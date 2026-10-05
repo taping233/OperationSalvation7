@@ -134,7 +134,17 @@ describe('09-30 深审 BC 组修复回归', () => {
     // 新旧行为的分界是 n：旧实现入队 n+1=2（选 2 张），修复后恒为 1
     expect(R.discovering?.options.length).toBeGreaterThanOrEqual(3);
     expect(R.discovering?.n).toBe(1);
-    BattleSession.commands.pickDiscover(0);
+    // 「其它职业」池允许职业特例（battle.resolution.js:279），永恒绽放类「选中即施放→
+    // 重开自己的发现面板」（onPlay acquire dest:'discover' act:'playKeep'）候选会被随机
+    // 抽进 options（实测 30 连跑 1 红）：本回归只钉「选 1 张后清场」，pick 时绕开发现链候选
+    const reopensDiscover = option => /发现/.test(option.desc || '') ||
+      (option.rules?.triggers?.onPlay || []).some(step =>
+        step.op === 'acquire' ? (step.dest ?? 'discover') === 'discover' : step.op === 'discover');
+    const cleanIdx = R.discovering.options
+      .map((option, i) => [option, i]).filter(([o]) => !reopensDiscover(o)).map(([, i]) => i);
+    expect(cleanIdx.length, '候选全为发现链卡，无法安全 pick').toBeGreaterThan(0);
+    BattleSession.commands.pickDiscover(cleanIdx[0]);
+    await waitIdle();
     expect(R.discovering).toBeNull();
   });
 

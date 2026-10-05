@@ -559,10 +559,14 @@ body.cardlib-open #overlay .photo-studio-v3 .lib-item {
   /* 09-24 全量渲染曾因行轨拿跳过态错误高度摘掉 content-visibility；改窗口挂载后恢复，
      跳过态占位由 contain-intrinsic-size 给足（单格高约 270~430px 随视宽浮动，进视口即用真实高度；
      09-25：360px 大于实际瓦片高致滚动条跳动，压至 270px） */
-  content-visibility:auto;
-  /* 09-29 二刀：占位高度吃 --lib-tile-h（syncLibTileIntrinsicSize 喂实测瓦片高，
-     271 张全距仅 320~323px）。09-29 二期起壳自带等高，此占位主要兜底非壳态。 */
-  contain-intrinsic-size:auto var(--lib-tile-h, 270px);
+  /* 10-03 三期复测反转：IO 窗口化后壳是空格、已挂瓦片本就在视口 ±1 屏的相关区内，
+     c-v:auto 的相关性开关只剩纯开销——同口径真实滚轮 A/B 实测 longtask 总时长
+     545ms→184ms（-66%），显式 visible 压过 winter.css:250 的全局 .lib-item 旧行。
+     壳自带等高（--lib-tile-h），滚动条稳定不依赖 c-v 跳过态。 */
+  content-visibility:visible;
+  /* contain-intrinsic-size 已删（10-04 收敛批，前序挂账兑现）：它只给 c-v:auto 跳过态
+     当占位，c-v 改 visible 后无消费方。--lib-tile-h 不是死变量——.lib-ph 壳高度
+     （下方规则）与 syncLibTileIntrinsicSize 喂养链继续使用。 */
   /* 09-29 二期不再整瓦片层化：will-change 移到下方 :not(.lib-ph)——壳常驻后已挂载
      瓦片只有视口附近几十张，合成层数量有界。全量 271 层在真实环境（Electron/核显/
      系统缩放）会打爆层预算退化回逐帧重栅格化：账本无头满帧率但老板实机仍卡的根因。 */
@@ -660,14 +664,15 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art::after {
     linear-gradient(180deg, rgba(255,234,196,.06), transparent 32%),
     radial-gradient(ellipse at 50% 42%, transparent 62%, rgba(62,42,24,.12));
 }
-/* 暗卡提亮（09-23 批次，曝光回调）：静态滤镜一次绘制、无 transition/animation；
-   brightness 曾到 1.14 老板嫌曝光过亮 → 回调 1.03，只保轻微提亮不吃高光 */
+/* 暗卡提亮（09-23 批次，曝光回调）：调色已烧进 assets/thumbs 缩略图（2026-10-04
+   WF-photolib-perf：bake-card-thumbs.cjs TINT 矩阵 = 本行原滤镜链），运行时 filter 删除
+   ——逐瓦片 shader 光栅化省一档（diagToggles 实测该滤镜占剩余滚动 longtask ~40%）。
+   选片台/网格共用缩略图即自带调色；#cardZoom 大图本就无此滤镜，观感关系不变。 */
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art img {
   width:100%;
   height:100%;
   display:block;
   object-fit:cover;
-  filter:sepia(.04) saturate(1.04) contrast(1.05) brightness(1.03);
 }
 /* 费用铜币已随 09-23「照片不是卡牌」拍板移除（费用数据在选片台文字行） */
 /* 白边下部：只有名字居中——照片墙上一张照片 = 画 + 一行名字 */
@@ -2670,4 +2675,130 @@ body.cardlib-open #cardZoom.cz-photo [data-studio-rarity="棱彩"] {
   body.cardlib-open #overlay .studio-index-layout .clib-count { padding:0; gap:5px; }
   body.cardlib-open #overlay .studio-index-layout .clib-count b { font-size:20px!important; }
   body.cardlib-open #overlay .studio-index-layout .library-tools:not(:empty) { grid-column:1/-1; grid-row:2; justify-self:start; }
+}
+
+/* 照相馆门头与索引：冬日档案的松绿、霜纸与旧金属色；压掉厚重边框，拉开馆名和检索层级。 */
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .library-head {
+  grid-template-columns:44px minmax(0,1fr) auto auto!important;
+  grid-template-areas:'. title count tools'!important;
+  min-height:86px;
+  gap:clamp(16px,2.5vw,36px)!important;
+  padding:14px clamp(22px,3vw,44px)!important;
+  border-bottom:1px solid rgba(202,184,139,.34)!important;
+  background:linear-gradient(180deg,#263a35,#1c2d29 78%,#192824)!important;
+  box-shadow:inset 0 1px rgba(235,240,221,.06),0 3px 10px rgba(0,0,0,.22);
+}
+body.cardlib-open #overlay .studio-index-layout .lib-head-title {
+  grid-area:title;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  min-width:0;
+}
+body.cardlib-open #overlay .studio-index-layout .lib-head-seal {
+  display:grid;
+  place-items:center;
+  flex:0 0 42px;
+  width:42px;
+  height:42px;
+  border:1px solid rgba(210,192,148,.56);
+  border-radius:2px;
+  color:#e6e3cf;
+  font:600 20px/1 var(--serif);
+  box-shadow:inset 0 0 0 3px rgba(210,192,148,.09),0 2px 5px rgba(0,0,0,.2);
+}
+body.cardlib-open #overlay .studio-index-layout .lib-head-name { display:grid; gap:3px; }
+body.cardlib-open #overlay .studio-index-layout .lib-head-name b {
+  color:#f0eedf;
+  font:600 clamp(23px,2vw,29px)/1.2 var(--serif);
+  letter-spacing:.12em;
+  text-shadow:0 1px 2px rgba(0,0,0,.3);
+}
+body.cardlib-open #overlay .studio-index-layout .lib-head-name small {
+  color:#bac7b8;
+  font:400 11px/1.4 var(--font-ui);
+  letter-spacing:.18em;
+}
+body.cardlib-open #overlay .studio-index-layout .clib-count {
+  grid-area:count;
+  gap:8px;
+  padding:4px 0 4px 20px;
+  border-left:1px solid rgba(202,184,139,.32)!important;
+  color:#c2cbbb!important;
+}
+body.cardlib-open #overlay .studio-index-layout .clib-count small {
+  color:#c2cbbb!important;
+  font-size:12px!important;
+  letter-spacing:.08em!important;
+}
+body.cardlib-open #overlay .studio-index-layout .clib-count b {
+  color:#e5d5a9!important;
+  font:600 25px/1 var(--font-ui)!important;
+  font-variant-numeric:tabular-nums;
+}
+body.cardlib-open #overlay .studio-index-layout .library-tools { grid-area:tools; justify-self:end; }
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-filterbar {
+  gap:10px;
+  padding:12px clamp(16px,2vw,28px) 14px!important;
+  border:1px solid #9da68f!important;
+  border-radius:3px;
+  outline:1px solid rgba(224,229,207,.48);
+  outline-offset:-4px;
+  background:linear-gradient(130deg,rgba(255,255,240,.28),transparent 48%),#d8ddcf!important;
+  box-shadow:inset 0 1px rgba(255,255,247,.72),0 3px 9px rgba(0,0,0,.2)!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading {
+  min-height:28px;
+  gap:12px;
+  color:#4d5e4c;
+  -webkit-text-fill-color:#4d5e4c;
+  text-shadow:none!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading>span:first-child {
+  padding-left:11px;
+  border-left:2px solid #667b62;
+  color:#344934;
+  -webkit-text-fill-color:#344934;
+  font-size:17px;
+  letter-spacing:.06em;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading .lib-show { color:#626f5d; }
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading .studio-clear {
+  color:#52664d!important;
+  border-left-color:#aab19e!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .clib-tabs {
+  gap:5px;
+  padding:2px 0 8px;
+  border-bottom:1px solid #b1b9aa;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab {
+  min-height:35px!important;
+  padding:7px 11px;
+  border-radius:2px;
+  color:#4c5b4a!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab.on,
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab.on:hover {
+  border-color:#536951!important;
+  background:linear-gradient(180deg,#536951,#40543f)!important;
+  box-shadow:inset 0 1px rgba(247,246,225,.2),0 1px 3px rgba(54,67,47,.2)!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-search-row { gap:10px; }
+body.cardlib-open #overlay .studio-index-layout .studio-field-label { color:#4e5c48; font-size:12px; }
+@media(max-width:760px) {
+  body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .library-head {
+    grid-template-columns:36px minmax(0,1fr) auto!important;
+    grid-template-areas:'. title count' 'tools tools tools'!important;
+    min-height:0;
+    row-gap:10px!important;
+    padding:12px 16px!important;
+  }
+  body.cardlib-open #overlay .studio-index-layout .lib-head-seal { flex-basis:36px; width:36px; height:36px; font-size:18px; }
+  body.cardlib-open #overlay .studio-index-layout .lib-head-name b { font-size:21px; }
+  body.cardlib-open #overlay .studio-index-layout .lib-head-name small { font-size:10px; }
+  body.cardlib-open #overlay .studio-index-layout .clib-count { padding-left:10px; }
+  body.cardlib-open #overlay .studio-index-layout .clib-count b { font-size:20px!important; }
+  body.cardlib-open #overlay .studio-index-layout .library-tools:not(:empty) { grid-column:1/-1; grid-row:2; justify-self:start; }
+  body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-filterbar { padding:10px 12px 12px!important; }
 }

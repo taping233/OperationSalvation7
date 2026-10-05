@@ -110,7 +110,7 @@ export function consumeCurrentCell() { consumeCell(); }
 
 // 节点与战斗结算之间的短过场：复用现有场景美术，不引入额外资源或阻塞式页面。
 let transitionRequest = 0;
-export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', eyebrow = 'AREA ENTERED', title, detail = '', duration = 900 }) {
+export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', eyebrow = 'AREA ENTERED', title, detail = '', duration = 900, presentation = '' }) {
   // 结束时必须恢复状态：战斗/节点流程下游会自行改状态，但「继续对局」路径
   // 过渡后无人收拾，曾导致 game.state 卡死在 modal、侧栏按钮永久禁用
   const prevState = game.state;
@@ -132,12 +132,14 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
       resolve(true);
     };
     UI.showOverlay('', `
-      <div class="scene flow-transition sc-${escAttr(tone)}" data-asset-key="${escAttr(asset)}" data-act="flowContinue">
+      <div class="scene flow-transition sc-${escAttr(tone)}" data-asset-key="${escAttr(asset)}" data-presentation="${escAttr(presentation)}" data-act="flowContinue">
+        ${presentation === 'base-arrival' ? '<div class="hub-arrival-card">' : ''}
         <div class="flow-scan" aria-hidden="true"></div>
         <p class="flow-eyebrow">${esc(eyebrow)}</p>
         <h2 class="flow-title">${esc(title || '未知区域')}</h2>
         ${detail ? `<p class="flow-detail">${esc(detail)}</p>` : ''}
         <div class="flow-line" aria-hidden="true"><i></i></div>
+        ${presentation === 'base-arrival' ? '</div>' : ''}
         <p class="flow-hint">点击跳过</p>
       </div>`, 'scene');
     UI.act('flowContinue', finish);

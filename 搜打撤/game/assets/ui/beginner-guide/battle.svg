@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" role="img" aria-label="出牌消耗费用并指向目标，随后进入敌方行动">
+  <rect width="560" height="360" rx="24" fill="#17262b"/><text x="30" y="44" fill="#f3e9d0" font-family="sans-serif" font-size="24" font-weight="700">出牌与回合顺序</text>
+  <rect x="24" y="68" width="245" height="228" rx="18" fill="#24373d" stroke="#40565a" stroke-width="2"/><rect x="291" y="68" width="245" height="228" rx="18" fill="#24373d" stroke="#40565a" stroke-width="2"/>
+  <text x="45" y="102" fill="#c5d0c5" font-family="sans-serif" font-size="20">你的回合</text><text x="312" y="102" fill="#c5d0c5" font-family="sans-serif" font-size="20">敌方回合</text>
+  <circle cx="76" cy="150" r="28" fill="#355544" stroke="#91b890" stroke-width="3"/><path d="M63 151h26m-13-13v26" stroke="#e9e5c9" stroke-width="4"/><text x="118" y="145" fill="#f3e9d0" font-family="sans-serif" font-size="20">玩家</text><text x="118" y="170" fill="#e8c16f" font-family="sans-serif" font-size="18">费用 ●●</text>
+  <rect x="51" y="205" width="58" height="66" rx="8" fill="#a7b9a8" stroke="#ead59f" stroke-width="3" transform="rotate(-8 80 238)"/><path d="M64 226h31m-31 10h22" stroke="#30434a" stroke-width="4"/><text x="81" y="262" fill="#30434a" font-family="sans-serif" font-size="18" text-anchor="middle">牌</text>
+  <path d="M119 235h88" stroke="#edc978" stroke-width="5"/><path d="m197 226 12 9-12 9" fill="none" stroke="#edc978" stroke-width="5"/><text x="161" y="218" fill="#e8c16f" font-family="sans-serif" font-size="18" text-anchor="middle">指向目标</text>
+  <path d="M225 126q22-24 42 0v30q-20 21-42 0z" fill="#8d6553" stroke="#d3a778" stroke-width="3"/><circle cx="237" cy="139" r="3" fill="#17262b"/><circle cx="253" cy="139" r="3" fill="#17262b"/><path d="m243 147 5 5 5-5" fill="none" stroke="#17262b" stroke-width="3"/>
+  <path d="M270 175h18" stroke="#f0d18b" stroke-width="5"/><path d="m281 166 10 9-10 9" fill="none" stroke="#f0d18b" stroke-width="5"/>
+  <path d="M358 151q23-30 49 0v41q-26 26-49 0z" fill="#9b6a55" stroke="#dfb57c" stroke-width="3"/><path d="m369 162 7 8 7-8m5 0 7 8 7-8" fill="none" stroke="#302d2a" stroke-width="4"/><path d="M422 170h69" stroke="#c58d68" stroke-width="4" stroke-dasharray="8 7"/><path d="m479 161 12 9-12 9" fill="none" stroke="#c58d68" stroke-width="4"/><circle cx="496" cy="170" r="20" fill="#374f52" stroke="#98b5ae" stroke-width="3"/><path d="M486 170h20m-10-10v20" stroke="#d7dfc8" stroke-width="3"/>
+  <text x="405" y="232" fill="#f0d6b7" font-family="sans-serif" font-size="18" text-anchor="middle">意图 → 目标</text>
+  <path d="M274 318h12" stroke="#edc978" stroke-width="4"/><text x="30" y="329" fill="#b9c6bf" font-family="sans-serif" font-size="18">先由你出牌，再看敌方意图并应对。</text>
+  <text x="472" y="329" fill="#aebdb8" font-family="sans-serif" font-size="18" text-anchor="end">图中符号为示意</text>
+</svg>

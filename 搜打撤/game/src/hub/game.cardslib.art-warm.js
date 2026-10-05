@@ -1,52 +1,130 @@
-/* 照相馆缩略图预解码预热（拆分自 game.cardslib.js，行为原样保留）。
-   卡面缩略图预解码：启动时的全量预热清单补的是 assets/ 原图，库页显示的是
-   assets/thumbs/ 缩略图，不补这一步首轮滚动就得边滚边解码（实测首轮滚动
-   32~35fps → 44~45fps，>50ms 长帧减半）。解码在解码线程，不占主线程。 */
+/* 照相馆缩略图预解码预热。
+   近视口才赋 src，异步解码；局部挂载可只扫描新增子树。 */
 
-let libArtObserver = null;
+const MAX_LIB_ART_DECODE_CONCURRENCY = 4;
+let libArtSession = null;
 let libArtRoot = null;
 
-function decodeLibImage(image) {
-  image.loading = 'eager';
-  if (!image.getAttribute('src') && image.dataset.libSrc) {
-    image.src = image.dataset.libSrc;
-    delete image.dataset.libSrc;
-  }
-  try { image.decode?.()?.catch?.(() => { /* 解码失败：图已显示，忽略 */ }); } catch { /* decode 不可用：跳过 */ }
+function imageSource(image) {
+  return image.dataset.libSrc || image.getAttribute('src') || '';
 }
 
-export function warmLibArt() {
-  const grid = document.getElementById('libGrid');
-  if (!grid) return;
-  // 当前页创建后观察近屏缩略图；网格根节点变化时重建 observer。
-  if (libArtRoot !== grid) {
-    libArtObserver?.disconnect();
-    libArtObserver = null;
-    libArtRoot = grid;
+function isInGrid(image, grid) {
+  return image.isConnected && (image === grid || grid.contains(image));
+}
+
+function makeLibArtSession(grid) {
+  return {
+    grid,
+    observer: null,
+    queue: [],
+    active: 0,
+    states: new WeakMap(),
+  };
+}
+
+function enqueueLibImage(session, image, src, scope) {
+  if (libArtSession !== session || !src) return;
+  const previous = session.states.get(image);
+  if (previous?.src === src && previous.status !== 'observed') return;
+  session.states.set(image, { src, status: 'queued' });
+  session.queue.push({ image, src, scope });
+  pumpLibArtQueue(session);
+}
+
+function pumpLibArtQueue(session) {
+  if (libArtSession !== session) return;
+  while (session.active < MAX_LIB_ART_DECODE_CONCURRENCY && session.queue.length) {
+    const item = session.queue.shift();
+    const { image, src, scope } = item;
+    const state = session.states.get(image);
+    const currentScope = scope === session.grid || scope === document.getElementById('libPreview');
+    if (state?.src !== src || !image.isConnected || !currentScope || !scope.contains(image)) continue;
+    session.active += 1;
+    state.status = 'decoding';
+    image.loading = 'eager';
+    if (image.dataset.libSrc === src) {
+      image.src = src;
+      delete image.dataset.libSrc;
+    }
+    let decoded;
+    try { decoded = image.decode?.(); } catch { /* 解码失败或不支持时图片仍可显示 */ }
+    Promise.resolve(decoded).catch(() => { /* 解码失败：忽略 */ }).finally(() => {
+      session.active -= 1;
+      if (libArtSession === session) pumpLibArtQueue(session);
+    });
   }
-  const images = [...grid.querySelectorAll('.studio-photo-art img[data-lib-src]:not([data-lib-warm]), .studio-photo-art img[src]:not([data-lib-warm])')];
-  images.forEach(image => { image.dataset.libWarm = '1'; });
-  // 图片先保留 data-lib-src；只有接近视口才赋 src 并异步解码，避免原生 lazy 提前加载整批。
+}
+
+function observeLibImage(session, image) {
+  const src = imageSource(image);
+  if (!src || !isInGrid(image, session.grid)) return;
   if (typeof IntersectionObserver !== 'function') {
-    images.forEach(decodeLibImage);
-  } else {
-    if (!libArtObserver) {
-      libArtObserver = new IntersectionObserver(entries => {
+    enqueueLibImage(session, image, src, session.grid);
+    return;
+  }
+  const previous = session.states.get(image);
+  if (previous?.src === src && previous.status !== 'observed') return;
+  if (previous?.src !== src) session.states.set(image, { src, status: 'observed' });
+  session.observer.observe(image);
+}
+
+function scanLibArtRoot(session, root) {
+  if (!root || (root !== session.grid && !session.grid.contains(root))) return;
+  const selector = '.studio-photo-art img[data-lib-src], .studio-photo-art img[src]';
+  const images = [];
+  if (root.matches?.(selector)) images.push(root);
+  images.push(...root.querySelectorAll(selector));
+  for (const image of images) observeLibImage(session, image);
+}
+
+function ensureLibArtSession(grid) {
+  if (libArtRoot !== grid || !libArtSession) {
+    resetLibArtWarmup();
+    libArtRoot = grid;
+    const session = makeLibArtSession(grid);
+    libArtSession = session;
+    if (typeof IntersectionObserver === 'function') {
+      session.observer = new IntersectionObserver(entries => {
+        if (libArtSession !== session) return;
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
-          decodeLibImage(entry.target);
-          libArtObserver?.unobserve(entry.target);
+          session.observer.unobserve(entry.target);
+          if (!isInGrid(entry.target, session.grid)) continue;
+          const src = imageSource(entry.target);
+          enqueueLibImage(session, entry.target, src, session.grid);
         }
-      }, { root: grid, rootMargin: '55% 0px' });
+      }, { root: grid, rootMargin: '100% 0px' });
     }
-    images.forEach(image => libArtObserver.observe(image));
   }
-  document.querySelectorAll('#libPreview img[src]').forEach(decodeLibImage);
+  return libArtSession;
 }
 
-// 关页 / 筛选重绘时彻底复位观察器（原 closeLibPage / renderLibGrid 的内联三连）
+export function warmLibArt(options = {}) {
+  const grid = document.getElementById('libGrid');
+  if (!grid) return;
+  const session = ensureLibArtSession(grid);
+  const roots = Array.isArray(options.roots) ? options.roots : null;
+  if (roots) {
+    for (const root of roots) scanLibArtRoot(session, root);
+  } else {
+    scanLibArtRoot(session, grid);
+  }
+
+  if (options.preview !== false) {
+    const preview = document.getElementById('libPreview');
+    for (const image of document.querySelectorAll('#libPreview img[src]')) {
+      const src = imageSource(image);
+      if (preview && src && image.isConnected) enqueueLibImage(session, image, src, preview);
+    }
+  }
+}
+
+// 关页 / 筛选重绘时使旧 observer、队列与异步完成回调失效。
 export function resetLibArtWarmup() {
-  libArtObserver?.disconnect();
-  libArtObserver = null;
+  const oldSession = libArtSession;
+  oldSession?.observer?.disconnect();
+  if (oldSession) oldSession.queue.length = 0;
+  libArtSession = null;
   libArtRoot = null;
 }

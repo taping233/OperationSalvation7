@@ -10,8 +10,6 @@ const DEFAULT_RULE_CONFIG = {
   rewards: {
     beastLegendaryChance: 0.3,
     petEggBaseChance: 0.007,
-    petEggMissBonus: 0.03,
-    petEggBattleBonus: 0.002,
   },
 };
 
@@ -96,8 +94,6 @@ function validateRuleConfig(config) {
   const rewards = group('rewards');
   number(rewards, 'rewards', 'beastLegendaryChance', { max: 1 });
   number(rewards, 'rewards', 'petEggBaseChance', { max: 1 });
-  number(rewards, 'rewards', 'petEggMissBonus', { max: 1 });
-  number(rewards, 'rewards', 'petEggBattleBonus', { max: 1 });
 
   return { ok: errors.length === 0, errors };
 }

@@ -1,0 +1,27 @@
+/* One motion rhythm for the character browser, not battle or the home director. */
+#overlay .card.page:has(:is(.cls2-page, .cls-pool-page)) { animation: none; }
+#overlay .card.page .pg:is(.cls2-page, .cls-pool-page) {
+  animation: none; /* Local Web Animations entry also works with the shared shell's reset. */
+}
+#overlay.closing .card.page :is(.cls2-page, .cls-pool-page) { animation: characterPageOut .18s cubic-bezier(.4,0,.7,1) both; }
+#overlay .cls2-page .cls2-panel > * { animation: none; }
+#overlay .cls2-page .cls2-fullart img.art-figure:not(.skin-swap),
+#overlay .cls2-page .cls2-fullart img.art-figure-back:not(.skin-swap) { animation: none; }
+#overlay .cls2-page .cls2-fullart img.skin-swap { animation: characterSkinIn .26s cubic-bezier(.22,1,.36,1) both; }
+#overlay .cls2-page .cls2-fullart img.art-figure-back.skin-swap { animation-name: characterSkinBackIn; }
+#overlay .cls-pool-page .pool-grid { animation: characterGridIn .22s cubic-bezier(.22,1,.36,1) both; }
+#overlay .cls-pool-page .pool-cell { animation: none; }
+#overlay :is(.cls2-page, .cls-pool-page)[data-character-view='out'] { pointer-events: none; }
+#overlay :is(.cls2-page, .cls-pool-page) button { transition-duration: .15s; transition-timing-function: ease-out; }
+@keyframes characterPageOut { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(8px); } }
+@keyframes characterGridIn { from { opacity: .3; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes characterSkinIn { from { opacity: .35; translate: 8px 0; } to { opacity: 1; translate: 0 0; } }
+@keyframes characterSkinBackIn { from { opacity: 0; } to { opacity: .25; } }
+body.reduce-motion #overlay .card.page :is(.cls2-page, .cls-pool-page),
+body.reduce-motion #overlay .card.page :is(.cls2-page, .cls-pool-page) * {
+  animation: none; transition: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  #overlay .card.page :is(.cls2-page, .cls-pool-page),
+  #overlay .card.page :is(.cls2-page, .cls-pool-page) * { animation: none; transition: none; }
+}

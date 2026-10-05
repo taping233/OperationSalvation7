@@ -16,10 +16,10 @@ export function createBasePetEggCommands({ read, persistPity, persistBattles }) 
   /** @returns {number} */
   function petEggDropChance() {
     const state = read();
-    const pityN = (state.eggPity || 0) + 1;
-    return RULE_CONFIG.rewards.petEggBaseChance +
-      RULE_CONFIG.rewards.petEggMissBonus * (pityN - 1) +
-      RULE_CONFIG.rewards.petEggBattleBonus * (state.eggBattles || 0);
+    // eggPity is the number of consecutive chest rewards without an egg.
+    // After 149 misses, this next reward is the 150th and is guaranteed.
+    if ((state.eggPity || 0) >= 149) return 1;
+    return RULE_CONFIG.rewards.petEggBaseChance;
   }
 
   /**
@@ -36,7 +36,9 @@ export function createBasePetEggCommands({ read, persistPity, persistBattles }) 
   }
 
   /**
-   * Record one no-slot battle victory for the egg drop bonus (2026-09-29 收敛：
+   * Record one no-slot battle victory for legacy settlement compatibility:
+   * this count no longer changes the fixed egg drop chance (2026-10-04).
+   * （2026-09-29 收敛：
    * 原 game.bag.settle 战后直写 Base.data.eggBattles 移入命令层)。槽位对局的计数
    * 走结算事务（battle-settlement.commands 的 afterBase），不经过本命令。
    * 沿用保底计数的旧语义：先内存推进，持久化失败不回滚，仅以 persisted:false 标记。

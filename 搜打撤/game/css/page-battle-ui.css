@@ -31,6 +31,51 @@
   --bt-press: .09s;
 }
 
+/* 2026-10-03: one height budget for encounter, arena and persistent actions.
+   The body selector overrides winter.css's old negative unit baseline. */
+body #overlay .battle-stage.sts .sts-topbar {
+  position: relative !important; flex: 0 0 auto; top: 0 !important;
+  min-height: 48px; padding: 8px 20px;
+  background: rgba(9, 18, 25, .94) !important;
+  border-bottom: 1px solid rgba(169, 192, 200, .2);
+}
+body #overlay .battle-stage.sts .sts-unit,
+body #overlay .battle-stage.sts .sts-me,
+body #overlay .battle-stage.sts .sts-foes,
+body #overlay .battle-stage.sts .sts-allies { bottom: 24px !important; }
+#overlay .battle-stage.sts .sts-foes { left: 44%; right: 4%; gap: 18px; }
+#overlay .battle-stage.sts .sts-foe { width: clamp(124px, 14vw, 176px); min-width: 0; }
+#overlay .battle-stage.sts .sts-arena::before,
+#overlay .battle-stage.sts .sts-arena::after { top: 18px; bottom: auto; }
+#overlay .battle-stage.sts .sts-encounter { font-size: 14px; }
+#overlay .battle-stage.sts .sts-encounter-kicker { font-size: 12px; }
+body #overlay .battle-stage.sts .sts-nameplate {
+  padding: 8px; border: 1px solid rgba(170, 191, 197, .22) !important;
+  background: rgba(9, 18, 25, .9) !important; text-shadow: none;
+}
+#overlay .battle-stage.sts .sts-nameplate b { font-size: 16px; }
+#overlay .battle-stage.sts .sts-hud {
+  padding: 12px 20px max(12px, env(safe-area-inset-bottom));
+  border-top: 1px solid rgba(170, 191, 197, .25);
+  background: rgba(9, 17, 24, .95); align-items: end;
+}
+#overlay .battle-stage.sts .sts-tactics { min-width: 180px; gap: 12px; padding-bottom: 0; }
+#overlay .battle-stage.sts .sts-tactics-secondary { gap: 6px; }
+#overlay .battle-stage.sts .sts-tactics-secondary .ov-btn {
+  padding: 8px 10px !important; font-size: 14px !important;
+}
+#overlay .battle-stage.sts .sts-end-turn { min-height: 48px; font-size: 16px; }
+#overlay .battle-stage.sts .sts-energy { box-shadow: none; }
+#overlay .battle-stage.sts .sts-hand { background: none; box-shadow: none; }
+#overlay .battle-stage.sts .sts-hand .bt-card.click-selected::after {
+  font-size: 13px; padding: 5px 0;
+}
+@media (max-width: 900px) {
+  #overlay .battle-stage.sts .sts-tactics { grid-column: 1 / -1; min-width: 0; }
+  #overlay .battle-stage.sts .sts-foes { left: 40%; gap: 10px; }
+  #overlay .battle-stage.sts .sts-foe { width: clamp(100px, 16vw, 140px); }
+}
+
 /* ═════════ W1 顶栏信息条 .sts-topbar：老板定版「回合条融入背景」透明态不覆盖；
    只补一条底缘金封条线（两端渐隐、静态不呼吸）与数值排版 ═════════ */
 
@@ -38,7 +83,7 @@
   content: ''; position: absolute; left: 26px; right: 26px; bottom: -1px; height: 1px;
   pointer-events: none;
   background: linear-gradient(90deg, transparent, #d9bb82a1 22%, #d9bb82c4 50%, #d9bb82a1 78%, transparent);
-  opacity: .55;
+  opacity: .25;
 }
 
 /* W1b 「第 N 回合」数值：表格数字排版（winter 定版暖字色不覆盖） */
@@ -83,7 +128,11 @@
   background: rgba(9, 17, 24, .92);
   border-color: rgba(217, 187, 130, .5); border-radius: 4px;
   color: #f2e3c3; font-variant-numeric: tabular-nums;
-  box-shadow: 0 3px 10px rgba(2, 8, 14, .5), 0 0 10px rgba(217, 187, 130, .08);
+  box-shadow: 0 2px 5px rgba(2, 8, 14, .4);
+  width: max-content; min-width: 104px; max-width: calc(100% - 4px);
+  padding: 6px 8px; line-height: 1.4; font-size: 15px;
+  white-space: normal; overflow-wrap: normal; word-break: keep-all;
+  top: -48px; bottom: auto;
 }
 /* 敌方攻击徽：暖米金表格数字（意图条同族） */
 #overlay .battle-stage.sts .sts-atkbadge {

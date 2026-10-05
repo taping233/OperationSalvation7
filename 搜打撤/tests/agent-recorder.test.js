@@ -75,7 +75,7 @@ describe('聚合口径', () => {
     const agg = aggregate(runs);
     expect(agg.deathByLayer).toEqual({ 2: 1 });
     expect(agg.topCards[0]).toMatchObject({ name: 'A', carriedCount: 3 });
-    expect(agg.byDriver.greedy.runs).toBe(2);
+    expect(agg.byDriver.unknown.runs).toBe(4); // 旧记录不反推本局来源
     expect(agg.byClass['战士'].runs).toBe(3);
     expect(agg.byMode.standard.runs).toBe(4);
   });

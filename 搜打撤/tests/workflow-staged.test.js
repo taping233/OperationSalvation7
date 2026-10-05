@@ -135,6 +135,24 @@ describe('Git index 隔离验收', () => {
     const skipReport = JSON.parse(readFileSync(path.join(f.project, stillPassed.report), 'utf8'));
     expect(readFileSync(path.join(f.project, skipReport.log), 'utf8')).not.toContain('[gate] 增量素材检查');
   }), 60_000);
+  it('stat-only 刷新（并发 git status/add 同内容）不使隔离验收 invalidated', asyncCase(async () => {
+    // 10-03 实测坑：并发会话的 git status/add 会改写源 index 的 stat 字段——文件字节变化、
+    // 逻辑内容（mode+blob+path）不变。按字节判哈希会把可复用验收误报 invalidated；内容哈希不应。
+    const f = fixture();
+    writeFileSync(f.value, 'staged');
+    git(f.root, ['add', '搜打撤/scripts/value.txt']);
+    const first = await runStaged(f.project, options);
+    expect(first.outcome).toBe('passed');
+    const indexBytesBefore = readFileSync(path.join(f.root, '.git/index'));
+    const { utimesSync } = await import('node:fs');
+    utimesSync(f.value, new Date(), new Date(Date.now() + 5000));
+    git(f.root, ['status', '--porcelain']);
+    git(f.root, ['add', '--refresh']);
+    const indexBytesAfter = readFileSync(path.join(f.root, '.git/index'));
+    expect(indexBytesAfter.equals(indexBytesBefore)).toBe(false); // stat 确实被刷新，测试有效复现坑场景
+    const second = await runStaged(f.project, options);
+    expect(second.outcome, JSON.stringify(second)).toBe('passed');
+  }), 60_000);
   it('真实 workflow staged --plan 在冻结Git视图内可执行，且不借用源工作树/index', asyncCase(async () => {
     const f = fixture();
     const sourceScripts = path.resolve('scripts');
@@ -226,14 +244,16 @@ if(!result.ok||result.repo===${JSON.stringify(f.root)}||!result.changes.some(ite
     const report = JSON.parse(readFileSync(path.join(f.project, mutated.report), 'utf8'));
     expect(report.snapshotTrackedMutations).toContain('搜打撤/scripts/value.txt');
   }), 60_000);
-  it('运行期间 index 改动使结果失效，保留别人新 index', asyncCase(async () => {
+  it('运行期间 index 实质改动使结果失效，保留别人新 index（stat-only 触碰不算，见前一条测试）', asyncCase(async () => {
     const f = fixture();
     const gate = path.join(f.project, 'scripts/acceptance-gate.mjs');
-    writeFileSync(gate, readFileSync(gate, 'utf8').replace("else console.log('snapshot passed');", `else {const {execFileSync}=await import('node:child_process');execFileSync('git',['update-index','--assume-unchanged','搜打撤/scripts/value.txt'],{cwd:${JSON.stringify(f.root)}});console.log('changed index');}`));
+    // 注入新 blob 条目（mode+blob+path 变化）——assume-unchanged 之类 stat/flag 域触碰
+    // 不再算内容变化（10-03 内容哈希修正），故用实质注入模拟"别人在验收期间改了 index"。
+    writeFileSync(gate, readFileSync(gate, 'utf8').replace("else console.log('snapshot passed');", `else {const {execFileSync}=await import('node:child_process');const blob=execFileSync('git',['hash-object','-w','--stdin'],{cwd:${JSON.stringify(f.root)},input:'foreign blob'});execFileSync('git',['update-index','--add','--cacheinfo','100644,'+blob.toString().trim()+',搜打撤/scripts/injected.txt'],{cwd:${JSON.stringify(f.root)}});console.log('changed index');}`));
     writeFileSync(f.value, 'staged'); git(f.root, ['add', '.']);
     const result = await runStaged(f.project, options);
     expect(result.outcome).toBe('invalidated'); expect(result.exitCode).toBe(1);
-    expect(git(f.root, ['ls-files', '-v', '搜打撤/scripts/value.txt']).startsWith('h ')).toBe(true);
+    expect(git(f.root, ['ls-files', '--', '搜打撤/scripts/injected.txt']).toString()).toContain('injected.txt');
   }), 60_000);
   it('文档路径 skip 明确未运行检查，不标通过', asyncCase(async () => {
     const f = fixture(); writeFileSync(path.join(f.project, 'note.md'), 'documentation'); git(f.root, ['add', '搜打撤/note.md']);

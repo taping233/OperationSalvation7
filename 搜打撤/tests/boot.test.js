@@ -4,8 +4,10 @@
  * jsdom 无 canvas/Audio/WebAudio，这里 stub 掉渲染与音频，只验启动接线。 */
 import { describe, it, expect, vi } from 'vitest';
 
-// 单跑约 5s：全量并行负载下会越过 vitest 默认 5s 超时形成负载 flake，给足裕量
-vi.setConfig({ testTimeout: 20000, hookTimeout: 20000 });
+// 单跑约 5s：全量并行负载下会越过 vitest 默认 5s 超时形成负载 flake，给足裕量。
+// 60s（2026-10-03 第三次复发）：测试库增长使全量时长 117.6s（10-02 receipt）→134s，全库挤压下
+// hideOverlay 的 210ms 收场 timer（overlay.js）实际延迟可超 15s，旧 20s 顶已不够；仅真卡死才等满。
+vi.setConfig({ testTimeout: 60000, hookTimeout: 60000 });
 
 // ---- 环境补桩（必须在动态 import main.js 之前就位） ----
 // 2D 上下文：所有方法返回可链式/可读的哑值
@@ -112,6 +114,8 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     await new Promise(r => setTimeout(r, 30));
     expect(document.querySelector('.card-library-page')).toBeNull();
     document.querySelector('#hubMain [data-act="closeBase"]')?.click();
+    await waitFor(() => document.querySelector('.slot-page'));
+    document.querySelector('.slot-page [data-act="slotBack"]')?.click();
     await waitFor(() => game.state === 'title');
     await waitFor(() => document.getElementById('overlay').hidden);
 
@@ -129,11 +133,44 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(document.getElementById('overlay').hidden).toBe(true);
   });
 
+  it('标题→选档→基地→选档往返保留档案，按钮与 Escape 语义一致', async () => {
+    const { game, getActiveSlot } = await import('../game/src/run/game.session.js');
+    document.getElementById('mStart').click();
+    await waitFor(() => document.querySelector('.slot-page'));
+    expect(document.querySelector('.slot-page')).not.toBeNull();
+
+    document.querySelector('[data-act="newSlot"][data-slot="1"]').click();
+    await waitFor(() => document.getElementById('hubMain'));
+    expect(game.state).toBe('modal');
+    expect(document.querySelector('.hub-head .help-btn')).toBeNull();
+    const baseBefore = window.SDT.Base.peek(1);
+
+    document.querySelector('#hubMain [data-act="closeBase"]').click();
+    await waitFor(() => document.querySelector('.slot-page'));
+    expect(getActiveSlot()).toBe(1);
+    expect(window.SDT.Base.peek(1)).toEqual(baseBefore);
+    expect(document.querySelector('[data-act="enterSlot"][data-slot="1"]')).not.toBeNull();
+
+    document.querySelector('[data-act="enterSlot"][data-slot="1"]').click();
+    await waitFor(() => document.getElementById('hubMain'));
+    document.querySelector('#hubMain [data-act="hubTab"][data-tab="stash"]').click();
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    await waitFor(() => document.querySelector('.slot-page'));
+    expect(getActiveSlot()).toBe(1);
+    expect(window.SDT.Base.peek(1)).toEqual(baseBefore);
+    document.querySelector('[data-act="slotBack"]').click();
+    await waitFor(() => game.state === 'title');
+    await waitFor(() => document.getElementById('overlay').hidden);
+  });
+
   it('卡牌档案馆可打开、筛选、清空与排序', { timeout: 15_000 }, async () => {
     const originalSfx = window.SDT.Sound.sfx;
     window.SDT.Sound.sfx = () => {};
     document.getElementById('btnCardLib').click();
+    await waitFor(() => document.querySelector('.page-loading'));
+    expect(document.querySelector('.card-library-page')).toBeNull();
     await waitFor(() => document.querySelector('.card-library-page'));
+    await waitFor(() => !document.querySelector('.page-loading'));
     const page = document.querySelector('.card-library-page');
     expect(page).not.toBeNull();
     expect(document.getElementById('libResultCount')).not.toBeNull();
@@ -268,6 +305,19 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(typeof g.onBattleEnd).toBe('function');    // bindBagMixins
     expect(g.TYPE_NAME && typeof g.TYPE_NAME.coin).toBe('string'); // bindNotesMixins
     expect(typeof g.debug.openShop).toBe('function'); // boot 调试入口
+  });
+  it('成就陈列室按整页暂停背景，并完成退场后返回标题', async () => {
+    document.getElementById('mAch').click();
+    const overlay = document.getElementById('overlay');
+    expect(overlay.querySelector('.achievement-gallery')).not.toBeNull();
+    expect(overlay.querySelector('.card').classList.contains('page')).toBe(true);
+    expect(document.body.classList.contains('page-covered')).toBe(true);
+    overlay.querySelector('[data-act="achBack"]').click();
+    expect(overlay.hidden).toBe(false);
+    expect(overlay.classList.contains('closing')).toBe(true);
+    await new Promise(resolve => setTimeout(resolve, 240));
+    expect(overlay.hidden).toBe(true);
+    expect(window.SDT.game.state).toBe('title');
   });
   it('核心模块已发布，战斗域按需加载后发布', async () => {
     for (const k of ['RULES', 'MAP', 'Art', 'Icons', 'Sound', 'Camera', 'Notes', 'Cards', 'Base', 'Meta', 'RenderScheduler', 'Renderer', 'UI', 'Chests']) {
@@ -482,7 +532,10 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
   // IME 家族守卫（game.boot.js 两处 Esc 分支）：中文输入法组合态按 Esc 是取消候选词，
   // 不得误关卡牌大页 / 不得打断加载态强关逻辑。定式对齐 ui.js:79。
   // 真实 timer 等待 + 满载并发下 15s 会抖（10-03 冻结门实测两红两绿）；放宽到 30s 上限，断言本身不变。
-  it('卡牌大页 Esc 关闭与加载态强关：输入法组合态（isComposing / keyCode 229）不误触', { timeout: 30_000 }, async () => {
+  // 60s（10-03 第三次复发）：测试库增长后 30s 已可被「前段开页等待 + 45s 收场窗口」合法耗尽
+  //（连红四轮：三轮 AssertionError + 一轮 TimeoutError）；用例级须与文件级 60s 对齐，
+  // 否则用例级优先压过 setConfig，下方 45s waitFor 永远等不满。
+  it('卡牌大页 Esc 关闭与加载态强关：输入法组合态（isComposing / keyCode 229）不误触', { timeout: 60_000 }, async () => {
     const cardsLib = await import('../game/src/hub/game.cardslib.js');
     const { game } = await import('../game/src/run/game.session.js');
     game.state = 'title';
@@ -516,9 +569,11 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     // 分步同步断言在全量并发负载下有竞态缝（01:14 批次②全量实锤一例））
     search.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
     expect(cardsLib.cardPageOpen).toBe(false);
-    // 15000ms 窗口：waitFor 绿跑时条件成立即返回（零成本），仅真卡死才等满——
-    // 全量并发负载下本文件单测可慢 3-5 倍，3000ms 曾两次假红（批次②/③实锤）
-    await waitFor(() => !document.querySelector('.card-library-page') && overlay.hidden, 15000);
+    // 45000ms 窗口：waitFor 绿跑时条件成立即返回（零成本），仅真卡死才等满——
+    // 全量并发负载下本文件单测可慢 3-5 倍，3000ms 曾两次假红（批次②/③实锤）；
+    // 15000 第三次复发（10-03 全量连红三轮，单跑恒绿）：断言条件绑定 hideOverlay 的
+    // 210ms 收场 timer（overlay.js finish 置 hidden），全库挤压下 timer 饥饿可迟至 15s+。
+    await waitFor(() => !document.querySelector('.card-library-page') && overlay.hidden, 45000);
     expect(overlay.hidden).toBe(true);
 
     // 加载态分支（boot.js 152）同族守卫：组合态 Esc 不强关、不打断加载

@@ -43,9 +43,10 @@ describe('照片弹层收回生命周期', () => {
     expect(zoom.classList.contains('cz-photo-closing-to-source')).toBe(true);
     expect(zoom.style.getPropertyValue('--cz-photo-to-transform')).toBe('translate(-475px, -275px) scale(0.25)');
     expect(UI.el.overlay.inert).toBe(true);
-    vi.advanceTimersByTime(319);
+    // 10-04 studio-cover 批收回时序：photoCloseMs=120ms + 60ms 容错 → 180ms 移除（旧值 340ms 系改版前口径）
+    vi.advanceTimersByTime(179);
     expect(zoom.isConnected).toBe(true);
-    vi.advanceTimersByTime(81);
+    vi.advanceTimersByTime(100);
     expect(zoom.isConnected).toBe(false);
     expect(UI.el.overlay.inert).toBe(false);
     expect(document.activeElement).toBe(opener);

@@ -9,11 +9,13 @@ describe('基地人物与收藏页的信息架构', () => {
     .map((f) => src(`game/src/${f}`)).join('\n');
   const css = src('game/css/expedition-hub.css');
 
-  it('人物页使用档案墙和汇总数据，而非旧成就列表', () => {
-    expect(hub).toContain('class-command-stats');
-    expect(hub).toContain('class-dossier-grid');
-    expect(hub).toContain('aria-label="人物熟练度档案"');
-    expect(css).toContain('.class-dossier-grid');
+  it('人物页使用切换栏+大立绘+档案详情布局（10-05 hub-personnel 批口径，取代旧档案墙）', () => {
+    expect(hub).toContain('class="person-tabs"');
+    expect(hub).toContain('aria-label="人物档案切换"');
+    expect(hub).toContain('class="person-portrait"');
+    expect(hub).toContain('class="person-details"');
+    expect(hub).toContain('class="person-stats"');
+    expect(src('game/css/hub-personnel-cover.css')).toContain('.person-layout');
   });
 
   it('收藏页以白名单二级标签切换单一内容区', () => {
@@ -48,11 +50,25 @@ describe('照相馆陈列交互', () => {
   const library = src('game/src/hub/game.cardslib.page.js');
   const index = src('game/index.html');
   const css = src('game/css/expedition-library.css');
+  const craftCss = src('game/css/photo-studio-craft.css');
   const ui = src('game/src/ui/ui.js');
 
-  it('标题入口与页面名称统一为照相馆', () => {
-    expect(index).toContain('<span class="c-cn">照相馆</span>');
-    expect(index).toContain('<span class="c-en">Photo Studio</span>');
+  it('标题入口与页面名称统一为照相馆（10-04 主页构图批口径：home-plate 按钮）', () => {
+    expect(index).toContain('id="btnCardLib"');
+    expect(index).toContain('title="照相馆"');
+    expect(index).toContain('<span class="home-button-cn">照相馆</span>');
+  });
+
+  it('门头突出馆名与馆藏数，照片分类、搜索及结果计数清晰分层（studio-unified 批口径）', () => {
+    expect(library).toContain('<div class="lib-head-title" aria-label="照相馆">');
+    expect(library).toContain('<span class="lib-head-name"><b>照相馆</b></span>');
+    expect(library).toContain('aria-label="馆藏 ${libCards.length} 张照片"');
+    expect(library).toContain('aria-label="卡牌类型筛选"');
+    expect(library).toContain('<span>浏览馆藏</span>');
+    expect(library).toContain('找到 <b id="libResultCount">');
+    expect(library).toContain('placeholder="名称、效果或关键词"');
+    expect(craftCss).toContain('照相馆顶部索引重排');
+    expect(craftCss).toContain('.lib-head-seal { display:none!important; }');
   });
 
   it('影廊版照片结构：黄铜挂件保留，卡牌语言与微倾已删（09-23 拍板）', () => {

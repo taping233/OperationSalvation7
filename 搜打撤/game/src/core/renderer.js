@@ -1,5 +1,5 @@
 
-import { circle, font, hash2, mixHex, rrect, shade } from './renderer.primitives.js';
+import { circle, font, hash2, rrect } from './renderer.primitives.js';
 import { drawTacticalIcon } from './renderer.icons.js';
 import { revealProgress } from './map-reveals.js';
 import { ease } from './motion-primitives.js';
@@ -18,10 +18,10 @@ const SDT = window.SDT;
   const PERSISTENT_TYPES = new Set(['door', 'emergencyExit', 'extraction', 'entrance']);
 
   const COLORS = {
-    bgTop: '#17252b',
-    bgBottom: '#080c10',
+    bgTop: '#405b66',
+    bgBottom: '#193341',
     mixTo: '#0a1014',                     // 非当前环结点压暗的目标色
-    ringLink: 'rgba(226,202,150,0.66)',   // 环内相邻结点的羊皮纸连线
+    ringLink: 'rgba(200,218,213,0.85)',  // 普通已知路线退后，可达路线单独强调
   };
 
   // 逐帧零分配：setLineDash 只拷贝值不持有数组引用，复用同一缓冲即可
@@ -124,9 +124,9 @@ const SDT = window.SDT;
     b.globalAlpha = 1;
     // 暗色纱层：保留地图、节点和 HUD 的对比度，不遮掉壁纸主体
     const shade = b.createLinearGradient(0, 0, 0, cam.viewH);
-    shade.addColorStop(0, 'rgba(5,14,18,0.28)');
-    shade.addColorStop(0.55, 'rgba(5,14,18,0.18)');
-    shade.addColorStop(1, 'rgba(2,8,11,0.40)');
+    shade.addColorStop(0, 'rgba(222,234,229,0.08)');
+    shade.addColorStop(0.55, 'rgba(12,34,45,0.08)');
+    shade.addColorStop(1, 'rgba(6,22,31,0.24)');
     b.fillStyle = shade;
     b.fillRect(0, 0, cam.viewW, cam.viewH);
     // 中央光晕：给壁纸中心一点冷色透气感
@@ -266,29 +266,23 @@ const SDT = window.SDT;
     return geo;
   }
 
-  // 地图底盘与备注点随可见结点动态绘制，避免为整张迷雾地图创建高分辨率画布。
-  // 当前位置底盘单独动态绘制，避免每走一步都重烘焙整张高分辨率棋盘。
-  function drawCurrentNodePlate(ctx, game) {
+  // 当前节点使用透明双轮廓，背景场景透过图标可见。
+  function drawCurrentNodeFrame(ctx, game) {
     const g = nodeGeo(game);
     const n = g.nodes.find(node => isCurrentNode(game, node));
     if (!n) return;
-    const layerColor = game.layerData[n.li]?.color || '#6e5133';
-    const base = mixHex(layerColor, '#07131d', 0.72);
     ctx.save();
-    ctx.shadowColor = 'rgba(255,205,108,0.34)';
-    ctx.shadowBlur = 14 / game.cam.zoom;
-    const rg = ctx.createRadialGradient(n.x - n.r * 0.3, n.y - n.r * 0.4, n.r * 0.18, n.x, n.y, n.r);
-    rg.addColorStop(0, shade(base, 0.12));
-    rg.addColorStop(1, shade(base, -0.05));
-    ctx.fillStyle = rg;
+    ctx.shadowBlur = 0;
+    ctx.strokeStyle = '#e1c18a';
+    ctx.lineWidth = 1 / game.cam.zoom;
     ctx.translate(n.x, n.y); ctx.rotate(Math.PI / 4);
-    ctx.fillRect(-n.r * .8, -n.r * .8, n.r * 1.6, n.r * 1.6);
+    ctx.strokeRect(-n.r * .93, -n.r * .93, n.r * 1.86, n.r * 1.86);
     ctx.restore();
   }
 
   // ---------- 图标层（圆形位图结点：呼吸缩放；当前环明亮，可走相邻环高亮，走过的中亮，其余隐藏/虚化） ----------
   // 节点配色表提升到模块级：原来在循环体内每节点每帧重建 14 键对象（纯常数）
-  const NODE_TYPE_COLORS = { battle:'#e98278', coin:'#e0c57d', wood:'#e0c57d', rations:'#e0c57d', chest:'#e0c57d', key:'#e0c57d', fire:'#76c6ad', emergencyExit:'#76c6ad', extraction:'#76c6ad', event:'#82b8d0', shop:'#82b8d0', altar:'#a995d4', boss:'#e98278', entrance:'#76c6ad' };
+  const NODE_TYPE_COLORS = { battle:'#e2a095', coin:'#e2c28b', wood:'#e2c28b', rations:'#e2c28b', chest:'#e2c28b', key:'#e2c28b', fire:'#8fc8b7', emergencyExit:'#8fc8b7', extraction:'#8fc8b7', event:'#a0cfda', shop:'#a0cfda', altar:'#c2b0df', boss:'#e2a095', entrance:'#8fc8b7' };
   function drawIcons(ctx, game) {
     const z = game.cam.zoom, g = nodeGeo(game);
     const reduced = SDT.Motion ? SDT.Motion.reduceMotion() : false;
@@ -303,21 +297,21 @@ const SDT = window.SDT;
       const rvA = rv < 1 ? Math.min(1, rv * 1.4) : 1;
       const s = pulse * rvS;
       ctx.save();
-      ctx.globalAlpha = (current || legal ? 1 : .38) * rvA;
+      ctx.globalAlpha = (current || legal ? 1 : .52) * rvA;
       // W1-10（2026-09-27 R2）：层间闸门金色化——门是层内唯一主线目标，此前与普通
       // 节点同色（NEW M-1 并入 W1-10）。金色 = 全站「目标/通道」语义色。
       const isDoor = game.doorKeys ? game.doorKeys.has(`${n.li},${n.idx}`) : false;
-      const color = current ? '#f3dfad' : isDoor ? (legal ? '#edcb8d' : '#c8ac74') : NODE_TYPE_COLORS[n.def.type] || '#82b8d0';
+      const color = current ? '#f3dfad' : isDoor ? (legal ? '#edcb8d' : '#c8ac74') : NODE_TYPE_COLORS[n.def.type] || '#a0cfda';
       // 消耗过的节点（2026-09-13 留言）：踩过一次的格子内容已取走，图标换成空白节点图标
       const spent = walked && !current && !PERSISTENT_TYPES.has(n.def.type) && !isDoor;
       ctx.translate(n.x, n.y); ctx.rotate(Math.PI / 4); ctx.scale(s, s);
-      ctx.fillStyle = '#0a1b27'; ctx.fillRect(-n.r * .78, -n.r * .78, n.r * 1.56, n.r * 1.56);
-      ctx.strokeStyle = current ? '#f1d99c' : isDoor ? '#e2c88f' : legal ? color : '#55717d'; ctx.lineWidth = (current ? 2.2 : isDoor && legal ? 2 : legal ? 1.7 : 1) / z;
+      ctx.shadowBlur = 0;
+      ctx.strokeStyle = current ? '#f3dfad' : isDoor ? '#e2c88f' : legal ? color : '#93afb8'; ctx.lineWidth = (current ? 2.2 : isDoor && legal ? 2 : legal ? 1.7 : 1) / z;
       ctx.strokeRect(-n.r * .78, -n.r * .78, n.r * 1.56, n.r * 1.56);
       ctx.rotate(-Math.PI / 4); ctx.scale(1 / s, 1 / s); ctx.translate(-n.x, -n.y);
-      drawTacticalIcon(ctx, spent ? 'blank' : n.def.type, n.x, n.y, Math.max(.8, n.r / 12), spent ? '#7d95a0' : color);
+      drawTacticalIcon(ctx, spent ? 'blank' : n.def.type, n.x, n.y, Math.max(.8, n.r / 12), spent ? '#93afb8' : color);
       if (walked && !current) {
-        ctx.fillStyle = '#8ec5b4';
+        ctx.fillStyle = '#76aa97';
         circle(ctx, n.x + n.r * .75, n.y - n.r * .75, 5 / z); ctx.fill();
       }
       const noteKey = game.map?.boardId + '|' + n.li + ',' + n.idx;
@@ -340,8 +334,8 @@ const SDT = window.SDT;
       Number(isCurrentNode(game, b)) * 2 + Number(g.legalKeys.has(`${b.li},${b.idx}`)) -
       Number(isCurrentNode(game, a)) * 2 - Number(g.legalKeys.has(`${a.li},${a.idx}`)));
     ctx.save(); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    // 字体固定 12px：宽度只取决于文本，按标签串缓存测量结果（省每帧 measureText）
-    ctx.font = `600 12px "HarmonyOS Sans SC","HarmonyOS Sans","Noto Sans SC Sub",sans-serif`;
+    // 字体固定 14px：宽度只取决于文本，按标签串缓存测量结果。
+    ctx.font = `600 14px "HarmonyOS Sans SC","HarmonyOS Sans","Noto Sans SC Sub",sans-serif`;
     for (const n of ordered) {
       const current = isCurrentNode(game, n), legal = g.legalKeys.has(`${n.li},${n.idx}`);
       if (!current && !legal && z < .65) continue;
@@ -355,11 +349,11 @@ const SDT = window.SDT;
       const x = p.x - w / 2, y = p.y + n.r * z + 14;
       if (occupied.some(r => x < r.x + r.w && x + w > r.x && y < r.y + 42 && y + 42 > r.y)) continue;
       occupied.push({x,y,w});
-      ctx.fillStyle = current ? '#dfc28d' : '#0a1923e8';
-      rrect(ctx, x, y, w, 27, 3); ctx.fill();
-      ctx.strokeStyle = current ? '#f5e2bc' : door ? '#d9bb82a6' : legal ? '#a49374' : '#45616e';
+      ctx.fillStyle = current ? '#e1c18a' : '#edf0e8f5';
+      rrect(ctx, x, y, w, 29, 1); ctx.fill();
+      ctx.strokeStyle = current ? '#1b3442' : door ? '#b7985f' : legal ? '#8faaa9' : '#82999f';
       ctx.lineWidth = 1; ctx.stroke();
-      ctx.fillStyle = current ? '#122633' : '#e6eef1'; ctx.fillText(label, p.x, y + 13.5);
+      ctx.fillStyle = '#1b3442'; ctx.fillText(label, p.x, y + 14.5);
     }
     ctx.restore();
   }
@@ -373,7 +367,7 @@ const SDT = window.SDT;
     ctx.strokeStyle = COLORS.ringLink;
     for (let li = 0; li < g.linksByLayer.length; li++) {
       const path = g.linksByLayer[li];
-      ctx.globalAlpha = li === curLi ? 0.20 : 0.08;
+      ctx.globalAlpha = li === curLi ? 0.35 : 0.10;
       ctx.lineWidth = 1.8 / z;
       ctx.stroke(path);
       ctx.globalAlpha = li === curLi ? 0.08 : 0.03;
@@ -382,22 +376,21 @@ const SDT = window.SDT;
       ctx.stroke(path);
       ctx.setLineDash(NO_DASH);
     }
-    // 当前节点可走道路：柔光底、亮色中层、白金芯线，明确下一步可走方向。
+    // 当前节点可走道路：深蓝衬线、暖金主线和浅色芯线，避免发光覆盖场景。
     if (g.legalLinks) {
       const pulse = 1;
-      ctx.globalAlpha = 0.42 * pulse;
-      ctx.strokeStyle = 'rgba(223,194,141,0.4)';
-      ctx.lineWidth = 7 / z;
-      ctx.shadowColor = 'rgba(223,194,141,0.4)';
-      ctx.shadowBlur = 7 / z;
+      ctx.globalAlpha = 0.7 * pulse;
+      ctx.strokeStyle = '#193341';
+      ctx.lineWidth = 6 / z;
+      ctx.shadowBlur = 0;
       ctx.stroke(g.legalLinks);
       ctx.shadowBlur = 0;
       ctx.globalAlpha = 0.92 * pulse;
-      ctx.strokeStyle = 'rgba(223,194,141,0.85)';
+      ctx.strokeStyle = '#d1ac6c';
       ctx.lineWidth = 2.4 / z;
       ctx.stroke(g.legalLinks);
       ctx.globalAlpha = 1;
-      ctx.strokeStyle = 'rgba(244,230,199,0.7)';
+      ctx.strokeStyle = 'rgba(255,241,214,0.8)';
       ctx.lineWidth = .8 / z;
       ctx.stroke(g.legalLinks);
     }
@@ -465,8 +458,7 @@ const SDT = window.SDT;
     ctx.fill();
     ctx.strokeStyle = 'rgba(240,210,140,0.7)';
     ctx.lineWidth = 1.5 / game.cam.zoom;
-    ctx.shadowColor = 'rgba(216,180,106,0.5)';
-    ctx.shadowBlur = 8;
+    ctx.shadowBlur = 0;
     ctx.stroke();
     ctx.restore();
   }
@@ -572,7 +564,7 @@ const SDT = window.SDT;
     ctx.scale(cam.zoom, cam.zoom);
     ctx.translate(-cam.cx, -cam.cy);
 
-    drawCurrentNodePlate(ctx, game);
+    drawCurrentNodeFrame(ctx, game);
     drawLinks(ctx, game);
     drawIcons(ctx, game);
     drawIndexes(ctx, game);
@@ -593,7 +585,7 @@ const SDT = window.SDT;
       vignetteGrad = ctx.createRadialGradient(cam.viewW / 2, cam.viewH / 2, Math.min(cam.viewW, cam.viewH) * 0.30,
         cam.viewW / 2, cam.viewH / 2, Math.max(cam.viewW, cam.viewH) * 0.78);
       vignetteGrad.addColorStop(0, 'rgba(0,0,0,0)');
-      vignetteGrad.addColorStop(1, 'rgba(0,0,0,0.36)');
+      vignetteGrad.addColorStop(1, 'rgba(4,20,29,0.18)');
     }
     ctx.fillStyle = vignetteGrad;
     ctx.fillRect(0, 0, cam.viewW, cam.viewH);

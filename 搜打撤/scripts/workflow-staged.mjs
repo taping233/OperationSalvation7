@@ -3,7 +3,7 @@ import { createHash, randomUUID } from 'node:crypto';
 import { appendFileSync, chmodSync, existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { dependencyBytes, gateInputScope, gateReceipt } from './workflow-gate-receipt.mjs';
+import { dependencyBytes, gateInputScope, gateReceipt, indexContentHash } from './workflow-gate-receipt.mjs';
 
 const sha = value => createHash('sha256').update(value).digest('hex');
 const slash = value => value.replaceAll('\\', '/');
@@ -26,7 +26,8 @@ function indexFile(repo, env = {}) {
   const file = git(repo, ['rev-parse', '--git-path', 'index'], env).toString().trim();
   return path.resolve(repo, file);
 }
-function indexHash(repo, env = {}) { return sha(readFileSync(indexFile(repo, env))); }
+// 内容哈希（见 workflow-gate-receipt.indexContentHash）：并发 git 操作的 stat-only 刷新不构成内容变化。
+function indexHash(repo, env = {}) { return indexContentHash(repo, env); }
 function safeRelative(file) {
   if (!file || file.includes('\\') || file.includes(':') || file.split('/').some(part => !part || part === '..' || part === '.' || part.toLowerCase() === '.git')) {
     throw new Error('不安全的 index 路径：' + file);
@@ -200,7 +201,7 @@ export async function runStaged(root, options = {}) {
       report.snapshotDirectory = temp;
       const isolatedIndex = path.join(temp, 'index');
       writeFileSync(isolatedIndex, readFileSync(indexFile(plan.repo)), { flag: 'wx' });
-      if (sha(readFileSync(isolatedIndex)) !== plan.indexSha256 || indexHash(plan.repo) !== plan.indexSha256) throw new Error('导出前 index 已变化');
+      if (indexHash(plan.repo, { GIT_INDEX_FILE: isolatedIndex }) !== plan.indexSha256 || indexHash(plan.repo) !== plan.indexSha256) throw new Error('导出前 index 已变化');
       const snapshot = path.join(temp, 'snapshot');
       mkdirSync(snapshot);
       const frozenEntries = records(plan.repo, { GIT_INDEX_FILE: isolatedIndex });

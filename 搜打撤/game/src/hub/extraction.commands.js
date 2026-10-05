@@ -49,6 +49,58 @@ function addXp(base, cls, amount, characterFor, addXpToProgress) {
   base[group][key] = addXpToProgress(base[group][key], amount).after;
 }
 
+// 2026-10-03 老板（SYS-02）：首探量与撤离经验公式各只留一份——加经验与结算回执
+// 都从这里取数，页面/记录/Agent 不再各自用 turn 反推（SYS-01 口径原样保留）。
+export function firstExploreMoves(game) {
+  // 2026-10-03 老板（SYS-01）：撤离经验只统计首次有效探索量——explored 是 moveTo 写入的
+  // 首踏入格打标（visited 类字段先例），重复进出已探索格的安全往返不再产生经验；
+  // 旧档会话无 explored 字段（null）回退旧口径 turn-1，存量进度不缩水；步数统计（turn）保留作展示。
+  return (game.explored && typeof game.explored === 'object')
+    ? Object.keys(game.explored).length
+    : Math.max(0, (Number(game.turn) || 0) - 1);
+}
+
+export function extractionXp(moves, xpMul) {
+  return Math.round((20 + moves * 2) * (Number(xpMul) || 1));
+}
+
+// 2026-10-03 老板（SYS-02）：一次远征的「真实回执」——结算命令链在 extractFinish 提交时构造，
+// 随既有事务收据持久化（base._m01.requests 的 output，journal 幂等语义不变，不新增存储机制）；
+// 结算页、跑局记录、Agent 导出三方读同一份事实。只读持久态（pending 的净带回/散失）
+// 与终局态（game 的结局/层/行动/时长），刷新后从存档重建 attempt 仍得到同一结果；
+// 已提交过的事务 replay 直接返回存档收据原值，回执不重复累计。
+export function buildExtractionReceipt({ game, pending, isSha = () => false, xpMul = 1 }) {
+  const moves = firstExploreMoves(game);
+  const remaining = pending && Array.isArray(pending.remainingCards) ? pending.remainingCards : [];
+  const remainingCount = remaining.reduce((n, s) => n + (s.count || 0), 0);
+  const ownedNonSha = (game.ownedCards || []).filter(o => o && o.card && !isSha(o.card)).length;
+  const pocketTotal = pending && Number.isInteger(pending.totalPocketCount) ? pending.totalPocketCount : 0;
+  const pocketLost = pending && Number.isInteger(pending.lostPocketCount) ? pending.lostPocketCount : 0;
+  const resources = pending && pending.resources ? pending.resources : {};
+  return {
+    version: 1,
+    outcome: game.bossKilled ? 'clear' : 'extract',   // clear=击破首脑后的终局撤离，extract=保本/紧急撤离
+    bossKilled: !!game.bossKilled,
+    layersReached: Number.isInteger(game.layerIdx) ? game.layerIdx + 1 : null,
+    actions: Math.max(0, (Number(game.turn) || 0) - 1),
+    firstExplore: { moves, xp: extractionXp(moves, xpMul) },
+    netTake: {
+      cardsStashed: Math.max(0, ownedNonSha - remainingCount),   // 本局真实入库张数（与携出候选、仓库原持有区分）
+      pocketKept: Math.max(0, pocketTotal - pocketLost),
+      wood: Number.isInteger(resources.wood) ? resources.wood : 0,
+      rations: Number.isInteger(resources.rations) ? resources.rations : 0,
+    },
+    losses: {
+      lostCount: remainingCount,   // 完成整理时未入库的卡牌即散失
+      lostNotable: remaining.filter(s => s.card && (s.card.rarity === '传说' || s.card.rarity === '史诗'))
+        .slice(0, 6).map(s => ({ name: s.card.name, rarity: s.card.rarity, count: s.count || 1 })),
+      pocketLost,
+    },
+    runCoins: Number.isInteger(game.coins) ? game.coins : null,   // 随身币不带回，只作本局记录
+    durationSec: Math.max(0, Math.floor(Number(game.elapsed) || 0)),
+  };
+}
+
 function calculateBaseAndPending({ game, runId, random, baseSnapshot, baseApi, characterFor, addXpToProgress, xpMul }) {
   const keptPocket = [];
   let lostPocketCount = 0;
@@ -91,7 +143,7 @@ function calculateBaseAndPending({ game, runId, random, baseSnapshot, baseApi, c
   const elapsedSynced = Math.max(0, Number(game.elapsedSynced) || 0);
   const playDelta = Math.max(0, elapsedNow - elapsedSynced);
   base.stats.playSeconds = Math.max(0, Number(base.stats.playSeconds) || 0) + playDelta;
-  addXp(base, game.myClass, Math.round((20 + Math.max(0, game.turn - 1) * 2) * xpMul), characterFor, addXpToProgress);
+  addXp(base, game.myClass, extractionXp(firstExploreMoves(game), xpMul), characterFor, addXpToProgress);
   return { pending, base, elapsedSynced: elapsedNow };
 }
 
@@ -278,7 +330,12 @@ export function createExtractionCommands({
     const slotId = getActiveSlot();
     if (!slotId) {
       if (expectedSlotId !== null) return fail('STALE_SLOT', '档位已切换，撤离整理请求已取消');
-      game.pendingExtraction = null; game.runActive = false; return { ok: true, ephemeral: true };
+      // 2026-10-03 老板（SYS-02）：测试投影局也产回执（内存态），页面与记录走同一条读数路径
+      const receipt = game.pendingExtraction
+        ? buildExtractionReceipt({ game, pending: game.pendingExtraction, isSha: baseApi.isSha, xpMul: xpMultiplier() })
+        : null;
+      game.pendingExtraction = null; game.runActive = false;
+      return { ok: true, ephemeral: true, ...(receipt ? { receipt } : {}) };
     }
     if (expectedSlotId !== slotId) return fail('STALE_SLOT', '档位已切换，撤离整理请求已取消');
     if (expectedRunId !== game.pendingExtraction?.runId) return fail('STALE_RUN', '当前整理页已过期，请重新载入撤离整理');
@@ -288,8 +345,11 @@ export function createExtractionCommands({
       const current = await readPending(slotId);
       if (!current.ok) return current;
       if (current.pending.runId !== expectedRunId) return fail('STALE_RUN', '当前整理页已过期，请重新载入撤离整理');
+      // 2026-10-03 老板（SYS-02）：结算回执随 extractFinish 事务收据持久化（output 位）——
+      // 重试/刷新后重建 attempt 重算结果一致；已提交过则经 readSettlementReceipt 原样重放，不重复累计。
+      const receipt = buildExtractionReceipt({ game, pending: current.pending, isSha: baseApi.isSha, xpMul: xpMultiplier() });
       attempt = makeAttempt(slotId, current, `terminal:extract:${expectedRunId}:${current.pending.requestSeq}:finish`,
-        'extractFinish', { requestSeq: current.pending.requestSeq }, current.base, null);
+        'extractFinish', { requestSeq: current.pending.requestSeq }, current.base, null, { output: { receipt } });
       inFlight.set(key, attempt);
     }
     if (attempt.command !== 'extractFinish') return fail('REQUEST_PENDING', '上一项整理正在重试，请稍后再操作', true);

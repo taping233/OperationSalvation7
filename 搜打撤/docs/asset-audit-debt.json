@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "captured": "2026-10-02",
-  "head": "c6ee206840",
-  "scope": "Existing local assets and manifest after observed bytes refresh; this frozen snapshot is not authorization evidence and must not be regenerated to accept new debt.",
+  "captured": "2026-10-03",
+  "head": "425d03920e4323b016433419ec11aec4a7f3795b",
+  "scope": "Historical debt re-fingerprinted under the LF line-ending canonical audit scope (#35, boss-approved 2026-10-03): same issue set as the 2026-10-02 snapshot, fingerprints recomputed because svg/json bytes+sha256 are now CRLF-normalized; 12 icon bytes-mismatch items were resolved by re-registering the manifest, not accepted as debt. Not authorization evidence; must not be regenerated to accept new debt.",
   "issues": [
     {
       "code": "unlisted",
@@ -2222,7 +2222,7 @@
       "code": "unlisted",
       "path": "sfx/alternatives/arknights-adjusted/library.json",
       "detail": "no manifest registration",
-      "fingerprint": "65fe079fd175dc385ca034a68be8d81f3fb6ee456ee79fc09bf752bbaf01f382"
+      "fingerprint": "bb4876354454898ba2d6c35d25963ffb57d1f5de7fe7b6190ac6166fcd9d62d5"
     },
     {
       "code": "unlisted",
@@ -2480,13 +2480,13 @@
       "code": "unlisted",
       "path": "sfx/alternatives/arknights-expansion/library-base.json",
       "detail": "no manifest registration",
-      "fingerprint": "939381c133c709a48b81580c848a47b01c2c55cf203756b01ad9ced23e2402d6"
+      "fingerprint": "c613356f9652fd232b0e95ae30f847d9c8eae4a79f76c66020a6efba1f34f24b"
     },
     {
       "code": "unlisted",
       "path": "sfx/alternatives/arknights-expansion/library.json",
       "detail": "no manifest registration",
-      "fingerprint": "084e761ad067581d91362eddbabce01d12c39651de2f88cd5b055dac4b28419c"
+      "fingerprint": "7b3ccae8245de7b9ffd866f60742e82a5b1b7b10b062f4003d1ef0b9c5a46271"
     },
     {
       "code": "unlisted",
@@ -2690,7 +2690,7 @@
       "code": "unlisted",
       "path": "sfx/alternatives/arknights-runtime/combat-extra/fragment.json",
       "detail": "no manifest registration",
-      "fingerprint": "06ce95b699ceaccda7a436e34f019724630516cd486837f9ab13d2aa68ff9f52"
+      "fingerprint": "2942fd77fe10f020e4658b80c1a519afebe7b5ad67134858f1ae0c864cd24c90"
     },
     {
       "code": "unlisted",
@@ -2852,7 +2852,7 @@
       "code": "unlisted",
       "path": "sfx/alternatives/arknights-runtime/environment/fragment.json",
       "detail": "no manifest registration",
-      "fingerprint": "760a5d421789cda3018187cbbce23f8a6426cf7caa785074c75b6518242ffb6b"
+      "fingerprint": "c46c64231cc75e86e77be5f6bc32af1deb964a0472541db80dc8d0f595311053"
     },
     {
       "code": "unlisted",
@@ -2978,7 +2978,7 @@
       "code": "unlisted",
       "path": "sfx/alternatives/arknights-runtime/library.json",
       "detail": "no manifest registration",
-      "fingerprint": "08f42aaa3d53738bcbdf01381b3d29f96a085118493883265fb668f726d340bd"
+      "fingerprint": "abe958545d2c0f95ebd27f6e065517ceb7b03ccb9dac2d652d4a8581284d395f"
     },
     {
       "code": "unlisted",
@@ -3068,7 +3068,7 @@
       "code": "unlisted",
       "path": "sfx/alternatives/arknights-runtime/ui-extra/fragment.json",
       "detail": "no manifest registration",
-      "fingerprint": "8bd871c6dce01a877ab9502499dc041e4ea1ce0ffe25eba207cf1292bed9b657"
+      "fingerprint": "cf53763356694df0440ccba56392f3aaffda71e1d2aac79ab56ed43fbba381f3"
     },
     {
       "code": "unlisted",
@@ -3218,7 +3218,7 @@
       "code": "unlisted",
       "path": "sfx/alternatives/arknights/library.json",
       "detail": "no manifest registration",
-      "fingerprint": "fd5714848bda86c397929094502cbc4912f2bdfadada8d1cced952f701a0da31"
+      "fingerprint": "1810228fb7045410d9bfce5eac836b0b3284f2c1ea0afcd68e3f35b2f16838fb"
     },
     {
       "code": "unlisted",
@@ -3284,7 +3284,7 @@
       "code": "unlisted",
       "path": "sfx/alternatives/cc0-action/library.json",
       "detail": "no manifest registration",
-      "fingerprint": "9ec26d22a64276723defd6eda4e6e44bc3c65194b0fc040cf144b871d3173ad1"
+      "fingerprint": "750595fc3f8cd48bb33040e6931d4317e9b7e0052c8ea5f10bb66362c860ede8"
     },
     {
       "code": "unlisted",
@@ -3350,7 +3350,7 @@
       "code": "unlisted",
       "path": "sfx/alternatives/cc0-ui/library.json",
       "detail": "no manifest registration",
-      "fingerprint": "41ee60bfa0368a2c620700b0ecb662a26c904af4a5303ac83e683073a41bbfca"
+      "fingerprint": "30ab3ffda34a276ce5a4fe308989c67c913e398b6b8c426f3893d1ddbd13c889"
     },
     {
       "code": "unlisted",

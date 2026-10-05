@@ -1,3 +1,5 @@
+@import url('/css/hub-cover.css');
+
 /* ═══════════════════════════════════════════════════════════════════
    基地主页美术升级（2026-09-24）——对标标题页 title-p0.css「09-24 美术升级」
    与选档页 page-slot-select.css 的定稿语言：
@@ -17,18 +19,18 @@
   --hub-press: .1s ease-out;
 }
 
-/* ── T4 出入场：基地切入 = 淡入 + 8px 上浮（backwards 结束即释放 transform
-   给交互态；页签切换不重建 .card.page，不会重播） ── */
+/* 基地切入只淡入，不缩放或抬动整个页面；同页刷新不重播外壳。 */
 #overlay .card.page:has(#hubMain) {
-  animation: hubPanelIn .42s cubic-bezier(.22, 1, .36, 1) backwards;
-  will-change: transform, opacity;
+  animation: hubPanelIn .24s var(--ease-entrance) both;
 }
 @keyframes hubPanelIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: none; }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
-/* 页签切换沿用现有 hubPageIn 关键帧，只换入更绵的落位曲线 */
-#overlay #hubMain .hub-page.page-in { animation: hubPageIn .34s cubic-bezier(.22, 1, .36, 1); }
+#overlay .card.page.hub-refresh:has(#hubMain) { animation: none; }
+/* 页签内容短淡入，不再与外壳的位移、缩放叠加。 */
+#overlay #hubMain .hub-page.page-in { animation: hubContentIn .16s var(--ease-entrance); }
+@keyframes hubContentIn { from { opacity: .65; } to { opacity: 1; } }
 
 /* ═════════ W1 冷青统一调色 + 暗角视线归属 ═════════ */
 

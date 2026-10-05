@@ -1,8 +1,904 @@
 {
   "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 271,
+  "count": 674,
   "assets": [
+    {
+      "path": "cards/martial-cc-unmoved.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 131802,
+      "sha256": "644a916c116f66b712bce3b6e91d5f7b4a961b777ba0bbf5b3079baabdc2cdce",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-cc-unmoved.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 14528,
+      "sha256": "d76673b8bd0bc7c4fac96d72f8fec2a2007b7f2be665cd40c73f1324aace262e",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt7-marchrush.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 137670,
+      "sha256": "3069f04dd87b888a4bbac0e1a9ef7a39842c249be22b48ff442bcea130566ef1",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-marchrush.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 15216,
+      "sha256": "71db26afa8628fc6b53c25d948e3cf665994638283dec29968caa9e0c8ff950d",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt7-bulwark.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 172940,
+      "sha256": "e1a9184ac32876d9141d58ce3bc661aa8962b057808f504ce01e9265127f381b",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-bulwark.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 18574,
+      "sha256": "8ccdc292c9c9abfb3041aac7d72e5c37fb46c1c57971ed051e88caca7c3f46cc",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt7-demonbreaker.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 161890,
+      "sha256": "c43b18024a9b9746d6149be9be8fbc18ce3beca7232cb03567170c51daaadd47",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-demonbreaker.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 20604,
+      "sha256": "7104a34a851802b985774024155d4841ef2e0e41f3f3d62de7c304df7a9971fd",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt7-ironcharge.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 116256,
+      "sha256": "1ed7125314d23bcb3e35c2ea0d1f1b8b1405b47ceb473784faf90611be042caf",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-ironcharge.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 12060,
+      "sha256": "47efdb9bc3db19cb5826a1315d1b47c39d573181df75bdb98d991828c44a6c56",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt7-armup.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 162914,
+      "sha256": "869752a891dad1bb8074ef50f04849a27c84dfc34dbc1323ca1130b7f2c09d05",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-armup.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 19050,
+      "sha256": "e45a7111c364dda0e755af37c0430695bc235ca26861c746db4a574f6c8ac22e",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt7-whirlwind.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 149112,
+      "sha256": "eae62f8946c0368b76866ca0291278fa523482e4b43931f9ebd41b729f767d18",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-whirlwind.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 17962,
+      "sha256": "b136632b1d7574395a49ae45af8b2d6e1d962962751c8fd00d305b8fd09ab30b",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt7-bloodpoison.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 104450,
+      "sha256": "a33fd10407f47b90fa00e0edf2c3e0ab8dc88572702dbda2f1c2ec5236e4378b",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-bloodpoison.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 12972,
+      "sha256": "ff86272069a5e864728934ac5a5f38b7a115883ea28539e3516030fd4a4454de",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt3-fatal-pierce.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 162140,
+      "sha256": "01100f3cb80e5b8ae15e39070986d78ea5426e1e91802b3970a871c49de8d921",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-fatal-pierce.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 26238,
+      "sha256": "4a60d1eec7132c7dd708c22eed1373415a113a36170b2cceb83f35288381d2f5",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt2-swiftarrow.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 167046,
+      "sha256": "0b8d28be3f8d3f4281ec65461ff8c229153fc778bb765e190c93d9d39fb526a1",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt2-swiftarrow.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 26622,
+      "sha256": "3408202e0c252334b8b62f2bb8c2a2ee08dc9377df1b8252b075f4131525f75a",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt2-forestarrow.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 174508,
+      "sha256": "1151e89ccb6ddca2ea43fc55d196f82ee64980bb5375591896a1db1e3d083a16",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt2-forestarrow.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 26606,
+      "sha256": "fece2b5cdb9ca3b1492ca701ce65c626106263a9e13879fc9e77f5a2d869ade8",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt3-life-arrow.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 138094,
+      "sha256": "2b9f8d40268853ab01f1d56f584f4fc8c9fb87363e7812116f8ef242e815802b",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-life-arrow.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 22318,
+      "sha256": "8ae02a65fd850268a8228735ee6630cdd762d9e21e8427dd1414bab8b983c265",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt2-block.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 163950,
+      "sha256": "03d6b296103cf27f5aaaa57ce80a1e7efd34ca7788b412bd354324b9100332a9",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt2-block.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 24758,
+      "sha256": "1d58d4cc2dc1ff5c3dc28cccbcad9d23df00e492dc6052d2b60fb32edfa0d2ea",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/expedition-starters/pierce.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 121476,
+      "sha256": "dc75312d62b6bee3c4618c3696ac72726fc2b51d57fba928a17c3808152a67b2",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/expedition-starters/pierce.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 20142,
+      "sha256": "dbadf3b72167b868ac0527a7826f6cbc80b26a0f40eda745817e45ec3b2b855f",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt2-turtlearmor.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 211502,
+      "sha256": "e534489c33dc9b3561cc16d3b22f2914c6021cc51f3181d658c9bc3f63c9bbe3",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt2-turtlearmor.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 32040,
+      "sha256": "b7288a6c00a71d36c5b198332ee88864dcaa46bfa006330160da4691c185bb61",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt3sp-shadowbug.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 181108,
+      "sha256": "a8b1c251ae18545ceb04637c16af127191e68727ca67c1168567e02bca52e9d2",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3sp-shadowbug.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 25196,
+      "sha256": "3d0180f4c069763637158a077caea03450777c4ac3b85b18ee50e3fde02a7e29",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt3-double-shot.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 147256,
+      "sha256": "ac4ef873b155809c1941252a77c51056409ca5f0bb6115957866513f0e374574",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-double-shot.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 20762,
+      "sha256": "e435ffecf8107875ba9ecc9a873acb2d75ec00d4594714f87c0b99de11380cae",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt3-fly-arrowhawk.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 214682,
+      "sha256": "c1426d37dec54dccd139333b88f2f197134f3c62e66b8c64637dc3040450cfcf",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-fly-arrowhawk.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 36284,
+      "sha256": "3aba553456c75b081658eed4d01d0689fc9b41dd53f643d7189bda413f4041cb",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt3-frostfall.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 268494,
+      "sha256": "14fd2c818ae06a1e1746dac0cba8264ef234a13aca5f3fe6288be43dc821cf5e",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-frostfall.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 40244,
+      "sha256": "57b3a1fd30a26d97c529971b35c44e8b5beae073dbcb574b6677e365c0a25960",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/spell-tt3-treasure-hunt.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 160758,
+      "sha256": "cbe2b9d59e799127e845cf7cfcefb56f3ab18d3dcf4e9ac4759b90da07097bee",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-treasure-hunt.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 27388,
+      "sha256": "7ff495ef6fc0fb6c39c946132efb9b34e8ca9e8d6c738894bc1a512603bd5ef2",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/spell-tt3-grope.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 92034,
+      "sha256": "b8856034393c74efb97842deba3690f82b5c5aea4a73382bbdfb9e6b531272c2",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-grope.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 14958,
+      "sha256": "cac1c9df9cb0d9764f278d0685089935a703e0d3d030001fcb9e5c6ecca46198",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/spell-tt3-ice-spike.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 134484,
+      "sha256": "a1afbe4d225fbe54f27aa2eab912c00d860dbed744a0c83026ac34710f8f134e",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-ice-spike.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 24282,
+      "sha256": "771245639bf0d4862fedd873fc818f3ca1496abeed654decc400745cfd18d35a",
+      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+    },
+    {
+      "path": "cards/equip-tt2-frostsword.webp",
+      "ext": "webp",
+      "bytes": 52230,
+      "sha256": "6fdd4393495a5df036057a027a0cd74606ce535c0dc871c2ed54f27441ec1b2b",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-eight-items-rough/images.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt2-frostsword.webp",
+      "ext": "webp",
+      "bytes": 6872,
+      "sha256": "a350466feffa521f70e945a3bd750c6d1d382ac7dd98708152fd74ac4659233c",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-eight-items-rough/images.json"
+    },
+    {
+      "path": "cards/equip-tt3-twinwater-mail.webp",
+      "ext": "webp",
+      "bytes": 116328,
+      "sha256": "dbc216c2807f438278217745d198491a0d2eff36ea0b9008bb11e18532846e2c",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-eight-items-rough/images.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-twinwater-mail.webp",
+      "ext": "webp",
+      "bytes": 16416,
+      "sha256": "d05e2fb9e166a6fd49abc2fc948353e44241bbb42cade14528167a5794d019ab",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-eight-items-rough/images.json"
+    },
+    {
+      "path": "cards/equip-tt3-grass-armor.webp",
+      "ext": "webp",
+      "bytes": 139890,
+      "sha256": "cbc2f31e13294e5a2b4d89b60ae0b739975ea9290692918a1dad0379090f6f2a",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-eight-items-rough/images.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-grass-armor.webp",
+      "ext": "webp",
+      "bytes": 18848,
+      "sha256": "c251f684b99ead2d88541546d9a9090a88a155afdcd256f84ca63035c985fa62",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-eight-items-rough/images.json"
+    },
+    {
+      "path": "cards/equip-tt7-naturestaff.webp",
+      "ext": "webp",
+      "bytes": 75340,
+      "sha256": "41090f4869adb6d555ec9b9bf4226f4633a024cb2d415f4da414bc99bd5a1783",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-eight-items-rough/images.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt7-naturestaff.webp",
+      "ext": "webp",
+      "bytes": 13822,
+      "sha256": "bc602350e33099c7986df6263006ab6c55a92b64cdefa093a9d5ae059467d8f2",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-eight-items-rough/images.json"
+    },
+    {
+      "path": "cards/equip-tt2-pearlbox.webp",
+      "ext": "webp",
+      "bytes": 80764,
+      "sha256": "2dd1921d7eda3f260ec74be23decc0a70cb6925812fd4e16d1ba0e1e7305e65b",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-eight-items-rough/images.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt2-pearlbox.webp",
+      "ext": "webp",
+      "bytes": 13862,
+      "sha256": "a1756fb8d624f090b33d944bad0167e702d9f5ea5342a66c1684d7fe4eb01d29",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-eight-items-rough/images.json"
+    },
+    {
+      "path": "cards/equip-tt3-element-seal.webp",
+      "ext": "webp",
+      "bytes": 38538,
+      "sha256": "631376d11209ee99dc861c076e90f225a1c20ae4930e132854b3a674110127cb",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-eight-items-rough/images.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-element-seal.webp",
+      "ext": "webp",
+      "bytes": 6166,
+      "sha256": "24a1654d49ec621a808a1f7ec836e4206598b8d320f430b3dacd274b623efc1e",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-eight-items-rough/images.json"
+    },
+    {
+      "path": "cards/equip-tt3-fate-wheel.webp",
+      "ext": "webp",
+      "bytes": 79746,
+      "sha256": "69bd24f9d1595a2cb03da05ddb1da0d0b526003c1505d4967ff40ab2d35c352c",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-eight-items-rough/images.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-fate-wheel.webp",
+      "ext": "webp",
+      "bytes": 11766,
+      "sha256": "8bbe689632f471a3e0991f22ffbd63d8d12772927660098a5439c88ed559e8f0",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-eight-items-rough/images.json"
+    },
+    {
+      "path": "cards/equip-tt2-wreck.webp",
+      "ext": "webp",
+      "bytes": 75038,
+      "sha256": "bbe517d50807a202c91eec5961311227a4e5250b90d9403c9f031214baa6eeff",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-eight-items-rough/images.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt2-wreck.webp",
+      "ext": "webp",
+      "bytes": 12980,
+      "sha256": "785c6d9901971a7d7d1891b74adbc91798e80314334e245ac355d4c84a8d7297",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-eight-items-rough/images.json"
+    },
+    {
+      "path": "cards/spell-tt3-holy-shield.webp",
+      "ext": "webp",
+      "bytes": 161656,
+      "sha256": "4fa2977dcc97c355fb05b13694eb54ac6373fa131323de9ecccca10f7596b5a2",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-holy-shield-fast/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-holy-shield.webp",
+      "ext": "webp",
+      "bytes": 16522,
+      "sha256": "11b24763f1a85c705babd2ddb992983565250bdd770ce3c9a4b05268515bfc65",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-holy-shield-fast/receipt.json"
+    },
+    {
+      "path": "cards/spell-cmtn28jv33wx.webp",
+      "ext": "webp",
+      "bytes": 116660,
+      "sha256": "dcc403edd74e1bad2f523ee012977167f165ff47ef9bb1e6ab3f276381b81cde",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-big-chest-search/images.json"
+    },
+    {
+      "path": "thumbs/cards/spell-cmtn28jv33wx.webp",
+      "ext": "webp",
+      "bytes": 19668,
+      "sha256": "b278bf5eda644f6a1bb71790b60e2cc5414cb696b3a19c36a08fdc4b0e5711f6",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-big-chest-search/images.json"
+    },
+    {
+      "path": "cards/martial-tt7-fullstrike.webp",
+      "ext": "webp",
+      "bytes": 115830,
+      "sha256": "ceeb4e2e189d2bcf484af11d6aee0611f30c8d8979b0b779ad84e3d332d2812c",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-fullstrike-identity-rough/images.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-fullstrike.webp",
+      "ext": "webp",
+      "bytes": 12480,
+      "sha256": "d7f27e27a8ff0a0f4f4013bec229b0d40a88b40eb6523df81d8fb7a235357612",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-fullstrike-identity-rough/images.json"
+    },
+    {
+      "path": "cards/spell-tt7-smite.webp",
+      "ext": "webp",
+      "bytes": 113536,
+      "sha256": "c3210dd20ee7939182b4779473b143fc8aec754ef7adc6b4818f129947ff99df",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-smite-original-rough/images.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-smite.webp",
+      "ext": "webp",
+      "bytes": 13270,
+      "sha256": "ae6def5a814d56d85d82e586cf5081c8bb5d13f7cd5e327e755b464923de4664",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-smite-original-rough/images.json"
+    },
+    {
+      "path": "reconstruction/wallpaper-ensemble-1005.webp",
+      "ext": "webp",
+      "bytes": 420426,
+      "sha256": "4dc60be119f7ab2d7ab5f72e08ccb6414bfbe0f775b4601b1d13b9cf0715fd95",
+      "license": "老板提供图的 AI 重绘版（本轮授权替换实装）",
+      "source": "docs/evidence/2026-10-05-WF-wallpaper-redraw/v3/asset-source.json"
+    },
+    {
+      "path": "cards/creature-tt8-curseimmune.webp",
+      "ext": "webp",
+      "bytes": 136338,
+      "sha256": "24494c64f808940a980aea8decf87689c8db00fafd8c2e639fc08d3880096146",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/images.json"
+    },
+    {
+      "path": "thumbs/cards/creature-tt8-curseimmune.webp",
+      "ext": "webp",
+      "bytes": 25728,
+      "sha256": "fb3b7df8998593fd95bea1ce544eddbc1ea37b57112de04d2d6a4f51a31fff8a",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/images.json"
+    },
+    {
+      "path": "cards/creature-tt8-energycap.webp",
+      "ext": "webp",
+      "bytes": 150212,
+      "sha256": "bdd1f5d1f47605a05c961553c77aed1338336318902d8cddc235f084e4d6bf23",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/images.json"
+    },
+    {
+      "path": "thumbs/cards/creature-tt8-energycap.webp",
+      "ext": "webp",
+      "bytes": 26990,
+      "sha256": "b1dc926d5fe84a83c252eb408ffe634d3551c96043fd4149d6295a7ab5b52a3f",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/images.json"
+    },
+    {
+      "path": "cards/creature-tt8-nofocus.webp",
+      "ext": "webp",
+      "bytes": 112758,
+      "sha256": "87ee008ad4a15d607d4936762a3b95c496bf9c0f89dde0595eb188e456e0555e",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/images.json"
+    },
+    {
+      "path": "thumbs/cards/creature-tt8-nofocus.webp",
+      "ext": "webp",
+      "bytes": 19612,
+      "sha256": "6865e411bfb1478444fd394dd9aab70a166699518db540f257f7a357ccbb2a43",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/images.json"
+    },
+    {
+      "path": "cards/creature-tt8-healplus.webp",
+      "ext": "webp",
+      "bytes": 79450,
+      "sha256": "e9a479ab60d659fcd58dbd5a852e81a926425f85154c5912b191f498fbe33784",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/images.json"
+    },
+    {
+      "path": "thumbs/cards/creature-tt8-healplus.webp",
+      "ext": "webp",
+      "bytes": 15526,
+      "sha256": "d349f2a33a842086be133c7ee97269663d3de93842ae9c659490de600099f01d",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/images.json"
+    },
+    {
+      "path": "cards/martial-tt8-dragonblade.webp",
+      "ext": "webp",
+      "bytes": 162536,
+      "sha256": "86afc67f288857fb3b6a66df5e21f77d139ff4d08636922f5bcb145fbade4869",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-dragonblade-original-rough/images.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt8-dragonblade.webp",
+      "ext": "webp",
+      "bytes": 17356,
+      "sha256": "c27489c0dfb6c57a592a108164e1593a8edc4d3a26327252f47b270d33b26cf1",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-dragonblade-original-rough/images.json"
+    },
+    {
+      "path": "cards/hero-sacredsword.webp",
+      "ext": "webp",
+      "bytes": 75788,
+      "sha256": "d5f3b77fa561b1cb36bc3f4c59bad93f935ca95a1370bb02c1275b758fef97e3",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-heixiang-two-forms-rough/images.json"
+    },
+    {
+      "path": "thumbs/cards/hero-sacredsword.webp",
+      "ext": "webp",
+      "bytes": 10294,
+      "sha256": "0be1d4ef2719453eac101bd2efdfcbedc2a117ce8f49d4be3557f37a0d494459",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-heixiang-two-forms-rough/images.json"
+    },
+    {
+      "path": "thumbs/cards/hero-warrior.webp",
+      "ext": "webp",
+      "bytes": 19080,
+      "sha256": "c850eb3433038664161d675990f3e3144a9bbdc283541b4603e1d400b9fe60c4",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-heixiang-two-forms-rough/images.json"
+    },
+    {
+      "path": "cards/bound-shadow.webp",
+      "ext": "webp",
+      "bytes": 190170,
+      "sha256": "262476293cb39eecaeddeacbe406a3d6ea2e3faeb8f6acde2a378b712791e5a5",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-bound-shadow-rough/images.json"
+    },
+    {
+      "path": "thumbs/cards/bound-shadow.webp",
+      "ext": "webp",
+      "bytes": 34286,
+      "sha256": "b1eadf7f8561af299dfea941fbd1677806dab111aae67c42037106579c7fcfa5",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-bound-shadow-rough/images.json"
+    },
+    {
+      "path": "cards/martial-cmtn1wnhhym.webp",
+      "ext": "webp",
+      "bytes": 208050,
+      "sha256": "631ff1e8c63cc2a6aedbc2fb26e11585a1f801722341d2cb6acf3355cdec83df",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-jianghu-rough-reset/images.json"
+    },
+    {
+      "path": "thumbs/cards/martial-cmtn1wnhhym.webp",
+      "ext": "webp",
+      "bytes": 31290,
+      "sha256": "bf00ff49c5091cd09778d590aac600dcb4f50b7c8f4166fbde88bd56d7a9dd05",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-jianghu-rough-reset/images.json"
+    },
+    {
+      "path": "reconstruction/wallpaper-wu-1004.webp",
+      "ext": "webp",
+      "bytes": 299938,
+      "sha256": "798b4996f4f923bd3ffac456f46e540a6e19189c396a5fb0953d562363c16db6",
+      "license": "AI重绘（老板提供原图及人物参考）",
+      "source": "docs/evidence/2026-10-04-WF-home-snow-wallpaper/README.md"
+    },
+    {
+      "path": "cards/hero-volcano.webp",
+      "ext": "webp",
+      "bytes": 241632,
+      "sha256": "8e7f520f2f58588e0f4b7bdfe19e1a2b44b625afddbbfa73f32eef22b6356db8",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-volcano-abstract-block/images.json"
+    },
+    {
+      "path": "thumbs/cards/hero-volcano.webp",
+      "ext": "webp",
+      "bytes": 44164,
+      "sha256": "fa0dac7b84ddc559c4c259a8661885e2f1e49b7bff92d2028e30412d82f8c17d",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-volcano-abstract-block/images.json"
+    },
+    {
+      "path": "cards/lore-raving.webp",
+      "ext": "webp",
+      "bytes": 168346,
+      "sha256": "01dd5ea11686c5e1d75a48c2d19d761772f9c3a837455a7bed10b938e5aec3f3",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-baita-lore-raving/images-v6.json"
+    },
+    {
+      "path": "thumbs/cards/lore-raving.webp",
+      "ext": "webp",
+      "bytes": 22718,
+      "sha256": "250de1125caa2da3d86bfae114296a675293cd450ba296aff23b00348cbd9ba1",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-baita-lore-raving/images-v6.json"
+    },
+    {
+      "path": "cards/spell-tt3-nature-form.webp",
+      "ext": "webp",
+      "bytes": 229904,
+      "sha256": "eb3cad5eef916f9ee00b29c548ba55e583992f4fe544f08cabed4d1421d20ec4",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-fullmoon-creative/images.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-nature-form.webp",
+      "ext": "webp",
+      "bytes": 40126,
+      "sha256": "1eb425ede8250cd0d1b61928039908d617deb6f7bcc7f79f8118d93e205eb143",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-05-WF-fullmoon-creative/images.json"
+    },
+    {
+      "path": "cards/hero-sacredrain.webp",
+      "ext": "webp",
+      "bytes": 249222,
+      "sha256": "acc2ad5a8d8218060ca9565918e1bd8a471fef1ddff76ce6d00719542865b29c",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wind-song-abstract/images.json"
+    },
+    {
+      "path": "thumbs/cards/hero-sacredrain.webp",
+      "ext": "webp",
+      "bytes": 46198,
+      "sha256": "fc26684689aedb44e628702baa554ecb27645b325962901eef2270cd46dcdc24",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wind-song-abstract/images.json"
+    },
+    {
+      "path": "ui/beginner-guide/prepare.svg",
+      "ext": "svg",
+      "bytes": 3366,
+      "sha256": "83ae823c9dc75bd4395ca766dd553e7db9f769009f5137df3149c7ea356e0acc",
+      "license": "项目自有（原创机制示意图）",
+      "source": "docs/evidence/2026-10-04-WF-feedback-r3/guide-art.md"
+    },
+    {
+      "path": "ui/beginner-guide/map.svg",
+      "ext": "svg",
+      "bytes": 2926,
+      "sha256": "b6b6fbd9435a9bcb80c94a58964c65e5fe367f17dd4f905a37ddea156cf0bd9f",
+      "license": "项目自有（原创机制示意图）",
+      "source": "docs/evidence/2026-10-04-WF-feedback-r3/guide-art.md"
+    },
+    {
+      "path": "ui/beginner-guide/battle.svg",
+      "ext": "svg",
+      "bytes": 2974,
+      "sha256": "98945ef399b1e04a574abf213d016a077a46f80ff33a635ed6ee605845a6b9a5",
+      "license": "项目自有（原创机制示意图）",
+      "source": "docs/evidence/2026-10-04-WF-feedback-r3/guide-art.md"
+    },
+    {
+      "path": "ui/beginner-guide/loot.svg",
+      "ext": "svg",
+      "bytes": 3202,
+      "sha256": "a60a75fd8bab16083236e6311078d9f8b8075a8e9b03fb60678d8fb5079af4ca",
+      "license": "项目自有（原创机制示意图）",
+      "source": "docs/evidence/2026-10-04-WF-feedback-r3/guide-art.md"
+    },
+    {
+      "path": "ui/beginner-guide/extract.svg",
+      "ext": "svg",
+      "bytes": 2672,
+      "sha256": "1356fe9aecc933680cd4220fcb411f496db0bf2624f743196663e0f40de5f137",
+      "license": "项目自有（原创机制示意图）",
+      "source": "docs/evidence/2026-10-04-WF-feedback-r3/guide-art.md"
+    },
+    {
+      "path": "ui/beginner-guide/growth.svg",
+      "ext": "svg",
+      "bytes": 2703,
+      "sha256": "6a94f27371fcafe174da4fb78babb2013168b7244a4a35d067d67fb9f99c6187",
+      "license": "项目自有（原创机制示意图）",
+      "source": "docs/evidence/2026-10-04-WF-feedback-r3/guide-art.md"
+    },
+    {
+      "path": "cards/spell-tt3sp-devour.webp",
+      "ext": "webp",
+      "bytes": 145368,
+      "sha256": "21839e9148c7a3df984fe529f3ac62b4da225e9cefdd4f1f1875dd9c5ae41f57",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3sp-devour.webp",
+      "ext": "webp",
+      "bytes": 23610,
+      "sha256": "0f84f52271b6195543546a4691826411f4c1d3200d268b51ebc19396bdba6956",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+    },
+    {
+      "path": "cards/spell-tt7-bloodpotion.webp",
+      "ext": "webp",
+      "bytes": 120996,
+      "sha256": "086bbfc19fe32c16fa4790fed0dbce533b1044807408346f6333de4a633d5d7a",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-bloodpotion.webp",
+      "ext": "webp",
+      "bytes": 19364,
+      "sha256": "c74e3b76f580b9523c28e45da1d43a21099b45114d1c73056ebfb27380879e0f",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+    },
+    {
+      "path": "cards/spell-tt7-provoke.webp",
+      "ext": "webp",
+      "bytes": 128694,
+      "sha256": "15ee8d0be46eaa7c4da99e92118beab710669e14352ea65ebc627b74fd1c6e13",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-provoke.webp",
+      "ext": "webp",
+      "bytes": 17994,
+      "sha256": "ea0d04f57d7e723b4eb23aa0a5f400e6fd8d1802607d45e35c797cb9a347a4f1",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+    },
+    {
+      "path": "cards/spell-tt7-silence.webp",
+      "ext": "webp",
+      "bytes": 102230,
+      "sha256": "3b61af3f98e5be1fe76c995a8cb4371ca63205362a57a6ef1b6608e3aeb26d21",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-silence.webp",
+      "ext": "webp",
+      "bytes": 16628,
+      "sha256": "966c433e54ce412131e14ab828e5cd1d83a438159fca9d7bd26c1392bb1bbcf5",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+    },
+    {
+      "path": "cards/spell-cc-demon.webp",
+      "ext": "webp",
+      "bytes": 141946,
+      "sha256": "b08f261709c9d7a14f6e3130e8466cf82334efd435dab96a8daa83150624cd20",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+    },
+    {
+      "path": "thumbs/cards/spell-cc-demon.webp",
+      "ext": "webp",
+      "bytes": 22770,
+      "sha256": "fc431f6a1f74bdfddc67dcadce5c3a275f74c72b596dcd64d92e314301ae410d",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+    },
+    {
+      "path": "ui/icons/settings-gear-r2.webp",
+      "ext": "webp",
+      "bytes": 7822,
+      "sha256": "a05f9465286915b601a17e4a87db5bef78f4372d634d62da37ecebc4e412c462",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-feedback-r2/images.json"
+    },
     {
       "path": "bgm-cisheng-yuanan.mp3",
       "ext": "mp3",
@@ -96,8 +992,10 @@
     {
       "path": "cards/hero-warrior.webp",
       "ext": "webp",
-      "bytes": 118222,
-      "license": "项目自有（自制/AI 生成）"
+      "bytes": 147266,
+      "sha256": "0b4dd45c92ebac1f97d4dd714da5c2c9b2b35cabbd125360c08f7fa55b6a3554",
+      "license": "项目自有（自制/AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-heixiang-two-forms-rough/images.json"
     },
     {
       "path": "cards/hero.webp",
@@ -372,56 +1270,65 @@
     {
       "path": "icons/altar.svg",
       "ext": "svg",
-      "bytes": 55967,
-      "license": "项目自有（自制/AI 生成）"
+      "bytes": 55650,
+      "license": "项目自有（自制/AI 生成）",
+      "sha256": "1c22ebbe5436c2c0b41934ae9d97e143daba68ed7db3a2caa0029a6f4a7400cc"
     },
     {
       "path": "icons/battle.svg",
       "ext": "svg",
-      "bytes": 40119,
-      "license": "项目自有（自制/AI 生成）"
+      "bytes": 39888,
+      "license": "项目自有（自制/AI 生成）",
+      "sha256": "e014c1391051c3a3161a0690b5ab038fea8919d1f3432ccd4b0f2fb3a1fba10f"
     },
     {
       "path": "icons/boss.svg",
       "ext": "svg",
-      "bytes": 53059,
-      "license": "项目自有（自制/AI 生成）"
+      "bytes": 52769,
+      "license": "项目自有（自制/AI 生成）",
+      "sha256": "ca76e4890e9af0867bc29aef353c5f31ad61e32c6f7ccf573215a12a9724806c"
     },
     {
       "path": "icons/chest.svg",
       "ext": "svg",
-      "bytes": 71756,
-      "license": "项目自有（自制/AI 生成）"
+      "bytes": 71376,
+      "license": "项目自有（自制/AI 生成）",
+      "sha256": "7a305198c1ad36d7006d4e4f895e664e8a020749e109d4224fb1f8c4e6e0a12b"
     },
     {
       "path": "icons/door.svg",
       "ext": "svg",
-      "bytes": 66769,
-      "license": "项目自有（自制/AI 生成）"
+      "bytes": 66414,
+      "license": "项目自有（自制/AI 生成）",
+      "sha256": "86b84ec4330e113ebdea19185c0beca6c4263e74cdca773d043cbcd59953667e"
     },
     {
       "path": "icons/entrance.svg",
       "ext": "svg",
-      "bytes": 43086,
-      "license": "项目自有（自制/AI 生成）"
+      "bytes": 42825,
+      "license": "项目自有（自制/AI 生成）",
+      "sha256": "c4941362f0c7d02a0633404137ab0e208089615f87c34eeb7d5fee84d3974d44"
     },
     {
       "path": "icons/event.svg",
       "ext": "svg",
-      "bytes": 36019,
-      "license": "项目自有（自制/AI 生成）"
+      "bytes": 35817,
+      "license": "项目自有（自制/AI 生成）",
+      "sha256": "bedaa75363b609ef62d735fa08b4a46f793a428b96d66906ccf80d70ebb0c880"
     },
     {
       "path": "icons/extract.svg",
       "ext": "svg",
-      "bytes": 41361,
-      "license": "项目自有（自制/AI 生成）"
+      "bytes": 41121,
+      "license": "项目自有（自制/AI 生成）",
+      "sha256": "693cdce7a27043bcd82b6a2e9447194e5ef3486caa2dc7c8e25bfc86198d4c9d"
     },
     {
       "path": "icons/fire.svg",
       "ext": "svg",
-      "bytes": 54368,
-      "license": "项目自有（自制/AI 生成）"
+      "bytes": 54084,
+      "license": "项目自有（自制/AI 生成）",
+      "sha256": "e5fdde7352600889760edbb7bcfec28898a70fb11860311e99d1076a127e99ef"
     },
     {
       "path": "icons/game-icons/badges-crown.svg",
@@ -612,20 +1519,23 @@
     {
       "path": "icons/key.svg",
       "ext": "svg",
-      "bytes": 38380,
-      "license": "项目自有（自制/AI 生成）"
+      "bytes": 38128,
+      "license": "项目自有（自制/AI 生成）",
+      "sha256": "b1a07159d79c8768e21d41349a271ba25613d9dc245dbd0c4cdc2d6763f8560f"
     },
     {
       "path": "icons/player.svg",
       "ext": "svg",
-      "bytes": 64900,
-      "license": "项目自有（自制/AI 生成）"
+      "bytes": 64521,
+      "license": "项目自有（自制/AI 生成）",
+      "sha256": "082ba8d55e82c8c4674b471d54355fe7c11de056cdfcdf29942ce822599e0ad4"
     },
     {
       "path": "icons/shop.svg",
       "ext": "svg",
-      "bytes": 88221,
-      "license": "项目自有（自制/AI 生成）"
+      "bytes": 87755,
+      "license": "项目自有（自制/AI 生成）",
+      "sha256": "9e054608a0944bcb7d162eb69b3ead300945975433b37f4d2ad8eb4049c8274d"
     },
     {
       "path": "portraits/avatars/changwuyu.webp",
@@ -948,164 +1858,164 @@
     {
       "path": "sfx/battle/chestburst-1.ogg",
       "ext": "ogg",
-      "bytes": 10208,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 8348,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/chestburst-2.ogg",
       "ext": "ogg",
-      "bytes": 13615,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 9087,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/chestburst-3.ogg",
       "ext": "ogg",
-      "bytes": 10032,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 9573,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/chestshake-1.ogg",
       "ext": "ogg",
-      "bytes": 10492,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 9352,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/chestshake-2.ogg",
       "ext": "ogg",
-      "bytes": 10028,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 8397,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/curse-1.ogg",
       "ext": "ogg",
-      "bytes": 6526,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 7516,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/curse-2.ogg",
       "ext": "ogg",
-      "bytes": 6544,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 7299,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/defeat-1.ogg",
       "ext": "ogg",
-      "bytes": 16579,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 15591,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/heal-1.ogg",
       "ext": "ogg",
-      "bytes": 16508,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 7822,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/heal-2.ogg",
       "ext": "ogg",
-      "bytes": 11787,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 17367,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/heal-3.ogg",
       "ext": "ogg",
-      "bytes": 12432,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 6393,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/hit-1.ogg",
       "ext": "ogg",
-      "bytes": 8800,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 7816,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/hit-2.ogg",
       "ext": "ogg",
-      "bytes": 10399,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 9440,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/hit-3.ogg",
       "ext": "ogg",
-      "bytes": 11617,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 6897,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/hit-4.ogg",
       "ext": "ogg",
-      "bytes": 10861,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 7551,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/hurt-1.ogg",
       "ext": "ogg",
-      "bytes": 6570,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 9247,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/hurt-2.ogg",
       "ext": "ogg",
-      "bytes": 6689,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 9560,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/legend-1.ogg",
       "ext": "ogg",
-      "bytes": 15477,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 11508,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/legend-2.ogg",
       "ext": "ogg",
-      "bytes": 8666,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 14047,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/legend-3.ogg",
       "ext": "ogg",
-      "bytes": 19626,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 8372,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/parry-1.ogg",
       "ext": "ogg",
-      "bytes": 6110,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 7473,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/parry-2.ogg",
       "ext": "ogg",
-      "bytes": 5634,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 6864,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/reveal-1.ogg",
       "ext": "ogg",
-      "bytes": 18248,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 7731,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/reveal-2.ogg",
       "ext": "ogg",
-      "bytes": 12393,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 6613,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/reveal-3.ogg",
       "ext": "ogg",
-      "bytes": 9077,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 12013,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/victory-1.ogg",
       "ext": "ogg",
-      "bytes": 10201,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 11572,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/battle/victory-2.ogg",
       "ext": "ogg",
-      "bytes": 10291,
-      "license": "CC0 (Kenney.nl)"
+      "bytes": 13191,
+      "license": "CC0 1.0（来源与处理见 sfx/battle/SOURCES.md，2026-10-04 换开源版）"
     },
     {
       "path": "sfx/click1.wav",
@@ -1660,7 +2570,2335 @@
         "seed": 1959446116,
         "note": "参数与来源仅据既有生成记录；未核验原始输出或授权"
       }
+    },
+    {
+      "path": "cards/martial-tt7-throwblade.webp",
+      "ext": "webp",
+      "bytes": 49356,
+      "sha256": "7c592d5cae15c921f77ee94687270827075eb95406bcfb26e94fac30c6a8722b",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-throwblade.webp",
+      "ext": "webp",
+      "bytes": 15554,
+      "sha256": "5b184035cfddd13310beb79d9422290545983103888009805dcd5eb70190341b",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "cards/martial-tt7-goldencicada.webp",
+      "ext": "webp",
+      "bytes": 44820,
+      "sha256": "989d38efcc86dc8f464070c80397280a48d48ac3217ca8defd5c37c2e1dcdbaa",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-goldencicada.webp",
+      "ext": "webp",
+      "bytes": 12112,
+      "sha256": "486279fa770bd45af128779c5acbb33345b4e1aae411e13a5a0e2cffbb7af63d",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "cards/martial-tt7-sneak.webp",
+      "ext": "webp",
+      "bytes": 49586,
+      "sha256": "6a2305d4e03268c9126e8d7f762db00916b7564ef9418f718366068792c6ec16",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-sneak.webp",
+      "ext": "webp",
+      "bytes": 12014,
+      "sha256": "30496faf3e32f94804872cfcb61c3e894e51c00b02bc65b5af01014d1e8f6877",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "cards/martial-tt7-ghostblade.webp",
+      "ext": "webp",
+      "bytes": 69352,
+      "sha256": "1d69874fee4e249aa030270dede0ce9dcfd52132607aca02fc15c76054d6d302",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-ghostblade.webp",
+      "ext": "webp",
+      "bytes": 17364,
+      "sha256": "6a3613ae27ccbf42a6eff210731e42e2ede147269fa7da072d096de99af85056",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "cards/martial-tt7-thundergrudge.webp",
+      "ext": "webp",
+      "bytes": 53486,
+      "sha256": "9b222502ad6aab6373747e977eb40d856ac6302c03e469dfa1ea7a085def2e38",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-thundergrudge.webp",
+      "ext": "webp",
+      "bytes": 13462,
+      "sha256": "e123fe387860836e0220e6c48af8e40787bdc80e3876588df50de28dae90b116",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "cards/martial-tt7-meteorrain.webp",
+      "ext": "webp",
+      "bytes": 37134,
+      "sha256": "35683467cbb9eaa5a0f9f6ebcf7a76e48ca392a31e746391c9b8ed1e1e18a5ce",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-meteorrain.webp",
+      "ext": "webp",
+      "bytes": 9056,
+      "sha256": "3f008936a1b7446e5d393898d21c6b377bc7175998872b9d9dd7ecf3e1dd30e5",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "cards/martial-tt7-stealth.webp",
+      "ext": "webp",
+      "bytes": 41548,
+      "sha256": "4838f19d1edf9976d314a9a73bb9c3f6400e147d85298a01fe8f209985c21ee5",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-stealth.webp",
+      "ext": "webp",
+      "bytes": 10254,
+      "sha256": "9c58567525164e5e17342ee552d5a01a05cb1bf26604ae0b489a3216f137fc0c",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "cards/martial-tt7-swordimmortal.webp",
+      "ext": "webp",
+      "bytes": 42246,
+      "sha256": "361d7b74b61be9a8e418c39a1cabd8ec10a648d409a7409f0b8c982cd3088c97",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-swordimmortal.webp",
+      "ext": "webp",
+      "bytes": 9960,
+      "sha256": "d5f120ff27b4da0f53aa3366cf1b2d395a255b166103df6234482f4e72955615",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "cards/martial-tt7-imitate.webp",
+      "ext": "webp",
+      "bytes": 41340,
+      "sha256": "da084556b2b4dc1d556f43595af6e7a6c23920dc561100e02056095c29f841de",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-imitate.webp",
+      "ext": "webp",
+      "bytes": 10180,
+      "sha256": "d931d5d946ae3c3c34c7cec25e1e444a9bc10540f4531aac0724f5fd1e4a36bc",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "cards/martial-cmtn1i64j7y7.webp",
+      "ext": "webp",
+      "bytes": 50786,
+      "sha256": "8b79b85c3ed7f3f7f058bfe69aa2c9b832f84640fc5a4f428f23ae14be6166ab",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "thumbs/cards/martial-cmtn1i64j7y7.webp",
+      "ext": "webp",
+      "bytes": 12130,
+      "sha256": "2df5efc85e27faf8a719d63b2d12bc3ae40dbd531723f95a08e5ee3a45e1e647",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "cards/wu-void.webp",
+      "ext": "webp",
+      "bytes": 115644,
+      "sha256": "e2597435801ed90d2b8ac266efc0de81efa7f6a366db35494938723894fbe0c2",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "thumbs/cards/wu-void.webp",
+      "ext": "webp",
+      "bytes": 12350,
+      "sha256": "0c531c7a6981f57e565172d4e70f3159a2485bcf78657aa8ed0c9e70bce206fc",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "cards/wu-myriadswords.webp",
+      "ext": "webp",
+      "bytes": 144382,
+      "sha256": "cc3fe1d9b39340e4d83dd3882395dff4e23a65cd5928be74c90ade9fb98164cc",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-two-swords-rough/images.json"
+    },
+    {
+      "path": "thumbs/cards/wu-myriadswords.webp",
+      "ext": "webp",
+      "bytes": 21532,
+      "sha256": "d6fc755c6861ddcbf54bfb96674e5dd9741f28741e44790700dab4211f0a1995",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-two-swords-rough/images.json"
+    },
+    {
+      "path": "cards/wu-heavensword.webp",
+      "ext": "webp",
+      "bytes": 96748,
+      "sha256": "2a3dbdd25f0250d5801751e6079ee4a5315d17f5bc3389c981abc6f5cd22bcfc",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-two-swords-rough/images-heaven-v4.json"
+    },
+    {
+      "path": "thumbs/cards/wu-heavensword.webp",
+      "ext": "webp",
+      "bytes": 13248,
+      "sha256": "3da25dac372f54aca455ae289f3e2a719a1a103091dae5ae16b9130fd479d16d",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-two-swords-rough/images-heaven-v4.json"
+    },
+    {
+      "path": "cards/equip-tt8-demonslay.webp",
+      "ext": "webp",
+      "bytes": 18100,
+      "sha256": "2e23c289d99acf110ba152b58d2d136bafeee0c7f5bc1613c6475d9b35c3d64e",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt8-demonslay.webp",
+      "ext": "webp",
+      "bytes": 3630,
+      "sha256": "d89a450f3bbfa5e0c0c03ae9fb82deb892cc5e8b457a96bca115c910d88ab629",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "cards/equip-tt8-archdemon.webp",
+      "ext": "webp",
+      "bytes": 16904,
+      "sha256": "b3cb93997a286dc377716e4fa8a68b2114719131ab899a9167663e90202e93bd",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt8-archdemon.webp",
+      "ext": "webp",
+      "bytes": 3170,
+      "sha256": "d16adc298449ad2657837d47ae295124e90e71a17c1350ef46cbb44f9b32d2bf",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "cards/equip-tt8-heavensword.webp",
+      "ext": "webp",
+      "bytes": 53908,
+      "sha256": "61539f6a00d221399f3632b009145c8e367b91049abead5b374c47fba2329648",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt8-heavensword.webp",
+      "ext": "webp",
+      "bytes": 12068,
+      "sha256": "0ea725b5cc62e4a9ba8b8da401949492d3d3650b6bca9342a3965dd7b5f77faf",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+    },
+    {
+      "path": "thumbs/cards/consumable.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 16074,
+      "sha256": "9e252e9c6a907c7f53673802ef9f7a3b5952e035852332f311ae833794b16c29",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/creature-cmtn6ulm4boj.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 10916,
+      "sha256": "cf01b8aaad856e2ad0a4521c1787e14b3f94e81e5c443fa290c3b9a35cc0d4d3",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/creature-cmtn79743r2n.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 16968,
+      "sha256": "094216853e7c48c08f5344aa8ddd50a7e77aa93500e6896ac14576e3eef6c0d5",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/creature-cmtn7err0a7.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 13500,
+      "sha256": "2934571f900466886d26f06beb1a27c82bb09bf4ee61037e9e8a28e60fe8aae7",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/curse-drain.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 19946,
+      "sha256": "0b8395d86eeb92534fe2aab1c0bc01b71603bd93023b81a812bdf85bec70b3f8",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/curse-freeze.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 22928,
+      "sha256": "cc44bc917bf737600c08bafc284af401b7e6b103f2424550b8ee43c2a9bdff6d",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/curse-silence.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 19716,
+      "sha256": "15e83d0b79677f0004901bdf80fe74f85f767cd4a22b5ff1ee9c656ff65364d5",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/curse-venom.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 18816,
+      "sha256": "852b05c757b21b4866b593652e64d8d8044b578233b3c0baa1932a18b721f3c5",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/dark-eclipse.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 22180,
+      "sha256": "2d69fa67789b55bb97e3dda00af7ce4420783503da431a48f634c6f0b90e702f",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt12-raygun.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 9066,
+      "sha256": "d2307283e8bd8e161358d4da29f778d93663dd1a72e84171df8e548609951640",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt2-apollo.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 13748,
+      "sha256": "bcf193b81327b2f99dc2386e699224dc2e38f8d98f91078aa80d0ebf58f64aff",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt2-treasuremap.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 10948,
+      "sha256": "ab50bf948be03ba66c781244834aeac819236e43b920ca9c2f1399532f61dcc1",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt2-venomstaff.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 3452,
+      "sha256": "3afef62cd7616d49e85309dd048a348fbe18379d938b09ac8298120ff0bc16ba",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-azure-sword.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 5206,
+      "sha256": "53a1a1c0113d192a361d167d2e0fdf2c794996ed7cc8414d912f2bba14a06994",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-blooddrinker.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 8456,
+      "sha256": "8e6d25b7290fba194b666da8296d612275615b12ff6893839d0b1deef26b25d0",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-chaos-eye.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 12034,
+      "sha256": "f7dc9a27e4caa8e8e9d2d04c8ded1d0dcaef37c25971cc3267320c9aa962aea1",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-crimson-pouch.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 4690,
+      "sha256": "06aee85514875eba6f0b58578e7ce7a36467861ccdc9675b6fb9476f23f3c1b0",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-deep-diary.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 10324,
+      "sha256": "11a4866f1369678ad6952e1fd0eb9c973bb0ea0b63f2dad7b23669b1af86410b",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-deep-seal.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 7304,
+      "sha256": "f60486d8cd42f878e20c33ef9269d8b0fd50b1a96d63b32af6338fd58c8cc7b3",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-holy-staff.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 4182,
+      "sha256": "bbebfc0f0dd1311d932d317cd29fab97a45939470f4bd9d717b480277932dba1",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-immortal-blade.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 5834,
+      "sha256": "b45e392dbecf065a5546a2bd3121e25abf28e9e5721246c140d794f85074e991",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-light-mail.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 8126,
+      "sha256": "988c5d58255f46e363fb2b6a8aecbf0feb1cc1b8ca2d5a31186aabd608e75553",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-longsword.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 3462,
+      "sha256": "f1d145433d233e384b1d48b7514cb9657a0fa5296743cc2bbe31b7f4856a56b7",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-master-staff.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 7320,
+      "sha256": "3c33b8362ae1d7127fd6afcf79bd2a68de8df672611b887b97a9daaa4db007ba",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-reverse-bow.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 11064,
+      "sha256": "fa10b5edeb89bef690ab2cd80132a0fed630353fab938edc437df491c2ab2860",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-sapper-bomb.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 9422,
+      "sha256": "f3d483bed065e83696c92421ef29f3f553119e9a994f1d051fef3b3a6ca02d3d",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-silver-runesword.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 7828,
+      "sha256": "54045c6886872b17b303d9f81b10e99825edc6f663de842f5929a5f7ba0bd5e5",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-staff.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 2652,
+      "sha256": "8cc4af74a7fac0d3fd2a553fe7043e1102a746a5156ba43749069021db7634dc",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-wolf-bow.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 4938,
+      "sha256": "30c3f8c8577d534a62cbc8c440dfb2575d05824ad92a3ded68ad7e9094d3170f",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3eq-boiler.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 8390,
+      "sha256": "928eb6e7190608471189b4c3320055784fa21d4853a33722b5c33f43dda1a92d",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3eq-mistbox.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 22494,
+      "sha256": "f208ba54104d1e988f62d7dbed7b2aef95545229ebc1dc85b5ea17406b7bd63f",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt7-arcanescroll.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 15424,
+      "sha256": "aa93c9afb1cfdb367de6765e048b7aca82bd4132383c53a3d5d060e6661ef54a",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt7-darkfort.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 5776,
+      "sha256": "ecd7131aee33cd8bbd664b2680cdb8d7790d8dd01b778e116f9cf2483afd3d2c",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt7-talisman.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 6318,
+      "sha256": "4ab00b65031248bc0b82ffab32fc306ad2f0a83adcf6410bd9703b40a7486f56",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equipment-armor.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 32918,
+      "sha256": "5dfaf6536c906f313a2a0947498de45f18b97f1d2ecfeeb88b57b278924ae47e",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equipment-utility.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 34532,
+      "sha256": "dd5d52b9388ec882cce8a5633a3baa9262e3573292c5e7e2884037a8147a41ca",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/equipment-weapon.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 17514,
+      "sha256": "8990a8ad52bebbbbbbd534859716cc6f1c49d78e32a2bbdd21822b826c5dabf3",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/event.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 55098,
+      "sha256": "87349a145c9cdc3f3a5cb8f1991c84d589a95861680c98d5bd4048fc64ea7618",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/expedition-starters/basic-attack.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 7280,
+      "sha256": "be94f7b043fa248160471b78c8720fa75a6c230a97a91835f32f9bc19c727bed",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/expedition-starters/fireball.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 16912,
+      "sha256": "427b00d66dcf5bd1f6eda43325a298e8632e550e8ee6314691966a370b9ec2df",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/expedition-starters/rations.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 12772,
+      "sha256": "88b04b398b03f25170d4049702ea0860aff8a5721ff7ce1065c3c306697a4e43",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/expedition-starters/staff.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 7124,
+      "sha256": "7b5c312cd332ba6507e24288b2b7310475aa874953bb04a96ed7572c0fad020f",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/healing.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 41058,
+      "sha256": "34b84ffcd2c97df8f3ae54a8a3288aa8483f5260314e7575773b566cfe39114e",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/hero-abysssovereign.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 19858,
+      "sha256": "e1e250b46c3722d0d2f91c2ac2745ac23b01a41fe4bb81e1286606f8e8a7c65f",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/hero-descend.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 7644,
+      "sha256": "0697bf7186c5282f926ae10095057d9097b81569a2751c02d1e62c1c7f710394",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/hero-forbidden.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 24504,
+      "sha256": "685d3e2d76c7dc80717ac64ac2155828ac611b199b20042d09a535b558c13395",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/hero-mage.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 8788,
+      "sha256": "4639d83f5469f437133b7f8ce8627e77b66d74e72864555e53ba66038db36eeb",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/hero-priest.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 24802,
+      "sha256": "df39fcac48355bd500f696e4ba4027ccbcc9a723eba71455c8e1658ca788c6f5",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/hero-summoner.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 24500,
+      "sha256": "41fadaae148787a988bd55c9e11729ba2d20a010f44698841060704e147b4823",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/hero-sword.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 9580,
+      "sha256": "42b068677a39a3e2f994d6bffb92afa110d6df32256bd10214b03a757159f386",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/hero.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 30502,
+      "sha256": "9b4f55976547c265aba5499cc0612ec1b479ebe33c84e396b4d69df88b4d419c",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/builtin-fuyuanyao.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 7538,
+      "sha256": "43dce5aff5faace2bfb274b545333746457ce27a8668ce256f0e3f1f60000d3c",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/cmtmvq6ss84l.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 8666,
+      "sha256": "69fc0f044f6f78efbb035b4d5991687c74b59f99ee8ef64595e39fe93072e90e",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/starter-emergency-bandage.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 6704,
+      "sha256": "afae5673b7d7656f4daec9fb43f7e337404480c9b561992ff3135794387ffc3b",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt-crystal.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 5540,
+      "sha256": "957c2f11602dad4f49534057b749fc46c22729edb0bd33b13460b46204aaa41e",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt-jinchuangyao.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 4854,
+      "sha256": "b4f0186ed223355a8de00668548a5ca26d3983f5ba0fe3b09b3d06ee43b35a36",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt-medneedle.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 4982,
+      "sha256": "f9b5fdc74bf358969fc5acd24f84ea757c97a09d2e98a71dcf95952c849a4e31",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt-token-gold.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 5614,
+      "sha256": "747c46f56446a0fe8a54b43cf5f5785c603b6a570ca108ca451bbb71836fc878",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-blue-potion.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 5902,
+      "sha256": "41bb85373f8d157f0c44daaa1293a5275a867d4e7a78e2af37bd0cd6fd1d5af5",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-demon-potion.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 2308,
+      "sha256": "9d6a8a085eee8229e8e437f1b27448e5292fdbd4d38b3aa6a73811294f852bd6",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-houyi-potion.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 7534,
+      "sha256": "92c66f27fb85a9b08421f0cd7a8f8ed9d7767e9b84b9a2a1db8f45cabf9391f6",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-iceheart-potion.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 7670,
+      "sha256": "511166b0396ca0b180c11bf7fb967dbf35548f19fe5e3ab111d94f239b844e4b",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-mind-potion.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 7202,
+      "sha256": "3c79344d782bead463b2f74d713cd7507b1b231587b738a5dfbe5a50bb342026",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-mixed-potion.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 2866,
+      "sha256": "e9a4042061ddacadd6748fc11723bd0ec8d4e785ff8eb146433cfbb7e195502c",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-mystery-potion.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 5676,
+      "sha256": "fb3c3139d8befed63ebddfd1a185f605b688a40b774fa44a1a63e5c5b65915ac",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-python-potion.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 5768,
+      "sha256": "643c2b74c5c495f5a1889dbb633c17553a77abefb1e47f03dbcb60f700701965",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-savior-elixir.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 7118,
+      "sha256": "54663a076931089c3ae28660ee838e5c6b729d702423415b4eb07c392d70842c",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-turnabout-potion.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 4402,
+      "sha256": "4458cbbdc9fd49625024ad231eed521f926820c8369b287bfeaf8b775d6c9b20",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3sp-doom.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 4448,
+      "sha256": "aafc420c1291e8d3bf7bdf291a9c09aa7a10a1cc95a99d53b479f61e71d8b705",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt4-shine-token.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 5972,
+      "sha256": "45ad0ee7c685ecde21afe64e0b43a8d28242b366057cf8bf69a992848ab3201e",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt4-smoke-bomb.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 6238,
+      "sha256": "e385e7ee793d1d722fe9819c23c7262056262b1a7edce89589b285cd133cd6d2",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt4-woodify.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI V5 生成）",
+      "bytes": 5774,
+      "sha256": "99d163e325c66b33b4f5d2ef355192d868889803e40ab32a64175fe702f6b99f",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-cc-chase-slash.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 15846,
+      "sha256": "2ad6652eca46a186aab085452b8d1c0acc6422585febf9f2d777e994683a6c3f",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-cc-cursed-blade.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 15142,
+      "sha256": "907b7076a9a59c89c7c567910bb68dc002fb3bb622170dfc66b282c12ab78060",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-cc-dual-wield.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 20956,
+      "sha256": "3425600c6767c887bd9d31e1e6e2cfc38e13d2d891d2d07772ce1cc2930acb2b",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-cc-last-stand.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 12790,
+      "sha256": "c8b68cdb1befd9d40194fbe042677addc6fcf6c1c8311081788e89f9b88006c3",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-cc-rapid-fire.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 10874,
+      "sha256": "2295f82912c467c47c8f6e926790192a30eb7c850aec48d078e464d79011922a",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-cmtn0pbkmnvc.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 3764,
+      "sha256": "9d13484f19363fa136832a6a5be15dde483272bee1d84e54a0d3bc7fe91171b1",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-cmtn0xt0zr7.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 15106,
+      "sha256": "014befd07e8d9339397a2d34680811a4b6447786886c5ff9cf91ff771c7c9d0d",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-cmtn233trmeg.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 8850,
+      "sha256": "f66b69b468d7e1cb7d7d6d9d14bb652933f21b888d4a910edda48ece9f365a0b",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-cmtn2jc142dj.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 12464,
+      "sha256": "e736266142c9c61c29272111cdef41933df135a5620aa93ec9b60fcd5f793cb4",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-melee.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 37128,
+      "sha256": "300eba72c4589ff253d3206e996f0566facd48d38ba0f10f35818ba937f3dd1b",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-ranged.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 34290,
+      "sha256": "bc3d428ae2ed1c05d4da3a7cf36450d701e0c8e0bec1291debc90abfc99f2df5",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt2-bloodblade.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 2754,
+      "sha256": "4ac7237576138350821e60d2c85c5d573adde7e2d64fe439184817f027645b3f",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt2-comboarrow.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 10342,
+      "sha256": "f130489bcf7f1264adf6d65e2b0cc2b9bcfd731803913df5f9c4e1b0e874cd6a",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt2-jianghu.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 12362,
+      "sha256": "29c44461b9f14ca2e95b4b62937ed4a34cb7d93ab196f861eb7117e80982ba1e",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt2-piercearrow.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 13488,
+      "sha256": "6abcf4ec3967d98a374085f8f26ea17efbaa9cfd0ad9d0606f3c618f14af1885",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt2-shoot.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 7632,
+      "sha256": "7da40637a4f93bd8dd9e7c9071197c678057ddcda37845938ba7d2773132b0ec",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-armor-rush.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 22580,
+      "sha256": "d284bf05a0c705b09550e1cdf9abc7532a78d9895c2a79f3835ff0b0192beda5",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-arrow-rain.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 15852,
+      "sha256": "7a9204b0d866afb55fc6482b1044ada669bca50cfda69b809ad4cb10cb926a53",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-bandage.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 3240,
+      "sha256": "c54e84625bf6dca5824b84c5acfae9b5f26f4f666203c332df1abbe87c2f88e3",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-blood-arrow.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 4242,
+      "sha256": "8508a29f1a9021ce07671ce946ca9ec744be5c42178be78c18f3bb17c995d571",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-dig-treasure.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 12532,
+      "sha256": "c6bc3d351e355379a37cee06e840e1b1bf12945635a5e786eb071a6d8bef26c8",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-execute.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 17834,
+      "sha256": "43c2f085f06f35c4e271b6ff04e1aef1521aba8bbcd4e8b06580f7fedd969f11",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-flux-slash.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 7430,
+      "sha256": "dca5139295170398762b14d4b729ab32590f9a93755838f8bfa8dae6912f9ce1",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-frost-slash.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 3444,
+      "sha256": "6316bc73603535f5aa9ce0070ab0b42f201d7ec12ab05d36f1e2172839fb53a3",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-hold-fast.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 9500,
+      "sha256": "7fb6d88f53d8b64beec3e86155adb0310aa19a674a9059f1af2ab42cb6709203",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-noon-duel.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 24300,
+      "sha256": "0fe4d08d5c456937ad359f2447b7026140f93455e34e973dce691b5d8d5e49a1",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-purify-arrow.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 7546,
+      "sha256": "3c9359f59c8c2bf2ee3333ffe644dad6861a14329b1392136f358c9facb9fd02",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-qi-wave.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 13378,
+      "sha256": "72c7e9a1c8e2fa9272ae89de1c10aac36f7ce6a96b11b16fd2853ef1d0ebc550",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-reshot.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 6082,
+      "sha256": "834862874af257067ca2e9974719150c80236c63dcb210266dc9df10474014ca",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-skewer.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 6570,
+      "sha256": "9468bcda1383631301d0f4796e06f475317d769e751ebeaf57dc2608bcaa0f4e",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-venom-arrow.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 3408,
+      "sha256": "a10b9d88167c5e50b6afa1122ee1cb74ebe5642a76cc875c4089c2f0b6edb0fe",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-wave-slash.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 12438,
+      "sha256": "48a37a847f021c306dc6747a666f10782c116e258ed9867c2ddca87ac2e879a6",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt3wu-shike.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 3734,
+      "sha256": "1cb00cc46c650f1c613aff24f0aa1193007605c21b212445b3c66857ef7bd4e1",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-ironphalanx.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 17298,
+      "sha256": "eb3a305ea17a366504fa87b81ca71bcb1019e8004cf1ed9e85f07cb0e389fba9",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resource-key.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 42174,
+      "sha256": "51c7195f1b18f46ac13efcc77a8cdbcba33f06141ed05f31a54c5de15506cbd3",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resource-material.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 42100,
+      "sha256": "1773a5655b6fabedb620229e466f41cb4763b04336d9939a329463e47f465fc5",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resource-valuables.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 61548,
+      "sha256": "4a5029b9bdbc66cb5119828a6eab273b2f5601cea983db5d8160b79dd8c8fd3a",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resources/coin-copper.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 13210,
+      "sha256": "d9260394681b2c72331df734a1eff2695260452ead687a55cd6db7df2da15066",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resources/coin-gold.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 13092,
+      "sha256": "91b02d18653e9407ca10b7fde5027b3e9e67ef11d93fa62fbeba9a36502026bf",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resources/coin-silver.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 8956,
+      "sha256": "999a03dcac05cc305486049de4abfafa153dc1a5c03ddcd785cbb1e8bc7d241a",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resources/diamond.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 7780,
+      "sha256": "1d634078e1bae1961e1dc96e85ba567ae87130de856379e527164335e4402963",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resources/econpack.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 9760,
+      "sha256": "94c2eb30274ce3469deb4472e4825950f3e00494a4470c231392e6064b0323e0",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resources/garnet-marble.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 7628,
+      "sha256": "c6d3f5d1c43dc0b9e5f12cbda45a5aeb0a4b5edc8b0eb272e25d23100274085a",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resources/key-one.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 12812,
+      "sha256": "615a6f62238508e1758d981060a0b385d3a4a9dbc56560c918693af3c2726333",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resources/key.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 5196,
+      "sha256": "5ff99d94b527fd4f4947406d45fd496da613fb97916e3c8f407f59c8907610d7",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resources/keys-bunch.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 9248,
+      "sha256": "2d8b5eaaf2bdeb70454f5b946318ab2c93e02c6e8baecc2762ca5198faa5261a",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resources/pet-egg.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 6158,
+      "sha256": "b4187f7113baec1b13a289f414823174f4bab473699cbf84a8d01d6c89f13063",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resources/ration-double.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 11052,
+      "sha256": "73ed80bc9fdeffb62192e6d8cec197e563b12eabea0118017d79c2ea25198c7f",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resources/ration-std.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 11922,
+      "sha256": "261e9fa9d857fbd6f84f949f0301274913d3ebbff689f4166f1246a3508a15a2",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resources/ration.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 12772,
+      "sha256": "88b04b398b03f25170d4049702ea0860aff8a5721ff7ce1065c3c306697a4e43",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resources/wood-bundle.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 13268,
+      "sha256": "985ddd01cb80b6dda4108f0a9357c20cbfe9a501ee879cefd0ec739d4107d74a",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resources/wood-lots.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 12140,
+      "sha256": "084e3dbb2442b0128147a63c3e624861c3fa0a76efef97106b5784bd3628db84",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/resources/wood.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 8390,
+      "sha256": "01ef9706f112315b1b7e32902c801ad85226f08a3e75a289a3ae3fde4b5b4bde",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-cc-double-boom.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 11304,
+      "sha256": "7a753f0d66a2e8ce9bad2d02f71c2d70806561ab1c8824b19df5bb52d435dc29",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-cc-ember-burst.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 19162,
+      "sha256": "61fd38e7f8d9c1a2e7dbd2727f509b9f2b8b0929bc6ff06d8beba5f8c6e7be2d",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-cc-lava-blast.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 19476,
+      "sha256": "832b96ee004a687c5d463aec7455a4e8500bdeb7201a310cd0eafc8ef7f462af",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-cc-mana-surge.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 23590,
+      "sha256": "c30e3102377facac7c09a6b84a6d4cb207812808eb7cababac1d25511776e3bc",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-cc-poison-burst.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 15490,
+      "sha256": "5e11728f13f731d208eb564b98434665e72726c0965cdb3f146b4153289abb24",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-cc-rot-seed.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 8738,
+      "sha256": "13117fdb78ebfe545cede55711a4f34fb1c50356b40062e96dd2dae3f8de7a83",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-cmtn125e1nk0.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 16744,
+      "sha256": "7d546a12969032af7caaaf6b1ced80b584b2923aa514875a253e7a1ccb71319d",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-cmtn1epgt20j.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 5962,
+      "sha256": "001be438f25b2ae2ac3a8400cfe1fd4609764d4d587d248339341533d359a217",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-cmtn1gfhczzj.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 15462,
+      "sha256": "85cd5509aa0e4ccddb91ab84568bb96458e22bb57f6211a4bf9016f7b72d41b8",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-cmtn1lbhbqi4.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 25862,
+      "sha256": "8bc6284711fd6c9b45bf64dd6f7df36ae972d74e87da3f81ea1b7bdc9e47786c",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-cmtn1ntxzoc4.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 29604,
+      "sha256": "9809fef4f7799de4cd75d281b1840db2d2ee33fa44655ac4693ca022f3d3bf6b",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-cmtn1p9vb5au.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 22978,
+      "sha256": "133d1cc63ffcd5ca8295bdcdece951d3b688818ba81b730cc1635eaf6df25535",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-cmtn1r10xnl1.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 17258,
+      "sha256": "47280a8278836a5138c33bb80c472d4eb0c379690e20d299c3f59ffa6c44fb4d",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-cmtna0nb1yxt.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 7018,
+      "sha256": "48715efe25c88782d23f556eecf2356045bc1f735ce685122f532df76f9e472c",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-backupcell.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 15448,
+      "sha256": "509c8dc1fe20de2e53f6ac4760acaa169208f0c0579b9aae72109902e6d763c2",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-barriermend.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 17094,
+      "sha256": "d78eb0d60a56411ce38625ea4ef2064d16671cc163ff3f3674990905eecc3de2",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-basicdev.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 12506,
+      "sha256": "815f8ec686c286d0c9127321a9180f70f251709249789a293ff0a9f8e803e717",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-breakthrough.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 8662,
+      "sha256": "af7fb48030479ff9ff8598e2ee747fca51920f0d94713d1df76baf8317efab00",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-chargeray.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 5738,
+      "sha256": "9434b8bbf6c5794da67c4ab0b15d112ad4828d8aabc2d5179202b9f92e1d2a2c",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-elemburst.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 9610,
+      "sha256": "209836ddd12249ad987cf6010385e5fb8cf84126137542dba8ec8b7f6d75da2e",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-felguard.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 12354,
+      "sha256": "f8c3d5ae4707d5c20256f8b2303cf2d866d7d8e29458d499ee8141a2955fc8cc",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-firecracker.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 8880,
+      "sha256": "ae7aa0d12fb33bf00192f6f6c29f09d1035f72ca3af5e2488a9d6ddfd46fb98a",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-freezeray.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 8548,
+      "sha256": "c197973ae211dd7ed53115a9672b8d40d5653178d5a7d89cd75b4dbeca48019c",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-hitechrd.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 18176,
+      "sha256": "f36f1cc966b31828c8b41b9560b0f150726b3d49f6a0cf1dcaece62d75d1afea",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-infectray.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 9350,
+      "sha256": "58e998b682f216f4e48194db6acc3d8788d96c136c271278d972e59cce72d3cd",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-magicfind.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 9912,
+      "sha256": "e2eda8238bb00341eda68cf17eb3d913cdd20d3ed91c7d8a731c743faab7ca5a",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-raydragon.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 16232,
+      "sha256": "705c934f1edb961ff6902473995a669fc969402d49543cb6fcb44ee7dedccd87",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-saturate.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 13218,
+      "sha256": "77f01c430721cc1a267613586bafda4bd9dca1c969187f33f5b22d39afdf48db",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-sporewall.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 17988,
+      "sha256": "d6906987072e11725d7938bfeed6a096b9b6645a9d920bfecd7758b9d50f9669",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-unstableray.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 2844,
+      "sha256": "dc223d7d03eabc5e729ecbeff71f288e96fdb954033f5c8aafcf7d2779823f93",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-chain-lightning.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 8252,
+      "sha256": "050d2f46d466148e793ef38aa6604ef066aaef82cc7c828f6ca38f4d4258b7a5",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-fireball.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 6434,
+      "sha256": "5ef9c555ba8c0152f626d576dbb1b391b22694725d17e2cfbd12395308340144",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-firm-barrier.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 15306,
+      "sha256": "c55cd22c0d2ebba76e3432972f00e18158741f09430e1a74dd984015263dcbcf",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-flame-storm.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 18570,
+      "sha256": "b158e2899c3b4d218b880952dd1c838a2480c6253ece37de2bbe264e7179c334",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-holy-water.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 3402,
+      "sha256": "4f28e457f8cf580510f37156dbeb371ffc63a5c733e1d427d3959f0c7bba00b8",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-magic-lamp.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 15034,
+      "sha256": "e6d01a8d0d6ac04fecff420d7853a7a05c53b3eda7cdb2a765ae2fe7940cb269",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-nuke-ray.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 12622,
+      "sha256": "11ce9f03eee6f4bac1e96ab710e5aec396bce680e9beedb7d66b73a5c5022bfb",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-petal.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 20682,
+      "sha256": "1e9cccf3c59106362b2edfe03cbf5526c2f4558c046fa44924f20005acc92982",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-thornfield.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 22372,
+      "sha256": "c83b88b3b04d4933fcf20ac75e3f579409500ee21e4d3d4a0fd147372914185d",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-thunderblast.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 20166,
+      "sha256": "5fac646edfffd56cf3415ce3a9879e8415efda6aaa022cb2a6aa6f5840f00520",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-toxin.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 5482,
+      "sha256": "9c352d02a7eb9fe7636ddb29e5608d58311377c44d05b10ff75409c86cb9abb4",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3sp-bloodstorm.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 15076,
+      "sha256": "f0eff7452f331ce3def05e8a405b7519668db747c8e3835874c50501d203c2dc",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3sp-dodge.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 4498,
+      "sha256": "ce79c51fbfbedf922ae4e83790c246876f2bb708b8b8c7316acc0f7a6ed20436",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3sp-flowerzhen.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 7170,
+      "sha256": "a1cfc1f0648b1330c76cf1b7279ab9eb4cf931039f271f9604639e02cedae8e4",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3sp-magicoil.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 6806,
+      "sha256": "ae5cbe2f507748097ab0bf5106b92b8a3e8100e8bfe0c37e5272f1f1d73e46fa",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3sp-shadowshot.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 16442,
+      "sha256": "e38fbe0bd9e796e4ae0ffe9bc35129b17b5eaebec259163f883b94a3ff0794f8",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt3sp-silverthorn.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 3288,
+      "sha256": "86262059db12726f6b2fd3a66d50f82e58d20e60ebf068ed7bd7d74def9b931b",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt5-galaxy-voyage.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 10840,
+      "sha256": "35fcd424fda4e48bc428c913e8c2ab5dfbc09112ddc6d43407b2002d7ec11dc9",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-abysscurse.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 16912,
+      "sha256": "107397f12ef2ae802cded59e6b2ba8297469c83b77b601c8139def3e948b2c99",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-arcanebolt.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 18380,
+      "sha256": "a29aeadda4845d0a142d81eff15973c2f568536ac36e234dcdf56acf26dc7d10",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-bladebloom.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 20352,
+      "sha256": "d0f6a7529d4adaaef2d6994200ccc9bd15116ffb35b224625154788e5dd80bf1",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-burnharvest.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 14802,
+      "sha256": "5784fcecbed5a20b8cc23a7e250e0ab11b39c3be3549db0e418d3a034542e933",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-elementstorm.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 13552,
+      "sha256": "e20e9173699cd3fa837b5fe7ee5d81cfd192c51ba01a63012b41d74ede39b1f3",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-energize.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 19808,
+      "sha256": "d24bce77fd2030a802b64dff93cf1bf17f7e4d8f3eb91e03ec8b81850e8f849d",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-frozenight.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 20012,
+      "sha256": "837143ffb3c4d015ffb6756120dd4d9ccbb4a4972922759546dfbcfbe4476fbf",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-holyglow.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 24122,
+      "sha256": "7b691a068fd4e90ed2ea598ca4d80814086e225b18318ff5bb0214a5a69afc33",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-holyheal.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 19008,
+      "sha256": "200fe2ccbd8c5abe49052da967feed97cd1bb483bacd408640d63fd5b54ab162",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-livingwater.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 5798,
+      "sha256": "a01191c4dbb00a085016127e78e9b737506c0e4e3e75f3335e4c525738de53e1",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-maxsupply.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 7424,
+      "sha256": "fff2b0ef9f8cdbb5f894a4cf322999716e2e9ff8fbe1fe496067bbbde4e53206",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-meteorstrong.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 24928,
+      "sha256": "61b9c9461bf9ae09c7f43f7085908725d834c5c18eb85885cabc77673d29e449",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-recruit.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 20374,
+      "sha256": "a89df9e68326e05e11a45e323fd4d4d15c8d27164befb088308e8cb41b168a4d",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-stratagem.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 17122,
+      "sha256": "53a30aff9f75df90ec32bd39f2cb56a8c52c8ced9aaa7abd655da2e65499d047",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-twinfireball.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 17886,
+      "sha256": "dfe0f816352da0b0c77e76f37b227c18d8f731907b7108112e41c5448c64fc04",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse1.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 17406,
+      "sha256": "1a60c3bbdbe690a604dca93893916f05576a4d544d41e250e3e9d679266a9495",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse2.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 22768,
+      "sha256": "a77114d06a8f963b0709d1974d9fbac2b658165d861dd8f586d1464112ee76ba",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse3.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 23322,
+      "sha256": "f71e159c81d3a006d63e5156f5ab3477b74dc4632e19e43012da8adee3980e5a",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse4.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 23126,
+      "sha256": "476fcfdd67004b62e7c0f8ba59f9da90fb050027550b3b19ed59866acadd0791",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/spell.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 55904,
+      "sha256": "212f0d408e5bf4e597080e739a57af86add5e77f5efc4c60b641a22d745211c2",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/cards/unknown.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 41010,
+      "sha256": "4325c5e78203fafa6bc7a9d7b3c2b50c7d9ae9087c89358235cd09c6410b67f5",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/archer.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 29062,
+      "sha256": "68662911cc3dd26f00fce4ed6c4dae1de24cab7ce84fefa77efcd52f09f053cf",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/bandit.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 25672,
+      "sha256": "26a606e930bde321e542728c833c4102e480328e584435d375e75e63215c5b10",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/boss_elem.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 33854,
+      "sha256": "c466b6a24b67b3759ace54c210e8eb3d19366a3c16de182e4a7986acf2aaa559",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/boss_general.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 35550,
+      "sha256": "00bc316134fdebf46a45ff9e31935e66fe378d7a01d8c7e26b82299d6c97e0b2",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/boss_orc.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 47004,
+      "sha256": "46793e3631b1f2699e7ae2a75144e5760533997a1c7dd8ea5efe49ed8c1396ef",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/cavalry.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 36526,
+      "sha256": "c4fef9ea2fdc9cf5690e5fd3cb097ce2585f9c2ded3308d980378cad9e5b63e0",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/dragon.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 50602,
+      "sha256": "4eca34ea42dd2f65fd24223b51aa226943e4de2e5d67355d54f06b5883d4cffd",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/esper_candle.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 22498,
+      "sha256": "3de050f2a500f43a3a1c7c618b6b75425c82ee3d5096337851376ac98f3de3a0",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/esper_crow.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 19940,
+      "sha256": "034f5d0f31f23e4b8ddf5d399c77fc88d4797e2cf802bce5a01fbf4d356aeba5",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/esper_echo.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 30546,
+      "sha256": "d3649e4384aefdc033649f06095eefe25bc37158594ac9e10f0075f7874380f6",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/esper_silence.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 28620,
+      "sha256": "275814e2b84813ecea7ccebea1adc79831103d8befee5c6244ab8358de313d66",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/fire_el.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 27024,
+      "sha256": "506ec85f22cc279b4ce266f78ee5dd5f734dc68be8fc9c58258e45381564179a",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/grass_el.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 28180,
+      "sha256": "07a6d5534828a4ae2032e69423be69eb66e88704408c688f23d3493db58f8084",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/infantry.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 27738,
+      "sha256": "80a40c2f69e486c9df5b4c849b238c5e0101aaa5d51ce590289b25f75af0f84b",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/orc_axe.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 46690,
+      "sha256": "102f33225c0014bb371a407df600b36a8b65ec7050443888ef5bb5b450294d79",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/orc_jav.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 31186,
+      "sha256": "3c46deb4872ae67cfcd544562509f73a5e184329d051e9486cd8a43471452d14",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/water_el.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 34384,
+      "sha256": "e307d762018e2b1a5ee0bbe32e8f8165ad0e7d8cec451f247a7c0e0b575d3445",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/portraits/enemies/wolf_rider.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 25232,
+      "sha256": "3dba3e59c523e1ffa4be8b1d3bee057dbffcac1373c4acd3beeaf195a676e8f4",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/battle-normal-anime-v2.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 12560,
+      "sha256": "eeb4a2b041ab7e57a515bbbb9b36b46895fee7e4b51bbaa4ce9be3cd29756cce",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/battle-street-amber-anime-v1.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 17594,
+      "sha256": "0bb536004fef2108a27e3d82e2a266e071922390042f34d50654ad0886108884",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-bandits-anime-v2.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 25148,
+      "sha256": "76924a383f674ffc025c4de8191437de53291f086171bd37cf48e90341f20de0",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-cmtn7qttxqo4.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 28808,
+      "sha256": "394ebc09bd16451f05669d8cb6cb1a6af6901f2dc53217251be06bad02aff6fe",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-ev19-arrows.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 21198,
+      "sha256": "3ff860d7f701353808eb2c6d37833e556fe22b015601235b802e36ff9d7d4187",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-ev19-classchest.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 24720,
+      "sha256": "f9896c8ff10a9f4b54c133922acd9f2efb44737bc7ed0a2b7ab25872bef585fc",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-ev19-fireballs.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 23726,
+      "sha256": "5a92c80b5cecdf1c03bcd84f736b962b53e585b097013c2efd58799bcccd927d",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-ev19-gamble.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 22058,
+      "sha256": "b2f09b3779a20c113f60938e8260a6f01956216386a358e086c4c25fccfdb0ae",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-ev19-pearlbox.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 28634,
+      "sha256": "f51513b2ccd32a020601cefa054d0f4594e4753e7e1630938698cbd81c6cde03",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-ev19-potions.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 28868,
+      "sha256": "dc668c1f4c5ac6df8fd583deb21e94d64d067157c61f432ff55c73f82fb75e8b",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-ev19-quartermaster.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 26178,
+      "sha256": "4739bf877abcfc50aff25f69e453ed012202e680466262e64ddde0723975a597",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-ev19-recode.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 22778,
+      "sha256": "7855f155cf08ae2084a4b16bd01a3860141d1555fe3150dbe00a896a687ebeda",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-ev19-vital.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 28564,
+      "sha256": "ff3becb9cf76c85e869c185b3856f984a20a448bb18c7e44db99ad8c85b10e22",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-tt6-airdrop.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 26044,
+      "sha256": "01c55190f61addb87bbc3151d16b1d5effbd22482a72ed0fde2488f7e14832ac",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-tt6-chestdraw.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 22318,
+      "sha256": "31b4ae7d0ae48a17d1c55e09141c3c713e5ca46c5e79c9fa1138ed35abcb41f5",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-tt6-demondeal.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 22578,
+      "sha256": "b77fcad43f7c0260b958694ffa57f6cb04640530f7f2713a310c89e59eac5641",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-tt6-goldhammer.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 20774,
+      "sha256": "b0e1f16a9644d201e064d9bc8c144e5f268095fd74912a5f68eececedfaa86fd",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-tt6-goldmine.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 30624,
+      "sha256": "3bc228496e0f8f989f7017011b5fcbd54b43f77dbecc6f99fc1df12a7186ce25",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-tt6-mystery.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 25230,
+      "sha256": "1b521ed2a4fbf6f289c81d1ae962a919fcbdc504b3970f42f0cc8b39b3e6023e",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-tt6-relief.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 25880,
+      "sha256": "c803d3e209eca3c6eeabc9f0d337214bbfa941a93489f219c14fd4a9b651d6df",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/event-tt6-systemsupply.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 25464,
+      "sha256": "cbb9d1c9c51397a696c094f899cecf5ce782b03f99bc6ead8920ad05e249cb50",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/hub-wallpaper.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 30094,
+      "sha256": "6e1e0a59c82db935b2feb9324a2cc6971d91789cb40c5b796f4cd07e4767c2bd",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-altar-anime-v2.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 16808,
+      "sha256": "9d887f0a4ddc9f5d3006bbf6babe8db057e002284a019f28fa640c5585226f50",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-anime-v2.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 14940,
+      "sha256": "1d47f1b0601136967f01fc0696f867274027b111f2e0da0e12cc7f6171fbedc5",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-boss-anime-v1.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 14882,
+      "sha256": "d8cfa319966b4e2fd40f9ed01635c41ef9ba66c42bd13bf50bd7aabd9438b727",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-class-anime-v1.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 8476,
+      "sha256": "7a2296825d5ba6cbb3d14afa31468464e644a0647bbdee5ed511d5d9eabeec52",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-large-anime-v1.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 15436,
+      "sha256": "48b5c7414776a7424ae86e53c71118a071ff2df6ba930e9f31e70f0d9a4c3b43",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-medium-anime-v1.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 11858,
+      "sha256": "702f21f4c4e382afd887d0d994616fdebfca6d533753a395eb8204a7426fb847",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-small-anime-v1.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 11580,
+      "sha256": "4a21b0ddd65979008d042e6d6b0038efed2d2e0fd7c13a4f8c5fd505146c6558",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-door-anime-v2.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 16078,
+      "sha256": "2b13557cfd544bfd6a2b03bd052def8f3ff10236231360085566682029f404fc",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-extract-anime-v2.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 9348,
+      "sha256": "b818fd1f5f03f9dcfd261d762d4343ccd5874b87acbd8459f574d590eb84c54b",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-fire-anime-v2.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 13196,
+      "sha256": "cdf3a634ad349dbcefec156ad51179b1f27c185900f5809be1647a9012a945e6",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-pickup-coin-anime-v2.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 17684,
+      "sha256": "c0f6fe7c90a2cad9ba63798b645842eb18e371b1162566f240603956856c8b3c",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-pickup-key-anime-v2.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 11604,
+      "sha256": "d7f80e253c0d77b7af0aebb96c1a762e2ce674e938d065ddef84996fe0b2de7e",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-pickup-rations-anime-v2.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 15208,
+      "sha256": "09e2e54efc3886308e433fd0b2c498c61686f2e521a0e33a41ed6bd947eb405b",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-pickup-wood-anime-v2.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 10974,
+      "sha256": "1489bf194f50bb4ba4e3cc8b2ecc14f928191f3727a9bb511194c1acd2223e66",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-shop-anime-v2.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 15250,
+      "sha256": "33089b4eb0506faac960bc3cc865e725a7ee21f21eb153f493b8e062e5e9cb3d",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/winter-expedition/core.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 5204,
+      "sha256": "e1b7eb2ae68ff4e05c5a585ceebc71c6b4f3bc472683ba37aa688264aaeb363c",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/winter-expedition/greenhouse.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 6568,
+      "sha256": "bd159c942e25e167d4dcd21815c33ca9cea5c28e98736a0ff738324609472c4d",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/winter-expedition/outskirts.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 6318,
+      "sha256": "31988e171b074ad98a597f13b3d6007d15edfccd7182a666c06cf6724f43cf16",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/winter-expedition/sanctuary.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 5546,
+      "sha256": "57c262f64adf46c0c1bc4853f1c32f45fa2ad538ebb417bdbaad1f3298be1038",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "thumbs/scenes/winter-expedition/supply-room.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 17136,
+      "sha256": "7d89b4d2b05b499ddfa5ac209dd2974353f16711bda678f73f8ac3752ba9872d",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "ui/home-v2/achievement-handpainted-v3.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 19046,
+      "sha256": "e6797435e8ba066e45541f4717975bd7479237f1db704ea3723976e3a933440b",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "ui/home-v2/camera-handpainted-v3.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 30472,
+      "sha256": "1dc3f08c9ad75aa00bcd3fa88825faeabf6eb6d0c31e4ec259af4ec7d71dd518",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "ui/home-v2/camera.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 111410,
+      "sha256": "b4778a5c844f81882e6e63f5b868aec270efa6ccb7a714b1409c6e4b0cfce2a4",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "ui/home-v2/expedition-handpainted-v3.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 90762,
+      "sha256": "aaf9fa2d9ad5ed06b2c71327937e8416c9ca21e307b5c91dee1b0579b01001bb",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "ui/home-v2/expedition-sigil.webp",
+      "ext": "webp",
+      "license": "项目自有（自制/AI 生成）",
+      "bytes": 220232,
+      "sha256": "f3e194b1fe074764c32753f89625fe9243a673bfed4eef6eccca7f0686c9fcc6",
+      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
     }
   ],
-  "verified": "2026-10-02"
+  "verified": "2026-10-05"
 }

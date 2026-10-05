@@ -8,6 +8,13 @@
 
 const rate = (n, d) => (d > 0 ? Math.round((n / d) * 1000) / 10 : 0);
 
+// 顶层 driver 是结算时点标签；随局来源以 recorder 的 provenance 三态为准。
+// 旧记录没有来源事实，不能从旧标签反推为真人局或自动局。
+function provenanceDriver(run) {
+  const driver = run?.provenance?.driver;
+  return ['human', 'agent', 'mixed'].includes(driver) ? driver : 'unknown';
+}
+
 function outcomeCounts(runs) {
   const counts = { clear: 0, extract: 0, death: 0, abandon: 0 };
   for (const r of runs) {
@@ -88,8 +95,8 @@ function aggregate(runs) {
     topCards,
     byClass: section(r => r.class),
     byMode: section(r => r.mode),
-    byDriver: section(r => r.driver),
+    byDriver: section(provenanceDriver),
   };
 }
 
-export { aggregate, brief, rate };
+export { aggregate, brief, rate, provenanceDriver };

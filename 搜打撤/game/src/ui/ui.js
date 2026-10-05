@@ -133,6 +133,8 @@ import { hudMethods } from './hud.js';
           <p class="cz-note-text">${note ? esc(note) : '暂无备注'}</p>
         </div>`;
       const photoMode = opts.presentation === 'photo';
+      const photoEnterMs = 140;
+      const photoCloseMs = 120;
       const photoArt = photoMode && SDT.Art?.cardIcon ? SDT.Art.cardIcon(card, { low: true }) : '';
       let photoFullSrc = '';
       if (photoMode && SDT.Art?.cardIcon) {
@@ -187,10 +189,10 @@ import { hudMethods } from './hud.js';
         const sourceRatio = sourceImage?.naturalHeight > 0 ? sourceImage.naturalWidth / sourceImage.naturalHeight : 1;
         el.style.setProperty('--cz-photo-ratio', String(sourceRatio > 0 ? sourceRatio : 1));
         if (!reducedMotion) el.classList.add('cz-photo-entering');
-        el.style.setProperty('--cz-photo-enter-ms', '240ms');
-        el.style.setProperty('--cz-photo-close-ms', '320ms');
+        el.style.setProperty('--cz-photo-enter-ms', `${photoEnterMs}ms`);
+        el.style.setProperty('--cz-photo-close-ms', `${photoCloseMs}ms`);
         el.style.setProperty('--cz-photo-info-delay', '0ms');
-        el.style.setProperty('--cz-photo-motion-ms', '240ms');
+        el.style.setProperty('--cz-photo-motion-ms', `${photoEnterMs}ms`);
       }
       el.setAttribute('role', 'dialog');
       el.setAttribute('aria-modal', 'true');
@@ -280,7 +282,7 @@ import { hudMethods } from './hud.js';
             && photoViewport.scale === SDT.UiScale.scale();
           const sourceRect = viewportUnchanged ? visiblePhotoSourceRect() : null;
           const targetRect = photoLayoutRect || (photoPaper ? SDT.UiScale.rect(photoPaper) : null);
-          el.style.setProperty('--cz-photo-motion-ms', '320ms');
+          el.style.setProperty('--cz-photo-motion-ms', `${photoCloseMs}ms`);
           el.classList.remove('cz-photo-entering');
           el.classList.add('cz-photo-closing');
           if (photoPaper) {
@@ -309,7 +311,7 @@ import { hudMethods } from './hud.js';
             if (e.target === photoPaper && e.propertyName === 'transform') finishClose();
           };
           photoPaper?.addEventListener('transitionend', closeTransitionEnd);
-          closeTimer = setTimeout(() => finishClose(), 380);
+          closeTimer = setTimeout(() => finishClose(), photoCloseMs + 60);
           return;
         }
         // cz-flip 的 animation:none 会一并压掉 czOut，收回前摘掉它恢复出场动画
@@ -389,7 +391,7 @@ import { hudMethods } from './hud.js';
           ready.then(() => {
             if (el.isConnected && !closed && fullImage.naturalWidth) visibleImage.src = fullImage.src;
           });
-        }, reducedMotion ? 0 : 260);
+        }, reducedMotion ? 0 : photoEnterMs);
       }
       // 大图显式解码，防 IAB 合成黑窗（同池页首屏/战斗手牌修法；2026-09-20 走查实锤特写黑窗）
       if (SDT.Art && SDT.Art.decodeIn) SDT.Art.decodeIn(el);
@@ -434,12 +436,12 @@ import { hudMethods } from './hud.js';
           void photoPaper.offsetWidth;
           photoPaper.style.transition = previousTransition;
           el.classList.remove('cz-photo-entering');
-          enterTimer = setTimeout(() => el.classList.remove('cz-photo-flipping'), 500);
+          enterTimer = setTimeout(() => el.classList.remove('cz-photo-flipping'), photoEnterMs + 20);
         } else {
           el.classList.add(reducedMotion ? 'cz-photo-reduced' : 'cz-photo-flipping');
           void photoPaper?.offsetWidth;
           el.classList.remove('cz-photo-entering');
-          if (!reducedMotion) enterTimer = setTimeout(() => el.classList.remove('cz-photo-flipping'), 500);
+          if (!reducedMotion) enterTimer = setTimeout(() => el.classList.remove('cz-photo-flipping'), photoEnterMs + 20);
         }
       } else if (fromR && fromR.width > 0) {
         const cardEl = el.querySelector('.cz-card');

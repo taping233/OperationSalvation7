@@ -194,9 +194,18 @@ export function verifyGateReceipt(root, file, plan) {
   if (JSON.stringify(current) !== JSON.stringify(report.gateReceipt)) {
     throw new Error('冻结源码/index、变更范围、依赖字节或验收环境已变化，须重新隔离验收');
   }
-  const index = execFileSync('git', ['rev-parse', '--git-path', 'index'], { cwd: plan.repo, encoding: 'utf8',
-    env: { ...process.env, GIT_OPTIONAL_LOCKS: '0' } }).trim();
-  if (sha(readFileSync(path.resolve(plan.repo, index))) !== plan.indexSha256) throw new Error('证据复用核对期间 index 已变化');
+  if (indexContentHash(plan.repo) !== plan.indexSha256) throw new Error('证据复用核对期间 index 已变化');
   return { report: relative, mode: report.gate.mode, tests: report.gate.tests,
     limits: ['仅复用已验冻结 index；工作树在途内容、build、浏览器与远端 CI 未验证', '台账与证据目录变化不影响代码证据，仍须单独核对提交边界'] };
+}
+
+// index 逻辑内容（mode+blob+path）哈希，Buffer 直哈希避免编码歧义：并发 git status/add 的
+// stat-only 刷新会改写 index 文件字节但逻辑内容不变，按文件字节判定会把可复用验收误报
+// invalidated（10-03 实测 STAGED_INVALIDATED）。workflow-staged 的 indexHash 与本文件复用校验同源。
+export function indexContentHash(repo, env = {}) {
+  const base = { ...process.env };
+  for (const key of ['GIT_DIR', 'GIT_WORK_TREE', 'GIT_COMMON_DIR', 'GIT_INDEX_FILE', 'GIT_OBJECT_DIRECTORY', 'GIT_ALTERNATE_OBJECT_DIRECTORIES', 'GIT_NAMESPACE']) delete base[key];
+  const listing = execFileSync('git', ['-c', 'core.quotepath=false', 'ls-files', '--stage', '-z'],
+    { cwd: repo, env: { ...base, GIT_OPTIONAL_LOCKS: '0', ...env }, maxBuffer: 128 * 1024 * 1024 });
+  return createHash('sha256').update(listing).digest('hex');
 }

@@ -4,7 +4,7 @@ const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc } from '../core/shared.js';
 import { MAP } from '../run/game.session.js';
-import { game, getActiveSlot, setLobby, showTitle } from '../run/game.session.js';
+import { game, getActiveSlot, setLobby, startNewGame } from '../run/game.session.js';
 import { Sfx, configureCardNavigation, _set_cardPageOpen } from './game.cardslib.js';
 import { readBase, readBaseReceipt, commitBase } from './base.commands.js';
 import { getCollection, selectSkin } from './collection.commands.js';
@@ -32,6 +32,8 @@ const disposePreparation = () => preparationFeature?.dispose();
 // 基地当前页签（原为隐式全局，ESM 严格模式下必须显式声明）
 let hubTab = 'deploy';
 let hubCollectionView = 'backs';
+let hubStashView = 'cards';
+let hubPersonView = 'wu';
 preparationFeature = createHubPreparationFeature({
   data: {
     readBase,
@@ -140,7 +142,9 @@ preparationFeature = createHubPreparationFeature({
     _set_cardPageOpen(true);      // Hub 页面：Esc / 点击背景可关闭
     const pending = M.pendingAch().length + M.pendingColl().length;
     // 页签切换时才播放入场动画（页内操作重渲染不闪）
-    const tabChanged = renderHub._lastTab !== hubTab;
+    const viewKey = `${hubTab}/${hubStashView}/${hubPersonView}/${hubCollectionView}`;
+    const tabChanged = renderHub._lastView !== viewKey;
+    renderHub._lastView = viewKey;
     renderHub._lastTab = hubTab;
     // v0.22 图标页签：大图标为主 + 小字注记（仓库=木房子）
     const TABS = [
@@ -152,18 +156,16 @@ preparationFeature = createHubPreparationFeature({
       { id: 'ach', icon: 'trophy', name: '成就·收藏' },   // 09-25 A 组：页签缩写防折行（page-hub.css 配 nowrap）
     ];
     const body = hubTab === 'deploy' ? hubDeployHTML()
-      : hubTab === 'stash' ? hubStashHTML()
+      : hubTab === 'stash' ? hubStashHTML(hubStashView)
       : hubTab === 'shop' ? hubShopHTML()
       : hubTab === 'upgrade' ? hubUpgradeHTML()
-      : hubTab === 'classes' ? hubClassesHTML()
+      : hubTab === 'classes' ? hubClassesHTML(hubPersonView)
       : hubAchHTML(hubCollectionView);
-    registerHubHelp(hubTab);
     UI.showOverlay('', `
-      <div class="pg hub hub-${hubTab}" id="hubMain">
+      <div class="pg hub hub-${hubTab} hub-cover" id="hubMain">
        <header class="hub-head hub-head-min">
           <h2>远征基地</h2><span class="hub-slot-label">${getActiveSlot() ? `档位 0${getActiveSlot()}` : '未选档'}</span>
-         <button class="hub-back" data-act="closeBase" title="返回主菜单（Esc）">← 返回</button>
-          ${UI.helpBtn('hub-' + hubTab)}
+         <button class="hub-back" data-act="closeBase" title="返回选档界面（Esc）">← 返回</button>
           <span class="pg-spacer"></span>
           <span class="hub-res">
             <span class="res-chip">[[icon:wood]] 木材 <b>${B.data.wood}</b></span>
@@ -208,12 +210,26 @@ preparationFeature = createHubPreparationFeature({
     UI.act('hubTab', (d) => {
       const next = d.tab === 'home' ? 'deploy' : d.tab;
       if (next !== hubTab) SDT.Sound.sfx('switch');   // W6-03：页签切换挂既有 switch 音（hub 最高频操作的静区补声）
+      if (next === 'stash' && hubTab !== 'stash') hubStashView = 'cards';
       hubTab = next;
+      renderHub();
+    });
+    UI.act('hubStashView', (d) => {
+      if (!['cards', 'pocket', 'pets'].includes(d.view) || d.view === hubStashView) return;
+      hubStashView = d.view;
+      SDT.Sound.sfx('switch');
       renderHub();
     });
     UI.act('hubCollectionView', (d) => {
       if (!['backs', 'achievements', 'classes'].includes(d.view)) return;
       hubCollectionView = d.view;
+      renderHub();
+    });
+    UI.act('hubPersonView', (d) => {
+      const character = characterFor(d.character);
+      if (!character || character.id === hubPersonView) return;
+      hubPersonView = character.id;
+      SDT.Sound.sfx('switch');
       renderHub();
     });
     UI.act('openPreparation', () => openPreparationPanel());
@@ -287,6 +303,8 @@ preparationFeature = createHubPreparationFeature({
     UI.act('claimAch', (d) => {
       const r = M.claim(d.id);
       if (r.ok) { Sfx.ding(); renderHub(); }
+      // meta.claim 失败时带 msg（仓库满/存档写失败）——静默丢弃会让「领取」看起来像坏按钮
+      else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');
     });
     UI.act('selBack', (d) => {
       const B2 = SDT.Base;
@@ -306,6 +324,7 @@ preparationFeature = createHubPreparationFeature({
       const r = M.claimColl(d.id);
       if (r.ok) { Sfx.ding(); renderHub(); }
       else if (r && r.why === 'full') UI.log(`[[icon:archive]] ${r.msg}`, 'warn');
+      else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');
     });
     UI.act('collZoom', (d) => {
       const card = M.collectPool().find(c => c.id === d.id);
@@ -319,57 +338,12 @@ preparationFeature = createHubPreparationFeature({
     preparationFeature.open();
   }
 
-  // —— 基地各页签的 ? 帮助主题（说明文字统一收进二级界面，不在页面直铺） ——
-  function registerHubHelp(tab) {
-    const R = MAP.rules;
-    const T = {
-      deploy: { title: '出发说明', items: [
-        ['玩法选择', '出发后会随机空降到外圈入口，并从全部人物中自由选择 1 个本局人物（熟练度提供常驻加成）。'],
-        ['出征预报', '点击「出发」后会打开出发整备：选择要从仓库携带的卡牌——只有带上的卡才能在战斗中使用。撤离成功后也会出现整理界面，让你把背包战利品放回仓库。'],
-        ['宝藏大门', '在棋盘的钥匙格收集钥匙，集齐 ' + (SDT.Base.KEY_NEEDED || 10) + ' 把可开启特殊关卡（关卡制作中）。'],
-      ] },
-      shop: { title: '商店说明', items: [
-        ['基础卡牌', '用储备币购买基础招式 / 装备 / 资源卡，买下直接放入卡牌仓库，出发前勾选带入。'],
-        ['储备币', '卖出仓库物品所得；不进局、不随对局增减，只用于基地消费（孵蛋、商店）。'],
-      ] },
-      stash: { title: '仓库说明', items: [
-        ['卡牌仓库', '点击物品可卖出换储备币，或收藏进图鉴（收藏职业卡 +10、能力卡 +50 对应人物熟练度经验，重复收藏重复获得经验（进度只记首次）；收藏即用掉这张卡，不再占仓库格；收藏进度可在「成就·收藏室」领一次性奖励。传说卡与桌游珍宝是特殊收藏品，收藏期间不可卖出）。出发时自选携带（职业卡带出后无法带入）。'],
-        ['材料卡 / 宠物蛋', '木材/口粮/钥匙材料卡可直接「使用」折入真实物资；宠物蛋 + 50 币可孵化随机宠物（宝箱 0.7% 起掉落：每开箱未出 +3%、每打赢一场战斗再 +0.2%）。'],
-        ['消耗口袋', '战斗中消耗的卡牌有 1/3 概率随撤离回到这里（职业卡与初始牌除外）；用钥匙按稀有度复原：古朴1 / 稀有2 / 史诗3 / 传说4。下一次出发后口袋清空。'],
-        ['宠物', '初始宠物「汪汪狗」自动获得，携带 1 只出战（出发页可切换）；其余用宠物蛋孵化。宠物在「升级」页用口粮升级（2-3-4-5）。'],
-        ['物资', '木材/口粮/钥匙是基地建设材料（木材扩建背包与仓库、口粮升级宠物、钥匙复原口袋与开启宝藏大门），不可卖出换币。储备币只留在基地消费，不随对局带走。'],
-      ] },
-      upgrade: { title: '升级说明', items: [
-        ['背包扩建', '每消耗木材 ×' + R.bagUpgradeWood + ' 扩建 1 格，上限 ' + R.bagMax + ' 格。'],
-        ['仓库扩建', '每消耗木材 ×' + R.stashUpgradeWood + ' 扩建 ' + R.stashUpgradeSlots + ' 张容量，上限 ' + R.stashMax + ' 张。'],
-        ['宠物升级', '每只宠物独立升级，口粮消耗递增 2-3-4-5，上限 Lv.5；Lv.1 起每级 +1 安全格。携带不同宠物安全格数量不同（小企鹅咕嘎 4-8 格）。'],
-      ] },
-      classes: { title: '人物说明', items: [
-        ['熟练度', '每局出发时从全部角色中自由选择 1 个；击败敌人、撤离成功都会累积所选角色的熟练度经验，升级获得常驻加成（下一局出征生效）。'],
-      ] },
-      ach: { title: '成就与职业收藏室', items: [
-        ['卡背图鉴', '牌库堆 / 背包翻面使用的卡背；领取对应成就奖励解锁，点击即可装备。'],
-        ['成就', '达成条件后自动解锁（页内显示奖励内容），回基地点击「领取」获得物资与卡背奖励。'],
-        ['职业收藏室', '仓库中收藏的职业卡与能力卡会陈列在此：每次收藏都转化为人物熟练度经验（职业卡 +10、能力卡 +50，重复收藏重复获得），卡牌收藏即用掉、不再占仓库格。收藏不同的职业卡与能力卡推进进度，5 / 15 / 30 / 45 / 全收集各有一次奖励，达成后点击「领取」。'],
-      ] },
-    };
-    const t = T[tab];
-    if (!t) return;
-    UI.registerHelp('hub-' + tab, {
-      title: t.title,
-      html: t.items.map(([k, v]) => `<p class="help-item"><b>${k}</b>${v}</p>`).join(''),
-      back: () => renderHub(),
-    });
-  }
-
-
-
   function closeBase() {
     homeSceneRequest++;
     disposeHome();
     _set_cardPageOpen(false);
     UI.hideOverlay();
-    showTitle();   // 基地只在局外（标题/撤离结算后）可达，关闭即回主菜单
+    startNewGame();   // 基地返回选档，不触碰当前档案或对局存档
   }
 
   // ---------- 背包（物资+卡牌混占格 · 安全格 · 消耗口袋） ----------

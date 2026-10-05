@@ -26,7 +26,7 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
     root = null;
   }
 
-  function makeModel(snapshot, preparation, error = '') {
+  function makeModel(snapshot, preparation, error = '', busy = false) {
     return buildModel({
       baseSnapshot: snapshot,
       preparation,
@@ -35,6 +35,7 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
       pets: data.pets(),
       catalogVersion: 'm06-v1',
       bagCapacity: data.bagCapacity(),
+      busy,
       error,
     });
   }
@@ -58,6 +59,14 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
 
     const token = ++generation;
     root = panelRoot;
+    // A3-PREP-04（2026-10-03）：整备页 busy 态——异步 intent 执行期间以 busy:true 重绘
+    // （视图 paint 据 current.busy 置 root[aria-busy]），命令 settle 后回 false，异常经
+    // finally 同样复位，aria-busy 不卡 true。busy 翻转的推帧复用 lastSnapshot/lastError
+    // （不重读 readBase、不重复 reportError，避免挤占命令层的读档配额），只翻 busy 态；
+    // 数据刷新仍走 repaint。
+    let busy = false;
+    let lastError = '';
+    let lastSnapshot = current.value;
     const repaint = (error = '') => {
       if (!isCurrent(token)) return null;
       const fresh = data.readBase(data.slotId());
@@ -65,8 +74,18 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
         if (isCurrent(token)) reportError(formatError(fresh));
         return fresh;
       }
-      if (isCurrent(token)) controller?.update(makeModel(fresh.value, getPreparation(fresh.value), error));
+      if (isCurrent(token)) {
+        lastSnapshot = fresh.value;
+        lastError = error;
+        controller?.update(makeModel(fresh.value, getPreparation(fresh.value), error, busy));
+      }
       return fresh;
+    };
+    const setBusy = value => {
+      busy = value;
+      if (isCurrent(token) && lastSnapshot) {
+        controller?.update(makeModel(lastSnapshot, getPreparation(lastSnapshot), lastError, busy));
+      }
     };
 
     controller = mountView(panelRoot, {
@@ -76,52 +95,59 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
         const slot = data.slotId();
         const fresh = data.readBase(slot);
         if (!fresh.ok) { reportError(formatError(fresh)); return; }
-        const context = { slotId: slot, requestId: requestId(`prep-${type}`), expectedRevision: fresh.revision };
-        const state = getPreparation(fresh.value);
-        const preset = state.presets.find(item => item.id === payload.presetId);
-        let result;
+        // A3-PREP-04：同步卫语句过后才进 busy；setBusy 在 try 内首行——update 在 busy:true 帧
+        // 同步抛错也走 finally 复位；慢命令 await 期间视图持 busy:true，终态 repaint 后由 finally 复位。
+        try {
+          setBusy(true);
+          const context = { slotId: slot, requestId: requestId(`prep-${type}`), expectedRevision: fresh.revision };
+          const state = getPreparation(fresh.value);
+          const preset = state.presets.find(item => item.id === payload.presetId);
+          let result;
 
-        if (type === 'goal-add' || type === 'goal-remove') {
-          const tracked = type === 'goal-add' ? [...state.tracked, payload.targetId] : state.tracked.filter(id => id !== payload.targetId);
-          result = await commands.setTrackedGoals(context, { targetIds: tracked.filter(Boolean) });
-        } else if (type === 'preset-field' && preset) {
-          result = await commands.savePreset(context, { ...preset, presetId: preset.id, [payload.field]: payload.value });
-        } else if ((type === 'preset-pick-add' || type === 'preset-pick-remove') && preset) {
-          const existing = preset.picks.filter(item => item.card.cardId !== payload.cardId);
-          const picks = type === 'preset-pick-add' && payload.cardId
-            ? existing.concat({ card: { cardId: payload.cardId }, count: payload.count })
-            : existing;
-          result = await commands.savePreset(context, { ...preset, presetId: preset.id, picks });
-        } else if (type === 'preset-preview') {
-          repaint();
-          return;
-        } else if (type === 'preset-apply' && preset) {
-          const preview = previewDeployment({
-            baseSnapshot: fresh.value,
-            preset,
-            cardCatalog: data.cardCatalog(),
-            characters: data.characters(),
-            pets: data.pets(),
-            bagCapacity: data.bagCapacity(),
-          });
-          if (!preview.canStart) { repaint('库存或资格已变化，预设无法应用。'); return; }
-          const picks = {};
-          for (const item of preview.resolvedPicks.filter(item => item.status === 'ready' && item.appliedCount === item.requestedCount)) {
-            const stack = fresh.value.stash.find(entry => entry.card?.id === item.card.cardId);
-            if (stack) picks[stack.card.name] = item.appliedCount;
+          if (type === 'goal-add' || type === 'goal-remove') {
+            const tracked = type === 'goal-add' ? [...state.tracked, payload.targetId] : state.tracked.filter(id => id !== payload.targetId);
+            result = await commands.setTrackedGoals(context, { targetIds: tracked.filter(Boolean) });
+          } else if (type === 'preset-field' && preset) {
+            result = await commands.savePreset(context, { ...preset, presetId: preset.id, [payload.field]: payload.value });
+          } else if ((type === 'preset-pick-add' || type === 'preset-pick-remove') && preset) {
+            const existing = preset.picks.filter(item => item.card.cardId !== payload.cardId);
+            const picks = type === 'preset-pick-add' && payload.cardId
+              ? existing.concat({ card: { cardId: payload.cardId }, count: payload.count })
+              : existing;
+            result = await commands.savePreset(context, { ...preset, presetId: preset.id, picks });
+          } else if (type === 'preset-preview') {
+            repaint();
+            return;
+          } else if (type === 'preset-apply' && preset) {
+            const preview = previewDeployment({
+              baseSnapshot: fresh.value,
+              preset,
+              cardCatalog: data.cardCatalog(),
+              characters: data.characters(),
+              pets: data.pets(),
+              bagCapacity: data.bagCapacity(),
+            });
+            if (!preview.canStart) { repaint('库存或资格已变化，预设无法应用。'); return; }
+            const picks = {};
+            for (const item of preview.resolvedPicks.filter(item => item.status === 'ready' && item.appliedCount === item.requestedCount)) {
+              const stack = fresh.value.stash.find(entry => entry.card?.id === item.card.cardId);
+              if (stack) picks[stack.card.name] = item.appliedCount;
+            }
+            if (!isCurrent(token)) return;
+            navigation.applyPicks(picks);
+            dispose();
+            navigation.openDeparture();
+            return;
+          } else if (type === 'preset-start' && preset) {
+            result = await commands.startDeployment(context, { presetId: preset.id, mode: 'standard', expectedRunRevision: 0 });
+          } else {
+            return;
           }
-          if (!isCurrent(token)) return;
-          navigation.applyPicks(picks);
-          dispose();
-          navigation.openDeparture();
-          return;
-        } else if (type === 'preset-start' && preset) {
-          result = await commands.startDeployment(context, { presetId: preset.id, mode: 'standard', expectedRunRevision: 0 });
-        } else {
-          return;
-        }
 
-        if (isCurrent(token)) repaint(result?.ok ? '' : (result?.message || '操作失败'));
+          if (isCurrent(token)) repaint(result?.ok ? '' : (result?.message || '操作失败'));
+        } finally {
+          setBusy(false);
+        }
       },
     });
     return true;

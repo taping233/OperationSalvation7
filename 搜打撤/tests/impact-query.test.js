@@ -144,4 +144,12 @@ describe('端到端（真实仓库）', () => {
   it('REGISTRY 真源解析不抛错（格式漂移即红）', () => {
     expect(() => parseActiveRegistry(readFileSync('docs/PARALLEL-REGISTRY.md', 'utf8'))).not.toThrow();
   });
+  it('不存在路径在文本与 JSON 输出中显式可见，不静默回退', () => {
+    const missing = ['scripts/不存在文件.mjs'];
+    const report = impactQuery(missing);
+    expect(report.missingPaths).toEqual(missing);
+    expect(formatImpact(report)).toContain('路径不存在');
+    const ok = formatImpact(impactQuery(['game/src/agent/agent.state.js']));
+    expect(ok).not.toContain('路径不存在');
+  });
 });

@@ -7,10 +7,46 @@ const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { runTerminalSettlement } from '../ui/terminal-settlement.js';
 import { characterName } from '../core/characters.js';
+import { firstExploreMoves } from '../hub/extraction.commands.js';
 
 // 终局失败车队横幅（LEG-6b，2026-09-26 W1 批件）：挂「撤离失败」终局页顶部作正脸
 // 结算演出（判负撤离与倒下共用本页，均为失败语义）。素材只读引用，不改结算语义。
 const RUN_FAIL_BANNER = new URL('../../assets/scenes/ui-loop-0925/rewards-convoy-fail.webp', import.meta.url).href;
+
+// 2026-10-03 老板（SYS-11）：死亡局也产「真实回执」——字段与 extraction.commands 的
+// buildExtractionReceipt 同形（version/outcome/netTake/losses/firstExplore…），跑局记录
+// 的死亡收益读回执口径、不再从 G 现场反推。死亡口径：只有安全抢运清单（rescuedCards，
+// 即 run.death 事务提交进基地仓库的同一批）计入 netTake.cardsStashed；口袋/随身物资/币
+// 全部散失；首探经验不发（撤离经验只在撤离链发放，+5 熟练度走 terminal 链的另一本账）。
+export function buildDeathReceipt({ game, rescuedCards }) {
+  const rescuedList = (rescuedCards || []).filter(c => c && c.card);
+  const rescuedRefs = new Set(rescuedList.map(c => c.card));
+  const rescuedCount = rescuedList.reduce((n, c) => n + (c.count || 1), 0);
+  const lostCards = (game.ownedCards || []).filter(o => o && o.card && !rescuedRefs.has(o.card));
+  const pocketLost = (game.usedPocket || []).reduce((n, s) => n + (s.count || 1), 0);
+  return {
+    version: 1,
+    outcome: 'death',
+    bossKilled: !!game.bossKilled,
+    layersReached: Number.isInteger(game.layerIdx) ? game.layerIdx + 1 : null,
+    actions: Math.max(0, (Number(game.turn) || 0) - 1),
+    firstExplore: { moves: firstExploreMoves(game), xp: 0 },
+    netTake: {
+      cardsStashed: rescuedCount,   // 抢运入库张数（与 applyCards 提交清单一致）
+      pocketKept: 0,
+      wood: 0,
+      rations: 0,
+    },
+    losses: {
+      lostCount: lostCards.length,
+      lostNotable: lostCards.filter(o => o.card.rarity === '传说' || o.card.rarity === '史诗')
+        .slice(0, 6).map(o => ({ name: o.card.name, rarity: o.card.rarity, count: 1 })),
+      pocketLost,
+    },
+    runCoins: Number.isInteger(game.coins) ? game.coins : null,   // 随身币不带回，只作本局记录
+    durationSec: Math.max(0, Math.floor(Number(game.elapsed) || 0)),
+  };
+}
 
 export function createDeathSettlement({
   game, runtime, terminalCommands,
@@ -60,7 +96,10 @@ export function createDeathSettlement({
     const cards = game.ownedCards.filter(o => o.safe || (o.stored && !o.pouchOf && boxSafe)).map(o => ({ card: o.card, count: 1 }));
     const token = { kind: 'death', generation, slotId, cards, deathClass: game.myClass, saved, lost, why,
       xpBefore: sumBefore ? sumBefore.xp : null, lvBefore: sumBefore ? sumBefore.lv : null,
-      hadCards: game.ownedCards.length > 0, attempt: null, busy: false, promise: null, ephemeral: !slotId };
+      hadCards: game.ownedCards.length > 0, attempt: null, busy: false, promise: null, ephemeral: !slotId,
+      // 2026-10-03 老板（SYS-11）：死亡回执在倒下瞬间快照（结算不改写这些值），随 token 走到
+      // finish 交给 recordRun——重试/重放路径同一份事实，收益口径不再反推
+      receipt: buildDeathReceipt({ game, rescuedCards: cards }) };
     game.terminalPending = token;
     game.state = 'terminalPending';
 
@@ -77,7 +116,9 @@ export function createDeathSettlement({
       game.state = 'done';
       game.runActive = false;
       game.surrenderedRun = false;
-      SDT.Agent?.recorder?.recordRun('death', { why: token.why, savedCards: token.saved });   // 跑局统计（数据分析系统）
+      // 2026-10-03 老板（SYS-11）：死亡收益读回执口径（netTake/losses/首探随 token.receipt），
+      // savedCards 仍作 carried 既有口径；无回执调用（旧测试兜底）行为不变
+      SDT.Agent?.recorder?.recordRun('death', { why: token.why, savedCards: token.saved, receipt: token.receipt });   // 跑局统计（数据分析系统）
     SDT.Sound.sfx('extractionFail');
       SDT.Sound.music('title');
       if (token.ephemeral) {
@@ -87,7 +128,11 @@ export function createDeathSettlement({
         announceLevelUps(levels);
         try { SDT.Meta.checkUnlocks(); } catch { /* 提交已完成，成就提示不能回滚终局 */ }
       }
-      const savedN = token.saved.reduce((a, b) => a + b.count, 0);
+      // A5-DEATH-02（2026-10-03）：抢运张数与死亡回执同口径——token.cards（doDeath 抢运清单，
+      // 含珍珠盒中 stored 资源卡，每条 count:1）即 buildDeathReceipt 的 rescuedCards，页面
+      // 「抢运回基地 N 张」与回执 netTake.cardsStashed 恒等；原 token.saved 是 cardStacks(true)
+      // 的安全格堆叠口径，盒中卡入盒不入安全格，盒入安全格存卡时两式劈叉（页面 N < 回执 M）。
+      const savedN = token.cards.reduce((a, b) => a + (b.count || 1), 0);
       // W3-01（定向解冻批件）：XP 行——提交后 Meta 现读 − token.xpBefore 快照=本局获得；
       // 跨级（lvBefore→lvAfter）改播升级宣告；测试投影局（ephemeral）无绝对值只报等级变化。
       let xpRow = '';
@@ -106,13 +151,20 @@ export function createDeathSettlement({
         }
       }
       UI.log(savedN
-        ? `<b>[[icon:skull]] ${token.why}……</b>[[icon:lock]] 宠物抢运回安全格中的 <b>${savedN}</b> 张卡牌，其余全部丢失`
+        // A5-DEATH-02：savedN 为回执口径（token.cards，含珍珠盒 stored 卡），不说「安全格中」
+        ? `<b>[[icon:skull]] ${token.why}……</b>[[icon:lock]] 宠物抢运回基地的 <b>${savedN}</b> 张卡牌（含珍珠盒内的卡），其余全部丢失`
         : `<b>[[icon:skull]] ${token.why}……</b>安全格里没有卡牌，全部战利品丢失`, 'warn');
+      // 死亡页损失明细读回执（A5-DEATH-01）：关键卡逐名表达，与撤离成功页 lossRow 同口径
+      const deathLoss = token.receipt?.losses;
+      const lossRow = (deathLoss && (deathLoss.lostCount || deathLoss.pocketLost))
+        ? `<p class="ov-note doom-loss-row">[[icon:cross]] 散失：卡牌 <b>${deathLoss.lostCount || 0}</b> 张${deathLoss.lostNotable?.length ? `（含 ${deathLoss.lostNotable.map(c => `【${c.name}】`).join('、')}）` : ''} · 口袋散失 ${deathLoss.pocketLost || 0} 张</p>`
+        : '';
       UI.showOverlay('[[icon:skull]] 撤离失败', `
         <div class="doom-panel">
           <img class="battle-banner" src="${RUN_FAIL_BANNER}" alt="" draggable="false">
           <p class="doom-sub">${token.why === '你倒下了' ? '生命归零 · 远征到此为止' : '战斗中撤离 · 视为失败'}</p>
           ${token.ephemeral ? '<p class="ov-note">开发测试档未选择存档槽；基地奖励仅暂存于内存。</p>' : ''}
+          ${lossRow}
           <div class="doom-stats">
             <div class="doom-stat" style="--i:0"><span class="ds-k">损失物资</span><b class="ds-v bad">${token.lost.toLocaleString()}</b></div>
             <div class="doom-stat" style="--i:1"><span class="ds-k">抢运回基地</span><b class="ds-v good">${savedN} 张</b></div>

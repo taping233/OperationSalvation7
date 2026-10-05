@@ -64,6 +64,20 @@ import { turboMs } from '../core/turbo.js';
     const K = KINDS()[kind] || KINDS().small;
     const c = { kind, cards: [], coins: 0, isClass: !!isClass };
     const seen = panelSeen();
+    const rollPetEgg = () => {
+      const eggRate = SDT.Base.petEggDropChance();
+      let eggGranted = false;
+      if (Random.random('loot') < eggRate) {
+        const egg = (SDT.Cards.all() || []).find(x => x.id === 'pet-egg');
+        if (egg && !seen.dup(egg)) {
+          seen.add(egg); c.cards.push(egg); c.eggHit = true;
+          eggGranted = true;
+        }
+      }
+      // Failed writes keep the legacy in-memory progression; they never reroll
+      // or revoke an already determined reward.
+      SDT.Base.recordPetEggChestResult({ eggGranted });
+    };
     // 职业宝箱：只掉落本职业的职业卡牌（2026-09-06）
     if (isClass && kind !== 'boss') {
       const pool = (G && G.myClass ? SDT.Cards.classPool(G.myClass) : []).filter(x => x.rarity === '职业');
@@ -81,6 +95,7 @@ import { turboMs } from '../core/turbo.js';
         c.cards.push(pick);
       }
       if (K.coins) c.coins = rndInt(K.coins[0], K.coins[1]);
+      rollPetEgg();
       return c;
     }
     // 随机卡池（2026-09-08 定版爆率）：只开 武术/法术/装备/道具/资源 五类，
@@ -102,26 +117,19 @@ import { turboMs } from '../core/turbo.js';
       seen.add(card);
       c.cards.push(card);
     }
-    // 宠物蛋软保底集中由 Base 持有；仍只消耗原来这一枚 loot 随机数。
-    const eggRate = SDT.Base.petEggDropChance();
-    let eggGranted = false;
-    if (Random.random('loot') < eggRate) {
-      const egg = (SDT.Cards.all() || []).find(x => x.id === 'pet-egg');
-      if (egg && !seen.dup(egg)) {
-        seen.add(egg); c.cards.push(egg); c.eggHit = true;
-        eggGranted = true;
-      }
-    }
-    // Write failure retains the legacy in-memory pity step and does not reroll
-    // or revoke this chest's already determined reward.
-    SDT.Base.recordPetEggChestResult({ eggGranted });
+    // Every chest reward advances the same hard-pity counter, including class chests.
+    rollPetEgg();
     // —— 宝箱保底（2026-09-09 试玩反馈；设计者定版权重 60:28:9:3 不动）——
     // 中宝箱（3 选 1）整包全古朴的概率约 21.6%，体验很差：保底至少 1 张「稀有」+；
-    // 大宝箱 / 首脑宝箱保底至少 1 张「史诗」+。未达标就重掷最后一张（目标档内挑卡，
+    // 大宝箱 / 首脑宝箱保底至少 1 张「史诗」+。未达标就重掷最后一张非宠物蛋卡（目标档内挑卡，
     // 该档暂无可用卡则逐档上探；全部失败则保持原结果）。职业宝箱走上面独立分支，不参与。
     const riOfCard = (card) => Math.max(0, SDT.Cards.RARITIES.indexOf(card.rarity));
     const needRi = K.pickFrom ? SDT.Cards.RARITIES.indexOf('稀有')
       : (kind === 'large' || kind === 'boss') ? SDT.Cards.RARITIES.indexOf('史诗') : -1;
+    let upgradeIndex = -1;
+    for (let i = c.cards.length - 1; i >= 0; i--) {
+      if (c.cards[i].id !== 'pet-egg') { upgradeIndex = i; break; }
+    }
     if (needRi > 0 && c.cards.length && !c.cards.some(x => riOfCard(x) >= needRi)) {
       const tiers = [SDT.Cards.RARITIES[needRi], '传说', '史诗', '稀有']
         .filter(r => riOfCard({ rarity: r }) >= needRi);
@@ -133,7 +141,11 @@ import { turboMs } from '../core/turbo.js';
           if (seen.dup(cand)) { seen.ids.add(cand.id); continue; }   // 只撞卡名（不同版本）→ 记下再挑一张
           up = cand;
         }
-        if (up) { c.cards[c.cards.length - 1] = up; seen.add(up); c.pity = tier; break; }
+        if (up) {
+          if (upgradeIndex >= 0) c.cards[upgradeIndex] = up;
+          else c.cards.push(up);
+          seen.add(up); c.pity = tier; break;
+        }
       }
     }
     if (K.coins) c.coins = rndInt(K.coins[0], K.coins[1]);

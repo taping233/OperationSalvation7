@@ -1,0 +1,176 @@
+/* 2026-10-04: paper/blue-gold visual family for inbox and feedback composer.
+   Original records, controls, two-step deletion and local storage stay untouched. */
+#overlay:has(.pg.settings-page.sugin-page) { background: #0819238c; backdrop-filter: blur(10px) saturate(.8); }
+#overlay .card.page:has(.pg.settings-page.sugin-page) {
+  width: min(1360px, 96%); height: 92%; max-width: none; max-height: none;
+  padding: 0; border: 2px solid #233f4c; border-radius: 0;
+  background: #edf0e8; box-shadow: 9px 9px 0 #07131b80;
+  clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+}
+#overlay .card.page:has(.sugin-page) .ov-x { display: none; }
+#overlay .card.page .pg.settings-page.sugin-page {
+  --mail-ink: #1b3442; --mail-muted: #586c77; --mail-gold: #c0aa78;
+  position: relative; display: flex; flex-direction: column;
+  width: 100%; height: 100%; min-height: 0; margin: 0; padding: 0;
+  background: #edf0e8; color: var(--mail-ink); font-family: var(--font-ui);
+}
+#overlay .pg.settings-page.sugin-page::after { content: none; }
+#overlay .pg.settings-page.sugin-page .pg-head {
+  flex: none; min-height: 98px; margin: 0; padding: 25px 32px 22px 154px;
+  border-bottom: 2px solid var(--mail-gold); background: none; animation: none;
+}
+#overlay .pg.settings-page.sugin-page .pg-head::before,
+#overlay .pg.settings-page.sugin-page .pg-head::after,
+#overlay .pg.settings-page.sugin-page .pg-head h2::before { content: none; }
+#overlay .pg.settings-page.sugin-page .pg-head h2 {
+  margin: 0; color: var(--mail-ink); font: 700 34px/1.3 var(--font-ui);
+  letter-spacing: .1em; text-shadow: none;
+}
+#overlay .pg.settings-page.sugin-page .pg-head h2 .ic { display: none; }
+#overlay .pg.settings-page.sugin-page .sugin-exit {
+  position: absolute; top: 25px; left: 29px; width: 104px; height: 46px;
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  background: #233743; border: 0; color: #f7f3e8; box-shadow: 3px 3px 0 #9eaca6;
+  clip-path: polygon(9px 0, 100% 0, calc(100% - 9px) 100%, 0 100%);
+}
+#overlay .pg.settings-page.sugin-page .sugin-exit::after {
+  content: '返回'; display: block; position: static; inset: auto;
+  border: 0; border-radius: 0; width: auto; height: auto; font: 600 14px/1.3 var(--font-ui);
+}
+#overlay .pg.settings-page.sugin-page .sugin-exit svg { width: 21px; height: 21px; }
+#overlay .pg.settings-page.sugin-page .sugin-exit:hover { background: #33525f; color: #f7f3e8; box-shadow: 3px 3px 0 #9eaca6; transform: none; }
+#overlay .card.page .pg.settings-page.sugin-page .settings {
+  width: 100%; max-width: none; margin: 0; padding: 22px 30px 28px;
+  flex: 1; min-height: 0; overflow-y: auto; scrollbar-color: #8ea09e #e1e6df;
+}
+#overlay .pg.settings-page.sugin-page .settings > * { animation: none; }
+#overlay .pg.settings-page.sugin-page .hint {
+  margin: 0 0 24px; padding: 12px 15px; background: #dde6df;
+  border-left: 3px solid #84a6a5; color: #49616a; font: 400 13px/1.7 var(--font-ui);
+}
+#overlay .pg.settings-page.sugin-page .set-h {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  margin: 24px 0 14px; padding: 0 0 12px; border: 0; border-bottom: 1px solid #aebcb973;
+  color: var(--mail-ink); font: 700 21px/1.4 var(--font-ui); letter-spacing: .06em; text-shadow: none;
+}
+#overlay .pg.settings-page.sugin-page .set-h::before,
+#overlay .pg.settings-page.sugin-page .set-h::after { content: none; }
+#overlay .pg.settings-page.sugin-page .set-en {
+  margin: 0; padding: 5px 9px; background: #e2e5d6; border: 1px solid #b5ae8d59;
+  color: #65736f; font: 600 11px/1.2 var(--font-ui); letter-spacing: .08em;
+}
+#overlay .pg.settings-page.sugin-page .sugin-row {
+  position: relative; margin: 0 0 16px; padding: 16px 21px 17px;
+  border: 1px solid #9eafaf73; border-radius: 0; background: #f7f7ef;
+  box-shadow: 3px 3px 0 #263d4921; opacity: 1; transition: border-color .15s ease;
+}
+#overlay .pg.settings-page.sugin-page .sugin-row::before {
+  content: ''; position: absolute; top: -1px; left: -1px; right: auto;
+  width: 44px; height: 3px; background: var(--mail-gold); opacity: 1;
+}
+#overlay .pg.settings-page.sugin-page .sugin-row:hover { background: #f7f7ef; border-color: #8aabaa; box-shadow: 3px 3px 0 #263d4921; }
+#overlay .pg.settings-page.sugin-page .sugin-row.done,
+#overlay .pg.settings-page.sugin-page .sugin-row.done:hover { background: #e7eee5; opacity: 1; }
+#overlay .pg.settings-page.sugin-page .sugin-row.done::before { background: #86aaa5; opacity: 1; }
+#overlay .pg.settings-page.sugin-page .sugin-top {
+  display: grid; grid-template-columns: 22px 112px minmax(0, 1fr) 108px 86px;
+  align-items: center; gap: 12px; padding: 0 0 12px;
+  border-bottom: 1px solid #bdc9c173; font-size: 13px; color: var(--mail-muted);
+}
+#overlay .pg.settings-page.sugin-page .sugin-row.done .sugin-top { grid-template-columns: 22px 112px minmax(0, 1fr) 108px; }
+#overlay .pg.settings-page.sugin-page .sugin-mark { display: flex; align-items: center; color: #9f8657; }
+#overlay .pg.settings-page.sugin-page .sugin-mark .ic { width: 18px; height: 18px; }
+#overlay .pg.settings-page.sugin-page .sugin-row.done .sugin-mark { color: #668e89; }
+#overlay .pg.settings-page.sugin-page .sugin-time { color: #5e737b; font: 500 13px/1.4 Consolas, monospace; letter-spacing: 0; white-space: nowrap; }
+#overlay .pg.settings-page.sugin-page .sugin-page-name { color: #345566; font: 650 14px/1.4 var(--font-ui); letter-spacing: .04em; overflow-wrap: anywhere; }
+#overlay .pg.settings-page.sugin-page .mini-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: auto; min-width: 0; min-height: 33px; margin: 0; padding: 6px 12px;
+  border: 0; border-radius: 0; background: #233743; color: #f7f3e8;
+  font: 600 12px/1.4 var(--font-ui); letter-spacing: .04em; box-shadow: 2px 2px 0 #9eaca6;
+  clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+}
+#overlay .pg.settings-page.sugin-page .mini-btn:hover { background: #33525f; border: 0; color: #fff6e4; box-shadow: 2px 2px 0 #9eaca6; transform: none; }
+#overlay .pg.settings-page.sugin-page .sugin-del { margin: 0; background: #e7dcd4; color: #845247; box-shadow: 2px 2px 0 #bb9d8e66; }
+#overlay .pg.settings-page.sugin-page .sugin-del:hover { background: #d8bfb0; color: #653e35; box-shadow: 2px 2px 0 #bb9d8e66; }
+#overlay .pg.settings-page.sugin-page .sugin-del.arm,
+#overlay .pg.settings-page.sugin-page .sugin-del.arm:hover { background: #a35040; color: #fff; }
+#overlay .pg.settings-page.sugin-page .sugin-text {
+  margin: 13px 0 0; color: #1b3442; font: 500 17px/1.8 var(--font-ui);
+  white-space: pre-wrap; word-break: normal; overflow-wrap: anywhere;
+}
+#overlay .pg.settings-page.sugin-page .sugin-where {
+  display: inline-block; max-width: 100%; margin: 11px 18px 0 0;
+  color: #64787e; font: 400 12px/1.6 var(--font-ui); word-break: normal; overflow-wrap: anywhere;
+}
+#overlay .pg.settings-page.sugin-page .sugin-detail {
+  margin: 13px 0 0; padding: 10px 13px; background: #e9eee5;
+  border-left: 2px solid #bea678; border-radius: 0; color: #34505c;
+  font: 400 14px/1.7 var(--font-ui); white-space: pre-wrap; overflow-wrap: anywhere;
+}
+#overlay .pg.settings-page.sugin-page .sugin-detail b { display: block; margin-bottom: 5px; color: #7d6c46; font: 600 12px/1.5 var(--font-ui); letter-spacing: .04em; }
+#overlay .pg.settings-page.sugin-page .ov-empty { margin: 18px 0; color: #586c77; font: 400 15px/1.7 var(--font-ui); }
+#overlay .pg.settings-page.sugin-page .ov-empty.danger { color: #984d40; }
+#overlay .pg.settings-page.sugin-page .sugin-empty {
+  display: flex; gap: 28px; align-items: center; margin: 24px auto; padding: 30px;
+  max-width: 760px; border: 1px solid #9eafaf73; border-radius: 0; background: #f7f7ef;
+  box-shadow: 3px 3px 0 #263d4921;
+}
+#overlay .pg.settings-page.sugin-page .sugin-empty .se-art { width: 145px; border: 0; border-radius: 0; box-shadow: none; filter: none; }
+#overlay .pg.settings-page.sugin-page .sugin-empty .se-text { gap: 10px; }
+#overlay .pg.settings-page.sugin-page .sugin-empty .se-text b { color: #1b3442; font-size: 23px; letter-spacing: .04em; text-shadow: none; }
+#overlay .pg.settings-page.sugin-page .sugin-empty .se-text span { color: #586c77; font-size: 14px; line-height: 1.8; }
+#overlay .pg.settings-page.sugin-page .sugin-empty .se-text span b { color: #927747; font-size: 14px; letter-spacing: 0; }
+#overlay .pg.settings-page.sugin-page button:focus-visible { outline: 2px solid #769c9c; outline-offset: 3px; box-shadow: none; }
+#overlay .pg.settings-page.sugin-page .settings::-webkit-scrollbar { width: 7px; }
+#overlay .pg.settings-page.sugin-page .settings::-webkit-scrollbar-track { background: #e1e6df; }
+#overlay .pg.settings-page.sugin-page .settings::-webkit-scrollbar-thumb { background: #8ea09e; border-radius: 0; }
+
+/* Matching paper sheet for composing a message; only appearance changes. */
+#sugLayer { background: #081923a3; backdrop-filter: blur(10px) saturate(.8); }
+#sugLayer .sug-panel {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px 18px;
+  grid-template-areas: 'head head' 'where where' 'tip tip' 'mainlabel mainlabel' 'main main' 'stepslabel stepslabel' 'steps steps' 'expectedlabel actuallabel' 'expected actual' 'actions actions';
+  width: min(760px, 90vw); max-height: 88vh; padding: 29px 32px 26px; overflow-y: auto;
+  border: 2px solid #233f4c; border-radius: 0; background: #edf0e8;
+  box-shadow: 8px 8px 0 #07131b80; color: #1b3442; font-family: var(--font-ui);
+  scrollbar-color: #8ea09e #e1e6df;
+}
+#sugLayer .sug-panel .sug-head { grid-area: head; margin: 0 0 9px; padding-bottom: 15px; border-bottom: 2px solid #c0aa78; color: #1b3442; font: 700 28px/1.35 var(--font-ui); letter-spacing: .06em; }
+#sugLayer .sug-panel .sug-where { grid-area: where; margin: 0; padding: 8px 12px; border-left: 3px solid #84a6a5; border-radius: 0; background: #dde6df; color: #49616a; font-size: 13px; }
+#sugLayer .sug-panel .sug-tip { grid-area: tip; margin: 3px 0 9px; color: #586c77; font: 400 12px/1.7 var(--font-ui); }
+#sugLayer .sug-panel .sug-label { margin: 4px 0 0; color: #34505c; font: 600 13px/1.5 var(--font-ui); }
+#sugLayer .sug-panel label[for='sugText'] { grid-area: mainlabel; }
+#sugLayer .sug-panel label[for='sugSteps'] { grid-area: stepslabel; }
+#sugLayer .sug-panel label[for='sugExpected'] { grid-area: expectedlabel; }
+#sugLayer .sug-panel label[for='sugActual'] { grid-area: actuallabel; }
+#sugLayer .sug-panel #sugText { grid-area: main; }
+#sugLayer .sug-panel #sugSteps { grid-area: steps; }
+#sugLayer .sug-panel #sugExpected { grid-area: expected; }
+#sugLayer .sug-panel #sugActual { grid-area: actual; }
+#sugLayer .sug-panel .sug-textarea {
+  width: 100%; min-width: 0; height: 112px; min-height: 112px; margin: 0; padding: 11px 13px;
+  background: #f7f7ef; border: 1px solid #9eafaf; border-radius: 0;
+  color: #1b3442; font: 400 15px/1.7 var(--font-ui); resize: vertical;
+}
+#sugLayer .sug-panel .sug-textarea.sug-small { height: 64px; min-height: 64px; }
+#sugLayer .sug-panel .sug-textarea::placeholder { color: #7c9097; }
+#sugLayer .sug-panel .sug-textarea:focus { border-color: #789c9b; outline: 2px solid #789c9b55; outline-offset: 1px; }
+#sugLayer .sug-panel .sug-btns { grid-area: actions; gap: 13px; margin-top: 13px; }
+#sugLayer .sug-panel .sug-btns .en { display: none; }
+#sugLayer .sug-panel .ov-btn {
+  min-height: 39px; padding: 8px 22px; border: 0; border-radius: 0;
+  background: #233743; color: #f7f3e8; font: 600 14px/1.5 var(--font-ui);
+  box-shadow: 3px 3px 0 #9eaca6; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+}
+#sugLayer .sug-panel .ov-btn.ok { background: #c2a470; color: #203743; }
+#sugLayer .sug-panel .ov-btn:hover { background: #33525f; color: #fff6e4; }
+#sugLayer .sug-panel .ov-btn.ok:hover { background: #d2b580; color: #203743; }
+#sugLayer .sug-panel .ov-btn:disabled { opacity: .5; cursor: wait; }
+#sugLayer .sug-panel .ov-btn:focus-visible { outline: 2px solid #769c9c; outline-offset: 3px; }
+@media (max-width: 760px) {
+  #overlay .pg.settings-page.sugin-page .sugin-top { grid-template-columns: 18px 1fr auto; gap: 8px; }
+  #overlay .pg.settings-page.sugin-page .sugin-page-name { grid-column: 2 / 4; }
+  #overlay .pg.settings-page.sugin-page .sugin-top .mini-btn { width: auto; }
+  #sugLayer .sug-panel { grid-template-columns: 1fr; grid-template-areas: 'head' 'where' 'tip' 'mainlabel' 'main' 'stepslabel' 'steps' 'expectedlabel' 'expected' 'actuallabel' 'actual' 'actions'; }
+}

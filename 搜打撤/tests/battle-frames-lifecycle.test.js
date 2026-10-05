@@ -73,6 +73,46 @@ describe('battle frame lifecycle', () => {
     document.querySelector('#btSelf img').setAttribute('src', '/assets/portraits/battle/changwuyu.webp');
   });
 
+  it.each([
+    ['wu', ['idle', 'idle-1', 'atk-wind', 'atk-wind-1', 'atk-wind-2', 'atk-hit', 'atk-hit-1', 'hurt', 'hurt-1', 'cast', 'cast-1', 'idle-breathe']],
+    ['changwuyu', ['idle', 'idle-1', 'atk-wind', 'atk-wind-1', 'atk-hit', 'atk-hit-1', 'hurt', 'hurt-1', 'cast', 'cast-1', 'cast-2', 'idle-breathe']],
+    ['baita', ['idle', 'idle-1', 'atk-wind', 'atk-wind-1', 'atk-hit', 'atk-hit-1', 'hurt', 'hurt-1', 'cast', 'cast-1', 'cast-2', 'cast-3', 'cast-4', 'cast-5', 'idle-breathe']],
+  ])('requests only the delivered %s frame URLs, in declared loading order', async (role, names) => {
+    hide();
+    const img = document.querySelector('#btSelf img');
+    img.setAttribute('data-asset-key', `battle-${role}`);
+    img.setAttribute('src', '/assets/new-version/portrait.webp');
+    await attach(document.getElementById('ovBody'));
+    expect(pixi.loaded.map(url => new URL(url, 'http://localhost').pathname.split('/').at(-1))).toEqual(names.map(name => `${name}.webp`));
+    expect(pixi.loaded.every(url => url.includes(`/frames/${role}/`))).toBe(true);
+    expect(pixi.sprites.at(-1).texture).toBe(pixi.idleTexture);
+    hide();
+  });
+
+  it('keeps characters without delivered frames visible, even with an old supported URL', async () => {
+    hide();
+    const img = document.querySelector('#btSelf img');
+    img.setAttribute('data-asset-key', 'battle-heixiang');
+    await attach(document.getElementById('ovBody'));
+    expect(img.style.visibility).toBe('');
+    expect(pixi.loaded).toEqual([]);
+  });
+
+  it('restores the portrait when a pending attach loses its battle DOM', async () => {
+    hide();
+    const body = document.getElementById('ovBody');
+    const img = body.querySelector('#btSelf img');
+    pixi.loadGate = new Promise(resolve => { pixi.finishLoad = resolve; });
+    const pending = attach(body);
+    await vi.waitFor(() => expect(pixi.inFlight).toBe(3));
+    body.replaceWith(document.createElement('div'));
+    pixi.finishLoad();
+    pixi.loadGate = null;
+    await pending;
+    expect(img.style.visibility).toBe('');
+    hide();
+  });
+
   it('rejects a late resource callback after hide or overlay replacement', () => {
     const body = document.getElementById('ovBody');
     const fig = body.querySelector('.sts-figure');

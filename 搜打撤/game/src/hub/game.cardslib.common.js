@@ -13,6 +13,10 @@ export function configureCardPageClosers({ closeLibrary, closeDesigner } = {}) {
   closeDesignerPage = closeDesigner || null;
 }
 export function configurePendingCardPageEntry(cancel) { cancelPendingPageEntry = cancel || null; }
+// 关页方（页面模块）同步中止门面 entry 机件的派发口：page-loading 尾巴（帧闸+180ms 淡出）
+// 不随页面 close 结算，尾窗内重开会吃 pageEntryPromise 早退（10-05 打包门实测修）。
+// 放本层避免 page→facade 静态回边（facade 已动态加载 page，回引即循环依赖，contracts 契约红）。
+export function cancelPendingCardPageEntry() { return cancelPendingPageEntry?.() ?? false; }
 export function closeCardPageTop() {
   if (cancelPendingPageEntry?.()) return;
   if (document.getElementById('cdesStage')) closeDesignerPage?.();

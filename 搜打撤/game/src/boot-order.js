@@ -13,7 +13,7 @@ const BOOT_ORDER = [
   'core/camera', 'core/motion', 'core/input',
   'core/event-bus', 'core/notes', 'cards/cards', 'battle/core/combat', 'hub/base', 'hub/meta',
   'core/render-scheduler', 'core/renderer.fx',
-  'core/renderer', 'ui/ui', 'ui/term-tips', 'core/shared', 'battle/battle-loader', 'run/chests',   // term-tips=词条讲解浮框（09-20 上线时漏登记，2026-09-22 补）
+  'core/renderer', 'ui/ui', 'ui/term-tips', 'ui/character-idle', 'core/shared', 'battle/battle-loader', 'run/chests',   // term-tips=词条讲解浮框（09-20 上线时漏登记，2026-09-22 补）；character-idle=选人页待机演出（自挂载监听 sdt-overlay-mode）
   'hub/game.storage', 'hub/game.store', 'run/game.session', 'run/game.nest', 'run/game.run',
   'hub/game.hub', 'hub/game.bag',
   'hub/game.notes', 'hub/game.cardslib', 'game.boot',

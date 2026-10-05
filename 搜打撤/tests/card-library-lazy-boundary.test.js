@@ -24,6 +24,8 @@ describe('照相馆按需页面边界', () => {
     expect(facade).toContain('CARD_DESIGNER_WRITES_ENABLED');
     expect(page).toContain("from './game.cardslib.designer.js'");
     expect(page).toContain("from './game.cardslib.photo-fps.js'");
+    expect(facade).toContain("from '../ui/page-loading.js'");
+    expect(page).not.toContain("from '../ui/page-loading.js'");
     expect(page).toContain('configureCardPageClosers({ closeLibrary: closeLibPage, closeDesigner });');
   });
 
@@ -31,8 +33,11 @@ describe('照相馆按需页面边界', () => {
     const facade = source('game/src/hub/game.cardslib.js');
     const quickNav = source('game/src/ui/quick-nav.js');
     expect(facade).toContain('const request = ++pageRequest');
-    expect(facade).toContain('if (request !== pageRequest) return;');
-    expect(facade).toContain('originOverlayHTML: overlay?.innerHTML');
+    expect(facade).toContain('if (request !== pageRequest || pending !== entry ||');
+    expect(facade).toContain('entry.controller.abort();');
+    expect(facade).toContain('if (pageEntryPromise) return pageEntryPromise;');
+    expect(facade).toContain('originOverlayHidden: overlay?.hidden,');
+    expect(facade).toContain('originRoot: originBody?.firstElementChild,');
     expect(facade).toContain('pendingPageEntry?.wasCardPageOpen ?? cardPageOpen');
     expect(facade).toContain('pageRequest += 1;');
     expect(facade).toContain('pageModulePromise = null;');
@@ -64,11 +69,18 @@ describe('照相馆按需页面边界', () => {
       await harness.pageGate;
       return { openCardLibrary: harness.openLibrary, openCardDesigner: vi.fn() };
     });
+    vi.doMock('../game/src/ui/page-loading.js', () => ({
+      runPageLoading({ open, signal }) {
+        const aborted = new Promise(resolve => signal.addEventListener('abort', () => resolve(false), { once: true }));
+        return Promise.race([Promise.resolve().then(open), aborted]);
+      },
+    }));
 
     try {
       const facade = await import('../game/src/hub/game.cardslib.js');
       const firstOpening = facade.openCardLibrary();
       const opening = facade.openCardLibrary();
+      expect(opening).toBe(firstOpening);
       expect(facade.cardPageLoading).toBe(true);
       expect(harness.isOpen).toBe(true);
       facade.closeCardPageTop();
@@ -83,6 +95,7 @@ describe('照相馆按需页面边界', () => {
       vi.doUnmock('../game/src/run/game.session.js');
       vi.doUnmock('../game/src/hub/game.cardslib.common.js');
       vi.doUnmock('../game/src/hub/game.cardslib.page.js');
+      vi.doUnmock('../game/src/ui/page-loading.js');
       vi.resetModules();
     }
   });

@@ -1,3 +1,5 @@
+@import url('./map-cover.css');
+
 /* 战术远征图：底图保留冬境氛围，路线与几何结点负责可读性。 */
 #game { background:#07131d; }
 /* 09-25 二波 C 组：接中心批二底图 expedition-map-bg.webp——叠深青压暗层保证
@@ -81,3 +83,15 @@ body:has(#overlay:not([hidden]) .card.chest) #routePanel .route-option .route-ar
   box-shadow: inset 3px 0 0 #d9bb82, 0 2px 12px rgba(217, 187, 130, .12);
 }
 #routePanel .route-option[data-door="1"] .route-arrow { color: #d9bb82; }
+
+/* 路线标题、选项和说明共同占用底栏预算，按钮不可被 flex 压成薄条。 */
+#sidebar { height:200px; min-height:200px; }
+#sidebar #routePanel { min-height:0; justify-content:center; }
+#sidebar #routePanel .route-heading,
+#sidebar #routePanel .route-options,
+#sidebar #routePanel .route-help { flex-shrink:0; }
+body:not(.scene-battle-3d) #bagBtnFloat { bottom:calc(200px + 12px) !important; }
+@media (max-width:850px) {
+  #sidebar { height:240px; min-height:240px; grid-template-rows:59px minmax(0,1fr); }
+  body:not(.scene-battle-3d) #bagBtnFloat { bottom:calc(240px + 12px) !important; }
+}

@@ -12,20 +12,40 @@ import { Random } from '../../core/random.js';
 // 常驻节点上走合成器，本模块只负责「立绘内容」的帧切换——每 tick 读 figure 的
 // getBoundingClientRect（含 transform）跟随，抖动/沉浮时序列帧内容跟着 DOM 一起动。
 // 帧资产：assets/portraits/frames/<角色>/<动作>.webp（基准帧）+ <动作>-1..N.webp
-// （GPT 追加帧；idle 另有 idle-breathe）。加载时按候选名探测，实际存在几帧播几帧，
+// （GPT 追加帧；idle 另有 idle-breathe）。按显式动作清单加载，实际成功几帧播几帧，
 // SEQ_MS[动作] 总时长均分到各帧——帧数变化不用改代码。
 // 角色无帧集 / 纹理未就绪 / 加载失败：不隐藏原 img，静态立绘兜底。
 // 省电策略（三铁律：不出画面不渲染）：静止期 renderer 停止，低频轮询 rect；rect 变化或
 // 切帧才拉起渲染。document.hidden 时整体暂停。
 // 帧缺失容错：动作里某帧加载失败就跳过该帧；整个动作没帧则该动作不播（不罢工）。
 
-const HAS_FRAMES = new Set(['changwuyu', 'baita', 'wu']);
+// 保留重复字节的帧槽与原有顺序；清单只避免请求未交付文件，不改变动作节奏。
+const FRAME_SEQUENCES = {
+  wu: {
+    idle: ['idle', 'idle-1', 'idle-breathe'],
+    'atk-wind': ['atk-wind', 'atk-wind-1', 'atk-wind-2'],
+    'atk-hit': ['atk-hit', 'atk-hit-1'],
+    hurt: ['hurt', 'hurt-1'], cast: ['cast', 'cast-1'],
+  },
+  changwuyu: {
+    idle: ['idle', 'idle-1', 'idle-breathe'],
+    'atk-wind': ['atk-wind', 'atk-wind-1'],
+    'atk-hit': ['atk-hit', 'atk-hit-1'],
+    hurt: ['hurt', 'hurt-1'], cast: ['cast', 'cast-1', 'cast-2'],
+  },
+  baita: {
+    idle: ['idle', 'idle-1', 'idle-breathe'],
+    'atk-wind': ['atk-wind', 'atk-wind-1'],
+    'atk-hit': ['atk-hit', 'atk-hit-1'],
+    hurt: ['hurt', 'hurt-1'], cast: ['cast', 'cast-1', 'cast-2', 'cast-3', 'cast-4', 'cast-5'],
+  },
+};
+const HAS_FRAMES = new Set(Object.keys(FRAME_SEQUENCES));
 const FRAME_H = 760, FRAME_W = 512;        // 烘焙画布尺寸
 const GEO_TUNE = 1.02;                     // 人物等高对齐静态立绘的视觉微调（沿用旧画布口径）
 // 帧节奏：每动作总时长（ms），均分到实际存在的帧上——攻击快、施法舒展、呼吸慢循环
 const SEQ_MS = { idle: 2900, 'atk-wind': 320, 'atk-hit': 280, hurt: 420, cast: 800 };
 const ACTIONS = Object.keys(SEQ_MS);
-const MAX_PROBE = 5;                       // 追加帧探测上限：<动作>-1 .. <动作>-5
 const LOAD_BATCH = 3;                      // 限制同时解码的纹理数，仍按候选顺序登记帧
 const POLL_MS = 200;                       // 静止期 rect 轮询间隔
 // 播放语义：atk = 起手连命中；cast / hurt 单段；idle 常驻循环
@@ -88,12 +108,11 @@ async function evictOtherTextureSets(keepRole, Assets, Texture) {
   await Promise.all(evictions);
 }
 
-// 探测某角色实际存在的帧：基准帧 <动作>.webp + 追加帧 <动作>-1..N.webp（idle 尾部含呼吸帧）
-function candidateNames() {
+// 保留原装载优先级：动作依 ACTIONS 排列，idle-breathe 最后加载。
+function candidateNames(role) {
   const names = [];
   for (const a of ACTIONS) {
-    names.push(a);
-    for (let i = 1; i <= MAX_PROBE; i++) names.push(`${a}-${i}`);
+    names.push(...FRAME_SEQUENCES[role][a].filter(name => name !== 'idle-breathe'));
   }
   names.push('idle-breathe');
   return names;
@@ -226,7 +245,7 @@ function loadSet(role) {
         return { name, url, tex, box: await boxP };
       } catch { return null; } // 探测：没这帧就跳过
     };
-    const candidates = candidateNames();
+    const candidates = candidateNames(role);
     for (let i = 0; i < candidates.length; i += LOAD_BATCH) {
       const batch = await Promise.all(candidates.slice(i, i + LOAD_BATCH).map(loadCandidate));
       for (const entry of batch) {
@@ -239,8 +258,7 @@ function loadSet(role) {
     // 每动作的实际帧序列 = 候选名里加载成功的按序集合
     const seqs = new Map();
     for (const a of ACTIONS) {
-      const frames = [a, ...Array.from({ length: MAX_PROBE }, (_, i) => `${a}-${i + 1}`)]
-        .filter(n => set.has(n)).concat(a === 'idle' && set.has('idle-breathe') ? ['idle-breathe'] : []);
+      const frames = FRAME_SEQUENCES[role][a].filter(n => set.has(n));
       if (frames.length) seqs.set(a, frames);
     }
     if (!seqs.get('idle')) {
@@ -424,8 +442,9 @@ async function attach(body) {
   const fig = body && body.querySelector('#btSelf .sts-figure');
   const img = fig && fig.querySelector('img');
   if (!fig || !img) { hide(); return; }
+  const key = /^battle-([a-z]+)$/.exec(String(img.getAttribute('data-asset-key') || ''));
   const m = /portraits\/battle\/([a-z]+?)\.webp/.exec(String(img.getAttribute('src') || ''));
-  const role = m && m[1];
+  const role = key ? key[1] : m && m[1];
   if (!role || !HAS_FRAMES.has(role)) { hide(); return; }
   // 确认有帧集后立刻藏静态 img：纹理异步装载期间静态立绘会露一脸、就绪后跳切序列帧
   // （老板 09-20 实机反馈首次进场「闪一下」）。visibility 只藏内容不塌布局，

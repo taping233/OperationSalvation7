@@ -3,13 +3,20 @@
  *
  * 终局挂点（各一行，经 SDT 全局晚绑定，零 import 边）：
  *   死亡结算完成   game.session.death.js   → recordRun('death', { why, savedCards })
- *   撤离整理完成   game.run.altar.js       → recordRun('clear'|'extract', { carriedCards })
+ *   撤离整理完成   game.run.altar.js       → recordRun('clear'|'extract', { receipt, carriedCards })
+ *                                    （2026-10-03 SYS-02：结局/层/行动/净带回随撤离回执读，不再反推）
  *   放弃对局       ui/game.menu.js         → recordRun('abandon')
  *   战斗收尾       battle.lifecycle.js     → noteBattle(win)（注意：不可订阅 battle:end
  *                                            总线事件——served>0 会吞掉 onBattleEnd 回退）
  *
  * 存储：localStorage 'sdt-run-records' 环形缓冲 200 局；导出 JSON/CSV 字符串由
  * 数据页/批跑落盘。字段口径与 agent.stats 聚合一一对应。
+ *
+ * 2026-10-03 老板（SYS-11）新增两路随局事实，均「只加记录不改行为」：
+ *   干预履历   各调试入口 → noteIntervention(source, action, detail?)
+ *              （开发者控制台/调试命令/场景注入；recordRun 时随 entry.provenance 留痕）
+ *   停止原因   agent.runner 收口 → noteStopReason({ code, phase, turn, waitingAction, steps })
+ *              （entry.stopReason；classifyStop 纯函数给出 completed/stalled/aborted/error）
  * ============================================================ */
 
 import { Random } from '../core/random.js';
@@ -18,13 +25,72 @@ const KEY = 'sdt-run-records';
 const CAP = 200;
 
 let driverTag = 'human';
+// 2026-10-03 老板（SYS-11）：本局「粘滞」自动驱动标签——结算确认（recordRun）晚于
+// autoRun 收口还原 human，纯 driverTag 会把 agent 局记成 human（研究证据：辅助局标
+// human）。非 human 驱动一经设置粘到本局记录落盘，resetRunCounters 才清。
+let runDriver = null;
+// 2026-10-03 老板（SYS-11）：干预履历（开发者控制台/调试命令/场景注入）——只记录
+// 不改行为，recordRun 时随 provenance 留痕后随局清零。
+let interventions = [];
+// 2026-10-03 老板（SYS-11）：结构化停止原因（runner 收口时写入，recordRun 随局落盘）
+let stopInfo = null;
 const battles = { fought: 0, won: 0 };
 // 本局战斗流水（09-26 死因解剖）：死亡 50 局全是战斗中倒下，但 runs.jsonl 只有
 // 胜负计数——看不到"最后一战打的谁、几回合、还剩多少血"。环形存末 40 场进记录
 const battleLog = [];
 
-function setDriver(name) { driverTag = name || 'human'; return driverTag; }
+function setDriver(name) {
+  driverTag = name || 'human';
+  if (driverTag !== 'human') runDriver = driverTag;   // SYS-11：粘滞本局，还原 human 不清
+  return driverTag;
+}
 function getDriver() { return driverTag; }
+
+// —— SYS-11 干预履历：来源固定三入口（开发者控制台 / 调试命令 / 场景注入），调用点只
+// 加一行记录、不改任何行为；at 快照当时的回合与层，便于回答「被干预过什么、在何时」。
+function noteIntervention(source, action, detail) {
+  const G = window.SDT?.game || {};
+  const item = {
+    ts: Date.now(),
+    source: String(source || 'dev-console'),
+    action: String(action || ''),
+    at: {
+      turn: G.turn ?? null,
+      layer: Number.isInteger(G.layerIdx) ? G.layerIdx + 1 : null,
+    },
+  };
+  if (detail != null && !(typeof detail === 'object' && !Object.keys(detail).length)) item.detail = detail;
+  interventions.push(item);
+  return item;
+}
+
+// —— SYS-11 停止原因分类（纯函数）：completed=正常完成（终局结算/对局收尾/外部判定），
+// stalled=卡死疑似（各类熔断与超时），aborted=中止（手动停止/驱动方主动停/重入拒绝），
+// error=错误（单步异常风暴）。
+const STOP_KINDS = {
+  'terminal-pending': 'completed', 'run-end': 'completed', 'until': 'completed',
+  'decide-null': 'aborted', 'cancelled': 'aborted', 'already-running': 'aborted',
+  'max-steps': 'stalled', 'spin': 'stalled', 'stay': 'stalled', 'battle-stall': 'stalled',
+  'no-progress': 'stalled', 'fail-spin': 'stalled', 'alt2-cycle': 'stalled',
+  'wait-limit': 'stalled', 'command-timeout': 'stalled', 'context-changed': 'stalled',
+  'run-timeout': 'stalled',
+  'step-errors': 'error', 'step-exception': 'error',
+};
+function classifyStop(code) { return STOP_KINDS[code] || 'unknown'; }
+
+// runner 收口调用：info 为结构化对象 { code, phase, turn, waitingAction, steps } 或纯码字符串。
+// 只留非空字段，旧调用（纯字符串）也能得到 { code, kind } 最小结构。
+function noteStopReason(info) {
+  const code = typeof info === 'string' ? info : String(info?.code || '');
+  if (!code) { stopInfo = null; return null; }
+  stopInfo = { code, kind: (typeof info === 'object' && info.kind) || classifyStop(code) };
+  if (typeof info === 'object') {
+    for (const key of ['phase', 'turn', 'waitingAction', 'steps']) {
+      if (info[key] != null) stopInfo[key] = info[key];
+    }
+  }
+  return stopInfo;
+}
 
 function noteBattle(win, ctx = {}) {
   battles.fought += 1;
@@ -103,6 +169,9 @@ function resetRunCounters() {
   battles.won = 0;
   battleLog.length = 0;
   bt = null;
+  runDriver = null;        // SYS-11：驱动粘滞/干预履历/停止原因随局清零，不污染下一局
+  interventions = [];
+  stopInfo = null;
 }
 
 function cardValue(card) {
@@ -124,9 +193,13 @@ function clearRuns() {
   try { localStorage.removeItem(KEY); } catch { /* 同上 */ }
 }
 
-// 记录一局终局。detail: { why?, savedCards?, carriedCards? }——卡牌数组元素为 { card, count }
+// 记录一局终局。detail: { why?, savedCards?, carriedCards?, receipt? }——卡牌数组元素为 { card, count }。
+// 2026-10-03 老板（SYS-02）：detail.receipt（撤离结算回执）存在时，结局/层/行动/币/时长/
+// 首探经验/净带回/关键损失一律以回执为准（与旧「从 G 现场/ownedCards 反推」口径冲突时回执赢），
+// 原始回执整体随 entry.receipt 留档供 Agent 导出对账；无回执的结局（death/abandon/nest）保持原口径。
 function recordRun(outcome, detail = {}) {
   const G = window.SDT?.game || {};
+  const receipt = detail.receipt && typeof detail.receipt === 'object' ? detail.receipt : null;
   const cards = detail.carriedCards || detail.savedCards || [];
   const carried = cards
     .filter(e => e && e.card)
@@ -141,24 +214,42 @@ function recordRun(outcome, detail = {}) {
     id: `run-${Date.now().toString(36)}-${Random.random('gameplay').toString(36).slice(2, 7)}`,
     ts: Date.now(),
     driver: driverTag,
-    outcome,                                   // clear | extract | death | abandon
+    // 2026-10-03 老板（SYS-11）：本局真实来源——driver 三态（human|agent|mixed）+ 干预履历
+    // 逐条留痕（谁驱动、被干预过什么）。有干预即 mixed（控制台/调试命令改变了局面推进）；
+    // 无干预时按粘滞 runDriver 判 agent（结算确认晚于 autoRun 还原，driverTag 不可信）。
+    // 顶层 driver 字段是既有口径（记录时点标签），消费方不动。
+    provenance: {
+      driver: interventions.length ? 'mixed' : (runDriver ? 'agent' : 'human'),
+      agentDriver: runDriver,
+      interventions: interventions.slice(),
+    },
+    // 2026-10-03 老板（SYS-11）：结构化停止原因（为何停：completed/stalled/aborted/error
+    // + code + 卡死疑似点 phase/等待动作）。无自动驱动或未收口即记录时为 null，旧记录无此字段。
+    stopReason: stopInfo,
+    outcome: receipt?.outcome || outcome,             // clear | extract | death | abandon（有回执以回执为准）
     why: detail.why || '',
     seed: G.mapSeed ?? null,
     mode: G.nestActive ? 'nest' : (G.mode || 'standard'),
     class: G.myClass || null,
     characterId: G.characterId || null,
-    maxLayer: G.layerIdx != null ? G.layerIdx + 1 : null,
+    maxLayer: receipt ? (receipt.layersReached ?? null) : (G.layerIdx != null ? G.layerIdx + 1 : null),
     // 死因分桶定位键（09-26 方法论补强）：层×节点 → 配合 deathByLayer 定位高发死亡点
     node: G.trackPos ?? null,
-    turns: G.turn ?? null,
-    coins: G.coins ?? null,
+    turns: receipt ? (receipt.actions ?? null) : (G.turn ?? null),
+    coins: receipt ? (receipt.runCoins ?? null) : (G.coins ?? null),
     hpLeft: G.hp ?? null,
-    durationSec: Math.floor(G.elapsed || 0),
+    durationSec: receipt ? Math.max(0, Math.floor(Number(receipt.durationSec) || 0)) : Math.floor(G.elapsed || 0),
+    bossKilled: receipt ? !!receipt.bossKilled : (G.bossKilled != null ? !!G.bossKilled : null),
+    firstExploreXp: receipt?.firstExplore?.xp ?? null,      // SYS-01 口径：首探经验（回执唯一真源）
+    firstExploreMoves: receipt?.firstExplore?.moves ?? null,
+    netTake: receipt?.netTake || null,                     // 本局真实入库（卡/口袋/木材/口粮）
+    losses: receipt?.losses || null,                       // 散失（未入库卡/口袋散失/notable）
     battles: { ...battles },
     // 末 10 场战斗流水（对照组分析需要撤离局的同款数据，故所有结局都带）
     lastBattles: battleLog.slice(-10).map(b => ({ ...b, li: b.li != null ? b.li + 1 : null })),
     carried,
     carriedValue: carried.reduce((sum, c) => sum + c.value * c.count, 0),
+    receipt,   // 原始回执整体留档（SYS-02：三方对账的锚点）
   };
   const runs = listRuns();
   runs.push(entry);
@@ -173,8 +264,12 @@ function exportJSON() {
 
 function exportCSV() {
   const runs = listRuns();
+  // 2026-10-03 老板（SYS-02）：列在原表尾追加（既有列序与消费方不动），回执派生字段供对账
   const head = ['id', 'ts', 'driver', 'outcome', 'why', 'seed', 'mode', 'class', 'characterId',
-    'maxLayer', 'turns', 'coins', 'hpLeft', 'durationSec', 'battlesFought', 'battlesWon', 'carriedValue', 'carriedNames'];
+    'maxLayer', 'turns', 'coins', 'hpLeft', 'durationSec', 'battlesFought', 'battlesWon', 'carriedValue', 'carriedNames',
+    'bossKilled', 'firstExploreXp', 'stashedCards', 'pocketKept', 'pocketLost', 'wood', 'rations', 'lostCount',
+    // 2026-10-03 老板（SYS-11）：来源/干预/停止三列随表尾追加，旧记录留空可对账
+    'provenanceDriver', 'interventions', 'stopReason'];
   const cell = (v) => {
     const s = v == null ? '' : String(v);
     return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
@@ -183,8 +278,12 @@ function exportCSV() {
     r.id, new Date(r.ts).toISOString(), r.driver, r.outcome, r.why, r.seed, r.mode, r.class, r.characterId,
     r.maxLayer, r.turns, r.coins, r.hpLeft, r.durationSec, r.battles?.fought ?? 0, r.battles?.won ?? 0,
     r.carriedValue, (r.carried || []).map(c => `${c.name}x${c.count}`).join(' '),
+    r.bossKilled != null ? (r.bossKilled ? 1 : 0) : '', r.firstExploreXp ?? '',
+    r.netTake?.cardsStashed ?? '', r.netTake?.pocketKept ?? '', r.losses?.pocketLost ?? '',
+    r.netTake?.wood ?? '', r.netTake?.rations ?? '', r.losses?.lostCount ?? '',
+    r.provenance?.driver ?? '', r.provenance?.interventions?.length ?? '', r.stopReason?.code ?? '',
   ].map(cell).join(','));
   return [head.join(','), ...rows].join('\n');
 }
 
-export { recordRun, noteBattle, battleTick, battleActionTick, battleEnd, getBattleCount, resetRunCounters, listRuns, clearRuns, exportJSON, exportCSV, setDriver, getDriver };
+export { recordRun, noteBattle, battleTick, battleActionTick, battleEnd, getBattleCount, resetRunCounters, listRuns, clearRuns, exportJSON, exportCSV, setDriver, getDriver, noteIntervention, noteStopReason, classifyStop };

@@ -329,6 +329,11 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
   // —— 开发者控制台（2026-09-19 留言 #22：战斗中 Ctrl+L 弹出）——
   // 调试能力统一入口：只有 openDevConsole 的按钮会调用，不进任何常规交互链路
   function devCommand(name, arg) {
+    // 2026-10-03 老板（SYS-11）：战斗调试命令入干预履历（含「直接胜利」钩子）——
+    // 只加一行记录，不改任何结算行为；未知命令仍走 default 返回 false，不记。
+    if (['energy', 'draw', 'heal', 'freezeAll', 'damageAll', 'win'].includes(name)) {
+      SDT.Agent?.recorder?.noteIntervention?.('debug-command', `战斗调试:${name}`, arg != null ? { arg } : undefined);
+    }
     switch (name) {
       case 'energy':
         set$energy(maxEnergy);

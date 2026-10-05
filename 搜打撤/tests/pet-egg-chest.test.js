@@ -70,4 +70,44 @@ describe('宝箱宠物蛋结算', () => {
     expect(result.eggHit).toBe(true);
     expect(base.recordPetEggChestResult).toHaveBeenCalledExactlyOnceWith({ eggGranted: true });
   });
+
+  it('职业宝箱奖励也推进同一保底计数', () => {
+    const classCard = { id: 'class-card', name: '职业牌', rarity: '职业', type: '武术' };
+    window.SDT.MAP.chestKinds.small.pickFrom = 1;
+    window.SDT.MAP.chestKinds.small.cards = 1;
+    window.SDT.Cards.classPool = () => [classCard];
+    const random = vi.fn(() => 0.5);
+    setRandomService({ random, reseed: vi.fn(), snapshot: vi.fn(), restore: vi.fn() });
+    chestFacade.Chests.open({ myClass: '武术', state: 'idle' }, [], vi.fn());
+
+    const result = chestFacade.Chests.rollContents('small', true);
+
+    expect(result.cards).toEqual([classCard, egg]);
+    expect(result.eggHit).toBe(true);
+    expect(base.recordPetEggChestResult).toHaveBeenCalledExactlyOnceWith({ eggGranted: true });
+    expect(random).toHaveBeenCalledTimes(3);
+    expect(random.mock.calls).toEqual([['loot'], ['loot'], ['loot']]);
+  });
+
+  it.each(['large', 'boss'])('%s 第 150 次奖励同时保留宠物蛋和史诗稀有度保底', kind => {
+    const ordinary = [
+      { id: 'ordinary-a', name: '普通牌甲', rarity: '古朴', type: '法术' },
+      { id: 'ordinary-b', name: '普通牌乙', rarity: '古朴', type: '法术' },
+    ];
+    const epic = { id: 'epic-pity', name: '史诗保底牌', rarity: '史诗', type: '法术' };
+    window.SDT.MAP.chestKinds[kind] = { cards: 2, coins: null, coinCards: [], tokenChance: 0 };
+    let nextOrdinary = 0;
+    window.SDT.Cards.randomDropCard = () => ordinary[nextOrdinary++];
+    window.SDT.Cards.pickOfRarity = () => epic;
+    setRandomService({ random: vi.fn(() => 0.5), reseed: vi.fn(), snapshot: vi.fn(), restore: vi.fn() });
+    base.petEggDropChance.mockReturnValueOnce(1);
+
+    const result = chestFacade.Chests.rollContents(kind);
+
+    expect(result.cards).toEqual([ordinary[0], epic, egg]);
+    expect(result.cards.some(card => card.id === 'pet-egg')).toBe(true);
+    expect(result.cards.some(card => card.rarity === '史诗')).toBe(true);
+    expect(result.pity).toBe('史诗');
+    expect(base.recordPetEggChestResult).toHaveBeenCalledExactlyOnceWith({ eggGranted: true });
+  });
 });

@@ -41,6 +41,10 @@ const Agent = Object.freeze({
     exportCSV: recorder.exportCSV,
     setDriver: recorder.setDriver,
     getDriver: recorder.getDriver,
+    // 2026-10-03 老板（SYS-11）：干预履历与停止原因的写入口（调试入口打标经此挂）
+    noteIntervention: recorder.noteIntervention,
+    noteStopReason: recorder.noteStopReason,
+    classifyStop: recorder.classifyStop,
   }),
   stats: Object.freeze({ aggregate: stats.aggregate, brief: stats.brief }),
   scenes: Object.freeze({ run: runScene, start: startScene, status: sceneStatus, list: listScenes }),

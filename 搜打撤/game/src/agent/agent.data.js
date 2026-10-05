@@ -5,9 +5,9 @@
  * 切分对比 + 最近明细 + JSON/CSV 导出。openDataPage() 独立可用；
  * 控制台改版（切片 5）经 dataPanelHTML() 内嵌同一面板。
  * ============================================================ */
-import { esc } from '../core/shared.js';
+import { esc, escAttr } from '../core/shared.js';
 import { listRuns, clearRuns, exportJSON, exportCSV } from './agent.recorder.js';
-import { aggregate } from './agent.stats.js';
+import { aggregate, provenanceDriver } from './agent.stats.js';
 
 const fmtTime = (ts) => {
   const d = new Date(ts);
@@ -17,6 +17,9 @@ const OUTCOME_ZH = { clear: '通关撤离', extract: '撤离', death: '死亡', 
 // 驱动标签：真人 / 脚本 / LLM 分色，让「辅助局」在明细里一眼可辨（不作为自然平衡依据）
 const DRIVER_ZH = {
   human: { label: '真人', cls: 'human' },
+  agent: { label: 'Agent', cls: 'bot' },
+  mixed: { label: '混合干预', cls: 'bot' },
+  unknown: { label: '未记录', cls: '' },
   greedy: { label: '脚本·贪心', cls: 'bot' },
   random: { label: '脚本·随机', cls: 'bot' },
   llm: { label: 'LLM', cls: 'llm' },
@@ -26,6 +29,18 @@ const driverTag = (d) => {
   return m ? `<span class="devc-driver sm ${m.cls}">${m.label}</span>` : `<span class="devc-driver sm">${esc(d)}</span>`;
 };
 const driverLabel = (d) => DRIVER_ZH[d]?.label || d;
+// 2026-10-03 老板（SYS-11）：明细「驱动」列改读 provenance 三态——混合干预一眼可辨；
+// 旧记录（SYS-11 前无 provenance 结构）显示「未记录」不炸。
+// 明细、切分表与 CSV 的 provenanceDriver 使用相同三态；具体脚本标签留在明细与 JSON。
+const provenanceTag = (r) => {
+  const p = r && r.provenance;
+  const driver = provenanceDriver(r);
+  if ((driver === 'agent' || driver === 'mixed') && p.agentDriver) {
+    const label = DRIVER_ZH[p.agentDriver]?.label || p.agentDriver;
+    return `<span class="devc-driver sm bot" title="${escAttr(label)}">${driverLabel(driver)}·${esc(label)}</span>`;
+  }
+  return driverTag(driver);
+};
 
 function download(filename, text, mime) {
   const blob = new Blob([text], { type: mime });
@@ -62,7 +77,7 @@ function dataPanelHTML() {
       <table class="dt-table"><thead><tr><th>分组</th><th>局数</th><th>通关率</th><th>撤离率</th><th>均价值</th></tr></thead><tbody>${rows || '<tr><td colspan="5" class="dim">—</td></tr>'}</tbody></table></section>`;
   };
   const recent = runs.slice(-20).reverse()
-    .map(r => `<tr><td>${fmtTime(r.ts)}</td><td>${driverTag(r.driver)}</td><td>${OUTCOME_ZH[r.outcome] || esc(r.outcome)}</td><td>${r.maxLayer ?? '—'}</td><td>${r.turns ?? '—'}</td><td>${r.carriedValue}</td></tr>`).join('');
+    .map(r => `<tr><td>${fmtTime(r.ts)}</td><td>${provenanceTag(r)}</td><td>${OUTCOME_ZH[r.outcome] || esc(r.outcome)}</td><td>${r.maxLayer ?? '—'}</td><td>${r.turns ?? '—'}</td><td>${r.carriedValue}</td></tr>`).join('');
   return `
     <div class="doom-stats" style="margin:8px 0">
       ${summaryCard('总局数', agg.total)}

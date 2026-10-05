@@ -1,0 +1,93 @@
+/* Full-window paper catalog; native card artwork and rarity frames stay intact. */
+#overlay:has(.cls-pool-page) { inset: 0; padding: 0; align-items: stretch; justify-content: stretch; background: #edf0e8; backdrop-filter: none; }
+#overlay .card.page:not(.bag-page):has(.cls-pool-page) {
+  width: 100%; height: 100%; max-width: none; max-height: none;
+  margin: 0; padding: 0; border: 0; border-radius: 0; box-shadow: none; clip-path: none; background: #edf0e8;
+}
+#overlay .card.page .pg.cls-pool-page {
+  --pool-ink: #1b3442; --pool-muted: #586c77; --pool-gold: #c0aa78;
+  display: flex; flex-direction: column; width: 100%; height: 100%; min-height: 0;
+  margin: 0; padding: 0; overflow: hidden; color: var(--pool-ink); background: #edf0e8; font-family: var(--font-ui);
+}
+#overlay:has(.cls-pool-page) #ovCloseX { display: none; }
+#overlay .card.page .pg.cls-pool-page .pg-head {
+  display: flex; align-items: center; flex-direction: row; flex: none; min-height: 88px;
+  gap: 24px; margin: 0; padding: 22px 30px; border: 0; border-bottom: 2px solid var(--pool-gold);
+  border-radius: 0; background: #edf0e8;
+}
+#overlay .card.page .pg.cls-pool-page .pg-head::before,
+#overlay .card.page .pg.cls-pool-page .pg-head::after { content: none; }
+#overlay .card.page .pg.cls-pool-page .pg-head .pool-archive-title h2 {
+  display: block; margin: 0; color: var(--pool-ink); font: 700 32px/1.3 var(--font-ui); letter-spacing: .1em; text-shadow: none;
+}
+#overlay .card.page .pg.cls-pool-page .pool-back {
+  display: inline-flex; align-items: center; justify-content: center; flex: none; gap: 9px;
+  width: 104px; height: 44px; padding: 0; border: 0; border-radius: 0;
+  background: #233743; color: #f7f3e8; font: 600 14px/1.3 var(--font-ui); cursor: pointer;
+  box-shadow: 3px 3px 0 #9eaca6; clip-path: polygon(9px 0, 100% 0, calc(100% - 9px) 100%, 0 100%);
+}
+#overlay .card.page .pg.cls-pool-page .pool-back svg { width: 21px; height: 21px; }
+#overlay .card.page .pg.cls-pool-page .pool-back:hover { background: #33525f; }
+#overlay .card.page .pg.cls-pool-page .pool-head-stats { display: flex; align-items: center; gap: 18px; margin-left: auto; }
+#overlay .card.page .pg.cls-pool-page .pool-head-caption { color: #48616a; font: 600 17px/1.4 var(--font-ui); letter-spacing: .04em; }
+#overlay .card.page .pg.cls-pool-page .pool-head-badge { display: flex; align-items: baseline; gap: 8px; margin: 0; padding: 8px 13px; border: 1px solid #a8b7ac; border-radius: 0; background: #f7f7ef; }
+#overlay .card.page .pg.cls-pool-page .pool-head-badge b { margin: 0; color: var(--pool-ink); font: 700 22px/1.1 Consolas, monospace; }
+#overlay .card.page .pg.cls-pool-page .pool-head-badge small { color: var(--pool-muted); font: 500 13px/1.4 var(--font-ui); }
+#overlay .card.page .pg.cls-pool-page .pool-main { display: flex; flex: 1; min-height: 0; min-width: 0; gap: 24px; padding: 20px 30px; background: none; }
+#overlay .card.page .pg.cls-pool-page .pool-side {
+  display: flex; flex-direction: column; flex: 0 0 324px; width: 324px; min-height: 0;
+  align-self: stretch; padding: 18px 20px; overflow: auto; border: 1px solid #9eafaf80; border-radius: 0;
+  background: #f7f7ef; color: var(--pool-ink); box-shadow: 3px 3px 0 #263d4921;
+}
+#overlay .card.page .pg.cls-pool-page .pool-side::before { content: none; }
+#overlay .card.page .pg.cls-pool-page .pv-head { margin: 0 0 16px; padding: 0 0 12px; border-bottom: 1px solid #aebcb973; }
+#overlay .card.page .pg.cls-pool-page .pv-name { color: var(--pool-ink); font: 700 20px/1.4 var(--font-ui); letter-spacing: .05em; text-shadow: none; }
+#overlay .card.page .pg.cls-pool-page .pv-body { flex: none; min-height: 0; }
+#overlay .card.page .pg.cls-pool-page .pv-body .hs-card.lg { margin: 0 auto; font-size: 20px; }
+#overlay .card.page .pg.cls-pool-page .pv-meta { display: grid; gap: 6px; margin-top: 16px; }
+#overlay .card.page .pg.cls-pool-page .pv-row { min-height: 30px; padding: 6px 9px; border: 0; border-bottom: 1px solid #b9c5bf80; border-radius: 0; background: none; }
+#overlay .card.page .pg.cls-pool-page .pv-row span { color: var(--pool-muted); font: 500 13px/1.5 var(--font-ui); letter-spacing: .03em; }
+#overlay .card.page .pg.cls-pool-page .pv-row b { color: var(--pool-ink); font: 600 14px/1.5 var(--font-ui); }
+#overlay .card.page .pg.cls-pool-page .pv-hint { display: none; }
+#overlay .card.page .pg.cls-pool-page .pv-rule { margin: auto 0 0; padding-top: 14px; border-top: 1px solid #aebcb980; color: #586c77; font: 400 13px/1.7 var(--font-ui); }
+#overlay .card.page .pg.cls-pool-page .pool-catalog { display: flex; flex: 1; min-width: 0; min-height: 0; flex-direction: column; overflow: hidden; border: 1px solid #9eafaf80; border-radius: 0; background: #f7f7ef; }
+#overlay .card.page .pg.cls-pool-page .pool-catalog-head { display: none; }
+#overlay .card.page .pg.cls-pool-page .pool-filters { display: flex; flex: none; flex-wrap: wrap; align-items: center; gap: 10px; min-height: 52px; margin: 0; padding: 10px 16px; border: 0; border-bottom: 1px solid #aebcb980; background: #edf0e8; }
+#overlay .card.page .pg.cls-pool-page .pool-filter { display: inline-flex; align-items: center; gap: 10px; min-height: 34px; padding: 6px 12px; border: 1px solid #9eafaf; border-radius: 0; background: #f7f7ef; color: #48616a; font: 600 13px/1.4 var(--font-ui); letter-spacing: 0; box-shadow: none; }
+#overlay .card.page .pg.cls-pool-page .pool-filter b { color: inherit; padding: 0; border: 0; border-radius: 0; background: none; font: 600 12px/1.4 Consolas, monospace; }
+#overlay .card.page .pg.cls-pool-page .pool-filter.active { color: #f7f3e8; border-color: #284653; background: #284653; }
+#overlay .card.page .pg.cls-pool-page .pool-filter:hover { border-color: #b59b67; box-shadow: none; }
+#overlay .card.page .pg.cls-pool-page .pool-grid {
+  display: grid; flex: 1; min-height: 0; grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-content: start; align-items: start; justify-content: stretch; gap: 18px 16px;
+  margin: 0; padding: 14px 16px 18px; overflow-y: auto; overflow-x: hidden;
+}
+#overlay .card.page .pg.cls-pool-page .pool-cell { display: flex; flex-direction: column; align-items: center; justify-self: center; gap: 7px; width: min(100%,174px); max-width: none; min-width: 0; padding: 0; }
+#overlay .card.page .pg.cls-pool-page .pool-cell::before { content: none; }
+#overlay .card.page .pg.cls-pool-page .pool-rarity-tag { position: static; display: inline-flex; align-self: flex-start; z-index: auto; margin: 0; padding: 3px 7px; border: 1px solid #9eafaf73; border-radius: 0; background: #e5ece2; color: #46636d; font: 600 12px/1.3 var(--font-ui); letter-spacing: .04em; box-shadow: none; }
+#overlay .card.page .pg.cls-pool-page .pool-rarity-tag.prism { background: linear-gradient(#f7f7ef,#f7f7ef) padding-box,linear-gradient(100deg,#d3a6a2,#d5c28b,#9abbb0,#aba1c4) border-box; border-color: transparent; color: #605878; }
+#overlay .card.page .pg.cls-pool-page .pool-card-button { display: block; width: min(100%,170px); max-width: 100%; margin: 0; padding: 0; border: 2px solid transparent; border-radius: 0; background: none; overflow: visible; box-shadow: 2px 3px 0 #263d4929; }
+#overlay .card.page .pg.cls-pool-page .pool-card-button .hs-card { margin: 0; font-size: 16px; }
+#overlay .card.page .pg.cls-pool-page .pool-card-button .hsc-art::after { box-shadow: none; }
+#overlay .card.page .pg.cls-pool-page .pool-card-button.lib-cardwrap:hover,
+#overlay .card.page .pg.cls-pool-page .pool-card-button.lib-cardwrap:focus-visible { transform: translateY(-2px); filter: none; border-color: #71989b; box-shadow: 2px 5px 0 #263d4933; }
+#overlay .card.page .pg.cls-pool-page .pool-card-button.selected { border-color: #b59b67; box-shadow: 0 0 0 1px #b59b6766,2px 4px 0 #aa925b40; }
+#overlay .card.page .pg.cls-pool-page .cls-foot { display: flex; flex: none; align-items: center; flex-wrap: nowrap; gap: 24px; min-height: 82px; padding: 18px 30px; border: 0; border-top: 2px solid var(--pool-gold); background: #edf0e8; }
+#overlay .card.page .pg.cls-pool-page .pool-pager { display: flex; align-items: center; gap: 18px; margin-right: auto; color: var(--pool-muted); }
+#overlay .card.page .pg.cls-pool-page .pool-pageinfo { min-width: 180px; color: var(--pool-muted); font: 500 14px/1.5 var(--font-ui); letter-spacing: .02em; text-align: center; }
+#overlay .card.page .pg.cls-pool-page .pool-page-now { color: var(--pool-ink); font-weight: 700; }
+#overlay .card.page .pg.cls-pool-page .cls-foot :is(.hs-btn, .ov-btn) { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 9px 18px; border: 0; border-radius: 0; background: #233743; color: #f7f3e8; font: 600 14px/1.4 var(--font-ui); letter-spacing: .04em; box-shadow: 3px 3px 0 #9eaca6; clip-path: polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%); }
+#overlay .card.page .pg.cls-pool-page .cls-foot .ov-btn.ok { min-width: 220px; background: #ad793a; color: #fff4df; }
+#overlay .card.page .pg.cls-pool-page .cls-foot :is(.hs-btn, .ov-btn):hover:not(:disabled) { background: #33525f; color: #fff6e4; }
+#overlay .card.page .pg.cls-pool-page .cls-foot .ov-btn.ok:hover { background: #bc8848; }
+#overlay .card.page .pg.cls-pool-page .cls-foot .hs-btn:disabled { background: #d9e1d8; color: #75878c; opacity: 1; box-shadow: none; }
+#overlay .card.page .pg.cls-pool-page .pool-grid-empty { display: flex; align-items: center; justify-content: center; min-height: 200px; color: var(--pool-muted); font: 500 16px/1.6 var(--font-ui); }
+#overlay .card.page .pg.cls-pool-page :is(button, .pool-card-button):focus-visible { outline: 2px solid #769c9c; outline-offset: 3px; }
+#overlay .card.page .pg.cls-pool-page { scrollbar-color: #8ea09e #e1e6df; }
+#overlay .card.page .pg.cls-pool-page ::-webkit-scrollbar { width: 7px; height: 7px; }
+#overlay .card.page .pg.cls-pool-page ::-webkit-scrollbar-track { background: #e1e6df; }
+#overlay .card.page .pg.cls-pool-page ::-webkit-scrollbar-thumb { background: #8ea09e; border-radius: 0; }
+@media (max-width: 1050px) {
+  #overlay .card.page .pg.cls-pool-page .pool-side { flex-basis: 280px; width: 280px; }
+  #overlay .card.page .pg.cls-pool-page .pool-grid { grid-template-columns: repeat(4,minmax(0,1fr)); }
+}

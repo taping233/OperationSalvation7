@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" role="img" aria-label="地图上只可前往相邻节点">
+  <rect width="560" height="360" rx="24" fill="#17262b"/><text x="30" y="46" fill="#f3e9d0" font-family="sans-serif" font-size="24" font-weight="700">沿相邻节点前进</text>
+  <path d="M75 190 172 116M75 190 182 262M172 116 285 104M172 116 285 190M182 262 285 190M285 104 390 120M285 190 390 120M285 190 392 269M285 104 392 269M392 269 490 192" fill="none" stroke="#617579" stroke-width="5" stroke-linecap="round"/>
+  <path d="M75 190 172 116M172 116 285 104" fill="none" stroke="#70b18c" stroke-width="7" stroke-linecap="round"/>
+  <path d="M285 104 390 120M285 190 392 269" fill="none" stroke="#e8c16f" stroke-width="7" stroke-linecap="round"/>
+  <g font-family="sans-serif" text-anchor="middle" font-weight="700">
+    <circle cx="75" cy="190" r="27" fill="#315543" stroke="#80c39a" stroke-width="4"/><path d="m63 190 8 8 16-18" fill="none" stroke="#e5f0dc" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="172" cy="116" r="27" fill="#315543" stroke="#80c39a" stroke-width="4"/><path d="m160 116 8 8 16-18" fill="none" stroke="#e5f0dc" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="182" cy="262" r="24" fill="#42474a" stroke="#667276" stroke-width="3"/><path d="M170 262h24" stroke="#a0a9a5" stroke-width="4"/>
+    <circle cx="285" cy="104" r="27" fill="#315543" stroke="#80c39a" stroke-width="4"/><path d="m273 104 8 8 16-18" fill="none" stroke="#e5f0dc" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="285" cy="190" r="25" fill="#42474a" stroke="#667276" stroke-width="3"/><path d="M273 190h24" stroke="#a0a9a5" stroke-width="4"/>
+    <circle cx="390" cy="120" r="29" fill="#665632" stroke="#edc978" stroke-width="4"/><path d="m390 101 6 13 14 2-10 9 3 14-13-7-13 7 3-14-10-9 14-2z" fill="#f1d38d"/>
+    <circle cx="392" cy="269" r="29" fill="#42474a" stroke="#667276" stroke-width="3"/><rect x="378" y="255" width="28" height="27" rx="4" fill="#7e8985"/><path d="M378 264h28M392 255v27" stroke="#c2cbc0" stroke-width="3"/>
+    <circle cx="490" cy="192" r="26" fill="#42474a" stroke="#667276" stroke-width="3"/><path d="M478 192h24" stroke="#a0a9a5" stroke-width="4"/>
+  </g>
+  <g font-family="sans-serif" font-size="18" fill="#e7dfcc"><text x="29" y="242">已走</text><text x="110" y="80">战斗</text><text x="408" y="92">火堆</text><text x="413" y="315">箱子</text></g>
+  <g font-family="sans-serif" font-size="18"><circle cx="43" cy="297" r="8" fill="#70b18c"/><text x="59" y="303" fill="#cbd5ca">已走</text><circle cx="160" cy="297" r="8" fill="#e8c16f"/><text x="176" y="303" fill="#cbd5ca">可去</text><circle cx="269" cy="297" r="8" fill="#687579"/><text x="285" y="303" fill="#cbd5ca">未接通</text></g>
+  <text x="30" y="338" fill="#aebdb8" font-family="sans-serif" font-size="18">每次从当前节点选择一条相连的路。</text>
+</svg>
+

@@ -243,11 +243,10 @@ body.page-opaque #sidebar{visibility:hidden}
 .cdes-stage{border-bottom:1px solid #68808b}
 /* 卡牌库重排版（2026-09-06 留言）：卡片太挤 → 紧凑卡面只留卡面+名字，
    完整卡面与描述看右侧悬停预览（点开具体看）；lib = 库列表专属紧凑卡 */
-.hs-card.lib{height:auto;min-height:0}
-.hs-card.lib .hsc-desc,.hs-card.lib .hsc-type,.hs-card.lib .hsc-kw{display:none}
-.hs-card.lib .hsc-art{height:5.8em}
-/* 滚动性能：视口外的卡条整体跳过布局/绘制（242 张全量卡面的滚动卡顿源） */
-.lib-item{content-visibility:auto;contain-intrinsic-size:auto 224px}
+/* .hs-card.lib 三行已删（10-04 收敛批）：09-06 紧凑列表时代类名，cards.view.js cardHTML 调用面只传 lg/sm/xl，DOM 永不出现该组合 */
+/* .lib-item 的 c-v:auto/contain-intrinsic-size 旧行已删（10-04 收敛批）：全量卡面时代的
+   跳过渲染优化，IO 窗口化后被 expedition-library.css 的显式 visible 压制，只余特异性
+   战争隐患；现行口径见 expedition-library.css（10-03 三期归因 longtask -66%） */
 
 /* —— 留言批次 2026-09-07：战斗视图占满 + 玩家立绘放大 —— */
 /* 战斗场景占满：标题条悬浮在场景上，不再占一行黑底 */
@@ -389,8 +388,7 @@ body.page-opaque #sidebar{visibility:hidden}
 .clib-preview .pv-hint b{color:#3c3a33}
 .clib-preview .pv-empty .ic{opacity:.45;filter:brightness(.55)}
 .lib-grid{background:transparent}
-.lib-item{border-right:1px solid #bbb8ae;border-bottom:1px solid #bbb8ae;padding:16px 12px 14px;margin:0}
-.lib-item:nth-child(6n){border-right-color:#bbb8ae}
+/* .lib-item 旧列表边框两行已删（10-04 收敛批）：现行边框口径在 expedition-library.css（border:0!important 恒压） */
 .clib-empty{color:#6b685b}
 
 /* —— 标题页：ASCENSION COUNCIL 与「已成功撤离 n 次」水平对齐（撤离行在左、字牌并排其右） —— */
@@ -494,10 +492,8 @@ body.page-opaque #sidebar{visibility:hidden}
 
 /* ═══════════ 留言批次 2026-09-07 五批（20:18-20:47 Edge 5199 共 13 条） ═══════════ */
 
-/* —— 卡牌库：编辑/删除键错位修复——lib-item 是 flex，卡面宽度被卡名长短撑开，
-      高度参差不齐导致按钮高度不一；让卡面统一满格宽 + 10/14 比例，按钮自然对齐 —— */
-#overlay .lib-item .lib-cardwrap{width:100%}
-#overlay .lib-cardwrap .hs-card{width:100%!important}
+/* —— 卡牌库：编辑/删除键错位修复（09-07 五批）——两行已删（10-04 收敛批）：
+      lib-item 旧 flex 结构与 .hs-card 卡面随 photo-studio 重构退场，现 DOM 无此组合（实证快照零变化） —— */
 
 /* 09-20 批4：原「基地浅色化补漏」段（pk-row/ach-row/step-btn 米白底）一并删除，
    同属旧米白主题残留，现役深蓝样式以 expedition-inventory.css 为准。 */
@@ -997,7 +993,6 @@ body,body *{font-family:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub',
 @media (max-width:1100px){
   #overlay .clib-main{flex-direction:column}
   #overlay .clib-preview{width:100%;min-width:0;height:250px;min-height:250px;border-right:0;border-bottom:1px solid #b7b4aa!important}
-  #overlay .lib-item{min-width:0}
 }
 @media (max-width:560px){
   #overlay .clib-preview{height:220px;min-height:220px}
@@ -1149,10 +1144,8 @@ body,body *{font-family:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub',
 
 /* v3 卡面定调正本=card-v3.css（index.html 中后加载，同特异性恒胜出），此处 2026-09-12 陈旧副本已删
    （09-29 CSS 精修班；jscpd card-v3⇄winter 109 行克隆销账）。
-   下方 .lib-item 122px 是全库唯一声明，且须压过本文件更早的 224px 行，故原位保留、不并入 card-v3。 */
-
-/* 牌库虚拟滚动占位高度按新卡高重估（卡变矮：紧凑卡 ~11px 字号 → 卡身 ~70px + 边距） */
-.lib-item{contain-intrinsic-size:auto 122px}
+   原下方 .lib-item{contain-intrinsic-size:auto 122px} 已删（10-04 收敛批）：全量时代占位
+   高度，窗口化+壳等高（--lib-tile-h）后无消费方。 */
 
 /* ===== 标题页选项按钮动画（2026-09-12 留言 #3：刚进入/点击时加一点动画） =====
    showTitle 以 hidden 属性切页，display:none→可见会让下列入场动画每次回标题页自动重播；
@@ -1191,8 +1184,8 @@ body,body *{font-family:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub',
 
 
 /* ===== 2026-09-12 晚留言批次 ===== */
-/* 卡牌库卡面再大一点：收窄卡片内边距（侧栏/页边距在 expedition-library.css 同步收窄） */
-#overlay .card-library-page .lib-item{padding:10px 6px}
+/* 卡牌库卡面再大一点：padding 行已删（10-04 收敛批）——库页恒带 cardlib-open，
+   expedition-library.css 的 padding!important 口径恒压本行，非 cardlib 态无 .lib-item DOM */
 /* 标题页左上退出/静音两键：hover 绿边对齐快速参考（原 border:none 只剩微光） */
 #btnTitleExit,#btnTitleMute{border:1px solid transparent}
 #btnTitleExit:hover,#btnTitleMute:hover{border-color:#d9bb82cc}
@@ -1547,6 +1540,8 @@ body.cardlib-open #overlay .card-library-page .clib-main{background:
 #overlay .result-pg .ext-card:active{transform:translateY(0) scale(.98)}
 #overlay .result-pg .ext-card.off{opacity:.5;filter:grayscale(.75);cursor:not-allowed}
 #overlay .result-pg .ext-card .hs-card{font-size:12px}
+#overlay .result-pg .ext-brought{position:absolute;left:6px;top:6px;padding:1px 7px;font-size:10px;letter-spacing:1px;
+  color:#f2d9a0;background:rgba(58,44,16,.92);border:1px solid rgba(217,187,130,.6);border-radius:999px}
 #overlay .result-pg .ext-noroom{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);white-space:nowrap;
   padding:2px 8px;font-size:10px;letter-spacing:1px;color:#ffb9a6;background:rgba(60,18,12,.9);
   border:1px solid rgba(214,120,96,.55);border-radius:999px}

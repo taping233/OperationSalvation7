@@ -5,6 +5,15 @@ const path = require('node:path');
 const hash = value => createHash('sha256').update(value).digest('hex');
 const isDocument = value => /\.(md|txt)$/i.test(value) || value.endsWith('.gitkeep') || value === 'asset-manifest.json';
 
+// #35 行尾归一（2026-10-03 老板拍板方案 1）：文本类资产（svg/json）按 LF 归一后计 bytes/sha256，
+// Windows 检出（CRLF）、Linux 检出与 git 对象（LF）三方一致；登记与审计同走本口径。
+// latin1 逐字节往返无损，CRLF(0D 0A) 序列替换安全；二进制扩展不归一。
+const TEXT_NORMALIZED_EXTENSIONS = new Set(['.svg', '.json']);
+function canonicalAssetBytes(buffer, relativePath) {
+  if (!TEXT_NORMALIZED_EXTENSIONS.has(path.posix.extname(relativePath).toLowerCase())) return buffer;
+  return Buffer.from(buffer.toString('latin1').replaceAll('\r\n', '\n'), 'latin1');
+}
+
 function canonicalPath(value) {
   if (typeof value !== 'string' || !value.trim()) throw new Error('asset path must be a nonempty string');
   const slash = value.replace(/\\/g, '/');
@@ -24,7 +33,8 @@ function walkAssets(dir, prefix = '') {
     if (stat.isSymbolicLink()) return [{ path: relative, symlink: true }];
     if (stat.isDirectory()) return walkAssets(file, relative + '/');
     if (!stat.isFile()) return [{ path: relative, unsupported: true }];
-    return [{ path: relative, bytes: stat.size, sha256: hash(readFileSync(file)) }];
+    const canonical = canonicalAssetBytes(readFileSync(file), relative);
+    return [{ path: relative, bytes: canonical.length, sha256: hash(canonical) }];
   });
 }
 
@@ -113,4 +123,4 @@ function auditAssets({ root, paths = [], debtPath = path.join(root, 'docs', 'ass
   return { ...inspected, errors, warnings, ok: errors.length === 0 };
 }
 
-module.exports = { auditAssets, canonicalPath, inspectAssets, selectedAssetPaths };
+module.exports = { auditAssets, canonicalAssetBytes, canonicalPath, inspectAssets, selectedAssetPaths };

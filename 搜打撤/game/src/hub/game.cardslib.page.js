@@ -35,7 +35,7 @@ import { game } from '../run/game.session.js';
 import { characterName } from '../core/characters.js';
 import { PHOTO_NOTE_PLACEHOLDER, photoNoteFor, savePhotoNote, exportNotes } from '../cards/card-photo-notes.js';
 import { photoMountFor } from './photo-studio-presentation.js';
-import { CARD_DESIGNER_WRITES_ENABLED, Sfx, cardPageOpen, setCardPageOpen, configureCardPageClosers } from './game.cardslib.common.js';
+import { CARD_DESIGNER_WRITES_ENABLED, Sfx, cardPageOpen, setCardPageOpen, configureCardPageClosers, cancelPendingCardPageEntry } from './game.cardslib.common.js';
 import {
   photoFpsEnabled, configurePhotoFps, stopPhotoFpsProbe, samplePhotoFps,
   clearPhotoFpsSettledTimer, scheduleSettledPhotoFps,
@@ -43,12 +43,15 @@ import {
 import { warmLibArt, resetLibArtWarmup } from './game.cardslib.art-warm.js';
 import { LIB_ART, photoStyle, photoNo } from './game.cardslib.photo-props.js';
 import { createCardDesigner } from './game.cardslib.designer.js';
+import { bindPhotoStudioControls, refreshPhotoStudioControls, closePhotoStudioControls } from './photo-studio-controls.js';
+import '../../css/photo-studio-unified.css';
 
 const RARITIES = SDT.Cards.RARITIES;
 const TYPES = SDT.Cards.TYPES;
 const DMG_TYPES = SDT.Cards.DMG_TYPES;
 let cardPagePrevState = null;  // 打开库/制作坊前的游戏状态（从标题界面打开时关回 'title'）
 let lastSavedId = null;        // 刚保存的卡，库中高亮
+let libPreviewTimer = null;
 let libCatalog = [];           // 此次照相馆数据刷新使用的浅数组快照
 let libCards = [];             // 库页面缓存（悬停预览用）
 let libFilter = { tab: '全部', rar: '全部', cls: '全部', q: '', sort: 'rarity' };
@@ -121,6 +124,15 @@ let libSearchTimer = null;
 const LIB_MOUNT_BATCH = 15;   // 首屏内联直挂数（视口内其余壳由 IO 首拍立即接管）
 const libWindowed = typeof IntersectionObserver === 'function';
 let libTileObserver = null;
+let libTileObserverGrid = null;
+// 首窗壳数与余壳 idle 队列（10-04 拆帧）：打开/筛选重绘的点击帧只同步解析首窗
+// （15 卡面 + 首窗壳，覆盖视口+100% 挂载窗口：1080p 全屏 ≈ 13 行×4 列 = 52），
+// 剩余壳空闲档分批 append——271 壳一次 innerHTML 实测阻塞打开 53ms/切页签 22ms。
+const LIB_SHELL_FIRST = 64;
+const LIB_SHELL_BATCH = 60;
+let _libShellQueue = [];
+let _libShellScheduled = false;
+let _libShellGeneration = 0;
 
 function libPreviewHTML(c) {
   if (!c) return '<div class="studio-preview-empty"><div class="pv-empty">[[icon:cards]]</div><p class="pv-hint">没有符合条件的卡牌<br>调整筛选后重新陈列</p></div>';
@@ -133,7 +145,7 @@ function libPreviewHTML(c) {
   const armorN = +(c.armor || 0) || SDT.Cards.deriveArmor(c);
   const kw = [drawN ? `抽卡 ${drawN}` : '', infN ? `注能(${infN})` : '',
     healN ? `回复 ${healN}` : '', armorN ? `护甲 ${armorN}` : ''].filter(Boolean).join(' · ');
-  const kwTxt = kw ? `效果词条：<b>${kw}</b>` : '';
+  const kwTxt = kw ? `效果词条：<b>${descRich(kw)}</b>` : '';
   const actions = CARD_DESIGNER_WRITES_ENABLED && game.devMode && libEditMode ? `<div class="studio-edit-actions">
     <button class="hs-btn" data-act="editCard" data-id="${escAttr(c.id)}">编辑卡牌</button>
     <button class="hs-btn danger" data-act="delCard" data-id="${escAttr(c.id)}">删除</button>
@@ -149,7 +161,7 @@ function libPreviewHTML(c) {
   const rarity = libRarityOf(c);
   const rarityIndex = Math.max(0, RARITIES.indexOf(rarity));
   const mount = photoMountFor(rarity);
-  return `<div class="studio-preview-frame"><span class="studio-photo-paper studio-preview-paper rv${rarityIndex}" data-photo-mount="${mount.kind}">
+  return `<div class="studio-preview-frame"><span class="studio-photo-paper studio-preview-paper rv${rarityIndex}" data-photo-mount="${mount.kind}" data-rarity="${escAttr(rarity)}">
     <span class="studio-mount-mark" aria-hidden="true"></span>
     <span class="studio-photo-art">${art}</span>
     <span class="studio-photo-caption"><b data-studio-rarity="${escAttr(rarity)}">${esc(c.name || '未命名卡牌')}</b></span>
@@ -178,18 +190,22 @@ function libActiveFiltersHTML() {
 
 // 卡面按钮（瓦片内层）：整瓦片 photoTileHTML 与壳注入 mountLibTile 共用
 function photoTileInnerHTML(c) {
+  const cached = libTileHTMLByCard.get(c);
+  if (cached) return c.id === libSelectedId ? cached.replace('aria-current="false"', 'aria-current="true"') : cached;
   const rarity = libRarityOf(c);
   const rarityIndex = Math.max(0, RARITIES.indexOf(rarity));
   const mount = photoMountFor(rarity);
   const art = (SDT.Art && SDT.Art.cardIcon && SDT.Art.cardIcon(c, { ...LIB_ART, defer: true })) ||
     SDT.Icons.img(SDT.Cards.TYPE_ART[c.type] || 'question');
-  return `<button type="button" class="lib-cardwrap studio-photo rv${rarityIndex}" data-act="libInspect" data-photo-zoom-source data-card="${escAttr(c.id)}" aria-label="查看照片：${escAttr(c.name || '未命名卡牌')}" aria-current="${c.id === libSelectedId ? 'true' : 'false'}" title="查看大图与照片背签">
-      <span class="studio-photo-paper" data-photo-mount="${mount.kind}">
+  const html = `<button type="button" class="lib-cardwrap studio-photo rv${rarityIndex}" data-act="libInspect" data-photo-zoom-source data-card="${escAttr(c.id)}" aria-label="查看照片：${escAttr(c.name || '未命名卡牌')}" aria-current="false" title="查看大图与照片背签">
+      <span class="studio-photo-paper" data-photo-mount="${mount.kind}" data-rarity="${escAttr(rarity)}">
         <span class="studio-mount-mark" aria-hidden="true"></span>
         <span class="studio-photo-art">${art}</span>
         <span class="studio-photo-caption"><b data-studio-rarity="${escAttr(rarity)}">${esc(c.name || '未命名卡牌')}</b>${c.type ? `<small class="type-badge">${esc(c.type === '能力卡' ? '能力' : c.type)}</small>` : ''}</span>
       </span>
     </button>`;
+  libTileHTMLByCard.set(c, html);
+  return c.id === libSelectedId ? html.replace('aria-current="false"', 'aria-current="true"') : html;
 }
 
 function photoTileHTML(c, index, motionIndex = index) {
@@ -211,10 +227,16 @@ function libGridContentsHTML(all = libFiltered()) {
       ${filtered ? '<button class="hs-btn sm" data-act="libClearFilter">重置筛选</button>' : ''}</div>`;
   }
   // 09-29 二期：壳常驻 + IO 双向窗口化；无 IntersectionObserver 的降级环境（jsdom 测试）一次性全量
-  if (!libWindowed) return all.map((card, offset) => photoTileHTML(card, offset, offset)).join('');
+  if (!libWindowed) { _libShellQueue = []; return all.map((card, offset) => photoTileHTML(card, offset, offset)).join(''); }
+  // 10-04 拆帧：点击帧只解析首窗（卡面 + 首窗壳），余壳进 idle 队列由 appendLibShellsIdle 分批补齐
   const first = Math.min(LIB_MOUNT_BATCH, all.length);
+  const firstShells = first + LIB_SHELL_FIRST;
   let html = '';
-  for (let i = 0; i < all.length; i++) html += i < first ? photoTileHTML(all[i], i, i) : libShellHTML(all[i], i);
+  _libShellQueue = [];
+  for (let i = 0; i < first; i++) html += photoTileHTML(all[i], i, i);
+  for (let i = first; i < Math.min(firstShells, all.length); i++) html += libShellHTML(all[i], i);
+  // 远端壳只排卡片引用和索引；HTML 模板与稳定样式延后到对应 rAF 批次生成。
+  for (let i = firstShells; i < all.length; i++) _libShellQueue.push({ card: all[i], index: i });
   return html;
 }
 
@@ -226,30 +248,86 @@ function libGridHTML() {
 
 let libCardById = new Map();
 let libCardNodeById = new Map();
+let libTileHTMLByCard = new WeakMap();
 
 // ======== 窗口化瓦片：壳常驻，IO 就近注入 / 离窗卸载（09-29 二期） ========
 function stopLibTileObserver() {
   libTileObserver?.disconnect();
   libTileObserver = null;
+  libTileObserverGrid = null;
 }
 
-function observeLibTiles(grid) {
-  stopLibTileObserver();
+function observeLibTiles(grid, roots = null) {
   if (!grid || !libWindowed) return;
-  libTileObserver = new IntersectionObserver(entries => {
-    let mountedAny = false;
-    for (const entry of entries) {
-      if (entry.isIntersecting) mountedAny = mountLibTile(entry.target) || mountedAny;
-      else unmountLibTile(entry.target);
+  if (libTileObserver && libTileObserverGrid !== grid) stopLibTileObserver();
+  if (!libTileObserver) {
+    const generation = _libShellGeneration;
+    libTileObserver = new IntersectionObserver(entries => {
+      if (generation !== _libShellGeneration || document.getElementById('libGrid') !== grid) return;
+      const mountedRoots = [];
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          if (mountLibTile(entry.target)) mountedRoots.push(entry.target);
+        } else unmountLibTile(entry.target);
+      }
+      if (mountedRoots.length) warmLibArt({ roots: mountedRoots, preview: false });
+    }, { root: grid, rootMargin: '100% 0px' });
+    libTileObserverGrid = grid;
+  }
+  const shells = roots || grid.querySelectorAll('.lib-item.lib-ph');
+  for (const shell of shells) {
+    if (shell?.isConnected && shell.closest('.lib-grid') === grid && shell.classList.contains('lib-ph')) {
+      libTileObserver.observe(shell);
     }
-    if (mountedAny) warmLibArt();
-  }, { root: grid, rootMargin: '100% 0px' });
-  grid.querySelectorAll('.lib-item.lib-ph').forEach(shell => libTileObserver.observe(shell));
+  }
+}
+
+// 网格整段替换时废弃上一代 rAF；旧回调不得把旧队列追加到新网格。
+function invalidateLibShellWork() {
+  _libShellGeneration++;
+  _libShellScheduled = false;
+  _libShellQueue = [];
+}
+
+// 余壳分批补齐（10-04 拆帧）：rAF 链每帧一批（192 壳 ≈ 4 帧补完），页面可见时
+// ~100ms 内滚动高度一次到位。不用 requestIdleCallback：面板遮挡/后台页 rIC 不触发，
+// 壳会滞留首窗（实测 scrollH 停在 5290）；rAF 在页面不可见时同样不跑但用户也看不到，
+// 恢复可见即续。每批 append 后重挂 IO 观察（幂等，新壳纳入挂载窗口）。
+function appendLibShellsIdle() {
+  if (!libWindowed || !_libShellQueue.length || _libShellScheduled) return;
+  _libShellScheduled = true;
+  const generation = _libShellGeneration;
+  const step = () => {
+    if (generation !== _libShellGeneration) return;
+    _libShellScheduled = false;
+    const grid = document.getElementById('libGrid');
+    if (!grid || !_libShellQueue.length) return;
+    const batch = _libShellQueue.splice(0, LIB_SHELL_BATCH);
+    const previousLast = grid.lastElementChild;
+    grid.insertAdjacentHTML('beforeend', batch.map(({ card, index }) => libShellHTML(card, index)).join(''));
+    const roots = [];
+    for (let shell = previousLast ? previousLast.nextElementSibling : grid.firstElementChild; shell; shell = shell.nextElementSibling) roots.push(shell);
+    observeLibTiles(grid, roots);
+    if (_libShellQueue.length) appendLibShellsIdle();
+  };
+  requestAnimationFrame(step);
+}
+
+// 余壳全部立即补齐（键盘定位/选片台翻看找不到壳时兜底：目标壳还没轮到 idle 批次）
+function flushLibShellsNow() {
+  if (!_libShellQueue.length) return;
+  const grid = document.getElementById('libGrid');
+  if (!grid) { _libShellQueue = []; return; }
+  const previousLast = grid.lastElementChild;
+  grid.insertAdjacentHTML('beforeend', _libShellQueue.map(({ card, index }) => libShellHTML(card, index)).join(''));
+  _libShellQueue = [];
+  const roots = [];
+  for (let shell = previousLast ? previousLast.nextElementSibling : grid.firstElementChild; shell; shell = shell.nextElementSibling) roots.push(shell);
+  observeLibTiles(grid, roots);
 }
 
 // 壳就近注入卡面；返回是否真的挂了
-function mountLibTile(shell) {
-  if (!shell || !shell.classList.contains('lib-ph')) return false;
+function mountLibTile(shell) {  if (!shell || !shell.classList.contains('lib-ph')) return false;
   const card = libCardById.get(shell.dataset.cardId);
   if (!card) return false;
   shell.insertAdjacentHTML('beforeend', photoTileInnerHTML(card));
@@ -323,7 +401,11 @@ function switchLibPage(page, all = libFiltered()) {
   if (!target) return;
   const grid = document.getElementById('libGrid');
   const sel = typeof CSS !== 'undefined' && CSS.escape ? CSS.escape(target.id) : target.id;
-  const shell = grid?.querySelector(`.lib-item[data-card-id="${sel}"]`);
+  let shell = grid?.querySelector(`.lib-item[data-card-id="${sel}"]`);
+  if (!shell && grid && _libShellQueue.length) {
+    flushLibShellsNow();   // 深位目标壳还在 idle 队列：一次性补齐再定位
+    shell = grid.querySelector(`.lib-item[data-card-id="${sel}"]`);
+  }
   if (shell) shell.scrollIntoView({ block: 'nearest' });
   else libCardNodeById.get(target.id)?.scrollIntoView({ block: 'nearest' });
 }
@@ -362,6 +444,11 @@ function bindLibGridNavigation() {
   // 网格级事件委托（focusin / 方向键），dataset.bound 保证整页生命周期只绑一次。
   if (grid.dataset.bound === '1') return;
   grid.dataset.bound = '1';
+  // 拆帧兜底（10-04）：rAF 补壳链未跟上时（页面冻结恢复期/极端时序），拖到距当前
+  // 底部 600px 内强制补齐，避免滚动条越拖越短的落空感；队列空时零成本短路。
+  grid.addEventListener('scroll', () => {
+    if (_libShellQueue.length && grid.scrollTop + grid.clientHeight > grid.scrollHeight - 600) flushLibShellsNow();
+  }, { passive: true });
   grid.addEventListener('focusin', (e) => {
     const card = e.target.closest && e.target.closest('.lib-cardwrap[data-card]');
     if (card) setLibSelection(card.dataset.card);
@@ -387,6 +474,9 @@ function bindLibGridNavigation() {
 
 // 筛选后只重绘卡格区（整页 showOverlay 会重置搜索焦点、重挂全部事件）
 function renderLibGrid() {
+  if (libPreviewTimer) clearTimeout(libPreviewTimer);
+  libPreviewTimer = null;
+  invalidateLibShellWork();
   stopLibTileObserver();
   const filtered = libFiltered();
   const n = filtered.length;
@@ -417,12 +507,13 @@ function renderLibGrid() {
     rebuildLibNodeMap(grid);
     bindLibGridNavigation();
     observeLibTiles(grid);
+    appendLibShellsIdle();
   }
   const active = document.getElementById('libActiveFilters');
   if (active) active.innerHTML = libActiveFiltersHTML();
   // 筛选/排序可能改变当前卡在馆藏中的位置，即使选中 ID 不变也需刷新选片台导航状态。
   setLibSelection(nextSelectedId, false, true);
-  warmLibArt();
+  if (grid) warmLibArt({ roots: [...grid.querySelectorAll('.lib-item:not(.lib-ph)')], preview: true });
   syncLibTileIntrinsicSize(grid);
 }
 
@@ -437,6 +528,7 @@ function syncLibFilterUI() {
     b.classList.toggle('on', active);
     b.setAttribute('aria-pressed', String(active));
   });
+  refreshPhotoStudioControls(document.querySelector('.studio-unified'));
 }
 
 // ======== 卡牌库彩蛋（2026-09-13 留言：多加一些动画和彩蛋） ========
@@ -461,6 +553,9 @@ function libHoloEgg() {
 }
 
 function renderCardLibrary() {
+  if (libPreviewTimer) clearTimeout(libPreviewTimer);
+  libPreviewTimer = null;
+  invalidateLibShellWork();
   const photoOpenStarted = photoFpsEnabled ? performance.now() : 0;
   setCardPageOpen(true);
   // 牌库页去动画开关（2026-09-08 老板拍板）：期间禁全部动画/过渡/流光/hover 特效，
@@ -474,6 +569,7 @@ function renderCardLibrary() {
   libCards = libCatalog.filter(c => c.id !== 'tt-token-color');
   _libSearchText = new WeakMap(libCards.map(c => [c, `${c.name || ''}\n${c.desc || ''}`.toLowerCase()]));
   libCardById = new Map(libCards.map(card => [card.id, card]));
+  libTileHTMLByCard = new WeakMap();
   // 库内容刷新即失效筛选缓存：防止卡牌增删/改卡后命中旧缓存
   // （旧缓存键只含 libCards.length，同张数的内容变化会读到陈旧列表）
   _libFilteredCache = null;
@@ -491,7 +587,7 @@ function renderCardLibrary() {
   if (!libSelectedId || !libFiltered().some(c => c.id === libSelectedId)) libSelectedId = first?.id || null;
   const selectedPreview = libCards.find(c => c.id === libSelectedId) || first;
   UI.showOverlay('', `
-    <div class="pg card-library-page photo-studio-v3 studio-index-layout${libEditMode ? ' edit-mode' : ''}">
+    <div class="pg card-library-page photo-studio-v3 studio-index-layout studio-unified${libEditMode ? ' edit-mode' : ''}">
       <div class="ak-tl studio-exit-anchor">
         <button class="ak-sq ak-exit studio-exit" data-act="closeCardPage" title="退出照相馆（Esc）" aria-label="关闭照相馆">
           <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
@@ -501,16 +597,19 @@ function renderCardLibrary() {
         </button>
       </div>
       <header class="pg-head library-head">
-        <span class="clib-count"><small>馆藏</small><b>${libCards.length}</b><small>张</small></span>
+        <div class="lib-head-title" aria-label="照相馆">
+          <span class="lib-head-name"><b>照相馆</b></span>
+        </div>
+        <span class="clib-count" aria-label="馆藏 ${libCards.length} 张照片"><small>馆藏</small><b>${libCards.length}</b><small>张照片</small></span>
         <div class="library-tools">${libEditMode ? '<button class="hs-btn" data-act="exportNotes" aria-label="导出全部照片备注">[[icon:download]] 导出备注</button>' : ''}${editorTools}</div>
       </header>
       <div class="clib-main">
         <section class="studio-catalog" aria-label="馆藏照片">
           <section class="studio-filterbar" aria-label="卡牌类型筛选">
-            <div class="studio-index-heading"><span>馆藏索引</span><span class="lib-show"${libFiltered().length === libCards.length ? ' hidden' : ''}>找到 <b id="libResultCount">${libFiltered().length}</b> 张照片</span><button type="button" class="studio-clear" data-act="libClearFilter">重置筛选</button></div>
+            <div class="studio-index-heading"><span>浏览馆藏</span><span class="lib-show"${libFiltered().length === libCards.length ? ' hidden' : ''}>找到 <b id="libResultCount">${libFiltered().length}</b> 张</span><button type="button" class="studio-clear" data-act="libClearFilter">重置筛选</button></div>
             <div class="clib-tabs">${tabs}</div>
             <div class="studio-search-row">
-              <label class="studio-field studio-query"><span class="studio-field-label">查找照片</span><span class="studio-search"><input id="cardSearch" class="clib-search" aria-label="搜索卡牌" placeholder="输入卡名或效果" value="${escAttr(libFilter.q)}"></span></label>
+              <label class="studio-field studio-query"><span class="studio-field-label">搜索照片</span><span class="studio-search"><input id="cardSearch" class="clib-search" aria-label="搜索卡牌" placeholder="名称、效果或关键词" value="${escAttr(libFilter.q)}"></span></label>
               <label class="studio-field"><span class="studio-field-label">稀有度</span><span class="studio-select-shell"><select id="libRar" class="pg-select library-select" aria-label="按稀有度筛选"><option value="全部">不限稀有度</option>${RARITIES.map(r => `<option value="${r}"${libFilter.rar === r ? ' selected' : ''}>${r}</option>`).join('')}</select></span></label>
               <label class="studio-field"><span class="studio-field-label">所属人物</span><span class="studio-select-shell"><select id="libCls" class="pg-select library-select" aria-label="按人物筛选"><option value="全部">不限人物</option><option value="通用"${libFilter.cls === '通用' ? ' selected' : ''}>通用</option>${[...new Set(libCards.map(c => c.cls).filter(c => c && c !== '通用'))].sort().map(c => `<option value="${escAttr(c)}"${libFilter.cls === c ? ' selected' : ''}>${esc(characterName(c))}</option>`).join('')}</select></span></label>
               <label class="studio-field"><span class="studio-field-label">排列方式</span><span class="studio-select-shell"><select id="libSort" class="pg-select" aria-label="照片排序"><option value="rarity"${libFilter.sort === 'rarity' ? ' selected' : ''}>稀有度</option><option value="cost"${libFilter.sort === 'cost' ? ' selected' : ''}>费用</option><option value="name"${libFilter.sort === 'name' ? ' selected' : ''}>名称</option></select></span></label>
@@ -519,16 +618,18 @@ function renderCardLibrary() {
           </section>
           ${libGridHTML()}
         </section>
-        <aside class="library-inspector" aria-label="选中卡牌详情"><div class="studio-inspector-head"><b>选片台</b></div><div class="library-preview${selectedPreview ? ' has-preview' : ''}" id="libPreview" aria-live="polite">${libPreviewHTML(selectedPreview)}</div></aside>
+        <aside class="library-inspector" aria-label="选中卡牌详情"><div class="studio-inspector-head"><b>当前选片</b><span>卡面 · 信息 · 背签</span></div><div class="library-preview${selectedPreview ? ' has-preview' : ''}" id="libPreview" aria-live="polite">${libPreviewHTML(selectedPreview)}</div></aside>
       </div>
     </div>`, 'page');
   lastSavedId = null;
+  bindPhotoStudioControls(document.querySelector('.studio-unified'));
   // 整页重建的网格同样走窗口挂载：还有剩余就挂上哨兵观察
   const libGrid = document.getElementById('libGrid');
   rebuildLibNodeMap(libGrid);
   observeLibTiles(libGrid);
+  appendLibShellsIdle();
   bindLibGridNavigation();
-  warmLibArt();
+  if (libGrid) warmLibArt({ roots: [...libGrid.querySelectorAll('.lib-item:not(.lib-ph)')], preview: true });
   syncLibTileIntrinsicSize(libGrid);
   // 注意：lastPreviewId 在下方悬停处理段声明（函数内 let），此处不可提前赋值——
   // 昨晚"悬停去重"改动曾在此赋值触发 TDZ ReferenceError，导致后续全部 UI.act
@@ -666,17 +767,17 @@ function renderCardLibrary() {
   // 2026-09-06 留言（库页滑动很卡）：预览大图的解码/重建在主线程，滚动扫过时
   // 再加 90ms 去抖——只有停留的卡才真正重建，滚动风暴中预览零重建。
   let lastPreviewId = null;
-  let previewTimer = null;
   bindLibGridNavigation();
   UI._hoverHandler = (e) => {
     const w = e.target.closest ? e.target.closest('[data-card]') : null;
     const id = w ? w.dataset.card : null;
     if (id === lastPreviewId) return;
     lastPreviewId = id;
-    if (previewTimer) clearTimeout(previewTimer);
+    if (libPreviewTimer) clearTimeout(libPreviewTimer);
+    libPreviewTimer = null;
     if (!id) return;   // 移出卡面：保留当前预览不动
-    previewTimer = setTimeout(() => {
-      previewTimer = null;
+    libPreviewTimer = setTimeout(() => {
+      libPreviewTimer = null;
       const card = libCardById.get(id);
       if (card) setLibSelection(card.id, true);
     }, 90);
@@ -698,6 +799,10 @@ function renderCardLibrary() {
 }
 
 function closeLibPage() {
+  cancelPendingCardPageEntry();
+  closePhotoStudioControls();
+  if (libPreviewTimer) clearTimeout(libPreviewTimer);
+  libPreviewTimer = null;
   setCardPageOpen(false);
   clearPhotoFpsSettledTimer();
   stopPhotoFpsProbe();
@@ -705,6 +810,8 @@ function closeLibPage() {
   libSearchTimer = null;
   stopLibTileObserver();
   resetLibArtWarmup();
+  invalidateLibShellWork();   // 关页丢弃余壳队列（idle 批次不再向已拆除的网格补壳）
+  libTileHTMLByCard = new WeakMap();   // 全局卡目录仍持有 key 对象，关闭时释放缓存模板字符串
   libRenderContext = null;
   libCatalog = [];
   libCardNodeById.clear();

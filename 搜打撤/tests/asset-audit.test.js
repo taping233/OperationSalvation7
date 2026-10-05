@@ -6,7 +6,8 @@ import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 const require = createRequire(import.meta.url);
-const { auditAssets, canonicalPath, inspectAssets, selectedAssetPaths } = require('../scripts/asset-audit-lib.cjs');
+const { createHash } = require('node:crypto');
+const { auditAssets, canonicalAssetBytes, canonicalPath, inspectAssets, selectedAssetPaths } = require('../scripts/asset-audit-lib.cjs');
 
 function fixture(entries = [{ path: 'old.png', ext: 'png', bytes: 3, license: 'CC0' }], files = { 'old.png': 'old' }) {
   const root = mkdtempSync(path.join(tmpdir(), 'asset-audit-test-'));
@@ -94,6 +95,19 @@ describe('incremental asset registration gate', () => {
   });
 
   // 隔离快照按 index 字节落盘（文本 LF 化），审计指纹按工作树字节登记——快照内必漂移；staged 门内跳过，工作树门与 CI 覆盖。
+  it('文本类资产 CRLF/LF 检出形态审计等价（#35 LF 归一口径）', () => {
+    // Windows 检出（CRLF）、Linux/git 对象（LF）对同一文本资产必须给出同一 bytes/sha256；
+    // 登记一次，两种检出形态都过审——跨平台移植性由归一化保证，不再按检出字节漂移。
+    const crlf = Buffer.from('<svg>\r\n<a/>\r\n</svg>\r\n');
+    const { root, manifest } = fixture([], { 'icon.svg': crlf });
+    const canonical = canonicalAssetBytes(crlf, 'icon.svg');
+    expect(canonical.length).toBeLessThan(crlf.length);
+    const sha = value => createHash('sha256').update(value).digest('hex');
+    manifest([{ path: 'icon.svg', ext: 'svg', bytes: canonical.length, sha256: sha(canonical), license: 'CC0' }]);
+    expect(auditAssets({ root, paths: ['game/assets/icon.svg'] }).ok).toBe(true);
+    writeFileSync(path.join(root, 'game/assets/icon.svg'), Buffer.from('<svg>\n<a/>\n</svg>\n'));
+    expect(auditAssets({ root, paths: ['game/assets/icon.svg'] }).ok).toBe(true);
+  });
   it.skipIf(Boolean(process.env.SDT_STAGED_SNAPSHOT))('runs the repository CLI without a build or document writes and rejects bad arguments', () => {
     const debtPath = path.resolve('docs/asset-audit-debt.json');
     const before = readFileSync(debtPath, 'utf8');

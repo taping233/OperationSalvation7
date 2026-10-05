@@ -30,6 +30,7 @@ import './core/renderer.js';        // 老板留言 #53：对局地图改回原�
                                // scene/ 目录已随 2026-09-19 技术清理删除，需要 3D 时从 git 历史找回
 import './ui/ui.js';
 import './ui/term-tips.js';   // 词条讲解浮框（09-20 老板：特殊词条触摸即讲解）——全局委托
+import './ui/character-idle.js';   // 选人页五人待机演出（自挂载：监听 sdt-overlay-mode，不侵入 altar 渲染）
 import './core/shared.js';
 import './battle/battle-loader.js';
 import './run/chests.js';

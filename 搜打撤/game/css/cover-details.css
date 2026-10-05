@@ -1,0 +1,97 @@
+/* 2026-10-05: uncovered detail surfaces. Named recent page covers stay frozen.
+   Card-face interiors, rarity text, mounts and all drag/selection handlers stay intact. */
+/* Backpack is a separate run-time page, not the recently redesigned hub warehouse. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.bag-page:has(.bag-view) {
+  width: 100%; height: 100%; max-width: none; max-height: none;
+  padding: 0; border: 0; border-radius: 0; background: var(--cover-paper, #edf0e8); box-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.bag-page #ovBody:has(.bag-view) { min-height: 0; height: 100%; overflow: hidden; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view {
+  display: flex; flex-direction: column; width: 100%; height: 100%; min-height: 0;
+  background: var(--cover-paper, #edf0e8); color: var(--cover-ink, #1b3442);
+  font-family: var(--font-ui);
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .bag-head {
+  flex: none; align-items: flex-start; gap: 24px; margin: 0; padding: 24px 30px;
+  border-bottom: 2px solid var(--cover-gold, #c0aa78); background: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .bag-head h2 { display: block; margin: 0 0 14px; color: var(--cover-ink, #1b3442); font: 700 28px/1.4 var(--font-ui); letter-spacing: .07em; text-shadow: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .bag-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .fc-chip { padding: 7px 12px; border: 1px solid #a8b9b2; border-radius: 0; background: #f7f7ef; color: #526a74; font: 500 14px/1.4 var(--font-ui); }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .fc-chip b { color: #1b3442; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .bag-close {
+  flex: none; min-width: 44px; min-height: 44px; border: 0; border-radius: 0;
+  background: #233743; color: #f7f3e8; box-shadow: 3px 3px 0 #9eaca659;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .bag-layout {
+  flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(310px, .34fr);
+  gap: 26px; padding: 24px 30px 30px; overflow-y: auto; align-items: start;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .bag-main { min-width: 0; padding: 18px; border: 1px solid #9eafaf73; background: #f7f7ef; overflow-x: auto; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .bag-side { min-width: 0; display: grid; gap: 22px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .bag-side-card { padding: 18px; border: 1px solid #9eafaf73; background: #f7f7ef; box-shadow: 3px 3px 0 #263d491c; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .set-h { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 0 0 18px; padding-bottom: 12px; border-bottom: 1px solid #aebcb973; color: #1b3442; font: 700 18px/1.4 var(--font-ui); letter-spacing: .04em; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .set-tip { color: #586c77; font: 500 13px/1.4 var(--font-ui); }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .bag-sort { display: flex; flex-wrap: wrap; gap: 9px; margin-left: auto; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .mini-btn { min-height: 36px; padding: 8px 12px; border: 0; border-radius: 0; background: #233743; color: #f7f3e8; font: 500 13px/1.4 var(--font-ui); box-shadow: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .bag-grid { gap: 14px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .bag-slot.empty { background: #e1e7df; border: 1px dashed #a9b8b2; box-shadow: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .bag-slot.empty.safe-empty { background: #e3ece5; border-color: #80a9aa; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .bag-slot.empty.pearl-empty { background: #ece7d8; border-color: #bca473; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .pk-list { max-height: 40vh; overflow-y: auto; padding: 2px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .pk-tag { background: #556c78; color: #f7f3e8; border: 0; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .ov-empty { padding: 18px 0; color: #6a7d82; font: 400 15px/1.7 var(--font-ui); }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .help-btn { color: #1b3442; border-color: #97adac; background: #e2e9df; border-radius: 0; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view :is(button,.help-btn):focus-visible { outline: 2px solid #719c9c; outline-offset: 3px; }
+/* Ordinary card zoom is distinct from the frozen photo card-zoom family. */
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) { gap: 16px; padding: 24px 24px 52px; overflow-y: auto; justify-content: flex-start; justify-content: safe center; }
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) .cz-backdrop { background: #081923bd; backdrop-filter: blur(7px); }
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) .cz-note {
+  flex: none; width: min(620px, 90%); max-height: 28vh; overflow-y: auto;
+  margin: 0; padding: 15px 18px; gap: 12px; border: 1px solid #99afad; border-radius: 0;
+  background: #edf0e8; color: #1b3442; box-shadow: 3px 3px 0 #07131b33;
+}
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) .cz-note.has { border-color: #c0aa78; box-shadow: 3px 3px 0 #07131b33; }
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) .cz-note-tag { color: #6e5e3e; font: 700 13px/1.6 var(--font-ui); letter-spacing: .04em; }
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) :is(.cz-note-text,.cz-note-status) { color: #586c77; font: 400 14px/1.7 var(--font-ui); }
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) .cz-note.has .cz-note-text { color: #1b3442; }
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) .cz-note-input {
+  min-width: 0; width: 100%; min-height: 70px; padding: 9px 12px;
+  border: 1px solid #97adac; border-radius: 0; background: #f7f7ef;
+  color: #1b3442; font: 400 15px/1.7 var(--font-ui); resize: vertical;
+}
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) .cz-foot {
+  position: relative; z-index: 2; flex: none; width: min(1020px, 94%);
+  padding: 16px 20px; border: 1px solid #99afad; border-radius: 0;
+  background: #edf0e8f5; color: #1b3442; box-shadow: 3px 3px 0 #07131b33;
+}
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) .cz-foot .ov-note { margin: 12px 0 0; color: #586c77; font: 400 14px/1.7 var(--font-ui); }
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) .cz-foot .ov-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 0; }
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) .cz-foot .ov-btns + .ov-btns { margin-top: 12px; }
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) .cz-foot .ov-btn { min-height: 42px; padding: 10px 18px; border: 0; border-radius: 0; background: #233743; color: #f7f3e8; font: 600 15px/1.4 var(--font-ui); clip-path: polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%); }
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) .cz-foot .ov-btn.ok { background: #a97738; color: #fff4df; }
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) .cz-foot .ov-btn.danger { background: #865044; color: #fff0e7; }
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) .cz-close { color: #1b3442; background: #edf0e8; border: 1px solid #97adac; border-radius: 0; }
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) .cz-hint { color: #d4e0df; font: 500 13px/1.6 var(--font-ui); letter-spacing: .04em; }
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) :is(button,textarea):focus-visible { outline: 2px solid #c0aa78; outline-offset: 3px; }
+/* Warehouse tertiary details only: never a .stash-workspace or hub page. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has(.stash-shell) { width: min(1000px, 95%); max-width: 95%; background: #edf0e8; color: #1b3442; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .stash-shell { min-width: 0; padding: 4px; color: #1b3442; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .stash-shell .stash-pop-card { margin: 0 auto 22px; padding: 18px; width: max-content; max-width: 100%; background: #e3e9df; border: 1px solid #a9bbb5; box-shadow: 3px 3px 0 #263d491c; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .stash-shell :is(.ov-note,.ov-stats) { color: #586c77; font: 400 15px/1.75 var(--font-ui); }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .stash-shell .gold { color: #8a6837; }
+/* Containers are third-level surfaces over card zoom, not a battle hand. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='pouchBack'],[data-act='pearlBack']) { width: min(1100px, 95%); max-width: 95%; background: #edf0e8; color: #1b3442; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='pouchBack'],[data-act='pearlBack']) .bt-hand { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 18px; margin: 18px 0 24px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='pouchBack'],[data-act='pearlBack']) :is(.ov-note,.ov-empty) { color: #586c77; font-size: 15px; line-height: 1.75; }
+/* Light confirmation sheet. Actual destructive/safe actions and focus ordering remain. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay.fx-glass .card:has(.glass-panel) { background: #edf0e8f2; color: #1b3442; border: 2px solid #233743; border-radius: 0; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay.fx-glass .glass-panel { padding: 6px 2px; background: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay.fx-glass .glass-panel .ov-note { color: #586c77; font: 400 16px/1.8 var(--font-ui); text-shadow: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay.fx-glass .glass-panel .ov-note b { color: #1b3442; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay.fx-glass .glass-panel .ov-btn { border: 0; border-radius: 0; color: #f7f3e8; background: #233743; min-height: 44px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay.fx-glass .glass-panel .ov-btn.danger { background: #865044; color: #fff0e7; }
+@media (max-width: 920px) {
+  :where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .bag-layout { grid-template-columns: 1fr; }
+  :where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view .bag-side { grid-template-columns: minmax(0, 1fr); }
+}

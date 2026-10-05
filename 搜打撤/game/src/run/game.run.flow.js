@@ -60,6 +60,9 @@ export function moveTo(toLi, toIdx) {
     game.layerIdx = toLi;
     game.trackPos = toIdx;
     markSeen(toLi, toIdx);
+    // 2026-10-03 老板（SYS-01）：首次踏入的格写入 explored（撤离经验只统计首次有效探索量，
+    // 重复进出已探索格不再涨经验）；旧档会话无该字段（null）不补标，撤离结算走旧口径。
+    if (game.explored) game.explored[toLi + ',' + toIdx] = 1;
     // 商店是唯一按「离开房间」消耗的节点；其余节点在奖励/事件实际结算完成时自行写入。
     if (current?.def?.type === 'shop') consumeCell(fromLi, fromIdx);
     // 到达取景走镜头补间（2026-09-27 动效补全：原为硬切瞬跳）；减动效/急速档直接贴合

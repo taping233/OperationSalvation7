@@ -8,6 +8,22 @@ const esc = value => escRaw(value ?? '');
 const optionList = (items, selected, emptyLabel) => `<option value="">${esc(emptyLabel)}</option>${(items || []).map(item => `<option value="${esc(item.id)}"${item.id === selected ? ' selected' : ''}>${esc(item.name || item.id)}</option>`).join('')}`;
 const statusText = item => item.status === 'ready' ? `已有 ${item.availableCount}` : item.status === 'forbidden' ? '职业卡禁带' : `缺 ${Math.max(0, item.requestedCount - item.availableCount)}`;
 
+// 预设摘要的资格提示：canStart 还卡在人物/宠物的收录与拥有上时给出一行原因，
+// 否则玩家只看到「需要处理 · 0 缺失 · 0 禁带」无从修复
+function qualificationHints(q) {
+  if (!q) return '';
+  const hints = [];
+  if (q.characterId) {
+    if (!q.characterKnown) hints.push('人物不在角色册');
+    else if (!q.characterOwned) hints.push('人物尚未拥有');
+  }
+  if (q.petId) {
+    if (!q.petKnown) hints.push('宠物不在图鉴');
+    else if (!q.petOwned) hints.push('宠物尚未拥有');
+  }
+  return hints.length ? `<small class="prep-qual-hint">${esc(hints.join(' · '))}</small>` : '';
+}
+
 function renderPreset(preset, model) {
   const preview = preset.preview;
   return `<section class="prep-preset" data-preset="${esc(preset.id)}">
@@ -15,7 +31,7 @@ function renderPreset(preset, model) {
     <div class="prep-fields"><label>人物<select data-field="characterId">${optionList(model.characterOptions, preset.characterId, '未选择人物')}</select></label><label>宠物<select data-field="petId">${optionList(model.petOptions, preset.petId, '未选择宠物')}</select></label></div>
     <div class="prep-picks">${preset.picks.length ? preset.picks.map(pick => { const hit = preview?.resolvedPicks?.find(item => item.card.cardId === pick.card.cardId && (item.card.variantKey || '') === (pick.card.variantKey || '')); return `<div class="prep-pick ${esc(hit?.status || '')}"><span><b>${esc(hit?.name || pick.name || pick.card.cardId)}</b> ×${pick.count}</span><small>${hit ? esc(statusText(hit)) : '尚未预览'}</small><button data-action="preset-pick-remove" data-card-id="${esc(pick.card.cardId)}" aria-label="移除 ${esc(hit?.name || pick.card.cardId)}">移除</button></div>`; }).join('') : '<p class="prep-empty">还没有选择带入卡牌。</p>'}</div>
     <div class="prep-add"><select data-role="card-add">${optionList(model.cardOptions, null, '选择仓库卡牌')}</select><input data-role="count-add" type="number" min="1" max="99" value="1" aria-label="数量"><button data-action="preset-pick-add">加入愿望清单</button></div>
-    ${preview ? `<div class="prep-summary ${preview.canStart ? 'ready' : 'blocked'}"><b>${preview.canStart ? '可以应用' : '需要处理'}</b><span>带入 ${preview.costs.stashCards} 张 · ${preview.missing.length} 缺失 · ${preview.forbidden.length} 禁带</span></div>` : ''}
+    ${preview ? `<div class="prep-summary ${preview.canStart ? 'ready' : 'blocked'}"><b>${preview.canStart ? '可以应用' : '需要处理'}</b><span>带入 ${preview.costs.stashCards} 张 · 占 ${preview.costs.slotsUsed} 格${preview.costs.extraStackSlots ? `（同名超限多占 ${preview.costs.extraStackSlots} 格）` : ''} · ${preview.missing.length} 缺失 · ${preview.forbidden.length} 禁带</span>${qualificationHints(preview.qualification)}</div>` : ''}
     <div class="prep-actions"><button data-action="preset-preview">重新预览</button><button data-action="preset-apply"${preview?.canStart ? '' : ' disabled'}>应用到整备</button></div>
     <p class="prep-empty">应用带入卡牌后，在整备页确认宠物并出发；人物仍在出发后选择。</p>
   </section>`;

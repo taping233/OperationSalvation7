@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" role="img" aria-label="第三层紧急撤离与第四层通关路线">
+  <rect width="560" height="360" rx="24" fill="#17262b"/><text x="30" y="45" fill="#f3e9d0" font-family="sans-serif" font-size="24" font-weight="700">两条撤离路线</text>
+  <rect x="27" y="72" width="230" height="252" rx="20" fill="#25383d" stroke="#728386" stroke-width="2"/><rect x="303" y="72" width="230" height="252" rx="20" fill="#25383d" stroke="#728386" stroke-width="2"/>
+  <text x="142" y="109" fill="#d4ddd1" font-family="sans-serif" font-size="20" text-anchor="middle">第三层</text><text x="418" y="109" fill="#d4ddd1" font-family="sans-serif" font-size="20" text-anchor="middle">第四层</text>
+  <circle cx="142" cy="168" r="34" fill="#5d5540" stroke="#edc978" stroke-width="3"/><path d="M142 145v24l15 11" fill="none" stroke="#f4e5bd" stroke-width="4" stroke-linecap="round"/><text x="142" y="223" fill="#f0dba9" font-family="sans-serif" font-size="20" text-anchor="middle">紧急出口</text>
+  <g transform="translate(77 253)"><rect width="34" height="43" rx="5" fill="#b8c3b4" stroke="#e5d29a" stroke-width="2"/><rect x="40" width="34" height="43" rx="5" fill="#b8c3b4" stroke="#e5d29a" stroke-width="2"/><rect x="80" width="34" height="43" rx="5" fill="#b8c3b4" stroke="#e5d29a" stroke-width="2"/><text x="132" y="28" fill="#f0dba9" font-family="sans-serif" font-size="20">献祭 3 张</text></g>
+  <path d="M338 166h160" stroke="#617579" stroke-width="4"/><path d="M368 166h92" stroke="#e8c16f" stroke-width="4"/><path d="m452 157 12 9-12 9" fill="none" stroke="#e8c16f" stroke-width="4"/>
+  <circle cx="340" cy="166" r="24" fill="#5c5339" stroke="#e6c875" stroke-width="3"/><path d="M340 148l5 11 12 2-9 7 3 12-11-6-11 6 3-12-9-7 12-2z" fill="#f1d48e"/><text x="340" y="218" fill="#e6d8b8" font-family="sans-serif" font-size="18" text-anchor="middle">祭坛</text>
+  <path d="M432 141q19-24 38 0v34q-19 20-38 0z" fill="#8f624e" stroke="#d4ac78" stroke-width="3"/><path d="m442 154 7 7 7-7m4 0 7 7 7-7" fill="none" stroke="#302b29" stroke-width="3"/><text x="455" y="218" fill="#e6d8b8" font-family="sans-serif" font-size="18" text-anchor="middle">首脑</text>
+  <path d="M493 166h28" stroke="#e8c16f" stroke-width="4"/><path d="m512 157 12 9-12 9" fill="none" stroke="#e8c16f" stroke-width="4"/><circle cx="517" cy="166" r="4" fill="#f7e8c0"/><text x="418" y="270" fill="#f0dba9" font-family="sans-serif" font-size="20" text-anchor="middle">击败后到终点</text>
+  <text x="30" y="348" fill="#aebdb8" font-family="sans-serif" font-size="18">第四层需先激活祭坛，再挑战首脑。</text>
+</svg>

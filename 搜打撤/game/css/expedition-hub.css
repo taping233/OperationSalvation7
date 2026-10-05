@@ -189,39 +189,70 @@
 #overlay .pk-row.stash-row.poor .shop-price-tag { border-color: transparent; color: inherit; }
 #overlay .pk-row.stash-row .poor-why { margin-left: 6px; color: inherit; }
 
-/* ═══ 2026-09-25 二波 C 组 P0（老板点名）：人物档案卡深色卡壳 + 立绘 contain 坐深底 + 底部信息条 ═══
-   对标 page-events 定稿语言：#0a1c27 底 + 1px rgba(194,212,211,.22) 描边 + 4px 金线内衬。
-   立绘源图（portraits/full/*.webp）是不透明白底 4K 横图（无 alpha），cover 时白墙糊满卡面、
-   金字裸压亮部不可读；改 contain 全身像坐进卡壳（白底作"档案相纸"压亮度，底缘 mask 溶进深底），
-   名称/Lv/经验条/皮肤按钮收进底部固定信息条（渐变托底）。仅 transform/opacity/filter，
-   无新动画；hover 既有缩放沿用 winter.css reduced-motion 兜底。 */
+/* 2026-10-03 A6：认可白底横幅完整坐入相纸窗；档案信息独立流式排版。
+   当前窗口样板采用宽卡，后续人物沿原容器滚动；不修改原图或皮肤行为。 */
+#overlay #hubMain.hub-classes .class-dossier-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  align-items: start;
+}
 #overlay #hubMain.hub-classes .class-dossier-grid .class-dossier {
+  min-height: 0;
   border: 1px solid rgba(194, 212, 211, .22);
   background: #0a1c27;
 }
-/* 4px 金线内衬：锁在卡壳最上层（盖立绘与信息条），克制 28% 透明度不抢文字 */
 #overlay #hubMain.hub-classes .class-dossier-grid .class-dossier::after {
-  content: ''; position: absolute; inset: 4px; z-index: 4; pointer-events: none;
-  border: 1px solid rgba(217, 187, 130, .28);
+  display: none;
 }
-/* 立绘窗深底：相纸四周由深青晕承接，明度差不再跳 */
 #overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .class-dossier-art {
-  background: radial-gradient(120% 90% at 50% 0%, #143246 0%, #0d2434 52%, #0a1c27 100%);
+  position: relative;
+  inset: auto;
+  z-index: 0;
+  aspect-ratio: 16 / 9;
+  background: #fff;
+  border-bottom: 1px solid rgba(194, 212, 211, .22);
 }
-/* contain 全身像：白底压亮度降饱和成"相纸"，底缘 55%→92% 渐隐溶进卡壳深底 */
 #overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .class-dossier-art img {
+  display: block;
+  position: absolute;
+  inset: 0;
   object-fit: contain;
-  filter: brightness(.9) saturate(.82);
-  -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 92%);
-  mask-image: linear-gradient(180deg, #000 55%, transparent 92%);
+  object-position: center;
+  filter: none;
+  transform: none;
+  transition: none;
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 #overlay #hubMain.hub-classes .class-dossier-grid .class-dossier:hover .class-dossier-art img {
-  filter: brightness(.96) saturate(.9);
+  filter: none;
+  transform: none;
 }
-/* 底部固定信息条：渐变托底替代裸压画面，金字可读 */
 #overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .class-dossier-copy {
-  padding: 56px 16px 16px;
-  background: linear-gradient(180deg, transparent, #0a1c27 40%);
+  position: relative;
+  inset: auto;
+  padding: 18px 18px 16px;
+  background: #0a1c27;
+}
+#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .class-dossier-shade {
+  display: none;
+}
+#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .class-dossier-index {
+  z-index: 1;
+  padding: 5px 7px;
+  background: #0a1c27;
+  border: 1px solid rgba(194, 212, 211, .3);
+}
+#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier p,
+#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .class-dossier-meta {
+  font-size: 14px;
+}
+#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .xp-txt,
+#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .class-skins .mini-btn {
+  font-size: 13px;
+}
+#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .class-skins .mini-btn {
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 /* W2-02（0926 W2 R1）：锁态深层内容收敛行——原主列锁钮+页底宝藏大门横条（锁态）不渲染，

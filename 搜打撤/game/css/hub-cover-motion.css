@@ -1,0 +1,20 @@
+/* One base motion grammar. Transaction refreshes remain still. */
+body.interface-motion #overlay[data-ui-motion='page']:has(#hubMain.hub-cover) { --ui-rise: 6px; --ui-return: 6px; --ui-scale: 1; }
+body.interface-motion #overlay #hubMain.hub-cover .person-portrait img { animation: none; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-page.page-in {
+  animation: hubUnifiedSheet .22s var(--ease-entrance) both;
+}
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-page.page-in :is(.hub-card, .class-command, .class-dossier, .collection-command, .collection-tabs, .back-card, .coll-group, .coll-slot, .coll-ms, .shelf-item, .ach-row, .ach-sil, .mode-card, .pet-row, .pk-row, .stash-cell) { animation: none; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-page.page-in .person-portrait img { animation: none; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-body :is(.hub-tab, .stash-section-tab, .person-tab, .collection-tabs button, .ov-btn, .mini-btn, .deploy-primary) { transition: transform .14s ease, background-color .14s ease, filter .14s ease; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-body :is(.hub-tab, .stash-section-tab, .person-tab, .collection-tabs button, .ov-btn, .mini-btn, .deploy-primary):hover:not(:disabled) { transform: translateY(-1px); }
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-body :is(.hub-tab, .stash-section-tab, .person-tab, .collection-tabs button, .ov-btn, .mini-btn, .deploy-primary):active:not(:disabled) { transform: translateY(1px); }
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-page :is(.stash-cell, .back-card, .coll-slot):hover { transform: translateY(-1px); }
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-page :is(.stash-cell, .back-card, .coll-slot):active { transform: translateY(1px); }
+@keyframes hubUnifiedSheet { from { opacity: .65; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+body.reduce-motion #overlay .card.page #hubMain.pg.hub.hub-cover *,
+body.reduce-motion #overlay .card.page #hubMain.pg.hub.hub-cover *::before,
+body.reduce-motion #overlay .card.page #hubMain.pg.hub.hub-cover *::after { animation: none; transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  #overlay .card.page #hubMain.pg.hub.hub-cover *, #overlay .card.page #hubMain.pg.hub.hub-cover *::before, #overlay .card.page #hubMain.pg.hub.hub-cover *::after { animation: none; transition: none; }
+}

@@ -161,6 +161,7 @@ function createRunSavePayload() {
     eventLog: game.eventLog || [],
     visited: game.visited || {},
     seen: game.seen || {},
+    explored: game.explored || null,   // 2026-10-03 老板（SYS-01）：首踏入格打标（撤离经验锚定首探）；旧档会话为 null 原样回写
     fragments: game.fragments || 0,
     discovered: [...game.discoveredPairs],
     bossKilled: !!game.bossKilled,
@@ -334,6 +335,9 @@ function restoreGame(slot) {
   // 迷雾与防重刷（旧档无字段 → {}，走【全部可见/可重复】的兼容路径）
   game.visited = (s.visited && typeof s.visited === 'object') ? s.visited : {};
   game.seen = (s.seen && typeof s.seen === 'object') ? s.seen : {};
+  // 2026-10-03 老板（SYS-01）：首踏入格打标（撤离经验只统计首次有效探索）；旧档无字段 → null，
+  // 本会话移动不补标、撤离结算回退旧口径 turn-1（存量进度不缩水）
+  game.explored = (s.explored && typeof s.explored === 'object') ? s.explored : null;
   game.fragments = +s.fragments || 0;   // 员工通行证A碎片（旧档无字段 → 0）
   game.bossKilled = !!s.bossKilled;     // 本局是否已击败首脑（终局撤离条件）
   game.altarActivated = !!s.altarActivated;   // 第四层祭坛是否已激活（首脑格准入条件，旧档无字段 → false）
@@ -480,6 +484,7 @@ function newRun(mode, picks, options = {}) {
   game.bossKilled = false;   // 第四层击败首脑后才能终局撤离
   game.visited = {};   // 已结算过的一次性格（防回头路重刷战斗/宝箱/事件）
   game.seen = {};      // 战争迷雾：走过的节点 + 当前相邻节点可见，其余隐藏
+  game.explored = {};   // 2026-10-03 老板（SYS-01）：首次踏入过的格（撤离经验只算首探量，防安全往返刷经验）
   SDT.Sound.music('board');   // 出发：切入行军氛围
   UI.clearLog();
   UI.log(`欢迎来到<b>代号7</b>：本次玩法【<b>${modeCfg().name}</b>】——${modeCfg().ckpt}`, 'sys');

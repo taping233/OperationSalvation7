@@ -367,7 +367,7 @@ function createShopController({
       if (game.canReceiveCard
         ? !game.canReceiveCard(slot.card)
         : (!game.ownedCards.some(owned => owned.card.name === slot.card.name) && !game.canAcceptCard(slot.card))) {
-        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格，同名卡最多叠 3 张——初始攻击/火球 5 张），买不下这张卡`, 'warn');
+        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格；同名每格最多叠 3 张——初始攻击/火球 5 张，堆满后另占一格），买不下这张卡`, 'warn');
         SDT.Sound.sfx('error');
         denySlotFeedback(+data.i, `背包装不下（${usedSlots()}/${bagCap()} 格）`);
         return;
@@ -395,9 +395,9 @@ function createShopController({
       // 2026-09-19 审计 P2-7：改走 canReceiveCard 统一口径——堆未满并入不占格、堆满或
       // 满包拒买；旧判定「满包但有同名就放行」会在堆也满时把第 6 张推出容量外
       if (!game.canReceiveCard(slot.card)) {
-        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格，初始攻击同名最多叠 5 张），补充不了`, 'warn');
+        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格；初始攻击每格最多叠 5 张，堆满后另占一格），补充不了`, 'warn');
         SDT.Sound.sfx('error');
-        denySlotFeedback(+data.i, `补不了——背包已满（${usedSlots()}/${bagCap()} 格，初始攻击同名最多叠 5 张）`);
+        denySlotFeedback(+data.i, `补不了——背包已满（${usedSlots()}/${bagCap()} 格）`);
         return;
       }
       game.coins -= slot.price;

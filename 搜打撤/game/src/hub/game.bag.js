@@ -404,6 +404,16 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     UI.act('pouchTake', (d) => {
       const stack = storedStacks().find(st => st.card.name === d.name);
       if (!stack) return;
+      const cap = game.stackCapOf(stack.card);
+      const sameBag = game.ownedCards.filter(x => !x.safe && !x.stored && x.card.name === stack.card.name).length;
+      const delta = Math.ceil((sameBag + stack.count) / cap) - Math.ceil(sameBag / cap);
+      // 取出整叠复用叠放增量；珍珠盒的额外格仍只收资源卡。
+      const limit = stack.card.type === '资源' ? bagCap() : SDT.Base.bagCap();
+      if (delta > 0 && usedSlots() + delta > limit) {
+        UI.log(`[[icon:bag]] 背包放不下：本次整叠还需 ${delta} 格，请先腾出空间；珍珠盒额外格仅收资源卡`, 'warn');
+        SDT.Sound.sfx('deny');
+        return;
+      }
       game.ownedCards.forEach(x => { if (x.pouchOf === POUCH_ID && x.card.name === d.name) { delete x.pouchOf; delete x.stored; } });
       UI.log(`[[icon:cards]] 【<b>${esc(stack.card.name)}</b>】已从锦囊取出`, 'ok');
       saveGame();

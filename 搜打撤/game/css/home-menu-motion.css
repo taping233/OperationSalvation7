@@ -1,0 +1,71 @@
+/* Home navigation: matched departures, gentle page reveals, staggered returns.
+   Page closing stays within the existing overlay 225ms cleanup window. */
+#title.home-composed[data-home-phase] { animation: none !important; }
+/* Settling a return must not restart the cover's original entry animation. */
+#title.home-composed[data-home-phase="rest"] .home-plate,
+#title.home-composed[data-home-phase="rest"] .home-brand,
+#title.home-composed[data-home-phase="rest"] .home-footer { animation: none !important; }
+#title.home-composed[data-home-phase="out"] .home-primary > .home-plate {
+  animation: hmMenuLeftOut .2s cubic-bezier(.4,0,.8,.4) both !important;
+}
+#title.home-composed[data-home-phase="out"] .home-secondary > .home-plate {
+  animation: hmMenuRightOut .2s cubic-bezier(.4,0,.8,.4) both !important;
+}
+#title.home-composed[data-home-phase="out"] .home-brand,
+#title.home-composed[data-home-phase="out"] .home-footer {
+  animation: hmQuietOut .2s ease-in both !important;
+}
+#title.home-composed[data-home-phase="in"] .home-primary > .home-plate {
+  animation: hmMenuLeftIn .42s cubic-bezier(.22,1,.36,1) both !important;
+}
+#title.home-composed[data-home-phase="in"] .home-secondary > .home-plate {
+  animation: hmMenuRightIn .42s cubic-bezier(.22,1,.36,1) both !important;
+}
+#title.home-composed[data-home-phase="in"] .home-brand,
+#title.home-composed[data-home-phase="in"] .home-footer {
+  animation: hmQuietIn .36s cubic-bezier(.22,1,.36,1) both !important;
+}
+#title.home-composed[data-home-phase="in"] .home-primary > :nth-child(2) { animation-delay: 35ms !important; }
+#title.home-composed[data-home-phase="in"] .home-secondary > :nth-child(2) { animation-delay: 25ms !important; }
+#title.home-composed[data-home-phase="in"] .home-secondary > :nth-child(3) { animation-delay: 50ms !important; }
+#title.home-composed[data-home-phase="in"] .home-secondary > :nth-child(4) { animation-delay: 75ms !important; }
+#title.home-composed[data-home-phase="in"] .home-secondary > :nth-child(5) { animation-delay: 100ms !important; }
+#title.home-composed[data-home-phase="in"] .home-footer { animation-delay: 60ms !important; }
+#title.home-composed[data-home-phase="out"] .home-primary,
+#title.home-composed[data-home-phase="out"] .home-secondary,
+#title.home-composed[data-home-phase="out"] .home-footer { pointer-events: none; }
+/* A covered title still needs its finite departure to finish; ambient effects stay paused. */
+body.page-covered #title.home-composed[data-home-phase] .home-plate,
+body.page-covered #title.home-composed[data-home-phase] .home-brand,
+body.page-covered #title.home-composed[data-home-phase] .home-footer { animation-play-state: running; }
+@keyframes hmMenuLeftOut { to { opacity: 0; transform: translateX(-18px) scale(.985); } }
+@keyframes hmMenuRightOut { to { opacity: 0; transform: translateX(18px) scale(.985); } }
+@keyframes hmMenuLeftIn { from { opacity: 0; transform: translateX(-22px) scale(.985); } to { opacity: 1; transform: none; } }
+@keyframes hmMenuRightIn { from { opacity: 0; transform: translateX(22px) scale(.985); } to { opacity: 1; transform: none; } }
+@keyframes hmQuietOut { to { opacity: 0; transform: translateY(-6px); } }
+@keyframes hmQuietIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+@keyframes hmLayerIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes hmLayerOut { to { opacity: 0; } }
+
+#title.home-composed .home-credits-dialog[open][data-home-motion="in"] {
+  animation: hmDialogIn .34s cubic-bezier(.22,1,.36,1) both;
+}
+#title.home-composed .home-credits-dialog[open][data-home-motion="out"] {
+  animation: hmDialogOut .2s cubic-bezier(.4,0,.7,1) both; pointer-events: none;
+}
+#title.home-composed .home-credits-dialog[data-home-motion="in"]::backdrop { animation: hmLayerIn .3s ease-out both; }
+#title.home-composed .home-credits-dialog[data-home-motion="out"]::backdrop { animation: hmLayerOut .2s ease-in both; }
+@keyframes hmDialogIn { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes hmDialogOut { to { opacity: 0; transform: translateY(9px) scale(.98); } }
+
+body.reduce-motion #title.home-composed[data-home-phase] *,
+body.reduce-motion #title.home-composed .home-credits-dialog[data-home-motion]::backdrop {
+  animation: none !important; transition: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  #title.home-composed[data-home-phase] *,
+  #title.home-composed .home-credits-dialog[data-home-motion]::backdrop {
+    animation: none !important; transition: none !important;
+  }
+}

@@ -18,6 +18,8 @@ async function devForceBattle(isBoss) {
     const b = MAP.altar.bosses[0];
     const started = await startBattle(game, scaledEnemy(b), { isBoss: true, returnTo: 'altar', name: b.name });
     if (started === false || !currentContext()) return false;
+    // 2026-10-03 老板（SYS-11）：强制开战入干预履历（boot 调试按钮/验收场景共用本入口）
+    SDT.Agent?.recorder?.noteIntervention?.('debug-command', `强制进入BOSS战:${b.name}`);
     UI.log(`[[icon:tools]] 开发者：强制进入 BOSS 战【${esc(b.name)}】`, 'sys');
     const snap = SDT.Battle.getSnapshot();
     if (snap.deckSelection) {
@@ -36,6 +38,7 @@ async function devForceBattle(isBoss) {
   const started = await startBattle(game, list, { isBoss: false, layer: game.layerIdx, name: list[0].name,
     risk: list.risk, strategy: list.strategy });
   if (started === false || !currentContext()) return false;
+  SDT.Agent?.recorder?.noteIntervention?.('debug-command', '强制进入遭遇战');   // SYS-11 干预履历
   UI.log('[[icon:tools]] 开发者：强制进入遭遇战', 'sys');
 }
 
@@ -64,6 +67,11 @@ function devJumpNode(kind) {
   if (!UI.el.overlay.hidden) UI.hideOverlay();
   game.state = 'idle';
   UI.beginRoom();
+  // 2026-10-03 老板（SYS-11）：调试跳节点=场景注入，入干预履历；战斗/BOSS 类由
+  // devForceBattle 自报（debug-command），此处不双计。
+  if (kind !== 'battle' && kind !== 'boss') {
+    SDT.Agent?.recorder?.noteIntervention?.('scene-inject', `跳转节点:${label}`);
+  }
   UI.log(`[[icon:tools]] 开发者：跳转节点【<b>${label}</b>】`, 'sys');
   switch (kind) {
     case 'battle': devForceBattle(false); break;
@@ -138,9 +146,11 @@ function openDevConsole() {
     : keysTabHTML();
   const bindTab = () => {
     if (tab === 'debug') {
-      UI.act('devcCoin', data => { if (notInRun()) return; const n = +data.n || 50; game.coins += n; UI.log(`[[icon:coin]] 开发者：+${n} 币（现有 ${game.coins}）`, 'coin'); saveGameDev(); render(); });
-      UI.act('devcHeal', data => { if (notInRun()) return; const n = +data.n || 10; game.hp = n >= 999 ? game.maxHp : Math.min(game.maxHp, game.hp + n); UI.log(`[[icon:heart]] 开发者：生命 ${game.hp}/${game.maxHp}`, 'ok'); saveGameDev(); render(); });
-      UI.act('devcCard', data => { if (notInRun()) return; const card = hitCards()[+data.i]; if (card && game.grantCard) game.grantCard(card); render(); });
+      // 2026-10-03 老板（SYS-11）：控制台资源/发卡改写入干预履历（dev-console）；战斗调试
+      // devcB 不在此记——SDT.Battle.commands.dev 漏斗自报（debug-command），避免双计。
+      UI.act('devcCoin', data => { if (notInRun()) return; const n = +data.n || 50; game.coins += n; SDT.Agent?.recorder?.noteIntervention?.('dev-console', `加币:${n}`); UI.log(`[[icon:coin]] 开发者：+${n} 币（现有 ${game.coins}）`, 'coin'); saveGameDev(); render(); });
+      UI.act('devcHeal', data => { if (notInRun()) return; const n = +data.n || 10; game.hp = n >= 999 ? game.maxHp : Math.min(game.maxHp, game.hp + n); SDT.Agent?.recorder?.noteIntervention?.('dev-console', n >= 999 ? '回满血' : `回血:${n}`); UI.log(`[[icon:heart]] 开发者：生命 ${game.hp}/${game.maxHp}`, 'ok'); saveGameDev(); render(); });
+      UI.act('devcCard', data => { if (notInRun()) return; const card = hitCards()[+data.i]; if (card && game.grantCard) { SDT.Agent?.recorder?.noteIntervention?.('dev-console', `发卡:${card.name}`); game.grantCard(card); } render(); });
       UI.act('devcB', data => { if (!devBattle()) return; SDT.Battle.commands.dev(data.k, data.n); setTimeout(render, 80); });
     } else if (tab === 'agent') {
       bindAgentTab(render);

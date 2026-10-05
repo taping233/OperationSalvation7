@@ -1,0 +1,41 @@
+/* character-idle.css —— 选人页（cls2）五人待机动作（2026-10-03 老板令「添加待机动作，要有大量特效，不同人物要有不同动作」）。
+ * JS 侧 game/src/ui/character-idle.js 在 .cls2-fullart 上挂 idle-stage 类 + data-idle-motion=<角色>，
+ * 本文件按 motion 名匹配 keyframes：立绘统一极慢水平平移，角色粒子特效保持区别。
+ * 层序：idle-vfx-back(z1，人物后地面辉光/法阵/光柱) → art-figure-wrap(z1，后插入 DOM 盖住背层)
+ *     → idle-vfx-front(z2，人物前粒子/大招) → .cls2-fullart::after 渐晕(z2，伪元素殿后压边)。
+ * 粒子绘制全在 JS Canvas；本文件只管立绘动作与画布层位。 */
+
+.cls2-fullart.idle-stage { /* 画布层：铺满立绘区，不参与命中 */ }
+.cls2-fullart.idle-stage .idle-vfx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.cls2-fullart.idle-stage .idle-vfx-back { z-index: 1; }
+.cls2-fullart.idle-stage .idle-vfx-front { z-index: 2; }
+/* 立绘主体显式 z1：与背层画布同级、DOM 靠后 → 人物盖住脚下辉光/法阵 */
+.cls2-fullart.idle-stage .art-figure-wrap { z-index: 1; will-change: transform; }
+
+/* ---------- 人物待机：老板 10-04 改为极慢的小幅水平平移 ---------- */
+.cls2-fullart.idle-stage .art-figure-wrap { transform-origin: 50% 100%; }
+
+/* 一次往返 40 秒，只在水平方向移动 ±3px，不升降、旋转或缩放。 */
+.cls2-fullart.idle-stage[data-idle-motion='wu'] .art-figure-wrap { animation: idleWu 40s ease-in-out infinite; }
+@keyframes idleWu { 0%, 100% { transform: translateX(-3px); } 50% { transform: translateX(3px); } }
+
+/* 常无欲 · 降临者 */
+.cls2-fullart.idle-stage[data-idle-motion='changwuyu'] .art-figure-wrap { animation: idleChangwuyu 40s ease-in-out infinite; }
+@keyframes idleChangwuyu { 0%, 100% { transform: translateX(-3px); } 50% { transform: translateX(3px); } }
+
+/* 白塔 · 法师 */
+.cls2-fullart.idle-stage[data-idle-motion='baita'] .art-figure-wrap { animation: idleBaita 40s ease-in-out infinite; }
+@keyframes idleBaita { 0%, 100% { transform: translateX(-3px); } 50% { transform: translateX(3px); } }
+
+/* 黑像 · 战士 */
+.cls2-fullart.idle-stage[data-idle-motion='heixiang'] .art-figure-wrap { animation: idleHeixiang 40s ease-in-out infinite; }
+@keyframes idleHeixiang { 0%, 100% { transform: translateX(-3px); } 50% { transform: translateX(3px); } }
+
+/* 星月 · 牧师 */
+.cls2-fullart.idle-stage[data-idle-motion='xingyue'] .art-figure-wrap { animation: idleXingyue 40s ease-in-out infinite; }
+@keyframes idleXingyue { 0%, 100% { transform: translateX(-3px); } 50% { transform: translateX(3px); } }
+
+/* 降动效兜底（JS 侧同样不挂 Canvas，此处保证 CSS 动作也停） */
+@media (prefers-reduced-motion: reduce) {
+  .cls2-fullart.idle-stage[data-idle-motion] .art-figure-wrap { animation: none; }
+}

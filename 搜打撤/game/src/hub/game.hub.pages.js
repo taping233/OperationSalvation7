@@ -84,15 +84,22 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       </div>`;
   }
 
-  function hubStashHTML() {
+  function hubStashHTML(view = 'cards') {
     const B = SDT.Base;
     const used = B.stashUsed(), cap = B.stashCap();
     const pkN = B.data.pocket.reduce((a, b) => a + b.count, 0);
-    const collN = Object.keys(B.data.collection).length;
-    const keys = B.keyCount ? B.keyCount() : 0;
+    const sectionTabs = `<nav class="stash-sections" aria-label="仓库分区">
+      <button class="stash-section-tab${view === 'cards' ? ' on' : ''}" data-act="hubStashView" data-view="cards" aria-pressed="${view === 'cards'}">[[icon:archive]] 卡牌仓库 <small>${used}/${cap}</small></button>
+      <button class="stash-section-tab${view === 'pocket' ? ' on' : ''}" data-act="hubStashView" data-view="pocket" aria-pressed="${view === 'pocket'}">[[icon:pocket]] 消耗口袋 <small>${pkN}</small></button>
+      <button class="stash-section-tab${view === 'pets' ? ' on' : ''}" data-act="hubStashView" data-view="pets" aria-pressed="${view === 'pets'}">[[icon:paw]] 宠物 <small>${B.ownedPets().length}/${B.PETS.length}</small></button>
+    </nav>`;
+    if (view === 'pets') return `<div class="stash-workspace stash-view-pets">${sectionTabs}${hubPetsHTML()}</div>`;
+    // 复原可用性按真实钥匙储备判定（A6-STASH-01：restore 只认 data.keys，不折算仓库材料卡；
+    // 之前用 keyCount() 折算会让按钮亮起但点击报钥匙不足）
+    const keys = B.data.keys || 0;
     // 09-20 高级感改造批2：卡牌仓库从文字行改卡面网格——复用出征整备/收藏室同款
     // cardHTML('sm') 卡面，点击仍走 stashItem 弹窗（卖出/收藏交互不变）
-    const stashRows = B.data.stash.length
+    const stashRows = view === 'cards' && B.data.stash.length
       ? `<div class="stash-cardgrid">${B.data.stash.map((s, i) => {
           const marked = B.isCollected(s.card);
           const mat = B.materialInfo ? B.materialInfo(s.card) : null;
@@ -111,7 +118,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
           <span>撤离成功后在整理界面把战利品放回这里；出发页点「出发整备」即可开启第一趟远征。</span>
         </div>`;
     // 消耗口袋：按稀有度用钥匙复原（需求 #1/#11：古朴1/稀有2/史诗3/传说4）；行首挂小卡面缩略
-    const pocketRows = B.data.pocket.length
+    const pocketRows = view === 'pocket' && B.data.pocket.length
       ? B.data.pocket.map((p, i) => {
           const cost = B.pocketKeyCost(p);
           const afford = keys >= cost;
@@ -122,35 +129,28 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
               title="${afford ? '消耗钥匙复原到卡牌仓库' : '钥匙不足'}">[[icon:key]] 复原 ×${cost}</button></div>`;
         }).join('')
       : `<div class="stash-placeholder"><span class="sp-ico">[[icon:pocket]]</span><b>口袋是空的</b><span>对战消耗的卡牌有 1/3 概率随撤离回到这里</span></div>`;
-    return `
-      <span class="section-kicker">CARD STORAGE // 02</span>
-      ${/* W2-03：三条经济线一行总览——卖卡/复原/升级的「币从哪来到哪去」页内可读（纯呈现，零数值改动） */''}
-      <p class="hint econ-line">[[icon:coin]] 卖卡 → <b>储备币</b>（商店消费，不进局）\u3000·\u3000[[icon:key]] 钥匙 → <b>复原</b>口袋卡牌\u3000·\u3000[[icon:bread]] 口粮 → <b>宠物升级</b>\u3000·\u3000[[icon:wood]] 木材 → <b>扩建</b>背包/仓库</p>
-      <div class="hub-two">
-        <section class="hub-card">
-          <h3>[[icon:archive]] 卡牌仓库</h3>
-          <div class="base-line">仓库容量 <b>${used}</b> / ${cap} 张 · [[icon:sparkles]] 图鉴 <b>${collN}</b></div>
-          <div class="base-bar"><i style="width:${(used / cap * 100).toFixed(1)}%"></i></div>
-          <div class="stash-scroll">${stashRows}</div>
-        </section>
-        <section class="hub-card">
+    if (view === 'pocket') return `<div class="stash-workspace stash-view-pocket">${sectionTabs}
+        <section class="hub-card warehouse-panel">
           <h3>[[icon:pocket]] 消耗口袋 <span class="set-tip">共 ${pkN} 张</span></h3>
-          <p class="ov-note" style="margin:0 0 6px">[[icon:key]] 用钥匙复原（古朴1 / 稀有2 / 史诗3 / 传说4）· <b>下一次出发后口袋清空</b></p>
+          <p class="ov-note stash-pocket-note">[[icon:key]] 用钥匙复原（古朴1 / 稀有2 / 史诗3 / 传说4）· <b>下一次出发后口袋清空</b></p>
           <div class="stash-list">${pocketRows}</div>
-          <h3 style="margin-top:14px">[[icon:archive]] 物资</h3>
-          <div class="material-grid">
+        </section></div>`;
+    return `<div class="stash-workspace stash-view-cards">${sectionTabs}
+        <section class="hub-card warehouse-panel">
+          <header class="warehouse-heading">
+            <div><h3>[[icon:archive]] 卡牌仓库</h3><p class="base-line">容量 <b>${used}</b> / ${cap} 张</p></div>
+            <div class="warehouse-materials">
             <button type="button" class="material-cell${B.data.wood > 0 ? '' : ' zero'}" data-act="rawItem" data-kind="wood" aria-label="木材 ×${B.data.wood}，基地建设材料，不可卖出" title="基地建设材料 · 不可卖出">
-              <span class="mat-ico">[[icon:wood]]</span><b>${B.data.wood}</b>
-              <span class="mat-use">背包与仓库扩建</span>
+              <span class="mat-ico">[[icon:wood]]</span><span>木材</span><b>${B.data.wood}</b>
             </button>
             <button type="button" class="material-cell${B.data.rations > 0 ? '' : ' zero'}" data-act="rawItem" data-kind="rations" aria-label="口粮 ×${B.data.rations}，基地建设材料，不可卖出" title="基地建设材料 · 不可卖出">
-              <span class="mat-ico">[[icon:bread]]</span><b>${B.data.rations}</b>
-              <span class="mat-use">宠物升级</span>
+              <span class="mat-ico">[[icon:bread]]</span><span>口粮</span><b>${B.data.rations}</b>
             </button>
-          </div>
-        </section>
-      </div>
-      ${hubPetsHTML()}`;
+            </div>
+          </header>
+          <div class="base-bar"><i style="width:${(used / cap * 100).toFixed(1)}%"></i></div>
+          <div class="stash-scroll">${stashRows}</div>
+        </section></div>`;
   }
 
   // —— 宠物栏（需求 #4：仓库界面增加宠物系统；孵化走宠物蛋弹窗）——
@@ -176,19 +176,19 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       </div>`;
     }).join('');
     const lockedRow = lockedN > 0 ? `<div class="pk-row pet-row locked">
-        <span>[[icon:crystal]] <b>？？？</b><span class="dim">· 未孵化 ×${lockedN}</span></span>
-        <span class="dim">宠物蛋 + 50 币孵化 · 存蛋时回仓库点蛋</span>
+        <span>[[icon:crystal]] <b>未孵化宠物</b><span class="dim">${lockedN} 只</span></span>
+        <span class="dim">宠物蛋 + 50 币，在卡牌仓库中孵化。</span>
       </div>` : '';
     const hasEgg = B.data.stash.some(s => s.card.id === B.PET_EGG_ID);
     return `
-      <section class="hub-card pet-sec" style="margin-top:14px">
+      <section class="hub-card pet-sec warehouse-panel">
         <h3>[[icon:paw]] 宠物 <span class="set-tip">${owned.length} / ${B.PETS.length} 只 · 携带 1 只出战</span></h3>
         <div class="pet-sec-head">
-          <p class="ov-note" style="margin:0 0 6px">初始宠物「汪汪狗」自动获得；其余只能用<b>宠物蛋</b>（宝箱 0.7% 起掉落：每开箱未出 +3%、每打赢一场战斗再 +0.2%）+ 50 币在仓库孵化。宠物在「升级」页用口粮升级，携带不同宠物安全格数量不同。</p>
+          <details class="pet-help"><summary>获取与升级说明</summary><p class="ov-note">初始宠物「汪汪狗」自动获得；其余只能用<b>宠物蛋</b>（宝箱 0.7% 起掉落：每开箱未出 +3%、每打赢一场战斗再 +0.2%）+ 50 币在仓库孵化。宠物在「升级」页用口粮升级，携带不同宠物安全格数量不同。</p></details>
           <img class="pet-egg-art" src="${assetUrl('assets/ui/emblems/pet-egg.png')}" alt="宠物蛋插画" decoding="async" draggable="false" loading="lazy">
         </div>
         <div class="stash-list">${lockedRow}${rows}</div>
-        ${hasEgg ? '<p class="hint ok-hint">[[icon:crystal]] 仓库里有宠物蛋——点击它进行孵化！</p>' : ''}
+        ${hasEgg ? '<button class="mini-btn ok" data-act="hubStashView" data-view="cards">[[icon:crystal]] 查看仓库中的宠物蛋</button>' : ''}
       </section>`;
   }
 
@@ -249,6 +249,8 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       const useStashMaterial = (all) => {
         const r = B.useStashMaterial(s.card.name, all);
         if (r.ok) { Sfx.ding(); UI.log(r.msg, 'loot'); }
+        // A6-STASH-02：失败（如存档写满）必须给提示，否则弹层关闭但操作未生效且无解释
+        else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');
         hubBridge.renderHub();
       };
       const useOne = () => useStashMaterial(false);
@@ -378,6 +380,8 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
     const sellStash = (n) => {
       const r = B.sellStashCards(s.card.name, n);
       if (r.ok) { Sfx.ding(); UI.log(r.msg, 'coin'); }
+      // A6-STASH-02：失败（如存档写满）必须给提示，否则弹层关闭但卡未减少、币未到账
+      else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');
       hubBridge.renderHub();
     };
     const sellOne = () => sellStash(1);
@@ -421,6 +425,15 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
     const R = MAP.rules;
     const owned = B.ownedPets();
     const sel = B.carriedPet();
+    const bagMaxed = B.bagCap() >= R.bagMax;
+    const stashMaxed = B.stashCap() >= R.stashMax;
+    const runeCost = !stashMaxed && B.stashCap() >= (R.stashRuneSlotFrom || 50) ? (R.stashRuneSlotCost || 2) : 0;
+    const runeCount = (B.data.runes || []).length;
+    const bagWhy = bagMaxed ? '已达上限' : B.data.wood < R.bagUpgradeWood ? `木材不足，还需 ${R.bagUpgradeWood - B.data.wood}` : '';
+    const stashWhy = stashMaxed ? '已达上限' : [
+      B.data.wood < R.stashUpgradeWood ? `木材不足，还需 ${R.stashUpgradeWood - B.data.wood}` : '',
+      runeCount < runeCost ? `符文不足，还需 ${runeCost - runeCount}` : '',
+    ].filter(Boolean).join(' · ');
     // 宠物升级：每只宠物独立进度，口粮递增 2-3-4-5，上限 Lv.5；
     // 携带中的宠物决定安全格数量（小企鹅咕嘎 +2：4-8 格）
     // 09-20 P1-8：未孵化的不再逐只铺「？？？」占位行（与仓库页重复且无操作），
@@ -433,13 +446,15 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       const maxed = lv >= B.PET_LEVEL_MAX;
       const cost = B.petUpCost(p.id);
       const on = sel && sel.id === p.id;
+      const why = maxed ? '已满级' : B.data.rations < cost ? `口粮不足，还需 ${cost - B.data.rations}` : '';
       return `<div class="pk-row pet-row${on ? ' on' : ''}">
         <span>[[icon:${p.icon}]] <b>${esc(p.name)}</b>${on ? ' <span class="got">[[icon:check]] 携带中</span>' : ''}
           <span class="dim pet-desc">${esc(p.desc.replace(/^携带效果：/, ''))}</span></span>
         <span class="pet-ops">
           <span class="dim">Lv.${lv}${maxed ? ' · MAX' : ` → ${lv + 1}`}</span>
           <button class="mini-btn ok" data-act="upPet" data-id="${p.id}" ${maxed || B.data.rations < cost ? 'disabled' : ''}
-            title="${maxed ? '已满级' : `消耗口粮 ×${cost} 升级`}">${maxed ? '已满级' : `[[icon:bread]] ×${cost} 升级`}</button>
+            title="${escAttr(why || `消耗口粮 ×${cost} 升级`)}">${maxed ? '已满级' : `[[icon:bread]] ×${cost} 升级`}</button>
+          ${why ? `<span class="hint${maxed ? ' ok-hint' : ''}">${esc(why)}</span>` : ''}
         </span>
       </div>`;
     }).join('');
@@ -451,14 +466,15 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
           <div class="up-cap"><b>${B.bagCap()}</b><small>/ ${R.bagMax} 格</small></div>
           <div class="base-bar"><i style="width:${(B.bagCap() / R.bagMax * 100).toFixed(1)}%"></i></div>
           <button class="ov-btn ok" data-act="upBag" ${B.canUpgradeBag() ? '' : 'disabled'}>[[icon:wood]] ×${R.bagUpgradeWood} 扩建 +1 格</button>
-          ${B.bagCap() >= R.bagMax ? '<p class="hint ok-hint">[[icon:check]] 已达上限</p>' : ''}
+          ${bagWhy ? `<p class="hint${bagMaxed ? ' ok-hint' : ''}">${esc(bagWhy)}</p>` : ''}
         </section>
         <section class="hub-card up-card">
           <h3>[[icon:archive]] 仓库扩建</h3>
           <div class="up-cap"><b>${B.stashCap()}</b><small>/ ${R.stashMax} 张</small></div>
           <div class="base-bar"><i style="width:${(B.stashCap() / R.stashMax * 100).toFixed(1)}%"></i></div>
-          <button class="ov-btn ok" data-act="upStash" ${B.canUpgradeStash() ? '' : 'disabled'}>[[icon:wood]] ×${R.stashUpgradeWood} 扩建 +${R.stashUpgradeSlots} 张</button>
-          ${B.stashCap() >= R.stashMax ? '<p class="hint ok-hint">[[icon:check]] 已达上限</p>' : ''}
+          <button class="ov-btn ok" data-act="upStash" ${B.canUpgradeStash() ? '' : 'disabled'}>[[icon:wood]] ×${R.stashUpgradeWood}${runeCost ? ` · [[icon:crystal]] 符文 ×${runeCost}` : ''} 扩建 +${R.stashUpgradeSlots} 张</button>
+          ${runeCost ? `<p class="hint">本次需符文 <b>${runeCost}</b> 个 · 当前 <b>${runeCount}</b> 个</p>` : ''}
+          ${stashWhy ? `<p class="hint${stashMaxed ? ' ok-hint' : ''}">${esc(stashWhy)}</p>` : ''}
         </section>
         <section class="hub-card up-pets">
           <h3>[[icon:paw]] 宠物升级 <span class="set-tip">口粮 ${B.PET_UP_COSTS.join('-')} · 携带中的宠物决定安全格 <b>${B.safeCap()}</b> 格</span></h3>
@@ -470,45 +486,29 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
   }
 
   // —— 人物页：各人物熟练度等级 ——
-  function hubClassesHTML() {
-    const summary = SDT.Meta.classSummary();
-    const totalCards = summary.reduce((n, c) => n + c.pool, 0);
-    const trained = summary.filter(c => c.lv > 1 || c.xp > 0).length;
-    const rows = summary.map((c, index) => {
-      const pct = c.maxed ? 100 : Math.min(100, c.need ? c.xp / c.need * 100 : 0);
-      const character = characterFor(c.cls);
-      const skinView = character && getCharacter(SDT.Base.data, character.id);
-      const skins = skinView?.availableSkinIds || ['default'];
-      const skinNames = new Map(SDT.Art.listSkins(c.cls).map(skin => [skin.id, skin.name]));
-      return `<article class="class-dossier${c.lv > 1 || c.xp > 0 ? ' trained' : ''}">
-        <div class="class-dossier-art">${SDT.Art.classArt(c.cls)}</div>
-        <div class="class-dossier-shade"></div>
-        <div class="class-dossier-index">0${index + 1}</div>
-        <div class="class-dossier-copy">
-          <span class="class-dossier-kicker">FIELD OPERATIVE</span>
-          <h3>${esc(characterName(c.cls))}</h3>
-          <p>${esc(SDT.Meta.perkText(c.lv))}</p>
-          <div class="class-dossier-meta"><b>Lv.${c.lv}${c.maxed ? ' · MAX' : ''}</b><span>人物卡 ${c.pool} 张</span></div>
-          <div class="xp-bar" aria-label="熟练度 ${pct.toFixed(0)}%"><i style="width:${pct.toFixed(1)}%"></i></div>
-          <div class="xp-txt">${c.maxed ? '熟练度已满' : `经验 ${c.xp} / ${c.need}`}</div>
-          <div class="class-skins" aria-label="${esc(characterName(c.cls))}皮肤">${skins.map(id => `<button class="mini-btn${skinView.selectedSkinId === id ? ' ok' : ''}" data-act="selectCharacterSkin" data-character="${character.id}" data-skin="${escAttr(id)}" aria-pressed="${skinView.selectedSkinId === id}">${id === 'default' ? '默认' : esc(skinNames.get(id) || id)}</button>`).join('')}</div>
-        </div>
-      </article>`;
-    }).join('');
-    return `
-      <section class="class-command">
-        <div class="class-command-copy">
-          <span class="section-kicker">BASE PERSONNEL // 05</span>
-          <h3>人物档案</h3>
-          <p>熟练度加成会在出征时自动生效。收藏对应人物的职业卡与能力卡，可继续积累经验。</p>
-        </div>
-        <div class="class-command-stats">
-          <span><small>在册人物</small><b>${summary.length}</b></span>
-          <span><small>已培养</small><b>${trained}</b></span>
-          <span><small>人物卡池</small><b>${totalCards}</b></span>
-        </div>
+  function hubClassesHTML(view = 'wu') {
+    const roster = SDT.Meta.classSummary().map(stats => ({ stats, character: characterFor(stats.cls) })).filter(entry => entry.character);
+    const selected = roster.find(entry => entry.character.id === view) || roster[0];
+    if (!selected) return '<p class="ov-empty">暂无人物档案</p>';
+    const { stats: c, character } = selected;
+    const pct = c.maxed ? 100 : Math.min(100, c.need ? c.xp / c.need * 100 : 0);
+    const skinView = getCharacter(SDT.Base.data, character.id);
+    const skins = skinView?.availableSkinIds || ['default'];
+    const selectedSkin = skinView?.selectedSkinId || 'default';
+    const skinNames = new Map(SDT.Art.listSkins(c.cls).map(skin => [skin.id, skin.name]));
+    return `<div class="person-workspace" style="--person-accent:${escAttr(character.color)}">
+      <nav class="person-tabs" aria-label="人物档案切换">${roster.map(entry => `<button class="person-tab${entry.character.id === character.id ? ' on' : ''}" data-act="hubPersonView" data-character="${escAttr(entry.character.id)}" aria-pressed="${entry.character.id === character.id}" aria-label="查看${escAttr(entry.character.name)}的档案"><b>${esc(entry.character.name)}</b><span>${esc(entry.character.rulesetId)}</span></button>`).join('')}</nav>
+      <section class="person-layout" aria-label="${escAttr(character.name)}人物档案">
+        <div class="person-portrait"><img src="${escAttr(SDT.Art.skinUrl(c.cls, selectedSkin))}" alt="${escAttr(character.name)}立绘" loading="eager" decoding="async" draggable="false"></div>
+        <article class="person-details">
+          <header class="person-heading"><span>${esc(character.rulesetId)}</span><h3>${esc(character.name)}</h3></header>
+          <div class="person-stats"><div><small>熟练度等级</small><b>Lv.${c.lv}${c.maxed ? ' · MAX' : ''}</b></div><div><small>人物卡池</small><b>${c.pool}<em> 张</em></b></div></div>
+          <section class="person-perk"><h4>熟练度加成</h4><p>${esc(SDT.Meta.perkText(c.lv))}</p></section>
+          <section class="person-progress"><h4>培养进度</h4><div class="person-progress-track" aria-label="熟练度 ${pct.toFixed(0)}%"><i style="width:${pct.toFixed(1)}%"></i></div><p>${c.maxed ? '熟练度已满' : `经验 ${c.xp} / ${c.need}`}</p><small>收藏对应人物的职业卡与能力卡，可继续积累经验。</small></section>
+          <section class="person-appearance"><h4>人物外观</h4><div class="person-skins" aria-label="${escAttr(character.name)}皮肤">${skins.map(id => `<button class="mini-btn${selectedSkin === id ? ' ok' : ''}" data-act="selectCharacterSkin" data-character="${escAttr(character.id)}" data-skin="${escAttr(id)}" aria-pressed="${selectedSkin === id}">${id === 'default' ? '默认' : esc(skinNames.get(id) || id)}</button>`).join('')}</div></section>
+        </article>
       </section>
-      <section class="class-dossier-grid" aria-label="人物熟练度档案">${rows}</section>`;
+    </div>`;
   }
 
   // —— 职业收藏室（2026-09-09：成就系统 → 成就与职业收藏室系统）——

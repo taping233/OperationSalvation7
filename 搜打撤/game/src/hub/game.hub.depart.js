@@ -10,6 +10,7 @@ import { MODES, game, newRun, requestClassChoice } from '../run/game.session.js'
 import { Sfx, _set_cardPageOpen } from './game.cardslib.js';
 import { slots as hubBridge } from './game.hub.bridge.js';   // 别名防局部 slots（槽位数）遮蔽——实机 depBack 曾因此 TypeError
 import { turboMs } from '../core/turbo.js';
+import { bindDepartureFilters, updateDepartureView } from './departure.view-updates.js';
   // —— 出发页：选择玩法 + 出征预报 + 宝藏大门 ——
   function hubDeployHTML() {
     const B = SDT.Base;
@@ -17,18 +18,17 @@ import { turboMs } from '../core/turbo.js';
     const m = MODES[curMode];
     const keys = B.keyCount ? B.keyCount() : 0;
     const gateReady = keys >= (B.KEY_NEEDED || 10);
-    const pet = B.carriedPet ? B.carriedPet() : null;
     return `
       <div class="deploy-brief">
         <section class="deploy-mission">
           <div class="deploy-mission-shade"></div>
+          <div class="deploy-mission-art" aria-hidden="true"></div>
           <div class="deploy-mission-copy">
             <span class="eyebrow">WINTER EXPEDITION / OUTSKIRTS</span>
-            <h3>[[icon:flag]] 外圈远征简报</h3>
-            <p class="deploy-mission-lead">从边缘街区切入，搜集资源、识别风险，并把能带回来的东西带回基地。</p>
+            <h3>[[icon:flag]] 远征准备</h3>
+            <p class="deploy-mission-lead">选择行动模式，再准备本次携带的物资。</p>
             <div class="deploy-mission-target"><span>本局目标</span><b>${esc(m.name)}</b><small>${esc(m.ckpt)}</small></div>
             <button id="btnDeploy" class="deploy-primary" data-act="deploy">[[icon:exit]] 出发整备 <span>→</span></button>
-            <button class="ov-btn" data-act="openPreparation" style="margin-top:10px">[[icon:flag]] 下一局目标与两套预设</button>
             ${SDT.Base.data.nestUnlocked ? `<button id="btnNest" class="deploy-primary" data-act="nestDeploy" style="margin-top:10px"
               title="第二地图：深入经典生命研究所，夺取符文与样本">[[icon:skull]] 研究所远征 <span>→</span></button>` : ''}
             <!-- W2-02：锁态「经典生命研究所（钥匙 0/10）」不再占主列行动位——未解锁时收敛到右栏 MISSION BRIEF 末行 -->
@@ -44,24 +44,6 @@ import { turboMs } from '../core/turbo.js';
             </div>
           </div>
         </section>
-        <aside class="deploy-readiness-panel">
-          <div class="readiness-head"><span class="eyebrow">MISSION BRIEF</span><b>出发前准备</b><span class="brief-status">可整备</span></div>
-          <div class="brief-mode"><span>当前模式</span><b>${esc(m.name)}</b><small>${esc(m.desc)}</small></div>
-          <div class="readiness-list">
-            <div class="readiness-item ready"><i>01</i><span>基础参考（角色出发后选择）</span><b>${MAP.rules.playerMaxHp + (pet?.effect?.maxHp || 0)} 生命 · ${MAP.rules.playerAtk} 攻击</b></div>
-            <div class="readiness-item"><i>02</i><span>携带容量</span><b>${B.bagCap()} 格背包 · 仓库 ${B.stashUsed()}/${B.stashCap()}</b></div>
-            <div class="readiness-item"><i>03</i><span>保护与回收</span><b>${B.safeCap()} 格可用</b></div>
-            <div class="readiness-item"><i>04</i><span>随身储备</span><b>开局 ${m.startCoins || 0} 币（储备币不进局） · ${B.data.rations} 口粮</b></div>
-            ${(!SDT.Base.data.nestUnlocked && !gateReady) ? `<div class="readiness-item locked-gate" data-act="gateInfo" role="button" tabindex="0"
-              title="集齐 ${B.KEY_NEEDED || 10} 把钥匙开启宝藏大门（特殊关卡制作中）· 钥匙在棋盘钥匙格与仓库钥匙卡获得">
-              <i>05</i><span>深层内容 · 经典生命研究所 / 宝藏大门 <small>（特殊关卡制作中）</small></span><b>[[icon:key]] ${keys}/${B.KEY_NEEDED || 10}</b></div>` : ''}
-          </div>
-          <div class="brief-pet">
-            <span class="brief-pet-icon">[[icon:paw]]</span><span><small>随队宠物</small><b>${pet ? esc(pet.name) : '未携带'}</b></span>
-            <em>${pet ? esc(pet.desc) : '可在仓库页选择携带的宠物'}</em>
-          </div>
-          <p class="deploy-tip">[[icon:map]] 进入整备后，可从仓库拖入本局携带卡牌；只有装入背包的卡牌才能在远征中使用。</p>
-        </aside>
       </div>
       ${gateReady ? `<section class="hub-card gate-strip gate-ready" data-act="gateInfo" role="button" tabindex="0"
         title="钥匙已集齐——宝藏大门虚位以待">
@@ -84,11 +66,13 @@ import { turboMs } from '../core/turbo.js';
   let deployPickFresh = false;   // 整备入口刚注入过预设选择（随后打开整备页时保留）
   function setDeployPick(v) { deployPick = v; deployPickFresh = true; }
   let deployHint = '';      // 页内提示（容量不足等）
+  let deployFilters = { rarity: '', type: '', cost: '' }; // 筛选只属于本次整备，不写存档。
   let deployJustOpened = false;   // 出发准备页刚打开（只播一次入场动画）
 
   function openDepartPrep() {
     game.state = 'modal';
     deployHint = '';
+    deployFilters = { rarity: '', type: '', cost: '' };
     // 预设应用链路（applyPicks → openDeparture）刚注入的选择必须保留：
     // 此前无条件清空，应用预设后确认出发只携带初始攻击（09-30 深审 ROOT-01）
     if (!deployPickFresh) deployPick = {};
@@ -113,9 +97,8 @@ import { turboMs } from '../core/turbo.js';
           data-act="pickAdd" data-name="${escAttr(s.card.name)}"
           aria-label="带入${escAttr(s.card.name)}，还可带 ${left} 张"
           title="${escAttr(s.card.name)} · 点击或拖到右侧背包带入（还可带 ${left}）">
-        ${SDT.Cards.cardHTML(s.card, 'sm')}
-        <span class="dep-own">仓 ×${left}</span>
-        ${n > 0 ? `<b class="dep-n" title="已选带入 ${n} 张">${n}</b>` : ''}
+        <div class="dep-card-face">${SDT.Cards.cardHTML(s.card, 'sm')}</div>
+        <div class="dep-quantity"><span>剩余 <b class="dep-own">${left}</b></span><span>已带 <b class="dep-picked-count">${n}</b></span></div>
       </div>`;
     }).join('') +
       (B.data.stash.some(s => s.card.rarity === '职业')
@@ -125,19 +108,10 @@ import { turboMs } from '../core/turbo.js';
 
   function renderDepartPrep() {
     const B = SDT.Base;
-    const m = MODES[B.data.selMode] ? B.data.selMode : 'standard';
     const slots = deploySlotsUsed();
     const full = slots >= B.bagCap();
     game.state = 'modal';
     _set_cardPageOpen(true);
-    UI.registerHelp('deploy-prep', {
-      title: '出发整备说明',
-      html: `
-        <p class="help-item"><b>携带规则</b>仓库卡牌留在左侧，点击卡面或拖到右侧背包才会带入；点击背包卡面可放大查看，拖回左侧即移除。</p>
-        <p class="help-item"><b>初始攻击</b>「初始攻击」×${MAP.rules.starterSha} 默认在背包（固定携带，不可移除，不入库）。</p>
-        <p class="help-item"><b>格数</b>背包格数 = 卡牌种类数 + 初始攻击；背包容量可在基地「升级」页用木材扩建。</p>`,
-      back: () => renderDepartPrep(),
-    });
     // 右侧背包格：第 1 格固定「初始攻击」（默认在背包、不可移除），其余按已选卡牌顺序落格；
     // 点击背包卡面 = 放大特写（2026-09-07 留言），移除靠拖回左侧卡牌区
     const pickedNames = Object.keys(deployPick).filter(k => deployPick[k] > 0);
@@ -150,7 +124,7 @@ import { turboMs } from '../core/turbo.js';
       bagCells += stack
          ? `<div class="bag-cell filled" draggable="true" role="button" tabindex="0" data-act="bagZoom" data-name="${escAttr(name)}"
              aria-label="${escAttr(name)} ×${deployPick[name]}，点击查看，拖回左侧移除" title="${escAttr(name)} ×${deployPick[name]} · 点击查看大卡，拖回左侧移除">
-            ${SDT.Cards.cardHTML(stack.card, 'sm')}<b class="dep-n on">${deployPick[name]}</b></div>`
+            ${SDT.Cards.cardHTML(stack.card, 'sm')}<b class="dep-n on">×${deployPick[name]}</b></div>`
         : '<div class="bag-cell empty" aria-hidden="true"></div>';
     }
     // —— 宠物携带选择（需求 #4：出发界面增加选择宠物携带的功能）——
@@ -161,8 +135,19 @@ import { turboMs } from '../core/turbo.js';
         [[icon:${p.icon}]] <b>${esc(p.name)}</b><span class="pet-chip-lv">Lv.${B.petLevel(p.id)}</span>
       </button>`;
     }).join('');
+    const capacityHtml = `[[icon:bag]] 已装 <b>${slots}/${B.bagCap()}</b> 格${full ? ' · 背包已满' : ` · 余 ${B.bagCap() - slots} 格`}`;
+    const currentStage = document.getElementById('depMain');
+    if (!deployJustOpened && currentStage?.dataset.departureView === 'cover-v3'
+      && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing')) {
+      updateDepartureView(currentStage, {
+        stash: B.data.stash, picks: deployPick, bagHtml: bagCells,
+        slots, capacity: B.bagCap(), capacityHtml, hint: deployHint,
+        petId: B.carriedPet()?.id || '', rich: html => SDT.Icons.rich(html),
+      });
+      return;
+    }
     UI.showOverlay('', `
-      <div class="pg hub" id="depMain">
+      <div class="pg hub departure-cover" id="depMain" data-departure-view="cover-v3">
         <!-- W1-03：返回件统一为左上 ak-back-tl 方钮（原底中「← 返回」与确认出发并排是全站五种返回制式之一） -->
         <button class="ak-sq ak-exit ak-back-tl" data-act="depBack" title="返回基地（Esc）" aria-label="返回">
           <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
@@ -173,37 +158,40 @@ import { turboMs } from '../core/turbo.js';
           </svg>
         </button>
         <header class="hub-head">
-          <span class="section-kicker dep-kicker">DEPARTURE STAGING // 06</span>
-          <h2>[[icon:bag]] 出发整备</h2>
-          ${UI.helpBtn('deploy-prep')}
-          <span class="sub">玩法【${MODES[m].name}】 · 点卡面或拖拽带入背包</span>
           <span class="pg-spacer"></span>
           <span class="hub-res">
-            <span class="res-chip">[[icon:bag]] 背包 <b class="${full ? 'fulled' : ''}">${slots}/${B.bagCap()}</b> 格</span>
-            <span class="res-chip" title="储备币留在基地消费，不进对局；开局只带当前模式的赠送币">[[icon:coin]] 开局 <b>${MODES[m].startCoins || 0}</b> 币</span>
+            <span class="res-chip">[[icon:bag]] 背包 <b data-dep-slots class="${full ? 'fulled' : ''}">${slots}/${B.bagCap()}</b> 格</span>
           </span>
         </header>
         <div class="dep-body${deployJustOpened ? ' page-in' : ''}">
-          <section class="hub-card">
-            <h3>[[icon:archive]] 携带卡牌 <span class="set-tip">点击卡面或拖到右侧带入 · 「仓 ×N」=剩余可带数</span></h3>
-            <div class="dep-cards" id="depPool">${deployPickRowsHTML()}</div>
-          </section>
-          <section class="hub-card">
-            <h3>[[icon:bag]] 背包预览 <span class="set-tip">拖入卡牌即可携带</span></h3>
-            ${petStrip ? `<div class="pet-strip"><span class="pet-strip-label">[[icon:paw]] 携带宠物</span>${petStrip}</div>` : ''}
-            <!-- W2-04：初始态引导——「初始攻击已默认携带、可直接出发」这一关键决定不再靠玩家自己读出 -->
-            <p class="hint bag-lead">「<b>初始攻击</b>」×${MAP.rules.starterSha} 已默认携带（固定）；首次出征可直接点「确认出发」，想自定义再从左侧把卡带入——只有装入背包的卡才能在对局使用。</p>
-            ${pickedNames.length === 0
-              ? '<p class="hint warn-hint">[[icon:info]] 当前只带初始攻击出征——卡牌是对局的主要输出手段，空手出战会明显吃力，建议从左侧把卡牌带入背包。</p>'
-              : (slots < B.bagCap() ? `<p class="hint">背包还有 <b>${B.bagCap() - slots}</b> 格空位——卡牌越多对局越稳，量力而行。</p>` : '')}
-            <div class="bag-grid${full ? ' full' : ''}" id="depBag">${bagCells}</div>
-            ${deployHint ? `<p class="hint warn-hint">${deployHint}</p>` : ''}
-            <div class="dep-foot">
-              <button id="btnDeploy" data-act="confirmDeploy">[[icon:exit]] 确认出发</button>
+          <section class="hub-card dep-storage">
+            <h3>仓库卡牌 <span class="set-tip">点击或拖拽带入</span></h3>
+            <div class="dep-filters">
+              <label>稀有度<select id="depFilterRarity" aria-label="按稀有度筛选仓库卡牌"></select></label>
+              <label>类型<select id="depFilterType" aria-label="按类型筛选仓库卡牌"></select></label>
+              <label>费用<select id="depFilterCost" aria-label="按费用筛选仓库卡牌"></select></label>
+              <span id="depFilterCount" aria-live="polite"></span>
+              <button type="button" id="depFilterReset" aria-label="重置仓库筛选">重置</button>
             </div>
+            <div class="dep-cards" id="depPool">${deployPickRowsHTML()}<p class="dep-no-results" id="depNoResults" hidden>没有匹配的卡牌</p></div>
+          </section>
+          <section class="hub-card dep-pack">
+            <h3>背包</h3>
+            ${petStrip ? `<div class="pet-strip"><span class="pet-strip-label">[[icon:paw]] 携带宠物</span>${petStrip}</div>` : ''}
+            <div class="bag-grid${full ? ' full' : ''}" id="depBag">${bagCells}</div>
           </section>
         </div>
+        <p class="dep-status" id="depStatus" role="status"${deployHint ? '' : ' hidden'}>${deployHint}</p>
+        <footer class="dep-foot">
+          <span class="dep-capacity" id="depCapacity">${capacityHtml}</span>
+          <button id="btnDeploy" data-act="confirmDeploy">[[icon:exit]] 确认出发</button>
+        </footer>
       </div>`, 'page');
+    bindDepartureFilters(document.getElementById('depMain'), B.data.stash, {
+      filters: deployFilters, rarities: SDT.Cards.RARITIES, types: SDT.Cards.TYPES,
+      rarityOf: card => SDT.Cards.rarityOf(card),
+      onFiltersChange: filters => { deployFilters = filters; },
+    });
     const addPick = (name) => {
       const B2 = SDT.Base;
       const stack = B2.data.stash.find(x => x.card.name === name);
@@ -215,11 +203,11 @@ import { turboMs } from '../core/turbo.js';
       }
       const cur = deployPick[name] || 0;
       if (cur >= stack.count) return;
-      // 局内同名叠放上限（初始攻击/火球 5，其余 3，见 game.session stackCapOf）——
-      // 带 4 张会占 2 格，整备页按「种类数」预览会失真，来源上直接按局内口径封顶（2026-09-19 审计）
+      // 同名每格叠放上限（初始攻击/火球 5，其余 3，见 game.session stackCapOf；局内第 cap+1 张起另占一格）——
+      // 整备来源上按此封顶（2026-09-19 审计）；预设路径的超限多占格已改由 previewDeployment 分段计入（A3-PREP-02）
       const stackCap = game.stackCapOf ? game.stackCapOf(stack.card) : 3;
       if (cur >= stackCap) {
-        deployHint = `[[icon:cross]] 同名卡牌最多携带 ${stackCap} 张（局内叠放上限）——想多带就分摊到不同卡牌上。`;
+        deployHint = `[[icon:cross]] 整备同名卡牌最多携带 ${stackCap} 张（每格叠放上限，局内超出会另占一格，这里不提供）——想多带就分摊到不同卡牌上。`;
         renderDepartPrep();
         return;
       }

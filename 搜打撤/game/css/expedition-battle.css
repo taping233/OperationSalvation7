@@ -94,19 +94,18 @@
 /* winter.css contains legacy calibration rules with !important. These are the
    final battle-stage contract and intentionally win because this sheet is last. */
 #overlay .battle-stage.sts { position:relative!important; display:flex!important; flex-direction:column!important; min-height:0!important; height:100%!important; }
-#overlay .battle-stage.sts .sts-arena { flex:1 1 auto!important; min-height:clamp(120px,18vh,240px)!important; height:auto!important; overflow:visible!important; }
+#overlay .battle-stage.sts .sts-arena { flex:1 1 auto!important; min-height:180px!important; height:auto!important; overflow:visible!important; }
 #overlay .battle-stage.sts .sts-unit { bottom:clamp(3%,2.5vh,6%)!important; }
-#overlay .battle-stage.sts .sts-me { bottom:60px!important; }
-#overlay .battle-stage.sts .sts-foes { bottom:60px!important; }
-#overlay .battle-stage.sts .sts-allies { bottom:60px!important; }
+#overlay .battle-stage.sts .sts-me { bottom:24px!important; }
+#overlay .battle-stage.sts .sts-foes { bottom:24px!important; }
+#overlay .battle-stage.sts .sts-allies { bottom:24px!important; }
 #overlay .battle-stage.sts .sts-nameplate { position:static!important; transform:none!important; }
-#overlay .battle-stage.sts .sts-hud { flex:0 0 240px!important; min-height:240px!important; height:240px!important; overflow:visible!important; }
-#overlay .battle-stage.sts .sts-hand { display:block!important; flex:1 1 auto!important; width:100%!important; max-width:none!important; min-width:0!important; min-height:220px!important; height:220px!important; overflow:visible!important; }
+#overlay .battle-stage.sts .sts-hud { flex:0 0 auto!important; min-height:0!important; height:auto!important; overflow:visible!important; }
+#overlay .battle-stage.sts .sts-hand { display:block!important; flex:1 1 auto!important; width:100%!important; max-width:none!important; min-width:0!important; min-height:224px!important; height:224px!important; overflow:visible!important; }
 #overlay .battle-stage.sts .sts-hand .bt-slot { bottom:18px!important; }
 #overlay .battle-stage.sts .sts-hand .bt-slot .bt-card { min-width:0; }
 @media (max-height:760px) and (min-width:901px) {
-  #overlay .battle-stage.sts .sts-hud { flex-basis:270px!important; min-height:270px!important; height:270px!important; }
-  #overlay .battle-stage.sts .sts-hand { min-height:250px!important; height:250px!important; padding-top:12px!important; }
+  #overlay .battle-stage.sts .sts-hand { min-height:224px!important; height:224px!important; padding-top:12px!important; }
   #overlay .battle-stage.sts .sts-hand .bt-slot { bottom:10px!important; width:10em; font-size:15px; }
   #overlay .battle-stage.sts .sts-hand[data-readable="true"] .bt-card.compact .hsc-desc { display:block; font-size:11px; line-height:1.25; }
   #overlay .battle-stage.sts .sts-hand[data-readable="true"] .bt-card.compact .hsc-desc > span:not(.bt-rulehint) { -webkit-line-clamp:3; }
@@ -114,10 +113,11 @@
   /* 目标选择时把选中牌收进左侧手牌区，避免盖住敌人血条；transform 不触发布局重排。 */
 }
 @media (max-width:900px) {
-  #overlay .battle-stage.sts .sts-hud { flex-basis:230px!important; min-height:230px!important; height:230px!important; }
+  /* The tactics row contributes its real height instead of overflowing a fixed HUD. */
+  #overlay .battle-stage.sts .sts-hud { row-gap:8px; }
+  #overlay .battle-stage.sts .sts-hand { min-height:196px!important; height:196px!important; }
 }
 @media (max-width:560px) {
-  #overlay .battle-stage.sts .sts-hud { flex-basis:205px!important; min-height:205px!important; height:205px!important; }
   #overlay .battle-stage.sts .sts-hand { min-height:175px!important; height:175px!important; }
   #overlay .battle-stage.sts .sts-hand .bt-slot { bottom:18px!important; }
 }
@@ -166,8 +166,8 @@
 #overlay .sts-hand .bt-card.click-selected { outline:2px solid #efcd89; outline-offset:3px; box-shadow:0 0 20px #e9c47a55; }
 @media (max-height:760px) and (min-width:901px) {
   #overlay .battle-stage.sts .sts-hand .bt-slot:has(.bt-card.click-selected) { z-index:40!important; }
-  #overlay .battle-stage.sts .sts-hand .bt-card.click-selected { transform:translate(max(-330px,-28vw),-8px) scale(1.02); z-index:30; }
-  body #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card.click-selected:not(.off):not(.aim-lift) { transform:translate(max(-330px,-28vw),-8px) scale(1.02)!important; }
+  #overlay .battle-stage.sts .sts-hand .bt-card.click-selected { transform:translateY(-8px) scale(1.02); z-index:30; }
+  body #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card.click-selected:not(.off):not(.aim-lift) { transform:translateY(-8px) scale(1.02)!important; }
 }
 #overlay .sts-hand .bt-card.click-selected::after { content:'选择目标 · Esc 取消'; position:absolute; bottom:4px; left:4px; right:4px; padding:4px 0; color:#112735; background:#dfc28d; font-size:10px; text-align:center; pointer-events:none; }
 
@@ -179,10 +179,10 @@
 #overlay .battle-stage.sts .sts-topbar { top:max(0px,env(safe-area-inset-top))!important; padding-left:max(clamp(12px,2vw,28px),env(safe-area-inset-left)); padding-right:max(clamp(12px,2vw,28px),env(safe-area-inset-right)); }
 
 /* 选目标时建立明确的“合法目标/其他单位”层级，避免与单位常驻蓝光混淆。 */
-#overlay .battle-stage[data-phase="targeting"] .sts-unit:not(.can-target) { opacity:.38; filter:grayscale(.6) saturate(.55); }
-#overlay .battle-stage[data-phase="targeting"] .sts-unit.can-target { opacity:1; z-index:8; outline:3px solid #ffe7a1; outline-offset:7px; border-radius:18px; background:radial-gradient(ellipse at center,rgba(255,221,128,.24),transparent 68%); box-shadow:0 0 0 2px rgba(69,43,13,.75),0 0 28px rgba(255,210,104,.72); }
-#overlay .battle-stage[data-phase="targeting"] .sts-unit.can-target .sts-figure { filter:drop-shadow(0 0 5px #fff) drop-shadow(0 0 18px #ffc84d) drop-shadow(0 0 32px rgba(255,153,0,.9)); }
-#overlay .battle-stage[data-phase="targeting"] .sts-unit.can-target::after { content:'可选目标'; position:absolute; left:50%; top:6px; transform:translateX(-50%); white-space:nowrap; padding:4px 10px; border:2px solid #ffe7a1; border-radius:999px; color:#2a1905; background:#ffd76f; font-size:11px; font-weight:900; letter-spacing:1px; box-shadow:0 2px 0 rgba(69,43,13,.85),0 0 18px rgba(255,205,91,.8); pointer-events:none; }
+#overlay .battle-stage:has(.can-target) .sts-unit:not(.can-target) { opacity:.38; filter:grayscale(.6) saturate(.55); }
+#overlay .battle-stage .sts-unit.can-target { opacity:1; z-index:8; outline:2px solid #efcd89; outline-offset:5px; border-radius:4px; background:rgba(239,205,137,.06); box-shadow:none; }
+#overlay .battle-stage .sts-unit.can-target .sts-figure { filter:none; }
+#overlay .battle-stage .sts-unit.can-target::after { content:'可选目标'; position:absolute; left:50%; top:6px; transform:translateX(-50%); white-space:nowrap; padding:4px 10px; border:1px solid #efcd89; border-radius:2px; color:#efcd89; background:#101c24; font-size:13px; font-weight:700; pointer-events:none; }
 /* 点选卡牌后舞台仍处于 player 阶段，直接依据可选目标类展示目标轮廓。 */
 #overlay .battle-stage.sts[data-boss="0"] .sts-foe.can-target .sts-figure {
   filter:drop-shadow(0 0 6px rgba(255,241,197,.82)) drop-shadow(0 0 14px rgba(231,165,79,.5));

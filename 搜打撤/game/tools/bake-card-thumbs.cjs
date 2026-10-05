@@ -48,6 +48,19 @@ function thumbRel(rel) {
 // 注意：本函数源码会被内嵌进渲染进程执行，不能引用本文件作用域的变量（一律参数传入）
 // 尺寸判定放在这里而非主进程的 nativeImage：nativeImage 读不了 webp（getSize 返回 0），
 // 而本项目卡面几乎全是 webp，放在主进程会把它们全部误判成「已够小」而跳过。canvas 能解码。
+//
+// 烧色（2026-10-04 WF-photolib-perf）：缩放后叠加调色矩阵，把库页原运行时滤镜
+//   filter:sepia(.04) saturate(1.04) contrast(1.05) brightness(1.03)
+// （expedition-library.css .studio-photo-art img，09-23 暗卡提亮回调值）烧进缩略图，
+// 运行时 CSS 侧滤镜已删（逐帧光栅化省一档 shader，diagToggles 实测占剩余 longtask ~40%）。
+// 矩阵 = brightness(1.03)·contrast(1.05)·saturate(1.04)·sepia(0.04) 合并为单次 3x3+bias，
+// 0-1 归一化 sRGB 逐通道运算（CSS filter 规范口径）；与 .tmp/rebake-thumbs-tinted.py 同公式。
+const TINT_M = [
+  [1.087994, 0.003705, 0.005219],
+  [0.006245, 1.079741, 0.004274],
+  [0.002781, -0.006867, 1.082379],
+];
+const TINT_B = -0.02575;
 const processOne = (dataUrl, MAX_W, QUALITY) => new Promise((resolve) => {
   const img = new Image();
   img.onload = () => {
@@ -62,6 +75,15 @@ const processOne = (dataUrl, MAX_W, QUALITY) => new Promise((resolve) => {
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = 'high';
       ctx.drawImage(img, 0, 0, W, H);
+      const id = ctx.getImageData(0, 0, W, H);
+      const d = id.data;
+      for (let i = 0; i < d.length; i += 4) {
+        const r = d[i] / 255, g = d[i + 1] / 255, b = d[i + 2] / 255;
+        d[i]     = Math.max(0, Math.min(255, Math.round((TINT_M[0][0] * r + TINT_M[0][1] * g + TINT_M[0][2] * b + TINT_B) * 255)));
+        d[i + 1] = Math.max(0, Math.min(255, Math.round((TINT_M[1][0] * r + TINT_M[1][1] * g + TINT_M[1][2] * b + TINT_B) * 255)));
+        d[i + 2] = Math.max(0, Math.min(255, Math.round((TINT_M[2][0] * r + TINT_M[2][1] * g + TINT_M[2][2] * b + TINT_B) * 255)));
+      }
+      ctx.putImageData(id, 0, 0);
       resolve({ url: canvas.toDataURL('image/webp', QUALITY), w: W, h: H });
     } catch (e) { resolve(null); }
   };

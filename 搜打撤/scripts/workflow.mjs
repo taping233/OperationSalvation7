@@ -19,7 +19,7 @@ const HELP = `项目流程工具（默认只读；ship --apply 需单独提交�
   task close 可直接 --stage <终态> --done-when-confirmed --check <kind:result:说明或报告>
        --unverified <未核项>（check/unverified可重复；显式空项用--checks-none/--unverified-none）
                                           直接字段与--input互斥，仍走同一任务模型与SHA锁
-  memory [--home <目录>] [--codex-home <目录>] [--zcode-home <目录>]
+  memory [--query <关键词> --limit <1..10>] [--home <目录>] [--codex-home <目录>] [--zcode-home <目录>]
                                           只读发现当前项目记忆索引，不倾倒正文
   docs                                    检查现行流程链接/重复/明确冲突候选
   sweep [--max-age-days <天数>]           停滞/中断任务只读检测；处置走 task close + ledger close
@@ -57,7 +57,7 @@ async function main() {
     full: { type: 'boolean' }, suite: { type: 'boolean' }, plan: { type: 'boolean' }, query: { type: 'string' }, key: { type: 'string' },
     owner: { type: 'string' }, input: { type: 'string' }, expect: { type: 'string' }, task: { type: 'string' }, message: { type: 'string' },
     tests: { type: 'string' }, paths: { type: 'string' }, date: { type: 'string' }, 'replaced-by': { type: 'string' },
-    home: { type: 'string' }, 'codex-home': { type: 'string' }, 'zcode-home': { type: 'string' },
+    home: { type: 'string' }, 'codex-home': { type: 'string' }, 'zcode-home': { type: 'string' }, limit: { type: 'string' },
     before: { type: 'string' }, after: { type: 'string' }, 'max-age-days': { type: 'string' }, receipt: { type: 'string' },
     goal: { type: 'string' }, 'done-when': { type: 'string', multiple: true }, stage: { type: 'string' },
     'done-when-confirmed': { type: 'boolean' }, check: { type: 'string', multiple: true },
@@ -102,8 +102,10 @@ async function main() {
     }
   }
   else if (command === 'memory') {
-    const { discoverMemory } = await import('./workflow-memory.mjs');
-    result = discoverMemory(root, { home: values.home, codexHome: values['codex-home'], zcodeHome: values['zcode-home'] });
+    const { discoverMemory, searchMemory } = await import('./workflow-memory.mjs');
+    if (values.limit !== undefined && values.query === undefined) throw new Error('memory --limit 需要 --query');
+    const options = { home: values.home, codexHome: values['codex-home'], zcodeHome: values['zcode-home'], query: values.query, limit: values.limit };
+    result = values.query === undefined ? discoverMemory(root, options) : searchMemory(root, options);
   }
   else if (command === 'docs') {
     const { validateDocumentation } = await import('./index-validation.mjs');

@@ -12,7 +12,7 @@ const state = vi.hoisted(() => ({
 vi.mock('../game/src/core/characters.js', () => ({ CHARACTERS: [], characterFor: (id) => ({ rulesetId: id }), characterName: (id) => id }));
 vi.mock('../game/src/core/shared.js', () => ({ clone: value => (value == null ? value : JSON.parse(JSON.stringify(value))), esc: String, escAttr: String }));
 vi.mock('../game/src/run/game.session.js', () => ({
-  MAP: { rules: {} }, MODES: {}, game: { state: '' }, getActiveSlot: () => 1,
+  MAP: { rules: {} }, MODES: {}, game: { state: '' }, getActiveSlot: () => 1, startNewGame: vi.fn(),
   newRun: vi.fn(), requestClassChoice: vi.fn(), setLobby: vi.fn(), showTitle: vi.fn(),
 }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: {}, configureCardNavigation: vi.fn(), _set_cardPageOpen: vi.fn() }));

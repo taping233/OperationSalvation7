@@ -2,6 +2,10 @@
  * 帮助弹层主题、焦点陷阱与背景 inert（09-25 自 ui.js 拆出，方法包由 ui.js 组装）。
  * 方法均以 UI.method() 形式调用，内部一律走 this 访问壳上的 el/_acts 等状态。
  */
+// T4 全界面开合成对动画（2026-10-04 D9-T4）：纯副作用 import——模块向 document.head
+// 注入 css/motion-transitions.css <link>（恒在 winter.css 等静态样式之后生效）
+import './motion-transitions.js';
+
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 
@@ -43,6 +47,8 @@ export const overlayMethods = {
     // 失败/清空类标题用红色语义
     if (this._hideTimer) { clearTimeout(this._hideTimer); this._hideTimer = null; }
     const wasOpen = !this.el.overlay.hidden;
+    const refreshHub = wasOpen && mode === 'page' &&
+      !!this.el.ovBody.querySelector('#hubMain') && bodyHtml.includes('id="hubMain"');
     if (!wasOpen) {
       const active = document.activeElement;
       this._overlayReturnFocus = active && active !== document.body ? active : null;
@@ -91,11 +97,13 @@ export const overlayMethods = {
     // 已打开状态下且弹窗模式变化（场景→战斗→结算等）时重播滑入动画；
     // 战斗内反复 render（同模式）不重播，避免每出一张卡就闪一次
     // 2026-09-12 留言 #33：page 页之间的返回/前进导航也重播入场动画（battle/bag 等高频重绘模式除外）
-    if (wasOpen && (this._lastMode !== mode || mode === 'page')) {
+    card.classList.toggle('hub-refresh', refreshHub);
+    if (wasOpen && !refreshHub && (this._lastMode !== mode || mode === 'page')) {
       card.classList.remove('swap');
       void card.offsetWidth;
       card.classList.add('swap');
     }
+    else if (refreshHub) card.classList.remove('swap');
     const prevMode = this._lastMode;
     this._lastMode = mode;
     this.el.overlay.hidden = false;
@@ -118,7 +126,13 @@ export const overlayMethods = {
     // page 全屏页自带 CSS 入场动画（.card.page 的 pgIn），WAAPI 再叠一层会与
     // CSS 动画互相覆盖造成过渡期跳帧——这里只跑 CSS 那套。
     // bagpage 背包页同理（2026-09-19 留言 #3：展开动画走 .card.bag-page 的 bagIn）
-    if ((!wasOpen || prevMode !== mode) && SDT.Motion && mode !== 'page' && mode !== 'bagpage') SDT.Motion.overlayIn(card);
+    // T4（2026-10-04）：战斗快档弹层（发现/选卡、战斗设置、墓地）与确认小窗档
+    // （玻璃确认 .glass-panel、离开对局卡 leaveSave——附录 B 档3 fade+scale(.98) .22s）
+    // 走纯 CSS（motion-transitions.css），WAAPI（y18px）仅标准弹层。
+    // 主控 10-04 复核处置：glass 模式整体按确认小窗档（hub 材料/仓库确认窗
+    // 同为 mode'glass' 而 markup 无 .glass-panel 锚点，按模式判定防漏）。
+    if ((!wasOpen || prevMode !== mode) && SDT.Motion && mode !== 'page' && mode !== 'bagpage' && mode !== 'glass' &&
+        !(mode === 'discover' || card.querySelector('.bt-settings, .bt-gy-list, .glass-panel, [data-act="leaveSave"]'))) SDT.Motion.overlayIn(card);
     // 开窗音效判定与文末场景音取景共用这一次查询（两者间无 DOM 增删，结果一致）
     const soundScene = this.el.ovBody.querySelector('.node-pg, .flow-transition');
     // 只在弹窗真正打开/切换模式时播开窗音效——战斗内反复 render 不刷音效
@@ -194,8 +208,14 @@ export const overlayMethods = {
     // 不透明整屏页淡出：boss 留言 #52 要求所有界面退出都有过渡动画（200ms 淡出+下移）；
     // room-view（战斗/房间页）例外保持瞬隐——留言 #33 实测整屏淡出每帧全屏重合成是
     // 「继续」卡顿来源，性能口径优先（overlays.css 有同步注释）。
+    // T4（2026-10-04）：战斗/房间态轻弹层（战斗设置/墓地、玻璃确认）例外不瞬隐——
+    // 留 160ms 给卡片层播反向动画（motion-transitions.css 只动卡片，
+    // 容器不播整屏淡出，留言 #33 的整屏重合成口径保持），到点同步收场。
     // immediate（exitToTitle 收口）同样走同步：跳转不允许留任何异步尾巴
-    const instant = immediate || this.el.overlay.classList.contains('room-view');
+    const btFastClose = !immediate && this.el.overlay.classList.contains('room-view') &&
+      !!card.querySelector?.('.bt-settings, .bt-gy-list, .glass-panel');
+    const instant = immediate || document.body.classList.contains('reduce-motion') ||
+      (this.el.overlay.classList.contains('room-view') && !btFastClose);
     const finish = () => {
       this._hideTimer = null;
       this._finishHide = null;
@@ -234,7 +254,11 @@ export const overlayMethods = {
     // 等淡出动画播完再真正隐藏并还原布局类，避免淡出期间跳版；
     // 期间 hidden 仍为 false，输入拦截逻辑不受影响
     this._finishHide = finish;
-    this._hideTimer = setTimeout(finish, 210);
+    // T4 时序常量：战斗快档 160ms（卡片反向动画 .14s / 玻璃确认 .16s，取 max）；其余 225ms
+    // （标准弹层容器淡出 0.22s 完整收场 + 5ms 裕量；对 boot.test.js:256 固定等 230ms
+    // 留出容错，避免同到期零裕量竞态；opaque 卡片 0.24s 尾段 15ms 在容器已透明后，
+    // 截断不可辨）
+    this._hideTimer = setTimeout(finish, btFastClose ? 160 : 225);
   },
 
   // Esc 关闭当前浮层（2026-09-09 老板：浮层要能按 Esc 关）。

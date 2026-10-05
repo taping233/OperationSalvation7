@@ -1,0 +1,100 @@
+/* One visual language for all UI surfaces; only opacity/transform animate.
+   Normal closes fit native 225ms cleanup, fast closes fit 140/160ms windows. */
+body.interface-motion {
+  --ui-in-ease: cubic-bezier(.22,1,.36,1);
+  --ui-out-ease: cubic-bezier(.4,0,.7,1);
+}
+body.interface-motion #t1Gate { display: none !important; }
+body.interface-motion #overlay[data-ui-motion] {
+  --ui-in: .34s; --ui-out: .2s; --ui-rise: 14px; --ui-return: 9px; --ui-scale: .992;
+}
+body.interface-motion #overlay[data-ui-motion="panel"] { --ui-in: .28s; --ui-rise: 12px; --ui-scale: .985; }
+body.interface-motion #overlay[data-ui-motion="confirm"] { --ui-in: .22s; --ui-out: .16s; --ui-rise: 6px; --ui-return: 5px; --ui-scale: .98; }
+body.interface-motion #overlay[data-ui-motion="fast"] { --ui-in: .18s; --ui-out: .14s; --ui-rise: 4px; --ui-return: 4px; --ui-scale: 1; }
+body.interface-motion #overlay[data-ui-motion][data-ui-instant-close] { --ui-out: .14s; --ui-return: 4px; --ui-scale: 1; }
+
+body.interface-motion #overlay[data-ui-motion][data-ui-enter]:not([hidden]) {
+  animation: uiVeilInA var(--ui-in) var(--ui-in-ease) both !important;
+}
+body.interface-motion #overlay[data-ui-motion][data-ui-enter="b"]:not([hidden]) {
+  animation-name: uiVeilInB !important;
+}
+body.interface-motion #overlay[data-ui-motion][data-ui-enter]:not([hidden]) > .card {
+  animation: uiPanelInA var(--ui-in) var(--ui-in-ease) both !important;
+}
+body.interface-motion #overlay[data-ui-motion][data-ui-enter="b"]:not([hidden]) > .card {
+  animation-name: uiPanelInB !important;
+}
+/* Eliminate competing whole-page animations; object-level effects keep their identity. */
+body.interface-motion #overlay[data-ui-motion] #ovBody > .pg { animation: none !important; }
+body.interface-motion #overlay[data-ui-motion] #hubMain .hub-page.page-in { animation: none !important; }
+body.interface-motion #overlay[data-ui-motion][data-ui-enter][data-ui-closing]:not([hidden]) {
+  animation: uiVeilOut var(--ui-out) var(--ui-out-ease) both !important; pointer-events: none;
+}
+body.interface-motion #overlay[data-ui-motion][data-ui-enter][data-ui-closing]:not([hidden]) > .card {
+  animation: uiPanelOut var(--ui-out) var(--ui-out-ease) both !important;
+}
+@keyframes uiVeilInA { from { opacity: 0; } to { opacity: 1; } }
+@keyframes uiVeilInB { from { opacity: 0; } to { opacity: 1; } }
+@keyframes uiVeilOut { to { opacity: 0; } }
+@keyframes uiPanelInA { from { opacity: 1; transform: translateY(var(--ui-rise)) scale(var(--ui-scale)); } to { opacity: 1; transform: none; } }
+@keyframes uiPanelInB { from { opacity: 1; transform: translateY(var(--ui-rise)) scale(var(--ui-scale)); } to { opacity: 1; transform: none; } }
+@keyframes uiPanelOut { from { opacity: 1; } to { opacity: 1; transform: translateY(var(--ui-return)) scale(var(--ui-scale)); } }
+
+body.interface-motion :is(#exitScr, #sugLayer)[data-ui-motion-screen="a"] {
+  animation: uiScreenInA .34s var(--ui-in-ease) both !important;
+}
+body.interface-motion #sugLayer:not([hidden]):not(.scr-out) {
+  animation: uiScreenInA .34s var(--ui-in-ease) both !important;
+}
+body.interface-motion :is(#exitScr, #sugLayer)[data-ui-motion-screen="b"] {
+  animation: uiScreenInB .34s var(--ui-in-ease) both !important;
+}
+body.interface-motion :is(#exitScr, #sugLayer)[data-ui-motion-screen="close"].scr-out,
+body.interface-motion #title.home-composed[data-ui-motion-screen="close"].scr-out {
+  animation: uiScreenOut .2s var(--ui-out-ease) both !important;
+}
+@keyframes uiScreenInA { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes uiScreenInB { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes uiScreenOut { to { opacity: 0; transform: translateY(6px); } }
+
+/* Small details that toggle hidden retain their own focus/close handlers. */
+body.interface-motion #overlay .ag-detail {
+  transition: opacity .2s var(--ui-out-ease), transform .2s var(--ui-out-ease), display .2s allow-discrete;
+}
+body.interface-motion #overlay .ag-detail[hidden] { opacity: 0; transform: translateY(6px) scale(.99); pointer-events: none; }
+@starting-style {
+  body.interface-motion #overlay .ag-detail:not([hidden]) { opacity: 0; transform: translateY(8px) scale(.99); }
+}
+body.interface-motion #cardZoom:not(.cz-photo-closing) { animation: uiVeilInA .28s var(--ui-in-ease); }
+body.interface-motion #cardZoom.cz-out { animation: uiVeilOut .2s var(--ui-out-ease) both !important; }
+body.interface-motion #cardZoom .cz-card,
+body.interface-motion #cardZoom .cz-photo-paper { transition-timing-function: var(--ui-in-ease) !important; }
+body.interface-motion #cardZoom.cz-out .cz-card,
+body.interface-motion #cardZoom.cz-photo-closing .cz-photo-paper { transition-timing-function: var(--ui-out-ease) !important; }
+
+body.reduce-motion.interface-motion #overlay[data-ui-motion][data-ui-enter]:not([hidden]),
+body.reduce-motion.interface-motion #overlay[data-ui-motion][data-ui-enter]:not([hidden]) > .card,
+body.reduce-motion.interface-motion #overlay[data-ui-motion][data-ui-enter][data-ui-closing]:not([hidden]),
+body.reduce-motion.interface-motion #overlay[data-ui-motion][data-ui-enter][data-ui-closing]:not([hidden]) > .card,
+body.reduce-motion.interface-motion :is(#exitScr, #sugLayer)[data-ui-motion-screen],
+body.reduce-motion.interface-motion #sugLayer:not([hidden]):not(.scr-out),
+body.reduce-motion.interface-motion #title.home-composed[data-ui-motion-screen].scr-out,
+body.reduce-motion.interface-motion #overlay .ag-detail,
+body.reduce-motion.interface-motion #cardZoom,
+body.reduce-motion.interface-motion #cardZoom.cz-out {
+  animation: none !important; transition: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  body.interface-motion #overlay[data-ui-motion][data-ui-enter]:not([hidden]),
+  body.interface-motion #overlay[data-ui-motion][data-ui-enter]:not([hidden]) > .card,
+  body.interface-motion #overlay[data-ui-motion][data-ui-enter][data-ui-closing]:not([hidden]),
+  body.interface-motion #overlay[data-ui-motion][data-ui-enter][data-ui-closing]:not([hidden]) > .card,
+  body.interface-motion :is(#exitScr, #sugLayer)[data-ui-motion-screen],
+  body.interface-motion #sugLayer:not([hidden]):not(.scr-out),
+  body.interface-motion :is(#exitScr, #sugLayer)[data-ui-motion-screen="close"].scr-out,
+  body.interface-motion #title.home-composed[data-ui-motion-screen="close"].scr-out,
+  body.interface-motion #overlay .ag-detail,
+  body.interface-motion #cardZoom,
+  body.interface-motion #cardZoom.cz-out { animation: none !important; transition: none !important; }
+}

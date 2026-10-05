@@ -1,7 +1,30 @@
+/* 关馆只移动整页合成层，内部照片仍保持禁动画，避免大批卡片重播。 */
+body.cardlib-open #overlay.closing .card.page:has(.card-library-page) {
+  animation: photoStudioLeave .2s var(--ease-fly) both !important;
+  transform-origin: 50% 45%;
+  will-change: transform, opacity;
+}
+@keyframes photoStudioLeave {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(10px) scale(.99); }
+}
+body.reduce-motion.cardlib-open #overlay.closing,
+body.reduce-motion.cardlib-open #overlay.closing .card.page:has(.card-library-page) {
+  animation: none !important;
+  transform: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  body.cardlib-open #overlay.closing,
+  body.cardlib-open #overlay.closing .card.page:has(.card-library-page) {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
 /* Cabinet joinery: the same brass, paper and leather from index to inspection. */
 body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .library-head {
-  grid-template-columns:auto minmax(0,1fr)!important;
-  grid-template-areas:'count tools'!important;
+  grid-template-columns:44px minmax(0,1fr) auto auto!important;
+  grid-template-areas:'. title count tools'!important;
   border-bottom:3px solid #5f573d!important;
   box-shadow:inset 0 -1px #baa47770,0 3px 0 #080f0a,0 5px 0 #a18b5838;
 }
@@ -41,7 +64,7 @@ body.cardlib-open #overlay .studio-index-layout .library-title h2 {
   filter:none!important;
 }
 body.cardlib-open #overlay .studio-index-layout .clib-count {
-  margin-left:84px; /* 09-25 验收反馈：铭牌移到左列后给左上 ak-exit 返回键（64×58）让位 */
+  margin-left:0; /* 返回键由页头首列留位，馆名与馆藏数共享同一基线。 */
   padding:6px 14px;
   border:1px solid #8a795657!important;
   border-radius:2px;
@@ -179,6 +202,10 @@ body.cardlib-open #overlay .studio-index-layout .pv-no { color:#c4c5b4; font-siz
 body.cardlib-open #overlay .studio-index-layout .studio-photo-paper::after { display:none!important; }
 body.cardlib-open #overlay .studio-index-layout .studio-photo-art img { filter:none!important; }
 @media(max-width:760px) {
+  body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .library-head {
+    grid-template-columns:36px minmax(0,1fr) auto!important;
+    grid-template-areas:'. title count' 'tools tools tools'!important;
+  }
   body.cardlib-open #overlay .studio-index-layout .library-title { padding:0 6px!important; }
   body.cardlib-open #overlay .studio-index-layout .library-title h2 { font-size:23px!important; letter-spacing:.12em!important; }
   body.cardlib-open #overlay .studio-index-layout .clib-count { padding:5px 8px; }
@@ -190,4 +217,117 @@ body.cardlib-open #overlay .studio-index-layout .studio-photo-art img { filter:n
   body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-filterbar { padding:10px!important; border-width:10px!important; }
   body.cardlib-open #overlay .studio-index-layout .library-inspector,
   body.cardlib-open #cardZoom.cz-photo .cz-photo-info { border-width:10px; }
+}
+
+/* 照相馆顶部索引重排：馆名与馆藏先读，分类和检索随后；使用本文件末尾规则压过旧工艺层。 */
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .library-head {
+  grid-template-columns:44px minmax(0,1fr) auto auto!important;
+  grid-template-areas:'. title count tools'!important;
+  min-height:82px;
+  gap:clamp(16px,2vw,30px)!important;
+  padding:13px clamp(20px,3vw,42px)!important;
+  border:0!important;
+  border-bottom:1px solid rgba(217,187,130,.42)!important;
+  background:linear-gradient(180deg,#172b35,#10202a 80%)!important;
+  box-shadow:inset 0 1px rgba(237,243,233,.06),0 3px 10px rgba(0,0,0,.24)!important;
+}
+body.cardlib-open #overlay .studio-index-layout .lib-head-title {
+  grid-area:title;
+  display:flex;
+  align-items:center;
+  min-width:0;
+}
+body.cardlib-open #overlay .studio-index-layout .lib-head-seal { display:none!important; }
+body.cardlib-open #overlay .studio-index-layout .lib-head-name { display:block; }
+body.cardlib-open #overlay .studio-index-layout .lib-head-name b {
+  color:#f2ead7!important;
+  font:600 clamp(25px,2.2vw,33px)/1.15 var(--serif)!important;
+  letter-spacing:.08em;
+  text-shadow:0 1px 2px rgba(0,0,0,.3);
+}
+body.cardlib-open #overlay .studio-index-layout .clib-count {
+  grid-area:count;
+  display:flex;
+  align-items:baseline;
+  gap:9px;
+  margin:0!important;
+  padding:4px 0 4px 20px!important;
+  border:0!important;
+  border-left:1px solid rgba(217,187,130,.4)!important;
+  border-radius:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  color:#d4d7ca!important;
+}
+body.cardlib-open #overlay .studio-index-layout .clib-count small {
+  color:#c1cabb!important;
+  font:500 12px/1.3 var(--font-ui)!important;
+  letter-spacing:.04em!important;
+}
+body.cardlib-open #overlay .studio-index-layout .clib-count b {
+  color:#e7d5a4!important;
+  font:600 29px/1 var(--font-ui)!important;
+  font-variant-numeric:tabular-nums;
+}
+body.cardlib-open #overlay .studio-index-layout .library-tools { grid-area:tools; justify-self:end; }
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-filterbar {
+  gap:10px;
+  padding:12px clamp(16px,2vw,26px) 14px!important;
+  border:1px solid rgba(151,167,152,.72)!important;
+  border-image:none!important;
+  border-radius:3px;
+  outline:none!important;
+  background:linear-gradient(180deg,rgba(249,246,229,.97),rgba(224,225,208,.98))!important;
+  box-shadow:inset 0 1px rgba(255,255,247,.75),0 3px 9px rgba(0,0,0,.2)!important;
+  color:#303e36;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-filterbar::before,
+body.cardlib-open #overlay .studio-index-layout .studio-filterbar::after { display:none!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading {
+  min-height:28px;
+  gap:12px;
+  color:#46564c!important;
+  font:500 13px/1.4 var(--font-ui)!important;
+  letter-spacing:0;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading>span:first-child {
+  padding:0!important;
+  border:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  color:#243d37!important;
+  font:700 16px/1.3 var(--serif)!important;
+  letter-spacing:.04em;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading .lib-show { color:#66756b!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading .studio-clear {
+  color:#52664d!important;
+  border-left-color:rgba(75,96,78,.28)!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-query .studio-field-label { color:#334c42!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-field :is(.studio-search,.studio-select-shell) {
+  border-color:#a4ae9d!important;
+  background:linear-gradient(180deg,#fffdf4,#f0eedf)!important;
+  box-shadow:inset 0 1px 3px rgba(45,53,40,.1),0 1px rgba(255,255,255,.75)!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-search:focus-within {
+  border-color:#52786d!important;
+  box-shadow:0 0 0 2px rgba(54,108,93,.16)!important;
+}
+@media(max-width:760px) {
+  body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .library-head {
+    grid-template-columns:36px minmax(0,1fr) auto!important;
+    grid-template-areas:'. title count' 'tools tools tools'!important;
+    min-height:0;
+    row-gap:10px!important;
+    padding:12px 16px!important;
+  }
+  body.cardlib-open #overlay .studio-index-layout .lib-head-name b { font-size:23px!important; }
+  body.cardlib-open #overlay .studio-index-layout .clib-count { gap:5px; padding-left:10px!important; }
+  body.cardlib-open #overlay .studio-index-layout .clib-count b { font-size:22px!important; }
+  body.cardlib-open #overlay .studio-index-layout .library-tools:not(:empty) { grid-column:1/-1; grid-row:2; justify-self:start; }
+  body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-filterbar { padding:10px 12px 12px!important; }
+}
+@media(max-height:700px) {
+  body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .library-head { min-height:66px; padding:10px 18px!important; }
 }

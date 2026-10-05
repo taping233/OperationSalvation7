@@ -93,6 +93,8 @@ export function reverseClosure(targets, graph, looseEdges) {
 /** 主查询：{paths, registry:{activeRowCount, hits, rows}, reverse, plan, commands}。 */
 export function impactQuery(inputPaths, { root = PROJECT_ROOT } = {}) {
   const paths = [...new Set(inputPaths.map(value => normalizePath(value, root)))].sort();
+  // 路径不存在只提示不阻断（机制不过严口径）：拼错路径的可见性交给调用方核对，回退计划仍完整输出。
+  const missingPaths = paths.filter(p => !existsSync(path.join(root, p)));
   const registryText = existsSync(path.join(root, 'docs/PARALLEL-REGISTRY.md')) ? readFileSync(path.join(root, 'docs/PARALLEL-REGISTRY.md'), 'utf8') : '';
   const auditRows = parseActiveRegistry(registryText, { includeSettled: true });
   const rows = auditRows.filter(row => row.isOpen);
@@ -110,7 +112,7 @@ export function impactQuery(inputPaths, { root = PROJECT_ROOT } = {}) {
   if (plan.mode === 'quick' && plan.tests.length) {
     commands.targeted = `npm run test:target -- ${plan.tests.join(' ')}`;
   }
-  return { paths, registry: { activeRowCount: rows.length, editingRowCount: rows.filter(row => row.isBlocking).length,
+  return { paths, missingPaths, registry: { activeRowCount: rows.length, editingRowCount: rows.filter(row => row.isBlocking).length,
     completedRowCount: rows.filter(row => row.state === 'complete-uncommitted').length,
     settledRowCount: auditRows.length - rows.length, hits: registryHits(paths, rows), rows,
     auditRows: auditRows.filter(row => !row.isOpen) }, reverse: closure, plan, commands };
@@ -124,9 +126,12 @@ const truncate = (list, limit, all) => {
 
 /** 文本渲染：给人/终端直接读。 */
 export function formatImpact(report) {
-  const { paths, registry, reverse, plan, commands } = report;
+  const { paths, missingPaths, registry, reverse, plan, commands } = report;
   const lines = [];
   lines.push(`影响面：${paths.join('  ')}`);
+  if (missingPaths?.length) {
+    lines.push(`── ⚠ 路径不存在：${missingPaths.join('、')}（可能是拼错路径；已按无映射回退口径出计划，动手前先核对）`);
+  }
   const editingHits = registry.hits.filter(hit => hit.state !== 'complete-uncommitted');
   const protectedHits = registry.hits.filter(hit => hit.state === 'complete-uncommitted');
   lines.push(editingHits.length

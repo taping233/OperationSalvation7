@@ -2,6 +2,11 @@ import { appendLocalFeedback, downloadFeedbackRecord, readLocalFeedback, removeL
 import { captureBattleContext, invalidateBattleContext } from '../battle/battle-loader.js';
 import { runTerminalSettlement } from './terminal-settlement.js';
 import { storeGet, storeSet } from '../core/storage.js';
+import { achievementGalleryHTML, bindAchievementGallery } from './achievement-gallery.js';
+import { beginnerGuideHTML, beginnerGuidePageCount } from './beginner-guide.js';
+import { SLOT_EMBLEMS } from './slot-emblems.js';
+import '../../css/title-achievements.css';
+import '../../css/beginner-guide.css';
 /* 标题、选档、离开与设置页面流程。只通过注入端口调用会话能力。 */
 function createGameMenuController(deps) {
   const {
@@ -124,7 +129,7 @@ function createGameMenuController(deps) {
       if (hub) {
         const tab = Array.from(hub.classList).find(c => c.startsWith('hub-'));
         const key = tab ? tab.slice(4) : '';
-        const tabName = { deploy: '出发', stash: '仓库', upgrade: '升级', classes: '人物', ach: '成就·收藏室' }[key] || key;
+        const tabName = { deploy: '出发', stash: '仓库', shop: '商店', upgrade: '升级', classes: '人物', ach: '成就·收藏室' }[key] || key;
         return { id: 'hub-' + key, name: `基地 · ${tabName || '主页'}` };
       }
       if (body && body.querySelector('#depMain')) return { id: 'depMain', name: '出发整备' };
@@ -396,28 +401,31 @@ function createGameMenuController(deps) {
   function openTitleGuide() {
     const prevState = game.state;
     game.state = 'modal';
-    UI.showOverlay('[[icon:question]] 远征手册', `
-      <!-- 2026-09-25 老板：返回键统一 = 主页左上退出键（ak-sq ak-exit）同款同位 -->
-      <button class="ak-sq ak-exit ak-back-tl" data-act="guideBack" title="返回（Esc）" aria-label="返回">
-        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-          <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
-                fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-          <path d="M4 12h10M4 12l4-4M4 12l4 4"
-                fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <div class="expedition-manual">
-        <span class="section-kicker">EXPEDITION MANUAL</span>
-        <p class="manual-lead">从基地整备，沿相邻节点深入，打完战斗后把带回来的东西安全撤离。</p>
-        <div class="manual-grid">
-          <section class="manual-step"><span class="manual-index">01</span><div><h3>整备</h3><p>在基地选择玩法、挑选背包卡牌与宠物。初始攻击固定占用 1 格；仓库卡只有放入背包才会带进远征。</p></div></section>
-          <section class="manual-step"><span class="manual-index">02</span><div><h3>探索</h3><p>直接点击当前节点相邻的下一节点。多条路线时 <b>Space / Enter</b> 切换，单条路线时直接前进；<b>Z</b> 回到上条路线，<b>X</b> 确认前往。</p></div></section>
-          <section class="manual-step"><span class="manual-index">03</span><div><h3>战斗</h3><p>手牌按住拖向敌人或自己使用指向卡；没有目标的招式拖到敌我之间空地即可。留意费用与敌方意图，回合结束后敌人会行动。</p></div></section>
-          <section class="manual-step"><span class="manual-index">04</span><div><h3>撤离</h3><p>抵达撤离节点并完成结算；安全格中的卡牌会由宠物运回基地，撤离失败时也会抢运安全格卡牌。倒下或放弃会丢失其他本局物资。</p></div></section>
-        </div>
-        <div class="manual-controls"><span class="manual-control-key">Space / Enter</span><span>切换路线</span><span class="manual-control-key">Z</span><span>上条路线</span><span class="manual-control-key">X</span><span>确认节点</span><span class="manual-control-key">B</span><span>背包</span><span class="manual-control-key">G / F</span><span>全景 / 定位</span><span class="manual-control-key">Alt+1-9 / 0</span><span>快捷跳页（基地/卡牌库/留言/数据/设置）</span><span class="manual-control-key">Esc</span><span>关闭页面</span></div>
-        <p class="manual-note">鼠标拖拽平移地图，滚轮缩放。地图只开放当前节点的相邻可通行路线；已探索节点的奖励不会重复刷新。</p>
-      </div>`, true);
+    const pageCount = beginnerGuidePageCount();
+    let currentPage = 0;
+    const renderPage = () => {
+      const active = document.activeElement;
+      const activeAction = active?.dataset?.act;
+      const activePageIndex = active?.dataset?.pageIndex;
+      const root = UI.el.ovBody.querySelector('.beginner-guide');
+      if (root) root.outerHTML = beginnerGuideHTML(currentPage);
+      else UI.showOverlay('远征新手指南', beginnerGuideHTML(currentPage), 'page');
+      if (activeAction && activeAction !== 'guideBack') {
+        const selector = activeAction === 'guidePage' && /^\d+$/.test(activePageIndex || '')
+          ? `[data-act="guidePage"][data-page-index="${activePageIndex}"]`
+          : `[data-act="${activeAction}"]`;
+        UI.el.ovBody.querySelector(selector)?.focus({ preventScroll: true });
+      }
+    };
+    UI.showOverlay('远征新手指南', beginnerGuideHTML(currentPage), 'page');
+    UI.act('guidePrev', () => { currentPage = Math.max(0, currentPage - 1); renderPage(); });
+    UI.act('guideNext', () => { currentPage = Math.min(pageCount - 1, currentPage + 1); renderPage(); });
+    UI.act('guidePage', data => {
+      const requested = Number.parseInt(data.pageIndex, 10);
+      if (!Number.isFinite(requested)) return;
+      currentPage = Math.max(0, Math.min(pageCount - 1, requested));
+      renderPage();
+    });
     UI.act('guideBack', () => {
       UI.hideOverlay();
       // 战斗 modal 态不可降级为 idle（战斗界面会丢）：口径同 showRunTransition 的恢复守卫
@@ -434,32 +442,16 @@ function createGameMenuController(deps) {
     const latest = pickLatestSlot();
     const base = latest?.base || null;
     game.state = 'modal';
-    const rows = SDT.Meta.ACHIEVEMENTS.map(a => {
-      const unlocked = base ? SDT.Meta.isUnlocked(a, base) : false;
-      const claimed = !!(base?.achClaimed?.[a.id]);
-      const mark = claimed ? '[[icon:check]] 已领取' : unlocked ? '[[icon:sparkles]] 已解锁' : '[[icon:lock]] 未解锁';
-      return `<div class="ach-row${unlocked ? ' done' : ''}">
-        <div class="ach-ico">${a.icon}</div>
-        <div class="ach-info"><b>${a.name}</b><span>${a.desc}</span></div>
-        <div class="ach-ops"><span class="rw">${mark}</span></div>
-      </div>`;
-    }).join('');
-    const note = latest
-      ? `以 <b>档位 0${latest.slot}</b> 的基地档案为准；成就奖励需进入基地领取。`
-      : '暂无任何档案——完成一次远征后，成就将随基地档案记录。';
-    UI.showOverlay('[[icon:medal]] 成就总览', `
-      <!-- 2026-09-25 老板：返回键统一 = 主页左上退出键（ak-sq ak-exit）同款同位 -->
-      <button class="ak-sq ak-exit ak-back-tl" data-act="achBack" title="返回（Esc）" aria-label="返回">
-        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-          <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
-                fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-          <path d="M4 12h10M4 12l4-4M4 12l4 4"
-                fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <p class="ov-note">${note}</p>
-      <div class="ach-list">${rows}</div>`, true);
-    UI.act('achBack', () => { UI.hideOverlay(); game.state = 'title'; });
+    UI.showOverlay('成就总览', achievementGalleryHTML({
+      achievements: SDT.Meta.ACHIEVEMENTS, base, slot: latest?.slot,
+      isUnlocked: (achievement, snapshot) => SDT.Meta.isUnlocked(achievement, snapshot),
+      backs: SDT.Cards.CARD_BACKS || [], cards: SDT.Cards.all(),
+    }), 'page');
+    const gallery = bindAchievementGallery(UI.el.ovBody.querySelector('.achievement-gallery'));
+    UI.act('achBack', () => {
+      if (gallery.closeDetail()) return;
+      UI.hideOverlay(); game.state = 'title';
+    });
   }
 
   // ---------- 存档档位选择 ----------
@@ -471,67 +463,8 @@ function createGameMenuController(deps) {
     return h > 0 ? `${h} 小时 ${String(m).padStart(2, '0')} 分` : `${m} 分钟`;
   }
 
-  // ---------- 选档页专用：五个档位的 AK 风格发光 SVG 图标（白体渐变 + 光影） ----------
-  const SLOT_ICONS = [
-    // 档位1 · 无（侠客）：交叉双刃 + 中心菱形
-    `<svg class="ic slot-ico" viewBox="0 0 120 120" aria-hidden="true">
-      <defs><linearGradient id="slotG1" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b9cdc9"/>
-      </linearGradient></defs>
-      <g stroke="url(#slotG1)" stroke-width="8" stroke-linecap="round">
-        <path d="M30 20 L88 90"/><path d="M90 20 L32 90"/>
-      </g>
-      <g stroke="url(#slotG1)" stroke-width="7" stroke-linecap="round">
-        <path d="M44 62 L60 76"/><path d="M76 62 L60 76"/>
-      </g>
-      <circle cx="60" cy="104" r="6" fill="url(#slotG1)"/>
-      <path d="M60 40 l7 12 -7 12 -7 -12 Z" fill="url(#slotG1)"/>
-    </svg>`,
-    // 档位2 · 常无欲（降临者）：弯檐巫帽 + 坠落的四芒星
-    `<svg class="ic slot-ico" viewBox="0 0 120 120" aria-hidden="true">
-      <defs><linearGradient id="slotG2" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#e6efed"/><stop offset="1" stop-color="#b3c8c4"/>
-      </linearGradient></defs>
-      <path fill="url(#slotG2)" d="M14 82 q46 16 92 0 l-7 -10 q-39 11 -78 0 Z"/>
-      <path fill="url(#slotG2)" d="M38 74 Q52 40 74 16 Q70 44 86 72 Q62 80 38 74 Z"/>
-      <path fill="url(#slotG2)" d="M92 30 l3.5 8 8 3.5 -8 3.5 -3.5 8 -3.5 -8 -8 -3.5 8 -3.5 Z"/>
-    </svg>`,
-    // 档位3 · 白塔（法师）：垛口高塔 + 拱窗 + 旗帜
-    `<svg class="ic slot-ico" viewBox="0 0 120 120" aria-hidden="true">
-      <defs><linearGradient id="slotG3" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#bccfcb"/>
-      </linearGradient></defs>
-      <path fill="url(#slotG3)" d="M44 104 V50 h32 v54 Z"/>
-      <path fill="url(#slotG3)" d="M40 50 v-12 h8 v8 h7 v-8 h10 v8 h7 v-8 h8 v12 Z"/>
-      <path fill="rgba(16,36,49,.6)" d="M54 104 v-16 a6 8 0 0 1 12 0 v16 Z"/>
-      <path d="M76 44 V16" stroke="url(#slotG3)" stroke-width="5" stroke-linecap="round"/>
-      <path fill="url(#slotG3)" d="M76 16 l16 5 -16 6 Z"/>
-    </svg>`,
-    // 档位4 · 黑像（战士）：巨剑 + 一杯热咖啡
-    `<svg class="ic slot-ico" viewBox="0 0 120 120" aria-hidden="true">
-      <defs><linearGradient id="slotG4" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b9cdc9"/>
-      </linearGradient></defs>
-      <path fill="url(#slotG4)" d="M56 10 l7 13 v52 h-14 v-52 Z"/>
-      <path fill="url(#slotG4)" d="M40 75 h40 v7 h-40 Z"/>
-      <path fill="url(#slotG4)" d="M52 82 h16 v10 h-16 Z"/>
-      <path fill="url(#slotG4)" d="M74 90 h22 v7 a11 11 0 0 1 -22 0 Z"/>
-      <path d="M96 92 a6 6 0 1 1 -1 11" fill="none" stroke="url(#slotG4)" stroke-width="4"/>
-      <g fill="none" stroke="url(#slotG4)" stroke-width="3.4" stroke-linecap="round">
-        <path d="M81 84 q3 -4 0 -8"/><path d="M90 84 q3 -4 0 -8"/>
-      </g>
-    </svg>`,
-    // 档位5 · 星月（牧师）：新月抱星 + 提灯
-    `<svg class="ic slot-ico" viewBox="0 0 120 120" aria-hidden="true">
-      <defs><linearGradient id="slotG5" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b6cbc7"/>
-      </linearGradient></defs>
-      <path fill="url(#slotG5)" d="M72 12 A40 40 0 1 0 106 66 A32 32 0 1 1 72 12 Z"/>
-      <path fill="url(#slotG5)" d="M88 26 l4 9 9 4 -9 4 -4 9 -4 -9 -9 -4 9 -4 Z"/>
-      <path d="M40 76 v10" stroke="url(#slotG5)" stroke-width="4" stroke-linecap="round"/>
-      <path fill="url(#slotG5)" d="M40 86 l8 11 -8 11 -8 -11 Z"/>
-    </svg>`,
-  ];
+  // 选档徽记：透明底蓝金切角印章，五种图形在独立美术模块中维护。
+  const SLOT_ICONS = SLOT_EMBLEMS;
 
   // 选档页背景：CSS/SVG 手绘（蓝紫雾气 + 发光鹿马剪影 + 鸟群 + 光斑，缓慢漂移呼吸）
   const SLOT_BG_SILHOUETTES = `
@@ -630,13 +563,6 @@ function createGameMenuController(deps) {
        </article>`);
       }
     }
-    UI.registerHelp('slots', {
-      title: '存档说明',
-      html: `
-        <p class="help-item"><b>独立存档</b>五个档位的基地与进度完全独立（资源/仓库/职业/成就/卡背各自保存）。</p>
-        <p class="help-item"><b>继续对局</b>有未完成对局的档位会直接回到那一局；没有对局则先进基地，再从基地出发。</p>`,
-      back: () => openSlotPicker(),
-    });
     UI.showOverlay('', `
       <div class="pg slot-page">
         <div class="slot-bg" aria-hidden="true">
@@ -649,12 +575,10 @@ function createGameMenuController(deps) {
              2026-09-25 老板：返回键统一 = 主页左上退出键（ak-sq ak-exit）同款同位，
              原 58px 透明变体（.pg-back）退役 -->
         <button class="ak-sq ak-exit ak-back-tl" data-act="slotBack" aria-label="返回主菜单" title="返回主菜单（Esc）"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M4 12h10M4 12l4-4M4 12l4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <!-- U6（2026-09-19 走查）：帮助「?」从孤悬左上挪进标题行，与标题同排 -->
         <header class="slot-page-head">
           <span class="section-kicker">SELECT ARCHIVE</span>
           <span class="slot-page-en">选择存档</span>
           <i class="slot-page-rule"></i>
-          <span class="slot-page-help">${UI.helpBtn('slots')}</span>
         </header>
         <p id="slotRestoreError" class="slot-restore-error" role="alert" aria-live="assertive" hidden></p>
         <div class="slot-deck">${cards.join('')}</div>
@@ -768,8 +692,9 @@ function createGameMenuController(deps) {
           }
           transition = runtime.showRunTransition({
             tone: 'door', asset: 'scene-door-bg',
-            eyebrow: 'BASE LINKED', title: '进入存档',
-            detail: '回到基地整备出发',
+            presentation: 'base-arrival',
+            eyebrow: '抵达', title: '远征基地',
+            detail: '整备物资，准备下一次远征',
             duration: 900,
           });
           if (await transition === false || !transition.isCurrent() || !currentContext()) return false;
@@ -867,9 +792,12 @@ function createGameMenuController(deps) {
       });
       const keptList = [...keptMap.values()];
       UI.log('<b>[[icon:flag]] 已放弃对局</b>：带入的卡牌全部遗失，物资与金币散失', 'warn');
+      // 抢运回的卡用卡面网格（A5-ABANDON-01，与死亡页 doom-loot 同构；样式复用 overlays.css 无作用域
+      // 的 .doom-loot/.doom-cards 家族；禁止套死亡页的外层 doom 玻璃容器——会改变放弃页标准弹层外观）；
+      // 散失损失仍走 ov-stats/ov-note 文本行（散失=文本是既定口径）
       const keptHTML = keptList.length
-        ? `<p class="ov-note">[[icon:lock]] 宠物从安全格抢运回 <b>${kept.length}</b> 张对局中获得的卡牌：` +
-          keptList.map(s => `${esc(s.card.name)}${s.count > 1 ? ' ×' + s.count : ''}`).join('、') + '</p>'
+        ? `<div class="doom-loot"><p class="doom-loot-h">[[icon:lock]] 宠物从安全格抢运回 <b>${kept.length}</b> 张对局中获得的卡牌</p><div class="doom-cards">${keptList.slice(0, 6).map((s, i) =>
+            `<span class="doom-card" style="--i:${i}">${SDT.Cards.cardHTML(s.card, 'sm')}</span>`).join('')}${keptList.length > 6 ? `<span class="doom-more">还有 ${keptList.slice(6).reduce((n, s) => n + s.count, 0)} 张</span>` : ''}</div></div>`
         : '<p class="ov-note">安全格里没有对局中获得的卡牌——本次放弃没有带回任何卡牌。</p>';
       UI.showOverlay('[[icon:flag]] 已放弃对局', `
         <p class="ov-stats">带入本局的 <b>${token.broughtN}</b> 张卡牌全部丢失；对局中获得的卡牌除安全格保护的外也全部失去；
@@ -974,15 +902,21 @@ function createGameMenuController(deps) {
                   fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
-        <header class="pg-head"><h2>[[icon:gear]] 设置</h2><span class="pg-spacer"></span></header>
-        <div class="settings">
+        <header class="pg-head"><h2><img class="settings-gear-r2" src="assets/ui/icons/settings-gear-r2.webp" width="28" height="28" alt="" aria-hidden="true"> 设置</h2><span class="pg-spacer"></span></header>
+        <div class="settings settings-layout">
+        <section class="settings-group settings-general">
         <h3 class="set-h">[[icon:gear]] 通用 <span class="set-en">GENERAL</span></h3>
         <label class="chk"><input type="checkbox" id="setIndex" ${game.toggles.index ? 'checked' : ''}> 结点编号 <span class="set-en">NODE NUMBERS</span></label>
         <label class="chk"><input type="checkbox" id="setHint" ${storeGet('sdt-hintbar') !== '0' ? 'checked' : ''}> 底部操作提示条 <span class="set-en">HINT BAR</span></label>
         <label class="chk"><input type="checkbox" id="setBanner" ${storeGet('sdt-banner') !== '0' ? 'checked' : ''}> 环层横幅 <span class="set-en">LAYER BANNER</span></label>
-        <label class="chk"><input type="checkbox" id="setDev" ${game.devMode ? 'checked' : ''}> 开发者模式（测试工具 / 卡牌制作） <span class="set-en">DEVELOPER</span></label>
+        <label class="chk"><input type="checkbox" id="setDev" ${game.devMode ? 'checked' : ''}> 开发者模式（测试工具） <span class="set-en">DEVELOPER</span></label>
+        </section>
+        <section class="settings-group settings-display">
+        <h3 class="set-h">[[icon:gear]] 画面与反馈 <span class="set-en">DISPLAY &amp; ACCESS</span></h3>
         <label class="chk"><input type="checkbox" id="setShake" ${storeGet('sdt-reduce-shake') === '1' ? '' : 'checked'}> 屏幕震动反馈 <span class="set-en">SCREEN SHAKE</span></label>
         <label class="chk"><input type="checkbox" id="setReduceMotion" ${storeGet('sdt-reduce-motion') === '1' ? 'checked' : ''}> 减少动态效果 <span class="set-en">REDUCE MOTION</span></label>
+        </section>
+        <section class="settings-group settings-audio">
         <h3 class="set-h">[[icon:gear]] 音频 <span class="set-en">AUDIO</span></h3>
         <label class="chk"><input type="checkbox" id="setMusic" ${SDT.Sound.musicMuted ? '' : 'checked'}> 背景音乐 <span class="set-en">MUSIC</span></label>
         <label class="chk"><span>音乐来源 <span class="set-en">MUSIC SOURCE</span></span><select id="setMusicSource"><option value="scape" ${SDT.Sound.musicSource === 'scape' ? 'selected' : ''}>冬境声景</option><option value="original" ${SDT.Sound.musicSource === 'original' ? 'selected' : ''}>原有曲目</option></select></label>
@@ -990,14 +924,20 @@ function createGameMenuController(deps) {
         <label class="chk"><input type="checkbox" id="setSfx" ${SDT.Sound.sfxMuted ? '' : 'checked'}> 音效 <span class="set-en">SOUND FX</span></label>
         <label class="chk vol"><span>音效音量 <span class="set-en">SFX VOL</span></span><input type="range" id="setSfxVol" min="0" max="100" value="${Math.round(SDT.Sound.sfxVolume * 100)}"><b id="setSfxVolVal">${Math.round(SDT.Sound.sfxVolume * 100)}</b></label>
         <p class="hint">侧边栏的 [[icon:gear]] 按钮为全局静音；这里可分别开关音乐与音效、拖动滑条调音量（自动保存）。</p>
+        </section>
+        <section class="settings-group settings-credits">
         <h3 class="set-h">[[icon:trophy]] 致谢 <span class="set-en">CREDITS</span></h3>
-        <p class="hint">图标来自 game-icons.net —— Lorc、Delapouite、Carl Olsen、Caro Asercion（CC-BY 3.0，详见 assets/icons/game-icons/LICENSE-CC-BY-3.0.md）；当前音效为《明日方舟》源素材轻改试听版。</p>
-        <p><a class="ov-btn" href="./sfx-audition.html?set=alternatives&amp;pack=arknights-runtime" target="_blank" rel="noopener">整套音效试听</a></p>
+        <p class="hint">图标：game-icons.net · Lorc、Delapouite、Carl Olsen、Caro Asercion（CC-BY 3.0）。战斗音效：rubberduck、Tinysized、Kenney 等创作者的 CC0 音效。</p>
+        <p><a class="ov-btn" href="./assets/sfx/battle/SOURCES.md" target="_blank" rel="noopener">查看音效来源</a></p>
+        </section>
+        <section class="settings-group settings-records">
         <h3 class="set-h">[[icon:book]] 留言库 <span class="set-en">SUGGESTION BOX</span></h3>
         <div class="btn-row"><button class="mini-btn" data-act="openInbox">查看历史留言</button></div>
         <h3 class="set-h">[[icon:chart]] 跑局数据 <span class="set-en">RUN DATA</span></h3>
         <!-- W1-01：数据页原唯一入口=Alt+9 不可发现，设置页加可见入口 -->
         <div class="btn-row"><button class="mini-btn" data-act="openDataPageUi">查看跑局数据</button></div>
+        </section>
+        <section class="settings-group settings-danger">
         <h3 class="set-h">危险区 <span class="set-en">DANGER ZONE</span></h3>
         <!-- W1-08：三枚不可逆钮原同排等权——按危险度分级：低危两枚一排，清档独占一排加重 -->
         <div class="btn-row">
@@ -1008,6 +948,7 @@ function createGameMenuController(deps) {
           <button class="mini-btn danger danger-max" data-act="wipeSave">清空全部存档</button>
         </div>
         <p class="hint">危险区操作均不可撤销：按钮需点击两次确认（首次点击变为「确认清空？」）。「清空全部存档」会删除全部五个档位的档案。</p>
+        </section>
         </div><!-- /.settings -->
       </div><!-- /.pg -->`, 'page');
     const sync = () => {

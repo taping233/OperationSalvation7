@@ -356,14 +356,19 @@
   /* 卡牌大页面：backdrop-filter 与 3D 转卡图层组合会出合成故障，改用不透明遮罩 */
   #overlay.opaque { backdrop-filter: none; background: #121212; }
   @keyframes ovFadeIn { from { opacity: 0; } }
-  /* 关闭弹窗：整体淡出（hidden 延迟到动画播完再置位） */
-  #overlay.closing { pointer-events: none; animation: ovFadeOut .15s ease forwards; }
+  /* 关闭弹窗：整体淡出（hidden 延迟到动画播完再置位）。
+     T4（2026-10-04）：0.15s ease → 0.22s --ease-fly——对齐标准弹层档容器淡出
+     （卡片反向动画 0.2s 在 motion-transitions.css，容器 0.22s 收尾） */
+  #overlay.closing { pointer-events: none; animation: ovFadeOut .22s var(--ease-fly) forwards; }
   @keyframes ovFadeOut { to { opacity: 0; } }
   /* 不透明整屏页（事件/节点/背包页/房间）关闭时直接消失：整屏淡出 = 每帧全屏重合成，是「继续」卡顿的来源 */
   /* room-view（战斗场景）关闭仍走游戏节奏瞬隐；opaque 全屏页恢复淡出（2026-09-12 留言 #33：
      原来这行把 opaque 一并 animation:none+opacity:0，父层瞬隐导致所有页面返回键看起来没有动画） */
   #overlay.room-view.closing { animation: none; opacity: 0; }
-  #overlay.opaque.closing { animation: ovFadeOut .2s ease forwards; }
+  /* T4（2026-10-04）：0.2s ease → 0.22s --ease-fly——容器与标准档统一 0.22s 收场
+     （.card.page/.bag-page 卡片反向动画 0.24s 在 motion-transitions.css，容器先透明
+     无视觉差；收场 timer 230ms 见 overlay.js） */
+  #overlay.opaque.closing { animation: ovFadeOut .22s var(--ease-fly) forwards; }
   /* 已打开状态下内容切换（场景→战斗→结算）：轻量上滑淡入，不重播整体缩放 */
   #overlay .card.swap { animation: cardSwap .28s cubic-bezier(.22,1,.36,1); }
   @keyframes cardSwap { from { opacity: 0; transform: translateY(16px); } }

@@ -1,19 +1,23 @@
 # -*- coding: utf-8 -*-
-"""全游戏统一画风配方（官方美术生图主题）v1.2 —— 以 0919 首版选人立绘为风格基准。
+"""全游戏统一画风配方 v1.3 —— 现行视觉权威见 docs/production/art/VISUAL-BIBLE.md。
 
 【口径（2026-09-23 老板拍板，本文件为唯一权威源）】
   一切 NAI 生图（立绘 / 卡面 / Q 版头像 / 资源卡 / 皮肤 / 背景……）一律 import 本模块，
   禁止散抄画风文本。.tmp/nai/style_modules/official_painterly_style.py 为兼容薄壳，
-  .tmp 清理丢失时以本文件重建。V5 full 口径；出图参数见 0919 链路记忆：
+  .tmp 清理丢失时以本文件重建。历史 0919 使用 V5 full；当前 nai_gen 默认
+  nai-diffusion-4-5-full，V5 必须显式传 model；配方与模型版本分别记录，不改客户端默认。
+  现行客户端参数（与历史基线一致）：
   steps 28 / scale 6.5 / variety_plus / k_euler_ancestral / karras / cfg_rescale 0。
 
 【配方来源】0919 首版选人立绘 wu-portrait-painterly-small（seed 1278087392）的画师串与风格块，
   2026-09-23 老板指定为全游戏通用风格基准；角色专属排除项仍由单图追加。
 【修订史】旧 v1.1（painterly sketch illustration + STYLE_CONTROL 1.2）实测后回滚记录仍保留，
-  不作为当前默认；当前配方版本为 v1.2。
+  不作为当前默认；v1.2 保留画师/笔触块，v1.3 纠正用途与强制站姿。
 【结构】build_prompt(subject, scene) = 画师串 + 主体层 + 场景层 + 风格块（\n\n 分段）；
   build_uc(extra) = 含手指异常排除的通用基线 + 角色/图片专属排除；
   build_character_portrait_prompt() 仅为全身立绘追加安静无场景背景的构图句。"""
+
+RECIPE_VERSION = '1.3'
 
 ARTIST_BLOCK = '1.2::miv4t::, 0.8::quasarcake::'
 
@@ -32,7 +36,7 @@ STYLE_BLOCK = (
 
 PORTRAIT_SCENE_TAIL = (
     'Use a quiet, loosely brushed background without scenery, '
-    'leaving the full standing figure as the focal point.'
+    'leaving the complete character silhouette as the focal point; preserve the specified pose.'
 )
 
 BASE_UC = (
@@ -49,10 +53,18 @@ def build_prompt(subject_layer, scene_layer=''):
     return '\n\n'.join(part for part in (ARTIST_BLOCK, subject_layer, scene_layer, STYLE_BLOCK) if part)
 
 
-def build_character_portrait_prompt(subject_layer, scene_layer=''):
-    """拼角色全身立绘提示词；把立绘专属的安静背景句放入场景层。"""
-    portrait_scene = '\n\n'.join(part for part in (scene_layer, PORTRAIT_SCENE_TAIL) if part)
+def build_character_portrait_prompt(subject_layer, scene_layer='', *, composition_layer=''):
+    """完整轮廓立绘；姿态来自主体/构图层，支持白塔坐姿；兼容旧两参数调用。"""
+    portrait_scene = '\n\n'.join(
+        part for part in (scene_layer, composition_layer, PORTRAIT_SCENE_TAIL) if part)
     return build_prompt(subject_layer, portrait_scene)
+
+
+def build_asset_prompt(subject_layer, *, purpose_layer='', composition_layer='', light_material_layer=''):
+    """主体/身份、用途、构图、光色材质分层；尺寸、模型与裁切在批次记录。"""
+    scene = '\n\n'.join(
+        part for part in (purpose_layer, composition_layer, light_material_layer) if part)
+    return build_prompt(subject_layer, scene)
 
 
 def build_uc(extra_uc=''):

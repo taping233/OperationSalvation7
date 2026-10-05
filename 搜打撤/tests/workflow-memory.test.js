@@ -1,8 +1,9 @@
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
+import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
-import { discoverMemory, hasProjectPath } from '../scripts/workflow-memory.mjs';
+import { discoverMemory, hasProjectPath, searchMemory } from '../scripts/workflow-memory.mjs';
 
 const temporaryRoots = [];
 function fixture() {
@@ -26,6 +27,70 @@ afterEach(() => {
 });
 
 describe('只读动态记忆入口', () => {
+  it('真实CLI转发query与limit，非法参数不退回全量discover', () => {
+    const home = fixture();
+    const repo = path.resolve(process.cwd(), '..');
+    put(path.join(home, '.codex/memories/memory_summary.md'), `项目 ${repo}`);
+    put(path.join(home, '.codex/memories/MEMORY.md'), `# topic\ncwd=${repo}\nworkflow receipt\n`);
+    const args = ['scripts/workflow.mjs', 'memory', '--home', home, '--query', 'workflow receipt', '--limit', '1', '--json'];
+    const result = JSON.parse(execFileSync(process.execPath, args, { encoding: 'utf8' }));
+    expect(result).toMatchObject({ status: 'matched', source: 'codex', limit: 1 });
+    expect(result.matches).toHaveLength(1);
+    expect(() => execFileSync(process.execPath, ['scripts/workflow.mjs', 'memory', '--limit', '1', '--json'], { stdio: 'pipe' })).toThrow();
+  });
+  it('显式query按仓库与全部关键词过滤，带来源行号且不执行引用内容', () => {
+    const home = fixture();
+    const repo = path.join(home, 'repo');
+    put(path.join(home, '.codex/memories/memory_summary.md'), `项目 ${repo}`);
+    const source = put(path.join(home, '.codex/memories/MEMORY.md'),
+      `# Task Group: workflow\ncwd=${repo}\n\n## Knowledge\nworkflow task 小修免登记历史建议\n[topic](secret.md)\n\n# Task Group: neighbour\ncwd=${repo}2\nworkflow task 不相关\n\n# Task Group: one-term\ncwd=${repo}\nworkflow only\n`);
+    put(path.join(home, '.codex/memories/secret.md'), '不允许自动读入的引用正文');
+    const before = readFileSync(source, 'utf8');
+    mkdirSync(path.join(home, '.zcode/cli/memories/projects/unrelated-bad/memory/MEMORY.md'), { recursive: true });
+    const result = searchMemory(repo, { home, query: 'workflow task' });
+    expect(result.status).toBe('matched');
+    expect(result.warnings).toEqual([]);
+    expect(result.matches).toHaveLength(1);
+    expect(result.matches[0]).toMatchObject({ source, startLine: 1, title: 'Task Group: workflow' });
+    expect(result.matches[0].excerpt).toContain('5: workflow task');
+    expect(JSON.stringify(result)).not.toContain('不相关');
+    expect(JSON.stringify(result)).not.toContain('不允许自动读入的引用正文');
+    expect(readFileSync(source, 'utf8')).toBe(before);
+  });
+  it('索引无当前仓库时不从正文猜测身份；query和limit失败必须显式返回', () => {
+    const home = fixture();
+    const repo = path.join(home, 'repo');
+    put(path.join(home, '.codex/memories/memory_summary.md'), '# unrelated');
+    put(path.join(home, '.codex/memories/MEMORY.md'), `# secret\ncwd=${repo}\nworkflow`);
+    expect(searchMemory(repo, { home, query: 'workflow' }).status).toBe('project-not-indexed');
+    for (const limit of [0, 11, 1.5, 'bad']) expect(() => searchMemory(repo, { home, query: 'workflow', limit })).toThrow();
+    expect(() => searchMemory(repo, { home, query: '  ' })).toThrow();
+    expect(() => searchMemory(repo, { home, query: 'x'.repeat(201) })).toThrow();
+  });
+  it('匹配数与输出有界，正文截断导致缺失命中时不宣称全库无结果', () => {
+    const home = fixture();
+    const repo = path.join(home, 'repo');
+    put(path.join(home, '.codex/memories/memory_summary.md'), `cwd=${repo}`);
+    const source = put(path.join(home, '.codex/memories/MEMORY.md'), Array.from({ length: 5 }, (_, i) =>
+      `# topic${i}\ncwd=${repo}\nworkflow ${'x'.repeat(1800)}`).join('\n'));
+    const result = searchMemory(repo, { home, query: 'workflow', limit: 2 });
+    expect(result.matches).toHaveLength(2);
+    expect(result.totalMatchedTopics).toBe(5);
+    expect(result.moreMatches).toBe(true);
+    expect(result.matches.every(hit => hit.excerpt.length <= 1600 && hit.excerptTruncated)).toBe(true);
+    writeFileSync(source, '# topic\ncwd=' + repo + '\n' + 'x'.repeat(530000) + '\nneedle');
+    expect(searchMemory(repo, { home, query: 'needle' })).toMatchObject({ status: 'incomplete', truncated: true, matches: [] });
+  });
+  it('真实知识优先于历史索引和关键词堆砌，query不只返回战报入口', () => {
+    const home = fixture();
+    const repo = path.join(home, 'repo');
+    put(path.join(home, '.codex/memories/memory_summary.md'), `cwd=${repo}`);
+    put(path.join(home, '.codex/memories/MEMORY.md'), `# Task Group: workflow\ncwd=${repo}\n` +
+      '## Task 1: history\n### keywords\nworkflow task\n' + 'rollout_metadata\n'.repeat(30) +
+      '## Reusable knowledge\n- task 小改不建任务，只有跨会话需要时才建\n');
+    const result = searchMemory(repo, { home, query: 'workflow task', limit: 1 });
+    expect(result.matches[0].excerpt).toContain('小改不建任务');
+  });
   it('换机从 USERPROFILE 发现，不依赖固定用户与 project 哈希', () => {
     const home = fixture();
     const repo = path.join(home, '新的中文用户', '代号柒');

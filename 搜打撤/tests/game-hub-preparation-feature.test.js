@@ -121,10 +121,13 @@ describe('基地整备功能端口', () => {
     const pendingIntent = h.view.lastIntent({ type: 'goal-add', payload: { targetId: 'card-a' } });
     await Promise.resolve();
     expect(h.commitBase).toHaveBeenCalledTimes(1);
+    // A3-PREP-04 后命令挂起期间已推送 busy:true 帧（dispose 前的合法 UI 更新）；
+    // 断言口径精确化为「dispose 后调用数不增」——迟到结果不得继续写入已卸载视图。
+    const updatesBeforeDispose = h.view.controller.update.mock.calls.length;
     h.feature.dispose();
     finishCommit({ ok: true, revision: 5 });
     await pendingIntent;
-    expect(h.view.controller.update).not.toHaveBeenCalled();
+    expect(h.view.controller.update.mock.calls.length).toBe(updatesBeforeDispose);
     expect(h.view.controller.dispose).toHaveBeenCalledTimes(1);
   });
 
@@ -135,5 +138,31 @@ describe('基地整备功能端口', () => {
     expect(h.navigation.applyPicks).toHaveBeenCalledWith({ 北境短刀: 1 });
     expect(h.navigation.openDeparture).toHaveBeenCalledTimes(1);
     expect(h.view.controller.dispose).toHaveBeenCalledTimes(1);
+  });
+
+  it('A3-PREP-04 异步 intent 期间推送 busy:true，命令 settle 后回 false', async () => {
+    let releaseCommit;
+    const gate = new Promise(resolve => { releaseCommit = resolve; });
+    const h = createHarness({ commitGate: () => gate });
+    h.feature.open();
+    const pending = h.view.lastIntent({ type: 'goal-add', payload: { targetId: 'card-a' } });
+    await Promise.resolve();   // onIntent 同步段（卫语句 + setBusy(true)）已执行完
+    expect(h.view.controller.update).toHaveBeenCalled();
+    const busyFrames = h.view.controller.update.mock.calls.map(([model]) => model.busy);
+    expect(busyFrames.at(-1)).toBe(true);   // 命令挂起期间最后一帧 busy:true
+    releaseCommit({ ok: true, revision: 5 });
+    await pending;
+    const frames = h.view.controller.update.mock.calls.map(([model]) => model.busy);
+    expect(frames).toContain(true);
+    expect(frames.at(-1)).toBe(false);      // settle 后复位 busy:false
+  });
+
+  it('A3-PREP-04 命令抛异常同样回 busy:false（try/finally 兜底）', async () => {
+    const h = createHarness({ commitGate: () => { throw new Error('boom'); } });
+    h.feature.open();
+    await expect(h.view.lastIntent({ type: 'goal-add', payload: { targetId: 'card-a' } })).rejects.toThrow('boom');
+    const frames = h.view.controller.update.mock.calls.map(([model]) => model.busy);
+    expect(frames).toContain(true);
+    expect(frames.at(-1)).toBe(false);
   });
 });

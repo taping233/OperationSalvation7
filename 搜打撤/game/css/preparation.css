@@ -88,3 +88,9 @@
   .prep-preset, .prep-preset::before { transition: none; }
   .prep-preset:hover { transform: none; }
 }
+
+/* ── prep-summary 资格提示（预设人物/宠物未收录或未拥有时给出一行原因） ── */
+.prep-summary .prep-qual-hint {
+  flex-basis: 100%; margin-top: 4px; color: #d0a394; font-size: 12px;
+}
+.prep-summary.ready .prep-qual-hint { color: #b9ab92; }

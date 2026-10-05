@@ -17,14 +17,14 @@ beforeEach(() => {
 afterEach(() => vi.restoreAllMocks());
 
 describe('Base 宠物蛋保底命令', () => {
-  it('概率公式来自规则配置且大于 1 时不钳制', () => {
+  it('固定基础概率不受未出次数或战斗次数影响，第 150 次宝箱奖励触发硬保底', () => {
     Base.data.eggPity = 40;
     Base.data.eggBattles = 500;
-    expect(Base.petEggDropChance()).toBeCloseTo(
-      RULES.rewards.petEggBaseChance + 40 * RULES.rewards.petEggMissBonus +
-      500 * RULES.rewards.petEggBattleBonus,
-    );
-    expect(Base.petEggDropChance()).toBeGreaterThan(1);
+    expect(Base.petEggDropChance()).toBe(RULES.rewards.petEggBaseChance);
+    Base.data.eggPity = 148;
+    expect(Base.petEggDropChance()).toBe(RULES.rewards.petEggBaseChance);
+    Base.data.eggPity = 149;
+    expect(Base.petEggDropChance()).toBe(1);
   });
 
   it('保存成功时只推进并落盘一次', () => {
@@ -80,5 +80,14 @@ describe('Base 宠物蛋保底命令', () => {
     expect(Base.recordPetEggChestResult({ eggGranted: false })).toEqual({ eggPity: 7, persisted: true });
     expect(Base.recordPetEggChestResult({ eggGranted: true })).toEqual({ eggPity: 0, persisted: true });
     expect(Base.data.eggPity).toBe(0);
+  });
+
+  it('第 149 次未出后第 150 次奖励必出，提前实际加入蛋后重新从基础概率计数', () => {
+    Base.data.eggPity = 148;
+    expect(Base.petEggDropChance()).toBe(RULES.rewards.petEggBaseChance);
+    expect(Base.recordPetEggChestResult({ eggGranted: false }).eggPity).toBe(149);
+    expect(Base.petEggDropChance()).toBe(1);
+    expect(Base.recordPetEggChestResult({ eggGranted: true }).eggPity).toBe(0);
+    expect(Base.petEggDropChance()).toBe(RULES.rewards.petEggBaseChance);
   });
 });

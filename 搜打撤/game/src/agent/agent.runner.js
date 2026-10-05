@@ -12,7 +12,7 @@ import { normalizeAction, actionId } from './agent.protocol.js';
 import { findUiElement, collectActionKeys, overlayVisible } from './agent.surface.js';
 import { observe, settleSignature, bustSigCache, markUiFailure } from './agent.state.js';
 import { isTurbo } from '../core/turbo.js';
-import { setDriver, getDriver, battleTick, battleActionTick, battleEnd } from './agent.recorder.js';
+import { setDriver, getDriver, battleTick, battleActionTick, battleEnd, noteStopReason } from './agent.recorder.js';
 import { moveTo, reenterCell } from '../run/game.run.flow.js';
 import { startNewGame, game, getActiveSlot } from '../run/game.session.js';
 
@@ -372,6 +372,7 @@ async function autoRun({ decide, maxSteps = 800, onStep, until, driver = 'auto',
   if (runAbort) {
     const trace = [];
     trace.stopReason = 'already-running';
+    noteStopReason({ code: 'already-running', steps: 0 });   // SYS-11：重入拒绝也是一次结构化停止
     return trace;
   }
   const trace = [];
@@ -399,6 +400,7 @@ async function autoRun({ decide, maxSteps = 800, onStep, until, driver = 'auto',
   let failCount = 0;
   let prevBattleActive = false;       // 战斗内埋点：battleActive 下降沿检测（battleEnd 触发）
   let stopReason = 'max-steps';       // 熔断原因入记录（09-26：弃局死因必须可见）
+  let lastStep = null;                // SYS-11：卡死疑似点定位（当前场景+等待动作）取自最后一步
   try {
     for (let i = 0; i < maxSteps; i++) {
       if (runCancelled) { stopReason = 'cancelled'; break; }
@@ -417,6 +419,7 @@ async function autoRun({ decide, maxSteps = 800, onStep, until, driver = 'auto',
         continue;
       }
       stepErrors = 0;
+      lastStep = result;   // SYS-11：其后所有收口点都能读到当前场景与等待动作
       if (result.stopReason) {
         trace.push({ step: i, id: result.id || null, ok: false, phase: result.obs.phase,
           spin: 0, code: result.res?.code, completed: result.res?.completed });
@@ -535,6 +538,16 @@ async function autoRun({ decide, maxSteps = 800, onStep, until, driver = 'auto',
     setDriver(previousDriver);   // 驱动标签只在本局生效，收口还原为 human
     runAbort = null;             // 本局取消控制器随局销毁，stopRun 不误伤下一局
   }
+  // 2026-10-03 老板（SYS-11）：结构化停止原因随局落盘（recorder 消费进 entry.stopReason）
+  // ——kind 分类 + 卡死疑似点（当前场景 phase + 等待动作 waitingAction）；trace.stopReason
+  // 字符串口径不动，既有消费方零感知。
+  noteStopReason({
+    code: stopReason,
+    phase: lastStep?.obs?.phase ?? null,
+    turn: lastStep?.obs?.turn ?? null,
+    waitingAction: lastStep?.id ?? null,
+    steps: trace.length,
+  });
   trace.stopReason = stopReason;
   return trace;
 }

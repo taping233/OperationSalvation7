@@ -92,4 +92,15 @@ describe('overlay dialog accessibility contract', () => {
     expect(document.getElementById('overlay').hidden).toBe(true);
     expect(document.activeElement).toBe(opener);
   });
+
+  it('closes immediately when reduced motion is enabled', () => {
+    UI.showOverlay('成就总览', '<div class="achievement-gallery">奖章</div>', 'page');
+    document.body.classList.add('reduce-motion');
+    try {
+      UI.hideOverlay();
+      expect(document.getElementById('overlay').hidden).toBe(true);
+      expect(document.getElementById('ovBody').childElementCount).toBe(0);
+      expect(UI._hideTimer).toBeNull();
+    } finally { document.body.classList.remove('reduce-motion'); }
+  });
 });

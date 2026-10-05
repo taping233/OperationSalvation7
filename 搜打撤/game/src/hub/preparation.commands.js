@@ -58,7 +58,7 @@ function stashCount(baseSnapshot, ref) {
 
 export function previewDeployment({ baseSnapshot, preset, mode = 'standard', cardCatalog = [], characters = [], pets = [], bagCapacity = Infinity } = {}) {
   const picks = normalizePicks(preset?.picks);
-  if (!baseSnapshot || !preset || !picks) return freezeDeep({ resolvedPicks: [], missing: [], forbidden: [], costs: { stashCards: 0 }, qualification: {}, lossRuleSummary: '未生成预览', canStart: false, errors: ['INVALID_ARGUMENT'] });
+  if (!baseSnapshot || !preset || !picks) return freezeDeep({ resolvedPicks: [], missing: [], forbidden: [], costs: { stashCards: 0, slotsUsed: 0, extraStackSlots: 0 }, qualification: {}, lossRuleSummary: '未生成预览', canStart: false, errors: ['INVALID_ARGUMENT'] });
   const cards = catalogMap(cardCatalog);
   const missing = [], forbidden = [], resolvedPicks = [];
   for (const pick of picks) {
@@ -80,9 +80,16 @@ export function previewDeployment({ baseSnapshot, preset, mode = 'standard', car
   const petKnown = !preset.petId || pets.some(item => item.id === preset.petId);
   const petOwned = !preset.petId || !!baseSnapshot.pets?.[preset.petId];
   const qualification = { characterId: preset.characterId || null, characterKnown, characterOwned, petId: preset.petId || null, petKnown, petOwned };
-  const slotsUsed = resolvedPicks.filter(item => item.status === 'ready').length + 1;
+  // A3-PREP-02：局内同名卡第 cap+1 张起另占一格（game.session.bag.js stackCapOf/cardStacks 口径）。
+  // 本模块保持纯函数不引 kernel 单例，这里同口径内联；改叠放规则须两处同步（xart-z1-batch1 测试钉值）。
+  const stackCapOfLocal = card => (card && (card.name === '初始攻击' || card.name === '火球')) ? 5 : 3;
+  const slotsFromPicks = resolvedPicks
+    .filter(item => item.status === 'ready')
+    .reduce((sum, item) => sum + Math.ceil(item.appliedCount / stackCapOfLocal(cards.get(item.card.cardId))), 0);
+  const slotsUsed = slotsFromPicks + 1;   // +1：初始攻击恒占一格
+  const extraStackSlots = slotsFromPicks - resolvedPicks.filter(item => item.status === 'ready').length;
   const capacityOk = !Number.isFinite(bagCapacity) || slotsUsed <= bagCapacity;
-  return freezeDeep({ mode, resolvedPicks, missing, forbidden, costs: { stashCards: resolvedPicks.reduce((sum, item) => sum + item.appliedCount, 0), slotsUsed, bagCapacity }, qualification, lossRuleSummary: '只有实际带入并在对局中消耗或未成功撤回的卡牌按现有对局规则处理；本预览不扣卡。', canStart: !missing.length && !forbidden.length && characterKnown && characterOwned && petKnown && petOwned && capacityOk, errors: capacityOk ? [] : ['BAG_CAPACITY_EXCEEDED'] });
+  return freezeDeep({ mode, resolvedPicks, missing, forbidden, costs: { stashCards: resolvedPicks.reduce((sum, item) => sum + item.appliedCount, 0), slotsUsed, extraStackSlots, bagCapacity }, qualification, lossRuleSummary: '只有实际带入并在对局中消耗或未成功撤回的卡牌按现有对局规则处理；本预览不扣卡。', canStart: !missing.length && !forbidden.length && characterKnown && characterOwned && petKnown && petOwned && capacityOk, errors: capacityOk ? [] : ['BAG_CAPACITY_EXCEEDED'] });
 }
 
 export function createPreparationCommands(deps = {}) {
