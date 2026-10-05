@@ -12,9 +12,9 @@
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
-| Friday（Codex 无部件长期任务 WF-wu-parts-full） | game/art-source/characters/wu-parts-v1/；docs/evidence/2026-10-05-WF-wu-parts-full/；本表自有行 | 老板明确授权长期自主生成22件、拼装检验并按缺陷重画；持续Goal＋本聊天定时续做 | 10-05 | 编辑中；独立素材与演示，未接入游戏主流程 |
+| Friday（Codex 无部件长期任务 WF-wu-parts-full） | game/art-source/characters/wu-parts-v1/；docs/evidence/2026-10-05-WF-wu-parts-full/；本表自有行；独立Vite 127.0.0.1:5348，PID见证据preview.pid，本聊天创建 | 老板明确授权长期自主生成22件、拼装检验并按缺陷重画；持续Goal＋每小时本聊天续做；22件初稿及像素检查已齐 | 10-05 | 编辑中；拼装与动作实检中，未接入游戏主流程 |
 | Friday（Codex 美术实机检查 WF-ui-art-live） | docs/evidence/2026-10-05-WF-ui-art-step1/及live/；本表自有行；cwd搜打撤/.tmp/ui-art-live-20261005固定源码副本；Codex IAB/127.0.0.1:5339，PID13032，exec会话19905，本聊天创建；原5200不启停 | 老板明确令证据不足的去实机检验：5200期间遇热更新回首页，转固定源码副本逐类真实输入和画面检查；仅更新规划/证据，不改游戏源文件 | 10-05 | 检查中；原127.0.0.1:5200存档保留；localhost:5200专用档05新建，5339节点测试局不占档位；不build不提交 |
-| Friday（ZCode 本会话，主线5200拉起+全场收尾 WF-web-5200-1005） | cwd 搜打撤；127.0.0.1:5200 / PID3744 / npm run web / web-up detached / 本会话创建；日志 node_modules/.cache/web-up-5200.log；本表本行+全场台账收尾批次 | 老板令「拉起一个主线，顺便把其他任务都收尾结束」：5200/5338/5341/5340/5344 实核全无监听后按固定指令拉起主线，node.exe PID3744 LISTENING+入口 HTTP200（23472B）核验；收尾=全场台账销账/死服务核销/无主复核/在途陈旧行定态，不提交不清理工作树内容 | 10-05 | 服务运行中（留老板用）；全场收尾收官中：manifest 转正 271 条/docs:check 341 链接 0 发现已随包，其余见已释放终态注记 |
+| Friday（ZCode 本会话，主线5200拉起+全场收尾 WF-web-5200-1005） | cwd 搜打撤；127.0.0.1:5200 / PID3744 / npm run web / web-up detached / 本会话创建；日志 node_modules/.cache/web-up-5200.log；本表本行 | 老板令「拉起一个主线，顺便把其他任务都收尾结束」+拍板（打包提交落库/五在途接手收尾/已验两件不用测试）：5200 实核无监听后重建（node.exe PID3744 LISTENING+入口 HTTP200）；全场 33 行定终态移已释放；manifest 转正 259 条+6 svg 归一（0 errors）；打包门修正三件（RNG visual 流/closeLibPage 经 common 派发器中止 entry/六套断言对齐终态）；码笔 39d5251（622 文件 +16463/−2276）+文档笔 71f9663（1050 文件，>1MB 十四件退回留本地）落库；排除件=三活会话在途属地（request-batching：根AGENTS/WORKFLOW-TOOLS/AGENT-TOOLBOX/QUICKSTART/workflow-memory.mjs；wu-parts-full+ui-art-live 起后新增 drift：workflow.mjs/sound.js/selftest.js/manifest+26 行）+嵌套搜打撤/（无主待批）+nul；SKIP_FULL_TESTS 显式放行有记档（门内 0 测试失败，同机并发负载环境级 error×3，独立全量两轮 295 文件 2517 过 0 失败+syntax 315+ESLint 净为证） | 10-05 | 服务运行中（留老板用）；全场收尾收官，行保留至服务停用 |
 
 ## 无主物品（只记录勿动，等认领/处置）
 
