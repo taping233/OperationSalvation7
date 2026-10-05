@@ -1,0 +1,154 @@
+{
+  "actions": [
+    {
+      "detail": "cua native clicks second→first→second; refresh retains second",
+      "type": "real-input"
+    },
+    {
+      "detail": "Current window new wallpaper, clear white shirt and existing menu placement",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "aria-label": "",
+        "data-home-wallpaper": "ensemble",
+        "id": "title"
+      },
+      "identity": "title",
+      "key": "wallpaper",
+      "rect": {
+        "height": 720,
+        "width": 1280,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#title",
+      "styles": {
+        "backgroundImage": "none",
+        "backgroundSize": "auto",
+        "filter": "none",
+        "opacity": "1"
+      },
+      "tag": "DIV",
+      "text": "冬日猜想 / CODE NAME 7冬日猜想 / CODE NAME 7冬日猜想 / CODE NAME 7\n          冬日猜想 / CODE NAME 7冬日猜想 / CODE NAME 7冬日猜想 / CODE NAME 7\n        \n      \n      \n        \n          \n        \n        \n          \n        "
+    },
+    {
+      "attributes": {
+        "aria-label": "",
+        "data-home-wallpaper": "",
+        "id": ""
+      },
+      "identity": "title-bg title-bg-alternate",
+      "key": "image",
+      "rect": {
+        "height": 662.4166870117188,
+        "width": 1177.604248046875,
+        "x": 51.19791793823242,
+        "y": 28.791667938232425
+      },
+      "selector": ".title-bg-alternate",
+      "styles": {
+        "backgroundImage": "url(\"http://127.0.0.1:5200/assets/reconstruction/wallpaper-ensemble-1005.webp\")",
+        "backgroundSize": "contain",
+        "filter": "none",
+        "opacity": "1"
+      },
+      "tag": "DIV",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "aria-label": "",
+        "data-home-wallpaper": "",
+        "id": ""
+      },
+      "identity": "title-wallpaper-extension",
+      "key": "extension",
+      "rect": {
+        "height": 777.5833740234375,
+        "width": 1382.3958740234375,
+        "x": -51.19791793823242,
+        "y": -28.791667938232425
+      },
+      "selector": ".title-wallpaper-extension",
+      "styles": {
+        "backgroundImage": "url(\"http://127.0.0.1:5200/assets/reconstruction/wallpaper-ensemble-1005.webp\")",
+        "backgroundSize": "cover",
+        "filter": "blur(40px) brightness(0.7)",
+        "opacity": "1"
+      },
+      "tag": "DIV",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "aria-label": "切换壁纸，当前第2张，共2张",
+        "data-home-wallpaper": "",
+        "id": "btnTitleWallpaper"
+      },
+      "identity": "btnTitleWallpaper",
+      "key": "switch",
+      "rect": {
+        "height": 39.09375,
+        "width": 90.90625,
+        "x": 223.4166717529297,
+        "y": 623.3125
+      },
+      "selector": "#btnTitleWallpaper",
+      "styles": {
+        "backgroundImage": "none",
+        "backgroundSize": "auto",
+        "filter": "none",
+        "opacity": "1"
+      },
+      "tag": "BUTTON",
+      "text": "壁纸 2/2"
+    }
+  ],
+  "observedAt": "2026-10-04T16:44:03.192Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.5,
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "scene": "redrawn second wallpaper",
+  "screenshots": [
+    "docs/evidence/2026-10-05-WF-wallpaper-redraw/current-window.png"
+  ],
+  "selectors": [
+    {
+      "key": "wallpaper",
+      "selector": "#title"
+    },
+    {
+      "key": "image",
+      "selector": ".title-bg-alternate"
+    },
+    {
+      "key": "extension",
+      "selector": ".title-wallpaper-extension"
+    },
+    {
+      "key": "switch",
+      "selector": "#btnTitleWallpaper"
+    }
+  ],
+  "schemaVersion": 1
+}

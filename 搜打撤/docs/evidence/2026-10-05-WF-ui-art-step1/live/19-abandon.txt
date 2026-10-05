@@ -1,0 +1,28 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container flag 已放弃对局, ID: overlay
+		3 container
+			4 heading flag 已放弃对局, Value: 2, ID: ovTitle
+				5 image flag
+				6 text  已放弃对局
+			7 container ovBody
+				8 container
+					9 text 带入本局的  2  张卡牌全部丢失；对局中获得的卡牌除安全格保护的外也全部失去； 物资与  1 币 一并散失。
+				10 text 开发测试档未选择存档槽；基地奖励仅暂存于内存。
+				11 container
+					12 image lock
+					13 text  宠物从安全格抢运回  1  张对局中获得的卡牌
+				14 container
+					15 text 2
+					16 image 追斩
+					17 text 追斩 武术 · 稀有 攻（ +0 ），本 回合 每打出一张其他武术，费用 -1 。
+					18 image coin
+					19 text 2
+				20 button home 回基地
+					21 image home
+					22 text  回基地
+				23 button archive 回主菜单
+					24 image archive
+					25 text  回主菜单
+
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/

@@ -1,0 +1,215 @@
+{
+  "actions": [
+    {
+      "detail": "打开馆页→资源筛选→宠物蛋大图→Esc收回→退出；加载遮罩真实出现已截图。",
+      "type": "real-input"
+    },
+    {
+      "detail": "当前窗口最终馆页截图",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "not-collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"HEADER\",\"text\":\"柒\\n          照相馆冬日收藏档案\\n        \\n        馆藏271张相片\",\"class\":\"pg-head library-head\"}",
+      "key": "header",
+      "rect": {
+        "height": 73.09375,
+        "width": 1183.3333740234375,
+        "x": 0,
+        "y": 0
+      },
+      "selector": ".library-head",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "12px 12px 0px 0px",
+        "color": "rgb(238, 231, 216)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16.5px",
+        "height": "85.9926px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "14px 35.5px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1392.16px"
+      },
+      "tag": "HEADER",
+      "text": "柒\n          照相馆冬日收藏档案\n        \n        馆藏271张相片"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"柒\\n          照相馆冬日收藏档案\",\"class\":\"lib-head-title\"}",
+      "key": "name",
+      "rect": {
+        "height": 39.77083587646485,
+        "width": 876.3541870117188,
+        "x": 92.70833587646484,
+        "y": 15.65625
+      },
+      "selector": ".lib-head-title",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(238, 231, 216)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16.5px",
+        "height": "46.7892px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1031px"
+      },
+      "tag": "DIV",
+      "text": "柒\n          照相馆冬日收藏档案"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"SPAN\",\"text\":\"馆藏271张相片\",\"class\":\"clib-count\"}",
+      "key": "count",
+      "rect": {
+        "height": 32.85416793823242,
+        "width": 133.8125,
+        "x": 994.2083740234376,
+        "y": 19.11458396911621
+      },
+      "selector": ".clib-count",
+      "styles": {
+        "background-color": "rgb(23, 33, 28)",
+        "border-radius": "2px",
+        "color": "rgb(194, 203, 187)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "10.5px",
+        "height": "38.652px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "6px 14px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "157.426px"
+      },
+      "tag": "SPAN",
+      "text": "馆藏271张相片"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"SECTION\",\"text\":\"馆藏索引找到 271 张照片重置筛选\\n            \\n    全部271\\n    \\n    武术64\\n    \\n    法术79\\n    \\n    生物25\\n    \\n    道具21\\n    \\n    装备36\\n    \\n    事件19\\n    \\n    能力12\\n    \\n    资源15\\n    \\n            \\n              查找照片\\n         \",\"class\":\"studio-filterbar\"}",
+      "key": "filters",
+      "rect": {
+        "height": 188.95834350585935,
+        "width": 729.03125,
+        "x": 54.39583587646485,
+        "y": 83.95833587646484
+      },
+      "selector": ".studio-filterbar",
+      "styles": {
+        "background-color": "rgb(219, 214, 197)",
+        "border-radius": "3px",
+        "color": "rgb(52, 62, 52)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16.5px",
+        "height": "222.304px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "10px 14px 12px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "857.684px"
+      },
+      "tag": "SECTION",
+      "text": "馆藏索引找到 271 张照片重置筛选\n            \n    全部271\n    \n    武术64\n    \n    法术79\n    \n    生物25\n    \n    道具21\n    \n    装备36\n    \n    事件19\n    \n    能力12\n    \n    资源15\n    \n            \n              查找照片\n         "
+    },
+    {
+      "attributes": {
+        "id": "libGrid"
+      },
+      "identity": "{\"id\":\"libGrid\"}",
+      "key": "grid",
+      "rect": {
+        "height": 477.4895935058594,
+        "width": 729.03125,
+        "x": 54.39583587646485,
+        "y": 272.91668701171875
+      },
+      "selector": "#libGrid",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(238, 231, 216)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16.5px",
+        "height": "561.752px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "12px 4px 36px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "857.684px"
+      },
+      "tag": "DIV",
+      "text": "禁咒I法术\n      \n    \n      \n        \n        \n        禁咒II法术\n      \n    \n      \n        \n        \n        禁咒III法术\n      \n    \n      \n        \n        \n        禁咒IV法术\n      \n    \n      \n        \n        \n"
+    }
+  ],
+  "observedAt": "2026-10-04T03:44:50.476Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.5,
+      "height": 764,
+      "width": 1183
+    }
+  },
+  "scene": "照相馆最终馆页",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-04-WF-feedback-1004/photo-after.jpg",
+    "docs/evidence/2026-10-04-WF-feedback-1004/loading-after.jpg"
+  ],
+  "selectors": [
+    {
+      "key": "header",
+      "selector": ".library-head"
+    },
+    {
+      "key": "name",
+      "selector": ".lib-head-title"
+    },
+    {
+      "key": "count",
+      "selector": ".clib-count"
+    },
+    {
+      "key": "filters",
+      "selector": ".studio-filterbar"
+    },
+    {
+      "key": "grid",
+      "selector": "#libGrid"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 3/25, ID: bagBtnFloat
+			4 text 背包
+			5 text 3/25
+		6 container door 离开对局？, ID: overlay
+			7 container
+				8 heading door 离开对局？, Value: 2, ID: ovTitle
+					12 image door
+					13 text  离开对局？
+				11 container ovBody
+					14 container
+						15 text 当前对局进度已自动保存——下次「开始游戏」进入  当前档位  会直接继续这场对局。
+					16 container
+						17 image question
+						18 text  若选择 放弃对局 ：带入本局的卡牌 全部丢失 ； 对局中获得的卡牌只有存入 安全格 的会被宠物运回基地；物资与金币全部散失。
+					19 button save 保存并回主菜单
+						20 image save
+						21 text  保存并回主菜单
+					22 button flag 放弃对局
+						23 image flag
+						24 text  放弃对局
+					25 button ↩ 继续对局
+
+The focused UI element is 25 button ↩ 继续对局

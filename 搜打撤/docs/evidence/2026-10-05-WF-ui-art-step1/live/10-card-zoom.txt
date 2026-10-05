@@ -1,0 +1,25 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 button 背包 2/16, ID: bagBtnFloat
+		3 text 背包
+		4 text 2/16
+	5 container Description: 追斩大图与备注, ID: cardZoom
+		6 button 关闭卡牌大图
+			7 image cross
+		8 container
+			9 text 2
+			10 image 追斩
+			11 text 追斩 武术 · 稀有 攻（ +0 ），本 回合 每打出一张其他武术，费用 -1 。
+			12 image coin
+			13 text 2
+		14 image pen
+		15 text 备注
+		16 text 暂无备注
+		17 container
+			18 button lock 移入安全格
+				19 image lock
+				20 text  移入安全格
+			21 text 按住拖动整理顺序 · 双击翻看卡背 · 可点击「移入安全格」
+		22 text Esc 或点击背景收回
+
+The focused UI element is 6 button 关闭卡牌大图

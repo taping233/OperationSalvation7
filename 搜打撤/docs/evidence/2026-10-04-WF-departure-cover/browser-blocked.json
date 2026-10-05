@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-04",
+  "platform": "Codex",
+  "browser": "iab",
+  "transport": "cua",
+  "url": "http://127.0.0.1:5200/",
+  "status": "blocked",
+  "observations": [
+    "Existing tab 1: initial navigation timed out.",
+    "Agent-created tab 3: Page.navigate timed out.",
+    "Subsequent inventory: existing tabs remained New tab; tab 3 remained about:blank."
+  ],
+  "service": { "port": 5200, "pid": 15108, "homepageHttpStatus": 200 },
+  "screenshotsCollected": false,
+  "gameplayInputsPerformed": false,
+  "testsRun": false,
+  "limits": ["Service response is not proof of rendered UI or gameplay.", "No external browser fallback was used."]
+}

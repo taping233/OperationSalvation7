@@ -1,0 +1,22 @@
+{
+  "background": "rgb(0, 0, 0)",
+  "layers": [
+    {
+      "image": "url(\"http://127.0.0.1:5200/assets/reconstruction/wallpaper-wu-1004.webp\")",
+      "inset": "0px",
+      "opacity": "0",
+      "position": "50% 56px",
+      "size": "cover",
+      "transition": "opacity 0.5s ease-in-out"
+    },
+    {
+      "image": "url(\"http://127.0.0.1:5200/assets/reconstruction/wallpaper-ensemble-1005.webp\")",
+      "inset": "35.9436px 61.6054px",
+      "opacity": "1",
+      "position": "50% 50%",
+      "size": "contain",
+      "transition": "opacity 0.5s ease-in-out"
+    }
+  ],
+  "selected": "ensemble"
+}

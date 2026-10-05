@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-feedback-1004",
+  "date": "2026-10-04",
+  "owner": "Friday-Codex",
+  "goal": "落实老板外部浏览器11条留言：标题/设置/成就/照相馆/宠物蛋",
+  "paths": [
+    "game/index.html",
+    "game/css/title-p0.css",
+    "game/css/page-settings.css",
+    "game/css/title-achievements.css",
+    "game/css/expedition-library.css",
+    "game/css/photo-studio-craft.css",
+    "game/css/motion-transitions.css",
+    "game/css/page-loading.css",
+    "game/src/ui/game.menu.js",
+    "game/src/ui/achievement-gallery.js",
+    "game/src/ui/overlay.js",
+    "game/src/ui/page-loading.js",
+    "game/src/hub/game.cardslib.js",
+    "game/src/hub/game.cardslib.page.js",
+    "game/src/core/rule-config.js",
+    "game/src/hub/base-pet-egg.commands.js",
+    "game/src/hub/base-state.js",
+    "game/src/hub/game.hub.js",
+    "game/src/run/chests.js",
+    "tests/page-loading.test.js",
+    "tests/overlay-dialog.test.js",
+    "tests/settings-page.test.js",
+    "tests/achievement-gallery.test.js",
+    "tests/base-pet-egg.test.js",
+    "tests/pet-egg-chest.test.js",
+    "tests/boot.test.js",
+    "tests/card-library-lazy-boundary.test.js",
+    "tests/premium-ui-pages.test.js",
+    "tests/card-library-performance-contract.test.js"
+  ],
+  "doneWhen": [
+    "11条留言对应需求实现并经定向验证",
+    "当前Codex内置浏览器关键视觉与交互验收有证据"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "相关定向报告均绿；完整记录见本任务README及WF-feedback-1004-photo/final/settings-final证据",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "当前Codex内置浏览器1183x764真实打开/筛选/大图/Esc/返回及关键视觉已核，browser snapshot经workflow导入",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "外部Edge性能、多尺寸、实页连续150箱与reduce偏好切换、全量/远端CI及远端差异未核"
+  ],
+  "updatedAt": "2026-10-04T03:52:36.463Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

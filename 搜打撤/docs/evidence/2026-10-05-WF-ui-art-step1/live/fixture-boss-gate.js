@@ -1,0 +1,1 @@
+(()=>{const q=window.__uiArtQA;q.reset();q.game.layerIdx=3;q.altar.openBossGate();return true;})()

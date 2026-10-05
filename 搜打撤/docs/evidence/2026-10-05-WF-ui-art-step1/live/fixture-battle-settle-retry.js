@@ -1,0 +1,1 @@
+(async()=>{const q=window.__uiArtQA;q.reset();return await q.withBaseReadFault(()=>q.game.onBattleEnd({isBoss:false,foeNames:['联邦巡防兵']},[],true,[]));})()

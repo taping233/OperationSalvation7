@@ -1,0 +1,364 @@
+{
+  "checkedAt": "2026-10-03T06:45:06.798Z",
+  "roles": {
+    "wu": {
+      "files": 12,
+      "distinctBytes": 10,
+      "actions": {
+        "idle": {
+          "slots": 3,
+          "distinctBytes": 3,
+          "files": [
+            {
+              "name": "idle-1.webp",
+              "sha256": "8fde65d9a80232668378ce45744e582b400411c9506a02859a7c32617dc5f11e",
+              "bytes": 51082
+            },
+            {
+              "name": "idle-breathe.webp",
+              "sha256": "fb6247efbfe3115bcb196f717279a7a0204c2a2da9b961f483238d7fdb763dae",
+              "bytes": 49030
+            },
+            {
+              "name": "idle.webp",
+              "sha256": "719d873ffc760b628e7e131fca7ee946fc131070151605e24d20cd65ce21be2f",
+              "bytes": 51112
+            }
+          ]
+        },
+        "atk-wind": {
+          "slots": 3,
+          "distinctBytes": 3,
+          "files": [
+            {
+              "name": "atk-wind-1.webp",
+              "sha256": "77fee63a7670a136800786da55d76d111e34530565efdb7e392cf0289372fb53",
+              "bytes": 57484
+            },
+            {
+              "name": "atk-wind-2.webp",
+              "sha256": "84d7d870874f8d5061367c44706fefeca0c2a0215578221825831a95929255cb",
+              "bytes": 63240
+            },
+            {
+              "name": "atk-wind.webp",
+              "sha256": "3efd3c2ca05a8ec170e06c6d93d2120bb8c99bf751482cf3a0fd374243b2b25e",
+              "bytes": 55804
+            }
+          ]
+        },
+        "atk-hit": {
+          "slots": 2,
+          "distinctBytes": 2,
+          "files": [
+            {
+              "name": "atk-hit-1.webp",
+              "sha256": "9fff76805caf90a0609dd61ccaf7ec08208eee84a890774e3e515651adcd6248",
+              "bytes": 61574
+            },
+            {
+              "name": "atk-hit.webp",
+              "sha256": "0f78de0055550c19cc6c2d8338344cd8e3da25ae1064ef058fddcc536af83e61",
+              "bytes": 57444
+            }
+          ]
+        },
+        "hurt": {
+          "slots": 2,
+          "distinctBytes": 1,
+          "files": [
+            {
+              "name": "hurt-1.webp",
+              "sha256": "cf707b3a0dacdc53cfe76d6471dd0a9d299ece149558c85285a28fbae6fc4650",
+              "bytes": 47084
+            },
+            {
+              "name": "hurt.webp",
+              "sha256": "cf707b3a0dacdc53cfe76d6471dd0a9d299ece149558c85285a28fbae6fc4650",
+              "bytes": 47084
+            }
+          ]
+        },
+        "cast": {
+          "slots": 2,
+          "distinctBytes": 1,
+          "files": [
+            {
+              "name": "cast-1.webp",
+              "sha256": "e63de959c4de2d21352a5e14f110f36780578cd6d41362274e15b854b2e44df1",
+              "bytes": 62366
+            },
+            {
+              "name": "cast.webp",
+              "sha256": "e63de959c4de2d21352a5e14f110f36780578cd6d41362274e15b854b2e44df1",
+              "bytes": 62366
+            }
+          ]
+        }
+      }
+    },
+    "changwuyu": {
+      "files": 12,
+      "distinctBytes": 9,
+      "actions": {
+        "idle": {
+          "slots": 3,
+          "distinctBytes": 2,
+          "files": [
+            {
+              "name": "idle-1.webp",
+              "sha256": "c6b00ef708cd38eef1a356b8d3e9b39764aa01ae6f27e788eea2658b6097b689",
+              "bytes": 44474
+            },
+            {
+              "name": "idle-breathe.webp",
+              "sha256": "c6b00ef708cd38eef1a356b8d3e9b39764aa01ae6f27e788eea2658b6097b689",
+              "bytes": 44474
+            },
+            {
+              "name": "idle.webp",
+              "sha256": "2748e1c37db768944aaf66eb4e85135969ecf3e191fcb444d2d0c2751d375c3e",
+              "bytes": 44826
+            }
+          ]
+        },
+        "atk-wind": {
+          "slots": 2,
+          "distinctBytes": 1,
+          "files": [
+            {
+              "name": "atk-wind-1.webp",
+              "sha256": "dbc3ad24358832d4889e40cb821d73700c4194b0b724ba5f9e2d9b3e0359f305",
+              "bytes": 57014
+            },
+            {
+              "name": "atk-wind.webp",
+              "sha256": "dbc3ad24358832d4889e40cb821d73700c4194b0b724ba5f9e2d9b3e0359f305",
+              "bytes": 57014
+            }
+          ]
+        },
+        "atk-hit": {
+          "slots": 2,
+          "distinctBytes": 2,
+          "files": [
+            {
+              "name": "atk-hit-1.webp",
+              "sha256": "2c382c2dcefedb715358a6026d598c971494dec1cfe3860fdbb700c5ea19a131",
+              "bytes": 51546
+            },
+            {
+              "name": "atk-hit.webp",
+              "sha256": "c613b5e85ea46fc74650a12669100f6a1c94a9fa219201dde5fab9dde6bdce80",
+              "bytes": 52416
+            }
+          ]
+        },
+        "hurt": {
+          "slots": 2,
+          "distinctBytes": 1,
+          "files": [
+            {
+              "name": "hurt-1.webp",
+              "sha256": "4341e4c9e6dc662635f3f5fdb8f1806b441ec719c2f7d1cd19e742349ceb3380",
+              "bytes": 50092
+            },
+            {
+              "name": "hurt.webp",
+              "sha256": "4341e4c9e6dc662635f3f5fdb8f1806b441ec719c2f7d1cd19e742349ceb3380",
+              "bytes": 50092
+            }
+          ]
+        },
+        "cast": {
+          "slots": 3,
+          "distinctBytes": 3,
+          "files": [
+            {
+              "name": "cast-1.webp",
+              "sha256": "29f89ea39d35de8c089f21f5a1d664157258d330cb95ecb9af0562ed9d5a8fd2",
+              "bytes": 54364
+            },
+            {
+              "name": "cast-2.webp",
+              "sha256": "def6d953511dd3f166736a93ea452312f838557f8e04b848a60869c095f0701b",
+              "bytes": 51282
+            },
+            {
+              "name": "cast.webp",
+              "sha256": "cb189e4934f74c91334b733490e9f5455a3a1466dbc2e55eba74ecc24429c474",
+              "bytes": 54366
+            }
+          ]
+        }
+      }
+    },
+    "baita": {
+      "files": 15,
+      "distinctBytes": 9,
+      "actions": {
+        "idle": {
+          "slots": 3,
+          "distinctBytes": 2,
+          "files": [
+            {
+              "name": "idle-1.webp",
+              "sha256": "102fa5876ccae4a2cd0eb54f1452044b2a408298ffefdb75da4e9b2f92b3873e",
+              "bytes": 39744
+            },
+            {
+              "name": "idle-breathe.webp",
+              "sha256": "102fa5876ccae4a2cd0eb54f1452044b2a408298ffefdb75da4e9b2f92b3873e",
+              "bytes": 39744
+            },
+            {
+              "name": "idle.webp",
+              "sha256": "95f72c8e282d109e51c654ccfb4bdc0b82ebfe049bf8aef8c33ed74074b2f00f",
+              "bytes": 39906
+            }
+          ]
+        },
+        "atk-wind": {
+          "slots": 2,
+          "distinctBytes": 2,
+          "files": [
+            {
+              "name": "atk-wind-1.webp",
+              "sha256": "6bef546a844a8bd6e8275ce6149901f00abc2592b86adb20aae246a0788617f3",
+              "bytes": 46318
+            },
+            {
+              "name": "atk-wind.webp",
+              "sha256": "a5565427df3a42ede7250571fd82a4668b75885be9838a13c64c39774cefcc57",
+              "bytes": 45360
+            }
+          ]
+        },
+        "atk-hit": {
+          "slots": 2,
+          "distinctBytes": 2,
+          "files": [
+            {
+              "name": "atk-hit-1.webp",
+              "sha256": "804e4c49abd81b6780d33cf24494e78281221ec99da6cf6de43fbb97cc67f7fe",
+              "bytes": 49416
+            },
+            {
+              "name": "atk-hit.webp",
+              "sha256": "5d1825a9868bc4cc96b844905b8cb185cc53e7a84b9594231e57b412c68d394d",
+              "bytes": 49398
+            }
+          ]
+        },
+        "hurt": {
+          "slots": 2,
+          "distinctBytes": 1,
+          "files": [
+            {
+              "name": "hurt-1.webp",
+              "sha256": "2d79440fd30261729f001b75f4c07753b191087a3f414e60f008cbf276a4d38b",
+              "bytes": 46014
+            },
+            {
+              "name": "hurt.webp",
+              "sha256": "2d79440fd30261729f001b75f4c07753b191087a3f414e60f008cbf276a4d38b",
+              "bytes": 46014
+            }
+          ]
+        },
+        "cast": {
+          "slots": 6,
+          "distinctBytes": 6,
+          "files": [
+            {
+              "name": "cast-1.webp",
+              "sha256": "6bef546a844a8bd6e8275ce6149901f00abc2592b86adb20aae246a0788617f3",
+              "bytes": 46318
+            },
+            {
+              "name": "cast-2.webp",
+              "sha256": "d6ce31eb233e0ed07fa023786fa83097806957437697f630f5b1438fefa8ab9d",
+              "bytes": 45378
+            },
+            {
+              "name": "cast-3.webp",
+              "sha256": "5d1825a9868bc4cc96b844905b8cb185cc53e7a84b9594231e57b412c68d394d",
+              "bytes": 49398
+            },
+            {
+              "name": "cast-4.webp",
+              "sha256": "804e4c49abd81b6780d33cf24494e78281221ec99da6cf6de43fbb97cc67f7fe",
+              "bytes": 49416
+            },
+            {
+              "name": "cast-5.webp",
+              "sha256": "a0f74157eb834cd750c61ce394247fbd4b2d74a1b80883697ae2a91ebcc80a3f",
+              "bytes": 43210
+            },
+            {
+              "name": "cast.webp",
+              "sha256": "a5565427df3a42ede7250571fd82a4668b75885be9838a13c64c39774cefcc57",
+              "bytes": 45360
+            }
+          ]
+        }
+      }
+    },
+    "heixiang": {
+      "exists": false
+    },
+    "xingyue": {
+      "exists": false
+    }
+  },
+  "approvedAnchors": [
+    {
+      "role": "wu",
+      "path": "game/assets/portraits/full/wu.webp",
+      "sha256": "a7c5d4e2242558337f5f5a8b8df71cda875af73586ec70657b45836f01466c6c"
+    },
+    {
+      "role": "changwuyu",
+      "path": "game/assets/portraits/full/changwuyu.webp",
+      "sha256": "98e69d19b6c2129d0f85d320bb95e4609584576c94b041663a523067ff946185"
+    },
+    {
+      "role": "baita",
+      "path": "game/assets/portraits/full/baita.webp",
+      "sha256": "e0731848113da23e419bb6ddfcab2bcbaa83598065511945d11aa7306076bcbb"
+    },
+    {
+      "role": "heixiang",
+      "path": "game/assets/portraits/full/heixiang.webp",
+      "sha256": "e186722f97369b3a63a45dca056e2fe6c10f7b211c8de9403f71639d4f6bda6e"
+    },
+    {
+      "role": "xingyue",
+      "path": "game/assets/portraits/full/xingyue.webp",
+      "sha256": "7fb82912770395c264bfb5c6918badfd176aa503ddf11cd07f0da0cd9300600c"
+    }
+  ],
+  "playerSource": "game/src/battle/view/battle.frames.js",
+  "playerSha256": "729b58832f13e5f0934da9d0f93101c8c3f0979fff1bc6020c3073850da947fe",
+  "sourceValues": {
+    "enabledRoles": [
+      "wu",
+      "changwuyu",
+      "baita"
+    ],
+    "sequenceMs": {
+      "idle": 2900,
+      "atk-wind": 320,
+      "atk-hit": 280,
+      "hurt": 420,
+      "cast": 800
+    },
+    "maxProbeSuffix": 5,
+    "pixiMaxFPS": 30
+  },
+  "limits": [
+    "字节哈希去重不等于逐帧绘制差异测量",
+    "只读资源/源码统计，非浏览器帧率采样",
+    "认可原图不能覆盖；战斗原图有基地共享引用，重绘须新增版本并限定接入"
+  ]
+}

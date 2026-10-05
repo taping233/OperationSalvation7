@@ -1,0 +1,42 @@
+{
+  "method": "Built-in ImageGen original-composition edit; existing WebP/thumb encoding",
+  "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-e745f322-700b-41ab-8214-966094e8d657.png",
+  "source": {
+    "path": "game/art-source/cards/spell-tt7-smite-original-rough-20261005.png",
+    "bytes": 1880313,
+    "sha256": "a762290db16c5c9138c4d99b6fe2608f88ef3192d853e2d66429457b7fdaf511"
+  },
+  "outputs": [
+    {
+      "path": "game/assets/cards/spell-tt7-smite.webp",
+      "bytes": 113536,
+      "sha256": "c3210dd20ee7939182b4779473b143fc8aec754ef7adc6b4818f129947ff99df",
+      "size": [
+        1448,
+        1086
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/cards/spell-tt7-smite.webp",
+      "bytes": 13270,
+      "sha256": "ae6def5a814d56d85d82e586cf5081c8bb5d13f7cd5e327e755b464923de4664",
+      "size": [
+        448,
+        336
+      ]
+    }
+  ],
+  "backups": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-smite-original-rough/originals-before-rough/full-spell-tt7-smite.webp",
+      "bytes": 56348,
+      "sha256": "10f53f361a245ee577185382e37a8e4cef6019ee9ebed78027b09d7eebba12e8"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-smite-original-rough/originals-before-rough/thumb-spell-tt7-smite.webp",
+      "bytes": 12720,
+      "sha256": "8c7bb3f9d0594ca6fe7917b6c08f78680c57d490c4a832fa0b2c37da3f5d9cf3"
+    }
+  ],
+  "verification": "未测试/资产门/实页"
+}

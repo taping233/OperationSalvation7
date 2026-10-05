@@ -1,0 +1,18 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 1/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 1/16
+		6 container
+			7 text FIELD ENCOUNTER 01 / 04
+			8 heading dice 避难市集药摊, Value: 2
+				9 image dice
+				10 text  避难市集药摊
+			11 text 从 3 瓶随机药水中选择 1 瓶获得。
+			12 button 查看药摊 从 3 瓶随机药水中选择 1 瓶 ▸
+				13 text 查看药摊
+				14 text 从 3 瓶随机药水中选择 1 瓶
+				15 text ▸
+
+The focused UI element is 12 button 查看药摊 从 3 瓶随机药水中选择 1 瓶 ▸

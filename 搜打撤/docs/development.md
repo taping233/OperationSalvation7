@@ -5,7 +5,7 @@
 当前仅开发 Vite，Codex / ZCode 共用根 AGENTS.md 与 [双端工作流](README.md#双端工作流)。优先现有 Node.js/依赖；确需首次安装时按任务授权处理，命令示例不授权安装、改全局配置或启动冻结的桌面线。
 
 ```powershell
-npm run dev
+npm run web
 npm run narrative:compile
 npm test
 npm run typecheck

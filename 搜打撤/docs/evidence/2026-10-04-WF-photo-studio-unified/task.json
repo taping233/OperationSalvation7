@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-photo-studio-unified",
+  "date": "2026-10-04",
+  "owner": "Friday-Codex",
+  "goal": "重设计照相馆整体UI与选择栏，统一简练手绘收藏风格与控件体系",
+  "paths": [
+    "game/src/hub/game.cardslib.page.js",
+    "game/src/hub/photo-studio-controls.js",
+    "game/css/photo-studio-unified.css"
+  ],
+  "doneWhen": [
+    "页头/分类搜索/选择栏/选片台及照片承托统一设计并接入",
+    "保留筛选排序/选择/大图/夹子和稀有度语义，老板验收，不跑测试或网页"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "统一页头/分类搜索/选择列表/选片台/照片承托与背签样式及控制接线已实现；缺失CSS已补齐；老板接管验收",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "按老板要求未测试/lint/解析验证/build/benchmark或实页；实际画面、操作、可访问性和性能待老板验收；远端差异与CI未核"
+  ],
+  "updatedAt": "2026-10-04T11:18:57.913Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

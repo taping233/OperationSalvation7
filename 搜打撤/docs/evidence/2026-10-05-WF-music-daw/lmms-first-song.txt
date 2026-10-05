@@ -1,0 +1,186 @@
+> For the complete documentation index, see [llms.txt](https://docs.lmms.io/user-manual/llms.txt). Markdown versions of documentation pages are available by appending `.md` to page URLs; this page is available as [Markdown](https://docs.lmms.io/user-manual/production/your-first-song.md).
+
+# Your First Song with LMMS
+
+## Your First Melody
+
+### Choosing the Instrument
+
+You've got the default screen in front of you, with the Song Editor, Beat+Bassline Editor and Project Notes open. First, click the Presets icon (<img src="https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-LuiVNbT6UrfSwJHxCkO%2F-LuiVakeZpDDlW1FzJWI%2Fimage.png?alt=media&amp;token=b8ed49cd-0289-4415-80ab-deb09e187c8d" alt="" data-size="original">) on the Sidebar to open up the list of preset sounds. Double-click on the TripleOscillator or click on the plus symbol on its left to open this folder and you will be presented with a diverse range of instruments. You can hold the mouse button down on any preset to hear a preview of its sound.
+
+![My Presets](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-LuiVg_A4R9epYpgcP6o%2F-LuiVqG5KojlsEM5ljVb%2Fimage.png?alt=media\&token=cae44514-d6fd-422b-8621-5d3e3fb95e56)
+
+For now, let's drag the "Xylophon" preset into the space in the middle of the Song Editor. When you drop it, a new track will be created with that preset as the instrument.
+
+![Dragging a preset](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-MfY7BeZhm80IGeZL_5J%2F-MfYOyk-r-yOH1Vaidx3%2FDrag_and_drop_preset_1.0.0.PNG?alt=media\&token=38979f1d-ac46-4839-9c83-e4256f68205a)
+
+![Xylophon dragged](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-LuiVtWT3lpYH9FHPXvV%2F-LuiW5_K9wC0UHbkxLBR%2Fimage.png?alt=media\&token=6d989ac7-68ac-4df3-bbe2-7d3c9dbc1224)
+
+{% hint style="info" %}
+If this were a percussion-type instrument, we might be better off dragging it to the Beat+Bassline Editor instead; you'll see why in a second. We really want to give this instrument a string of notes (or a Piano Roll) to play, though, so Song Editor it is.
+{% endhint %}
+
+### Making the Melody
+
+We now want to add notes to make the melody. Left-click in the first bar of the Xylophon track and a new piano roll segment will appear (<img src="https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-LuiceCJAbFbP450DrX4%2F-LuicqEKOLxefbD46WrR%2Fimage.png?alt=media&amp;token=78c3f708-a13c-499a-a9c0-54109a523c4d" alt="" data-size="original">). Double-click on that and the Piano Roll Editor will appear, allowing you to put notes into that newly-created segment.
+
+![Piano Roll Editor](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-LuiW9nP0TfFnNQ8kKTE%2F-LuiWVSK5ItlNTnW7V9J%2Fimage.png?alt=media\&token=5e32b61a-863d-439b-89a7-68a080e6bb95)
+
+#### The First Note
+
+Now click in the black square just to the right of the "A4" note (which is three lines, or semitones, down from the note marked "C5"). This will create a new crotchet, a note one beat long, starting at that time.
+
+![The first note](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-LuiWYdTBnxy4uOrBuRn%2F-LuiWcm6v0uYtq_Y7KFB%2Fimage.png?alt=media\&token=f64ea86b-aaa6-4149-aa27-c2d8c2919e61)
+
+However, this is too long: we need notes half a bear - a quarter - long. To change this, we simply move the mouse pointer to the right-hand edge of the note, until the cursor changes into a left-and-right arrow. Then we hold the mouse button down and drag the end of the note left two "blocks" (each block being 1/16 of a bar).
+
+![Resizing notes](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-MfY7BeZhm80IGeZL_5J%2F-MfYP79N1G2gBuC4uF8s%2FResizing_notes_1.0.0.PNG?alt=media\&token=5cdf9d68-3ecd-4571-90e6-6d2b981c5674)
+
+After this, the new notes we put down will be the same length, because the Piano Roll Editor is by default set to Last Note (<img src="https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-LuiWfhnWpU-vqas1Mts%2F-LuiWipUrmBXyWLUa3Da%2Fimage.png?alt=media&amp;token=9a953e97-be56-4ff2-8f81-5457501e8135" alt="" data-size="original">). You can change this in the drop-down. However most of the time you will work with the "Las Note" setting, but if you suddenly create notes in the length you expected, it's because you accidentally made a change to this drop-down.
+
+#### More Notes
+
+Continue creating notes in the pattern shown:
+
+![Popcorn pattern](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-Lui_IKqFc8ccEwy9F1X%2F-Lui_qnQWqBFxrJkMHDh%2Fimage.png?alt=media\&token=cd8c2a71-1c72-41f8-bce3-28026d0cf937)
+
+To place a note, you need to aim for the line at the start of the bear; LMMS will recognize a small fraction of the area left of the beat line as being closer to that beat than the previous. You can control this with the "Q setting". Default Q is correlated to note-length. That is "Note lock". But again you can change that "magnetic point" in the Q-drop-down. If you make a mistake placing a note, you can move it to its correct position by clicking on the middle of the note (where the cursor turns into a four-way cross) and dragging the note to its new position. LMMS will play the note that you're dragging onto as an aide to correct placement. You can move notes horizontally (in time) as well as vertically (in pitch).
+
+If you need to delete a note, simply right-click on it.
+
+#### Copy and Paste
+
+We now want to repeat those seven notes at the start of the bar in the next bar. There are three ways to do this.
+
+* The first and worst way to do it is to simply click the correct notes. This is tedious.
+* The first real way to do it is to use the duplicator tool. First select the notes you want to copy. Hold down Ctrl and make a selection rectangle around the notes you want to copy. Next, hold Shift and drag the newly selected notes. You are now dragging a copy of the selected notes. You can place these where you want them to go.
+
+![Notes selected](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-Lui_vxt8EhhlZ_RJRmB%2F-Lui_zumRHWCWJjrP22A%2Fimage.png?alt=media\&token=cfbdd643-ed87-449d-9d44-71f63a1666fa)
+
+![Copy-dragging the notes](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-MfY7BeZhm80IGeZL_5J%2F-MfYPGsp9Dh9QjI96Q-G%2FDragging_the_notes_1.0.0.PNG?alt=media\&token=d8af6d42-6226-43b5-a100-1f0a014606bb)
+
+![Duplicated notes](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-Luia3Kx-TPnKcRZk7NA%2F-LuiaCR3k2g7al7RVXN8%2Fimage.png?alt=media\&token=81dbaf7c-f4e4-41c7-8e6a-296a14eea1c4)
+
+* Alternatively, you can use good old copy and paste. Again, use Ctrl to select the notes you want, and then press Ctrl+C. Press Ctrl+V to paste the notes at the beginning, and move them to their new location.
+
+To select all notes you can press Ctrl+A.
+
+We can now press the **play** button (<img src="https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-LuiXMMuzrjTIAVYMSyn%2F-LuiXPfS45utESGwqYFg%2Fimage.png?alt=media&amp;token=174ae1e6-69bb-4da4-b2bd-bed1643a8410" alt="" data-size="original">) in the Piano Roll Editor window to play the melody back. When it gets to the end of the last bar in which there are notes, it will automatically repeat back to the start of the first bar.
+
+Oops!
+
+When we play the melody so far, we realize that the melody actually starts on the wrong beat. The second A4 note is really supposed to be the start of the bar, and the two notes before it are leading in from the previous bar. However, we can't go further back than bar 1 in our piano roll. We need to move all the notes forward. Press Ctrl+A to select all the notes. Then you can click and drag to move them all over in order to have the first note start on the right beat (see picture below).
+
+Now we need to avoid another and far more annoying Oops: loosing everything you made! Now you have made something that actually sounds great, it is high time for saving your project!
+
+The first time you save, LMMS will prompt you for a project name. That's entirely up to you, but LMMS also lets you decide whether your project should be compressed (.mmpz), or kept as uncompressed XML (.mmp). Make your choice and save your project now!
+
+Observe the message in the bottom of your screen!
+
+Make sure you *always* see this message, every time you save your project, and if you end your work, and close LMMS, I recommend that you wait about 10 seconds, after you have saved the last time, before you close the program. You could also take a peek on your disk, and actually make sure that the project has been saved, has a believable size, and a correct time-stamp. But only when you close LMMS.
+
+#### The First Four Bars
+
+If you're confident, you can now continue adding the notes of the tune to make the first four bars (up to where the main melody repeats). Here's what your piano roll should look like at the end of this:
+
+![Popcorn melody](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-LuiaFWVqLVCr0SKSeh6%2F-LuiaOCY63OiTjejdHr-%2Fimage.png?alt=media\&token=61425019-3d9b-40a8-af2d-6715b64bf1ea)
+
+### More Structure
+
+We can now close the Piano Roll Editor and go back to the Song Editor. You will see that the track segment we initially double-clicked to create the melody has expanded out to fit the notes that we've added.
+
+We now want to copy that segment to create the next four bars. The easiest way to do that is to simply hold down the Ctrl key, then drag the initial segment. This will drag a copy of the segment to a new location, which must be outside the initial segment. This process will look like this:
+
+![Copying segments](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-MfY7BeZhm80IGeZL_5J%2F-MfYPRAiYpEXJD6wkwmU%2FCopying_segments_1.0.0.PNG?alt=media\&token=cabbd5fc-968a-4b0d-81e4-daff009eac4b)
+
+Drop the segment on bar 6. This is actually one bar too late, as the first three quarters of a bar of this segment are empty, as is the last quarter of the last segment. Fortunately, segments can overlap and their notes will play simultaneously.
+
+{% hint style="warning" %}
+You should avoid having segments overlap as there is no clear display of how many segments overlap in a particular area. A small segment might completely disappear behind a large one, leaving you confused as to where those extra notes were coming from
+{% endhint %}
+
+Drag the second copy so that it starts at bar 5.
+
+You can now play this using the play button in the Song Editor. You will hear a short pause as it counts the first three beats of silence, then the melody will start. It should play smoothly through the two repeats.
+
+The Song Editor should now look like this:
+
+![How the Song Editor should look like](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-LuiZnn4Fz5CxlVJ1ScT%2F-Lui_9RYb6aW4CzLptC-%2Fimage.png?alt=media\&token=3d89eca2-19f4-4784-a375-96801fe5be58)
+
+### Variation 2
+
+We can now go on to create another piano roll segment and fill in the next four bars:
+
+![Melody variation](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-LuiaSJe5iG1jPU51gcH%2F-LuiadH2N99onKW2T9_K%2Fimage.png?alt=media\&token=f8a0e375-019a-40d1-be2d-44c0299e6194)
+
+Due to the way that the segments overlap, you will have to create the new segment in a new bar, e.g. bar 11, and then move it into position over the previous segment.
+
+Note that there is a slight oddity in the Piano Roll Editor that causes you to start editing at bar 2 when opening occasional new segments. Check which bar you're writing notes into before getting too far!
+
+Your Song Editor should now look like this:
+
+![Final Song Editor look](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-Luiah3xwLg2o0UDvIdk%2F-LuiasdXjGtN21CQJLxW%2Fimage.png?alt=media\&token=0a45dc2d-00ed-48e9-a537-875b470edaa0)
+
+## Your First Beat
+
+For our first beat we are going to click the my samples button on the Sidebar (<img src="https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-Luiaw9rNR60CD6GfFb3%2F-Luib-VItFz2eZDrkkJO%2Fimage.png?alt=media&amp;token=33a09db6-4552-4902-87b1-21783c15f5af" alt="" data-size="original">). This is your sample collection that comes standard with LMMS. On the list of folders that appeared, one of them labeled "drums". Double-clicking the folder will show a list of percussion instruments. Click on them to hear the different sounds of the instruments.
+
+If you look at the open windows one of them should read Beat+Bassline Editor. Locate that box before going forward. If you have closed it by chance it is located on the left top toolbar.
+
+Going back to the samples you just heard select a **Kick drum** (any will work). Double-click the sample and it should appear in the Beat+Bassline Editor. Also add a **Closed HiHat** and a **Snare**. You will end up with 3 instruments in the Beat+Bassline Editor. You can make drum patterns by clicking the grey squares (<img src="https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-Luib5hMp84lYz06ahE6%2F-LuibEpXkNWFGiDZPLZL%2Fimage.png?alt=media&amp;token=b1074070-7c52-488d-87a8-3a4d1aa798c8" alt="" data-size="original">). You can play your drum patter by pressing the **play** button (<img src="https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-LuibLhWMSXYHDB5l7Pr%2F-LuibPx864R-7znvjHYA%2Fimage.png?alt=media&amp;token=da63c0fe-97ca-4373-bd9b-d97c659d48d6" alt="" data-size="original">). The pattern will loop until you stop it.
+
+Here are some example drum patterns that you could use in your projects:
+
+### Drum Patterns
+
+#### Four on the Floor
+
+Standard beat pattern commonly used in Disco, House and Techno songs.
+
+![Four on the floor](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-LuibUczd4UxcwKZkoGV%2F-Luic5E9l-qomaIO2oHt%2Fimage.png?alt=media\&token=43897991-5b33-461d-8557-83b8064e6c69)
+
+#### Amen Break
+
+This drum solo was originally performed by Gregory Sylvester Coleman, but has been heavily sampled and pitched up for use in jump-up drum and bass and jungle.
+
+![Amen break](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-MfY7BeZhm80IGeZL_5J%2F-MfYPufYY0qSyNCanYMp%2FAmen_break_1.0.0.PNG?alt=media\&token=6dca4f09-061c-48f2-b0f3-2231a391688b)
+
+#### Typical Breakbeat
+
+By moving the Bass drum out of the regular 4/4 timing we create a "Breakbeat".
+
+![Typical breakbeat](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-MfY7BeZhm80IGeZL_5J%2F-MfYQAIc2WSlX4klm7T-%2FTypical_breakbeat_1.0.0.PNG?alt=media\&token=45044f12-f9bc-488f-916e-ead6aae57200)
+
+#### Prodigy - Smack My B\*\*\*\* up
+
+Breakbeat intro.
+
+![Prodigy - Smack my B\*\*\*\* up](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-LuMh7wdZSKhcWI6ZfgV%2F-LuMhXBYex-pvYIuC27T%2Fprodigy.PNG?alt=media\&token=1df2dbdf-f9d7-413d-8b64-0dab713c95a2)
+
+#### Prodigy - Main Beat
+
+![Prodigy main beat](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LRtsae7H2l0Wn3A4biK%2F-MfY7BeZhm80IGeZL_5J%2F-MfYQLIs1PTgLt7GaKbb%2FProdigy_beat_main_1.0.0.PNG?alt=media\&token=07244c42-ade1-458c-8c97-24f6611f443a)
+
+Note the lowered volumes of the snare drum in the 2 examples above, i.e. the dimmed lights in some steps. To change the volume of a step, hover your mouse over it and roll the scroll wheel down to lower volume and up to raise volume. The brightness of the step will change.
+
+Want to hear how all these patterns sound? [Download a demo project here.](http://docs.google.com/uc?authuser=0\&id=0B49dcRGtm8vJVkhEWFJCb3FsTnc\&export=download)
+
+There is more to making great percussion. Here we only looked at simple "notes" added directly in BB Editor. But you should also read the section Composing Bass Lines and Drum Sequences, where more advanced methods are explained. You will learn how to alter quantizing and humanize in piano roll.
+
+## Good Song! Bad result.
+
+You are not there yet!
+
+One of the most common problems is sound-clipping and nasty artifacts. One of those make the song sound like it comes from a tin bucket. Sometimes distortion will feel like really unpleasant hearing irritation, and your first impulse is to look for a volume control.
+
+Your next job is to make sure you do not have that! This part of the process is at least as important as the previous ones.
+
+Take a look at the mixer. You can see that all channels have their own dB meter. The first thing you need is to make sure that no meter, including master is (constantly) in the red area. When a sound-intensity causes the meter to go "into the red", you will get distortions, and really bad sound, well, in fact even risk of damage to speakers, and worse - your ears!
+
+I choose the phrase *constantly*. I did that because it is acceptable that your meter occasionally touches in the red, but it's a fine art to know when touching is more like groping.
+
+If you have clipping, you can deal with it in a lot of different ways. You can find much more about tools as limiters and compressors in the more specialized chapters of the wiki.
+
+You can also watch the mixing video tutorials and learn much more about the power of the LMMS mixer.
+
+Right now, you can try to just change the volume sliders and get rid of the red-clippings. Then listen to your track again. You should be able to hear the difference. The instruments should be cleaner and stand better individually in the total mix.

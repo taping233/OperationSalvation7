@@ -1,0 +1,46 @@
+{
+  "readAt": "2026-10-04T09:22:45.771Z",
+  "origin": "http://127.0.0.1:5200",
+  "messages": [
+    {
+      "ts": "2026-10-04T08:30:14.242Z",
+      "version": "v0.60.0",
+      "page": {
+        "id": "hub-deploy",
+        "name": "基地 · 出发"
+      },
+      "target": {
+        "name": "基地 · 出发 · deploy-mission-copy",
+        "selector": "div.hub-page > div.deploy-brief > section.deploy-mission > div.deploy-mission-copy"
+      },
+      "at": {
+        "x": 46,
+        "y": 32
+      },
+      "text": "进来的过渡动画太丑了，你自己实机看一下优化",
+      "steps": "",
+      "expected": "",
+      "actual": ""
+    },
+    {
+      "ts": "2026-10-04T08:33:51.833Z",
+      "version": "v0.60.0",
+      "page": {
+        "id": "state:title",
+        "name": "标题页"
+      },
+      "target": {
+        "name": "标题页 · 按钮「远征手册」",
+        "selector": "#mGuide"
+      },
+      "at": {
+        "x": 17,
+        "y": 5
+      },
+      "text": "这个界面点进去全部重做，做成新手引导，要配图说明，文案不要ai味太重，简单说明全流程和一些特殊的机制，可以做成分页制的",
+      "steps": "",
+      "expected": "",
+      "actual": ""
+    }
+  ]
+}

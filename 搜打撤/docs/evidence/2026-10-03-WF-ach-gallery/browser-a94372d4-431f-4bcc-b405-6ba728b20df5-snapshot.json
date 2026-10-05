@@ -1,0 +1,1064 @@
+{
+  "actions": [
+    {
+      "detail": "成就入口、空态恢复、搜索符文、分类研究、分列/集中、两项详情、关闭与Esc、滚至末项并返回顶部",
+      "type": "real-input"
+    },
+    {
+      "detail": "当前默认窗口保存列表、集中、底部、详情；未主动调整窗口",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "0",
+      "key": "gallery",
+      "rect": {
+        "height": 720,
+        "width": 1280,
+        "x": 0,
+        "y": 0
+      },
+      "selector": ".achievement-gallery",
+      "styles": {
+        "color": "rgb(48, 55, 53)",
+        "display": "flex",
+        "fontSize": "16.5px"
+      },
+      "tag": "SECTION",
+      "text": "WINTER / HONOURS成就陈列室\n    全部已获得未获得☷ 分列▦ 集中\n    \n      \n    \n    \n    \n    \n    WINTER · 12\n  总收集数0/ 26收集率 0%已获得0待领取0已领取0尚无远征档案完成远征，留下你的印记\n      ⌕26 枚奖章\n      \n    \n    \n    \n    \n    WINTER · 01\n  \n  "
+    },
+    {
+      "attributes": {},
+      "identity": "初出茅庐 首次撤离成功",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 143.875
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 01\n  \n      初出茅庐◇未获得\n      首次撤离成功\n      远征奖章 / NO. 01查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "老练搜刮者 累计撤离成功 3 次",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 283.75
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 02\n  \n      老练搜刮者◇未获得\n      累计撤离成功 3 次\n      远征奖章 / NO. 02查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "猎手 累计击败 10 个敌人",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 423.625
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 03\n  \n      猎手◇未获得\n      累计击败 10 个敌人\n      战斗奖章 / NO. 03查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "破壁者 首次击败污染核心的变异首脑",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 563.5
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 04\n  \n      破壁者◇未获得\n      首次击败污染核心的变异首脑\n      战斗奖章 / NO. 04查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "净化征服者 击败全部 3 只变异首脑",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 703.375
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 05\n  \n      净化征服者◇未获得\n      击败全部 3 只变异首脑\n      战斗奖章 / NO. 05查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "小有积蓄 单局撤离时携带 ≥ 30 币",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 843.25
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 06\n  \n      小有积蓄◇未获得\n      单局撤离时携带 ≥ 30 币\n      远征奖章 / NO. 06查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "仓廪充实 累计运回 20 张卡牌入库",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 983.125
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 07\n  \n      仓廪充实◇未获得\n      累计运回 20 张卡牌入库\n      典藏奖章 / NO. 07查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "能工巧匠 背包扩建至满级（30 格）",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 1123
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 08\n  \n      能工巧匠◇未获得\n      背包扩建至满级（30 格）\n      成长奖章 / NO. 08查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "最忠实的伙伴 宠物安全格升满（6 格）",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 1262.875
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 09\n  \n      最忠实的伙伴◇未获得\n      宠物安全格升满（6 格）\n      成长奖章 / NO. 09查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "崭露头角 任意职业熟练度达到 3 级",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 1402.75
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 10\n  \n      崭露头角◇未获得\n      任意职业熟练度达到 3 级\n      成长奖章 / NO. 10查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "珍品收藏家 收藏桌游珍宝「金币」",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 1542.625
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 11\n  \n      珍品收藏家◇未获得\n      收藏桌游珍宝「金币」\n      典藏奖章 / NO. 11查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "传说典藏 收藏任意一张传说卡牌",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 1682.5
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 12\n  \n      传说典藏◇未获得\n      收藏任意一张传说卡牌\n      典藏奖章 / NO. 12查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "博物学家 收藏 5 张不同的卡牌",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 1822.375
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 13\n  \n      博物学家◇未获得\n      收藏 5 张不同的卡牌\n      典藏奖章 / NO. 13查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "驯养新手 首次孵化出一只宠物",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 1962.25
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 14\n  \n      驯养新手◇未获得\n      首次孵化出一只宠物\n      成长奖章 / NO. 14查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "孵蛋专家 累计孵化 3 只宠物",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 2102.125
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 15\n  \n      孵蛋专家◇未获得\n      累计孵化 3 只宠物\n      成长奖章 / NO. 15查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "心有灵犀 任意宠物升到满级（Lv.5）",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 2242
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 16\n  \n      心有灵犀◇未获得\n      任意宠物升到满级（Lv.5）\n      成长奖章 / NO. 16查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "宠物满堂 集齐全部 6 只宠物",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 2381.875
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 17\n  \n      宠物满堂◇未获得\n      集齐全部 6 只宠物\n      成长奖章 / NO. 17查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "无限能源 在一回合内打出 10 张及以上的招式（0 费连招流可达成）",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 2521.75
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 18\n  \n      无限能源◇未获得\n      在一回合内打出 10 张及以上的招式（0 费连招流可达成）\n      战斗奖章 / NO. 18查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "武器大师 在一场战斗中穿戴 5 件装备及以上",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 2661.625
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 19\n  \n      武器大师◇未获得\n      在一场战斗中穿戴 5 件装备及以上\n      战斗奖章 / NO. 19查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "符文爱好者 仓库拥有 5 块不同属性的符文",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 2801.5
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 20\n  \n      符文爱好者◇未获得\n      仓库拥有 5 块不同属性的符文\n      典藏奖章 / NO. 20查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "拯救者 击败 2 位研究所最终 BOSS",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 2941.375
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 21\n  \n      拯救者◇未获得\n      击败 2 位研究所最终 BOSS\n      研究奖章 / NO. 21查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "好美的花瓶！ 仓库拥有 1 块双属性的彩虹符文",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 3081.25
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 22\n  \n      好美的花瓶！◇未获得\n      仓库拥有 1 块双属性的彩虹符文\n      典藏奖章 / NO. 22查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "借过 一回合内击杀完全形态·元素领主的复活体",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 3221.125
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 23\n  \n      借过◇未获得\n      一回合内击杀完全形态·元素领主的复活体\n      战斗奖章 / NO. 23查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "实验数据·铜 研究所累计结算分数达 500",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 3361
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 24\n  \n      实验数据·铜◇未获得\n      研究所累计结算分数达 500\n      研究奖章 / NO. 24查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "实验数据·银 研究所累计结算分数达 1500",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 3500.875
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 25\n  \n      实验数据·银◇未获得\n      研究所累计结算分数达 1500\n      研究奖章 / NO. 25查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "实验数据·金 研究所累计结算分数达 4000",
+      "key": "medals",
+      "rect": {
+        "height": 124.58333587646484,
+        "width": 856.9375,
+        "x": 242.2291717529297,
+        "y": 3640.75
+      },
+      "selector": "[data-gallery-item]",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "flex",
+        "fontSize": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "WINTER · 26\n  \n      实验数据·金◇未获得\n      研究所累计结算分数达 4000\n      研究奖章 / NO. 26查看详情 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "firstExtract",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 159.4166717529297
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 01"
+    },
+    {
+      "attributes": {},
+      "identity": "extract3",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 299.29168701171875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 02"
+    },
+    {
+      "attributes": {},
+      "identity": "kill10",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 439.1666870117187
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 03"
+    },
+    {
+      "attributes": {},
+      "identity": "firstBoss",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 579.0416870117188
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 04"
+    },
+    {
+      "attributes": {},
+      "identity": "allBoss",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 718.9166870117188
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 05"
+    },
+    {
+      "attributes": {},
+      "identity": "rich30",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 858.7916870117188
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 06"
+    },
+    {
+      "attributes": {},
+      "identity": "stash20",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 998.6666870117188
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 07"
+    },
+    {
+      "attributes": {},
+      "identity": "bagMax",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 1138.541748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 08"
+    },
+    {
+      "attributes": {},
+      "identity": "safeMax",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 1278.416748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 09"
+    },
+    {
+      "attributes": {},
+      "identity": "class3",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 1418.291748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 10"
+    },
+    {
+      "attributes": {},
+      "identity": "collectGold",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 1558.166748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 11"
+    },
+    {
+      "attributes": {},
+      "identity": "collectLegend",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 1698.041748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 12"
+    },
+    {
+      "attributes": {},
+      "identity": "collect5",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 1837.916748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 13"
+    },
+    {
+      "attributes": {},
+      "identity": "petHatch1",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 1977.791748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 14"
+    },
+    {
+      "attributes": {},
+      "identity": "petHatch3",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 2117.666748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 15"
+    },
+    {
+      "attributes": {},
+      "identity": "petMax",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 2257.541748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 16"
+    },
+    {
+      "attributes": {},
+      "identity": "petAll",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 2397.416748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 17"
+    },
+    {
+      "attributes": {},
+      "identity": "unlimitedEnergy",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 2537.291748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 18"
+    },
+    {
+      "attributes": {},
+      "identity": "weaponMaster",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 2677.166748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 19"
+    },
+    {
+      "attributes": {},
+      "identity": "runeFan",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 2817.041748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 20"
+    },
+    {
+      "attributes": {},
+      "identity": "savior",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 2956.916748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 21"
+    },
+    {
+      "attributes": {},
+      "identity": "beautifulVase",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 3096.791748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 22"
+    },
+    {
+      "attributes": {},
+      "identity": "excuseMe",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 3236.666748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 23"
+    },
+    {
+      "attributes": {},
+      "identity": "labScore1",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 3376.541748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 24"
+    },
+    {
+      "attributes": {},
+      "identity": "labScore2",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 3516.416748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 25"
+    },
+    {
+      "attributes": {},
+      "identity": "labScore3",
+      "key": "badges",
+      "rect": {
+        "height": 93.5,
+        "width": 79.89583587646484,
+        "x": 257.34375,
+        "y": 3656.291748046875
+      },
+      "selector": ".ag-emblem > svg",
+      "styles": {
+        "color": "rgb(48, 56, 49)",
+        "display": "block",
+        "fontSize": "13.3333px"
+      },
+      "tag": "svg",
+      "text": "WINTER · 26"
+    }
+  ],
+  "observedAt": "2026-10-03T15:44:42.892Z",
+  "page": {
+    "origin": "http://127.0.0.1:5341",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.5,
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "scene": "title-achievement-gallery",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-03-ach-gallery/after-list.png",
+    "docs/evidence/2026-10-03-ach-gallery/after-grid.png",
+    "docs/evidence/2026-10-03-ach-gallery/after-bottom.png",
+    "docs/evidence/2026-10-03-ach-gallery/detail.png"
+  ],
+  "selectors": [
+    {
+      "key": "gallery",
+      "selector": ".achievement-gallery"
+    },
+    {
+      "key": "medals",
+      "selector": "[data-gallery-item]"
+    },
+    {
+      "key": "badges",
+      "selector": ".ag-emblem > svg"
+    }
+  ]
+}

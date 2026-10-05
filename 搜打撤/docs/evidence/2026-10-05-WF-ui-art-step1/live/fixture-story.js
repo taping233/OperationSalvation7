@@ -1,0 +1,1 @@
+(async()=>{const q=window.__uiArtQA;q.session.saveGame();await q.flow.runEventDeck();return true;})()

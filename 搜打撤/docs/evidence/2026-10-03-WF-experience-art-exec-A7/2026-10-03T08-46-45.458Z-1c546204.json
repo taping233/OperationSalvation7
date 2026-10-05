@@ -1,0 +1,457 @@
+{
+  "schemaVersion": 1,
+  "task": "WF-experience-art-exec-A7",
+  "kind": "automated-local-check",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "scripts/acceptance-gate.mjs",
+    "--target-tests",
+    "tests/perf-probe-summary.test.js"
+  ],
+  "cwd": "D:\\素材\\代号柒\\搜打撤",
+  "startedAt": "2026-10-03T08:46:45.551Z",
+  "endedAt": "2026-10-03T08:46:50.509Z",
+  "head": "425d03920e4323b016433419ec11aec4a7f3795b",
+  "statusBefore": "M docs/DEBT-CAMPAIGN-2026-10.md\n M docs/PARALLEL-REGISTRY.md\n M docs/PENDING.md\n M docs/asset-audit-debt.json\n M docs/character-bible/changwuyu.md\n M docs/character-bible/wu.md\n M docs/evidence/2026-10-02-production-research/planning/README.md\n M docs/evidence/2026-10-02-production-research/planning/总体改造计划.md\n M docs/production/art/VISUAL-BIBLE.md\n M docs/production/design/GDD.md\n M docs/production/management/DECISIONS.md\n M docs/production/project/CHARTER.md\n M game/assets/asset-manifest.json\n M game/css/expedition-battle.css\n M game/css/expedition-hub.css\n M game/css/expedition-inventory.css\n M game/css/expedition-map.css\n M game/css/page-battle-ui.css\n M game/src/agent/agent.data.js\n M game/src/agent/agent.js\n M game/src/agent/agent.recorder.js\n M game/src/agent/agent.runner.js\n M game/src/agent/agent.stats.js\n M game/src/battle/core/battle.core.js\n M game/src/battle/view/battle.frames.js\n M game/src/core/perf-probe.local.js\n M game/src/hub/extraction.commands.js\n M game/src/hub/game.hub.depart.js\n M game/src/hub/game.hub.pages.js\n M game/src/run/game.run.altar.js\n M game/src/run/game.run.dev.js\n M game/src/run/game.run.flow.js\n M game/src/run/game.session.death.js\n M game/src/run/game.session.js\n M game/src/ui/game.menu.js\n M game/src/ui/terminal-settlement.js\n M scripts/asset-audit-lib.cjs\n M scripts/impact-query.mjs\n M scripts/workflow-gate-receipt.mjs\n M scripts/workflow-staged.mjs\n M tests/agent-recorder.test.js\n M tests/asset-audit.test.js\n M tests/battle-frames-lifecycle.test.js\n M tests/boot.test.js\n M tests/full-review-regressions-battle.test.js\n M tests/impact-query.test.js\n M tests/perf-probe-summary.test.js\n M tests/workflow-staged.test.js\n M tools/__pycache__/nai_style.cpython-38.pyc\n M tools/nai_style.py\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-40-53.381Z-9a1affee-staged.json\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-56-38.896Z-d5ca5df9-staged.json\n?? docs/evidence/2026-10-02-seven-departments-review/tmp/contact-3.png\n?? docs/evidence/2026-10-02-seven-departments-v2/\n?? docs/evidence/2026-10-02-staged-check/2026-10-02T01-22-15.433Z-e5d284fd-staged.json\n?? docs/evidence/2026-10-03-WF-experience-art-exec-A4-frames/\n?? docs/evidence/2026-10-03-WF-experience-art-exec-A5/\n?? docs/evidence/2026-10-03-WF-experience-art-exec-A7/\n?? docs/evidence/2026-10-03-WF-experience-art-exec/\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-19-39.159Z-5fbee550-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-27-43.086Z-63530fe5-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-46-33.917Z-9cb2485d-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-51-21.366Z-f2ed6511-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-59-11.935Z-35c52133-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-03-58.112Z-5cc22689-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-08-10.704Z-da12b315-staged.json\n?? docs/evidence/2026-10-03-experience-art-plan/\n?? docs/evidence/2026-10-03-ph1-sys01-10/\n?? docs/evidence/2026-10-03-ph1-sys02/\n?? docs/evidence/2026-10-03-ph1-sys03/\n?? docs/evidence/2026-10-03-ph1-sys11/\n?? game/assets/portraits/battle-v2/\n?? tests/agent-provenance-stopreason.test.js\n?? tests/agent-stats-provenance.test.js\n?? tests/extraction-first-explore-xp.test.js\n?? tests/extraction-receipt-idempotency.test.js\n?? tests/extraction-receipt.test.js\n?? tests/first-explore-marking.test.js\n?? tests/hub-upgrade-render.test.js\n?? tests/sys03-altar-restore-txn.test.js\n?? tests/sys03-base-key-restore.test.js\n?? tests/sys03-loot-shop-txn.test.js\n?? tests/terminal-retry-copy.test.js\n?? 搜打撤/",
+  "statusAfter": "M docs/DEBT-CAMPAIGN-2026-10.md\n M docs/PARALLEL-REGISTRY.md\n M docs/PENDING.md\n M docs/asset-audit-debt.json\n M docs/character-bible/changwuyu.md\n M docs/character-bible/wu.md\n M docs/evidence/2026-10-02-production-research/planning/README.md\n M docs/evidence/2026-10-02-production-research/planning/总体改造计划.md\n M docs/production/art/VISUAL-BIBLE.md\n M docs/production/design/GDD.md\n M docs/production/management/DECISIONS.md\n M docs/production/project/CHARTER.md\n M game/assets/asset-manifest.json\n M game/css/expedition-battle.css\n M game/css/expedition-hub.css\n M game/css/expedition-inventory.css\n M game/css/expedition-map.css\n M game/css/page-battle-ui.css\n M game/src/agent/agent.data.js\n M game/src/agent/agent.js\n M game/src/agent/agent.recorder.js\n M game/src/agent/agent.runner.js\n M game/src/agent/agent.stats.js\n M game/src/battle/core/battle.core.js\n M game/src/battle/view/battle.frames.js\n M game/src/core/perf-probe.local.js\n M game/src/hub/extraction.commands.js\n M game/src/hub/game.hub.depart.js\n M game/src/hub/game.hub.pages.js\n M game/src/run/game.run.altar.js\n M game/src/run/game.run.dev.js\n M game/src/run/game.run.flow.js\n M game/src/run/game.session.death.js\n M game/src/run/game.session.js\n M game/src/ui/game.menu.js\n M game/src/ui/terminal-settlement.js\n M scripts/asset-audit-lib.cjs\n M scripts/impact-query.mjs\n M scripts/workflow-gate-receipt.mjs\n M scripts/workflow-staged.mjs\n M tests/agent-recorder.test.js\n M tests/asset-audit.test.js\n M tests/battle-frames-lifecycle.test.js\n M tests/boot.test.js\n M tests/full-review-regressions-battle.test.js\n M tests/impact-query.test.js\n M tests/perf-probe-summary.test.js\n M tests/workflow-staged.test.js\n M tools/__pycache__/nai_style.cpython-38.pyc\n M tools/nai_style.py\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-40-53.381Z-9a1affee-staged.json\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-56-38.896Z-d5ca5df9-staged.json\n?? docs/evidence/2026-10-02-seven-departments-review/tmp/contact-3.png\n?? docs/evidence/2026-10-02-seven-departments-v2/\n?? docs/evidence/2026-10-02-staged-check/2026-10-02T01-22-15.433Z-e5d284fd-staged.json\n?? docs/evidence/2026-10-03-WF-experience-art-exec-A4-frames/\n?? docs/evidence/2026-10-03-WF-experience-art-exec-A5/\n?? docs/evidence/2026-10-03-WF-experience-art-exec-A7/\n?? docs/evidence/2026-10-03-WF-experience-art-exec/\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-19-39.159Z-5fbee550-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-27-43.086Z-63530fe5-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-46-33.917Z-9cb2485d-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-51-21.366Z-f2ed6511-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-59-11.935Z-35c52133-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-03-58.112Z-5cc22689-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-08-10.704Z-da12b315-staged.json\n?? docs/evidence/2026-10-03-experience-art-plan/\n?? docs/evidence/2026-10-03-ph1-sys01-10/\n?? docs/evidence/2026-10-03-ph1-sys02/\n?? docs/evidence/2026-10-03-ph1-sys03/\n?? docs/evidence/2026-10-03-ph1-sys11/\n?? game/assets/portraits/battle-v2/\n?? tests/agent-provenance-stopreason.test.js\n?? tests/agent-stats-provenance.test.js\n?? tests/extraction-first-explore-xp.test.js\n?? tests/extraction-receipt-idempotency.test.js\n?? tests/extraction-receipt.test.js\n?? tests/first-explore-marking.test.js\n?? tests/hub-upgrade-render.test.js\n?? tests/sys03-altar-restore-txn.test.js\n?? tests/sys03-base-key-restore.test.js\n?? tests/sys03-loot-shop-txn.test.js\n?? tests/terminal-retry-copy.test.js\n?? 搜打撤/",
+  "before": {
+    "sha256": "6040e6b2112aff191097beffdf240e98ae45d3fcabbfee6b895bf5aff1e30970",
+    "manifest": [
+      {
+        "file": ".githooks/pre-commit",
+        "sha256": "47893464ecbcb80013cbd41db3db5cd3db5c7429a0cbffc9dbb0e6912ba52068"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-full-repository-review/task.json",
+        "sha256": "56c99a5e2f865aac7d3651fafd2c4bc771b87034342b4b92c51284c0f6fbf817"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-lean-workflow/task.json",
+        "sha256": "fb10db8484d2015531c6f50d1142e56d40b78114f3c470810f54d0cec377b00f"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-workflow-review-fixes/task.json",
+        "sha256": "7529efb752cfe4d3875ab415597adc4b88f63bad9ee9c8885aa9ef9a7b37d840"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-1/task.json",
+        "sha256": "87f5c33558af6f52c7a50b9fe86f8f5133ed0a58b3e9ef380ca53fc604a9329b"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-2/task.json",
+        "sha256": "f6bd0e0416430ef5eb16d83cda2d881326e85cdcf1b0a353d876a0584e841550"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-3/task.json",
+        "sha256": "852fcd7f7a2da7e7ae70951eeb352d3e4c882112f900c9d052fd15d24c314ddc"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-automation/task.json",
+        "sha256": "ee4018aad4f0e98cd82c9104476a6c217e7000b8e42e1531ad4a39c5a87749ae"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-decouple/task.json",
+        "sha256": "2250963edfa165dea21d46d679d03c2b1295f30cbd47fd09da74cdb3c958f27d"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-redesign/task.json",
+        "sha256": "d6c88a124e7d714f29e28fe61a86e0d8a528b42a21575aa437ac7ec4097d445c"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-production-research/task.json",
+        "sha256": "bb2934f113227ef9b03071f2c7656e0a61b320a13c3b59e751e7917f8a4f3c27"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes-crossplatform/task.json",
+        "sha256": "af714f27e7067293f4b2fd00ab38b9d476650e6342c0c971b1533c5fe9507167"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes/task.json",
+        "sha256": "4bf05ca76394be31df66ac841a98b6e8a6c9c1a93b0bedcd7f4d012a3cdaf0a3"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-review/task.json",
+        "sha256": "cefc4ecf8fe895d9bd322122b6d380660e6d42b2df0f10e98eb3e119973f7586"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-v2/task.json",
+        "sha256": "8be4224aedd99176ab906077813b7fc3bf046ede2ac0b526cbe31b387799683b"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-experience-art-plan/task.json",
+        "sha256": "e3ea75d9bb5fbf657664cfc0521e93bab1381b735647a7a4fcc9224939ae605b"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-experience-art-exec/task.json",
+        "sha256": "01e3fe3aea0116fd0e34706106b39bb993faf2f04d5d2fabcf2f8fd0cdd6980f"
+      },
+      {
+        "file": "docs/PARALLEL-REGISTRY.md",
+        "sha256": "e336c3e186791f7fafd95b264600e088a62171d3920e82bf168b63047051793c"
+      },
+      {
+        "file": "docs/PENDING.md",
+        "sha256": "cae0d20b60e5847f5ed1ce05b053346f729554b25a6478f0c7f47c7ee24f5f50"
+      },
+      {
+        "file": "docs/STATUS.md",
+        "sha256": "19a7d521b20bc2639d4aca9f4c6ea6aaea649b7cd1b0ff4758acde485ef4c791"
+      },
+      {
+        "file": "eslint.config.js",
+        "sha256": "e29079fdc795c560e4ba742018455f2ba098192581ef847bb3f6e2a32bda26ae"
+      },
+      {
+        "file": "game/src/core/perf-probe.local.js",
+        "sha256": "ca127f59b6197ffce5600f93e7d85ec2691bf3293bfbae29521aa3a29be00598"
+      },
+      {
+        "file": "jsconfig.battle-settlement.json",
+        "sha256": "ff9c6acca637b6583dc514e35f0870e8c39aa903f758919364ca3a10c4478f03"
+      },
+      {
+        "file": "jsconfig.battle-snapshot.json",
+        "sha256": "3fb7f26a7982e73c077b006c059b9a565b4353689ad04e0e634ebbe1b46a35c2"
+      },
+      {
+        "file": "jsconfig.card-rules.json",
+        "sha256": "426fb5f7c2781a1cf9427f29d326bea7e47cde4cd9338b99b3d178593632230d"
+      },
+      {
+        "file": "jsconfig.json",
+        "sha256": "3f2e1bd99ddc0cb8eb95ef70a7818e56fbcc687a8970d4615d6319396dbc2da1"
+      },
+      {
+        "file": "jsconfig.strict-foundations.json",
+        "sha256": "7d2f1e714dc03b4a67604a3928a5d1172c5214c6fce00443bacf4e56c6668c90"
+      },
+      {
+        "file": "jsconfig.strict-hand-selection.json",
+        "sha256": "4a4b2d33af7297b95a05976e5bc81aaf0baf3e64e3b8313516013994fbf11ba0"
+      },
+      {
+        "file": "jsconfig.strict-selection.json",
+        "sha256": "a141c4996d7ed5630a222e882738c6bf22c5473527a3c9e53e82686a8bd88f98"
+      },
+      {
+        "file": "jsconfig.strict-ui.json",
+        "sha256": "a53bcb7a075a6fab45f5b1076b97cb3449e3313eca05b193da1ede8ec5695abc"
+      },
+      {
+        "file": "package-lock.json",
+        "sha256": "c72e1da1f98d590f1d4b5b4f13530020af00fc5a328c86f3a9619daa610eed73"
+      },
+      {
+        "file": "package.json",
+        "sha256": "7700e3529505ec3917cc1478cb8028afd4efec1325c158f1b3b11db38620b697"
+      },
+      {
+        "file": "tests/perf-probe-summary.test.js",
+        "sha256": "2634189112cae3a28bbd7cf9138de99d5cf9c395e954d3e0aaf2a3f7968ae3b4"
+      },
+      {
+        "file": "vite.config.js",
+        "sha256": "384b2fe4cc46d026e7345d309eb89ee9363b1a33403688004baa7f054dabec5c"
+      }
+    ],
+    "environment": {
+      "node": "v24.13.0",
+      "platform": "win32",
+      "arch": "x64",
+      "dependencies": {
+        "vitest": "3.2.7",
+        "vite": "6.4.3",
+        "typescript": "7.0.2",
+        "eslint": "10.11.0",
+        "jsdom": "25.0.1",
+        "acorn": "8.18.0",
+        "acorn-walk": "8.3.5"
+      },
+      "ci": null,
+      "nodeOptions": null,
+      "forceFullTests": null
+    },
+    "documents": false,
+    "assets": false,
+    "selection": {
+      "mode": "targeted",
+      "roots": [
+        "tests/perf-probe-summary.test.js"
+      ],
+      "files": [
+        "game/src/core/perf-probe.local.js",
+        "tests/perf-probe-summary.test.js"
+      ],
+      "existence": [],
+      "inventories": [],
+      "contracts": [],
+      "reason": "静态依赖闭包与显式测试/命令输入契约；fixture生成的数据不锁当前项目"
+    },
+    "groups": {
+      "code": "292e2d3b08924bb82511ffb5d14dcc8b5a8edf1a1d9ab0f569d207dcb38988a4",
+      "docs": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "state": "c36413152ab6821e0862f5dacc70e48da51e01f22a380e84bab3cf8f8021a977",
+      "environment": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4"
+    },
+    "limits": [
+      "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+    ]
+  },
+  "after": {
+    "sha256": "6040e6b2112aff191097beffdf240e98ae45d3fcabbfee6b895bf5aff1e30970",
+    "manifest": [
+      {
+        "file": ".githooks/pre-commit",
+        "sha256": "47893464ecbcb80013cbd41db3db5cd3db5c7429a0cbffc9dbb0e6912ba52068"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-full-repository-review/task.json",
+        "sha256": "56c99a5e2f865aac7d3651fafd2c4bc771b87034342b4b92c51284c0f6fbf817"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-lean-workflow/task.json",
+        "sha256": "fb10db8484d2015531c6f50d1142e56d40b78114f3c470810f54d0cec377b00f"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-workflow-review-fixes/task.json",
+        "sha256": "7529efb752cfe4d3875ab415597adc4b88f63bad9ee9c8885aa9ef9a7b37d840"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-1/task.json",
+        "sha256": "87f5c33558af6f52c7a50b9fe86f8f5133ed0a58b3e9ef380ca53fc604a9329b"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-2/task.json",
+        "sha256": "f6bd0e0416430ef5eb16d83cda2d881326e85cdcf1b0a353d876a0584e841550"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-3/task.json",
+        "sha256": "852fcd7f7a2da7e7ae70951eeb352d3e4c882112f900c9d052fd15d24c314ddc"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-automation/task.json",
+        "sha256": "ee4018aad4f0e98cd82c9104476a6c217e7000b8e42e1531ad4a39c5a87749ae"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-decouple/task.json",
+        "sha256": "2250963edfa165dea21d46d679d03c2b1295f30cbd47fd09da74cdb3c958f27d"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-redesign/task.json",
+        "sha256": "d6c88a124e7d714f29e28fe61a86e0d8a528b42a21575aa437ac7ec4097d445c"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-production-research/task.json",
+        "sha256": "bb2934f113227ef9b03071f2c7656e0a61b320a13c3b59e751e7917f8a4f3c27"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes-crossplatform/task.json",
+        "sha256": "af714f27e7067293f4b2fd00ab38b9d476650e6342c0c971b1533c5fe9507167"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes/task.json",
+        "sha256": "4bf05ca76394be31df66ac841a98b6e8a6c9c1a93b0bedcd7f4d012a3cdaf0a3"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-review/task.json",
+        "sha256": "cefc4ecf8fe895d9bd322122b6d380660e6d42b2df0f10e98eb3e119973f7586"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-v2/task.json",
+        "sha256": "8be4224aedd99176ab906077813b7fc3bf046ede2ac0b526cbe31b387799683b"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-experience-art-plan/task.json",
+        "sha256": "e3ea75d9bb5fbf657664cfc0521e93bab1381b735647a7a4fcc9224939ae605b"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-experience-art-exec/task.json",
+        "sha256": "01e3fe3aea0116fd0e34706106b39bb993faf2f04d5d2fabcf2f8fd0cdd6980f"
+      },
+      {
+        "file": "docs/PARALLEL-REGISTRY.md",
+        "sha256": "e336c3e186791f7fafd95b264600e088a62171d3920e82bf168b63047051793c"
+      },
+      {
+        "file": "docs/PENDING.md",
+        "sha256": "cae0d20b60e5847f5ed1ce05b053346f729554b25a6478f0c7f47c7ee24f5f50"
+      },
+      {
+        "file": "docs/STATUS.md",
+        "sha256": "19a7d521b20bc2639d4aca9f4c6ea6aaea649b7cd1b0ff4758acde485ef4c791"
+      },
+      {
+        "file": "eslint.config.js",
+        "sha256": "e29079fdc795c560e4ba742018455f2ba098192581ef847bb3f6e2a32bda26ae"
+      },
+      {
+        "file": "game/src/core/perf-probe.local.js",
+        "sha256": "ca127f59b6197ffce5600f93e7d85ec2691bf3293bfbae29521aa3a29be00598"
+      },
+      {
+        "file": "jsconfig.battle-settlement.json",
+        "sha256": "ff9c6acca637b6583dc514e35f0870e8c39aa903f758919364ca3a10c4478f03"
+      },
+      {
+        "file": "jsconfig.battle-snapshot.json",
+        "sha256": "3fb7f26a7982e73c077b006c059b9a565b4353689ad04e0e634ebbe1b46a35c2"
+      },
+      {
+        "file": "jsconfig.card-rules.json",
+        "sha256": "426fb5f7c2781a1cf9427f29d326bea7e47cde4cd9338b99b3d178593632230d"
+      },
+      {
+        "file": "jsconfig.json",
+        "sha256": "3f2e1bd99ddc0cb8eb95ef70a7818e56fbcc687a8970d4615d6319396dbc2da1"
+      },
+      {
+        "file": "jsconfig.strict-foundations.json",
+        "sha256": "7d2f1e714dc03b4a67604a3928a5d1172c5214c6fce00443bacf4e56c6668c90"
+      },
+      {
+        "file": "jsconfig.strict-hand-selection.json",
+        "sha256": "4a4b2d33af7297b95a05976e5bc81aaf0baf3e64e3b8313516013994fbf11ba0"
+      },
+      {
+        "file": "jsconfig.strict-selection.json",
+        "sha256": "a141c4996d7ed5630a222e882738c6bf22c5473527a3c9e53e82686a8bd88f98"
+      },
+      {
+        "file": "jsconfig.strict-ui.json",
+        "sha256": "a53bcb7a075a6fab45f5b1076b97cb3449e3313eca05b193da1ede8ec5695abc"
+      },
+      {
+        "file": "package-lock.json",
+        "sha256": "c72e1da1f98d590f1d4b5b4f13530020af00fc5a328c86f3a9619daa610eed73"
+      },
+      {
+        "file": "package.json",
+        "sha256": "7700e3529505ec3917cc1478cb8028afd4efec1325c158f1b3b11db38620b697"
+      },
+      {
+        "file": "tests/perf-probe-summary.test.js",
+        "sha256": "2634189112cae3a28bbd7cf9138de99d5cf9c395e954d3e0aaf2a3f7968ae3b4"
+      },
+      {
+        "file": "vite.config.js",
+        "sha256": "384b2fe4cc46d026e7345d309eb89ee9363b1a33403688004baa7f054dabec5c"
+      }
+    ],
+    "environment": {
+      "node": "v24.13.0",
+      "platform": "win32",
+      "arch": "x64",
+      "dependencies": {
+        "vitest": "3.2.7",
+        "vite": "6.4.3",
+        "typescript": "7.0.2",
+        "eslint": "10.11.0",
+        "jsdom": "25.0.1",
+        "acorn": "8.18.0",
+        "acorn-walk": "8.3.5"
+      },
+      "ci": null,
+      "nodeOptions": null,
+      "forceFullTests": null
+    },
+    "documents": false,
+    "assets": false,
+    "selection": {
+      "mode": "targeted",
+      "roots": [
+        "tests/perf-probe-summary.test.js"
+      ],
+      "files": [
+        "game/src/core/perf-probe.local.js",
+        "tests/perf-probe-summary.test.js"
+      ],
+      "existence": [],
+      "inventories": [],
+      "contracts": [],
+      "reason": "静态依赖闭包与显式测试/命令输入契约；fixture生成的数据不锁当前项目"
+    },
+    "groups": {
+      "code": "292e2d3b08924bb82511ffb5d14dcc8b5a8edf1a1d9ab0f569d207dcb38988a4",
+      "docs": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "state": "c36413152ab6821e0862f5dacc70e48da51e01f22a380e84bab3cf8f8021a977",
+      "environment": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4"
+    },
+    "limits": [
+      "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+    ]
+  },
+  "exitCode": 1,
+  "signal": null,
+  "error": null,
+  "validation": {
+    "mode": "targeted",
+    "paths": [],
+    "tests": [
+      "tests/perf-probe-summary.test.js"
+    ],
+    "reasons": [
+      "显式测试列表"
+    ],
+    "executed": true
+  },
+  "outcome": "failed",
+  "log": "docs/evidence/2026-10-03-WF-experience-art-exec-A7/2026-10-03T08-46-45.458Z-1c546204.log",
+  "logSha256": "1b2cf08e9c2ed9f20afa2e720fbf6762b94f734090d5811f397f3886a5628d8d",
+  "limits": [
+    "仅本命令覆盖范围；没有 build、实页、真实 hover、玩家存档或远端 CI 验收",
+    "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+  ],
+  "freshness": {
+    "eligibleForReview": false,
+    "codeEligibleForReview": false,
+    "result": "failed",
+    "parts": {
+      "code": {
+        "before": "292e2d3b08924bb82511ffb5d14dcc8b5a8edf1a1d9ab0f569d207dcb38988a4",
+        "after": "292e2d3b08924bb82511ffb5d14dcc8b5a8edf1a1d9ab0f569d207dcb38988a4",
+        "current": "292e2d3b08924bb82511ffb5d14dcc8b5a8edf1a1d9ab0f569d207dcb38988a4",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "failed",
+        "eligibleForReview": false
+      },
+      "docs": {
+        "before": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "after": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "current": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "covered": false,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "not-covered",
+        "eligibleForReview": false
+      },
+      "state": {
+        "before": "c36413152ab6821e0862f5dacc70e48da51e01f22a380e84bab3cf8f8021a977",
+        "after": "c36413152ab6821e0862f5dacc70e48da51e01f22a380e84bab3cf8f8021a977",
+        "current": "c36413152ab6821e0862f5dacc70e48da51e01f22a380e84bab3cf8f8021a977",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "failed",
+        "eligibleForReview": false
+      },
+      "environment": {
+        "before": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4",
+        "after": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4",
+        "current": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "failed",
+        "eligibleForReview": false
+      }
+    },
+    "recheck": [
+      "code"
+    ],
+    "limits": [
+      "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+    ]
+  }
+}

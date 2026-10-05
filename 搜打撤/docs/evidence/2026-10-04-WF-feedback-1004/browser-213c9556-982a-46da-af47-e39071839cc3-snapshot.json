@@ -1,0 +1,294 @@
+{
+  "actions": [
+    {
+      "detail": "打开设置并点击返回；未触发危险操作，也未改动实际偏好。",
+      "type": "real-input"
+    },
+    {
+      "detail": "当前窗口布局截图",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "not-collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"BUTTON\",\"text\":\"\",\"class\":\"ak-sq ak-exit ak-back-tl\"}",
+      "key": "back",
+      "rect": {
+        "height": 49.28810119628906,
+        "width": 54.39189910888672,
+        "x": 15.333327293395996,
+        "y": 13.62039566040039
+      },
+      "selector": ".settings-page .ak-back-tl",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "1px",
+        "color": "rgb(183, 203, 208)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "57.9902px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "63.9951px"
+      },
+      "tag": "BUTTON",
+      "text": ""
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"通用 GENERAL\\n         结点编号 NODE NUMBERS\\n         底部操作提示条 HINT BAR\\n         环层横幅 LAYER BANNER\\n         开发者模式（测试工具） DEVELOPER\\n        \\n        \\n         画面与反馈 DISPLAY & ACCESS\\n         屏幕震动反馈 SCREEN SHAKE\",\"class\":\"settings settings-layout\"}",
+      "key": "layout",
+      "rect": {
+        "height": 689.158447265625,
+        "width": 866.937255859375,
+        "x": 158.197998046875,
+        "y": 74.81388854980469
+      },
+      "selector": ".settings-layout",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(230, 238, 241)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16.5px",
+        "height": "810.833px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "10px 26px 30px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1020px"
+      },
+      "tag": "DIV",
+      "text": "通用 GENERAL\n         结点编号 NODE NUMBERS\n         底部操作提示条 HINT BAR\n         环层横幅 LAYER BANNER\n         开发者模式（测试工具） DEVELOPER\n        \n        \n         画面与反馈 DISPLAY & ACCESS\n         屏幕震动反馈 SCREEN SHAKE"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"SECTION\",\"text\":\"通用 GENERAL\\n         结点编号 NODE NUMBERS\\n         底部操作提示条 HINT BAR\\n         环层横幅 LAYER BANNER\\n         开发者模式（测试工具） DEVELOPER\",\"class\":\"settings-group settings-general\"}",
+      "key": "groups",
+      "rect": {
+        "height": 267.1160888671875,
+        "width": 401.76263427734375,
+        "x": 180.29014587402344,
+        "y": 83.48116302490234
+      },
+      "selector": ".settings-group",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(230, 238, 241)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16.5px",
+        "height": "314.277px",
+        "line-height": "normal",
+        "opacity": "0.975309",
+        "padding": "4px 16px 16px",
+        "pointer-events": "auto",
+        "transform": "matrix(1, 0, 0, 1, 0, 0.197525)",
+        "visibility": "visible",
+        "width": "472.696px"
+      },
+      "tag": "SECTION",
+      "text": "通用 GENERAL\n         结点编号 NODE NUMBERS\n         底部操作提示条 HINT BAR\n         环层横幅 LAYER BANNER\n         开发者模式（测试工具） DEVELOPER"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"SECTION\",\"text\":\"画面与反馈 DISPLAY & ACCESS\\n         屏幕震动反馈 SCREEN SHAKE\\n         减少动态效果 REDUCE MOTION\",\"class\":\"settings-group settings-display\"}",
+      "key": "groups",
+      "rect": {
+        "height": 166.8316650390625,
+        "width": 401.76263427734375,
+        "x": 180.29014587402344,
+        "y": 362.6448669433594
+      },
+      "selector": ".settings-group",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(230, 238, 241)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16.5px",
+        "height": "196.287px",
+        "line-height": "normal",
+        "opacity": "0.952866",
+        "padding": "4px 16px 16px",
+        "pointer-events": "auto",
+        "transform": "matrix(1, 0, 0, 1, 0, 0.377075)",
+        "visibility": "visible",
+        "width": "472.696px"
+      },
+      "tag": "SECTION",
+      "text": "画面与反馈 DISPLAY & ACCESS\n         屏幕震动反馈 SCREEN SHAKE\n         减少动态效果 REDUCE MOTION"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"SECTION\",\"text\":\"音频 AUDIO\\n         背景音乐 MUSIC\\n        音乐来源 MUSIC SOURCE冬境声景原有曲目\\n        音乐音量 MUSIC VOL100\\n         音效 SOUND FX\\n        音效音量 SFX VOL100\\n        侧边栏的  按钮为全局静音；这里可分别开关音乐与音效、拖动滑条调音量（自动保存）。\",\"class\":\"settings-group settings-audio\"}",
+      "key": "groups",
+      "rect": {
+        "height": 445.8427734375,
+        "width": 401.7625427246094,
+        "x": 593.94775390625,
+        "y": 83.89378356933594
+      },
+      "selector": ".settings-group",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(230, 238, 241)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16.5px",
+        "height": "524.559px",
+        "line-height": "normal",
+        "opacity": "0.914626",
+        "padding": "4px 16px 16px",
+        "pointer-events": "auto",
+        "transform": "matrix(1, 0, 0, 1, 0, 0.682993)",
+        "visibility": "visible",
+        "width": "472.696px"
+      },
+      "tag": "SECTION",
+      "text": "音频 AUDIO\n         背景音乐 MUSIC\n        音乐来源 MUSIC SOURCE冬境声景原有曲目\n        音乐音量 MUSIC VOL100\n         音效 SOUND FX\n        音效音量 SFX VOL100\n        侧边栏的  按钮为全局静音；这里可分别开关音乐与音效、拖动滑条调音量（自动保存）。"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"SECTION\",\"text\":\"致谢 CREDITS\\n        图标：game-icons.net · Lorc、Delapouite、Carl Olsen、Caro Asercion（CC-BY 3.0）。战斗音效：rubberduck、Tinysized、Kenney 等创作者的 CC0 音效。\\n        查看音效来源\",\"class\":\"settings-group settings-credits\"}",
+      "key": "groups",
+      "rect": {
+        "height": 168.4149169921875,
+        "width": 401.7625427246094,
+        "x": 593.94775390625,
+        "y": 542.0665283203125
+      },
+      "selector": ".settings-group",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(230, 238, 241)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16.5px",
+        "height": "198.149px",
+        "line-height": "normal",
+        "opacity": "0.850647",
+        "padding": "4px 16px 16px",
+        "pointer-events": "auto",
+        "transform": "matrix(1, 0, 0, 1, 0, 1.19482)",
+        "visibility": "visible",
+        "width": "472.696px"
+      },
+      "tag": "SECTION",
+      "text": "致谢 CREDITS\n        图标：game-icons.net · Lorc、Delapouite、Carl Olsen、Caro Asercion（CC-BY 3.0）。战斗音效：rubberduck、Tinysized、Kenney 等创作者的 CC0 音效。\n        查看音效来源"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"SECTION\",\"text\":\"留言库 SUGGESTION BOX\\n        查看历史留言\\n         跑局数据 RUN DATA\\n        \\n        查看跑局数据\",\"class\":\"settings-group settings-records\"}",
+      "key": "groups",
+      "rect": {
+        "height": 204.006103515625,
+        "width": 401.76263427734375,
+        "x": 180.29014587402344,
+        "y": 542.7821655273438
+      },
+      "selector": ".settings-group",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(230, 238, 241)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16.5px",
+        "height": "240.024px",
+        "line-height": "normal",
+        "opacity": "0.745404",
+        "padding": "4px 16px 16px",
+        "pointer-events": "auto",
+        "transform": "matrix(1, 0, 0, 1, 0, 2.03677)",
+        "visibility": "visible",
+        "width": "472.696px"
+      },
+      "tag": "SECTION",
+      "text": "留言库 SUGGESTION BOX\n        查看历史留言\n         跑局数据 RUN DATA\n        \n        查看跑局数据"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"SECTION\",\"text\":\"危险区 DANGER ZONE\\n        \\n        \\n          清空格子备注\\n          清空卡牌库\\n        \\n        \\n          清空全部存档\\n        \\n        危险区操作均不可撤销：按钮需点击两次确认（首次点击变为「确认清空？」）。「清空全部存档」会删除全部五个档位的档案。\",\"class\":\"settings-group settings-danger\"}",
+      "key": "groups",
+      "rect": {
+        "height": 188.03857421875,
+        "width": 815.420166015625,
+        "x": 180.29014587402344,
+        "y": 763.2164916992188
+      },
+      "selector": ".settings-group",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(230, 238, 241)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16.5px",
+        "height": "221.238px",
+        "line-height": "normal",
+        "opacity": "0.578079",
+        "padding": "4px 16px 16px",
+        "pointer-events": "auto",
+        "transform": "matrix(1, 0, 0, 1, 0, 3.37537)",
+        "visibility": "visible",
+        "width": "959.387px"
+      },
+      "tag": "SECTION",
+      "text": "危险区 DANGER ZONE\n        \n        \n          清空格子备注\n          清空卡牌库\n        \n        \n          清空全部存档\n        \n        危险区操作均不可撤销：按钮需点击两次确认（首次点击变为「确认清空？」）。「清空全部存档」会删除全部五个档位的档案。"
+    }
+  ],
+  "observedAt": "2026-10-04T03:43:28.461Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.5,
+      "height": 764,
+      "width": 1183
+    }
+  },
+  "scene": "设置分组与透明返回键",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-04-WF-feedback-1004/settings-after.jpg"
+  ],
+  "selectors": [
+    {
+      "key": "back",
+      "selector": ".settings-page .ak-back-tl"
+    },
+    {
+      "key": "layout",
+      "selector": ".settings-layout"
+    },
+    {
+      "key": "groups",
+      "selector": ".settings-group"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-feedback-r2",
+  "date": "2026-10-04",
+  "owner": "Friday-Codex",
+  "goal": "实施5200代码直读的6条新留言：照相馆顶部、暗影星月恶魔之力、入口光线、设置图标、基地返回选档及移除问号",
+  "paths": [
+    "game/src/hub/game.cardslib.page.js",
+    "game/css/expedition-library.css",
+    "game/css/photo-studio-craft.css",
+    "game/src/hub/game.hub.js",
+    "game/src/ui/game.menu.js",
+    "game/css/title-p0.css",
+    "game/css/page-settings.css",
+    "game/index.html",
+    "game/data/art-mapping.json",
+    "game/assets/asset-manifest.json"
+  ],
+  "doneWhen": [
+    "6条新留言完成实现与资源接入",
+    "老板明确接管验收，本轮停止后续测试和实页验证"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "六条留言实现和两张ImageGen生产资源已接入；老板接管验收，不继续测试或实页",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "待老板验收；既有本轮一次快速重开断言失败未继续诊断；全资产门其他登记问题与完整实页/CI未核"
+  ],
+  "updatedAt": "2026-10-04T08:57:47.174Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

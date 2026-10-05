@@ -1,0 +1,227 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container bag 背包, ID: overlay
+		3 container
+			4 button Description: 关闭, ID: ovCloseX
+			5 container ovBody
+				6 container
+					7 heading bag 背包 , Value: 2
+						8 image bag
+						9 text  背包 
+						10 button
+					11 text 格数  16/16 总值  0
+					12 image lock
+					13 text  安全格  0/2
+					14 image pocket
+					15 text  消耗口袋  0  张
+					16 button 关闭背包
+				17 container
+					18 heading bag 背包格 按稀有度 按种类, Value: 3
+						19 image bag
+						20 text 背包格
+						21 button 按稀有度
+						22 button 按种类
+					23 container
+						24 container
+							25 text 1
+							26 image 初始攻击
+							27 text 初始攻击 武术 · 初始 攻（ +0 ）： 造成等同于攻击力的 伤害 。
+							28 image coin
+							29 text 1
+						30 text ×1 · 
+						31 image pen
+						32 container
+							33 image cards
+					34 container
+						35 container
+							36 text 1
+							37 image 江湖救急
+							38 text 江湖救急 武术 · 史诗 发现 1  张其它职业的卡牌并直接施放。
+							39 image coin
+							40 text 4
+						41 text ×1
+						42 container
+							43 image cards
+					44 container
+						45 container
+							46 text 1
+							47 image 迅疾箭
+							48 text 迅疾箭 武术 · 古朴
+							49 image cards
+							50 text 抽 1 攻（ -1 ），抽  1  张牌。
+							51 image swords
+							52 text -1
+							53 image coin
+							54 text 2
+						55 text ×1
+						56 container
+							57 image cards
+					58 container
+						59 container
+							60 text 1
+							61 image 格挡
+							62 text 格挡 武术 · 古朴 本 回合 所受 伤害 降为  1 。
+							63 image coin
+							64 text 2
+						65 text ×1
+						66 container
+							67 image cards
+					68 container
+						69 container
+							70 text 1
+							71 image 连击箭
+							72 text 连击箭 武术 · 古朴 攻（ -1 ）；如果你打出的上一张牌是武术牌，本牌变为 0 费。
+							73 image swords
+							74 text -1
+							75 image coin
+							76 text 2
+						77 text ×1
+						78 container
+							79 image cards
+					80 container
+						81 container
+							82 text 1
+							83 image 破甲箭
+							84 text 破甲箭 武术 · 古朴
+							85 image plate
+							86 text 甲 3 攻（ -1 ），获得  3  点 护甲 。
+							87 image swords
+							88 text -1
+							89 image coin
+							90 text 2
+						91 text ×1
+						92 container
+							93 image cards
+					94 container
+						95 container
+							96 text 0
+							97 image 射击
+							98 text 射击 武术 · 古朴 造成  2  点 伤害 。
+							99 image crystal
+							100 text 2
+							101 image coin
+							102 text 2
+						103 text ×1
+						104 container
+							105 image cards
+					106 container
+						107 container
+							108 text 1
+							109 image 铸甲
+							110 text 铸甲 武术 · 稀有
+							111 image plate
+							112 text 甲 10 消耗 1  张 装备 牌， +10 甲。
+							113 image coin
+							114 text 3
+						115 text ×1
+						116 container
+							117 image cards
+					118 container
+						119 container
+							120 text 2
+							121 image 嗜血刃
+							122 text 嗜血刃 武术 · 史诗 攻（ +2 ），回复等量 生命 。
+							123 image swords
+							124 text +2
+							125 image coin
+							126 text 4
+						127 text ×1
+						128 container
+							129 image cards
+					130 container
+						131 container
+							132 text 1
+							133 image 绿化箭
+							134 text 绿化箭 武术 · 古朴
+							135 image plate
+							136 text 甲 3 攻（ -1 ）， +3  甲。
+							137 image swords
+							138 text -1
+							139 image coin
+							140 text 2
+						141 text ×1
+						142 container
+							143 image cards
+					144 container
+						145 container
+							146 text 1
+							147 image 血箭
+							148 text 血箭 武术 · 古朴 攻（ -1 ），附加 流血 。
+							149 image swords
+							150 text -1
+							151 image coin
+							152 text 2
+						153 text ×1
+						154 container
+							155 image cards
+					156 container
+						157 container
+							158 text 1
+							159 image 致命穿刺
+							160 text 致命穿刺 武术 · 古朴 攻（ +1 ）；若对方处于 流血 状态， 伤害 +2  并附加破甲，持续  1 回合 。
+							161 image swords
+							162 text +1
+							163 image coin
+							164 text 2
+						165 text ×1
+						166 container
+							167 image cards
+					168 container
+						169 container
+							170 text 2
+							171 image 飞身劈
+							172 text 飞身劈 武术 · 稀有 攻（ +3 ），触发的 流血 伤害 翻倍。
+							173 image swords
+							174 text +3
+							175 image coin
+							176 text 3
+						177 text ×1
+						178 container
+							179 image cards
+					180 container
+						181 container
+							182 text 2
+							183 image 霜月斩
+							184 text 霜月斩 武术 · 史诗 攻（ +2 ），附加 冰冻 与禁疗，持续 1 回合 。
+							185 image swords
+							186 text +2
+							187 image coin
+							188 text 4
+						189 text ×1
+						190 container
+							191 image cards
+					192 container
+						193 container
+							194 text 1
+							195 image 正午决战
+							196 text 正午决战 武术 · 史诗 下 回合开始时 ，连开四枪！（每枪造成 2 点固定 伤害 ）。
+							197 image crystal
+							198 text 2
+							199 image coin
+							200 text 3
+						201 text ×1
+						202 container
+							203 image cards
+					204 container
+						205 container
+							206 text 2
+							207 image 破甲急袭
+							208 text 破甲急袭 武术 · 稀有 攻（ +4 ），附加  2  层 流血 。
+							209 image swords
+							210 text +4
+							211 image coin
+							212 text 3
+						213 text ×1
+						214 container
+							215 image cards
+					216 container
+						217 heading pocket 消耗口袋 0 张, Value: 3
+							218 image pocket
+							219 text 消耗口袋 0 张
+						220 text （空——对小怪使用过的卡牌会进入这里）
+					221 container
+						222 heading lock 安全格, Value: 3
+							223 image lock
+							224 text 安全格
+
+The focused UI element is 16 button 关闭背包

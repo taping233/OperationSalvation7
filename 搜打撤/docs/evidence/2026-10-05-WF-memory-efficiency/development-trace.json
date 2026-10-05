@@ -1,0 +1,13 @@
+{
+  "requestReceived": "2026-10-05T02:51:32.922Z",
+  "observedAt": "2026-10-05T03:07:57.802911+00:00",
+  "elapsedSoFarSeconds": 984.88,
+  "recordedModelResponses": 18,
+  "recordedTopLevelToolCalls": 18,
+  "inputTokenRange": [
+    132731,
+    187856
+  ],
+  "reasoningOutputTokens": 10232,
+  "limits": "Snapshot before final reply; no equivalent old-development baseline; not a whole-task speed claim."
+}

@@ -1,0 +1,29 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 1/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 1/16
+		6 container tools 开发者控制台, ID: overlay
+			7 container
+				8 button Description: 关闭, ID: ovCloseX
+				9 heading tools 开发者控制台, Value: 2, ID: ovTitle
+					13 image tools
+					14 text  开发者控制台
+				12 container ovBody
+					15 text 开发工具 · 操作可能影响存档 Ctrl+L 开关
+					16 button 调试
+					17 button Agent
+					18 button 数据
+					19 button 快捷键
+					20 container
+						21 text 页面快捷进入  与 Alt+键位同入口 Alt+1  基地·出发 战斗 / 研究所 / 跑局进行中不可返回基地 Alt+2  基地·仓库 战斗 / 研究所 / 跑局进行中不可返回基地 Alt+3  基地·商店 战斗 / 研究所 / 跑局进行中不可返回基地 Alt+4  基地·升级 战斗 / 研究所 / 跑局进行中不可返回基地 Alt+5  基地·人物 战斗 / 研究所 / 跑局进行中不可返回基地 Alt+6  基地·成就收藏 战斗 / 研究所 / 跑局进行中不可返回基地 Alt+7  照相馆
+						22 button 进入
+						23 text Alt+8  留言信箱
+						24 button 进入
+						25 text Alt+9  跑局数据
+						26 button 进入
+						27 text Alt+0  设置 战斗 / 研究所 / 跑局进行中不可打开 灰色行为当前守卫拦截，右侧写明原因（战斗/对局中受保护）；另有 Ctrl+L 开关本控制台、B 开背包、Esc 关弹层。 本页为开发辅助导航：经此进入不作为正常玩法走线的覆盖证据。
+					28 button 关闭（Esc / Ctrl+L）
+
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/

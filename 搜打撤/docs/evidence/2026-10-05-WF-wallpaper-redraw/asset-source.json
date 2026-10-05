@@ -1,0 +1,16 @@
+{
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a107c6-f69f-7ca1-93ba-674f3f24d7e1\\exec-0dddb8c8-9271-4e89-89c0-5fca1493d2b7.png",
+  "sourceSHA256": "f8d3df01f56d336de8b7df6b7f15b5e72572028e72b85e3db1825f20a6b10910",
+  "sourceBytes": 2505069,
+  "asset": "reconstruction/wallpaper-ensemble-1005.webp",
+  "size": [
+    1672,
+    941
+  ],
+  "bytes": 355030,
+  "sha256": "a1649492967e8a8cc3bcdbd36af617c93727a6cf00843a830fa451e2be527d67",
+  "beforeSHA256": "146de08d291a2e334236b8abb3ba600f80e6c476b0373dfd8f123ef4b93f1da7",
+  "conversion": "Pillow RGB WebP quality=92 method=6; no crop or resize",
+  "origin": "Built-in ImageGen full redraw of current second wallpaper; Wu template for style/identity only; current shirt/blazer/trousers costume retained",
+  "prompt": "prompt.txt"
+}

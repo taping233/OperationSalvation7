@@ -1,0 +1,30 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 1/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 1/16
+		6 container
+			7 text FIELD ENCOUNTER 01 / 04
+			8 heading dice 污染空投箱, Value: 2
+				9 image dice
+				10 text  污染空投箱
+			11 text 空投箱的隔层只能保住一类物资，其余部分已经污染。
+			12 button 木材 木材卡 ×1 ▸
+				13 text 木材
+				14 text 木材卡 ×1
+				15 text ▸
+			16 button 口粮 口粮卡 ×1 ▸
+				17 text 口粮
+				18 text 口粮卡 ×1
+				19 text ▸
+			20 button 能量饮料 回复 6 血 ▸
+				21 text 能量饮料
+				22 text 回复 6 血
+				23 text ▸
+			24 button 随机药水 获得【剧毒药水】：对所有敌人附加1层中毒。 ▸
+				25 text 随机药水
+				26 text 获得【剧毒药水】：对所有敌人附加1层中毒。
+				27 text ▸
+
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/

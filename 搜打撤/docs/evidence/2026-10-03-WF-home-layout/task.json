@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-home-layout",
+  "date": "2026-10-03",
+  "owner": "Friday",
+  "goal": "参考探索主页例图重做标题主页构图与入口层级",
+  "paths": [
+    "game/css/title-p0.css",
+    "game/index.html"
+  ],
+  "doneWhen": [
+    "当前窗口标题不遮角色脸、入口与预热提示不重叠",
+    "远征档案、照相馆、成就、设置、手册、留言与静音的现有入口可用"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-10-03-WF-home-layout/2026-10-03T15-34-32.906Z-6220da5d.json",
+      "result": "passed",
+      "sha256": "577de7dffd94b1b62ed7414ad58efe3019f7a21f6be8f011e5d728b50c7d78e4",
+      "verification": "recorded-result-only-not-current-freshness"
+    },
+    {
+      "kind": "manual",
+      "description": "Codex内置1183×764当前窗口：标题不遮脸，六个目的地入口打开返回、静音双切换恢复，控制台无error/warn，after.jpg+browser-input.json",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "git diff --check通过，index.html既有character-idle引入保留，game.menu与成就他人属地未修改",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "多尺寸、hover、退出关闭窗口、帧率/长期性能",
+    "混树全量/构建/远端CI与最近全量覆盖未核实；未提交"
+  ],
+  "updatedAt": "2026-10-03T15:39:37.205Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

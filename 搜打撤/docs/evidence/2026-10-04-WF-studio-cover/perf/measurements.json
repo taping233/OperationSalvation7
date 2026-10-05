@@ -1,0 +1,98 @@
+{
+  "source": "Codex in-app browser, tab-scoped CDP; current visible 871x764 viewport",
+  "beforePhoto": {
+    "firstPhotoAtMs": 68.30000000074506,
+    "flippingEndMs": 498.69999999925494,
+    "infoReadyMs": 209.5,
+    "styles": {
+      "backdropBlur": "blur(10px) saturate(0.8)",
+      "infoDelay": "0s, 0s",
+      "infoDuration": "0.18s, 0.18s",
+      "paperDuration": "0.24s, 0.24s",
+      "rootBlur": "none"
+    },
+    "window": {
+      "height": 764,
+      "visibility": "visible",
+      "width": 871
+    }
+  },
+  "afterPhoto": [
+    {
+      "firstPhotoAtMs": 207.89999999850988,
+      "flippingEndMs": 163,
+      "infoReadyMs": 151.10000000149012,
+      "styles": {
+        "backdropBlur": "blur(6px)",
+        "infoDelay": "0s, 0s",
+        "infoDuration": "0.12s, 0.14s",
+        "paperDuration": "0.14s, 0.14s",
+        "rootBlur": "none"
+      },
+      "window": {
+        "height": 764,
+        "visibility": "visible",
+        "width": 871
+      }
+    },
+    {
+      "firstPhotoAtMs": 66.29999999701977,
+      "flippingEndMs": 174.40000000223517,
+      "infoReadyMs": 129.80000000074506,
+      "styles": {
+        "backdropBlur": "blur(6px)",
+        "infoDelay": "0s, 0s",
+        "infoDuration": "0.12s, 0.14s",
+        "paperDuration": "0.14s, 0.14s",
+        "rootBlur": "none"
+      },
+      "window": {
+        "height": 764,
+        "visibility": "visible",
+        "width": 871
+      }
+    }
+  ],
+  "afterClose": {
+    "closingToRemovalMs": 154.19999999925494,
+    "firstClosingAtMs": 55.69999999925494,
+    "removed": true,
+    "styles": {
+      "declaredClose": "120ms",
+      "paperDuration": "0.12s, 0.12s"
+    },
+    "window": {
+      "height": 764,
+      "width": 871
+    }
+  },
+  "scrollAfter": {
+    "elapsed": 3000.699999999255,
+    "frames": 467,
+    "galleryFrames": 468,
+    "longTasks": [],
+    "missingFrames": 0,
+    "rafIntervalMs": {
+      "max": 24.29999999998836,
+      "p50": 6.099999999976717,
+      "p95": 6.2999999999883585
+    },
+    "sceneValid": true,
+    "totalLongTaskMs": 0,
+    "window": {
+      "height": 764,
+      "visibility": "visible",
+      "width": 871
+    }
+  },
+  "discardedComparisons": [
+    "scroll-before.json and scroll-after.json have no scene guard; excluded from improvement claims because later scene switching was observed"
+  ],
+  "input": "Photo opening/return: Playwright UI locator; guarded scroll: tab-scoped CDP mouseWheel, not physical hardware input",
+  "limits": [
+    "rAF callbacks are not presented FPS",
+    "Three-second scroll sample only; no all-scenes or GPU benchmark",
+    "No test suite, settings or notes edits"
+  ],
+  "observedAt": "2026-10-04T14:10:59.477Z"
+}

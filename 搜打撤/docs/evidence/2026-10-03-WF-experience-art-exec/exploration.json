@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "task": "A0/A1/A3 exploration and preparation layout",
+  "owner": "Codex exploration_layout",
+  "date": "2026-10-03",
+  "status": "layout-verified-node-copy-implemented-awaiting-parent-live-review",
+  "files": ["game/css/expedition-inventory.css", "game/css/expedition-map.css", "game/src/hub/game.hub.depart.js", "game/src/run/game.run.altar.js", "tests/sys03-altar-restore-txn.test.js"],
+  "implementation": [
+    "Moved confirmDeploy outside the two content columns into a page-level footer with actual slot usage and remaining capacity.",
+    "Added wrapping to preparation header/resources and min-width:0 to content panels; retained existing card pool/backpack scrolling, breakpoints, rules and actions.",
+    "Map sidebar budget is 200 CSS px; route heading/options/help cannot flex-shrink. Existing narrow two-row layout receives 240 px and remaining-height second track. Floating bag button follows map sidebar height; battle body excluded.",
+    "Assigned follow-up only: altar reward restoration passes existing tone/icon/title opts for 祭坛回赠 · 复原; full-bag campfire no longer emits contradictory no-restorable-card result. Existing full-bag warning retained. scenes.js and restoration logic unchanged."
+  ],
+  "baseline": {
+    "source": "parent Codex built-in browser, http://127.0.0.1:5337/",
+    "viewport": "1280x720, DPR 1.5; current window unchanged",
+    "preparation": "B03 not reproduced in this window. Parent reports header, resources, pool, bag and confirm button fully within viewport before implementation.",
+    "map": "B04 partially reproduced: sidebar y599.3 h120.7; routePanel y611.86 h134.86; route-help y723.29 h23.44 outside viewport, options still visible.",
+    "historicalBoundary": "Planning 755x586 observations are historical. CSS zoom makes client sizes differ from DOMRects; not used to claim current overflow."
+  },
+  "verification": [
+    {"check": "Acorn parse game.hub.depart.js and game.run.altar.js", "result": "passed"},
+    {"check": "PostCSS parse both owned CSS files", "result": "passed"},
+    {"check": "parent built-in-browser preparation true-input chain", "result": "footer y653.07 h56.73 within 720 px; capacity 2/16 and 14 free matches carried cards; confirm click enters character choice, grant and map"},
+    {"check": "parent built-in-browser post-change map", "result": "sidebar y550 h170; routePanel y562.56 h145.54; options y604.89 h67.65; route-option y609.98 h57.46; help y679.32 h23.44 ends702.76 <=720; floating bag y478.6 h61.2 ends539.8 above sidebar"},
+    {"check": "parent true-input battle-result-map chain", "result": "victory, claimed 棘刺之地, closed consumption tutorial and returned to map normally"},
+    {"check": "git diff --check on owned preparation files", "result": "passed"},
+    {"check": "base-departure, departure-class-confirmation, expedition-view", "result": "3 test files, 14 tests passed", "environment": "Vitest 3.2.7; initial sandbox esbuild spawn EPERM, exact scoped command retried with approved escalation"},
+    {"check": "sys03-altar-restore-txn, sys03-base-key-restore, sys03-loot-shop-txn", "result": "3 files, 26 tests passed; original24 plus2 dedicated copy boundary cases", "environment": "Vitest jsdom constructed state, scoped approved local subprocess; not natural node traversal or browser input"}
+  ],
+  "nodeCopyConstructedBaseline": {
+    "beforeFix": "Two desired-behavior tests failed against original code. Captured heading: [[icon:fire]] 营火休整. Full-bag transcript: capacity refusal followed by 火堆静悄悄——消耗口袋里没有可复原的卡牌（另有1张道具/装备不可在此复原） although one spell was present.",
+    "afterFix": "Actual openAltarRitual reward handler -> real openPocketRestore yields altar heading and sc-altar; continuation consumes original pending flag and uses original save/finish callback. Full-bag spell remains in pocket, no card enters bag, node still consumed and returns idle; capacity refusal remains, false empty-pool text absent.",
+    "scope": "Only openAltarReward source identity and openFireRest result text. No RNG call/order, count2, card consumption, transaction, callback or persistence change. Altar sacrifice restoration call was not assigned and remains a separate candidate."
+  },
+  "freshness": {
+    "PREP": "current baseline and post-change normal carried-card/action chain obtained by parent; narrow historical window not rechecked",
+    "MAP": "current B04 partial reproduction and post-change route/help/floating-bag visibility verified by parent; battle-result-map return chain passed",
+    "FIRE": "old manual restore screenshots retired; current automatic at-most-two restoration retained",
+    "POCKET-RESTORE": "existing tests establish full-bag refusal and continuation, not all source identity labels",
+    "BAG-POUCH": "ordinary storage historical assisted-state evidence does not establish full-capacity boundary"
+  },
+  "reportedOutsideOwnership": [
+    {"candidate": "altar restoration identity", "source": "game/src/run/game.run.altar.js openAltarReward", "finding": "Reward previously omitted opts; constructed capture confirmed campfire identity", "status": "later explicitly assigned, minimally fixed via existing opts; constructed boundary passed, parent live node review pending"},
+    {"candidate": "full-bag campfire message", "source": "game/src/run/game.run.altar.js openFireRest", "finding": "Constructed capture confirmed full-bag refusal followed by false empty-pool text", "status": "later explicitly assigned, result-text guard fixed; constructed full-bag boundary passed, not claimed natural full-bag traversal"},
+    {"candidate": "pouch capacity", "source": "game/src/hub/game.bag.js pouchTake", "finding": "whole-stack stored/pouchOf deletion has no capacity precheck", "status": "source-confirmed risk, live reproduction pending, not modified"}
+  ],
+  "unverified": ["parent live ordinary campfire and altar-reward restoration identity post-change", "natural full-bag campfire; only constructed test evidenced", "altar sacrifice restoration identity outside assigned reward scope", "four-layer traversal and exploration boundary interactions", "narrow breakpoint current pixels", "later naturally changed1183x764 window layout", "performance numbers"],
+  "constraints": "No browser operation by subagent; no viewport changes, build, deletion, installation, commit or push. No storage/rules/battle/shared tables changed."
+}

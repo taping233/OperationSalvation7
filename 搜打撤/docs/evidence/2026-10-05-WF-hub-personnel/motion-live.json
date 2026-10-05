@@ -1,0 +1,12 @@
+{
+  "input": "real UI clicks; read-only styles",
+  "before": "b",
+  "after": {
+    "animation": "uiPanelInA",
+    "duration": "0.34s",
+    "enter": "a",
+    "kind": "page",
+    "rise": "6px",
+    "scale": "1"
+  }
+}

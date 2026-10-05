@@ -1,0 +1,20 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container question 整理入库说明, ID: overlay
+		3 container
+			4 button Description: 关闭, ID: ovCloseX
+			5 heading question 整理入库说明, Value: 2, ID: ovTitle
+				6 image question
+				7 text  整理入库说明
+			8 container ovBody
+				9 text 背包卡牌
+				10 text 点击「入库」放回仓库；仓库容量不足时无法入库，未入库的卡牌将在撤离中丢失。
+				11 text 自动入库
+				12 text 木材/口粮自动入库（纯资源没有丢弃的意义）；消耗口袋逐张结算，每张仅 1/3 概率带回——保留的进基地口袋（用钥匙复原），未带回的散失；「初始攻击」不可入库（每局自动携带）。
+				13 text 仓库容量
+				14 text 可在基地「升级」页用 
+				15 image wood
+				16 text  木材×2 扩建 +3 张；仓库里的卡牌下次出发时可以携带。
+				17 button ↩ 返回
+
+The focused UI element is 17 button ↩ 返回

@@ -1,0 +1,1 @@
+(()=>{const q=window.__uiArtQA;q.reset();q.scenes.openBlankSafePage();return true;})()

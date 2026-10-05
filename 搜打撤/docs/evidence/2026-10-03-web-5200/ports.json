@@ -1,0 +1,32 @@
+{
+  "checkedAt": "2026-10-03T22:43:35+08:00",
+  "started": {
+    "port": 5200,
+    "pid": 28164,
+    "cwd": "D:\\素材\\代号柒\\搜打撤",
+    "command": "npm run web -- --port 5200 --skip-compile",
+    "browser": "Codex In-app Browser",
+    "verification": "当前窗口首页正常显示，入口及PNG/WebP响应有效"
+  },
+  "retained": [
+    {
+      "port": 5340,
+      "pid": 15172,
+      "owner": "WF-xart-z1",
+      "reason": "在用验收服务"
+    },
+    {
+      "port": 5344,
+      "pid": 26008,
+      "owner": "WF-photolib-perf",
+      "reason": "在用验收服务"
+    }
+  ],
+  "alreadyOffline": [
+    5336,
+    5337,
+    5343
+  ],
+  "stopped": [],
+  "note": "全端口监听与本项目Vite命令行交叉核对，无闲置重复进程可清理"
+}

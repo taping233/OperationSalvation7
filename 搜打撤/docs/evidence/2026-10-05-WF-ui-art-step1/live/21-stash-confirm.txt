@@ -1,0 +1,14 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container question 确认操作, ID: overlay
+		3 container
+			4 button Description: 关闭, ID: ovCloseX
+			5 heading question 确认操作, Value: 2, ID: ovTitle
+				6 image question
+				7 text  确认操作
+			8 container ovBody
+				9 text 卖出【追斩】将获得 2 币，这也是仓库里的最后一张。
+				10 button 保留，返回仓库
+				11 button 确认操作
+
+The focused UI element is 10 button 保留，返回仓库

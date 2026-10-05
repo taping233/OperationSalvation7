@@ -1,0 +1,1921 @@
+{
+  "ok": false,
+  "errors": [
+    {
+      "code": "bytes-mismatch",
+      "path": "cards/hero-volcano.webp",
+      "detail": "registered=205760; actual=133814",
+      "fingerprint": "e65f0d935f139c2419bc2e82fcc8f27551a4b510f7e766dc3297bd5ca57e8ad8"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "cards/hero-volcano.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "735acd997809756c3b5819d02b2bac33c96f0b7170ac9606e89cc6f7409edd92"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/bound-shadow.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "27d33088d9c8bff33221a9978eb65201ca5e4989243f93075fab6ccfed43350f"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/consumable.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "4acd7d50e6911312061ea1806db983fd57502c3ceefcadd37865097115ebabb4"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/creature-cmtn6ulm4boj.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "5514dbca798b26a5ef8f1c8d3764715033afda11ff747e40ecd9a62962c104b2"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/creature-cmtn79743r2n.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "29d8431747ac31887b593163bf637031c6f1d4288c6a6a766ebfbff8b7829350"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/creature-cmtn7err0a7.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a388105058881a20848457a0ee1aadbdc2bafd1874f44a66d5fd8345e2b14a4f"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/creature-tt8-curseimmune.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "eb32abde7a9f42e270d2331b641344d94cd285dfffcdf4c5bc2152082524f16c"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/creature-tt8-energycap.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "b52d33413d91ec6ae6e1a8e9d1f5133833609d25416c7faec003ee4bb4a708e1"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/creature-tt8-healplus.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "3255c32b13f619192ae6ffe039f5d32c061ac7bc114c08a768680c2bd76cfd3a"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/creature-tt8-nofocus.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "78c92cde06d62703174994da15cb97eb7eb3e45e450366f733632d1328b6817f"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/curse-drain.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "d42ba699b989365f0f4784a4bbb3ac2f05a75c05786aa0ac7f7181acd455c31d"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/curse-freeze.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "d126e41d7ea9ab6563405663f8c4fb8a6b4df38e2a5edf551cbdca548770199d"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/curse-silence.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ed3497eabfae0c9d39275d8d141d4f5d6068520badacdade87321e248566be07"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/curse-venom.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "bc03584c3ebfb8d1ac988bc79c631a38aaa91fb10f232a87468e704404cdb6ff"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/dark-eclipse.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "547e1d487f63c643155fd76c9256c0a1234ba0e4bdf3852a41a5c8c9d1da7454"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt12-raygun.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "804e5980583d1cc3e11a2a4519a48bc30cd890d65928f110de600b4be595d53a"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt2-apollo.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "7777229df054f5bbb2becd8421fe8d751511d869bd6d441fd4612fbf44aa9c6d"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt2-frostsword.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ddd690130a5154d8e2553f0d666e49b0ca8a5c409593f47886b6404df8e7fc99"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt2-pearlbox.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "75ff4ea477c578e5b13b8c0f444f2377cd650ce83431bac09491c51cbdd55dba"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt2-treasuremap.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "c426ca1bc83325cf6a61dba44b600c7a6003099272242ccccb6b350bd84e9cf6"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt2-venomstaff.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "736b241bc1c1dfa3fb604f4f193aea1396cfc19ba32a1e45f4c071643d537df2"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt2-wreck.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a73f080e292f35c2f7c9860f38f32e6c2cbc32e902b92db60a6ee960eabdf824"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-azure-sword.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6fbdb504b0f679fe127cf9aab30572d7a3ea4036afb341e4bbe32a5b9081728a"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-blooddrinker.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "dee3559c9c509d974de36b70630d221f9dd8069bc090b0652e7b795776db93b5"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-chaos-eye.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "c5340f4a7eaad54733e6e7da37945cf5ae8fba967c4df5aedbf194030d683926"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-crimson-pouch.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "d2d78c1b4411f8ddd20c33bbeae41c6891713d89f6558aed23182b66051f3320"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-deep-diary.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "4110fdd09bc70c8cd8696764342886c838060b97790748afd0299b079e677e6e"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-deep-seal.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "f7dbcf2002556d95b2969f49507e3fbfd32b4b82df3f2a8f2bdcac04bb502058"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-element-seal.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "4b1f0a95988435e5365f1367e6275053622f7c640099a04218be2b5bcd7e169b"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-fate-wheel.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a4e1bf6d20d9c6720994608059f6c8c60b3d96c851e75af023561325ec5b9e9a"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-grass-armor.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "b73e2e4b6d45927fb43e72a25565313109e71f83f3d89ec5b6c4ec2eba819900"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-holy-staff.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "fa567838e4a89f23d58926b4cfc31763e79da457015d9833551c6a8726f6c49b"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-immortal-blade.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "84954ad04a9bfebae53655f554dac8cdb89acde4342b946d79f83baecde46fb2"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-light-mail.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "d416f56eade0260499400775f311e4eedc12188fd04866575385c34c7f2e6daf"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-longsword.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "bb620ffab8dd2c850474ee0a3c1ceb4f76f98a0cdc925d714fae717e57aea0b3"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-master-staff.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "b1fd3cdca5fa821b683e548a9e58c9a90bf44c53365cb655ef437a58fa33fc5c"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-reverse-bow.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "8e74475fe79b69284367eceb6d9e2843f28583f2d2db22ebc7562f2aef21f36a"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-sapper-bomb.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "60a941091c17913488a653b46bb1afc3f4cb46f8e12f8d1b648b24fdc5dd10f5"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-silver-runesword.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ea6276bb312b30b3b28292f7791cb380b85fbd3553a5781b9b2964b64659c89a"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-staff.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "253af50866bd9218ae16b0c05560e1b140aca8ef309961005605aaaf1fa95356"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-twinwater-mail.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "71cc04db36d4b016404c258386fab7d3f9a8dc8bda027eba8e3cee4b3b9d4fdb"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3-wolf-bow.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "293a522645a90486bbf1bd2a9eccfedd9d0da0d02a0fa91cbad4042511def186"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3eq-boiler.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "abb3a734f048856830fd91ef92ae60d45713a3e8708eab42eb9b7351663a3ac9"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt3eq-mistbox.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "2fb3d1063b9da1bc0dcdd0907bcd6085864d55f1d62aa11855b4d220d360f172"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt7-arcanescroll.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "59a2d3e6f119b9ee69f69a9c80e7c624a74be51bda2d693d0f70db6f8729d220"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt7-darkfort.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "9153bbaa6d363103c43ffd3ae54413e1a5246bf6260a50ae1d5a34dbe1a83fed"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt7-naturestaff.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ca8507c5c86b8ac1e9b0f3d1128a50dc55145611687664968e747baa698c1c67"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equip-tt7-talisman.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "3f655580cd2dacd3207253cb7ec06b4ebcd8a03cb99db9b4ff77978f6b76ca0d"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equipment-armor.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "9fb42591985a26ec8e93027d37dd3f4ee8d977911d26e71eb2b74fc3bff08b2c"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equipment-utility.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "1abd1bf41e60fb07c9e0ef020591f5b5cacc307b1b6260e763bf5fcd8616c9c1"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/equipment-weapon.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "0bd39c75d7caa6b22d49a93749a084943e5c817d45dc90e6abbfa1cb18ada1e8"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/event.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "fe8b5d92fe5501908b92b865db5493c8ebdd31dadaf17771ddaaa005c9175613"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/expedition-starters/basic-attack.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "2ef8d68bae132129ea4c3781c8aa542489ceb6890adc7cb154e94441cda2d81c"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/expedition-starters/fireball.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "3000dd3bb1273d32a887cb53e4e3be2b0b48ea3327a07b2a36a29fc2e82b5397"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/expedition-starters/pierce.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6ca05b654dbd616c186ddbe5eed0cd75d58bfb6f86f5f6ae63add592d8e1e4c5"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/expedition-starters/rations.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "0179b0d7038e3482a98c2817f32cdce5e5f68528811f43ec70b295731b867af2"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/expedition-starters/staff.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "4972de1ef72c913bc1c00815d4f3fbc6c5313365ffd0623b4db460966bfdb403"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/healing.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6067ae611f729204065e212d427f98a474b7469fd95d5ce0479573bf6ea19f02"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/hero-abysssovereign.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "29731faebd4ea6a3c10c49cf9cb23c3ed0632bb0bea5480612993ae43b3947fc"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/hero-descend.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "7f668eb1766457d151a0fd83c59f2ac53b21c0177e57efddac23c43d2a6b6657"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/hero-forbidden.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "5c25ee45c1096c1047b697cea307186f22d068e1ee35c2eec5c9968ac077ad5b"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/hero-mage.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "b60bf0c9c51413683ad65079d935260ea633a4f02c2feccfccc5524459acc1b4"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/hero-priest.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "98ff507508297cd164437b86666f7a46c335589e9d958a9d930092f996ca1391"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/hero-sacredsword.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6ff5b33dfc0ba8463563c5553e0282db7c887b01ac39292b01e3a62e076167f4"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/hero-summoner.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "49338b60f484a0ce8a5c8c0f4464990345c613ee92c0def456377021673db28f"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/hero-sword.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "27e16a11b5be04b4c80bb24d547035d773138b6af755f11a163349a1eddce0dd"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/hero-volcano.webp",
+      "detail": "registered=30894; actual=20790",
+      "fingerprint": "9d625a039c091cd1c0ebf4d7e4bab8245340a6500d4dda702a623f6db3e9a51a"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/hero-volcano.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "f771efc06c725fe829c63776e5b6ee89c374e2e94c1765d93547849eed9b238a"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/hero-warrior.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "5be72023ff63b7774c2b29c8fdda59948f8f5e045f8bb9558ae36ea1fa52d0bc"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/hero.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "96a29293e019c657efb180ac680957d26b17eff5369eb8ee563927885309a0d4"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/builtin-fuyuanyao.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "5beb85369c011d66f0772357278cfa88a784b8f8574003bd3bb2fd1a03d8f164"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/cmtmvq6ss84l.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "12ccca75c61e56d097fa3636ec25bf4c737b846b9c11566feaef7cddbb17c49c"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/starter-emergency-bandage.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "594e912834381c5f20f4175976b16fb899544490f85765d5225690721e943733"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/tt-crystal.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "8acc74abcae79c6b6f993e6728282856b65390bdb812a15b1a201e8663bdaf29"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/tt-jinchuangyao.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "773a44b998c67d7a2ef235ef8bdca9b18b5c2c9672a6ad53efeea72dc6b5fe71"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/tt-medneedle.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "94c76a2813dadcc11ea36e83a56da9e5147cd267e00575d8124883ac49f6c9ea"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/tt-token-gold.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "60b378a4b85f6bb6aead0c5e614bc6474ea58453feb99c127ca40f302e7e113e"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/tt3-blue-potion.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "991f6486ed4bd2bebf1b153530eca5dd95b875b61da3f7ee91773e2c128bf1e4"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/tt3-demon-potion.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "163e13aa8803f6d8c656aadfc756e92241f304d8f16a6372b720c36a8d19d95f"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/tt3-houyi-potion.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "e4bbfb67881d2119a37b88dee9b95da283405bc766566b283446964ca1f8a8ba"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/tt3-iceheart-potion.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "78dc12c929cbaa8212962956e370d41f1826f4ebf7c57f32751f429b8f1af47c"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/tt3-mind-potion.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "00e28e01c4a44f79db2ef1ca9042c4ea4e207eca278819f80128fb03df47da83"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/tt3-mixed-potion.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a95cf7ebb5b375336ad2f17d0515e0f41be64f0ad3b23370f75003220d5e3811"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/tt3-mystery-potion.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "38fd3dafad831b9d203c7f102016ec88127cd21902a94b90618451ae1193b3fe"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/tt3-python-potion.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "5b277255e677717cb8d5c53d00b0061becd245a9b2e9dc019309708e6d8c33b8"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/tt3-savior-elixir.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "c39fedabac02c9b22cef7c4e42e7e0376af506772c749df25420fdedda7e5c86"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/tt3-turnabout-potion.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "5d90c3c72585cedb506e4ae2c7597e29fc9a910e8d7691e21556554125abec48"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/tt3sp-doom.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "e86887361f0a22c0f876762d75815cc482e64b092fde9dfba723e8d9ccf8e2ab"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/tt4-shine-token.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "257fba36b45d43f355b93d59f65aa8cc53ff2d79a7c3de15059cb3b126923850"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/tt4-smoke-bomb.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "f9031c4dd95374a5a7391572e4cfd07213f0cb433eb62fd300dab8cb39f737d2"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/items/tt4-woodify.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "5ad161239e2b9075c992fcfe84ee51ec64ff1979ab65340d02ca58893f10d593"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-cc-chase-slash.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ec4930c182b6ab0b1937ce0bc0a441ddaab4a8d7487d6053976c7167bb616895"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-cc-cursed-blade.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "082af2675c4b6ae376469eeb767c3a0f3ddd4e0a51c863ece3ea14363422854a"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-cc-dual-wield.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ab1080b9923d9c7d50e30b84aaea1fc350a610cf2c1401023d770da072e8d490"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-cc-last-stand.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "770f8efc95ca0bcfe1570ae0441ffbb6b37003c335bd566c538a9f9f35429fe6"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-cc-rapid-fire.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "9af49d4102d3f11d2d5938e0ba1c10acb3a616f45c532916bc6b6ffe5397f749"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-cc-unmoved.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "f30d70a0aac739c569ed1fe22390d196e717850167f75ab3406b5da810f8b8b2"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-cmtn0pbkmnvc.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "eecd40f7f933e8e8f8726f717182851a9d14be4c30bfc0e6f88ed7c8fa183533"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-cmtn0xt0zr7.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "235a5d1f13cc67d5c2210c757110d29b0564dbcbfa765690bea383f1df9cb9ed"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-cmtn1wnhhym.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a2e874306bca0ede3e52f8d6b60e1259af72c3bf17da74a83493b809c28d1c76"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-cmtn233trmeg.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "fa50508c6c4dbf72bed10f12760f760cc35dd05bffed4dc262cb9e173112f8ea"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-cmtn2jc142dj.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "34d6bd44e09440952907a9d3b8c36e28e0f945f9677daf22b913e58225748f78"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-melee.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "c20b7691d54eb2efcbc73f55d854c19cdd258dfa6239abcb6f711637662b3c17"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-ranged.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "2008e912c88d69c6621f5cfde4bfc7a7b024eb8b44e3601af8807b13916cebe7"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt2-block.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ee9946696424887278132b58b9746b144cbdf8250aab6f0a9958e59a6fac052e"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt2-bloodblade.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "e2f3729d688e56969425a468eef78ddb033a58e42b78a78509d1a54faff2a0be"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt2-comboarrow.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "f3f9e09b228fc9816a0248a213d4f9281c0e03f8044aebc7825a487d7bc01973"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt2-forestarrow.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "e28ff5db609915580dda5527b310f5a894e9c3cf4a79e5bd611a3b5f2b0b4c84"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt2-jianghu.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "4a7d3444dec15fdd580f54a7524d38222b49867c6c6d9297f8082a270c04c14d"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt2-piercearrow.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "3f14cf23737af68e6184153a7eaddd5b642b21c7f69a08362fc473a1e0802637"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt2-shoot.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "fe8871d768ea6a8ef6b538439cd7a09b99c53860e2ad0726647383d5b72421bd"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt2-swiftarrow.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "4efd1d91b2be4cfa5ec66e43e8667fe43290fd5aeaa69b7532ae3240d8ad8a31"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt2-turtlearmor.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "9c60adfdf4580e19103633fad21514af85de7f2c267b4c3159d77c316a8f8058"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-armor-rush.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "1300f079f5425859c02f001f5522c2d45850429f14e4f860e5a017133aa5a518"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-arrow-rain.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "8a9312f982cca2eb40c20ac445d1d8d6ed68aa8421b0cd5cdd015488d864695d"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-bandage.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "28e7bc0c33a3088c155108a4a2069f3015301c856a06ab705b2588289df5e343"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-blood-arrow.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "9f2a44b6019fa63a89b26f8edc3a9478dc5307384d37f695a0171bfc319fd391"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-dig-treasure.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "b158173727f7dd3966df70a3f1edf19a90c2657cdc4a868eff9bbed176945460"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-double-shot.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "60e387f50c0d2b3476b344100200e845cb1e3e6e25da3373c95abebf32ed80b8"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-execute.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "88a1f7ba1f51007634e35ba8fa3946c779f2638b08051cdf3e32ca8e1f63c7df"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-fatal-pierce.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "9cc05d39baa031a51e7c40210908b55691393b71b33cecae706f3138749bf783"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-flux-slash.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "8287ae67fce558cdf01781ccadfd6e6492c443a1ddde018b1279a6af412a73f6"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-fly-arrowhawk.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "991efd862116e0158877743cf1b7a273528be11e621e42d5726e9deef8d9e8c8"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-frost-slash.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "9ee27db9769c7743c8982bbf122724c6c5bcacd94adc38014cb819a1fe3a785d"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-frostfall.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ce8ded8074a47a958d755c72c3f59c48984133f18de45f3ca66972951ab09749"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-hold-fast.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6b580a88d9e05a5bf2c7170e86a26c75997b517c1f00630988b0f9de310a06d9"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-life-arrow.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "acb4dec77618073d2b80186a8c07d77e2928d23f19addc698f7b95db45f6666f"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-noon-duel.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "fd3bd61518acff079cf5d09cd2f6702798dea8bb5216d9e09bfd79a6d80a6606"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-purify-arrow.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "2fa5ce91409dc7f05996f21c702b6cfa12f304bff00b61b4aef3d2e0ef5a49e1"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-qi-wave.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "5f20a0ab789d5d8010778fc67ac57ef397d6c7be3250e566432386a324e25010"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-reshot.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "e56a9a2b49a21c0bdb5f195ae7b75698c5fb06d05065e1c495d16429dd22cf23"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-skewer.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "9e2b5d7828b6e830f9a395f1afbde3a081a1669b2290618e2e57e42d459e0813"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-venom-arrow.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "633d95871ca4eb359978a0aebbfee8b3c03d71415cbdb508563051ac041d41da"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3-wave-slash.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "bb9bbe2f71cf20bb1978ac36b41a5ed760a8714df8e827743ab70b74fe110a06"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3sp-shadowbug.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "994a5880f954152aeff47aa0484c0ca371aab2226f83e4d6318a7e7d08c8cfb9"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt3wu-shike.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "e8c8c826619f8e95fe3bb4fb3d3d30ecd00a85574381364b3682983a9b544027"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt7-armup.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "bb95c4fe6a3269cd6e94fbfe4c0b76aa0705155bc17fb0553755237b117b9fa8"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt7-bloodpoison.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "973d2f66395092710a4ae535821878e0dfbd5544e244c147b68e0bbb1c424265"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt7-bulwark.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "8b62fe4816fc5229510dbe02e9a9767ac0bee4dcc9ac67ef1c902c8daa4fad26"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt7-demonbreaker.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a3f62147b37d700bad526555da4b0a948cdb0016422130a4110492ab938bbb73"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt7-fullstrike.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "bc3d04abde6c1e2d0f07f534a596717fd1cff7098409d272e3bc411171053a81"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt7-ironcharge.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6a987aef0cfef9bce8a9d7cb15eab26bd968ea23efa4b87b23a555b3022a36de"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt7-ironphalanx.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "4cb9a707c4e1bf5cf482173c520daf72b88d1a81982f8b7684a71cc46c5dcf90"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt7-marchrush.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "b79a51da69715d03c080da3cd2a1c094b02a3760f1c9fc2d741ff4919889069c"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt7-whirlwind.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "b58f08ac6de81302c489cb6fd383558cbe12567768b82dddb8edefdf5754823f"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/martial-tt8-dragonblade.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "bd7bc96bed280025ae86ce07c7a6445fe2fc978c887d59cca98ef516747bc779"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resource-key.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "65b9a3a6a308873479d9964d30471ff61c30e633ee1750d32ffe574c00eb13cc"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resource-material.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "19a5a2247342b3ebfbf05773834c88f347462dc674295d21a80244d67e126c89"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resource-valuables.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "398cb4178ce88573503a6b23b6298f738278e5fb0711b6769e09c0a232938416"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resources/coin-copper.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "33b54f12943690fdb37878b55078959e63b3c3b0d9724dea53bc49b68ab9d833"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resources/coin-gold.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "41578f40680e2594e6514c5915815b4480d5874f5681355eb350a9391a7388b5"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resources/coin-silver.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "caf8de263d0ddf18592425c8bedeb8ced00a68c32381fd9614fdf668f4b46713"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resources/diamond.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "5eca609272745ef0c563dc563df08dad479cf2095bacef6b9124c639e235f7e1"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resources/econpack.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "40aaf0603ba143a6fced292844583fa19a60bbec92274ac8f9dcc956319e535c"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resources/garnet-marble.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "7096f4f34cd145f6f2c4b8968b0f2d2b1d0aa1da232212213489ddcbbe51c0d0"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resources/key-one.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "314bdf88fa0189e0fbba73c21490934186f3b443fc710fdd6291d7adc5661291"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resources/key.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "1a960a285bbccf9e189bd679a932b3014193b9d92687aea7a76ec132bcb2b942"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resources/keys-bunch.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "8b86460037546a11ec590de1a1e56202b751fe8c089e4ef948880c48693c9e85"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resources/pet-egg.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "5e7c85f2a86ccef7b69e045062b0bcd828b3f447a186eb93a0ca3165e1206364"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resources/ration-double.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "e8bf7dcf2ac41a2ca91ccd2401ad50575f685dd709eb2696e79873ea75812941"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resources/ration-std.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "b5338da30438f2961b91d23fefef2f9c5a6edb2fa78133590877d8940a37ad9f"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resources/ration.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "0bf9dd73697ffe8cdaeff498d28edcece5b35819643513a67230751f7f099d47"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resources/wood-bundle.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "c5962b3b5ecc2c553643201e67b8f534c4eef1b35d1d0b8e592665b3fb2e4188"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resources/wood-lots.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "372db415a2ab424dbdca3d8a30df7cba07620c7ced6bc9a9817558f9e9eda549"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/resources/wood.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "0f63cd7b2c0cc84d30c47159e6292e8f4e9638586c96191e033ac5ca21f5fc4a"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-cc-double-boom.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "fe2ba6a168539db20cb82f6a06c60a59cdd3fcbf07048f74bedcca2caf935cbe"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-cc-ember-burst.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "5f556b373ac0b8c1a29807b683079d91e12728f0dd814b3ec4b17fb32eddf5a3"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-cc-lava-blast.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "4d401527cd153cd62007607b4bb2a3f28ec11578bbd81bb3e907b61f615032af"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-cc-mana-surge.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "fcc1a0b3c3312ba121d3485281d76b8593e01df5c209fb76d6d885032a6a5a6c"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-cc-poison-burst.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ecdd6cb010b1f484cc4f7403f025bcf0deae627c3974a0fe801230a1bfd884fb"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-cc-rot-seed.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "49f68c289b9e78a61c71840f28257fa10f7875dc40dafed0520c36bb55945611"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-cmtn125e1nk0.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a221bba37ced9e55df47fce2f249f7ae74b26ed916d0fc646db7d303467dc60d"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-cmtn1epgt20j.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "8edea5a78d4bc17294cdb97de93e45f0dfc9fea56aa06888421d798e699d5bc9"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-cmtn1gfhczzj.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "035e0dcbaf3cfa8ac58e5abf52bd2b1fe9866ddd404006edfdad3c14a4d4dfb4"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-cmtn1lbhbqi4.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "855fc7998a8f24c74e97e9247da47046a9de87753be0b9e10d11ece3adb8d56d"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-cmtn1ntxzoc4.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ef90363f5d181e31a33095b6144d9a26061f001d31c5bb918728c9a4aa285b77"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-cmtn1p9vb5au.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "5d005ba1a6f2d6b659041c8b552fef9920df01498e6618983d926ef97fe5a5d9"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-cmtn1r10xnl1.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "bab70b758dcaab1c5e40fedf1a63a513237a84f5d3c6c37651bd52b835a405b6"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-cmtn28jv33wx.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "c63c728f907cc5f3d5175c7942b1b1ad2e98687a072c57b8a9dc1c31df1b5cdb"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-cmtna0nb1yxt.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ce9fde798ea4c832b2f738930b38cb09145a0eabae1e025f5150fae401b2b706"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt12-backupcell.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "c9b84b43b8abd6664dcb01ec9a6e170220acbec185993e32c50e5b5f48510ade"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt12-barriermend.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "7f3ff335387310dd134dda6cfddf2187ee90285b1933de7ce2ff5ef9af5f34e8"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt12-basicdev.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "038120831b660a9f9ae4b08c774109bceae63562854772d1a9308ead26db99a3"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt12-breakthrough.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "12e12d5f18c3e884b4b89c155b215cd437d5b73d44f464e6a92e7c2bf05804dc"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt12-chargeray.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "5c0b46b4945c868b790ecf2dfe684705a3d695f957db813d3456bd95de71ca3f"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt12-elemburst.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ea9e50e405092b5fdeaf5858a8a576925691f102b4176b130ffba60da378ed2f"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt12-felguard.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6f5c7a0c18222628258a558dca8f83fe47a88f28c3294d1e78341ff105047521"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt12-firecracker.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "2fef49e3af0993547b0fcea65baa237e12844d01a43cc85ccfcca07695a86d53"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt12-freezeray.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6e4d8dee40c005305c74f33313e686f670245dc25aad3348b55c86d56cca22f4"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt12-hitechrd.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "0234c0bb2c337545c50199620a20bd95153fa0750dfc599099b000291cee1dbe"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt12-infectray.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "88cd0bc71116c6c2e641818c42fa3701abff125d1e4068fb4df562930c221d62"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt12-magicfind.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "2f2345f0b282034b2f57cea89b58e4718a5319a05fa02985742d359085248dc7"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt12-raydragon.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "cb867c19a13d70d4dca1009f89f30b2e8e6c4d82d4de6be36d7b7fb0468ee8d9"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt12-saturate.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "98244935dabfe14c62514484665d8c9bd2965c5ca5a587fcbf2f4abc539558cb"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt12-sporewall.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a013c978e51b47bceaafd56544ceaa48ab1d03a0acc905fbbf396e0e798b9aa1"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt12-unstableray.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "83ee1b73a18d67db44ec8408d95d5344afbe6e1ae65739e89975bbadbe8e0a59"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3-chain-lightning.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "12b888423564fe7e19ef834d73cf70ff2f69d7d9b55a93b91824f791fba0633c"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3-fireball.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "1466abc1f2e52928ec001af50aefd4bf01c2c916cb3ac91b28eb2b56b5fa339f"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3-firm-barrier.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "8a607832268a7cb01f50ddd1c810ab12963dd00298d5b970bdfaa9e3efe4eeff"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3-flame-storm.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "742c45321fb869a95c643e0016bea24c6d81b6d756388c3cc97f56098e198407"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3-grope.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "e0250384031b03ac1548872c62d070d67844fc4d002990cfade7390941ee19f1"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3-holy-shield.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "84686f5bda843910b612299f2c0abf285018e6b3c32e348bce2156c8124d08c1"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3-holy-water.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "3a1dd69d30b77357c151bf53c5d3112bc01c645f3379bf2fc8a2059aa932d588"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3-ice-spike.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "0cd45d851808e96104faec5c7d0d42f9a5f7620cd35f6d5dae620cde499bc7fb"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3-magic-lamp.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "cbe8c4abf82f6e14751a276557cc030e8d67a4a8c66a441de4c0eb297ad44cda"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3-nuke-ray.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a91e11c79447b92ccb968bb6d0524b5925e5ab49b86ae43f48c46fe648a19981"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3-petal.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "0f2a84375f781117ec37dd339add01c77c464e133fc6f664b94970f368110e47"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3-thornfield.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "d62589ae5f8b0922f1d3c12271aaacfde0ddf89d1d065c025880dab96a857fd2"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3-thunderblast.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "14707e404ae347a0c44803e1f67d40cf5c13ed0a328ae3de22d3509be46d2181"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3-toxin.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ea6847834e8515e3ac82ff95909c119d5a50cf53f54cd944da32fc97651fe145"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3-treasure-hunt.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "1908405c0f243e5fb73bd9c83b0b6b0389ce89093ec9b51a41c4d5d1fd248d2d"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3sp-bloodstorm.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "dccb6a8c0720c9dd8fddb909d51be609f5fe985bed1ac252179189bf2e2ccebd"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3sp-dodge.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6395f54a272c237f7ba5f2591df6f388dcea8b13a52f3ab424fa24be644a59ca"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3sp-flowerzhen.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "127ce1c089d689af48d63e220a858f59801f95ea322f8a950077ba1fd62fa686"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3sp-magicoil.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "44837744cb2df8227964bf26e9b49e471ff2217a3ba1122a447b5778f93315a0"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3sp-shadowshot.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "94a2f288934f609e466c8627bb27c0c00ce7ca9eb280423216a8aa09b30e19f7"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt3sp-silverthorn.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "153d88341d77882c838d57f5776ba4bed155db0f13b147fa6ff5e6aaf2c8a61b"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt5-galaxy-voyage.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "fd0688239d3da6f8b0a9002da8c4e3e09da550c5470059effa27d4671627083d"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt7-abysscurse.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a654b84fab6b07a5db2265f8f96972c6f4252000b88bf2f6e737ac0af418e171"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt7-arcanebolt.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "d51b8984086ce6755e48076d6bcb7bd110582b9192fc0cfae78eada301136ba6"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt7-bladebloom.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a488cec9a12b14b3e48efd0437130fab0d9f095d7f6b874fdefa828b6199182b"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt7-burnharvest.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "73499a94318a6a0acf24b80e3f508c0b3d373a3407b47c7c64fc2de0dc276efa"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt7-elementstorm.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a9ccb8c6cca7e2f05e1c6a3653dbe1defbb64536253cce30fa5f6b69f7f7b441"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt7-energize.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "692dc0eeb27dd550e40029c1dfc362f52962d1c8c0ff6231c5071e0f1613f090"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt7-frozenight.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "43cd8b0165c9824b6add6df7f956867f1a53198efdb9dc97817f27c41b9367af"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt7-holyglow.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "4cbfc84b03de04730b75d6252f52cd6b292cad22bda13fd803894843a0144730"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt7-holyheal.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "432868507556111ac640de0cdad974f234afaa7775eddf891ad616770256ba2d"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt7-livingwater.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "19747fa4b96fe708f1484f1d462003e3775fd28e7cb090fb0f7b7371e441da07"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt7-maxsupply.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "07bb493c126e6b806c4af2c5d3dd64d598ab889f058c49d624f612093a917454"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt7-meteorstrong.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "d22d769c135fee40125ce5bbad3464d29564487fd5d1891039380b1621d06fad"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt7-recruit.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "f281ce2ca0559479789cfc83d3cc595c45682e85a9f33f5e8476d301f68ab2d8"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt7-smite.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "7007c1a70ab7d5276882554be8a676089c7e51425d81a2f7c1baef90116973a1"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt7-stratagem.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "540fa151943ce264ebe489c8e8efb926d032c36ec05240d1e0ff814651dbc835"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt7-twinfireball.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "f9e8c743570ae9ff11a99a43ce41767903b86c5bd2155ecdda63f97ee3e19c77"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt8-curse1.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "562645627dc7552835e1f72c1a2653ffcd3acae16559a304ea413b5f6214b961"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt8-curse2.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "75d8de620dc22e51734e23134b6139fd98571eb2c6be14756648bbd63e242a5e"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt8-curse3.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "830107e1ff0e4ba1d48dd19ab9d076e99aef9ec6b2fe20a0f87fcd8fec622096"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell-tt8-curse4.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "967957415ed35a1fb33b73d881da254d6b67c2931d47f43c954edbe3db544f10"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/spell.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "8fb06da1f76e543b95cc6d9aa24e1f40b8287612400e3887a1e8b3600d9d3539"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/unknown.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "5b66ae9bbbd7c0c5995ca76e017c7d0e8d96d19e528a43a8219448495713deaf"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/portraits/enemies/archer.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "2748de6c7ebcfe507a4771f7555575346951057ee99d0bbc614253c5e46639e7"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/portraits/enemies/bandit.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "142e63c838b2ac7319817fab1a3ba0535b2b8002bbc9bcee6d2b3e92fd333c17"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/portraits/enemies/boss_elem.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ddb298b33483aad553a93835d4463eb965ff99c0c59b1dba2682b2eface672d6"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/portraits/enemies/boss_general.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "3979561d4e53e13e4b75ab4d459fa70a47759adb6ba078a4e166ca41dce6aaee"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/portraits/enemies/boss_orc.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "4d80f40c738b895a423ffe00ea4c240a9427655272e8025a3543546201f16863"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/portraits/enemies/cavalry.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "505574f730c403a71d4d38b43836cb344823008ca228ebf7cc9657154f95d519"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/portraits/enemies/dragon.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "9ca919484df3b975232ffa5dba0e93dab159a2d811c086d1842876b08d16c8b3"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/portraits/enemies/esper_candle.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "f527ddae25a0e6cdbea4592ae4afdb9c6abc9aa9e5b6a374d5136e7d98d14b6f"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/portraits/enemies/esper_crow.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6827ce10d1d0cabcec3f878b0782fc70c1573541083e5866fca85a86bab13ece"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/portraits/enemies/esper_echo.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "71c03130afc247c8f794fca66411ab039364592ccd1b3ac377a62d9883b8ce0b"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/portraits/enemies/esper_silence.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "996b1e9346b1f4439faf2961efc72aba154d648d46160b36dd7ff47ab8b3ef76"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/portraits/enemies/fire_el.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "83ca61906a627dc9c98196723b5ede294cb8bbfc68adeb5b57e90579ab1ced0e"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/portraits/enemies/grass_el.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "4750910d8229cbe1e1fe884a0f861133d6c261ccf2b678c9c507d84632563669"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/portraits/enemies/infantry.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "7aa9166e7835e5395514368dab4540dd03385db5299c26b4e038b780b6f65181"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/portraits/enemies/orc_axe.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ae82679a5e3f4b4b508d2250997cbf430d65a0af28a7d6429502a9b7ccb450fe"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/portraits/enemies/orc_jav.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6f137c4c6d4630495b7c49c58817f194f6921a2d8c3729039f97e65d58ee6017"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/portraits/enemies/water_el.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "45491e71d215e65ae2d00ceca92f994fcab0f1ddf03f46123723159a2c18f04f"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/portraits/enemies/wolf_rider.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "cb216bcb743c010f6bbc8411994e2268cfcde98d2927eb4f8830f56ab4e89817"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/battle-normal-anime-v2.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "19751aaf0ed23fd5bb248cd10e9fbd52f351e3bdff921d599774b47dccb61152"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/battle-street-amber-anime-v1.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "2d44ac69e931f1b94dd253c5665d46e706d7b4db74df04d08dd62859c78cc3be"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-bandits-anime-v2.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "14a0771b2e8d7211f55771fa170e15df5838da5d048fc6cbd1f4fbe0d32de884"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-cmtn7qttxqo4.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "4d582eefef82cd3159ce2b099c91c5971d74e517a08b6854a0889350c2430804"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-ev19-arrows.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "c06ab07ff684e45d7b7c3fccfe38de43a07f05d416ace6dffad6fd1a15232591"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-ev19-classchest.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "d9a5a758627841a86370bc543b9d76658f54cf631ed9725f51185fa5288e5cf5"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-ev19-fireballs.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ba9c6beca693c3ffd9245d8f4a5c65feeffa87491f97b16e4d9056d20cc4bb4a"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-ev19-gamble.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "69ba7a1def8d3d0bf5c31860420cc06c88f7541be746cfa90945789c850c7f7c"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-ev19-pearlbox.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "e56461bf2fa78e77dcf80c8b53b96804642431680120cf96e27820a9c8bc53f2"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-ev19-potions.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "8e8c016b758b2ddc9b5f81c08d6f4df5f3b2a686bc17ae68d1e4a94d24f1510d"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-ev19-quartermaster.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "dd26bf682c4c3c070e1e7b952393c41737bd98176599c52ebdec56f3fa0f17da"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-ev19-recode.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "c7511e466cb39f1d90658c88fae876fe4163cc5df4845f477455b6715a703bbb"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-ev19-vital.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "68ff70de7ab2740b75ca32df718f6eb5220d421eb3444f785e4ad554a7b1c737"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-tt6-airdrop.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "f1d7fd9b8db3db26db16ab7badffe21bd4edbd7a0aa066df1448c6677e5704b3"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-tt6-chestdraw.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "aa5281fb7912bc27944e3c8a7f16b6a9cabd4a94c722e6635eef3c0803bd2f35"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-tt6-demondeal.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "349a683355f24de5d492ee227641c17e46d8a59d0df9302b5ff4fe66aeeab89c"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-tt6-goldhammer.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6e3ce529818d2b8aaf32be8b262f9c1e4065bc4ee65eb689904d5dbd0060f30a"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-tt6-goldmine.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6479182814876781779700914c81af64d3091a0fb2149f31876d9da484330c7d"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-tt6-mystery.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "d95e20ec445baa3c63d30e9da3e08f659de9aa907e7423cbd9072f52fff01879"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-tt6-relief.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a7e0b4fb40058209f64763a8811dd6766f1163974672d14891dde5e4a8d2fe0d"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/event-tt6-systemsupply.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "b27def5c534eb10320301b7e81302668a4bb3df60c8792a7f7d30457118581dd"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/hub-wallpaper.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "7e9683940cd650fc0982a3ab7420da9f26886a4915cf46909b413bc583d97c95"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/scene-altar-anime-v2.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "34412a7db8abc818b22ec0fe978a7da3e33f37e6b278354c3b1d6d3424c16b37"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/scene-chest-anime-v2.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "9268311a0b54a8bd57ab712b38de0e7bf11df3b176e6a7823cd2f9220069e7a1"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/scene-chest-boss-anime-v1.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "e57e627e479c1333c529d82a90c9028b1f353dbbb844b1570eb30b8bca754dae"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/scene-chest-class-anime-v1.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "c80eb07434eeefd84e676ce6f5b7effd1ff0149fba29465493e160c254bc3b46"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/scene-chest-large-anime-v1.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "bb2690fb65ca45ffb69f169037c37963329e23e107561cf2ba9efd92e696a243"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/scene-chest-medium-anime-v1.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "076bfb71a8fa685220d97382e8e7bd3f562d461e8b333ca9c6cce71d56c976da"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/scene-chest-small-anime-v1.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a224a7a4582a71023e15991f05a72af4b5ae4e5e67f68c3c279cc13e6073eb06"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/scene-door-anime-v2.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "9e6480da46e1dcccab02c4c1b07aff182a50c52714f452f3f0563ebbbbef820c"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/scene-extract-anime-v2.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "fdf1371ccbc4a92a685db5d5977f978985bedde6d0ec8dce3e28458ca3df129f"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/scene-fire-anime-v2.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "334e0790e167c97c0815e0ff73084f82381095aa4f857662ec3fd5d135332e82"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/scene-pickup-coin-anime-v2.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "826e666d8fce707a17a0975e99dfc023535cbd9d2dad75e9097e84b3b2d9b202"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/scene-pickup-key-anime-v2.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6d61c038c86c891113f0c6e9afb1522566e998c0cc7ce83f59ce414e2d9eaa41"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/scene-pickup-rations-anime-v2.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "5f00c91316c15b57bb6d1229fa55a8e03eff07aedbd7b49cff21b6241783e47b"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/scene-pickup-wood-anime-v2.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "b2bbff4cb5807a595efdb1debc8668622c5a462fb3753dae053f448b749f0b18"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/scene-shop-anime-v2.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "9916264f19270e17e3d52e71ba041663d1894865b44092877f2280f3a45d504d"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/winter-expedition/core.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "c8f68bd0f684d3e58049d8094e1b5f81e81083afec676f977a0e61e4ec3209ed"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/winter-expedition/greenhouse.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "72b68ac7ea21e9bc1c171222cae11fc6b1216fdacd8ff2fe5ee5a6547c1c594a"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/winter-expedition/outskirts.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "5b5f16de8da524320a5195a097a1f2a14b31ddfaad57f8b5dc0c43adece7338b"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/winter-expedition/sanctuary.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "fee0d02e5ca87b6547888a029d299ef7beffab580508dfd8a87213305268745b"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/scenes/winter-expedition/supply-room.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6359747fe078efab8720becc2fd0b4dd1967e410ac7881c85c86963d445c5b2b"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "ui/beginner-guide/battle.svg",
+      "detail": "registered=2975; actual=2974",
+      "fingerprint": "f3aebc1ee8da49c5757dd6da6b9b5d8fd6d384bd4d718a5e73310ad88ce32841"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "ui/beginner-guide/battle.svg",
+      "detail": "registered hash differs from file",
+      "fingerprint": "091af5070a0742b7a87516511ffc6497bd0231f6aa323d61671b4fd335da2968"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "ui/beginner-guide/extract.svg",
+      "detail": "registered=2673; actual=2672",
+      "fingerprint": "aefb10af50951ba061156eaed566f02c58bab86c609be978bb59f4bc274c17e4"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "ui/beginner-guide/extract.svg",
+      "detail": "registered hash differs from file",
+      "fingerprint": "93187bd1703b69f10b6d4a53e6c91029646ca5f268d9670a8946f32677dacacc"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "ui/beginner-guide/growth.svg",
+      "detail": "registered=2704; actual=2703",
+      "fingerprint": "5f7d6bfb427f76349442d1aaad24de0d353e0c30167c1284b2f50a4119ae2c90"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "ui/beginner-guide/growth.svg",
+      "detail": "registered hash differs from file",
+      "fingerprint": "16391a5e75ea6fbc722c33b5b8949d2b63928739362e529c830f65b11476f578"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "ui/beginner-guide/loot.svg",
+      "detail": "registered=3203; actual=3202",
+      "fingerprint": "a1802099076b866ed5d62b021edcf8b95b6864f65618fc08a961b97170411f63"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "ui/beginner-guide/loot.svg",
+      "detail": "registered hash differs from file",
+      "fingerprint": "3e5b7782aadfc027d24f3f73b6b52a6f0e2b8642cd5e481d3bc4dd6213012d04"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "ui/beginner-guide/map.svg",
+      "detail": "registered=2928; actual=2926",
+      "fingerprint": "1ffdfc64b53aaea4bca4bb2192714c829ff40874fcd2699f89230fda3897519d"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "ui/beginner-guide/map.svg",
+      "detail": "registered hash differs from file",
+      "fingerprint": "4f89f076b62fa4ca4295f9a9c043a85330ce532ec7a9b234cadb80bbfe1eebc2"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "ui/beginner-guide/prepare.svg",
+      "detail": "registered=3367; actual=3366",
+      "fingerprint": "f33e38890fead0707138116cdc4c8a0f5978f6ec2eecbe91b450dd27419cddeb"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "ui/beginner-guide/prepare.svg",
+      "detail": "registered hash differs from file",
+      "fingerprint": "ee53e0754b4a112c06df77724f4d48bff46cfa0fb4fd60b2d2af0d49d65b03d4"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/home-v2/achievement-handpainted-v3.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "2a1914769b3d8d785d5e946b0f94725d67fefff4f4aacc5c8fb93738c45c7d25"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/home-v2/camera-handpainted-v3.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "dbb2cd32a6779a14b1a8b7f971d9c41d54ba0ba9b22644e39b1136c8a576979a"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/home-v2/camera.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "097accd353f079e2786842b9c30555a58f1fa14bfb85ae998c42dc4543d8144b"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/home-v2/expedition-handpainted-v3.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "27a79727cc1e157d1c2c2a337cd87fb1733b69afd58f605911304e408e68cb22"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/home-v2/expedition-sigil.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "26ca10c95779586359c0d34e46efd652ef3bd77655a454b21030199027b0da6e"
+    }
+  ],
+  "warnings": 815,
+  "scope": [
+    "cards/hero-sacredrain.webp",
+    "thumbs/cards/hero-sacredrain.webp"
+  ],
+  "scopedErrors": [],
+  "scopedOk": true,
+  "outOfScopeErrorCount": 318
+}

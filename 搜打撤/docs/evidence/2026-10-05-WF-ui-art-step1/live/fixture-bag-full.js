@@ -1,0 +1,1 @@
+(async()=>{const q=window.__uiArtQA;q.reset();const list=window.SDT.Cards.all().filter(c=>['武术','法术'].includes(c.type)).slice(0,16);q.game.ownedCards=list.map(c=>({uid:q.session.newUid(),card:{...c},safe:false,sellable:false}));const m=await import('/src/hub/game.bag.js');m.showBackpack();return JSON.stringify({distinctCards:list.length});})()

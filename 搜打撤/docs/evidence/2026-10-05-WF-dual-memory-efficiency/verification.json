@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-05",
+  "head": "425d03920e",
+  "trackingUpstream": "53\t0",
+  "fetched": false,
+  "queryRuns": [
+    {
+      "source": "codex",
+      "query": "task.json",
+      "seconds": 0.149,
+      "matches": 1,
+      "status": "matched"
+    },
+    {
+      "source": "zcode",
+      "query": "任务启动",
+      "seconds": 0.084,
+      "matches": 1,
+      "status": "matched"
+    },
+    {
+      "source": "both",
+      "query": "workflow task",
+      "seconds": 0.086,
+      "matches": 2,
+      "status": "matched"
+    }
+  ],
+  "externalRuleMemoryFiles": [
+    {
+      "path": "C:\\Users\\太平\\.codex\\AGENTS.md",
+      "bytes": 1968,
+      "sha256": "926AA2E0E0EFF6479E7BE248E2D40895B63982E40D9578B149382977EFF10F29"
+    },
+    {
+      "path": "C:\\Users\\太平\\.codex\\memories\\memory_summary.md",
+      "bytes": 7728,
+      "sha256": "FD8B18AA24F2AAFDB2E5EF82ECEA3528B08FA9C91D316FECDD23936C9DB2C731"
+    },
+    {
+      "path": "C:\\Users\\太平\\.codex\\memories\\MEMORY.md",
+      "bytes": 180844,
+      "sha256": "0E5EAAE361D175A64BFC24BB78904C1EBE54046E4431CEB39FDC8C3C8ACB7157"
+    },
+    {
+      "path": "C:\\Users\\太平\\.zcode\\AGENTS.md",
+      "bytes": 4239,
+      "sha256": "C414DC2CAE4F34FC2C4B727973ECAF079360E863BFD7D399435A515694AE335F"
+    },
+    {
+      "path": "C:\\Users\\太平\\.zcode\\cli\\memories\\projects\\project-9f3e184c77472436\\memory\\MEMORY.md",
+      "bytes": 2402,
+      "sha256": "A3784B828C4FCAA1D43D17761431FA08D4E5654C8F0C01761F6120A746DE9522"
+    },
+    {
+      "path": "C:\\Users\\太平\\.zcode\\cli\\memories\\projects\\project-9f3e184c77472436\\memory\\TOPICS.md",
+      "bytes": 12249,
+      "sha256": "EDF720FB0BEBD2AFC7C582B68432C0DEC57342BB1774F40DDE951B52B1EEA1F3"
+    },
+    {
+      "path": "C:\\Users\\太平\\.zcode\\cli\\memories\\projects\\project-9f3e184c77472436\\memory\\task-startup-10s.md",
+      "bytes": 1955,
+      "sha256": "2F8138F9595582100063DBEF0B9F496045C00D459761316F90A9CF765552A359"
+    },
+    {
+      "path": "C:\\Users\\太平\\.zcode\\cli\\memories\\projects\\project-9f3e184c77472436\\memory\\ask-when-unsure.md",
+      "bytes": 2093,
+      "sha256": "81B8B807B68D89B3F40EC1DC9CA1E37CF9CFA86A484ED7C10AA4C902E1F64EB0"
+    }
+  ],
+  "testFiles": 7,
+  "tests": 131,
+  "testReport": "2026-10-05T03-22-46.843Z-95bd1d70.json",
+  "status": "complete-uncommitted",
+  "runtimeLimit": "ZCode模型会话与自动重载未验证"
+}

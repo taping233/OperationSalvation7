@@ -1,0 +1,13 @@
+{
+  "platform": "Codex In-app Browser",
+  "url": "http://127.0.0.1:5200/music-demo.html",
+  "window": "current default window; no viewport overrides",
+  "decoded": [
+    {"track": "01-title-frostglass", "frames": 2710588, "sampleRate": 48000, "duration": "56.47058"},
+    {"track": "02-explore-ashline", "frames": 2425263, "sampleRate": 48000, "duration": "50.52631"},
+    {"track": "03-battle-blackpulse", "frames": 2972903, "sampleRate": 48000, "duration": "61.93548"}
+  ],
+  "real_input": "clicked all three audition buttons; observed currently-playing status and previous-track stop status; no page error logs returned",
+  "game_settings": "opened settings and selected original; production title resource inventory empty; HMR removed settings before source-restore selector could match",
+  "limits": ["production title/board/battle scene switching not fully verified", "no subjective auditory quality claim", "no full-period browser loop recording", "subsequent user said first demos were acceptable but insufficient"]
+}

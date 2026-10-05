@@ -1,0 +1,11 @@
+{
+  "id": "12",
+  "slug": "right-hand-grip",
+  "version": 1,
+  "prompt": "ONE individual 2D skeletal-animation sprite component for Wu, not a sheet. Genuine transparent PNG background, zero alpha outside the silhouette, no cast shadow, aura, backdrop, text, numbers or alignment marks. Reference 1 is the confirmed THREE-QUARTER FACING SCREEN RIGHT combat mother pose and proportions; reference 2 is the front identity/style reference. Painterly anime, LOW detail, large opaque angular color blocks, clear hard-edge shadows, economical rough hand-painted marks. Neutral black and gray clothing, cream skin, silver-white hair. Keep original anatomical proportions and camera angle. Paint hidden overlap at the joints so the part can rotate without gaps. Center the component with generous transparent margins, one piece only, not a mannequin or full character. No amputated gore, no wounds; clean game asset joining boundaries. Do not include adjacent body parts, do not invent equipment or accessories. Part 12: ONLY Wu's RIGHT gripping hand for holding the sword in combat reference 1, an anatomically coherent small anime hand viewed from three-quarter side, back of hand visible, wrist attachment at LEFT and clenched fingers curving around an INVISIBLE cylindrical sword handle toward RIGHT. Thumb wraps across fingers, five fingers implied coherently, not six or duplicated. Hand only with a tiny rounded wrist overlap stub. Do NOT draw the sword, any handle, cuff, sleeve, arm, rings or gloves. A natural secure gripping fist with enough inner curve for the separate sword handle to sit behind it, not an open palm or claw. Light cream skin, sparse peach/neutral-gray angular shadows, very low detail hand-painted anime. One single hand only.",
+  "refs": [
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\wu-battle-base-frame000.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\reference.png"
+  ],
+  "tool": "built-in imagegen"
+}

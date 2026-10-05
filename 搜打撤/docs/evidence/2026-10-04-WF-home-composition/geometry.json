@@ -1,0 +1,164 @@
+{
+  "buttons": [
+    {
+      "hit": "mStart",
+      "id": "mStart",
+      "overflow": false,
+      "rect": {
+        "height": 113.89583587646484,
+        "width": 422.3958435058594,
+        "x": 69.11458587646484,
+        "y": 324
+      },
+      "svgVisible": true,
+      "text": "EXPEDITION ARCHIVE\n进入远征档案\n选择档案，启程远征\n01",
+      "withinViewport": true
+    },
+    {
+      "hit": "mGuide",
+      "id": "mGuide",
+      "overflow": false,
+      "rect": {
+        "height": 85,
+        "width": 380.15625,
+        "x": 69.11458587646484,
+        "y": 458.2916870117187
+      },
+      "svgVisible": true,
+      "text": "远征手册\nFIELD MANUAL\n02",
+      "withinViewport": true
+    },
+    {
+      "hit": "mAch",
+      "id": "mAch",
+      "overflow": false,
+      "rect": {
+        "height": 73.09375,
+        "width": 294.3958435058594,
+        "x": 916.4896240234376,
+        "y": 259.19793701171875
+      },
+      "svgVisible": true,
+      "text": "成就总览\nACHIEVEMENTS\n0/26",
+      "withinViewport": true
+    },
+    {
+      "hit": "btnCardLib",
+      "id": "btnCardLib",
+      "overflow": false,
+      "rect": {
+        "height": 73.09375,
+        "width": 294.3958435058594,
+        "x": 916.4896240234376,
+        "y": 348.4375
+      },
+      "svgVisible": true,
+      "text": "照相馆\nPHOTO STUDIO\n03",
+      "withinViewport": true
+    },
+    {
+      "hit": "mSettings",
+      "id": "mSettings",
+      "overflow": false,
+      "rect": {
+        "height": 73.09375,
+        "width": 294.3958435058594,
+        "x": 916.4896240234376,
+        "y": 437.6770935058594
+      },
+      "svgVisible": true,
+      "text": "设置\nSETTINGS\n04",
+      "withinViewport": true
+    },
+    {
+      "hit": "btnTitleExit",
+      "id": "btnTitleExit",
+      "overflow": false,
+      "rect": {
+        "height": 73.09375,
+        "width": 294.3958435058594,
+        "x": 916.4896240234376,
+        "y": 526.9166870117188
+      },
+      "svgVisible": true,
+      "text": "退出游戏\nEXIT GAME\n05",
+      "withinViewport": true
+    },
+    {
+      "hit": "btnTitleMute",
+      "id": "btnTitleMute",
+      "overflow": false,
+      "rect": {
+        "height": 39.09375,
+        "width": 39.09375,
+        "x": 69.11458587646484,
+        "y": 623.3125
+      },
+      "svgVisible": true,
+      "text": "",
+      "withinViewport": true
+    },
+    {
+      "hit": "mInbox",
+      "id": "mInbox",
+      "overflow": false,
+      "rect": {
+        "height": 39.09375,
+        "width": 98.20833587646484,
+        "x": 116.70833587646484,
+        "y": 623.3125
+      },
+      "svgVisible": true,
+      "text": "留言信箱",
+      "withinViewport": true
+    }
+  ],
+  "oldQuotePresent": false,
+  "stylesheets": [
+    "http://127.0.0.1:5200/css/base.css",
+    "http://127.0.0.1:5200/css/cards.css",
+    "http://127.0.0.1:5200/css/overlays.css",
+    "http://127.0.0.1:5200/css/hub.css",
+    "http://127.0.0.1:5200/css/battle.css",
+    "http://127.0.0.1:5200/css/scenes.css",
+    "http://127.0.0.1:5200/css/lab-ending.css",
+    "http://127.0.0.1:5200/css/winter.css",
+    "http://127.0.0.1:5200/css/expedition.css",
+    "http://127.0.0.1:5200/css/expedition-map.css",
+    "http://127.0.0.1:5200/css/expedition-hub.css",
+    "http://127.0.0.1:5200/css/expedition-inventory.css",
+    "http://127.0.0.1:5200/css/expedition-rewards.css",
+    "http://127.0.0.1:5200/css/expedition-battle.css",
+    "http://127.0.0.1:5200/css/expedition-library.css",
+    "http://127.0.0.1:5200/css/photo-studio-mounts.css",
+    "http://127.0.0.1:5200/css/photo-studio-craft.css",
+    "http://127.0.0.1:5200/css/card-v3.css",
+    "http://127.0.0.1:5200/css/expedition-roster.css",
+    "http://127.0.0.1:5200/css/expedition-shop.css",
+    "http://127.0.0.1:5200/css/ui-scale.css?t=1791115072819",
+    "http://127.0.0.1:5200/css/page-slot-select.css",
+    "http://127.0.0.1:5200/css/page-hub.css",
+    "http://127.0.0.1:5200/css/page-deploy.css",
+    "http://127.0.0.1:5200/css/page-classes.css",
+    "http://127.0.0.1:5200/css/page-stash.css",
+    "http://127.0.0.1:5200/css/page-shop.css",
+    "http://127.0.0.1:5200/css/page-upgrade.css",
+    "http://127.0.0.1:5200/css/page-settings.css",
+    "http://127.0.0.1:5200/css/page-datapage.css",
+    "http://127.0.0.1:5200/css/page-cardslib.css",
+    "http://127.0.0.1:5200/css/page-ach.css",
+    "http://127.0.0.1:5200/css/page-cardforge.css",
+    "http://127.0.0.1:5200/css/page-expedition-hud.css",
+    "http://127.0.0.1:5200/css/pocket-strip.css",
+    "http://127.0.0.1:5200/css/experience-loot.css",
+    "http://127.0.0.1:5200/css/page-events.css",
+    "http://127.0.0.1:5200/css/page-rewards-bag-help.css",
+    "http://127.0.0.1:5200/css/page-battle-ui.css",
+    "http://127.0.0.1:5200/css/character-idle.css",
+    "http://127.0.0.1:5200/css/motion-transitions.css"
+  ],
+  "viewport": {
+    "height": 720,
+    "width": 1280
+  }
+}

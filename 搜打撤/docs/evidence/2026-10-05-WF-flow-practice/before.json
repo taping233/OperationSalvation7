@@ -1,0 +1,87 @@
+{
+  "phase": "before",
+  "startedAt": "2026-10-05T03:33:26.572Z",
+  "experiments": [
+    {
+      "name": "documented-task-start",
+      "command": [
+        "scripts/workflow.mjs",
+        "task",
+        "start",
+        "--task",
+        "WF-example",
+        "--owner",
+        "Friday",
+        "--goal",
+        "修正任务工具及其说明",
+        "--paths",
+        "scripts/workflow-task.mjs,tests/workflow-task.test.js,docs/WORKFLOW-TOOLS.md",
+        "--done-when",
+        "相关契约测试通过",
+        "--done-when",
+        "说明与实际接口一致",
+        "--stage",
+        "doing",
+        "--json",
+        "--date",
+        "2026-10-05"
+      ],
+      "cwd": "docs/evidence/2026-10-05-WF-flow-practice/fixture-before",
+      "ms": 73,
+      "exitCode": 0,
+      "stdout": "{\"ok\":true,\"file\":\"docs/evidence/2026-10-05-WF-example/task.json\",\"action\":\"start\",\"expectedSha256\":\"absent\",\"before\":null,\"task\":{\"schemaVersion\":1,\"id\":\"WF-example\",\"date\":\"2026-10-05\",\"owner\":\"Friday\",\"goal\":\"修正任务工具及其说明\",\"paths\":[\"scripts/workflow-task.mjs\",\"tests/workflow-task.test.js\",\"docs/WORKFLOW-TOOLS.md\"],\"doneWhen\":[\"相关契约测试通过\",\"说明与实际接口一致\"],\"stage\":\"doing\",\"checks\":[],\"unverified\":[],\"updatedAt\":\"2026-10-05T03:33:26.643Z\"},\"limits\":[\"预览不写入\",\"仅任务执行记录；不更新 REGISTRY、STATUS 或需求规格\",\"手工声明不是独立验收；报告结果未核对当前 freshness\"],\"dryRun\":true,\"bytes\":437}\n",
+      "stderr": ""
+    },
+    {
+      "name": "documented-task-close-preview",
+      "command": [
+        "scripts/workflow.mjs",
+        "task",
+        "close",
+        "--task",
+        "WF-example",
+        "--owner",
+        "Friday",
+        "--stage",
+        "complete-uncommitted",
+        "--done-when-confirmed",
+        "--check",
+        "manual:passed:已核对相关契约测试输出与说明接口",
+        "--unverified",
+        "远端CI未覆盖本轮未推送改动",
+        "--json",
+        "--date",
+        "2026-10-05"
+      ],
+      "cwd": "docs/evidence/2026-10-05-WF-flow-practice/fixture-before",
+      "ms": 66,
+      "exitCode": 1,
+      "stdout": "{\"ok\":false,\"error\":\"任务不存在，请先 start\"}\n",
+      "stderr": ""
+    },
+    {
+      "name": "docs-check",
+      "command": [
+        "scripts/workflow.mjs",
+        "docs",
+        "--json"
+      ],
+      "cwd": "",
+      "ms": 128,
+      "exitCode": 0,
+      "stdout": "{\"ok\":true,\"schemaVersion\":1,\"root\":\"D:\\\\素材\\\\代号柒\\\\搜打撤\",\"scannedFiles\":[\"../AGENTS.md\",\"README.md\",\"docs/AGENT-TOOLBOX.md\",\"docs/BASE-DIRECT-WRITE-AUDIT-2026-09-29.md\",\"docs/DEBT-CAMPAIGN-2026-10.md\",\"docs/DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md\",\"docs/M-BATCH-EXCLUSIONS.md\",\"docs/M-BATCH-MATRIX.md\",\"docs/PARALLEL-DISPATCH-PLAYBOOK.md\",\"docs/PARALLEL-REGISTRY.md\",\"docs/PENDING.md\",\"docs/PERF-LEDGER-2026-09-29.md\",\"docs/PHOTOLIB-PERF-TASK-2026-09-29.md\",\"docs/QUICKSTART.md\",\"docs/README.md\",\"docs/STATUS.md\",\"docs/UI-ART-OVERHAUL-GUIDE.md\",\"docs/UI-TOKEN-SYSTEM-PROPOSAL.md\",\"docs/WORKFLOW-TOOLS.md\",\"docs/agent-iteration-playbook.md\",\"docs/agent-protocol.md\",\"docs/architecture.md\",\"docs/asset-audit-debt.md\",\"docs/audio-system.md\",\"docs/changelog.md\",\"docs/class-consolidation.md\",\"docs/design.md\",\"docs/development.md\",\"docs/game-compendium.md\",\"docs/performance.md\",\"docs/production/README.md\",\"docs/production/art/VISUAL-BIBLE.md\",\"docs/production/design/GDD.md\",\"docs/production/engineering/AGENT-EXPERIMENTS.md\",\"docs/production/engineering/CODE-DATA-WORKFLOW.md\",\"docs/production/engineering/MAKER-HANDBOOK.md\",\"docs/production/management/DECISIONS.md\",\"docs/production/management/ITERATION-BOARD.md\",\"docs/production/management/NEXT-CYCLE-TECH-PLAN.md\",\"docs/production/project/CHARTER.md\",\"docs/production/qa/ACCEPTANCE-MATRIX.md\",\"docs/quality-gates.md\",\"docs/roadmap.md\",\"docs/rules.md\",\"docs/save-format.md\",\"docs/terminology.md\"],\"checkedRelativeLinks\":343,\"findings\":[],\"reviewRequired\":false,\"limits\":[\"只扫描 docs 根层、production、项目 README/AGENTS 与仓库 AGENTS\",\"跳过 archive/evidence/previews/modules 与代码块\",\"链接仅检查文件可达，不验证标题锚点、运行素材或外部网址\",\"模式命中只作人工复核候选，不证明全项目语义一致\",\"口径真源检测只提示收敛候选，不阻断也不自动改写\",\"无自动写入、移动、删除、提交\"]}\n",
+      "stderr": ""
+    }
+  ],
+  "startup": {
+    "command": "npm run dev",
+    "expected": "npm run web",
+    "matches": false,
+    "webDefault": {
+      "port": 5200,
+      "compile": true
+    },
+    "boundary": "只解析现有入口；未启停服务或核验游戏实页"
+  },
+  "endedAt": "2026-10-05T03:33:26.845Z"
+}

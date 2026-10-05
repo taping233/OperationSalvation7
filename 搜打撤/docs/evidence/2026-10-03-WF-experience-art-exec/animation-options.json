@@ -1,0 +1,413 @@
+{
+  "owner": "A4 animation read-only by results_data",
+  "status": "implemented-targeted-verified-live-pending",
+  "assets": [
+    {
+      "role": "baita",
+      "frame": "atk-hit-1",
+      "bytes": 49416,
+      "sha256": "804e4c49abd81b6780d33cf24494e78281221ec99da6cf6de43fbb97cc67f7fe"
+    },
+    {
+      "role": "baita",
+      "frame": "atk-hit",
+      "bytes": 49398,
+      "sha256": "5d1825a9868bc4cc96b844905b8cb185cc53e7a84b9594231e57b412c68d394d"
+    },
+    {
+      "role": "baita",
+      "frame": "atk-wind-1",
+      "bytes": 46318,
+      "sha256": "6bef546a844a8bd6e8275ce6149901f00abc2592b86adb20aae246a0788617f3"
+    },
+    {
+      "role": "baita",
+      "frame": "atk-wind",
+      "bytes": 45360,
+      "sha256": "a5565427df3a42ede7250571fd82a4668b75885be9838a13c64c39774cefcc57"
+    },
+    {
+      "role": "baita",
+      "frame": "cast-1",
+      "bytes": 46318,
+      "sha256": "6bef546a844a8bd6e8275ce6149901f00abc2592b86adb20aae246a0788617f3"
+    },
+    {
+      "role": "baita",
+      "frame": "cast-2",
+      "bytes": 45378,
+      "sha256": "d6ce31eb233e0ed07fa023786fa83097806957437697f630f5b1438fefa8ab9d"
+    },
+    {
+      "role": "baita",
+      "frame": "cast-3",
+      "bytes": 49398,
+      "sha256": "5d1825a9868bc4cc96b844905b8cb185cc53e7a84b9594231e57b412c68d394d"
+    },
+    {
+      "role": "baita",
+      "frame": "cast-4",
+      "bytes": 49416,
+      "sha256": "804e4c49abd81b6780d33cf24494e78281221ec99da6cf6de43fbb97cc67f7fe"
+    },
+    {
+      "role": "baita",
+      "frame": "cast-5",
+      "bytes": 43210,
+      "sha256": "a0f74157eb834cd750c61ce394247fbd4b2d74a1b80883697ae2a91ebcc80a3f"
+    },
+    {
+      "role": "baita",
+      "frame": "cast",
+      "bytes": 45360,
+      "sha256": "a5565427df3a42ede7250571fd82a4668b75885be9838a13c64c39774cefcc57"
+    },
+    {
+      "role": "baita",
+      "frame": "hurt-1",
+      "bytes": 46014,
+      "sha256": "2d79440fd30261729f001b75f4c07753b191087a3f414e60f008cbf276a4d38b"
+    },
+    {
+      "role": "baita",
+      "frame": "hurt",
+      "bytes": 46014,
+      "sha256": "2d79440fd30261729f001b75f4c07753b191087a3f414e60f008cbf276a4d38b"
+    },
+    {
+      "role": "baita",
+      "frame": "idle-1",
+      "bytes": 39744,
+      "sha256": "102fa5876ccae4a2cd0eb54f1452044b2a408298ffefdb75da4e9b2f92b3873e"
+    },
+    {
+      "role": "baita",
+      "frame": "idle-breathe",
+      "bytes": 39744,
+      "sha256": "102fa5876ccae4a2cd0eb54f1452044b2a408298ffefdb75da4e9b2f92b3873e"
+    },
+    {
+      "role": "baita",
+      "frame": "idle",
+      "bytes": 39906,
+      "sha256": "95f72c8e282d109e51c654ccfb4bdc0b82ebfe049bf8aef8c33ed74074b2f00f"
+    },
+    {
+      "role": "changwuyu",
+      "frame": "atk-hit-1",
+      "bytes": 51546,
+      "sha256": "2c382c2dcefedb715358a6026d598c971494dec1cfe3860fdbb700c5ea19a131"
+    },
+    {
+      "role": "changwuyu",
+      "frame": "atk-hit",
+      "bytes": 52416,
+      "sha256": "c613b5e85ea46fc74650a12669100f6a1c94a9fa219201dde5fab9dde6bdce80"
+    },
+    {
+      "role": "changwuyu",
+      "frame": "atk-wind-1",
+      "bytes": 57014,
+      "sha256": "dbc3ad24358832d4889e40cb821d73700c4194b0b724ba5f9e2d9b3e0359f305"
+    },
+    {
+      "role": "changwuyu",
+      "frame": "atk-wind",
+      "bytes": 57014,
+      "sha256": "dbc3ad24358832d4889e40cb821d73700c4194b0b724ba5f9e2d9b3e0359f305"
+    },
+    {
+      "role": "changwuyu",
+      "frame": "cast-1",
+      "bytes": 54364,
+      "sha256": "29f89ea39d35de8c089f21f5a1d664157258d330cb95ecb9af0562ed9d5a8fd2"
+    },
+    {
+      "role": "changwuyu",
+      "frame": "cast-2",
+      "bytes": 51282,
+      "sha256": "def6d953511dd3f166736a93ea452312f838557f8e04b848a60869c095f0701b"
+    },
+    {
+      "role": "changwuyu",
+      "frame": "cast",
+      "bytes": 54366,
+      "sha256": "cb189e4934f74c91334b733490e9f5455a3a1466dbc2e55eba74ecc24429c474"
+    },
+    {
+      "role": "changwuyu",
+      "frame": "hurt-1",
+      "bytes": 50092,
+      "sha256": "4341e4c9e6dc662635f3f5fdb8f1806b441ec719c2f7d1cd19e742349ceb3380"
+    },
+    {
+      "role": "changwuyu",
+      "frame": "hurt",
+      "bytes": 50092,
+      "sha256": "4341e4c9e6dc662635f3f5fdb8f1806b441ec719c2f7d1cd19e742349ceb3380"
+    },
+    {
+      "role": "changwuyu",
+      "frame": "idle-1",
+      "bytes": 44474,
+      "sha256": "c6b00ef708cd38eef1a356b8d3e9b39764aa01ae6f27e788eea2658b6097b689"
+    },
+    {
+      "role": "changwuyu",
+      "frame": "idle-breathe",
+      "bytes": 44474,
+      "sha256": "c6b00ef708cd38eef1a356b8d3e9b39764aa01ae6f27e788eea2658b6097b689"
+    },
+    {
+      "role": "changwuyu",
+      "frame": "idle",
+      "bytes": 44826,
+      "sha256": "2748e1c37db768944aaf66eb4e85135969ecf3e191fcb444d2d0c2751d375c3e"
+    },
+    {
+      "role": "wu",
+      "frame": "atk-hit-1",
+      "bytes": 61574,
+      "sha256": "9fff76805caf90a0609dd61ccaf7ec08208eee84a890774e3e515651adcd6248"
+    },
+    {
+      "role": "wu",
+      "frame": "atk-hit",
+      "bytes": 57444,
+      "sha256": "0f78de0055550c19cc6c2d8338344cd8e3da25ae1064ef058fddcc536af83e61"
+    },
+    {
+      "role": "wu",
+      "frame": "atk-wind-1",
+      "bytes": 57484,
+      "sha256": "77fee63a7670a136800786da55d76d111e34530565efdb7e392cf0289372fb53"
+    },
+    {
+      "role": "wu",
+      "frame": "atk-wind-2",
+      "bytes": 63240,
+      "sha256": "84d7d870874f8d5061367c44706fefeca0c2a0215578221825831a95929255cb"
+    },
+    {
+      "role": "wu",
+      "frame": "atk-wind",
+      "bytes": 55804,
+      "sha256": "3efd3c2ca05a8ec170e06c6d93d2120bb8c99bf751482cf3a0fd374243b2b25e"
+    },
+    {
+      "role": "wu",
+      "frame": "cast-1",
+      "bytes": 62366,
+      "sha256": "e63de959c4de2d21352a5e14f110f36780578cd6d41362274e15b854b2e44df1"
+    },
+    {
+      "role": "wu",
+      "frame": "cast",
+      "bytes": 62366,
+      "sha256": "e63de959c4de2d21352a5e14f110f36780578cd6d41362274e15b854b2e44df1"
+    },
+    {
+      "role": "wu",
+      "frame": "hurt-1",
+      "bytes": 47084,
+      "sha256": "cf707b3a0dacdc53cfe76d6471dd0a9d299ece149558c85285a28fbae6fc4650"
+    },
+    {
+      "role": "wu",
+      "frame": "hurt",
+      "bytes": 47084,
+      "sha256": "cf707b3a0dacdc53cfe76d6471dd0a9d299ece149558c85285a28fbae6fc4650"
+    },
+    {
+      "role": "wu",
+      "frame": "idle-1",
+      "bytes": 51082,
+      "sha256": "8fde65d9a80232668378ce45744e582b400411c9506a02859a7c32617dc5f11e"
+    },
+    {
+      "role": "wu",
+      "frame": "idle-breathe",
+      "bytes": 49030,
+      "sha256": "fb6247efbfe3115bcb196f717279a7a0204c2a2da9b961f483238d7fdb763dae"
+    },
+    {
+      "role": "wu",
+      "frame": "idle",
+      "bytes": 51112,
+      "sha256": "719d873ffc760b628e7e131fca7ee946fc131070151605e24d20cd65ce21be2f"
+    }
+  ],
+  "explicitActions": {
+    "wu": {
+      "idle": [
+        "idle",
+        "idle-1",
+        "idle-breathe"
+      ],
+      "atk-wind": [
+        "atk-wind",
+        "atk-wind-1",
+        "atk-wind-2"
+      ],
+      "atk-hit": [
+        "atk-hit",
+        "atk-hit-1"
+      ],
+      "hurt": [
+        "hurt",
+        "hurt-1"
+      ],
+      "cast": [
+        "cast",
+        "cast-1"
+      ]
+    },
+    "changwuyu": {
+      "idle": [
+        "idle",
+        "idle-1",
+        "idle-breathe"
+      ],
+      "atk-wind": [
+        "atk-wind",
+        "atk-wind-1"
+      ],
+      "atk-hit": [
+        "atk-hit",
+        "atk-hit-1"
+      ],
+      "hurt": [
+        "hurt",
+        "hurt-1"
+      ],
+      "cast": [
+        "cast",
+        "cast-1",
+        "cast-2"
+      ]
+    },
+    "baita": {
+      "idle": [
+        "idle",
+        "idle-1",
+        "idle-breathe"
+      ],
+      "atk-wind": [
+        "atk-wind",
+        "atk-wind-1"
+      ],
+      "atk-hit": [
+        "atk-hit",
+        "atk-hit-1"
+      ],
+      "hurt": [
+        "hurt",
+        "hurt-1"
+      ],
+      "cast": [
+        "cast",
+        "cast-1",
+        "cast-2",
+        "cast-3",
+        "cast-4",
+        "cast-5"
+      ]
+    }
+  },
+  "uniqueBytes": {
+    "wu": 10,
+    "changwuyu": 9,
+    "baita": 9
+  },
+  "probeWork": {
+    "currentCandidatesPerRole": 31,
+    "currentBatchLimit": 3,
+    "proposedCandidates": {
+      "wu": 12,
+      "changwuyu": 12,
+      "baita": 15
+    },
+    "removedMissingCandidates": {
+      "wu": 19,
+      "changwuyu": 19,
+      "baita": 16
+    },
+    "note": "每候选启动Assets.load与独立fetch/blob/createImageBitmap alpha测量。明确清单减少不存在路径尝试，HTTP缓存/实际速度/内存峰值未实测。"
+  },
+  "duplicateSlots": [
+    "wu: hurt=hurt-1; cast=cast-1",
+    "changwuyu: idle-1=idle-breathe; hurt=hurt-1; atk-wind=atk-wind-1",
+    "baita: idle-1=idle-breathe; hurt=hurt-1; cast=atk-wind; cast-1=atk-wind-1; cast-3=atk-hit; cast-4=atk-hit-1"
+  ],
+  "minimalPatchProposal": [
+    "battle.frames.js定义冻结本地role→action→有序frame数组，或单独battle.frame-sequences.js仅源码清单；不是asset manifest改写。",
+    "candidateNames(role)用动作定义展开唯一名字，loadSet按LOAD_BATCH=3保序加载，seqs以声明数组过滤成功项；保留重复字节的槽位，不去重时序。",
+    "首补丁只换候选/序列构建；保留SEQ_MS idle2900/atk-wind320/atk-hit280/hurt420/cast800、demoMs、maxFPS30、随机idle相位。",
+    "第二步待属地确认：battle.view.js:601 attachUnitFrames(body,{role: 当前snapshot角色id})，battle.frames.js优先显式role，旧src正则仅兼容回退；不从新资产路径推断角色。实际snapshot字段需在对应源码属地负责人核定。",
+    "黑像/星月目前无帧目录继续静态；新角色资产验过透明/安全距/身份才追加动作清单。v1/v2小样失败不接runtime，静图transform不算补帧。"
+  ],
+  "preserve": [
+    "lifecycle token每个await后和isLiveBattleFigure守卫",
+    "同步隐藏static img与失败恢复，idle缺失卸载部分纹理",
+    "hide清sprite EMPTY、等待releasePromise、evictOtherTextureSets与urls准确卸载",
+    "同角色重render不重置play，单次动作回resumeAfter或idle，缺帧过滤/缺动作跳过",
+    "hidden暂停/clock setPaused/减动效静图/静止rect轮询",
+    "事件仍由anim.view卡牌起飞触发cast/atk，vfx触发hurt，battle.lifecycle session.abort/clearActionSignals与finish结果链原样",
+    "armBattleEndHide首次成功识别有帧角色时才订阅battle:end，避免提前订阅吞核心onBattleEnd回退"
+  ],
+  "exactBoundaries": [
+    "允许候选：game/src/battle/view/battle.frames.js + 新纯动作清单模块 + tests/battle-frames-lifecycle.test.js + 新纯清单测试；需负责人确认才写",
+    "角色显式传入需额外battle.view.js仅601调用点与必要当前角色读取，不碰SYS08 preview/core",
+    "不改battle.lifecycle.js、battle.anim.view.js、battle.vfx.js、battle.clock.js、battle.pace.js规则与事件"
+  ],
+  "tests": [
+    "battle-frames-lifecycle mock仅成功idle.webp/atk-wind.webp，其余reject；当前fixture依赖旧src识别changwuyu",
+    "测试不直接断言31总候选或MAX_PROBE，但断言并行>1且<=3、pending first batch inFlight=3，显式清单仍至少3候选可保留",
+    "卸载partial缺idle、hide后reload、releaseGate阻止新load、同步hide/失败restore、late DOM拒绝必须保留",
+    "新增清单契约：每个声明路径存在，数组顺序idle→idle-1→idle-breathe、动作槽数12/12/15，未知role不load，失败个别帧只过滤不重排；声明并不要求重复槽字节不同",
+    "新增动作时间轴测试才可证明缺帧总时长均分、atk两段顺序、中断resume；当前lifecycle测试没有验证这些",
+    "scripts/perf-ledger-capture.mjs:310消费sdt:battle-frames-role measure名，保留名和frames/ready字段，不用测量调用开销作FPS"
+  ],
+  "incidental": [
+    "battle.frames.play(name)目前无boolean返回，而battle.vfx.js:327期待framesPlayed决定是否DOM受击；这是已有消费契约疑点。未改，若要修需负责人确认vfx/frames精确范围和实际行为证据。"
+  ],
+  "unverified": [
+    "未实页/未FPS/未耗时采样",
+    "未执行测试，纯只读证据",
+    "未批准补丁实现"
+  ],
+  "implementation": {
+    "changedFiles": [
+      "game/src/battle/view/battle.frames.js",
+      "tests/battle-frames-lifecycle.test.js"
+    ],
+    "savedAfter": "主线真实战斗链结束后明确放行",
+    "behaviour": "显式每角色动作数组替代31候选与序列重构；优先data-asset-key=battle-role识别，旧src兼容回退；无帧角色不隐藏原img",
+    "unchanged": [
+      "SEQ_MS",
+      "maxFPS30",
+      "重复帧槽",
+      "LOAD_BATCH3",
+      "battle.view.js",
+      "vfx",
+      "SYS08 core与规则接口",
+      "未新增素材"
+    ],
+    "checks": {
+      "workflowReport": "docs/evidence/2026-10-03-WF-experience-art-exec-A4-frames/2026-10-03T07-43-35.903Z-ae7e7500.json",
+      "result": "2 files / 14 tests passed",
+      "firstFailure": "新增URL文件名断言漏现有?v=0.60.0版本query，改URL.pathname解析后通过",
+      "coverage": [
+        "三角色只请求12/12/15清单内URL且顺序保留",
+        "data-asset-key优先识别新版本URL",
+        "无帧黑像即便旧src为常无欲仍不隐藏",
+        "pending attach离场恢复原图",
+        "原hide卸载/reload/取消/release gate/idle失败兜底/同步隐藏测试保持通过"
+      ]
+    },
+    "unverified": [
+      "修改后当前窗口实页",
+      "实际加载耗时/FPS/内存数值"
+    ]
+  }
+}

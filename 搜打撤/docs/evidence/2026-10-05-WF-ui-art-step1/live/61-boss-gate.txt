@@ -1,0 +1,20 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 1/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 1/16
+		6 container
+			7 button Description: 关闭, ID: ovCloseX
+			8 container
+				9 text FIELD ENCOUNTER 04 / 04
+				10 heading skull 首脑巢穴 · 封印中, Value: 2
+					11 image skull
+					12 text  首脑巢穴 · 封印中
+				13 text 三位首脑被污染祭坛的辐射护盾庇护——先激活祭坛（弃 3 张卡牌），再来挑战
+				14 button 离开 首脑格不消耗——先去激活祭坛，随时回来挑战 ▸
+					15 text 离开
+					16 text 首脑格不消耗——先去激活祭坛，随时回来挑战
+					17 text ▸
+
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/

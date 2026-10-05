@@ -1,0 +1,89 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 2/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 2/16
+		6 container
+			7 text 冬境街区 · 遭遇
+			8 text 第 1 回合
+			9 text 选择目标 Lv.1 · 23/50 · 差 27 点
+			10 text 我方
+			11 container btSelf
+				12 image 黑像
+				13 container
+					14 text 黑像 你
+				15 container
+					16 text 30/30
+				17 container
+					18 image swords
+					19 text  4
+			20 container
+				21 button 联邦射手，按 Enter 确认目标
+					22 container
+						23 image swords
+						24 text  攻击 · 5
+					25 image archer
+					26 text 联邦射手
+					27 image swords
+					28 text 5
+					29 container
+						30 text 3/3
+					31 text 可选目标
+				32 button 联邦射手，按 Enter 确认目标
+					33 container
+						34 image swords
+						35 text  攻击 · 5
+					36 image archer
+					37 text 联邦射手
+					38 image swords
+					39 text 5
+					40 container
+						41 text 3/3
+					42 text 可选目标
+				43 button 联邦射手，按 Enter 确认目标
+					44 container
+						45 image swords
+						46 text  攻击 · 5
+					47 image archer
+					48 text 联邦射手
+					49 image swords
+					50 text 5
+					51 container
+						52 text 3/3
+					53 text 可选目标
+			54 text 敌方意图
+			55 container
+				56 image bolt
+				57 text 2 /2
+			58 button swords 猛击
+				59 image swords
+				60 text  猛击
+			61 container
+				62 checkbox Description: 初始攻击 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					63 container
+						64 text 1
+						65 image 初始攻击
+						66 text 初始攻击
+					67 image swords
+				68 checkbox Description: 神灯 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					69 container
+						70 text 1
+						71 image 神灯
+						72 text 神灯
+					73 image swords
+			74 container 战术操作
+				75 button bag 背包
+					76 image bag
+					77 text  背包
+				78 button runner 撤离（判负）
+					79 image runner
+					80 text  撤离（判负）
+				81 button gear 设置
+					82 image gear
+					83 text  设置
+				84 button skip 结束回合
+					85 image skip
+					86 text  结束回合
+
+The focused UI element is 21 button 联邦射手，按 Enter 确认目标

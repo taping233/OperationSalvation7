@@ -1,0 +1,42 @@
+{
+  "method": "Built-in ImageGen face-reference edit; existing WebP/thumb encoding",
+  "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-377379bc-3f90-4278-8167-4f35d2c48f75.png",
+  "source": {
+    "path": "game/art-source/cards/wu-heavensword-face-v3-20261004.png",
+    "bytes": 1483074,
+    "sha256": "864971234c68ad36976c070629ab25534e4a004dc71fdd8ca94a7621138c0987"
+  },
+  "outputs": [
+    {
+      "path": "game/assets/cards/wu-heavensword.webp",
+      "bytes": 96918,
+      "sha256": "540f14b941fd2b1af9bdd8206355f846fce4395c812f02ce1b16a367a63ab393",
+      "size": [
+        1441,
+        1091
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/cards/wu-heavensword.webp",
+      "bytes": 13388,
+      "sha256": "4714985dfd315ae425fe1728ed9d0fb6cce2b63c7a5208288b226e12e5d772a2",
+      "size": [
+        448,
+        339
+      ]
+    }
+  ],
+  "backups": [
+    {
+      "path": "docs/evidence/2026-10-04-WF-wu-two-swords-rough/originals-before-heaven-v3/full-wu-heavensword.webp",
+      "bytes": 97974,
+      "sha256": "3f8ab89b02281df5072644cf364ae056ffe414cc49250468708a47945c8c38d1"
+    },
+    {
+      "path": "docs/evidence/2026-10-04-WF-wu-two-swords-rough/originals-before-heaven-v3/thumb-wu-heavensword.webp",
+      "bytes": 13280,
+      "sha256": "0dc232f7d161387b83dfa0ede41f5e6d13b02bb075481f0a567b49f921133a1b"
+    }
+  ],
+  "verification": "未测试/资产门/实页"
+}

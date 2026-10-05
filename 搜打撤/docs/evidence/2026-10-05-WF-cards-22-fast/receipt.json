@@ -1,0 +1,1482 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "cc-unmoved",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-b5dcb60c-f622-4380-81d9-49a7c97f1e83.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-cc-unmoved-source.png",
+        "bytes": 1907891,
+        "sha256": "007f3f29545e16218fc522be23a3e007f8e4deda0fb7fa8914097c151b3e3936"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-cc-unmoved-full-before.webp",
+          "bytes": 70502,
+          "sha256": "541b7998a50f349cdf1c04eef6503701c7943ccf7be7a698738e7ea1e70ae68d"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-cc-unmoved-thumb-before.webp",
+          "bytes": 16010,
+          "sha256": "225510e6d504f1fc3864feceeb7569c9b720f5a2b121348b15ef64145e7633c7"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-cc-unmoved.webp",
+          "bytes": 131802,
+          "sha256": "644a916c116f66b712bce3b6e91d5f7b4a961b777ba0bbf5b3079baabdc2cdce",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-cc-unmoved.webp",
+          "bytes": 14528,
+          "sha256": "d76673b8bd0bc7c4fac96d72f8fec2a2007b7f2be665cd40c73f1324aace262e",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "heixiang-cc-unmoved-original-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-cc-unmoved.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 131802,
+            "sha256": "644a916c116f66b712bce3b6e91d5f7b4a961b777ba0bbf5b3079baabdc2cdce",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-cc-unmoved.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 14528,
+            "sha256": "d76673b8bd0bc7c4fac96d72f8fec2a2007b7f2be665cd40c73f1324aace262e",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-marchrush",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-8f6fd55d-3cf0-4ba6-90f6-6f1265940dc8.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-marchrush-source.png",
+        "bytes": 1972457,
+        "sha256": "1d7d758ce0c58a8681a677ea0f7849dfc5d9ebe15712beac3bea43305e325430"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-marchrush-full-before.webp",
+          "bytes": 67810,
+          "sha256": "6f34d3278bb0452088521b9fd03b08869698178a12954cccae2203c8c30d7a9c"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-marchrush-thumb-before.webp",
+          "bytes": 14508,
+          "sha256": "8c9cc4c5fd12700080e5cfc67704c0f752e15b45babb1f6767333935fb196912"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-marchrush.webp",
+          "bytes": 137670,
+          "sha256": "3069f04dd87b888a4bbac0e1a9ef7a39842c249be22b48ff442bcea130566ef1",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-marchrush.webp",
+          "bytes": 15216,
+          "sha256": "71db26afa8628fc6b53c25d948e3cf665994638283dec29968caa9e0c8ff950d",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "heixiang-tt7-marchrush-original-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt7-marchrush.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 137670,
+            "sha256": "3069f04dd87b888a4bbac0e1a9ef7a39842c249be22b48ff442bcea130566ef1",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt7-marchrush.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 15216,
+            "sha256": "71db26afa8628fc6b53c25d948e3cf665994638283dec29968caa9e0c8ff950d",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-bulwark",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-b16dc411-c592-46b6-a3b7-c37a8b37a2b1.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-bulwark-source.png",
+        "bytes": 2133458,
+        "sha256": "53f5fc3dc31f41145d7e48d4b802922d42876ec7caac4d6ca0f62d38727ce62f"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-bulwark-full-before.webp",
+          "bytes": 72140,
+          "sha256": "cf91876faad7356c89e89ccafb00814bdd56dc70e9611ede733b033903004e6d"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-bulwark-thumb-before.webp",
+          "bytes": 15912,
+          "sha256": "06207be6a9cfb83832aeec556a92b4cb844a6363438d0b3957f3b15f98a9ea1e"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-bulwark.webp",
+          "bytes": 172940,
+          "sha256": "e1a9184ac32876d9141d58ce3bc661aa8962b057808f504ce01e9265127f381b",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-bulwark.webp",
+          "bytes": 18574,
+          "sha256": "8ccdc292c9c9abfb3041aac7d72e5c37fb46c1c57971ed051e88caca7c3f46cc",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "heixiang-tt7-bulwark-original-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt7-bulwark.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 172940,
+            "sha256": "e1a9184ac32876d9141d58ce3bc661aa8962b057808f504ce01e9265127f381b",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt7-bulwark.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 18574,
+            "sha256": "8ccdc292c9c9abfb3041aac7d72e5c37fb46c1c57971ed051e88caca7c3f46cc",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-demonbreaker",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-9a7ad6b7-1e3d-43a7-881b-09a64cf961ce.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-demonbreaker-source.png",
+        "bytes": 2092835,
+        "sha256": "90a306997adc2178a059e74dcff2b5b0f8180d0f9096f0a4778e4a88e8679b4b"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-demonbreaker-full-before.webp",
+          "bytes": 102168,
+          "sha256": "d7a459f40a725beef12010cc6203de0c8a9fdeaa70c420b434a3f8934d6b3429"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-demonbreaker-thumb-before.webp",
+          "bytes": 24442,
+          "sha256": "2118a9ef83a441bcc36cf2695fd70b094272191c907447bd824373f205156c4d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-demonbreaker.webp",
+          "bytes": 161890,
+          "sha256": "c43b18024a9b9746d6149be9be8fbc18ce3beca7232cb03567170c51daaadd47",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-demonbreaker.webp",
+          "bytes": 20604,
+          "sha256": "7104a34a851802b985774024155d4841ef2e0e41f3f3d62de7c304df7a9971fd",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "heixiang-tt7-demonbreaker-original-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt7-demonbreaker.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 161890,
+            "sha256": "c43b18024a9b9746d6149be9be8fbc18ce3beca7232cb03567170c51daaadd47",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt7-demonbreaker.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 20604,
+            "sha256": "7104a34a851802b985774024155d4841ef2e0e41f3f3d62de7c304df7a9971fd",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-ironcharge",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-f5be8325-c6ab-4e24-b4ac-a23494101e8b.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-ironcharge-source.png",
+        "bytes": 1813139,
+        "sha256": "3bca03f76253f9423a23d47edc7009747d89714eb62bb897c6b060e2aa0a2e2e"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-ironcharge-full-before.webp",
+          "bytes": 53214,
+          "sha256": "fa17047e30db5f27ec71fd30ad2f60a79c56fabfc3c23c94b75cacc8892e65e1"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-ironcharge-thumb-before.webp",
+          "bytes": 11072,
+          "sha256": "599ccb33f5629753d1b730be46f90fcb762ba14ea73863bbbad85a3067b4186a"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-ironcharge.webp",
+          "bytes": 116256,
+          "sha256": "1ed7125314d23bcb3e35c2ea0d1f1b8b1405b47ceb473784faf90611be042caf",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-ironcharge.webp",
+          "bytes": 12060,
+          "sha256": "47efdb9bc3db19cb5826a1315d1b47c39d573181df75bdb98d991828c44a6c56",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "heixiang-tt7-ironcharge-original-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt7-ironcharge.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 116256,
+            "sha256": "1ed7125314d23bcb3e35c2ea0d1f1b8b1405b47ceb473784faf90611be042caf",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt7-ironcharge.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 12060,
+            "sha256": "47efdb9bc3db19cb5826a1315d1b47c39d573181df75bdb98d991828c44a6c56",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-armup",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-d60402cf-49f7-414a-82cf-d4b8019134ed.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-armup-source.png",
+        "bytes": 1935469,
+        "sha256": "58f3e5e1536477af6a954725c87e04f5227a462decb69377ee4f435034091c5b"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-armup-full-before.webp",
+          "bytes": 91228,
+          "sha256": "747e5ba816f8069527747d95ed733d8be3d781d31c50d522110082ffe65a94a8"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-armup-thumb-before.webp",
+          "bytes": 19146,
+          "sha256": "d9159d0621aa46fcb1c01a1c2b69b1cea498897e528c89df94d022951c065077"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-armup.webp",
+          "bytes": 162914,
+          "sha256": "869752a891dad1bb8074ef50f04849a27c84dfc34dbc1323ca1130b7f2c09d05",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-armup.webp",
+          "bytes": 19050,
+          "sha256": "e45a7111c364dda0e755af37c0430695bc235ca26861c746db4a574f6c8ac22e",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "heixiang-tt7-armup-original-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt7-armup.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 162914,
+            "sha256": "869752a891dad1bb8074ef50f04849a27c84dfc34dbc1323ca1130b7f2c09d05",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt7-armup.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 19050,
+            "sha256": "e45a7111c364dda0e755af37c0430695bc235ca26861c746db4a574f6c8ac22e",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-whirlwind",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-8258609c-27a6-4363-9e89-0af54a1f96d7.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-whirlwind-source.png",
+        "bytes": 1996056,
+        "sha256": "35adf274dcbfa047c24adbe59aec3f90d3bf4124ad0cf2a0461df4f5b62a6e89"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-whirlwind-full-before.webp",
+          "bytes": 72746,
+          "sha256": "7debfb44da3376786eb8e5e553b161cc95f89b39eba6170ffb24a52d37daebd2"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-whirlwind-thumb-before.webp",
+          "bytes": 17598,
+          "sha256": "46f6f5440d4c0d8a54f8391f70cf862de07b611262e36977fab0274561ee03c6"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-whirlwind.webp",
+          "bytes": 149112,
+          "sha256": "eae62f8946c0368b76866ca0291278fa523482e4b43931f9ebd41b729f767d18",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-whirlwind.webp",
+          "bytes": 17962,
+          "sha256": "b136632b1d7574395a49ae45af8b2d6e1d962962751c8fd00d305b8fd09ab30b",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "heixiang-tt7-whirlwind-original-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt7-whirlwind.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 149112,
+            "sha256": "eae62f8946c0368b76866ca0291278fa523482e4b43931f9ebd41b729f767d18",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt7-whirlwind.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 17962,
+            "sha256": "b136632b1d7574395a49ae45af8b2d6e1d962962751c8fd00d305b8fd09ab30b",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-bloodpoison",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-aadb12e1-063b-474a-b913-c1a905e2eded.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-bloodpoison-source.png",
+        "bytes": 1717275,
+        "sha256": "13140d7e9f88db57e86c5ad3c59cd1dc257fabc7971e71b0ddaa3077f15020ee"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-bloodpoison-full-before.webp",
+          "bytes": 59064,
+          "sha256": "9045e34b4b257451ffa90663878b294127675576295add3cafef9bfb4a40a32c"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt7-bloodpoison-thumb-before.webp",
+          "bytes": 13562,
+          "sha256": "9b48c2d798e529d071bb6898ce15d29cc38e7f1e0c0eca6230bd4f7b2e64f191"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-bloodpoison.webp",
+          "bytes": 104450,
+          "sha256": "a33fd10407f47b90fa00e0edf2c3e0ab8dc88572702dbda2f1c2ec5236e4378b",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-bloodpoison.webp",
+          "bytes": 12972,
+          "sha256": "ff86272069a5e864728934ac5a5f38b7a115883ea28539e3516030fd4a4454de",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "heixiang-tt7-bloodpoison-original-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt7-bloodpoison.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 104450,
+            "sha256": "a33fd10407f47b90fa00e0edf2c3e0ab8dc88572702dbda2f1c2ec5236e4378b",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt7-bloodpoison.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 12972,
+            "sha256": "ff86272069a5e864728934ac5a5f38b7a115883ea28539e3516030fd4a4454de",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-fatal-pierce",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-4fe0f845-3057-46a5-ad9b-293692937131.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt3-fatal-pierce-source.png",
+        "bytes": 2078031,
+        "sha256": "014e699d24ddde7f44142de23ed4dd5d0b394b445738753dbbe0368225a3e1ea"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt3-fatal-pierce-full-before.webp",
+          "bytes": 15124,
+          "sha256": "f94b2b95603cf5d369c755abd22b7b5b3e73f5f9c7a7ad4eda34cb1caadd6c28"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt3-fatal-pierce-thumb-before.webp",
+          "bytes": 2154,
+          "sha256": "965807bef3dc0528357d2833d8f1372cdefd94543302cdb492e824f3c99b3007"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-fatal-pierce.webp",
+          "bytes": 162140,
+          "sha256": "01100f3cb80e5b8ae15e39070986d78ea5426e1e91802b3970a871c49de8d921",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-fatal-pierce.webp",
+          "bytes": 26238,
+          "sha256": "4a60d1eec7132c7dd708c22eed1373415a113a36170b2cceb83f35288381d2f5",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt3-fatal-pierce-creative-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt3-fatal-pierce.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 162140,
+            "sha256": "01100f3cb80e5b8ae15e39070986d78ea5426e1e91802b3970a871c49de8d921",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt3-fatal-pierce.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 26238,
+            "sha256": "4a60d1eec7132c7dd708c22eed1373415a113a36170b2cceb83f35288381d2f5",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt2-swiftarrow",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-780f6a75-d7bc-4eec-9476-5c11c60632c2.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt2-swiftarrow-source.png",
+        "bytes": 1923977,
+        "sha256": "dcae25aeb6c739c38351840fc3ec1df09d5a9ed5737071fb5393d2cecc27918b"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt2-swiftarrow-full-before.webp",
+          "bytes": 24114,
+          "sha256": "80c71a1f38bc6b058a3d16657cac68fc3e31c5ce8e8aabca9b21a48af8190de6"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt2-swiftarrow-thumb-before.webp",
+          "bytes": 2536,
+          "sha256": "7ca8c94965c585271db8a8cf221dfddd8e5649e1a5046fa161d5e96131611cdb"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt2-swiftarrow.webp",
+          "bytes": 167046,
+          "sha256": "0b8d28be3f8d3f4281ec65461ff8c229153fc778bb765e190c93d9d39fb526a1",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt2-swiftarrow.webp",
+          "bytes": 26622,
+          "sha256": "3408202e0c252334b8b62f2bb8c2a2ee08dc9377df1b8252b075f4131525f75a",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt2-swiftarrow-creative-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt2-swiftarrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 167046,
+            "sha256": "0b8d28be3f8d3f4281ec65461ff8c229153fc778bb765e190c93d9d39fb526a1",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt2-swiftarrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 26622,
+            "sha256": "3408202e0c252334b8b62f2bb8c2a2ee08dc9377df1b8252b075f4131525f75a",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt2-forestarrow",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-0443a451-d98e-46f1-a7a8-46e0bce2a8d4.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt2-forestarrow-source.png",
+        "bytes": 2094473,
+        "sha256": "0b6769ba5461fbb65ad6ca966e6c93b9688db94208566a7d47ea71204ec66c2d"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt2-forestarrow-full-before.webp",
+          "bytes": 28114,
+          "sha256": "6b00867ec112429b6fa5b66c36856d692399c1f0571460205039fabafa9c07a5"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt2-forestarrow-thumb-before.webp",
+          "bytes": 6380,
+          "sha256": "656168fece9fc9c588ad278d9b4094a8b1369f6496ba01e591d6c41cb5211434"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt2-forestarrow.webp",
+          "bytes": 174508,
+          "sha256": "1151e89ccb6ddca2ea43fc55d196f82ee64980bb5375591896a1db1e3d083a16",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt2-forestarrow.webp",
+          "bytes": 26606,
+          "sha256": "fece2b5cdb9ca3b1492ca701ce65c626106263a9e13879fc9e77f5a2d869ade8",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt2-forestarrow-creative-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt2-forestarrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 174508,
+            "sha256": "1151e89ccb6ddca2ea43fc55d196f82ee64980bb5375591896a1db1e3d083a16",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt2-forestarrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 26606,
+            "sha256": "fece2b5cdb9ca3b1492ca701ce65c626106263a9e13879fc9e77f5a2d869ade8",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-life-arrow",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-34bf946c-d152-4953-8425-8f7b42b192cc.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt3-life-arrow-source.png",
+        "bytes": 1938141,
+        "sha256": "8d0b2bf489bd96abe3c8e9c1422d19838fdc64f13b01e543fccfe668df074b88"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt3-life-arrow-full-before.webp",
+          "bytes": 44952,
+          "sha256": "4457632a27475bf111df3d31575028c51e47cec66f59f7dca955a6d62b11eae9"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt3-life-arrow-thumb-before.webp",
+          "bytes": 10538,
+          "sha256": "e210faca64c803b7d7fc95026f7079af3c6014000828368600032513a0d20f1b"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-life-arrow.webp",
+          "bytes": 138094,
+          "sha256": "2b9f8d40268853ab01f1d56f584f4fc8c9fb87363e7812116f8ef242e815802b",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-life-arrow.webp",
+          "bytes": 22318,
+          "sha256": "8ae02a65fd850268a8228735ee6630cdd762d9e21e8427dd1414bab8b983c265",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt3-life-arrow-creative-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt3-life-arrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 138094,
+            "sha256": "2b9f8d40268853ab01f1d56f584f4fc8c9fb87363e7812116f8ef242e815802b",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt3-life-arrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 22318,
+            "sha256": "8ae02a65fd850268a8228735ee6630cdd762d9e21e8427dd1414bab8b983c265",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt2-block",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-869f12ba-26ea-44dd-9a29-b2681e6b0c71.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt2-block-source.png",
+        "bytes": 2002858,
+        "sha256": "8468681a84ae5ee25d1208f80a8ee99f51482d94e613523c0690fd18f3cbf25f"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt2-block-full-before.webp",
+          "bytes": 75192,
+          "sha256": "611c1ca5b78f204a76a06b382022178ce1bd52bbde2e232ab83279aa71d6563f"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt2-block-thumb-before.webp",
+          "bytes": 13782,
+          "sha256": "99b7128877de2cbc9e32d3194b3284ad55e8c6674ae90406ecbba69a9379452e"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt2-block.webp",
+          "bytes": 163950,
+          "sha256": "03d6b296103cf27f5aaaa57ce80a1e7efd34ca7788b412bd354324b9100332a9",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt2-block.webp",
+          "bytes": 24758,
+          "sha256": "1d58d4cc2dc1ff5c3dc28cccbcad9d23df00e492dc6052d2b60fb32edfa0d2ea",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt2-block-creative-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt2-block.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 163950,
+            "sha256": "03d6b296103cf27f5aaaa57ce80a1e7efd34ca7788b412bd354324b9100332a9",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt2-block.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 24758,
+            "sha256": "1d58d4cc2dc1ff5c3dc28cccbcad9d23df00e492dc6052d2b60fb32edfa0d2ea",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-skewer",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-05cc1232-8335-4e0b-8542-b8dcf1c283e5.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-expedition-starters-pierce-source.png",
+        "bytes": 1819570,
+        "sha256": "22b061ce20e0551650743979d61cf8bf6077d8594820cd65765475fa790ef2eb"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-expedition-starters-pierce-full-before.webp",
+          "bytes": 40170,
+          "sha256": "6a1e9f7f38c183ce15b6f08fffa5b58b599dfe4958f2cb840917a6a196db4ea7"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-expedition-starters-pierce-thumb-before.webp",
+          "bytes": 10524,
+          "sha256": "151de4a901e48eac58024d8db4803a5677e8783e0667bcdae93e711187011d5b"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/expedition-starters/pierce.webp",
+          "bytes": 121476,
+          "sha256": "dc75312d62b6bee3c4618c3696ac72726fc2b51d57fba928a17c3808152a67b2",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/expedition-starters/pierce.webp",
+          "bytes": 20142,
+          "sha256": "dbadf3b72167b868ac0527a7826f6cbc80b26a0f40eda745817e45ec3b2b855f",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt3-skewer-creative-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/expedition-starters/pierce.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 121476,
+            "sha256": "dc75312d62b6bee3c4618c3696ac72726fc2b51d57fba928a17c3808152a67b2",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/expedition-starters/pierce.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 20142,
+            "sha256": "dbadf3b72167b868ac0527a7826f6cbc80b26a0f40eda745817e45ec3b2b855f",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt2-turtlearmor",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-1bfd3889-5dcd-479d-82d8-51202e73cbe4.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt2-turtlearmor-source.png",
+        "bytes": 2155663,
+        "sha256": "ab5817042202452be8de9f7bee1df0a72dec040f77490e0b6ddb5132cf5e2f8d"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt2-turtlearmor-full-before.webp",
+          "bytes": 34692,
+          "sha256": "da6153ba9042a17debedcdae6e6de3839f7ada03cf4db96dbd30b2fbdba7fb7e"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt2-turtlearmor-thumb-before.webp",
+          "bytes": 7786,
+          "sha256": "4f8e4acf20f3383580df264d7b5005e57ea9f7479e1b97bd1a9bc260eb27f993"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt2-turtlearmor.webp",
+          "bytes": 211502,
+          "sha256": "e534489c33dc9b3561cc16d3b22f2914c6021cc51f3181d658c9bc3f63c9bbe3",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt2-turtlearmor.webp",
+          "bytes": 32040,
+          "sha256": "b7288a6c00a71d36c5b198332ee88864dcaa46bfa006330160da4691c185bb61",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt2-turtlearmor-creative-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt2-turtlearmor.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 211502,
+            "sha256": "e534489c33dc9b3561cc16d3b22f2914c6021cc51f3181d658c9bc3f63c9bbe3",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt2-turtlearmor.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 32040,
+            "sha256": "b7288a6c00a71d36c5b198332ee88864dcaa46bfa006330160da4691c185bb61",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3sp-shadowbug",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-7f9247be-ce4b-45f4-9906-f723876957bf.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt3sp-shadowbug-source.png",
+        "bytes": 2219907,
+        "sha256": "1353983046afe6669d24feb90cdd9fc080b1c7f9a2c6eb3a92867cfbf25f8995"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt3sp-shadowbug-full-before.webp",
+          "bytes": 17552,
+          "sha256": "8bee92352c8e5470491d622524a0bdbb82b49b21fab2a80452cd19b9c2735d27"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt3sp-shadowbug-thumb-before.webp",
+          "bytes": 3532,
+          "sha256": "ec81a8780783a2f44b9aa5f9f8788a47df513fe5ea2ae7f764ece6b914ceda9c"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3sp-shadowbug.webp",
+          "bytes": 181108,
+          "sha256": "a8b1c251ae18545ceb04637c16af127191e68727ca67c1168567e02bca52e9d2",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3sp-shadowbug.webp",
+          "bytes": 25196,
+          "sha256": "3d0180f4c069763637158a077caea03450777c4ac3b85b18ee50e3fde02a7e29",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt3sp-shadowbug-creative-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt3sp-shadowbug.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 181108,
+            "sha256": "a8b1c251ae18545ceb04637c16af127191e68727ca67c1168567e02bca52e9d2",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt3sp-shadowbug.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 25196,
+            "sha256": "3d0180f4c069763637158a077caea03450777c4ac3b85b18ee50e3fde02a7e29",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-double-shot",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-000d21ab-f339-4324-847b-e6e161bcf55d.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt3-double-shot-source.png",
+        "bytes": 1825006,
+        "sha256": "f35aa1c7ba1ad7d45aa343674ded8753f5b98feb30434bf331deba8b0c7ec632"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt3-double-shot-full-before.webp",
+          "bytes": 49312,
+          "sha256": "f461cf0c7aecacc50c03ccb5350d26ebcb65d4bd2b4a8b2b4315b2880432e8a7"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt3-double-shot-thumb-before.webp",
+          "bytes": 10590,
+          "sha256": "566a4019608db4f631a8d2f27aede647f96011db4b3223b690aa75b98dc81041"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-double-shot.webp",
+          "bytes": 147256,
+          "sha256": "ac4ef873b155809c1941252a77c51056409ca5f0bb6115957866513f0e374574",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-double-shot.webp",
+          "bytes": 20762,
+          "sha256": "e435ffecf8107875ba9ecc9a873acb2d75ec00d4594714f87c0b99de11380cae",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt3-double-shot-creative-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt3-double-shot.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 147256,
+            "sha256": "ac4ef873b155809c1941252a77c51056409ca5f0bb6115957866513f0e374574",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt3-double-shot.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 20762,
+            "sha256": "e435ffecf8107875ba9ecc9a873acb2d75ec00d4594714f87c0b99de11380cae",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-fly-arrowhawk",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-30651e40-6abe-42c8-92a8-2325228273b1.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt3-fly-arrowhawk-source.png",
+        "bytes": 2174059,
+        "sha256": "ddb08d1e9fda0caaf104141d9d589e6d6a36bb696486eb074208767a7ac0be98"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt3-fly-arrowhawk-full-before.webp",
+          "bytes": 81358,
+          "sha256": "d8589c3e8998cbb03110832b0d13792966362aa39cb794c5a77f0968aaed9767"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt3-fly-arrowhawk-thumb-before.webp",
+          "bytes": 11956,
+          "sha256": "a21ef504942ef57e108ff5b4147df4d5bb48944b98034d8ba57a5b4ee62b0c5b"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-fly-arrowhawk.webp",
+          "bytes": 214682,
+          "sha256": "c1426d37dec54dccd139333b88f2f197134f3c62e66b8c64637dc3040450cfcf",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-fly-arrowhawk.webp",
+          "bytes": 36284,
+          "sha256": "3aba553456c75b081658eed4d01d0689fc9b41dd53f643d7189bda413f4041cb",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt3-fly-arrowhawk-creative-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt3-fly-arrowhawk.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 214682,
+            "sha256": "c1426d37dec54dccd139333b88f2f197134f3c62e66b8c64637dc3040450cfcf",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt3-fly-arrowhawk.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 36284,
+            "sha256": "3aba553456c75b081658eed4d01d0689fc9b41dd53f643d7189bda413f4041cb",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-frostfall",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-faf0bbef-757e-4969-801a-ca27b4d2062a.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt3-frostfall-source.png",
+        "bytes": 2407146,
+        "sha256": "1a708dfc350f13ef213bca0b2a74bd88709d694d45c5769918649703f1c3ffce"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt3-frostfall-full-before.webp",
+          "bytes": 101114,
+          "sha256": "a3692bce669e6e6cd7ebf8cbb2068fa5082d2850e9f21fc2f21b76c52640153f"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-martial-tt3-frostfall-thumb-before.webp",
+          "bytes": 26172,
+          "sha256": "8291656d2ca123d30e900491fbedd34a27ceb36b9e76f897df3ec2d860464646"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-frostfall.webp",
+          "bytes": 268494,
+          "sha256": "14fd2c818ae06a1e1746dac0cba8264ef234a13aca5f3fe6288be43dc821cf5e",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-frostfall.webp",
+          "bytes": 40244,
+          "sha256": "57b3a1fd30a26d97c529971b35c44e8b5beae073dbcb574b6677e365c0a25960",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt3-frostfall-creative-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt3-frostfall.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 268494,
+            "sha256": "14fd2c818ae06a1e1746dac0cba8264ef234a13aca5f3fe6288be43dc821cf5e",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt3-frostfall.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 40244,
+            "sha256": "57b3a1fd30a26d97c529971b35c44e8b5beae073dbcb574b6677e365c0a25960",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-treasure-hunt",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-ec72b6a7-1935-4dd2-aa12-c7ccaa3764ea.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-spell-tt3-treasure-hunt-source.png",
+        "bytes": 1857828,
+        "sha256": "3dcf8d6afaffca3d7644aa401430985cd36b994da8e239ea9615d2611574ab87"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-spell-tt3-treasure-hunt-full-before.webp",
+          "bytes": 26044,
+          "sha256": "01168942c40124e1558d0b66a045c9e9560b80db38b32c5135681fd3f9cb6c7b"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-spell-tt3-treasure-hunt-thumb-before.webp",
+          "bytes": 6998,
+          "sha256": "45fd22c02de72628f973cea394738fee6c02069ab7c72bc5259c8b2aa1d74903"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-treasure-hunt.webp",
+          "bytes": 160758,
+          "sha256": "cbe2b9d59e799127e845cf7cfcefb56f3ab18d3dcf4e9ac4759b90da07097bee",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-treasure-hunt.webp",
+          "bytes": 27388,
+          "sha256": "7ff495ef6fc0fb6c39c946132efb9b34e8ca9e8d6c738894bc1a512603bd5ef2",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt3-treasure-hunt-creative-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt3-treasure-hunt.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 160758,
+            "sha256": "cbe2b9d59e799127e845cf7cfcefb56f3ab18d3dcf4e9ac4759b90da07097bee",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/spell-tt3-treasure-hunt.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 27388,
+            "sha256": "7ff495ef6fc0fb6c39c946132efb9b34e8ca9e8d6c738894bc1a512603bd5ef2",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-grope",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-f5a9b4c7-59d5-40d5-bc4c-c868a69fb30c.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-spell-tt3-grope-source.png",
+        "bytes": 1692558,
+        "sha256": "b41e6349356018d65787f2bd222f8b339899897780c08751a8a365f6d5fd5c50"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-spell-tt3-grope-full-before.webp",
+          "bytes": 47242,
+          "sha256": "dfd833b7dad5ebb30859410f47d489b9884d33d4aad318e1e48c27b624b936a3"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-spell-tt3-grope-thumb-before.webp",
+          "bytes": 11096,
+          "sha256": "0bf042ebfaa6aacdcb7a862497ba7f7066ef08ef3ac77a86d63d3f7a1d5fdbb9"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-grope.webp",
+          "bytes": 92034,
+          "sha256": "b8856034393c74efb97842deba3690f82b5c5aea4a73382bbdfb9e6b531272c2",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-grope.webp",
+          "bytes": 14958,
+          "sha256": "cac1c9df9cb0d9764f278d0685089935a703e0d3d030001fcb9e5c6ecca46198",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt3-grope-creative-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt3-grope.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 92034,
+            "sha256": "b8856034393c74efb97842deba3690f82b5c5aea4a73382bbdfb9e6b531272c2",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/spell-tt3-grope.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 14958,
+            "sha256": "cac1c9df9cb0d9764f278d0685089935a703e0d3d030001fcb9e5c6ecca46198",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-ice-spike",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-62058b1c-6c25-44b8-b03f-d266aa32bc2c.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-spell-tt3-ice-spike-source.png",
+        "bytes": 1843727,
+        "sha256": "23d27cead53e715799e39f2c830aae23fd76d6fcac1111d6c65805dc7ede97ac"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-spell-tt3-ice-spike-full-before.webp",
+          "bytes": 60078,
+          "sha256": "2982099578d5925669cdf6e80d0c72986491719d77bd88bbe2e16c3666fe63cf"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-cards-22-fast/cards-spell-tt3-ice-spike-thumb-before.webp",
+          "bytes": 5660,
+          "sha256": "0340ec16deea0ddde4d4cf1c59685a882554bd19cb47a938be8d9ce305e71843"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-ice-spike.webp",
+          "bytes": 134484,
+          "sha256": "a1afbe4d225fbe54f27aa2eab912c00d860dbed744a0c83026ac34710f8f134e",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-ice-spike.webp",
+          "bytes": 24282,
+          "sha256": "771245639bf0d4862fedd873fc818f3ca1496abeed654decc400745cfd18d35a",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt3-ice-spike-creative-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt3-ice-spike.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 134484,
+            "sha256": "a1afbe4d225fbe54f27aa2eab912c00d860dbed744a0c83026ac34710f8f134e",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/spell-tt3-ice-spike.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 24282,
+            "sha256": "771245639bf0d4862fedd873fc818f3ca1496abeed654decc400745cfd18d35a",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 371,
+  "manifest_count_after": 415
+}

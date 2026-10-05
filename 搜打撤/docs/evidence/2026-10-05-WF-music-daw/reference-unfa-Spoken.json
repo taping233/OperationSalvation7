@@ -1,0 +1,133 @@
+{
+  "project": "demos/unfa-Spoken.mmpz",
+  "sha256": "3a0c2df58349a21fa7aeb9e6c3d521a32200202858df0e904c07bd44f1912032",
+  "head": {
+    "timesig_numerator": "4",
+    "bpm": "140",
+    "timesig_denominator": "4",
+    "mastervol": "100",
+    "masterpitch": "0"
+  },
+  "tracks": [
+    {
+      "name": "Beat/Bassline 0",
+      "type": "1",
+      "patterns": 0,
+      "instrument": null
+    },
+    {
+      "name": "Kick",
+      "type": "0",
+      "patterns": 28,
+      "instrument": {
+        "name": "zynaddsubfx"
+      }
+    },
+    {
+      "name": "Snare",
+      "type": "0",
+      "patterns": 28,
+      "instrument": {
+        "name": "zynaddsubfx"
+      }
+    },
+    {
+      "name": "Hihat",
+      "type": "0",
+      "patterns": 28,
+      "instrument": {
+        "name": "zynaddsubfx"
+      }
+    },
+    {
+      "name": "snare",
+      "type": "0",
+      "patterns": 28,
+      "instrument": {
+        "name": "zynaddsubfx"
+      }
+    },
+    {
+      "name": "kick",
+      "type": "0",
+      "patterns": 28,
+      "instrument": {
+        "name": "zynaddsubfx"
+      }
+    },
+    {
+      "name": "Kick",
+      "type": "0",
+      "patterns": 28,
+      "instrument": {
+        "name": "zynaddsubfx"
+      }
+    },
+    {
+      "name": "Hihat short",
+      "type": "0",
+      "patterns": 28,
+      "instrument": {
+        "name": "zynaddsubfx"
+      }
+    },
+    {
+      "name": "extra snare",
+      "type": "0",
+      "patterns": 28,
+      "instrument": {
+        "name": "zynaddsubfx"
+      }
+    },
+    {
+      "name": "hi hihat",
+      "type": "0",
+      "patterns": 28,
+      "instrument": {
+        "name": "zynaddsubfx"
+      }
+    },
+    {
+      "name": "Hardstyle Kick",
+      "type": "0",
+      "patterns": 28,
+      "instrument": {
+        "name": "zynaddsubfx"
+      }
+    },
+    {
+      "name": "hardstyle bass",
+      "type": "0",
+      "patterns": 28,
+      "instrument": {
+        "name": "zynaddsubfx"
+      }
+    },
+    {
+      "name": "Clone of Beat/Bassline 0",
+      "type": "1",
+      "patterns": 0,
+      "instrument": null
+    },
+    {
+      "name": "Duplikat Clone of Beat/Bassline 0",
+      "type": "1",
+      "patterns": 0,
+      "instrument": null
+    },
+    {
+      "name": "lead",
+      "type": "0",
+      "patterns": 62,
+      "instrument": {
+        "name": "zynaddsubfx"
+      }
+    },
+    {
+      "name": "Automation track",
+      "type": "5",
+      "patterns": 0,
+      "instrument": null
+    }
+  ]
+}

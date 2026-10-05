@@ -1,0 +1,76 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 2/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 2/16
+		6 container
+			7 text 冬境街区 · 遭遇
+			8 text 第 1 回合
+			9 text 选择目标 Lv.1 · 23/50 · 差 27 点
+			10 text 我方
+			11 button Description: 自己，按 Enter 确认目标, ID: btSelf
+				12 image 黑像
+				13 container
+					14 text 黑像 你
+				15 container
+					16 text 30/30
+				17 container
+					18 image swords
+					19 text  4
+				20 text 可选目标
+			21 container
+				22 container
+					23 image swords
+					24 text  攻击 · 5
+				25 image archer
+				26 text 联邦射手
+				27 image swords
+				28 text 5
+				29 container
+					30 text 3/3
+				31 container
+					32 image swords
+					33 text  攻击 · 5
+				34 image archer
+				35 text 联邦射手
+				36 image swords
+				37 text 5
+				38 container
+					39 text 3/3
+			40 text 敌方意图
+			41 container
+				42 image bolt
+				43 text 2 /2
+			44 button swords 猛击
+				45 image swords
+				46 text  猛击
+			47 container
+				48 checkbox Description: 初始攻击 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					49 container
+						50 text 1
+						51 image 初始攻击
+						52 text 初始攻击
+					53 text ×2
+					54 image swords
+				55 checkbox Description: 二刀流 · 1 费。费用 1 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）, Value: 0
+					56 container
+						57 text 1
+						58 image 二刀流
+						59 text 二刀流
+					60 image heart
+			61 container 战术操作
+				62 button bag 背包
+					63 image bag
+					64 text  背包
+				65 button runner 撤离（判负）
+					66 image runner
+					67 text  撤离（判负）
+				68 button gear 设置
+					69 image gear
+					70 text  设置
+				71 button skip 结束回合
+					72 image skip
+					73 text  结束回合
+
+The focused UI element is 11 button Description: 自己，按 Enter 确认目标, ID: btSelf

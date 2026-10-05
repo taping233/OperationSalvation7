@@ -1,0 +1,246 @@
+{
+  "actions": [
+    {
+      "detail": "远征档案→选档→返回；设置→返回（返回工具报deadline，随后AX核实已回标题页）；未创建存档/修改设置",
+      "type": "real-input"
+    },
+    {
+      "detail": "Codex内置浏览器当前窗口，无尺寸覆盖",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "title-heading",
+      "key": "title",
+      "rect": {
+        "height": 228.8125,
+        "width": 382.2083435058594,
+        "x": 61.53125,
+        "y": 152.7916717529297
+      },
+      "selector": "#title .title-heading",
+      "styles": {
+        "color": "rgb(232, 238, 234)",
+        "display": "block",
+        "font-size": "16.5px",
+        "transform": "none"
+      },
+      "tag": "DIV",
+      "text": "THE ASCENSION SOCIETY\n          升格会的冬日猜想\n          于风雪深处，寻回失落的故事。"
+    },
+    {
+      "attributes": {
+        "id": "btnTitleExit"
+      },
+      "identity": "btnTitleExit",
+      "key": "entries",
+      "rect": {
+        "height": 40.79166793823242,
+        "width": 45.89583587646485,
+        "x": 61.53125,
+        "y": 20.39583396911621
+      },
+      "selector": "#title .ak-hud button",
+      "styles": {
+        "color": "rgb(244, 247, 244)",
+        "display": "flex",
+        "font-size": "13.3333px",
+        "transform": "none"
+      },
+      "tag": "BUTTON",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "id": "btnTitleMute"
+      },
+      "identity": "btnTitleMute",
+      "key": "entries",
+      "rect": {
+        "height": 40.79166793823242,
+        "width": 45.89583587646485,
+        "x": 107.42708587646484,
+        "y": 20.39583396911621
+      },
+      "selector": "#title .ak-hud button",
+      "styles": {
+        "color": "rgb(244, 247, 244)",
+        "display": "flex",
+        "font-size": "13.3333px",
+        "transform": "none"
+      },
+      "tag": "BUTTON",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "id": "mGuide"
+      },
+      "identity": "mGuide",
+      "key": "entries",
+      "rect": {
+        "height": 40.79166793823242,
+        "width": 103.44792175292967,
+        "x": 173.7291717529297,
+        "y": 20.39583396911621
+      },
+      "selector": "#title .ak-hud button",
+      "styles": {
+        "color": "rgb(228, 237, 239)",
+        "display": "flex",
+        "font-size": "14px",
+        "transform": "none"
+      },
+      "tag": "BUTTON",
+      "text": "远征手册"
+    },
+    {
+      "attributes": {
+        "id": "mInbox"
+      },
+      "identity": "mInbox",
+      "key": "entries",
+      "rect": {
+        "height": 40.79166793823242,
+        "width": 103.44792175292967,
+        "x": 283.96875,
+        "y": 20.39583396911621
+      },
+      "selector": "#title .ak-hud button",
+      "styles": {
+        "color": "rgb(228, 237, 239)",
+        "display": "flex",
+        "font-size": "14px",
+        "transform": "none"
+      },
+      "tag": "BUTTON",
+      "text": "留言信箱"
+    },
+    {
+      "attributes": {
+        "id": "mAch"
+      },
+      "identity": "mAch",
+      "key": "entries",
+      "rect": {
+        "height": 74.79167175292969,
+        "width": 222.6979217529297,
+        "x": 81.92708587646484,
+        "y": 550.0729370117188
+      },
+      "selector": "#title .ak-hud button",
+      "styles": {
+        "color": "rgb(232, 237, 240)",
+        "display": "grid",
+        "font-size": "13.3333px",
+        "transform": "none"
+      },
+      "tag": "BUTTON",
+      "text": "0/26\n            \n            成就\n            Achievement"
+    },
+    {
+      "attributes": {
+        "id": "btnCardLib"
+      },
+      "identity": "btnCardLib",
+      "key": "entries",
+      "rect": {
+        "height": 74.79167175292969,
+        "width": 222.6979217529297,
+        "x": 61.53125,
+        "y": 435.4791870117187
+      },
+      "selector": "#title .ak-hud button",
+      "styles": {
+        "color": "rgb(232, 237, 240)",
+        "display": "grid",
+        "font-size": "13.3333px",
+        "transform": "none"
+      },
+      "tag": "BUTTON",
+      "text": "照相馆\n            Photo Studio"
+    },
+    {
+      "attributes": {
+        "id": "mSettings"
+      },
+      "identity": "mSettings",
+      "key": "entries",
+      "rect": {
+        "height": 43.34375,
+        "width": 108.79167175292967,
+        "x": 707.0104370117188,
+        "y": 695.15625
+      },
+      "selector": "#title .ak-hud button",
+      "styles": {
+        "color": "rgb(232, 237, 240)",
+        "display": "grid",
+        "font-size": "13.3333px",
+        "transform": "none"
+      },
+      "tag": "BUTTON",
+      "text": "设置\n            Settings"
+    },
+    {
+      "attributes": {
+        "id": "mStart"
+      },
+      "identity": "mStart",
+      "key": "entries",
+      "rect": {
+        "height": 144.5,
+        "width": 280.5,
+        "x": 841.3021240234375,
+        "y": 594.8541870117188
+      },
+      "selector": "#title .ak-hud button",
+      "styles": {
+        "color": "rgb(12, 24, 34)",
+        "display": "flex",
+        "font-size": "13.3333px",
+        "transform": "none"
+      },
+      "tag": "BUTTON",
+      "text": "进入远征档案\n            \n            EXPEDITION ARCHIVE / 选档启程"
+    }
+  ],
+  "observedAt": "2026-10-03T16:30:05.644Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.5,
+      "height": 764,
+      "width": 1183
+    }
+  },
+  "scene": "restored-title",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-04-WF-home-restore/restored.jpg"
+  ],
+  "selectors": [
+    {
+      "key": "title",
+      "selector": "#title .title-heading"
+    },
+    {
+      "key": "entries",
+      "selector": "#title .ak-hud button"
+    }
+  ]
+}

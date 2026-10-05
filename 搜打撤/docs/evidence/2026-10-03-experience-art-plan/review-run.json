@@ -1,0 +1,701 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-03",
+  "reviewScope": "探索事件：28基本页+12变体；只读当前源码与既有证据，未改游戏/共享文档，唯一输出本JSON。",
+  "reviewedBy": "Codex coverage_run（全域调研子代理）",
+  "summary": {
+    "basicInterfaces": 28,
+    "variants": 12,
+    "totalRows": 40,
+    "reviewedHistoricalImages": 14,
+    "currentBrowserFrames": 0,
+    "implementationChanges": 0,
+    "keyCorrections": [
+      "供给页口袋避让已实现，标已改待实页复核；CLASS-GRANT/SACRIFICE未命中chest避让。",
+      "FIRE旧手动复原页已失效，当前为自动随机复原至多两张；不重新开发旧页。",
+      "SYS-03已完成24测试且无源码缺陷修复；交易系统不重复派发。",
+      "珍珠盒/锦囊普通存取有辅助造状态+真实点击证据；容量边界补验证，pouchTake仅最小复现候选。",
+      "DOOR现行不允许留下；BAG-DISCARD丢弃1张；旧计划这两处表述需纠偏。"
+    ]
+  },
+  "rows": [
+    {
+      "id": "CLASS-GRANT",
+      "researchConclusion": "明确问题：旧图标题被口袋条压住；当前供给页避让仅命中 chest，职业补给 node-pg 尚需当前帧复核。",
+      "basis": [
+        "game/src/run/game.run.altar.js:403-425",
+        "game/src/experience/pocket-strip.js:107-113",
+        "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/CLASS-GRANT.jpg"
+      ],
+      "visualStatus": "已亲读历史像素：标题左段遮挡；图中断线造成的背景/图标/卡图空缺不用于美术质量判断。",
+      "performanceRisk": "未测运行时性能；沿 nodeShell 复用单一节点背景，保留按目标节点预取和异步解码，不因计划扩为全背景预载。",
+      "recommendedAction": "复用已发入包的两张职业牌和一次性离开守卫；在当前窗口补正常职业补给帧，若仍遮挡只改共享口袋避让/标题安全区；核背包打开返回、1/2张候选、继续一次，不重做发牌机制。"
+    },
+    {
+      "id": "MAP",
+      "researchConclusion": "明确问题：历史辅助窗口的底部路线仅露一行、第三层日志贴近当前节点；源码已具路线身份、去重、当前目标及差分渲染，应保留。",
+      "basis": [
+        "game/src/run/expedition.view.js:5-105",
+        "game/src/core/render-scheduler.js:24-62",
+        "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-map.jpg",
+        "docs/evidence/2026-10-02-production-research/diagnosis/browser-assisted/03-layer2.jpg",
+        "docs/evidence/2026-10-02-production-research/diagnosis/browser-assisted/07-layer3.jpg",
+        "docs/evidence/2026-10-02-production-research/diagnosis/browser-assisted/10-layer4.jpg"
+      ],
+      "visualStatus": "已亲读四层历史像素；第一层1183×764的两条路线完整，二至四层658×764局部滚动/拥挤，不能将旧窄窗口外推为所有当前窗口。",
+      "performanceRisk": "调度器已有覆盖停止与空闲脏标绘制；路线面板有 viewKey。待测长局节点绘制、换层大图解码/交叉溶解及口袋600ms轮询；不再派无证据全局性能重构。",
+      "recommendedAction": "当前窗口按四层、行动前后、低血、满包、首脑击破前后各核目标/路线/日志/返回；仅对复现的遮挡重新分区。first-explored改动已做，保留首探经验口径；路线导航和玩法规则不重写。"
+    },
+    {
+      "id": "CHEST-PICK",
+      "researchConclusion": "已改需复核：旧图口袋遮挡已有10-02供给页避让实现；剩余卡面/页尾可见性才是本轮视觉工作。",
+      "basis": [
+        "game/src/run/chests.js:277-383",
+        "game/src/experience/pocket-strip.js:107-113",
+        "docs/evidence/2026-10-02-gameplay-fixes/README.md:28",
+        "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-supply.jpg"
+      ],
+      "visualStatus": "亲读历史三选一图，遮挡确曾存在；当前实现无新帧，标已改待验，非仍未修。",
+      "performanceRisk": "未测运行时性能；整组 cardHTML 和整页重绘可能扩大 DOM/图片解码成本，先用实际最大候选量测开页与重绘，未超预算不引入虚拟列表。",
+      "recommendedAction": "当前窗口补三选一稳定帧与满包→开背包→返回同一候选→领取；币只入账一次，未选卡散落规则不改。核首次开箱到口袋条下一次600ms轮询前是否短暂压标题；不重复建设交易事务。"
+    },
+    {
+      "id": "CHEST-ALL",
+      "researchConclusion": "明确问题：历史首脑满包页的横幅、说明、警告、箱图挤压奖励牌；交易流程已通过SYS-03，需布局收束。",
+      "basis": [
+        "game/src/run/chests.js:314-412",
+        "docs/evidence/2026-10-03-ph1-sys03/README.md:3-17",
+        "docs/evidence/2026-10-02-production-research/diagnosis/browser-assisted/15-boss-victory.jpg"
+      ],
+      "visualStatus": "已亲读历史满包首脑奖励图：未滚动时仅露卡牌顶部；口袋条遮挡已有独立修复，须拆开验。",
+      "performanceRisk": "未测运行时性能；整组 cardHTML 和整页重绘可能扩大 DOM/图片解码成本，先用实际最大候选量测开页与重绘，未超预算不引入虚拟列表。",
+      "recommendedAction": "合并重复收益说明、警告短句与展开详情，缩小或折叠装饰箱图；当前窗口初始态至少看全一张奖励和明确退出操作。逐收/全收/只收币三路逐一核总数；满包散落是现行设计，仅改善确认信息。"
+    },
+    {
+      "id": "RUN-SHOP",
+      "researchConclusion": "明确问题：买不起状态把卡面正文也整体压暗，影响阅读与筹币决策；交易校验先于扣费且已有验证，应保留。",
+      "basis": [
+        "game/src/run/game.run.shop.js:105-130,358-410",
+        "game/css/expedition-shop.css:111-124",
+        "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/RUN-SHOP.jpg",
+        "docs/evidence/2026-10-03-ph1-sys03/README.md"
+      ],
+      "visualStatus": "已亲读历史零币货架；断线破图不作素材质量依据，卡文整体灰暗同时获CSS双层opacity支持。",
+      "performanceRisk": "购买仅刷新货位与数字是已有优化；神秘货箱使用临时克隆+多段计时器，需核离页中断后无残影/无旧货位回写，未测长任务或泄漏。",
+      "recommendedAction": "保留卡文可读度，仅价签和购买动作表达买不起；验零币/恰好够/满包/售罄/神秘货箱、出售后返回和背包回商店。复用SYS-03扣款验证，补动画中离页一次，不整页重写。"
+    },
+    {
+      "id": "RUN-SELL",
+      "researchConclusion": "保留：已有货币账单、持有/符合条件区分及真实空态，历史稳定图未见必须重建的结构问题。",
+      "basis": [
+        "game/src/run/game.run.shop.js:273-320,412-437",
+        "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/RUN-SELL.jpg",
+        "docs/evidence/2026-10-03-ph1-sys03/README.md"
+      ],
+      "visualStatus": "已亲读历史空态；有货卡列表与售出回执尚无本轮像素。",
+      "performanceRisk": "有货时卖出整页重绘；先按真实最大可售清单测，不因空态留白而加数据框架。",
+      "recommendedAction": "保留主体布局，随共享字阶做有限可读性修整；补一张可售卡、不可售卡不出现、售出一次余额相符、开背包后回收购台、返回商店五个状态。"
+    },
+    {
+      "id": "FIRE",
+      "researchConclusion": "已改需复核：旧计划的手动复原火堆页已被10-02自动发现并复原至多两张替代，禁止重建旧页。",
+      "basis": [
+        "game/src/run/game.run.altar.js:45-90",
+        "docs/evidence/2026-10-02-gameplay-fixes/README.md:31",
+        "docs/evidence/2026-10-03-ph1-sys03/README.md:12",
+        "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/FIRE.jpg"
+      ],
+      "visualStatus": "已亲读历史手动复原空页，但此图对现行FIRE失效；现行自动发奖链未亲读像素。",
+      "performanceRisk": "现行每次至多两张复原与奖励演出；关注连续发牌队列和地图恢复，不额外增加强制等待页。",
+      "recommendedAction": "沿已完成测试，只补当前内置浏览器空口袋/1张/≥2张/满包/含不可复原道具装备的回执与去向。当前found为空分支会把满包拒绝与无可复原文案混用，先复现并只修回执措辞，保留随机发现规则。"
+    },
+    {
+      "id": "ALTAR",
+      "researchConclusion": "保留规则，明确视觉问题：禁用项连原因一起灰化；已具未激活、待领、已消费与取消留节点的守卫。",
+      "basis": [
+        "game/src/run/game.run.altar.js:458-541",
+        "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/ALTAR.jpg",
+        "docs/evidence/2026-10-03-ph1-sys03/README.md"
+      ],
+      "visualStatus": "已亲读历史未激活图，碎片不足/无道具两条原因低对比；背景断线不作为重绘理由。",
+      "performanceRisk": "未测运行时性能；沿 nodeShell 复用单一节点背景，保留按目标节点预取和异步解码，不因计划扩为全背景预载。",
+      "recommendedAction": "共享事件选项改为动作禁用、原因仍可读；补不足3张、2碎片、无职业池、献祭取消/确认、已激活待领/已领奖状态。费用和奖励靠近，不修改献祭经济与节点消耗机制。"
+    },
+    {
+      "id": "SACRIFICE",
+      "researchConclusion": "明确问题：历史标题被口袋条遮挡；当前chest专用避让不覆盖discover。取消和确认交易已有SYS-03验证。",
+      "basis": [
+        "game/src/run/game.run.altar.js:639-676",
+        "game/src/experience/pocket-strip.js:107-113",
+        "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/SACRIFICE.jpg"
+      ],
+      "visualStatus": "亲读历史献祭页：标题遮挡、7张牌可见；当时破图不可用于否定卡图。",
+      "performanceRisk": "未测运行时性能；整组 cardHTML 和整页重绘可能扩大 DOM/图片解码成本，先用实际最大候选量测开页与重绘，未超预算不引入虚拟列表。",
+      "recommendedAction": "当前窗口核候选多/少、选0/1/3、取消回来源、确认只扣选中数量；确认前显示选中卡名与数量。只修安全区和选择态信息，不重复做献祭事务；核键盘可到每张可选牌。"
+    },
+    {
+      "id": "ALTAR-REWARD",
+      "researchConclusion": "明确问题：不可选原因低对比；满包仍消耗奖励资格并可能散失是现行口径，不能以UI改版私改规则。",
+      "basis": [
+        "game/src/run/game.run.altar.js:546-587",
+        "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/ALTAR-REWARD.jpg",
+        "docs/evidence/2026-10-03-ph1-sys03/README.md:16-17"
+      ],
+      "visualStatus": "已亲读空口袋历史二选一；旧画面未覆盖可复原、满包、离开后回访。",
+      "performanceRisk": "未测运行时性能；沿 nodeShell 复用单一节点背景，保留按目标节点预取和异步解码，不因计划扩为全背景预载。",
+      "recommendedAction": "复用已验证pending标记；补0/1/3张可复原（含同名多张）、满包取传说+装备、离开再回。将实际入包/散落结果与领取状态并列；是否满包先阻止领取交主会话决策，实施前不改变现行规则。"
+    },
+    {
+      "id": "EVENT",
+      "researchConclusion": "证据不足：已找到并亲读旧稳定帧，不能再称只有过渡帧；旧图只有获取并离开，但当前支持叙事选择，须按真实事件ID核对。",
+      "basis": [
+        "game/src/run/game.run.flow.js:426-489",
+        "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/EVENT-stable.jpg"
+      ],
+      "visualStatus": "亲读EVENT-stable历史稳定像素；存在断线背景/图标，且当前事件ID/状态对应关系未验证，不以此定性现行单按钮缺陷。",
+      "performanceRisk": "eventLog已封顶200条；叙事异步加载有异常回退。测首次进入与返回，保留封顶，避免同时预载所有事件背景。",
+      "recommendedAction": "以真实事件清单抽每种结构一例：双选成本/普通结算/二级选卡/叙事失败回退，核故事、费用、后果、来源返回。视觉先统一nodeShell，再核各事件专属背景与文案，内容变体不各建新壳。"
+    },
+    {
+      "id": "RUN-TRANSITION",
+      "researchConclusion": "保留：已有跳过、请求代次及上下文校验、计时器收尾与状态恢复；旧计划将这些作为新功能属于重复。",
+      "basis": [
+        "game/src/run/game.run.scenes.js:113-160"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "单计时器过场，目标节点预取已存在；只测首次背景解码、跳过与连续换页，不持续追加动画层。",
+      "recommendedAction": "当前窗口补接敌/闸门/祭坛/商店/继续读档的开头与结束；验点击跳过、旧过场不盖新页、减动态和返回状态。仅发现过场身份/节奏问题时调整文案时长。"
+    },
+    {
+      "id": "NODE-SAFE",
+      "researchConclusion": "保留：源码已经明确无事发生、无埋伏拾获和继续旅程，旧计划风险已被实现文本满足。",
+      "basis": [
+        "game/src/run/game.run.scenes.js:233-245"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "未测运行时性能；沿 nodeShell 复用单一节点背景，保留按目标节点预取和异步解码，不因计划扩为全背景预载。",
+      "recommendedAction": "仅补当前稳定帧及继续回地图；核背景成功解码、标题/正文可读，不新增无收益安全节点交互。"
+    },
+    {
+      "id": "PICKUP",
+      "researchConclusion": "保留：已具搜索→揭晓→获取，并有背包返回跳过重播与失效DOM守卫；无需重做领奖协议。",
+      "basis": [
+        "game/src/run/game.run.scenes.js:177-205"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "950ms搜索由turboMs缩放；失效DOM不写回。测连续拾取与背包返回的等待感，非测得卡顿前不改时序。",
+      "recommendedAction": "补币/木材/口粮/钥匙4身份与奖励前后数值、背包进出、仅领一次；揭晓即聚焦获取键保留。只在当前帧确认文本/图标语义或可读性缺陷后修。"
+    },
+    {
+      "id": "RESOURCE-PICK",
+      "researchConclusion": "证据不足：源码已满包拒收保留候选和暂不领取；本函数未见专用背包返回钩子，需以真实入口查是否由上层兜底。",
+      "basis": [
+        "game/src/run/game.run.flow.js:179-210",
+        "game/src/hub/game.bag.js:237-256"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "未测运行时性能；整组 cardHTML 和整页重绘可能扩大 DOM/图片解码成本，先用实际最大候选量测开页与重绘，未超预算不引入虚拟列表。",
+      "recommendedAction": "先用资源二选一→满包→B背包→腾格→关闭，核回到同两候选且不重抽；若可复现来源丢失才补局部返回闭包。空池done(false)、跳过不消费及领取成功消费同步核一次。"
+    },
+    {
+      "id": "CHEST-SEARCH",
+      "researchConclusion": "保留：已有箱序号、点击立即揭晓、searchSeq失效与背包挂起/恢复；需核提前揭晓后定时器是否重复渲染。",
+      "basis": [
+        "game/src/run/chests.js:216-271,418-423"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "点击立即揭晓不在该处理器递增searchSeq；同一780ms自动回调仍可能重渲染并重排卡面pop（源码风险，未复现）。声音免验，但重复视觉/DOM工作应测。",
+      "recommendedAction": "录一次点击立即揭晓并在剩余搜索窗口操作卡面/开背包；核无二次卡牌入场、焦点丢失或旧回调。复现才取消旧timer或作废代次，保留现有队列机制。"
+    },
+    {
+      "id": "DOOR",
+      "researchConclusion": "已改需复核：旧计划把留下/取消视为必要去向，但当前文案与按钮明确闸门不能停留；规划应尊重现行规则。",
+      "basis": [
+        "game/src/run/game.run.altar.js:431-452"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "未测运行时性能；沿 nodeShell 复用单一节点背景，保留按目标节点预取和异步解码，不因计划扩为全背景预载。",
+      "recommendedAction": "改计划为跨层进入/相邻商队/反向门真实去向三种核验；当前页面是否应可留需独立玩法决策，不能按旧acceptance强加。补第三到第四层及第四层终局不显示第五层。"
+    },
+    {
+      "id": "POCKET-RESTORE",
+      "researchConclusion": "保留主体：已支持来源opts、剩余次数、背包回页、满包先拒绝；祭坛调用有未传opts仍显示营火身份的明确源码风险。",
+      "basis": [
+        "game/src/run/game.run.scenes.js:303-347",
+        "game/src/run/game.run.altar.js:505,570",
+        "docs/evidence/2026-10-03-ph1-sys03/README.md"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "未测运行时性能；整组 cardHTML 和整页重绘可能扩大 DOM/图片解码成本，先用实际最大候选量测开页与重绘，未超预算不引入虚拟列表。",
+      "recommendedAction": "补修鞋铺/祭坛道具献祭/祭坛奖励3来源，核标题、剩余次数、同名堆count与张数、满包不扣、关闭背包回原页；只给祭坛调用补实际来源身份，不另建复原系统。"
+    },
+    {
+      "id": "EVENT-CHOICE",
+      "researchConclusion": "保留：军需页已明确支付3币，候选闭包与picked守卫、背包返回均在；不重复补支付来源协议。",
+      "basis": [
+        "game/src/run/game.run.flow.js:527-556,618-633"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "未测运行时性能；整组 cardHTML 和整页重绘可能扩大 DOM/图片解码成本，先用实际最大候选量测开页与重绘，未超预算不引入虚拟列表。",
+      "recommendedAction": "补药摊免费与军需已扣费两种、满包保候选、背包返回不重扣、空池；原因文字保持可读、卡详情与领取行为区分，交易重构不入本包。"
+    },
+    {
+      "id": "EVENT-RECODE",
+      "researchConclusion": "证据不足：最多两张、同稀有度同类型和放弃路径已在；未见本页返回钩子，背包返回保持选择状态须核。",
+      "basis": [
+        "game/src/run/game.run.flow.js:568-615",
+        "game/src/hub/game.bag.js:237-256"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "未测运行时性能；整组 cardHTML 和整页重绘可能扩大 DOM/图片解码成本，先用实际最大候选量测开页与重绘，未超预算不引入虚拟列表。",
+      "recommendedAction": "补0/1/≥2候选、选中/撤选、放弃与转换前后身份、开背包返回；若来源丢失才保留选择闭包。不得改同类型稀有度限制或为每张牌做独立美术页。"
+    },
+    {
+      "id": "EVENT-GAMBLE",
+      "researchConclusion": "证据不足：3币/50%/第5次保底及已尝试次数可读；是否满包告知与背包返回保持attempts缺实页证据。",
+      "basis": [
+        "game/src/run/game.run.flow.js:636-669"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "候选固定、尝试重绘一页，量小；先测返回状态，不为此引入动画状态机库。",
+      "recommendedAction": "补缺币/失败/第5次/胜利满包、离开与B返回；校对承诺三张和实际入包/散落回执。先证实attempts/prizes保存问题再局部修，赔率与保底不改。"
+    },
+    {
+      "id": "LAST-LAMP",
+      "researchConclusion": "保留：已做档位/局/节点绑定、重复选择拦截和Base记录先提交；需补完整叙事视觉及等待反馈。",
+      "basis": [
+        "game/src/run/game.run.flow.js:342-421",
+        "tests/r6-story-flow.repro.test.js"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "首次叙事await和保存await需测可见等待状态，不把偶发等待推成整个存档重构。",
+      "recommendedAction": "同一页面模板覆盖三段故事与最终两选择，补长文本、提交中、失败重试、背包返回、换档旧回调；视觉用既有story-last-lamp素材建立人物/线索/选择层级，不扩写剧情。"
+    },
+    {
+      "id": "LAST-LAMP-RESULT",
+      "researchConclusion": "保留：结果已明确故事已保存与节点未保存的分界，重试不重复推进；已有失败测试，不再派重试机制重写。",
+      "basis": [
+        "game/src/run/game.run.flow.js:312-339",
+        "tests/r6-story-flow.repro.test.js:98-128"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "单页重绘规模小，先查保存时长与稳定帧，无性能缺陷证据。",
+      "recommendedAction": "补普通段/结局纪念、节点保存失败→重试成功和背包返回3类帧；结果、纪念物和错误状态分层，保留幂等与原段落，不改持久化协议。"
+    },
+    {
+      "id": "ALTAR-FRAGMENT-FAIL",
+      "researchConclusion": "保留：无职业/空能力池在副文案区分，碎片原样保留且有返回祭坛；旧风险已由源码满足。",
+      "basis": [
+        "game/src/run/game.run.altar.js:517-538"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "未测运行时性能；沿 nodeShell 复用单一节点背景，保留按目标节点预取和异步解码，不因计划扩为全背景预载。",
+      "recommendedAction": "补无职业/空池两种说明及返回，核碎片数不变；这是罕见异常分支，随共享nodeShell收口即可，不投入独立美术生产。"
+    },
+    {
+      "id": "BAG",
+      "researchConclusion": "已改需复核：已区分普通/安全/资源扩格与消耗口袋，并处理来源返回；旧计划不应笼统重写库存。",
+      "basis": [
+        "game/src/hub/game.bag.js:237-256,520-637",
+        "docs/evidence/2026-10-02-gameplay-fixes/README.md:24-25,53"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "容量循环与全部消耗口袋卡面随每次showBackpack重建，口袋无容量上限；需测实际长局大口袋时打开/排序/拖放，不预先全库虚拟化。",
+      "recommendedAction": "保留已验证容器链；补当前背包像素，核普通/安全/扩格身份、卡详情与拖放、B关闭回事件/商店/搜刮。优先复核旧证据背包25格vs地图HUD16格口径差异，若仍有差异只统一展示真源。"
+    },
+    {
+      "id": "BAG-DISCARD",
+      "researchConclusion": "保留：现有确认明确卡名、永久丢弃1张、不可找回，取消默认焦点；旧计划说丢弃整堆须纠偏。",
+      "basis": [
+        "game/src/hub/game.bag.js:259-288"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "小确认页无性能问题证据；跟随背包页面测来源恢复即可。",
+      "recommendedAction": "补普通/安全格拖出、取消、确认-1而非整堆、初始攻击拒弃；风险主次颜色与默认焦点只做当前帧复核，不重复开发确认机制。"
+    },
+    {
+      "id": "BAG-PEARL",
+      "researchConclusion": "已改需复核：普通存取已有10-02真实点击（辅助造状态）证据，整叠取出按格增量拒收已有回归测试。",
+      "basis": [
+        "game/src/hub/game.bag.js:419-490",
+        "tests/full-review-regressions-hub.test.js:68-80",
+        "docs/evidence/2026-10-02-gameplay-fixes/README.md:24,35"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "资源表每次过滤/分组，多为有限背包量；无基准超标，保留实现。",
+      "recommendedAction": "补0/满盒/多盒/整叠取出所需≥2格/只剩1格/安全格保护与地图HUD容量；将tooltip固定“需要一个空背包格”改为实际格增量若当前帧证实误导，结构保留。"
+    },
+    {
+      "id": "BAG-POUCH",
+      "researchConclusion": "已改需复核：普通非职业法术存取已测、职业法术排除为现行规则；取出分支未见容量预检是需先复现的范围内风险。",
+      "basis": [
+        "game/src/hub/game.bag.js:352-413",
+        "tests/full-review-regressions-hub.test.js:83-91",
+        "docs/evidence/2026-10-02-gameplay-fixes/README.md:25,35"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "容器最多3张，性能优化价值低；重点是满包取出与视觉语义。",
+      "recommendedAction": "保留现行容器与3张限制；先复现普通背包满格时pouchTake是否越容量，并与珍珠盒按格增量口径对齐；只有复现才局部修。补职业法术不出现的就近解释，不能当作缺陷解除过滤。"
+    },
+    {
+      "id": "CHEST-SMALL",
+      "researchConclusion": "保留：小箱使用逐收/全收模板，规则不等于三选一；专属像素不足。",
+      "basis": [
+        "game/src/run/chests.js:63-161,277-412"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "未测运行时性能；整组 cardHTML 和整页重绘可能扩大 DOM/图片解码成本，先用实际最大候选量测开页与重绘，未超预算不引入虚拟列表。",
+      "recommendedAction": "复用CHEST-ALL样式与测试，补小箱真实奖励数、逐收后余数及只收币离开，不另建小箱美术壳。"
+    },
+    {
+      "id": "CHEST-MEDIUM",
+      "researchConclusion": "已改需复核：真实三选一；历史口袋遮挡已有实现修复，复用CHEST-PICK计划。",
+      "basis": [
+        "game/src/run/chests.js:277-383",
+        "game/src/experience/pocket-strip.js:107-113",
+        "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-supply.jpg"
+      ],
+      "visualStatus": "已亲读历史中箱三选一像素，当前修复后未见。",
+      "performanceRisk": "未测运行时性能；整组 cardHTML 和整页重绘可能扩大 DOM/图片解码成本，先用实际最大候选量测开页与重绘，未超预算不引入虚拟列表。",
+      "recommendedAction": "只补中箱3候选、只取1、满包保持候选、腾格返回与跳过币一次；继承CHEST-PICK安全区核验。"
+    },
+    {
+      "id": "CHEST-BIG",
+      "researchConclusion": "证据不足：大箱多牌布局无本轮像素，不能由首脑箱外推已经验过。",
+      "basis": [
+        "game/src/run/chests.js:63-161,277-412"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "未测运行时性能；整组 cardHTML 和整页重绘可能扩大 DOM/图片解码成本，先用实际最大候选量测开页与重绘，未超预算不引入虚拟列表。",
+      "recommendedAction": "用实际最大候选数补初始帧和滚动到底；至少一张完整卡与数量/容量/退出同时可知，沿CHEST-ALL一次修模板。"
+    },
+    {
+      "id": "CHEST-CLASS",
+      "researchConclusion": "证据不足：职业箱来源身份存在，但各职业箱未亲读像素。",
+      "basis": [
+        "game/src/run/chests.js:63-89,350-357"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "未测运行时性能；整组 cardHTML 和整页重绘可能扩大 DOM/图片解码成本，先用实际最大候选量测开页与重绘，未超预算不引入虚拟列表。",
+      "recommendedAction": "复用共享箱壳；核5职业的真实候选池与职业牌带出规则，抽最长名称/最大牌数做排版压力，避免逐职业另画箱体或复制页面。"
+    },
+    {
+      "id": "CHEST-BOSSREWARD",
+      "researchConclusion": "明确问题：历史首脑保险柜信息堆叠压卡面；继承CHEST-ALL布局包，交易和结算回执已分别有完成工作。",
+      "basis": [
+        "game/src/run/chests.js:349-357",
+        "docs/evidence/2026-10-02-production-research/diagnosis/browser-assisted/15-boss-victory.jpg",
+        "docs/evidence/2026-10-03-ph1-sys03/README.md"
+      ],
+      "visualStatus": "已亲读辅助首脑奖励历史图；不是自然完整跑局证明。",
+      "performanceRisk": "未测运行时性能；整组 cardHTML 和整页重绘可能扩大 DOM/图片解码成本，先用实际最大候选量测开页与重绘，未超预算不引入虚拟列表。",
+      "recommendedAction": "与首脑战后回执交接：败敌数/剩余HP/主要奖励/剩余箱/终局去向清楚；合并重复说明，保留首脑身份且不虚构第5层。"
+    },
+    {
+      "id": "CHEST-MULTIQUEUE",
+      "researchConclusion": "保留：next清cur和queue、searchSeq作废旧回调已在；旧永久卡死推断不能复用。",
+      "basis": [
+        "game/src/run/chests.js:206-232,244,348,418-423"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "多箱会串行重复搜索/卡牌揭晓，先测正常与快速揭晓节奏和定时器串台；不为省一两次点击破坏逐箱规则。",
+      "recommendedAction": "补2箱→逐收/跳过→第2箱→关闭，含中途背包返回；页上明确当前/总数和下一箱，终态可回地图且无残留isOpen。"
+    },
+    {
+      "id": "CHEST-FULLBAG",
+      "researchConclusion": "保留规则，明确可读性工作：预检已告知能收/散落，三选一失败留原候选；未证永久卡死。",
+      "basis": [
+        "game/src/run/chests.js:314-381",
+        "docs/evidence/2026-10-02-production-research/diagnosis/browser-assisted/15-boss-victory.jpg",
+        "docs/evidence/2026-10-03-ph1-sys03/README.md:16"
+      ],
+      "visualStatus": "已亲读历史满包首脑图，长警示挤压卡面；当前口袋避让已修需复核。",
+      "performanceRisk": "未测运行时性能；整组 cardHTML 和整页重绘可能扩大 DOM/图片解码成本，先用实际最大候选量测开页与重绘，未超预算不引入虚拟列表。",
+      "recommendedAction": "补基础满格、资源扩格可放资源但不可放其他、同名堆余量、逐收/全收/跳过；警示收束为可收N/散落N与管理背包入口，不以设计名义改变强收散落。"
+    },
+    {
+      "id": "CHEST-EMPTYCATALOG",
+      "researchConclusion": "保留：源码已有空牌库说明和离开路径，缺空目录像素。",
+      "basis": [
+        "game/src/run/chests.js:356,369-372,404-412"
+      ],
+      "visualStatus": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+      "performanceRisk": "无卡面DOM，性能低风险；不绘制假的加载占位卡。",
+      "recommendedAction": "补空牌库含币与无币两态，确认币入账一次、可离开并完成队列；共享空态样式，无独立页面开发。"
+    },
+    {
+      "id": "MAP-LAYER1",
+      "researchConclusion": "保留规则，复核布局：首层暂无成功出口，已有闸门方向与路线身份。",
+      "basis": [
+        "game/src/run/expedition.view.js:42-70",
+        "game/src/run/layeredMap.js",
+        "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-map.jpg"
+      ],
+      "visualStatus": "已亲读第一层历史1183×764图，两路线可见；当前窗口仍需新帧。",
+      "performanceRisk": "继承MAP性能采样；不重复做空闲绘制优化。",
+      "recommendedAction": "核首层背景、入口→物资/战斗两支、已探索回头路不再加首探经验、暂无离局点说明；入口状态作为地图模板样板。"
+    },
+    {
+      "id": "MAP-LAYER2",
+      "researchConclusion": "明确问题：历史当前窄窗口路线只有局部露出；规则仍是向第三层推进，无成功出口。",
+      "basis": [
+        "game/src/run/expedition.view.js:42-70",
+        "game/src/run/layeredMap.js",
+        "docs/evidence/2026-10-02-production-research/diagnosis/browser-assisted/03-layer2.jpg"
+      ],
+      "visualStatus": "已亲读第二层历史658×764辅助图；未操作多尺寸，不把此尺寸当本轮目标。",
+      "performanceRisk": "换层背景预取/交叉溶解待实测。",
+      "recommendedAction": "当前窗口补二层入口/门前/商店后状态；路线与目标完整可读，背景身份区别于一层；玩法不加早退口。"
+    },
+    {
+      "id": "MAP-LAYER3",
+      "researchConclusion": "明确问题：历史行动日志贴近当前入口节点，路线底部受挤；第3层撤离献祭3牌文案已存在。",
+      "basis": [
+        "game/src/run/expedition.view.js:42-45",
+        "docs/evidence/2026-10-02-production-research/diagnosis/browser-assisted/07-layer3.jpg"
+      ],
+      "visualStatus": "已亲读第三层历史658×764辅助图，日志右缘贴当前节点/标牌；新帧未核。",
+      "performanceRisk": "日志长度和节点标牌碰撞需测，不以大量装饰动效填空。",
+      "recommendedAction": "当前窗口补低血/满包/撤离附近三态，日志默认短并可展开且不挡当前节点，路径与撤离代价同时可见；只处理复现的几何冲突。"
+    },
+    {
+      "id": "MAP-LAYER4",
+      "researchConclusion": "保留现行目标：已有祭坛→首脑→终局撤离分支；旧图布局拥挤需随MAP复核。",
+      "basis": [
+        "game/src/run/expedition.view.js:45",
+        "game/src/run/game.run.altar.js:455-590",
+        "docs/evidence/2026-10-02-production-research/diagnosis/browser-assisted/10-layer4.jpg"
+      ],
+      "visualStatus": "已亲读第四层历史辅助图：层名与目标身份成立；不是首脑胜利或最终撤离验收。",
+      "performanceRisk": "继承换层/日志/地图覆盖时零绘制检查；未实测。",
+      "recommendedAction": "补祭坛前/激活后/首脑击破后三目标帧与终局入口，消除任何第五层提示；回执相关PH1成果只接入验收，不重复实现。"
+    }
+  ],
+  "sourceInputs": [
+    {
+      "path": "docs/evidence/2026-10-02-gameplay-fixes/README.md",
+      "sha256": "4d985da0ae50ccb5a671786ba43facc1d535750c37154bbc547ca12044245f4c",
+      "bytes": 5767
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser-assisted/03-layer2.jpg",
+      "sha256": "048b51cc3ca7a3092d45f76956ea706f055c0a23e56a077ed5e4cb51cc7d1260",
+      "bytes": 53920
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser-assisted/07-layer3.jpg",
+      "sha256": "7c9c13f6fa219f95cd55e3053f270ca50b404469955fc3bc5c32122c31a82610",
+      "bytes": 53023
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser-assisted/10-layer4.jpg",
+      "sha256": "5232dd6d88ab8c8bf201c0cb72598f9eca7f6f245dacf6dc572dec8ec95a544e",
+      "bytes": 52337
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser-assisted/15-boss-victory.jpg",
+      "sha256": "00a7e433a98d33ad19b75eded0c1f817c78c8cf26a7aa9aa347e249a6dc18f69",
+      "bytes": 60408
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-map.jpg",
+      "sha256": "cbc946e97ebf703cf4627916cdff61ac980c068260ae3ff6c5f3ed326a6fe04e",
+      "bytes": 75796
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-supply.jpg",
+      "sha256": "864fb295d35848085d4ce5b1d08c7ca8f92414ca2b68b2436f1fe9ed4c5f974b",
+      "bytes": 81599
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/ALTAR-REWARD.jpg",
+      "sha256": "312fe72b35377da31f1cbd0236ebb06dcff909d7bf985fb65b971c2cf849d4f1",
+      "bytes": 29954
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/ALTAR.jpg",
+      "sha256": "8ece2a6e5c353ba7de6cba3dfe1f7d9df388110fdf7b044ed841abb0994fb9cb",
+      "bytes": 32585
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/CLASS-GRANT.jpg",
+      "sha256": "64f860e5191f0b0f6d6768330c8371597c80faaaae65027131c0928884614daa",
+      "bytes": 41450
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/EVENT-stable.jpg",
+      "sha256": "1f1133216a2beec0579968d3de88faea4ede7d92afd1db3656ee823f9407b631",
+      "bytes": 17573
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/FIRE.jpg",
+      "sha256": "f822119bbf2cbd3ddff3a308d139186d9cf744ac8313faa3194e8fac440d8ea2",
+      "bytes": 22285
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/RUN-SELL.jpg",
+      "sha256": "ecb11f30dffa966b56568ca9a57316310ced9fe51f354e622e80c429b28af4ea",
+      "bytes": 42751
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/RUN-SHOP.jpg",
+      "sha256": "b1b07c92f73bbd95373935a9fce94fc4b94d40f702dfb4781cc6acf7f1552290",
+      "bytes": 71697
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/SACRIFICE.jpg",
+      "sha256": "3752c9e9c6a840edf59be8c902cdd17988a6227bbcdb8c0d5558f109029e9bdd",
+      "bytes": 78733
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/planning/pages/pages.json",
+      "sha256": "ffc58a7bc957b98f3a27954a6213f1b1704dff73218ab6688df58d4cc2eb9a30",
+      "bytes": 894518
+    },
+    {
+      "path": "docs/evidence/2026-10-03-ph1-sys03/README.md",
+      "sha256": "68646bdae0a9e882b090a8ea0aaaf36231cca76d2cee20a2245fc4e19f874625",
+      "bytes": 2400
+    },
+    {
+      "path": "game/css/expedition-inventory.css",
+      "sha256": "c81993fc77c90cc5e3524cc9fc0c8fa347fe91438b2ad624b4e2d0168b59dec7",
+      "bytes": 19036
+    },
+    {
+      "path": "game/css/expedition-map.css",
+      "sha256": "ff144fa8660d83a71d6ebc1ca82c9c7160eced75cdaf834da3314df592e90e9e",
+      "bytes": 6879
+    },
+    {
+      "path": "game/css/expedition-rewards.css",
+      "sha256": "1504f9555b55dd5d8ec0ccbc7b65a4006456e56ff8f17508ad0568df0d1f087c",
+      "bytes": 9670
+    },
+    {
+      "path": "game/css/expedition-shop.css",
+      "sha256": "1371459d1409a41bb48cf23616be52acf2f2864f762f57b656bea3ef0f880540",
+      "bytes": 17777
+    },
+    {
+      "path": "game/css/expedition.css",
+      "sha256": "2761c677a94dd7d85c04cd3c15cb588478957f1ec0331c8fed7c2dcd473d55f2",
+      "bytes": 28580
+    },
+    {
+      "path": "game/css/overlays.css",
+      "sha256": "68045996feed7ed077f56dbfe6ffe6ebdfce9d62e59bc545bb6f058b49e73609",
+      "bytes": 39134
+    },
+    {
+      "path": "game/css/page-events.css",
+      "sha256": "73e4854d755921b36ac80178b6e7ede7d17ed3eeecee3d256dcedfe3a8c4c6bd",
+      "bytes": 12109
+    },
+    {
+      "path": "game/css/page-expedition-hud.css",
+      "sha256": "9c4933bfb5c3b79f54d66d844838ef5b9f729c3cc3d5c418fd544ba892b73eed",
+      "bytes": 14148
+    },
+    {
+      "path": "game/css/page-rewards-bag-help.css",
+      "sha256": "c192bf5ce0632ed986637acfe2a1da649bea5aa0bdbb3253a294ccb9095684d6",
+      "bytes": 40878
+    },
+    {
+      "path": "game/css/page-shop.css",
+      "sha256": "86a7df4ce69c0a42cc9b50fb5ccf5765976055eac3141f4d2485670006b5beb3",
+      "bytes": 20035
+    },
+    {
+      "path": "game/css/page-stash.css",
+      "sha256": "65f9abae8ba1cde52a8cca0dc7d276b51f9684a8f2fb925b3875302b74c21bca",
+      "bytes": 19756
+    },
+    {
+      "path": "game/css/pocket-strip.css",
+      "sha256": "1a9c662718a4fa58e2d5010217b9b66ff67c9086120a27d7bd10e0a1bd1a8c9a",
+      "bytes": 4692
+    },
+    {
+      "path": "game/css/scenes.css",
+      "sha256": "ea832d0aec9caddf8b602dd882ee13acc09c6512be89c5a3c34f15dc951ed338",
+      "bytes": 51303
+    },
+    {
+      "path": "game/src/core/render-scheduler.js",
+      "sha256": "a698340dc9a192991d00a53dfea5b27c21f2fc3bbee330c0834643670ad19c32",
+      "bytes": 2586
+    },
+    {
+      "path": "game/src/core/renderer.js",
+      "sha256": "232f2b2555b55bbdc07fb6b01d417d41b78c6a51b803613874f8245464a4c254",
+      "bytes": 29811
+    },
+    {
+      "path": "game/src/experience/pocket-strip.js",
+      "sha256": "27fe4698f7fb0db6d58e75cf942147414a47a2e361aa9171df0022f3089c9d4b",
+      "bytes": 9392
+    },
+    {
+      "path": "game/src/hub/game.bag.js",
+      "sha256": "b608bc37946e08d6ded684887079b4f477acbfb14a759876ccb86c0bb57dbb9c",
+      "bytes": 42907
+    },
+    {
+      "path": "game/src/run/chests.js",
+      "sha256": "37071c99427a5d2f514128a252795269a56bc3ccdfa4bdb1a82ddb1f312d5053",
+      "bytes": 25787
+    },
+    {
+      "path": "game/src/run/expedition.view.js",
+      "sha256": "c55cf92bb8340afaccc71807a768bc7afd2913de43ea2b9f5d1d8e144c6bb335",
+      "bytes": 7503
+    },
+    {
+      "path": "game/src/run/game.run.altar.js",
+      "sha256": "fa41f1c3206db40027b8345b540d6c5e65f3a8e78d7f19405aba44b3ebe1afef",
+      "bytes": 63361
+    },
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "sha256": "b6d68b5cb280d297b6e5337dc05ace3ca049e4bfda4db11375c33bec8a14b084",
+      "bytes": 46039
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "sha256": "cfb7291a73dd8a0cbe66bfdd812eb057db1fef413ba48226ac11a35fbadecc64",
+      "bytes": 19404
+    },
+    {
+      "path": "game/src/run/game.run.shop.js",
+      "sha256": "9d73c89a1d415f1c0c7c1510beb52112890e716311194a310a2c9acbde87d588",
+      "bytes": 26262
+    },
+    {
+      "path": "game/src/run/layeredMap.js",
+      "sha256": "679e59f0cf4fb2c264ecf0838a1eda9b83ab315ed31b054b32f4816d5c18cd35",
+      "bytes": 1574
+    },
+    {
+      "path": "tests/full-review-regressions-hub.test.js",
+      "sha256": "9e738cde8d443acc82e4d30de6eb4f3b546baaa3c1df2a569753371dd475bdcd",
+      "bytes": 6537
+    },
+    {
+      "path": "tests/r6-story-flow.repro.test.js",
+      "sha256": "74330e49471bdc501736269bb4299a828a240ad6d90bfbbcd1aebbf5d6327df2",
+      "bytes": 7364
+    }
+  ],
+  "limitations": [
+    "本轮不启浏览器、不启服务、不安装、不改删源码/素材/脚本；声音免验。没有实时FPS/long-task/内存测量，不宣称性能达标或已定性瓶颈。",
+    "view_image亲读14张2026-10-02历史图片；这些证明当时像素，不能代表10-03工作树实页。658×764为已有当前窗口历史证据，不是本轮多尺寸验证。",
+    "部分interface-captures来自资源断线阶段；空背景/破图/图标fallback不据此判定原素材质量，不将旧图用于要求重绘所有场景。",
+    "current-supply旧遮挡已有10-02代码修复；FIRE旧手动页已经退出当前入口。页面源码/旧截图和测试日志层级分别记录。",
+    "未重新运行其他会话测试，SYS-03及10-02既有验证仅以已读证据复用；当前在途源码不得把旧测试绿外推为整树通过。",
+    "pouchTake容量、RESOURCE-PICK/RECODE/GAMBLE背包返回、CHEST-SEARCH提前揭晓后的重复视觉均为源码定位的最小复现候选，未定性运行时bug，未修改。",
+    "每一变体都有研究行，但缺有效像素的变体明确标证据不足；不以共享模板通过代验全部变体。",
+    "五张获认可选角立绘与旧美术素材/生图脚本保留；冻结域不因本报告解冻。"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "readAt": "2026-10-04T09:47:13.086Z",
+  "origin": "http://127.0.0.1:5200",
+  "messages": [
+    {
+      "ts": "2026-10-04T09:10:06.015Z",
+      "version": "v0.60.0",
+      "page": {
+        "id": "cardlib",
+        "name": "卡牌库"
+      },
+      "target": {
+        "name": "卡牌库 · 按钮「」",
+        "selector": "button.ak-sq ak-exit studio-exit"
+      },
+      "at": {
+        "x": 6,
+        "y": 3
+      },
+      "text": "退出照相馆缺少动画",
+      "steps": "",
+      "expected": "",
+      "actual": ""
+    }
+  ]
+}

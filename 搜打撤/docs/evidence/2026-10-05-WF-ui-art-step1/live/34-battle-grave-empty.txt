@@ -1,0 +1,22 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 3/16, ID: bagBtnFloat
+			4 text 背包
+			25 text 3/16
+		26 container demon BOSS战 · 第 1 回合 · skull 墓地, ID: overlay
+			27 container
+				28 button Description: 关闭, ID: ovCloseX
+				29 heading demon BOSS战 · 第 1 回合 · skull 墓地, Value: 2, ID: ovTitle
+					35 image demon
+					36 text  BOSS战 · 第 1 回合 · 
+					37 image skull
+					38 text  墓地
+				34 container ovBody
+					39 container
+						40 text 被消耗的牌共  0  张 —— （墓地还是空的——注能等效果消耗的牌会进入这里）
+					41 container
+						42 text 墓地中的牌 不会在牌库空后洗回 ；打出的牌进弃牌堆（会洗回循环）。战胜 BOSS 后可在「整理背包」环节把这些牌放回背包或丢弃。
+					43 button ↩ 返回战斗
+
+The focused UI element is 43 button ↩ 返回战斗

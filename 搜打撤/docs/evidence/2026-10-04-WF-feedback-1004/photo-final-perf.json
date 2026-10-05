@@ -1,0 +1,32 @@
+[
+  {
+    "level": "info",
+    "message": "[photo-fps] {\"label\":\"settled-idle\",\"fps\":165.5,\"frameP95\":6.2,\"frameMax\":6.4,\"over8ms\":0,\"over20ms\":0,\"longTasks\":0,\"longTaskMax\":0,\"longAnimationFrames\":[],\"slowFrames\":[],\"frames\":580,\"visible\":\"visible\"}",
+    "timestamp": "2026-10-04T03:30:06.790Z",
+    "url": "http://127.0.0.1:5200/src/hub/game.cardslib.photo-fps.js"
+  },
+  {
+    "level": "info",
+    "message": "[photo-fps] {\"label\":\"title\",\"fps\":155.3,\"frameP95\":6.2,\"frameMax\":108.9,\"over8ms\":8,\"over20ms\":3,\"longTasks\":1,\"longTaskMax\":104,\"longAnimationFrames\":[{\"duration\":105.7,\"renderMs\":104,\"layoutMs\":2.3,\"scripts\":[]}],\"slowFrames\":[[78,42.4],[121,36.5],[351,108.9]],\"frames\":544,\"visible\":\"visible\"}",
+    "timestamp": "2026-10-04T03:35:37.354Z",
+    "url": "http://127.0.0.1:5200/src/hub/game.cardslib.photo-fps.js"
+  },
+  {
+    "level": "info",
+    "message": "[photo-fps] {\"label\":\"render-sync\",\"ms\":22.2,\"photos\":79}",
+    "timestamp": "2026-10-04T03:43:28.977Z",
+    "url": "http://127.0.0.1:5200/src/hub/game.cardslib.page.js?t=1791085121958"
+  },
+  {
+    "level": "info",
+    "message": "[photo-fps] {\"label\":\"open\",\"fps\":108.3,\"frameP95\":30.4,\"frameMax\":54.6,\"over8ms\":29,\"over20ms\":11,\"longTasks\":0,\"longTaskMax\":0,\"longAnimationFrames\":[],\"slowFrames\":[[20,33.4],[50,30.2],[81,30.4],[135,54.6],[178,42.3],[226,48.5],[257,30.4],[281,24.2],[335,36.4],[384,48.4],[438,54.6]],\"frames\":163,\"visible\":\"visible\"}",
+    "timestamp": "2026-10-04T03:43:30.483Z",
+    "url": "http://127.0.0.1:5200/src/hub/game.cardslib.photo-fps.js"
+  },
+  {
+    "level": "info",
+    "message": "[photo-fps] {\"label\":\"settled-idle\",\"fps\":165.5,\"frameP95\":6.2,\"frameMax\":8,\"over8ms\":0,\"over20ms\":0,\"longTasks\":0,\"longTaskMax\":0,\"longAnimationFrames\":[],\"slowFrames\":[],\"frames\":580,\"visible\":\"visible\"}",
+    "timestamp": "2026-10-04T03:43:34.283Z",
+    "url": "http://127.0.0.1:5200/src/hub/game.cardslib.photo-fps.js"
+  }
+]

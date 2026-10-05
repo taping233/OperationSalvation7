@@ -1,0 +1,84 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 3/16, ID: bagBtnFloat
+			4 text 背包
+			25 text 3/16
+		26 container
+			27 text 冬核深处 · 首脑遭遇
+			28 text 第 1 回合
+			29 text 你的行动 Lv.1 · 18/50 · 差 32 点
+			30 container
+				31 image cards
+			32 text 0 牌库
+			33 container
+				34 image cards
+			35 text 0 弃牌
+			36 container
+				37 image cards
+			38 image skull
+			39 text 0 消耗
+			40 text 我方
+			41 container btSelf
+				42 image 黑像
+				43 container
+					44 text 黑像 你
+				45 container
+					46 text 30/30
+				47 container
+					48 image swords
+					49 text  4
+			50 container
+				51 image arrow
+				52 text  攻击·回合末强化 · 5
+				53 image boss_general
+				54 text 肃清总督
+				55 image swords
+				56 text 5
+				57 image arrow
+				58 text  军威
+				59 text 50/50
+			60 text 敌方意图
+			61 container
+				62 image bolt
+				63 text 2 /2
+			64 button swords 猛击
+				65 image swords
+				66 text  猛击
+			67 container
+				68 checkbox Description: 初始攻击 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					69 container
+						70 text 1
+						71 image 初始攻击
+						72 text 初始攻击
+					73 text ×2
+					74 image swords
+				75 checkbox Description: 深海印记 · 0 费。费用 0 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）, Value: 0
+					76 container
+						77 text 0
+						78 image 深海印记
+						79 text 深海印记
+					80 image heart
+				81 checkbox Description: 斩杀 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					82 container
+						83 text 1
+						84 image 斩杀
+						85 text 斩杀
+						86 image bolt
+						87 text 9''
+					88 image swords
+			89 container 战术操作
+				90 button bag 背包
+					91 image bag
+					92 text  背包
+				93 button runner 撤离（判负）
+					94 image runner
+					95 text  撤离（判负）
+				96 button gear 设置
+					97 image gear
+					98 text  设置
+				99 button skip 结束回合
+					100 image skip
+					101 text  结束回合
+
+The focused UI element is 64 button swords 猛击

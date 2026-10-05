@@ -1,0 +1,31 @@
+{
+  "before_sha256": "326976aa11f25274bf4634f8e2e54a0cb9dff93774bfeb585b120df3a266dae0",
+  "after_sha256": "499346781c40357a428ad080290a122631e6b397b6ec5160c4f4f3f50aa3a180",
+  "existing_entries_preserved": 674,
+  "added": [
+    {
+      "path": "music-demo/01-title-frostglass.ogg",
+      "ext": "ogg",
+      "bytes": 748780,
+      "sha256": "cabeb3798923dcc23eeae1f6332abdb5823374b837f4c8ebbb7c2ac3773f2ec7",
+      "license": "项目自有（原创程序合成，无外部采样）",
+      "source": "docs/evidence/2026-10-05-WF-music-demos/render-report.json"
+    },
+    {
+      "path": "music-demo/02-explore-ashline.ogg",
+      "ext": "ogg",
+      "bytes": 810668,
+      "sha256": "d6d266a7a2361e97bb5f5ac55f12f448d69b2b716404df79faea1a4c8c2d56ea",
+      "license": "项目自有（原创程序合成，无外部采样）",
+      "source": "docs/evidence/2026-10-05-WF-music-demos/render-report.json"
+    },
+    {
+      "path": "music-demo/03-battle-blackpulse.ogg",
+      "ext": "ogg",
+      "bytes": 881593,
+      "sha256": "bd820e70480417cf4201facdb3dcae609a6cf07ec11523658b5a8ff115962d97",
+      "license": "项目自有（原创程序合成，无外部采样）",
+      "source": "docs/evidence/2026-10-05-WF-music-demos/render-report.json"
+    }
+  ]
+}

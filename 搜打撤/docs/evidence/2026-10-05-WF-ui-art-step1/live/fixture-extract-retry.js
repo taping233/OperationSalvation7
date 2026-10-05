@@ -1,0 +1,1 @@
+(async()=>{const q=window.__uiArtQA;q.reset(['镭射','木材']);return JSON.stringify(await q.withBaseReadFault(()=>q.altar.doExtract()));})()

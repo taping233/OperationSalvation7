@@ -1,0 +1,11 @@
+{
+  "id": "05",
+  "slug": "ponytail",
+  "version": 1,
+  "prompt": "ONE individual 2D skeletal-animation sprite component for Wu, not a sheet. Genuine transparent PNG background, zero alpha outside the silhouette, no cast shadow, aura, backdrop, text, numbers or alignment marks. Reference 1 is the confirmed THREE-QUARTER FACING SCREEN RIGHT combat mother pose and proportions; reference 2 is the front identity/style reference. Painterly anime, LOW detail, large opaque angular color blocks, clear hard-edge shadows, economical rough hand-painted marks. Neutral black and gray clothing, cream skin, silver-white hair. Keep original anatomical proportions and camera angle. Paint hidden overlap at the joints so the part can rotate without gaps. Center the component with generous transparent margins, one piece only, not a mannequin or full character. No amputated gore, no wounds; clean game asset joining boundaries. Do not include adjacent body parts, do not invent equipment or accessories. Part 05: ONLY Wu's SINGLE LONG STRAIGHT HIGH PONYTAIL, attached by a small narrow gathered root at TOP and flowing downward behind character toward SCREEN LEFT as in combat mother reference 1. One continuous silver-white ponytail mass, length from high head tie to hip/skirt area, not calf or ground length. Gently bowed overall silhouette allowed, but mostly STRAIGHT long tapered hair planes; no repeated S curves, waves, curls, fluffy cloud, braided tail, extra ponytail or bun. Tail broadens slightly below root then tapers into a few long sharp tips. A few large white and cool silver-gray opaque angular hair masses, low detail with sparse long straight brush marks. NO scalp/head cap, front bangs, face, neck, goggles, black rose, blue ribbon, body, clothes or weapon. Root must be a fully painted small rounded connection stub to tuck under separate flower/ribbon. One standalone ponytail sprite only.",
+  "refs": [
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\wu-battle-base-frame000.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\reference.png"
+  ],
+  "tool": "built-in imagegen"
+}

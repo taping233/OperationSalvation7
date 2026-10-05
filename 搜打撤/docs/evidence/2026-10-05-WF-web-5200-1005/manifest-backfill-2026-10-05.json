@@ -1,0 +1,1796 @@
+{
+  "captured": "2026-10-05",
+  "head": "425d03920e（打包前工作树）",
+  "scope": "打包转正批：asset-audit --check 的 271 条阻断错误全量转正——259 条 unlisted（thumbs/cards 194、thumbs/scenes 42、thumbs/portraits 18、ui/beginner-guide 2、ui/home-v2 3，按目录实际为准）登记入 manifest；6 个 ui/beginner-guide svg bytes/sha256 按 LF 归一口径重登记（#35 先例）。license：能按同名大图继承的继承（清单见 inherited 分布），其余按项目卡面/场景美术既有口径「项目自有（自制/AI 生成）」登记。历史未变债（基线 1162 口径）不在本批处置范围。",
+  "added": [
+    {
+      "path": "thumbs/cards/consumable.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/creature-cmtn6ulm4boj.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/creature-cmtn79743r2n.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/creature-cmtn7err0a7.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/curse-drain.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/curse-freeze.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/curse-silence.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/curse-venom.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/dark-eclipse.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt12-raygun.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt2-apollo.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt2-treasuremap.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt2-venomstaff.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-azure-sword.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-blooddrinker.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-chaos-eye.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-crimson-pouch.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-deep-diary.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-deep-seal.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-holy-staff.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-immortal-blade.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-light-mail.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-longsword.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-master-staff.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-reverse-bow.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-sapper-bomb.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-silver-runesword.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-staff.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-wolf-bow.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3eq-boiler.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3eq-mistbox.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt7-arcanescroll.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt7-darkfort.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt7-talisman.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/equipment-armor.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/equipment-utility.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/equipment-weapon.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/event.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/expedition-starters/basic-attack.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/expedition-starters/fireball.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/expedition-starters/rations.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/expedition-starters/staff.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/healing.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/hero-abysssovereign.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/hero-descend.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/hero-forbidden.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/hero-mage.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/hero-priest.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/hero-summoner.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/hero-sword.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/hero.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/builtin-fuyuanyao.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/cmtmvq6ss84l.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/items/starter-emergency-bandage.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/tt-crystal.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/tt-jinchuangyao.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/tt-medneedle.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/tt-token-gold.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/tt3-blue-potion.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/tt3-demon-potion.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/tt3-houyi-potion.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/tt3-iceheart-potion.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/tt3-mind-potion.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/tt3-mixed-potion.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/tt3-mystery-potion.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/tt3-python-potion.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/tt3-savior-elixir.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/tt3-turnabout-potion.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/tt3sp-doom.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/tt4-shine-token.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/tt4-smoke-bomb.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/items/tt4-woodify.webp",
+      "code": "unlisted",
+      "license": "项目自有（NovelAI V5 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/martial-cc-chase-slash.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-cc-cursed-blade.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-cc-dual-wield.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-cc-last-stand.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-cc-rapid-fire.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-cmtn0pbkmnvc.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-cmtn0xt0zr7.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-cmtn233trmeg.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-cmtn2jc142dj.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-melee.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/martial-ranged.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/martial-tt2-bloodblade.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt2-comboarrow.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt2-jianghu.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt2-piercearrow.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt2-shoot.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-armor-rush.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-arrow-rain.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-bandage.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-blood-arrow.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-dig-treasure.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-execute.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-flux-slash.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-frost-slash.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-hold-fast.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-noon-duel.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-purify-arrow.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-qi-wave.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-reshot.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-skewer.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-venom-arrow.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt3-wave-slash.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt3wu-shike.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-ironphalanx.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/resource-key.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/resource-material.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/resource-valuables.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/resources/coin-copper.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/resources/coin-gold.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/resources/coin-silver.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/resources/diamond.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/resources/econpack.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/resources/garnet-marble.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/resources/key-one.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/resources/key.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/resources/keys-bunch.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/resources/pet-egg.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/resources/ration-double.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/resources/ration-std.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/resources/ration.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/resources/wood-bundle.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/resources/wood-lots.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/resources/wood.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/spell-cc-double-boom.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-cc-ember-burst.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-cc-lava-blast.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-cc-mana-surge.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-cc-poison-burst.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-cc-rot-seed.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-cmtn125e1nk0.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-cmtn1epgt20j.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-cmtn1gfhczzj.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-cmtn1lbhbqi4.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-cmtn1ntxzoc4.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-cmtn1p9vb5au.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-cmtn1r10xnl1.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-cmtna0nb1yxt.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-backupcell.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-barriermend.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-basicdev.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-breakthrough.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-chargeray.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-elemburst.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-felguard.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-firecracker.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-freezeray.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-hitechrd.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-infectray.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-magicfind.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-raydragon.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-saturate.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-sporewall.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt12-unstableray.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-chain-lightning.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-fireball.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-firm-barrier.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-flame-storm.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-holy-water.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-magic-lamp.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-nuke-ray.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-petal.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-thornfield.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-thunderblast.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt3-toxin.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt3sp-bloodstorm.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt3sp-dodge.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt3sp-flowerzhen.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt3sp-magicoil.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt3sp-shadowshot.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt3sp-silverthorn.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt5-galaxy-voyage.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-abysscurse.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-arcanebolt.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-bladebloom.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-burnharvest.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-elementstorm.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-energize.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-frozenight.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-holyglow.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-holyheal.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-livingwater.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-maxsupply.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-meteorstrong.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-recruit.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-stratagem.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt7-twinfireball.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse1.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse2.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse3.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse4.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/cards/spell.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/cards/unknown.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/portraits/enemies/archer.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/portraits/enemies/bandit.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/portraits/enemies/boss_elem.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/portraits/enemies/boss_general.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/portraits/enemies/boss_orc.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/portraits/enemies/cavalry.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/portraits/enemies/dragon.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/portraits/enemies/esper_candle.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/portraits/enemies/esper_crow.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/portraits/enemies/esper_echo.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/portraits/enemies/esper_silence.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/portraits/enemies/fire_el.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/portraits/enemies/grass_el.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/portraits/enemies/infantry.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/portraits/enemies/orc_axe.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/portraits/enemies/orc_jav.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/portraits/enemies/water_el.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/portraits/enemies/wolf_rider.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/scenes/battle-normal-anime-v2.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/scenes/battle-street-amber-anime-v1.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/event-bandits-anime-v2.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/scenes/event-cmtn7qttxqo4.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/event-ev19-arrows.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/event-ev19-classchest.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/event-ev19-fireballs.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/event-ev19-gamble.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/event-ev19-pearlbox.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/event-ev19-potions.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/event-ev19-quartermaster.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/event-ev19-recode.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/event-ev19-vital.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/event-tt6-airdrop.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/event-tt6-chestdraw.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/event-tt6-demondeal.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/event-tt6-goldhammer.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/event-tt6-goldmine.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/event-tt6-mystery.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/event-tt6-relief.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/event-tt6-systemsupply.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/hub-wallpaper.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/scene-altar-anime-v2.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-anime-v2.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-boss-anime-v1.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-class-anime-v1.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-large-anime-v1.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-medium-anime-v1.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-small-anime-v1.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/scenes/scene-door-anime-v2.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/scenes/scene-extract-anime-v2.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/scenes/scene-fire-anime-v2.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/scenes/scene-pickup-coin-anime-v2.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/scenes/scene-pickup-key-anime-v2.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/scenes/scene-pickup-rations-anime-v2.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/scenes/scene-pickup-wood-anime-v2.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/scenes/scene-shop-anime-v2.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": true
+    },
+    {
+      "path": "thumbs/scenes/winter-expedition/core.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/winter-expedition/greenhouse.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/winter-expedition/outskirts.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/winter-expedition/sanctuary.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "thumbs/scenes/winter-expedition/supply-room.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "ui/home-v2/achievement-handpainted-v3.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "ui/home-v2/camera-handpainted-v3.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "ui/home-v2/camera.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "ui/home-v2/expedition-handpainted-v3.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    },
+    {
+      "path": "ui/home-v2/expedition-sigil.webp",
+      "code": "unlisted",
+      "license": "项目自有（自制/AI 生成）",
+      "licenseInherited": false
+    }
+  ],
+  "updated": [
+    {
+      "path": "ui/beginner-guide/battle.svg",
+      "code": "bytes-mismatch"
+    },
+    {
+      "path": "ui/beginner-guide/battle.svg",
+      "code": "sha256-mismatch"
+    },
+    {
+      "path": "ui/beginner-guide/extract.svg",
+      "code": "bytes-mismatch"
+    },
+    {
+      "path": "ui/beginner-guide/extract.svg",
+      "code": "sha256-mismatch"
+    },
+    {
+      "path": "ui/beginner-guide/growth.svg",
+      "code": "bytes-mismatch"
+    },
+    {
+      "path": "ui/beginner-guide/growth.svg",
+      "code": "sha256-mismatch"
+    },
+    {
+      "path": "ui/beginner-guide/loot.svg",
+      "code": "bytes-mismatch"
+    },
+    {
+      "path": "ui/beginner-guide/loot.svg",
+      "code": "sha256-mismatch"
+    },
+    {
+      "path": "ui/beginner-guide/map.svg",
+      "code": "bytes-mismatch"
+    },
+    {
+      "path": "ui/beginner-guide/map.svg",
+      "code": "sha256-mismatch"
+    },
+    {
+      "path": "ui/beginner-guide/prepare.svg",
+      "code": "bytes-mismatch"
+    },
+    {
+      "path": "ui/beginner-guide/prepare.svg",
+      "code": "sha256-mismatch"
+    }
+  ],
+  "inheritedLicenseCounts": {
+    "项目自有（自制/AI 生成）": 62,
+    "项目自有（NovelAI V5 生成）": 20
+  },
+  "fallbackLicensePaths": [
+    "thumbs/cards/creature-cmtn6ulm4boj.webp",
+    "thumbs/cards/creature-cmtn79743r2n.webp",
+    "thumbs/cards/creature-cmtn7err0a7.webp",
+    "thumbs/cards/curse-drain.webp",
+    "thumbs/cards/curse-freeze.webp",
+    "thumbs/cards/curse-silence.webp",
+    "thumbs/cards/curse-venom.webp",
+    "thumbs/cards/dark-eclipse.webp",
+    "thumbs/cards/equip-tt12-raygun.webp",
+    "thumbs/cards/equip-tt2-apollo.webp",
+    "thumbs/cards/equip-tt2-treasuremap.webp",
+    "thumbs/cards/equip-tt2-venomstaff.webp",
+    "thumbs/cards/equip-tt3-azure-sword.webp",
+    "thumbs/cards/equip-tt3-blooddrinker.webp",
+    "thumbs/cards/equip-tt3-chaos-eye.webp",
+    "thumbs/cards/equip-tt3-crimson-pouch.webp",
+    "thumbs/cards/equip-tt3-deep-diary.webp",
+    "thumbs/cards/equip-tt3-deep-seal.webp",
+    "thumbs/cards/equip-tt3-holy-staff.webp",
+    "thumbs/cards/equip-tt3-immortal-blade.webp",
+    "thumbs/cards/equip-tt3-light-mail.webp",
+    "thumbs/cards/equip-tt3-longsword.webp",
+    "thumbs/cards/equip-tt3-master-staff.webp",
+    "thumbs/cards/equip-tt3-reverse-bow.webp",
+    "thumbs/cards/equip-tt3-sapper-bomb.webp",
+    "thumbs/cards/equip-tt3-silver-runesword.webp",
+    "thumbs/cards/equip-tt3-staff.webp",
+    "thumbs/cards/equip-tt3-wolf-bow.webp",
+    "thumbs/cards/equip-tt3eq-boiler.webp",
+    "thumbs/cards/equip-tt3eq-mistbox.webp",
+    "thumbs/cards/equip-tt7-arcanescroll.webp",
+    "thumbs/cards/equip-tt7-darkfort.webp",
+    "thumbs/cards/equip-tt7-talisman.webp",
+    "thumbs/cards/expedition-starters/basic-attack.webp",
+    "thumbs/cards/expedition-starters/fireball.webp",
+    "thumbs/cards/expedition-starters/rations.webp",
+    "thumbs/cards/expedition-starters/staff.webp",
+    "thumbs/cards/hero-abysssovereign.webp",
+    "thumbs/cards/hero-forbidden.webp",
+    "thumbs/cards/items/cmtmvq6ss84l.webp",
+    "thumbs/cards/martial-cc-chase-slash.webp",
+    "thumbs/cards/martial-cc-cursed-blade.webp",
+    "thumbs/cards/martial-cc-dual-wield.webp",
+    "thumbs/cards/martial-cc-last-stand.webp",
+    "thumbs/cards/martial-cc-rapid-fire.webp",
+    "thumbs/cards/martial-cmtn0pbkmnvc.webp",
+    "thumbs/cards/martial-cmtn0xt0zr7.webp",
+    "thumbs/cards/martial-cmtn233trmeg.webp",
+    "thumbs/cards/martial-cmtn2jc142dj.webp",
+    "thumbs/cards/martial-tt2-bloodblade.webp",
+    "thumbs/cards/martial-tt2-comboarrow.webp",
+    "thumbs/cards/martial-tt2-jianghu.webp",
+    "thumbs/cards/martial-tt2-piercearrow.webp",
+    "thumbs/cards/martial-tt2-shoot.webp",
+    "thumbs/cards/martial-tt3-armor-rush.webp",
+    "thumbs/cards/martial-tt3-arrow-rain.webp",
+    "thumbs/cards/martial-tt3-bandage.webp",
+    "thumbs/cards/martial-tt3-blood-arrow.webp",
+    "thumbs/cards/martial-tt3-dig-treasure.webp",
+    "thumbs/cards/martial-tt3-execute.webp",
+    "thumbs/cards/martial-tt3-flux-slash.webp",
+    "thumbs/cards/martial-tt3-frost-slash.webp",
+    "thumbs/cards/martial-tt3-hold-fast.webp",
+    "thumbs/cards/martial-tt3-noon-duel.webp",
+    "thumbs/cards/martial-tt3-purify-arrow.webp",
+    "thumbs/cards/martial-tt3-qi-wave.webp",
+    "thumbs/cards/martial-tt3-reshot.webp",
+    "thumbs/cards/martial-tt3-skewer.webp",
+    "thumbs/cards/martial-tt3-venom-arrow.webp",
+    "thumbs/cards/martial-tt3-wave-slash.webp",
+    "thumbs/cards/martial-tt3wu-shike.webp",
+    "thumbs/cards/martial-tt7-ironphalanx.webp",
+    "thumbs/cards/resources/coin-copper.webp",
+    "thumbs/cards/resources/coin-gold.webp",
+    "thumbs/cards/resources/coin-silver.webp",
+    "thumbs/cards/resources/pet-egg.webp",
+    "thumbs/cards/spell-cc-double-boom.webp",
+    "thumbs/cards/spell-cc-ember-burst.webp",
+    "thumbs/cards/spell-cc-lava-blast.webp",
+    "thumbs/cards/spell-cc-mana-surge.webp",
+    "thumbs/cards/spell-cc-poison-burst.webp",
+    "thumbs/cards/spell-cc-rot-seed.webp",
+    "thumbs/cards/spell-cmtn125e1nk0.webp",
+    "thumbs/cards/spell-cmtn1epgt20j.webp",
+    "thumbs/cards/spell-cmtn1gfhczzj.webp",
+    "thumbs/cards/spell-cmtn1lbhbqi4.webp",
+    "thumbs/cards/spell-cmtn1ntxzoc4.webp",
+    "thumbs/cards/spell-cmtn1p9vb5au.webp",
+    "thumbs/cards/spell-cmtn1r10xnl1.webp",
+    "thumbs/cards/spell-cmtna0nb1yxt.webp",
+    "thumbs/cards/spell-tt12-backupcell.webp",
+    "thumbs/cards/spell-tt12-barriermend.webp",
+    "thumbs/cards/spell-tt12-basicdev.webp",
+    "thumbs/cards/spell-tt12-breakthrough.webp",
+    "thumbs/cards/spell-tt12-chargeray.webp",
+    "thumbs/cards/spell-tt12-elemburst.webp",
+    "thumbs/cards/spell-tt12-felguard.webp",
+    "thumbs/cards/spell-tt12-firecracker.webp",
+    "thumbs/cards/spell-tt12-freezeray.webp",
+    "thumbs/cards/spell-tt12-hitechrd.webp",
+    "thumbs/cards/spell-tt12-infectray.webp",
+    "thumbs/cards/spell-tt12-magicfind.webp",
+    "thumbs/cards/spell-tt12-raydragon.webp",
+    "thumbs/cards/spell-tt12-saturate.webp",
+    "thumbs/cards/spell-tt12-sporewall.webp",
+    "thumbs/cards/spell-tt12-unstableray.webp",
+    "thumbs/cards/spell-tt3-chain-lightning.webp",
+    "thumbs/cards/spell-tt3-fireball.webp",
+    "thumbs/cards/spell-tt3-firm-barrier.webp",
+    "thumbs/cards/spell-tt3-flame-storm.webp",
+    "thumbs/cards/spell-tt3-holy-water.webp",
+    "thumbs/cards/spell-tt3-magic-lamp.webp",
+    "thumbs/cards/spell-tt3-nuke-ray.webp",
+    "thumbs/cards/spell-tt3-petal.webp",
+    "thumbs/cards/spell-tt3-thornfield.webp",
+    "thumbs/cards/spell-tt3-thunderblast.webp",
+    "thumbs/cards/spell-tt3-toxin.webp",
+    "thumbs/cards/spell-tt3sp-bloodstorm.webp",
+    "thumbs/cards/spell-tt3sp-dodge.webp",
+    "thumbs/cards/spell-tt3sp-flowerzhen.webp",
+    "thumbs/cards/spell-tt3sp-magicoil.webp",
+    "thumbs/cards/spell-tt3sp-shadowshot.webp",
+    "thumbs/cards/spell-tt3sp-silverthorn.webp",
+    "thumbs/cards/spell-tt5-galaxy-voyage.webp",
+    "thumbs/cards/spell-tt7-abysscurse.webp",
+    "thumbs/cards/spell-tt7-arcanebolt.webp",
+    "thumbs/cards/spell-tt7-bladebloom.webp",
+    "thumbs/cards/spell-tt7-burnharvest.webp",
+    "thumbs/cards/spell-tt7-elementstorm.webp",
+    "thumbs/cards/spell-tt7-energize.webp",
+    "thumbs/cards/spell-tt7-frozenight.webp",
+    "thumbs/cards/spell-tt7-holyglow.webp",
+    "thumbs/cards/spell-tt7-holyheal.webp",
+    "thumbs/cards/spell-tt7-livingwater.webp",
+    "thumbs/cards/spell-tt7-maxsupply.webp",
+    "thumbs/cards/spell-tt7-meteorstrong.webp",
+    "thumbs/cards/spell-tt7-recruit.webp",
+    "thumbs/cards/spell-tt7-stratagem.webp",
+    "thumbs/cards/spell-tt7-twinfireball.webp",
+    "thumbs/cards/spell-tt8-curse1.webp",
+    "thumbs/cards/spell-tt8-curse2.webp",
+    "thumbs/cards/spell-tt8-curse3.webp",
+    "thumbs/cards/spell-tt8-curse4.webp",
+    "thumbs/portraits/enemies/esper_candle.webp",
+    "thumbs/portraits/enemies/esper_crow.webp",
+    "thumbs/portraits/enemies/esper_echo.webp",
+    "thumbs/portraits/enemies/esper_silence.webp",
+    "thumbs/scenes/battle-street-amber-anime-v1.webp",
+    "thumbs/scenes/event-cmtn7qttxqo4.webp",
+    "thumbs/scenes/event-ev19-arrows.webp",
+    "thumbs/scenes/event-ev19-classchest.webp",
+    "thumbs/scenes/event-ev19-fireballs.webp",
+    "thumbs/scenes/event-ev19-gamble.webp",
+    "thumbs/scenes/event-ev19-pearlbox.webp",
+    "thumbs/scenes/event-ev19-potions.webp",
+    "thumbs/scenes/event-ev19-quartermaster.webp",
+    "thumbs/scenes/event-ev19-recode.webp",
+    "thumbs/scenes/event-ev19-vital.webp",
+    "thumbs/scenes/event-tt6-airdrop.webp",
+    "thumbs/scenes/event-tt6-chestdraw.webp",
+    "thumbs/scenes/event-tt6-demondeal.webp",
+    "thumbs/scenes/event-tt6-goldhammer.webp",
+    "thumbs/scenes/event-tt6-goldmine.webp",
+    "thumbs/scenes/event-tt6-mystery.webp",
+    "thumbs/scenes/event-tt6-relief.webp",
+    "thumbs/scenes/event-tt6-systemsupply.webp",
+    "thumbs/scenes/hub-wallpaper.webp",
+    "thumbs/scenes/winter-expedition/core.webp",
+    "thumbs/scenes/winter-expedition/greenhouse.webp",
+    "thumbs/scenes/winter-expedition/outskirts.webp",
+    "thumbs/scenes/winter-expedition/sanctuary.webp",
+    "thumbs/scenes/winter-expedition/supply-room.webp",
+    "ui/home-v2/achievement-handpainted-v3.webp",
+    "ui/home-v2/camera-handpainted-v3.webp",
+    "ui/home-v2/camera.webp",
+    "ui/home-v2/expedition-handpainted-v3.webp",
+    "ui/home-v2/expedition-sigil.webp"
+  ],
+  "fallbackLicenseNote": "177 条无同名大图可继承（老卡/场景整族未登记），按项目对卡面/场景美术的既有口径「项目自有（自制/AI 生成）」登记；其中 62+20 条命中同名继承见 inheritedLicenseCounts。无「待确认」前缀条目，不产生 license-pending 新债。",
+  "updatedNote": "updated 12 行=6 个 ui/beginner-guide svg 的 bytes+sha256 两条码（LF 归一口径重登记，#35 先例）"
+}

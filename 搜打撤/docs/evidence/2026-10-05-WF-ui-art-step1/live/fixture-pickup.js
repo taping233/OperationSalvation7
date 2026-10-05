@@ -1,0 +1,1 @@
+(()=>{const q=window.__uiArtQA;q.reset();q.scenes.openPickupPage('coin','+3 币',()=>q.scenes.finishInstant(),true);return true;})()

@@ -1,0 +1,12 @@
+{
+  "baselineHeadAtStart": "425d03920e",
+  "remoteRefsRefreshed": false,
+  "render": "3/3 OGG decode, exact frame counts, no clipping, boundary jump checks passed; see render-report.json",
+  "targetedTests": "3 files / 11 tests passed; 2026-10-05T03-24-53.962Z-5e0451f1.json",
+  "selftest": "game/selftest.js passed including new 3-file BGM references",
+  "scopedAssetAudit": "0 errors; 773 unchanged historical warnings at check time",
+  "docsCheck": "343 relative links; no findings at check time",
+  "browser": "browser-check.json; 3/3 decoded and audition buttons exercised; production scenes incomplete",
+  "userFeedback": "first demos acceptable but insufficient; authorised desktop DAW candidates next",
+  "fullTestsBuildRemoteCI": "not run"
+}

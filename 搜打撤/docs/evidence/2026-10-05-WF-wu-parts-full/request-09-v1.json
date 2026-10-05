@@ -1,0 +1,11 @@
+{
+  "id": "09",
+  "slug": "skirt-front",
+  "prompt": "ONE individual 2D skeletal-animation sprite component for Wu, not a sheet. Genuine transparent PNG background, zero alpha outside the silhouette, no cast shadow, aura, backdrop, text, numbers or alignment marks. Reference 1 is the confirmed THREE-QUARTER FACING SCREEN RIGHT combat mother pose and proportions; reference 2 is the front identity/style reference. Painterly anime, LOW detail, large opaque angular color blocks, clear hard-edge shadows, economical rough hand-painted marks. Neutral black and gray clothing, cream skin, silver-white hair. Keep original anatomical proportions and camera angle. Paint hidden overlap at the joints so the part can rotate without gaps. Center the component with generous transparent margins, one piece only, not a mannequin or full character. No amputated gore, no wounds; clean game asset joining boundaries. Do not include adjacent body parts, do not invent equipment or accessories. Part 09: ONLY the FRONT skirt layer, same short A-line silhouette, exact same waistband width and above-knee hem height as the isolated skirt in reference 3. Reference 3 controls matching fabric, blue star band and large folds; produce a slightly front-facing three-quarter-right view appropriate to the front of Wu in reference 1. Entire skirt from waistband attachment to final hem, no upper dress torso, sleeves, skin, legs, boots, hair or weapon. Use a few big black-gray layered ruffle planes, one dark cobalt band with a few large bright-blue five-point stars at bottom hem and narrow black outer ruffle. Front/back/sides equal length; absolutely no long rear train. Fully opaque layer with a clean narrow waistband overlap so it attaches beneath separate bodice. Slight variation in front folds, not a second full dress. One skirt component only.",
+  "refs": [
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\wu-battle-base-frame000.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\reference.png",
+    "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\characters\\wu-parts-v1\\part-08-skirt-back-v1.png"
+  ],
+  "tool": "built-in imagegen"
+}

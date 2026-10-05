@@ -1,0 +1,41 @@
+{
+  "checkedAt": "2026-10-03T07:13:02.008Z",
+  "passed": true,
+  "checks": {
+    "localLinks": 40,
+    "jsonFiles": 11,
+    "originalBasic": 110,
+    "originalVariants": 55,
+    "researchRows": 165,
+    "allIdsPreserved": true,
+    "active": 152,
+    "frozen": 13,
+    "coverageBytes": 521536
+  },
+  "docsCheck": {
+    "result": "passed",
+    "relativeLinks": 347,
+    "findings": 0,
+    "scope": "现行docs/production，相关受检文件后续未变，复用有效结果"
+  },
+  "workflowVerify": {
+    "mode": "skip",
+    "reason": "纯说明，无游戏测试路径；不把skip写成通过"
+  },
+  "checkedDocumentHashes": {
+    "BATTLE-REBUILD.md": "79ecc52bcb378cf6d16027d6d621ed78ec2f46390ced5b0b15d50eb058d69118",
+    "FACTS.md": "1ec4330c3025ce994f7229b58e361495c64a6d15c25d7b0ba836a5f049c535c7",
+    "README.md": "449e7f93a26e31114c24de0f9b9ab3c30214898a459cf908fddaa8f03c32df4a",
+    "refs/open-source-methods.md": "3b023bda3f1fa6d84713fc26f6a31084e62c15bb769b91e4049458b5a8ce22bb",
+    "refs/README.md": "5e7a189602ae87605c37b2c5b4ed70d472664dffc7ae9f0f82e2839c5c443a3d",
+    "refs/visual-reference-review.md": "2823c8092571cf52c9af1d6b41ed755d5f1e51fae7b9a203bc0df32ab4f6eae7",
+    "TASKS.md": "5bf74e99d27ae7037102495ed468ef2643906767da40fb653f1c2721b965bb35"
+  },
+  "limits": [
+    "研究覆盖不等于全当前实页通过",
+    "未运行数值性能采样/游戏全量/build",
+    "链接不核外部网址与标题锚点",
+    "远端与CI未核"
+  ],
+  "issues": []
+}

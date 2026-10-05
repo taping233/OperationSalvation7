@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "seven-departments-v2",
+  "date": "2026-10-02",
+  "owner": "Friday",
+  "goal": "重做图像与量化主导的七部门PDF汇报",
+  "paths": [
+    "docs/evidence/2026-10-02-seven-departments-review/v2",
+    "output/pdf"
+  ],
+  "doneWhen": [
+    "当前窗口实机图与官方对照图来源可核对",
+    "每部门有图表或量化数据及明确口径",
+    "PDF画面主次清晰且全页渲染检查通过"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "已采七类实机截图+三代理复核；重做停在权限墙（10-04老板确认收编既有材料）",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "Steam素材导出与后续localhost补采未做"
+  ],
+  "updatedAt": "2026-10-03T17:20:08.559Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

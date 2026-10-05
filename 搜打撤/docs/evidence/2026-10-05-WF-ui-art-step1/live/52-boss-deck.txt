@@ -1,0 +1,72 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 6/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 6/16
+		6 container demon BOSS战 · 编组牌库, ID: overlay
+			7 container
+				8 heading demon BOSS战 · 编组牌库, Value: 2, ID: ovTitle
+					9 image demon
+					10 text  BOSS战 · 编组牌库
+				11 container ovBody
+					12 container
+						13 text 本局首脑： 肃清总督 （5-50）——从背包选  15  张 招式 / 装备 / 能力卡 ，与  2  张初始攻击组成牌库 · 开局抽 5 张 · 每回合开始抽 1 张 · 每回合固定 2 费
+					14 container
+						15 image question
+						16 text 肃清总督  词缀【
+						17 image arrow
+						18 text  军威】每个回合结束时攻击力 +2
+					19 container
+						20 image lock
+						21 text  固定编入：初始攻击 ×2（初始攻击不足 5 张——部分进消耗口袋了） · 
+						22 image cross
+						23 text  道具 / 资源 / 事件卡与初始攻击不可选入 · 
+						24 image bolt
+						25 text  「对战开始时」装备编入即生效（卡面带角标）
+					26 container
+						27 image cross
+						28 text  背包可编卡牌不足  15  张（现有 5 张）——选完后按现有卡牌迎战首脑
+					29 heading 可选卡牌 已选 0 张（至少 5）, Value: 3
+						30 text 可选卡牌 已选 0 张（至少 5）
+					31 container
+						32 text 1
+						33 image 镭射
+						34 text 镭射 法术 · 古朴
+						35 image crystal
+						36 text 注能 1 造成 5 点法术 伤害 ； 注能 ( 1 )： 伤害 +3 。
+						37 image sparkles
+						38 text 5'
+						39 text 法伤
+						40 image coin
+						41 text 2
+					42 container
+						43 text 1
+						44 image 二刀流
+						45 text 二刀流 武术 · 稀有 发现 一张武术卡并额外获得 1 张复制。
+						46 image coin
+						47 text 2
+					48 container
+						49 text 1
+						50 image 格挡
+						51 text 格挡 武术 · 古朴 本 回合 所受 伤害 降为  1 。
+						52 image coin
+						53 text 2
+					54 container
+						55 text 2
+						56 image 龙焰射线
+						57 text 龙焰射线 法术 · 古朴
+						58 image crystal
+						59 text 注能 1 注能 （ 1 ）： 造成 11 点 法伤
+					60 container
+						61 text 1
+						62 image 神灯
+						63 text 神灯 法术 · 史诗
+						64 image plate
+						65 text 甲 5 抉择： 1 °  发现 1  张牌并将其释放； 2 ° 消灭  1  名受伤敌人（非 BOSS）； 3 °  冰冻 2  名角色，获得 5  点 护甲 。
+						66 image coin
+						67 text 4
+					68 button (disabled) 还需选择 5 张…
+					69 button ↩ 放弃挑战
+
+The focused UI element is 69 button ↩ 放弃挑战

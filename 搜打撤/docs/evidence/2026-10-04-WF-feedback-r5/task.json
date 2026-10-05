@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-feedback-r5",
+  "date": "2026-10-04",
+  "owner": "Friday-Codex",
+  "goal": "实施4条新留言：极慢水平立绘、角色卡池重排、移除指定随身汇总提示栏",
+  "paths": [
+    "game/css/character-idle.css",
+    "game/src/run/game.run.altar.js",
+    "game/css/expedition-roster.css",
+    "game/src/experience/pocket-strip.js",
+    "game/src/README.md"
+  ],
+  "doneWhen": [
+    "立绘/卡池/指定提示栏修改已接入",
+    "按老板要求不测试不实页，交老板验收"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "4留言实现已接入，老板附图确认expPocketStrip对象后移除其创建更新，立绘40s水平轻移与卡池重排完成；老板接管验收",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "未测试/lint/解析验证/build或改后实页验收；远端差异和CI未核"
+  ],
+  "updatedAt": "2026-10-04T10:13:59.578Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

@@ -1,0 +1,11 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container
+		3 heading 撤离结算待恢复, Value: 2
+			4 text 撤离结算待恢复
+		5 text 撤离已成功，整理快照尚未确认写入。请重试保存后继续。
+		6 image scroll
+		7 text  撤离前的局面已保存——若反复失败，可以退出游戏重新进入，会回到撤离前的位置，不会重复扣卡。
+		8 button 重试撤离整理
+
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/

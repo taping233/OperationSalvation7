@@ -1,0 +1,18 @@
+{
+  "result": {
+    "type": "object",
+    "value": {
+      "closingToRemovalMs": 154.19999999925494,
+      "firstClosingAtMs": 55.69999999925494,
+      "removed": true,
+      "styles": {
+        "declaredClose": "120ms",
+        "paperDuration": "0.12s, 0.12s"
+      },
+      "window": {
+        "height": 764,
+        "width": 871
+      }
+    }
+  }
+}

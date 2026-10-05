@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-xingyue-wind-song",
+  "date": "2026-10-04",
+  "owner": "Friday-Codex",
+  "goal": "按低细节手绘画风与正常星月身份重绘浪掷风吟，重新设计贴合卡名的动作分镜",
+  "paths": [
+    "game/assets/cards/hero-sacredrain.webp",
+    "game/assets/thumbs/cards/hero-sacredrain.webp",
+    "game/data/art-mapping.json",
+    "game/assets/asset-manifest.json"
+  ],
+  "doneWhen": [
+    "正常星月身份、风势/衣摆/吟唱构图与低细节画风完成",
+    "原图和缩略图接入登记，老板接管验收，不跑测试或网页"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "10-05 收尾核对：原会话已死（无进程），卡面被 WF-wind-song-block-brush 批（老板令实装吧）取代并整合，现树卡面即终版；manifest/art-mapping 条目随包",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "卡面终验留老板（不认可可依证据 originals 复原）"
+  ],
+  "updatedAt": "2026-10-05T02:54:37.091Z",
+  "doneWhenConfirmed": true
+}

@@ -1,0 +1,42 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail color bake only",
+  "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-8a109da6-9380-4fb4-b273-4f2f005e6083.png",
+  "outputs": [
+    {
+      "path": "game/assets/cards/spell-tt3-nature-form.webp",
+      "bytes": 229904,
+      "sha256": "eb3cad5eef916f9ee00b29c548ba55e583992f4fe544f08cabed4d1421d20ec4",
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/cards/spell-tt3-nature-form.webp",
+      "bytes": 40126,
+      "sha256": "1eb425ede8250cd0d1b61928039908d617deb6f7bcc7f79f8118d93e205eb143",
+      "size": [
+        448,
+        448
+      ]
+    }
+  ],
+  "source": {
+    "path": "game/art-source/cards/spell-tt3-nature-form-creative-20261005.png",
+    "bytes": 2099773,
+    "sha256": "dcb598695b339fd4f29ae9c5c31aa292e63c310bd2b68f057d3cb23b70970ab6"
+  },
+  "backups": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-fullmoon-creative/originals-before-creative/full-spell-tt3-nature-form.webp",
+      "bytes": 127300,
+      "sha256": "8f4f321630933ac3221c0209f513128ec7ca2c86f38210d526cddaf5a7917b52"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-fullmoon-creative/originals-before-creative/thumb-spell-tt3-nature-form.webp",
+      "bytes": 26690,
+      "sha256": "5679ce518c19af4da0a2762b6ecd793c942f2776f09b616a5444998c7e328d9c"
+    }
+  ],
+  "verification": "老板明确禁止测试，本轮未测试/资产审计/实页"
+}

@@ -1,0 +1,1 @@
+(()=>{const q=window.__uiArtQA;q.reset();q.game.layerIdx=2;const i=q.game.layerData[2].logical.findIndex(c=>c.def?.type==='emergencyExit');if(i<0)throw Error('本图未生成撤离点');q.game.trackPos=i;q.altar.openEmergencyModal();return true;})()

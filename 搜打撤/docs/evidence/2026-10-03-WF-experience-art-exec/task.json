@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-experience-art-exec",
+  "date": "2026-10-03",
+  "owner": "Friday Codex 体验美术执行",
+  "goal": "实施总纲适用项并补现行覆盖与性能证据",
+  "paths": [
+    "game/css/expedition-battle.css",
+    "game/css/page-battle-ui.css",
+    "game/css/expedition-inventory.css",
+    "game/css/expedition-map.css",
+    "game/src/battle/view/battle.frames.js",
+    "game/src/hub/game.hub.depart.js",
+    "game/src/hub/game.hub.pages.js",
+    "game/src/ui/game.menu.js",
+    "game/src/core/perf-probe.local.js",
+    "game/src/agent/agent.stats.js",
+    "game/src/agent/agent.data.js",
+    "docs/production/art/VISUAL-BIBLE.md",
+    "tools/nai_style.py",
+    "docs/evidence/2026-10-03-WF-experience-art-exec",
+    "docs/evidence/2026-10-03-experience-art-plan/coverage.json"
+  ],
+  "doneWhen": [
+    "现行覆盖逐项有准确结论；战斗完整样板后扩展；相关真实输入和性能证据留存；冻结边界保持"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "46/46定向测试绿+A7探针11/11补验（xart-z1接手盘点核实）",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "原会话已停，收尾由xart-z1完成"
+  ],
+  "updatedAt": "2026-10-03T17:20:07.662Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

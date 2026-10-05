@@ -1,0 +1,80 @@
+{
+  "role": "explore",
+  "title": "灰线行军 · LMMS版",
+  "bpm": 152,
+  "seconds": 50.5263125,
+  "native_engine": "LMMS 1.2.2 sf2player/FluidSynth, sinc-best, 2x oversampling, 48k float render",
+  "tracks": {
+    "Tine piano motif": {
+      "program": 4,
+      "bank": 0,
+      "volume": 100,
+      "pan": -12,
+      "notes": 96
+    },
+    "Picked guitar": {
+      "program": 27,
+      "bank": 0,
+      "volume": 85,
+      "pan": 24,
+      "notes": 112
+    },
+    "Warm pad": {
+      "program": 89,
+      "bank": 0,
+      "volume": 30,
+      "pan": -22,
+      "notes": 64
+    },
+    "Synth bass": {
+      "program": 38,
+      "bank": 0,
+      "volume": 34,
+      "pan": 0,
+      "notes": 144
+    },
+    "String response": {
+      "program": 48,
+      "bank": 0,
+      "volume": 58,
+      "pan": 17,
+      "notes": 16
+    },
+    "Electronic drums": {
+      "program": 25,
+      "bank": 128,
+      "volume": 38,
+      "pan": 0,
+      "notes": 476
+    }
+  },
+  "cycles_rendered": 2,
+  "delivered_cycle": 2,
+  "raw_peak": 0.056940414011478424,
+  "peak_dbfs": -1.209614872932434,
+  "rms_dbfs": -16.38705849647522,
+  "post_master_gain_db": 22.54718997158493,
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-daw/02-explore-ashline-v2.mmp",
+      "bytes": 123969,
+      "sha256": "a730e5ae06b3b982861832b6ac69d29c3f168364457c1ca87c429fa509cbd66d"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-daw/02-explore-ashline-v2.wav",
+      "bytes": 14551622,
+      "sha256": "f95bbd40ec6dfb7440c66ac734f729f7efefb26666bd0abcefabd8653f0e365f"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-daw/02-explore-ashline-v2.mp3",
+      "bytes": 1619023,
+      "sha256": "c86f61bd8c647785747cf19eb9f4ff0ccece29c2922afd82c9a90fbb510292b7"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-daw/02-explore-ashline-v2.ogg",
+      "bytes": 943973,
+      "sha256": "271f656c54b38fcd28ca84d3fd07fe1431aeb1f3e40bc414a7d3fd14f9c7de86"
+    }
+  ],
+  "listening": "user listening required; numerical checks cannot establish aesthetic improvement"
+}

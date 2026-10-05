@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-feedback-r3",
+  "date": "2026-10-04",
+  "owner": "Friday-Codex",
+  "goal": "实施两条新留言：基地入场过渡与六页配图新手指南",
+  "paths": [
+    "game/src/ui/overlay.js",
+    "game/css/page-hub.css",
+    "game/src/ui/game.menu.js",
+    "game/index.html",
+    "game/src/ui/beginner-guide.js",
+    "game/css/beginner-guide.css",
+    "game/data/beginner-guide.json",
+    "game/assets/ui/beginner-guide",
+    "game/assets/asset-manifest.json"
+  ],
+  "doneWhen": [
+    "基地过渡调整与分页配图指南已接入",
+    "按老板最新要求不测试不实页，交老板验收"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "基地过渡与六页配图指南已实现接入，原始留言/分工/图片登记入本任务记录；老板自行验收",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "未运行测试、lint、解析验证、build或实页验收；远端差异/CI未核"
+  ],
+  "updatedAt": "2026-10-04T09:27:13.275Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

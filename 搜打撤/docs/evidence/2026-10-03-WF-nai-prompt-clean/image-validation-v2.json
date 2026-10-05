@@ -1,0 +1,29 @@
+{
+  "path_relative_to_repository": ".tmp/nai/output/wu-battle-right-transparent-20261003/wu-battle-right-transparent-v2.png",
+  "sha256": "362a7a0d448568601aa78ecba9ee4efcb3ee7ddcb762ece038ec991c7f501975",
+  "bytes": 1937491,
+  "size": [
+    1024,
+    1536
+  ],
+  "mode": "RGBA",
+  "alpha_extrema": [
+    0,
+    254
+  ],
+  "transparent_pixels": 952380,
+  "corner_alpha": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "visual_checks": [
+    "back-mounted sword removed",
+    "one longer black sword held toward screen-right",
+    "broader more selective painterly treatment",
+    "full figure and transparent background preserved"
+  ],
+  "source": "built-in image_gen edit; original generation retained",
+  "runtime_replacement": false
+}

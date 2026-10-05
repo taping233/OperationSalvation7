@@ -1,0 +1,18 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 5/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 5/16
+		6 container
+			7 text FIELD ENCOUNTER 01 / 04
+			8 heading dice 故障重编, Value: 2
+				9 image dice
+				10 text  故障重编
+			11 text 选择 2 张招式或装备卡，随机变为同稀有度、同类型的卡牌。
+			12 button 接入重编台 选择 2 张招式或装备卡进行同稀有度同类型转换 ▸
+				13 text 接入重编台
+				14 text 选择 2 张招式或装备卡进行同稀有度同类型转换
+				15 text ▸
+
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/

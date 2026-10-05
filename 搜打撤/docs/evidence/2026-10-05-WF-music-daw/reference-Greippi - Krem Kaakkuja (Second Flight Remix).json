@@ -1,0 +1,133 @@
+{
+  "project": "demos/Greippi - Krem Kaakkuja (Second Flight Remix).mmpz",
+  "sha256": "e818772255e19d88903b7663ab9625675cdfa249b6759905c5e1410041f7eb4d",
+  "head": {
+    "timesig_numerator": "4",
+    "bpm": "132",
+    "timesig_denominator": "4",
+    "mastervol": "100",
+    "masterpitch": "0"
+  },
+  "tracks": [
+    {
+      "name": "kick01.ogg",
+      "type": "0",
+      "patterns": 32,
+      "instrument": {
+        "name": "audiofileprocessor"
+      }
+    },
+    {
+      "name": "Sidechain Control",
+      "type": "0",
+      "patterns": 37,
+      "instrument": {
+        "name": "tripleoscillator"
+      }
+    },
+    {
+      "name": "Sidechain Attack",
+      "type": "5",
+      "patterns": 0,
+      "instrument": null
+    },
+    {
+      "name": "Saw Bass",
+      "type": "0",
+      "patterns": 59,
+      "instrument": {
+        "name": "sid"
+      }
+    },
+    {
+      "name": "Saw Bass (Crushed)",
+      "type": "0",
+      "patterns": 66,
+      "instrument": {
+        "name": "sid"
+      }
+    },
+    {
+      "name": "Automation track",
+      "type": "5",
+      "patterns": 0,
+      "instrument": null
+    },
+    {
+      "name": "Talking bass (mono)",
+      "type": "0",
+      "patterns": 20,
+      "instrument": {
+        "name": "tripleoscillator"
+      }
+    },
+    {
+      "name": "Talking bass (stereo)",
+      "type": "0",
+      "patterns": 47,
+      "instrument": {
+        "name": "tripleoscillator"
+      }
+    },
+    {
+      "name": "Triangle arp",
+      "type": "0",
+      "patterns": 53,
+      "instrument": {
+        "name": "bitinvader"
+      }
+    },
+    {
+      "name": "Automation track",
+      "type": "5",
+      "patterns": 0,
+      "instrument": null
+    },
+    {
+      "name": "Sawish Chords",
+      "type": "0",
+      "patterns": 15,
+      "instrument": {
+        "name": "sid"
+      }
+    },
+    {
+      "name": "Sawish Hit",
+      "type": "0",
+      "patterns": 23,
+      "instrument": {
+        "name": "sid"
+      }
+    },
+    {
+      "name": "TripleOscillator",
+      "type": "0",
+      "patterns": 18,
+      "instrument": {
+        "name": "tripleoscillator"
+      }
+    },
+    {
+      "name": "Automation track",
+      "type": "5",
+      "patterns": 0,
+      "instrument": null
+    },
+    {
+      "name": "8-bit pluck",
+      "type": "0",
+      "patterns": 34,
+      "instrument": {
+        "name": "sid"
+      }
+    },
+    {
+      "name": "sfxr",
+      "type": "0",
+      "patterns": 4,
+      "instrument": {
+        "name": "sfxr"
+      }
+    }
+  ]
+}

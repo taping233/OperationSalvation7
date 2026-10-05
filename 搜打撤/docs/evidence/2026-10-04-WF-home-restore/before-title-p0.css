@@ -1,0 +1,242 @@
+/* Winter lobby v2: original scene, ceremonial typography and painted artifacts. */
+#title { --home-edge: 4.5%; --home-gold: #e3c98e; --home-serif: 'KaiTi', 'STKaiti', 'SimSun', serif; }
+#title .title-bg {
+  background: url('../assets/reconstruction/wallpaper-original.webp') center / cover no-repeat;
+  transform: none; filter: saturate(.93) contrast(1.04) brightness(.86);
+}
+#title .title-bg::before, #title .title-bg::after,
+#title .title-inner::before, #title::before,
+#title .ak-hud::before, #title .ak-hud::after { display: none; }
+#title::after {
+  background: radial-gradient(ellipse at 48% 43%, transparent 27%, #05111f38 62%, #020b16b8 100%),
+    linear-gradient(90deg, #0612209c, #071a293d 21%, transparent 39%, #07132024 65%, #03111dc9),
+    linear-gradient(0deg, #020d18c9, transparent 37%, transparent 78%, #06132280);
+}
+#title .title-foreground-paper { display: none; }
+#title .title-heading {
+  left: 6%; right: auto; top: 19%; width: 29%; transform: none; z-index: 4;
+}
+#title .title-kicker {
+  display: block; margin: 0 0 16px; color: #c9d5df;
+  font: 11px/1.4 Georgia, serif; letter-spacing: .2em;
+}
+#title .winter-wordmark {
+  background: none; aspect-ratio: auto; margin: 0;
+  color: #f2f2eb; font-family: var(--home-serif) !important; font-size: clamp(50px, 5.7vw, 88px);
+  font-weight: 400; line-height: 1.16; letter-spacing: .035em; white-space: nowrap;
+  text-shadow: 0 2px 2px #07121e, 0 5px 18px #030e1baa; filter: none;
+}
+#title .winter-wordmark small {
+  display: block; margin: 0 0 9px 3px; color: #d5dce1;
+  font-family: var(--home-serif) !important;
+  font-size: 27px; letter-spacing: .26em; line-height: 1.4;
+}
+#title .title-lead {
+  margin: 17px 0 0 4px; padding-top: 14px; color: #b8c8d3;
+  border-top: 1px solid #c0ced142; width: max-content; max-width: 100%;
+  font: 13px/1.6 var(--home-serif); letter-spacing: .13em;
+}
+/* Solid top-left plaques, then a floating chapter guide. */
+#title .ak-tl { left: 24px; top: 24px; gap: 3px; }
+#title .ak-tl .ak-sq {
+  width: 76px; height: 60px; transform: none;
+  background: #293039b8; border: 0; border-bottom: 1px solid #a2afb052;
+  color: #e0e9eb; box-shadow: none; filter: none;
+}
+#title .ak-tl .ak-sq::after { display: none; }
+#title .ak-tl .ak-sq svg { width: 29px; height: 29px; }
+#title .ak-tl .ak-sq:hover { background: #404c57c7; color: #fff; }
+#title .ak-pillrow { position: static; }
+#title .ak-pillrow #mGuide {
+  position: absolute; top: 24px; left: 206px; height: 60px;
+  padding: 0 20px; transform: none; background: none; border: 0;
+  color: #e4ebec; font-size: 20px; letter-spacing: .14em; filter: none;
+}
+#title .ak-pillrow #mGuide svg { width: 25px; height: 25px; color: #c2d4d9; }
+#title .ak-pillrow #mGuide:hover { color: #fff; background: #a7bfce0d; }
+#title .ak-pillrow #mInbox {
+  position: absolute; left: var(--home-edge); top: auto; bottom: 5.8%;
+  height: 54px; padding: 0 10px; background: none; border: 0;
+  color: #e1e7e7; font-family: var(--home-serif); font-size: 20px;
+  letter-spacing: .08em; transform: none; filter: none;
+}
+#title .ak-pillrow #mInbox svg { width: 31px; height: 31px; margin-right: 7px; color: #c9d7dc; }
+#title .ak-pillrow #mInbox:hover { color: #ffe1a1; }
+/* Archive remains a true data piece, with the number close to its crest. */
+#title .ak-user {
+  top: 25px; right: 4%; padding: 0; transform: none;
+  min-width: 242px; background: none; border: 0; box-shadow: none;
+}
+#title .ak-user-row { position: relative; gap: 16px; padding: 0 0 25px; }
+#title .ak-user .ak-ava {
+  width: 65px; height: 65px; border: 1px solid #ddc89573;
+  box-shadow: 0 3px 12px #0209176b; background: #07152580;
+}
+#title .ak-lv { gap: 11px; }
+#title .ak-lv em { font: 12px Georgia, serif; letter-spacing: .12em; color: #becdd5; }
+#title .ak-lv b { font: 43px/1 Consolas, monospace; color: #cfe6e7; text-shadow: 0 2px 4px #020912; }
+#title .ak-uname {
+  position: absolute; top: auto; bottom: 4px; right: 0; margin: 0;
+  padding-top: 7px; border-top: 1px solid #d2dce040;
+  font-size: 12px; letter-spacing: .07em; color: #c0d0d7; white-space: nowrap;
+}
+/* Destinations have irregular painted silhouettes, no opaque orb disks or web rows. */
+#title .ak-hud .ak-circle {
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  width: 190px; height: 202px; padding: 0; gap: 0;
+  background: none; border: 0; border-radius: 0; box-shadow: none;
+  opacity: 1; filter: none; transform: none; text-align: center;
+  transition: transform .2s, filter .2s;
+}
+#title .ak-hud .ak-lib { left: 4.8%; right: auto; top: 48%; }
+#title .ak-hud .ak-ach { left: 17%; right: auto; top: 67%; }
+#title .ak-hud .ak-circle .c-ring {
+  width: 134px; height: 134px; flex: 0 0 134px;
+  transform: none; background: none; border: 0; box-shadow: none;
+}
+#title .ak-hud .ak-circle .c-ring::before {
+  inset: -3px; border-radius: 0; overflow: visible;
+  background: var(--home-icon) center / contain no-repeat;
+  filter: drop-shadow(0 3px 5px #020916b0); animation: none;
+}
+#title .ak-hud .ak-lib .c-ring { --home-icon: url('../assets/ui/home-v2/camera-handpainted-v3.webp?v=1'); }
+#title .ak-hud .ak-ach .c-ring { --home-icon: url('../assets/ui/home-v2/achievement-handpainted-v3.webp'); }
+#title .ak-hud .ak-circle .c-ring::after,
+#title .ak-hud .ak-circle .c-en::after { display: none; }
+#title .ak-hud .ak-circle .c-cn {
+  position: relative; margin: 3px 0 0; color: #eef0ea;
+  font-family: var(--home-serif) !important; font-size: 29px; line-height: 1.25;
+  font-weight: 400; letter-spacing: .09em;
+  text-shadow: 0 2px 3px #020814, 0 0 12px #031225;
+}
+#title .ak-hud .ak-circle .c-en {
+  margin: 4px 0 0; color: #d4bd89; font-family: Georgia, serif !important;
+  font-size: 12px; line-height: 1.2; font-style: italic; letter-spacing: .06em;
+  text-shadow: 0 2px 4px #031225;
+}
+#title .ak-hud .ak-circle .c-tag {
+  position: static; order: 4; margin: 5px 0 0; padding: 0;
+  background: none; border: 0; color: #cbd8df; font: 12px Consolas, monospace;
+}
+#title .ak-hud .ak-circle:hover { transform: translateY(-4px); background: none; filter: none; }
+#title .ak-hud .ak-circle:hover .c-ring::before { filter: brightness(1.1) drop-shadow(0 3px 5px #020916b0); }
+/* A quiet right-side utility, separate from the chapter action. */
+#title .ak-hud .ak-set { left: auto; right: 4%; top: 31%; width: 120px; height: 130px; }
+#title .ak-hud .ak-set .c-ring { width: 62px; height: 62px; flex-basis: 62px; }
+#title .ak-hud .ak-set .c-ring::before { display: none; }
+#title .ak-hud .ak-set .c-ring svg {
+  display: block; width: 49px; height: 49px; color: #dce5e5;
+  filter: drop-shadow(0 2px 5px #020916);
+}
+#title .ak-hud .ak-set .c-cn { font-size: 25px; }
+#title .ak-hud .ak-set .c-en { color: #bdced3; font-size: 11px; }
+#title .ak-sec { left: 40%; right: auto; top: auto; bottom: 6%; gap: 9px; }
+#title .ak-sec::before, #title .ak-sec::after { display: none; }
+#title .ak-sec span { color: #c7d3d8; font-size: 12px; letter-spacing: .06em; }
+#title .ak-sec b { border: 0; padding: 0 2px; background: none; font: 25px Consolas, monospace; color: #e5d8b6; }
+/* The large expedition sigil holds the action; all live text stays separate. */
+#title .ak-start {
+  right: 2.7%; bottom: 1.6%; width: clamp(290px, 28vw, 420px);
+  height: 310px; min-height: 310px; padding: 0 20px 31px;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  gap: 8px; border: 0; background: none; box-shadow: none; filter: none;
+  overflow: visible; transform: none; transition: transform .2s;
+}
+#title .ak-start::before {
+  content: ''; display: block; position: absolute; inset: 0; z-index: 0;
+  width: auto; height: auto; background: url('../assets/ui/home-v2/expedition-handpainted-v3.webp') center / contain no-repeat;
+  filter: drop-shadow(0 5px 8px #020d1ab0); opacity: 1; animation: none; pointer-events: none;
+}
+#title .ak-start::after { display: none; }
+#title .ak-start .st-row { position: relative; z-index: 1; gap: 0; }
+#title .ak-start .st-row::before { display: none; }
+#title .ak-start .st-cn {
+  color: #f6f4e9; font-family: var(--home-serif) !important;
+  font-size: clamp(42px, 4.2vw, 62px); line-height: 1.2; font-weight: 400; letter-spacing: .04em;
+  text-shadow: 0 2px 2px #041221, 0 0 8px #061527, 0 0 22px #03101b;
+  animation: none;
+}
+#title .ak-start .st-en {
+  position: relative; z-index: 1; margin: 0;
+  color: #d7d3bd; font-family: var(--font-ui) !important;
+  font-size: 13px; font-style: normal; letter-spacing: .1em; line-height: 1.5;
+  text-shadow: 0 2px 5px #020c17;
+}
+#title .ak-start:hover { background: none; box-shadow: none; filter: none; transform: translateY(-4px); }
+#title .ak-start:hover::before { filter: brightness(1.12) drop-shadow(0 5px 8px #020d1ab0); }
+#title .ak-start:hover .st-cn { transform: none; text-shadow: 0 2px 2px #041221, 0 0 12px #061527; }
+#title .ak-start:active { scale: .98; }
+#title .ak-hud button:focus-visible { outline: 2px solid #d4e5df; outline-offset: 5px; }
+#title .ak-veins { display: none; }
+#title .title-snow { opacity: .55; }
+#title .title-snow i:nth-child(n+25) { display: none; }
+#title .title-quote {
+  left: var(--home-edge); bottom: 2.5%; padding: 0; border: 0;
+  font: 9px Georgia, serif; letter-spacing: .15em; color: #91a9b8;
+}
+#title #warmupTip {
+  left: auto; right: 4%; top: 17%; bottom: auto; min-width: 0; width: 282px;
+  max-width: 29%; padding: 9px 12px; background: #0a1b29bf;
+  border: 0; border-left: 1px solid #b5c9d1; box-shadow: none;
+}
+#title #warmupTip .warmup-reason { font-size: 10px; letter-spacing: 0; }
+#title #warmupTip .warmup-track { height: 2px; margin-top: 5px; }
+@media (max-width: 1000px) {
+  #title .title-heading { left: 5%; width: 33%; }
+  #title .winter-wordmark { font-size: 58px; }
+  #title .winter-wordmark small { font-size: 23px; }
+  #title .title-lead { font-size: 11px; letter-spacing: .05em; }
+  #title .ak-user { min-width: 195px; }
+  #title .ak-user .ak-ava { width: 50px; height: 50px; }
+  #title .ak-lv b { font-size: 35px; }
+  #title .ak-hud .ak-circle { width: 165px; height: 175px; }
+  #title .ak-hud .ak-circle .c-ring { width: 108px; height: 108px; flex-basis: 108px; }
+  #title .ak-hud .ak-circle .c-cn { font-size: 25px; }
+  #title .ak-hud .ak-set { width: 100px; }
+  #title .ak-hud .ak-set .c-ring { width: 53px; height: 53px; flex-basis: 53px; }
+  #title .ak-start { width: 290px; height: 270px; min-height: 270px; }
+}
+@media (max-height: 650px) {
+  #title .title-heading { top: 18%; }
+  #title .title-kicker { margin-bottom: 8px; font-size: 9px; }
+  #title .winter-wordmark { font-size: 54px; }
+  #title .title-lead { margin-top: 9px; padding-top: 8px; }
+  #title .ak-hud .ak-circle { height: 155px; }
+  #title .ak-hud .ak-circle .c-ring { width: 100px; height: 100px; flex-basis: 100px; }
+  #title .ak-hud .ak-ach { top: 65%; }
+  #title .ak-start { height: 255px; min-height: 255px; padding-bottom: 21px; }
+  #title .title-quote { display: none; }
+}
+@media (max-width: 650px) {
+  #title .ak-tl { left: 16px; top: 16px; }
+  #title .ak-tl .ak-sq { width: 53px; height: 48px; }
+  #title .ak-pillrow #mGuide { left: 128px; top: 16px; height: 48px; font-size: 15px; padding: 0 8px; }
+  #title .ak-user { top: 78px; min-width: 145px; }
+  #title .ak-user .ak-ava { width: 36px; height: 36px; }
+  #title .ak-lv b { font-size: 28px; }
+  #title .ak-lv em { font-size: 9px; }
+  #title .ak-uname { font-size: 10px; }
+  #title .title-heading { top: 24%; width: 54%; }
+  #title .winter-wordmark { font-size: 47px; }
+  #title .winter-wordmark small { font-size: 20px; }
+  #title .title-lead { display: none; }
+  #title .ak-hud .ak-lib { left: 3%; top: 48%; }
+  #title .ak-hud .ak-ach { left: 22%; top: 69%; }
+  #title .ak-hud .ak-circle { width: 130px; height: 152px; }
+  #title .ak-hud .ak-circle .c-ring { width: 86px; height: 86px; flex-basis: 86px; }
+  #title .ak-hud .ak-circle .c-cn { font-size: 22px; }
+  #title .ak-hud .ak-set { top: 33%; right: 3%; width: 75px; height: 110px; }
+  #title .ak-start { width: 220px; height: 230px; min-height: 230px; padding: 0 10px 20px; }
+  #title .ak-start .st-cn { font-size: 38px; }
+  #title .ak-start .st-en { font-size: 10px; }
+  #title .ak-sec, #title .title-quote { display: none; }
+  #title .ak-pillrow #mInbox { font-size: 16px; bottom: 3%; }
+  #title #warmupTip { top: 16%; max-width: 45%; }
+  #title #warmupTip .warmup-reason { display: none; }
+}
+body.page-covered.page-opaque #title,
+body.page-covered.page-opaque #title * { animation-play-state: paused !important; }
+body.reduce-motion #title *, body.reduce-motion #title *::before, body.reduce-motion #title *::after { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  #title *, #title *::before, #title *::after { animation: none !important; transition: none !important; }
+}

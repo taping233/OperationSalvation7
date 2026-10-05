@@ -1,0 +1,94 @@
+{
+  "role": "battle",
+  "title": "黑脉交锋 · LMMS版",
+  "bpm": 124,
+  "seconds": 61.93547916666667,
+  "native_engine": "LMMS 1.2.2 sf2player/FluidSynth, sinc-best, 2x oversampling, 48k float render",
+  "tracks": {
+    "Pizzicato drive": {
+      "program": 45,
+      "bank": 0,
+      "volume": 48,
+      "pan": -17,
+      "notes": 224
+    },
+    "String theme": {
+      "program": 48,
+      "bank": 0,
+      "volume": 105,
+      "pan": 10,
+      "notes": 95
+    },
+    "French horn answer": {
+      "program": 60,
+      "bank": 0,
+      "volume": 55,
+      "pan": -25,
+      "notes": 16
+    },
+    "Low strings": {
+      "program": 49,
+      "bank": 0,
+      "volume": 34,
+      "pan": 23,
+      "notes": 32
+    },
+    "Synth bass": {
+      "program": 38,
+      "bank": 0,
+      "volume": 32,
+      "pan": 0,
+      "notes": 192
+    },
+    "Taiko": {
+      "program": 116,
+      "bank": 0,
+      "volume": 32,
+      "pan": -6,
+      "notes": 48
+    },
+    "Power drums": {
+      "program": 16,
+      "bank": 128,
+      "volume": 20,
+      "pan": 0,
+      "notes": 428
+    },
+    "Saw accent": {
+      "program": 81,
+      "bank": 0,
+      "volume": 28,
+      "pan": 0,
+      "notes": 16
+    }
+  },
+  "cycles_rendered": 2,
+  "delivered_cycle": 2,
+  "raw_peak": 0.0743543952703476,
+  "peak_dbfs": -1.2096154689788818,
+  "rms_dbfs": -17.751554250717163,
+  "post_master_gain_db": 21.844752693960633,
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-daw/03-battle-blackpulse-v2.mmp",
+      "bytes": 142556,
+      "sha256": "d7bac5115fc3d5225877f9680b8261093923265e9d420fb291c1986e5b1d87ef"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-daw/03-battle-blackpulse-v2.wav",
+      "bytes": 17837462,
+      "sha256": "05e48b455d00e29cbf3434e757dab86b76e0e2ad661d183f068536f8a013353d"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-daw/03-battle-blackpulse-v2.mp3",
+      "bytes": 1983823,
+      "sha256": "6b0e9070e84fb2ad5b68cafdb518575ec790315e0fdcf2163f114efa1174e2e4"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-daw/03-battle-blackpulse-v2.ogg",
+      "bytes": 1202361,
+      "sha256": "fded6227bb2f75b97d34e51e4073982a0605e1d3c04e79b51adb2c1cf6bc748c"
+    }
+  ],
+  "listening": "user listening required; numerical checks cannot establish aesthetic improvement"
+}

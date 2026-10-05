@@ -1,0 +1,59 @@
+[
+  {
+    "name": "camera-handpainted-v3",
+    "channel": "built-in image_gen",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1025a-eb31-7e91-8193-f99ee3679743\\exec-25c989e3-0ba8-434b-810c-d04a4e3deb70.png",
+    "sourceSha256": "74c159565f9ef9401b1618753467d33eea5c4d4a006a4434f1ad36b083f58c60",
+    "sourceSize": [
+      1402,
+      1122
+    ],
+    "transparentFraction": 0.5826276950930807,
+    "runtime": "game/assets/ui/home-v2/camera-handpainted-v3.webp",
+    "runtimeSize": [
+      384,
+      307
+    ],
+    "runtimeBytes": 30472,
+    "runtimeSha256": "1dc3f08c9ad75aa00bcd3fa88825faeabf6eb6d0c31e4ec259af4ec7d71dd518",
+    "processing": "resize and WebP encoding only; generated alpha preserved"
+  },
+  {
+    "name": "achievement-handpainted-v3",
+    "channel": "built-in image_gen",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1025a-eb31-7e91-8193-f99ee3679743\\exec-6a58f546-fb67-4d41-8936-ab256440cb19.png",
+    "sourceSha256": "453134b9ea3cedccd65262fdb230b657bca73d0b213e2bf5c7ec006d80c134bd",
+    "sourceSize": [
+      1402,
+      1122
+    ],
+    "transparentFraction": 0.6378416624074088,
+    "runtime": "game/assets/ui/home-v2/achievement-handpainted-v3.webp",
+    "runtimeSize": [
+      384,
+      307
+    ],
+    "runtimeBytes": 19046,
+    "runtimeSha256": "e6797435e8ba066e45541f4717975bd7479237f1db704ea3723976e3a933440b",
+    "processing": "resize and WebP encoding only; generated alpha preserved"
+  },
+  {
+    "name": "expedition-handpainted-v3",
+    "channel": "built-in image_gen",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1025a-eb31-7e91-8193-f99ee3679743\\exec-7a0a2df0-e5e8-441a-abde-3cab6ad9968c.png",
+    "sourceSha256": "a59daffb7f1108bb269ac8935d0a1b3a907073e1872b712e1181949feb9453f3",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "transparentFraction": 0.704587425501553,
+    "runtime": "game/assets/ui/home-v2/expedition-handpainted-v3.webp",
+    "runtimeSize": [
+      640,
+      640
+    ],
+    "runtimeBytes": 90762,
+    "runtimeSha256": "aaf9fa2d9ad5ed06b2c71327937e8416c9ca21e307b5c91dee1b0579b01001bb",
+    "processing": "resize and WebP encoding only; generated alpha preserved"
+  }
+]

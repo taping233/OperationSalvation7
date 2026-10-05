@@ -1,0 +1,1 @@
+(async()=>{const q=window.__uiArtQA;q.reset();const m=await import('/src/ui/terminal-settlement.js');return await m.runTerminalSettlement({token:{busy:false,ephemeral:false,cards:[]},current:()=>true,game:q.game,UI:window.SDT.UI,finish:()=>true,command:'death',retryAct:'retryTerminalDeath',extraPayload:{},terminalCommands:null});})()

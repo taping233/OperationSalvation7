@@ -1,0 +1,269 @@
+{
+  "characterDossierImplementedSample": {
+    "status": "implemented-pending-owner-current-window-verification",
+    "file": "game/css/expedition-hub.css",
+    "scope": "#overlay #hubMain.hub-classes .class-dossier-grid and descendants only",
+    "baselineFromOwner": {
+      "window": [
+        1280,
+        720
+      ],
+      "cardPixels": [
+        199,
+        331.5
+      ],
+      "artRectPixels": [
+        197.75,
+        330.17
+      ],
+      "visibleWideImageApproxHeight": 111,
+      "filter": "brightness(.9) saturate(.82)",
+      "objectFit": "contain"
+    },
+    "changes": [
+      "Grid auto-fit minmax(min(100%,320px),1fr) targets three wider cards at current virtual CSS scale",
+      "16:9 art-paper window; complete contain original image; mask/filter/hover image scale removed locally",
+      "Copy in normal flow separate from art with opaque calm background",
+      "Shade and overlaid frame hidden via CSS; index has compact dark corner label",
+      "Readable local typography and wrapping skin buttons; existing skin actions unchanged"
+    ],
+    "checks": [
+      {
+        "command": "git diff --check -- game/css/expedition-hub.css",
+        "exitCode": 0
+      },
+      {
+        "command": "PostCSS parse of expedition-hub.css",
+        "exitCode": 0
+      }
+    ],
+    "imagesChanged": false,
+    "newAnimations": false,
+    "liveVerification": "Owner has current page and will capture image/rectangles and verify scrolling, identity and skin controls",
+    "risks": [
+      "Exact column count and scroll accessibility not independently live verified",
+      "Natural-flow variable copy height may yield cards with different heights; identity/content completeness prioritized over forced clipping"
+    ]
+  },
+  "characterDossierPendingLiveSample": {
+    "status": "pending-owner-current-window-sample",
+    "inspection": "read-only source/CSS, no live page",
+    "renderSource": "game/src/hub/game.hub.pages.js:484-523",
+    "render": "SDT.Art.classArt(c.cls); single art-figure img; active skin respected, default mapping is five approved portraits; no classFullArt blurred backdrop",
+    "effectiveRule": {
+      "source": "game/css/expedition-hub.css:212",
+      "selector": "#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .class-dossier-art img",
+      "objectFit": "contain",
+      "filter": "brightness(.9) saturate(.82)",
+      "mask": "linear-gradient(180deg,#000 55%,transparent 92%)",
+      "objectPosition": "center top from game/css/page-classes.css:207"
+    },
+    "container": {
+      "art": "absolute inset0 z-index-3",
+      "copy": "absolute bottom0 padding56px 16px 16px with gradient",
+      "height": "min-height clamp(390px,50vh,600px)",
+      "grid": "5 columns then media 3/2/1; verify current actual column count"
+    },
+    "risk": "Wide opaque-white 2560x1440 image contained inside narrow tall card scales by card width; central figure becomes small while vertical card remains mostly empty. Existing mask affects complete image and filter changes approved colors. This is source-derived risk, not new live acceptance.",
+    "minimumSample": [
+      "Use owner current window screenshot/rectangles to confirm actual card/art/copy sizes and column count",
+      "Try one scoped dossier layout with separate art and flow text regions, complete contain image with no whole-image fade/filter, restrained light archive-paper art window",
+      "Keep original five files and identities; verify white-tower chair/boots and changwuyu hat tip visible before expanding",
+      "Confirm skin buttons and long perk text remain legible and reachable; do not force all skins recognized"
+    ],
+    "metadata": {
+      "dossierPaletteRendered": false,
+      "selectionPaletteSelector": "#overlay .cls2-palette > i",
+      "selectionSource": "game/src/run/game.run.altar.js:150-151",
+      "selectionCSS": "game/css/expedition-roster.css:25-26",
+      "fieldsInOrder": [
+        "hair",
+        "skin",
+        "outfit",
+        "color"
+      ],
+      "confirmedSourceVsAnchorConflicts": [
+        {
+          "character": "changwuyu",
+          "fields": {
+            "hair": "#29313d",
+            "outfit": "#e8e5dc"
+          },
+          "anchor": "silver gray hair / black robe with purple lining"
+        },
+        {
+          "character": "xingyue",
+          "fields": {
+            "hair": "#285a59"
+          },
+          "anchor": "gold-blonde hair"
+        }
+      ],
+      "liveVisibility": "Requires owner selection-page observation; source DOM/CSS alone not current-window evidence"
+    },
+    "runtimeChanges": false
+  },
+  "unknowns": [
+    "No browser samples or performance measurement in this slice",
+    "Remote model and image-reference support not verified",
+    "New helpers smoke checked; no dedicated existing recipe test found",
+    "Three page samples require owner live verification; not aesthetic approval",
+    "Current character metadata colors not edited in this ownership slice"
+  ],
+  "changes": [
+    "Only five default portraits are recognized anchors; existing UI is under review",
+    "One shared rule table for preparation, battle and result layouts",
+    "Wu current painterly style and skirt silhouette separated from historical cel/high-low requirements",
+    "Changwuyu current no-staff identity separated from historical staff requirements",
+    "Portrait helper no longer forces standing; two-argument callers remain compatible",
+    "Layered asset helper added without replacing old scripts or generator defaults"
+  ],
+  "checks": [
+    {
+      "assertions": [
+        "recipe version",
+        "legacy call composition",
+        "seated pose not overridden",
+        "keyword composition layer",
+        "layered asset helper",
+        "negative append",
+        "generator model and seeded payload unchanged"
+      ],
+      "command": "python inline import and semantic smoke checks",
+      "exitCode": 0
+    },
+    {
+      "limit": "Does not scan character-bible or evidence; related links were inspected manually",
+      "checkedRelativeLinks": 353,
+      "findings": 0,
+      "command": "npm run --silent docs:check -- --json",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check -- [seven owned paths]",
+      "exitCode": 0
+    }
+  ],
+  "status": "implemented-directed-checks-passed",
+  "changedPaths": [
+    "docs/production/art/VISUAL-BIBLE.md",
+    "docs/production/management/DECISIONS.md",
+    "docs/production/project/CHARTER.md",
+    "docs/production/design/GDD.md",
+    "docs/character-bible/wu.md",
+    "docs/character-bible/changwuyu.md",
+    "tools/nai_style.py"
+  ],
+  "schemaVersion": 1,
+  "referenceResearch": {
+    "borrowed": [
+      "Griftlands target/action relation",
+      "Hades portrait/text avoidance",
+      "Darkest Dungeon preparation cost/result sources",
+      "Backpack Hero owned/reward separation"
+    ],
+    "source": "docs/evidence/2026-10-03-experience-art-plan/refs/visual-reference-review.md",
+    "mode": "Read prior official screenshot observations; no new external pixel review"
+  },
+  "boundaries": [
+    "No images changed",
+    "No batch generation",
+    "No old scripts deleted",
+    "No installs",
+    "No browser operation",
+    "No staging or commit"
+  ],
+  "nextSamples": [
+    "One character card with current identity in its real card container",
+    "One non-character scene with HUD-safe low-detail regions",
+    "One small icon; compare existing SVG before generation"
+  ],
+  "date": "2026-10-03",
+  "recipe": {
+    "explicitV5": "nai-diffusion-5-full",
+    "sampler": "k_euler_ancestral",
+    "steps": 28,
+    "modelDefault": "nai-diffusion-4-5-full",
+    "scale": 6.5,
+    "cfgRescale": 0,
+    "version": "1.3",
+    "varietyPlus": true,
+    "generatedAssets": 0,
+    "noiseSchedule": "karras",
+    "clientModified": false
+  },
+  "anchors": [
+    {
+      "referenceSha256": "A7C5D4E2242558337F5F5A8B8DF71CDA875AF73586EC70657B45836F01466C6C",
+      "sourcePixels": [
+        2560,
+        1440
+      ],
+      "path": "game/assets/portraits/full/wu.webp",
+      "viewedPixels": [
+        2048,
+        1152
+      ],
+      "id": "wu",
+      "sha256": "A7C5D4E2242558337F5F5A8B8DF71CDA875AF73586EC70657B45836F01466C6C"
+    },
+    {
+      "referenceSha256": "98E69D19B6C2129D0F85D320BB95E4609584576C94B041663A523067FF946185",
+      "sourcePixels": [
+        2560,
+        1440
+      ],
+      "path": "game/assets/portraits/full/changwuyu.webp",
+      "viewedPixels": [
+        2048,
+        1152
+      ],
+      "id": "changwuyu",
+      "sha256": "98E69D19B6C2129D0F85D320BB95E4609584576C94B041663A523067FF946185"
+    },
+    {
+      "referenceSha256": "E0731848113DA23E419BB6DDFCAB2BCBAA83598065511945D11AA7306076BCBB",
+      "sourcePixels": [
+        2560,
+        1440
+      ],
+      "path": "game/assets/portraits/full/baita.webp",
+      "viewedPixels": [
+        2048,
+        1152
+      ],
+      "id": "baita",
+      "sha256": "E0731848113DA23E419BB6DDFCAB2BCBAA83598065511945D11AA7306076BCBB"
+    },
+    {
+      "referenceSha256": "E186722F97369B3A63A45DCA056E2FE6C10F7B211C8DE9403F71639D4F6BDA6E",
+      "sourcePixels": [
+        2560,
+        1440
+      ],
+      "path": "game/assets/portraits/full/heixiang.webp",
+      "viewedPixels": [
+        2048,
+        1152
+      ],
+      "id": "heixiang",
+      "sha256": "E186722F97369B3A63A45DCA056E2FE6C10F7B211C8DE9403F71639D4F6BDA6E"
+    },
+    {
+      "referenceSha256": "7FB82912770395C264BFB5C6918BADFD176AA503DDF11CD07F0DA0CD9300600C",
+      "sourcePixels": [
+        2560,
+        1440
+      ],
+      "path": "game/assets/portraits/full/xingyue.webp",
+      "viewedPixels": [
+        2048,
+        1152
+      ],
+      "id": "xingyue",
+      "sha256": "7FB82912770395C264BFB5C6918BADFD176AA503DDF11CD07F0DA0CD9300600C"
+    }
+  ],
+  "task": "WF-experience-art-exec",
+  "slice": "A2-art-spec"
+}

@@ -1,0 +1,193 @@
+{
+  "line": "A5",
+  "date": "2026-10-03",
+  "head": "425d03920e",
+  "scope": "结果、损失与恢复的表现侧：结算页（terminal-settlement/extraction/death/abandon）、clear 与 extract 收束、死亡/放弃/保存失败/重试/刷新恢复表现链、coverage 战斗结算 23 行新鲜度、A2 战后领取/结算样板落点侦察。只读研究，未运行测试/构建/浏览器。",
+  "status": [
+    {
+      "page": "EXTRACT-DONE 撤离成功结算（clear/extract 共用）",
+      "state": "正常保留：收束可区分性成立（源码级），数字全读回执",
+      "evidence": "game/src/run/game.run.altar.js:978-1018 showExtractDone——标题/图标/副标题三件套按 r.outcome 分叉（:1001-1005 clear='首脑突破 · 满载而归'+trophy vs extract='保本返回 · 撤离成功'+home），日志行分叉（:991），收获行/损失行/已运回行全读 receipt（:994-1010），记录同源（:986-987 recordRun 传同一 receipt）"
+    },
+    {
+      "page": "EXTRACT-STASH 撤离整理入库",
+      "state": "正常保留，一处信息缺口列 findings",
+      "evidence": "game/src/run/game.run.altar.js:840-973 renderExtractStash——容量 chip（:895 fulled 类）、单卡容量不足徽标（:863-868）、全部入库按余量禁用（:911）、完成整理明示将丢失张数（:915）、帮助页注册（:879-886）；卡片网格无 brought 来源标记（:862-870）"
+    },
+    {
+      "page": "EXTRACT-RETRY 撤离快照保存失败重试页",
+      "state": "需修（小）：缺 SYS-10 同款人话兜底说明",
+      "evidence": "game/src/run/game.run.altar.js:834-838 showExtractionRetry 仅一行说明；失败原因只进日志（:802/:826）；对照 terminal-settlement.js:33-38 已有人话化三件事"
+    },
+    {
+      "page": "EXIT-PAY 第三层紧急撤离",
+      "state": "正常保留：成本不足/取消/停用态齐备",
+      "evidence": "game/src/run/game.run.altar.js:689-761 openEmergencyModal——非第三层停用态说明（:699-707）、卡不足禁用+原因（:715-717 + :721-725 运行时再守卫）、币不带回提醒（:692-694）、继续深入出口（:718,732）"
+    },
+    {
+      "page": "DEATH 死亡/撤离失败结算",
+      "state": "需修：损失明细缺口与抢运计数口径分歧，两处列 findings；其余收束表达保留",
+      "evidence": "game/src/run/game.session.death.js:152-168 doom-panel——三格统计（:157-161）+抢运卡面列表（:163-166）+XP 行（:137-147）；回执 losses.lostNotable 已构造（:40-44）但页面未消费；savedN 用 cardStacks(true)（:92,:131）与回执 cardsStashed（:22-24 计 token.cards 含珍珠盒 stored）口径分歧"
+    },
+    {
+      "page": "ABANDON-DONE 放弃行动结算",
+      "state": "正常保留：损失/安全物品/双出口表达完整",
+      "evidence": "game/src/ui/game.menu.js:842-893 abandonRun——二步确认（:829-837）、统计行（:875-876）、抢运清单（:870-873）、回基地/回主菜单分路（:883-884）；无回执系 SYS-02 既定 scope（ph1-sys02 README:10）"
+    },
+    {
+      "page": "TERMINAL-RETRY 死亡/放弃保存失败重试页",
+      "state": "正常保留（SYS-10 完成未提交增量原样看待）：人话化+防重复提交成立",
+      "evidence": "game/src/ui/terminal-settlement.js:27-76——失败页固定补进度位置/重试安全/刷新兜底（:33-38）、意外异常人话兜底+控制台留痕（:66-71）、token.busy+current() 双守卫（:39,:43）、attempt 保留重试不重建（:55-64）、replay 直接 finish 不重复发奖（:59）"
+    },
+    {
+      "page": "BATTLE-REWARD 普通战后物资箱（A5/A4 共管）",
+      "state": "正常保留：战果收束+容量预检在位",
+      "evidence": "game/src/run/chests.js:209/:230 battleSummary 挂首箱，:349 胜利横幅，:353 战果行（击败数/剩余生命），:308-337 满包逐张预检+最低价参照，:313-314 三选一满包留面板不吞卡"
+    },
+    {
+      "page": "AMMO-TUTORIAL 卡牌消耗教学",
+      "state": "正常保留",
+      "evidence": "game/src/hub/game.bag.settle.js:127-142 一次性教学浮层，:267 首胜后触发"
+    },
+    {
+      "page": "战斗结算组其余 14 行（BATTLE/BOSS-*/BATTLE-GRAVE/DECK/BAG/CHOICE/PAYMENT/DISCOVER/INFUSE/TARGET/SETTINGS/EXIT-FINAL）",
+      "state": "锚点全部在源码验证存活，属 A4 域，本线只做新鲜度不深研",
+      "evidence": "rg 逐行验证 23 行 entry.anchor 全部命中：battle.view.js:204(渲染)/228(choosing)/241(handSelecting)/275(discovering)/509(btInfuseStart)，battle.overlays.js:19/:58/:89/:118，battle.layers.js:562，game.run.altar.js:593(openBossGate)/689(EXIT-PAY)/834/:840/:978；coverage 行 id 见 docs/evidence/2026-10-03-experience-art-plan/coverage.json:1012-7845"
+    },
+    {
+      "page": "数据页/聚合消费（agent.stats.js/agent.data.js，归 WF-experience-art-exec）",
+      "state": "表现侧一致性核过：FACTS 的 byDriver 旧口径问题在工作树已被修复（新鲜度更正）；一处口径注释过期归他人",
+      "evidence": "game/src/agent/agent.stats.js:98 byDriver 已切 provenanceDriver（:13-16）；agent.recorder.js:200-253 回执赢口径+原回执留档；结算页与记录同读一份回执（altar.js:969-987）；agent.data.js:91 口径注释称「通关撤离行记 savedCards」与现行 altar.js:986-987 clear 也传 carriedCards 不符——归 WF-experience-art-exec 复核"
+    }
+  ],
+  "findings": [
+    {
+      "id": "A5-DEATH-01",
+      "where": "game/src/run/game.session.death.js:152-168（回执字段在同文件 :40-44）",
+      "problem": "死亡结算页不展示关键损失明细：buildDeathReceipt 已算出 losses.lostNotable（传说/史诗至多6条，:40-44）并随 token.receipt（:102）进入 finish 作用域，但 doom-panel 只显示资源损失价值（token.lost）与抢运卡面，具体丢了哪些关键卡只有 UI.log 一句「其余全部丢失」（:150-151）；对照撤离成功页有「散失：未入库 N 张（【卡名】×n）」逐名表达（game/src/run/game.run.altar.js:996-998）。",
+      "impact": "死亡是不可逆损失场景，玩家在结算面板上看不到自己丢了哪些传说/史诗卡，与撤离页损失表达不一致；TASKS A5.1 要求「损失分别表达」未在死亡页达成。",
+      "severity": "medium",
+      "action": "fix：doom-panel 增加 losses 行读 token.receipt.losses（复用 altar.js:996-998 lossRow 形态，含 lostCount 与 lostNotable 名单），属地 game.session.death.js；该文件为 PH1 完成未提交增量，实施前需与 SYS-11 会话协调。",
+      "files": ["game/src/run/game.session.death.js"],
+      "status": "verified"
+    },
+    {
+      "id": "A5-EXSTASH-01",
+      "where": "game/src/run/game.run.altar.js:862-870（renderExtractStash 卡片网格）",
+      "problem": "整理入库页不区分「带入的卡」与「局内获得的卡」：带入卡出发时已从基地仓库移除（game/src/hub/base-departure.commands.js:54-55 扣库存），未入库即永久损失（game/src/run/game.session.js:417「brought=1：开局带入的卡（放弃对局时无条件丢失，v0.21 规则）」），但整理页所有卡按同一「未入库将丢失」呈现，无来源标记。",
+      "impact": "仓库容量不足时玩家无法一眼识别哪些卡是永久收藏（优先抢救）、哪些只是本局收获，可能把永久损失浪费在局内散卡上；TASKS A5.1「候选、实际入库、原库存和损失分别表达」中的原库存维度缺失。",
+      "severity": "medium",
+      "action": "fix：ext-card 加来源角标——o.brought 在 game.ownedCards 上仍可取（altar.js:862 的 extractLeft 只有 card+count，需按卡名/uid 从 game.ownedCards 映射；刷新恢复链 resumeExtraction 后 ownedCards 同样在位 game/src/run/game.session.js:314,364），实施时注意同名多张部分带入的边界。",
+      "files": ["game/src/run/game.run.altar.js", "game/css/winter.css"],
+      "status": "verified"
+    },
+    {
+      "id": "A5-DEATH-02",
+      "where": "game/src/run/game.session.death.js:92,:96,:131（对照 :22-24 与 game/src/run/game.session.bag.js:39）",
+      "problem": "死亡页「抢运回基地 N 张」统计与回执口径分歧：页面数字 savedN 用 cardStacks(true)（排除一切 o.stored，game.session.bag.js:39），而实际提交清单 token.cards 含珍珠盒安全时的 stored 资源卡（death.js:96 过滤条件 o.stored && !o.pouchOf && boxSafe），buildDeathReceipt.netTake.cardsStashed 按后者计数（:22-24）且 run.death 确实把这部分提交进仓库（terminal.commands.js applyCards）。",
+      "impact": "珍珠盒升级且存有资源卡、盒又放入安全格的玩家，死亡面板张数/卡面列表少于实际入库与数据页 netTake 记录，对账困惑；低频边界（需盒安全+盒内有 stored 卡）。",
+      "severity": "low",
+      "action": "fix：面板统计改读 token.receipt.netTake.cardsStashed，或列表/文案把「珍珠盒随盒抢运 M 张」单列；属地同 death 页表现侧。",
+      "files": ["game/src/run/game.session.death.js"],
+      "status": "verified"
+    },
+    {
+      "id": "A5-EXRETRY-01",
+      "where": "game/src/run/game.run.altar.js:834-838（对照 game/src/ui/terminal-settlement.js:33-38）",
+      "problem": "撤离重试页没有 SYS-10 同款兜底说明：overlay 只有「撤离已成功，整理快照尚未确认写入。请重试保存后继续。」与重试钮，无关闭/替代出口；失败原因只进 UI.log（:802/:826），且「退出重进安全」的事实（doExtract 前已 saveGame 落盘撤前局面，:787）未告知玩家。",
+      "impact": "存储持续失败（如配额满）时玩家困在无出口弹层里循环重试，不知道退出游戏再进入可回到撤前局面；死亡/放弃重试页已补齐同类说明，表现不一致。",
+      "severity": "low",
+      "action": "fix：补一行人话说明（失败原因+进度在哪+退出重进兜底），复用 terminal-settlement.js:36-38 文案结构；属地 game.run.altar.js 撤离段（PH1 在途增量旁，注意避让）。",
+      "files": ["game/src/run/game.run.altar.js"],
+      "status": "verified"
+    },
+    {
+      "id": "A5-ABANDON-01",
+      "where": "game/src/ui/game.menu.js:870-873（对照 game/src/run/game.session.death.js:163-166）",
+      "problem": "同为「宠物抢运清单」，放弃页用纯文本名字列表（:872 join('、')），死亡页用卡面网格（doom-cards + cardHTML，death.js:163-166），同一语义两种视觉表达。",
+      "impact": "轻微：文本清单可读但与死亡页不一致，A2 定结算/领取样板时领取列表形态需要统一口径。",
+      "severity": "low",
+      "action": "investigate：不单独动，等 A2 规范定「领取/抢运列表」代表形态后随样板统一（复用 doom-loot 或列表式二选一）。",
+      "files": ["game/src/ui/game.menu.js"],
+      "status": "verified"
+    }
+  ],
+  "keeps": [
+    {
+      "item": "EXTRACT-DONE 的 clear/extract 收束可区分性（标题+图标+副标题+日志四层分叉，不只换标题）",
+      "reason": "源码证实 altar.js:991/:1001-1005 按 r.outcome 分叉且数字一律读回执；两主体互斥另有 DOM 断言钉死（docs/evidence/2026-10-03-ph1-sys02/README.md:11）。TASKS A5.3「不只换标题」已达成，实页观感留待验收。"
+    },
+    {
+      "item": "TERMINAL-RETRY 人话化失败页与防重复提交守卫",
+      "reason": "terminal-settlement.js:33-38 固定补「进度保留在哪/重试为什么安全/刷新兜底」三件事；:39/:43 busy+current 双守卫；:55-64 attempt 保留+replay 直取收据，journal 幂等（SYS-10 增量，原样保留不重做）。"
+    },
+    {
+      "item": "EXTRACT-STASH 的容量语义与丢失预警",
+      "reason": "容量 chip 满仓变（fulled）:895、单卡容量不足徽标+禁用 :863-868、全部入库按余量禁用 :911、完成整理明示「N 张将丢失」:915、帮助页解释口袋 1/3 与初始牌 :879-886；候选/实际入库/损失三维已表达（原库存维度缺口另列 A5-EXSTASH-01）。"
+    },
+    {
+      "item": "EXIT-PAY 成本不足/取消/停用三态",
+      "reason": "altar.js:699-707 非第三层停用态有解释、:715-717 卡不足禁用+文案+title、:721-725 运行时二次守卫+错误音、:692-694 币不带回提醒、:718/:732 继续深入出口；coverage 行 boundary 全部在位。"
+    },
+    {
+      "item": "DEATH 页失败语义区分与 XP 行",
+      "reason": "「你倒下了」vs「战斗中撤离」两种副标题（death.js:84,:155）、失败横幅 LEG-6b（:14,:154）、熟练度行区分升级/未升级/测试投影三态（:137-147）；损失明细缺口单列 A5-DEATH-01，不否定整体收束。"
+    },
+    {
+      "item": "ABANDON-DONE 二步确认与损失表达",
+      "reason": "menu.js:829-837 首点变确认文案 2.6s 回弹、:875-876 统计行说明带入卡全丢/物资币散失、:870-873 安全格抢运清单、回基地与回主菜单双出口分路（:883-884）；保存失败不显示已完成由 terminal-settlement 编排保证。"
+    },
+    {
+      "item": "BATTLE-REWARD 满包预检与三选一不吞卡",
+      "reason": "chests.js:308-337 逐张模拟占格算出放不下张数+最低价已装卡参照（:326-332）、:313-314/:374-381 三选一放不下留面板可腾格重选，不满包不弹警示——克制且信息足。"
+    },
+    {
+      "item": "刷新恢复链（源码级成立，实页待验）",
+      "reason": "整理中刷新：pendingExtraction 随局存档持久化，preflight 校验版本+身份（session.js:255-263）后 resumeExtraction 直接回整理页（session.js:357-366 → altar.js:769-779）；终局中刷新：terminalPending 不写档（session.js:192），磁盘停留在撤/死前自动存档，恢复后重演；已提交事务经 readSettlementReceipt 重放不重复（terminal.commands.js:81-83,:116-120；extraction.commands.js:186-191）。"
+    },
+    {
+      "item": "数据消费一致性（表现侧）",
+      "reason": "结算页（altar.js:969-987）、跑局记录（recorder.js:200-253 回执赢+原回执留档）、CSV 导出同读一份回执；agent.stats.js:98 byDriver 已切 provenance 三态——FACTS.md:32-34 记载的 driver 分叉问题在工作树已被并行会话修复，FACTS 该条已过时（更正，非本线动作）。"
+    }
+  ],
+  "a2SampleRecon": {
+    "purpose": "A2 战后领取/结算样板落点侦察（只读）：三类结算页代表元素与视觉语言现状",
+    "pages": {
+      "战后领取(chest)": "结构 game/src/run/chests.js:348-357（标题条/FIELD SUPPLY kicker/背包占用/战果行/满包警示/卡面网格/散落提示/双钮）；CSS 主壳 game/css/expedition-rewards.css:52-66（.card.chest/.loot-manifest/.loot-capacity/.chest-ops）、:67-105 短视口压缩、:85-93 battle-loot-summary；卡价档位徽标 .eps-card-val/.eps-fate 在 experience-loot.css/page-rewards-bag-help.css",
+      "撤离整理(EXTRACT-STASH)": "game/css/winter.css:1542-1550（.ext-cards 网格/.ext-card/.off/.ext-noroom）+ expedition-rewards.css:22-35（.result-pg/.result-summary/.result-columns/.result-line/#btnDeploy 金实心/.dep-foot sticky）",
+      "撤离成功(done)/紧急撤离(EXIT-PAY)": "nodeShell 壳 game/src/run/game.run.scenes.js:84-102 + expedition-rewards.css:2-50（node-pg/node-panel 右毛玻璃面板/node-kicker/evt-opt/sc-exit 主次钮），done 页复用同壳 tone:exit",
+      "死亡(DEATH)": "overlays.css:437-481（.doom-panel 玻璃面板/.doom-stats 三格/.doom-loot/.doom-btns + fx-doom 背景纱）+ battle.css:660-663（.battle-banner 入 doom 面板，battle.css 归 WF-experience-art-exec）+ page-rewards-bag-help.css:561-571（.doom-xp 进度条）与 :574-596（w3-rise 错峰入场动画，doom 与胜利搜刮页共用体系）",
+      "重试页两处": "TERMINAL-RETRY 用通用 ov-note/ov-btn（overlays.css），EXTRACT-RETRY 套 .pg.hub 页壳——无专属样式，A2 无需为其建样板，统一文案层级即可"
+    },
+    "visualLanguage": "深蓝绿底 #081722/#0d2634 + 金色主动作 #dfc28d（实心）与深蓝描边次动作（expedition-rewards.css:15-21，成功与失败结算同语义）；三处等宽大写 kicker（FIELD ENCOUNTER / EXTRACTION REPORT / FIELD SUPPLY）形态不一（node-kicker 定义分散在 expedition-rewards.css:41、page-events.css、page-rewards-bag-help.css:732 三处），A2 可统一；数字 tabular-nums（page-rewards-bag-help.css:721）；稀有度 rl-* 边框色、危险红 rgba(200,80,60)、好评绿 #7fdd9c、警示 #f0b9ae；入场动画统一 w3-rise 错峰体系",
+    "representativeElements": {
+      "领取列表": "chest .bt-hand 卡面网格 + .eps-card-val 价档徽标 + .chest-got-mark 已收标记 + .bt-count 叠数（battle.css:330 通用版）",
+      "损失": "extract lossRow（altar.js:996-998 .result-line+ov-note+lostNotable 名单）与 death doom-stats .ds-v.bad + doom-loot——两形态可作 A2 损失表达对照样板",
+      "结算标题": "nodeShell h2（SimSun 32px，expedition-rewards.css:43）+ kicker + sub；result-summary kicker 版（altar.js:899）",
+      "下一动作": "node-foot 主金次蓝双钮（altar.js:1011-1013）、doom-btns 等宽双钮（death.js:167）、chest-ops 左跳过右全收（chests.js:347）、dep-foot sticky 完成钮（altar.js:33-34）"
+    }
+  },
+  "unverified": [
+    "完整结果链实页未验（本任务禁浏览器）：clear/extract/death/abandon 结算页真实观感、CSV 导出对照、死亡/放弃/失败重试链、刷新恢复——FACTS.md:14-15,:28 与 SYS-02 README:19-21 均列为实页缺口，归负责人实机验收；本报告全部结论为源码级。",
+    "「回基地」「再出发」均回 deploy 的用户期望：源码证实三处同路（altar.js:1015-1016、death.js:169-170、abandon goBase→deploy/:883-884），TASKS A5:87 要求实页核是否误导后改命名/衔接——期望判断须实页，未做。",
+    "归 WF-experience-art-exec 属地（按 ask 跳过，仅作新鲜度更正）：agent.stats.js byDriver 已修复（FACTS 过时）；agent.data.js:91 口径注释与现行 recordRun 传参不符（clear 行现传 carriedCards），归其复核；game.menu.js 冻结工具文案、game.bag.js 锦囊、game.run.altar.js 祭坛/火堆文案段、expedition-inventory/map.css、game.hub.depart.js、core/art.js、battle/view/battle.frames.js、page-battle-ui.css 未研究。",
+    "EXTRACT-RETRY/TERMINAL-RETRY 的真实存储故障注入实验未做（coverage 两行 nextAction 要求，只读研究不执行注入）。",
+    "死亡链回执与嵌套（nest）clear 口径：SYS-02 scope 决策维持既有口径（ph1-sys02 README:10），本线未对 nest 收束页另做核验。",
+    "未运行任何测试/构建：PH1 增量（terminal-settlement.js 约19行、extraction.commands.js、game.session.death.js 等）按 ask 原样只读看待，其测试绿灯属原交付报告，非本轮独立验收。"
+  ],
+  "coverageFreshness": {
+    "summary": "coverage.json 战斗结算组 23 行（行号 1012-7845）entry.path/anchor 全部在当前源码验证存活，无退役锚点；status 均维持 needs-review/partial-live-review，未经实页不得改判。A5 相关 9 行中：EXTRACT-DONE/EXTRACT-STASH/EXIT-PAY/TERMINAL-RETRY/DEATH/ABANDON-DONE/BATTLE-REWARD/AMMO-TUTORIAL 的 boundary 描述与源码一致（明细见 status 数组）；EXTRACT-RETRY 行 boundary 成立但表现缺兜底说明（A5-EXRETRY-01）。",
+    "notes": [
+      "FACTS.md:32-34「agent.stats.js byDriver 仍按 r.driver 分组」已过时：agent.stats.js:98 现为 provenanceDriver（工作树并行会话已实施），avgCarriedValue 按老板决策保留携带口径未改名（agent.stats.js:55-56）。",
+      "EXTRACT-STASH 行 nextAction「A5区分领取与带损失完成；容量持续可见」——容量持续可见成立；「区分领取与带损失」中来源（brought）维度缺失，见 A5-EXSTASH-01。",
+      "ABANDON-DONE 行 nextAction「补损失/安全物品/返回可读性」——三项现已在页面（menu.js:870-884），该行描述滞后于源码。"
+    ]
+  },
+  "commands": [
+    "rg -n '\"group\"\\s*:\\s*\"战斗结算\"' docs/evidence/2026-10-03-experience-art-plan/coverage.json（23 行定位）",
+    "node -e（JSON.parse coverage.json 过滤 group==='战斗结算' 导出 23 行字段）",
+    "rg 逐行验证 23 行 entry.anchor（battle.view.js/battle.overlays.js/battle.layers.js/chests.js/game.bag.settle.js/game.run.altar.js/game.session.death.js/game.menu.js/terminal-settlement.js）",
+    "rg 定位结算相关选择器在 game/css/ 的定义文件与 index.html:15-55 加载顺序",
+    "git diff --stat HEAD -- <结算链8文件>（确认完成未提交增量范围，未改动任何文件）"
+  ]
+}

@@ -1,0 +1,1 @@
+(()=>{const q=window.__uiArtQA;q.reset();q.notes.openCellEditor(0,0);return true;})()

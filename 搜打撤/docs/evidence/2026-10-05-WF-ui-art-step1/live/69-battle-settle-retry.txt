@@ -1,0 +1,13 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 1/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 1/16
+		6 container 战后结算未完成, ID: overlay
+			7 container
+				8 heading 战后结算未完成, Value: 2, ID: ovTitle
+					9 text 战后结算未完成
+				10 button 重试保存战后奖励
+
+The focused UI element is 10 button 重试保存战后奖励

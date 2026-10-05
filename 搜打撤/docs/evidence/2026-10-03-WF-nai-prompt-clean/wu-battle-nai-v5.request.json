@@ -1,0 +1,15 @@
+{
+  "channel": "NovelAI",
+  "model": "nai-diffusion-4-5-full",
+  "recipe_version": "1.3",
+  "width": 1152,
+  "height": 768,
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1girl, young adult swordswoman, fair skin, cyan-blue eyes, confident smile with a small fang, silver-white tight high ponytail, blue ribbon bow, black rose at ponytail base, matte black round sunglasses on head, parted bangs, two long sidelocks. 1.3::charcoal-black off-shoulder ruffled dress, black bodice and black outer skirt::, calf-length hem, blue star-patterned inner lining, narrow black waist belt, black gloves, bare lower legs, black cuffed ankle boots.\n\nFull body, three-quarter side view facing screen-right, gaze to the right, balanced battle-ready stance with slightly bent knees. Right hand holds exactly one straight slender black longsword in a low forward guard. Blade length about half her head-to-boot height; small plain crossguard. Left hand relaxed near waist.\n\nLandscape 3:2, character on the left, sword pointing right. Entire hair, boots and blade visible with margins. Uniform flat chroma-green background, no scenery, ground or cast shadow. Simplify small hair strands, fabric folds and ornament details into clear larger shapes.\n\npainterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "uc": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, second sword, back-mounted weapon, scabbard, oversized sword, broad greatsword, dagger, cropped sword tip, cropped feet, white dress, stockings, sunglasses over eyes, intricate detail, fine hair strands, glossy fabric, photorealistic, 3d render, extra character, green clothing, green hair, gradient background, background shadow",
+  "char_prompt": "",
+  "style_variant": "shared style once, generic quality tags removed",
+  "reference_note": "text identity from approved Wu; no direct image conditioning in current client",
+  "output": ".tmp/nai/output/wu-battle-right-transparent-20261003/wu-battle-right-nai-v5-raw.png",
+  "seed": 1898224611,
+  "raw_sha256": "e62e7e1cb13d31bd49c548058884fcd0868f1b165e3fbdccdc83e4b05fab097e"
+}

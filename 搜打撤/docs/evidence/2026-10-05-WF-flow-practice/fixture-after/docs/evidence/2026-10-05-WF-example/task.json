@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-example",
+  "date": "2026-10-05",
+  "owner": "Friday",
+  "goal": "修正任务工具及其说明",
+  "paths": [
+    "scripts/workflow-task.mjs",
+    "tests/workflow-task.test.js",
+    "docs/WORKFLOW-TOOLS.md"
+  ],
+  "doneWhen": [
+    "相关契约测试通过",
+    "说明与实际接口一致"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "已核对相关契约测试输出与说明接口",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "远端CI未覆盖本轮未推送改动"
+  ],
+  "updatedAt": "2026-10-05T03:34:31.624Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

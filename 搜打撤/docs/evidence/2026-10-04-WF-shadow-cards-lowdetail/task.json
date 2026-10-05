@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-shadow-cards-lowdetail",
+  "date": "2026-10-04",
+  "owner": "Friday-Codex",
+  "goal": "按老板参考图重绘暗影星月五张卡面，恶魔之力收简、吞噬/噬血术/禁言术新构图、扰敌保留原构图",
+  "paths": [
+    "game/assets/cards/spell-cc-demon.webp",
+    "game/assets/cards/spell-tt3sp-devour.webp",
+    "game/assets/cards/spell-tt7-bloodpotion.webp",
+    "game/assets/cards/spell-tt7-provoke.webp",
+    "game/assets/cards/spell-tt7-silence.webp",
+    "game/assets/thumbs/cards/spell-cc-demon.webp",
+    "game/assets/thumbs/cards/spell-tt3sp-devour.webp",
+    "game/assets/thumbs/cards/spell-tt7-bloodpotion.webp",
+    "game/assets/thumbs/cards/spell-tt7-provoke.webp",
+    "game/assets/thumbs/cards/spell-tt7-silence.webp",
+    "game/data/art-mapping.json",
+    "game/assets/asset-manifest.json"
+  ],
+  "doneWhen": [
+    "五张画作符合低细节手绘画风与暗影星月身份，扰敌原构图保留",
+    "资源与缩略图接入并登记，老板接管网页验收，不跑测试"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "五张内置ImageGen画作已目视查看，低细节画风/暗影身份/扰敌原构图已落实，原图和缩略图已接入登记",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "待老板验收；按老板要求不跑测试、资产门或网页验收；远端差异及CI未核"
+  ],
+  "updatedAt": "2026-10-04T09:17:57.351Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

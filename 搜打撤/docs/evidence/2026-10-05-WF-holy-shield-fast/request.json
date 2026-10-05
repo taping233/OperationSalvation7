@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-holy-shield",
+      "asset": "cards/spell-tt3-holy-shield.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a1079e-49bd-7d13-9261-f9d43860911d/exec-9a64e5fc-2935-4c1b-9321-145cf1a41a38.png",
+      "revision": "xingyue-holy-shield-original-rough-20261005",
+      "prompt": "Repaint IMAGE 1, the 圣盾 (Holy Shield) card, in a rough hand-painted anime style. Keep the ORIGINAL composition exactly: Xingyue centered and frontal, gold-eyed face in upper middle, body cropped at the bottom, wide golden HONEYCOMB SHIELD across the lower/middle foreground covering her hands/chest, same hexagonal layout and outer shield silhouette, pale bright center, teal cape on both sides, thick low gold braid extending toward bottom-right. Same camera, proportions, overlaps and quiet dark side regions; do not redesign pose or turn the honeycomb shield into a held metal shield.\n\nInputs2/3 are broad opaque paint STYLE ONLY, input4 is Xingyue IDENTITY ONLY. Normal Xingyue: cream-gold blunt bangs and low braid, gold eyes, white priest dress with restrained gold edges and deep teal cape. Her WHITE C-shaped crescent clip rests flat above bangs at viewer-right, tilted, not a halo. Preserve a clear composed anime face; do not copy style-reference identities, ornate clothing detail or input4's lantern/standing pose.\n\nRough hand-painted anime color study. Large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Group hair into substantial locks and cloth into principal fold planes. Clear anime gold eyes and economical face marks; other regions coarse and quiet. Matte muted colors with concentrated warm-gold shield accents. Hexagons remain readable with broad uneven ochre borders and quiet ivory/gold faces, not intricate multi-layer glowing rims. Simplify dress/cape ornament to a few gold strokes, remove dense sparks, keep shield's bright center as one calm pale painted mass. No fine strands, dense wrinkles, facet mosaics, glossy rendering, airbrush bloom or all-over texture filters.\n\nBackground: pure dark gray-blue/charcoal abstract color fields in the original open regions, no physical environment. Shield is symbolic protective imagery. No text, frame, watermark or UI.",
+      "references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-holy-shield.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\character-bible\\ref-images\\xingyue.webp"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail color bake only",
+  "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-8924cd32-bf3e-4ddc-ad0e-60b976b138df.png",
+  "outputs": [
+    {
+      "path": "game/assets/cards/hero-volcano.webp",
+      "bytes": 241632,
+      "sha256": "8e7f520f2f58588e0f4b7bdfe19e1a2b44b625afddbbfa73f32eef22b6356db8",
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/cards/hero-volcano.webp",
+      "bytes": 44164,
+      "sha256": "fa0dac7b84ddc559c4c259a8661885e2f1e49b7bff92d2028e30412d82f8c17d",
+      "size": [
+        448,
+        448
+      ]
+    }
+  ],
+  "source": {
+    "path": "game/art-source/cards/hero-volcano-abstract-block-20261004.png",
+    "bytes": 2070309,
+    "sha256": "a468a8accf7e38510b46faef2e2636b0068806801e1247ad6a008ba9a2dc9691"
+  },
+  "backups": [
+    {
+      "path": "docs/evidence/2026-10-04-WF-volcano-abstract-block/originals-before-abstract/full-hero-volcano.webp",
+      "bytes": 133814,
+      "sha256": "d1bfc287b6a9d9c5dc85985bddc91d47c3490d154ba20f6fde3f1922992b1efd"
+    },
+    {
+      "path": "docs/evidence/2026-10-04-WF-volcano-abstract-block/originals-before-abstract/thumb-hero-volcano.webp",
+      "bytes": 20790,
+      "sha256": "fca7192794344a7f1c2f20a7b5f878a82f1e79f8cf2cfd95201e191a59a217f1"
+    }
+  ],
+  "verification": "老板明确禁止测试，本轮未测试/资产审计/实页"
+}

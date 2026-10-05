@@ -1,0 +1,37 @@
+{
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a107c6-f69f-7ca1-93ba-674f3f24d7e1\\exec-68264048-094b-4062-b537-6ed12a495fd9.png",
+  "sourceSHA256": "f5dcdf747643c1a6f7e9b2fe1003fc0a9666d2aadbd8c52d618f62143bd2585a",
+  "sourceBytes": 2111396,
+  "asset": "reconstruction/wallpaper-ensemble-1005.webp",
+  "size": [
+    1672,
+    941
+  ],
+  "bytes": 237722,
+  "sha256": "4c9d73f1ab6129c64408d3e73b27d9b51db3e7880204e5fd7ac6ce35b834512f",
+  "beforeSHA256": "a1649492967e8a8cc3bcdbd36af617c93727a6cf00843a830fa451e2be527d67",
+  "conversion": "Pillow RGB WebP quality=92 method=6; no crop or resize",
+  "origin": "Built-in ImageGen broad-brush repaint, Heixiang/Changwuyu selection face corrections; latest user request removes two extra men, retains five playable characters",
+  "prompt": "prompt-five-final.txt",
+  "identityReferences": [
+    {
+      "path": "game\\assets\\portraits\\full\\heixiang.webp",
+      "sha256": "e186722f97369b3a63a45dca056e2fe6c10f7b211c8de9403f71639d4f6bda6e"
+    },
+    {
+      "path": "game\\assets\\portraits\\full\\changwuyu.webp",
+      "sha256": "98e69d19b6c2129d0f85d320bb95e4609584576c94b041663a523067ff946185"
+    }
+  ],
+  "intermediate": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a107c6-f69f-7ca1-93ba-674f3f24d7e1\\exec-c5071519-0217-470a-97f1-3d52b9d68e57.png",
+    "status": "not installed; cloth/hair still too fragmented"
+  },
+  "intermediateSevenPerson": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a107c6-f69f-7ca1-93ba-674f3f24d7e1\\exec-e6e3f7d3-1846-42fc-93d0-005e46091e4a.png",
+    "sha256": "b85cd6dc61568b5013fcb6abe78bca8341c2595d456f474cc10f6088179807e0",
+    "assetSHA256": "53b4af6ea0f6a4d2a35bb703c1c6a276eac02c0de4c0f8e85bf7395409855294",
+    "backup": "before-five.webp",
+    "status": "superseded by user request: remove two extra people"
+  }
+}

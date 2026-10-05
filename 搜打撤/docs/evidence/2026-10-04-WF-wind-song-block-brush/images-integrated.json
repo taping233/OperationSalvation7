@@ -1,0 +1,57 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail color bake only",
+  "outputs": [
+    {
+      "path": "game/assets/cards/hero-sacredrain.webp",
+      "bytes": 292948,
+      "sha256": "d6344d125c999950053c9ee958c37c78f56ef8f3287de191967b8b0829c67287",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "game/assets/thumbs/cards/hero-sacredrain.webp",
+      "bytes": 55328,
+      "sha256": "40ca3cec810f1562ca23616a112f67e0fdc85b4aca295f766e18dc56306be11a",
+      "size": [
+        448,
+        448
+      ],
+      "mode": "RGB"
+    }
+  ],
+  "source": {
+    "path": "game/art-source/cards/hero-sacredrain-block-brush-20261004.png",
+    "bytes": 2347563,
+    "sha256": "62980f34c8a9c24854d3c927717252889c9d7673e74715ade9bd89f2cfe2135c",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGB"
+  },
+  "backups": [
+    {
+      "path": "docs/evidence/2026-10-04-WF-wind-song-block-brush/originals-before-integration/full-hero-sacredrain.webp",
+      "bytes": 131434,
+      "sha256": "a09f61c0437a97f0b84880cb587cea9f802e3c956f305dbe6c5977e5de4562d0",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "docs/evidence/2026-10-04-WF-wind-song-block-brush/originals-before-integration/thumb-hero-sacredrain.webp",
+      "bytes": 23040,
+      "sha256": "3f49d7e09ef4408e973a6075744652db0337148e9b6cbd92e33c7b476c0ab356",
+      "size": [
+        448,
+        448
+      ],
+      "mode": "RGB"
+    }
+  ]
+}

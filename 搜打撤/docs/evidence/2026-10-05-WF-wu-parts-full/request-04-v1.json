@@ -1,0 +1,12 @@
+{
+  "id": "04",
+  "slug": "back-hair",
+  "version": 1,
+  "prompt": "ONE individual 2D skeletal-animation sprite component for Wu, not a sheet. Genuine transparent PNG background, zero alpha outside the silhouette, no cast shadow, aura, backdrop, text, numbers or alignment marks. Reference 1 is the confirmed THREE-QUARTER FACING SCREEN RIGHT combat mother pose and proportions; reference 2 is the front identity/style reference. Painterly anime, LOW detail, large opaque angular color blocks, clear hard-edge shadows, economical rough hand-painted marks. Neutral black and gray clothing, cream skin, silver-white hair. Keep original anatomical proportions and camera angle. Paint hidden overlap at the joints so the part can rotate without gaps. Center the component with generous transparent margins, one piece only, not a mannequin or full character. No amputated gore, no wounds; clean game asset joining boundaries. Do not include adjacent body parts, do not invent equipment or accessories. Part 04: ONLY Wu's SILVER-WHITE BACK SCALP HAIR CAP, for the exact three-quarter right-facing bald head in reference 3. This goes BEHIND the separate head sprite: a compact silver hair mass wrapping back/upper skull, gathered smoothly toward a HIGH ponytail tie point at top-back, with only short straight nape/side hair wisps ending around jaw/neck. Preserve head size and right-facing angle of reference 3. NO face, ears, neck, skin, front bangs, long ponytail, rose, ribbon or goggles. Do not create a whole wig or flowing long hair. Silhouette compact and rounded to fit rear skull, a small upward gathered tuft near high tie point okay. Silver-white broad angular painted hair masses with cool light-gray shadow planes and a FEW straight strand accents, not individual hair filaments, wavy curls or blue gradient. One compact rear hair cap only.",
+  "refs": [
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\wu-battle-base-frame000.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\reference.png",
+    "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\characters\\wu-parts-v1\\part-02-head-neck-v1.png"
+  ],
+  "tool": "built-in imagegen"
+}

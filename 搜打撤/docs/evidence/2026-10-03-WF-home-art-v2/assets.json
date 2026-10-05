@@ -1,0 +1,40 @@
+[
+  {
+    "name": "camera",
+    "channel": "built-in image_gen",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1025a-eb31-7e91-8193-f99ee3679743\\exec-ac6bea7a-7f85-4c61-9dd2-b739c150ad57.png",
+    "sourceSha256": "0cf6841dc73b6b53a5b800b478cc221d165e400faf8200aa2bcab128a7154247",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "transparentFraction": 0.4777846457524121,
+    "runtime": "game/assets/ui/home-v2/camera.webp",
+    "runtimeSize": [
+      512,
+      512
+    ],
+    "runtimeBytes": 111410,
+    "runtimeSha256": "b4778a5c844f81882e6e63f5b868aec270efa6ccb7a714b1409c6e4b0cfce2a4",
+    "processing": "resize and WebP encoding only; generated alpha preserved"
+  },
+  {
+    "name": "expedition-sigil",
+    "channel": "built-in image_gen",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1025a-eb31-7e91-8193-f99ee3679743\\exec-6a3046ef-ef85-483f-8e0e-27239a61befe.png",
+    "sourceSha256": "f845ed0d9e64c54eb64cf1f4aa29b4275ee2c7f782f85c46026ad08d9d9a4b8d",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "transparentFraction": 0.6533669609720982,
+    "runtime": "game/assets/ui/home-v2/expedition-sigil.webp",
+    "runtimeSize": [
+      768,
+      768
+    ],
+    "runtimeBytes": 220232,
+    "runtimeSha256": "f3e194b1fe074764c32753f89625fe9243a673bfed4eef6eccca7f0686c9fcc6",
+    "processing": "resize and WebP encoding only; generated alpha preserved"
+  }
+]

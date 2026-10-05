@@ -1,0 +1,54 @@
+{
+  "assets": [
+    {
+      "path": "ui/beginner-guide/prepare.svg",
+      "ext": "svg",
+      "bytes": 3367,
+      "sha256": "48789ed0ff7813a06fa68fcb89b5b69b13c0bd24293be3b0dd23339d66ea1f4b",
+      "license": "项目自有（原创机制示意图）",
+      "source": "docs/evidence/2026-10-04-WF-feedback-r3/guide-art.md"
+    },
+    {
+      "path": "ui/beginner-guide/map.svg",
+      "ext": "svg",
+      "bytes": 2928,
+      "sha256": "e5ae70ca2219d97618e9b5ad86a663e86e84990475cee533b04e9e0c7a4b8aa1",
+      "license": "项目自有（原创机制示意图）",
+      "source": "docs/evidence/2026-10-04-WF-feedback-r3/guide-art.md"
+    },
+    {
+      "path": "ui/beginner-guide/battle.svg",
+      "ext": "svg",
+      "bytes": 2975,
+      "sha256": "f30302fd7e20f40beaba8c5f43bc1d5caea4351b192731351f61fb8e780f6f57",
+      "license": "项目自有（原创机制示意图）",
+      "source": "docs/evidence/2026-10-04-WF-feedback-r3/guide-art.md"
+    },
+    {
+      "path": "ui/beginner-guide/loot.svg",
+      "ext": "svg",
+      "bytes": 3203,
+      "sha256": "9ee78f05872a80a669691434bc88b57580fd33c66fd37a17442e30f9cc766d14",
+      "license": "项目自有（原创机制示意图）",
+      "source": "docs/evidence/2026-10-04-WF-feedback-r3/guide-art.md"
+    },
+    {
+      "path": "ui/beginner-guide/extract.svg",
+      "ext": "svg",
+      "bytes": 2673,
+      "sha256": "15a96c997706c3c36a26acbebeb43c906f6114d120f6ac483f62453d293e2ad6",
+      "license": "项目自有（原创机制示意图）",
+      "source": "docs/evidence/2026-10-04-WF-feedback-r3/guide-art.md"
+    },
+    {
+      "path": "ui/beginner-guide/growth.svg",
+      "ext": "svg",
+      "bytes": 2704,
+      "sha256": "1b28c00aa0224c091a503d6114f242b27c53b8b835639a953f5ef7925e30a2a0",
+      "license": "项目自有（原创机制示意图）",
+      "source": "docs/evidence/2026-10-04-WF-feedback-r3/guide-art.md"
+    }
+  ],
+  "note": "WF-shadow-cards-lowdetail已移入近期释放后，沿当前字节SHA最小添加本6条；其他清单条目保留。",
+  "mergedAt": "2026-10-04T09:23:05.058Z"
+}

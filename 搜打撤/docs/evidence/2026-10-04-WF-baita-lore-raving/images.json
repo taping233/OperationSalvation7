@@ -1,0 +1,42 @@
+{
+  "method": "Built-in imagegen; Sharp only encodes and applies the existing bake-card-thumbs.cjs thumbnail matrix",
+  "raw": {
+    "path": ".tmp/imagegen/baita-lore-raving-20261004/lore-raving-v1.png",
+    "bytes": 2479408,
+    "sha256": "2ca20902989421419096679a687d651b568c7f32f34a762d60324809567092e1",
+    "width": 1254,
+    "height": 1254
+  },
+  "originals": [
+    {
+      "path": ".tmp/imagegen/baita-lore-raving-20261004/originals/lore-raving.webp",
+      "bytes": 105844,
+      "sha256": "2c09c74aa8d834e4ae5d79105101a624300a8b1d6bfd254d7a67e78f3d4bf466",
+      "width": 896,
+      "height": 896
+    },
+    {
+      "path": ".tmp/imagegen/baita-lore-raving-20261004/originals/thumb-lore-raving.webp",
+      "bytes": 26168,
+      "sha256": "32dafd161b5ff5cea2f5996929d2e31b86765dcea1f899c7b3948051cbb8c41a",
+      "width": 448,
+      "height": 448
+    }
+  ],
+  "outputs": [
+    {
+      "path": "game/assets/cards/lore-raving.webp",
+      "bytes": 288664,
+      "sha256": "3febc2f59ea7ecec812829c636aa3e4a3b094ddd1ad3a3f76d0d9d88a4494ef3",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "game/assets/thumbs/cards/lore-raving.webp",
+      "bytes": 38914,
+      "sha256": "f916e8a115a075ed61d23b21e562f6951ec8866c34411a0f3fec3ef873932f58",
+      "width": 448,
+      "height": 448
+    }
+  ]
+}

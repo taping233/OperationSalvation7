@@ -1,0 +1,1 @@
+(()=>{const q=window.__uiArtQA;q.game.state='idle';q.scenes.openChestsOnCell([{kind:'large'}],'受控满包宝箱');return true;})()

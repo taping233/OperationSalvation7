@@ -1,0 +1,13 @@
+{
+  "channel": "built-in image_gen",
+  "transparent_background": true,
+  "reference_image": ".tmp/nai/output/wu-battle-right-transparent-20261003/wu-battle-right-transparent-v2.png",
+  "prompt": "Edit this Wu portrait. OUTPUT A WIDE LANDSCAPE 3:2 CANVAS, not a tall portrait. True transparent RGBA cutout. Place the full-body character in the LEFT HALF, keep her facing screen-right and her current battle-ready pose. Leave the RIGHT HALF for her much longer sword. Enlarge canvas width rather than compressing the blade. Exactly one sword, in her right hand; no back sword or scabbard.\nMake the held slender straight black sword DRAMATICALLY LONGER: guard-to-tip blade length about 80% of her full head-to-boot body height, approximately DOUBLE the input blade length relative to her body. Extend it low forward toward screen-right, retain a restrained steel edge and tapered tip. The entire tip stays comfortably inside the wider canvas with clear transparent margin.\nREDUCE DETAIL SUBSTANTIALLY: a loose, broad-brush painted character concept sketch. Large angular color/light-shadow masses, dry broken brush edges, very few deliberate small accents. Simplify ponytail to 5-7 broad flowing paint ribbons; simplify dress to broad dark planes, large ruffles and a few readable blue stars. Simplify rose, boots, sunglasses and face rendering. Keep face identity, blue eyes and small-fang smile recognizable with minimal strokes. No meticulous hair strands, tiny fabric folds, polished gradients, glossy render, crisp ornamental microdetail or photorealism. Preserve silver high ponytail, blue bow, black rose and head-top sunglasses; black off-shoulder calf-length dress with blue star inner lining, bare lower legs and black boots. Whole body, hair, both boots and entire long blade visible. No background, ground, glow, cast shadow, text or watermark.",
+  "status": "failed-no-image-returned",
+  "attempts": 2,
+  "errors": [
+    "connection failed: error sending request",
+    "connection failed: error sending request"
+  ],
+  "previous_image_preserved": true
+}

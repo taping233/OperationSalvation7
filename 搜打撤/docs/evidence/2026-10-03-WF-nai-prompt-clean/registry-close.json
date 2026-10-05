@@ -1,0 +1,8 @@
+{
+  "cells": [
+    "Friday（Codex 生图提示词整理 WF-nai-prompt-clean）",
+    "tools/nai_prompt_clean.py、tools/tests/test_nai_prompt_clean.py、tools/NAI-PROMPTS.md；.tmp/nai/ 43 个本地脚本与忽略目录无朝右透明 PNG；证据 docs/evidence/2026-10-03-WF-nai-prompt-clean/；原脚本逐字节备份；nai_style.py/人物规范/游戏运行素材保留他人现场",
+    "完成未提交：59 脚本语法+43 前后 SHA/原字节备份核对+6 离线契约测试通过；一次内置 imagegen 生成无朝右全身战斗立绘，1024×1536 RGBA/四角透明已核；>1MB PNG 留 .tmp，记录 SHA256 与获取方式；等待老板审美反馈，无源码接入/build/提交/推送；编辑占用释放，无自建服务",
+    "10-03"
+  ]
+}

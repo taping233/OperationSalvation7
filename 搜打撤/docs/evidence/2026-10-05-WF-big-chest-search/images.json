@@ -1,0 +1,42 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail color bake only",
+  "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-bdf343d6-c42f-4966-9521-0c77fc99dcec.png",
+  "outputs": [
+    {
+      "path": "game/assets/cards/spell-cmtn28jv33wx.webp",
+      "bytes": 116660,
+      "sha256": "dcc403edd74e1bad2f523ee012977167f165ff47ef9bb1e6ab3f276381b81cde",
+      "size": [
+        1448,
+        1086
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/cards/spell-cmtn28jv33wx.webp",
+      "bytes": 19668,
+      "sha256": "b278bf5eda644f6a1bb71790b60e2cc5414cb696b3a19c36a08fdc4b0e5711f6",
+      "size": [
+        448,
+        336
+      ]
+    }
+  ],
+  "source": {
+    "path": "game/art-source/cards/spell-cmtn28jv33wx-rough-20261005.png",
+    "bytes": 1690357,
+    "sha256": "0136e52250d0f4951a7882120415564ecb24c07341fcf937bf011eeb58dacb87"
+  },
+  "backups": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-big-chest-search/originals-before-search/full-spell-cmtn28jv33wx.webp",
+      "bytes": 52650,
+      "sha256": "53f6100d37f88c0351d62b82afe2e945e84fa71776b9b4a77e7ea9c0e9dfc0e9"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-big-chest-search/originals-before-search/thumb-spell-cmtn28jv33wx.webp",
+      "bytes": 13548,
+      "sha256": "bd2aa7b8fb91c8a7091f5e1e3877c0cb794a65cd5b669b0c860c75b45a9d8123"
+    }
+  ],
+  "verification": "老板明确禁止测试，本轮未测试/资产审计/实页"
+}

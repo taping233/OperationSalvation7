@@ -1,0 +1,75 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-holy-shield",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-9a64e5fc-2935-4c1b-9321-145cf1a41a38.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-05-WF-holy-shield-fast/cards-spell-tt3-holy-shield-source.png",
+        "bytes": 2025288,
+        "sha256": "27b848240a38eef9cdacde4c8b3cb4494f2df181263493ea9130bcc1be07eec9"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-holy-shield-fast/cards-spell-tt3-holy-shield-full-before.webp",
+          "bytes": 86530,
+          "sha256": "3bc6f5b1c99bccddd938f5c4b66a3f65495dc0da3819007ece27aeb9b6530c22"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-05-WF-holy-shield-fast/cards-spell-tt3-holy-shield-thumb-before.webp",
+          "bytes": 18704,
+          "sha256": "a9e9aab0565295933031c7c116e83c958483c64c3c593647357bad5376cec321"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-holy-shield.webp",
+          "bytes": 161656,
+          "sha256": "4fa2977dcc97c355fb05b13694eb54ac6373fa131323de9ecccca10f7596b5a2",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-holy-shield.webp",
+          "bytes": 16522,
+          "sha256": "11b24763f1a85c705babd2ddb992983565250bdd770ce3c9a4b05268515bfc65",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "xingyue-holy-shield-original-rough-20261005",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt3-holy-shield.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 161656,
+            "sha256": "4fa2977dcc97c355fb05b13694eb54ac6373fa131323de9ecccca10f7596b5a2",
+            "source": "docs/evidence/2026-10-05-WF-holy-shield-fast/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/spell-tt3-holy-shield.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 16522,
+            "sha256": "11b24763f1a85c705babd2ddb992983565250bdd770ce3c9a4b05268515bfc65",
+            "source": "docs/evidence/2026-10-05-WF-holy-shield-fast/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 353,
+  "manifest_count_after": 355
+}

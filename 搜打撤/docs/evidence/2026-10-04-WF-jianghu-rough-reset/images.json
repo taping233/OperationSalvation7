@@ -1,0 +1,42 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail color bake only",
+  "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-e834f412-d927-4dd5-84ec-4663748bf374.png",
+  "outputs": [
+    {
+      "path": "game/assets/cards/martial-cmtn1wnhhym.webp",
+      "bytes": 208050,
+      "sha256": "631ff1e8c63cc2a6aedbc2fb26e11585a1f801722341d2cb6acf3355cdec83df",
+      "size": [
+        1448,
+        1086
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/cards/martial-cmtn1wnhhym.webp",
+      "bytes": 31290,
+      "sha256": "bf00ff49c5091cd09778d590aac600dcb4f50b7c8f4166fbde88bd56d7a9dd05",
+      "size": [
+        448,
+        336
+      ]
+    }
+  ],
+  "source": {
+    "path": "game/art-source/cards/martial-cmtn1wnhhym-rough-reset-20261004.png",
+    "bytes": 2003624,
+    "sha256": "ac7cdf49863c89fd4ea9e398291231f2aebe3c25d4e860e10ddafb5169bc238c"
+  },
+  "backups": [
+    {
+      "path": "docs/evidence/2026-10-04-WF-jianghu-rough-reset/originals-before-reset/full-martial-cmtn1wnhhym.webp",
+      "bytes": 27750,
+      "sha256": "2043170860b4c33ea7e3faf2f60bbcbfadeb3b00e8c23d03a40ce32e4c7a9f4f"
+    },
+    {
+      "path": "docs/evidence/2026-10-04-WF-jianghu-rough-reset/originals-before-reset/thumb-martial-cmtn1wnhhym.webp",
+      "bytes": 6694,
+      "sha256": "9fafe0cdae2b3ad09f7f4578c4c2cef3fa7619a6acf5c23816b460f5fc17bf2d"
+    }
+  ],
+  "verification": "老板明确禁止测试，本轮未测试/资产审计/实页"
+}

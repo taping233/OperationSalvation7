@@ -1,0 +1,22 @@
+> For the complete documentation index, see [llms.txt](https://docs.lmms.io/user-manual/llms.txt). Markdown versions of documentation pages are available by appending `.md` to page URLs; this page is available as [Markdown](https://docs.lmms.io/user-manual/instruments/zynaddsubfx.md).
+
+# ZynAddSubFX
+
+ZynAddSubFX is a powerful synthesizer with a wide range of sounds. It has its own GUI with the options for simple or advanced controls, as well as its own effects system. ZynAddSubFX is the most powerful embedded synthesizer in LMMS.
+
+![ZynAddSubFX](https://2675558978-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-LRtsae7H2l0Wn3A4biK-1972196547%2Fuploads%2FirkaHe78sag49ffrPnlG%2FScreenshot%202025-01-25%20231555.png?alt=media\&token=9228b0b3-ddba-4d20-aafc-36afb06c65be)
+
+This article will not cover ZynAddSubFX, not even remotely. It would without any kind of "story-telling" be easy to write a 500 page book, and still come up short...! If you want to learn the most important features, you should watch the [Video Tutorials](/user-manual/resources/videos.md#zynaddsubfx) video tutorials, there you can get specific hands-on visualizations of the most important things. Otherwise, you can read the official ZynAddSubFX documentation [here](https://zynaddsubfx.sourceforge.io/Doc/) on SourceForge.
+
+Here, we will only look at the special LMMS controllers and that is an absolute insignificant scratch of the surface, of this amazing synthesizer!
+
+ZynAddSubFX is actually an embedded and fully integrated open source VST. That is also the reason, that the LMMS ENV/LFO tab is empty. VSTs can't utilize those. ZynAddSubFX has been given a special LMMS UI, that gives you access to its seven different internal settings:
+
+* **PORT:** stands for "Portamento". The setting is OFF when it is below 50%, and ON when over 50%. You can not alter the slide-duration, for that you need to access the ZynAddSubFX controllers.
+* **FREQ:** it is the cutoff frequency of the default Low-pass 1 stages 12dB filter
+* **RES (Resonance):** also known as "Q" of the default filter. Resonance increases the chosen part of the filter cutoff. Kind of a "hump" in the spectrum. You hear this as "sharpness" versus "dull" expression of the sound. Too much resonance causes distortion, and can harm both hearing! and speakers. The default presets in the ZynAddSubFX folders should only use moderate Q, because the internal ZynAddSubFX Q is quite high! Serious clipping from factory ZynAddSubFX presets will often be solvable, if you moderate the Q, sometimes significantly. (When you make your own ZynAddSubFX presets, a Q <\~ 10 is recommended.)
+* **BW Wave Bandwidth:** comes out as detuning of the waveform, and it is a very nice sound, indeed. Unfortunately, not all ZynAddSubFX factory presets will allow Bandwidth modulation. There need to be either *UNISON* or several *PARTS* of the instrument.
+* **FM GAIN Frequency Modulation intensity:** this dial will increase any modulation, that has been built inside the ZynAddSubFX preset. Not just FM. By default this dial will not change anything, because no factory presets have any modulation.
+* **RES CF & RES BW Resonance Center Frequency & Resonance Bandwidth:** these settings are not working with the default ZynAddSubFX presets. In order to activate them, a *Resonance envelope* needs to be made, inside ZynAddSubFX.
+
+How to control FM GAIN, RES CF & RES BW is explained in some of the Video resources.

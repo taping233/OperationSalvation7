@@ -1,0 +1,68 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 16/16 满, ID: bagBtnFloat
+			4 text 背包
+			5 text 16/16
+			6 text 满
+		7 container archive 搜刮！军用保险柜 · 第 1 / 1, ID: overlay
+			8 container
+				9 button Description: 关闭, ID: ovCloseX
+				10 heading archive 搜刮！军用保险柜 · 第 1 / 1, Value: 2, ID: ovTitle
+					11 image archive
+					12 text  搜刮！军用保险柜 · 第 1 / 1
+				13 container ovBody
+					14 text FIELD SUPPLY / 01
+					15 text 发现补给，整理收获。
+					16 text 背包占用
+					17 container
+						18 text 16  / 16
+					19 container
+						20 text 开出  3  张卡牌 · 
+						21 image coin
+						22 text 2  币 ·  打出即散失 · 撤离每张 
+						23 image pocket
+						24 text  1/3 带回
+					25 container
+						26 image bag
+						27 text  背包已满（16/16 格，珍珠盒扩格只收资源卡）——只能再收  0  张：可单点卡牌拾取，或按 B 打开背包把卡牌拖入安全格/存入珍珠盒腾出格子，或全部收下（放不下的  3  张将散落）。 背包最低价：「迅疾箭」
+						28 image coin
+						29 text 2  币——新卡值不止这个价就值得让路
+					30 button 收取卡牌：寻宝图
+						31 container
+							32 text 0
+							33 image 寻宝图
+							34 text 寻宝图 装备 · 古朴
+							35 image cards
+							36 text 抽 1 主动技能 ： 将  1 张‘搜索大宝箱’洗入 牌库 ，抽 1 张牌。
+							37 image coin
+							38 text 2
+						39 image coin
+						40 text 2
+					41 button 收取卡牌：银河之旅
+						42 container
+							43 text 2
+							44 image 银河之旅
+							45 text 银河之旅 法术 · 传说 本场对战中，你的所有武术均为  1  费。
+							46 image coin
+							47 text 5
+						48 image coin
+						49 text 5
+					50 button 收取卡牌：感染射线
+						51 container
+							52 text 1
+							53 image 感染射线
+							54 text 感染射线 法术 · 古朴 造成 4 点 法伤 ，附加一层随机 诅咒
+							55 image sparkles
+							56 text 4'
+							57 text 法伤
+						58 image coin
+						59 text 1
+					60 text 点击卡牌收下它，未收取的将在离开时散落
+					61 container
+						62 button 只收金币并离开
+						63 button archive 全部收下（3 张放不下）
+							64 image archive
+							65 text 全部收下（3 张放不下）
+
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/

@@ -1,0 +1,43 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 1/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 1/16
+		6 container archive 搜刮！小型物资箱 · 第 1 / 1, ID: overlay
+			7 container
+				8 button Description: 关闭, ID: ovCloseX
+				9 heading archive 搜刮！小型物资箱 · 第 1 / 1, Value: 2, ID: ovTitle
+					10 image archive
+					11 text  搜刮！小型物资箱 · 第 1 / 1
+				12 container ovBody
+					13 text FIELD SUPPLY / 01
+					14 text 发现补给，整理收获。
+					15 text 背包占用
+					16 container
+						17 text 1  / 16
+					18 container
+						19 text 开出  1  张卡牌 · 
+						20 image coin
+						21 text 1  币 ·  打出即散失 · 撤离每张 
+						22 image pocket
+						23 text  1/3 带回
+					24 container
+						25 text 本战击败  3  名敌人 · 剩余生命  26/30
+					26 button 收取卡牌：追斩
+						27 container
+							28 text 2
+							29 image 追斩
+							30 text 追斩 武术 · 稀有 攻（ +0 ），本 回合 每打出一张其他武术，费用 -1 。
+							31 image coin
+							32 text 2
+						33 image coin
+						34 text 2
+					35 text 点击卡牌收下它，未收取的将在离开时散落
+					36 container
+						37 button 只收金币并离开
+						38 button archive 全部收下（含 1 币）
+							39 image archive
+							40 text 全部收下（含 1 币）
+
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/

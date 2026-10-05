@@ -1,0 +1,1 @@
+(()=>{const q=window.__uiArtQA;q.reset();const d=q.game.layerData[0].doors[0];q.altar.openDoorModal(d,{type:'shop'});return JSON.stringify({door:d});})()

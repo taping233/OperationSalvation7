@@ -1,0 +1,13 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container
+		3 text FIELD ENCOUNTER 01 / 04
+		4 heading coin 拾获, Value: 2
+			5 image coin
+			6 text  拾获
+		7 text 「叮」——一枚旧世界硬币从锈铁皮里滚了出来。 +3 币
+		8 button 获取并离开 ▸
+			9 text 获取并离开
+			10 text ▸
+
+The focused UI element is 8 button 获取并离开 ▸

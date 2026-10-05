@@ -1,0 +1,77 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 1/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 1/16
+		6 container
+			7 text 冬境街区 · 遭遇
+			8 text 第 1 回合
+			9 text 你的行动 Lv.1 · 0/50 · 差 50 点
+			10 text 我方
+			11 container btSelf
+				12 image 黑像
+				13 container
+					14 text 黑像 你
+				15 container
+					16 text 30/30
+				17 container
+					18 image swords
+					19 text  4
+			20 container
+				21 container
+					22 image swords
+					23 text  攻击 · 4
+				24 image infantry
+				25 text 联邦巡防兵
+				26 image swords
+				27 text 4
+				28 container
+					29 text 4/4
+				30 container
+					31 image swords
+					32 text  攻击 · 4
+				33 image infantry
+				34 text 联邦巡防兵
+				35 image swords
+				36 text 4
+				37 container
+					38 text 4/4
+				39 container
+					40 image swords
+					41 text  攻击 · 4
+				42 image infantry
+				43 text 联邦巡防兵
+				44 image swords
+				45 text 4
+				46 container
+					47 text 4/4
+			48 text 敌方意图
+			49 container
+				50 image bolt
+				51 text 2 /2
+			52 button swords 猛击
+				53 image swords
+				54 text  猛击
+			55 checkbox Description: 初始攻击 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+				56 container
+					57 text 1
+					58 image 初始攻击
+					59 text 初始攻击
+				60 text ×5
+				61 image swords
+			62 container 战术操作
+				63 button bag 背包
+					64 image bag
+					65 text  背包
+				66 button runner 撤离（判负）
+					67 image runner
+					68 text  撤离（判负）
+				69 button gear 设置
+					70 image gear
+					71 text  设置
+				72 button skip 结束回合
+					73 image skip
+					74 text  结束回合
+
+The focused UI element is 52 button swords 猛击

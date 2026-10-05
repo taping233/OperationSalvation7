@@ -1,0 +1,27 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 2/16, ID: bagBtnFloat
+			4 text 背包
+			12 text 2/16
+		6 container swords 遭遇战 · 第 1 回合 · question 抉择, ID: overlay
+			7 container
+				8 heading swords 遭遇战 · 第 1 回合 · question 抉择, Value: 2, ID: ovTitle
+					13 image swords
+					14 text  遭遇战 · 第 1 回合 · 
+					15 image question
+					16 text  抉择
+				11 container ovBody
+					17 container
+						18 text 【神灯】——从  3  个选项中选择  1  项，只有选中项结算
+					19 button question 发现 1 张牌并将其释放
+						20 image question
+						21 text  发现 1 张牌并将其释放
+					22 button question 消灭 1 名受伤敌人（非 BOSS）
+						23 image question
+						24 text  消灭 1 名受伤敌人（非 BOSS）
+					25 button question 冰冻 2 名角色，获得5 点护甲
+						26 image question
+						27 text  冰冻 2 名角色，获得5 点护甲
+
+The focused UI element is 19 button question 发现 1 张牌并将其释放

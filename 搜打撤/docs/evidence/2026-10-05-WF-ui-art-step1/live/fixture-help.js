@@ -1,0 +1,1 @@
+(()=>{const q=window.__uiArtQA;q.reset();window.SDT.UI.showHelp('extract');return true;})()

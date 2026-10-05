@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-xingyue-fullmoon",
+  "date": "2026-10-04",
+  "owner": "Friday-Codex",
+  "goal": "以正常星月人设和固定低细节画风重绘满月形态职业卡，设计新动作分镜",
+  "paths": [
+    "game/assets/cards/spell-tt3-nature-form.webp",
+    "game/assets/thumbs/cards/spell-tt3-nature-form.webp",
+    "game/data/art-mapping.json",
+    "game/assets/asset-manifest.json"
+  ],
+  "doneWhen": [
+    "正常星月身份、简练满月变化分镜与低细节手绘风格完成",
+    "原图/缩略图接入与本2件登记，老板接管验收，不跑测试"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "内置ImageGen图已目视查看，正常星月/简练满月分镜/固定画风落实，原图缩略图接入并登记本2件",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "待老板验收；按要求不测试、不资产门、不网页验收；远端差异与CI未核"
+  ],
+  "updatedAt": "2026-10-04T10:09:04.109Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

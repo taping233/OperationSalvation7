@@ -1,0 +1,165 @@
+{
+  "at": "2026-10-05T03:42:14.220Z",
+  "head": "425d03920e4323b016433419ec11aec4a7f3795b",
+  "trackingDifference": "53\t0",
+  "remoteRefreshed": false,
+  "tests": {
+    "report": "2026-10-05T03-40-36.415Z-7fb3297c.json",
+    "outcome": "passed",
+    "validity": {
+      "eligibleForReview": true,
+      "codeEligibleForReview": true,
+      "result": "state-changed",
+      "parts": {
+        "code": {
+          "before": "f40adfff066de5e8f1e51e5b94ef99eb41646db2d18ceeec8076faa3e86c68f9",
+          "after": "f40adfff066de5e8f1e51e5b94ef99eb41646db2d18ceeec8076faa3e86c68f9",
+          "current": "f40adfff066de5e8f1e51e5b94ef99eb41646db2d18ceeec8076faa3e86c68f9",
+          "covered": true,
+          "changedDuringCheck": false,
+          "changedSinceCheck": false,
+          "status": "candidate",
+          "eligibleForReview": true
+        },
+        "docs": {
+          "before": "8c24817f63dae594adb83c4b5e4e73513cc7f7531e429d3c02abcc5e9182f2ff",
+          "after": "8c24817f63dae594adb83c4b5e4e73513cc7f7531e429d3c02abcc5e9182f2ff",
+          "current": "8c24817f63dae594adb83c4b5e4e73513cc7f7531e429d3c02abcc5e9182f2ff",
+          "covered": true,
+          "changedDuringCheck": false,
+          "changedSinceCheck": false,
+          "status": "candidate",
+          "eligibleForReview": true
+        },
+        "state": {
+          "before": "608822ce510f833fb8871b88bd3839d93cb8f7b6baca0b02e9affc636d16b40e",
+          "after": "608822ce510f833fb8871b88bd3839d93cb8f7b6baca0b02e9affc636d16b40e",
+          "current": "9af86e52ee9f4234eb87dcf1e22ad8fdec1ce5b1fa56119dbb5d35fcb991493e",
+          "covered": true,
+          "changedDuringCheck": false,
+          "changedSinceCheck": true,
+          "status": "stale",
+          "eligibleForReview": false
+        },
+        "environment": {
+          "before": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4",
+          "after": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4",
+          "current": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4",
+          "covered": true,
+          "changedDuringCheck": false,
+          "changedSinceCheck": false,
+          "status": "candidate",
+          "eligibleForReview": true
+        }
+      },
+      "recheck": [
+        "state"
+      ],
+      "limits": [
+        "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+      ]
+    }
+  },
+  "docs": {
+    "ok": true,
+    "checkedRelativeLinks": 344,
+    "findings": []
+  },
+  "rulesBytes": 4398,
+  "flowBytes": 25888,
+  "ownInputs": [
+    {
+      "file": "../AGENTS.md",
+      "sha256": "72156d4f2d27609406ce8ea20bc83bf39c5c52df6d12ba62cc909b90eb5e21d4"
+    },
+    {
+      "file": "README.md",
+      "sha256": "0b9317b28e3353038d844df33beb0c2df3f6331298515bd3bbcde4bbfcfe9d45"
+    },
+    {
+      "file": "docs/development.md",
+      "sha256": "7515108634aae3d647ba2ef9fcc74ff97542661596bd8416fe96da5fe29f0e6a"
+    },
+    {
+      "file": "docs/README.md",
+      "sha256": "619e159f5de9c914b179d345709d8d60ed9ddc58672491d570cae601dce7d852"
+    },
+    {
+      "file": "docs/WORKFLOW-TOOLS.md",
+      "sha256": "a4e84c1c34c81cde6a87768d89a7e2fdfcdf888b1557362f416898cda3509bca"
+    },
+    {
+      "file": "docs/quality-gates.md",
+      "sha256": "06a7d9ed29c034a4a846e132750f0e7399e34b516ddffd1151388cb5064e697b"
+    },
+    {
+      "file": "tests/docs-consistency.test.js",
+      "sha256": "d766f3e45845bc9f8a889ab29f6160f1b95e4561986d948f6ad756d7acf0afc6"
+    }
+  ],
+  "evidenceLinksChecked": 10,
+  "oversized": [],
+  "commands": [
+    {
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/eslint/bin/eslint.js",
+        "tests/docs-consistency.test.js"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        "../AGENTS.md",
+        "README.md",
+        "docs/development.md",
+        "docs/README.md",
+        "docs/WORKFLOW-TOOLS.md",
+        "docs/quality-gates.md",
+        "tests/docs-consistency.test.js"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "warning: in the working copy of '搜打撤/docs/development.md', CRLF will be replaced by LF the next time Git touches it"
+    },
+    {
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--check",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-05-WF-flow-practice\\practice.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--check",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-05-WF-flow-practice\\scope-practice.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--check",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-05-WF-flow-practice\\finalize.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "limits": [
+    "仅工程流程/文档和示例守卫；没有游戏实页、build、全量或远端CI验收；无提交授权"
+  ]
+}

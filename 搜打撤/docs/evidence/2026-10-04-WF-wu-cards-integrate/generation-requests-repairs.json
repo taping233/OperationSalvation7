@@ -1,0 +1,172 @@
+{
+  "tool": "built-in imagegen",
+  "repairs": [
+    {
+      "id": "tt7-stealth",
+      "prompt": "Edit IMAGE 1 ONLY for two identity corrections, preserve all composition, rendering style, face, accessories, above-knee skirt, dissolution fragments on left, and finger-to-lips hush pose EXACTLY. Image2 is identity reference only. (1) Remove the black glove on the raised hush hand and replace it with her BARE pale warm-skinned hand. Same index-finger position touching lips, same wrist/hand pose, fingers anatomy clear. Black ruffled sleeve still ends at the wrist; no black fabric covers palm or fingers. (2) Shorten the long straight ponytail on the image-right: same high root and straight grouped strands, but tip ends near the HIP/LOWER SKIRT HEM, not beside her shins or boots. Keep black rose and blue ribbon at root and round goggles on forehead unchanged. No new objects, no other changes, same exact canvas dimensions and framing.",
+      "input": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt7-stealth.png"
+    },
+    {
+      "id": "tt7-swordimmortal",
+      "prompt": "Edit IMAGE 1 only for costume and held-sword identity, preserve its exact steep TOP-DOWN camera, face, pose, figure size and position, circular fanned skirt, straight ponytail streaming upward, dark background, and TWO horizontal magical swords extending left/right unchanged. Image2 is costume identity reference, image3 is main sword reference only. Add the approved BLACK-GRAY LONG SLEEVES: cover BOTH arms from below exposed shoulders to the WRISTS with loose black ruffled sleeves and gathered wrist cuffs. No bare upper arms or forearms below shoulder opening. Hands gripping the downward sword must be BARE skin, no gloves. Replace ONLY the DOWNWARD sword held between her hands with the same thin straight BLACK/CHARCOAL-GRAY sword as image3, small short rectangular guard, simple black grip, neutral SILVER/GRAY highlights. Keep its position, direction and apparent length in this foreshortened layout; completely remove blue coloring/glow from this physical held blade. If a thin effect beyond sword tip is needed, it is neutral white separate from blade. Leave the two horizontal spell swords' pale glow and all original effect trajectories in place. Maintain low-detail broad opaque angular painterly anime brushwork, no new detail, no text, same exact image size.",
+      "input": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt7-swordimmortal.png"
+    },
+    {
+      "id": "tt8-hero-ranger",
+      "prompt": "Edit IMAGE 1 ONLY to correct Wu's skirt to her approved short uniform-length outfit. Preserve exact overall scene composition: central vertical gold-white summoned giant sword, same sword silhouette/size/location, gold light column width and navy side panels, figure center/scale/camera, face visible left of sword, raised arm on right, other hand low on left, straight high ponytail and root black rose/blue bow, goggles and black long sleeves, bare legs and boots. Image2 is costume reference only. SKIRT CORRECTION: front, sides and BACK of dress must be equally short, all hem edges end ABOVE THE KNEES, with no long side/back train. The big hanging left/right blue-star rear panels in image1 are the OLD incorrect high-low skirt and must be shortened. Retain a broadly sideways flared skirt gesture, but made of short uniform-length black layered ruffled skirt with one narrow cobalt blue star band along its lower edge, fanning at THIGH height. No panel goes below knees or trails sideways at calf level. If it creates more empty background beside legs, show the existing gold/navy background there; do not add new props or effects. Do not add blue to shoulders/bodice/sleeves. Keep the economy of angular opaque painterly blocks, sparse details and same image dimensions. Everything else unchanged. No text.",
+      "input": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt8-hero-ranger.png"
+    }
+  ],
+  "selectedOutputs": [
+    {
+      "index": 0,
+      "id": "tt7-throwblade",
+      "name": "飞刃偷袭",
+      "file": "martial-tt7-throwblade.webp",
+      "source": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/game/assets/cards/martial-tt7-throwblade.webp",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-70190d8d-7348-41ad-9237-66c02fbb32e1.png",
+      "final": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt7-throwblade.png"
+    },
+    {
+      "index": 1,
+      "id": "tt7-goldencicada",
+      "name": "金蝉脱壳",
+      "file": "martial-tt7-goldencicada.webp",
+      "source": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/game/assets/cards/martial-tt7-goldencicada.webp",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-d8ae05f9-2afc-4c23-b6bf-03163f45f4a4.png",
+      "final": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt7-goldencicada.png"
+    },
+    {
+      "index": 2,
+      "id": "tt7-sneak",
+      "name": "偷袭",
+      "file": "martial-tt7-sneak.webp",
+      "source": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/game/assets/cards/martial-tt7-sneak.webp",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-a7fd9e48-5425-4d41-97fe-06ad6a5d7314.png",
+      "final": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt7-sneak.png"
+    },
+    {
+      "index": 3,
+      "id": "tt7-ghostblade",
+      "name": "鬼魅之刃",
+      "file": "martial-tt7-ghostblade.webp",
+      "source": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/game/assets/cards/martial-tt7-ghostblade.webp",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-bc8c92d5-4fa1-4140-9b41-4c96cf0502c8.png",
+      "final": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt7-ghostblade.png"
+    },
+    {
+      "index": 4,
+      "id": "tt7-thundergrudge",
+      "name": "快意恩仇",
+      "file": "martial-tt7-thundergrudge.webp",
+      "source": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/game/assets/cards/martial-tt7-thundergrudge.webp",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-eff86fca-06b2-487f-a42c-845a16d6c700.png",
+      "final": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt7-thundergrudge.png"
+    },
+    {
+      "index": 5,
+      "id": "tt7-meteorrain",
+      "name": "流星箭雨",
+      "file": "martial-tt7-meteorrain.webp",
+      "source": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/game/assets/cards/martial-tt7-meteorrain.webp",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-924c78f2-0688-4352-ba01-3a9a931a56a8.png",
+      "final": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt7-meteorrain.png"
+    },
+    {
+      "index": 6,
+      "id": "tt7-stealth",
+      "name": "潜匿",
+      "file": "martial-tt7-stealth.webp",
+      "source": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/game/assets/cards/martial-tt7-stealth.webp",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-9e7b7a9c-6910-4616-b7a2-c7d720fe252f.png",
+      "final": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt7-stealth-v2.png",
+      "firstVersion": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt7-stealth.png",
+      "firstGeneratedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-ffa94659-210b-4d6e-8263-6eaed93f28b0.png"
+    },
+    {
+      "index": 7,
+      "id": "tt7-swordimmortal",
+      "name": "剑仙形态",
+      "file": "martial-tt7-swordimmortal.webp",
+      "source": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/game/assets/cards/martial-tt7-swordimmortal.webp",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-aad55680-8703-4fb5-a520-680c1ffd1494.png",
+      "final": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt7-swordimmortal-v2.png",
+      "firstVersion": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt7-swordimmortal.png",
+      "firstGeneratedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-231f99e0-9c5a-4e27-8c9c-75685ac5e905.png"
+    },
+    {
+      "index": 8,
+      "id": "tt7-imitate",
+      "name": "不变应万变-改",
+      "file": "martial-tt7-imitate.webp",
+      "source": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/game/assets/cards/martial-tt7-imitate.webp",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-5ede66ae-79b4-4e11-9f3d-d5d401af6530.png",
+      "final": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt7-imitate.png"
+    },
+    {
+      "index": 9,
+      "id": "cmtn1i64j7y7",
+      "name": "盗宝",
+      "file": "martial-cmtn1i64j7y7.webp",
+      "source": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/game/assets/cards/martial-cmtn1i64j7y7.webp",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-fef0ab43-5ddf-4e00-9e49-95181d34e4ab.png",
+      "final": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/cmtn1i64j7y7.png"
+    },
+    {
+      "index": 10,
+      "id": "tt8-hero-assassin",
+      "name": "白梅落影·妄",
+      "file": "wu-void.webp",
+      "source": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/game/assets/cards/wu-void.webp",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-0aff4605-ea32-4b32-98c4-d6e5e04caa4d.png",
+      "final": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt8-hero-assassin.png"
+    },
+    {
+      "index": 11,
+      "id": "tt8-hero-sword",
+      "name": "无量仙剑·云风",
+      "file": "wu-myriadswords.webp",
+      "source": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/game/assets/cards/wu-myriadswords.webp",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-7d3643fe-5d08-454f-a523-4ff89e9f5ec3.png",
+      "final": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt8-hero-sword.png"
+    },
+    {
+      "index": 12,
+      "id": "tt8-hero-ranger",
+      "name": "天剑诛魔·云阳",
+      "file": "wu-heavensword.webp",
+      "source": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/game/assets/cards/wu-heavensword.webp",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-9ac6ce8a-c45a-4191-a0f2-26cdb81849ae.png",
+      "final": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt8-hero-ranger-v2.png",
+      "firstVersion": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt8-hero-ranger.png",
+      "firstGeneratedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-db591c98-fdca-4ea4-a009-ba70dcdb2c0e.png"
+    },
+    {
+      "index": 13,
+      "id": "tt8-demonslay",
+      "name": "诛魔剑",
+      "file": "equip-tt8-demonslay.webp",
+      "source": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/game/assets/cards/equip-tt8-demonslay.webp",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-1869ad29-bcc6-4fda-8f43-767af49a47f6.png",
+      "final": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt8-demonslay.png"
+    },
+    {
+      "index": 14,
+      "id": "tt8-archdemon",
+      "name": "天启诛魔剑",
+      "file": "equip-tt8-archdemon.webp",
+      "source": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/game/assets/cards/equip-tt8-archdemon.webp",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-e0451150-3222-411f-89d2-27aa1f0a6d2b.png",
+      "final": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt8-archdemon.png"
+    },
+    {
+      "index": 15,
+      "id": "tt8-heavensword",
+      "name": "天启剑",
+      "file": "equip-tt8-heavensword.webp",
+      "source": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/game/assets/cards/equip-tt8-heavensword.webp",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-a9ce1322-137b-42d9-a228-c04a755b9768.png",
+      "final": "C:/Users/太平/.codex/worktrees/3169/代号柒/搜打撤/.tmp/art-reference/wu-class-cards-20261004/final/tt8-heavensword.png"
+    }
+  ]
+}

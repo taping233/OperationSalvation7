@@ -1,0 +1,49 @@
+{
+  "owner": "A0/A5 results_data",
+  "status": "implemented-targeted-verified-live-pending",
+  "changedFiles": [
+    "game/src/agent/agent.stats.js",
+    "game/src/agent/agent.data.js",
+    "tests/agent-stats-provenance.test.js",
+    "tests/agent-recorder.test.js",
+    "tests/agent-provenance-stopreason.test.js"
+  ],
+  "scope": "最小统一来源消费者，保留SYS02/10/11既有未提交增量；agent.data.js仅来源标签/helper导入。旧专属测试各改一个消费断言。",
+  "changes": [
+    "byDriver使用provenance.driver三态human/agent/mixed；无来源与无效来源归unknown/未记录，不从历史driver补造来源。",
+    "明细复用同一来源helper，Agent/混合干预保留agentDriver脚本标签与tooltip。",
+    "carriedValue及均值不改名、不改变数值口径；CSV保留旧driver及独立provenanceDriver列。"
+  ],
+  "recorderExperiment": {
+    "type": "Node Vitest中调用现有真实recorder接口，隔离localStorage与window.SDT，不是自然跑局",
+    "automaticSequence": "resetRunCounters → setDriver(greedy) → setDriver(human) → recordRun(extract)",
+    "automaticObserved": { "driver": "human", "provenanceDriver": "agent", "agentDriver": "greedy" },
+    "mixedSequence": "resetRunCounters → setDriver(greedy) → setDriver(human) → noteIntervention(debug-command,定向接口实验) → recordRun(death)",
+    "mixedObserved": { "driver": "human", "provenanceDriver": "mixed", "agentDriver": "greedy" },
+    "conclusion": "消费口径分叉能由当前真实接口序列生成，并非只在任意fixture出现；自然完成整局的真实记录仍交主线核对。"
+  },
+  "retainedResults": [
+    "terminal-settlement.js现有保存失败进度保留/幂等重试文案正确，未修改。",
+    "altar.js现有clear/extract副标题、净入库张数/仓库现有含往局、木材口粮分列保留。",
+    "death.js熟练度与宠物抢运表现保留。",
+    "goBase与again在altar.js和death.js均回openBaseHub(deploy)，仅源码确认，当前实页期待由主线核验；没有擅自新增流程。"
+  ],
+  "checks": {
+    "workflowReport": "docs/evidence/2026-10-03-WF-experience-art-exec-A5/2026-10-03T07-21-19.853Z-60f476a0.json",
+    "result": "5 files / 32 tests passed",
+    "tests": ["tests/agent-stats-provenance.test.js", "tests/agent-recorder.test.js", "tests/agent-provenance-stopreason.test.js", "tests/terminal-settlement.test.js", "tests/extraction-receipt.test.js"],
+    "initialFailure": "旧来源断言human与旧混badge断言失败；经主线批准仅改为unknown/混合干预后通过。受限sandbox spawnSync git EPERM，经正常权限运行verify。",
+    "diffCheck": "git diff --check passed before final evidence write",
+    "limits": "混树定向验证，不代表全量、build或当前窗口实页通过。"
+  },
+  "liveAcceptanceForMain": [
+    "先通过现有Agent recorder.listRuns读取本origin真实记录，核对driver/provenance.driver/agentDriver与CSV来源列；没有记录不能宣称已验自然链。",
+    "DATA/DEV-DATA .dt-grid .hub-card：按驱动对比分组human/agent/mixed/未记录与最近20局相同；Agent和混合记录保留具体脚本身份。",
+    "[data-act=dataExportCSV]及[data-act=dataExportJSON]使用真实输入导出，对照provenanceDriver/provenance.driver；不要点击dataClear。",
+    "自然clear/extract结果 .result-line 与[data-act=goBase]/[data-act=again]：候选/本次入库/往局库存分清；当前窗口可读且按钮可达。",
+    "自然death结果 .doom-loot/.doom-btns，与[data-act=goBase]/[data-act=again]验证实际回出发页。",
+    "保存失败与重试 [data-act=extractRetry]、[data-act=retryTerminalDeath]：如需注入失败需标构造，不能冒充自然失败；重试/刷新应无重复扣牌发奖。"
+  ],
+  "unverified": ["当前内置浏览器真实记录", "自然clear/extract/death整局", "当前窗口结果/数据实页", "刷新恢复真实链"],
+  "excluded": ["音频", "冻结平台", "安装", "删除", "build", "提交", "推送", "台账与coverage改写"]
+}

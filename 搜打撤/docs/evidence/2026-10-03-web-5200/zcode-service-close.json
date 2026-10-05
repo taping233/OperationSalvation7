@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-10-03T22:46:51.7204971+08:00",
+  "authorization": "老板明确说明 ZCode 已关闭，并要求关闭其服务",
+  "stopped": [
+    {
+      "port": 5340,
+      "pid": 15172,
+      "owner": "WF-xart-z1",
+      "identity": "本项目Vite命令行与监听PID匹配"
+    },
+    {
+      "port": 5344,
+      "pid": 26008,
+      "owner": "WF-photolib-perf",
+      "identity": "本项目Vite命令行与监听PID匹配"
+    }
+  ],
+  "remaining": [
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 5200,
+      "OwningProcess": 28164
+    }
+  ],
+  "mainWebHttpStatus": 200,
+  "closedPortsConfirmed": [
+    5340,
+    5344
+  ]
+}

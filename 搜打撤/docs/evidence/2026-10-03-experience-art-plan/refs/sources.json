@@ -1,0 +1,82 @@
+{
+  "observedAt": "2026-10-03",
+  "observer": "Codex visual_reference_research",
+  "method": "Current Codex in-app browser; full static image pixels viewed in current approximately 1280x720 window; no viewport override, gameplay, video or audio observation",
+  "rights": "Official publication supports provenance only. Copyright remains with the respective owners. No commercial-use asset licence inferred; do not import these images into game production assets.",
+  "observationFile": "visual-reference-review.md",
+  "sources": [
+    {
+      "id": "REF-GRIFT-BATTLE",
+      "game": "Griftlands",
+      "sourcePage": "https://www.klei.com/games/griftlands",
+      "imageUrl": "https://assets.klei.com/f/259446/2662x1440/55280044c0/3-fight1.jpg/m/fit-in/1200x700/filters:quality(70)",
+      "seenRange": "Full battle screenshot: actor groups, bottom hand/action points/end turn, highlighted target and directional lines",
+      "projectUse": ["BATTLE", "BATTLE-TARGET", "CARD-ZOOM"],
+      "effectiveFor": "Scene/hand separation, anchored status labels, source-target visual relationship",
+      "limits": ["Static only", "No timing or performance claim", "Different card economy", "Do not copy palette semantics without defining project states"],
+      "pixelsSeen": true,
+      "localFile": null
+    },
+    {
+      "id": "REF-HADES-DIALOGUE",
+      "game": "Hades",
+      "sourcePage": "https://www.supergiantgames.com/games/hades/",
+      "imageUrl": "https://images.ctfassets.net/5owu3y35gz1g/73cqOl2QleftNZSwhHmYXO/28627035cb39453e3c46c81300e088bc/hades_09-dec-2019_06.jpg?w=1920&q=80",
+      "seenRange": "Full Athena dialogue screenshot: large portrait, nameplate, light text panel, dark game scene",
+      "projectUse": ["CLASS-CHOICE", "CLASS-GRANT", "NARRATIVE"],
+      "effectiveFor": "Portrait silhouette and text panel hierarchy; decorative frame separated from readable text surface",
+      "limits": ["2019 early game image currently hosted by developer", "Not boon selection, collection or result screen evidence", "No claim that project portrait style matches until project portrait review"],
+      "pixelsSeen": true,
+      "localFile": null
+    },
+    {
+      "id": "REF-DD-GUILD",
+      "game": "Darkest Dungeon",
+      "sourcePage": "https://www.darkestdungeon.com/darkest-dungeon/media/?cat=screenshots",
+      "imageUrl": "https://img2.storyblok.com/fit-in/1536x768/filters:format(webp)/f/127947/1920x1080/043452ad8f/ss-24.png",
+      "seenRange": "Full Guild screen: left location illustration, central selected hero/upgrade grid, right roster, bottom resources",
+      "projectUse": ["HUB-UPGRADE", "HUB-CLASSES", "HUB-DEPLOY"],
+      "effectiveFor": "Object-detail-cost-resource grouping; roster separated from operations; lock shape redundant with brightness",
+      "limits": ["Static only", "Exact semantic meaning of every light node unverified", "Small dark text and grid density are not project readability targets"],
+      "pixelsSeen": true,
+      "localFile": null
+    },
+    {
+      "id": "REF-DD-VICTORY",
+      "game": "Darkest Dungeon",
+      "sourcePage": "https://www.darkestdungeon.com/darkest-dungeon/media/?cat=screenshots",
+      "imageUrl": "https://img2.storyblok.com/fit-in/1536x768/filters:format(webp)/f/127947/1920x1080/2bae10868e/ss-13.png",
+      "seenRange": "Full Victory summary: centered result/title, quest rewards, treasure total, heirlooms and single Next action",
+      "projectUse": ["EXTRACT-DONE", "DEATH", "ABANDON-DONE"],
+      "effectiveFor": "Result-first hierarchy, reward provenance groups, strong totals and next step",
+      "limits": ["Victory actually seen; failure and abandon are proposed project applications only", "Narrow repeated icon stacks reduce individual item readability", "No claim of observed reward animation"],
+      "pixelsSeen": true,
+      "localFile": null
+    },
+    {
+      "id": "REF-BPH-REWARD",
+      "game": "Backpack Hero",
+      "sourcePage": "https://store.steampowered.com/app/1970580/Backpack_Hero/",
+      "imageUrl": "https://cdn.akamai.steamstatic.com/steam/apps/1970580/ss_34f8989603fae6271448b2c5965096c783a3ee09.1920x1080.jpg?t=1707741983",
+      "seenRange": "Full reward choice screenshot: existing inventory grid above, candidate items below, finished choosing/take one item controls",
+      "projectUse": ["LOOT", "CLASS-GRANT", "HUB-COLLECTION"],
+      "effectiveFor": "Owned and candidate items spatially separated; allowance visible; consistent icon silhouettes",
+      "limits": ["Not an observed collection/codex screen", "Collection transfer is a layout hypothesis only", "Screenshot bears AKS credit and is served by official store", "Grid mechanic/pixel art should not be copied into project"],
+      "pixelsSeen": true,
+      "localFile": null
+    }
+  ],
+  "coverageGap": "No dedicated external collection/codex interface observed in this supplement; do not mark collection interaction coverage complete.",
+  "downloadStatus": {
+    "projectImageFiles": 0,
+    "shellAttempt": "Optional source-image downloads failed authentication; no files created in refs",
+    "browserDownload": {
+      "sourceId": "REF-BPH-REWARD",
+      "path": "C:\\Users\\太平\\Downloads\\ss_34f8989603fae6271448b2c5965096c783a3ee09.1920x1080.jpg",
+      "bytes": 358622,
+      "sha256": "0D0FDE443E4B96FF16CE86871D41747D15CE5436E764E618A4CC45F6BF7D5B61",
+      "actionAfterDownload": "Read-only existence/size verification; not moved, modified or deleted"
+    },
+    "stoppedByReview": "Next Griftlands download was automatically rejected because browser default Downloads destination is outside this subtask's refs-only write boundary. Further downloads stopped; no workaround attempted. Official links and verified pixel observations are the deliverable."
+  }
+}

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/png" href="assets/brand-mark-codename7.png" />
+<!-- 首屏关键资源提前预载：标题壁纸与字标是首屏核心视觉；
+     其余资源（BGM/立绘/卡面）保持按需加载，避免挤占启动带宽 -->
+<link rel="preload" as="image" href="assets/reconstruction/wallpaper-original.webp" />
+<link rel="preload" as="font" type="font/ttf" href="assets/fonts/HarmonyOS_Sans_SC_Regular.ttf" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/cascadia-code-400.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/notosans-sc-400.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/notosans-sc-700.woff2" crossorigin />
+<title>升格会的冬日猜想</title>
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/cards.css" />
+<link rel="stylesheet" href="css/overlays.css" />
+<link rel="stylesheet" href="css/hub.css" />
+<link rel="stylesheet" href="css/battle.css" />
+<link rel="stylesheet" href="css/scenes.css" />
+<link rel="stylesheet" href="css/lab-ending.css" />
+<link rel="stylesheet" href="css/winter.css" />
+<link rel="stylesheet" href="css/expedition.css" />
+<link rel="stylesheet" href="css/expedition-map.css" />
+<link rel="stylesheet" href="css/expedition-hub.css" />
+<link rel="stylesheet" href="css/expedition-inventory.css" />
+<link rel="stylesheet" href="css/expedition-rewards.css" />
+<link rel="stylesheet" href="css/expedition-battle.css" />
+<link rel="stylesheet" href="css/expedition-library.css" />
+<link rel="stylesheet" href="css/photo-studio-mounts.css" />
+<link rel="stylesheet" href="css/photo-studio-craft.css" />
+<link rel="stylesheet" href="css/card-v3.css" />
+<link rel="stylesheet" href="css/expedition-roster.css" />
+<link rel="stylesheet" href="css/expedition-shop.css" />
+<link rel="stylesheet" href="css/ui-scale.css" />
+<!-- 09-24 美术排版流水线：各界面增量层（子代理产出，主代理统一挂载；须在 ui-scale.css 之后） -->
+<link rel="stylesheet" href="css/page-slot-select.css" />
+<link rel="stylesheet" href="css/page-hub.css" />
+<link rel="stylesheet" href="css/page-deploy.css" />
+<link rel="stylesheet" href="css/page-classes.css" />
+<link rel="stylesheet" href="css/page-stash.css" />
+<link rel="stylesheet" href="css/page-shop.css" />
+<link rel="stylesheet" href="css/page-upgrade.css" />
+    <link rel="stylesheet" href="css/page-settings.css" />
+    <link rel="stylesheet" href="css/page-datapage.css" />
+<link rel="stylesheet" href="css/page-cardslib.css" />
+<link rel="stylesheet" href="css/page-ach.css" />
+<link rel="stylesheet" href="css/page-cardforge.css" />
+<link rel="stylesheet" href="css/page-expedition-hud.css" />
+<link rel="stylesheet" href="css/pocket-strip.css" />
+<link rel="stylesheet" href="css/experience-loot.css" />
+<link rel="stylesheet" href="css/page-events.css" />
+<link rel="stylesheet" href="css/page-rewards-bag-help.css" />
+<link rel="stylesheet" href="css/page-battle-ui.css" />
+<link rel="stylesheet" href="css/character-idle.css" />
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar">
+    <section class="panel" id="charPanel">
+      <div class="hero-ava" id="heroAva">医</div>
+    </section>
+
+    <section class="panel" id="statsPanel">
+      <canvas id="miniMap" width="560" height="112" aria-label="已探明区域简图"></canvas>
+      <div class="stat stat-duo"><label>行动 · 价值</label>
+        <b><span id="statTurn">0</span><em class="duo-sep">/</em><span id="statValue" class="gold">¥0</span></b>
+      </div>
+    </section>
+
+    <section class="panel" id="routePanel">
+      <div class="route-heading"><div class="route-title">下一步</div><span class="route-objective"></span></div>
+      <div class="route-options" role="group" aria-label="可前往的相邻节点"></div>
+      <div class="route-help">点击路线或地图亮环前进 <span>Space 选择 · X 确认 · B 背包</span></div>
+    </section>
+    <section class="panel" id="devPanel" hidden>
+      <div id="devTools" class="dev-tools" hidden>
+        <div class="dev-battle-row">
+          <button id="devBattle" type="button">强制遭遇战</button>
+          <button id="devBoss" type="button">强制BOSS战</button>
+        </div>
+      </div>
+    </section>
+
+  </aside>
+
+  <main id="viewport">
+    <canvas id="game"></canvas>
+    <div id="layerBanner" aria-hidden="true">
+      <div class="lb-zh" id="layerBannerZh">—</div>
+      <div class="lb-en" id="layerBannerEn"></div>
+    </div>
+    <nav id="expeditionChapter" aria-label="远征章节"></nav>
+    <!-- 09-24 留言 #8：「已知区域 G」按键移除（G 键镜头总览保留，见 input.js camOverview） -->
+    <div id="resHud">
+      <span class="chip-mini res-gold" title="持有金币" data-tip="持有金币">
+        <svg class="res-ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="3" fill="url(#resGoldGrad)"/>
+          <circle cx="12" cy="12" r="7.2" fill="none" stroke="#5c3d00" stroke-width="1.4"/>
+          <circle cx="12" cy="12" r="4.6" fill="none" stroke="#5c3d00" stroke-width="1" opacity=".7"/>
+          <path d="M12 8.2l1.1 2.4 2.6.3-1.9 1.8.5 2.6-2.3-1.3-2.3 1.3.5-2.6-1.9-1.8 2.6-.3z"
+                fill="#5c3d00" stroke="none"/>
+          <path d="M4 4h16" stroke="#ffe9a8" stroke-width="1" opacity=".5"/>
+          <defs>
+            <linearGradient id="resGoldGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f4c95c"/>
+              <stop offset=".5" stop-color="#e0a52e"/>
+              <stop offset="1" stop-color="#b97b14"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <b id="charCoins">0</b>
+      </span>
+      <span class="chip-mini res-atk" title="攻击力" data-tip="攻击力">
+        <svg class="res-ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path d="M6.2 11.2V8.8a1.5 1.5 0 0 1 3 0v2.2" fill="none" stroke="#ff6b5e" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M9.2 11V8a1.5 1.5 0 0 1 3 0v3.2" fill="none" stroke="#ff6b5e" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M12.2 11.2V8.6a1.5 1.5 0 0 1 3 0v3.6" fill="none" stroke="#ff6b5e" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M15.2 12.4v-1a1.5 1.5 0 0 1 3 0v4a5.4 5.4 0 0 1-5.4 5.4h-1.2a5.4 5.4 0 0 1-5.4-5.4v-5.2"
+                fill="none" stroke="#ff6b5e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <b id="charAtk">4</b>
+      </span>
+    </div>
+    <div id="topBtns">
+      <button id="btnLocate" title="镜头回到当前位置（F）">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <circle cx="12" cy="12" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          <circle cx="12" cy="12" r="1.6" fill="currentColor"/>
+          <path d="M12 2.5v4M12 17.5v4M2.5 12h4M17.5 12h4"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button id="btnHome" class="exit-btn" title="离开对局（可保存或放弃） / 回主菜单">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
+                fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M4 12h10M4 12l4-4M4 12l4 4"
+                fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button id="btnHelp" title="远征手册（操作与流程速查）">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path d="M8.1 9a3.9 3.9 0 1 1 6.05 3.27c-1.25.83-2.15 1.55-2.15 3.03v.3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <circle cx="12" cy="19.7" r="1.35" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button id="btnMute" title="音效 / 背景乐开关">
+        <svg class="ic-sound-on" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path d="M4.5 9.5v5h3l4.5 4V5.5l-4.5 4h-3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M15.2 9.2a4.4 4.4 0 0 1 0 5.6M17.8 7a8 8 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+        </svg>
+        <svg class="ic-sound-off" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path d="M4.5 9.5v5h3l4.5 4V5.5l-4.5 4h-3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M15.5 9.5l5 5M20.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div id="hpHud" title="生命值">
+        <div class="hp-hud-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            <path d="M12 3l7 3v5c0 4.4-3 8.4-7 10-4-1.6-7-5.6-7-10V6l7-3z"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M12 8v6M9 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="hp-hud-body">
+          <span class="hp-hud-label">当前生命</span>
+          <b id="hpText">30/30</b>
+          <div id="hpBarWrap"><div id="hpBar"></div></div>
+        </div>
+      </div>
+    </div>
+    <div id="tooltip" hidden></div>
+    <!-- 全局背包入口（2026-09-19 留言 #27）：对局中任何界面（战斗/商店/事件/全屏页）
+         都可从同一位置打开背包；仅对局中且已选角色时显示，点击行为同 B 键 -->
+    <button id="bagBtnFloat" hidden title="打开 / 关闭背包（B）">
+      <img class="bbf-art" src="assets/ui/bag-icon.webp" alt="" draggable="false">
+      <span class="bbf-label">背包</span>
+      <b id="bagCountFloat">0/16</b>
+    </button>
+    <div id="title">
+      <div class="title-bg" aria-hidden="true"></div>
+      <div class="title-foreground-paper" aria-hidden="true"></div>
+      <!-- 10-04 老板令：上下黑条英文滚动字幕（对标参考首页 UI）；双 span 无缝循环，title-p0.css 驱动 -->
+      <div class="title-ticker title-ticker-top" aria-hidden="true"><span>CODE NAME 7 / THE ASCENSION SOCIETY / WINTER CONJECTURE / SEARCH · FIGHT · EXTRACT / EXPEDITION ARCHIVE STANDBY / CODE NAME 7 / THE ASCENSION SOCIETY / WINTER CONJECTURE / SEARCH · FIGHT · EXTRACT / EXPEDITION ARCHIVE STANDBY / </span><span>CODE NAME 7 / THE ASCENSION SOCIETY / WINTER CONJECTURE / SEARCH · FIGHT · EXTRACT / EXPEDITION ARCHIVE STANDBY / CODE NAME 7 / THE ASCENSION SOCIETY / WINTER CONJECTURE / SEARCH · FIGHT · EXTRACT / EXPEDITION ARCHIVE STANDBY / </span></div>
+      <div class="title-ticker title-ticker-bottom" aria-hidden="true"><span>CODE NAME 7 / THE ASCENSION SOCIETY / WINTER CONJECTURE / SEARCH · FIGHT · EXTRACT / EXPEDITION ARCHIVE STANDBY / CODE NAME 7 / THE ASCENSION SOCIETY / WINTER CONJECTURE / SEARCH · FIGHT · EXTRACT / EXPEDITION ARCHIVE STANDBY / </span><span>CODE NAME 7 / THE ASCENSION SOCIETY / WINTER CONJECTURE / SEARCH · FIGHT · EXTRACT / EXPEDITION ARCHIVE STANDBY / CODE NAME 7 / THE ASCENSION SOCIETY / WINTER CONJECTURE / SEARCH · FIGHT · EXTRACT / EXPEDITION ARCHIVE STANDBY / </span></div>
+      <div class="title-inner">
+        <div class="title-heading">
+          <div class="title-kicker">THE ASCENSION SOCIETY</div>
+          <h1 class="winter-wordmark" aria-label="升格会的冬日猜想"><small>升格会的</small>冬日猜想</h1>
+        </div>
+        <div class="ak-hud">
+          <!-- 10-04 米娜可式排版重做（WF-home-minako-layout）：ak-tl/ak-pillrow 包装解散、ak-veins 死装饰删除，
+               按钮直接按视觉序排列（Tab 焦点序=视觉序）：左轴 01/02 → 右列四键 → 底缘工具 -->
+          <!-- 右上：档案信息（最近游玩档位的真实数据） -->
+          <div class="ak-user">
+            <div class="ak-user-row">
+              <span class="ak-ava"><img src="assets/brand-mark-codename7.png" alt="档案徽记" draggable="false"></span>
+              <span class="ak-lv"><em>Archive</em><b id="akSlotNo">--</b></span>
+              <span class="ak-uname" id="akPlaytime">暂无档案</span>
+            </div>
+          </div>
+          <!-- 左轴 01：进入远征档案（主 CTA，选档启程） -->
+          <button class="ak-start" id="mStart" title="进入远征档案">
+            <span class="st-row">
+              <span class="st-cn">进入远征档案</span>
+            </span>
+            <span class="st-light-sweep" aria-hidden="true"></span>
+            <span class="st-en">EXPEDITION ARCHIVE / 选档启程</span>
+          </button>
+          <!-- 左轴 02：远征手册（次级入口，W1-07 钮名统一） -->
+          <button class="ak-quickref" id="mGuide" title="远征手册 · 新手指南" aria-label="打开远征手册新手指南">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 5.5C6.5 4.4 9 4.5 12 6c3-1.5 5.5-1.6 8-.5v13c-2.5-1.1-5-1-8 .5-3-1.5-5.5-1.6-8-.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 6v13" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span>远征手册</span>
+          </button>
+          <!-- 右列：成就总览 / 照相馆 / 设置 / 退出游戏 -->
+          <button class="ak-circle ak-ach" id="mAch" title="成就总览">
+            <span class="c-tag" id="akAchTag">--</span>
+            <span class="c-ring"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><circle cx="16" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m16 7.5 1.4 3 3.2.4-2.3 2.3.6 3.2-2.9-1.5-2.9 1.5.6-3.2-2.3-2.3 3.2-.4zM11 18.5 9 27l7-3.4L23 27l-2-8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+            <span class="c-cn">成就</span>
+            <span class="c-en">Achievement</span>
+          </button>
+          <button class="ak-circle ak-lib" id="btnCardLib" title="照相馆">
+            <span class="c-ring"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path d="M5 9V5h19v4M8 9h19v18H8z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="15" cy="15" r="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m11 23 5-5 3 3 3-3 2 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
+            <span class="c-cn">照相馆</span>
+            <span class="c-en">Photo Studio</span>
+          </button>
+          <button class="ak-circle ak-set" id="mSettings" title="设置">
+            <span class="c-ring"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><circle cx="12" cy="12" r="6.2" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="2.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 2.6v3.2M12 18.2v3.2M2.6 12h3.2M18.2 12h3.2M5.4 5.4l2.3 2.3M16.3 16.3l2.3 2.3M18.6 5.4l-2.3 2.3M7.7 16.3l-2.3 2.3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+            <span class="c-cn">设置</span>
+            <span class="c-en">Settings</span>
+          </button>
+          <button class="ak-sq ak-exit" id="btnTitleExit" title="退出游戏" aria-label="退出游戏">
+            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+              <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
+                    fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M4 12h10M4 12l4-4M4 12l4 4"
+                    fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <!-- 底缘工具：静音 / 留言信箱（W1-11：信箱入口从设置页提升到首页） -->
+          <button class="ak-sq ak-home" id="btnTitleMute" title="音效 / 背景乐开关" aria-label="音效 / 背景乐开关">
+            <svg class="ic-sound-on" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+              <path d="M4.5 9.5v5h3l4.5 4V5.5l-4.5 4h-3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+              <path d="M15.2 9.2a4.4 4.4 0 0 1 0 5.6M17.8 7a8 8 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <svg class="ic-sound-off" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+              <path d="M4.5 9.5v5h3l4.5 4V5.5l-4.5 4h-3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+              <path d="M15.5 9.5l5 5M20.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="ak-quickref ak-inbox" id="mInbox" title="留言信箱">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M3 6.5h18v11H3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m3.5 7 8.5 6 8.5-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>留言信箱</span>
+          </button>
+          <!-- 底缘左：撤离次数（真实数据） -->
+          <div class="ak-sec" title="最近档案的累计撤离次数">
+            <span>已成功撤离 </span><b id="akExtracts">0</b><span> 次</span>
+          </div>
+          <!-- 雪花飘落特效层 -->
+          <!-- 09-24 W2：25-36 中景补充、37-48 近景大颗（winter.css 定义，景深三层） -->
+          <div class="title-snow" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <!-- 美术预热进度（2026-09-08 老板：首次打开强制预热，显示原因与进度） -->
+          <div id="warmupTip" hidden aria-live="polite">
+            <div class="warmup-head"><span class="warmup-spark" aria-hidden="true">❄</span>美术资源预热中 <b id="warmupNum">0/0</b></div>
+            <div class="warmup-reason">正在准备卡面与场景，减少首次进入时的等待</div>
+            <div class="warmup-track"><div id="warmupBar"></div></div>
+          </div>
+        </div>
+        <div class="title-quote">代号柒 · 冬境档案<small>CODE NAME 7 / WINTER ARCHIVE</small></div>
+        <p class="title-credits">制作者：太平 · 创 · Tang · 字体：HarmonyOS Sans</p>
+        <p class="title-ver" hidden>ASCENSION COUNCIL · <span id="gameVersion">v…</span></p>
+      </div>
+      <!-- 开发者节点测试面板：仅「设置 → 开发者模式」开启后可见，一键跳到各类节点
+           （隐藏 = 普通玩家看不到；测试局不占档位、不写存档） -->
+      <div id="titleDev" class="title-dev" hidden>
+        <div class="td-head"><span>[[icon:tools]] 节点测试</span><span class="td-en">NODE TEST</span></div>
+        <div class="td-grid">
+          <button type="button" data-dev-node="battle">遭遇战</button>
+          <button type="button" data-dev-node="boss">BOSS 战</button>
+          <button type="button" data-dev-node="shop">商店</button>
+          <button type="button" data-dev-node="event">事件</button>
+          <button type="button" data-dev-node="chest-small">小宝箱</button>
+          <button type="button" data-dev-node="chest-medium">中宝箱</button>
+          <button type="button" data-dev-node="chest-large">大宝箱</button>
+          <button type="button" data-dev-node="fire">火堆</button>
+          <button type="button" data-dev-node="altar">祭坛</button>
+        </div>
+        <p class="td-tip">开发者模式专属 · 测试局不写入存档</p>
+      </div>
+    </div>
+    <div id="sugLayer" hidden>
+      <div class="sug-panel">
+        <h3 class="sug-head" id="sugHead">记录试玩反馈</h3>
+        <p class="sug-where" id="sugWhere"></p>
+        <p class="sug-tip">只保存在当前浏览器，不会自动发送。保存后请从设置的留言库导出单条 JSON 交给制作者。</p>
+        <label class="sug-label" for="sugText">反馈正文（必填）</label>
+        <textarea id="sugText" class="sug-textarea" rows="6" maxlength="2000"
+          placeholder="例如：这个按钮太小，容易误触……"></textarea>
+        <label class="sug-label" for="sugSteps">复现步骤（可选）</label><textarea id="sugSteps" class="sug-textarea sug-small" maxlength="1200"></textarea>
+        <label class="sug-label" for="sugExpected">期望结果（可选）</label><textarea id="sugExpected" class="sug-textarea sug-small" maxlength="800"></textarea>
+        <label class="sug-label" for="sugActual">实际结果（可选）</label><textarea id="sugActual" class="sug-textarea sug-small" maxlength="800"></textarea>
+        <div class="sug-btns">
+          <button class="ov-btn ok" id="sugSaveBtn">保存 <i class="en">SAVE</i></button>
+          <button class="ov-btn" id="sugCancelBtn">返回 <i class="en">BACK</i></button>
+        </div>
+      </div>
+    </div>
+    <div class="log-panel" id="logPanel" aria-label="行动记录">
+      <button class="log-toggle" id="logToggle" title="收起 / 展开行动记录">行动记录</button>
+      <div id="log"></div>
+    </div>
+    <div id="exitScr" hidden>
+      <div class="title-inner">
+        <p class="exit-msg">信号已断开。愿风雪之后，仍有重逢。</p>
+        <button class="menu-btn" id="mBack">重 新 进 入</button>
+      </div>
+    </div>
+    <div id="overlay" role="dialog" aria-modal="true" aria-labelledby="ovTitle" tabindex="-1" hidden>
+      <div class="card">
+        <button id="ovCloseX" class="ov-x" aria-label="关闭" hidden>×</button>
+        <h2 id="ovTitle"></h2>
+        <div id="ovBody"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  // 启动失败兜底（迭代评审 09-20 D-P3；W5-02 0926 重做）：main.js 以 type=module 加载，
+  // 404/解析失败不会触发 window.onerror——轮询 window.SDT 代替裸 3s 计时：
+  //   3s 未就绪 → 中性「加载中」提示（不再引导清缓存）；
+  //   SDT 就绪（不论多晚）→ 撤销提示并停表（慢启动误报自愈，旧版永不移除）；
+  //   12s 仍未就绪 → 升级为失败条，附刷新指引与关闭钮。
+  (function () {
+    var bar = null;
+    var started = Date.now();
+    function makeBar(text, tone) {
+      var el = document.createElement('div');
+      el.textContent = text;
+      el.style.cssText = 'position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:9999;'
+        + 'padding:8px 18px;border-radius:6px;'
+        + (tone === 'fail'
+            ? 'background:#3a1216;color:#ffd9d4;border:1px solid #a4524a;'
+            : 'background:#12262f;color:#b2c4c9;border:1px solid #48667455;')
+        + 'font:13px/1.6 system-ui,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.5)';
+      document.body.appendChild(el);
+      return el;
+    }
+    window.addEventListener('error', function (e) {
+      if (e && e.target && (e.target.tagName === 'SCRIPT' || e.target.tagName === 'LINK') && !bar) {
+        bar = makeBar('资源加载失败——请刷新页面重试', 'fail');
+      }
+    }, true);
+    var guardTimer = setInterval(function () {
+      if (window.SDT) {                     // 就绪即自愈：撤销误报条并停止看护
+        if (bar && bar.isConnected) bar.remove();
+        bar = null;
+        clearInterval(guardTimer);         // 回调内 this 是 Window，clearInterval(this) 从未生效（09-30 深审 WORLD-005）
+        return;
+      }
+      var elapsed = Date.now() - started;
+      if (!bar && elapsed >= 3000 && elapsed < 12000) {
+        bar = makeBar('资源加载中……首次启动需要预热美术素材，请稍候', 'wait');
+      } else if (elapsed >= 12000) {
+        if (bar && bar.isConnected) bar.remove();
+        bar = makeBar('加载失败——请刷新页面重试；多次失败可检查网络后重启浏览器', 'fail');
+        var close = document.createElement('button');
+        close.textContent = '×';
+        close.title = '收起提示';
+        close.style.cssText = 'margin-left:12px;background:none;border:0;color:inherit;font:inherit;cursor:pointer';
+        close.addEventListener('click', function () { bar.remove(); bar = null; });
+        bar.appendChild(close);
+        clearInterval(guardTimer);         // 失败条定格，不再轮询
+      }
+    }, 400);
+  })();
+</script>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>

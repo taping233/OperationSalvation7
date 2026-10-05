@@ -1,0 +1,209 @@
+{
+  "verifiedAt": "2026-10-04T20:52:10.7583769+08:00",
+  "authorization": "老板：停掉现在所有服务器，只留5200",
+  "stopped": [
+    {
+      "port": 5338,
+      "processId": 25400,
+      "parentProcessId": 23428,
+      "creationDate": "2026-10-04T20:39:06.969531+08:00",
+      "commandLine": "\"C:\\Program Files\\nodejs\\node.exe\" C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\node_modules\\vite\\bin\\vite.js --host 127.0.0.1 --port 5338 --strictPort"
+    },
+    {
+      "port": 5351,
+      "processId": 22360,
+      "parentProcessId": 24348,
+      "creationDate": "2026-10-04T16:46:45.806131+08:00",
+      "commandLine": "\"C:\\Program Files\\nodejs\\node.exe\" C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\node_modules\\vite\\bin\\vite.js --host 127.0.0.1 --port 5351 --strictPort"
+    }
+  ],
+  "kept": {
+    "port": 5200,
+    "commandLine": "\"C:\\Program Files\\nodejs\\node.exe\" D:\\素材\\代号柒\\搜打撤\\node_modules\\vite\\bin\\vite.js --host 127.0.0.1 --port 5200 --strictPort",
+    "processId": 15108,
+    "httpStatus": 200
+  },
+  "listenersAfter": [
+    {
+      "LocalAddress": "::",
+      "LocalPort": 49681,
+      "OwningProcess": 1624
+    },
+    {
+      "LocalAddress": "::1",
+      "LocalPort": 49671,
+      "OwningProcess": 5972
+    },
+    {
+      "LocalAddress": "::",
+      "LocalPort": 49668,
+      "OwningProcess": 4748
+    },
+    {
+      "LocalAddress": "::",
+      "LocalPort": 49667,
+      "OwningProcess": 3528
+    },
+    {
+      "LocalAddress": "::",
+      "LocalPort": 49666,
+      "OwningProcess": 2584
+    },
+    {
+      "LocalAddress": "::",
+      "LocalPort": 49665,
+      "OwningProcess": 1548
+    },
+    {
+      "LocalAddress": "::",
+      "LocalPort": 49664,
+      "OwningProcess": 1632
+    },
+    {
+      "LocalAddress": "::",
+      "LocalPort": 7680,
+      "OwningProcess": 25180
+    },
+    {
+      "LocalAddress": "::",
+      "LocalPort": 445,
+      "OwningProcess": 4
+    },
+    {
+      "LocalAddress": "::",
+      "LocalPort": 135,
+      "OwningProcess": 2012
+    },
+    {
+      "LocalAddress": "0.0.0.0",
+      "LocalPort": 49681,
+      "OwningProcess": 1624
+    },
+    {
+      "LocalAddress": "0.0.0.0",
+      "LocalPort": 49668,
+      "OwningProcess": 4748
+    },
+    {
+      "LocalAddress": "0.0.0.0",
+      "LocalPort": 49667,
+      "OwningProcess": 3528
+    },
+    {
+      "LocalAddress": "0.0.0.0",
+      "LocalPort": 49666,
+      "OwningProcess": 2584
+    },
+    {
+      "LocalAddress": "0.0.0.0",
+      "LocalPort": 49665,
+      "OwningProcess": 1548
+    },
+    {
+      "LocalAddress": "0.0.0.0",
+      "LocalPort": 49664,
+      "OwningProcess": 1632
+    },
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 33331,
+      "OwningProcess": 15160
+    },
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 33211,
+      "OwningProcess": 5164
+    },
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 28317,
+      "OwningProcess": 5900
+    },
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 14023,
+      "OwningProcess": 568
+    },
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 14022,
+      "OwningProcess": 568
+    },
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 14019,
+      "OwningProcess": 568
+    },
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 14016,
+      "OwningProcess": 568
+    },
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 14013,
+      "OwningProcess": 568
+    },
+    {
+      "LocalAddress": "192.168.71.204",
+      "LocalPort": 10191,
+      "OwningProcess": 5704
+    },
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 9996,
+      "OwningProcess": 5812
+    },
+    {
+      "LocalAddress": "0.0.0.0",
+      "LocalPort": 9197,
+      "OwningProcess": 5704
+    },
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 9097,
+      "OwningProcess": 13708
+    },
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 7890,
+      "OwningProcess": 13708
+    },
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 5283,
+      "OwningProcess": 14636
+    },
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 5200,
+      "OwningProcess": 15108
+    },
+    {
+      "LocalAddress": "0.0.0.0",
+      "LocalPort": 5040,
+      "OwningProcess": 12068
+    },
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 4709,
+      "OwningProcess": 20952
+    },
+    {
+      "LocalAddress": "198.18.0.1",
+      "LocalPort": 139,
+      "OwningProcess": 4
+    },
+    {
+      "LocalAddress": "192.168.71.204",
+      "LocalPort": 139,
+      "OwningProcess": 4
+    },
+    {
+      "LocalAddress": "0.0.0.0",
+      "LocalPort": 135,
+      "OwningProcess": 2012
+    }
+  ],
+  "scope": "项目开发服务器；系统、输入法、代理、通讯工具、Codex工具进程保留"
+}

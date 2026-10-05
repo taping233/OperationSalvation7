@@ -1,0 +1,22 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 3/16, ID: bagBtnFloat
+			4 text 背包
+			25 text 3/16
+		26 container demon BOSS战 · 第 1 回合 · cards 牌库, ID: overlay
+			27 container
+				28 button Description: 关闭, ID: ovCloseX
+				29 heading demon BOSS战 · 第 1 回合 · cards 牌库, Value: 2, ID: ovTitle
+					30 image demon
+					31 text  BOSS战 · 第 1 回合 · 
+					32 image cards
+					33 text  牌库
+				34 container ovBody
+					35 container
+						36 text 牌库剩余  0  张 —— （牌库已经空了——弃牌堆洗回后才会补充）
+					37 container
+						38 text 查看牌库不消耗任何资源；牌库空后会 洗回弃牌堆 循环（墓地不会洗回）。
+					39 button ↩ 返回战斗
+
+The focused UI element is 39 button ↩ 返回战斗

@@ -1,0 +1,57 @@
+{
+  "method": "Built-in ImageGen v2; only encoding and existing thumbnail bake",
+  "outputs": [
+    {
+      "path": "game/assets/cards/hero-sacredrain.webp",
+      "bytes": 131434,
+      "sha256": "a09f61c0437a97f0b84880cb587cea9f802e3c956f305dbe6c5977e5de4562d0",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "game/assets/thumbs/cards/hero-sacredrain.webp",
+      "bytes": 23040,
+      "sha256": "3f49d7e09ef4408e973a6075744652db0337148e9b6cbd92e33c7b476c0ab356",
+      "size": [
+        448,
+        448
+      ],
+      "mode": "RGB"
+    }
+  ],
+  "raw": {
+    "path": ".tmp/imagegen/xingyue-wind-song-20261004/wind-song-v2.png",
+    "bytes": 1722702,
+    "sha256": "e2c4abe921c01d4fecfe27b3333c3d02be08e671c1adeb4445b860c088054b94",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGB"
+  },
+  "rejectedV1": [
+    {
+      "path": "docs/evidence/2026-10-04-WF-xingyue-wind-song/variants/v1-full-hero-sacredrain.webp",
+      "bytes": 240680,
+      "sha256": "f30d4b35d2c6fea20d0b08e3ca77f8896289f92b648453f80e9bf7994c120d70",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "docs/evidence/2026-10-04-WF-xingyue-wind-song/variants/v1-thumb-hero-sacredrain.webp",
+      "bytes": 44080,
+      "sha256": "d6b60edb846f2ae184f57ea3c542882ec4380577c9f20c67eb464311070de8d8",
+      "size": [
+        448,
+        448
+      ],
+      "mode": "RGB"
+    }
+  ]
+}

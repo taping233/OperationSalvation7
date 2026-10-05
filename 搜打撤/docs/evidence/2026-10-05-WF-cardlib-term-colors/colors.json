@@ -1,0 +1,50 @@
+[
+  {
+    "class": "d-kw",
+    "color": "rgb(8, 114, 138)",
+    "parent": "pv-desc",
+    "text": "抽到时施放："
+  },
+  {
+    "class": "d-term",
+    "color": "rgb(8, 114, 138)",
+    "parent": "pv-desc",
+    "text": "沉默"
+  },
+  {
+    "class": "d-num",
+    "color": "rgb(155, 96, 28)",
+    "parent": "pv-desc",
+    "text": "1"
+  },
+  {
+    "class": "d-term",
+    "color": "rgb(8, 114, 138)",
+    "parent": "pv-desc",
+    "text": "回合"
+  },
+  {
+    "class": "d-kw",
+    "color": "rgb(8, 114, 138)",
+    "parent": "cz-photo-rules",
+    "text": "抽到时施放："
+  },
+  {
+    "class": "d-term",
+    "color": "rgb(8, 114, 138)",
+    "parent": "cz-photo-rules",
+    "text": "沉默"
+  },
+  {
+    "class": "d-num",
+    "color": "rgb(155, 96, 28)",
+    "parent": "cz-photo-rules",
+    "text": "1"
+  },
+  {
+    "class": "d-term",
+    "color": "rgb(8, 114, 138)",
+    "parent": "cz-photo-rules",
+    "text": "回合"
+  }
+]

@@ -1,0 +1,730 @@
+{
+  "date": "2026-10-04",
+  "sourceThread": "01a10615-bc80-76f1-9180-db97f763caca",
+  "sourceEvidence": "C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\docs\\evidence\\2026-10-04-WF-wu-class-cards",
+  "revision": "wu-class-final-20261004",
+  "cards": [
+    {
+      "id": "tt7-throwblade",
+      "name": "飞刃偷袭",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-70190d8d-7348-41ad-9237-66c02fbb32e1.png",
+      "selectedSource": "C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\.tmp\\art-reference\\wu-class-cards-20261004\\final\\tt7-throwblade.png",
+      "localOriginal": ".tmp/art-reference/wu-cards-integrate-20261004/final/tt7-throwblade.png",
+      "originalSha256": "ecdc7950a8873c40d644c93a7daec5b05b471491cbcd079efef229e1c43bcba7",
+      "originalBytes": 1582429,
+      "backups": [
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/cards/martial-tt7-throwblade.webp",
+          "sha256": "655d2d8eea850fd9e901685635c9075677aef956679674a08841cb4875e5c05d"
+        },
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/thumbs/cards/martial-tt7-throwblade.webp",
+          "sha256": "f4137c49da4355e755835d14f8d5fcc908e58c4572d246eca0cdf42682c6cf04"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "cards/martial-tt7-throwblade.webp",
+          "ext": "webp",
+          "bytes": 49356,
+          "sha256": "7c592d5cae15c921f77ee94687270827075eb95406bcfb26e94fac30c6a8722b",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            896,
+            679
+          ]
+        },
+        {
+          "path": "thumbs/cards/martial-tt7-throwblade.webp",
+          "ext": "webp",
+          "bytes": 15554,
+          "sha256": "5b184035cfddd13310beb79d9422290545983103888009805dcd5eb70190341b",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tt7-goldencicada",
+      "name": "金蝉脱壳",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-d8ae05f9-2afc-4c23-b6bf-03163f45f4a4.png",
+      "selectedSource": "C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\.tmp\\art-reference\\wu-class-cards-20261004\\final\\tt7-goldencicada.png",
+      "localOriginal": ".tmp/art-reference/wu-cards-integrate-20261004/final/tt7-goldencicada.png",
+      "originalSha256": "4b71a748b495f0e35b4fb55090eee838bcaff4c6ba73a76979f658331fc878f8",
+      "originalBytes": 1553127,
+      "backups": [
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/cards/martial-tt7-goldencicada.webp",
+          "sha256": "88e44eacb6ce103dd46e916f821dc576179439a9f746760de72ed354b4563484"
+        },
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/thumbs/cards/martial-tt7-goldencicada.webp",
+          "sha256": "b7ab95f4fc7090037cdb6ac4e7828747ad52a3bbaeb982a882db8247382acea7"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "cards/martial-tt7-goldencicada.webp",
+          "ext": "webp",
+          "bytes": 44820,
+          "sha256": "989d38efcc86dc8f464070c80397280a48d48ac3217ca8defd5c37c2e1dcdbaa",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            896,
+            679
+          ]
+        },
+        {
+          "path": "thumbs/cards/martial-tt7-goldencicada.webp",
+          "ext": "webp",
+          "bytes": 12112,
+          "sha256": "486279fa770bd45af128779c5acbb33345b4e1aae411e13a5a0e2cffbb7af63d",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tt7-sneak",
+      "name": "偷袭",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-a7fd9e48-5425-4d41-97fe-06ad6a5d7314.png",
+      "selectedSource": "C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\.tmp\\art-reference\\wu-class-cards-20261004\\final\\tt7-sneak.png",
+      "localOriginal": ".tmp/art-reference/wu-cards-integrate-20261004/final/tt7-sneak.png",
+      "originalSha256": "34c23b80936ef117a361a47b5891adb18984450755247d6ebe6883b5c469c3ea",
+      "originalBytes": 1599364,
+      "backups": [
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/cards/martial-tt7-sneak.webp",
+          "sha256": "d782797ba486be02759ece9d42500229ff59e5634e547ce7401b67e365d0d574"
+        },
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/thumbs/cards/martial-tt7-sneak.webp",
+          "sha256": "7e0c35f80d8b94ee98978a136791fbc183b805e34aae04755da9f5557213cdd5"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "cards/martial-tt7-sneak.webp",
+          "ext": "webp",
+          "bytes": 49586,
+          "sha256": "6a2305d4e03268c9126e8d7f762db00916b7564ef9418f718366068792c6ec16",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            896,
+            679
+          ]
+        },
+        {
+          "path": "thumbs/cards/martial-tt7-sneak.webp",
+          "ext": "webp",
+          "bytes": 12014,
+          "sha256": "30496faf3e32f94804872cfcb61c3e894e51c00b02bc65b5af01014d1e8f6877",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tt7-ghostblade",
+      "name": "鬼魅之刃",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-bc8c92d5-4fa1-4140-9b41-4c96cf0502c8.png",
+      "selectedSource": "C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\.tmp\\art-reference\\wu-class-cards-20261004\\final\\tt7-ghostblade.png",
+      "localOriginal": ".tmp/art-reference/wu-cards-integrate-20261004/final/tt7-ghostblade.png",
+      "originalSha256": "dc41e81b02e4067a3567fb447726c51207eacbc158f5bfed60ebe0321f44e8a8",
+      "originalBytes": 1576884,
+      "backups": [
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/cards/martial-tt7-ghostblade.webp",
+          "sha256": "6a4861a57849a2f034f45e285031b62163790d5febe433ae01fac412c1db040f"
+        },
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/thumbs/cards/martial-tt7-ghostblade.webp",
+          "sha256": "5702c55dc94e93d4495f5f8928d0115f55364b04264c46b9a57fa2113ab3b70a"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "cards/martial-tt7-ghostblade.webp",
+          "ext": "webp",
+          "bytes": 69352,
+          "sha256": "1d69874fee4e249aa030270dede0ce9dcfd52132607aca02fc15c76054d6d302",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            896,
+            1149
+          ]
+        },
+        {
+          "path": "thumbs/cards/martial-tt7-ghostblade.webp",
+          "ext": "webp",
+          "bytes": 17364,
+          "sha256": "6a3613ae27ccbf42a6eff210731e42e2ede147269fa7da072d096de99af85056",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            448,
+            574
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tt7-thundergrudge",
+      "name": "快意恩仇",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-eff86fca-06b2-487f-a42c-845a16d6c700.png",
+      "selectedSource": "C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\.tmp\\art-reference\\wu-class-cards-20261004\\final\\tt7-thundergrudge.png",
+      "localOriginal": ".tmp/art-reference/wu-cards-integrate-20261004/final/tt7-thundergrudge.png",
+      "originalSha256": "a5a292a125b6c4b5d95e52def9c8f104c965341e4f8d6e954d8de899c5e22a64",
+      "originalBytes": 1620680,
+      "backups": [
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/cards/martial-tt7-thundergrudge.webp",
+          "sha256": "8f278fb1fec057b01c5379b10fcef6861dcb007c424eed42227f447a8b825d55"
+        },
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/thumbs/cards/martial-tt7-thundergrudge.webp",
+          "sha256": "0b867afece8da1e894cd1691a8d1b80623e02bbf558d4e17321acdf2f5ac8ca1"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "cards/martial-tt7-thundergrudge.webp",
+          "ext": "webp",
+          "bytes": 53486,
+          "sha256": "9b222502ad6aab6373747e977eb40d856ac6302c03e469dfa1ea7a085def2e38",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            896,
+            679
+          ]
+        },
+        {
+          "path": "thumbs/cards/martial-tt7-thundergrudge.webp",
+          "ext": "webp",
+          "bytes": 13462,
+          "sha256": "e123fe387860836e0220e6c48af8e40787bdc80e3876588df50de28dae90b116",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tt7-meteorrain",
+      "name": "流星箭雨",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-924c78f2-0688-4352-ba01-3a9a931a56a8.png",
+      "selectedSource": "C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\.tmp\\art-reference\\wu-class-cards-20261004\\final\\tt7-meteorrain.png",
+      "localOriginal": ".tmp/art-reference/wu-cards-integrate-20261004/final/tt7-meteorrain.png",
+      "originalSha256": "5f017284d94d0f4f2db887d3e6155072f4b89fd38cd91b9795caabe9ea9fcbee",
+      "originalBytes": 1495789,
+      "backups": [
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/cards/martial-tt7-meteorrain.webp",
+          "sha256": "176bc0552fb9fcd485a8f5828c1095ba82b698a623d1b9963a5b8fb63b435e52"
+        },
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/thumbs/cards/martial-tt7-meteorrain.webp",
+          "sha256": "979cf8edaf6bfdcd7cf98b2feabfcc54bbb48ee5f11175840d9d5c1a17edb063"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "cards/martial-tt7-meteorrain.webp",
+          "ext": "webp",
+          "bytes": 37134,
+          "sha256": "35683467cbb9eaa5a0f9f6ebcf7a76e48ca392a31e746391c9b8ed1e1e18a5ce",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            896,
+            679
+          ]
+        },
+        {
+          "path": "thumbs/cards/martial-tt7-meteorrain.webp",
+          "ext": "webp",
+          "bytes": 9056,
+          "sha256": "3f008936a1b7446e5d393898d21c6b377bc7175998872b9d9dd7ecf3e1dd30e5",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tt7-stealth",
+      "name": "潜匿",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-9e7b7a9c-6910-4616-b7a2-c7d720fe252f.png",
+      "selectedSource": "C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\.tmp\\art-reference\\wu-class-cards-20261004\\final\\tt7-stealth-v2.png",
+      "localOriginal": ".tmp/art-reference/wu-cards-integrate-20261004/final/tt7-stealth-v2.png",
+      "originalSha256": "fefdc373427c6149011fdb56e501971ff616ed8c1c484aae7fdc8b676276efef",
+      "originalBytes": 1502701,
+      "backups": [
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/cards/martial-tt7-stealth.webp",
+          "sha256": "8db245415e3a8c0b88cf8cb40a0838d2fb9b33a08c3e36e2dc7a740d90f34c7f"
+        },
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/thumbs/cards/martial-tt7-stealth.webp",
+          "sha256": "de8da165630372555805532aa3106121dbb92cbfd2421d46d51d39ed3d0ea355"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "cards/martial-tt7-stealth.webp",
+          "ext": "webp",
+          "bytes": 41548,
+          "sha256": "4838f19d1edf9976d314a9a73bb9c3f6400e147d85298a01fe8f209985c21ee5",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            896,
+            679
+          ]
+        },
+        {
+          "path": "thumbs/cards/martial-tt7-stealth.webp",
+          "ext": "webp",
+          "bytes": 10254,
+          "sha256": "9c58567525164e5e17342ee552d5a01a05cb1bf26604ae0b489a3216f137fc0c",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tt7-swordimmortal",
+      "name": "剑仙形态",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-aad55680-8703-4fb5-a520-680c1ffd1494.png",
+      "selectedSource": "C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\.tmp\\art-reference\\wu-class-cards-20261004\\final\\tt7-swordimmortal-v2.png",
+      "localOriginal": ".tmp/art-reference/wu-cards-integrate-20261004/final/tt7-swordimmortal-v2.png",
+      "originalSha256": "31912a27c830a595211147d224f82a3c160c5ebd4a75b9c3b21100defa214b5b",
+      "originalBytes": 1478422,
+      "backups": [
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/cards/martial-tt7-swordimmortal.webp",
+          "sha256": "ddde65e77212252b9261a6dc4f93a5f7418d6448aedbbad2f1ac4f40d9aac3d2"
+        },
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/thumbs/cards/martial-tt7-swordimmortal.webp",
+          "sha256": "fce3816f95c76eb103d590a25ce393290cece043f6f04d3830108a148402ce6a"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "cards/martial-tt7-swordimmortal.webp",
+          "ext": "webp",
+          "bytes": 42246,
+          "sha256": "361d7b74b61be9a8e418c39a1cabd8ec10a648d409a7409f0b8c982cd3088c97",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            896,
+            679
+          ]
+        },
+        {
+          "path": "thumbs/cards/martial-tt7-swordimmortal.webp",
+          "ext": "webp",
+          "bytes": 9960,
+          "sha256": "d5f120ff27b4da0f53aa3366cf1b2d395a255b166103df6234482f4e72955615",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tt7-imitate",
+      "name": "不变应万变-改",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-5ede66ae-79b4-4e11-9f3d-d5d401af6530.png",
+      "selectedSource": "C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\.tmp\\art-reference\\wu-class-cards-20261004\\final\\tt7-imitate.png",
+      "localOriginal": ".tmp/art-reference/wu-cards-integrate-20261004/final/tt7-imitate.png",
+      "originalSha256": "9c555b628d4e3a9879e7215924150c05cb5d99405bb70a4812f8d031bbc726c0",
+      "originalBytes": 1497547,
+      "backups": [
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/cards/martial-tt7-imitate.webp",
+          "sha256": "f2e14eefb152297b6c0b1023c7432af5453f6b9000927c6482f6ffff6234f966"
+        },
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/thumbs/cards/martial-tt7-imitate.webp",
+          "sha256": "3ffb6f71ecff05b8844510e51c500f008a621f7fa9343db70f6408e1a1482387"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "cards/martial-tt7-imitate.webp",
+          "ext": "webp",
+          "bytes": 41340,
+          "sha256": "da084556b2b4dc1d556f43595af6e7a6c23920dc561100e02056095c29f841de",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            896,
+            679
+          ]
+        },
+        {
+          "path": "thumbs/cards/martial-tt7-imitate.webp",
+          "ext": "webp",
+          "bytes": 10180,
+          "sha256": "d931d5d946ae3c3c34c7cec25e1e444a9bc10540f4531aac0724f5fd1e4a36bc",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cmtn1i64j7y7",
+      "name": "盗宝",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-fef0ab43-5ddf-4e00-9e49-95181d34e4ab.png",
+      "selectedSource": "C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\.tmp\\art-reference\\wu-class-cards-20261004\\final\\cmtn1i64j7y7.png",
+      "localOriginal": ".tmp/art-reference/wu-cards-integrate-20261004/final/cmtn1i64j7y7.png",
+      "originalSha256": "a9eb46431411cc99244522dd3c6b19ca9097d96ff57df470001f59c444a26e79",
+      "originalBytes": 1613072,
+      "backups": [
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/cards/martial-cmtn1i64j7y7.webp",
+          "sha256": "1afa684fa3593ed82323f98a1b8ba654e9bc37a493dac0f4b476689b652ab2e1"
+        },
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/thumbs/cards/martial-cmtn1i64j7y7.webp",
+          "sha256": "4d60c8a93b595794534a7a7b5ff74bed8d94b8cc3f9bd88da182b9039435557b"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "cards/martial-cmtn1i64j7y7.webp",
+          "ext": "webp",
+          "bytes": 50786,
+          "sha256": "8b79b85c3ed7f3f7f058bfe69aa2c9b832f84640fc5a4f428f23ae14be6166ab",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            896,
+            679
+          ]
+        },
+        {
+          "path": "thumbs/cards/martial-cmtn1i64j7y7.webp",
+          "ext": "webp",
+          "bytes": 12130,
+          "sha256": "2df5efc85e27faf8a719d63b2d12bc3ae40dbd531723f95a08e5ee3a45e1e647",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tt8-hero-assassin",
+      "name": "白梅落影·妄",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-0aff4605-ea32-4b32-98c4-d6e5e04caa4d.png",
+      "selectedSource": "C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\.tmp\\art-reference\\wu-class-cards-20261004\\final\\tt8-hero-assassin.png",
+      "localOriginal": ".tmp/art-reference/wu-cards-integrate-20261004/final/tt8-hero-assassin.png",
+      "originalSha256": "3433a69025458d47dae8234dce5c1631037d6527aeb1f27e05686715db01ff47",
+      "originalBytes": 1672501,
+      "backups": [
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/cards/wu-void.webp",
+          "sha256": "75e7e3cde28b3d5ee90f314b52c16a61460a4cf2ff3e890c92180cce7010d2d9"
+        },
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/thumbs/cards/wu-void.webp",
+          "sha256": "c6b93e3045203bd2764369012b94e83b054d090146c563463b13d313229f6690"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "cards/wu-void.webp",
+          "ext": "webp",
+          "bytes": 115644,
+          "sha256": "e2597435801ed90d2b8ac266efc0de81efa7f6a366db35494938723894fbe0c2",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            1792,
+            1358
+          ]
+        },
+        {
+          "path": "thumbs/cards/wu-void.webp",
+          "ext": "webp",
+          "bytes": 12350,
+          "sha256": "0c531c7a6981f57e565172d4e70f3159a2485bcf78657aa8ed0c9e70bce206fc",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tt8-hero-sword",
+      "name": "无量仙剑·云风",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-7d3643fe-5d08-454f-a523-4ff89e9f5ec3.png",
+      "selectedSource": "C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\.tmp\\art-reference\\wu-class-cards-20261004\\final\\tt8-hero-sword.png",
+      "localOriginal": ".tmp/art-reference/wu-cards-integrate-20261004/final/tt8-hero-sword.png",
+      "originalSha256": "a33dea887cf43c61814268a7372ec53fb80747656223c95552ac094e53e0891e",
+      "originalBytes": 2016361,
+      "backups": [
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/cards/wu-myriadswords.webp",
+          "sha256": "fb0f7e54a612b44debeac5cdf3129479078ed0c61bd6d0dd59e23c3a8950cabc"
+        },
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/thumbs/cards/wu-myriadswords.webp",
+          "sha256": "bfe741dba12e143863bbffe373ab67a1063d27b588e42941d8c1a0c9311c3b54"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "cards/wu-myriadswords.webp",
+          "ext": "webp",
+          "bytes": 214382,
+          "sha256": "f7da1aac9f400e19323c8cecbdb0d23a2b9648964125b7838f35e5b9ee8ba0e3",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            1792,
+            1358
+          ]
+        },
+        {
+          "path": "thumbs/cards/wu-myriadswords.webp",
+          "ext": "webp",
+          "bytes": 26110,
+          "sha256": "4be404edc2df18ba586138cb1abeea90fbc8c6e068de8bd1571dfcb5ace1ae84",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tt8-hero-ranger",
+      "name": "天剑诛魔·云阳",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-9ac6ce8a-c45a-4191-a0f2-26cdb81849ae.png",
+      "selectedSource": "C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\.tmp\\art-reference\\wu-class-cards-20261004\\final\\tt8-hero-ranger-v2.png",
+      "localOriginal": ".tmp/art-reference/wu-cards-integrate-20261004/final/tt8-hero-ranger-v2.png",
+      "originalSha256": "b3f85c77c586bf324bf1163e4c7a363233ef5cd50922c9fb2adcd0dcf9173206",
+      "originalBytes": 1489794,
+      "backups": [
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/cards/wu-heavensword.webp",
+          "sha256": "dd2c73ff846b6c04c679d9cbfb0de019abd231c7beda40c64e375fe99c680ab0"
+        },
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/thumbs/cards/wu-heavensword.webp",
+          "sha256": "a16ee2dafe2f417716430705c4cc5349a26ce6f59ee5a9bd1ced0e0975c0a5de"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "cards/wu-heavensword.webp",
+          "ext": "webp",
+          "bytes": 110222,
+          "sha256": "c217c3623b254d3640c6fe1282d6538d9ce6085aff12ca0240c9c40ebd0f1a99",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            1792,
+            1358
+          ]
+        },
+        {
+          "path": "thumbs/cards/wu-heavensword.webp",
+          "ext": "webp",
+          "bytes": 11024,
+          "sha256": "e171fb56bce57a2e3b4f4177f8b87e5d15cf03697327c32a9271aa9afb1eb421",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tt8-demonslay",
+      "name": "诛魔剑",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-1869ad29-bcc6-4fda-8f43-767af49a47f6.png",
+      "selectedSource": "C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\.tmp\\art-reference\\wu-class-cards-20261004\\final\\tt8-demonslay.png",
+      "localOriginal": ".tmp/art-reference/wu-cards-integrate-20261004/final/tt8-demonslay.png",
+      "originalSha256": "73ec8b721122ffaecec46cd324842dcac0f90a646807619b3b816f473d147d66",
+      "originalBytes": 1387005,
+      "backups": [
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/cards/equip-tt8-demonslay.webp",
+          "sha256": "9664bbe39548cf00e53588cf1780ad2f344c9bf5f7716a1c66e7eb839b1e6811"
+        },
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/thumbs/cards/equip-tt8-demonslay.webp",
+          "sha256": "92165690f579b08226bd262fd0746fe216c1bde6b9f4a3f27c032c0bc847f1c0"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "cards/equip-tt8-demonslay.webp",
+          "ext": "webp",
+          "bytes": 18100,
+          "sha256": "2e23c289d99acf110ba152b58d2d136bafeee0c7f5bc1613c6475d9b35c3d64e",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            896,
+            679
+          ]
+        },
+        {
+          "path": "thumbs/cards/equip-tt8-demonslay.webp",
+          "ext": "webp",
+          "bytes": 3630,
+          "sha256": "d89a450f3bbfa5e0c0c03ae9fb82deb892cc5e8b457a96bca115c910d88ab629",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tt8-archdemon",
+      "name": "天启诛魔剑",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-e0451150-3222-411f-89d2-27aa1f0a6d2b.png",
+      "selectedSource": "C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\.tmp\\art-reference\\wu-class-cards-20261004\\final\\tt8-archdemon.png",
+      "localOriginal": ".tmp/art-reference/wu-cards-integrate-20261004/final/tt8-archdemon.png",
+      "originalSha256": "c6077d1ccdcef4dd6eccec092d8a9d8f4f1e4a692cd6caa1babfd1031f16ff87",
+      "originalBytes": 1414727,
+      "backups": [
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/cards/equip-tt8-archdemon.webp",
+          "sha256": "fc0714d5b3f2a113a42e246dd6aff5d18efb523261be220e6b54fdd93ae4a06c"
+        },
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/thumbs/cards/equip-tt8-archdemon.webp",
+          "sha256": "4247a94591982f91bd811c77d05bb0c014f94680e0a971643b877537a491d013"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "cards/equip-tt8-archdemon.webp",
+          "ext": "webp",
+          "bytes": 16904,
+          "sha256": "b3cb93997a286dc377716e4fa8a68b2114719131ab899a9167663e90202e93bd",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            896,
+            679
+          ]
+        },
+        {
+          "path": "thumbs/cards/equip-tt8-archdemon.webp",
+          "ext": "webp",
+          "bytes": 3170,
+          "sha256": "d16adc298449ad2657837d47ae295124e90e71a17c1350ef46cbb44f9b32d2bf",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tt8-heavensword",
+      "name": "天启剑",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a10615-bc80-76f1-9180-db97f763caca\\exec-a9ce1322-137b-42d9-a228-c04a755b9768.png",
+      "selectedSource": "C:\\Users\\太平\\.codex\\worktrees\\3169\\代号柒\\搜打撤\\.tmp\\art-reference\\wu-class-cards-20261004\\final\\tt8-heavensword.png",
+      "localOriginal": ".tmp/art-reference/wu-cards-integrate-20261004/final/tt8-heavensword.png",
+      "originalSha256": "2d1f34fca226ffee6468fb7d96237ba955549f264a265ed467761bc6ba25717e",
+      "originalBytes": 1524636,
+      "backups": [
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/cards/equip-tt8-heavensword.webp",
+          "sha256": "26b83f3749d110bfd1d844469ff877a855e5a975a389c875ccb634b9e9e1d09b"
+        },
+        {
+          "path": ".tmp/art-reference/wu-cards-integrate-20261004/before/thumbs/cards/equip-tt8-heavensword.webp",
+          "sha256": "c9577e638c88cd469d7928c768dd788ed03ef4bf3bc47e39606556f14d27e41d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "cards/equip-tt8-heavensword.webp",
+          "ext": "webp",
+          "bytes": 53908,
+          "sha256": "61539f6a00d221399f3632b009145c8e367b91049abead5b374c47fba2329648",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            896,
+            1149
+          ]
+        },
+        {
+          "path": "thumbs/cards/equip-tt8-heavensword.webp",
+          "ext": "webp",
+          "bytes": 12068,
+          "sha256": "0ea725b5cc62e4a9ba8b8da401949492d3d3650b6bca9342a3965dd7b5f77faf",
+          "license": "项目自有（AI 生成）",
+          "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json",
+          "size": [
+            448,
+            574
+          ]
+        }
+      ]
+    }
+  ],
+  "conversion": "existing runtime dimensions; WebP q90; thumbs width448 q82 with current baked colour matrix",
+  "originalRetrieval": "Selected PNGs copied from worktree3169 final outputs; local originals/backups remain ignored, with path/bytes/SHA256 recorded"
+}

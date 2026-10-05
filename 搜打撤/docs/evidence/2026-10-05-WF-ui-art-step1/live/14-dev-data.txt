@@ -1,0 +1,125 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 1/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 1/16
+		6 container tools 开发者控制台, ID: overlay
+			7 container
+				8 button Description: 关闭, ID: ovCloseX
+				9 heading tools 开发者控制台, Value: 2, ID: ovTitle
+					13 image tools
+					14 text  开发者控制台
+				12 container ovBody
+					15 text 开发工具 · 操作可能影响存档 Ctrl+L 开关
+					16 button 调试
+					17 button Agent
+					18 button 数据
+					19 button 快捷键
+					20 container
+						21 text 开发壳视图：数据与「跑局数据」页 同源 （同一记录与统计规则），本页签只多这层开发入口标注。
+					22 text 总局数 0 通关率 0% 撤离率 0% 死亡率 0% 均带出价值 0 战斗胜率 0%
+					23 text 样本 0 局（本地环形缓冲，最多保留 200 局）——当前为空，先跑一局再回来看。真人局与辅助局混记，辅助局胜率不作为自然平衡依据。
+					24 text 口径：「通关撤离」行记入库卡（savedCards），「撤离」行记带出卡（carriedCards），均为最终确定集合——撤离时未选中的候选不入账。
+					25 container
+						26 heading 死亡层分布, Value: 3
+							27 text 死亡层分布
+						28 text 暂无死亡记录。
+					29 container
+						30 heading 高价值带出卡 Top, Value: 3
+							31 text 高价值带出卡 Top
+						32 table
+							33 row
+								34 cell
+									35 text 卡牌
+								36 cell
+									37 text 稀有度
+								38 cell
+									39 text 带出
+								40 cell
+									41 text 单价
+							42 row
+								43 cell
+									44 text 暂无带出记录
+					45 container
+						46 heading 按驱动对比, Value: 3
+							47 text 按驱动对比
+						48 table
+							49 row
+								50 cell
+									51 text 分组
+								52 cell
+									53 text 局数
+								54 cell
+									55 text 通关率
+								56 cell
+									57 text 撤离率
+								58 cell
+									59 text 均价值
+							60 row
+								61 cell
+									62 text —
+					63 container
+						64 heading 按职业对比, Value: 3
+							65 text 按职业对比
+						66 table
+							67 row
+								68 cell
+									69 text 分组
+								70 cell
+									71 text 局数
+								72 cell
+									73 text 通关率
+								74 cell
+									75 text 撤离率
+								76 cell
+									77 text 均价值
+							78 row
+								79 cell
+									80 text —
+					81 container
+						82 heading 按模式对比, Value: 3
+							83 text 按模式对比
+						84 table
+							85 row
+								86 cell
+									87 text 分组
+								88 cell
+									89 text 局数
+								90 cell
+									91 text 通关率
+								92 cell
+									93 text 撤离率
+								94 cell
+									95 text 均价值
+							96 row
+								97 cell
+									98 text —
+					99 container
+						100 heading 最近 20 局, Value: 3
+							101 text 最近 20 局
+						102 table
+							103 row
+								104 cell
+									105 text 时间
+								106 cell
+									107 text 驱动
+								108 cell
+									109 text 结局
+								110 cell
+									111 text 层
+								112 cell
+									113 text 行动
+								114 cell
+									115 text 带出价值
+							116 row
+								117 cell
+									118 text 暂无记录
+					119 button 导出 JSON
+					120 button 导出 CSV
+					121 text 清空本地跑局记录
+					122 text 将删除本地全部 0 局记录（含真人局），清空后不可恢复；如需留档请先用上方导出。
+					123 button 清空记录
+					124 button 关闭（Esc / Ctrl+L）
+
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/

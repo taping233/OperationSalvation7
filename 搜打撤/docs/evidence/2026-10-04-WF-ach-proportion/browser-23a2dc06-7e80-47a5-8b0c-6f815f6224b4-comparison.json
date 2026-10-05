@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "kind": "browser-comparison",
+  "recordedAt": "2026-10-04T13:02:09.830Z",
+  "before": {
+    "input": "docs/evidence/2026-10-04-WF-ach-proportion/before.json",
+    "sha256": "0d92a7cb6269006785f1852bc30b51971e680ed4c50751fd8472269ef24e3676"
+  },
+  "after": {
+    "input": "docs/evidence/2026-10-04-WF-ach-proportion/after.json",
+    "sha256": "09cb9ff14920678b6ac75290066c145479ae48f0a650cf741f0e784c0b318ed8"
+  },
+  "status": "different",
+  "paired": 4,
+  "differences": [
+    {
+      "identity": [
+        "gallery",
+        ".achievement-gallery",
+        "gallery"
+      ],
+      "field": "styles.width",
+      "before": "1081.94px",
+      "after": "1540.39px"
+    },
+    {
+      "identity": [
+        "gallery",
+        ".achievement-gallery",
+        "gallery"
+      ],
+      "field": "rect.width",
+      "before": 919.6458740234376,
+      "after": 1309.3333740234375
+    },
+    {
+      "identity": [
+        "header",
+        ".ag-header",
+        "header"
+      ],
+      "field": "styles.width",
+      "before": "1081.94px",
+      "after": "1540.39px"
+    },
+    {
+      "identity": [
+        "header",
+        ".ag-header",
+        "header"
+      ],
+      "field": "rect.width",
+      "before": 919.6458740234376,
+      "after": 1309.3333740234375
+    },
+    {
+      "identity": [
+        "columns",
+        ".ag-body",
+        "columns"
+      ],
+      "field": "styles.width",
+      "before": "1081.94px",
+      "after": "1540.39px"
+    },
+    {
+      "identity": [
+        "columns",
+        ".ag-body",
+        "columns"
+      ],
+      "field": "rect.width",
+      "before": 919.6458740234376,
+      "after": 1309.3333740234375
+    }
+  ],
+  "inconclusive": [],
+  "actions": {
+    "before": [
+      {
+        "detail": "点击主页成就总览；读取当前窗口布局",
+        "type": "real-input"
+      }
+    ],
+    "after": [
+      {
+        "detail": "点击主页成就总览；读取当前窗口布局",
+        "type": "real-input"
+      }
+    ]
+  },
+  "console": {
+    "before": {
+      "coverage": "not-collected",
+      "errors": []
+    },
+    "after": {
+      "coverage": "not-collected",
+      "errors": []
+    }
+  },
+  "screenshots": {
+    "before": [],
+    "after": []
+  },
+  "limits": [
+    "equal 仅表示已配对节点字段一致；different 不是自动失败结论",
+    "未配对/身份重复需人工复核；不同操作类型不可互相替代"
+  ]
+}

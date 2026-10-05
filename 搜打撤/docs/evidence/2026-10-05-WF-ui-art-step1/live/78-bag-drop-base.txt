@@ -1,0 +1,59 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container bag 背包, ID: overlay
+		3 container
+			4 button Description: 关闭, ID: ovCloseX
+			5 container ovBody
+				6 container
+					7 heading bag 背包 , Value: 2
+						8 image bag
+						9 text  背包 
+						10 button
+					11 text 格数  2/16 总值  0
+					12 image lock
+					13 text  安全格  0/2
+					14 image pocket
+					15 text  消耗口袋  0  张
+					16 button 关闭背包
+				17 container
+					18 heading bag 背包格 按稀有度 按种类, Value: 3
+						19 image bag
+						20 text 背包格
+						21 button 按稀有度
+						22 button 按种类
+					23 container
+						24 container
+							25 text 1
+							26 image 镭射
+							27 text 镭射 法术 · 古朴
+							28 image crystal
+							29 text 注能 1 造成 5 点法术 伤害 ； 注能 ( 1 )： 伤害 +3 。
+							30 image sparkles
+							31 text 5'
+							32 text 法伤
+							33 image coin
+							34 text 2
+						35 text ×1
+						36 container
+							37 image cards
+					38 container
+						39 container
+							40 text 1
+							41 image 格挡
+							42 text 格挡 武术 · 古朴 本 回合 所受 伤害 降为  1 。
+							43 image coin
+							44 text 2
+						45 text ×1
+						46 container
+							47 image cards
+					48 container
+						49 heading pocket 消耗口袋 0 张, Value: 3
+							50 image pocket
+							51 text 消耗口袋 0 张
+						52 text （空——对小怪使用过的卡牌会进入这里）
+					53 container
+						54 heading lock 安全格, Value: 3
+							55 image lock
+							56 text 安全格
+
+The focused UI element is 16 button 关闭背包

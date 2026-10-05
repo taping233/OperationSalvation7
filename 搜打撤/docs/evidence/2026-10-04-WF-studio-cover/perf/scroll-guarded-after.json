@@ -1,0 +1,24 @@
+{
+  "result": {
+    "type": "object",
+    "value": {
+      "elapsed": 3000.699999999255,
+      "frames": 467,
+      "galleryFrames": 468,
+      "longTasks": [],
+      "missingFrames": 0,
+      "rafIntervalMs": {
+        "max": 24.29999999998836,
+        "p50": 6.099999999976717,
+        "p95": 6.2999999999883585
+      },
+      "sceneValid": true,
+      "totalLongTaskMs": 0,
+      "window": {
+        "height": 764,
+        "visibility": "visible",
+        "width": 871
+      }
+    }
+  }
+}

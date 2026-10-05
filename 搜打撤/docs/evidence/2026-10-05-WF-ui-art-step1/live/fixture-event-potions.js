@@ -1,0 +1,1 @@
+window.__uiArtQA.event('避难市集药摊')

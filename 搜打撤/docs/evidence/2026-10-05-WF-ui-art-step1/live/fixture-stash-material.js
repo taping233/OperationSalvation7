@@ -1,0 +1,1 @@
+(()=>{const q=window.__uiArtQA;q.reset();const B=window.SDT.Base;const c=window.SDT.Cards.all().find(c=>c.name==='木材');B.data.stash=[{card:{...c},count:2}];q.pages.openStashItem(0);return true;})()

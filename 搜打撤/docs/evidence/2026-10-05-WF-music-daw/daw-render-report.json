@@ -1,0 +1,256 @@
+[
+  {
+    "role": "title",
+    "title": "霜窗回声 · LMMS版",
+    "bpm": 136,
+    "seconds": 56.47058333333333,
+    "native_engine": "LMMS 1.2.2 sf2player/FluidSynth, sinc-best, 2x oversampling, 48k float render",
+    "tracks": {
+      "Grand piano": {
+        "program": 0,
+        "bank": 0,
+        "volume": 105,
+        "pan": -10,
+        "notes": 184
+      },
+      "Warm horizon": {
+        "program": 89,
+        "bank": 0,
+        "volume": 30,
+        "pan": 18,
+        "notes": 64
+      },
+      "Cello strings": {
+        "program": 49,
+        "bank": 0,
+        "volume": 40,
+        "pan": -18,
+        "notes": 24
+      },
+      "Muted bass": {
+        "program": 33,
+        "bank": 0,
+        "volume": 55,
+        "pan": 0,
+        "notes": 64
+      },
+      "Glass answer": {
+        "program": 8,
+        "bank": 0,
+        "volume": 43,
+        "pan": 25,
+        "notes": 16
+      },
+      "Brush drums": {
+        "program": 40,
+        "bank": 128,
+        "volume": 38,
+        "pan": 0,
+        "notes": 190
+      }
+    },
+    "cycles_rendered": 2,
+    "delivered_cycle": 2,
+    "raw_peak": 0.07797759771347046,
+    "peak_dbfs": -2.8758031129837036,
+    "rms_dbfs": -18.000006675720215,
+    "post_master_gain_db": 19.95012501933346,
+    "files": [
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-daw/01-title-frostglass-v2.mmp",
+        "bytes": 80052,
+        "sha256": "42fbe905720703789e5c825b65289dfbbb52078ae06979bc8199f5cb088f8943"
+      },
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-daw/01-title-frostglass-v2.wav",
+        "bytes": 16263572,
+        "sha256": "46ff9dd1fda513956ed6556bb86988b194f85fb956f7dc200cb545ed192e3a0b"
+      },
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-daw/01-title-frostglass-v2.mp3",
+        "bytes": 1808719,
+        "sha256": "c544acef1336fadc2c42ce50275dd990cecba22d6180a4d4f8a53ba62126b032"
+      },
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-daw/01-title-frostglass-v2.ogg",
+        "bytes": 865164,
+        "sha256": "7c1d0792660318a9eeb021573c7f840bf80dbd8fa18abe34603c4912bb8ee3e1"
+      }
+    ],
+    "listening": "user listening required; numerical checks cannot establish aesthetic improvement"
+  },
+  {
+    "role": "explore",
+    "title": "灰线行军 · LMMS版",
+    "bpm": 152,
+    "seconds": 50.5263125,
+    "native_engine": "LMMS 1.2.2 sf2player/FluidSynth, sinc-best, 2x oversampling, 48k float render",
+    "tracks": {
+      "Tine piano motif": {
+        "program": 4,
+        "bank": 0,
+        "volume": 100,
+        "pan": -12,
+        "notes": 96
+      },
+      "Picked guitar": {
+        "program": 27,
+        "bank": 0,
+        "volume": 85,
+        "pan": 24,
+        "notes": 112
+      },
+      "Warm pad": {
+        "program": 89,
+        "bank": 0,
+        "volume": 30,
+        "pan": -22,
+        "notes": 64
+      },
+      "Synth bass": {
+        "program": 38,
+        "bank": 0,
+        "volume": 34,
+        "pan": 0,
+        "notes": 144
+      },
+      "String response": {
+        "program": 48,
+        "bank": 0,
+        "volume": 58,
+        "pan": 17,
+        "notes": 16
+      },
+      "Electronic drums": {
+        "program": 25,
+        "bank": 128,
+        "volume": 38,
+        "pan": 0,
+        "notes": 476
+      }
+    },
+    "cycles_rendered": 2,
+    "delivered_cycle": 2,
+    "raw_peak": 0.056940414011478424,
+    "peak_dbfs": -1.209614872932434,
+    "rms_dbfs": -16.38705849647522,
+    "post_master_gain_db": 22.54718997158493,
+    "files": [
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-daw/02-explore-ashline-v2.mmp",
+        "bytes": 123969,
+        "sha256": "a730e5ae06b3b982861832b6ac69d29c3f168364457c1ca87c429fa509cbd66d"
+      },
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-daw/02-explore-ashline-v2.wav",
+        "bytes": 14551622,
+        "sha256": "f95bbd40ec6dfb7440c66ac734f729f7efefb26666bd0abcefabd8653f0e365f"
+      },
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-daw/02-explore-ashline-v2.mp3",
+        "bytes": 1619023,
+        "sha256": "c86f61bd8c647785747cf19eb9f4ff0ccece29c2922afd82c9a90fbb510292b7"
+      },
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-daw/02-explore-ashline-v2.ogg",
+        "bytes": 943973,
+        "sha256": "271f656c54b38fcd28ca84d3fd07fe1431aeb1f3e40bc414a7d3fd14f9c7de86"
+      }
+    ],
+    "listening": "user listening required; numerical checks cannot establish aesthetic improvement"
+  },
+  {
+    "role": "battle",
+    "title": "黑脉交锋 · LMMS版",
+    "bpm": 124,
+    "seconds": 61.93547916666667,
+    "native_engine": "LMMS 1.2.2 sf2player/FluidSynth, sinc-best, 2x oversampling, 48k float render",
+    "tracks": {
+      "Pizzicato drive": {
+        "program": 45,
+        "bank": 0,
+        "volume": 48,
+        "pan": -17,
+        "notes": 224
+      },
+      "String theme": {
+        "program": 48,
+        "bank": 0,
+        "volume": 105,
+        "pan": 10,
+        "notes": 95
+      },
+      "French horn answer": {
+        "program": 60,
+        "bank": 0,
+        "volume": 55,
+        "pan": -25,
+        "notes": 16
+      },
+      "Low strings": {
+        "program": 49,
+        "bank": 0,
+        "volume": 34,
+        "pan": 23,
+        "notes": 32
+      },
+      "Synth bass": {
+        "program": 38,
+        "bank": 0,
+        "volume": 32,
+        "pan": 0,
+        "notes": 192
+      },
+      "Taiko": {
+        "program": 116,
+        "bank": 0,
+        "volume": 32,
+        "pan": -6,
+        "notes": 48
+      },
+      "Power drums": {
+        "program": 16,
+        "bank": 128,
+        "volume": 20,
+        "pan": 0,
+        "notes": 428
+      },
+      "Saw accent": {
+        "program": 81,
+        "bank": 0,
+        "volume": 28,
+        "pan": 0,
+        "notes": 16
+      }
+    },
+    "cycles_rendered": 2,
+    "delivered_cycle": 2,
+    "raw_peak": 0.0743543952703476,
+    "peak_dbfs": -1.2096154689788818,
+    "rms_dbfs": -17.751554250717163,
+    "post_master_gain_db": 21.844752693960633,
+    "files": [
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-daw/03-battle-blackpulse-v2.mmp",
+        "bytes": 142556,
+        "sha256": "d7bac5115fc3d5225877f9680b8261093923265e9d420fb291c1986e5b1d87ef"
+      },
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-daw/03-battle-blackpulse-v2.wav",
+        "bytes": 17837462,
+        "sha256": "05e48b455d00e29cbf3434e757dab86b76e0e2ad661d183f068536f8a013353d"
+      },
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-daw/03-battle-blackpulse-v2.mp3",
+        "bytes": 1983823,
+        "sha256": "6b0e9070e84fb2ad5b68cafdb518575ec790315e0fdcf2163f114efa1174e2e4"
+      },
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-daw/03-battle-blackpulse-v2.ogg",
+        "bytes": 1202361,
+        "sha256": "fded6227bb2f75b97d34e51e4073982a0605e1d3c04e79b51adb2c1cf6bc748c"
+      }
+    ],
+    "listening": "user listening required; numerical checks cannot establish aesthetic improvement"
+  }
+]

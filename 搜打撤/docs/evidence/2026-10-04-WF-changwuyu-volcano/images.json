@@ -1,0 +1,42 @@
+{
+  "method": "Built-in imagegen; Sharp only encodes and applies the existing bake-card-thumbs.cjs thumbnail matrix",
+  "raw": {
+    "path": ".tmp/imagegen/changwuyu-volcano-20261004/hero-volcano-v1.png",
+    "bytes": 2090284,
+    "sha256": "eff274d13a48f05d4d7a0d23783b2b1de5b558940bef866268d829c16f159aa1",
+    "width": 1254,
+    "height": 1254
+  },
+  "originals": [
+    {
+      "path": ".tmp/imagegen/changwuyu-volcano-20261004/originals/hero-volcano.webp",
+      "bytes": 118588,
+      "sha256": "1e96b0f1474397b2a9faba29cb7b3d9c65caaaa37229f275bdb332eda719b90d",
+      "width": 896,
+      "height": 896
+    },
+    {
+      "path": ".tmp/imagegen/changwuyu-volcano-20261004/originals/thumb-hero-volcano.webp",
+      "bytes": 33818,
+      "sha256": "2804ddd307ab79991bb3d8e7c9ebe1419450a11fa59f98e9f7fc460112b36bfa",
+      "width": 448,
+      "height": 448
+    }
+  ],
+  "outputs": [
+    {
+      "path": "game/assets/cards/hero-volcano.webp",
+      "bytes": 205760,
+      "sha256": "219cef00c185d81cd57103390eff7216df5503625cefd6a2b0121043b4e2cf13",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "game/assets/thumbs/cards/hero-volcano.webp",
+      "bytes": 30894,
+      "sha256": "9d2f9336d91ea8e1af2cdf41d072bdca0d86272f5bd041f49078cd26cdf13c24",
+      "width": 448,
+      "height": 448
+    }
+  ]
+}

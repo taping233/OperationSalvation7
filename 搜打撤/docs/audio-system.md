@@ -4,6 +4,8 @@
 
 原有曲目按模式使用独立 Howl 实例。场景或曲目切换时，旧曲保持可闻并淡出 280ms，新曲淡入 420ms；淡出回调带曲目代次校验，防止快速切换时旧回调暂停当前曲。设置中关闭音乐和页面隐藏立即静音/暂停。音乐音量滑条同步当前曲目，包含战斗曲；战斗 ducking 将音乐降至目标音量的 45%。
 
+2026-10-05 老板授权将三首文件曲目替换为原创循环 demo：标题《霜窗回声》（136 BPM／56.47s）、探索及基地《灰线行军》（152 BPM／50.53s）、战斗《黑脉交锋》（124 BPM／61.94s）。文件在 `game/assets/music-demo/`，均用 WebAudio 解码循环；设置仍沿用“原有曲目”入口与已有声景偏好。原三首 MP3 保留但不再被音频入口引用。独立试听页为 `game/music-demo.html`；源码、分析、复现和验收见 [demo 证据](evidence/2026-10-05-WF-music-demos/README.md)。听感和风格接近程度待老板试听。
+
 短音效优先使用 `assets/sfx/battle` 采样池，缺少素材或解码未完成时使用 WebAudio 合成音。新战斗 cue：`cardSelect`、`discard`、`burn`、`kill`、`danger`、`energyUp`、`energyDown`、`shieldUp`、`shieldBreak`、`phase`、`rarePlay`、`curseEnd`。其中 `phase` 支持 `{ side: 'foe'|'self' }`；选牌、弃牌、护盾增加和击杀使用新增 CC0 采样，其余使用短合成音。护盾增加采样以较低增益播放，截短至 420ms 并淡出；护盾增加 cue 有 220ms 冷却。
 
 高频操作和装饰音按事件冷却；45ms 内超过四个声音时，后续低优先级操作声会被抑制，战斗结果和危险提示仍可播放。合成音与采样共享 SFX 总线和 Master 软限幅器（阈值 -6dB、比例 12:1）。采样峰值归一化至约 95%，各 cue 再按独立增益混合。

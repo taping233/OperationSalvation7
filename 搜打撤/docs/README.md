@@ -6,9 +6,7 @@
 
 ## 双端工作流
 
-Codex / ZCode 共用项目规则和事实，各自适配平台工具。[流程指南](WORKFLOW-TOOLS.md)统一任务、台账、验证、暂存隔离与归档；[路由原文](archive/workflow-routing-2026-09-30/README.md)及[工具原文](archive/workflow-completion-2026-09-30/README.md)仅作历史依据。
-
-2026-09-30 老板批准：项目规则与事实共用，Codex / ZCode 各自适配入口；浏览器边界口径见根 AGENTS.md。当前直接指令优先，历史经验不扩大授权。
+Codex / ZCode 共用项目规则和事实，各自适配平台工具（2026-09-30 老板批准：项目规则与事实共用，浏览器边界口径见根 AGENTS.md；当前直接指令优先，历史经验不扩大授权）。[流程指南](WORKFLOW-TOOLS.md)统一任务、台账、验证、暂存隔离与归档；[路由原文](archive/workflow-routing-2026-09-30/README.md)及[工具原文](archive/workflow-completion-2026-09-30/README.md)仅作历史依据。
 
 ### 事实分层与记忆入口
 
@@ -22,24 +20,11 @@ Codex / ZCode 共用项目规则和事实，各自适配平台工具。[流程�
 | PENDING.md | 唯一待决策台账；backlog 归 roadmap，已决记录回写来源 |
 | 平台记忆 | 稳定经验与历史依据；现行架构归 docs，热点/活账只放指针 |
 
-本机经 09-30 核实的记忆入口（换机先确认路径，不猜目录哈希）：
-
-| 平台 | 按需读取顺序 |
-| --- | --- |
-| Codex | `C:\Users\太平\.codex\memories\memory_summary.md` → 同目录 `MEMORY.md` 的 cwd/主题命中 → 必要的引用正文 |
-| ZCode | `npm run memory:discover` 精确匹配当前仓库后返回项目索引 → 对应主题正文；多候选/不可读时人工确认 |
-| 共享项目经验 | 上述 ZCode 项目目录现存近期经验；Codex 可沿自己的索引按需读取，保留现有路径，不复制整库 |
-| 历史迁移库 | `C:\Users\太平\.zcode\memories\` 是旧记忆，不能替代当前项目索引 |
-
-两端都以源码、实时 Git、现行 docs 为准。上述绝对路径是本机历史核实入口，换机优先用 `npm run memory:discover` 动态发现，不猜项目哈希。记忆索引只存主题钩子与来源；同一经验维护一份正文。工具只读索引，不自动注入整库，也不要求每次读全部记忆。
-
-### 平台适配
-
-浏览器能力与证据边界见[质量门](quality-gates.md#内置浏览器验收)，协作授权见根 AGENTS.md，派工入口见[派工手册](PARALLEL-DISPATCH-PLAYBOOK.md)。留言只有任务需要时核验：确认内置浏览器来源地址与 origin，不可读记未核验，不推断没有留言或导出整个存储。平台记忆不重复保存进度和活账。
+记忆有缺口才查：`npm run --silent workflow -- memory --source both --query "关键词" --limit 3 --json` 先索引后限量正文；source可选codex、zcode、both，默认codex。ZCode从唯一匹配项目索引/TOPICS取命中主题，both分别列来源与不完整状态。无query的 `memory:discover` 只发现库，不猜hash；旧ZCode迁移库只读。源码/实时Git/现行docs优先，索引只留钩子，同一经验维护一份正文，不注入整库或保存活账副本。留言按任务需要核验内置浏览器来源与origin，不可读记未核验。
 
 ## 按改动找文档
 
-改任何一块之前，先按这张表找到该看的文档；带日期文档只说明当时时点，改完的现行事实以源码与测试为准。
+规范入口不明时按表定位；目标与适用规范已知就直接处理。带日期文档只说明当时时点，现行事实以源码与测试为准。
 
 | 要改什么 | 先看（现行规范） | 再看（时点依据与证据） |
 | --- | --- | --- |
@@ -72,10 +57,5 @@ Codex / ZCode 共用项目规则和事实，各自适配平台工具。[流程�
 
 ## 带时间的记录与证据
 
-- 09-28 前后的带日期记录已各成组归档：状态快照在 [archive/status/](archive/status/)，其余单篇在 [archive/records-2026-09-28/](archive/records-2026-09-28/)（含[重构执行记录](archive/records-2026-09-28/REFACTOR-2026-09-28.md)）；标题中的“当前”以记录时间为准。
-- [归档总览](archive/README.md)和[模块交付资料](modules/README.md)保存已执行批次的计划、结果和审查；工程 E1–E8 与 M 批结果已各成组归档，不把批次结果当作现行规则。
-- [验收证据](evidence/README.md)保存报告和测试引用的数据；[预览页面](previews/README.md)含验收宿主与旧设计比较；[三线原始记录](archive/three-track-2026-09-27/)保留原报告与截图。
-- [归档审阅与执行记录](DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md)记录迁移、固定路径和待处理临时资料。移动或删除前复核文件归属与引用。
-- [项目文件夹与未提交现场盘点](archive/records-2026-09-28/PROJECT-FOLDER-INVENTORY-2026-09-28.md)记录 Vite 各层目录、生成物、重复内容和并行归属；`output/` 的 250 个实验目录见[逐项快照](evidence/agent-output-inventory-2026-09-28.tsv)。
-- [09-28 实验构建精简记录](archive/records-2026-09-28/BUILD-OUTPUT-CLEANUP-2026-09-28.md)列明五个已结题产物的原路径、本机去重归档、校验与恢复方式。
-- [09-28 项目概览页面](archive/records-2026-09-28/PROJECT-OVERVIEW-2026-09-28.html)和[静态图](archive/records-2026-09-28/OVERVIEW-2026-09-28.png)是该时点的视觉快照，数据以实时状态入口为准。
+- 带日期记录只说明当时的工作树与验证边界，改完的现行事实以源码与测试为准。09-28 前后的状态快照在 [archive/status/](archive/status/)，其余单篇在 [archive/records-2026-09-28/](archive/records-2026-09-28/)；[归档总览](archive/README.md)保存已执行批次的计划、结果和审查，不把批次结果当作现行规则。移动或删除前复核文件归属与引用（[归档审阅与执行记录](DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md)）。
+- [验收证据](evidence/README.md)保存报告和测试引用的数据；[预览页面](previews/README.md)含验收宿主与旧设计比较；[模块交付资料](modules/README.md)与各专题归档（[三线原始记录](archive/three-track-2026-09-27/)、实验构建精简、项目概览快照）从 [archive/README.md](archive/README.md) 进入。

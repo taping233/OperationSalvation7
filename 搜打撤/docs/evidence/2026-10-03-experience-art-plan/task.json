@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "experience-art-plan",
+  "date": "2026-10-03",
+  "owner": "Friday",
+  "goal": "更新昨天计划并形成以游戏体验和美术为主的可执行总纲，交给6.1s实施；最小化代码与流程改造",
+  "paths": [
+    "docs/evidence/2026-10-03-experience-art-plan",
+    "docs/evidence/2026-10-02-production-research/planning",
+    "docs/DEBT-CAMPAIGN-2026-10.md"
+  ],
+  "doneWhen": [
+    "旧任务完成状态与证据边界核对，避免重复排期",
+    "总目录包含步骤、属地、依赖、验收和不做项，6.1s收到首批执行任务",
+    "冗余候选逐路径核实且旧素材与生图脚本受保护"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "165个ID研究结论完整、五张锚点与帧资产复核、总纲已交6.1sol独立执行对话，handoff.json留证",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "docs现行347链接零发现；自有文档40本地链接、11JSON及coverage一致性通过，见validation.json",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "165条研究不等于全部当前实页验收；声音免验；数值性能/游戏全量/build/远端CI未核"
+  ],
+  "updatedAt": "2026-10-03T07:16:48.766Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

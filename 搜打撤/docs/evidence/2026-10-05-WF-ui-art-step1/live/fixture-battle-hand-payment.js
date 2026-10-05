@@ -1,0 +1,1 @@
+(async()=>{const q=window.__uiArtQA;await q.ordinary(['快意恩仇','初始攻击','初始攻击','镭射']);const h=window.SDT.Agent.observe().battle.hand.find(c=>c.name==='快意恩仇');return JSON.stringify(window.SDT.Battle.commands.playCard(h.uid,0));})()

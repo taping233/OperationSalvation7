@@ -1,0 +1,455 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-03",
+  "dispatchGroup": "工具研究所",
+  "reviewBasis": "当前源码定向读取、原计划指纹比较、Git相关历史/差异、7张既有截图亲读；只读调查，唯一输出为本文件。",
+  "snapshotHead": "425d039",
+  "rows": [
+    {
+      "id": "DATA",
+      "researchConclusion": "独立跑局数据与开发台数据共用dataPanelHTML；样本数/辅助身份/结果口径/导出与危险清空已随开发台批次落库。当前另有未提交provenance三态展示改动，不能把旧截图或已完成任务再次派发。",
+      "basis": [
+        "game/src/agent/agent.data.js:60",
+        "game/src/agent/agent.data.js:129",
+        "docs/evidence/2026-10-03-batch1-toolpages/README.md:17",
+        "git:14a0025；当前工作树agent.data.js有SYS-11增量"
+      ],
+      "visualStatus": "已亲读旧DATA.jpg和新版DEV-DATA.png；旧图human原文与清空布局已过时，新独立壳和当前provenance未实页核。",
+      "performanceRisk": "本地记录上限200、最近明细20行；聚合和表格同步生成，未测耗时，不默认上虚拟列表。",
+      "recommendedAction": "不再重做统计面板；跟随现有SYS-11归属收口，之后仅补独立壳、少样本/满记录与已有口袋条遮挡复核。"
+    },
+    {
+      "id": "CARD-DESIGNER",
+      "researchConclusion": "制作器源码含分组字段、机制词条和即时卡面预览，但全局写开关为false，入口跳回照相馆；此页没有当前可写交付。",
+      "basis": [
+        "game/src/hub/game.cardslib.common.js:25",
+        "game/src/hub/game.cardslib.designer.js:35",
+        "game/src/hub/game.cardslib.designer.js:102",
+        "game/src/hub/game.cardslib.page.js:489"
+      ],
+      "visualStatus": "SOURCE_ONLY_GUARDED：无原清单界面图，本轮未绕开开关。",
+      "performanceRisk": "每次输入刷新预览、描述更新机制片，未来启用时需测中文输入与悬浮倾斜；当前不可写路径不构成线上热点。",
+      "recommendedAction": "保持开关关闭；不单列美术重做。未来获准启用时再核结构化规则兼容性、保存错误反馈、输入保留与预览。"
+    },
+    {
+      "id": "CARDS-EXPORT",
+      "researchConclusion": "开发模式照相馆可展开导出工具；导出全库JSON，复制失败有手选替代，下载会释放ObjectURL，返回照相馆。",
+      "basis": [
+        "game/src/hub/game.cardslib.page.js:489",
+        "game/src/hub/game.cardslib.page.js:623",
+        "game/src/hub/game.cardslib.designer.js:304"
+      ],
+      "visualStatus": "SOURCE_ONLY：已有动作与只读文本框源码，无本页实图；不声称拥挤或遮挡。",
+      "performanceRisk": "全库JSON.stringify和转义一次完成，库增长时可能阻塞；仅风险未测。",
+      "recommendedAction": "随工具弹层统一复核一次复制失败、完整文本可选、下载与返回；无实证问题不改版。"
+    },
+    {
+      "id": "CARDS-IMPORT",
+      "researchConclusion": "写开关关闭，源码仍按id逐条upsert；只接收旧基础字段，未见rules/cls/hero等结构化身份完整回写，也没有批量预检或完整成功计数。属于未启用路径风险，不能当现行玩家导入故障。",
+      "basis": [
+        "game/src/hub/game.cardslib.common.js:25",
+        "game/src/hub/game.cardslib.designer.js:330",
+        "game/src/hub/game.cardslib.designer.js:343"
+      ],
+      "visualStatus": "SOURCE_ONLY_GUARDED：无实图，未开启或执行导入。",
+      "performanceRisk": "JSON解析及逐条存储可能放大批量耗时；当前被写守卫阻断。",
+      "recommendedAction": "不打开开关、不派发界面重绘；若将来启用，先做结构化字段保真、完整校验和失败/部分写入策略，再做布局。"
+    },
+    {
+      "id": "NODE-NOTE",
+      "researchConclusion": "节点编辑保留节点身份与来源配置；保存/清空存储失败会留在弹层，取消回idle。旧图显示黑色输入框与保存/清空同排、取消另行，属于低成本共享工具表单问题。",
+      "basis": [
+        "game/src/hub/game.notes.js:43",
+        "game/src/hub/game.notes.js:74",
+        "game/src/core/notes.js:13"
+      ],
+      "visualStatus": "已亲读NODE-NOTE-healthy.jpg：旧截图可见输入框材质突兀及按钮分组；本轮未采当前图，其他notes改动只证明清空确认修订，不证明该页已改。",
+      "performanceRisk": "set会读取并序列化整个备注字典；单条编辑风险低，未作性能测量。",
+      "recommendedAction": "并入共享工具表单小修，先当前窗口确认后统一输入承托和保存/取消/清空层级；不要单独造美术素材。"
+    },
+    {
+      "id": "NOTES-EXPORT",
+      "researchConclusion": "idle守卫下导出v3节点备注；只读JSON、复制失败手选、独立下载和关闭动作齐备，与照相馆备注不是同一种数据。",
+      "basis": [
+        "game/src/hub/game.notes.js:95",
+        "game/src/hub/game.notes.js:113"
+      ],
+      "visualStatus": "SOURCE_ONLY：无本页截图，不把NODE-NOTE截图代替导出页。",
+      "performanceRisk": "全量备注排序/序列化后写入textarea；大字典风险未测。",
+      "recommendedAction": "合并至工具导入导出一次复核，保留v3与坐标身份；没有实证问题则只补证不改。"
+    },
+    {
+      "id": "NOTES-IMPORT",
+      "researchConclusion": "idle守卫下支持v3 li/idx、旧x/y和字典；JSON失败有警告，逐条写失败计数可见，但已经成功的项不回滚，部分失败后关闭弹层。",
+      "basis": [
+        "game/src/hub/game.notes.js:140",
+        "game/src/hub/game.notes.js:152",
+        "game/src/core/notes.js:13"
+      ],
+      "visualStatus": "SOURCE_ONLY：无本页实图；部分失败文案/可恢复性尚未实页核。",
+      "performanceRisk": "逐条set反复读取/序列化全量字典，批量很大时存在放大开销；不把风险写成实测卡顿。",
+      "recommendedAction": "与备注保存错误反馈合并一个小任务：用离线夹具核格式错误和部分失败信息，必要时保留输入/明示数量；不扩大为通用导入框架。"
+    },
+    {
+      "id": "NOTES-CLEAR",
+      "researchConclusion": "原计划要求红色危险按钮和默认取消已完成：当前danger类且initialFocus指向取消，随b44c731落库。另源码clearAll吞存储异常，调用方仍显示已清空，是独立错误反馈缺口，旧测试只断言不抛错。",
+      "basis": [
+        "game/src/hub/game.notes.js:184",
+        "game/src/core/notes.js:25",
+        "tests/cell-notes-quota.test.js:34",
+        "git:b44c731"
+      ],
+      "visualStatus": "已亲读NOTES-CLEAR-healthy.jpg，但图内金色确认按钮为旧版，不得用来重新派发已经完成的danger样式。",
+      "performanceRisk": "单次removeItem无持续渲染；风险主要是结果真实性而非帧率。",
+      "recommendedAction": "销掉金钮改红任务；在共享存储失败反馈定向回归时补clearAll失败可见性，禁止实际清空用户备注作为验证。"
+    },
+    {
+      "id": "DEV-DEBUG",
+      "researchConclusion": "四页签改造已落库；常驻开发/影响存档说明、资源/发卡作用域与关闭后战斗重绘已存在。当前SYS-11未提交增量增加调试干预履历，不能混作本轮新成果。",
+      "basis": [
+        "game/src/run/game.run.dev.js:92",
+        "game/src/run/game.run.dev.js:163",
+        "game/src/run/game.run.dev.js:170",
+        "docs/evidence/2026-10-03-batch1-toolpages/README.md:55",
+        "git:14a0025"
+      ],
+      "visualStatus": "已亲读 docs/evidence/2026-10-03-batch1-toolpages/DEV-DEBUG.png；是既有ZCode当前窗口证据，本轮未操作浏览器。既有截图顶部口袋条压壳；归档已明确该共享层问题另有归属，当前修复状态未实页核。",
+      "performanceRisk": "发卡搜索只更新结果列表、避免重建输入宿主；没有本轮性能数据。",
+      "recommendedAction": "不重派四页签改造；仅跟随当前归属核SYS-11及共享弹层口袋条，真实快捷键入口仍需后续补证。"
+    },
+    {
+      "id": "DEV-AGENT",
+      "researchConclusion": "运行/停止、策略、快进、LLM配置和只读observe已分区，失败有停止说明；本轮只读源码及截图，没有启用自动跑局或读取实际凭证。",
+      "basis": [
+        "game/src/agent/agent.console.js:21",
+        "game/src/agent/agent.console.js:38",
+        "game/src/agent/agent.console.js:87",
+        "git:14a0025"
+      ],
+      "visualStatus": "已亲读 docs/evidence/2026-10-03-batch1-toolpages/DEV-AGENT.png；是既有ZCode当前窗口证据，本轮未操作浏览器。已看见停机按钮和配置空态，长内容可滚动；不证明已配置/实际调用/运行中状态。",
+      "performanceRisk": "observe同步JSON.stringify；实际自动运行与网络性能未测。",
+      "recommendedAction": "保留已做分区；只补未覆盖状态的验收，不新建接入、改配置或调用服务；声音免验。"
+    },
+    {
+      "id": "DEV-DATA",
+      "researchConclusion": "已落库开发壳身份、样本数、结果口径、危险清空及共享数据面板；当前另有SYS-11 provenance增量，不能重复实现旧计划。",
+      "basis": [
+        "game/src/run/game.run.dev.js:145",
+        "game/src/agent/agent.data.js:60",
+        "docs/evidence/2026-10-03-batch1-toolpages/README.md:17",
+        "git:14a0025"
+      ],
+      "visualStatus": "已亲读 docs/evidence/2026-10-03-batch1-toolpages/DEV-DATA.png；是既有ZCode当前窗口证据，本轮未操作浏览器。证据为空记录，不能证明有记录驱动标签或当前未提交provenance显示；截图上部摘要大留白及口袋条需实际复核后定性。",
+      "performanceRisk": "最近20局，全部聚合最多200局；无测量支持大规模重构。",
+      "recommendedAction": "与DATA共用一个后续验证，不再派发同一面板；空态、已有记录、危险按钮只验一次，区分两种外壳。"
+    },
+    {
+      "id": "DEV-KEYS",
+      "researchConclusion": "已落库列表化键位、同入口按钮、禁用原因、辅助导航身份；jump成功不隐藏新目标页。既有验收入口用了合成KeyboardEvent，不等于真实Ctrl+L已通过。",
+      "basis": [
+        "game/src/agent/agent.console.js:110",
+        "game/src/agent/agent.console.js:125",
+        "game/src/ui/quick-nav.js",
+        "docs/evidence/2026-10-03-batch1-toolpages/README.md:58",
+        "git:14a0025"
+      ],
+      "visualStatus": "已亲读 docs/evidence/2026-10-03-batch1-toolpages/DEV-KEYS.png；是既有ZCode当前窗口证据，本轮未操作浏览器。按钮/禁用原因清楚；存在共享口袋条叠压，不应拆成四页各修。",
+      "performanceRisk": "有限静态路由行，无持续动画或大列表热点证据。",
+      "recommendedAction": "不重复键位页改造；待共享壳处理后定向验可用/禁用与真实快捷键，不绕过守卫进入冻结域。"
+    },
+    {
+      "id": "SFX-AUDITION",
+      "researchConclusion": "独立工具HTML包含库/方案/搜索、分类卡片与固定底部播放器；加载失败、空搜索和播放错误有可见状态，焦点与减动效样式已设。",
+      "basis": [
+        "game/sfx-audition.html:22",
+        "game/sfx-audition.html:27",
+        "game/src/audio/sfx-audition.js:66",
+        "game/src/audio/sfx-audition.js:121",
+        "game/css/sfx-audition.css:1"
+      ],
+      "visualStatus": "SOURCE_ONLY_AUDIO_EXEMPT：仅布局源码核对，无页面图；按用户要求未播放、未评价听感或音源接线。",
+      "performanceRisk": "搜索重建整张卡片网格，固定播放器有blur；需实际确认遮挡/列表数量后才测，不默认优化。",
+      "recommendedAction": "低优先保持现状；如顺路验独立工具，仅看搜索空态/错误提示/底部留白，不验声音、不扩音效任务。"
+    },
+    {
+      "id": "HOME-SCENE",
+      "researchConclusion": "renderHomeScene与命令/呈现/素材fallback存在，renderHub当前六页签分派未调用该场景；源码存在不代表已上线。按当前任务冻结，不接入口。",
+      "basis": [
+        "game/src/hub/game.hub.js:80",
+        "game/src/hub/game.hub.js:134",
+        "game/src/home/home.scene.js:607"
+      ],
+      "visualStatus": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。",
+      "performanceRisk": "潜在Pixi/拖放/ResizeObserver生命周期风险已有dispose路径；当前入口未接，未测运行。",
+      "recommendedAction": "保留冻结与独立业务口径，本轮不排实现；日后明确解冻才补实际入口、空态/失败态和当前窗口证据。"
+    },
+    {
+      "id": "LAB-DOOR",
+      "researchConclusion": "独立研究所门：现有/所需钥匙显示，unlockNestGate结果分支明确，缺钥匙拒绝且失败不进入；研究所第二地图按章程暂缓。",
+      "basis": [
+        "game/src/run/game.nest.js:102",
+        "docs/production/project/CHARTER.md:24"
+      ],
+      "visualStatus": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。",
+      "performanceRisk": "轻量模态，无性能热点证据；不做解锁或修改储备。",
+      "recommendedAction": "保留冻结与独立业务口径，本轮不排实现；日后明确解冻才补实际入口、空态/失败态和当前窗口证据。"
+    },
+    {
+      "id": "LAB-PREP",
+      "researchConclusion": "独立备战要求10张非职业招式/装备，最多3符文，空仓提示与按钮计数存在；列表每次选取重绘。",
+      "basis": [
+        "game/src/run/game.nest.js:142",
+        "game/src/run/game.nest.js:164"
+      ],
+      "visualStatus": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。",
+      "performanceRisk": "eligible反复筛选仓库并重绘全列表；大量仓库候选时可能变慢，未测。",
+      "recommendedAction": "保留冻结与独立业务口径，本轮不排实现；日后明确解冻才补实际入口、空态/失败态和当前窗口证据。"
+    },
+    {
+      "id": "LAB-MAP",
+      "researchConclusion": "顺序研究所地图仅下一格可点，符文选择与定向盒选择单独显示；不等于四层主地图或现行终局覆盖。",
+      "basis": [
+        "game/src/run/game.nest.js:228",
+        "game/src/run/game.nest.js:266"
+      ],
+      "visualStatus": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。",
+      "performanceRisk": "地图固定12节点，重绘量有限；大符文/卡盒边界未测。",
+      "recommendedAction": "保留冻结与独立业务口径，本轮不排实现；日后明确解冻才补实际入口、空态/失败态和当前窗口证据。"
+    },
+    {
+      "id": "LAB-RUNES",
+      "researchConclusion": "符文法阵提供献祭3张牌选符文、整牌盒紧急撤离、离开；不足3张在动作后警告。涉及牺牲与结算，评审不执行。",
+      "basis": [
+        "game/src/run/game.nest.js:391",
+        "game/src/run/game.nest.js:401"
+      ],
+      "visualStatus": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。",
+      "performanceRisk": "5项有限候选，无性能改造依据；风险重点为献祭范围与结果说明。",
+      "recommendedAction": "保留冻结与独立业务口径，本轮不排实现；日后明确解冻才补实际入口、空态/失败态和当前窗口证据。"
+    },
+    {
+      "id": "LAB-ALTAR",
+      "researchConclusion": "研究所祭坛提供英雄/职业牌或3次符文重掷；无符文或次数耗尽禁用重掷。候选池与实际获得内容需未来解冻后验证。",
+      "basis": [
+        "game/src/run/game.nest.js:417",
+        "game/src/run/game.nest.js:429"
+      ],
+      "visualStatus": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。",
+      "performanceRisk": "卡库筛选与随机取样发生在动作路径，尚无耗时证据。",
+      "recommendedAction": "保留冻结与独立业务口径，本轮不排实现；日后明确解冻才补实际入口、空态/失败态和当前窗口证据。"
+    },
+    {
+      "id": "LAB-SHOP",
+      "researchConclusion": "研究所商店有限随机卡、职业卡、符文三组，价格和已售呈现，余额不足在购买动作中提示；独立于基地商店。",
+      "basis": [
+        "game/src/run/game.nest.js:451",
+        "game/src/run/game.nest.js:468"
+      ],
+      "visualStatus": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。",
+      "performanceRisk": "固定4+3+3商品；候选卡重试上限50，未见需优先优化证据。",
+      "recommendedAction": "保留冻结与独立业务口径，本轮不排实现；日后明确解冻才补实际入口、空态/失败态和当前窗口证据。"
+    },
+    {
+      "id": "LAB-RETRY",
+      "researchConclusion": "撤离未保存弹层保留本次研究所数据并提供重试；seed、slot、runId和runesRef检查防旧异步结果覆盖新现场。",
+      "basis": [
+        "game/src/run/game.nest.js:508",
+        "game/src/run/game.nest.js:519",
+        "game/src/run/game.nest.js:586"
+      ],
+      "visualStatus": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。",
+      "performanceRisk": "重试等待是持久化路径，不能通过视觉任务改事务/身份守卫；本轮未测。",
+      "recommendedAction": "保留冻结与独立业务口径，本轮不排实现；日后明确解冻才补实际入口、空态/失败态和当前窗口证据。"
+    },
+    {
+      "id": "LAB-ENDING",
+      "researchConclusion": "已有三页插画+打字字幕/跳过/键盘路径，turbo同出口；三张ending资源确实在盘，源码旧注释'出图后补'不能作为缺图结论。属于冻结研究所专属演出。",
+      "basis": [
+        "game/src/run/lab.ending.js:13",
+        "game/src/run/lab.ending.js:31",
+        "game/assets/scenes/lab-ending/ending-1.webp",
+        "game/assets/scenes/lab-ending/ending-2.webp",
+        "game/assets/scenes/lab-ending/ending-3.webp"
+      ],
+      "visualStatus": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。仅确认资源文件存在，未亲读三图，不评价画质。",
+      "performanceRisk": "一次创建三页背景，30ms文本interval及淡入；解冻后需验重复启动/关闭清理，未测帧率。",
+      "recommendedAction": "保留冻结与独立业务口径，本轮不排实现；日后明确解冻才补实际入口、空态/失败态和当前窗口证据。不另建三套壳。"
+    },
+    {
+      "id": "LAB-DONE",
+      "researchConclusion": "独立研究所结算展示击杀/首脑/血量、卡牌/符文/金币分数及累计最佳，并回标题；不以此证明主图通关结算。",
+      "basis": [
+        "game/src/run/game.nest.js:633",
+        "game/src/run/game.nest.js:612"
+      ],
+      "visualStatus": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。",
+      "performanceRisk": "轻量文本弹层，无性能热点证据；统计记录/持久化不属视觉重做。",
+      "recommendedAction": "保留冻结与独立业务口径，本轮不排实现；日后明确解冻才补实际入口、空态/失败态和当前窗口证据。"
+    },
+    {
+      "id": "LAB-ENDING-1",
+      "researchConclusion": "crisis变体为三页演出的第一页，引用ending-1.webp，与另外两页共用同一壳与输入处理。",
+      "basis": [
+        "game/src/run/lab.ending.js:15",
+        "game/assets/scenes/lab-ending/ending-1.webp"
+      ],
+      "visualStatus": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。资源存在，未亲读原画。",
+      "performanceRisk": "共享LAB-ENDING三背景载入风险；不另估独立系统性能。",
+      "recommendedAction": "保留冻结与独立业务口径，本轮不排实现；日后明确解冻才补实际入口、空态/失败态和当前窗口证据。解冻后只核本页文字/裁切，不派独立改造。"
+    },
+    {
+      "id": "LAB-ENDING-2",
+      "researchConclusion": "flight变体为第二页，引用ending-2.webp；切页仅切on类并启动本页字幕。",
+      "basis": [
+        "game/src/run/lab.ending.js:20",
+        "game/assets/scenes/lab-ending/ending-2.webp"
+      ],
+      "visualStatus": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。资源存在，未亲读原画。",
+      "performanceRisk": "共享LAB-ENDING计时器与背景预算。",
+      "recommendedAction": "保留冻结与独立业务口径，本轮不排实现；日后明确解冻才补实际入口、空态/失败态和当前窗口证据。解冻后只核本页文字/裁切，不派独立改造。"
+    },
+    {
+      "id": "LAB-ENDING-3",
+      "researchConclusion": "abyss变体为第三页，引用ending-3.webp；完成后回同一onDone结算出口。",
+      "basis": [
+        "game/src/run/lab.ending.js:25",
+        "game/assets/scenes/lab-ending/ending-3.webp"
+      ],
+      "visualStatus": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。资源存在，未亲读原画。",
+      "performanceRisk": "共享LAB-ENDING清理与返回出口；未运行。",
+      "recommendedAction": "保留冻结与独立业务口径，本轮不排实现；日后明确解冻才补实际入口、空态/失败态和当前窗口证据。解冻后只核最后一页到结算，不派独立改造。"
+    }
+  ],
+  "sourceInputs": [
+    {
+      "path": "docs/evidence/2026-10-02-production-research/planning/pages/pages.json",
+      "sha256": "ffc58a7bc957b98f3a27954a6213f1b1704dff73218ab6688df58d4cc2eb9a30"
+    },
+    {
+      "path": "docs/evidence/2026-10-03-batch1-toolpages/README.md",
+      "sha256": "1cca11a48c36bf3146cdf99ea9a499df9c54dd65a27bc77827f2eef07f3e6487"
+    },
+    {
+      "path": "docs/production/project/CHARTER.md",
+      "sha256": "f6cd36814b80e13278b143a523a1d39fba026f92d6b819ec715a4c1bee6aafb4"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.common.js",
+      "sha256": "1479c11d9710dc126e2ee3b417eef91edb782f4596120f07978fd828070a9261"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.designer.js",
+      "sha256": "7991adb7c1a8e3de3266eec87b503491e6d9b65f27ca358685ebbba6f64b8cb5"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.page.js",
+      "sha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52"
+    },
+    {
+      "path": "game/src/hub/game.notes.js",
+      "sha256": "d60c6964c677a7461ec21828a14f3d9a4b097fcba4cbb833af150044827cdcd6"
+    },
+    {
+      "path": "game/src/core/notes.js",
+      "sha256": "2af6b9b239918392d309fc940b820bc86291fd8c9972a85134a71f41751eea27"
+    },
+    {
+      "path": "tests/cell-notes-quota.test.js",
+      "sha256": "643b27f69ede1a058834365e36a02e38a6ff2897e6cd4ceafebe83ad9dbe74c9"
+    },
+    {
+      "path": "game/src/run/game.run.dev.js",
+      "sha256": "adca20a4cf94501634ddf5715cccc4ee5e5727c01a2ec25bf6cf3db99829f8ad"
+    },
+    {
+      "path": "game/src/agent/agent.console.js",
+      "sha256": "098a10cefdbe945c1d4227beaf84dba3fcd73d45f7545fff657174adf3e707b5"
+    },
+    {
+      "path": "game/src/agent/agent.data.js",
+      "sha256": "5b1910d82355a329d3a18c91d75fdc98adcffa8c263c00c00ec0a3f705d14501"
+    },
+    {
+      "path": "game/src/ui/quick-nav.js",
+      "sha256": "77560b7ee412e961c7362afe805ba64759befdf233a31dc5e6be37fde6de713e"
+    },
+    {
+      "path": "game/src/audio/sfx-audition.js",
+      "sha256": "e2a5dbbfc72747a51f1023a70bccd4f8ed33785126e0433a2ab2473881bdebdc"
+    },
+    {
+      "path": "game/sfx-audition.html",
+      "sha256": "37afecbe0a952dfe29f273e1a7c1756c57041df57c51045290f4258e1f888858"
+    },
+    {
+      "path": "game/css/sfx-audition.css",
+      "sha256": "efef56115f0fea572dbd044e21dc32e40554bf515fb384e69c68f13da3bf19eb"
+    },
+    {
+      "path": "game/src/hub/game.hub.js",
+      "sha256": "bd0cec0ddcfac314380bfab5bfde945fead4cccdc2a3168d56a1ea817ecb102e"
+    },
+    {
+      "path": "game/src/home/home.scene.js",
+      "sha256": "abbbd5aaabc4afae047302bc2e7bd62858fbc7a6386b1505e60b46dcbe957604"
+    },
+    {
+      "path": "game/src/run/game.nest.js",
+      "sha256": "72bd4f0f893f1fbf8e5c808c4f8bfd979f30aa095843e58f2f5426b0e0a3f538"
+    },
+    {
+      "path": "game/src/run/lab.ending.js",
+      "sha256": "4ebedd8dd70253956410986e19b45d61a3b993514fb5a1dbc4fab1bc01d91b6c"
+    },
+    {
+      "path": "docs/evidence/2026-10-03-batch1-toolpages/DEV-DEBUG.png",
+      "sha256": "d8723d2e5c2b4cea226a4828fb861ecba5a73b63f2f60dfea1096760838b1df8"
+    },
+    {
+      "path": "docs/evidence/2026-10-03-batch1-toolpages/DEV-AGENT.png",
+      "sha256": "725bc8b0b73657393b36f384407bb53feb105d35ece0841998a734f4d1817b5c"
+    },
+    {
+      "path": "docs/evidence/2026-10-03-batch1-toolpages/DEV-DATA.png",
+      "sha256": "74a428bea9e5da7adf2fc65518c92571e00f5d4185db656200132efbc0e66104"
+    },
+    {
+      "path": "docs/evidence/2026-10-03-batch1-toolpages/DEV-KEYS.png",
+      "sha256": "0ec03752cc8d4fefe461bad146b74ed438858de4a983013aa53a1f2748eaf836"
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/DATA.jpg",
+      "sha256": "523c4b2aca873da63ec355138611997ddd554012ca6f1e7c238128996e85c515"
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/NODE-NOTE-healthy.jpg",
+      "sha256": "5efb9351dcf05456e72f651e24616e79cb57fc794ca61785966d0197647f1b71"
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/NOTES-CLEAR-healthy.jpg",
+      "sha256": "1695fa6fac6cda6d6d6bf050da286f46a5cfe3908a255bfeb6232d8af9878d88"
+    },
+    {
+      "path": "game/assets/scenes/lab-ending/ending-1.webp",
+      "sha256": "a3da0938060abb7d662d37df29dd70a766e0d631113062850113cdb445802d65"
+    },
+    {
+      "path": "game/assets/scenes/lab-ending/ending-2.webp",
+      "sha256": "e33494abfd8461a2d459058f2574f3a1f47b8abb939c3466f528c18e6a0630e1"
+    },
+    {
+      "path": "game/assets/scenes/lab-ending/ending-3.webp",
+      "sha256": "4ae4a68c948af79cc6a98da3ff630e88481bd14a64262c440aa35bf869def02a"
+    }
+  ],
+  "limitations": [
+    "本轮未使用浏览器、未启动服务、未采性能数据、未运行游戏或测试；声音按用户明确要求免验，SFX只核布局源码。",
+    "四页签既有图来源为2026-10-03批次ZCode内置当前窗口；入口用KeyboardEvent、页签点击来源见原证据。此处复用图不冒充本轮新采或真实快捷键通过。",
+    "DATA/DEV-DATA/DEV-DEBUG相关文件存在其他会话SYS-11未提交修改，本文件仅记录当前所见并保存SHA；不得覆盖、重复派发或认领其交付。",
+    "NOTES-CLEAR旧图已被当前danger源码修订超越；截图不能证明当前危险按钮仍是旧色。clearAll静默失败为源码可证反馈缺口，未触发用户数据删除。",
+    "HOME-SCENE和全部LAB条目保持冻结；确认源码/资源存在不表示上线、实页验收或解冻。",
+    "CARD-DESIGNER/CARDS-IMPORT保持写开关false；导入字段与性能只是未启用源码风险，未执行导入、不改存档。",
+    "SOURCE_ONLY项目没有本页图，未把条件风险写成已确认的布局问题。性能风险均未经本轮测量，不直接转为优化任务。",
+    "源码文件的SHA为写档时现场指纹，后续变更须定向重核；历史提交证明相应批次曾落库，不证明新未提交增量已通过验证。"
+  ]
+}

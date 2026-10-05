@@ -1,0 +1,396 @@
+{
+  "actions": [
+    {
+      "detail": "Playwright locator click：远征档案/手册/留言/设置/成就/照相馆打开及返回；静音两次切换恢复原状态",
+      "type": "real-input"
+    },
+    {
+      "detail": "Codex 内置浏览器当前窗口，未设置视口覆盖",
+      "type": "screenshot"
+    },
+    {
+      "detail": "DOM计算样式、入口尺寸与档案真实空态；退出按钮仅检查标记，不触发关闭",
+      "type": "static-inspection"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "title-heading",
+      "key": "heading",
+      "rect": {
+        "height": 228.8125,
+        "width": 382.2083435058594,
+        "x": 61.53125,
+        "y": 152.7916717529297
+      },
+      "selector": "#title .title-heading",
+      "styles": {
+        "color": "rgb(232, 238, 234)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16.5px",
+        "height": "269.191px",
+        "opacity": "1",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "449.657px"
+      },
+      "tag": "DIV",
+      "text": "THE ASCENSION SOCIETY\n          升格会的冬日猜想\n          于风雪深处，寻回失落的故事。"
+    },
+    {
+      "attributes": {
+        "id": "btnTitleExit"
+      },
+      "identity": "btnTitleExit",
+      "key": "links",
+      "rect": {
+        "height": 40.79166793823242,
+        "width": 45.89583587646485,
+        "x": 61.53125,
+        "y": 20.39583396911621
+      },
+      "selector": "#title .ak-hud button",
+      "styles": {
+        "color": "rgb(244, 247, 244)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "47.9902px",
+        "opacity": "1",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "53.9951px"
+      },
+      "tag": "BUTTON",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "id": "btnTitleMute"
+      },
+      "identity": "btnTitleMute",
+      "key": "links",
+      "rect": {
+        "height": 40.79166793823242,
+        "width": 45.89583587646485,
+        "x": 107.42708587646484,
+        "y": 20.39583396911621
+      },
+      "selector": "#title .ak-hud button",
+      "styles": {
+        "color": "rgb(244, 247, 244)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "47.9902px",
+        "opacity": "1",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "53.9951px"
+      },
+      "tag": "BUTTON",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "id": "mGuide"
+      },
+      "identity": "mGuide",
+      "key": "links",
+      "rect": {
+        "height": 40.79166793823242,
+        "width": 103.44792175292967,
+        "x": 173.7291717529297,
+        "y": 20.39583396911621
+      },
+      "selector": "#title .ak-hud button",
+      "styles": {
+        "color": "rgb(228, 237, 239)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "47.9902px",
+        "opacity": "1",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "121.703px"
+      },
+      "tag": "BUTTON",
+      "text": "远征手册"
+    },
+    {
+      "attributes": {
+        "id": "mInbox"
+      },
+      "identity": "mInbox",
+      "key": "links",
+      "rect": {
+        "height": 40.79166793823242,
+        "width": 103.44792175292967,
+        "x": 283.96875,
+        "y": 20.39583396911621
+      },
+      "selector": "#title .ak-hud button",
+      "styles": {
+        "color": "rgb(228, 237, 239)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "47.9902px",
+        "opacity": "1",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "121.703px"
+      },
+      "tag": "BUTTON",
+      "text": "留言信箱"
+    },
+    {
+      "attributes": {
+        "id": "mAch"
+      },
+      "identity": "mAch",
+      "key": "links",
+      "rect": {
+        "height": 74.79167175292969,
+        "width": 222.6979217529297,
+        "x": 81.92708587646484,
+        "y": 550.0729370117188
+      },
+      "selector": "#title .ak-hud button",
+      "styles": {
+        "color": "rgb(232, 237, 240)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "87.9902px",
+        "opacity": "1",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "261.998px"
+      },
+      "tag": "BUTTON",
+      "text": "0/26\n            \n            成就\n            Achievement"
+    },
+    {
+      "attributes": {
+        "id": "btnCardLib"
+      },
+      "identity": "btnCardLib",
+      "key": "links",
+      "rect": {
+        "height": 74.79167175292969,
+        "width": 222.6979217529297,
+        "x": 61.53125,
+        "y": 435.4791870117187
+      },
+      "selector": "#title .ak-hud button",
+      "styles": {
+        "color": "rgb(232, 237, 240)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "87.9902px",
+        "opacity": "1",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "261.998px"
+      },
+      "tag": "BUTTON",
+      "text": "照相馆\n            Photo Studio"
+    },
+    {
+      "attributes": {
+        "id": "mSettings"
+      },
+      "identity": "mSettings",
+      "key": "links",
+      "rect": {
+        "height": 43.34375,
+        "width": 108.79167175292967,
+        "x": 707.0104370117188,
+        "y": 695.15625
+      },
+      "selector": "#title .ak-hud button",
+      "styles": {
+        "color": "rgb(232, 237, 240)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "50.9926px",
+        "opacity": "1",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "127.99px"
+      },
+      "tag": "BUTTON",
+      "text": "设置\n            Settings"
+    },
+    {
+      "attributes": {
+        "id": "mStart"
+      },
+      "identity": "mStart",
+      "key": "links",
+      "rect": {
+        "height": 144.5,
+        "width": 280.5,
+        "x": 841.3021240234375,
+        "y": 594.8541870117188
+      },
+      "selector": "#title .ak-hud button",
+      "styles": {
+        "color": "rgb(12, 24, 34)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "170px",
+        "opacity": "1",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "330px"
+      },
+      "tag": "BUTTON",
+      "text": "进入远征档案\n            \n            EXPEDITION ARCHIVE / 选档启程"
+    },
+    {
+      "attributes": {},
+      "identity": "ak-user",
+      "key": "archive",
+      "rect": {
+        "height": 64.40625,
+        "width": 149.59375,
+        "x": 972.2083740234376,
+        "y": 20.39583396911621
+      },
+      "selector": "#title .ak-user",
+      "styles": {
+        "color": "rgb(232, 238, 234)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16.5px",
+        "height": "75.7721px",
+        "opacity": "1",
+        "pointer-events": "auto",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "visibility": "visible",
+        "width": "175.993px"
+      },
+      "tag": "DIV",
+      "text": "Archive--\n              尚无档案，等待远征"
+    },
+    {
+      "attributes": {
+        "id": "warmupTip"
+      },
+      "identity": "warmupTip",
+      "key": "preheat",
+      "rect": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#warmupTip",
+      "styles": {
+        "color": "rgb(207, 227, 234)",
+        "display": "none",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12.5px",
+        "height": "auto",
+        "opacity": "0",
+        "pointer-events": "none",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "300px"
+      },
+      "tag": "DIV",
+      "text": "❄美术资源预热中 818/818\n            正在准备卡面与场景，减少首次进入时的等待"
+    },
+    {
+      "attributes": {},
+      "identity": "ak-sec",
+      "key": "stats",
+      "rect": {
+        "height": 26,
+        "width": 100.09375,
+        "x": 61.53125,
+        "y": 706.5521240234375
+      },
+      "selector": "#title .ak-sec",
+      "styles": {
+        "color": "rgb(162, 181, 192)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16.5px",
+        "height": "30.5882px",
+        "opacity": "1",
+        "pointer-events": "auto",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "visibility": "visible",
+        "width": "117.757px"
+      },
+      "tag": "DIV",
+      "text": "已成功撤离 0 次"
+    }
+  ],
+  "observedAt": "2026-10-03T15:36:51.112Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.5,
+      "height": 764,
+      "width": 1183
+    }
+  },
+  "scene": "title-home-layout",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-03-WF-home-layout/after.jpg"
+  ],
+  "selectors": [
+    {
+      "key": "heading",
+      "selector": "#title .title-heading"
+    },
+    {
+      "key": "links",
+      "selector": "#title .ak-hud button"
+    },
+    {
+      "key": "archive",
+      "selector": "#title .ak-user"
+    },
+    {
+      "key": "preheat",
+      "selector": "#warmupTip"
+    },
+    {
+      "key": "stats",
+      "selector": "#title .ak-sec"
+    }
+  ]
+}

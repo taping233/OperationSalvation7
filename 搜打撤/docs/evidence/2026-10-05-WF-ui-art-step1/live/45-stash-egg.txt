@@ -1,0 +1,27 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container crystal 宠物蛋, ID: overlay
+		3 container
+			4 button Description: 关闭, ID: ovCloseX
+			5 heading crystal 宠物蛋, Value: 2, ID: ovTitle
+				6 image crystal
+				7 text  宠物蛋
+			8 container
+				9 text 0
+				10 image 宠物蛋
+				11 text 宠物蛋
+				12 text 资源 · 传说
+				13 text 可以孵化宠物。
+				14 container
+					15 image coin
+					16 text 5
+				17 text ×1 张 · 孵化消耗：宠物蛋 ×1 +  50 币 （储备 0）
+				18 image paw
+				19 text  孵化将随机获得 1 只 未拥有 的宠物（还差 6 只集齐）。
+				20 button (disabled) paw 孵化（-1 蛋 -50 币）
+					21 image paw
+					22 text  孵化（-1 蛋 -50 币）
+				23 button ↩ 返回仓库
+				24 text 01
+
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/

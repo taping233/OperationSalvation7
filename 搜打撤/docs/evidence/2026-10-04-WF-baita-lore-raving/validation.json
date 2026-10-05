@@ -1,0 +1,22 @@
+{
+  "targetErrors": [],
+  "otherErrors": 332,
+  "unchangedWarnings": 832,
+  "targetMapping": "baita-lore-raving-brush-v1-20261004",
+  "browser": {
+    "origin": "http://127.0.0.1:5200",
+    "platform": "Codex IAB",
+    "currentWindow": true,
+    "thumbnailSize": [
+      448,
+      448
+    ],
+    "fullSize": [
+      1254,
+      1254
+    ],
+    "loaded": true,
+    "consoleErrors": 0,
+    "input": "clicked Photo Studio; native setValue search; screenshot/read-only DOM observed full-size detail"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "method": "built-in ImageGen; encoding and existing thumbnail bake only",
+  "outputs": [
+    {
+      "path": "game/assets/cards/spell-cc-demon.webp",
+      "bytes": 226580,
+      "sha256": "020b1f78803c47b8398adb30181246a8ce27023b7528a1d070f8fa3707ec2216",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "game/assets/thumbs/cards/spell-cc-demon.webp",
+      "bytes": 32098,
+      "sha256": "7c3ada4655f7236297e58da16ecc232e936b0544f711c487a19569da838ee995",
+      "size": [
+        448,
+        336
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "game/assets/ui/icons/settings-gear-r2.webp",
+      "bytes": 7822,
+      "sha256": "a05f9465286915b601a17e4a87db5bef78f4372d634d62da37ecebc4e412c462",
+      "size": [
+        128,
+        128
+      ],
+      "mode": "RGBA"
+    }
+  ],
+  "raw": [
+    {
+      "path": ".tmp/imagegen/feedback-r2/card.png",
+      "bytes": 2138499,
+      "sha256": "dd2b5772a84b561dab12022b9ce3fc8ff9eeec367ae2097f44a6825533f3ce34",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": ".tmp/imagegen/feedback-r2/gear.png",
+      "bytes": 1046081,
+      "sha256": "ecefad16a7142749dfc8c45c1bbeddfb5fbe95f40df498af5446b89fc9e538b0",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    }
+  ],
+  "originals": [
+    {
+      "path": "docs/evidence/2026-10-04-WF-feedback-r2/originals/full-spell-cc-demon.webp",
+      "bytes": 86500,
+      "sha256": "f33af5c27d130eba12693b94fda76f81f29b0b2c09b87adea450993375637319",
+      "size": [
+        896,
+        679
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "docs/evidence/2026-10-04-WF-feedback-r2/originals/thumb-spell-cc-demon.webp",
+      "bytes": 21536,
+      "sha256": "e6814a932b6b1d599d4efd0885558f07b3ab9da1cbdfad1397a517a94c38101e",
+      "size": [
+        448,
+        340
+      ],
+      "mode": "RGB"
+    }
+  ]
+}

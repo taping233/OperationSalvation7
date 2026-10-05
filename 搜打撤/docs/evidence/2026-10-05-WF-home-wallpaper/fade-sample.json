@@ -1,0 +1,17 @@
+{
+  "layers": [
+    {
+      "inset": "0px",
+      "opacity": "0.997473",
+      "size": "cover",
+      "transition": "opacity 0.5s ease-in-out"
+    },
+    {
+      "inset": "35.9436px 61.6054px",
+      "opacity": "0.00252749",
+      "size": "contain",
+      "transition": "opacity 0.5s ease-in-out"
+    }
+  ],
+  "selected": "ensemble"
+}

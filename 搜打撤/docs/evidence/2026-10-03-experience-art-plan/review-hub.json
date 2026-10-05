@@ -1,0 +1,2923 @@
+{
+  "schemaVersion": 1,
+  "reviewDate": "2026-10-03",
+  "scope": "入口基地：36基本页及40变体；只读调研",
+  "rows": [
+    {
+      "id": "TITLE",
+      "researchConclusion": "保留",
+      "basis": {
+        "observations": "亲读标题旧图，中文入口和主动作清楚；花体难读但不承载必须信息。菜单源SHA同昨日。",
+        "source": {
+          "path": "game/src/ui/game.menu.js",
+          "anchor": "function showTitle",
+          "line": 25,
+          "baselineSha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "sha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-seven-departments-review/v2/current-title.jpg",
+            "exists": true,
+            "sha256": "876f554f4b62c4708856c449e3d9ea6404333296e0a4217dea99fff2328f4189",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/ui/game.menu.js",
+          "game/css/title-p0.css",
+          "game/css/page-slot-select.css"
+        ]
+      },
+      "recommendedAction": "保留功能构图；低优先级校装饰/焦点，补有档与键盘，不据此重画背景。",
+      "kind": "basic",
+      "name": "标题／主入口",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。循环filter/drop-shadow仅是长帧测量点，不能判定卡顿。"
+    },
+    {
+      "id": "SLOTS",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "observations": "亲读五空档图，状态清楚；非空/在途/损坏未见。源码已分run/base/empty与单档错误。",
+        "source": {
+          "path": "game/src/ui/game.menu.js",
+          "anchor": "function openSlotPicker",
+          "line": 586,
+          "baselineSha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "sha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-seven-departments-review/v2/current-slots.jpg",
+            "exists": true,
+            "sha256": "fef6716479e6cdf844a4a62f85ab375caf1e7c79e2ae56e80a0fa439405ed754",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/ui/game.menu.js",
+          "game/css/title-p0.css",
+          "game/css/page-slot-select.css"
+        ]
+      },
+      "recommendedAction": "补非空/在途/恢复失败/确认；拥挤才让装饰区给状态，不重写存档。",
+      "kind": "basic",
+      "name": "五档远征档案",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "HUB-DEPLOY",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "observations": "基地旧图大标题占主列，模式比较字小；主动作/准备摘要可辨。",
+        "source": {
+          "path": "game/src/hub/game.hub.depart.js",
+          "anchor": "function hubDeployHTML",
+          "line": 14,
+          "baselineSha256": "bac138ae4581178bfe1a23554e465c7fc89d254147cdfe5f2266f3398edce9fa",
+          "sha256": "bac138ae4581178bfe1a23554e465c7fc89d254147cdfe5f2266f3398edce9fa",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-seven-departments-review/v2/current-base.jpg",
+            "exists": true,
+            "sha256": "e149108d4592db15ba6548421695890fef0ed4af9ae6dbebdc49b00192c35fd3",
+            "personallyReviewed": true
+          },
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser-assisted/21-base-return.jpg",
+            "exists": true,
+            "sha256": "2756cc894bf4871ba1a3911718a90e629e29e013e78409db23608d29b45132ad",
+            "personallyReviewed": false
+          }
+        ],
+        "relatedPaths": [
+          "game/src/hub/game.hub.depart.js",
+          "game/css/expedition-hub.css",
+          "game/css/page-hub.css"
+        ]
+      },
+      "recommendedAction": "敌人/经验/掉落差异直接对照，减重复说明；不改倍率、不扩研究所。",
+      "kind": "basic",
+      "name": "远征基地／出发页",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "HUB-STASH",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "observations": "658×764历史图只见仓库前两行/口袋首项，有双滚动；不代表今天窗口。",
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function hubStashHTML",
+          "line": 87,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser-assisted/24-stash-after-reload.jpg",
+            "exists": true,
+            "sha256": "9283eb2b8532a54cf9101a8cee3288039fba449e6a3f82d5808a46de3016398d",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/hub/game.hub.pages.js",
+          "game/css/page-stash.css",
+          "game/css/expedition-inventory.css"
+        ]
+      },
+      "recommendedAction": "当前窗口补满仓/口袋/宠物可达性；双滚动阻碍任务才收敛，保留经济流程。",
+      "kind": "basic",
+      "name": "基地／仓库及消耗口袋",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "PREP",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "observations": "整备旧图小卡长规则拥挤，右侧大部空白但确认明确。",
+        "source": {
+          "path": "game/src/hub/game.hub.depart.js",
+          "anchor": "function renderDepartPrep",
+          "line": 126,
+          "baselineSha256": "bac138ae4581178bfe1a23554e465c7fc89d254147cdfe5f2266f3398edce9fa",
+          "sha256": "bac138ae4581178bfe1a23554e465c7fc89d254147cdfe5f2266f3398edce9fa",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-seven-departments-review/v2/current-preparation.jpg",
+            "exists": true,
+            "sha256": "91603175a3ba400097b690d99d19413111bdaa5435f46be3f10f77c71b580d8a",
+            "personallyReviewed": false
+          },
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/PREP-stable.jpg",
+            "exists": true,
+            "sha256": "c0059e306e62c85b5dc893984e5aeea597f9e4a155542fe027b1b86fb743e99c",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/hub/game.hub.depart.js",
+          "game/css/preparation.css",
+          "game/css/page-deploy.css",
+          "game/css/expedition-roster.css"
+        ]
+      },
+      "recommendedAction": "小卡负责识别/数量/选入，完整规则沿详情；核加减/满格/固定卡，不改带入规则。",
+      "kind": "basic",
+      "name": "出发整备",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "CLASS-CHOICE",
+      "researchConclusion": "保留",
+      "basis": {
+        "observations": "旧图可见五头像与无大立绘；五张默认图获认可不等于UI/皮肤认可。同文件未提交改动在撤离结果区。",
+        "source": {
+          "path": "game/src/run/game.run.altar.js",
+          "anchor": "export function openClassChoice",
+          "line": 95,
+          "baselineSha256": "9249104eb75dda983f18dc064edac3810347e8fcba6699bca6994c245d11a7e1",
+          "sha256": "fa41f1c3206db40027b8345b540d6c5e65f3a8e78d7f19405aba44b3ebe1afef",
+          "changed": true
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-seven-departments-review/v2/current-character.jpg",
+            "exists": true,
+            "sha256": "ae2dc80080e025ed190baa593ad9d065747200d9a0c49f0bb50ed93d7b4a6c40",
+            "personallyReviewed": false
+          },
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/CLASS-CHOICE-stable.jpg",
+            "exists": true,
+            "sha256": "95a828c55a66e8861c07693c937d1d240635c382af641f285ccc446ca0bdbe79",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/run/game.run.altar.js",
+          "game/css/preparation.css",
+          "game/css/page-deploy.css",
+          "game/css/expedition-roster.css"
+        ]
+      },
+      "recommendedAction": "保护五张默认图；只试选中语义/字阶，逐人核裁切/名字/卡池/出发身份。",
+      "kind": "basic",
+      "name": "出发／人物选择",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。五图预热、图片池张数/字节预算及池分页局部重绘已具备，先测冷/热开页。"
+    },
+    {
+      "id": "STUDIO",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "observations": "索引/选片台有效，但多重画框/夹子/编号/导航竞争；已有筛选导航。",
+        "source": {
+          "path": "game/src/hub/game.cardslib.page.js",
+          "anchor": "function renderCardLibrary",
+          "line": 463,
+          "baselineSha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "sha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-seven-departments-review/v2/current-studio.jpg",
+            "exists": true,
+            "sha256": "561fcf6863040d02eb03cdb7e3498ad92a08da0a8046cced92ebd8810ff70c92",
+            "personallyReviewed": false
+          },
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/STUDIO-stable.jpg",
+            "exists": true,
+            "sha256": "bd3cbc8b4960ce3fe9ed5b616240242bf34422ec33ff98a653fb0a957e66cce8",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/hub/game.cardslib.page.js",
+          "game/css/page-cardslib.css",
+          "game/css/photo-studio-mounts.css"
+        ]
+      },
+      "recommendedAction": "先做一张照片和选片台样例，减重复边界，保留照片/背签特色。",
+      "kind": "basic",
+      "name": "照相馆／馆藏索引与选片台",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。已有缓存/双向窗口化/观察器清理/缩略图预热，先测长帧和图数，禁止重复虚拟化。"
+    },
+    {
+      "id": "GUIDE",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "observations": "亲读旧图只露前三步且有淡入迹象；源码有完整四步，不能判第四步缺失。",
+        "source": {
+          "path": "game/src/ui/game.menu.js",
+          "anchor": "function openTitleGuide",
+          "line": 396,
+          "baselineSha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "sha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/GUIDE.jpg",
+            "exists": true,
+            "sha256": "738a120bfd78fef6d65e55f54a6d0e4ea647d20eba6b56652f356382d1bc505a",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/ui/game.menu.js",
+          "game/css/page-settings.css",
+          "game/css/overlays.css"
+        ]
+      },
+      "recommendedAction": "补稳定页/滚动到底；战斗变后只修实际操作对应说明。",
+      "kind": "basic",
+      "name": "远征手册／首屏",
+      "visualStatus": "历史部分/过渡帧，稳定视觉证据不足",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "HUB-SHOP",
+      "researchConclusion": "保留",
+      "basis": {
+        "observations": "稳定旧图商品/价格/不足原因/去向清楚，全不可买状态。",
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function hubShopHTML",
+          "line": 40,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/HUB-SHOP.jpg",
+            "exists": true,
+            "sha256": "07f0f77989cb3879266caf945a1b35e8c653ec237722cda68dfe36f064d4140b",
+            "personallyReviewed": false
+          },
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/HUB-SHOP-stable.jpg",
+            "exists": true,
+            "sha256": "5d6517ce2104a1482774955cee7631f1e398a178cdcb657844a6c3b7ab14016a",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/hub/game.hub.pages.js",
+          "game/css/expedition-shop.css",
+          "game/css/page-shop.css"
+        ]
+      },
+      "recommendedAction": "保留货架，补可买/满仓/买后反馈；不另建美化包。",
+      "kind": "basic",
+      "name": "基地商店／首屏",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "HUB-UPGRADE",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "observations": "资源零时扩建只灰掉，源码仅满级显示原因；宠物收益需读上文。",
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function hubUpgradeHTML",
+          "line": 419,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/HUB-UPGRADE.jpg",
+            "exists": true,
+            "sha256": "55f3ae551b06714c8905376de189c324760134e83217c4ff4fa7a5cd0182d11a",
+            "personallyReviewed": false
+          },
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/HUB-UPGRADE-stable.jpg",
+            "exists": true,
+            "sha256": "64d85fb18589fd46489f4228a5468386007405858a77ed810482d548fa049042",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/hub/game.hub.pages.js",
+          "game/css/expedition-hub.css",
+          "game/css/page-hub.css",
+          "game/css/page-upgrade.css"
+        ]
+      },
+      "recommendedAction": "禁用旁补不足/满级原因，宠物行列本次安全格收益，不改曲线。",
+      "kind": "basic",
+      "name": "基地升级／首屏",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "HUB-CLASSES",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "observations": "五人旧图立绘缩成白底顶部横幅，卡壳占比大，皮肤数造成基线差；已有contain/渐隐。",
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function hubClassesHTML",
+          "line": 473,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/HUB-CLASSES.jpg",
+            "exists": true,
+            "sha256": "939a963d762c381084b64e7c067f4359a8e7e67aa134912d003a8762e5b5057f",
+            "personallyReviewed": false
+          },
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/HUB-CLASSES-stable.jpg",
+            "exists": true,
+            "sha256": "a4d592d39c8503869c80ba77d82ce7b02ead6d134b271e94a1525049efcaebe4",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/hub/game.hub.pages.js",
+          "game/css/expedition-hub.css",
+          "game/css/page-hub.css",
+          "game/css/page-classes.css"
+        ]
+      },
+      "recommendedAction": "原图试一张容器的比例/密度/皮肤行，过样后复用；不重绘认可图或强裁头脚。",
+      "kind": "basic",
+      "name": "基地人物档案／首屏",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。五图预热、图片池张数/字节预算及池分页局部重绘已具备，先测冷/热开页。"
+    },
+    {
+      "id": "HUB-ACH",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "observations": "大标题/说明/故事/统计/导航占高，实际列表在下半页。",
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function hubAchHTML",
+          "line": 564,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/COLLECTION-ROOM.jpg",
+            "exists": true,
+            "sha256": "d0e0f1587e63b0ae7d210fee525bb8dad3be6022eaa6dafa0feaffa879b525a1",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/hub/game.hub.pages.js",
+          "game/css/page-ach.css",
+          "game/css/page-classes.css"
+        ]
+      },
+      "recommendedAction": "缩共享外壳、收起故事，使首屏见实际对象，不加装饰。",
+      "kind": "basic",
+      "name": "基地成就收藏／外壳",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "HUB-BACKS",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "observations": "旧HUB-ACH图半透明过渡，仅轮廓；源码有锁定/使用中/来源。",
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "const equipped = B.backSel",
+          "line": 593,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/HUB-ACH.jpg",
+            "exists": true,
+            "sha256": "dcc67f4d5020cbaed44f2ef77ddc49a3e44fe15441b69e116e18f33db6f7758a",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/hub/game.hub.pages.js",
+          "game/css/page-ach.css",
+          "game/css/page-classes.css"
+        ]
+      },
+      "recommendedAction": "补稳定卡背和选用反馈，先保留七卡，不据过渡图重绘。",
+      "kind": "basic",
+      "name": "卡背图鉴／初始帧",
+      "visualStatus": "历史部分/过渡帧，稳定视觉证据不足",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "HUB-COLLECTION",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "observations": "规则/五阶段目标挤压卡位；源码真实职业分母、collectPool只取一次。",
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function collRoomHTML",
+          "line": 517,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/COLLECTION-ROOM.jpg",
+            "exists": true,
+            "sha256": "d0e0f1587e63b0ae7d210fee525bb8dad3be6022eaa6dafa0feaffa879b525a1",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/hub/game.hub.pages.js",
+          "game/css/page-ach.css",
+          "game/css/page-classes.css"
+        ]
+      },
+      "recommendedAction": "规则压为消耗卡→经验/图鉴摘要，奖励紧凑化；保留数据层。",
+      "kind": "basic",
+      "name": "职业收藏室／零收藏首屏",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "HUB-ACHIEVEMENTS",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "observations": "旧图领奖金按钮瘦长、奖励字小，状态可分。",
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "const rows = M.ACHIEVEMENTS",
+          "line": 569,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/ACHIEVEMENTS.jpg",
+            "exists": true,
+            "sha256": "9666c43bf48538bdf79006c1e88a90655ae1fb457bf22f6634f85d7915ca226a",
+            "personallyReviewed": false
+          },
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/HUB-ACH-stable.jpg",
+            "exists": true,
+            "sha256": "78dabc4464b243aa6b634bb12efa36b4b64ec0df4603dc58bf0256c28d4f2930",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/hub/game.hub.pages.js",
+          "game/css/page-ach.css",
+          "game/css/page-classes.css"
+        ]
+      },
+      "recommendedAction": "奖励/领取固定宽动作区，持续文字分可领/已领，核实际奖励。",
+      "kind": "basic",
+      "name": "基地成就列表／已达成可领首屏",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "SETTINGS",
+      "researchConclusion": "保留",
+      "basis": {
+        "observations": "稳定图分组清楚，危险区未入图；有减动态/震动设置。",
+        "source": {
+          "path": "game/src/ui/game.menu.js",
+          "anchor": "function openSettings",
+          "line": 962,
+          "baselineSha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "sha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/SETTINGS.jpg",
+            "exists": true,
+            "sha256": "4257f721ebd43ee1d9f6388977b8fd88b92b7c166558faeeb9e1e640db7f76ff",
+            "personallyReviewed": false
+          },
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/SETTINGS-stable.jpg",
+            "exists": true,
+            "sha256": "d2a3f0082f853dcf41d48579bb95ae2c6837542d38fa28fcf1acf82d5be3fab4",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/ui/game.menu.js",
+          "game/css/page-settings.css",
+          "game/css/overlays.css"
+        ]
+      },
+      "recommendedAction": "保留结构，核底部/返回/减动态保存/危险确认，声音免验。",
+      "kind": "basic",
+      "name": "全局设置／首屏初始帧",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "INBOX",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "observations": "空图只有右键说明，无可点新建动作，一次提示不能替代常驻入口。",
+        "source": {
+          "path": "game/src/ui/game.menu.js",
+          "anchor": "function openSuggestionInbox",
+          "line": 342,
+          "baselineSha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "sha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/INBOX.jpg",
+            "exists": true,
+            "sha256": "d501a1665771817125d0bc7e508d9ee77769f7880b600e6bf554222328f9a4e3",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/ui/game.menu.js",
+          "game/css/overlays.css",
+          "game/css/expedition.css"
+        ]
+      },
+      "recommendedAction": "低优先级沿原编辑器加新留言入口，保留右键定位，不扩外部系统。",
+      "kind": "basic",
+      "name": "留言库／空信箱",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "STASH-ITEM",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "observations": "物品弹层小卡长规则难读，收藏说明多行，动作已有区分。",
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "已收藏' : '[[icon:archive]] 仓库物品",
+          "line": 293,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/STASH-ITEM.jpg",
+            "exists": true,
+            "sha256": "d4c65b6e3afa4a377c9568f629efff28d14d5a419839b96033ab134a66e6ff6f",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/hub/game.hub.pages.js",
+          "game/css/page-stash.css",
+          "game/css/expedition-inventory.css"
+        ]
+      },
+      "recommendedAction": "沿卡详情补可读规则区，保留对象/数量/收益/消耗，不另造体系。",
+      "kind": "basic",
+      "name": "仓库物品／职业卡操作",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "STASH-MATERIAL",
+      "researchConclusion": "保留",
+      "basis": {
+        "observations": "单口粮图折入数/不可卖/使用/返回清楚，全用禁用可见。",
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "仓库材料",
+          "line": 237,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/MATERIAL-ITEM.jpg",
+            "exists": true,
+            "sha256": "f8d4fdbb8d4ed278fed0e05a931776bea1a1a755d42c0261c8e59a64aaf898fe",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/hub/game.hub.pages.js",
+          "game/css/page-stash.css",
+          "game/css/expedition-inventory.css"
+        ]
+      },
+      "recommendedAction": "补多张/木材/钥匙数量前后，失败不清才局部补。",
+      "kind": "basic",
+      "name": "仓库材料／单张口粮折入",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "MATERIAL-CONFIRM",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "observations": "确认图背后为地图非仓库，源码替换前层；来源连续性弱不等于数据错。",
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "const confirmMaterial",
+          "line": 256,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/MATERIAL-CONFIRM.jpg",
+            "exists": true,
+            "sha256": "fb4a1249780f8b48e770ceeca19e45cbb24e97527a9b994ee2499dd03b34de8a",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/hub/game.hub.pages.js",
+          "game/css/overlays.css",
+          "game/css/expedition.css"
+        ]
+      },
+      "recommendedAction": "补对象/数量/折入收益/仓库来源，保前层或摘要，核取消回原物品。",
+      "kind": "basic",
+      "name": "材料末张使用确认",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "CARD-ZOOM",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "observations": "大卡可读，暂无备注区域极暗贴背景；已有inert/焦点/关闭清理。",
+        "source": {
+          "path": "game/src/ui/ui.js",
+          "anchor": "showCardZoom(card",
+          "line": 108,
+          "baselineSha256": "5dcdd6fd9df85ccb2ddb80896c9ddb00b869a666f4a2f5d1ae903cd3224c0815",
+          "sha256": "5dcdd6fd9df85ccb2ddb80896c9ddb00b869a666f4a2f5d1ae903cd3224c0815",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/CARD-ZOOM.jpg",
+            "exists": true,
+            "sha256": "78fa61ad9fa12e9e4577d3e0e29eceaf2e2d741f0682df54ce3c0c72443a9aa9",
+            "personallyReviewed": true
+          },
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/CLASS-POOL-DETAIL.jpg",
+            "exists": true,
+            "sha256": "02c376e243943edea2dc6e01732b1bdfd9c27d6f7dfa895137e8b7f4d8588755",
+            "personallyReviewed": false
+          }
+        ],
+        "relatedPaths": [
+          "game/src/ui/ui.js",
+          "game/css/card-v3.css",
+          "game/css/cards.css",
+          "game/css/overlays.css"
+        ]
+      },
+      "recommendedAction": "只调备注承托/空备注呈现；保留框架，核长规则/快速关闭。",
+      "kind": "basic",
+      "name": "通用卡牌详情／初始攻击与圣盾",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "CLASS-POOL",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "observations": "五职业首屏已亲读，侧栏可读，网格能力/注能规则密；已有均衡分页/局部重绘/预解码。",
+        "source": {
+          "path": "game/src/run/game.run.altar.js",
+          "anchor": "const renderPool =",
+          "line": 250,
+          "baselineSha256": "9249104eb75dda983f18dc064edac3810347e8fcba6699bca6994c245d11a7e1",
+          "sha256": "fa41f1c3206db40027b8345b540d6c5e65f3a8e78d7f19405aba44b3ebe1afef",
+          "changed": true
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/CLASS-POOL.jpg",
+            "exists": true,
+            "sha256": "0275e62c6a67c605d1aaa2ef35303e64e677c108d3a1c8e56f428a4d6636dccb",
+            "personallyReviewed": false
+          }
+        ],
+        "relatedPaths": [
+          "game/src/run/game.run.altar.js",
+          "game/css/preparation.css",
+          "game/css/page-deploy.css",
+          "game/css/expedition-roster.css"
+        ]
+      },
+      "recommendedAction": "共享卡面层级，保留分页预览，校实时卡数和末页，不新建五套。",
+      "kind": "basic",
+      "name": "职业卡池档案／共享模板",
+      "visualStatus": "五职业首屏历史图已亲读",
+      "performanceRisk": "未实测。五图预热、图片池张数/字节预算及池分页局部重绘已具备，先测冷/热开页。"
+    },
+    {
+      "id": "PHOTO-ZOOM",
+      "researchConclusion": "保留",
+      "basis": {
+        "observations": "照片/规则/背签分区清楚，有低图先显/原图切换/FLIP/快关路径。",
+        "source": {
+          "path": "game/src/ui/ui.js",
+          "anchor": "const photoMode",
+          "line": 135,
+          "baselineSha256": "5dcdd6fd9df85ccb2ddb80896c9ddb00b869a666f4a2f5d1ae903cd3224c0815",
+          "sha256": "5dcdd6fd9df85ccb2ddb80896c9ddb00b869a666f4a2f5d1ae903cd3224c0815",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/STUDIO-DETAIL.jpg",
+            "exists": true,
+            "sha256": "e7ca37629a9d4b6dd4e0e2b127f7c9e5822714183e586f9e99c0961c0775d7ae",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/ui/ui.js",
+          "game/css/page-cardslib.css",
+          "game/css/photo-studio-mounts.css"
+        ]
+      },
+      "recommendedAction": "保留特色，随样例收敛框层；核备注失败保留/快开关。",
+      "kind": "basic",
+      "name": "照相馆大图／正面与背签",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "PREP-GOALS",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "observations": "两空方案仍金条可以应用，带入零张；人物选项与实际时机易误读。",
+        "source": {
+          "path": "game/src/hub/preparation.view.js",
+          "anchor": "function render(model)",
+          "line": 24,
+          "baselineSha256": "8fb5deb1dd49dfc471c7166c84ac72498fcd7089e6f2ad88c038704a1614a15f",
+          "sha256": "8fb5deb1dd49dfc471c7166c84ac72498fcd7089e6f2ad88c038704a1614a15f",
+          "changed": false
+        },
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/PREP-GOALS.jpg",
+            "exists": true,
+            "sha256": "2a68bbd86a652936fa928279a8a58445e263ea7a51bb6a13b279a42ad9371cc7",
+            "personallyReviewed": true
+          }
+        ],
+        "relatedPaths": [
+          "game/src/hub/preparation.view.js",
+          "game/css/preparation.css",
+          "game/css/page-deploy.css",
+          "game/css/expedition-roster.css"
+        ]
+      },
+      "recommendedAction": "明确空方案与应用影响，别把可应用当已整备；不扩系统/改选人流程。",
+      "kind": "basic",
+      "name": "下一局目标与双预设／空愿望清单",
+      "visualStatus": "亲读历史图，未采当前实页",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "SLOT-RECOVERY",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "observations": "无实图，已有原档/恢复记录保护、预检/守卫/选档回退。",
+        "source": {
+          "path": "game/src/ui/game.menu.js",
+          "anchor": "UI.act('enterSlot'",
+          "line": 710,
+          "baselineSha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "sha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "changed": false
+        },
+        "images": [],
+        "relatedPaths": [
+          "game/src/ui/game.menu.js",
+          "game/css/title-p0.css",
+          "game/css/page-slot-select.css"
+        ]
+      },
+      "recommendedAction": "复用故障证据补加载/失败/重试，缺反馈才补档号阶段，不重写事务。",
+      "kind": "basic",
+      "name": "读档恢复与进局过场",
+      "visualStatus": "无对应实图，仅源码",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "TITLE-ACH",
+      "researchConclusion": "保留",
+      "basis": {
+        "observations": "无实图，源码已说明最近档、只读状态和进基地领奖。",
+        "source": {
+          "path": "game/src/ui/game.menu.js",
+          "anchor": "function openTitleAchievements",
+          "line": 433,
+          "baselineSha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "sha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "changed": false
+        },
+        "images": [],
+        "relatedPaths": [
+          "game/src/ui/game.menu.js",
+          "game/css/page-ach.css",
+          "game/css/page-classes.css"
+        ]
+      },
+      "recommendedAction": "补有档/无档与返回，保留只读不加领奖。",
+      "kind": "basic",
+      "name": "标题成就总览",
+      "visualStatus": "无对应实图，仅源码",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "SUGGESTION",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "observations": "无实图，有目标/四字段/busy防重/失败保留/本地保存反馈。",
+        "source": {
+          "path": "game/src/ui/game.menu.js",
+          "anchor": "function openSuggestionBox",
+          "line": 228,
+          "baselineSha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "sha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "changed": false
+        },
+        "images": [],
+        "relatedPaths": [
+          "game/src/ui/game.menu.js",
+          "game/css/overlays.css",
+          "game/css/expedition.css"
+        ]
+      },
+      "recommendedAction": "核编辑/失败/取消可读，缺目标用通用来源，保留本地语义。",
+      "kind": "basic",
+      "name": "右键留言编辑",
+      "visualStatus": "无对应实图，仅源码",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "LEAVE",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "observations": "无实图，已有主次危险色/默认继续焦点/放弃二次确认。",
+        "source": {
+          "path": "game/src/ui/game.menu.js",
+          "anchor": "function openLeaveMenu",
+          "line": 816,
+          "baselineSha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "sha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "changed": false
+        },
+        "images": [],
+        "relatedPaths": [
+          "game/src/ui/game.menu.js",
+          "game/css/overlays.css",
+          "game/css/expedition.css"
+        ]
+      },
+      "recommendedAction": "核三动作/确认/保存失败，仅反馈不符时局部补，不重做。",
+      "kind": "basic",
+      "name": "离开对局选择",
+      "visualStatus": "无对应实图，仅源码",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "EXIT-SCREEN",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "observations": "无实图，Vite只显示告别屏，未核文字；桌面冻结。",
+        "source": {
+          "path": "game/src/ui/game.menu.js",
+          "anchor": "function quitGame",
+          "line": 895,
+          "baselineSha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "sha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+          "changed": false
+        },
+        "images": [],
+        "relatedPaths": [
+          "game/src/ui/game.menu.js",
+          "game/css/title-p0.css",
+          "game/css/page-slot-select.css"
+        ]
+      },
+      "recommendedAction": "只核网页可关闭/返回诚实表达，无问题保留，不开发桌面。",
+      "kind": "basic",
+      "name": "退出游戏屏",
+      "visualStatus": "无对应实图，仅源码",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "HUB-PETS",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "observations": "无独立图，源码分拥有/携带/未孵摘要和带1只，蛋图lazy async。",
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function hubPetsHTML",
+          "line": 157,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "images": [],
+        "relatedPaths": [
+          "game/src/hub/game.hub.pages.js",
+          "game/css/page-stash.css",
+          "game/css/expedition-inventory.css"
+        ]
+      },
+      "recommendedAction": "核初始/多只/全齐/切换安全格，长说明阻碍才压缩。",
+      "kind": "basic",
+      "name": "仓库宠物区域",
+      "visualStatus": "无对应实图，仅源码",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "STASH-EGG",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "observations": "无图，已列蛋/50币/随机未拥有，穷/全齐禁用，穷原因靠数字日志。",
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "if (s.card.id === B.PET_EGG_ID)",
+          "line": 201,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "images": [],
+        "relatedPaths": [
+          "game/src/hub/game.hub.pages.js",
+          "game/css/page-stash.css",
+          "game/css/expedition-inventory.css"
+        ]
+      },
+      "recommendedAction": "核可孵/不足/全齐，禁用不明才邻近写原因，不改随机保护。",
+      "kind": "basic",
+      "name": "宠物蛋孵化弹层",
+      "visualStatus": "无对应实图，仅源码",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "STASH-RAW",
+      "researchConclusion": "保留",
+      "basis": {
+        "observations": "无图，源码木材/口粮数量用途不可卖返回，无出售，旧风险不成立。",
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function openRawItem",
+          "line": 403,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "images": [],
+        "relatedPaths": [
+          "game/src/hub/game.hub.pages.js",
+          "game/css/page-stash.css",
+          "game/css/expedition-inventory.css"
+        ]
+      },
+      "recommendedAction": "补两种说明图，不新增面板或不存在的钥匙入口。",
+      "kind": "basic",
+      "name": "仓库真实物资说明",
+      "visualStatus": "无对应实图，仅源码",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "STASH-CONFIRM",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "observations": "无图，确认具体消息/取消焦点/返回原物品已具备，不能外推所有消息错。",
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "const confirmStashAction",
+          "line": 277,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "images": [],
+        "relatedPaths": [
+          "game/src/hub/game.hub.pages.js",
+          "game/css/overlays.css",
+          "game/css/expedition.css"
+        ]
+      },
+      "recommendedAction": "核末张/全堆/特殊收藏对象数量与取消确认，复用材料样例。",
+      "kind": "basic",
+      "name": "仓库消耗与出售确认",
+      "visualStatus": "无对应实图，仅源码",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "HUB-HELP",
+      "researchConclusion": "保留",
+      "basis": {
+        "observations": "无图，六页均有中文来源标题/具体条目/返回，旧来源风险已有覆盖。",
+        "source": {
+          "path": "game/src/hub/game.hub.js",
+          "anchor": "function registerHubHelp",
+          "line": 323,
+          "baselineSha256": "bd0cec0ddcfac314380bfab5bfde945fead4cccdc2a3168d56a1ea817ecb102e",
+          "sha256": "bd0cec0ddcfac314380bfab5bfde945fead4cccdc2a3168d56a1ea817ecb102e",
+          "changed": false
+        },
+        "images": [],
+        "relatedPaths": [
+          "game/src/hub/game.hub.js",
+          "game/css/expedition-hub.css",
+          "game/css/page-hub.css"
+        ]
+      },
+      "recommendedAction": "只校文案与玩法和长页滚动，不另造六个美化任务。",
+      "kind": "basic",
+      "name": "基地六页签帮助弹层",
+      "visualStatus": "无对应实图，仅源码",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "BATTLE-SETTLE-RETRY",
+      "researchConclusion": "已改需复核",
+      "basis": {
+        "observations": "无图，文件SHA改在教学示例/四层文案，重试仍明确奖励不重发，改文件不等于此页完成。",
+        "source": {
+          "path": "game/src/hub/game.bag.settle.js",
+          "anchor": "战后结算未完成",
+          "line": 64,
+          "baselineSha256": "7b2d0b64d68f025a90ca9f33f5488f20cbe4e37fb7e8916047e95c5690f91ce1",
+          "sha256": "3d03d698f5b8f708224323eddc44770d0cc01baf761dbb3d8dfdd18ed47d73c2",
+          "changed": true
+        },
+        "images": [],
+        "relatedPaths": [
+          "game/src/hub/game.bag.settle.js",
+          "game/css/overlays.css",
+          "game/css/expedition.css"
+        ]
+      },
+      "recommendedAction": "复用幂等证据补失败/重试/换档；新战斗仅换壳不动权威链。",
+      "kind": "basic",
+      "name": "战后保存失败恢复",
+      "visualStatus": "无对应实图，仅源码",
+      "performanceRisk": "未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。"
+    },
+    {
+      "id": "TERM-TIP",
+      "researchConclusion": "已改需复核",
+      "basis": {
+        "observations": "无图，自然形态已改满月形态；定位有缩放/边缘夹紧，只有pointer无focusin。",
+        "source": {
+          "path": "game/src/ui/term-tips.js",
+          "anchor": "function show(el)",
+          "line": 93,
+          "baselineSha256": "90c24e0fefe9a9d49ef610220cd9da6ce39082e87b9204ce1ccb39f7eb6f8661",
+          "sha256": "4191d9cccfb1626ca1186d9e58015c8f891ad31cb3daa3e45ed5ee2155cd7c01",
+          "changed": true
+        },
+        "images": [],
+        "relatedPaths": [
+          "game/src/ui/term-tips.js",
+          "game/css/overlays.css",
+          "game/css/expedition.css"
+        ]
+      },
+      "recommendedAction": "核满月文案/边缘/滚动/键盘；成对监听残留如复现仅小修。",
+      "kind": "basic",
+      "name": "术语说明浮层",
+      "visualStatus": "无对应实图，仅源码",
+      "performanceRisk": "未实测。pointerdown成对添加once的pointerup/pointercancel而未互相移除，候选监听累积须定向复现后才小修。"
+    },
+    {
+      "id": "CLASS-CHOICE-WU",
+      "name": "无·侠客",
+      "parentId": "CLASS-CHOICE",
+      "kind": "variant",
+      "researchConclusion": "保留",
+      "basis": {
+        "source": {
+          "path": "game/src/run/game.run.altar.js",
+          "anchor": "export function openClassChoice",
+          "line": 95,
+          "baselineSha256": "9249104eb75dda983f18dc064edac3810347e8fcba6699bca6994c245d11a7e1",
+          "sha256": "fa41f1c3206db40027b8345b540d6c5e65f3a8e78d7f19405aba44b3ebe1afef",
+          "changed": true
+        },
+        "contentDifference": "人物身份：无·侠客（侠客）。只替换该人物立绘/皮肤/起始规则，不另建页面壳。",
+        "observations": "五张默认立绘保护；头像条不能替代所选人物全幅验收。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/run/game.run.altar.js"
+        ],
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/CLASS-CHOICE-stable.jpg",
+            "exists": true,
+            "sha256": "95a828c55a66e8861c07693c937d1d240635c382af641f285ccc446ca0bdbe79",
+            "personallyReviewed": true
+          }
+        ],
+        "sharedConclusionRef": "CLASS-CHOICE"
+      },
+      "visualStatus": "亲读历史共享图，只对实际可见内容有效",
+      "performanceRisk": "复用CLASS-CHOICE性能边界：未实测。五图预热、图片池张数/字节预算及池分页局部重绘已具备，先测冷/热开页。",
+      "recommendedAction": "沿CLASS-CHOICE同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "CLASS-CHOICE-CHANGWUYU",
+      "name": "常无欲·降临者",
+      "parentId": "CLASS-CHOICE",
+      "kind": "variant",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "source": {
+          "path": "game/src/run/game.run.altar.js",
+          "anchor": "export function openClassChoice",
+          "line": 95,
+          "baselineSha256": "9249104eb75dda983f18dc064edac3810347e8fcba6699bca6994c245d11a7e1",
+          "sha256": "fa41f1c3206db40027b8345b540d6c5e65f3a8e78d7f19405aba44b3ebe1afef",
+          "changed": true
+        },
+        "contentDifference": "人物身份：常无欲·降临者（降临者）。只替换该人物立绘/皮肤/起始规则，不另建页面壳。",
+        "observations": "五张默认立绘保护；头像条不能替代所选人物全幅验收。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/run/game.run.altar.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "CLASS-CHOICE"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用CLASS-CHOICE性能边界：未实测。五图预热、图片池张数/字节预算及池分页局部重绘已具备，先测冷/热开页。",
+      "recommendedAction": "沿CLASS-CHOICE同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "CLASS-CHOICE-BAITA",
+      "name": "白塔·法师",
+      "parentId": "CLASS-CHOICE",
+      "kind": "variant",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "source": {
+          "path": "game/src/run/game.run.altar.js",
+          "anchor": "export function openClassChoice",
+          "line": 95,
+          "baselineSha256": "9249104eb75dda983f18dc064edac3810347e8fcba6699bca6994c245d11a7e1",
+          "sha256": "fa41f1c3206db40027b8345b540d6c5e65f3a8e78d7f19405aba44b3ebe1afef",
+          "changed": true
+        },
+        "contentDifference": "人物身份：白塔·法师（法师）。只替换该人物立绘/皮肤/起始规则，不另建页面壳。",
+        "observations": "五张默认立绘保护；头像条不能替代所选人物全幅验收。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/run/game.run.altar.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "CLASS-CHOICE"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用CLASS-CHOICE性能边界：未实测。五图预热、图片池张数/字节预算及池分页局部重绘已具备，先测冷/热开页。",
+      "recommendedAction": "沿CLASS-CHOICE同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "CLASS-CHOICE-HEIXIANG",
+      "name": "黑像·战士",
+      "parentId": "CLASS-CHOICE",
+      "kind": "variant",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "source": {
+          "path": "game/src/run/game.run.altar.js",
+          "anchor": "export function openClassChoice",
+          "line": 95,
+          "baselineSha256": "9249104eb75dda983f18dc064edac3810347e8fcba6699bca6994c245d11a7e1",
+          "sha256": "fa41f1c3206db40027b8345b540d6c5e65f3a8e78d7f19405aba44b3ebe1afef",
+          "changed": true
+        },
+        "contentDifference": "人物身份：黑像·战士（战士）。只替换该人物立绘/皮肤/起始规则，不另建页面壳。",
+        "observations": "五张默认立绘保护；头像条不能替代所选人物全幅验收。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/run/game.run.altar.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "CLASS-CHOICE"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用CLASS-CHOICE性能边界：未实测。五图预热、图片池张数/字节预算及池分页局部重绘已具备，先测冷/热开页。",
+      "recommendedAction": "沿CLASS-CHOICE同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "CLASS-CHOICE-XINGYUE",
+      "name": "星月·牧师",
+      "parentId": "CLASS-CHOICE",
+      "kind": "variant",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "source": {
+          "path": "game/src/run/game.run.altar.js",
+          "anchor": "export function openClassChoice",
+          "line": 95,
+          "baselineSha256": "9249104eb75dda983f18dc064edac3810347e8fcba6699bca6994c245d11a7e1",
+          "sha256": "fa41f1c3206db40027b8345b540d6c5e65f3a8e78d7f19405aba44b3ebe1afef",
+          "changed": true
+        },
+        "contentDifference": "人物身份：星月·牧师（牧师）。只替换该人物立绘/皮肤/起始规则，不另建页面壳。",
+        "observations": "五张默认立绘保护；头像条不能替代所选人物全幅验收。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/run/game.run.altar.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "CLASS-CHOICE"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用CLASS-CHOICE性能边界：未实测。五图预热、图片池张数/字节预算及池分页局部重绘已具备，先测冷/热开页。",
+      "recommendedAction": "沿CLASS-CHOICE同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "CLASS-POOL-WU",
+      "name": "无·侠客",
+      "parentId": "CLASS-POOL",
+      "kind": "variant",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "source": {
+          "path": "game/src/run/game.run.altar.js",
+          "anchor": "const renderPool =",
+          "line": 250,
+          "baselineSha256": "9249104eb75dda983f18dc064edac3810347e8fcba6699bca6994c245d11a7e1",
+          "sha256": "fa41f1c3206db40027b8345b540d6c5e65f3a8e78d7f19405aba44b3ebe1afef",
+          "changed": true
+        },
+        "contentDifference": "卡池身份：无·侠客。共享10张上限均衡分页，池数取该职业真实过滤结果。",
+        "observations": "五职业历史首屏均亲读，旧池数不能硬编码为当前；保留均衡分页和预览。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/run/game.run.altar.js"
+        ],
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/CLASS-POOL-WU.jpg",
+            "exists": true,
+            "sha256": "13e4f74c6901016783727e2cfa59c3368a730c0a5705b30148e1edae00590bca",
+            "personallyReviewed": true
+          }
+        ],
+        "sharedConclusionRef": "CLASS-POOL"
+      },
+      "visualStatus": "亲读历史共享图，只对实际可见内容有效",
+      "performanceRisk": "复用CLASS-POOL性能边界：未实测。五图预热、图片池张数/字节预算及池分页局部重绘已具备，先测冷/热开页。",
+      "recommendedAction": "沿CLASS-POOL同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "CLASS-POOL-CHANGWUYU",
+      "name": "常无欲·降临者",
+      "parentId": "CLASS-POOL",
+      "kind": "variant",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "source": {
+          "path": "game/src/run/game.run.altar.js",
+          "anchor": "const renderPool =",
+          "line": 250,
+          "baselineSha256": "9249104eb75dda983f18dc064edac3810347e8fcba6699bca6994c245d11a7e1",
+          "sha256": "fa41f1c3206db40027b8345b540d6c5e65f3a8e78d7f19405aba44b3ebe1afef",
+          "changed": true
+        },
+        "contentDifference": "卡池身份：常无欲·降临者。共享10张上限均衡分页，池数取该职业真实过滤结果。",
+        "observations": "五职业历史首屏均亲读，旧池数不能硬编码为当前；保留均衡分页和预览。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/run/game.run.altar.js"
+        ],
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/CLASS-POOL-CHANGWUYU.jpg",
+            "exists": true,
+            "sha256": "380f58b863299cd10fe178178c655b4dc7525396e6c4c1a996c10222fb929831",
+            "personallyReviewed": true
+          }
+        ],
+        "sharedConclusionRef": "CLASS-POOL"
+      },
+      "visualStatus": "亲读历史共享图，只对实际可见内容有效",
+      "performanceRisk": "复用CLASS-POOL性能边界：未实测。五图预热、图片池张数/字节预算及池分页局部重绘已具备，先测冷/热开页。",
+      "recommendedAction": "沿CLASS-POOL同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "CLASS-POOL-BAITA",
+      "name": "白塔·法师",
+      "parentId": "CLASS-POOL",
+      "kind": "variant",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "source": {
+          "path": "game/src/run/game.run.altar.js",
+          "anchor": "const renderPool =",
+          "line": 250,
+          "baselineSha256": "9249104eb75dda983f18dc064edac3810347e8fcba6699bca6994c245d11a7e1",
+          "sha256": "fa41f1c3206db40027b8345b540d6c5e65f3a8e78d7f19405aba44b3ebe1afef",
+          "changed": true
+        },
+        "contentDifference": "卡池身份：白塔·法师。共享10张上限均衡分页，池数取该职业真实过滤结果。",
+        "observations": "五职业历史首屏均亲读，旧池数不能硬编码为当前；保留均衡分页和预览。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/run/game.run.altar.js"
+        ],
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/CLASS-POOL-BAITA.jpg",
+            "exists": true,
+            "sha256": "374923d0cc7cb278fbd99a528fd49e0bb1f90cc941da8048a3ca466b8330195e",
+            "personallyReviewed": true
+          }
+        ],
+        "sharedConclusionRef": "CLASS-POOL"
+      },
+      "visualStatus": "亲读历史共享图，只对实际可见内容有效",
+      "performanceRisk": "复用CLASS-POOL性能边界：未实测。五图预热、图片池张数/字节预算及池分页局部重绘已具备，先测冷/热开页。",
+      "recommendedAction": "沿CLASS-POOL同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "CLASS-POOL-HEIXIANG",
+      "name": "黑像·战士",
+      "parentId": "CLASS-POOL",
+      "kind": "variant",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "source": {
+          "path": "game/src/run/game.run.altar.js",
+          "anchor": "const renderPool =",
+          "line": 250,
+          "baselineSha256": "9249104eb75dda983f18dc064edac3810347e8fcba6699bca6994c245d11a7e1",
+          "sha256": "fa41f1c3206db40027b8345b540d6c5e65f3a8e78d7f19405aba44b3ebe1afef",
+          "changed": true
+        },
+        "contentDifference": "卡池身份：黑像·战士。共享10张上限均衡分页，池数取该职业真实过滤结果。",
+        "observations": "五职业历史首屏均亲读，旧池数不能硬编码为当前；保留均衡分页和预览。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/run/game.run.altar.js"
+        ],
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/CLASS-POOL-HEIXIANG.jpg",
+            "exists": true,
+            "sha256": "6b4b0794efa9d6281c4cfda9a185469e455ee7a5ef37415607115ec50738714d",
+            "personallyReviewed": true
+          }
+        ],
+        "sharedConclusionRef": "CLASS-POOL"
+      },
+      "visualStatus": "亲读历史共享图，只对实际可见内容有效",
+      "performanceRisk": "复用CLASS-POOL性能边界：未实测。五图预热、图片池张数/字节预算及池分页局部重绘已具备，先测冷/热开页。",
+      "recommendedAction": "沿CLASS-POOL同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "CLASS-POOL-XINGYUE",
+      "name": "星月·牧师",
+      "parentId": "CLASS-POOL",
+      "kind": "variant",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "source": {
+          "path": "game/src/run/game.run.altar.js",
+          "anchor": "const renderPool =",
+          "line": 250,
+          "baselineSha256": "9249104eb75dda983f18dc064edac3810347e8fcba6699bca6994c245d11a7e1",
+          "sha256": "fa41f1c3206db40027b8345b540d6c5e65f3a8e78d7f19405aba44b3ebe1afef",
+          "changed": true
+        },
+        "contentDifference": "卡池身份：星月·牧师。共享10张上限均衡分页，池数取该职业真实过滤结果。",
+        "observations": "五职业历史首屏均亲读，旧池数不能硬编码为当前；保留均衡分页和预览。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/run/game.run.altar.js"
+        ],
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/CLASS-POOL-XINGYUE.jpg",
+            "exists": true,
+            "sha256": "829781c0c06161aff215d6fe4482d388fbf13e14bb52412aed0428f15b84d717",
+            "personallyReviewed": true
+          }
+        ],
+        "sharedConclusionRef": "CLASS-POOL"
+      },
+      "visualStatus": "亲读历史共享图，只对实际可见内容有效",
+      "performanceRisk": "复用CLASS-POOL性能边界：未实测。五图预热、图片池张数/字节预算及池分页局部重绘已具备，先测冷/热开页。",
+      "recommendedAction": "沿CLASS-POOL同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-CLASSES-WU",
+      "name": "无·侠客",
+      "parentId": "HUB-CLASSES",
+      "kind": "variant",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function hubClassesHTML",
+          "line": 473,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "contentDifference": "成长档案：无·侠客。列该人物实际等级/XP/生命加成与已解锁皮肤。",
+        "observations": "五人历史同屏均亲读，无有三套附加皮肤，其余默认；皮肤数量须按真实数据。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/hub/game.hub.pages.js"
+        ],
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/HUB-CLASSES-stable.jpg",
+            "exists": true,
+            "sha256": "a4d592d39c8503869c80ba77d82ce7b02ead6d134b271e94a1525049efcaebe4",
+            "personallyReviewed": true
+          }
+        ],
+        "sharedConclusionRef": "HUB-CLASSES"
+      },
+      "visualStatus": "亲读历史共享图，只对实际可见内容有效",
+      "performanceRisk": "复用HUB-CLASSES性能边界：未实测。五图预热、图片池张数/字节预算及池分页局部重绘已具备，先测冷/热开页。",
+      "recommendedAction": "沿HUB-CLASSES同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-CLASSES-CHANGWUYU",
+      "name": "常无欲·降临者",
+      "parentId": "HUB-CLASSES",
+      "kind": "variant",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function hubClassesHTML",
+          "line": 473,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "contentDifference": "成长档案：常无欲·降临者。列该人物实际等级/XP/生命加成与已解锁皮肤。",
+        "observations": "五人历史同屏均亲读，无有三套附加皮肤，其余默认；皮肤数量须按真实数据。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/hub/game.hub.pages.js"
+        ],
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/HUB-CLASSES-stable.jpg",
+            "exists": true,
+            "sha256": "a4d592d39c8503869c80ba77d82ce7b02ead6d134b271e94a1525049efcaebe4",
+            "personallyReviewed": true
+          }
+        ],
+        "sharedConclusionRef": "HUB-CLASSES"
+      },
+      "visualStatus": "亲读历史共享图，只对实际可见内容有效",
+      "performanceRisk": "复用HUB-CLASSES性能边界：未实测。五图预热、图片池张数/字节预算及池分页局部重绘已具备，先测冷/热开页。",
+      "recommendedAction": "沿HUB-CLASSES同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-CLASSES-BAITA",
+      "name": "白塔·法师",
+      "parentId": "HUB-CLASSES",
+      "kind": "variant",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function hubClassesHTML",
+          "line": 473,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "contentDifference": "成长档案：白塔·法师。列该人物实际等级/XP/生命加成与已解锁皮肤。",
+        "observations": "五人历史同屏均亲读，无有三套附加皮肤，其余默认；皮肤数量须按真实数据。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/hub/game.hub.pages.js"
+        ],
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/HUB-CLASSES-stable.jpg",
+            "exists": true,
+            "sha256": "a4d592d39c8503869c80ba77d82ce7b02ead6d134b271e94a1525049efcaebe4",
+            "personallyReviewed": true
+          }
+        ],
+        "sharedConclusionRef": "HUB-CLASSES"
+      },
+      "visualStatus": "亲读历史共享图，只对实际可见内容有效",
+      "performanceRisk": "复用HUB-CLASSES性能边界：未实测。五图预热、图片池张数/字节预算及池分页局部重绘已具备，先测冷/热开页。",
+      "recommendedAction": "沿HUB-CLASSES同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-CLASSES-HEIXIANG",
+      "name": "黑像·战士",
+      "parentId": "HUB-CLASSES",
+      "kind": "variant",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function hubClassesHTML",
+          "line": 473,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "contentDifference": "成长档案：黑像·战士。列该人物实际等级/XP/生命加成与已解锁皮肤。",
+        "observations": "五人历史同屏均亲读，无有三套附加皮肤，其余默认；皮肤数量须按真实数据。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/hub/game.hub.pages.js"
+        ],
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/HUB-CLASSES-stable.jpg",
+            "exists": true,
+            "sha256": "a4d592d39c8503869c80ba77d82ce7b02ead6d134b271e94a1525049efcaebe4",
+            "personallyReviewed": true
+          }
+        ],
+        "sharedConclusionRef": "HUB-CLASSES"
+      },
+      "visualStatus": "亲读历史共享图，只对实际可见内容有效",
+      "performanceRisk": "复用HUB-CLASSES性能边界：未实测。五图预热、图片池张数/字节预算及池分页局部重绘已具备，先测冷/热开页。",
+      "recommendedAction": "沿HUB-CLASSES同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-CLASSES-XINGYUE",
+      "name": "星月·牧师",
+      "parentId": "HUB-CLASSES",
+      "kind": "variant",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function hubClassesHTML",
+          "line": 473,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "contentDifference": "成长档案：星月·牧师。列该人物实际等级/XP/生命加成与已解锁皮肤。",
+        "observations": "五人历史同屏均亲读，无有三套附加皮肤，其余默认；皮肤数量须按真实数据。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/hub/game.hub.pages.js"
+        ],
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/HUB-CLASSES-stable.jpg",
+            "exists": true,
+            "sha256": "a4d592d39c8503869c80ba77d82ce7b02ead6d134b271e94a1525049efcaebe4",
+            "personallyReviewed": true
+          }
+        ],
+        "sharedConclusionRef": "HUB-CLASSES"
+      },
+      "visualStatus": "亲读历史共享图，只对实际可见内容有效",
+      "performanceRisk": "复用HUB-CLASSES性能边界：未实测。五图预热、图片池张数/字节预算及池分页局部重绘已具备，先测冷/热开页。",
+      "recommendedAction": "沿HUB-CLASSES同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-COLLECTION-WU",
+      "name": "无·侠客",
+      "parentId": "HUB-COLLECTION",
+      "kind": "variant",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function collRoomHTML",
+          "line": 517,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "contentDifference": "收藏分组：无·侠客。分母按该职业真实池，不把总67当个人池。",
+        "observations": "源码按当前职业过滤collectPool，个人分母不能套总收藏数。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/hub/game.hub.pages.js"
+        ],
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/COLLECTION-ROOM.jpg",
+            "exists": true,
+            "sha256": "d0e0f1587e63b0ae7d210fee525bb8dad3be6022eaa6dafa0feaffa879b525a1",
+            "personallyReviewed": true
+          }
+        ],
+        "sharedConclusionRef": "HUB-COLLECTION"
+      },
+      "visualStatus": "亲读历史共享图，只对实际可见内容有效",
+      "performanceRisk": "复用HUB-COLLECTION性能边界：未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。",
+      "recommendedAction": "沿HUB-COLLECTION同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-COLLECTION-CHANGWUYU",
+      "name": "常无欲·降临者",
+      "parentId": "HUB-COLLECTION",
+      "kind": "variant",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function collRoomHTML",
+          "line": 517,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "contentDifference": "收藏分组：常无欲·降临者。分母按该职业真实池，不把总67当个人池。",
+        "observations": "源码按当前职业过滤collectPool，个人分母不能套总收藏数。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/hub/game.hub.pages.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "HUB-COLLECTION"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用HUB-COLLECTION性能边界：未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。",
+      "recommendedAction": "沿HUB-COLLECTION同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-COLLECTION-BAITA",
+      "name": "白塔·法师",
+      "parentId": "HUB-COLLECTION",
+      "kind": "variant",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function collRoomHTML",
+          "line": 517,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "contentDifference": "收藏分组：白塔·法师。分母按该职业真实池，不把总67当个人池。",
+        "observations": "源码按当前职业过滤collectPool，个人分母不能套总收藏数。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/hub/game.hub.pages.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "HUB-COLLECTION"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用HUB-COLLECTION性能边界：未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。",
+      "recommendedAction": "沿HUB-COLLECTION同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-COLLECTION-HEIXIANG",
+      "name": "黑像·战士",
+      "parentId": "HUB-COLLECTION",
+      "kind": "variant",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function collRoomHTML",
+          "line": 517,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "contentDifference": "收藏分组：黑像·战士。分母按该职业真实池，不把总67当个人池。",
+        "observations": "源码按当前职业过滤collectPool，个人分母不能套总收藏数。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/hub/game.hub.pages.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "HUB-COLLECTION"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用HUB-COLLECTION性能边界：未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。",
+      "recommendedAction": "沿HUB-COLLECTION同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-COLLECTION-XINGYUE",
+      "name": "星月·牧师",
+      "parentId": "HUB-COLLECTION",
+      "kind": "variant",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function collRoomHTML",
+          "line": 517,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "contentDifference": "收藏分组：星月·牧师。分母按该职业真实池，不把总67当个人池。",
+        "observations": "源码按当前职业过滤collectPool，个人分母不能套总收藏数。",
+        "relatedPaths": [
+          "game/src/core/characters.js",
+          "game/src/hub/game.hub.pages.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "HUB-COLLECTION"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用HUB-COLLECTION性能边界：未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。",
+      "recommendedAction": "沿HUB-COLLECTION同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-HELP-DEPLOY",
+      "name": "deploy",
+      "parentId": "HUB-HELP",
+      "kind": "variant",
+      "researchConclusion": "保留",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.js",
+          "anchor": "function registerHubHelp",
+          "line": 323,
+          "baselineSha256": "bd0cec0ddcfac314380bfab5bfde945fead4cccdc2a3168d56a1ea817ecb102e",
+          "sha256": "bd0cec0ddcfac314380bfab5bfde945fead4cccdc2a3168d56a1ea817ecb102e",
+          "changed": false
+        },
+        "contentDifference": "帮助内容：标准/精英、整备、目标预设与钥匙门暂缓。标题用中文来源页名。",
+        "observations": "对应registerHubHelp分支有中文来源标题/具体条目/返回。",
+        "relatedPaths": [
+          "game/src/hub/game.hub.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "HUB-HELP"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用HUB-HELP性能边界：未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。",
+      "recommendedAction": "沿HUB-HELP同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-HELP-STASH",
+      "name": "stash",
+      "parentId": "HUB-HELP",
+      "kind": "variant",
+      "researchConclusion": "保留",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.js",
+          "anchor": "function registerHubHelp",
+          "line": 323,
+          "baselineSha256": "bd0cec0ddcfac314380bfab5bfde945fead4cccdc2a3168d56a1ea817ecb102e",
+          "sha256": "bd0cec0ddcfac314380bfab5bfde945fead4cccdc2a3168d56a1ea817ecb102e",
+          "changed": false
+        },
+        "contentDifference": "帮助内容：仓库/口袋/宠物与真实资源去向。标题用中文来源页名。",
+        "observations": "对应registerHubHelp分支有中文来源标题/具体条目/返回。",
+        "relatedPaths": [
+          "game/src/hub/game.hub.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "HUB-HELP"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用HUB-HELP性能边界：未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。",
+      "recommendedAction": "沿HUB-HELP同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-HELP-SHOP",
+      "name": "shop",
+      "parentId": "HUB-HELP",
+      "kind": "variant",
+      "researchConclusion": "保留",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.js",
+          "anchor": "function registerHubHelp",
+          "line": 323,
+          "baselineSha256": "bd0cec0ddcfac314380bfab5bfde945fead4cccdc2a3168d56a1ea817ecb102e",
+          "sha256": "bd0cec0ddcfac314380bfab5bfde945fead4cccdc2a3168d56a1ea817ecb102e",
+          "changed": false
+        },
+        "contentDifference": "帮助内容：储备币购货、空格与不足原因。标题用中文来源页名。",
+        "observations": "对应registerHubHelp分支有中文来源标题/具体条目/返回。",
+        "relatedPaths": [
+          "game/src/hub/game.hub.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "HUB-HELP"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用HUB-HELP性能边界：未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。",
+      "recommendedAction": "沿HUB-HELP同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-HELP-UPGRADE",
+      "name": "upgrade",
+      "parentId": "HUB-HELP",
+      "kind": "variant",
+      "researchConclusion": "保留",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.js",
+          "anchor": "function registerHubHelp",
+          "line": 323,
+          "baselineSha256": "bd0cec0ddcfac314380bfab5bfde945fead4cccdc2a3168d56a1ea817ecb102e",
+          "sha256": "bd0cec0ddcfac314380bfab5bfde945fead4cccdc2a3168d56a1ea817ecb102e",
+          "changed": false
+        },
+        "contentDifference": "帮助内容：木材扩建、口粮宠物升级与上限。标题用中文来源页名。",
+        "observations": "对应registerHubHelp分支有中文来源标题/具体条目/返回。",
+        "relatedPaths": [
+          "game/src/hub/game.hub.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "HUB-HELP"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用HUB-HELP性能边界：未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。",
+      "recommendedAction": "沿HUB-HELP同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-HELP-CLASSES",
+      "name": "classes",
+      "parentId": "HUB-HELP",
+      "kind": "variant",
+      "researchConclusion": "保留",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.js",
+          "anchor": "function registerHubHelp",
+          "line": 323,
+          "baselineSha256": "bd0cec0ddcfac314380bfab5bfde945fead4cccdc2a3168d56a1ea817ecb102e",
+          "sha256": "bd0cec0ddcfac314380bfab5bfde945fead4cccdc2a3168d56a1ea817ecb102e",
+          "changed": false
+        },
+        "contentDifference": "帮助内容：人物XP、皮肤与卡池查看。标题用中文来源页名。",
+        "observations": "对应registerHubHelp分支有中文来源标题/具体条目/返回。",
+        "relatedPaths": [
+          "game/src/hub/game.hub.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "HUB-HELP"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用HUB-HELP性能边界：未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。",
+      "recommendedAction": "沿HUB-HELP同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-HELP-ACH",
+      "name": "ach",
+      "parentId": "HUB-HELP",
+      "kind": "variant",
+      "researchConclusion": "保留",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.js",
+          "anchor": "function registerHubHelp",
+          "line": 323,
+          "baselineSha256": "bd0cec0ddcfac314380bfab5bfde945fead4cccdc2a3168d56a1ea817ecb102e",
+          "sha256": "bd0cec0ddcfac314380bfab5bfde945fead4cccdc2a3168d56a1ea817ecb102e",
+          "changed": false
+        },
+        "contentDifference": "帮助内容：卡背、成就领奖、职业收藏三子页。标题用中文来源页名。",
+        "observations": "对应registerHubHelp分支有中文来源标题/具体条目/返回。",
+        "relatedPaths": [
+          "game/src/hub/game.hub.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "HUB-HELP"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用HUB-HELP性能边界：未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。",
+      "recommendedAction": "沿HUB-HELP同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-DEPLOY-STANDARD",
+      "name": "standard",
+      "parentId": "HUB-DEPLOY",
+      "kind": "variant",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.depart.js",
+          "anchor": "function hubDeployHTML",
+          "line": 14,
+          "baselineSha256": "bac138ae4581178bfe1a23554e465c7fc89d254147cdfe5f2266f3398edce9fa",
+          "sha256": "bac138ae4581178bfe1a23554e465c7fc89d254147cdfe5f2266f3398edce9fa",
+          "changed": false
+        },
+        "contentDifference": "模式：标准：敌/币/XP倍率1，完整四层、第四层祭坛与首脑后终局撤离；同地图倍率变体，非新增地图。",
+        "observations": "标准/精英源数据已核；仅标准选中图可见。",
+        "relatedPaths": [
+          "game/src/run/game.session.modes.js",
+          "game/src/hub/game.hub.depart.js"
+        ],
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-seven-departments-review/v2/current-base.jpg",
+            "exists": true,
+            "sha256": "e149108d4592db15ba6548421695890fef0ed4af9ae6dbebdc49b00192c35fd3",
+            "personallyReviewed": true
+          }
+        ],
+        "sharedConclusionRef": "HUB-DEPLOY"
+      },
+      "visualStatus": "亲读历史共享图，只对实际可见内容有效",
+      "performanceRisk": "复用HUB-DEPLOY性能边界：未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。",
+      "recommendedAction": "沿HUB-DEPLOY同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-DEPLOY-ELITE",
+      "name": "elite",
+      "parentId": "HUB-DEPLOY",
+      "kind": "variant",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.depart.js",
+          "anchor": "function hubDeployHTML",
+          "line": 14,
+          "baselineSha256": "bac138ae4581178bfe1a23554e465c7fc89d254147cdfe5f2266f3398edce9fa",
+          "sha256": "bac138ae4581178bfe1a23554e465c7fc89d254147cdfe5f2266f3398edce9fa",
+          "changed": false
+        },
+        "contentDifference": "模式：精英：敌/首脑属性×1.5、战斗币×1.5、XP+50%，描述高稀有掉落+20%；同地图倍率变体，非新增地图。",
+        "observations": "标准/精英源数据已核；仅标准选中图可见。",
+        "relatedPaths": [
+          "game/src/run/game.session.modes.js",
+          "game/src/hub/game.hub.depart.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "HUB-DEPLOY"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用HUB-DEPLOY性能边界：未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。",
+      "recommendedAction": "沿HUB-DEPLOY同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-ACH-VIEW-BACKS",
+      "name": "backs",
+      "parentId": "HUB-BACKS",
+      "kind": "variant",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "const equipped = B.backSel",
+          "line": 593,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "contentDifference": "backs子视图：卡背解锁/选用身份，沿HUB-BACKS计划；属于同一基本页别名。",
+        "observations": "同基本页子视图别名，不另计实施包。",
+        "relatedPaths": [
+          "game/src/hub/game.hub.js",
+          "game/src/hub/game.hub.pages.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "HUB-BACKS"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用HUB-BACKS性能边界：未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。",
+      "recommendedAction": "沿HUB-BACKS同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-ACH-VIEW-ACHIEVEMENTS",
+      "name": "achievements",
+      "parentId": "HUB-ACHIEVEMENTS",
+      "kind": "variant",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "const rows = M.ACHIEVEMENTS",
+          "line": 569,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "contentDifference": "achievements子视图：可领成就与真实奖励，沿HUB-ACHIEVEMENTS计划。",
+        "observations": "同基本页子视图别名，不另计实施包。",
+        "relatedPaths": [
+          "game/src/hub/game.hub.js",
+          "game/src/hub/game.hub.pages.js"
+        ],
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/HUB-ACH-stable.jpg",
+            "exists": true,
+            "sha256": "78dabc4464b243aa6b634bb12efa36b4b64ec0df4603dc58bf0256c28d4f2930",
+            "personallyReviewed": true
+          }
+        ],
+        "sharedConclusionRef": "HUB-ACHIEVEMENTS"
+      },
+      "visualStatus": "亲读历史共享图，只对实际可见内容有效",
+      "performanceRisk": "复用HUB-ACHIEVEMENTS性能边界：未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。",
+      "recommendedAction": "沿HUB-ACHIEVEMENTS同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "HUB-ACH-VIEW-CLASSES",
+      "name": "classes",
+      "parentId": "HUB-COLLECTION",
+      "kind": "variant",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.hub.pages.js",
+          "anchor": "function collRoomHTML",
+          "line": 517,
+          "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+          "changed": false
+        },
+        "contentDifference": "classes子视图：职业收藏室整体入口，沿HUB-COLLECTION计划，不是某个人物变体。",
+        "observations": "同基本页子视图别名，不另计实施包。",
+        "relatedPaths": [
+          "game/src/hub/game.hub.js",
+          "game/src/hub/game.hub.pages.js"
+        ],
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/COLLECTION-ROOM.jpg",
+            "exists": true,
+            "sha256": "d0e0f1587e63b0ae7d210fee525bb8dad3be6022eaa6dafa0feaffa879b525a1",
+            "personallyReviewed": true
+          }
+        ],
+        "sharedConclusionRef": "HUB-COLLECTION"
+      },
+      "visualStatus": "亲读历史共享图，只对实际可见内容有效",
+      "performanceRisk": "复用HUB-COLLECTION性能边界：未实测。核打开/滚动/切换/关闭实际耗时；未由文件长度判卡顿。",
+      "recommendedAction": "沿HUB-COLLECTION同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "STUDIO-TYPE-全部",
+      "name": "全部",
+      "parentId": "STUDIO",
+      "kind": "variant",
+      "researchConclusion": "明确问题",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.cardslib.page.js",
+          "anchor": "function renderCardLibrary",
+          "line": 463,
+          "baselineSha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "sha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "changed": false
+        },
+        "contentDifference": "筛选类型：全部；当前类型标签、结果数与页码对应真实TYPES数据。",
+        "observations": "TYPES/libTab源码已核，计数来自当前libCards。网格现行为滚动窗口化，旧页码表述不构成新增分页要求。",
+        "relatedPaths": [
+          "game/src/hub/game.cardslib.page.js",
+          "game/src/cards/cards.rules.js"
+        ],
+        "images": [
+          {
+            "path": "docs/evidence/2026-10-02-production-research/diagnosis/interface-captures/STUDIO-stable.jpg",
+            "exists": true,
+            "sha256": "bd3cbc8b4960ce3fe9ed5b616240242bf34422ec33ff98a653fb0a957e66cce8",
+            "personallyReviewed": true
+          }
+        ],
+        "sharedConclusionRef": "STUDIO"
+      },
+      "visualStatus": "亲读历史共享图，只对实际可见内容有效",
+      "performanceRisk": "复用STUDIO性能边界：未实测。已有缓存/双向窗口化/观察器清理/缩略图预热，先测长帧和图数，禁止重复虚拟化。",
+      "recommendedAction": "沿STUDIO同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "STUDIO-TYPE-武术",
+      "name": "武术",
+      "parentId": "STUDIO",
+      "kind": "variant",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.cardslib.page.js",
+          "anchor": "function renderCardLibrary",
+          "line": 463,
+          "baselineSha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "sha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "changed": false
+        },
+        "contentDifference": "筛选类型：武术；当前类型标签、结果数与页码对应真实TYPES数据。",
+        "observations": "TYPES/libTab源码已核，计数来自当前libCards。网格现行为滚动窗口化，旧页码表述不构成新增分页要求。",
+        "relatedPaths": [
+          "game/src/hub/game.cardslib.page.js",
+          "game/src/cards/cards.rules.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "STUDIO"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用STUDIO性能边界：未实测。已有缓存/双向窗口化/观察器清理/缩略图预热，先测长帧和图数，禁止重复虚拟化。",
+      "recommendedAction": "沿STUDIO同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "STUDIO-TYPE-法术",
+      "name": "法术",
+      "parentId": "STUDIO",
+      "kind": "variant",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.cardslib.page.js",
+          "anchor": "function renderCardLibrary",
+          "line": 463,
+          "baselineSha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "sha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "changed": false
+        },
+        "contentDifference": "筛选类型：法术；当前类型标签、结果数与页码对应真实TYPES数据。",
+        "observations": "TYPES/libTab源码已核，计数来自当前libCards。网格现行为滚动窗口化，旧页码表述不构成新增分页要求。",
+        "relatedPaths": [
+          "game/src/hub/game.cardslib.page.js",
+          "game/src/cards/cards.rules.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "STUDIO"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用STUDIO性能边界：未实测。已有缓存/双向窗口化/观察器清理/缩略图预热，先测长帧和图数，禁止重复虚拟化。",
+      "recommendedAction": "沿STUDIO同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "STUDIO-TYPE-生物",
+      "name": "生物",
+      "parentId": "STUDIO",
+      "kind": "variant",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.cardslib.page.js",
+          "anchor": "function renderCardLibrary",
+          "line": 463,
+          "baselineSha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "sha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "changed": false
+        },
+        "contentDifference": "筛选类型：生物；当前类型标签、结果数与页码对应真实TYPES数据。",
+        "observations": "TYPES/libTab源码已核，计数来自当前libCards。网格现行为滚动窗口化，旧页码表述不构成新增分页要求。",
+        "relatedPaths": [
+          "game/src/hub/game.cardslib.page.js",
+          "game/src/cards/cards.rules.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "STUDIO"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用STUDIO性能边界：未实测。已有缓存/双向窗口化/观察器清理/缩略图预热，先测长帧和图数，禁止重复虚拟化。",
+      "recommendedAction": "沿STUDIO同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "STUDIO-TYPE-道具",
+      "name": "道具",
+      "parentId": "STUDIO",
+      "kind": "variant",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.cardslib.page.js",
+          "anchor": "function renderCardLibrary",
+          "line": 463,
+          "baselineSha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "sha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "changed": false
+        },
+        "contentDifference": "筛选类型：道具；当前类型标签、结果数与页码对应真实TYPES数据。",
+        "observations": "TYPES/libTab源码已核，计数来自当前libCards。网格现行为滚动窗口化，旧页码表述不构成新增分页要求。",
+        "relatedPaths": [
+          "game/src/hub/game.cardslib.page.js",
+          "game/src/cards/cards.rules.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "STUDIO"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用STUDIO性能边界：未实测。已有缓存/双向窗口化/观察器清理/缩略图预热，先测长帧和图数，禁止重复虚拟化。",
+      "recommendedAction": "沿STUDIO同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "STUDIO-TYPE-装备",
+      "name": "装备",
+      "parentId": "STUDIO",
+      "kind": "variant",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.cardslib.page.js",
+          "anchor": "function renderCardLibrary",
+          "line": 463,
+          "baselineSha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "sha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "changed": false
+        },
+        "contentDifference": "筛选类型：装备；当前类型标签、结果数与页码对应真实TYPES数据。",
+        "observations": "TYPES/libTab源码已核，计数来自当前libCards。网格现行为滚动窗口化，旧页码表述不构成新增分页要求。",
+        "relatedPaths": [
+          "game/src/hub/game.cardslib.page.js",
+          "game/src/cards/cards.rules.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "STUDIO"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用STUDIO性能边界：未实测。已有缓存/双向窗口化/观察器清理/缩略图预热，先测长帧和图数，禁止重复虚拟化。",
+      "recommendedAction": "沿STUDIO同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "STUDIO-TYPE-事件",
+      "name": "事件",
+      "parentId": "STUDIO",
+      "kind": "variant",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.cardslib.page.js",
+          "anchor": "function renderCardLibrary",
+          "line": 463,
+          "baselineSha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "sha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "changed": false
+        },
+        "contentDifference": "筛选类型：事件；当前类型标签、结果数与页码对应真实TYPES数据。",
+        "observations": "TYPES/libTab源码已核，计数来自当前libCards。网格现行为滚动窗口化，旧页码表述不构成新增分页要求。",
+        "relatedPaths": [
+          "game/src/hub/game.cardslib.page.js",
+          "game/src/cards/cards.rules.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "STUDIO"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用STUDIO性能边界：未实测。已有缓存/双向窗口化/观察器清理/缩略图预热，先测长帧和图数，禁止重复虚拟化。",
+      "recommendedAction": "沿STUDIO同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "STUDIO-TYPE-能力卡",
+      "name": "能力卡",
+      "parentId": "STUDIO",
+      "kind": "variant",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.cardslib.page.js",
+          "anchor": "function renderCardLibrary",
+          "line": 463,
+          "baselineSha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "sha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "changed": false
+        },
+        "contentDifference": "筛选类型：能力卡；当前类型标签、结果数与页码对应真实TYPES数据。",
+        "observations": "TYPES/libTab源码已核，计数来自当前libCards。网格现行为滚动窗口化，旧页码表述不构成新增分页要求。",
+        "relatedPaths": [
+          "game/src/hub/game.cardslib.page.js",
+          "game/src/cards/cards.rules.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "STUDIO"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用STUDIO性能边界：未实测。已有缓存/双向窗口化/观察器清理/缩略图预热，先测长帧和图数，禁止重复虚拟化。",
+      "recommendedAction": "沿STUDIO同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    },
+    {
+      "id": "STUDIO-TYPE-资源",
+      "name": "资源",
+      "parentId": "STUDIO",
+      "kind": "variant",
+      "researchConclusion": "证据不足",
+      "basis": {
+        "source": {
+          "path": "game/src/hub/game.cardslib.page.js",
+          "anchor": "function renderCardLibrary",
+          "line": 463,
+          "baselineSha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "sha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+          "changed": false
+        },
+        "contentDifference": "筛选类型：资源；当前类型标签、结果数与页码对应真实TYPES数据。",
+        "observations": "TYPES/libTab源码已核，计数来自当前libCards。网格现行为滚动窗口化，旧页码表述不构成新增分页要求。",
+        "relatedPaths": [
+          "game/src/hub/game.cardslib.page.js",
+          "game/src/cards/cards.rules.js"
+        ],
+        "images": [],
+        "sharedConclusionRef": "STUDIO"
+      },
+      "visualStatus": "没有此变体独立实图，不外推通过",
+      "performanceRisk": "复用STUDIO性能边界：未实测。已有缓存/双向窗口化/观察器清理/缩略图预热，先测长帧和图数，禁止重复虚拟化。",
+      "recommendedAction": "沿STUDIO同一共享改造/验收，单独核本项真实身份、数量、规则、裁切、选中和返回；未见状态先补当前窗口证据，不另造页面。"
+    }
+  ],
+  "limitations": [
+    "没有当前浏览器实页、真实输入或性能采样；所有图是历史证据，亲读不等于当前通过。声音免验，冻结端不开发。",
+    "图片旧相对路径错位，实际interface-captures/browser-assisted在diagnosis目录；本报告仅修正引用映射，不改旧目录。",
+    "GUIDE与HUB-BACKS是部分/过渡帧，不作当前审美缺陷；未見角色/收藏/筛选变体不冒充看过。",
+    "五张默认选人立绘保护，美术素材和生图脚本不删除；建议仅供主纲裁剪，不把76行膨胀为76个实施包。",
+    "全域SHA指纹覆盖旧165项列出的源输入，入口基地以外仅哈希，不冒充源码审阅；CSS没有旧SHA不能认定未变。",
+    "后续仅当前平台内置浏览器当前窗口；既有658×764图是历史窗口，不授权新多尺寸。"
+  ],
+  "sourceInputs": [
+    {
+      "path": "game/css/battle.css",
+      "sha256": "e2c4fe866ad2cf47dd5bba0f1371d0704f0f173678158f896420896869b08a3a",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/card-v3.css",
+      "sha256": "8e3798847433d2316ff430c0c71abce6664934416d7e73f7dd096ddc997c0c57",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/cards.css",
+      "sha256": "fd1b10805d60aecf749759762221e909a3028f4a1c2bcef378271f3bcee0fce3",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/combat-feedback.css",
+      "sha256": "90157af53f476b7f558afb4c05d00e887e8224d5217d475fcaa519dd23722476",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/expedition-battle.css",
+      "sha256": "00820b720e062888c1eb18b4c65a844b68eb893178900551abc27c3a8f473f1c",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/expedition-hub.css",
+      "sha256": "1a6603ff8e8c112fb216e675d6da3d27f0670175cc2342abe1d7e32667667285",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/expedition-inventory.css",
+      "sha256": "c81993fc77c90cc5e3524cc9fc0c8fa347fe91438b2ad624b4e2d0168b59dec7",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/expedition-map.css",
+      "sha256": "ff144fa8660d83a71d6ebc1ca82c9c7160eced75cdaf834da3314df592e90e9e",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/expedition-rewards.css",
+      "sha256": "1504f9555b55dd5d8ec0ccbc7b65a4006456e56ff8f17508ad0568df0d1f087c",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/expedition-roster.css",
+      "sha256": "f673ced699f9a095dc2fe6c9437ada7a5c38401b5a4407802002eeb3e79bcee3",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/expedition-shop.css",
+      "sha256": "1371459d1409a41bb48cf23616be52acf2f2864f762f57b656bea3ef0f880540",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/expedition.css",
+      "sha256": "2761c677a94dd7d85c04cd3c15cb588478957f1ec0331c8fed7c2dcd473d55f2",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/lab-ending.css",
+      "sha256": "4e394830598c02659fe272bb504bb5cf8e7f8ee02c2346e83951c1750d950e4f",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/overlays.css",
+      "sha256": "68045996feed7ed077f56dbfe6ffe6ebdfce9d62e59bc545bb6f058b49e73609",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/page-ach.css",
+      "sha256": "9c0d4c093593104cb7b3e6717e5b294ac2ee5ac532b03ba689b55c30586ff394",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/page-cardforge.css",
+      "sha256": "0ae5387f4c9bdeba52f736bb2bf93b36a073de76985f5c5f450ef5efae5a6842",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/page-cardslib.css",
+      "sha256": "42c5483a5c46633c410ab2fa02df40ba4f806481e84b8933973344be4332c85c",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/page-classes.css",
+      "sha256": "8f7f412fdd314fd330f9f5f3134f93d296f525179f711bb158022df4297de07c",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/page-datapage.css",
+      "sha256": "cd19ba334fb1bb386d5b7ddf271599ac07e250ff2eda946c20f3c9a718c30ee4",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/page-deploy.css",
+      "sha256": "5b07ba1a878cb1e864f5e582a6bacdf015d6bbea1ec870d643dc2c3df27c5006",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/page-events.css",
+      "sha256": "73e4854d755921b36ac80178b6e7ede7d17ed3eeecee3d256dcedfe3a8c4c6bd",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/page-expedition-hud.css",
+      "sha256": "9c4933bfb5c3b79f54d66d844838ef5b9f729c3cc3d5c418fd544ba892b73eed",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/page-hub.css",
+      "sha256": "1bd197ac65fcfdf42185400e1d113c41c00cfabc7ecb94a9ef24fe540d3dfc72",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/page-rewards-bag-help.css",
+      "sha256": "c192bf5ce0632ed986637acfe2a1da649bea5aa0bdbb3253a294ccb9095684d6",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/page-settings.css",
+      "sha256": "babeac24acd26fd915f3de3785c5e78102132814f250f786d5de548fbb60e182",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/page-shop.css",
+      "sha256": "86a7df4ce69c0a42cc9b50fb5ccf5765976055eac3141f4d2485670006b5beb3",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/page-slot-select.css",
+      "sha256": "890a746ad2566fa65f32395a98f8a729b0f95238ffab8054c82628b9d6e0ccec",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/page-stash.css",
+      "sha256": "65f9abae8ba1cde52a8cca0dc7d276b51f9684a8f2fb925b3875302b74c21bca",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/page-upgrade.css",
+      "sha256": "8caef993b803399f45a3830b5e204e06e2633f3d1b27226e01f399c116841884",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/photo-studio-mounts.css",
+      "sha256": "0b2af0289d7bdebf3db8aa7764bca54fd02d312cca189bd8555b4a971511c187",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/pocket-strip.css",
+      "sha256": "1a9c662718a4fa58e2d5010217b9b66ff67c9086120a27d7bd10e0a1bd1a8c9a",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/preparation.css",
+      "sha256": "e3a41a537fce727dcdf209f428d7c33ac2d87483dcb3ce15084fc3c180866bcd",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/scenes.css",
+      "sha256": "ea832d0aec9caddf8b602dd882ee13acc09c6512be89c5a3c34f15dc951ed338",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/sfx-audition.css",
+      "sha256": "efef56115f0fea572dbd044e21dc32e40554bf515fb384e69c68f13da3bf19eb",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/css/title-p0.css",
+      "sha256": "3a725507b7a892119a5f950f5275fa1219f3b8c95368c360bc5704ddbc346195",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/src/agent/agent.console.js",
+      "sha256": "098a10cefdbe945c1d4227beaf84dba3fcd73d45f7545fff657174adf3e707b5",
+      "baselineSha256": "02eb889c7c7bb64a538bfb691d162cebe9c5a44f9e9c1dad419e8aa411f53323",
+      "changedSinceBaseline": true
+    },
+    {
+      "path": "game/src/agent/agent.data.js",
+      "sha256": "5b1910d82355a329d3a18c91d75fdc98adcffa8c263c00c00ec0a3f705d14501",
+      "baselineSha256": "4f87cba1a7bfacf4fbc13a3b91ce0286e84c2098b206b4ab1b92330112f2ba6c",
+      "changedSinceBaseline": true
+    },
+    {
+      "path": "game/src/audio/sfx-audition.js",
+      "sha256": "e2a5dbbfc72747a51f1023a70bccd4f8ed33785126e0433a2ab2473881bdebdc",
+      "baselineSha256": "e2a5dbbfc72747a51f1023a70bccd4f8ed33785126e0433a2ab2473881bdebdc",
+      "changedSinceBaseline": false
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "sha256": "e9ff86fe575dec41d755e350f3c2e8f3d2996eb9f417e9a9e1013a11e70ab83e",
+      "baselineSha256": "e9ff86fe575dec41d755e350f3c2e8f3d2996eb9f417e9a9e1013a11e70ab83e",
+      "changedSinceBaseline": false
+    },
+    {
+      "path": "game/src/battle/view/battle.overlays.js",
+      "sha256": "4e7ee00e4960140de76e8e50394a0e78490609ebdece66fd8f231fdff9dd19e6",
+      "baselineSha256": "4e7ee00e4960140de76e8e50394a0e78490609ebdece66fd8f231fdff9dd19e6",
+      "changedSinceBaseline": false
+    },
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "sha256": "0176cbe9aa4562ece056541b9cf4aa1763479e184d04a07bbd4fe905e8800828",
+      "baselineSha256": "1e0789d9c02a637e2d43479264997a2f78c2d57a28dbfee6e7342147719500aa",
+      "changedSinceBaseline": true
+    },
+    {
+      "path": "game/src/cards/cards.rules.js",
+      "sha256": "58fe30fa3c7f0d86bb5f3d88632b1613ff3972b83bddc814f66ad4aedab8e2c0",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/src/core/art.js",
+      "sha256": "917fa8978c06605664cc0c9e7aa57acfab745cb94973d07a5f3f6ed20c639f77",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/src/core/characters.js",
+      "sha256": "debf1abce843de26a49adbfaab9b2a8190740939c61bd3ae03a0fe6502afdc7c",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/src/experience/pocket-strip.js",
+      "sha256": "27fe4698f7fb0db6d58e75cf942147414a47a2e361aa9171df0022f3089c9d4b",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/src/hub/game.bag.js",
+      "sha256": "b608bc37946e08d6ded684887079b4f477acbfb14a759876ccb86c0bb57dbb9c",
+      "baselineSha256": "b608bc37946e08d6ded684887079b4f477acbfb14a759876ccb86c0bb57dbb9c",
+      "changedSinceBaseline": false
+    },
+    {
+      "path": "game/src/hub/game.bag.settle.js",
+      "sha256": "3d03d698f5b8f708224323eddc44770d0cc01baf761dbb3d8dfdd18ed47d73c2",
+      "baselineSha256": "7b2d0b64d68f025a90ca9f33f5488f20cbe4e37fb7e8916047e95c5690f91ce1",
+      "changedSinceBaseline": true
+    },
+    {
+      "path": "game/src/hub/game.cardslib.designer.js",
+      "sha256": "7991adb7c1a8e3de3266eec87b503491e6d9b65f27ca358685ebbba6f64b8cb5",
+      "baselineSha256": "7991adb7c1a8e3de3266eec87b503491e6d9b65f27ca358685ebbba6f64b8cb5",
+      "changedSinceBaseline": false
+    },
+    {
+      "path": "game/src/hub/game.cardslib.page.js",
+      "sha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+      "baselineSha256": "aba856ebc1bc8fe35e27d5620d83015692aa7918ee4245393330ba85b4630f52",
+      "changedSinceBaseline": false
+    },
+    {
+      "path": "game/src/hub/game.hub.depart.js",
+      "sha256": "bac138ae4581178bfe1a23554e465c7fc89d254147cdfe5f2266f3398edce9fa",
+      "baselineSha256": "bac138ae4581178bfe1a23554e465c7fc89d254147cdfe5f2266f3398edce9fa",
+      "changedSinceBaseline": false
+    },
+    {
+      "path": "game/src/hub/game.hub.js",
+      "sha256": "bd0cec0ddcfac314380bfab5bfde945fead4cccdc2a3168d56a1ea817ecb102e",
+      "baselineSha256": "bd0cec0ddcfac314380bfab5bfde945fead4cccdc2a3168d56a1ea817ecb102e",
+      "changedSinceBaseline": false
+    },
+    {
+      "path": "game/src/hub/game.hub.pages.js",
+      "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+      "baselineSha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f",
+      "changedSinceBaseline": false
+    },
+    {
+      "path": "game/src/hub/game.notes.js",
+      "sha256": "d60c6964c677a7461ec21828a14f3d9a4b097fcba4cbb833af150044827cdcd6",
+      "baselineSha256": "df0f8a3d9d80544ed46edfb161b81ba1b2ff3c783d2a2d71e3acde5e51ecd171",
+      "changedSinceBaseline": true
+    },
+    {
+      "path": "game/src/hub/preparation.view.js",
+      "sha256": "8fb5deb1dd49dfc471c7166c84ac72498fcd7089e6f2ad88c038704a1614a15f",
+      "baselineSha256": "8fb5deb1dd49dfc471c7166c84ac72498fcd7089e6f2ad88c038704a1614a15f",
+      "changedSinceBaseline": false
+    },
+    {
+      "path": "game/src/run/chests.js",
+      "sha256": "37071c99427a5d2f514128a252795269a56bc3ccdfa4bdb1a82ddb1f312d5053",
+      "baselineSha256": "37071c99427a5d2f514128a252795269a56bc3ccdfa4bdb1a82ddb1f312d5053",
+      "changedSinceBaseline": false
+    },
+    {
+      "path": "game/src/run/expedition.view.js",
+      "sha256": "c55cf92bb8340afaccc71807a768bc7afd2913de43ea2b9f5d1d8e144c6bb335",
+      "baselineSha256": "c55cf92bb8340afaccc71807a768bc7afd2913de43ea2b9f5d1d8e144c6bb335",
+      "changedSinceBaseline": false
+    },
+    {
+      "path": "game/src/run/game.nest.js",
+      "sha256": "72bd4f0f893f1fbf8e5c808c4f8bfd979f30aa095843e58f2f5426b0e0a3f538",
+      "baselineSha256": "72bd4f0f893f1fbf8e5c808c4f8bfd979f30aa095843e58f2f5426b0e0a3f538",
+      "changedSinceBaseline": false
+    },
+    {
+      "path": "game/src/run/game.run.altar.js",
+      "sha256": "fa41f1c3206db40027b8345b540d6c5e65f3a8e78d7f19405aba44b3ebe1afef",
+      "baselineSha256": "9249104eb75dda983f18dc064edac3810347e8fcba6699bca6994c245d11a7e1",
+      "changedSinceBaseline": true
+    },
+    {
+      "path": "game/src/run/game.run.dev.js",
+      "sha256": "adca20a4cf94501634ddf5715cccc4ee5e5727c01a2ec25bf6cf3db99829f8ad",
+      "baselineSha256": "47ca24edd9556730fea694b04edebfcae871b4ca000ecd58476b80199bf8abf8",
+      "changedSinceBaseline": true
+    },
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "sha256": "b6d68b5cb280d297b6e5337dc05ace3ca049e4bfda4db11375c33bec8a14b084",
+      "baselineSha256": "52d31e7811be56dd191b5d7a65d4a4124affc6f68c5f0d6698d01c4d7a377788",
+      "changedSinceBaseline": true
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "sha256": "cfb7291a73dd8a0cbe66bfdd812eb057db1fef413ba48226ac11a35fbadecc64",
+      "baselineSha256": "cfb7291a73dd8a0cbe66bfdd812eb057db1fef413ba48226ac11a35fbadecc64",
+      "changedSinceBaseline": false
+    },
+    {
+      "path": "game/src/run/game.run.shop.js",
+      "sha256": "9d73c89a1d415f1c0c7c1510beb52112890e716311194a310a2c9acbde87d588",
+      "baselineSha256": "9d73c89a1d415f1c0c7c1510beb52112890e716311194a310a2c9acbde87d588",
+      "changedSinceBaseline": false
+    },
+    {
+      "path": "game/src/run/game.session.death.js",
+      "sha256": "10eab34d969e9ab7812f5c9eb20b516a50662d32862540c4de8f31115e08d9a5",
+      "baselineSha256": "2d015cc342291a578b0dea775eccb8efe22ac21545f5c6e1754dae38635a894a",
+      "changedSinceBaseline": true
+    },
+    {
+      "path": "game/src/run/game.session.modes.js",
+      "sha256": "97bdd16eefa10e6b3e9144299f9920f62cafc15ab117ec2c3f55f05da33fb2a7",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/src/run/lab.ending.js",
+      "sha256": "4ebedd8dd70253956410986e19b45d61a3b993514fb5a1dbc4fab1bc01d91b6c",
+      "baselineSha256": "4ebedd8dd70253956410986e19b45d61a3b993514fb5a1dbc4fab1bc01d91b6c",
+      "changedSinceBaseline": false
+    },
+    {
+      "path": "game/src/run/layeredMap.js",
+      "sha256": "679e59f0cf4fb2c264ecf0838a1eda9b83ab315ed31b054b32f4816d5c18cd35",
+      "baselineSha256": null,
+      "changedSinceBaseline": null
+    },
+    {
+      "path": "game/src/ui/game.menu.js",
+      "sha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+      "baselineSha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124",
+      "changedSinceBaseline": false
+    },
+    {
+      "path": "game/src/ui/term-tips.js",
+      "sha256": "4191d9cccfb1626ca1186d9e58015c8f891ad31cb3daa3e45ed5ee2155cd7c01",
+      "baselineSha256": "90c24e0fefe9a9d49ef610220cd9da6ce39082e87b9204ce1ccb39f7eb6f8661",
+      "changedSinceBaseline": true
+    },
+    {
+      "path": "game/src/ui/terminal-settlement.js",
+      "sha256": "db5b21b4ee1be4f1889540433d6e3b8348351d19c80320ead3810125756b1c8c",
+      "baselineSha256": "3dbe873264615d5d6dbdfc539f60faae79cce81657fef230417ea1ccff0b65a5",
+      "changedSinceBaseline": true
+    },
+    {
+      "path": "game/src/ui/ui.js",
+      "sha256": "5dcdd6fd9df85ccb2ddb80896c9ddb00b869a666f4a2f5d1ae903cd3224c0815",
+      "baselineSha256": "5dcdd6fd9df85ccb2ddb80896c9ddb00b869a666f4a2f5d1ae903cd3224c0815",
+      "changedSinceBaseline": false
+    }
+  ],
+  "globalCurrentSourceFingerprint": "46a613a12acadea0c0e615888dd120989424301d6729e0a39a65312c88785e08",
+  "head": "425d03920e4323b016433419ec11aec4a7f3795b",
+  "catalog": {
+    "path": "docs/evidence/2026-10-02-production-research/planning/pages/pages.json",
+    "sha256": "ffc58a7bc957b98f3a27954a6213f1b1704dff73218ab6688df58d4cc2eb9a30"
+  },
+  "changedMappings": [
+    {
+      "id": "CLASS-CHOICE",
+      "path": "game/src/run/game.run.altar.js",
+      "anchor": "export function openClassChoice",
+      "line": 95,
+      "baselineSha256": "9249104eb75dda983f18dc064edac3810347e8fcba6699bca6994c245d11a7e1",
+      "sha256": "fa41f1c3206db40027b8345b540d6c5e65f3a8e78d7f19405aba44b3ebe1afef",
+      "changed": true,
+      "scopeImpact": "本次未提交差异在撤离exFinish/showExtractDone，未触选人卡池"
+    },
+    {
+      "id": "CLASS-POOL",
+      "path": "game/src/run/game.run.altar.js",
+      "anchor": "const renderPool =",
+      "line": 250,
+      "baselineSha256": "9249104eb75dda983f18dc064edac3810347e8fcba6699bca6994c245d11a7e1",
+      "sha256": "fa41f1c3206db40027b8345b540d6c5e65f3a8e78d7f19405aba44b3ebe1afef",
+      "changed": true,
+      "scopeImpact": "本次未提交差异在撤离exFinish/showExtractDone，未触选人卡池"
+    },
+    {
+      "id": "BATTLE-SETTLE-RETRY",
+      "path": "game/src/hub/game.bag.settle.js",
+      "anchor": "战后结算未完成",
+      "line": 64,
+      "baselineSha256": "7b2d0b64d68f025a90ca9f33f5488f20cbe4e37fb7e8916047e95c5690f91ce1",
+      "sha256": "3d03d698f5b8f708224323eddc44770d0cc01baf761dbb3d8dfdd18ed47d73c2",
+      "changed": true,
+      "scopeImpact": "已提交教学示例和第五层→第四层文案，重试呈现未证明改变"
+    },
+    {
+      "id": "TERM-TIP",
+      "path": "game/src/ui/term-tips.js",
+      "anchor": "function show(el)",
+      "line": 93,
+      "baselineSha256": "90c24e0fefe9a9d49ef610220cd9da6ce39082e87b9204ce1ccb39f7eb6f8661",
+      "sha256": "4191d9cccfb1626ca1186d9e58015c8f891ad31cb3daa3e45ed5ee2155cd7c01",
+      "changed": true,
+      "scopeImpact": "已提交自然形态→满月形态显示名，布局未证明改变"
+    }
+  ],
+  "protectedAssets": [
+    {
+      "id": "wu",
+      "path": "game/assets/portraits/full/wu.webp",
+      "exists": true,
+      "sha256": "a7c5d4e2242558337f5f5a8b8df71cda875af73586ec70657b45836f01466c6c"
+    },
+    {
+      "id": "changwuyu",
+      "path": "game/assets/portraits/full/changwuyu.webp",
+      "exists": true,
+      "sha256": "98e69d19b6c2129d0f85d320bb95e4609584576c94b041663a523067ff946185"
+    },
+    {
+      "id": "baita",
+      "path": "game/assets/portraits/full/baita.webp",
+      "exists": true,
+      "sha256": "e0731848113da23e419bb6ddfcab2bcbaa83598065511945d11aa7306076bcbb"
+    },
+    {
+      "id": "heixiang",
+      "path": "game/assets/portraits/full/heixiang.webp",
+      "exists": true,
+      "sha256": "e186722f97369b3a63a45dca056e2fe6c10f7b211c8de9403f71639d4f6bda6e"
+    },
+    {
+      "id": "xingyue",
+      "path": "game/assets/portraits/full/xingyue.webp",
+      "exists": true,
+      "sha256": "7fb82912770395c264bfb5c6918badfd176aa503ddf11cd07f0da0cd9300600c"
+    }
+  ],
+  "counts": {
+    "basic": 36,
+    "variants": 40,
+    "total": 76,
+    "uniqueIds": 76,
+    "imagesReferenced": 38,
+    "imagesPersonallyReviewed": 27,
+    "missingImages": 0
+  }
+}

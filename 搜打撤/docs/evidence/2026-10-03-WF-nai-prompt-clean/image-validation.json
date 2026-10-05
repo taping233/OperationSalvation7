@@ -1,0 +1,32 @@
+{
+  "path_relative_to_repository": ".tmp/nai/output/wu-battle-right-transparent-20261003/wu-battle-right-transparent.png",
+  "original_generator_path": "C:\\Users\\太平\\.codex\\generated_images\\01a101d3-64db-7dd2-b9b8-9d38ae82f4a2\\exec-d2d84854-5f8f-4395-94aa-8016cdaf895f.png",
+  "sha256": "02207b2dc41f69bc2490d99bdc5cd8dc076980309047fef18add36a70dfa72c1",
+  "bytes": 1980232,
+  "mode": "RGBA",
+  "size": [
+    1024,
+    1536
+  ],
+  "alpha_extrema": [
+    0,
+    254
+  ],
+  "transparent_pixels": 947233,
+  "partial_alpha_pixels": 625631,
+  "corner_alpha": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "source": "built-in image_gen, using approved Wu portrait as an inspected reference",
+  "seed": "not exposed by this channel",
+  "visual_checks": [
+    "full figure and sword inside canvas",
+    "body face gaze and sword face screen-right",
+    "approved white ponytail, sunglasses, blue bow, black rose, black ruffled dress, blue star lining, bare legs and boots retained"
+  ],
+  "runtime_replacement": false,
+  "git_policy": "PNG exceeds 1 MB; stays in ignored .tmp directory; record relative path and SHA256 only"
+}

@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "line": "A6",
+  "date": "2026-10-03",
+  "head": "425d03920e",
+  "scope": "基地、收藏与工具「剩余部分」只读研究：仓库/出售/材料/蛋/宠物/卡背/成就·收藏/预设、存档恢复页、设置/帮助/留言（他人属地只读）、卡牌制作/导入冻结拒绝行为、节点笔记、开发台四页签回归核、coverage 行新鲜度",
+  "method": "全文细读 game.hub.js/base.js/base-state.js/base.commands.js/base-pet-egg.commands.js/collection.commands.js/meta-progression.js/meta.js/base-meta.commands.js/base-economy.js/game.hub.pages.js/game.hub.bridge.js/game.hub.preparation.js/recovery.commands.js/recoverable-pair.js/versioned-slot-reader.js/game.storage.js/game.notes.js/core/notes.js/game.menu.js/game.cardslib.designer.js/game.cardslib.page.js/game.cardslib.common.js/ui/overlay.js/ui/term-tips.js + 定向读 rule-config.js/achievements.json/pets.json/hub.css/page-stash.css/expedition-inventory.css/page-rewards-bag-help.css + git diff 核开发台在途改动 + node 脚本比对 coverage.json inputs 哈希。禁浏览器：全部为源码级复核，无实页操作。",
+  "findings": [
+    {
+      "id": "A6-ACH-01",
+      "where": "game/src/hub/game.hub.js:287-290",
+      "problem": "成就领取 claimAch 只处理成功分支：meta.js claim() 专门构造的仓库满缓发回执 {ok:false,why:'full',msg:'仓库容量不足——先卖出或扩建卡牌仓库再来领取'}（meta.js:239-241）与 grantReward 的存储写失败回执 {ok:false,why:'save',msg:'基地存档未保存…'}（base-economy.js:24）在此被整体丢弃，点击「领取」后无日志、无重绘、无任何反馈。收藏里程碑 claimColl（game.hub.js:305-309）处理了 why==='full' 但同样漏掉 save 失败分支。",
+      "impact": "带卡奖励的成就（achievements.json 实证 labScore2→tt3-thunderblast、labScore3→tt3-immortal-blade）在仓库满时点领取完全无反应，玩家会以为按钮坏了；所有成就/收藏领取在 localStorage 写满时同样静默失败。错误消息已经构造好，只差消费端一行。",
+      "severity": "medium",
+      "action": "fix：game.hub.js claimAch 补 else 分支 UI.log(r.msg || '领取失败，请稍后重试','warn') 并在失败但原因明确时也 renderHub()；claimColl 补 r.why==='save' 时 UI.log(r.msg,'warn')。不改 claim/grantReward 语义。",
+      "files": ["game/src/hub/game.hub.js"],
+      "status": "verified"
+    },
+    {
+      "id": "A6-STASH-01",
+      "where": "game/src/hub/game.hub.pages.js:92,117",
+      "problem": "消耗口袋「复原」按钮的可用判定用 B.keyCount()（真实钥匙储备+仓库钥匙材料卡折算，base.js:639-648），而点击后 restore() 执行判定只认真实储备 data.keys（base.js:483）。仓库有钥匙材料卡但真实储备不足时按钮亮起，点击必报「钥匙不足…可在仓库把钥匙材料卡『使用』折入储备」（game.hub.js:284）。",
+      "impact": "玩家多点一次无效按钮并需读一条解释才能继续；引导文案存在、流程可走通（先使用材料卡再复原），故仅为轻微摩擦而非不可用。",
+      "severity": "low",
+      "action": "fix：game.hub.pages.js 口袋行 afford 改用 B.data.keys||0 与 restore 同口径（title 补「钥匙材料卡需先使用折入」），或保持现状并接受该提示引导——二选一，前者最便宜。",
+      "files": ["game/src/hub/game.hub.pages.js"],
+      "status": "verified"
+    },
+    {
+      "id": "A6-STASH-02",
+      "where": "game/src/hub/game.hub.pages.js:249-253,378-382",
+      "problem": "仓库弹层内材料「使用 1 张/全部使用」与「卖出 1 张/全部卖出」的命令失败分支静默：useStashMaterial/sellStashCards 的 {ok:false,why:'save',msg:'基地存档未保存，请重新载入后重试'}（base.js:592,611）在两处都只写 if (r.ok)，失败时同样执行 renderHub() 关闭弹层，无任何提示。",
+      "impact": "存储写满的边缘场景下，玩家确认操作后弹层关闭但物资/币未到账、卡未减少且无解释；操作本身未生效（幂等，无数据损失）。",
+      "severity": "low",
+      "action": "fix：两处补 else UI.log(r.msg || '操作未生效，请重新载入档位后重试','warn')，失败时不调用 renderHub 以保留弹层现场（与备注保存失败的处理同款，core/notes.js:18-21 先例）。",
+      "files": ["game/src/hub/game.hub.pages.js"],
+      "status": "verified"
+    },
+    {
+      "id": "A6-MENU-01",
+      "where": "game/src/ui/game.menu.js:127",
+      "problem": "右键留言的页面识别器 describeCurrentPage 的基地页签中文名映射缺 shop：{deploy,stash,upgrade,classes,ach} 五键之外走 || key 回退，基地「商店」页签内右键留言时 page.name 记为「基地 · shop」。",
+      "impact": "留言库中该条记录的位置名夹生英文，可辨认但不一致；其余五个基地页签均显示中文。",
+      "severity": "low",
+      "action": "fix：映射补 shop: '商店'（一行）。属地 game.menu.js 归 WF-experience-art-exec，本线只报告不动手。",
+      "files": ["game/src/ui/game.menu.js"],
+      "status": "verified",
+      "review": "他人属地（game.menu.js 属 WF-experience-art-exec），按任务要求仅核冻结工具文案之外的问题并标注归属"
+    }
+  ],
+  "keeps": [
+    {"item": "卡牌制作/导入冻结拒绝行为（CARD-DESIGNER/CARDS-IMPORT）", "reason": "冻结期入口本身不渲染：game.cardslib.page.js:489 editorTools 中「＋制作新卡」「导入」只在 CARD_DESIGNER_WRITES_ENABLED 时出现，:137 编辑/删除操作同条件；运行时另有 designer.js:36/331 静默redirect、:264/341 与 page.js:537/563/608/624 直 return 的多重守卫。玩家日常路径见不到入口即无误导；设置页开发者勾选文案已改「开发者模式（测试工具）」（game.menu.js:983，他人已实施）不再承诺卡牌制作。导出（CARDS-EXPORT）为只读行为保留开放符合设计。维持冻结，不开启写入口。"},
+    {"item": "存档恢复链（SLOT-RECOVERY）", "reason": "recovery.commands.js 日志四快照版本门+收据身份链校验（:27-54）、Web Locks 独占锁（:62-66）、recoverable-pair.js 三相日志+第三值检测（:77-88）+失败保留现场（:138-142）、versioned-slot-reader.js 迁移断链装载期炸出（:35-39）+tooNew拒读+坏档备份、game.storage.js U17 prev 自愈不假称已回退（:96-99）；UI 侧选档页 enterSlot 恢复失败走页内 #slotRestoreError role=alert+日志+保留原档（game.menu.js:714-727），失败文案均交代「原档与恢复记录已保留」。语义严谨无需改动。"},
+    {"item": "基地各页签空/满/锁定/危险状态", "reason": "仓库空态引导（game.hub.pages.js:108-112）、口袋空说明（:124）、宠物未孵化摘要行而非占位行（:163-181）、货架空态封条兜底（:66-69）、成就 0 解锁剪影陈列含 title 名与条件（:630-633）、卡背锁定显示来源（:606-614）、材料 0 时 zero 态（:142-149）、卖出价≥5或末张/收藏消耗/材料末张与全部使用均有两步确认（:256-270,277-286,350-360,384-398）且确认层 initialFocus 落保留（:260,283）。覆盖完整。"},
+    {"item": "基地帮助文案与规则数据一致性（HUB-HELP 六页签）", "reason": "registerHubHelp（game.hub.js:323-363）逐条对照源数据核实：宠物蛋 0.7%起+3%/场+0.2% = rule-config.js:12-14（0.007/0.03/0.002）；孵化 50 币 = pets.json hatchCost；宠物升级 2-3-4-5 上限 Lv.5 = pets.json upCosts/levelMax；职业卡+10/能力卡+50 = meta.js:30；钥匙门槛 10 = base.js:629；口袋复原价古朴1/稀有2/史诗3/传说4 = base.js:466；扩建木材2/+3张/上限100/符文门槛50×2 = rule-config.js:7。帮助弹层机制（overlay.js showHelp/registerHelp + hideOverlay 清 _acts :188）无泄漏、Esc 经取消按钮探测可关。"},
+    {"item": "照相馆已验收结构（STUDIO/CARD-ZOOM）", "reason": "窗口化瓦片（page.js:116-121 壳常驻+IO 双向挂卸）、筛选缓存（:90-111 含内容失效修正）、art 预热、悬停 90ms 去抖（:668-683）、搜索 120ms debounce（:651-655）、TDZ 事故修复注记（:533-535）均在位；closeLibPage 完整清理观察器/定时器/缓存（:700-722）；showCardZoom inert+焦点管理（ui.js:108 起）。未发现新回归，不重开改造。"},
+    {"item": "节点笔记四件套（NODE-NOTE/NOTES-EXPORT/NOTES-IMPORT/NOTES-CLEAR）", "reason": "写失败返回 false 并保留弹层与输入（game.notes.js:73-84 + core/notes.js:13-23）、导入 v2/v3 兼容+failed 计数如实上报（:150-179）、清空红系危险钮+默认焦点落取消（:184-201，10-02 老板定版已实施）、旧键迁移幂等（:7-31）。"},
+    {"item": "开发台四页签（DEV-DEBUG/DEV-AGENT/DEV-DATA/DEV-KEYS）无新回归", "reason": "git diff 核实在途改动仅 SYS-11：game.run.dev.js 为调试动作追加 noteIntervention 记录（devForceBattle/devJumpNode/devcCoin/Heal/Card 四处），agent.data.js 为明细驱动列改 provenance 三态标签，均不触碰 batch1 验收的栅格分组/状态条/键位行/危险分区结构；agent.console.js 与 quick-nav.js 无工作树改动。winter.css .devc-row 死样式残留为 batch1 复核已知项，不重复报。"},
+    {"item": "升级页短缺原因展示（HUB-UPGRADE）", "reason": "他人已实施 slice 在位且正确：game.hub.pages.js:426-432 符文门槛成本/差额计算与 base.js:378-381 canUpgradeStash 同口径，:465/471-473 按钮文案与 hint 渲染齐全，不重复报。"},
+    {"item": "整备预设面板（PREP-GOALS）", "reason": "game.hub.preparation.js:84-121 命令失败 repaint(result.message||'操作失败')、preset-apply 资格失效提示「库存或资格已变化，预设无法应用。」、generation token 防 dispose 后回调（:22-23,60）；preparation.view.js 预设渲染含移除/预览/应用钮。详细体验归 A3 整备线，本线未见缺陷。"},
+    {"item": "UI.act 注册与基地重绘机制", "reason": "UI.act 为覆盖式赋值（ui.js:101）且 hideOverlay 清空 _acts/_inputHandler/_hoverHandler（overlay.js:188-190），renderHub 每次全量重注册无泄漏累积；基地关闭 closeBase 走 disposeHome+hideOverlay+showTitle（game.hub.js:367-373）返回链正确。"}
+  ],
+  "status": [
+    {"page": "HUB-STASH 仓库（卡牌仓库/消耗口袋/物资）", "state": "主体正常保留；一处复原按钮可用口径不一致（A6-STASH-01）与弹层失败静默（A6-STASH-02）", "evidence": "game/src/hub/game.hub.pages.js:87-154 + base.js:476-492 + game.hub.js:278-286"},
+    {"page": "STASH-ITEM 仓库物品弹层", "state": "正常保留：卖出/收藏/转化三分支、危险确认、特殊收藏品保护说明齐全", "evidence": "game/src/hub/game.hub.pages.js:196-400"},
+    {"page": "STASH-CONFIRM / MATERIAL-CONFIRM 确认弹层", "state": "正常保留：确认层 initialFocus 落保留、失败分支见 A6-STASH-02", "evidence": "game/src/hub/game.hub.pages.js:256-286"},
+    {"page": "STASH-MATERIAL / MATERIAL-CONFIRM 材料使用", "state": "正常保留：材料不可卖出口径页内说明+弹层双重表达；末张/全部使用有确认", "evidence": "game/src/hub/game.hub.pages.js:231-273 + base.js:534-593"},
+    {"page": "STASH-EGG 宠物蛋孵化弹层", "state": "正常保留：未拥有随机孵化、币不足/集齐/存档失败分支齐全，egg 插画资源在位", "evidence": "game/src/hub/game.hub.pages.js:200-229 + assets/ui/emblems/pet-egg.png 已核实存在"},
+    {"page": "STASH-RAW 真实物资说明", "state": "正常保留：木材/口粮不可卖说明弹层", "evidence": "game/src/hub/game.hub.pages.js:403-416"},
+    {"page": "HUB-PETS 宠物区域", "state": "正常保留：已孵化列出/未孵化摘要行/携带切换/蛋提示", "evidence": "game/src/hub/game.hub.pages.js:157-193"},
+    {"page": "HUB-UPGRADE 升级页", "state": "正常保留：他人短缺原因 slice 已在位；数值与规则一致", "evidence": "game/src/hub/game.hub.pages.js:419-482 + base.js:357-432"},
+    {"page": "HUB-SHOP 基地商店", "state": "正常保留：买不起降饱和+原因、仓库满拦截、空态封条兜底", "evidence": "game/src/hub/game.hub.pages.js:40-85 + base-economy.js:27-39"},
+    {"page": "HUB-CLASSES 人物档案", "state": "正常保留：熟练度/皮肤切换/aria-pressed 齐全；class-dossier 样式属地归他人", "evidence": "game/src/hub/game.hub.pages.js:485-524 + game.hub.js:220-227"},
+    {"page": "HUB-ACH / HUB-BACKS / HUB-ACHIEVEMENTS / HUB-COLLECTION 成就·收藏", "state": "主体正常保留；领取失败反馈缺口见 A6-ACH-01；两条布局 option（收藏室首屏拥挤/成就奖励行宽）为他人已登记未实施项待实页定夺", "evidence": "game/src/hub/game.hub.pages.js:529-660 + meta.js + docs/evidence/2026-10-03-WF-experience-art-exec/hub-tools-options.json options[2][3]"},
+    {"page": "HUB-HELP 帮助弹层（六页签主题）", "state": "正常保留：文案与 rule-config/pets.json/achievements.json/base.js 逐条一致", "evidence": "game/src/hub/game.hub.js:323-363 + game/src/ui/overlay.js:13-28"},
+    {"page": "SLOT-RECOVERY 读档恢复", "state": "正常保留：恢复失败页内 alert+日志+保留原档；事务链严谨", "evidence": "game/src/ui/game.menu.js:698-727 + recovery.commands.js + recoverable-pair.js + versioned-slot-reader.js + game.storage.js"},
+    {"page": "SETTINGS 设置页（他人属地只读）", "state": "正常保留：开发者勾选文案已改、危险区两步确认+分级布局、存储安全封装", "evidence": "game/src/ui/game.menu.js:962-1092"},
+    {"page": "INBOX / SUGGESTION 留言（他人属地只读）", "state": "正常保留：右键入口+一次性提示、留言库空态邮筒图在位、删除两步确认、导出反馈；一处页面识别缺 shop 映射见 A6-MENU-01", "evidence": "game/src/ui/game.menu.js:44-55,228-391 + assets/ui/sugin-mail-empty.webp 已核实存在"},
+    {"page": "TITLE-ACH 标题成就总览（只读）", "state": "正常保留：以最近档为据、无档兜底文案、明确「奖励需进基地领取」", "evidence": "game/src/ui/game.menu.js:433-463"},
+    {"page": "CARD-DESIGNER 卡牌制作器", "state": "冻结保留：入口不渲染+多重运行时守卫，拒绝行为清楚（见 keeps）；不开启写入口", "evidence": "game/src/hub/game.cardslib.page.js:489 + game.cardslib.designer.js:36,264 + game.cardslib.common.js:25"},
+    {"page": "CARDS-EXPORT / CARDS-IMPORT", "state": "导出只读开放（复制/下载带失败提示）；导入随冻结关闭", "evidence": "game/src/hub/game.cardslib.designer.js:304-370"},
+    {"page": "NODE-NOTE / NOTES-EXPORT / NOTES-IMPORT / NOTES-CLEAR 节点笔记", "state": "正常保留：写失败保护/导入失败计数/清空危险红钮", "evidence": "game/src/hub/game.notes.js + game/src/core/notes.js"},
+    {"page": "DEV-DEBUG / DEV-AGENT / DEV-DATA / DEV-KEYS 开发台四页签", "state": "已验收不重做；回归核通过：在途改动仅 SYS-11 干预履历与 provenance 标签，页面结构未动", "evidence": "git diff -- game/src/run/game.run.dev.js game/src/agent/agent.data.js（本轮实跑，见 method）+ docs/evidence/2026-10-03-batch1-toolpages/README.md"},
+    {"page": "PREP-GOALS 下一局目标与双预设", "state": "正常保留：失败反馈与守卫完整；深入体验归 A3 整备线", "evidence": "game/src/hub/game.hub.preparation.js:60-122 + preparation.view.js"},
+    {"page": "coverage 对应行新鲜度", "state": "26 行 inputs 指纹已过期（game.hub.pages.js/game.menu.js/expedition-inventory+hub.css/agent.data.js 等被在途会话改动），17 行仍新鲜；本报告全部结论按当前源码重核，coverage 行 status 未回写（只读任务）", "evidence": "node 哈希比对脚本实跑输出 fresh:17 stale:26（HUB-STASH/HUB-SHOP/HUB-UPGRADE/HUB-CLASSES/HUB-ACH/HUB-BACKS/HUB-COLLECTION/HUB-ACHIEVEMENTS/STASH-ITEM/STASH-MATERIAL/MATERIAL-CONFIRM/HUB-PETS/STASH-EGG/STASH-RAW/STASH-CONFIRM/HUB-HELP/SLOT-RECOVERY/SETTINGS/INBOX/SUGGESTION/TITLE-ACH/LEAVE/EXIT-SCREEN/GUIDE/CLASS-POOL/DEV-DATA 过期）"}
+  ],
+  "unverified": [
+    "全程禁止浏览器：所有结论均为源码级复核（verified 指逻辑链经本会话独立读码成立），当前窗口实页视觉、点击与性能未做任何验证",
+    "他人已登记未实施的两个 option 待实页定夺，归 WF-experience-art-exec：A6-COLLECTION-FIRST-OBJECT（收藏室首屏解释段+里程碑先于卡组）与 A6-ACHIEVEMENT-ACTION-WIDTH（ach-ops nowrap+flex-shrink:0 长奖励行挤压，hub.css:131-134 + page-rewards-bag-help.css:665-666 源码风险已在，视觉缺陷未证）",
+    "属地归他人未深研（按任务清单跳过并在此注明归 WF-experience-art-exec）：expedition-hub.css class-dossier*、game.bag.js 锦囊、game.run.altar.js 祭坛文案、expedition-inventory/map.css+game.hub.depart.js、game.menu.js 冻结工具文案、VISUAL-BIBLE/nai_style.py、battle/page-battle-ui CSS、battle.frames.js、agent.stats.js/agent.data.js 消费口径、perf-probe.local.js；PH1 完成未提交增量（extraction.commands.js/game.session.death.js/chests/shop/flow）原样保留未核",
+    "SFX-AUDITION：sfx-audition.html 存在已核实，但页面本体内容与声音试听按老板令免验，未核",
+    "hubStashHTML 每次页签渲染全量拼装至多 100 张（stashMax）sm 卡面 HTML 无窗口化——量级有限且为整页重绘惯例，未报问题；A7 性能线若实测仓库页卡顿可回看 game.hub.pages.js:96-107",
+    "LEAVE/EXIT-SCREEN/TERM-TIP/GUIDE/HUB-DEPLOY/PREP/CLASS-CHOICE/SLOTS/TITLE 等相邻行分别归 A3/A5/入口基地线，本线未重核（LEAVE/EXIT-SCREEN 仅在 game.menu.js 通读中顺带确认无异常）"
+  ],
+  "evidenceFile": "docs/evidence/2026-10-03-WF-xart-z1/a6-research.json"
+}

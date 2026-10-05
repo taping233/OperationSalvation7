@@ -1,0 +1,128 @@
+{
+  "actions": [
+    {
+      "detail": "点击主页成就总览；读取当前窗口布局",
+      "type": "real-input"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "not-collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "body",
+      "key": "body",
+      "rect": {
+        "height": 764,
+        "width": 1309.3333740234375,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#ovBody",
+      "styles": {
+        "display": "flex",
+        "height": "898.823px",
+        "width": "1540.39px"
+      },
+      "tag": "DIV",
+      "text": "WINTER / HONOURS成就陈列室\n    全部已获得未获得☷ 分列▦ 集中\n    \n      \n    \n    \n    \n    \n    WINTER · 12\n  总收集数0/ 26收集率 0%已获得0待领取0已领取0档案 04 · 最近游玩\n      ⌕26 枚奖章\n      \n    \n    \n    \n    \n    WINTER · 01\n  \n      初"
+    },
+    {
+      "attributes": {},
+      "identity": "gallery",
+      "key": "gallery",
+      "rect": {
+        "height": 764,
+        "width": 919.6458740234376,
+        "x": 0,
+        "y": 0
+      },
+      "selector": ".achievement-gallery",
+      "styles": {
+        "display": "flex",
+        "height": "898.823px",
+        "width": "1081.94px"
+      },
+      "tag": "SECTION",
+      "text": "WINTER / HONOURS成就陈列室\n    全部已获得未获得☷ 分列▦ 集中\n    \n      \n    \n    \n    \n    \n    WINTER · 12\n  总收集数0/ 26收集率 0%已获得0待领取0已领取0档案 04 · 最近游玩\n      ⌕26 枚奖章\n      \n    \n    \n    \n    \n    WINTER · 01\n  \n      初"
+    },
+    {
+      "attributes": {},
+      "identity": "header",
+      "key": "header",
+      "rect": {
+        "height": 76.92708587646484,
+        "width": 919.6458740234376,
+        "x": 0,
+        "y": 0
+      },
+      "selector": ".ag-header",
+      "styles": {
+        "display": "flex",
+        "height": "90.5024px",
+        "width": "1081.94px"
+      },
+      "tag": "HEADER",
+      "text": "WINTER / HONOURS成就陈列室\n    全部已获得未获得☷ 分列▦ 集中"
+    },
+    {
+      "attributes": {},
+      "identity": "columns",
+      "key": "columns",
+      "rect": {
+        "height": 687.0729370117188,
+        "width": 919.6458740234376,
+        "x": 0,
+        "y": 76.92708587646484
+      },
+      "selector": ".ag-body",
+      "styles": {
+        "display": "grid",
+        "height": "808.321px",
+        "width": "1081.94px"
+      },
+      "tag": "DIV",
+      "text": "WINTER · 12\n  总收集数0/ 26收集率 0%已获得0待领取0已领取0档案 04 · 最近游玩\n      ⌕26 枚奖章\n      \n    \n    \n    \n    \n    WINTER · 01\n  \n      初出茅庐◇未获得\n      首次撤离成功\n      远征奖章 / NO. 01查看详情 ↗\n      \n    \n      \n    \n    \n   "
+    }
+  ],
+  "observedAt": "2026-10-04T13:01:15.873Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.5,
+      "height": 764,
+      "width": 1309
+    }
+  },
+  "scene": "achievement-gallery-list",
+  "schemaVersion": 1,
+  "screenshots": [],
+  "selectors": [
+    {
+      "key": "body",
+      "selector": "#ovBody"
+    },
+    {
+      "key": "gallery",
+      "selector": ".achievement-gallery"
+    },
+    {
+      "key": "header",
+      "selector": ".ag-header"
+    },
+    {
+      "key": "columns",
+      "selector": ".ag-body"
+    }
+  ]
+}

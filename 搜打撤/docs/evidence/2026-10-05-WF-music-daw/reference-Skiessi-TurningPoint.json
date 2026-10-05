@@ -1,0 +1,141 @@
+{
+  "project": "demos/Skiessi/Skiessi-TurningPoint.mmpz",
+  "sha256": "92deb227b435ce1a8767cc4c1946366b53f29df795e5753240ac436d776947be",
+  "head": {
+    "timesig_denominator": "4",
+    "mastervol": "100",
+    "bpm": "180",
+    "timesig_numerator": "4",
+    "masterpitch": "0"
+  },
+  "tracks": [
+    {
+      "name": "snare07.ogg",
+      "type": "0",
+      "patterns": 0,
+      "instrument": {
+        "name": "audiofileprocessor"
+      }
+    },
+    {
+      "name": "hihat_closed05.ogg",
+      "type": "0",
+      "patterns": 60,
+      "instrument": {
+        "name": "audiofileprocessor"
+      }
+    },
+    {
+      "name": "bassdrum_acoustic01.ogg",
+      "type": "0",
+      "patterns": 56,
+      "instrument": {
+        "name": "audiofileprocessor"
+      }
+    },
+    {
+      "name": "snare07.ogg",
+      "type": "0",
+      "patterns": 48,
+      "instrument": {
+        "name": "audiofileprocessor"
+      }
+    },
+    {
+      "name": "bassdrum_acoustic02.ogg",
+      "type": "0",
+      "patterns": 0,
+      "instrument": {
+        "name": "audiofileprocessor"
+      }
+    },
+    {
+      "name": "kick_hiphop01.ogg",
+      "type": "0",
+      "patterns": 0,
+      "instrument": {
+        "name": "audiofileprocessor"
+      }
+    },
+    {
+      "name": "snare07.ogg",
+      "type": "0",
+      "patterns": 48,
+      "instrument": {
+        "name": "audiofileprocessor"
+      }
+    },
+    {
+      "name": "kick_soft01.ogg",
+      "type": "0",
+      "patterns": 32,
+      "instrument": {
+        "name": "audiofileprocessor"
+      }
+    },
+    {
+      "name": "Default preset",
+      "type": "0",
+      "patterns": 56,
+      "instrument": {
+        "name": "tripleoscillator"
+      }
+    },
+    {
+      "name": "snare01.ogg",
+      "type": "0",
+      "patterns": 32,
+      "instrument": {
+        "name": "audiofileprocessor"
+      }
+    },
+    {
+      "name": "snare01.ogg",
+      "type": "0",
+      "patterns": 24,
+      "instrument": {
+        "name": "audiofileprocessor"
+      }
+    },
+    {
+      "name": "Default preset",
+      "type": "0",
+      "patterns": 12,
+      "instrument": {
+        "name": "lb302"
+      }
+    },
+    {
+      "name": "Default preset",
+      "type": "0",
+      "patterns": 12,
+      "instrument": {
+        "name": "lb302"
+      }
+    },
+    {
+      "name": "crash02.ogg",
+      "type": "0",
+      "patterns": 7,
+      "instrument": {
+        "name": "audiofileprocessor"
+      }
+    },
+    {
+      "name": "orion_string01.ogg",
+      "type": "0",
+      "patterns": 10,
+      "instrument": {
+        "name": "audiofileprocessor"
+      }
+    },
+    {
+      "name": "Default preset",
+      "type": "0",
+      "patterns": 6,
+      "instrument": {
+        "name": "tripleoscillator"
+      }
+    }
+  ]
+}

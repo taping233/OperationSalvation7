@@ -1,0 +1,11 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container
+		3 text FIELD ENCOUNTER 01 / 04
+		4 heading check 安全地带, Value: 2
+			5 image check
+			6 text  安全地带
+		7 text 空白的安全节点 无事发生 四周静悄悄的——这里没有埋伏，也没有拾获。整理一下背包，准备继续深入。
+		8 button 继续旅程
+
+The focused UI element is 8 button 继续旅程

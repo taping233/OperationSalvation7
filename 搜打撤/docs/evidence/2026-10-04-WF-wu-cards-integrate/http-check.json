@@ -1,0 +1,165 @@
+{
+  "url": "http://127.0.0.1:5200/",
+  "checks": [
+    {
+      "path": "cards/martial-tt7-throwblade.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-throwblade.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "cards/martial-tt7-goldencicada.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-goldencicada.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "cards/martial-tt7-sneak.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-sneak.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "cards/martial-tt7-ghostblade.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-ghostblade.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "cards/martial-tt7-thundergrudge.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-thundergrudge.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "cards/martial-tt7-meteorrain.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-meteorrain.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "cards/martial-tt7-stealth.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-stealth.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "cards/martial-tt7-swordimmortal.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-swordimmortal.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "cards/martial-tt7-imitate.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "thumbs/cards/martial-tt7-imitate.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "cards/martial-cmtn1i64j7y7.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "thumbs/cards/martial-cmtn1i64j7y7.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "cards/wu-void.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "thumbs/cards/wu-void.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "cards/wu-myriadswords.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "thumbs/cards/wu-myriadswords.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "cards/wu-heavensword.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "thumbs/cards/wu-heavensword.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "cards/equip-tt8-demonslay.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "thumbs/cards/equip-tt8-demonslay.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "cards/equip-tt8-archdemon.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "thumbs/cards/equip-tt8-archdemon.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "cards/equip-tt8-heavensword.webp",
+      "status": 200,
+      "sha256Matches": true
+    },
+    {
+      "path": "thumbs/cards/equip-tt8-heavensword.webp",
+      "status": 200,
+      "sha256Matches": true
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-05",
+  "scope": "真实记忆检索功能开发与流程/记忆规则增量迭代",
+  "baseline": "已有Codex索引在本会话有效，原流程搜索行号再读主题；新流程一次query。未比较冷启动整任务基线。",
+  "retrieval": {
+    "rounds": [
+      {
+        "query": "task.json",
+        "baselineSeconds": 15.478,
+        "querySeconds": 0.74,
+        "baselineRoundTrips": 2,
+        "queryRoundTrips": 1,
+        "baselineOutputChars": 8598,
+        "queryOutputChars": 2169,
+        "correctDecision": true,
+        "sourceLines": [
+          106,
+          167
+        ],
+        "fullTopicRetainedInSource": true
+      },
+      {
+        "query": "workflow-staged.mjs",
+        "baselineSeconds": 31.01,
+        "querySeconds": 0.819,
+        "baselineRoundTrips": 2,
+        "queryRoundTrips": 1,
+        "baselineOutputChars": 8311,
+        "queryOutputChars": 2179,
+        "correctDecision": true,
+        "sourceLines": [
+          106,
+          167
+        ]
+      }
+    ],
+    "outputReductionPercent": 74.28588325743686
+  },
+  "development": {
+    "elapsedFromRegistrationSoFarSeconds": 735.213,
+    "traceSnapshot": {
+      "requestReceived": "2026-10-05T02:51:32.922Z",
+      "observedAt": "2026-10-05T03:01:13.633610+00:00",
+      "elapsedSoFarSeconds": 580.71,
+      "recordedModelResponses": 14,
+      "recordedTopLevelToolCalls": 14,
+      "inputTokenRange": [
+        132731,
+        175904
+      ],
+      "reasoningOutputTokens": 6612,
+      "limits": "仅截至当前日志采样；不含最终回复，服务端重试不等于response记录数"
+    },
+    "rework": [
+      {
+        "kind": "测试发现误匹配",
+        "detail": "Task Group模板中的task被误当关键词；修复结构标签匹配"
+      },
+      {
+        "kind": "实际输出返工",
+        "detail": "首版优先索引/元数据，改为知识/偏好/失败教训优先并保持相关度顺序"
+      },
+      {
+        "kind": "编排语法错误",
+        "detail": "一次JS引号错误，未运行命令；已纠正，计入会话总成本"
+      },
+      {
+        "kind": "native stdin encoding",
+        "detail": "One Chinese inline Python pipe failed decoding; saved UTF-8 capture script replaces the pipe."
+      }
+    ],
+    "finalTraceSnapshot": {
+      "requestReceived": "2026-10-05T02:51:32.922Z",
+      "observedAt": "2026-10-05T03:07:57.802911+00:00",
+      "elapsedSoFarSeconds": 984.88,
+      "recordedModelResponses": 18,
+      "recordedTopLevelToolCalls": 18,
+      "inputTokenRange": [
+        132731,
+        187856
+      ],
+      "reasoningOutputTokens": 10232,
+      "limits": "Snapshot before final reply; no equivalent old-development baseline; not a whole-task speed claim."
+    }
+  },
+  "validation": {
+    "base": {
+      "files": 7,
+      "tests": 125,
+      "report": "2026-10-05T02-59-55.641Z-9e77ef75.json",
+      "stateChangedDuringCheck": true,
+      "codeAndDocsStable": true
+    },
+    "incremental": {
+      "files": 2,
+      "tests": 20,
+      "report": "2026-10-05T03-02-51.910Z-655214e9.json",
+      "reason": "新增索引截断边界与定向反馈说明",
+      "freshness": "candidate"
+    },
+    "lint": "passed for touched scripts/test",
+    "docs": "docs-check.json",
+    "diffCheck": "passed"
+  },
+  "changes": [
+    "memory --query/--limit有界当前仓库检索；无query保持索引发现",
+    "query不扫描ZCode索引或自动读引用文件；符号链接/越界沿原只读边界",
+    "正文/索引截断标incomplete，不宣称全库无匹配",
+    "小修免task与历史派工非长期授权回写记忆",
+    "已知测试列表直接verify；不把plan示例变成必跑清单"
+  ],
+  "head": "425d03920e",
+  "trackingUpstream": {
+    "ahead": 53,
+    "behind": 0,
+    "fetched": false
+  },
+  "limits": [
+    "单会话、仅两组查询；先旧后新未随机化",
+    "字符数不是精确token数，检索阶段不是整任务耗时",
+    "整任务开发未做同等旧流程对照，不能声称端到端提速",
+    "本轮不改游戏运行逻辑、config.toml，不提交或发布"
+  ],
+  "finalStatus": "complete-uncommitted",
+  "rulesBudget": {
+    "rootBytes": 4556,
+    "docsFourBytes": 25473
+  }
+}

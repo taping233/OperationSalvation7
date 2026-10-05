@@ -1,0 +1,140 @@
+{
+  "line": "A3",
+  "scope": "出发与探索链剩余部分（表现侧研究）：整备/补给三文件、地图与路线表现成因、节点表现层与边界、FACTS 三个 A3 边界候选、coverage 新鲜度。HEAD 425d03920e，含并行会话在途改动的共享工作树，全部结论为源码级静态复核（本任务禁浏览器）。",
+  "methods": [
+    "读 docs/evidence/2026-10-03-experience-art-plan/TASKS.md（A3 小节）与 FACTS.md 全文",
+    "node 解析 coverage.json：探索事件 40 行 + 入口基地 PREP/PREP-GOALS/HUB-DEPLOY/CLASS-CHOICE 行字段与 inputs",
+    "node 批量 sha256 对照 44 行 coverage inputs 对当前工作树文件：104 新鲜 / 19 STALE / 0 缺失，STALE 全部落在并行会话属地文件（game.hub.depart.js、expedition-hub.css、game.run.altar.js、expedition-map.css、game.bag.js、expedition-inventory.css）",
+    "git diff 读在途改动：expedition-map.css（+12 行 sidebar 修复）、game.hub.depart.js（+7 行 dep-foot 迁移）、game.run.altar.js（54 行：火堆 else-if 条件、祭坛回赠复原 opts、SYS-02 撤离回执）",
+    "逐文件细读：game.hub.preparation.js / preparation.view.js / preparation.sources.js / preparation.commands.js / game.hub.depart.js / game.run.scenes.js / game.run.altar.js(火堆/祭坛/闸门段) / game.run.flow.js(修鞋铺段) / chests.js(满包与搜刮段) / game.run.shop.js(购买预检段) / game.session.js(newRun/canReceiveCard) / game.session.bag.js(stackCapOf) / base-departure.commands.js / expedition.view.js / expedition-map.css 全文"
+  ],
+  "findings": [
+    {
+      "id": "A3-PREP-01",
+      "where": "game/src/hub/preparation.view.js:18 + game/src/hub/preparation.commands.js:82-85",
+      "problem": "预设摘要只显示『带入 N 张 · X 缺失 · Y 禁带』，而 canStart 还依赖 characterKnown/characterOwned/petKnown/petOwned 四项资格判定，这四项在 UI 上没有任何表达。",
+      "impact": "玩家在预设里选了未拥有的人物/宠物（或已存档丢失该角色）后，「应用到整备」永远禁用，界面显示『需要处理 · 0 缺失 · 0 禁带』，无任何原因提示，无从修复。apply 分支兜底文案『库存或资格已变化，预设无法应用。』（game.hub.preparation.js:107）也因按钮禁用而几乎不可达。",
+      "severity": "medium",
+      "action": "fix：prep-summary 按 qualification 追加一行（如『人物未拥有/未收录』），最小改动在 preparation.view.js:18 的 summary 模板里消费 preview.qualification。",
+      "files": ["game/src/hub/preparation.view.js", "game/src/hub/preparation.commands.js"],
+      "status": "verified",
+      "review": "源码链完整：preparation.commands.js:85 把资格四项并入 canStart，view:18 summary 只渲染 costs/missing/forbidden 三个数。"
+    },
+    {
+      "id": "A3-PREP-02",
+      "where": "game/src/hub/game.hub.depart.js:219-231,368-372 + game/src/hub/preparation.commands.js:64-77 + game/src/hub/game.hub.preparation.js:108-116 + game/src/run/game.session.bag.js:26-27,47-51 + game/src/run/game.session.js:495-500",
+      "problem": "同名叠放两套口径并存：①整备手动加牌封顶 stackCap（3 张，火球/初始攻击 5），提示『同名卡牌最多携带 3 张（局内叠放上限）』；②局内实际规则是同名第 4 张起另占一格、可继续获得（game.session.bag.js:27 注释与 cardStacks 分段实现、canReceiveCard game.session.js:65-70 均无硬上限）；③预设应用路径（preset-apply→applyPicks 直注 deployPick）完全不经过 stackCap 封顶，previewDeployment 也只查仓库存量不查叠放。",
+      "impact": "仓库同名普通卡 ≥4 张时：预设可存 ×4/×5 并显示『可以应用』，整备页按种类数显示『已装 2/N 格』（deploySlotsUsed 只数种类），出发后 newRun 无校验全带入，局内实际多占一格——格数预览失真，正是 game.hub.depart.js:220 注释担心的场景，手动路径封了、预设路径没封。同时『局内叠放上限』的说法描述了一条局内不存在的规则，玩家无法建立正确容量心智（帮助文案『背包格数 = 卡牌种类数 + 初始攻击』game.hub.depart.js:138 同样只在每名≤stackCap 时成立）。",
+      "severity": "medium",
+      "action": "fix（跨属地协调）：最小方案二选一——(a) preset-apply 时对超过 stackCap 的 pick 截断并提示；(b) previewDeployment 把超 stackCap 的 pick 按『多占格』计入 slotsUsed 并在 summary 明示。文案同步把『局内叠放上限』改为『每格叠放上限，超出另占一格』。game.hub.depart.js 属 exploration_layout 会话，改动需与其协调。",
+      "files": ["game/src/hub/game.hub.preparation.js", "game/src/hub/preparation.commands.js", "game/src/hub/game.hub.depart.js"],
+      "status": "verified",
+      "review": "全链源码核实：normalizePicks 允许 1-99（preparation.commands.js:24）；previewDeployment 仅 missing/forbidden/资格/容量（:69-85）；apply 只转 ready picks 为 {卡名:数量} 直注（game.hub.preparation.js:108-116 → game.hub.js:55 setDeployPick）；newRun 循环全量 push ownedCards 无校验（game.session.js:495-500）。"
+    },
+    {
+      "id": "A3-PREP-03",
+      "where": "game/src/hub/game.hub.preparation.js:98-117 + game/src/hub/preparation.commands.js:126 + game/src/hub/preparation.view.js:15,19",
+      "problem": "预设的人物/宠物字段只参与 canStart 资格判定：应用到整备时只传 picks（applyPicks），characterId/petId 被丢弃，出发后仍走 requestClassChoice 重新选人；带 characterId 的 startDeployment 事务路径（M11）在 UI 无入口（view 只有 preset-preview/preset-apply 按钮）。",
+      "impact": "玩家在预设里选了已拥有人物并应用后，该选择对开局零效果，容易误解为『预设会自动选人』；文案层面自洽（preparation.view.js:20『人物仍在出发后选择』、game.hub.depart.js:51『基础参考（角色出发后选择）』），故非误导文案而是功能空转。",
+      "severity": "low",
+      "action": "investigate：是否让预设人物预填出发选人页属玩法决策，列方案问老板（低收益，当前文案已声明流程）；不建议静默改行为。",
+      "files": ["game/src/hub/game.hub.preparation.js", "game/src/hub/preparation.view.js"],
+      "status": "verified",
+      "review": "applyPicks 仅 navigation.applyPicks(picks)+openDeparture（game.hub.js:55-56 → setDeployPick/openDepartPrep）；confirmDeploy 后 requestClassChoice（game.hub.depart.js:339-353）。"
+    },
+    {
+      "id": "A3-PREP-04",
+      "where": "game/src/hub/game.hub.preparation.js:29-40,74-125 + game/src/hub/preparation.view.js:64",
+      "problem": "整备预设页无 busy 态：makeModel 从不传 busy（恒 false），onIntent 异步命令执行期间按钮不禁用、aria-busy 恒 false。",
+      "impact": "快速连点『加入愿望清单/取消追踪』等动作会并发多次 savePreset/setTrackedGoals，依赖 expectedRevision 乐观并发兜底：后到提交读旧 revision 时 commitBase 失败，玩家看到泛化『操作失败』；窗口小、有反馈，属轻微体验损伤。",
+      "severity": "low",
+      "action": "fix：onIntent 入口置 busy=true 并 repaint，完成后复位；或按钮侧最简防抖（禁用至 repaint）。",
+      "files": ["game/src/hub/game.hub.preparation.js", "game/src/hub/preparation.view.js"],
+      "status": "verified",
+      "review": "view:64 aria-busy 只读 current.busy；game.hub.preparation.js:29-40 的 makeModel 参数表无 busy 实参。"
+    },
+    {
+      "id": "A3-SRC-01",
+      "where": "game/src/hub/preparation.sources.js:4-6,11",
+      "problem": "①evidenceRef 四处漂移：cards.js:isRandomObtainable 实定义在 game/src/cards/cards.rules.js:234；base.js:shopCards 符号已不存在（现商店种子池在 game/src/hub/base.js:273-279 seedStarterStash）；chests.js:52 的 classPool 现在 chests.js:69；altar.js:39/473 现对应 altar.js:105/520。②本地判定复制 isRandomObtainableShape 比权威 isRandomObtainable 少了 card.type!=='能力卡' 排除。",
+      "impact": "evidenceRef 不向玩家展示（preparation.view.js:39 只用 conditions 作来源说明），漂移仅损维护溯源。缺能力卡排除在当前数据下无实害——cards.data.js 全部 17 张能力卡均带 cls，走 abilityPool 分支（preparation.sources.js:18）先被接住；若未来出现无 cls 能力卡会被误标『进入通用随机卡池』（权威口径能力卡只走事件拼凑/祭坛/员工通行证A，cards.rules.js:250 注释）。",
+      "severity": "low",
+      "action": "fix：一行补齐 type!=='能力卡' 判定；evidenceRef 随下次触碰该文件时更新行号/符号，不单独开工。",
+      "files": ["game/src/hub/preparation.sources.js"],
+      "status": "verified",
+      "review": "rg 全库核实：isRandomObtainable 定义于 cards.rules.js:234-238（含能力卡排除）；shopCards 在 game/src 下仅 preparation.sources.js 自身引用。"
+    },
+    {
+      "id": "A3-ALTAR-01",
+      "where": "game/src/run/game.run.altar.js:505 + game/src/run/game.run.scenes.js:301-322",
+      "problem": "祭坛『献祭道具 · 复原卡牌』路径调用 openPocketRestore 不传 opts，复原页落默认身份『营火休整』（title/icon=fire/tone=fire）。scenes.js:301-302 注释（09-19 留言 #21）明确该页不应再一律伪装营火；同批在途改动已给『祭坛回赠 · 复原』路径传 opts（altar.js:570-572，git diff 可见为在途新增），漏掉 505 这一处。",
+      "impact": "玩家在污染祭坛献出道具后，跳出的页面自称『营火休整』、配火堆图标与火堆场景色，底部按钮还是『继续旅程』——节点身份语境断裂，易误以为走到了火堆节点。FACTS A3 边界候选之一，源码级复现成立。",
+      "severity": "low",
+      "action": "fix：一行——altar.js:505 补 { tone:'altar', icon:'[[icon:crystal]]', title:'祭坛回赠 · 复原' } 同款 opts（建议标题『祭坛复原』以区分回赠页）。属地 game.run.altar.js 归他人（祭坛文案在途会话），转交协调，勿双改。",
+      "files": ["game/src/run/game.run.altar.js"],
+      "status": "verified",
+      "review": "scenes.js:322 默认值 `title: opts.title || '营火休整'`；对比 flow.js:841-845 修鞋铺传 {tone:'event',title:'修鞋铺 · 修整行装'}、altar.js:570 传 altar 组 opts。505 行在当前工作树（含在途 diff）无 opts。"
+    },
+    {
+      "id": "A3-SHOP-01",
+      "where": "game/src/run/game.run.shop.js:370,398,400 + game/src/run/game.session.js:65-70",
+      "problem": "商店买不下/补不了的拒绝文案断言『同名卡最多叠 3 张——初始攻击/火球 5 张』『初始攻击同名最多叠 5 张』，而实际判定 canReceiveCard 的规则是同名堆满一段后只要背包有空格即可继续收（第 4 张起另占一格），不存在同名硬上限。",
+      "impact": "拒绝行为本身保守正确（宁拒勿超），但理由文字教给玩家一条不存在的全局规则：玩家会以为局内同名上限 3/5 张，而事件/火堆/宝箱实际可以收到第 4 张同名（占新格）。容量心智被文案误导，与 A3-PREP-02 同族（表现口径不一致）。",
+      "severity": "low",
+      "action": "fix：文案改为真实拒绝原因（『背包装不下：同名已叠满一格且无空格』），一行级改动。game.run.shop.js 属 PH1 完成未提交增量避让范围，转主代理/属地会话。",
+      "files": ["game/src/run/game.run.shop.js"],
+      "status": "verified",
+      "review": "canReceiveCard（game.session.js:65-70）：owned>0 且 owned%stackCap!==0 直接放行（并入不占格）；owned%cap===0 才查 canAcceptCard 空格。文案中的上限数字来自 stackCapOf 但被表述成总量上限。"
+    }
+  ],
+  "edgeCandidates": [
+    {
+      "candidate": "祭坛调用复原页是否误显营火身份",
+      "verdict": "复现（源码级）",
+      "evidence": "game/src/run/game.run.altar.js:505 无 opts 调用 openPocketRestore → game/src/run/game.run.scenes.js:322 默认 title='营火休整'；见 finding A3-ALTAR-01。属地他人，只记录供协调。"
+    },
+    {
+      "candidate": "满包火堆是否把『没空间』说成『没有可复原牌』",
+      "verdict": "不复现（当前工作树，修复在途未提交）",
+      "evidence": "game/src/run/game.run.altar.js:70 满包走专用播报『背包已满（N/M），无法复原』+deny；:80 的『没有可复原的卡牌』分支带 `!game.usedPocket.some(p => FIRE_RESTORABLE(p.card))` 条件，两分支互斥。git diff 证实该 else-if 条件正是在途改动新增——coverage FIRE 行 nextAction 里『found 为空分支会把满…』描述的是修复前状态。"
+    },
+    {
+      "candidate": "锦囊取出缺容量预检",
+      "verdict": "不复现（预检已存在）",
+      "evidence": "game/src/hub/game.bag.js:404-421 pouchTake 计算叠放增量 delta（:409 逐段 ceil）并在 usedSlots()+delta>limit 时拒绝，提示『背包放不下：本次整叠还需 N 格』；资源/非资源 limit 区分（:411）与 canAcceptCard 口径一致（game.session.bag.js:22-23）。coverage BAG-POUCH 的『先复现 pouchTake 是否越容量』已被当前源码满足，无需复现实验。"
+    }
+  ],
+  "status": [
+    { "page": "PREP 出发整备", "state": "需修（A3-PREP-01/02/04 集中于此链）", "evidence": "game/src/hub/game.hub.preparation.js:98-125 + preparation.view.js:18 + game.hub.depart.js:219-231；coverage PREP 行 inputs 中 game.hub.depart.js sha 已 STALE（属他在途），本表按当前工作树核" },
+    { "page": "PREP-GOALS 下一局目标与双预设", "state": "需修（同 A3-PREP-01/04；目标追踪/来源说明本身正常）", "evidence": "preparation.view.js:24-31 目标区渲染完整，goal-add 满 3 禁用（:29）；来源说明 certainty 分级严谨（preparation.sources.js:3-8）" },
+    { "page": "HUB-DEPLOY 基地出发页", "state": "正常保留（dep-foot 迁移+容量常显为他在途改进，方向正确）；钥匙门锁态收敛右栏 05 行不再占主列", "evidence": "game/src/hub/game.hub.depart.js:14-77 + git diff（dep-foot 移页面级 footer）；A3-PREP-02 的文案问题归属整备页不在此页" },
+    { "page": "MAP 远征地图（B04 路线面板压缩）", "state": "条件实验：源码成因=底栏 sidebar 被 flex 压缩；他在途改动 expedition-map.css:86-95 已针对性修复（#sidebar 定高 200px/850px 以下 240px、route-heading/options/help flex-shrink:0、bagBtnFloat bottom 联动），待属地负责人实页复核收口", "evidence": "git diff game/css/expedition-map.css（+12 行未提交）；expedition.view.js:87-104 viewKey 差分渲染+路线序号去重+door 金高亮钩子正常，无新增问题" },
+    { "page": "FIRE 营火休整（自动复原两张形态）", "state": "正常保留（在途改动进一步收紧空池文案条件）；每格一次性 _fireRestKey 防重入", "evidence": "game/src/run/game.run.altar.js:45-90（:49-51 首次结算锁、:66-76 随机两张自动复原、:70 满包专用播报、:80 空池条件）；git diff 证实 else-if 为在途新增" },
+    { "page": "ALTAR 污染祭坛", "state": "需修一处（A3-ALTAR-01 献祭道具复原页身份）；激活/碎片/回赠/离开主链表现正常，碎片不足改禁用态+原因可读", "evidence": "game/src/run/game.run.altar.js:468-486（fragOpt 禁用态）、:495-507（献祭道具路径）、:546-563（回赠二选一含 restorableN 标注）；属地他人在途" },
+    { "page": "SACRIFICE/ALTAR-REWARD/DOOR/ALTAR-FRAGMENT-FAIL", "state": "正常保留（表现层）；闸门『只向深处放行，不能停留』与 TASKS A3.4 口径一致，反向门按钮明示『返回第 N 层』，门旁商队条件渲染", "evidence": "game/src/run/game.run.altar.js:517-539（碎片兑换先发牌后扣碎片防白扣）、:552-555（奖励①无可复原如实禁用）、openDoorModal（sub 文案+goDoor/doorShop 两出口）" },
+    { "page": "CHEST-PICK/ALL 及满包变体", "state": "正常保留：满包逐张预检、三选一跳过出口、散落数量明示、最低价让路参照、币一次入账出口齐备", "evidence": "game/src/run/chests.js:308-347（预检与警示行）、:340-347（chestSkip 出口，命中 _findCancelBtn 出口制式）" },
+    { "page": "CHEST-SEARCH 宝箱搜寻揭晓", "state": "正常保留：searchSeq 代次保护防旧 timer 串台，点击立即揭晓已实现", "evidence": "game/src/run/chests.js:241（tok=++searchSeq）、:265-270（chestReveal 即时揭晓）、:274-277（setTimeout 守卫）" },
+    { "page": "RUN-SHOP/RUN-SELL", "state": "需修一处文案（A3-SHOP-01 叠放上限说法）；价签/买不起红化/货位即时反馈/键盘购买/背包返回商店均在位", "evidence": "game/src/run/game.run.shop.js:117,133-143,352-357,361-373；shop.js 属 PH1 在途避让，转协调" },
+    { "page": "RUN-TRANSITION/NODE-SAFE/POCKET-RESTORE", "state": "正常保留：过场代次守卫+prevState 恢复+点击跳过；POCKET-RESTORE 自 09-19 起支持 opts 身份（唯一漏网见 A3-ALTAR-01）；背包返回钩子 setBagReturnHook 保留剩余次数", "evidence": "game/src/run/game.run.scenes.js:113-149（showRunTransition）、:233-245（安全页）、:303-348（openPocketRestore：:307-308 返回钩子、:336 满包复原拒绝）" },
+    { "page": "BAG/BAG-PEARL/BAG-POUCH", "state": "正常保留（表现层）：锦囊存取 3 张上限+容量预检完整；珍珠盒/锦囊 tooltip 细节归 bag.js 属地（BAG-PEARL 行 coverage 口径）", "evidence": "game/src/hub/game.bag.js:352-424（openPouchStore 全链）；:394 整叠存入上限检查（09-30 ROOT-04 修复在位）" },
+    { "page": "MAP-LAYER1..4 变体", "state": "未逐层实页核（本任务禁浏览器）；源码层当前位置/可达路线/目标文案生成正常：层数文案无第五层泄漏（nodeShell kicker 固定 04 封顶）", "evidence": "game/src/run/expedition.view.js:5-40（路线+已探索态+重复名序号）、:42-69（目标文案：低血/三层撤离/四层首脑/闸门方位角步数）、game.run.scenes.js:89（`String(game.layerIdx+1).padStart(2,'0')} / 04`）" }
+  ],
+  "keeps": [
+    { "item": "ROOT-01 预设应用链路修复在位", "reason": "applyPicks→setDeployPick 置 deployPickFresh，openDepartPrep 保留注入值不再清空（game.hub.depart.js:85,92-95；game.hub.js:55-56）——此前应用预设后只带初始攻击的缺陷已修" },
+    { "item": "previewDeployment 与整备页容量口径（每名≤stackCap 时）", "reason": "两端都是『种类数+初始攻击』：preparation.commands.js:83-84 与 game.hub.depart.js:368-372 一致；职业卡禁带双端一致（commands.js:69-71 无条件禁 vs depart.js:109 列表过滤+:212 拒绝提示）" },
+    { "item": "整备出发页反误导提示", "reason": "空背包出征有显式警示『只带初始攻击…空手出战会明显吃力』（game.hub.depart.js:197），同时保留可直接出发（:195 初始攻击默认携带说明）——不把『牌越多越稳』当强制规则，符合 TASKS A3.1 要求" },
+    { "item": "火堆 2026-10-02 自动复原两张形态", "reason": "池不足全复原、空池明示、满包专用播报、首次结算锁防重领（altar.js:49-83）；FACTS 记录的形态变更已稳定，无回退诉求" },
+    { "item": "chests/shop 满包反馈与资源去向一致性", "reason": "放不下张数逐张模拟、散落明示、只收币离开出口、强收时 grantCard 现场播报（chests.js:308-347、scenes.js:272-279 grantEventCard 满包拒收即日志）——领取/取消/满包的资源去向可解释" },
+    { "item": "层间过渡与节点过场", "reason": "showRunTransition 代次守卫防旧过场盖新页、战斗 modal 态不降级、点击跳过、turboMs 缩时（scenes.js:113-149）；enterNode 按节点身份给差异化文案/背景（:151-161）" },
+    { "item": "coverage 新鲜度结论", "reason": "44 行 123 个 input：104 新鲜/19 STALE/0 缺失；STALE 集中于 6 个并行属地文件（game.hub.depart.js、expedition-hub.css、game.run.altar.js、expedition-map.css、game.bag.js、expedition-inventory.css），与本任务避让清单完全重合——coverage 对我属地的三文件（preparation.*）全部新鲜，结论可直接沿用" }
+  ],
+  "unverified": [
+    "本任务禁浏览器：全部结论为源码级静态复核，未做实页复现；B04 修复效果、祭坛复原页身份的视觉观感需属地负责人在当前窗口实页验证",
+    "归 WF-experience-art-exec：game.run.altar.js（A3-ALTAR-01 与火堆文案，altar 文案会话在途）、game.run.shop.js（A3-SHOP-01，PH1 在途）、expedition-map.css+game.hub.depart.js（B04 修复与 dep-foot，exploration_layout 属地）——四项发现均只记录未动源码",
+    "选人页/皮肤/待机表现（TASKS A3.2）未研究：cls2-idle 待机包在途，按任务书先避让接收其结果",
+    "PH1 完成未提交增量（extraction.commands.js/game.session.death.js/chests/shop/flow）按任务书原样保留只读，其撤离/死亡回执消费一致性归 A5 线",
+    "agent.stats/agent.data 的 byDriver 口径分叉归 A5（FACTS 已记录），本线未重复核",
+    "coverage 里 DOOR 行『当前页面是否应可留』属独立玩法决策（旧 acceptance 不能强加），本线维持闸门不可停留现状口径，未提解冻"
+  ],
+  "evidenceFile": "docs/evidence/2026-10-03-WF-xart-z1/a3-research.json"
+}

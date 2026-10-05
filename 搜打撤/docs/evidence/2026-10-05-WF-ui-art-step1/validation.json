@@ -1,0 +1,26 @@
+{
+  "capturedAt": "2026-10-05T03:01:12.379Z",
+  "kind": "文档与清单完整性核对，不是游戏测试",
+  "uniqueIds": 107,
+  "finalInventoryIdsMatch": true,
+  "implementationFamilyIds": 59,
+  "counts": {
+    "total": 107,
+    "reservedRecent": 34,
+    "reservedExcluded": 14,
+    "insufficient": 59,
+    "confirmedRestructure": 0,
+    "componentPolishCandidatesOutsideScreenCount": 1
+  },
+  "localLinks": 9,
+  "allLocalLinksExist": true,
+  "noRuntimeChanges": true,
+  "sourceFingerprintsUnchanged": 20,
+  "docsCheck": {
+    "ok": true,
+    "checkedRelativeLinks": 342,
+    "findings": 0,
+    "scope": "项目根/production文档；新evidence的9个本地链接另由本轮定向核对"
+  },
+  "all59TargetsMappedToCandidate": true
+}

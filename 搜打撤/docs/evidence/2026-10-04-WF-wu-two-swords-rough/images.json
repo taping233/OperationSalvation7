@@ -1,0 +1,88 @@
+{
+  "method": "Built-in ImageGen; face edits; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "cardId": "tt8-hero-ranger",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-298a6c83-b22e-4cfb-8477-7bd212c303b6.png",
+      "source": {
+        "path": "game/art-source/cards/wu-heavensword-rough-face-20261004.png",
+        "bytes": 1517951,
+        "sha256": "2c20e05f03db69f19c67d3a29bf13e42d3fb5ab80bce94bc94bd88f7f75dff41"
+      },
+      "outputs": [
+        {
+          "path": "game/assets/cards/wu-heavensword.webp",
+          "bytes": 97974,
+          "sha256": "3f8ab89b02281df5072644cf364ae056ffe414cc49250468708a47945c8c38d1",
+          "size": [
+            1441,
+            1091
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/wu-heavensword.webp",
+          "bytes": 13280,
+          "sha256": "0dc232f7d161387b83dfa0ede41f5e6d13b02bb075481f0a567b49f921133a1b",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "backups": [
+        {
+          "path": "docs/evidence/2026-10-04-WF-wu-two-swords-rough/originals-before-rough/full-wu-heavensword.webp",
+          "bytes": 110222,
+          "sha256": "c217c3623b254d3640c6fe1282d6538d9ce6085aff12ca0240c9c40ebd0f1a99"
+        },
+        {
+          "path": "docs/evidence/2026-10-04-WF-wu-two-swords-rough/originals-before-rough/thumb-wu-heavensword.webp",
+          "bytes": 11024,
+          "sha256": "e171fb56bce57a2e3b4f4177f8b87e5d15cf03697327c32a9271aa9afb1eb421"
+        }
+      ]
+    },
+    {
+      "cardId": "tt8-hero-sword",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-1d9441ae-d15c-40b9-b65d-e727bca0f772.png",
+      "source": {
+        "path": "game/art-source/cards/wu-myriadswords-rough-face-20261004.png",
+        "bytes": 1858057,
+        "sha256": "bb08a2e08f7741fd32ec5e881e626b6002d8b43314f3c4ce4ecff0ed166e7a99"
+      },
+      "outputs": [
+        {
+          "path": "game/assets/cards/wu-myriadswords.webp",
+          "bytes": 144382,
+          "sha256": "cc3fe1d9b39340e4d83dd3882395dff4e23a65cd5928be74c90ade9fb98164cc",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/wu-myriadswords.webp",
+          "bytes": 21532,
+          "sha256": "d6fc755c6861ddcbf54bfb96674e5dd9741f28741e44790700dab4211f0a1995",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "backups": [
+        {
+          "path": "docs/evidence/2026-10-04-WF-wu-two-swords-rough/originals-before-rough/full-wu-myriadswords.webp",
+          "bytes": 214382,
+          "sha256": "f7da1aac9f400e19323c8cecbdb0d23a2b9648964125b7838f35e5b9ee8ba0e3"
+        },
+        {
+          "path": "docs/evidence/2026-10-04-WF-wu-two-swords-rough/originals-before-rough/thumb-wu-myriadswords.webp",
+          "bytes": 26110,
+          "sha256": "4be404edc2df18ba586138cb1abeea90fbc8c6e068de8bd1571dfcb5ace1ae84"
+        }
+      ]
+    }
+  ],
+  "verification": "遵老板禁测令，未测试/资产门/实页"
+}

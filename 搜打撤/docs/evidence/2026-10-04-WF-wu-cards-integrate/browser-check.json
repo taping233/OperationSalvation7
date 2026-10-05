@@ -1,0 +1,113 @@
+{
+  "platform": "Codex IAB",
+  "url": "http://127.0.0.1:5200/",
+  "input": "真实点击照相馆/无人物筛选/滚动/大图，无合成事件",
+  "currentWindowOnly": true,
+  "targetThumbnails": [
+    {
+      "loaded": true,
+      "name": "白梅落影·妄",
+      "src": "assets/thumbs/cards/wu-void.webp?art=wu-class-final-20261004&v=0.60.0"
+    },
+    {
+      "loaded": true,
+      "name": "天剑诛魔·云阳",
+      "src": "assets/thumbs/cards/wu-heavensword.webp?art=wu-class-final-20261004&v=0.60.0"
+    },
+    {
+      "loaded": true,
+      "name": "无量仙剑·云风",
+      "src": "assets/thumbs/cards/wu-myriadswords.webp?art=wu-class-final-20261004&v=0.60.0"
+    },
+    {
+      "loaded": true,
+      "name": "天启剑",
+      "src": "assets/thumbs/cards/equip-tt8-heavensword.webp?art=wu-class-final-20261004&v=0.60.0"
+    },
+    {
+      "loaded": true,
+      "name": "天启诛魔剑",
+      "src": "assets/thumbs/cards/equip-tt8-archdemon.webp?art=wu-class-final-20261004&v=0.60.0"
+    },
+    {
+      "loaded": true,
+      "name": "诛魔剑",
+      "src": "assets/thumbs/cards/equip-tt8-demonslay.webp?art=wu-class-final-20261004&v=0.60.0"
+    },
+    {
+      "loaded": true,
+      "name": "不变应万变-改",
+      "src": "assets/thumbs/cards/martial-tt7-imitate.webp?art=wu-class-final-20261004&v=0.60.0"
+    },
+    {
+      "loaded": true,
+      "name": "盗宝",
+      "src": "assets/thumbs/cards/martial-cmtn1i64j7y7.webp?art=wu-class-final-20261004&v=0.60.0"
+    },
+    {
+      "loaded": true,
+      "name": "飞刃偷袭",
+      "src": "assets/thumbs/cards/martial-tt7-throwblade.webp?art=wu-class-final-20261004&v=0.60.0"
+    },
+    {
+      "loaded": true,
+      "name": "鬼魅之刃",
+      "src": "assets/thumbs/cards/martial-tt7-ghostblade.webp?art=wu-class-final-20261004&v=0.60.0"
+    },
+    {
+      "loaded": true,
+      "name": "剑仙形态",
+      "src": "assets/thumbs/cards/martial-tt7-swordimmortal.webp?art=wu-class-final-20261004&v=0.60.0"
+    },
+    {
+      "loaded": true,
+      "name": "金蝉脱壳",
+      "src": "assets/thumbs/cards/martial-tt7-goldencicada.webp?art=wu-class-final-20261004&v=0.60.0"
+    },
+    {
+      "loaded": true,
+      "name": "快意恩仇",
+      "src": "assets/thumbs/cards/martial-tt7-thundergrudge.webp?art=wu-class-final-20261004&v=0.60.0"
+    },
+    {
+      "loaded": true,
+      "name": "流星箭雨",
+      "src": "assets/thumbs/cards/martial-tt7-meteorrain.webp?art=wu-class-final-20261004&v=0.60.0"
+    },
+    {
+      "loaded": true,
+      "name": "潜匿",
+      "src": "assets/thumbs/cards/martial-tt7-stealth.webp?art=wu-class-final-20261004&v=0.60.0"
+    },
+    {
+      "loaded": true,
+      "name": "偷袭",
+      "src": "assets/thumbs/cards/martial-tt7-sneak.webp?art=wu-class-final-20261004&v=0.60.0"
+    }
+  ],
+  "zoom": [
+    {
+      "height": 128,
+      "loaded": true,
+      "name": "cross",
+      "src": "assets/ui/icons/cross.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "height": 1358,
+      "loaded": true,
+      "name": "无量仙剑·云风",
+      "src": "http://127.0.0.1:5200/assets/cards/wu-myriadswords.webp?art=wu-class-final-20261004&v=0.60.0",
+      "width": 1792
+    },
+    {
+      "height": 128,
+      "loaded": true,
+      "name": "pen",
+      "src": "assets/ui/icons/pen.png?v=0.60.0",
+      "width": 128
+    }
+  ],
+  "errors": [],
+  "initialLoad": "首次HMR后入口提示加载失败；本会话标签刷新后重新打开通过"
+}

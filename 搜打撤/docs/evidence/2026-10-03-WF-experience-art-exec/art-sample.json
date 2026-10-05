@@ -1,0 +1,246 @@
+{
+  "schemaVersion": 1,
+  "task": "WF-experience-art-exec",
+  "slice": "A2-A4-wu-melee-sample",
+  "date": "2026-10-03",
+  "status": "v2-edit-failed-awaiting-approved-postprocess",
+    "postprocessAudit": {
+      "status": "read-only-awaiting-owner-permission-for-non-imagegen-edit",
+      "date": "2026-10-03",
+      "executedImageEdits": false,
+      "pipelines": [
+        {
+          "path": "../.tmp/nai/cutout_pilot.py",
+          "purpose": "White-background bio/item card cutout",
+          "algorithm": "8 seed floodfill threshold42; MinFilter3; GaussianBlur0.6; crop; WEBP quality95 method6",
+          "fit": "Not reliable for dark fog. Raising tolerance may remove black garment/sword/contours; edge erosion may remove hair strands. Existing hard-coded sources/outputs must not be executed on candidate without narrowly scoped adaptation."
+        },
+        {
+          "path": "scripts/build-menu-emblems.py",
+          "purpose": "White-background menu emblem to embedded WebP SVG",
+          "algorithm": "max(255-R,255-G,255-B) distance; matte ramp; multiply source alpha",
+          "fit": "Wrong polarity for dark fog: retains dark fog/garment and removes white hair/skin; does not restore body opacity."
+        },
+        {
+          "path": "../.tmp/nai/package_home_icons_v12.py",
+          "purpose": "Trim transparent margins and fit icon canvas",
+          "algorithm": "alpha>12 bounds; resize to allowed area; alpha-composite centered; WebP quality92",
+          "fit": "Can support deterministic >=8% padding after clean silhouette exists; cannot remove fog or restore subject opacity."
+        }
+      ],
+      "environment": {
+        "pythonModulesPresent": [
+          "PIL",
+          "numpy",
+          "cv2",
+          "onnxruntime",
+          "torch"
+        ],
+        "pythonModulesAbsent": [
+          "rembg"
+        ],
+        "modelCache": "C:/Users/太平/.u2net/u2net.onnx exists",
+        "modelLoaded": false,
+        "inferenceRun": false,
+        "installation": false,
+        "externalService": false,
+        "credentialsRead": false
+      },
+      "assessment": {
+        "strictFogRemoval": "Not guaranteed by current white-background or threshold-only pipelines",
+        "identityRisk": "Global gray/alpha thresholds can erase black sword and dress edges or white hair wisps; forcing all alpha>threshold to255 can harden fog into opaque contamination.",
+        "padding": "Low-cost local deterministic operation after mask acceptance",
+        "cost": "Existing color-key/crop operations are local CPU with no service fee; semantic model feasibility and latency unknown because no inference was authorized or run",
+        "recommendation": "If permitted, process one candidate non-destructively with an inspected semantic mask and compare hair/sword/skirt edges over light/dark backgrounds; do not claim strict matte without pixel/visual checks. No new framework or batch."
+      }
+    },
+    "v2": {
+      "path": "game/assets/portraits/battle-v2/wu-melee-sample-v2.png",
+      "sourcePixels": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "bytes": 1984660,
+      "sha256": "c4583633cb35571f49d740b97a83418fc8b669ac70e966b34173913bc8242136",
+      "generation": {
+        "channel": "built-in image_gen.imagegen",
+        "model": "not exposed",
+        "seed": "not exposed",
+        "parameters": {
+          "transparent_background": true,
+          "referenced_image_paths": [
+            "game/assets/portraits/battle-v2/wu-melee-sample-v1.png"
+          ]
+        },
+        "prompt": "Use case: background-extraction and precise-object-edit. Edit target is this Wu battle candidate. Make ONLY these technical corrections: remove the entire dark gray fog/halo/backdrop and all ground glow/shadow; the exterior background must be truly transparent alpha=0, while the complete visible character, clothing, skin, hair, accessories, sword, and scabbard interiors must be fully opaque alpha=255, with only a narrow antialiased silhouette edge. Expand the transparent canvas / fit the complete existing figure and weapon so every side has at least 8 percent of final canvas width/height empty transparent padding: include full sword tip, hair tips, both boots. Preserve exact existing face, blue eyes, head-top round sunglasses, black rose, blue ribbon, silver high ponytail, black off-shoulder ruffled dress, blue star lining, bare legs, ankle boots, long black sword and scabbard; preserve painterly brush marks, original colors/materials, right-facing two-handed sword-ready pose, proportions and all identity details. Both feet may remain at different heights; do not change stance or repaint costume. Do not add environment, shadow, glow, trail, particles, framing, text, UI, checkerboard texture, opaque black/white background, or duplicate figure. This is a clean production cutout, not a scene. Output one transparent PNG candidate.",
+        "outputHint": "Generated images are saved to C:\\Users\\太平\\.codex\\generated_images\\01a1009e-f3cc-7ec0-b757-86816c92f48f as C:\\Users\\太平\\.codex\\generated_images\\01a1009e-f3cc-7ec0-b757-86816c92f48f\\exec-b82f7d85-85af-4cb8-ba12-0eb1266fd119.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+      },
+      "validation": {
+        "status": "failed-transparent-cutout-and-safety-margin",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alpha0": 979152,
+        "alpha1to127": 45445,
+        "alpha128to254": 548267,
+        "alpha255": 0,
+        "bboxNonzero": [
+          18,
+          73,
+          1014,
+          1520
+        ],
+        "bboxOver127": [
+          21,
+          109,
+          1009,
+          1447
+        ],
+        "strongPaddingPercent": {
+          "left": 2.05078125,
+          "top": 7.096354166666667,
+          "right": 1.46484375,
+          "bottom": 5.794270833333334
+        },
+        "requiredPaddingPercent": 8,
+        "visualObservation": "Gray fog halo remains; full-opacity body requirement not satisfied; pose and identity remain substantially continuous."
+      },
+      "footAnchor": {
+        "method": "Bottom-center of alpha>127 body bounds pending container review",
+        "sourcePixels": [
+          515,
+          1447
+        ],
+        "normalized": [
+          0.5029296875,
+          0.9420572916666666
+        ],
+        "note": "Feet at different heights retained intentionally per owner direction; do not force common baseline. Bounds also include other solid subject regions, so handoff anchor is provisional, not runtime-tested."
+      },
+      "derivative": {
+        "webpProduced": false,
+        "reason": "Source failed technical acceptance; format conversion would preserve defects"
+      },
+      "limits": [
+        "Both PNGs exceed 1MB and must not enter git",
+        "Two attempts did not improve cutout; no further prompt iteration or programmatic background removal performed",
+        "No runtime or manifest changes",
+        "Static image is not animation footage"
+      ]
+    },
+  "generation": {
+    "channel": "built-in image_gen.imagegen",
+    "mode": "local-reference identity-preserve",
+    "model": "not exposed by built-in tool",
+    "modelVersion": "unknown",
+    "seed": "not exposed",
+    "steps": "not exposed",
+    "guidance": "not exposed",
+    "transparentBackgroundRequested": true,
+    "referencedImagePaths": [
+      "game/assets/portraits/full/wu.webp"
+    ],
+    "prompt": "Use case: identity-preserve. Asset type: one production candidate full-body melee battle character cutout for the existing Chinese game. Input image: ONLY approved Wu portrait is supplied as identity and painterly style reference. Preserve her recognizable exact face and proportions, bright blue eyes visible under parted fringe, small fang and confident smile, silver-white tight high ponytail with blue ribbon, black rose next to ponytail, black round sunglasses ON TOP OF HEAD not on eyes, bare shoulders and black layered ruffled gothic dress with deep-blue small star-pattern lining, bare lower legs and black thick-soled ankle boots. Change only pose and backdrop into a grounded ready-for-melee combat stance, facing screen RIGHT in readable three-quarter view. Both feet visible and firmly planted on a common baseline near bottom with padding. Her black long sword is drawn and held in front diagonally pointing right, black scabbard stays slung behind; keep long black sword identity and make blade silhouette clear. Slight bent knees and poised body, not lunging or airborne. Full figure, entire ponytail, sword tip and boots inside canvas, quiet silhouette and enough padding for HUD. Use same fine sketch lines with painterly block shadows, visible brush strokes, restrained gray-black with blue details, distinct cloth/leather/metal, no glossy plastic finish. Truly transparent background, no environment, no floor or cast shadow baked outside subject, no motion trail, no particles, no text, no labels, no UI, no multiple poses, no duplicate character, no white flower crown, no glasses over eyes, no cape or new costume, no tights, no boots extending up calves. One static candidate image, not a sprite sheet. Do not reproduce the wide white reference background. Aim a portrait-oriented asset suitable for 220px-tall battle display.",
+    "outputHint": "Generated images are saved to C:\\Users\\太平\\.codex\\generated_images\\01a1009e-f3cc-7ec0-b757-86816c92f48f as C:\\Users\\太平\\.codex\\generated_images\\01a1009e-f3cc-7ec0-b757-86816c92f48f\\exec-27cd6431-e060-43ce-805f-13f269b2a055.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  },
+  "candidate": {
+    "path": "game/assets/portraits/battle-v2/wu-melee-sample-v1.png",
+    "sourcePixels": [
+      1024,
+      1536
+    ],
+    "format": "PNG",
+    "mode": "RGBA",
+    "bytes": 1918936,
+    "sha256": "f1050818586d5c099d8901cfb340be0a8252b44fd00cdd9c0f77781453ad28b0",
+    "gitPolicy": "Over 1MB binary; retain locally and record path+hash+generation method; do not stage",
+    "alpha": {
+      "range": [
+        0,
+        254
+      ],
+      "zeroPixels": 1019664,
+      "oneTo127": 56310,
+      "one28To253": 495816,
+      "at254": 1074,
+      "at255": 0,
+      "nonzeroBounds": [
+        31,
+        73,
+        1024,
+        1514
+      ],
+      "alphaOver127Bounds": [
+        37,
+        163,
+        1018,
+        1453
+      ]
+    }
+  },
+  "observations": {
+    "referenceCompared": "Approved full/wu.webp and old battle/wu.webp both viewed before generation",
+    "identityRetained": [
+      "blue visible eyes",
+      "sunglasses on head",
+      "black rose and blue ribbon",
+      "silver high ponytail",
+      "black shoulder-baring ruffled dress",
+      "blue star lining",
+      "bare legs and black ankle boots",
+      "black long sword"
+    ],
+    "pose": "Facing right in three-quarter grounded guard; two hands on drawn sword; not an attack-frame sequence",
+    "style": "Painterly plane shadows and material contrast closer to approved portrait than old battle cutout; finer rendering than reference remains an aesthetic review item",
+    "limitations": [
+      "No opaque alpha255 pixels; subject opacity must be tested over actual dark battle background before acceptance",
+      "Nonzero alpha touches right canvas edge; strong-alpha blade tip has only roughly 6px right margin",
+      "Boot sole y-coordinates differ by roughly 55px from visual inspection; silhouette bottom anchor cannot align both feet to the same line without pose revision",
+      "Face reads recognizable but likeness/brush fidelity not owner-approved",
+      "At 220px body-height the sword contributes width; current HUD/target-container fit unverified",
+      "PNG exceeds 1MB; no runtime derivative produced or wired"
+    ]
+  },
+  "checks": [
+    {
+      "command": "Pillow read-only size/bands/alpha histogram/bounds inspection",
+      "result": "completed",
+      "editing": false
+    },
+    {
+      "command": "SHA256 and file size",
+      "result": "completed"
+    },
+    {
+      "command": "view approved and old battle portraits, inspect generated image tool result",
+      "result": "completed; no browser"
+    }
+  ],
+  "integration": {
+    "runtimeModified": false,
+    "manifestModified": false,
+    "approvedAnchorsModified": false,
+    "oldPathsPreserved": true
+  },
+  "actionBudget": {
+    "current": "One static candidate; cannot represent new idle/attack/hurt/cast animation",
+    "existingCodeReference": "game/src/battle/view/battle.frames.js",
+    "existingDurationsMs": {
+      "idle": 2900,
+      "attackWind": 320,
+      "attackHit": 280,
+      "hurt": 420,
+      "cast": 800
+    },
+    "existingAnchor": "sprite.anchor.set(0.5,1)",
+    "proposal": "First review pose/identity at actual battle container; then author distinct wind-up and contact pose with same camera/body scale/foot anchor. Do not warp this static image and claim new frames. No new frame count budget until runtime footprint and decode are measured."
+  },
+  "next": [
+    "Owner can preview candidate with dark battle container; do not mark production-ready",
+    "If pose accepted, next image edit should correct only baseline and canvas margin while preserving identity; alpha-opacity needs explicit check",
+    "Only after static acceptance decide authored action frames and derivative encoding; no expansion to five roles"
+  ]
+}

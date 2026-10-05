@@ -1,0 +1,38 @@
+[
+  {
+    "level": "info",
+    "message": "[photo-fps] {\"label\":\"render-sync\",\"ms\":71,\"photos\":79}",
+    "timestamp": "2026-10-04T03:09:26.328Z",
+    "url": "http://127.0.0.1:5200/src/hub/game.cardslib.page.js?t=1791083347205"
+  },
+  {
+    "level": "info",
+    "message": "[photo-fps] {\"label\":\"open\",\"fps\":87,\"frameP95\":48.5,\"frameMax\":218.1,\"over8ms\":12,\"over20ms\":10,\"longTasks\":1,\"longTaskMax\":75,\"longAnimationFrames\":[{\"duration\":114.6,\"renderMs\":28.2,\"layoutMs\":9.2,\"scripts\":[[\"import.then\",74.3]]},{\"duration\":76,\"renderMs\":11.8,\"layoutMs\":9.8,\"scripts\":[]},{\"duration\":215.7,\"renderMs\":8.2,\"layoutMs\":6.6,\"scripts\":[]},{\"duration\":73.3,\"renderMs\":4.2,\"layoutMs\":3.6,\"scripts\":[]},{\"duration\":55.1,\"renderMs\":4.3,\"layoutMs\":3.5,\"scripts\":[]},{\"duration\":67.8,\"renderMs\":6.7,\"layoutMs\":6,\"scripts\":[]}],\"slowFrames\":[[45,42.3],[81,36.4],[178,97],[397,218.1],[481,84.8],[536,54.7],[603,66.6],[663,60.6],[712,48.5],[772,48.5]],\"frames\":131,\"visible\":\"visible\"}",
+    "timestamp": "2026-10-04T03:09:27.835Z",
+    "url": "http://127.0.0.1:5200/src/hub/game.cardslib.photo-fps.js"
+  },
+  {
+    "level": "info",
+    "message": "[photo-fps] {\"label\":\"settled-idle\",\"fps\":165.5,\"frameP95\":6.2,\"frameMax\":6.4,\"over8ms\":0,\"over20ms\":0,\"longTasks\":0,\"longTaskMax\":0,\"longAnimationFrames\":[],\"slowFrames\":[],\"frames\":580,\"visible\":\"visible\"}",
+    "timestamp": "2026-10-04T03:09:31.633Z",
+    "url": "http://127.0.0.1:5200/src/hub/game.cardslib.photo-fps.js"
+  },
+  {
+    "level": "info",
+    "message": "[photo-fps] {\"label\":\"render-sync\",\"ms\":27.4,\"photos\":79}",
+    "timestamp": "2026-10-04T03:30:01.483Z",
+    "url": "http://127.0.0.1:5200/src/hub/game.cardslib.page.js?t=1791084430361"
+  },
+  {
+    "level": "info",
+    "message": "[photo-fps] {\"label\":\"open\",\"fps\":103.3,\"frameP95\":36.4,\"frameMax\":66.6,\"over8ms\":24,\"over20ms\":15,\"longTasks\":0,\"longTaskMax\":0,\"longAnimationFrames\":[{\"duration\":55.8,\"renderMs\":23.2,\"layoutMs\":7.7,\"scripts\":[[\"import.then\",29.7]]},{\"duration\":54.4,\"renderMs\":5.2,\"layoutMs\":3.9,\"scripts\":[]},{\"duration\":52,\"renderMs\":5.2,\"layoutMs\":4.7,\"scripts\":[]},{\"duration\":62.2,\"renderMs\":3.8,\"layoutMs\":3.5,\"scripts\":[]}],\"slowFrames\":[[28,27.2],[64,36.4],[149,66.6],[203,54.5],[258,54.6],[294,36.4],[325,30.2],[379,36.5],[422,42.3],[464,42.6],[488,24.1],[512,24.2],[537,24.3],[597,24.3],[676,24.3]],\"frames\":155,\"visible\":\"visible\"}",
+    "timestamp": "2026-10-04T03:30:02.986Z",
+    "url": "http://127.0.0.1:5200/src/hub/game.cardslib.photo-fps.js"
+  },
+  {
+    "level": "info",
+    "message": "[photo-fps] {\"label\":\"settled-idle\",\"fps\":165.5,\"frameP95\":6.2,\"frameMax\":6.4,\"over8ms\":0,\"over20ms\":0,\"longTasks\":0,\"longTaskMax\":0,\"longAnimationFrames\":[],\"slowFrames\":[],\"frames\":580,\"visible\":\"visible\"}",
+    "timestamp": "2026-10-04T03:30:06.790Z",
+    "url": "http://127.0.0.1:5200/src/hub/game.cardslib.photo-fps.js"
+  }
+]

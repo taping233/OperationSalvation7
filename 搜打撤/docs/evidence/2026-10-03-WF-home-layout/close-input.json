@@ -1,0 +1,10 @@
+{
+  "stage": "complete-uncommitted",
+  "doneWhenConfirmed": true,
+  "checks": [
+    {"kind":"report","result":"passed","report":"docs/evidence/2026-10-03-WF-home-layout/2026-10-03T15-34-32.906Z-6220da5d.json"},
+    {"kind":"manual","result":"passed","description":"Codex内置1183×764当前窗口：标题不遮脸，六个目的地入口打开返回、静音双切换恢复，控制台无error/warn，after.jpg+browser-input.json"},
+    {"kind":"manual","result":"passed","description":"git diff --check通过，index.html既有character-idle引入保留，game.menu与成就他人属地未修改"}
+  ],
+  "unverified": ["多尺寸、hover、退出关闭窗口、帧率/长期性能", "混树全量/构建/远端CI与最近全量覆盖未核实；未提交"]
+}

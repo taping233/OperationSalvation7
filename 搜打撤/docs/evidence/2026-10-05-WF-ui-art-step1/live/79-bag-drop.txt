@@ -1,0 +1,15 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container question 丢弃卡牌？, ID: overlay
+		3 container
+			4 button Description: 关闭, ID: ovCloseX
+			6 heading question 丢弃卡牌？, Value: 2, ID: ovTitle
+				7 image question
+				8 text  丢弃卡牌？
+			5 container ovBody
+				9 container
+					10 text 你把【 镭射 】拖到了背包外。确认后将永久丢弃 1 张，无法从消耗口袋或墓地取回。
+				11 button 确认丢弃
+				12 button 取消，放回背包
+
+The focused UI element is 12 button 取消，放回背包

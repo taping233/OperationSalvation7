@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-03",
+  "owner": "WF-xart-z1",
+  "purpose": "A7 首轮数值基线（探针 perf-probe.local.js，Codex 移交工具，本会话首次实跑采数）",
+  "environment": {
+    "browser": "ZCode 内置浏览器当前窗口",
+    "url": "http://127.0.0.1:5340/?perfProbe",
+    "cssViewport": "1280x550(canvas 区)/720 窗口",
+    "dpr": "pan=1.0 / battle=1.5",
+    "save": "独立 origin 档01（会话测试档）",
+    "head": "425d03920e + 共享工作树在途",
+    "caveat": "rAF 回调率不等于屏幕 FPS；screenFps=null；draw 只统计 SDT.Renderer.draw，不含 Pixi 合成"
+  },
+  "baseline": {
+    "mapPan": {
+      "mode": "pan",
+      "elapsedMs": 6002.5,
+      "rafHz": 164.76,
+      "frameMedianMs": 6.1,
+      "frameP95Ms": 6.2,
+      "over20msPercent": 0,
+      "drawMedianMs": 0.2,
+      "drawP95Ms": 0.4,
+      "drawMaxMs": 0.9,
+      "longTasks": 0,
+      "loopTicks": 989,
+      "visible": true,
+      "note": "受控平移拉起渲染循环；帧预算 16.7ms 占用 37%，无长任务"
+    },
+    "battleIdle": {
+      "mode": "page",
+      "mechanism": "battle",
+      "elapsedMs": 6002.7,
+      "rafHz": 164.59,
+      "frameMedianMs": 6.1,
+      "frameP95Ms": 6.2,
+      "over20msPercent": 0,
+      "drawCalls": 0,
+      "longTasks": 0,
+      "loopTicks": 23,
+      "domElements": 590,
+      "images": 39,
+      "imageComplete": 39,
+      "canvases": 3,
+      "note": "战斗待机零 Renderer.draw（事件驱动渲染验证）；签名 battle-stage/bt-entrance/phase-player"
+    },
+    "battlePlayPeak": {
+      "result": "采样中止：出牌导致战斗结束、机制签名变化，通用页面采样按设计中止",
+      "implication": "出牌峰值需战斗内专用采样模式（探针现状无此模式），列为探针能力边界；非游戏性能问题"
+    },
+    "staticPages": {
+      "result": "基地页与静止地图 rAF 停止（采样按设计中止 data-state=incomplete）",
+      "implication": "静止页零渲染——省电三铁律（不出画面不渲染）在基线成立，记为积极信号"
+    },
+    "loads": {
+      "navigation": {
+        "responseEndMs": 15.9,
+        "domContentLoadedMs": 453.9,
+        "loadEventMs": 581.4
+      },
+      "paint": {
+        "firstPaintMs": 348,
+        "firstContentfulPaintMs": 348
+      },
+      "battleModuleLoadsMs": 93.6,
+      "battleFrameLoads": {
+        "wu": 327.4
+      },
+      "resourceCount": 250,
+      "resourceTransferKiB": 167.64,
+      "possibleBufferTruncation": true,
+      "note": "Resource Timing 缓冲可能截断，250 条非全量资产清单"
+    }
+  },
+  "unmeasured": [
+    "战斗出牌渲染峰值（探针无专用模式，机制签名随战斗结束变化）",
+    "整备/仓库/照相馆密集卡片滚动采样（本窗未做，探针可用待补）",
+    "大卡库筛选、详情开关、四层地图、首脑战、胜负结算、隐藏恢复",
+    "screenFps（探针明示 null，不伪造）",
+    "基地仓库/整备页滚动采样：本窗尝试 6 次未稳定进入（回基地链路在探针展开态下待查），方法已定型归下批"
+  ],
+  "method": "同一内置浏览器同一窗口，每项 6 秒前台采样，探针原生 JSON 落文本；未改视口、未装工具、未碰全局配置"
+}

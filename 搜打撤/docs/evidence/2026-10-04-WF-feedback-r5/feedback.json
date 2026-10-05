@@ -1,0 +1,91 @@
+{
+  "readAt": "2026-10-04T10:13:07.730Z",
+  "origin": "http://127.0.0.1:5200",
+  "messages": [
+    {
+      "ts": "2026-10-04T09:53:07.075Z",
+      "version": "v0.60.0",
+      "page": {
+        "id": "classselect",
+        "name": "选人页"
+      },
+      "target": {
+        "name": "选人页 · art-figure",
+        "selector": "div.cls2-stage > div.cls2-fullart > span.art-figure-wrap > img.art-figure"
+      },
+      "at": {
+        "x": 59,
+        "y": 43
+      },
+      "text": "不要上下晃动，改为左右轻微平移",
+      "steps": "",
+      "expected": "",
+      "actual": ""
+    },
+    {
+      "ts": "2026-10-04T09:53:42.293Z",
+      "version": "v0.60.0",
+      "page": {
+        "id": "mode:page",
+        "name": "全屏页"
+      },
+      "target": {
+        "name": "全屏页 · pool-grid",
+        "selector": "div#ovBody > div.pg > div.pool-main > div.pool-grid#poolGrid"
+      },
+      "at": {
+        "x": 37,
+        "y": 84
+      },
+      "text": "角色卡池的界面ui太丑了，都没有对齐，从头重新设计",
+      "steps": "",
+      "expected": "",
+      "actual": ""
+    },
+    {
+      "ts": "2026-10-04T09:54:15.163Z",
+      "version": "v0.60.0",
+      "page": {
+        "id": "classselect",
+        "name": "选人页"
+      },
+      "target": {
+        "name": "选人页 · art-figure",
+        "selector": "div.cls2-stage > div.cls2-fullart > span.art-figure-wrap > img.art-figure"
+      },
+      "at": {
+        "x": 64,
+        "y": 42
+      },
+      "text": "左右轻微平移的速度要很慢很慢",
+      "steps": "",
+      "expected": "",
+      "actual": ""
+    },
+    {
+      "ts": "2026-10-04T09:54:34.699Z",
+      "version": "v0.60.0",
+      "page": {
+        "id": "state:idle",
+        "name": "对局地图"
+      },
+      "target": {
+        "name": "游戏画布（对局地图）",
+        "selector": "canvas#game"
+      },
+      "at": {
+        "x": 36,
+        "y": 14
+      },
+      "text": "把这个提示栏删掉",
+      "steps": "",
+      "expected": "",
+      "actual": ""
+    }
+  ],
+  "targetConfirmation": {
+    "source": "老板随后提供的截图",
+    "id": "expPocketStrip",
+    "content": "背包/消耗袋/随身币/带出预估整条汇总栏"
+  }
+}

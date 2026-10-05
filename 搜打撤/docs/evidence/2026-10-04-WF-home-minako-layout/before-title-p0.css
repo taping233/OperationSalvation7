@@ -1,0 +1,364 @@
+/* Title lobby redesign (10-04 老板令，对标参考首页)：
+   上下黑条英文滚动字幕 + 左右实体感箭头选项牌 + 大字排版。
+   壁纸仍走 .title-bg（wallpaper-wu-1004.webp），本文件为 #title 权威增量层。 */
+#title { --home-edge: 5.2%; --home-gold: #d9bb82; --plate-shadow: rgba(7, 13, 19, .72); }
+
+#title .title-bg {
+  background-image: url('../assets/reconstruction/wallpaper-wu-1004.webp');
+  background-size: cover; background-position: center;
+  transform: none; filter: saturate(.94) contrast(1.04);
+}
+#title .title-bg::before, #title .title-bg::after,
+#title .title-inner::before, #title::before,
+#title .ak-hud::before, #title .ak-hud::after,
+#title .title-foreground-paper, #title .title-veins { display: none; }
+
+/* —— 上下黑色横条 + 英文滚动字幕 —— */
+#title .title-ticker {
+  position: absolute; left: 0; right: 0; height: 42px; z-index: 7;
+  display: flex; align-items: center; overflow: hidden;
+  background: #0c1014;
+}
+#title .title-ticker-top { top: 0; border-bottom: 2px solid var(--home-gold); }
+#title .title-ticker-bottom { bottom: 0; border-top: 2px solid var(--home-gold); }
+#title .title-ticker span {
+  flex: none; min-width: 100%; white-space: nowrap;
+  color: #f2f5f4; font: italic 800 15px/1 var(--font-ui);
+  letter-spacing: .18em;
+  animation: titleTickerMove 46s linear infinite;
+}
+#title .title-ticker-bottom span { animation-direction: reverse; }
+@keyframes titleTickerMove { to { transform: translateX(-100%); } }
+
+/* —— 字标（左上，深底衬托保证清晰） —— */
+#title .title-heading {
+  left: var(--home-edge); right: auto; top: 8.5%;
+  width: clamp(330px, 34vw, 540px); transform: none; z-index: 4;
+  padding: 14px 26px 16px 20px;
+  background: linear-gradient(90deg, #0b1722d9, #0b17228c 62%, transparent);
+  border-left: 3px solid var(--home-gold);
+}
+#title .title-kicker {
+  display: flex; align-items: center; gap: 14px; margin: 0 0 12px;
+  color: #bad2dc; font: 10px/1.5 Consolas, monospace; letter-spacing: .24em;
+}
+#title .title-kicker::before { content: ''; width: 30px; height: 1px; background: #a7c7d3; }
+#title .winter-wordmark {
+  filter: brightness(1.32) drop-shadow(0 3px 8px #030d14aa);
+}
+#title .title-lead {
+  margin: 10px 0 0 5px; color: #ccdbe0;
+  font: 13px/1.8 var(--font-ui); letter-spacing: .24em;
+}
+
+/* —— HUD 布局：ak-tl / ak-pillrow 释放子元素，自由落位 —— */
+#title .ak-tl, #title .ak-pillrow { display: contents; }
+
+/* 实体箭头牌公共层：clip-path 成箭头形，drop-shadow 出贴纸厚度 */
+#title .ak-hud .plate {
+  position: absolute; z-index: 5; margin: 0; border: 0; border-radius: 0;
+  box-shadow: none; cursor: pointer; text-align: left;
+  transition: transform .14s ease, filter .14s ease;
+}
+#title .ak-hud .plate:hover, #title .ak-hud .plate:focus-visible {
+  transform: translate(-3px, -3px);
+  filter: drop-shadow(10px 10px 0 var(--plate-shadow));
+}
+#title .ak-hud .plate:active {
+  transform: translate(4px, 4px);
+  filter: drop-shadow(2px 2px 0 var(--plate-shadow));
+}
+#title .ak-hud .plate-r {
+  clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 50%, calc(100% - 30px) 100%, 0 100%);
+  filter: drop-shadow(7px 7px 0 var(--plate-shadow));
+}
+#title .ak-hud .plate-l {
+  clip-path: polygon(30px 0, 100% 0, 100% 100%, 30px 100%, 0 50%);
+  filter: drop-shadow(-7px 7px 0 var(--plate-shadow));
+}
+#title .ak-hud .plate:hover, #title .ak-hud .plate:focus-visible { filter: drop-shadow(11px 11px 0 var(--plate-shadow)); }
+#title .ak-hud .plate-l:hover, #title .ak-hud .plate-l:focus-visible { filter: drop-shadow(-11px 11px 0 var(--plate-shadow)); }
+#title .ak-hud .plate:active { filter: drop-shadow(2px 2px 0 var(--plate-shadow)); }
+
+/* —— 左列：进入远征档案 / 照相馆 / 成就 —— */
+#title .ak-start {
+  left: var(--home-edge); right: auto; top: 21%; bottom: auto;
+  width: clamp(300px, 27vw, 400px); min-height: 96px;
+  display: flex; flex-direction: column; justify-content: center; gap: 6px;
+  padding: 12px 52px 12px 26px; overflow: visible;
+  background: linear-gradient(180deg, #f7b45a, #f0a03a 55%, #e89430);
+  color: #241304;
+}
+#title .ak-start .st-row { display: flex; align-items: center; gap: 14px; }
+#title .ak-start .st-row::before {
+  content: ''; width: 56px; height: 52px; flex-basis: 52px;
+  background: url('../assets/ui/home-icons-v12/explore-sword.webp') center / contain no-repeat;
+  filter: drop-shadow(0 2px 3px #7a4a10aa);
+}
+#title .ak-start .st-cn {
+  color: #241304; font-family: var(--font-ui) !important;
+  font-size: 31px; line-height: 1.25; font-weight: 800; letter-spacing: .12em;
+  text-shadow: 0 1px 0 #ffd9a3;
+}
+#title .ak-start .st-en {
+  color: #5c3a10; font-family: var(--font-ui) !important;
+  font-size: 11px; font-style: normal; font-weight: 700; letter-spacing: .22em;
+  text-shadow: none;
+}
+#title .ak-start:hover { background: linear-gradient(180deg, #ffbd63, #f6a944 55%, #ee9d38); }
+#title .ak-start .st-light-sweep {
+  position: absolute; top: 10px; left: 10%; width: 36%; height: 2px;
+  background: linear-gradient(90deg, transparent, #fff6dd 48%, #ffffff 58%, transparent);
+  opacity: 0; transform: translateX(-130%); pointer-events: none; z-index: 2;
+  animation: titleStartIdleSweep 6.5s var(--ease-float, ease-in-out) infinite;
+}
+#title .ak-start:hover .st-light-sweep,
+#title .ak-start:focus-visible .st-light-sweep { animation: titleStartSweep .82s cubic-bezier(.2, .65, .35, 1) both; }
+@keyframes titleStartSweep {
+  0% { opacity: 0; transform: translateX(-130%); }
+  24% { opacity: .85; }
+  100% { opacity: 0; transform: translateX(230%); }
+}
+@keyframes titleStartIdleSweep {
+  0%, 76% { opacity: 0; transform: translateX(-130%); }
+  84% { opacity: .7; }
+  100% { opacity: 0; transform: translateX(230%); }
+}
+
+#title .ak-hud .ak-circle { display: grid; align-content: center; align-items: center; }
+#title .ak-hud .ak-lib {
+  left: var(--home-edge); right: auto; top: 37%; bottom: auto;
+  width: clamp(280px, 25vw, 372px); height: 88px; gap: 2px 16px;
+  grid-template-columns: 44px 1fr; grid-template-rows: auto auto;
+  padding: 0 52px 0 26px;
+  background: linear-gradient(180deg, #43d0ae, #2ebfa3 55%, #27b096);
+  color: #05231b;
+}
+#title .ak-hud .ak-ach {
+  left: var(--home-edge); right: auto; top: 53%; bottom: auto;
+  width: clamp(280px, 25vw, 372px); height: 88px; gap: 2px 16px;
+  grid-template-columns: 44px 1fr; grid-template-rows: auto auto;
+  padding: 0 52px 0 26px;
+  background: linear-gradient(180deg, #f7f3e6, #efe9d8 55%, #e6dfca);
+  color: #1c2a33;
+}
+#title .ak-hud .ak-circle .c-ring {
+  grid-column: 1; grid-row: 1 / 3; width: 44px; height: 44px;
+  transform: none; background: #ffffff2e; border: 0; border-radius: 10px;
+  box-shadow: none; display: grid; place-items: center; color: inherit;
+}
+#title .ak-hud .ak-circle .c-ring::before, #title .ak-hud .ak-circle .c-ring::after { display: none; }
+#title .ak-hud .ak-circle .c-ring svg { width: 30px; height: 30px; }
+#title .ak-hud .ak-circle .c-cn {
+  grid-column: 2; grid-row: 1; align-self: end; margin: 0;
+  color: inherit; font-family: var(--font-ui) !important;
+  font-size: 27px; line-height: 1.25; font-weight: 800; letter-spacing: .14em;
+  text-shadow: 0 1px 0 #ffffff55;
+}
+#title .ak-hud .ak-circle .c-en {
+  grid-column: 2; grid-row: 2; margin: 0;
+  color: inherit; opacity: .72; font-family: var(--font-ui) !important;
+  font-size: 11px; line-height: 1.4; font-style: normal; font-weight: 700; letter-spacing: .22em;
+  text-transform: uppercase; text-shadow: none;
+}
+#title .ak-hud .ak-ach .c-tag {
+  position: absolute; right: 44px; bottom: 13px; margin: 0; padding: 0;
+  background: none; border: 0; color: #8a6a2f;
+  font: 700 12px Consolas, monospace; letter-spacing: .08em;
+}
+#title .ak-hud .ak-circle:hover, #title .ak-hud .ak-circle:hover .c-ring { transform: none; filter: none; background: inherit; }
+#title .ak-hud .ak-lib:hover { background: linear-gradient(180deg, #4cdcb8, #36c9ab 55%, #2db8a0); }
+#title .ak-hud .ak-ach:hover { background: linear-gradient(180deg, #fffdf4, #f6f0df 55%, #ece4cf); }
+
+/* —— 右列：新手指南 / 设置 / 退出游戏 —— */
+#title .ak-hud .ak-quickref {
+  position: absolute; z-index: 5;
+  left: auto; right: var(--home-edge); top: 21%;
+  width: clamp(260px, 23vw, 340px); height: 84px;
+  display: grid; grid-template-columns: 44px 1fr; grid-template-rows: auto auto;
+  align-content: center; align-items: center; gap: 2px 16px;
+  padding: 0 26px 0 52px; text-align: right;
+  clip-path: polygon(30px 0, 100% 0, 100% 100%, 30px 100%, 0 50%);
+  filter: drop-shadow(-7px 7px 0 var(--plate-shadow));
+  background: linear-gradient(180deg, #f7f3e6, #efe9d8 55%, #e6dfca);
+  color: #1c2a33; border: 0; border-radius: 0;
+  transition: transform .14s ease, filter .14s ease, background .14s ease;
+}
+#title .ak-hud .ak-quickref svg { grid-column: 1; grid-row: 1 / 3; width: 30px; height: 30px; margin: 0 auto; color: #41525c; }
+#title .ak-hud .ak-quickref span {
+  grid-column: 2; width: 100%;
+  color: #1c2a33; font-family: var(--font-ui) !important;
+  font-size: 24px; line-height: 1.2; font-weight: 800; letter-spacing: .16em;
+}
+#title .ak-hud .ak-quickref:hover, #title .ak-hud .ak-quickref:focus-visible {
+  transform: translate(3px, -3px);
+  filter: drop-shadow(-11px 11px 0 var(--plate-shadow));
+  background: linear-gradient(180deg, #fffdf4, #f6f0df 55%, #ece4cf); color: #10202b;
+}
+#title .ak-hud .ak-quickref:active {
+  transform: translate(-4px, 4px);
+  filter: drop-shadow(-2px 2px 0 var(--plate-shadow));
+}
+#title .ak-hud .ak-set {
+  left: auto; right: var(--home-edge); top: 37%; bottom: auto;
+  width: clamp(260px, 23vw, 340px); height: 88px;
+  grid-template-columns: 44px 1fr; grid-template-rows: auto auto;
+  gap: 2px 16px; padding: 0 26px 0 52px; text-align: right; justify-items: end;
+  clip-path: polygon(30px 0, 100% 0, 100% 100%, 30px 100%, 0 50%);
+  filter: drop-shadow(-7px 7px 0 var(--plate-shadow));
+  background: linear-gradient(180deg, #ffd94e, #ffd23f 55%, #f5c32e);
+  color: #241a02; border: 0; border-left: 0;
+  transition: transform .14s ease, filter .14s ease, background .14s ease;
+}
+#title .ak-hud .ak-set .c-ring {
+  grid-column: 1; grid-row: 1 / 3; width: 44px; height: 44px;
+  transform: none; background: #ffffff38; border: 0; border-radius: 10px;
+  box-shadow: none; display: grid; place-items: center; color: #6b4e08;
+}
+#title .ak-hud .ak-set .c-ring::before, #title .ak-hud .ak-set .c-ring::after { display: none; }
+#title .ak-hud .ak-set .c-ring svg { width: 30px; height: 30px; }
+#title .ak-hud .ak-set .c-cn {
+  grid-column: 2; grid-row: 1; align-self: end; margin: 0;
+  color: #241a02; font-family: var(--font-ui) !important;
+  font-size: 27px; line-height: 1.25; font-weight: 800; letter-spacing: .16em;
+  text-shadow: 0 1px 0 #ffe99399;
+}
+#title .ak-hud .ak-set .c-en {
+  grid-column: 2; grid-row: 2; margin: 0;
+  color: #6b4e08; font-family: var(--font-ui) !important;
+  font-size: 11px; line-height: 1.4; font-style: normal; font-weight: 700; letter-spacing: .22em;
+  text-transform: uppercase; text-shadow: none;
+}
+#title .ak-hud .ak-set:hover, #title .ak-hud .ak-set:focus-visible {
+  transform: translate(3px, -3px);
+  filter: drop-shadow(-11px 11px 0 var(--plate-shadow));
+  background: linear-gradient(180deg, #ffe066, #ffd94a 55%, #f8c936);
+}
+#title .ak-hud .ak-set:active {
+  transform: translate(-4px, 4px);
+  filter: drop-shadow(-2px 2px 0 var(--plate-shadow));
+}
+#title .ak-exit {
+  position: absolute; z-index: 5;
+  left: auto; right: var(--home-edge); top: 53%;
+  width: clamp(260px, 23vw, 340px); height: 88px;
+  display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 4px;
+  padding: 0 26px 0 52px; text-align: right;
+  clip-path: polygon(30px 0, 100% 0, 100% 100%, 30px 100%, 0 50%);
+  filter: drop-shadow(-7px 7px 0 var(--plate-shadow));
+  background: linear-gradient(180deg, #f47663, #ee6553 55%, #e25746);
+  color: #3a0f08; border: 0; border-radius: 0;
+  transition: transform .14s ease, filter .14s ease, background .14s ease;
+}
+#title .ak-exit::before {
+  content: '退出游戏'; color: #3a0f08;
+  font: 800 27px/1.2 var(--font-ui); letter-spacing: .16em;
+}
+#title .ak-exit::after {
+  content: 'EXIT GAME'; color: #7c2c1d;
+  font: 700 11px/1.4 var(--font-ui); letter-spacing: .22em;
+}
+#title .ak-exit svg {
+  position: absolute; left: 24px; top: 50%; translate: 0 -50%;
+  width: 30px; height: 30px; color: #7c2c1d;
+}
+#title .ak-exit:hover, #title .ak-exit:focus-visible {
+  transform: translate(3px, -3px);
+  filter: drop-shadow(-11px 11px 0 var(--plate-shadow));
+  background: linear-gradient(180deg, #fb8371, #f26d5b 55%, #e65c4b);
+}
+#title .ak-exit:active {
+  transform: translate(-4px, 4px);
+  filter: drop-shadow(-2px 2px 0 var(--plate-shadow));
+}
+
+/* —— 小件：静音 / 留言信箱（左上角工具钮） —— */
+#title .ak-home, #title .ak-hud .ak-inbox {
+  position: absolute; z-index: 5; top: 58px; left: var(--home-edge);
+  width: 46px; height: 46px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #12212cd9; border: 1px solid #acc9d038; border-radius: 0;
+  color: #dfe9ec; box-shadow: 4px 4px 0 var(--plate-shadow);
+  transition: border-color .16s, color .16s, transform .14s, box-shadow .14s;
+}
+#title .ak-hud .ak-inbox { left: calc(var(--home-edge) + 56px); }
+#title .ak-home::after { display: none; }
+#title .ak-home:hover, #title .ak-hud .ak-inbox:hover {
+  border-color: var(--home-gold); color: #fff;
+  transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--plate-shadow);
+}
+
+/* —— 右上档案信息 / 底部小件 —— */
+#title .ak-user {
+  top: 58px; right: var(--home-edge); padding: 0 0 10px; min-width: 176px;
+  background: none; border: 0; border-bottom: 1px solid #adc9d04d;
+  box-shadow: none; transform: none;
+}
+#title .ak-user-row { position: relative; gap: 12px; padding-bottom: 15px; }
+#title .ak-user .ak-ava { width: 44px; height: 44px; border: 1px solid #d9c38b80; }
+#title .ak-lv { gap: 10px; }
+#title .ak-lv em { font: 10px var(--font-ui); letter-spacing: .18em; color: #bdd0d6; }
+#title .ak-lv b { font: 34px/1 Consolas, monospace; color: #eaf3f1; text-shadow: 0 2px 6px #0a161f; }
+#title .ak-uname {
+  position: absolute; top: auto; bottom: 0; right: 0; margin: 0; white-space: nowrap;
+  font-size: 11px; letter-spacing: .08em; color: #b4c8ce;
+}
+#title .ak-sec { left: var(--home-edge); right: auto; top: auto; bottom: 58px; gap: 10px; }
+#title .ak-sec::before, #title .ak-sec::after { display: none; }
+#title .ak-sec span { color: #c2d4da; font-size: 12px; letter-spacing: .12em; text-shadow: 0 1px 4px #0a161f; }
+#title .ak-sec b { border: 0; padding: 0 2px; background: none; font: 700 22px Consolas, monospace; color: #e8d6ab; }
+#title .title-credits {
+  right: var(--home-edge); left: auto; top: auto; bottom: 58px; margin: 0;
+  font-size: 10px; letter-spacing: .1em; color: #9fb4bf; text-shadow: 0 1px 4px #0a161f;
+}
+#title .title-quote { display: none; }
+#title .title-snow { opacity: .4; }
+#title .title-snow i:nth-child(n+25) { display: none; }
+#title #warmupTip {
+  left: var(--home-edge); top: 64px; bottom: auto; min-width: 0; width: 300px;
+  max-width: 32%; padding: 10px 12px; background: #081e28b3;
+  border: 0; border-left: 2px solid #94bbcb; box-shadow: none;
+}
+#title #warmupTip .warmup-reason { font-size: 10px; letter-spacing: 0; }
+#title #warmupTip .warmup-track { height: 2px; margin-top: 5px; }
+#title .ak-hud button:focus-visible { outline: 2px solid #ffe9b0; outline-offset: 4px; }
+
+/* —— 小窗降级 —— */
+@media (max-width: 1000px) {
+  #title { --home-edge: 3.5%; }
+  #title .title-heading { width: 40vw; }
+  #title .ak-start { width: 40vw; min-height: 84px; }
+  #title .ak-start .st-cn { font-size: 25px; }
+  #title .ak-hud .ak-lib, #title .ak-hud .ak-ach { width: 37vw; height: 76px; }
+  #title .ak-hud .ak-circle .c-cn { font-size: 22px; }
+  #title .ak-hud .ak-quickref, #title .ak-hud .ak-set, #title .ak-exit { width: 34vw; height: 76px; }
+  #title .ak-hud .ak-quickref span { font-size: 20px; }
+  #title .ak-hud .ak-set .c-cn, #title .ak-exit::before { font-size: 22px; }
+}
+@media (max-height: 650px) {
+  #title .title-heading { top: 7%; }
+  #title .ak-start { top: 18%; }
+  #title .ak-hud .ak-lib, #title .ak-hud .ak-quickref, #title .ak-hud .ak-set { top: 34%; }
+  #title .ak-hud .ak-ach, #title .ak-exit { top: 50%; }
+}
+@media (max-width: 650px) {
+  #title .title-heading { width: 62vw; }
+  #title .ak-start, #title .ak-hud .ak-lib, #title .ak-hud .ak-ach { width: 56vw; }
+  #title .ak-hud .ak-quickref, #title .ak-hud .ak-set, #title .ak-exit { width: 52vw; }
+  #title .ak-start .st-cn { font-size: 21px; letter-spacing: .06em; }
+  #title .ak-hud .ak-circle .c-cn { font-size: 19px; }
+  #title .ak-hud .ak-quickref span { font-size: 17px; }
+  #title .ak-hud .ak-set .c-cn, #title .ak-exit::before { font-size: 19px; }
+  #title .title-ticker span { font-size: 11px; letter-spacing: .12em; }
+  #title .title-ticker { height: 32px; }
+  #title .ak-home, #title .ak-hud .ak-inbox { top: 46px; }
+  #title .ak-user { top: 46px; }
+}
+
+/* —— 既有生命周期：页面遮罩冻结 / 减少动态 —— */
+body.page-covered.page-opaque #title,
+body.page-covered.page-opaque #title * { animation-play-state: paused !important; }
+body.reduce-motion #title *, body.reduce-motion #title *::before, body.reduce-motion #title *::after { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  #title *, #title *::before, #title *::after { animation: none !important; transition: none !important; }
+}

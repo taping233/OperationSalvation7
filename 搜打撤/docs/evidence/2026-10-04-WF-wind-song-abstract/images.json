@@ -1,0 +1,42 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail color bake only",
+  "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-1bf4a8b3-2e82-4ea0-b3e8-209625623b54.png",
+  "outputs": [
+    {
+      "path": "game/assets/cards/hero-sacredrain.webp",
+      "bytes": 249222,
+      "sha256": "acc2ad5a8d8218060ca9565918e1bd8a471fef1ddff76ce6d00719542865b29c",
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/cards/hero-sacredrain.webp",
+      "bytes": 46198,
+      "sha256": "fc26684689aedb44e628702baa554ecb27645b325962901eef2270cd46dcdc24",
+      "size": [
+        448,
+        448
+      ]
+    }
+  ],
+  "source": {
+    "path": "game/art-source/cards/hero-sacredrain-abstract-20261004.png",
+    "bytes": 2069965,
+    "sha256": "e9cbe78237b7f751047e0b0dec45f1d5350611aaaa05af92779bd02541141445"
+  },
+  "backups": [
+    {
+      "path": "docs/evidence/2026-10-04-WF-wind-song-abstract/originals-before-abstract/full-hero-sacredrain.webp",
+      "bytes": 292948,
+      "sha256": "d6344d125c999950053c9ee958c37c78f56ef8f3287de191967b8b0829c67287"
+    },
+    {
+      "path": "docs/evidence/2026-10-04-WF-wind-song-abstract/originals-before-abstract/thumb-hero-sacredrain.webp",
+      "bytes": 55328,
+      "sha256": "40ca3cec810f1562ca23616a112f67e0fdc85b4aca295f766e18dc56306be11a"
+    }
+  ],
+  "verification": "老板明确禁止测试，本轮未测试/资产审计/实页"
+}

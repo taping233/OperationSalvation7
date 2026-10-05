@@ -1,0 +1,31 @@
+{
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a107c6-f69f-7ca1-93ba-674f3f24d7e1\\exec-02d8df50-a11d-47c2-a13c-27b3bed60af9.png",
+  "sourceSHA256": "172ff8adb8b52d14da95aa0db470b37afd6693de2119e4a64100dbc7729c598c",
+  "sourceBytes": 2742483,
+  "asset": "reconstruction/wallpaper-ensemble-1005.webp",
+  "size": [
+    1672,
+    941
+  ],
+  "bytes": 420426,
+  "sha256": "4dc60be119f7ab2d7ab5f72e08ccb6414bfbe0f775b4601b1d13b9cf0715fd95",
+  "beforeSHA256": "4c9d73f1ab6129c64408d3e73b27d9b51db3e7880204e5fd7ac6ce35b834512f",
+  "conversion": "Pillow RGB WebP quality=92 method=6; no crop or resize",
+  "origin": "Built-in ImageGen edit: user-selected texture/brush reference, stronger reflective broken glass, recognizable ruined city architecture; exactly five playable characters and scene costumes retained",
+  "prompt": "prompt.txt",
+  "userReference": {
+    "path": "user-reference.png",
+    "sha256": "56d59cd6b7f2fb9e4ca91c3f3e049ba2ece65c60e60e3738022e176154de35d1",
+    "role": "user-supplied drawing-style and glass-material reference only"
+  },
+  "identityReferences": [
+    {
+      "path": "game/assets/portraits/full/heixiang.webp",
+      "sha256": "e186722f97369b3a63a45dca056e2fe6c10f7b211c8de9403f71639d4f6bda6e"
+    },
+    {
+      "path": "game/assets/portraits/full/changwuyu.webp",
+      "sha256": "98e69d19b6c2129d0f85d320bb95e4609584576c94b041663a523067ff946185"
+    }
+  ]
+}

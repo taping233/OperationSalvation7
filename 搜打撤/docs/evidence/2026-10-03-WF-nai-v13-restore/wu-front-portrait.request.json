@@ -1,0 +1,93 @@
+{
+  "recipe_version": "1.3",
+  "model": "nai-diffusion-4-5-full",
+  "reference_image": "game/assets/portraits/full/wu.webp",
+  "reference_sha256": "a7c5d4e2242558337f5f5a8b8df71cda875af73586ec70657b45836f01466c6c",
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1girl, young adult woman, fair skin, small youthful face, bright cyan-blue eyes, slightly upturned sharp eyes, confident playful grin with one small fang, parted bangs, eyebrows visible through hair, silver-white sleek smooth hair, tight neat very high ponytail, long ponytail falling behind her left side down to mid-calf, blue satin ribbon bow with two trailing bands at the ponytail base, one black rose beside the ponytail root, two long sidelocks reaching the collarbone, matte black round sunglasses with thin frames resting on top of her head, black off-shoulder one-line-neckline dress, horizontal pleated ruffle at the neckline, narrow black waist belt, charcoal-black outer skirt with zigzag ruffled hem ending at the calves, deep-blue inner skirt lining covered with small light-blue four-pointed stars, a ring of the star-patterned lining visible below the outer hem, bare lower legs, black platform ankle boots with folded cuffs and zipper detail, one black longsword with a black scabbard slung diagonally on her back, hilt visible above her left shoulder, scabbard tip extending past her right hip below the knee, a thin black strap from her right shoulder to her left waist\n\nFull body front view facing the viewer, standing upright with feet slightly apart, right hand resting on her hip with the back of the hand outward, left arm relaxed at her side, chest-up fully visible, entire figure inside the frame with margins on all sides, expression cocky and self-assured\n\nPortrait orientation, single complete standing figure centered, head-to-boot silhouette fully readable against the quiet background\n\nUse a quiet, loosely brushed background without scenery, leaving the complete character silhouette as the focal point; preserve the specified pose.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "uc": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, reflective sunglasses, lens flare, glasses reflection, pantyhose, stockings, thigh highs, fluffy hair, voluminous hair, messy hair, wavy hair, high-low skirt, asymmetric skirt, hair over one eye, second sword, two swords, drawn sword in hand, multiple girls",
+  "width": 832,
+  "height": 1216,
+  "seed": 1481474331,
+  "output": ".tmp/nai/output/wu-front-portrait-20261003/wu-front-portrait-20261003.png",
+  "payload": {
+    "input": "1.2::miv4t::, 0.8::quasarcake::\n\n1girl, young adult woman, fair skin, small youthful face, bright cyan-blue eyes, slightly upturned sharp eyes, confident playful grin with one small fang, parted bangs, eyebrows visible through hair, silver-white sleek smooth hair, tight neat very high ponytail, long ponytail falling behind her left side down to mid-calf, blue satin ribbon bow with two trailing bands at the ponytail base, one black rose beside the ponytail root, two long sidelocks reaching the collarbone, matte black round sunglasses with thin frames resting on top of her head, black off-shoulder one-line-neckline dress, horizontal pleated ruffle at the neckline, narrow black waist belt, charcoal-black outer skirt with zigzag ruffled hem ending at the calves, deep-blue inner skirt lining covered with small light-blue four-pointed stars, a ring of the star-patterned lining visible below the outer hem, bare lower legs, black platform ankle boots with folded cuffs and zipper detail, one black longsword with a black scabbard slung diagonally on her back, hilt visible above her left shoulder, scabbard tip extending past her right hip below the knee, a thin black strap from her right shoulder to her left waist\n\nFull body front view facing the viewer, standing upright with feet slightly apart, right hand resting on her hip with the back of the hand outward, left arm relaxed at her side, chest-up fully visible, entire figure inside the frame with margins on all sides, expression cocky and self-assured\n\nPortrait orientation, single complete standing figure centered, head-to-boot silhouette fully readable against the quiet background\n\nUse a quiet, loosely brushed background without scenery, leaving the complete character silhouette as the focal point; preserve the specified pose.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 832,
+      "height": 1216,
+      "scale": 6.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": true,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1481474331,
+      "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, reflective sunglasses, lens flare, glasses reflection, pantyhose, stockings, thigh highs, fluffy hair, voluminous hair, messy hair, wavy hair, high-low skirt, asymmetric skirt, hair over one eye, second sword, two swords, drawn sword in hand, multiple girls",
+      "characterPrompts": [
+        {
+          "prompt": "",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\n1girl, young adult woman, fair skin, small youthful face, bright cyan-blue eyes, slightly upturned sharp eyes, confident playful grin with one small fang, parted bangs, eyebrows visible through hair, silver-white sleek smooth hair, tight neat very high ponytail, long ponytail falling behind her left side down to mid-calf, blue satin ribbon bow with two trailing bands at the ponytail base, one black rose beside the ponytail root, two long sidelocks reaching the collarbone, matte black round sunglasses with thin frames resting on top of her head, black off-shoulder one-line-neckline dress, horizontal pleated ruffle at the neckline, narrow black waist belt, charcoal-black outer skirt with zigzag ruffled hem ending at the calves, deep-blue inner skirt lining covered with small light-blue four-pointed stars, a ring of the star-patterned lining visible below the outer hem, bare lower legs, black platform ankle boots with folded cuffs and zipper detail, one black longsword with a black scabbard slung diagonally on her back, hilt visible above her left shoulder, scabbard tip extending past her right hip below the knee, a thin black strap from her right shoulder to her left waist\n\nFull body front view facing the viewer, standing upright with feet slightly apart, right hand resting on her hip with the back of the hand outward, left arm relaxed at her side, chest-up fully visible, entire figure inside the frame with margins on all sides, expression cocky and self-assured\n\nPortrait orientation, single complete standing figure centered, head-to-boot silhouette fully readable against the quiet background\n\nUse a quiet, loosely brushed background without scenery, leaving the complete character silhouette as the focal point; preserve the specified pose.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, reflective sunglasses, lens flare, glasses reflection, pantyhose, stockings, thigh highs, fluffy hair, voluminous hair, messy hair, wavy hair, high-low skirt, asymmetric skirt, hair over one eye, second sword, two swords, drawn sword in hand, multiple girls",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  }
+}

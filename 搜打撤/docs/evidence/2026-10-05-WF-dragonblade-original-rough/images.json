@@ -1,0 +1,42 @@
+{
+  "method": "Built-in ImageGen original-composition edit; existing WebP/thumb encoding",
+  "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-a5441182-d72a-4ffa-b065-2d80987b2433.png",
+  "source": {
+    "path": "game/art-source/cards/martial-tt8-dragonblade-original-rough-20261005.png",
+    "bytes": 2047144,
+    "sha256": "88bba5e543096aea8a8733739d648483a81d9b9d930b6540b114e3371c2253fd"
+  },
+  "outputs": [
+    {
+      "path": "game/assets/cards/martial-tt8-dragonblade.webp",
+      "bytes": 162536,
+      "sha256": "86afc67f288857fb3b6a66df5e21f77d139ff4d08636922f5bcb145fbade4869",
+      "size": [
+        1448,
+        1086
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/cards/martial-tt8-dragonblade.webp",
+      "bytes": 17356,
+      "sha256": "c27489c0dfb6c57a592a108164e1593a8edc4d3a26327252f47b270d33b26cf1",
+      "size": [
+        448,
+        336
+      ]
+    }
+  ],
+  "backups": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-dragonblade-original-rough/originals-before-rough/full-martial-tt8-dragonblade.webp",
+      "bytes": 83370,
+      "sha256": "ab0214a8e11960b1fceb4208942284c311ce4ed2aa2868fbc0548c536ad89593"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-dragonblade-original-rough/originals-before-rough/thumb-martial-tt8-dragonblade.webp",
+      "bytes": 17900,
+      "sha256": "25275d234c50b1e0b57ede0b245944611bcb5ae1f2b3bcbf694a20337900cb5e"
+    }
+  ],
+  "verification": "未测试/资产门/实页"
+}

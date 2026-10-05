@@ -1,0 +1,25 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 3/25, ID: bagBtnFloat
+			4 text 背包
+			5 text 3/25
+		6 container cards 法师锦囊 · 存放法术牌, ID: overlay
+			7 container
+				8 heading cards 法师锦囊 · 存放法术牌, Value: 2, ID: ovTitle
+					9 image cards
+					10 text  法师锦囊 · 存放法术牌
+				11 container ovBody
+					12 container
+						13 text 锦囊中  0/3  张法术——战斗中打出锦囊后，从这 0 张里选 1 张直接释放（锦囊为空则无效果）
+					14 heading 锦囊中的法术（点击整叠取出）, Value: 3
+						15 text 锦囊中的法术（点击整叠取出）
+					16 text （锦囊是空的——存入法术牌后战斗中打出可释放）
+					17 heading 背包里的法术卡（点击整叠存入）, Value: 3
+						18 text 背包里的法术卡（点击整叠存入）
+					19 text （背包里没有法术卡）
+					20 button arrow 收好锦囊
+						21 image arrow
+						22 text  收好锦囊
+
+The focused UI element is 20 button arrow 收好锦囊

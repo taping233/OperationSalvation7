@@ -1,0 +1,38 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 2/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 2/16
+		6 container swords 遭遇战 · 第 1 回合 · question 发现, ID: overlay
+			7 container
+				8 heading swords 遭遇战 · 第 1 回合 · question 发现, Value: 2, ID: ovTitle
+					9 image swords
+					10 text  遭遇战 · 第 1 回合 · 
+					11 image question
+					12 text  发现
+				13 container ovBody
+					14 container
+						15 text 选  1  张置入手牌 · 战后消散
+					16 container
+						17 text 0
+						18 image 江湖救急-改
+						19 text 江湖救急-改 武术 · 无专属 随机获得 3 张临时卡牌， 回合开始时 将其 消耗 。
+						20 image coin
+						21 text 3
+					22 container
+						23 text 1
+						24 image 割蚀
+						25 text 割蚀 武术 · 古朴 降低  1  名敌人  2  攻，持续 3 回合 ；附加 流血 。
+						26 image coin
+						27 text 2
+					28 container
+						29 text 2
+						30 image 剑荡妖邪
+						31 text 剑荡妖邪 武术 · 传说 攻 +5 ，选择手牌中  1  张武术卡直接释放。
+						32 image swords
+						33 text +5
+						34 image coin
+						35 text 5
+
+The focused UI element is 6 container swords 遭遇战 · 第 1 回合 · question 发现, ID: overlay

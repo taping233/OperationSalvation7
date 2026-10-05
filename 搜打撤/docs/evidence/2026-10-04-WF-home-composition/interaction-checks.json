@@ -1,0 +1,28 @@
+{
+  "observedAt": "2026-10-04T12:01:34.225Z",
+  "source": "Codex IAB / cua / actual locator clicks",
+  "checked": [
+    "主入口打开选档并返回（未进入任何存档）",
+    "手册打开并返回",
+    "成就打开并返回（未领取）",
+    "照相馆打开并关闭（未改筛选/藏品）",
+    "设置打开并返回",
+    "留言信箱打开并返回（未写入/删除留言）"
+  ],
+  "reducedMotion": {
+    "buttonAnimation": "none",
+    "classActive": true,
+    "snowAnimation": "none"
+  },
+  "mute": {
+    "before": false,
+    "toggled": true,
+    "restored": false,
+    "passed": true
+  },
+  "unverified": [
+    "退出游戏实际关窗",
+    "其他窗口尺寸",
+    "完整性能前后基线"
+  ]
+}

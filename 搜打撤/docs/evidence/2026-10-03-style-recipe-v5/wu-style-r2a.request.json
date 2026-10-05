@@ -1,0 +1,102 @@
+{
+  "recipe": "v5-recipe-r2（老板10-04反馈三处修正，未固化）",
+  "batch": "r2a",
+  "model": "nai-diffusion-5-full",
+  "params": {
+    "scale": 5.5,
+    "steps": 28,
+    "size": "832x1216"
+  },
+  "artist_block": "1.3::miv4t::, 0.6::quasarcake::",
+  "changes_from_r1c": [
+    "skirt: jagged ruffle hem -> black A-line skirt with a single layered ruffle hem (+UC jagged trio)",
+    "ribbon: two trailing blue ribbon streamers -> short ribbon ends (+UC long streamers)",
+    "color: muted low-saturation palette -> clean limited palette + one single blue accent (+UC busy/muddy)"
+  ],
+  "seed": 1502523721,
+  "seed_note": "r2a locked to r1c seed 1502523721 for A/B",
+  "prompt": "1.3::miv4t::, 0.6::quasarcake::\n\nmasterpiece, best quality, painterly illustration, no lineart, dry impasto brushwork, visible rough brush strokes, broken open edges, clean limited palette of black, white and muted greys with one single blue accent.\n\nPaint in large unified planes, each passage done in a few decisive strokes rather than many small strokes. Build strong value contrast with deep shadow masses and minimal mid-tones, letting small crisp highlights land only on material edges. Hair is drawn in grouped sweeping strokes, with brush marks skipping and breaking over the outer silhouette. The face stays finely rendered with sharp eye highlights, while the body, dress and limbs are kept loosely simplified with broad sketchy planes.\n\n1girl, young adult woman, small youthful face, fair skin, bright cyan-blue eyes, slightly upturned sharp eyes, confident playful grin, single small upper fang, parted bangs, eyebrows visible through hair, silver-white long smooth hair, tight neat very high ponytail, long ponytail falls behind left side down to mid-calf, large blue satin ribbon bow at ponytail base, short ribbon ends, black rose hair accessory beside ponytail root, two long thin sidelocks to collarbone, matte black round sunglasses resting on top of head, black off-shoulder dress, horizontal pleated ruffle at neckline, thin narrow black waist belt, black A-line skirt with a single layered ruffle hem, deep blue inner lining printed with small four-pointed stars, star lining visible only through small openings at the hem, bare lower legs, black platform ankle boots, folded boot cuffs, side zipper detail, single black longsword in black plain scabbard slung diagonally across back, sword hilt over left shoulder, scabbard tip below right knee, thin black crossbody strap from right shoulder to left waist\n\nfull body, front view facing viewer, standing upright, feet slightly apart, right hand placed gently on hip, left arm relaxed naturally at side, hands simple, clean hands, entire body visible inside frame, cocky self-assured expression\n\nportrait orientation, single standing character centered in canvas, full head-to-boot silhouette, character silhouette is main focus, well-proportioned face, balanced facial features\n\nquiet loosely brushed plain white background with no scenery, preserve specified pose, character illustration sketch, not unfinished draft",
+  "uc": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully polished render, plastic texture, waxy skin, blurry fingers, extra fingers, missing fingers, fused fingers, deformed hands, deformed face, asymmetrical face, crooked mouth, uneven eyes, text, watermark, signature, border, collage, multiple character views, reflective sunglasses, lens flare, glasses lens reflection, pantyhose, stockings, thigh highs, over fluffy hair, over voluminous hair, messy tangled hair, wavy curls, hair fully covering eye, two swords, multiple swords, drawn sword, weapon in hand, multiple girls, bad anatomy, deformed limbs, jagged hem, zigzag-cut hem, pointed triangular hem, torn jagged skirt edge, very long ribbon streamers, oversized ribbons, flying ribbon tails, busy pattern, scattered confetti dots, glitter, muddy colors, oversaturated colors",
+  "output": ".tmp\\nai\\output\\wu-front-portrait-v5style-20261003\\wu-style-r2a.png",
+  "payload": {
+    "input": "1.3::miv4t::, 0.6::quasarcake::\n\nmasterpiece, best quality, painterly illustration, no lineart, dry impasto brushwork, visible rough brush strokes, broken open edges, clean limited palette of black, white and muted greys with one single blue accent.\n\nPaint in large unified planes, each passage done in a few decisive strokes rather than many small strokes. Build strong value contrast with deep shadow masses and minimal mid-tones, letting small crisp highlights land only on material edges. Hair is drawn in grouped sweeping strokes, with brush marks skipping and breaking over the outer silhouette. The face stays finely rendered with sharp eye highlights, while the body, dress and limbs are kept loosely simplified with broad sketchy planes.\n\n1girl, young adult woman, small youthful face, fair skin, bright cyan-blue eyes, slightly upturned sharp eyes, confident playful grin, single small upper fang, parted bangs, eyebrows visible through hair, silver-white long smooth hair, tight neat very high ponytail, long ponytail falls behind left side down to mid-calf, large blue satin ribbon bow at ponytail base, short ribbon ends, black rose hair accessory beside ponytail root, two long thin sidelocks to collarbone, matte black round sunglasses resting on top of head, black off-shoulder dress, horizontal pleated ruffle at neckline, thin narrow black waist belt, black A-line skirt with a single layered ruffle hem, deep blue inner lining printed with small four-pointed stars, star lining visible only through small openings at the hem, bare lower legs, black platform ankle boots, folded boot cuffs, side zipper detail, single black longsword in black plain scabbard slung diagonally across back, sword hilt over left shoulder, scabbard tip below right knee, thin black crossbody strap from right shoulder to left waist\n\nfull body, front view facing viewer, standing upright, feet slightly apart, right hand placed gently on hip, left arm relaxed naturally at side, hands simple, clean hands, entire body visible inside frame, cocky self-assured expression\n\nportrait orientation, single standing character centered in canvas, full head-to-boot silhouette, character silhouette is main focus, well-proportioned face, balanced facial features\n\nquiet loosely brushed plain white background with no scenery, preserve specified pose, character illustration sketch, not unfinished draft",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 832,
+      "height": 1216,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": true,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1502523721,
+      "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully polished render, plastic texture, waxy skin, blurry fingers, extra fingers, missing fingers, fused fingers, deformed hands, deformed face, asymmetrical face, crooked mouth, uneven eyes, text, watermark, signature, border, collage, multiple character views, reflective sunglasses, lens flare, glasses lens reflection, pantyhose, stockings, thigh highs, over fluffy hair, over voluminous hair, messy tangled hair, wavy curls, hair fully covering eye, two swords, multiple swords, drawn sword, weapon in hand, multiple girls, bad anatomy, deformed limbs, jagged hem, zigzag-cut hem, pointed triangular hem, torn jagged skirt edge, very long ribbon streamers, oversized ribbons, flying ribbon tails, busy pattern, scattered confetti dots, glitter, muddy colors, oversaturated colors",
+      "characterPrompts": [
+        {
+          "prompt": "",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1.3::miv4t::, 0.6::quasarcake::\n\nmasterpiece, best quality, painterly illustration, no lineart, dry impasto brushwork, visible rough brush strokes, broken open edges, clean limited palette of black, white and muted greys with one single blue accent.\n\nPaint in large unified planes, each passage done in a few decisive strokes rather than many small strokes. Build strong value contrast with deep shadow masses and minimal mid-tones, letting small crisp highlights land only on material edges. Hair is drawn in grouped sweeping strokes, with brush marks skipping and breaking over the outer silhouette. The face stays finely rendered with sharp eye highlights, while the body, dress and limbs are kept loosely simplified with broad sketchy planes.\n\n1girl, young adult woman, small youthful face, fair skin, bright cyan-blue eyes, slightly upturned sharp eyes, confident playful grin, single small upper fang, parted bangs, eyebrows visible through hair, silver-white long smooth hair, tight neat very high ponytail, long ponytail falls behind left side down to mid-calf, large blue satin ribbon bow at ponytail base, short ribbon ends, black rose hair accessory beside ponytail root, two long thin sidelocks to collarbone, matte black round sunglasses resting on top of head, black off-shoulder dress, horizontal pleated ruffle at neckline, thin narrow black waist belt, black A-line skirt with a single layered ruffle hem, deep blue inner lining printed with small four-pointed stars, star lining visible only through small openings at the hem, bare lower legs, black platform ankle boots, folded boot cuffs, side zipper detail, single black longsword in black plain scabbard slung diagonally across back, sword hilt over left shoulder, scabbard tip below right knee, thin black crossbody strap from right shoulder to left waist\n\nfull body, front view facing viewer, standing upright, feet slightly apart, right hand placed gently on hip, left arm relaxed naturally at side, hands simple, clean hands, entire body visible inside frame, cocky self-assured expression\n\nportrait orientation, single standing character centered in canvas, full head-to-boot silhouette, character silhouette is main focus, well-proportioned face, balanced facial features\n\nquiet loosely brushed plain white background with no scenery, preserve specified pose, character illustration sketch, not unfinished draft",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully polished render, plastic texture, waxy skin, blurry fingers, extra fingers, missing fingers, fused fingers, deformed hands, deformed face, asymmetrical face, crooked mouth, uneven eyes, text, watermark, signature, border, collage, multiple character views, reflective sunglasses, lens flare, glasses lens reflection, pantyhose, stockings, thigh highs, over fluffy hair, over voluminous hair, messy tangled hair, wavy curls, hair fully covering eye, two swords, multiple swords, drawn sword, weapon in hand, multiple girls, bad anatomy, deformed limbs, jagged hem, zigzag-cut hem, pointed triangular hem, torn jagged skirt edge, very long ribbon streamers, oversized ribbons, flying ribbon tails, busy pattern, scattered confetti dots, glitter, muddy colors, oversaturated colors",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  }
+}

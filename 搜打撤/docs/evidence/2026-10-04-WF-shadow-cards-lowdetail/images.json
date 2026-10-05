@@ -1,0 +1,305 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing gallery thumbnail bake only",
+  "styleReference": {
+    "path": ".tmp/imagegen/shadow-cards-lowdetail-20261004/style-reference.png",
+    "bytes": 1959639,
+    "sha256": "95407f3b399c903f6adb87ae20a744bf5463ce959bbb58baec3cc489cb34731e",
+    "size": [
+      1024,
+      1536
+    ],
+    "mode": "RGB"
+  },
+  "cards": [
+    {
+      "id": "cc-demon",
+      "name": "恶魔之力",
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-cc-demon.webp",
+          "bytes": 141946,
+          "sha256": "b08f261709c9d7a14f6e3130e8466cf82334efd435dab96a8daa83150624cd20",
+          "size": [
+            1448,
+            1086
+          ],
+          "mode": "RGB"
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-cc-demon.webp",
+          "bytes": 22770,
+          "sha256": "fc431f6a1f74bdfddc67dcadce5c3a275f74c72b596dcd64d92e314301ae410d",
+          "size": [
+            448,
+            336
+          ],
+          "mode": "RGB"
+        }
+      ],
+      "raw": {
+        "path": ".tmp/imagegen/shadow-cards-lowdetail-20261004/cc-demon.png",
+        "bytes": 1767134,
+        "sha256": "d008d6ad63234d1dddc7bcc6651ec0fe4ac1c540cd227e8706889626d6d4c4cb",
+        "size": [
+          1448,
+          1086
+        ],
+        "mode": "RGB"
+      },
+      "originals": [
+        {
+          "path": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/originals/full-spell-cc-demon.webp",
+          "bytes": 226580,
+          "sha256": "020b1f78803c47b8398adb30181246a8ce27023b7528a1d070f8fa3707ec2216",
+          "size": [
+            1448,
+            1086
+          ],
+          "mode": "RGB"
+        },
+        {
+          "path": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/originals/thumb-spell-cc-demon.webp",
+          "bytes": 32098,
+          "sha256": "7c3ada4655f7236297e58da16ecc232e936b0544f711c487a19569da838ee995",
+          "size": [
+            448,
+            336
+          ],
+          "mode": "RGB"
+        }
+      ]
+    },
+    {
+      "id": "tt3sp-devour",
+      "name": "吞噬",
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3sp-devour.webp",
+          "bytes": 145368,
+          "sha256": "21839e9148c7a3df984fe529f3ac62b4da225e9cefdd4f1f1875dd9c5ae41f57",
+          "size": [
+            1448,
+            1086
+          ],
+          "mode": "RGB"
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3sp-devour.webp",
+          "bytes": 23610,
+          "sha256": "0f84f52271b6195543546a4691826411f4c1d3200d268b51ebc19396bdba6956",
+          "size": [
+            448,
+            336
+          ],
+          "mode": "RGB"
+        }
+      ],
+      "raw": {
+        "path": ".tmp/imagegen/shadow-cards-lowdetail-20261004/tt3sp-devour.png",
+        "bytes": 1895098,
+        "sha256": "f35a066ff67e3ed4055c2db073be3b98ae890f8f8847f13f56faff3fda51ba32",
+        "size": [
+          1448,
+          1086
+        ],
+        "mode": "RGB"
+      },
+      "originals": [
+        {
+          "path": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/originals/full-spell-tt3sp-devour.webp",
+          "bytes": 79908,
+          "sha256": "29684db9832ae240e7f18ba10367dd568471d91feee572ec90d9ee51cf44dcd2",
+          "size": [
+            896,
+            679
+          ],
+          "mode": "RGB"
+        },
+        {
+          "path": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/originals/thumb-spell-tt3sp-devour.webp",
+          "bytes": 19244,
+          "sha256": "ea4351390e9e1bf21b01854aa5d056dcd58a07d5f7a99e5aeae70414dfe8a114",
+          "size": [
+            448,
+            340
+          ],
+          "mode": "RGB"
+        }
+      ]
+    },
+    {
+      "id": "tt7-bloodpotion",
+      "name": "噬血术",
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-bloodpotion.webp",
+          "bytes": 120996,
+          "sha256": "086bbfc19fe32c16fa4790fed0dbce533b1044807408346f6333de4a633d5d7a",
+          "size": [
+            1448,
+            1086
+          ],
+          "mode": "RGB"
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-bloodpotion.webp",
+          "bytes": 19364,
+          "sha256": "c74e3b76f580b9523c28e45da1d43a21099b45114d1c73056ebfb27380879e0f",
+          "size": [
+            448,
+            336
+          ],
+          "mode": "RGB"
+        }
+      ],
+      "raw": {
+        "path": ".tmp/imagegen/shadow-cards-lowdetail-20261004/tt7-bloodpotion.png",
+        "bytes": 1672069,
+        "sha256": "e705305b46d8780d5687a2bd5bcb8e307b0f5ae79f7a0aadb95b2aed8eaf5e9b",
+        "size": [
+          1448,
+          1086
+        ],
+        "mode": "RGB"
+      },
+      "originals": [
+        {
+          "path": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/originals/full-spell-tt7-bloodpotion.webp",
+          "bytes": 96830,
+          "sha256": "86aa99b81631536b970cbdcadeb9c6382cbc69c5874d8b6c4f38ea13ec22fedd",
+          "size": [
+            896,
+            679
+          ],
+          "mode": "RGB"
+        },
+        {
+          "path": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/originals/thumb-spell-tt7-bloodpotion.webp",
+          "bytes": 21584,
+          "sha256": "64a1021019ea34dc229a4d9e17b7beebbec7e95a94411fc0b9e21dbb351b406a",
+          "size": [
+            448,
+            340
+          ],
+          "mode": "RGB"
+        }
+      ]
+    },
+    {
+      "id": "tt7-provoke",
+      "name": "扰敌",
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-provoke.webp",
+          "bytes": 128694,
+          "sha256": "15ee8d0be46eaa7c4da99e92118beab710669e14352ea65ebc627b74fd1c6e13",
+          "size": [
+            1448,
+            1086
+          ],
+          "mode": "RGB"
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-provoke.webp",
+          "bytes": 17994,
+          "sha256": "ea0d04f57d7e723b4eb23aa0a5f400e6fd8d1802607d45e35c797cb9a347a4f1",
+          "size": [
+            448,
+            336
+          ],
+          "mode": "RGB"
+        }
+      ],
+      "raw": {
+        "path": ".tmp/imagegen/shadow-cards-lowdetail-20261004/tt7-provoke.png",
+        "bytes": 1747938,
+        "sha256": "7bcee119d4d43be7031536b7b83276785fca0d1249cb4fb00f686a3d1b193220",
+        "size": [
+          1448,
+          1086
+        ],
+        "mode": "RGB"
+      },
+      "originals": [
+        {
+          "path": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/originals/full-spell-tt7-provoke.webp",
+          "bytes": 79664,
+          "sha256": "5fa06877eb9b9cac945b0940a0784c4d9ba06b3dcd24a322d99e02a05f53aba8",
+          "size": [
+            896,
+            679
+          ],
+          "mode": "RGB"
+        },
+        {
+          "path": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/originals/thumb-spell-tt7-provoke.webp",
+          "bytes": 18516,
+          "sha256": "a9b85c7706ca944b02cfab808656ad81565d61f560b860946ca466c5e0ae5e96",
+          "size": [
+            448,
+            340
+          ],
+          "mode": "RGB"
+        }
+      ]
+    },
+    {
+      "id": "tt7-silence",
+      "name": "禁言术",
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-silence.webp",
+          "bytes": 102230,
+          "sha256": "3b61af3f98e5be1fe76c995a8cb4371ca63205362a57a6ef1b6608e3aeb26d21",
+          "size": [
+            1448,
+            1086
+          ],
+          "mode": "RGB"
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-silence.webp",
+          "bytes": 16628,
+          "sha256": "966c433e54ce412131e14ab828e5cd1d83a438159fca9d7bd26c1392bb1bbcf5",
+          "size": [
+            448,
+            336
+          ],
+          "mode": "RGB"
+        }
+      ],
+      "raw": {
+        "path": ".tmp/imagegen/shadow-cards-lowdetail-20261004/tt7-silence.png",
+        "bytes": 1606586,
+        "sha256": "8340423ba37811eeae8dcc8879c2e0c865e2bd73891226e7b64dc9c1b3d174d0",
+        "size": [
+          1448,
+          1086
+        ],
+        "mode": "RGB"
+      },
+      "originals": [
+        {
+          "path": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/originals/full-spell-tt7-silence.webp",
+          "bytes": 71896,
+          "sha256": "59851417284c4f7f23b00b92e9d4162dadf7eb85549722bab77c4f5929eabf55",
+          "size": [
+            896,
+            679
+          ],
+          "mode": "RGB"
+        },
+        {
+          "path": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/originals/thumb-spell-tt7-silence.webp",
+          "bytes": 16810,
+          "sha256": "b714289ce0df8f5b9d3d4551976bdc45c7f50d5906fb103e104cdfd5187af8ff",
+          "size": [
+            448,
+            340
+          ],
+          "mode": "RGB"
+        }
+      ]
+    }
+  ]
+}

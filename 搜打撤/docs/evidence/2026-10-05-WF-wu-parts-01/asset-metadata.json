@@ -1,0 +1,39 @@
+{
+  "file": "game/art-source/characters/wu-parts-v1/part-01-torso-v1.png",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-bd1b63c3-4d85-4a82-995a-bd1a2f30475b.png",
+  "width": 1536,
+  "height": 1024,
+  "bytes": 1120961,
+  "sha256": "d7dfab7ffa5d1269cca162bd8f1cca0e5fe426e4c652f500d759138f4d47ef85",
+  "alphaSamples": [
+    {
+      "x": 0,
+      "y": 0,
+      "alpha": 0
+    },
+    {
+      "x": 768,
+      "y": 100,
+      "alpha": 0
+    },
+    {
+      "x": 1100,
+      "y": 300,
+      "alpha": 0
+    },
+    {
+      "x": 800,
+      "y": 850,
+      "alpha": 0
+    }
+  ],
+  "head": "425d03920e4323b016433419ec11aec4a7f3795b",
+  "acquisition": "内置 imagegen 生成＋一次边界修正，原样复制保留alpha",
+  "placement": "独立居中源图；尚未与母版配准或拼接",
+  "stage": "draft-ready",
+  "unverified": [
+    "关节锚点与母版缩放配准",
+    "与其他部件拼接",
+    "骨骼绑定与游戏播放"
+  ]
+}

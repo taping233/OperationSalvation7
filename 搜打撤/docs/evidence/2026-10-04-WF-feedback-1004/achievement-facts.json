@@ -1,0 +1,16 @@
+{
+  "achievementFacts": {
+    "copy": "开始下一次远征，收集属于你的第一枚奖章。",
+    "copyWidth": 272,
+    "emptyState": "earned",
+    "lineHeight": "32px",
+    "removedSmall": true
+  },
+  "exitFacts": {
+    "animation": "t4CardIn",
+    "closing": false,
+    "duration": "0.3s",
+    "hidden": true,
+    "transform": "none"
+  }
+}

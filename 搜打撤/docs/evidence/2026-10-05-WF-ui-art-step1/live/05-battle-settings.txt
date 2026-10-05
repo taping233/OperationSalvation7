@@ -1,0 +1,23 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 1/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 1/16
+		6 container gear 战斗设置, ID: overlay
+			7 container
+				8 button Description: 关闭, ID: ovCloseX
+				9 heading gear 战斗设置, Value: 2, ID: ovTitle
+					10 image gear
+					11 text  战斗设置
+				12 container ovBody
+					13 checkbox (settable, integer) Description: 背景音乐, Value: 1, ID: btSetMusic
+					14 checkbox (settable, integer) Description: 音效, Value: 1, ID: btSetSfx
+					15 checkbox (settable, integer) Description: 屏幕震动反馈, Value: 1, ID: btSetShake
+					16 checkbox (settable, integer) Description: 2× 战斗节奏（敌方行动加速）, Value: 0, ID: btSetPace
+					17 text 完整设置可在基地 / 标题页打开。关闭后回到战斗。
+					18 button cross 返回战斗
+						19 image cross
+						20 text  返回战斗
+
+The focused UI element is 18 button cross 返回战斗

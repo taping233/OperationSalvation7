@@ -1,0 +1,18 @@
+{
+  "method": "Built-in imagegen; Sharp performs format encoding only",
+  "styleReference": "../WF-baita-lore-raving/prompt-v4-reference-analysis.txt and user-approved generated v4 artwork",
+  "identityReference": "docs/character-bible/ref-images/changwuyu.webp",
+  "raw": {
+    "path": ".tmp/imagegen/volcano-v4-reference-20261004/volcano-v1.png",
+    "bytes": 2247211,
+    "sha256": "f88e4d5debd1d6f05fe4a9d2ccdc401b0e6ae6a5af05eead269370922a945c02",
+    "obtainedFrom": "C:/Users/太平/.codex/generated_images/01a106bd-b41c-7132-8ce4-6af29cc0327d/exec-4c32838e-c320-4072-bdf3-eb88dbe63585.png"
+  },
+  "candidate": {
+    "path": "game/art-source/cards/hero-volcano-v4-reference-20261004.webp",
+    "bytes": 238146,
+    "sha256": "1f09e78d12089887001a7359d5e6e66b61220b210d3d0270187a4a1344df632c"
+  },
+  "integration": "Independent candidate; active WF-changwuyu-volcano runtime assets preserved",
+  "verification": "Not performed, per user instruction"
+}

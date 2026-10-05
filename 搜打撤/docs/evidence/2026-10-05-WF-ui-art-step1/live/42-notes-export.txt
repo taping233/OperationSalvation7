@@ -1,0 +1,21 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container upload 导出格子备注, ID: overlay
+		3 container
+			4 button Description: 关闭, ID: ovCloseX
+			5 heading upload 导出格子备注, Value: 2, ID: ovTitle
+				9 image upload
+				10 text  导出格子备注
+			8 container ovBody
+				11 text 把下面的 JSON 发给开发者/AI，即可按备注更新格子事件。
+				12 text entry area ID: ovExport, Value: {
+  "game": "sdt",
+  "format": "cell-notes",
+  "version": 3,
+  "cells": []
+}
+				13 button 复制到剪贴板
+				14 button 下载文件
+				15 button 关闭
+
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/

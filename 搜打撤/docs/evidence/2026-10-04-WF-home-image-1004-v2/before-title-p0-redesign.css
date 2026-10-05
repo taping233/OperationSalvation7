@@ -1,0 +1,263 @@
+/* Title lobby: a scene first, with destinations along its edges. */
+#title { --home-edge: 5.2%; --home-gold: #dfc58e; --home-muted: #b1c7cf; }
+#title .title-bg {
+  background-image: url('../assets/reconstruction/wallpaper-wu-1004.webp');
+  background-size: cover; background-position: center;
+  transform: none; filter: saturate(.92) contrast(1.04);
+}
+#title .title-bg::before, #title .title-bg::after,
+#title .title-inner::before, #title::before,
+#title .ak-hud::before, #title .ak-hud::after { display: none; }
+#title::after {
+  background: linear-gradient(90deg, #05121bef, #071a29b0 25%, #071a2920 57%, #06152350),
+    linear-gradient(0deg, #04121bf5, #07152210 33%, transparent 75%, #06131ca8);
+}
+#title .title-foreground-paper { display: none; }
+#title .title-heading {
+  left: var(--home-edge); right: auto; top: 20%;
+  width: clamp(320px, 38vw, 600px); transform: none; z-index: 4;
+}
+#title .title-kicker {
+  display: flex; align-items: center; gap: 14px; margin: 0 0 12px;
+  color: #bad2dc; font: 10px/1.5 Consolas, monospace; letter-spacing: .24em;
+}
+#title .title-kicker::before { content: ''; width: 30px; height: 1px; background: #a7c7d3; }
+#title .winter-wordmark {
+  filter: brightness(1.3) drop-shadow(0 3px 8px #030d14aa);
+}
+#title .title-lead {
+  margin: 10px 0 0 5px; color: #ccdbe0;
+  font: 13px/1.8 var(--font-ui); letter-spacing: .24em;
+}
+/* Top navigation shares one quiet baseline. The archive stays on the far right. */
+#title .ak-tl { left: var(--home-edge); top: 24px; gap: 0; }
+#title .ak-tl .ak-sq {
+  width: 54px; height: 48px; transform: none; background: transparent;
+  border: 1px solid #acc9d033; box-shadow: none; filter: none;
+}
+#title .ak-tl .ak-sq + .ak-sq { border-left: 0; }
+#title .ak-tl .ak-sq::after { display: none; }
+#title .ak-tl .ak-sq:hover { background: transparent; color: #fff; border-color: #d9bb8280; }
+#title .ak-tl .ak-sq:focus-visible { outline: 2px solid var(--home-gold); outline-offset: 3px; }
+#title .ak-pillrow { left: calc(var(--home-edge) + 132px); top: 24px; gap: 8px; }
+#title .ak-pillrow .ak-quickref {
+  position: static; height: 48px; padding: 0 14px; transform: none;
+  background: transparent; border: 0; color: #e4edef; font-size: 14px;
+  letter-spacing: .12em; filter: none;
+}
+#title .ak-pillrow .ak-quickref svg { width: 19px; height: 19px; color: #a9c8d3; }
+#title .ak-pillrow .ak-quickref:hover { background: #adc9d012; color: #fff; }
+#title .ak-user {
+  top: 24px; right: var(--home-edge); padding: 0 0 12px;
+  background: none; border: 0; border-bottom: 1px solid #adc9d04d;
+  box-shadow: none; transform: none; min-width: 176px;
+}
+#title .ak-user-row { position: relative; gap: 12px; padding-bottom: 17px; }
+#title .ak-user .ak-ava { width: 46px; height: 46px; border: 1px solid #d9c38b80; }
+#title .ak-lv { gap: 10px; }
+#title .ak-lv em { font: 10px var(--font-ui); letter-spacing: .18em; color: #bdd0d6; }
+#title .ak-lv b { font: 36px/1 Consolas, monospace; color: #d4eee9; text-shadow: none; }
+#title .ak-uname {
+  position: absolute; top: auto; bottom: 0; right: 0; margin: 0; white-space: nowrap;
+  font-size: 11px; letter-spacing: .08em; color: #b4c8ce;
+}
+/* Two library destinations: art emblem, title, subtitle and real progress. */
+#title .ak-hud .ak-circle {
+  display: grid; grid-template-columns: 78px 1fr; grid-template-rows: 32px 22px;
+  align-content: center; align-items: center; justify-items: start;
+  width: 262px; height: 88px; gap: 0 16px; padding: 0 12px 0 0;
+  background: linear-gradient(90deg, #0a1a2659, #0a1a26a6 35%, #0a1a2640 83%, transparent);
+  border: 0; border-radius: 0; box-shadow: none; text-align: left;
+  opacity: 1; filter: none; transform: none;
+  transition: background .2s, transform .2s;
+}
+#title .ak-hud .ak-lib { left: var(--home-edge); right: auto; top: 57%; }
+#title .ak-hud .ak-ach { left: calc(var(--home-edge) + 24px); right: auto; top: 72%; }
+#title .ak-hud .ak-circle .c-ring {
+  grid-column: 1; grid-row: 1 / 3; width: 72px; height: 72px; flex-basis: auto;
+  transform: none; background: none; border: 0; box-shadow: none;
+}
+#title .ak-hud .ak-circle .c-ring::before {
+  inset: 0; background-size: cover; animation: none;
+  filter: brightness(1.15) drop-shadow(0 3px 5px #020911a0);
+}
+#title .ak-hud .ak-circle .c-ring::after,
+#title .ak-hud .ak-circle .c-en::after { display: none; }
+#title .ak-hud .ak-circle .c-cn {
+  grid-column: 2; grid-row: 1; align-self: end; margin: 0;
+  color: #f3f1e9; font-family: var(--font-ui) !important;
+  font-size: 22px; line-height: 1.4; font-weight: 500; letter-spacing: .16em;
+  text-shadow: 0 2px 6px #020d16;
+}
+#title .ak-hud .ak-circle .c-en {
+  grid-column: 2; grid-row: 2; margin: 3px 0 0;
+  color: #b3c6cd; font-family: var(--font-ui) !important;
+  font-size: 10px; line-height: 1.4; font-style: normal; letter-spacing: .1em;
+  text-shadow: none;
+}
+#title .ak-hud .ak-ach .c-en { padding-right: 48px; }
+#title .ak-hud .ak-circle .c-tag {
+  grid-column: 2; grid-row: 2; justify-self: end; align-self: center;
+  position: static; order: initial; margin: 4px 15px 0 0; padding: 0;
+  background: none; border: 0; color: var(--home-gold); font: 11px Consolas, monospace;
+}
+#title .ak-hud .ak-circle:hover {
+  transform: translateX(5px); filter: none;
+  background: linear-gradient(90deg, #0e26332b, #274552b0 35%, #27455240 83%, transparent);
+}
+#title .ak-hud .ak-circle:hover .c-ring::before {
+  filter: brightness(1.3) drop-shadow(0 3px 5px #020911a0);
+}
+/* Bottom rail and expedition action occupy separate areas of the same baseline. */
+#title .ak-hud::after {
+  content: ''; display: block; position: absolute;
+  inset: auto var(--home-edge) 30px; height: 52px; width: auto;
+  background: linear-gradient(90deg, #aecad045, #aecad024 65%, #dfc58e80) top / 100% 1px no-repeat;
+  animation: none; opacity: 1; pointer-events: none;
+}
+#title .ak-sec { left: var(--home-edge); right: auto; top: auto; bottom: 37px; gap: 10px; }
+#title .ak-sec::before, #title .ak-sec::after { display: none; }
+#title .ak-sec span { color: #c2d4da; font-size: 12px; letter-spacing: .12em; }
+#title .ak-sec b { border: 0; padding: 0 2px; background: none; font: 23px Consolas, monospace; color: #e4d5af; }
+#title .ak-hud .ak-set {
+  left: auto; right: calc(var(--home-edge) + 360px); top: auto; bottom: 30px;
+  width: 128px; height: 51px; grid-template-columns: 35px 1fr;
+  grid-template-rows: 22px 14px; gap: 0 12px; padding: 0 12px;
+  background: none; border-left: 1px solid #acc9d026;
+}
+#title .ak-hud .ak-set .c-ring { width: 32px; height: 32px; }
+#title .ak-hud .ak-set .c-cn { font-size: 15px; letter-spacing: .12em; }
+#title .ak-hud .ak-set .c-en { font-size: 9px; margin-top: 0; }
+#title .ak-start {
+  right: var(--home-edge); bottom: 29px; width: 330px; height: 170px; min-height: 170px;
+  padding: 20px 16px 14px; gap: 7px; align-items: center; justify-content: flex-end;
+  background: linear-gradient(0deg, #102d38b3, #102d3833 65%, transparent);
+  border: 0; border-bottom: 2px solid #dfc58ec2; border-radius: 0;
+  box-shadow: none; filter: none; overflow: visible;
+  transition: background .2s, transform .2s;
+}
+#title .ak-start::before {
+  content: ''; display: block; position: absolute;
+  inset: auto 12px 15px; width: auto; height: 66px; z-index: 0;
+  background: radial-gradient(ellipse, #72b8c229, transparent 70%);
+  filter: none; animation: none; opacity: 1; pointer-events: none;
+}
+#title .ak-start::after {
+  content: ''; display: block; position: absolute; top: 43px; right: 6px;
+  width: 7px; height: 7px; inset: 43px 6px auto auto;
+  background: #dfc58e; border: 0; transform: rotate(45deg); opacity: .7;
+}
+#title .ak-start .st-row { gap: 12px; }
+#title .ak-start .st-row::before {
+  width: 244px; height: 62px; flex-basis: 62px; animation: none;
+  background: url('../assets/ui/home-icons-v12/explore-sword.webp') center / contain no-repeat;
+  filter: drop-shadow(0 1px 6px #d5bb8066);
+}
+#title .ak-start .st-cn {
+  color: #fff0d2; font-family: var(--font-ui) !important;
+  font-size: 30px; line-height: 1.3; font-weight: 600; letter-spacing: .12em;
+  text-shadow: 0 2px 8px #030e17; animation: none;
+}
+#title .ak-start .st-en {
+  color: #c9d9db; font-family: var(--font-ui) !important;
+  font-size: 10px; font-style: normal; letter-spacing: .08em; text-shadow: none;
+}
+#title .ak-start:hover {
+  background: linear-gradient(0deg, #1e4653e0, #14354160 65%, transparent);
+  transform: translateY(-3px); box-shadow: none; filter: none;
+}
+#title .ak-start:hover .st-cn { transform: none; text-shadow: 0 2px 8px #030e17; }
+#title .ak-start:hover::after { animation: none; }
+#title .ak-start:active { scale: .98; }
+#title .ak-start .st-light-sweep {
+  position: absolute; top: 12px; left: 12%; width: 38%; height: 1px;
+  background: linear-gradient(90deg, transparent, #fff4d6dd 48%, #d9bb82 58%, transparent);
+  box-shadow: 0 0 7px #e8ca8a80;
+  opacity: 0; transform: translateX(-130%); pointer-events: none; z-index: 2;
+  animation: titleStartIdleSweep 6.5s var(--ease-float) infinite;
+}
+#title .ak-start:hover .st-light-sweep,
+#title .ak-start:focus-visible .st-light-sweep { animation: titleStartSweep .82s cubic-bezier(.2, .65, .35, 1) both; }
+@keyframes titleStartSweep {
+  0% { opacity: 0; transform: translateX(-130%); }
+  24% { opacity: .78; }
+  100% { opacity: 0; transform: translateX(230%); }
+}
+@keyframes titleStartIdleSweep {
+  0%, 76% { opacity: 0; transform: translateX(-130%); }
+  84% { opacity: .65; }
+  100% { opacity: 0; transform: translateX(230%); }
+}
+body.reduce-motion #title .ak-start .st-light-sweep { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  #title .ak-start .st-light-sweep { display: none; }
+}
+#title .ak-hud button:focus-visible { outline: 2px solid #cde9e5; outline-offset: 5px; }
+#title .ak-veins { display: none; }
+#title .title-snow { opacity: .48; }
+#title .title-snow i:nth-child(n+25) { display: none; }
+#title .title-quote {
+  left: var(--home-edge); bottom: 94px; padding: 0; border: 0;
+  font: 9px/1.6 Consolas, monospace; letter-spacing: .18em; color: #9eb6c1;
+}
+#title #warmupTip {
+  left: var(--home-edge); top: 12%; bottom: auto; min-width: 0; width: 300px;
+  max-width: 32%; padding: 10px 12px; background: #081e28b3;
+  border: 0; border-left: 2px solid #94bbcb; box-shadow: none;
+}
+#title #warmupTip .warmup-reason { font-size: 10px; letter-spacing: 0; }
+#title #warmupTip .warmup-track { height: 2px; margin-top: 5px; }
+/* Keep ordinary smaller windows usable; only the current window is accepted this round. */
+@media (max-width: 1000px) {
+  #title { --home-edge: 4%; }
+  #title .title-heading { width: 37vw; top: 25%; }
+  #title .title-lead { font-size: 11px; letter-spacing: .12em; }
+  #title .ak-pillrow { left: calc(var(--home-edge) + 116px); }
+  #title .ak-pillrow .ak-quickref { padding-inline: 9px; font-size: 13px; letter-spacing: 0; }
+  #title .ak-user { min-width: 140px; }
+  #title .ak-user .ak-ava { width: 36px; height: 36px; }
+  #title .ak-lv b { font-size: 28px; }
+  #title .ak-hud .ak-circle { width: 230px; grid-template-columns: 62px 1fr; gap: 0 12px; }
+  #title .ak-hud .ak-circle .c-ring { width: 60px; height: 60px; }
+  #title .ak-hud .ak-circle .c-cn { font-size: 19px; }
+  #title .ak-start { width: 292px; }
+  #title .ak-start .st-cn { font-size: 26px; }
+  #title .ak-hud .ak-set { right: calc(var(--home-edge) + 310px); width: 114px; grid-template-columns: 30px 1fr; }
+  #title .ak-hud .ak-set .c-ring { width: 30px; height: 30px; }
+}
+@media (max-height: 650px) {
+  #title .title-heading { top: 21%; }
+  #title .title-lead { margin-top: 0; }
+  #title .ak-hud .ak-lib { top: 52%; }
+  #title .ak-hud .ak-ach { top: 69%; }
+  #title .title-quote { display: none; }
+  #title .ak-hud .ak-circle { height: 72px; }
+  #title #warmupTip { top: 11%; padding: 5px 10px; }
+  #title #warmupTip .warmup-reason { display: none; }
+}
+@media (max-width: 650px) {
+  #title .ak-pillrow { top: 82px; left: var(--home-edge); }
+  #title .ak-user { right: var(--home-edge); top: 24px; }
+  #title .title-heading { width: 56vw; top: 26%; }
+  #title .title-kicker, #title .title-lead { font-size: 9px; letter-spacing: .08em; }
+  #title .ak-hud .ak-circle { width: 200px; }
+  #title .ak-hud .ak-ach { left: var(--home-edge); }
+  #title .ak-hud .ak-circle .c-cn { font-size: 17px; }
+  #title .ak-start { width: 210px; height: 135px; min-height: 135px; bottom: 22px; }
+  #title .ak-start .st-row::before { width: 180px; height: 48px; flex-basis: 48px; }
+  #title .ak-start .st-cn { font-size: 20px; letter-spacing: .05em; }
+  #title .ak-start .st-en { font-size: 8px; }
+  #title .ak-hud .ak-set { right: var(--home-edge); bottom: 170px; }
+  #title .ak-sec { bottom: 31px; gap: 3px; }
+  #title .ak-sec span { font-size: 10px; letter-spacing: 0; }
+  #title .title-quote { display: none; }
+  #title #warmupTip { top: 17%; max-width: 60%; padding: 5px 10px; }
+  #title #warmupTip .warmup-reason { display: none; }
+}
+/* Freeze invisible title effects under an opaque page, as in the existing lifecycle. */
+body.page-covered.page-opaque #title,
+body.page-covered.page-opaque #title * { animation-play-state: paused !important; }
+body.reduce-motion #title *, body.reduce-motion #title *::before, body.reduce-motion #title *::after { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  #title *, #title *::before, #title *::after { animation: none !important; transition: none !important; }
+}

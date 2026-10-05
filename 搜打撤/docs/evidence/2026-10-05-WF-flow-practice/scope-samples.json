@@ -1,0 +1,150 @@
+{
+  "at": "2026-10-05T03:38:11.219Z",
+  "boundary": {
+    "exitCode": 1,
+    "output": "{\"ok\":false,\"error\":\"任务范围路径必须位于项目内\"}\n"
+  },
+  "samples": [
+    {
+      "round": 1,
+      "mode": "global",
+      "paths": "README.md,docs/development.md",
+      "ms": 779,
+      "chars": 279158,
+      "changes": 1563,
+      "editing": [
+        "Friday（Codex 实际任务流程迭代 WF-flow-practice）",
+        "Friday（Codex 无部件长期任务 WF-wu-parts-full）",
+        "Friday（Codex 循环音乐 demo WF-music-demos / WF-music-daw）",
+        "Friday（Codex 美术实机检查 WF-ui-art-live）",
+        "Friday（ZCode 本会话，主线5200拉起+全场收尾 WF-web-5200-1005）"
+      ],
+      "omitted": {
+        "changes": 0,
+        "registry": 0,
+        "pending": 0,
+        "unowned": 0,
+        "warnings": 0,
+        "evidence": 0,
+        "recentTasks": 26
+      },
+      "outputSha256": "05e7a74531492369e52567aec23f425dfab66702a2fc55784f965e17a44e7f5c"
+    },
+    {
+      "round": 1,
+      "mode": "scoped",
+      "paths": "README.md,docs/development.md",
+      "ms": 767,
+      "chars": 10365,
+      "changes": 2,
+      "editing": [
+        "Friday（Codex 实际任务流程迭代 WF-flow-practice）"
+      ],
+      "omitted": {
+        "changes": 1561,
+        "registry": 4,
+        "pending": 17,
+        "unowned": 2,
+        "warnings": 0,
+        "evidence": 27,
+        "recentTasks": 27
+      },
+      "outputSha256": "f7a35fdd99c0274877682c67a5fb4a359cb131eea33743b992eff7905e988f45"
+    },
+    {
+      "round": 2,
+      "mode": "scoped",
+      "paths": "docs/WORKFLOW-TOOLS.md,tests/docs-consistency.test.js",
+      "ms": 716,
+      "chars": 11702,
+      "changes": 2,
+      "editing": [
+        "Friday（Codex 实际任务流程迭代 WF-flow-practice）"
+      ],
+      "omitted": {
+        "changes": 1561,
+        "registry": 4,
+        "pending": 17,
+        "unowned": 2,
+        "warnings": 0,
+        "evidence": 23,
+        "recentTasks": 26
+      },
+      "outputSha256": "4cb4e96183e49ef5920d75af9783a7c2fe5826c7a6299502e4937371b3fe04db"
+    },
+    {
+      "round": 2,
+      "mode": "global",
+      "paths": "docs/WORKFLOW-TOOLS.md,tests/docs-consistency.test.js",
+      "ms": 707,
+      "chars": 279158,
+      "changes": 1563,
+      "editing": [
+        "Friday（Codex 实际任务流程迭代 WF-flow-practice）",
+        "Friday（Codex 无部件长期任务 WF-wu-parts-full）",
+        "Friday（Codex 循环音乐 demo WF-music-demos / WF-music-daw）",
+        "Friday（Codex 美术实机检查 WF-ui-art-live）",
+        "Friday（ZCode 本会话，主线5200拉起+全场收尾 WF-web-5200-1005）"
+      ],
+      "omitted": {
+        "changes": 0,
+        "registry": 0,
+        "pending": 0,
+        "unowned": 0,
+        "warnings": 0,
+        "evidence": 0,
+        "recentTasks": 26
+      },
+      "outputSha256": "cdea675cea9dddc312b7083107a3bb790fccddec7626cf008f3001b24a9f45c9"
+    },
+    {
+      "round": 3,
+      "mode": "global",
+      "paths": "docs/README.md,docs/quality-gates.md",
+      "ms": 625,
+      "chars": 279158,
+      "changes": 1563,
+      "editing": [
+        "Friday（Codex 实际任务流程迭代 WF-flow-practice）",
+        "Friday（Codex 无部件长期任务 WF-wu-parts-full）",
+        "Friday（Codex 循环音乐 demo WF-music-demos / WF-music-daw）",
+        "Friday（Codex 美术实机检查 WF-ui-art-live）",
+        "Friday（ZCode 本会话，主线5200拉起+全场收尾 WF-web-5200-1005）"
+      ],
+      "omitted": {
+        "changes": 0,
+        "registry": 0,
+        "pending": 0,
+        "unowned": 0,
+        "warnings": 0,
+        "evidence": 0,
+        "recentTasks": 26
+      },
+      "outputSha256": "fdba6d72476a90b93c305e5e7d503247ac210bb5c9c1883942ab7794f17e95f9"
+    },
+    {
+      "round": 3,
+      "mode": "scoped",
+      "paths": "docs/README.md,docs/quality-gates.md",
+      "ms": 633,
+      "chars": 12086,
+      "changes": 2,
+      "editing": [
+        "Friday（Codex 实际任务流程迭代 WF-flow-practice）"
+      ],
+      "omitted": {
+        "changes": 1561,
+        "registry": 4,
+        "pending": 17,
+        "unowned": 2,
+        "warnings": 0,
+        "evidence": 25,
+        "recentTasks": 26
+      },
+      "outputSha256": "c0c3f5178b902f3bc7e0fb19625bcf92e30b6960d3ec763524a96b222d471a7f"
+    }
+  ],
+  "limits": [
+    "3组同机实测；顺序部分反转，非随机试验；只比较接手输出与命令耗时，不推断整个开发任务提速"
+  ]
+}

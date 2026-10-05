@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "collector": {"platform":"Codex","browser":"iab","transport":"cua","surface":"current-window"},
+  "date": "2026-10-03",
+  "head": "425d03920e",
+  "origin": "http://127.0.0.1:5337",
+  "viewport": {"width":1280,"height":720,"devicePixelRatio":1.5},
+  "environment": "共享Vite工作树；CSS热更新，JS保存曾重载回标题；独立origin档02本会话新建，档01保留。没有改viewport。",
+  "screenshots": {"status":"seen-in-tool-output-not-saved","reason":"本轮截图已由内置工具显示；未取得可复用文件，不登记虚构文件路径。"},
+  "realInputChain": [
+    "标题→选择空档02→基地→出发整备",
+    "真实点格挡带入，容量1/16→2/16；确认出发→默认无→出发→真实领取两职业卡→第一层地图",
+    "点击遭遇战节点2→三个联邦巡防兵普通战",
+    "初始攻击选择目标→真实Escape取消→重选→击杀第一人→恢复输入→重选并击杀第二人",
+    "真实结束回合→敌方攻击4→生命35/35变31/35→第二回合恢复2/2费用",
+    "格挡自目标→格挡中/扣1费→流星箭雨真实出牌→两段各3伤害自然胜利",
+    "搜刮页真实领取棘刺之地及1币→消耗教学真实关闭→回第一层地图",
+    "导航同origin ?perfProbe=1→标题→档02继续→地图位置/31生命/3格/1币恢复"
+  ],
+  "prep": {
+    "baseline": "当前1280×720未复现规划755×586的B03，不能宣称旧尺寸复验。",
+    "after": {"footerY":653.07,"footerHeight":56.73,"buttonY":662.24,"buttonHeight":38.40,"usedSlots":2,"capacity":16,"remaining":14},
+    "conclusion":"页级容量/确认出发完整可见，带牌同步并真实进入后续链。"
+  },
+  "map": {
+    "before":{"sidebarY":599.30,"sidebarHeight":120.70,"helpY":723.29,"helpHeight":23.44,"optionHeight":57.46},
+    "after":{"sidebarY":550,"sidebarHeight":170,"helpY":679.32,"helpHeight":23.44,"optionHeight":57.46,"bagY":478.60,"bagHeight":61.20},
+    "conclusion":"当前窗口帮助文字裁切已复现并修复，路线按钮与帮助完整，浮背包在操作区上方；真实战后返回成立。"
+  },
+  "battle": {
+    "before":{"arenaY":0,"arenaHeight":490.50,"hudY":490.50,"hudHeight":229.50,"intentWidth":59.84,"intentHeight":38.46,"endTurnY":664.76,"endTurnHeight":39.95},
+    "afterFirstCss":{"topbarHeight":40.79,"arenaY":40.79,"arenaHeight":479.65,"hudY":520.44,"hudHeight":199.56,"intentWidth":88.40,"intentHeight":26.99,"endTurnY":669.85,"endTurnHeight":39.95},
+    "targetEvidence":"真实选择时stage.data-phase仍为player而非targeting，合法目标有can-target；CSS改随真实can-target，再次实图可见三目标框和可选目标文字，自己目标亦可用，Escape取消无锁残留。",
+    "conclusion":"当前普通三敌意图横读、主操作完整；自然胜利链通过。尚不是完整战斗美术/五人/首脑验收。"
+  },
+  "unverified":["规划755×586旧尺寸","四层完整远征与首脑","其余四人物战斗","战斗全部子页/异常态","完整结果与来源数据实页","隐藏/减少动态/动作中离场真实链","完整数值性能前后对比"],
+  "audio":"老板免验",
+  "ci":"远端未刷新，未提交增量无CI覆盖；未运行build或全量"
+}

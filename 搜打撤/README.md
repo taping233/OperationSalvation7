@@ -9,10 +9,10 @@
 Vite 网页版开发调试在本目录运行：
 
 ```powershell
-npm run dev
+npm run web
 ```
 
-优先复用现有 Node 22 与锁定依赖；缺失依赖按任务授权处理。`index.html` 使用 ESM，不能通过 `file://` 直接双击运行。`npm run dev` 由 Vite 读取 `game`；构建环境边界见[开发指南](docs/development.md)。
+主线 5200 使用 `npm run web` 幂等复用；它由 Vite 读取 `game`。优先现有 Node 22 与锁定依赖，缺失项按任务授权处理。`index.html` 不能通过 `file://` 双击运行；构建环境边界见[开发指南](docs/development.md)。
 
 网页版浏览器要求：Chromium 105+ / Edge 常青版 / Firefox 121+（样式层使用 `:has()` 与容器查询 `cqw`，旧内核 WebView 下部分界面样式会退化）。桌面版内置 Electron 44，无此限制。
 

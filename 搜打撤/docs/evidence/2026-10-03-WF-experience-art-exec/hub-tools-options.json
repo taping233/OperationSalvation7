@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-03",
+  "owner": "Codex exploration_layout",
+  "scope": "A6 bounded read-only options: upgrade, collection/achievements, settings and existing developer navigation",
+  "status": "verified-current-window-settings-and-zero-resource-upgrade-slice",
+  "browserOperations": 0,
+  "gameSourceChanges": 2,
+  "implementation": [
+    {"file": "game/src/ui/game.menu.js", "scope": "Only #setDev label changed to 开发者模式（测试工具） after parent confirmed actual misleading label and authorized edit. Frozen writer gate untouched.", "checks": ["Acorn source parse passed", "git diff --check passed", "one-line diff only", "parent current-window true review confirmed new label"]},
+    {"file": "game/src/hub/game.hub.pages.js", "scope": "Only hubUpgradeHTML presentation: bag/stash wood deficit or maximum, pet ration deficit or maximum, actual stash rune threshold cost/current count/deficit. Mirrors existing base.js rules with identical fallback 50/2; no command or storage edit.", "checks": ["Acorn source parse passed", "git diff --check passed", "hub-upgrade-render and hub-architecture: 2 files, 10 tests passed", "parent current 1280x720 zero-resource review: both wood-shortage hints and pet ration-shortage hint visible; buttons still disabled; no action obstruction"]}
+  ],
+  "currentLiveEvidence": {"source": "parent Codex built-in browser, 1280x720 during these reviews; later current window naturally became1183x764, other untested scenarios remain unknown", "upgradeBaseline": "Natural new slot03: wood0, bag16/30 disabled 木材×2扩建+1格, stash25/100 disabled 木材×2扩建+3张, rations0 pet disabled; no nearby shortage reason", "upgradePostChange": "Bag and stash each show 木材不足，还需2; pet shows 口粮不足，还需2; all buttons remain disabled and hints do not cover primary actions. No actual upgrade or rune transaction.", "settingsPostChange": "Developer checkbox label visibly 开发者模式（测试工具）; verified"},
+  "constructedExperiment": {"file": "tests/hub-upgrade-render.test.js", "environment": "Vitest jsdom using actual hubUpgradeHTML with injected base/session dependencies", "coverage": ["zero-resource reasons and disabled actions", "nondefault rune threshold48/cost3, before/at threshold", "enough rune resources allow existing action", "maximum reason precedes shortages", "render never mutates wood/rations/runes"], "limitation": "Constructed render evidence only; not natural progressed slot or real upgrade transaction", "result": "4 render cases passed; existing architecture 6 cases passed"},
+  "freshness": [
+    {"ids": ["HUB-UPGRADE", "HUB-COLLECTION", "HUB-ACHIEVEMENTS"], "source": "game/src/hub/game.hub.pages.js", "sha256": "e13df2c4080dbd901982a24a086cd15c2c45259a8f03e1908f8bcbe2a90cc21f", "matchesCoverageSourceAtReadBeforeEdit": true},
+    {"ids": ["SETTINGS"], "source": "game/src/ui/game.menu.js", "sha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124", "matchesCoverageSourceAtReadBeforeEdit": true}
+  ],
+  "options": [
+    {
+      "id": "A6-UPGRADE-REASON",
+      "priority": 1,
+      "finding": "Upgrade controls have disabled state but no nearby shortage reason. Stash upgrades also require runes from a capacity threshold while the visible button lists only wood cost.",
+      "source": ["game/src/hub/game.hub.pages.js:441-442", "game/src/hub/game.hub.pages.js:453-461", "game/src/hub/base.js:372-380"],
+      "confidence": "parent natural zero-resource current-window omission and post-change hints verified; rune boundary constructed render passed, no natural rune transaction claim",
+      "cheapestReview": "Naturally open base upgrade with initial zero wood. Read disabled buttons and nearby text; no resource spending needed.",
+      "selectors": ["#hubMain [data-act=upBag]", "#hubMain [data-act=upStash]", "#hubMain [data-act=upPet]", "#hubMain .up-card", "#hubMain .pet-ops"],
+      "boundaryReview": "A >=50-capacity stash with sufficient wood but insufficient runes requires explicitly labelled assisted state or a real progressed slot; initial-slot screenshot cannot prove that boundary.",
+      "smallestPossibleFixAfterLiveConfirmation": "Display actual disabled reason next to each control, including rune requirement; preserve upgrade command, costs, curves and inventory."
+    },
+    {
+      "id": "A6-SETTINGS-FROZEN-LABEL",
+      "priority": 1,
+      "finding": "Developer toggle promises 测试工具 / 卡牌制作, but card designer writes remain explicitly frozen and designer entry guard returns to the gallery.",
+      "source": ["game/src/ui/game.menu.js:983", "game/src/hub/game.cardslib.common.js:24-25", "game/src/hub/game.cardslib.designer.js:36"],
+      "confidence": "parent current-window confirmed original mismatch and verified one-line label fix",
+      "cheapestReview": "Naturally open settings and read the developer toggle label. No toggle or frozen-entry interaction required.",
+      "selectors": [".settings-page #setDev", ".settings-page label:has(#setDev)"],
+      "selectorNote": "The checkbox is inside its label; #setDev.closest('label') is equivalent.",
+      "smallestPossibleFixAfterLiveConfirmation": "Name the actual developer test tools in the label and preserve CARD_DESIGNER_WRITES_ENABLED=false."
+    },
+    {
+      "id": "A6-COLLECTION-FIRST-OBJECT",
+      "priority": 2,
+      "finding": "Collection renders explanatory paragraph plus all five milestones before character card groups. Historical coverage calls this crowded; current viewport must decide whether it remains a real obstacle.",
+      "source": ["game/src/hub/game.hub.pages.js:517-560", "game/css/hub.css:151-159"],
+      "confidence": "source order confirmed, current visual defect unproven",
+      "cheapestReview": "Base achievement/collection tab -> 人物收藏; capture current first frame and measure first .coll-group/.coll-cards against the visible scroll region. Normal scrolling and return are sufficient.",
+      "selectors": ["#hubMain [data-act=hubCollectionView][data-view=classes]", "#hubMain .coll-room .ov-note", "#hubMain .coll-ms-list", "#hubMain .coll-group", "#hubMain .coll-cards"],
+      "decision": "Keep structure unless the current frame confirms card objects are pushed too far below meaningful navigation. No collection data or stage rewards rewrite."
+    },
+    {
+      "id": "A6-ACHIEVEMENT-ACTION-WIDTH",
+      "priority": 2,
+      "finding": "Achievement reward text is nowrap inside a nonshrinking action region. Historical reports describe thin claim buttons; current layout and long-reward row decide whether this remains actionable.",
+      "source": ["game/src/hub/game.hub.pages.js:568-590", "game/css/hub.css:131-134", "game/css/page-rewards-bag-help.css:665-666"],
+      "confidence": "source risk only; current visual defect unproven",
+      "cheapestReview": "Base achievement/collection tab -> 成就记录; use a normal long-reward row and any naturally claimable row. Compare reward/action region with title/description and viewport, then return.",
+      "selectors": ["#hubMain [data-act=hubCollectionView][data-view=achievements]", "#hubMain .ach-row", "#hubMain .ach-ops", "#hubMain [data-act=claimAch]"],
+      "decision": "No synthetic claim or reward mutation required for visual inspection. Do not declare actual reward transaction verified from a static row."
+    },
+    {
+      "id": "A6-TOOLS-REAL-ENTRY",
+      "priority": 2,
+      "finding": "Four developer tabs and guarded key navigation already exist. Prior keyboard evidence used synthetic KeyboardEvent, so true Ctrl+L entry remains a cheap coverage gap, not grounds to rebuild the tools.",
+      "source": ["game/src/agent/agent.console.js:110-139", "game/src/ui/quick-nav.js:14-62", "docs/evidence/2026-10-03-experience-art-plan/coverage.json DEV-KEYS/DEV-DEBUG"],
+      "confidence": "implemented source confirmed, real input gap retained",
+      "cheapestReview": "With an allowed normal developer mode and no focused text field, use genuine Ctrl+L, open the keys tab, read available/disabled navigation and close it. A guarded in-run base entry must remain disabled.",
+      "selectors": [".devc-keylist", ".devc-keyrow", ".devc-why", "[data-act=devcGoto]"],
+      "decision": "No four-tab redesign, no external service/configuration, no frozen-platform bypass; auxiliary jumps cannot count as normal gameplay coverage."
+    }
+  ],
+  "retained": [
+    "Gallery windowing/filter/cache/prewarm structure and card designer freeze.",
+    "Settings groups, two-step danger controls and reduce-motion persistence already exist; no claimed source defect or audio test.",
+    "Collection pool single-fetch, actual class denominator and one-time milestones; no new collection framework.",
+    "Existing developer four tabs, guard reasons and same-entry quick navigation."
+  ],
+  "unverified": ["natural resource-shortage rune boundary or real rune upgrade transaction", "collection/achievement current-window layout and reward transaction", "real Ctrl+L and return input", "later1183x764 layout", "performance measurements"],
+  "constraints": "Only this evidence file added for A6; explicitly assigned settings-label line and hubUpgradeHTML presentation changed after live confirmation, plus one scoped render test. No browser operation, viewport change, deletion, build, installation, commit or push. Historical screenshots are references, not current evidence."
+}

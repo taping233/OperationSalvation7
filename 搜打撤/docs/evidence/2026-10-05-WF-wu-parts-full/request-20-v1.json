@@ -1,0 +1,12 @@
+{
+  "id": "20",
+  "slug": "left-calf",
+  "version": 1,
+  "prompt": "ONE individual 2D skeletal-animation sprite component for Wu, not a sheet. Genuine transparent PNG background, zero alpha outside the silhouette, no cast shadow, aura, backdrop, text, numbers or alignment marks. Reference 1 is the confirmed THREE-QUARTER FACING SCREEN RIGHT combat mother pose and proportions; reference 2 is the front identity/style reference. Painterly anime, LOW detail, large opaque angular color blocks, clear hard-edge shadows, economical rough hand-painted marks. Neutral black and gray clothing, cream skin, silver-white hair. Keep original anatomical proportions and camera angle. Paint hidden overlap at the joints so the part can rotate without gaps. Center the component with generous transparent margins, one piece only, not a mannequin or full character. No amputated gore, no wounds; clean game asset joining boundaries. Do not include adjacent body parts, do not invent equipment or accessories. Part 20: ONLY the character-LEFT lower leg/CALF, the rear leg on screen-left in the combat mother pose. Knee-to-ankle skin segment, WITHOUT thigh, kneecap bulge, foot, toes or boot. A smooth narrow lower leg, calf muscle softly fullest just below upper third then tapering toward a narrow ankle. Clean rounded joining stub at top, narrow ankle stub at bottom to hide inside a separate boot. Descends diagonally slightly toward SCREEN LEFT, following rear leg from mother pose. Match the cream/peach broad brush-plane skin shading in reference 3. Do not copy the upper-leg shape: this is a LOWER leg with a smooth ankle, not a whole leg or thigh. One isolated calf only.",
+  "refs": [
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\wu-battle-base-frame000.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\reference.png",
+    "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\characters\\wu-parts-v1\\part-19-left-thigh-v1.png"
+  ],
+  "tool": "built-in imagegen"
+}

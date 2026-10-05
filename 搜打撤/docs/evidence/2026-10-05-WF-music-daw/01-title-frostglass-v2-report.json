@@ -1,0 +1,80 @@
+{
+  "role": "title",
+  "title": "霜窗回声 · LMMS版",
+  "bpm": 136,
+  "seconds": 56.47058333333333,
+  "native_engine": "LMMS 1.2.2 sf2player/FluidSynth, sinc-best, 2x oversampling, 48k float render",
+  "tracks": {
+    "Grand piano": {
+      "program": 0,
+      "bank": 0,
+      "volume": 105,
+      "pan": -10,
+      "notes": 184
+    },
+    "Warm horizon": {
+      "program": 89,
+      "bank": 0,
+      "volume": 30,
+      "pan": 18,
+      "notes": 64
+    },
+    "Cello strings": {
+      "program": 49,
+      "bank": 0,
+      "volume": 40,
+      "pan": -18,
+      "notes": 24
+    },
+    "Muted bass": {
+      "program": 33,
+      "bank": 0,
+      "volume": 55,
+      "pan": 0,
+      "notes": 64
+    },
+    "Glass answer": {
+      "program": 8,
+      "bank": 0,
+      "volume": 43,
+      "pan": 25,
+      "notes": 16
+    },
+    "Brush drums": {
+      "program": 40,
+      "bank": 128,
+      "volume": 38,
+      "pan": 0,
+      "notes": 190
+    }
+  },
+  "cycles_rendered": 2,
+  "delivered_cycle": 2,
+  "raw_peak": 0.07797759771347046,
+  "peak_dbfs": -2.8758031129837036,
+  "rms_dbfs": -18.000006675720215,
+  "post_master_gain_db": 19.95012501933346,
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-daw/01-title-frostglass-v2.mmp",
+      "bytes": 80052,
+      "sha256": "42fbe905720703789e5c825b65289dfbbb52078ae06979bc8199f5cb088f8943"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-daw/01-title-frostglass-v2.wav",
+      "bytes": 16263572,
+      "sha256": "46ff9dd1fda513956ed6556bb86988b194f85fb956f7dc200cb545ed192e3a0b"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-daw/01-title-frostglass-v2.mp3",
+      "bytes": 1808719,
+      "sha256": "c544acef1336fadc2c42ce50275dd990cecba22d6180a4d4f8a53ba62126b032"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-daw/01-title-frostglass-v2.ogg",
+      "bytes": 865164,
+      "sha256": "7c1d0792660318a9eeb021573c7f840bf80dbd8fa18abe34603c4912bb8ee3e1"
+    }
+  ],
+  "listening": "user listening required; numerical checks cannot establish aesthetic improvement"
+}

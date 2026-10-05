@@ -1,0 +1,1 @@
+(async()=>{const q=window.__uiArtQA;await q.ordinary(['初始攻击','流血药水','木材','珍珠盒']);return JSON.stringify(window.SDT.Battle.commands.openBag());})()

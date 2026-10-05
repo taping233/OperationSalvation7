@@ -1,0 +1,22 @@
+{
+  "result": {
+    "type": "object",
+    "value": {
+      "firstPhotoAtMs": 207.89999999850988,
+      "flippingEndMs": 163,
+      "infoReadyMs": 151.10000000149012,
+      "styles": {
+        "backdropBlur": "blur(6px)",
+        "infoDelay": "0s, 0s",
+        "infoDuration": "0.12s, 0.14s",
+        "paperDuration": "0.14s, 0.14s",
+        "rootBlur": "none"
+      },
+      "window": {
+        "height": 764,
+        "visibility": "visible",
+        "width": 871
+      }
+    }
+  }
+}

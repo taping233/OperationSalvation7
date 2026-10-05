@@ -1,0 +1,342 @@
+{
+  "method": "Built-in ImageGen original-layout edits; WebP and existing thumbnail bake",
+  "items": [
+    {
+      "cardId": "tt2-frostsword",
+      "name": "寒冰剑",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-c6500a7a-77dd-4b70-bf23-458f1fa9571f.png",
+      "source": {
+        "path": "game/art-source/cards/equip-tt2-frostsword-original-rough-20261005.png",
+        "bytes": 1157987,
+        "sha256": "3630c432ac74556ea3023531f5cff8f289211823a880323b35a1660d48e9f21f"
+      },
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt2-frostsword.webp",
+          "bytes": 52230,
+          "sha256": "6fdd4393495a5df036057a027a0cd74606ce535c0dc871c2ed54f27441ec1b2b",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt2-frostsword.webp",
+          "bytes": 6872,
+          "sha256": "a350466feffa521f70e945a3bd750c6d1d382ac7dd98708152fd74ac4659233c",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "backups": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-eight-items-rough/originals-before-repaint/full-equip-tt2-frostsword.webp",
+          "bytes": 42456,
+          "sha256": "ba7fd39653c6eef7fa7ca1d2348aebdef5db76f7cd75bb7ab5f433e675c5f43e"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-eight-items-rough/originals-before-repaint/thumb-equip-tt2-frostsword.webp",
+          "bytes": 9478,
+          "sha256": "1e8887d1317db010257fe2071c67770ce1f268047f86d23e6ba13e8e19670d17"
+        }
+      ]
+    },
+    {
+      "cardId": "tt3-twinwater-mail",
+      "name": "冰甲",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-fb06cff2-26db-4aaf-8e00-2f0869915d43.png",
+      "source": {
+        "path": "game/art-source/cards/equip-tt3-twinwater-mail-original-rough-20261005.png",
+        "bytes": 1579862,
+        "sha256": "9a1d3eab3899db97eba4aca8a6099d7feea4d2a255735a89466a0397dd31fc2c"
+      },
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt3-twinwater-mail.webp",
+          "bytes": 116328,
+          "sha256": "dbc216c2807f438278217745d198491a0d2eff36ea0b9008bb11e18532846e2c",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt3-twinwater-mail.webp",
+          "bytes": 16416,
+          "sha256": "d05e2fb9e166a6fd49abc2fc948353e44241bbb42cade14528167a5794d019ab",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "backups": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-eight-items-rough/originals-before-repaint/full-equip-tt3-twinwater-mail.webp",
+          "bytes": 124766,
+          "sha256": "7b65902b37f1eb2c08076d1ddf6505a735b82016330d8b4166e2a201ae159a95"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-eight-items-rough/originals-before-repaint/thumb-equip-tt3-twinwater-mail.webp",
+          "bytes": 28830,
+          "sha256": "47d88e2711f5d6f3b608a35113d4b8f489eb7f3c486632cc0518a124ed6a4265"
+        }
+      ]
+    },
+    {
+      "cardId": "tt3-grass-armor",
+      "name": "草甲",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-15a24d31-627a-41f8-a345-6ae70b481144.png",
+      "source": {
+        "path": "game/art-source/cards/equip-tt3-grass-armor-original-rough-20261005.png",
+        "bytes": 1753706,
+        "sha256": "71e8887f99d156c064d231dce931db06c8d45ecc493852cd400ab234d269bb21"
+      },
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt3-grass-armor.webp",
+          "bytes": 139890,
+          "sha256": "cbc2f31e13294e5a2b4d89b60ae0b739975ea9290692918a1dad0379090f6f2a",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt3-grass-armor.webp",
+          "bytes": 18848,
+          "sha256": "c251f684b99ead2d88541546d9a9090a88a155afdcd256f84ca63035c985fa62",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "backups": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-eight-items-rough/originals-before-repaint/full-equip-tt3-grass-armor.webp",
+          "bytes": 121026,
+          "sha256": "5bda0fb281da241aa34424f3a992230a1200cfd8d84c6f7727bb7c88d253615e"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-eight-items-rough/originals-before-repaint/thumb-equip-tt3-grass-armor.webp",
+          "bytes": 24974,
+          "sha256": "f07234a740e57d444766f6ba4f53266b97e6d869ef76000f02da5c100caeb8ce"
+        }
+      ]
+    },
+    {
+      "cardId": "tt7-naturestaff",
+      "name": "自然法杖",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-b9e6c6c4-0e16-4597-8df5-71ddbcc20c39.png",
+      "source": {
+        "path": "game/art-source/cards/equip-tt7-naturestaff-original-rough-20261005.png",
+        "bytes": 1281877,
+        "sha256": "3a0820890ec741858250e23916bfa929db804adfe714448fcf334b76ab3d7533"
+      },
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt7-naturestaff.webp",
+          "bytes": 75340,
+          "sha256": "41090f4869adb6d555ec9b9bf4226f4633a024cb2d415f4da414bc99bd5a1783",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt7-naturestaff.webp",
+          "bytes": 13822,
+          "sha256": "bc602350e33099c7986df6263006ab6c55a92b64cdefa093a9d5ae059467d8f2",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "backups": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-eight-items-rough/originals-before-repaint/full-equip-tt7-naturestaff.webp",
+          "bytes": 85522,
+          "sha256": "98263e3d900b2cb87525b5e1250de2322e3887809371743b499e082ac9cdf351"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-eight-items-rough/originals-before-repaint/thumb-equip-tt7-naturestaff.webp",
+          "bytes": 15682,
+          "sha256": "810249a0bea082d5aad71f4d9d0f907ab4c207a558a39cf995fba3cab0e89137"
+        }
+      ]
+    },
+    {
+      "cardId": "tt2-pearlbox",
+      "name": "珍珠盒",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-cc56e9a2-ed1d-4767-83b0-414f84750289.png",
+      "source": {
+        "path": "game/art-source/cards/equip-tt2-pearlbox-original-rough-20261005.png",
+        "bytes": 1416815,
+        "sha256": "3233a4a8d737125f9061f7255a8903a2ec61e40a3a7329c0272a48e744788229"
+      },
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt2-pearlbox.webp",
+          "bytes": 80764,
+          "sha256": "2dd1921d7eda3f260ec74be23decc0a70cb6925812fd4e16d1ba0e1e7305e65b",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt2-pearlbox.webp",
+          "bytes": 13862,
+          "sha256": "a1756fb8d624f090b33d944bad0167e702d9f5ea5342a66c1684d7fe4eb01d29",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "backups": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-eight-items-rough/originals-before-repaint/full-equip-tt2-pearlbox.webp",
+          "bytes": 97630,
+          "sha256": "59283608b436d1fad2bdf03974333e6cec09c91a22b99029a4b5f6ec83ac48f7"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-eight-items-rough/originals-before-repaint/thumb-equip-tt2-pearlbox.webp",
+          "bytes": 18216,
+          "sha256": "33e82c66ffcf5d25c072540b7c6326bb409d451ef866f170f569286ff4eb92f8"
+        }
+      ]
+    },
+    {
+      "cardId": "tt3-element-seal",
+      "name": "元素符印",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-2752d8ef-b31b-4451-a4ee-0f9a3147cf1c.png",
+      "source": {
+        "path": "game/art-source/cards/equip-tt3-element-seal-original-rough-20261005.png",
+        "bytes": 1042601,
+        "sha256": "d3e30c4a06fa7dbd5381d0626d1818a2f28a975578b0afa90fcc3a73e51bec39"
+      },
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt3-element-seal.webp",
+          "bytes": 38538,
+          "sha256": "631376d11209ee99dc861c076e90f225a1c20ae4930e132854b3a674110127cb",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt3-element-seal.webp",
+          "bytes": 6166,
+          "sha256": "24a1654d49ec621a808a1f7ec836e4206598b8d320f430b3dacd274b623efc1e",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "backups": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-eight-items-rough/originals-before-repaint/full-equip-tt3-element-seal.webp",
+          "bytes": 33466,
+          "sha256": "1cd2e4d5c5bca551b7dd90e47e1cc586b2665620f6eea4208b343b4b59d17ab2"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-eight-items-rough/originals-before-repaint/thumb-equip-tt3-element-seal.webp",
+          "bytes": 6710,
+          "sha256": "9db0e9c193db89bd452781a4eae0877bf364d2d05fd5c8b5879c2e9294b4e697"
+        }
+      ]
+    },
+    {
+      "cardId": "tt3-fate-wheel",
+      "name": "命运钟表",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-aa13dc03-066d-4389-bb84-b4c4741b2f82.png",
+      "source": {
+        "path": "game/art-source/cards/equip-tt3-fate-wheel-original-rough-20261005.png",
+        "bytes": 1256404,
+        "sha256": "b538b2d5813c4b070339f0c2f7864c27a60a35675f9783fd0f52f8888626e7a7"
+      },
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt3-fate-wheel.webp",
+          "bytes": 79746,
+          "sha256": "69bd24f9d1595a2cb03da05ddb1da0d0b526003c1505d4967ff40ab2d35c352c",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt3-fate-wheel.webp",
+          "bytes": 11766,
+          "sha256": "8bbe689632f471a3e0991f22ffbd63d8d12772927660098a5439c88ed559e8f0",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "backups": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-eight-items-rough/originals-before-repaint/full-equip-tt3-fate-wheel.webp",
+          "bytes": 71850,
+          "sha256": "8a9ede526265d62e7114f65323a63e499152ad460398464b678aa59bd2a30346"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-eight-items-rough/originals-before-repaint/thumb-equip-tt3-fate-wheel.webp",
+          "bytes": 14490,
+          "sha256": "059ccb8fdb98f6e50292cacc6df236a391f99e62af5e48825604570bf3371797"
+        }
+      ]
+    },
+    {
+      "cardId": "tt2-wreck",
+      "name": "沉船宝盒",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-d644f011-8939-41ca-adb2-26e96f204254.png",
+      "source": {
+        "path": "game/art-source/cards/equip-tt2-wreck-original-rough-20261005.png",
+        "bytes": 1417868,
+        "sha256": "7817036d2954d8558fe7e6626649bfe788a81c80bd63567b9536363de3dd16e9"
+      },
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt2-wreck.webp",
+          "bytes": 75038,
+          "sha256": "bbe517d50807a202c91eec5961311227a4e5250b90d9403c9f031214baa6eeff",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt2-wreck.webp",
+          "bytes": 12980,
+          "sha256": "785c6d9901971a7d7d1891b74adbc91798e80314334e245ac355d4c84a8d7297",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "backups": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-eight-items-rough/originals-before-repaint/full-equip-tt2-wreck.webp",
+          "bytes": 66138,
+          "sha256": "a6686840dd741805b0f46f54eaa31715640b67960eb0a392a5e91139610f9ed8"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-eight-items-rough/originals-before-repaint/thumb-equip-tt2-wreck.webp",
+          "bytes": 12842,
+          "sha256": "299c143b969f5e3ec3043d3c198eb66594f4f0829595e084ba8d5aac82a85d81"
+        }
+      ]
+    }
+  ],
+  "verification": "遵老板禁测令，未测试/资产门/实页"
+}

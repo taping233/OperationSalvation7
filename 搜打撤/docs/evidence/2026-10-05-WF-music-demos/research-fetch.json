@@ -1,0 +1,22 @@
+[
+  {
+    "url": "https://librosa.org/doc/0.11.0/generated/librosa.beat.beat_track.html",
+    "status": 200,
+    "title": [
+      "librosa.beat.beat_track &mdash; librosa 0.11.0 documentation"
+    ],
+    "excerpt": " librosa.beat.beat_track &mdash; librosa 0.11.0 documentation Getting started Installation instructions Tutorial Troubleshooting API documentation Core IO and DSP Display Feature extraction Onset detection Beat and tempo librosa.beat.beat_track beat_track librosa.beat.plp Spectrogram decomposition Effects Temporal segmentation Sequential modeling Utilities Advanced topics Multi-channel Filters Caching Advanced I/O Use Cases Advanced examples Example files Reference Changelog Index Glossary librosa Beat and tempo librosa.beat.beat_track View page source librosa.beat.beat_track  librosa.beat. beat_track ( * , y = None , sr = 22050 , onset_envelope = None , hop_length = 512 , start_bpm = 120.0 , tightness = 100 , trim = True , bpm = None , prior = None , units = 'frames' , sparse = True ) [source]  Dynamic programming beat tracker. Beats are detected in three stages, following the method of [ 1 ] : Measure onset strength Estimate tempo from onset correlation Pick peaks in onset strength approximately consistent with estimated tempo [ 1 ] Ellis, Daniel PW. “Beat tracking by dynamic programming.” Journal of New Music Research 36.1 (2007): 51-60. http://labrosa.ee.columbia.edu/projects/beattrack/ Parameters : y np.ndarray [shape=(…, n)] or None audio time series sr number &gt; 0 [scalar] sampling rate of y onset_envelope np.ndarray [shape=(…, m)] or None (optional) pre-computed onset strength envelope. hop_length int &gt; 0 [scalar] number of audio samples between successive onset_envelope values start_bpm float &gt; 0 [scalar] initial guess for the tempo estimator (in beats per minute) tightness float [scalar] tightness of beat distribution around tempo trim bool [scalar] trim leading/trailing beats with weak onsets bpm float [scalar] or np.ndarray [shape=(…)] (optional) I"
+  },
+  {
+    "url": "https://www.soundonsound.com/techniques/practical-bass-drum-synthesis",
+    "status": 200,
+    "title": [
+      "Practical Bass Drum Synthesis"
+    ],
+    "excerpt": " Practical Bass Drum Synthesis Skip to main content Log in Register Subscribe Shop Help 0 items Search SOUND ON SOUND Home SOS For Artists Advertise Information Readers&#039; Ads Competitions Videos Podcasts Case Studies eBooks News Latest All News Search Podcasts Case Studies Readers Ads Forum Latest Posts Search SOS For Artists Readers Ads FAQ Glossary Rules Magazine Latest issue All issues Publication Dates Subscribe Advertise Write for SOS Search Reviews Articles Search Podcasts Glossary Case Studies Techniques Articles Series Search Podcasts Glossary Case Studies People Articles Search Podcasts Glossary Case Studies Sound Advice Articles Search Podcasts Glossary Case Studies Music Business Articles Search Podcasts Glossary Case Studies Set us as a Google preferred source preferred facebook twitter email print You are here Home Techniques Practical Bass Drum Synthesis Synth Secrets Synthesizers > Synth Secrets , Synthesis / Sound Design By Gordon Reid Published February 2002 Figure 1(a): A patch to synthesize the bass drum. Moving from last month's theoretical bass drum synth patch to its practical application on affordable analogue synths, we also take a look at how the world's most famous drum machines produce this fundamental rhythm sound. Last month, we analysed the bass drum, ending up with a patch that synthesized all the important elements of its sound (see Figure 1(a) above). Given a synthesizer of appropriate power and flexibility, there's no reason why you shouldn't use this to create a wide range of powerful kick drum sounds. Indeed, with careful choices of VCO pitches and waveforms, filter characteristics, and contour rates, you can use this to synthesize a huge range of realistic and electronic percussion instruments. Unfortunately, few of us have acces"
+  },
+  {
+    "url": "https://www.audiokinetic.com/en/library/edge/?source=Help&id=looping_sounds",
+    "error": "HTTP Error 403: Forbidden"
+  }
+]

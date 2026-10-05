@@ -1,0 +1,31 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container archive 仓库物品, ID: overlay
+		3 container
+			4 button Description: 关闭, ID: ovCloseX
+			5 heading archive 仓库物品, Value: 2, ID: ovTitle
+				6 image archive
+				7 text  仓库物品
+			8 container
+				9 text 2
+				10 image 追斩
+				11 text 追斩
+				12 text 武术 · 稀有
+				13 text 攻（ +0 ），本 回合 每打出一张其他武术，费用 -1 。
+				14 container
+					15 image coin
+					16 text 2
+				17 text ×1 张 · 收购价  2 币 /张
+				18 button sparkles 收藏
+					19 image sparkles
+					20 text  收藏
+				21 button coin 卖出 1 张（+2）
+					22 image coin
+					23 text  卖出 1 张（+2）
+				24 button (disabled) coin 全部卖出（+2 币）
+					25 image coin
+					26 text  全部卖出（+2 币）
+				27 button ↩ 返回仓库
+				28 text 03
+
+The focused UI element is 27 button ↩ 返回仓库

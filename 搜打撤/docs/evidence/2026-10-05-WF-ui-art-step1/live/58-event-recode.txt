@@ -1,0 +1,49 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 5/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 5/16
+		6 container
+			7 text FIELD ENCOUNTER 01 / 04
+			8 heading recycle 故障重编, Value: 2
+				9 image recycle
+				10 text  故障重编
+			11 text 选择  2  张招式或装备卡，将其随机变为同稀有度、同类型的卡牌（0/2）
+			12 checkbox 1 镭射 镭射 法术 · 古朴 crystal 注能 1 造成5点法术伤害；注能(1)：伤害+3。 sparkles 5' 法伤 coin 2, Value: 0
+				13 container
+					14 text 1
+					15 image 镭射
+					16 text 镭射 法术 · 古朴
+					17 image crystal
+					18 text 注能 1 造成 5 点法术 伤害 ； 注能 ( 1 )： 伤害 +3 。
+					19 image sparkles
+					20 text 5'
+					21 text 法伤
+					22 image coin
+					23 text 2
+			24 checkbox 1 二刀流 二刀流 武术 · 稀有 发现一张武术卡并额外获得1张复制。 coin 2, Value: 0
+				25 container
+					26 text 1
+					27 image 二刀流
+					28 text 二刀流 武术 · 稀有 发现 一张武术卡并额外获得 1 张复制。
+					29 image coin
+					30 text 2
+			31 checkbox 1 格挡 格挡 武术 · 古朴 本回合所受伤害降为 1。 coin 2, Value: 0
+				32 container
+					33 text 1
+					34 image 格挡
+					35 text 格挡 武术 · 古朴 本 回合 所受 伤害 降为  1 。
+					36 image coin
+					37 text 2
+			38 checkbox 2 龙焰射线 龙焰射线 法术 · 古朴 crystal 注能 1 注能（1）：造成11点法伤, Value: 0
+				39 container
+					40 text 2
+					41 image 龙焰射线
+					42 text 龙焰射线 法术 · 古朴
+					43 image crystal
+					44 text 注能 1 注能 （ 1 ）： 造成 11 点 法伤
+			45 button 放弃转换
+			46 button (disabled) 启动重编
+
+The focused UI element is 12 checkbox 1 镭射 镭射 法术 · 古朴 crystal 注能 1 造成5点法术伤害；注能(1)：伤害+3。 sparkles 5' 法伤 coin 2, Value: 0

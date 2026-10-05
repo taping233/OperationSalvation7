@@ -1,0 +1,328 @@
+{
+  "scope": {
+    "original_composition": 8,
+    "new_creative_composition": 14,
+    "total": 22
+  },
+  "notes": "迅捷箭对应库内迅疾箭；穿刺按现行override接入。无的临时脸部参考已失效，两张人物卡改用保留的Wu基准。飞身劈修正多余肢体/手套/副剑，寻宝去角标签名。未测试/资产门/实页/build/提交。",
+  "items": [
+    {
+      "card_id": "cc-unmoved",
+      "name": "不变应万变",
+      "asset": "cards/martial-cc-unmoved.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-b5dcb60c-f622-4380-81d9-49a7c97f1e83.png",
+      "revision": "heixiang-cc-unmoved-original-rough-20261005",
+      "prompt": "Repaint IMAGE1, game card 不变应万变, keeping ORIGINAL COMPOSITION, camera, figure/props positions, proportions and action. Landscape 4:3. Image1 is pose/composition; images2/3 PAINT STYLE only, image4 CHARACTER only. Do not copy style-reference people/clothes.\nFrontal centered waist-up Heixiang with arms firmly CROSSED before his chest, same left-side silver shoulder armor, orange scarf and face size/location. Preserve the selected spark-contact points near crossed arms/shoulders as a FEW coarse orange impact marks. Calm unflinching smirk, same wide dark/gray negative space; no new shield/sword or posture.\nUse image4 ONLY for Heixiang identity: adult dark-brown-skinned muscular broad-shouldered man, thick slicked-back black hair with exposed forehead, amber-gold eyes, stitched scar on his LEFT cheek (viewer-right in frontal views), bold confident smirk, black tactical suit/gloves/boots, silver-gray armor and muted brown-orange scarf. Preserve target's pose and main silhouettes. No coffee/saucer or reference4 standing pose. Held greatswords are simple massive SILVER-GRAY plain broad blades, no gold filigree or text.\nRough hand-painted anime color study: large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges, selective unfinished regions and sparse structural lines. Coarse grouped hair/cloth/armor planes, clear amber eyes and economical readable hands/face; matte muted colors. No fine strands, dense wrinkles, micro-ornament, facet mosaics, glossy render, particle shower or all-over grain. Abstract solid-color background blocks retain target's negative-space layout; effects become a few broad symbolic painted gestures, not a real environment. No text, watermark, card frame or UI.",
+      "references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-unmoved.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\heixiang.webp"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt7-marchrush",
+      "name": "急行军",
+      "asset": "cards/martial-tt7-marchrush.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-8f6fd55d-3cf0-4ba6-90f6-6f1265940dc8.png",
+      "revision": "heixiang-tt7-marchrush-original-rough-20261005",
+      "prompt": "Repaint IMAGE1, game card 急行军, keeping ORIGINAL COMPOSITION, camera, figure/props positions, proportions and action. Landscape 4:3. Image1 is pose/composition; images2/3 PAINT STYLE only, image4 CHARACTER only. Do not copy style-reference people/clothes.\nHeixiang rushes diagonally toward viewer from center-right, one knee/boot thrust forward in the same foreshortened RUNNING pose. Same gloved arm crossing before body and TWO small cards in the raised hand near UPPER-RIGHT; render cards as simple dark rectangles with one cyan mark, NO text/illustrated mini-scenes. Scarf streams far to LEFT at same angle and span. Bottom launch/dust burst becomes a few broad pale speed-strokes at same place, no literal road.\nUse image4 ONLY for Heixiang identity: adult dark-brown-skinned muscular broad-shouldered man, thick slicked-back black hair with exposed forehead, amber-gold eyes, stitched scar on his LEFT cheek (viewer-right in frontal views), bold confident smirk, black tactical suit/gloves/boots, silver-gray armor and muted brown-orange scarf. Preserve target's pose and main silhouettes. No coffee/saucer or reference4 standing pose. Held greatswords are simple massive SILVER-GRAY plain broad blades, no gold filigree or text.\nRough hand-painted anime color study: large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges, selective unfinished regions and sparse structural lines. Coarse grouped hair/cloth/armor planes, clear amber eyes and economical readable hands/face; matte muted colors. No fine strands, dense wrinkles, micro-ornament, facet mosaics, glossy render, particle shower or all-over grain. Abstract solid-color background blocks retain target's negative-space layout; effects become a few broad symbolic painted gestures, not a real environment. No text, watermark, card frame or UI.",
+      "references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-tt7-marchrush.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\heixiang.webp"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt7-bulwark",
+      "name": "坚盾",
+      "asset": "cards/martial-tt7-bulwark.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-b16dc411-c592-46b6-a3b7-c37a8b37a2b1.png",
+      "revision": "heixiang-tt7-bulwark-original-rough-20261005",
+      "prompt": "Repaint IMAGE1, game card 坚盾, keeping ORIGINAL COMPOSITION, camera, figure/props positions, proportions and action. Landscape 4:3. Image1 is pose/composition; images2/3 PAINT STYLE only, image4 CHARACTER only. Do not copy style-reference people/clothes.\nHuge upright steel-gray rectangular TOWER SHIELD dominates LEFT foreground, same polygonal outer shape, height/tilt and simple inset panels. Heixiang behind/right, forearm resting on shield top, other hand at hip, one leg planted forward, confident smirk. Preserve exact body/shield scale and lower contact line. Bottom smashed-ground shards/dust as a few coarse symbolic wedges, no expanded landscape or scenery.\nUse image4 ONLY for Heixiang identity: adult dark-brown-skinned muscular broad-shouldered man, thick slicked-back black hair with exposed forehead, amber-gold eyes, stitched scar on his LEFT cheek (viewer-right in frontal views), bold confident smirk, black tactical suit/gloves/boots, silver-gray armor and muted brown-orange scarf. Preserve target's pose and main silhouettes. No coffee/saucer or reference4 standing pose. Held greatswords are simple massive SILVER-GRAY plain broad blades, no gold filigree or text.\nRough hand-painted anime color study: large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges, selective unfinished regions and sparse structural lines. Coarse grouped hair/cloth/armor planes, clear amber eyes and economical readable hands/face; matte muted colors. No fine strands, dense wrinkles, micro-ornament, facet mosaics, glossy render, particle shower or all-over grain. Abstract solid-color background blocks retain target's negative-space layout; effects become a few broad symbolic painted gestures, not a real environment. No text, watermark, card frame or UI.",
+      "references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-tt7-bulwark.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\heixiang.webp"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt7-demonbreaker",
+      "name": "破甲重斩",
+      "asset": "cards/martial-tt7-demonbreaker.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-9a7ad6b7-1e3d-43a7-881b-09a64cf961ce.png",
+      "revision": "heixiang-tt7-demonbreaker-original-rough-20261005",
+      "prompt": "Repaint IMAGE1, game card 破甲重斩, keeping ORIGINAL COMPOSITION, camera, figure/props positions, proportions and action. Landscape 4:3. Image1 is pose/composition; images2/3 PAINT STYLE only, image4 CHARACTER only. Do not copy style-reference people/clothes.\nVery CLOSE crop: Heixiang's face/shoulders upper-left, orange scarf diagonal across neck, gloved hand lower-left/center. Straight silver-gray BLADE runs from lower-center toward UPPER-RIGHT across broken armor plates at RIGHT. Keep weapon, hand, face and shattering-plate positions and overlap. Coarse small group of pale metal shards/ochre impact strokes at same collision point, not dense spark networks. Simple plain blade, no gold ornament.\nUse image4 ONLY for Heixiang identity: adult dark-brown-skinned muscular broad-shouldered man, thick slicked-back black hair with exposed forehead, amber-gold eyes, stitched scar on his LEFT cheek (viewer-right in frontal views), bold confident smirk, black tactical suit/gloves/boots, silver-gray armor and muted brown-orange scarf. Preserve target's pose and main silhouettes. No coffee/saucer or reference4 standing pose. Held greatswords are simple massive SILVER-GRAY plain broad blades, no gold filigree or text.\nRough hand-painted anime color study: large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges, selective unfinished regions and sparse structural lines. Coarse grouped hair/cloth/armor planes, clear amber eyes and economical readable hands/face; matte muted colors. No fine strands, dense wrinkles, micro-ornament, facet mosaics, glossy render, particle shower or all-over grain. Abstract solid-color background blocks retain target's negative-space layout; effects become a few broad symbolic painted gestures, not a real environment. No text, watermark, card frame or UI.",
+      "references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-tt7-demonbreaker.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\heixiang.webp"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt7-ironcharge",
+      "name": "厉兵秣马",
+      "asset": "cards/martial-tt7-ironcharge.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-f5be8325-c6ab-4e24-b4ac-a23494101e8b.png",
+      "revision": "heixiang-tt7-ironcharge-original-rough-20261005",
+      "prompt": "Repaint IMAGE1, game card 厉兵秣马, keeping ORIGINAL COMPOSITION, camera, figure/props positions, proportions and action. Landscape 4:3. Image1 is pose/composition; images2/3 PAINT STYLE only, image4 CHARACTER only. Do not copy style-reference people/clothes.\nHeixiang in SIDE VIEW seated center-right on the same simple squat gray block/stump silhouette; torso leans forward, same front planted boot lower-left. A LONG giant sword lies HORIZONTALLY across whole frame at waist height, handle toward LEFT and tip toward RIGHT. Upper glove rubs a rectangular WHETSTONE on blade while other hand stabilizes it; preserve exact hand/tool arrangement, not a sword slash. Two small tilted blue cards at LOWER-RIGHT remain simple symbolic rectangles without text. Seat and sharpening sparks rendered as coarse flat shapes in abstract backdrop, no woodland/environment. Sword plain silver-gray, REMOVE engraved lettering.\nUse image4 ONLY for Heixiang identity: adult dark-brown-skinned muscular broad-shouldered man, thick slicked-back black hair with exposed forehead, amber-gold eyes, stitched scar on his LEFT cheek (viewer-right in frontal views), bold confident smirk, black tactical suit/gloves/boots, silver-gray armor and muted brown-orange scarf. Preserve target's pose and main silhouettes. No coffee/saucer or reference4 standing pose. Held greatswords are simple massive SILVER-GRAY plain broad blades, no gold filigree or text.\nRough hand-painted anime color study: large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges, selective unfinished regions and sparse structural lines. Coarse grouped hair/cloth/armor planes, clear amber eyes and economical readable hands/face; matte muted colors. No fine strands, dense wrinkles, micro-ornament, facet mosaics, glossy render, particle shower or all-over grain. Abstract solid-color background blocks retain target's negative-space layout; effects become a few broad symbolic painted gestures, not a real environment. No text, watermark, card frame or UI.",
+      "references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-tt7-ironcharge.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\heixiang.webp"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt7-armup",
+      "name": "武装",
+      "asset": "cards/martial-tt7-armup.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-d60402cf-49f7-414a-82cf-d4b8019134ed.png",
+      "revision": "heixiang-tt7-armup-original-rough-20261005",
+      "prompt": "Repaint IMAGE1, game card 武装, keeping ORIGINAL COMPOSITION, camera, figure/props positions, proportions and action. Landscape 4:3. Image1 is pose/composition; images2/3 PAINT STYLE only, image4 CHARACTER only. Do not copy style-reference people/clothes.\nCentered frontal knee-up figure opens BOTH sides of a dark outer coat outward, revealing broad ORANGE INNER PANELS filled with equipment silhouettes, same hands gripping coat edges and torso/legs placement. Keep rows of weapons/tools as a handful of coarse dark shapes, not detailed miniatures. Keep floating pale-gold AXE at upper-left and HAMMER at right at same locations/scales, simplified icon-like painted masses. Preserve coats spread-wide silhouette and quiet dark background. Do not replace with sword pose.\nUse image4 ONLY for Heixiang identity: adult dark-brown-skinned muscular broad-shouldered man, thick slicked-back black hair with exposed forehead, amber-gold eyes, stitched scar on his LEFT cheek (viewer-right in frontal views), bold confident smirk, black tactical suit/gloves/boots, silver-gray armor and muted brown-orange scarf. Preserve target's pose and main silhouettes. No coffee/saucer or reference4 standing pose. Held greatswords are simple massive SILVER-GRAY plain broad blades, no gold filigree or text.\nRough hand-painted anime color study: large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges, selective unfinished regions and sparse structural lines. Coarse grouped hair/cloth/armor planes, clear amber eyes and economical readable hands/face; matte muted colors. No fine strands, dense wrinkles, micro-ornament, facet mosaics, glossy render, particle shower or all-over grain. Abstract solid-color background blocks retain target's negative-space layout; effects become a few broad symbolic painted gestures, not a real environment. No text, watermark, card frame or UI.",
+      "references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-tt7-armup.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\heixiang.webp"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt7-whirlwind",
+      "name": "旋风斩",
+      "asset": "cards/martial-tt7-whirlwind.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-8258609c-27a6-4363-9e89-0af54a1f96d7.png",
+      "revision": "heixiang-tt7-whirlwind-original-rough-20261005",
+      "prompt": "Repaint IMAGE1, game card 旋风斩, keeping ORIGINAL COMPOSITION, camera, figure/props positions, proportions and action. Landscape 4:3. Image1 is pose/composition; images2/3 PAINT STYLE only, image4 CHARACTER only. Do not copy style-reference people/clothes.\nHIGH OVERHEAD view: smaller Heixiang centered inside a broad PALE CYAN CIRCULAR slash ring; feet spread, both gloved hands grip greatsword near lower-middle. Blade points diagonally toward LOWER-LEFT with same extreme foreground size/length. Preserve ring ellipse size, full encircling motion, camera and figure/ring overlap. Ring edge fragments only a few wide broken strokes, no real whirlpool/floor or particle network. Sword plain silver-gray and simple guard.\nUse image4 ONLY for Heixiang identity: adult dark-brown-skinned muscular broad-shouldered man, thick slicked-back black hair with exposed forehead, amber-gold eyes, stitched scar on his LEFT cheek (viewer-right in frontal views), bold confident smirk, black tactical suit/gloves/boots, silver-gray armor and muted brown-orange scarf. Preserve target's pose and main silhouettes. No coffee/saucer or reference4 standing pose. Held greatswords are simple massive SILVER-GRAY plain broad blades, no gold filigree or text.\nRough hand-painted anime color study: large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges, selective unfinished regions and sparse structural lines. Coarse grouped hair/cloth/armor planes, clear amber eyes and economical readable hands/face; matte muted colors. No fine strands, dense wrinkles, micro-ornament, facet mosaics, glossy render, particle shower or all-over grain. Abstract solid-color background blocks retain target's negative-space layout; effects become a few broad symbolic painted gestures, not a real environment. No text, watermark, card frame or UI.",
+      "references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-tt7-whirlwind.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\heixiang.webp"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt7-bloodpoison",
+      "name": "血毒双镖",
+      "asset": "cards/martial-tt7-bloodpoison.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-aadb12e1-063b-474a-b913-c1a905e2eded.png",
+      "revision": "heixiang-tt7-bloodpoison-original-rough-20261005",
+      "prompt": "Repaint IMAGE1, game card 血毒双镖, keeping ORIGINAL COMPOSITION, camera, figure/props positions, proportions and action. Landscape 4:3. Image1 is pose/composition; images2/3 PAINT STYLE only, image4 CHARACTER only. Do not copy style-reference people/clothes.\nBACK/three-quarter view of Heixiang centered, head looks over shoulder toward viewer-left, arms spread to LEFT and RIGHT at same angles holding TWO SILVER throwing blades at outside edges. One broad RED curved trajectory sweeps around LEFT/bottom, one broad GREEN curved trajectory sweeps RIGHT/bottom; same oval loop and intersection under figure. Preserve two blade positions, gaze, shoulders, scarf and back silhouette. Blood/poison are opaque symbolic red/green swipes, no fine drips/string networks or literal setting.\nUse image4 ONLY for Heixiang identity: adult dark-brown-skinned muscular broad-shouldered man, thick slicked-back black hair with exposed forehead, amber-gold eyes, stitched scar on his LEFT cheek (viewer-right in frontal views), bold confident smirk, black tactical suit/gloves/boots, silver-gray armor and muted brown-orange scarf. Preserve target's pose and main silhouettes. No coffee/saucer or reference4 standing pose. Held greatswords are simple massive SILVER-GRAY plain broad blades, no gold filigree or text.\nRough hand-painted anime color study: large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges, selective unfinished regions and sparse structural lines. Coarse grouped hair/cloth/armor planes, clear amber eyes and economical readable hands/face; matte muted colors. No fine strands, dense wrinkles, micro-ornament, facet mosaics, glossy render, particle shower or all-over grain. Abstract solid-color background blocks retain target's negative-space layout; effects become a few broad symbolic painted gestures, not a real environment. No text, watermark, card frame or UI.",
+      "references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-tt7-bloodpoison.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\heixiang.webp"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt3-fatal-pierce",
+      "name": "致命穿刺",
+      "asset": "cards/martial-tt3-fatal-pierce.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-4fe0f845-3057-46a5-ad9b-293692937131.png",
+      "revision": "tt3-fatal-pierce-creative-rough-20261005",
+      "prompt": "Create ONE square 1:1 illustration for game card 致命穿刺. Fresh inventive staging authorised by user.\nNO character. Extreme oblique close-up of ONE narrow steel spear/dagger point piercing through a single fractured charcoal armor plate. A taut SCARLET ribbon-like line snaps at the point, symbolizing an already bleeding weak spot; just a few red chips, no actual body/gore. Point razor-clear in lower-right foreground, shaft recedes toward upper-left, broken armor forms a dark off-center ring around the puncture. Cold slate/ivory with one decisive red accent, pale gray and black diagonal background blocks. Tense precise lethal instant, not a centered weapon catalog.\n\nSTYLE references1/2 ONLY: rough hand-painted anime/gouache concept study. Large connected opaque masses, few wide directional swipes and blunt dabs, sparse useful structural lines, handmade edges, selective unfinished areas and quiet color interiors. Readable key object/gesture, coarse secondary forms. Matte muted colors with concentrated accents; no glossy 3D, airbrush, fine ornament, all-over grain, facet mosaics or dense particle networks. ONLY alternating pure-color abstract fields behind the imagery, no landscape/interior/battlefield. Props/effects convey the card name symbolically. No text, numbers, card frame, watermark or UI. New imaginative composition, not a reproduction of old card.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt2-swiftarrow",
+      "name": "迅疾箭",
+      "asset": "cards/martial-tt2-swiftarrow.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-780f6a75-d7bc-4eec-9476-5c11c60632c2.png",
+      "revision": "tt2-swiftarrow-creative-rough-20261005",
+      "prompt": "Create ONE square 1:1 illustration for game card 迅疾箭. Fresh inventive staging authorised by user.\nNO character. Dramatic foreshortened arrow rushes TOWARD viewer across upper-right foreground; broad silver arrowhead partly breaks image edge, straight dark shaft recedes diagonally toward far lower-left. Three short staggered pale blue directional swipes imply one arrow's speed and afterimage, not three unrelated shots. Opposing diagonal blue-gray/ivory/navy fields, huge clean speed pocket. Arrow fletching is 2 coarse planes. No literal sky or glow render.\n\nSTYLE references1/2 ONLY: rough hand-painted anime/gouache concept study. Large connected opaque masses, few wide directional swipes and blunt dabs, sparse useful structural lines, handmade edges, selective unfinished areas and quiet color interiors. Readable key object/gesture, coarse secondary forms. Matte muted colors with concentrated accents; no glossy 3D, airbrush, fine ornament, all-over grain, facet mosaics or dense particle networks. ONLY alternating pure-color abstract fields behind the imagery, no landscape/interior/battlefield. Props/effects convey the card name symbolically. No text, numbers, card frame, watermark or UI. New imaginative composition, not a reproduction of old card.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt2-forestarrow",
+      "name": "绿化箭",
+      "asset": "cards/martial-tt2-forestarrow.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-0443a451-d98e-46f1-a7a8-46e0bce2a8d4.png",
+      "revision": "tt2-forestarrow-creative-rough-20261005",
+      "prompt": "Create ONE square 1:1 illustration for game card 绿化箭. Fresh inventive staging authorised by user.\nNO character. ONE dark arrow hits an abstract defense plane and its shaft unfurls into a FAN of five broad fresh-green leaf shapes, leaf edges forming a protective overlapping shield silhouette. View slightly from above, arrow diagonal from upper-left to lower-right, impact and opening leaf fan near lower-middle. Botanical gesture clearly born from the arrow, not a real garden. Muted moss/cream/charcoal fields with concentrated green, broad blunt painted leaves, no veins or vine filigree.\n\nSTYLE references1/2 ONLY: rough hand-painted anime/gouache concept study. Large connected opaque masses, few wide directional swipes and blunt dabs, sparse useful structural lines, handmade edges, selective unfinished areas and quiet color interiors. Readable key object/gesture, coarse secondary forms. Matte muted colors with concentrated accents; no glossy 3D, airbrush, fine ornament, all-over grain, facet mosaics or dense particle networks. ONLY alternating pure-color abstract fields behind the imagery, no landscape/interior/battlefield. Props/effects convey the card name symbolically. No text, numbers, card frame, watermark or UI. New imaginative composition, not a reproduction of old card.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt3-life-arrow",
+      "name": "生命箭",
+      "asset": "cards/martial-tt3-life-arrow.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-34bf946c-d152-4953-8425-8f7b42b192cc.png",
+      "revision": "tt3-life-arrow-creative-rough-20261005",
+      "prompt": "Create ONE square 1:1 illustration for game card 生命箭. Fresh inventive staging authorised by user.\nNO character. A single ivory arrow curves only through its flowing trailing ribbon, physical shaft straight, rises diagonally from lower-left toward upper-right. At arrow's middle a small warm seed/pearl cracks open into three broad pale-green petals; two simple dark card-shaped leaves peel outward as life unfolding into new possibilities. Dominant dark teal negative space, cream and pale sage offset blocks, a small warm-gold center. Coarse symbolic growth, not realistic flowers, elaborate vines or scenery.\n\nSTYLE references1/2 ONLY: rough hand-painted anime/gouache concept study. Large connected opaque masses, few wide directional swipes and blunt dabs, sparse useful structural lines, handmade edges, selective unfinished areas and quiet color interiors. Readable key object/gesture, coarse secondary forms. Matte muted colors with concentrated accents; no glossy 3D, airbrush, fine ornament, all-over grain, facet mosaics or dense particle networks. ONLY alternating pure-color abstract fields behind the imagery, no landscape/interior/battlefield. Props/effects convey the card name symbolically. No text, numbers, card frame, watermark or UI. New imaginative composition, not a reproduction of old card.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt2-block",
+      "name": "格挡",
+      "asset": "cards/martial-tt2-block.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-869f12ba-26ea-44dd-9a29-b2681e6b0c71.png",
+      "revision": "tt2-block-creative-rough-20261005",
+      "prompt": "Create ONE square 1:1 illustration for game card 格挡. Fresh inventive staging authorised by user.\nClose-up of an anonymous BLACK-GLOVED defender's thick forearm/steel wrist guard thrust across frame, stopping a descending silver blade at the front edge. Camera extremely close to the collision from below: guard horizontal in lower-middle, attacking blade slanting down from upper-right, three coarse ochre impact marks point AWAY from the stopped edge. No full character or face. Heavy black/silver grouped masses, pale warm-gray/deep slate blocks. Clearly a timed BLOCK gesture, not equipment displayed on a wall.\n\nSTYLE references1/2 ONLY: rough hand-painted anime/gouache concept study. Large connected opaque masses, few wide directional swipes and blunt dabs, sparse useful structural lines, handmade edges, selective unfinished areas and quiet color interiors. Readable key object/gesture, coarse secondary forms. Matte muted colors with concentrated accents; no glossy 3D, airbrush, fine ornament, all-over grain, facet mosaics or dense particle networks. ONLY alternating pure-color abstract fields behind the imagery, no landscape/interior/battlefield. Props/effects convey the card name symbolically. No text, numbers, card frame, watermark or UI. New imaginative composition, not a reproduction of old card.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt3-skewer",
+      "name": "穿刺",
+      "asset": "cards/expedition-starters/pierce.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-05cc1232-8335-4e0b-8542-b8dcf1c283e5.png",
+      "revision": "tt3-skewer-creative-rough-20261005",
+      "prompt": "Create ONE square 1:1 illustration for game card 穿刺. Fresh inventive staging authorised by user.\nNO character. Look nearly straight down the thrust axis: a single sharp silver spear/sword point emerges toward viewer through THREE staggered broken armor apertures. Closest punctured plate is large and partly cropped lower-left, rear two plates smaller and offset upper-right. A thin ivory trajectory connects the holes, puncture alignment and scale create striking depth without environment. Broad charcoal plates and simple silver edges over muted sand/slate solid fields, one small ochre contact stroke. No tiny fragments or realistic metal scratches.\n\nSTYLE references1/2 ONLY: rough hand-painted anime/gouache concept study. Large connected opaque masses, few wide directional swipes and blunt dabs, sparse useful structural lines, handmade edges, selective unfinished areas and quiet color interiors. Readable key object/gesture, coarse secondary forms. Matte muted colors with concentrated accents; no glossy 3D, airbrush, fine ornament, all-over grain, facet mosaics or dense particle networks. ONLY alternating pure-color abstract fields behind the imagery, no landscape/interior/battlefield. Props/effects convey the card name symbolically. No text, numbers, card frame, watermark or UI. New imaginative composition, not a reproduction of old card.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt2-turtlearmor",
+      "name": "铸甲",
+      "asset": "cards/martial-tt2-turtlearmor.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-1bfd3889-5dcd-479d-82d8-51202e73cbe4.png",
+      "revision": "tt2-turtlearmor-creative-rough-20261005",
+      "prompt": "Create ONE square 1:1 illustration for game card 铸甲. Fresh inventive staging authorised by user.\nOnly thick black-gloved smith hands in a tightly cropped action shot. One hand brings a simple heavy hammer DOWN, other steadies a new broad curved STEEL BREASTPLATE taking shape. Two old broken equipment pieces merge into the plate along a broad orange-hot seam, visually telling conversion of equipment into armor. Hammer in upper-left, plate dominates lower-right, anvil represented by one squat charcoal block with no forge room. Warm ochre/black/cool silver large planes and just 3 broad spark marks. No detailed tools, buckles or inscription.\n\nSTYLE references1/2 ONLY: rough hand-painted anime/gouache concept study. Large connected opaque masses, few wide directional swipes and blunt dabs, sparse useful structural lines, handmade edges, selective unfinished areas and quiet color interiors. Readable key object/gesture, coarse secondary forms. Matte muted colors with concentrated accents; no glossy 3D, airbrush, fine ornament, all-over grain, facet mosaics or dense particle networks. ONLY alternating pure-color abstract fields behind the imagery, no landscape/interior/battlefield. Props/effects convey the card name symbolically. No text, numbers, card frame, watermark or UI. New imaginative composition, not a reproduction of old card.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt3sp-shadowbug",
+      "name": "影噬",
+      "asset": "cards/martial-tt3sp-shadowbug.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-7f9247be-ce4b-45f4-9906-f723876957bf.png",
+      "revision": "tt3sp-shadowbug-creative-rough-20261005",
+      "prompt": "Create ONE square 1:1 illustration for game card 影噬. Fresh inventive staging authorised by user.\nNO named character. A large INK-BLACK curved jaw/hand silhouette coils from right around a simple upright sword-shaped emblem on left and consumes its crimson strength stroke. The sword's lower half fades into a quiet gray stump while a single muted purple current flows into the swallowing shadow. Tiny ivory eye slit, 2–3 grouped fang wedges, not an emoji face or detailed monster. Off-center composition with huge pale-gray crescent negative space enclosed by black/purple shapes, violet/charcoal/ivory palette. Shadow draining force reads immediately, no literal environment.\n\nSTYLE references1/2 ONLY: rough hand-painted anime/gouache concept study. Large connected opaque masses, few wide directional swipes and blunt dabs, sparse useful structural lines, handmade edges, selective unfinished areas and quiet color interiors. Readable key object/gesture, coarse secondary forms. Matte muted colors with concentrated accents; no glossy 3D, airbrush, fine ornament, all-over grain, facet mosaics or dense particle networks. ONLY alternating pure-color abstract fields behind the imagery, no landscape/interior/battlefield. Props/effects convey the card name symbolically. No text, numbers, card frame, watermark or UI. New imaginative composition, not a reproduction of old card.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt3-double-shot",
+      "name": "连射",
+      "asset": "cards/martial-tt3-double-shot.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-000d21ab-f339-4324-847b-e6e161bcf55d.png",
+      "revision": "tt3-double-shot-creative-rough-20261005",
+      "prompt": "Create ONE landscape 4:3 illustration for game card 连射. Fresh inventive staging authorised by user.\nNO character. Very close three-quarter perspective of a compact dark metal CROSSBOW/repeating launcher at lower-left, release mechanism simplified. Exactly THREE silver arrows launch in a stepped diagonal rank toward upper-right, nearest arrowhead huge and partly cropped right, later shots recede in scale behind. Three coarse cyan-white trajectory marks make successive releases readable, not a uniform laser bundle. Graphite/steel/ivory with sparse cyan against alternating pale blue/deep navy flat fields. Kinetic repeated firing, matte brush planes, no intricate engineering parts.\n\nSTYLE references1/2 ONLY: rough hand-painted anime/gouache concept study. Large connected opaque masses, few wide directional swipes and blunt dabs, sparse useful structural lines, handmade edges, selective unfinished areas and quiet color interiors. Readable key object/gesture, coarse secondary forms. Matte muted colors with concentrated accents; no glossy 3D, airbrush, fine ornament, all-over grain, facet mosaics or dense particle networks. ONLY alternating pure-color abstract fields behind the imagery, no landscape/interior/battlefield. Props/effects convey the card name symbolically. No text, numbers, card frame, watermark or UI. New imaginative composition, not a reproduction of old card.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt3-fly-arrowhawk",
+      "name": "飞身劈",
+      "asset": "cards/martial-tt3-fly-arrowhawk.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-30651e40-6abe-42c8-92a8-2325228273b1.png",
+      "revision": "tt3-fly-arrowhawk-creative-rough-20261005",
+      "prompt": "Create ONE square 1:1 illustration for game card 飞身劈. Fresh inventive staging authorised by user.\nWu leaps into a decisive aerial DOWNWARD sword cut, viewed from dramatic high three-quarter angle. Her face near upper-right, shoulders and both BARE hands grip a BLACK-GRAY physical long sword, blade cuts diagonally to oversized lower-left foreground. One knee tucked, other leg extended along counter-diagonal; straight high ponytail sweeps upward-left. One broad ivory slash-shaped wedge breaks apart two dark symbolic blocks below, conveying flying force, not an eagle or landscape. Charcoal/pale gray blocks and cobalt identity accents. Clear face and eyes, coarse motion, no particles.\nCharacter reference3 ONLY: keep Wu an adult anime woman with exact cyan-turquoise eye character/face and confident fang smile from reference3; black round goggles on forehead, black rose and blue ribbon at HIGH straight silver-white ponytail root; straight ponytail, blunt bangs, both eyes clear; short BLACK-GRAY OFF-SHOULDER LONG-SLEEVED dress with equally ABOVE-KNEE front/back/side hem and ONE blue-star band ONLY at hem; bare hands/thighs, black ankle boots, simple BLACK-GRAY held long sword. Reference3 supplies the approved FACE and clothing, not its standing pose. Keep clear open turquoise eyes, distinct dark pupils and strong upper eyelids. No armor or alternate outfit.\nSTYLE references1/2 ONLY: rough hand-painted anime/gouache concept study. Large connected opaque masses, few wide directional swipes and blunt dabs, sparse useful structural lines, handmade edges, selective unfinished areas and quiet color interiors. Readable key object/gesture, coarse secondary forms. Matte muted colors with concentrated accents; no glossy 3D, airbrush, fine ornament, all-over grain, facet mosaics or dense particle networks. ONLY alternating pure-color abstract fields behind the imagery, no landscape/interior/battlefield. Props/effects convey the card name symbolically. No text, numbers, card frame, watermark or UI. New imaginative composition, not a reproduction of old card.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\reference.png"
+      ],
+      "edits": [
+        {
+          "prompt": "EDIT IMAGE1 飞身劈 ONLY for Wu's costume/weapon identity. Preserve the current face/blue eyes/fang, goggles/rose/ribbon, straight high ponytail, airborne bent-leg motion, short equal-length blue-star-hem dress, abstract blue-gray backdrop and ivory slash path. Give BOTH arms BLACK-GRAY LONG loose sleeves from below the bare off-shoulder openings to WRISTS. BOTH hands are BARE natural pale skin, absolutely no gloves. She wields ONLY ONE physical BLACK-GRAY long sword: retain the lower foreground sword, remove the separate sword/hilt at upper-left entirely. The upper-left arm becomes a natural EMPTY bare-hand counterbalancing gesture, same broad motion direction, no held object; the lower hand firmly grips the retained sword. No second physical blade anywhere. White slash is magical imagery, distinct from the single dark blade. Preserve coarse broad handmade paint and image dimensions, no other changes, text or watermark. IMAGE2 is outfit/identity only.",
+          "target": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-8a80e2a5-ea5a-468b-870e-ab570df5a0da.png"
+        },
+        {
+          "prompt": "EDIT IMAGE1 to correct a specific extra-limb error. Wu currently has THREE arms: (A) an open bare hand stretched toward LEFT with a black long ruffled sleeve ABOVE, (B) an unwanted second horizontal pale forearm BELOW it ending in a BLACK-GLOVED FIST gripping a separate hilt at approximately x20%, y42%, and (C) the lower bare hand holding the main sword. REMOVE (B) ENTIRELY: erase that lower-left horizontal pale forearm, black-gloved fist, its separate guard/hilt and secondary blade. Reconstruct the area as the nearby ivory slash/blue-gray abstract background and appropriate torso cloth, not another arm. KEEP (A) connected naturally to ONE shoulder through its long black sleeve, KEEP (C) connected to the OTHER shoulder through its long black sleeve. The final picture must contain EXACTLY TWO ARMS and TWO BARE HANDS: one EMPTY open counterbalance hand on left, one hand gripping ONLY the large main black-gray sword aimed lower-left. No gloves, extra hand, second elbow, detached limb or second physical weapon anywhere. Preserve existing attractive blue-eyed face, goggles/rose/blue bow, high straight ponytail, off-shoulder short blue-star hem dress, airborne legs, bright ivory slash and broad rough paint. No other redesign or text.",
+          "target": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-2f3fb98c-a5d4-4d78-a16a-cc9bbf3fe417.png"
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-frostfall",
+      "name": "剑荡妖邪",
+      "asset": "cards/martial-tt3-frostfall.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-faf0bbef-757e-4969-801a-ca27b4d2062a.png",
+      "revision": "tt3-frostfall-creative-rough-20261005",
+      "prompt": "Create ONE square 1:1 illustration for game card 剑荡妖邪. Fresh inventive staging authorised by user.\nWu in close knee-up low-angle three-quarter view sweeps her simple BLACK-GRAY sword horizontally across foreground with a confident fang smile. Sword motion becomes ONE decisive broad ivory crescent cutting three asymmetric dark MASK/evil-shadow wedges into coarse halves at the far edge. Gesture follows torso twist, ponytail and short skirt counter-sweep. Face near upper-left and both blue eyes readable, sword near lower-right, not a uniform radial sword mandala. Deep navy/gray fields with subdued warm ivory slash and sparse cobalt, symbolic purge only, no real enemies/setting or giant decorative spell circle.\nCharacter reference3 ONLY: keep Wu an adult anime woman with exact cyan-turquoise eye character/face and confident fang smile from reference3; black round goggles on forehead, black rose and blue ribbon at HIGH straight silver-white ponytail root; straight ponytail, blunt bangs, both eyes clear; short BLACK-GRAY OFF-SHOULDER LONG-SLEEVED dress with equally ABOVE-KNEE front/back/side hem and ONE blue-star band ONLY at hem; bare hands/thighs, black ankle boots, simple BLACK-GRAY held long sword. Reference3 supplies the approved FACE and clothing, not its standing pose. Keep clear open turquoise eyes, distinct dark pupils and strong upper eyelids. No armor or alternate outfit.\nSTYLE references1/2 ONLY: rough hand-painted anime/gouache concept study. Large connected opaque masses, few wide directional swipes and blunt dabs, sparse useful structural lines, handmade edges, selective unfinished areas and quiet color interiors. Readable key object/gesture, coarse secondary forms. Matte muted colors with concentrated accents; no glossy 3D, airbrush, fine ornament, all-over grain, facet mosaics or dense particle networks. ONLY alternating pure-color abstract fields behind the imagery, no landscape/interior/battlefield. Props/effects convey the card name symbolically. No text, numbers, card frame, watermark or UI. New imaginative composition, not a reproduction of old card.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\reference.png"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt3-treasure-hunt",
+      "name": "寻宝",
+      "asset": "cards/spell-tt3-treasure-hunt.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-ec72b6a7-1935-4dd2-aa12-c7ccaa3764ea.png",
+      "revision": "tt3-treasure-hunt-creative-rough-20261005",
+      "prompt": "Create ONE square 1:1 illustration for game card 寻宝. Fresh inventive staging authorised by user.\nNO character except one partially cropped anonymous hand lifting a LARGE old dark magnifying lens into upper-left foreground. Under the lens, a small ordinary dark map scrap's folded corner reveals a warm GOLD KEY/treasure seal; inside magnified circular area it becomes dramatically larger and clear, telling discovery through inspection. A broken ochre route line leads from lower-right into lens, no written map labels, no generic fiery X. Cream/sand/ink-brown broad solid planes, one clear gold focal symbol, large quiet space. Props float as abstract imagery, no table or room.\n\nSTYLE references1/2 ONLY: rough hand-painted anime/gouache concept study. Large connected opaque masses, few wide directional swipes and blunt dabs, sparse useful structural lines, handmade edges, selective unfinished areas and quiet color interiors. Readable key object/gesture, coarse secondary forms. Matte muted colors with concentrated accents; no glossy 3D, airbrush, fine ornament, all-over grain, facet mosaics or dense particle networks. ONLY alternating pure-color abstract fields behind the imagery, no landscape/interior/battlefield. Props/effects convey the card name symbolically. No text, numbers, card frame, watermark or UI. New imaginative composition, not a reproduction of old card.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png"
+      ],
+      "edits": [
+        {
+          "prompt": "EDIT the supplied 寻宝 artwork: remove ONLY the tiny gray signature/watermark-like marking in the extreme BOTTOM-RIGHT corner. Restore the surrounding warm ivory/brown rough painted color there. Preserve the magnifying glass, gloved hand, folded map, magnified golden key/treasure seal, route marks, composition and all existing broad brushwork EXACTLY. No new text, signature, logo, watermark or other changes.",
+          "target": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-eddabb77-b746-4e76-84d4-f31f1a3f1eb9.png"
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-grope",
+      "name": "摸索",
+      "asset": "cards/spell-tt3-grope.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-f5a9b4c7-59d5-40d5-bc4c-c868a69fb30c.png",
+      "revision": "tt3-grope-creative-rough-20261005",
+      "prompt": "Create ONE square 1:1 illustration for game card 摸索. Fresh inventive staging authorised by user.\nTwo anonymous hands search through deep dark abstract shapes from opposing lower corners; nearer fingers almost touch one pale edge of a hidden CARD, while two other simple cards are only partially revealed behind broad charcoal folds. A tiny plain lantern near upper-right casts ONE wedge of muted ivory painted color over the searching fingertips; light shape creates a tactile discovery moment, no real corridor/room or treasure field. Charcoal/gray/cream quiet planes with one restrained warm-gold edge, no card illustrations/text, no fine finger texture.\n\nSTYLE references1/2 ONLY: rough hand-painted anime/gouache concept study. Large connected opaque masses, few wide directional swipes and blunt dabs, sparse useful structural lines, handmade edges, selective unfinished areas and quiet color interiors. Readable key object/gesture, coarse secondary forms. Matte muted colors with concentrated accents; no glossy 3D, airbrush, fine ornament, all-over grain, facet mosaics or dense particle networks. ONLY alternating pure-color abstract fields behind the imagery, no landscape/interior/battlefield. Props/effects convey the card name symbolically. No text, numbers, card frame, watermark or UI. New imaginative composition, not a reproduction of old card.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png"
+      ],
+      "edits": []
+    },
+    {
+      "card_id": "tt3-ice-spike",
+      "name": "冰刺",
+      "asset": "cards/spell-tt3-ice-spike.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1079e-49bd-7d13-9261-f9d43860911d\\exec-62058b1c-6c25-44b8-b03f-d266aa32bc2c.png",
+      "revision": "tt3-ice-spike-creative-rough-20261005",
+      "prompt": "Create ONE square 1:1 illustration for game card 冰刺. Fresh inventive staging authorised by user.\nNO character. A single LONG angular ice lance bursts straight toward viewer from upper-left to huge lower-right foreground, with two shorter off-axis spikes behind forming an aggressive uneven trident rhythm. At the base, one broad dark broken oval plane is locked inside a coarse pale-cyan frozen wedge, expressing freezing on impact. Ice consists of opaque ivory/cool-blue planes and a few sharp drawn edges, NOT glassy realistic crystal or tiny facet mosaic. Alternating charcoal-blue, pale gray and muted cyan solid fields; dynamic diagonal spearhead, not three static vertical icicles.\n\nSTYLE references1/2 ONLY: rough hand-painted anime/gouache concept study. Large connected opaque masses, few wide directional swipes and blunt dabs, sparse useful structural lines, handmade edges, selective unfinished areas and quiet color interiors. Readable key object/gesture, coarse secondary forms. Matte muted colors with concentrated accents; no glossy 3D, airbrush, fine ornament, all-over grain, facet mosaics or dense particle networks. ONLY alternating pure-color abstract fields behind the imagery, no landscape/interior/battlefield. Props/effects convey the card name symbolically. No text, numbers, card frame, watermark or UI. New imaginative composition, not a reproduction of old card.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png"
+      ],
+      "edits": []
+    }
+  ]
+}

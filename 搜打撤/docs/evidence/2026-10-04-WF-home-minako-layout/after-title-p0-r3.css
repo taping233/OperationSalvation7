@@ -1,0 +1,387 @@
+/* Title lobby redesign（10-04 老板令，对标米娜可主菜单排版；WF-home-minako-layout r3 对标返修）：
+   漫画拼贴风五件套——①人物身后 CSS 放射星芒 ②六枚按钮全部粗黑描边（drop-shadow 链）+硬投影
+   ③上下滚动条斜切（±1.4deg）④配色提饱和（金/青/品红/正红）⑤左上代号贴纸（.title-quote 复用）。
+   原标题卡移除；壁纸上移景下移（center 22%）；白字无阴影；纵向重心居中治头重脚轻；
+   底缘：静音/留言信箱 + 撤离次数（左）、制作者（右）。
+   壁纸仍走 .title-bg（wallpaper-wu-1004.webp），本文件为 #title 权威增量层（ui-scale.css @import 链入）。 */
+#title {
+  --home-edge: 5.2%; --home-gold: #d9bb82;
+  --plate-shadow: rgba(6, 10, 14, .8); --plate-ink: #10181e;
+  /* 描边链：4 向 2px 墨线勾出 clip-path 剪影轮廓（漫画分格线） */
+  --ink-outline: drop-shadow(2px 0 0 var(--plate-ink)) drop-shadow(-2px 0 0 var(--plate-ink))
+    drop-shadow(0 2px 0 var(--plate-ink)) drop-shadow(0 -2px 0 var(--plate-ink));
+}
+
+#title .title-bg {
+  background-image: url('../assets/reconstruction/wallpaper-wu-1004.webp');
+  background-size: cover; background-position: center 22%;
+  transform: none; filter: saturate(.94) contrast(1.04);
+}
+#title .title-bg::before, #title .title-bg::after,
+#title::before,
+#title .ak-hud::before, #title .ak-hud::after,
+#title .title-foreground-paper, #title .title-veins,
+#title .title-heading { display: none; }   /* 原标题卡移除（10-04 老板令），题名由滚动条/贴纸承载 */
+
+/* ① 放射星芒：立绘身后的青色光芒（repeating-conic-gradient，径向淡出；非图资产，纯 CSS 装饰） */
+#title .title-inner::before {
+  content: ''; position: absolute; inset: -22% -14%;
+  background: repeating-conic-gradient(from 2deg at 50% 34%,
+    rgba(96, 205, 192, .13) 0deg 4.5deg, transparent 4.5deg 13deg);
+  -webkit-mask-image: radial-gradient(circle at 50% 34%, #000 0%, #000000d9 34%, transparent 60%);
+  mask-image: radial-gradient(circle at 50% 34%, #000 0%, #000000d9 34%, transparent 60%);
+  pointer-events: none;
+}
+
+/* 遮罩：左右列落位区+底缘轻压暗，中央让给立绘主体（覆盖 winter.css 原渐变） */
+#title::after {
+  background:
+    linear-gradient(90deg, #0a151fd9 0%, #0a151f73 20%, transparent 36%),
+    linear-gradient(90deg, transparent 62%, #0a151f59 80%, #0a151f9e 100%),
+    linear-gradient(0deg, #0a161ea8 0%, transparent 24%);
+}
+
+/* ③ 上下黑色斜切滚动条（±1.4deg，出血 3% 防露角） */
+#title .title-ticker {
+  position: absolute; left: -3%; right: -3%; height: 42px; z-index: 7;
+  display: flex; align-items: center; overflow: hidden;
+  background: #0c1014;
+}
+#title .title-ticker-top { top: 0; border-bottom: 2px solid var(--home-gold); transform: rotate(-1.4deg); }
+#title .title-ticker-bottom { bottom: 0; border-top: 2px solid var(--home-gold); transform: rotate(1.4deg); }
+#title .title-ticker span {
+  flex: none; min-width: 100%; white-space: nowrap;
+  color: #f2f5f4; font: italic 800 15px/1 var(--font-ui);
+  letter-spacing: .18em;
+  animation: titleTickerMove 46s linear infinite;
+}
+#title .title-ticker-bottom span { animation-direction: reverse; }
+@keyframes titleTickerMove { to { transform: translateX(-100%); } }
+
+/* ⑤ 代号贴纸：左上角歪斜小签（复用 .title-quote，黑底金边白字 rotate -4deg） */
+#title .title-quote {
+  position: absolute; top: 64px; left: var(--home-edge); z-index: 5;
+  display: inline-block; margin: 0; padding: 8px 16px 9px;
+  background: #0c1014; border: 2px solid var(--plate-ink);
+  border-left: 3px solid var(--home-gold);
+  transform: rotate(-3.5deg);
+  color: #f2f5f4; font-size: 13px; letter-spacing: .2em;
+  box-shadow: 4px 4px 0 var(--plate-shadow);
+}
+#title .title-quote small {
+  display: block; margin-top: 3px;
+  color: #9fc4bd; font: 700 9px 'Cascadia Code', Consolas, monospace; letter-spacing: .3em;
+}
+
+/* —— HUD 布局：ak-tl / ak-pillrow 释放子元素，自由落位 —— */
+#title .ak-tl, #title .ak-pillrow { display: contents; }
+
+/* —— 左轴 01：进入远征档案（全页唯一大键；正金底白字，墨描边+硬投影） —— */
+#title .ak-start {
+  left: var(--home-edge); right: auto; top: 288px; bottom: auto;
+  width: clamp(340px, 30vw, 460px); min-height: 124px;
+  display: grid; align-content: center; gap: 7px;
+  padding: 14px 64px 14px 24px; overflow: visible;
+  background: linear-gradient(180deg, #f2b62f, #eaa61f 55%, #df9916);
+  color: #fff;
+  clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 50%, calc(100% - 30px) 100%, 0 100%);
+  filter: var(--ink-outline) drop-shadow(7px 7px 0 var(--plate-shadow));
+  border: 0; border-radius: 0; box-shadow: none; cursor: pointer;
+  transition: transform .14s ease, filter .14s ease, background .14s ease;
+  animation: akBtnInUp .6s cubic-bezier(.22, 1, .36, 1) both; animation-delay: .06s;
+}
+#title .ak-start .st-row { display: flex; align-items: center; gap: 18px; }
+#title .ak-start .st-row::before {
+  content: '01'; flex: none;
+  color: #fff; font: 800 46px/1 Consolas, monospace; letter-spacing: 0;
+  padding-right: 18px; border-right: 3px solid #ffffff45;
+}
+/* 远征剑水印（编号为主视觉，剑作底纹） */
+#title .ak-start::after {
+  content: ''; position: absolute; right: 52px; top: 50%; translate: 0 -50%;
+  width: 76px; height: 72px; pointer-events: none;
+  background: url('../assets/ui/home-icons-v12/explore-sword.webp') center / contain no-repeat;
+  opacity: .2; filter: brightness(2.8);
+}
+#title .ak-start .st-cn {
+  color: #fff; font-family: var(--font-ui) !important;
+  font-size: 34px; line-height: 1.2; font-weight: 800; letter-spacing: .1em;
+  text-shadow: none;
+}
+#title .ak-start .st-en {
+  color: #ffffffd9; font-family: var(--font-ui) !important;
+  font-size: 11px; font-style: normal; font-weight: 700; letter-spacing: .24em;
+  text-shadow: none; padding-left: 2px;
+}
+#title .ak-start:hover, #title .ak-start:focus-visible {
+  transform: translate(-3px, -3px);
+  filter: var(--ink-outline) drop-shadow(11px 11px 0 var(--plate-shadow));
+  background: linear-gradient(180deg, #f9c23c, #f0b02a 55%, #e5a31f);
+}
+#title .ak-start:active {
+  transform: translate(4px, 4px);
+  filter: var(--ink-outline) drop-shadow(2px 2px 0 var(--plate-shadow));
+}
+#title .ak-start .st-light-sweep {
+  position: absolute; top: 12px; left: 10%; width: 36%; height: 2px;
+  background: linear-gradient(90deg, transparent, #fff6dd 48%, #ffffff 58%, transparent);
+  opacity: 0; transform: translateX(-130%); pointer-events: none; z-index: 2;
+  animation: titleStartIdleSweep 6.5s var(--ease-float, ease-in-out) infinite;
+}
+#title .ak-start:hover .st-light-sweep,
+#title .ak-start:focus-visible .st-light-sweep { animation: titleStartSweep .82s cubic-bezier(.2, .65, .35, 1) both; }
+@keyframes titleStartSweep {
+  0% { opacity: 0; transform: translateX(-130%); }
+  24% { opacity: .85; }
+  100% { opacity: 0; transform: translateX(230%); }
+}
+@keyframes titleStartIdleSweep {
+  0%, 76% { opacity: 0; transform: translateX(-130%); }
+  84% { opacity: .7; }
+  100% { opacity: 0; transform: translateX(230%); }
+}
+
+/* —— 左轴 02：远征手册（次级中键，正青底白字） —— */
+#title .ak-hud .ak-quickref {
+  position: absolute; z-index: 5;
+  left: var(--home-edge); right: auto; top: 428px;
+  width: clamp(300px, 26vw, 404px); height: 96px;
+  display: grid; grid-template-columns: auto 1fr; align-content: center;
+  column-gap: 18px; padding: 0 56px 0 22px; text-align: left;
+  clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 50%, calc(100% - 26px) 100%, 0 100%);
+  filter: var(--ink-outline) drop-shadow(7px 7px 0 var(--plate-shadow));
+  background: linear-gradient(180deg, #22c4aa, #1bb098 55%, #169d88);
+  color: #fff; border: 0; border-radius: 0; box-shadow: none; cursor: pointer;
+  transition: transform .14s ease, filter .14s ease, background .14s ease;
+  animation: akBtnInUp .6s cubic-bezier(.22, 1, .36, 1) both; animation-delay: .16s;
+}
+#title .ak-hud .ak-quickref::before {
+  display: block; content: '02';
+  color: #fff; font: 800 36px/1 Consolas, monospace;
+  padding-right: 18px; border-right: 3px solid #ffffff42;
+}
+#title .ak-hud .ak-quickref svg { display: none; }
+#title .ak-hud .ak-quickref span {
+  display: block; width: 100%;
+  color: #fff; font-family: var(--font-ui) !important;
+  font-size: 26px; line-height: 1.25; font-weight: 800; letter-spacing: .12em;
+  text-shadow: none;
+}
+#title .ak-hud .ak-quickref span::after {
+  content: 'FIELD MANUAL';
+  display: block; margin-top: 3px;
+  font-size: 10px; font-weight: 700; letter-spacing: .24em; opacity: .85;
+}
+#title .ak-hud .ak-quickref:hover, #title .ak-hud .ak-quickref:focus-visible {
+  transform: translate(-3px, -3px);
+  filter: var(--ink-outline) drop-shadow(11px 11px 0 var(--plate-shadow));
+  background: linear-gradient(180deg, #2bd2b7, #20bda2 55%, #1ba98f);
+}
+#title .ak-hud .ak-quickref:active {
+  transform: translate(4px, 4px);
+  filter: var(--ink-outline) drop-shadow(2px 2px 0 var(--plate-shadow));
+}
+
+/* —— 右列公共层：平行四边形小键（品红/青/正金/正红；白字，墨描边+硬投影） —— */
+#title .ak-hud .ak-ach, #title .ak-hud .ak-lib,
+#title .ak-hud .ak-set, #title .ak-exit {
+  position: absolute; z-index: 5;
+  left: auto; right: var(--home-edge);
+  width: clamp(252px, 22vw, 324px); height: 76px;
+  display: grid; grid-template-columns: 44px 1fr auto; align-content: center;
+  column-gap: 14px; padding: 0 18px 0 38px; text-align: left;
+  clip-path: polygon(24px 0, 100% 0, calc(100% - 24px) 100%, 0 100%);
+  filter: var(--ink-outline) drop-shadow(7px 7px 0 var(--plate-shadow));
+  border: 0; border-radius: 0; box-shadow: none; cursor: pointer;
+  transition: transform .14s ease, filter .14s ease, background .14s ease;
+  animation: akBtnInUp .55s cubic-bezier(.22, 1, .36, 1) both;
+}
+#title .ak-hud .ak-ach:hover, #title .ak-hud .ak-lib:hover, #title .ak-hud .ak-set:hover,
+#title .ak-exit:hover,
+#title .ak-hud .ak-ach:focus-visible, #title .ak-hud .ak-lib:focus-visible,
+#title .ak-hud .ak-set:focus-visible, #title .ak-exit:focus-visible {
+  transform: translate(3px, -3px);
+  filter: var(--ink-outline) drop-shadow(11px 11px 0 var(--plate-shadow));
+}
+#title .ak-hud .ak-ach:active, #title .ak-hud .ak-lib:active,
+#title .ak-hud .ak-set:active, #title .ak-exit:active {
+  transform: translate(-4px, 4px);
+  filter: var(--ink-outline) drop-shadow(2px 2px 0 var(--plate-shadow));
+}
+/* 右列图块（c-ring 圆环改方图块；退出键 svg 同位） */
+#title .ak-hud .ak-circle { display: grid; align-content: center; align-items: center; }
+#title .ak-hud .ak-circle .c-ring {
+  grid-column: 1; grid-row: 1 / 3; width: 44px; height: 44px;
+  transform: none; background: #ffffff2e; border: 0; border-radius: 8px;
+  box-shadow: none; display: grid; place-items: center; color: #fff;
+}
+#title .ak-hud .ak-circle .c-ring::before, #title .ak-hud .ak-circle .c-ring::after { display: none; }
+#title .ak-hud .ak-circle .c-ring svg { width: 28px; height: 28px; }
+#title .ak-hud .ak-circle .c-cn {
+  grid-column: 2; grid-row: 1; align-self: end; margin: 0;
+  color: #fff; font-family: var(--font-ui) !important;
+  font-size: 24px; line-height: 1.2; font-weight: 800; letter-spacing: .12em;
+  text-shadow: none;
+}
+#title .ak-hud .ak-circle .c-en {
+  grid-column: 2; grid-row: 2; align-self: start; margin: 0;
+  color: #ffffffc9; font-family: var(--font-ui) !important;
+  font-size: 10px; line-height: 1.3; font-style: normal; font-weight: 700; letter-spacing: .2em;
+  text-transform: uppercase; text-shadow: none;
+}
+#title .ak-hud .ak-circle:hover, #title .ak-hud .ak-circle:hover .c-ring {
+  transform: none; filter: none; background: inherit;
+}
+/* 行内进度徽标（3/26 竖排小签） */
+#title .ak-hud .ak-ach .c-tag {
+  position: static; grid-column: 3; grid-row: 1 / 3; align-self: center;
+  margin: 0; padding: 5px 9px;
+  background: #10181e; border: 0; border-radius: 0;
+  color: #fff; font: 700 13px/1.2 Consolas, monospace; letter-spacing: .04em;
+  text-align: center;
+}
+/* 右列行位：档案条下方 208px 起，等距 92px（品红→青→正金→正红） */
+#title .ak-hud .ak-ach { top: 208px; animation-delay: .26s;
+  background: linear-gradient(180deg, #d9508e, #cc4482 55%, #bf3d76);
+  color: #fff;
+}
+#title .ak-hud .ak-lib { top: 300px; animation-delay: .32s;
+  background: linear-gradient(180deg, #22c4aa, #1bb098 55%, #169d88);
+  color: #fff;
+}
+#title .ak-hud .ak-set { top: 392px; animation-delay: .38s;
+  background: linear-gradient(180deg, #e8b92a, #dcac1f 55%, #cf9f16);
+  color: #fff;
+}
+#title .ak-exit { top: 484px; animation-delay: .44s;
+  display: grid; grid-template-columns: 44px 1fr auto; align-content: center;
+  background: linear-gradient(180deg, #e04a38, #d43e2d 55%, #c53626);
+  color: #fff; cursor: pointer;
+}
+#title .ak-exit::before {
+  content: '退出游戏'; grid-column: 2; grid-row: 1; align-self: end;
+  color: #fff; font: 800 24px/1.2 var(--font-ui); letter-spacing: .12em;
+}
+#title .ak-exit::after {
+  content: 'EXIT GAME'; grid-column: 2; grid-row: 2; align-self: start;
+  color: #ffffffc9;
+  font: 700 10px/1.3 var(--font-ui); letter-spacing: .2em;
+}
+#title .ak-exit svg {
+  position: static; grid-column: 1; grid-row: 1 / 3; place-self: center;
+  width: 30px; height: 30px; color: #fff;
+}
+#title .ak-hud .ak-ach:hover { background: linear-gradient(180deg, #e35e99, #d64e88 55%, #c9447c); }
+#title .ak-hud .ak-lib:hover { background: linear-gradient(180deg, #2bd2b7, #20bda2 55%, #1ba98f); }
+#title .ak-hud .ak-set:hover { background: linear-gradient(180deg, #f0c433, #e2b626 55%, #d4a81b); }
+#title .ak-exit:hover { background: linear-gradient(180deg, #e95a48, #dd4a38 55%, #ce4230); }
+
+/* —— 底缘工具钮：静音 / 留言信箱（沉底，不与左轴争位） —— */
+#title .ak-home, #title .ak-hud .ak-inbox {
+  position: absolute; z-index: 5; bottom: 58px; top: auto;
+  left: var(--home-edge);
+  width: 46px; height: 46px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #12212dd9; border: 1px solid #acc9d038; border-radius: 0;
+  color: #dfe9ec; box-shadow: 4px 4px 0 var(--plate-shadow);
+  transition: border-color .16s, color .16s, transform .14s, box-shadow .14s;
+}
+#title .ak-hud .ak-inbox { left: calc(var(--home-edge) + 56px); }
+#title .ak-home::after { display: none; }
+#title .ak-home:hover, #title .ak-hud .ak-inbox:hover {
+  border-color: var(--home-gold); color: #fff;
+  transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--plate-shadow);
+}
+
+/* —— 右上档案条（真实数据件，随右列下移，白字） —— */
+#title .ak-user {
+  top: 96px; right: var(--home-edge); padding: 0 0 10px; min-width: 176px;
+  background: none; border: 0; border-bottom: 1px solid #adc9d04d;
+  box-shadow: none; transform: none;
+}
+#title .ak-user-row { position: relative; gap: 12px; padding-bottom: 15px; }
+#title .ak-user .ak-ava { width: 44px; height: 44px; border: 1px solid #d9c38b80; }
+#title .ak-lv { gap: 10px; }
+#title .ak-lv em { font: 10px var(--font-ui); letter-spacing: .18em; color: #cfe0e5; }
+#title .ak-lv b { font: 34px/1 Consolas, monospace; color: #ffffff; text-shadow: none; }
+#title .ak-uname {
+  position: absolute; top: auto; bottom: 0; right: 0; margin: 0; white-space: nowrap;
+  font-size: 11px; letter-spacing: .08em; color: #d7e5ea;
+}
+
+/* —— 底缘信息行：撤离次数（左）/ 制作者（右），加底衬与滚动条拉开 —— */
+#title .ak-sec {
+  left: calc(var(--home-edge) + 118px); right: auto; top: auto; bottom: 58px;
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 14px; background: #0c1720c9;
+  border-left: 3px solid var(--home-gold);
+}
+#title .ak-sec::before, #title .ak-sec::after { display: none; }
+#title .ak-sec span { color: #d5e3e8; font-size: 12px; letter-spacing: .12em; }
+#title .ak-sec b {
+  border: 0; padding: 0 2px; background: none;
+  font: 700 20px Consolas, monospace; color: #f0dcae;
+}
+#title .title-credits {
+  right: var(--home-edge); left: auto; top: auto; bottom: 62px; margin: 0;
+  font-size: 10px; letter-spacing: .1em; color: #c3cdc5;
+}
+#title .title-snow { opacity: .4; }
+#title .title-snow i:nth-child(n+25) { display: none; }
+#title #warmupTip {
+  left: 50%; top: auto; bottom: 108px; translate: -50% 0; min-width: 0; width: 320px;
+  max-width: 40%; padding: 10px 12px; background: #081e28b3;
+  border: 0; border-left: 2px solid #94bbcb; box-shadow: none;
+}
+#title #warmupTip .warmup-reason { font-size: 10px; letter-spacing: 0; }
+#title #warmupTip .warmup-track { height: 2px; margin-top: 5px; }
+#title .ak-hud button:focus-visible { outline: 2px solid #ffe9b0; outline-offset: 4px; }
+
+/* —— 小窗降级 —— */
+@media (max-width: 1000px) {
+  #title { --home-edge: 3.5%; }
+  #title .title-quote { top: 58px; font-size: 11px; padding: 7px 13px 8px; }
+  #title .ak-start { width: 38vw; min-height: 108px; }
+  #title .ak-start .st-cn { font-size: 27px; }
+  #title .ak-start .st-row::before { font-size: 38px; }
+  #title .ak-hud .ak-quickref { width: 34vw; height: 84px; }
+  #title .ak-hud .ak-quickref span { font-size: 22px; }
+  #title .ak-hud .ak-ach, #title .ak-hud .ak-lib,
+  #title .ak-hud .ak-set, #title .ak-exit { width: 31vw; height: 68px; }
+  #title .ak-hud .ak-circle .c-cn { font-size: 20px; }
+  #title .ak-exit::before { font-size: 20px; }
+  #title .ak-sec { left: calc(var(--home-edge) + 108px); }
+}
+@media (max-height: 680px) {
+  #title .title-quote { top: 56px; }
+  #title .ak-user { top: 84px; }
+  #title .ak-start { top: 236px; min-height: 106px; }
+  #title .ak-hud .ak-quickref { top: 354px; height: 84px; }
+  #title .ak-hud .ak-ach { top: 176px; }
+  #title .ak-hud .ak-lib { top: 254px; }
+  #title .ak-hud .ak-set { top: 332px; }
+  #title .ak-exit { top: 410px; }
+  #title .ak-home, #title .ak-hud .ak-inbox, #title .ak-sec { bottom: 48px; }
+  #title .title-credits { bottom: 52px; }
+}
+@media (max-width: 650px) {
+  #title .ak-start { width: 56vw; }
+  #title .ak-hud .ak-quickref { width: 52vw; }
+  #title .ak-hud .ak-ach, #title .ak-hud .ak-lib,
+  #title .ak-hud .ak-set, #title .ak-exit { width: 48vw; }
+  #title .ak-start .st-cn { font-size: 24px; letter-spacing: .06em; }
+  #title .ak-start .st-row::before { font-size: 30px; }
+  #title .ak-hud .ak-quickref span { font-size: 19px; }
+  #title .ak-hud .ak-circle .c-cn { font-size: 17px; }
+  #title .ak-exit::before { font-size: 17px; }
+  #title .title-ticker span { font-size: 11px; letter-spacing: .12em; }
+  #title .title-ticker { height: 32px; }
+}
+
+/* —— 既有生命周期：页面遮罩冻结 / 减少动态 —— */
+body.page-covered.page-opaque #title,
+body.page-covered.page-opaque #title * { animation-play-state: paused !important; }
+body.reduce-motion #title *, body.reduce-motion #title *::before, body.reduce-motion #title *::after { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  #title *, #title *::before, #title *::after { animation: none !important; transition: none !important; }
+}

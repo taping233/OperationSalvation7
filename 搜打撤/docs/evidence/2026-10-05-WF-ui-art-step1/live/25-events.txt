@@ -1,0 +1,22 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 1/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 1/16
+		6 container
+			7 text FIELD ENCOUNTER 01 / 04
+			8 heading dice 隧道血契, Value: 2
+				9 image dice
+				10 text  隧道血契
+			11 text 维修隧道的尽头亮着一盏不该存在的灯。交易台后的影子看不清脸，只把一只手掌摊在你面前，掌心朝上。
+			12 button 成交 -5 血，获得 1 个军用保险柜 ▸
+				13 text 成交
+				14 text -5 血，获得 1 个军用保险柜
+				19 text ▸
+			16 button 拒绝 无事发生 ▸
+				17 text 拒绝
+				18 text 无事发生
+				20 text ▸
+
+The focused UI element is 12 button 成交 -5 血，获得 1 个军用保险柜 ▸

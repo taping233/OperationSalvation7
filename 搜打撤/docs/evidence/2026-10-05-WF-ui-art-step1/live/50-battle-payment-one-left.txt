@@ -1,0 +1,25 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 3/16, ID: bagBtnFloat
+			4 text 背包
+			14 text 3/16
+		6 container swords 遭遇战 · 第 1 回合 · cards 支付代价：为【快意恩仇】选择, ID: overlay
+			7 container
+				8 heading swords 遭遇战 · 第 1 回合 · cards 支付代价：为【快意恩仇】选择, Value: 2, ID: ovTitle
+					15 image swords
+					16 text  遭遇战 · 第 1 回合 · 
+					17 image cards
+					18 text  支付代价：为【快意恩仇】选择
+				13 container ovBody
+					19 container
+						20 text 还需支付： 1  张 初始攻击 作为支付代价
+					21 container
+						22 text 1
+						23 image 初始攻击
+						24 text 初始攻击 武术 · 初始 攻（ +0 ）： 造成等同于攻击力的 伤害 。
+						25 image coin
+						26 text 1
+					27 text 已选手牌和本次牌/燃料不在候选池中；选取后会作为支付代价消耗。
+
+The focused UI element is 6 container swords 遭遇战 · 第 1 回合 · cards 支付代价：为【快意恩仇】选择, ID: overlay

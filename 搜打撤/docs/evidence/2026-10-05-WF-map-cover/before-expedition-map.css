@@ -1,0 +1,95 @@
+/* 战术远征图：底图保留冬境氛围，路线与几何结点负责可读性。 */
+#game { background:#07131d; }
+/* 09-25 二波 C 组：接中心批二底图 expedition-map-bg.webp——叠深青压暗层保证
+   层列表/结点/行动记录可读（图自带雪原纵向构图，bottom 对齐脚印线） */
+#game { background:linear-gradient(180deg,rgba(5,14,21,.5),rgba(5,13,20,.62) 60%,rgba(4,10,16,.78)),url('../assets/scenes/ui-loop-0925/expedition-map-bg.webp') center bottom / cover no-repeat,#07131d; }
+#expeditionChapter { position: absolute; left: 28px; top: 107px; z-index: 3; width: 180px; pointer-events: none; color: #aebfc7; background: rgba(7, 18, 26, .55); padding: 8px 10px; border-radius: 2px; border: 1px solid rgba(159, 183, 188, .14); } /* 09-25 P3：层列表加半透明细底板，不再裸浮在地图上 */
+.chapter-kicker { font: 9px 'Cascadia Code',monospace; letter-spacing: 2px; color: #82b8d0; margin-bottom: 16px; }
+#expeditionChapter ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid #a4bec444; }
+#expeditionChapter li { display: flex; align-items: center; gap: 12px; padding: 8px 0 8px 14px; font-size: 11px; letter-spacing: 2px; border-left: 2px solid transparent; margin-left: -1px; color: #90a6af; }
+#expeditionChapter li span { font: 9px 'Cascadia Code',monospace; letter-spacing: 0; opacity: .7; }
+#expeditionChapter li.current { border-color: #e0c57d; color: #f0dfb1; background: linear-gradient(90deg,#d4ba7f22,transparent); }
+#expeditionChapter li.passed { color: #93bcb1; }
+#expeditionChapter > small { display: block; font-size: 9px; margin-top: 20px; color: #9bafb5; letter-spacing: .5px; }
+#layerBanner { top: 22px; border: 0; background: transparent; padding: 7px 20px; }
+#layerBanner .lb-zh { font: 19px 'SimSun',serif; letter-spacing: 6px; color: #edf0e9; text-shadow:0 2px 14px #061019; }
+#layerBanner .lb-en { font-size: 8px; letter-spacing: 3px; }
+#btnMapOverview { position: absolute; right: 22px; bottom: 20px; z-index: 5; background: #0b1d29e8; border: 1px solid #82b8d066; border-radius:2px; padding: 10px 14px; color: #d2dfe1; font-size: 11px; cursor: pointer; box-shadow:0 8px 22px #02091066; }
+#btnMapOverview span { display: inline-block; margin-left: 14px; color: #dfc28d; font: 10px monospace; }
+/* 09-25 P1：定位键基准统一——winter.css:1676 以 !important 定 bottom:calc(142px + 12px + 82px)
+   （底栏 142 + 间距 12 + 键组 82），right 与 #bagBtnFloat 的 22px 同轴；本条原 bottom:162px /
+   right:157px 是被覆盖的死值，现改为与 winter 生效值显式同值，仅作局部锚点（单一来源语义，
+   winter 的 !important 仍为最终裁决） */
+#topBtns #btnLocate { position: fixed; bottom: calc(142px + 12px + 82px); right: 22px; width: 36px; height: 36px; background: #0d202cdb; border: 1px solid #8ba1a866; }
+#topBtns #btnHome.exit-btn { background: #203543; box-shadow: none; color: #c6d4d9; border: 1px solid #7b959944; }
+/* 09-25 二波 C 组：行动记录面板对齐 #expeditionChapter 语言——半透明底板+细边框，
+   不再近乎实色糊在地图上；文字可读性由 backdrop 不透明度与行距保证 */
+#logPanel { background: rgba(7, 18, 26, .55); border: 1px solid rgba(159, 183, 188, .14); max-width: min(340px,30vw); border-radius:2px; }
+body.lobby #expeditionChapter, body.lobby #btnMapOverview, body.page-opaque #expeditionChapter, body.page-opaque #btnMapOverview { display: none; }
+@media(max-width: 850px) {
+  #expeditionChapter { left: 16px; top: 116px; width: 150px; }
+  #expeditionChapter li { padding-block: 5px; font-size: 10px; letter-spacing: 1px; }
+  #expeditionChapter > small { display: none; }
+  #topBtns #btnLocate { bottom: calc(142px + 12px + 82px); } /* 09-25：原 210px 为死值，与 winter.css:1676 !important 生效值同值 */
+  #logPanel { max-width: 260px; }
+}
+@media(max-width: 560px) {
+  #expeditionChapter { top: 117px; width: calc(100% - 32px); }
+  .chapter-kicker { display: none; }
+  #expeditionChapter ol { display: flex; border: 0; }
+  #expeditionChapter li { padding: 8px; border-left: 0; border-bottom: 2px solid transparent; font-size: 9px; gap: 4px; }
+  #expeditionChapter li span { display: none; }
+  #layerBanner { top: 78px; }
+}
+@media(max-height: 700px) and (min-width: 851px) { #topBtns #btnLocate { bottom: calc(122px + 12px + 82px); } } /* 09-25：原 142px 为死值，与 expedition.css:463 !important 生效值同值（矮窗口档 122px 底栏） */
+
+/* ═══ W1-05（2026-09-27 R2）：宝箱弹层下的「假可点」路线卡降权 ═══
+   弹层开着时底部路线卡被状态守卫禁用（点了静默丢弃），但 hover 箭头/可点光标
+   仍在，诱骗玩家点击（透镜 #62「看上去不同，行为也要不同」）。
+   只作用域：地图上开着宝箱/搜刮弹层时（.card.chest），弹层关即恢复，零机制改动。
+   ——本单另一半「三选一缺跳过出口」须改 chests.js（冻结中），转主代理裁决。 */
+body:has(#overlay:not([hidden]) .card.chest) #routePanel .route-option {
+  opacity: .42;
+  pointer-events: none;
+  cursor: default;
+}
+body:has(#overlay:not([hidden]) .card.chest) #routePanel .route-option .route-arrow { display: none; }
+
+/* ═══ W1-04（2026-09-27 R2）：定位钮出屏修复——回归顶部钮簇文档流 ═══
+   实测（headless 1600×900，事件态）：#btnLocate fixed 渲染于 (205,-184)——
+   ui-scale 把 zoom 挂 html（STATE 已录的实测坑），html 成为 fixed 包含块后
+   winter.css:595/:1676 的 bottom:236px 被解析成离屏坐标，整钮不可见，
+   鼠标玩家的唯一镜头找回手段消失（F 键在但键位表只在手册里）。
+   修法=评审建议「排入顶部钮簇」：撤固定定位，回 #topBtns 文档流，
+   与 离开/手册/静音 同组（系统动作簇语义一致）。!important 压过
+   winter.css:1676 与 expedition.css:434/455 的 bottom !important
+   （本文件在 index.html 中于 winter/expedition 之后加载，同权后赢）。 */
+#topBtns #btnLocate {
+  position: static !important;
+  bottom: auto !important;
+  right: auto !important;
+  width: 40px;
+  height: 40px;
+}
+
+/* ═══ W1-10（2026-09-27 R2）：前进层间闸门路线卡金高亮 ═══
+   目标文案（expedition.view.js expeditionObjective）已带方位/步数信号，
+   路线卡侧同步：data-door="1"（前进闸门）金边+左金条，与普通卡区分；
+   折返门（reverse）不打标。全局「目标=金」语义与地图门节点金色化同批。 */
+#routePanel .route-option[data-door="1"] {
+  border-color: #d9bb82b3;
+  box-shadow: inset 3px 0 0 #d9bb82, 0 2px 12px rgba(217, 187, 130, .12);
+}
+#routePanel .route-option[data-door="1"] .route-arrow { color: #d9bb82; }
+
+/* 路线标题、选项和说明共同占用底栏预算，按钮不可被 flex 压成薄条。 */
+#sidebar { height:200px; min-height:200px; }
+#sidebar #routePanel { min-height:0; justify-content:center; }
+#sidebar #routePanel .route-heading,
+#sidebar #routePanel .route-options,
+#sidebar #routePanel .route-help { flex-shrink:0; }
+body:not(.scene-battle-3d) #bagBtnFloat { bottom:calc(200px + 12px) !important; }
+@media (max-width:850px) {
+  #sidebar { height:240px; min-height:240px; grid-template-rows:59px minmax(0,1fr); }
+  body:not(.scene-battle-3d) #bagBtnFloat { bottom:calc(240px + 12px) !important; }
+}

@@ -1,0 +1,1 @@
+(async()=>{const q=window.__uiArtQA;q.reset(['镭射','格挡']);const m=await import('/src/hub/game.bag.js');m.showBackpack();return true;})()

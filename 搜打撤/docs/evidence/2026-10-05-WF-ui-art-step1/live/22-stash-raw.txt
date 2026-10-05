@@ -1,0 +1,14 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container archive 木材, ID: overlay
+		3 container
+			4 button Description: 关闭, ID: ovCloseX
+			5 heading archive 木材, Value: 2, ID: ovTitle
+				6 image archive
+				7 text  木材
+			8 container
+				9 text 储备  0  个 木材用于扩建背包与仓库容量——材料是基地建设的根基， 不可卖出换币 。
+				10 button ↩ 返回仓库
+				11 text 04
+
+The focused UI element is 10 button ↩ 返回仓库

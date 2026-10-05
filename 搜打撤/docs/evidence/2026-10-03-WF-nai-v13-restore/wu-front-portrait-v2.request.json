@@ -1,0 +1,97 @@
+{
+  "recipe_draft": "v1.4-draft（老板 2026-10-03 深夜方案，实测中未固化）",
+  "model": "nai-diffusion-4-5-full",
+  "param_overrides": {
+    "scale": 5.5,
+    "steps": 32
+  },
+  "reference_image": "game/assets/portraits/full/wu.webp",
+  "reference_sha256": "a7c5d4e2242558337f5f5a8b8df71cda875af73586ec70657b45836f01466c6c",
+  "prompt": "0.7::miv4t::, 1.1::quasarcake::\n\nmasterpiece, best quality, painterly sketch illustration, visible rough brush strokes, loose hand-painted texture, broken open edges, blocky volume modeling, confident planes of light and shadow, broad paint masses, dry uneven strokes, crisp small material highlights, varying brush sizes, retain deliberate brush marks, do not over smooth surfaces, soft directional lighting, anime character sheet, full body character stand\n\n1girl, young adult woman, fair skin, small youthful face, bright cyan-blue eyes, slightly upturned sharp eyes, confident playful grin, single small upper fang, parted bangs, eyebrows visible through hair, silver-white long smooth hair, tight neat very high ponytail, long ponytail falls behind left side down to mid-calf, large blue satin ribbon bow at ponytail base, two trailing blue ribbon streamers, one black rose decoration beside ponytail root, two long thin sidelocks to collarbone, matte black round sunglasses resting on top of head, black off-shoulder dress, horizontal pleated ruffle at neckline, thin narrow black waist belt, outer black skirt with jagged ruffle hem, deep blue inner skirt lining printed with tiny light-blue four-pointed stars, star lining peeking out below outer skirt hem, bare lower legs, black platform ankle boots, folded boot cuffs, side zipper detail, single black longsword in black scabbard slung diagonally across back, sword hilt over left shoulder, scabbard tip below right knee, thin black crossbody strap from right shoulder to left waist\n\nfull body, front view facing viewer, standing upright, feet slightly apart, right hand placed on hip, left arm relaxed naturally at side, entire body visible inside frame, blank plain white background, cocky self-assured expression\n\nportrait orientation, single standing character centered in canvas, full head-to-boot silhouette, clean white empty background, character silhouette is main focus\n\nquiet loosely brushed plain background with no scenery, preserve specified pose, character illustration sketch, not unfinished draft",
+  "uc": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully polished render, plastic texture, waxy skin, blurry fingers, extra fingers, missing fingers, fused fingers, deformed hands, text, watermark, signature, border, collage, multiple character views, reflective sunglasses, lens flare, glasses lens reflection, pantyhose, stockings, thigh highs, over fluffy hair, over voluminous hair, messy tangled hair, wavy curls, hair fully covering eye, two swords, multiple swords, drawn sword, weapon in hand, multiple girls, bad anatomy, deformed limbs",
+  "width": 832,
+  "height": 1216,
+  "seed": 1805482835,
+  "output": ".tmp/nai/output/wu-front-portrait-20261003/wu-front-portrait-v2.png",
+  "payload": {
+    "input": "0.7::miv4t::, 1.1::quasarcake::\n\nmasterpiece, best quality, painterly sketch illustration, visible rough brush strokes, loose hand-painted texture, broken open edges, blocky volume modeling, confident planes of light and shadow, broad paint masses, dry uneven strokes, crisp small material highlights, varying brush sizes, retain deliberate brush marks, do not over smooth surfaces, soft directional lighting, anime character sheet, full body character stand\n\n1girl, young adult woman, fair skin, small youthful face, bright cyan-blue eyes, slightly upturned sharp eyes, confident playful grin, single small upper fang, parted bangs, eyebrows visible through hair, silver-white long smooth hair, tight neat very high ponytail, long ponytail falls behind left side down to mid-calf, large blue satin ribbon bow at ponytail base, two trailing blue ribbon streamers, one black rose decoration beside ponytail root, two long thin sidelocks to collarbone, matte black round sunglasses resting on top of head, black off-shoulder dress, horizontal pleated ruffle at neckline, thin narrow black waist belt, outer black skirt with jagged ruffle hem, deep blue inner skirt lining printed with tiny light-blue four-pointed stars, star lining peeking out below outer skirt hem, bare lower legs, black platform ankle boots, folded boot cuffs, side zipper detail, single black longsword in black scabbard slung diagonally across back, sword hilt over left shoulder, scabbard tip below right knee, thin black crossbody strap from right shoulder to left waist\n\nfull body, front view facing viewer, standing upright, feet slightly apart, right hand placed on hip, left arm relaxed naturally at side, entire body visible inside frame, blank plain white background, cocky self-assured expression\n\nportrait orientation, single standing character centered in canvas, full head-to-boot silhouette, clean white empty background, character silhouette is main focus\n\nquiet loosely brushed plain background with no scenery, preserve specified pose, character illustration sketch, not unfinished draft",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 832,
+      "height": 1216,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 32,
+      "variety_plus": true,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1805482835,
+      "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully polished render, plastic texture, waxy skin, blurry fingers, extra fingers, missing fingers, fused fingers, deformed hands, text, watermark, signature, border, collage, multiple character views, reflective sunglasses, lens flare, glasses lens reflection, pantyhose, stockings, thigh highs, over fluffy hair, over voluminous hair, messy tangled hair, wavy curls, hair fully covering eye, two swords, multiple swords, drawn sword, weapon in hand, multiple girls, bad anatomy, deformed limbs",
+      "characterPrompts": [
+        {
+          "prompt": "",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "0.7::miv4t::, 1.1::quasarcake::\n\nmasterpiece, best quality, painterly sketch illustration, visible rough brush strokes, loose hand-painted texture, broken open edges, blocky volume modeling, confident planes of light and shadow, broad paint masses, dry uneven strokes, crisp small material highlights, varying brush sizes, retain deliberate brush marks, do not over smooth surfaces, soft directional lighting, anime character sheet, full body character stand\n\n1girl, young adult woman, fair skin, small youthful face, bright cyan-blue eyes, slightly upturned sharp eyes, confident playful grin, single small upper fang, parted bangs, eyebrows visible through hair, silver-white long smooth hair, tight neat very high ponytail, long ponytail falls behind left side down to mid-calf, large blue satin ribbon bow at ponytail base, two trailing blue ribbon streamers, one black rose decoration beside ponytail root, two long thin sidelocks to collarbone, matte black round sunglasses resting on top of head, black off-shoulder dress, horizontal pleated ruffle at neckline, thin narrow black waist belt, outer black skirt with jagged ruffle hem, deep blue inner skirt lining printed with tiny light-blue four-pointed stars, star lining peeking out below outer skirt hem, bare lower legs, black platform ankle boots, folded boot cuffs, side zipper detail, single black longsword in black scabbard slung diagonally across back, sword hilt over left shoulder, scabbard tip below right knee, thin black crossbody strap from right shoulder to left waist\n\nfull body, front view facing viewer, standing upright, feet slightly apart, right hand placed on hip, left arm relaxed naturally at side, entire body visible inside frame, blank plain white background, cocky self-assured expression\n\nportrait orientation, single standing character centered in canvas, full head-to-boot silhouette, clean white empty background, character silhouette is main focus\n\nquiet loosely brushed plain background with no scenery, preserve specified pose, character illustration sketch, not unfinished draft",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully polished render, plastic texture, waxy skin, blurry fingers, extra fingers, missing fingers, fused fingers, deformed hands, text, watermark, signature, border, collage, multiple character views, reflective sunglasses, lens flare, glasses lens reflection, pantyhose, stockings, thigh highs, over fluffy hair, over voluminous hair, messy tangled hair, wavy curls, hair fully covering eye, two swords, multiple swords, drawn sword, weapon in hand, multiple girls, bad anatomy, deformed limbs",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  }
+}

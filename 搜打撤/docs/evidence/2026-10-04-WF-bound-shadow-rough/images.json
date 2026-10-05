@@ -1,0 +1,42 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail color bake only",
+  "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-cbc7f878-d1e6-410a-bb3a-e1476e3bc08e.png",
+  "outputs": [
+    {
+      "path": "game/assets/cards/bound-shadow.webp",
+      "bytes": 190170,
+      "sha256": "262476293cb39eecaeddeacbe406a3d6ea2e3faeb8f6acde2a378b712791e5a5",
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/cards/bound-shadow.webp",
+      "bytes": 34286,
+      "sha256": "b1eadf7f8561af299dfea941fbd1677806dab111aae67c42037106579c7fcfa5",
+      "size": [
+        448,
+        448
+      ]
+    }
+  ],
+  "source": {
+    "path": "game/art-source/cards/bound-shadow-rough-20261004.png",
+    "bytes": 1993982,
+    "sha256": "d63d6a35b686ef6085f3d41698097c407085cf19ff997e7d069429544e0a0af1"
+  },
+  "backups": [
+    {
+      "path": "docs/evidence/2026-10-04-WF-bound-shadow-rough/originals-before-rough/full-bound-shadow.webp",
+      "bytes": 113846,
+      "sha256": "cbace15429165301fc454475dd28e675efca0198ea80bfc7116e758d7b5f433a"
+    },
+    {
+      "path": "docs/evidence/2026-10-04-WF-bound-shadow-rough/originals-before-rough/thumb-bound-shadow.webp",
+      "bytes": 28542,
+      "sha256": "4a1390f039111b6f3b03cba85fa2f21c5560146a266c4f8387e6362bc1251c9b"
+    }
+  ],
+  "verification": "老板明确禁止测试，本轮未测试/资产审计/实页"
+}

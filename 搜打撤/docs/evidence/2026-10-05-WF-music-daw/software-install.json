@@ -1,0 +1,11 @@
+{
+  "software": "LMMS",
+  "version": "1.2.2",
+  "source": "https://github.com/LMMS/lmms/releases/download/v1.2.2/lmms-1.2.2-win64.exe",
+  "installerBytes": 36829951,
+  "installerSha256": "5F20AF1D782468507417D0785826B1F064FADBA88ED1691E2DEF269922ACE56B",
+  "installRoot": "D:\\素材\\代号柒\\搜打撤\\.tmp\\music-workstation\\LMMS",
+  "method": "official NSIS silent installer /S /D=task-directory",
+  "authorization": "老板明确要求下载电脑编曲软件并接入生成试听",
+  "timestamp": "2026-10-05T11:32:01.8846823+08:00"
+}

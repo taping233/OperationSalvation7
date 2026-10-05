@@ -1,0 +1,27 @@
+{
+  "checkedAt": "2026-10-03T06:18:51.740Z",
+  "input": [
+    {
+      "driver": "human",
+      "provenance": {
+        "driver": "agent",
+        "interventions": []
+      },
+      "class": "wu",
+      "mode": "standard",
+      "outcome": "extract",
+      "maxLayer": 1,
+      "turns": 1,
+      "durationSec": 1,
+      "carriedValue": 0,
+      "battles": {
+        "fought": 0,
+        "won": 0
+      }
+    }
+  ],
+  "actualDriverGroups": [
+    "human"
+  ],
+  "limit": "只证明聚合消费者使用旧driver，不证明真实新局一定产生该字段组合。真实生产记录需执行负责人再核。"
+}

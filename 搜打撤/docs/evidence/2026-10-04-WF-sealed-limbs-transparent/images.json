@@ -1,0 +1,214 @@
+{
+  "method": "Built-in ImageGen native transparent background; RGBA WebP/thumb encoding",
+  "items": [
+    {
+      "cardId": "tt8-curseimmune",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-a3702c62-5273-4a03-8214-25a9512c1d8c.png",
+      "source": {
+        "path": "game/art-source/cards/creature-tt8-curseimmune-transparent-20261004.png",
+        "bytes": 786406,
+        "sha256": "fecf39fa45c7f20cf2db2c9d6b21dc451214ecda30f176204f118c003814ab30",
+        "mode": "RGBA",
+        "size": [
+          1254,
+          1254
+        ],
+        "alphaRange": [
+          0,
+          255
+        ]
+      },
+      "outputs": [
+        {
+          "path": "game/assets/cards/creature-tt8-curseimmune.webp",
+          "bytes": 136338,
+          "sha256": "24494c64f808940a980aea8decf87689c8db00fafd8c2e639fc08d3880096146",
+          "size": [
+            1254,
+            1254
+          ],
+          "mode": "RGBA"
+        },
+        {
+          "path": "game/assets/thumbs/cards/creature-tt8-curseimmune.webp",
+          "bytes": 25728,
+          "sha256": "fb3b7df8998593fd95bea1ce544eddbc1ea37b57112de04d2d6a4f51a31fff8a",
+          "size": [
+            448,
+            448
+          ],
+          "mode": "RGBA"
+        }
+      ],
+      "backups": [
+        {
+          "path": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/originals-before-transparent/full-creature-tt8-curseimmune.webp",
+          "bytes": 103096,
+          "sha256": "2b8665cca68ac602aa59e7e7913f5a30b4235ff183ce64514467a6a500db1133"
+        },
+        {
+          "path": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/originals-before-transparent/thumb-creature-tt8-curseimmune.webp",
+          "bytes": 14038,
+          "sha256": "8656021b5629c8d5b792d4689445c96cdfd82627756de4d2c93fb93f043bc09c"
+        }
+      ]
+    },
+    {
+      "cardId": "tt8-energycap",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-2ea5d84f-42e4-4080-8017-b542f9345064.png",
+      "source": {
+        "path": "game/art-source/cards/creature-tt8-energycap-transparent-20261004.png",
+        "bytes": 948577,
+        "sha256": "84f786f1e3cc3f760939db03d63cf733c3499664736d8ecd49a433c80cf0e550",
+        "mode": "RGBA",
+        "size": [
+          1254,
+          1254
+        ],
+        "alphaRange": [
+          0,
+          255
+        ]
+      },
+      "outputs": [
+        {
+          "path": "game/assets/cards/creature-tt8-energycap.webp",
+          "bytes": 150212,
+          "sha256": "bdd1f5d1f47605a05c961553c77aed1338336318902d8cddc235f084e4d6bf23",
+          "size": [
+            1254,
+            1254
+          ],
+          "mode": "RGBA"
+        },
+        {
+          "path": "game/assets/thumbs/cards/creature-tt8-energycap.webp",
+          "bytes": 26990,
+          "sha256": "b1dc926d5fe84a83c252eb408ffe634d3551c96043fd4149d6295a7ab5b52a3f",
+          "size": [
+            448,
+            448
+          ],
+          "mode": "RGBA"
+        }
+      ],
+      "backups": [
+        {
+          "path": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/originals-before-transparent/full-creature-tt8-energycap.webp",
+          "bytes": 111026,
+          "sha256": "d42208b4544e8bd7f4b2b24bf228eebd4ff3849902834261922a8863105dcdcf"
+        },
+        {
+          "path": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/originals-before-transparent/thumb-creature-tt8-energycap.webp",
+          "bytes": 15296,
+          "sha256": "bd4c57504fec630f19013654372038dee14d6f35669d27cb314439e739bb76a6"
+        }
+      ]
+    },
+    {
+      "cardId": "tt8-nofocus",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-464fdeff-1940-45a8-95e4-7d24748f15bf.png",
+      "source": {
+        "path": "game/art-source/cards/creature-tt8-nofocus-transparent-20261004.png",
+        "bytes": 788326,
+        "sha256": "9d0ed94e8f76daff483773c1db6f44fa066b9cd0effb4213503349b351bccf34",
+        "mode": "RGBA",
+        "size": [
+          1254,
+          1254
+        ],
+        "alphaRange": [
+          0,
+          255
+        ]
+      },
+      "outputs": [
+        {
+          "path": "game/assets/cards/creature-tt8-nofocus.webp",
+          "bytes": 112758,
+          "sha256": "87ee008ad4a15d607d4936762a3b95c496bf9c0f89dde0595eb188e456e0555e",
+          "size": [
+            1254,
+            1254
+          ],
+          "mode": "RGBA"
+        },
+        {
+          "path": "game/assets/thumbs/cards/creature-tt8-nofocus.webp",
+          "bytes": 19612,
+          "sha256": "6865e411bfb1478444fd394dd9aab70a166699518db540f257f7a357ccbb2a43",
+          "size": [
+            448,
+            448
+          ],
+          "mode": "RGBA"
+        }
+      ],
+      "backups": [
+        {
+          "path": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/originals-before-transparent/full-creature-tt8-nofocus.webp",
+          "bytes": 41962,
+          "sha256": "db7f8d9363b6801efc5def691a70cec0e0b887188453c047e4ab07be8959bd7b"
+        },
+        {
+          "path": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/originals-before-transparent/thumb-creature-tt8-nofocus.webp",
+          "bytes": 4844,
+          "sha256": "d72f008c2e9132c147264a08bb8b514116f5274f2707fc748da6371e38b7da17"
+        }
+      ]
+    },
+    {
+      "cardId": "tt8-healplus",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-2c49ea4f-6452-4e0f-a079-d49a2f542949.png",
+      "source": {
+        "path": "game/art-source/cards/creature-tt8-healplus-transparent-20261004.png",
+        "bytes": 488864,
+        "sha256": "6b1f5268e1d28a349368a8dbdaf78f38bcff2f8ecaf0d79789ba0917456adc9e",
+        "mode": "RGBA",
+        "size": [
+          1254,
+          1254
+        ],
+        "alphaRange": [
+          0,
+          255
+        ]
+      },
+      "outputs": [
+        {
+          "path": "game/assets/cards/creature-tt8-healplus.webp",
+          "bytes": 79450,
+          "sha256": "e9a479ab60d659fcd58dbd5a852e81a926425f85154c5912b191f498fbe33784",
+          "size": [
+            1254,
+            1254
+          ],
+          "mode": "RGBA"
+        },
+        {
+          "path": "game/assets/thumbs/cards/creature-tt8-healplus.webp",
+          "bytes": 15526,
+          "sha256": "d349f2a33a842086be133c7ee97269663d3de93842ae9c659490de600099f01d",
+          "size": [
+            448,
+            448
+          ],
+          "mode": "RGBA"
+        }
+      ],
+      "backups": [
+        {
+          "path": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/originals-before-transparent/full-creature-tt8-healplus.webp",
+          "bytes": 44702,
+          "sha256": "10945a12eb0b7e56eb6c4ae2e4cbb25be893c7e3e5bf821bdfd1ac2490a76748"
+        },
+        {
+          "path": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/originals-before-transparent/thumb-creature-tt8-healplus.webp",
+          "bytes": 5026,
+          "sha256": "0855888e81a5c6f5e900bf59710e249bb0dc2a0f23c240fb539a8ac53a740c15"
+        }
+      ]
+    }
+  ],
+  "verification": "遵老板禁测令，未测试/资产门/实页"
+}

@@ -1,0 +1,1897 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-03",
+  "purpose": "A0/A7定向新鲜度与性能测量交接；不替代coverage，不代表实页验收。",
+  "coverageAudit": {
+    "source": "docs/evidence/2026-10-03-experience-art-plan/coverage.json",
+    "rows": 165,
+    "unchangedRows": 148,
+    "changedInputRows": 17,
+    "changedInputs": [
+      {
+        "id": "HUB-DEPLOY",
+        "paths": [
+          {
+            "path": "game/src/hub/game.hub.depart.js",
+            "recordedSha256": "bac138ae4581178bfe1a23554e465c7fc89d254147cdfe5f2266f3398edce9fa",
+            "currentSha256": "22eca8690c54e15615b96f2d94f5a7d059559cade74c78536d01374a57ac31b2"
+          }
+        ],
+        "visualStatusPreserved": "seen-in-chat-not-saved",
+        "status": "partial-live-review"
+      },
+      {
+        "id": "HUB-STASH",
+        "paths": [
+          {
+            "path": "game/css/expedition-inventory.css",
+            "recordedSha256": "c81993fc77c90cc5e3524cc9fc0c8fa347fe91438b2ad624b4e2d0168b59dec7",
+            "currentSha256": "99d37880b48f34afaa9fc801f646db9d5f5021b799018c847b428c12b673066c"
+          }
+        ],
+        "visualStatusPreserved": "unverified",
+        "status": "needs-review"
+      },
+      {
+        "id": "PREP",
+        "paths": [
+          {
+            "path": "game/src/hub/game.hub.depart.js",
+            "recordedSha256": "bac138ae4581178bfe1a23554e465c7fc89d254147cdfe5f2266f3398edce9fa",
+            "currentSha256": "22eca8690c54e15615b96f2d94f5a7d059559cade74c78536d01374a57ac31b2"
+          }
+        ],
+        "visualStatusPreserved": "seen-in-chat-not-saved",
+        "status": "partial-live-review"
+      },
+      {
+        "id": "MAP",
+        "paths": [
+          {
+            "path": "game/css/expedition-map.css",
+            "recordedSha256": "ff144fa8660d83a71d6ebc1ca82c9c7160eced75cdaf834da3314df592e90e9e",
+            "currentSha256": "53642fea050c75819817ffc70b50ae6429570f48376d9d77dd62349a45539c98"
+          }
+        ],
+        "visualStatusPreserved": "seen-in-chat-not-saved",
+        "status": "partial-live-review"
+      },
+      {
+        "id": "EXTRACT-DONE",
+        "paths": [
+          {
+            "path": "game/src/agent/agent.data.js",
+            "recordedSha256": "5b1910d82355a329d3a18c91d75fdc98adcffa8c263c00c00ec0a3f705d14501",
+            "currentSha256": "f5b4138c9ef0c6996c53ac811d06f486633293f1c1ff20cb044e88267d0d3c10"
+          }
+        ],
+        "visualStatusPreserved": "unverified",
+        "status": "needs-review"
+      },
+      {
+        "id": "DATA",
+        "paths": [
+          {
+            "path": "game/src/agent/agent.data.js",
+            "recordedSha256": "5b1910d82355a329d3a18c91d75fdc98adcffa8c263c00c00ec0a3f705d14501",
+            "currentSha256": "f5b4138c9ef0c6996c53ac811d06f486633293f1c1ff20cb044e88267d0d3c10"
+          }
+        ],
+        "visualStatusPreserved": "unverified",
+        "status": "needs-review"
+      },
+      {
+        "id": "STASH-ITEM",
+        "paths": [
+          {
+            "path": "game/css/expedition-inventory.css",
+            "recordedSha256": "c81993fc77c90cc5e3524cc9fc0c8fa347fe91438b2ad624b4e2d0168b59dec7",
+            "currentSha256": "99d37880b48f34afaa9fc801f646db9d5f5021b799018c847b428c12b673066c"
+          }
+        ],
+        "visualStatusPreserved": "unverified",
+        "status": "needs-review"
+      },
+      {
+        "id": "STASH-MATERIAL",
+        "paths": [
+          {
+            "path": "game/css/expedition-inventory.css",
+            "recordedSha256": "c81993fc77c90cc5e3524cc9fc0c8fa347fe91438b2ad624b4e2d0168b59dec7",
+            "currentSha256": "99d37880b48f34afaa9fc801f646db9d5f5021b799018c847b428c12b673066c"
+          }
+        ],
+        "visualStatusPreserved": "unverified",
+        "status": "needs-review"
+      },
+      {
+        "id": "HUB-PETS",
+        "paths": [
+          {
+            "path": "game/css/expedition-inventory.css",
+            "recordedSha256": "c81993fc77c90cc5e3524cc9fc0c8fa347fe91438b2ad624b4e2d0168b59dec7",
+            "currentSha256": "99d37880b48f34afaa9fc801f646db9d5f5021b799018c847b428c12b673066c"
+          }
+        ],
+        "visualStatusPreserved": "unverified",
+        "status": "needs-review"
+      },
+      {
+        "id": "STASH-EGG",
+        "paths": [
+          {
+            "path": "game/css/expedition-inventory.css",
+            "recordedSha256": "c81993fc77c90cc5e3524cc9fc0c8fa347fe91438b2ad624b4e2d0168b59dec7",
+            "currentSha256": "99d37880b48f34afaa9fc801f646db9d5f5021b799018c847b428c12b673066c"
+          }
+        ],
+        "visualStatusPreserved": "unverified",
+        "status": "needs-review"
+      },
+      {
+        "id": "STASH-RAW",
+        "paths": [
+          {
+            "path": "game/css/expedition-inventory.css",
+            "recordedSha256": "c81993fc77c90cc5e3524cc9fc0c8fa347fe91438b2ad624b4e2d0168b59dec7",
+            "currentSha256": "99d37880b48f34afaa9fc801f646db9d5f5021b799018c847b428c12b673066c"
+          }
+        ],
+        "visualStatusPreserved": "unverified",
+        "status": "needs-review"
+      },
+      {
+        "id": "BAG",
+        "paths": [
+          {
+            "path": "game/css/expedition-inventory.css",
+            "recordedSha256": "c81993fc77c90cc5e3524cc9fc0c8fa347fe91438b2ad624b4e2d0168b59dec7",
+            "currentSha256": "99d37880b48f34afaa9fc801f646db9d5f5021b799018c847b428c12b673066c"
+          }
+        ],
+        "visualStatusPreserved": "unverified",
+        "status": "needs-review"
+      },
+      {
+        "id": "BAG-PEARL",
+        "paths": [
+          {
+            "path": "game/css/expedition-inventory.css",
+            "recordedSha256": "c81993fc77c90cc5e3524cc9fc0c8fa347fe91438b2ad624b4e2d0168b59dec7",
+            "currentSha256": "99d37880b48f34afaa9fc801f646db9d5f5021b799018c847b428c12b673066c"
+          }
+        ],
+        "visualStatusPreserved": "unverified",
+        "status": "needs-review"
+      },
+      {
+        "id": "BAG-POUCH",
+        "paths": [
+          {
+            "path": "game/css/expedition-inventory.css",
+            "recordedSha256": "c81993fc77c90cc5e3524cc9fc0c8fa347fe91438b2ad624b4e2d0168b59dec7",
+            "currentSha256": "99d37880b48f34afaa9fc801f646db9d5f5021b799018c847b428c12b673066c"
+          }
+        ],
+        "visualStatusPreserved": "unverified",
+        "status": "needs-review"
+      },
+      {
+        "id": "DEV-DATA",
+        "paths": [
+          {
+            "path": "game/src/agent/agent.data.js",
+            "recordedSha256": "5b1910d82355a329d3a18c91d75fdc98adcffa8c263c00c00ec0a3f705d14501",
+            "currentSha256": "f5b4138c9ef0c6996c53ac811d06f486633293f1c1ff20cb044e88267d0d3c10"
+          }
+        ],
+        "visualStatusPreserved": "unverified",
+        "status": "needs-review"
+      },
+      {
+        "id": "HUB-DEPLOY-STANDARD",
+        "paths": [
+          {
+            "path": "game/src/hub/game.hub.depart.js",
+            "recordedSha256": "bac138ae4581178bfe1a23554e465c7fc89d254147cdfe5f2266f3398edce9fa",
+            "currentSha256": "22eca8690c54e15615b96f2d94f5a7d059559cade74c78536d01374a57ac31b2"
+          }
+        ],
+        "visualStatusPreserved": "unverified",
+        "status": "needs-review"
+      },
+      {
+        "id": "HUB-DEPLOY-ELITE",
+        "paths": [
+          {
+            "path": "game/src/hub/game.hub.depart.js",
+            "recordedSha256": "bac138ae4581178bfe1a23554e465c7fc89d254147cdfe5f2266f3398edce9fa",
+            "currentSha256": "22eca8690c54e15615b96f2d94f5a7d059559cade74c78536d01374a57ac31b2"
+          }
+        ],
+        "visualStatusPreserved": "unverified",
+        "status": "needs-review"
+      }
+    ],
+    "frozenRows": 13,
+    "perIdStatusLedger": [
+      {
+        "id": "TITLE",
+        "scope": "active",
+        "status": "partial-live-review",
+        "stableFrame": "seen-in-chat-not-saved",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "SLOTS",
+        "scope": "active",
+        "status": "partial-live-review",
+        "stableFrame": "seen-in-chat-not-saved",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-DEPLOY",
+        "scope": "active",
+        "status": "partial-live-review",
+        "stableFrame": "seen-in-chat-not-saved",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-STASH",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "PREP",
+        "scope": "active",
+        "status": "partial-live-review",
+        "stableFrame": "seen-in-chat-not-saved",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CLASS-CHOICE",
+        "scope": "active",
+        "status": "partial-live-review",
+        "stableFrame": "seen-in-chat-not-saved",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CLASS-GRANT",
+        "scope": "active",
+        "status": "partial-live-review",
+        "stableFrame": "seen-in-chat-not-saved",
+        "visualConclusion": "已亲读历史像素：标题左段遮挡；图中断线造成的背景/图标/卡图空缺不用于美术质量判断。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "MAP",
+        "scope": "active",
+        "status": "partial-live-review",
+        "stableFrame": "seen-in-chat-not-saved",
+        "visualConclusion": "已亲读四层历史像素；第一层1183×764的两条路线完整，二至四层658×764局部滚动/拥挤，不能将旧窄窗口外推为所有当前窗口。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CHEST-PICK",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史三选一图，遮挡确曾存在；当前实现无新帧，标已改待验，非仍未修。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BATTLE",
+        "scope": "active",
+        "status": "partial-live-review",
+        "stableFrame": "seen-in-chat-not-saved",
+        "visualConclusion": "live-partial",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BATTLE-REWARD",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "historical-only",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BOSS-GATE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "historical-only",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BOSS-DECK",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "historical-only",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BOSS-BATTLE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "historical-only",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CHEST-ALL",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读历史满包首脑奖励图：未滚动时仅露卡牌顶部；口袋条遮挡已有独立修复，须拆开验。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "EXIT-FINAL",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "historical-only",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "EXTRACT-STASH",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "historical-only",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "EXTRACT-DONE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "source-newer-than-image",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "STUDIO",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "GUIDE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "历史部分/过渡帧，稳定视觉证据不足",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-SHOP",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-UPGRADE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-CLASSES",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-ACH",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-BACKS",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "历史部分/过渡帧，稳定视觉证据不足",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-COLLECTION",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-ACHIEVEMENTS",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "SETTINGS",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "INBOX",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "DATA",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读旧DATA.jpg和新版DEV-DATA.png；旧图human原文与清空布局已过时，新独立壳和当前provenance未实页核。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "STASH-ITEM",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "STASH-MATERIAL",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "MATERIAL-CONFIRM",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CARD-ZOOM",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CLASS-POOL",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "五职业首屏历史图已亲读",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "PHOTO-ZOOM",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "PREP-GOALS",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史图，未采当前实页",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "RUN-SHOP",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读历史零币货架；断线破图不作素材质量依据，卡文整体灰暗同时获CSS双层opacity支持。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "RUN-SELL",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读历史空态；有货卡列表与售出回执尚无本轮像素。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "FIRE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读历史手动复原空页，但此图对现行FIRE失效；现行自动发奖链未亲读像素。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "ALTAR",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读历史未激活图，碎片不足/无道具两条原因低对比；背景断线不作为重绘理由。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "SACRIFICE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史献祭页：标题遮挡、7张牌可见；当时破图不可用于否定卡图。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "ALTAR-REWARD",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读空口袋历史二选一；旧画面未覆盖可复原、满包、离开后回访。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "EVENT",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读EVENT-stable历史稳定像素；存在断线背景/图标，且当前事件ID/状态对应关系未验证，不以此定性现行单按钮缺陷。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "SLOT-RECOVERY",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "无对应实图，仅源码",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "TITLE-ACH",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "无对应实图，仅源码",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "SUGGESTION",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "无对应实图，仅源码",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "LEAVE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "无对应实图，仅源码",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "ABANDON-DONE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "source-only",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "TERMINAL-RETRY",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "fixture-stale",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "EXIT-SCREEN",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "无对应实图，仅源码",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-PETS",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "无对应实图，仅源码",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "STASH-EGG",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "无对应实图，仅源码",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "STASH-RAW",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "无对应实图，仅源码",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "STASH-CONFIRM",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "无对应实图，仅源码",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-HELP",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "无对应实图，仅源码",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CARD-DESIGNER",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY_GUARDED：无原清单界面图，本轮未绕开开关。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CARDS-EXPORT",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY：已有动作与只读文本框源码，无本页实图；不声称拥挤或遮挡。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CARDS-IMPORT",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY_GUARDED：无实图，未开启或执行导入。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "RUN-TRANSITION",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "NODE-SAFE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "PICKUP",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "RESOURCE-PICK",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CHEST-SEARCH",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "AMMO-TUTORIAL",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "historical-newer-code",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BATTLE-SETTLE-RETRY",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "无对应实图，仅源码",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "DOOR",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "POCKET-RESTORE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "EVENT-CHOICE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "EVENT-RECODE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "EVENT-GAMBLE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "LAST-LAMP",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "LAST-LAMP-RESULT",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "ALTAR-FRAGMENT-FAIL",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "EXIT-PAY",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "source-only",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "EXTRACT-RETRY",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "source-only",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "DEATH",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "source-newer-than-image",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BAG",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BAG-DISCARD",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BAG-PEARL",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BAG-POUCH",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BATTLE-GRAVE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "historical-invalid-assets",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BATTLE-DECK",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "source-only",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BATTLE-BAG",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "source-only",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BATTLE-CHOICE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "historical-invalid-assets",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BATTLE-PAYMENT",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "historical-invalid-assets",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BATTLE-DISCOVER",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "historical-invalid-assets",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BATTLE-INFUSE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "source-only",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BATTLE-TARGET",
+        "scope": "active",
+        "status": "partial-live-review",
+        "stableFrame": "seen-in-chat-not-saved",
+        "visualConclusion": "live-partial",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "BATTLE-SETTINGS",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "historical-invalid-assets",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "TERM-TIP",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "无对应实图，仅源码",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "NODE-NOTE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读NODE-NOTE-healthy.jpg：旧截图可见输入框材质突兀及按钮分组；本轮未采当前图，其他notes改动只证明清空确认修订，不证明该页已改。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "NOTES-EXPORT",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY：无本页截图，不把NODE-NOTE截图代替导出页。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "NOTES-IMPORT",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY：无本页实图；部分失败文案/可恢复性尚未实页核。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "NOTES-CLEAR",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读NOTES-CLEAR-healthy.jpg，但图内金色确认按钮为旧版，不得用来重新派发已经完成的danger样式。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "DEV-DEBUG",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读 docs/evidence/2026-10-03-batch1-toolpages/DEV-DEBUG.png；是既有ZCode当前窗口证据，本轮未操作浏览器。既有截图顶部口袋条压壳；归档已明确该共享层问题另有归属，当前修复状态未实页核。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "DEV-AGENT",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读 docs/evidence/2026-10-03-batch1-toolpages/DEV-AGENT.png；是既有ZCode当前窗口证据，本轮未操作浏览器。已看见停机按钮和配置空态，长内容可滚动；不证明已配置/实际调用/运行中状态。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "DEV-DATA",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读 docs/evidence/2026-10-03-batch1-toolpages/DEV-DATA.png；是既有ZCode当前窗口证据，本轮未操作浏览器。证据为空记录，不能证明有记录驱动标签或当前未提交provenance显示；截图上部摘要大留白及口袋条需实际复核后定性。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "DEV-KEYS",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读 docs/evidence/2026-10-03-batch1-toolpages/DEV-KEYS.png；是既有ZCode当前窗口证据，本轮未操作浏览器。按钮/禁用原因清楚；存在共享口袋条叠压，不应拆成四页各修。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "SFX-AUDITION",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY_AUDIO_EXEMPT：仅布局源码核对，无页面图；按用户要求未播放、未评价听感或音源接线。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HOME-SCENE",
+        "scope": "frozen",
+        "status": "frozen",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。",
+        "performanceStatus": "excluded-frozen"
+      },
+      {
+        "id": "LAB-DOOR",
+        "scope": "frozen",
+        "status": "frozen",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。",
+        "performanceStatus": "excluded-frozen"
+      },
+      {
+        "id": "LAB-PREP",
+        "scope": "frozen",
+        "status": "frozen",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。",
+        "performanceStatus": "excluded-frozen"
+      },
+      {
+        "id": "LAB-MAP",
+        "scope": "frozen",
+        "status": "frozen",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。",
+        "performanceStatus": "excluded-frozen"
+      },
+      {
+        "id": "LAB-RUNES",
+        "scope": "frozen",
+        "status": "frozen",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。",
+        "performanceStatus": "excluded-frozen"
+      },
+      {
+        "id": "LAB-ALTAR",
+        "scope": "frozen",
+        "status": "frozen",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。",
+        "performanceStatus": "excluded-frozen"
+      },
+      {
+        "id": "LAB-SHOP",
+        "scope": "frozen",
+        "status": "frozen",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。",
+        "performanceStatus": "excluded-frozen"
+      },
+      {
+        "id": "LAB-RETRY",
+        "scope": "frozen",
+        "status": "frozen",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。",
+        "performanceStatus": "excluded-frozen"
+      },
+      {
+        "id": "LAB-ENDING",
+        "scope": "frozen",
+        "status": "frozen",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。仅确认资源文件存在，未亲读三图，不评价画质。",
+        "performanceStatus": "excluded-frozen"
+      },
+      {
+        "id": "LAB-DONE",
+        "scope": "frozen",
+        "status": "frozen",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。",
+        "performanceStatus": "excluded-frozen"
+      },
+      {
+        "id": "CLASS-CHOICE-WU",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史共享图，只对实际可见内容有效",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CLASS-CHOICE-CHANGWUYU",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CLASS-CHOICE-BAITA",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CLASS-CHOICE-HEIXIANG",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CLASS-CHOICE-XINGYUE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CLASS-POOL-WU",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史共享图，只对实际可见内容有效",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CLASS-POOL-CHANGWUYU",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史共享图，只对实际可见内容有效",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CLASS-POOL-BAITA",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史共享图，只对实际可见内容有效",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CLASS-POOL-HEIXIANG",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史共享图，只对实际可见内容有效",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CLASS-POOL-XINGYUE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史共享图，只对实际可见内容有效",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-CLASSES-WU",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史共享图，只对实际可见内容有效",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-CLASSES-CHANGWUYU",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史共享图，只对实际可见内容有效",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-CLASSES-BAITA",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史共享图，只对实际可见内容有效",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-CLASSES-HEIXIANG",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史共享图，只对实际可见内容有效",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-CLASSES-XINGYUE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史共享图，只对实际可见内容有效",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-COLLECTION-WU",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史共享图，只对实际可见内容有效",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-COLLECTION-CHANGWUYU",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-COLLECTION-BAITA",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-COLLECTION-HEIXIANG",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-COLLECTION-XINGYUE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-HELP-DEPLOY",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-HELP-STASH",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-HELP-SHOP",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-HELP-UPGRADE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-HELP-CLASSES",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-HELP-ACH",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-DEPLOY-STANDARD",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史共享图，只对实际可见内容有效",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-DEPLOY-ELITE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CHEST-SMALL",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CHEST-MEDIUM",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读历史中箱三选一像素，当前修复后未见。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CHEST-BIG",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CHEST-CLASS",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CHEST-BOSSREWARD",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读辅助首脑奖励历史图；不是自然完整跑局证明。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CHEST-MULTIQUEUE",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CHEST-FULLBAG",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读历史满包首脑图，长警示挤压卡面；当前口袋避让已修需复核。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "CHEST-EMPTYCATALOG",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "证据不足：本轮未见该状态的有效像素；源码覆盖不等于视觉或操作验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "MAP-LAYER1",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读第一层历史1183×764图，两路线可见；当前窗口仍需新帧。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "MAP-LAYER2",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读第二层历史658×764辅助图；未操作多尺寸，不把此尺寸当本轮目标。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "MAP-LAYER3",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读第三层历史658×764辅助图，日志右缘贴当前节点/标牌；新帧未核。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "MAP-LAYER4",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "已亲读第四层历史辅助图：层名与目标身份成立；不是首脑胜利或最终撤离验收。",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-ACH-VIEW-BACKS",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-ACH-VIEW-ACHIEVEMENTS",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史共享图，只对实际可见内容有效",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "HUB-ACH-VIEW-CLASSES",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史共享图，只对实际可见内容有效",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "STUDIO-TYPE-全部",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "亲读历史共享图，只对实际可见内容有效",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "STUDIO-TYPE-武术",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "STUDIO-TYPE-法术",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "STUDIO-TYPE-生物",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "STUDIO-TYPE-道具",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "STUDIO-TYPE-装备",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "STUDIO-TYPE-事件",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "STUDIO-TYPE-能力卡",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "STUDIO-TYPE-资源",
+        "scope": "active",
+        "status": "needs-review",
+        "stableFrame": "unverified",
+        "visualConclusion": "没有此变体独立实图，不外推通过",
+        "performanceStatus": "unmeasured"
+      },
+      {
+        "id": "LAB-ENDING-1",
+        "scope": "frozen",
+        "status": "frozen",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。资源存在，未亲读原画。",
+        "performanceStatus": "excluded-frozen"
+      },
+      {
+        "id": "LAB-ENDING-2",
+        "scope": "frozen",
+        "status": "frozen",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。资源存在，未亲读原画。",
+        "performanceStatus": "excluded-frozen"
+      },
+      {
+        "id": "LAB-ENDING-3",
+        "scope": "frozen",
+        "status": "frozen",
+        "stableFrame": "unverified",
+        "visualConclusion": "SOURCE_ONLY_FROZEN：原清单无界面图，本轮只核源码；未评价实际布局优劣，未解冻。资源存在，未亲读原画。",
+        "performanceStatus": "excluded-frozen"
+      }
+    ],
+    "reuseRule": "源文件SHA256仍一致时复用原源码结论/历史证据来源；源文件变化行只复用不受影响部分并保留原visual状态，重新实页核对。四份review的旧图和source-only均不算当前视觉通过。"
+  },
+  "readOnlyFindings": [
+    {
+      "id": "TITLE",
+      "conclusion": "相关当前输入指纹与coverage一致；已有历史图不可替代当前标题实页。index.html对标题壁纸 wallpaper-original.webp 做preload，标题资源当前计数/字节需由负责人在当前平台窗口读取performance resource entries。",
+      "measureSelector": "#title, #title .title-bg, #title .winter-wordmark"
+    },
+    {
+      "id": "MAP",
+      "conclusion": "game/css/expedition-map.css指纹与coverage不一致；旧截图不复用作当前视觉依据。四层地图独特布局/节点量需逐层测。",
+      "measureSelector": "#game, #viewport"
+    },
+    {
+      "id": "BATTLE",
+      "conclusion": "共享战斗视图指纹一致；普通战当前视觉仅coverage记载的partial-live-review，峰值交互仍待负责人当前窗口测。",
+      "measureSelector": "#ovBody .battle-stage.sts, #ovBody .sts-hand .bt-card, #ovBody .sts-enemy"
+    },
+    {
+      "id": "BOSS-BATTLE",
+      "conclusion": "共享战斗视图指纹一致；首脑战历史/源码状态不升级，须单独测多敌、多目标/意图和演出峰值。",
+      "measureSelector": "#ovBody .battle-stage.sts, #ovBody .sts-hand .bt-card, #ovBody .sts-enemy"
+    },
+    {
+      "id": "STUDIO",
+      "conclusion": "照相馆源码指纹一致；已有窗口化、缓存、缩略图预热和观察器清理的来源结论可复用，但当前密集列表性能未测。",
+      "measureSelector": ".card-library-page, #libGrid .lib-item, #libGrid .studio-photo-art img"
+    },
+    {
+      "id": "PHOTO-ZOOM",
+      "conclusion": "大图详情输入指纹一致；单独核实际放大图decode/关闭释放，不将列表结论外推。",
+      "measureSelector": "#cardZoom, #cardZoom .cz-photo-image img"
+    }
+  ],
+  "performanceInterfaces": [
+    {
+      "entry": "?perfProbe=1（DEV only）",
+      "source": "game/src/core/perf-probe.local.js; injected panel #vitePerfProbe",
+      "controls": [
+        "button[data-perf=\"loads\"]",
+        "button[data-perf=\"idle\"]",
+        "button[data-perf=\"pan\"]"
+      ],
+      "readableOutput": "#vitePerfResult / console [vite-perf] JSON",
+      "metrics": [
+        "navigation responseEnd/domContentLoaded/loadEvent",
+        "paint entries",
+        "battle module/frame measures",
+        "resource count/transfer KiB",
+        "6s rAF Hz/P95/over20ms",
+        "canvas draw Hz/P95/max",
+        "long task count/max",
+        "loopTicks",
+        "viewport CSS/buffer/DPR"
+      ],
+      "caveat": "idle/pan仅远征静止地图可用；pan会暂时改变camera并在finally恢复，非纯读取。loads只读。探针不测DOM屏幕页面FPS、内存或图片解码。"
+    },
+    {
+      "entry": "?photoFps=1（DEV only）",
+      "source": "game/src/hub/game.cardslib.photo-fps.js; 照相馆代码调用 samplePhotoFps",
+      "controls": "无需额外按钮；照相馆打开后有settled-idle采样；滚动/筛选等由负责人执行既有自然操作触发相应采样调用。",
+      "readableOutput": "console [photo-fps] JSON",
+      "metrics": [
+        "fps/frameP95/frameMax",
+        "over8ms/over20ms",
+        "longTasks及max",
+        "支持时long-animation-frame含script/render/layout信息",
+        "页面可见状态"
+      ],
+      "caveat": "仅照相馆DOM rAF；工具自身仅记录读指标，用户动作仍由负责人控制；内置浏览器是否暴露console需现场确认。"
+    },
+    {
+      "entry": "战斗性能既有开发指标",
+      "source": "game/src/game.boot.js (SDT.__frameStats); game/src/battle/view/battle.frames.js (?perfProbe=1)",
+      "readableApi": "window.SDT.__frameStats；performance.getEntriesByName(\"sdt:battle-load\",\"measure\")及sdt:battle-frames-* measures；console [vite-perf-frames]",
+      "metrics": [
+        "已有render/update/fps平滑统计（具体对象字段需在窗口DOM/API只读确认）",
+        "战斗帧集加载时长/角色",
+        "battle module load duration"
+      ],
+      "caveat": "frames日志偏帧集加载，不等同战斗动画帧率或交互峰值。不可推造字段。"
+    }
+  ],
+  "ownerMeasurementPlan": [
+    {
+      "scenario": "标题冷/热进入与818资源预热线索",
+      "path": "当前窗口打开标题页；对照cold/warm两次performance.getEntriesByType(\"resource\")，筛 title background/wordmark/font，记录请求数、transferSize、decodedBodySize及responseEnd；读取#title自然尺寸、DOM节点和图像complete/naturalWidth。",
+      "selectors": [
+        "#title",
+        "#title .title-bg",
+        "#title .winter-wordmark"
+      ],
+      "metrics": {
+        "loadMs": null,
+        "resourceCount": null,
+        "transferKiB": null,
+        "domElements": null,
+        "imageDecodedCount": null,
+        "rAFP95Ms": null
+      }
+    },
+    {
+      "scenario": "首次战斗进入",
+      "path": "从当前可达标题/整备自然进入战斗；读sdt:battle-load及sdt:battle-frames-*，战斗稳定后和交互峰值分开记录。",
+      "selectors": [
+        "#battleRoot",
+        ".battle-hand",
+        ".battle-enemies",
+        ".battle-fx-layer"
+      ],
+      "metrics": {
+        "battleLoadMs": null,
+        "frameAssetLoadMs": null,
+        "domElements": null,
+        "imageDecodedCount": null,
+        "rAFP95Ms": null,
+        "longTasks": null
+      }
+    },
+    {
+      "scenario": "照相馆密集图库与大图详情",
+      "path": "照相馆首次打开、热返回、连续滚动/筛选；photoFps=1若当前dev窗口可用则复用现成输出；点开/关闭大图检查重复开关后的DOM节点/图片数量及decode状态。",
+      "selectors": [
+        "#cardsLib",
+        ".cz-photo-grid",
+        ".cz-photo-card",
+        ".cz-photo-zoom img"
+      ],
+      "metrics": {
+        "openMs": null,
+        "visibleCards": null,
+        "domElements": null,
+        "imageCompleteCount": null,
+        "decodedImages": null,
+        "frameP95Ms": null,
+        "longTasks": null,
+        "postCloseNodes": null
+      }
+    },
+    {
+      "scenario": "仓库密集图",
+      "path": "自然进入仓库当前页，记屏内卡/图节点数量与滚动筛选操作；共享图库/图片解码逻辑可与STUDIO比较，布局及数据量单独注明。",
+      "selectors": [
+        "#hubMain",
+        ".hub-inventory img",
+        ".hub-inventory .card"
+      ],
+      "metrics": {
+        "domElements": null,
+        "visibleImages": null,
+        "decodedImages": null,
+        "rAFP95Ms": null,
+        "longTasks": null
+      }
+    },
+    {
+      "scenario": "四层地图静止/移动/缩放",
+      "path": "每层静止态；现成#vitePerfProbe在可用时测idle/pan各6秒；地图缩放走自然输入单独记录。",
+      "selectors": [
+        "#mapCanvas",
+        "#mapViewport",
+        ".map-node"
+      ],
+      "metrics": {
+        "layerNodeCount": null,
+        "rafHz": null,
+        "frameP95Ms": null,
+        "drawP95Ms": null,
+        "longTasks": null,
+        "zoomFrameP95Ms": null
+      }
+    },
+    {
+      "scenario": "普通战/首脑战交互峰值",
+      "path": "普通战和首脑战分开；分别记录静止、出牌/多目标、敌方演出、回合结算。仅利用既有frame统计和浏览器PerformanceObserver；不以静止图替峰值。",
+      "selectors": [
+        "#battleRoot",
+        ".battle-hand",
+        ".battle-enemies",
+        ".battle-fx-layer"
+      ],
+      "metrics": {
+        "rAFP95Ms": null,
+        "longTasks": null,
+        "domElements": null,
+        "frameSetMeasures": null,
+        "renderMs": null
+      }
+    },
+    {
+      "scenario": "选人动画与隐藏/恢复",
+      "path": "选人页待机稳定、切出隐藏再返回各测；检查当前活动角色图数量、持续rAF、隐藏时rAF回调是否停、返回后是否重复。",
+      "selectors": [
+        "#characterSelect",
+        ".character-card",
+        ".character-portrait"
+      ],
+      "metrics": {
+        "domElements": null,
+        "activeImages": null,
+        "rAFP95Ms": null,
+        "hiddenRafCallbacks": null,
+        "restoreFrameP95Ms": null
+      }
+    },
+    {
+      "scenario": "资源释放",
+      "path": "图库详情/选人/战斗进出重复往返，记录操作前后相关DOM/图像数、active observer/计时器如现有开发界面可见；浏览器JS heap非可用就留null。",
+      "selectors": [
+        "#cardsLib",
+        ".cz-photo-zoom",
+        "#characterSelect",
+        "#battleRoot"
+      ],
+      "metrics": {
+        "beforeNodes": null,
+        "afterNodes": null,
+        "beforeImages": null,
+        "afterImages": null,
+        "jsHeapBytes": null,
+        "listenerCount": null
+      }
+    }
+  ],
+  "limitations": [
+    "本代理未操作浏览器；本JSON所有数值均为null待负责人实测。",
+    "read-only DOM/API可读取element count、Image.complete/naturalWidth/naturalHeight、performance resource/navigation/measure、现存开发接口输出；浏览器内部GPU显存、精确图片解码内存、监听器总数、JS heap若窗口未授权/未暴露均null。",
+    "页面rAF统计会受浏览器节流影响，确认当前窗口可见；不要用工具调用耗时推 FPS。",
+    "selector均按源码找到的DOM/稳定容器；测量前在当前窗口核元素存在。Canvas地图只可读#game尺寸，地图绘制节点数不适用DOM计数；source-only结论不算视觉通过。"
+  ],
+  "implementationReport": {
+    "date": "2026-10-03",
+    "files": [
+      "game/src/core/perf-probe.local.js",
+      "tests/perf-probe-summary.test.js"
+    ],
+    "changes": [
+      "增加折叠状态默认开启的小把手；展开后可选测当前页面/地图idle/pan/读加载。",
+      "新增通用页面6秒采样：不约束game state、不改camera；起止记录机制标签、DOM/image/canvas计数、image.complete/naturalWidth摘要、采样窗Resource Timing可用条目与transfer bytes。",
+      "页面机制离开或visibilitychange隐藏则中止，结果data-state=incomplete；finally清理rAF/timeout/observer/visibility listener并还原Renderer.draw wrapper。",
+      "统一报告frameMedianMs/drawMedianMs；明示rafMetricLabel是回调率不是屏幕FPS，screenFps=null。draw与rendererScope仅代表SDT.Renderer.draw，不代表Pixi合成或屏幕绘制。",
+      "loads及通用页报告资源时序缓冲可能截断；250条时提示possibleBufferTruncation，不能当资源全量。",
+      "原地图idle/pan采样条件、pan公式和camera finally恢复语义保留；折叠不停止正在运行的采样。",
+      "折叠态实收敛为左边缘24×64px竖向把手；展开态移至右上角。同步panel宽高/定位/transform/section.hidden及handle aria-expanded，避免原右下角300px拦截区域。",
+      "探针按#overlay.hidden前景状态挂载：overlay可见时作为#overlay直接子项（不进会被替换的#ovBody），隐藏时移回body；每次迁移仅清除panel自身inert。MutationObserver只观察#overlay的hidden属性；install guard复用既有#vitePerfProbe防重复observer。未改overlay/focus isolation。"
+    ],
+    "pageMechanisms": [
+      "hub-deploy",
+      "hub-stash",
+      "hub-shop",
+      "hub-upgrade",
+      "hub-classes",
+      "hub-ach",
+      "prep (#depMain)",
+      "extract (#exMain)",
+      "battle (battle overlay mode or .battle-stage)",
+      "loot (chest overlay mode)",
+      "discover (discover overlay mode)",
+      "terminal (doom overlay mode)",
+      "collection (.card-library-page)",
+      "character-select (.cls2-page/.cls2-stage)",
+      "title (#title)",
+      "map (#viewport/#game while overlay hidden)",
+      "unknown overlay/page fallback includes stable foreground root id, semantic classes, and overlay mode in signature"
+    ],
+    "validityRule": "Current foreground priority is visible #overlay and #ovBody.firstElementChild, then visible title, then map canvas. Root id + stable semantic classes + overlay card mode define signature; page-in/swap/closing/entering/selection animation classes and battle phase/action do not. Unknown roots remain measurable and abort on stable signature change. Static DOM counts never claim peak coverage.",
+    "test": [
+      "node --check game/src/core/perf-probe.local.js：通过",
+      "node --check tests/perf-probe-summary.test.js：通过",
+      "git diff --check（两目标文件）：通过",
+      "npx vitest run tests/perf-probe-summary.test.js --reporter=dot：Vite config打包触发esbuild spawn EPERM，未执行测试。",
+      "npx vitest run tests/perf-probe-summary.test.js --reporter=dot --configLoader native --pool=threads --maxWorkers=1 --minWorkers=1：Vite Windows安全路径解析尝试execFile spawn EPERM，未执行测试。"
+    ],
+    "ownerSuppliedSamples": [
+      {
+        "scenario": "map-idle",
+        "durationMs": 6000.7,
+        "callbacks": 990,
+        "rafCallbackRateHz": 164.98,
+        "callbackGapP95Ms": 6.2,
+        "longTasks": 0,
+        "rendererDrawCalls": 0,
+        "viewport": {
+          "cssWidth": 1280,
+          "cssHeight": 550,
+          "bufferWidth": 1920,
+          "bufferHeight": 825,
+          "dpr": 1.5
+        },
+        "screenFps": null,
+        "note": "真实当前内置浏览器窗口；回调率不是屏幕FPS。"
+      },
+      {
+        "scenario": "map-pan",
+        "durationMs": 6001.8,
+        "callbacks": 990,
+        "rafCallbackRateHz": 164.95,
+        "callbackGapP95Ms": 6.2,
+        "longTasks": 0,
+        "rendererDrawCalls": 990,
+        "rendererDrawP95Ms": 0.4,
+        "rendererDrawMaxMs": 1.2,
+        "viewport": {
+          "cssWidth": 1280,
+          "cssHeight": 550,
+          "bufferWidth": 1920,
+          "bufferHeight": 825,
+          "dpr": 1.5
+        },
+        "screenFps": null,
+        "note": "真实当前内置浏览器窗口；draw只表示SDT.Renderer绘制计时，不等于GPU/屏幕FPS。"
+      },
+      {
+        "scenario": "warm-reload-loads",
+        "navigation": {
+          "responseEndMs": 14.4,
+          "domContentLoadedMs": 805.6,
+          "loadEventMs": 854.6,
+          "firstContentfulPaintMs": 256
+        },
+        "resourceTimingEntriesAvailable": 250,
+        "possibleBufferTruncation": true,
+        "screenFps": null,
+        "note": "资源计时条目达到250，疑似命中缓冲上限，不把250当全量资源数。"
+      }
+    ],
+    "browserRunBySubagent": false,
+    "newLifecycleTest": "tests/perf-probe-summary.test.js adds collection→extract mechanism-transition abort and cleanup, in addition to visibility abort cleanup. The project owner previously reported the 3 targeted A7 tests pass via workflow verify; no rerun was requested after this narrow classifier/test addition.",
+    "browserRerunBySubagent": false,
+    "latestVerification": {
+      "workflowVerify": "npm run --silent workflow -- verify --task WF-experience-art-exec --tests tests/perf-probe-summary.test.js",
+      "result": "未进入测试运行；workflow返回 spawnSync git EPERM。负责人按当前正常权限自行运行同一专属测试。",
+      "staticChecks": [
+        "node --check game/src/core/perf-probe.local.js 通过",
+        "node --check tests/perf-probe-summary.test.js 通过",
+        "git diff --check -- game/src/core/perf-probe.local.js tests/perf-probe-summary.test.js 通过"
+      ],
+      "uiRegression": "既有生命周期测试新增断言：默认折叠为24×64且内容隐藏；展开为右上宽330px且aria-expanded=true；再次折叠复核尺寸/aria，再开始通用采样。测试总数不变。"
+    },
+    "latestOverlayCompatibility": {
+      "simulatedTest": "tests/perf-probe-summary.test.js增加真实DOM inert模拟：#viewport保持inert，前景#overlay不inert，探针挂入overlay并可点击展开；overlay.hidden切换后探针回body、自身inert=false，外部兄弟仍inert；重复install不增加observer。原rAF与机制离场abort清理测试保留。",
+      "installationLifecycle": "DEV页面一次install；重复install被#vitePerfProbe guard拦截；MutationObserver仅监听hidden attribute，不监听childList/style，因此probe append不会回调成循环。",
+      "checks": [
+        "node --check game/src/core/perf-probe.local.js 通过",
+        "node --check tests/perf-probe-summary.test.js 通过",
+        "git diff --check -- game/src/core/perf-probe.local.js tests/perf-probe-summary.test.js 通过"
+      ],
+      "testRun": "未运行；由负责人按正常权限workflow verify复核这5例。",
+      "browserRunBySubagent": false
+    }
+  },
+  "integrationTests": {
+    "result": "passed",
+    "files": 1,
+    "tests": 5,
+    "report": "docs/evidence/2026-10-03-WF-experience-art-exec-A7/2026-10-03T08-51-03.072Z-06eedec4.json",
+    "reason": "Own inert attribute clearing and external HTML inert preservation verified; prior failed jsdom property assertion retained in earlier report"
+  }
+}

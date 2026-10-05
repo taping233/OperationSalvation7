@@ -1,0 +1,87 @@
+{
+  "scope": [
+    "game/assets/cards/spell-cc-demon.webp",
+    "game/assets/thumbs/cards/spell-cc-demon.webp",
+    "game/assets/ui/icons/settings-gear-r2.webp"
+  ],
+  "ownIssues": [],
+  "fullGate": {
+    "ok": false,
+    "errorCount": 326,
+    "warningCount": 839
+  },
+  "outsideExamples": [
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/bound-shadow.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "27d33088d9c8bff33221a9978eb65201ca5e4989243f93075fab6ccfed43350f"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/consumable.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "4acd7d50e6911312061ea1806db983fd57502c3ceefcadd37865097115ebabb4"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/creature-cmtn6ulm4boj.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "5514dbca798b26a5ef8f1c8d3764715033afda11ff747e40ecd9a62962c104b2"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/creature-cmtn79743r2n.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "29d8431747ac31887b593163bf637031c6f1d4288c6a6a766ebfbff8b7829350"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/creature-cmtn7err0a7.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a388105058881a20848457a0ee1aadbdc2bafd1874f44a66d5fd8345e2b14a4f"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/creature-tt8-curseimmune.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "eb32abde7a9f42e270d2331b641344d94cd285dfffcdf4c5bc2152082524f16c"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/creature-tt8-energycap.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "b52d33413d91ec6ae6e1a8e9d1f5133833609d25416c7faec003ee4bb4a708e1"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/creature-tt8-healplus.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "3255c32b13f619192ae6ffe039f5d32c061ac7bc114c08a768680c2bd76cfd3a"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/creature-tt8-nofocus.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "78c92cde06d62703174994da15cb97eb7eb3e45e450366f733632d1328b6817f"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/curse-drain.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "d42ba699b989365f0f4784a4bbb3ac2f05a75c05786aa0ac7f7181acd455c31d"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/curse-freeze.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "d126e41d7ea9ab6563405663f8c4fb8a6b4df38e2a5edf551cbdca548770199d"
+    },
+    {
+      "code": "unlisted",
+      "path": "thumbs/cards/curse-silence.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ed3497eabfae0c9d39275d8d141d4f5d6068520badacdade87321e248566be07"
+    }
+  ]
+}

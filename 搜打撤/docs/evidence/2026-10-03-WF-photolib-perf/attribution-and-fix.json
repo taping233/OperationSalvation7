@@ -1,0 +1,65 @@
+{
+ "meta": {
+  "head": "425d03920e",
+  "service": "http://127.0.0.1:5344（独立 origin，npm run web --port 5344 --skip-compile，本会话 exec）",
+  "browser": "ZCode 内置浏览器，主会话操作；有效数据均产帧期真实输入（cua 滚轮）采集；pane 不产帧时（后台/遮挡）rAF=0、IO 不回调，测量自动失效（全零=双侧无工作，非无卡顿）",
+  "date": "2026-10-03",
+  "change": "game/css/expedition-library.css 照相馆瓦片规则 content-visibility:auto→visible（显式压过 winter.css:250 全局旧行），注释留痕"
+ },
+ "reproduction": [
+  "A7 基线（5343）：照相馆滚动 5 秒 88/138/207ms 主线程阻塞×3 + 2 longtask",
+  "5344 复现：真实滚轮 8×500px（实际 7677px，104 次挂载注入）→ longtask [126,115,65,52,77,51,50] 合计 536ms"
+ ],
+ "attribution": {
+  "excluded": [
+   {
+    "suspect": "挂载 HTML 注入（mountLibTile/insertAdjacentHTML）",
+    "evidence": "104 次注入累计仅 7.9-9.8ms"
+   },
+   {
+    "suspect": "悬停预览重建（滚动合成 mouseover）",
+    "evidence": "滚动期 mouseover 仅 1 次（起始位），libPreview innerHTML 重建 0 次"
+   },
+   {
+    "suspect": "动画/过渡",
+    "evidence": "body.cardlib-open 已全局禁（cards.css:239-241），页面打开期间不构成变量"
+   }
+  ],
+  "diagToggles": [
+   {
+    "v": "noshadow",
+    "ltSum": 509
+   },
+   {
+    "v": "nofilter(img filter:none)",
+    "ltSum": 318
+   },
+   {
+    "v": "nooverlay(::before/::after)",
+    "ltSum": 396
+   },
+   {
+    "v": "noimg",
+    "ltSum": 394
+   },
+   {
+    "note": "同口径 536ms 基线：单一视觉组件均非主导（滤镜贡献最大约-40%）"
+   }
+  ],
+  "rootCause": {
+   "what": "content-visibility:auto 的相关性开关（relevance toggling）",
+   "evidence": "同一真实滚轮口径，现场注入 #libGrid .lib-item{content-visibility:visible!important}：longtask 合计 545ms→184ms（-66%），任务数 9→3",
+   "mechanism": "09-29 IO 窗口化之后，占位壳是空格（无内容可跳过）、已挂瓦片本就在视口±1屏的相关区内——c-v:auto 只剩「每步滚动反复进出相关区→样式/布局/栅格化风暴」的纯开销；该属性的价值前提（全量渲染时代跳过 271 张整卡）已被窗口化取代"
+  }
+ },
+ "fix": {
+  "file": "game/css/expedition-library.css（body.cardlib-open #overlay .photo-studio-v3 .lib-item 规则）",
+  "change": "content-visibility:auto → visible（一行+注释）；contain-intrinsic-size 保留成死属性待下轮 CSS 收敛批与 syncLibTileIntrinsicSize 一并清理",
+  "verification": [
+   "计算样式实测 content-visibility=visible",
+   "定向测试 3 文件 18/18 绿（photo-studio-presentation / photo-zoom-lifecycle / card-photo-notes）",
+   "截图对照：阴影/棱彩卡名/选片台/悬停规则无视觉回归（hover 的 content-visibility:visible!important 成为无害死分支）"
+  ],
+  "pending": "修复后真实滚轮终验（需浏览器 pane 产帧，等老板配合）；改动未提交，等打包授权"
+ }
+}

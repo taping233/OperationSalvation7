@@ -13,7 +13,7 @@
     "批量流程定型",
     "check-types常驻挂载"
   ],
-  "stage": "doing",
+  "stage": "partial",
   "checks": [
     {
       "kind": "manual",
@@ -21,6 +21,8 @@
       "result": "passed"
     }
   ],
-  "unverified": [],
-  "updatedAt": "2026-10-01T17:24:47.410Z"
+  "unverified": [
+    "第三批 ui.js/game.menu/quick-nav 大件未做，归 DEBT 战役续排；jsconfig/check-types 现与 HEAD 一致无在途改动（10-05 核对）"
+  ],
+  "updatedAt": "2026-10-05T02:54:37.091Z"
 }

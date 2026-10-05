@@ -1,0 +1,63 @@
+{
+  "owner": "A3 read-only experiment",
+  "status": "confirmed-over-capacity-no-loss-in-memory",
+  "experiment": "现有真实showBackpack→UI.act inspectStack→pouchStoreZoom→pouchTake；jsdom内存，activeSlot=null禁写对局存档，Base.bagCap只在隔离进程设16",
+  "reports": [
+    {
+      "label": "full",
+      "before": {
+        "used": 16,
+        "cap": 16,
+        "cardCount": 4,
+        "supplies": "[{\"name\":\"物资0\",\"value\":1,\"count\":1},{\"name\":\"物资1\",\"value\":1,\"count\":1},{\"name\":\"物资2\",\"value\":1,\"count\":1},{\"name\":\"物资3\",\"value\":1,\"count\":1},{\"name\":\"物资4\",\"value\":1,\"count\":1},{\"name\":\"物资5\",\"value\":1,\"count\":1},{\"name\":\"物资6\",\"value\":1,\"count\":1},{\"name\":\"物资7\",\"value\":1,\"count\":1},{\"name\":\"物资8\",\"value\":1,\"count\":1},{\"name\":\"物资9\",\"value\":1,\"count\":1},{\"name\":\"物资10\",\"value\":1,\"count\":1},{\"name\":\"物资11\",\"value\":1,\"count\":1},{\"name\":\"物资12\",\"value\":1,\"count\":1},{\"name\":\"物资13\",\"value\":1,\"count\":1},{\"name\":\"物资14\",\"value\":1,\"count\":1}]"
+      },
+      "after": {
+        "used": 17,
+        "cap": 16,
+        "cardCount": 4,
+        "stored": 0,
+        "supplies": "[{\"name\":\"物资0\",\"value\":1,\"count\":1},{\"name\":\"物资1\",\"value\":1,\"count\":1},{\"name\":\"物资2\",\"value\":1,\"count\":1},{\"name\":\"物资3\",\"value\":1,\"count\":1},{\"name\":\"物资4\",\"value\":1,\"count\":1},{\"name\":\"物资5\",\"value\":1,\"count\":1},{\"name\":\"物资6\",\"value\":1,\"count\":1},{\"name\":\"物资7\",\"value\":1,\"count\":1},{\"name\":\"物资8\",\"value\":1,\"count\":1},{\"name\":\"物资9\",\"value\":1,\"count\":1},{\"name\":\"物资10\",\"value\":1,\"count\":1},{\"name\":\"物资11\",\"value\":1,\"count\":1},{\"name\":\"物资12\",\"value\":1,\"count\":1},{\"name\":\"物资13\",\"value\":1,\"count\":1},{\"name\":\"物资14\",\"value\":1,\"count\":1}]"
+      }
+    },
+    {
+      "label": "short-one-slot",
+      "before": {
+        "used": 16,
+        "cap": 16,
+        "cardCount": 7,
+        "supplies": "[{\"name\":\"物资0\",\"value\":1,\"count\":1},{\"name\":\"物资1\",\"value\":1,\"count\":1},{\"name\":\"物资2\",\"value\":1,\"count\":1},{\"name\":\"物资3\",\"value\":1,\"count\":1},{\"name\":\"物资4\",\"value\":1,\"count\":1},{\"name\":\"物资5\",\"value\":1,\"count\":1},{\"name\":\"物资6\",\"value\":1,\"count\":1},{\"name\":\"物资7\",\"value\":1,\"count\":1},{\"name\":\"物资8\",\"value\":1,\"count\":1},{\"name\":\"物资9\",\"value\":1,\"count\":1},{\"name\":\"物资10\",\"value\":1,\"count\":1},{\"name\":\"物资11\",\"value\":1,\"count\":1},{\"name\":\"物资12\",\"value\":1,\"count\":1},{\"name\":\"物资13\",\"value\":1,\"count\":1}]"
+      },
+      "after": {
+        "used": 17,
+        "cap": 16,
+        "cardCount": 7,
+        "stored": 0,
+        "supplies": "[{\"name\":\"物资0\",\"value\":1,\"count\":1},{\"name\":\"物资1\",\"value\":1,\"count\":1},{\"name\":\"物资2\",\"value\":1,\"count\":1},{\"name\":\"物资3\",\"value\":1,\"count\":1},{\"name\":\"物资4\",\"value\":1,\"count\":1},{\"name\":\"物资5\",\"value\":1,\"count\":1},{\"name\":\"物资6\",\"value\":1,\"count\":1},{\"name\":\"物资7\",\"value\":1,\"count\":1},{\"name\":\"物资8\",\"value\":1,\"count\":1},{\"name\":\"物资9\",\"value\":1,\"count\":1},{\"name\":\"物资10\",\"value\":1,\"count\":1},{\"name\":\"物资11\",\"value\":1,\"count\":1},{\"name\":\"物资12\",\"value\":1,\"count\":1},{\"name\":\"物资13\",\"value\":1,\"count\":1}]"
+      }
+    },
+    {
+      "label": "exact",
+      "before": {
+        "used": 15,
+        "cap": 16,
+        "cardCount": 4,
+        "supplies": "[{\"name\":\"物资0\",\"value\":1,\"count\":1},{\"name\":\"物资1\",\"value\":1,\"count\":1},{\"name\":\"物资2\",\"value\":1,\"count\":1},{\"name\":\"物资3\",\"value\":1,\"count\":1},{\"name\":\"物资4\",\"value\":1,\"count\":1},{\"name\":\"物资5\",\"value\":1,\"count\":1},{\"name\":\"物资6\",\"value\":1,\"count\":1},{\"name\":\"物资7\",\"value\":1,\"count\":1},{\"name\":\"物资8\",\"value\":1,\"count\":1},{\"name\":\"物资9\",\"value\":1,\"count\":1},{\"name\":\"物资10\",\"value\":1,\"count\":1},{\"name\":\"物资11\",\"value\":1,\"count\":1},{\"name\":\"物资12\",\"value\":1,\"count\":1},{\"name\":\"物资13\",\"value\":1,\"count\":1}]"
+      },
+      "after": {
+        "used": 16,
+        "cap": 16,
+        "cardCount": 4,
+        "stored": 0,
+        "supplies": "[{\"name\":\"物资0\",\"value\":1,\"count\":1},{\"name\":\"物资1\",\"value\":1,\"count\":1},{\"name\":\"物资2\",\"value\":1,\"count\":1},{\"name\":\"物资3\",\"value\":1,\"count\":1},{\"name\":\"物资4\",\"value\":1,\"count\":1},{\"name\":\"物资5\",\"value\":1,\"count\":1},{\"name\":\"物资6\",\"value\":1,\"count\":1},{\"name\":\"物资7\",\"value\":1,\"count\":1},{\"name\":\"物资8\",\"value\":1,\"count\":1},{\"name\":\"物资9\",\"value\":1,\"count\":1},{\"name\":\"物资10\",\"value\":1,\"count\":1},{\"name\":\"物资11\",\"value\":1,\"count\":1},{\"name\":\"物资12\",\"value\":1,\"count\":1},{\"name\":\"物资13\",\"value\":1,\"count\":1}]"
+      }
+    }
+  ],
+  "conclusion": "确认允许超容：满包16/16→17/16；同名背包已3张、锦囊另3张且无空格→17/16；空1格整叠3张正好16/16。三态卡牌总数与物资完全保留，未观察丢牌/扣物资，未验证刷新后持久化。",
+  "cause": "game.bag.js:404-410仅解除pouchOf/stored后saveGame/render，没有容量helper调用。game.session.bag.js cardStacks按name与stackCapOf=3切堆，usedSlots排除stored但解除后增加1格。saveGame容量断言未参与此实验（activeSlot=null），不会在内存路径拒收或回滚。",
+  "proposal": "最小保留资源拒绝方案：pouchTake变更标记前，按本次整叠count和同名现有非safe/nonstored张数计算ceil((existing+count)/stackCap)-ceil(existing/stackCap)增量；若不足则warn+deny并return，保留锦囊牌，不save/render。沿用现行整叠取出，不自行选部分取出玩法。珍珠盒扩格仅资源：法术应按Base基础格上限校验（bagCap包含珍珠盒bonus，不能把资源专属空格用于法术）；需负责人确认精确helper复用范围。",
+  "checks": "独立现有Vitest配置下1文件1测试通过；真实UI._acts与session.usedSlots，不修改游戏源码/既有测试，不触发浏览器。",
+  "intermediatesDoNotCommit": [
+    "docs/evidence/2026-10-03-WF-experience-art-exec/pouch-check.tmp.test.js",
+    "docs/evidence/2026-10-03-WF-experience-art-exec/pouch-check.tmp.config.js"
+  ]
+}

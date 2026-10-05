@@ -1,0 +1,26 @@
+{
+  "status": "accepted-in-progress",
+  "acceptedEvidence": "wait_threads已确认执行对话active/inProgress；执行负责人已读实时交接，声明分规范素材、探索结果、战斗表现三线，共享接口与内置浏览器统一集成。",
+  "planOwner": "Friday / 原规划会话",
+  "executionTitle": "游戏体验与美术总纲执行",
+  "executionThreadId": "01a1009d-468d-77c0-a05d-63209afefde5",
+  "hostId": "local",
+  "model": "gpt-6.1-sol",
+  "allowedWorkerModels": ["gpt-6.1-sol", "gpt-6-luna"],
+  "delegation": "老板明确授权执行负责人创建新项目对话和子代理，按独立属地提高并行度。",
+  "planEntry": "docs/evidence/2026-10-03-experience-art-plan/README.md",
+  "researchRows": 165,
+  "executionScope": "完整总纲适用项：全界面/关键状态/性能补证及有依据的体验美术改进；战斗视觉重做建议优先；声音免验、冻结项保留。",
+  "ownershipTransfer": "规划正文已交付；覆盖表及执行新增证据由执行负责人接续，保留本轮原始研究/验证记录，不能覆盖或把未核项改成无依据通过。",
+  "server": {
+    "origin": "http://127.0.0.1:5337/",
+    "cwd": "D:\\素材\\代号柒\\搜打撤",
+    "createdPid": 23912,
+    "creator": "Codex WF-experience-art-plan",
+    "launch": "web-up detached --skip-compile",
+    "state": "保留供执行接用；创建时入口/PNG/WebP健康，后续接用须重新核身份。独立origin不是隔离源码。",
+    "testSave": "此origin新建档01，正常进入第一场战斗；未触碰5200真实档。"
+  },
+  "unverified": ["不是全页面当前实页验收", "本轮未做数值性能采样", "未跑游戏全量或build", "未核远端与CI", "执行进度须读取执行对话或执行task"],
+  "noAutomaticActions": ["删除", "提交", "推送", "发布", "安装工具", "修改全局配置"]
+}

@@ -1,0 +1,629 @@
+{
+  "schemaVersion": 1,
+  "task": "WF-music-demos",
+  "kind": "automated-local-check",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "scripts/acceptance-gate.mjs",
+    "--target-tests",
+    "tests/sound-bank.test.js",
+    "tests/sound-policy.test.js",
+    "tests/soundscape.test.js"
+  ],
+  "cwd": "D:\\素材\\代号柒\\搜打撤",
+  "startedAt": "2026-10-05T03:24:54.056Z",
+  "endedAt": "2026-10-05T03:24:57.000Z",
+  "head": "425d03920e4323b016433419ec11aec4a7f3795b",
+  "statusBefore": "M ../AGENTS.md\n M docs/AGENT-TOOLBOX.md\n M docs/DEBT-CAMPAIGN-2026-10.md\n M docs/PARALLEL-REGISTRY.md\n M docs/PENDING.md\n M docs/QUICKSTART.md\n M docs/README.md\n M docs/WORKFLOW-TOOLS.md\nM  docs/asset-audit-debt.json\n M docs/audio-system.md\n M docs/character-bible/changwuyu.md\n M docs/character-bible/wu.md\n M docs/evidence/2026-10-02-DEBT-2/task.json\n M docs/evidence/2026-10-02-production-research/planning/README.md\n M docs/evidence/2026-10-02-production-research/planning/总体改造计划.md\n M docs/production/art/VISUAL-BIBLE.md\n M docs/production/design/GDD.md\n M docs/production/management/DECISIONS.md\n M docs/production/project/CHARTER.md\n M docs/quality-gates.md\nA  game/art-source/cards/bound-shadow-rough-20261004.png\nA  game/art-source/cards/creature-tt8-curseimmune-transparent-20261004.png\nA  game/art-source/cards/creature-tt8-energycap-transparent-20261004.png\nA  game/art-source/cards/creature-tt8-healplus-transparent-20261004.png\nA  game/art-source/cards/creature-tt8-nofocus-transparent-20261004.png\nA  game/art-source/cards/equip-tt2-frostsword-original-rough-20261005.png\nA  game/art-source/cards/equip-tt2-pearlbox-original-rough-20261005.png\nA  game/art-source/cards/equip-tt2-wreck-original-rough-20261005.png\nA  game/art-source/cards/equip-tt3-element-seal-original-rough-20261005.png\nA  game/art-source/cards/equip-tt3-fate-wheel-original-rough-20261005.png\nA  game/art-source/cards/equip-tt3-grass-armor-original-rough-20261005.png\nA  game/art-source/cards/equip-tt3-twinwater-mail-original-rough-20261005.png\nA  game/art-source/cards/equip-tt7-naturestaff-original-rough-20261005.png\nA  game/art-source/cards/hero-sacredrain-abstract-20261004.png\nA  game/art-source/cards/hero-sacredrain-block-brush-20261004.png\nA  game/art-source/cards/hero-sacredsword-rough-20261004.png\nA  game/art-source/cards/hero-volcano-abstract-block-20261004.png\nA  game/art-source/cards/hero-volcano-v4-reference-20261004.webp\nA  game/art-source/cards/hero-warrior-rough-20261004.png\nA  game/art-source/cards/martial-cmtn1wnhhym-rough-reset-20261004.png\nA  game/art-source/cards/martial-tt7-fullstrike-identity-rough-20261005.png\nA  game/art-source/cards/martial-tt8-dragonblade-original-rough-20261005.png\nA  game/art-source/cards/spell-cmtn28jv33wx-rough-20261005.png\nA  game/art-source/cards/spell-tt3-nature-form-creative-20261005.png\nA  game/art-source/cards/spell-tt7-smite-original-rough-20261005.png\nA  game/art-source/cards/wu-heavensword-face-v3-20261004.png\nA  game/art-source/cards/wu-heavensword-face-v4-20261004.png\nA  game/art-source/cards/wu-heavensword-rough-face-20261004.png\nA  game/art-source/cards/wu-myriadswords-rough-face-20261004.png\nMM game/assets/asset-manifest.json\nM  game/assets/cards/bound-shadow.webp\nM  game/assets/cards/creature-tt8-curseimmune.webp\nM  game/assets/cards/creature-tt8-energycap.webp\nM  game/assets/cards/creature-tt8-healplus.webp\nM  game/assets/cards/creature-tt8-nofocus.webp\nM  game/assets/cards/equip-tt2-frostsword.webp\nM  game/assets/cards/equip-tt2-pearlbox.webp\nM  game/assets/cards/equip-tt2-wreck.webp\nM  game/assets/cards/equip-tt3-element-seal.webp\nM  game/assets/cards/equip-tt3-fate-wheel.webp\nM  game/assets/cards/equip-tt3-grass-armor.webp\nM  game/assets/cards/equip-tt3-twinwater-mail.webp\nM  game/assets/cards/equip-tt7-naturestaff.webp\nM  game/assets/cards/equip-tt8-archdemon.webp\nM  game/assets/cards/equip-tt8-demonslay.webp\nM  game/assets/cards/equip-tt8-heavensword.webp\nM  game/assets/cards/expedition-starters/pierce.webp\nM  game/assets/cards/hero-sacredrain.webp\nM  game/assets/cards/hero-sacredsword.webp\nM  game/assets/cards/hero-volcano.webp\nM  game/assets/cards/hero-warrior.webp\nM  game/assets/cards/lore-raving.webp\nM  game/assets/cards/martial-cc-unmoved.webp\nM  game/assets/cards/martial-cmtn1i64j7y7.webp\nM  game/assets/cards/martial-cmtn1wnhhym.webp\nM  game/assets/cards/martial-tt2-block.webp\nM  game/assets/cards/martial-tt2-forestarrow.webp\nM  game/assets/cards/martial-tt2-swiftarrow.webp\nM  game/assets/cards/martial-tt2-turtlearmor.webp\nM  game/assets/cards/martial-tt3-double-shot.webp\nM  game/assets/cards/martial-tt3-fatal-pierce.webp\nM  game/assets/cards/martial-tt3-fly-arrowhawk.webp\nM  game/assets/cards/martial-tt3-frostfall.webp\nM  game/assets/cards/martial-tt3-life-arrow.webp\nM  game/assets/cards/martial-tt3sp-shadowbug.webp\nM  game/assets/cards/martial-tt7-armup.webp\nM  game/assets/cards/martial-tt7-bloodpoison.webp\nM  game/assets/cards/martial-tt7-bulwark.webp\nM  game/assets/cards/martial-tt7-demonbreaker.webp\nM  game/assets/cards/martial-tt7-fullstrike.webp\nM  game/assets/cards/martial-tt7-ghostblade.webp\nM  game/assets/cards/martial-tt7-goldencicada.webp\nM  game/assets/cards/martial-tt7-imitate.webp\nM  game/assets/cards/martial-tt7-ironcharge.webp\nM  game/assets/cards/martial-tt7-marchrush.webp\nM  game/assets/cards/martial-tt7-meteorrain.webp\nM  game/assets/cards/martial-tt7-sneak.webp\nM  game/assets/cards/martial-tt7-stealth.webp\nM  game/assets/cards/martial-tt7-swordimmortal.webp\nM  game/assets/cards/martial-tt7-throwblade.webp\nM  game/assets/cards/martial-tt7-thundergrudge.webp\nM  game/assets/cards/martial-tt7-whirlwind.webp\nM  game/assets/cards/martial-tt8-dragonblade.webp\nM  game/assets/cards/spell-cc-demon.webp\nM  game/assets/cards/spell-cmtn28jv33wx.webp\nM  game/assets/cards/spell-tt3-grope.webp\nM  game/assets/cards/spell-tt3-holy-shield.webp\nM  game/assets/cards/spell-tt3-ice-spike.webp\nM  game/assets/cards/spell-tt3-nature-form.webp\nM  game/assets/cards/spell-tt3-treasure-hunt.webp\nM  game/assets/cards/spell-tt3sp-devour.webp\nM  game/assets/cards/spell-tt7-bloodpotion.webp\nM  game/assets/cards/spell-tt7-provoke.webp\nM  game/assets/cards/spell-tt7-silence.webp\nM  game/assets/cards/spell-tt7-smite.webp\nM  game/assets/cards/wu-heavensword.webp\nM  game/assets/cards/wu-myriadswords.webp\nM  game/assets/cards/wu-void.webp\nA  game/assets/reconstruction/wallpaper-ensemble-1005.webp\nA  game/assets/reconstruction/wallpaper-wu-1004.webp\nA  game/assets/sfx/battle/SOURCES.md\nM  game/assets/sfx/battle/chestburst-1.ogg\nM  game/assets/sfx/battle/chestburst-2.ogg\nM  game/assets/sfx/battle/chestburst-3.ogg\nM  game/assets/sfx/battle/chestshake-1.ogg\nM  game/assets/sfx/battle/chestshake-2.ogg\nM  game/assets/sfx/battle/curse-1.ogg\nM  game/assets/sfx/battle/curse-2.ogg\nM  game/assets/sfx/battle/defeat-1.ogg\nM  game/assets/sfx/battle/heal-1.ogg\nM  game/assets/sfx/battle/heal-2.ogg\nM  game/assets/sfx/battle/heal-3.ogg\nM  game/assets/sfx/battle/hit-1.ogg\nM  game/assets/sfx/battle/hit-2.ogg\nM  game/assets/sfx/battle/hit-3.ogg\nM  game/assets/sfx/battle/hit-4.ogg\nM  game/assets/sfx/battle/hurt-1.ogg\nM  game/assets/sfx/battle/hurt-2.ogg\nM  game/assets/sfx/battle/legend-1.ogg\nM  game/assets/sfx/battle/legend-2.ogg\nM  game/assets/sfx/battle/legend-3.ogg\nM  game/assets/sfx/battle/parry-1.ogg\nM  game/assets/sfx/battle/parry-2.ogg\nM  game/assets/sfx/battle/reveal-1.ogg\nM  game/assets/sfx/battle/reveal-2.ogg\nM  game/assets/sfx/battle/reveal-3.ogg\nM  game/assets/sfx/battle/victory-1.ogg\nM  game/assets/sfx/battle/victory-2.ogg\nM  game/assets/thumbs/cards/bound-shadow.webp\nM  game/assets/thumbs/cards/consumable.webp\nM  game/assets/thumbs/cards/creature-cmtn6ulm4boj.webp\nM  game/assets/thumbs/cards/creature-cmtn79743r2n.webp\nM  game/assets/thumbs/cards/creature-cmtn7err0a7.webp\nM  game/assets/thumbs/cards/creature-tt8-curseimmune.webp\nM  game/assets/thumbs/cards/creature-tt8-energycap.webp\nM  game/assets/thumbs/cards/creature-tt8-healplus.webp\nM  game/assets/thumbs/cards/creature-tt8-nofocus.webp\nM  game/assets/thumbs/cards/curse-drain.webp\nM  game/assets/thumbs/cards/curse-freeze.webp\nM  game/assets/thumbs/cards/curse-silence.webp\nM  game/assets/thumbs/cards/curse-venom.webp\nM  game/assets/thumbs/cards/dark-eclipse.webp\nM  game/assets/thumbs/cards/equip-tt12-raygun.webp\nM  game/assets/thumbs/cards/equip-tt2-apollo.webp\nM  game/assets/thumbs/cards/equip-tt2-frostsword.webp\nM  game/assets/thumbs/cards/equip-tt2-pearlbox.webp\nM  game/assets/thumbs/cards/equip-tt2-treasuremap.webp\nM  game/assets/thumbs/cards/equip-tt2-venomstaff.webp\nM  game/assets/thumbs/cards/equip-tt2-wreck.webp\nM  game/assets/thumbs/cards/equip-tt3-azure-sword.webp\nM  game/assets/thumbs/cards/equip-tt3-blooddrinker.webp\nM  game/assets/thumbs/cards/equip-tt3-chaos-eye.webp\nM  game/assets/thumbs/cards/equip-tt3-crimson-pouch.webp\nM  game/assets/thumbs/cards/equip-tt3-deep-diary.webp\nM  game/assets/thumbs/cards/equip-tt3-deep-seal.webp\nM  game/assets/thumbs/cards/equip-tt3-element-seal.webp\nM  game/assets/thumbs/cards/equip-tt3-fate-wheel.webp\nM  game/assets/thumbs/cards/equip-tt3-grass-armor.webp\nM  game/assets/thumbs/cards/equip-tt3-holy-staff.webp\nM  game/assets/thumbs/cards/equip-tt3-immortal-blade.webp\nM  game/assets/thumbs/cards/equip-tt3-light-mail.webp\nM  game/assets/thumbs/cards/equip-tt3-longsword.webp\nM  game/assets/thumbs/cards/equip-tt3-master-staff.webp\nM  game/assets/thumbs/cards/equip-tt3-reverse-bow.webp\nM  game/assets/thumbs/cards/equip-tt3-sapper-bomb.webp\nM  game/assets/thumbs/cards/equip-tt3-silver-runesword.webp\nM  game/assets/thumbs/cards/equip-tt3-staff.webp\nM  game/assets/thumbs/cards/equip-tt3-twinwater-mail.webp\nM  game/assets/thumbs/cards/equip-tt3-wolf-bow.webp\nM  game/assets/thumbs/cards/equip-tt3eq-boiler.webp\nM  game/assets/thumbs/cards/equip-tt3eq-mistbox.webp\nM  game/assets/thumbs/cards/equip-tt7-arcanescroll.webp\nM  game/assets/thumbs/cards/equip-tt7-darkfort.webp\nM  game/assets/thumbs/cards/equip-tt7-naturestaff.webp\nM  game/assets/thumbs/cards/equip-tt7-talisman.webp\nM  game/assets/thumbs/cards/equip-tt8-archdemon.webp\nM  game/assets/thumbs/cards/equip-tt8-demonslay.webp\nM  game/assets/thumbs/cards/equip-tt8-heavensword.webp\nM  game/assets/thumbs/cards/equipment-armor.webp\nM  game/assets/thumbs/cards/equipment-utility.webp\nM  game/assets/thumbs/cards/equipment-weapon.webp\nM  game/assets/thumbs/cards/event.webp\nM  game/assets/thumbs/cards/expedition-starters/basic-attack.webp\nM  game/assets/thumbs/cards/expedition-starters/fireball.webp\nM  game/assets/thumbs/cards/expedition-starters/pierce.webp\nM  game/assets/thumbs/cards/expedition-starters/rations.webp\nM  game/assets/thumbs/cards/expedition-starters/staff.webp\nM  game/assets/thumbs/cards/healing.webp\nM  game/assets/thumbs/cards/hero-abysssovereign.webp\nM  game/assets/thumbs/cards/hero-descend.webp\nM  game/assets/thumbs/cards/hero-forbidden.webp\nM  game/assets/thumbs/cards/hero-mage.webp\nM  game/assets/thumbs/cards/hero-priest.webp\nM  game/assets/thumbs/cards/hero-sacredrain.webp\nM  game/assets/thumbs/cards/hero-sacredsword.webp\nM  game/assets/thumbs/cards/hero-summoner.webp\nM  game/assets/thumbs/cards/hero-sword.webp\nM  game/assets/thumbs/cards/hero-volcano.webp\nM  game/assets/thumbs/cards/hero-warrior.webp\nM  game/assets/thumbs/cards/hero.webp\nM  game/assets/thumbs/cards/items/builtin-fuyuanyao.webp\nM  game/assets/thumbs/cards/items/cmtmvq6ss84l.webp\nM  game/assets/thumbs/cards/items/starter-emergency-bandage.webp\nM  game/assets/thumbs/cards/items/tt-crystal.webp\nM  game/assets/thumbs/cards/items/tt-jinchuangyao.webp\nM  game/assets/thumbs/cards/items/tt-medneedle.webp\nM  game/assets/thumbs/cards/items/tt-token-gold.webp\nM  game/assets/thumbs/cards/items/tt3-blue-potion.webp\nM  game/assets/thumbs/cards/items/tt3-demon-potion.webp\nM  game/assets/thumbs/cards/items/tt3-houyi-potion.webp\nM  game/assets/thumbs/cards/items/tt3-iceheart-potion.webp\nM  game/assets/thumbs/cards/items/tt3-mind-potion.webp\nM  game/assets/thumbs/cards/items/tt3-mixed-potion.webp\nM  game/assets/thumbs/cards/items/tt3-mystery-potion.webp\nM  game/assets/thumbs/cards/items/tt3-python-potion.webp\nM  game/assets/thumbs/cards/items/tt3-savior-elixir.webp\nM  game/assets/thumbs/cards/items/tt3-turnabout-potion.webp\nM  game/assets/thumbs/cards/items/tt3sp-doom.webp\nM  game/assets/thumbs/cards/items/tt4-shine-token.webp\nM  game/assets/thumbs/cards/items/tt4-smoke-bomb.webp\nM  game/assets/thumbs/cards/items/tt4-woodify.webp\nM  game/assets/thumbs/cards/lore-raving.webp\nM  game/assets/thumbs/cards/martial-cc-chase-slash.webp\nM  game/assets/thumbs/cards/martial-cc-cursed-blade.webp\nM  game/assets/thumbs/cards/martial-cc-dual-wield.webp\nM  game/assets/thumbs/cards/martial-cc-last-stand.webp\nM  game/assets/thumbs/cards/martial-cc-rapid-fire.webp\nM  game/assets/thumbs/cards/martial-cc-unmoved.webp\nM  game/assets/thumbs/cards/martial-cmtn0pbkmnvc.webp\nM  game/assets/thumbs/cards/martial-cmtn0xt0zr7.webp\nM  game/assets/thumbs/cards/martial-cmtn1i64j7y7.webp\nM  game/assets/thumbs/cards/martial-cmtn1wnhhym.webp\nM  game/assets/thumbs/cards/martial-cmtn233trmeg.webp\nM  game/assets/thumbs/cards/martial-cmtn2jc142dj.webp\nM  game/assets/thumbs/cards/martial-melee.webp\nM  game/assets/thumbs/cards/martial-ranged.webp\nM  game/assets/thumbs/cards/martial-tt2-block.webp\nM  game/assets/thumbs/cards/martial-tt2-bloodblade.webp\nM  game/assets/thumbs/cards/martial-tt2-comboarrow.webp\nM  game/assets/thumbs/cards/martial-tt2-forestarrow.webp\nM  game/assets/thumbs/cards/martial-tt2-jianghu.webp\nM  game/assets/thumbs/cards/martial-tt2-piercearrow.webp\nM  game/assets/thumbs/cards/martial-tt2-shoot.webp\nM  game/assets/thumbs/cards/martial-tt2-swiftarrow.webp\nM  game/assets/thumbs/cards/martial-tt2-turtlearmor.webp\nM  game/assets/thumbs/cards/martial-tt3-armor-rush.webp\nM  game/assets/thumbs/cards/martial-tt3-arrow-rain.webp\nM  game/assets/thumbs/cards/martial-tt3-bandage.webp\nM  game/assets/thumbs/cards/martial-tt3-blood-arrow.webp\nM  game/assets/thumbs/cards/martial-tt3-dig-treasure.webp\nM  game/assets/thumbs/cards/martial-tt3-double-shot.webp\nM  game/assets/thumbs/cards/martial-tt3-execute.webp\nM  game/assets/thumbs/cards/martial-tt3-fatal-pierce.webp\nM  game/assets/thumbs/cards/martial-tt3-flux-slash.webp\nM  game/assets/thumbs/cards/martial-tt3-fly-arrowhawk.webp\nM  game/assets/thumbs/cards/martial-tt3-frost-slash.webp\nM  game/assets/thumbs/cards/martial-tt3-frostfall.webp\nM  game/assets/thumbs/cards/martial-tt3-hold-fast.webp\nM  game/assets/thumbs/cards/martial-tt3-life-arrow.webp\nM  game/assets/thumbs/cards/martial-tt3-noon-duel.webp\nM  game/assets/thumbs/cards/martial-tt3-purify-arrow.webp\nM  game/assets/thumbs/cards/martial-tt3-qi-wave.webp\nM  game/assets/thumbs/cards/martial-tt3-reshot.webp\nM  game/assets/thumbs/cards/martial-tt3-skewer.webp\nM  game/assets/thumbs/cards/martial-tt3-venom-arrow.webp\nM  game/assets/thumbs/cards/martial-tt3-wave-slash.webp\nM  game/assets/thumbs/cards/martial-tt3sp-shadowbug.webp\nM  game/assets/thumbs/cards/martial-tt3wu-shike.webp\nM  game/assets/thumbs/cards/martial-tt7-armup.webp\nM  game/assets/thumbs/cards/martial-tt7-bloodpoison.webp\nM  game/assets/thumbs/cards/martial-tt7-bulwark.webp\nM  game/assets/thumbs/cards/martial-tt7-demonbreaker.webp\nM  game/assets/thumbs/cards/martial-tt7-fullstrike.webp\nM  game/assets/thumbs/cards/martial-tt7-ghostblade.webp\nM  game/assets/thumbs/cards/martial-tt7-goldencicada.webp\nM  game/assets/thumbs/cards/martial-tt7-imitate.webp\nM  game/assets/thumbs/cards/martial-tt7-ironcharge.webp\nM  game/assets/thumbs/cards/martial-tt7-ironphalanx.webp\nM  game/assets/thumbs/cards/martial-tt7-marchrush.webp\nM  game/assets/thumbs/cards/martial-tt7-meteorrain.webp\nM  game/assets/thumbs/cards/martial-tt7-sneak.webp\nM  game/assets/thumbs/cards/martial-tt7-stealth.webp\nM  game/assets/thumbs/cards/martial-tt7-swordimmortal.webp\nM  game/assets/thumbs/cards/martial-tt7-throwblade.webp\nM  game/assets/thumbs/cards/martial-tt7-thundergrudge.webp\nM  game/assets/thumbs/cards/martial-tt7-whirlwind.webp\nM  game/assets/thumbs/cards/martial-tt8-dragonblade.webp\nM  game/assets/thumbs/cards/resource-key.webp\nM  game/assets/thumbs/cards/resource-material.webp\nM  game/assets/thumbs/cards/resource-valuables.webp\nM  game/assets/thumbs/cards/resources/coin-copper.webp\nM  game/assets/thumbs/cards/resources/coin-gold.webp\nM  game/assets/thumbs/cards/resources/coin-silver.webp\nM  game/assets/thumbs/cards/resources/diamond.webp\nM  game/assets/thumbs/cards/resources/econpack.webp\nM  game/assets/thumbs/cards/resources/garnet-marble.webp\nM  game/assets/thumbs/cards/resources/key-one.webp\nM  game/assets/thumbs/cards/resources/key.webp\nM  game/assets/thumbs/cards/resources/keys-bunch.webp\nM  game/assets/thumbs/cards/resources/pet-egg.webp\nM  game/assets/thumbs/cards/resources/ration-double.webp\nM  game/assets/thumbs/cards/resources/ration-std.webp\nM  game/assets/thumbs/cards/resources/ration.webp\nM  game/assets/thumbs/cards/resources/wood-bundle.webp\nM  game/assets/thumbs/cards/resources/wood-lots.webp\nM  game/assets/thumbs/cards/resources/wood.webp\nM  game/assets/thumbs/cards/spell-cc-demon.webp\nM  game/assets/thumbs/cards/spell-cc-double-boom.webp\nM  game/assets/thumbs/cards/spell-cc-ember-burst.webp\nM  game/assets/thumbs/cards/spell-cc-lava-blast.webp\nM  game/assets/thumbs/cards/spell-cc-mana-surge.webp\nM  game/assets/thumbs/cards/spell-cc-poison-burst.webp\nM  game/assets/thumbs/cards/spell-cc-rot-seed.webp\nM  game/assets/thumbs/cards/spell-cmtn125e1nk0.webp\nM  game/assets/thumbs/cards/spell-cmtn1epgt20j.webp\nM  game/assets/thumbs/cards/spell-cmtn1gfhczzj.webp\nM  game/assets/thumbs/cards/spell-cmtn1lbhbqi4.webp\nM  game/assets/thumbs/cards/spell-cmtn1ntxzoc4.webp\nM  game/assets/thumbs/cards/spell-cmtn1p9vb5au.webp\nM  game/assets/thumbs/cards/spell-cmtn1r10xnl1.webp\nM  game/assets/thumbs/cards/spell-cmtn28jv33wx.webp\nM  game/assets/thumbs/cards/spell-cmtna0nb1yxt.webp\nM  game/assets/thumbs/cards/spell-tt12-backupcell.webp\nM  game/assets/thumbs/cards/spell-tt12-barriermend.webp\nM  game/assets/thumbs/cards/spell-tt12-basicdev.webp\nM  game/assets/thumbs/cards/spell-tt12-breakthrough.webp\nM  game/assets/thumbs/cards/spell-tt12-chargeray.webp\nM  game/assets/thumbs/cards/spell-tt12-elemburst.webp\nM  game/assets/thumbs/cards/spell-tt12-felguard.webp\nM  game/assets/thumbs/cards/spell-tt12-firecracker.webp\nM  game/assets/thumbs/cards/spell-tt12-freezeray.webp\nM  game/assets/thumbs/cards/spell-tt12-hitechrd.webp\nM  game/assets/thumbs/cards/spell-tt12-infectray.webp\nM  game/assets/thumbs/cards/spell-tt12-magicfind.webp\nM  game/assets/thumbs/cards/spell-tt12-raydragon.webp\nM  game/assets/thumbs/cards/spell-tt12-saturate.webp\nM  game/assets/thumbs/cards/spell-tt12-sporewall.webp\nM  game/assets/thumbs/cards/spell-tt12-unstableray.webp\nM  game/assets/thumbs/cards/spell-tt3-chain-lightning.webp\nM  game/assets/thumbs/cards/spell-tt3-fireball.webp\nM  game/assets/thumbs/cards/spell-tt3-firm-barrier.webp\nM  game/assets/thumbs/cards/spell-tt3-flame-storm.webp\nM  game/assets/thumbs/cards/spell-tt3-grope.webp\nM  game/assets/thumbs/cards/spell-tt3-holy-shield.webp\nM  game/assets/thumbs/cards/spell-tt3-holy-water.webp\nM  game/assets/thumbs/cards/spell-tt3-ice-spike.webp\nM  game/assets/thumbs/cards/spell-tt3-magic-lamp.webp\nM  game/assets/thumbs/cards/spell-tt3-nature-form.webp\nM  game/assets/thumbs/cards/spell-tt3-nuke-ray.webp\nM  game/assets/thumbs/cards/spell-tt3-petal.webp\nM  game/assets/thumbs/cards/spell-tt3-thornfield.webp\nM  game/assets/thumbs/cards/spell-tt3-thunderblast.webp\nM  game/assets/thumbs/cards/spell-tt3-toxin.webp\nM  game/assets/thumbs/cards/spell-tt3-treasure-hunt.webp\nM  game/assets/thumbs/cards/spell-tt3sp-bloodstorm.webp\nM  game/assets/thumbs/cards/spell-tt3sp-devour.webp\nM  game/assets/thumbs/cards/spell-tt3sp-dodge.webp\nM  game/assets/thumbs/cards/spell-tt3sp-flowerzhen.webp\nM  game/assets/thumbs/cards/spell-tt3sp-magicoil.webp\nM  game/assets/thumbs/cards/spell-tt3sp-shadowshot.webp\nM  game/assets/thumbs/cards/spell-tt3sp-silverthorn.webp\nM  game/assets/thumbs/cards/spell-tt5-galaxy-voyage.webp\nM  game/assets/thumbs/cards/spell-tt7-abysscurse.webp\nM  game/assets/thumbs/cards/spell-tt7-arcanebolt.webp\nM  game/assets/thumbs/cards/spell-tt7-bladebloom.webp\nM  game/assets/thumbs/cards/spell-tt7-bloodpotion.webp\nM  game/assets/thumbs/cards/spell-tt7-burnharvest.webp\nM  game/assets/thumbs/cards/spell-tt7-elementstorm.webp\nM  game/assets/thumbs/cards/spell-tt7-energize.webp\nM  game/assets/thumbs/cards/spell-tt7-frozenight.webp\nM  game/assets/thumbs/cards/spell-tt7-holyglow.webp\nM  game/assets/thumbs/cards/spell-tt7-holyheal.webp\nM  game/assets/thumbs/cards/spell-tt7-livingwater.webp\nM  game/assets/thumbs/cards/spell-tt7-maxsupply.webp\nM  game/assets/thumbs/cards/spell-tt7-meteorstrong.webp\nM  game/assets/thumbs/cards/spell-tt7-provoke.webp\nM  game/assets/thumbs/cards/spell-tt7-recruit.webp\nM  game/assets/thumbs/cards/spell-tt7-silence.webp\nM  game/assets/thumbs/cards/spell-tt7-smite.webp\nM  game/assets/thumbs/cards/spell-tt7-stratagem.webp\nM  game/assets/thumbs/cards/spell-tt7-twinfireball.webp\nM  game/assets/thumbs/cards/spell-tt8-curse1.webp\nM  game/assets/thumbs/cards/spell-tt8-curse2.webp\nM  game/assets/thumbs/cards/spell-tt8-curse3.webp\nM  game/assets/thumbs/cards/spell-tt8-curse4.webp\nM  game/assets/thumbs/cards/spell.webp\nM  game/assets/thumbs/cards/unknown.webp\nM  game/assets/thumbs/cards/wu-heavensword.webp\nM  game/assets/thumbs/cards/wu-myriadswords.webp\nM  game/assets/thumbs/cards/wu-void.webp\nM  game/assets/thumbs/portraits/enemies/archer.webp\nM  game/assets/thumbs/portraits/enemies/bandit.webp\nM  game/assets/thumbs/portraits/enemies/boss_elem.webp\nM  game/assets/thumbs/portraits/enemies/boss_general.webp\nM  game/assets/thumbs/portraits/enemies/boss_orc.webp\nM  game/assets/thumbs/portraits/enemies/cavalry.webp\nM  game/assets/thumbs/portraits/enemies/dragon.webp\nM  game/assets/thumbs/portraits/enemies/esper_candle.webp\nM  game/assets/thumbs/portraits/enemies/esper_crow.webp\nM  game/assets/thumbs/portraits/enemies/esper_echo.webp\nM  game/assets/thumbs/portraits/enemies/esper_silence.webp\nM  game/assets/thumbs/portraits/enemies/fire_el.webp\nM  game/assets/thumbs/portraits/enemies/grass_el.webp\nM  game/assets/thumbs/portraits/enemies/infantry.webp\nM  game/assets/thumbs/portraits/enemies/orc_axe.webp\nM  game/assets/thumbs/portraits/enemies/orc_jav.webp\nM  game/assets/thumbs/portraits/enemies/water_el.webp\nM  game/assets/thumbs/portraits/enemies/wolf_rider.webp\nM  game/assets/thumbs/scenes/battle-normal-anime-v2.webp\nM  game/assets/thumbs/scenes/battle-street-amber-anime-v1.webp\nM  game/assets/thumbs/scenes/event-bandits-anime-v2.webp\nM  game/assets/thumbs/scenes/event-cmtn7qttxqo4.webp\nM  game/assets/thumbs/scenes/event-ev19-arrows.webp\nM  game/assets/thumbs/scenes/event-ev19-classchest.webp\nM  game/assets/thumbs/scenes/event-ev19-fireballs.webp\nM  game/assets/thumbs/scenes/event-ev19-gamble.webp\nM  game/assets/thumbs/scenes/event-ev19-pearlbox.webp\nM  game/assets/thumbs/scenes/event-ev19-potions.webp\nM  game/assets/thumbs/scenes/event-ev19-quartermaster.webp\nM  game/assets/thumbs/scenes/event-ev19-recode.webp\nM  game/assets/thumbs/scenes/event-ev19-vital.webp\nM  game/assets/thumbs/scenes/event-tt6-airdrop.webp\nM  game/assets/thumbs/scenes/event-tt6-chestdraw.webp\nM  game/assets/thumbs/scenes/event-tt6-demondeal.webp\nM  game/assets/thumbs/scenes/event-tt6-goldhammer.webp\nM  game/assets/thumbs/scenes/event-tt6-goldmine.webp\nM  game/assets/thumbs/scenes/event-tt6-mystery.webp\nM  game/assets/thumbs/scenes/event-tt6-relief.webp\nM  game/assets/thumbs/scenes/event-tt6-systemsupply.webp\nM  game/assets/thumbs/scenes/hub-wallpaper.webp\nM  game/assets/thumbs/scenes/scene-altar-anime-v2.webp\nM  game/assets/thumbs/scenes/scene-chest-anime-v2.webp\nM  game/assets/thumbs/scenes/scene-chest-boss-anime-v1.webp\nM  game/assets/thumbs/scenes/scene-chest-class-anime-v1.webp\nM  game/assets/thumbs/scenes/scene-chest-large-anime-v1.webp\nM  game/assets/thumbs/scenes/scene-chest-medium-anime-v1.webp\nM  game/assets/thumbs/scenes/scene-chest-small-anime-v1.webp\nM  game/assets/thumbs/scenes/scene-door-anime-v2.webp\nM  game/assets/thumbs/scenes/scene-extract-anime-v2.webp\nM  game/assets/thumbs/scenes/scene-fire-anime-v2.webp\nM  game/assets/thumbs/scenes/scene-pickup-coin-anime-v2.webp\nM  game/assets/thumbs/scenes/scene-pickup-key-anime-v2.webp\nM  game/assets/thumbs/scenes/scene-pickup-rations-anime-v2.webp\nM  game/assets/thumbs/scenes/scene-pickup-wood-anime-v2.webp\nM  game/assets/thumbs/scenes/scene-shop-anime-v2.webp\nM  game/assets/thumbs/scenes/winter-expedition/core.webp\nM  game/assets/thumbs/scenes/winter-expedition/greenhouse.webp\nM  game/assets/thumbs/scenes/winter-expedition/outskirts.webp\nM  game/assets/thumbs/scenes/winter-expedition/sanctuary.webp\nM  game/assets/thumbs/scenes/winter-expedition/supply-room.webp\nA  game/assets/ui/beginner-guide/battle.svg\nA  game/assets/ui/beginner-guide/extract.svg\nA  game/assets/ui/beginner-guide/growth.svg\nA  game/assets/ui/beginner-guide/loot.svg\nA  game/assets/ui/beginner-guide/map.svg\nA  game/assets/ui/beginner-guide/prepare.svg\nA  game/assets/ui/home-v2/achievement-handpainted-v3.webp\nA  game/assets/ui/home-v2/camera-handpainted-v3.webp\nA  game/assets/ui/home-v2/camera.webp\nA  game/assets/ui/home-v2/expedition-handpainted-v3.webp\nA  game/assets/ui/home-v2/expedition-sigil.webp\nA  game/assets/ui/icons/settings-gear-r2.webp\nA  game/css/beginner-guide.css\nA  game/css/character-cover.css\nA  game/css/character-idle.css\nA  game/css/character-pool-cover.css\nA  game/css/character-view-motion.css\nA  game/css/cover-battle-shell.css\nA  game/css/cover-details.css\nA  game/css/cover-remaining.css\nA  game/css/cover-run.css\nA  game/css/cover-secondary.css\nA  game/css/cover-system.css\nA  game/css/departure-cover.css\nM  game/css/expedition-battle.css\nM  game/css/expedition-hub.css\nM  game/css/expedition-inventory.css\nM  game/css/expedition-library.css\nM  game/css/expedition-map.css\nM  game/css/expedition-roster.css\nA  game/css/home-menu-motion.css\nA  game/css/hub-arrival.css\nA  game/css/hub-cover-collections.css\nA  game/css/hub-cover-deploy.css\nA  game/css/hub-cover-motion.css\nA  game/css/hub-cover.css\nA  game/css/hub-personnel-cover.css\nA  game/css/hub-stash-cover.css\nA  game/css/inbox-cover.css\nA  game/css/interface-motion.css\nA  game/css/map-cover.css\nA  game/css/motion-transitions.css\nM  game/css/overlays.css\nM  game/css/page-battle-ui.css\nM  game/css/page-datapage.css\nM  game/css/page-deploy.css\nM  game/css/page-hub.css\nA  game/css/page-loading.css\nM  game/css/page-settings.css\nM  game/css/page-slot-select.css\nA  game/css/photo-studio-cover.css\nM  game/css/photo-studio-craft.css\nA  game/css/photo-studio-unified.css\nM  game/css/preparation.css\nA  game/css/settings-cover.css\nA  game/css/slots-cover.css\nA  game/css/title-achievements.css\nM  game/css/title-p0.css\nM  game/css/winter.css\nM  game/data/art-mapping.json\nA  game/data/beginner-guide.json\nM  game/index.html\n M game/selftest.js\nM  game/src/README.md\nM  game/src/agent/agent.data.js\nM  game/src/agent/agent.js\nM  game/src/agent/agent.recorder.js\nM  game/src/agent/agent.runner.js\nM  game/src/agent/agent.stats.js\n M game/src/audio/sound.js\nM  game/src/battle/core/battle.core.js\nM  game/src/battle/view/battle.frames.js\nM  game/src/boot-order.js\nM  game/src/core/perf-probe.local.js\nM  game/src/core/renderer.js\nM  game/src/core/rule-config.js\nM  game/src/experience/pocket-strip.js\nM  game/src/hub/base-pet-egg.commands.js\nM  game/src/hub/base-state.js\nA  game/src/hub/departure.view-updates.js\nM  game/src/hub/extraction.commands.js\nM  game/src/hub/game.bag.js\nM  game/src/hub/game.cardslib.art-warm.js\nM  game/src/hub/game.cardslib.js\nM  game/src/hub/game.cardslib.page.js\nM  game/src/hub/game.hub.depart.js\nM  game/src/hub/game.hub.js\nM  game/src/hub/game.hub.pages.js\nM  game/src/hub/game.hub.preparation.js\nA  game/src/hub/photo-studio-controls.js\nM  game/src/hub/preparation.commands.js\nM  game/src/hub/preparation.sources.js\nM  game/src/hub/preparation.view.js\nM  game/src/main.js\nM  game/src/run/chests.js\nM  game/src/run/game.run.altar.js\nM  game/src/run/game.run.dev.js\nM  game/src/run/game.run.flow.js\nM  game/src/run/game.run.scenes.js\nM  game/src/run/game.run.shop.js\nM  game/src/run/game.session.death.js\nM  game/src/run/game.session.js\nA  game/src/ui/achievement-gallery.js\nA  game/src/ui/achievement-medals.js\nA  game/src/ui/beginner-guide-diagrams.js\nA  game/src/ui/beginner-guide.js\nAM game/src/ui/character-idle.js\nA  game/src/ui/character-view-motion.js\nA  game/src/ui/comm-feed.js\nA  game/src/ui/cover-context.js\nM  game/src/ui/game.menu.js\nA  game/src/ui/home-menu-motion.js\nA  game/src/ui/interface-motion.js\nA  game/src/ui/motion-transitions.js\nM  game/src/ui/overlay.js\nA  game/src/ui/page-loading.js\nA  game/src/ui/slot-emblems.js\nM  game/src/ui/terminal-settlement.js\nA  game/src/ui/title-credits.js\nA  game/src/ui/title-wallpaper.js\nA  game/src/ui/transitions-director.js\nM  game/src/ui/ui.js\nM  game/tools/bake-card-thumbs.cjs\nM  scripts/asset-audit-lib.cjs\nM  scripts/impact-query.mjs\nM  scripts/workflow-gate-receipt.mjs\nMM scripts/workflow-memory.mjs\nM  scripts/workflow-staged.mjs\nMM scripts/workflow.mjs\nA  tests/achievement-gallery.test.js\nA  tests/agent-provenance-stopreason.test.js\nM  tests/agent-recorder.test.js\nA  tests/agent-stats-provenance.test.js\nM  tests/asset-audit.test.js\nA  tests/bag-pouch-capacity.test.js\nM  tests/base-pet-egg.test.js\nM  tests/battle-frames-lifecycle.test.js\nMM tests/boot.test.js\nMM tests/card-library-lazy-boundary.test.js\nA  tests/card-library-performance-contract.test.js\nA  tests/character-idle.test.js\nA  tests/extraction-first-explore-xp.test.js\nA  tests/extraction-receipt-idempotency.test.js\nA  tests/extraction-receipt.test.js\nA  tests/first-explore-marking.test.js\nM  tests/full-review-regressions-battle.test.js\nM  tests/game-hub-preparation-feature.test.js\n M tests/home-async-lifecycle.test.js\nA  tests/hub-upgrade-render.test.js\nM  tests/impact-query.test.js\nM  tests/overlay-dialog.test.js\nA  tests/page-loading.test.js\nM  tests/perf-probe-summary.test.js\nM  tests/pet-egg-chest.test.js\n M tests/photo-zoom-lifecycle.test.js\nMM tests/premium-ui-pages.test.js\nM  tests/rule-config.test.js\nA  tests/settings-page.test.js\nA  tests/sys03-altar-restore-txn.test.js\nA  tests/sys03-base-key-restore.test.js\nA  tests/sys03-loot-shop-txn.test.js\nA  tests/terminal-retry-copy.test.js\nA  tests/title-wallpaper.test.js\nMM tests/workflow-memory.test.js\nM  tests/workflow-staged.test.js\nA  tests/xart-z1-batch1.test.js\nA  tests/xart-z1-batch2.test.js\nA  tools/NAI-PROMPTS.md\nD  tools/__pycache__/nai_style.cpython-38.pyc\nA  tools/nai_prompt_clean.py\nM  tools/nai_style.py\nA  tools/tests/test_nai_prompt_clean.py\n?? ../nul\n?? docs/archive/PARALLEL-REGISTRY-2026-10-04.md\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-40-53.381Z-9a1affee-staged.json\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-56-38.896Z-d5ca5df9-staged.json\n?? docs/evidence/2026-10-02-production-research/diagnosis/engineering/measure-git-variant.mjs\n?? docs/evidence/2026-10-02-seven-departments-review/tmp/contact-3.png\n?? docs/evidence/2026-10-02-seven-departments-v2/\n?? docs/evidence/2026-10-02-staged-check/2026-10-02T01-22-15.433Z-e5d284fd-staged.json\n?? docs/evidence/2026-10-03-WF-a7-perf-baseline/\n?? docs/evidence/2026-10-03-WF-ach-gallery/\n?? docs/evidence/2026-10-03-WF-experience-art-exec-A3-pouch/\n?? docs/evidence/2026-10-03-WF-experience-art-exec-A4-frames/\n?? docs/evidence/2026-10-03-WF-experience-art-exec-A5/\n?? docs/evidence/2026-10-03-WF-experience-art-exec-A7/\n?? docs/evidence/2026-10-03-WF-experience-art-exec/\n?? docs/evidence/2026-10-03-WF-home-art-v2/\n?? docs/evidence/2026-10-03-WF-home-layout/\n?? docs/evidence/2026-10-03-WF-nai-prompt-clean/\n?? docs/evidence/2026-10-03-WF-nai-v13-restore/\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-19-39.159Z-5fbee550-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-27-43.086Z-63530fe5-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-46-33.917Z-9cb2485d-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-51-21.366Z-f2ed6511-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-59-11.935Z-35c52133-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-03-58.112Z-5cc22689-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-08-10.704Z-da12b315-staged.json\n?? docs/evidence/2026-10-03-WF-photolib-perf/\n?? docs/evidence/2026-10-03-WF-xart-z1/\n?? docs/evidence/2026-10-03-ach-gallery/\n?? docs/evidence/2026-10-03-experience-art-plan/\n?? docs/evidence/2026-10-03-ph1-sys01-10/\n?? docs/evidence/2026-10-03-ph1-sys02/\n?? docs/evidence/2026-10-03-ph1-sys03/\n?? docs/evidence/2026-10-03-ph1-sys11/\n?? docs/evidence/2026-10-03-style-recipe-v5/\n?? docs/evidence/2026-10-03-web-5200/\n?? docs/evidence/2026-10-04-WF-ach-blank-dismiss/\n?? docs/evidence/2026-10-04-WF-ach-proportion/\n?? docs/evidence/2026-10-04-WF-baita-lore-raving/\n?? docs/evidence/2026-10-04-WF-bound-shadow-rough/\n?? docs/evidence/2026-10-04-WF-changwuyu-volcano/\n?? docs/evidence/2026-10-04-WF-character-cover/\n?? docs/evidence/2026-10-04-WF-departure-cover/\n?? docs/evidence/2026-10-04-WF-feedback-1004-final/\n?? docs/evidence/2026-10-04-WF-feedback-1004-main/\n?? docs/evidence/2026-10-04-WF-feedback-1004-photo/\n?? docs/evidence/2026-10-04-WF-feedback-1004-settings-final/\n?? docs/evidence/2026-10-04-WF-feedback-1004/\n?? docs/evidence/2026-10-04-WF-feedback-r2/\n?? docs/evidence/2026-10-04-WF-feedback-r3/\n?? docs/evidence/2026-10-04-WF-feedback-r4/\n?? docs/evidence/2026-10-04-WF-feedback-r5/\n?? docs/evidence/2026-10-04-WF-group-identity/\n?? docs/evidence/2026-10-04-WF-heixiang-two-forms-rough/\n?? docs/evidence/2026-10-04-WF-home-composition/\n?? docs/evidence/2026-10-04-WF-home-image-1004-v2/\n?? docs/evidence/2026-10-04-WF-home-image-1004/\n?? docs/evidence/2026-10-04-WF-home-menu-motion/\n?? docs/evidence/2026-10-04-WF-home-minako-layout/\n?? docs/evidence/2026-10-04-WF-home-restore/\n?? docs/evidence/2026-10-04-WF-home-snow-wallpaper/\n?? docs/evidence/2026-10-04-WF-hub-cover/\n?? docs/evidence/2026-10-04-WF-inbox-cover/\n?? docs/evidence/2026-10-04-WF-jianghu-rough-reset/\n?? docs/evidence/2026-10-04-WF-motion-ui-p0/\n?? docs/evidence/2026-10-04-WF-photo-studio-unified/\n?? docs/evidence/2026-10-04-WF-process-trim/\n?? docs/evidence/2026-10-04-WF-rundata-cover/\n?? docs/evidence/2026-10-04-WF-sealed-limbs-transparent/\n?? docs/evidence/2026-10-04-WF-settings-cover/\n?? docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/\n?? docs/evidence/2026-10-04-WF-slots-cover/\n?? docs/evidence/2026-10-04-WF-stop-servers/\n?? docs/evidence/2026-10-04-WF-studio-cover/\n?? docs/evidence/2026-10-04-WF-survival-guide-cover/\n?? docs/evidence/2026-10-04-WF-volcano-abstract-block/\n?? docs/evidence/2026-10-04-WF-volcano-v4-reference/\n?? docs/evidence/2026-10-04-WF-web-restore-2255/\n?? docs/evidence/2026-10-04-WF-wind-song-abstract/\n?? docs/evidence/2026-10-04-WF-wind-song-block-brush/\n?? docs/evidence/2026-10-04-WF-wu-battle-imagegen/\n?? docs/evidence/2026-10-04-WF-wu-cards-integrate/\n?? docs/evidence/2026-10-04-WF-wu-two-swords-rough/\n?? docs/evidence/2026-10-04-WF-xingyue-fullmoon/\n?? docs/evidence/2026-10-04-WF-xingyue-wind-song/\n?? docs/evidence/2026-10-04-minako-ui-benchmark/\n?? docs/evidence/2026-10-04-sfx-opensource/\n?? docs/evidence/2026-10-05-WF-big-chest-search/\n?? docs/evidence/2026-10-05-WF-cardlib-term-colors/\n?? docs/evidence/2026-10-05-WF-cards-22-fast/\n?? docs/evidence/2026-10-05-WF-character-pool-cover/\n?? docs/evidence/2026-10-05-WF-dragonblade-original-rough/\n?? docs/evidence/2026-10-05-WF-dual-memory-efficiency/\n?? docs/evidence/2026-10-05-WF-eight-items-rough/\n?? docs/evidence/2026-10-05-WF-fullmoon-creative/\n?? docs/evidence/2026-10-05-WF-fullstrike-identity-rough/\n?? docs/evidence/2026-10-05-WF-holy-shield-fast/\n?? docs/evidence/2026-10-05-WF-home-wallpaper-1005/\n?? docs/evidence/2026-10-05-WF-home-wallpaper/\n?? docs/evidence/2026-10-05-WF-hub-personnel/\n?? docs/evidence/2026-10-05-WF-hub-warehouse/\n?? docs/evidence/2026-10-05-WF-map-cover/\n?? docs/evidence/2026-10-05-WF-memory-efficiency/\n?? docs/evidence/2026-10-05-WF-music-demos/\n?? docs/evidence/2026-10-05-WF-request-batching/\n?? docs/evidence/2026-10-05-WF-smite-original-rough/\n?? docs/evidence/2026-10-05-WF-ui-art-step1/\n?? docs/evidence/2026-10-05-WF-ui-cover-all/\n?? docs/evidence/2026-10-05-WF-wallpaper-block-1005/\n?? docs/evidence/2026-10-05-WF-wallpaper-glass-1005/\n?? docs/evidence/2026-10-05-WF-wallpaper-redraw-1005/\n?? docs/evidence/2026-10-05-WF-wallpaper-redraw/\n?? docs/evidence/2026-10-05-WF-web-5200-1005/\n?? game/art-source/characters/wu-parts-v1/\n?? game/assets/music-demo/\n?? game/css/cover-hub.css\n?? game/music-demo.html\n?? 搜打撤/",
+  "statusAfter": "M ../AGENTS.md\n M docs/AGENT-TOOLBOX.md\n M docs/DEBT-CAMPAIGN-2026-10.md\n M docs/PARALLEL-REGISTRY.md\n M docs/PENDING.md\n M docs/QUICKSTART.md\n M docs/README.md\n M docs/WORKFLOW-TOOLS.md\nM  docs/asset-audit-debt.json\n M docs/audio-system.md\n M docs/character-bible/changwuyu.md\n M docs/character-bible/wu.md\n M docs/evidence/2026-10-02-DEBT-2/task.json\n M docs/evidence/2026-10-02-production-research/planning/README.md\n M docs/evidence/2026-10-02-production-research/planning/总体改造计划.md\n M docs/production/art/VISUAL-BIBLE.md\n M docs/production/design/GDD.md\n M docs/production/management/DECISIONS.md\n M docs/production/project/CHARTER.md\n M docs/quality-gates.md\nA  game/art-source/cards/bound-shadow-rough-20261004.png\nA  game/art-source/cards/creature-tt8-curseimmune-transparent-20261004.png\nA  game/art-source/cards/creature-tt8-energycap-transparent-20261004.png\nA  game/art-source/cards/creature-tt8-healplus-transparent-20261004.png\nA  game/art-source/cards/creature-tt8-nofocus-transparent-20261004.png\nA  game/art-source/cards/equip-tt2-frostsword-original-rough-20261005.png\nA  game/art-source/cards/equip-tt2-pearlbox-original-rough-20261005.png\nA  game/art-source/cards/equip-tt2-wreck-original-rough-20261005.png\nA  game/art-source/cards/equip-tt3-element-seal-original-rough-20261005.png\nA  game/art-source/cards/equip-tt3-fate-wheel-original-rough-20261005.png\nA  game/art-source/cards/equip-tt3-grass-armor-original-rough-20261005.png\nA  game/art-source/cards/equip-tt3-twinwater-mail-original-rough-20261005.png\nA  game/art-source/cards/equip-tt7-naturestaff-original-rough-20261005.png\nA  game/art-source/cards/hero-sacredrain-abstract-20261004.png\nA  game/art-source/cards/hero-sacredrain-block-brush-20261004.png\nA  game/art-source/cards/hero-sacredsword-rough-20261004.png\nA  game/art-source/cards/hero-volcano-abstract-block-20261004.png\nA  game/art-source/cards/hero-volcano-v4-reference-20261004.webp\nA  game/art-source/cards/hero-warrior-rough-20261004.png\nA  game/art-source/cards/martial-cmtn1wnhhym-rough-reset-20261004.png\nA  game/art-source/cards/martial-tt7-fullstrike-identity-rough-20261005.png\nA  game/art-source/cards/martial-tt8-dragonblade-original-rough-20261005.png\nA  game/art-source/cards/spell-cmtn28jv33wx-rough-20261005.png\nA  game/art-source/cards/spell-tt3-nature-form-creative-20261005.png\nA  game/art-source/cards/spell-tt7-smite-original-rough-20261005.png\nA  game/art-source/cards/wu-heavensword-face-v3-20261004.png\nA  game/art-source/cards/wu-heavensword-face-v4-20261004.png\nA  game/art-source/cards/wu-heavensword-rough-face-20261004.png\nA  game/art-source/cards/wu-myriadswords-rough-face-20261004.png\nMM game/assets/asset-manifest.json\nM  game/assets/cards/bound-shadow.webp\nM  game/assets/cards/creature-tt8-curseimmune.webp\nM  game/assets/cards/creature-tt8-energycap.webp\nM  game/assets/cards/creature-tt8-healplus.webp\nM  game/assets/cards/creature-tt8-nofocus.webp\nM  game/assets/cards/equip-tt2-frostsword.webp\nM  game/assets/cards/equip-tt2-pearlbox.webp\nM  game/assets/cards/equip-tt2-wreck.webp\nM  game/assets/cards/equip-tt3-element-seal.webp\nM  game/assets/cards/equip-tt3-fate-wheel.webp\nM  game/assets/cards/equip-tt3-grass-armor.webp\nM  game/assets/cards/equip-tt3-twinwater-mail.webp\nM  game/assets/cards/equip-tt7-naturestaff.webp\nM  game/assets/cards/equip-tt8-archdemon.webp\nM  game/assets/cards/equip-tt8-demonslay.webp\nM  game/assets/cards/equip-tt8-heavensword.webp\nM  game/assets/cards/expedition-starters/pierce.webp\nM  game/assets/cards/hero-sacredrain.webp\nM  game/assets/cards/hero-sacredsword.webp\nM  game/assets/cards/hero-volcano.webp\nM  game/assets/cards/hero-warrior.webp\nM  game/assets/cards/lore-raving.webp\nM  game/assets/cards/martial-cc-unmoved.webp\nM  game/assets/cards/martial-cmtn1i64j7y7.webp\nM  game/assets/cards/martial-cmtn1wnhhym.webp\nM  game/assets/cards/martial-tt2-block.webp\nM  game/assets/cards/martial-tt2-forestarrow.webp\nM  game/assets/cards/martial-tt2-swiftarrow.webp\nM  game/assets/cards/martial-tt2-turtlearmor.webp\nM  game/assets/cards/martial-tt3-double-shot.webp\nM  game/assets/cards/martial-tt3-fatal-pierce.webp\nM  game/assets/cards/martial-tt3-fly-arrowhawk.webp\nM  game/assets/cards/martial-tt3-frostfall.webp\nM  game/assets/cards/martial-tt3-life-arrow.webp\nM  game/assets/cards/martial-tt3sp-shadowbug.webp\nM  game/assets/cards/martial-tt7-armup.webp\nM  game/assets/cards/martial-tt7-bloodpoison.webp\nM  game/assets/cards/martial-tt7-bulwark.webp\nM  game/assets/cards/martial-tt7-demonbreaker.webp\nM  game/assets/cards/martial-tt7-fullstrike.webp\nM  game/assets/cards/martial-tt7-ghostblade.webp\nM  game/assets/cards/martial-tt7-goldencicada.webp\nM  game/assets/cards/martial-tt7-imitate.webp\nM  game/assets/cards/martial-tt7-ironcharge.webp\nM  game/assets/cards/martial-tt7-marchrush.webp\nM  game/assets/cards/martial-tt7-meteorrain.webp\nM  game/assets/cards/martial-tt7-sneak.webp\nM  game/assets/cards/martial-tt7-stealth.webp\nM  game/assets/cards/martial-tt7-swordimmortal.webp\nM  game/assets/cards/martial-tt7-throwblade.webp\nM  game/assets/cards/martial-tt7-thundergrudge.webp\nM  game/assets/cards/martial-tt7-whirlwind.webp\nM  game/assets/cards/martial-tt8-dragonblade.webp\nM  game/assets/cards/spell-cc-demon.webp\nM  game/assets/cards/spell-cmtn28jv33wx.webp\nM  game/assets/cards/spell-tt3-grope.webp\nM  game/assets/cards/spell-tt3-holy-shield.webp\nM  game/assets/cards/spell-tt3-ice-spike.webp\nM  game/assets/cards/spell-tt3-nature-form.webp\nM  game/assets/cards/spell-tt3-treasure-hunt.webp\nM  game/assets/cards/spell-tt3sp-devour.webp\nM  game/assets/cards/spell-tt7-bloodpotion.webp\nM  game/assets/cards/spell-tt7-provoke.webp\nM  game/assets/cards/spell-tt7-silence.webp\nM  game/assets/cards/spell-tt7-smite.webp\nM  game/assets/cards/wu-heavensword.webp\nM  game/assets/cards/wu-myriadswords.webp\nM  game/assets/cards/wu-void.webp\nA  game/assets/reconstruction/wallpaper-ensemble-1005.webp\nA  game/assets/reconstruction/wallpaper-wu-1004.webp\nA  game/assets/sfx/battle/SOURCES.md\nM  game/assets/sfx/battle/chestburst-1.ogg\nM  game/assets/sfx/battle/chestburst-2.ogg\nM  game/assets/sfx/battle/chestburst-3.ogg\nM  game/assets/sfx/battle/chestshake-1.ogg\nM  game/assets/sfx/battle/chestshake-2.ogg\nM  game/assets/sfx/battle/curse-1.ogg\nM  game/assets/sfx/battle/curse-2.ogg\nM  game/assets/sfx/battle/defeat-1.ogg\nM  game/assets/sfx/battle/heal-1.ogg\nM  game/assets/sfx/battle/heal-2.ogg\nM  game/assets/sfx/battle/heal-3.ogg\nM  game/assets/sfx/battle/hit-1.ogg\nM  game/assets/sfx/battle/hit-2.ogg\nM  game/assets/sfx/battle/hit-3.ogg\nM  game/assets/sfx/battle/hit-4.ogg\nM  game/assets/sfx/battle/hurt-1.ogg\nM  game/assets/sfx/battle/hurt-2.ogg\nM  game/assets/sfx/battle/legend-1.ogg\nM  game/assets/sfx/battle/legend-2.ogg\nM  game/assets/sfx/battle/legend-3.ogg\nM  game/assets/sfx/battle/parry-1.ogg\nM  game/assets/sfx/battle/parry-2.ogg\nM  game/assets/sfx/battle/reveal-1.ogg\nM  game/assets/sfx/battle/reveal-2.ogg\nM  game/assets/sfx/battle/reveal-3.ogg\nM  game/assets/sfx/battle/victory-1.ogg\nM  game/assets/sfx/battle/victory-2.ogg\nM  game/assets/thumbs/cards/bound-shadow.webp\nM  game/assets/thumbs/cards/consumable.webp\nM  game/assets/thumbs/cards/creature-cmtn6ulm4boj.webp\nM  game/assets/thumbs/cards/creature-cmtn79743r2n.webp\nM  game/assets/thumbs/cards/creature-cmtn7err0a7.webp\nM  game/assets/thumbs/cards/creature-tt8-curseimmune.webp\nM  game/assets/thumbs/cards/creature-tt8-energycap.webp\nM  game/assets/thumbs/cards/creature-tt8-healplus.webp\nM  game/assets/thumbs/cards/creature-tt8-nofocus.webp\nM  game/assets/thumbs/cards/curse-drain.webp\nM  game/assets/thumbs/cards/curse-freeze.webp\nM  game/assets/thumbs/cards/curse-silence.webp\nM  game/assets/thumbs/cards/curse-venom.webp\nM  game/assets/thumbs/cards/dark-eclipse.webp\nM  game/assets/thumbs/cards/equip-tt12-raygun.webp\nM  game/assets/thumbs/cards/equip-tt2-apollo.webp\nM  game/assets/thumbs/cards/equip-tt2-frostsword.webp\nM  game/assets/thumbs/cards/equip-tt2-pearlbox.webp\nM  game/assets/thumbs/cards/equip-tt2-treasuremap.webp\nM  game/assets/thumbs/cards/equip-tt2-venomstaff.webp\nM  game/assets/thumbs/cards/equip-tt2-wreck.webp\nM  game/assets/thumbs/cards/equip-tt3-azure-sword.webp\nM  game/assets/thumbs/cards/equip-tt3-blooddrinker.webp\nM  game/assets/thumbs/cards/equip-tt3-chaos-eye.webp\nM  game/assets/thumbs/cards/equip-tt3-crimson-pouch.webp\nM  game/assets/thumbs/cards/equip-tt3-deep-diary.webp\nM  game/assets/thumbs/cards/equip-tt3-deep-seal.webp\nM  game/assets/thumbs/cards/equip-tt3-element-seal.webp\nM  game/assets/thumbs/cards/equip-tt3-fate-wheel.webp\nM  game/assets/thumbs/cards/equip-tt3-grass-armor.webp\nM  game/assets/thumbs/cards/equip-tt3-holy-staff.webp\nM  game/assets/thumbs/cards/equip-tt3-immortal-blade.webp\nM  game/assets/thumbs/cards/equip-tt3-light-mail.webp\nM  game/assets/thumbs/cards/equip-tt3-longsword.webp\nM  game/assets/thumbs/cards/equip-tt3-master-staff.webp\nM  game/assets/thumbs/cards/equip-tt3-reverse-bow.webp\nM  game/assets/thumbs/cards/equip-tt3-sapper-bomb.webp\nM  game/assets/thumbs/cards/equip-tt3-silver-runesword.webp\nM  game/assets/thumbs/cards/equip-tt3-staff.webp\nM  game/assets/thumbs/cards/equip-tt3-twinwater-mail.webp\nM  game/assets/thumbs/cards/equip-tt3-wolf-bow.webp\nM  game/assets/thumbs/cards/equip-tt3eq-boiler.webp\nM  game/assets/thumbs/cards/equip-tt3eq-mistbox.webp\nM  game/assets/thumbs/cards/equip-tt7-arcanescroll.webp\nM  game/assets/thumbs/cards/equip-tt7-darkfort.webp\nM  game/assets/thumbs/cards/equip-tt7-naturestaff.webp\nM  game/assets/thumbs/cards/equip-tt7-talisman.webp\nM  game/assets/thumbs/cards/equip-tt8-archdemon.webp\nM  game/assets/thumbs/cards/equip-tt8-demonslay.webp\nM  game/assets/thumbs/cards/equip-tt8-heavensword.webp\nM  game/assets/thumbs/cards/equipment-armor.webp\nM  game/assets/thumbs/cards/equipment-utility.webp\nM  game/assets/thumbs/cards/equipment-weapon.webp\nM  game/assets/thumbs/cards/event.webp\nM  game/assets/thumbs/cards/expedition-starters/basic-attack.webp\nM  game/assets/thumbs/cards/expedition-starters/fireball.webp\nM  game/assets/thumbs/cards/expedition-starters/pierce.webp\nM  game/assets/thumbs/cards/expedition-starters/rations.webp\nM  game/assets/thumbs/cards/expedition-starters/staff.webp\nM  game/assets/thumbs/cards/healing.webp\nM  game/assets/thumbs/cards/hero-abysssovereign.webp\nM  game/assets/thumbs/cards/hero-descend.webp\nM  game/assets/thumbs/cards/hero-forbidden.webp\nM  game/assets/thumbs/cards/hero-mage.webp\nM  game/assets/thumbs/cards/hero-priest.webp\nM  game/assets/thumbs/cards/hero-sacredrain.webp\nM  game/assets/thumbs/cards/hero-sacredsword.webp\nM  game/assets/thumbs/cards/hero-summoner.webp\nM  game/assets/thumbs/cards/hero-sword.webp\nM  game/assets/thumbs/cards/hero-volcano.webp\nM  game/assets/thumbs/cards/hero-warrior.webp\nM  game/assets/thumbs/cards/hero.webp\nM  game/assets/thumbs/cards/items/builtin-fuyuanyao.webp\nM  game/assets/thumbs/cards/items/cmtmvq6ss84l.webp\nM  game/assets/thumbs/cards/items/starter-emergency-bandage.webp\nM  game/assets/thumbs/cards/items/tt-crystal.webp\nM  game/assets/thumbs/cards/items/tt-jinchuangyao.webp\nM  game/assets/thumbs/cards/items/tt-medneedle.webp\nM  game/assets/thumbs/cards/items/tt-token-gold.webp\nM  game/assets/thumbs/cards/items/tt3-blue-potion.webp\nM  game/assets/thumbs/cards/items/tt3-demon-potion.webp\nM  game/assets/thumbs/cards/items/tt3-houyi-potion.webp\nM  game/assets/thumbs/cards/items/tt3-iceheart-potion.webp\nM  game/assets/thumbs/cards/items/tt3-mind-potion.webp\nM  game/assets/thumbs/cards/items/tt3-mixed-potion.webp\nM  game/assets/thumbs/cards/items/tt3-mystery-potion.webp\nM  game/assets/thumbs/cards/items/tt3-python-potion.webp\nM  game/assets/thumbs/cards/items/tt3-savior-elixir.webp\nM  game/assets/thumbs/cards/items/tt3-turnabout-potion.webp\nM  game/assets/thumbs/cards/items/tt3sp-doom.webp\nM  game/assets/thumbs/cards/items/tt4-shine-token.webp\nM  game/assets/thumbs/cards/items/tt4-smoke-bomb.webp\nM  game/assets/thumbs/cards/items/tt4-woodify.webp\nM  game/assets/thumbs/cards/lore-raving.webp\nM  game/assets/thumbs/cards/martial-cc-chase-slash.webp\nM  game/assets/thumbs/cards/martial-cc-cursed-blade.webp\nM  game/assets/thumbs/cards/martial-cc-dual-wield.webp\nM  game/assets/thumbs/cards/martial-cc-last-stand.webp\nM  game/assets/thumbs/cards/martial-cc-rapid-fire.webp\nM  game/assets/thumbs/cards/martial-cc-unmoved.webp\nM  game/assets/thumbs/cards/martial-cmtn0pbkmnvc.webp\nM  game/assets/thumbs/cards/martial-cmtn0xt0zr7.webp\nM  game/assets/thumbs/cards/martial-cmtn1i64j7y7.webp\nM  game/assets/thumbs/cards/martial-cmtn1wnhhym.webp\nM  game/assets/thumbs/cards/martial-cmtn233trmeg.webp\nM  game/assets/thumbs/cards/martial-cmtn2jc142dj.webp\nM  game/assets/thumbs/cards/martial-melee.webp\nM  game/assets/thumbs/cards/martial-ranged.webp\nM  game/assets/thumbs/cards/martial-tt2-block.webp\nM  game/assets/thumbs/cards/martial-tt2-bloodblade.webp\nM  game/assets/thumbs/cards/martial-tt2-comboarrow.webp\nM  game/assets/thumbs/cards/martial-tt2-forestarrow.webp\nM  game/assets/thumbs/cards/martial-tt2-jianghu.webp\nM  game/assets/thumbs/cards/martial-tt2-piercearrow.webp\nM  game/assets/thumbs/cards/martial-tt2-shoot.webp\nM  game/assets/thumbs/cards/martial-tt2-swiftarrow.webp\nM  game/assets/thumbs/cards/martial-tt2-turtlearmor.webp\nM  game/assets/thumbs/cards/martial-tt3-armor-rush.webp\nM  game/assets/thumbs/cards/martial-tt3-arrow-rain.webp\nM  game/assets/thumbs/cards/martial-tt3-bandage.webp\nM  game/assets/thumbs/cards/martial-tt3-blood-arrow.webp\nM  game/assets/thumbs/cards/martial-tt3-dig-treasure.webp\nM  game/assets/thumbs/cards/martial-tt3-double-shot.webp\nM  game/assets/thumbs/cards/martial-tt3-execute.webp\nM  game/assets/thumbs/cards/martial-tt3-fatal-pierce.webp\nM  game/assets/thumbs/cards/martial-tt3-flux-slash.webp\nM  game/assets/thumbs/cards/martial-tt3-fly-arrowhawk.webp\nM  game/assets/thumbs/cards/martial-tt3-frost-slash.webp\nM  game/assets/thumbs/cards/martial-tt3-frostfall.webp\nM  game/assets/thumbs/cards/martial-tt3-hold-fast.webp\nM  game/assets/thumbs/cards/martial-tt3-life-arrow.webp\nM  game/assets/thumbs/cards/martial-tt3-noon-duel.webp\nM  game/assets/thumbs/cards/martial-tt3-purify-arrow.webp\nM  game/assets/thumbs/cards/martial-tt3-qi-wave.webp\nM  game/assets/thumbs/cards/martial-tt3-reshot.webp\nM  game/assets/thumbs/cards/martial-tt3-skewer.webp\nM  game/assets/thumbs/cards/martial-tt3-venom-arrow.webp\nM  game/assets/thumbs/cards/martial-tt3-wave-slash.webp\nM  game/assets/thumbs/cards/martial-tt3sp-shadowbug.webp\nM  game/assets/thumbs/cards/martial-tt3wu-shike.webp\nM  game/assets/thumbs/cards/martial-tt7-armup.webp\nM  game/assets/thumbs/cards/martial-tt7-bloodpoison.webp\nM  game/assets/thumbs/cards/martial-tt7-bulwark.webp\nM  game/assets/thumbs/cards/martial-tt7-demonbreaker.webp\nM  game/assets/thumbs/cards/martial-tt7-fullstrike.webp\nM  game/assets/thumbs/cards/martial-tt7-ghostblade.webp\nM  game/assets/thumbs/cards/martial-tt7-goldencicada.webp\nM  game/assets/thumbs/cards/martial-tt7-imitate.webp\nM  game/assets/thumbs/cards/martial-tt7-ironcharge.webp\nM  game/assets/thumbs/cards/martial-tt7-ironphalanx.webp\nM  game/assets/thumbs/cards/martial-tt7-marchrush.webp\nM  game/assets/thumbs/cards/martial-tt7-meteorrain.webp\nM  game/assets/thumbs/cards/martial-tt7-sneak.webp\nM  game/assets/thumbs/cards/martial-tt7-stealth.webp\nM  game/assets/thumbs/cards/martial-tt7-swordimmortal.webp\nM  game/assets/thumbs/cards/martial-tt7-throwblade.webp\nM  game/assets/thumbs/cards/martial-tt7-thundergrudge.webp\nM  game/assets/thumbs/cards/martial-tt7-whirlwind.webp\nM  game/assets/thumbs/cards/martial-tt8-dragonblade.webp\nM  game/assets/thumbs/cards/resource-key.webp\nM  game/assets/thumbs/cards/resource-material.webp\nM  game/assets/thumbs/cards/resource-valuables.webp\nM  game/assets/thumbs/cards/resources/coin-copper.webp\nM  game/assets/thumbs/cards/resources/coin-gold.webp\nM  game/assets/thumbs/cards/resources/coin-silver.webp\nM  game/assets/thumbs/cards/resources/diamond.webp\nM  game/assets/thumbs/cards/resources/econpack.webp\nM  game/assets/thumbs/cards/resources/garnet-marble.webp\nM  game/assets/thumbs/cards/resources/key-one.webp\nM  game/assets/thumbs/cards/resources/key.webp\nM  game/assets/thumbs/cards/resources/keys-bunch.webp\nM  game/assets/thumbs/cards/resources/pet-egg.webp\nM  game/assets/thumbs/cards/resources/ration-double.webp\nM  game/assets/thumbs/cards/resources/ration-std.webp\nM  game/assets/thumbs/cards/resources/ration.webp\nM  game/assets/thumbs/cards/resources/wood-bundle.webp\nM  game/assets/thumbs/cards/resources/wood-lots.webp\nM  game/assets/thumbs/cards/resources/wood.webp\nM  game/assets/thumbs/cards/spell-cc-demon.webp\nM  game/assets/thumbs/cards/spell-cc-double-boom.webp\nM  game/assets/thumbs/cards/spell-cc-ember-burst.webp\nM  game/assets/thumbs/cards/spell-cc-lava-blast.webp\nM  game/assets/thumbs/cards/spell-cc-mana-surge.webp\nM  game/assets/thumbs/cards/spell-cc-poison-burst.webp\nM  game/assets/thumbs/cards/spell-cc-rot-seed.webp\nM  game/assets/thumbs/cards/spell-cmtn125e1nk0.webp\nM  game/assets/thumbs/cards/spell-cmtn1epgt20j.webp\nM  game/assets/thumbs/cards/spell-cmtn1gfhczzj.webp\nM  game/assets/thumbs/cards/spell-cmtn1lbhbqi4.webp\nM  game/assets/thumbs/cards/spell-cmtn1ntxzoc4.webp\nM  game/assets/thumbs/cards/spell-cmtn1p9vb5au.webp\nM  game/assets/thumbs/cards/spell-cmtn1r10xnl1.webp\nM  game/assets/thumbs/cards/spell-cmtn28jv33wx.webp\nM  game/assets/thumbs/cards/spell-cmtna0nb1yxt.webp\nM  game/assets/thumbs/cards/spell-tt12-backupcell.webp\nM  game/assets/thumbs/cards/spell-tt12-barriermend.webp\nM  game/assets/thumbs/cards/spell-tt12-basicdev.webp\nM  game/assets/thumbs/cards/spell-tt12-breakthrough.webp\nM  game/assets/thumbs/cards/spell-tt12-chargeray.webp\nM  game/assets/thumbs/cards/spell-tt12-elemburst.webp\nM  game/assets/thumbs/cards/spell-tt12-felguard.webp\nM  game/assets/thumbs/cards/spell-tt12-firecracker.webp\nM  game/assets/thumbs/cards/spell-tt12-freezeray.webp\nM  game/assets/thumbs/cards/spell-tt12-hitechrd.webp\nM  game/assets/thumbs/cards/spell-tt12-infectray.webp\nM  game/assets/thumbs/cards/spell-tt12-magicfind.webp\nM  game/assets/thumbs/cards/spell-tt12-raydragon.webp\nM  game/assets/thumbs/cards/spell-tt12-saturate.webp\nM  game/assets/thumbs/cards/spell-tt12-sporewall.webp\nM  game/assets/thumbs/cards/spell-tt12-unstableray.webp\nM  game/assets/thumbs/cards/spell-tt3-chain-lightning.webp\nM  game/assets/thumbs/cards/spell-tt3-fireball.webp\nM  game/assets/thumbs/cards/spell-tt3-firm-barrier.webp\nM  game/assets/thumbs/cards/spell-tt3-flame-storm.webp\nM  game/assets/thumbs/cards/spell-tt3-grope.webp\nM  game/assets/thumbs/cards/spell-tt3-holy-shield.webp\nM  game/assets/thumbs/cards/spell-tt3-holy-water.webp\nM  game/assets/thumbs/cards/spell-tt3-ice-spike.webp\nM  game/assets/thumbs/cards/spell-tt3-magic-lamp.webp\nM  game/assets/thumbs/cards/spell-tt3-nature-form.webp\nM  game/assets/thumbs/cards/spell-tt3-nuke-ray.webp\nM  game/assets/thumbs/cards/spell-tt3-petal.webp\nM  game/assets/thumbs/cards/spell-tt3-thornfield.webp\nM  game/assets/thumbs/cards/spell-tt3-thunderblast.webp\nM  game/assets/thumbs/cards/spell-tt3-toxin.webp\nM  game/assets/thumbs/cards/spell-tt3-treasure-hunt.webp\nM  game/assets/thumbs/cards/spell-tt3sp-bloodstorm.webp\nM  game/assets/thumbs/cards/spell-tt3sp-devour.webp\nM  game/assets/thumbs/cards/spell-tt3sp-dodge.webp\nM  game/assets/thumbs/cards/spell-tt3sp-flowerzhen.webp\nM  game/assets/thumbs/cards/spell-tt3sp-magicoil.webp\nM  game/assets/thumbs/cards/spell-tt3sp-shadowshot.webp\nM  game/assets/thumbs/cards/spell-tt3sp-silverthorn.webp\nM  game/assets/thumbs/cards/spell-tt5-galaxy-voyage.webp\nM  game/assets/thumbs/cards/spell-tt7-abysscurse.webp\nM  game/assets/thumbs/cards/spell-tt7-arcanebolt.webp\nM  game/assets/thumbs/cards/spell-tt7-bladebloom.webp\nM  game/assets/thumbs/cards/spell-tt7-bloodpotion.webp\nM  game/assets/thumbs/cards/spell-tt7-burnharvest.webp\nM  game/assets/thumbs/cards/spell-tt7-elementstorm.webp\nM  game/assets/thumbs/cards/spell-tt7-energize.webp\nM  game/assets/thumbs/cards/spell-tt7-frozenight.webp\nM  game/assets/thumbs/cards/spell-tt7-holyglow.webp\nM  game/assets/thumbs/cards/spell-tt7-holyheal.webp\nM  game/assets/thumbs/cards/spell-tt7-livingwater.webp\nM  game/assets/thumbs/cards/spell-tt7-maxsupply.webp\nM  game/assets/thumbs/cards/spell-tt7-meteorstrong.webp\nM  game/assets/thumbs/cards/spell-tt7-provoke.webp\nM  game/assets/thumbs/cards/spell-tt7-recruit.webp\nM  game/assets/thumbs/cards/spell-tt7-silence.webp\nM  game/assets/thumbs/cards/spell-tt7-smite.webp\nM  game/assets/thumbs/cards/spell-tt7-stratagem.webp\nM  game/assets/thumbs/cards/spell-tt7-twinfireball.webp\nM  game/assets/thumbs/cards/spell-tt8-curse1.webp\nM  game/assets/thumbs/cards/spell-tt8-curse2.webp\nM  game/assets/thumbs/cards/spell-tt8-curse3.webp\nM  game/assets/thumbs/cards/spell-tt8-curse4.webp\nM  game/assets/thumbs/cards/spell.webp\nM  game/assets/thumbs/cards/unknown.webp\nM  game/assets/thumbs/cards/wu-heavensword.webp\nM  game/assets/thumbs/cards/wu-myriadswords.webp\nM  game/assets/thumbs/cards/wu-void.webp\nM  game/assets/thumbs/portraits/enemies/archer.webp\nM  game/assets/thumbs/portraits/enemies/bandit.webp\nM  game/assets/thumbs/portraits/enemies/boss_elem.webp\nM  game/assets/thumbs/portraits/enemies/boss_general.webp\nM  game/assets/thumbs/portraits/enemies/boss_orc.webp\nM  game/assets/thumbs/portraits/enemies/cavalry.webp\nM  game/assets/thumbs/portraits/enemies/dragon.webp\nM  game/assets/thumbs/portraits/enemies/esper_candle.webp\nM  game/assets/thumbs/portraits/enemies/esper_crow.webp\nM  game/assets/thumbs/portraits/enemies/esper_echo.webp\nM  game/assets/thumbs/portraits/enemies/esper_silence.webp\nM  game/assets/thumbs/portraits/enemies/fire_el.webp\nM  game/assets/thumbs/portraits/enemies/grass_el.webp\nM  game/assets/thumbs/portraits/enemies/infantry.webp\nM  game/assets/thumbs/portraits/enemies/orc_axe.webp\nM  game/assets/thumbs/portraits/enemies/orc_jav.webp\nM  game/assets/thumbs/portraits/enemies/water_el.webp\nM  game/assets/thumbs/portraits/enemies/wolf_rider.webp\nM  game/assets/thumbs/scenes/battle-normal-anime-v2.webp\nM  game/assets/thumbs/scenes/battle-street-amber-anime-v1.webp\nM  game/assets/thumbs/scenes/event-bandits-anime-v2.webp\nM  game/assets/thumbs/scenes/event-cmtn7qttxqo4.webp\nM  game/assets/thumbs/scenes/event-ev19-arrows.webp\nM  game/assets/thumbs/scenes/event-ev19-classchest.webp\nM  game/assets/thumbs/scenes/event-ev19-fireballs.webp\nM  game/assets/thumbs/scenes/event-ev19-gamble.webp\nM  game/assets/thumbs/scenes/event-ev19-pearlbox.webp\nM  game/assets/thumbs/scenes/event-ev19-potions.webp\nM  game/assets/thumbs/scenes/event-ev19-quartermaster.webp\nM  game/assets/thumbs/scenes/event-ev19-recode.webp\nM  game/assets/thumbs/scenes/event-ev19-vital.webp\nM  game/assets/thumbs/scenes/event-tt6-airdrop.webp\nM  game/assets/thumbs/scenes/event-tt6-chestdraw.webp\nM  game/assets/thumbs/scenes/event-tt6-demondeal.webp\nM  game/assets/thumbs/scenes/event-tt6-goldhammer.webp\nM  game/assets/thumbs/scenes/event-tt6-goldmine.webp\nM  game/assets/thumbs/scenes/event-tt6-mystery.webp\nM  game/assets/thumbs/scenes/event-tt6-relief.webp\nM  game/assets/thumbs/scenes/event-tt6-systemsupply.webp\nM  game/assets/thumbs/scenes/hub-wallpaper.webp\nM  game/assets/thumbs/scenes/scene-altar-anime-v2.webp\nM  game/assets/thumbs/scenes/scene-chest-anime-v2.webp\nM  game/assets/thumbs/scenes/scene-chest-boss-anime-v1.webp\nM  game/assets/thumbs/scenes/scene-chest-class-anime-v1.webp\nM  game/assets/thumbs/scenes/scene-chest-large-anime-v1.webp\nM  game/assets/thumbs/scenes/scene-chest-medium-anime-v1.webp\nM  game/assets/thumbs/scenes/scene-chest-small-anime-v1.webp\nM  game/assets/thumbs/scenes/scene-door-anime-v2.webp\nM  game/assets/thumbs/scenes/scene-extract-anime-v2.webp\nM  game/assets/thumbs/scenes/scene-fire-anime-v2.webp\nM  game/assets/thumbs/scenes/scene-pickup-coin-anime-v2.webp\nM  game/assets/thumbs/scenes/scene-pickup-key-anime-v2.webp\nM  game/assets/thumbs/scenes/scene-pickup-rations-anime-v2.webp\nM  game/assets/thumbs/scenes/scene-pickup-wood-anime-v2.webp\nM  game/assets/thumbs/scenes/scene-shop-anime-v2.webp\nM  game/assets/thumbs/scenes/winter-expedition/core.webp\nM  game/assets/thumbs/scenes/winter-expedition/greenhouse.webp\nM  game/assets/thumbs/scenes/winter-expedition/outskirts.webp\nM  game/assets/thumbs/scenes/winter-expedition/sanctuary.webp\nM  game/assets/thumbs/scenes/winter-expedition/supply-room.webp\nA  game/assets/ui/beginner-guide/battle.svg\nA  game/assets/ui/beginner-guide/extract.svg\nA  game/assets/ui/beginner-guide/growth.svg\nA  game/assets/ui/beginner-guide/loot.svg\nA  game/assets/ui/beginner-guide/map.svg\nA  game/assets/ui/beginner-guide/prepare.svg\nA  game/assets/ui/home-v2/achievement-handpainted-v3.webp\nA  game/assets/ui/home-v2/camera-handpainted-v3.webp\nA  game/assets/ui/home-v2/camera.webp\nA  game/assets/ui/home-v2/expedition-handpainted-v3.webp\nA  game/assets/ui/home-v2/expedition-sigil.webp\nA  game/assets/ui/icons/settings-gear-r2.webp\nA  game/css/beginner-guide.css\nA  game/css/character-cover.css\nA  game/css/character-idle.css\nA  game/css/character-pool-cover.css\nA  game/css/character-view-motion.css\nA  game/css/cover-battle-shell.css\nA  game/css/cover-details.css\nA  game/css/cover-remaining.css\nA  game/css/cover-run.css\nA  game/css/cover-secondary.css\nA  game/css/cover-system.css\nA  game/css/departure-cover.css\nM  game/css/expedition-battle.css\nM  game/css/expedition-hub.css\nM  game/css/expedition-inventory.css\nM  game/css/expedition-library.css\nM  game/css/expedition-map.css\nM  game/css/expedition-roster.css\nA  game/css/home-menu-motion.css\nA  game/css/hub-arrival.css\nA  game/css/hub-cover-collections.css\nA  game/css/hub-cover-deploy.css\nA  game/css/hub-cover-motion.css\nA  game/css/hub-cover.css\nA  game/css/hub-personnel-cover.css\nA  game/css/hub-stash-cover.css\nA  game/css/inbox-cover.css\nA  game/css/interface-motion.css\nA  game/css/map-cover.css\nA  game/css/motion-transitions.css\nM  game/css/overlays.css\nM  game/css/page-battle-ui.css\nM  game/css/page-datapage.css\nM  game/css/page-deploy.css\nM  game/css/page-hub.css\nA  game/css/page-loading.css\nM  game/css/page-settings.css\nM  game/css/page-slot-select.css\nA  game/css/photo-studio-cover.css\nM  game/css/photo-studio-craft.css\nA  game/css/photo-studio-unified.css\nM  game/css/preparation.css\nA  game/css/settings-cover.css\nA  game/css/slots-cover.css\nA  game/css/title-achievements.css\nM  game/css/title-p0.css\nM  game/css/winter.css\nM  game/data/art-mapping.json\nA  game/data/beginner-guide.json\nM  game/index.html\n M game/selftest.js\nM  game/src/README.md\nM  game/src/agent/agent.data.js\nM  game/src/agent/agent.js\nM  game/src/agent/agent.recorder.js\nM  game/src/agent/agent.runner.js\nM  game/src/agent/agent.stats.js\n M game/src/audio/sound.js\nM  game/src/battle/core/battle.core.js\nM  game/src/battle/view/battle.frames.js\nM  game/src/boot-order.js\nM  game/src/core/perf-probe.local.js\nM  game/src/core/renderer.js\nM  game/src/core/rule-config.js\nM  game/src/experience/pocket-strip.js\nM  game/src/hub/base-pet-egg.commands.js\nM  game/src/hub/base-state.js\nA  game/src/hub/departure.view-updates.js\nM  game/src/hub/extraction.commands.js\nM  game/src/hub/game.bag.js\nM  game/src/hub/game.cardslib.art-warm.js\nM  game/src/hub/game.cardslib.js\nM  game/src/hub/game.cardslib.page.js\nM  game/src/hub/game.hub.depart.js\nM  game/src/hub/game.hub.js\nM  game/src/hub/game.hub.pages.js\nM  game/src/hub/game.hub.preparation.js\nA  game/src/hub/photo-studio-controls.js\nM  game/src/hub/preparation.commands.js\nM  game/src/hub/preparation.sources.js\nM  game/src/hub/preparation.view.js\nM  game/src/main.js\nM  game/src/run/chests.js\nM  game/src/run/game.run.altar.js\nM  game/src/run/game.run.dev.js\nM  game/src/run/game.run.flow.js\nM  game/src/run/game.run.scenes.js\nM  game/src/run/game.run.shop.js\nM  game/src/run/game.session.death.js\nM  game/src/run/game.session.js\nA  game/src/ui/achievement-gallery.js\nA  game/src/ui/achievement-medals.js\nA  game/src/ui/beginner-guide-diagrams.js\nA  game/src/ui/beginner-guide.js\nAM game/src/ui/character-idle.js\nA  game/src/ui/character-view-motion.js\nA  game/src/ui/comm-feed.js\nA  game/src/ui/cover-context.js\nM  game/src/ui/game.menu.js\nA  game/src/ui/home-menu-motion.js\nA  game/src/ui/interface-motion.js\nA  game/src/ui/motion-transitions.js\nM  game/src/ui/overlay.js\nA  game/src/ui/page-loading.js\nA  game/src/ui/slot-emblems.js\nM  game/src/ui/terminal-settlement.js\nA  game/src/ui/title-credits.js\nA  game/src/ui/title-wallpaper.js\nA  game/src/ui/transitions-director.js\nM  game/src/ui/ui.js\nM  game/tools/bake-card-thumbs.cjs\nM  scripts/asset-audit-lib.cjs\nM  scripts/impact-query.mjs\nM  scripts/workflow-gate-receipt.mjs\nMM scripts/workflow-memory.mjs\nM  scripts/workflow-staged.mjs\nMM scripts/workflow.mjs\nA  tests/achievement-gallery.test.js\nA  tests/agent-provenance-stopreason.test.js\nM  tests/agent-recorder.test.js\nA  tests/agent-stats-provenance.test.js\nM  tests/asset-audit.test.js\nA  tests/bag-pouch-capacity.test.js\nM  tests/base-pet-egg.test.js\nM  tests/battle-frames-lifecycle.test.js\nMM tests/boot.test.js\nMM tests/card-library-lazy-boundary.test.js\nA  tests/card-library-performance-contract.test.js\nA  tests/character-idle.test.js\nA  tests/extraction-first-explore-xp.test.js\nA  tests/extraction-receipt-idempotency.test.js\nA  tests/extraction-receipt.test.js\nA  tests/first-explore-marking.test.js\nM  tests/full-review-regressions-battle.test.js\nM  tests/game-hub-preparation-feature.test.js\n M tests/home-async-lifecycle.test.js\nA  tests/hub-upgrade-render.test.js\nM  tests/impact-query.test.js\nM  tests/overlay-dialog.test.js\nA  tests/page-loading.test.js\nM  tests/perf-probe-summary.test.js\nM  tests/pet-egg-chest.test.js\n M tests/photo-zoom-lifecycle.test.js\nMM tests/premium-ui-pages.test.js\nM  tests/rule-config.test.js\nA  tests/settings-page.test.js\nA  tests/sys03-altar-restore-txn.test.js\nA  tests/sys03-base-key-restore.test.js\nA  tests/sys03-loot-shop-txn.test.js\nA  tests/terminal-retry-copy.test.js\nA  tests/title-wallpaper.test.js\nMM tests/workflow-memory.test.js\nM  tests/workflow-staged.test.js\nA  tests/xart-z1-batch1.test.js\nA  tests/xart-z1-batch2.test.js\nA  tools/NAI-PROMPTS.md\nD  tools/__pycache__/nai_style.cpython-38.pyc\nA  tools/nai_prompt_clean.py\nM  tools/nai_style.py\nA  tools/tests/test_nai_prompt_clean.py\n?? ../nul\n?? docs/archive/PARALLEL-REGISTRY-2026-10-04.md\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-40-53.381Z-9a1affee-staged.json\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-56-38.896Z-d5ca5df9-staged.json\n?? docs/evidence/2026-10-02-production-research/diagnosis/engineering/measure-git-variant.mjs\n?? docs/evidence/2026-10-02-seven-departments-review/tmp/contact-3.png\n?? docs/evidence/2026-10-02-seven-departments-v2/\n?? docs/evidence/2026-10-02-staged-check/2026-10-02T01-22-15.433Z-e5d284fd-staged.json\n?? docs/evidence/2026-10-03-WF-a7-perf-baseline/\n?? docs/evidence/2026-10-03-WF-ach-gallery/\n?? docs/evidence/2026-10-03-WF-experience-art-exec-A3-pouch/\n?? docs/evidence/2026-10-03-WF-experience-art-exec-A4-frames/\n?? docs/evidence/2026-10-03-WF-experience-art-exec-A5/\n?? docs/evidence/2026-10-03-WF-experience-art-exec-A7/\n?? docs/evidence/2026-10-03-WF-experience-art-exec/\n?? docs/evidence/2026-10-03-WF-home-art-v2/\n?? docs/evidence/2026-10-03-WF-home-layout/\n?? docs/evidence/2026-10-03-WF-nai-prompt-clean/\n?? docs/evidence/2026-10-03-WF-nai-v13-restore/\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-19-39.159Z-5fbee550-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-27-43.086Z-63530fe5-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-46-33.917Z-9cb2485d-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-51-21.366Z-f2ed6511-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-59-11.935Z-35c52133-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-03-58.112Z-5cc22689-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-08-10.704Z-da12b315-staged.json\n?? docs/evidence/2026-10-03-WF-photolib-perf/\n?? docs/evidence/2026-10-03-WF-xart-z1/\n?? docs/evidence/2026-10-03-ach-gallery/\n?? docs/evidence/2026-10-03-experience-art-plan/\n?? docs/evidence/2026-10-03-ph1-sys01-10/\n?? docs/evidence/2026-10-03-ph1-sys02/\n?? docs/evidence/2026-10-03-ph1-sys03/\n?? docs/evidence/2026-10-03-ph1-sys11/\n?? docs/evidence/2026-10-03-style-recipe-v5/\n?? docs/evidence/2026-10-03-web-5200/\n?? docs/evidence/2026-10-04-WF-ach-blank-dismiss/\n?? docs/evidence/2026-10-04-WF-ach-proportion/\n?? docs/evidence/2026-10-04-WF-baita-lore-raving/\n?? docs/evidence/2026-10-04-WF-bound-shadow-rough/\n?? docs/evidence/2026-10-04-WF-changwuyu-volcano/\n?? docs/evidence/2026-10-04-WF-character-cover/\n?? docs/evidence/2026-10-04-WF-departure-cover/\n?? docs/evidence/2026-10-04-WF-feedback-1004-final/\n?? docs/evidence/2026-10-04-WF-feedback-1004-main/\n?? docs/evidence/2026-10-04-WF-feedback-1004-photo/\n?? docs/evidence/2026-10-04-WF-feedback-1004-settings-final/\n?? docs/evidence/2026-10-04-WF-feedback-1004/\n?? docs/evidence/2026-10-04-WF-feedback-r2/\n?? docs/evidence/2026-10-04-WF-feedback-r3/\n?? docs/evidence/2026-10-04-WF-feedback-r4/\n?? docs/evidence/2026-10-04-WF-feedback-r5/\n?? docs/evidence/2026-10-04-WF-group-identity/\n?? docs/evidence/2026-10-04-WF-heixiang-two-forms-rough/\n?? docs/evidence/2026-10-04-WF-home-composition/\n?? docs/evidence/2026-10-04-WF-home-image-1004-v2/\n?? docs/evidence/2026-10-04-WF-home-image-1004/\n?? docs/evidence/2026-10-04-WF-home-menu-motion/\n?? docs/evidence/2026-10-04-WF-home-minako-layout/\n?? docs/evidence/2026-10-04-WF-home-restore/\n?? docs/evidence/2026-10-04-WF-home-snow-wallpaper/\n?? docs/evidence/2026-10-04-WF-hub-cover/\n?? docs/evidence/2026-10-04-WF-inbox-cover/\n?? docs/evidence/2026-10-04-WF-jianghu-rough-reset/\n?? docs/evidence/2026-10-04-WF-motion-ui-p0/\n?? docs/evidence/2026-10-04-WF-photo-studio-unified/\n?? docs/evidence/2026-10-04-WF-process-trim/\n?? docs/evidence/2026-10-04-WF-rundata-cover/\n?? docs/evidence/2026-10-04-WF-sealed-limbs-transparent/\n?? docs/evidence/2026-10-04-WF-settings-cover/\n?? docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/\n?? docs/evidence/2026-10-04-WF-slots-cover/\n?? docs/evidence/2026-10-04-WF-stop-servers/\n?? docs/evidence/2026-10-04-WF-studio-cover/\n?? docs/evidence/2026-10-04-WF-survival-guide-cover/\n?? docs/evidence/2026-10-04-WF-volcano-abstract-block/\n?? docs/evidence/2026-10-04-WF-volcano-v4-reference/\n?? docs/evidence/2026-10-04-WF-web-restore-2255/\n?? docs/evidence/2026-10-04-WF-wind-song-abstract/\n?? docs/evidence/2026-10-04-WF-wind-song-block-brush/\n?? docs/evidence/2026-10-04-WF-wu-battle-imagegen/\n?? docs/evidence/2026-10-04-WF-wu-cards-integrate/\n?? docs/evidence/2026-10-04-WF-wu-two-swords-rough/\n?? docs/evidence/2026-10-04-WF-xingyue-fullmoon/\n?? docs/evidence/2026-10-04-WF-xingyue-wind-song/\n?? docs/evidence/2026-10-04-minako-ui-benchmark/\n?? docs/evidence/2026-10-04-sfx-opensource/\n?? docs/evidence/2026-10-05-WF-big-chest-search/\n?? docs/evidence/2026-10-05-WF-cardlib-term-colors/\n?? docs/evidence/2026-10-05-WF-cards-22-fast/\n?? docs/evidence/2026-10-05-WF-character-pool-cover/\n?? docs/evidence/2026-10-05-WF-dragonblade-original-rough/\n?? docs/evidence/2026-10-05-WF-dual-memory-efficiency/\n?? docs/evidence/2026-10-05-WF-eight-items-rough/\n?? docs/evidence/2026-10-05-WF-fullmoon-creative/\n?? docs/evidence/2026-10-05-WF-fullstrike-identity-rough/\n?? docs/evidence/2026-10-05-WF-holy-shield-fast/\n?? docs/evidence/2026-10-05-WF-home-wallpaper-1005/\n?? docs/evidence/2026-10-05-WF-home-wallpaper/\n?? docs/evidence/2026-10-05-WF-hub-personnel/\n?? docs/evidence/2026-10-05-WF-hub-warehouse/\n?? docs/evidence/2026-10-05-WF-map-cover/\n?? docs/evidence/2026-10-05-WF-memory-efficiency/\n?? docs/evidence/2026-10-05-WF-music-demos/\n?? docs/evidence/2026-10-05-WF-request-batching/\n?? docs/evidence/2026-10-05-WF-smite-original-rough/\n?? docs/evidence/2026-10-05-WF-ui-art-step1/\n?? docs/evidence/2026-10-05-WF-ui-cover-all/\n?? docs/evidence/2026-10-05-WF-wallpaper-block-1005/\n?? docs/evidence/2026-10-05-WF-wallpaper-glass-1005/\n?? docs/evidence/2026-10-05-WF-wallpaper-redraw-1005/\n?? docs/evidence/2026-10-05-WF-wallpaper-redraw/\n?? docs/evidence/2026-10-05-WF-web-5200-1005/\n?? game/art-source/characters/wu-parts-v1/\n?? game/assets/music-demo/\n?? game/css/cover-hub.css\n?? game/music-demo.html\n?? 搜打撤/",
+  "before": {
+    "sha256": "95b06866f7d6ffe3b743868eeeb666116a2ea7a5b1fe7af93a3c7d445f058186",
+    "manifest": [
+      {
+        "file": ".githooks/pre-commit",
+        "sha256": "47893464ecbcb80013cbd41db3db5cd3db5c7429a0cbffc9dbb0e6912ba52068"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-full-repository-review/task.json",
+        "sha256": "56c99a5e2f865aac7d3651fafd2c4bc771b87034342b4b92c51284c0f6fbf817"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-lean-workflow/task.json",
+        "sha256": "fb10db8484d2015531c6f50d1142e56d40b78114f3c470810f54d0cec377b00f"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-workflow-review-fixes/task.json",
+        "sha256": "7529efb752cfe4d3875ab415597adc4b88f63bad9ee9c8885aa9ef9a7b37d840"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-1/task.json",
+        "sha256": "87f5c33558af6f52c7a50b9fe86f8f5133ed0a58b3e9ef380ca53fc604a9329b"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-2/task.json",
+        "sha256": "6bdb06bbbf26bcbc029e167c0d6a6bd21420e098e2c4329f96035d3de72bd902"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-3/task.json",
+        "sha256": "852fcd7f7a2da7e7ae70951eeb352d3e4c882112f900c9d052fd15d24c314ddc"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-automation/task.json",
+        "sha256": "ee4018aad4f0e98cd82c9104476a6c217e7000b8e42e1531ad4a39c5a87749ae"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-decouple/task.json",
+        "sha256": "2250963edfa165dea21d46d679d03c2b1295f30cbd47fd09da74cdb3c958f27d"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-redesign/task.json",
+        "sha256": "d6c88a124e7d714f29e28fe61a86e0d8a528b42a21575aa437ac7ec4097d445c"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-production-research/task.json",
+        "sha256": "bb2934f113227ef9b03071f2c7656e0a61b320a13c3b59e751e7917f8a4f3c27"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes-crossplatform/task.json",
+        "sha256": "af714f27e7067293f4b2fd00ab38b9d476650e6342c0c971b1533c5fe9507167"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes/task.json",
+        "sha256": "4bf05ca76394be31df66ac841a98b6e8a6c9c1a93b0bedcd7f4d012a3cdaf0a3"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-review/task.json",
+        "sha256": "cefc4ecf8fe895d9bd322122b6d380660e6d42b2df0f10e98eb3e119973f7586"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-v2/task.json",
+        "sha256": "776320fc8065871d96b6bce0c0806e325518717ed0b20e09077ca77539e9274c"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-experience-art-plan/task.json",
+        "sha256": "e3ea75d9bb5fbf657664cfc0521e93bab1381b735647a7a4fcc9224939ae605b"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-experience-art-exec/task.json",
+        "sha256": "5751581ca69fe5ba1d81c4d803fe01cce046b85d15a55887f58c031ad626ed0c"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-home-art-v2/task.json",
+        "sha256": "2f4eb76b9c9594d7594f6dd04127dd44035204ed9c4a394d2f646ac112de63ea"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-home-layout/task.json",
+        "sha256": "6f74540ad681ec952da2e8ec1d49b36b8321cfce09319ce6508d3046731febf6"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-xart-z1/task.json",
+        "sha256": "6c872e2e62530e22818ef3bbf5c49343a206647ec59dac0523184f2de4a676ea"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-1004/task.json",
+        "sha256": "3179b2f8a0919fe52a1b5f7b77156c057e91eed06ca04cacbce78cdd6d99cfe1"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r2/task.json",
+        "sha256": "e20177c47ef50180968058350a01d053d0869912d33424bd93d3d3f58dfd98ec"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r3/task.json",
+        "sha256": "8f3cfeca13faf07df5d021fb4c13c3806ae623a4c49bdd5e4f386dd03200e7c2"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r4/task.json",
+        "sha256": "6230d9073433b0c4e7f92a2a122b749af131053c529f9e25b9d10b9294caaafe"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r5/task.json",
+        "sha256": "c7e969cd6fb3646dedf66d88b7ef78b7697228aa0158a7353a5fba1f60e63c3f"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-photo-studio-unified/task.json",
+        "sha256": "5b3b6a5e64dcd00a1db4ec607585efd0dd1219ee36f1c2dc421b64d75afb2f01"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/task.json",
+        "sha256": "beff569b4672957dfd05f7bcd9be0b557ce9723e57027db0f8820826c0e2671b"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-xingyue-fullmoon/task.json",
+        "sha256": "b2cc8f2eb4839568fa83656113c07df3fa01dc10619e285081754a2f06b8d7e8"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-xingyue-wind-song/task.json",
+        "sha256": "0a5ee0d13ac9fa61bfd8e8202c059a95e28351c884d3609f1287256a7f05529c"
+      },
+      {
+        "file": "docs/PARALLEL-REGISTRY.md",
+        "sha256": "60ad52d40d92cd00a69cbbc93726724fead9a5533a74e488e5366a60769eb5b6"
+      },
+      {
+        "file": "docs/PENDING.md",
+        "sha256": "1e349ba6e25129e319b1c27478fd1d61cee6ae7f88cbbaf4be8774ab4103d704"
+      },
+      {
+        "file": "docs/STATUS.md",
+        "sha256": "19a7d521b20bc2639d4aca9f4c6ea6aaea649b7cd1b0ff4758acde485ef4c791"
+      },
+      {
+        "file": "eslint.config.js",
+        "sha256": "e29079fdc795c560e4ba742018455f2ba098192581ef847bb3f6e2a32bda26ae"
+      },
+      {
+        "file": "game/assets/sfx/alternatives/arknights-runtime/library.json",
+        "sha256": "96cdeccbd347db3e735c9205619f5b91e593867f7f4d0e92d603b74b74a7d4b7"
+      },
+      {
+        "file": "game/src/audio/sound.bank.js",
+        "sha256": "81b9bdf76f7440c6adccdc757b10a1240201830d76f8b4dea695dc9812b0fdf4"
+      },
+      {
+        "file": "game/src/audio/sound.policy.js",
+        "sha256": "bef908c7cfc155e491104959902607ba776c787b2297e8e05c584d3d7d10c9e1"
+      },
+      {
+        "file": "game/src/audio/sound.scape.js",
+        "sha256": "d6aa9b4d4b11568743422bd1f8244bec874a0a0039807b30e651dfc0c2e54dc8"
+      },
+      {
+        "file": "game/src/battle/view/battle.attack-cues.js",
+        "sha256": "b47072848f56c56254d2d476d5aff2643fc1a65594f8874725b86386f33b0f01"
+      },
+      {
+        "file": "game/src/core/asset-url.js",
+        "sha256": "0e4dd4ec75c58e74f6fc1d853db2156177c91bf15cc015212c21b51e96888bcd"
+      },
+      {
+        "file": "jsconfig.battle-settlement.json",
+        "sha256": "ff9c6acca637b6583dc514e35f0870e8c39aa903f758919364ca3a10c4478f03"
+      },
+      {
+        "file": "jsconfig.battle-snapshot.json",
+        "sha256": "3fb7f26a7982e73c077b006c059b9a565b4353689ad04e0e634ebbe1b46a35c2"
+      },
+      {
+        "file": "jsconfig.card-rules.json",
+        "sha256": "426fb5f7c2781a1cf9427f29d326bea7e47cde4cd9338b99b3d178593632230d"
+      },
+      {
+        "file": "jsconfig.json",
+        "sha256": "3f2e1bd99ddc0cb8eb95ef70a7818e56fbcc687a8970d4615d6319396dbc2da1"
+      },
+      {
+        "file": "jsconfig.strict-foundations.json",
+        "sha256": "7d2f1e714dc03b4a67604a3928a5d1172c5214c6fce00443bacf4e56c6668c90"
+      },
+      {
+        "file": "jsconfig.strict-hand-selection.json",
+        "sha256": "4a4b2d33af7297b95a05976e5bc81aaf0baf3e64e3b8313516013994fbf11ba0"
+      },
+      {
+        "file": "jsconfig.strict-selection.json",
+        "sha256": "a141c4996d7ed5630a222e882738c6bf22c5473527a3c9e53e82686a8bd88f98"
+      },
+      {
+        "file": "jsconfig.strict-ui.json",
+        "sha256": "a53bcb7a075a6fab45f5b1076b97cb3449e3313eca05b193da1ede8ec5695abc"
+      },
+      {
+        "file": "package-lock.json",
+        "sha256": "c72e1da1f98d590f1d4b5b4f13530020af00fc5a328c86f3a9619daa610eed73"
+      },
+      {
+        "file": "package.json",
+        "sha256": "7700e3529505ec3917cc1478cb8028afd4efec1325c158f1b3b11db38620b697"
+      },
+      {
+        "file": "tests/sound-bank.test.js",
+        "sha256": "b950665e2a33b096984fbdd8e09712f5a1d71df442bfe70514df81427659d9d0"
+      },
+      {
+        "file": "tests/sound-policy.test.js",
+        "sha256": "2cce10c47165d56215d0dd25ed1bf3fbf81d28afc254b3f86f4296a4faeb524b"
+      },
+      {
+        "file": "tests/soundscape.test.js",
+        "sha256": "3023ce71485332b9cbf1e231eddae8db19d5f43cd47edbf62d4690cb9c8c7bc1"
+      },
+      {
+        "file": "vite.config.js",
+        "sha256": "384b2fe4cc46d026e7345d309eb89ee9363b1a33403688004baa7f054dabec5c"
+      }
+    ],
+    "environment": {
+      "node": "v24.13.0",
+      "platform": "win32",
+      "arch": "x64",
+      "dependencies": {
+        "vitest": "3.2.7",
+        "vite": "6.4.3",
+        "typescript": "7.0.2",
+        "eslint": "10.11.0",
+        "jsdom": "25.0.1",
+        "acorn": "8.18.0",
+        "acorn-walk": "8.3.5"
+      },
+      "ci": null,
+      "nodeOptions": null,
+      "forceFullTests": null
+    },
+    "documents": false,
+    "assets": false,
+    "selection": {
+      "mode": "targeted",
+      "roots": [
+        "tests/sound-bank.test.js",
+        "tests/sound-policy.test.js",
+        "tests/soundscape.test.js"
+      ],
+      "files": [
+        "game/assets/sfx/alternatives/arknights-runtime/library.json",
+        "game/src/audio/sound.bank.js",
+        "game/src/audio/sound.policy.js",
+        "game/src/audio/sound.scape.js",
+        "game/src/battle/view/battle.attack-cues.js",
+        "game/src/core/asset-url.js",
+        "tests/sound-bank.test.js",
+        "tests/sound-policy.test.js",
+        "tests/soundscape.test.js"
+      ],
+      "existence": [],
+      "inventories": [],
+      "contracts": [],
+      "reason": "逐根独立证明输入范围；未知根不能借其他测试的fixture契约豁免"
+    },
+    "groups": {
+      "code": "7add5d3f3bc11c643128bfd59ba5e799f459b29170ff25c6439a6cbcc59e0c0f",
+      "docs": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "state": "08ebf5074ddd759d5c104b8290e297250efffbaf8e1c868e40dba36ef2687c0e",
+      "environment": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4"
+    },
+    "limits": [
+      "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+    ]
+  },
+  "after": {
+    "sha256": "95b06866f7d6ffe3b743868eeeb666116a2ea7a5b1fe7af93a3c7d445f058186",
+    "manifest": [
+      {
+        "file": ".githooks/pre-commit",
+        "sha256": "47893464ecbcb80013cbd41db3db5cd3db5c7429a0cbffc9dbb0e6912ba52068"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-full-repository-review/task.json",
+        "sha256": "56c99a5e2f865aac7d3651fafd2c4bc771b87034342b4b92c51284c0f6fbf817"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-lean-workflow/task.json",
+        "sha256": "fb10db8484d2015531c6f50d1142e56d40b78114f3c470810f54d0cec377b00f"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-workflow-review-fixes/task.json",
+        "sha256": "7529efb752cfe4d3875ab415597adc4b88f63bad9ee9c8885aa9ef9a7b37d840"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-1/task.json",
+        "sha256": "87f5c33558af6f52c7a50b9fe86f8f5133ed0a58b3e9ef380ca53fc604a9329b"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-2/task.json",
+        "sha256": "6bdb06bbbf26bcbc029e167c0d6a6bd21420e098e2c4329f96035d3de72bd902"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-3/task.json",
+        "sha256": "852fcd7f7a2da7e7ae70951eeb352d3e4c882112f900c9d052fd15d24c314ddc"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-automation/task.json",
+        "sha256": "ee4018aad4f0e98cd82c9104476a6c217e7000b8e42e1531ad4a39c5a87749ae"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-decouple/task.json",
+        "sha256": "2250963edfa165dea21d46d679d03c2b1295f30cbd47fd09da74cdb3c958f27d"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-redesign/task.json",
+        "sha256": "d6c88a124e7d714f29e28fe61a86e0d8a528b42a21575aa437ac7ec4097d445c"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-production-research/task.json",
+        "sha256": "bb2934f113227ef9b03071f2c7656e0a61b320a13c3b59e751e7917f8a4f3c27"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes-crossplatform/task.json",
+        "sha256": "af714f27e7067293f4b2fd00ab38b9d476650e6342c0c971b1533c5fe9507167"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes/task.json",
+        "sha256": "4bf05ca76394be31df66ac841a98b6e8a6c9c1a93b0bedcd7f4d012a3cdaf0a3"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-review/task.json",
+        "sha256": "cefc4ecf8fe895d9bd322122b6d380660e6d42b2df0f10e98eb3e119973f7586"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-v2/task.json",
+        "sha256": "776320fc8065871d96b6bce0c0806e325518717ed0b20e09077ca77539e9274c"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-experience-art-plan/task.json",
+        "sha256": "e3ea75d9bb5fbf657664cfc0521e93bab1381b735647a7a4fcc9224939ae605b"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-experience-art-exec/task.json",
+        "sha256": "5751581ca69fe5ba1d81c4d803fe01cce046b85d15a55887f58c031ad626ed0c"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-home-art-v2/task.json",
+        "sha256": "2f4eb76b9c9594d7594f6dd04127dd44035204ed9c4a394d2f646ac112de63ea"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-home-layout/task.json",
+        "sha256": "6f74540ad681ec952da2e8ec1d49b36b8321cfce09319ce6508d3046731febf6"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-xart-z1/task.json",
+        "sha256": "6c872e2e62530e22818ef3bbf5c49343a206647ec59dac0523184f2de4a676ea"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-1004/task.json",
+        "sha256": "3179b2f8a0919fe52a1b5f7b77156c057e91eed06ca04cacbce78cdd6d99cfe1"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r2/task.json",
+        "sha256": "e20177c47ef50180968058350a01d053d0869912d33424bd93d3d3f58dfd98ec"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r3/task.json",
+        "sha256": "8f3cfeca13faf07df5d021fb4c13c3806ae623a4c49bdd5e4f386dd03200e7c2"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r4/task.json",
+        "sha256": "6230d9073433b0c4e7f92a2a122b749af131053c529f9e25b9d10b9294caaafe"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r5/task.json",
+        "sha256": "c7e969cd6fb3646dedf66d88b7ef78b7697228aa0158a7353a5fba1f60e63c3f"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-photo-studio-unified/task.json",
+        "sha256": "5b3b6a5e64dcd00a1db4ec607585efd0dd1219ee36f1c2dc421b64d75afb2f01"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/task.json",
+        "sha256": "beff569b4672957dfd05f7bcd9be0b557ce9723e57027db0f8820826c0e2671b"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-xingyue-fullmoon/task.json",
+        "sha256": "b2cc8f2eb4839568fa83656113c07df3fa01dc10619e285081754a2f06b8d7e8"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-xingyue-wind-song/task.json",
+        "sha256": "0a5ee0d13ac9fa61bfd8e8202c059a95e28351c884d3609f1287256a7f05529c"
+      },
+      {
+        "file": "docs/PARALLEL-REGISTRY.md",
+        "sha256": "60ad52d40d92cd00a69cbbc93726724fead9a5533a74e488e5366a60769eb5b6"
+      },
+      {
+        "file": "docs/PENDING.md",
+        "sha256": "1e349ba6e25129e319b1c27478fd1d61cee6ae7f88cbbaf4be8774ab4103d704"
+      },
+      {
+        "file": "docs/STATUS.md",
+        "sha256": "19a7d521b20bc2639d4aca9f4c6ea6aaea649b7cd1b0ff4758acde485ef4c791"
+      },
+      {
+        "file": "eslint.config.js",
+        "sha256": "e29079fdc795c560e4ba742018455f2ba098192581ef847bb3f6e2a32bda26ae"
+      },
+      {
+        "file": "game/assets/sfx/alternatives/arknights-runtime/library.json",
+        "sha256": "96cdeccbd347db3e735c9205619f5b91e593867f7f4d0e92d603b74b74a7d4b7"
+      },
+      {
+        "file": "game/src/audio/sound.bank.js",
+        "sha256": "81b9bdf76f7440c6adccdc757b10a1240201830d76f8b4dea695dc9812b0fdf4"
+      },
+      {
+        "file": "game/src/audio/sound.policy.js",
+        "sha256": "bef908c7cfc155e491104959902607ba776c787b2297e8e05c584d3d7d10c9e1"
+      },
+      {
+        "file": "game/src/audio/sound.scape.js",
+        "sha256": "d6aa9b4d4b11568743422bd1f8244bec874a0a0039807b30e651dfc0c2e54dc8"
+      },
+      {
+        "file": "game/src/battle/view/battle.attack-cues.js",
+        "sha256": "b47072848f56c56254d2d476d5aff2643fc1a65594f8874725b86386f33b0f01"
+      },
+      {
+        "file": "game/src/core/asset-url.js",
+        "sha256": "0e4dd4ec75c58e74f6fc1d853db2156177c91bf15cc015212c21b51e96888bcd"
+      },
+      {
+        "file": "jsconfig.battle-settlement.json",
+        "sha256": "ff9c6acca637b6583dc514e35f0870e8c39aa903f758919364ca3a10c4478f03"
+      },
+      {
+        "file": "jsconfig.battle-snapshot.json",
+        "sha256": "3fb7f26a7982e73c077b006c059b9a565b4353689ad04e0e634ebbe1b46a35c2"
+      },
+      {
+        "file": "jsconfig.card-rules.json",
+        "sha256": "426fb5f7c2781a1cf9427f29d326bea7e47cde4cd9338b99b3d178593632230d"
+      },
+      {
+        "file": "jsconfig.json",
+        "sha256": "3f2e1bd99ddc0cb8eb95ef70a7818e56fbcc687a8970d4615d6319396dbc2da1"
+      },
+      {
+        "file": "jsconfig.strict-foundations.json",
+        "sha256": "7d2f1e714dc03b4a67604a3928a5d1172c5214c6fce00443bacf4e56c6668c90"
+      },
+      {
+        "file": "jsconfig.strict-hand-selection.json",
+        "sha256": "4a4b2d33af7297b95a05976e5bc81aaf0baf3e64e3b8313516013994fbf11ba0"
+      },
+      {
+        "file": "jsconfig.strict-selection.json",
+        "sha256": "a141c4996d7ed5630a222e882738c6bf22c5473527a3c9e53e82686a8bd88f98"
+      },
+      {
+        "file": "jsconfig.strict-ui.json",
+        "sha256": "a53bcb7a075a6fab45f5b1076b97cb3449e3313eca05b193da1ede8ec5695abc"
+      },
+      {
+        "file": "package-lock.json",
+        "sha256": "c72e1da1f98d590f1d4b5b4f13530020af00fc5a328c86f3a9619daa610eed73"
+      },
+      {
+        "file": "package.json",
+        "sha256": "7700e3529505ec3917cc1478cb8028afd4efec1325c158f1b3b11db38620b697"
+      },
+      {
+        "file": "tests/sound-bank.test.js",
+        "sha256": "b950665e2a33b096984fbdd8e09712f5a1d71df442bfe70514df81427659d9d0"
+      },
+      {
+        "file": "tests/sound-policy.test.js",
+        "sha256": "2cce10c47165d56215d0dd25ed1bf3fbf81d28afc254b3f86f4296a4faeb524b"
+      },
+      {
+        "file": "tests/soundscape.test.js",
+        "sha256": "3023ce71485332b9cbf1e231eddae8db19d5f43cd47edbf62d4690cb9c8c7bc1"
+      },
+      {
+        "file": "vite.config.js",
+        "sha256": "384b2fe4cc46d026e7345d309eb89ee9363b1a33403688004baa7f054dabec5c"
+      }
+    ],
+    "environment": {
+      "node": "v24.13.0",
+      "platform": "win32",
+      "arch": "x64",
+      "dependencies": {
+        "vitest": "3.2.7",
+        "vite": "6.4.3",
+        "typescript": "7.0.2",
+        "eslint": "10.11.0",
+        "jsdom": "25.0.1",
+        "acorn": "8.18.0",
+        "acorn-walk": "8.3.5"
+      },
+      "ci": null,
+      "nodeOptions": null,
+      "forceFullTests": null
+    },
+    "documents": false,
+    "assets": false,
+    "selection": {
+      "mode": "targeted",
+      "roots": [
+        "tests/sound-bank.test.js",
+        "tests/sound-policy.test.js",
+        "tests/soundscape.test.js"
+      ],
+      "files": [
+        "game/assets/sfx/alternatives/arknights-runtime/library.json",
+        "game/src/audio/sound.bank.js",
+        "game/src/audio/sound.policy.js",
+        "game/src/audio/sound.scape.js",
+        "game/src/battle/view/battle.attack-cues.js",
+        "game/src/core/asset-url.js",
+        "tests/sound-bank.test.js",
+        "tests/sound-policy.test.js",
+        "tests/soundscape.test.js"
+      ],
+      "existence": [],
+      "inventories": [],
+      "contracts": [],
+      "reason": "逐根独立证明输入范围；未知根不能借其他测试的fixture契约豁免"
+    },
+    "groups": {
+      "code": "7add5d3f3bc11c643128bfd59ba5e799f459b29170ff25c6439a6cbcc59e0c0f",
+      "docs": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "state": "08ebf5074ddd759d5c104b8290e297250efffbaf8e1c868e40dba36ef2687c0e",
+      "environment": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4"
+    },
+    "limits": [
+      "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+    ]
+  },
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "validation": {
+    "mode": "targeted",
+    "paths": [],
+    "tests": [
+      "tests/sound-bank.test.js",
+      "tests/sound-policy.test.js",
+      "tests/soundscape.test.js"
+    ],
+    "reasons": [
+      "显式测试列表"
+    ],
+    "executed": true
+  },
+  "outcome": "passed",
+  "log": "docs/evidence/2026-10-05-WF-music-demos/2026-10-05T03-24-53.962Z-5e0451f1.log",
+  "logSha256": "0ce294ffc5d9b51f6e8c44f5b02bdf5892b2fa9109f3a9a702d0a2704868773b",
+  "limits": [
+    "仅本命令覆盖范围；没有 build、实页、真实 hover、玩家存档或远端 CI 验收",
+    "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+  ],
+  "freshness": {
+    "eligibleForReview": true,
+    "codeEligibleForReview": true,
+    "result": "candidate",
+    "parts": {
+      "code": {
+        "before": "7add5d3f3bc11c643128bfd59ba5e799f459b29170ff25c6439a6cbcc59e0c0f",
+        "after": "7add5d3f3bc11c643128bfd59ba5e799f459b29170ff25c6439a6cbcc59e0c0f",
+        "current": "7add5d3f3bc11c643128bfd59ba5e799f459b29170ff25c6439a6cbcc59e0c0f",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "candidate",
+        "eligibleForReview": true
+      },
+      "docs": {
+        "before": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "after": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "current": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "covered": false,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "not-covered",
+        "eligibleForReview": false
+      },
+      "state": {
+        "before": "08ebf5074ddd759d5c104b8290e297250efffbaf8e1c868e40dba36ef2687c0e",
+        "after": "08ebf5074ddd759d5c104b8290e297250efffbaf8e1c868e40dba36ef2687c0e",
+        "current": "08ebf5074ddd759d5c104b8290e297250efffbaf8e1c868e40dba36ef2687c0e",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "candidate",
+        "eligibleForReview": true
+      },
+      "environment": {
+        "before": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4",
+        "after": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4",
+        "current": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "candidate",
+        "eligibleForReview": true
+      }
+    },
+    "recheck": [],
+    "limits": [
+      "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake only",
+  "outputs": [
+    {
+      "path": "game/assets/cards/spell-tt3-nature-form.webp",
+      "bytes": 127300,
+      "sha256": "8f4f321630933ac3221c0209f513128ec7ca2c86f38210d526cddaf5a7917b52",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "game/assets/thumbs/cards/spell-tt3-nature-form.webp",
+      "bytes": 26690,
+      "sha256": "5679ce518c19af4da0a2762b6ecd793c942f2776f09b616a5444998c7e328d9c",
+      "size": [
+        448,
+        448
+      ],
+      "mode": "RGB"
+    }
+  ],
+  "raw": {
+    "path": ".tmp/imagegen/xingyue-fullmoon-20261004/fullmoon.png",
+    "bytes": 1623928,
+    "sha256": "ed0326c4516ec1538c801b04f3dd956c083e1a4790b5af78cc96bcc71c183c02",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGB"
+  },
+  "originals": [
+    {
+      "path": "docs/evidence/2026-10-04-WF-xingyue-fullmoon/originals/full-spell-tt3-nature-form.webp",
+      "bytes": 26874,
+      "sha256": "09191692775129978b8ca97ac70f66bc5e7dc757c1643110b5476c7ea1c76cb0",
+      "size": [
+        896,
+        896
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "docs/evidence/2026-10-04-WF-xingyue-fullmoon/originals/thumb-spell-tt3-nature-form.webp",
+      "bytes": 8520,
+      "sha256": "35246b56d5ea37b817feb95fc86f0920010e72aaaef028d944ead03839c3c3b9",
+      "size": [
+        448,
+        448
+      ],
+      "mode": "RGB"
+    }
+  ]
+}

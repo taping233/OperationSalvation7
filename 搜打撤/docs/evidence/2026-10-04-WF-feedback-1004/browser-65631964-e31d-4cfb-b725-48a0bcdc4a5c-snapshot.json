@@ -1,0 +1,178 @@
+{
+  "actions": [
+    {
+      "detail": "内置浏览器点击标题成就→已获得；实际点返回并回标题已核对。",
+      "type": "real-input"
+    },
+    {
+      "detail": "当前窗口最终空态截图",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "not-collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"H2\",\"text\":\"成就陈列室\",\"class\":\"\"}",
+      "key": "heading",
+      "rect": {
+        "height": 24.46875,
+        "width": 112.20833587646484,
+        "x": 82.4375,
+        "y": 36.5
+      },
+      "selector": ".ag-header h2",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(48, 55, 53)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "24px",
+        "height": "28.7868px",
+        "line-height": "28.8px",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "132.01px"
+      },
+      "tag": "H2",
+      "text": "成就陈列室"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"◇暂无符合条件的奖章开始下一次远征，收集属于你的第一枚奖章。查看全部奖章\",\"class\":\"ag-empty\"}",
+      "key": "empty",
+      "rect": {
+        "height": 567.7083740234375,
+        "width": 312.79168701171875,
+        "x": 242.2291717529297,
+        "y": 143.875
+      },
+      "selector": ".ag-empty",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(93, 112, 97)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16.5px",
+        "height": "667.892px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "45.84px 24px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "367.99px"
+      },
+      "tag": "DIV",
+      "text": "◇暂无符合条件的奖章开始下一次远征，收集属于你的第一枚奖章。查看全部奖章"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"P\",\"text\":\"开始下一次远征，收集属于你的第一枚奖章。\",\"class\":\"ag-empty-copy\"}",
+      "key": "copy",
+      "rect": {
+        "height": 27.20833396911621,
+        "width": 272,
+        "x": 262.625,
+        "y": 437.2291870117187
+      },
+      "selector": ".ag-empty-copy",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(93, 112, 97)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "32.0098px",
+        "line-height": "32px",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "320px"
+      },
+      "tag": "P",
+      "text": "开始下一次远征，收集属于你的第一枚奖章。"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"P\",\"text\":\"尚无远征档案\",\"class\":\"ag-archive\"}",
+      "key": "archive",
+      "rect": {
+        "height": 21.40625,
+        "width": 195.5,
+        "x": 20.39583396911621,
+        "y": 452.7395935058594
+      },
+      "selector": ".ag-archive",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(72, 88, 77)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "25.1838px",
+        "line-height": "25.2px",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "230px"
+      },
+      "tag": "P",
+      "text": "尚无远征档案"
+    }
+  ],
+  "observedAt": "2026-10-04T03:42:44.753Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.5,
+      "height": 764,
+      "width": 1183
+    }
+  },
+  "scene": "成就已获得空态",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-04-WF-feedback-1004/achievements-after.jpg"
+  ],
+  "selectors": [
+    {
+      "key": "heading",
+      "selector": ".ag-header h2"
+    },
+    {
+      "key": "empty",
+      "selector": ".ag-empty"
+    },
+    {
+      "key": "copy",
+      "selector": ".ag-empty-copy"
+    },
+    {
+      "key": "archive",
+      "selector": ".ag-archive"
+    }
+  ]
+}

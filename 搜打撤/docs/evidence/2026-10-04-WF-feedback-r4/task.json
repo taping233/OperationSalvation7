@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-feedback-r4",
+  "date": "2026-10-04",
+  "owner": "Friday-Codex",
+  "goal": "优化照相馆装配与缩略图处理，并补全退出动画留言",
+  "paths": [
+    "game/src/hub/game.cardslib.page.js",
+    "game/src/hub/game.cardslib.art-warm.js",
+    "game/src/hub/game.cardslib.js",
+    "game/css/photo-studio-craft.css"
+  ],
+  "doneWhen": [
+    "照相馆增量装配/有限解码/退出动画已实现接入",
+    "按老板要求不测试不实页，交老板验收并明确性能未实测"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "增量观察/局部预热/有界解码/旧任务清理与退出动画已实现，源码说明和留言原文已入记录；老板接管验收",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "按老板要求未测试/lint/解析验证/benchmark/build/实页，性能与交互未实测；远端差异/CI未核"
+  ],
+  "updatedAt": "2026-10-04T09:51:00.844Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

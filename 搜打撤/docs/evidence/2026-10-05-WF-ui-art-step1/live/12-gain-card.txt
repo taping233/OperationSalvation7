@@ -1,0 +1,33 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 1/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 1/16
+		6 container tools 开发者控制台, ID: overlay
+			7 container
+				8 button Description: 关闭, ID: ovCloseX
+				9 heading tools 开发者控制台, Value: 2, ID: ovTitle
+					10 image tools
+					11 text  开发者控制台
+				12 container ovBody
+					13 text 开发工具 · 操作可能影响存档 Ctrl+L 开关
+					14 button 调试
+					15 button Agent
+					16 button 数据
+					17 button 快捷键
+					18 text 修改会立即写入本局存档，别在正经挑战里用；执行记录写入左侧日志（带「开发者：」前缀，可追溯目标与结果）。
+					19 container
+						20 text 资源  写入本局存档
+						21 button +50 币
+						22 button +200 币
+						23 button 回 10 血
+						24 button 回满血
+					25 container
+						26 text 指定卡牌  发牌写入本局
+						27 text field (settable) Value: 珍珠盒, ID: devcSearch
+						28 button 【珍珠盒】· 装备 · 稀有
+					29 text mapSeed=494949270 · snapshot=v2 · routeVersion=r5-routes-v1 · status=applied · fallbackReason=none
+					30 button 关闭（Esc / Ctrl+L）
+
+The focused UI element is 27 text field (settable) Value: 珍珠盒, ID: devcSearch

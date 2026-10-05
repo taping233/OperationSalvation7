@@ -1,0 +1,10 @@
+{
+  "id": "08",
+  "slug": "skirt-back",
+  "prompt": "ONE individual 2D skeletal-animation sprite component for Wu, not a sheet. Genuine transparent PNG background, zero alpha outside the silhouette, no cast shadow, aura, backdrop, text, numbers or alignment marks. Reference 1 is the confirmed THREE-QUARTER FACING SCREEN RIGHT combat mother pose and proportions; reference 2 is the front identity/style reference. Painterly anime, LOW detail, large opaque angular color blocks, clear hard-edge shadows, economical rough hand-painted marks. Neutral black and gray clothing, cream skin, silver-white hair. Keep original anatomical proportions and camera angle. Paint hidden overlap at the joints so the part can rotate without gaps. Center the component with generous transparent margins, one piece only, not a mannequin or full character. No amputated gore, no wounds; clean game asset joining boundaries. Do not include adjacent body parts, do not invent equipment or accessories. Part 08: ONLY the REAR skirt layer, from the waist attachment to the equal-length ABOVE-KNEE final hem. Short A-line charcoal layered ruffle skirt in the same three-quarter side view as reference 1. Entire skirt including waist socket overlap, NO torso, sleeves, hips, skin, legs, boots, hair or sword. Keep ONE dark cobalt-blue band with a FEW large bright-blue five-point stars ONLY along the lowest skirt hem, with a narrow black outer ruffle edging. Front/back/sides all end at the same height, no train. Simplify folds and ruffles into a few big painted planes. The rear skirt is an opaque complete layer which will sit behind the legs, with clean upper waist attachment margin; no open see-through holes. Match reference waist-to-knee proportions. One isolated short skirt, not a dress.",
+  "refs": [
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\wu-battle-base-frame000.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\reference.png"
+  ],
+  "tool": "built-in imagegen"
+}

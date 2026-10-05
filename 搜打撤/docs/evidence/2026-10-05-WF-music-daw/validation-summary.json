@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "head": "425d03920e4323b016433419ec11aec4a7f3795b",
+  "cached_upstream_difference": "53\t0",
+  "remote_refs_refreshed": false,
+  "checks": [
+    {
+      "role": "title",
+      "frames": 2710588,
+      "seconds": 56.47058333333333,
+      "sample_rate": 48000,
+      "channels": 2,
+      "ogg_frames_match": true,
+      "ogg_boundary_jump": 0.0004516616463661194,
+      "adjacent_step_p99": 0.020606268793344484,
+      "sha256_match": true,
+      "mp3_and_ogg_decode": "passed",
+      "peak_dbfs": -2.8758031129837036,
+      "rms_dbfs": -18.000006675720215
+    },
+    {
+      "role": "explore",
+      "frames": 2425263,
+      "seconds": 50.5263125,
+      "sample_rate": 48000,
+      "channels": 2,
+      "ogg_frames_match": true,
+      "ogg_boundary_jump": 0.002148488536477089,
+      "adjacent_step_p99": 0.04463920846581432,
+      "sha256_match": true,
+      "mp3_and_ogg_decode": "passed",
+      "peak_dbfs": -1.209614872932434,
+      "rms_dbfs": -16.38705849647522
+    },
+    {
+      "role": "battle",
+      "frames": 2972903,
+      "seconds": 61.93547916666667,
+      "sample_rate": 48000,
+      "channels": 2,
+      "ogg_frames_match": true,
+      "ogg_boundary_jump": 0.0028111767023801804,
+      "adjacent_step_p99": 0.045398983582854234,
+      "sha256_match": true,
+      "mp3_and_ogg_decode": "passed",
+      "peak_dbfs": -1.2096154689788818,
+      "rms_dbfs": -17.751554250717163
+    }
+  ],
+  "native_render_processes": "completed; no persistent DAW service needed",
+  "game_changes_this_round": false,
+  "full_game_tests_build_remote_ci": "not run; this round only produces candidate audio",
+  "unverified": [
+    "subjective quality and style similarity",
+    "long listening fatigue",
+    "native GUI editing interactions"
+  ]
+}

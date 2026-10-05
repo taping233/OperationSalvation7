@@ -1,0 +1,351 @@
+{
+  "checkedAt": "2026-10-03T06:47:16.667Z",
+  "group": "战斗结算",
+  "rows": [
+    {
+      "id": "BATTLE",
+      "researchConclusion": "明确问题",
+      "basis": [
+        "当前755×586稳定帧与按钮矩形；手牌选中和一次真实击杀；角色帧统计",
+        "game/src/battle/view/battle.view.js @ function render(snapshot"
+      ],
+      "visualStatus": "live-partial",
+      "performanceRisk": "规则与表现耦合、纹理解码、动画峰值未测",
+      "recommendedAction": "A4整体布局与角色/动画样板；保住命令与规则"
+    },
+    {
+      "id": "BATTLE-REWARD",
+      "researchConclusion": "旧问题需现状复核",
+      "basis": [
+        "chests.js战果共壳；原截图有占高问题，近期安全区已有局部修复",
+        "game/src/run/chests.js @ cur.battleSummary"
+      ],
+      "visualStatus": "historical-only",
+      "performanceRisk": "奖励多卡解码/弹层叠放",
+      "recommendedAction": "与A5共同收束战果和奖励，不重做已落库安全区小修"
+    },
+    {
+      "id": "BOSS-GATE",
+      "researchConclusion": "研究已定位，需实页",
+      "basis": [
+        "openBossGate/原主图首脑证据与边界",
+        "game/src/run/game.run.altar.js @ export function openBossGate"
+      ],
+      "visualStatus": "historical-only",
+      "performanceRisk": "低频静态弹层，未采样",
+      "recommendedAction": "突出首脑身份/危险，保留击破守卫和离开入口"
+    },
+    {
+      "id": "BOSS-DECK",
+      "researchConclusion": "有针对性的布局候选",
+      "basis": [
+        "renderDeckSelection现行规则/数量/开战装备提示已读；旧图说明拥挤",
+        "game/src/battle/view/battle.overlays.js @ function renderDeckSelection"
+      ],
+      "visualStatus": "historical-only",
+      "performanceRisk": "整池cardHTML映射、UID选择后重绘",
+      "recommendedAction": "规则摘要与选牌/已选计数/主动作分区；不改编组规则"
+    },
+    {
+      "id": "BOSS-BATTLE",
+      "researchConclusion": "纳入战斗整体研究",
+      "basis": [
+        "render样式分支+三份battle CSS叠加；历史首脑图",
+        "game/src/battle/view/battle.view.js @ opts.isBoss"
+      ],
+      "visualStatus": "historical-only",
+      "performanceRisk": "多目标/长意图/首脑动画峰值未测",
+      "recommendedAction": "A4样板含首脑而非只普通战"
+    },
+    {
+      "id": "EXIT-FINAL",
+      "researchConclusion": "已有规则，风险表达待验",
+      "basis": [
+        "game.run.altar终局点/第三层出口规则；旧图不能当新结算验收",
+        "game/src/run/game.run.altar.js @ 终局撤离点"
+      ],
+      "visualStatus": "historical-only",
+      "performanceRisk": "低频状态UI",
+      "recommendedAction": "先解释留下的币和带回路径，不改门槛"
+    },
+    {
+      "id": "EXTRACT-STASH",
+      "researchConclusion": "明确需复核危险层级",
+      "basis": [
+        "现行renderExtractStash与旧图完整整理流程",
+        "game/src/run/game.run.altar.js @ function renderExtractStash"
+      ],
+      "visualStatus": "historical-only",
+      "performanceRisk": "大量卡片与嵌套滚动、整理后重绘",
+      "recommendedAction": "A5区分领取与带损失完成；容量持续可见"
+    },
+    {
+      "id": "EXTRACT-DONE",
+      "researchConclusion": "已改，原问题部分消除",
+      "basis": [
+        "showExtractDone现已读取netTake/losses/firstExplore，仓库标含往局",
+        "game/src/run/game.run.altar.js @ function showExtractDone"
+      ],
+      "visualStatus": "source-newer-than-image",
+      "performanceRisk": "低频结果布局/数据消费",
+      "recommendedAction": "保留回执，实页验clear/extract；再出发与回基地当前同回deploy须核用户预期"
+    },
+    {
+      "id": "ABANDON-DONE",
+      "researchConclusion": "源码研究，视觉证据不足",
+      "basis": [
+        "game.menu放弃走terminal，成功才呈现结果",
+        "game/src/ui/game.menu.js @ 已放弃对局"
+      ],
+      "visualStatus": "source-only",
+      "performanceRisk": "低频终局，异步重试与返回",
+      "recommendedAction": "A5补损失/安全物品/返回可读性，先看再决定改"
+    },
+    {
+      "id": "TERMINAL-RETRY",
+      "researchConclusion": "已改需验，不重复修文案",
+      "basis": [
+        "当前terminal-settlement已增加保留进度/重试说明并收起原始异常",
+        "game/src/ui/terminal-settlement.js @ 终局结算未保存"
+      ],
+      "visualStatus": "fixture-stale",
+      "performanceRisk": "失败重复提交/监听清理",
+      "recommendedAction": "只在可丢弃档注入并验；说明与真实恢复一致"
+    },
+    {
+      "id": "AMMO-TUTORIAL",
+      "researchConclusion": "已修落库，复核即可",
+      "basis": [
+        "b44c731/PH1对账；普通消耗与初始攻击区别保持",
+        "game/src/hub/game.bag.settle.js @ 卡牌是消耗品"
+      ],
+      "visualStatus": "historical-newer-code",
+      "performanceRisk": "一次性教学低频",
+      "recommendedAction": "复验图解和新版标记，不重复重画整页"
+    },
+    {
+      "id": "EXIT-PAY",
+      "researchConclusion": "源码研究，视觉待补",
+      "basis": [
+        "openEmergencyModal第三层与弃3代价边界",
+        "game/src/run/game.run.altar.js @ export function openEmergencyModal"
+      ],
+      "visualStatus": "source-only",
+      "performanceRisk": "低频确认页",
+      "recommendedAction": "A5补成本不足/取消/确认态，玩法不改"
+    },
+    {
+      "id": "EXTRACT-RETRY",
+      "researchConclusion": "源码研究，视觉待补",
+      "basis": [
+        "showExtractionRetry有原局身份与回整理入口",
+        "game/src/run/game.run.altar.js @ function showExtractionRetry"
+      ],
+      "visualStatus": "source-only",
+      "performanceRisk": "重复提交与刷新恢复",
+      "recommendedAction": "A5故障注入；不把fixture当真实存储失败"
+    },
+    {
+      "id": "DEATH",
+      "researchConclusion": "已有新增回执待实页",
+      "basis": [
+        "buildDeathReceipt同形；safe抢运/口袋损失/0首探XP",
+        "game/src/run/game.session.death.js @ 撤离失败"
+      ],
+      "visualStatus": "source-newer-than-image",
+      "performanceRisk": "终局反馈/重复进入",
+      "recommendedAction": "A5真实死亡和刷新；不再次重建回执"
+    },
+    {
+      "id": "BATTLE-GRAVE",
+      "researchConclusion": "功能已有，视觉需健康帧",
+      "basis": [
+        "renderGrave按身份聚合/有返回；亲读旧截图为空墓且图标未加载",
+        "game/src/battle/view/battle.overlays.js @ function renderGrave"
+      ],
+      "visualStatus": "historical-invalid-assets",
+      "performanceRisk": "列表聚合，很多堆时DOM增长待测",
+      "recommendedAction": "保留消耗墓地语义，当前健康页核排版；旧破图不作为美术缺陷"
+    },
+    {
+      "id": "BATTLE-DECK",
+      "researchConclusion": "功能已有，视觉不足",
+      "basis": [
+        "renderDeckPileView抽牌堆独立标签/只读/返回已读",
+        "game/src/battle/view/battle.overlays.js @ function renderDeckPileView"
+      ],
+      "visualStatus": "source-only",
+      "performanceRisk": "聚合与重复HTML，先测规模",
+      "recommendedAction": "A4统一牌堆子页，不改循环规则"
+    },
+    {
+      "id": "BATTLE-BAG",
+      "researchConclusion": "功能已有，状态待验",
+      "basis": [
+        "renderBattleBag只列可用道具/可移安全格，排除starter与stored",
+        "game/src/battle/view/battle.overlays.js @ function renderBattleBag"
+      ],
+      "visualStatus": "source-only",
+      "performanceRisk": "大卡列/无效重绘",
+      "recommendedAction": "核空态、整组容量不足、返回与动画层隐藏"
+    },
+    {
+      "id": "BATTLE-CHOICE",
+      "researchConclusion": "源码与历史布局已读",
+      "basis": [
+        "choice-list/单选与无通用跳过；旧截图资源未加载",
+        "game/src/battle/view/battle.view.js @ if (choosing)"
+      ],
+      "visualStatus": "historical-invalid-assets",
+      "performanceRisk": "模糊背景与旧画面重绘",
+      "recommendedAction": "先健康截图；A4统一选择语义与层级"
+    },
+    {
+      "id": "BATTLE-PAYMENT",
+      "researchConclusion": "源码与历史布局已读",
+      "basis": [
+        "payment候选排除UID/主牌/燃料，强制与可选分支；旧图空候选",
+        "game/src/battle/view/battle.view.js @ if (handSelecting)"
+      ],
+      "visualStatus": "historical-invalid-assets",
+      "performanceRisk": "候选过滤及结算续接",
+      "recommendedAction": "A4明确还需数量/不可选原因；不能添加无条件跳过"
+    },
+    {
+      "id": "BATTLE-DISCOVER",
+      "researchConclusion": "源码与历史布局已读",
+      "basis": [
+        "候选选一与战后消散；discoverSrcRect记录来源，旧图有破图",
+        "game/src/battle/view/battle.view.js @ if (discovering)"
+      ],
+      "visualStatus": "historical-invalid-assets",
+      "performanceRisk": "候选图片加载和入手演出",
+      "recommendedAction": "A4重做布局但保留同卡来源与临时身份，重采健康帧"
+    },
+    {
+      "id": "BATTLE-INFUSE",
+      "researchConclusion": "源码研究，视觉待补",
+      "basis": [
+        "btInfuseStart及UID燃料/取消/直接打接口仍在",
+        "game/src/battle/view/battle.view.js @ UI.act('btInfuseStart'"
+      ],
+      "visualStatus": "source-only",
+      "performanceRisk": "同名UID轮转、交互峰值",
+      "recommendedAction": "A4三类动作分清；收益预览沿SYS08真源"
+    },
+    {
+      "id": "BATTLE-TARGET",
+      "researchConclusion": "当前部分实证",
+      "basis": [
+        "真实选初始攻击后两敌高亮，选择目标扣费并击杀一敌",
+        "game/src/battle/view/battle.layers.js @ setTargetable(selfUnit"
+      ],
+      "visualStatus": "live-partial",
+      "performanceRisk": "预览重算/指向与重绘",
+      "recommendedAction": "A4保留合法目标/取消与unknown语义，补多段/自用/键盘"
+    },
+    {
+      "id": "BATTLE-SETTINGS",
+      "researchConclusion": "布局基础已有，当前待验",
+      "basis": [
+        "btSettings静态轻浮层保留battle状态；旧截图图标失效",
+        "game/src/battle/view/battle.view.js @ 战斗设置"
+      ],
+      "visualStatus": "historical-invalid-assets",
+      "performanceRisk": "离开恢复动画/纹理生命周期",
+      "recommendedAction": "核速度/减动态/返回；声音免验"
+    }
+  ],
+  "sourceInputs": [
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "sha256": "0176cbe9aa4562ece056541b9cf4aa1763479e184d04a07bbd4fe905e8800828"
+    },
+    {
+      "path": "game/css/battle.css",
+      "sha256": "e2c4fe866ad2cf47dd5bba0f1371d0704f0f173678158f896420896869b08a3a"
+    },
+    {
+      "path": "game/css/expedition-battle.css",
+      "sha256": "00820b720e062888c1eb18b4c65a844b68eb893178900551abc27c3a8f473f1c"
+    },
+    {
+      "path": "game/css/combat-feedback.css",
+      "sha256": "90157af53f476b7f558afb4c05d00e887e8224d5217d475fcaa519dd23722476"
+    },
+    {
+      "path": "game/src/run/chests.js",
+      "sha256": "37071c99427a5d2f514128a252795269a56bc3ccdfa4bdb1a82ddb1f312d5053"
+    },
+    {
+      "path": "game/css/expedition-rewards.css",
+      "sha256": "1504f9555b55dd5d8ec0ccbc7b65a4006456e56ff8f17508ad0568df0d1f087c"
+    },
+    {
+      "path": "game/css/page-rewards-bag-help.css",
+      "sha256": "c192bf5ce0632ed986637acfe2a1da649bea5aa0bdbb3253a294ccb9095684d6"
+    },
+    {
+      "path": "game/css/pocket-strip.css",
+      "sha256": "1a9c662718a4fa58e2d5010217b9b66ff67c9086120a27d7bd10e0a1bd1a8c9a"
+    },
+    {
+      "path": "game/src/run/game.run.altar.js",
+      "sha256": "fa41f1c3206db40027b8345b540d6c5e65f3a8e78d7f19405aba44b3ebe1afef"
+    },
+    {
+      "path": "game/css/overlays.css",
+      "sha256": "68045996feed7ed077f56dbfe6ffe6ebdfce9d62e59bc545bb6f058b49e73609"
+    },
+    {
+      "path": "game/css/expedition.css",
+      "sha256": "2761c677a94dd7d85c04cd3c15cb588478957f1ec0331c8fed7c2dcd473d55f2"
+    },
+    {
+      "path": "game/src/battle/view/battle.overlays.js",
+      "sha256": "4e7ee00e4960140de76e8e50394a0e78490609ebdece66fd8f231fdff9dd19e6"
+    },
+    {
+      "path": "game/css/preparation.css",
+      "sha256": "e3a41a537fce727dcdf209f428d7c33ac2d87483dcb3ce15084fc3c180866bcd"
+    },
+    {
+      "path": "game/css/page-deploy.css",
+      "sha256": "5b07ba1a878cb1e864f5e582a6bacdf015d6bbea1ec870d643dc2c3df27c5006"
+    },
+    {
+      "path": "game/css/expedition-roster.css",
+      "sha256": "f673ced699f9a095dc2fe6c9437ada7a5c38401b5a4407802002eeb3e79bcee3"
+    },
+    {
+      "path": "game/src/agent/agent.data.js",
+      "sha256": "5b1910d82355a329d3a18c91d75fdc98adcffa8c263c00c00ec0a3f705d14501"
+    },
+    {
+      "path": "game/src/ui/game.menu.js",
+      "sha256": "26bed241d227a0596b8bf022c88f56d432b2b95d4a92bf04935e5593af8f2124"
+    },
+    {
+      "path": "game/src/ui/terminal-settlement.js",
+      "sha256": "db5b21b4ee1be4f1889540433d6e3b8348351d19c80320ead3810125756b1c8c"
+    },
+    {
+      "path": "game/src/hub/game.bag.settle.js",
+      "sha256": "3d03d698f5b8f708224323eddc44770d0cc01baf761dbb3d8dfdd18ed47d73c2"
+    },
+    {
+      "path": "game/src/run/game.session.death.js",
+      "sha256": "10eab34d969e9ab7812f5c9eb20b516a50662d32862540c4de8f31115e08d9a5"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "sha256": "e9ff86fe575dec41d755e350f3c2e8f3d2996eb9f417e9a9e1013a11e70ab83e"
+    }
+  ],
+  "limitations": [
+    "主会话定向源码与既有证据研究；不是全部实页验收",
+    "历史破图只支持有限布局记录，不支持素材失效或画质结论",
+    "性能是风险分类，尚未数值采样；声音免验",
+    "没有修改游戏/生成图片/运行全量测试"
+  ]
+}

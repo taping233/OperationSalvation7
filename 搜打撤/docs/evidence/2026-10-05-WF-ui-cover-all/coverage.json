@@ -1,0 +1,1564 @@
+{
+  "schema_version": 1,
+  "snapshot_local": "2026-10-05 02:26:02 +08:00",
+  "head": "425d03920e4323b016433419ec11aec4a7f3795b",
+  "remote_refreshed": false,
+  "scope": "Vite presentation implementation only; recent pages and research including shared branches excluded",
+  "counts": {
+    "total_entries": 107,
+    "implemented": 59,
+    "frozen_recent": 34,
+    "user_excluded_research": 9,
+    "hidden_or_disabled": 5
+  },
+  "evidence_kind": "source inventory, scoped implementation, read-only source review; not runtime verification",
+  "entry_point": "game/index.html",
+  "stylesheet_entry": "game/css/cover-remaining.css",
+  "context_entry": "game/src/ui/cover-context.js",
+  "selector_guard": ":where(body[data-ui-cover-context=\"ordinary\"])",
+  "excluded_candidate": "game/css/cover-hub.css retained unmounted; not a delivery or future commit item",
+  "no_browser": true,
+  "no_tests_lint_build": true,
+  "no_commit_push_publish": true,
+  "no_new_services": true,
+  "families": [
+    {
+      "css": "cover-run.css",
+      "ids": [
+        "pickup",
+        "safe",
+        "fire",
+        "airdrop",
+        "story",
+        "events",
+        "event-choice",
+        "event-recode",
+        "start-supply",
+        "door",
+        "altar",
+        "altar-reward",
+        "boss-gate",
+        "sacrifice",
+        "extract-entry",
+        "extract-sort",
+        "extract-done",
+        "loot-search",
+        "loot-reveal",
+        "run-shop",
+        "run-sell",
+        "death",
+        "run-transition"
+      ]
+    },
+    {
+      "css": "cover-details.css",
+      "ids": [
+        "stash-card",
+        "stash-egg",
+        "stash-material",
+        "stash-raw",
+        "bag",
+        "bag-drop",
+        "bag-pouch",
+        "bag-pearl",
+        "card-zoom"
+      ]
+    },
+    {
+      "css": "cover-system.css",
+      "ids": [
+        "stash-confirm",
+        "help",
+        "terms",
+        "notes",
+        "notes-export",
+        "notes-import",
+        "notes-clear",
+        "leave",
+        "abandon",
+        "exit"
+      ]
+    },
+    {
+      "css": "cover-battle-shell.css",
+      "ids": [
+        "battle",
+        "boss-deck",
+        "battle-choice",
+        "battle-hand-payment",
+        "battle-discover",
+        "battle-settings",
+        "battle-grave",
+        "battle-deck",
+        "battle-bag",
+        "battle-settle-retry",
+        "boss-intro"
+      ]
+    },
+    {
+      "css": "cover-secondary.css",
+      "ids": [
+        "extract-retry",
+        "bag-consumable-help",
+        "terminal-retry",
+        "designer-export",
+        "dev-console",
+        "gain-card"
+      ]
+    }
+  ],
+  "code_snapshot": [
+    {
+      "path": "game/css/cover-system.css",
+      "bytes": 14663,
+      "sha256": "25c312030e112f809c4244ea7b80c6ec42e52fa0aeef8b38ca6ba6c545d2afb2",
+      "ownership": "WF-ui-cover-all"
+    },
+    {
+      "path": "game/css/cover-details.css",
+      "bytes": 11003,
+      "sha256": "bdc072968abb7b5ef70b51583f3e41d4d9418a655de7ee3bb5736b0b9f8abcda",
+      "ownership": "WF-ui-cover-all"
+    },
+    {
+      "path": "game/css/cover-run.css",
+      "bytes": 27699,
+      "sha256": "36e67a42225159b4320aba1d8674a945701f8b381205ea73032c59e886a4a142",
+      "ownership": "WF-ui-cover-all"
+    },
+    {
+      "path": "game/css/cover-battle-shell.css",
+      "bytes": 24012,
+      "sha256": "65a982ca125416ed6a64bd948646cc2689a96cbf6e15db8a9f97aea604f1dc4d",
+      "ownership": "WF-ui-cover-all"
+    },
+    {
+      "path": "game/css/cover-secondary.css",
+      "bytes": 20225,
+      "sha256": "04def9cad257b9703405223b390a7981d9a5e02548ac73d269eda550a91416d8",
+      "ownership": "WF-ui-cover-all"
+    },
+    {
+      "path": "game/css/cover-remaining.css",
+      "bytes": 366,
+      "sha256": "cd82e174d2a781bffbf275df084be1d756c6fb1f7f1657cf6c0ab0058cb02d4e",
+      "ownership": "WF-ui-cover-all"
+    },
+    {
+      "path": "game/src/ui/cover-context.js",
+      "bytes": 2753,
+      "sha256": "c16729750acf44c22ee0ecbcbd94a313837283863daa497b68877e9c0cb415b8",
+      "ownership": "WF-ui-cover-all"
+    },
+    {
+      "path": "game/index.html",
+      "bytes": 23417,
+      "sha256": "97ef281655908968ac14a0dbe4e8992361cdd92c75c76864e89665a07a86c1f4",
+      "ownership": "this task owns only two mounting lines; other changes preserved"
+    }
+  ],
+  "items": [
+    {
+      "id": "home",
+      "name": "主页",
+      "parent_id": null,
+      "root_selector": "#title.home-composed",
+      "render_source": "game/index.html;game/src/ui/game.menu.js",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "credits",
+      "name": "制作名单",
+      "parent_id": "home",
+      "root_selector": "#homeCredits.home-credits-dialog",
+      "render_source": "game/index.html;game/src/ui/title-credits.js",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "settings",
+      "name": "设置",
+      "parent_id": "home",
+      "root_selector": ".pg.settings-page",
+      "render_source": "game/src/ui/game.menu.js:893",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "inbox",
+      "name": "留言信箱",
+      "parent_id": "home",
+      "root_selector": ".pg.settings-page.sugin-page",
+      "render_source": "game/src/ui/game.menu.js:350",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "feedback",
+      "name": "写留言 / 编辑反馈",
+      "parent_id": "inbox",
+      "root_selector": "#sugLayer .sug-panel",
+      "render_source": "game/index.html;game/src/ui/feedback.local.js",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "guide",
+      "name": "生存指南",
+      "parent_id": "home",
+      "root_selector": ".beginner-guide",
+      "render_source": "game/src/ui/beginner-guide.js;game/src/ui/game.menu.js:420",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "achievements",
+      "name": "成就陈列室",
+      "parent_id": "home",
+      "root_selector": ".achievement-gallery",
+      "render_source": "game/src/ui/achievement-gallery.js;game/src/ui/game.menu.js:445",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "achievement-detail",
+      "name": "奖章详情",
+      "parent_id": "achievements",
+      "root_selector": ".ag-detail / .ag-detail-backdrop",
+      "render_source": "game/src/ui/achievement-gallery.js:53",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "slots",
+      "name": "五档选档",
+      "parent_id": "home",
+      "root_selector": ".pg.slot-page",
+      "render_source": "game/src/ui/game.menu.js:566",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "slot-errors",
+      "name": "坏档 / 恢复错误 / 覆盖删除确认",
+      "parent_id": "slots",
+      "root_selector": "#slotRestoreError / .slot-card-ops .arm",
+      "render_source": "game/src/ui/game.menu.js:583",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "data",
+      "name": "跑局数据",
+      "parent_id": "settings",
+      "root_selector": ".pg.data-tuned",
+      "render_source": "game/src/ui/game.menu.js;game/src/agent/agent.data.js",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "photo",
+      "name": "照相馆",
+      "parent_id": "home",
+      "root_selector": ".pg.card-library-page.studio-unified",
+      "render_source": "game/src/hub/game.cardslib.page.js:589",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "photo-detail",
+      "name": "照片大图与背签",
+      "parent_id": "photo",
+      "root_selector": "#cardZoom.cz-photo",
+      "render_source": "game/src/ui/ui.js:164",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "character",
+      "name": "全屏选人",
+      "parent_id": "departure",
+      "root_selector": ".pg.cls2-page",
+      "render_source": "game/src/run/game.run.altar.js:128",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "character-pool",
+      "name": "角色卡池档案",
+      "parent_id": "character",
+      "root_selector": ".pg.cls-pool-page",
+      "render_source": "game/src/run/game.run.altar.js:270",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "hub",
+      "name": "全屏远征基地外壳",
+      "parent_id": "slots",
+      "root_selector": "#hubMain.pg.hub.hub-cover",
+      "render_source": "game/src/hub/game.hub.js:164",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "hub-deploy",
+      "name": "基地出发封面",
+      "parent_id": "hub",
+      "root_selector": "#hubMain.hub-deploy",
+      "render_source": "game/src/hub/game.hub.depart.js:hubDeployHTML",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "departure",
+      "name": "出发整备",
+      "parent_id": "hub-deploy",
+      "root_selector": "#depMain.departure-cover",
+      "render_source": "game/src/hub/game.hub.depart.js:149",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "hub-stash",
+      "name": "仓库总页 / 卡牌仓库",
+      "parent_id": "hub",
+      "root_selector": "#hubMain.hub-stash",
+      "render_source": "game/src/hub/game.hub.pages.js:hubStashHTML",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "hub-pocket",
+      "name": "仓库消耗口袋",
+      "parent_id": "hub-stash",
+      "root_selector": "#hubMain.hub-stash .warehouse-panel",
+      "render_source": "game/src/hub/game.hub.pages.js:hubStashHTML",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "hub-pets",
+      "name": "仓库宠物",
+      "parent_id": "hub-stash",
+      "root_selector": "#hubMain.hub-stash .pet-sec",
+      "render_source": "game/src/hub/game.hub.pages.js:hubPetsHTML",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "stash-card",
+      "name": "仓库卡牌 / 收藏品详情",
+      "parent_id": "hub-stash",
+      "root_selector": ".ov-shell.stash-shell[data-index=\"03\"]",
+      "render_source": "game/src/hub/game.hub.pages.js:295",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-details.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "stash-egg",
+      "name": "宠物蛋孵化详情",
+      "parent_id": "hub-stash",
+      "root_selector": ".ov-shell.stash-shell[data-index=\"01\"]",
+      "render_source": "game/src/hub/game.hub.pages.js:206",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-details.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "stash-material",
+      "name": "仓库材料卡使用",
+      "parent_id": "hub-stash",
+      "root_selector": ".ov-shell.stash-shell[data-index=\"02\"]",
+      "render_source": "game/src/hub/game.hub.pages.js:237",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-details.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "stash-raw",
+      "name": "木材 / 口粮储备说明",
+      "parent_id": "hub-stash",
+      "root_selector": ".ov-shell.stash-shell[data-index=\"04\"]",
+      "render_source": "game/src/hub/game.hub.pages.js:413",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-details.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "stash-confirm",
+      "name": "仓库使用 / 卖出确认",
+      "parent_id": "stash-card",
+      "root_selector": "#overlay.fx-glass .card:has([data-act=\"stashConfirmOk\"],[data-act=\"matConfirmOk\"])",
+      "render_source": "game/src/hub/game.hub.pages.js:259;game/src/hub/game.hub.pages.js:280",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-system.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "hub-shop",
+      "name": "基地商店",
+      "parent_id": "hub",
+      "root_selector": "#hubMain.hub-shop",
+      "render_source": "game/src/hub/game.hub.pages.js:hubShopHTML",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "hub-upgrade",
+      "name": "基地扩建 / 宠物升级",
+      "parent_id": "hub",
+      "root_selector": "#hubMain.hub-upgrade",
+      "render_source": "game/src/hub/game.hub.pages.js:hubUpgradeHTML",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "hub-personnel",
+      "name": "基地人物档案 / 外观选择",
+      "parent_id": "hub",
+      "root_selector": "#hubMain.hub-classes",
+      "render_source": "game/src/hub/game.hub.pages.js:hubClassesHTML",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "hub-collection",
+      "name": "基地成就收藏总页",
+      "parent_id": "hub",
+      "root_selector": "#hubMain.hub-ach",
+      "render_source": "game/src/hub/game.hub.pages.js:hubAchHTML",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "hub-collection-cards",
+      "name": "人物卡收藏 / 里程碑",
+      "parent_id": "hub-collection",
+      "root_selector": "#hubMain.hub-ach .coll-group",
+      "render_source": "game/src/hub/game.hub.pages.js:hubAchHTML",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "hub-collection-ach",
+      "name": "基地成就记录 / 领取",
+      "parent_id": "hub-collection",
+      "root_selector": "#hubMain.hub-ach .ach-list",
+      "render_source": "game/src/hub/game.hub.pages.js:hubAchHTML",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "hub-backs",
+      "name": "卡背图鉴 / 装备卡背",
+      "parent_id": "hub-collection",
+      "root_selector": "#hubMain.hub-ach .back-grid",
+      "render_source": "game/src/hub/game.hub.pages.js:hubAchHTML",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "map",
+      "name": "城市探索地图",
+      "parent_id": "departure",
+      "root_selector": "#viewport > canvas#game",
+      "render_source": "game/index.html;game/src/core/renderer.js;game/src/ui/hud.js;game/src/run/expedition.view.js",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "pickup",
+      "name": "金币 / 木材 / 口粮拾取",
+      "parent_id": "map",
+      "root_selector": ".node-pg.sc-pickup .node-panel",
+      "render_source": "game/src/run/game.run.scenes.js:185",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "safe",
+      "name": "安全地带",
+      "parent_id": "map",
+      "root_selector": ".node-pg.sc-safe .node-panel",
+      "render_source": "game/src/run/game.run.scenes.js:237",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "fire",
+      "name": "营火休整 / 复原",
+      "parent_id": "map",
+      "root_selector": ".node-pg.sc-fire .node-panel",
+      "render_source": "game/src/run/game.run.scenes.js:323;game/src/run/game.run.altar.js:45",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "airdrop",
+      "name": "物资投放点",
+      "parent_id": "map",
+      "root_selector": ".node-pg.sc-event",
+      "render_source": "game/src/run/game.run.flow.js:195",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "story",
+      "name": "最后一盏引路灯 / 章节 / 记录失败",
+      "parent_id": "map",
+      "root_selector": ".node-pg.sc-event",
+      "render_source": "game/src/run/game.run.flow.js:316;:378;:415",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "events",
+      "name": "普通事件 / 黑市 / 修鞋铺",
+      "parent_id": "map",
+      "root_selector": ".node-pg.sc-event .node-panel",
+      "render_source": "game/src/run/game.run.flow.js:462;:644;:845",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "event-choice",
+      "name": "药摊 / 装备征用二级选卡",
+      "parent_id": "events",
+      "root_selector": ".node-pg.sc-event .event-choice-hand",
+      "render_source": "game/src/run/game.run.flow.js:539",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "event-recode",
+      "name": "故障重编二级选卡",
+      "parent_id": "events",
+      "root_selector": ".node-pg.sc-event .event-choice-hand",
+      "render_source": "game/src/run/game.run.flow.js:580",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "start-supply",
+      "name": "选人后启程补给",
+      "parent_id": "character",
+      "root_selector": ".node-pg.sc-event",
+      "render_source": "game/src/run/game.run.altar.js:440",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "door",
+      "name": "环间门",
+      "parent_id": "map",
+      "root_selector": ".node-pg.sc-door",
+      "render_source": "game/src/run/game.run.altar.js:465",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "altar",
+      "name": "污染祭坛",
+      "parent_id": "map",
+      "root_selector": ".node-pg.sc-altar",
+      "render_source": "game/src/run/game.run.altar.js:501",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "altar-reward",
+      "name": "祭坛回赠 / 复原 / 碎片不可用",
+      "parent_id": "altar",
+      "root_selector": ".node-pg.sc-altar",
+      "render_source": "game/src/run/game.run.altar.js:535;:553;:587;:602",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "boss-gate",
+      "name": "首脑巢穴封印 / 决战入口",
+      "parent_id": "altar",
+      "root_selector": ".node-pg.sc-altar",
+      "render_source": "game/src/run/game.run.altar.js:627;:653",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "sacrifice",
+      "name": "祭坛 / 撤离献祭选卡",
+      "parent_id": "altar",
+      "root_selector": "#overlay .card:has(.sac-card)",
+      "render_source": "game/src/run/game.run.altar.js:686",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "extract-entry",
+      "name": "紧急 / 终局 / 停用撤离点",
+      "parent_id": "map",
+      "root_selector": ".node-pg.sc-exit",
+      "render_source": "game/src/run/game.run.altar.js:731;:741;:769;:778",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "extract-sort",
+      "name": "撤离整理入库",
+      "parent_id": "extract-entry",
+      "root_selector": "#exMain.pg.hub.result-pg",
+      "render_source": "game/src/run/game.run.altar.js:928",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "extract-retry",
+      "name": "撤离整理待恢复",
+      "parent_id": "extract-sort",
+      "root_selector": "#overlay .card.page:has([data-act=\"extractRetry\"])",
+      "render_source": "game/src/run/game.run.altar.js:868",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-secondary.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "extract-done",
+      "name": "撤离成功 / 首脑突破结算",
+      "parent_id": "extract-sort",
+      "root_selector": ".node-pg.sc-exit",
+      "render_source": "game/src/run/game.run.altar.js:1040",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "loot-search",
+      "name": "开箱搜索演出",
+      "parent_id": "map",
+      "root_selector": "#overlay .card.chest .pick-search",
+      "render_source": "game/src/run/chests.js:256",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "loot-reveal",
+      "name": "开箱 / 战后奖励 / 选一张",
+      "parent_id": "loot-search",
+      "root_selector": "#overlay .card.chest",
+      "render_source": "game/src/run/chests.js:360",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "run-shop",
+      "name": "局内战术补给站",
+      "parent_id": "map",
+      "root_selector": ".shop-pg.node-pg.sc-shop",
+      "render_source": "game/src/run/game.run.shop.js:248",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "run-sell",
+      "name": "局内收购台",
+      "parent_id": "run-shop",
+      "root_selector": ".shop-pg.node-pg.sc-shop:has(.sell-desk)",
+      "render_source": "game/src/run/game.run.shop.js:294",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "bag",
+      "name": "全屏局内背包",
+      "parent_id": "map",
+      "root_selector": "#overlay .card.bag-page .bag-view",
+      "render_source": "game/src/hub/game.bag.js:648",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-details.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "bag-drop",
+      "name": "丢弃卡牌确认",
+      "parent_id": "bag",
+      "root_selector": "#overlay.fx-glass .glass-panel",
+      "render_source": "game/src/hub/game.bag.js:279",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-details.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "bag-pouch",
+      "name": "法师锦囊收存",
+      "parent_id": "bag",
+      "root_selector": "#overlay .card:has([data-act=\"pouchBack\"])",
+      "render_source": "game/src/hub/game.bag.js:381",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-details.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "bag-pearl",
+      "name": "珍珠盒资源收存",
+      "parent_id": "bag",
+      "root_selector": "#overlay .card:has([data-act=\"pearlBack\"])",
+      "render_source": "game/src/hub/game.bag.js:459",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-details.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "bag-consumable-help",
+      "name": "卡牌是消耗品提醒",
+      "parent_id": "bag",
+      "root_selector": "#overlay .card.discover:has(.ammo-teach)",
+      "render_source": "game/src/hub/game.bag.settle.js:142",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-secondary.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "help",
+      "name": "各页二级说明",
+      "parent_id": "map",
+      "root_selector": "#overlay .card:has(.help-body)",
+      "render_source": "game/src/ui/overlay.js:28",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-system.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "card-zoom",
+      "name": "普通卡牌详情 / 收藏卡大图",
+      "parent_id": "bag",
+      "root_selector": "#cardZoom:not(.cz-photo)",
+      "render_source": "game/src/ui/ui.js:201",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-details.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "terms",
+      "name": "词条讲解浮框",
+      "parent_id": "card-zoom",
+      "root_selector": ".term-tip",
+      "render_source": "game/src/ui/term-tips.js:81",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-system.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "notes",
+      "name": "格子备注编辑",
+      "parent_id": "map",
+      "root_selector": "#overlay .card:has(#ovNote)",
+      "render_source": "game/src/hub/game.notes.js:63",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-system.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "notes-export",
+      "name": "格子备注导出",
+      "parent_id": "notes",
+      "root_selector": "#overlay .card:has(#ovExport)",
+      "render_source": "game/src/hub/game.notes.js:117",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-system.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "notes-import",
+      "name": "格子备注导入",
+      "parent_id": "notes",
+      "root_selector": "#overlay .card:has(#ovImport)",
+      "render_source": "game/src/hub/game.notes.js:143",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-system.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "notes-clear",
+      "name": "清空备注确认",
+      "parent_id": "notes",
+      "root_selector": "#overlay .card:has([data-act=\"doClear\"])",
+      "render_source": "game/src/hub/game.notes.js:187",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-system.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "leave",
+      "name": "保存离局 / 放弃确认",
+      "parent_id": "map",
+      "root_selector": "#overlay .card:has([data-act=\"leaveSave\"])",
+      "render_source": "game/src/ui/game.menu.js:743",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-system.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "abandon",
+      "name": "放弃结算",
+      "parent_id": "leave",
+      "root_selector": "#overlay .card:has([data-act=\"toTitle\"])",
+      "render_source": "game/src/ui/game.menu.js:802",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-system.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "death",
+      "name": "撤离失败结算",
+      "parent_id": "battle",
+      "root_selector": "#overlay.fx-doom .doom-panel",
+      "render_source": "game/src/run/game.session.death.js:162",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "terminal-retry",
+      "name": "死亡 / 放弃终局保存重试",
+      "parent_id": "death",
+      "root_selector": "#overlay .card:has([data-act=\"retryTerminalDeath\"],[data-act=\"retryAbandon\"])",
+      "render_source": "game/src/ui/terminal-settlement.js:36",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-secondary.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "battle",
+      "name": "战斗主界面",
+      "parent_id": "map",
+      "root_selector": ".battle-stage.sts",
+      "render_source": "game/src/battle/view/battle.view.js:377",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-battle-shell.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "boss-deck",
+      "name": "首脑战编组牌库",
+      "parent_id": "boss-gate",
+      "root_selector": "#overlay .card:has([data-act=\"bossGo\"])",
+      "render_source": "game/src/battle/view/battle.overlays.js:38",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-battle-shell.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "battle-choice",
+      "name": "战斗抉择",
+      "parent_id": "battle",
+      "root_selector": "#overlay .card.discover .choice-list",
+      "render_source": "game/src/battle/view/battle.view.js:234",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-battle-shell.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "battle-hand-payment",
+      "name": "战斗选手牌 / 注能 / 支付",
+      "parent_id": "battle",
+      "root_selector": "#overlay .card.discover:has([data-act=\"btPickHand\"])",
+      "render_source": "game/src/battle/view/battle.view.js:266",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-battle-shell.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "battle-discover",
+      "name": "战斗发现卡牌",
+      "parent_id": "battle",
+      "root_selector": "#overlay .card.discover:has([data-act=\"btDiscover\"])",
+      "render_source": "game/src/battle/view/battle.view.js:280",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-battle-shell.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "battle-settings",
+      "name": "战斗设置",
+      "parent_id": "battle",
+      "root_selector": ".bt-settings",
+      "render_source": "game/src/battle/view/battle.view.js:442",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-battle-shell.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "battle-grave",
+      "name": "战斗墓地",
+      "parent_id": "battle",
+      "root_selector": "#overlay .card:has([data-act=\"btGraveBack\"])",
+      "render_source": "game/src/battle/view/battle.overlays.js:76",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-battle-shell.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "battle-deck",
+      "name": "战斗牌库",
+      "parent_id": "battle",
+      "root_selector": "#overlay .card:has([data-act=\"btDeckBack\"])",
+      "render_source": "game/src/battle/view/battle.overlays.js:107",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-battle-shell.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "battle-bag",
+      "name": "战斗背包道具",
+      "parent_id": "battle",
+      "root_selector": ".battle-bag",
+      "render_source": "game/src/battle/view/battle.overlays.js:158",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-battle-shell.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "battle-settle-retry",
+      "name": "战后奖励未保存重试",
+      "parent_id": "battle",
+      "root_selector": "#overlay .card.discover:has([data-act=\"battleSettleRetry\"])",
+      "render_source": "game/src/hub/game.bag.settle.js:67",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-battle-shell.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "run-transition",
+      "name": "进入节点 / 出发短过场",
+      "parent_id": "map",
+      "root_selector": ".scene.flow-transition:not([data-presentation=\"base-arrival\"])",
+      "render_source": "game/src/run/game.run.scenes.js:134",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-run.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "hub-arrival",
+      "name": "进入基地过场",
+      "parent_id": "slots",
+      "root_selector": ".flow-transition[data-presentation=\"base-arrival\"] .hub-arrival-card",
+      "render_source": "game/src/run/game.run.scenes.js:134",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "nest-gate",
+      "name": "研究所大门钥匙确认",
+      "parent_id": "hub-deploy",
+      "root_selector": "#overlay .card:has([data-act=\"labOpen\"])",
+      "render_source": "game/src/run/game.nest.js:112",
+      "implementation_status": "user-excluded-research",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "nest-prep",
+      "name": "研究所备战 / 符文槽",
+      "parent_id": "nest-gate",
+      "root_selector": "#overlay .card:has([data-act=\"nestGo\"])",
+      "render_source": "game/src/run/game.nest.js:155",
+      "implementation_status": "user-excluded-research",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "nest-map",
+      "name": "研究所线性路线 / 奖励选择",
+      "parent_id": "nest-prep",
+      "root_selector": "#overlay .card:has([data-act^=\"nestCell\"])",
+      "render_source": "game/src/run/game.nest.js:237",
+      "implementation_status": "user-excluded-research",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "nest-circle",
+      "name": "符文法阵",
+      "parent_id": "nest-map",
+      "root_selector": "#overlay .card:has([data-act=\"rcBack\"])",
+      "render_source": "game/src/run/game.nest.js:393",
+      "implementation_status": "user-excluded-research",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "nest-altar",
+      "name": "研究所祭坛",
+      "parent_id": "nest-map",
+      "root_selector": "#overlay .card:has([data-act=\"naBack\"])",
+      "render_source": "game/src/run/game.nest.js:420",
+      "implementation_status": "user-excluded-research",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "nest-shop",
+      "name": "研究所神秘商店",
+      "parent_id": "nest-map",
+      "root_selector": "#overlay .card:has([data-act=\"nsBack\"])",
+      "render_source": "game/src/run/game.nest.js:461",
+      "implementation_status": "user-excluded-research",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "nest-extract-save",
+      "name": "研究所撤离未保存 / 正在保存",
+      "parent_id": "nest-map",
+      "root_selector": "#overlay .card:has([data-act=\"nestExtractRetry\"])",
+      "render_source": "game/src/run/game.nest.js:522;:568",
+      "implementation_status": "user-excluded-research",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "lab-ending",
+      "name": "研究所通关三页演出",
+      "parent_id": "nest-extract-save",
+      "root_selector": "#labEnding",
+      "render_source": "game/src/run/lab.ending.js:36",
+      "implementation_status": "user-excluded-research",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "nest-result",
+      "name": "研究所行动结算",
+      "parent_id": "lab-ending",
+      "root_selector": "#overlay .card:has([data-act=\"labScoreBack\"])",
+      "render_source": "game/src/run/game.nest.js:637",
+      "implementation_status": "user-excluded-research",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "loading",
+      "name": "页面加载提示",
+      "parent_id": "photo",
+      "root_selector": ".page-loading",
+      "render_source": "game/src/ui/page-loading.js:29",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "exit",
+      "name": "退出后的重新进入页",
+      "parent_id": "home",
+      "root_selector": "#exitScr",
+      "render_source": "game/index.html:304;game/src/ui/game.menu.js:830",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-system.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "tooltip-log",
+      "name": "悬停提示 / 行动记录 / 资源预热",
+      "parent_id": "map",
+      "root_selector": "#tooltip / #logPanel / #warmupTip",
+      "render_source": "game/index.html;game/src/ui/hud.js;game/src/ui/cinematics.js",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "designer",
+      "name": "自定义卡牌设计器",
+      "parent_id": "photo",
+      "root_selector": ".pg.cdes",
+      "render_source": "game/src/hub/game.cardslib.designer.js:104",
+      "implementation_status": "hidden-or-disabled-preserved",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "designer-export",
+      "name": "卡牌导出",
+      "parent_id": "photo",
+      "root_selector": "#overlay .card:has(#ovExport)",
+      "render_source": "game/src/hub/game.cardslib.designer.js:307",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-secondary.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "designer-import",
+      "name": "卡牌导入",
+      "parent_id": "designer",
+      "root_selector": "#overlay .card:has(#ovImport)",
+      "render_source": "game/src/hub/game.cardslib.designer.js:333",
+      "implementation_status": "hidden-or-disabled-preserved",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "dev-console",
+      "name": "开发者控制台四页签",
+      "parent_id": "settings",
+      "root_selector": "#overlay .card.discover:has(.devc-topbar)",
+      "render_source": "game/src/run/game.run.dev.js:171;game/src/agent/agent.console.js",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-secondary.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "hidden-home",
+      "name": "旧基地房间布置与编辑器",
+      "parent_id": "hub",
+      "root_selector": "#homeSceneHost / .home-scene",
+      "render_source": "game/src/hub/game.hub.js:83;game/src/home/home.scene.js",
+      "implementation_status": "hidden-or-disabled-preserved",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "hidden-preparation",
+      "name": "收藏目标与出征预设",
+      "parent_id": "hub-deploy",
+      "root_selector": ".preparation-shell / #preparationRoot",
+      "render_source": "game/src/hub/game.hub.js:50;game/src/hub/preparation.view.js",
+      "implementation_status": "hidden-or-disabled-preserved",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "demo",
+      "name": "演示与验收宿主页",
+      "parent_id": null,
+      "root_selector": "#commDemoPanel / QA roots",
+      "render_source": "game/src/ui/comm-feed.js;game/dev.html;game/dev/*",
+      "implementation_status": "hidden-or-disabled-preserved",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "gain-card",
+      "name": "卡牌获得 / 传说揭晓",
+      "parent_id": "events",
+      "root_selector": "#cardGet / #legendGet",
+      "render_source": "game/src/ui/cinematics.js:36;:82",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-secondary.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "boss-intro",
+      "name": "首脑登场 / 开战装备闪现",
+      "parent_id": "battle",
+      "root_selector": ".boss-intro / .bt-start-equip-flash",
+      "render_source": "game/src/battle/view/battle.view.js:100;:620",
+      "implementation_status": "implemented-awaiting-user-review",
+      "primary_cover": [
+        "cover-battle-shell.css"
+      ],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "photo-note-edit",
+      "name": "照片背签编辑",
+      "parent_id": "photo-detail",
+      "root_selector": "#cardZoom.cz-photo .cz-note.editable",
+      "render_source": "game/src/ui/ui.js:125",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    },
+    {
+      "id": "photo-note-export",
+      "name": "导出照片备注",
+      "parent_id": "photo",
+      "root_selector": ".library-tools [data-act=\"exportNotes\"]",
+      "render_source": "game/src/hub/game.cardslib.page.js:604",
+      "implementation_status": "frozen-recent",
+      "primary_cover": [],
+      "research_shared_branch": "all new cover rules inactive in research context",
+      "visual_verified": false,
+      "interaction_verified": false
+    }
+  ]
+}

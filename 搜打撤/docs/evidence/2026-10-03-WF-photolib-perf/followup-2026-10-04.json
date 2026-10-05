@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "date": "2026-10-04",
+    "head": "425d03920e 工作树（含 10-03 c-v 修复未提交）",
+    "service": "http://127.0.0.1:5200（主线 Vite，留老板用，本会话只读复测；未另起服务）",
+    "browser": "ZCode 内置浏览器 1280x720；已知环境噪音：IAB 面板被遮挡时 rAF 冻结（本会话实测 78s/17s/12.8s 巨帧），帧统计一律剔除 >2000ms 遮挡帧后口径",
+    "task": "老板令「卡牌库特别卡，研究底层代码优化清理冗余」——WF-photolib-perf 10-03 归因修复的续做"
+  },
+  "measurement": {
+    "scenes": [
+      { "scene": "静止浏览", "fps": 165, "p50ms": 6, "note": "预热完成后" },
+      { "scene": "稳态滚动（预热后·改动前）", "fps": 63.8, "p50ms": 12, "p95ms": 31, "over50": 3, "note": "reload 后面板产帧期" },
+      { "scene": "首轮滚动（冷缓存+预热期·改动前）", "fps": 35.1, "p50ms": 30, "over50": 8, "note": "进游戏即开库的老板高频场景" },
+      { "scene": "首轮滚动（冷缓存+预热期·改动后）", "fps": 57.3, "p50ms": 12, "p95ms": 48, "over50": 8, "note": "同场景复测；p50 30→12 与稳态持平，首轮现场解码等待基本消除" },
+      { "scene": "打开照相馆", "blockMs": 52.9, "secondFrameMs": 39.9 },
+      { "scene": "切页签（法术 79 张）", "blockMs": 22.4 },
+      { "scene": "主线程占用（滚动全程 MessageChannel 4ms 节拍）", "avgExtraMs": 0.6, "p99ms": 2, "maxMs": 11, "note": "DOM 挂载/卸载/IO 全在主线程但成本 <1ms/帧" },
+      { "scene": "JS 堆（4 轮连续滚动）", "stable": "37-38MB", "note": "无泄漏" }
+    ],
+    "excluded": [
+      { "suspect": "box-shadow（88 处/照片 4 层叠影）", "evidence": "注入 none!important 后滚动 65.6 vs 基线 63.8 FPS（720p 下无差异）" },
+      { "suspect": "DOM 挂载/卸载（每秒 ~110 次 mutation）", "evidence": "主线程额外延迟 <1ms/帧；前序会话同结论（104 次注入累计 7.9-9.8ms）" },
+      { "suspect": "JS 堆泄漏", "evidence": "4 轮滚动 37-38MB 稳定" },
+      { "suspect": "启动预取/解码竞争", "evidence": "warmBatched/prefetchBatched 均已有 cardlib-open 让路（art.js:406/450），开库即挂起" }
+    ]
+  },
+  "changes": [
+    {
+      "file": "game/src/hub/game.cardslib.art-warm.js",
+      "change": "缩略图解码 IO rootMargin '55% 0px'→'100% 0px'，与瓦片挂载窗口（observeLibTiles 同为 100%）对齐",
+      "why": "解码窗口小于挂载窗口时，滚到的瓦片已挂载但图未解码，首轮滚动仍现场解码（本轮实测首轮 p50 30ms vs 稳态 12ms 的差距主因）"
+    },
+    {
+      "file": "game/css/expedition-library.css",
+      "change": "删除 contain-intrinsic-size:auto var(--lib-tile-h,270px) 死属性声明（原 :570）",
+      "why": "只服务 c-v:auto 跳过态占位，10-03 c-v 改 visible 后无消费方（前序挂账的收敛批兑现）；--lib-tile-h 仍被 .lib-ph 壳高度消费，非死变量"
+    },
+    {
+      "file": "game/css/winter.css",
+      "change": "删除 :250 .lib-item{content-visibility:auto;contain-intrinsic-size:auto 224px} 与 :1155 .lib-item{contain-intrinsic-size:auto 122px} 两条全局旧行",
+      "why": "全量卡面时代的跳过渲染优化；.lib-item 仅照相馆生成，现行口径已由 expedition-library.css 显式 visible 承接（10-03 归因 -66%），旧行只余特异性战争隐患"
+    }
+  ],
+  "verification": [
+    "计算样式：content-visibility=visible（旧行删后新行唯一来源）、contain-intrinsic-size=none（死属性删除生效）、contain=layout style（保留）",
+    "壳等高链路：.lib-ph offsetHeight=245 = 瓦片 offsetHeight=245（--lib-tile-h 由 syncLibTileIntrinsicSize 喂养；rect 208 差异系全局 zoom:0.85，改动前后一致）",
+    "定向测试 31/31 绿：card-photo-notes 4 + photo-studio-presentation 2 + photo-zoom-lifecycle 12 + card-render-context 3 + hub-architecture 6 + full-review-regressions-hub 6 + custom-cards 4",
+    "截图对照：库页照片墙/选片台/筛选栏视觉无回归（见 README 索引）",
+    "首轮滚动复测：p50 30ms→12ms、35→57 FPS（同场景前后对照，非严格 A/B，环境含遮挡噪音已剔）"
+  ],
+  "proposals": [
+    {
+      "id": "P-imgfilter-bake",
+      "what": "每张瓦片照片的运行时调色滤镜（expedition-library.css:675 filter:sepia(.04) saturate(1.04) contrast(1.05) brightness(1.03)）烧进 bake-card-thumbs 缩略图烘焙管线，删除运行时 filter",
+      "evidence": "前序 diagToggles：nofilter 后 longtask 总量 536→318ms（-40%），是 c-v 修复后最大单一剩余份额",
+      "cost": "bake-card-thumbs.cjs 加调色 + 223 张重烘（二进制变更入 git）+ 烧色与 CSS 滤镜色彩一致性验收（需老板看图拍板）",
+      "note": "选片台/zoom 大图用原图+CSS 滤镜可保留（单张无性能压力）"
+    },
+    {
+      "id": "P-open-split",
+      "what": "打开照相馆 53ms 阻塞拆帧：壳分段渲染（首帧视口窗口内壳，余壳 rIC 分批 append）",
+      "evidence": "本轮实测打开点击帧阻塞 52.9ms+次帧 39.9ms（271 壳 innerHTML 一次性解析）",
+      "cost": "renderCardLibrary/renderLibGrid 两处调用时序改动+IO 重挂，中风险中收益；老板主诉为持续卡顿，此项列为备选"
+    },
+    {
+      "id": "P-css-winter-legacy",
+      "what": "winter.css 内 .lib-item 旧列表样式残留（:393/394/500/1001/1196 等）与 .hs-card.lib 旧紧凑卡样式逐条特异性核对后收敛",
+      "evidence": "库页根类已固定 photo-studio-v3，这些规则多数被 expedition-library.css 压制，只余特异性战争",
+      "cost": "需逐条核对覆盖面（部分仍向 page-cardslib.css 等口径供值），建议并入下次 CSS 收敛批"
+    }
+  ]
+}

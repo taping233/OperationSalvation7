@@ -1,0 +1,24 @@
+{
+  "restoredAt": "2026-10-03T16:27:00.806Z",
+  "source": "2026-10-03-WF-home-layout/2026-10-03T15-34-32.906Z-6220da5d.json",
+  "expected": {
+    "css": "c1e4c6bd9005da5ddf36b0d3db8bf634d320da4c8eadb4b0fb7e3750e25be9ad",
+    "html": "57b31c28efa48fe7bd69032d859b683741a83ba81f71aa23b78500710a3f7e75"
+  },
+  "actual": {
+    "css": "c1e4c6bd9005da5ddf36b0d3db8bf634d320da4c8eadb4b0fb7e3750e25be9ad",
+    "html": "57b31c28efa48fe7bd69032d859b683741a83ba81f71aa23b78500710a3f7e75"
+  },
+  "backup": [
+    {
+      "file": "game/css/title-p0.css",
+      "backup": "docs/evidence/2026-10-04-WF-home-restore/before-title-p0.css",
+      "sha256": "1642d6485f74c8d61f7221bf8331dc0ef3ee02343ebad3ff0a1d954e4cec5618"
+    },
+    {
+      "file": "game/index.html",
+      "backup": "docs/evidence/2026-10-04-WF-home-restore/before-index.html",
+      "sha256": "44ec95ca227e1f4b2f897010f501b366cdbce189c8b9ca4f27e0e58693ef27d2"
+    }
+  ]
+}

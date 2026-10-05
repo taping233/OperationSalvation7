@@ -1,0 +1,61 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 4/25, ID: bagBtnFloat
+			4 text 背包
+			12 text 4/25
+		6 container swords 遭遇战 · 第 1 回合 · bag 战斗背包, ID: overlay
+			7 container
+				13 button Description: 关闭, ID: ovCloseX
+				8 heading swords 遭遇战 · 第 1 回合 · bag 战斗背包, Value: 2, ID: ovTitle
+					14 image swords
+					15 text  遭遇战 · 第 1 回合 · 
+					16 image bag
+					17 text  战斗背包
+				11 container ovBody
+					18 text 点击道具卡直接使用——回复类 / 能源结晶 / 神秘药水 / 口粮木材战斗内生效，其余道具战后回地图再使
+					19 container
+						20 text 0
+						21 image 流血药水
+						22 text 流血药水 道具 · 稀有 造成  2  点固定 伤害 ，附加 流血 。
+						23 image coin
+						24 text 2
+					25 container
+						26 image lock
+						27 text  安全格  0/2 （空位 2）——点击卡牌把整组存入，撤离失败时只有安全格里的卡牌会抢运回基地
+					28 container
+						29 text 0
+						30 image 流血药水
+						31 text 流血药水
+						32 text 道具 · 稀有
+						33 text 造成  2  点固定 伤害 ，附加 流血 。
+						34 container
+							35 image coin
+							36 text 2
+						37 image lock
+						38 text 存入
+					39 container
+						40 text 0
+						41 image 木材
+						42 text 木材
+						43 text 资源 · 古朴
+						44 text 木材 × 1 。
+						45 container
+							46 image coin
+							47 text 2
+						48 image lock
+						49 text 存入
+					50 container
+						51 text 0
+						52 image 珍珠盒
+						53 text 珍珠盒
+						54 text 装备 · 稀有
+						55 text 内置 3 * 3 空间，可以容纳所有类型的资源卡牌。
+						56 container
+							57 image coin
+							58 text 3
+						59 image lock
+						60 text 存入
+					61 button ↩ 返回战斗（B）
+
+The focused UI element is 61 button ↩ 返回战斗（B）

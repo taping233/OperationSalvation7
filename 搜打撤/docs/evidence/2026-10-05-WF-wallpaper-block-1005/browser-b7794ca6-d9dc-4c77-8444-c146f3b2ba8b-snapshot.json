@@ -1,0 +1,123 @@
+{
+  "actions": [
+    {
+      "detail": "Current DOM confirms versioned final wallpaper URL, selected ensemble, unchanged contain/extension configuration",
+      "type": "static-inspection"
+    },
+    {
+      "detail": "Current window after refresh, five-person wallpaper, extra two men absent; clothing large planes visible",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "data-home-wallpaper": "ensemble",
+        "id": "title"
+      },
+      "identity": "title",
+      "key": "wallpaper",
+      "rect": {
+        "height": 720,
+        "width": 1280,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#title",
+      "styles": {
+        "backgroundImage": "none",
+        "backgroundSize": "auto",
+        "filter": "none",
+        "opacity": "1"
+      },
+      "tag": "DIV",
+      "text": "冬日猜想 / CODE NAME 7冬日猜想 / CODE NAME 7冬日猜想 / CODE NAME 7\n          冬日猜想 / CODE NAME 7冬日猜想 / CODE NAME 7冬日猜想 / CODE NAME 7\n        \n      \n      \n        \n          \n        \n        \n          \n        "
+    },
+    {
+      "attributes": {
+        "data-home-wallpaper": "",
+        "id": ""
+      },
+      "identity": "title-bg title-bg-alternate",
+      "key": "image",
+      "rect": {
+        "height": 662.4166870117188,
+        "width": 1177.604248046875,
+        "x": 51.19791793823242,
+        "y": 28.791667938232425
+      },
+      "selector": ".title-bg-alternate",
+      "styles": {
+        "backgroundImage": "url(\"http://127.0.0.1:5200/assets/reconstruction/wallpaper-ensemble-1005.webp?v=block-five-1005\")",
+        "backgroundSize": "contain",
+        "filter": "none",
+        "opacity": "1"
+      },
+      "tag": "DIV",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-home-wallpaper": "",
+        "id": ""
+      },
+      "identity": "title-wallpaper-extension",
+      "key": "extension",
+      "rect": {
+        "height": 777.5833740234375,
+        "width": 1382.3958740234375,
+        "x": -51.19791793823242,
+        "y": -28.791667938232425
+      },
+      "selector": ".title-wallpaper-extension",
+      "styles": {
+        "backgroundImage": "url(\"http://127.0.0.1:5200/assets/reconstruction/wallpaper-ensemble-1005.webp?v=block-five-1005\")",
+        "backgroundSize": "cover",
+        "filter": "blur(40px) brightness(0.7)",
+        "opacity": "1"
+      },
+      "tag": "DIV",
+      "text": ""
+    }
+  ],
+  "observedAt": "2026-10-04T16:58:27.003Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.5,
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "scene": "Five-person broad-brush wallpaper with Heixiang and Changwuyu face corrections",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-05-WF-wallpaper-redraw/v2/current-window.png"
+  ],
+  "selectors": [
+    {
+      "key": "wallpaper",
+      "selector": "#title"
+    },
+    {
+      "key": "image",
+      "selector": ".title-bg-alternate"
+    },
+    {
+      "key": "extension",
+      "selector": ".title-wallpaper-extension"
+    }
+  ]
+}

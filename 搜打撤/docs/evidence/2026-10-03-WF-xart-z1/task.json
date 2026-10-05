@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-xart-z1",
+  "date": "2026-10-03",
+  "owner": "Friday ZCode 体验美术执行侧",
+  "goal": "按 2026-10-03-experience-art-plan 总纲执行 ZCode 侧适用项：A6 剩余页签、A5 结算表现与结果链、A3 补给/节点研究、A2 战后样板",
+  "paths": [
+    "game/src/hub/game.hub.js",
+    "game/src/hub/base-pet-egg.commands.js",
+    "game/src/hub/collection.commands.js",
+    "game/src/hub/meta-progression.js",
+    "game/src/hub/base.commands.js",
+    "game/src/hub/recovery.commands.js",
+    "game/src/hub/game.notes.js",
+    "game/src/hub/game.hub.preparation.js",
+    "game/src/hub/preparation.view.js",
+    "game/src/hub/preparation.sources.js",
+    "game/src/ui/terminal-settlement.js",
+    "game/css/page-hub.css",
+    "docs/evidence/2026-10-03-WF-xart-z1/"
+  ],
+  "doneWhen": [
+    "总纲执行收尾：批次1-4全落且测试门全绿"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "批次1-4全落+测试门全绿+独立复核通过（BATCH-REPORT.md）",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "出图线产物留.tmp未验收；实页验收以a4-a3-live-review为证"
+  ],
+  "updatedAt": "2026-10-03T17:20:34.710Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

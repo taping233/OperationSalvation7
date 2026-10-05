@@ -1,0 +1,5 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
++	60 container 注能——打出前可点卡面「注能」角标，牺牲若干张手牌强化本牌效果；牺牲品进入墓地、不计入「打出」。不注能则按弱效果直接打出。
++		61 text 注能 —— 打出前可点卡面「注能」角标，牺牲若干张手牌强化本牌效果；牺牲品进入墓地、不计入「打出」。不注能则按弱效果直接打出。
+The focused UI element is 19 button 关闭背包

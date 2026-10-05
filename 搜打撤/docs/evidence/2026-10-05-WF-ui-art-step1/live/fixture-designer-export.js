@@ -1,0 +1,1 @@
+(async()=>{const q=window.__uiArtQA;q.reset();const m=await import('/src/hub/game.cardslib.designer.js');const lib=await import('/src/hub/game.cardslib.js');m.createCardDesigner({setCardPageOpen:lib._set_cardPageOpen,openCardLibrary:lib.openCardLibrary}).showCardsExportOverlay();return true;})()

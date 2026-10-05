@@ -1,0 +1,23 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container skull 撤离失败, ID: overlay
+		3 container
+			4 heading skull 撤离失败, Value: 2, ID: ovTitle
+				5 image skull
+				6 text  撤离失败
+			7 container ovBody
+				8 text 生命归零 · 远征到此为止
+				9 text 开发测试档未选择存档槽；基地奖励仅暂存于内存。
+				10 container
+					11 image cross
+					12 text  散失：卡牌  4  张（含 【斩杀】） · 口袋散失 0 张
+				13 text 损失物资 0 抢运回基地 0 张 安全格占用 0/2
+				14 text 安全格里没有卡牌——把卡存进背包安全格（基地用口粮升级），倒下时才抢得回来。
+				15 button home 回基地
+					16 image home
+					17 text  回基地
+				18 button skull 再出发
+					19 image skull
+					20 text  再出发
+
+The focused UI element is 15 button home 回基地

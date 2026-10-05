@@ -1,0 +1,88 @@
+{
+  "method": "Built-in ImageGen; rough repaint edits; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "cardId": "tt8-hero-guardian",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-60ee4ae4-7a0e-4318-983f-160eaec5bf09.png",
+      "source": {
+        "path": "game/art-source/cards/hero-sacredsword-rough-20261004.png",
+        "bytes": 1588803,
+        "sha256": "34e3d91778517bc6914b1701de6c8e48f92b9cc57678f47bcd3eb50bfe1634e0"
+      },
+      "outputs": [
+        {
+          "path": "game/assets/cards/hero-sacredsword.webp",
+          "bytes": 75788,
+          "sha256": "d5f3b77fa561b1cb36bc3f4c59bad93f935ca95a1370bb02c1275b758fef97e3",
+          "size": [
+            1440,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/hero-sacredsword.webp",
+          "bytes": 10294,
+          "sha256": "0be1d4ef2719453eac101bd2efdfcbedc2a117ce8f49d4be3557f37a0d494459",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ],
+      "backups": [
+        {
+          "path": "docs/evidence/2026-10-04-WF-heixiang-two-forms-rough/originals-before-rough/full-hero-sacredsword.webp",
+          "bytes": 68894,
+          "sha256": "cc65eeca5b02017934f3fafcb1faff8d4c05b61f230d0dce6fae62ed1f9996f8"
+        },
+        {
+          "path": "docs/evidence/2026-10-04-WF-heixiang-two-forms-rough/originals-before-rough/thumb-hero-sacredsword.webp",
+          "bytes": 14074,
+          "sha256": "b0ffcb8a659c483b0953afe7a18b32a009da93e03a21b1675b311142fa81cfbe"
+        }
+      ]
+    },
+    {
+      "cardId": "tt8-hero-warrior",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a1072f-aa1b-7d20-9d28-a6b0afc07e00\\exec-4eb6888c-ba7b-4fa6-a43b-5f0e5ae983cd.png",
+      "source": {
+        "path": "game/art-source/cards/hero-warrior-rough-20261004.png",
+        "bytes": 1913033,
+        "sha256": "fa0375963be78782ae984ea8895b61a41f8429ceeca1d3232f615aa48d156740"
+      },
+      "outputs": [
+        {
+          "path": "game/assets/cards/hero-warrior.webp",
+          "bytes": 147266,
+          "sha256": "0b4dd45c92ebac1f97d4dd714da5c2c9b2b35cabbd125360c08f7fa55b6a3554",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/hero-warrior.webp",
+          "bytes": 19080,
+          "sha256": "c850eb3433038664161d675990f3e3144a9bbdc283541b4603e1d400b9fe60c4",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "backups": [
+        {
+          "path": "docs/evidence/2026-10-04-WF-heixiang-two-forms-rough/originals-before-rough/full-hero-warrior.webp",
+          "bytes": 118222,
+          "sha256": "a102c1f178d1fab7f026aeaed637c7dbe4233fd455a189aece25049ea4acdf45"
+        },
+        {
+          "path": "docs/evidence/2026-10-04-WF-heixiang-two-forms-rough/originals-before-rough/thumb-hero-warrior.webp",
+          "bytes": 26748,
+          "sha256": "deb89c075d555ecd7bd419b9dff4bc5bae6fe4c9c08d7d6a2a86d4f5f57bcde7"
+        }
+      ]
+    }
+  ],
+  "verification": "遵老板禁测令，未测试/资产门/实页"
+}

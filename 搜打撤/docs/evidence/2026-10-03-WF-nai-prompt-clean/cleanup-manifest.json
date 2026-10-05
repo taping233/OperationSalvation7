@@ -1,0 +1,647 @@
+{
+  "python_files": 59,
+  "generation_entries": 50,
+  "changed_scripts": 43,
+  "files": [
+    {
+      "file": "bake_changwuyu_thumbs_20260923.py",
+      "generation_entry": false,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "c53831809d066f72f07c4305068ddeda60d89785300d7bddcb747e008e232870"
+    },
+    {
+      "file": "batch1_bio_event.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "205987213e27da12cc2f9c98f38abdc447342a7bd2aad4c4433bf7a01d21559c",
+      "after_sha256": "c4b4f5259c9aef473adf60ef14c88acba94245d21a426c5e387c9c349c47c969",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/batch1_bio_event.py"
+    },
+    {
+      "file": "batch1r_recheck.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "b66b0ca6cac515ca0c151c488eb4559b8b6169cc3ce1a087983b9748aa29e711",
+      "after_sha256": "d47b417363b500a5cbda05cf2b2ce9756e53ea3e34b4b5d3369ce324100dd234",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/batch1r_recheck.py"
+    },
+    {
+      "file": "batch2_ms_effects.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "de35a4cb3ba192bea9c420f9c0383a741a9274695c6c63bf804b9cd5b4dd5eb2",
+      "after_sha256": "fb2f7a0cd571b402b9654fd4c683a578fbbd55e4047e86ed37ec118f46c39ef7",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/batch2_ms_effects.py"
+    },
+    {
+      "file": "battle_portrait_recipe_check.py",
+      "generation_entry": false,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "2224ad51ef36eab48b3889d6c629b7d6719d70b49d322e7dfdf93cadd2b4e731"
+    },
+    {
+      "file": "card_pilot_batch.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "dbe5258d36a0dc25314650e04fb3b63b2561ac983ba3389f2e36a6e647ebd8c1",
+      "after_sha256": "cdb7e423b337da4ab13cedf44bb545cd0c6c2915140e8892937d838848f5f6f8",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/card_pilot_batch.py"
+    },
+    {
+      "file": "card_pilot_hero.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "94984332380f514faa3d69ad55a98c9526a463c9ad8626d7f020f67a2cc40dd0",
+      "after_sha256": "e9c12738c10e7f65d65e824101f5a7cecbe1bb262c49ff2322c605ca8bf109aa",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/card_pilot_hero.py"
+    },
+    {
+      "file": "changwuyu_abyss_curse_v2_small_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "2a73c178af147356efa91aa44c2e03a19a581e691dcffdbadeee46cfe58970ec",
+      "after_sha256": "9e5db63f485d4e481a3ec3bb3ab03a44054ec203234017e35323e885570c59cb",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/changwuyu_abyss_curse_v2_small_20260923.py"
+    },
+    {
+      "file": "changwuyu_cards_fire_abyss_v3_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "8893b4f8c94e07c548af23224c979d3571dda6a6ca328436cebd9187955dd087",
+      "after_sha256": "aad25718a49a6834ad4c7e8950593a258582880662d5a7149bb906164e3f131c",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter",
+        "removed solo count constraint from enemy-containing scenes",
+        "generic style sentence now supplied once by shared recipe"
+      ],
+      "original_backup": "original-scripts/changwuyu_cards_fire_abyss_v3_20260923.py"
+    },
+    {
+      "file": "changwuyu_profession_abyss_curse_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "072f78ee4632440de2e1073d21c679628391ab699bd1f0bd0ff506b403951085",
+      "after_sha256": "230c1bd1f9732b0acd6e83f9f990433296ffb9c69322c3313281ec6ac39ccda9",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/changwuyu_profession_abyss_curse_20260923.py"
+    },
+    {
+      "file": "changwuyu_profession_cards_batch_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "f5936b7503548e2253dc88f4ae7a718da5b253241edcbad1933956b754aa6851",
+      "after_sha256": "fee0d4e92cf7f87919182a541ab5093e0b618ed1b2da7c51918cd27893ff1797",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter",
+        "removed solo count constraint from enemy-containing scenes"
+      ],
+      "original_backup": "original-scripts/changwuyu_profession_cards_batch_20260923.py"
+    },
+    {
+      "file": "changwuyu_profession_cards_v2_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "b24ea08c2230a12c03fac2900f88e3cdef8429dfbde683625b211c746fd56125",
+      "after_sha256": "870f48c2c4ec45ecca6bb8689792923b75ff5aafb77fc0cd7a1a15e2682027a2",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter",
+        "removed solo count constraint from enemy-containing scenes",
+        "generic style sentence now supplied once by shared recipe"
+      ],
+      "original_backup": "original-scripts/changwuyu_profession_cards_v2_20260923.py"
+    },
+    {
+      "file": "cutout_pilot.py",
+      "generation_entry": false,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "95b8a07c09e983e43f3e5cb7a74bfbf2b9d6bce06b283d1ae66689100894c305"
+    },
+    {
+      "file": "doom_gate_redo.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "a19e6a5e671d56726c010b856133f69109c945b281974e69a2570be6547e2723",
+      "after_sha256": "4b539ca3f43a6e4b5aeea3ad6644ad403ae41840cee2e6b9768ceb0a9564b340",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/doom_gate_redo.py"
+    },
+    {
+      "file": "fullmoon_card_batch_1002.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": true,
+      "before_sha256": "6423a62dd4c41914cefa58a3c7e19eabf0b6aa72f0a8e1062b7ff675d564200a",
+      "after_sha256": "5c4a488283db40779215f6eb9f768e1a2dc81a74b99549aeed2e34542981bc22",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter",
+        "shared background no longer demands visible feet under knee crop"
+      ],
+      "original_backup": "original-scripts/fullmoon_card_batch_1002.py"
+    },
+    {
+      "file": "gen-lab-ending.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": true,
+      "before_sha256": "88257ac4c3112e869521485e954b03c449e9de9693a5925132ba96550762e0d2",
+      "after_sha256": "9052f12ec4914784e4abdd1fa238707b48e7569114f8c037ca63025004c77c6c",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/gen-lab-ending.py"
+    },
+    {
+      "file": "home_icons_v12.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "7939ff219f3a98c954d16f13a5de1954fb771d69a323316e54a8b9861d95fdc5",
+      "after_sha256": "b0e7e878b8d03406e53c3dd38b6591cd1f8903f43912e6bd484f630acb599fed",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/home_icons_v12.py"
+    },
+    {
+      "file": "install_changwuyu_cards_20260923.py",
+      "generation_entry": false,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "26127ed975dfe6b0296998be28edbe2cbadef8266f30d2610c2b583149102f68"
+    },
+    {
+      "file": "install_changwuyu_cards_fire_abyss_v3_20260923.py",
+      "generation_entry": false,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "9b7c20907b366e7002a41f727a89cd533863112f707379730849f05dc450817d"
+    },
+    {
+      "file": "install_changwuyu_profession_cards_v2_20260923.py",
+      "generation_entry": false,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "291006ddf57a0855214708c564fe08ca901959f4ba9caca77df28816e997093b"
+    },
+    {
+      "file": "install_missing_card_art_17_20260923.py",
+      "generation_entry": false,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "7cf141afcb1cf84f8d7ce563de55f28ddcd666c855e17cb741ab7073496fea86"
+    },
+    {
+      "file": "missing_card_art_batch_17_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "624a43306fed07fab08b200ae8beb6869f440b44c6609afae6939cf12741f019",
+      "after_sha256": "13dabf01752fea1ae355bf0b53b2e821d767c0d72854a986a1e66de147087563",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/missing_card_art_batch_17_20260923.py"
+    },
+    {
+      "file": "package_home_icons_v12.py",
+      "generation_entry": false,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "ebf673b8f2906046d42e78ed979c799d2718b2554d80b6e048b7b4c6b30b77c1"
+    },
+    {
+      "file": "painterly_card_style_compare_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "8d45b2fe93b47e092b1e75c464c1acceff00395e31b394c073be62554fe5092a",
+      "after_sha256": "9d18045d6f208d850fc152b67775a0f63e335b61e34dc6ab37407e5b88304fbc",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/painterly_card_style_compare_20260923.py"
+    },
+    {
+      "file": "redo_research_cards_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "b815eeba479ca5940737377de9319dfe0f1e63eaafcd0fb8d37b82f697d84dbe",
+      "after_sha256": "9c3b60c9b8abe5657be3adaff56718d08342904bb5bb4601d289886ead9d5492",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter",
+        "generic style sentence now supplied once by shared recipe"
+      ],
+      "original_backup": "original-scripts/redo_research_cards_20260923.py"
+    },
+    {
+      "file": "select_style_reference_test_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "d00530242ca570880f92ff15e69fe5ac6bfff0cb94fd10654dbf3c02ceac23c0"
+    },
+    {
+      "file": "studio_deco_batch.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "db39fbebedd9a471ee718cd49350039ddc92b29f211db47c215c67539a195859",
+      "after_sha256": "ec4a02a35e923665cba1f7d98fa3e3f5c82a8b3a663fec9771af58b3a8734384",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/studio_deco_batch.py"
+    },
+    {
+      "file": "style_modules/official_painterly_style.py",
+      "generation_entry": false,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "e69745b2e502af836093af30fd40f17d2eb96e85fd7d3a6214cdb80cc9f23fcf"
+    },
+    {
+      "file": "title_redo_0923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "b5aceede388101d9b33822b478e0df564f53a66ae317ca65936144f9308db3df",
+      "after_sha256": "33b2f260b2227d26a8e60ff48565177e0c9a60a2feeff216a68dded0d7010bac",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/title_redo_0923.py"
+    },
+    {
+      "file": "ui-loop-batch1-20260925.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": true,
+      "before_sha256": "fb8e07e180406a7e151eb40ffef56a72282697de03304d45ecaf4afa5dc1f67b",
+      "after_sha256": "4320db06964d89caf8800d5d8a6f640bef9f3eb35f740550dfe408a44c139f09",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/ui-loop-batch1-20260925.py"
+    },
+    {
+      "file": "ui-loop-batch2-20260925.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": true,
+      "before_sha256": "996ed435ccb10d90df8d2452ea4af4a315f054a0de6d6aad408dda5878bb8e06",
+      "after_sha256": "2ce76149545582ed854ba151351de63571a915fb8e77f856d108d7bd5dcc4908",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/ui-loop-batch2-20260925.py"
+    },
+    {
+      "file": "v10_select_style_iterations_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "28c34a2e2fedab7c9b782c909336a1e2b486c9b4475a6f75e78cca233a9db59a",
+      "after_sha256": "637f10300930f19d5e4db3d3449923de4660ea97ead40f9502b1919f6e23ec4e",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/v10_select_style_iterations_20260923.py"
+    },
+    {
+      "file": "wallpaper_v2_0923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "d90eb9c3fed153b7413197f9b595d8af329a45b0e24b167d6ec430d3c95d61bc",
+      "after_sha256": "82aad206a4b530ab90e59b177742747040736361ab1ee894cb62d03138898e76",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/wallpaper_v2_0923.py"
+    },
+    {
+      "file": "wu_portrait_v12_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "bc5ce577e712c8e3aa3e3c15dbae76cb5b2cca0008327c6275fbfe0fbf0b081c",
+      "after_sha256": "612037a64720585c9cfd90b14e52004f75c5641974ca547dd5cc91ec5bbbb39f",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/wu_portrait_v12_20260923.py"
+    },
+    {
+      "file": "wu_portrait_v13_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "6e9170fac0c076c3afda0ebad71b71ebf6a20df40520049dbcfaaefa8fbfc06e"
+    },
+    {
+      "file": "wu_portrait_v14_large_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "292124ea2299530b69676e4030a500ef2b85dee6f3a8b1c561225ccaa118ff91"
+    },
+    {
+      "file": "wu_portrait_v15_small_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "e45178a279d74e2c8d2092975605c93feeacfa244759885b32fa084aa9dc6e47"
+    },
+    {
+      "file": "wu_profession_throwblade_knife_focus_v5_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "beb463046ca7d9684d1bf0886088caadf160920e5dc877c2ef57fb8f6bbe1f41",
+      "after_sha256": "4ef4b12c57af245460fcc6d929d0eea183489c644e1e5f50d34f304fa0a88ab7",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/wu_profession_throwblade_knife_focus_v5_20260923.py"
+    },
+    {
+      "file": "wu_profession_throwblade_purebg_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "528cf01d13587701f8459d6b1567d83c788032548449b53633cfe10cbb3762c4",
+      "after_sha256": "bad1b3b02e249d5adce7745553cd973367b7154bc88d3ad3844aa550faf01a92",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/wu_profession_throwblade_purebg_20260923.py"
+    },
+    {
+      "file": "wu_profession_throwblade_solidcolor_v2_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "2db3767e04f642f848f6879f3ab2c779e65e142fab8a8eae15f61c9c2dc609b2",
+      "after_sha256": "3e90d807f776c43ae873fbe4f304f8bc31527ca5e5bd10f2f72369dcdc9ef169",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/wu_profession_throwblade_solidcolor_v2_20260923.py"
+    },
+    {
+      "file": "wu_profession_throwblade_solidcolor_v3_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "ac56aa350a8f151278634610ff06ef9d8ef219a06ac436859fad6396f81cedeb",
+      "after_sha256": "c598bbde08386f441d8cf646823a471ca63ceddf7cd7c0d5b06bbe8134e329d8",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/wu_profession_throwblade_solidcolor_v3_20260923.py"
+    },
+    {
+      "file": "wu_profession_throwblade_solidcolor_v4_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "7ecd8a18348319125780bb0d1b5b73a25dd643665070fcbbbf763362987b0cd2",
+      "after_sha256": "3576ef010f17ffcd24b8abf6eaecb68c1d992e8d8e942d4168af10331cba232e",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/wu_profession_throwblade_solidcolor_v4_20260923.py"
+    },
+    {
+      "file": "wu_profession_two_previews_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "43a721146a620b029782c71153b644a5da98ae49ab9013f177dc324e118429d9",
+      "after_sha256": "970dc769fd2789c63ef866135b89b156ec92226200ee4c1c03dfaeb3794279ac",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter",
+        "enemy-compatible heroine count and no full-visible-body demand for stealth crop"
+      ],
+      "original_backup": "original-scripts/wu_profession_two_previews_20260923.py"
+    },
+    {
+      "file": "wu_select_portrait_v16_small_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "a92c1932c7bf33f55582bb0f24c0bc09656564fa765c19f11dcaa1fa6bea285d",
+      "after_sha256": "ac2c6a0aaa7c4fa8ea99e082a191e14fb008d5e0b968b4b0c0c514476921346c",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/wu_select_portrait_v16_small_20260923.py"
+    },
+    {
+      "file": "wu_select_portrait_v17_small_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "c3f45cfc636f6ed11625fb6129ed2cf52b7f101abdb02b561d897d42adf86695",
+      "after_sha256": "0e5154582088b5818ef5253bd01c4a8f50c764f937884f2f9e8f342bdbd5631f",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/wu_select_portrait_v17_small_20260923.py"
+    },
+    {
+      "file": "wu_select_portrait_v18_small_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "a1050e9de0ec192cbc073a9ffe9faca29ce33231dad9af320ece85d45f1f538c",
+      "after_sha256": "12d98f1c21878f7e5a689dab6a021f6f5717f7796c3fadd1f9106162cf883607",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/wu_select_portrait_v18_small_20260923.py"
+    },
+    {
+      "file": "wu_select_portrait_v19_gacha4_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "134b41fe18de154fb476ce32875cba022f31468ed44588e4cf5912fe97f34e99",
+      "after_sha256": "77fc64ad3697f0854dc5b58d1ba15faa95c2a41b33f92855dd3f2046024c6f3d",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/wu_select_portrait_v19_gacha4_20260923.py"
+    },
+    {
+      "file": "wu_select_portrait_v20_tuned3_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "b736110665225164c6b3aa044580e7c0ea0df8e9968c2b0fcfa8a49302f814e3",
+      "after_sha256": "537628e7803f1e80460cff53a515b89ebc371612c33e01ca9975515d9b4d9ef4",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/wu_select_portrait_v20_tuned3_20260923.py"
+    },
+    {
+      "file": "wu_select_portrait_v21_brush3_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": true,
+      "shared_client": false,
+      "before_sha256": "e322c38369944673f30e30ca5ed419113b998990839cf511c1e4dcf8c42f95ef",
+      "after_sha256": "58fe646affc06d4aa8550570c6d987f2436f2014644817d5f5845e79b1cc3e33",
+      "changes": [
+        "deduplicated UC via compatible shared-style adapter"
+      ],
+      "original_backup": "original-scripts/wu_select_portrait_v21_brush3_20260923.py"
+    },
+    {
+      "file": "wu_select_portrait_v22_restruct3_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "acde6a4c2aed0bef7ca2f01b2b09794af564a5d754527810702dc6d218f9d89c"
+    },
+    {
+      "file": "wu_select_portrait_v23_hem3_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "52cd26e817fbd6765e213b605ef0cacc6bf4f53b8de71cf9dd950ec639cb403b"
+    },
+    {
+      "file": "wu_select_portrait_v24_strap3_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "553ddf2968f0a28025ecfabc287c6ebcc3b7b5dff6182f8637f20f2d91d0275b"
+    },
+    {
+      "file": "wu_select_portrait_v25_fix5_20260923.py",
+      "generation_entry": true,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "a6ed1daccf13247b9aba1b817027d3984785201c5e33a50727a524034cac6db0",
+      "after_sha256": "4445c824333b05d29df17af1b3ac3fa2eee49b96004af67b9ca12e4b7608327e",
+      "changes": [
+        "one hem ruffle with visible inner lining; no contradictory multiple layers"
+      ],
+      "original_backup": "original-scripts/wu_select_portrait_v25_fix5_20260923.py"
+    },
+    {
+      "file": "wu_select_portrait_v26_big_20260924.py",
+      "generation_entry": true,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "144fca562e0e31bfd6291721623a6c268611aa80975650b89d42d13999e63854",
+      "after_sha256": "97c47d298b4898429310bddd02e908233ab2905614bdc23d8420406e108a8546",
+      "changes": [
+        "one hem ruffle with visible inner lining; no contradictory multiple layers"
+      ],
+      "original_backup": "original-scripts/wu_select_portrait_v26_big_20260924.py"
+    },
+    {
+      "file": "wu_select_portrait_v27_bigab_20260924.py",
+      "generation_entry": true,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "c2e0ba4c3417253f6fb5e0147f4785790a30eff3c818ad39043bcd440679cd56",
+      "after_sha256": "7f03fcb30db91f970bca450874539273cdf788a09968c05cacb9a9ba49167243",
+      "changes": [
+        "one hem ruffle with visible inner lining; no contradictory multiple layers"
+      ],
+      "original_backup": "original-scripts/wu_select_portrait_v27_bigab_20260924.py"
+    },
+    {
+      "file": "wu_select_portrait_v28_face_20260924.py",
+      "generation_entry": true,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "5a400b292cb15c9693ad21338d8f7bcbe26631ed4918c324aeebb99ac1cda698",
+      "after_sha256": "72b58cfdb96789f031ccf1c2749f2492a5794a68d3c3f43abc1309ef174cbede",
+      "changes": [
+        "removed adult-identity exclusion; retained face-age exclusions",
+        "one hem ruffle with visible inner lining; no contradictory multiple layers"
+      ],
+      "original_backup": "original-scripts/wu_select_portrait_v28_face_20260924.py"
+    },
+    {
+      "file": "wu_select_portrait_v29_wavy_20260924.py",
+      "generation_entry": true,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "d52188bf3d8c574186863eb5de52f1c58c4f910122d28041fa1b0ad234dfcb03",
+      "after_sha256": "b824e92b10319cd32c4bec015336dcda4989d47d0eb3e64fa3d0845a7403dd37",
+      "changes": [
+        "removed adult-identity exclusion; retained face-age exclusions",
+        "one hem ruffle with visible inner lining; no contradictory multiple layers"
+      ],
+      "original_backup": "original-scripts/wu_select_portrait_v29_wavy_20260924.py"
+    },
+    {
+      "file": "wu_select_portrait_v30_hairkeep_20260924.py",
+      "generation_entry": true,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "7db5c99adeeb9c646f5b978142879ca4af14236285991a7351649ad895fb9500",
+      "after_sha256": "e13f75100c1a3f85711dbf0572eeda9986e26634d974f78e47eaf1c3fb58f0d4",
+      "changes": [
+        "removed adult-identity exclusion; retained face-age exclusions",
+        "one hem ruffle with visible inner lining; no contradictory multiple layers"
+      ],
+      "original_backup": "original-scripts/wu_select_portrait_v30_hairkeep_20260924.py"
+    },
+    {
+      "file": "wu_select_portrait_v31_45full_20260924.py",
+      "generation_entry": true,
+      "shared_positive_builder": false,
+      "shared_client": false,
+      "before_sha256": "e26cf40b6bf8f84277ecb8e1d5f3f7b332e81e23bf7145d279e144850e2b9630",
+      "after_sha256": "16da0b1556278b559ac04f28a8cadd9539043d544e7ee0faffb9e0c4f912541b",
+      "changes": [
+        "removed adult-identity exclusion; retained face-age exclusions",
+        "one hem ruffle with visible inner lining; no contradictory multiple layers"
+      ],
+      "original_backup": "original-scripts/wu_select_portrait_v31_45full_20260924.py"
+    }
+  ]
+}

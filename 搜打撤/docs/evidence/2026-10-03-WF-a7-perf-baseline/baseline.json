@@ -1,0 +1,165 @@
+{
+ "meta": {
+  "head": "425d03920e",
+  "service": "http://127.0.0.1:5343（独立 origin，npm run web --port 5343 --skip-compile，PID 24104）",
+  "origin": "http://127.0.0.1:5343 新建采样档01",
+  "window": "1280x720（IAB 视口）",
+  "browser": "ZCode 内置浏览器，主会话采样（工作流 subagent 浏览器桥会话被宿主判非激活，已升级并由主会话接管）",
+  "slot": "档位01（本 origin 全新档）",
+  "validityRule": "时间类指标仅 document.hasFocus()=true 时有效；失焦时 rAF=0、定时器被 Chromium 节流至约 1Hz（本环境实测），数据无效",
+  "envLimit": "rAF 在此 IAB 环境对静止页面不触发（含 active tab），帧率类指标改用「主线程阻塞代理」：4ms 心跳偏差>50ms 计数 + PerformanceObserver longtask",
+  "collectedAt": "2026-10-03",
+  "来源": "WF-a7-perf-baseline 动态工作流（修订版：主会话采样+工作流整理复核）",
+  "与 WF-xart-z1 首轮探针基线 a7-baseline-first.json 的关系": "补场景化测量（pan/FCP/长任务已由首轮覆盖）"
+ },
+ "scenarios": [
+  {
+   "id": "nav-hub",
+   "name": "标题→基地进入（完整链：进入档案→选档→基地可交互）",
+   "status": "measured",
+   "valid": true,
+   "samples": [
+    1030.6,
+    979.1,
+    963.5
+   ],
+   "median": 979.1,
+   "p95": 1030.6,
+   "unit": "ms",
+   "input": "页面内 JS click + 16ms 轮询（前台）",
+   "notes": "3/3 有效；首轮冷启动 1030.6ms，热路径 963-979ms；期间累计 longtask 2（含首次开档）"
+  },
+  {
+   "id": "hub-tabs",
+   "name": "基地页签切换（仓库/商店/升级/人物/成就·收藏 各3次）",
+   "status": "measured",
+   "valid": true,
+   "samples": [
+    47.1,
+    31.8,
+    24.9,
+    27,
+    30.4,
+    26.7,
+    22.3,
+    21.8,
+    21.3,
+    22.2,
+    23.3,
+    21.8,
+    20.9,
+    22.6,
+    23
+   ],
+   "median": 23,
+   "p95": 47.1,
+   "unit": "ms",
+   "input": "页面内 JS click + 可见 heading 变化检测（前台）",
+   "notes": "15/15 有效（sameShell=0）；首次 47.1ms 冷，此后 20.9-31.8ms；页签切换不是热点"
+  },
+  {
+   "id": "photolib-open",
+   "name": "打开照相馆（标题页→馆藏覆盖层）",
+   "status": "measured",
+   "valid": true,
+   "samples": [],
+   "median": null,
+   "p95": null,
+   "unit": "longtask",
+   "input": "页面内 JS click（前台）",
+   "notes": "打开时捕获 1 个 longtask（>50ms 主线程任务）；耗时毫秒值因判据粒度未单独计时"
+  },
+  {
+   "id": "photolib-scroll",
+   "name": "照相馆列表滚动（lib-grid 21125px/522px 视口）",
+   "status": "measured",
+   "valid": true,
+   "samples": [
+    88,
+    138,
+    207
+   ],
+   "median": 138,
+   "p95": 207,
+   "unit": "ms（心跳偏差>50ms）",
+   "input": "程序化 scrollTop + 4ms 心跳 + longtask（前台重测）",
+   "notes": "5 秒滚动期 3 次主线程阻塞 88/138/207ms + 2 longtask——照相馆滚动为可感知卡顿热点；首轮失焦测得 [420,1004,997,1000,1000] 系节流伪影已弃；另有 3 次 ≈993-998ms 偏差疑似回卷瞬间整列表重排，存疑待复核"
+  },
+  {
+   "id": "stash-scroll",
+   "name": "仓库列表滚动",
+   "status": "measured",
+   "valid": true,
+   "samples": [],
+   "median": null,
+   "p95": null,
+   "unit": "ms",
+   "input": "程序化滚动 + 心跳（前台）",
+   "notes": "零抖动零 longtask；但新档仓库仅 5/25 内容少，不代表满仓状态——满仓重测列入下一轮"
+  },
+  {
+   "id": "prep-scroll",
+   "name": "出征整备页纵向滚动",
+   "status": "blocked",
+   "valid": null,
+   "samples": [],
+   "median": null,
+   "p95": null,
+   "unit": "ms",
+   "input": "-",
+   "notes": "整备页无纵向滚动容器（内容一屏内）；B03 记录的是横向溢出，归 A1 修复域，非本指标"
+  },
+  {
+   "id": "map-enter",
+   "name": "选人→出发→地图可交互",
+   "status": "measured",
+   "valid": true,
+   "samples": [
+    124.8
+   ],
+   "median": 124.8,
+   "p95": 124.8,
+   "unit": "ms",
+   "input": "页面内 JS click + 地图元素可见性判据（前台）",
+   "notes": "样本 1；首轮 17.3ms 系预渲染文本伪判据已作废重测；地图进入很轻"
+  },
+  {
+   "id": "battle-enter",
+   "name": "地图遭遇战节点→战斗 UI 可交互",
+   "status": "measured",
+   "valid": true,
+   "samples": [
+    1238.7
+   ],
+   "median": 1238.7,
+   "p95": 1238.7,
+   "unit": "ms",
+   "input": "页面内 JS click + 结束回合按钮可见判据（前台）",
+   "notes": "样本 1（战斗节点打完即消失，无法同档重复）；自然路径真实遭遇战；1.2s 中含敌人生成/牌库洗切——是否可优化留 A4 战斗重做评估"
+  },
+  {
+   "id": "battle-card-play",
+   "name": "战斗内首牌点击→目标选择反馈",
+   "status": "blocked",
+   "valid": null,
+   "samples": [],
+   "median": null,
+   "p95": null,
+   "unit": "ms",
+   "input": "-",
+   "notes": "判据被 SPA 预渲染文本污染（18ms 伪值已作废）；需目标选择面板类名级判据，下一轮补"
+  },
+  {
+   "id": "hide-restore",
+   "name": "浏览器面板隐藏→恢复",
+   "status": "blocked",
+   "valid": null,
+   "samples": [],
+   "median": null,
+   "p95": null,
+   "unit": "ms",
+   "input": "visibility capability",
+   "notes": "IAB pane 隐藏不构成 document.hidden（visibilityState 全程 visible，4 次 change 均 hidden:false）——页面 JS 层面无恢复开销可言，该场景在本平台不可测，如实记录"
+  }
+ ]
+}

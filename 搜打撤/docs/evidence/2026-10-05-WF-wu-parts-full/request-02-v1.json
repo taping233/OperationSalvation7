@@ -1,0 +1,11 @@
+{
+  "id": "02",
+  "slug": "head-neck",
+  "version": 1,
+  "prompt": "ONE individual 2D skeletal-animation sprite component for Wu, not a sheet. Genuine transparent PNG background, zero alpha outside the silhouette, no cast shadow, aura, backdrop, text, numbers or alignment marks. Reference 1 is the confirmed THREE-QUARTER FACING SCREEN RIGHT combat mother pose and proportions; reference 2 is the front identity/style reference. Painterly anime, LOW detail, large opaque angular color blocks, clear hard-edge shadows, economical rough hand-painted marks. Neutral black and gray clothing, cream skin, silver-white hair. Keep original anatomical proportions and camera angle. Paint hidden overlap at the joints so the part can rotate without gaps. Center the component with generous transparent margins, one piece only, not a mannequin or full character. No amputated gore, no wounds; clean game asset joining boundaries. Do not include adjacent body parts, do not invent equipment or accessories. Part 02: ONLY Wu's HEAD/FACE plus NECK, NO HAIR or accessories. Preserve the exact facial identity from references: small youthful anime oval face, soft cheeks and rounded narrow chin, large cyan-blue almond eyes slightly upturned at outer corners, fine light-gray brows, small nose, confident playful subtle smile showing ONE tiny pointed fang. Head and gaze THREE-QUARTER FACING SCREEN RIGHT as combat mother, both eyes visible with far eye naturally foreshortened. Do not redesign her face or use frontal view, realistic adult face or chibi proportions. Complete bare smooth cranial silhouette without any hair, so separate front/back hair sprites will overlay it. Ears retained. Short natural neck ends at the BASE OF NECK with a clean overlapping cap, NO shoulders, collarbones, chest, straps or clothing. No goggles, rose, ribbon, ponytail, bangs, jewelry, eyelashes microdetail or blush gradients. Broad opaque cream/peach skin and cool-neutral shadow planes, sparse painterly anime lines. One complete face/head/neck sprite only; the bald scalp is a rig underlayer, not a new hair style.",
+  "refs": [
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\wu-battle-base-frame000.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\reference.png"
+  ],
+  "tool": "built-in imagegen"
+}
