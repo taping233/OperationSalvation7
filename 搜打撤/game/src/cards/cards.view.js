@@ -14,8 +14,7 @@ import { esc, escAttr } from '../core/shared.js';
 // 顺序固定：先转义 → 关键字 → 术语 → 数字（正则均不含数字，不会互相污染标签）。
 // 时点短语整体标蓝（2026-09-16 留言）：「对战开始时/回合开始时/回合结束时」必须排在
 // 「回合」等单词前面，交替分支按序尝试，长词才会整体命中而不是只染前两个字。
-// （09-23 自 buildCardHTML 体内上移模块顶层并导出——选片台描述复用，卡面行为不变；
-//  buildCardHTML 体内自有局部 const esc，与本模块级 import 同名共存、体内遮蔽照旧。）
+// （09-23 自 buildCardHTML 体内上移模块顶层并导出——选片台描述复用，卡面行为不变。）
 const DESC_TERMS = ['对战开始时', '回合开始时', '回合结束时', '冰冻', '冻结', '中毒', '燃烧', '灼烧', '流血', '护甲', '法伤', '生命', '伤害', '诅咒', '净化', '沉默', '充能', '注能', '发现', '限定', '主动技能', '消耗', '装备', '牌库', '回合', '弃牌', '抽牌', '能量'];
 // 术语 alternation 正则（2026-10-02 审计 A 档上提模块级）：descRich 原每次调用重建 30 词
 // RegExp（卡牌库页首渲数百卡各一次）；词表是模块常量不会变，/g 标志 lastIndex 由
@@ -129,7 +128,9 @@ const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
   // opts.low：低倍率场景（卡牌库网格/悬停预览）取 448 宽缩略图，见 art.js cardIcon。
   const artHTML = (window.SDT.Art && window.SDT.Art.cardIcon && window.SDT.Art.cardIcon(c, opts)) ||
     SDT.Icons.img(SDT.Icons.TYPE_ART[c.type] || 'question');
-  return `<div class="hs-card tp${ti} ${rvCls}${CF_SLUGS[c.cls] ? ' ' + CF_SLUGS[c.cls] : ''}${cls ? ' ' + cls : ''}">
+  const ruleLength = String(c.desc || '').length;
+  const ruleDensity = ruleLength > 90 ? 'very-dense' : ruleLength > 55 ? 'dense' : ruleLength > 30 ? 'long' : 'normal';
+  return `<div class="hs-card tp${ti} ${rvCls}${CF_SLUGS[c.cls] ? ' ' + CF_SLUGS[c.cls] : ''}${cls ? ' ' + cls : ''}" data-rule-density="${ruleDensity}">
     ${isPrism ? '<i class="rv-beam" aria-hidden="true"></i>' : ''}
     ${hideCost ? '' : costMod
       ? `<div class="hsc-cost cost-mod ${costMod.down ? 'mod-down' : 'mod-up'}" title="费用变化：按 ${costMod.v} 费打出（原 ${costMod.base} 费）">${costMod.v}</div>`

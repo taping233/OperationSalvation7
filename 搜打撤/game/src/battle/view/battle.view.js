@@ -4,9 +4,8 @@ const UI = window.SDT.UI;
 
 import { sdtDefine } from '../../core/sdt-facade.js';
 import { rect as uiRect } from '../../ui/ui-scale.js';
-import { esc } from '../../core/shared.js';
+import { esc, escAttr } from '../../core/shared.js';
 import { storeGet, storeSet } from '../../core/storage.js';
-import { escAttr } from '../../core/shared.js';
 import { Random } from '../../core/random.js';
 import { on as onBattleEvent } from '../../core/event-bus.js';
 import { groupHandCards, orderHandGroups } from '../core/battle.hand.js';
@@ -621,10 +620,11 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       intro.innerHTML = `
         <div class="boss-intro-inner">
           <div class="boss-intro-tag">BOSS战</div>
-          <div class="boss-intro-art">${art}</div>
+          <div class="boss-intro-art${SDT.game?.nestActive ? '' : ' sts-figure'}">${art}</div>
           <div class="boss-intro-title">${esc(bossName)}</div>
         </div>`;
       const ovEl = UI.el.overlay;
+      if (!SDT.game?.nestActive) SDT.Art?.cutoutFigures?.(intro);
       if (ovEl) {
         ovEl.appendChild(intro);
         schedulePresentationMs(() => intro.remove(), 1800);   // 动画 1.6s + 缓冲后移除

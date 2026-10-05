@@ -1,0 +1,122 @@
+/* 2026-10-05 owner-approved second card design. Fixed 5:7 silhouette,
+   density-based type; photos, recent hub surfaces and research stay intact.
+   cqw sizes text against the actual card width, including small displays. */
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)) {
+  width: 12.2em !important; height: auto !important; min-height: 0 !important; max-height: none !important; aspect-ratio: 5 / 7 !important;
+  box-sizing: border-box; container-type: inline-size; display: grid; grid-template-rows: 12% 39% 8% 7% minmax(0, 1fr);
+  padding: .45em !important; gap: 0; overflow: hidden; border-radius: .45em !important;
+  background: #243943 !important; border: 1px solid var(--cf3, #91a5ad) !important;
+  box-shadow: 0 3px 8px #07131b44, inset 0 0 0 1px #f2e8cd22 !important;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *))::before {
+  display: none !important;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)) .hsc-name {
+  grid-row: 1; order: 1 !important; width: 100% !important; min-height: 0 !important; max-height: 100%; margin: 0 !important;
+  padding: .18em .45em .18em 3em !important; box-sizing: border-box;
+  display: flex !important; justify-content: flex-start !important; align-items: center !important;
+  font-size: 7.2cqw !important; line-height: 1.15; letter-spacing: .01em !important;
+  border-radius: .2em .2em 0 0 !important; background: linear-gradient(100deg, var(--rb2), var(--rb1)) !important;
+  white-space: normal; overflow-wrap: anywhere; text-shadow: none !important; box-shadow: none !important;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)) .hsc-name > span {
+  max-width: 100%; text-wrap: balance; font-size: inherit !important;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)) .hsc-cost {
+  position: absolute; top: .5em !important; left: .52em !important; right: auto !important;
+  width: 1.9em !important; height: 1.65em !important; border-radius: .15em !important;
+  display: grid; place-items: center; font: 700 1em/1 var(--font-ui); font-size: max(12px, 8cqw) !important; padding: 0;
+  background: #172e3c !important; border: 1px solid #99bdc6 !important;
+  color: #f5e4ba !important; box-shadow: none !important; text-shadow: none !important;
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 80% 100%, 0 100%); z-index: 8;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)) .hsc-cost.cost-mod.mod-down {
+  background: #264d3c !important; border-color: #89bda1 !important;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)) .hsc-cost.cost-mod.mod-up {
+  background: #693e35 !important; border-color: #d9a08a !important;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)) :is(.hsc-dmg, .hsc-val, .hsc-gem) {
+  display: none !important;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)) .hsc-art {
+  grid-row: 2; order: 2 !important; width: 100%; height: 100% !important; min-height: 0 !important; aspect-ratio: auto !important;
+  margin: 0 !important; border: 0 !important; border-radius: 0 !important;
+  box-sizing: border-box; overflow: hidden; box-shadow: none !important;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)) .hsc-art::after {
+  opacity: .18;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)) .hsc-art img {
+  width: 100%; height: 100%; object-fit: cover; filter: none;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)) .hsc-type {
+  grid-row: 3; order: 3 !important; width: 100%; height: 100%; min-height: 0; margin: 0 !important;
+  box-sizing: border-box; padding: .1em .3em !important; display: flex; align-items: center; justify-content: center;
+  font-size: 5.2cqw; line-height: 1.2; letter-spacing: .03em !important;
+  border: 0 !important; border-radius: 0 !important; background: #304b56 !important;
+  color: #e5ece6 !important; box-shadow: none !important;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)) .hsc-kw {
+  grid-row: 4; order: 4; margin: 0; padding: .12em .25em; min-height: 0; gap: .15em;
+  background: #edf0e8; align-items: center; justify-content: flex-start; overflow: hidden;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)) .hsc-kw span {
+  font-size: 4.8cqw; line-height: 1.2; color: #345763; background: #d7e2dd; border: 0; border-radius: .12em; box-shadow: none;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)) .hsc-desc {
+  grid-row: 5; order: 5 !important; width: 100%; height: 100%; min-height: 0 !important; max-height: none;
+  box-sizing: border-box; margin: 0 !important; padding: .35em .5em !important;
+  display: flex; align-items: flex-start; justify-content: flex-start; text-align: left;
+  font-size: 7.1cqw !important; line-height: 1.35; overflow: hidden;
+  color: #223d49 !important; background: #edf0e8 !important;
+  border: 0 !important; border-radius: 0 0 .15em .15em !important; box-shadow: none !important;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)) .hsc-desc > span {
+  display: block; -webkit-line-clamp: unset; max-height: none; overflow: visible; color: inherit !important;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *))[data-rule-density='long'] .hsc-desc {
+  font-size: 6.5cqw !important; line-height: 1.3;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *))[data-rule-density='dense'] .hsc-desc {
+  font-size: 5.8cqw !important; line-height: 1.25;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *))[data-rule-density='very-dense'] .hsc-desc {
+  font-size: 5.1cqw !important; line-height: 1.22;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)) .hsc-desc :is(.d-num, .d-kw) {
+  color: #8a552c !important; font-size: 1em !important;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)) .hsc-desc .d-term {
+  color: #276579 !important;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)):is(.rv7, .rv-prism) .hsc-name {
+  background: linear-gradient(105deg,#f7f2f3,#f2d98e 15%,#f0bfe4 38%,#cbaaf0 58%,#aed0f0 78%,#f7f2f3) !important;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)):is(.rv7, .rv-prism) .hsc-name span {
+  color: #182c37 !important;
+}
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)) .rv-beam {
+  display: none;
+}
+
+/* Full ally portraits keep the existing slots, names and target behaviour. */
+body[data-ui-cover-context='ordinary'] #overlay .card.battle .sts-hand .hs-card {
+  width: 10em !important;
+  height: 14em !important;
+  font-size: 14px !important;
+}
+body[data-ui-cover-context='ordinary'] #overlay .card.discover:has([data-act='btDiscover'], [data-act='btPickHand']) {
+  width: min(1180px, 96vw) !important;
+  max-width: 96vw !important;
+}
+body[data-ui-cover-context='ordinary'] #overlay .battle-stage.sts .sts-ally .sts-figure {
+  width: 92px; height: 142px; display: flex; align-items: flex-end; justify-content: center;
+  filter: drop-shadow(0 3px 4px #08172566);
+}
+body[data-ui-cover-context='ordinary'] #overlay .battle-stage.sts .sts-ally .ally-portrait {
+  width: 100%; height: 100% !important; object-fit: contain; object-position: center bottom;
+  background: transparent; border: 0; filter: none;
+}
+
+body[data-ui-cover-context='ordinary'] :is(#overlay, #cardZoom:not(.cz-photo)) .hs-card:not(:where(#hubMain *, #depMain *, .studio-unified *, .card-library-page *, .cls-pool-page *, .cls2-page *, .cz-photo *)):not(:has(.hsc-cost)) .hsc-name { padding-left: .45em !important; }

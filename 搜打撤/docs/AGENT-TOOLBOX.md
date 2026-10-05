@@ -21,7 +21,7 @@
 | 环境/报告有疑问时轻预检 | `npm run workflow -- doctor --json`，报告可加 `--input <报告>` | 只读，不自动测试；checks 的 passed/warning/blocked/info/not-checked 与 summary 标明预检边界，无报告不算错误 |
 | 建跨会话任务台账 | `npm run --silent workflow -- task start/update/close ...` | 可直接传 goal/paths/done-when/check 等字段，例子见[流程指南](WORKFLOW-TOOLS.md#仅需跨会话跟踪时直接-task-字段)；小修不需要 |
 | 老板拍板事项 | [PENDING](PENDING.md) | 唯一真源，拍板即销账 |
-| 找历史经验 | `npm run memory:discover -- --json` | 项目记忆索引，按需读正文 |
+| 查指定历史经验 / 找记忆库 | `npm run --silent workflow -- memory --source both --query "关键词" --limit 3 --json` / `npm run memory:discover -- --json` | source可选codex/zcode/both；各端先索引后限量正文，附来源行号；无query只发现库，历史不是现行规则 |
 | 文档一致性检查 | `npm run docs:check -- --json` | 与 docs-consistency 共用链接、档案完整性、预算和域表契约；语义候选另行复核 |
 | Vite 性能观察 | 游戏内 `?perfProbe=1`；[性能方法](performance.md) | 先核对当前平台内置浏览器能力；Electron perf 命令冻结不执行 |
 

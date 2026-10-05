@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-05",
+  "scope": "同一会话内真实工作区小任务的工具编排阶段；不含首次模型响应和最终答复",
+  "measurement": "分步从第一项工具编排开始，到第二项返回；合并从同一编排开始，到全部工具返回。往返为顶层工具编排边界数；不等同于服务端网络尝试数。前三组分步在前，后两组交换顺序复测。样本小且单会话，不能外推整任务提速。",
+  "trials": [
+    {
+      "label": "定位真实工作流入口",
+      "baselineSeconds": 7.43,
+      "batchSeconds": 0.8,
+      "baselineToolSeconds": 0.5723607,
+      "batchToolSeconds": 0.620782,
+      "sameResults": true,
+      "baselineRoundTrips": 2,
+      "batchRoundTrips": 1
+    },
+    {
+      "label": "核对现行规则体积与工具语法",
+      "baselineSeconds": 9.499,
+      "batchSeconds": 0.686,
+      "baselineToolSeconds": 0.5160783,
+      "batchToolSeconds": 0.5617323,
+      "sameResults": true,
+      "baselineRoundTrips": 2,
+      "batchRoundTrips": 1
+    },
+    {
+      "label": "检查实际文档与源码映射",
+      "baselineSeconds": 7.655,
+      "batchSeconds": 1.103,
+      "baselineToolSeconds": 1.0812711,
+      "batchToolSeconds": 1.0421603,
+      "sameResults": true,
+      "baselineRoundTrips": 2,
+      "batchRoundTrips": 1
+    },
+    {
+      "label": "反向顺序复测：入口定位",
+      "order": "合并在前、分步在后",
+      "baselineSeconds": 16.045,
+      "batchSeconds": 0.67,
+      "baselineToolSeconds": 0.49982819999999994,
+      "batchToolSeconds": 0.47768239999999995,
+      "sameResults": true,
+      "baselineRoundTrips": 2,
+      "batchRoundTrips": 1
+    },
+    {
+      "label": "反向顺序复测：预算与语法",
+      "order": "合并在前、分步在后",
+      "baselineSeconds": 27.367,
+      "batchSeconds": 0.535,
+      "baselineToolSeconds": 0.49414270000000005,
+      "batchToolSeconds": 0.4789491,
+      "sameResults": true,
+      "baselineRoundTrips": 2,
+      "batchRoundTrips": 1
+    }
+  ],
+  "commands": [
+    {
+      "label": "定位真实工作流入口",
+      "commands": [
+        "$taskPackage = Get-Content -LiteralPath 'package.json' -Raw | ConvertFrom-Json; $taskPackage.scripts | Select-Object workflow,'docs:check',handoff | ConvertTo-Json -Compress",
+        "$taskSource = Get-Content -LiteralPath 'scripts/workflow.mjs'; $taskSource[101..115]"
+      ]
+    },
+    {
+      "label": "核对现行规则体积与工具语法",
+      "commands": [
+        "$taskPaths = @('../AGENTS.md','docs/README.md','docs/QUICKSTART.md','docs/WORKFLOW-TOOLS.md','docs/quality-gates.md'); $taskSizes = foreach ($taskPath in $taskPaths) { $taskItem = Get-Item -LiteralPath $taskPath; [pscustomobject]@{path=$taskPath;bytes=$taskItem.Length} }; $taskSizes | ConvertTo-Json -Compress",
+        "node --check scripts/workflow.mjs"
+      ]
+    },
+    {
+      "label": "检查实际文档与源码映射",
+      "commands": [
+        "npm run --silent docs:check -- --json",
+        "$taskPackage = Get-Content -LiteralPath 'package.json' -Raw | ConvertFrom-Json; $taskEntries = foreach ($taskKey in @('docs:check','workflow','handoff')) { $taskCommand = $taskPackage.scripts.$taskKey; $taskTarget = ($taskCommand -split ' ')[1]; [pscustomobject]@{script=$taskKey;entry=$taskTarget;exists=(Test-Path -LiteralPath $taskTarget)} }; $taskEntries | ConvertTo-Json -Compress"
+      ]
+    }
+  ],
+  "iterations": [
+    {
+      "version": 1,
+      "changes": [
+        "全局按依赖边界合并；程序可判定的链按序继续",
+        "项目流程明确按需读取，避免固定开场清单",
+        "记忆索引删除AGENTS/README/STATUS全读建议"
+      ]
+    },
+    {
+      "version": 2,
+      "changes": [
+        "目标路径已知直接查目标；不明再查导航",
+        "逐项核对结果与退出码；工具正常返回不代表命令通过",
+        "反向顺序复测两组，结果仍一致"
+      ]
+    }
+  ],
+  "dependentFailureProbe": {
+    "precheckExitCode": 1,
+    "dependentCalls": 0,
+    "passed": true,
+    "seconds": 0.689,
+    "assertion": "前置结果退出码非零，后续依赖调用为0；不要求shell保留指定的native退出码",
+    "initialAssertion": "最初过度要求退出码精确等于7，观察值为1；判据改为流程契约实际要求的非零"
+  },
+  "actualEvidenceWriteAndChecksSeconds": 1.164,
+  "firstValidation": [
+    {
+      "exitCode": 0,
+      "toolSeconds": 0.7663774
+    },
+    {
+      "exitCode": 0,
+      "toolSeconds": 0.3348532
+    }
+  ],
+  "finalValidation": {
+    "docsCheck": "docs-check.json",
+    "relativeLinks": 342,
+    "findings": 0,
+    "rootBytes": 4556,
+    "docsFourBytes": 25196,
+    "diffCheckPassed": true,
+    "head": "425d03920e",
+    "upstream": {
+      "ahead": 53,
+      "behind": 0,
+      "fetched": false
+    },
+    "status": "complete-uncommitted"
+  },
+  "totals": {
+    "baselineSeconds": 67.99600000000001,
+    "batchSeconds": 3.7940000000000005,
+    "baselineRoundTrips": 10,
+    "batchRoundTrips": 5
+  }
+}

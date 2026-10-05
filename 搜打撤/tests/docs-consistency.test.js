@@ -49,9 +49,14 @@ describe('文档一致性守卫', () => {
         task: { type: 'string' }, owner: { type: 'string' }, goal: { type: 'string' }, paths: { type: 'string' },
         'done-when': { type: 'string', multiple: true }, stage: { type: 'string' }, 'done-when-confirmed': { type: 'boolean' },
         check: { type: 'string', multiple: true }, unverified: { type: 'string', multiple: true }, json: { type: 'boolean' },
+        apply: { type: 'boolean' }, expect: { type: 'string' },
       } });
       expect(values.task).toBe('WF-example');
       expect(values.owner).toBe('Friday');
+      if (action === 'start') {
+        expect(values.apply, '示例必须创建任务，不能只预览后直接关闭').toBe(true);
+        expect(values.expect, '新建仍须拒绝覆盖既有任务').toBe('absent');
+      }
       return taskInputFromValues(action, values);
     };
     const fixture = mkdtempSync(resolve(os.tmpdir(), 'sdt-doc-task-example-'));

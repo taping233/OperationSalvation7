@@ -2,7 +2,20 @@
  *   ① 药水元素不再挂系统 title 属性（悬停延迟且触屏无效）；
  *   ② 药水栏自带 [data-potion-tip] 提示条，初始隐藏，贴药水栏正下方；
  *   ③ 悬停/按下药水 → 提示条显示【名 ×数】效果+用法；移开/松手 → 收起。 */
-import { describe, it, expect } from 'vitest';
+import { afterAll, describe, it, expect, vi } from 'vitest';
+
+// 完整启动会排入壁纸预热等延后工作；测试结束前释放，避免jsdom拆除后再访问Image。
+const pendingTimeouts = new Set();
+const nativeSetTimeout = globalThis.setTimeout;
+const timeoutSpy = vi.spyOn(globalThis, 'setTimeout').mockImplementation((callback, delay, ...args) => {
+  const timer = nativeSetTimeout(callback, delay, ...args);
+  pendingTimeouts.add(timer);
+  return timer;
+});
+afterAll(() => {
+  for (const timer of pendingTimeouts) clearTimeout(timer);
+  timeoutSpy.mockRestore();
+});
 
 // ---- 环境补桩（与 boot.test.js 同族：jsdom 无 canvas/Audio/WebAudio） ----
 // 故意恒真：jsdom 无 canvas，无论原生 getContext 是否存在都强制换成本桩（lint 静音，不改逻辑）

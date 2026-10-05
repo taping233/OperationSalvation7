@@ -15,6 +15,26 @@ beforeEach(() => {
 afterEach(() => vi.restoreAllMocks());
 
 describe('home wallpaper preference', () => {
+  it('temporarily hides the interface and restores it without changing wallpaper or saves', async () => {
+    localStorage.setItem('sdt-title-wallpaper', 'ensemble');
+    localStorage.setItem('game-save-fixture', 'untouched');
+    await boot();
+    const title = document.getElementById('title');
+    const viewButton = document.getElementById('btnTitleWallpaperView');
+    const stored = { ...localStorage };
+    viewButton.click();
+    expect(title.classList.contains('wallpaper-only')).toBe(true);
+    expect(title.querySelector('.title-inner').hasAttribute('inert')).toBe(true);
+    expect(viewButton.getAttribute('aria-pressed')).toBe('true');
+    expect(viewButton.textContent).toContain('恢复界面');
+    expect(selection()).toBe('ensemble');
+    viewButton.click();
+    expect(title.classList.contains('wallpaper-only')).toBe(false);
+    expect(title.querySelector('.title-inner').hasAttribute('inert')).toBe(false);
+    expect(viewButton.getAttribute('aria-pressed')).toBe('false');
+    expect({ ...localStorage }).toEqual(stored);
+  });
+
   it('keeps the snow cover by default and cycles both directions without changing game saves', async () => {
     localStorage.setItem('game-save-fixture', 'untouched');
     await boot();

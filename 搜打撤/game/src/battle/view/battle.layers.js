@@ -4,8 +4,8 @@ const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { rect as uiRect } from '../../ui/ui-scale.js';
 import { characterName } from '../../core/characters.js';
-import { esc } from '../../core/shared.js';
-import { escAttr } from '../../core/shared.js';
+import { esc, escAttr } from '../../core/shared.js';
+import { assetUrl } from '../../core/asset-url.js';
 import { fanLayout } from '../core/battle.hand.js';
 import { calculateEnemyIntent } from '../core/battle.enemy-intent.js';
 import { intentViewModel } from './battle.intent.view.js';
@@ -570,6 +570,18 @@ import { cardRuleHint } from './battle.preview.js';
     sig.init = true;
   }
   // 随从位（Q4 老板定向：征召步兵等——替你承伤、每回合自动攻击）
+  function allyFigure(name) {
+    if (SDT.game?.nestActive) return SDT.Icons.img('runner');
+    const source = {
+      '联邦巡防兵': 'assets/portraits/allies/federal-patrol-v1.webp',
+      '联邦射手': 'assets/portraits/allies/federal-shooter-v1.webp',
+      '封印肢体': 'assets/portraits/allies/sealed-limb-v1.webp',
+    }[name];
+    return typeof source === 'string'
+      ? `<img class="ally-portrait" src="${assetUrl(source)}" alt="" draggable="false" decoding="async">`
+      : SDT.Icons.img('runner');
+  }
+
   function updateAllies(mount, allies) {
     mount.style.display = allies.length ? '' : 'none';
     const ordered = [];
@@ -588,7 +600,7 @@ import { cardRuleHint } from './battle.preview.js';
       }
       rec.slot.classList.toggle('dead', !!a.dead);
       rec.slot.dataset.allyI = i;
-      setSection(rec.parts.fig, rec.sig, 'fig', SDT.Icons.img('runner'));
+      setSection(rec.parts.fig, rec.sig, 'fig', allyFigure(a.name));
       setSection(rec.parts.head, rec.sig, 'head', `<b>${esc(a.name)}</b>`);
       // 无攻血场面物件（封印肢体，同天国之门口径）：不显示血条与攻击力
       if (a.statless) {

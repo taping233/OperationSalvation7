@@ -11,7 +11,7 @@
 | 收官或老板已授权提交 | [流程指南·按授权收官](WORKFLOW-TOOLS.md#按授权收官) |
 | 复制普通小修或混树提交示例 | [两条操作路径](WORKFLOW-TOOLS.md#两条操作路径)，跨会话 task 模板按需取用 |
 | 并行派工 | [派工手册](PARALLEL-DISPATCH-PLAYBOOK.md) |
-| 查看工具能力、历史经验 | [Agent 工具箱](AGENT-TOOLBOX.md)、`npm run memory:discover -- --json` |
+| 查看工具能力、查指定历史经验 | [Agent 工具箱](AGENT-TOOLBOX.md)；`npm run --silent workflow -- memory --source both --query "关键词" --limit 3 --json`（source选codex/zcode/both） |
 
 新机器才核对环境：Node 22、现有依赖与锁文件，以及 `git config core.hooksPath` 是否指向 `搜打撤/.githooks`。缺失项按任务授权补齐；命令示例不授权安装或改 Git 配置。不要每轮重做环境初始化。
 

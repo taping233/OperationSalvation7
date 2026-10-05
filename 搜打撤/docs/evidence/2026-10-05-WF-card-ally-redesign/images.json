@@ -1,0 +1,56 @@
+[
+  {
+    "key": "federal-patrol-v1",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109f3-9757-7630-9dc1-39787efa50c4\\exec-033e53b0-98ad-47f7-94bb-5f9ae4fd00b0.png",
+    "runtime": "game/assets/portraits/allies/federal-patrol-v1.webp",
+    "size": [
+      512,
+      768
+    ],
+    "bytes": 72236,
+    "sha256": "3ee2983b8aad448f5b7f038d6d44dc3c984e000619172d1376e50c2953eeaf4e",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "transparentPixels": 265362,
+    "alphaPreserved": true,
+    "process": "常规等比缩放/编码，未修改透明通道或重画"
+  },
+  {
+    "key": "federal-shooter-v1",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109f3-9757-7630-9dc1-39787efa50c4\\exec-34e05ca2-0c39-449e-be3e-8c83cceabcdf.png",
+    "runtime": "game/assets/portraits/allies/federal-shooter-v1.webp",
+    "size": [
+      512,
+      749
+    ],
+    "bytes": 87082,
+    "sha256": "5f98829cbcd9fae36ea5002d6dee4a6997cabc0221ff2bb8a5bc5428181d6f55",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "transparentPixels": 195381,
+    "alphaPreserved": true,
+    "process": "常规等比缩放/编码，未修改透明通道或重画"
+  },
+  {
+    "key": "sealed-limb-v1",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109f3-9757-7630-9dc1-39787efa50c4\\exec-9ae0477c-aa08-40c8-9911-4210e277e01b.png",
+    "runtime": "game/assets/portraits/allies/sealed-limb-v1.webp",
+    "size": [
+      512,
+      768
+    ],
+    "bytes": 71314,
+    "sha256": "ae985adc4a1bcd504f551714685e5ec375e20779a17efdc6e86042a1422ce3bd",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "transparentPixels": 248910,
+    "alphaPreserved": true,
+    "process": "常规等比缩放/编码，未修改透明通道或重画"
+  }
+]

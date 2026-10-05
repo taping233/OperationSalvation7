@@ -147,7 +147,8 @@ describe('Git index 隔离验收', () => {
     const { utimesSync } = await import('node:fs');
     utimesSync(f.value, new Date(), new Date(Date.now() + 5000));
     git(f.root, ['status', '--porcelain']);
-    git(f.root, ['add', '--refresh']);
+    // 隔离门继承 GIT_OPTIONAL_LOCKS=0，status 不写回 index；refresh 必须给实际路径。
+    git(f.root, ['add', '--refresh', '--', '搜打撤/scripts/value.txt']);
     const indexBytesAfter = readFileSync(path.join(f.root, '.git/index'));
     expect(indexBytesAfter.equals(indexBytesBefore)).toBe(false); // stat 确实被刷新，测试有效复现坑场景
     const second = await runStaged(f.project, options);

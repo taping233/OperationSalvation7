@@ -1,4 +1,4 @@
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
@@ -27,6 +27,72 @@ afterEach(() => {
 });
 
 describe('只读动态记忆入口', () => {
+  it('ZCode索引主题经junction越过项目库仍拒读，both不能报告完整检索', () => {
+    const home = fixture();
+    const repo = path.join(home, 'repo');
+    const memory = project(home, 'current', `cwd=${repo}\n[workflow](escape/private.md)`);
+    const outside = path.join(home, 'outside-library');
+    put(path.join(outside, 'private.md'), 'workflow 不允许读入的外库正文');
+    symlinkSync(outside, path.join(path.dirname(memory), 'escape'), 'junction');
+    const result = searchMemory(repo, { home, query: 'workflow', source: 'zcode' });
+    expect(result).toMatchObject({ status: 'incomplete', matches: [] });
+    expect(result.warnings).toContainEqual(expect.objectContaining({ reason: 'outside-or-symlink' }));
+    expect(JSON.stringify(result)).not.toContain('不允许读入');
+    expect(searchMemory(repo, { home, query: 'workflow', source: 'both' }).partial).toBe(true);
+  });
+  it('ZCode从唯一项目索引与TOPICS读取命中主题，不扫未索引正文或递归引用', () => {
+    const home = fixture();
+    const repo = path.join(home, 'repo');
+    const memory = project(home, 'project-current', `cwd=${repo}\n[主题](TOPICS.md)`);
+    const base = path.dirname(memory);
+    put(path.join(base, 'TOPICS.md'), '- [workflow task](task.md)\n- [other](other.md)');
+    put(path.join(base, 'task.md'), '# workflow task\n\n**How to apply:** task 小修免task\n[secret](secret.md)');
+    put(path.join(base, 'secret.md'), 'workflow task 不应读到的递归正文');
+    put(path.join(base, 'unindexed.md'), 'workflow task 不应扫到的正文');
+    const result = searchMemory(repo, { home, query: 'workflow task', source: 'zcode', limit: 1 });
+    expect(result).toMatchObject({ source: 'zcode', status: 'matched', totalMatchedTopics: 1 });
+    expect(result.matches[0]).toMatchObject({ source: path.join(base, 'task.md'), catalog: path.join(base, 'TOPICS.md'), catalogLine: 1 });
+    expect(result.matches[0].excerpt).toContain('小修免task');
+    expect(JSON.stringify(result)).not.toContain('不应读到');
+    expect(JSON.stringify(result)).not.toContain('不应扫到');
+  });
+  it('both合计限量且保留两端来源；默认Codex能力保持兼容', () => {
+    const home = fixture();
+    const repo = path.join(home, 'repo');
+    put(path.join(home, '.codex/memories/memory_summary.md'), `cwd=${repo}`);
+    put(path.join(home, '.codex/memories/MEMORY.md'), `# workflow\ncwd=${repo}\nworkflow task Codex经验`);
+    const memory = project(home, 'project-current', `cwd=${repo}\n[workflow task](task.md)`);
+    put(path.join(path.dirname(memory), 'task.md'), '# workflow task ZCode经验');
+    const result = searchMemory(repo, { home, query: 'workflow task', source: 'both', limit: 2 });
+    expect(result).toMatchObject({ source: 'both', status: 'matched', partial: false });
+    expect(result.matches.map(hit => hit.platform)).toEqual(['codex', 'zcode']);
+    expect(searchMemory(repo, { home, query: 'workflow task', source: 'both', limit: 1 }).matches).toHaveLength(1);
+    expect(searchMemory(repo, { home, query: 'workflow task' }).source).toBe('codex');
+    expect(() => searchMemory(repo, { home, query: 'workflow', source: 'unknown' })).toThrow();
+  });
+  it('ZCode多库歧义不猜选，旧迁移库不作兜底，both显式标部分缺失', () => {
+    const home = fixture();
+    const repo = path.join(home, 'repo');
+    project(home, 'one', `cwd=${repo}\n[workflow](task.md)`);
+    project(home, 'two', `cwd=${repo}\n[workflow](task.md)`);
+    put(path.join(home, '.zcode/memories/MEMORY.md'), 'workflow 历史迁移不自动读取');
+    const result = searchMemory(repo, { home, query: 'workflow', source: 'zcode' });
+    expect(result).toMatchObject({ status: 'ambiguous', matches: [] });
+    expect(searchMemory(repo, { home, query: 'workflow', source: 'both' }).partial).toBe(true);
+  });
+  it('ZCode越界索引链接不读取，缺失主题与正文截断显式记录', () => {
+    const home = fixture();
+    const repo = path.join(home, 'repo');
+    const memory = project(home, 'current', `cwd=${repo}\n[workflow private](../../outside.md)\n[workflow missing](missing.md)`);
+    const result = searchMemory(repo, { home, query: 'workflow', source: 'zcode' });
+    expect(result).toMatchObject({ status: 'incomplete', matches: [] });
+    expect(result.warnings).toContainEqual(expect.objectContaining({ code: 'outside-topic' }));
+    put(memory, `cwd=${repo}\n[workflow](large.md)`);
+    put(path.join(path.dirname(memory), 'large.md'), '# workflow\n' + 'x'.repeat(70000));
+    const truncated = searchMemory(repo, { home, query: 'workflow', source: 'zcode' });
+    expect(truncated.truncated).toBe(true);
+    expect(truncated.matches[0].excerptTruncated).toBe(true);
+  });
   it('真实CLI转发query与limit，非法参数不退回全量discover', () => {
     const home = fixture();
     const repo = path.resolve(process.cwd(), '..');
@@ -90,6 +156,13 @@ describe('只读动态记忆入口', () => {
       '## Reusable knowledge\n- task 小改不建任务，只有跨会话需要时才建\n');
     const result = searchMemory(repo, { home, query: 'workflow task', limit: 1 });
     expect(result.matches[0].excerpt).toContain('小改不建任务');
+  });
+  it('索引截断不能误报项目不存在，也不能越过索引直接读正文', () => {
+    const home = fixture();
+    const repo = path.join(home, 'repo');
+    put(path.join(home, '.codex/memories/memory_summary.md'), 'x'.repeat(17000) + ` cwd=${repo}`);
+    put(path.join(home, '.codex/memories/MEMORY.md'), `# secret\ncwd=${repo}\nworkflow`);
+    expect(searchMemory(repo, { home, query: 'workflow' })).toMatchObject({ status: 'incomplete', truncated: true, matches: [] });
   });
   it('换机从 USERPROFILE 发现，不依赖固定用户与 project 哈希', () => {
     const home = fixture();

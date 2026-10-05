@@ -1,7 +1,7 @@
 {
   "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 674,
+  "count": 677,
   "assets": [
     {
       "path": "cards/martial-cc-unmoved.webp",
@@ -550,10 +550,10 @@
     {
       "path": "reconstruction/wallpaper-ensemble-1005.webp",
       "ext": "webp",
-      "bytes": 420426,
-      "sha256": "4dc60be119f7ab2d7ab5f72e08ccb6414bfbe0f775b4601b1d13b9cf0715fd95",
+      "bytes": 318028,
+      "sha256": "b66deda30f427f0ce646519df2e5e259e29ea26aa6dc9f5097e7946ee1c5e608",
       "license": "老板提供图的 AI 重绘版（本轮授权替换实装）",
-      "source": "docs/evidence/2026-10-05-WF-wallpaper-redraw/v3/asset-source.json"
+      "source": "docs/evidence/2026-10-05-WF-ensemble-wallpaper-final/asset-source.json"
     },
     {
       "path": "cards/creature-tt8-curseimmune.webp",
@@ -4898,6 +4898,30 @@
       "bytes": 220232,
       "sha256": "f3e194b1fe074764c32753f89625fe9243a673bfed4eef6eccca7f0686c9fcc6",
       "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+    },
+    {
+      "path": "portraits/allies/federal-patrol-v1.webp",
+      "ext": "webp",
+      "bytes": 72236,
+      "sha256": "3ee2983b8aad448f5b7f038d6d44dc3c984e000619172d1376e50c2953eeaf4e",
+      "license": "AI生成（OpenAI ImageGen，本项目友军返修）",
+      "source": "docs/evidence/2026-10-05-WF-card-ally-redesign/images.json"
+    },
+    {
+      "path": "portraits/allies/federal-shooter-v1.webp",
+      "ext": "webp",
+      "bytes": 87082,
+      "sha256": "5f98829cbcd9fae36ea5002d6dee4a6997cabc0221ff2bb8a5bc5428181d6f55",
+      "license": "AI生成（OpenAI ImageGen，本项目友军返修）",
+      "source": "docs/evidence/2026-10-05-WF-card-ally-redesign/images.json"
+    },
+    {
+      "path": "portraits/allies/sealed-limb-v1.webp",
+      "ext": "webp",
+      "bytes": 71314,
+      "sha256": "ae985adc4a1bcd504f551714685e5ec375e20779a17efdc6e86042a1422ce3bd",
+      "license": "AI生成（OpenAI ImageGen，本项目友军返修）",
+      "source": "docs/evidence/2026-10-05-WF-card-ally-redesign/images.json"
     }
   ],
   "verified": "2026-10-05"

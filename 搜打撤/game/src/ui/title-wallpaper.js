@@ -4,6 +4,17 @@ const preferenceKey = 'sdt-title-wallpaper';
 const wallpapers = ['snow', 'ensemble'];
 const title = document.getElementById('title');
 const button = document.getElementById('btnTitleWallpaper');
+const viewButton = document.getElementById('btnTitleWallpaperView');
+
+if (title && viewButton) {
+  viewButton.addEventListener('click', () => {
+    const viewing = title.classList.toggle('wallpaper-only');
+    title.querySelector('.title-inner').toggleAttribute('inert', viewing);
+    viewButton.setAttribute('aria-pressed', String(viewing));
+    viewButton.querySelector('span').textContent = viewing ? '恢复界面' : '只看壁纸';
+    viewButton.title = viewing ? '恢复主页界面' : '隐藏界面，只看壁纸';
+  });
+}
 
 if (title && button) {
   let index = Math.max(0, wallpapers.indexOf(storeGet(preferenceKey)));
