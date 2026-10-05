@@ -1,0 +1,787 @@
+{
+  "id": "extraction",
+  "title": "渡口倒数",
+  "stem": "09-extraction-last-ferry-v2",
+  "idea": "七八拍2+2+3的撤离脉冲；小提琴长主线、竖琴节拍与远圆号，推进明确但不骤然加响。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+  "key": "D mixolydian",
+  "meter": [
+    7,
+    8
+  ],
+  "bpm_quarter": 128,
+  "bars": 32,
+  "total_beats": 112.0,
+  "seconds": 52.5,
+  "tracks": [
+    {
+      "name": "Violin signal",
+      "program": 40,
+      "bank": 0,
+      "hand": null,
+      "notes": 80,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/09-extraction-last-ferry-v2-Violin-signal.wav",
+        "bytes": 20160088,
+        "sha256": "03bb704849562cd26e76f34e61fc836b19ec280004f56c5fdd0ecac65f075074"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          10.5,
+          0.84
+        ],
+        [
+          17.5,
+          1
+        ],
+        [
+          24.5,
+          1
+        ],
+        [
+          31.5,
+          0.95
+        ],
+        [
+          38.5,
+          0.95
+        ],
+        [
+          45.5,
+          0.9
+        ],
+        [
+          52.5,
+          0.9
+        ],
+        [
+          59.5,
+          1.05
+        ],
+        [
+          66.5,
+          1.05
+        ],
+        [
+          73.5,
+          0.93
+        ],
+        [
+          80.5,
+          0.93
+        ],
+        [
+          87.5,
+          1.02
+        ],
+        [
+          94.5,
+          1.02
+        ],
+        [
+          101.5,
+          0.86
+        ],
+        [
+          108.5,
+          0.86
+        ],
+        [
+          112.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Harp beacon steps",
+      "program": 46,
+      "bank": 0,
+      "hand": null,
+      "notes": 46,
+      "pan": -31,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/09-extraction-last-ferry-v2-Harp-beacon-steps.wav",
+        "bytes": 20160088,
+        "sha256": "f66e2c147f938f1710ee09e6b5666e2fd81707b02a3e7e45900c8de06a6e4bd1"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.65
+        ],
+        [
+          10.5,
+          0.65
+        ],
+        [
+          17.5,
+          0.9
+        ],
+        [
+          24.5,
+          0.9
+        ],
+        [
+          31.5,
+          0.74
+        ],
+        [
+          38.5,
+          0.74
+        ],
+        [
+          45.5,
+          0.84
+        ],
+        [
+          52.5,
+          0.84
+        ],
+        [
+          59.5,
+          0.96
+        ],
+        [
+          66.5,
+          0.96
+        ],
+        [
+          73.5,
+          0.67
+        ],
+        [
+          80.5,
+          0.67
+        ],
+        [
+          87.5,
+          0.91
+        ],
+        [
+          94.5,
+          0.91
+        ],
+        [
+          101.5,
+          0.74
+        ],
+        [
+          108.5,
+          0.74
+        ],
+        [
+          112.0,
+          0.65
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Horn safe passage",
+      "program": 60,
+      "bank": 0,
+      "hand": null,
+      "notes": 10,
+      "pan": 20,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/09-extraction-last-ferry-v2-Horn-safe-passage.wav",
+        "bytes": 20160088,
+        "sha256": "8c2d1469c96dc87f3191e7c96abd5bba3cc3d88c3430a48080a7d50a8a7b3f3b"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.65
+        ],
+        [
+          10.5,
+          0.65
+        ],
+        [
+          17.5,
+          0.9
+        ],
+        [
+          24.5,
+          0.9
+        ],
+        [
+          31.5,
+          0.74
+        ],
+        [
+          38.5,
+          0.74
+        ],
+        [
+          45.5,
+          0.84
+        ],
+        [
+          52.5,
+          0.84
+        ],
+        [
+          59.5,
+          0.96
+        ],
+        [
+          66.5,
+          0.96
+        ],
+        [
+          73.5,
+          0.67
+        ],
+        [
+          80.5,
+          0.67
+        ],
+        [
+          87.5,
+          0.91
+        ],
+        [
+          94.5,
+          0.91
+        ],
+        [
+          101.5,
+          0.74
+        ],
+        [
+          108.5,
+          0.74
+        ],
+        [
+          112.0,
+          0.65
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Cello countdown",
+      "program": 42,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 28,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/09-extraction-last-ferry-v2-Cello-countdown.wav",
+        "bytes": 20160088,
+        "sha256": "e2a8191a2eb06e4ac448e56bc74460633f1f7eedbba5f01b91d19708baf90e98"
+      },
+      "target_active_rms_dbfs": -29,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          10.5,
+          0.84
+        ],
+        [
+          17.5,
+          1
+        ],
+        [
+          24.5,
+          1
+        ],
+        [
+          31.5,
+          0.95
+        ],
+        [
+          38.5,
+          0.95
+        ],
+        [
+          45.5,
+          0.9
+        ],
+        [
+          52.5,
+          0.9
+        ],
+        [
+          59.5,
+          1.05
+        ],
+        [
+          66.5,
+          1.05
+        ],
+        [
+          73.5,
+          0.93
+        ],
+        [
+          80.5,
+          0.93
+        ],
+        [
+          87.5,
+          1.02
+        ],
+        [
+          94.5,
+          1.02
+        ],
+        [
+          101.5,
+          0.86
+        ],
+        [
+          108.5,
+          0.86
+        ],
+        [
+          112.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Long crossing strings",
+      "program": 49,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": -35,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/09-extraction-last-ferry-v2-Long-crossing-strings.wav",
+        "bytes": 20160088,
+        "sha256": "653cce1afee84cfa63a8a30ef604fc1cead929230e94aced57521feeec63fad8"
+      },
+      "target_active_rms_dbfs": -34,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          10.5,
+          0.92
+        ],
+        [
+          17.5,
+          0.96
+        ],
+        [
+          24.5,
+          0.96
+        ],
+        [
+          31.5,
+          0.95
+        ],
+        [
+          38.5,
+          0.95
+        ],
+        [
+          45.5,
+          0.91
+        ],
+        [
+          52.5,
+          0.91
+        ],
+        [
+          59.5,
+          1
+        ],
+        [
+          66.5,
+          1
+        ],
+        [
+          73.5,
+          0.96
+        ],
+        [
+          80.5,
+          0.96
+        ],
+        [
+          87.5,
+          0.97
+        ],
+        [
+          94.5,
+          0.97
+        ],
+        [
+          101.5,
+          0.9
+        ],
+        [
+          108.5,
+          0.9
+        ],
+        [
+          112.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Timpani distant clock",
+      "program": 47,
+      "bank": 0,
+      "hand": null,
+      "notes": 45,
+      "pan": -6,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/09-extraction-last-ferry-v2-Timpani-distant-clock.wav",
+        "bytes": 20160088,
+        "sha256": "6ee451ad7e150e4c11d06c6c4500ac7fb1938518f37607fe7ec65ab4dd35b544"
+      },
+      "target_active_rms_dbfs": -39,
+      "continuous_gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          10.5,
+          0.68
+        ],
+        [
+          17.5,
+          0.9
+        ],
+        [
+          24.5,
+          0.9
+        ],
+        [
+          31.5,
+          0.78
+        ],
+        [
+          38.5,
+          0.78
+        ],
+        [
+          45.5,
+          0.95
+        ],
+        [
+          52.5,
+          0.95
+        ],
+        [
+          59.5,
+          0.92
+        ],
+        [
+          66.5,
+          0.92
+        ],
+        [
+          73.5,
+          0.72
+        ],
+        [
+          80.5,
+          0.72
+        ],
+        [
+          87.5,
+          1
+        ],
+        [
+          94.5,
+          1
+        ],
+        [
+          101.5,
+          0.78
+        ],
+        [
+          108.5,
+          0.78
+        ],
+        [
+          112.0,
+          0.68
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/09-extraction-last-ferry-v2-Steady-low-foundation.wav",
+        "bytes": 20160088,
+        "sha256": "4a7325ae4d07ac310d0804801717257b190421480857b2f3b0722d2fb8a17663"
+      },
+      "target_active_rms_dbfs": -33,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          10.5,
+          0.92
+        ],
+        [
+          17.5,
+          0.96
+        ],
+        [
+          24.5,
+          0.96
+        ],
+        [
+          31.5,
+          0.95
+        ],
+        [
+          38.5,
+          0.95
+        ],
+        [
+          45.5,
+          0.91
+        ],
+        [
+          52.5,
+          0.91
+        ],
+        [
+          59.5,
+          1
+        ],
+        [
+          66.5,
+          1
+        ],
+        [
+          73.5,
+          0.96
+        ],
+        [
+          80.5,
+          0.96
+        ],
+        [
+          87.5,
+          0.97
+        ],
+        [
+          94.5,
+          0.97
+        ],
+        [
+          101.5,
+          0.9
+        ],
+        [
+          108.5,
+          0.9
+        ],
+        [
+          112.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Muted guitar drive",
+      "program": 28,
+      "bank": 0,
+      "hand": null,
+      "notes": 96,
+      "pan": -26,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/09-extraction-last-ferry-v2-Muted-guitar-drive.wav",
+        "bytes": 20160088,
+        "sha256": "3713cea43f188325d80c75a4d4c1887b98864f905aeda236ba8bf472d1191f4b"
+      },
+      "target_active_rms_dbfs": -38,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          10.5,
+          0.84
+        ],
+        [
+          17.5,
+          1
+        ],
+        [
+          24.5,
+          1
+        ],
+        [
+          31.5,
+          0.95
+        ],
+        [
+          38.5,
+          0.95
+        ],
+        [
+          45.5,
+          0.9
+        ],
+        [
+          52.5,
+          0.9
+        ],
+        [
+          59.5,
+          1.05
+        ],
+        [
+          66.5,
+          1.05
+        ],
+        [
+          73.5,
+          0.93
+        ],
+        [
+          80.5,
+          0.93
+        ],
+        [
+          87.5,
+          1.02
+        ],
+        [
+          94.5,
+          1.02
+        ],
+        [
+          101.5,
+          0.86
+        ],
+        [
+          108.5,
+          0.86
+        ],
+        [
+          112.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-5.62",
+    "input_lra": "1.60",
+    "input_thresh": "-28.50",
+    "output_i": "-22.88",
+    "output_tp": "-9.85",
+    "output_lra": "1.60",
+    "output_thresh": "-32.88",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.12"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.4404002444846977,
+      0.3743595647586378
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/09-extraction-last-ferry-v2.mmp",
+      "bytes": 7714,
+      "sha256": "3921bb5b138bb7c037f87f2f1713fdc1a1a1109b240c5c105938906e95ad6ca1"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/09-extraction-last-ferry-v2.wav",
+      "bytes": 15120044,
+      "sha256": "c0763a74c5cca504ff3f0cb271b60ac2bb813bab53549104e622265ad44f665c"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/09-extraction-last-ferry-v2.mp3",
+      "bytes": 1681988,
+      "sha256": "28c1d8f8539cf049e69c049b48d5414d5e86480384f3b239e7d92812a31956c6"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/09-extraction-last-ferry-v2.ogg",
+      "bytes": 991551,
+      "sha256": "0f3787b2feaabb82e3b3ab4342f0b109e3a18df7539fe86c2a87c5c85e2af6d1"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "statement"
+    },
+    {
+      "start_bar": 4,
+      "name": "answer"
+    },
+    {
+      "start_bar": 8,
+      "name": "lift"
+    },
+    {
+      "start_bar": 12,
+      "name": "refrain"
+    },
+    {
+      "start_bar": 16,
+      "name": "statement"
+    },
+    {
+      "start_bar": 20,
+      "name": "answer"
+    },
+    {
+      "start_bar": 24,
+      "name": "lift"
+    },
+    {
+      "start_bar": 28,
+      "name": "refrain"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed",
+  "creative_revision": {
+    "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+    "primary_response_voice": "Cello countdown",
+    "changes": [
+      "short memorable motifs",
+      "foreground replies every 2 bars",
+      "orchestration or rhythmic fills every 4 bars",
+      "clearer pulse",
+      "gentle 1-bar transitions"
+    ],
+    "not_a_gain_only_revision": true
+  }
+}

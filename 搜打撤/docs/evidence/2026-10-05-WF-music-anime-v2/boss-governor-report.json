@@ -1,0 +1,872 @@
+{
+  "id": "boss-governor",
+  "title": "铁律封城",
+  "stem": "10-boss-governor-iron-edict-v2",
+  "idea": "肃清总督的低铜管战歌；军令式圆号主题与弦乐反问，低铜管错开进入，压力来自句法和节奏。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+  "key": "D minor",
+  "meter": [
+    4,
+    4
+  ],
+  "bpm_quarter": 144,
+  "bars": 32,
+  "total_beats": 128.0,
+  "seconds": 53.333333333333336,
+  "tracks": [
+    {
+      "name": "Horn edict",
+      "program": 60,
+      "bank": 0,
+      "hand": null,
+      "notes": 112,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/10-boss-governor-iron-edict-v2-Horn-edict.wav",
+        "bytes": 20480088,
+        "sha256": "bcf224566a1074d59a78da394a66b01310c097847d4af819cb00520dc3a9845d"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          12.0,
+          0.84
+        ],
+        [
+          20.0,
+          1
+        ],
+        [
+          28.0,
+          1
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.9
+        ],
+        [
+          60.0,
+          0.9
+        ],
+        [
+          68.0,
+          1.05
+        ],
+        [
+          76.0,
+          1.05
+        ],
+        [
+          84.0,
+          0.93
+        ],
+        [
+          92.0,
+          0.93
+        ],
+        [
+          100.0,
+          1.02
+        ],
+        [
+          108.0,
+          1.02
+        ],
+        [
+          116.0,
+          0.86
+        ],
+        [
+          124.0,
+          0.86
+        ],
+        [
+          128.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Trombone battlement",
+      "program": 57,
+      "bank": 0,
+      "hand": null,
+      "notes": 10,
+      "pan": 18,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/10-boss-governor-iron-edict-v2-Trombone-battlement.wav",
+        "bytes": 20480088,
+        "sha256": "65a7cf0ea72fc20016e614225dafb9b731446480f40b26f01a6c44e900e4d18e"
+      },
+      "target_active_rms_dbfs": -34,
+      "continuous_gain_points": [
+        [
+          0,
+          0.65
+        ],
+        [
+          12.0,
+          0.65
+        ],
+        [
+          20.0,
+          0.9
+        ],
+        [
+          28.0,
+          0.9
+        ],
+        [
+          36.0,
+          0.74
+        ],
+        [
+          44.0,
+          0.74
+        ],
+        [
+          52.0,
+          0.84
+        ],
+        [
+          60.0,
+          0.84
+        ],
+        [
+          68.0,
+          0.96
+        ],
+        [
+          76.0,
+          0.96
+        ],
+        [
+          84.0,
+          0.67
+        ],
+        [
+          92.0,
+          0.67
+        ],
+        [
+          100.0,
+          0.91
+        ],
+        [
+          108.0,
+          0.91
+        ],
+        [
+          116.0,
+          0.74
+        ],
+        [
+          124.0,
+          0.74
+        ],
+        [
+          128.0,
+          0.65
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Tuba foundation",
+      "program": 58,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/10-boss-governor-iron-edict-v2-Tuba-foundation.wav",
+        "bytes": 20480088,
+        "sha256": "c3f38186f05bd90ee897e4133a607776e0b8d321ffdcd9676bb9f446c44fc0ee"
+      },
+      "target_active_rms_dbfs": -37,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          12.0,
+          0.92
+        ],
+        [
+          20.0,
+          0.96
+        ],
+        [
+          28.0,
+          0.96
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.91
+        ],
+        [
+          60.0,
+          0.91
+        ],
+        [
+          68.0,
+          1
+        ],
+        [
+          76.0,
+          1
+        ],
+        [
+          84.0,
+          0.96
+        ],
+        [
+          92.0,
+          0.96
+        ],
+        [
+          100.0,
+          0.97
+        ],
+        [
+          108.0,
+          0.97
+        ],
+        [
+          116.0,
+          0.9
+        ],
+        [
+          124.0,
+          0.9
+        ],
+        [
+          128.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Violin defiance",
+      "program": 40,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": -36,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/10-boss-governor-iron-edict-v2-Violin-defiance.wav",
+        "bytes": 20480088,
+        "sha256": "e2705b8c0fae671295ce039aea527488d73bd0a27f6e30274eee321daeaa3624"
+      },
+      "target_active_rms_dbfs": -29,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          12.0,
+          0.84
+        ],
+        [
+          20.0,
+          1
+        ],
+        [
+          28.0,
+          1
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.9
+        ],
+        [
+          60.0,
+          0.9
+        ],
+        [
+          68.0,
+          1.05
+        ],
+        [
+          76.0,
+          1.05
+        ],
+        [
+          84.0,
+          0.93
+        ],
+        [
+          92.0,
+          0.93
+        ],
+        [
+          100.0,
+          1.02
+        ],
+        [
+          108.0,
+          1.02
+        ],
+        [
+          116.0,
+          0.86
+        ],
+        [
+          124.0,
+          0.86
+        ],
+        [
+          128.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Pizzicato orders",
+      "program": 45,
+      "bank": 0,
+      "hand": null,
+      "notes": 72,
+      "pan": 32,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/10-boss-governor-iron-edict-v2-Pizzicato-orders.wav",
+        "bytes": 20480088,
+        "sha256": "1342b87b1bb9e09a696dbcc27c604e6821fa865955d891b31d095268a3f9bcc2"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          12.0,
+          0.68
+        ],
+        [
+          20.0,
+          0.9
+        ],
+        [
+          28.0,
+          0.9
+        ],
+        [
+          36.0,
+          0.78
+        ],
+        [
+          44.0,
+          0.78
+        ],
+        [
+          52.0,
+          0.95
+        ],
+        [
+          60.0,
+          0.95
+        ],
+        [
+          68.0,
+          0.92
+        ],
+        [
+          76.0,
+          0.92
+        ],
+        [
+          84.0,
+          0.72
+        ],
+        [
+          92.0,
+          0.72
+        ],
+        [
+          100.0,
+          1
+        ],
+        [
+          108.0,
+          1
+        ],
+        [
+          116.0,
+          0.78
+        ],
+        [
+          124.0,
+          0.78
+        ],
+        [
+          128.0,
+          0.68
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Orchestral snare",
+      "program": 48,
+      "bank": 128,
+      "hand": null,
+      "notes": 56,
+      "pan": 7,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/10-boss-governor-iron-edict-v2-Orchestral-snare.wav",
+        "bytes": 20480088,
+        "sha256": "60ab61a86f96dc1c97da8abcffff855985f4ae3bcd018aef8b901280906b4efb"
+      },
+      "target_active_rms_dbfs": -37,
+      "continuous_gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          12.0,
+          0.68
+        ],
+        [
+          20.0,
+          0.9
+        ],
+        [
+          28.0,
+          0.9
+        ],
+        [
+          36.0,
+          0.78
+        ],
+        [
+          44.0,
+          0.78
+        ],
+        [
+          52.0,
+          0.95
+        ],
+        [
+          60.0,
+          0.95
+        ],
+        [
+          68.0,
+          0.92
+        ],
+        [
+          76.0,
+          0.92
+        ],
+        [
+          84.0,
+          0.72
+        ],
+        [
+          92.0,
+          0.72
+        ],
+        [
+          100.0,
+          1
+        ],
+        [
+          108.0,
+          1
+        ],
+        [
+          116.0,
+          0.78
+        ],
+        [
+          124.0,
+          0.78
+        ],
+        [
+          128.0,
+          0.68
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Timpani gates",
+      "program": 47,
+      "bank": 0,
+      "hand": null,
+      "notes": 44,
+      "pan": -8,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/10-boss-governor-iron-edict-v2-Timpani-gates.wav",
+        "bytes": 20480088,
+        "sha256": "242b4c52d0dfcddb330163aee28d148623be0133f4195ad2ffbbdd19ff180f2c"
+      },
+      "target_active_rms_dbfs": -36,
+      "continuous_gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          12.0,
+          0.68
+        ],
+        [
+          20.0,
+          0.9
+        ],
+        [
+          28.0,
+          0.9
+        ],
+        [
+          36.0,
+          0.78
+        ],
+        [
+          44.0,
+          0.78
+        ],
+        [
+          52.0,
+          0.95
+        ],
+        [
+          60.0,
+          0.95
+        ],
+        [
+          68.0,
+          0.92
+        ],
+        [
+          76.0,
+          0.92
+        ],
+        [
+          84.0,
+          0.72
+        ],
+        [
+          92.0,
+          0.72
+        ],
+        [
+          100.0,
+          1
+        ],
+        [
+          108.0,
+          1
+        ],
+        [
+          116.0,
+          0.78
+        ],
+        [
+          124.0,
+          0.78
+        ],
+        [
+          128.0,
+          0.68
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/10-boss-governor-iron-edict-v2-Steady-low-foundation.wav",
+        "bytes": 20480088,
+        "sha256": "f54f23d67ab8965963c9528d9db50bed67f282aec561aed98776c4c1ca9135b8"
+      },
+      "target_active_rms_dbfs": -33,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          12.0,
+          0.92
+        ],
+        [
+          20.0,
+          0.96
+        ],
+        [
+          28.0,
+          0.96
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.91
+        ],
+        [
+          60.0,
+          0.91
+        ],
+        [
+          68.0,
+          1
+        ],
+        [
+          76.0,
+          1
+        ],
+        [
+          84.0,
+          0.96
+        ],
+        [
+          92.0,
+          0.96
+        ],
+        [
+          100.0,
+          0.97
+        ],
+        [
+          108.0,
+          0.97
+        ],
+        [
+          116.0,
+          0.9
+        ],
+        [
+          124.0,
+          0.9
+        ],
+        [
+          128.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Muted guitar drive",
+      "program": 28,
+      "bank": 0,
+      "hand": null,
+      "notes": 96,
+      "pan": -26,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/10-boss-governor-iron-edict-v2-Muted-guitar-drive.wav",
+        "bytes": 20480088,
+        "sha256": "db857d1c0123fe8e97636bfccd78b5d3b5580ee9efec7c2dddbdb6ae830a778b"
+      },
+      "target_active_rms_dbfs": -38,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          12.0,
+          0.84
+        ],
+        [
+          20.0,
+          1
+        ],
+        [
+          28.0,
+          1
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.9
+        ],
+        [
+          60.0,
+          0.9
+        ],
+        [
+          68.0,
+          1.05
+        ],
+        [
+          76.0,
+          1.05
+        ],
+        [
+          84.0,
+          0.93
+        ],
+        [
+          92.0,
+          0.93
+        ],
+        [
+          100.0,
+          1.02
+        ],
+        [
+          108.0,
+          1.02
+        ],
+        [
+          116.0,
+          0.86
+        ],
+        [
+          124.0,
+          0.86
+        ],
+        [
+          128.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-4.28",
+    "input_lra": "2.20",
+    "input_thresh": "-28.50",
+    "output_i": "-22.81",
+    "output_tp": "-8.92",
+    "output_lra": "1.80",
+    "output_thresh": "-32.81",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.19"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.4051466139376141,
+      0.6301744043333428
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/10-boss-governor-iron-edict-v2.mmp",
+      "bytes": 8598,
+      "sha256": "850b9620db8a12814e367b8aa4073e7a0986b751e7fb45d9aa706239df8ed1ce"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/10-boss-governor-iron-edict-v2.wav",
+      "bytes": 15360044,
+      "sha256": "968a675a6d69cee2ec0fb8bfb81990ad42916c9f2c3541ac3f5f94e599ae4fa8"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/10-boss-governor-iron-edict-v2.mp3",
+      "bytes": 1708868,
+      "sha256": "6908e4532a05fd3638853091d4e2726ad82d002ebb64a9bb043add8ae9653866"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/10-boss-governor-iron-edict-v2.ogg",
+      "bytes": 816210,
+      "sha256": "343e06cc8245c417bc422959f135d65d4e5d0bbe8a3d37384608803668d9f3fa"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "statement"
+    },
+    {
+      "start_bar": 4,
+      "name": "answer"
+    },
+    {
+      "start_bar": 8,
+      "name": "lift"
+    },
+    {
+      "start_bar": 12,
+      "name": "refrain"
+    },
+    {
+      "start_bar": 16,
+      "name": "statement"
+    },
+    {
+      "start_bar": 20,
+      "name": "answer"
+    },
+    {
+      "start_bar": 24,
+      "name": "lift"
+    },
+    {
+      "start_bar": 28,
+      "name": "refrain"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed",
+  "creative_revision": {
+    "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+    "primary_response_voice": "Violin defiance",
+    "changes": [
+      "short memorable motifs",
+      "foreground replies every 2 bars",
+      "orchestration or rhythmic fills every 4 bars",
+      "clearer pulse",
+      "gentle 1-bar transitions"
+    ],
+    "not_a_gain_only_revision": true
+  }
+}

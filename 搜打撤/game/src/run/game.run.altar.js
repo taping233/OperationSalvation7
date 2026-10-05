@@ -1050,6 +1050,7 @@ function showExtractDone(receipt) {
     : '';
   nodeShell({
     tone: 'exit',
+    music: 'success',
     icon: wasClear ? '[[icon:trophy]]' : '[[icon:home]]',
     title: wasClear ? '首脑突破 · 满载而归' : '保本返回 · 撤离成功',
     sub: `${wasClear ? '击破第四层首脑，从终局撤离点凯旋' : '见好就收，带着战利品安全返回基地'} ·

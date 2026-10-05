@@ -1,0 +1,2759 @@
+{
+  "schemaVersion": 1,
+  "task": "WF-music-integration",
+  "kind": "automated-local-check",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "scripts/acceptance-gate.mjs",
+    "--target-tests",
+    "tests/sound-music.test.js",
+    "tests/overlay-dialog.test.js",
+    "tests/settings-page.test.js",
+    "tests/sound-policy.test.js",
+    "tests/soundscape.test.js",
+    "tests/r7a-scenes-integration.test.js",
+    "tests/extraction-receipt.test.js"
+  ],
+  "cwd": "D:\\素材\\代号柒\\搜打撤",
+  "startedAt": "2026-10-05T14:07:40.380Z",
+  "endedAt": "2026-10-05T14:07:43.764Z",
+  "head": "4e1f9ccc412919626503b12ab5776bfd8b3b4275",
+  "statusBefore": "M docs/PARALLEL-REGISTRY.md\n M game/assets/asset-manifest.json\n M game/selftest.js\n M game/src/audio/sound.js\n M game/src/battle/core/battle.lifecycle.js\n M game/src/run/game.run.altar.js\n M game/src/run/game.run.scenes.js\n M game/src/ui/game.menu.js\n M game/src/ui/overlay.js\n?? ../nul\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-40-53.381Z-9a1affee-staged.json\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-56-38.896Z-d5ca5df9-staged.json\n?? docs/evidence/2026-10-02-seven-departments-review/tmp/contact-3.png\n?? docs/evidence/2026-10-02-staged-check/2026-10-02T01-22-15.433Z-e5d284fd-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-19-39.159Z-5fbee550-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-27-43.086Z-63530fe5-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-46-33.917Z-9cb2485d-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-51-21.366Z-f2ed6511-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-59-11.935Z-35c52133-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-03-58.112Z-5cc22689-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-08-10.704Z-da12b315-staged.json\n?? docs/evidence/2026-10-04-WF-home-minako-layout/before-1280x720.png\n?? docs/evidence/2026-10-04-WF-home-minako-layout/r2-1280x720.png\n?? docs/evidence/2026-10-04-WF-home-minako-layout/r3-final-1280x720.png\n?? docs/evidence/2026-10-05-WF-card-ally-redesign/before/\n?? docs/evidence/2026-10-05-WF-music-anime-v2/\n?? docs/evidence/2026-10-05-WF-music-continuity-review/\n?? docs/evidence/2026-10-05-WF-music-explore-battle-v4/\n?? docs/evidence/2026-10-05-WF-music-gap/\n?? docs/evidence/2026-10-05-WF-music-identity/\n?? docs/evidence/2026-10-05-WF-music-independent-review/\n?? docs/evidence/2026-10-05-WF-music-integration/\n?? docs/evidence/2026-10-05-WF-music-missing-bgm/\n?? docs/evidence/2026-10-05-WF-music-piano-two-hands/\n?? docs/evidence/2026-10-05-WF-music-title-v4/\n?? docs/evidence/2026-10-05-WF-music-title-v5/\n?? docs/evidence/2026-10-05-WF-music-title-v6/\n?? docs/evidence/2026-10-05-WF-music-title-v7/\n?? docs/evidence/2026-10-05-WF-music-title-v8/\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-25-13.937Z-efceee45-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-29-39.744Z-c5028f6a-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-33-43.811Z-46b41035-staged.json\n?? docs/evidence/2026-10-05-WF-ui-art-step1/implementation/before/\n?? docs/evidence/2026-10-05-WF-wu-parts-full/before-face-leg.png\n?? docs/evidence/2026-10-05-WF-wu-parts-full/browser-static-000.jpg\n?? docs/evidence/2026-10-05-WF-wu-parts-full/gaze-bindings.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/geometry-check.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/preview.pid\n?? docs/evidence/2026-10-05-WF-wu-parts-full/proportion-bindings.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-hurt-v1.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-hurt-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-v3.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-v4.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-03-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-16-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-16-v3.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-17-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-17-v3.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-19-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-19-v3.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-20-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-21-v2.json\n?? game/art-source/characters/wu-parts-v1/\n?? game/assets/music-demo/\n?? game/css/cover-hub.css\n?? game/music-demo.html\n?? game/src/audio/sound.music.catalog.js\n?? game/src/audio/sound.music.player.js\n?? tests/sound-music.test.js\n?? 搜打撤/",
+  "statusAfter": "M docs/PARALLEL-REGISTRY.md\n M game/assets/asset-manifest.json\n M game/selftest.js\n M game/src/audio/sound.js\n M game/src/battle/core/battle.lifecycle.js\n M game/src/run/game.run.altar.js\n M game/src/run/game.run.scenes.js\n M game/src/ui/game.menu.js\n M game/src/ui/overlay.js\n?? ../nul\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-40-53.381Z-9a1affee-staged.json\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-56-38.896Z-d5ca5df9-staged.json\n?? docs/evidence/2026-10-02-seven-departments-review/tmp/contact-3.png\n?? docs/evidence/2026-10-02-staged-check/2026-10-02T01-22-15.433Z-e5d284fd-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-19-39.159Z-5fbee550-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-27-43.086Z-63530fe5-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-46-33.917Z-9cb2485d-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-51-21.366Z-f2ed6511-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-59-11.935Z-35c52133-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-03-58.112Z-5cc22689-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-08-10.704Z-da12b315-staged.json\n?? docs/evidence/2026-10-04-WF-home-minako-layout/before-1280x720.png\n?? docs/evidence/2026-10-04-WF-home-minako-layout/r2-1280x720.png\n?? docs/evidence/2026-10-04-WF-home-minako-layout/r3-final-1280x720.png\n?? docs/evidence/2026-10-05-WF-card-ally-redesign/before/\n?? docs/evidence/2026-10-05-WF-music-anime-v2/\n?? docs/evidence/2026-10-05-WF-music-continuity-review/\n?? docs/evidence/2026-10-05-WF-music-explore-battle-v4/\n?? docs/evidence/2026-10-05-WF-music-gap/\n?? docs/evidence/2026-10-05-WF-music-identity/\n?? docs/evidence/2026-10-05-WF-music-independent-review/\n?? docs/evidence/2026-10-05-WF-music-integration/\n?? docs/evidence/2026-10-05-WF-music-missing-bgm/\n?? docs/evidence/2026-10-05-WF-music-piano-two-hands/\n?? docs/evidence/2026-10-05-WF-music-title-v4/\n?? docs/evidence/2026-10-05-WF-music-title-v5/\n?? docs/evidence/2026-10-05-WF-music-title-v6/\n?? docs/evidence/2026-10-05-WF-music-title-v7/\n?? docs/evidence/2026-10-05-WF-music-title-v8/\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-25-13.937Z-efceee45-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-29-39.744Z-c5028f6a-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-33-43.811Z-46b41035-staged.json\n?? docs/evidence/2026-10-05-WF-ui-art-step1/implementation/before/\n?? docs/evidence/2026-10-05-WF-wu-parts-full/before-face-leg.png\n?? docs/evidence/2026-10-05-WF-wu-parts-full/browser-static-000.jpg\n?? docs/evidence/2026-10-05-WF-wu-parts-full/gaze-bindings.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/geometry-check.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/preview.pid\n?? docs/evidence/2026-10-05-WF-wu-parts-full/proportion-bindings.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-hurt-v1.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-hurt-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-v3.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-v4.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-03-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-16-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-16-v3.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-17-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-17-v3.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-19-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-19-v3.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-20-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-21-v2.json\n?? game/art-source/characters/wu-parts-v1/\n?? game/assets/music-demo/\n?? game/css/cover-hub.css\n?? game/music-demo.html\n?? game/src/audio/sound.music.catalog.js\n?? game/src/audio/sound.music.player.js\n?? tests/sound-music.test.js\n?? 搜打撤/",
+  "before": {
+    "sha256": "1b98b57374ebab021d4e2eb261fb88c59918be49c8937e60606f709ddebf0129",
+    "manifest": [
+      {
+        "file": ".githooks/pre-commit",
+        "sha256": "47893464ecbcb80013cbd41db3db5cd3db5c7429a0cbffc9dbb0e6912ba52068"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-full-repository-review/task.json",
+        "sha256": "56c99a5e2f865aac7d3651fafd2c4bc771b87034342b4b92c51284c0f6fbf817"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-lean-workflow/task.json",
+        "sha256": "fb10db8484d2015531c6f50d1142e56d40b78114f3c470810f54d0cec377b00f"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-workflow-review-fixes/task.json",
+        "sha256": "7529efb752cfe4d3875ab415597adc4b88f63bad9ee9c8885aa9ef9a7b37d840"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-1/task.json",
+        "sha256": "87f5c33558af6f52c7a50b9fe86f8f5133ed0a58b3e9ef380ca53fc604a9329b"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-2/task.json",
+        "sha256": "6bdb06bbbf26bcbc029e167c0d6a6bd21420e098e2c4329f96035d3de72bd902"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-3/task.json",
+        "sha256": "852fcd7f7a2da7e7ae70951eeb352d3e4c882112f900c9d052fd15d24c314ddc"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-automation/task.json",
+        "sha256": "ee4018aad4f0e98cd82c9104476a6c217e7000b8e42e1531ad4a39c5a87749ae"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-decouple/task.json",
+        "sha256": "2250963edfa165dea21d46d679d03c2b1295f30cbd47fd09da74cdb3c958f27d"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-redesign/task.json",
+        "sha256": "d6c88a124e7d714f29e28fe61a86e0d8a528b42a21575aa437ac7ec4097d445c"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-production-research/task.json",
+        "sha256": "bb2934f113227ef9b03071f2c7656e0a61b320a13c3b59e751e7917f8a4f3c27"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes-crossplatform/task.json",
+        "sha256": "af714f27e7067293f4b2fd00ab38b9d476650e6342c0c971b1533c5fe9507167"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes/task.json",
+        "sha256": "4bf05ca76394be31df66ac841a98b6e8a6c9c1a93b0bedcd7f4d012a3cdaf0a3"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-review/task.json",
+        "sha256": "cefc4ecf8fe895d9bd322122b6d380660e6d42b2df0f10e98eb3e119973f7586"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-v2/task.json",
+        "sha256": "776320fc8065871d96b6bce0c0806e325518717ed0b20e09077ca77539e9274c"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-experience-art-plan/task.json",
+        "sha256": "e3ea75d9bb5fbf657664cfc0521e93bab1381b735647a7a4fcc9224939ae605b"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-experience-art-exec/task.json",
+        "sha256": "5751581ca69fe5ba1d81c4d803fe01cce046b85d15a55887f58c031ad626ed0c"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-home-art-v2/task.json",
+        "sha256": "2f4eb76b9c9594d7594f6dd04127dd44035204ed9c4a394d2f646ac112de63ea"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-home-layout/task.json",
+        "sha256": "6f74540ad681ec952da2e8ec1d49b36b8321cfce09319ce6508d3046731febf6"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-xart-z1/task.json",
+        "sha256": "6c872e2e62530e22818ef3bbf5c49343a206647ec59dac0523184f2de4a676ea"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-1004/task.json",
+        "sha256": "3179b2f8a0919fe52a1b5f7b77156c057e91eed06ca04cacbce78cdd6d99cfe1"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r2/task.json",
+        "sha256": "e20177c47ef50180968058350a01d053d0869912d33424bd93d3d3f58dfd98ec"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r3/task.json",
+        "sha256": "8f3cfeca13faf07df5d021fb4c13c3806ae623a4c49bdd5e4f386dd03200e7c2"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r4/task.json",
+        "sha256": "6230d9073433b0c4e7f92a2a122b749af131053c529f9e25b9d10b9294caaafe"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r5/task.json",
+        "sha256": "c7e969cd6fb3646dedf66d88b7ef78b7697228aa0158a7353a5fba1f60e63c3f"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-photo-studio-unified/task.json",
+        "sha256": "5b3b6a5e64dcd00a1db4ec607585efd0dd1219ee36f1c2dc421b64d75afb2f01"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/task.json",
+        "sha256": "beff569b4672957dfd05f7bcd9be0b557ce9723e57027db0f8820826c0e2671b"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-xingyue-fullmoon/task.json",
+        "sha256": "b2cc8f2eb4839568fa83656113c07df3fa01dc10619e285081754a2f06b8d7e8"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-xingyue-wind-song/task.json",
+        "sha256": "0a5ee0d13ac9fa61bfd8e8202c059a95e28351c884d3609f1287256a7f05529c"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-card-ally-redesign/task.json",
+        "sha256": "cb1eb9a7ae68374d3ddf23c96c4433e7d8e4013e0d7bc5ce926269f2c7066ce7"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-music-independent-review/task.json",
+        "sha256": "5268a56c5bd8b6aa9b060a0ce58de90dfb204033a43887571565c56f03fdb16c"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-wu-parts-full/task.json",
+        "sha256": "eb37eee3cf2cf597442a9b163009b055289f01ca7712da63e01f212a27fc8737"
+      },
+      {
+        "file": "docs/PARALLEL-REGISTRY.md",
+        "sha256": "50dc6f0e5354a21eb9bb7d341525f26ec24f3f04a46475a7a554db6757d1802a"
+      },
+      {
+        "file": "docs/PENDING.md",
+        "sha256": "1e349ba6e25129e319b1c27478fd1d61cee6ae7f88cbbaf4be8774ab4103d704"
+      },
+      {
+        "file": "docs/STATUS.md",
+        "sha256": "19a7d521b20bc2639d4aca9f4c6ea6aaea649b7cd1b0ff4758acde485ef4c791"
+      },
+      {
+        "file": "eslint.config.js",
+        "sha256": "e29079fdc795c560e4ba742018455f2ba098192581ef847bb3f6e2a32bda26ae"
+      },
+      {
+        "file": "game/css/beginner-guide.css",
+        "sha256": "62a9299eea2de5fe23258497303277af3d1c0b0440f210add8423b026794bd73"
+      },
+      {
+        "file": "game/css/combat-feedback.css",
+        "sha256": "90157af53f476b7f558afb4c05d00e887e8224d5217d475fcaa519dd23722476"
+      },
+      {
+        "file": "game/css/home-scene.css",
+        "sha256": "e3e3eb8e75fb2e070ab428ef4dcf646f4b13755ea4a4a495766e048d7d499493"
+      },
+      {
+        "file": "game/css/page-loading.css",
+        "sha256": "a42fb3f5b7f899c1652b74dd1a508fc63aecdbc6cf2eaa1cafc6068a5a554f08"
+      },
+      {
+        "file": "game/css/photo-studio-unified.css",
+        "sha256": "bba5c749be4a72812a14558e1c678b4fd595ab4e12e36f66aa1293c2e79e771e"
+      },
+      {
+        "file": "game/css/preparation.css",
+        "sha256": "80ad14dec4da220535ec52a71568b1858111eed6ff7771d70b79d72010e13cdd"
+      },
+      {
+        "file": "game/css/title-achievements.css",
+        "sha256": "60042fcc74db0ec878fcdcd968b8a6a3be3d77bc9a0c667a463cad589e877008"
+      },
+      {
+        "file": "game/data/achievements.json",
+        "sha256": "feda8996c2f7827f75d3b14769aff4feb3530acfe113f51a3a6fe8d2246de13c"
+      },
+      {
+        "file": "game/data/art-mapping.json",
+        "sha256": "a09c4688774fb432256e78b553a5bb4f7d99ec7ec038647db035bb547897105c"
+      },
+      {
+        "file": "game/data/beginner-guide.json",
+        "sha256": "c4fa00e16ab57647217e1489b5247b1aa49b09c31ac61b258fd3699039db470e"
+      },
+      {
+        "file": "game/data/card-notes.json",
+        "sha256": "61019fea1f1a74da04a93772b2aa51430b4a2480f6d1331c6ff3c3064f334df4"
+      },
+      {
+        "file": "game/data/cards-sync.json",
+        "sha256": "d2f38387dd0c49ca90628aeea5334790286de906838b34e6c7aece0652511244"
+      },
+      {
+        "file": "game/data/map.json",
+        "sha256": "eb2d7147fcd422c06c64d09824a508a6272c166ba034802663087ed3b4dfdcb8"
+      },
+      {
+        "file": "game/data/pets.json",
+        "sha256": "3f9b1a714e1a6643b802a73cba270b92f9188ce307615251396177276894a20f"
+      },
+      {
+        "file": "game/data/scenes.json",
+        "sha256": "db4b986d110bae604a1ffefb99365040a0393c356b2dd7d4baf5ccac4db3bcf6"
+      },
+      {
+        "file": "game/src/agent/agent.data.js",
+        "sha256": "f5b4138c9ef0c6996c53ac811d06f486633293f1c1ff20cb044e88267d0d3c10"
+      },
+      {
+        "file": "game/src/agent/agent.recorder.js",
+        "sha256": "f55264595076a1b7f6b4c6c6727429bd4c7bf07a61603148114864024987f163"
+      },
+      {
+        "file": "game/src/agent/agent.stats.js",
+        "sha256": "6e0791d7ae899c39d9185a05663922b3c66b76dd4f31de72fe045a362240bdb5"
+      },
+      {
+        "file": "game/src/audio/sound.music.catalog.js",
+        "sha256": "2ba70951c9c662a5e22819af69f297c6f4f0c93f387ae225e1f163c73df1cd1b"
+      },
+      {
+        "file": "game/src/audio/sound.music.player.js",
+        "sha256": "c07ee3881d2995cc52ca1ae6905cf722e542abbdeada276a974163c7062e09a3"
+      },
+      {
+        "file": "game/src/audio/sound.policy.js",
+        "sha256": "bef908c7cfc155e491104959902607ba776c787b2297e8e05c584d3d7d10c9e1"
+      },
+      {
+        "file": "game/src/audio/sound.scape.js",
+        "sha256": "d6aa9b4d4b11568743422bd1f8244bec874a0a0039807b30e651dfc0c2e54dc8"
+      },
+      {
+        "file": "game/src/battle/bag/battle.bag.js",
+        "sha256": "b356157ee6f48ec3c94eab0a69afa05b5b17c9b8bd140a4fcb6a98190c6aea94"
+      },
+      {
+        "file": "game/src/battle/bag/battle.deck.js",
+        "sha256": "6eeef7be98dbf5f244507e9361d4ea1231d2aea5d3fae8b9d0c32440ec23f934"
+      },
+      {
+        "file": "game/src/battle/bag/battle.equipment.js",
+        "sha256": "cf6200dac1dcc2a4b392003d608ab005655462f80bed9ac0016f5d114057cd74"
+      },
+      {
+        "file": "game/src/battle/bag/battle.piles.js",
+        "sha256": "c73f6cdbce9f33ac4e0b975ef12e69edf0b0ebc9749a6097dff48ec6db515067"
+      },
+      {
+        "file": "game/src/battle/bag/battle.slam-skill.js",
+        "sha256": "00149c4b48aad31725661788029da85df391743957d5ef63e8f11515d5718f2d"
+      },
+      {
+        "file": "game/src/battle/battle-loader.js",
+        "sha256": "5c7259185a6112677098083627dd84d3c4205db75b749d5ebe4d869a1fc0bfc7"
+      },
+      {
+        "file": "game/src/battle/core/battle.actions.js",
+        "sha256": "006a741924d4fddb9bd5a1c3fc531a1bc2ffa62df4f44c6a1c0e528f105a02e9"
+      },
+      {
+        "file": "game/src/battle/core/battle.core.js",
+        "sha256": "82a40f6f78c93dad5ba0268b522133340f4633bd2ef77de6c09d49512f3f1387"
+      },
+      {
+        "file": "game/src/battle/core/battle.draw.js",
+        "sha256": "97189e31d7744d9ec3d8d897ba93c91c53611a904f9b56cdb3b252ca6c37244d"
+      },
+      {
+        "file": "game/src/battle/core/battle.enemy-intent.js",
+        "sha256": "e0c4c523d0b852409158052db7cf533601196723324c0477416c60c0b1626f91"
+      },
+      {
+        "file": "game/src/battle/core/battle.enemy-phase.js",
+        "sha256": "54c21eced3bd5d85a4082700ab75e38394a1ae1a04cf23809747a4b0af0b513d"
+      },
+      {
+        "file": "game/src/battle/core/battle.engine.js",
+        "sha256": "757a438d5fc0eff0a78ab07f20f15f893108583caf8ea8083981b86e2ea95f09"
+      },
+      {
+        "file": "game/src/battle/core/battle.exec-play.js",
+        "sha256": "a79700295ec6c11681733f6c3b1610319aff023847a942410e6a44461d49c9ec"
+      },
+      {
+        "file": "game/src/battle/core/battle.foe-lifecycle.js",
+        "sha256": "cfea4347155fecac205c7469ea6c42b8e54d0b59942fd88431f827194502ce4b"
+      },
+      {
+        "file": "game/src/battle/core/battle.hand-selection.js",
+        "sha256": "d6d7edfaa983453f6e073fe79a7af63f7eb32d896dca4c54001364bc0a1e26a9"
+      },
+      {
+        "file": "game/src/battle/core/battle.hand.js",
+        "sha256": "170dee83e1fa34d7d86130247429bca9c14d7ba1994307265264e0be79ad3468"
+      },
+      {
+        "file": "game/src/battle/core/battle.lifecycle.js",
+        "sha256": "86730f1988da4bbaad12379c629d772e737f50438e7da487a91d3cb716b12ae6"
+      },
+      {
+        "file": "game/src/battle/core/battle.resolution.js",
+        "sha256": "cea1e2076b1cdfde3f04a72b6c4d0b4f5a97289058557bf4b497f11b3aa54925"
+      },
+      {
+        "file": "game/src/battle/core/battle.selection-flow.js",
+        "sha256": "d22ff43b972dd3f1725af2f1c93df23623b02e107a0b5f312c674443a2c70845"
+      },
+      {
+        "file": "game/src/battle/core/battle.target-session.js",
+        "sha256": "40dc80eba1799f08232ae5f37e3e2db7fbe2ef444191df86e90bc2e0c4473e76"
+      },
+      {
+        "file": "game/src/battle/core/combat.js",
+        "sha256": "99e145c0d8e2410cb99477f5bce6eccc244e16cd2f29195d80d2418bc60db1b2"
+      },
+      {
+        "file": "game/src/battle/effects/battle.card-cost.js",
+        "sha256": "2c5d1592a719e30864f2692ed45bf6ed881572f574fcb0e2acd92460ab8d7f59"
+      },
+      {
+        "file": "game/src/battle/effects/battle.card-inspection.js",
+        "sha256": "6e2b1876d88d90f685a0ecd23330b58dc5b93333107d28c3014c312d7f6f1f48"
+      },
+      {
+        "file": "game/src/battle/effects/battle.discover-candidates.js",
+        "sha256": "0c6d781eb98dcdf9b89af3fbe6b966ae4f9dde84e404ab3be0ec228c0c33320c"
+      },
+      {
+        "file": "game/src/battle/effects/battle.discover-flow.js",
+        "sha256": "21eae1aaa5a5e22d28bd8514806c37f92666ee6219146c8e63b99533c9710fed"
+      },
+      {
+        "file": "game/src/battle/effects/battle.discover-state.js",
+        "sha256": "455e957d690b0c1c063d7cfd571ab92bebd90cb272ba2727ce828ca834bfb049"
+      },
+      {
+        "file": "game/src/battle/effects/battle.effects.js",
+        "sha256": "7f20447ebcbf21f7f6ac4bd7ea88947de0300792f596f2c60b14d32649b65647"
+      },
+      {
+        "file": "game/src/battle/effects/battle.hosted.js",
+        "sha256": "c058b2b8306b1ff2a7416096792c655440c4b9db7b7af60141773fe06847d394"
+      },
+      {
+        "file": "game/src/battle/effects/battle.rule-guard.js",
+        "sha256": "6d8de0843c29c63a8e23c24ce2c8adec7acc931183fa229e5e1db6507680ebcb"
+      },
+      {
+        "file": "game/src/battle/effects/battle.target-rules.js",
+        "sha256": "49a22148c9a3c02c6d24a8021a800badb478f6d972a86222bd98c6ee30b6a43b"
+      },
+      {
+        "file": "game/src/battle/effects/battle.triggers.m2.js",
+        "sha256": "5d61f2d702f602000a4024c375bb3380f4874002c1ad39b90445fc2538de4180"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.audit.js",
+        "sha256": "7f5933d3ffceb917cce2414ff8343e86addfa550758a151552a69f946d4571e3"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.ctx.js",
+        "sha256": "1f9644b4c9956888d5663ebe578cd9093fe7b1b3850e105cca23d5e6fad7d05c"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.curse.js",
+        "sha256": "dd10ce940de63089488a36cf9ca8e182b8824319f550354726c72380fb9475fd"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.damage.js",
+        "sha256": "6aa2db75ed1fa82db13b1768f62591c6a734b0a08d1c1ceb7d38120a5db615f6"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.deck.js",
+        "sha256": "6b3143e8782770df7be6fab75a69b299783e3db22a22e2b42006b3cb14edc4e5"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.gates.js",
+        "sha256": "c9bb3fb47288769776dfd2e2308d04abb21df1a06e93038d1dff94bea0600ca0"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.js",
+        "sha256": "842685028a84f07d8a8f3c4f161fd516a5f0f212b9c8794a052074a32de507f3"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.kills.js",
+        "sha256": "7f4d899962462a2f67ca3d154b8b66ce65ec8e5ec490cb2d59eeafd4850b454f"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.m1.js",
+        "sha256": "3170b0844fd16db35f942b00c6f95ea7ace9b61883893ed9a53371aa35560de8"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.m2.js",
+        "sha256": "7457f3759285df66dd0133681c7832e1512b45567339b42c292d016dcdf717e4"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.recovery.js",
+        "sha256": "e4c8950f2bf2a0ec79209ce455977e572eb774a4b0c1bd7c310168661d42141a"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.rules.js",
+        "sha256": "d3a65b037ab591f5cf73a5f7d173f29d17c0bee57f5011b779371d48f83ea973"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.tail.js",
+        "sha256": "1c767d3a1c64e37567f46ba789c25fcbc6e82df127c9464281acaadea05ed1d6"
+      },
+      {
+        "file": "game/src/battle/effects/effect-verbs.js",
+        "sha256": "4612d5a01fc1d0a12c2bca7fc0eb5bfebaa630d4e96f21e6898c8a38f6cdd78b"
+      },
+      {
+        "file": "game/src/battle/effects/hand-cost-patterns.js",
+        "sha256": "a7a0a6bee19c9118a3b2f17ecb4b8f2062ee220cbe28deee67b57a512619b4c6"
+      },
+      {
+        "file": "game/src/battle/effects/hosted-catalog-index.js",
+        "sha256": "f09545cf3da650239553f5d30e9855924ce44d393a536d65088febd723c382bb"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.action-runner.js",
+        "sha256": "5002dc43d8e71c8297f95f7a6a4789448fb1eada7b02577b98ab1011402ef549"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.clock.js",
+        "sha256": "4cf28cc500a6eefba06d8aec960f8673e2396760d54d68db7aed2c7db78709a5"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.execution-session.js",
+        "sha256": "aaf29d7cf135c43a377e3dd5da08707dc1de9db33d83cc049f39b05f2006153d"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.pace.js",
+        "sha256": "ed4a0471a09561a605dbac9d16f60451ef8b1a3b88ab9594e3cb39d8ab3b3feb"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.runtime.effects.js",
+        "sha256": "4c078b33109fd1e3838613d8c50ae1c7cdfe7bcf3199578a3ee7e008d4db1e7e"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.runtime.interaction.js",
+        "sha256": "685fdbfb883d7da35d7203a01d1d316a646ef11099932ee86d2c7ea49e37106b"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.runtime.js",
+        "sha256": "bed419162b81a2b54a32484e8963e32f7dc7a37fa5283b61eb8d61dd6a539632"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.runtime.piles.js",
+        "sha256": "9d8f61605b27084ffebd2c700184a7304bb6f2a72252e57da92f4c14613cf0bc"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.runtime.presentation.js",
+        "sha256": "27aebed4ab68e551e6c3ab09830d837982ba209fdfdcbba7a0099b62edd4e16e"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.runtime.session.js",
+        "sha256": "04997b81ef6e9755ac74ba88673a9235c35668ac156df83a0d59485e434513d4"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.snapshot.js",
+        "sha256": "bd881a046ce94dbe94187bed9b51398246d48ed2836af4ed3bb163c3e9096810"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.staged-playback.js",
+        "sha256": "29134624d1a0203b4f32eba1c0954fa13a5fbded435c85e3fa5d35e9fbbf8995"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.state.js",
+        "sha256": "14c3b2edda788adf278460e9fbd7dcb327c5094eb88938f04331bd1cf7a379d5"
+      },
+      {
+        "file": "game/src/battle/view/battle.aim.js",
+        "sha256": "e2b90915116a8747e8b514ab2bd5a3d000c786d18298de07e291f70e12bda2f4"
+      },
+      {
+        "file": "game/src/battle/view/battle.anim.view.js",
+        "sha256": "425f75ac656e1fdb881ad62a76c22a4491ca6c290a550cf840a67daf8eee0b9d"
+      },
+      {
+        "file": "game/src/battle/view/battle.attack-cues.js",
+        "sha256": "b47072848f56c56254d2d476d5aff2643fc1a65594f8874725b86386f33b0f01"
+      },
+      {
+        "file": "game/src/battle/view/battle.feedback.js",
+        "sha256": "a90def0ae8cbee51a0c82b3acb2d8853795f91d5c7fa4362e817826f416b9a16"
+      },
+      {
+        "file": "game/src/battle/view/battle.frames.js",
+        "sha256": "225e0f78356db1c75acd5524248d2f0efe4a424afa44382272651abf900e8e16"
+      },
+      {
+        "file": "game/src/battle/view/battle.hover.js",
+        "sha256": "8738da029e0deca12ea2d5054b3800a7ab8fc2674dc9620f8db2e8040025b442"
+      },
+      {
+        "file": "game/src/battle/view/battle.intent.view.js",
+        "sha256": "c2ff4f02f246f330d6b64c2ac2a8dd25b480e769f171abc0376172f9ac2c37b5"
+      },
+      {
+        "file": "game/src/battle/view/battle.layers.js",
+        "sha256": "f990835830cbf8b92ccd603f53d7b5fbd67bc5bdf7836e9b161d33897533b721"
+      },
+      {
+        "file": "game/src/battle/view/battle.overlays.js",
+        "sha256": "4e7ee00e4960140de76e8e50394a0e78490609ebdece66fd8f231fdff9dd19e6"
+      },
+      {
+        "file": "game/src/battle/view/battle.piles.view.js",
+        "sha256": "afb13e4686087a47a17bfa50c48f1872842b6ad4ca5487929f60fdb514691169"
+      },
+      {
+        "file": "game/src/battle/view/battle.preview.js",
+        "sha256": "e5ad2df05da767269e5224aa73ab26da5ac8c3b46d1db0736ab17d2a4281432e"
+      },
+      {
+        "file": "game/src/battle/view/battle.vfx.js",
+        "sha256": "43e9b4514b2cbf9710dc5e46442483c985ae2e310f9f2ea6c30fa3f080e99a4a"
+      },
+      {
+        "file": "game/src/battle/view/battle.view.js",
+        "sha256": "5ec9781afbdd12f869dddd1a7cb9f4d76d692de6c5d8046e93cd10c0e617f72d"
+      },
+      {
+        "file": "game/src/cards/card-photo-notes.js",
+        "sha256": "5b7a45b03b171c02f4b640dc5a87f84ac1dab74849fe9cbf2ef0684404ddc594"
+      },
+      {
+        "file": "game/src/cards/card-rarity.js",
+        "sha256": "155b338a000e571eb58e29905bd2a631a95edb2846da35f963703b4f912151a8"
+      },
+      {
+        "file": "game/src/cards/card-render-context.js",
+        "sha256": "5520443debdf12b82befc015e04765052642a6b9af99a0a502992c4e3de9ad4b"
+      },
+      {
+        "file": "game/src/cards/card-rules.capability.js",
+        "sha256": "4044acfd52099325ff5abf324951e3e6c0e49782e92653368d5a3928d9f892e2"
+      },
+      {
+        "file": "game/src/cards/card-rules.schema.js",
+        "sha256": "54fdcbf01911f895cb07aeb39547beab7d07eb363436c5a5b4776e4d8b1db908"
+      },
+      {
+        "file": "game/src/cards/cards.catalog.js",
+        "sha256": "8be4bec49c82b5e3bb023be7fbe623fcdbb82ace680100ae477cb917b981a823"
+      },
+      {
+        "file": "game/src/cards/cards.data.js",
+        "sha256": "449232a280692897ae14db7c568eff2ab2918c212963902f0f160e954e57526f"
+      },
+      {
+        "file": "game/src/cards/cards.view.js",
+        "sha256": "b0475d731f4516efad0d14f7c1cbfad92c83e3e9883d782c16ac9d10587e9b7d"
+      },
+      {
+        "file": "game/src/cards/mech-sentences.js",
+        "sha256": "fe7cb590cee930fe795de5bcb0e94bfe5d4e76d74f2c0d6ded0d9e1b2fed1061"
+      },
+      {
+        "file": "game/src/core/art.js",
+        "sha256": "917fa8978c06605664cc0c9e7aa57acfab745cb94973d07a5f3f6ed20c639f77"
+      },
+      {
+        "file": "game/src/core/asset-url.js",
+        "sha256": "0e4dd4ec75c58e74f6fc1d853db2156177c91bf15cc015212c21b51e96888bcd"
+      },
+      {
+        "file": "game/src/core/characters.js",
+        "sha256": "debf1abce843de26a49adbfaab9b2a8190740939c61bd3ae03a0fe6502afdc7c"
+      },
+      {
+        "file": "game/src/core/data-loader.js",
+        "sha256": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be"
+      },
+      {
+        "file": "game/src/core/diagnostics.local.js",
+        "sha256": "aaaf2af15496b426c6bfd974cbff3ab91a6d1bbaa1736202f143d7bcba0f03da"
+      },
+      {
+        "file": "game/src/core/event-bus.js",
+        "sha256": "76cc1a8023d1330c386c1e2392525d4d33882b21aad6d7485822660d630c0740"
+      },
+      {
+        "file": "game/src/core/map-reveals.js",
+        "sha256": "891511c20e01c1316264147d56dbf7ae830e99af42ec1ebee4feb0c670c7e4cd"
+      },
+      {
+        "file": "game/src/core/mapData.js",
+        "sha256": "cd140f6f0876fd4f01aec10019e2a51a76398d7642526f52fafce77772eb9bf7"
+      },
+      {
+        "file": "game/src/core/motion-primitives.js",
+        "sha256": "ff13e1089b25de9af60b70da0e30d1badae577ac2b85df4c308c8a18ff2240d7"
+      },
+      {
+        "file": "game/src/core/motion.js",
+        "sha256": "d70f9e42c714b60d9d3e01e6762c6c723a8d5b8eec0757f8571aa51aaa320653"
+      },
+      {
+        "file": "game/src/core/node-info.js",
+        "sha256": "90160256d8fdf30359927ba5ac49673971969dea432ab46ff270949558ecfcfd"
+      },
+      {
+        "file": "game/src/core/performance-budgets.js",
+        "sha256": "35972fa6e3fd93f363f9b7b53fe2c05f8c44d9a73ecfddc7a8ad0bc7934ae7e8"
+      },
+      {
+        "file": "game/src/core/random-core.js",
+        "sha256": "177382f86d8e810a76428bc7aaae450a0b0e3811490220e9d8dc1a39db58b174"
+      },
+      {
+        "file": "game/src/core/random.js",
+        "sha256": "cbc6ade0393a77dc838fea3d5833ae771eb51825f9d3a06644b100a449542923"
+      },
+      {
+        "file": "game/src/core/render-scheduler.js",
+        "sha256": "a698340dc9a192991d00a53dfea5b27c21f2fc3bbee330c0834643670ad19c32"
+      },
+      {
+        "file": "game/src/core/rule-config.js",
+        "sha256": "7976d367bf8a8313f197f489cf923cd0a014914a33f46111100daf55fd2dbbbe"
+      },
+      {
+        "file": "game/src/core/rules.js",
+        "sha256": "ab76d311c8428e045a2219ef2c294492ea31c514046744e6c571e37384e611d5"
+      },
+      {
+        "file": "game/src/core/sdt-facade.js",
+        "sha256": "52c174eb79457cf0f215420b0503e572fa228c4d33c8f34b9b637efd338d433d"
+      },
+      {
+        "file": "game/src/core/shared.js",
+        "sha256": "2687bcc33d114eab4700663ffdda962e783a8c9125da5c3de29323e8f6f9e9ad"
+      },
+      {
+        "file": "game/src/core/storage.js",
+        "sha256": "011a7e5d2fc8446f626981322b986d6bae954a4cac709d9d381d3bc6d27a49fc"
+      },
+      {
+        "file": "game/src/core/turbo.js",
+        "sha256": "576dbe1bd94981696971a4fe65a8b81c3755b128f15be8dc36842b44f9ad25ff"
+      },
+      {
+        "file": "game/src/generated/art-manifest.js",
+        "sha256": "5ad3802b827b00f84a099864ce9872072ab0d4293dd4b418c4749967f2fd3a02"
+      },
+      {
+        "file": "game/src/generated/thumb-manifest.js",
+        "sha256": "0256caf541b91f12f1cc84d222158bb1bd69b22c3721b19c3f94a1b5080bc1d7"
+      },
+      {
+        "file": "game/src/home/home.catalog.js",
+        "sha256": "a0722309d6cdcec0e95f3a2c79b8cca3480a4482a468a000f491c75f7171b869"
+      },
+      {
+        "file": "game/src/home/home.commands.js",
+        "sha256": "e36ea8c36851c7b80047ef4374392f61a4184acb42782ab92ac93b5311fd9714"
+      },
+      {
+        "file": "game/src/home/home.presenter.js",
+        "sha256": "885923c89a44c237010830dbd037602c5bae1552fec40f65a03d30efc8066b88"
+      },
+      {
+        "file": "game/src/home/home.scene.js",
+        "sha256": "abbbd5aaabc4afae047302bc2e7bd62858fbc7a6386b1505e60b46dcbe957604"
+      },
+      {
+        "file": "game/src/home/home.visuals.js",
+        "sha256": "d2b08f30fabf9a98c1f2760dbe72de47586b1a6206b679418578098b3f759e1b"
+      },
+      {
+        "file": "game/src/home/story.last-lamp.js",
+        "sha256": "6ce80c708c9c2d760abd0cb08215f4e75de644cbf51c7aa9ff563ae670df1cbc"
+      },
+      {
+        "file": "game/src/hub/bag-return-hook.js",
+        "sha256": "855b5c061bbf2c3aa57a4e2ba2f98849da3e2e8d98e7d17afee7c06c0081e9c9"
+      },
+      {
+        "file": "game/src/hub/base-departure.commands.js",
+        "sha256": "bbe418b489490e7bf8ce90d0bfbc1dc5279ec504684a0283ed2e31ade2ffe72b"
+      },
+      {
+        "file": "game/src/hub/base-economy.js",
+        "sha256": "d39b7920f233156b9c036d33e700fc61222e2eb103e83799f76b7c0d0316f21d"
+      },
+      {
+        "file": "game/src/hub/base-elapsed.commands.js",
+        "sha256": "6b47872c47a2ec728025745a0e356dee9ef9e98b6a7a81ca9250b87c1180b514"
+      },
+      {
+        "file": "game/src/hub/base-meta.commands.js",
+        "sha256": "43c53e3edf5d48dabb979e3c94d36788d17acfd3a5e74fc058ee5d898af0476a"
+      },
+      {
+        "file": "game/src/hub/base-mutation.js",
+        "sha256": "88601f7a606e91275a692e929d96697b80ad88512b4ccf53b0a4ced14e6050f6"
+      },
+      {
+        "file": "game/src/hub/base-pet-egg.commands.js",
+        "sha256": "44066ee38c5d7bd85497486c30fa05633bfde139d406c04b374808fa04b82b79"
+      },
+      {
+        "file": "game/src/hub/base-progression.commands.js",
+        "sha256": "80c520a6179c650bab60315face2c0f52894a4622e5c92a83100b185ef9e4cbf"
+      },
+      {
+        "file": "game/src/hub/base-state.js",
+        "sha256": "688a223b3cd42ad696016e8ccf1ca834936bb43afb9fdaae0a8dcb5bcc60ed91"
+      },
+      {
+        "file": "game/src/hub/base.commands.js",
+        "sha256": "b7bed97ec524345f308249f4d9791bafbae6fb25f2dfee025150d69792a700e6"
+      },
+      {
+        "file": "game/src/hub/base.js",
+        "sha256": "34c485c2faf36d8d57bbd59c505bb144c866578f916a302da0955822ddda588f"
+      },
+      {
+        "file": "game/src/hub/collection.commands.js",
+        "sha256": "9595d570e3d889b21aeab9817c948c5e4e5b68aa3c3135e31dcb05b4d91ac6a2"
+      },
+      {
+        "file": "game/src/hub/commands.shared.js",
+        "sha256": "6100ca4b1f3624e49fd0c27a2b21373baeb462f50d1d84f13a85e3d6438ca88b"
+      },
+      {
+        "file": "game/src/hub/departure.view-updates.js",
+        "sha256": "90a2804d724669117a1cdbffc72d505863f4bb2e0884385dfb03ced357022627"
+      },
+      {
+        "file": "game/src/hub/extraction.commands.js",
+        "sha256": "0772a4198a614989255590da9eda1dc29596361cc3514e834a6b40ce8de8a88b"
+      },
+      {
+        "file": "game/src/hub/game.cardslib.art-warm.js",
+        "sha256": "b4408b9db63aedb575f1ccff1c671f92f47d991592131c00034b181daed9efad"
+      },
+      {
+        "file": "game/src/hub/game.cardslib.common.js",
+        "sha256": "8573c21cb68e337c99d70fdcf6b1b1eb42add088831de2609c14af0f75af6708"
+      },
+      {
+        "file": "game/src/hub/game.cardslib.designer.js",
+        "sha256": "7991adb7c1a8e3de3266eec87b503491e6d9b65f27ca358685ebbba6f64b8cb5"
+      },
+      {
+        "file": "game/src/hub/game.cardslib.js",
+        "sha256": "4e4b8b11c26c8335fe0e57f09bf492f5b775c4aa42c1065161550126b7c008a5"
+      },
+      {
+        "file": "game/src/hub/game.cardslib.page.js",
+        "sha256": "1bc1dc9f9e5ee08f4f0d443431f466f5e5003f4b397ebb1178c41c37b6736876"
+      },
+      {
+        "file": "game/src/hub/game.cardslib.photo-fps.js",
+        "sha256": "f088d8a2da767bb6491274dc9f2f8b6e6845743887fe1fee5bb1c035a854a500"
+      },
+      {
+        "file": "game/src/hub/game.cardslib.photo-props.js",
+        "sha256": "f9e59c92f27ec7ab58c124b098f85a1ab98b9ae71421781bf520330375b4141a"
+      },
+      {
+        "file": "game/src/hub/game.hub.bridge.js",
+        "sha256": "47c71b9495041258141c454370cca19bafe5a748f4fb2207a66705cc56e0abf0"
+      },
+      {
+        "file": "game/src/hub/game.hub.depart.js",
+        "sha256": "a43e84372c0b4f2a9ed2e105dbb19f3faab18c5d83ad3c9480ccecfb65778d68"
+      },
+      {
+        "file": "game/src/hub/game.hub.js",
+        "sha256": "ceb81ba2ddd201d1a17640d714d6623aabc7ca5770bd12bdffb6bd91b7e9a629"
+      },
+      {
+        "file": "game/src/hub/game.hub.pages.js",
+        "sha256": "0d7aee4f8175af4774339a5771adb3c63d43ee6ffadbb070e173897a7f823a37"
+      },
+      {
+        "file": "game/src/hub/game.hub.preparation.js",
+        "sha256": "e996aab5e3407ae2c1841290bf8f3c09b0e9ac55f9e50fec754f8a760a0b32de"
+      },
+      {
+        "file": "game/src/hub/game.storage.js",
+        "sha256": "bfef0205e96669582387141e4227595ea715ef0293de0da608d31968344c5d49"
+      },
+      {
+        "file": "game/src/hub/game.store.js",
+        "sha256": "c8f0abf90e41dc1279e625d6650688c281b2fc0a413ac37885b0cff58117f711"
+      },
+      {
+        "file": "game/src/hub/meta-progression.js",
+        "sha256": "b3033c3466f95142eaa221a2e2c28e2e38695d0a65d82cb15b9c3818d88d0de0"
+      },
+      {
+        "file": "game/src/hub/meta.js",
+        "sha256": "ffaa0fb64b09f0e013b74e276be07cb5b6b062db5ec1f60a4a33363a59c7586a"
+      },
+      {
+        "file": "game/src/hub/photo-studio-controls.js",
+        "sha256": "53b931b622bc784f3ac7fdc18659f4e8a360c8afe365622d73a61491113c1f06"
+      },
+      {
+        "file": "game/src/hub/photo-studio-presentation.js",
+        "sha256": "b93af0e7507faa7e70bc0b4b0c13f7b2acee17b9a37620a3135192a228e750a5"
+      },
+      {
+        "file": "game/src/hub/preparation.commands.js",
+        "sha256": "1c3ad2cb5086711e5bb795b969a88a712182424b8f1daf0d05519c2d80c8f1bc"
+      },
+      {
+        "file": "game/src/hub/preparation.sources.js",
+        "sha256": "980eeff5ae6b929b751dd60fa2a592726dda26fc21bd59b87bcf32287ea21e80"
+      },
+      {
+        "file": "game/src/hub/preparation.view.js",
+        "sha256": "59c7ffdfa21f6ddada449bea1b0640653492050c56ea25b0802591adaba7bf95"
+      },
+      {
+        "file": "game/src/hub/recoverable-pair.js",
+        "sha256": "b817a01f7961dda2eafb83e65f2fb7cde7836fc96b93a2bd119bc3bbb29bf8fd"
+      },
+      {
+        "file": "game/src/hub/recovery.commands.js",
+        "sha256": "457ad8aee4756b7f85a31f22dbb7ec7fee24498be629e273b976c687fd327dac"
+      },
+      {
+        "file": "game/src/hub/run-save-validation.js",
+        "sha256": "fd55bfffa0ea4c1b229a49bf9205522c82e5a4159fab8312d27ebc174daea4e9"
+      },
+      {
+        "file": "game/src/hub/terminal.commands.js",
+        "sha256": "d0aceac2317893b092233bb3a13bf346eeb6528da2b10b30a9290f85ed2b9229"
+      },
+      {
+        "file": "game/src/hub/versioned-slot-reader.js",
+        "sha256": "4ca1a14dff44561122a48178deb3f43a4a33a8758e1de976c147dcb6094b689e"
+      },
+      {
+        "file": "game/src/run/encounter-selector.js",
+        "sha256": "a7533515ede020fdb82a5dbf488dea9d411224b329239897085d1f45d8855398"
+      },
+      {
+        "file": "game/src/run/expedition.view.js",
+        "sha256": "c55cf92bb8340afaccc71807a768bc7afd2913de43ea2b9f5d1d8e144c6bb335"
+      },
+      {
+        "file": "game/src/run/game.run.altar.js",
+        "sha256": "e1441fc95666999afc9cc4c658c3b2c32bd84c0da433546089ea841b83280fc3"
+      },
+      {
+        "file": "game/src/run/game.run.data.js",
+        "sha256": "2641bc455633bf7a336608b0b36d8b40db295411e3db5e9a3551351c488754eb"
+      },
+      {
+        "file": "game/src/run/game.run.scenes.js",
+        "sha256": "9d6acf341bc867009ab726ffdb1c06866e47c0b84de74ae08f59c024ade10d7c"
+      },
+      {
+        "file": "game/src/run/game.run.shop.js",
+        "sha256": "084fe819432ebcdc08b24ef869f91ea1f7546b0d299aa5bd590791d1d28c6320"
+      },
+      {
+        "file": "game/src/run/game.session.bag.js",
+        "sha256": "655a936af21410617d6e7d7306cf283fda6119e9688c92f15c075530b5685b2b"
+      },
+      {
+        "file": "game/src/run/game.session.board.js",
+        "sha256": "558f0d92456c383e4bcb0834d02185266ff316615a3ec8ef49ad5ee46f5927f9"
+      },
+      {
+        "file": "game/src/run/game.session.death.js",
+        "sha256": "c47967d864068927c50f4e584dd72e64eb5bd4a17df67954d20ea39f90ef834f"
+      },
+      {
+        "file": "game/src/run/game.session.js",
+        "sha256": "317f2657d4872c8197bd7511ba32c21f6f56acce01ef937e6ece2e022d03253d"
+      },
+      {
+        "file": "game/src/run/game.session.kernel.js",
+        "sha256": "6a6c52571458c2f2ed93b07e80d0b18abb8aa798c461c23d5884898428ba34d7"
+      },
+      {
+        "file": "game/src/run/game.session.map.js",
+        "sha256": "47452660d3e100cfc726989be28eefea8953e0acb84a0c02ae234c1f0c958035"
+      },
+      {
+        "file": "game/src/run/game.session.modes.js",
+        "sha256": "97bdd16eefa10e6b3e9144299f9920f62cafc15ab117ec2c3f55f05da33fb2a7"
+      },
+      {
+        "file": "game/src/run/layeredMap.js",
+        "sha256": "679e59f0cf4fb2c264ecf0838a1eda9b83ab315ed31b054b32f4816d5c18cd35"
+      },
+      {
+        "file": "game/src/run/map-generator.js",
+        "sha256": "ea8de60cdec2f9678d2fffb64610622d78acd46cbeb7b8d1f7a8ecd0b19ae0ba"
+      },
+      {
+        "file": "game/src/run/map-graph.js",
+        "sha256": "0bc103c77976a51284c74a2eabee0b6eb14061c5ee234b97ce733d37f2784db2"
+      },
+      {
+        "file": "game/src/run/map-snapshot.js",
+        "sha256": "1dbd182bf8f4a398cdb453cea0ca72cca8586f86a816cc43a6ab8271fb158f79"
+      },
+      {
+        "file": "game/src/ui/achievement-gallery.js",
+        "sha256": "67ab8917a77ed73b1a4424c7ad6a7027dae0ec38af73f3f5ef33c59dbc23b77c"
+      },
+      {
+        "file": "game/src/ui/achievement-medals.js",
+        "sha256": "003080aa6add251578a1465b8859c7a1ae4d6c4fdcb690d7300e5909b7254edd"
+      },
+      {
+        "file": "game/src/ui/beginner-guide-diagrams.js",
+        "sha256": "d2a73af72f72310b395e21efa3255258d9149aff85b4dc9035d7ac8c3afe1bad"
+      },
+      {
+        "file": "game/src/ui/beginner-guide.js",
+        "sha256": "0288d2ea7d0b1f22902e24c056600329ce999823ce0d21bff5914285d1837cd4"
+      },
+      {
+        "file": "game/src/ui/character-view-motion.js",
+        "sha256": "1f2a0e1d44f79d2f0aa7205177aac2d17b7c722767191068801750cc27f73ced"
+      },
+      {
+        "file": "game/src/ui/cinematics.js",
+        "sha256": "ded3eb8a0cb81c984fe075d68a79993c826045c0b49950212996b65e984bd7c4"
+      },
+      {
+        "file": "game/src/ui/comm-feed.js",
+        "sha256": "5928b486247fb0ccf47a5e09f6277a4000bdc4b04a762d2b0f1430e5d258a97c"
+      },
+      {
+        "file": "game/src/ui/feedback.local.js",
+        "sha256": "67c8a111f34befa452c3fddb6598ec412d29e41d4a2905c4c3a8e75490a39e61"
+      },
+      {
+        "file": "game/src/ui/game.menu.js",
+        "sha256": "ba48acb7a97e646f99563e3d56d89b754869526b223b0b69fce3fa8d0f30ff17"
+      },
+      {
+        "file": "game/src/ui/hud.js",
+        "sha256": "39a070d2b2347bb4b43d1f2496c6de037b7f106e8387a38c23d245f860a15196"
+      },
+      {
+        "file": "game/src/ui/motion-transitions.js",
+        "sha256": "b9590cb526ddf530644c551f81123328049493f8089fd9c794d207489d6079d1"
+      },
+      {
+        "file": "game/src/ui/overlay.js",
+        "sha256": "3130656bad569867b589b9d7344f4b52d023b71e63f8f2dcda46184dcc5b148c"
+      },
+      {
+        "file": "game/src/ui/page-loading.js",
+        "sha256": "3ad3a3464b2715325116db51d536fd4a503dd5c5945ff5f9431733d033fdadd4"
+      },
+      {
+        "file": "game/src/ui/route-overlay.js",
+        "sha256": "5b0547cf721ce742e63f53b552c217967553547e0ff0d4ddedf98e9fc472ebc5"
+      },
+      {
+        "file": "game/src/ui/slot-emblems.js",
+        "sha256": "635dfece03b4d22b2396c14010001f77791b4431296222262ae2145a67c7efb9"
+      },
+      {
+        "file": "game/src/ui/term-tips.js",
+        "sha256": "4191d9cccfb1626ca1186d9e58015c8f891ad31cb3daa3e45ed5ee2155cd7c01"
+      },
+      {
+        "file": "game/src/ui/terminal-settlement.js",
+        "sha256": "db5b21b4ee1be4f1889540433d6e3b8348351d19c80320ead3810125756b1c8c"
+      },
+      {
+        "file": "game/src/ui/transitions-director.js",
+        "sha256": "4b3eb63e7b8c585dba29c456032e26a19cd9cb404043c397fe1961ef1d297b38"
+      },
+      {
+        "file": "game/src/ui/ui-scale.js",
+        "sha256": "1b90f31d98c8c5435e0afa172a86a885e9820842fc46a45de52fe22c551024a7"
+      },
+      {
+        "file": "game/src/ui/ui.js",
+        "sha256": "2583f960f0c1a8873e9179a7fdce11471f2876c8ec3aaabd26c91a8474f021b2"
+      },
+      {
+        "file": "jsconfig.battle-settlement.json",
+        "sha256": "ff9c6acca637b6583dc514e35f0870e8c39aa903f758919364ca3a10c4478f03"
+      },
+      {
+        "file": "jsconfig.battle-snapshot.json",
+        "sha256": "3fb7f26a7982e73c077b006c059b9a565b4353689ad04e0e634ebbe1b46a35c2"
+      },
+      {
+        "file": "jsconfig.card-rules.json",
+        "sha256": "426fb5f7c2781a1cf9427f29d326bea7e47cde4cd9338b99b3d178593632230d"
+      },
+      {
+        "file": "jsconfig.json",
+        "sha256": "3f2e1bd99ddc0cb8eb95ef70a7818e56fbcc687a8970d4615d6319396dbc2da1"
+      },
+      {
+        "file": "jsconfig.strict-foundations.json",
+        "sha256": "7d2f1e714dc03b4a67604a3928a5d1172c5214c6fce00443bacf4e56c6668c90"
+      },
+      {
+        "file": "jsconfig.strict-hand-selection.json",
+        "sha256": "4a4b2d33af7297b95a05976e5bc81aaf0baf3e64e3b8313516013994fbf11ba0"
+      },
+      {
+        "file": "jsconfig.strict-selection.json",
+        "sha256": "a141c4996d7ed5630a222e882738c6bf22c5473527a3c9e53e82686a8bd88f98"
+      },
+      {
+        "file": "jsconfig.strict-ui.json",
+        "sha256": "a53bcb7a075a6fab45f5b1076b97cb3449e3313eca05b193da1ede8ec5695abc"
+      },
+      {
+        "file": "package-lock.json",
+        "sha256": "c72e1da1f98d590f1d4b5b4f13530020af00fc5a328c86f3a9619daa610eed73"
+      },
+      {
+        "file": "package.json",
+        "sha256": "7700e3529505ec3917cc1478cb8028afd4efec1325c158f1b3b11db38620b697"
+      },
+      {
+        "file": "tests/extraction-receipt.test.js",
+        "sha256": "5cc0367d80bab74e9315d21df33d860fe45503748bb7209dbbbb857e3b778569"
+      },
+      {
+        "file": "tests/overlay-dialog.test.js",
+        "sha256": "4f365a6030cd18b599529fd6bbaf8f94aa0c0b472e27b4195ed27758131d9c8c"
+      },
+      {
+        "file": "tests/r7a-scenes-integration.test.js",
+        "sha256": "b9dd8b0607d19e53685f9b6bdbe4ea69cc7a71cb667effb4b079ad2737f53f89"
+      },
+      {
+        "file": "tests/settings-page.test.js",
+        "sha256": "73c5fc4087586bb19cad3cd98d97e0a9aab784a5284c64adad2e5488747bdd5e"
+      },
+      {
+        "file": "tests/sound-music.test.js",
+        "sha256": "caad8031da71ca39770b12129d63d2468bab5393e0b1c5db54fc40ee6719ea77"
+      },
+      {
+        "file": "tests/sound-policy.test.js",
+        "sha256": "2cce10c47165d56215d0dd25ed1bf3fbf81d28afc254b3f86f4296a4faeb524b"
+      },
+      {
+        "file": "tests/soundscape.test.js",
+        "sha256": "3023ce71485332b9cbf1e231eddae8db19d5f43cd47edbf62d4690cb9c8c7bc1"
+      },
+      {
+        "file": "vite.config.js",
+        "sha256": "384b2fe4cc46d026e7345d309eb89ee9363b1a33403688004baa7f054dabec5c"
+      }
+    ],
+    "environment": {
+      "node": "v24.13.0",
+      "platform": "win32",
+      "arch": "x64",
+      "dependencies": {
+        "vitest": "3.2.7",
+        "vite": "6.4.3",
+        "typescript": "7.0.2",
+        "eslint": "10.11.0",
+        "jsdom": "25.0.1",
+        "acorn": "8.18.0",
+        "acorn-walk": "8.3.5"
+      },
+      "ci": null,
+      "nodeOptions": null,
+      "forceFullTests": null
+    },
+    "documents": false,
+    "assets": false,
+    "selection": {
+      "mode": "targeted",
+      "roots": [
+        "tests/sound-music.test.js",
+        "tests/overlay-dialog.test.js",
+        "tests/settings-page.test.js",
+        "tests/sound-policy.test.js",
+        "tests/soundscape.test.js",
+        "tests/r7a-scenes-integration.test.js",
+        "tests/extraction-receipt.test.js"
+      ],
+      "files": [
+        "game/css/beginner-guide.css",
+        "game/css/combat-feedback.css",
+        "game/css/home-scene.css",
+        "game/css/page-loading.css",
+        "game/css/photo-studio-unified.css",
+        "game/css/preparation.css",
+        "game/css/title-achievements.css",
+        "game/data/achievements.json",
+        "game/data/art-mapping.json",
+        "game/data/beginner-guide.json",
+        "game/data/card-notes.json",
+        "game/data/cards-sync.json",
+        "game/data/map.json",
+        "game/data/pets.json",
+        "game/data/scenes.json",
+        "game/src/agent/agent.data.js",
+        "game/src/agent/agent.recorder.js",
+        "game/src/agent/agent.stats.js",
+        "game/src/audio/sound.music.catalog.js",
+        "game/src/audio/sound.music.player.js",
+        "game/src/audio/sound.policy.js",
+        "game/src/audio/sound.scape.js",
+        "game/src/battle/bag/battle.bag.js",
+        "game/src/battle/bag/battle.deck.js",
+        "game/src/battle/bag/battle.equipment.js",
+        "game/src/battle/bag/battle.piles.js",
+        "game/src/battle/bag/battle.slam-skill.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/battle/core/battle.actions.js",
+        "game/src/battle/core/battle.core.js",
+        "game/src/battle/core/battle.draw.js",
+        "game/src/battle/core/battle.enemy-intent.js",
+        "game/src/battle/core/battle.enemy-phase.js",
+        "game/src/battle/core/battle.engine.js",
+        "game/src/battle/core/battle.exec-play.js",
+        "game/src/battle/core/battle.foe-lifecycle.js",
+        "game/src/battle/core/battle.hand-selection.js",
+        "game/src/battle/core/battle.hand.js",
+        "game/src/battle/core/battle.lifecycle.js",
+        "game/src/battle/core/battle.resolution.js",
+        "game/src/battle/core/battle.selection-flow.js",
+        "game/src/battle/core/battle.target-session.js",
+        "game/src/battle/core/combat.js",
+        "game/src/battle/effects/battle.card-cost.js",
+        "game/src/battle/effects/battle.card-inspection.js",
+        "game/src/battle/effects/battle.discover-candidates.js",
+        "game/src/battle/effects/battle.discover-flow.js",
+        "game/src/battle/effects/battle.discover-state.js",
+        "game/src/battle/effects/battle.effects.js",
+        "game/src/battle/effects/battle.hosted.js",
+        "game/src/battle/effects/battle.rule-guard.js",
+        "game/src/battle/effects/battle.target-rules.js",
+        "game/src/battle/effects/battle.triggers.m2.js",
+        "game/src/battle/effects/effect-steps.audit.js",
+        "game/src/battle/effects/effect-steps.ctx.js",
+        "game/src/battle/effects/effect-steps.curse.js",
+        "game/src/battle/effects/effect-steps.damage.js",
+        "game/src/battle/effects/effect-steps.deck.js",
+        "game/src/battle/effects/effect-steps.gates.js",
+        "game/src/battle/effects/effect-steps.js",
+        "game/src/battle/effects/effect-steps.kills.js",
+        "game/src/battle/effects/effect-steps.m1.js",
+        "game/src/battle/effects/effect-steps.m2.js",
+        "game/src/battle/effects/effect-steps.recovery.js",
+        "game/src/battle/effects/effect-steps.rules.js",
+        "game/src/battle/effects/effect-steps.tail.js",
+        "game/src/battle/effects/effect-verbs.js",
+        "game/src/battle/effects/hand-cost-patterns.js",
+        "game/src/battle/effects/hosted-catalog-index.js",
+        "game/src/battle/runtime/battle.action-runner.js",
+        "game/src/battle/runtime/battle.clock.js",
+        "game/src/battle/runtime/battle.execution-session.js",
+        "game/src/battle/runtime/battle.pace.js",
+        "game/src/battle/runtime/battle.runtime.effects.js",
+        "game/src/battle/runtime/battle.runtime.interaction.js",
+        "game/src/battle/runtime/battle.runtime.js",
+        "game/src/battle/runtime/battle.runtime.piles.js",
+        "game/src/battle/runtime/battle.runtime.presentation.js",
+        "game/src/battle/runtime/battle.runtime.session.js",
+        "game/src/battle/runtime/battle.snapshot.js",
+        "game/src/battle/runtime/battle.staged-playback.js",
+        "game/src/battle/runtime/battle.state.js",
+        "game/src/battle/view/battle.aim.js",
+        "game/src/battle/view/battle.anim.view.js",
+        "game/src/battle/view/battle.attack-cues.js",
+        "game/src/battle/view/battle.feedback.js",
+        "game/src/battle/view/battle.frames.js",
+        "game/src/battle/view/battle.hover.js",
+        "game/src/battle/view/battle.intent.view.js",
+        "game/src/battle/view/battle.layers.js",
+        "game/src/battle/view/battle.overlays.js",
+        "game/src/battle/view/battle.piles.view.js",
+        "game/src/battle/view/battle.preview.js",
+        "game/src/battle/view/battle.vfx.js",
+        "game/src/battle/view/battle.view.js",
+        "game/src/cards/card-photo-notes.js",
+        "game/src/cards/card-rarity.js",
+        "game/src/cards/card-render-context.js",
+        "game/src/cards/card-rules.capability.js",
+        "game/src/cards/card-rules.schema.js",
+        "game/src/cards/cards.catalog.js",
+        "game/src/cards/cards.data.js",
+        "game/src/cards/cards.view.js",
+        "game/src/cards/mech-sentences.js",
+        "game/src/core/art.js",
+        "game/src/core/asset-url.js",
+        "game/src/core/characters.js",
+        "game/src/core/data-loader.js",
+        "game/src/core/diagnostics.local.js",
+        "game/src/core/event-bus.js",
+        "game/src/core/map-reveals.js",
+        "game/src/core/mapData.js",
+        "game/src/core/motion-primitives.js",
+        "game/src/core/motion.js",
+        "game/src/core/node-info.js",
+        "game/src/core/performance-budgets.js",
+        "game/src/core/random-core.js",
+        "game/src/core/random.js",
+        "game/src/core/render-scheduler.js",
+        "game/src/core/rule-config.js",
+        "game/src/core/rules.js",
+        "game/src/core/sdt-facade.js",
+        "game/src/core/shared.js",
+        "game/src/core/storage.js",
+        "game/src/core/turbo.js",
+        "game/src/generated/art-manifest.js",
+        "game/src/generated/thumb-manifest.js",
+        "game/src/home/home.catalog.js",
+        "game/src/home/home.commands.js",
+        "game/src/home/home.presenter.js",
+        "game/src/home/home.scene.js",
+        "game/src/home/home.visuals.js",
+        "game/src/home/story.last-lamp.js",
+        "game/src/hub/bag-return-hook.js",
+        "game/src/hub/base-departure.commands.js",
+        "game/src/hub/base-economy.js",
+        "game/src/hub/base-elapsed.commands.js",
+        "game/src/hub/base-meta.commands.js",
+        "game/src/hub/base-mutation.js",
+        "game/src/hub/base-pet-egg.commands.js",
+        "game/src/hub/base-progression.commands.js",
+        "game/src/hub/base-state.js",
+        "game/src/hub/base.commands.js",
+        "game/src/hub/base.js",
+        "game/src/hub/collection.commands.js",
+        "game/src/hub/commands.shared.js",
+        "game/src/hub/departure.view-updates.js",
+        "game/src/hub/extraction.commands.js",
+        "game/src/hub/game.cardslib.art-warm.js",
+        "game/src/hub/game.cardslib.common.js",
+        "game/src/hub/game.cardslib.designer.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/hub/game.cardslib.page.js",
+        "game/src/hub/game.cardslib.photo-fps.js",
+        "game/src/hub/game.cardslib.photo-props.js",
+        "game/src/hub/game.hub.bridge.js",
+        "game/src/hub/game.hub.depart.js",
+        "game/src/hub/game.hub.js",
+        "game/src/hub/game.hub.pages.js",
+        "game/src/hub/game.hub.preparation.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/game.store.js",
+        "game/src/hub/meta-progression.js",
+        "game/src/hub/meta.js",
+        "game/src/hub/photo-studio-controls.js",
+        "game/src/hub/photo-studio-presentation.js",
+        "game/src/hub/preparation.commands.js",
+        "game/src/hub/preparation.sources.js",
+        "game/src/hub/preparation.view.js",
+        "game/src/hub/recoverable-pair.js",
+        "game/src/hub/recovery.commands.js",
+        "game/src/hub/run-save-validation.js",
+        "game/src/hub/terminal.commands.js",
+        "game/src/hub/versioned-slot-reader.js",
+        "game/src/run/encounter-selector.js",
+        "game/src/run/expedition.view.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/game.run.data.js",
+        "game/src/run/game.run.scenes.js",
+        "game/src/run/game.run.shop.js",
+        "game/src/run/game.session.bag.js",
+        "game/src/run/game.session.board.js",
+        "game/src/run/game.session.death.js",
+        "game/src/run/game.session.js",
+        "game/src/run/game.session.kernel.js",
+        "game/src/run/game.session.map.js",
+        "game/src/run/game.session.modes.js",
+        "game/src/run/layeredMap.js",
+        "game/src/run/map-generator.js",
+        "game/src/run/map-graph.js",
+        "game/src/run/map-snapshot.js",
+        "game/src/ui/achievement-gallery.js",
+        "game/src/ui/achievement-medals.js",
+        "game/src/ui/beginner-guide-diagrams.js",
+        "game/src/ui/beginner-guide.js",
+        "game/src/ui/character-view-motion.js",
+        "game/src/ui/cinematics.js",
+        "game/src/ui/comm-feed.js",
+        "game/src/ui/feedback.local.js",
+        "game/src/ui/game.menu.js",
+        "game/src/ui/hud.js",
+        "game/src/ui/motion-transitions.js",
+        "game/src/ui/overlay.js",
+        "game/src/ui/page-loading.js",
+        "game/src/ui/route-overlay.js",
+        "game/src/ui/slot-emblems.js",
+        "game/src/ui/term-tips.js",
+        "game/src/ui/terminal-settlement.js",
+        "game/src/ui/transitions-director.js",
+        "game/src/ui/ui-scale.js",
+        "game/src/ui/ui.js",
+        "tests/extraction-receipt.test.js",
+        "tests/overlay-dialog.test.js",
+        "tests/r7a-scenes-integration.test.js",
+        "tests/settings-page.test.js",
+        "tests/sound-music.test.js",
+        "tests/sound-policy.test.js",
+        "tests/soundscape.test.js"
+      ],
+      "existence": [],
+      "inventories": [],
+      "contracts": [],
+      "reason": "逐根独立证明输入范围；未知根不能借其他测试的fixture契约豁免"
+    },
+    "groups": {
+      "code": "4d820a58c6c9d5a2c809a20fcc299f6ea5641bbb6a264277c07860f4691126bf",
+      "docs": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "state": "32c19ab30631e80a2b98bd273bb8167766e4aeba36457225610823eec9951a74",
+      "environment": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4"
+    },
+    "limits": [
+      "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+    ]
+  },
+  "after": {
+    "sha256": "1b98b57374ebab021d4e2eb261fb88c59918be49c8937e60606f709ddebf0129",
+    "manifest": [
+      {
+        "file": ".githooks/pre-commit",
+        "sha256": "47893464ecbcb80013cbd41db3db5cd3db5c7429a0cbffc9dbb0e6912ba52068"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-full-repository-review/task.json",
+        "sha256": "56c99a5e2f865aac7d3651fafd2c4bc771b87034342b4b92c51284c0f6fbf817"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-lean-workflow/task.json",
+        "sha256": "fb10db8484d2015531c6f50d1142e56d40b78114f3c470810f54d0cec377b00f"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-workflow-review-fixes/task.json",
+        "sha256": "7529efb752cfe4d3875ab415597adc4b88f63bad9ee9c8885aa9ef9a7b37d840"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-1/task.json",
+        "sha256": "87f5c33558af6f52c7a50b9fe86f8f5133ed0a58b3e9ef380ca53fc604a9329b"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-2/task.json",
+        "sha256": "6bdb06bbbf26bcbc029e167c0d6a6bd21420e098e2c4329f96035d3de72bd902"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-3/task.json",
+        "sha256": "852fcd7f7a2da7e7ae70951eeb352d3e4c882112f900c9d052fd15d24c314ddc"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-automation/task.json",
+        "sha256": "ee4018aad4f0e98cd82c9104476a6c217e7000b8e42e1531ad4a39c5a87749ae"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-decouple/task.json",
+        "sha256": "2250963edfa165dea21d46d679d03c2b1295f30cbd47fd09da74cdb3c958f27d"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-redesign/task.json",
+        "sha256": "d6c88a124e7d714f29e28fe61a86e0d8a528b42a21575aa437ac7ec4097d445c"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-production-research/task.json",
+        "sha256": "bb2934f113227ef9b03071f2c7656e0a61b320a13c3b59e751e7917f8a4f3c27"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes-crossplatform/task.json",
+        "sha256": "af714f27e7067293f4b2fd00ab38b9d476650e6342c0c971b1533c5fe9507167"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes/task.json",
+        "sha256": "4bf05ca76394be31df66ac841a98b6e8a6c9c1a93b0bedcd7f4d012a3cdaf0a3"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-review/task.json",
+        "sha256": "cefc4ecf8fe895d9bd322122b6d380660e6d42b2df0f10e98eb3e119973f7586"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-v2/task.json",
+        "sha256": "776320fc8065871d96b6bce0c0806e325518717ed0b20e09077ca77539e9274c"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-experience-art-plan/task.json",
+        "sha256": "e3ea75d9bb5fbf657664cfc0521e93bab1381b735647a7a4fcc9224939ae605b"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-experience-art-exec/task.json",
+        "sha256": "5751581ca69fe5ba1d81c4d803fe01cce046b85d15a55887f58c031ad626ed0c"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-home-art-v2/task.json",
+        "sha256": "2f4eb76b9c9594d7594f6dd04127dd44035204ed9c4a394d2f646ac112de63ea"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-home-layout/task.json",
+        "sha256": "6f74540ad681ec952da2e8ec1d49b36b8321cfce09319ce6508d3046731febf6"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-xart-z1/task.json",
+        "sha256": "6c872e2e62530e22818ef3bbf5c49343a206647ec59dac0523184f2de4a676ea"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-1004/task.json",
+        "sha256": "3179b2f8a0919fe52a1b5f7b77156c057e91eed06ca04cacbce78cdd6d99cfe1"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r2/task.json",
+        "sha256": "e20177c47ef50180968058350a01d053d0869912d33424bd93d3d3f58dfd98ec"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r3/task.json",
+        "sha256": "8f3cfeca13faf07df5d021fb4c13c3806ae623a4c49bdd5e4f386dd03200e7c2"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r4/task.json",
+        "sha256": "6230d9073433b0c4e7f92a2a122b749af131053c529f9e25b9d10b9294caaafe"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r5/task.json",
+        "sha256": "c7e969cd6fb3646dedf66d88b7ef78b7697228aa0158a7353a5fba1f60e63c3f"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-photo-studio-unified/task.json",
+        "sha256": "5b3b6a5e64dcd00a1db4ec607585efd0dd1219ee36f1c2dc421b64d75afb2f01"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/task.json",
+        "sha256": "beff569b4672957dfd05f7bcd9be0b557ce9723e57027db0f8820826c0e2671b"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-xingyue-fullmoon/task.json",
+        "sha256": "b2cc8f2eb4839568fa83656113c07df3fa01dc10619e285081754a2f06b8d7e8"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-xingyue-wind-song/task.json",
+        "sha256": "0a5ee0d13ac9fa61bfd8e8202c059a95e28351c884d3609f1287256a7f05529c"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-card-ally-redesign/task.json",
+        "sha256": "cb1eb9a7ae68374d3ddf23c96c4433e7d8e4013e0d7bc5ce926269f2c7066ce7"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-music-independent-review/task.json",
+        "sha256": "5268a56c5bd8b6aa9b060a0ce58de90dfb204033a43887571565c56f03fdb16c"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-wu-parts-full/task.json",
+        "sha256": "eb37eee3cf2cf597442a9b163009b055289f01ca7712da63e01f212a27fc8737"
+      },
+      {
+        "file": "docs/PARALLEL-REGISTRY.md",
+        "sha256": "50dc6f0e5354a21eb9bb7d341525f26ec24f3f04a46475a7a554db6757d1802a"
+      },
+      {
+        "file": "docs/PENDING.md",
+        "sha256": "1e349ba6e25129e319b1c27478fd1d61cee6ae7f88cbbaf4be8774ab4103d704"
+      },
+      {
+        "file": "docs/STATUS.md",
+        "sha256": "19a7d521b20bc2639d4aca9f4c6ea6aaea649b7cd1b0ff4758acde485ef4c791"
+      },
+      {
+        "file": "eslint.config.js",
+        "sha256": "e29079fdc795c560e4ba742018455f2ba098192581ef847bb3f6e2a32bda26ae"
+      },
+      {
+        "file": "game/css/beginner-guide.css",
+        "sha256": "62a9299eea2de5fe23258497303277af3d1c0b0440f210add8423b026794bd73"
+      },
+      {
+        "file": "game/css/combat-feedback.css",
+        "sha256": "90157af53f476b7f558afb4c05d00e887e8224d5217d475fcaa519dd23722476"
+      },
+      {
+        "file": "game/css/home-scene.css",
+        "sha256": "e3e3eb8e75fb2e070ab428ef4dcf646f4b13755ea4a4a495766e048d7d499493"
+      },
+      {
+        "file": "game/css/page-loading.css",
+        "sha256": "a42fb3f5b7f899c1652b74dd1a508fc63aecdbc6cf2eaa1cafc6068a5a554f08"
+      },
+      {
+        "file": "game/css/photo-studio-unified.css",
+        "sha256": "bba5c749be4a72812a14558e1c678b4fd595ab4e12e36f66aa1293c2e79e771e"
+      },
+      {
+        "file": "game/css/preparation.css",
+        "sha256": "80ad14dec4da220535ec52a71568b1858111eed6ff7771d70b79d72010e13cdd"
+      },
+      {
+        "file": "game/css/title-achievements.css",
+        "sha256": "60042fcc74db0ec878fcdcd968b8a6a3be3d77bc9a0c667a463cad589e877008"
+      },
+      {
+        "file": "game/data/achievements.json",
+        "sha256": "feda8996c2f7827f75d3b14769aff4feb3530acfe113f51a3a6fe8d2246de13c"
+      },
+      {
+        "file": "game/data/art-mapping.json",
+        "sha256": "a09c4688774fb432256e78b553a5bb4f7d99ec7ec038647db035bb547897105c"
+      },
+      {
+        "file": "game/data/beginner-guide.json",
+        "sha256": "c4fa00e16ab57647217e1489b5247b1aa49b09c31ac61b258fd3699039db470e"
+      },
+      {
+        "file": "game/data/card-notes.json",
+        "sha256": "61019fea1f1a74da04a93772b2aa51430b4a2480f6d1331c6ff3c3064f334df4"
+      },
+      {
+        "file": "game/data/cards-sync.json",
+        "sha256": "d2f38387dd0c49ca90628aeea5334790286de906838b34e6c7aece0652511244"
+      },
+      {
+        "file": "game/data/map.json",
+        "sha256": "eb2d7147fcd422c06c64d09824a508a6272c166ba034802663087ed3b4dfdcb8"
+      },
+      {
+        "file": "game/data/pets.json",
+        "sha256": "3f9b1a714e1a6643b802a73cba270b92f9188ce307615251396177276894a20f"
+      },
+      {
+        "file": "game/data/scenes.json",
+        "sha256": "db4b986d110bae604a1ffefb99365040a0393c356b2dd7d4baf5ccac4db3bcf6"
+      },
+      {
+        "file": "game/src/agent/agent.data.js",
+        "sha256": "f5b4138c9ef0c6996c53ac811d06f486633293f1c1ff20cb044e88267d0d3c10"
+      },
+      {
+        "file": "game/src/agent/agent.recorder.js",
+        "sha256": "f55264595076a1b7f6b4c6c6727429bd4c7bf07a61603148114864024987f163"
+      },
+      {
+        "file": "game/src/agent/agent.stats.js",
+        "sha256": "6e0791d7ae899c39d9185a05663922b3c66b76dd4f31de72fe045a362240bdb5"
+      },
+      {
+        "file": "game/src/audio/sound.music.catalog.js",
+        "sha256": "2ba70951c9c662a5e22819af69f297c6f4f0c93f387ae225e1f163c73df1cd1b"
+      },
+      {
+        "file": "game/src/audio/sound.music.player.js",
+        "sha256": "c07ee3881d2995cc52ca1ae6905cf722e542abbdeada276a974163c7062e09a3"
+      },
+      {
+        "file": "game/src/audio/sound.policy.js",
+        "sha256": "bef908c7cfc155e491104959902607ba776c787b2297e8e05c584d3d7d10c9e1"
+      },
+      {
+        "file": "game/src/audio/sound.scape.js",
+        "sha256": "d6aa9b4d4b11568743422bd1f8244bec874a0a0039807b30e651dfc0c2e54dc8"
+      },
+      {
+        "file": "game/src/battle/bag/battle.bag.js",
+        "sha256": "b356157ee6f48ec3c94eab0a69afa05b5b17c9b8bd140a4fcb6a98190c6aea94"
+      },
+      {
+        "file": "game/src/battle/bag/battle.deck.js",
+        "sha256": "6eeef7be98dbf5f244507e9361d4ea1231d2aea5d3fae8b9d0c32440ec23f934"
+      },
+      {
+        "file": "game/src/battle/bag/battle.equipment.js",
+        "sha256": "cf6200dac1dcc2a4b392003d608ab005655462f80bed9ac0016f5d114057cd74"
+      },
+      {
+        "file": "game/src/battle/bag/battle.piles.js",
+        "sha256": "c73f6cdbce9f33ac4e0b975ef12e69edf0b0ebc9749a6097dff48ec6db515067"
+      },
+      {
+        "file": "game/src/battle/bag/battle.slam-skill.js",
+        "sha256": "00149c4b48aad31725661788029da85df391743957d5ef63e8f11515d5718f2d"
+      },
+      {
+        "file": "game/src/battle/battle-loader.js",
+        "sha256": "5c7259185a6112677098083627dd84d3c4205db75b749d5ebe4d869a1fc0bfc7"
+      },
+      {
+        "file": "game/src/battle/core/battle.actions.js",
+        "sha256": "006a741924d4fddb9bd5a1c3fc531a1bc2ffa62df4f44c6a1c0e528f105a02e9"
+      },
+      {
+        "file": "game/src/battle/core/battle.core.js",
+        "sha256": "82a40f6f78c93dad5ba0268b522133340f4633bd2ef77de6c09d49512f3f1387"
+      },
+      {
+        "file": "game/src/battle/core/battle.draw.js",
+        "sha256": "97189e31d7744d9ec3d8d897ba93c91c53611a904f9b56cdb3b252ca6c37244d"
+      },
+      {
+        "file": "game/src/battle/core/battle.enemy-intent.js",
+        "sha256": "e0c4c523d0b852409158052db7cf533601196723324c0477416c60c0b1626f91"
+      },
+      {
+        "file": "game/src/battle/core/battle.enemy-phase.js",
+        "sha256": "54c21eced3bd5d85a4082700ab75e38394a1ae1a04cf23809747a4b0af0b513d"
+      },
+      {
+        "file": "game/src/battle/core/battle.engine.js",
+        "sha256": "757a438d5fc0eff0a78ab07f20f15f893108583caf8ea8083981b86e2ea95f09"
+      },
+      {
+        "file": "game/src/battle/core/battle.exec-play.js",
+        "sha256": "a79700295ec6c11681733f6c3b1610319aff023847a942410e6a44461d49c9ec"
+      },
+      {
+        "file": "game/src/battle/core/battle.foe-lifecycle.js",
+        "sha256": "cfea4347155fecac205c7469ea6c42b8e54d0b59942fd88431f827194502ce4b"
+      },
+      {
+        "file": "game/src/battle/core/battle.hand-selection.js",
+        "sha256": "d6d7edfaa983453f6e073fe79a7af63f7eb32d896dca4c54001364bc0a1e26a9"
+      },
+      {
+        "file": "game/src/battle/core/battle.hand.js",
+        "sha256": "170dee83e1fa34d7d86130247429bca9c14d7ba1994307265264e0be79ad3468"
+      },
+      {
+        "file": "game/src/battle/core/battle.lifecycle.js",
+        "sha256": "86730f1988da4bbaad12379c629d772e737f50438e7da487a91d3cb716b12ae6"
+      },
+      {
+        "file": "game/src/battle/core/battle.resolution.js",
+        "sha256": "cea1e2076b1cdfde3f04a72b6c4d0b4f5a97289058557bf4b497f11b3aa54925"
+      },
+      {
+        "file": "game/src/battle/core/battle.selection-flow.js",
+        "sha256": "d22ff43b972dd3f1725af2f1c93df23623b02e107a0b5f312c674443a2c70845"
+      },
+      {
+        "file": "game/src/battle/core/battle.target-session.js",
+        "sha256": "40dc80eba1799f08232ae5f37e3e2db7fbe2ef444191df86e90bc2e0c4473e76"
+      },
+      {
+        "file": "game/src/battle/core/combat.js",
+        "sha256": "99e145c0d8e2410cb99477f5bce6eccc244e16cd2f29195d80d2418bc60db1b2"
+      },
+      {
+        "file": "game/src/battle/effects/battle.card-cost.js",
+        "sha256": "2c5d1592a719e30864f2692ed45bf6ed881572f574fcb0e2acd92460ab8d7f59"
+      },
+      {
+        "file": "game/src/battle/effects/battle.card-inspection.js",
+        "sha256": "6e2b1876d88d90f685a0ecd23330b58dc5b93333107d28c3014c312d7f6f1f48"
+      },
+      {
+        "file": "game/src/battle/effects/battle.discover-candidates.js",
+        "sha256": "0c6d781eb98dcdf9b89af3fbe6b966ae4f9dde84e404ab3be0ec228c0c33320c"
+      },
+      {
+        "file": "game/src/battle/effects/battle.discover-flow.js",
+        "sha256": "21eae1aaa5a5e22d28bd8514806c37f92666ee6219146c8e63b99533c9710fed"
+      },
+      {
+        "file": "game/src/battle/effects/battle.discover-state.js",
+        "sha256": "455e957d690b0c1c063d7cfd571ab92bebd90cb272ba2727ce828ca834bfb049"
+      },
+      {
+        "file": "game/src/battle/effects/battle.effects.js",
+        "sha256": "7f20447ebcbf21f7f6ac4bd7ea88947de0300792f596f2c60b14d32649b65647"
+      },
+      {
+        "file": "game/src/battle/effects/battle.hosted.js",
+        "sha256": "c058b2b8306b1ff2a7416096792c655440c4b9db7b7af60141773fe06847d394"
+      },
+      {
+        "file": "game/src/battle/effects/battle.rule-guard.js",
+        "sha256": "6d8de0843c29c63a8e23c24ce2c8adec7acc931183fa229e5e1db6507680ebcb"
+      },
+      {
+        "file": "game/src/battle/effects/battle.target-rules.js",
+        "sha256": "49a22148c9a3c02c6d24a8021a800badb478f6d972a86222bd98c6ee30b6a43b"
+      },
+      {
+        "file": "game/src/battle/effects/battle.triggers.m2.js",
+        "sha256": "5d61f2d702f602000a4024c375bb3380f4874002c1ad39b90445fc2538de4180"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.audit.js",
+        "sha256": "7f5933d3ffceb917cce2414ff8343e86addfa550758a151552a69f946d4571e3"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.ctx.js",
+        "sha256": "1f9644b4c9956888d5663ebe578cd9093fe7b1b3850e105cca23d5e6fad7d05c"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.curse.js",
+        "sha256": "dd10ce940de63089488a36cf9ca8e182b8824319f550354726c72380fb9475fd"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.damage.js",
+        "sha256": "6aa2db75ed1fa82db13b1768f62591c6a734b0a08d1c1ceb7d38120a5db615f6"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.deck.js",
+        "sha256": "6b3143e8782770df7be6fab75a69b299783e3db22a22e2b42006b3cb14edc4e5"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.gates.js",
+        "sha256": "c9bb3fb47288769776dfd2e2308d04abb21df1a06e93038d1dff94bea0600ca0"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.js",
+        "sha256": "842685028a84f07d8a8f3c4f161fd516a5f0f212b9c8794a052074a32de507f3"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.kills.js",
+        "sha256": "7f4d899962462a2f67ca3d154b8b66ce65ec8e5ec490cb2d59eeafd4850b454f"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.m1.js",
+        "sha256": "3170b0844fd16db35f942b00c6f95ea7ace9b61883893ed9a53371aa35560de8"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.m2.js",
+        "sha256": "7457f3759285df66dd0133681c7832e1512b45567339b42c292d016dcdf717e4"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.recovery.js",
+        "sha256": "e4c8950f2bf2a0ec79209ce455977e572eb774a4b0c1bd7c310168661d42141a"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.rules.js",
+        "sha256": "d3a65b037ab591f5cf73a5f7d173f29d17c0bee57f5011b779371d48f83ea973"
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.tail.js",
+        "sha256": "1c767d3a1c64e37567f46ba789c25fcbc6e82df127c9464281acaadea05ed1d6"
+      },
+      {
+        "file": "game/src/battle/effects/effect-verbs.js",
+        "sha256": "4612d5a01fc1d0a12c2bca7fc0eb5bfebaa630d4e96f21e6898c8a38f6cdd78b"
+      },
+      {
+        "file": "game/src/battle/effects/hand-cost-patterns.js",
+        "sha256": "a7a0a6bee19c9118a3b2f17ecb4b8f2062ee220cbe28deee67b57a512619b4c6"
+      },
+      {
+        "file": "game/src/battle/effects/hosted-catalog-index.js",
+        "sha256": "f09545cf3da650239553f5d30e9855924ce44d393a536d65088febd723c382bb"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.action-runner.js",
+        "sha256": "5002dc43d8e71c8297f95f7a6a4789448fb1eada7b02577b98ab1011402ef549"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.clock.js",
+        "sha256": "4cf28cc500a6eefba06d8aec960f8673e2396760d54d68db7aed2c7db78709a5"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.execution-session.js",
+        "sha256": "aaf29d7cf135c43a377e3dd5da08707dc1de9db33d83cc049f39b05f2006153d"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.pace.js",
+        "sha256": "ed4a0471a09561a605dbac9d16f60451ef8b1a3b88ab9594e3cb39d8ab3b3feb"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.runtime.effects.js",
+        "sha256": "4c078b33109fd1e3838613d8c50ae1c7cdfe7bcf3199578a3ee7e008d4db1e7e"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.runtime.interaction.js",
+        "sha256": "685fdbfb883d7da35d7203a01d1d316a646ef11099932ee86d2c7ea49e37106b"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.runtime.js",
+        "sha256": "bed419162b81a2b54a32484e8963e32f7dc7a37fa5283b61eb8d61dd6a539632"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.runtime.piles.js",
+        "sha256": "9d8f61605b27084ffebd2c700184a7304bb6f2a72252e57da92f4c14613cf0bc"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.runtime.presentation.js",
+        "sha256": "27aebed4ab68e551e6c3ab09830d837982ba209fdfdcbba7a0099b62edd4e16e"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.runtime.session.js",
+        "sha256": "04997b81ef6e9755ac74ba88673a9235c35668ac156df83a0d59485e434513d4"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.snapshot.js",
+        "sha256": "bd881a046ce94dbe94187bed9b51398246d48ed2836af4ed3bb163c3e9096810"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.staged-playback.js",
+        "sha256": "29134624d1a0203b4f32eba1c0954fa13a5fbded435c85e3fa5d35e9fbbf8995"
+      },
+      {
+        "file": "game/src/battle/runtime/battle.state.js",
+        "sha256": "14c3b2edda788adf278460e9fbd7dcb327c5094eb88938f04331bd1cf7a379d5"
+      },
+      {
+        "file": "game/src/battle/view/battle.aim.js",
+        "sha256": "e2b90915116a8747e8b514ab2bd5a3d000c786d18298de07e291f70e12bda2f4"
+      },
+      {
+        "file": "game/src/battle/view/battle.anim.view.js",
+        "sha256": "425f75ac656e1fdb881ad62a76c22a4491ca6c290a550cf840a67daf8eee0b9d"
+      },
+      {
+        "file": "game/src/battle/view/battle.attack-cues.js",
+        "sha256": "b47072848f56c56254d2d476d5aff2643fc1a65594f8874725b86386f33b0f01"
+      },
+      {
+        "file": "game/src/battle/view/battle.feedback.js",
+        "sha256": "a90def0ae8cbee51a0c82b3acb2d8853795f91d5c7fa4362e817826f416b9a16"
+      },
+      {
+        "file": "game/src/battle/view/battle.frames.js",
+        "sha256": "225e0f78356db1c75acd5524248d2f0efe4a424afa44382272651abf900e8e16"
+      },
+      {
+        "file": "game/src/battle/view/battle.hover.js",
+        "sha256": "8738da029e0deca12ea2d5054b3800a7ab8fc2674dc9620f8db2e8040025b442"
+      },
+      {
+        "file": "game/src/battle/view/battle.intent.view.js",
+        "sha256": "c2ff4f02f246f330d6b64c2ac2a8dd25b480e769f171abc0376172f9ac2c37b5"
+      },
+      {
+        "file": "game/src/battle/view/battle.layers.js",
+        "sha256": "f990835830cbf8b92ccd603f53d7b5fbd67bc5bdf7836e9b161d33897533b721"
+      },
+      {
+        "file": "game/src/battle/view/battle.overlays.js",
+        "sha256": "4e7ee00e4960140de76e8e50394a0e78490609ebdece66fd8f231fdff9dd19e6"
+      },
+      {
+        "file": "game/src/battle/view/battle.piles.view.js",
+        "sha256": "afb13e4686087a47a17bfa50c48f1872842b6ad4ca5487929f60fdb514691169"
+      },
+      {
+        "file": "game/src/battle/view/battle.preview.js",
+        "sha256": "e5ad2df05da767269e5224aa73ab26da5ac8c3b46d1db0736ab17d2a4281432e"
+      },
+      {
+        "file": "game/src/battle/view/battle.vfx.js",
+        "sha256": "43e9b4514b2cbf9710dc5e46442483c985ae2e310f9f2ea6c30fa3f080e99a4a"
+      },
+      {
+        "file": "game/src/battle/view/battle.view.js",
+        "sha256": "5ec9781afbdd12f869dddd1a7cb9f4d76d692de6c5d8046e93cd10c0e617f72d"
+      },
+      {
+        "file": "game/src/cards/card-photo-notes.js",
+        "sha256": "5b7a45b03b171c02f4b640dc5a87f84ac1dab74849fe9cbf2ef0684404ddc594"
+      },
+      {
+        "file": "game/src/cards/card-rarity.js",
+        "sha256": "155b338a000e571eb58e29905bd2a631a95edb2846da35f963703b4f912151a8"
+      },
+      {
+        "file": "game/src/cards/card-render-context.js",
+        "sha256": "5520443debdf12b82befc015e04765052642a6b9af99a0a502992c4e3de9ad4b"
+      },
+      {
+        "file": "game/src/cards/card-rules.capability.js",
+        "sha256": "4044acfd52099325ff5abf324951e3e6c0e49782e92653368d5a3928d9f892e2"
+      },
+      {
+        "file": "game/src/cards/card-rules.schema.js",
+        "sha256": "54fdcbf01911f895cb07aeb39547beab7d07eb363436c5a5b4776e4d8b1db908"
+      },
+      {
+        "file": "game/src/cards/cards.catalog.js",
+        "sha256": "8be4bec49c82b5e3bb023be7fbe623fcdbb82ace680100ae477cb917b981a823"
+      },
+      {
+        "file": "game/src/cards/cards.data.js",
+        "sha256": "449232a280692897ae14db7c568eff2ab2918c212963902f0f160e954e57526f"
+      },
+      {
+        "file": "game/src/cards/cards.view.js",
+        "sha256": "b0475d731f4516efad0d14f7c1cbfad92c83e3e9883d782c16ac9d10587e9b7d"
+      },
+      {
+        "file": "game/src/cards/mech-sentences.js",
+        "sha256": "fe7cb590cee930fe795de5bcb0e94bfe5d4e76d74f2c0d6ded0d9e1b2fed1061"
+      },
+      {
+        "file": "game/src/core/art.js",
+        "sha256": "917fa8978c06605664cc0c9e7aa57acfab745cb94973d07a5f3f6ed20c639f77"
+      },
+      {
+        "file": "game/src/core/asset-url.js",
+        "sha256": "0e4dd4ec75c58e74f6fc1d853db2156177c91bf15cc015212c21b51e96888bcd"
+      },
+      {
+        "file": "game/src/core/characters.js",
+        "sha256": "debf1abce843de26a49adbfaab9b2a8190740939c61bd3ae03a0fe6502afdc7c"
+      },
+      {
+        "file": "game/src/core/data-loader.js",
+        "sha256": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be"
+      },
+      {
+        "file": "game/src/core/diagnostics.local.js",
+        "sha256": "aaaf2af15496b426c6bfd974cbff3ab91a6d1bbaa1736202f143d7bcba0f03da"
+      },
+      {
+        "file": "game/src/core/event-bus.js",
+        "sha256": "76cc1a8023d1330c386c1e2392525d4d33882b21aad6d7485822660d630c0740"
+      },
+      {
+        "file": "game/src/core/map-reveals.js",
+        "sha256": "891511c20e01c1316264147d56dbf7ae830e99af42ec1ebee4feb0c670c7e4cd"
+      },
+      {
+        "file": "game/src/core/mapData.js",
+        "sha256": "cd140f6f0876fd4f01aec10019e2a51a76398d7642526f52fafce77772eb9bf7"
+      },
+      {
+        "file": "game/src/core/motion-primitives.js",
+        "sha256": "ff13e1089b25de9af60b70da0e30d1badae577ac2b85df4c308c8a18ff2240d7"
+      },
+      {
+        "file": "game/src/core/motion.js",
+        "sha256": "d70f9e42c714b60d9d3e01e6762c6c723a8d5b8eec0757f8571aa51aaa320653"
+      },
+      {
+        "file": "game/src/core/node-info.js",
+        "sha256": "90160256d8fdf30359927ba5ac49673971969dea432ab46ff270949558ecfcfd"
+      },
+      {
+        "file": "game/src/core/performance-budgets.js",
+        "sha256": "35972fa6e3fd93f363f9b7b53fe2c05f8c44d9a73ecfddc7a8ad0bc7934ae7e8"
+      },
+      {
+        "file": "game/src/core/random-core.js",
+        "sha256": "177382f86d8e810a76428bc7aaae450a0b0e3811490220e9d8dc1a39db58b174"
+      },
+      {
+        "file": "game/src/core/random.js",
+        "sha256": "cbc6ade0393a77dc838fea3d5833ae771eb51825f9d3a06644b100a449542923"
+      },
+      {
+        "file": "game/src/core/render-scheduler.js",
+        "sha256": "a698340dc9a192991d00a53dfea5b27c21f2fc3bbee330c0834643670ad19c32"
+      },
+      {
+        "file": "game/src/core/rule-config.js",
+        "sha256": "7976d367bf8a8313f197f489cf923cd0a014914a33f46111100daf55fd2dbbbe"
+      },
+      {
+        "file": "game/src/core/rules.js",
+        "sha256": "ab76d311c8428e045a2219ef2c294492ea31c514046744e6c571e37384e611d5"
+      },
+      {
+        "file": "game/src/core/sdt-facade.js",
+        "sha256": "52c174eb79457cf0f215420b0503e572fa228c4d33c8f34b9b637efd338d433d"
+      },
+      {
+        "file": "game/src/core/shared.js",
+        "sha256": "2687bcc33d114eab4700663ffdda962e783a8c9125da5c3de29323e8f6f9e9ad"
+      },
+      {
+        "file": "game/src/core/storage.js",
+        "sha256": "011a7e5d2fc8446f626981322b986d6bae954a4cac709d9d381d3bc6d27a49fc"
+      },
+      {
+        "file": "game/src/core/turbo.js",
+        "sha256": "576dbe1bd94981696971a4fe65a8b81c3755b128f15be8dc36842b44f9ad25ff"
+      },
+      {
+        "file": "game/src/generated/art-manifest.js",
+        "sha256": "5ad3802b827b00f84a099864ce9872072ab0d4293dd4b418c4749967f2fd3a02"
+      },
+      {
+        "file": "game/src/generated/thumb-manifest.js",
+        "sha256": "0256caf541b91f12f1cc84d222158bb1bd69b22c3721b19c3f94a1b5080bc1d7"
+      },
+      {
+        "file": "game/src/home/home.catalog.js",
+        "sha256": "a0722309d6cdcec0e95f3a2c79b8cca3480a4482a468a000f491c75f7171b869"
+      },
+      {
+        "file": "game/src/home/home.commands.js",
+        "sha256": "e36ea8c36851c7b80047ef4374392f61a4184acb42782ab92ac93b5311fd9714"
+      },
+      {
+        "file": "game/src/home/home.presenter.js",
+        "sha256": "885923c89a44c237010830dbd037602c5bae1552fec40f65a03d30efc8066b88"
+      },
+      {
+        "file": "game/src/home/home.scene.js",
+        "sha256": "abbbd5aaabc4afae047302bc2e7bd62858fbc7a6386b1505e60b46dcbe957604"
+      },
+      {
+        "file": "game/src/home/home.visuals.js",
+        "sha256": "d2b08f30fabf9a98c1f2760dbe72de47586b1a6206b679418578098b3f759e1b"
+      },
+      {
+        "file": "game/src/home/story.last-lamp.js",
+        "sha256": "6ce80c708c9c2d760abd0cb08215f4e75de644cbf51c7aa9ff563ae670df1cbc"
+      },
+      {
+        "file": "game/src/hub/bag-return-hook.js",
+        "sha256": "855b5c061bbf2c3aa57a4e2ba2f98849da3e2e8d98e7d17afee7c06c0081e9c9"
+      },
+      {
+        "file": "game/src/hub/base-departure.commands.js",
+        "sha256": "bbe418b489490e7bf8ce90d0bfbc1dc5279ec504684a0283ed2e31ade2ffe72b"
+      },
+      {
+        "file": "game/src/hub/base-economy.js",
+        "sha256": "d39b7920f233156b9c036d33e700fc61222e2eb103e83799f76b7c0d0316f21d"
+      },
+      {
+        "file": "game/src/hub/base-elapsed.commands.js",
+        "sha256": "6b47872c47a2ec728025745a0e356dee9ef9e98b6a7a81ca9250b87c1180b514"
+      },
+      {
+        "file": "game/src/hub/base-meta.commands.js",
+        "sha256": "43c53e3edf5d48dabb979e3c94d36788d17acfd3a5e74fc058ee5d898af0476a"
+      },
+      {
+        "file": "game/src/hub/base-mutation.js",
+        "sha256": "88601f7a606e91275a692e929d96697b80ad88512b4ccf53b0a4ced14e6050f6"
+      },
+      {
+        "file": "game/src/hub/base-pet-egg.commands.js",
+        "sha256": "44066ee38c5d7bd85497486c30fa05633bfde139d406c04b374808fa04b82b79"
+      },
+      {
+        "file": "game/src/hub/base-progression.commands.js",
+        "sha256": "80c520a6179c650bab60315face2c0f52894a4622e5c92a83100b185ef9e4cbf"
+      },
+      {
+        "file": "game/src/hub/base-state.js",
+        "sha256": "688a223b3cd42ad696016e8ccf1ca834936bb43afb9fdaae0a8dcb5bcc60ed91"
+      },
+      {
+        "file": "game/src/hub/base.commands.js",
+        "sha256": "b7bed97ec524345f308249f4d9791bafbae6fb25f2dfee025150d69792a700e6"
+      },
+      {
+        "file": "game/src/hub/base.js",
+        "sha256": "34c485c2faf36d8d57bbd59c505bb144c866578f916a302da0955822ddda588f"
+      },
+      {
+        "file": "game/src/hub/collection.commands.js",
+        "sha256": "9595d570e3d889b21aeab9817c948c5e4e5b68aa3c3135e31dcb05b4d91ac6a2"
+      },
+      {
+        "file": "game/src/hub/commands.shared.js",
+        "sha256": "6100ca4b1f3624e49fd0c27a2b21373baeb462f50d1d84f13a85e3d6438ca88b"
+      },
+      {
+        "file": "game/src/hub/departure.view-updates.js",
+        "sha256": "90a2804d724669117a1cdbffc72d505863f4bb2e0884385dfb03ced357022627"
+      },
+      {
+        "file": "game/src/hub/extraction.commands.js",
+        "sha256": "0772a4198a614989255590da9eda1dc29596361cc3514e834a6b40ce8de8a88b"
+      },
+      {
+        "file": "game/src/hub/game.cardslib.art-warm.js",
+        "sha256": "b4408b9db63aedb575f1ccff1c671f92f47d991592131c00034b181daed9efad"
+      },
+      {
+        "file": "game/src/hub/game.cardslib.common.js",
+        "sha256": "8573c21cb68e337c99d70fdcf6b1b1eb42add088831de2609c14af0f75af6708"
+      },
+      {
+        "file": "game/src/hub/game.cardslib.designer.js",
+        "sha256": "7991adb7c1a8e3de3266eec87b503491e6d9b65f27ca358685ebbba6f64b8cb5"
+      },
+      {
+        "file": "game/src/hub/game.cardslib.js",
+        "sha256": "4e4b8b11c26c8335fe0e57f09bf492f5b775c4aa42c1065161550126b7c008a5"
+      },
+      {
+        "file": "game/src/hub/game.cardslib.page.js",
+        "sha256": "1bc1dc9f9e5ee08f4f0d443431f466f5e5003f4b397ebb1178c41c37b6736876"
+      },
+      {
+        "file": "game/src/hub/game.cardslib.photo-fps.js",
+        "sha256": "f088d8a2da767bb6491274dc9f2f8b6e6845743887fe1fee5bb1c035a854a500"
+      },
+      {
+        "file": "game/src/hub/game.cardslib.photo-props.js",
+        "sha256": "f9e59c92f27ec7ab58c124b098f85a1ab98b9ae71421781bf520330375b4141a"
+      },
+      {
+        "file": "game/src/hub/game.hub.bridge.js",
+        "sha256": "47c71b9495041258141c454370cca19bafe5a748f4fb2207a66705cc56e0abf0"
+      },
+      {
+        "file": "game/src/hub/game.hub.depart.js",
+        "sha256": "a43e84372c0b4f2a9ed2e105dbb19f3faab18c5d83ad3c9480ccecfb65778d68"
+      },
+      {
+        "file": "game/src/hub/game.hub.js",
+        "sha256": "ceb81ba2ddd201d1a17640d714d6623aabc7ca5770bd12bdffb6bd91b7e9a629"
+      },
+      {
+        "file": "game/src/hub/game.hub.pages.js",
+        "sha256": "0d7aee4f8175af4774339a5771adb3c63d43ee6ffadbb070e173897a7f823a37"
+      },
+      {
+        "file": "game/src/hub/game.hub.preparation.js",
+        "sha256": "e996aab5e3407ae2c1841290bf8f3c09b0e9ac55f9e50fec754f8a760a0b32de"
+      },
+      {
+        "file": "game/src/hub/game.storage.js",
+        "sha256": "bfef0205e96669582387141e4227595ea715ef0293de0da608d31968344c5d49"
+      },
+      {
+        "file": "game/src/hub/game.store.js",
+        "sha256": "c8f0abf90e41dc1279e625d6650688c281b2fc0a413ac37885b0cff58117f711"
+      },
+      {
+        "file": "game/src/hub/meta-progression.js",
+        "sha256": "b3033c3466f95142eaa221a2e2c28e2e38695d0a65d82cb15b9c3818d88d0de0"
+      },
+      {
+        "file": "game/src/hub/meta.js",
+        "sha256": "ffaa0fb64b09f0e013b74e276be07cb5b6b062db5ec1f60a4a33363a59c7586a"
+      },
+      {
+        "file": "game/src/hub/photo-studio-controls.js",
+        "sha256": "53b931b622bc784f3ac7fdc18659f4e8a360c8afe365622d73a61491113c1f06"
+      },
+      {
+        "file": "game/src/hub/photo-studio-presentation.js",
+        "sha256": "b93af0e7507faa7e70bc0b4b0c13f7b2acee17b9a37620a3135192a228e750a5"
+      },
+      {
+        "file": "game/src/hub/preparation.commands.js",
+        "sha256": "1c3ad2cb5086711e5bb795b969a88a712182424b8f1daf0d05519c2d80c8f1bc"
+      },
+      {
+        "file": "game/src/hub/preparation.sources.js",
+        "sha256": "980eeff5ae6b929b751dd60fa2a592726dda26fc21bd59b87bcf32287ea21e80"
+      },
+      {
+        "file": "game/src/hub/preparation.view.js",
+        "sha256": "59c7ffdfa21f6ddada449bea1b0640653492050c56ea25b0802591adaba7bf95"
+      },
+      {
+        "file": "game/src/hub/recoverable-pair.js",
+        "sha256": "b817a01f7961dda2eafb83e65f2fb7cde7836fc96b93a2bd119bc3bbb29bf8fd"
+      },
+      {
+        "file": "game/src/hub/recovery.commands.js",
+        "sha256": "457ad8aee4756b7f85a31f22dbb7ec7fee24498be629e273b976c687fd327dac"
+      },
+      {
+        "file": "game/src/hub/run-save-validation.js",
+        "sha256": "fd55bfffa0ea4c1b229a49bf9205522c82e5a4159fab8312d27ebc174daea4e9"
+      },
+      {
+        "file": "game/src/hub/terminal.commands.js",
+        "sha256": "d0aceac2317893b092233bb3a13bf346eeb6528da2b10b30a9290f85ed2b9229"
+      },
+      {
+        "file": "game/src/hub/versioned-slot-reader.js",
+        "sha256": "4ca1a14dff44561122a48178deb3f43a4a33a8758e1de976c147dcb6094b689e"
+      },
+      {
+        "file": "game/src/run/encounter-selector.js",
+        "sha256": "a7533515ede020fdb82a5dbf488dea9d411224b329239897085d1f45d8855398"
+      },
+      {
+        "file": "game/src/run/expedition.view.js",
+        "sha256": "c55cf92bb8340afaccc71807a768bc7afd2913de43ea2b9f5d1d8e144c6bb335"
+      },
+      {
+        "file": "game/src/run/game.run.altar.js",
+        "sha256": "e1441fc95666999afc9cc4c658c3b2c32bd84c0da433546089ea841b83280fc3"
+      },
+      {
+        "file": "game/src/run/game.run.data.js",
+        "sha256": "2641bc455633bf7a336608b0b36d8b40db295411e3db5e9a3551351c488754eb"
+      },
+      {
+        "file": "game/src/run/game.run.scenes.js",
+        "sha256": "9d6acf341bc867009ab726ffdb1c06866e47c0b84de74ae08f59c024ade10d7c"
+      },
+      {
+        "file": "game/src/run/game.run.shop.js",
+        "sha256": "084fe819432ebcdc08b24ef869f91ea1f7546b0d299aa5bd590791d1d28c6320"
+      },
+      {
+        "file": "game/src/run/game.session.bag.js",
+        "sha256": "655a936af21410617d6e7d7306cf283fda6119e9688c92f15c075530b5685b2b"
+      },
+      {
+        "file": "game/src/run/game.session.board.js",
+        "sha256": "558f0d92456c383e4bcb0834d02185266ff316615a3ec8ef49ad5ee46f5927f9"
+      },
+      {
+        "file": "game/src/run/game.session.death.js",
+        "sha256": "c47967d864068927c50f4e584dd72e64eb5bd4a17df67954d20ea39f90ef834f"
+      },
+      {
+        "file": "game/src/run/game.session.js",
+        "sha256": "317f2657d4872c8197bd7511ba32c21f6f56acce01ef937e6ece2e022d03253d"
+      },
+      {
+        "file": "game/src/run/game.session.kernel.js",
+        "sha256": "6a6c52571458c2f2ed93b07e80d0b18abb8aa798c461c23d5884898428ba34d7"
+      },
+      {
+        "file": "game/src/run/game.session.map.js",
+        "sha256": "47452660d3e100cfc726989be28eefea8953e0acb84a0c02ae234c1f0c958035"
+      },
+      {
+        "file": "game/src/run/game.session.modes.js",
+        "sha256": "97bdd16eefa10e6b3e9144299f9920f62cafc15ab117ec2c3f55f05da33fb2a7"
+      },
+      {
+        "file": "game/src/run/layeredMap.js",
+        "sha256": "679e59f0cf4fb2c264ecf0838a1eda9b83ab315ed31b054b32f4816d5c18cd35"
+      },
+      {
+        "file": "game/src/run/map-generator.js",
+        "sha256": "ea8de60cdec2f9678d2fffb64610622d78acd46cbeb7b8d1f7a8ecd0b19ae0ba"
+      },
+      {
+        "file": "game/src/run/map-graph.js",
+        "sha256": "0bc103c77976a51284c74a2eabee0b6eb14061c5ee234b97ce733d37f2784db2"
+      },
+      {
+        "file": "game/src/run/map-snapshot.js",
+        "sha256": "1dbd182bf8f4a398cdb453cea0ca72cca8586f86a816cc43a6ab8271fb158f79"
+      },
+      {
+        "file": "game/src/ui/achievement-gallery.js",
+        "sha256": "67ab8917a77ed73b1a4424c7ad6a7027dae0ec38af73f3f5ef33c59dbc23b77c"
+      },
+      {
+        "file": "game/src/ui/achievement-medals.js",
+        "sha256": "003080aa6add251578a1465b8859c7a1ae4d6c4fdcb690d7300e5909b7254edd"
+      },
+      {
+        "file": "game/src/ui/beginner-guide-diagrams.js",
+        "sha256": "d2a73af72f72310b395e21efa3255258d9149aff85b4dc9035d7ac8c3afe1bad"
+      },
+      {
+        "file": "game/src/ui/beginner-guide.js",
+        "sha256": "0288d2ea7d0b1f22902e24c056600329ce999823ce0d21bff5914285d1837cd4"
+      },
+      {
+        "file": "game/src/ui/character-view-motion.js",
+        "sha256": "1f2a0e1d44f79d2f0aa7205177aac2d17b7c722767191068801750cc27f73ced"
+      },
+      {
+        "file": "game/src/ui/cinematics.js",
+        "sha256": "ded3eb8a0cb81c984fe075d68a79993c826045c0b49950212996b65e984bd7c4"
+      },
+      {
+        "file": "game/src/ui/comm-feed.js",
+        "sha256": "5928b486247fb0ccf47a5e09f6277a4000bdc4b04a762d2b0f1430e5d258a97c"
+      },
+      {
+        "file": "game/src/ui/feedback.local.js",
+        "sha256": "67c8a111f34befa452c3fddb6598ec412d29e41d4a2905c4c3a8e75490a39e61"
+      },
+      {
+        "file": "game/src/ui/game.menu.js",
+        "sha256": "ba48acb7a97e646f99563e3d56d89b754869526b223b0b69fce3fa8d0f30ff17"
+      },
+      {
+        "file": "game/src/ui/hud.js",
+        "sha256": "39a070d2b2347bb4b43d1f2496c6de037b7f106e8387a38c23d245f860a15196"
+      },
+      {
+        "file": "game/src/ui/motion-transitions.js",
+        "sha256": "b9590cb526ddf530644c551f81123328049493f8089fd9c794d207489d6079d1"
+      },
+      {
+        "file": "game/src/ui/overlay.js",
+        "sha256": "3130656bad569867b589b9d7344f4b52d023b71e63f8f2dcda46184dcc5b148c"
+      },
+      {
+        "file": "game/src/ui/page-loading.js",
+        "sha256": "3ad3a3464b2715325116db51d536fd4a503dd5c5945ff5f9431733d033fdadd4"
+      },
+      {
+        "file": "game/src/ui/route-overlay.js",
+        "sha256": "5b0547cf721ce742e63f53b552c217967553547e0ff0d4ddedf98e9fc472ebc5"
+      },
+      {
+        "file": "game/src/ui/slot-emblems.js",
+        "sha256": "635dfece03b4d22b2396c14010001f77791b4431296222262ae2145a67c7efb9"
+      },
+      {
+        "file": "game/src/ui/term-tips.js",
+        "sha256": "4191d9cccfb1626ca1186d9e58015c8f891ad31cb3daa3e45ed5ee2155cd7c01"
+      },
+      {
+        "file": "game/src/ui/terminal-settlement.js",
+        "sha256": "db5b21b4ee1be4f1889540433d6e3b8348351d19c80320ead3810125756b1c8c"
+      },
+      {
+        "file": "game/src/ui/transitions-director.js",
+        "sha256": "4b3eb63e7b8c585dba29c456032e26a19cd9cb404043c397fe1961ef1d297b38"
+      },
+      {
+        "file": "game/src/ui/ui-scale.js",
+        "sha256": "1b90f31d98c8c5435e0afa172a86a885e9820842fc46a45de52fe22c551024a7"
+      },
+      {
+        "file": "game/src/ui/ui.js",
+        "sha256": "2583f960f0c1a8873e9179a7fdce11471f2876c8ec3aaabd26c91a8474f021b2"
+      },
+      {
+        "file": "jsconfig.battle-settlement.json",
+        "sha256": "ff9c6acca637b6583dc514e35f0870e8c39aa903f758919364ca3a10c4478f03"
+      },
+      {
+        "file": "jsconfig.battle-snapshot.json",
+        "sha256": "3fb7f26a7982e73c077b006c059b9a565b4353689ad04e0e634ebbe1b46a35c2"
+      },
+      {
+        "file": "jsconfig.card-rules.json",
+        "sha256": "426fb5f7c2781a1cf9427f29d326bea7e47cde4cd9338b99b3d178593632230d"
+      },
+      {
+        "file": "jsconfig.json",
+        "sha256": "3f2e1bd99ddc0cb8eb95ef70a7818e56fbcc687a8970d4615d6319396dbc2da1"
+      },
+      {
+        "file": "jsconfig.strict-foundations.json",
+        "sha256": "7d2f1e714dc03b4a67604a3928a5d1172c5214c6fce00443bacf4e56c6668c90"
+      },
+      {
+        "file": "jsconfig.strict-hand-selection.json",
+        "sha256": "4a4b2d33af7297b95a05976e5bc81aaf0baf3e64e3b8313516013994fbf11ba0"
+      },
+      {
+        "file": "jsconfig.strict-selection.json",
+        "sha256": "a141c4996d7ed5630a222e882738c6bf22c5473527a3c9e53e82686a8bd88f98"
+      },
+      {
+        "file": "jsconfig.strict-ui.json",
+        "sha256": "a53bcb7a075a6fab45f5b1076b97cb3449e3313eca05b193da1ede8ec5695abc"
+      },
+      {
+        "file": "package-lock.json",
+        "sha256": "c72e1da1f98d590f1d4b5b4f13530020af00fc5a328c86f3a9619daa610eed73"
+      },
+      {
+        "file": "package.json",
+        "sha256": "7700e3529505ec3917cc1478cb8028afd4efec1325c158f1b3b11db38620b697"
+      },
+      {
+        "file": "tests/extraction-receipt.test.js",
+        "sha256": "5cc0367d80bab74e9315d21df33d860fe45503748bb7209dbbbb857e3b778569"
+      },
+      {
+        "file": "tests/overlay-dialog.test.js",
+        "sha256": "4f365a6030cd18b599529fd6bbaf8f94aa0c0b472e27b4195ed27758131d9c8c"
+      },
+      {
+        "file": "tests/r7a-scenes-integration.test.js",
+        "sha256": "b9dd8b0607d19e53685f9b6bdbe4ea69cc7a71cb667effb4b079ad2737f53f89"
+      },
+      {
+        "file": "tests/settings-page.test.js",
+        "sha256": "73c5fc4087586bb19cad3cd98d97e0a9aab784a5284c64adad2e5488747bdd5e"
+      },
+      {
+        "file": "tests/sound-music.test.js",
+        "sha256": "caad8031da71ca39770b12129d63d2468bab5393e0b1c5db54fc40ee6719ea77"
+      },
+      {
+        "file": "tests/sound-policy.test.js",
+        "sha256": "2cce10c47165d56215d0dd25ed1bf3fbf81d28afc254b3f86f4296a4faeb524b"
+      },
+      {
+        "file": "tests/soundscape.test.js",
+        "sha256": "3023ce71485332b9cbf1e231eddae8db19d5f43cd47edbf62d4690cb9c8c7bc1"
+      },
+      {
+        "file": "vite.config.js",
+        "sha256": "384b2fe4cc46d026e7345d309eb89ee9363b1a33403688004baa7f054dabec5c"
+      }
+    ],
+    "environment": {
+      "node": "v24.13.0",
+      "platform": "win32",
+      "arch": "x64",
+      "dependencies": {
+        "vitest": "3.2.7",
+        "vite": "6.4.3",
+        "typescript": "7.0.2",
+        "eslint": "10.11.0",
+        "jsdom": "25.0.1",
+        "acorn": "8.18.0",
+        "acorn-walk": "8.3.5"
+      },
+      "ci": null,
+      "nodeOptions": null,
+      "forceFullTests": null
+    },
+    "documents": false,
+    "assets": false,
+    "selection": {
+      "mode": "targeted",
+      "roots": [
+        "tests/sound-music.test.js",
+        "tests/overlay-dialog.test.js",
+        "tests/settings-page.test.js",
+        "tests/sound-policy.test.js",
+        "tests/soundscape.test.js",
+        "tests/r7a-scenes-integration.test.js",
+        "tests/extraction-receipt.test.js"
+      ],
+      "files": [
+        "game/css/beginner-guide.css",
+        "game/css/combat-feedback.css",
+        "game/css/home-scene.css",
+        "game/css/page-loading.css",
+        "game/css/photo-studio-unified.css",
+        "game/css/preparation.css",
+        "game/css/title-achievements.css",
+        "game/data/achievements.json",
+        "game/data/art-mapping.json",
+        "game/data/beginner-guide.json",
+        "game/data/card-notes.json",
+        "game/data/cards-sync.json",
+        "game/data/map.json",
+        "game/data/pets.json",
+        "game/data/scenes.json",
+        "game/src/agent/agent.data.js",
+        "game/src/agent/agent.recorder.js",
+        "game/src/agent/agent.stats.js",
+        "game/src/audio/sound.music.catalog.js",
+        "game/src/audio/sound.music.player.js",
+        "game/src/audio/sound.policy.js",
+        "game/src/audio/sound.scape.js",
+        "game/src/battle/bag/battle.bag.js",
+        "game/src/battle/bag/battle.deck.js",
+        "game/src/battle/bag/battle.equipment.js",
+        "game/src/battle/bag/battle.piles.js",
+        "game/src/battle/bag/battle.slam-skill.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/battle/core/battle.actions.js",
+        "game/src/battle/core/battle.core.js",
+        "game/src/battle/core/battle.draw.js",
+        "game/src/battle/core/battle.enemy-intent.js",
+        "game/src/battle/core/battle.enemy-phase.js",
+        "game/src/battle/core/battle.engine.js",
+        "game/src/battle/core/battle.exec-play.js",
+        "game/src/battle/core/battle.foe-lifecycle.js",
+        "game/src/battle/core/battle.hand-selection.js",
+        "game/src/battle/core/battle.hand.js",
+        "game/src/battle/core/battle.lifecycle.js",
+        "game/src/battle/core/battle.resolution.js",
+        "game/src/battle/core/battle.selection-flow.js",
+        "game/src/battle/core/battle.target-session.js",
+        "game/src/battle/core/combat.js",
+        "game/src/battle/effects/battle.card-cost.js",
+        "game/src/battle/effects/battle.card-inspection.js",
+        "game/src/battle/effects/battle.discover-candidates.js",
+        "game/src/battle/effects/battle.discover-flow.js",
+        "game/src/battle/effects/battle.discover-state.js",
+        "game/src/battle/effects/battle.effects.js",
+        "game/src/battle/effects/battle.hosted.js",
+        "game/src/battle/effects/battle.rule-guard.js",
+        "game/src/battle/effects/battle.target-rules.js",
+        "game/src/battle/effects/battle.triggers.m2.js",
+        "game/src/battle/effects/effect-steps.audit.js",
+        "game/src/battle/effects/effect-steps.ctx.js",
+        "game/src/battle/effects/effect-steps.curse.js",
+        "game/src/battle/effects/effect-steps.damage.js",
+        "game/src/battle/effects/effect-steps.deck.js",
+        "game/src/battle/effects/effect-steps.gates.js",
+        "game/src/battle/effects/effect-steps.js",
+        "game/src/battle/effects/effect-steps.kills.js",
+        "game/src/battle/effects/effect-steps.m1.js",
+        "game/src/battle/effects/effect-steps.m2.js",
+        "game/src/battle/effects/effect-steps.recovery.js",
+        "game/src/battle/effects/effect-steps.rules.js",
+        "game/src/battle/effects/effect-steps.tail.js",
+        "game/src/battle/effects/effect-verbs.js",
+        "game/src/battle/effects/hand-cost-patterns.js",
+        "game/src/battle/effects/hosted-catalog-index.js",
+        "game/src/battle/runtime/battle.action-runner.js",
+        "game/src/battle/runtime/battle.clock.js",
+        "game/src/battle/runtime/battle.execution-session.js",
+        "game/src/battle/runtime/battle.pace.js",
+        "game/src/battle/runtime/battle.runtime.effects.js",
+        "game/src/battle/runtime/battle.runtime.interaction.js",
+        "game/src/battle/runtime/battle.runtime.js",
+        "game/src/battle/runtime/battle.runtime.piles.js",
+        "game/src/battle/runtime/battle.runtime.presentation.js",
+        "game/src/battle/runtime/battle.runtime.session.js",
+        "game/src/battle/runtime/battle.snapshot.js",
+        "game/src/battle/runtime/battle.staged-playback.js",
+        "game/src/battle/runtime/battle.state.js",
+        "game/src/battle/view/battle.aim.js",
+        "game/src/battle/view/battle.anim.view.js",
+        "game/src/battle/view/battle.attack-cues.js",
+        "game/src/battle/view/battle.feedback.js",
+        "game/src/battle/view/battle.frames.js",
+        "game/src/battle/view/battle.hover.js",
+        "game/src/battle/view/battle.intent.view.js",
+        "game/src/battle/view/battle.layers.js",
+        "game/src/battle/view/battle.overlays.js",
+        "game/src/battle/view/battle.piles.view.js",
+        "game/src/battle/view/battle.preview.js",
+        "game/src/battle/view/battle.vfx.js",
+        "game/src/battle/view/battle.view.js",
+        "game/src/cards/card-photo-notes.js",
+        "game/src/cards/card-rarity.js",
+        "game/src/cards/card-render-context.js",
+        "game/src/cards/card-rules.capability.js",
+        "game/src/cards/card-rules.schema.js",
+        "game/src/cards/cards.catalog.js",
+        "game/src/cards/cards.data.js",
+        "game/src/cards/cards.view.js",
+        "game/src/cards/mech-sentences.js",
+        "game/src/core/art.js",
+        "game/src/core/asset-url.js",
+        "game/src/core/characters.js",
+        "game/src/core/data-loader.js",
+        "game/src/core/diagnostics.local.js",
+        "game/src/core/event-bus.js",
+        "game/src/core/map-reveals.js",
+        "game/src/core/mapData.js",
+        "game/src/core/motion-primitives.js",
+        "game/src/core/motion.js",
+        "game/src/core/node-info.js",
+        "game/src/core/performance-budgets.js",
+        "game/src/core/random-core.js",
+        "game/src/core/random.js",
+        "game/src/core/render-scheduler.js",
+        "game/src/core/rule-config.js",
+        "game/src/core/rules.js",
+        "game/src/core/sdt-facade.js",
+        "game/src/core/shared.js",
+        "game/src/core/storage.js",
+        "game/src/core/turbo.js",
+        "game/src/generated/art-manifest.js",
+        "game/src/generated/thumb-manifest.js",
+        "game/src/home/home.catalog.js",
+        "game/src/home/home.commands.js",
+        "game/src/home/home.presenter.js",
+        "game/src/home/home.scene.js",
+        "game/src/home/home.visuals.js",
+        "game/src/home/story.last-lamp.js",
+        "game/src/hub/bag-return-hook.js",
+        "game/src/hub/base-departure.commands.js",
+        "game/src/hub/base-economy.js",
+        "game/src/hub/base-elapsed.commands.js",
+        "game/src/hub/base-meta.commands.js",
+        "game/src/hub/base-mutation.js",
+        "game/src/hub/base-pet-egg.commands.js",
+        "game/src/hub/base-progression.commands.js",
+        "game/src/hub/base-state.js",
+        "game/src/hub/base.commands.js",
+        "game/src/hub/base.js",
+        "game/src/hub/collection.commands.js",
+        "game/src/hub/commands.shared.js",
+        "game/src/hub/departure.view-updates.js",
+        "game/src/hub/extraction.commands.js",
+        "game/src/hub/game.cardslib.art-warm.js",
+        "game/src/hub/game.cardslib.common.js",
+        "game/src/hub/game.cardslib.designer.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/hub/game.cardslib.page.js",
+        "game/src/hub/game.cardslib.photo-fps.js",
+        "game/src/hub/game.cardslib.photo-props.js",
+        "game/src/hub/game.hub.bridge.js",
+        "game/src/hub/game.hub.depart.js",
+        "game/src/hub/game.hub.js",
+        "game/src/hub/game.hub.pages.js",
+        "game/src/hub/game.hub.preparation.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/game.store.js",
+        "game/src/hub/meta-progression.js",
+        "game/src/hub/meta.js",
+        "game/src/hub/photo-studio-controls.js",
+        "game/src/hub/photo-studio-presentation.js",
+        "game/src/hub/preparation.commands.js",
+        "game/src/hub/preparation.sources.js",
+        "game/src/hub/preparation.view.js",
+        "game/src/hub/recoverable-pair.js",
+        "game/src/hub/recovery.commands.js",
+        "game/src/hub/run-save-validation.js",
+        "game/src/hub/terminal.commands.js",
+        "game/src/hub/versioned-slot-reader.js",
+        "game/src/run/encounter-selector.js",
+        "game/src/run/expedition.view.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/game.run.data.js",
+        "game/src/run/game.run.scenes.js",
+        "game/src/run/game.run.shop.js",
+        "game/src/run/game.session.bag.js",
+        "game/src/run/game.session.board.js",
+        "game/src/run/game.session.death.js",
+        "game/src/run/game.session.js",
+        "game/src/run/game.session.kernel.js",
+        "game/src/run/game.session.map.js",
+        "game/src/run/game.session.modes.js",
+        "game/src/run/layeredMap.js",
+        "game/src/run/map-generator.js",
+        "game/src/run/map-graph.js",
+        "game/src/run/map-snapshot.js",
+        "game/src/ui/achievement-gallery.js",
+        "game/src/ui/achievement-medals.js",
+        "game/src/ui/beginner-guide-diagrams.js",
+        "game/src/ui/beginner-guide.js",
+        "game/src/ui/character-view-motion.js",
+        "game/src/ui/cinematics.js",
+        "game/src/ui/comm-feed.js",
+        "game/src/ui/feedback.local.js",
+        "game/src/ui/game.menu.js",
+        "game/src/ui/hud.js",
+        "game/src/ui/motion-transitions.js",
+        "game/src/ui/overlay.js",
+        "game/src/ui/page-loading.js",
+        "game/src/ui/route-overlay.js",
+        "game/src/ui/slot-emblems.js",
+        "game/src/ui/term-tips.js",
+        "game/src/ui/terminal-settlement.js",
+        "game/src/ui/transitions-director.js",
+        "game/src/ui/ui-scale.js",
+        "game/src/ui/ui.js",
+        "tests/extraction-receipt.test.js",
+        "tests/overlay-dialog.test.js",
+        "tests/r7a-scenes-integration.test.js",
+        "tests/settings-page.test.js",
+        "tests/sound-music.test.js",
+        "tests/sound-policy.test.js",
+        "tests/soundscape.test.js"
+      ],
+      "existence": [],
+      "inventories": [],
+      "contracts": [],
+      "reason": "逐根独立证明输入范围；未知根不能借其他测试的fixture契约豁免"
+    },
+    "groups": {
+      "code": "4d820a58c6c9d5a2c809a20fcc299f6ea5641bbb6a264277c07860f4691126bf",
+      "docs": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "state": "32c19ab30631e80a2b98bd273bb8167766e4aeba36457225610823eec9951a74",
+      "environment": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4"
+    },
+    "limits": [
+      "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+    ]
+  },
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "validation": {
+    "mode": "targeted",
+    "paths": [],
+    "tests": [
+      "tests/sound-music.test.js",
+      "tests/overlay-dialog.test.js",
+      "tests/settings-page.test.js",
+      "tests/sound-policy.test.js",
+      "tests/soundscape.test.js",
+      "tests/r7a-scenes-integration.test.js",
+      "tests/extraction-receipt.test.js"
+    ],
+    "reasons": [
+      "显式测试列表"
+    ],
+    "executed": true
+  },
+  "outcome": "passed",
+  "log": "docs/evidence/2026-10-05-WF-music-integration/2026-10-05T14-07-39.815Z-3f424e5c.log",
+  "logSha256": "85954a799df0943828f557e4afd5ddf782d52add9bdc72fa963fa7f9aaec7381",
+  "limits": [
+    "仅本命令覆盖范围；没有 build、实页、真实 hover、玩家存档或远端 CI 验收",
+    "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+  ],
+  "freshness": {
+    "eligibleForReview": true,
+    "codeEligibleForReview": true,
+    "result": "candidate",
+    "parts": {
+      "code": {
+        "before": "4d820a58c6c9d5a2c809a20fcc299f6ea5641bbb6a264277c07860f4691126bf",
+        "after": "4d820a58c6c9d5a2c809a20fcc299f6ea5641bbb6a264277c07860f4691126bf",
+        "current": "4d820a58c6c9d5a2c809a20fcc299f6ea5641bbb6a264277c07860f4691126bf",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "candidate",
+        "eligibleForReview": true
+      },
+      "docs": {
+        "before": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "after": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "current": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "covered": false,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "not-covered",
+        "eligibleForReview": false
+      },
+      "state": {
+        "before": "32c19ab30631e80a2b98bd273bb8167766e4aeba36457225610823eec9951a74",
+        "after": "32c19ab30631e80a2b98bd273bb8167766e4aeba36457225610823eec9951a74",
+        "current": "32c19ab30631e80a2b98bd273bb8167766e4aeba36457225610823eec9951a74",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "candidate",
+        "eligibleForReview": true
+      },
+      "environment": {
+        "before": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4",
+        "after": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4",
+        "current": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "candidate",
+        "eligibleForReview": true
+      }
+    },
+    "recheck": [],
+    "limits": [
+      "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+    ]
+  }
+}

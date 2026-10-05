@@ -1,0 +1,513 @@
+{
+  "id": "altar",
+  "title": "幽核回响",
+  "stem": "08-altar-hollow-core-v2",
+  "idea": "污染核心的祭仪：巴松与管风琴，低部不间断，颤弦远置；以悬置和声营造危险，避免高音尖叫。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+  "key": "F-sharp minor",
+  "meter": [
+    4,
+    4
+  ],
+  "bpm_quarter": 82,
+  "bars": 24,
+  "total_beats": 96.0,
+  "seconds": 70.24389583333334,
+  "tracks": [
+    {
+      "name": "Bassoon ritual",
+      "program": 70,
+      "bank": 0,
+      "hand": null,
+      "notes": 60,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/08-altar-hollow-core-v2-Bassoon-ritual.wav",
+        "bytes": 26973744,
+        "sha256": "07d5d517f406385744186132dc2f7a75328b5ac18a9e7589673de34b3debcfdd"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          12.0,
+          0.84
+        ],
+        [
+          20.0,
+          1
+        ],
+        [
+          28.0,
+          1
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.9
+        ],
+        [
+          60.0,
+          0.9
+        ],
+        [
+          68.0,
+          1.05
+        ],
+        [
+          76.0,
+          1.05
+        ],
+        [
+          84.0,
+          0.93
+        ],
+        [
+          92.0,
+          0.93
+        ],
+        [
+          96.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Organ carved stone",
+      "program": 19,
+      "bank": 0,
+      "hand": null,
+      "notes": 24,
+      "pan": -14,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/08-altar-hollow-core-v2-Organ-carved-stone.wav",
+        "bytes": 26973744,
+        "sha256": "f3a64ba45056d2953e2ec4839ee0b0ade80be06ed99d98bae9d55bb582a41470"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          12.0,
+          0.92
+        ],
+        [
+          20.0,
+          0.96
+        ],
+        [
+          28.0,
+          0.96
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.91
+        ],
+        [
+          60.0,
+          0.91
+        ],
+        [
+          68.0,
+          1
+        ],
+        [
+          76.0,
+          1
+        ],
+        [
+          84.0,
+          0.96
+        ],
+        [
+          92.0,
+          0.96
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Viola suspended",
+      "program": 41,
+      "bank": 0,
+      "hand": null,
+      "notes": 12,
+      "pan": 25,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/08-altar-hollow-core-v2-Viola-suspended.wav",
+        "bytes": 26973744,
+        "sha256": "25f7a9e57b516d82e550e2b129f366d15e541a72ec83d4a569b5de535b52ebbe"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          12.0,
+          0.92
+        ],
+        [
+          20.0,
+          0.96
+        ],
+        [
+          28.0,
+          0.96
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.91
+        ],
+        [
+          60.0,
+          0.91
+        ],
+        [
+          68.0,
+          1
+        ],
+        [
+          76.0,
+          1
+        ],
+        [
+          84.0,
+          0.96
+        ],
+        [
+          92.0,
+          0.96
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Tremolo distant pulse",
+      "program": 44,
+      "bank": 0,
+      "hand": null,
+      "notes": 12,
+      "pan": -32,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/08-altar-hollow-core-v2-Tremolo-distant-pulse.wav",
+        "bytes": 26973744,
+        "sha256": "3b32a2afb2ebfb0a062759aee27a8dc09d311c2411d3987fa53224b5b02c5b2f"
+      },
+      "target_active_rms_dbfs": -40,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          12.0,
+          0.92
+        ],
+        [
+          20.0,
+          0.96
+        ],
+        [
+          28.0,
+          0.96
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.91
+        ],
+        [
+          60.0,
+          0.91
+        ],
+        [
+          68.0,
+          1
+        ],
+        [
+          76.0,
+          1
+        ],
+        [
+          84.0,
+          0.96
+        ],
+        [
+          92.0,
+          0.96
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Celeste core light",
+      "program": 8,
+      "bank": 0,
+      "hand": null,
+      "notes": 12,
+      "pan": 32,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/08-altar-hollow-core-v2-Celeste-core-light.wav",
+        "bytes": 26973744,
+        "sha256": "1bbff4c6e51288c605850851f19bd5b12977fb36db3a7ed5de0ad63b59812bfd"
+      },
+      "target_active_rms_dbfs": -29,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          12.0,
+          0.84
+        ],
+        [
+          20.0,
+          1
+        ],
+        [
+          28.0,
+          1
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.9
+        ],
+        [
+          60.0,
+          0.9
+        ],
+        [
+          68.0,
+          1.05
+        ],
+        [
+          76.0,
+          1.05
+        ],
+        [
+          84.0,
+          0.93
+        ],
+        [
+          92.0,
+          0.93
+        ],
+        [
+          96.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 12,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/08-altar-hollow-core-v2-Steady-low-foundation.wav",
+        "bytes": 26973744,
+        "sha256": "17233d593ab9d1f0e3ef32dec047e623251fc1e8d7758ec28a8980349d6ab7e7"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          12.0,
+          0.92
+        ],
+        [
+          20.0,
+          0.96
+        ],
+        [
+          28.0,
+          0.96
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.91
+        ],
+        [
+          60.0,
+          0.91
+        ],
+        [
+          68.0,
+          1
+        ],
+        [
+          76.0,
+          1
+        ],
+        [
+          84.0,
+          0.96
+        ],
+        [
+          92.0,
+          0.96
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-7.23",
+    "input_lra": "1.80",
+    "input_thresh": "-28.50",
+    "output_i": "-22.81",
+    "output_tp": "-11.70",
+    "output_lra": "1.60",
+    "output_thresh": "-32.81",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.19"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.4209564913159953,
+      0.5649931356323132
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/08-altar-hollow-core-v2.mmp",
+      "bytes": 5944,
+      "sha256": "f45da24ce68c23118e57f601d5250600e34874d32c8d254b8d6a40f5eb2f4383"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/08-altar-hollow-core-v2.wav",
+      "bytes": 20230286,
+      "sha256": "d8633b151daa81cea7ded33729844f2e111c437b1022956d9384231c867d8cd1"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/08-altar-hollow-core-v2.mp3",
+      "bytes": 2249540,
+      "sha256": "1de096fe0bdbef4c7975e07d407390efb800ca45214078236e292397c989d458"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/08-altar-hollow-core-v2.ogg",
+      "bytes": 1237488,
+      "sha256": "9850507aaa4faa1b13f5fb956fc587afefdbdc46742f2bffa455fea9e123385e"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "statement"
+    },
+    {
+      "start_bar": 4,
+      "name": "answer"
+    },
+    {
+      "start_bar": 8,
+      "name": "lift"
+    },
+    {
+      "start_bar": 12,
+      "name": "refrain"
+    },
+    {
+      "start_bar": 16,
+      "name": "statement"
+    },
+    {
+      "start_bar": 20,
+      "name": "answer"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed",
+  "creative_revision": {
+    "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+    "primary_response_voice": "Celeste core light",
+    "changes": [
+      "short memorable motifs",
+      "foreground replies every 2 bars",
+      "orchestration or rhythmic fills every 4 bars",
+      "clearer pulse",
+      "gentle 1-bar transitions"
+    ],
+    "not_a_gain_only_revision": true
+  }
+}

@@ -1,0 +1,1324 @@
+{
+  "id": "altar",
+  "stem": "08-altar-hollow-core-v2",
+  "title": "幽核回响",
+  "bpm": 82,
+  "meter": [
+    4,
+    4
+  ],
+  "bars": 24,
+  "key": "F-sharp minor",
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "statement"
+    },
+    {
+      "start_bar": 4,
+      "name": "answer"
+    },
+    {
+      "start_bar": 8,
+      "name": "lift"
+    },
+    {
+      "start_bar": 12,
+      "name": "refrain"
+    },
+    {
+      "start_bar": 16,
+      "name": "statement"
+    },
+    {
+      "start_bar": 20,
+      "name": "answer"
+    }
+  ],
+  "lead": [
+    70,
+    "Bassoon ritual"
+  ],
+  "piano": false,
+  "chords": [
+    [
+      42,
+      45,
+      49,
+      52
+    ],
+    [
+      50,
+      54,
+      57,
+      61
+    ],
+    [
+      45,
+      49,
+      52,
+      56
+    ],
+    [
+      49,
+      53,
+      56,
+      59
+    ]
+  ],
+  "phrases": [
+    [
+      61,
+      62,
+      64,
+      66,
+      65,
+      61
+    ],
+    [
+      66,
+      65,
+      64,
+      61,
+      59,
+      57
+    ],
+    [
+      64,
+      62,
+      61,
+      57,
+      59,
+      59
+    ],
+    [
+      65,
+      62,
+      61,
+      59,
+      61,
+      61
+    ]
+  ],
+  "rhythm": [
+    0,
+    1.5,
+    2.5,
+    4,
+    5.5,
+    6.5
+  ],
+  "voices": [
+    [
+      "Organ carved stone",
+      19,
+      -35,
+      -14
+    ],
+    [
+      "Viola suspended",
+      41,
+      -35,
+      25
+    ],
+    [
+      "Tremolo distant pulse",
+      44,
+      -40,
+      -32
+    ],
+    [
+      "Celeste core light",
+      8,
+      -43,
+      32
+    ]
+  ],
+  "idea": "污染核心的祭仪：巴松与管风琴，低部不间断，颤弦远置；以悬置和声营造危险，避免高音尖叫。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+  "beats_per_bar": 4.0,
+  "total_beats": 96.0,
+  "tracks": {
+    "Bassoon ritual": {
+      "program": 70,
+      "bank": 0,
+      "target_active_rms_dbfs": -25,
+      "pan": -17,
+      "mode": "lead",
+      "gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          12.0,
+          0.84
+        ],
+        [
+          20.0,
+          1
+        ],
+        [
+          28.0,
+          1
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.9
+        ],
+        [
+          60.0,
+          0.9
+        ],
+        [
+          68.0,
+          1.05
+        ],
+        [
+          76.0,
+          1.05
+        ],
+        [
+          84.0,
+          0.93
+        ],
+        [
+          92.0,
+          0.93
+        ],
+        [
+          96.0,
+          0.84
+        ]
+      ],
+      "notes": [
+        {
+          "beat": 0.0,
+          "midi": 61,
+          "length": 1.46,
+          "velocity": 57
+        },
+        {
+          "beat": 1.5,
+          "midi": 62,
+          "length": 0.96,
+          "velocity": 54
+        },
+        {
+          "beat": 2.5,
+          "midi": 64,
+          "length": 1.46,
+          "velocity": 54
+        },
+        {
+          "beat": 4.0,
+          "midi": 66,
+          "length": 3.96,
+          "velocity": 52
+        },
+        {
+          "beat": 5.5,
+          "midi": 65,
+          "length": 2.46,
+          "velocity": 54
+        },
+        {
+          "beat": 6.5,
+          "midi": 61,
+          "length": 1.46,
+          "velocity": 54
+        },
+        {
+          "beat": 8.0,
+          "midi": 66,
+          "length": 1.46,
+          "velocity": 57
+        },
+        {
+          "beat": 9.5,
+          "midi": 65,
+          "length": 0.96,
+          "velocity": 54
+        },
+        {
+          "beat": 10.5,
+          "midi": 64,
+          "length": 1.46,
+          "velocity": 54
+        },
+        {
+          "beat": 12.0,
+          "midi": 61,
+          "length": 3.96,
+          "velocity": 52
+        },
+        {
+          "beat": 16.0,
+          "midi": 64,
+          "length": 1.46,
+          "velocity": 57
+        },
+        {
+          "beat": 17.5,
+          "midi": 62,
+          "length": 0.96,
+          "velocity": 54
+        },
+        {
+          "beat": 18.5,
+          "midi": 61,
+          "length": 1.46,
+          "velocity": 54
+        },
+        {
+          "beat": 20.0,
+          "midi": 57,
+          "length": 3.96,
+          "velocity": 52
+        },
+        {
+          "beat": 21.5,
+          "midi": 59,
+          "length": 0.975,
+          "velocity": 60
+        },
+        {
+          "beat": 22.5,
+          "midi": 59,
+          "length": 1.46,
+          "velocity": 60
+        },
+        {
+          "beat": 24.0,
+          "midi": 65,
+          "length": 1.46,
+          "velocity": 57
+        },
+        {
+          "beat": 25.5,
+          "midi": 62,
+          "length": 0.96,
+          "velocity": 54
+        },
+        {
+          "beat": 26.5,
+          "midi": 61,
+          "length": 1.46,
+          "velocity": 54
+        },
+        {
+          "beat": 28.0,
+          "midi": 59,
+          "length": 3.96,
+          "velocity": 52
+        },
+        {
+          "beat": 32.0,
+          "midi": 61,
+          "length": 1.46,
+          "velocity": 57
+        },
+        {
+          "beat": 33.5,
+          "midi": 62,
+          "length": 0.96,
+          "velocity": 54
+        },
+        {
+          "beat": 34.5,
+          "midi": 64,
+          "length": 1.46,
+          "velocity": 54
+        },
+        {
+          "beat": 36.0,
+          "midi": 66,
+          "length": 3.96,
+          "velocity": 52
+        },
+        {
+          "beat": 37.5,
+          "midi": 65,
+          "length": 2.46,
+          "velocity": 54
+        },
+        {
+          "beat": 38.5,
+          "midi": 61,
+          "length": 1.46,
+          "velocity": 54
+        },
+        {
+          "beat": 40.0,
+          "midi": 66,
+          "length": 1.46,
+          "velocity": 57
+        },
+        {
+          "beat": 41.5,
+          "midi": 65,
+          "length": 0.96,
+          "velocity": 54
+        },
+        {
+          "beat": 42.5,
+          "midi": 64,
+          "length": 1.46,
+          "velocity": 54
+        },
+        {
+          "beat": 44.0,
+          "midi": 61,
+          "length": 3.96,
+          "velocity": 52
+        },
+        {
+          "beat": 48.0,
+          "midi": 64,
+          "length": 1.46,
+          "velocity": 57
+        },
+        {
+          "beat": 49.5,
+          "midi": 62,
+          "length": 0.96,
+          "velocity": 54
+        },
+        {
+          "beat": 50.5,
+          "midi": 61,
+          "length": 1.46,
+          "velocity": 54
+        },
+        {
+          "beat": 52.0,
+          "midi": 57,
+          "length": 3.96,
+          "velocity": 52
+        },
+        {
+          "beat": 53.5,
+          "midi": 59,
+          "length": 0.975,
+          "velocity": 60
+        },
+        {
+          "beat": 54.5,
+          "midi": 59,
+          "length": 1.46,
+          "velocity": 60
+        },
+        {
+          "beat": 56.0,
+          "midi": 65,
+          "length": 1.46,
+          "velocity": 57
+        },
+        {
+          "beat": 57.5,
+          "midi": 62,
+          "length": 0.96,
+          "velocity": 54
+        },
+        {
+          "beat": 58.5,
+          "midi": 61,
+          "length": 1.46,
+          "velocity": 54
+        },
+        {
+          "beat": 60.0,
+          "midi": 59,
+          "length": 3.96,
+          "velocity": 52
+        },
+        {
+          "beat": 64.0,
+          "midi": 61,
+          "length": 1.46,
+          "velocity": 57
+        },
+        {
+          "beat": 65.5,
+          "midi": 62,
+          "length": 0.96,
+          "velocity": 54
+        },
+        {
+          "beat": 66.5,
+          "midi": 64,
+          "length": 1.46,
+          "velocity": 54
+        },
+        {
+          "beat": 68.0,
+          "midi": 66,
+          "length": 3.96,
+          "velocity": 52
+        },
+        {
+          "beat": 69.5,
+          "midi": 61,
+          "length": 2.46,
+          "velocity": 54
+        },
+        {
+          "beat": 70.5,
+          "midi": 65,
+          "length": 1.46,
+          "velocity": 54
+        },
+        {
+          "beat": 72.0,
+          "midi": 66,
+          "length": 1.46,
+          "velocity": 57
+        },
+        {
+          "beat": 73.5,
+          "midi": 65,
+          "length": 0.96,
+          "velocity": 54
+        },
+        {
+          "beat": 74.5,
+          "midi": 64,
+          "length": 1.46,
+          "velocity": 54
+        },
+        {
+          "beat": 76.0,
+          "midi": 61,
+          "length": 3.96,
+          "velocity": 52
+        },
+        {
+          "beat": 80.0,
+          "midi": 64,
+          "length": 1.46,
+          "velocity": 57
+        },
+        {
+          "beat": 81.5,
+          "midi": 62,
+          "length": 0.96,
+          "velocity": 54
+        },
+        {
+          "beat": 82.5,
+          "midi": 61,
+          "length": 1.46,
+          "velocity": 54
+        },
+        {
+          "beat": 84.0,
+          "midi": 57,
+          "length": 3.96,
+          "velocity": 52
+        },
+        {
+          "beat": 85.5,
+          "midi": 59,
+          "length": 0.975,
+          "velocity": 60
+        },
+        {
+          "beat": 86.5,
+          "midi": 59,
+          "length": 1.46,
+          "velocity": 60
+        },
+        {
+          "beat": 88.0,
+          "midi": 65,
+          "length": 1.46,
+          "velocity": 57
+        },
+        {
+          "beat": 89.5,
+          "midi": 62,
+          "length": 0.96,
+          "velocity": 54
+        },
+        {
+          "beat": 90.5,
+          "midi": 61,
+          "length": 1.46,
+          "velocity": 54
+        },
+        {
+          "beat": 92.0,
+          "midi": 59,
+          "length": 3.96,
+          "velocity": 52
+        }
+      ]
+    },
+    "Organ carved stone": {
+      "program": 19,
+      "bank": 0,
+      "target_active_rms_dbfs": -35,
+      "pan": -14,
+      "mode": "body",
+      "gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          12.0,
+          0.92
+        ],
+        [
+          20.0,
+          0.96
+        ],
+        [
+          28.0,
+          0.96
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.91
+        ],
+        [
+          60.0,
+          0.91
+        ],
+        [
+          68.0,
+          1
+        ],
+        [
+          76.0,
+          1
+        ],
+        [
+          84.0,
+          0.96
+        ],
+        [
+          92.0,
+          0.96
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "notes": [
+        {
+          "beat": 0.0,
+          "midi": 42,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 0.15,
+          "midi": 49,
+          "length": 7.82,
+          "velocity": 35
+        },
+        {
+          "beat": 8.0,
+          "midi": 50,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 8.15,
+          "midi": 57,
+          "length": 7.82,
+          "velocity": 35
+        },
+        {
+          "beat": 16.0,
+          "midi": 45,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 16.15,
+          "midi": 52,
+          "length": 7.82,
+          "velocity": 35
+        },
+        {
+          "beat": 24.0,
+          "midi": 49,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 24.15,
+          "midi": 56,
+          "length": 7.82,
+          "velocity": 35
+        },
+        {
+          "beat": 32.0,
+          "midi": 42,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 32.15,
+          "midi": 49,
+          "length": 7.82,
+          "velocity": 35
+        },
+        {
+          "beat": 40.0,
+          "midi": 50,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 40.15,
+          "midi": 57,
+          "length": 7.82,
+          "velocity": 35
+        },
+        {
+          "beat": 48.0,
+          "midi": 45,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 48.15,
+          "midi": 52,
+          "length": 7.82,
+          "velocity": 35
+        },
+        {
+          "beat": 56.0,
+          "midi": 49,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 56.15,
+          "midi": 56,
+          "length": 7.82,
+          "velocity": 35
+        },
+        {
+          "beat": 64.0,
+          "midi": 42,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 64.15,
+          "midi": 49,
+          "length": 7.82,
+          "velocity": 35
+        },
+        {
+          "beat": 72.0,
+          "midi": 50,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 72.15,
+          "midi": 57,
+          "length": 7.82,
+          "velocity": 35
+        },
+        {
+          "beat": 80.0,
+          "midi": 45,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 80.15,
+          "midi": 52,
+          "length": 7.82,
+          "velocity": 35
+        },
+        {
+          "beat": 88.0,
+          "midi": 49,
+          "length": 7.975,
+          "velocity": 43
+        },
+        {
+          "beat": 88.15,
+          "midi": 56,
+          "length": 7.82,
+          "velocity": 35
+        }
+      ]
+    },
+    "Viola suspended": {
+      "program": 41,
+      "bank": 0,
+      "target_active_rms_dbfs": -35,
+      "pan": 25,
+      "mode": "body",
+      "gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          12.0,
+          0.92
+        ],
+        [
+          20.0,
+          0.96
+        ],
+        [
+          28.0,
+          0.96
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.91
+        ],
+        [
+          60.0,
+          0.91
+        ],
+        [
+          68.0,
+          1
+        ],
+        [
+          76.0,
+          1
+        ],
+        [
+          84.0,
+          0.96
+        ],
+        [
+          92.0,
+          0.96
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "notes": [
+        {
+          "beat": 0.0,
+          "midi": 57,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 8.0,
+          "midi": 54,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 16.0,
+          "midi": 49,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 24.0,
+          "midi": 53,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 32.0,
+          "midi": 57,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 40.0,
+          "midi": 54,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 48.0,
+          "midi": 49,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 56.0,
+          "midi": 53,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 64.0,
+          "midi": 57,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 72.0,
+          "midi": 54,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 80.0,
+          "midi": 49,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 88.0,
+          "midi": 53,
+          "length": 7.975,
+          "velocity": 43
+        }
+      ]
+    },
+    "Tremolo distant pulse": {
+      "program": 44,
+      "bank": 0,
+      "target_active_rms_dbfs": -40,
+      "pan": -32,
+      "mode": "body",
+      "gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          12.0,
+          0.92
+        ],
+        [
+          20.0,
+          0.96
+        ],
+        [
+          28.0,
+          0.96
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.91
+        ],
+        [
+          60.0,
+          0.91
+        ],
+        [
+          68.0,
+          1
+        ],
+        [
+          76.0,
+          1
+        ],
+        [
+          84.0,
+          0.96
+        ],
+        [
+          92.0,
+          0.96
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "notes": [
+        {
+          "beat": 0.0,
+          "midi": 45,
+          "length": 7.98,
+          "velocity": 35
+        },
+        {
+          "beat": 8.0,
+          "midi": 54,
+          "length": 7.98,
+          "velocity": 35
+        },
+        {
+          "beat": 16.0,
+          "midi": 49,
+          "length": 7.98,
+          "velocity": 35
+        },
+        {
+          "beat": 24.0,
+          "midi": 53,
+          "length": 7.98,
+          "velocity": 35
+        },
+        {
+          "beat": 32.0,
+          "midi": 45,
+          "length": 7.98,
+          "velocity": 35
+        },
+        {
+          "beat": 40.0,
+          "midi": 54,
+          "length": 7.98,
+          "velocity": 35
+        },
+        {
+          "beat": 48.0,
+          "midi": 49,
+          "length": 7.98,
+          "velocity": 35
+        },
+        {
+          "beat": 56.0,
+          "midi": 53,
+          "length": 7.98,
+          "velocity": 35
+        },
+        {
+          "beat": 64.0,
+          "midi": 45,
+          "length": 7.98,
+          "velocity": 35
+        },
+        {
+          "beat": 72.0,
+          "midi": 54,
+          "length": 7.98,
+          "velocity": 35
+        },
+        {
+          "beat": 80.0,
+          "midi": 49,
+          "length": 7.98,
+          "velocity": 35
+        },
+        {
+          "beat": 88.0,
+          "midi": 53,
+          "length": 7.975,
+          "velocity": 35
+        }
+      ]
+    },
+    "Celeste core light": {
+      "program": 8,
+      "bank": 0,
+      "target_active_rms_dbfs": -29,
+      "pan": 32,
+      "mode": "detail",
+      "gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          12.0,
+          0.84
+        ],
+        [
+          20.0,
+          1
+        ],
+        [
+          28.0,
+          1
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.9
+        ],
+        [
+          60.0,
+          0.9
+        ],
+        [
+          68.0,
+          1.05
+        ],
+        [
+          76.0,
+          1.05
+        ],
+        [
+          84.0,
+          0.93
+        ],
+        [
+          92.0,
+          0.93
+        ],
+        [
+          96.0,
+          0.84
+        ]
+      ],
+      "notes": [
+        {
+          "beat": 13.5,
+          "midi": 59,
+          "length": 2.495,
+          "velocity": 50
+        },
+        {
+          "beat": 14.5,
+          "midi": 57,
+          "length": 1.495,
+          "velocity": 50
+        },
+        {
+          "beat": 29.5,
+          "midi": 61,
+          "length": 0.98,
+          "velocity": 50
+        },
+        {
+          "beat": 30.5,
+          "midi": 61,
+          "length": 1.495,
+          "velocity": 50
+        },
+        {
+          "beat": 45.5,
+          "midi": 59,
+          "length": 2.495,
+          "velocity": 50
+        },
+        {
+          "beat": 46.5,
+          "midi": 57,
+          "length": 1.495,
+          "velocity": 50
+        },
+        {
+          "beat": 61.5,
+          "midi": 61,
+          "length": 0.98,
+          "velocity": 50
+        },
+        {
+          "beat": 62.5,
+          "midi": 61,
+          "length": 1.495,
+          "velocity": 50
+        },
+        {
+          "beat": 77.5,
+          "midi": 57,
+          "length": 2.495,
+          "velocity": 50
+        },
+        {
+          "beat": 78.5,
+          "midi": 59,
+          "length": 1.495,
+          "velocity": 50
+        },
+        {
+          "beat": 93.5,
+          "midi": 61,
+          "length": 0.98,
+          "velocity": 50
+        },
+        {
+          "beat": 94.5,
+          "midi": 61,
+          "length": 1.475,
+          "velocity": 50
+        }
+      ]
+    },
+    "Steady low foundation": {
+      "program": 43,
+      "bank": 0,
+      "target_active_rms_dbfs": -35,
+      "pan": 0,
+      "mode": "body",
+      "gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          12.0,
+          0.92
+        ],
+        [
+          20.0,
+          0.96
+        ],
+        [
+          28.0,
+          0.96
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.91
+        ],
+        [
+          60.0,
+          0.91
+        ],
+        [
+          68.0,
+          1
+        ],
+        [
+          76.0,
+          1
+        ],
+        [
+          84.0,
+          0.96
+        ],
+        [
+          92.0,
+          0.96
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "notes": [
+        {
+          "beat": 0.0,
+          "midi": 30,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 8.0,
+          "midi": 38,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 16.0,
+          "midi": 33,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 24.0,
+          "midi": 37,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 32.0,
+          "midi": 30,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 40.0,
+          "midi": 38,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 48.0,
+          "midi": 33,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 56.0,
+          "midi": 37,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 64.0,
+          "midi": 30,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 72.0,
+          "midi": 38,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 80.0,
+          "midi": 33,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 88.0,
+          "midi": 37,
+          "length": 7.975,
+          "velocity": 44
+        }
+      ]
+    }
+  },
+  "creative_revision": {
+    "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+    "primary_response_voice": "Celeste core light",
+    "changes": [
+      "short memorable motifs",
+      "foreground replies every 2 bars",
+      "orchestration or rhythmic fills every 4 bars",
+      "clearer pulse",
+      "gentle 1-bar transitions"
+    ],
+    "not_a_gain_only_revision": true
+  }
+}

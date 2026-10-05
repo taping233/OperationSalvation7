@@ -84,7 +84,7 @@ export function preloadAllNodeShellBgs() {
 export function nodeShell(o) {
   const bg = o.asset || NODE_BG[o.tone] || '';
   UI.showOverlay('', `
-    <div class="pg node-pg sc-${o.tone}"${bg ? ` data-asset-key="${escAttr(bg)}"` : ''}>
+    <div class="pg node-pg sc-${o.tone}"${o.music ? ` data-music-scene="${escAttr(o.music)}"` : ''}${bg ? ` data-asset-key="${escAttr(bg)}"` : ''}>
       <div class="node-panel">
         <div class="node-kicker">FIELD ENCOUNTER <span>${String(game.layerIdx + 1).padStart(2, '0')} / 04</span></div>
         <header class="pg-head">

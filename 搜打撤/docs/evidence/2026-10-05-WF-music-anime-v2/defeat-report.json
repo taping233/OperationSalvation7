@@ -1,0 +1,587 @@
+{
+  "id": "defeat",
+  "title": "未熄之灯",
+  "stem": "14-defeat-unextinguished-lamp-v2",
+  "idea": "死亡或放弃结算的温柔收束；大提琴、双手钢琴与双簧管，保留重新出发的微光。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+  "key": "G minor",
+  "meter": [
+    4,
+    4
+  ],
+  "bpm_quarter": 84,
+  "bars": 24,
+  "total_beats": 96.0,
+  "seconds": 68.5714375,
+  "tracks": [
+    {
+      "name": "Cello last ember",
+      "program": 42,
+      "bank": 0,
+      "hand": null,
+      "notes": 60,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/14-defeat-unextinguished-lamp-v2-Cello-last-ember.wav",
+        "bytes": 26331520,
+        "sha256": "f68bf7b9e51b231bf540851d55c9b6942c1775cd0911ccad17f2e176726eef06"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          12.0,
+          0.84
+        ],
+        [
+          20.0,
+          1
+        ],
+        [
+          28.0,
+          1
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.9
+        ],
+        [
+          60.0,
+          0.9
+        ],
+        [
+          68.0,
+          1.05
+        ],
+        [
+          76.0,
+          1.05
+        ],
+        [
+          84.0,
+          0.93
+        ],
+        [
+          92.0,
+          0.93
+        ],
+        [
+          96.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Piano right hand",
+      "program": 0,
+      "bank": 0,
+      "hand": "right",
+      "notes": 24,
+      "pan": 8,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/14-defeat-unextinguished-lamp-v2-Piano-right-hand.wav",
+        "bytes": 26331520,
+        "sha256": "42a07eac6d29b27b75edcbcf5de740bd9670b16edc38b43e0229d5c7e6ec3ec3"
+      },
+      "target_active_rms_dbfs": -32,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          12.0,
+          0.92
+        ],
+        [
+          20.0,
+          0.96
+        ],
+        [
+          28.0,
+          0.96
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.91
+        ],
+        [
+          60.0,
+          0.91
+        ],
+        [
+          68.0,
+          1
+        ],
+        [
+          76.0,
+          1
+        ],
+        [
+          84.0,
+          0.96
+        ],
+        [
+          92.0,
+          0.96
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": true
+    },
+    {
+      "name": "Piano left hand",
+      "program": 0,
+      "bank": 0,
+      "hand": "left",
+      "notes": 72,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/14-defeat-unextinguished-lamp-v2-Piano-left-hand.wav",
+        "bytes": 26331520,
+        "sha256": "a5d1228864fcbedf44ac7ab991ff790569e2c67ea646de9624921862c52f4c57"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          12.0,
+          0.92
+        ],
+        [
+          20.0,
+          0.96
+        ],
+        [
+          28.0,
+          0.96
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.91
+        ],
+        [
+          60.0,
+          0.91
+        ],
+        [
+          68.0,
+          1
+        ],
+        [
+          76.0,
+          1
+        ],
+        [
+          84.0,
+          0.96
+        ],
+        [
+          92.0,
+          0.96
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": true
+    },
+    {
+      "name": "Oboe remembered road",
+      "program": 68,
+      "bank": 0,
+      "hand": null,
+      "notes": 12,
+      "pan": 18,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/14-defeat-unextinguished-lamp-v2-Oboe-remembered-road.wav",
+        "bytes": 26331520,
+        "sha256": "f67e8570ea0c2d8c1b2dbae1e4ba72e0dfd27214081e9b5f97ff983409bfaf0b"
+      },
+      "target_active_rms_dbfs": -29,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          12.0,
+          0.84
+        ],
+        [
+          20.0,
+          1
+        ],
+        [
+          28.0,
+          1
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.9
+        ],
+        [
+          60.0,
+          0.9
+        ],
+        [
+          68.0,
+          1.05
+        ],
+        [
+          76.0,
+          1.05
+        ],
+        [
+          84.0,
+          0.93
+        ],
+        [
+          92.0,
+          0.93
+        ],
+        [
+          96.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Slow strings shelter",
+      "program": 49,
+      "bank": 0,
+      "hand": null,
+      "notes": 12,
+      "pan": -31,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/14-defeat-unextinguished-lamp-v2-Slow-strings-shelter.wav",
+        "bytes": 26331520,
+        "sha256": "b1c5843adfd82235cd1b32bbc5400acea1c309eead9e2e7fb1c2b0656fb1ec6f"
+      },
+      "target_active_rms_dbfs": -34,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          12.0,
+          0.92
+        ],
+        [
+          20.0,
+          0.96
+        ],
+        [
+          28.0,
+          0.96
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.91
+        ],
+        [
+          60.0,
+          0.91
+        ],
+        [
+          68.0,
+          1
+        ],
+        [
+          76.0,
+          1
+        ],
+        [
+          84.0,
+          0.96
+        ],
+        [
+          92.0,
+          0.96
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Harp small hope",
+      "program": 46,
+      "bank": 0,
+      "hand": null,
+      "notes": 34,
+      "pan": -24,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/14-defeat-unextinguished-lamp-v2-Harp-small-hope.wav",
+        "bytes": 26331520,
+        "sha256": "b1513642bea61248bef0d2210a4f6fee8187498aafcadf14195e1f4b675db371"
+      },
+      "target_active_rms_dbfs": -43,
+      "continuous_gain_points": [
+        [
+          0,
+          0.65
+        ],
+        [
+          12.0,
+          0.65
+        ],
+        [
+          20.0,
+          0.9
+        ],
+        [
+          28.0,
+          0.9
+        ],
+        [
+          36.0,
+          0.74
+        ],
+        [
+          44.0,
+          0.74
+        ],
+        [
+          52.0,
+          0.84
+        ],
+        [
+          60.0,
+          0.84
+        ],
+        [
+          68.0,
+          0.96
+        ],
+        [
+          76.0,
+          0.96
+        ],
+        [
+          84.0,
+          0.67
+        ],
+        [
+          92.0,
+          0.67
+        ],
+        [
+          96.0,
+          0.65
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 12,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/14-defeat-unextinguished-lamp-v2-Steady-low-foundation.wav",
+        "bytes": 26331520,
+        "sha256": "b18c3abea263dd26ab1a4de4226e4a32a46e39952253998d934cf1e0dea73602"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          12.0,
+          0.92
+        ],
+        [
+          20.0,
+          0.96
+        ],
+        [
+          28.0,
+          0.96
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.91
+        ],
+        [
+          60.0,
+          0.91
+        ],
+        [
+          68.0,
+          1
+        ],
+        [
+          76.0,
+          1
+        ],
+        [
+          84.0,
+          0.96
+        ],
+        [
+          92.0,
+          0.96
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-6.05",
+    "input_lra": "1.50",
+    "input_thresh": "-28.50",
+    "output_i": "-22.77",
+    "output_tp": "-10.52",
+    "output_lra": "1.40",
+    "output_thresh": "-32.77",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.23"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.5029841183370147,
+      0.386927531623967
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/14-defeat-unextinguished-lamp-v2.mmp",
+      "bytes": 6858,
+      "sha256": "418b321ce7db9fe6ff780245d5b6f11020ea5e1ad49b48efbe389a1a4d83268b"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/14-defeat-unextinguished-lamp-v2.wav",
+      "bytes": 19748618,
+      "sha256": "c0e495f45f23849630a3c72ebf6c5d228ffe854e9a88266e9e3a01155d69f6fd"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/14-defeat-unextinguished-lamp-v2.mp3",
+      "bytes": 2196548,
+      "sha256": "0bed9c40f13c3fa8263776a37e3eec0e82e62c9a0b9651e068def375ce9d545d"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/14-defeat-unextinguished-lamp-v2.ogg",
+      "bytes": 1286955,
+      "sha256": "57710e99659ce5adb7bf2473164291b5fb68b2e9a860a989c5c1d13266aabcb0"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/14-defeat-unextinguished-lamp-v2-piano.mid",
+      "bytes": 1394,
+      "sha256": "107462fa663b8e246d7c3cd7a42f6a0f8184b8f975fd3deb8bbab2ca5a8522d9"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "statement"
+    },
+    {
+      "start_bar": 4,
+      "name": "answer"
+    },
+    {
+      "start_bar": 8,
+      "name": "lift"
+    },
+    {
+      "start_bar": 12,
+      "name": "refrain"
+    },
+    {
+      "start_bar": 16,
+      "name": "statement"
+    },
+    {
+      "start_bar": 20,
+      "name": "answer"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed",
+  "creative_revision": {
+    "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+    "primary_response_voice": "Oboe remembered road",
+    "changes": [
+      "short memorable motifs",
+      "foreground replies every 2 bars",
+      "orchestration or rhythmic fills every 4 bars",
+      "clearer pulse",
+      "gentle 1-bar transitions"
+    ],
+    "not_a_gain_only_revision": true
+  }
+}

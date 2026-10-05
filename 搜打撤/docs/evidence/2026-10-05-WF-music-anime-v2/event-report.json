@@ -1,0 +1,702 @@
+{
+  "id": "event",
+  "title": "余烬来信",
+  "stem": "07-event-letter-in-ashes-v2",
+  "idea": "奇遇和叙事选择的低密度问答；双簧管像说话，颤音琴只作标点，留出阅读空间。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+  "key": "A minor",
+  "meter": [
+    4,
+    4
+  ],
+  "bpm_quarter": 96,
+  "bars": 32,
+  "total_beats": 128.0,
+  "seconds": 80.0,
+  "tracks": [
+    {
+      "name": "Oboe storyteller",
+      "program": 68,
+      "bank": 0,
+      "hand": null,
+      "notes": 96,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/07-event-letter-in-ashes-v2-Oboe-storyteller.wav",
+        "bytes": 30720088,
+        "sha256": "9b7f19d1091e68768c1dee967a1ef4ff32806f5940f4129e417c12556e9a6da8"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          12.0,
+          0.84
+        ],
+        [
+          20.0,
+          1
+        ],
+        [
+          28.0,
+          1
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.9
+        ],
+        [
+          60.0,
+          0.9
+        ],
+        [
+          68.0,
+          1.05
+        ],
+        [
+          76.0,
+          1.05
+        ],
+        [
+          84.0,
+          0.93
+        ],
+        [
+          92.0,
+          0.93
+        ],
+        [
+          100.0,
+          1.02
+        ],
+        [
+          108.0,
+          1.02
+        ],
+        [
+          116.0,
+          0.86
+        ],
+        [
+          124.0,
+          0.86
+        ],
+        [
+          128.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Vibraphone ink",
+      "program": 11,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": -22,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/07-event-letter-in-ashes-v2-Vibraphone-ink.wav",
+        "bytes": 30720088,
+        "sha256": "6f910007752cd3580d397600c87fc66e744194eb2e8238f49e43a5970dfe166d"
+      },
+      "target_active_rms_dbfs": -29,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          12.0,
+          0.84
+        ],
+        [
+          20.0,
+          1
+        ],
+        [
+          28.0,
+          1
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.9
+        ],
+        [
+          60.0,
+          0.9
+        ],
+        [
+          68.0,
+          1.05
+        ],
+        [
+          76.0,
+          1.05
+        ],
+        [
+          84.0,
+          0.93
+        ],
+        [
+          92.0,
+          0.93
+        ],
+        [
+          100.0,
+          1.02
+        ],
+        [
+          108.0,
+          1.02
+        ],
+        [
+          116.0,
+          0.86
+        ],
+        [
+          124.0,
+          0.86
+        ],
+        [
+          128.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Bassoon question",
+      "program": 70,
+      "bank": 0,
+      "hand": null,
+      "notes": 10,
+      "pan": 24,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/07-event-letter-in-ashes-v2-Bassoon-question.wav",
+        "bytes": 30720088,
+        "sha256": "f7767b0d4b22b16ff1b8c082f1a6d5af705c8bf621ec83c7f6d9320861193be1"
+      },
+      "target_active_rms_dbfs": -36,
+      "continuous_gain_points": [
+        [
+          0,
+          0.65
+        ],
+        [
+          12.0,
+          0.65
+        ],
+        [
+          20.0,
+          0.9
+        ],
+        [
+          28.0,
+          0.9
+        ],
+        [
+          36.0,
+          0.74
+        ],
+        [
+          44.0,
+          0.74
+        ],
+        [
+          52.0,
+          0.84
+        ],
+        [
+          60.0,
+          0.84
+        ],
+        [
+          68.0,
+          0.96
+        ],
+        [
+          76.0,
+          0.96
+        ],
+        [
+          84.0,
+          0.67
+        ],
+        [
+          92.0,
+          0.67
+        ],
+        [
+          100.0,
+          0.91
+        ],
+        [
+          108.0,
+          0.91
+        ],
+        [
+          116.0,
+          0.74
+        ],
+        [
+          124.0,
+          0.74
+        ],
+        [
+          128.0,
+          0.65
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Muted paper strings",
+      "program": 49,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": -31,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/07-event-letter-in-ashes-v2-Muted-paper-strings.wav",
+        "bytes": 30720088,
+        "sha256": "d0a7e02bed74d060872035c98a112a3cfebb74f2db7badf3dd9dfcbd38fdea46"
+      },
+      "target_active_rms_dbfs": -34,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          12.0,
+          0.92
+        ],
+        [
+          20.0,
+          0.96
+        ],
+        [
+          28.0,
+          0.96
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.91
+        ],
+        [
+          60.0,
+          0.91
+        ],
+        [
+          68.0,
+          1
+        ],
+        [
+          76.0,
+          1
+        ],
+        [
+          84.0,
+          0.96
+        ],
+        [
+          92.0,
+          0.96
+        ],
+        [
+          100.0,
+          0.97
+        ],
+        [
+          108.0,
+          0.97
+        ],
+        [
+          116.0,
+          0.9
+        ],
+        [
+          124.0,
+          0.9
+        ],
+        [
+          128.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Harp page turn",
+      "program": 46,
+      "bank": 0,
+      "hand": null,
+      "notes": 44,
+      "pan": 29,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/07-event-letter-in-ashes-v2-Harp-page-turn.wav",
+        "bytes": 30720088,
+        "sha256": "1cd4ddfb14baa17b13fe67fb243fc9277f8975109b0eeecaf7dad533bbd76bcd"
+      },
+      "target_active_rms_dbfs": -42,
+      "continuous_gain_points": [
+        [
+          0,
+          0.65
+        ],
+        [
+          12.0,
+          0.65
+        ],
+        [
+          20.0,
+          0.9
+        ],
+        [
+          28.0,
+          0.9
+        ],
+        [
+          36.0,
+          0.74
+        ],
+        [
+          44.0,
+          0.74
+        ],
+        [
+          52.0,
+          0.84
+        ],
+        [
+          60.0,
+          0.84
+        ],
+        [
+          68.0,
+          0.96
+        ],
+        [
+          76.0,
+          0.96
+        ],
+        [
+          84.0,
+          0.67
+        ],
+        [
+          92.0,
+          0.67
+        ],
+        [
+          100.0,
+          0.91
+        ],
+        [
+          108.0,
+          0.91
+        ],
+        [
+          116.0,
+          0.74
+        ],
+        [
+          124.0,
+          0.74
+        ],
+        [
+          128.0,
+          0.65
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/07-event-letter-in-ashes-v2-Steady-low-foundation.wav",
+        "bytes": 30720088,
+        "sha256": "e03ac24bce69b749d7f47f2e559500989189cb0b39003cc9057c4f7265f6f57b"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          12.0,
+          0.92
+        ],
+        [
+          20.0,
+          0.96
+        ],
+        [
+          28.0,
+          0.96
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.91
+        ],
+        [
+          60.0,
+          0.91
+        ],
+        [
+          68.0,
+          1
+        ],
+        [
+          76.0,
+          1
+        ],
+        [
+          84.0,
+          0.96
+        ],
+        [
+          92.0,
+          0.96
+        ],
+        [
+          100.0,
+          0.97
+        ],
+        [
+          108.0,
+          0.97
+        ],
+        [
+          116.0,
+          0.9
+        ],
+        [
+          124.0,
+          0.9
+        ],
+        [
+          128.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Light acoustic motion",
+      "program": 48,
+      "bank": 128,
+      "hand": null,
+      "notes": 64,
+      "pan": 10,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/07-event-letter-in-ashes-v2-Light-acoustic-motion.wav",
+        "bytes": 30720088,
+        "sha256": "a8ec35069d4145792929de28de636bc5e49984b218640f5f149858dea54ebe62"
+      },
+      "target_active_rms_dbfs": -42,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          12.0,
+          0.84
+        ],
+        [
+          20.0,
+          1
+        ],
+        [
+          28.0,
+          1
+        ],
+        [
+          36.0,
+          0.95
+        ],
+        [
+          44.0,
+          0.95
+        ],
+        [
+          52.0,
+          0.9
+        ],
+        [
+          60.0,
+          0.9
+        ],
+        [
+          68.0,
+          1.05
+        ],
+        [
+          76.0,
+          1.05
+        ],
+        [
+          84.0,
+          0.93
+        ],
+        [
+          92.0,
+          0.93
+        ],
+        [
+          100.0,
+          1.02
+        ],
+        [
+          108.0,
+          1.02
+        ],
+        [
+          116.0,
+          0.86
+        ],
+        [
+          124.0,
+          0.86
+        ],
+        [
+          128.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-5.90",
+    "input_lra": "2.80",
+    "input_thresh": "-28.50",
+    "output_i": "-22.87",
+    "output_tp": "-10.40",
+    "output_lra": "2.50",
+    "output_thresh": "-32.87",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.13"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.5325838814003304,
+      0.5003835855468647
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/07-event-letter-in-ashes-v2.mmp",
+      "bytes": 6820,
+      "sha256": "0abe069f3814d2042dadec47ff44d6b5da15888c60048a10269094b4a92eb5c7"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/07-event-letter-in-ashes-v2.wav",
+      "bytes": 23040044,
+      "sha256": "943f65145d381c415a1a10b8b0496dfefc67bae322fb3da068d8e74393dea6ab"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/07-event-letter-in-ashes-v2.mp3",
+      "bytes": 2562116,
+      "sha256": "1f8b9b9ff64a6d178416c8dbbc6cc272103829b0320080e65d0f0b500fdcb2f9"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/07-event-letter-in-ashes-v2.ogg",
+      "bytes": 1413325,
+      "sha256": "0cebfff86199b62c82f1a438115bd5d2178803273ad77a2e58f8752066e08c5c"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "statement"
+    },
+    {
+      "start_bar": 4,
+      "name": "answer"
+    },
+    {
+      "start_bar": 8,
+      "name": "lift"
+    },
+    {
+      "start_bar": 12,
+      "name": "refrain"
+    },
+    {
+      "start_bar": 16,
+      "name": "statement"
+    },
+    {
+      "start_bar": 20,
+      "name": "answer"
+    },
+    {
+      "start_bar": 24,
+      "name": "lift"
+    },
+    {
+      "start_bar": 28,
+      "name": "refrain"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed",
+  "creative_revision": {
+    "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+    "primary_response_voice": "Vibraphone ink",
+    "changes": [
+      "short memorable motifs",
+      "foreground replies every 2 bars",
+      "orchestration or rhythmic fills every 4 bars",
+      "clearer pulse",
+      "gentle 1-bar transitions"
+    ],
+    "not_a_gain_only_revision": true
+  }
+}

@@ -1,0 +1,651 @@
+{
+  "id": "success",
+  "title": "归航余晖",
+  "stem": "13-success-homeward-glow-v2",
+  "idea": "成功撤离、首脑胜利与通关结算：柔圆号和温暖大调，不做刺耳连续胜利号角，末句自然回落。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+  "key": "A major",
+  "meter": [
+    3,
+    4
+  ],
+  "bpm_quarter": 112,
+  "bars": 24,
+  "total_beats": 72.0,
+  "seconds": 38.5714375,
+  "tracks": [
+    {
+      "name": "Horn homeward",
+      "program": 60,
+      "bank": 0,
+      "hand": null,
+      "notes": 60,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/13-success-homeward-glow-v2-Horn-homeward.wav",
+        "bytes": 14811520,
+        "sha256": "4f8d274ac830e5f1086d77723beae6724b82cb7fac5b82b8f2dea82685f8b16a"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          9.0,
+          0.84
+        ],
+        [
+          15.0,
+          1
+        ],
+        [
+          21.0,
+          1
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.9
+        ],
+        [
+          45.0,
+          0.9
+        ],
+        [
+          51.0,
+          1.05
+        ],
+        [
+          57.0,
+          1.05
+        ],
+        [
+          63.0,
+          0.93
+        ],
+        [
+          69.0,
+          0.93
+        ],
+        [
+          72.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Violin horizon gold",
+      "program": 40,
+      "bank": 0,
+      "hand": null,
+      "notes": 12,
+      "pan": -31,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/13-success-homeward-glow-v2-Violin-horizon-gold.wav",
+        "bytes": 14811520,
+        "sha256": "b20c77ee9a447b8ae13fd048966e0d2b5d6f991e11a21eaee8b414fb9b120684"
+      },
+      "target_active_rms_dbfs": -29,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          9.0,
+          0.84
+        ],
+        [
+          15.0,
+          1
+        ],
+        [
+          21.0,
+          1
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.9
+        ],
+        [
+          45.0,
+          0.9
+        ],
+        [
+          51.0,
+          1.05
+        ],
+        [
+          57.0,
+          1.05
+        ],
+        [
+          63.0,
+          0.93
+        ],
+        [
+          69.0,
+          0.93
+        ],
+        [
+          72.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Cello return",
+      "program": 42,
+      "bank": 0,
+      "hand": null,
+      "notes": 24,
+      "pan": 29,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/13-success-homeward-glow-v2-Cello-return.wav",
+        "bytes": 14811520,
+        "sha256": "c4395e64047315bbf04b5aeda66785ef466743ffa68a7555b3c4e5410c8dc17c"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          9.0,
+          0.92
+        ],
+        [
+          15.0,
+          0.96
+        ],
+        [
+          21.0,
+          0.96
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.91
+        ],
+        [
+          45.0,
+          0.91
+        ],
+        [
+          51.0,
+          1
+        ],
+        [
+          57.0,
+          1
+        ],
+        [
+          63.0,
+          0.96
+        ],
+        [
+          69.0,
+          0.96
+        ],
+        [
+          72.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Harp carried treasures",
+      "program": 46,
+      "bank": 0,
+      "hand": null,
+      "notes": 34,
+      "pan": -24,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/13-success-homeward-glow-v2-Harp-carried-treasures.wav",
+        "bytes": 14811520,
+        "sha256": "f27d8a6ae1031638777d5535ca85e81cefc2ba6c6016fc8c942654d167d7fd92"
+      },
+      "target_active_rms_dbfs": -37,
+      "continuous_gain_points": [
+        [
+          0,
+          0.65
+        ],
+        [
+          9.0,
+          0.65
+        ],
+        [
+          15.0,
+          0.9
+        ],
+        [
+          21.0,
+          0.9
+        ],
+        [
+          27.0,
+          0.74
+        ],
+        [
+          33.0,
+          0.74
+        ],
+        [
+          39.0,
+          0.84
+        ],
+        [
+          45.0,
+          0.84
+        ],
+        [
+          51.0,
+          0.96
+        ],
+        [
+          57.0,
+          0.96
+        ],
+        [
+          63.0,
+          0.67
+        ],
+        [
+          69.0,
+          0.67
+        ],
+        [
+          72.0,
+          0.65
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Trumpet final sunlight",
+      "program": 56,
+      "bank": 0,
+      "hand": null,
+      "notes": 8,
+      "pan": 20,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/13-success-homeward-glow-v2-Trumpet-final-sunlight.wav",
+        "bytes": 14811520,
+        "sha256": "461a0b166cb0a1e8ccb8b2ddffdae823a84815014362913006137e101745e411"
+      },
+      "target_active_rms_dbfs": -40,
+      "continuous_gain_points": [
+        [
+          0,
+          0.65
+        ],
+        [
+          9.0,
+          0.65
+        ],
+        [
+          15.0,
+          0.9
+        ],
+        [
+          21.0,
+          0.9
+        ],
+        [
+          27.0,
+          0.74
+        ],
+        [
+          33.0,
+          0.74
+        ],
+        [
+          39.0,
+          0.84
+        ],
+        [
+          45.0,
+          0.84
+        ],
+        [
+          51.0,
+          0.96
+        ],
+        [
+          57.0,
+          0.96
+        ],
+        [
+          63.0,
+          0.67
+        ],
+        [
+          69.0,
+          0.67
+        ],
+        [
+          72.0,
+          0.65
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Celeste quiet reward",
+      "program": 8,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 31,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/13-success-homeward-glow-v2-Celeste-quiet-reward.wav",
+        "bytes": 14811520,
+        "sha256": "dfc5f9940e630631d525937caba9f30e4769b15712cb064fc5f32d3864c9a45d"
+      },
+      "target_active_rms_dbfs": -43,
+      "continuous_gain_points": [
+        [
+          0,
+          0.65
+        ],
+        [
+          9.0,
+          0.65
+        ],
+        [
+          15.0,
+          0.9
+        ],
+        [
+          21.0,
+          0.9
+        ],
+        [
+          27.0,
+          0.74
+        ],
+        [
+          33.0,
+          0.74
+        ],
+        [
+          39.0,
+          0.84
+        ],
+        [
+          45.0,
+          0.84
+        ],
+        [
+          51.0,
+          0.96
+        ],
+        [
+          57.0,
+          0.96
+        ],
+        [
+          63.0,
+          0.67
+        ],
+        [
+          69.0,
+          0.67
+        ],
+        [
+          72.0,
+          0.65
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 12,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/13-success-homeward-glow-v2-Steady-low-foundation.wav",
+        "bytes": 14811520,
+        "sha256": "83a9bee8f8dc66c0a06b964b877c6c7847b6608e1294219702bd90f4142bfafc"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          9.0,
+          0.92
+        ],
+        [
+          15.0,
+          0.96
+        ],
+        [
+          21.0,
+          0.96
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.91
+        ],
+        [
+          45.0,
+          0.91
+        ],
+        [
+          51.0,
+          1
+        ],
+        [
+          57.0,
+          1
+        ],
+        [
+          63.0,
+          0.96
+        ],
+        [
+          69.0,
+          0.96
+        ],
+        [
+          72.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Light acoustic motion",
+      "program": 48,
+      "bank": 128,
+      "hand": null,
+      "notes": 48,
+      "pan": 10,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/13-success-homeward-glow-v2-Light-acoustic-motion.wav",
+        "bytes": 14811520,
+        "sha256": "ae67a2d73cd82513a59cbe948bad9d8cb6cc8a817dd27a682ba6ccd49f65ffa7"
+      },
+      "target_active_rms_dbfs": -42,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          9.0,
+          0.84
+        ],
+        [
+          15.0,
+          1
+        ],
+        [
+          21.0,
+          1
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.9
+        ],
+        [
+          45.0,
+          0.9
+        ],
+        [
+          51.0,
+          1.05
+        ],
+        [
+          57.0,
+          1.05
+        ],
+        [
+          63.0,
+          0.93
+        ],
+        [
+          69.0,
+          0.93
+        ],
+        [
+          72.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.51",
+    "input_tp": "-5.59",
+    "input_lra": "2.60",
+    "input_thresh": "-28.51",
+    "output_i": "-22.66",
+    "output_tp": "-9.83",
+    "output_lra": "2.40",
+    "output_thresh": "-32.66",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.34"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.5611897899865999,
+      0.8697248081339672
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/13-success-homeward-glow-v2.mmp",
+      "bytes": 7740,
+      "sha256": "72efb05f3c835d7fda06bb70fab7ea51ecdaadc6a0fd8cb0a4ff48e38d58b6c8"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/13-success-homeward-glow-v2.wav",
+      "bytes": 11108618,
+      "sha256": "b44c1ce1604fec5242d3713fadd275c7b5c481e21a2b556df316167a95e04717"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/13-success-homeward-glow-v2.mp3",
+      "bytes": 1236548,
+      "sha256": "b120a059e2abf83f33c9acadef3979e963cd2b68b606fa861a516efbeb5e5eff"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/13-success-homeward-glow-v2.ogg",
+      "bytes": 623380,
+      "sha256": "deb45de47f0f7dbf3c6466547206445bacd8263d8e7c5c621880b3dbc41ce888"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "statement"
+    },
+    {
+      "start_bar": 4,
+      "name": "answer"
+    },
+    {
+      "start_bar": 8,
+      "name": "lift"
+    },
+    {
+      "start_bar": 12,
+      "name": "refrain"
+    },
+    {
+      "start_bar": 16,
+      "name": "statement"
+    },
+    {
+      "start_bar": 20,
+      "name": "answer"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed",
+  "creative_revision": {
+    "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+    "primary_response_voice": "Violin horizon gold",
+    "changes": [
+      "short memorable motifs",
+      "foreground replies every 2 bars",
+      "orchestration or rhythmic fills every 4 bars",
+      "clearer pulse",
+      "gentle 1-bar transitions"
+    ],
+    "not_a_gain_only_revision": true
+  }
+}

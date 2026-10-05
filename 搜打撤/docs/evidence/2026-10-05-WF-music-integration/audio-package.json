@@ -1,0 +1,262 @@
+{
+  "status": "passed",
+  "exitCode": 0,
+  "tracks": [
+    {
+      "id": "title",
+      "title": "霜窗回声 · 双手钢琴",
+      "version": "approved 01-title-frostglass-v10",
+      "source": {
+        "path": "docs/evidence/2026-10-05-WF-music-piano-two-hands/01-title-frostglass-v10.wav",
+        "bytes": 26331470,
+        "sha256": "07d8c38088de5b2a8a172c9048d60c4e6dfc4a94a65c617dfd98bbfdc3c118d9"
+      },
+      "runtime": {
+        "path": "game/assets/music-demo/01-title-frostglass.ogg",
+        "bytes": 718863,
+        "sha256": "d5c69dbc3bb85c7078d866b9881fd96040532175334f96976faff9a19a431c07"
+      },
+      "codec": "opus",
+      "container": "ogg"
+    },
+    {
+      "id": "explore",
+      "title": "灰线行军 · 双手行旅",
+      "version": "approved 02-explore-ashline-v6",
+      "source": {
+        "path": "docs/evidence/2026-10-05-WF-music-piano-two-hands/02-explore-ashline-v6.wav",
+        "bytes": 29622902,
+        "sha256": "459abc9546dc5146c618cefc7cbaa35cef37121dfddbb6045f4965674455d986"
+      },
+      "runtime": {
+        "path": "game/assets/music-demo/02-explore-ashline.ogg",
+        "bytes": 838678,
+        "sha256": "c0960cd2fefeb60b24a8b2d6264290763ffe8edde31b738ae04b42e934a01458"
+      },
+      "codec": "opus",
+      "container": "ogg"
+    },
+    {
+      "id": "battle",
+      "title": "黑脉交锋 · 双手间奏",
+      "version": "approved 03-battle-blackpulse-v6",
+      "source": {
+        "path": "docs/evidence/2026-10-05-WF-music-piano-two-hands/03-battle-blackpulse-v6.wav",
+        "bytes": 26756174,
+        "sha256": "6880372f3b438d9dffd28218ed4e5078ef7008c5ea2b869a35cb81aa441984b0"
+      },
+      "runtime": {
+        "path": "game/assets/music-demo/03-battle-blackpulse.ogg",
+        "bytes": 793644,
+        "sha256": "b89a84bab6b048ab30da5c2035f56e9af731ecb3f6c2c138934f7a3eec21f105"
+      },
+      "codec": "opus",
+      "container": "ogg"
+    },
+    {
+      "id": "base",
+      "title": "晨霜归所",
+      "version": "anime v2 04-base-morning-haven-v2",
+      "source": {
+        "path": "docs/evidence/2026-10-05-WF-music-anime-v2/04-base-morning-haven-v2.wav",
+        "bytes": 16588844,
+        "sha256": "0ef263a630fc149f799719f3ca9dd0505a7b8b345d8dd09a1b2ae095702bdefb"
+      },
+      "runtime": {
+        "path": "game/assets/music-demo/04-base-morning-haven.ogg",
+        "bytes": 475517,
+        "sha256": "edcc8cb1fc4705c9b6a1c91c5637a38fee2c295366288e486e45d56f08e8b7ee"
+      },
+      "codec": "opus",
+      "container": "ogg"
+    },
+    {
+      "id": "shop",
+      "title": "铜灯市集",
+      "version": "anime v2 05-shop-copper-lanterns-v2",
+      "source": {
+        "path": "docs/evidence/2026-10-05-WF-music-anime-v2/05-shop-copper-lanterns-v2.wav",
+        "bytes": 24685760,
+        "sha256": "7db0a5c149d25a787f8c0ab402ff9733b8ca82809a9ec854b1be7d61edc93f99"
+      },
+      "runtime": {
+        "path": "game/assets/music-demo/05-shop-copper-lanterns.ogg",
+        "bytes": 778436,
+        "sha256": "84f036b2594499e407b166a474e3fedd8f34defd24dc8e7011748f01ca3609f2"
+      },
+      "codec": "opus",
+      "container": "ogg"
+    },
+    {
+      "id": "fire",
+      "title": "炉边长夜",
+      "version": "anime v2 06-fire-embers-and-snow-v2",
+      "source": {
+        "path": "docs/evidence/2026-10-05-WF-music-anime-v2/06-fire-embers-and-snow-v2.wav",
+        "bytes": 18432044,
+        "sha256": "27dd05ba7ad1ff6ec4f490cba0a3f37b6db55a8c69287e25b0204971de339b12"
+      },
+      "runtime": {
+        "path": "game/assets/music-demo/06-fire-embers-and-snow.ogg",
+        "bytes": 525062,
+        "sha256": "81a42685bb7fe26de29c096a390228f7c9b033953af34ac3836538bd57fdf8e1"
+      },
+      "codec": "opus",
+      "container": "ogg"
+    },
+    {
+      "id": "event",
+      "title": "余烬来信",
+      "version": "anime v2 07-event-letter-in-ashes-v2",
+      "source": {
+        "path": "docs/evidence/2026-10-05-WF-music-anime-v2/07-event-letter-in-ashes-v2.wav",
+        "bytes": 23040044,
+        "sha256": "943f65145d381c415a1a10b8b0496dfefc67bae322fb3da068d8e74393dea6ab"
+      },
+      "runtime": {
+        "path": "game/assets/music-demo/07-event-letter-in-ashes.ogg",
+        "bytes": 743795,
+        "sha256": "0be0472db8a4258abc774b2b8bd49d2e2f5f727ee093020c6461816b523da2a0"
+      },
+      "codec": "opus",
+      "container": "ogg"
+    },
+    {
+      "id": "altar",
+      "title": "幽核回响",
+      "version": "anime v2 08-altar-hollow-core-v2",
+      "source": {
+        "path": "docs/evidence/2026-10-05-WF-music-anime-v2/08-altar-hollow-core-v2.wav",
+        "bytes": 20230286,
+        "sha256": "d8633b151daa81cea7ded33729844f2e111c437b1022956d9384231c867d8cd1"
+      },
+      "runtime": {
+        "path": "game/assets/music-demo/08-altar-hollow-core.ogg",
+        "bytes": 603447,
+        "sha256": "9e7ce524c46e9fe46f5ce467cc4201ea3638c6b2b889874ab7ee5243e908d9d9"
+      },
+      "codec": "opus",
+      "container": "ogg"
+    },
+    {
+      "id": "extraction",
+      "title": "渡口倒数",
+      "version": "anime v2 09-extraction-last-ferry-v2",
+      "source": {
+        "path": "docs/evidence/2026-10-05-WF-music-anime-v2/09-extraction-last-ferry-v2.wav",
+        "bytes": 15120044,
+        "sha256": "c0763a74c5cca504ff3f0cb271b60ac2bb813bab53549104e622265ad44f665c"
+      },
+      "runtime": {
+        "path": "game/assets/music-demo/09-extraction-last-ferry.ogg",
+        "bytes": 430638,
+        "sha256": "626e9f5a6468354e3f1d0d56a56a33655aebaba14c8ccb7ec8ac83503bf6c89a"
+      },
+      "codec": "opus",
+      "container": "ogg"
+    },
+    {
+      "id": "boss-governor",
+      "title": "铁律封城",
+      "version": "anime v2 10-boss-governor-iron-edict-v2",
+      "source": {
+        "path": "docs/evidence/2026-10-05-WF-music-anime-v2/10-boss-governor-iron-edict-v2.wav",
+        "bytes": 15360044,
+        "sha256": "968a675a6d69cee2ec0fb8bfb81990ad42916c9f2c3541ac3f5f94e599ae4fa8"
+      },
+      "runtime": {
+        "path": "game/assets/music-demo/10-boss-governor-iron-edict.ogg",
+        "bytes": 454623,
+        "sha256": "d6380a3020dbb9ec1fe971348fc0d2068cecf025ed01d5da7c75692cf4d6e73f"
+      },
+      "codec": "opus",
+      "container": "ogg"
+    },
+    {
+      "id": "boss-brood",
+      "title": "腐巢微光",
+      "version": "anime v2 11-boss-brood-pale-nest-v2",
+      "source": {
+        "path": "docs/evidence/2026-10-05-WF-music-anime-v2/11-boss-brood-pale-nest-v2.wav",
+        "bytes": 14811470,
+        "sha256": "401c1c2f6e333f9a0706026e479d4156d6e09de8d26544a298d380f6abd101f4"
+      },
+      "runtime": {
+        "path": "game/assets/music-demo/11-boss-brood-pale-nest.ogg",
+        "bytes": 445462,
+        "sha256": "f6039a096937e1f04487c2d1fdd7ce35b5e3365d5353f17a0f6532981b83acd0"
+      },
+      "codec": "opus",
+      "container": "ogg"
+    },
+    {
+      "id": "boss-psionic",
+      "title": "折镜之主",
+      "version": "anime v2 12-boss-psionic-broken-mirrors-v2",
+      "source": {
+        "path": "docs/evidence/2026-10-05-WF-music-anime-v2/12-boss-psionic-broken-mirrors-v2.wav",
+        "bytes": 13824044,
+        "sha256": "1b8823a20d5fda6c6deb8c3fafc7a7cb8a38df1c0a6ccd18b699abd67279565c"
+      },
+      "runtime": {
+        "path": "game/assets/music-demo/12-boss-psionic-broken-mirrors.ogg",
+        "bytes": 427587,
+        "sha256": "ebe76c23345e82c2555e7ecb0dc0a19594a336dea703f6d1484f8a79922c932c"
+      },
+      "codec": "opus",
+      "container": "ogg"
+    },
+    {
+      "id": "success",
+      "title": "归航余晖",
+      "version": "anime v2 13-success-homeward-glow-v2",
+      "source": {
+        "path": "docs/evidence/2026-10-05-WF-music-anime-v2/13-success-homeward-glow-v2.wav",
+        "bytes": 11108618,
+        "sha256": "b44c1ce1604fec5242d3713fadd275c7b5c481e21a2b556df316167a95e04717"
+      },
+      "runtime": {
+        "path": "game/assets/music-demo/13-success-homeward-glow.ogg",
+        "bytes": 351624,
+        "sha256": "a38630155ef86ba518b86e22a21cd922247db2ea1c683f78bf01efe7df65debe"
+      },
+      "codec": "opus",
+      "container": "ogg"
+    },
+    {
+      "id": "defeat",
+      "title": "未熄之灯",
+      "version": "anime v2 14-defeat-unextinguished-lamp-v2",
+      "source": {
+        "path": "docs/evidence/2026-10-05-WF-music-anime-v2/14-defeat-unextinguished-lamp-v2.wav",
+        "bytes": 19748618,
+        "sha256": "c0e495f45f23849630a3c72ebf6c5d228ffe854e9a88266e9e3a01155d69f6fd"
+      },
+      "runtime": {
+        "path": "game/assets/music-demo/14-defeat-unextinguished-lamp.ogg",
+        "bytes": 648342,
+        "sha256": "20b05f3445c64837ee95320521daab9ccc19c50d7c41eb29be9b4eac569a0602"
+      },
+      "codec": "opus",
+      "container": "ogg"
+    }
+  ],
+  "old_runtime_backups": [
+    {
+      "path": ".tmp/music-workstation/integration-before/01-title-frostglass.ogg",
+      "bytes": 748780,
+      "sha256": "cabeb3798923dcc23eeae1f6332abdb5823374b837f4c8ebbb7c2ac3773f2ec7"
+    },
+    {
+      "path": ".tmp/music-workstation/integration-before/02-explore-ashline.ogg",
+      "bytes": 810668,
+      "sha256": "d6d266a7a2361e97bb5f5ac55f12f448d69b2b716404df79faea1a4c8c2d56ea"
+    },
+    {
+      "path": ".tmp/music-workstation/integration-before/03-battle-blackpulse.ogg",
+      "bytes": 881593,
+      "sha256": "bd820e70480417cf4201facdb3dcae609a6cf07ec11523658b5a8ff115962d97"
+    }
+  ],
+  "method": "Existing ffmpeg libopus 64k stereo; lossless WAV sources retained and unchanged. Runtime Opus decoded through Howler format opus."
+}

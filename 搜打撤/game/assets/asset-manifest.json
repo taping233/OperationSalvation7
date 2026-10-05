@@ -1,8 +1,32 @@
 {
   "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 677,
+  "count": 691,
   "assets": [
+    {
+      "path": "music-demo/01-title-frostglass.ogg",
+      "ext": "ogg",
+      "bytes": 718863,
+      "sha256": "d5c69dbc3bb85c7078d866b9881fd96040532175334f96976faff9a19a431c07",
+      "license": "项目原创曲目；GeneralUser GS 2.0.3 BETA 采样许可v2.0（允许音乐创作）",
+      "source": "docs/evidence/2026-10-05-WF-music-integration/audio-package.json"
+    },
+    {
+      "path": "music-demo/02-explore-ashline.ogg",
+      "ext": "ogg",
+      "bytes": 838678,
+      "sha256": "c0960cd2fefeb60b24a8b2d6264290763ffe8edde31b738ae04b42e934a01458",
+      "license": "项目原创曲目；GeneralUser GS 2.0.3 BETA 采样许可v2.0（允许音乐创作）",
+      "source": "docs/evidence/2026-10-05-WF-music-integration/audio-package.json"
+    },
+    {
+      "path": "music-demo/03-battle-blackpulse.ogg",
+      "ext": "ogg",
+      "bytes": 793644,
+      "sha256": "b89a84bab6b048ab30da5c2035f56e9af731ecb3f6c2c138934f7a3eec21f105",
+      "license": "项目原创曲目；GeneralUser GS 2.0.3 BETA 采样许可v2.0（允许音乐创作）",
+      "source": "docs/evidence/2026-10-05-WF-music-integration/audio-package.json"
+    },
     {
       "path": "cards/martial-cc-unmoved.webp",
       "ext": "webp",
@@ -4922,6 +4946,94 @@
       "sha256": "ae985adc4a1bcd504f551714685e5ec375e20779a17efdc6e86042a1422ce3bd",
       "license": "AI生成（OpenAI ImageGen，本项目友军返修）",
       "source": "docs/evidence/2026-10-05-WF-card-ally-redesign/images.json"
+    },
+    {
+      "path": "music-demo/04-base-morning-haven.ogg",
+      "ext": "ogg",
+      "bytes": 475517,
+      "sha256": "edcc8cb1fc4705c9b6a1c91c5637a38fee2c295366288e486e45d56f08e8b7ee",
+      "license": "项目原创曲目；GeneralUser GS 2.0.3 BETA 采样许可v2.0（允许音乐创作）",
+      "source": "docs/evidence/2026-10-05-WF-music-integration/audio-package.json"
+    },
+    {
+      "path": "music-demo/05-shop-copper-lanterns.ogg",
+      "ext": "ogg",
+      "bytes": 778436,
+      "sha256": "84f036b2594499e407b166a474e3fedd8f34defd24dc8e7011748f01ca3609f2",
+      "license": "项目原创曲目；GeneralUser GS 2.0.3 BETA 采样许可v2.0（允许音乐创作）",
+      "source": "docs/evidence/2026-10-05-WF-music-integration/audio-package.json"
+    },
+    {
+      "path": "music-demo/06-fire-embers-and-snow.ogg",
+      "ext": "ogg",
+      "bytes": 525062,
+      "sha256": "81a42685bb7fe26de29c096a390228f7c9b033953af34ac3836538bd57fdf8e1",
+      "license": "项目原创曲目；GeneralUser GS 2.0.3 BETA 采样许可v2.0（允许音乐创作）",
+      "source": "docs/evidence/2026-10-05-WF-music-integration/audio-package.json"
+    },
+    {
+      "path": "music-demo/07-event-letter-in-ashes.ogg",
+      "ext": "ogg",
+      "bytes": 743795,
+      "sha256": "0be0472db8a4258abc774b2b8bd49d2e2f5f727ee093020c6461816b523da2a0",
+      "license": "项目原创曲目；GeneralUser GS 2.0.3 BETA 采样许可v2.0（允许音乐创作）",
+      "source": "docs/evidence/2026-10-05-WF-music-integration/audio-package.json"
+    },
+    {
+      "path": "music-demo/08-altar-hollow-core.ogg",
+      "ext": "ogg",
+      "bytes": 603447,
+      "sha256": "9e7ce524c46e9fe46f5ce467cc4201ea3638c6b2b889874ab7ee5243e908d9d9",
+      "license": "项目原创曲目；GeneralUser GS 2.0.3 BETA 采样许可v2.0（允许音乐创作）",
+      "source": "docs/evidence/2026-10-05-WF-music-integration/audio-package.json"
+    },
+    {
+      "path": "music-demo/09-extraction-last-ferry.ogg",
+      "ext": "ogg",
+      "bytes": 430638,
+      "sha256": "626e9f5a6468354e3f1d0d56a56a33655aebaba14c8ccb7ec8ac83503bf6c89a",
+      "license": "项目原创曲目；GeneralUser GS 2.0.3 BETA 采样许可v2.0（允许音乐创作）",
+      "source": "docs/evidence/2026-10-05-WF-music-integration/audio-package.json"
+    },
+    {
+      "path": "music-demo/10-boss-governor-iron-edict.ogg",
+      "ext": "ogg",
+      "bytes": 454623,
+      "sha256": "d6380a3020dbb9ec1fe971348fc0d2068cecf025ed01d5da7c75692cf4d6e73f",
+      "license": "项目原创曲目；GeneralUser GS 2.0.3 BETA 采样许可v2.0（允许音乐创作）",
+      "source": "docs/evidence/2026-10-05-WF-music-integration/audio-package.json"
+    },
+    {
+      "path": "music-demo/11-boss-brood-pale-nest.ogg",
+      "ext": "ogg",
+      "bytes": 445462,
+      "sha256": "f6039a096937e1f04487c2d1fdd7ce35b5e3365d5353f17a0f6532981b83acd0",
+      "license": "项目原创曲目；GeneralUser GS 2.0.3 BETA 采样许可v2.0（允许音乐创作）",
+      "source": "docs/evidence/2026-10-05-WF-music-integration/audio-package.json"
+    },
+    {
+      "path": "music-demo/12-boss-psionic-broken-mirrors.ogg",
+      "ext": "ogg",
+      "bytes": 427587,
+      "sha256": "ebe76c23345e82c2555e7ecb0dc0a19594a336dea703f6d1484f8a79922c932c",
+      "license": "项目原创曲目；GeneralUser GS 2.0.3 BETA 采样许可v2.0（允许音乐创作）",
+      "source": "docs/evidence/2026-10-05-WF-music-integration/audio-package.json"
+    },
+    {
+      "path": "music-demo/13-success-homeward-glow.ogg",
+      "ext": "ogg",
+      "bytes": 351624,
+      "sha256": "a38630155ef86ba518b86e22a21cd922247db2ea1c683f78bf01efe7df65debe",
+      "license": "项目原创曲目；GeneralUser GS 2.0.3 BETA 采样许可v2.0（允许音乐创作）",
+      "source": "docs/evidence/2026-10-05-WF-music-integration/audio-package.json"
+    },
+    {
+      "path": "music-demo/14-defeat-unextinguished-lamp.ogg",
+      "ext": "ogg",
+      "bytes": 648342,
+      "sha256": "20b05f3445c64837ee95320521daab9ccc19c50d7c41eb29be9b4eac569a0602",
+      "license": "项目原创曲目；GeneralUser GS 2.0.3 BETA 采样许可v2.0（允许音乐创作）",
+      "source": "docs/evidence/2026-10-05-WF-music-integration/audio-package.json"
     }
   ],
   "verified": "2026-10-05"

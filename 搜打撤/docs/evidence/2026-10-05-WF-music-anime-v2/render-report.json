@@ -1,0 +1,8034 @@
+{
+  "source_inputs_unchanged": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/04-base-morning-haven.wav",
+      "bytes": 19748618,
+      "sha256": "5b83d0eed9e8a42b44b4a11ec6757be9c613a245ac72d06a5ff72d3cc188a8c8"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/05-shop-copper-lanterns.wav",
+      "bytes": 27648044,
+      "sha256": "d74ea861bda9931f0a434022909dd0114536db49ed8634ecc5de3d78a1bcebe6"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/06-fire-embers-and-snow.wav",
+      "bytes": 23040044,
+      "sha256": "1b30d7df4017c37f8ea261f449481296a74cfa93bcde94ffd9c7325748e887c9"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/07-event-letter-in-ashes.wav",
+      "bytes": 28356968,
+      "sha256": "6f45239ae20dd902f583fa92a6f8a1a81e0e418f7b6a1ded3a01217216c571e4"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/08-altar-hollow-core.wav",
+      "bytes": 24395336,
+      "sha256": "0e520f27006a6dac95f4538bc0090ca36d056f61c6ac3c5a0aa85f4b3fa96e4b"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/09-extraction-last-ferry.wav",
+      "bytes": 17920046,
+      "sha256": "0c11934dfa3abc14af66d5e54f3e1c9b665ccd95f1a3f2aa5d2a773e451fa994"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/10-boss-governor-iron-edict.wav",
+      "bytes": 18432044,
+      "sha256": "39dfaa98117ce14e5bf81c6081f7026b8f908d573897824aa533a32768c241e0"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/11-boss-brood-pale-nest.wav",
+      "bytes": 18432044,
+      "sha256": "ab06223976b949c171b0bd8ee2b32fc9476c71e4e04d3e170f516f9d3e7809b3"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/12-boss-psionic-broken-mirrors.wav",
+      "bytes": 17280044,
+      "sha256": "d1995cfc49f4fa70e94d2a7fa4d90dcb108edca5f316ae74e82618aefbb37a93"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/13-success-homeward-glow.wav",
+      "bytes": 13523522,
+      "sha256": "33a0d6c1c6edfb344dcd9c652f58a02a41b139741b02d9774f6130a54192fd05"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/14-defeat-unextinguished-lamp.wav",
+      "bytes": 23040044,
+      "sha256": "d15ae428a7ace4014f55a7f40eac067efc0c035e9c2d305d072adaa83733abcf"
+    }
+  ],
+  "cues": [
+    {
+      "id": "base",
+      "title": "晨霜归所",
+      "stem": "04-base-morning-haven-v2",
+      "idea": "安稳的三拍驻地小圆舞曲；钢琴双手主导，单簧管只在句尾接话，B段把旋律交给弦乐色彩。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+      "key": "F major",
+      "meter": [
+        3,
+        4
+      ],
+      "bpm_quarter": 100,
+      "bars": 32,
+      "total_beats": 96.0,
+      "seconds": 57.6,
+      "tracks": [
+        {
+          "name": "Piano right hand",
+          "program": 0,
+          "bank": 0,
+          "hand": "right",
+          "notes": 80,
+          "pan": 7,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/04-base-morning-haven-v2-Piano-right-hand.wav",
+            "bytes": 22118488,
+            "sha256": "5939fdea39ece5c8b71b14b61d43cf4d57e48351dddd17386dfa5dd2d17aa804"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              9.0,
+              0.84
+            ],
+            [
+              15.0,
+              1
+            ],
+            [
+              21.0,
+              1
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.9
+            ],
+            [
+              45.0,
+              0.9
+            ],
+            [
+              51.0,
+              1.05
+            ],
+            [
+              57.0,
+              1.05
+            ],
+            [
+              63.0,
+              0.93
+            ],
+            [
+              69.0,
+              0.93
+            ],
+            [
+              75.0,
+              1.02
+            ],
+            [
+              81.0,
+              1.02
+            ],
+            [
+              87.0,
+              0.86
+            ],
+            [
+              93.0,
+              0.86
+            ],
+            [
+              96.0,
+              0.84
+            ]
+          ],
+          "cc64_used": true
+        },
+        {
+          "name": "Piano left hand",
+          "program": 0,
+          "bank": 0,
+          "hand": "left",
+          "notes": 96,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/04-base-morning-haven-v2-Piano-left-hand.wav",
+            "bytes": 22118488,
+            "sha256": "553cfdecd46ab410f72eae79cfdba6be7f9e84a1eea75a81a4eb5861ce3c9d7c"
+          },
+          "target_active_rms_dbfs": -28.5,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              9.0,
+              0.92
+            ],
+            [
+              15.0,
+              0.96
+            ],
+            [
+              21.0,
+              0.96
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.91
+            ],
+            [
+              45.0,
+              0.91
+            ],
+            [
+              51.0,
+              1
+            ],
+            [
+              57.0,
+              1
+            ],
+            [
+              63.0,
+              0.96
+            ],
+            [
+              69.0,
+              0.96
+            ],
+            [
+              75.0,
+              0.97
+            ],
+            [
+              81.0,
+              0.97
+            ],
+            [
+              87.0,
+              0.9
+            ],
+            [
+              93.0,
+              0.9
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": true
+        },
+        {
+          "name": "Clarinet window",
+          "program": 71,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 23,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/04-base-morning-haven-v2-Clarinet-window.wav",
+            "bytes": 22118488,
+            "sha256": "c3d35038de0693e59e3ac7a06865e64ba60bdc28746b0c875869864041091b62"
+          },
+          "target_active_rms_dbfs": -29,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              9.0,
+              0.84
+            ],
+            [
+              15.0,
+              1
+            ],
+            [
+              21.0,
+              1
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.9
+            ],
+            [
+              45.0,
+              0.9
+            ],
+            [
+              51.0,
+              1.05
+            ],
+            [
+              57.0,
+              1.05
+            ],
+            [
+              63.0,
+              0.93
+            ],
+            [
+              69.0,
+              0.93
+            ],
+            [
+              75.0,
+              1.02
+            ],
+            [
+              81.0,
+              1.02
+            ],
+            [
+              87.0,
+              0.86
+            ],
+            [
+              93.0,
+              0.86
+            ],
+            [
+              96.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Cello hearth",
+          "program": 42,
+          "bank": 0,
+          "hand": null,
+          "notes": 32,
+          "pan": 30,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/04-base-morning-haven-v2-Cello-hearth.wav",
+            "bytes": 22118488,
+            "sha256": "9d10223d9f330ede176110d00191d72d0bf4f285dbb1e52ebd76b55a39e12219"
+          },
+          "target_active_rms_dbfs": -36,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              9.0,
+              0.92
+            ],
+            [
+              15.0,
+              0.96
+            ],
+            [
+              21.0,
+              0.96
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.91
+            ],
+            [
+              45.0,
+              0.91
+            ],
+            [
+              51.0,
+              1
+            ],
+            [
+              57.0,
+              1
+            ],
+            [
+              63.0,
+              0.96
+            ],
+            [
+              69.0,
+              0.96
+            ],
+            [
+              75.0,
+              0.97
+            ],
+            [
+              81.0,
+              0.97
+            ],
+            [
+              87.0,
+              0.9
+            ],
+            [
+              93.0,
+              0.9
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Warm bowed room",
+          "program": 49,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": -29,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/04-base-morning-haven-v2-Warm-bowed-room.wav",
+            "bytes": 22118488,
+            "sha256": "40a2b56c90cdee863a4e90da0fb249ac1e4c6eae8ee7be4f334c0681435d214c"
+          },
+          "target_active_rms_dbfs": -34,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              9.0,
+              0.92
+            ],
+            [
+              15.0,
+              0.96
+            ],
+            [
+              21.0,
+              0.96
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.91
+            ],
+            [
+              45.0,
+              0.91
+            ],
+            [
+              51.0,
+              1
+            ],
+            [
+              57.0,
+              1
+            ],
+            [
+              63.0,
+              0.96
+            ],
+            [
+              69.0,
+              0.96
+            ],
+            [
+              75.0,
+              0.97
+            ],
+            [
+              81.0,
+              0.97
+            ],
+            [
+              87.0,
+              0.9
+            ],
+            [
+              93.0,
+              0.9
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Harp morning",
+          "program": 46,
+          "bank": 0,
+          "hand": null,
+          "notes": 44,
+          "pan": -30,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/04-base-morning-haven-v2-Harp-morning.wav",
+            "bytes": 22118488,
+            "sha256": "eac2ab2eb5961f6c8945cbf2c88cdbe01203f8ae06f0d81fed50d3efe7042a99"
+          },
+          "target_active_rms_dbfs": -41,
+          "continuous_gain_points": [
+            [
+              0,
+              0.65
+            ],
+            [
+              9.0,
+              0.65
+            ],
+            [
+              15.0,
+              0.9
+            ],
+            [
+              21.0,
+              0.9
+            ],
+            [
+              27.0,
+              0.74
+            ],
+            [
+              33.0,
+              0.74
+            ],
+            [
+              39.0,
+              0.84
+            ],
+            [
+              45.0,
+              0.84
+            ],
+            [
+              51.0,
+              0.96
+            ],
+            [
+              57.0,
+              0.96
+            ],
+            [
+              63.0,
+              0.67
+            ],
+            [
+              69.0,
+              0.67
+            ],
+            [
+              75.0,
+              0.91
+            ],
+            [
+              81.0,
+              0.91
+            ],
+            [
+              87.0,
+              0.74
+            ],
+            [
+              93.0,
+              0.74
+            ],
+            [
+              96.0,
+              0.65
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/04-base-morning-haven-v2-Steady-low-foundation.wav",
+            "bytes": 22118488,
+            "sha256": "20d116e8f4f2fc83678ce8e2fb3748e3ec4195a8b20dfff86f322a1cfecbac68"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              9.0,
+              0.92
+            ],
+            [
+              15.0,
+              0.96
+            ],
+            [
+              21.0,
+              0.96
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.91
+            ],
+            [
+              45.0,
+              0.91
+            ],
+            [
+              51.0,
+              1
+            ],
+            [
+              57.0,
+              1
+            ],
+            [
+              63.0,
+              0.96
+            ],
+            [
+              69.0,
+              0.96
+            ],
+            [
+              75.0,
+              0.97
+            ],
+            [
+              81.0,
+              0.97
+            ],
+            [
+              87.0,
+              0.9
+            ],
+            [
+              93.0,
+              0.9
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Light acoustic motion",
+          "program": 48,
+          "bank": 128,
+          "hand": null,
+          "notes": 64,
+          "pan": 10,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/04-base-morning-haven-v2-Light-acoustic-motion.wav",
+            "bytes": 22118488,
+            "sha256": "4a310a2b42f4537351dc3285f11d10e6666a061f890a4d19eaea8ebdb3b58116"
+          },
+          "target_active_rms_dbfs": -42,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              9.0,
+              0.84
+            ],
+            [
+              15.0,
+              1
+            ],
+            [
+              21.0,
+              1
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.9
+            ],
+            [
+              45.0,
+              0.9
+            ],
+            [
+              51.0,
+              1.05
+            ],
+            [
+              57.0,
+              1.05
+            ],
+            [
+              63.0,
+              0.93
+            ],
+            [
+              69.0,
+              0.93
+            ],
+            [
+              75.0,
+              1.02
+            ],
+            [
+              81.0,
+              1.02
+            ],
+            [
+              87.0,
+              0.86
+            ],
+            [
+              93.0,
+              0.86
+            ],
+            [
+              96.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.51",
+        "input_tp": "-4.88",
+        "input_lra": "1.80",
+        "input_thresh": "-28.51",
+        "output_i": "-22.88",
+        "output_tp": "-9.27",
+        "output_lra": "1.60",
+        "output_thresh": "-32.88",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.12"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.40766138829847115,
+          0.5989386879027001
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/04-base-morning-haven-v2.mmp",
+          "bytes": 7665,
+          "sha256": "2aa3fe789103b979e4decbd6fdd01dd21c28568df7b6647f2376ca68a632f0fc"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/04-base-morning-haven-v2.wav",
+          "bytes": 16588844,
+          "sha256": "0ef263a630fc149f799719f3ca9dd0505a7b8b345d8dd09a1b2ae095702bdefb"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/04-base-morning-haven-v2.mp3",
+          "bytes": 1844804,
+          "sha256": "4e627339fd25d0e84e11fee17cc694cab207856abb61f8d1dbb98faa8c725e27"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/04-base-morning-haven-v2.ogg",
+          "bytes": 950072,
+          "sha256": "49e5440537166bec27b39536f5d5f092caa650f83e117e9844cb88f0e69868fd"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/04-base-morning-haven-v2-piano.mid",
+          "bytes": 2222,
+          "sha256": "6ccefa233f31ced55b50eb7b67f5ef1a02bc3a3f09fccd7c072f9f8f902aa5b1"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "statement"
+        },
+        {
+          "start_bar": 4,
+          "name": "answer"
+        },
+        {
+          "start_bar": 8,
+          "name": "lift"
+        },
+        {
+          "start_bar": 12,
+          "name": "refrain"
+        },
+        {
+          "start_bar": 16,
+          "name": "statement"
+        },
+        {
+          "start_bar": 20,
+          "name": "answer"
+        },
+        {
+          "start_bar": 24,
+          "name": "lift"
+        },
+        {
+          "start_bar": 28,
+          "name": "refrain"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed",
+      "creative_revision": {
+        "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+        "primary_response_voice": "Clarinet window",
+        "changes": [
+          "short memorable motifs",
+          "foreground replies every 2 bars",
+          "orchestration or rhythmic fills every 4 bars",
+          "clearer pulse",
+          "gentle 1-bar transitions"
+        ],
+        "not_a_gain_only_revision": true
+      }
+    },
+    {
+      "id": "shop",
+      "title": "铜灯市集",
+      "stem": "05-shop-copper-lanterns-v2",
+      "idea": "五拍按3+2走的拾荒商队；单簧管俏皮但不碎，羽管键琴与拨弦形成步伐，末段换成轻轻讨价还价的回答。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+      "key": "C dorian",
+      "meter": [
+        5,
+        4
+      ],
+      "bpm_quarter": 112,
+      "bars": 32,
+      "total_beats": 160.0,
+      "seconds": 85.71429166666667,
+      "tracks": [
+        {
+          "name": "Clarinet merchant",
+          "program": 71,
+          "bank": 0,
+          "hand": null,
+          "notes": 112,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/05-shop-copper-lanterns-v2-Clarinet-merchant.wav",
+            "bytes": 32914376,
+            "sha256": "677e6728451f36a0f2fe3757f3642074f3abc375ef9f535922c2ffc7466e4877"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              15.0,
+              0.84
+            ],
+            [
+              25.0,
+              1
+            ],
+            [
+              35.0,
+              1
+            ],
+            [
+              45.0,
+              0.95
+            ],
+            [
+              55.0,
+              0.95
+            ],
+            [
+              65.0,
+              0.9
+            ],
+            [
+              75.0,
+              0.9
+            ],
+            [
+              85.0,
+              1.05
+            ],
+            [
+              95.0,
+              1.05
+            ],
+            [
+              105.0,
+              0.93
+            ],
+            [
+              115.0,
+              0.93
+            ],
+            [
+              125.0,
+              1.02
+            ],
+            [
+              135.0,
+              1.02
+            ],
+            [
+              145.0,
+              0.86
+            ],
+            [
+              155.0,
+              0.86
+            ],
+            [
+              160.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Harpsichord bargaining",
+          "program": 6,
+          "bank": 0,
+          "hand": null,
+          "notes": 104,
+          "pan": -24,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/05-shop-copper-lanterns-v2-Harpsichord-bargaining.wav",
+            "bytes": 32914376,
+            "sha256": "07aa13661223c998a7f4d1a1010fb5efa8b8507ce4841b02f34ec078b681d418"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.68
+            ],
+            [
+              15.0,
+              0.68
+            ],
+            [
+              25.0,
+              0.9
+            ],
+            [
+              35.0,
+              0.9
+            ],
+            [
+              45.0,
+              0.78
+            ],
+            [
+              55.0,
+              0.78
+            ],
+            [
+              65.0,
+              0.95
+            ],
+            [
+              75.0,
+              0.95
+            ],
+            [
+              85.0,
+              0.92
+            ],
+            [
+              95.0,
+              0.92
+            ],
+            [
+              105.0,
+              0.72
+            ],
+            [
+              115.0,
+              0.72
+            ],
+            [
+              125.0,
+              1
+            ],
+            [
+              135.0,
+              1
+            ],
+            [
+              145.0,
+              0.78
+            ],
+            [
+              155.0,
+              0.78
+            ],
+            [
+              160.0,
+              0.68
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Pizzicato footsteps",
+          "program": 45,
+          "bank": 0,
+          "hand": null,
+          "notes": 104,
+          "pan": 31,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/05-shop-copper-lanterns-v2-Pizzicato-footsteps.wav",
+            "bytes": 32914376,
+            "sha256": "b4e50442763e91e5fc947c2a45a4b09423fdd4e8d63401f9d3f4cf358cd8c5ed"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.68
+            ],
+            [
+              15.0,
+              0.68
+            ],
+            [
+              25.0,
+              0.9
+            ],
+            [
+              35.0,
+              0.9
+            ],
+            [
+              45.0,
+              0.78
+            ],
+            [
+              55.0,
+              0.78
+            ],
+            [
+              65.0,
+              0.95
+            ],
+            [
+              75.0,
+              0.95
+            ],
+            [
+              85.0,
+              0.92
+            ],
+            [
+              95.0,
+              0.92
+            ],
+            [
+              105.0,
+              0.72
+            ],
+            [
+              115.0,
+              0.72
+            ],
+            [
+              125.0,
+              1
+            ],
+            [
+              135.0,
+              1
+            ],
+            [
+              145.0,
+              0.78
+            ],
+            [
+              155.0,
+              0.78
+            ],
+            [
+              160.0,
+              0.68
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Bassoon grin",
+          "program": 70,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 18,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/05-shop-copper-lanterns-v2-Bassoon-grin.wav",
+            "bytes": 32914376,
+            "sha256": "81dba2a300e159bf52450c3ab0a36a4d28327f77cb955db5826a798198e25908"
+          },
+          "target_active_rms_dbfs": -29,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              15.0,
+              0.84
+            ],
+            [
+              25.0,
+              1
+            ],
+            [
+              35.0,
+              1
+            ],
+            [
+              45.0,
+              0.95
+            ],
+            [
+              55.0,
+              0.95
+            ],
+            [
+              65.0,
+              0.9
+            ],
+            [
+              75.0,
+              0.9
+            ],
+            [
+              85.0,
+              1.05
+            ],
+            [
+              95.0,
+              1.05
+            ],
+            [
+              105.0,
+              0.93
+            ],
+            [
+              115.0,
+              0.93
+            ],
+            [
+              125.0,
+              1.02
+            ],
+            [
+              135.0,
+              1.02
+            ],
+            [
+              145.0,
+              0.86
+            ],
+            [
+              155.0,
+              0.86
+            ],
+            [
+              160.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Viola canvas",
+          "program": 41,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": -35,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/05-shop-copper-lanterns-v2-Viola-canvas.wav",
+            "bytes": 32914376,
+            "sha256": "e65668c54dce3800f693408ba8c285d8202aaed25e16f7d832e27d9b1a4979b1"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              15.0,
+              0.92
+            ],
+            [
+              25.0,
+              0.96
+            ],
+            [
+              35.0,
+              0.96
+            ],
+            [
+              45.0,
+              0.95
+            ],
+            [
+              55.0,
+              0.95
+            ],
+            [
+              65.0,
+              0.91
+            ],
+            [
+              75.0,
+              0.91
+            ],
+            [
+              85.0,
+              1
+            ],
+            [
+              95.0,
+              1
+            ],
+            [
+              105.0,
+              0.96
+            ],
+            [
+              115.0,
+              0.96
+            ],
+            [
+              125.0,
+              0.97
+            ],
+            [
+              135.0,
+              0.97
+            ],
+            [
+              145.0,
+              0.9
+            ],
+            [
+              155.0,
+              0.9
+            ],
+            [
+              160.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/05-shop-copper-lanterns-v2-Steady-low-foundation.wav",
+            "bytes": 32914376,
+            "sha256": "139787850305a3fdbd49b14b9c0158b891d81419e4f8027337433ad053092a4d"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              15.0,
+              0.92
+            ],
+            [
+              25.0,
+              0.96
+            ],
+            [
+              35.0,
+              0.96
+            ],
+            [
+              45.0,
+              0.95
+            ],
+            [
+              55.0,
+              0.95
+            ],
+            [
+              65.0,
+              0.91
+            ],
+            [
+              75.0,
+              0.91
+            ],
+            [
+              85.0,
+              1
+            ],
+            [
+              95.0,
+              1
+            ],
+            [
+              105.0,
+              0.96
+            ],
+            [
+              115.0,
+              0.96
+            ],
+            [
+              125.0,
+              0.97
+            ],
+            [
+              135.0,
+              0.97
+            ],
+            [
+              145.0,
+              0.9
+            ],
+            [
+              155.0,
+              0.9
+            ],
+            [
+              160.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Light acoustic motion",
+          "program": 48,
+          "bank": 128,
+          "hand": null,
+          "notes": 64,
+          "pan": 10,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/05-shop-copper-lanterns-v2-Light-acoustic-motion.wav",
+            "bytes": 32914376,
+            "sha256": "d210282986a7c9d4e214921017861e92d93ea3f2f929c870ace6b84a814c8f0b"
+          },
+          "target_active_rms_dbfs": -42,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              15.0,
+              0.84
+            ],
+            [
+              25.0,
+              1
+            ],
+            [
+              35.0,
+              1
+            ],
+            [
+              45.0,
+              0.95
+            ],
+            [
+              55.0,
+              0.95
+            ],
+            [
+              65.0,
+              0.9
+            ],
+            [
+              75.0,
+              0.9
+            ],
+            [
+              85.0,
+              1.05
+            ],
+            [
+              95.0,
+              1.05
+            ],
+            [
+              105.0,
+              0.93
+            ],
+            [
+              115.0,
+              0.93
+            ],
+            [
+              125.0,
+              1.02
+            ],
+            [
+              135.0,
+              1.02
+            ],
+            [
+              145.0,
+              0.86
+            ],
+            [
+              155.0,
+              0.86
+            ],
+            [
+              160.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-5.16",
+        "input_lra": "3.00",
+        "input_thresh": "-28.50",
+        "output_i": "-22.80",
+        "output_tp": "-9.72",
+        "output_lra": "3.10",
+        "output_thresh": "-32.80",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.20"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.47714706299294063,
+          0.5360587977316483
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/05-shop-copper-lanterns-v2.mmp",
+          "bytes": 6850,
+          "sha256": "8a99302e5bbecd6980f40d3de74ddf7502d4755bcbd9c293fdb1460291375a71"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/05-shop-copper-lanterns-v2.wav",
+          "bytes": 24685760,
+          "sha256": "7db0a5c149d25a787f8c0ab402ff9733b8ca82809a9ec854b1be7d61edc93f99"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/05-shop-copper-lanterns-v2.mp3",
+          "bytes": 2744900,
+          "sha256": "296d0dca761abc81be2cfddd39bc8b8e4b78155dac41a0b47afb2c4868b0d756"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/05-shop-copper-lanterns-v2.ogg",
+          "bytes": 1630229,
+          "sha256": "bb9c4b444781c9f0e83121a26b049611a6969f3fe317a091c4eccfefce6374bf"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "statement"
+        },
+        {
+          "start_bar": 4,
+          "name": "answer"
+        },
+        {
+          "start_bar": 8,
+          "name": "lift"
+        },
+        {
+          "start_bar": 12,
+          "name": "refrain"
+        },
+        {
+          "start_bar": 16,
+          "name": "statement"
+        },
+        {
+          "start_bar": 20,
+          "name": "answer"
+        },
+        {
+          "start_bar": 24,
+          "name": "lift"
+        },
+        {
+          "start_bar": 28,
+          "name": "refrain"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed",
+      "creative_revision": {
+        "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+        "primary_response_voice": "Bassoon grin",
+        "changes": [
+          "short memorable motifs",
+          "foreground replies every 2 bars",
+          "orchestration or rhythmic fills every 4 bars",
+          "clearer pulse",
+          "gentle 1-bar transitions"
+        ],
+        "not_a_gain_only_revision": true
+      }
+    },
+    {
+      "id": "fire",
+      "title": "炉边长夜",
+      "stem": "06-fire-embers-and-snow-v2",
+      "idea": "六八拍摇摆的营火；长笛、尼龙弦与双手钢琴，极轻火星般竖琴，没有行军鼓点。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+      "key": "G major",
+      "meter": [
+        6,
+        8
+      ],
+      "bpm_quarter": 90,
+      "bars": 32,
+      "total_beats": 96.0,
+      "seconds": 64.0,
+      "tracks": [
+        {
+          "name": "Flute warm breath",
+          "program": 73,
+          "bank": 0,
+          "hand": null,
+          "notes": 80,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/06-fire-embers-and-snow-v2-Flute-warm-breath.wav",
+            "bytes": 24576088,
+            "sha256": "7e553ba81debdb7c93783fd6fe4f591f2469afacf32a3d262da1dd1d4aeca24f"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              9.0,
+              0.84
+            ],
+            [
+              15.0,
+              1
+            ],
+            [
+              21.0,
+              1
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.9
+            ],
+            [
+              45.0,
+              0.9
+            ],
+            [
+              51.0,
+              1.05
+            ],
+            [
+              57.0,
+              1.05
+            ],
+            [
+              63.0,
+              0.93
+            ],
+            [
+              69.0,
+              0.93
+            ],
+            [
+              75.0,
+              1.02
+            ],
+            [
+              81.0,
+              1.02
+            ],
+            [
+              87.0,
+              0.86
+            ],
+            [
+              93.0,
+              0.86
+            ],
+            [
+              96.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Piano right hand",
+          "program": 0,
+          "bank": 0,
+          "hand": "right",
+          "notes": 32,
+          "pan": 8,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/06-fire-embers-and-snow-v2-Piano-right-hand.wav",
+            "bytes": 24576088,
+            "sha256": "efdc097c98ab91e1da94be3858ca6942e6a8aea7892cf6127187f38e61b0c552"
+          },
+          "target_active_rms_dbfs": -32,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              9.0,
+              0.92
+            ],
+            [
+              15.0,
+              0.96
+            ],
+            [
+              21.0,
+              0.96
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.91
+            ],
+            [
+              45.0,
+              0.91
+            ],
+            [
+              51.0,
+              1
+            ],
+            [
+              57.0,
+              1
+            ],
+            [
+              63.0,
+              0.96
+            ],
+            [
+              69.0,
+              0.96
+            ],
+            [
+              75.0,
+              0.97
+            ],
+            [
+              81.0,
+              0.97
+            ],
+            [
+              87.0,
+              0.9
+            ],
+            [
+              93.0,
+              0.9
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": true
+        },
+        {
+          "name": "Piano left hand",
+          "program": 0,
+          "bank": 0,
+          "hand": "left",
+          "notes": 96,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/06-fire-embers-and-snow-v2-Piano-left-hand.wav",
+            "bytes": 24576088,
+            "sha256": "85d876f3e0993bc5fccef4b22097e42fcd1dde7d15ef2a6a774c8c37264c7726"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              9.0,
+              0.92
+            ],
+            [
+              15.0,
+              0.96
+            ],
+            [
+              21.0,
+              0.96
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.91
+            ],
+            [
+              45.0,
+              0.91
+            ],
+            [
+              51.0,
+              1
+            ],
+            [
+              57.0,
+              1
+            ],
+            [
+              63.0,
+              0.96
+            ],
+            [
+              69.0,
+              0.96
+            ],
+            [
+              75.0,
+              0.97
+            ],
+            [
+              81.0,
+              0.97
+            ],
+            [
+              87.0,
+              0.9
+            ],
+            [
+              93.0,
+              0.9
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": true
+        },
+        {
+          "name": "Nylon beside flame",
+          "program": 24,
+          "bank": 0,
+          "hand": null,
+          "notes": 88,
+          "pan": -28,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/06-fire-embers-and-snow-v2-Nylon-beside-flame.wav",
+            "bytes": 24576088,
+            "sha256": "ead84dae6af724cfa17e322f83a44d16472c7d92147a3f430b79f191d351a926"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              9.0,
+              0.92
+            ],
+            [
+              15.0,
+              0.96
+            ],
+            [
+              21.0,
+              0.96
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.91
+            ],
+            [
+              45.0,
+              0.91
+            ],
+            [
+              51.0,
+              1
+            ],
+            [
+              57.0,
+              1
+            ],
+            [
+              63.0,
+              0.96
+            ],
+            [
+              69.0,
+              0.96
+            ],
+            [
+              75.0,
+              0.97
+            ],
+            [
+              81.0,
+              0.97
+            ],
+            [
+              87.0,
+              0.9
+            ],
+            [
+              93.0,
+              0.9
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Viola blanket",
+          "program": 41,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 28,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/06-fire-embers-and-snow-v2-Viola-blanket.wav",
+            "bytes": 24576088,
+            "sha256": "c1a3c1016e4219cce7ae211a688b60f145f56abb5b4bddd6645f99e87c71bc92"
+          },
+          "target_active_rms_dbfs": -36,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              9.0,
+              0.92
+            ],
+            [
+              15.0,
+              0.96
+            ],
+            [
+              21.0,
+              0.96
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.91
+            ],
+            [
+              45.0,
+              0.91
+            ],
+            [
+              51.0,
+              1
+            ],
+            [
+              57.0,
+              1
+            ],
+            [
+              63.0,
+              0.96
+            ],
+            [
+              69.0,
+              0.96
+            ],
+            [
+              75.0,
+              0.97
+            ],
+            [
+              81.0,
+              0.97
+            ],
+            [
+              87.0,
+              0.9
+            ],
+            [
+              93.0,
+              0.9
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Cello slow breath",
+          "program": 42,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/06-fire-embers-and-snow-v2-Cello-slow-breath.wav",
+            "bytes": 24576088,
+            "sha256": "2155c1020e40a9dfe196b83a2d19b9372aaa3aac3e083461105165449e4f1c8a"
+          },
+          "target_active_rms_dbfs": -29,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              9.0,
+              0.84
+            ],
+            [
+              15.0,
+              1
+            ],
+            [
+              21.0,
+              1
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.9
+            ],
+            [
+              45.0,
+              0.9
+            ],
+            [
+              51.0,
+              1.05
+            ],
+            [
+              57.0,
+              1.05
+            ],
+            [
+              63.0,
+              0.93
+            ],
+            [
+              69.0,
+              0.93
+            ],
+            [
+              75.0,
+              1.02
+            ],
+            [
+              81.0,
+              1.02
+            ],
+            [
+              87.0,
+              0.86
+            ],
+            [
+              93.0,
+              0.86
+            ],
+            [
+              96.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Harp spark",
+          "program": 46,
+          "bank": 0,
+          "hand": null,
+          "notes": 44,
+          "pan": -20,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/06-fire-embers-and-snow-v2-Harp-spark.wav",
+            "bytes": 24576088,
+            "sha256": "9e3303306ba0ac9beb46f5cf86d34242b5cb89631d55669d10553557018b777e"
+          },
+          "target_active_rms_dbfs": -42,
+          "continuous_gain_points": [
+            [
+              0,
+              0.65
+            ],
+            [
+              9.0,
+              0.65
+            ],
+            [
+              15.0,
+              0.9
+            ],
+            [
+              21.0,
+              0.9
+            ],
+            [
+              27.0,
+              0.74
+            ],
+            [
+              33.0,
+              0.74
+            ],
+            [
+              39.0,
+              0.84
+            ],
+            [
+              45.0,
+              0.84
+            ],
+            [
+              51.0,
+              0.96
+            ],
+            [
+              57.0,
+              0.96
+            ],
+            [
+              63.0,
+              0.67
+            ],
+            [
+              69.0,
+              0.67
+            ],
+            [
+              75.0,
+              0.91
+            ],
+            [
+              81.0,
+              0.91
+            ],
+            [
+              87.0,
+              0.74
+            ],
+            [
+              93.0,
+              0.74
+            ],
+            [
+              96.0,
+              0.65
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/06-fire-embers-and-snow-v2-Steady-low-foundation.wav",
+            "bytes": 24576088,
+            "sha256": "3de93c2a104bc76563b5aa8251bf7c3b5f988a566d779c543e70edb196e07b06"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              9.0,
+              0.92
+            ],
+            [
+              15.0,
+              0.96
+            ],
+            [
+              21.0,
+              0.96
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.91
+            ],
+            [
+              45.0,
+              0.91
+            ],
+            [
+              51.0,
+              1
+            ],
+            [
+              57.0,
+              1
+            ],
+            [
+              63.0,
+              0.96
+            ],
+            [
+              69.0,
+              0.96
+            ],
+            [
+              75.0,
+              0.97
+            ],
+            [
+              81.0,
+              0.97
+            ],
+            [
+              87.0,
+              0.9
+            ],
+            [
+              93.0,
+              0.9
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-5.74",
+        "input_lra": "1.60",
+        "input_thresh": "-28.50",
+        "output_i": "-22.82",
+        "output_tp": "-10.06",
+        "output_lra": "1.70",
+        "output_thresh": "-32.82",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.18"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.4274379479247429,
+          0.5209606216926086
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/06-fire-embers-and-snow-v2.mmp",
+          "bytes": 7667,
+          "sha256": "ab16d247a082b1e757cf0eff887cef8d5f7b740bf665969ff5bb49712f700b45"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/06-fire-embers-and-snow-v2.wav",
+          "bytes": 18432044,
+          "sha256": "27dd05ba7ad1ff6ec4f490cba0a3f37b6db55a8c69287e25b0204971de339b12"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/06-fire-embers-and-snow-v2.mp3",
+          "bytes": 2049860,
+          "sha256": "d8c48909079b1b073c7423b05ab5b55578b15d9a0c566a85da20885d0b003dcc"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/06-fire-embers-and-snow-v2.ogg",
+          "bytes": 1041496,
+          "sha256": "67ad1f36481ec6c7e4968c93b4ba130f2f77bbc9498e8249880b24aa9d0d7614"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/06-fire-embers-and-snow-v2-piano.mid",
+          "bytes": 1822,
+          "sha256": "2dc93d307c65f339a335f8b821b12f4459361f82e9c1db0f472017beb928cfce"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "statement"
+        },
+        {
+          "start_bar": 4,
+          "name": "answer"
+        },
+        {
+          "start_bar": 8,
+          "name": "lift"
+        },
+        {
+          "start_bar": 12,
+          "name": "refrain"
+        },
+        {
+          "start_bar": 16,
+          "name": "statement"
+        },
+        {
+          "start_bar": 20,
+          "name": "answer"
+        },
+        {
+          "start_bar": 24,
+          "name": "lift"
+        },
+        {
+          "start_bar": 28,
+          "name": "refrain"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed",
+      "creative_revision": {
+        "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+        "primary_response_voice": "Cello slow breath",
+        "changes": [
+          "short memorable motifs",
+          "foreground replies every 2 bars",
+          "orchestration or rhythmic fills every 4 bars",
+          "clearer pulse",
+          "gentle 1-bar transitions"
+        ],
+        "not_a_gain_only_revision": true
+      }
+    },
+    {
+      "id": "event",
+      "title": "余烬来信",
+      "stem": "07-event-letter-in-ashes-v2",
+      "idea": "奇遇和叙事选择的低密度问答；双簧管像说话，颤音琴只作标点，留出阅读空间。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+      "key": "A minor",
+      "meter": [
+        4,
+        4
+      ],
+      "bpm_quarter": 96,
+      "bars": 32,
+      "total_beats": 128.0,
+      "seconds": 80.0,
+      "tracks": [
+        {
+          "name": "Oboe storyteller",
+          "program": 68,
+          "bank": 0,
+          "hand": null,
+          "notes": 96,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/07-event-letter-in-ashes-v2-Oboe-storyteller.wav",
+            "bytes": 30720088,
+            "sha256": "9b7f19d1091e68768c1dee967a1ef4ff32806f5940f4129e417c12556e9a6da8"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              12.0,
+              0.84
+            ],
+            [
+              20.0,
+              1
+            ],
+            [
+              28.0,
+              1
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.9
+            ],
+            [
+              60.0,
+              0.9
+            ],
+            [
+              68.0,
+              1.05
+            ],
+            [
+              76.0,
+              1.05
+            ],
+            [
+              84.0,
+              0.93
+            ],
+            [
+              92.0,
+              0.93
+            ],
+            [
+              100.0,
+              1.02
+            ],
+            [
+              108.0,
+              1.02
+            ],
+            [
+              116.0,
+              0.86
+            ],
+            [
+              124.0,
+              0.86
+            ],
+            [
+              128.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Vibraphone ink",
+          "program": 11,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": -22,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/07-event-letter-in-ashes-v2-Vibraphone-ink.wav",
+            "bytes": 30720088,
+            "sha256": "6f910007752cd3580d397600c87fc66e744194eb2e8238f49e43a5970dfe166d"
+          },
+          "target_active_rms_dbfs": -29,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              12.0,
+              0.84
+            ],
+            [
+              20.0,
+              1
+            ],
+            [
+              28.0,
+              1
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.9
+            ],
+            [
+              60.0,
+              0.9
+            ],
+            [
+              68.0,
+              1.05
+            ],
+            [
+              76.0,
+              1.05
+            ],
+            [
+              84.0,
+              0.93
+            ],
+            [
+              92.0,
+              0.93
+            ],
+            [
+              100.0,
+              1.02
+            ],
+            [
+              108.0,
+              1.02
+            ],
+            [
+              116.0,
+              0.86
+            ],
+            [
+              124.0,
+              0.86
+            ],
+            [
+              128.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Bassoon question",
+          "program": 70,
+          "bank": 0,
+          "hand": null,
+          "notes": 10,
+          "pan": 24,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/07-event-letter-in-ashes-v2-Bassoon-question.wav",
+            "bytes": 30720088,
+            "sha256": "f7767b0d4b22b16ff1b8c082f1a6d5af705c8bf621ec83c7f6d9320861193be1"
+          },
+          "target_active_rms_dbfs": -36,
+          "continuous_gain_points": [
+            [
+              0,
+              0.65
+            ],
+            [
+              12.0,
+              0.65
+            ],
+            [
+              20.0,
+              0.9
+            ],
+            [
+              28.0,
+              0.9
+            ],
+            [
+              36.0,
+              0.74
+            ],
+            [
+              44.0,
+              0.74
+            ],
+            [
+              52.0,
+              0.84
+            ],
+            [
+              60.0,
+              0.84
+            ],
+            [
+              68.0,
+              0.96
+            ],
+            [
+              76.0,
+              0.96
+            ],
+            [
+              84.0,
+              0.67
+            ],
+            [
+              92.0,
+              0.67
+            ],
+            [
+              100.0,
+              0.91
+            ],
+            [
+              108.0,
+              0.91
+            ],
+            [
+              116.0,
+              0.74
+            ],
+            [
+              124.0,
+              0.74
+            ],
+            [
+              128.0,
+              0.65
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Muted paper strings",
+          "program": 49,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": -31,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/07-event-letter-in-ashes-v2-Muted-paper-strings.wav",
+            "bytes": 30720088,
+            "sha256": "d0a7e02bed74d060872035c98a112a3cfebb74f2db7badf3dd9dfcbd38fdea46"
+          },
+          "target_active_rms_dbfs": -34,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              12.0,
+              0.92
+            ],
+            [
+              20.0,
+              0.96
+            ],
+            [
+              28.0,
+              0.96
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.91
+            ],
+            [
+              60.0,
+              0.91
+            ],
+            [
+              68.0,
+              1
+            ],
+            [
+              76.0,
+              1
+            ],
+            [
+              84.0,
+              0.96
+            ],
+            [
+              92.0,
+              0.96
+            ],
+            [
+              100.0,
+              0.97
+            ],
+            [
+              108.0,
+              0.97
+            ],
+            [
+              116.0,
+              0.9
+            ],
+            [
+              124.0,
+              0.9
+            ],
+            [
+              128.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Harp page turn",
+          "program": 46,
+          "bank": 0,
+          "hand": null,
+          "notes": 44,
+          "pan": 29,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/07-event-letter-in-ashes-v2-Harp-page-turn.wav",
+            "bytes": 30720088,
+            "sha256": "1cd4ddfb14baa17b13fe67fb243fc9277f8975109b0eeecaf7dad533bbd76bcd"
+          },
+          "target_active_rms_dbfs": -42,
+          "continuous_gain_points": [
+            [
+              0,
+              0.65
+            ],
+            [
+              12.0,
+              0.65
+            ],
+            [
+              20.0,
+              0.9
+            ],
+            [
+              28.0,
+              0.9
+            ],
+            [
+              36.0,
+              0.74
+            ],
+            [
+              44.0,
+              0.74
+            ],
+            [
+              52.0,
+              0.84
+            ],
+            [
+              60.0,
+              0.84
+            ],
+            [
+              68.0,
+              0.96
+            ],
+            [
+              76.0,
+              0.96
+            ],
+            [
+              84.0,
+              0.67
+            ],
+            [
+              92.0,
+              0.67
+            ],
+            [
+              100.0,
+              0.91
+            ],
+            [
+              108.0,
+              0.91
+            ],
+            [
+              116.0,
+              0.74
+            ],
+            [
+              124.0,
+              0.74
+            ],
+            [
+              128.0,
+              0.65
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/07-event-letter-in-ashes-v2-Steady-low-foundation.wav",
+            "bytes": 30720088,
+            "sha256": "e03ac24bce69b749d7f47f2e559500989189cb0b39003cc9057c4f7265f6f57b"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              12.0,
+              0.92
+            ],
+            [
+              20.0,
+              0.96
+            ],
+            [
+              28.0,
+              0.96
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.91
+            ],
+            [
+              60.0,
+              0.91
+            ],
+            [
+              68.0,
+              1
+            ],
+            [
+              76.0,
+              1
+            ],
+            [
+              84.0,
+              0.96
+            ],
+            [
+              92.0,
+              0.96
+            ],
+            [
+              100.0,
+              0.97
+            ],
+            [
+              108.0,
+              0.97
+            ],
+            [
+              116.0,
+              0.9
+            ],
+            [
+              124.0,
+              0.9
+            ],
+            [
+              128.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Light acoustic motion",
+          "program": 48,
+          "bank": 128,
+          "hand": null,
+          "notes": 64,
+          "pan": 10,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/07-event-letter-in-ashes-v2-Light-acoustic-motion.wav",
+            "bytes": 30720088,
+            "sha256": "a8ec35069d4145792929de28de636bc5e49984b218640f5f149858dea54ebe62"
+          },
+          "target_active_rms_dbfs": -42,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              12.0,
+              0.84
+            ],
+            [
+              20.0,
+              1
+            ],
+            [
+              28.0,
+              1
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.9
+            ],
+            [
+              60.0,
+              0.9
+            ],
+            [
+              68.0,
+              1.05
+            ],
+            [
+              76.0,
+              1.05
+            ],
+            [
+              84.0,
+              0.93
+            ],
+            [
+              92.0,
+              0.93
+            ],
+            [
+              100.0,
+              1.02
+            ],
+            [
+              108.0,
+              1.02
+            ],
+            [
+              116.0,
+              0.86
+            ],
+            [
+              124.0,
+              0.86
+            ],
+            [
+              128.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-5.90",
+        "input_lra": "2.80",
+        "input_thresh": "-28.50",
+        "output_i": "-22.87",
+        "output_tp": "-10.40",
+        "output_lra": "2.50",
+        "output_thresh": "-32.87",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.13"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.5325838814003304,
+          0.5003835855468647
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/07-event-letter-in-ashes-v2.mmp",
+          "bytes": 6820,
+          "sha256": "0abe069f3814d2042dadec47ff44d6b5da15888c60048a10269094b4a92eb5c7"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/07-event-letter-in-ashes-v2.wav",
+          "bytes": 23040044,
+          "sha256": "943f65145d381c415a1a10b8b0496dfefc67bae322fb3da068d8e74393dea6ab"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/07-event-letter-in-ashes-v2.mp3",
+          "bytes": 2562116,
+          "sha256": "1f8b9b9ff64a6d178416c8dbbc6cc272103829b0320080e65d0f0b500fdcb2f9"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/07-event-letter-in-ashes-v2.ogg",
+          "bytes": 1413325,
+          "sha256": "0cebfff86199b62c82f1a438115bd5d2178803273ad77a2e58f8752066e08c5c"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "statement"
+        },
+        {
+          "start_bar": 4,
+          "name": "answer"
+        },
+        {
+          "start_bar": 8,
+          "name": "lift"
+        },
+        {
+          "start_bar": 12,
+          "name": "refrain"
+        },
+        {
+          "start_bar": 16,
+          "name": "statement"
+        },
+        {
+          "start_bar": 20,
+          "name": "answer"
+        },
+        {
+          "start_bar": 24,
+          "name": "lift"
+        },
+        {
+          "start_bar": 28,
+          "name": "refrain"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed",
+      "creative_revision": {
+        "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+        "primary_response_voice": "Vibraphone ink",
+        "changes": [
+          "short memorable motifs",
+          "foreground replies every 2 bars",
+          "orchestration or rhythmic fills every 4 bars",
+          "clearer pulse",
+          "gentle 1-bar transitions"
+        ],
+        "not_a_gain_only_revision": true
+      }
+    },
+    {
+      "id": "altar",
+      "title": "幽核回响",
+      "stem": "08-altar-hollow-core-v2",
+      "idea": "污染核心的祭仪：巴松与管风琴，低部不间断，颤弦远置；以悬置和声营造危险，避免高音尖叫。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+      "key": "F-sharp minor",
+      "meter": [
+        4,
+        4
+      ],
+      "bpm_quarter": 82,
+      "bars": 24,
+      "total_beats": 96.0,
+      "seconds": 70.24389583333334,
+      "tracks": [
+        {
+          "name": "Bassoon ritual",
+          "program": 70,
+          "bank": 0,
+          "hand": null,
+          "notes": 60,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/08-altar-hollow-core-v2-Bassoon-ritual.wav",
+            "bytes": 26973744,
+            "sha256": "07d5d517f406385744186132dc2f7a75328b5ac18a9e7589673de34b3debcfdd"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              12.0,
+              0.84
+            ],
+            [
+              20.0,
+              1
+            ],
+            [
+              28.0,
+              1
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.9
+            ],
+            [
+              60.0,
+              0.9
+            ],
+            [
+              68.0,
+              1.05
+            ],
+            [
+              76.0,
+              1.05
+            ],
+            [
+              84.0,
+              0.93
+            ],
+            [
+              92.0,
+              0.93
+            ],
+            [
+              96.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Organ carved stone",
+          "program": 19,
+          "bank": 0,
+          "hand": null,
+          "notes": 24,
+          "pan": -14,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/08-altar-hollow-core-v2-Organ-carved-stone.wav",
+            "bytes": 26973744,
+            "sha256": "f3a64ba45056d2953e2ec4839ee0b0ade80be06ed99d98bae9d55bb582a41470"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              12.0,
+              0.92
+            ],
+            [
+              20.0,
+              0.96
+            ],
+            [
+              28.0,
+              0.96
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.91
+            ],
+            [
+              60.0,
+              0.91
+            ],
+            [
+              68.0,
+              1
+            ],
+            [
+              76.0,
+              1
+            ],
+            [
+              84.0,
+              0.96
+            ],
+            [
+              92.0,
+              0.96
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Viola suspended",
+          "program": 41,
+          "bank": 0,
+          "hand": null,
+          "notes": 12,
+          "pan": 25,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/08-altar-hollow-core-v2-Viola-suspended.wav",
+            "bytes": 26973744,
+            "sha256": "25f7a9e57b516d82e550e2b129f366d15e541a72ec83d4a569b5de535b52ebbe"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              12.0,
+              0.92
+            ],
+            [
+              20.0,
+              0.96
+            ],
+            [
+              28.0,
+              0.96
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.91
+            ],
+            [
+              60.0,
+              0.91
+            ],
+            [
+              68.0,
+              1
+            ],
+            [
+              76.0,
+              1
+            ],
+            [
+              84.0,
+              0.96
+            ],
+            [
+              92.0,
+              0.96
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Tremolo distant pulse",
+          "program": 44,
+          "bank": 0,
+          "hand": null,
+          "notes": 12,
+          "pan": -32,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/08-altar-hollow-core-v2-Tremolo-distant-pulse.wav",
+            "bytes": 26973744,
+            "sha256": "3b32a2afb2ebfb0a062759aee27a8dc09d311c2411d3987fa53224b5b02c5b2f"
+          },
+          "target_active_rms_dbfs": -40,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              12.0,
+              0.92
+            ],
+            [
+              20.0,
+              0.96
+            ],
+            [
+              28.0,
+              0.96
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.91
+            ],
+            [
+              60.0,
+              0.91
+            ],
+            [
+              68.0,
+              1
+            ],
+            [
+              76.0,
+              1
+            ],
+            [
+              84.0,
+              0.96
+            ],
+            [
+              92.0,
+              0.96
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Celeste core light",
+          "program": 8,
+          "bank": 0,
+          "hand": null,
+          "notes": 12,
+          "pan": 32,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/08-altar-hollow-core-v2-Celeste-core-light.wav",
+            "bytes": 26973744,
+            "sha256": "1bbff4c6e51288c605850851f19bd5b12977fb36db3a7ed5de0ad63b59812bfd"
+          },
+          "target_active_rms_dbfs": -29,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              12.0,
+              0.84
+            ],
+            [
+              20.0,
+              1
+            ],
+            [
+              28.0,
+              1
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.9
+            ],
+            [
+              60.0,
+              0.9
+            ],
+            [
+              68.0,
+              1.05
+            ],
+            [
+              76.0,
+              1.05
+            ],
+            [
+              84.0,
+              0.93
+            ],
+            [
+              92.0,
+              0.93
+            ],
+            [
+              96.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 12,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/08-altar-hollow-core-v2-Steady-low-foundation.wav",
+            "bytes": 26973744,
+            "sha256": "17233d593ab9d1f0e3ef32dec047e623251fc1e8d7758ec28a8980349d6ab7e7"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              12.0,
+              0.92
+            ],
+            [
+              20.0,
+              0.96
+            ],
+            [
+              28.0,
+              0.96
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.91
+            ],
+            [
+              60.0,
+              0.91
+            ],
+            [
+              68.0,
+              1
+            ],
+            [
+              76.0,
+              1
+            ],
+            [
+              84.0,
+              0.96
+            ],
+            [
+              92.0,
+              0.96
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-7.23",
+        "input_lra": "1.80",
+        "input_thresh": "-28.50",
+        "output_i": "-22.81",
+        "output_tp": "-11.70",
+        "output_lra": "1.60",
+        "output_thresh": "-32.81",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.19"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.4209564913159953,
+          0.5649931356323132
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/08-altar-hollow-core-v2.mmp",
+          "bytes": 5944,
+          "sha256": "f45da24ce68c23118e57f601d5250600e34874d32c8d254b8d6a40f5eb2f4383"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/08-altar-hollow-core-v2.wav",
+          "bytes": 20230286,
+          "sha256": "d8633b151daa81cea7ded33729844f2e111c437b1022956d9384231c867d8cd1"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/08-altar-hollow-core-v2.mp3",
+          "bytes": 2249540,
+          "sha256": "1de096fe0bdbef4c7975e07d407390efb800ca45214078236e292397c989d458"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/08-altar-hollow-core-v2.ogg",
+          "bytes": 1237488,
+          "sha256": "9850507aaa4faa1b13f5fb956fc587afefdbdc46742f2bffa455fea9e123385e"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "statement"
+        },
+        {
+          "start_bar": 4,
+          "name": "answer"
+        },
+        {
+          "start_bar": 8,
+          "name": "lift"
+        },
+        {
+          "start_bar": 12,
+          "name": "refrain"
+        },
+        {
+          "start_bar": 16,
+          "name": "statement"
+        },
+        {
+          "start_bar": 20,
+          "name": "answer"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed",
+      "creative_revision": {
+        "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+        "primary_response_voice": "Celeste core light",
+        "changes": [
+          "short memorable motifs",
+          "foreground replies every 2 bars",
+          "orchestration or rhythmic fills every 4 bars",
+          "clearer pulse",
+          "gentle 1-bar transitions"
+        ],
+        "not_a_gain_only_revision": true
+      }
+    },
+    {
+      "id": "extraction",
+      "title": "渡口倒数",
+      "stem": "09-extraction-last-ferry-v2",
+      "idea": "七八拍2+2+3的撤离脉冲；小提琴长主线、竖琴节拍与远圆号，推进明确但不骤然加响。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+      "key": "D mixolydian",
+      "meter": [
+        7,
+        8
+      ],
+      "bpm_quarter": 128,
+      "bars": 32,
+      "total_beats": 112.0,
+      "seconds": 52.5,
+      "tracks": [
+        {
+          "name": "Violin signal",
+          "program": 40,
+          "bank": 0,
+          "hand": null,
+          "notes": 80,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/09-extraction-last-ferry-v2-Violin-signal.wav",
+            "bytes": 20160088,
+            "sha256": "03bb704849562cd26e76f34e61fc836b19ec280004f56c5fdd0ecac65f075074"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              10.5,
+              0.84
+            ],
+            [
+              17.5,
+              1
+            ],
+            [
+              24.5,
+              1
+            ],
+            [
+              31.5,
+              0.95
+            ],
+            [
+              38.5,
+              0.95
+            ],
+            [
+              45.5,
+              0.9
+            ],
+            [
+              52.5,
+              0.9
+            ],
+            [
+              59.5,
+              1.05
+            ],
+            [
+              66.5,
+              1.05
+            ],
+            [
+              73.5,
+              0.93
+            ],
+            [
+              80.5,
+              0.93
+            ],
+            [
+              87.5,
+              1.02
+            ],
+            [
+              94.5,
+              1.02
+            ],
+            [
+              101.5,
+              0.86
+            ],
+            [
+              108.5,
+              0.86
+            ],
+            [
+              112.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Harp beacon steps",
+          "program": 46,
+          "bank": 0,
+          "hand": null,
+          "notes": 46,
+          "pan": -31,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/09-extraction-last-ferry-v2-Harp-beacon-steps.wav",
+            "bytes": 20160088,
+            "sha256": "f66e2c147f938f1710ee09e6b5666e2fd81707b02a3e7e45900c8de06a6e4bd1"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.65
+            ],
+            [
+              10.5,
+              0.65
+            ],
+            [
+              17.5,
+              0.9
+            ],
+            [
+              24.5,
+              0.9
+            ],
+            [
+              31.5,
+              0.74
+            ],
+            [
+              38.5,
+              0.74
+            ],
+            [
+              45.5,
+              0.84
+            ],
+            [
+              52.5,
+              0.84
+            ],
+            [
+              59.5,
+              0.96
+            ],
+            [
+              66.5,
+              0.96
+            ],
+            [
+              73.5,
+              0.67
+            ],
+            [
+              80.5,
+              0.67
+            ],
+            [
+              87.5,
+              0.91
+            ],
+            [
+              94.5,
+              0.91
+            ],
+            [
+              101.5,
+              0.74
+            ],
+            [
+              108.5,
+              0.74
+            ],
+            [
+              112.0,
+              0.65
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Horn safe passage",
+          "program": 60,
+          "bank": 0,
+          "hand": null,
+          "notes": 10,
+          "pan": 20,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/09-extraction-last-ferry-v2-Horn-safe-passage.wav",
+            "bytes": 20160088,
+            "sha256": "8c2d1469c96dc87f3191e7c96abd5bba3cc3d88c3430a48080a7d50a8a7b3f3b"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.65
+            ],
+            [
+              10.5,
+              0.65
+            ],
+            [
+              17.5,
+              0.9
+            ],
+            [
+              24.5,
+              0.9
+            ],
+            [
+              31.5,
+              0.74
+            ],
+            [
+              38.5,
+              0.74
+            ],
+            [
+              45.5,
+              0.84
+            ],
+            [
+              52.5,
+              0.84
+            ],
+            [
+              59.5,
+              0.96
+            ],
+            [
+              66.5,
+              0.96
+            ],
+            [
+              73.5,
+              0.67
+            ],
+            [
+              80.5,
+              0.67
+            ],
+            [
+              87.5,
+              0.91
+            ],
+            [
+              94.5,
+              0.91
+            ],
+            [
+              101.5,
+              0.74
+            ],
+            [
+              108.5,
+              0.74
+            ],
+            [
+              112.0,
+              0.65
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Cello countdown",
+          "program": 42,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 28,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/09-extraction-last-ferry-v2-Cello-countdown.wav",
+            "bytes": 20160088,
+            "sha256": "e2a8191a2eb06e4ac448e56bc74460633f1f7eedbba5f01b91d19708baf90e98"
+          },
+          "target_active_rms_dbfs": -29,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              10.5,
+              0.84
+            ],
+            [
+              17.5,
+              1
+            ],
+            [
+              24.5,
+              1
+            ],
+            [
+              31.5,
+              0.95
+            ],
+            [
+              38.5,
+              0.95
+            ],
+            [
+              45.5,
+              0.9
+            ],
+            [
+              52.5,
+              0.9
+            ],
+            [
+              59.5,
+              1.05
+            ],
+            [
+              66.5,
+              1.05
+            ],
+            [
+              73.5,
+              0.93
+            ],
+            [
+              80.5,
+              0.93
+            ],
+            [
+              87.5,
+              1.02
+            ],
+            [
+              94.5,
+              1.02
+            ],
+            [
+              101.5,
+              0.86
+            ],
+            [
+              108.5,
+              0.86
+            ],
+            [
+              112.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Long crossing strings",
+          "program": 49,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": -35,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/09-extraction-last-ferry-v2-Long-crossing-strings.wav",
+            "bytes": 20160088,
+            "sha256": "653cce1afee84cfa63a8a30ef604fc1cead929230e94aced57521feeec63fad8"
+          },
+          "target_active_rms_dbfs": -34,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              10.5,
+              0.92
+            ],
+            [
+              17.5,
+              0.96
+            ],
+            [
+              24.5,
+              0.96
+            ],
+            [
+              31.5,
+              0.95
+            ],
+            [
+              38.5,
+              0.95
+            ],
+            [
+              45.5,
+              0.91
+            ],
+            [
+              52.5,
+              0.91
+            ],
+            [
+              59.5,
+              1
+            ],
+            [
+              66.5,
+              1
+            ],
+            [
+              73.5,
+              0.96
+            ],
+            [
+              80.5,
+              0.96
+            ],
+            [
+              87.5,
+              0.97
+            ],
+            [
+              94.5,
+              0.97
+            ],
+            [
+              101.5,
+              0.9
+            ],
+            [
+              108.5,
+              0.9
+            ],
+            [
+              112.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Timpani distant clock",
+          "program": 47,
+          "bank": 0,
+          "hand": null,
+          "notes": 45,
+          "pan": -6,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/09-extraction-last-ferry-v2-Timpani-distant-clock.wav",
+            "bytes": 20160088,
+            "sha256": "6ee451ad7e150e4c11d06c6c4500ac7fb1938518f37607fe7ec65ab4dd35b544"
+          },
+          "target_active_rms_dbfs": -39,
+          "continuous_gain_points": [
+            [
+              0,
+              0.68
+            ],
+            [
+              10.5,
+              0.68
+            ],
+            [
+              17.5,
+              0.9
+            ],
+            [
+              24.5,
+              0.9
+            ],
+            [
+              31.5,
+              0.78
+            ],
+            [
+              38.5,
+              0.78
+            ],
+            [
+              45.5,
+              0.95
+            ],
+            [
+              52.5,
+              0.95
+            ],
+            [
+              59.5,
+              0.92
+            ],
+            [
+              66.5,
+              0.92
+            ],
+            [
+              73.5,
+              0.72
+            ],
+            [
+              80.5,
+              0.72
+            ],
+            [
+              87.5,
+              1
+            ],
+            [
+              94.5,
+              1
+            ],
+            [
+              101.5,
+              0.78
+            ],
+            [
+              108.5,
+              0.78
+            ],
+            [
+              112.0,
+              0.68
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/09-extraction-last-ferry-v2-Steady-low-foundation.wav",
+            "bytes": 20160088,
+            "sha256": "4a7325ae4d07ac310d0804801717257b190421480857b2f3b0722d2fb8a17663"
+          },
+          "target_active_rms_dbfs": -33,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              10.5,
+              0.92
+            ],
+            [
+              17.5,
+              0.96
+            ],
+            [
+              24.5,
+              0.96
+            ],
+            [
+              31.5,
+              0.95
+            ],
+            [
+              38.5,
+              0.95
+            ],
+            [
+              45.5,
+              0.91
+            ],
+            [
+              52.5,
+              0.91
+            ],
+            [
+              59.5,
+              1
+            ],
+            [
+              66.5,
+              1
+            ],
+            [
+              73.5,
+              0.96
+            ],
+            [
+              80.5,
+              0.96
+            ],
+            [
+              87.5,
+              0.97
+            ],
+            [
+              94.5,
+              0.97
+            ],
+            [
+              101.5,
+              0.9
+            ],
+            [
+              108.5,
+              0.9
+            ],
+            [
+              112.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Muted guitar drive",
+          "program": 28,
+          "bank": 0,
+          "hand": null,
+          "notes": 96,
+          "pan": -26,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/09-extraction-last-ferry-v2-Muted-guitar-drive.wav",
+            "bytes": 20160088,
+            "sha256": "3713cea43f188325d80c75a4d4c1887b98864f905aeda236ba8bf472d1191f4b"
+          },
+          "target_active_rms_dbfs": -38,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              10.5,
+              0.84
+            ],
+            [
+              17.5,
+              1
+            ],
+            [
+              24.5,
+              1
+            ],
+            [
+              31.5,
+              0.95
+            ],
+            [
+              38.5,
+              0.95
+            ],
+            [
+              45.5,
+              0.9
+            ],
+            [
+              52.5,
+              0.9
+            ],
+            [
+              59.5,
+              1.05
+            ],
+            [
+              66.5,
+              1.05
+            ],
+            [
+              73.5,
+              0.93
+            ],
+            [
+              80.5,
+              0.93
+            ],
+            [
+              87.5,
+              1.02
+            ],
+            [
+              94.5,
+              1.02
+            ],
+            [
+              101.5,
+              0.86
+            ],
+            [
+              108.5,
+              0.86
+            ],
+            [
+              112.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-5.62",
+        "input_lra": "1.60",
+        "input_thresh": "-28.50",
+        "output_i": "-22.88",
+        "output_tp": "-9.85",
+        "output_lra": "1.60",
+        "output_thresh": "-32.88",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.12"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.4404002444846977,
+          0.3743595647586378
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/09-extraction-last-ferry-v2.mmp",
+          "bytes": 7714,
+          "sha256": "3921bb5b138bb7c037f87f2f1713fdc1a1a1109b240c5c105938906e95ad6ca1"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/09-extraction-last-ferry-v2.wav",
+          "bytes": 15120044,
+          "sha256": "c0763a74c5cca504ff3f0cb271b60ac2bb813bab53549104e622265ad44f665c"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/09-extraction-last-ferry-v2.mp3",
+          "bytes": 1681988,
+          "sha256": "28c1d8f8539cf049e69c049b48d5414d5e86480384f3b239e7d92812a31956c6"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/09-extraction-last-ferry-v2.ogg",
+          "bytes": 991551,
+          "sha256": "0f3787b2feaabb82e3b3ab4342f0b109e3a18df7539fe86c2a87c5c85e2af6d1"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "statement"
+        },
+        {
+          "start_bar": 4,
+          "name": "answer"
+        },
+        {
+          "start_bar": 8,
+          "name": "lift"
+        },
+        {
+          "start_bar": 12,
+          "name": "refrain"
+        },
+        {
+          "start_bar": 16,
+          "name": "statement"
+        },
+        {
+          "start_bar": 20,
+          "name": "answer"
+        },
+        {
+          "start_bar": 24,
+          "name": "lift"
+        },
+        {
+          "start_bar": 28,
+          "name": "refrain"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed",
+      "creative_revision": {
+        "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+        "primary_response_voice": "Cello countdown",
+        "changes": [
+          "short memorable motifs",
+          "foreground replies every 2 bars",
+          "orchestration or rhythmic fills every 4 bars",
+          "clearer pulse",
+          "gentle 1-bar transitions"
+        ],
+        "not_a_gain_only_revision": true
+      }
+    },
+    {
+      "id": "boss-governor",
+      "title": "铁律封城",
+      "stem": "10-boss-governor-iron-edict-v2",
+      "idea": "肃清总督的低铜管战歌；军令式圆号主题与弦乐反问，低铜管错开进入，压力来自句法和节奏。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+      "key": "D minor",
+      "meter": [
+        4,
+        4
+      ],
+      "bpm_quarter": 144,
+      "bars": 32,
+      "total_beats": 128.0,
+      "seconds": 53.333333333333336,
+      "tracks": [
+        {
+          "name": "Horn edict",
+          "program": 60,
+          "bank": 0,
+          "hand": null,
+          "notes": 112,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/10-boss-governor-iron-edict-v2-Horn-edict.wav",
+            "bytes": 20480088,
+            "sha256": "bcf224566a1074d59a78da394a66b01310c097847d4af819cb00520dc3a9845d"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              12.0,
+              0.84
+            ],
+            [
+              20.0,
+              1
+            ],
+            [
+              28.0,
+              1
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.9
+            ],
+            [
+              60.0,
+              0.9
+            ],
+            [
+              68.0,
+              1.05
+            ],
+            [
+              76.0,
+              1.05
+            ],
+            [
+              84.0,
+              0.93
+            ],
+            [
+              92.0,
+              0.93
+            ],
+            [
+              100.0,
+              1.02
+            ],
+            [
+              108.0,
+              1.02
+            ],
+            [
+              116.0,
+              0.86
+            ],
+            [
+              124.0,
+              0.86
+            ],
+            [
+              128.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Trombone battlement",
+          "program": 57,
+          "bank": 0,
+          "hand": null,
+          "notes": 10,
+          "pan": 18,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/10-boss-governor-iron-edict-v2-Trombone-battlement.wav",
+            "bytes": 20480088,
+            "sha256": "65a7cf0ea72fc20016e614225dafb9b731446480f40b26f01a6c44e900e4d18e"
+          },
+          "target_active_rms_dbfs": -34,
+          "continuous_gain_points": [
+            [
+              0,
+              0.65
+            ],
+            [
+              12.0,
+              0.65
+            ],
+            [
+              20.0,
+              0.9
+            ],
+            [
+              28.0,
+              0.9
+            ],
+            [
+              36.0,
+              0.74
+            ],
+            [
+              44.0,
+              0.74
+            ],
+            [
+              52.0,
+              0.84
+            ],
+            [
+              60.0,
+              0.84
+            ],
+            [
+              68.0,
+              0.96
+            ],
+            [
+              76.0,
+              0.96
+            ],
+            [
+              84.0,
+              0.67
+            ],
+            [
+              92.0,
+              0.67
+            ],
+            [
+              100.0,
+              0.91
+            ],
+            [
+              108.0,
+              0.91
+            ],
+            [
+              116.0,
+              0.74
+            ],
+            [
+              124.0,
+              0.74
+            ],
+            [
+              128.0,
+              0.65
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Tuba foundation",
+          "program": 58,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/10-boss-governor-iron-edict-v2-Tuba-foundation.wav",
+            "bytes": 20480088,
+            "sha256": "c3f38186f05bd90ee897e4133a607776e0b8d321ffdcd9676bb9f446c44fc0ee"
+          },
+          "target_active_rms_dbfs": -37,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              12.0,
+              0.92
+            ],
+            [
+              20.0,
+              0.96
+            ],
+            [
+              28.0,
+              0.96
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.91
+            ],
+            [
+              60.0,
+              0.91
+            ],
+            [
+              68.0,
+              1
+            ],
+            [
+              76.0,
+              1
+            ],
+            [
+              84.0,
+              0.96
+            ],
+            [
+              92.0,
+              0.96
+            ],
+            [
+              100.0,
+              0.97
+            ],
+            [
+              108.0,
+              0.97
+            ],
+            [
+              116.0,
+              0.9
+            ],
+            [
+              124.0,
+              0.9
+            ],
+            [
+              128.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Violin defiance",
+          "program": 40,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": -36,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/10-boss-governor-iron-edict-v2-Violin-defiance.wav",
+            "bytes": 20480088,
+            "sha256": "e2705b8c0fae671295ce039aea527488d73bd0a27f6e30274eee321daeaa3624"
+          },
+          "target_active_rms_dbfs": -29,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              12.0,
+              0.84
+            ],
+            [
+              20.0,
+              1
+            ],
+            [
+              28.0,
+              1
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.9
+            ],
+            [
+              60.0,
+              0.9
+            ],
+            [
+              68.0,
+              1.05
+            ],
+            [
+              76.0,
+              1.05
+            ],
+            [
+              84.0,
+              0.93
+            ],
+            [
+              92.0,
+              0.93
+            ],
+            [
+              100.0,
+              1.02
+            ],
+            [
+              108.0,
+              1.02
+            ],
+            [
+              116.0,
+              0.86
+            ],
+            [
+              124.0,
+              0.86
+            ],
+            [
+              128.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Pizzicato orders",
+          "program": 45,
+          "bank": 0,
+          "hand": null,
+          "notes": 72,
+          "pan": 32,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/10-boss-governor-iron-edict-v2-Pizzicato-orders.wav",
+            "bytes": 20480088,
+            "sha256": "1342b87b1bb9e09a696dbcc27c604e6821fa865955d891b31d095268a3f9bcc2"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.68
+            ],
+            [
+              12.0,
+              0.68
+            ],
+            [
+              20.0,
+              0.9
+            ],
+            [
+              28.0,
+              0.9
+            ],
+            [
+              36.0,
+              0.78
+            ],
+            [
+              44.0,
+              0.78
+            ],
+            [
+              52.0,
+              0.95
+            ],
+            [
+              60.0,
+              0.95
+            ],
+            [
+              68.0,
+              0.92
+            ],
+            [
+              76.0,
+              0.92
+            ],
+            [
+              84.0,
+              0.72
+            ],
+            [
+              92.0,
+              0.72
+            ],
+            [
+              100.0,
+              1
+            ],
+            [
+              108.0,
+              1
+            ],
+            [
+              116.0,
+              0.78
+            ],
+            [
+              124.0,
+              0.78
+            ],
+            [
+              128.0,
+              0.68
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Orchestral snare",
+          "program": 48,
+          "bank": 128,
+          "hand": null,
+          "notes": 56,
+          "pan": 7,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/10-boss-governor-iron-edict-v2-Orchestral-snare.wav",
+            "bytes": 20480088,
+            "sha256": "60ab61a86f96dc1c97da8abcffff855985f4ae3bcd018aef8b901280906b4efb"
+          },
+          "target_active_rms_dbfs": -37,
+          "continuous_gain_points": [
+            [
+              0,
+              0.68
+            ],
+            [
+              12.0,
+              0.68
+            ],
+            [
+              20.0,
+              0.9
+            ],
+            [
+              28.0,
+              0.9
+            ],
+            [
+              36.0,
+              0.78
+            ],
+            [
+              44.0,
+              0.78
+            ],
+            [
+              52.0,
+              0.95
+            ],
+            [
+              60.0,
+              0.95
+            ],
+            [
+              68.0,
+              0.92
+            ],
+            [
+              76.0,
+              0.92
+            ],
+            [
+              84.0,
+              0.72
+            ],
+            [
+              92.0,
+              0.72
+            ],
+            [
+              100.0,
+              1
+            ],
+            [
+              108.0,
+              1
+            ],
+            [
+              116.0,
+              0.78
+            ],
+            [
+              124.0,
+              0.78
+            ],
+            [
+              128.0,
+              0.68
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Timpani gates",
+          "program": 47,
+          "bank": 0,
+          "hand": null,
+          "notes": 44,
+          "pan": -8,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/10-boss-governor-iron-edict-v2-Timpani-gates.wav",
+            "bytes": 20480088,
+            "sha256": "242b4c52d0dfcddb330163aee28d148623be0133f4195ad2ffbbdd19ff180f2c"
+          },
+          "target_active_rms_dbfs": -36,
+          "continuous_gain_points": [
+            [
+              0,
+              0.68
+            ],
+            [
+              12.0,
+              0.68
+            ],
+            [
+              20.0,
+              0.9
+            ],
+            [
+              28.0,
+              0.9
+            ],
+            [
+              36.0,
+              0.78
+            ],
+            [
+              44.0,
+              0.78
+            ],
+            [
+              52.0,
+              0.95
+            ],
+            [
+              60.0,
+              0.95
+            ],
+            [
+              68.0,
+              0.92
+            ],
+            [
+              76.0,
+              0.92
+            ],
+            [
+              84.0,
+              0.72
+            ],
+            [
+              92.0,
+              0.72
+            ],
+            [
+              100.0,
+              1
+            ],
+            [
+              108.0,
+              1
+            ],
+            [
+              116.0,
+              0.78
+            ],
+            [
+              124.0,
+              0.78
+            ],
+            [
+              128.0,
+              0.68
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/10-boss-governor-iron-edict-v2-Steady-low-foundation.wav",
+            "bytes": 20480088,
+            "sha256": "f54f23d67ab8965963c9528d9db50bed67f282aec561aed98776c4c1ca9135b8"
+          },
+          "target_active_rms_dbfs": -33,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              12.0,
+              0.92
+            ],
+            [
+              20.0,
+              0.96
+            ],
+            [
+              28.0,
+              0.96
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.91
+            ],
+            [
+              60.0,
+              0.91
+            ],
+            [
+              68.0,
+              1
+            ],
+            [
+              76.0,
+              1
+            ],
+            [
+              84.0,
+              0.96
+            ],
+            [
+              92.0,
+              0.96
+            ],
+            [
+              100.0,
+              0.97
+            ],
+            [
+              108.0,
+              0.97
+            ],
+            [
+              116.0,
+              0.9
+            ],
+            [
+              124.0,
+              0.9
+            ],
+            [
+              128.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Muted guitar drive",
+          "program": 28,
+          "bank": 0,
+          "hand": null,
+          "notes": 96,
+          "pan": -26,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/10-boss-governor-iron-edict-v2-Muted-guitar-drive.wav",
+            "bytes": 20480088,
+            "sha256": "db857d1c0123fe8e97636bfccd78b5d3b5580ee9efec7c2dddbdb6ae830a778b"
+          },
+          "target_active_rms_dbfs": -38,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              12.0,
+              0.84
+            ],
+            [
+              20.0,
+              1
+            ],
+            [
+              28.0,
+              1
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.9
+            ],
+            [
+              60.0,
+              0.9
+            ],
+            [
+              68.0,
+              1.05
+            ],
+            [
+              76.0,
+              1.05
+            ],
+            [
+              84.0,
+              0.93
+            ],
+            [
+              92.0,
+              0.93
+            ],
+            [
+              100.0,
+              1.02
+            ],
+            [
+              108.0,
+              1.02
+            ],
+            [
+              116.0,
+              0.86
+            ],
+            [
+              124.0,
+              0.86
+            ],
+            [
+              128.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-4.28",
+        "input_lra": "2.20",
+        "input_thresh": "-28.50",
+        "output_i": "-22.81",
+        "output_tp": "-8.92",
+        "output_lra": "1.80",
+        "output_thresh": "-32.81",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.19"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.4051466139376141,
+          0.6301744043333428
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/10-boss-governor-iron-edict-v2.mmp",
+          "bytes": 8598,
+          "sha256": "850b9620db8a12814e367b8aa4073e7a0986b751e7fb45d9aa706239df8ed1ce"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/10-boss-governor-iron-edict-v2.wav",
+          "bytes": 15360044,
+          "sha256": "968a675a6d69cee2ec0fb8bfb81990ad42916c9f2c3541ac3f5f94e599ae4fa8"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/10-boss-governor-iron-edict-v2.mp3",
+          "bytes": 1708868,
+          "sha256": "6908e4532a05fd3638853091d4e2726ad82d002ebb64a9bb043add8ae9653866"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/10-boss-governor-iron-edict-v2.ogg",
+          "bytes": 816210,
+          "sha256": "343e06cc8245c417bc422959f135d65d4e5d0bbe8a3d37384608803668d9f3fa"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "statement"
+        },
+        {
+          "start_bar": 4,
+          "name": "answer"
+        },
+        {
+          "start_bar": 8,
+          "name": "lift"
+        },
+        {
+          "start_bar": 12,
+          "name": "refrain"
+        },
+        {
+          "start_bar": 16,
+          "name": "statement"
+        },
+        {
+          "start_bar": 20,
+          "name": "answer"
+        },
+        {
+          "start_bar": 24,
+          "name": "lift"
+        },
+        {
+          "start_bar": 28,
+          "name": "refrain"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed",
+      "creative_revision": {
+        "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+        "primary_response_voice": "Violin defiance",
+        "changes": [
+          "short memorable motifs",
+          "foreground replies every 2 bars",
+          "orchestration or rhythmic fills every 4 bars",
+          "clearer pulse",
+          "gentle 1-bar transitions"
+        ],
+        "not_a_gain_only_revision": true
+      }
+    },
+    {
+      "id": "boss-brood",
+      "title": "腐巢微光",
+      "stem": "11-boss-brood-pale-nest-v2",
+      "idea": "变异巢母的六八拍隐伏；低单簧管、巴松、木质马林巴与颤弦，像缓慢呼吸的巢，而非军鼓战争。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+      "key": "B minor",
+      "meter": [
+        6,
+        8
+      ],
+      "bpm_quarter": 112,
+      "bars": 32,
+      "total_beats": 96.0,
+      "seconds": 51.4285625,
+      "tracks": [
+        {
+          "name": "Clarinet lurking",
+          "program": 71,
+          "bank": 0,
+          "hand": null,
+          "notes": 112,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/11-boss-brood-pale-nest-v2-Clarinet-lurking.wav",
+            "bytes": 19748656,
+            "sha256": "faf4b40ebd368597133b4c52266c638c3bc4ded2fedb804ab5c83add6368e03a"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              9.0,
+              0.84
+            ],
+            [
+              15.0,
+              1
+            ],
+            [
+              21.0,
+              1
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.9
+            ],
+            [
+              45.0,
+              0.9
+            ],
+            [
+              51.0,
+              1.05
+            ],
+            [
+              57.0,
+              1.05
+            ],
+            [
+              63.0,
+              0.93
+            ],
+            [
+              69.0,
+              0.93
+            ],
+            [
+              75.0,
+              1.02
+            ],
+            [
+              81.0,
+              1.02
+            ],
+            [
+              87.0,
+              0.86
+            ],
+            [
+              93.0,
+              0.86
+            ],
+            [
+              96.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Tremolo nest walls",
+          "program": 44,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": -31,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/11-boss-brood-pale-nest-v2-Tremolo-nest-walls.wav",
+            "bytes": 19748656,
+            "sha256": "b26ed3e39efc40f2a7455811f5462f36c5f8dd80c6fe3b961bb009bdc755d61b"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              9.0,
+              0.92
+            ],
+            [
+              15.0,
+              0.96
+            ],
+            [
+              21.0,
+              0.96
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.91
+            ],
+            [
+              45.0,
+              0.91
+            ],
+            [
+              51.0,
+              1
+            ],
+            [
+              57.0,
+              1
+            ],
+            [
+              63.0,
+              0.96
+            ],
+            [
+              69.0,
+              0.96
+            ],
+            [
+              75.0,
+              0.97
+            ],
+            [
+              81.0,
+              0.97
+            ],
+            [
+              87.0,
+              0.9
+            ],
+            [
+              93.0,
+              0.9
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Bassoon roots",
+          "program": 70,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 22,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/11-boss-brood-pale-nest-v2-Bassoon-roots.wav",
+            "bytes": 19748656,
+            "sha256": "324e09b4c371525ee119eebce00db6a11b28d8bfc5d4d234a591e56cee74b987"
+          },
+          "target_active_rms_dbfs": -29,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              9.0,
+              0.84
+            ],
+            [
+              15.0,
+              1
+            ],
+            [
+              21.0,
+              1
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.9
+            ],
+            [
+              45.0,
+              0.9
+            ],
+            [
+              51.0,
+              1.05
+            ],
+            [
+              57.0,
+              1.05
+            ],
+            [
+              63.0,
+              0.93
+            ],
+            [
+              69.0,
+              0.93
+            ],
+            [
+              75.0,
+              1.02
+            ],
+            [
+              81.0,
+              1.02
+            ],
+            [
+              87.0,
+              0.86
+            ],
+            [
+              93.0,
+              0.86
+            ],
+            [
+              96.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Cello crawling answer",
+          "program": 42,
+          "bank": 0,
+          "hand": null,
+          "notes": 32,
+          "pan": 32,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/11-boss-brood-pale-nest-v2-Cello-crawling-answer.wav",
+            "bytes": 19748656,
+            "sha256": "408ed9a8f2e93a7e9aed9674bb2af9460d2556095f56a1cff22111d220f4c4c6"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              9.0,
+              0.92
+            ],
+            [
+              15.0,
+              0.96
+            ],
+            [
+              21.0,
+              0.96
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.91
+            ],
+            [
+              45.0,
+              0.91
+            ],
+            [
+              51.0,
+              1
+            ],
+            [
+              57.0,
+              1
+            ],
+            [
+              63.0,
+              0.96
+            ],
+            [
+              69.0,
+              0.96
+            ],
+            [
+              75.0,
+              0.97
+            ],
+            [
+              81.0,
+              0.97
+            ],
+            [
+              87.0,
+              0.9
+            ],
+            [
+              93.0,
+              0.9
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Marimba hollow bones",
+          "program": 12,
+          "bank": 0,
+          "hand": null,
+          "notes": 88,
+          "pan": -24,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/11-boss-brood-pale-nest-v2-Marimba-hollow-bones.wav",
+            "bytes": 19748656,
+            "sha256": "e5b52c88a271ac188912a0c73585acc7f5726c6389fff5f1b29f7c143009bf39"
+          },
+          "target_active_rms_dbfs": -38,
+          "continuous_gain_points": [
+            [
+              0,
+              0.65
+            ],
+            [
+              9.0,
+              0.65
+            ],
+            [
+              15.0,
+              0.9
+            ],
+            [
+              21.0,
+              0.9
+            ],
+            [
+              27.0,
+              0.74
+            ],
+            [
+              33.0,
+              0.74
+            ],
+            [
+              39.0,
+              0.84
+            ],
+            [
+              45.0,
+              0.84
+            ],
+            [
+              51.0,
+              0.96
+            ],
+            [
+              57.0,
+              0.96
+            ],
+            [
+              63.0,
+              0.67
+            ],
+            [
+              69.0,
+              0.67
+            ],
+            [
+              75.0,
+              0.91
+            ],
+            [
+              81.0,
+              0.91
+            ],
+            [
+              87.0,
+              0.74
+            ],
+            [
+              93.0,
+              0.74
+            ],
+            [
+              96.0,
+              0.65
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Viola spores",
+          "program": 41,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/11-boss-brood-pale-nest-v2-Viola-spores.wav",
+            "bytes": 19748656,
+            "sha256": "0589415bdc4a25ac9d635b82973d173335d973346c7e6309b4772eeff86cee7e"
+          },
+          "target_active_rms_dbfs": -38,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              9.0,
+              0.92
+            ],
+            [
+              15.0,
+              0.96
+            ],
+            [
+              21.0,
+              0.96
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.91
+            ],
+            [
+              45.0,
+              0.91
+            ],
+            [
+              51.0,
+              1
+            ],
+            [
+              57.0,
+              1
+            ],
+            [
+              63.0,
+              0.96
+            ],
+            [
+              69.0,
+              0.96
+            ],
+            [
+              75.0,
+              0.97
+            ],
+            [
+              81.0,
+              0.97
+            ],
+            [
+              87.0,
+              0.9
+            ],
+            [
+              93.0,
+              0.9
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/11-boss-brood-pale-nest-v2-Steady-low-foundation.wav",
+            "bytes": 19748656,
+            "sha256": "c95782412c1e75ca80f4e9870c0cf0df169b2167d62f78c7109431de78a1f06c"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              9.0,
+              0.92
+            ],
+            [
+              15.0,
+              0.96
+            ],
+            [
+              21.0,
+              0.96
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.91
+            ],
+            [
+              45.0,
+              0.91
+            ],
+            [
+              51.0,
+              1
+            ],
+            [
+              57.0,
+              1
+            ],
+            [
+              63.0,
+              0.96
+            ],
+            [
+              69.0,
+              0.96
+            ],
+            [
+              75.0,
+              0.97
+            ],
+            [
+              81.0,
+              0.97
+            ],
+            [
+              87.0,
+              0.9
+            ],
+            [
+              93.0,
+              0.9
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Light acoustic motion",
+          "program": 48,
+          "bank": 128,
+          "hand": null,
+          "notes": 64,
+          "pan": 10,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/11-boss-brood-pale-nest-v2-Light-acoustic-motion.wav",
+            "bytes": 19748656,
+            "sha256": "24ff6c8e9ab8671035c7fc54fb19732fbd7bb6582887ed1b69d8dd598d0bc7e3"
+          },
+          "target_active_rms_dbfs": -39,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              9.0,
+              0.84
+            ],
+            [
+              15.0,
+              1
+            ],
+            [
+              21.0,
+              1
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.9
+            ],
+            [
+              45.0,
+              0.9
+            ],
+            [
+              51.0,
+              1.05
+            ],
+            [
+              57.0,
+              1.05
+            ],
+            [
+              63.0,
+              0.93
+            ],
+            [
+              69.0,
+              0.93
+            ],
+            [
+              75.0,
+              1.02
+            ],
+            [
+              81.0,
+              1.02
+            ],
+            [
+              87.0,
+              0.86
+            ],
+            [
+              93.0,
+              0.86
+            ],
+            [
+              96.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-4.75",
+        "input_lra": "1.20",
+        "input_thresh": "-28.50",
+        "output_i": "-22.82",
+        "output_tp": "-9.32",
+        "output_lra": "0.80",
+        "output_thresh": "-32.82",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.18"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.2755025388230497,
+          0.4081066810527848
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/11-boss-brood-pale-nest-v2.mmp",
+          "bytes": 7719,
+          "sha256": "9a17f653b84e184d13d38fe10424ea3d5d6765ed7f6df88c89095d0b7006ae32"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/11-boss-brood-pale-nest-v2.wav",
+          "bytes": 14811470,
+          "sha256": "401c1c2f6e333f9a0706026e479d4156d6e09de8d26544a298d380f6abd101f4"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/11-boss-brood-pale-nest-v2.mp3",
+          "bytes": 1647428,
+          "sha256": "8ab6202d42ba05e89af47606ee29ae1af20e45b5273bd723f23ebd1d90691e9a"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/11-boss-brood-pale-nest-v2.ogg",
+          "bytes": 847133,
+          "sha256": "7305a1c9f1cd26332d8c649508fdd99c39d03cfe638070fec83306c902a92da1"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "statement"
+        },
+        {
+          "start_bar": 4,
+          "name": "answer"
+        },
+        {
+          "start_bar": 8,
+          "name": "lift"
+        },
+        {
+          "start_bar": 12,
+          "name": "refrain"
+        },
+        {
+          "start_bar": 16,
+          "name": "statement"
+        },
+        {
+          "start_bar": 20,
+          "name": "answer"
+        },
+        {
+          "start_bar": 24,
+          "name": "lift"
+        },
+        {
+          "start_bar": 28,
+          "name": "refrain"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed",
+      "creative_revision": {
+        "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+        "primary_response_voice": "Bassoon roots",
+        "changes": [
+          "short memorable motifs",
+          "foreground replies every 2 bars",
+          "orchestration or rhythmic fills every 4 bars",
+          "clearer pulse",
+          "gentle 1-bar transitions"
+        ],
+        "not_a_gain_only_revision": true
+      }
+    },
+    {
+      "id": "boss-psionic",
+      "title": "折镜之主",
+      "stem": "12-boss-psionic-broken-mirrors-v2",
+      "idea": "异能领主的镜厅三拍：颤音琴与钟琴交错，管风琴守住低部；同句不同方向的回答形成折射感。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+      "key": "E-flat minor",
+      "meter": [
+        3,
+        4
+      ],
+      "bpm_quarter": 120,
+      "bars": 32,
+      "total_beats": 96.0,
+      "seconds": 48.0,
+      "tracks": [
+        {
+          "name": "Vibraphone mirror",
+          "program": 11,
+          "bank": 0,
+          "hand": null,
+          "notes": 112,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/12-boss-psionic-broken-mirrors-v2-Vibraphone-mirror.wav",
+            "bytes": 18432088,
+            "sha256": "c31b17534da735b835a1669279a2ae9d9925f66040a031259050e30dfd8cf192"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              9.0,
+              0.84
+            ],
+            [
+              15.0,
+              1
+            ],
+            [
+              21.0,
+              1
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.9
+            ],
+            [
+              45.0,
+              0.9
+            ],
+            [
+              51.0,
+              1.05
+            ],
+            [
+              57.0,
+              1.05
+            ],
+            [
+              63.0,
+              0.93
+            ],
+            [
+              69.0,
+              0.93
+            ],
+            [
+              75.0,
+              1.02
+            ],
+            [
+              81.0,
+              1.02
+            ],
+            [
+              87.0,
+              0.86
+            ],
+            [
+              93.0,
+              0.86
+            ],
+            [
+              96.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Celeste reflection",
+          "program": 8,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 31,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/12-boss-psionic-broken-mirrors-v2-Celeste-reflection.wav",
+            "bytes": 18432088,
+            "sha256": "6741b18cd1428f935240f104f8e9761c3d73ba4174d52d8ed70cfbb384ad053a"
+          },
+          "target_active_rms_dbfs": -29,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              9.0,
+              0.84
+            ],
+            [
+              15.0,
+              1
+            ],
+            [
+              21.0,
+              1
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.9
+            ],
+            [
+              45.0,
+              0.9
+            ],
+            [
+              51.0,
+              1.05
+            ],
+            [
+              57.0,
+              1.05
+            ],
+            [
+              63.0,
+              0.93
+            ],
+            [
+              69.0,
+              0.93
+            ],
+            [
+              75.0,
+              1.02
+            ],
+            [
+              81.0,
+              1.02
+            ],
+            [
+              87.0,
+              0.86
+            ],
+            [
+              93.0,
+              0.86
+            ],
+            [
+              96.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Organ shadow",
+          "program": 19,
+          "bank": 0,
+          "hand": null,
+          "notes": 32,
+          "pan": -22,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/12-boss-psionic-broken-mirrors-v2-Organ-shadow.wav",
+            "bytes": 18432088,
+            "sha256": "c2dcef02825c236afb03db12c6e18fc670a15fbbbcece4dc6afdb4d64cab4b59"
+          },
+          "target_active_rms_dbfs": -36,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              9.0,
+              0.92
+            ],
+            [
+              15.0,
+              0.96
+            ],
+            [
+              21.0,
+              0.96
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.91
+            ],
+            [
+              45.0,
+              0.91
+            ],
+            [
+              51.0,
+              1
+            ],
+            [
+              57.0,
+              1
+            ],
+            [
+              63.0,
+              0.96
+            ],
+            [
+              69.0,
+              0.96
+            ],
+            [
+              75.0,
+              0.97
+            ],
+            [
+              81.0,
+              0.97
+            ],
+            [
+              87.0,
+              0.9
+            ],
+            [
+              93.0,
+              0.9
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Violin narrow light",
+          "program": 40,
+          "bank": 0,
+          "hand": null,
+          "notes": 10,
+          "pan": 25,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/12-boss-psionic-broken-mirrors-v2-Violin-narrow-light.wav",
+            "bytes": 18432088,
+            "sha256": "f70c4dad079eb0899333174fdd8626a314c38e563adc0e0e863bb5ee2316b4cf"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.65
+            ],
+            [
+              9.0,
+              0.65
+            ],
+            [
+              15.0,
+              0.9
+            ],
+            [
+              21.0,
+              0.9
+            ],
+            [
+              27.0,
+              0.74
+            ],
+            [
+              33.0,
+              0.74
+            ],
+            [
+              39.0,
+              0.84
+            ],
+            [
+              45.0,
+              0.84
+            ],
+            [
+              51.0,
+              0.96
+            ],
+            [
+              57.0,
+              0.96
+            ],
+            [
+              63.0,
+              0.67
+            ],
+            [
+              69.0,
+              0.67
+            ],
+            [
+              75.0,
+              0.91
+            ],
+            [
+              81.0,
+              0.91
+            ],
+            [
+              87.0,
+              0.74
+            ],
+            [
+              93.0,
+              0.74
+            ],
+            [
+              96.0,
+              0.65
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Viola dark glass",
+          "program": 41,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": -34,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/12-boss-psionic-broken-mirrors-v2-Viola-dark-glass.wav",
+            "bytes": 18432088,
+            "sha256": "a5d41b0c001f3148736b3b6439ec5a81ffa4513c91912d6ef7342b4001cdee8b"
+          },
+          "target_active_rms_dbfs": -36,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              9.0,
+              0.92
+            ],
+            [
+              15.0,
+              0.96
+            ],
+            [
+              21.0,
+              0.96
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.91
+            ],
+            [
+              45.0,
+              0.91
+            ],
+            [
+              51.0,
+              1
+            ],
+            [
+              57.0,
+              1
+            ],
+            [
+              63.0,
+              0.96
+            ],
+            [
+              69.0,
+              0.96
+            ],
+            [
+              75.0,
+              0.97
+            ],
+            [
+              81.0,
+              0.97
+            ],
+            [
+              87.0,
+              0.9
+            ],
+            [
+              93.0,
+              0.9
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Harp fractured image",
+          "program": 46,
+          "bank": 0,
+          "hand": null,
+          "notes": 46,
+          "pan": 18,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/12-boss-psionic-broken-mirrors-v2-Harp-fractured-image.wav",
+            "bytes": 18432088,
+            "sha256": "fa7f99510843066768496e945ba9c5a4da2e971dbeeea946c752f396ebf1ad61"
+          },
+          "target_active_rms_dbfs": -42,
+          "continuous_gain_points": [
+            [
+              0,
+              0.65
+            ],
+            [
+              9.0,
+              0.65
+            ],
+            [
+              15.0,
+              0.9
+            ],
+            [
+              21.0,
+              0.9
+            ],
+            [
+              27.0,
+              0.74
+            ],
+            [
+              33.0,
+              0.74
+            ],
+            [
+              39.0,
+              0.84
+            ],
+            [
+              45.0,
+              0.84
+            ],
+            [
+              51.0,
+              0.96
+            ],
+            [
+              57.0,
+              0.96
+            ],
+            [
+              63.0,
+              0.67
+            ],
+            [
+              69.0,
+              0.67
+            ],
+            [
+              75.0,
+              0.91
+            ],
+            [
+              81.0,
+              0.91
+            ],
+            [
+              87.0,
+              0.74
+            ],
+            [
+              93.0,
+              0.74
+            ],
+            [
+              96.0,
+              0.65
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/12-boss-psionic-broken-mirrors-v2-Steady-low-foundation.wav",
+            "bytes": 18432088,
+            "sha256": "def89634d6cf78e96aec2da980b12403743a95a86f63c2571731b642d4a3e7b0"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              9.0,
+              0.92
+            ],
+            [
+              15.0,
+              0.96
+            ],
+            [
+              21.0,
+              0.96
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.91
+            ],
+            [
+              45.0,
+              0.91
+            ],
+            [
+              51.0,
+              1
+            ],
+            [
+              57.0,
+              1
+            ],
+            [
+              63.0,
+              0.96
+            ],
+            [
+              69.0,
+              0.96
+            ],
+            [
+              75.0,
+              0.97
+            ],
+            [
+              81.0,
+              0.97
+            ],
+            [
+              87.0,
+              0.9
+            ],
+            [
+              93.0,
+              0.9
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Light acoustic motion",
+          "program": 48,
+          "bank": 128,
+          "hand": null,
+          "notes": 64,
+          "pan": 10,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/12-boss-psionic-broken-mirrors-v2-Light-acoustic-motion.wav",
+            "bytes": 18432088,
+            "sha256": "8e9de0b47d15d814387277715d594a2ca63b74b3b3396ed1dd637777c1df7bac"
+          },
+          "target_active_rms_dbfs": -39,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              9.0,
+              0.84
+            ],
+            [
+              15.0,
+              1
+            ],
+            [
+              21.0,
+              1
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.9
+            ],
+            [
+              45.0,
+              0.9
+            ],
+            [
+              51.0,
+              1.05
+            ],
+            [
+              57.0,
+              1.05
+            ],
+            [
+              63.0,
+              0.93
+            ],
+            [
+              69.0,
+              0.93
+            ],
+            [
+              75.0,
+              1.02
+            ],
+            [
+              81.0,
+              1.02
+            ],
+            [
+              87.0,
+              0.86
+            ],
+            [
+              93.0,
+              0.86
+            ],
+            [
+              96.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-6.94",
+        "input_lra": "1.20",
+        "input_thresh": "-28.50",
+        "output_i": "-22.89",
+        "output_tp": "-11.52",
+        "output_lra": "1.10",
+        "output_thresh": "-32.89",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.11"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.24400140617374522,
+          0.4006884527969117
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/12-boss-psionic-broken-mirrors-v2.mmp",
+          "bytes": 7776,
+          "sha256": "4b8b67b3d2cea10ab0df9143fced14e82803113f07973838fc77b33a315e268e"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/12-boss-psionic-broken-mirrors-v2.wav",
+          "bytes": 13824044,
+          "sha256": "1b8823a20d5fda6c6deb8c3fafc7a7cb8a38df1c0a6ccd18b699abd67279565c"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/12-boss-psionic-broken-mirrors-v2.mp3",
+          "bytes": 1537604,
+          "sha256": "ac5a09095450b4d9f9d9faac927aba240fd540742ed8af4aaee6a1bd9fc3a23c"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/12-boss-psionic-broken-mirrors-v2.ogg",
+          "bytes": 817158,
+          "sha256": "35f311b507f14405bdcd1c014d6d3bb9314bb6c47c56078bc871b7089739e305"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "statement"
+        },
+        {
+          "start_bar": 4,
+          "name": "answer"
+        },
+        {
+          "start_bar": 8,
+          "name": "lift"
+        },
+        {
+          "start_bar": 12,
+          "name": "refrain"
+        },
+        {
+          "start_bar": 16,
+          "name": "statement"
+        },
+        {
+          "start_bar": 20,
+          "name": "answer"
+        },
+        {
+          "start_bar": 24,
+          "name": "lift"
+        },
+        {
+          "start_bar": 28,
+          "name": "refrain"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed",
+      "creative_revision": {
+        "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+        "primary_response_voice": "Celeste reflection",
+        "changes": [
+          "short memorable motifs",
+          "foreground replies every 2 bars",
+          "orchestration or rhythmic fills every 4 bars",
+          "clearer pulse",
+          "gentle 1-bar transitions"
+        ],
+        "not_a_gain_only_revision": true
+      }
+    },
+    {
+      "id": "success",
+      "title": "归航余晖",
+      "stem": "13-success-homeward-glow-v2",
+      "idea": "成功撤离、首脑胜利与通关结算：柔圆号和温暖大调，不做刺耳连续胜利号角，末句自然回落。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+      "key": "A major",
+      "meter": [
+        3,
+        4
+      ],
+      "bpm_quarter": 112,
+      "bars": 24,
+      "total_beats": 72.0,
+      "seconds": 38.5714375,
+      "tracks": [
+        {
+          "name": "Horn homeward",
+          "program": 60,
+          "bank": 0,
+          "hand": null,
+          "notes": 60,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/13-success-homeward-glow-v2-Horn-homeward.wav",
+            "bytes": 14811520,
+            "sha256": "4f8d274ac830e5f1086d77723beae6724b82cb7fac5b82b8f2dea82685f8b16a"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              9.0,
+              0.84
+            ],
+            [
+              15.0,
+              1
+            ],
+            [
+              21.0,
+              1
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.9
+            ],
+            [
+              45.0,
+              0.9
+            ],
+            [
+              51.0,
+              1.05
+            ],
+            [
+              57.0,
+              1.05
+            ],
+            [
+              63.0,
+              0.93
+            ],
+            [
+              69.0,
+              0.93
+            ],
+            [
+              72.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Violin horizon gold",
+          "program": 40,
+          "bank": 0,
+          "hand": null,
+          "notes": 12,
+          "pan": -31,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/13-success-homeward-glow-v2-Violin-horizon-gold.wav",
+            "bytes": 14811520,
+            "sha256": "b20c77ee9a447b8ae13fd048966e0d2b5d6f991e11a21eaee8b414fb9b120684"
+          },
+          "target_active_rms_dbfs": -29,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              9.0,
+              0.84
+            ],
+            [
+              15.0,
+              1
+            ],
+            [
+              21.0,
+              1
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.9
+            ],
+            [
+              45.0,
+              0.9
+            ],
+            [
+              51.0,
+              1.05
+            ],
+            [
+              57.0,
+              1.05
+            ],
+            [
+              63.0,
+              0.93
+            ],
+            [
+              69.0,
+              0.93
+            ],
+            [
+              72.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Cello return",
+          "program": 42,
+          "bank": 0,
+          "hand": null,
+          "notes": 24,
+          "pan": 29,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/13-success-homeward-glow-v2-Cello-return.wav",
+            "bytes": 14811520,
+            "sha256": "c4395e64047315bbf04b5aeda66785ef466743ffa68a7555b3c4e5410c8dc17c"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              9.0,
+              0.92
+            ],
+            [
+              15.0,
+              0.96
+            ],
+            [
+              21.0,
+              0.96
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.91
+            ],
+            [
+              45.0,
+              0.91
+            ],
+            [
+              51.0,
+              1
+            ],
+            [
+              57.0,
+              1
+            ],
+            [
+              63.0,
+              0.96
+            ],
+            [
+              69.0,
+              0.96
+            ],
+            [
+              72.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Harp carried treasures",
+          "program": 46,
+          "bank": 0,
+          "hand": null,
+          "notes": 34,
+          "pan": -24,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/13-success-homeward-glow-v2-Harp-carried-treasures.wav",
+            "bytes": 14811520,
+            "sha256": "f27d8a6ae1031638777d5535ca85e81cefc2ba6c6016fc8c942654d167d7fd92"
+          },
+          "target_active_rms_dbfs": -37,
+          "continuous_gain_points": [
+            [
+              0,
+              0.65
+            ],
+            [
+              9.0,
+              0.65
+            ],
+            [
+              15.0,
+              0.9
+            ],
+            [
+              21.0,
+              0.9
+            ],
+            [
+              27.0,
+              0.74
+            ],
+            [
+              33.0,
+              0.74
+            ],
+            [
+              39.0,
+              0.84
+            ],
+            [
+              45.0,
+              0.84
+            ],
+            [
+              51.0,
+              0.96
+            ],
+            [
+              57.0,
+              0.96
+            ],
+            [
+              63.0,
+              0.67
+            ],
+            [
+              69.0,
+              0.67
+            ],
+            [
+              72.0,
+              0.65
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Trumpet final sunlight",
+          "program": 56,
+          "bank": 0,
+          "hand": null,
+          "notes": 8,
+          "pan": 20,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/13-success-homeward-glow-v2-Trumpet-final-sunlight.wav",
+            "bytes": 14811520,
+            "sha256": "461a0b166cb0a1e8ccb8b2ddffdae823a84815014362913006137e101745e411"
+          },
+          "target_active_rms_dbfs": -40,
+          "continuous_gain_points": [
+            [
+              0,
+              0.65
+            ],
+            [
+              9.0,
+              0.65
+            ],
+            [
+              15.0,
+              0.9
+            ],
+            [
+              21.0,
+              0.9
+            ],
+            [
+              27.0,
+              0.74
+            ],
+            [
+              33.0,
+              0.74
+            ],
+            [
+              39.0,
+              0.84
+            ],
+            [
+              45.0,
+              0.84
+            ],
+            [
+              51.0,
+              0.96
+            ],
+            [
+              57.0,
+              0.96
+            ],
+            [
+              63.0,
+              0.67
+            ],
+            [
+              69.0,
+              0.67
+            ],
+            [
+              72.0,
+              0.65
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Celeste quiet reward",
+          "program": 8,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 31,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/13-success-homeward-glow-v2-Celeste-quiet-reward.wav",
+            "bytes": 14811520,
+            "sha256": "dfc5f9940e630631d525937caba9f30e4769b15712cb064fc5f32d3864c9a45d"
+          },
+          "target_active_rms_dbfs": -43,
+          "continuous_gain_points": [
+            [
+              0,
+              0.65
+            ],
+            [
+              9.0,
+              0.65
+            ],
+            [
+              15.0,
+              0.9
+            ],
+            [
+              21.0,
+              0.9
+            ],
+            [
+              27.0,
+              0.74
+            ],
+            [
+              33.0,
+              0.74
+            ],
+            [
+              39.0,
+              0.84
+            ],
+            [
+              45.0,
+              0.84
+            ],
+            [
+              51.0,
+              0.96
+            ],
+            [
+              57.0,
+              0.96
+            ],
+            [
+              63.0,
+              0.67
+            ],
+            [
+              69.0,
+              0.67
+            ],
+            [
+              72.0,
+              0.65
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 12,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/13-success-homeward-glow-v2-Steady-low-foundation.wav",
+            "bytes": 14811520,
+            "sha256": "83a9bee8f8dc66c0a06b964b877c6c7847b6608e1294219702bd90f4142bfafc"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              9.0,
+              0.92
+            ],
+            [
+              15.0,
+              0.96
+            ],
+            [
+              21.0,
+              0.96
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.91
+            ],
+            [
+              45.0,
+              0.91
+            ],
+            [
+              51.0,
+              1
+            ],
+            [
+              57.0,
+              1
+            ],
+            [
+              63.0,
+              0.96
+            ],
+            [
+              69.0,
+              0.96
+            ],
+            [
+              72.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Light acoustic motion",
+          "program": 48,
+          "bank": 128,
+          "hand": null,
+          "notes": 48,
+          "pan": 10,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/13-success-homeward-glow-v2-Light-acoustic-motion.wav",
+            "bytes": 14811520,
+            "sha256": "ae67a2d73cd82513a59cbe948bad9d8cb6cc8a817dd27a682ba6ccd49f65ffa7"
+          },
+          "target_active_rms_dbfs": -42,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              9.0,
+              0.84
+            ],
+            [
+              15.0,
+              1
+            ],
+            [
+              21.0,
+              1
+            ],
+            [
+              27.0,
+              0.95
+            ],
+            [
+              33.0,
+              0.95
+            ],
+            [
+              39.0,
+              0.9
+            ],
+            [
+              45.0,
+              0.9
+            ],
+            [
+              51.0,
+              1.05
+            ],
+            [
+              57.0,
+              1.05
+            ],
+            [
+              63.0,
+              0.93
+            ],
+            [
+              69.0,
+              0.93
+            ],
+            [
+              72.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.51",
+        "input_tp": "-5.59",
+        "input_lra": "2.60",
+        "input_thresh": "-28.51",
+        "output_i": "-22.66",
+        "output_tp": "-9.83",
+        "output_lra": "2.40",
+        "output_thresh": "-32.66",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.34"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.5611897899865999,
+          0.8697248081339672
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/13-success-homeward-glow-v2.mmp",
+          "bytes": 7740,
+          "sha256": "72efb05f3c835d7fda06bb70fab7ea51ecdaadc6a0fd8cb0a4ff48e38d58b6c8"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/13-success-homeward-glow-v2.wav",
+          "bytes": 11108618,
+          "sha256": "b44c1ce1604fec5242d3713fadd275c7b5c481e21a2b556df316167a95e04717"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/13-success-homeward-glow-v2.mp3",
+          "bytes": 1236548,
+          "sha256": "b120a059e2abf83f33c9acadef3979e963cd2b68b606fa861a516efbeb5e5eff"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/13-success-homeward-glow-v2.ogg",
+          "bytes": 623380,
+          "sha256": "deb45de47f0f7dbf3c6466547206445bacd8263d8e7c5c621880b3dbc41ce888"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "statement"
+        },
+        {
+          "start_bar": 4,
+          "name": "answer"
+        },
+        {
+          "start_bar": 8,
+          "name": "lift"
+        },
+        {
+          "start_bar": 12,
+          "name": "refrain"
+        },
+        {
+          "start_bar": 16,
+          "name": "statement"
+        },
+        {
+          "start_bar": 20,
+          "name": "answer"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed",
+      "creative_revision": {
+        "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+        "primary_response_voice": "Violin horizon gold",
+        "changes": [
+          "short memorable motifs",
+          "foreground replies every 2 bars",
+          "orchestration or rhythmic fills every 4 bars",
+          "clearer pulse",
+          "gentle 1-bar transitions"
+        ],
+        "not_a_gain_only_revision": true
+      }
+    },
+    {
+      "id": "defeat",
+      "title": "未熄之灯",
+      "stem": "14-defeat-unextinguished-lamp-v2",
+      "idea": "死亡或放弃结算的温柔收束；大提琴、双手钢琴与双簧管，保留重新出发的微光。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+      "key": "G minor",
+      "meter": [
+        4,
+        4
+      ],
+      "bpm_quarter": 84,
+      "bars": 24,
+      "total_beats": 96.0,
+      "seconds": 68.5714375,
+      "tracks": [
+        {
+          "name": "Cello last ember",
+          "program": 42,
+          "bank": 0,
+          "hand": null,
+          "notes": 60,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/14-defeat-unextinguished-lamp-v2-Cello-last-ember.wav",
+            "bytes": 26331520,
+            "sha256": "f68bf7b9e51b231bf540851d55c9b6942c1775cd0911ccad17f2e176726eef06"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              12.0,
+              0.84
+            ],
+            [
+              20.0,
+              1
+            ],
+            [
+              28.0,
+              1
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.9
+            ],
+            [
+              60.0,
+              0.9
+            ],
+            [
+              68.0,
+              1.05
+            ],
+            [
+              76.0,
+              1.05
+            ],
+            [
+              84.0,
+              0.93
+            ],
+            [
+              92.0,
+              0.93
+            ],
+            [
+              96.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Piano right hand",
+          "program": 0,
+          "bank": 0,
+          "hand": "right",
+          "notes": 24,
+          "pan": 8,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/14-defeat-unextinguished-lamp-v2-Piano-right-hand.wav",
+            "bytes": 26331520,
+            "sha256": "42a07eac6d29b27b75edcbcf5de740bd9670b16edc38b43e0229d5c7e6ec3ec3"
+          },
+          "target_active_rms_dbfs": -32,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              12.0,
+              0.92
+            ],
+            [
+              20.0,
+              0.96
+            ],
+            [
+              28.0,
+              0.96
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.91
+            ],
+            [
+              60.0,
+              0.91
+            ],
+            [
+              68.0,
+              1
+            ],
+            [
+              76.0,
+              1
+            ],
+            [
+              84.0,
+              0.96
+            ],
+            [
+              92.0,
+              0.96
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": true
+        },
+        {
+          "name": "Piano left hand",
+          "program": 0,
+          "bank": 0,
+          "hand": "left",
+          "notes": 72,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/14-defeat-unextinguished-lamp-v2-Piano-left-hand.wav",
+            "bytes": 26331520,
+            "sha256": "a5d1228864fcbedf44ac7ab991ff790569e2c67ea646de9624921862c52f4c57"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              12.0,
+              0.92
+            ],
+            [
+              20.0,
+              0.96
+            ],
+            [
+              28.0,
+              0.96
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.91
+            ],
+            [
+              60.0,
+              0.91
+            ],
+            [
+              68.0,
+              1
+            ],
+            [
+              76.0,
+              1
+            ],
+            [
+              84.0,
+              0.96
+            ],
+            [
+              92.0,
+              0.96
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": true
+        },
+        {
+          "name": "Oboe remembered road",
+          "program": 68,
+          "bank": 0,
+          "hand": null,
+          "notes": 12,
+          "pan": 18,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/14-defeat-unextinguished-lamp-v2-Oboe-remembered-road.wav",
+            "bytes": 26331520,
+            "sha256": "f67e8570ea0c2d8c1b2dbae1e4ba72e0dfd27214081e9b5f97ff983409bfaf0b"
+          },
+          "target_active_rms_dbfs": -29,
+          "continuous_gain_points": [
+            [
+              0,
+              0.84
+            ],
+            [
+              12.0,
+              0.84
+            ],
+            [
+              20.0,
+              1
+            ],
+            [
+              28.0,
+              1
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.9
+            ],
+            [
+              60.0,
+              0.9
+            ],
+            [
+              68.0,
+              1.05
+            ],
+            [
+              76.0,
+              1.05
+            ],
+            [
+              84.0,
+              0.93
+            ],
+            [
+              92.0,
+              0.93
+            ],
+            [
+              96.0,
+              0.84
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Slow strings shelter",
+          "program": 49,
+          "bank": 0,
+          "hand": null,
+          "notes": 12,
+          "pan": -31,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/14-defeat-unextinguished-lamp-v2-Slow-strings-shelter.wav",
+            "bytes": 26331520,
+            "sha256": "b1c5843adfd82235cd1b32bbc5400acea1c309eead9e2e7fb1c2b0656fb1ec6f"
+          },
+          "target_active_rms_dbfs": -34,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              12.0,
+              0.92
+            ],
+            [
+              20.0,
+              0.96
+            ],
+            [
+              28.0,
+              0.96
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.91
+            ],
+            [
+              60.0,
+              0.91
+            ],
+            [
+              68.0,
+              1
+            ],
+            [
+              76.0,
+              1
+            ],
+            [
+              84.0,
+              0.96
+            ],
+            [
+              92.0,
+              0.96
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Harp small hope",
+          "program": 46,
+          "bank": 0,
+          "hand": null,
+          "notes": 34,
+          "pan": -24,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/14-defeat-unextinguished-lamp-v2-Harp-small-hope.wav",
+            "bytes": 26331520,
+            "sha256": "b1513642bea61248bef0d2210a4f6fee8187498aafcadf14195e1f4b675db371"
+          },
+          "target_active_rms_dbfs": -43,
+          "continuous_gain_points": [
+            [
+              0,
+              0.65
+            ],
+            [
+              12.0,
+              0.65
+            ],
+            [
+              20.0,
+              0.9
+            ],
+            [
+              28.0,
+              0.9
+            ],
+            [
+              36.0,
+              0.74
+            ],
+            [
+              44.0,
+              0.74
+            ],
+            [
+              52.0,
+              0.84
+            ],
+            [
+              60.0,
+              0.84
+            ],
+            [
+              68.0,
+              0.96
+            ],
+            [
+              76.0,
+              0.96
+            ],
+            [
+              84.0,
+              0.67
+            ],
+            [
+              92.0,
+              0.67
+            ],
+            [
+              96.0,
+              0.65
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 12,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/anime-v2/14-defeat-unextinguished-lamp-v2-Steady-low-foundation.wav",
+            "bytes": 26331520,
+            "sha256": "b18c3abea263dd26ab1a4de4226e4a32a46e39952253998d934cf1e0dea73602"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.92
+            ],
+            [
+              12.0,
+              0.92
+            ],
+            [
+              20.0,
+              0.96
+            ],
+            [
+              28.0,
+              0.96
+            ],
+            [
+              36.0,
+              0.95
+            ],
+            [
+              44.0,
+              0.95
+            ],
+            [
+              52.0,
+              0.91
+            ],
+            [
+              60.0,
+              0.91
+            ],
+            [
+              68.0,
+              1
+            ],
+            [
+              76.0,
+              1
+            ],
+            [
+              84.0,
+              0.96
+            ],
+            [
+              92.0,
+              0.96
+            ],
+            [
+              96.0,
+              0.92
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-6.05",
+        "input_lra": "1.50",
+        "input_thresh": "-28.50",
+        "output_i": "-22.77",
+        "output_tp": "-10.52",
+        "output_lra": "1.40",
+        "output_thresh": "-32.77",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.23"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.5029841183370147,
+          0.386927531623967
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/14-defeat-unextinguished-lamp-v2.mmp",
+          "bytes": 6858,
+          "sha256": "418b321ce7db9fe6ff780245d5b6f11020ea5e1ad49b48efbe389a1a4d83268b"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/14-defeat-unextinguished-lamp-v2.wav",
+          "bytes": 19748618,
+          "sha256": "c0e495f45f23849630a3c72ebf6c5d228ffe854e9a88266e9e3a01155d69f6fd"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/14-defeat-unextinguished-lamp-v2.mp3",
+          "bytes": 2196548,
+          "sha256": "0bed9c40f13c3fa8263776a37e3eec0e82e62c9a0b9651e068def375ce9d545d"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/14-defeat-unextinguished-lamp-v2.ogg",
+          "bytes": 1286955,
+          "sha256": "57710e99659ce5adb7bf2473164291b5fb68b2e9a860a989c5c1d13266aabcb0"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-anime-v2/14-defeat-unextinguished-lamp-v2-piano.mid",
+          "bytes": 1394,
+          "sha256": "107462fa663b8e246d7c3cd7a42f6a0f8184b8f975fd3deb8bbab2ca5a8522d9"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "statement"
+        },
+        {
+          "start_bar": 4,
+          "name": "answer"
+        },
+        {
+          "start_bar": 8,
+          "name": "lift"
+        },
+        {
+          "start_bar": 12,
+          "name": "refrain"
+        },
+        {
+          "start_bar": 16,
+          "name": "statement"
+        },
+        {
+          "start_bar": 20,
+          "name": "answer"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed",
+      "creative_revision": {
+        "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+        "primary_response_voice": "Oboe remembered road",
+        "changes": [
+          "short memorable motifs",
+          "foreground replies every 2 bars",
+          "orchestration or rhythmic fills every 4 bars",
+          "clearer pulse",
+          "gentle 1-bar transitions"
+        ],
+        "not_a_gain_only_revision": true
+      }
+    }
+  ],
+  "scope": "11 more active replacements; approved title/explore/battle unchanged"
+}

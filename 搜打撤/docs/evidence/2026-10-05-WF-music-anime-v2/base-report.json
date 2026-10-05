@@ -1,0 +1,792 @@
+{
+  "id": "base",
+  "title": "晨霜归所",
+  "stem": "04-base-morning-haven-v2",
+  "idea": "安稳的三拍驻地小圆舞曲；钢琴双手主导，单簧管只在句尾接话，B段把旋律交给弦乐色彩。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+  "key": "F major",
+  "meter": [
+    3,
+    4
+  ],
+  "bpm_quarter": 100,
+  "bars": 32,
+  "total_beats": 96.0,
+  "seconds": 57.6,
+  "tracks": [
+    {
+      "name": "Piano right hand",
+      "program": 0,
+      "bank": 0,
+      "hand": "right",
+      "notes": 80,
+      "pan": 7,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/04-base-morning-haven-v2-Piano-right-hand.wav",
+        "bytes": 22118488,
+        "sha256": "5939fdea39ece5c8b71b14b61d43cf4d57e48351dddd17386dfa5dd2d17aa804"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          9.0,
+          0.84
+        ],
+        [
+          15.0,
+          1
+        ],
+        [
+          21.0,
+          1
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.9
+        ],
+        [
+          45.0,
+          0.9
+        ],
+        [
+          51.0,
+          1.05
+        ],
+        [
+          57.0,
+          1.05
+        ],
+        [
+          63.0,
+          0.93
+        ],
+        [
+          69.0,
+          0.93
+        ],
+        [
+          75.0,
+          1.02
+        ],
+        [
+          81.0,
+          1.02
+        ],
+        [
+          87.0,
+          0.86
+        ],
+        [
+          93.0,
+          0.86
+        ],
+        [
+          96.0,
+          0.84
+        ]
+      ],
+      "cc64_used": true
+    },
+    {
+      "name": "Piano left hand",
+      "program": 0,
+      "bank": 0,
+      "hand": "left",
+      "notes": 96,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/04-base-morning-haven-v2-Piano-left-hand.wav",
+        "bytes": 22118488,
+        "sha256": "553cfdecd46ab410f72eae79cfdba6be7f9e84a1eea75a81a4eb5861ce3c9d7c"
+      },
+      "target_active_rms_dbfs": -28.5,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          9.0,
+          0.92
+        ],
+        [
+          15.0,
+          0.96
+        ],
+        [
+          21.0,
+          0.96
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.91
+        ],
+        [
+          45.0,
+          0.91
+        ],
+        [
+          51.0,
+          1
+        ],
+        [
+          57.0,
+          1
+        ],
+        [
+          63.0,
+          0.96
+        ],
+        [
+          69.0,
+          0.96
+        ],
+        [
+          75.0,
+          0.97
+        ],
+        [
+          81.0,
+          0.97
+        ],
+        [
+          87.0,
+          0.9
+        ],
+        [
+          93.0,
+          0.9
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": true
+    },
+    {
+      "name": "Clarinet window",
+      "program": 71,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 23,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/04-base-morning-haven-v2-Clarinet-window.wav",
+        "bytes": 22118488,
+        "sha256": "c3d35038de0693e59e3ac7a06865e64ba60bdc28746b0c875869864041091b62"
+      },
+      "target_active_rms_dbfs": -29,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          9.0,
+          0.84
+        ],
+        [
+          15.0,
+          1
+        ],
+        [
+          21.0,
+          1
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.9
+        ],
+        [
+          45.0,
+          0.9
+        ],
+        [
+          51.0,
+          1.05
+        ],
+        [
+          57.0,
+          1.05
+        ],
+        [
+          63.0,
+          0.93
+        ],
+        [
+          69.0,
+          0.93
+        ],
+        [
+          75.0,
+          1.02
+        ],
+        [
+          81.0,
+          1.02
+        ],
+        [
+          87.0,
+          0.86
+        ],
+        [
+          93.0,
+          0.86
+        ],
+        [
+          96.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Cello hearth",
+      "program": 42,
+      "bank": 0,
+      "hand": null,
+      "notes": 32,
+      "pan": 30,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/04-base-morning-haven-v2-Cello-hearth.wav",
+        "bytes": 22118488,
+        "sha256": "9d10223d9f330ede176110d00191d72d0bf4f285dbb1e52ebd76b55a39e12219"
+      },
+      "target_active_rms_dbfs": -36,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          9.0,
+          0.92
+        ],
+        [
+          15.0,
+          0.96
+        ],
+        [
+          21.0,
+          0.96
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.91
+        ],
+        [
+          45.0,
+          0.91
+        ],
+        [
+          51.0,
+          1
+        ],
+        [
+          57.0,
+          1
+        ],
+        [
+          63.0,
+          0.96
+        ],
+        [
+          69.0,
+          0.96
+        ],
+        [
+          75.0,
+          0.97
+        ],
+        [
+          81.0,
+          0.97
+        ],
+        [
+          87.0,
+          0.9
+        ],
+        [
+          93.0,
+          0.9
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Warm bowed room",
+      "program": 49,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": -29,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/04-base-morning-haven-v2-Warm-bowed-room.wav",
+        "bytes": 22118488,
+        "sha256": "40a2b56c90cdee863a4e90da0fb249ac1e4c6eae8ee7be4f334c0681435d214c"
+      },
+      "target_active_rms_dbfs": -34,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          9.0,
+          0.92
+        ],
+        [
+          15.0,
+          0.96
+        ],
+        [
+          21.0,
+          0.96
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.91
+        ],
+        [
+          45.0,
+          0.91
+        ],
+        [
+          51.0,
+          1
+        ],
+        [
+          57.0,
+          1
+        ],
+        [
+          63.0,
+          0.96
+        ],
+        [
+          69.0,
+          0.96
+        ],
+        [
+          75.0,
+          0.97
+        ],
+        [
+          81.0,
+          0.97
+        ],
+        [
+          87.0,
+          0.9
+        ],
+        [
+          93.0,
+          0.9
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Harp morning",
+      "program": 46,
+      "bank": 0,
+      "hand": null,
+      "notes": 44,
+      "pan": -30,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/04-base-morning-haven-v2-Harp-morning.wav",
+        "bytes": 22118488,
+        "sha256": "eac2ab2eb5961f6c8945cbf2c88cdbe01203f8ae06f0d81fed50d3efe7042a99"
+      },
+      "target_active_rms_dbfs": -41,
+      "continuous_gain_points": [
+        [
+          0,
+          0.65
+        ],
+        [
+          9.0,
+          0.65
+        ],
+        [
+          15.0,
+          0.9
+        ],
+        [
+          21.0,
+          0.9
+        ],
+        [
+          27.0,
+          0.74
+        ],
+        [
+          33.0,
+          0.74
+        ],
+        [
+          39.0,
+          0.84
+        ],
+        [
+          45.0,
+          0.84
+        ],
+        [
+          51.0,
+          0.96
+        ],
+        [
+          57.0,
+          0.96
+        ],
+        [
+          63.0,
+          0.67
+        ],
+        [
+          69.0,
+          0.67
+        ],
+        [
+          75.0,
+          0.91
+        ],
+        [
+          81.0,
+          0.91
+        ],
+        [
+          87.0,
+          0.74
+        ],
+        [
+          93.0,
+          0.74
+        ],
+        [
+          96.0,
+          0.65
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/04-base-morning-haven-v2-Steady-low-foundation.wav",
+        "bytes": 22118488,
+        "sha256": "20d116e8f4f2fc83678ce8e2fb3748e3ec4195a8b20dfff86f322a1cfecbac68"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          9.0,
+          0.92
+        ],
+        [
+          15.0,
+          0.96
+        ],
+        [
+          21.0,
+          0.96
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.91
+        ],
+        [
+          45.0,
+          0.91
+        ],
+        [
+          51.0,
+          1
+        ],
+        [
+          57.0,
+          1
+        ],
+        [
+          63.0,
+          0.96
+        ],
+        [
+          69.0,
+          0.96
+        ],
+        [
+          75.0,
+          0.97
+        ],
+        [
+          81.0,
+          0.97
+        ],
+        [
+          87.0,
+          0.9
+        ],
+        [
+          93.0,
+          0.9
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Light acoustic motion",
+      "program": 48,
+      "bank": 128,
+      "hand": null,
+      "notes": 64,
+      "pan": 10,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/04-base-morning-haven-v2-Light-acoustic-motion.wav",
+        "bytes": 22118488,
+        "sha256": "4a310a2b42f4537351dc3285f11d10e6666a061f890a4d19eaea8ebdb3b58116"
+      },
+      "target_active_rms_dbfs": -42,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          9.0,
+          0.84
+        ],
+        [
+          15.0,
+          1
+        ],
+        [
+          21.0,
+          1
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.9
+        ],
+        [
+          45.0,
+          0.9
+        ],
+        [
+          51.0,
+          1.05
+        ],
+        [
+          57.0,
+          1.05
+        ],
+        [
+          63.0,
+          0.93
+        ],
+        [
+          69.0,
+          0.93
+        ],
+        [
+          75.0,
+          1.02
+        ],
+        [
+          81.0,
+          1.02
+        ],
+        [
+          87.0,
+          0.86
+        ],
+        [
+          93.0,
+          0.86
+        ],
+        [
+          96.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.51",
+    "input_tp": "-4.88",
+    "input_lra": "1.80",
+    "input_thresh": "-28.51",
+    "output_i": "-22.88",
+    "output_tp": "-9.27",
+    "output_lra": "1.60",
+    "output_thresh": "-32.88",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.12"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.40766138829847115,
+      0.5989386879027001
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/04-base-morning-haven-v2.mmp",
+      "bytes": 7665,
+      "sha256": "2aa3fe789103b979e4decbd6fdd01dd21c28568df7b6647f2376ca68a632f0fc"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/04-base-morning-haven-v2.wav",
+      "bytes": 16588844,
+      "sha256": "0ef263a630fc149f799719f3ca9dd0505a7b8b345d8dd09a1b2ae095702bdefb"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/04-base-morning-haven-v2.mp3",
+      "bytes": 1844804,
+      "sha256": "4e627339fd25d0e84e11fee17cc694cab207856abb61f8d1dbb98faa8c725e27"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/04-base-morning-haven-v2.ogg",
+      "bytes": 950072,
+      "sha256": "49e5440537166bec27b39536f5d5f092caa650f83e117e9844cb88f0e69868fd"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/04-base-morning-haven-v2-piano.mid",
+      "bytes": 2222,
+      "sha256": "6ccefa233f31ced55b50eb7b67f5ef1a02bc3a3f09fccd7c072f9f8f902aa5b1"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "statement"
+    },
+    {
+      "start_bar": 4,
+      "name": "answer"
+    },
+    {
+      "start_bar": 8,
+      "name": "lift"
+    },
+    {
+      "start_bar": 12,
+      "name": "refrain"
+    },
+    {
+      "start_bar": 16,
+      "name": "statement"
+    },
+    {
+      "start_bar": 20,
+      "name": "answer"
+    },
+    {
+      "start_bar": 24,
+      "name": "lift"
+    },
+    {
+      "start_bar": 28,
+      "name": "refrain"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed",
+  "creative_revision": {
+    "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+    "primary_response_voice": "Clarinet window",
+    "changes": [
+      "short memorable motifs",
+      "foreground replies every 2 bars",
+      "orchestration or rhythmic fills every 4 bars",
+      "clearer pulse",
+      "gentle 1-bar transitions"
+    ],
+    "not_a_gain_only_revision": true
+  }
+}

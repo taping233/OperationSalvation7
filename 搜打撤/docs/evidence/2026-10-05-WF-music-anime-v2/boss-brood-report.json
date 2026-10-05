@@ -1,0 +1,787 @@
+{
+  "id": "boss-brood",
+  "title": "腐巢微光",
+  "stem": "11-boss-brood-pale-nest-v2",
+  "idea": "变异巢母的六八拍隐伏；低单簧管、巴松、木质马林巴与颤弦，像缓慢呼吸的巢，而非军鼓战争。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+  "key": "B minor",
+  "meter": [
+    6,
+    8
+  ],
+  "bpm_quarter": 112,
+  "bars": 32,
+  "total_beats": 96.0,
+  "seconds": 51.4285625,
+  "tracks": [
+    {
+      "name": "Clarinet lurking",
+      "program": 71,
+      "bank": 0,
+      "hand": null,
+      "notes": 112,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/11-boss-brood-pale-nest-v2-Clarinet-lurking.wav",
+        "bytes": 19748656,
+        "sha256": "faf4b40ebd368597133b4c52266c638c3bc4ded2fedb804ab5c83add6368e03a"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          9.0,
+          0.84
+        ],
+        [
+          15.0,
+          1
+        ],
+        [
+          21.0,
+          1
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.9
+        ],
+        [
+          45.0,
+          0.9
+        ],
+        [
+          51.0,
+          1.05
+        ],
+        [
+          57.0,
+          1.05
+        ],
+        [
+          63.0,
+          0.93
+        ],
+        [
+          69.0,
+          0.93
+        ],
+        [
+          75.0,
+          1.02
+        ],
+        [
+          81.0,
+          1.02
+        ],
+        [
+          87.0,
+          0.86
+        ],
+        [
+          93.0,
+          0.86
+        ],
+        [
+          96.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Tremolo nest walls",
+      "program": 44,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": -31,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/11-boss-brood-pale-nest-v2-Tremolo-nest-walls.wav",
+        "bytes": 19748656,
+        "sha256": "b26ed3e39efc40f2a7455811f5462f36c5f8dd80c6fe3b961bb009bdc755d61b"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          9.0,
+          0.92
+        ],
+        [
+          15.0,
+          0.96
+        ],
+        [
+          21.0,
+          0.96
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.91
+        ],
+        [
+          45.0,
+          0.91
+        ],
+        [
+          51.0,
+          1
+        ],
+        [
+          57.0,
+          1
+        ],
+        [
+          63.0,
+          0.96
+        ],
+        [
+          69.0,
+          0.96
+        ],
+        [
+          75.0,
+          0.97
+        ],
+        [
+          81.0,
+          0.97
+        ],
+        [
+          87.0,
+          0.9
+        ],
+        [
+          93.0,
+          0.9
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Bassoon roots",
+      "program": 70,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 22,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/11-boss-brood-pale-nest-v2-Bassoon-roots.wav",
+        "bytes": 19748656,
+        "sha256": "324e09b4c371525ee119eebce00db6a11b28d8bfc5d4d234a591e56cee74b987"
+      },
+      "target_active_rms_dbfs": -29,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          9.0,
+          0.84
+        ],
+        [
+          15.0,
+          1
+        ],
+        [
+          21.0,
+          1
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.9
+        ],
+        [
+          45.0,
+          0.9
+        ],
+        [
+          51.0,
+          1.05
+        ],
+        [
+          57.0,
+          1.05
+        ],
+        [
+          63.0,
+          0.93
+        ],
+        [
+          69.0,
+          0.93
+        ],
+        [
+          75.0,
+          1.02
+        ],
+        [
+          81.0,
+          1.02
+        ],
+        [
+          87.0,
+          0.86
+        ],
+        [
+          93.0,
+          0.86
+        ],
+        [
+          96.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Cello crawling answer",
+      "program": 42,
+      "bank": 0,
+      "hand": null,
+      "notes": 32,
+      "pan": 32,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/11-boss-brood-pale-nest-v2-Cello-crawling-answer.wav",
+        "bytes": 19748656,
+        "sha256": "408ed9a8f2e93a7e9aed9674bb2af9460d2556095f56a1cff22111d220f4c4c6"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          9.0,
+          0.92
+        ],
+        [
+          15.0,
+          0.96
+        ],
+        [
+          21.0,
+          0.96
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.91
+        ],
+        [
+          45.0,
+          0.91
+        ],
+        [
+          51.0,
+          1
+        ],
+        [
+          57.0,
+          1
+        ],
+        [
+          63.0,
+          0.96
+        ],
+        [
+          69.0,
+          0.96
+        ],
+        [
+          75.0,
+          0.97
+        ],
+        [
+          81.0,
+          0.97
+        ],
+        [
+          87.0,
+          0.9
+        ],
+        [
+          93.0,
+          0.9
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Marimba hollow bones",
+      "program": 12,
+      "bank": 0,
+      "hand": null,
+      "notes": 88,
+      "pan": -24,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/11-boss-brood-pale-nest-v2-Marimba-hollow-bones.wav",
+        "bytes": 19748656,
+        "sha256": "e5b52c88a271ac188912a0c73585acc7f5726c6389fff5f1b29f7c143009bf39"
+      },
+      "target_active_rms_dbfs": -38,
+      "continuous_gain_points": [
+        [
+          0,
+          0.65
+        ],
+        [
+          9.0,
+          0.65
+        ],
+        [
+          15.0,
+          0.9
+        ],
+        [
+          21.0,
+          0.9
+        ],
+        [
+          27.0,
+          0.74
+        ],
+        [
+          33.0,
+          0.74
+        ],
+        [
+          39.0,
+          0.84
+        ],
+        [
+          45.0,
+          0.84
+        ],
+        [
+          51.0,
+          0.96
+        ],
+        [
+          57.0,
+          0.96
+        ],
+        [
+          63.0,
+          0.67
+        ],
+        [
+          69.0,
+          0.67
+        ],
+        [
+          75.0,
+          0.91
+        ],
+        [
+          81.0,
+          0.91
+        ],
+        [
+          87.0,
+          0.74
+        ],
+        [
+          93.0,
+          0.74
+        ],
+        [
+          96.0,
+          0.65
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Viola spores",
+      "program": 41,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/11-boss-brood-pale-nest-v2-Viola-spores.wav",
+        "bytes": 19748656,
+        "sha256": "0589415bdc4a25ac9d635b82973d173335d973346c7e6309b4772eeff86cee7e"
+      },
+      "target_active_rms_dbfs": -38,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          9.0,
+          0.92
+        ],
+        [
+          15.0,
+          0.96
+        ],
+        [
+          21.0,
+          0.96
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.91
+        ],
+        [
+          45.0,
+          0.91
+        ],
+        [
+          51.0,
+          1
+        ],
+        [
+          57.0,
+          1
+        ],
+        [
+          63.0,
+          0.96
+        ],
+        [
+          69.0,
+          0.96
+        ],
+        [
+          75.0,
+          0.97
+        ],
+        [
+          81.0,
+          0.97
+        ],
+        [
+          87.0,
+          0.9
+        ],
+        [
+          93.0,
+          0.9
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/11-boss-brood-pale-nest-v2-Steady-low-foundation.wav",
+        "bytes": 19748656,
+        "sha256": "c95782412c1e75ca80f4e9870c0cf0df169b2167d62f78c7109431de78a1f06c"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          9.0,
+          0.92
+        ],
+        [
+          15.0,
+          0.96
+        ],
+        [
+          21.0,
+          0.96
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.91
+        ],
+        [
+          45.0,
+          0.91
+        ],
+        [
+          51.0,
+          1
+        ],
+        [
+          57.0,
+          1
+        ],
+        [
+          63.0,
+          0.96
+        ],
+        [
+          69.0,
+          0.96
+        ],
+        [
+          75.0,
+          0.97
+        ],
+        [
+          81.0,
+          0.97
+        ],
+        [
+          87.0,
+          0.9
+        ],
+        [
+          93.0,
+          0.9
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Light acoustic motion",
+      "program": 48,
+      "bank": 128,
+      "hand": null,
+      "notes": 64,
+      "pan": 10,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/11-boss-brood-pale-nest-v2-Light-acoustic-motion.wav",
+        "bytes": 19748656,
+        "sha256": "24ff6c8e9ab8671035c7fc54fb19732fbd7bb6582887ed1b69d8dd598d0bc7e3"
+      },
+      "target_active_rms_dbfs": -39,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          9.0,
+          0.84
+        ],
+        [
+          15.0,
+          1
+        ],
+        [
+          21.0,
+          1
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.9
+        ],
+        [
+          45.0,
+          0.9
+        ],
+        [
+          51.0,
+          1.05
+        ],
+        [
+          57.0,
+          1.05
+        ],
+        [
+          63.0,
+          0.93
+        ],
+        [
+          69.0,
+          0.93
+        ],
+        [
+          75.0,
+          1.02
+        ],
+        [
+          81.0,
+          1.02
+        ],
+        [
+          87.0,
+          0.86
+        ],
+        [
+          93.0,
+          0.86
+        ],
+        [
+          96.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-4.75",
+    "input_lra": "1.20",
+    "input_thresh": "-28.50",
+    "output_i": "-22.82",
+    "output_tp": "-9.32",
+    "output_lra": "0.80",
+    "output_thresh": "-32.82",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.18"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.2755025388230497,
+      0.4081066810527848
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/11-boss-brood-pale-nest-v2.mmp",
+      "bytes": 7719,
+      "sha256": "9a17f653b84e184d13d38fe10424ea3d5d6765ed7f6df88c89095d0b7006ae32"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/11-boss-brood-pale-nest-v2.wav",
+      "bytes": 14811470,
+      "sha256": "401c1c2f6e333f9a0706026e479d4156d6e09de8d26544a298d380f6abd101f4"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/11-boss-brood-pale-nest-v2.mp3",
+      "bytes": 1647428,
+      "sha256": "8ab6202d42ba05e89af47606ee29ae1af20e45b5273bd723f23ebd1d90691e9a"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/11-boss-brood-pale-nest-v2.ogg",
+      "bytes": 847133,
+      "sha256": "7305a1c9f1cd26332d8c649508fdd99c39d03cfe638070fec83306c902a92da1"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "statement"
+    },
+    {
+      "start_bar": 4,
+      "name": "answer"
+    },
+    {
+      "start_bar": 8,
+      "name": "lift"
+    },
+    {
+      "start_bar": 12,
+      "name": "refrain"
+    },
+    {
+      "start_bar": 16,
+      "name": "statement"
+    },
+    {
+      "start_bar": 20,
+      "name": "answer"
+    },
+    {
+      "start_bar": 24,
+      "name": "lift"
+    },
+    {
+      "start_bar": 28,
+      "name": "refrain"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed",
+  "creative_revision": {
+    "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+    "primary_response_voice": "Bassoon roots",
+    "changes": [
+      "short memorable motifs",
+      "foreground replies every 2 bars",
+      "orchestration or rhythmic fills every 4 bars",
+      "clearer pulse",
+      "gentle 1-bar transitions"
+    ],
+    "not_a_gain_only_revision": true
+  }
+}

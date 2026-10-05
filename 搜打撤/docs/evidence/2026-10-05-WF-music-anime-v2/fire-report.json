@@ -1,0 +1,792 @@
+{
+  "id": "fire",
+  "title": "炉边长夜",
+  "stem": "06-fire-embers-and-snow-v2",
+  "idea": "六八拍摇摆的营火；长笛、尼龙弦与双手钢琴，极轻火星般竖琴，没有行军鼓点。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+  "key": "G major",
+  "meter": [
+    6,
+    8
+  ],
+  "bpm_quarter": 90,
+  "bars": 32,
+  "total_beats": 96.0,
+  "seconds": 64.0,
+  "tracks": [
+    {
+      "name": "Flute warm breath",
+      "program": 73,
+      "bank": 0,
+      "hand": null,
+      "notes": 80,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/06-fire-embers-and-snow-v2-Flute-warm-breath.wav",
+        "bytes": 24576088,
+        "sha256": "7e553ba81debdb7c93783fd6fe4f591f2469afacf32a3d262da1dd1d4aeca24f"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          9.0,
+          0.84
+        ],
+        [
+          15.0,
+          1
+        ],
+        [
+          21.0,
+          1
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.9
+        ],
+        [
+          45.0,
+          0.9
+        ],
+        [
+          51.0,
+          1.05
+        ],
+        [
+          57.0,
+          1.05
+        ],
+        [
+          63.0,
+          0.93
+        ],
+        [
+          69.0,
+          0.93
+        ],
+        [
+          75.0,
+          1.02
+        ],
+        [
+          81.0,
+          1.02
+        ],
+        [
+          87.0,
+          0.86
+        ],
+        [
+          93.0,
+          0.86
+        ],
+        [
+          96.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Piano right hand",
+      "program": 0,
+      "bank": 0,
+      "hand": "right",
+      "notes": 32,
+      "pan": 8,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/06-fire-embers-and-snow-v2-Piano-right-hand.wav",
+        "bytes": 24576088,
+        "sha256": "efdc097c98ab91e1da94be3858ca6942e6a8aea7892cf6127187f38e61b0c552"
+      },
+      "target_active_rms_dbfs": -32,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          9.0,
+          0.92
+        ],
+        [
+          15.0,
+          0.96
+        ],
+        [
+          21.0,
+          0.96
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.91
+        ],
+        [
+          45.0,
+          0.91
+        ],
+        [
+          51.0,
+          1
+        ],
+        [
+          57.0,
+          1
+        ],
+        [
+          63.0,
+          0.96
+        ],
+        [
+          69.0,
+          0.96
+        ],
+        [
+          75.0,
+          0.97
+        ],
+        [
+          81.0,
+          0.97
+        ],
+        [
+          87.0,
+          0.9
+        ],
+        [
+          93.0,
+          0.9
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": true
+    },
+    {
+      "name": "Piano left hand",
+      "program": 0,
+      "bank": 0,
+      "hand": "left",
+      "notes": 96,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/06-fire-embers-and-snow-v2-Piano-left-hand.wav",
+        "bytes": 24576088,
+        "sha256": "85d876f3e0993bc5fccef4b22097e42fcd1dde7d15ef2a6a774c8c37264c7726"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          9.0,
+          0.92
+        ],
+        [
+          15.0,
+          0.96
+        ],
+        [
+          21.0,
+          0.96
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.91
+        ],
+        [
+          45.0,
+          0.91
+        ],
+        [
+          51.0,
+          1
+        ],
+        [
+          57.0,
+          1
+        ],
+        [
+          63.0,
+          0.96
+        ],
+        [
+          69.0,
+          0.96
+        ],
+        [
+          75.0,
+          0.97
+        ],
+        [
+          81.0,
+          0.97
+        ],
+        [
+          87.0,
+          0.9
+        ],
+        [
+          93.0,
+          0.9
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": true
+    },
+    {
+      "name": "Nylon beside flame",
+      "program": 24,
+      "bank": 0,
+      "hand": null,
+      "notes": 88,
+      "pan": -28,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/06-fire-embers-and-snow-v2-Nylon-beside-flame.wav",
+        "bytes": 24576088,
+        "sha256": "ead84dae6af724cfa17e322f83a44d16472c7d92147a3f430b79f191d351a926"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          9.0,
+          0.92
+        ],
+        [
+          15.0,
+          0.96
+        ],
+        [
+          21.0,
+          0.96
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.91
+        ],
+        [
+          45.0,
+          0.91
+        ],
+        [
+          51.0,
+          1
+        ],
+        [
+          57.0,
+          1
+        ],
+        [
+          63.0,
+          0.96
+        ],
+        [
+          69.0,
+          0.96
+        ],
+        [
+          75.0,
+          0.97
+        ],
+        [
+          81.0,
+          0.97
+        ],
+        [
+          87.0,
+          0.9
+        ],
+        [
+          93.0,
+          0.9
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Viola blanket",
+      "program": 41,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 28,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/06-fire-embers-and-snow-v2-Viola-blanket.wav",
+        "bytes": 24576088,
+        "sha256": "c1a3c1016e4219cce7ae211a688b60f145f56abb5b4bddd6645f99e87c71bc92"
+      },
+      "target_active_rms_dbfs": -36,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          9.0,
+          0.92
+        ],
+        [
+          15.0,
+          0.96
+        ],
+        [
+          21.0,
+          0.96
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.91
+        ],
+        [
+          45.0,
+          0.91
+        ],
+        [
+          51.0,
+          1
+        ],
+        [
+          57.0,
+          1
+        ],
+        [
+          63.0,
+          0.96
+        ],
+        [
+          69.0,
+          0.96
+        ],
+        [
+          75.0,
+          0.97
+        ],
+        [
+          81.0,
+          0.97
+        ],
+        [
+          87.0,
+          0.9
+        ],
+        [
+          93.0,
+          0.9
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Cello slow breath",
+      "program": 42,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/06-fire-embers-and-snow-v2-Cello-slow-breath.wav",
+        "bytes": 24576088,
+        "sha256": "2155c1020e40a9dfe196b83a2d19b9372aaa3aac3e083461105165449e4f1c8a"
+      },
+      "target_active_rms_dbfs": -29,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          9.0,
+          0.84
+        ],
+        [
+          15.0,
+          1
+        ],
+        [
+          21.0,
+          1
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.9
+        ],
+        [
+          45.0,
+          0.9
+        ],
+        [
+          51.0,
+          1.05
+        ],
+        [
+          57.0,
+          1.05
+        ],
+        [
+          63.0,
+          0.93
+        ],
+        [
+          69.0,
+          0.93
+        ],
+        [
+          75.0,
+          1.02
+        ],
+        [
+          81.0,
+          1.02
+        ],
+        [
+          87.0,
+          0.86
+        ],
+        [
+          93.0,
+          0.86
+        ],
+        [
+          96.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Harp spark",
+      "program": 46,
+      "bank": 0,
+      "hand": null,
+      "notes": 44,
+      "pan": -20,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/06-fire-embers-and-snow-v2-Harp-spark.wav",
+        "bytes": 24576088,
+        "sha256": "9e3303306ba0ac9beb46f5cf86d34242b5cb89631d55669d10553557018b777e"
+      },
+      "target_active_rms_dbfs": -42,
+      "continuous_gain_points": [
+        [
+          0,
+          0.65
+        ],
+        [
+          9.0,
+          0.65
+        ],
+        [
+          15.0,
+          0.9
+        ],
+        [
+          21.0,
+          0.9
+        ],
+        [
+          27.0,
+          0.74
+        ],
+        [
+          33.0,
+          0.74
+        ],
+        [
+          39.0,
+          0.84
+        ],
+        [
+          45.0,
+          0.84
+        ],
+        [
+          51.0,
+          0.96
+        ],
+        [
+          57.0,
+          0.96
+        ],
+        [
+          63.0,
+          0.67
+        ],
+        [
+          69.0,
+          0.67
+        ],
+        [
+          75.0,
+          0.91
+        ],
+        [
+          81.0,
+          0.91
+        ],
+        [
+          87.0,
+          0.74
+        ],
+        [
+          93.0,
+          0.74
+        ],
+        [
+          96.0,
+          0.65
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/06-fire-embers-and-snow-v2-Steady-low-foundation.wav",
+        "bytes": 24576088,
+        "sha256": "3de93c2a104bc76563b5aa8251bf7c3b5f988a566d779c543e70edb196e07b06"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          9.0,
+          0.92
+        ],
+        [
+          15.0,
+          0.96
+        ],
+        [
+          21.0,
+          0.96
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.91
+        ],
+        [
+          45.0,
+          0.91
+        ],
+        [
+          51.0,
+          1
+        ],
+        [
+          57.0,
+          1
+        ],
+        [
+          63.0,
+          0.96
+        ],
+        [
+          69.0,
+          0.96
+        ],
+        [
+          75.0,
+          0.97
+        ],
+        [
+          81.0,
+          0.97
+        ],
+        [
+          87.0,
+          0.9
+        ],
+        [
+          93.0,
+          0.9
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-5.74",
+    "input_lra": "1.60",
+    "input_thresh": "-28.50",
+    "output_i": "-22.82",
+    "output_tp": "-10.06",
+    "output_lra": "1.70",
+    "output_thresh": "-32.82",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.18"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.4274379479247429,
+      0.5209606216926086
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/06-fire-embers-and-snow-v2.mmp",
+      "bytes": 7667,
+      "sha256": "ab16d247a082b1e757cf0eff887cef8d5f7b740bf665969ff5bb49712f700b45"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/06-fire-embers-and-snow-v2.wav",
+      "bytes": 18432044,
+      "sha256": "27dd05ba7ad1ff6ec4f490cba0a3f37b6db55a8c69287e25b0204971de339b12"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/06-fire-embers-and-snow-v2.mp3",
+      "bytes": 2049860,
+      "sha256": "d8c48909079b1b073c7423b05ab5b55578b15d9a0c566a85da20885d0b003dcc"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/06-fire-embers-and-snow-v2.ogg",
+      "bytes": 1041496,
+      "sha256": "67ad1f36481ec6c7e4968c93b4ba130f2f77bbc9498e8249880b24aa9d0d7614"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/06-fire-embers-and-snow-v2-piano.mid",
+      "bytes": 1822,
+      "sha256": "2dc93d307c65f339a335f8b821b12f4459361f82e9c1db0f472017beb928cfce"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "statement"
+    },
+    {
+      "start_bar": 4,
+      "name": "answer"
+    },
+    {
+      "start_bar": 8,
+      "name": "lift"
+    },
+    {
+      "start_bar": 12,
+      "name": "refrain"
+    },
+    {
+      "start_bar": 16,
+      "name": "statement"
+    },
+    {
+      "start_bar": 20,
+      "name": "answer"
+    },
+    {
+      "start_bar": 24,
+      "name": "lift"
+    },
+    {
+      "start_bar": 28,
+      "name": "refrain"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed",
+  "creative_revision": {
+    "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+    "primary_response_voice": "Cello slow breath",
+    "changes": [
+      "short memorable motifs",
+      "foreground replies every 2 bars",
+      "orchestration or rhythmic fills every 4 bars",
+      "clearer pulse",
+      "gentle 1-bar transitions"
+    ],
+    "not_a_gain_only_revision": true
+  }
+}

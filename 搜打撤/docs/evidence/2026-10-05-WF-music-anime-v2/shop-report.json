@@ -1,0 +1,702 @@
+{
+  "id": "shop",
+  "title": "铜灯市集",
+  "stem": "05-shop-copper-lanterns-v2",
+  "idea": "五拍按3+2走的拾荒商队；单簧管俏皮但不碎，羽管键琴与拨弦形成步伐，末段换成轻轻讨价还价的回答。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+  "key": "C dorian",
+  "meter": [
+    5,
+    4
+  ],
+  "bpm_quarter": 112,
+  "bars": 32,
+  "total_beats": 160.0,
+  "seconds": 85.71429166666667,
+  "tracks": [
+    {
+      "name": "Clarinet merchant",
+      "program": 71,
+      "bank": 0,
+      "hand": null,
+      "notes": 112,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/05-shop-copper-lanterns-v2-Clarinet-merchant.wav",
+        "bytes": 32914376,
+        "sha256": "677e6728451f36a0f2fe3757f3642074f3abc375ef9f535922c2ffc7466e4877"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          15.0,
+          0.84
+        ],
+        [
+          25.0,
+          1
+        ],
+        [
+          35.0,
+          1
+        ],
+        [
+          45.0,
+          0.95
+        ],
+        [
+          55.0,
+          0.95
+        ],
+        [
+          65.0,
+          0.9
+        ],
+        [
+          75.0,
+          0.9
+        ],
+        [
+          85.0,
+          1.05
+        ],
+        [
+          95.0,
+          1.05
+        ],
+        [
+          105.0,
+          0.93
+        ],
+        [
+          115.0,
+          0.93
+        ],
+        [
+          125.0,
+          1.02
+        ],
+        [
+          135.0,
+          1.02
+        ],
+        [
+          145.0,
+          0.86
+        ],
+        [
+          155.0,
+          0.86
+        ],
+        [
+          160.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Harpsichord bargaining",
+      "program": 6,
+      "bank": 0,
+      "hand": null,
+      "notes": 104,
+      "pan": -24,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/05-shop-copper-lanterns-v2-Harpsichord-bargaining.wav",
+        "bytes": 32914376,
+        "sha256": "07aa13661223c998a7f4d1a1010fb5efa8b8507ce4841b02f34ec078b681d418"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          15.0,
+          0.68
+        ],
+        [
+          25.0,
+          0.9
+        ],
+        [
+          35.0,
+          0.9
+        ],
+        [
+          45.0,
+          0.78
+        ],
+        [
+          55.0,
+          0.78
+        ],
+        [
+          65.0,
+          0.95
+        ],
+        [
+          75.0,
+          0.95
+        ],
+        [
+          85.0,
+          0.92
+        ],
+        [
+          95.0,
+          0.92
+        ],
+        [
+          105.0,
+          0.72
+        ],
+        [
+          115.0,
+          0.72
+        ],
+        [
+          125.0,
+          1
+        ],
+        [
+          135.0,
+          1
+        ],
+        [
+          145.0,
+          0.78
+        ],
+        [
+          155.0,
+          0.78
+        ],
+        [
+          160.0,
+          0.68
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Pizzicato footsteps",
+      "program": 45,
+      "bank": 0,
+      "hand": null,
+      "notes": 104,
+      "pan": 31,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/05-shop-copper-lanterns-v2-Pizzicato-footsteps.wav",
+        "bytes": 32914376,
+        "sha256": "b4e50442763e91e5fc947c2a45a4b09423fdd4e8d63401f9d3f4cf358cd8c5ed"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          15.0,
+          0.68
+        ],
+        [
+          25.0,
+          0.9
+        ],
+        [
+          35.0,
+          0.9
+        ],
+        [
+          45.0,
+          0.78
+        ],
+        [
+          55.0,
+          0.78
+        ],
+        [
+          65.0,
+          0.95
+        ],
+        [
+          75.0,
+          0.95
+        ],
+        [
+          85.0,
+          0.92
+        ],
+        [
+          95.0,
+          0.92
+        ],
+        [
+          105.0,
+          0.72
+        ],
+        [
+          115.0,
+          0.72
+        ],
+        [
+          125.0,
+          1
+        ],
+        [
+          135.0,
+          1
+        ],
+        [
+          145.0,
+          0.78
+        ],
+        [
+          155.0,
+          0.78
+        ],
+        [
+          160.0,
+          0.68
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Bassoon grin",
+      "program": 70,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 18,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/05-shop-copper-lanterns-v2-Bassoon-grin.wav",
+        "bytes": 32914376,
+        "sha256": "81dba2a300e159bf52450c3ab0a36a4d28327f77cb955db5826a798198e25908"
+      },
+      "target_active_rms_dbfs": -29,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          15.0,
+          0.84
+        ],
+        [
+          25.0,
+          1
+        ],
+        [
+          35.0,
+          1
+        ],
+        [
+          45.0,
+          0.95
+        ],
+        [
+          55.0,
+          0.95
+        ],
+        [
+          65.0,
+          0.9
+        ],
+        [
+          75.0,
+          0.9
+        ],
+        [
+          85.0,
+          1.05
+        ],
+        [
+          95.0,
+          1.05
+        ],
+        [
+          105.0,
+          0.93
+        ],
+        [
+          115.0,
+          0.93
+        ],
+        [
+          125.0,
+          1.02
+        ],
+        [
+          135.0,
+          1.02
+        ],
+        [
+          145.0,
+          0.86
+        ],
+        [
+          155.0,
+          0.86
+        ],
+        [
+          160.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Viola canvas",
+      "program": 41,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": -35,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/05-shop-copper-lanterns-v2-Viola-canvas.wav",
+        "bytes": 32914376,
+        "sha256": "e65668c54dce3800f693408ba8c285d8202aaed25e16f7d832e27d9b1a4979b1"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          15.0,
+          0.92
+        ],
+        [
+          25.0,
+          0.96
+        ],
+        [
+          35.0,
+          0.96
+        ],
+        [
+          45.0,
+          0.95
+        ],
+        [
+          55.0,
+          0.95
+        ],
+        [
+          65.0,
+          0.91
+        ],
+        [
+          75.0,
+          0.91
+        ],
+        [
+          85.0,
+          1
+        ],
+        [
+          95.0,
+          1
+        ],
+        [
+          105.0,
+          0.96
+        ],
+        [
+          115.0,
+          0.96
+        ],
+        [
+          125.0,
+          0.97
+        ],
+        [
+          135.0,
+          0.97
+        ],
+        [
+          145.0,
+          0.9
+        ],
+        [
+          155.0,
+          0.9
+        ],
+        [
+          160.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/05-shop-copper-lanterns-v2-Steady-low-foundation.wav",
+        "bytes": 32914376,
+        "sha256": "139787850305a3fdbd49b14b9c0158b891d81419e4f8027337433ad053092a4d"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          15.0,
+          0.92
+        ],
+        [
+          25.0,
+          0.96
+        ],
+        [
+          35.0,
+          0.96
+        ],
+        [
+          45.0,
+          0.95
+        ],
+        [
+          55.0,
+          0.95
+        ],
+        [
+          65.0,
+          0.91
+        ],
+        [
+          75.0,
+          0.91
+        ],
+        [
+          85.0,
+          1
+        ],
+        [
+          95.0,
+          1
+        ],
+        [
+          105.0,
+          0.96
+        ],
+        [
+          115.0,
+          0.96
+        ],
+        [
+          125.0,
+          0.97
+        ],
+        [
+          135.0,
+          0.97
+        ],
+        [
+          145.0,
+          0.9
+        ],
+        [
+          155.0,
+          0.9
+        ],
+        [
+          160.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Light acoustic motion",
+      "program": 48,
+      "bank": 128,
+      "hand": null,
+      "notes": 64,
+      "pan": 10,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/05-shop-copper-lanterns-v2-Light-acoustic-motion.wav",
+        "bytes": 32914376,
+        "sha256": "d210282986a7c9d4e214921017861e92d93ea3f2f929c870ace6b84a814c8f0b"
+      },
+      "target_active_rms_dbfs": -42,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          15.0,
+          0.84
+        ],
+        [
+          25.0,
+          1
+        ],
+        [
+          35.0,
+          1
+        ],
+        [
+          45.0,
+          0.95
+        ],
+        [
+          55.0,
+          0.95
+        ],
+        [
+          65.0,
+          0.9
+        ],
+        [
+          75.0,
+          0.9
+        ],
+        [
+          85.0,
+          1.05
+        ],
+        [
+          95.0,
+          1.05
+        ],
+        [
+          105.0,
+          0.93
+        ],
+        [
+          115.0,
+          0.93
+        ],
+        [
+          125.0,
+          1.02
+        ],
+        [
+          135.0,
+          1.02
+        ],
+        [
+          145.0,
+          0.86
+        ],
+        [
+          155.0,
+          0.86
+        ],
+        [
+          160.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-5.16",
+    "input_lra": "3.00",
+    "input_thresh": "-28.50",
+    "output_i": "-22.80",
+    "output_tp": "-9.72",
+    "output_lra": "3.10",
+    "output_thresh": "-32.80",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.20"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.47714706299294063,
+      0.5360587977316483
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/05-shop-copper-lanterns-v2.mmp",
+      "bytes": 6850,
+      "sha256": "8a99302e5bbecd6980f40d3de74ddf7502d4755bcbd9c293fdb1460291375a71"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/05-shop-copper-lanterns-v2.wav",
+      "bytes": 24685760,
+      "sha256": "7db0a5c149d25a787f8c0ab402ff9733b8ca82809a9ec854b1be7d61edc93f99"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/05-shop-copper-lanterns-v2.mp3",
+      "bytes": 2744900,
+      "sha256": "296d0dca761abc81be2cfddd39bc8b8e4b78155dac41a0b47afb2c4868b0d756"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/05-shop-copper-lanterns-v2.ogg",
+      "bytes": 1630229,
+      "sha256": "bb9c4b444781c9f0e83121a26b049611a6969f3fe317a091c4eccfefce6374bf"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "statement"
+    },
+    {
+      "start_bar": 4,
+      "name": "answer"
+    },
+    {
+      "start_bar": 8,
+      "name": "lift"
+    },
+    {
+      "start_bar": 12,
+      "name": "refrain"
+    },
+    {
+      "start_bar": 16,
+      "name": "statement"
+    },
+    {
+      "start_bar": 20,
+      "name": "answer"
+    },
+    {
+      "start_bar": 24,
+      "name": "lift"
+    },
+    {
+      "start_bar": 28,
+      "name": "refrain"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed",
+  "creative_revision": {
+    "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+    "primary_response_voice": "Bassoon grin",
+    "changes": [
+      "short memorable motifs",
+      "foreground replies every 2 bars",
+      "orchestration or rhythmic fills every 4 bars",
+      "clearer pulse",
+      "gentle 1-bar transitions"
+    ],
+    "not_a_gain_only_revision": true
+  }
+}

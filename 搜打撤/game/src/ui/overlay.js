@@ -152,7 +152,7 @@ export const overlayMethods = {
     // 未就绪时挂 bg-loading 类（CSS 显示「正在进入…」微提示），图片到齐后自动摘除。
     this._checkPageBg();
     const soundTone = soundScene && [...soundScene.classList].find(name => name.startsWith('sc-'));
-    SDT.Sound.scene?.(soundTone ? soundTone.slice(3) : null, soundScene?.dataset.assetKey || '');
+    SDT.Sound.scene?.(soundScene?.dataset.musicScene || (soundTone ? soundTone.slice(3) : null), soundScene?.dataset.assetKey || '', { mode });
   },
 
   // U1：整页背景就绪检测。_bgReady 缓存已确认加载过的 URL，重复打开零开销。

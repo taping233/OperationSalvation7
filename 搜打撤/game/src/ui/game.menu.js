@@ -919,7 +919,7 @@ function createGameMenuController(deps) {
         <section class="settings-group settings-audio">
         <h3 class="set-h">[[icon:gear]] 音频 <span class="set-en">AUDIO</span></h3>
         <label class="chk"><input type="checkbox" id="setMusic" ${SDT.Sound.musicMuted ? '' : 'checked'}> 背景音乐 <span class="set-en">MUSIC</span></label>
-        <label class="chk"><span>音乐来源 <span class="set-en">MUSIC SOURCE</span></span><select id="setMusicSource"><option value="scape" ${SDT.Sound.musicSource === 'scape' ? 'selected' : ''}>冬境声景</option><option value="original" ${SDT.Sound.musicSource === 'original' ? 'selected' : ''}>原有曲目</option></select></label>
+        <label class="chk"><span>音乐来源 <span class="set-en">MUSIC SOURCE</span></span><select id="setMusicSource"><option value="scape" ${SDT.Sound.musicSource === 'scape' ? 'selected' : ''}>冬境声景</option><option value="original" ${SDT.Sound.musicSource === 'original' ? 'selected' : ''}>原创场景配乐</option></select></label>
         <label class="chk vol"><span>音乐音量 <span class="set-en">MUSIC VOL</span></span><input type="range" id="setMusicVol" min="0" max="100" value="${Math.round(SDT.Sound.musicVolume * 100)}"><b id="setMusicVolVal">${Math.round(SDT.Sound.musicVolume * 100)}</b></label>
         <label class="chk"><input type="checkbox" id="setSfx" ${SDT.Sound.sfxMuted ? '' : 'checked'}> 音效 <span class="set-en">SOUND FX</span></label>
         <label class="chk vol"><span>音效音量 <span class="set-en">SFX VOL</span></span><input type="range" id="setSfxVol" min="0" max="100" value="${Math.round(SDT.Sound.sfxVolume * 100)}"><b id="setSfxVolVal">${Math.round(SDT.Sound.sfxVolume * 100)}</b></label>

@@ -103,7 +103,7 @@ export function createBattleLifecycle({
     G.battleActive = true;
     G.state = 'modal';
     if (SDT.Sound) SDT.Sound.setDucked(true);
-    SDT.Sound.setBoss?.(!!data.opts.isBoss);   // 读档恢复：紧张垫按存档战斗类型同步（音频 P2#12；旧格式普通战不再误抬垫）
+    SDT.Sound.setBoss?.(!!data.opts.isBoss, foes[0]?.id || '');   // 读档恢复：紧张垫按存档战斗类型同步（音频 P2#12；旧格式普通战不再误抬垫）
     SDT.Sound.music('battle');
     if (data.deckSelect) {
       prepareDeckSelection();   // BOSS 战退出在编组阶段：重开编组（还没实际开打，无进度损失）
@@ -216,7 +216,7 @@ export function createBattleLifecycle({
     G.battleActive = true;   // game.js 用它锁住侧栏/快捷键背包入口
     if (SDT.Sound) SDT.Sound.setDucked(true);   // 战斗期间 BGM 侧链压低（audio-design ducking）
     set$opts(startOptions);
-    if (SDT.Sound) SDT.Sound.setBoss?.(opts.isBoss);   // BOSS 战抬升紧张垫（音频 P2#12）
+    if (SDT.Sound) SDT.Sound.setBoss?.(opts.isBoss, defs[0]?.id || '');   // BOSS 战抬升紧张垫（音频 P2#12）
     set$mode(opts.isBoss ? 'boss' : 'normal');
     set$battleState(createBattleState({ mode }));
     set$foes(defs.map(d => {

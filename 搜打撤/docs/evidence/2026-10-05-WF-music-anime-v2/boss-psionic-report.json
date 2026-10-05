@@ -1,0 +1,787 @@
+{
+  "id": "boss-psionic",
+  "title": "折镜之主",
+  "stem": "12-boss-psionic-broken-mirrors-v2",
+  "idea": "异能领主的镜厅三拍：颤音琴与钟琴交错，管风琴守住低部；同句不同方向的回答形成折射感。 V2：更快短动机、每4小节一次编配变化与主副声部交接。",
+  "key": "E-flat minor",
+  "meter": [
+    3,
+    4
+  ],
+  "bpm_quarter": 120,
+  "bars": 32,
+  "total_beats": 96.0,
+  "seconds": 48.0,
+  "tracks": [
+    {
+      "name": "Vibraphone mirror",
+      "program": 11,
+      "bank": 0,
+      "hand": null,
+      "notes": 112,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/12-boss-psionic-broken-mirrors-v2-Vibraphone-mirror.wav",
+        "bytes": 18432088,
+        "sha256": "c31b17534da735b835a1669279a2ae9d9925f66040a031259050e30dfd8cf192"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          9.0,
+          0.84
+        ],
+        [
+          15.0,
+          1
+        ],
+        [
+          21.0,
+          1
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.9
+        ],
+        [
+          45.0,
+          0.9
+        ],
+        [
+          51.0,
+          1.05
+        ],
+        [
+          57.0,
+          1.05
+        ],
+        [
+          63.0,
+          0.93
+        ],
+        [
+          69.0,
+          0.93
+        ],
+        [
+          75.0,
+          1.02
+        ],
+        [
+          81.0,
+          1.02
+        ],
+        [
+          87.0,
+          0.86
+        ],
+        [
+          93.0,
+          0.86
+        ],
+        [
+          96.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Celeste reflection",
+      "program": 8,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 31,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/12-boss-psionic-broken-mirrors-v2-Celeste-reflection.wav",
+        "bytes": 18432088,
+        "sha256": "6741b18cd1428f935240f104f8e9761c3d73ba4174d52d8ed70cfbb384ad053a"
+      },
+      "target_active_rms_dbfs": -29,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          9.0,
+          0.84
+        ],
+        [
+          15.0,
+          1
+        ],
+        [
+          21.0,
+          1
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.9
+        ],
+        [
+          45.0,
+          0.9
+        ],
+        [
+          51.0,
+          1.05
+        ],
+        [
+          57.0,
+          1.05
+        ],
+        [
+          63.0,
+          0.93
+        ],
+        [
+          69.0,
+          0.93
+        ],
+        [
+          75.0,
+          1.02
+        ],
+        [
+          81.0,
+          1.02
+        ],
+        [
+          87.0,
+          0.86
+        ],
+        [
+          93.0,
+          0.86
+        ],
+        [
+          96.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Organ shadow",
+      "program": 19,
+      "bank": 0,
+      "hand": null,
+      "notes": 32,
+      "pan": -22,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/12-boss-psionic-broken-mirrors-v2-Organ-shadow.wav",
+        "bytes": 18432088,
+        "sha256": "c2dcef02825c236afb03db12c6e18fc670a15fbbbcece4dc6afdb4d64cab4b59"
+      },
+      "target_active_rms_dbfs": -36,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          9.0,
+          0.92
+        ],
+        [
+          15.0,
+          0.96
+        ],
+        [
+          21.0,
+          0.96
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.91
+        ],
+        [
+          45.0,
+          0.91
+        ],
+        [
+          51.0,
+          1
+        ],
+        [
+          57.0,
+          1
+        ],
+        [
+          63.0,
+          0.96
+        ],
+        [
+          69.0,
+          0.96
+        ],
+        [
+          75.0,
+          0.97
+        ],
+        [
+          81.0,
+          0.97
+        ],
+        [
+          87.0,
+          0.9
+        ],
+        [
+          93.0,
+          0.9
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Violin narrow light",
+      "program": 40,
+      "bank": 0,
+      "hand": null,
+      "notes": 10,
+      "pan": 25,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/12-boss-psionic-broken-mirrors-v2-Violin-narrow-light.wav",
+        "bytes": 18432088,
+        "sha256": "f70c4dad079eb0899333174fdd8626a314c38e563adc0e0e863bb5ee2316b4cf"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.65
+        ],
+        [
+          9.0,
+          0.65
+        ],
+        [
+          15.0,
+          0.9
+        ],
+        [
+          21.0,
+          0.9
+        ],
+        [
+          27.0,
+          0.74
+        ],
+        [
+          33.0,
+          0.74
+        ],
+        [
+          39.0,
+          0.84
+        ],
+        [
+          45.0,
+          0.84
+        ],
+        [
+          51.0,
+          0.96
+        ],
+        [
+          57.0,
+          0.96
+        ],
+        [
+          63.0,
+          0.67
+        ],
+        [
+          69.0,
+          0.67
+        ],
+        [
+          75.0,
+          0.91
+        ],
+        [
+          81.0,
+          0.91
+        ],
+        [
+          87.0,
+          0.74
+        ],
+        [
+          93.0,
+          0.74
+        ],
+        [
+          96.0,
+          0.65
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Viola dark glass",
+      "program": 41,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": -34,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/12-boss-psionic-broken-mirrors-v2-Viola-dark-glass.wav",
+        "bytes": 18432088,
+        "sha256": "a5d41b0c001f3148736b3b6439ec5a81ffa4513c91912d6ef7342b4001cdee8b"
+      },
+      "target_active_rms_dbfs": -36,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          9.0,
+          0.92
+        ],
+        [
+          15.0,
+          0.96
+        ],
+        [
+          21.0,
+          0.96
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.91
+        ],
+        [
+          45.0,
+          0.91
+        ],
+        [
+          51.0,
+          1
+        ],
+        [
+          57.0,
+          1
+        ],
+        [
+          63.0,
+          0.96
+        ],
+        [
+          69.0,
+          0.96
+        ],
+        [
+          75.0,
+          0.97
+        ],
+        [
+          81.0,
+          0.97
+        ],
+        [
+          87.0,
+          0.9
+        ],
+        [
+          93.0,
+          0.9
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Harp fractured image",
+      "program": 46,
+      "bank": 0,
+      "hand": null,
+      "notes": 46,
+      "pan": 18,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/12-boss-psionic-broken-mirrors-v2-Harp-fractured-image.wav",
+        "bytes": 18432088,
+        "sha256": "fa7f99510843066768496e945ba9c5a4da2e971dbeeea946c752f396ebf1ad61"
+      },
+      "target_active_rms_dbfs": -42,
+      "continuous_gain_points": [
+        [
+          0,
+          0.65
+        ],
+        [
+          9.0,
+          0.65
+        ],
+        [
+          15.0,
+          0.9
+        ],
+        [
+          21.0,
+          0.9
+        ],
+        [
+          27.0,
+          0.74
+        ],
+        [
+          33.0,
+          0.74
+        ],
+        [
+          39.0,
+          0.84
+        ],
+        [
+          45.0,
+          0.84
+        ],
+        [
+          51.0,
+          0.96
+        ],
+        [
+          57.0,
+          0.96
+        ],
+        [
+          63.0,
+          0.67
+        ],
+        [
+          69.0,
+          0.67
+        ],
+        [
+          75.0,
+          0.91
+        ],
+        [
+          81.0,
+          0.91
+        ],
+        [
+          87.0,
+          0.74
+        ],
+        [
+          93.0,
+          0.74
+        ],
+        [
+          96.0,
+          0.65
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/12-boss-psionic-broken-mirrors-v2-Steady-low-foundation.wav",
+        "bytes": 18432088,
+        "sha256": "def89634d6cf78e96aec2da980b12403743a95a86f63c2571731b642d4a3e7b0"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.92
+        ],
+        [
+          9.0,
+          0.92
+        ],
+        [
+          15.0,
+          0.96
+        ],
+        [
+          21.0,
+          0.96
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.91
+        ],
+        [
+          45.0,
+          0.91
+        ],
+        [
+          51.0,
+          1
+        ],
+        [
+          57.0,
+          1
+        ],
+        [
+          63.0,
+          0.96
+        ],
+        [
+          69.0,
+          0.96
+        ],
+        [
+          75.0,
+          0.97
+        ],
+        [
+          81.0,
+          0.97
+        ],
+        [
+          87.0,
+          0.9
+        ],
+        [
+          93.0,
+          0.9
+        ],
+        [
+          96.0,
+          0.92
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Light acoustic motion",
+      "program": 48,
+      "bank": 128,
+      "hand": null,
+      "notes": 64,
+      "pan": 10,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/anime-v2/12-boss-psionic-broken-mirrors-v2-Light-acoustic-motion.wav",
+        "bytes": 18432088,
+        "sha256": "8e9de0b47d15d814387277715d594a2ca63b74b3b3396ed1dd637777c1df7bac"
+      },
+      "target_active_rms_dbfs": -39,
+      "continuous_gain_points": [
+        [
+          0,
+          0.84
+        ],
+        [
+          9.0,
+          0.84
+        ],
+        [
+          15.0,
+          1
+        ],
+        [
+          21.0,
+          1
+        ],
+        [
+          27.0,
+          0.95
+        ],
+        [
+          33.0,
+          0.95
+        ],
+        [
+          39.0,
+          0.9
+        ],
+        [
+          45.0,
+          0.9
+        ],
+        [
+          51.0,
+          1.05
+        ],
+        [
+          57.0,
+          1.05
+        ],
+        [
+          63.0,
+          0.93
+        ],
+        [
+          69.0,
+          0.93
+        ],
+        [
+          75.0,
+          1.02
+        ],
+        [
+          81.0,
+          1.02
+        ],
+        [
+          87.0,
+          0.86
+        ],
+        [
+          93.0,
+          0.86
+        ],
+        [
+          96.0,
+          0.84
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-6.94",
+    "input_lra": "1.20",
+    "input_thresh": "-28.50",
+    "output_i": "-22.89",
+    "output_tp": "-11.52",
+    "output_lra": "1.10",
+    "output_thresh": "-32.89",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.11"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.24400140617374522,
+      0.4006884527969117
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/12-boss-psionic-broken-mirrors-v2.mmp",
+      "bytes": 7776,
+      "sha256": "4b8b67b3d2cea10ab0df9143fced14e82803113f07973838fc77b33a315e268e"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/12-boss-psionic-broken-mirrors-v2.wav",
+      "bytes": 13824044,
+      "sha256": "1b8823a20d5fda6c6deb8c3fafc7a7cb8a38df1c0a6ccd18b699abd67279565c"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/12-boss-psionic-broken-mirrors-v2.mp3",
+      "bytes": 1537604,
+      "sha256": "ac5a09095450b4d9f9d9faac927aba240fd540742ed8af4aaee6a1bd9fc3a23c"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-anime-v2/12-boss-psionic-broken-mirrors-v2.ogg",
+      "bytes": 817158,
+      "sha256": "35f311b507f14405bdcd1c014d6d3bb9314bb6c47c56078bc871b7089739e305"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "statement"
+    },
+    {
+      "start_bar": 4,
+      "name": "answer"
+    },
+    {
+      "start_bar": 8,
+      "name": "lift"
+    },
+    {
+      "start_bar": 12,
+      "name": "refrain"
+    },
+    {
+      "start_bar": 16,
+      "name": "statement"
+    },
+    {
+      "start_bar": 20,
+      "name": "answer"
+    },
+    {
+      "start_bar": 24,
+      "name": "lift"
+    },
+    {
+      "start_bar": 28,
+      "name": "refrain"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed",
+  "creative_revision": {
+    "reason": "User found first eleven cues changed too slowly for an anime-style game.",
+    "primary_response_voice": "Celeste reflection",
+    "changes": [
+      "short memorable motifs",
+      "foreground replies every 2 bars",
+      "orchestration or rhythmic fills every 4 bars",
+      "clearer pulse",
+      "gentle 1-bar transitions"
+    ],
+    "not_a_gain_only_revision": true
+  }
+}

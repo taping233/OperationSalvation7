@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>冬境 · 场景配乐试听</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#edf1f5;color:#25333f;font:16px/1.65 system-ui,sans-serif}main{max-width:1080px;margin:5vh auto;padding:26px}small{color:#617386;letter-spacing:.12em}h1{font-size:34px;margin:10px 0}p{color:#617386}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:25px}article{background:white;border-top:4px solid #608ca8;padding:20px}h2{font-size:22px;margin:8px 0}.meta{color:#917849;font-size:14px}button{background:#355f78;color:white;border:0;padding:10px 15px;font:inherit;cursor:pointer;width:100%}.status{font-size:13px;min-height:22px}a{color:#355f78}article.playing{border-color:#c59648}#nowPlaying{background:#fff5df;padding:12px}button:focus-visible,a:focus-visible{outline:3px solid #b99850;outline-offset:4px}@media(max-width:700px){.grid{grid-template-columns:1fr}main{margin:20px auto;padding:18px}}
+</style></head><body><main>
+<small>升格会的冬日猜想 · ORIGINAL SCENE MUSIC</small>
+<h1>冬境的十四段回声</h1>
+<p>标题、探索、普通战斗与十一首场景配乐。切换时交叉渐变，可快速连续点击试听衔接；离开此页或切到后台会停止播放。</p>
+<div id="nowPlaying" aria-live="polite">请选择曲目</div><div class="grid" id="tracks"></div>
+<p><a href="./">返回游戏</a> · 游戏设置中的「原创场景配乐」使用同一组曲目。</p>
+</main><script type="module">
+import { Howl, Howler } from 'howler';
+import { MUSIC_TRACKS } from './src/audio/sound.music.catalog.js';
+import { SceneMusicPlayer } from './src/audio/sound.music.player.js';
+const descriptions = {
+  title:['标题','霜窗回声','双手钢琴与弦乐'], board:['探索','灰线行军','双手钢琴、木管与持续行旅'], battle:['普通战斗','黑脉交锋','弦乐主题与铜管回应'],
+  base:['基地','晨霜归所','三拍钢琴短动机与单簧管问答'], shop:['商店','铜灯市集','五拍拨弦、羽管键琴与木管'], fire:['营火','炉边长夜','六八拍长笛、尼龙弦与钢琴'],
+  event:['事件','余烬来信','双簧管故事与颤音琴标点'], altar:['祭坛','幽核回响','巴松、管风琴与祭仪脉冲'], extraction:['撤离','渡口倒数','七八拍弦乐、竖琴与吉他推进'],
+  'boss-governor':['肃清总督','铁律封城','圆号军令、弦乐反问与低铜管'], 'boss-brood':['变异巢母','腐巢微光','木管短动机、木质节奏与颤弦'], 'boss-psionic':['异能领主','折镜之主','玻璃般音色、三拍问答与反射'],
+  success:['成功结算','归航余晖','上扬圆号与明亮弦乐'], defeat:['失败结算','未熄之灯','大提琴、钢琴与重新出发的回答'],
+};
+const cards = new Map(); let selected = null;
+const player = new SceneMusicPlayer((scene, callbacks) => new Howl({
+  src:[MUSIC_TRACKS[scene]], format:['opus'], loop:true, html5:false, preload:false, volume:0,
+  onload:()=>{const card=cards.get(scene);card.dataset.decoded='true';callbacks.load();},
+  onloaderror:(_,error)=>{cards.get(scene).querySelector('.status').textContent=`加载失败：${error}`;callbacks.error(_,error);},
+}));
+for (const [scene,url] of Object.entries(MUSIC_TRACKS)) {
+  const [label,title,description]=descriptions[scene];const card=document.createElement('article');card.dataset.scene=scene;
+  card.innerHTML=`<small>${label}</small><h2>${title}</h2><p class="meta">${description}</p><button aria-label="试听 ${title}">试听</button><p class="status">按需加载</p><a href="${url}" download>下载音频</a>`;
+  document.getElementById('tracks').append(card);cards.set(scene,card);
+  card.querySelector('button').addEventListener('click',()=>{
+    if (Howler.ctx?.state==='suspended') Howler.ctx.resume().catch(()=>{});
+    selected=selected===scene?null:scene;player.set(selected,{enabled:!!selected,volume:.45});
+  });
+}
+setInterval(()=>{
+  const state=player.snapshot();document.body.dataset.currentMusic=state.current||'';
+  document.getElementById('nowPlaying').textContent=selected?`正在试听：${descriptions[selected][1]}`:'请选择曲目';
+  for (const [scene,card] of cards) {
+    const row=state.tracks.find(t=>t.scene===scene);card.classList.toggle('playing',!!row?.playing);card.dataset.volume=String(row?.volume||0);
+    card.querySelector('button').textContent=selected===scene?'停止':'试听';
+    card.querySelector('.status').textContent=row?.state==='loading'?'正在加载…':row?.fadingOut?'正在渐出…':row?.playing?(row.volume<.44?'正在渐入…':'循环试听中'):card.dataset.decoded==='true'?'已试听':'按需加载';
+  }
+},80);
+document.addEventListener('visibilitychange',()=>{if(document.hidden){selected=null;player.set(null,{enabled:false,volume:0,immediate:true});}});
+window.addEventListener('pagehide',()=>player.set(null,{enabled:false,volume:0,immediate:true}));
+Object.defineProperty(window,'musicReviewPlayback',{get:()=>player.snapshot()});
+</script></body></html>
