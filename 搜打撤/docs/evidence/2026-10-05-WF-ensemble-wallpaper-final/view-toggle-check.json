@@ -1,0 +1,20 @@
+{
+  "input": "Codex IAB native click: only wallpaper -> restore interface",
+  "viewport": [
+    1280,
+    720
+  ],
+  "wallpaperOnly": {
+    "backgroundSize": "cover",
+    "hidden": true,
+    "inset": "0px",
+    "overlayOpacity": "0",
+    "selection": "ensemble"
+  },
+  "restored": {
+    "hidden": false,
+    "pressed": "false",
+    "selection": "ensemble"
+  },
+  "errors": []
+}

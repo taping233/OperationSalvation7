@@ -1,0 +1,1 @@
+(()=>{const q=window.__ArtVisMore;q.game.shopStock[0].sold=true;q.game.shopStock[1].sold=true;const replen=q.game.shopStock.find(s=>s.shaReplenish!=null);if(replen)replen.shaReplenish=0;q.game.state='idle';q.scenes.openShop('visual-stock');return true;})()

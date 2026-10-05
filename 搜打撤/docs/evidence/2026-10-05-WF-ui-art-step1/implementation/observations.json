@@ -1,0 +1,218 @@
+[
+  {
+    "id": "01-bag",
+    "file": "01-bag.jpg",
+    "notes": "非空背包：原模块受控显示，不测存档或拖拽",
+    "at": "2026-10-05T09:47:03.706Z"
+  },
+  {
+    "id": "01-bag-stable",
+    "file": "01-bag-stable.jpg",
+    "notes": "解码与有限开合动画结束后；深色侧栏仍待修正",
+    "at": "2026-10-05T09:47:32.134Z"
+  },
+  {
+    "id": "02-bag-final",
+    "file": "02-bag-final.jpg",
+    "notes": "浅面主标题/侧栏标题稳定可读，操作台让位",
+    "at": "2026-10-05T09:49:51.113Z"
+  },
+  {
+    "id": "03-egg",
+    "file": "03-egg.jpg",
+    "notes": "原宠物蛋详情、可孵化受控显示，不执行事务",
+    "at": "2026-10-05T09:49:52.267Z"
+  },
+  {
+    "id": "04-extract-empty",
+    "file": "04-extract-empty.jpg",
+    "notes": "原撤离模板构造空态；不执行入库/存档",
+    "at": "2026-10-05T09:49:52.829Z"
+  },
+  {
+    "id": "05-extract-populated",
+    "file": "05-extract-populated.jpg",
+    "notes": "原模板3种卡×3长损失文案；未入库",
+    "at": "2026-10-05T09:50:24.038Z"
+  },
+  {
+    "id": "06-shop-sold",
+    "file": "06-shop-sold.jpg",
+    "notes": "构造已售货位，未交易",
+    "at": "2026-10-05T09:50:24.805Z"
+  },
+  {
+    "id": "08-battle-stable",
+    "file": "08-battle-stable.jpg",
+    "notes": "首脑原节点测试进入，图片加载稳定后的战场",
+    "at": "2026-10-05T09:52:06.076Z"
+  },
+  {
+    "id": "09-allies",
+    "file": "09-allies.jpg",
+    "notes": "原战斗渲染、多状态、三种友军矢量轮廓；补齐原夹具maxHp，不测玩法组合",
+    "at": "2026-10-05T09:52:51.457Z"
+  },
+  {
+    "id": "09-allies-final",
+    "file": "09-allies-final.jpg",
+    "notes": "正确归一化原夹具maxHp；三种友军可区分，原名牌/状态保留",
+    "at": "2026-10-05T09:53:42.542Z"
+  },
+  {
+    "id": "10-extract-final",
+    "file": "10-extract-final.jpg",
+    "notes": "原模板长损失文案；标题/自动入库长说明/完成动作",
+    "at": "2026-10-05T09:53:43.262Z"
+  },
+  {
+    "id": "11-material",
+    "file": "11-material.jpg",
+    "notes": "原材料详情后态构造，未使用材料",
+    "at": "2026-10-05T09:53:44.590Z"
+  },
+  {
+    "id": "12-card-sample-a",
+    "file": "12-card-sample-a.jpg",
+    "notes": "原复原组件的6类卡牌显示样板；能力卡/高阶加入只用于排版，不宣称真实可复原组合",
+    "at": "2026-10-05T09:54:22.238Z"
+  },
+  {
+    "id": "13-card-a-final",
+    "file": "13-card-a-final.jpg",
+    "notes": "六张去重代表卡样板；原文字与稀有度保留，不执行复原",
+    "at": "2026-10-05T09:55:52.415Z"
+  },
+  {
+    "id": "14-selection-a",
+    "file": "14-selection-a.jpg",
+    "notes": "原UI壳和cardHTML组合样板；不是自然抽取，未执行选择",
+    "at": "2026-10-05T09:57:46.616Z"
+  },
+  {
+    "id": "15-selection-b",
+    "file": "15-selection-b.jpg",
+    "notes": "较平材质对照，仅内置页临时样式，不写产品",
+    "at": "2026-10-05T09:57:46.877Z"
+  },
+  {
+    "id": "16-selection-final",
+    "file": "16-selection-final.jpg",
+    "notes": "采用A的最小精修；移除B临时样式",
+    "at": "2026-10-05T09:57:47.161Z"
+  },
+  {
+    "id": "17-selection-a-final",
+    "file": "17-selection-a-final.jpg",
+    "notes": "六类原组件样板最终A：跨行最小高度，保留完整规则",
+    "at": "2026-10-05T09:58:59.251Z"
+  },
+  {
+    "id": "18-discovery",
+    "file": "18-discovery.jpg",
+    "notes": "原战斗发现渲染器的受控五卡样板；不点击选牌",
+    "at": "2026-10-05T10:00:07.386Z"
+  },
+  {
+    "id": "19-card-detail",
+    "file": "19-card-detail.jpg",
+    "notes": "原大图组件：同卡、同图、同棱彩身份，完整详情；未选牌",
+    "at": "2026-10-05T10:00:08.072Z"
+  },
+  {
+    "id": "20-card-detail-final",
+    "file": "20-card-detail-final.jpg",
+    "notes": "普通大图长名称避让费用球、完整67字规则，照片详情未改",
+    "at": "2026-10-05T10:02:24.639Z"
+  },
+  {
+    "id": "21-detail-return",
+    "file": "21-detail-return.jpg",
+    "notes": "真实点击收回，回到同一发现列表；未选牌",
+    "at": "2026-10-05T10:02:25.472Z"
+  },
+  {
+    "id": "22-result-success",
+    "file": "22-result-success.jpg",
+    "notes": "原成功节点模板，构造回执数据只看统计条，未记录/入库/存档",
+    "at": "2026-10-05T10:02:26.267Z"
+  },
+  {
+    "id": "23-altar-disabled",
+    "file": "23-altar-disabled.jpg",
+    "notes": "原祭坛不足条件，未献祭或兑换",
+    "at": "2026-10-05T10:02:27.434Z"
+  },
+  {
+    "id": "24-pouch-full",
+    "file": "24-pouch-full.jpg",
+    "notes": "真实点击打开原满锦囊，底部操作台让位，未存取",
+    "at": "2026-10-05T10:03:56.310Z"
+  },
+  {
+    "id": "25-pearl-full",
+    "file": "25-pearl-full.jpg",
+    "notes": "真实点击打开原9/9珍珠盒，同名×3；未存取",
+    "at": "2026-10-05T10:03:58.824Z"
+  },
+  {
+    "id": "26-deck",
+    "file": "26-deck.jpg",
+    "notes": "原24行牌库渲染器，实际注册UID；不验证抽牌",
+    "at": "2026-10-05T10:04:33.234Z"
+  },
+  {
+    "id": "27-deck-bottom",
+    "file": "27-deck-bottom.jpg",
+    "notes": "原长清单下部，返回不被操作台遮住",
+    "at": "2026-10-05T10:04:34.008Z"
+  },
+  {
+    "id": "28-grave",
+    "file": "28-grave.jpg",
+    "notes": "原24行墓地渲染器；显示构造，不验证消耗",
+    "at": "2026-10-05T10:04:34.323Z"
+  },
+  {
+    "id": "29-grave-bottom",
+    "file": "29-grave-bottom.jpg",
+    "notes": "墓地下部说明及返回无遮挡",
+    "at": "2026-10-05T10:04:34.827Z"
+  },
+  {
+    "id": "30-chest",
+    "file": "30-chest.jpg",
+    "notes": "原宝箱初始视图；不搜索/领取",
+    "at": "2026-10-05T10:04:35.890Z"
+  },
+  {
+    "id": "31-chest-final",
+    "file": "31-chest-final.jpg",
+    "notes": "强制暖金标题已适配浅色面；结束有限演出后取图，未领取",
+    "at": "2026-10-05T10:06:47.893Z"
+  },
+  {
+    "id": "32-extract-empty-final",
+    "file": "32-extract-empty-final.jpg",
+    "notes": "原空态模板最终：标题、空态与动作完整",
+    "at": "2026-10-05T10:06:48.462Z"
+  },
+  {
+    "id": "33-six-card-final",
+    "file": "33-six-card-final.jpg",
+    "notes": "最终六类组件样板，A材质，跨行最低高度，全部规则保留",
+    "at": "2026-10-05T10:06:49.608Z"
+  },
+  {
+    "id": "34-detail-final",
+    "file": "34-detail-final.jpg",
+    "notes": "最终大图：长名称均衡换行、费用球避让、全部规则",
+    "at": "2026-10-05T10:06:50.275Z"
+  },
+  {
+    "id": "35-dock-restored",
+    "file": "35-dock-restored.jpg",
+    "notes": "关闭原UI弹层，地图操作台恢复；未拖动/缩放地图",
+    "at": "2026-10-05T10:06:51.631Z"
+  }
+]

@@ -1,0 +1,17 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 1/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 1/16
+		6 container archive 搜刮！小型物资箱 · 第 1 / 1, ID: overlay
+			7 container
+				8 heading archive 搜刮！小型物资箱 · 第 1 / 1, Value: 2, ID: ovTitle
+					9 image archive
+					10 text  搜刮！小型物资箱 · 第 1 / 1
+				11 container ovBody
+					12 text 你俯身翻检箱子——灰尘、锈迹，还有别的东西。
+					13 button 正在搜索物资…（点击立即揭晓）
+						14 text 正在搜索物资…（点击立即揭晓）
+
+The focused UI element is 13 button 正在搜索物资…（点击立即揭晓）

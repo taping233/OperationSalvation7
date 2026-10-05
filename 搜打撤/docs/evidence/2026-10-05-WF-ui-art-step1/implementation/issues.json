@@ -1,0 +1,79 @@
+[
+  {
+    "id": "I01",
+    "status": "已证实",
+    "change": "背包/侧栏/宝箱标题浅面深字；宝箱旧强制字色定向覆盖",
+    "evidence": [
+      "02-bag-final.jpg",
+      "31-chest-final.jpg"
+    ]
+  },
+  {
+    "id": "I02",
+    "status": "已证实",
+    "change": "仓库详情与结算统计条成对调整承托和字色",
+    "evidence": [
+      "03-egg.jpg",
+      "11-material.jpg",
+      "22-result-success.jpg"
+    ]
+  },
+  {
+    "id": "I03",
+    "status": "已证实",
+    "change": "普通弹层/大图打开时地图操作台让位，关闭恢复",
+    "evidence": [
+      "24-pouch-full.jpg",
+      "25-pearl-full.jpg",
+      "27-deck-bottom.jpg",
+      "29-grave-bottom.jpg",
+      "35-dock-restored.jpg"
+    ]
+  },
+  {
+    "id": "I04",
+    "status": "已证实",
+    "change": "撤离单列动作、完整损失文字、空态占所属区，顺带恢复原标题与长说明",
+    "evidence": [
+      "10-extract-final.jpg",
+      "32-extract-empty-final.jpg"
+    ]
+  },
+  {
+    "id": "I05",
+    "status": "已证实",
+    "change": "禁用条件不整体淡化，已售标签独立承托",
+    "evidence": [
+      "06-shop-sold.jpg",
+      "23-altar-disabled.jpg"
+    ]
+  },
+  {
+    "id": "I06",
+    "status": "已实现，待用户审美",
+    "change": "原选择列表统一名称预算/同排与最低卡高，保留完整规则；采用A最小材质精修，普通大图补长文/费用球避让",
+    "evidence": [
+      "18-discovery.jpg",
+      "21-detail-return.jpg",
+      "33-six-card-final.jpg",
+      "34-detail-final.jpg"
+    ]
+  },
+  {
+    "id": "I07",
+    "status": "已证实",
+    "change": "首脑登场复用现有透明立绘，原姓名与时长保留",
+    "evidence": [
+      "07-boss-25.jpg",
+      "07-boss.json"
+    ]
+  },
+  {
+    "id": "I08",
+    "status": "已实现，待用户审美",
+    "change": "巡防兵/射手/封印肢体三种原创SVG轮廓；未知与研究所保留原通用图",
+    "evidence": [
+      "09-allies-final.jpg"
+    ]
+  }
+]

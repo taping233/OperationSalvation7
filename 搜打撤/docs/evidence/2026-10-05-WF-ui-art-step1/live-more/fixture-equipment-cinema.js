@@ -1,0 +1,1 @@
+window.__ArtVisMore.ordinary(['初始攻击','骷髅王剑','混沌之眼','灵符'])

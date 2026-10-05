@@ -1,0 +1,12 @@
+{
+  "kind": "incremental asset audit",
+  "scope": [
+    "federal-patrol-v1",
+    "federal-shooter-v1",
+    "sealed-limb-v1"
+  ],
+  "exitCode": 0,
+  "errors": 0,
+  "unchangedHistoricalWarnings": 773,
+  "raw": "Manifest drift: {\"unlisted\":736,\"ghost\":33,\"license-pending\":4}\nAsset check: 0 errors, 773 unchanged historical warnings (docs/asset-audit-debt.json)\n"
+}

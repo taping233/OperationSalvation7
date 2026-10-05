@@ -1,0 +1,80 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	1 container hubMain
+		2 container
+			3 heading 远征基地, Value: 2
+				4 text 远征基地
+			5 text 未选档
+			6 button ← 返回
+			7 image wood
+			8 text 木材 0
+			9 image bread
+			10 text 口粮 0
+			11 image key
+			12 text 钥匙 0
+			13 image coin
+			14 text 储备 50 币
+		15 container
+			16 button flag 出发
+				17 image flag
+				18 text 出发
+			19 button home 仓库
+				20 image home
+				21 text 仓库
+			22 button coin 商店
+				23 image coin
+				24 text 商店
+			25 button tools 升级
+				26 image tools
+				27 text 升级
+			28 button medal 人物
+				29 image medal
+				30 text 人物
+			31 button trophy 成就·收藏
+				32 image trophy
+				33 text 成就·收藏
+		34 container 仓库分区
+			35 checkbox archive 卡牌仓库 0/25, Value: 0
+				36 image archive
+				37 text 卡牌仓库
+				38 text 0/25
+			39 checkbox pocket 消耗口袋 0, Value: 0
+				40 image pocket
+				41 text 消耗口袋
+				42 text 0
+			43 checkbox paw 宠物 6/6, Value: 1
+				44 image paw
+				45 text 宠物
+				46 text 6/6
+		47 container
+			48 heading paw 宠物 6 / 6 只 · 携带 1 只出战, Value: 3
+				49 image paw
+				50 text  宠物  6 / 6 只 · 携带 1 只出战
+			51 button (collapsed) 获取与升级说明, Secondary Actions: Expand
+				52 text 获取与升级说明
+			53 image paw
+			54 text 汪汪狗 Lv.1
+			55 button 携带
+			56 text 生命上限 +5
+			57 image runner
+			58 text 猎鹰宝宝 Lv.5
+			59 image check
+			60 text  携带中 获得的宝箱为职业宝箱的概率提高至 35%
+			61 image coin
+			62 text 招财猫 Lv.1
+			63 button 携带
+			64 text 商店中第一格的卡牌变为免费
+			65 image tools
+			66 text 变形机器人 Lv.1
+			67 button 携带
+			68 text 起始背包中增加 2 张「初始攻击」
+			69 image fire
+			70 text 火焰精灵 Lv.1
+			71 button 携带
+			72 text 起始背包中的 5 张「初始攻击」化为 5 张「火球」
+			73 image crystal
+			74 text 小企鹅咕嘎 Lv.1
+			75 button 携带
+			76 text 安全格 +2（2-6 格 → 4-8 格）
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/

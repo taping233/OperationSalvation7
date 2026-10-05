@@ -1,0 +1,14 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 1/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 1/16
+		6 container overlay
+			7 container
+				8 text HOSTILE CONTACT
+				9 heading 遭遇敌袭, Value: 2
+					10 text 遭遇敌袭
+				11 text 武器解锁 · 准备接敌 点击跳过
+
+The focused UI element is 6 container overlay

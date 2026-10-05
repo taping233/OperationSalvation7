@@ -1,0 +1,40 @@
+{
+  "kind": "自有清单、图片引用与源码指纹核对，不是游戏测试套件",
+  "capturedAt": "2026-10-05T08:39:09.405Z",
+  "uniqueTargetIds": 59,
+  "allEvidenceFilesExist": true,
+  "allLocalLinksExist": true,
+  "checkedLinks": 17,
+  "allSourceCodeMatchesSnapshot": false,
+  "comparedSourceFiles": 371,
+  "counts": {
+    "targetItems": 59,
+    "representativeVisuals": 58,
+    "unassessedDynamic": 1,
+    "polish": 20,
+    "preserve": 38,
+    "restructure": 0,
+    "evidenceInsufficient": 1,
+    "screenshotFiles": 88
+  },
+  "port5339Released": true,
+  "pid13032Released": true,
+  "sourceDifferenceReview": {
+    "reviewed": true,
+    "coreTenLayoutInputsMatch": true,
+    "changed": [
+      "game/selftest.js",
+      "game/src/audio/sound.js",
+      "game/src/hub/game.cardslib.common.js",
+      "game/src/hub/game.cardslib.js",
+      "game/src/hub/game.cardslib.page.js"
+    ],
+    "assessment": "selftest与未验音频；照相馆新增关页取消函数/导入调用/门面缩进，没有改cardHTML、布局或字色；不能宣称全部源码一致"
+  },
+  "docsCheck": {
+    "ok": true,
+    "checkedRelativeLinks": 344,
+    "findings": 0,
+    "limits": "根/production文档；自有evidence的17个相对链接另核"
+  }
+}

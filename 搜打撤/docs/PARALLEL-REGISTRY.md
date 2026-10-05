@@ -12,8 +12,8 @@
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
-| Friday（Codex 无部件长期任务 WF-wu-parts-full） | game/art-source/characters/wu-parts-v1/；docs/evidence/2026-10-05-WF-wu-parts-full/；本表自有行；独立Vite 127.0.0.1:5348，PID见证据preview.pid，本聊天创建 | 老板明确授权长期自主生成22件、拼装检验并按缺陷重画；持续Goal＋每小时本聊天续做；22件初稿及像素检查已齐 | 10-05 | 编辑中；拼装与动作实检中，未接入游戏主流程 |
-| Friday（Codex 美术实机检查 WF-ui-art-live） | docs/evidence/2026-10-05-WF-ui-art-step1/及live/；本表自有行；cwd搜打撤/.tmp/ui-art-live-20261005固定源码副本；Codex IAB/127.0.0.1:5339，PID13032，exec会话19905，本聊天创建；原5200不启停 | 老板明确令证据不足的去实机检验：5200期间遇热更新回首页，转固定源码副本逐类真实输入和画面检查；仅更新规划/证据，不改游戏源文件 | 10-05 | 检查中；原127.0.0.1:5200存档保留；localhost:5200专用档05新建，5339节点测试局不占档位；不build不提交 |
+| Friday（Codex 壁纸预览服务 WF-wallpaper-view） | 127.0.0.1:5200/PID26752；cwd搜打撤；创建聊天01a10bd8-f1cd-7b13-b6fa-fd8cbef66018 | 壁纸代码编辑已完成释放；本轮实核5200仍由该PID监听，非打包会话创建，保留服务 | 10-05 | 服务运行中；代码完成项已移已释放，未停止他会话服务 |
+| Friday（Codex 无部件长期任务 WF-wu-parts-full） | game/art-source/characters/wu-parts-v1/；docs/evidence/2026-10-05-WF-wu-parts-full/；本表自有行；独立Vite 127.0.0.1:5348，PID见证据preview.pid，本聊天创建（旧10028退出后已恢复） | 老板明确授权长期自主生成22件、拼装检验并按缺陷重画；持续Goal＋每小时本聊天续做；22件已齐，右小腿v2与关节遮挡修正已实检 | 10-05 | 编辑中；三种动作完整过程复核中，未接入游戏主流程 |
 | Friday（ZCode 本会话，主线5200拉起+全场收尾 WF-web-5200-1005） | cwd 搜打撤；127.0.0.1:5200 / PID3744 / npm run web / web-up detached / 本会话创建；日志 node_modules/.cache/web-up-5200.log；本表本行 | 老板令「拉起一个主线，顺便把其他任务都收尾结束」+拍板（打包提交落库/五在途接手收尾/已验两件不用测试）：5200 实核无监听后重建（node.exe PID3744 LISTENING+入口 HTTP200）；全场 33 行定终态移已释放；manifest 转正 259 条+6 svg 归一（0 errors）；打包门修正三件（RNG visual 流/closeLibPage 经 common 派发器中止 entry/六套断言对齐终态）；码笔 39d5251（622 文件 +16463/−2276）+文档笔 71f9663（1050 文件，>1MB 十四件退回留本地）落库；排除件=三活会话在途属地（request-batching：根AGENTS/WORKFLOW-TOOLS/AGENT-TOOLBOX/QUICKSTART/workflow-memory.mjs；wu-parts-full+ui-art-live 起后新增 drift：workflow.mjs/sound.js/selftest.js/manifest+26 行）+嵌套搜打撤/（无主待批）+nul；SKIP_FULL_TESTS 显式放行有记档（门内 0 测试失败，同机并发负载环境级 error×3，独立全量两轮 295 文件 2517 过 0 失败+syntax 315+ESLint 净为证） | 10-05 | 服务运行中（留老板用）；全场收尾收官，行保留至服务停用 |
 
 ## 无主物品（只记录勿动，等认领/处置）
@@ -29,7 +29,40 @@
 | `搜打撤/搜打撤/` 嵌套目录（内含 production-research/diagnosis/engineering/measure.mjs，4KB） | production-research 会话脚本相对路径多拼一层项目名致产物落错位置（10-02 18:23 生成）；10-05 比对：与正位 measure.mjs **不同体**——系 git 直调迭代版（正位为 env 注入+hashManifest 定稿版） | 10-03 00:1x 包装会话发现 | 【10-05 收尾注记】变体内容已保全至正位证据目录 measure-git-variant.mjs（纯新增）；嵌套壳目录原样留现场，删除须老板批；本轮打包显式排除该路径 |
 | `搜打撤/docs/evidence/2026-10-02-staged-check/` 两个 >1.5MB staged 报告 JSON | 9d4b5ef 会话隔离门证据，超 1MB 红线留本地未入库 | 10-03 包装会话发现 | 只记录；随该会话属地处置 |
 
-## 近期已释放（更早记录按需归档，删除仍须授权）
+## 近期已释放
+
+Friday（Codex 冗余清理与提交推送 WF-package-cleanup-1005），10-05：编辑占用释放，码笔da6b8ff已入库（30文件）。卡牌/透明友军、首脑、全幅壁纸和隐藏恢复；双端检索与流程说明；去重复导入、复用检索计算；两处验收fixture修复。冻结index full：295文件/2513项通过、17跳过、未处理异常0；syntax/data/type/lint通过，工作树定向素材0错误、773未变历史警告。完成证据及销账随文档笔；源码与路径清单、原始报告SHA及覆盖边界见 docs/evidence/2026-10-05-WF-package-cleanup-1005/。音乐增量、无部件、无主目录、cover-hub候选与中间/超大媒体保留现场；没有删除文件、build或启停服务，远端CI另核对应push。
+
+Friday（Codex 探索战斗V4 WF-music-explore-battle-v4），10-05：完成未提交，编辑占用释放。自有 docs/evidence/2026-10-05-WF-music-explore-battle-v4/、.tmp/music-workstation/explore-battle-v4/及本表行；探索99.31秒/15轨木管竖琴交接，战斗87.27秒/16轨铜管定音鼓反击；独立段落、力度/CC11/CC64/空间，25项必要检查通过，旧输入/音源指纹不变。现有FluidSynth直接演奏混音，含冻结LMMS前母带分轨工程，未单独LMMS重渲染；素材作者/许可及参考标准在README。未人工试听、未接入游戏，不改配置、不build不提交；无服务，渲染结束。
+
+Friday（Codex 卡牌/友军返修 WF-card-ally-redesign），10-05：老板在提交会话明确确认已完成并令代销账、提交。编辑占用释放；范围 game/css/ordinary-polish.css、cover-remaining.css、tactical-card-redesign.css、game/src/cards/cards.view.js、game/src/battle/view/battle.layers.js、game/assets/portraits/allies/及manifest对应3条；证据 docs/evidence/2026-10-05-WF-card-ally-redesign/，当前窗口卡面/费用与长文不溢出、三立绘透明/HTTP指纹及资产0错误、9文件定向验证已留档。5339本轮实核无监听，未操作他会话进程；已随da6b8ff入库，295文件全量与素材门通过，不把老板认可替代自动化结果。
+
+Friday（Codex 壁纸全幅与纯展示 WF-wallpaper-view），10-05：已随da6b8ff入库、编辑占用释放，由WF-package-cleanup-1005冻结验收。范围 game/css/title-p0.css、game/index.html、game/src/ui/title-wallpaper.js、tests/title-wallpaper.test.js；来源聊天实测42项及Codex当前1280×720原生点击隐藏/恢复、inert与console error0，续证 view-toggle-final-check.json、wallpaper-only.png、interface-restored.png 在 docs/evidence/2026-10-05-WF-ensemble-wallpaper-final/。5200/PID26752服务仍保留活跃行，不代停服务。
+
+Friday（Codex 标题曲V8 WF-music-title-v8），10-05：完成未提交，编辑占用释放。仅 docs/evidence/2026-10-05-WF-music-title-v8/、.tmp/music-workstation/title-v8/及本表自有行；按报告改A回答/返回、钢琴力度踏板与音区声像、弦乐分工表情，保留开场垫底和主题。91.43秒，−15.53LUFS匹配V7；LRA2.3→4.4，主片段侧向2.65→4.17%；12项必要检查通过，未人工试听、未接入游戏。旧版/音源/配置指纹不变；LMMS PID7592/16180已自然退出，无服务，不build不提交。试听MP3、原生MMP/WAV/OGG及报告指纹在证据。
+
+Friday（Codex 独立音乐复核 WF-music-independent-review），10-05：完成未提交，编辑占用释放。仅 docs/evidence/2026-10-05-WF-music-independent-review/ 与本表自有行；最新标题V7＋三首塞壬官方参考重新解码七窗口，探索战斗取消。窄声场与少谱形发展跨窗口成立，V7已有开场伴奏/CC64/自动化/明确周期；原生与伴奏残差复核、旧参考独立复现、28项定向检查及两图目视/来源指纹/链接通过，docs守卫零发现、自有diff通过。未人工试听、官方谱/分轨不可得，建议未实施；未改曲/游戏/音源/配置，未启动服务、不build不提交。报告 README.md，数值 comparison.json，方法 analyze.py/verify.py。
+
+Friday（Codex 第二张壁纸最终版 WF-ensemble-wallpaper-final），10-05：完成未提交、编辑/服务占用释放。仅 game/assets/reconstruction/wallpaper-ensemble-1005.webp、game/css/title-p0.css两处缓存版本串、asset-manifest本既有条目；证据 docs/evidence/2026-10-05-WF-ensemble-wallpaper-final/。老板令将本聊天最终男性化/去尾巴/去墨镜/星月右向/五人眼色修正版替换为第二张主页壁纸；原尺寸WebP318028B，旧图备份。定向4/4、素材门本件0错误、HTTP哈希相等；当前1280×720 Codex内置实页2/2目视及console error0。其他尺寸/完整流程/全量/CI未核；不build不提交。原5200离线，本聊天临时启动PID13228并核身份后停，端口无监听、临时页关闭。
+（更早记录按需归档，删除仍须授权）
+
+Friday（Codex 第一首开场垫音v7 WF-music-title-v7），10-05：完成未提交，编辑占用释放。仅 docs/evidence/2026-10-05-WF-music-title-v7/ 与 ignored .tmp/music-workstation/title-v7/；按老板缺垫音/乐器少/一开始不要solo令，将已认可弦乐和声前移至第一拍，补柔弦乐垫/中提琴/低音提琴持续支撑，演奏5→8轨；不加竞争旋律。V6钢琴轨/踏板录音XML不变，原第8小节后弦乐音符不变；静音钢琴单独导出伴奏确认首200ms有声、前2秒伴奏RMS−27.20dBFS/相对整混RMS29.63%，响度仍−15.53LUFS。91.43秒MP3/WAV/OGG/MMP齐，帧数/解码/无PCM削波/循环端点/指纹通过；饱满度与主次待老板试听。无新服务，原生子进程已结束；不改其他曲/游戏，不build不提交不删除。媒体仅本地，依赖与复现留证。
+
+Friday（Codex 第一首钢琴最后尝试v6 WF-music-title-v6），10-05：完成未提交，编辑占用释放。仅 docs/evidence/2026-10-05-WF-music-title-v6/ 与 ignored .tmp/music-workstation/title-v6/。老板赞弦乐、钢琴仍断，令再试后再决定去留：v5弦乐/大提琴三条音轨与三条表情曲线指纹完全保留；钢琴用现有LMMS FluidSynth1.1.6实录CC64延音踏板，换踏板/轻触键/键长衔接，相对弦乐主琴−3dB/和声琴−4dB，再冻结入原生LMMS混音。单音踏板尾音对照37.45dB仅证明控制生效；整曲响度对齐v5差0.00LU，不作好听保证。91.43秒MP3/WAV/OGG/MMP齐，帧数/无削波/解码/循环端点/媒体与弦乐指纹通过；钢琴冻结录音须脚本重建，依赖和指纹留证。听感/去留待老板；没有提前去钢琴，不改其他曲/游戏，不build不提交不删除，无新服务，原生子进程已退出。
+
+Friday（Codex 美术实施 WF-ui-art-implement），10-05：完成未提交，编辑占用释放。仅game/css/ordinary-polish.css、cover-remaining.css及game/src/battle/view/battle.view.js、battle.layers.js；自有docs/evidence/2026-10-05-WF-ui-art-step1/implementation/、根README更新及workflow生成docs/evidence/2026-10-05-WF-ui-art-implement/。I01–I08局部修正已接入，背包/宝箱字色、详情/结算承托、普通弹层地图操作台让位、撤离动作/空态/长说明、禁用与已售、选择卡高/完整规则及大图避让、首脑透明图、三种友军SVG；卡牌材质与友军图形待老板审美，不宣称全游戏最终认可。当前1309×764内置实页，受控原模块/原模板与真实输入范围分开；7文件87定向测试、JS语法/CSS解析及副本指纹通过，沿明确排除不测流程/存档/整备拖拽/地图拖缩/全面键盘/性能/多尺寸，不build不提交。自有5339/PID15056/exec22732确认身份后已停并无监听，自有页已关；主线5200/他会话5348未动，备份副本保留。HEADe87034b835f，远端未刷新。
+
+Friday（Codex 第一首旋律整理v5 WF-music-title-v5），10-05：完成未提交，编辑占用释放。仅 docs/evidence/2026-10-05-WF-music-title-v5/ 与 ignored .tmp/music-workstation/title-v5/；老板直接反馈v4杂乱/钢琴断续，故重写完整八小节主线，四分/二分音符与句尾短呼吸，84BPM/32小节/91.43秒，5轨清楚主次：钢琴主线＋安静和声＋柔弦乐/大提琴，不再堆零散回应。乐谱覆盖58.73→97.98%、最长空拍5.04→0.083拍、跨八度4→0；这些只核对断续，不作审美打分。原生LMMS导出MP3/WAV/OGG/MMP，48k立体声、无PCM削波、4388571帧、媒体解码/循环端点/指纹通过；听感待老板。前版保留，不改其他曲/游戏，不build不提交不删除，无新服务；子进程已结束。音频沿ignore只留本地，来源/复现/边界见自有README。
+
+Friday（Codex 第一首音乐v4 WF-music-title-v4），10-05：完成未提交，编辑占用释放。仅 docs/evidence/2026-10-05-WF-music-title-v4/ 与 ignored .tmp/music-workstation/title-v4/；老板认可分析后令只迭代第一首。保留钢琴主题，56小节/120秒八段不等长发展，五条原生LMMS连续表情自动化，经静态/自动化对照真实导出确认；两次编曲/混音，前次保留pass-A。最终侧向声能2.29→8.43%、全曲LRA5.1→9.7LU、与旧强弱轮廓相关−0.595；谱形移动0.092→0.120；周期脉冲0.178→0.130未解决，报告明确不冒称全面改善。MP3/WAV/OGG及原生MMP齐，帧数/无削波/格式解码/循环端点/指纹与五自动化核验通过。原生渲染进程已结束，无新服务；不改其他两首与游戏、不build不提交不删除。听感与耐听待老板；采样音源上限及节奏边界留证。
+
+Friday（Codex 遗漏美术补检 WF-ui-art-live-more），10-05：完成未提交，编辑占用释放。仅docs/evidence/2026-10-05-WF-ui-art-step1/live-more/及自有README/live报告与覆盖更新；原59项代表视觉已补齐，新增首脑浅底I07和友军图形I08候选，复现字色/叠层/已售弱对比；非空与后态为原模块受控显示，不等于事务/完整玩法。当前1309×764内置窗口，沿老板明确排除不测完整流程/存档/整备拖拽/地图拖缩/全面键盘/性能/其他尺寸；不改游戏代码素材、不build不提交。自有5339/PID15444/exec75011身份确认后已停，端口无监听，自有页已关；主线5200/他会话5348未动，固定副本保留。HEADe87034b835f，远端未刷新，文件指纹/引用核对见live-more/validation.json。
+
+Friday（Codex 音乐量化差距 WF-music-gap），10-05：完成未提交，编辑占用释放。仅 docs/evidence/2026-10-05-WF-music-gap/ 与本表自有行；当前B版3首及官方停滞之地/山雪欲来/回想6份录音同取12–60秒测频谱、M/S空间、起音密度/周期性、谱形移动；全曲LUFS/LRA、RMS轨迹及自有原生乐谱另验。发现自身空间窄、周期脉冲弱，尤其强弱轮廓相关0.93–0.95印证六段模板高度同形；谱重心已在参考范围内，结果不作审美评分/不泛化整库。源码、6曲数据/输入PCM指纹/方法局限、两张图及中文报告齐；六记录一致性、数值有限、3本地输入指纹复核、Python语法及图表目视通过，最大单件809776B。初次脚本数据完成后的打印遇Python3.8字典兼容报错已修，仅打印变化，未记初次进程为绿。官方PCM只在内存，无保留参考音频。无曲子/游戏改动，无新端口/服务，不build不提交；审美、真人奏法及原曲乐谱未知，报告明确边界。
+
+Friday（Codex 音乐共同元素与古典配器 WF-music-identity），10-05：完成未提交，编辑占用释放。属地 docs/evidence/2026-10-05-WF-music-identity/ 与 ignored .tmp/music-workstation/identity/。按老板最新口味（三首独立旋律、仅少量共同元素、偏弦乐钢琴鼓、可参考明日方舟、丰富耐听）写3首48小节候选；实际LMMS原生导出A轮＋28声部校准＋B轮编排/混音修改，最终试听B：103/90/93秒，钢琴／弦乐／木管／圆号／低音提琴／定音鼓／音乐厅鼓组，轻钟琴/三角铁及空间作为共同材料；不用试通的Zyn电子音色，不改游戏入口。塞壬官网3曲流式分析只留指标，无参考音频或旋律复制。A/B六件48k立体声、MP3/OGG解码、帧数、无削波、循环端点数值、SHA与实际工程/音频差异核验通过；数值不等同听感，听感与耐听程度待老板。原生渲染/校准子进程均退出，无新服务/端口，不build不提交不删除。原生工程与复现源码入证据；音频沿ignore留本地，SHA见各轮render-report及validation-summary。
+
+Friday（Codex 美术实机检查 WF-ui-art-live）｜属地：docs/evidence/2026-10-05-WF-ui-art-step1/及live/、本表自有行；cwd搜打撤，Vite root .tmp/ui-art-live-20261005/game；5339/PID13032/exec19905本聊天创建｜事项：59项逐项实机对账，88张当前窗口截图；58项代表画面=精修20/保留38，首脑登场1项动态未核，重构0；六组问题及具体标准见live/REVIEW.md，逐项/source SHA/输入方式见live/coverage.json；普通输入、内置调试和受控故障分列，不冒充四层自然通关/持久化全链｜登记/释放10-05｜终态：检查文档交付、编辑/服务占用释放；续接实核5339无监听/旧PID不存在，IAB临时标签已随前轮结束关闭，无须杀进程；固定副本与两origin专用档05保留不删除，原127.0.0.1:5200档位未覆盖、5200未启停；未改游戏/素材、不build/提交/推送。HEAD检查起点425d039→收官e87034，现有origin/master领先56/落后0、未刷新；部分早期证据已随他会话打包，本轮新报告与尾段证据仍有未提交增量；371源码比较5差异已分域说明，核心布局10份一致。
 
 Friday（Codex 循环音乐 WF-music-demos / WF-music-daw），10-05：完成未提交，编辑占用释放。首轮属地 game/src/audio/sound.js、game/selftest.js、game/music-demo.html、game/assets/music-demo/、asset-manifest仅自有3条、docs/audio-system.md、docs/evidence/2026-10-05-WF-music-demos/；原三首保留，接入3首自产OGG，定向11例/源码selftest/定向资产门0错误/343文档链接通过，内置浏览器3首解码与真实试听按钮验证；生产场景链未完整验收，老板反馈还可以但不足。续令明确下载桌面DAW：官方LMMS 1.2.2安装于 .tmp/music-workstation/LMMS，GeneralUser GS音源留同目录父层；新作6/6/8轨MMP与原生软件渲染第二轮三首候选，WAV/MP3/OGG、许可/作者范例结构/工具SHA/音轨校准/验证见 docs/evidence/2026-10-05-WF-music-daw/。三首48k立体声、帧数/媒体解码/无削波/OGG端点数值检查通过；候选尚未覆盖游戏首轮，听感待老板。原生渲染进程均正常退出；无新端口，5200只复用不启停；不build不提交，不改他人game.menu.js。软件与中间音频保留在ignored .tmp，证据音频沿ignore仅本地保存。
 

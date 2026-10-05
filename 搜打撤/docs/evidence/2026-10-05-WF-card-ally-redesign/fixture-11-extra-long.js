@@ -1,0 +1,1 @@
+(async()=>{const q=__ArtVisMore;await q.ordinary(['初始攻击','格挡']);const base=SDT.Cards.all().find(c=>c.name==='格挡');const text='回合开始时获得护甲，受到伤害后回复生命；本回合首次攻击提高伤害，结束回合后失去这些临时效果。';const options=[{...base},{...base,name:'长规则视觉样板',desc:text.repeat(2)}];q.runtime.set$discovering({options});SDT.Battle.commands.refreshView();return options.map(c=>({name:c.name,length:c.desc.length}));})()

@@ -1,0 +1,71 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	1 container viewport
+		2 button 背包 24/25, ID: bagBtnFloat
+			3 text 背包
+			4 text 24/25
+		5 container demon BOSS战 · 第 1 回合 · cards 牌库, ID: overlay
+			6 container
+				7 button Description: 关闭, ID: ovCloseX
+				8 heading demon BOSS战 · 第 1 回合 · cards 牌库, Value: 2, ID: ovTitle
+					14 image demon
+					15 text  BOSS战 · 第 1 回合 · 
+					16 image cards
+					17 text  牌库
+				13 container ovBody
+					18 container
+						19 text 牌库剩余  24  张 —— 武术  18  · 装备  6
+					20 container
+						21 image cards
+						22 text 阿猫的礼物 装备 · 0费 · 史诗
+						23 image cards
+						24 text 珍珠盒 装备 · 0费 · 稀有
+						25 image cards
+						26 text 沉船宝盒 装备 · 0费 · 史诗
+						27 image cards
+						28 text 寻宝图 装备 · 0费 · 古朴
+						29 image cards
+						30 text 毒杖 装备 · 0费 · 史诗
+						31 image cards
+						32 text 寒冰剑 装备 · 0费 · 古朴
+						33 image cards
+						34 text 江湖救急 武术 · 1费 · 史诗
+						35 image cards
+						36 text 迅疾箭 武术 · 1费 · 古朴
+						37 image cards
+						38 text 格挡 武术 · 1费 · 古朴
+						39 image cards
+						40 text 连击箭 武术 · 1费 · 古朴
+						41 image cards
+						42 text 破甲箭 武术 · 1费 · 古朴
+						43 image cards
+						44 text 射击 武术 · 0费 · 古朴
+						45 image cards
+						46 text 铸甲 武术 · 1费 · 稀有
+						47 image cards
+						48 text 嗜血刃 武术 · 2费 · 史诗
+						49 image cards
+						50 text 绿化箭 武术 · 1费 · 古朴
+						51 image cards
+						52 text 血箭 武术 · 1费 · 古朴
+						53 image cards
+						54 text 致命穿刺 武术 · 1费 · 古朴
+						55 image cards
+						56 text 飞身劈 武术 · 2费 · 稀有
+						57 image cards
+						58 text 霜月斩 武术 · 2费 · 史诗
+						59 image cards
+						60 text 正午决战 武术 · 1费 · 史诗
+						61 image cards
+						62 text 破甲急袭 武术 · 2费 · 稀有
+						63 image cards
+						64 text 连射 武术 · 1费 · 稀有
+						65 image cards
+						66 text 包扎 武术 · 1费 · 古朴
+						67 image cards
+						68 text 净化箭 武术 · 1费 · 古朴
+					69 container
+						70 text 查看牌库不消耗任何资源；牌库空后会 洗回弃牌堆 循环（墓地不会洗回）。
+					71 button ↩ 返回战斗
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/

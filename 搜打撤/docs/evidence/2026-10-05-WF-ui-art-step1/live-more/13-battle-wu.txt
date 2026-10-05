@@ -1,0 +1,94 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	1 container viewport
+		2 button 背包 3/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 3/16
+		5 container
+			6 text 冬境街区 · 遭遇
+			7 text 第 1 回合
+			8 text 你的行动 Lv.1 · 0/50 · 差 50 点
+			9 text 我方
+			10 container btSelf
+				11 container
+					12 text 无 你
+				13 container
+					14 text 30/30
+				15 container
+					16 image swords
+					17 text  4
+			18 container
+				19 container
+					20 image swords
+					21 text  攻击 · 4
+				22 image infantry
+				23 text 联邦巡防兵
+				24 image swords
+				25 text 4
+				26 container
+					27 text 4/4
+				28 container
+					29 image swords
+					30 text  攻击 · 4
+				31 image infantry
+				32 text 联邦巡防兵
+				33 image swords
+				34 text 4
+				35 container
+					36 text 4/4
+				37 container
+					38 image swords
+					39 text  攻击 · 4
+				40 image infantry
+				41 text 联邦巡防兵
+				42 image swords
+				43 text 4
+				44 container
+					45 text 4/4
+			46 text 敌方意图
+			47 container
+				48 image bolt
+				49 text 2 /2
+			50 button swords 刺击
+				51 image swords
+				52 text  刺击
+			53 container
+				54 checkbox Description: 初始攻击 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					55 container
+						56 text 1
+						57 image 初始攻击
+						58 text 初始攻击
+					59 image swords
+				60 checkbox Description: 镭射 · 1 费。费用 1 · 点击进入注能（选 1 张手牌消耗强化打出），注能条内也可「不注能直接打出」或拖到敌人身上直打（悬停看完整描述）, Value: 0
+					61 container
+						62 text 1
+						63 image 镭射
+						64 text 镭射
+						65 image sparkles
+						66 text 5'
+						67 text 法伤
+					68 image swords
+					69 button crystal 注能1
+						70 image crystal
+						71 text 注能1
+				72 checkbox Description: 格挡 · 1 费。费用 1 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）, Value: 0
+					73 container
+						74 text 1
+						75 image 格挡
+						76 text 格挡
+					77 image heart
+			78 container 战术操作
+				79 button bag 背包
+					80 image bag
+					81 text  背包
+				82 button runner 撤离（判负）
+					83 image runner
+					84 text  撤离（判负）
+				85 button gear 设置
+					86 image gear
+					87 text  设置
+				88 button skip 结束回合
+					89 image skip
+					90 text  结束回合
+
+The focused UI element is 50 button swords 刺击

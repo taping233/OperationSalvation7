@@ -1,0 +1,1 @@
+(()=>{const q=window.__ArtVisMore;const foes=SDT.Battle.getSnapshot().foes.map(f=>({...f,maxHp:f.maxHp??f.hp}));q.runtime.set$foes(foes);SDT.Battle.commands.refreshView();return true;})()

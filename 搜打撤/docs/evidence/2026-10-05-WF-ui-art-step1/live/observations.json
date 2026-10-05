@@ -575,5 +575,68 @@
     "file": "79-bag-drop.jpg",
     "url": "http://127.0.0.1:5339/",
     "capturedAt": "2026-10-05T03:59:30.544Z"
+  },
+  {
+    "id": "airdrop-resource",
+    "notes": "受控构造、原游戏渲染器：当前测试节点改为原resource类型，进入真正物资投放点二选一；区别于污染空投箱事件",
+    "file": "80-airdrop-resource.jpg",
+    "url": "http://127.0.0.1:5339/",
+    "capturedAt": "2026-10-05T04:05:02.204Z"
+  },
+  {
+    "id": "fire-restore",
+    "notes": "受控构造、原游戏渲染器：原复原选择器，含两张实际可复原卡；营火自动分支已另验",
+    "file": "81-fire-restore.jpg",
+    "url": "http://127.0.0.1:5339/",
+    "capturedAt": "2026-10-05T04:05:02.843Z"
+  },
+  {
+    "id": "run-transition",
+    "notes": "原enterNode battle、默认900ms短过场静帧；未改时长，不代表整段录像验收",
+    "file": "82-run-transition.jpg",
+    "url": "http://127.0.0.1:5339/",
+    "capturedAt": "2026-10-05T04:06:21.587Z"
+  },
+  {
+    "id": "boss-intro",
+    "notes": "原首脑开始演出；无非初始牌的受控编组，静帧，不冒充完整动态验收",
+    "file": "83-boss-intro.jpg",
+    "url": "http://127.0.0.1:5339/",
+    "capturedAt": "2026-10-05T04:06:23.405Z"
+  },
+  {
+    "id": "loot-search-actual",
+    "notes": "调用原宝箱入口后立即取图，真实搜索阶段，不等待搜索动画结束",
+    "file": "84-loot-search-actual.jpg",
+    "url": "http://127.0.0.1:5339/",
+    "capturedAt": "2026-10-05T04:09:30.744Z"
+  },
+  {
+    "id": "exit",
+    "notes": "原网页quitGame分支的退出屏；仅5339专用验收档，不退出Codex应用",
+    "file": "85-exit.jpg",
+    "url": "http://127.0.0.1:5339/",
+    "capturedAt": "2026-10-05T04:10:35.167Z"
+  },
+  {
+    "id": "exit-stable",
+    "notes": "旧弹层完成退场后的真实网页退出屏",
+    "file": "86-exit-stable.jpg",
+    "url": "http://127.0.0.1:5339/",
+    "capturedAt": "2026-10-05T04:11:00.532Z"
+  },
+  {
+    "id": "run-transition-readable",
+    "notes": "原900ms过场，按标题与祖先实际不透明状态等待取静帧；不延长动画",
+    "file": "87-run-transition-readable.jpg",
+    "url": "http://127.0.0.1:5339/",
+    "capturedAt": "2026-10-05T04:15:20.768Z"
+  },
+  {
+    "id": "boss-intro-readable",
+    "file": "88-boss-intro-readable.jpg",
+    "capturedAt": "2026-10-05T04:15:22.114Z",
+    "notes": "截图/TXT已写入，索引写入瞬时失败后按文件恢复；首脑标题等待未满足，不认定登场演出通过。",
+    "recoveredIndex": true
   }
 ]

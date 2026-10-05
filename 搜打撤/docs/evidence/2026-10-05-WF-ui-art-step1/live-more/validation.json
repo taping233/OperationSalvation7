@@ -1,0 +1,30 @@
+{
+  "kind": "补检证据/文档完整性核对，非游戏测试",
+  "capturedAt": "2026-10-05T09:29:09.849Z",
+  "head": "e87034b835f094c2cb7a0c3b86dc70d56c74db5f",
+  "previous371SourceHashesRechecked": true,
+  "sourceChangesSincePreviousEvidence": [],
+  "allObservedFilesExist": true,
+  "allMovieFramesExist": true,
+  "largeFiles": [],
+  "port5339Released": true,
+  "pid15444Released": true,
+  "browserOwnTabClosed": true,
+  "representativeTargetCount": 59,
+  "newArtIssues": 2,
+  "allLocalLinksExist": true,
+  "checkedLinks": 54,
+  "docsCheck": {
+    "ok": true,
+    "checkedRelativeLinks": 344,
+    "findings": 0,
+    "limits": "根/production文档；自有evidence54个相对引用已另核"
+  },
+  "diffCheckPassed": true,
+  "classificationCounts": {
+    "polish": 25,
+    "preserve": 34,
+    "restructure": 0,
+    "evidenceInsufficient": 0
+  }
+}

@@ -1,0 +1,1 @@
+(()=>{const q=window.__ArtVisMore;q.reset();q.scenes.enterNode('battle',()=>{});return true;})()

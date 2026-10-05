@@ -1,0 +1,39 @@
+{
+  "platform": "Codex IAB",
+  "origin": "http://127.0.0.1:5339/",
+  "viewport": {
+    "width": 1309,
+    "height": 764
+  },
+  "override": false,
+  "slotsLoaded": false,
+  "activeSlotObserved": null,
+  "temporaryVariantRemoved": true,
+  "explicitExclusions": [
+    "完整流程",
+    "存档",
+    "整备拖拽",
+    "地图拖动/缩放",
+    "全面键盘操作",
+    "性能",
+    "其他窗口尺寸"
+  ],
+  "nativeClicks": [
+    "首脑节点测试",
+    "打开锦囊",
+    "打开珍珠盒",
+    "关闭普通卡牌大图"
+  ],
+  "listScrolling": [
+    "牌库",
+    "墓地"
+  ],
+  "controlledInputs": "原模块内存状态；撤离/成功为原模板组件构造；卡牌A/B为原壳及cardHTML样板",
+  "bossFrameCount": 46,
+  "discardedEvidence": [
+    "01-bag.jpg：开合/图片加载过程",
+    "09-allies.jpg：旧夹具maxHp未归一化，不作数值故障依据",
+    "早期卡牌/撤离图：修正前中间状态"
+  ],
+  "capturedAt": "2026-10-05T10:09:17.057Z"
+}

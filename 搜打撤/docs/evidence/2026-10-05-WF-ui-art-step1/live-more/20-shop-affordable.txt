@@ -1,0 +1,130 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	1 container viewport
+		2 button 背包 3/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 3/16
+		5 container
+			6 button Description: 关闭, ID: ovCloseX
+			7 container
+				8 text TACTICAL SUPPLY // 07
+				9 heading bag 冬境战术补给站 , Value: 2
+					10 image bag
+					11 text  冬境战术补给站 
+					12 button
+				13 button bag 背包
+					14 image bag
+					15 text 背包
+				16 container 远征资源（点击打开背包）
+					17 text 持有卡牌
+					18 text 3
+					19 text 张
+					20 text 当前金币
+					21 text 30
+					22 text 币
+					23 text 背包容量
+					24 text 3/16
+					25 text 格
+				26 text 补给清单
+				27 text 点击货位即可直接购买（价签＝价格） · 随身币不随撤离带回，离局前记得花掉
+				28 container 商店商品
+					29 button 购买「生命箭」，2 币
+						30 container
+							31 text 1
+							32 image 生命箭
+							33 text 生命箭 武术 · 古朴 攻（ -1 ），获得  1  张随机卡牌。
+							34 image swords
+							35 text -1
+							36 image coin
+							37 text 2
+						38 image coin
+						39 text 2
+					40 button 购买「精神药水」，3 币
+						41 container
+							42 text 0
+							43 image 精神药水
+							44 text 精神药水 道具 · 稀有
+							45 image cards
+							46 text 抽 2 抽  2  张牌。
+							47 image coin
+							48 text 3
+						49 image coin
+						50 text 3
+					51 button 购买「魔法锅炉」，2 币
+						52 container
+							53 text 0
+							54 image 魔法锅炉
+							55 text 魔法锅炉 装备 · 古朴
+							56 image crystal
+							57 text 注能 2 主动技能 ： 注能 ( 2 )：随机获取  3  张卡牌。
+							58 image coin
+							59 text 2
+						60 image coin
+						61 text 2
+					62 button 购买「一把钥匙」，2 币
+						63 container
+							64 text 0
+							65 image 一把钥匙
+							66 text 一把钥匙 资源 · 古朴 解锁大门。
+							67 image coin
+							68 text 2
+						69 image coin
+						70 text 2
+					71 button 购买「草甲」，2 币
+						72 container
+							73 text 0
+							74 image 草甲
+							75 text 草甲 装备 · 古朴
+							76 image plate
+							77 text 甲 5 装备 ： 装备 时获得 5 点 护甲 。
+							78 image coin
+							79 text 2
+						80 image coin
+						81 text 2
+					82 button 购买「邪能护体」，4 币
+						83 container
+							84 text 2
+							85 image 邪能护体
+							86 text 邪能护体 法术 · 史诗
+							87 image cards
+							88 text 抽 3
+							89 image crystal
+							90 text 注能 2 注能 （ 2 ）： 抽 3 张牌，本 回合 免疫所有 伤害 和 诅咒 效果
+						91 image coin
+						92 text 4
+					93 button 购买「能量饮料」，2 币
+						94 container
+							95 text 0
+							96 image 能量饮料
+							97 text 能量饮料 道具 · 古朴
+							98 image heart
+							99 text 回 6 回复  6  点 生命 。
+							100 image coin
+							101 text 2
+						102 image coin
+						103 text 2
+					104 button 补充初始攻击，1 币，本站余 5 张
+						105 container
+							106 text 1
+							107 image 初始攻击
+							108 text 初始攻击 武术 · 初始 攻（ +0 ）： 造成等同于攻击力的 伤害 。
+						109 image coin
+						110 text 1
+						111 text 余 5
+					112 button 购买神秘货箱，开出随机卡牌，3 币
+						113 image dice
+						114 text ？
+						115 text 随机卡牌
+						116 image coin
+						117 text 3
+					118 button ACQ // 08 cards 收购台 已识别 3 张可出售卡 进入 →
+						119 text ACQ // 08
+						120 image cards
+						121 text 收购台
+						122 text 已识别 3 张可出售卡
+						123 text 进入 →
+				124 button arrow 离开补给站
+					125 image arrow
+					126 text 离开补给站
+
+The focused UI element is 12 button

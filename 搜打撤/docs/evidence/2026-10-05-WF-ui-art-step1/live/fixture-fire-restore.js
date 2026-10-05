@@ -1,0 +1,1 @@
+(()=>{const q=window.__uiArtQA;q.reset();const all=window.SDT.Cards.all();q.game.usedPocket=['镭射','格挡'].map(name=>({card:{...all.find(c=>c.name===name)},count:1}));q.scenes.openPocketRestore(2,()=>q.scenes.finishInstant());return true;})()

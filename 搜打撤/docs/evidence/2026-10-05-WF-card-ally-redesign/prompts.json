@@ -1,0 +1,29 @@
+{
+  "tool": "built-in ImageGen",
+  "style": "artifact-template-wu",
+  "prompts": [
+    {
+      "key": "federal-patrol-v1",
+      "prompt": "Asset: production transparent full-body ally portrait for a Chinese tactical card roguelike. Reference 1 controls drawing STYLE ONLY: painterly anime, very broad opaque color blocks, hard-edge cool shadows, low detail, loose visible economical brushwork, natural adult proportions. Reference 2 controls this existing Federal Patrol Soldier's identity/uniform: young adult male, blue-gray combat helmet, teal-gray armored vest and blue uniform, full tactical boots and gloves, carrying a dark gray modern rifle securely across chest. Redesign only into that broad painterly style and clean silhouette, keep uniform identity. One complete standing figure facing three-quarter right toward enemy, calm ready posture, both boots visible, no chibi, no text, no badge text, no background scenery, no pedestal, no cast shadow baked outside body, no glow. Entire helmet/rifle/boots inside frame with a little margin. True transparent alpha background, perfectly clean edges with no white paper halo or square artifacts. Render for readable approximately 100px wide in-game full-body display, details consolidated into large masses. Do not inherit the girl, hair, dress or sword from reference 1.",
+      "refs": [
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/cut/enemies/infantry.webp"
+      ]
+    },
+    {
+      "key": "federal-shooter-v1",
+      "prompt": "Asset: production transparent full-body ally portrait for a Chinese tactical card roguelike. Reference 1 controls STYLE ONLY: painterly anime, broad opaque color blocks, hard-edged gray shadows, economical visible brush marks, low detail density, natural adult proportions. Reference 2 controls existing Federal Shooter identity: young adult man with short brown hair, clear dark tactical goggles and headset, blue uniform, teal-gray shoulder protection and tactical vest, dark gloves and kneepads; a coherent dark-gray long scoped rifle. One complete figure in a low kneeling marksman pose aiming the rifle three-quarter right, steady readable rifle-to-shoulder grip; knees, boots and barrel all visible. Keep anatomy and existing uniform identity, simplify tiny gear into large blocks. No girl/dress/sword from reference1, no text, no UI/card frame, no scenery, no pedestal, no outside cast shadow, no glow. True transparent alpha background with clean edges, no white halo or paper squares. Moderate empty margin. Readable at about 100px wide on dark game battlefield.",
+      "refs": [
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/cut/enemies/archer.webp"
+      ]
+    },
+    {
+      "key": "sealed-limb-v1",
+      "prompt": "Asset: a single production transparent full-body supernatural summoned ally portrait, named Sealed Limb, for a painterly anime tactical card roguelike. Reference controls brush STYLE ONLY, not the human girl's identity: broad opaque dark violet/slate color masses, hard-edged cold-gray light/shadow, economical loose anime brushwork, sparse contour strokes, very low small-detail density. Subject: ONE huge spectral forearm and open claw-like hand emerging upward from a compact shadowy stump, unnaturally elongated graceful fingers, wrist bound by two broad dull gold metal sealing bands, one short heavy broken chain attached to a band. Non-gory supernatural body fragment, no human person or full humanoid, no wound or blood. Arm and all fingers completely visible, asymmetrical three-quarter profile toward right, silhouette distinct from armed soldiers. Base contained compactly, no floating particles or bright glow. No scenery, ground plane, pedestal, labels or card border. True transparent alpha background including outside shape, clean anti-aliased edges, no painted white backdrop/halo. Readable roughly 100px wide on a dark battlefield. Do not copy girl hair/clothes/sword.",
+      "refs": [
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ]
+    }
+  ]
+}

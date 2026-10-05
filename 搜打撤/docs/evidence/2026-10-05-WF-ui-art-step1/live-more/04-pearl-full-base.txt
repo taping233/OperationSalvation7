@@ -1,0 +1,43 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	1 container bag 背包, ID: overlay
+		2 container
+			3 button Description: 关闭, ID: ovCloseX
+			4 container ovBody
+				5 container
+					6 heading bag 背包 , Value: 2
+						7 image bag
+						8 text  背包 
+						9 button
+					10 text 格数  1/25 总值  0
+					11 image lock
+					12 text  安全格  0/2
+					13 image pocket
+					14 text  消耗口袋  0  张
+					15 button 关闭背包
+				16 container
+					17 heading bag 背包格 按稀有度 按种类, Value: 3
+						18 image bag
+						19 text 背包格
+						20 button 按稀有度
+						21 button 按种类
+					22 container
+						23 container
+							24 image 珍珠盒
+							25 text 珍珠盒 装备 · 稀有 内置 3 * 3 空间，可以容纳所有类型的资源卡牌。
+							26 image coin
+							27 text 3
+						28 text ×1
+						29 container
+							30 image cards
+					31 container
+						32 heading pocket 消耗口袋 0 张, Value: 3
+							33 image pocket
+							34 text 消耗口袋 0 张
+						35 text （空——对小怪使用过的卡牌会进入这里）
+					36 container
+						37 heading lock 安全格, Value: 3
+							38 image lock
+							39 text 安全格
+
+The focused UI element is 15 button 关闭背包

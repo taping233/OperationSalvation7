@@ -1,0 +1,74 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container viewport
+		3 button 背包 1/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 1/16
+		6 container overlay
+			7 container
+				8 text 冬核深处 · 首脑遭遇
+				9 text 第 1 回合
+				10 text 你的行动 Lv.1 · 0/50 · 差 50 点
+				11 container
+					12 image cards
+				13 text 0 牌库
+				14 container
+					15 image cards
+				16 text 0 弃牌
+				17 container
+					18 image cards
+				19 image skull
+				20 text 0 消耗
+				21 text 我方
+				22 container btSelf
+					23 image 黑像
+					24 container
+						25 text 黑像 你
+					26 container
+						27 text 35/35
+					28 container
+						29 image swords
+						30 text  4
+				31 container
+					32 image arrow
+					33 text  攻击·回合末强化 · 5
+					34 image boss_general
+					35 text 肃清总督
+					36 image swords
+					37 text 5
+					38 image arrow
+					39 text  军威
+					40 text 50/50
+				41 text 敌方意图
+				42 container
+					43 image bolt
+					44 text 2 /2
+				45 button swords 猛击
+					46 image swords
+					47 text  猛击
+				48 checkbox Description: 初始攻击 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					49 container
+						50 text 1
+						51 image 初始攻击
+						52 text 初始攻击
+					53 text ×5
+					54 image swords
+				55 container 战术操作
+					56 button bag 背包
+						57 image bag
+						58 text  背包
+					59 button runner 撤离（判负）
+						60 image runner
+						61 text  撤离（判负）
+					62 button gear 设置
+						63 image gear
+						64 text  设置
+					65 button skip 结束回合
+						66 image skip
+						67 text  结束回合
+			68 container
+				69 text BOSS战
+				70 image boss_general
+				71 text 肃清总督
+
+The focused UI element is 45 button swords 猛击

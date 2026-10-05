@@ -1,0 +1,194 @@
+[
+  {
+    "id": "bag-populated",
+    "file": "01-bag-populated.jpg",
+    "notes": "非空口袋5张、锦囊3/3、珍珠盒3/9、安全格2/2；仅构造显示状态，不验证存档",
+    "capturedAt": "2026-10-05T08:53:10.384Z"
+  },
+  {
+    "id": "pouch-full",
+    "file": "02-pouch-full.jpg",
+    "notes": "原容器视图，三种法术满容量；看名称/数量/满提示，不操作存取",
+    "capturedAt": "2026-10-05T08:53:11.331Z"
+  },
+  {
+    "id": "pearl-populated",
+    "file": "03-pearl-populated.jpg",
+    "notes": "真实打开3/9资源卡视图，木材/口粮/钥匙三类",
+    "capturedAt": "2026-10-05T08:53:50.049Z"
+  },
+  {
+    "id": "pearl-full-base",
+    "file": "04-pearl-full-base.jpg",
+    "notes": "九张资源填满原珍珠盒，只构造显示",
+    "capturedAt": "2026-10-05T08:53:50.823Z"
+  },
+  {
+    "id": "pearl-full",
+    "file": "05-pearl-full.jpg",
+    "notes": "原珍珠盒9/9满容量、同名堆叠数量×3",
+    "capturedAt": "2026-10-05T08:53:51.995Z"
+  },
+  {
+    "id": "deck-long",
+    "file": "06-deck-long.jpg",
+    "notes": "24张实际注册卡的非空牌库，原清单渲染器，仅检查排版",
+    "capturedAt": "2026-10-05T09:00:30.524Z"
+  },
+  {
+    "id": "deck-long-bottom",
+    "file": "07-deck-long-bottom.jpg",
+    "notes": "滚动查看牌库下部和返回，非键盘/功能验收",
+    "capturedAt": "2026-10-05T09:00:31.078Z"
+  },
+  {
+    "id": "grave-long",
+    "file": "08-grave-long.jpg",
+    "notes": "24张实际卡的非空墓地，原清单渲染器，未模拟消费结算",
+    "capturedAt": "2026-10-05T09:00:31.560Z"
+  },
+  {
+    "id": "deck-long-stable",
+    "file": "09-deck-long-stable.jpg",
+    "notes": "开战首帧稳定后查看24行牌库；前面deck-long图被待执行主渲染覆盖，不作牌库依据",
+    "capturedAt": "2026-10-05T09:01:34.074Z"
+  },
+  {
+    "id": "deck-bottom",
+    "file": "10-deck-bottom.jpg",
+    "notes": "原牌库列表下部；仅滚动看文字和返回",
+    "capturedAt": "2026-10-05T09:01:34.504Z"
+  },
+  {
+    "id": "grave-long-stable",
+    "file": "11-grave-long-stable.jpg",
+    "notes": "24行墓地上部",
+    "capturedAt": "2026-10-05T09:01:34.818Z"
+  },
+  {
+    "id": "grave-bottom",
+    "file": "12-grave-bottom.jpg",
+    "notes": "墓地最后条目与说明/返回",
+    "capturedAt": "2026-10-05T09:01:35.290Z"
+  },
+  {
+    "id": "battle-wu",
+    "file": "13-battle-wu.jpg",
+    "notes": "其他职业普通战斗的立绘/名牌/手牌与HUD，只看画面",
+    "capturedAt": "2026-10-05T09:05:01.851Z"
+  },
+  {
+    "id": "battle-changwuyu",
+    "file": "14-battle-changwuyu.jpg",
+    "notes": "其他职业普通战斗的立绘/名牌/手牌与HUD，只看画面",
+    "capturedAt": "2026-10-05T09:05:02.980Z"
+  },
+  {
+    "id": "battle-baita",
+    "file": "15-battle-baita.jpg",
+    "notes": "其他职业普通战斗的立绘/名牌/手牌与HUD，只看画面",
+    "capturedAt": "2026-10-05T09:05:04.070Z"
+  },
+  {
+    "id": "battle-xingyue",
+    "file": "16-battle-xingyue.jpg",
+    "notes": "其他职业普通战斗的立绘/名牌/手牌与HUD，只看画面",
+    "capturedAt": "2026-10-05T09:05:05.066Z"
+  },
+  {
+    "id": "battle-dense",
+    "file": "17-battle-dense.jpg",
+    "notes": "16种手牌、三长名敌人、三友军和多状态，原战斗渲染；不验证数值/玩法组合合法性",
+    "capturedAt": "2026-10-05T09:05:06.310Z"
+  },
+  {
+    "id": "battle-dense-corrected",
+    "file": "18-battle-dense-corrected.jpg",
+    "notes": "补齐构造对象原引擎通常会归一化的maxHp；前图undefined属夹具错误，不记游戏缺陷",
+    "capturedAt": "2026-10-05T09:06:04.463Z"
+  },
+  {
+    "id": "hand-second-page",
+    "file": "19-hand-second-page.jpg",
+    "notes": "16种手牌第二栏，真实切栏，只看排版",
+    "capturedAt": "2026-10-05T09:07:09.021Z"
+  },
+  {
+    "id": "shop-affordable",
+    "file": "20-shop-affordable.jpg",
+    "notes": "有币可购买状态；未购买或检查扣币",
+    "capturedAt": "2026-10-05T09:07:10.640Z"
+  },
+  {
+    "id": "shop-sold",
+    "file": "21-shop-sold.jpg",
+    "notes": "构造两已售货位与初始攻击售罄，原商店渲染，不测交易",
+    "capturedAt": "2026-10-05T09:07:11.426Z"
+  },
+  {
+    "id": "sell-populated",
+    "file": "22-sell-populated.jpg",
+    "notes": "三种可出售真实卡的收购清单；仅查看，不交易",
+    "capturedAt": "2026-10-05T09:07:39.621Z"
+  },
+  {
+    "id": "egg-ready",
+    "file": "23-egg-ready.jpg",
+    "notes": "宠物蛋有币可孵化的视觉状态，未孵化或写档",
+    "capturedAt": "2026-10-05T09:10:21.135Z"
+  },
+  {
+    "id": "pet-after-state",
+    "file": "24-pet-after-state.jpg",
+    "notes": "按原孵化数据形状构造拥有新宠物/蛋已消耗的后态，未执行孵化事务",
+    "capturedAt": "2026-10-05T09:10:21.800Z"
+  },
+  {
+    "id": "pet-new-owned",
+    "file": "25-pet-new-owned.jpg",
+    "notes": "新宠物拥有后两行、当前选择/携带状态；数据构造，不测孵化事务",
+    "capturedAt": "2026-10-05T09:11:26.123Z"
+  },
+  {
+    "id": "pets-all-owned",
+    "file": "26-pets-all-owned.jpg",
+    "notes": "六宠物全拥有，含Lv5满级状态，原宠物页面",
+    "capturedAt": "2026-10-05T09:11:26.619Z"
+  },
+  {
+    "id": "pets-all-bottom",
+    "file": "27-pets-all-bottom.jpg",
+    "notes": "全拥有列表下部，只看长内容/按钮",
+    "capturedAt": "2026-10-05T09:11:27.171Z"
+  },
+  {
+    "id": "egg-all-owned",
+    "file": "28-egg-all-owned.jpg",
+    "notes": "全宠物拥有后的不可孵化说明，不点击孵化",
+    "capturedAt": "2026-10-05T09:11:27.835Z"
+  },
+  {
+    "id": "material-after",
+    "file": "29-material-after.jpg",
+    "notes": "使用一张后的剩余1张/木材储备1视觉状态，未执行材料事务",
+    "capturedAt": "2026-10-05T09:11:29.164Z"
+  },
+  {
+    "id": "story-segment-2",
+    "file": "30-story-segment-2.jpg",
+    "notes": "真实Ink第2段＋原nodeShell、按原故事模板传入画面内容，不执行记录",
+    "capturedAt": "2026-10-05T09:17:08.209Z"
+  },
+  {
+    "id": "story-segment-3",
+    "file": "31-story-segment-3.jpg",
+    "notes": "真实Ink第3段两结局选择＋原节点组件，只看长文/选项",
+    "capturedAt": "2026-10-05T09:17:09.147Z"
+  },
+  {
+    "id": "story-error-visual",
+    "file": "32-story-error-visual.jpg",
+    "notes": "按原记录失败分支样式与原文构造提示/重试按钮，仅美术，不注入或测试存储故障",
+    "capturedAt": "2026-10-05T09:17:10.178Z"
+  }
+]

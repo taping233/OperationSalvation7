@@ -1,0 +1,228 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	1 container viewport
+		2 button 背包 16/16 满, ID: bagBtnFloat
+			3 text 背包
+			4 text 16/16
+			225 text 满
+		6 container
+			7 text 冬境街区 · 遭遇
+			8 text 第 1 回合
+			9 text 你的行动 Lv.1 · 0/50 · 差 50 点
+			10 text 我方
+			11 container btSelf
+				12 container
+					13 text 白塔 你
+				14 container
+					15 text 30/30
+				16 container
+					17 image swords
+					18 text  4 · 
+					19 image shield
+					20 text  盾 2 · 
+					21 image plate
+					22 text  甲 8 · 格挡中
+				23 container
+					24 image blood
+					25 text  流血 2
+					26 image skull
+					27 text  中毒 3
+					28 image crystal
+					29 text  冰冻 1回合
+					30 image cross
+					31 text  沉默 1回合
+					32 image tools
+					33 text  破甲 1回合
+					34 image heart
+					35 text  禁疗 1回合
+					36 image fire
+					37 text  灼烧 2回合
+					38 image arrow
+					39 text  攻击降低 2回合
+			40 container
+				41 image runner
+				42 text 联邦巡防兵
+				43 text 4/4
+				44 image swords
+				45 text  4
+				46 image runner
+				47 text 联邦射手
+				48 text 3/3
+				49 image swords
+				50 text  5
+				51 image runner
+				52 text 封印肢体
+			53 container
+				54 container
+					55 image crystal
+					56 text  冰冻·无法行动
+				57 image bandit
+				58 text 反抗组织拾荒者
+				59 image swords
+				60 text 3
+				61 image arrow
+				62 text  军威
+				63 container
+					226 text 3/3
+				65 container
+					66 image blood
+					67 text  3
+					68 image skull
+					69 text  2
+					70 image crystal
+					71 text  1回合
+					72 image cross
+					73 text  1回合
+					74 image tools
+					75 text  1回合
+					76 image heart
+					77 text  1回合
+					78 image fire
+					79 text  2回合
+					80 image arrow
+					81 text  2回合
+				82 container
+					83 image crystal
+					84 text  冰冻·无法行动
+				85 image orc_jav
+				86 text 反抗组织掷弹兵
+				87 image swords
+				88 text 6
+				89 image arrow
+				90 text  军威
+				91 container
+					227 text 4/4
+				93 container
+					94 image blood
+					95 text  3
+					96 image skull
+					97 text  2
+					98 image crystal
+					99 text  1回合
+					100 image cross
+					101 text  1回合
+					102 image tools
+					103 text  1回合
+					104 image heart
+					105 text  1回合
+					106 image fire
+					107 text  2回合
+					108 image arrow
+					109 text  2回合
+				110 container
+					111 image crystal
+					112 text  冰冻·无法行动
+				113 image dragon
+				114 text 巨兽「荒渊」
+				115 image swords
+				116 text 7
+				117 image arrow
+				118 text  军威
+				119 container
+					228 text 40/40
+				121 container
+					122 image blood
+					123 text  3
+					124 image skull
+					125 text  2
+					126 image crystal
+					127 text  1回合
+					128 image cross
+					129 text  1回合
+					130 image tools
+					131 text  1回合
+					132 image heart
+					133 text  1回合
+					134 image fire
+					135 text  2回合
+					136 image arrow
+					137 text  2回合
+			138 text 敌方意图
+			139 container
+				140 image bolt
+				141 text 2 /2
+			142 button cards 搜刮
+				143 image cards
+				144 text  搜刮
+			145 button 还有另一栏手牌，当前第 1 栏，共 2 栏
+				146 image cards
+				147 text  第 1/2 栏
+			148 container
+				149 checkbox Description: 初始攻击 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					150 container
+						151 text 1
+						152 image 初始攻击
+						153 text 初始攻击
+					154 image swords
+				155 checkbox Description: 江湖救急 · 1 费。费用 1 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）, Value: 0
+					156 container
+						157 text 1
+						158 image 江湖救急
+						159 text 江湖救急
+					160 image heart
+				161 checkbox Description: 迅疾箭 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					162 container
+						163 text 1
+						164 image 迅疾箭
+						165 text 迅疾箭
+						166 image swords
+						167 text -1
+					168 image swords
+				169 checkbox Description: 格挡 · 1 费。费用 1 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）, Value: 0
+					170 container
+						171 text 1
+						172 image 格挡
+						173 text 格挡
+					174 image heart
+				175 checkbox Description: 连击箭 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					176 container
+						177 text 1
+						178 image 连击箭
+						179 text 连击箭
+						180 image swords
+						181 text -1
+					182 image swords
+				183 checkbox Description: 破甲箭 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					184 container
+						185 text 1
+						186 image 破甲箭
+						187 text 破甲箭
+						188 image swords
+						189 text -1
+					190 image swords
+				191 checkbox Description: 射击 · 0 费。费用 0 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					192 container
+						193 text 0
+						194 image 射击
+						195 text 射击
+						196 image crystal
+						197 text 2
+					198 image swords
+				199 checkbox (disabled) Description: 铸甲 · 1 费。 无法打出：手牌中的「装备」卡牌不足——需要 1 张，现有 0 张, Value: 0
+					200 container
+						201 text 1
+						202 image 铸甲
+						203 text 铸甲
+				204 checkbox Description: 嗜血刃 · 2 费。费用 2 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					205 container
+						206 text 2
+						207 image 嗜血刃
+						208 text 嗜血刃
+						209 image swords
+						210 text +2
+					211 image swords
+			212 container 战术操作
+				213 button bag 背包
+					214 image bag
+					215 text  背包
+				216 button runner 撤离（判负）
+					217 image runner
+					218 text  撤离（判负）
+				219 button gear 设置
+					220 image gear
+					221 text  设置
+				222 button skip 结束回合
+					223 image skip
+					224 text  结束回合
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/

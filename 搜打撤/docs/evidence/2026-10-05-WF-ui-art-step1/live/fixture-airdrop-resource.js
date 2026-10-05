@@ -1,0 +1,1 @@
+(async()=>{const q=window.__uiArtQA;q.reset();q.game.visited={};q.game.layerData[0].logical[0].def={type:'resource'};await q.flow.reenterCell();return true;})()

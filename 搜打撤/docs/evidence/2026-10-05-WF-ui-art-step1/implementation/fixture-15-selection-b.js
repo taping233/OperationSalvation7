@@ -1,0 +1,1 @@
+(()=>{const s=document.createElement('style');s.id='artVariantB';s.textContent="#overlay .card.discover .bt-hand .hs-card{background:var(--cf2)!important;box-shadow:0 0 0 1px var(--cf3)!important;}#overlay .card.discover .bt-hand .hs-card::before{background:#263640!important;box-shadow:none!important;}";document.head.append(s);return true;})()

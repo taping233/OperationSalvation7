@@ -1,0 +1,1 @@
+(()=>{const q=window.__ArtVisMore;q.reset();q.scenes.openChestsOnCell([{kind:'large'}],'受控宝箱');return true;})()

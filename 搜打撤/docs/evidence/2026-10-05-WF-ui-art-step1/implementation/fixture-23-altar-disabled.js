@@ -1,0 +1,1 @@
+(async()=>{const q=window.__ArtVisMore;q.reset();const altar=await import('/src/run/game.run.altar.js');altar.openAltarRitual({});return true;})()

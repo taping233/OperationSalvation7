@@ -1,0 +1,1 @@
+(async()=>{const q=__ArtVisMore;await q.ordinary(['初始攻击','格挡','镭射']);const all=SDT.Cards.all();q.runtime.set$discovering({options:['格挡','镭射','深渊主宰·妲莉薇特'].map(name=>({...all.find(c=>c.name===name)}))});SDT.Battle.commands.refreshView();return true;})()

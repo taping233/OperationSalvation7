@@ -1,0 +1,49 @@
+{
+  "capturedAt": "2026-10-05T10:11:55.348Z",
+  "head": "e87034b835f094c2cb7a0c3b86dc70d56c74db5f",
+  "remoteRefreshed": false,
+  "tests": {
+    "report": "docs/evidence/2026-10-05-WF-ui-art-implement/2026-10-05T10-08-37.592Z-1f897f9d.json",
+    "files": 7,
+    "passed": 87
+  },
+  "jsSyntax": true,
+  "cssParsed": true,
+  "cssRules": 36,
+  "sourceFingerprint": [
+    {
+      "path": "game/css/ordinary-polish.css",
+      "sha256": "d11ff05410a103d531df0962e17404ab1fbfb3b519d3bb4391a0481996e8fd0b",
+      "snapshotSha256": "d11ff05410a103d531df0962e17404ab1fbfb3b519d3bb4391a0481996e8fd0b"
+    },
+    {
+      "path": "game/css/cover-remaining.css",
+      "sha256": "95dd3b87e77d8f9644596712d05f3013bd4033b3e7e7c5962c0488f14afcff25",
+      "snapshotSha256": "95dd3b87e77d8f9644596712d05f3013bd4033b3e7e7c5962c0488f14afcff25"
+    },
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "sha256": "c8e7ae5217de2dfcb7ee60139eff9ff3866e305562b59fe581ad3bc2f180bde9",
+      "snapshotSha256": "c8e7ae5217de2dfcb7ee60139eff9ff3866e305562b59fe581ad3bc2f180bde9"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "sha256": "8651dc3e1ef2724660338b226d8eadc319ad79dd3d804a5c31a85d9aaccaa7e0",
+      "snapshotSha256": "8651dc3e1ef2724660338b226d8eadc319ad79dd3d804a5c31a85d9aaccaa7e0"
+    }
+  ],
+  "serviceReleased": true,
+  "ownBrowserClosed": true,
+  "explicitExclusions": [
+    "完整流程",
+    "存档",
+    "整备拖拽",
+    "地图拖动/缩放",
+    "全面键盘操作",
+    "性能",
+    "其他窗口尺寸"
+  ],
+  "localLinksChecked": 33,
+  "largeFiles": [],
+  "allLocalLinksExist": true
+}

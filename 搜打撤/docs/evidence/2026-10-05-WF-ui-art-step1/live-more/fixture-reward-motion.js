@@ -1,0 +1,1 @@
+(()=>{const q=window.__ArtVisMore;q.reset();const c=window.SDT.Cards.all().find(c=>c.name==='镭射');window.SDT.UI.showCardReward(c,'视觉检查：普通奖励演出');return true;})()

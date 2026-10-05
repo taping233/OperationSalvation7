@@ -1,0 +1,1 @@
+(()=>{const q=window.__ArtVisMore;q.reset(['铜币','金币','钻石']);q.game.coins=30;q.scenes.openShop('visual-stock');return true;})()

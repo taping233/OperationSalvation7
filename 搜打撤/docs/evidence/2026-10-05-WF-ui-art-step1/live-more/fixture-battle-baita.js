@@ -1,0 +1,1 @@
+window.__ArtVisMore.ordinary(['初始攻击','镭射','格挡'],'baita')

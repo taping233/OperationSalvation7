@@ -1,0 +1,1 @@
+(async()=>{const q=window.__uiArtQA;q.reset(['初始攻击','初始攻击','初始攻击','初始攻击','初始攻击']);const b=q.session.MAP.altar.bosses[0];await window.SDT.BattleLoader.start(q.game,q.session.scaledEnemy(b),{isBoss:true,returnTo:'altar',name:b.name});window.SDT.Battle.commands.confirmDeck();return true;})()

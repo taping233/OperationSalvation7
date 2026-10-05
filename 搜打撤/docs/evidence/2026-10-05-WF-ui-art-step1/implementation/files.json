@@ -1,0 +1,625 @@
+{
+  "generatedAt": "2026-10-05T10:11:55.339Z",
+  "files": [
+    {
+      "path": "01-bag-stable.jpg",
+      "bytes": 80903,
+      "sha256": "2239bdcfc8e43d664178e354049f7eae26c8f2dfb39c6f117ab41c319bd8db62"
+    },
+    {
+      "path": "01-bag.jpg",
+      "bytes": 69085,
+      "sha256": "093e014c12782f70eb432130219d627adcc437773ac6c31b52ac7debd10a4683"
+    },
+    {
+      "path": "02-bag-final.jpg",
+      "bytes": 83724,
+      "sha256": "418468d2121cff645a948fcad332451a7ae9afa7610e8461efff3951296eb014"
+    },
+    {
+      "path": "03-egg.jpg",
+      "bytes": 39999,
+      "sha256": "7a8c1e163fbed59a4179b50ab21d97ad72b624546aaac16b0b07a8925b659614"
+    },
+    {
+      "path": "04-extract-empty.jpg",
+      "bytes": 40755,
+      "sha256": "6ec037b15f138033f59b98e87fdd0fb2e015967b05baf205e520c657dc2fad47"
+    },
+    {
+      "path": "05-extract-populated.jpg",
+      "bytes": 62103,
+      "sha256": "304cd90531af541e398eedd4d291bc574f52c0f1aa1506e3af24b8ce4691d232"
+    },
+    {
+      "path": "06-shop-sold.jpg",
+      "bytes": 94765,
+      "sha256": "861db5823a26de56cdf7f33701d4028551f872fcc6bc8c986b40bc93f605e899"
+    },
+    {
+      "path": "07-boss-00.jpg",
+      "bytes": 238123,
+      "sha256": "95b75523e39811871ef06bb1d3301e68c1582271d0a821e3aef3a0ad2c25cf38"
+    },
+    {
+      "path": "07-boss-01.jpg",
+      "bytes": 237969,
+      "sha256": "135c773b4b06463ae191115ddeb8651efa06e59c79feb2bbe630d1e279750834"
+    },
+    {
+      "path": "07-boss-02.jpg",
+      "bytes": 237959,
+      "sha256": "0bf58354d6beba2b00c63ec9f39158dc5d801ba7d9a2b37791852356f94550f6"
+    },
+    {
+      "path": "07-boss-03.jpg",
+      "bytes": 16687,
+      "sha256": "bad60a3b0de0fb6f5ee03a2b8fb877d1ec46ef5339fed7b0f8eeddf4a8bdde4c"
+    },
+    {
+      "path": "07-boss-04.jpg",
+      "bytes": 17310,
+      "sha256": "a198cd4ab711d18c35cec1fffa93de11d395c3e1e2aff39786f1a871b3bb94eb"
+    },
+    {
+      "path": "07-boss-05.jpg",
+      "bytes": 17981,
+      "sha256": "68db421d25f87b0c08b4e72bb87de232426b102550aa22b4353daded33f107c9"
+    },
+    {
+      "path": "07-boss-06.jpg",
+      "bytes": 18760,
+      "sha256": "3ad45053399268f3ffff55f24107e71857eee1f71c4c2be02ace056dc95b479c"
+    },
+    {
+      "path": "07-boss-07.jpg",
+      "bytes": 107391,
+      "sha256": "c1dc708f7c884a6a05ec0770aac351f7c675b7bf8cedb96e53d94506a081c60d"
+    },
+    {
+      "path": "07-boss-08.jpg",
+      "bytes": 113743,
+      "sha256": "81a8aaddaaf18e6020312bdb257c25ec2cd3dce68b007a54f9f5b82a08943dc4"
+    },
+    {
+      "path": "07-boss-09.jpg",
+      "bytes": 117961,
+      "sha256": "c3c8eb322920f501d68bd1351ea39e00a5a92581b69d0f907caa4f2d45eb6bde"
+    },
+    {
+      "path": "07-boss-10.jpg",
+      "bytes": 122675,
+      "sha256": "ce6ad8615b5d3e12025e641e265be1b4872400896e0ff9441660e42cd0db590e"
+    },
+    {
+      "path": "07-boss-11.jpg",
+      "bytes": 123307,
+      "sha256": "a72a22cc9a89465d1031b43b4b913da8b20a484df5cee8761dbf6b185b2ce338"
+    },
+    {
+      "path": "07-boss-12.jpg",
+      "bytes": 130051,
+      "sha256": "4faa1273a5a0c53b5a635cff51566c3b8aaabd43fd828878c0b827364d558be4"
+    },
+    {
+      "path": "07-boss-13.jpg",
+      "bytes": 108239,
+      "sha256": "d90ceafa97727a45a1f4eb3ca1dcaf36db7a5d6190026437b594f92626258004"
+    },
+    {
+      "path": "07-boss-14.jpg",
+      "bytes": 65056,
+      "sha256": "00bdbf7ffcc240a4817c6489401aa63a493edcc752fda63143146fe974cdff0c"
+    },
+    {
+      "path": "07-boss-15.jpg",
+      "bytes": 93020,
+      "sha256": "61d83930f46787322b47a55f337fa05576a5747aa2149775e615962e8c2ccf1f"
+    },
+    {
+      "path": "07-boss-16.jpg",
+      "bytes": 95025,
+      "sha256": "e7ece3937534662fece34066c7c3cbe23c0f6549f3e691ae4be2ff5eecb0bdd7"
+    },
+    {
+      "path": "07-boss-17.jpg",
+      "bytes": 95226,
+      "sha256": "98d35ec37bc0a618b74ec8f1a13ff1a7882d5362e738b3b0b9aefdd1a7ec8db3"
+    },
+    {
+      "path": "07-boss-18.jpg",
+      "bytes": 95297,
+      "sha256": "657cdba0d9ee7b6eb4255eb1ecccc2f7173cc3823ed8e347eb3a987abafd7886"
+    },
+    {
+      "path": "07-boss-19.jpg",
+      "bytes": 95235,
+      "sha256": "212a42521bfbee14516d3ee872545170c927134e750ef4e3f2b923215de6c273"
+    },
+    {
+      "path": "07-boss-20.jpg",
+      "bytes": 95230,
+      "sha256": "ba593e8e7b7ab4ac488b4557621dbb0d4ee78fe4c65790cd27d5cd921cfcd7db"
+    },
+    {
+      "path": "07-boss-21.jpg",
+      "bytes": 119816,
+      "sha256": "ea583952e4b013a132e4e5bb13e2ee6be59065904ed485e36d595816b5a58197"
+    },
+    {
+      "path": "07-boss-22.jpg",
+      "bytes": 120386,
+      "sha256": "5ef9e9e82d8d69cc714fd66407ba849356c412f04bd91e87ee4286aac23b42f8"
+    },
+    {
+      "path": "07-boss-23.jpg",
+      "bytes": 120325,
+      "sha256": "5d96bc933d12c1050205163aa8e1c833dac74c6ae6ff23f56c14d540c21da062"
+    },
+    {
+      "path": "07-boss-24.jpg",
+      "bytes": 120239,
+      "sha256": "86ea85ef9f7795e4144f5c92e5d6fdd91178d5536bbc51a491540ac6e31c042c"
+    },
+    {
+      "path": "07-boss-25.jpg",
+      "bytes": 120641,
+      "sha256": "3783331a287307331210047c132c73614b6ef8ad2aaf0a7045b040194d9c7d30"
+    },
+    {
+      "path": "07-boss-26.jpg",
+      "bytes": 121199,
+      "sha256": "1e95d6789551280cfade9ccb2dce1b1a0b826b36bfef1d817bccd98778794254"
+    },
+    {
+      "path": "07-boss-27.jpg",
+      "bytes": 121261,
+      "sha256": "6b803b469daa1fd96fb50fd77f4da754dd7f0edade2fd55cb11fa24f2d181d30"
+    },
+    {
+      "path": "07-boss-28.jpg",
+      "bytes": 121205,
+      "sha256": "36a871f6b3f35d72c7946e7b586da9d8a710b08a28896a6a1fe6fef2de2f49c2"
+    },
+    {
+      "path": "07-boss-29.jpg",
+      "bytes": 121328,
+      "sha256": "7441c6c1b42c22fda92e869efc9f59e3d99cc61763ced23f2db18a009138b3d5"
+    },
+    {
+      "path": "07-boss-30.jpg",
+      "bytes": 121190,
+      "sha256": "dc6469df79f7f87f275bd0295e97d8b2ec8e6f162e3e6ea7961cbe8982a030a2"
+    },
+    {
+      "path": "07-boss-31.jpg",
+      "bytes": 121184,
+      "sha256": "446148173dd2ba3c62b1e697a1253c5f7eaa893875a75a1d58a0dc6a851eae50"
+    },
+    {
+      "path": "07-boss-32.jpg",
+      "bytes": 121301,
+      "sha256": "c2090527493865145e2ea1a2a038a694da8ed83e6c24238b2459e9663cabeca3"
+    },
+    {
+      "path": "07-boss-33.jpg",
+      "bytes": 124785,
+      "sha256": "9c2dcdc5ce3cd2764ae95c270360df36b7f84504d2e34eca00b0e3cee34960c8"
+    },
+    {
+      "path": "07-boss-34.jpg",
+      "bytes": 137158,
+      "sha256": "cc7b2fec0c9668272210c341ae880ab3134cc980e96c5330f893394fff7edfdc"
+    },
+    {
+      "path": "07-boss-35.jpg",
+      "bytes": 158771,
+      "sha256": "ef83b18aa6098df2b107a09208195f18e9aa47709efd749c7b10253d88f67227"
+    },
+    {
+      "path": "07-boss-36.jpg",
+      "bytes": 200538,
+      "sha256": "4eea7086b30b0f87a8d4c5a9af550d23b35dbafd39d5b96caac995fe006e3454"
+    },
+    {
+      "path": "07-boss-37.jpg",
+      "bytes": 207344,
+      "sha256": "0179eb7d2dd6a54ecfedef25056425cf7460d019c5204dbe75a95e0c7c756014"
+    },
+    {
+      "path": "07-boss-38.jpg",
+      "bytes": 214593,
+      "sha256": "92aa288db8274d0d95955ad193b652291b6443c537e3cce24bfea561609c8309"
+    },
+    {
+      "path": "07-boss-39.jpg",
+      "bytes": 218387,
+      "sha256": "a0047f6c92eeb610abcf772270320c394227a2cda366c4d08bb094909e57417c"
+    },
+    {
+      "path": "07-boss-40.jpg",
+      "bytes": 219132,
+      "sha256": "4f95ab67749d6c802c735f0a9becda73619e7f4f31d7d7a4ef944dcbd2b99be9"
+    },
+    {
+      "path": "07-boss-41.jpg",
+      "bytes": 219080,
+      "sha256": "b0bdfe3ef43340393e5d769956322b1e8897ed0acb2bc7a8eeaed85f5d210fcb"
+    },
+    {
+      "path": "07-boss-42.jpg",
+      "bytes": 219029,
+      "sha256": "5cb89a886afb8299d8a71d06aecba9034a2385fe5110535bee608c77f93486a0"
+    },
+    {
+      "path": "07-boss-43.jpg",
+      "bytes": 218925,
+      "sha256": "9d640fecb04be0297d556fc76cb521f980294daabb96e31891828a9d4ce8b1d7"
+    },
+    {
+      "path": "07-boss-44.jpg",
+      "bytes": 219102,
+      "sha256": "f49245d4438db9d1fd5f67b42bfac5ee0d0f3001bebd456964c78e81cc38840e"
+    },
+    {
+      "path": "07-boss-45.jpg",
+      "bytes": 219190,
+      "sha256": "c311337197b28764ee26cdb0fbcddb877993a8f3d5d48c9a583bc9766727b520"
+    },
+    {
+      "path": "07-boss.json",
+      "bytes": 13322,
+      "sha256": "f69407951b5d87eb528e0a60217d211be84898c7e6f64be00ea0c343389820cb"
+    },
+    {
+      "path": "08-battle-stable.jpg",
+      "bytes": 118820,
+      "sha256": "0c12da4756aaeb162ed3f5aa513ce3b7e3930afd263be18123a63f5ae02d4bfd"
+    },
+    {
+      "path": "09-allies-final.jpg",
+      "bytes": 153924,
+      "sha256": "5524fec9f823f0bcd4f7114082f2cd5d37571eae171c266ce9b214ac11338cc3"
+    },
+    {
+      "path": "09-allies.jpg",
+      "bytes": 154321,
+      "sha256": "7d7e0b28a0d126dd4560b589a5fdab4e29d894095b588231abf81a40ba3bccf9"
+    },
+    {
+      "path": "10-extract-final.jpg",
+      "bytes": 66682,
+      "sha256": "834c32343bd930147ee28f257b1058cfa978762f2e060bb6ce3bb9bd164fe338"
+    },
+    {
+      "path": "11-material.jpg",
+      "bytes": 40272,
+      "sha256": "5079d22723f708a6a5061cc77ff16d062914a62da9d3ab2d3bf865655d5db145"
+    },
+    {
+      "path": "12-card-sample-a.jpg",
+      "bytes": 101449,
+      "sha256": "e21b721efea3ed3002b608f79a3652acae79405df17249d9bf6155d4c72fde85"
+    },
+    {
+      "path": "13-card-a-final.jpg",
+      "bytes": 104914,
+      "sha256": "d0a0a5b52186320dbdde3e0694a1cdbaf7b0e1498ac62782da81f76ae52b204c"
+    },
+    {
+      "path": "14-selection-a.jpg",
+      "bytes": 92622,
+      "sha256": "fd2c71013be877d38acd2b7f3cf965a3bb6d21bcf36b800cbb493466331b4af1"
+    },
+    {
+      "path": "15-selection-b.jpg",
+      "bytes": 92598,
+      "sha256": "577ef66103e427258fe8793217b80e3672e3dbb9be705e679323b5396b8199af"
+    },
+    {
+      "path": "16-selection-final.jpg",
+      "bytes": 92546,
+      "sha256": "12abb15a07cc8cfc92bccd42a24255ac713e5a1aa8301c8ff30c803ba90adcf5"
+    },
+    {
+      "path": "17-selection-a-final.jpg",
+      "bytes": 92126,
+      "sha256": "6bac54105c3c6544aef1f8558d3fc91d36feeedd6a803ebc852e65c40804f7e8"
+    },
+    {
+      "path": "18-discovery.jpg",
+      "bytes": 91521,
+      "sha256": "9fadc0e039077c4f2550353be6059497c806ea7b43dadde043b54cce17e0a350"
+    },
+    {
+      "path": "19-card-detail.jpg",
+      "bytes": 53364,
+      "sha256": "83cfeefd4da55bc07397ab752c141f512bc6ee689849e8826f6c237f4c11757a"
+    },
+    {
+      "path": "20-card-detail-final.jpg",
+      "bytes": 61869,
+      "sha256": "8141222633addbc026e4a3c2f4baaba071d54c650f4f3aa1eac2390d83772440"
+    },
+    {
+      "path": "21-detail-return.jpg",
+      "bytes": 89619,
+      "sha256": "540697af94452f68097f5e85ca0ba7cf8d78b92008ea5448f32505e24ae5a5b0"
+    },
+    {
+      "path": "22-result-success.jpg",
+      "bytes": 74942,
+      "sha256": "a008cf4c8d7b52d4b7ee516ce133cf8881f47f15f690477a0bb96f53eea3d8f9"
+    },
+    {
+      "path": "23-altar-disabled.jpg",
+      "bytes": 103092,
+      "sha256": "978f68a1542aed598598fa9ecc90d0befe8ad394233e76b536aafccc11bd2d6f"
+    },
+    {
+      "path": "24-pouch-full.jpg",
+      "bytes": 56238,
+      "sha256": "b932f6dc2e94ad27f31ac9e8b12bdaa225e63043783149c5130341ee76d46d5d"
+    },
+    {
+      "path": "25-pearl-full.jpg",
+      "bytes": 56065,
+      "sha256": "58c344bcbe5acf5b53f8e12caecbac26c471a40ab65320ef764b33da179f9173"
+    },
+    {
+      "path": "26-deck.jpg",
+      "bytes": 42831,
+      "sha256": "c6747a21a7e47a6ca8af6307880fa19f4a833771287df77479486aa82e7bc848"
+    },
+    {
+      "path": "27-deck-bottom.jpg",
+      "bytes": 42723,
+      "sha256": "d7f9622f8403da3795fb284352f90c36aa7e2e883c4a9158601cbd3f756c8640"
+    },
+    {
+      "path": "28-grave.jpg",
+      "bytes": 45627,
+      "sha256": "c6f06f66fe51afab54aae2a3bf374cf1d77e31a82f834e48e9f8619006e77f35"
+    },
+    {
+      "path": "29-grave-bottom.jpg",
+      "bytes": 45496,
+      "sha256": "43231cd6a46575107f9ea4f7ac2df9a08e890cec72c336d9e3949fe1bc92b740"
+    },
+    {
+      "path": "30-chest.jpg",
+      "bytes": 41072,
+      "sha256": "d8f65294f4e46b68876c475e11c860b32ac154738a55d97a2bbdbbc0688c99fe"
+    },
+    {
+      "path": "31-chest-final.jpg",
+      "bytes": 77966,
+      "sha256": "47594c75eb0bf07ebd3cc5c2316f54af542edd477037b59bd36513ce4d037feb"
+    },
+    {
+      "path": "32-extract-empty-final.jpg",
+      "bytes": 47715,
+      "sha256": "ae37dbd37d44cbbd9bf121049496c1653b9a813168eb01dd153afaf9a576d4fb"
+    },
+    {
+      "path": "33-six-card-final.jpg",
+      "bytes": 93101,
+      "sha256": "7bd1fc66bbecb779df6242336f69af6f27f75040bd498d793dff79beee27a13b"
+    },
+    {
+      "path": "34-detail-final.jpg",
+      "bytes": 64597,
+      "sha256": "3035dee2cc49f12d587637af6e8d1d1bf18ea8beb58dfa1b58006619d8b7ae4f"
+    },
+    {
+      "path": "35-dock-restored.jpg",
+      "bytes": 78445,
+      "sha256": "bf5d83b0e188f6d9512289285911b6d20b5a0d4a85795574ae4bfd34bd5f604c"
+    },
+    {
+      "path": "before/game/css/card-v3.css",
+      "bytes": 12518,
+      "sha256": "8e3798847433d2316ff430c0c71abce6664934416d7e73f7dd096ddc997c0c57"
+    },
+    {
+      "path": "before/game/css/cover-battle-shell.css",
+      "bytes": 24012,
+      "sha256": "65a982ca125416ed6a64bd948646cc2689a96cbf6e15db8a9f97aea604f1dc4d"
+    },
+    {
+      "path": "before/game/css/cover-details.css",
+      "bytes": 11003,
+      "sha256": "bdc072968abb7b5ef70b51583f3e41d4d9418a655de7ee3bb5736b0b9f8abcda"
+    },
+    {
+      "path": "before/game/css/cover-remaining.css",
+      "bytes": 366,
+      "sha256": "cd82e174d2a781bffbf275df084be1d756c6fb1f7f1657cf6c0ab0058cb02d4e"
+    },
+    {
+      "path": "before/game/css/cover-run.css",
+      "bytes": 27699,
+      "sha256": "36e67a42225159b4320aba1d8674a945701f8b381205ea73032c59e886a4a142"
+    },
+    {
+      "path": "before/game/src/battle/view/battle.layers.js",
+      "bytes": 46336,
+      "sha256": "e9ff86fe575dec41d755e350f3c2e8f3d2996eb9f417e9a9e1013a11e70ab83e"
+    },
+    {
+      "path": "before/game/src/battle/view/battle.view.js",
+      "bytes": 44632,
+      "sha256": "0176cbe9aa4562ece056541b9cf4aa1763479e184d04a07bbd4fe905e8800828"
+    },
+    {
+      "path": "before/game/src/core/art.js",
+      "bytes": 32887,
+      "sha256": "917fa8978c06605664cc0c9e7aa57acfab745cb94973d07a5f3f6ed20c639f77"
+    },
+    {
+      "path": "before/game/src/ui/cover-context.js",
+      "bytes": 2753,
+      "sha256": "c16729750acf44c22ee0ecbcbd94a313837283863daa497b68877e9c0cb415b8"
+    },
+    {
+      "path": "browser-summary.json",
+      "bytes": 989,
+      "sha256": "c5f242bbb08d3b70697c952d7444ee5b243e8ebc045e08207b633b5c93023e24"
+    },
+    {
+      "path": "card-geometry.json",
+      "bytes": 398,
+      "sha256": "37324469498198313a43f73d548aa847853896302e67891d2af149004cc1cd9d"
+    },
+    {
+      "path": "fixture-03-egg.js",
+      "bytes": 273,
+      "sha256": "487718260f5fceeca8df2ac81d329ac1c2ce784cdadc54895b7fdbc9341a4ce5"
+    },
+    {
+      "path": "fixture-04-extract-empty.js",
+      "bytes": 4552,
+      "sha256": "84c91efa4375493b019fefdd31a3a845280d8ad5f3a204ddfe7758189409e4bf"
+    },
+    {
+      "path": "fixture-05-extract-populated.js",
+      "bytes": 4578,
+      "sha256": "cdfb229c71b7275e86ca6d84ecdfb8b58315e27872c585811f8f17d6555725ce"
+    },
+    {
+      "path": "fixture-06-shop-sold.js",
+      "bytes": 395,
+      "sha256": "2b3e2ae89c16c307e0eea3fee8833fde246414e10a9a9dd1e79180b9c09e494a"
+    },
+    {
+      "path": "fixture-09-allies-final.js",
+      "bytes": 187,
+      "sha256": "6b7916663d6ab384ebe19aa7356815240477aa6291889ac0374fe8b87e4c3c74"
+    },
+    {
+      "path": "fixture-09-allies.js",
+      "bytes": 1502,
+      "sha256": "2b8e6c2ea74ba7278766cdd4c89f70bd84c84619c297ea47d7e9ccf3cc43620f"
+    },
+    {
+      "path": "fixture-10-extract-final.js",
+      "bytes": 4578,
+      "sha256": "cdfb229c71b7275e86ca6d84ecdfb8b58315e27872c585811f8f17d6555725ce"
+    },
+    {
+      "path": "fixture-11-material.js",
+      "bytes": 218,
+      "sha256": "3a4603181e8665a000da6867faeb5e21c64e0d13b1b3719c1c8fcbd24f8428d3"
+    },
+    {
+      "path": "fixture-12-card-sample-a.js",
+      "bytes": 700,
+      "sha256": "53039ca8e33245b3515cbd58cb37e539a39916c57b791638bc8091b40c4010de"
+    },
+    {
+      "path": "fixture-13-card-a-final.js",
+      "bytes": 768,
+      "sha256": "082fe4047876c91e84fb68c5b8cd621590f29fd45cb2ad410a847a5709afb479"
+    },
+    {
+      "path": "fixture-14-selection-a.js",
+      "bytes": 609,
+      "sha256": "cfbd6dc9156777f1cf0a6858868b5e4a425017af41a0d46649357c12bba42890"
+    },
+    {
+      "path": "fixture-15-selection-b.js",
+      "bytes": 345,
+      "sha256": "2070e52b0e125e35d5289e00732bbe7ea3d9592ef2a0987b20b7afb6c9c14eee"
+    },
+    {
+      "path": "fixture-17-selection-a-final.js",
+      "bytes": 609,
+      "sha256": "cfbd6dc9156777f1cf0a6858868b5e4a425017af41a0d46649357c12bba42890"
+    },
+    {
+      "path": "fixture-18-discovery.js",
+      "bytes": 329,
+      "sha256": "60ca3e0f52e2ffb21bf7863d0a194e87f8298c0a43bc687d3d6597bfb4167537"
+    },
+    {
+      "path": "fixture-22-result-success.js",
+      "bytes": 2519,
+      "sha256": "c8e4d5c648331eb77b1e379d1532691f4b886f879bfba330485559c2e9eccdb8"
+    },
+    {
+      "path": "fixture-23-altar-disabled.js",
+      "bytes": 146,
+      "sha256": "12bbeaeabe19713818974c49ba516a5307c3cebe4af180d09166a5e292e9027b"
+    },
+    {
+      "path": "fixture-26-deck.js",
+      "bytes": 148,
+      "sha256": "c30dc8c20cebd6cd008e6e2646f98e4de20a5bb4ddf85d97903a7280c0a90e78"
+    },
+    {
+      "path": "fixture-28-grave.js",
+      "bytes": 138,
+      "sha256": "62e52e0070fde0f759bd8b85285f569971e16da8c784691d927b2f1fd330876a"
+    },
+    {
+      "path": "fixture-30-chest.js",
+      "bytes": 119,
+      "sha256": "29a728239bd7cc38b46e331175b35f69687d53bff4f0f1deb164ea1ea8661cf3"
+    },
+    {
+      "path": "fixture-32-extract-empty-final.js",
+      "bytes": 4552,
+      "sha256": "84c91efa4375493b019fefdd31a3a845280d8ad5f3a204ddfe7758189409e4bf"
+    },
+    {
+      "path": "fixture-33-six-card-final.js",
+      "bytes": 609,
+      "sha256": "cfbd6dc9156777f1cf0a6858868b5e4a425017af41a0d46649357c12bba42890"
+    },
+    {
+      "path": "fixture-extract-empty.js",
+      "bytes": 4552,
+      "sha256": "84c91efa4375493b019fefdd31a3a845280d8ad5f3a204ddfe7758189409e4bf"
+    },
+    {
+      "path": "fixture-extract-populated.js",
+      "bytes": 4578,
+      "sha256": "cdfb229c71b7275e86ca6d84ecdfb8b58315e27872c585811f8f17d6555725ce"
+    },
+    {
+      "path": "fixture-helpers.js",
+      "bytes": 805,
+      "sha256": "acb64b7aa2887aac9f0767753c33f63d08ca2a61bdc065686ce1e051a7f97814"
+    },
+    {
+      "path": "fixture-init.js",
+      "bytes": 1100,
+      "sha256": "72f216bd82173cee23fbcc6170b0709111306f21388c0fff2ffc869e665fb01e"
+    },
+    {
+      "path": "fixture-result-success.js",
+      "bytes": 2519,
+      "sha256": "c8e4d5c648331eb77b1e379d1532691f4b886f879bfba330485559c2e9eccdb8"
+    },
+    {
+      "path": "issues.json",
+      "bytes": 2017,
+      "sha256": "8eae5838997343017eb97dcd1a8886d37b142f2ffb134d7d73967f27421050d4"
+    },
+    {
+      "path": "observations.json",
+      "bytes": 6763,
+      "sha256": "dc29a8e5a5d2f153746acd1be95dc132aef40e5aaf13621951892e26d960ca84"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5832,
+      "sha256": "38e917a243a299719382ea453bcab7b969a2c9ce79b79aba5693acd7bc7db5ec"
+    },
+    {
+      "path": "task.json",
+      "bytes": 4524,
+      "sha256": "053f688be0fd8f62dedf0753415d1febbfb28c08d6e7937928b2bcc9e510d8be"
+    }
+  ]
+}

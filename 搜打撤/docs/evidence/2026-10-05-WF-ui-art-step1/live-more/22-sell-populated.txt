@@ -1,0 +1,83 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	1 container viewport
+		2 button 背包 3/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 3/16
+		5 container
+			6 button Description: 关闭, ID: ovCloseX
+			7 container
+				8 text ACQUISITION DESK // 08
+				9 heading cards 收购台 , Value: 2
+					10 image cards
+					11 text  收购台 
+					12 button
+				13 text 只收带有“可出售”备注的卡牌，其他卡不会出现在这里。
+				14 button bag 背包
+					15 image bag
+					16 text 背包
+				17 text 当前金币
+				18 text 30
+				19 text 币
+				20 text 可出售
+				21 text 3
+				22 text 张
+				23 container
+					24 text MERCHANT LEDGER
+					25 heading 商队收购单, Value: 3
+						26 text 商队收购单
+					27 text 本页可换取 28 币
+					28 definition list
+						29 container 持有卡牌
+							30 text 持有卡牌
+						31 text 3 张
+						32 container 符合条件
+							33 text 符合条件
+						34 text 3 张
+						35 container 当前金币
+							36 text 当前金币
+						37 text 30 币
+					38 text 收购规则 仅识别带“可出售”备注的货币与宝石类卡牌。点击“确认卖出”后立即成交，价格等于卡面币值。
+				39 container 可出售卡牌
+					40 text APPRAISAL LIST
+					41 heading 待估物清单, Value: 3
+						42 text 待估物清单
+					43 text 3 件
+					44 container
+						45 text 0
+						46 image 铜币
+						47 text 铜币
+						48 text 资源 · 古朴
+						49 text 可出售。
+						50 container
+							51 image coin
+							52 text 3
+						53 text 商队估值 +3 币
+						54 button 确认卖出
+					55 container
+						56 text 0
+						57 image 金币
+						58 text 金币
+						59 text 资源 · 史诗
+						60 text 贵重货币，可出售。
+						61 container
+							62 image coin
+							63 text 9
+						64 text 商队估值 +9 币
+						65 button 确认卖出
+					66 container
+						67 text 0
+						68 image 钻石
+						69 text 钻石
+						70 text 资源 · 传说
+						71 text 贵重货币，可出售。
+						72 container
+							73 image coin
+							74 text 16
+						75 text 商队估值 +16 币
+						76 button 确认卖出
+				77 button arrow 返回商店
+					78 image arrow
+					79 text 返回商店
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/

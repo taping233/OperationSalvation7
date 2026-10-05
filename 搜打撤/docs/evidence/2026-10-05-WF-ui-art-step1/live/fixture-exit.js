@@ -1,0 +1,1 @@
+(()=>{if(window.sdtDesktop?.isDesktop)throw Error('不退出桌面应用');const q=window.__uiArtQA;q.game.state='idle';window.SDT.UI.hideOverlay();q.session.showTitle();q.session.quitGame();return true;})()

@@ -1,0 +1,63 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	1 container viewport
+		2 button 背包 24/25, ID: bagBtnFloat
+			3 text 背包
+			4 text 24/25
+		5 container
+			6 text 冬核深处 · 首脑遭遇
+			7 text 第 1 回合
+			8 text 你的行动 Lv.1 · 0/50 · 差 50 点
+			9 container
+				10 image cards
+			11 text 0 牌库
+			12 container
+				13 image cards
+			14 text 0 弃牌
+			15 container
+				16 image cards
+			17 image skull
+			18 text 0 消耗
+			19 text 我方
+			20 container btSelf
+				21 image 黑像
+				22 container
+					23 text 黑像 你
+				24 container
+					25 text 30/30
+				26 container
+					27 image swords
+					28 text  4
+			29 container
+				30 image arrow
+				31 text  攻击·回合末强化 · 5
+				32 image boss_general
+				33 text 肃清总督
+				34 image swords
+				35 text 5
+				36 image arrow
+				37 text  军威
+				38 text 50/50
+			39 text 敌方意图
+			40 container
+				41 image bolt
+				42 text 2 /2
+			43 button swords 猛击
+				44 image swords
+				45 text  猛击
+			46 text 牌库与弃牌堆都空了——只能结束回合硬抗，或撤退
+			47 container 战术操作
+				48 button bag 背包
+					49 image bag
+					50 text  背包
+				51 button runner 撤离（判负）
+					52 image runner
+					53 text  撤离（判负）
+				54 button gear 设置
+					55 image gear
+					56 text  设置
+				57 button skip 结束回合
+					58 image skip
+					59 text  结束回合
+
+The focused UI element is 43 button swords 猛击

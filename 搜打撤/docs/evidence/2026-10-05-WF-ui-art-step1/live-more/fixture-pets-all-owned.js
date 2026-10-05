@@ -1,0 +1,1 @@
+(()=>{const q=window.__ArtVisMore;const B=window.SDT.Base;B.data.pets=Object.fromEntries(B.PETS.map((p,i)=>[p.id,{lv:i===1?5:1,ts:0}]));q.hub.renderHub();return true;})()

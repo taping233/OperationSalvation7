@@ -1,0 +1,1 @@
+(async()=>{const q=window.__uiArtQA;q.reset();q.scenes.enterNode('battle',()=>{});return JSON.stringify(await q.waitVisual('.flow-title',650));})()

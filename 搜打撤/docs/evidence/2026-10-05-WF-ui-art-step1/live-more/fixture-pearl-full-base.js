@@ -1,0 +1,1 @@
+(()=>{const q=window.__ArtVisMore;q.reset(['珍珠盒']);const all=window.SDT.Cards.all();for(const name of ['木材','口粮','一把钥匙'])for(let i=0;i<3;i++){const c=all.find(c=>c.name===name);q.game.ownedCards.push({uid:q.session.newUid(),card:{...c},safe:false,sellable:false,stored:true});}q.bag.showBackpack();return true;})()

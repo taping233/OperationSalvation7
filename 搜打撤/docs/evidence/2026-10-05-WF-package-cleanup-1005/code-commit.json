@@ -1,0 +1,7 @@
+{
+  "commit": "da6b8ffeb487f0a228a9e2f9aff5a07e6cddc81a",
+  "parent": "e87034b835f094c2cb7a0c3b86dc70d56c74db5f",
+  "files": 30,
+  "receipt": "docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-33-43.811Z-46b41035-staged.json",
+  "output": "[master da6b8ff] chore(vite): 完成卡牌友军与壁纸，清理重复代码\n 30 files changed, 828 insertions(+), 114 deletions(-)\n create mode 100644 搜打撤/docs/evidence/2026-10-05-WF-card-ally-redesign/images.json\n create mode 100644 搜打撤/docs/evidence/2026-10-05-WF-ensemble-wallpaper-final/asset-source.json\n create mode 100644 搜打撤/docs/evidence/2026-10-05-WF-request-batching/README.md\n create mode 100644 搜打撤/docs/evidence/2026-10-05-WF-request-batching/docs-check.json\n create mode 100644 搜打撤/docs/evidence/2026-10-05-WF-request-batching/results.json\n create mode 100644 搜打撤/game/assets/portraits/allies/federal-patrol-v1.webp\n create mode 100644 搜打撤/game/assets/portraits/allies/federal-shooter-v1.webp\n create mode 100644 搜打撤/game/assets/portraits/allies/sealed-limb-v1.webp\n create mode 100644 搜打撤/game/css/ordinary-polish.css\n create mode 100644 搜打撤/game/css/tactical-card-redesign.css\n"
+}

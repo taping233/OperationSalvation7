@@ -1,0 +1,147 @@
+{
+  "id": "WF-ui-art-implement",
+  "status": "实现交付，完成未提交，卡牌/友军样式待用户审美",
+  "authorized": "老板令按七阶段开始实施",
+  "phases": {
+    "1": "已完成：复用盘点与补检",
+    "2": "已完成：局部规则与实际样板",
+    "3": "已完成：I01–I04定向修正",
+    "4": "已完成：I07完整原生序列",
+    "5": "已实现/定向复核：I06，样式待用户审美",
+    "6": "已实现/定向复核：I05/I08，友军样式待用户审美",
+    "7": "已完成：当前窗口/定向测试/归属释放"
+  },
+  "scope": [
+    "game/css/ordinary-polish.css",
+    "game/css/cover-remaining.css",
+    "game/src/battle/view/battle.view.js",
+    "game/src/battle/view/battle.layers.js"
+  ],
+  "excluded": [
+    "完整流程",
+    "存档",
+    "整备拖拽",
+    "地图拖动/缩放",
+    "全面键盘操作",
+    "性能",
+    "其他窗口尺寸"
+  ],
+  "sourceHead": "e87034b835f094c2cb7a0c3b86dc70d56c74db5f",
+  "service": {
+    "port": 5339,
+    "pid": 15056,
+    "exec": 22732,
+    "stopped": true,
+    "ownTabClosed": true
+  },
+  "issues": [
+    {
+      "id": "I01",
+      "status": "已证实",
+      "change": "背包/侧栏/宝箱标题浅面深字；宝箱旧强制字色定向覆盖",
+      "evidence": [
+        "02-bag-final.jpg",
+        "31-chest-final.jpg"
+      ]
+    },
+    {
+      "id": "I02",
+      "status": "已证实",
+      "change": "仓库详情与结算统计条成对调整承托和字色",
+      "evidence": [
+        "03-egg.jpg",
+        "11-material.jpg",
+        "22-result-success.jpg"
+      ]
+    },
+    {
+      "id": "I03",
+      "status": "已证实",
+      "change": "普通弹层/大图打开时地图操作台让位，关闭恢复",
+      "evidence": [
+        "24-pouch-full.jpg",
+        "25-pearl-full.jpg",
+        "27-deck-bottom.jpg",
+        "29-grave-bottom.jpg",
+        "35-dock-restored.jpg"
+      ]
+    },
+    {
+      "id": "I04",
+      "status": "已证实",
+      "change": "撤离单列动作、完整损失文字、空态占所属区，顺带恢复原标题与长说明",
+      "evidence": [
+        "10-extract-final.jpg",
+        "32-extract-empty-final.jpg"
+      ]
+    },
+    {
+      "id": "I05",
+      "status": "已证实",
+      "change": "禁用条件不整体淡化，已售标签独立承托",
+      "evidence": [
+        "06-shop-sold.jpg",
+        "23-altar-disabled.jpg"
+      ]
+    },
+    {
+      "id": "I06",
+      "status": "已实现，待用户审美",
+      "change": "原选择列表统一名称预算/同排与最低卡高，保留完整规则；采用A最小材质精修，普通大图补长文/费用球避让",
+      "evidence": [
+        "18-discovery.jpg",
+        "21-detail-return.jpg",
+        "33-six-card-final.jpg",
+        "34-detail-final.jpg"
+      ]
+    },
+    {
+      "id": "I07",
+      "status": "已证实",
+      "change": "首脑登场复用现有透明立绘，原姓名与时长保留",
+      "evidence": [
+        "07-boss-25.jpg",
+        "07-boss.json"
+      ]
+    },
+    {
+      "id": "I08",
+      "status": "已实现，待用户审美",
+      "change": "巡防兵/射手/封印肢体三种原创SVG轮廓；未知与研究所保留原通用图",
+      "evidence": [
+        "09-allies-final.jpg"
+      ]
+    }
+  ],
+  "sourceFingerprint": [
+    {
+      "path": "game/css/ordinary-polish.css",
+      "sha256": "d11ff05410a103d531df0962e17404ab1fbfb3b519d3bb4391a0481996e8fd0b",
+      "snapshotSha256": "d11ff05410a103d531df0962e17404ab1fbfb3b519d3bb4391a0481996e8fd0b"
+    },
+    {
+      "path": "game/css/cover-remaining.css",
+      "sha256": "95dd3b87e77d8f9644596712d05f3013bd4033b3e7e7c5962c0488f14afcff25",
+      "snapshotSha256": "95dd3b87e77d8f9644596712d05f3013bd4033b3e7e7c5962c0488f14afcff25"
+    },
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "sha256": "c8e7ae5217de2dfcb7ee60139eff9ff3866e305562b59fe581ad3bc2f180bde9",
+      "snapshotSha256": "c8e7ae5217de2dfcb7ee60139eff9ff3866e305562b59fe581ad3bc2f180bde9"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "sha256": "8651dc3e1ef2724660338b226d8eadc319ad79dd3d804a5c31a85d9aaccaa7e0",
+      "snapshotSha256": "8651dc3e1ef2724660338b226d8eadc319ad79dd3d804a5c31a85d9aaccaa7e0"
+    }
+  ],
+  "tests": {
+    "path": "docs/evidence/2026-10-05-WF-ui-art-implement/2026-10-05T10-08-37.592Z-1f897f9d.json",
+    "files": 7,
+    "passed": 87
+  },
+  "build": false,
+  "commit": false,
+  "externalSkillsInstalled": false,
+  "newRasterAssets": false
+}

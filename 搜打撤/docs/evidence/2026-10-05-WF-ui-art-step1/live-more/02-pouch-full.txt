@@ -1,0 +1,74 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	1 container
+		2 container cards 法师锦囊 · 存放法术牌, ID: overlay
+			3 container
+				4 heading cards 法师锦囊 · 存放法术牌, Value: 2, ID: ovTitle
+					5 image cards
+					6 text  法师锦囊 · 存放法术牌
+				7 container ovBody
+					8 container
+						9 text 锦囊中  3/3  张法术——战斗中打出锦囊后，从这 3 张里选 1 张直接释放（锦囊为空则无效果）
+					10 heading 锦囊中的法术（点击整叠取出）, Value: 3
+						11 text 锦囊中的法术（点击整叠取出）
+					12 container
+						13 text 1
+						14 image 镭射
+						15 text 镭射
+						16 text 法术 · 古朴
+						17 image crystal
+						18 text 注能 1 造成 5 点法术 伤害 ； 注能 ( 1 )： 伤害 +3 。
+						19 container
+							20 image sparkles
+							21 text 5' 法伤
+						22 container
+							23 image coin
+							24 text 2
+						25 text ×1
+					26 container
+						27 text 2
+						28 image 龙焰射线
+						29 text 龙焰射线
+						30 text 法术 · 古朴
+						31 image crystal
+						32 text 注能 1 注能 （ 1 ）： 造成 11 点 法伤 ×1
+					33 container
+						34 text 1
+						35 image 神灯
+						36 text 神灯
+						37 text 法术 · 史诗
+						38 image plate
+						39 text 甲 5 抉择： 1 °  发现 1  张牌并将其释放； 2 ° 消灭  1  名受伤敌人（非 BOSS）； 3 °  冰冻 2  名角色，获得 5  点 护甲 。
+						40 container
+							41 image coin
+							42 text 4
+						43 text ×1
+					44 heading 背包里的法术卡（点击整叠存入）, Value: 3
+						45 text 背包里的法术卡（点击整叠存入）
+					46 text （背包里没有法术卡）
+					47 button arrow 收好锦囊
+						48 image arrow
+						49 text  收好锦囊
+		50 container Description: 法师锦囊大图与备注, ID: cardZoom
+			51 button 关闭卡牌大图
+				52 image cross
+			53 container
+				54 text 1
+				55 image 法师锦囊
+				56 text 法师锦囊 法术 · 白塔专属 自带 1 * 3 空间，可以置入 3 张法术牌；打出时选择其中  1  张直接施放。
+				57 image coin
+				58 text 3
+			59 image pen
+			60 text 备注
+			61 text 暂无备注
+			62 container
+				63 button cards 打开锦囊（存放法术 ×3）
+					64 image cards
+					65 text  打开锦囊（存放法术 ×3）
+				66 button lock 移入安全格
+					67 image lock
+					68 text  移入安全格
+				69 text 按住拖动整理顺序 · 双击翻看卡背 · 可点击「移入安全格」
+			70 text Esc 或点击背景收回
+
+The focused UI element is 47 button arrow 收好锦囊

@@ -1,0 +1,1 @@
+(()=>{const q=window.__ArtVisMore;const s=window.SDT.Battle.getSnapshot();q.overlays.renderGrave({...s,grave:q.pileUids});return true;})()

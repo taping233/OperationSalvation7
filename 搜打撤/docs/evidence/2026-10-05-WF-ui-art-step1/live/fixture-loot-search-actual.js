@@ -1,0 +1,1 @@
+(()=>{const q=window.__uiArtQA;q.reset();q.scenes.openChestsOnCell([{kind:'small'}],'UI_ART_QA_SEARCH');return true;})()

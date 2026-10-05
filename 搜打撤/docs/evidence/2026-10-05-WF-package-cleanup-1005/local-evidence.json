@@ -1,0 +1,100 @@
+[
+  {
+    "path": "docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-17-48.226Z-1c7b0089.json",
+    "bytes": 323836,
+    "sha256": "b6b8097c9d2c56f08574c8cb1409fb707aebe06e87991e1a14ed1088fa0fb5bc",
+    "localOnly": false,
+    "acquisition": "本会话workflow verify/staged及打包脚本生成；原始报告保留本地"
+  },
+  {
+    "path": "docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-17-48.226Z-1c7b0089.log",
+    "bytes": 465,
+    "sha256": "6e75552d18a3ebc3034ef4e279df3b729696d10d80d8f52425d2d19c2c0d7f81",
+    "localOnly": true,
+    "acquisition": "本会话workflow verify/staged及打包脚本生成；原始报告保留本地"
+  },
+  {
+    "path": "docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-25-13.937Z-efceee45-staged.json",
+    "bytes": 1913098,
+    "sha256": "0fa68b816d38ca8e7d81d121401e48c570da2c0e8fc0b64da0cb55d1fbc50da4",
+    "localOnly": true,
+    "acquisition": "本会话workflow verify/staged及打包脚本生成；原始报告保留本地"
+  },
+  {
+    "path": "docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-25-13.937Z-efceee45-staged.log",
+    "bytes": 13848,
+    "sha256": "7bdc404cf5fd785e22195b08cd904c786d7f1f8f30090d3fb73a9d96ff772a56",
+    "localOnly": true,
+    "acquisition": "本会话workflow verify/staged及打包脚本生成；原始报告保留本地"
+  },
+  {
+    "path": "docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-29-39.744Z-c5028f6a-staged.json",
+    "bytes": 1915396,
+    "sha256": "a28d1a366b64e5158b05abdb4359821cd8723c4f55954a3d1070dd05383bf324",
+    "localOnly": true,
+    "acquisition": "本会话workflow verify/staged及打包脚本生成；原始报告保留本地"
+  },
+  {
+    "path": "docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-29-39.744Z-c5028f6a-staged.log",
+    "bytes": 13758,
+    "sha256": "5df402bd1a829c7d9e7c693ba89b9c6b1794049a3a88b25064de8ca1e60d2e21",
+    "localOnly": true,
+    "acquisition": "本会话workflow verify/staged及打包脚本生成；原始报告保留本地"
+  },
+  {
+    "path": "docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-32-53.498Z-42d77f51.json",
+    "bytes": 268564,
+    "sha256": "cf3e4bea21802a7b8a66d4509548e4e6b51663854642b25edfd5d7989d2bfad8",
+    "localOnly": false,
+    "acquisition": "本会话workflow verify/staged及打包脚本生成；原始报告保留本地"
+  },
+  {
+    "path": "docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-32-53.498Z-42d77f51.log",
+    "bytes": 5041,
+    "sha256": "ef2e86835374809b943dbd1667700015600bc05f7ef28642853589f24b3e318e",
+    "localOnly": true,
+    "acquisition": "本会话workflow verify/staged及打包脚本生成；原始报告保留本地"
+  },
+  {
+    "path": "docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-33-43.811Z-46b41035-staged.json",
+    "bytes": 2027377,
+    "sha256": "22d60bae217194696f4854a640a922f5c60c8382d3df6662c9bd054b17494054",
+    "localOnly": true,
+    "acquisition": "本会话workflow verify/staged及打包脚本生成；原始报告保留本地"
+  },
+  {
+    "path": "docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-33-43.811Z-46b41035-staged.log",
+    "bytes": 12491,
+    "sha256": "dd50c1b1a3d3dd31c31ba1cb999a1e90d9506015f7cac7dd34568944b5364ec1",
+    "localOnly": true,
+    "acquisition": "本会话workflow verify/staged及打包脚本生成；原始报告保留本地"
+  },
+  {
+    "path": "docs/evidence/2026-10-05-WF-package-cleanup-1005/asset-audit.txt",
+    "bytes": 150,
+    "sha256": "458ec440b6d0012406a2cd137bfa6581332df19aa73034a6fd168500ac597ba9",
+    "localOnly": false,
+    "acquisition": "本会话workflow verify/staged及打包脚本生成；原始报告保留本地"
+  },
+  {
+    "path": "docs/evidence/2026-10-05-WF-package-cleanup-1005/code-commit.json",
+    "bytes": 1226,
+    "sha256": "87ffac20c44c179a75172bcd40c74a4d11ad64fcba532f9517ab54d0c25970d6",
+    "localOnly": false,
+    "acquisition": "本会话workflow verify/staged及打包脚本生成；原始报告保留本地"
+  },
+  {
+    "path": "docs/evidence/2026-10-05-WF-package-cleanup-1005/package-plan.json",
+    "bytes": 283701,
+    "sha256": "36c429a64f604ddeba132689ba56ed6fcccda516dcd94a2e984488ba630bf4c3",
+    "localOnly": false,
+    "acquisition": "本会话workflow verify/staged及打包脚本生成；原始报告保留本地"
+  },
+  {
+    "path": "docs/evidence/2026-10-05-WF-package-cleanup-1005/README.md",
+    "bytes": 2748,
+    "sha256": "101ba3cafc00110ab019b78dc499448a70c40a4396a2b2e40b206b1580b59bef",
+    "localOnly": false,
+    "acquisition": "本会话workflow verify/staged及打包脚本生成；原始报告保留本地"
+  }
+]

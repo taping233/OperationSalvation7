@@ -1,0 +1,1 @@
+(()=>{const q=window.__ArtVisMore;q.reset();const B=window.SDT.Base;const c=window.SDT.Cards.all().find(c=>c.name==='木材');B.data.wood=1;B.data.stash=[{card:{...c},count:1}];q.pages.openStashItem(0);return true;})()

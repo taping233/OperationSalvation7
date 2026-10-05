@@ -1,0 +1,14 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	1 container
+		2 text FIELD ENCOUNTER 01 / 04
+		3 heading notes 最后一盏引路灯, Value: 2
+			4 image notes
+			5 text  最后一盏引路灯
+		6 text 校工值班室的抽屉里压着一张改道图和一页停电巡检表。改道图在玻璃连廊上盖着「冬季封闭」的红章；巡检表最后一栏写着：「北门引路灯，停电后切至蓄电。」
+		7 button 对照路标，抄下巡检记录 永久记录本段见闻；本局不再推进。无物资变化。 ▸
+			8 text 对照路标，抄下巡检记录
+			9 text 永久记录本段见闻；本局不再推进。无物资变化。
+			10 text ▸
+
+The focused UI element is 7 button 对照路标，抄下巡检记录 永久记录本段见闻；本局不再推进。无物资变化。 ▸

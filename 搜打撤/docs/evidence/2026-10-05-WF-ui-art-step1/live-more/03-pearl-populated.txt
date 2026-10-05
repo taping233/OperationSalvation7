@@ -1,0 +1,72 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	1 container
+		2 container gem 珍珠盒 · 存放资源卡, ID: overlay
+			3 container
+				4 heading gem 珍珠盒 · 存放资源卡, Value: 2, ID: ovTitle
+					5 image gem
+					6 text  珍珠盒 · 存放资源卡
+				7 container ovBody
+					8 container
+						9 text 盒中  3/9  张（1 个珍珠盒 · 每个内置 3×3 空间）——存入的资源卡 不占背包格 ；把珍珠盒放进安全格，盒中的卡撤离失败时也会被抢运回基地
+					10 heading 盒中资源（点击整叠取出）, Value: 3
+						11 text 盒中资源（点击整叠取出）
+					12 container
+						13 text 0
+						14 image 木材
+						15 text 木材
+						16 text 资源 · 古朴
+						17 text 木材 × 1 。
+						18 container
+							19 image coin
+							20 text 2
+						21 text ×1
+					22 container
+						23 text 0
+						24 image 口粮
+						25 text 口粮
+						26 text 资源 · 稀有
+						27 text 升级宠物。
+						28 container
+							29 image coin
+							30 text 3
+						31 text ×1
+					32 container
+						33 text 0
+						34 image 一把钥匙
+						35 text 一把钥匙
+						36 text 资源 · 古朴
+						37 text 解锁大门。
+						38 container
+							39 image coin
+							40 text 2
+						41 text ×1
+					42 heading 背包里的资源卡（点击整叠存入）, Value: 3
+						43 text 背包里的资源卡（点击整叠存入）
+					44 text （背包里没有资源卡——木材/口粮/货币卡等才是资源）
+					45 button arrow 收好珍珠盒
+						46 image arrow
+						47 text  收好珍珠盒
+		48 container Description: 珍珠盒大图与备注, ID: cardZoom
+			49 button 关闭卡牌大图
+				50 image cross
+			51 container
+				52 text 0
+				53 image 珍珠盒
+				54 text 珍珠盒 装备 · 稀有 内置 3 * 3 空间，可以容纳所有类型的资源卡牌。
+				55 image coin
+				56 text 3
+			57 image pen
+			58 text 备注
+			59 text 暂无备注
+			60 container
+				61 button gem 打开珍珠盒
+					62 image gem
+					63 text  打开珍珠盒
+				64 button lock 移入安全格
+					65 image lock
+					66 text  移入安全格
+				67 text 按住拖动整理顺序 · 双击翻看卡背 · 可点击「移入安全格」
+			68 text Esc 或点击背景收回
+
+The focused UI element is 45 button arrow 收好珍珠盒

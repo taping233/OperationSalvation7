@@ -1,0 +1,28 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	2 container
+		3 text FIELD ENCOUNTER 01 / 04
+		4 heading fire 营火休整, Value: 2
+			5 image fire
+			6 text  营火休整
+		7 text 还可从消耗口袋中复原  2  张（最多 2 张）· 点击卡牌复原 ·  复原=撤离全额带回，否则每张仅 1/3 幸存
+		8 container
+			9 text 1
+			10 image 镭射
+			11 text 镭射 法术 · 古朴
+			12 image crystal
+			13 text 注能 1 造成 5 点法术 伤害 ； 注能 ( 1 )： 伤害 +3 。
+			14 image sparkles
+			15 text 5'
+			16 text 法伤
+			17 image coin
+			18 text 2
+		19 container
+			20 text 1
+			21 image 格挡
+			22 text 格挡 武术 · 古朴 本 回合 所受 伤害 降为  1 。
+			23 image coin
+			24 text 2
+		25 button 继续旅程
+
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/

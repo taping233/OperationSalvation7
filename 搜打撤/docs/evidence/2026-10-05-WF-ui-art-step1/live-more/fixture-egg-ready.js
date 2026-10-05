@@ -1,0 +1,1 @@
+(()=>{const q=window.__ArtVisMore;q.reset();const B=window.SDT.Base;const c=window.SDT.Cards.all().find(c=>c.id===B.PET_EGG_ID);B.data.pets={dog:{lv:1,ts:0}};B.data.petSel='dog';B.data.coins=100;B.data.stash=[{card:{...c},count:1}];q.pages.openStashItem(0);return true;})()

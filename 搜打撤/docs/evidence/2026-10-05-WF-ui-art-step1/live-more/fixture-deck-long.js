@@ -1,0 +1,1 @@
+(async()=>{const q=window.__ArtVisMore;await q.longBoss();const s=window.SDT.Battle.getSnapshot();q.overlays.renderDeckPileView({...s,drawPile:q.pileUids});return JSON.stringify({rows:q.pileUids.length});})()

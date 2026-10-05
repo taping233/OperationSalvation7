@@ -1,0 +1,86 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5339/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/
+	1 container viewport
+		2 button 背包 3/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 3/16
+		5 container
+			6 text 冬境街区 · 遭遇
+			7 text 第 1 回合
+			8 text 你的行动 Lv.1 · 0/50 · 差 50 点
+			9 text 我方
+			10 container btSelf
+				11 image 星月
+				12 container
+					13 text 星月 你
+				14 container
+					15 text 30/30
+				16 container
+					17 image swords
+					18 text  4
+			19 container
+				20 container
+					21 image swords
+					22 text  攻击 · 5
+				23 image archer
+				24 text 联邦射手
+				25 image swords
+				26 text 5
+				27 container
+					28 text 3/3
+				29 container
+					30 image swords
+					31 text  攻击 · 5
+				32 image archer
+				33 text 联邦射手
+				34 image swords
+				35 text 5
+				36 container
+					37 text 3/3
+			38 text 敌方意图
+			39 container
+				40 image bolt
+				41 text 2 /2
+			42 button heart 圣疗
+				43 image heart
+				44 text  圣疗
+			45 container
+				46 checkbox Description: 初始攻击 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					47 container
+						48 text 1
+						49 image 初始攻击
+						50 text 初始攻击
+					51 image swords
+				52 checkbox Description: 镭射 · 1 费。费用 1 · 点击进入注能（选 1 张手牌消耗强化打出），注能条内也可「不注能直接打出」或拖到敌人身上直打（悬停看完整描述）, Value: 0
+					53 container
+						54 text 1
+						55 image 镭射
+						56 text 镭射
+						57 image sparkles
+						58 text 5'
+						59 text 法伤
+					60 image swords
+					61 button crystal 注能1
+						62 image crystal
+						63 text 注能1
+				64 checkbox Description: 格挡 · 1 费。费用 1 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）, Value: 0
+					65 container
+						66 text 1
+						67 image 格挡
+						68 text 格挡
+					69 image heart
+			70 container 战术操作
+				71 button bag 背包
+					72 image bag
+					73 text  背包
+				74 button runner 撤离（判负）
+					75 image runner
+					76 text  撤离（判负）
+				77 button gear 设置
+					78 image gear
+					79 text  设置
+				80 button skip 结束回合
+					81 image skip
+					82 text  结束回合
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5339/

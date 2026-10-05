@@ -1,0 +1,1 @@
+(async()=>{const q=window.__ArtVisMore;q.reset();q.game.runActive=false;const B=window.SDT.Base;const pet=B.PETS.find(p=>p.id!=='dog');B.data.pets={dog:{lv:1,ts:0},[pet.id]:{lv:1,ts:0}};B.data.petSel=pet.id;B.data.coins=50;B.data.stash=[];q.hub=await import('/src/hub/game.hub.js');q.hub.openBaseHub('stash');return JSON.stringify({newPet:pet.name});})()

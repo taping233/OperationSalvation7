@@ -1,0 +1,1 @@
+(()=>{const q=window.__uiArtQA;q.reset();q.scenes.enterNode('battle',()=>{});return true;})()
