@@ -28,16 +28,12 @@ export const M11_HOSTED_BY_ID = Object.freeze({
   'tt3sp-bloodstorm': 'infused-repeating-lifesteal',
   'tt3sp-flowerzhen': 'double-and-burst-poison',
   'tt3sp-silverthorn': 'infused-damage-bonus',
-  'tt-token-color': 'class-ability-acquire',
-  'tt-medneedle': 'delayed-heal-item',
   'tt7-arcanebolt': 'damage-and-draw',
 });
 
-// tt-token-color 是 bag.use 特例（员工通行证：直授职业能力，非 hosted 声明），其余为命名 hosted。
+// 剩余存活卡均为命名 hosted；旧合成材料通行证和急救合剂已退役。
 const definitions = new Map(Object.entries(M11_HOSTED_BY_ID).map(([id, hosted]) =>
-  [id, id === 'tt-token-color'
-    ? { rules: { version: 1, bag: { use: [{ op: 'acquire', pool: { kind: 'classAbility' } }] } } }
-    : { rules: { version: 1, battle: { hosted: [hosted] } } }]));
+  [id, { rules: { version: 1, battle: { hosted: [hosted] } } }]));
 
 // 优先实机同步，其次最新 TABLETOP 定版；从源定义取 canonical，不读玩家当前卡面。
 //（原 canonicalCard 扫描顺序逐字保留，现为工厂 canonicalOrder 形态。）

@@ -14,7 +14,7 @@ npm run web
 
 主线 5200 使用 `npm run web` 幂等复用；它由 Vite 读取 `game`。优先现有 Node 22 与锁定依赖，缺失项按任务授权处理。`index.html` 不能通过 `file://` 双击运行；构建环境边界见[开发指南](docs/development.md)。
 
-网页版浏览器要求：Chromium 105+ / Edge 常青版 / Firefox 121+（样式层使用 `:has()` 与容器查询 `cqw`，旧内核 WebView 下部分界面样式会退化）。桌面版内置 Electron 44，无此限制。
+样式使用 `:has()` 与容器查询 `cqw`；这些特性影响旧内核的显示。当前支持范围与实际验收环境以[质量门](docs/quality-gates.md)和对应实页记录为准。
 
 ## 常用检查
 
@@ -44,9 +44,6 @@ npm run build
 - [制作资料总入口（章程、GDD、视觉、工程、迭代与验收）](docs/production/README.md)
 - [项目状态入口](docs/STATUS.md)
 - [文档导航（含按改动找文档路由表）](docs/README.md)
-- [项目记忆快照（2026-09-28 上午，已归档）](docs/archive/status/PROJECT-MEMORY-2026-09-28.md)
-- [历史项目状态快照（2026-09-27，已归档）](docs/archive/status/PROJECT-STATUS-2026-09-27.md)
-- [历史交接记录（09-20 至 09-27）](docs/archive/handoffs/2026-09-20-to-27-vite-log.md)
 - [Agent 接口协议](docs/agent-protocol.md)
 - [Agent 策略迭代手册](docs/agent-iteration-playbook.md)
 - [现行游戏规则](docs/rules.md)
@@ -59,4 +56,4 @@ npm run build
 - [后续路线图](docs/roadmap.md)
 - [已完成版本记录](docs/changelog.md)
 
-美术方向与资产清单保存在 `docs/` 对应独立文档中；阶段性历史文档在 `docs/archive/`。
+美术方向与资产清单从文档导航进入；旧状态、交接和版本依据从[历史索引](docs/archive/README.md)进入。

@@ -1,0 +1,188 @@
+{
+  "status": "candidate",
+  "character": "wu",
+  "animation": "death",
+  "texture": "wu-death-sheet.webp",
+  "frameWidth": 768,
+  "frameHeight": 512,
+  "columns": 4,
+  "rows": 2,
+  "poseSlots": 8,
+  "uniquePoseFrames": 7,
+  "sampleRate": 24,
+  "sequence": [
+    0,
+    1,
+    1,
+    1,
+    2,
+    2,
+    3,
+    3,
+    3,
+    4,
+    4,
+    5,
+    5,
+    5,
+    6,
+    6,
+    6,
+    7,
+    7,
+    7,
+    7
+  ],
+  "durationsMs": [
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42
+  ],
+  "durationMs": 875,
+  "firstFrame": 0,
+  "lastFrame": 7,
+  "loop": false,
+  "holdLastFrame": true,
+  "idleSpec": "../wu-idle-sprite-20261009/v2/sprite.json",
+  "endpointSource": "../wu-idle-sprite-20261009/v2/frames/idle-000.png",
+  "phases": [
+    {
+      "name": "待机起点",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "name": "失去支撑",
+      "start": 1,
+      "end": 3
+    },
+    {
+      "name": "屈膝撑地",
+      "start": 4,
+      "end": 8
+    },
+    {
+      "name": "侧身落地",
+      "start": 9,
+      "end": 13
+    },
+    {
+      "name": "倒地停留",
+      "start": 14,
+      "end": 20
+    }
+  ],
+  "method": "imagegen collapse poses; shared scale, consistent floor and camera; exact accepted idle start, identical settled final frames",
+  "alignment": [
+    {
+      "frame": 0,
+      "source": "accepted idle-000.png, exact copy"
+    },
+    {
+      "frame": 1,
+      "sourceBounds": [
+        647,
+        41,
+        414,
+        440
+      ],
+      "scale": 1.0064935064935066,
+      "offset": [
+        180,
+        38
+      ]
+    },
+    {
+      "frame": 2,
+      "sourceBounds": [
+        113,
+        511,
+        426,
+        352
+      ],
+      "scale": 1.0064935064935066,
+      "offset": [
+        190,
+        127
+      ]
+    },
+    {
+      "frame": 3,
+      "sourceBounds": [
+        588,
+        532,
+        481,
+        351
+      ],
+      "scale": 1.0064935064935066,
+      "offset": [
+        121,
+        128
+      ]
+    },
+    {
+      "frame": 4,
+      "sourceBounds": [
+        79,
+        908,
+        445,
+        268
+      ],
+      "scale": 1.0064935064935066,
+      "offset": [
+        155,
+        211
+      ]
+    },
+    {
+      "frame": 5,
+      "sourceBounds": [
+        581,
+        1007,
+        467,
+        165
+      ],
+      "scale": 1.0064935064935066,
+      "offset": [
+        114,
+        315
+      ]
+    },
+    {
+      "frame": 6,
+      "sourceBounds": [
+        56,
+        1264,
+        488,
+        149
+      ],
+      "scale": 1.0064935064935066,
+      "offset": [
+        132,
+        331
+      ]
+    },
+    {
+      "frame": 7,
+      "source": "death-06.png, identical settled endpoint"
+    }
+  ]
+}

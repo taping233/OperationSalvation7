@@ -80,7 +80,7 @@ describe('神秘召唤卡池（2026-09-16 留言「神秘召唤卡池错误」�
     expect(pred({ name: 'C', rarity: '古朴', type: '武术' })).toBe(false);
   });
 
-  it('实打：发现面板的三张全部满足「传说或能力卡」', async () => {
+  it('实打：神秘召唤发现面板仅提供传说卡', async () => {
     const mystic = C.all().find(c => c.name === '神秘召唤');
     expect(mystic).toBeTruthy();
     const g = makeGame([mystic]);
@@ -93,8 +93,8 @@ describe('神秘召唤卡池（2026-09-16 留言「神秘召唤卡池错误」�
     expect(d.options.length).toBeGreaterThan(0);
     for (const o of d.options) {
       const c = o.card || o;
-      expect(c.rarity === '传说' || c.type === '能力卡',
-        `发现选项【${c.name}】(${c.rarity}/${c.type}) 不在传说或能力卡池`).toBe(true);
+      expect(c.rarity,
+        `发现选项【${c.name}】(${c.rarity}/${c.type}) 应为传说`).toBe('传说');
     }
     BattleSession.commands.pickDiscover(0);
     await drain(300);
@@ -175,8 +175,8 @@ describe('卡牌定版（2026-09-16 留言）', () => {
   it('灭魔之剑已整卡退役', () => {
     expect(C.all().some(c => c.name === '灭魔之剑')).toBe(false);
   });
-  it('员工通行证A仍在注册表（合成材料），卡牌库展示层过滤', () => {
-    expect(C.all().some(c => c.id === 'tt-token-color')).toBe(true);
+  it('员工通行证A只保留实际授予职业能力的条目', () => {
+    expect(C.all().filter(c => c.name === '员工通行证A').map(c => c.id)).toEqual(['cmtmvq6ss84l']);
   });
   it('装备技能句：主动技能与旧措辞限定技能都可解析', () => {
     expect(splitEffectClauses('主动技能：抽3张牌').skill).toEqual(['抽3张牌']);

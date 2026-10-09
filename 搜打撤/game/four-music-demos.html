@@ -1,0 +1,36 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>四首场景配乐 · 30 秒编曲试听</title>
+<style>*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top right,#283c49,transparent 65%),#101921;color:#e8eef1;font:16px/1.65 system-ui,sans-serif}main{max-width:960px;margin:auto;padding:36px 24px}small{color:#9ebfc8;letter-spacing:.13em}h1{font-size:34px;line-height:1.3;margin:12px 0}p{color:#b0bec7}section{background:#ffffff05;border:1px solid #45616d;border-radius:14px;padding:20px;margin:18px 0}h2{font-size:23px;margin:5px 0}audio{width:100%;margin-top:15px}.actions{display:flex;gap:12px;flex-wrap:wrap}button{font:inherit;padding:8px 16px;border:1px solid #74949e;border-radius:8px;background:#1c2e3a;color:#d8e5eb;cursor:pointer}button[aria-pressed=true]{background:#bdd3d9;color:#12252e}.status{min-height:26px;margin:8px 0}a{color:#a6d5dd}button:focus-visible,a:focus-visible{outline:2px solid #c5e4eb;outline-offset:3px}</style>
+<main><small>代号柒 / 四首配乐方案</small><h1>原曲保留，编曲展开</h1><p>首页、探索、战斗、商店，各 30 秒。点击原版／改编版对照；切换时保留试听位置，同时只播放一首。</p><div id="tracks"></div><p>原版与改编版的整体电平已对齐。30 秒末尾暂作淡出，当前为试听候选。</p><p><a href="./music-demo.html">原有 14 首完整试听</a></p></main>
+<script type="module">
+import titleNew from '../docs/evidence/2026-10-09-WF-four-music-demos/title-revised-30s.mp3?url';
+import titleOld from '../docs/evidence/2026-10-09-WF-four-music-demos/title-original-30s.mp3?url';
+import exploreNew from '../docs/evidence/2026-10-09-WF-four-music-demos/explore-revised-30s.mp3?url';
+import exploreOld from '../docs/evidence/2026-10-09-WF-four-music-demos/explore-original-30s.mp3?url';
+import battleNew from '../docs/evidence/2026-10-09-WF-four-music-demos/battle-revised-30s.mp3?url';
+import battleOld from '../docs/evidence/2026-10-09-WF-four-music-demos/battle-original-30s.mp3?url';
+import shopNew from '../docs/evidence/2026-10-09-WF-four-music-demos/shop-revised-30s.mp3?url';
+import shopOld from '../docs/evidence/2026-10-09-WF-four-music-demos/shop-original-30s.mp3?url';
+const rows=[['title','首页','霜窗回声','保留钢琴的平静主线；缓慢流动的内声部、电钢与低木管形成暗流。',titleNew,titleOld],['explore','探索','灰线行军','保留行旅旋律；木吉他、木管回应和交错中声部逐渐展开。',exploreNew,exploreOld],['battle','战斗','黑脉交锋','保留弦乐主旋律；交错重音、低吉他、定音鼓与圆号反击。',battleNew,battleOld],['shop','商店','铜灯市集','保留单簧管与五拍特色；马林巴、爵士吉他、行走低音轮流回应。',shopNew,shopOld]];
+const players=[];
+for(const [id,scene,title,description,newUrl,oldUrl] of rows){
+ const card=document.createElement('section');card.dataset.scene=id;
+ card.innerHTML=`<small>${scene}</small><h2>${title}</h2><p>${description}</p><div class="actions"><button data-version="revised" aria-pressed="true" aria-label="试听${scene}改编版">改编版</button><button data-version="original" aria-pressed="false" aria-label="试听${scene}原版">原版对照</button></div><audio controls preload="metadata" aria-label="${scene}音频播放器"></audio><p class="status" aria-live="polite">改编版 · 待试听</p><a download href="${newUrl}">下载改编版 MP3</a>`;
+ document.getElementById('tracks').append(card);
+ const audio=card.querySelector('audio'),status=card.querySelector('.status');audio.src=newUrl;let version='revised',generation=0;players.push(audio);
+ const label=()=>version==='revised'?'改编版':'原版';
+ audio.addEventListener('play',()=>{players.forEach(p=>{if(p!==audio)p.pause()})});
+ audio.addEventListener('playing',()=>status.textContent=label()+' · 正在试听');
+ audio.addEventListener('pause',()=>status.textContent=label()+' · '+(audio.ended?'试听结束':'已暂停'));
+ audio.addEventListener('ended',()=>status.textContent=label()+' · 试听结束');
+ audio.addEventListener('error',()=>status.textContent=label()+' · 加载失败');
+ card.querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{
+  const target=button.dataset.version;
+  if(target===version){audio.play().catch(()=>status.textContent=label()+' · 点击播放器开始');return}
+  const position=audio.ended?0:audio.currentTime;version=target;const token=++generation;
+  card.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+  audio.src=version==='revised'?newUrl:oldUrl;status.textContent=label()+' · 正在加载';
+  audio.addEventListener('loadedmetadata',()=>{if(token!==generation)return;audio.currentTime=Math.min(position,29.8);audio.play().catch(()=>status.textContent=label()+' · 点击播放器开始')},{once:true});
+ }));
+}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)players.forEach(p=>p.pause())});
+</script></html>

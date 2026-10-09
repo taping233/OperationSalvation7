@@ -12,8 +12,7 @@
  *                   desc 正则旧读法——rules 迁入即收编，无双算。
  *                   行为修复：desc 正则旧读法的攻加成提取式（/攻\s*\+\s*\d/）匹配不到
  *                   「获得 2 点攻击力」，文本版诅咒期间只 +2 法伤；rules 版按卡面 2/2 全生效。
- *   tt3-deep-seal   深海印记「诅咒状态下，攻 +2，法伤 +2」→ 同款 rules（矩阵陷阱 T6：两卡
- *                   同草案同测，防漂移）。文本正则旧读法本就正确，迁移前后数值一致。
+ *   当前仅迁移深海咒印；深海印记已按老板10-10指示退役。
  *
  * 跳过 25 张（逐卡原因见 docs/archive/card-migration-2026-09-27/M4-D6-RESULT.md，此处按缺口归组摘要）：
  *   穿戴/光环双算 4 张（tt3-longsword / tt3-staff / tt3-grass-armor / tt3-silver-runesword /
@@ -58,18 +57,16 @@ const curseCondAura = () => ({
   },
 });
 
-// id → 结构化 rules（卡形部分定义，回填只取其 .rules）。两卡卡面字段已在 TABLETOP 定版中
+// id → 结构化 rules（卡形部分定义，回填只取其 .rules）。卡面字段已在 TABLETOP 定版中
 // 存在，无需 A3 的字段回填（extraFieldsById），definitions 只携带 rules。
 const definitions = new Map([
   ['tt3-deep-diary', curseCondAura()],
-  ['tt3-deep-seal', curseCondAura()],
 ]);
 
 // canonical 源表：id → SDT.Cards 上的定版数组名。两卡的 TABLETOP3 旧行（深解印记/深衍日记）
 // 已被 TABLETOP10 定版覆盖（同 id 双引用取后表，与 E8 产线观测一致）。
 const CANONICAL_TABLE_BY_ID = new Map([
   ['tt3-deep-diary', 'TABLETOP10'],
-  ['tt3-deep-seal', 'TABLETOP10'],
 ]);
 
 export const ensureM4EquipRules = createRuleBackfiller({

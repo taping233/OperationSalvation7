@@ -1,7 +1,7 @@
 {
   "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 691,
+  "count": 694,
   "assets": [
     {
       "path": "music-demo/01-title-frostglass.ogg",
@@ -303,33 +303,33 @@
       "path": "cards/martial-tt3-fly-arrowhawk.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 214682,
-      "sha256": "c1426d37dec54dccd139333b88f2f197134f3c62e66b8c64637dc3040450cfcf",
-      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+      "bytes": 257134,
+      "sha256": "53aeaa6f4d222ebfb3cacd65112d703a73736cffa32a6084feb2eb99b51e8d54",
+      "source": "docs/evidence/2026-10-10-card-fixes/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-tt3-fly-arrowhawk.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 36284,
-      "sha256": "3aba553456c75b081658eed4d01d0689fc9b41dd53f643d7189bda413f4041cb",
-      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+      "bytes": 35230,
+      "sha256": "4bdb8c6449afa48139858d2bb4a614da95db57873c027ba448a9b90dcfac959e",
+      "source": "docs/evidence/2026-10-10-card-fixes/receipt.json"
     },
     {
       "path": "cards/martial-tt3-frostfall.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 268494,
-      "sha256": "14fd2c818ae06a1e1746dac0cba8264ef234a13aca5f3fe6288be43dc821cf5e",
-      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+      "bytes": 273276,
+      "sha256": "7ee2d7f2b91d7fce2c8c5cc7b230f35f63004e2cdb003eed3a8c230703b35a15",
+      "source": "docs/evidence/2026-10-10-card-fixes/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-tt3-frostfall.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 40244,
-      "sha256": "57b3a1fd30a26d97c529971b35c44e8b5beae073dbcb574b6677e365c0a25960",
-      "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+      "bytes": 37110,
+      "sha256": "8ff0eb12112d0dca2f35507e5992e33a54c7a3614e8eca1778fbe1f9ac3618bb",
+      "source": "docs/evidence/2026-10-10-card-fixes/receipt.json"
     },
     {
       "path": "cards/spell-tt3-treasure-hunt.webp",
@@ -614,34 +614,34 @@
     {
       "path": "cards/creature-tt8-nofocus.webp",
       "ext": "webp",
-      "bytes": 112758,
-      "sha256": "87ee008ad4a15d607d4936762a3b95c496bf9c0f89dde0595eb188e456e0555e",
+      "bytes": 60192,
+      "sha256": "7d99590414095633b4e885a8c976f77af286856e6cb1e92db4c551c81683d284",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/images.json"
+      "source": "docs/evidence/2026-10-10-card-fixes/hands/receipt.json"
     },
     {
       "path": "thumbs/cards/creature-tt8-nofocus.webp",
       "ext": "webp",
-      "bytes": 19612,
-      "sha256": "6865e411bfb1478444fd394dd9aab70a166699518db540f257f7a357ccbb2a43",
+      "bytes": 7844,
+      "sha256": "4010f492cfe71f31ae8496759f0e17dfc0731419e66fa369d509d929e41c24b7",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/images.json"
+      "source": "docs/evidence/2026-10-10-card-fixes/hands/receipt.json"
     },
     {
       "path": "cards/creature-tt8-healplus.webp",
       "ext": "webp",
-      "bytes": 79450,
-      "sha256": "e9a479ab60d659fcd58dbd5a852e81a926425f85154c5912b191f498fbe33784",
+      "bytes": 70582,
+      "sha256": "a4ea003c2b20367d478fc6bb13dde4f73716e818900a8aa5bb595b396594abf5",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/images.json"
+      "source": "docs/evidence/2026-10-10-card-fixes/hands/receipt.json"
     },
     {
       "path": "thumbs/cards/creature-tt8-healplus.webp",
       "ext": "webp",
-      "bytes": 15526,
-      "sha256": "d349f2a33a842086be133c7ee97269663d3de93842ae9c659490de600099f01d",
+      "bytes": 10044,
+      "sha256": "51569b7851073c415b8a1bf68866fb2f09c19b69dc6cd10953fe530e35302035",
       "license": "项目自有（AI 生成）",
-      "source": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/images.json"
+      "source": "docs/evidence/2026-10-10-card-fixes/hands/receipt.json"
     },
     {
       "path": "cards/martial-tt8-dragonblade.webp",
@@ -718,10 +718,10 @@
     {
       "path": "reconstruction/wallpaper-wu-1004.webp",
       "ext": "webp",
-      "bytes": 431540,
-      "sha256": "0a8fbfd65dc278810840b27ce051e462426f7455e77060a70ad1aaa7293c1688",
-      "license": "AI编辑（老板提供原图，去水印）",
-      "source": "docs/evidence/2026-10-09-wallpaper-one/asset-source.json"
+      "bytes": 515672,
+      "sha256": "0ce34acb0c698d911266b69615b45ffe812997e5c08bb62337dfd3149b05644d",
+      "license": "AI编辑（老板提供原图，去水印后左右扩图）",
+      "source": "docs/evidence/2026-10-09-wallpaper-outpaint/asset-source.json"
     },
     {
       "path": "cards/hero-volcano.webp",
@@ -1004,8 +1004,10 @@
     {
       "path": "cards/hero-summoner.webp",
       "ext": "webp",
-      "bytes": 71680,
-      "license": "项目自有（自制/AI 生成）"
+      "bytes": 177550,
+      "license": "项目自有（自制/AI 生成）",
+      "sha256": "e80166824800f37c1ccc96364683e691e152717345094383ce0c39445dc28f45",
+      "source": "docs/evidence/2026-10-10-two-blooms/receipt.json"
     },
     {
       "path": "cards/hero-sword.webp",
@@ -3239,9 +3241,9 @@
       "path": "thumbs/cards/hero-summoner.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 24500,
-      "sha256": "41fadaae148787a988bd55c9e11729ba2d20a010f44698841060704e147b4823",
-      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+      "bytes": 23364,
+      "sha256": "666e4f919b795f5606bdfc17fbdf60ed559f211976c2f78ca006d3e4d478c88b",
+      "source": "docs/evidence/2026-10-10-two-blooms/receipt.json"
     },
     {
       "path": "thumbs/cards/hero-sword.webp",
@@ -3447,9 +3449,9 @@
       "path": "thumbs/cards/martial-cc-dual-wield.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 20956,
-      "sha256": "3425600c6767c887bd9d31e1e6e2cfc38e13d2d891d2d07772ce1cc2930acb2b",
-      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+      "bytes": 28046,
+      "sha256": "8c4880aaae19784e773e7570ef8f772b7b50cbaa8716cbd26069ddd3230ae86e",
+      "source": "docs/evidence/2026-10-10-dual-wield/receipt.json"
     },
     {
       "path": "thumbs/cards/martial-cc-last-stand.webp",
@@ -5034,6 +5036,30 @@
       "sha256": "20b05f3445c64837ee95320521daab9ccc19c50d7c41eb29be9b4eac569a0602",
       "license": "项目原创曲目；GeneralUser GS 2.0.3 BETA 采样许可v2.0（允许音乐创作）",
       "source": "docs/evidence/2026-10-05-WF-music-integration/audio-package.json"
+    },
+    {
+      "path": "cards/martial-cc-dual-wield.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 233770,
+      "sha256": "4a85e1d7f32d34f94deefef34472ea2876bf8b9cec9865727a7262d02a040982",
+      "source": "docs/evidence/2026-10-10-dual-wield/receipt.json"
+    },
+    {
+      "path": "music-demo/03-battle-coldfront.ogg",
+      "ext": "ogg",
+      "bytes": 503327,
+      "sha256": "e3692c9d8c1dad42ed14b5f197194a65e98715aa44c11fa655bc7842a2882723",
+      "license": "Original deterministic electronic synthesis; no game reference samples.",
+      "source": "docs/evidence/2026-10-09-WF-four-bgm-install/audio-package.json"
+    },
+    {
+      "path": "music-demo/05-shop-lamplight-deal.ogg",
+      "ext": "ogg",
+      "bytes": 380240,
+      "sha256": "9db5869ecb2ce591cf32758f9150938c1555eab89c5d171ee6c08520f7788ae9",
+      "license": "Project original; GeneralUser GS sample license v2.0 permits music creation.",
+      "source": "docs/evidence/2026-10-09-WF-four-bgm-install/audio-package.json"
     }
   ],
   "verified": "2026-10-05"

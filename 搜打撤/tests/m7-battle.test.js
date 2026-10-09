@@ -1,4 +1,4 @@
-import { beforeAll, describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { ensureM7EquipRules } from '../game/src/cards/cards.sync.m7.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
@@ -80,10 +80,18 @@ describe('M7 装备触发器真实 BattleSession 消费', () => {
     BattleSession.start(game, [foe()], { isBoss: false, name: 'M7 沉船宝盒验证' });
     await drain();
     const before = BattleSession.getSnapshot().hand.length;
-    fireConsumeTriggers(card('tt2-wreck'), null);
-    const after = BattleSession.getSnapshot();
-    expect(after.hand.length - before).toBe(2);
-    endBattle(game);
+    const box = card('tt2-wreck');
+    const plain = card('tt3-wave-slash');
+    // 锁定没有入手/抽到触发的随机池，避免卡牌自身追加抽牌干扰获取数量断言。
+    const pool = vi.spyOn(Cards, 'all').mockReturnValue([plain]);
+    try {
+      fireConsumeTriggers(box, null);
+      const after = BattleSession.getSnapshot();
+      expect(after.hand.length - before).toBe(2);
+    } finally {
+      pool.mockRestore();
+      endBattle(game);
+    }
   });
 
   it('奥术残卷：消耗触发只抽三张，不再回放描述文本', async () => {

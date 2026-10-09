@@ -67,7 +67,7 @@ const eventSceneIds = JSON.stringify(scenesJson.eventSceneMeta);
 check('场景·10 张事件 sceneId 覆盖', ['timeskip','demondeal','bandits','mystery','goldmine','goldhammer','relief','airdrop','chestdraw','systemsupply'].every(k => eventSceneIds.includes(`event-${k}`)), true);
 check('场景·标准节点与拾取契约', /scene-battle-bg/.test(gameSource) && /scene-extract-bg/.test(gameSource) && /scene-pickup-key/.test(gameSource), true);
 check('场景·落脚进入全屏房间链', /UI\.beginRoom\(\)/.test(gameSource) && /_roomActive/.test(src('ui/ui.js')), true);
-check('音频·14首原创场景曲使用Howler循环与交叉渐变', /from 'howler'/.test(src('audio/sound.js')) && ['01-title-frostglass.ogg', '02-explore-ashline.ogg', '03-battle-blackpulse.ogg', '14-defeat-unextinguished-lamp.ogg'].every(name => src('audio/sound.music.catalog.js').includes(name)) && /new Howl\(\{[^}]*loop:\s*true/s.test(src('audio/sound.js')) && /class SceneMusicPlayer/.test(src('audio/sound.music.player.js')), true);
+check('音频·四首原创场景曲使用Howler循环与交叉渐变', /from 'howler'/.test(src('audio/sound.js')) && ['01-title-frostglass.ogg', '02-explore-ashline.ogg', '03-battle-coldfront.ogg', '05-shop-lamplight-deal.ogg'].every(name => src('audio/sound.music.catalog.js').includes(name)) && /new Howl\(\{[^}]*loop:\s*true/s.test(src('audio/sound.js')) && /class SceneMusicPlayer/.test(src('audio/sound.music.player.js')), true);
 check('战斗·意图轮转与 DOM 接线', /function intentFor/.test(src('battle.js')) && /foe\.intent = intentFor\(foe, turn\)/.test(src('battle.js')) && /sts-intent/.test(src('battle.js')), true);
 // 拖牌指向已从静态 data-aim 属性迁移为渲染后写入 dataset.aim；守护真实接线而非旧实现细节。
 check('战斗·拖牌 Pointer Events 接线保留', /pointerdown/.test(src('battle.js')) && /dataset\.aim/.test(src('battle.js')) && /drag-over/.test(src('battle.js')), true);

@@ -1003,7 +1003,7 @@ export const syncSlice = {
         ['tt12-basicdev', R(SELF, [acquire(2, '0费招式', 'hand')])],
         ['tt3-treasure-hunt', dmgOne([acquire(1, '随机', 'discover')])],
         ['cc-lava-blast', dmgOne([acquire(1, '二次爆炸', 'hand')])],
-        ['cmtn125e1nk0', R(SELF, [acquire(1, '传说或能力卡', 'discover')])],
+        ['cmtn125e1nk0', R(SELF, [acquire(1, '传说', 'discover')])],
         ['tt12-magicfind', R(SELF, [acquire(1, '1费招式', 'discover', 'zeroCost')])],
         // —— B7 增益·祝福·能量 ——
         ['tt7-stealth', R(SELF, [

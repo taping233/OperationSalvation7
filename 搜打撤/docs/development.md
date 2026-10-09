@@ -37,7 +37,8 @@ npm run assets:audit
 
 ## 界面实现约定
 
-- 全局缩放由 `ui-scale.js` 管理；新增 UI 坐标通过 `uiRect()` 换算。`position: fixed` 的视口坐标需按缩放比例换算，详见 `architecture.md` 的样式级联说明。
+- 界面进入/退出的分块错峰、方向、缓动与时长统一在 `game/src/ui/surface-motion.js` 修改；`interface-motion.js` 在公共 `showOverlay/hideOverlay/showScreen/hideScreen` 入口自动挂载，首页与制作名单沿已有生命周期接入。基地同页刷新不重播，切换页签重播；战斗轻面板用快档，减少动态效果时禁用。实际隐藏、焦点和业务回调仍由原界面入口管理。
+- 全局缩放由 `ui-scale.js` 管理：以 1920×1080 为基准，取窗口宽高比例的较小值统一缩放全部元素，不设小窗下限或局部字号/按钮放大；额外宽高由现有布局展开。新增 UI 坐标通过 `uiRect()` 换算。`position: fixed` 的视口坐标需按缩放比例换算，详见 `architecture.md` 的样式级联说明。
 - 启动时会移除原生 `title` 属性，提示使用自绘文字层。输入框事件不能触发整页重建；处理 Escape 前先判断 `isComposing`，避免中断中文输入。
 - overlay 背景由 inert 隔离；新增常驻层时同步更新排除名单。图片挂载后调用 `SDT.Art.decodeIn(el)`，避免内置浏览器合成黑窗。
 - 同一候选选择面板内卡牌不得重复。动画与空闲态性能规则见 `performance.md`；卡牌规则和数据来源见 `rules.md`、`architecture.md` 与生成的 `game-compendium.md`。
@@ -46,7 +47,7 @@ npm run assets:audit
 
 发布须老板明确授权；当前范围仅 Vite，按质量门完成相关测试、自测、版本核对与构建，内置浏览器验收后再执行已授权发布。版本唯一真源为 `game/version.json`。历史 Electron 封装流程保持冻结，不因“收官”自动运行。
 
-## 原型纪律（2026-09-06，源自 gamedev skills / prototype-fast）
+## 玩法原型
 
-- 验证性玩法先做**抛弃式 spike**：一个问题一个原型 + 时间盒（机制级 30~90 分钟），灰箱素材、零打磨；验证"是否好玩"后再按工程规范进 `src/`。
+- 验证性玩法先用临时原型回答一个问题，机制试验控制在 30~90 分钟；使用灰箱素材，记录实际观察，再决定是否进入正式实现。
 - spike 代码不得直接进入主源码目录；落地时重写命名与结构（原型回答的是问题，不是交付物）。

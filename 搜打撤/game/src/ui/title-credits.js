@@ -1,4 +1,6 @@
+import './home-fx.js';
 import { enterHomeDialog, leaveHomeDialog } from './home-menu-motion.js';
+import './home-layers.js';
 
 // Keep native dialog focus and return semantics while matching the home page choreography.
 const creditsButton = document.getElementById('mCredits');

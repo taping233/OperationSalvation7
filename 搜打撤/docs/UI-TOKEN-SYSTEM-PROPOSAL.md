@@ -1,8 +1,8 @@
 # UI Token/变体体系提案（UI-TOKEN-SYSTEM-PROPOSAL）
 
-> 2026-09-29 立项备查，**下次 UI 大修的实施参照**。形制取自 [shadcn/ui](https://github.com/shadcn-ui/ui)（125k⭐）的
-> 「语义 token + 组件源码归项目 + 变体矩阵」组织方式——**借组织方式，不借它的视觉**（v3 重金属/主题演出是游戏资产，保留）。
-> 触发时机：照相馆验收收官、CSS 热点空闲后。关联：jscpd 报告的结构性重复（docs/evidence/jscpd-2026-09-29/）。
+文档状态：09-29 的候选方案，实施范围需按当前 UI 问题和文件归属确定。参考 [shadcn/ui](https://github.com/shadcn-ui/ui) 的语义变量、项目内组件源码和变体矩阵组织方式；视觉与保留项按[现行视觉规范](production/art/VISUAL-BIBLE.md)核对。
+
+下方重复统计来自当时的 `docs/evidence/jscpd-2026-09-29/`，选题前重新确认对应文件与重复块。
 
 ## 现状问题（jscpd 实证）
 

@@ -1,6 +1,6 @@
-@import url('./character-cover.css');
-@import url('./character-pool-cover.css');
-@import url('./character-view-motion.css');
+/* EXP @import url('./character-cover.css'); */
+/* EXP @import url('./character-pool-cover.css'); */
+/* EXP @import url('./character-view-motion.css'); */
 
 /* 远征选角：人物预览优先，确认按钮只负责提交当前选择。 */
 #overlay .card.page:has(.cls2-page) { background:#101112; border:0; }

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "at": "2026-10-09T04:43:16.119Z",
+  "task": "WF-art-doc-context-1009",
+  "method": "copy-original-before-revision",
+  "items": [
+    {
+      "source": "docs/production/art/VISUAL-BIBLE.md",
+      "target": "docs/archive/WF-art-doc-context-1009/originals/docs/production/art/VISUAL-BIBLE.md",
+      "sha256": "23c259391eab0af206dbc2a4f4366bfce304659a117fab17f12d6868a2541351",
+      "replacedBy": "docs/production/art/VISUAL-BIBLE.md"
+    }
+  ],
+  "limits": [
+    "原文保持字节，内部相对链接仍以 source 原位置解释",
+    "本命令未修改源文件；替代状态由负责人核实并在现行入口注明"
+  ]
+}

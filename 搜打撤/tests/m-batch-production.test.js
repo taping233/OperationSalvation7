@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
 import before from '../docs/evidence/e8-card-migration-2026-09-27/catalog-before.json';
+import { approvedRevisionBaseline, RETIRED_1010 } from './helpers/card-catalog-approved-revisions.js';
 
 const text = readFileSync('docs/M-BATCH-MATRIX.md', 'utf8');
 const targetIds = [...text.matchAll(/^\| ([a-z][\w-]+) \|/gm)].map(match => match[1]).filter(id => id !== 'id');
@@ -30,8 +31,8 @@ describe('M batch production boot', () => {
     expect(targetIds).toHaveLength(150);
     expect(new Set(targetIds).size).toBe(150);
     expect(excludedIds).toHaveLength(51);
-    expect(first).toHaveLength(272);
-    const missing = targetIds.filter(id => !first.find(card => card.id === id)?.rules);
+    expect(first).toHaveLength(268);
+    const missing = targetIds.filter(id => !RETIRED_1010.has(id) && !first.find(card => card.id === id)?.rules);
     console.info('M missing target rules', JSON.stringify(missing));
     expect(missing).toEqual([]);
     expect(first.filter(card => !card.rules).map(card => card.id).sort()).toEqual([...excludedIds].sort());
@@ -42,7 +43,7 @@ describe('M batch production boot', () => {
   });
 
   it('preserves every original ID and only changes explicitly migrated fields', () => {
-    const old = before.production.cards.map(row => row.card);
+    const old = approvedRevisionBaseline(before).production.cards.map(row => row.card);
     expect(first.map(card => card.id).sort()).toEqual(old.map(card => card.id).sort());
     for (const previous of old) {
       const current = first.find(card => card.id === previous.id);

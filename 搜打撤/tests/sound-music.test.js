@@ -119,14 +119,28 @@ describe('scene BGM crossfades', () => {
 });
 
 describe('scene routing', () => {
-  it('maps all fourteen cues and all three boss identities', () => {
-    expect(Object.keys(MUSIC_TRACKS)).toHaveLength(14);
-    expect(resolveMusicScene('base', null)).toBe('base');
-    expect(resolveMusicScene('board', 'exit')).toBe('extraction');
-    expect(resolveMusicScene('title', 'success')).toBe('success');
-    expect(resolveMusicScene('title', 'defeat')).toBe('defeat');
-    for (const [id, scene] of [['boss_general', 'boss-governor'], ['boss_orc', 'boss-brood'], ['boss_elem', 'boss-psionic']]) {
-      expect(resolveMusicScene('battle', 'shop', id)).toBe(scene);
+  it('keeps old soundscape preferences on the approved file soundtrack', async () => {
+    localStorage.setItem('sdt-music-source', 'scape');
+    vi.resetModules();
+    await import('../game/src/audio/sound.js');
+    expect(window.SDT.Sound.musicSource).toBe('original');
+    window.SDT.Sound.setMusicSource('scape');
+    expect(window.SDT.Sound.musicSource).toBe('original');
+    expect(localStorage.getItem('sdt-music-source')).toBe('original');
+    localStorage.removeItem('sdt-music-source');
+  });
+
+  it('uses exactly four tracks across base, nodes, settlements and bosses', () => {
+    expect(Object.keys(MUSIC_TRACKS)).toEqual(['title', 'board', 'battle', 'shop']);
+    expect(resolveMusicScene('base', null)).toBe('title');
+    for (const scene of ['exit', 'fire', 'event', 'altar', 'extraction']) {
+      expect(resolveMusicScene('board', scene)).toBe('board');
+    }
+    expect(resolveMusicScene('board', 'shop')).toBe('shop');
+    expect(resolveMusicScene('title', 'success')).toBe('title');
+    expect(resolveMusicScene('title', 'defeat')).toBe('title');
+    for (const id of ['boss_general', 'boss_orc', 'boss_elem']) {
+      expect(resolveMusicScene('battle', 'shop', id)).toBe('battle');
     }
     expect(resolveMusicScene('battle', null, 'nest_unknown')).toBe('battle');
     expect(resolveMusicScene(null, 'shop')).toBe(null);

@@ -59,6 +59,19 @@ body.page-covered #title.home-composed[data-home-phase] .home-footer { animation
 @keyframes hmDialogIn { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
 @keyframes hmDialogOut { to { opacity: 0; transform: translateY(9px) scale(.98); } }
 
+/* This native dialog is nested in the departing title, but owns its region phase. */
+#title #homeCredits > form { position: absolute; left: 25px; top: 22px; }
+#title #homeCredits > form .home-credits-back { position: static; }
+#title #homeCredits[data-surface-motion][data-surface-phase] > [data-surface-block] {
+  animation: surfaceBlockIn var(--surface-in) var(--surface-ease) var(--surface-delay,0ms) both !important;
+}
+#title #homeCredits[data-surface-motion][data-surface-phase="b"] > [data-surface-block] {
+  animation-name: surfaceBlockInB !important;
+}
+#title #homeCredits[data-surface-motion][data-surface-phase="out"] > [data-surface-block] {
+  animation: surfaceBlockOut var(--surface-out) cubic-bezier(.5,0,.8,.4) both !important;
+}
+
 body.reduce-motion #title.home-composed[data-home-phase] *,
 body.reduce-motion #title.home-composed .home-credits-dialog[data-home-motion]::backdrop {
   animation: none !important; transition: none !important;

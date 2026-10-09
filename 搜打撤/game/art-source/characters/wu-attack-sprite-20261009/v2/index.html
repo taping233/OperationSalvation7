@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>无 · 攻击 Sprite</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#141b26;color:#e7edf8;font:16px/1.6 system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:22px}h1{font-size:23px;margin:0 0 6px}p{margin:0 0 12px;color:#afbbd0}.stage{background:radial-gradient(ellipse at 50% 70%,#354255,#1b2431 65%);border:1px solid #40516a;border-radius:12px;overflow:hidden}.stage canvas{display:block;width:auto;max-width:100%;height:auto;max-height:60vh;margin:auto}nav{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}button,a{background:#273750;color:#e7edf8;border:1px solid #526984;border-radius:6px;padding:7px 12px;text-decoration:none;font:inherit}button{cursor:pointer}button:disabled{opacity:.45}output{display:block;color:#adbfda}.light .stage{background:#bbc5d1}label{display:flex;gap:10px;align-items:center}input{flex:1}details{margin-top:16px}details img{width:100%;background:#29364a}
+</style>
+<main>
+<h1>无 · 攻击</h1>
+<p>蓄力 → 斩击 → 收势。腰胯带动斩击、后脚抬跟、短拖影与命中停顿。8 张姿态，单次约 0.42 秒。</p>
+<div class="stage"><canvas width="768" height="512" aria-label="无的攻击逐帧动画"></canvas></div>
+<nav><button id="once" disabled>播放一次</button><button id="loop" disabled>循环演示</button><button id="pause" disabled>暂停</button><button id="step" disabled>逐帧</button><button id="bg">切换浅色背景</button></nav>
+<label>动作进度<input id="timeline" aria-label="动作进度" type="range" min="0" max="9" value="0" disabled></label>
+<output>正在加载帧图…</output>
+<nav><a href="wu-attack-sheet.png" download>PNG 帧图</a><a href="sprite.json" download>动作配置</a><a href="../../wu-idle-sprite-20261009/v2/index.html">查看待机</a></nav>
+<p><a href="https://www.slynyrd.com/blog/2018/9/8/pixelblog-9-melee-attacks" target="_blank" rel="noopener">参考：Slynyrd 剑击拆帧</a> <a href="https://itch.io/t/2489691/pixel-tutorial-sword-slash-animation" target="_blank" rel="noopener">参考：imonk 斩击教程</a></p><details><summary>查看 8 张关键姿态</summary><img src="wu-attack-sheet.png" alt="无的八张攻击姿态"></details>
+</main>
+<script type="module">
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),status=document.querySelector('output');
+const once=document.querySelector('#once'),loopButton=document.querySelector('#loop'),pause=document.querySelector('#pause'),step=document.querySelector('#step'),timeline=document.querySelector('#timeline');
+document.querySelector('#bg').onclick=()=>document.body.classList.toggle('light');
+try {
+const spec=await fetch('./sprite.json').then(r=>{if(!r.ok)throw Error('动作配置加载失败');return r.json()});
+const sheet=new Image();sheet.src=spec.texture;await sheet.decode();
+let active=!matchMedia('(prefers-reduced-motion: reduce)').matches,repeat=true,index=0,elapsed=0,resting=false,restElapsed=0,last=performance.now();
+function draw(){const frame=resting?spec.restFrame:spec.sequence[index];ctx.clearRect(0,0,spec.frameWidth,spec.frameHeight);ctx.drawImage(sheet,(frame%spec.columns)*spec.frameWidth,Math.floor(frame/spec.columns)*spec.frameHeight,spec.frameWidth,spec.frameHeight,0,0,spec.frameWidth,spec.frameHeight);const phase=resting?'待机':spec.phases.find(p=>index>=p.start&&index<=p.end).name;status.textContent=`${active?'播放中':'已暂停'} · ${phase} · 第 ${index+1}/${spec.sequence.length} 步 · 姿态 ${frame+1}/${spec.uniquePoseFrames}${index===spec.impactStep&&!resting?' · 命中点':''}`;canvas.dataset.pose=frame;canvas.dataset.phase=phase;timeline.value=index;pause.textContent=active?'暂停':'继续';step.disabled=active;}
+function start(shouldRepeat){repeat=shouldRepeat;index=0;elapsed=0;restElapsed=0;resting=false;active=true;last=performance.now();draw();}
+function tick(now){const delta=now-last;last=now;if(active&&!document.hidden){if(resting){restElapsed+=delta;if(restElapsed>=spec.previewRestMs){resting=false;index=0;elapsed=0;draw();}}else{elapsed+=delta;while(active&&!resting&&elapsed>=spec.durationsMs[index]){elapsed-=spec.durationsMs[index];if(index===spec.sequence.length-1){if(repeat){resting=true;restElapsed=0;}else{active=false;}}else{index++;}draw();}}}requestAnimationFrame(tick);}
+once.onclick=()=>start(false);loopButton.onclick=()=>start(true);pause.onclick=()=>{active=!active;last=performance.now();draw();};step.onclick=()=>{resting=false;index=(index+1)%spec.sequence.length;elapsed=0;draw();};timeline.oninput=()=>{active=false;resting=false;index=Number(timeline.value);elapsed=0;draw();};document.addEventListener('visibilitychange',()=>last=performance.now());for(const element of [once,loopButton,pause,timeline])element.disabled=false;draw();requestAnimationFrame(tick);
+}catch(error){status.textContent=`加载失败：${error.message}`;console.error(error);}
+</script>
+</html>

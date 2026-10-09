@@ -158,6 +158,8 @@
   transition-duration: var(--exh-press);
 }
 /* 右下镜头定位键（expedition-map.css 底态非 important，直接覆盖） */
+body:not(.lobby):not(.scene-battle-3d) #topBtns #btnLocate { display: none !important; }
+
 #topBtns #btnLocate {
   background: rgba(17,18,19,.88);
   border-color: rgba(170,174,177,.3);

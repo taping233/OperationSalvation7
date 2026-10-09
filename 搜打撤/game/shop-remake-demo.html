@@ -1,0 +1,8 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>灯下交易 · 商店重做试听</title>
+<style>body{margin:0;background:#17191d;color:#e9e2d2;font:16px/1.8 system-ui,sans-serif}main{max-width:760px;margin:auto;padding:48px 26px}small{color:#c5a870;letter-spacing:.16em}h1{font-size:44px;line-height:1.25}p{color:#bfb8aa}.player{padding:24px;border:1px solid #756343;border-radius:14px;background:#27251f}audio{width:100%;margin-top:18px}a{color:#ddbf85}</style>
+<main><small>代号柒 / 商店重做</small><h1>灯下交易</h1><p>小编制暗色爵士 · 轻微摇摆 · 钢琴短动机与弱音铜管问答</p><section class="player"><strong>全新曲目 · 30 秒 · 96 BPM</strong><audio controls preload="metadata"></audio><p id="status" aria-live="polite">点击播放试听</p><a id="download" download>下载 MP3</a></section><p>前十秒建立短动机，中段把主角交给弱音铜管，最后回到变奏主题。保留交易时的松弛感，和声带一点不安。</p><p>参考入口：<a href="https://monster-siren.hypergryph.com/music/880369" target="_blank" rel="noopener">明日方舟 · 商人坎诺特</a>。本曲重新作曲，未使用参考录音或原曲旋律。</p><p><a href="./four-music-demos.html">上一轮四首试听</a></p></main>
+<script type="module">
+import url from '../docs/evidence/2026-10-09-WF-shop-remake/shop-lamplight-deal-30s.mp3?url';
+const a=document.querySelector('audio'),s=document.getElementById('status');a.src=url;document.getElementById('download').href=url;
+a.addEventListener('playing',()=>s.textContent='正在试听 · 灯下交易');a.addEventListener('pause',()=>s.textContent=a.ended?'试听结束':'已暂停');a.addEventListener('ended',()=>s.textContent='试听结束');a.addEventListener('error',()=>s.textContent='加载失败');document.addEventListener('visibilitychange',()=>{if(document.hidden)a.pause()});
+</script></html>

@@ -29,7 +29,7 @@ npm run build
 
 quick / full 执行剧情编译、语法、数据、类型、lint、增量资产检查与所选 Vitest；eslint、jsconfig/tsconfig、Vitest 配置与提交钩子变更强制 full，类型配置见 [check-types 的 configs 清单](../scripts/check-types.mjs)。快速门是局部反馈，不表示整项目通过；全量以 CI（master push/PR）为准，本地 `npm test` 全量只在阶段收尾、集成风险需要且 CI 尚未覆盖时按需运行，"落库"不自动触发本地全量，出现红灯按新问题处置。`FORCE_FULL_TESTS=1` 在同一暂存验收链中强制 full；`SKIP_FULL_TESTS` 是明确绕过，绕过后的提交不得记为本地验证通过。任何逃生变量都是明确绕过，不是提速或验证通过；失败按输出补验。
 
-### 验收分级（09-30 双端对齐）
+### 验收分级
 
 | 改动 | 必要验收 |
 | --- | --- |
@@ -56,8 +56,8 @@ A 档三证据：①与幸存正本逐字相同或全库零引用（搜索含 ht
 - 平台工具入口按当次说明核实（Codex 当前为 `mcp__cua_repl` 的 `cua` API；ZCode 用当次内置浏览器工具与已授权桥接入口），历史经验不代表当前能力。内置浏览器不可用、没有来源页或服务不可安全启动时，记录平台、地址、时间、错误和未核验场景；继续独立工作，不换外部浏览器，不宣称实页通过。
 - 战斗验收走真实开局流程；`devForceBattle` 在没有随身卡牌的新局会拒绝启动；标题页 `#titleDev` 面板只用于构造节点入口测试。交互优先走真实输入；工具明确支持页面求值时可构造功能场景，合成事件需标注。截图发黑先检查转场；重载前确认不会打断别人的验收。
 - 截图证明外观，计算样式 A/B 证明所选属性差异，合成交互证明所构造事件路径，真实输入/hover 证明真实输入路径，刷新/读档证明该存档场景；分别列范围，不互相替代，不得为了截图掩盖真实错误。检查页面 `error`、真实状态和完整交互路径；战斗日志位于 `#log`。
-- 浏览器证据统一入口 `npm run workflow -- browser import/compare`（`scripts/workflow-browser.mjs`）；`scripts/iab-drive.mjs` 是内置浏览器驱动与验收剧本的一行式入口。窗口/origin/身份不一致记 inconclusive；工具存在不等于真实输入已验。
-- 玩家可见变化的 B 档实页验收可用固定剧本（`SDT.Agent.scenes`，协议见 agent-protocol「验收剧本」节）：剧本断言 JSON 当逻辑证据 + 当次内置浏览器关键页截图 1–2 张当视觉证据，合并构成实页证据，验收结论仍由执行会话下（2026-10-01 老板拍板）。场景报告落 `docs/evidence/<日期>-<任务>/`；长场景（>60s）在共享树受并行会话 HMR 重载限制，受阻时以 jsdom 同源测试先行、实机补跑挂 PENDING。
+- 浏览器证据统一入口 `npm run workflow -- browser import/compare`（`scripts/workflow-browser.mjs`）；`scripts/iab-drive.mjs` 是 ZCode 的驱动桥接入口，Codex 使用当次内置浏览器接口。窗口/origin/身份不一致记 inconclusive；证据同时注明真实输入或构造事件的范围。
+- 玩家可见变化的 B 档实页验收可用固定剧本（`SDT.Agent.scenes`，见[接口协议](agent-protocol.md#九验收剧本sdtagentscenes)）：剧本断言 JSON 与当次内置浏览器关键页截图分别说明逻辑和视觉结果，由执行会话判断是否覆盖目标。报告落 `docs/evidence/<日期>-<任务>/`；共享树 HMR 导致长场景受阻时，可先做 jsdom 定向测试，把待补实页范围记入任务未核项；需老板处置时再登记 PENDING。
 
 ## CI 状态
 

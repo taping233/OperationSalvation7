@@ -1,6 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { assertInventoryComplete, buildCardInventory, compareMigrationInventories, describeStage, renderCardInventory } from './helpers/e8-card-inventory.js';
 import beforeInventory from '../docs/evidence/e8-card-migration-2026-09-27/catalog-before.json';
+import { approvedRevisionBaseline, RETIRED_1010 } from './helpers/card-catalog-approved-revisions.js';
 import { readFileSync } from 'node:fs';
 
 const BOOT_ORDER = ['ensureStarters', 'ensureSha', 'ensureTabletop', 'ensureDmgTypes', 'ensureEffectFields'];
@@ -17,7 +18,8 @@ const M_BATCH_ONPLAY_IDS = [
 ];
 const ALL_M_BATCH_IDS = [...readFileSync('docs/M-BATCH-MATRIX.md', 'utf8')
   .matchAll(/^\| ([a-z][\w-]+) \|/gm)].map(match => match[1]).filter(id => id !== 'id');
-const APPROVED_IDS = [...MIGRATED_IDS, ...ALL_M_BATCH_IDS];
+const APPROVED_IDS = [...MIGRATED_IDS, ...ALL_M_BATCH_IDS].filter(id => !RETIRED_1010.has(id));
+const currentBaseline = approvedRevisionBaseline(beforeInventory);
 const APPROVED_FACE_BY_ID = {
   'tt3-noon-duel': { dmg: 2, dmgType: 'fixed' },
   // 2026-09-29 老板裁决：花瓣法阵 heal 2→3，desc「回复 3」与 before 快照一致故仅 heal 差异。
@@ -158,6 +160,7 @@ describe('E8 isolated production inventory', () => {
   });
 
   it('fails on duplicate/missing IDs, omitted entries, counts and missing classifications', () => {
+    expect(describeStage('JSON key order', [{ id: 'same', cost: 1 }], [{ cost: 1, id: 'same' }]).changed).toEqual([]);
     const first = boot.production[0];
     expect(() => describeStage('duplicate', [], [first, first])).toThrow('duplicate ID');
     expect(() => describeStage('missing', [], [{}])).toThrow('missing stable ID');
@@ -178,15 +181,15 @@ describe('E8 isolated production inventory', () => {
   it('changes only approved IDs (E8 bag heal + M batch onPlay) by adding rules, leaving every other full card untouched', () => {
     const approvedIds = APPROVED_IDS;
     expect(M_BATCH_ONPLAY_IDS.every(id => ALL_M_BATCH_IDS.includes(id))).toBe(true);
-    const comparison = compareMigrationInventories(beforeInventory, inventory, approvedIds, HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID);
+    const comparison = compareMigrationInventories(currentBaseline, inventory, approvedIds, HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID);
     expect(comparison.changedIds.sort()).toEqual([...approvedIds].sort());
     const unexpected = clone(inventory);
     unexpected.production.cards.find(row => row.id === MIGRATED_IDS[0]).card.heal++;
-    expect(() => compareMigrationInventories(beforeInventory, unexpected, approvedIds, HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID))
+    expect(() => compareMigrationInventories(currentBaseline, unexpected, approvedIds, HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID))
       .toThrow('changed beyond approved rules addition');
     const changedSync = clone(inventory);
     changedSync.cardsSync.cards[0].card.desc += 'changed';
-    expect(() => compareMigrationInventories(beforeInventory, changedSync, approvedIds, HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID))
+    expect(() => compareMigrationInventories(currentBaseline, changedSync, approvedIds, HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID))
       .toThrow('CARDS_SYNC card fields changed');
   });
 

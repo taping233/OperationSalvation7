@@ -2,16 +2,20 @@
 
 ![星月·定稿立绘](ref-images/xingyue.webp)
 
-## 基础信息（以 characters.js / 选人界面为准）
+## 身份与参考使用
+
+既有运行参考为 `game/assets/portraits/full/xingyue.webp`，本页图片为同图副本。当前画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)；新图按指定版本核对发饰、服装与道具，历史姿态和配方保留在下方版本描述。
+
+## 当前角色数据（core/characters.js）
 
 | 项 | 值 |
 |---|---|
 | id | `xingyue` |
-| 名字 | 星月（2026-09-12 由「灯葵」改名，id 与立绘文件名不变） |
+| 名字 | 星月 |
 | 职业 | 牧师 |
 | 主题色 | `#81bcb0` |
 
-## 外观锚点（已定稿，出图必须遵守）
+## 历史：2026-09-12 立绘口径
 
 2026-09-12 老板逐轮定稿并验收主立绘（赛璐璐色块风大图，`roster-main-0912-big/xingyue_seed1411148278.png`，已入库三组立绘）。
 
@@ -25,7 +29,7 @@
 - 画风：**赛璐璐色块**（cel shading + flat color），纯深藏青渐变底。
 - 构图：全身居中、约占画幅高 85%、不出框；横版宽幅 16:9（4096×2304）。
 
-## 2026-09-19 painterly 全身立绘定稿（老板授权 Friday 定锚点）
+## 参考立绘描述（2026-09-19 painterly 版本）
 
 - 依据：`roster-painterly-four-v2-20260919-120257/dengkui-120257.png`（seed 1412045851），已实装 `portraits/full/xingyue.webp`。
 - 演出：全身站姿，**右手提星灯平举身侧（灯光照亮裙摆）+ 左手胸前祈祷手势**（此为该张已实装立绘的演出记录；**2026-09-20 老板令后星灯不再是锚点**，后续出图不必携带）；正脸三分钟视角、双眼金色可见（禁全侧面）。
@@ -34,7 +38,7 @@
 - 色调：**白 + 青绿 + 暖金**（主题色 `#81bcb0` 落地）；simple background 素底（旧版"背景大月牙+星尘"为历史口径，painterly 版不用）。
 - 画风：painterly 统一画风模块（miv4t+quasarcake，`official_painterly_style.py`）。
 
-### 细粒度锚点（0919 定稿立绘逐要素，出图照抄）
+### 对应参考版本的细节
 
 依据 `roster-painterly-four-v2-20260919-120257/dengkui-120257.png`（实装版）：
 

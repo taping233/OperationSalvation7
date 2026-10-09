@@ -29,14 +29,12 @@ export const dataSlice = {
     // 银币 ×2、铜币 ×2 为重复/同卡备注，各保留一种设计）。
     // 资源标注重拍照片后：钥匙/口粮/木材系/经济卡包按卡面「资源·N币」标注
     // 改为资源类型（设计者规则：未标注类型的卡牌均为资源）；
-    // 急救合剂/金疮药/能源结晶/金银铜币/员工通行证仍为道具（药水与通行证可在背包直接使用）。
+    // 金疮药/能源结晶/金银铜币/员工通行证仍为道具（药水与通行证可在背包直接使用）。
     TABLETOP: [
       // —— 第一排 ——
-      { id: 'tt-medneedle',  name: '急救合剂', cost: 1, rarity: '古朴', type: '道具', desc: '回复 16 点生命。', value: 4 },
       { id: 'tt-copper',     name: '铜币',     cost: 0, rarity: '初始', type: '道具', desc: '高价值，可出售。', value: 3, unrandom: true }, // 2026-09-13 老板拍板：经济牌退出商店/发现池，堵买低卖高套利
       { id: 'tt-keys-bunch', name: '一串钥匙', cost: 0, rarity: '古朴', type: '资源', desc: '钥匙 ×2。', value: 4, rules: { version: 1, base: { material: { kind: 'keys', amount: 2 } } } },
       { id: 'tt-rations',    name: '口粮',     cost: 0, rarity: '初始', type: '资源', desc: '升级宠物。', value: 3, rules: { version: 1, base: { material: { kind: 'rations', amount: 1 } } } },
-      { id: 'tt-token-color', name: '员工通行证A', cost: 2, rarity: '史诗', type: '道具', desc: '觉醒。', value: 8 },
       // —— 第二排 ——
       { id: 'tt-gold',       name: '金币',     cost: 0, rarity: '史诗', type: '道具', desc: '贵重货币，可出售。', value: 9, unrandom: true },
       { id: 'tt-econpack',   name: '经济卡包', cost: 2, rarity: '传说', type: '资源', desc: '带入战场时，以 5 张随机卡牌开局。可出售。', value: 10, sellable: true, unrandom: true }, // 资源标注重拍：卡面明确「可出售 10币」
@@ -155,7 +153,6 @@ export const dataSlice = {
       //     未在本摞照片中出现的条目（魔纹银剑/深红丝袋/圣杖/玄龟/草甲/逆弓/聚魔之血/深衍日记）保持原样）——
       { id: 'tt3-silver-runesword', name: '魔纹银剑', cost: 2, rarity: '稀有', type: '装备', desc: '装备：攻击 +3。', value: 3 },
       { id: 'tt3-azure-sword',  name: '百炼青虹剑', cost: 2, rarity: '稀有', type: '装备', desc: '消耗时 +4 甲，将其置于牌库底。' },
-      { id: 'tt3-deep-seal',    name: '深解印记', cost: 4, rarity: '稀有', type: '装备', desc: '诅咒状态下，攻 +2，法伤 +2。' },
       { id: 'tt3-fate-wheel',   name: '命运钟表', cost: 4, rarity: '史诗', type: '装备', desc: '限定：弃掉所有手牌，获得 1 个额外回合。' },
       { id: 'tt3-crimson-pouch', name: '深红丝袋', cost: 2, rarity: '稀有', type: '装备', desc: '装备：可复制你装备的 1 张牌。', value: 4 },
       { id: 'tt3-holy-staff',   name: '圣杖',     cost: 1, rarity: '古朴', type: '装备', desc: '装备：消耗能量进入法阵。', value: 3 },
@@ -172,7 +169,6 @@ export const dataSlice = {
       { id: 'tt3-reverse-bow',  name: '逆弓',     cost: 2, rarity: '古朴', type: '装备', desc: '装备：对方行动时，将 2 张手牌换新。', value: 2 },
       { id: 'tt3-deep-diary',   name: '深衍日记', cost: 1, rarity: '古朴', type: '装备', desc: '装备：记载深处的秘密。', value: 3 },
       // —— 装备（第四批照片重辨补录 2 张：此前未入库）——
-      { id: 'tt3eq-boiler',     name: '魔法锅炉', cost: 3, rarity: '古朴', type: '装备', desc: '限定：消耗至多 2 张牌，发现等量随机卡牌。' },
       { id: 'tt3eq-mistbox',    name: '迷之匣',   cost: 2, rarity: '古朴', type: '装备', desc: '对战开始时，将 2 张攻替换为随机卡牌。' },
       // —— 资源（散卡 3 张）——
       { id: 'tt3-garnet-marble', name: '石榴石弹珠', cost: 0, rarity: '古朴', type: '资源', desc: '漂亮的小玩意，可出售。', value: 4, unrandom: true }, // 2026-09-13 老板拍板：卖价 3→4，并退出商店/发现池
@@ -189,7 +185,7 @@ export const dataSlice = {
     // 角标「[[icon:crystal]] 字」多数取卡名/效果用字（彩/木/水/金/传），唯烟雾弹 [[icon:crystal]]稀 与效果
     // 无关，按稀有度「稀有」解读。
     TABLETOP4: [
-      { id: 'tt4-shine-token', name: '员工通行证C', cost: 2, rarity: '史诗', type: '道具', desc: '发现 1 张传说卡。', value: 7 },
+      { id: 'tt4-shine-token', name: '员工通行证C', cost: 2, rarity: '传说', type: '道具', desc: '发现 1 张传说卡。', value: 7 },
       { id: 'tt4-smoke-bomb',  name: '烟雾弹',   cost: 1, rarity: '稀有', type: '道具', desc: '非 BOSS 战逃跑一次。', value: 3 },
       { id: 'tt4-woodify',     name: '能量饮料', cost: 0, rarity: '初始', type: '道具', desc: '回复 6 点生命。', value: 2 },
     ],
@@ -369,7 +365,6 @@ export const dataSlice = {
     // 无 sync 定版的历史行继续内联；引用与字段优先级由 cards-sync-snapshot-guard.test.js 守卫。
     TABLETOP10: resolveCardCatalog([
       { id: 'starter-attack', name: '初始攻击', cost: 1, rarity: '初始', type: '武术', desc: '攻（+0）：造成等同于攻击力的伤害。', dmg: 0, dmgType: 'attack', value: 1 },
-      { id: 'tt-medneedle', name: '急救合剂', cost: 0, rarity: '稀有', type: '道具', desc: '回合开始时：回复 6点生命。持续 3 回合。', dmg: 0, heal: 16, value: 4 },
       { id: 'tt-copper', name: '铜币', cost: 0, rarity: '古朴', type: '资源', desc: '可出售。', dmg: 0, value: 3, sellable: true, unrandom: true },
       "tt-keys-bunch",
       { id: 'tt-rations', name: '口粮', cost: 0, rarity: '稀有', type: '资源', desc: '升级宠物。', dmg: 0, value: 3 },
@@ -455,7 +450,6 @@ export const dataSlice = {
       "tt3-savior-elixir",
       { id: 'tt3-silver-runesword', name: '诅咒之剑', cost: 0, rarity: '史诗', type: '装备', desc: '获得 2 点攻击力；回合开始时，受到2点伤害', dmg: 0, value: 3 },
       { id: 'tt3-azure-sword', name: '百炼青虹剑', cost: 0, rarity: '稀有', type: '装备', desc: '消耗该牌时立即释放一次’初始攻击‘。', dmg: 0, value: 3 },
-      { id: 'tt3-deep-seal', name: '深海印记', cost: 0, rarity: '稀有', type: '装备', desc: '诅咒状态下，攻 +2，法伤 +2。', dmg: 0, dmgType: 'attack' },
       { id: 'tt3-fate-wheel', name: '命运钟表', cost: 0, rarity: '史诗', type: '装备', desc: '主动技能：消耗所有手牌，获得 1 个额外回合。', dmg: 0, value: 4 },
       { id: 'tt3-crimson-pouch', name: '深红丝袋', cost: 0, rarity: '稀有', type: '装备', desc: '主动技能：选择并复制你的 1 张手牌。', dmg: 0, value: 3 },
       { id: 'tt3-holy-staff', name: '圣杖', cost: 0, rarity: '稀有', type: '装备', desc: '主动技能：净化并回复5血', dmg: 0, heal: 5, value: 3 },
@@ -470,11 +464,10 @@ export const dataSlice = {
       { id: 'tt3-light-mail', name: '急速跑鞋', cost: 0, rarity: '稀有', type: '装备', desc: '主动技能：抽3张牌', dmg: 0, draw: 3 },
       { id: 'tt3-reverse-bow', name: '连弩', cost: 0, rarity: '古朴', type: '装备', desc: '主动技能：直接释放手牌中的所有‘箭’，每释放1张，抽1张牌。', dmg: 0, draw: 1, value: 2 },
       { id: 'tt3-deep-diary', name: '深海咒印', cost: 0, rarity: '史诗', type: '装备', desc: '自身处于诅咒状态时，获得 2 点攻击力且法伤 +2。', dmg: 0, value: 4 },
-      "tt3eq-boiler",
       "tt3eq-mistbox",
       { id: 'tt3-wood-bundle', name: '一捆木材', cost: 0, rarity: '史诗', type: '资源', desc: '木材 ×3。', dmg: 0, value: 6, rules: { version: 1, base: { material: { kind: 'wood', amount: 3 } } } },
       { id: 'tt3-ration-double', name: '双份口粮', cost: 0, rarity: '史诗', type: '资源', desc: '口粮 ×2。', dmg: 0, value: 6, rules: { version: 1, base: { material: { kind: 'rations', amount: 2 } } } },
-      { id: 'tt4-shine-token', name: '员工通行证C', cost: 0, rarity: '史诗', type: '道具', desc: '发现 1 张传说卡。', dmg: 0, value: 4 },
+      "tt4-shine-token",
       { id: 'tt4-smoke-bomb', name: '烟雾弹', cost: 0, rarity: '稀有', type: '道具', desc: '非 BOSS 战逃跑一次。', dmg: 0, value: 3 },
       { id: 'tt4-woodify', name: '能量饮料', cost: 0, rarity: '古朴', type: '道具', desc: '回复 6 点生命。', dmg: 0, heal: 6, value: 2 },
       "tt5-galaxy-voyage",
@@ -579,7 +572,7 @@ export const dataSlice = {
       "tt8-curseimmune",
       { id: "cmtmvq6ss84l", name: "员工通行证A", cost: 0, rarity: "衍生", type: "道具", dmg: 0, desc: "获取本职业的能力卡", value: 8, sellable: false },
       { id: "cmtn0xt0zr7", name: "闪金之锤", cost: 1, rarity: "衍生", type: "武术", dmg: 5, dmgType: "fixed", desc: "造成5点固定伤害，若击杀敌人，+2币。", value: 3, sellable: false },
-      { id: "cmtn125e1nk0", name: "神秘召唤", cost: 2, rarity: "史诗", type: "法术", dmg: 0, desc: "发现一张传说或能力卡。", value: 4, sellable: false },
+      "cmtn125e1nk0",
       { id: "cmtn1gfhczzj", cls: "降临者", name: "厄运", cost: 0, rarity: "职业", type: "法术", dmg: 0, desc: "随机获取1张能施加诅咒的招式", value: 2, sellable: false, unrandom: true },
       { id: "cmtn1i64j7y7", cls: "侠客", name: "盗宝", cost: 1, rarity: "职业", type: "武术", dmg: 0, desc: "发现一张装备卡", value: 3, sellable: false, unrandom: true },
       { id: "cmtn1lbhbqi4", cls: "降临者", name: "充能火球", cost: 1, rarity: "职业", type: "法术", dmg: 4, dmgType: "spell", desc: "4‘，回合开始时，本牌伤害+1", value: 3, sellable: false, unrandom: true },
@@ -592,7 +585,6 @@ export const dataSlice = {
       { id: "cmtn7qttxqo4", name: "修鞋铺", cost: 0, rarity: "衍生", type: "事件", dmg: 0, desc: "获得员工通行证A碎片；复原1张卡牌", value: 0, sellable: false },
       // —— 以下 25 张共享 id 卡取设计者稿（整卡覆盖） ——
       { id: "starter-emergency-bandage", name: "应急绷带", cost: 0, rarity: "稀有", type: "道具", dmg: 0, heal: 12, desc: "回复12 点生命。", value: 0, sellable: false },
-      { id: "tt-token-color", name: "员工通行证A", cost: 0, rarity: "史诗", type: "道具", dmg: 0, desc: "集齐两枚碎片，合成真正的员工通行证A：获取一张能力卡。", value: 4, sellable: false },
       { id: "tt-econpack", name: "经济卡包", cost: 0, rarity: "史诗", type: "资源", dmg: 0, desc: "只能在仓库界面点击使用，获得5张随机卡牌", value: 10, sellable: false, unrandom: true },
       { id: "tt2-treasuremap", name: "寻宝图", cost: 0, rarity: "古朴", type: "装备", dmg: 0, draw: 1, desc: "主动技能：将 1张‘搜索大宝箱’洗入牌库，抽1张牌。", value: 2, sellable: false },
       { id: "tt3-flame-storm", cls: "降临者", name: "风暴火球", cost: 2, rarity: "职业", type: "法术", dmg: 4, dmgType: "spell", desc: "对全体敌人每人释放1次火球。", value: 3, sellable: false, unrandom: true },

@@ -2,14 +2,11 @@
 /* ============================================================
  * ui-scale.js —— 全局 UI 等比缩放（2026-09-19）
  *
- * 以 1920×1080 为设计基准：先按视口等比适配；低于可读性下限时不再继续缩小。
+ * 以 1920×1080 为设计基准，按视口宽高比例的较小值统一缩放全部元素。
  * zoom 挂 <html>：一次生效全部 DOM——flex 布局照常铺满窗口、文字按缩放后尺寸
  * 重排渲染不糊、浏览器自动换算事件坐标；media query 仍按真实视口判定不受影响。
  *
- * 小窗策略：MIN_ZOOM=0.85。窗口不足基准尺寸时保留至少 85% 的设计字号/控件，
- * html zoom 的额外宽高交给 100%/flex/grid/滚动容器消化（不强行裁切或加横向滚动）。
- * 因此基准 16px 正文有效下限约 13.6px，常用 44px 交互控件有效下限约 37px；
- * 低于此窗口仍可能需要浏览器自身缩放或滚动，这是可读性优先的明确取舍。
+ * 不设小窗缩放下限，也不单独放大文字或按钮；额外宽高由现有布局展开。
  *
  * 两套坐标口径（zoom≠1 时差 zoom 倍，混用必错位）：
  *   视口坐标 = e.clientX/Y、getBoundingClientRect()（显示位置）
@@ -20,31 +17,23 @@
 import SDT from '../core/sdt-facade.js';
 
 const BASE_W = 1920, BASE_H = 1080;
-const MIN_ZOOM = 0.85;
 let z = 1;
 
 /**
  * Return the CSS zoom for a viewport without reading global browser state.
- * At/above the reference resolution the old fit-to-window behaviour remains;
- * below it, the readability floor intentionally leaves a larger CSS layout
- * viewport inside the same physical window.
  * @param {number} width  视口宽（CSS 像素；非法值按 1 处理）
  * @param {number} height  视口高（CSS 像素）
- * @returns {number} 缩放系数（可读性下限 MIN_ZOOM 封底）
+ * @returns {number} 全部元素共用的等比缩放系数
  */
 function scaleForViewport(width, height) {
   const w = Number(width), h = Number(height);
   if (!Number.isFinite(w) || !Number.isFinite(h) || w <= 0 || h <= 0) return 1;
-  return Math.max(MIN_ZOOM, Math.min(w / BASE_W, h / BASE_H));
+  return Math.min(w / BASE_W, h / BASE_H);
 }
 
-/** 把当前视口的缩放写入 <html>（zoom 属性 + 可读性下限标记），无返回值。 */
+/** 把当前视口的统一缩放写入 <html>，无返回值。 */
 function apply() {
-  const fit = Math.min(window.innerWidth / BASE_W, window.innerHeight / BASE_H);
   z = scaleForViewport(window.innerWidth, window.innerHeight);
-  // CSS can afford larger typography/control hit areas only while the floor is
-  // active; keeping this state explicit avoids changing the 1920x1080 layout.
-  document.documentElement.toggleAttribute('data-ui-scale-floor', Number.isFinite(fit) && fit > 0 && fit < MIN_ZOOM);
   document.documentElement.style.zoom = z === 1 ? '' : String(z);
 }
 apply();
@@ -64,4 +53,4 @@ function rect(el) {
 function scale() { return z; }
 
 SDT.UiScale = { rect, scale, apply, scaleForViewport };
-export { rect, scale, apply, scaleForViewport, BASE_W, BASE_H, MIN_ZOOM };
+export { rect, scale, apply, scaleForViewport, BASE_W, BASE_H };

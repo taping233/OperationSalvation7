@@ -1,21 +1,23 @@
 # 架构与模块接口
 
-> 2026-09-27 按当前源码补充战斗拆分、Agent 域与样式入口。已提交/在途范围及验收状态见 [项目状态快照](archive/status/PROJECT-STATUS-2026-09-27.md)；本文描述接口，不表示当前整库已通过验收。
+本文维护模块职责、依赖方向和接口边界；实现位置见[源码目录说明](../game/src/README.md)。当前占用与交付证据从[状态入口](STATUS.md)查询，接口说明的适用范围由对应源码和契约测试核对。
 
 ## 入口与依赖方向
 
 `index.html` 只加载 `src/main.js`。所有源码均为 ESM；`main.js` 负责确定初始化顺序，模块自身使用显式 `import` 描述依赖。
 
-源码按功能域分目录（2026-09-23 目录化；2026-09-29 战斗域治理后 `battle/` 内部分五目录 `core/`（装配/引擎/结算/快照）、`effects/`（效果流水线）、`runtime/`（运行态）、`view/`（渲染）、`bag/`（牌堆/卡费），装载器与符文在 `battle/` 根）：`core/`（底座：随机/规则/输入/渲染/事件/数据/诊断/门面）、`ui/`（全局 UI 与控制器）、`experience/`（体验线：随身口袋常驻状态条与章节层级风险徽标）、`battle/`（战斗全域，含 effect-steps 效果流水线与 combat 伤害）、`cards/`（卡库数据/同步/规则/schema/视图）、`run/`（局内流程与对局地图）、`hub/`（基地/局外：仓库/背包/存档/商店/整备/命令）、`home/`（首页/叙事）、`audio/`（音频）、`agent/`（自动游玩与统计）；根层只留装配与入口（`main.js`、`boot-order.js`、`game.boot.js`、`r7a.qa.js`）和 `generated/`。分层判据与目录一致，详见 `game/src/README.md`。
+源码按功能域分目录：`core/` 管规则、随机、输入与绘图底座；`ui/` 管全局界面；`experience/` 管章节风险徽标；`cards/` 管卡库、同步与规则；`run/` 管局内地图与流程；`hub/` 管基地、背包与存档；`home/` 管首页与叙事；`audio/` 管音频；`agent/` 管自动游玩与统计。根层保留装配入口和 `generated/`。
+
+`battle/` 内分为 `core/`（装配、引擎、结算、快照）、`effects/`（效果流水线）、`runtime/`（运行态）、`view/`（渲染）、`bag/`（牌堆与卡费）；装载器与符文入口在战斗域根目录。
 
 分层从底向上为：规则/数据与纯工具 → 状态和领域逻辑 → 功能视图 → 启动接线；高层依赖低层。核心状态模块不得反向导入 `boot`、`run`、`hub`、`notes` 或具体视图。`tests/contracts.test.js` 通过 AST 依赖图拒绝循环依赖，覆盖子目录、重导出与动态字面量 import。
 
-2026-09-25～26 新增 `agent/` 自动游玩与统计域：`agent.js` 装配 `SDT.Agent`，观察和动作执行复用现有 UI/移动/战斗命令；策略、权重、LLM 适配、记录统计和数据页分模块。批跑/比较/进化/台账工具位于 `game/tools/agent-*.mjs`。协议与实验约束分别见 [agent-protocol.md](agent-protocol.md)、[agent-iteration-playbook.md](agent-iteration-playbook.md)。
+`agent/agent.js` 装配 `SDT.Agent`，观察和动作执行复用 UI、移动与战斗命令；策略、权重、LLM 适配、记录统计和数据页分模块。批跑、比较、进化和台账工具位于 `game/tools/agent-*.mjs`，接口与实验方法见[协议](agent-protocol.md)和[迭代手册](agent-iteration-playbook.md)。
 
 ## 稳定接口
 
 - `RULES`：跨功能固定数值，只读且冻结。
-- `window.SDT`：桌面调试与旧调用的兼容门面；新增代码应优先使用 ESM 导出。
+- `window.SDT`：页面调试与旧调用的兼容门面；新增代码优先使用 ESM 导出。
 - `BattleSession` / `window.SDT.Battle.start(game, enemies, options)`：开始战斗；后者是兼容门面。
 - `window.SDT.Battle.getSnapshot()`：取得战斗只读快照。
 - `window.SDT.Battle.commands`：统一战斗命令，包括出牌、注能、结束回合、逃跑和墓地操作。
@@ -32,17 +34,17 @@
 - `game.cardslib.js`：卡牌库轻门面；首次进入照相馆或制作坊时动态加载 `game.cardslib.page.js`。页面及其制作坊、照片道具、性能探针、图片预热和共享模块保持在门面之后，避免静态依赖回到首屏；制作坊写开关保持关闭。`ui/ui.js` 组合 `overlay.js`、`cinematics.js`、`hud.js`。
 - `game.hub.preparation.js`：基地整备控制器，通过数据、视图、导航和错误处理端口装配 `preparation.commands.js` / `preparation.view.js`；不读取 `SDT`、`UI`、`document` 或 `window`。页面 dispose 会阻止过期异步返回继续更新 UI。
 - `game.run.data.js`：场景、事件与职业叙事授权数据；`game.run.shop.js`：商店进货、购买和出售；`game.run.js`：移动、格子、事件、祭坛与撤离流程。
-- `game.hub.js`（基地壳）+ `game.hub.depart.js` / `game.hub.pages.js` / `game.hub.bridge.js`（出征整备、六页签、壳↔切片中立桥）与 `game.bag.js`（背包本体）+ `game.bag.drag.js` / `game.bag.settle.js` / `game.bag.bridge.js`（3D 拖拽、战后结算、中立桥）——2026-09-22 六文件重构批3/4 拆出，切片禁 import 壳、互调只经桥（contracts 拒环）。
-- 基地 `home.scene.js` 与 Pixi 在首次打开基地场景时动态加载；请求序号和挂载节点检查阻止已关闭页面的加载结果继续挂载。稳定卡牌数据打为 `game-card-catalog` 缓存分块，仍是同步启动依赖，计入首屏脚本预算。用户已授权将初始 JS gzip 预算从 290 KiB 调至 310 KiB：干净 `96950de` 实测为 299.3 KiB；提交 `9a51054` 的干净构建实测为 300.0 KiB / 310 KiB，postbuild 通过。Vite 通用 chunk-size warning 仍存在。
+- `game.hub.js` 装配出征整备、页签与中立桥；`game.bag.js` 装配拖拽、战后结算与背包中立桥。对应切片以 `game.hub.*.js`、`game.bag.*.js` 命名；切片通过桥互调，contracts 检查循环依赖。
+- 基地 `home.scene.js` 与 Pixi 在首次打开基地场景时动态加载；请求序号和挂载节点检查阻止已关闭页面的加载结果继续挂载。稳定卡牌数据打为 `game-card-catalog` 缓存分块，仍是同步启动依赖，计入首屏脚本预算。预算值由 `scripts/perf-budget.cjs` 维护，实际产物大小与构建状态见对应任务证据。
 - `cards.js`（壳）+ `cards.data.js` / `cards.rules.js` / `cards.sync.js` / `cards.consts.js`：卡池数据、推导与经济规则、迁移播种、共享常量；`window.SDT.Cards` 键面与数据字节不变。
 - `cards.sync.js` 的 TT10/TT11 历史批次重播优先使用 `cards-sync.json` 同 id 定版字段，并服从其退役清单；定版未提供的仓库元数据仍保留。迁移标记存在时不覆盖玩家后续编辑。
 - `game/data/cards-sync.json` 是生成数据，使用 `scripts/sync-cards-from-live.mjs` 更新，不手改；改卡牌描述时递增版本，退役卡进入退役名单并递增版本。新增卡必须进入同步数据，保证历史批次重播可解析。
 - TT10/TT11 内联历史快照须与同步数据保持一致，由 `tests/cards-sync-snapshot-guard.test.js` 守卫；卡牌效果审计例外与回归入口见 `docs/quality-gates.md`。
 - `cards.catalog.js`：按稳定 id 解析 TT10/TT11 的定版引用，定版字段优先，历史独有元数据随后补齐；缺失 id、重复 id、继续内联定版条目均明确失败。其他批次保持原数据入口。
 - `cards/card-rarity.js`：英雄线与衍生牌稀有度的纯规则实现，由调用方注入按 ID 查找。Cards 门面继续用 `Array.find` 保持原数组首项优先；`card-render-context.js` 在照相馆一次浅目录快照中构造 first-ID 索引，筛选、排序和各延迟挂载批次共用该快照，页面数据刷新后重建，关闭时释放索引。
-> 战斗模块路径说明（09-29 治理后）：下文模块清单的职责描述仍有效，但平铺文件名已按五目录归位——`battle.core.js` 等装配/引擎/结算/快照在 `battle/core/`，`battle.effects.js` 与 `effect-steps.*` 在 `battle/effects/`，`battle.runtime` 运行态在 `battle/runtime/`，`battle.view` 与渲染六片在 `battle/view/`，`battle.deck` 等牌堆/卡费在 `battle/bag/`。实际路径以 `game/src/README.md` 与现场为准。
+下文战斗模块文件名相对上方五个子目录；具体路径按[源码目录说明](../game/src/README.md)定位。
 
-- `battle.core.js`：战斗装配与命令门面（批6 拆分：状态在 `battle.runtime.js`、回合环引擎在 `battle.engine.js`、敌方阶段在 `battle.enemy-phase.js`）；不访问 DOM，也不依赖战斗视图。BOSS 编组和墓地页面同样由快照驱动。
+- `battle.core.js`：战斗装配与命令门面；状态在 `battle.runtime.js`、回合环在 `battle.engine.js`、敌方阶段在 `battle.enemy-phase.js`。核心不访问 DOM 或依赖战斗视图，BOSS 编组和墓地页面由快照驱动。
 - `battle.effects.js` + `effect-steps.js`（有序步骤表本体，拆片 `effect-steps.<节>.js` 按原序 concat——顺序即语义）：文本时点解析与效果执行器；执行器只通过显式端口改变战斗状态，不访问 DOM。
 - `battle.deck.js` / `battle.rules.js`：可独立测试的洗牌、回收、目标判定和出牌限制。
 - `battle.card-cost.js` / `battle.intent.js`：显式接收卡牌与战斗状态值的费用、敌方意图纯计算；`battle.engine.js` 保留原接口并收集状态，纯计算模块不读取 `window.SDT` 或 DOM。
@@ -51,17 +53,17 @@
 - `battle.engine.js` 装配 `battle.execution-session.js`（取消与代次）、`battle.action-runner.js`（串行动作队列）、`battle.staged-playback.js`（逐拍播放）；旧回调须校验战斗 token 和执行会话 generation。选择、装备、背包、生命周期、出牌执行分别委派给 `battle.selection-flow/equipment/bag/lifecycle/exec-play.js`。
 - `battle.selection-flow.js` 管理战斗内手牌选择、发现和抉择队列；卡库查询、拒绝音效、随机源与取消检查由 `battle.engine.js` 通过窄端口装配。`battle.hand-selection.js` 单源提供选择名称匹配与支付候选规则；`battle.discover-candidates.js` 提供有序目录筛选和单次候选抽取；`battle.discover-state.js` 构造显式、随机及锦囊发现状态，`battle.discover-flow.js` 承载发现队列处理。非自定义发现池在单个面板内构建一次并保留源卡引用，自定义 `job.pred` 每次抽取仍重新查询目录/执行谓词。interaction 用 `getJobs()` 读取当前可替换队列，避免固定捕获旧数组。selection-flow 不捕获 `window.SDT`，也不静态依赖连接 UI 等待的 `battle.staged-playback.js`；战斗状态仍读取 `battle.runtime.js` 活绑定，因此这是浏览器边界解耦，不是纯状态模块。
 - `meta-progression.js` 是等级曲线与 XP 步进的共享纯计算来源；`battle-victory-progress.js` 从 Base 快照计算本场击杀、首个同名 BOSS 记录和逐敌职业经验。slot 战斗结算将计算后的 Base 一并纳入现有 journal attempt，提交成功后才发布升级演出与成就检查；重放已完成 receipt 不重复增加进度。无 slot 保留旧内存埋点路径。该流程仍使用分离的 Base/Run 存储，不能视为跨存储原子事务。
-- `cards/card-rules.schema.js` 的 schema v2 是增量契约，`rules.version` 仍为 1；A3 已迁移 damage/heal/armor、curse、acquire、blessing/energy 等批次，未支持的操作或参数由解释器 pending 守卫拒绝。schema 接受形状不等于全部效果已经接线。
+- `cards/card-rules.schema.js` 的 schema v2 是增量契约，`rules.version` 仍为 1；damage/heal/armor、curse、acquire、blessing/energy 等操作的支持范围由 schema、解释器与测试共同确定。未支持的操作或参数由 pending 守卫拒绝。
 - `battle.resolution.js`：完整单卡结算，显式接收当前状态查询与伤害、抽牌、回复、护甲、延迟效果等命名端口；引擎负责适配现有运行时。模块本身不读取全局状态，不直接修改运行时字段。
 - `battle.snapshot.js`：按输入值构造视图快照；引擎负责收集输入和维护签名缓存。保留原有快照字段和复制/冻结层级，不宣称任意嵌套对象都已深冻结。
 - `battle.view.js`（渲染壳）+ `battle.overlays/layers/vfx/anim/aim/hover.js` 六片：只读取 `getSnapshot()` 快照、渲染 DOM、派发 `commands` 并向核心注册渲染器；viewApi 反取已改 core 具名直引。
 - `renderer.js`：Canvas 地图编排与视觉特效；`renderer.primitives.js` 提供纯绘图工具；`render-scheduler.js` 决定何时绘制。
-- `sound.js`：Howler.js 管理双 BGM 的加载、循环、静音和淡入淡出；战斗/开箱/胜负音效优先使用 Kenney CC0 采样（`assets/sfx/battle/`，预解码缓存、按键随机选一），采样未就绪或缺位时回退 Web Audio 程序化合成。
+- `audio/sound.js`：音频门面，装配 `sound.music.catalog.js`、`sound.music.player.js` 与 `sound.scape.js`。原创配乐按场景加载和切换；短音效优先采样，缺位或未解码时回退程序化合成。具体曲目与混音行为见[音频说明](audio-system.md)。
 - `motion.js`：基于 Motion Mini 的 DOM 微动效门面，并统一处理减少动态效果偏好。
-- `pixi-effects.js`：按需加载 PixiJS（v7 + @pixi/particle-emitter 粒子发射），只承载战斗命中特效层，避免增加首屏执行成本。
+- `battle/view/battle.frames.js`：按需加载 PixiJS 播放战斗序列帧；`battle.vfx.js` 的轻量受击火花使用 WAAPI 动画。
 - `narrative.js`：使用 inkjs 读取预编译剧情；全部 10 个 tt6 事件（选项、文案与效果标注）定义在 `narrative/events.ink`，构建、测试和开发启动前由 `scripts/compile-narrative.mjs` 生成运行时代码；效果结算通过 `game.run.js` 的效果端口表执行。
 
-样式级联以 `game/index.html` 的 `<link rel="stylesheet">` 实际顺序为准：基础/卡牌/弹层/基地/战斗/场景层 → lab-ending/winter/expedition 与照相馆等功能层 → ui-scale → `page-*.css` 页面覆盖层。当前工作区已挂接 `page-datapage.css` 等新页面片，不能再按旧“18 张样式表”清单排查。`winter.css` 和页面覆盖层可能覆盖前层规则，修改后须检查实际页面计算样式。
+样式级联以 `game/index.html` 的 `<link rel="stylesheet">` 实际顺序为准：基础与功能层之后加载缩放和页面覆盖层。按当前引用定位样式文件，并检查目标页面的计算样式。
 
 模块之间不得直接修改另一模块的私有变量；需要跨模块行为时应暴露命名命令、只读快照或一次性配置接口。
 
@@ -73,6 +75,6 @@
 
 ## 质量检查与文档生成
 
-模块级改进范围与验收记录见 `code-health-plan-2026-09-23.md`、`architecture-alignment-plan-2026-09-23.md`，自动检查入口见 `quality-gates.md`。
+自动检查入口见[质量门](quality-gates.md)；模块改进的过程与验收从[历史索引](archive/README.md)按任务查阅。
 `scripts/architecture-graph.mjs` 由契约测试和 `tests/architecture-boundaries.test.js` 共用。检查包含缺失 JS 模块、不透明动态 import、运行时导入范围与独立领域模块的浏览器全局访问；判据采用真实域路径的精确集合，并以 `deadGuardKeys` 检查失效键。`hub/game.cardslib.page.js` 只有一个允许的入边：轻门面 `hub/game.cardslib.js` 的字面量动态 import；静态导入、重导出或其他模块的动态导入都会失败，防止照相馆页面被重新打入首屏。`RUNTIME_SURFACE` 覆盖兼容入口及五个运行态子模块；`RUNTIME_OWNERS` 包含 core、engine、enemy-phase、selection-flow、equipment、bag、lifecycle、exec-play，运行态模块也可互相导入。战斗视图通过 core 的快照和命令访问领域，不能直接读取运行态。这是源码依赖约束，不代表已消除兼容门面上的全部可变状态。
 普通测试中的游戏全书校验只在内存生成内容；`npm run docs:compendium` 才会写入 `docs/game-compendium.md`，避免回归测试覆盖工作区文档。

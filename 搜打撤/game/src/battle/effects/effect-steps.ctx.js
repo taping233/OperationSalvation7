@@ -36,10 +36,10 @@ export function parsePoolNoun(raw, myClass) {
   if (/^(其它|其他)职业/.test(s)) { s = ''; preds.push(c => !!c.cls && !!myClass && c.cls !== myClass && c.type !== '能力卡'); }   // 江湖救急只发现其它职业的招式与装备（2026-09-16 留言）
   else if (/^本职业/.test(s)) { s = ''; preds.push(c => !!c.cls && c.cls === myClass); }
   if (/^招式/.test(s)) { s = s.replace(/^招式/, ''); preds.push(c => c.type === '武术'); }
-  // 复合池「传说或能力」（神秘召唤）：指定稀有度 或 能力卡类型。
+  // 复合池必须带「或」；纯稀有度名词仅按品质过滤。
   // 「发现一张传说或能力卡」的名词会被上层后缀匹配吃掉「能力卡」只剩「传说或」，
   // 因此结尾的「能力/或」都要兼容（2026-09-16 留言「神秘召唤卡池错误」修复）
-  const om = s.match(/^(传说|史诗|稀有|古朴)(?:或能力卡|或能力|或)?$/);
+  const om = s.match(/^(传说|史诗|稀有|古朴)(?:或能力卡|或能力|或)$/);
   if (om) { s = ''; preds.push(c => c.rarity === om[1] || c.type === '能力卡'); }
   const typeKey = ['武术', '法术', '装备', '能力卡', '道具'].find(t => s === t);
   if (typeKey) { s = ''; preds.push(c => c.type === typeKey); }

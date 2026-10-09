@@ -1,0 +1,81 @@
+{
+  "status": "candidate",
+  "character": "wu",
+  "animation": "idle",
+  "texture": "wu-idle-sheet.webp",
+  "frameWidth": 800,
+  "frameHeight": 544,
+  "columns": 2,
+  "rows": 2,
+  "uniqueFrames": 4,
+  "sequence": [
+    0,
+    1,
+    2,
+    3,
+    2,
+    1
+  ],
+  "durationsMs": [
+    600,
+    450,
+    450,
+    600,
+    450,
+    450
+  ],
+  "loopDurationMs": 3000,
+  "soleBaselineY": 512,
+  "loop": true,
+  "alignment": [
+    {
+      "sourceBounds": [
+        99,
+        13,
+        747,
+        496
+      ],
+      "offset": [
+        16,
+        16
+      ]
+    },
+    {
+      "sourceBounds": [
+        112,
+        14,
+        747,
+        496
+      ],
+      "offset": [
+        16,
+        16
+      ]
+    },
+    {
+      "sourceBounds": [
+        98,
+        6,
+        748,
+        492
+      ],
+      "offset": [
+        16,
+        20
+      ]
+    },
+    {
+      "sourceBounds": [
+        92,
+        8,
+        753,
+        492
+      ],
+      "offset": [
+        16,
+        20
+      ]
+    }
+  ],
+  "method": "imagegen keyframes; cell extraction and baseline alignment; no skeleton or generated in-between frames"
+}

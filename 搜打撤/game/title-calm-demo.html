@@ -1,0 +1,21 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>雪光慢行 · 首页配乐试听</title>
+<style>*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top right,#243c4b,transparent 70%),#111b25;color:#e9eff3;font:16px/1.8 system-ui,sans-serif;min-height:100vh}main{max-width:760px;margin:auto;padding:48px 28px}small{color:#a0c5cc;letter-spacing:.18em}h1{font-size:46px;margin:15px 0;line-height:1.2}p{color:#b1c2cb}.player{padding:25px;margin:28px 0;background:#ffffff07;border:1px solid #54717b;border-radius:18px}audio{width:100%;margin:18px 0 0}a{color:#a9d9df}h2{font-size:21px}.refs{display:flex;flex-wrap:wrap;gap:10px 22px}a:focus-visible{outline:2px solid #a9d9df;outline-offset:3px}</style>
+<main><small>代号柒 / TITLE DEMO 02</small><h1>雪光慢行</h1><p>平和、舒展的首页配乐 · 木吉他主旋律 · 温暖电钢与持续铺底</p>
+<section class="player"><strong>30 秒 · 64 BPM</strong><audio controls preload="metadata"></audio><p id="status" aria-live="polite">点击播放试听</p><a id="download" download>下载 MP3</a></section>
+<p>这版没有鼓组和循环电子脉冲。旋律分成两段长句，和声缓慢移动，中后段只轻轻展开，最后保留余韵。</p>
+<h2>本轮标题／主菜单参考</h2><div class="refs">
+<a href="https://gametabs.net/tabs/ori-and-the-blind-forest/main-menu-13" target="_blank" rel="noopener">Ori · Main Menu 吉他谱</a>
+<a href="https://gametabs.net/tabs/life-is-strange/main-theme-125" target="_blank" rel="noopener">奇异人生 · Main Theme 吉他谱</a>
+<a href="https://www.vgleadsheets.com/assets/sheets/F/Stardew%20Valley%20-%20Stardew%20Valley%20Overture.pdf" target="_blank" rel="noopener">星露谷 · Overture 谱例</a>
+<a href="https://sheet.host/sheet/prMSWi" target="_blank" rel="noopener">Ori · Main Menu 钢琴谱入口</a>
+</div><p>参考声部分工、长句与留白；本曲旋律及编排重新创作。</p><p><a href="./title-modern-demo.html">上一版《冰下信号》</a> · <a href="./music-demo.html">原有 14 首</a></p></main>
+<script type="module">
+import url from '../docs/evidence/2026-10-09-WF-title-calm-demo/title-snowlight-30s.mp3?url';
+const audio=document.querySelector('audio'),status=document.getElementById('status');
+audio.src=url;document.getElementById('download').href=url;
+audio.addEventListener('playing',()=>status.textContent='正在试听 · 雪光慢行');
+audio.addEventListener('pause',()=>status.textContent=audio.ended?'试听结束':'已暂停');
+audio.addEventListener('ended',()=>status.textContent='试听结束 · 可再次播放');
+audio.addEventListener('error',()=>status.textContent='音频加载失败，请刷新重试');
+document.addEventListener('visibilitychange',()=>{if(document.hidden)audio.pause()});
+</script></html>

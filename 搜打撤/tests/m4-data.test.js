@@ -7,7 +7,7 @@
  *   4) 对被改名 / 改字段 / 已有自有 rules 的卡保守跳过。
  * 批次级另锁：marker 一次性、缺卡/缺 canonical/saveAll 失败/无原库串整体保守退出不标记、
  * 单卡被改只跳过该卡其余正常迁移。
- * 回填器为 A3 式全批语义（definitions 2 张齐备才落库），故运行夹具一律放全量 2 张 canonical 卡。
+ * 当前深海印记已退役，夹具仅保留存活的深海咒印；全批校验语义不变。
  * 纯单元：依赖注入 storage/library，不启动 cards.js 播种链。 */
 import { describe, expect, it } from 'vitest';
 import { KEY } from '../game/src/cards/cards.consts.js';
@@ -21,7 +21,7 @@ const MARKER = 'sdt-cards-m4-equip-rules-v1-seeded';
 // canonical 夹具（2026-09-29 镜像收编）：原「逐字照抄 cards.data.js TABLETOP10 定版行」改为
 // 按本批 id 取真源行（两卡的 TABLETOP3 旧行已被 TABLETOP10 覆盖）；卡面字段值不再手抄，
 // 真源漂移时以真源为准（深相等守卫按真源判定，不会写脏）。
-const M4_IDS = ['tt3-deep-seal', 'tt3-deep-diary'];
+const M4_IDS = ['tt3-deep-diary'];
 const TABLETOP10 = dataSlice.TABLETOP10.filter(card => card?.id && M4_IDS.includes(card.id));
 
 // 期望回填结果：version:1 / 纯 equip 域（无 battle/triggers）。cond.hasCurse 条件被动 +
@@ -134,10 +134,10 @@ describe('M4 数据迁移批 D6：批次级保守语义', () => {
   });
 
   it('库内缺卡：整体保守退出，不标记、不部分回填', () => {
-    const harness = makeHarness([{ ...TABLETOP10[0] }]);
+    const harness = makeHarness([]);
     ensureM4EquipRules(harness);
     expect(harness.storage.getItem(MARKER)).toBe(null);
-    expect(harness.cards()[0].rules, '缺其余卡时连可迁卡也不写（下次启动重试）').toBeUndefined();
+    expect(harness.cards()).toEqual([]);
   });
 
   it('缺 canonical 定版表：整体保守退出，不标记', () => {
@@ -162,7 +162,7 @@ describe('M4 数据迁移批 D6：批次级保守语义', () => {
     expect(harness.storage.getItem(MARKER)).toBe(null);
   });
 
-  it('单卡被改（旧批次同名副本卡面）：该卡保守跳过，其余 1 张正常迁移', () => {
+  it('存活卡被改：保守跳过，退役深海印记不再阻断迁移', () => {
     // TABLETOP3 旧行「深衍日记」即现实中的旧批次副本形态（同名不同面）——深相等不过即跳过
     const legacy = { ...TABLETOP10.find(entry => entry.id === 'tt3-deep-diary'), name: '深衍日记', cost: 1, rarity: '古朴', desc: '装备：记载深处的秘密。', value: 3 };
     const others = TABLETOP10.filter(entry => entry.id !== 'tt3-deep-diary').map(entry => ({ ...entry }));
@@ -170,7 +170,7 @@ describe('M4 数据迁移批 D6：批次级保守语义', () => {
     ensureM4EquipRules(harness);
     expect(harness.cards().find(card => card.id === 'tt3-deep-diary')).toEqual(legacy);
     expect(harness.cards().find(card => card.id === 'tt3-deep-diary').rules).toBeUndefined();
-    expect(harness.cards().find(card => card.id === 'tt3-deep-seal').rules).toEqual(EXPECTED_RULES['tt3-deep-seal']);
+    expect(harness.cards().some(card => card.id === 'tt3-deep-seal')).toBe(false);
     expect(harness.storage.getItem(MARKER)).toBe('1');
   });
 });

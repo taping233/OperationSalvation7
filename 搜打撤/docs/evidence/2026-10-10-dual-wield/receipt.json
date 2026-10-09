@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "cc-dual-wield",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12188-dadb-7ff2-900b-9421425bc7a8\\exec-1d8ab5da-2a52-4e0c-9d88-0699533cfcdf.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-dual-wield/cards-martial-cc-dual-wield-source.png",
+        "bytes": 2426210,
+        "sha256": "a9c01a6cf5a9177b1c0cd0514df83d2cff15c0f62e3acc40b4f7daab6159135e"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-dual-wield/cards-martial-cc-dual-wield-full-before.webp",
+          "bytes": 108102,
+          "sha256": "6dfda06c488f90b0554d9660cf8136e2cdefe7d15328ddcdc373c124eb379008"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-dual-wield/cards-martial-cc-dual-wield-thumb-before.webp",
+          "bytes": 20956,
+          "sha256": "3425600c6767c887bd9d31e1e6e2cfc38e13d2d891d2d07772ce1cc2930acb2b"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-cc-dual-wield.webp",
+          "bytes": 233770,
+          "sha256": "4a85e1d7f32d34f94deefef34472ea2876bf8b9cec9865727a7262d02a040982",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-cc-dual-wield.webp",
+          "bytes": 28046,
+          "sha256": "8c4880aaae19784e773e7570ef8f772b7b50cbaa8716cbd26069ddd3230ae86e",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "dual-wield-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-cc-dual-wield.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 233770,
+            "sha256": "4a85e1d7f32d34f94deefef34472ea2876bf8b9cec9865727a7262d02a040982",
+            "source": "docs/evidence/2026-10-10-dual-wield/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-cc-dual-wield.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 20956,
+            "sha256": "3425600c6767c887bd9d31e1e6e2cfc38e13d2d891d2d07772ce1cc2930acb2b",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-cc-dual-wield.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 28046,
+            "sha256": "8c4880aaae19784e773e7570ef8f772b7b50cbaa8716cbd26069ddd3230ae86e",
+            "source": "docs/evidence/2026-10-10-dual-wield/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 744,
+  "manifest_count_after": 745
+}

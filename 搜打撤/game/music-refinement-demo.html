@@ -1,0 +1,13 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>四首配乐 · 草稿精修试听</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#121b24;color:#e6edf2;font:16px/1.7 system-ui,sans-serif}main{max-width:900px;margin:auto;padding:38px 25px}small{color:#9abfc9;letter-spacing:.15em}h1{font-size:34px;line-height:1.3}p{color:#afbdc8}section{padding:23px;border:1px solid #4c6572;border-radius:14px;background:#ffffff05;margin:18px 0}h2{margin:7px 0;font-size:23px}audio{width:100%;margin-top:12px}a{color:#b2dce5}.status{min-height:26px}a:focus-visible{outline:2px solid #b2dce5;outline-offset:3px}</style>
+<main><small>代号柒 / 草稿精修</small><h1>四首配乐 · 第二轮</h1><p>保留旋律身份，重新编排主次、动机与段落。每首 30 秒，同时只播放一首。</p><div id="tracks"></div><p><a href="./four-music-demos.html">上一轮前三首与旧商店</a> · <a href="./shop-remake-demo.html">《灯下交易》初稿</a></p></main>
+<script type="module">
+import title from '../docs/evidence/2026-10-09-WF-music-refinement/title-refined-30s.mp3?url';
+import explore from '../docs/evidence/2026-10-09-WF-music-refinement/explore-refined-30s.mp3?url';
+import battle from '../docs/evidence/2026-10-09-WF-music-refinement/battle-refined-30s.mp3?url';
+import shop from '../docs/evidence/2026-10-09-WF-music-refinement/shop-refined-30s.mp3?url';
+const rows=[['首页','霜窗回声','保留原钢琴主旋律；大提琴暗流、悬留和解决推动下层和声。',title],['探索','灰线行军','固定的吉他短动机；钢琴与单簧管轮流接过完整乐句。',explore],['战斗','黑脉交锋','大提琴与鼓共用节奏中心；圆号只在应答段接替主旋律。',battle],['商店','灯下交易','缩减伴奏与插话；低音走向更连贯，钢琴和弱音铜管分段主导。',shop]];
+const players=[];
+for(const [scene,name,desc,url] of rows){const card=document.createElement('section');card.innerHTML=`<small>${scene} · 30 秒草稿</small><h2>${name}</h2><p>${desc}</p><audio controls preload="metadata" aria-label="${scene}试听" src="${url}"></audio><p class="status" aria-live="polite">点击播放试听</p><a href="${url}" download>下载 MP3</a>`;document.getElementById('tracks').append(card);const audio=card.querySelector('audio'),status=card.querySelector('.status');players.push(audio);audio.addEventListener('play',()=>players.forEach(p=>{if(p!==audio)p.pause()}));audio.addEventListener('playing',()=>status.textContent='正在试听 · '+name);audio.addEventListener('pause',()=>status.textContent=audio.ended?'试听结束':'已暂停');audio.addEventListener('ended',()=>status.textContent='试听结束');audio.addEventListener('error',()=>status.textContent='加载失败')}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)players.forEach(p=>p.pause())});
+</script></html>

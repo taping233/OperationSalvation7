@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "card_id": "tt8-nofocus",
+      "asset": "cards/creature-tt8-nofocus.webp",
+      "source": "D:/素材/代号柒/搜打撤/game/assets/cards/creature-tt8-curseimmune.webp",
+      "revision": "sealed-limb-3-hand-reuse-20261010",
+      "prompt": "封印肢体3由脚改手：两次内置生图网络失败后复用封印肢体1的正确手部卡图，保留透明底与黑色封印腕箍，不修改像素。",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/creature-tt8-curseimmune.webp"
+      ]
+    },
+    {
+      "card_id": "tt8-healplus",
+      "asset": "cards/creature-tt8-healplus.webp",
+      "source": "D:/素材/代号柒/搜打撤/game/assets/cards/creature-tt8-energycap.webp",
+      "revision": "sealed-limb-4-hand-reuse-20261010",
+      "prompt": "封印肢体4由脚改手：两次内置生图网络失败后复用封印肢体2的正确握拳卡图，保留透明底与黑色封印腕箍，不修改像素。",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/creature-tt8-energycap.webp"
+      ]
+    }
+  ]
+}

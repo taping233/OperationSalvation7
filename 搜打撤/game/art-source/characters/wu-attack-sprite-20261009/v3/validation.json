@@ -1,0 +1,71 @@
+{
+  "passed": true,
+  "idleInitialEqualsAttackInitialEqualsAttackFinal": true,
+  "endpointPngSha256": "484895aa505493825202539d4b7cfadf7c63c33997633b7940982a6634dbc63f",
+  "frameSize": [
+    768,
+    512
+  ],
+  "bounds": [
+    [
+      196,
+      19,
+      730,
+      484
+    ],
+    [
+      187,
+      8,
+      545,
+      485
+    ],
+    [
+      195,
+      9,
+      748,
+      485
+    ],
+    [
+      110,
+      66,
+      744,
+      486
+    ],
+    [
+      131,
+      69,
+      762,
+      485
+    ],
+    [
+      181,
+      30,
+      614,
+      486
+    ],
+    [
+      192,
+      21,
+      704,
+      485
+    ],
+    [
+      196,
+      19,
+      730,
+      484
+    ]
+  ],
+  "visibleAtlasMatchesFrames": true,
+  "durationMs": 417,
+  "normalization": {
+    "scaleX": 1.06,
+    "scaleY": 1.1231884057971016,
+    "translateX": 28.00999999999999,
+    "translateY": -31.54347826086962,
+    "recoveryPoseScaleCorrection": {
+      "5": 1.055,
+      "6": 1.12
+    }
+  }
+}

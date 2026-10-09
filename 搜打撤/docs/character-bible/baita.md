@@ -2,7 +2,11 @@
 
 ![白塔·定稿立绘](ref-images/baita.webp)
 
-## 基础信息（以 characters.js / 选人界面为准）
+## 身份与参考使用
+
+既有运行参考为 `game/assets/portraits/full/baita.webp`，本页图片为同图副本。下面保留该版本的身份观察与历史配方；当前画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)，新图姿态和道具按任务指定参考核对。
+
+## 当前角色数据（core/characters.js）
 
 | 项 | 值 |
 |---|---|
@@ -11,7 +15,7 @@
 | 职业 | 法师 |
 | 主题色 | `#e9bd69` |
 
-## 外观锚点（已定稿）
+## 参考立绘描述（2026-09-19 版本）
 
 2026-09-19 老板授权 Friday 按 painterly 全身立绘定稿，当日二次修订（老板反馈）定稿：
 依据 `roster-fix-20260919-170117/lituan-170117.png`（seed 1486003179），已实装 `portraits/full/baita.webp`。
@@ -26,7 +30,7 @@
 - 画风：painterly 统一画风模块（miv4t+quasarcake，`official_painterly_style.py`）。
 - 旧立绘的花拱门白塔场景为历史版本口径，非现行立绘要素。
 
-### 细粒度锚点（0919 定稿立绘逐要素，出图照抄）
+### 历史：0919 配方细节
 
 依据 `roster-fix2-20260919-170853/lituan-170853-2202.png`（实装版）：
 

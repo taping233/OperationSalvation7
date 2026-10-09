@@ -1,10 +1,12 @@
 # M 批迁移矩阵（目标池 150 张，老板 2026-09-27 拍板）
 
+本矩阵保留 09-27 的迁移目标、契约分类与 09-29 的批次复核。150 张目标及 51 张排除属于原始迁移集合，测试按本文件路径和稳定 id 读取；当前运行库与支持能力从[卡牌入口](cards/README.md)定位源码和测试。本页各段的能力、在途和验证描述按所注明的基线阅读。
+
 - 基线：HEAD `a8e91e6`。数据源 `docs/evidence/e8-card-migration-2026-09-27/legacy-201-scratch.json` + `catalog-after.json`（150 张逐卡核对，缺失 0）。排除的 51 张见 `docs/M-BATCH-EXCLUSIONS.md`。
-- 能力现状（实读核实）：
+- `a8e91e6` 的能力快照（制定时点实读）：
   - schema 放行的 onPlay op 全集：damage / armor / heal / draw / status(仅 freeze+allEnemies) / discover / curse / acquire / blessing / energy / energyCap / maxHp / deckCap / coins（`game/src/cards/card-rules.schema.js:482-483,510-511`）；pending 键位已设计、解释器遇之 throw：execute / summon / transform / registerRule / extraTurn（`card-rules.schema.js:51-66`）。装备域 equip 全 pending（`card-rules.schema.js:71-76`），capability 对 rules.equip 一票否决（`game/src/cards/card-rules.capability.js:78-80`）。
   - 解释器已消费（HEAD `battle.resolution.js`）：curse double/burst/extend（:78,167-193）、damage lifesteal（:523）、recast on:'kill'（:532-536）、acquire/coins/blessing/energy/energyCap/maxHp/deckCap（:699-740）、heal perFuelCost（:797）、cond 四键 foeHpBelow/foeHpHalf/foeStatus/foeFullHp（:57-62）。
-  - **HEAD 尚未消费**（capability 同步拒绝）：cleanse、draw.untilHandN、draw.handOps（HEAD `battle.resolution.js:809` 守卫拦截；`card-rules.capability.js:100-102` 拒绝）、damage.graveyard/schedule（`capability.js:100-102`）。**注意：工作区存在并行未提交 M1 扩展**（`battle.resolution.js` +43/-11，新增 `effect-steps.m1.js`）已接线 cleanse/untilHandN/handOps（工作区 `battle.resolution.js:7,723,833-839`）——本矩阵按 HEAD 口径将其计为「并行M1(在途)」，与「规格新增」区分。
+  - **基线尚未消费**（当时 capability 同步拒绝）：cleanse、draw.untilHandN、draw.handOps（基线 `battle.resolution.js:809` 守卫拦截；`card-rules.capability.js:100-102` 拒绝）、damage.graveyard/schedule（`capability.js:100-102`）。当时工作区的未提交 M1 扩展（`battle.resolution.js` +43/-11，新增 `effect-steps.m1.js`）已接线 cleanse/untilHandN/handOps，因此原矩阵将其标为「并行M1(在途)」。这是制定时点的分类，后续复核见第七节。
 - 依赖契约取值：`现有能力` / `规格新增:<语义>`（见 `docs/cards/M-BATCH-CONTRACT-SPEC-2026-09-27.md`）/ `并行M1(在途)` / `混合实现`（schema+宿主命名分支）。
 - 批次：B-M1 现集 / B-M2 onPlay 扩展 / B-M3 装备与trigger / B-M4 延迟持续形态 / B-M5 大招与大机制 / B-M6 bag道具。
 - 复杂度：S 纯数据 / M 需新 op 或参数 / L 需新 trigger/lifecycle / XL 混合实现或大机制。
@@ -56,7 +58,7 @@
 
 | id | 名称 | 类型 | 目标 rules 草案 | 依赖契约 | 复杂度 | 批次 | 备注 |
 |---|---|---|---|---|---|---|---|
-| cc-demon | 恶魔之力 | 法术 | onPlay[damage amount:4 dmgType:spell, heal amount:2 selfDamage:true] | 现有能力 | S | B-M1 | selfDamage 键已有（HEAL_ALLOWED_KEYS schema:36） |
+| cc-demon | 恶魔之力 | 法术 | onPlay[damage amountField:dmg dmgType:spell, heal amount:2 selfDamage:true] | 现有能力（2026-10-06 卡面 dmg 4→7，amountField 动态跟随，旧档 face-refresh 重刷） | S | B-M1 | selfDamage 键已有（HEAL_ALLOWED_KEYS schema:36） |
 | cc-mana-surge | 法力奔涌 | 法术 | hosted:mana-surge（随机施放 4 个随机法术，默认已注能） | 混合实现（execute 域无「随机法术池」；注能默认化全场旗标） | XL | B-M5 | 与 allSpellsInfused 宿主旗标（battle.core.js:113）联动 |
 | cc-poison-burst | 毒爆 | 法术 | onPlay[curse {burst:2}] | 现有能力 | S | B-M1 | burst 引爆已消费（battle.resolution.js:189-193），层数保留 |
 | cc-rot-seed | 腐化之种 | 法术 | hosted:rot-seed（中毒 2 层 + 死亡时层数转移）onPlay[curse poison stacks:2] + onKill 转移 | 混合实现（宿主 poisonLegacy/transferPoisonLegacy battle.engine.js:171、battle.core.js:95） | XL | B-M4 | 敌人死亡钩子（onKill 系）+ 层数转移；宿主已实现，迁移=收编为 rules |
@@ -80,7 +82,7 @@
 | tt3-petal | 花瓣法阵 | 法术 | 触发器 onTurnStart×3 回合[draw 1, heal 3] | 规格/接线:onTurnStart + 多回合 repeat | L | B-M4 | delayed 队列宿主（battle.core.js:63）可承载 |
 | tt3-thunderblast | 雷殛 | 法术 | onPlay[damage amount:7 dmgType:spell, graveyard:{perSpell:1}] | 规格接线:damage.graveyard（capability 拒绝 capability.js:100-102） | M | B-M2 | 墓地计数：BOSS 战 grave 堆已有 |
 | tt3-toxin | 毒药 | 法术 | onPlay[curse poison stacks:1, draw amountField:draw] | 现有能力 | S | B-M1 | — |
-| tt5-galaxy-voyage | 银河之旅 | 法术 | hosted:galaxy（本场全部武术 1 费） | 混合实现（宿主 allMartialCost1/allSpellCost1 battle.core.js:73-74；G8 typeCostRule 键位已设计未进白名单 schema:874-876） | XL | B-M5 | 迁移路径二选一：收编宿主旗标，或等 typeCostRule 进白名单后转 rules |
+| tt5-galaxy-voyage | 银河之旅 | 法术 | m9 registerRule moveCost1（本场全部招式 1 费，招式=武术+法术；2026-10-06 改版） | 已迁移（m9 v2：marker 升版 + v1 旧版快照 previousRulesById 重放；文本路径双旗标同落） | XL | B-M5 | G8 typeCostRule 键位仍留白名单外，本卡走 REGISTER_RULE_KEYS moveCost1 |
 | tt7-abysscurse | 深渊诅咒 | 法术 | onPlay[damage amount:7 dmgType:spell, curse healban, draw amount:'perCurseKindsOnFoe'] | 规格新增:draw 动态源 perCurseKinds（敌身上诅咒种类数） | M | B-M2 | 伤害与抽牌在同 op 组合时注意「damage+draw 不与 amountField 混排」契约（schema:649-651），用 v2 字面量 |
 | tt7-arcanebolt | 奥术弹 | 法术 | onPlay[damage amountField:dmg dmgType:spell, draw amountField:draw] | 现有能力 | S | B-M1 | dmg:1、draw:1 字段锚定 |
 | tt7-bladebloom | 永恒绽放 | 法术 | onPlay[discover {count:1, act:'play'} + acquire 2 dest:hand]（三张同组） | 规格新增:discover 组剩余卡转 acquire 的组合语义 | M | B-M2 | 「发现并直接施放 1 张，获取剩下两张」 |
@@ -239,7 +241,7 @@ bag 结构化消费器现状（实读）：`game/src/hub/game.bag.js:26` useStru
 
 ## 七、2026-09-29 m3-m6 甄别（Friday · HEAD `47001e3`）
 
-> **结论先行：B-M3~M6 共 86 张已在库全部接线**（m4~m11 数据批于 commit `791b2c2` "feat(cards): complete M batch rule migration" 落库，`cards.js:285-295` ensure 链 m1~m11 全部在链）。本轮甄别 **0 张新增接线、0 张需老板拍板、0 张玩家可见行为缺口**。矩阵头部「能力现状」是 `a8e91e6` 时的过时快照（T12 capability 漂移已消除），B-M3~M6 各行状态以本小节为权威（2026-09-29 · HEAD `47001e3`）；因 86 张均为「既往批次已接线」而非本轮接线，行内批次列不做逐行改写。
+> 09-29 在 HEAD `47001e3` 的复核结果：B-M3~M6 共 86 张由此前批次接线；m4~m11 数据批随 `791b2c2` 落库，ensure 链当时包含 m1~m11。该轮记录为 0 张新增接线、0 张待拍板和 0 张已发现的玩家行为缺口。头部属于 `a8e91e6` 快照，本节属于后续复核；行内原批次标记保留，当前支持范围仍按源码与对应测试核对。
 
 ### 甄别方法（一切以源码为准）
 
@@ -270,7 +272,7 @@ bag 结构化消费器现状（实读）：`game/src/hub/game.bag.js:26` useStru
 
 | 载体 | 形态 | 卡 |
 |---|---|---|
-| m9 结构化 registerRule | 1 张 | tt5-galaxy-voyage 银河之旅（registerRule meleeCost1） |
+| m9 结构化 registerRule | 1 张 | tt5-galaxy-voyage 银河之旅（registerRule moveCost1；2026-10-06 招式改版 marker v2 + v1 快照重放） |
 | m9 hosted | 17 张 | tt7-imitate=imitate、cc-mana-surge=mana-surge、tt7-stratagem=pouch-container、tt8-demonslay=ranger-chain、tt8-heavensword=ranger-chain、tt8-abyss-sovereign=sovereign、tt8-hero-assassin=assassin、tt8-hero-descender=consume-fireball、tt8-hero-guardian=guardian、tt8-hero-mage=mage、tt8-hero-priest=priest、tt8-hero-ranger=ranger、tt8-hero-sealer=seal-chain、tt8-hero-summoner=gate-choices、tt8-hero-sword=sword、tt8-hero-warlock=warlock、tt8-hero-warrior=kill-transform |
 
 **B-M6 bag 道具 17 张**

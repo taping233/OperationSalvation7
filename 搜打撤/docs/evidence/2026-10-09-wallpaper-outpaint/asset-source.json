@@ -1,0 +1,12 @@
+{
+  "path": "game/assets/reconstruction/wallpaper-wu-1004.webp",
+  "dimensions": [
+    2048,
+    768
+  ],
+  "bytes": 515672,
+  "sha256": "0ce34acb0c698d911266b69615b45ffe812997e5c08bb62337dfd3149b05644d",
+  "source": "game/art-source/home-wallpaper-outpaint-1009/wallpaper-one-expanded.png",
+  "method": "本聊天内置imagegen扩图，Pillow转WebP quality92 method6",
+  "backup": "output/imagegen/wallpaper-one-before-outpaint-1009.webp"
+}

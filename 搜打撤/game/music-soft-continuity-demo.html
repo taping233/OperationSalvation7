@@ -1,0 +1,12 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>配乐试听 · 连贯与收敛</title>
+<style>body{margin:0;background:#131c25;color:#e7eef4;font:16px/1.7 system-ui,sans-serif}main{max-width:880px;margin:auto;padding:36px 24px}h1{font-size:32px;line-height:1.3}h2{font-size:23px;margin:7px 0}small{color:#9fc2cd;letter-spacing:.12em}p{color:#b2c1cc}section{padding:22px;border:1px solid #4d6878;border-radius:14px;margin:18px 0;background:#ffffff05}audio{width:100%;margin-top:10px}a{color:#b4dae7}.status{min-height:25px}footer{font-size:13px;color:#95a9b7}</style>
+<main><small>代号柒 / 草稿更新</small><h1>钢琴接句，战斗收敛</h1><p>首页与战斗更新，探索使用最初版本，商店保留《灯下交易》上一版。</p><div id="tracks"></div><p><a href="./music-redirection-demo.html">上一轮对照</a></p><footer>钢琴采样：Salamander Grand Piano V3 — Alexander Holm，CC BY 3.0；仅用于本曲部分采样，自定义离线播放。四首仍为草稿。</footer></main>
+<script type="module">
+import title from '../docs/evidence/2026-10-09-WF-music-soft-continuity/title-rewrite-30s.mp3?url';
+import battle from '../docs/evidence/2026-10-09-WF-music-soft-continuity/battle-rewrite-30s.mp3?url';
+import explore from './assets/music-demo/02-explore-ashline.ogg?url';
+import shop from '../docs/evidence/2026-10-09-WF-shop-remake/shop-lamplight-deal-30s.mp3?url';
+const rows=[['首页','霜窗回声 · 连贯版','保留新钢琴主题，连接相邻触键，放缓释放尾音，统一触键层次。',title],['探索','灰线行军 · 最初版','直接使用最初游戏音频，完整版本，原样保留。',explore],['战斗','黑脉交锋 · 收敛版','减少鼓镲与吉他密度，压低高频刺激和整体音量，保留现代节奏。',battle],['商店','灯下交易','保留你更认可的上一版。',shop]];const players=[];
+for(const [scene,name,desc,url] of rows){const card=document.createElement('section');card.innerHTML=`<small>${scene}</small><h2>${name}</h2><p>${desc}</p><audio controls preload="metadata" aria-label="${scene}试听" src="${url}"></audio><p class="status" aria-live="polite">点击播放试听</p><a href="${url}" download>下载音频</a>`;document.getElementById('tracks').append(card);const a=card.querySelector('audio'),s=card.querySelector('.status');players.push(a);a.addEventListener('play',()=>players.forEach(p=>{if(p!==a)p.pause()}));a.addEventListener('playing',()=>s.textContent='正在试听 · '+name);a.addEventListener('pause',()=>s.textContent=a.ended?'试听结束':'已暂停');a.addEventListener('ended',()=>s.textContent='试听结束');a.addEventListener('error',()=>s.textContent='加载失败')}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)players.forEach(p=>p.pause())});
+</script></html>

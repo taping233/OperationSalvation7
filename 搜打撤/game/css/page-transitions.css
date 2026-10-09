@@ -1,0 +1,101 @@
+/* ═══════════════════════════════════════════════════════════════════
+   全局页面进出过渡编排（2026-10-05 网页留言 #6「过渡动画太简陋，做一些设计」）
+   ── 机制 ── 整页（设置/成就/照相馆/指南/留言信箱）走 UI.showOverlay(mode='page')
+   → interface-motion.css 的 veil+panel 容器档，生命周期属性：
+   data-ui-motion="page"（档位）、data-ui-enter="a|b"（每次开层翻转，重播入场）、
+   data-ui-closing（关层，overlay.js 240ms 后 hidden）。制作名单是独立
+   <dialog #homeCredits>，走 home-menu-motion.css 的 data-home-motion in/out。
+   ── 本文件职责 ── 零 JS：只在既有生命周期钩子上叠内容级编排——
+   · page 档容器参数升级（位移/缩放幅度对齐 title-p0 语言）；
+   · 成就总览 / 生存指南 / 照相馆 / 制作名单：内容块级联入场（此前只有容器级
+     单层淡入）；设置页与留言信箱已有 page-settings.css 的 setPanelIn/setRowIn
+     级联，零接触。
+   · 红线同 motion-transitions.css：只动 transform/opacity；缓动
+     cubic-bezier(.22,1,.36,1)（进）/ .4,0,.7,1（出，继承 interface-motion）；
+     prefers-reduced-motion 与 body.reduce-motion 双重守卫全量禁用；
+     退场不做块级动画（容器 uiVeilOut/uiPanelOut 统一收场，退后 hidden
+     + pointer-events 兜底不可交互，口径不变）。
+   ─────────────────────────────────────────────────────────────────── */
+
+/* —— page 档容器参数升级：入场 .36s / 抬升 18px / 缩放 .986（原 .34s/14px/.992）。
+   属性选择器写两遍抬特异性，压过运行时注入的 interface-motion.css 同名规则
+   （注入样式恒在静态 link 之后，同特异性会输）。 —— */
+body.interface-motion #overlay[data-ui-motion="page"][data-ui-motion] {
+  --ui-in: .36s;
+  --ui-rise: 18px;
+  --ui-scale: .986;
+}
+
+/* —— 内容块级联入场：块自身淡入 + 12px 抬升，与容器动画复合 —— */
+@media (prefers-reduced-motion: no-preference) {
+
+  /* --pt-in 挂 body：overlay 整页与 #homeCredits dialog（挂在 #title 子树）共用 */
+  body.interface-motion:not(.reduce-motion) {
+    --pt-in: .34s cubic-bezier(.22, 1, .36, 1) backwards;
+  }
+
+  /* 成就总览：页头 → 左侧档案栏 → 右侧奖章陈列 */
+  body.interface-motion:not(.reduce-motion)
+    #overlay[data-ui-motion="page"][data-ui-enter]:not([hidden]) .achievement-gallery > .ag-header {
+    animation: ptBlockIn var(--pt-in);
+  }
+  body.interface-motion:not(.reduce-motion)
+    #overlay[data-ui-motion="page"][data-ui-enter]:not([hidden]) .achievement-gallery .ag-body > .ag-summary {
+    animation: ptBlockIn var(--pt-in);
+    animation-delay: .07s;
+  }
+  body.interface-motion:not(.reduce-motion)
+    #overlay[data-ui-motion="page"][data-ui-enter]:not([hidden]) .achievement-gallery .ag-body > .ag-content {
+    animation: ptBlockIn var(--pt-in);
+    animation-delay: .13s;
+  }
+
+  /* 生存指南：页头 → 章节导航 → 正文页（翻页 outerHTML 重建时同款级联重播） */
+  body.interface-motion:not(.reduce-motion)
+    #overlay[data-ui-motion="page"][data-ui-enter]:not([hidden]) .beginner-guide > .bg-head {
+    animation: ptBlockIn var(--pt-in);
+  }
+  body.interface-motion:not(.reduce-motion)
+    #overlay[data-ui-motion="page"][data-ui-enter]:not([hidden]) .beginner-guide .bg-layout > .bg-nav {
+    animation: ptBlockIn var(--pt-in);
+    animation-delay: .07s;
+  }
+  body.interface-motion:not(.reduce-motion)
+    #overlay[data-ui-motion="page"][data-ui-enter]:not([hidden]) .beginner-guide .bg-layout > .bg-page {
+    animation: ptBlockIn var(--pt-in);
+    animation-delay: .13s;
+  }
+
+  /* 照相馆：退出锚/页头 → 馆藏目录 → 右侧选片检查台 */
+  body.interface-motion:not(.reduce-motion)
+    #overlay[data-ui-motion="page"][data-ui-enter]:not([hidden]) .card-library-page > :is(.ak-tl, .library-head) {
+    animation: ptBlockIn var(--pt-in);
+  }
+  body.interface-motion:not(.reduce-motion)
+    #overlay[data-ui-motion="page"][data-ui-enter]:not([hidden]) .card-library-page > .clib-main {
+    animation: ptBlockIn var(--pt-in);
+    animation-delay: .07s;
+  }
+  body.interface-motion:not(.reduce-motion)
+    #overlay[data-ui-motion="page"][data-ui-enter]:not([hidden]) .card-library-page > .library-inspector {
+    animation: ptBlockIn var(--pt-in);
+    animation-delay: .13s;
+  }
+
+  /* 制作名单（独立 dialog）：返回钮 → 标题 → 名单 → 来源附注 */
+  body.interface-motion:not(.reduce-motion)
+    #title.home-composed .home-credits-dialog[open][data-home-motion="in"] > * {
+    animation: ptBlockIn var(--pt-in);
+  }
+  body.interface-motion:not(.reduce-motion)
+    #title.home-composed .home-credits-dialog[open][data-home-motion="in"] > :nth-child(2) { animation-delay: .05s; }
+  body.interface-motion:not(.reduce-motion)
+    #title.home-composed .home-credits-dialog[open][data-home-motion="in"] > :nth-child(3) { animation-delay: .1s; }
+  body.interface-motion:not(.reduce-motion)
+    #title.home-composed .home-credits-dialog[open][data-home-motion="in"] > :nth-child(n+4) { animation-delay: .15s; }
+}
+
+@keyframes ptBlockIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}

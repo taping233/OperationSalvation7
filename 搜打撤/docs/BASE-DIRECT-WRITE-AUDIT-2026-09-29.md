@@ -1,5 +1,7 @@
 # 基地存档直写路径盘点与收敛审计（2026-09-29 夜班 C 线）
 
+文档身份：09-29 的路径审计与方案依据。当前写入、失败和恢复边界见[存档契约](save-format.md)与[架构](architecture.md)；下文的路径状态使用前核对源码。
+
 - 基准 HEAD：`47001e3`（docs(vite): record gate, art, perf, and provenance evidence）
 - 执行：存档收敛子代理（hub/base 存档域）；未提交，工作区另有并行会话改动（`game.bag.js`、`game.run.altar.js` 文案/接线，`docs/M-BATCH-MATRIX.md` 开工后出现）——均未触碰。
 - 使命：把绕过事务命令、直接改 `Base.data` 后保存的业务残留路径收敛为命令，业务层「直接写存档」清零。

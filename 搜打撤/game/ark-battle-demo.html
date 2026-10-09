@@ -1,0 +1,12 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>配乐草稿 · 初版首页与电子作战</title>
+<style>body{margin:0;background:#101922;color:#e9eef4;font:16px/1.7 system-ui,sans-serif}main{max-width:880px;margin:auto;padding:36px 24px}h1{font-size:32px;line-height:1.3}h2{font-size:23px;margin:7px 0}small{color:#9bc3cd;letter-spacing:.14em}p{color:#b0c1cc}section{border:1px solid #456574;border-radius:14px;padding:22px;margin:18px 0;background:#ffffff05}audio{width:100%;margin-top:10px}a{color:#b4dce8}.status{min-height:25px}</style>
+<main><small>代号柒 / 战斗方向重做</small><h1>首页回初版，战斗换方向</h1><p>战斗：低频压力、工业打击与短合成器动机。首页、探索使用最初游戏音频，商店保持上一版。</p><div id="tracks"></div><p>参考入口：<a href="https://monster-siren.hypergryph.com/music/048744" target="_blank" rel="noopener">明日方舟 · 短兵相接</a> · <a href="https://monster-siren.hypergryph.com/music/697658" target="_blank" rel="noopener">Operation Spectrum Battle Theme</a></p><p>战斗旋律与音色重新创作，未拼接参考录音。仍为30秒草稿。</p></main>
+<script type="module">
+import title from './assets/music-demo/01-title-frostglass.ogg?url';
+import explore from './assets/music-demo/02-explore-ashline.ogg?url';
+import battle from '../docs/evidence/2026-10-09-WF-ark-battle-demo/battle-coldfront-30s.mp3?url';
+import shop from '../docs/evidence/2026-10-09-WF-shop-remake/shop-lamplight-deal-30s.mp3?url';
+const rows=[['战斗','冷线交锋 · 全新电子作战','30秒新候选，保留推进感和段落留白，控制高频与响度。',battle],['首页','霜窗回声 · 初版','最初游戏里的完整版本，原样引用。',title],['探索','灰线行军 · 初版','最初游戏里的完整版本，原样引用。',explore],['商店','灯下交易','保留上一版。',shop]],players=[];
+for(const [scene,name,desc,url] of rows){const card=document.createElement('section');card.innerHTML=`<small>${scene}</small><h2>${name}</h2><p>${desc}</p><audio controls preload="metadata" aria-label="${scene}试听" src="${url}"></audio><p class="status" aria-live="polite">点击播放试听</p><a href="${url}" download>下载音频</a>`;document.getElementById('tracks').append(card);const a=card.querySelector('audio'),s=card.querySelector('.status');players.push(a);a.addEventListener('play',()=>players.forEach(p=>{if(p!==a)p.pause()}));a.addEventListener('playing',()=>s.textContent='正在试听 · '+name);a.addEventListener('pause',()=>s.textContent=a.ended?'试听结束':'已暂停');a.addEventListener('ended',()=>s.textContent='试听结束');a.addEventListener('error',()=>s.textContent='加载失败')}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)players.forEach(p=>p.pause())});
+</script></html>

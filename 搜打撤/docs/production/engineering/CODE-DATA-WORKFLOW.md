@@ -25,17 +25,14 @@
 | Agent 逐局记录与聚合 | Agent runner/recorder/stats；批跑 `runs.jsonl`、`summary.json` | `game/tools/agent-batch.mjs` 在新汇总中记录代码/运行条件指纹；`agent-compare.mjs` 校验配对与实验条件并输出机器判决；`agent-ledger.mjs` 记录假设、T/V 产物 hash 与判决。具体晋级条件和人工留证见[实验复现约定](AGENT-EXPERIMENTS.md)。批量结果不是浏览器真实体验验收。 |
 | 图鉴文档 | 卡库运行数据 | 常规测试只在内存比较；显式 `npm run docs:compendium` 才写 `docs/game-compendium.md`。 |
 
-### 验证与 CI 边界
+### 验证入口
 
-- 改动分级、定向反馈、冻结报告复用和 CI 实际覆盖边界只在[质量门](../../quality-gates.md)维护；不要从阶段收尾或落库字样推导固定全量步骤。
-- `.github/workflows/ci.yml`：master push 与 PR 触发；Node 22，`npm ci`、语法/类型/lint，再由 `npm test` 的 pretest 编译剧情、校验数据并执行全量 Vitest；该 workflow 没有构建步骤。
-- `.github/workflows/vite-quality.yml`：master push 与 PR 按 Vite 路径过滤触发；Node 22，`npm ci` 与 `npm run build`（prebuild 处理剧情/数据，postbuild 检查性能预算），不重复全量测试。配置只说明预期流水线，是否实际运行/通过须查对应 Actions 记录。
-- 本地质量门脚本和覆盖限制见[质量门](../../quality-gates.md)。构建成功、静态测试或 Agent 模拟均不单独代表实页完整验收。
+- 改动分级、命令、冻结报告复用和 CI 配置在[质量门](../../quality-gates.md)维护；本页的数据表只列各类数据的校验入口。
 
 ### 已知债务与防重复建设
 
 - TypeScript 检查按显式配置边界增量覆盖；通过 typecheck 不代表全项目严格类型检查。存档层仍有兼容旧流程直接写状态的路径；Base 与 Run 分存储也不是统一原子事务。
-- RenderScheduler 文档已按当前源码更正为活动上限目标 120 FPS、静态空闲零绘制；这不等于实页已稳定达到 120 FPS。`development.md` 中桌面发布步骤属于已冻结的 EXE 线，接手时以 Vite 开发路径为准。
+- 渲染调度与测量方法见[性能文档](../../performance.md)；目标帧率与实际交付帧率分别记录。
 - `cards-sync.json` 是生成物，勿手改；剧情生成文件勿手改；普通测试不会刷新图鉴文档。先复用现有同步器、编译器和生成入口，不另造平行真源。
 - 架构图及依赖守卫已有 `scripts/architecture-graph.mjs`、`tests/architecture-boundaries.test.js` 与 contracts 检查；不要新建第二套模块分层/循环扫描器。
 - Agent 已有协议、策略迭代手册、batch、compare、evolve、supervise 和 ledger。先扩展现有结果记录/台账约定，不另建一套实验 runner 或跟踪服务。

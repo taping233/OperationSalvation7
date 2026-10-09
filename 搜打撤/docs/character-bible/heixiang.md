@@ -2,16 +2,20 @@
 
 ![黑像·定稿立绘](ref-images/heixiang.webp)
 
-## 基础信息（以 characters.js / 选人界面为准）
+## 身份与参考使用
+
+既有运行参考为 `game/assets/portraits/full/heixiang.webp`，本页图片为同图副本。身份要素按指定版本核对；当前画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)。下方 09-12 与 09-19 描述保留版本差异，不同时套用两种画风或发色。
+
+## 当前角色数据（core/characters.js）
 
 | 项 | 值 |
 |---|---|
 | id | `heixiang` |
-| 名字 | 黑像（2026-09-12 由「玄砾」改名，id 与立绘文件名不变） |
+| 名字 | 黑像 |
 | 职业 | 战士 |
 | 主题色 | `#d0805a` |
 
-## 外观锚点（已定稿，出图必须遵守）
+## 历史：2026-09-12 立绘口径
 
 2026-09-12 老板逐轮定稿并验收主立绘（赛璐璐色块风大图，`roster-main-0912-big/heixiang_v3_seed645024971.png`，已入库三组立绘）。
 
@@ -25,7 +29,7 @@
 - 画风：**赛璐璐色块**（cel shading + flat color）。
 - 构图：全身居中、约占画幅高 85%、不出框；横版宽幅 16:9（4096×2304）。
 
-## 2026-09-19 painterly 全身立绘定稿（老板授权 Friday 定锚点）
+## 参考立绘描述（2026-09-19 painterly 版本）
 
 - 依据：`roster-painterly-four-v2-20260919-120257/xuanli-120257.png`（seed 1111442184），已实装 `portraits/full/heixiang.webp`。
 - 演出：延续定稿反差萌——**单手捏小咖啡杯啜饮（小指微翘、托碟、热气）**；巨剑由"插身侧"改为**背负**（剑柄露出肩上）。
@@ -34,7 +38,7 @@
 - 色调：黑白灰 + 棕橙围巾为全身唯一暖色（主题色 `#d0805a` 落地）；simple background 素底。
 - 画风：painterly 统一画风模块（miv4t+quasarcake，`official_painterly_style.py`）。
 
-### 细粒度锚点（0919 定稿立绘逐要素，出图照抄）
+### 对应参考版本的细节
 
 依据 `roster-painterly-four-v2-20260919-120257/xuanli-120257.png`（实装版）：
 

@@ -141,7 +141,7 @@ for (;;) {
 - 游戏内数据页（控制台「数据」页签或 Alt+9）：通关率 / 撤离率 / 死亡层分布 / 带出卡牌价值等聚合，
   支持 JSON/CSV 导出；人类玩家的对局同样入账（driver=human）。
 
-## 八、控制台四页签与页面快捷键（2026-09-25）
+## 八、控制台四页签与页面快捷键
 
 - **开发者控制台**（Ctrl+L，任意界面可开）四页签：
   - 调试：原有资源/发卡/战斗调试（写操作仅在对局/战斗中生效）；
@@ -159,7 +159,7 @@ for (;;) {
 
   战斗中/对局中的受保护页面会拒绝进入并日志提示，不绕过既有状态守卫。
 
-## 九、验收剧本（SDT.Agent.scenes，2026-10-01）
+## 九、验收剧本（SDT.Agent.scenes）
 
 固定验收剧本库：把「实机验收逐步驱动」压成一次调用。每个场景 = 前置 + 自动驱动 +
 内建断言，跑完返回结构化报告（pass / assertions / final / errors），剧本断言 JSON +
@@ -179,8 +179,4 @@ SDT.Agent.scenes.status('fullrun')         // 轮询 { started, done, report }
 | extract | 开局→（直跳第三层）BFS 逐格走到紧急撤离点→献祭 3 卡→撤离结算 | 自动开局，options.fullWalk 走全图 |
 | fullrun | strategic 打到撤离或死亡，断言自然收口+记录落盘 | 自动开局，默认 turbo |
 
-外部 evaluate 只有 3s 级预算：短场景可 `JSON.stringify(await run(...))` 一次取回；
-长场景必须 start+status 分体（`scripts/iab-drive.mjs` 的 `runScene(tab, scene)` 已封装，
-含 PAGE_RELOADED 感知）。场景间前置自动清场（搜刮/教学弹层残留会污染断言）；
-`[SDT.Icons] missing bitmap` 预热告警不入报告错误桶。坑全录：
-`docs/evidence/2026-10-01-acceptance-scenes/README.md`。
+求值和长任务预算按当前平台工具说明核对；支持时短场景直接取报告，长场景用 `start` / `status` 分开启动与查询。`scripts/iab-drive.mjs` 是 ZCode 桥接封装，Codex 使用当次可用的内置浏览器接口。场景前置自动清场；预热告警的处理和当时兼容问题见[10-01 剧本记录](evidence/2026-10-01-acceptance-scenes/README.md)。

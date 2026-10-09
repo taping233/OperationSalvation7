@@ -1,32 +1,31 @@
-# 玩家可见文案术语总表（2026-09-20 迭代评审批次）
+# 玩家可见文案术语
 
-> 目的：收口「同一概念多种叫法」。新写卡面 desc / 事件文本 / UI 文案时按本表取词；
-> 既有文案与实装口径冲突时，以实装为准改文案（走 cards-sync version+1 或 EVENTS_0919 通道）。
+本页维护玩家概念与文案写法。卡牌数据、效果与同步关系见[卡牌入口](cards/README.md)，运行词条讲解见 `game/src/ui/term-tips.js`。旧改名、修复次数和实现批次保留在[整理前记录](archive/WF-card-doc-context-1009/originals/docs/terminology.md)。
 
 ## 核心术语
 
 | 统一用词 | 勿用 / 说明 |
 |---|---|
-| 初始攻击 | 「杀」（2026-09-09 已全局改名，保留 id `starter-attack`；旧文本残留按 bug 处理） |
-| 招式 | = **武术 + 法术**（设计者定版口径，见迷之匣/连续射击/诅咒之刃及 battle.core 注释）。银河之旅特例：desc 直称「武术」（其实现只降武术，触发正则已补「武术」分支，battle.core.js `registerBattle`） |
-| 安全格 | 「保护格」已退役（2026-09-20 统一，玩家可见面 8 处已改：pets.json、基地页日志/说明、图鉴） |
+| 初始攻击 | 旧称「杀」；稳定 id 保留为 `starter-attack`，玩家文案使用当前名称 |
+| 招式 | 武术与法术的统称；「所有招式」类效果同时覆盖两种牌。讲解和高亮由 `term-tips.js` 与 `descRich` 提供，具体费用效果查相应卡牌规则 |
+| 安全格 | 玩家可见名称；旧称「保护格」保留在历史记录 |
 | 火球 | 「火球术」为异写——现役卡名是「火球」（tt3-fireball），联动卡面统一写「火球」 |
-| 员工通行证A / B / C | 材料/产物同名不同 id 是定版；碎片提示语：「集齐 2 枚可合成员工通行证A，兑换一张能力卡」 |
+| 员工通行证A / B / C | 同名材料与产物按稳定 id 区分。祭坛提示按当前行为表达：两枚员工通行证A碎片可兑换本职业能力卡；前置条件与消费见[规则](rules.md) |
 | 小型物资箱 / 密封物资箱 / 军用保险柜 | 宝箱三档实装名；**单指场合一律用实装名**（如恶魔交易「获得 1 个军用保险柜」）；列举语境可用大/中/小，首次出现注明映射（docs/rules.md §1） |
 
-## 文案格式细则（新卡必须遵守；存量已解析验证的 desc 不做连锁改写，避免触发结算正则漂移）
+## 文案格式与解析边界
 
-- 句末用句号「。」；禁半角句点「.」结尾；禁「。；」连用（破甲重斩已修为「；」单分隔）。
-- 卡名引用统一「」直角引号，方向不得颠倒（骷髅王剑已修）。
-- 数词：新文案统一「N 张 / N 点」阿拉伯数字加空格；**存量 desc 不做一↔1 连锁替换**——部分结算正则按「一张/两」汉字匹配（HAND_COST 句式表，`game/src/battle/hand-cost-patterns.js`），改写前必须先核对正则并跑 `tests/battle-all-cards.test.js`。
+- 句末用句号「。」；分句使用「；」，不连用「。；」。
+- 卡名引用统一使用「」。
+- 新文案使用「N 张 / N 点」的阿拉伯数字与空格。存量 desc 如仍由文本解释器消费，先核对 `game/src/battle/effects/hand-cost-patterns.js` 和相关牌效测试，再改写数词或句式；避免把排版修改变成结算变化。
 - 伤害表述统一「造成 N 点法术伤害」等全称；角标类窄位（意图气泡）可用「流血 N 层」缩略。
 
 ## 事件文本三层分工
 
-- 卡面 desc（cards-sync / EVENTS_0919）：效果承诺的**单一真源**。
-- V2 事件选项（game.run.flow.js `eventChoiceSpec`）：接管后 detail 是玩家实际所见，须与 desc、实装三方一致（熔断双箱已对齐「随机抽取」口径）。
-- ink（narrative/events.ink）：V2 接管的事件只保留开场氛围句，数值细节一律从 ink 撤除；改 ink 后必须 `npm run narrative:compile` 并 grep `game/src/generated/narrative-events.js` 核验，产物为勿改区。
+- 卡面 desc：在卡库与定版数据中维护效果承诺，与结构化规则和实际执行一致；同步通道见卡牌入口。
+- 事件选项：`game/src/run/game.run.flow.js` 的 `eventChoiceSpec` 等入口组装玩家所见 detail，核对选项、卡面承诺和执行结果。
+- 叙事：`narrative/events.ink` 维护氛围与剧情；由节点控制器接管的事件，数值细节在选项与执行来源维护。编译后核对 `game/src/generated/narrative-events.js`，生成文件勿手改。
 
-## 已知死数据
+## 背景与历史资料
 
-- `game/data/scenes.json` 的 `classStory` 为旧 11 职业背景死数据（已加 `_note` 占位），五职业背景待老板定稿后按 docs/character-bible 重写，引用前先核对职业整合口径。
+- `game/data/scenes.json` 的 `classStory` 保留旧职业背景数据；新剧情按[人设库](character-bible/README.md)中的当前身份与待定标记核对，不从旧职业文本推定未确认背景。

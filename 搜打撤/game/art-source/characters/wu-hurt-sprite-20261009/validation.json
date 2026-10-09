@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "idleInitialEqualsHurtInitialEqualsHurtFinal": true,
+  "endpointPngSha256": "484895aa505493825202539d4b7cfadf7c63c33997633b7940982a6634dbc63f",
+  "frameSize": [
+    768,
+    512
+  ],
+  "bounds": [
+    [
+      196,
+      19,
+      730,
+      484
+    ],
+    [
+      168,
+      64,
+      684,
+      484
+    ],
+    [
+      196,
+      25,
+      706,
+      485
+    ],
+    [
+      196,
+      19,
+      730,
+      484
+    ]
+  ],
+  "uniquePoses": 3,
+  "visibleAtlasMatchesFrames": true,
+  "durationMs": 334
+}

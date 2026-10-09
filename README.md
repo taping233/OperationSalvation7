@@ -1,13 +1,13 @@
 # 代号柒工作区
 
-本目录把可运行项目、原始素材、交付成果和辅助工具分开保存。
+当前开发主线是 `搜打撤/` 下的 Vite 网页版。Godot、Unity 和桌面 EXE 线保持冻结，开发与协作边界见 [AGENTS.md](AGENTS.md)。
 
 | 目录 | 用途 |
 |---|---|
-| `搜打撤/` | 游戏源码、测试、文档和桌面外壳 |
-| `SoudacheGodot/` | Godot 4.7 C# 迁移版、测试、资源清单和 Windows 导出配置 |
+| `搜打撤/` | Vite 游戏源码、测试、文档；桌面外壳保留但冻结 |
+| `SoudacheGodot/`、`SoudacheUnity/` | 冻结的迁移工程与历史资源 |
 | `图片/` | 原始图片与分类源素材，不直接作为游戏运行目录 |
 | `图片成果/` | 海报、预览图、应用图标候选和历史版本 |
 | `工具/` | 独立美术处理工具，不参与游戏构建 |
 
-原版说明见 [`搜打撤/README.md`](搜打撤/README.md)，迁移版说明见 [`SoudacheGodot/README.md`](SoudacheGodot/README.md)。生成目录和依赖缓存不提交到 Git；Godot 运行资源保存在迁移工程内并记录来源。
+游戏与启动说明见 [项目 README](搜打撤/README.md)，开发入口见 [QUICKSTART](搜打撤/docs/QUICKSTART.md)，按任务查资料见 [文档导航](搜打撤/docs/README.md)。生成目录和依赖缓存按项目忽略规则保存。

@@ -1,0 +1,73 @@
+{
+  "status": "candidate",
+  "character": "wu",
+  "animation": "attack",
+  "texture": "wu-attack-sheet.webp",
+  "frameWidth": 768,
+  "frameHeight": 512,
+  "columns": 4,
+  "rows": 2,
+  "uniquePoseFrames": 8,
+  "sampleRate": 24,
+  "sequence": [
+    0,
+    1,
+    1,
+    2,
+    3,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "durationsMs": [
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42
+  ],
+  "durationMs": 417,
+  "impactStep": 4,
+  "restFrame": 0,
+  "loop": false,
+  "previewRestMs": 900,
+  "phases": [
+    {
+      "name": "蓄力",
+      "start": 0,
+      "end": 2
+    },
+    {
+      "name": "斩击",
+      "start": 3,
+      "end": 6
+    },
+    {
+      "name": "收势",
+      "start": 7,
+      "end": 9
+    }
+  ],
+  "idleSpec": "../../wu-idle-sprite-20261009/v2/sprite.json",
+  "endpointSource": "../../wu-idle-sprite-20261009/v2/frames/idle-000.png",
+  "firstFrame": 0,
+  "lastFrame": 7,
+  "method": "exact accepted idle PNG reused at both endpoints; shared affine normalization for intermediate poses",
+  "normalization": {
+    "scaleX": 1.06,
+    "scaleY": 1.1231884057971016,
+    "translateX": 28.00999999999999,
+    "translateY": -31.54347826086962,
+    "recoveryPoseScaleCorrection": {
+      "5": 1.055,
+      "6": 1.12
+    }
+  }
+}

@@ -4,7 +4,7 @@
 
 ## 现行权威（2026-10-03）
 
-唯一认可外观为 `game/assets/portraits/full/changwuyu.webp`，本页 ref-images 为同图参考；现行画风见[视觉规范](../production/art/VISUAL-BIBLE.md)。其他卡面、皮肤、战斗图不因历史“定稿”字样自动获认可。
+既有运行外观参考为 `game/assets/portraits/full/changwuyu.webp`，本页 ref-images 为同图副本。身份要素按指定参考核对，当前画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)，接入要求见[视觉规范](../production/art/VISUAL-BIBLE.md)。
 
 - 男性、银灰长发低发髻、垂肩鬓发、黄瞳、尖耳、细圆框眼镜、黑弯尖宽檐魔女帽。
 - 黑高领长袍、紫内衬、金滚边、黑手套黑靴、左胸白羽与蓝宝石金扣胸针。
@@ -12,7 +12,7 @@
 
 下方 09-12 / 09-19 文字保留为修订史；旧持杖、背景和景别不作为现行共同条件。未定背景不由画面推断。
 
-## 基础信息（以 characters.js / 选人界面为准）
+## 当前角色数据（core/characters.js）
 
 | 项 | 值 |
 |---|---|

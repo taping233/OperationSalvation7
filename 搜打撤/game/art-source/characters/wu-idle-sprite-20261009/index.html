@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>无 · 战斗待机 Sprite</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#141b26;color:#e7edf8;font:16px/1.6 system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:24px}h1{font-size:23px;margin:0 0 6px}p{margin:0 0 14px;color:#afbbd0}.stage{background:radial-gradient(ellipse at 50% 70%,#354255,#1b2431 65%);border:1px solid #40516a;border-radius:12px;overflow:hidden}.stage canvas{display:block;width:auto;max-width:100%;height:auto;max-height:64vh;margin:auto}nav{display:flex;flex-wrap:wrap;gap:10px;padding:14px 0}button,a{background:#273750;color:#e7edf8;border:1px solid #526984;border-radius:6px;padding:7px 13px;text-decoration:none;font:inherit}button{cursor:pointer}button:disabled{opacity:.45}output{display:block;color:#adbfda}details{margin-top:18px}details img{width:100%;background:#29364a}.light .stage{background:#bbc5d1}
+</style>
+<main>
+<h1>无 · 战斗待机</h1>
+<p>朝右持剑，轻微呼吸与衣发摆动。四张关键帧，3 秒往返循环。</p>
+<div class="stage"><canvas width="800" height="544" aria-label="无的战斗待机逐帧动画"></canvas></div>
+<nav><button id="play">暂停</button><button id="step">逐帧</button><button id="bg">切换浅色背景</button><a href="wu-idle-sheet.png" download>PNG 帧图</a><a href="sprite.json" download>动作配置</a></nav>
+<output>正在加载帧图…</output>
+<details><summary>查看四张关键帧</summary><img src="wu-idle-sheet.png" alt="四张无待机关键帧"></details>
+</main>
+<script type="module">
+const spec=await fetch('./sprite.json').then(r=>{if(!r.ok)throw Error('动作配置加载失败');return r.json()});
+const sheet=new Image();sheet.src=spec.texture;await sheet.decode();
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),status=document.querySelector('output');
+const play=document.querySelector('#play'),step=document.querySelector('#step');
+let running=!matchMedia('(prefers-reduced-motion: reduce)').matches,index=0,last=performance.now(),elapsed=0;
+function draw(){const frame=spec.sequence[index];ctx.clearRect(0,0,800,544);ctx.drawImage(sheet,(frame%2)*800,Math.floor(frame/2)*544,800,544,0,0,800,544);status.textContent=`${running?'播放中':'已暂停'} · 第 ${frame+1}/4 张 · 循环 ${index+1}/6 步 · 3 秒`;play.textContent=running?'暂停':'播放';step.disabled=running;canvas.dataset.frame=frame;canvas.dataset.step=index;}
+function tick(now){const delta=now-last;last=now;if(running&&!document.hidden){elapsed+=delta;while(elapsed>=spec.durationsMs[index]){elapsed-=spec.durationsMs[index];index=(index+1)%spec.sequence.length;draw();}}requestAnimationFrame(tick);}
+play.onclick=()=>{running=!running;last=performance.now();draw();};step.onclick=()=>{index=(index+1)%spec.sequence.length;elapsed=0;draw();};document.querySelector('#bg').onclick=()=>document.body.classList.toggle('light');document.addEventListener('visibilitychange',()=>last=performance.now());draw();requestAnimationFrame(tick);
+</script>
+</html>

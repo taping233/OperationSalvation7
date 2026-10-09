@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "at": "2026-10-09T04:21:44.721Z",
+  "task": "WF-ledger-context-1009",
+  "method": "copy-original-before-revision",
+  "items": [
+    {
+      "source": "docs/PARALLEL-REGISTRY.md",
+      "target": "docs/archive/WF-ledger-context-1009/originals/docs/PARALLEL-REGISTRY.md",
+      "sha256": "d6a0ba704109375c630cc5971cb16fbe55c9595263eb68812ae576f4ca2c6522",
+      "replacedBy": "docs/STATUS.md"
+    },
+    {
+      "source": "docs/PENDING.md",
+      "target": "docs/archive/WF-ledger-context-1009/originals/docs/PENDING.md",
+      "sha256": "1e349ba6e25129e319b1c27478fd1d61cee6ae7f88cbbaf4be8774ab4103d704",
+      "replacedBy": "docs/STATUS.md"
+    }
+  ],
+  "limits": [
+    "原文保持字节，内部相对链接仍以 source 原位置解释",
+    "本命令未修改源文件；替代状态由负责人核实并在现行入口注明"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "at": "2026-10-09T04:53:25.103Z",
+  "task": "WF-card-doc-context-1009",
+  "method": "copy-original-before-revision",
+  "items": [
+    {
+      "source": "docs/terminology.md",
+      "target": "docs/archive/WF-card-doc-context-1009/originals/docs/terminology.md",
+      "sha256": "09ca9e4c9adb303a9acd5c11c55b7b2c3cf0a5a325bec49ddd4a076d9d27442c",
+      "replacedBy": "docs/cards/README.md"
+    },
+    {
+      "source": "docs/M-BATCH-MATRIX.md",
+      "target": "docs/archive/WF-card-doc-context-1009/originals/docs/M-BATCH-MATRIX.md",
+      "sha256": "1f3d5dc4159be775a9506708f426a409c527db6e4a8e4d73503db71c322e70d2",
+      "replacedBy": "docs/cards/README.md"
+    },
+    {
+      "source": "docs/game-compendium.md",
+      "target": "docs/archive/WF-card-doc-context-1009/originals/docs/game-compendium.md",
+      "sha256": "7a4ac3fcac85e35549ef21cd5d18fe98f0f90bc4670ff36b8ee69568de45ddd8",
+      "replacedBy": "docs/cards/README.md"
+    }
+  ],
+  "limits": [
+    "原文保持字节，内部相对链接仍以 source 原位置解释",
+    "本命令未修改源文件；替代状态由负责人核实并在现行入口注明"
+  ]
+}

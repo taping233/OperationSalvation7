@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "poses": 8,
+  "timelineSteps": 10,
+  "sampleRate": 24,
+  "durationMs": 417,
+  "sameScaleAllPoses": true,
+  "bounds": [
+    [
+      161,
+      45,
+      614,
+      459
+    ],
+    [
+      150,
+      35,
+      488,
+      460
+    ],
+    [
+      158,
+      36,
+      680,
+      460
+    ],
+    [
+      77,
+      87,
+      675,
+      461
+    ],
+    [
+      97,
+      90,
+      693,
+      459
+    ],
+    [
+      160,
+      76,
+      547,
+      461
+    ],
+    [
+      185,
+      91,
+      616,
+      460
+    ],
+    [
+      192,
+      91,
+      618,
+      459
+    ]
+  ],
+  "alphaCornersZero": true,
+  "frontBootCenterX": 440,
+  "soleBaselineY": 460
+}

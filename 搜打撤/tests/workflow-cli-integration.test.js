@@ -165,7 +165,7 @@ describe('流程入口集成', () => {
     expect(result.indexEntryCount).toBeGreaterThan(0);
     expect(result.entries).toBeUndefined();
     expect(Array.isArray(result.changes)).toBe(true);
-    expect(output.length).toBeLessThan(100000);
+    expect(output.length).toBeLessThan(100000 + result.changes.length * 256); // 大批次保留变化清单，仍排除全仓库index entries。
   });
   it('npm工作流入口只连接项目脚本，不改变依赖或跳过原门禁', () => {
     const pkg = JSON.parse(readFileSync(path.join(project, 'package.json'), 'utf8'));

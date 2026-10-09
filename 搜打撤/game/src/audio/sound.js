@@ -23,7 +23,7 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     sfxOff = localStorage.getItem('sdt-sfx-off') === '1';
     const mv = parseFloat(localStorage.getItem('sdt-music-vol')); if (mv >= 0 && mv <= 1) musicVol = mv;
     const sv = parseFloat(localStorage.getItem('sdt-sfx-vol')); if (sv >= 0 && sv <= 1) sfxVol = sv;
-    const source = localStorage.getItem('sdt-music-source'); if (source === 'original' || source === 'scape') musicSource = source;
+    // The approved four-track soundtrack supersedes the legacy soundscape preference.
   } catch { /* localStorage 不可用/写入失败（隐私模式等）：音频设置回落默认值，可安全忽略 */ }
 
   function ensure() {
@@ -424,7 +424,7 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     if (scape) {
       scape.setVolume(BASE_MUSIC * dbGain(musicVol) * 0.32 * (ducked ? 0.45 : 1));
       scape.setMode(on && musicSource === 'scape' ? (['title', 'base'].includes(musicMode) ? 'title' : musicMode === 'battle' ? 'battle' : 'board') : null);
-      // Dedicated boss scores already carry tension; no synthetic layer over file music.
+      // The shared battle track owns the texture; no synthetic layer over file music.
       scape.setBoss(musicSource === 'scape' && battleBoss);
       scape.setMuted(!on || musicSource === 'original');
     }
@@ -464,8 +464,8 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     try { localStorage.setItem('sdt-music-off', musicOff ? '1' : '0'); } catch { /* localStorage 不可用/写入失败（隐私模式等）：音频设置回落默认值，可安全忽略 */ }
     syncBgm();
   }
-  function setMusicSource(source) {
-    musicSource = source === 'original' ? 'original' : 'scape';
+  function setMusicSource() {
+    musicSource = 'original';
     try { localStorage.setItem('sdt-music-source', musicSource); } catch { /* localStorage 不可用/写入失败（隐私模式等）：音频设置回落默认值，可安全忽略 */ }
     syncBgm();
   }

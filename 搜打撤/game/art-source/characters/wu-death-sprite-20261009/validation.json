@@ -1,0 +1,66 @@
+{
+  "passed": true,
+  "idleInitialEqualsDeathInitial": true,
+  "startPngSha256": "484895aa505493825202539d4b7cfadf7c63c33997633b7940982a6634dbc63f",
+  "finalTwoFramesIdentical": true,
+  "finalDifferentFromIdle": true,
+  "finalIsLowHorizontalSilhouette": true,
+  "frameSize": [
+    768,
+    512
+  ],
+  "bounds": [
+    [
+      196,
+      19,
+      730,
+      484
+    ],
+    [
+      183,
+      41,
+      600,
+      484
+    ],
+    [
+      193,
+      130,
+      622,
+      484
+    ],
+    [
+      124,
+      131,
+      608,
+      484
+    ],
+    [
+      158,
+      214,
+      606,
+      484
+    ],
+    [
+      117,
+      318,
+      587,
+      484
+    ],
+    [
+      135,
+      334,
+      626,
+      484
+    ],
+    [
+      135,
+      334,
+      626,
+      484
+    ]
+  ],
+  "visibleAtlasMatchesFrames": true,
+  "durationMs": 875,
+  "loop": false,
+  "holdLastFrame": true
+}

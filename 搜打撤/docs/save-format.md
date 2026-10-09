@@ -32,15 +32,15 @@
 - 删除档位只删除对应对局与基地数据，不影响其他档位。
 - 重构允许移动函数和模块，不允许静默更改字段含义、资源数量、卡牌归属或安全格规则。
 
-固定兼容样本位于 `tests/fixtures/`，由 `tests/save-compat.test.js` 覆盖 RunStorage v1/v2 字段迁移、跨档隔离、未完成对局、基地、职业、成就和卡背。这些 fixture 没有地图版本，证明不了原地图可恢复；地图恢复契约另由 R5 快照测试覆盖。任何存档格式变更都必须同步更新相应样本与迁移测试。
+固定兼容样本位于 `tests/fixtures/`，由 `tests/save-compat.test.js` 覆盖 RunStorage v1/v2 字段迁移、跨档隔离、未完成对局、基地、职业、成就和卡背。这些 fixture 没有地图版本；原地图恢复另由地图快照测试覆盖。存档格式变更同步更新相应样本与迁移测试。
 
-## R5-b 路线快照 v2
+## 路线快照 v2（routeVersion: r5-routes-v1）
 
 新开的普通远征在现行 3/9 地图生成后尝试一次 `r5-routes-v1` 覆盖。成功或有诊断回退的新局均保存 `snapshotVersion: 2`、外层 `routeVersion`，以及严格的 `routePlan`；应用计划必须与快照内起点、汇合点、补给 chest、交战 battle 和四条分支边一致。回退计划只保存状态与原因，不宣称存在双路线。
 
 旧 `snapshotVersion: 1` 与无快照的旧 3/9 对局仍走原恢复逻辑，绝不补做覆盖。未知路线版本、外层与快照版本冲突、计划节点/边/类型不符时保留原始存档并拒绝载入。顶层 run 仍允许既有扩展字段；`mapSnapshot` v1/v2 各自执行严格字段合同。
 
-## E5 装载与回写结果
+## 装载与回写结果
 
 读档顶层必须是普通记录，不能是数组或标量。缺失 `version` 仍按历史版本 0 迁移；显式版本须为非负整数，字符串、空值、小数及其他非法形状视为损坏，合法但高于当前版本的整数单独报告版本过新。原始存档键保留，损坏备份失败时只承诺原档保留，不声称备份成功。
 
@@ -73,4 +73,4 @@
 
 `reason` 为 `card_rename`、`elapsed_migration`、`play_time_sync` 或 `save_game`。基地失败码为 `BASE_SAVE_FAILED`；对局失败码优先采用存储层的 `STALE_SLOT`、`RECOVERY_REQUIRED` 或 `STORAGE`，否则为 `RUN_SAVE_FAILED`。正常返回、预检拒绝和抛错都会释放本次收集上下文，后续保存不再修改已返回的结果。
 
-已经可以继续的装载，即使回写失败仍可返回 `ok: true`，同时明确提示本次部分进度未保存。菜单进入与 Agent `enterSlot` 的成功仍只说明进入完成，不升级为持久化承诺；E4 的转场归属、战斗加载身份及完成凭据保持原语义。预检拒绝返回 `preserveRun: true`，原 run/base/journal 串保留，且不会先修改随机流、安装地图、调用 `Base.use` 或赋值运行态。
+装载成功且可继续时，即使回写失败仍可返回 `ok: true`，同时提示本次部分进度未保存。菜单进入与 Agent `enterSlot` 的成功表示进入完成；持久化结果由 `persistence` 单列。转场归属、战斗加载身份及完成凭据沿现有协议处理。预检拒绝返回 `preserveRun: true`，原 run/base/journal 串保留，且不会先修改随机流、安装地图、调用 `Base.use` 或赋值运行态。

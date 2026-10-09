@@ -34,9 +34,10 @@ describe('settings page layout and controls', () => {
     const { acts, UI } = openSettings();
     const root = UI.el.ovBody.querySelector('.settings-page');
     expect(root.querySelectorAll('.settings-group')).toHaveLength(6);
-    for (const id of ['setIndex', 'setHint', 'setBanner', 'setDev', 'setShake', 'setReduceMotion', 'setMusic', 'setMusicSource', 'setMusicVol', 'setSfx', 'setSfxVol']) {
+    for (const id of ['setIndex', 'setHint', 'setBanner', 'setDev', 'setShake', 'setReduceMotion', 'setMusic', 'setMusicVol', 'setSfx', 'setSfxVol']) {
       expect(root.querySelector(`#${id}`), `missing #${id}`).not.toBeNull();
     }
+    expect(root.querySelector('#setMusicSource')).toBeNull(); // 配乐固定使用已实装原创曲库。
     expect(root.querySelector('.settings-danger [data-act="wipeSave"]')).not.toBeNull();
     expect(root.querySelector('.settings-records [data-act="openInbox"]')).not.toBeNull();
     expect(root.querySelector('.settings-records [data-act="openDataPageUi"]')).not.toBeNull();

@@ -1,0 +1,289 @@
+{
+  "status": "candidate",
+  "character": "wu",
+  "animation": "attack",
+  "texture": "wu-attack-sheet.webp",
+  "frameWidth": 512,
+  "frameHeight": 512,
+  "columns": 4,
+  "rows": 3,
+  "uniquePoseFrames": 12,
+  "sampleRate": 24,
+  "sequence": [
+    0,
+    1,
+    1,
+    2,
+    3,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    10,
+    11,
+    11
+  ],
+  "durationsMs": [
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42
+  ],
+  "durationMs": 667,
+  "loop": false,
+  "impactStep": 8,
+  "restFrame": 0,
+  "previewRestMs": 900,
+  "phases": [
+    {
+      "name": "蓄力",
+      "start": 0,
+      "end": 5
+    },
+    {
+      "name": "斩击",
+      "start": 6,
+      "end": 9
+    },
+    {
+      "name": "收势",
+      "start": 10,
+      "end": 15
+    }
+  ],
+  "method": "imagegen twelve poses; figure extraction and boot alignment; intentional anticipation/recovery holds; no skeleton or optical-flow morphing",
+  "alignment": [
+    {
+      "frame": 0,
+      "sourceBounds": [
+        36,
+        27,
+        324,
+        357
+      ],
+      "bootCenters": [
+        57.5,
+        258.0
+      ],
+      "scale": 0.9975062344139651,
+      "offset": [
+        132,
+        101
+      ]
+    },
+    {
+      "frame": 1,
+      "sourceBounds": [
+        387,
+        26,
+        286,
+        358
+      ],
+      "bootCenters": [
+        409.0,
+        609.5
+      ],
+      "scale": 0.9975062344139651,
+      "offset": [
+        131,
+        100
+      ]
+    },
+    {
+      "frame": 2,
+      "sourceBounds": [
+        720,
+        5,
+        267,
+        379
+      ],
+      "bootCenters": [
+        755.5,
+        956.5
+      ],
+      "scale": 0.9950248756218906,
+      "offset": [
+        118,
+        80
+      ]
+    },
+    {
+      "frame": 3,
+      "sourceBounds": [
+        31,
+        401,
+        272,
+        392
+      ],
+      "bootCenters": [
+        54.0,
+        272.0
+      ],
+      "scale": 0.9174311926605505,
+      "offset": [
+        132,
+        98
+      ]
+    },
+    {
+      "frame": 4,
+      "sourceBounds": [
+        376,
+        378,
+        265,
+        415
+      ],
+      "bootCenters": [
+        398.5,
+        610.0
+      ],
+      "scale": 0.9456264775413712,
+      "offset": [
+        132,
+        65
+      ]
+    },
+    {
+      "frame": 5,
+      "sourceBounds": [
+        705,
+        460,
+        311,
+        333
+      ],
+      "bootCenters": [
+        728.0,
+        942.0
+      ],
+      "scale": 0.9345794392523364,
+      "offset": [
+        132,
+        146
+      ]
+    },
+    {
+      "frame": 6,
+      "sourceBounds": [
+        44,
+        853,
+        325,
+        302
+      ],
+      "bootCenters": [
+        67.0,
+        281.5
+      ],
+      "scale": 0.9324009324009324,
+      "offset": [
+        132,
+        176
+      ]
+    },
+    {
+      "frame": 7,
+      "sourceBounds": [
+        380,
+        850,
+        342,
+        305
+      ],
+      "bootCenters": [
+        402.5,
+        610.0
+      ],
+      "scale": 0.963855421686747,
+      "offset": [
+        131,
+        163
+      ]
+    },
+    {
+      "frame": 8,
+      "sourceBounds": [
+        724,
+        820,
+        266,
+        335
+      ],
+      "bootCenters": [
+        747.0,
+        956.0
+      ],
+      "scale": 0.9569377990430622,
+      "offset": [
+        131,
+        137
+      ]
+    },
+    {
+      "frame": 9,
+      "sourceBounds": [
+        34,
+        1175,
+        290,
+        352
+      ],
+      "bootCenters": [
+        56.5,
+        258.0
+      ],
+      "scale": 0.9925558312655087,
+      "offset": [
+        131,
+        108
+      ]
+    },
+    {
+      "frame": 10,
+      "sourceBounds": [
+        375,
+        1191,
+        318,
+        336
+      ],
+      "bootCenters": [
+        397.0,
+        601.0
+      ],
+      "scale": 0.9803921568627451,
+      "offset": [
+        131,
+        128
+      ]
+    },
+    {
+      "frame": 11,
+      "sourceBounds": [
+        705,
+        1187,
+        311,
+        340
+      ],
+      "bootCenters": [
+        727.0,
+        921.5
+      ],
+      "scale": 1.0282776349614395,
+      "offset": [
+        130,
+        107
+      ]
+    }
+  ]
+}

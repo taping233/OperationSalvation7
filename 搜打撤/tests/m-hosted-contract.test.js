@@ -4,6 +4,7 @@ import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capabili
 import { resolveRegisterRule } from '../game/src/battle/effects/effect-steps.m2.js';
 import { getHostedExecutionCard } from '../game/src/battle/effects/battle.hosted.js';
 import { buildFirstSourceCardIndex } from '../game/src/battle/effects/hosted-catalog-index.js';
+import { RETIRED_1010 } from './helpers/card-catalog-approved-revisions.js';
 
 const hostedCards = Object.entries(HOSTED_CARD_RULES);
 
@@ -48,6 +49,7 @@ describe('M hosted battle contract', () => {
 
   it('keeps canonical M-batch execution text for every registered hosted ID', () => {
     for (const [id, hostedName] of hostedCards) {
+      if (RETIRED_1010.has(id)) continue; // 退役卡不再有现役canonical，注册表仍兼容历史规则形状。
       const savedCard = {
         id,
         desc: '玩家存档改写的文字',

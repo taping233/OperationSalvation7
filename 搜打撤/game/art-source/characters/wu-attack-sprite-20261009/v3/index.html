@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>无 · 待机与攻击统一</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#141b26;color:#e7edf8;font:16px/1.6 system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:22px}h1{font-size:23px;margin:0 0 6px}p{margin:0 0 12px;color:#afbbd0}.stage{background:radial-gradient(ellipse at 50% 70%,#354255,#1b2431 65%);border:1px solid #40516a;border-radius:12px;overflow:hidden}.stage canvas{display:block;width:auto;max-width:100%;height:auto;max-height:58vh;margin:auto}nav{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}button,a{background:#273750;color:#e7edf8;border:1px solid #526984;border-radius:6px;padding:6px 11px;text-decoration:none;font:inherit}button{cursor:pointer}button:disabled{opacity:.45}output{display:block;color:#adbfda}.light .stage{background:#bbc5d1}label{display:flex;gap:10px;align-items:center}input{flex:1}
+</style>
+<main>
+<h1>无 · 待机与攻击统一</h1><p>攻击首帧 = 待机初始帧 = 攻击尾帧。连播查看起手和收势。</p>
+<div class="stage"><canvas width="768" height="512" aria-label="无的待机攻击衔接动画"></canvas></div>
+<nav><button id="combined" disabled>待机 → 攻击 → 待机</button><button id="once" disabled>攻击一次</button><button id="pause" disabled>暂停</button><button id="bg">切换浅色背景</button></nav>
+<nav><button id="idle0" disabled>待机初始帧</button><button id="first" disabled>攻击首帧</button><button id="last" disabled>攻击尾帧</button></nav>
+<label>攻击进度<input id="timeline" aria-label="攻击进度" type="range" min="0" max="9" value="0" disabled></label>
+<output>正在加载帧图…</output>
+<nav><a href="attack-00.png" download>首帧 PNG</a><a href="attack-07.png" download>尾帧 PNG</a><a href="sprite.json" download>动作配置</a></nav>
+</main>
+<script type="module">
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),status=document.querySelector('output');
+const buttons=Object.fromEntries(['combined','once','pause','idle0','first','last','bg'].map(id=>[id,document.querySelector('#'+id)]));const timeline=document.querySelector('#timeline');
+buttons.bg.onclick=()=>document.body.classList.toggle('light');
+try{
+const attack=await fetch('./sprite.json').then(r=>{if(!r.ok)throw Error('攻击配置加载失败');return r.json()});
+const idleUrl=new URL(attack.idleSpec,location.href);const idle=await fetch(idleUrl).then(r=>{if(!r.ok)throw Error('待机配置加载失败');return r.json()});
+const attackSheet=new Image(),idleSheet=new Image();attackSheet.src=attack.texture;idleSheet.src=new URL(idle.texture,idleUrl).href;await Promise.all([attackSheet.decode(),idleSheet.decode()]);
+const idleSteps=idle.sequence.map((frame,i)=>({kind:'idle',frame,ms:idle.durationsMs[i],phase:'待机',step:i}));
+const attackSteps=attack.sequence.map((frame,i)=>({kind:'attack',frame,ms:attack.durationsMs[i],phase:attack.phases.find(p=>i>=p.start&&i<=p.end).name,step:i}));
+const combinedSteps=[...idleSteps,...attackSteps,...idleSteps];
+let schedule=combinedSteps,index=0,active=!matchMedia('(prefers-reduced-motion: reduce)').matches,repeat=true,elapsed=0,last=performance.now();
+function draw(){const item=schedule[index],spec=item.kind==='idle'?idle:attack,sheet=item.kind==='idle'?idleSheet:attackSheet;ctx.clearRect(0,0,768,512);ctx.drawImage(sheet,(item.frame%spec.columns)*768,Math.floor(item.frame/spec.columns)*512,768,512,0,0,768,512);canvas.dataset.kind=item.kind;canvas.dataset.frame=item.frame;status.textContent=`${active?'播放中':'已暂停'} · ${item.phase} · ${item.kind==='idle'?'待机':'攻击'}第 ${item.frame+1} 帧 · 首尾与待机初始帧完全一致`;timeline.value=item.kind==='attack'?item.step:0;buttons.pause.textContent=active?'暂停':'继续';}
+function start(steps,loop){schedule=steps;index=0;elapsed=0;repeat=loop;active=true;last=performance.now();draw();}
+function show(item){schedule=[item];index=0;elapsed=0;active=false;repeat=false;draw();}
+function tick(now){const delta=now-last;last=now;if(active&&!document.hidden){elapsed+=delta;while(active&&elapsed>=schedule[index].ms){elapsed-=schedule[index].ms;if(index===schedule.length-1){if(repeat)index=0;else active=false;}else index++;draw();}}requestAnimationFrame(tick);}
+buttons.combined.onclick=()=>start(combinedSteps,true);buttons.once.onclick=()=>start(attackSteps,false);buttons.pause.onclick=()=>{active=!active;last=performance.now();draw();};buttons.idle0.onclick=()=>show(idleSteps[0]);buttons.first.onclick=()=>show(attackSteps[0]);buttons.last.onclick=()=>show(attackSteps[attackSteps.length-1]);timeline.oninput=()=>show(attackSteps[Number(timeline.value)]);document.addEventListener('visibilitychange',()=>last=performance.now());for(const button of Object.values(buttons))button.disabled=false;timeline.disabled=false;draw();requestAnimationFrame(tick);
+}catch(error){status.textContent=`加载失败：${error.message}`;console.error(error);}
+</script></html>

@@ -30,7 +30,6 @@ function makeGame(cards) {
 const foe = (name) => ({ id: 'infantry', name, hp: 100, atk: 1 });
 const tick = () => new Promise(resolve => setTimeout(resolve, 0));
 const nap = (ms) => new Promise(r => setTimeout(r, ms));   // 空闲确认用真实延时（根治负载 flake）
-const waitLog = async (pred, ms = 4000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (pred()) return true; await nap(20); } return false; };   // 结果级轮询：等动作链真正落日志/终态再断言（根治负载 flake）
 async function settle(max = 200) {
   for (let i = 0; i < max; i++) {
     await tick();
@@ -47,9 +46,9 @@ async function settle(max = 200) {
 const card = id => C.all().find(entry => entry.id === id);
 
 describe('2026-09-20 晚间留言卡牌数据', () => {
-  it('迷之匣、魔法锅炉、员工通行证B按定版入库', () => {
+  it('迷之匣和员工通行证B按定版入库，魔法锅炉退役', () => {
     expect(card('tt3eq-mistbox').rarity).toBe('史诗');
-    expect(card('tt3eq-boiler').desc).toContain('注能(2)：随机获取 3 张卡牌');
+    expect(card('tt3eq-boiler')).toBeUndefined(); // 老板10-10删除魔法锅炉
     expect(card('tt-token-gold').desc).toContain('随机获取 1 张传说卡（不含棱彩卡）');
     const ability = C.all().find(entry => entry.type === '能力卡');
     expect(C.cardHTML(ability, 'sm')).toContain('data-term="ability"');
@@ -69,26 +68,9 @@ describe('2026-09-20 晚间留言卡牌数据', () => {
   });
 });
 
-describe('魔法锅炉', () => {
-  it('必须消耗两张燃料，随后直接随机获取三张卡牌', async () => {
-    const boiler = card('tt3eq-boiler');
-    const fuels = [card('tt3sp-silverthorn'), card('tt3-holy-water')];
-    const game = makeGame([boiler, ...fuels]);
-    BattleSession.start(game, [foe('锅炉靶子')], { isBoss: false });
-    await settle();
-    const [boilerUid, fuelA, fuelB] = game.ownedCards.map(entry => entry.uid);
-    BattleSession.commands.playCard(boilerUid, 'self');
-    await settle();
-    BattleSession.commands.useEquipSkill(boilerUid);
-    expect(BattleSession.getSnapshot().handSelecting?.mandatory).toBe(true);
-    BattleSession.commands.pickHandSelect(fuelA);
-    BattleSession.commands.pickHandSelect(fuelB);
-    await settle();
-    await waitLog(() => BattleSession.getSnapshot().hand.length >= 3);   // 结果级等待：至少三张上手（根治负载 flake）
-    expect(BattleSession.getSnapshot().hand.length).toBeGreaterThanOrEqual(3);   // ≥3：随机获取若抽中「抽到时触发」卡会合法追加（2026-09-22 口径，获取数由下方日志断言保真）
-    await waitLog(() => game.logs.some(line => line.includes('随机获取 3 张卡牌')));
-    expect(game.logs.some(line => line.includes('随机获取 3 张卡牌'))).toBe(true);
-    BattleSession.commands.flee();
+describe('魔法锅炉退役', () => {
+  it('完整播种后不再进入现役卡库', () => {
+    expect(card('tt3eq-boiler')).toBeUndefined();
   });
 });
 

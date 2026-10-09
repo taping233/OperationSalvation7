@@ -1,20 +1,20 @@
 # 《搜打撤》制作资料入口
 
-整理时间：2026-09-28。这里汇集 Vite 项目的制作决策、设计、视觉、工程、迭代与验收资料，供后续人类或 Agent 制作者按同一入口接手。本次新增目录采用索引和补充规范的方式；现有源码、素材、规则和历史证据仍在原路径。实时进度先查[项目状态入口](../STATUS.md)并核对 Git 工作区。
+这里汇集 Vite 项目的目标、设计、视觉、工程与验收方法，供人和 Agent 按任务查阅。已确认方向、候选方案和当前实现分别标注；实时进度从[项目状态入口](../STATUS.md)查询。
 
 ## 目录
 
 | 领域 | 从哪里开始 | 主要用途 |
 | --- | --- | --- |
 | 项目目标 | [项目章程](project/CHARTER.md) | 为什么做、双目标、范围与取舍 |
-| 游戏设计 | [活 GDD](design/GDD.md) | 玩家旅程、核心循环、系统关系与内容状态 |
+| 游戏设计 | [玩法概览](design/GDD.md) | 玩家旅程、核心循环、系统关系与待核内容 |
 | 美术与体验 | [Vite 视觉规范](art/VISUAL-BIBLE.md) | 已有风格锚点、组件状态、素材接入与实页复核 |
 | 工程与数据 | [代码与数据工作流](engineering/CODE-DATA-WORKFLOW.md)、[后续制作者操作手册](engineering/MAKER-HANDBOOK.md) | 模块入口、Git/CI、数据真源、常见修改步骤与验证边界 |
 | Agent 研究 | [实验复现约定](engineering/AGENT-EXPERIMENTS.md) | 在现有协议和手册上补齐实验元数据 |
-| 迭代管理 | [当前看板](management/ITERATION-BOARD.md)、[制作决策簿](management/DECISIONS.md)、[下一轮技术计划](management/NEXT-CYCLE-TECH-PLAN.md) | 当前主问题、老板已定方向、候选技术轮 |
-| 质量与验收 | [整局与 Agent 验收矩阵](qa/ACCEPTANCE-MATRIX.md) | 未来整局、恢复与配对实验的验收入口；当前未执行 |
+| 迭代管理 | [迭代办法](management/ITERATION-BOARD.md)、[制作决策簿](management/DECISIONS.md)、[工程选题计划](management/NEXT-CYCLE-TECH-PLAN.md) | 任务选择方法、已确认决定与候选工作；执行状态查任务记录 |
+| 质量与验收 | [整局与 Agent 验收模板](qa/ACCEPTANCE-MATRIX.md) | 场景选择与记录模板；每次实际结果保存到任务证据 |
 
-## 权威资料仍在原路径
+## 现行资料与证据入口
 
 | 问题 | 先看 |
 | --- | --- |
@@ -31,4 +31,4 @@
 
 日常路径见[流程指南](../WORKFLOW-TOOLS.md)，快速导航见[QUICKSTART](../QUICKSTART.md)。按目标读取本目录所需章程、GDD、视觉或工程资料；看板和历史报告不再提供第二套接手步骤与执行进度。
 
-本目录是导航与工作规则，不是另一套运行时数据源。游戏规则、生成数据、存档格式和实际完成状态仍由各自的现行资料与代码决定。
+游戏规则、生成数据和存档格式在上表对应来源维护；本目录通过链接引用。

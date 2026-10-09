@@ -2,7 +2,9 @@ import { validateCardRules } from '../../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../../game/src/cards/card-rules.capability.js';
 
 const clone = value => JSON.parse(JSON.stringify(value));
-const equal = (left, right) => JSON.stringify(left) === JSON.stringify(right);
+const stable = value => Array.isArray(value) ? value.map(stable) : value && typeof value === 'object'
+  ? Object.fromEntries(Object.keys(value).sort().map(key => [key, stable(value[key])])) : value;
+const equal = (left, right) => JSON.stringify(stable(left)) === JSON.stringify(stable(right));
 const classificationKeys = ['sourceDefinitions', 'consumerStatus', 'textStatus', 'testReferences'];
 
 function indexed(cards, label) {
@@ -134,7 +136,11 @@ export function compareMigrationInventories(before, after, approvedIds, expected
   const delta = describeStage('E8 approved migration', previous, current);
   if (delta.added.length || delta.removed.length) throw new Error('migration: card IDs changed');
   if (!equal(delta.changed.map(row => row.id).sort(), [...approvedIds].sort())) {
-    throw new Error('migration: changed IDs differ from approved IDs');
+    const actual = new Set(delta.changed.map(row => row.id));
+    const expected = new Set(approvedIds);
+    throw new Error('migration: changed IDs differ from approved IDs; extra=' +
+      [...actual].filter(id => !expected.has(id)).join(',') + '; missing=' +
+      [...expected].filter(id => !actual.has(id)).join(','));
   }
   const oldById = indexed(previous, 'before');
   const nextById = indexed(current, 'after');

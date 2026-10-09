@@ -77,7 +77,7 @@ async function playOwned(g, card, targetIdx = 0) {
 }
 
 describe('破釜沉舟 + 毒爆', () => {
-  it('卡牌已入库：破釜沉舟2费稀有武术攻+3；毒爆2费史诗法术', () => {
+  it('卡牌已入库：破釜沉舟2费稀有武术攻+3；毒爆1费史诗法术', () => {
     const a = lastStand(), b = poisonBurst();
     expect(a).toBeTruthy();
     expect(a.cost).toBe(2);
@@ -86,7 +86,7 @@ describe('破釜沉舟 + 毒爆', () => {
     expect(a.dmg).toBe(3);
     expect(a.dmgType).toBe('attack');
     expect(b).toBeTruthy();
-    expect(b.cost).toBe(2);
+    expect(b.cost).toBe(1);
     expect(b.rarity).toBe('史诗');
     expect(b.type).toBe('法术');
   });
@@ -133,6 +133,6 @@ describe('破釜沉舟 + 毒爆', () => {
     expect(snap().foes[0].hp).toBe(hp0 - 4);
     expect(snap().foes[0].status.poison).toBe(2);   // 中毒不衰减，层数保留
     expect(g.logs.some(l => l.includes('毒伤引爆 2 次'))).toBe(true);   // 日志数值带加粗标签，只断言句式
-    expect(snap().energy).toBe(96);             // 99 - 1(腐化之种) - 2(毒爆)
+    expect(snap().energy).toBe(97);             // 99 - 1(腐化之种) - 1(毒爆)
   });
 });

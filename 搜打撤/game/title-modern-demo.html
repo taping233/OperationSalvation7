@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>冰下信号 · 标题曲试听</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 80% 10%,#163b50,transparent 60%),#0b121c;color:#e7f1f5;font:16px/1.7 system-ui,sans-serif}main{max-width:820px;margin:0 auto;padding:48px 28px}small{letter-spacing:.2em;color:#77cddd}h1{font-size:48px;line-height:1.2;margin:18px 0}p{color:#a7b9c6}.player{margin:30px 0;padding:26px;border:1px solid #34596b;border-radius:16px;background:#12202ddd}audio{width:100%;margin-top:18px}h2{font-size:21px}a{color:#80d6ea}.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form div{padding:15px;border-left:2px solid #4789a2;background:#ffffff05}.form strong{display:block;color:#77cddd}.refs{display:flex;flex-wrap:wrap;gap:10px 20px}a:focus-visible{outline:2px solid #80d6ea;outline-offset:4px}
+</style>
+<main><small>代号柒 / TITLE DEMO 01</small><h1>冰下信号</h1><p>暗色电子 · 切分低音 · 延迟吉他 · 合成器主题</p>
+<section class="player"><strong>标题候选 · 30 秒 · 112 BPM</strong><br><audio controls preload="metadata"></audio><p id="status" aria-live="polite">点击播放试听</p><a download>下载 MP3</a></section>
+<div class="form"><div><strong>00:00–00:04</strong>电钢、脉冲与低音引子</div><div><strong>00:04–00:13</strong>主题进入，鼓与吉他展开</div><div><strong>00:13–00:17</strong>减鼓留白，旋律回答</div><div><strong>00:17–00:30</strong>主题变奏、加密节奏与收束</div></div>
+<h2>参考谱例</h2><p>研究音型、切分、和声及声部进入方式；本曲旋律与编排重新创作。</p><div class="refs">
+<a href="https://vgleadsheets.com/view/celeste/resurrections" target="_blank" rel="noopener">Celeste · Resurrections</a>
+<a href="https://vgleadsheets.com/view/undertale/another-medium" target="_blank" rel="noopener">Undertale · Another Medium</a>
+<a href="https://vgleadsheets.com/view/persona-5/layer-cake" target="_blank" rel="noopener">Persona 5 · Layer Cake</a>
+<a href="https://vgleadsheets.com/view/nierautomata/city-ruins---rays-of-light" target="_blank" rel="noopener">NieR · City Ruins</a>
+<a href="https://vgleadsheets.com/view/minecraft/pigstep" target="_blank" rel="noopener">Minecraft · Pigstep</a>
+<a href="https://vgleadsheets.com/view/hades/final-expense" target="_blank" rel="noopener">Hades · Final Expense</a>
+</div><p><a href="./music-demo.html">原有 14 首试听</a></p></main>
+<script type="module">
+import demoUrl from '../docs/evidence/2026-10-09-WF-title-modern-demo/title-underice-signal-30s.mp3?url';
+const audio=document.querySelector('audio'),status=document.getElementById('status');
+audio.src=demoUrl;
+document.querySelector('a[download]').href=demoUrl;
+audio.addEventListener('playing',()=>status.textContent='正在试听 · 冰下信号');
+audio.addEventListener('pause',()=>status.textContent=audio.ended?'试听结束':'已暂停');
+audio.addEventListener('ended',()=>status.textContent='试听结束 · 可再次播放');
+audio.addEventListener('error',()=>status.textContent='音频加载失败，请刷新重试');
+document.addEventListener('visibilitychange',()=>{if(document.hidden)audio.pause()});
+</script></html>

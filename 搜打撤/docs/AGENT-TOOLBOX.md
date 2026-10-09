@@ -1,6 +1,6 @@
 # Agent 工具箱（按意图查表）
 
-给 agent / 会话的能力地图：**我想做 X，用什么**。工具是助力不是门槛——本表只回答「哪里有能力」，流程纪律（授权边界、登记、验收分级）以根 AGENTS.md 与 [WORKFLOW-TOOLS](WORKFLOW-TOOLS.md) 为准，不在此重复。新工具落库时在本表加一行；工具合并/删除时同步移除并更新引用。
+本页按任务查工具能力。权限见根 AGENTS.md，操作步骤见[流程指南](WORKFLOW-TOOLS.md)，验收范围见[质量门](quality-gates.md)。新增、合并或移除工具时同步更新本表。
 
 日常路径见 [WORKFLOW-TOOLS](WORKFLOW-TOOLS.md)，本页只查能力，查询工具按需使用，不逐项串行运行。
 
@@ -31,5 +31,5 @@
 
 ## 保养
 
-- 新脚本进 `scripts/` 时：在 acceptance-gate `WORKFLOW_TESTS`（配专属测试）或 `EXEMPT_SCRIPTS` 登记，否则 scripts-contract 守卫红——一行登记换 quick 门定向加速，值。
+- 新脚本进 `scripts/` 时，在 acceptance-gate 的 `WORKFLOW_TESTS`（配专属测试）或 `EXEMPT_SCRIPTS` 登记，供 scripts-contract 和定向检查选择器使用。
 - 本表行与真实命令失配时以 `package.json` scripts 与脚本头注释为准，改完命令同步本表。

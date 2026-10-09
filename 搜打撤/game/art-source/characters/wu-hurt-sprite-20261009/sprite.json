@@ -1,0 +1,105 @@
+{
+  "status": "candidate",
+  "character": "wu",
+  "animation": "hurt",
+  "texture": "wu-hurt-sheet.webp",
+  "frameWidth": 768,
+  "frameHeight": 512,
+  "columns": 2,
+  "rows": 2,
+  "poseSlots": 4,
+  "uniquePoseFrames": 3,
+  "sampleRate": 24,
+  "sequence": [
+    0,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    3
+  ],
+  "durationsMs": [
+    41,
+    42,
+    42,
+    42,
+    41,
+    42,
+    42,
+    42
+  ],
+  "durationMs": 334,
+  "impactStep": 1,
+  "restFrame": 0,
+  "loop": false,
+  "firstFrame": 0,
+  "lastFrame": 3,
+  "previewRestMs": 900,
+  "idleSpec": "../wu-idle-sprite-20261009/v2/sprite.json",
+  "endpointSource": "../wu-idle-sprite-20261009/v2/frames/idle-000.png",
+  "phases": [
+    {
+      "name": "待机起点",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "name": "受击后仰",
+      "start": 1,
+      "end": 3
+    },
+    {
+      "name": "稳住重心",
+      "start": 4,
+      "end": 6
+    },
+    {
+      "name": "回到待机",
+      "start": 7,
+      "end": 7
+    }
+  ],
+  "method": "imagegen recoil and bracing; shared scale and front boot alignment; exact accepted idle copied at both endpoints",
+  "alignment": [
+    {
+      "frame": 0,
+      "source": "accepted idle-000.png, exact copy"
+    },
+    {
+      "frame": 1,
+      "sourceBounds": [
+        877,
+        56,
+        561,
+        456
+      ],
+      "scale": 0.9207920792079208,
+      "frontBootCenter": 1233.0,
+      "offset": [
+        165,
+        61
+      ]
+    },
+    {
+      "frame": 2,
+      "sourceBounds": [
+        207,
+        514,
+        554,
+        498
+      ],
+      "scale": 0.9207920792079208,
+      "frontBootCenter": 533.5,
+      "offset": [
+        193,
+        23
+      ]
+    },
+    {
+      "frame": 3,
+      "source": "accepted idle-000.png, exact copy"
+    }
+  ]
+}

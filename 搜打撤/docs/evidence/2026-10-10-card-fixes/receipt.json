@@ -1,0 +1,170 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-frostfall",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12188-dadb-7ff2-900b-9421425bc7a8\\exec-5cc43809-33a2-41ec-afdc-ad43f64f7525.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-card-fixes/cards-martial-tt3-frostfall-source.png",
+        "bytes": 2484653,
+        "sha256": "6d8f30cb3355c4eaf7457eb57d0617f1b3475687281636dd6b0c8fdd2a3f67a0"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-card-fixes/cards-martial-tt3-frostfall-full-before.webp",
+          "bytes": 268494,
+          "sha256": "14fd2c818ae06a1e1746dac0cba8264ef234a13aca5f3fe6288be43dc821cf5e"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-card-fixes/cards-martial-tt3-frostfall-thumb-before.webp",
+          "bytes": 40244,
+          "sha256": "57b3a1fd30a26d97c529971b35c44e8b5beae073dbcb574b6677e365c0a25960"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-frostfall.webp",
+          "bytes": 273276,
+          "sha256": "7ee2d7f2b91d7fce2c8c5cc7b230f35f63004e2cdb003eed3a8c230703b35a15",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-frostfall.webp",
+          "bytes": 37110,
+          "sha256": "8ff0eb12112d0dca2f35507e5992e33a54c7a3614e8eca1778fbe1f9ac3618bb",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt3-frostfall-creative-rough-20261005",
+      "revision_after": "tt3-frostfall-generic-no-character-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt3-frostfall.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 268494,
+            "sha256": "14fd2c818ae06a1e1746dac0cba8264ef234a13aca5f3fe6288be43dc821cf5e",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt3-frostfall.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 273276,
+            "sha256": "7ee2d7f2b91d7fce2c8c5cc7b230f35f63004e2cdb003eed3a8c230703b35a15",
+            "source": "docs/evidence/2026-10-10-card-fixes/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt3-frostfall.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 40244,
+            "sha256": "57b3a1fd30a26d97c529971b35c44e8b5beae073dbcb574b6677e365c0a25960",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt3-frostfall.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 37110,
+            "sha256": "8ff0eb12112d0dca2f35507e5992e33a54c7a3614e8eca1778fbe1f9ac3618bb",
+            "source": "docs/evidence/2026-10-10-card-fixes/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-fly-arrowhawk",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12188-dadb-7ff2-900b-9421425bc7a8\\exec-fc2d64cf-ab1e-4c4d-9eda-c1935fb70f8e.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-card-fixes/cards-martial-tt3-fly-arrowhawk-source.png",
+        "bytes": 2382737,
+        "sha256": "5470ed25a2a217bb763cc3456a0c6198a613b39bc0b6d9e027719df5753a17d3"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-card-fixes/cards-martial-tt3-fly-arrowhawk-full-before.webp",
+          "bytes": 214682,
+          "sha256": "c1426d37dec54dccd139333b88f2f197134f3c62e66b8c64637dc3040450cfcf"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-card-fixes/cards-martial-tt3-fly-arrowhawk-thumb-before.webp",
+          "bytes": 36284,
+          "sha256": "3aba553456c75b081658eed4d01d0689fc9b41dd53f643d7189bda413f4041cb"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-fly-arrowhawk.webp",
+          "bytes": 257134,
+          "sha256": "53aeaa6f4d222ebfb3cacd65112d703a73736cffa32a6084feb2eb99b51e8d54",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-fly-arrowhawk.webp",
+          "bytes": 35230,
+          "sha256": "4bdb8c6449afa48139858d2bb4a614da95db57873c027ba448a9b90dcfac959e",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt3-fly-arrowhawk-creative-rough-20261005",
+      "revision_after": "tt3-fly-arrowhawk-generic-no-character-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt3-fly-arrowhawk.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 214682,
+            "sha256": "c1426d37dec54dccd139333b88f2f197134f3c62e66b8c64637dc3040450cfcf",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt3-fly-arrowhawk.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 257134,
+            "sha256": "53aeaa6f4d222ebfb3cacd65112d703a73736cffa32a6084feb2eb99b51e8d54",
+            "source": "docs/evidence/2026-10-10-card-fixes/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt3-fly-arrowhawk.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 36284,
+            "sha256": "3aba553456c75b081658eed4d01d0689fc9b41dd53f643d7189bda413f4041cb",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt3-fly-arrowhawk.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 35230,
+            "sha256": "4bdb8c6449afa48139858d2bb4a614da95db57873c027ba448a9b90dcfac959e",
+            "source": "docs/evidence/2026-10-10-card-fixes/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 744,
+  "manifest_count_after": 744
+}

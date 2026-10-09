@@ -31,6 +31,8 @@ const FAMILIES = ['martial', 'spell', 'equip'];
 // 通用兜底图白名单（按卡名规则引用，非按 id），合法非死图。
 // （历史死图 5 张已随 2026-09-25 老板批准的孤儿清理批删除，白名单同步收窄。）
 const KNOWN_ORPHANS = [
+  'equip-tt3-deep-seal', // 老板10-10退役卡牌，旧图保留供历史追溯。
+  'equip-tt3eq-boiler',  // 同批退役魔法锅炉；没有删除资产文件的授权。
   'martial-melee',
   'martial-ranged',
 ];

@@ -20,7 +20,7 @@ Cards.ensureEffectFields();
 
 const RULE_NAME = new Map([
   ['tt2-frostsword', 'frost-sword'], ['tt3-crimson-pouch', 'crimson-pouch'],
-  ['tt3-fate-wheel', 'fate-wheel'], ['tt3eq-boiler', 'boiler'],
+  ['tt3-fate-wheel', 'fate-wheel'],
   ['tt3-azure-sword', 'azure-sword'], ['tt3-chaos-eye', 'chaos-eye'],
   ['tt3-immortal-blade', 'immortal-blade'], ['tt3-silver-runesword', 'silver-runesword'],
   ['tt3-sapper-bomb', 'sapper-bomb'], ['tt3-wolf-bow', 'wolf-bow'],
@@ -54,8 +54,8 @@ function makeHarness(cards) {
 }
 
 describe('M10 hosted 装备数据回填', () => {
-  it('全部 11 张 hosted id/name 绑定通过 schema 与 capability', () => {
-    expect(CANONICAL).toHaveLength(11);
+  it('全部 10 张存活 hosted id/name 绑定通过 schema 与 capability', () => {
+    expect(CANONICAL).toHaveLength(10);
     for (const card of CANONICAL) {
       const candidate = { ...card, rules: EXPECTED[card.id] };
       expect(validateCardRules(candidate).ok, `${card.id} schema`).toBe(true);

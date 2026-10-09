@@ -1,0 +1,33 @@
+{
+  "tracks": [
+    {
+      "role": "battle",
+      "approved_source": "docs/evidence/2026-10-09-WF-ark-battle-demo/battle-coldfront-30s.wav",
+      "runtime": {
+        "path": "music-demo/03-battle-coldfront.ogg",
+        "ext": "ogg",
+        "bytes": 503327,
+        "sha256": "e3692c9d8c1dad42ed14b5f197194a65e98715aa44c11fa655bc7842a2882723",
+        "license": "Original deterministic electronic synthesis; no game reference samples.",
+        "source": "docs/evidence/2026-10-09-WF-four-bgm-install/audio-package.json"
+      }
+    },
+    {
+      "role": "shop",
+      "approved_source": "docs/evidence/2026-10-09-WF-shop-remake/shop-lamplight-deal-30s.wav",
+      "runtime": {
+        "path": "music-demo/05-shop-lamplight-deal.ogg",
+        "ext": "ogg",
+        "bytes": 380240,
+        "sha256": "9db5869ecb2ce591cf32758f9150938c1555eab89c5d171ee6c08520f7788ae9",
+        "license": "Project original; GeneralUser GS sample license v2.0 permits music creation.",
+        "source": "docs/evidence/2026-10-09-WF-four-bgm-install/audio-package.json"
+      }
+    }
+  ],
+  "retained_original": [
+    "music-demo/01-title-frostglass.ogg",
+    "music-demo/02-explore-ashline.ogg"
+  ],
+  "old_files_policy": "retained inactive as explicitly requested"
+}

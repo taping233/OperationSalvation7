@@ -1,0 +1,165 @@
+{
+  "sprite": {
+    "status": "candidate",
+    "character": "wu",
+    "animation": "idle",
+    "texture": "wu-idle-sheet.webp",
+    "frameWidth": 800,
+    "frameHeight": 544,
+    "columns": 2,
+    "rows": 2,
+    "uniqueFrames": 4,
+    "sequence": [
+      0,
+      1,
+      2,
+      3,
+      2,
+      1
+    ],
+    "durationsMs": [
+      600,
+      450,
+      450,
+      600,
+      450,
+      450
+    ],
+    "loopDurationMs": 3000,
+    "soleBaselineY": 512,
+    "loop": true,
+    "alignment": [
+      {
+        "sourceBounds": [
+          99,
+          13,
+          747,
+          496
+        ],
+        "offset": [
+          16,
+          16
+        ]
+      },
+      {
+        "sourceBounds": [
+          112,
+          14,
+          747,
+          496
+        ],
+        "offset": [
+          16,
+          16
+        ]
+      },
+      {
+        "sourceBounds": [
+          98,
+          6,
+          748,
+          492
+        ],
+        "offset": [
+          16,
+          20
+        ]
+      },
+      {
+        "sourceBounds": [
+          92,
+          8,
+          753,
+          492
+        ],
+        "offset": [
+          16,
+          20
+        ]
+      }
+    ],
+    "method": "imagegen keyframes; cell extraction and baseline alignment; no skeleton or generated in-between frames"
+  },
+  "files": [
+    {
+      "file": "export_sprite.py",
+      "bytes": 3002,
+      "sha256": "a1423506b7dd2d8c78ee4e648a57a7db42a2cf422b835e22f71119e625a3ca3f"
+    },
+    {
+      "file": "generated-sheet.png",
+      "bytes": 1822818,
+      "sha256": "2551fe3d42175ea4d28e07d8ef99ab766e1b77f85bde52146562fe8fe57678c3"
+    },
+    {
+      "file": "idle-00.png",
+      "bytes": 457969,
+      "sha256": "a8cbdfeabeba2ed934603f0cb35c881d97f780dfe6c7970724d0d956022123b7"
+    },
+    {
+      "file": "idle-00.webp",
+      "bytes": 178616,
+      "sha256": "05d12a793b03a2e753fb20a20c385207c9ab8d328a1a2585019f66e1d8ec8cdf"
+    },
+    {
+      "file": "idle-01.png",
+      "bytes": 453790,
+      "sha256": "aea5e1ecd8a241f1bf47d26c5d0cdcefecf4b477f18de757db113caf7cedea51"
+    },
+    {
+      "file": "idle-01.webp",
+      "bytes": 179432,
+      "sha256": "9dadc67c0579d3c94d23bb132db7ded4a4531d4e930beb502df50f2f37b7bedb"
+    },
+    {
+      "file": "idle-02.png",
+      "bytes": 455009,
+      "sha256": "6a53c5ff82b5edd13a3c9f6333f8f350f9c335ea4e37f2664790307a9f40efb9"
+    },
+    {
+      "file": "idle-02.webp",
+      "bytes": 176026,
+      "sha256": "ce0caeef896f57a5155ccc558b53a2561f00bdb2fabcff2c71a9e01814cfe5a8"
+    },
+    {
+      "file": "idle-03.png",
+      "bytes": 455530,
+      "sha256": "6bc7b8017d96eb91ea20a4cccf2ee42ece6c0f03b74db02cef4fd3426380bdd5"
+    },
+    {
+      "file": "idle-03.webp",
+      "bytes": 181536,
+      "sha256": "adacd3fbdb6991e81494ebb451586277553d0355ad3818d5b4c63e933b7865f3"
+    },
+    {
+      "file": "index.html",
+      "bytes": 3090,
+      "sha256": "3e6b8f2e5d45411c4093d6b9b52ce553b30fc8c494c9031d41f7c9f2f510d262"
+    },
+    {
+      "file": "sprite.json",
+      "bytes": 1198,
+      "sha256": "b1be1cf9ac358a93ef785dc96b2cd480fd91d85dcd63ca9c936455f6116ad133"
+    },
+    {
+      "file": "wu-idle-preview.gif",
+      "bytes": 532073,
+      "sha256": "a45418e6c6ed9894ec159aedae3dd5cef673fdcadb8aab1e926b48c3203dd629"
+    },
+    {
+      "file": "wu-idle-preview.webp",
+      "bytes": 1475794,
+      "sha256": "89fad6ea86470970ca60129719c403b03dc39b580157aa325f405223e58556bf"
+    },
+    {
+      "file": "wu-idle-sheet.png",
+      "bytes": 1815835,
+      "sha256": "b620082eca020ac320c4fa464912bc447badf21f0fdc5dec72131e65272b6c40"
+    },
+    {
+      "file": "wu-idle-sheet.webp",
+      "bytes": 724772,
+      "sha256": "cdf2a25115936439b133410d7c5049c675c616837fde7809149f2ba75b115d89"
+    }
+  ]
+}

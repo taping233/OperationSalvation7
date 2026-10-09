@@ -1,0 +1,87 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt8-hero-summoner",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12188-dadb-7ff2-900b-9421425bc7a8\\exec-ee7d3ecb-de09-4c00-a18e-c57f567e32dd.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-two-blooms/cards-hero-summoner-source.png",
+        "bytes": 2172022,
+        "sha256": "a6cc033c01b9d1774a70e68cc0da506260f3067ded63c5ecfc745293bcfb2acb"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-two-blooms/cards-hero-summoner-full-before.webp",
+          "bytes": 71680,
+          "sha256": "49a0eb24747a3299f341b1556d647161649fc4dd310f44464e7429cc22c70dd1"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-two-blooms/cards-hero-summoner-thumb-before.webp",
+          "bytes": 24500,
+          "sha256": "41fadaae148787a988bd55c9e11729ba2d20a010f44698841060704e147b4823"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/hero-summoner.webp",
+          "bytes": 177550,
+          "sha256": "e80166824800f37c1ccc96364683e691e152717345094383ce0c39445dc28f45",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/hero-summoner.webp",
+          "bytes": 23364,
+          "sha256": "666e4f919b795f5606bdfc17fbdf60ed559f211976c2f78ca006d3e4d478c88b",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "baita-two-blooms-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/hero-summoner.webp",
+            "ext": "webp",
+            "bytes": 71680,
+            "license": "项目自有（自制/AI 生成）"
+          },
+          "after": {
+            "path": "cards/hero-summoner.webp",
+            "ext": "webp",
+            "bytes": 177550,
+            "license": "项目自有（自制/AI 生成）",
+            "sha256": "e80166824800f37c1ccc96364683e691e152717345094383ce0c39445dc28f45",
+            "source": "docs/evidence/2026-10-10-two-blooms/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/hero-summoner.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 24500,
+            "sha256": "41fadaae148787a988bd55c9e11729ba2d20a010f44698841060704e147b4823",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/hero-summoner.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 23364,
+            "sha256": "666e4f919b795f5606bdfc17fbdf60ed559f211976c2f78ca006d3e4d478c88b",
+            "source": "docs/evidence/2026-10-10-two-blooms/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 750,
+  "manifest_count_after": 750
+}

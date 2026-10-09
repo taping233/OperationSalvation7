@@ -1,5 +1,5 @@
 // @ts-check
-/* M10（2026-09-27）：B-M3 装备剩余 hosted 批，共 11 张。
+/* M10：B-M3 装备剩余 hosted 批，魔法锅炉退役后现存 10 张。
  * Hosted 名称必须同时匹配固定 id 注册表与 canonical description；battle.hosted 执行适配由
  * battle.hosted.js 提供，玩家保存卡的自定义描述不参与宿主分派。
  * M7 已迁 tt3-master-staff / tt3-twinwater-mail，故此批不重复声明。
@@ -15,7 +15,6 @@ const hostedRuleById = new Map([
   ['tt2-frostsword', 'frost-sword'],
   ['tt3-crimson-pouch', 'crimson-pouch'],
   ['tt3-fate-wheel', 'fate-wheel'],
-  ['tt3eq-boiler', 'boiler'],
   ['tt3-azure-sword', 'azure-sword'],
   ['tt3-chaos-eye', 'chaos-eye'],
   ['tt3-immortal-blade', 'immortal-blade'],
