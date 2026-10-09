@@ -37,6 +37,26 @@ describe('expedition view route projection', () => {
     expect(expeditionObjective(makeGame({ layerIdx: 3, layerData: [{}, {}, {}, layer], bossKilled: true })).text).toContain('终局撤离点');
   });
 
+  it('第三层同时说明紧急撤离代价和第四层深入目标', () => {
+    const objective = expeditionObjective(makeGame({ layerIdx: 2 }));
+    expect(objective.text).toContain('献祭 3 张');
+    expect(objective.text).toContain('深入第四层');
+  });
+
+  it('第四层按祭坛未激活、奖励待领和首脑已解锁分别提示下一步', () => {
+    const g = makeGame({ layerIdx: 3 });
+    expect(expeditionObjective(g).text).toContain('弃 3 张卡牌');
+    expect(expeditionObjective({ ...g, altarActivated: true, altarRewardPending: true }).text).toContain('领取奖励');
+    expect(expeditionObjective({ ...g, altarActivated: true, altarRewardPending: false }).text).toContain('编组牌库');
+  });
+
+  it('首脑胜利后的低血量仍提示终局撤离通关，未胜利仍提示治疗', () => {
+    const g = makeGame({ layerIdx: 3, hp: 1, bossKilled: true });
+    expect(expeditionObjective(g).text).toContain('完成通关');
+    expect(expeditionObjective(g).tone).toBe('gold');
+    expect(expeditionObjective({ ...g, bossKilled: false }).text).toContain('生命危急');
+  });
+
   it('同名相邻路线获得稳定的可视与无障碍区分，并保留节点索引', () => {
     const g = makeGame({
       layerData: [{ logical: [

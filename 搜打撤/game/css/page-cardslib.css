@@ -2,7 +2,7 @@
    照相馆（卡牌收藏馆）美术排版升级（2026-09-24）——对标 page-slot-select.css /
    page-deploy.css「09-24 美术升级」定稿语言：
          ① 冷青统一调色（馆内房间/墙面/选片台纳入冷青系，暗部保视线归属）
-         ② #d9bb82 暖金点缀（选中环/焦点环/编号短线/命中数，与黄铜装裱同族）
+         ② #e6cb76 暖金点缀（选中环/焦点环/编号短线/命中数，与黄铜装裱同族）
          ③ 交互三档节奏变量 + 按压「快按慢弹」+ 金线焦点环 + 首开出入场编排
    约束：全部规则限定 body.cardlib-open + .photo-studio-v3（照相馆根）作用域，
          只覆盖不删除；#cardZoom 大图弹层与 card-v3/photo-studio-mounts/craft
@@ -24,94 +24,94 @@ body.cardlib-open #overlay .photo-studio-v3 {
 /* W1a 页面底：冷青深渐变 + 顶部一束极淡暖金看片灯（全页暖点缀的源头）+ 底部沉暗 */
 body.cardlib-open #overlay .photo-studio-v3 {
   background:
-    radial-gradient(110% 46% at 50% -6%, rgba(217, 187, 130, .055), transparent 56%),
-    radial-gradient(130% 90% at 50% 118%, rgba(5, 14, 22, .62), transparent 64%),
-    linear-gradient(168deg, #15242f 0%, #0f1b26 48%, #0a141d 100%)!important;
+    radial-gradient(110% 46% at 50% -6%, rgba(230,203,118,.055), transparent 56%),
+    radial-gradient(130% 90% at 50% 118%, rgba(11,12,13,.62), transparent 64%),
+    linear-gradient(168deg, #1c1e20 0%, #161719 48%, #101112 100%)!important;
 }
-/* W1b 控件变量 retint：control 族橄榄绿 → 冷青暗底；accent → #d9bb82 定稿金
+/* W1b 控件变量 retint：control 族橄榄绿 → 冷青暗底；accent → #e6cb76 定稿金
    （变量层统一，窄屏/非装裱控件自动跟随） */
 body.cardlib-open #overlay .photo-studio-v3 {
-  --studio-control: #132532;
-  --studio-control-hi: #1c3648;
-  --studio-accent: #d9bb82;
+  --studio-control: #1c1e20;
+  --studio-control-hi: #292c2f;
+  --studio-accent: #e6cb76;
 }
 /* W1c 页头底色：09-24 老板——冷青暗板 → 黄白纸纹（复用相纸 grain 颗粒），纸上压深字色 */
 body.cardlib-open #overlay .photo-studio-v3 .library-head {
   background:
-    linear-gradient(180deg, rgba(244, 235, 214, .96), rgba(238, 227, 202, .97)),
+    linear-gradient(180deg, rgba(232,230,226,.96), rgba(223,221,217,.97)),
     url('../assets/ui/photo-studio/paper-grain.png') repeat!important;
   background-blend-mode:multiply, multiply;
-  --lib-c1:#8a6a35; --lib-dim:#6b5a40; --lib-dim2:#7a6748; --lib-txt:#2f2414;
-  --lib-c2:#2e6b63; --lib-line:rgba(90,70,40,.35); --lib-line2:rgba(90,70,40,.45);
+  --lib-c1:#8a7035; --lib-dim:#6b5e40; --lib-dim2:#7a6b48; --lib-txt:#2f2714;
+  --lib-c2:#3f4348; --lib-line:rgba(90,75,40,.35); --lib-line2:rgba(90,75,40,.45);
 }
 /* 09-24 老板：上方栏图标配纸纹——退出键改纸面墨线（SVG 图形见 game.cardslib.js） */
 body.cardlib-open #overlay .studio-index-layout .ak-sq.ak-exit.studio-exit {
-  background:#f6efdd;
-  border-color:rgba(90,70,40,.55);
-  color:#4a3820;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.55), 0 2px 6px rgba(60,45,25,.22);
+  background:#eceae7;
+  border-color:rgba(90,75,40,.55);
+  color:#4a3d20;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55), 0 2px 6px rgba(60,50,25,.22);
 }
-body.cardlib-open #overlay .studio-index-layout .ak-sq.ak-exit.studio-exit::after { border-color:rgba(138,106,53,.32); }
-body.cardlib-open #overlay .studio-index-layout .ak-sq.ak-exit.studio-exit:hover { background:#fbf6e8; border-color:#8a6a35; color:#2f2414; }
+body.cardlib-open #overlay .studio-index-layout .ak-sq.ak-exit.studio-exit::after { border-color:rgba(138,112,53,.32); }
+body.cardlib-open #overlay .studio-index-layout .ak-sq.ak-exit.studio-exit:hover { background:#f3f2f0; border-color:#8a7035; color:#2f2714; }
 /* W1d 影廊墙面：保留 wall.webp 绒布墙，压顶的调色层绿改冷青（外围容器层扣） */
 body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .clib-main {
   background:
-    linear-gradient(180deg, rgba(10, 22, 32, .38), rgba(7, 16, 25, .58)),
+    linear-gradient(180deg, rgba(17,18,20,.38), rgba(13,14,15,.58)),
     url('../assets/ui/photo-studio/wall.webp') center bottom/cover no-repeat,
-    linear-gradient(180deg, #12202b, #0a1420)!important;
+    linear-gradient(180deg, #191b1d, #111214)!important;
 }
 /* W1e 选片台台面：绿皮革 → 冷青暗皮革（保留纹理图；边框装裱是 craft 域不动） */
 body.cardlib-open #overlay .studio-index-layout .library-inspector {
   background:
-    linear-gradient(155deg, rgba(15, 31, 43, .90), rgba(7, 16, 25, .95)),
+    linear-gradient(155deg, rgba(24,26,27,.90), rgba(13,14,15,.95)),
     url('../assets/ui/photo-studio/leather-archive-v1.png') center/420px!important;
-  scrollbar-color: #3a5566 #0d1822;
+  scrollbar-color: #41464b #131516;
 }
 /* W1f 空态：绿罩层 → 冷青罩层，虚线边提到定稿金 */
 body.cardlib-open #overlay .photo-studio-v3 .clib-empty {
-  border-color: rgba(217, 187, 130, .42)!important;
+  border-color: rgba(230,203,118,.42)!important;
   background:
-    linear-gradient(180deg, rgba(9, 20, 30, .68), rgba(6, 14, 22, .88)),
+    linear-gradient(180deg, rgba(16,17,18,.68), rgba(11,12,13,.88)),
     url('../assets/ui/photo-studio/empty.webp') center/cover no-repeat!important;
 }
 
 /* ═════════ W2 馆藏索引卡内交互色：页签/命中数/重置/条件 chip（expedition 域） ═════════ */
 /* W2a 页签：悬停 sage 绿 → 冷青晕；选中绿实块 → 暖金晕 + 深墨字（纸上黄铜页签） */
 body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab:not(.on):hover {
-  background: rgba(146, 197, 205, .18)!important;
-  color: #22383c!important;
+  background: rgba(168,177,183,.18)!important;
+  color: #26292c!important;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab.on,
 body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab.on:hover {
-  border-color: rgba(138, 118, 80, .55)!important;
-  color: #4a3a1c!important;
-  background: linear-gradient(180deg, rgba(217, 187, 130, .22), rgba(217, 187, 130, .06))!important;
+  border-color: rgba(138,121,80,.55)!important;
+  color: #4a3c1c!important;
+  background: linear-gradient(180deg, rgba(230,203,118,.22), rgba(230,203,118,.06))!important;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab.on em {
-  color: #8a6d33!important;
+  color: #8a7033!important;
 }
 /* W2b 命中计数：冷灰标签 + 暖金数字（筛选结果一眼定位） */
 body.cardlib-open #overlay .studio-index-layout .studio-index-heading .lib-show { color: #5f6a5e; }
-body.cardlib-open #overlay .studio-index-layout .studio-index-heading .lib-show b { color: #8a6d33; }
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading .lib-show b { color: #8a7033; }
 /* W2c 重置筛选：纸上墨金链接，悬停加深 + 金焦点（沿用既有下划线语言） */
 body.cardlib-open #overlay .studio-index-layout .studio-index-heading .studio-clear {
   color: #7a6a45!important;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-index-heading .studio-clear:hover {
-  color: #4a3a1c!important;
+  color: #4a3c1c!important;
 }
 /* W2d 已选条件 chip：sage 底 → 纸上黄铜描边 chip，悬停微亮 */
-body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-active-filters { color: #665d42; }
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-active-filters { color: #665b42; }
 body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-active-filters button {
-  border-color: rgba(154, 124, 66, .55);
-  background: #efe6cf;
-  color: #5a4a28;
+  border-color: rgba(154,128,66,.55);
+  background: #e2e0dc;
+  color: #5a4b28;
   transition: background-color var(--lib-fast), border-color var(--lib-fast),
     color var(--lib-fast), transform var(--lib-fast)!important;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-active-filters button:hover {
-  background: #e7dab9;
-  border-color: rgba(122, 96, 44, .75);
+  background: #eee0b2;
+  border-color: rgba(122,99,44,.75);
 }
 
 /* ═════════ W3 信息排版仪式感（选片台/命中反馈的小金饰） ═════════ */
@@ -119,8 +119,8 @@ body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-active-f
 body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-no::before {
   content: ''; display: inline-block; width: 14px; height: 1px; margin-right: 8px;
   vertical-align: .35em;
-  background: linear-gradient(90deg, transparent, #b89a5e);
-  box-shadow: 0 0 4px rgba(217, 187, 130, .35);
+  background: linear-gradient(90deg, transparent, #c8ac4e);
+  box-shadow: 0 0 4px rgba(230,203,118,.35);
 }
 /* W3b 命中数脉冲扩到筛选命中数字（renderLibGrid 的 .bump 已在播，补样式缺口） */
 body.cardlib-open #overlay .photo-studio-v3 .lib-show b.bump {
@@ -129,39 +129,39 @@ body.cardlib-open #overlay .photo-studio-v3 .lib-show b.bump {
 }
 
 /* ═════════ W4 选中环 / 焦点环：全页金线语言 ═════════ */
-/* W4a 墙上选中照片：青绿圈 → #d9bb82 金圈（装裱本体不动，只换这圈 UI 状态色；
+/* W4a 墙上选中照片：青绿圈 → #e6cb76 金圈（装裱本体不动，只换这圈 UI 状态色；
    特异性对齐 mounts.css 同选择器，靠后加载取胜） */
 body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap[aria-current="true"] .studio-photo-paper[data-photo-mount] {
-  outline-color: rgba(217, 187, 130, .88)!important;
+  outline-color: rgba(230,203,118,.88)!important;
 }
 body.cardlib-open #overlay .photo-studio-v3 .lib-item.selected .studio-photo-paper {
-  border-color: rgba(217, 187, 130, .72)!important;
+  border-color: rgba(230,203,118,.72)!important;
 }
 /* W4b 照片瓦片键盘焦点：虚线青 → 金线 + 暖晕（1px 金 outline + 端点式光晕） */
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo:focus-visible {
-  outline: 1px solid #d9bb82cc!important;
+  outline: 1px solid #e6cb76cc!important;
   outline-offset: 3px!important;
-  box-shadow: 0 0 14px rgba(217, 187, 130, .3)!important;
+  box-shadow: 0 0 14px rgba(230,203,118,.3)!important;
 }
 /* W4c 索引卡内输入壳焦点：绿圈 → 金圈（沿用壳上 focus-within 机制） */
 body.cardlib-open #overlay .studio-index-layout .studio-field :is(.studio-search, .studio-select-shell):focus-within {
-  outline-color: #a5854a!important;
+  outline-color: #b69939!important;
 }
 /* W4d 纸面控件金线焦点环（页签/重置/条件 chip：环画内侧，不吃纸面留白） */
 body.cardlib-open #overlay .studio-index-layout .studio-catalog :is(.type-tab, .studio-clear, .studio-active-filters button):focus-visible {
-  outline: 2px solid rgba(154, 120, 60, .8)!important;
+  outline: 2px solid rgba(154,126,60,.8)!important;
   outline-offset: -3px!important;
 }
 /* W4d-补 页签既有 teal 焦点（expedition 收口段）压到同选择器之后失效 */
 body.cardlib-open #overlay .photo-studio-v3 .type-tab:focus-visible {
-  outline: 2px solid rgba(154, 120, 60, .8)!important;
+  outline: 2px solid rgba(154,126,60,.8)!important;
   outline-offset: -3px!important;
 }
 /* W4e 墙面控件金线焦点环（退出/翻页/主按钮：1px 金 + 暗色隔离晕 + 保留底缘影） */
 body.cardlib-open #overlay .studio-index-layout :is(.studio-exit, .pv-navbtn, .studio-zoom, .studio-load-more):focus-visible {
-  outline: 1px solid #d9bb82cc!important;
+  outline: 1px solid #e6cb76cc!important;
   outline-offset: 2px!important;
-  box-shadow: 0 2px 0 #070e09, 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35)!important;
+  box-shadow: 0 2px 0 #0a0a0b, 0 0 0 1px #101112, 0 0 12px rgba(230,203,118,.35)!important;
 }
 
 /* ═════════ T1 按压「快按慢弹」：按下快进 .09s，松手沿 lift 过冲曲线回位 ═════════ */

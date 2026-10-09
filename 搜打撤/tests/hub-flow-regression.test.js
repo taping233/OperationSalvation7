@@ -37,10 +37,12 @@ describe('基地操作键盘语义与危险操作保护', () => {
     expect(readFileSync('game/css/hub.css', 'utf8')).toContain('.dep-card[role="button"]:focus-visible');
   });
 
-  it('职业收藏、高价值/最后一张消费或卖出默认先进入确认页', () => {
-    expect(hub).toContain('confirmStashAction(`收藏【${esc(s.card.name)}】会消耗 1 张卡');
-    expect(hub).toContain('price >= 5 || s.count === 1');
-    expect(hub).toContain('confirmMaterial(`这是仓库里的最后一张${mat.label}卡');
-    expect(hub).toContain('stashConfirmCancel');
+  it('职业收藏、高价值/最后一张消费或卖出默认先就地二次确认（2026-10-06 特写操作台改版）', () => {
+    // 2026-10-06 老板改版：旧确认页（stashConfirmCancel/stash-shell 弹窗）废除，
+    // 危险操作改特写页脚按钮就地二次确认（armOrRun 变红 2.6s），保护语义不变
+    expect(hub).toContain("armOrRun('stashCollectOne'");
+    expect(hub).toContain('price >= 5 || cur.count <= 1');
+    expect(hub).toContain("armOrRun('stashUseMat'");
+    expect(hub).toContain('data-act="stashSellOne"${blocked ? \' disabled\' : \'\'}');
   });
 });

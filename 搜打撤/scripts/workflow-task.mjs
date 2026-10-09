@@ -100,7 +100,10 @@ export function planTask(root, { action, id, date, owner, input }) {
   if (!input || typeof input !== 'object' || Array.isArray(input) || Object.keys(input).some(key => !editable.has(key))) throw new Error('input 含未知字段或试图修改任务身份');
   const before = readTask(root, { id, date });
   if (action === 'start' && before.task) throw new Error('任务已存在，不得覆盖或重复建设');
-  if (action === 'start' && summarizeTasks(root, { id }).tasks.length) throw new Error('任务编号已存在于其他日期，不得重复建设');
+  if (action === 'start') {
+    const summary = summarizeTasks(root, { id });
+    if (summary.tasks.length || summary.skipped.length) throw new Error('任务编号已存在于其他日期或旧格式记录，不得重复建设');
+  }
   if (action !== 'start' && !before.task) throw new Error('任务不存在，请先 start');
   if (before.task && before.task.owner !== owner) throw new Error('负责人不匹配，不得改其他会话任务');
   if (before.task && terminal.has(before.task.stage)) throw new Error('任务已收官，不自动重开；请明确新任务范围');
@@ -160,11 +163,19 @@ export function applyTask(root, plan, expectedSha256) {
 export function summarizeTasks(root, { id, owner } = {}) {
   const directory = safePath(root, 'docs/evidence');
   const tasks = [];
+  const skipped = [];
   if (existsSync(directory)) for (const entry of readdirSync(directory, { withFileTypes: true })) {
     const identity = entry.name.match(/^(\d{4}-\d{2}-\d{2})-([a-zA-Z0-9][a-zA-Z0-9-]{0,79})$/);
     if (!entry.isDirectory() || entry.isSymbolicLink() || !identity || !existsSync(path.join(directory, entry.name, 'task.json'))) continue;
-    const record = readTask(root, { date: identity[1], id: identity[2] });
-    if ((!id || record.task.id === id) && (!owner || record.task.owner === owner)) tasks.push(record);
+    if (id && identity[2] !== id) continue;
+    try {
+      const record = readTask(root, { date: identity[1], id: identity[2] });
+      if (!owner || record.task.owner === owner) tasks.push(record);
+    } catch (error) {
+      skipped.push({ file: taskFile({ date: identity[1], id: identity[2] }), id: identity[2], date: identity[1],
+        reason: error instanceof Error ? error.message : String(error) });
+    }
   }
-  return { tasks: tasks.sort((a, b) => b.task.updatedAt.localeCompare(a.task.updatedAt)), limits: ['只读从 task.json 生成；不创建第二份状态台账'] };
+  return { tasks: tasks.sort((a, b) => b.task.updatedAt.localeCompare(a.task.updatedAt)), skipped, incomplete: skipped.length > 0,
+    limits: ['只读从 task.json 生成；不创建第二份状态台账', '跳过的旧格式或无效记录不推断任务状态，原文保留'] };
 }

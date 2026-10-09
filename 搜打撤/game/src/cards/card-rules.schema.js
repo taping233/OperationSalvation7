@@ -140,8 +140,9 @@ const BLESSING_KEYS = new Set(['atkUp', 'spellUp', 'stealth', 'immune', 'dodge',
 // cost/costMax——type 过滤与池名词 parsePoolNoun 重叠，E6 回归锁定未消费 filter 必拒）。
 const ACQUIRE_FILTER_KEYS = new Set(['type', 'cost', 'costMax', 'exceptIds']);
 // M2：registerRule 持续规则旗标扩键（bleedAmp 流血伤害翻倍 / meleeCost1 所有武术 1 费 /
-// spellCost1 所有法术 1 费——消费点 combat/enemy-phase 流血结算与 battle.card-cost 既有旗标）
-const REGISTER_RULE_KEYS = new Set(['consumeFireball', 'allSpellsInfused', 'growth', 'bleedAmp', 'meleeCost1', 'spellCost1',
+// spellCost1 所有法术 1 费——消费点 combat/enemy-phase 流血结算与 battle.card-cost 既有旗标；
+// moveCost1 所有招式（=武术+法术）1 费，2026-10-06 银河之旅改版，执行时双旗标同落）
+const REGISTER_RULE_KEYS = new Set(['consumeFireball', 'allSpellsInfused', 'growth', 'bleedAmp', 'meleeCost1', 'spellCost1', 'moveCost1',
   'discoverPlus', 'doubleNextSpell', 'poisonLegacy', 'playerCurseImmune', 'stealthStrike']);
 const HAND_OP_KEYS = new Set(['consumeHand', 'dumpHand', 'copyRandom', 'keepInHand', 'noInfuse']);
 // v2 —— G5 装备域（键位设计先行，全部 pending；消费点在 battle.equipment.js，A3 B9 落地）

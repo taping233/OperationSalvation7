@@ -4,70 +4,70 @@
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-sections { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; flex: none; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-section-tab {
   display: flex; align-items: center; justify-content: flex-start; gap: 11px; min-height: 54px;
-  padding: 12px 20px; border: 0; border-radius: 0; background: #233743; color: #f7f3e8;
+  padding: 12px 20px; border: 0; border-radius: 0; background: #2a2d30; color: #f1f0ee;
   font: 600 16px/1.4 var(--font-ui); letter-spacing: .03em;
   clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
-  box-shadow: 3px 3px 0 #9eaca680;
+  box-shadow: 3px 3px 0 #a3a5a780;
 }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-section-tab.on { background: #ceb37a; color: #1b3442; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-section-tab.on { background: #dbc16d; color: #26292c; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-section-tab:hover { filter: brightness(1.06); }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-section-tab .ic { width: 23px; height: 23px; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-section-tab small { margin-left: auto; padding: 3px 7px; background: #ffffff1c; color: inherit; font: 600 13px/1.4 Consolas, monospace; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-section-tab.on small { background: #1b344211; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-section-tab.on small { background: #26292c11; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .warehouse-panel {
   display: flex; flex-direction: column; flex: 1; min-height: 0; margin: 0;
-  padding: 24px; overflow: hidden; background: #f7f7ef; color: #1b3442;
-  border: 1px solid #a9b9b173; box-shadow: 4px 4px 0 #263d491c;
+  padding: 24px; overflow: hidden; background: #f3f3f3; color: #26292c;
+  border: 1px solid #afb1b373; box-shadow: 4px 4px 0 #2d31341c;
 }
 #overlay .card.page #hubMain.pg.hub.hub-cover .warehouse-heading { display: flex; align-items: center; justify-content: space-between; flex: none; gap: 22px; padding-bottom: 16px; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .warehouse-heading h3 { margin: 0 0 8px; color: #1b3442; font-size: 24px; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .warehouse-heading .base-line { margin: 0; font-size: 14px; color: #536a73; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .warehouse-heading .base-line b { color: #284b59; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .warehouse-heading h3 { margin: 0 0 8px; color: #26292c; font-size: 24px; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .warehouse-heading .base-line { margin: 0; font-size: 14px; color: #51575d; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .warehouse-heading .base-line b { color: #35393d; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .warehouse-materials { display: flex; flex-wrap: wrap; gap: 12px; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .warehouse-materials .material-cell {
   display: flex; flex-direction: row; align-items: center; justify-content: flex-start; gap: 9px;
   min-width: 130px; min-height: 47px; padding: 10px 13px; margin: 0;
-  background: #e2e9e0; color: #284b59; border: 1px solid #a8b9af80;
+  background: #e4e4e5; color: #35393d; border: 1px solid #aeb1b380;
   opacity: 1; box-shadow: none; font: 500 14px/1.4 var(--font-ui);
 }
-#overlay .card.page #hubMain.pg.hub.hub-cover .warehouse-materials .material-cell b { margin-left: auto; color: #284b59; font: 700 22px/1 Consolas, monospace; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .warehouse-materials .material-cell b { margin-left: auto; color: #35393d; font: 700 22px/1 Consolas, monospace; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .warehouse-materials .mat-ico .ic { width: 25px; height: 25px; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .base-bar { flex: none; margin: 0 0 18px; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-scroll { flex: 1; min-height: 0; max-height: none; padding: 5px 8px 12px 5px; overflow-y: auto; overflow-x: hidden; scrollbar-color: #8ea09e #e1e6df; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-scroll { flex: 1; min-height: 0; max-height: none; padding: 5px 8px 12px 5px; overflow-y: auto; overflow-x: hidden; scrollbar-color: #959799 #e2e2e3; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-cardgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); align-content: start; gap: 20px; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-cell { min-width: 0; border-radius: 0; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-cell .hs-card { font-size: 14px; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-cell .hsc-val { right: 2px; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-cell .stack-count { background: #183440; color: #f7f3e8; border-color: #b9a06a; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace :is(.ov-note, .hint, .dim, .set-tip) { color: #536a73; text-shadow: none; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace :is(.hint b, .ov-note b) { color: #284b59; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-cell .stack-count { background: #242729; color: #f1f0ee; border-color: #c8af5b; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace :is(.ov-note, .hint, .dim, .set-tip) { color: #51575d; text-shadow: none; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace :is(.hint b, .ov-note b) { color: #35393d; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .set-tip { font-size: 14px; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-list { flex: 1; min-height: 0; max-height: none; overflow: auto; scrollbar-color: #8ea09e #e1e6df; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-pocket-note { flex: none; margin: 0 0 22px; padding: 13px 17px; background: #e8e5d4; border-left: 3px solid #a28a50; font-size: 14px; line-height: 1.7; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pocket .pocket-row { display: grid; grid-template-columns: 68px minmax(0, 1fr) auto; gap: 24px; padding: 18px; margin-bottom: 15px; background: #e6ede4; border: 1px solid #b1c2b773; color: #284b59; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-list { flex: 1; min-height: 0; max-height: none; overflow: auto; scrollbar-color: #959799 #e2e2e3; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-pocket-note { flex: none; margin: 0 0 22px; padding: 13px 17px; background: #e0dfdc; border-left: 3px solid #b29840; font-size: 14px; line-height: 1.7; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pocket .pocket-row { display: grid; grid-template-columns: 68px minmax(0, 1fr) auto; gap: 24px; padding: 18px; margin-bottom: 15px; background: #e8e9e9; border: 1px solid #b7babc73; color: #35393d; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pocket .pocket-thumb { width: 68px; height: 95px; border-radius: 0; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pocket .pocket-thumb .hs-card { font-size: 6.8px; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pocket .pocket-info { overflow: visible; white-space: normal; color: #284b59; font-size: 17px; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pocket .pocket-info b { color: #1b3442; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pocket .stash-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; min-height: 260px; padding: 35px; background: #e8eee5; border: 1px dashed #a5b9b0; color: #536a73; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pocket .stash-placeholder b { color: #284b59; font-size: 22px; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pocket .stash-placeholder span { color: #536a73; font-size: 15px; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pocket .pocket-info { overflow: visible; white-space: normal; color: #35393d; font-size: 17px; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pocket .pocket-info b { color: #26292c; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pocket .stash-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; min-height: 260px; padding: 35px; background: #e9eaea; border: 1px dashed #acafb2; color: #51575d; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pocket .stash-placeholder b { color: #35393d; font-size: 22px; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pocket .stash-placeholder span { color: #51575d; font-size: 15px; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-sec { overflow: auto; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-sec-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex: none; padding-bottom: 20px; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-help { flex: 1; min-width: 0; max-width: 820px; border: 1px solid #a5b9b073; background: #e8eee5; padding: 13px 17px; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .pet-help summary { color: #284b59; font: 600 15px/1.5 var(--font-ui); cursor: pointer; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .pet-help p { color: #536a73; font-size: 14px; line-height: 1.8; margin: 14px 0 0; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .pet-help summary:focus-visible { outline: 2px solid #769c9c; outline-offset: 4px; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-help { flex: 1; min-width: 0; max-width: 820px; border: 1px solid #acafb273; background: #e9eaea; padding: 13px 17px; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .pet-help summary { color: #35393d; font: 600 15px/1.5 var(--font-ui); cursor: pointer; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .pet-help p { color: #51575d; font-size: 14px; line-height: 1.8; margin: 14px 0 0; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .pet-help summary:focus-visible { outline: 2px solid #848a8e; outline-offset: 4px; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-egg-art { display: none; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .stash-list { display: flex; flex-direction: row; flex-wrap: wrap; align-content: start; gap: 18px; overflow: visible; flex: none; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 15px; flex: 1 1 340px; margin: 0; padding: 22px; background: #e4ece2; border: 1px solid #a8beb073; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 15px; flex: 1 1 340px; margin: 0; padding: 22px; background: #e6e7e8; border: 1px solid #b0b3b673; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-row > span:first-child { display: flex; align-items: center; gap: 11px; font-size: 19px; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-row > span:first-child > .ic { width: 32px; height: 32px; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-row b { color: #1b3442; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-row .pet-desc { grid-column: 1 / -1; color: #536a73; font-size: 15px; line-height: 1.7; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-row .got { color: #3c6350; font-size: 14px; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-row.locked { order: 99; flex-basis: 100%; background: #edf0e8; border-style: dashed; opacity: 1; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-row.locked .dim { color: #536a73; font-size: 14px; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-row b { color: #26292c; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-row .pet-desc { grid-column: 1 / -1; color: #51575d; font-size: 15px; line-height: 1.7; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-row .got { color: #41464b; font-size: 14px; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-row.locked { order: 99; flex-basis: 100%; background: #ebeced; border-style: dashed; opacity: 1; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pets .pet-row.locked .dim { color: #51575d; font-size: 14px; }
 @media (max-width: 1050px) {
   #overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-cardgrid { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 17px; }
   #overlay .card.page #hubMain.pg.hub.hub-cover .warehouse-heading { flex-wrap: wrap; }

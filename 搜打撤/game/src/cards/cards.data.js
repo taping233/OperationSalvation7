@@ -251,7 +251,7 @@ export const dataSlice = {
       // —— 牧师（← 牧师 + 授印者 + 术士；能力卡：浪掷风吟 / 禁术解放，2026-09-13 老板拍板实机定名）——
       // 另有 吞噬（tt3sp-devour）/ 圣盾（tt3-holy-shield）自第三批原地转职为本职业卡
       { id: 'tt7-silence',     name: '禁言术',     cost: 0, rarity: '职业', type: '法术', cls: '牧师', unrandom: true, desc: '沉默 1 名角色 1 回合，抽 1 张牌。', value: 2 },
-      { id: 'cc-demon',        name: '恶魔之力',   cost: 1, rarity: '职业', type: '法术', cls: '牧师', unrandom: true, dmg: 4, dmgType: 'spell', desc: "4′，损失 2 点生命。", value: 3 },
+      { id: 'cc-demon',        name: '恶魔之力',   cost: 1, rarity: '职业', type: '法术', cls: '牧师', unrandom: true, dmg: 7, dmgType: 'spell', desc: "7′，损失 2 点生命。", value: 3 }, // 2026-10-06 老板拍板：4→7 法伤（旧档卡面走 face-refresh 注册表重刷）
       { id: 'tt7-holyglow',    name: '沐愈光辉',   cost: 4, rarity: '职业', type: '法术', cls: '牧师', unrandom: true, desc: '将自身血量回复至 12 血。', value: 3 },
       { id: 'tt7-holyheal',    name: '圣光治愈',   cost: 1, rarity: '职业', type: '法术', cls: '牧师', unrandom: true, desc: '弃置 1 张牌，回复 2 倍于其费用的血量。', value: 2 },
       { id: 'tt7-provoke',     name: '扰敌',       cost: 1, rarity: '职业', type: '法术', cls: '牧师', unrandom: true, desc: '迫使 2 名敌人斗殴。', value: 2 },

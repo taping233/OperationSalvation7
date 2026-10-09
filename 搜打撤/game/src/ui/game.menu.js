@@ -1,4 +1,4 @@
-import { appendLocalFeedback, downloadFeedbackRecord, readLocalFeedback, removeLocalFeedback } from './feedback.local.js';
+import { appendLocalFeedback, downloadFeedbackRecord, downloadFeedbackRecords, readLocalFeedback, removeLocalFeedback } from './feedback.local.js';
 import { captureBattleContext, invalidateBattleContext } from '../battle/battle-loader.js';
 import { runTerminalSettlement } from './terminal-settlement.js';
 import { storeGet, storeSet } from '../core/storage.js';
@@ -133,7 +133,7 @@ function createGameMenuController(deps) {
         return { id: 'hub-' + key, name: `基地 · ${tabName || '主页'}` };
       }
       if (body && body.querySelector('#depMain')) return { id: 'depMain', name: '出发整备' };
-      if (body && body.querySelector('.sugin-page')) return { id: 'suginbox', name: '留言库' };
+      if (body && body.querySelector('.sugin-page')) return { id: 'suginbox', name: '留言信箱' };
       if (body && body.querySelector('.clib-main')) return { id: 'cardlib', name: '卡牌库' };
       if (body && body.querySelector('.cdes-main')) return { id: 'cardforge', name: '制作坊' };
       if (body && body.querySelector('.settings-page')) return { id: 'settings', name: '设置页' };
@@ -259,10 +259,14 @@ function createGameMenuController(deps) {
       catch { ok = false; }
       if (layer._openToken !== token) return;
       busy = false; saveBtn.disabled = false;
-      document.getElementById('sugWhere').innerHTML = ok
-        ? '已保存在本浏览器。请到设置 → 留言库导出此条 JSON，再交给制作者。'
-        : '写入失败，输入已保留，请重试。';
-      if (ok) fields.forEach(el => { el.value = ''; });
+      if (ok) {
+        // 保存成功即自动退出留言界面、回原页面（close 的 token 守卫保证只退一次）；
+        // 导出指引常驻表单下方静态提示，无需停留展示
+        fields.forEach(el => { el.value = ''; });
+        close();
+        return;
+      }
+      document.getElementById('sugWhere').innerHTML = '写入失败，输入已保留，请重试。';
     };
     setTimeout(() => { if (layer._openToken === token) ta.focus(); }, 0);
   }
@@ -322,7 +326,12 @@ function createGameMenuController(deps) {
   function renderSugBox() {
     const box = document.getElementById('sugBox');
     if (!box) return;
-    if (!Array.isArray(sugCache)) { box.innerHTML = `<p class="ov-empty danger">${esc(sugCache?.message || '留言库读取失败，原数据已保留')}</p>`; return; }
+    const exportAll = document.querySelector('[data-act="sugExportAll"]');
+    if (exportAll) {
+      exportAll.disabled = !Array.isArray(sugCache) || !sugCache.length;
+      exportAll.textContent = '全部导出';
+    }
+    if (!Array.isArray(sugCache)) { box.innerHTML = `<p class="ov-empty danger">${esc(sugCache?.message || '留言信箱读取失败，原数据已保留')}</p>`; return; }
     const list = sugCache.map((entry, index) => ({ entry, index })).reverse();
     const entries = list.map(x => x.entry);
     const pend = list.filter((x) => !x.entry?.done);
@@ -336,7 +345,7 @@ function createGameMenuController(deps) {
         <div class="se-text">
           <b>邮筒还是空的</b>
           <span>在游戏任意界面<b>点击右键</b>，就能给制作者写一张留言。</span>
-          <span>保存后在这里导出 JSON 交给制作者；处理完的留言会盖「已完成」章归档。</span>
+          <span>保存后可点「全部导出」，一次导出所有留言的 JSON 交给制作者；处理完的留言会盖「已完成」章归档。</span>
         </div>
       </div>`;
     box.innerHTML = SDT.Icons.rich(html);
@@ -346,6 +355,7 @@ function createGameMenuController(deps) {
   let sugFromTitle = false;
   function openSuggestionInbox(fromTitle = false) {
     sugFromTitle = !!fromTitle;
+    sugCache = null;
     game.state = 'modal';
     UI.showOverlay('', `
       <div class="pg settings-page sugin-page">
@@ -358,7 +368,7 @@ function createGameMenuController(deps) {
                   fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
-        <header class="pg-head"><h2>[[icon:book]] 留言库</h2><span class="pg-spacer"></span></header>
+        <header class="pg-head"><h2>[[icon:book]] 留言信箱</h2><span class="pg-spacer"></span><button class="mini-btn" data-act="sugExportAll" title="导出全部待处理和已完成留言到一个 JSON 文件" disabled>全部导出</button></header>
         <div class="settings" id="sugBox"><p class="ov-empty">读取中…</p></div>
       </div>`, 'page');
     UI.act('sugBack', () => {
@@ -370,6 +380,12 @@ function createGameMenuController(deps) {
       const btn = document.querySelector(`[data-act="sugExport"][data-idx="${+d.idx}"]`);
       const result = downloadFeedbackRecord(entry);
       if (btn) btn.textContent = result.ok ? '已导出' : '导出失败，请重试';
+    });
+    UI.act('sugExportAll', () => {
+      if (!Array.isArray(sugCache) || !sugCache.length) return;
+      const btn = document.querySelector('[data-act="sugExportAll"]');
+      const result = downloadFeedbackRecords(sugCache);
+      if (btn) btn.textContent = result.ok ? `已导出 ${sugCache.length} 条` : '导出失败，请重试';
     });
     UI.act('sugDel', async (d) => {
       const ts = d?.ts;
@@ -931,7 +947,7 @@ function createGameMenuController(deps) {
         <p><a class="ov-btn" href="./assets/sfx/battle/SOURCES.md" target="_blank" rel="noopener">查看音效来源</a></p>
         </section>
         <section class="settings-group settings-records">
-        <h3 class="set-h">[[icon:book]] 留言库 <span class="set-en">SUGGESTION BOX</span></h3>
+        <h3 class="set-h">[[icon:book]] 留言信箱 <span class="set-en">SUGGESTION BOX</span></h3>
         <div class="btn-row"><button class="mini-btn" data-act="openInbox">查看历史留言</button></div>
         <h3 class="set-h">[[icon:chart]] 跑局数据 <span class="set-en">RUN DATA</span></h3>
         <!-- W1-01：数据页原唯一入口=Alt+9 不可发现，设置页加可见入口 -->

@@ -16,22 +16,22 @@
 
 #overlay #hubMain.hub-classes .class-command {
   position: relative;
-  border-color: rgba(159, 183, 188, .2);
+  border-color: rgba(170,174,177,.2);
   border-left-color: var(--gold-main);
 }
 /* C1a 下缘金发丝线（两端渐隐、中心提亮，同 hub-head W2a 语言） */
 #overlay #hubMain.hub-classes .class-command::after {
   content: ''; position: absolute; left: 12px; right: 12px; bottom: -1px; height: 1px;
   pointer-events: none;
-  background: linear-gradient(90deg, transparent, #d9bb82a1 18%, #d9bb82c4 50%, #d9bb82a1 82%, transparent);
-  box-shadow: 0 0 6px #d9bb8233;
+  background: linear-gradient(90deg, transparent, #e6cb76a1 18%, #e6cb76c4 50%, #e6cb76a1 82%, transparent);
+  box-shadow: 0 0 6px #e6cb7633;
 }
 /* C1b 右端光点呼吸（金线的"封蜡"） */
 #overlay #hubMain.hub-classes .class-command::before {
   content: ''; position: absolute; right: 10px; bottom: -3px; width: 5px; height: 5px;
   border-radius: 50%; pointer-events: none;
   background: var(--gold-bright);
-  box-shadow: 0 0 10px #d9bb82d9, 0 0 22px #d9bb8255;
+  box-shadow: 0 0 10px #e6cb76d9, 0 0 22px #e6cb7655;
   animation: clsGemBreath 5s ease-in-out infinite alternate;
 }
 @keyframes clsGemBreath { from { opacity: .5; } to { opacity: 1; } }
@@ -43,28 +43,28 @@
 }
 #overlay #hubMain.hub-classes .class-command .section-kicker::before {
   content: ''; display: block; width: 18px; height: 1px; flex: 0 0 auto;
-  background: linear-gradient(90deg, transparent, #d9bb82a8);
-  box-shadow: 0 0 4px #d9bb8255;
+  background: linear-gradient(90deg, transparent, #e6cb76a8);
+  box-shadow: 0 0 4px #e6cb7655;
 }
 /* C1d 页名：微金晕提亮（层级：页名 > 说明 > 统计） */
 #overlay #hubMain.hub-classes .class-command h3 {
-  text-shadow: 0 2px 16px rgba(3, 10, 16, .72), 0 0 3px rgba(217, 187, 130, .26);
+  text-shadow: 0 2px 16px rgba(8,8,9,.72), 0 0 3px rgba(230,203,118,.26);
 }
-#overlay #hubMain.hub-classes .class-command p { color: #a9bcc1; }
+#overlay #hubMain.hub-classes .class-command p { color: #b2b5b8; }
 
 /* C1e 统计章：档案章化——冷青底、左上金角标、数值金晕 */
 #overlay #hubMain.hub-classes .class-command-stats > span {
-  position: relative; border-color: rgba(159, 183, 188, .2);
-  background: rgba(6, 15, 22, .55);
+  position: relative; border-color: rgba(170,174,177,.2);
+  background: rgba(11,12,13,.55);
 }
 #overlay #hubMain.hub-classes .class-command-stats > span::before {
   content: ''; position: absolute; left: -1px; top: -1px; width: 10px; height: 10px;
-  border-left: 1px solid #d9bb82a1; border-top: 1px solid #d9bb82a1;
+  border-left: 1px solid #e6cb76a1; border-top: 1px solid #e6cb76a1;
   pointer-events: none;
 }
-#overlay #hubMain.hub-classes .class-command-stats small { color: #8fa5ad; letter-spacing: 2px; }
+#overlay #hubMain.hub-classes .class-command-stats small { color: #9a9fa2; letter-spacing: 2px; }
 #overlay #hubMain.hub-classes .class-command-stats b {
-  color: #efe0b6; text-shadow: 0 0 10px rgba(217, 187, 130, .28);
+  color: #f6e6af; text-shadow: 0 0 10px rgba(230,203,118,.28);
 }
 
 /* ═════════ C2 人物档案卡：封条顶线 + hover 抬升 + 按压回弹 ═════════ */
@@ -76,9 +76,9 @@
     transform var(--hub-lift, .32s cubic-bezier(.22, 1, .36, 1));
 }
 #overlay #hubMain.hub-classes .class-dossier:hover {
-  border-color: rgba(217, 187, 130, .55);
+  border-color: rgba(230,203,118,.55);
   transform: translateY(-3px);
-  box-shadow: 0 16px 32px rgba(2, 8, 14, .52), 0 0 16px rgba(217, 187, 130, .12);
+  box-shadow: 0 16px 32px rgba(7,7,8,.52), 0 0 16px rgba(230,203,118,.12);
 }
 #overlay #hubMain.hub-classes .class-dossier:active {
   transform: translateY(-1px) scale(.988);
@@ -86,15 +86,15 @@
 }
 /* C2b 键盘可达：卡内皮肤按钮聚焦时金线亮框（对焦走查的可见反馈） */
 #overlay #hubMain.hub-classes .class-dossier:focus-within {
-  border-color: rgba(217, 187, 130, .6);
-  box-shadow: 0 12px 26px rgba(2, 8, 14, .45), 0 0 14px rgba(217, 187, 130, .14);
+  border-color: rgba(230,203,118,.6);
+  box-shadow: 0 12px 26px rgba(7,7,8,.45), 0 0 14px rgba(230,203,118,.14);
 }
 
 /* C2c 卡顶"封条"金线：未培养极淡、已培养可辨、hover 点亮（slot-card W2d 语言） */
 #overlay #hubMain.hub-classes .class-dossier::before {
   content: ''; position: absolute; top: 0; left: 12%; right: 12%; height: 1px; z-index: 3;
   pointer-events: none;
-  background: linear-gradient(90deg, transparent, #d9bb82cc, transparent);
+  background: linear-gradient(90deg, transparent, #e6cb76cc, transparent);
   opacity: .18;
   transition: opacity var(--hub-fast, .18s cubic-bezier(.33, 1, .68, 1));
 }
@@ -104,13 +104,13 @@
 /* C2d 档案编号：提亮微金晕 + 号下金短线（编号短线语言） */
 #overlay #hubMain.hub-classes .class-dossier-index {
   display: flex; flex-direction: column; align-items: flex-end; gap: 3px;
-  color: rgba(243, 228, 194, .88);
-  text-shadow: 0 0 8px rgba(217, 187, 130, .3), 0 1px 3px rgba(2, 8, 13, .8);
+  color: rgba(223,220,214,.88);
+  text-shadow: 0 0 8px rgba(230,203,118,.3), 0 1px 3px rgba(6,7,7,.8);
 }
 #overlay #hubMain.hub-classes .class-dossier-index::after {
   content: ''; display: block; width: 14px; height: 1px;
-  background: linear-gradient(270deg, #d9bb82b3, transparent);
-  box-shadow: 0 0 4px #d9bb8255;
+  background: linear-gradient(270deg, #e6cb76b3, transparent);
+  box-shadow: 0 0 4px #e6cb7655;
 }
 
 /* ═════════ C3 卡内信息层级：发丝分隔线 + 熟练度金头光点 ═════════ */
@@ -118,64 +118,64 @@
 /* C3a 眉题/人名/描述：层级分离（人名压暗投影保浅色立绘下的可读性） */
 #overlay #hubMain.hub-classes .class-dossier-kicker { color: var(--gold-main); }
 #overlay #hubMain.hub-classes .class-dossier h3 {
-  text-shadow: 0 2px 14px rgba(3, 10, 16, .82), 0 0 3px rgba(217, 187, 130, .18);
+  text-shadow: 0 2px 14px rgba(8,8,9,.82), 0 0 3px rgba(230,203,118,.18);
 }
-#overlay #hubMain.hub-classes .class-dossier p { color: #b3c3c7; }
+#overlay #hubMain.hub-classes .class-dossier p { color: #bbbdc0; }
 
 /* C3b 档案数据行：顶部发丝分隔线（信息块仪式感，slot-page W3d 语言） */
 #overlay #hubMain.hub-classes .class-dossier-meta {
   padding-top: 8px;
-  border-top: 1px solid rgba(159, 183, 188, .18);
+  border-top: 1px solid rgba(170,174,177,.18);
 }
 #overlay #hubMain.hub-classes .class-dossier-meta b {
-  color: #efe0b6; text-shadow: 0 0 8px rgba(217, 187, 130, .22);
+  color: #f6e6af; text-shadow: 0 0 8px rgba(230,203,118,.22);
 }
-#overlay #hubMain.hub-classes .class-dossier-meta span { color: #9db1b6; letter-spacing: .05em; }
+#overlay #hubMain.hub-classes .class-dossier-meta span { color: #a6aaad; letter-spacing: .05em; }
 
 /* C3c 熟练度条：冷青凹槽 + 进度金头光点（仅已培养卡出现，保证 width>0） */
 #overlay #hubMain.hub-classes .class-dossier .xp-bar {
-  background: rgba(6, 16, 24, .78);
-  box-shadow: inset 0 1px 2px rgba(2, 8, 13, .6);
+  background: rgba(12,13,14,.78);
+  box-shadow: inset 0 1px 2px rgba(6,7,7,.6);
 }
 #overlay #hubMain.hub-classes .class-dossier .xp-bar i {
   position: relative;
-  background: linear-gradient(90deg, #8fb3b8, var(--gold-main));
-  box-shadow: 0 0 6px rgba(217, 187, 130, .28);
+  background: linear-gradient(90deg, #9ea4a9, var(--gold-main));
+  box-shadow: 0 0 6px rgba(230,203,118,.28);
 }
 #overlay #hubMain.hub-classes .class-dossier.trained .xp-bar i::after {
   content: ''; position: absolute; right: -1px; top: 50%; width: 5px; height: 5px;
   margin-top: -2.5px; border-radius: 50%;
   background: var(--gold-bright);
-  box-shadow: 0 0 8px 1px rgba(217, 187, 130, .65);
+  box-shadow: 0 0 8px 1px rgba(230,203,118,.65);
 }
-#overlay #hubMain.hub-classes .class-dossier .xp-txt { color: #a7b8bd; letter-spacing: .06em; }
+#overlay #hubMain.hub-classes .class-dossier .xp-txt { color: #afb2b5; letter-spacing: .06em; }
 
 /* ═════════ C4 皮肤按钮：冷青底 retint + 选中金章 + hover 金线 ═════════ */
 
 #overlay #hubMain.hub-classes .class-skins { gap: 6px; margin-top: 9px; }
 #overlay #hubMain.hub-classes .class-skins .mini-btn {
-  border-color: rgba(159, 183, 188, .28);
-  background: rgba(9, 24, 33, .72);
-  color: #c6d6da; letter-spacing: 1px;
+  border-color: rgba(170,174,177,.28);
+  background: rgba(17,18,20,.72);
+  color: #cfd0d1; letter-spacing: 1px;
 }
 #overlay #hubMain.hub-classes .class-skins .mini-btn:hover {
-  border-color: rgba(217, 187, 130, .5);
-  background: rgba(18, 40, 54, .9);
-  color: #f0f6f4;
-  box-shadow: 0 0 8px rgba(217, 187, 130, .12);
+  border-color: rgba(230,203,118,.5);
+  background: rgba(29,32,34,.9);
+  color: #f3f3f3;
+  box-shadow: 0 0 8px rgba(230,203,118,.12);
 }
 /* 选中皮肤 = 金章（金渐变 + 内高光 + 微金晕，同 deploy-primary 收口语言） */
 #overlay #hubMain.hub-classes .class-skins .mini-btn.ok {
   border-color: var(--gold-main);
-  background: linear-gradient(160deg, #e0c58e, #c2a469);
-  color: #1c3038;
-  box-shadow: inset 0 1px 0 rgba(255, 240, 205, .5), 0 0 10px rgba(217, 187, 130, .22);
+  background: linear-gradient(160deg, #ebd383, #d1b55a);
+  color: #222528;
+  box-shadow: inset 0 1px 0 rgba(235,232,226,.5), 0 0 10px rgba(230,203,118,.22);
 }
 #overlay #hubMain.hub-classes .class-skins .mini-btn.ok:hover {
-  border-color: #e6cd97;
-  background: linear-gradient(160deg, #e7cf9b, #c9ab6f);
-  color: #1c3038;
-  box-shadow: inset 0 1px 0 rgba(255, 244, 214, .6), 0 0 14px rgba(217, 187, 130, .32);
+  border-color: #f0d98d;
+  background: linear-gradient(160deg, #f1db91, #d7bc61);
+  color: #222528;
+  box-shadow: inset 0 1px 0 rgba(238,236,231,.6), 0 0 14px rgba(230,203,118,.32);
 }
 
 /* ═════════ C5 出入场：页首先落位、档案卡错峰上浮（仅页签切入时重播；

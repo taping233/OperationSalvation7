@@ -6,17 +6,17 @@
 @import url('./hub-cover-motion.css');
 
 /* Base-only paper shell. Cards retain their rarity art and game rules. */
-#overlay:has(#hubMain) { background: #0819238c; backdrop-filter: blur(10px) saturate(.8); }
+#overlay:has(#hubMain) { background: #1213148c; backdrop-filter: blur(10px) saturate(.8); }
 #overlay .card.page:has(#hubMain) {
   width: 100%; height: 100%; max-width: none; max-height: none;
-  padding: 0; border: 0; background: #edf0e8; border-radius: 0;
+  padding: 0; border: 0; background: #ebeced; border-radius: 0;
   box-shadow: none;
   animation: hubCoverIn .3s var(--ease-entrance) both;
 }
 #overlay .card.page.hub-refresh:has(#hubMain) { animation: none; }
 #overlay:has(#hubMain) :is(.ov-x, #ovCloseX) { display: none; }
 #overlay .card.page #hubMain.pg.hub.hub-cover {
-  --hub-ink: #1b3442; --hub-muted: #586c77; --hub-paper: #edf0e8; --hub-rule: #b6c1ba;
+  --hub-ink: #26292c; --hub-muted: #555b61; --hub-paper: #ebeced; --hub-rule: #babcbd;
   display: flex; flex-direction: column; width: 100%; height: 100%; min-height: 0;
   padding: 0; background: var(--hub-paper); color: var(--hub-ink); border: 0;
 }
@@ -29,70 +29,70 @@
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-head {
   position: relative; display: grid; grid-template-columns: 102px auto minmax(70px, 1fr) auto;
   align-items: center; gap: 18px; min-height: 92px; padding: 20px 26px;
-  background: #edf0e8; border: 0; border-bottom: 2px solid #c0aa78; border-radius: 0;
+  background: #ebeced; border: 0; border-bottom: 2px solid #ceb66b; border-radius: 0;
 }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-head h2 {
   grid-column: 2; grid-row: 1; margin: 0; padding: 0;
   color: var(--hub-ink); font: 700 29px/1.25 var(--font-ui); letter-spacing: .1em; text-shadow: none;
 }
-#overlay .card.page #hubMain.pg.hub.hub-cover .hub-slot-label { grid-column: 3; grid-row: 1; color: #657985; font: 500 12px/1.4 var(--font-ui); letter-spacing: .06em; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-slot-label { grid-column: 3; grid-row: 1; color: #717679; font: 500 12px/1.4 var(--font-ui); letter-spacing: .06em; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-head .pg-spacer { display: none; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-back {
   grid-column: 1; grid-row: 1; width: 100%; min-height: 44px; margin: 0;
-  padding: 10px 14px; background: #233743; color: #f7f3e8; border: 0; border-radius: 0;
+  padding: 10px 14px; background: #2a2d30; color: #f1f0ee; border: 0; border-radius: 0;
   clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
-  font: 600 14px/1.4 var(--font-ui); box-shadow: 3px 3px 0 #9eaca6; text-shadow: none;
+  font: 600 14px/1.4 var(--font-ui); box-shadow: 3px 3px 0 #a3a5a7; text-shadow: none;
 }
-#overlay .card.page #hubMain.pg.hub.hub-cover .hub-back:hover { background: #33525f; transform: translateY(-1px); }
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-back:hover { background: #3c4045; transform: translateY(-1px); }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-res { grid-column: 4; grid-row: 1; display: flex; gap: 9px; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .res-chip {
   display: inline-flex; align-items: center; gap: 7px; padding: 8px 10px;
-  background: #e0e7df; color: #586c77; border: 1px solid #9eafaf59; border-radius: 0; font-size: 12px;
+  background: #e2e3e4; color: #555b61; border: 1px solid #a4a7a959; border-radius: 0; font-size: 12px;
 }
-#overlay .card.page #hubMain.pg.hub.hub-cover .res-chip b { color: #284b59; font: 700 19px/1 Consolas, monospace; text-shadow: none; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .res-chip b { color: #35393d; font: 700 19px/1 Consolas, monospace; text-shadow: none; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-body { display: grid; grid-template-columns: 174px minmax(0, 1fr); margin: 0; flex: 1; min-height: 0; overflow: hidden; border-radius: 0; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .hub-tabs { display: flex; flex-direction: column; gap: 11px; padding: 22px 13px; background: #e0e7df; border: 0; border-right: 1px solid #aebcb973; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-tabs { display: flex; flex-direction: column; gap: 11px; padding: 22px 13px; background: #e2e3e4; border: 0; border-right: 1px solid #b3b5b773; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-tab {
   flex: 0 0 auto; display: flex; flex-direction: row; align-items: center; justify-content: flex-start;
-  min-height: 58px; padding: 12px 15px; gap: 11px; background: #233743; border: 0; border-radius: 0;
-  color: #e8eeea; box-shadow: 3px 3px 0 #9eaca680; clip-path: polygon(9px 0, 100% 0, calc(100% - 9px) 100%, 0 100%);
+  min-height: 58px; padding: 12px 15px; gap: 11px; background: #2a2d30; border: 0; border-radius: 0;
+  color: #ebebeb; box-shadow: 3px 3px 0 #a3a5a780; clip-path: polygon(9px 0, 100% 0, calc(100% - 9px) 100%, 0 100%);
 }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-tab .tab-txt { color: inherit; font: 600 14px/1.4 var(--font-ui); letter-spacing: .04em; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-tab .tab-ico { width: 28px; height: 28px; margin: 0; background: none; border: 0; box-shadow: none; transform: none; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-tab .tab-ico .ic { width: 25px; height: 25px; filter: none; transform: none; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .hub-tab:hover { background: #33525f; transform: translateX(2px); }
-#overlay .card.page #hubMain.pg.hub.hub-cover .hub-tab.on { background: #ceb37a; color: #1b3442; border: 0; box-shadow: 3px 3px 0 #9eaca680; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-tab:hover { background: #3c4045; transform: translateX(2px); }
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-tab.on { background: #dbc16d; color: #26292c; border: 0; box-shadow: 3px 3px 0 #a3a5a780; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-tab.on::after { content: none; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-tab.on .tab-ico .ic { filter: brightness(.6) saturate(.6); }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-tab .dot { width: 6px; height: 6px; right: 12px; top: 10px; background: #a65742; box-shadow: none; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .hub-page { width: 100%; max-width: none; min-width: 0; margin: 0; padding: 22px 24px 26px; background: #edf0e8; overflow: auto; scrollbar-color: #8ea09e #e1e6df; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-page { width: 100%; max-width: none; min-width: 0; margin: 0; padding: 22px 24px 26px; background: #ebeced; overflow: auto; scrollbar-color: #959799 #e2e2e3; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-page.page-in { animation: hubUnifiedSheet .22s var(--ease-entrance) both; }
-#overlay .card.page #hubMain.pg.hub.hub-cover :is(.hub-card, .class-command, .collection-command) { background: #f7f7ef; color: var(--hub-ink); border: 1px solid #9eafaf73; border-radius: 0; box-shadow: 4px 4px 0 #263d491c; }
+#overlay .card.page #hubMain.pg.hub.hub-cover :is(.hub-card, .class-command, .collection-command) { background: #f3f3f3; color: var(--hub-ink); border: 1px solid #a4a7a973; border-radius: 0; box-shadow: 4px 4px 0 #2d31341c; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-card { padding: 20px 22px; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-page .hub-card::before,
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-card > h3::before,
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-card > h3::after { content: none; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .hub-card h3 { color: var(--hub-ink); font: 700 20px/1.4 var(--font-ui); letter-spacing: .04em; text-shadow: none; border-color: #b5c1ba; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-card h3 { color: var(--hub-ink); font: 700 20px/1.4 var(--font-ui); letter-spacing: .04em; text-shadow: none; border-color: #babbbc; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-card :is(.base-line, .pk-row, .ov-note, .ov-empty, .dim, .set-tip, .si-line, .hint) { color: var(--hub-muted); text-shadow: none; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-card :is(.base-line, .ov-note, .ov-empty, .hint) { font-size: 13px; line-height: 1.7; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .hub-card :is(.base-line b, .pk-row b) { color: #284b59; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .hub-page .hub-card .base-line { padding: 0; background: none; border: 0; color: #586c77; box-shadow: none; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .base-bar { height: 5px; background: #ced8d0; border: 0; border-radius: 0; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .base-bar i { background: #a78c52; box-shadow: none; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-card :is(.base-line b, .pk-row b) { color: #35393d; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-page .hub-card .base-line { padding: 0; background: none; border: 0; color: #555b61; box-shadow: none; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .base-bar { height: 5px; background: #d2d3d4; border: 0; border-radius: 0; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .base-bar i { background: #b89c41; box-shadow: none; }
 #overlay .card.page #hubMain.pg.hub.hub-cover :is(.ov-btn, .mini-btn) {
   display: inline-flex; align-items: center; justify-content: center; min-height: 39px; gap: 7px;
-  padding: 10px 16px; background: #233743; color: #f7f3e8; border: 0; border-radius: 0;
-  font: 600 13px/1.4 var(--font-ui); letter-spacing: .03em; box-shadow: 3px 3px 0 #9eaca659;
+  padding: 10px 16px; background: #2a2d30; color: #f1f0ee; border: 0; border-radius: 0;
+  font: 600 13px/1.4 var(--font-ui); letter-spacing: .03em; box-shadow: 3px 3px 0 #a3a5a759;
   clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
 }
-#overlay .card.page #hubMain.pg.hub.hub-cover :is(.ov-btn, .mini-btn):hover:not(:disabled) { background: #33525f; transform: translateY(-1px); color: #fff5e5; }
-#overlay .card.page #hubMain.pg.hub.hub-cover :is(.ov-btn.ok, .mini-btn.ok) { background: #cdb17a; color: #1b3442; }
+#overlay .card.page #hubMain.pg.hub.hub-cover :is(.ov-btn, .mini-btn):hover:not(:disabled) { background: #3c4045; transform: translateY(-1px); color: #f4f3f0; }
+#overlay .card.page #hubMain.pg.hub.hub-cover :is(.ov-btn.ok, .mini-btn.ok) { background: #dac16d; color: #26292c; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-page :is(.ov-btn, .mini-btn):disabled { opacity: .65; cursor: not-allowed; }
-#overlay .card.page #hubMain.pg.hub.hub-cover :is(button, select, input, [role='button']):focus-visible { outline: 2px solid #769c9c; outline-offset: 3px; }
+#overlay .card.page #hubMain.pg.hub.hub-cover :is(button, select, input, [role='button']):focus-visible { outline: 2px solid #848a8e; outline-offset: 3px; }
 #overlay .card.page #hubMain.pg.hub.hub-cover :is(.eyebrow, .section-kicker, .class-dossier-kicker) { display: none; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .hub-page::-webkit-scrollbar { width: 7px; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .hub-page::-webkit-scrollbar-track { background: #e1e6df; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .hub-page::-webkit-scrollbar-thumb { background: #8ea09e; border-radius: 0; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-page::-webkit-scrollbar-track { background: #e2e2e3; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .hub-page::-webkit-scrollbar-thumb { background: #959799; border-radius: 0; }
 @keyframes hubCoverIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes hubSheetIn { from { opacity: .6; transform: translateX(7px); } to { opacity: 1; transform: translateX(0); } }
 @media (max-width: 1050px) {

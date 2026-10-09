@@ -25,8 +25,8 @@ body.reduce-motion.cardlib-open #overlay.closing .card.page:has(.card-library-pa
 body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .library-head {
   grid-template-columns:44px minmax(0,1fr) auto auto!important;
   grid-template-areas:'. title count tools'!important;
-  border-bottom:3px solid #5f573d!important;
-  box-shadow:inset 0 -1px #baa47770,0 3px 0 #080f0a,0 5px 0 #a18b5838;
+  border-bottom:3px solid #5f553d!important;
+  box-shadow:inset 0 -1px #c8b26970,0 3px 0 #0b0c0c,0 5px 0 #b1994838;
 }
 /* 返回键统一（2026-09-25 老板）：卡牌库模式的退出键不再走「封面透明变体」，
    恢复主页左上退出键（ak-sq ak-exit 64×58 实底+内框）同款同位；
@@ -35,30 +35,30 @@ body.cardlib-open #overlay .studio-index-layout .studio-exit-anchor { z-index:12
 /* Restore the velvet photo wall beneath the gallery, darkened to sit with the green cabinet UI. */
 body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .clib-main {
   background:
-    linear-gradient(180deg,rgba(10,18,13,.28),rgba(8,14,10,.46)),
+    linear-gradient(180deg,rgba(11,12,13,.28),rgba(9,10,10,.46)),
     url('../assets/ui/photo-studio/wall.webp') center bottom/cover no-repeat,
-    linear-gradient(180deg,#182019,#0d150f)!important;
+    linear-gradient(180deg,#1b1c1d,#101112)!important;
 }
 body.cardlib-open #overlay .studio-index-layout .library-title {
   position:relative;
   padding:0 14px!important;
   border:8px solid transparent!important;
   border-image:url('../assets/ui/photo-studio/cabinet-plaque.svg') 32 fill stretch!important;
-  border-radius:2px;
-  background:linear-gradient(140deg,#55523d,#29372b 55%,#17251c);
-  box-shadow:inset 0 0 0 2px #17241c,inset 0 0 0 3px #b59c6350,0 3px 5px #0007;
+  border-radius:0;
+  background:linear-gradient(140deg,#554e3d,#2f3031 55%,#191a1c);
+  box-shadow:inset 0 0 0 2px #181a1c,inset 0 0 0 3px #c5aa5350,0 3px 5px #0007;
 }
 body.cardlib-open #overlay .studio-index-layout .library-title::after {
   content:'';
   position:absolute;
   inset:0 7px;
   pointer-events:none;
-  background:radial-gradient(circle at left center,#decb97 0 1px,#574b32 1.5px 2.5px,transparent 3px),radial-gradient(circle at right center,#decb97 0 1px,#574b32 1.5px 2.5px,transparent 3px);
+  background:radial-gradient(circle at left center,#e8d38d 0 1px,#574c32 1.5px 2.5px,transparent 3px),radial-gradient(circle at right center,#e8d38d 0 1px,#574c32 1.5px 2.5px,transparent 3px);
 }
 body.cardlib-open #overlay .studio-index-layout .library-title h2 {
   font-size:28px!important;
-  color:#fff!important;
-  -webkit-text-fill-color:#fff!important;
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
   background:none!important;
   text-shadow:none!important;
   filter:none!important;
@@ -66,22 +66,22 @@ body.cardlib-open #overlay .studio-index-layout .library-title h2 {
 body.cardlib-open #overlay .studio-index-layout .clib-count {
   margin-left:0; /* 返回键由页头首列留位，馆名与馆藏数共享同一基线。 */
   padding:6px 14px;
-  border:1px solid #8a795657!important;
-  border-radius:2px;
-  background:#17211c!important; /* 09-25 半透明深绿叠纸白页头对比度不足，改实底墨绿（金字 ≥4.5:1） */
-  box-shadow:inset 0 1px 3px #0006,0 1px #ddc48e20!important;
+  border:1px solid #8a7a5657!important;
+  border-radius:0;
+  background:#17191a!important; /* 09-25 半透明深绿叠纸白页头对比度不足，改实底墨绿（金字 ≥4.5:1） */
+  box-shadow:inset 0 1px 3px #0006,0 1px #e8d18320!important;
 }
 /* 09-25 导出工具键与馆藏铭牌同语言：实底墨绿+金字（原半透明浅底压在纸纹上发飘） */
 body.cardlib-open #overlay .photo-studio-v3 .library-tools>.studio-edit-toggle {
-  background:#17211c!important;
-  border-color:rgba(236,217,176,.4)!important;
-  color:#ecd9b0!important;
+  background:#17191a!important;
+  border-color:rgba(244,226,168,.4)!important;
+  color:#f4e2a8!important;
   box-shadow:0 2px 5px rgba(20,10,6,.3)!important;
 }
 body.cardlib-open #overlay .photo-studio-v3 .library-tools>.studio-edit-toggle:hover {
-  background:#24352b!important;
-  border-color:rgba(236,217,176,.7)!important;
-  color:#f4e6c2!important;
+  background:#24272a!important;
+  border-color:rgba(244,226,168,.7)!important;
+  color:#e0ddd6!important;
 }
 body.cardlib-open #overlay .studio-index-layout .clib-main::before { opacity:.32; }
 body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-filterbar {
@@ -89,8 +89,8 @@ body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-filterba
   border-image:url('../assets/ui/photo-studio/cabinet-trim-painted-v2.png') 230 stretch!important;
   padding:10px 14px 12px!important;
   outline:none;
-  background:linear-gradient(125deg,#e4ddcaed,#d7d0bfee),url('../assets/ui/photo-studio/paper-grain.png') center/256px,#dbd6c5!important;
-  box-shadow:inset 0 0 0 1px #b4a581,0 4px 0 #12170f,0 7px 16px #0005!important;
+  background:linear-gradient(125deg,#e9e1c5ed,#ddd5b9ee),url('../assets/ui/photo-studio/paper-grain.png') center/256px,#e1d9bf!important;
+  box-shadow:inset 0 0 0 1px #c1af74,0 4px 0 #121314,0 7px 16px #0005!important;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-filterbar::before,
 body.cardlib-open #overlay .studio-index-layout .studio-filterbar::after {
@@ -101,7 +101,7 @@ body.cardlib-open #overlay .studio-index-layout .studio-filterbar::after {
   width:12px;
   pointer-events:none;
   opacity:.9;
-  background:linear-gradient(#b49a68,#73623f) left top/12px 2px no-repeat,linear-gradient(#b49a68,#73623f) left bottom/12px 2px no-repeat,linear-gradient(#a3895a,#73623f) left top/2px 12px no-repeat,linear-gradient(#a3895a,#73623f) left bottom/2px 12px no-repeat;
+  background:linear-gradient(#c3aa59,#73633f) left top/12px 2px no-repeat,linear-gradient(#c3aa59,#73633f) left bottom/12px 2px no-repeat,linear-gradient(#b39b4a,#73633f) left top/2px 12px no-repeat,linear-gradient(#b39b4a,#73633f) left bottom/2px 12px no-repeat;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-filterbar::before { left:5px; }
 body.cardlib-open #overlay .studio-index-layout .studio-filterbar::after { right:5px; transform:scaleX(-1); }
@@ -109,53 +109,53 @@ body.cardlib-open #overlay .studio-index-layout .studio-index-heading>span:first
   border-left:0;
   padding:3px 12px;
   color:#51462e;
-  border:1px solid #a4926a;
-  background:linear-gradient(180deg,#eee3c7,#d8c9a7);
-  box-shadow:inset 0 0 0 2px #eaddbe,0 1px 2px #4f412c26;
+  border:1px solid #b39e5b;
+  background:linear-gradient(180deg,#dedcd7,#e1d19e);
+  box-shadow:inset 0 0 0 2px #f0e3b7,0 1px 2px #4f452c26;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-catalog .clib-tabs {
-  border-bottom:1px solid #ada18a;
-  box-shadow:0 1px #fff9e575;
+  border-bottom:1px solid #b9ab7e;
+  box-shadow:0 1px #f4f3f075;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab {
-  border-radius:2px 2px 0 0;
+  border-radius:0 0 0;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab.on {
-  box-shadow:inset 0 1px #e8d1a765,inset 0 -2px #bfa36a,0 2px 3px #4a4a312b!important;
+  box-shadow:inset 0 1px #f1de9e65,inset 0 -2px #ceb35b,0 2px 3px #4a42312b!important;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-field :is(.studio-search,.studio-select-shell) {
-  border-color:#a39476!important;
-  background:linear-gradient(180deg,#e4deca,#f2eddd)!important;
-  box-shadow:inset 0 2px 3px #51442d1f,0 1px #fff9e6!important;
+  border-color:#b1a068!important;
+  background:linear-gradient(180deg,#e9e1c5,#e9e8e6)!important;
+  box-shadow:inset 0 2px 3px #51462d1f,0 1px #f5f4f0!important;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-select-shell::after {
-  border-color:#776b4c;
-  filter:drop-shadow(0 1px #fff8df);
+  border-color:#776a4c;
+  filter:drop-shadow(0 1px #f2f1ec);
 }
 body.cardlib-open #overlay .studio-index-layout .library-inspector,
 body.cardlib-open #cardZoom.cz-photo .cz-photo-info {
   border:18px solid transparent;
   border-image:url('../assets/ui/photo-studio/cabinet-trim-painted-v2.png') 230 stretch;
   outline:none;
-  box-shadow:inset 0 0 0 2px #10190f,inset 0 0 0 3px #c7ad6e42,inset 0 8px 18px #0004,0 5px 0 #080e0a,0 14px 28px #0005;
+  box-shadow:inset 0 0 0 2px #131415,inset 0 0 0 3px #d6ba6042,inset 0 8px 18px #0004,0 5px 0 #090a0a,0 14px 28px #0005;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-inspector-head {
   margin-bottom:17px;
   padding-bottom:16px;
-  border-bottom:1px solid #a18a574d;
-  box-shadow:0 1px #050e0866;
+  border-bottom:1px solid #b198474d;
+  box-shadow:0 1px #08080966;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-inspector-head b {
   display:inline-block;
   padding:4px 14px;
-  border:1px solid #aa8f584f;
-  background:linear-gradient(180deg,#ad986524,#14271a24);
-  box-shadow:inset 0 0 0 2px #08100955;
+  border:1px solid #bba0474f;
+  background:linear-gradient(180deg,#bca45624,#1c1e1f24);
+  box-shadow:inset 0 0 0 2px #0b0c0d55;
 }
 body.cardlib-open #overlay .studio-index-layout .pv-meta {
   padding:12px 0;
-  border-top:1px solid #c4aa7038;
-  border-bottom:1px solid #c4aa7028;
+  border-top:1px solid #d2b86238;
+  border-bottom:1px solid #d2b86228;
   box-shadow:inset 0 1px #0005;
 }
 body.cardlib-open #overlay .studio-index-layout .pv-desc { padding-bottom:10px; }
@@ -163,8 +163,8 @@ body.cardlib-open #overlay .studio-index-layout :is(.pv-navbtn,.studio-zoom,.stu
   border:5px solid transparent!important;
   border-image:url('../assets/ui/photo-studio/cabinet-plaque.svg') 32 fill stretch!important;
   padding:7px 12px;
-  color:#f1e9d4!important;
-  box-shadow:0 2px 0 #070e09,0 4px 7px #0003!important;
+  color:#e5e4e0!important;
+  box-shadow:0 2px 0 #0a0a0b,0 4px 7px #0003!important;
   text-shadow:none!important;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-zoom {
@@ -173,7 +173,7 @@ body.cardlib-open #overlay .studio-index-layout .studio-zoom {
   letter-spacing:.06em;
 }
 body.cardlib-open #overlay .studio-index-layout :is(.pv-navbtn,.studio-zoom,.studio-load-more):hover:not(:disabled) {
-  outline:1px solid #d8c18b;
+  outline:1px solid #e4cc7f;
   outline-offset:1px;
 }
 body.cardlib-open #overlay .studio-index-layout :is(.pv-navbtn,.studio-zoom,.studio-load-more):active:not(:disabled) {
@@ -181,24 +181,24 @@ body.cardlib-open #overlay .studio-index-layout :is(.pv-navbtn,.studio-zoom,.stu
 }
 body.cardlib-open #overlay .studio-index-layout .pv-navbtn:disabled { opacity:.45; }
 /* 09-25 二波 C 组：选片台「查看大图与背签」描边去橄榄绿——cabinet-plaque 皮牌框的
-   墨绿皮底（#34463c 族）与选片台金系不搭；本钮单改金系描边（--gold-main #d9bb82 族）：
+   墨绿皮底（#323639 族）与选片台金系不搭；本钮单改金系描边（--gold-main #e6cb76 族）：
    金线 + 4px 金内衬 + 深咖底，翻页/加载钮仍保留皮牌框 */
 body.cardlib-open #overlay .studio-index-layout .studio-zoom {
-  border:1px solid rgba(217,187,130,.55)!important;
-  border-radius:2px!important;
-  background:linear-gradient(180deg,#3a3226,#241f18)!important;
-  box-shadow:inset 0 0 0 3px rgba(217,187,130,.14),inset 0 1px rgba(255,240,205,.12),0 2px 0 #070e09,0 4px 7px #0003!important;
+  border:1px solid rgba(230,203,118,.55)!important;
+  border-radius:0!important;
+  background:linear-gradient(180deg,#3a3426,#242018)!important;
+  box-shadow:inset 0 0 0 3px rgba(230,203,118,.14),inset 0 1px rgba(235,232,226,.12),0 2px 0 #0a0a0b,0 4px 7px #0003!important;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-zoom:hover:not(:disabled) {
-  border-color:#d9bb82!important;
-  background:linear-gradient(180deg,#463b2a,#2c2519)!important;
+  border-color:#e6cb76!important;
+  background:linear-gradient(180deg,#463e2a,#2c2619)!important;
 }
 /* Keep ink crisp: no texture or glow composited over glyphs. */
 body.cardlib-open #overlay .studio-index-layout .studio-photo-caption b { font-size:18px; text-shadow:none!important; }
-body.cardlib-open #overlay .studio-index-layout .studio-photo-caption span { font-size:13px; color:#514e40; }
+body.cardlib-open #overlay .studio-index-layout .studio-photo-caption span { font-size:13px; color:#514c40; }
 body.cardlib-open #overlay .studio-index-layout .studio-preview-paper .studio-photo-caption b { font-size:23px; }
-body.cardlib-open #overlay .studio-index-layout .studio-field-label { color:#414b39; }
-body.cardlib-open #overlay .studio-index-layout .pv-no { color:#c4c5b4; font-size:13px; }
+body.cardlib-open #overlay .studio-index-layout .studio-field-label { color:#414243; }
+body.cardlib-open #overlay .studio-index-layout .pv-no { color:#ccc5ac; font-size:13px; }
 body.cardlib-open #overlay .studio-index-layout .studio-photo-paper::after { display:none!important; }
 body.cardlib-open #overlay .studio-index-layout .studio-photo-art img { filter:none!important; }
 @media(max-width:760px) {
@@ -227,9 +227,9 @@ body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .library-head {
   gap:clamp(16px,2vw,30px)!important;
   padding:13px clamp(20px,3vw,42px)!important;
   border:0!important;
-  border-bottom:1px solid rgba(217,187,130,.42)!important;
-  background:linear-gradient(180deg,#172b35,#10202a 80%)!important;
-  box-shadow:inset 0 1px rgba(237,243,233,.06),0 3px 10px rgba(0,0,0,.24)!important;
+  border-bottom:1px solid rgba(230,203,118,.42)!important;
+  background:linear-gradient(180deg,#1f2124,#181a1b 80%)!important;
+  box-shadow:inset 0 1px rgba(237,238,239,.06),0 3px 10px rgba(0,0,0,.24)!important;
 }
 body.cardlib-open #overlay .studio-index-layout .lib-head-title {
   grid-area:title;
@@ -240,7 +240,7 @@ body.cardlib-open #overlay .studio-index-layout .lib-head-title {
 body.cardlib-open #overlay .studio-index-layout .lib-head-seal { display:none!important; }
 body.cardlib-open #overlay .studio-index-layout .lib-head-name { display:block; }
 body.cardlib-open #overlay .studio-index-layout .lib-head-name b {
-  color:#f2ead7!important;
+  color:#e7e5e2!important;
   font:600 clamp(25px,2.2vw,33px)/1.15 var(--serif)!important;
   letter-spacing:.08em;
   text-shadow:0 1px 2px rgba(0,0,0,.3);
@@ -253,19 +253,19 @@ body.cardlib-open #overlay .studio-index-layout .clib-count {
   margin:0!important;
   padding:4px 0 4px 20px!important;
   border:0!important;
-  border-left:1px solid rgba(217,187,130,.4)!important;
+  border-left:1px solid rgba(230,203,118,.4)!important;
   border-radius:0!important;
   background:none!important;
   box-shadow:none!important;
-  color:#d4d7ca!important;
+  color:#d0d0d1!important;
 }
 body.cardlib-open #overlay .studio-index-layout .clib-count small {
-  color:#c1cabb!important;
+  color:#c1c2c4!important;
   font:500 12px/1.3 var(--font-ui)!important;
   letter-spacing:.04em!important;
 }
 body.cardlib-open #overlay .studio-index-layout .clib-count b {
-  color:#e7d5a4!important;
+  color:#f0dc9b!important;
   font:600 29px/1 var(--font-ui)!important;
   font-variant-numeric:tabular-nums;
 }
@@ -273,20 +273,20 @@ body.cardlib-open #overlay .studio-index-layout .library-tools { grid-area:tools
 body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-filterbar {
   gap:10px;
   padding:12px clamp(16px,2vw,26px) 14px!important;
-  border:1px solid rgba(151,167,152,.72)!important;
+  border:1px solid rgba(158,159,160,.72)!important;
   border-image:none!important;
-  border-radius:3px;
+  border-radius:0;
   outline:none!important;
-  background:linear-gradient(180deg,rgba(249,246,229,.97),rgba(224,225,208,.98))!important;
-  box-shadow:inset 0 1px rgba(255,255,247,.75),0 3px 9px rgba(0,0,0,.2)!important;
-  color:#303e36;
+  background:linear-gradient(180deg,rgba(241,240,237,.97),rgba(230,224,203,.98))!important;
+  box-shadow:inset 0 1px rgba(251,251,251,.75),0 3px 9px rgba(0,0,0,.2)!important;
+  color:#2d3034;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-filterbar::before,
 body.cardlib-open #overlay .studio-index-layout .studio-filterbar::after { display:none!important; }
 body.cardlib-open #overlay .studio-index-layout .studio-index-heading {
   min-height:28px;
   gap:12px;
-  color:#46564c!important;
+  color:#404549!important;
   font:500 13px/1.4 var(--font-ui)!important;
   letter-spacing:0;
 }
@@ -295,24 +295,24 @@ body.cardlib-open #overlay .studio-index-layout .studio-index-heading>span:first
   border:0!important;
   background:none!important;
   box-shadow:none!important;
-  color:#243d37!important;
+  color:#282b2e!important;
   font:700 16px/1.3 var(--serif)!important;
   letter-spacing:.04em;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-index-heading .lib-show { color:#66756b!important; }
 body.cardlib-open #overlay .studio-index-layout .studio-index-heading .studio-clear {
-  color:#52664d!important;
-  border-left-color:rgba(75,96,78,.28)!important;
+  color:#585a5b!important;
+  border-left-color:rgba(84,86,87,.28)!important;
 }
-body.cardlib-open #overlay .studio-index-layout .studio-query .studio-field-label { color:#334c42!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-query .studio-field-label { color:#34383c!important; }
 body.cardlib-open #overlay .studio-index-layout .studio-field :is(.studio-search,.studio-select-shell) {
-  border-color:#a4ae9d!important;
-  background:linear-gradient(180deg,#fffdf4,#f0eedf)!important;
-  box-shadow:inset 0 1px 3px rgba(45,53,40,.1),0 1px rgba(255,255,255,.75)!important;
+  border-color:#a4a6a7!important;
+  background:linear-gradient(180deg,#f9fafa,#e7e8e8)!important;
+  box-shadow:inset 0 1px 3px rgba(46,47,47,.1),0 1px rgba(255,255,255,.75)!important;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-search:focus-within {
-  border-color:#52786d!important;
-  box-shadow:0 0 0 2px rgba(54,108,93,.16)!important;
+  border-color:#53595f!important;
+  box-shadow:0 0 0 2px rgba(66,71,76,.16)!important;
 }
 @media(max-width:760px) {
   body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .library-head {

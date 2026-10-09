@@ -131,6 +131,26 @@ describe('定版卡面刷新器（cards.sync.face-refresh.js）', () => {
     expect(h.library.saves).toBe(savesBefore + 1);
   });
 
+  it('cc-demon 老档 4′固化为 7′定版（dmg+desc 点名刷新），m2 rules 不动且幂等不落盘', () => {
+    const canonicalDemon = dataSlice.TABLETOP7.find(card => card?.id === 'cc-demon');
+    expect(canonicalDemon.dmg).toBe(7);   // 2026-10-06 老板拍板 4→7 法伤（真源 cards.data.js）
+    const m2Rules = { version: 1, battle: { target: { side: 'enemy', area: false } },
+      triggers: { onPlay: [
+        { op: 'damage', amountField: 'dmg', target: 'chosenEnemy' },
+        { op: 'heal', selfDamage: 2 },
+      ] } };
+    const h = harness([...fresh(), { ...canonicalDemon, dmg: 4, desc: '4′，损失 2 点生命。', rules: m2Rules }]);
+    const library = { ...h.library, TABLETOP7: [canonicalDemon] };   // 刷新器按注册表读 TABLETOP7 定版
+    ensureCanonicalFaceRefresh({ library });
+    const card = h.cards().find(item => item.id === 'cc-demon');
+    expect(card.dmg).toBe(7);
+    expect(card.desc).toBe('7′，损失 2 点生命。');
+    expect(card.rules).toEqual(m2Rules);
+    expect(library.saves).toBe(1);
+    ensureCanonicalFaceRefresh({ library });
+    expect(library.saves).toBe(1);   // 已定版幂等不落盘
+  });
+
   it('缺卡或缺定版表时安全退出不落盘；点名外字段不碰', () => {
     const withoutPetal = harness(fresh().filter(card => card.id !== 'tt3-petal'));
     ensureCanonicalFaceRefresh({ library: withoutPetal.library });

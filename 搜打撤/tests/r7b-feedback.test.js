@@ -31,15 +31,16 @@ describe('R7-b 本地反馈', () => {
   });
   afterEach(() => { listeners.forEach(([target, type, fn, opts]) => target.removeEventListener(type, fn, opts)); docAdd.mockRestore(); winAdd.mockRestore(); });
 
-  it('真实控制器DOM右键保存四字段，双击只写一次', async () => {
-    setup();
+  it('真实控制器DOM右键保存四字段，双击只写一次，成功后自动退出', async () => {
+    const { game } = setup();
     document.getElementById('title').dispatchEvent(new MouseEvent('contextmenu', { bubbles: true, clientX: 10, clientY: 20 }));
     Object.assign(document.getElementById('sugText'), { value: '<b>正文</b>' });
     document.getElementById('sugSteps').value = '步骤'; document.getElementById('sugExpected').value = '期望'; document.getElementById('sugActual').value = '实际';
     const save = document.getElementById('sugSaveBtn'); save.onclick(); save.onclick(); await Promise.resolve();
     const list = JSON.parse(localStorage.getItem('sdt-suggestions-v1'));
     expect(list).toHaveLength(1); expect(list[0]).toMatchObject({ text: '<b>正文</b>', steps: '步骤', expected: '期望', actual: '实际', version: 'v9.1' });
-    expect(document.getElementById('sugWhere').textContent).toContain('本浏览器');
+    expect(document.getElementById('sugLayer').hidden).toBe(true);   // 保存成功自动退出留言界面
+    expect(game.state).toBe('title');   // 已回之前的页面（标题页），无需手动点返回
   });
 
   it('标题→设置→留言库→设置→标题后按可见DOM记录标题页', async () => {
@@ -161,5 +162,61 @@ describe('R7-b 本地反馈', () => {
     fail = false; acts.sugExport({ idx: '0' }); expect(document.querySelector('[data-act="sugExport"]').textContent).toBe('已导出');
     const text = await new Promise(resolve => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.readAsText(exported); });
     expect(text).toContain('准确正文'); expect(localStorage.getItem('sdt-suggestions-v1')).toBe(raw);
+  });
+
+  it('全部导出一次下载，保留旧留言、重复时间及完成状态，不泄露额外字段或修改存储', async () => {
+    const raw = JSON.stringify([
+      { ts: 'same', text: '旧留言', target: { name: '标题', selector: '#private' }, secret: '不导出' },
+      { ts: 'same', text: '待处理', version: 'v9', steps: '步骤', expected: '期望', actual: '实际' },
+      { ts: 'done', text: '已处理', done: true, page: { id: 'base', name: '基地', url: 'private-url' } },
+    ]);
+    localStorage.setItem('sdt-suggestions-v1', raw);
+    const { controller, acts } = setup();
+    URL.createObjectURL = vi.fn(() => 'blob:all'); URL.revokeObjectURL = vi.fn();
+    const click = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => {});
+    controller.openSuggestionInbox();
+    const btn = document.querySelector('[data-act="sugExportAll"]');
+    expect(btn.disabled).toBe(true);
+    await Promise.resolve(); expect(btn.disabled).toBe(false);
+    acts.sugExportAll();
+    expect(URL.createObjectURL).toHaveBeenCalledOnce(); expect(click).toHaveBeenCalledOnce();
+    expect(click.mock.instances[0].download).toMatch(/^sdt-feedback-all-[0-9A-Za-z_-]+\.json$/);
+    const blob = URL.createObjectURL.mock.calls[0][0];
+    const json = await new Promise(resolve => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.readAsText(blob); });
+    const exported = JSON.parse(json);
+    expect(exported).toMatchObject({ formatVersion: 1, total: 3, records: [
+      { ts: 'same', text: '旧留言', gameVersion: '未知', done: false },
+      { ts: 'same', text: '待处理', steps: '步骤', expected: '期望', actual: '实际', done: false },
+      { text: '已处理', page: { id: 'base', name: '基地' }, done: true },
+    ] });
+    expect(exported.records).toHaveLength(3);
+    expect(Number.isFinite(Date.parse(exported.exportedAt))).toBe(true);
+    expect(json).not.toMatch(/不导出|private|selector|secret/);
+    expect(btn.textContent).toBe('已导出 3 条'); expect(localStorage.getItem('sdt-suggestions-v1')).toBe(raw);
+    await new Promise(resolve => setTimeout(resolve, 0)); expect(URL.revokeObjectURL).toHaveBeenCalledWith('blob:all');
+    click.mockRestore();
+  });
+
+  it.each(['[]', '{bad'])('空或损坏的留言库不能全部导出，保留原存储：%s', async raw => {
+    localStorage.setItem('sdt-suggestions-v1', raw);
+    const { controller, acts } = setup(); URL.createObjectURL = vi.fn();
+    controller.openSuggestionInbox(); await Promise.resolve();
+    expect(document.querySelector('[data-act="sugExportAll"]').disabled).toBe(true);
+    acts.sugExportAll(); expect(URL.createObjectURL).not.toHaveBeenCalled();
+    expect(localStorage.getItem('sdt-suggestions-v1')).toBe(raw);
+  });
+
+  it('全部导出失败后可重试，仍一次下载完整列表且不写存储', async () => {
+    const raw = JSON.stringify([{ ts: 'a', text: '一' }, { ts: 'b', text: '二', done: true }]);
+    localStorage.setItem('sdt-suggestions-v1', raw);
+    const { controller, acts } = setup(); controller.openSuggestionInbox(); await Promise.resolve();
+    URL.createObjectURL = vi.fn(() => 'blob:retry'); URL.revokeObjectURL = vi.fn();
+    const click = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementationOnce(() => { throw new Error('blocked'); }).mockImplementation(() => {});
+    const btn = document.querySelector('[data-act="sugExportAll"]');
+    acts.sugExportAll(); expect(btn.textContent).toContain('失败'); expect(btn.disabled).toBe(false);
+    acts.sugExportAll(); expect(btn.textContent).toBe('已导出 2 条');
+    expect(click).toHaveBeenCalledTimes(2); expect(localStorage.getItem('sdt-suggestions-v1')).toBe(raw);
+    await new Promise(resolve => setTimeout(resolve, 0)); expect(URL.revokeObjectURL).toHaveBeenCalledTimes(2);
+    click.mockRestore();
   });
 });

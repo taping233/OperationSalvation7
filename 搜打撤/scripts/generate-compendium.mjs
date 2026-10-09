@@ -6,6 +6,8 @@
  * 生成入口：tests/compendium.test.js（vitest 的 jsdom 环境才能加载 cards.js 的 JSON 数据链），
  * 也可 `npm run docs:compendium`。文档即快照，重跑即同步；手改会被下一次生成覆盖。
  */
+import { RULE_CONFIG } from '../game/src/core/rule-config.js';
+
 export function buildCompendium({ Cards, syncData, achievements, pets, scenes, mapData, generatedAt }) {
   const all = Cards.all();
   const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\|/g, '\\|');
@@ -36,8 +38,8 @@ export function buildCompendium({ Cards, syncData, achievements, pets, scenes, m
   return `# 搜打撤 · 代号7 游戏全书（自动生成）
 
 > 本文档由 \`scripts/generate-compendium.mjs\` 直接读取游戏运行时数据源生成（生成日期 ${generatedAt}），
-> 卡牌表、敌人表、成就、宠物均与代码一一对应；重跑 \`npm run docs:compendium\` 即重新同步。
-> 请勿手改本文件——机制疑义以 \`game/src/\` 源码为准，本文给出每章的数据出处。
+> 卡牌表来自装配后的卡库，成就、宠物与场景计数来自传入数据；机制章节提供现行来源导航。
+> 本文是生成时点的快照；通过 \`npm run docs:compendium\` 更新，详细行为在 \`docs/rules.md\` 维护，生成文件勿手改。
 >
 > 覆盖批次：cards-sync v${syncData.version}（退役 ${syncData.retire.length} 张）；全书卡牌共 **${total} 张**。
 ${ch('1', '游戏概览')}
@@ -45,12 +47,12 @@ ${ch('1', '游戏概览')}
 - 一局流程：基地出发整备 → 空降外圈 → 逐层深入（4 层定版地图）→ 第 4 层祭坛 → 首脑战 → 撤离整理入库。
 - 局外成长：人物熟练度、仓库、收藏图鉴、宠物、成就（\`game/src/hub/meta.js\`、\`base.js\`）。
 ${ch('2', '对局规则与常量')}
-- 玩家规则文档：\`docs/rules.md\`；数值常量真源：\`game/src/core/rules.js\`（能量、手牌上限、初始攻击数量、抽牌节奏、骰子面数）。
-- 地图定版：\`game/src/run/map-generator.js\`（layoutVersion 配额：每层战斗/宝箱/事件/物资格上下限、火堆与补给站恒 1；第 4 层固定「祭坛 → 首脑 → 终局撤离点」纵深，撤离点须击败首脑解锁）。
-- 地图静态表：\`game/data/map.json\`（棋盘 ${esc(mapData.boardName || mapData.boardId || '')} · ${mapData.cols || '?'}×${mapData.rows || '?'} 格）。
+- 玩家规则文档：\`docs/rules.md\`；基础数值源为 \`game/src/core/rule-config.js\`，\`game/src/core/rules.js\` 提供兼容门面。
+- 基础战斗规则：每回合 ${RULE_CONFIG.battle.energy} 能量，手牌上限 ${RULE_CONFIG.battle.handMax}；首脑战初始抽 ${RULE_CONFIG.battle.startDraw} 张、每回合抽 ${RULE_CONFIG.battle.turnDraw} 张，编组 ${RULE_CONFIG.battle.bossDeckSize} 张并加入 ${RULE_CONFIG.battle.starterAttack} 张初始攻击。具体效果与例外查玩家规则。
+- 地图拓扑由 \`game/src/run/map-generator.js\` 按种子生成，恢复使用已校验快照；\`game/data/map.json\` 提供内容配置（${Object.keys(mapData?.monsters || {}).length} 个敌人模板），旧棋盘元数据不描述当前地图几何。
 ${ch('3', '战斗系统')}
-- 流程实现：\`game/src/battle/core/battle.core.js\`（状态机 + 动作队列，异步演出在动作内等待）、\`battle.rules.js\`（打出校验）、\`battle.deck.js\`（牌库/墓地，仅 BOSS 战有牌库）。
-- 伤害口径：\`game/src/battle/combat.js\`（攻击 = 角色攻击 + 卡面修正；法术受法伤加成；固定伤害无视强化；护甲/格挡/护盾减免）。
+- 流程入口：\`game/src/battle/core/battle.core.js\` 提供命令与快照；\`game/src/battle/effects/battle.target-rules.js\` 提供目标及打出限制，\`game/src/battle/bag/battle.deck.js\` 管理牌堆。
+- 伤害与防御计算：\`game/src/battle/core/combat.js\`；详细伤害类型、诅咒、祝福与例外见 \`docs/rules.md\`。
 - 诅咒与祝福：\`combat.js\` CURSES/BUFFS（中毒、流血、灼烧、冰冻、沉默、破甲、禁疗等；灼烧同为诅咒口径）。
 - 注能：卡面「注能」角标主动进入（消耗 N 张手牌强化打出；镭射等可不注能直接打出）；「被注能时」句随注能结算。
 - 指向卡：拖拽 / 点击点选目标；群体卡自动全体；背包砸击为手牌左侧按钮（2 费 · 4 点固定伤害）。
@@ -70,7 +72,8 @@ ${ch('6', '局外系统索引')}
 | 对局地图 | \`game/src/run/game.run.flow.js\`、\`map-generator.js\`、\`expedition.view.js\` | 节点行军、物资格/宝箱/事件/商店/火堆/祭坛/撤离点 |
 | 商店（局内） | \`game/src/run/game.run.shop.js\` | 战术补给站、收购台、神秘货箱（问号卡面、面板内不重复刷新、买后亮卡） |
 | 祭坛 | \`game/src/run/game.run.altar.js\` | 碎片兑换能力卡、献祭、复原、撤离整理（全部入库 / 智能整理） |
-| 首脑战 | \`game/src/battle/core/battle.core.js\`、\`game.nest.js\` | 开战装备勾选制、首脑死亡立即结束、保险柜、战后整理（全部带走 / 智能选择） |
+| 四层首脑战 | \`game/src/battle/core/battle.core.js\`、\`game/src/battle/core/battle.lifecycle.js\` | 编组、战斗、首脑奖励与战后整理；完成状态查对应任务证据 |
+| 研究所兼容玩法 | \`game/src/run/game.nest.js\` | 既有兼容实现；开发与验收范围见制作章程 |
 | 存档 | \`game/src/hub/game.storage.js\` | 五档位、战斗快照随对局存档、旧档卡库刷新与 retire 清理 |
 ${ch('7', '事件与场景')}
 - 场景数据真源：\`game/data/scenes.json\`（${sceneList.length} 个场景定义）；事件叙事真源 \`narrative/\`（编译脚本 \`scripts/compile-narrative.mjs\`）。

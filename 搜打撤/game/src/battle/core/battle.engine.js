@@ -485,16 +485,18 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   function registerBattle(card, clause, target) {
     G.log(`[[icon:question]] <b>本局对战内</b>：${esc(clause)}（整场战斗有效，离开战斗失效）`, 'ok');
     const inner = clause.replace(/^(本局对战内|本场对战|本场战斗)[中内]?[：:，,]?\s*/, '');
-    // 银河之旅（迭代评审 09-20 终裁）：desc 已定稿「你的所有武术均为 1 费」——
-    // 触发正则补「武术」分支；实装只降武术（:530），「所有卡牌」是宇宙形态的口径，不得混同
-    if (/所有(?:法术|招式|武术)[^。]*?1\s*费/.test(inner)) {
-      if (/所有招式|所有武术/.test(inner)) {
-        set$meleeCost1(true);
-        G.log('[[icon:sparkles]] 持续规则：你的所有武术均按 <b>1</b> 费打出', 'ok');
-      } else {
-        set$spellCost1(true);
-        G.log('[[icon:sparkles]] 持续规则：你的所有法术均按 <b>1</b> 费打出', 'ok');
-      }
+    // 银河之旅（2026-10-06 老板拍板改版）：desc 定稿「你的所有招式均为 1 费」——招式=武术+法术
+    // （terminology 定版口径），双旗标同落；「所有卡牌」是宇宙形态的口径，不得混同
+    if (/所有招式[^。]*?1\s*费/.test(inner)) {
+      set$meleeCost1(true);
+      set$spellCost1(true);
+      G.log('[[icon:sparkles]] 持续规则：你的所有招式（武术与法术）均按 <b>1</b> 费打出', 'ok');
+    } else if (/所有武术[^。]*?1\s*费/.test(inner)) {
+      set$meleeCost1(true);
+      G.log('[[icon:sparkles]] 持续规则：你的所有武术均按 <b>1</b> 费打出', 'ok');
+    } else if (/所有法术[^。]*?1\s*费/.test(inner)) {
+      set$spellCost1(true);
+      G.log('[[icon:sparkles]] 持续规则：你的所有法术均按 <b>1</b> 费打出', 'ok');
     }
     return applyTextEffects(card, inner, target).did;
   }

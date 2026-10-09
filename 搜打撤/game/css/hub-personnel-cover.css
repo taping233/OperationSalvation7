@@ -4,41 +4,41 @@
 #overlay .card.page #hubMain.pg.hub.hub-cover .person-tabs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; flex: none; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .person-tab {
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  min-height: 65px; padding: 14px 19px; background: #233743; color: #f7f3e8;
+  min-height: 65px; padding: 14px 19px; background: #2a2d30; color: #f1f0ee;
   border: 0; border-radius: 0; clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
-  box-shadow: 3px 3px 0 #9eaca680; cursor: pointer;
+  box-shadow: 3px 3px 0 #a3a5a780; cursor: pointer;
 }
 #overlay .card.page #hubMain.pg.hub.hub-cover .person-tab b { color: inherit; font: 700 18px/1.4 var(--font-ui); white-space: nowrap; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .person-tab span { color: inherit; font: 500 12px/1.5 var(--font-ui); white-space: nowrap; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .person-tab.on { background: #ceb37a; color: #1b3442; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .person-tab.on { background: #dbc16d; color: #26292c; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .person-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(340px, .9fr); gap: 22px; flex: 1; min-height: 0; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .person-portrait {
   position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden;
-  min-height: 0; background: linear-gradient(145deg, #dde7e0, #f0f3eb);
-  border: 1px solid #9fafb180; border-left: 4px solid var(--person-accent); box-shadow: 4px 4px 0 #263d4921;
+  min-height: 0; background: linear-gradient(145deg, #e1e2e3, #eeeff0);
+  border: 1px solid #a6a8aa80; border-left: 4px solid var(--person-accent); box-shadow: 4px 4px 0 #2d313421;
 }
 #overlay .card.page #hubMain.pg.hub.hub-cover .person-portrait::before {
   content: ''; position: absolute; inset: 7% 11%; pointer-events: none;
-  border: 1px solid #7d979726; transform: skewX(-7deg);
+  border: 1px solid #878b8d26; transform: skewX(-7deg);
 }
 #overlay .card.page #hubMain.pg.hub.hub-cover .person-portrait img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; mix-blend-mode: multiply; filter: none; animation: hubPortraitFade .18s ease-out both; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .person-details { padding: 28px 30px; min-width: 0; min-height: 0; overflow: auto; background: #f7f7ef; border: 1px solid #a9b9b173; box-shadow: 4px 4px 0 #263d491c; scrollbar-color: #8ea09e #e1e6df; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .person-details { padding: 28px 30px; min-width: 0; min-height: 0; overflow: auto; background: #f3f3f3; border: 1px solid #afb1b373; box-shadow: 4px 4px 0 #2d31341c; scrollbar-color: #959799 #e2e2e3; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .person-heading { display: flex; align-items: center; gap: 18px; margin-bottom: 24px; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .person-heading span { padding: 7px 11px; background: #e0e8de; color: #526f78; border-left: 3px solid var(--person-accent); font: 600 14px/1.4 var(--font-ui); }
-#overlay .card.page #hubMain.pg.hub.hub-cover .person-heading h3 { margin: 0; color: #1b3442; font: 750 44px/1.2 var(--font-ui); letter-spacing: .05em; text-shadow: none; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .person-heading span { padding: 7px 11px; background: #e2e3e4; color: #53595f; border-left: 3px solid var(--person-accent); font: 600 14px/1.4 var(--font-ui); }
+#overlay .card.page #hubMain.pg.hub.hub-cover .person-heading h3 { margin: 0; color: #26292c; font: 750 44px/1.2 var(--font-ui); letter-spacing: .05em; text-shadow: none; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .person-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 24px; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .person-stats > div { padding: 16px; background: #e3eae0; border: 1px solid #aabcb373; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .person-stats small { display: block; margin-bottom: 8px; color: #536a73; font-size: 13px; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .person-stats b { color: #284b59; font: 600 30px/1.2 Consolas, monospace; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .person-stats em { font: 500 13px/1.4 var(--font-ui); color: #536a73; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .person-details h4 { margin: 0 0 12px; color: #1b3442; font: 700 17px/1.4 var(--font-ui); letter-spacing: .04em; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .person-perk { padding-bottom: 22px; border-bottom: 1px solid #aabcb373; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .person-perk p { margin: 0; color: #42685a; font: 600 18px/1.6 var(--font-ui); }
-#overlay .card.page #hubMain.pg.hub.hub-cover .person-progress { padding: 22px 0; border-bottom: 1px solid #aabcb373; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .person-progress-track { height: 5px; background: #c9d5cb; margin: 15px 0 10px; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .person-progress-track i { display: block; height: 100%; background: #a78c52; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .person-progress p { margin: 0 0 8px; color: #284b59; font: 600 14px/1.5 Consolas, monospace; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .person-progress small { color: #536a73; font: 400 13px/1.7 var(--font-ui); }
+#overlay .card.page #hubMain.pg.hub.hub-cover .person-stats > div { padding: 16px; background: #e4e5e6; border: 1px solid #b1b3b573; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .person-stats small { display: block; margin-bottom: 8px; color: #51575d; font-size: 13px; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .person-stats b { color: #35393d; font: 600 30px/1.2 Consolas, monospace; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .person-stats em { font: 500 13px/1.4 var(--font-ui); color: #51575d; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .person-details h4 { margin: 0 0 12px; color: #26292c; font: 700 17px/1.4 var(--font-ui); letter-spacing: .04em; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .person-perk { padding-bottom: 22px; border-bottom: 1px solid #b1b3b573; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .person-perk p { margin: 0; color: #464b50; font: 600 18px/1.6 var(--font-ui); }
+#overlay .card.page #hubMain.pg.hub.hub-cover .person-progress { padding: 22px 0; border-bottom: 1px solid #b1b3b573; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .person-progress-track { height: 5px; background: #cecfd0; margin: 15px 0 10px; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .person-progress-track i { display: block; height: 100%; background: #b89c41; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .person-progress p { margin: 0 0 8px; color: #35393d; font: 600 14px/1.5 Consolas, monospace; }
+#overlay .card.page #hubMain.pg.hub.hub-cover .person-progress small { color: #51575d; font: 400 13px/1.7 var(--font-ui); }
 #overlay .card.page #hubMain.pg.hub.hub-cover .person-appearance { padding-top: 22px; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .person-skins { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .person-skins .mini-btn { min-width: 0; padding: 11px 14px; min-height: 43px; }

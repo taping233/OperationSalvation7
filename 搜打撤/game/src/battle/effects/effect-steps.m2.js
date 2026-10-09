@@ -130,7 +130,8 @@ export function resolveExtraTurn(card, _operation, deps) {
   return true;
 }
 
-/** registerRule：持续规则旗标。M2 扩 bleedAmp / meleeCost1 / spellCost1（既有三键文本路径承载）。 */
+/** registerRule：持续规则旗标。M2 扩 bleedAmp / meleeCost1 / spellCost1（既有三键文本路径承载）；
+ * moveCost1 所有招式（=武术+法术）1 费（2026-10-06 银河之旅改版）。 */
 export function resolveRegisterRule(card, operation, deps) {
   const rule = operation.rule;
   if (rule === 'consumeFireball') {
@@ -166,6 +167,13 @@ export function resolveRegisterRule(card, operation, deps) {
   if (rule === 'bleedAmp') {
     deps.setBleedAmp(true);
     deps.log(`[[icon:blood]] <b>${deps.esc(card.name)}</b>：持续规则——触发的流血伤害翻倍`, 'ok');
+    return true;
+  }
+  if (rule === 'moveCost1') {
+    // 招式=武术+法术（terminology 定版口径）：机械层复用双旗标，battle.card-cost 费用结算零改动
+    deps.setMeleeCost1(true);
+    deps.setSpellCost1(true);
+    deps.log(`[[icon:sparkles]] 持续规则：你的所有招式（武术与法术）均按 <b>1</b> 费打出`, 'ok');
     return true;
   }
   if (rule === 'meleeCost1') {

@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════
    远征地图 HUD 美术升级（2026-09-24）——对标 page-slot-select / page-hub /
    page-deploy 定稿语言：① 冷青统一调色+半透明底（不遮地图视线）
-   ② #d9bb82 暖金装饰（金短线/发丝线/档案编号语言）③ 信息排版仪式感
+   ② #e6cb76 暖金装饰（金短线/发丝线/档案编号语言）③ 信息排版仪式感
    （数值暖米金表格数字、面板金短线标题）④ 交互三档节奏 + 按压快按慢弹 +
    :focus-visible 金线焦点环 ⑤ 光标自查
    作用域：仅对局 DOM HUD——#sidebar（底部面板栏）/ #topBtns / #resHud /
@@ -22,78 +22,78 @@
 
 /* W1a 底栏：实色蓝灰 → 冷青半透明（地图视线透底），顶缘分隔提为暖金族 */
 #sidebar {
-  background: linear-gradient(105deg, rgba(9, 22, 32, .93), rgba(17, 34, 46, .9));
-  border-top-color: rgba(217, 187, 130, .26);
-  box-shadow: 0 -10px 30px rgba(3, 10, 17, .5), inset 0 1px 0 rgba(214, 232, 235, .05);
+  background: linear-gradient(105deg, rgba(17,18,19,.93), rgba(26,28,30,.9));
+  border-top-color: rgba(230,203,118,.26);
+  box-shadow: 0 -10px 30px rgba(8,9,9,.5), inset 0 1px 0 rgba(223,224,226,.05);
 }
 /* W1a-2 顶缘金发丝线：两端渐隐、中心提亮（档案"封条"，静态不呼吸） */
 #sidebar::before {
   content: ''; position: absolute; left: 26px; right: 26px; top: -1px; height: 1px;
   pointer-events: none;
-  background: linear-gradient(90deg, transparent, #d9bb82a1 22%, #d9bb82c4 50%, #d9bb82a1 78%, transparent);
+  background: linear-gradient(90deg, transparent, #e6cb76a1 22%, #e6cb76c4 50%, #e6cb76a1 78%, transparent);
   opacity: .66;
 }
 
-/* W1b 面板竖向分隔发丝线：冷青弱化（原 #425d6880 蓝灰） */
-#sidebar .panel { border-right-color: rgba(159, 183, 188, .14); }
+/* W1b 面板竖向分隔发丝线：冷青弱化（原 #464b5080 蓝灰） */
+#sidebar .panel { border-right-color: rgba(170,174,177,.14); }
 
 /* W1c 头像卡：冷青描边 + 底部内阴影落定 + 脚底金线（档案章的"镇纸"） */
 #sidebar .hero-ava {
-  border-color: rgba(196, 219, 223, .55);
-  box-shadow: 0 6px 18px rgba(3, 10, 17, .55), inset 0 -22px 30px rgba(6, 16, 24, .35);
+  border-color: rgba(208,210,211,.55);
+  box-shadow: 0 6px 18px rgba(8,9,9,.55), inset 0 -22px 30px rgba(12,13,14,.35);
 }
 #sidebar .hero-ava::after {
   content: ''; position: absolute; left: 12%; right: 12%; bottom: 5px; height: 1px; z-index: 2;
   pointer-events: none;
-  background: linear-gradient(90deg, transparent, #d9bb82cc, transparent);
-  box-shadow: 0 0 5px #d9bb8245;
+  background: linear-gradient(90deg, transparent, #e6cb76cc, transparent);
+  box-shadow: 0 0 5px #e6cb7645;
 }
-/* W1c-2 头像空档态（09-25 P1）：winter.css:938 的浅灰实心底（#9b9b9b→#666 + #c2c2c2 边）
+/* W1c-2 头像空档态（09-25 P1）：winter.css:938 的浅灰实心底（#9b9b9b→#666666 + #c2c2c2 边）
    在未选职业时露出成刺眼灰块，占位字（医/旅）不可见——按行规不碰 winter，在此以
    更高特异性（+ #charPanel 一级）覆盖为深蓝底 + 冷青弱边 + 暖金占位字；
    选中职业后立绘 img 盖满底，不受影响 */
 #sidebar #charPanel .hero-ava {
-  background: radial-gradient(ellipse at 50% 30%, #17323f, #0a1a24 88%);
-  border-color: rgba(159, 183, 188, .25);
-  color: #d9bb82;
+  background: radial-gradient(ellipse at 50% 30%, #232628, #131416 88%);
+  border-color: rgba(170,174,177,.25);
+  color: #e6cb76;
 }
 
 /* ═════════ W2 简图面板：数值排版仪式感（标签小而灰青、数值暖米金表格数字） ═════════ */
 
-#sidebar #statsPanel { border-right-color: rgba(159, 183, 188, .14); }
+#sidebar #statsPanel { border-right-color: rgba(170,174,177,.14); }
 #sidebar .stat-duo { gap: 8px; }
-#sidebar .stat-duo label { font-size: 10px; letter-spacing: .22em; color: #86a0a6; }
+#sidebar .stat-duo label { font-size: 10px; letter-spacing: .22em; color: #92979a; }
 #sidebar .stat-duo b {
-  color: #f2f6f5; font-variant-numeric: tabular-nums; letter-spacing: .03em;
-  text-shadow: 0 0 8px rgba(217, 187, 130, .14);
+  color: #f4f4f4; font-variant-numeric: tabular-nums; letter-spacing: .03em;
+  text-shadow: 0 0 8px rgba(230,203,118,.14);
 }
-#sidebar .stat-duo .gold { color: #ecd9ad; }
-#sidebar .stat-duo .duo-sep { color: #6d8690; }
+#sidebar .stat-duo .gold { color: #f4e2a5; }
+#sidebar .stat-duo .duo-sep { color: #7a7f83; }
 
 /* ═════════ W3 路线面板：金短线标题 + 发丝分隔线 + 路线卡交互（核心操作区） ═════════ */
 
 /* W3a 「下一步」标题：前置金短线 + 暖米金（对标页头 hub-slot-label / 卡标题语言） */
 #sidebar .route-title {
   display: inline-flex; align-items: center; gap: 8px;
-  color: #ecd9ad; font-size: 12.5px; letter-spacing: .24em;
-  text-shadow: 0 0 10px rgba(217, 187, 130, .18);
+  color: #f4e2a5; font-size: 12.5px; letter-spacing: .24em;
+  text-shadow: 0 0 10px rgba(230,203,118,.18);
 }
 #sidebar .route-title::before {
   content: ''; display: block; width: 16px; height: 1px;
-  background: linear-gradient(90deg, transparent, #d9bb82b3);
-  box-shadow: 0 0 4px #d9bb8255;
+  background: linear-gradient(90deg, transparent, #e6cb76b3);
+  box-shadow: 0 0 4px #e6cb7655;
 }
 /* W3a-2 标题行下发丝线 / 提示行上发丝线：面板内的"档案表格"骨架 */
-#sidebar .route-heading { padding-bottom: 7px; border-bottom: 1px solid rgba(159, 183, 188, .13); }
-#sidebar .route-help { padding-top: 7px; border-top: 1px solid rgba(159, 183, 188, .11); }
-#sidebar .route-help { color: #93a9ad; }
-#sidebar .route-help span { color: #93a9ad; letter-spacing: .08em; } /* 09-25 P3：#7e969c 对比临界，提到 route-help 同级 */
-#sidebar .route-objective { color: #93a9ad; letter-spacing: .05em; }
+#sidebar .route-heading { padding-bottom: 7px; border-bottom: 1px solid rgba(170,174,177,.13); }
+#sidebar .route-help { padding-top: 7px; border-top: 1px solid rgba(170,174,177,.11); }
+#sidebar .route-help { color: #9da1a3; }
+#sidebar .route-help span { color: #9da1a3; letter-spacing: .08em; } /* 09-25 P3：#898e91 对比临界，提到 route-help 同级 */
+#sidebar .route-objective { color: #9da1a3; letter-spacing: .05em; }
 
 /* W3b 路线卡：冷青半透明档案卡 + hover 金线上浮 + 按压快按慢弹 */
 #sidebar .route-option {
-  background: linear-gradient(180deg, rgba(24, 44, 58, .88), rgba(15, 31, 43, .92));
-  border-color: rgba(159, 183, 188, .26);
+  background: linear-gradient(180deg, rgba(34,36,39,.88), rgba(24,26,27,.92));
+  border-color: rgba(170,174,177,.26);
   transition: transform var(--exh-lift), border-color var(--exh-fast),
     background var(--exh-fast), box-shadow var(--exh-fast);
 }
@@ -101,15 +101,15 @@
 #sidebar .route-option::after {
   content: ''; position: absolute; top: 0; left: 12%; right: 12%; height: 1px;
   pointer-events: none;
-  background: linear-gradient(90deg, transparent, #d9bb82b8, transparent);
+  background: linear-gradient(90deg, transparent, #e6cb76b8, transparent);
   opacity: 0;
   transition: opacity var(--exh-fast);
 }
 #sidebar .route-option:hover:not(:disabled) {
   transform: translateY(-2px);
-  border-color: rgba(217, 187, 130, .58);
-  background: linear-gradient(180deg, rgba(34, 60, 76, .95), rgba(20, 40, 54, .95));
-  box-shadow: 0 6px 14px rgba(2, 8, 14, .38), 0 0 10px rgba(217, 187, 130, .1);
+  border-color: rgba(230,203,118,.58);
+  background: linear-gradient(180deg, rgba(45,48,52,.95), rgba(30,33,35,.95));
+  box-shadow: 0 6px 14px rgba(7,7,8,.38), 0 0 10px rgba(230,203,118,.1);
 }
 #sidebar .route-option:hover:not(:disabled)::after { opacity: .8; }
 #sidebar .route-option:active:not(:disabled) {
@@ -119,21 +119,21 @@
 }
 /* 选中态：金边 + 左缘金条压过 tone 强调色（expedition.css 原有 hover/selected 底色同步提冷） */
 #sidebar .route-option.selected {
-  border-color: #d9bb82;
-  background: linear-gradient(180deg, rgba(43, 64, 78, .95), rgba(25, 45, 59, .95));
-  box-shadow: 0 0 12px rgba(217, 187, 130, .12);
+  border-color: #e6cb76;
+  background: linear-gradient(180deg, rgba(50,53,57,.95), rgba(34,37,40,.95));
+  box-shadow: 0 0 12px rgba(230,203,118,.12);
 }
 #sidebar .route-option:disabled { opacity: .45; }
 
 /* W3c 路线卡文字层级：主名提亮 / 副注灰青 / 箭头 hover 斜移 + 暖金 */
-#sidebar .route-copy b { color: #eef4f2; letter-spacing: .04em; }
-#sidebar .route-copy small { color: #9fb4bd; }
+#sidebar .route-copy b { color: #f1f1f1; letter-spacing: .04em; }
+#sidebar .route-copy small { color: #aaafb2; }
 #sidebar .route-arrow {
   transition: transform var(--exh-fast), color var(--exh-fast);
 }
 #sidebar .route-option:hover:not(:disabled) .route-arrow {
   transform: translate(2px, -2px);
-  color: #ecd9ad;
+  color: #f4e2a5;
 }
 
 /* ═════════ W4 左上操作键组 #topBtns（含右下定位键）：幽灵键三态 + 金线焦点 ═════════ */
@@ -147,10 +147,10 @@
 #topBtns #btnHome:hover,
 #topBtns #btnHelp:hover,
 #topBtns #btnMute:hover {
-  color: #f2f6f5 !important;
-  border-color: rgba(217, 187, 130, .62) !important;
-  background: rgba(12, 28, 40, .66) !important;
-  box-shadow: 0 0 10px rgba(217, 187, 130, .16) !important;
+  color: #f4f4f4 !important;
+  border-color: rgba(230,203,118,.62) !important;
+  background: rgba(21,23,24,.66) !important;
+  box-shadow: 0 0 10px rgba(230,203,118,.16) !important;
   transform: translateY(-1px);
 }
 #topBtns button:active:not(:disabled) {
@@ -159,40 +159,40 @@
 }
 /* 右下镜头定位键（expedition-map.css 底态非 important，直接覆盖） */
 #topBtns #btnLocate {
-  background: rgba(9, 22, 32, .88);
-  border-color: rgba(159, 183, 188, .3);
-  color: #c3d3d8;
+  background: rgba(17,18,19,.88);
+  border-color: rgba(170,174,177,.3);
+  color: #cccecf;
   transition: color var(--exh-fast), border-color var(--exh-fast), background var(--exh-fast),
     box-shadow var(--exh-fast), transform var(--exh-fast);
 }
 #topBtns #btnLocate:hover {
-  color: #f2f6f5; border-color: rgba(217, 187, 130, .6);
-  background: rgba(12, 28, 40, .9);
-  box-shadow: 0 0 10px rgba(217, 187, 130, .16);
+  color: #f4f4f4; border-color: rgba(230,203,118,.6);
+  background: rgba(21,23,24,.9);
+  box-shadow: 0 0 10px rgba(230,203,118,.16);
   transform: translateY(-1px);
 }
 #topBtns #btnLocate:active { transform: scale(.92); transition-duration: var(--exh-press); }
 
 /* W4b 血量 HUD：底座并进冷青半透明家族，图标块收饱和保 HP 蓝语义 */
 #hpHud {
-  background: linear-gradient(180deg, rgba(10, 24, 35, .88), rgba(7, 18, 28, .92));
-  border-color: rgba(159, 183, 188, .28);
-  box-shadow: 0 2px 8px rgba(2, 8, 14, .3);
+  background: linear-gradient(180deg, rgba(18,20,21,.88), rgba(14,15,16,.92));
+  border-color: rgba(170,174,177,.28);
+  box-shadow: 0 2px 8px rgba(7,7,8,.3);
 }
-.hp-hud-icon, .hp-hud-label { background: linear-gradient(160deg, #567f96 0%, #40688a 60%, #2f5474 100%); }
+.hp-hud-icon, .hp-hud-label { background: linear-gradient(160deg, #6e777e 0%, #53595f 60%, #43484d 100%); }
 .hp-hud-label { letter-spacing: 2.5px; }
 #hpText { font-variant-numeric: tabular-nums; letter-spacing: .04em; }
 
 /* ═════════ W5 右上资源章 #resHud：冷青档案章 + 金色值 + 左缘金标 ═════════ */
 
 #resHud .chip-mini {
-  background: linear-gradient(180deg, rgba(9, 22, 33, .88), rgba(6, 16, 25, .92));
-  border: 1px solid rgba(159, 183, 188, .26); border-radius: 2px;
-  box-shadow: inset 0 1px 0 rgba(214, 232, 235, .06), 0 2px 8px rgba(2, 8, 14, .35);
+  background: linear-gradient(180deg, rgba(17,18,20,.88), rgba(13,14,15,.92));
+  border: 1px solid rgba(170,174,177,.26); border-radius:0;
+  box-shadow: inset 0 1px 0 rgba(223,224,226,.06), 0 2px 8px rgba(7,7,8,.35);
 }
 /* 金币章：左缘 2px 暖金标（资源主章，呼应入口牌 border-left 金条语言） */
-#resHud .res-gold { box-shadow: inset 2px 0 0 rgba(217, 187, 130, .5), inset 0 1px 0 rgba(214, 232, 235, .06), 0 2px 8px rgba(2, 8, 14, .35); }
-#resHud .res-gold b { color: #ecd9ad; text-shadow: 0 0 8px rgba(217, 187, 130, .2); }
+#resHud .res-gold { box-shadow: inset 2px 0 0 rgba(230,203,118,.5), inset 0 1px 0 rgba(223,224,226,.06), 0 2px 8px rgba(7,7,8,.35); }
+#resHud .res-gold b { color: #f4e2a5; text-shadow: 0 0 8px rgba(230,203,118,.2); }
 #resHud .res-atk b { color: #ff8d7e; }
 #resHud .chip-mini b { font-variant-numeric: tabular-nums; letter-spacing: .02em; }
 
@@ -201,67 +201,67 @@
 /* W6a 横幅：中文名提字距 + 微金晕，下方金发丝短线收束 */
 #layerBanner .lb-zh {
   letter-spacing: 7px;
-  text-shadow: 0 2px 14px rgba(4, 10, 17, .9), 0 0 3px rgba(217, 187, 130, .22);
+  text-shadow: 0 2px 14px rgba(9,9,10,.9), 0 0 3px rgba(230,203,118,.22);
 }
 #layerBanner::after {
   content: ''; position: absolute; left: 50%; bottom: 0; width: 56px; height: 1px;
   transform: translateX(-50%); pointer-events: none;
-  background: linear-gradient(90deg, transparent, #d9bb82a1, transparent);
+  background: linear-gradient(90deg, transparent, #e6cb76a1, transparent);
   opacity: .8;
 }
 /* W6b 章节导航：眉题金化、当前节点金线金点、已过节点青绿提亮 */
-#expeditionChapter .chapter-kicker { color: #d9bb82; opacity: .82; letter-spacing: 3px; }
-#expeditionChapter ol { border-left-color: rgba(164, 190, 196, .28); }
+#expeditionChapter .chapter-kicker { color: #e6cb76; opacity: .82; letter-spacing: 3px; }
+#expeditionChapter ol { border-left-color: rgba(176,181,184,.28); }
 #expeditionChapter li { transition: color var(--exh-fast), border-color var(--exh-fast), background var(--exh-fast); }
-#expeditionChapter li.current { border-left-color: #d9bb82; }
-#expeditionChapter li.current span { opacity: 1; color: #e8d5a8; }
-#expeditionChapter li.passed { color: #9fc4b8; }
-#expeditionChapter > small { color: #86a0a6; }
+#expeditionChapter li.current { border-left-color: #e6cb76; }
+#expeditionChapter li.current span { opacity: 1; color: #f1de9f; }
+#expeditionChapter li.passed { color: #adb2b6; }
+#expeditionChapter > small { color: #92979a; }
 
 /* ═════════ W7 行动记录 #logPanel：冷青档案纸 + 标题条金线反馈 ═════════ */
 
 #logPanel {
-  background: rgba(8, 15, 22, .74);
-  border-color: rgba(159, 183, 188, .15); border-radius: 2px;
+  background: rgba(12,13,14,.74);
+  border-color: rgba(170,174,177,.15); border-radius:0;
 }
 #logPanel .log-toggle {
   padding-bottom: 5px;
-  border-bottom: 1px solid rgba(159, 183, 188, .13);
-  color: #8fa5ad; letter-spacing: .2em;
+  border-bottom: 1px solid rgba(170,174,177,.13);
+  color: #9a9fa2; letter-spacing: .2em;
   transition: color var(--exh-fast), border-color var(--exh-fast);
 }
-#logPanel .log-toggle:hover { color: #ecd9ad; border-bottom-color: rgba(217, 187, 130, .42); }
+#logPanel .log-toggle:hover { color: #f4e2a5; border-bottom-color: rgba(230,203,118,.42); }
 
 /* ═════════ W8 全局背包浮键 #bagBtnFloat：与资源章同族 + 三态 ═════════ */
 
 #bagBtnFloat {
-  background: linear-gradient(180deg, rgba(9, 22, 33, .9), rgba(6, 16, 25, .92));
-  border-color: rgba(159, 183, 188, .3); border-radius: 2px;
-  box-shadow: 0 4px 14px rgba(2, 8, 14, .4), inset 0 1px 0 rgba(214, 232, 235, .05);
+  background: linear-gradient(180deg, rgba(17,18,20,.9), rgba(13,14,15,.92));
+  border-color: rgba(170,174,177,.3); border-radius:0;
+  box-shadow: 0 4px 14px rgba(7,7,8,.4), inset 0 1px 0 rgba(223,224,226,.05);
   transition: background var(--exh-fast), border-color var(--exh-fast), color var(--exh-fast),
     box-shadow var(--exh-fast), transform var(--exh-fast);
 }
 #bagBtnFloat:hover {
-  background: rgba(12, 28, 40, .92);
-  border-color: rgba(217, 187, 130, .6);
-  color: #f2f6f5;
-  box-shadow: 0 6px 16px rgba(2, 8, 14, .45), 0 0 10px rgba(217, 187, 130, .15);
+  background: rgba(21,23,24,.92);
+  border-color: rgba(230,203,118,.6);
+  color: #f4f4f4;
+  box-shadow: 0 6px 16px rgba(7,7,8,.45), 0 0 10px rgba(230,203,118,.15);
   transform: translateY(-2px);
 }
 #bagBtnFloat:active {
   transform: translateY(0) scale(.95);
   transition-duration: var(--exh-press);
 }
-#bagBtnFloat #bagCountFloat { color: #ecd9ad; font-variant-numeric: tabular-nums; font-family: 'Cascadia Code', monospace; } /* 09-25 P3：数字字体与 HUD 其余等宽制式对齐 */
+#bagBtnFloat #bagCountFloat { color: #f4e2a5; font-variant-numeric: tabular-nums; font-family: 'Cascadia Code', monospace; } /* 09-25 P3：数字字体与 HUD 其余等宽制式对齐 */
 
 /* ═════════ T2 焦点态：键盘导航金线焦点环（对局 HUD 全部可焦元素） ═════════ */
 #sidebar .route-option:focus-visible,
 #topBtns button:focus-visible,
 #bagBtnFloat:focus-visible,
 #logPanel .log-toggle:focus-visible {
-  outline: 1px solid #d9bb82cc;
+  outline: 1px solid #e6cb76cc;
   outline-offset: 2px;
-  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+  box-shadow: 0 0 0 1px #101112, 0 0 12px rgba(230,203,118,.35);
 }
 /* 路线卡贴边收进：金环画在卡内，避免与相邻卡重叠 */
 #sidebar .route-option:focus-visible { outline-offset: -3px; }

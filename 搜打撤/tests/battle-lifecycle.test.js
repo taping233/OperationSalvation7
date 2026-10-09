@@ -19,6 +19,7 @@ const feeRule = window.SDT.Cards.all().find(card => card.id === 'tt5-galaxy-voya
 if (!feeRule) throw new Error('生命周期测试需要现有的「银河之旅」持续费用规则卡');
 const armor = { id: 'lifecycle-armor', name: '生命周期护甲', cost: 1, type: '法术', desc: '获得 3 点护甲。', armor: 3 };
 const probeSpell = { id: 'lifecycle-probe-spell', name: '费用探针', cost: 3, type: '武术', desc: '造成攻击伤害。', dmg: 1, dmgType: 'attack' };
+const probeSpell2 = { id: 'lifecycle-probe-spell2', name: '费用探针·法术', cost: 3, type: '法术', desc: '造成 2 点法伤。', dmg: 2, dmgType: 'spell' };
 
 function makeGame() {
   return {
@@ -64,6 +65,7 @@ async function contaminateWithRealCards(game, isBoss) {
   expect(state.energy).toBe(3);
   expect(state.pdef.armor).toBe(3);
   expect(viewApi.effCostOf(probeSpell, 'probe-spell')).toBe(1);
+  expect(viewApi.effCostOf(probeSpell2, 'probe-spell-2')).toBe(1);   // 招式改版：法术同降（2026-10-06）
 }
 
 function expectFreshBattle(state, mode) {
@@ -71,6 +73,7 @@ function expectFreshBattle(state, mode) {
   expect(state.pendingTarget).toBeNull();
   expect(state.pdef).toEqual({ shield: 0, armor: 0, guard: false });
   expect(viewApi.effCostOf(probeSpell, 'probe-spell')).toBe(3);
+  expect(viewApi.effCostOf(probeSpell2, 'probe-spell-2')).toBe(3);
 }
 
 describe('跨战斗生命周期重置', () => {

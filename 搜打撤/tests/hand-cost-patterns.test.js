@@ -13,7 +13,7 @@ describe('手牌代价句式登记点', () => {
   });
 
   it('非代价句不误命中（银河之旅为无前置条件卡，零效果走硬失败）', () => {
-    const desc = '本场对战中，你的所有武术均为 1 费。';
+    const desc = '本场对战中，你的所有招式均为 1 费。';   // 2026-10-06 v35 招式改版后定版 desc
     expect(HAND_COST_PATTERNS.some(re => re.test(desc))).toBe(false);
     expect(HAND_COST_PATTERNS.some(re => re.test('获得 2 点攻击力。'))).toBe(false);
   });

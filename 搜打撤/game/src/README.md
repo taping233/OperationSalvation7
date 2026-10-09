@@ -2,21 +2,21 @@
 
 `index.html` 通过 `<script type="module">` 加载 `main.js`。所有模块都是 ESM；不得再依赖旧版普通 script 的共享词法作用域。
 
-## 目录结构（2026-09-23 域目录化）
+## 目录结构
 
-平铺布局已按功能域收进目录；2026-09-25～26 新增 `agent/`，2026-09-28 体验线新增 `experience/`，现共 10 个功能域（另有生成目录）。架构守卫入口为 `scripts/architecture-graph.mjs` + `tests/architecture-boundaries.test.js`：
+源码按下表的功能域组织，生成文件另放 `generated/`。依赖边界由 `scripts/architecture-graph.mjs` 与 `tests/architecture-boundaries.test.js` 检查：
 
 | 目录 | 域 | 内容概览 |
 | --- | --- | --- |
 | `core/` | 底座 | 随机、规则、输入、相机、渲染原语与聚合、事件总线、数据加载、诊断、SDT 门面 |
 | `ui/` | 全局 UI | `ui.js` 工具、ui-scale、词条浮框、路线浮层、光标、标题菜单 |
-| `experience/` | 体验线 | 「随身口袋」常驻状态条、章节面板层级风险徽标（2026-09-28 EXP 线起） |
-| `battle/` | 战斗 | 09-29 起分五目录：`core/`（装配/引擎/结算/快照）、`effects/`（效果流水线 effect-steps.*）、`runtime/`（运行态）、`view/`（渲染六片）、`bag/`（牌堆/卡费）；懒装载器、符文与快照类型定义在 `battle/` 根 |
+| `experience/` | 体验线 | 章节风险徽标；`startPocketStrip` 保留装配接口，当前不创建随身资源汇总条 |
+| `battle/` | 战斗 | `core/`（装配/引擎/结算/快照）、`effects/`（效果流水线 effect-steps.*）、`runtime/`（运行态）、`view/`（渲染）、`bag/`（牌堆/卡费）；懒装载器、符文与快照类型定义在 `battle/` 根 |
 | `cards/` | 卡库 | 卡数据/同步/规则/schema/视图、备注、机制句式 |
 | `run/` | 局内流程 | 对局会话、地图生成与快照、遭遇、宝箱、祭坛/商店/撤离 |
 | `hub/` | 基地/局外 | 仓库、背包、存档、商店、整备、收藏、各类命令、照相馆呈现 |
 | `home/` | 首页/叙事 | 首页场景五件套、ink 叙事、剧情命令 |
-| `audio/` | 音频 | sound 策略/声景 |
+| `audio/` | 音频 | 音频门面、场景曲目、按需配乐播放器、短音效策略与声景 |
 | `agent/` | 自动游玩与统计 | SDT.Agent 门面、局面观察、动作执行、策略/权重、LLM 适配器、跑局记录和数据页 |
 
 根层只保留装配与入口：`main.js`（唯一入口，导入顺序即启动顺序）、`boot-order.js`（顺序唯一事实源，条目为带域前缀的路径）、`game.boot.js`（跨功能接线）、`r7a.qa.js`（QA 入口）、`generated/`（生成物，不手改）。
@@ -24,7 +24,7 @@
 ## 依赖层次
 
 1. `core/rules.js`、`core/mapData.js`、`run/game.run.data.js`、`core/asset-url.js`：规则、授权数据和资源路径。
-2. `core/art.js`、`core/icons-bitmap.js`、`audio/sound.js`、`core/camera.js`、`battle/combat.js`、`hub/base.js`、`hub/meta.js`、`core/renderer.primitives.js`：独立能力与纯工具。
+2. `core/art.js`、`core/icons-bitmap.js`、`audio/sound.js`、`core/camera.js`、`battle/core/combat.js`、`hub/base.js`、`hub/meta.js`、`core/renderer.primitives.js`：独立能力与纯工具。
 3. `hub/game.store.js`、`hub/game.storage.js`、`run/game.session.js`、`battle/core/battle.core.js`、`battle/effects/battle.effects.js`、`battle/bag/battle.deck.js`、`battle/core/battle.target-rules.js`：状态、持久化和领域逻辑；`ui/game.menu.js` 是标题/选档/设置控制器。
 4. `core/renderer.js`（聚合 `renderer.icons.js` / `renderer.fx.js`）、`battle/view/battle.view.js`、`ui/ui.js`、`experience/pocket-strip.js`（章节风险徽标，常驻汇总条已按老板要求移除）：Canvas 或 DOM 表现层；`renderer.fx.js` 挂载的 `SDT.FX` 必须先于 `run/game.session.js` 求值（main.js 导入顺序不可调换）。
 5. `run/game.run.js`、`run/game.run.shop.js`、`hub/game.hub.js`（基地壳）、`hub/game.hub.depart.js`（出征整备）、`hub/game.hub.pages.js`（六页签 HTML）、`hub/game.hub.bridge.js`（壳↔切片中立桥）、`hub/game.bag.js`、`hub/game.notes.js`、`hub/game.cardslib.js`：功能流程。

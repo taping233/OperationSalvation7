@@ -29,10 +29,10 @@
      2026-09-08 二次定版：棱彩代表色 = 彩色——宝石走彩虹渐变，--gem 仅留单色兜底。
      2026-09-09 三次定版：彩色换老板指定全息幻彩色板（白心 + 粉/奶油黄/薄荷/淡蓝/薰衣草环绕），
      --gem 兜底锚色取幻彩中调薰衣草。 */
-  .rv0 { --gem: #9aa0a6; } .rv1 { --gem: #6f9e6a; } .rv2 { --gem: #5a8ec2; }
-  .rv3 { --gem: #9b7fb8; } .rv4 { --gem: #d0883e; } .rv5 { --gem: #3fae94; }
-  .rv5 { box-shadow: 0 .3em 1em rgba(0,0,0,.55), inset 0 0 0 2px rgba(96,190,168,.55); }
-  .rv6 { --gem: #0b0b0d; } .rv7 { --gem: #cbb2f0; }
+  .rv0 { --gem: #9aa0a6; } .rv1 { --gem: #808488; } .rv2 { --gem: #81909b; }
+  .rv3 { --gem: #9b7fb8; } .rv4 { --gem: #e3b82b; } .rv5 { --gem: #697984; }
+  .rv5 { box-shadow: 0 .3em 1em rgba(0,0,0,.55), inset 0 0 0 2px rgba(131,145,155,.55); }
+  .rv6 { --gem: #0a0b0b; } .rv7 { --gem: #cdd1d5; }
 
   /* 能力卡：渐变棱彩（2026-09-04 定版）——棱彩光带沿卡边自动小幅流转；
      传说英雄为金光变体 rv-gold（金卡闪金光）。
@@ -45,16 +45,16 @@
   .hs-card.rv7 .hsc-gem, .hs-card.rv-prism .hsc-gem {
     background:
       radial-gradient(circle at 50% 42%, #ffffff 0 20%, rgba(255,255,255,0) 62%),
-      conic-gradient(from 210deg, #ffd6ec, #fff0c2, #c6f6de, #c3d8ff, #e2d0ff, #f5c9ec, #ffd6ec);
+      conic-gradient(from 210deg, #ffd6ec, #e6e3db, #dbdee1, #dde1e5, #e5e8ea, #f5c9ec, #ffd6ec);
     box-shadow: 0 0 .5em rgba(255,255,255,.65); }
   .hs-card .rv-beam { position: absolute; inset: 0; z-index: 4; border-radius: inherit;
     padding: 2px; pointer-events: none;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#ffffff 0 0) content-box, linear-gradient(#ffffff 0 0);
+    mask: linear-gradient(#ffffff 0 0) content-box, linear-gradient(#ffffff 0 0);
     -webkit-mask-composite: xor; mask-composite: exclude; }
   .hs-card .rv-beam::before { content: ''; position: absolute; top: 0; left: 0;
     width: 400%; height: 400%;
-    background: linear-gradient(115deg, #ff6b6b, #ffd93d, #6bffb8, #6bb8ff, #b36bff, #ff6b6b);
+    background: linear-gradient(115deg, #ff6b6b, #ffd23d, #6bceff, #6bceff, #b36bff, #ff6b6b);
     animation: heroPrism 7s ease-in-out infinite; }
   /* background-position 0%→100%（bg-size 400%）等效于图片左移 3 倍卡宽 = 自身宽度 75% */
   @keyframes heroPrism {
@@ -62,7 +62,7 @@
     50% { transform: translateX(-75%); }
   }
   .hs-card.rv-gold .rv-beam::before {
-    background: linear-gradient(115deg, #8a6a1f, #ffd700, #fff3b0, #e6a817, #8a6a1f);
+    background: linear-gradient(115deg, #8a6a1f, #ffc300, #ffedb0, #fdc200, #8a6a1f);
     animation: heroGold 3.2s ease-in-out infinite; }
   @keyframes heroGold {
     0%, 100% { transform: translateX(0); }
@@ -104,8 +104,8 @@
   .hsc-kw .kw-draw { color: #d1d1d1; border-color: rgba(154,154,154,.55); }
   .hsc-kw .kw-infuse { color: #b4b4b4; border-color: rgba(128,128,128,.55); }
   /* 注能变体（注能前后效果不同）：水蓝高亮提醒 */
-  .hsc-kw .kw-infuse.alt { color: #a8dcff; border-color: rgba(96,168,220,.85);
-    box-shadow: 0 0 .5em rgba(96,168,220,.35); }
+  .hsc-kw .kw-infuse.alt { color: #ced3d9; border-color: rgba(96,179,220,.85);
+    box-shadow: 0 0 .5em rgba(96,179,220,.35); }
   .hsc-gem { display: block; margin: .14em auto 0; width: .8em; height: .8em; flex-shrink: 0;
     transform: rotate(45deg); background: var(--gem); border: 1px solid rgba(255,255,255,.55);
     box-shadow: 0 0 .5em var(--gem); }
@@ -140,7 +140,7 @@
   /* 币值词条：右下角金色硬币（桌游道具卡的 [[icon:coin]] 数值） */
   .hsc-val { position: absolute; z-index: 3; bottom: -.48em; right: -.48em; width: 2.18em; height: 2.18em;
     display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-    padding-bottom: .18em; color: #ffffff; cursor: help; border-radius: 50%; border: 2px solid rgba(255,236,169,.78);
+    padding-bottom: .18em; color: #ffffff; cursor: help; border-radius: 50%; border: 2px solid rgba(255,235,169,.78);
     background: linear-gradient(180deg, #d5d5d5, #a2a2a2 55%, #616161);
     filter: drop-shadow(0 2px 3px rgba(0,0,0,.5)) drop-shadow(0 0 .35em rgba(196,196,196,.45)); }
   .hsc-val .ic { width: .62em; height: .62em; margin-bottom: .06em; vertical-align: 0; }
@@ -149,7 +149,7 @@
   .hsc-val b { font-size: .95em; line-height: 1.05; text-shadow: 0 1px 2px rgba(47,47,47,.9); }
   .sellable-tgl { display: inline-flex; align-items: center; gap: .35em; font-size: .9em;
     color: #d5d5d5; cursor: pointer; user-select: none; }
-  .sellable-tgl input { accent-color: #e0a458; cursor: pointer; }
+  .sellable-tgl input { accent-color: #f1c947; cursor: pointer; }
 
   /* ============ 卡牌大页面（收藏 / 制作坊） ============ */
   /* 宽版弹窗限高内部滚动：内容超高（如商店含出售区）时不再被居中裁掉顶部 */
@@ -171,24 +171,24 @@
   .pg-close:hover { background: #2c2c2c; color: #ffffff; border-color: #6b6b6b;
     box-shadow: 0 0 14px rgba(113,113,113,.55); transform: scale(1.08) rotate(90deg); }
   .pg-head { display: flex; align-items: center; gap: 10px; flex-shrink: 0; padding: 14px 64px 12px 20px;
-    border-bottom: 1px solid #353535; border-radius: 12px 12px 0 0;
+    border-bottom: 1px solid #353535; border-radius:0 0 0;
     background: linear-gradient(180deg, rgba(97,97,97,.30), rgba(20,20,20,0)); }
   .pg-head h2 { font-size: 20px; margin: 0; color: #dadada; letter-spacing: 2px; white-space: nowrap; }
   .pg-head h2 .ic { width: 18px; height: 18px; vertical-align: -0.22em; }
   .pg-head .sub { color: #8b8b8b; font-size: 12px; white-space: nowrap; overflow: hidden;
     text-overflow: ellipsis; }
   .pg-spacer { flex: 1; }
-  .clib-search { width: 210px; background: #121212; border: 1px solid #424242; border-radius: 18px;
+  .clib-search { width: 210px; background: #121212; border: 1px solid #424242; border-radius:0;
     padding: 7px 14px; color: #dadada; font-size: 12.5px; outline: none; }
   .clib-search:focus { border-color: #a1a1a1; box-shadow: 0 0 0 2px rgba(161,161,161,.18); }
-  .pg-select { background: #121212; border: 1px solid #424242; border-radius: 8px; color: #d5d5d5;
+  .pg-select { background: #121212; border: 1px solid #424242; border-radius:0; color: #d5d5d5;
     padding: 7px 8px; font-size: 12.5px; outline: none; cursor: pointer; }
   .pg-select:focus { border-color: #a1a1a1; }
   .clib-count { color: #8b8b8b; font-size: 12.5px; white-space: nowrap; }
   .clib-count b { color: #dadada; font-size: 14px; }
 
   /* 黄铜按钮 */
-  .hs-btn { padding: 8px 15px; font-size: 12.5px; font-weight: 600; border-radius: 8px; cursor: pointer;
+  .hs-btn { padding: 8px 15px; font-size: 12.5px; font-weight: 600; border-radius:0; cursor: pointer;
     border: 1px solid #4c4c4c; background: linear-gradient(180deg, #2f2f2f, #1c1c1c);
     color: #d5d5d5; white-space: nowrap; transition: all .14s;
     box-shadow: inset 0 1px 0 rgba(240,240,240,.06); }
@@ -199,7 +199,7 @@
   .hs-btn.gold:hover { box-shadow: 0 0 12px rgba(196,196,196,.35); }
   .hs-btn.danger { border-color: #3d3d3d; background: #1c1c1c; color: #c4c4c4; }
   .hs-btn.danger:hover { border-color: #5c5c5c; }
-  .hs-btn.sm { padding: 4px 11px; font-size: 11.5px; border-radius: 6px; }
+  .hs-btn.sm { padding: 4px 11px; font-size: 11.5px; border-radius:0; }
   .hs-btn.round { width: 34px; height: 34px; min-width: 34px; padding: 0; border-radius: 50%;
     font-size: 16px; line-height: 1; }
   .hs-btn.arm { border-color: #5c5c5c; background: #2c2c2c; color: #ffffff;
@@ -208,7 +208,7 @@
   /* 收藏页：类型页签 + 预览 + 卡格 */
   .clib-tabs { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 20px; flex-shrink: 0;
     border-bottom: 1px solid #2a2a2a; }
-  .type-tab { padding: 5px 12px; font-size: 12px; border-radius: 16px; cursor: pointer;
+  .type-tab { padding: 5px 12px; font-size: 12px; border-radius:0; cursor: pointer;
     border: 1px solid #424242; background: #1f1f1f; color: #999999; transition: all .13s; }
   .type-tab:hover { color: #dadada; border-color: #595959; }
   .type-tab.on { color: #eaeaea; border-color: #a1a1a1; background: linear-gradient(180deg, #414141, #212121);
@@ -263,13 +263,13 @@
     color: #a3a3a3; letter-spacing: 1px; margin-bottom: 7px; font-weight: 600; }
   .cdes-row .row-tip { font-weight: 400; letter-spacing: 0; color: #7c7c7c; font-size: 11px; }
   .cdes-row input[type="text"], .cdes-row textarea { width: 100%; background: #121212;
-    border: 1px solid #393939; border-radius: 8px; color: #e6e6e6; padding: 9px 12px;
+    border: 1px solid #393939; border-radius:0; color: #e6e6e6; padding: 9px 12px;
     font-size: 14px; font-family: inherit; outline: none; transition: border-color .13s; }
   .cdes-row input[type="text"]:focus, .cdes-row textarea:focus,
   .cdes-row input[type="number"]:focus { border-color: #a1a1a1; box-shadow: 0 0 0 2px rgba(161,161,161,.15); }
   .cdes-row textarea { resize: vertical; line-height: 1.5; }
   .seg { display: flex; flex-wrap: wrap; gap: 6px; }
-  .seg button { padding: 6px 12px; font-size: 12.5px; border-radius: 8px; cursor: pointer;
+  .seg button { padding: 6px 12px; font-size: 12.5px; border-radius:0; cursor: pointer;
     border: 1px solid #424242; background: #1f1f1f; color: #999999; transition: all .13s; }
   .seg button:hover { color: #dadada; border-color: #595959; }
   .seg button.on { color: #eaeaea; border-color: #a1a1a1; background: linear-gradient(180deg, #414141, #212121);
@@ -290,7 +290,7 @@
   /* 伤害词条步进器 */
   .dmg-ctl { display: flex; align-items: center; gap: 10px; }
   .dmg-ctl input[type="number"] { width: 74px; text-align: center; font-size: 21px; font-weight: 800;
-    color: #999999; background: #121212; border: 1.5px solid #3d3d3d; border-radius: 9px; padding: 5px 0;
+    color: #999999; background: #121212; border: 1.5px solid #3d3d3d; border-radius:0; padding: 5px 0;
     outline: none; -moz-appearance: textfield; appearance: textfield; }
   .dmg-ctl input::-webkit-outer-spin-button, .dmg-ctl input::-webkit-inner-spin-button {
     -webkit-appearance: none; margin: 0; }
@@ -309,7 +309,7 @@
   .mech-group-name { font-size: 11px; color: #7c7c7c; letter-spacing: 1px; margin-bottom: 6px; }
   .mech-chips { display: flex; flex-wrap: wrap; gap: 6px; }
   .mech-chip { display: inline-flex; align-items: center; gap: 4px; padding: 5px 11px;
-    font-size: 12px; font-family: inherit; border-radius: 8px; cursor: pointer;
+    font-size: 12px; font-family: inherit; border-radius:0; cursor: pointer;
     border: 1px solid #3d3d3d; background: #181818; color: #9a9a9a; transition: all .13s; }
   .mech-chip .ic { width: 14px; height: 14px; opacity: .8; }
   .mech-chip em { font-style: normal; font-weight: 800; font-size: 11px; margin-left: 1px;
@@ -325,7 +325,7 @@
   .shop-slot { display: flex; flex-direction: column; align-items: center; gap: 6px;
     transition: transform .15s ease; }
   .shop-slot:hover { transform: translateY(-3px); }
-  .shop-empty { width: 140px; height: 196px; border: 1.5px dashed #3f3f3f; border-radius: 12px;
+  .shop-empty { width: 140px; height: 196px; border: 1.5px dashed #3f3f3f; border-radius:0;
     display: flex; align-items: center; justify-content: center; color: #5d5d5d; font-size: 12px; }
   .shop-slot.sold .shop-empty { text-decoration: line-through; color: #606060; }
   .mini-btn.ok { border-color: #5b5b5b; background: #303030; color: #e3e3e3; }

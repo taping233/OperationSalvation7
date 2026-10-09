@@ -1,7 +1,8 @@
 {
-  "version": 34,
+  "version": 35,
   "note": "实机卡库定版覆盖批次数据（同步自网页版实机卡库）。由 scripts/sync-cards-from-live.mjs 生成，勿手改；重跑该脚本整份重写。",
   "changelog": [
+    "2026-10-06 招式词条与银河之旅改版批次（v35）：银河之旅「你的所有武术均为 1 费」改「你的所有招式均为 1 费」——招式=武术+法术（terminology 定版口径）立为词条（term-tips 讲解 + descRich 高亮），实现侧 m9 rules 迁移 registerRule moveCost1（marker v2 + v1 旧版快照重放，m3 v3 先例）与 battle.engine 文本路径双旗标同落；desc 经 effect 解析兼容核对",
     "2026-09-20 留言落实批次（v34）：迷之匣稀有度改史诗；魔法锅炉改为「注能(2)：随机获取3张卡牌」；员工通行证B改为随机获取1张传说卡且明确排除棱彩。",
     "2026-09-20 快照防退回批次（v33）：补 tt6-goldhammer 整卡——09-19 老板留言批次定名「满电动力锤」落在 TABLETOP6，但 TABLETOP11 内联快照（09-09 冻结）播种在后将其压死且 sync 数组无此条目，实机始终显示旧名「矮人的帮助」；本版补条目令旧档重播纠正。同批 cards.js 侧 TT10/TT11 快照 30 行按定版对齐 + CC_RENAME/CC_DESC 对齐 + CC_RETIRE 移除封印肢体1-4（防各批次升版重播再度退回受缚之残影定版）",
     "2026-09-20 禁咒补种批次（v32）：补 tt8-curse1~4 四张整卡——禁咒系列 09-16 随 v21 重做加入 cards.js 但从未进过 sync 数组，旧档播种库缺失且无补种机制，导致卡牌库搜不到；条目照 cards.js 定版（禁咒I 夺取攻击力 / II 冰冻 / III 中毒流血 / IV 沉默 1 回合，衍生法术 tokenOf tt8-hero-warlock）",
@@ -151,6 +152,19 @@
       "value": 4
     },
     {
+      "cls": "侠客",
+      "cost": 0,
+      "desc": "随机获得3张临时卡牌，回合开始时将其消耗。",
+      "dmg": 0,
+      "id": "cmtn1wnhhym",
+      "name": "江湖救急-改",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "武术",
+      "unrandom": true,
+      "value": 3
+    },
+    {
       "cost": 0,
       "desc": "攻击力4生命4，优先为主人承受伤害，自动攻击敌人",
       "id": "cmtn6ulm4boj",
@@ -243,6 +257,29 @@
     },
     {
       "cost": 0,
+      "desc": "随机获取 1 张传说卡（不含棱彩卡）。",
+      "dmg": 0,
+      "id": "tt-token-gold",
+      "name": "员工通行证B",
+      "rarity": "史诗",
+      "type": "道具",
+      "value": 4
+    },
+    {
+      "cost": 1,
+      "desc": "造成 4 点法术伤害。",
+      "dmg": 4,
+      "dmgType": "spell",
+      "id": "tt3-fireball",
+      "name": "火球",
+      "rarity": "衍生",
+      "sellable": false,
+      "type": "法术",
+      "unrandom": true,
+      "value": 1
+    },
+    {
+      "cost": 0,
       "desc": "漂亮的小玩意，可出售。",
       "dmg": 0,
       "id": "tt3-garnet-marble",
@@ -251,6 +288,19 @@
       "sellable": true,
       "type": "资源",
       "value": 4
+    },
+    {
+      "armor": 6,
+      "cls": "牧师",
+      "cost": 1,
+      "desc": "获得 6 点护甲；若你此时护甲为 0，本牌变为 0 费。",
+      "dmg": 0,
+      "id": "tt3-holy-shield",
+      "name": "圣盾",
+      "rarity": "职业",
+      "type": "法术",
+      "unrandom": true,
+      "value": 3
     },
     {
       "cost": 1,
@@ -265,6 +315,16 @@
     },
     {
       "cost": 0,
+      "desc": "对战开始时，你的所有「初始攻击」化为 1 张不朽斩。",
+      "dmg": 0,
+      "id": "tt3-immortal-blade",
+      "name": "骷髅王剑",
+      "rarity": "传说",
+      "type": "装备",
+      "value": 5
+    },
+    {
+      "cost": 0,
       "desc": "回复 99 点生命。",
       "dmg": 0,
       "heal": 99,
@@ -274,6 +334,17 @@
       "sellable": false,
       "type": "道具",
       "value": 5
+    },
+    {
+      "cost": 0,
+      "desc": "主动技能：注能(2)：随机获取 3 张卡牌。",
+      "dmg": 0,
+      "id": "tt3eq-boiler",
+      "infuse": 2,
+      "name": "魔法锅炉",
+      "rarity": "古朴",
+      "type": "装备",
+      "value": 2
     },
     {
       "cost": 0,
@@ -298,6 +369,27 @@
       "value": 4
     },
     {
+      "cost": 2,
+      "desc": "本场对战中，你的所有招式均为 1 费。",
+      "dmg": 0,
+      "id": "tt5-galaxy-voyage",
+      "name": "银河之旅",
+      "rarity": "传说",
+      "type": "法术",
+      "value": 5
+    },
+    {
+      "cost": 0,
+      "desc": "获得卡牌「闪金之锤」。",
+      "id": "tt6-goldhammer",
+      "name": "满电动力锤",
+      "rarity": "衍生",
+      "sellable": false,
+      "type": "事件",
+      "unrandom": true,
+      "value": 0
+    },
+    {
       "cost": 0,
       "desc": "获得员工通行证A碎片，+2 币。",
       "dmg": 0,
@@ -318,6 +410,20 @@
       "unrandom": true
     },
     {
+      "armor": 4,
+      "cls": "战士",
+      "cost": 2,
+      "desc": "攻5，附加破甲，持续 2 回合；击杀敌人时 +4 甲。",
+      "dmg": 5,
+      "dmgType": "attack",
+      "id": "tt7-demonbreaker",
+      "name": "破甲重斩",
+      "rarity": "职业",
+      "type": "武术",
+      "unrandom": true,
+      "value": 3
+    },
+    {
       "cls": "法师",
       "cost": 1,
       "desc": "下一张法术施放 2 次。",
@@ -326,8 +432,8 @@
       "name": "元素风暴",
       "rarity": "职业",
       "type": "法术",
-      "value": 3,
-      "unrandom": true
+      "unrandom": true,
+      "value": 3
     },
     {
       "armor": 12,
@@ -347,6 +453,56 @@
     {
       "cls": "降临者",
       "cost": 2,
+      "desc": "注能(2)：施放 3 次火球。",
+      "dmg": 0,
+      "id": "tt7-meteorstrong",
+      "infuse": 2,
+      "name": "星陨之力",
+      "rarity": "职业",
+      "type": "法术",
+      "unrandom": true,
+      "value": 3
+    },
+    {
+      "cost": 0,
+      "desc": "主动技能：选择 1 张卡牌，下回合将其变为 0 费。",
+      "dmg": 0,
+      "id": "tt7-naturestaff",
+      "name": "自然法杖",
+      "rarity": "稀有",
+      "sellable": false,
+      "type": "装备",
+      "value": 3
+    },
+    {
+      "cost": 0,
+      "desc": "对战开始时，额外抽 2 张牌。",
+      "dmg": 0,
+      "draw": 2,
+      "id": "tt7-talisman",
+      "name": "灵符",
+      "rarity": "稀有",
+      "sellable": false,
+      "type": "装备",
+      "value": 3
+    },
+    {
+      "cls": "战士",
+      "cost": 2,
+      "desc": "攻（+1），目标为敌方全体。",
+      "dmg": 1,
+      "dmgType": "attack",
+      "id": "tt7-whirlwind",
+      "name": "旋风斩",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "武术",
+      "unrandom": true,
+      "value": 3
+    },
+    {
+      "cls": "降临者",
+      "cost": 2,
       "desc": "旧日再临：抽牌直到有 6 张手牌；免疫诅咒，能量上限 +1，法伤 +1，所有可注能与必须注能的招式均视为已注能；召唤 4 名封印肢体。",
       "hero": true,
       "id": "tt8-abyss-sovereign",
@@ -356,6 +512,54 @@
       "type": "能力卡",
       "unrandom": true,
       "value": 8
+    },
+    {
+      "cls": "牧师",
+      "cost": 0,
+      "desc": "抽到时施放：夺取 1 点攻击力。",
+      "id": "tt8-curse1",
+      "name": "禁咒I",
+      "rarity": "衍生",
+      "tokenOf": "tt8-hero-warlock",
+      "type": "法术",
+      "unrandom": true,
+      "value": 5
+    },
+    {
+      "cls": "牧师",
+      "cost": 0,
+      "desc": "抽到时施放：冰冻。",
+      "id": "tt8-curse2",
+      "name": "禁咒II",
+      "rarity": "衍生",
+      "tokenOf": "tt8-hero-warlock",
+      "type": "法术",
+      "unrandom": true,
+      "value": 5
+    },
+    {
+      "cls": "牧师",
+      "cost": 0,
+      "desc": "抽到时施放：中毒，流血。",
+      "id": "tt8-curse3",
+      "name": "禁咒III",
+      "rarity": "衍生",
+      "tokenOf": "tt8-hero-warlock",
+      "type": "法术",
+      "unrandom": true,
+      "value": 5
+    },
+    {
+      "cls": "牧师",
+      "cost": 0,
+      "desc": "抽到时施放：沉默 1 回合。",
+      "id": "tt8-curse4",
+      "name": "禁咒IV",
+      "rarity": "衍生",
+      "tokenOf": "tt8-hero-warlock",
+      "type": "法术",
+      "unrandom": true,
+      "value": 5
     },
     {
       "cost": 0,
@@ -433,66 +637,6 @@
       "value": 8
     },
     {
-      "cls": "牧师",
-      "cost": 0,
-      "desc": "无定横行：将四张禁咒洗入牌库，然后抽 2 张牌。",
-      "hero": true,
-      "id": "tt8-hero-warlock",
-      "name": "禁术解放",
-      "rarity": "稀有",
-      "type": "能力卡",
-      "unrandom": true,
-      "value": 5
-    },
-    {
-      "cls": "牧师",
-      "cost": 0,
-      "desc": "抽到时施放：夺取 1 点攻击力。",
-      "id": "tt8-curse1",
-      "name": "禁咒I",
-      "rarity": "衍生",
-      "tokenOf": "tt8-hero-warlock",
-      "type": "法术",
-      "unrandom": true,
-      "value": 5
-    },
-    {
-      "cls": "牧师",
-      "cost": 0,
-      "desc": "抽到时施放：冰冻。",
-      "id": "tt8-curse2",
-      "name": "禁咒II",
-      "rarity": "衍生",
-      "tokenOf": "tt8-hero-warlock",
-      "type": "法术",
-      "unrandom": true,
-      "value": 5
-    },
-    {
-      "cls": "牧师",
-      "cost": 0,
-      "desc": "抽到时施放：中毒，流血。",
-      "id": "tt8-curse3",
-      "name": "禁咒III",
-      "rarity": "衍生",
-      "tokenOf": "tt8-hero-warlock",
-      "type": "法术",
-      "unrandom": true,
-      "value": 5
-    },
-    {
-      "cls": "牧师",
-      "cost": 0,
-      "desc": "抽到时施放：沉默 1 回合。",
-      "id": "tt8-curse4",
-      "name": "禁咒IV",
-      "rarity": "衍生",
-      "tokenOf": "tt8-hero-warlock",
-      "type": "法术",
-      "unrandom": true,
-      "value": 5
-    },
-    {
       "cls": "法师",
       "cost": 2,
       "desc": "元素潮汐：抉择：打开‘末日浩劫之门’或者‘天国之门’。两回合后，开启未选择的那扇‘门’",
@@ -507,6 +651,18 @@
       "value": 8
     },
     {
+      "cls": "牧师",
+      "cost": 0,
+      "desc": "无定横行：将四张禁咒洗入牌库，然后抽 2 张牌。",
+      "hero": true,
+      "id": "tt8-hero-warlock",
+      "name": "禁术解放",
+      "rarity": "稀有",
+      "type": "能力卡",
+      "unrandom": true,
+      "value": 5
+    },
+    {
       "cost": 0,
       "desc": "受缚之残影的封印肢体。入手时无效果，无法打出；集齐 5 张封印之牌后破除封印。",
       "id": "tt8-nofocus",
@@ -517,161 +673,6 @@
       "type": "生物",
       "unrandom": true,
       "value": 8
-    },
-    {
-      "cost": 1,
-      "desc": "造成 4 点法术伤害。",
-      "dmg": 4,
-      "dmgType": "spell",
-      "id": "tt3-fireball",
-      "name": "火球",
-      "rarity": "衍生",
-      "sellable": false,
-      "type": "法术",
-      "unrandom": true,
-      "value": 1
-    },
-    {
-      "cost": 0,
-      "desc": "主动技能：选择 1 张卡牌，下回合将其变为 0 费。",
-      "dmg": 0,
-      "id": "tt7-naturestaff",
-      "name": "自然法杖",
-      "rarity": "稀有",
-      "sellable": false,
-      "type": "装备",
-      "value": 3
-    },
-    {
-      "cost": 0,
-      "desc": "对战开始时，额外抽 2 张牌。",
-      "dmg": 0,
-      "draw": 2,
-      "id": "tt7-talisman",
-      "name": "灵符",
-      "rarity": "稀有",
-      "sellable": false,
-      "type": "装备",
-      "value": 3
-    },
-    {
-      "cls": "战士",
-      "cost": 2,
-      "desc": "攻（+1），目标为敌方全体。",
-      "dmg": 1,
-      "dmgType": "attack",
-      "id": "tt7-whirlwind",
-      "name": "旋风斩",
-      "rarity": "职业",
-      "sellable": false,
-      "type": "武术",
-      "unrandom": true,
-      "value": 3
-    },
-    {
-      "cls": "侠客",
-      "cost": 0,
-      "desc": "随机获得3张临时卡牌，回合开始时将其消耗。",
-      "dmg": 0,
-      "id": "cmtn1wnhhym",
-      "name": "江湖救急-改",
-      "rarity": "职业",
-      "sellable": false,
-      "type": "武术",
-      "unrandom": true,
-      "value": 3
-    },
-    {
-      "id": "tt3-holy-shield",
-      "cls": "牧师",
-      "name": "圣盾",
-      "cost": 1,
-      "rarity": "职业",
-      "type": "法术",
-      "desc": "获得 6 点护甲；若你此时护甲为 0，本牌变为 0 费。",
-      "dmg": 0,
-      "armor": 6,
-      "value": 3,
-      "unrandom": true
-    },
-    {
-      "id": "tt3-immortal-blade",
-      "name": "骷髅王剑",
-      "cost": 0,
-      "rarity": "传说",
-      "type": "装备",
-      "desc": "对战开始时，你的所有「初始攻击」化为 1 张不朽斩。",
-      "dmg": 0,
-      "value": 5
-    },
-    {
-      "id": "tt5-galaxy-voyage",
-      "name": "银河之旅",
-      "cost": 2,
-      "rarity": "传说",
-      "type": "法术",
-      "desc": "本场对战中，你的所有武术均为 1 费。",
-      "dmg": 0,
-      "value": 5
-    },
-    {
-      "id": "tt7-meteorstrong",
-      "cls": "降临者",
-      "name": "星陨之力",
-      "cost": 2,
-      "rarity": "职业",
-      "type": "法术",
-      "desc": "注能(2)：施放 3 次火球。",
-      "dmg": 0,
-      "infuse": 2,
-      "value": 3,
-      "unrandom": true
-    },
-    {
-      "id": "tt7-demonbreaker",
-      "cls": "战士",
-      "name": "破甲重斩",
-      "cost": 2,
-      "rarity": "职业",
-      "type": "武术",
-      "desc": "攻5，附加破甲，持续 2 回合；击杀敌人时 +4 甲。",
-      "dmg": 5,
-      "dmgType": "attack",
-      "armor": 4,
-      "value": 3,
-      "unrandom": true
-    },
-    {
-      "cost": 0,
-      "desc": "获得卡牌「闪金之锤」。",
-      "id": "tt6-goldhammer",
-      "name": "满电动力锤",
-      "rarity": "衍生",
-      "sellable": false,
-      "type": "事件",
-      "unrandom": true,
-      "value": 0
-    },
-    {
-      "cost": 0,
-      "desc": "随机获取 1 张传说卡（不含棱彩卡）。",
-      "dmg": 0,
-      "id": "tt-token-gold",
-      "name": "员工通行证B",
-      "rarity": "史诗",
-      "type": "道具",
-      "value": 4
-    },
-    {
-      "cost": 0,
-      "desc": "主动技能：注能(2)：随机获取 3 张卡牌。",
-      "dmg": 0,
-      "id": "tt3eq-boiler",
-      "infuse": 2,
-      "name": "魔法锅炉",
-      "rarity": "古朴",
-      "type": "装备",
-      "value": 2
     }
   ],
   "retire": [

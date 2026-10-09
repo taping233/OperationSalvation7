@@ -40,6 +40,7 @@ const TERM_TIPS = {
   infuse:     { name: '注能',     text: '打出前可点卡面「注能」角标，牺牲若干张手牌强化本牌效果；牺牲品进入墓地、不计入「打出」。不注能则按弱效果直接打出。' },
   charge:     { name: '充能',     text: '「回合开始时，本牌伤害 +N」——该牌每回合开始永久成长，整场对战按牌累计（如充能火山）。' },
   discover:   { name: '发现',     text: '展示若干张随机牌（可限定卡池），选择其中一张置入手牌。' },
+  moves:      { name: '招式',     text: '武术与法术的统称：「所有招式」类效果对两种牌同时生效。' },
   exhaust:    { name: '消耗',     text: '此牌打出后进入墓地，不再参与洗回；部分卡牌需要「消耗」其他手牌作为发动代价。' },
   equipSkill: { name: '主动技能', text: '装备打出即穿戴；技能在角色信息区以按钮发动，每场战斗限一次。' },
   ability:    { name: '能力卡',   text: '只能收藏，普通战不会进入手牌；仅可编入 BOSS 战牌库使用。' },
@@ -54,6 +55,7 @@ const TERM_TIPS = {
 const TERM_ALIAS = {
   '冰冻': 'freeze', '冻结': 'freeze', '中毒': 'poison', '燃烧': 'burn', '灼烧': 'burn',
   '流血': 'bleed', '沉默': 'silence', '诅咒': 'curse', '净化': 'purify', '充能': 'charge',
+  '招式': 'moves',
   '注能': 'infuse', '发现': 'discover', '消耗': 'exhaust', '限定': 'equipSkill', '主动技能': 'equipSkill',
 };
 

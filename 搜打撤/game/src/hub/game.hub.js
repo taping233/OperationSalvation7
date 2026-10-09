@@ -15,7 +15,7 @@ import { createHubPreparationFeature } from './game.hub.preparation.js';
 import '../../css/preparation.css';
 import { slots, homeRequestId } from './game.hub.bridge.js';
 import { hubDeployHTML, openDepartPrep, deployPick, setDeployPick } from './game.hub.depart.js';
-import { hubShopHTML, hubStashHTML, openStashItem, openRawItem, hubUpgradeHTML, hubClassesHTML, hubAchHTML, HUB_SHOP_GOODS, hubShopGoodsCard } from './game.hub.pages.js';
+import { hubShopHTML, hubStashHTML, openStashCardView, openRawItem, hubUpgradeHTML, hubClassesHTML, hubAchHTML, HUB_SHOP_GOODS, hubShopGoodsCard } from './game.hub.pages.js';
 slots.renderHub = renderHub;   // 切片经桥回调重绘（勿直接 import 壳，contracts 拒环）
 export { deployPick };         // 对外导出五件套之一（实现在 depart 片，此处转出）
 
@@ -289,7 +289,7 @@ preparationFeature = createHubPreparationFeature({
       UI.log(`[[icon:archive]] 仓库扩建完成：容量 <b>${B.stashCap()}</b> 张（- [[icon:wood]]×${MAP.rules.stashUpgradeWood}）`, 'ok');
       renderHub();
     });
-    UI.act('stashItem', (d) => openStashItem(+d.i));
+    UI.act('stashItem', (d) => openStashCardView(+d.i));   // 点卡 = 大卡特写操作台：看牌 + 卖出/收藏/使用/孵化都在页脚（2026-10-06 老板二次改版）
     UI.act('rawItem', (d) => openRawItem(d.kind));
     UI.act('restoreCard', (d) => {
       const stack = B.data.pocket[+d.i];

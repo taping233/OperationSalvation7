@@ -3,7 +3,7 @@
  * DOM/类名契约归体验线 pocket-strip.js（#expPocketStrip / .eps-cell / .eps-num / .eps-lab /
  * .eps-warn / .eps-pop / .eps-hint，hidden 控显隐）；本文件只做表现，不含业务判定。
  * 视觉语言：page-expedition-hud.css W5「冷青档案章 + 金色值」家族——
- * 深青渐变底 / rgba(159,183,188,.26) 细边 / 2px 直角 / 左缘金标 / 金值 #ecd9ad / tabular-nums。
+ * 深青渐变底 / rgba(170,174,177,.26) 细边 / 2px 直角 / 左缘金标 / 金值 #f4e2a5 / tabular-nums。
  * 位置：顶部居中、layerBanner 下方（top:76）。实页验证：底部被「下一步·路线」面板整幅
  * 占据（y≈765-900），状态条不可用；顶部居中在章节导航（左）与 resHud（右）之间为空位，
  * 横幅仅换层时瞬时出现属可接受遮挡。证据见 docs/archive/three-track-2026-09-27/art-evidence/。
@@ -22,13 +22,13 @@
   pointer-events: none;      /* 纯展示，装饰层绝不拦截点击 */
   user-select: none;
   font-family: inherit;
-  background: linear-gradient(180deg, rgba(9, 22, 33, .88), rgba(6, 16, 25, .92));
-  border: 1px solid rgba(159, 183, 188, .26);
-  border-radius: 2px;
+  background: linear-gradient(180deg, rgba(17,18,20,.88), rgba(13,14,15,.92));
+  border: 1px solid rgba(170,174,177,.26);
+  border-radius:0;
   /* 左缘金标 = 「带出价值」主章语言（呼应 #resHud .res-gold / 入口牌金条） */
-  box-shadow: inset 2px 0 0 rgba(217, 187, 130, .5),
-              inset 0 1px 0 rgba(214, 232, 235, .06),
-              0 2px 8px rgba(2, 8, 14, .35);
+  box-shadow: inset 2px 0 0 rgba(230,203,118,.5),
+              inset 0 1px 0 rgba(223,224,226,.06),
+              0 2px 8px rgba(7,7,8,.35);
   /* 注：不使用 backdrop-filter——常驻层只走合成器，避免持续重绘 */
 }
 
@@ -42,13 +42,13 @@
   padding: 7px 14px 8px;
   white-space: nowrap;
 }
-.eps-cell + .eps-cell { border-left: 1px solid rgba(159, 183, 188, .14); }
+.eps-cell + .eps-cell { border-left: 1px solid rgba(170,174,177,.14); }
 
 .eps-num {
   font-style: normal;
   font-weight: 700;
   font-size: 15px;
-  color: #dfe9ec;
+  color: #e5e6e6;
   font-variant-numeric: tabular-nums;
   letter-spacing: .02em;
 }
@@ -56,24 +56,24 @@
   font-style: normal;
   font-size: 11px;
   letter-spacing: 2px;
-  color: #86a0a6;
+  color: #92979a;
 }
 
 /* 带出预估：全条核心读数，金色加提亮（主题「带出去才作数」的落点） */
-.eps-forecast .eps-num { color: #f2e3ba; text-shadow: 0 0 10px rgba(217, 187, 130, .28); }
-.eps-forecast .eps-lab { color: #b9a06b; }
+.eps-forecast .eps-num { color: #f9e9b3; text-shadow: 0 0 10px rgba(230,203,118,.28); }
+.eps-forecast .eps-lab { color: #c8af5c; }
 
 /* 随身币：金色值语义（同 #resHud .res-gold b） */
-.eps-coins .eps-num { color: #ecd9ad; text-shadow: 0 0 8px rgba(217, 187, 130, .2); }
+.eps-coins .eps-num { color: #f4e2a5; text-shadow: 0 0 8px rgba(230,203,118,.2); }
 
 /* 规则提示行：金发丝分隔（对应金条语言），弱化为档案注记
-   色彩合规：#8fa6ad 在最坏底（亮画布透出 12% alpha，实测底 rgb(32,43,52)）下对比 5.6:1 ≥4.5（原 #6d848b 仅 3.67 不达标，02:2x 实测修正） */
+   色彩合规：#9a9fa2 在最坏底（亮画布透出 12% alpha，实测底 rgb(34,37,40)）下对比 5.6:1 ≥4.5（原 #787d80 仅 3.67 不达标，02:2x 实测修正） */
 .eps-hint {
   font-style: normal;
   font-size: 10.5px;
   letter-spacing: .06em;
-  color: #8fa6ad;
-  border-left: 1px solid rgba(217, 187, 130, .28);
+  color: #9a9fa2;
+  border-left: 1px solid rgba(230,203,118,.28);
   margin-left: 2px;
   padding-left: 12px;
   display: inline-flex;
@@ -82,10 +82,10 @@
 
 /* ── 注意/警示态（判定在 js：pocket>0=复原机会；coins>0 且 layer≥3=离局清零） ── */
 /* 通用注意：琥珀（消耗袋有卡 = 机会语义，非危险） */
-.eps-cell.eps-warn .eps-num { color: #e8b054; text-shadow: 0 0 8px rgba(232, 176, 84, .22); }
-.eps-cell.eps-warn .eps-lab { color: #c9a054; }
+.eps-cell.eps-warn .eps-num { color: #f9cf43; text-shadow: 0 0 8px rgba(249,207,67,.22); }
+.eps-cell.eps-warn .eps-lab { color: #dab743; }
 /* 币格警示恒为危险红（离局清零语义，压过机会琥珀）+ ⚠ 前缀 */
-.eps-coins.eps-warn .eps-num { color: #ff8d7e; text-shadow: 0 0 8px rgba(255, 107, 94, .25); }
+.eps-coins.eps-warn .eps-num { color: #ff8d7e; text-shadow: 0 0 8px rgba(255,107,94,.25); }
 .eps-coins.eps-warn .eps-lab { color: #ff8d7e; }
 .eps-coins.eps-warn .eps-lab::before { content: '⚠ '; letter-spacing: 0; }
 

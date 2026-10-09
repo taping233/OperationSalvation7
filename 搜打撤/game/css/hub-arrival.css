@@ -1,43 +1,43 @@
 /* Dedicated base arrival: a paper nameplate over the existing base scenery. */
-#overlay .card.scene:has([data-presentation='base-arrival']) { position: relative; width: 100%; height: 100%; max-width: none; max-height: none; padding: 0; border: 0; background: #122531; animation: none; }
+#overlay .card.scene:has([data-presentation='base-arrival']) { position: relative; width: 100%; height: 100%; max-width: none; max-height: none; padding: 0; border: 0; background: #1b1d20; animation: none; }
 #overlay #ovBody:has([data-presentation='base-arrival']) { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; }
 #overlay .flow-transition[data-presentation='base-arrival'] { position: absolute; inset: 0; width: 100%; max-width: none; height: 100%; min-height: 100%; margin: 0; padding: 40px; }
 #overlay .flow-transition[data-presentation='base-arrival']::before {
   content: ''; position: absolute; inset: 0; z-index: 0;
-  background: linear-gradient(90deg, #112734a8, #11273470), url('../assets/scenes/hub-wallpaper.webp') center / cover;
+  background: linear-gradient(90deg, #1c1e20a8, #1c1e2070), url('../assets/scenes/hub-wallpaper.webp') center / cover;
 }
-#overlay .flow-transition[data-presentation='base-arrival']::after { background: #10233042; }
+#overlay .flow-transition[data-presentation='base-arrival']::after { background: #1a1c1e42; }
 #overlay .flow-transition[data-presentation='base-arrival'] .hub-arrival-card {
   position: relative; width: min(580px, 75%); padding: 40px 48px 36px;
-  background: #edf0e8f2; color: #1b3442; border-left: 5px solid #c0aa78;
-  box-shadow: 9px 9px 0 #07131b66;
+  background: #ebecedf2; color: #26292c; border-left: 5px solid #ceb66b;
+  box-shadow: 9px 9px 0 #0e0f1066;
   clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 0 100%);
   animation: hubArrivalPaper .34s var(--ease-entrance) both;
 }
 #overlay .flow-transition[data-presentation='base-arrival'] .flow-scan { display: none; }
 #overlay .flow-transition[data-presentation='base-arrival'] .flow-eyebrow {
-  margin: 0 0 14px; color: #657985; font: 600 15px/1.4 var(--font-ui); letter-spacing: .22em;
+  margin: 0 0 14px; color: #717679; font: 600 15px/1.4 var(--font-ui); letter-spacing: .22em;
   animation: hubArrivalCopy .32s .06s var(--ease-entrance) both;
 }
 #overlay .flow-transition[data-presentation='base-arrival'] .flow-title {
-  margin: 0; color: #1b3442; font: 750 48px/1.25 var(--font-ui);
+  margin: 0; color: #26292c; font: 750 48px/1.25 var(--font-ui);
   letter-spacing: .12em; text-indent: 0; text-shadow: none; filter: none;
   animation: hubArrivalCopy .34s .1s var(--ease-entrance) both;
 }
 #overlay .flow-transition[data-presentation='base-arrival'] .flow-detail {
-  margin: 17px 0 0; color: #586c77; font: 500 15px/1.6 var(--font-ui); letter-spacing: .04em;
+  margin: 17px 0 0; color: #555b61; font: 500 15px/1.6 var(--font-ui); letter-spacing: .04em;
   animation: hubArrivalCopy .3s .16s var(--ease-entrance) both;
 }
-#overlay .flow-transition[data-presentation='base-arrival'] .flow-line { width: 100%; height: 3px; margin-top: 28px; background: #c0cbc4; }
-#overlay .flow-transition[data-presentation='base-arrival'] .flow-line i { background: #b59a61; animation: hubArrivalRule .66s .12s ease-out both; }
-#overlay .flow-transition[data-presentation='base-arrival'] .flow-hint { color: #e2e9e3ad; font-size: 12px; letter-spacing: .06em; }
+#overlay .flow-transition[data-presentation='base-arrival'] .flow-line { width: 100%; height: 3px; margin-top: 28px; background: #c4c6c7; }
+#overlay .flow-transition[data-presentation='base-arrival'] .flow-line i { background: #c5aa51; animation: hubArrivalRule .66s .12s ease-out both; }
+#overlay .flow-transition[data-presentation='base-arrival'] .flow-hint { color: #e5e5e6ad; font-size: 12px; letter-spacing: .06em; }
 @keyframes hubArrivalPaper { from { opacity: 0; transform: translateX(-18px); } to { opacity: 1; transform: translateX(0); } }
 @keyframes hubArrivalCopy { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes hubArrivalRule { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 /* Keep the existing gate director; recolour only base/preparation routes. */
 body:has(#hubMain, #depMain, [data-presentation='base-arrival']) #t1Gate .t1-arm {
-  background: linear-gradient(110deg, #d9e0d8, #edf0e8 55%, #d5dfdd);
-  border-left: 5px solid #bca46d; box-shadow: 8px 0 0 #233f4c66;
+  background: linear-gradient(110deg, #dbdcdd, #ebeced 55%, #d9dadb);
+  border-left: 5px solid #cbb15e; box-shadow: 8px 0 0 #2d313466;
 }
 body:has(#hubMain, #depMain, [data-presentation='base-arrival']) #t1Gate.on .t1-arm {
   animation: hubGatePaper .42s var(--ease-pop) both;

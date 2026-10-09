@@ -122,4 +122,24 @@ describe('单一任务执行记录', () => {
     expect(() => applyTask(root, plan, plan.expectedSha256)).toThrow('报告已变化');
     expect(readTask(root, identity).task.stage).toBe('doing');
   });
+  it('旧格式和损坏记录单列，不阻塞其他任务；同编号仍拒绝新建', () => {
+    const root = fixture();
+    const legacyDir = path.join(root, 'docs/evidence/2026-09-29-WF-legacy');
+    const brokenDir = path.join(root, 'docs/evidence/2026-09-29-WF-broken');
+    mkdirSync(legacyDir, { recursive: true });
+    mkdirSync(brokenDir, { recursive: true });
+    const legacyRaw = JSON.stringify({ id: 'WF-legacy', status: '已交付', commit: true });
+    writeFileSync(path.join(legacyDir, 'task.json'), legacyRaw);
+    writeFileSync(path.join(brokenDir, 'task.json'), '{broken');
+    start(root);
+    const summary = summarizeTasks(root);
+    expect(summary.tasks).toHaveLength(1);
+    expect(summary.incomplete).toBe(true);
+    expect(summary.skipped.map(item => item.id).sort()).toEqual(['WF-broken', 'WF-legacy']);
+    expect(summarizeTasks(root, { id: identity.id }).skipped).toEqual([]);
+    expect(() => planTask(root, { ...identity, id: 'WF-legacy', action: 'start', input })).toThrow('旧格式');
+    expect(() => planTask(root, { ...identity, id: 'WF-broken', action: 'start', input })).toThrow('旧格式');
+    expect(() => readTask(root, { id: 'WF-legacy', date: '2026-09-29' })).toThrow('身份');
+    expect(readFileSync(path.join(legacyDir, 'task.json'), 'utf8')).toBe(legacyRaw);
+  });
 });

@@ -59,6 +59,8 @@ const LANDMARK_ART = [
   'spell-cc-poison-burst',       // 毒爆（双重冲击环）
   'spell-cc-rot-seed',           // 腐化之种（腐种破土芽指下一宿主）
   'martial-cc-last-stand',       // 破釜沉舟（背水剪影）
+  // 治愈重绘（2026-10-06 老板验收实装：双手捧瓶高举逆光，重新构图替换居中小瓶空底）
+  'spell-tt3-holy-water',        // 治愈（圣水净化）
 ];
 
 let allCards;

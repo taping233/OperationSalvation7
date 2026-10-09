@@ -139,9 +139,13 @@ if (title && overlay) {
   });
 
   new MutationObserver(() => {
-    if (!route) return;
-    if (overlay.classList.contains('closing')) returnHome();
-    if (overlay.hidden) { clearRoute(); returnHome(); }
+    if (route && overlay.classList.contains('closing')) returnHome();
+    // Base/character pages clear the original route while the title stays visible.
+    // Restore that title on close even when no menu route remains to clear.
+    if (overlay.hidden) {
+      clearRoute();
+      if (!credits?.open) returnHome();
+    }
   }).observe(overlay, { attributes: true, attributeFilter: ['hidden', 'class'] });
 
   new MutationObserver(() => {

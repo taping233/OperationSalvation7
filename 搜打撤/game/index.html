@@ -6,10 +6,11 @@
 <link rel="icon" type="image/png" href="assets/brand-mark-codename7.png" />
 <!-- 首屏关键资源提前预载：标题壁纸与字标是首屏核心视觉；
      其余资源（BGM/立绘/卡面）保持按需加载，避免挤占启动带宽 -->
-<link rel="preload" as="image" href="assets/reconstruction/wallpaper-wu-1004.webp" />
+<link rel="preload" as="image" href="assets/reconstruction/wallpaper-wu-1004.webp?v=snow-clean-1009" />
 <link rel="preload" as="image" href="assets/title-wordmark.png" />
 <link rel="preload" as="font" type="font/ttf" href="assets/fonts/HarmonyOS_Sans_SC_Regular.ttf" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/cascadia-code-400.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/oxanium-latin-700-normal.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/notosans-sc-400.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/notosans-sc-700.woff2" crossorigin />
 <title>升格会的冬日猜想</title>
@@ -55,6 +56,8 @@
 <link rel="stylesheet" href="css/page-battle-ui.css" />
 <link rel="stylesheet" href="css/character-idle.css" />
 <link rel="stylesheet" href="css/cover-remaining.css" />
+<link rel="stylesheet" href="css/page-transitions.css" />
+<link rel="stylesheet" href="css/ak-skin.css" />
 </head>
 <body>
 <div id="app">
@@ -248,8 +251,8 @@
           <form method="dialog"><button class="home-credits-back" aria-label="返回主页">← 返回</button></form>
           <h2 id="homeCreditsTitle">制作名单</h2>
           <dl class="home-makers-list">
-            <div><dt>总策划与程序</dt><dd>太平</dd></div>
-            <div><dt>游戏策划</dt><dd>创</dd></div>
+            <div><dt>制作人、程序员</dt><dd>太平</dd></div>
+            <div><dt>游戏设计师</dt><dd>创</dd></div>
             <div><dt>精神支柱</dt><dd>Tang</dd></div>
           </dl>
           <dl class="home-credits-sources">
@@ -288,7 +291,7 @@
       <div class="sug-panel">
         <h3 class="sug-head" id="sugHead">记录试玩反馈</h3>
         <p class="sug-where" id="sugWhere"></p>
-        <p class="sug-tip">只保存在当前浏览器，不会自动发送。保存后请从设置的留言库导出单条 JSON 交给制作者。</p>
+        <p class="sug-tip">只保存在当前浏览器，不会自动发送。保存后请到留言信箱点击「全部导出」或「导出此条」，再把 JSON 交给制作者。</p>
         <label class="sug-label" for="sugText">反馈正文（必填）</label>
         <textarea id="sugText" class="sug-textarea" rows="6" maxlength="2000"
           placeholder="例如：这个按钮太小，容易误触……"></textarea>

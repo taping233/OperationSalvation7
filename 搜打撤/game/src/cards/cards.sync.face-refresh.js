@@ -15,11 +15,13 @@
 /** id → 允许重刷的卡面字段列表。 */
 const FACE_REFRESH_BY_ID = new Map([
   ['tt3-petal', ['heal', 'desc']],   // 2026-09-29 老板裁决 heal 2→3（覆盖 09-27 保留 heal:2 旧裁决）
+  ['cc-demon', ['dmg', 'desc']],     // 2026-10-06 老板拍板 4→7 法伤（m2 rules 用 amountField:'dmg'，卡面刷新即生效）
 ]);
 
 /** id → canonical 定版数组名（SDT.Cards 上的表）。 */
 const FACE_REFRESH_TABLE_BY_ID = new Map([
   ['tt3-petal', 'TABLETOP11'],
+  ['cc-demon', 'TABLETOP7'],
 ]);
 
 /**

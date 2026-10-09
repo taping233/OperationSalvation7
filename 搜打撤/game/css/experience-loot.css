@@ -18,12 +18,12 @@
   align-items: center;
   gap: 3px;
   padding: 2px 7px;
-  border-radius: 2px;
-  background: linear-gradient(180deg, rgba(9, 22, 33, .9), rgba(6, 16, 25, .94));
-  border: 1px solid rgba(217, 187, 130, .42);
-  box-shadow: inset 0 1px 0 rgba(214, 232, 235, .06), 0 2px 6px rgba(2, 8, 14, .35);
-  color: #ecd9ad;
-  text-shadow: 0 0 8px rgba(217, 187, 130, .2);
+  border-radius:0;
+  background: linear-gradient(180deg, rgba(17,18,20,.9), rgba(13,14,15,.94));
+  border: 1px solid rgba(230,203,118,.42);
+  box-shadow: inset 0 1px 0 rgba(223,224,226,.06), 0 2px 6px rgba(7,7,8,.35);
+  color: #f4e2a5;
+  text-shadow: 0 0 8px rgba(230,203,118,.2);
   font-size: 12px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
@@ -35,7 +35,7 @@
 
 /* 命运行：档案注记，弱化为规则提示（与 .eps-hint 同族灰青） */
 .eps-fate {
-  color: #86a0a6;
+  color: #92979a;
   font-size: 12px;
   letter-spacing: .06em;
 }
@@ -52,7 +52,7 @@
   margin: 3px 0 2px auto !important;
   padding: 0 6px !important;
   width: fit-content;
-  border-radius: 2px !important;
+  border-radius:0 !important;
   font-style: normal;
   font-size: 10.5px;
   letter-spacing: .08em;
@@ -61,20 +61,20 @@
 }
 #expeditionChapter li .eps-lyr[data-tier="低"],
 #expeditionChapter li .eps-lyr[data-tier="中"] {
-  color: #9fb7bc !important;
-  background: rgba(159, 183, 188, .1) !important;
-  border: 1px solid rgba(159, 183, 188, .22) !important;
+  color: #aaaeb1 !important;
+  background: rgba(170,174,177,.1) !important;
+  border: 1px solid rgba(170,174,177,.22) !important;
 }
 #expeditionChapter li .eps-lyr[data-tier="高"] {
-  color: #e8b054 !important;
-  background: rgba(232, 176, 84, .1) !important;
-  border: 1px solid rgba(232, 176, 84, .32) !important;
+  color: #f9cf43 !important;
+  background: rgba(249,207,67,.1) !important;
+  border: 1px solid rgba(249,207,67,.32) !important;
 }
 #expeditionChapter li .eps-lyr[data-tier="极高"] {
   color: #ff8d7e !important;
-  background: rgba(255, 107, 94, .12) !important;
-  border: 1px solid rgba(255, 107, 94, .38) !important;
-  text-shadow: 0 0 8px rgba(255, 107, 94, .18);
+  background: rgba(255,107,94,.12) !important;
+  border: 1px solid rgba(255,107,94,.38) !important;
+  text-shadow: 0 0 8px rgba(255,107,94,.18);
 }
 
 /* ═══ 收购价档位编码（02:2x 体验线切片4：PoE loot filter 多通道编码模式）
@@ -82,10 +82,10 @@
    S≥6 / A 3-5 / B 2 / C 1）。档位规则=体验线信息编码；色值美术线可调，
    关键是相对量级一眼可辨（S 最亮金+微光，C 最淡）。 */
 .eps-card-val.eps-val-S {
-  border-color: rgba(244, 201, 92, .95);
-  box-shadow: 0 0 8px rgba(244, 201, 92, .45), inset 0 1px 0 rgba(214, 232, 235, .06);
-  color: #ffe9a8;
+  border-color: rgba(255,214,81,.95);
+  box-shadow: 0 0 8px rgba(255,214,81,.45), inset 0 1px 0 rgba(223,224,226,.06);
+  color: #ffeba8;
 }
-.eps-card-val.eps-val-A { border-color: rgba(217, 187, 130, .75); color: #ecd9ad; }
-.eps-card-val.eps-val-B { border-color: rgba(159, 183, 188, .5); color: #cfd8e6; text-shadow: none; }
-.eps-card-val.eps-val-C { border-color: rgba(159, 183, 188, .25); color: #8fa6ad; opacity: .85; text-shadow: none; }
+.eps-card-val.eps-val-A { border-color: rgba(230,203,118,.75); color: #f4e2a5; }
+.eps-card-val.eps-val-B { border-color: rgba(170,174,177,.5); color: #d9dbdc; text-shadow: none; }
+.eps-card-val.eps-val-C { border-color: rgba(170,174,177,.25); color: #9a9fa2; opacity: .85; text-shadow: none; }

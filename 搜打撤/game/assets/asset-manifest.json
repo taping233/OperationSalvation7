@@ -718,10 +718,10 @@
     {
       "path": "reconstruction/wallpaper-wu-1004.webp",
       "ext": "webp",
-      "bytes": 299938,
-      "sha256": "798b4996f4f923bd3ffac456f46e540a6e19189c396a5fb0953d562363c16db6",
-      "license": "AI重绘（老板提供原图及人物参考）",
-      "source": "docs/evidence/2026-10-04-WF-home-snow-wallpaper/README.md"
+      "bytes": 431540,
+      "sha256": "0a8fbfd65dc278810840b27ce051e462426f7455e77060a70ad1aaa7293c1688",
+      "license": "AI编辑（老板提供原图，去水印）",
+      "source": "docs/evidence/2026-10-09-wallpaper-one/asset-source.json"
     },
     {
       "path": "cards/hero-volcano.webp",
@@ -1762,7 +1762,7 @@
     {
       "path": "portraits/full/wu.webp",
       "ext": "webp",
-      "bytes": 121696,
+      "bytes": 150636,
       "license": "项目自有（自制/AI 生成）"
     },
     {

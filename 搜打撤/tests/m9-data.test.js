@@ -2,7 +2,7 @@ import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { M9_HOSTED_BY_ID, ensureM9HostedRules } from '../game/src/cards/cards.sync.m9.js';
 import { KEY } from '../game/src/cards/cards.consts.js';
 
-const MARKER = 'sdt-cards-m9-hosted-rules-v1-seeded';
+const MARKER = 'sdt-cards-m9-hosted-rules-v2-seeded';
 const ids = [...Object.keys(M9_HOSTED_BY_ID), 'tt5-galaxy-voyage'];
 let tables, canonical;
 beforeAll(async () => {
@@ -35,11 +35,29 @@ describe('M9 canonical migration persistence', () => {
       const { rules, ...face } = card;
       expect(face).toEqual(canonical[index]);
       if (M9_HOSTED_BY_ID[card.id]) expect(rules.battle.hosted).toEqual([M9_HOSTED_BY_ID[card.id]]);
-      else expect(rules.triggers.onPlay).toEqual([{ op: 'registerRule', rule: 'meleeCost1' }]);
+      else expect(rules.triggers.onPlay).toEqual([{ op: 'registerRule', rule: 'moveCost1' }]);
     });
     expect(JSON.parse(h.storage.getItem(KEY))).toEqual(h.library.all());
     ensureM9HostedRules(h);
     expect(h.library.saveAll).toHaveBeenCalledTimes(1);
+  });
+
+  it('v1 旧版产物（银河之旅 meleeCost1）按旧版快照重放为 moveCost1，玩家改动仍保留', () => {
+    const oldRules = { version: 1, battle: { target: { side: 'self', area: false } },
+      triggers: { onPlay: [{ op: 'registerRule', rule: 'meleeCost1' }] } };
+    const newRules = { version: 1, battle: { target: { side: 'self', area: false } },
+      triggers: { onPlay: [{ op: 'registerRule', rule: 'moveCost1' }] } };
+    for (const customized of [false, true]) {
+      const cards = structuredClone(canonical).map(card => card.id === 'tt5-galaxy-voyage'
+        ? { ...card, ...(customized ? { name: '玩家银河' } : {}), rules: oldRules } : card);
+      const h = harness(cards);
+      h.storage.setItem('sdt-cards-m9-hosted-rules-v1-seeded', '1');   // v1 旧 marker 不阻塞 v2 重放
+      ensureM9HostedRules(h);
+      const card = h.library.all().find(value => value.id === 'tt5-galaxy-voyage');
+      expect(card.rules).toEqual(customized ? oldRules : newRules);
+      expect(card.name).toBe(customized ? '玩家银河' : '银河之旅');
+      expect(h.storage.getItem(MARKER)).toBe('1');
+    }
   });
 
   it.each(ids)('preserves player edits and existing rules on %s', id => {

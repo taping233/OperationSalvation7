@@ -1,17 +1,17 @@
 /* Shared cover for destinations that need a frame to prepare their content. */
 .page-loading {
   position: fixed; inset: 0; z-index: 990; display: grid; place-items: center;
-  background: #091721; color: #f0eee5; pointer-events: auto;
+  background: #111214; color: #ebebea; pointer-events: auto;
 }
 .page-loading::before {
-  content: ''; position: absolute; inset: 22px; border: 1px solid #b9cdd022;
+  content: ''; position: absolute; inset: 22px; border: 1px solid #c2c5c722;
 }
 .page-loading-copy { width: min(380px, 75vw); text-align: center; }
-.page-loading-copy small { color: #aac3cc; font: 10px/1.6 Consolas, monospace; letter-spacing: .3em; }
+.page-loading-copy small { color: #b7bcbf; font: 10px/1.6 Consolas, monospace; letter-spacing: .3em; }
 .page-loading-copy h2 { margin: 22px 0 14px; font: 500 30px/1.4 var(--font-ui); letter-spacing: .2em; }
-.page-loading-copy p { margin: 0; color: #bacbd0; font: 14px/1.8 var(--font-ui); }
+.page-loading-copy p { margin: 0; color: #c2c5c8; font: 14px/1.8 var(--font-ui); }
 .page-loading-track { display: flex; justify-content: center; gap: 9px; margin-top: 30px; }
-.page-loading-track i { width: 44px; height: 2px; background: #dfc58e; animation: pageLoadPulse 1s ease-in-out infinite; }
+.page-loading-track i { width: 44px; height: 2px; background: #ead283; animation: pageLoadPulse 1s ease-in-out infinite; }
 .page-loading-track i:nth-child(2) { animation-delay: .15s; }
 .page-loading-track i:nth-child(3) { animation-delay: .3s; }
 .page-loading.leaving { animation: pageLoadOut .18s var(--ease-fly) both; pointer-events: none; }

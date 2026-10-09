@@ -2,7 +2,7 @@
  * 在 vitest jsdom 环境装配真实卡牌库后生成文档内容；仅 npm run docs:compendium 写入文件，
  * 并校验文档与运行时数据一致（卡牌计数、退役卡不出现、时点词条样例存在）。 */
 import { describe, it, expect, beforeAll } from 'vitest';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { buildCompendium } from '../scripts/generate-compendium.mjs';
 
@@ -61,6 +61,19 @@ describe('游戏全书与运行时数据一一对应', () => {
   it('生成内容含全部类型章节', () => {
     expect(md).toContain('# 搜打撤 · 代号7 游戏全书');
     for (const t of ['招式（武术）', '法术', '装备', '道具', '资源', '能力卡']) expect(md).toContain(t);
+  });
+
+  it('机制导航指向现行文件，基础常量不取伪造的运行态或旧棋盘字段', () => {
+    const before = readFileSync(OUT);
+    expect(md).toContain('每回合 2 能量，手牌上限 8');
+    expect(md).not.toContain('每回合 99');
+    expect(md).not.toContain('骰子面数');
+    expect(md).not.toContain('30×30 格');
+    expect(md).not.toContain('game/src/battle/combat.js');
+    const paths = [...md.matchAll(/`(game\/src\/[^`]+\.js)`/g)].map(match => match[1]);
+    expect(paths.length).toBeGreaterThan(5);
+    for (const file of paths) expect(existsSync(join(process.cwd(), file)), file).toBe(true);
+    expect(readFileSync(OUT)).toEqual(before);
   });
 
   it('卡牌计数与 Cards.all() 一致', () => {

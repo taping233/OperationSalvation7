@@ -1,11 +1,11 @@
 /* Ordinary run/detail refinements, 2026-10-05. Named recent hub/photo
    surfaces and research retain their existing presentation. */
 body[data-ui-cover-context='ordinary'] {
-  --polish-ink: #1b3442;
-  --polish-muted: #526773;
-  --polish-paper: #edf0e8;
-  --polish-sheet: #f7f7ef;
-  --polish-line: #a9bbb5;
+  --polish-ink: #26292c;
+  --polish-muted: #51575d;
+  --polish-paper: #ebeced;
+  --polish-sheet: #f3f3f3;
+  --polish-line: #b0b2b4;
 }
 
 /* I03: the map dock yields to an overlay, then returns without JS state. */
@@ -26,7 +26,7 @@ body[data-ui-cover-context='ordinary'] #overlay .card.chest #ovTitle {
 body[data-ui-cover-context='ordinary'] #overlay .card.bag-page .bag-view .bag-side .bag-side-card {
   background: var(--polish-sheet);
   border: 1px solid var(--polish-line);
-  box-shadow: 3px 3px 0 #263d491c;
+  box-shadow: 3px 3px 0 #2d31341c;
 }
 
 /* I02: the tertiary shell previously retained a dark background. */
@@ -40,7 +40,7 @@ body[data-ui-cover-context='ordinary'] #overlay .ov-shell.stash-shell :is(.ov-st
   padding: 12px 16px;
   background: var(--polish-sheet);
   color: var(--polish-muted);
-  border: 1px solid #bcc9c1;
+  border: 1px solid #c1c3c4;
   text-shadow: none;
 }
 body[data-ui-cover-context='ordinary'] #overlay .ov-shell.stash-shell .ov-stats b {
@@ -104,7 +104,7 @@ body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .ext-cards > .
   width: 100%;
   box-sizing: border-box;
   padding: 24px 16px;
-  background: #e8eee6;
+  background: #e9eaeb;
   color: var(--polish-muted);
 }
 
@@ -112,21 +112,21 @@ body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .ext-cards > .
 body[data-ui-cover-context='ordinary'] #overlay .node-pg > .node-panel .evt-opt:disabled,
 body[data-ui-cover-context='ordinary'] #overlay .node-pg > .node-panel .evt-opt:disabled:hover {
   opacity: 1;
-  background: #e1e6df;
+  background: #e2e2e3;
   color: var(--polish-muted);
   border-style: dashed;
 }
 body[data-ui-cover-context='ordinary'] #overlay .node-pg > .node-panel .evt-opt:disabled b {
-  color: #405a65;
+  color: #44494e;
 }
 body[data-ui-cover-context='ordinary'] #overlay .shop-pg.sc-shop .shop-slot.sold {
   opacity: 1;
-  background: #e1e7df;
+  background: #e2e3e4;
 }
 body[data-ui-cover-context='ordinary'] #overlay .shop-pg.sc-shop .shop-slot.sold .shop-empty {
-  color: #405a65 !important;
-  background: #edf0e8;
-  border: 1px dashed #8ca09c;
+  color: #44494e !important;
+  background: #ebeced;
+  border: 1px dashed #939699;
 }
 body[data-ui-cover-context='ordinary'] #overlay .shop-pg.sc-shop .shop-slot.buy[data-short] {
   opacity: 1;

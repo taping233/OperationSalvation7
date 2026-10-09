@@ -16,6 +16,7 @@ import { getDiagnosticSummary } from '../core/diagnostics.local.js';
  *   target: (FeedbackTarget|null|undefined),
  *   at: (FeedbackPoint|null|undefined),
  *   text: string, steps: string, expected: string, actual: string,
+ *   done?: boolean,
  * }} FeedbackEntry
  */
 /** 失败结果（ok 为字面量 false，与各成功形状构成可判别联合）。 */
@@ -67,8 +68,8 @@ function readLocalFeedback(storage) {
   if (raw == null) return { ok: true, value: [], raw: null };
   try {
     const value = JSON.parse(raw);
-    return Array.isArray(value) ? { ok: true, value, raw } : fail('INVALID_DATA', '留言库格式损坏，原数据已保留');
-  } catch { return fail('INVALID_DATA', '留言库格式损坏，原数据已保留'); }
+    return Array.isArray(value) ? { ok: true, value, raw } : fail('INVALID_DATA', '留言信箱格式损坏，原数据已保留');
+  } catch { return fail('INVALID_DATA', '留言信箱格式损坏，原数据已保留'); }
 }
 
 /** @param {FeedbackEntry} entry @param {(Storage|null|undefined)} [storage] @returns {(FeedbackWriteResult|FeedbackFailure)} */
@@ -126,16 +127,33 @@ function feedbackExportRecord(entry, diagnostics = getDiagnosticSummary()) {
 
 /** @param {FeedbackEntry} entry @param {FeedbackExportPorts} [ports] @returns {(FeedbackFailure|{ok: true})} */
 function downloadFeedbackRecord(entry, ports = {}) {
+  const safeTs = String(entry?.ts || 'unknown').replace(/[^0-9A-Za-z_-]/g, '-').slice(0, 40);
+  return downloadFeedbackJSON(feedbackExportRecord(entry), `sdt-feedback-${safeTs || 'unknown'}.json`, ports);
+}
+
+/** @param {FeedbackEntry[]} entries @param {FeedbackExportPorts} [ports] @returns {(FeedbackFailure|{ok: true})} */
+function downloadFeedbackRecords(entries, ports = {}) {
+  if (!Array.isArray(entries) || !entries.length) return fail('NO_RECORDS', '没有可导出的留言');
+  const exportedAt = new Date().toISOString();
+  const diagnostics = getDiagnosticSummary();
+  const data = {
+    formatVersion: 1, exportedAt, total: entries.length,
+    records: entries.map(entry => ({ ...feedbackExportRecord(entry, diagnostics), done: !!entry?.done })),
+  };
+  return downloadFeedbackJSON(data, `sdt-feedback-all-${exportedAt.replace(/[^0-9A-Za-z_-]/g, '-')}.json`, ports);
+}
+
+/** @param {object} data @param {string} name @param {FeedbackExportPorts} ports @returns {(FeedbackFailure|{ok: true})} */
+function downloadFeedbackJSON(data, name, ports) {
   let href = /** @type {(string|null)} */ (null), revoke = /** @type {(((url: string) => void)|null)} */ (null);
   try {
-    const blob = new Blob([JSON.stringify(feedbackExportRecord(entry), null, 2)], { type: 'application/json;charset=utf-8' });
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json;charset=utf-8' });
     const create = ports.createObjectURL || URL.createObjectURL.bind(URL);
     revoke = ports.revokeObjectURL || URL.revokeObjectURL.bind(URL);
     /** @type {(url: string, name: string) => void} */
     const click = ports.click || ((url, name) => { const a = document.createElement('a'); a.href = url; a.download = name; a.click(); });
     href = create(blob);
-    const safeTs = String(entry?.ts || 'unknown').replace(/[^0-9A-Za-z_-]/g, '-').slice(0, 40);
-    click(href, `sdt-feedback-${safeTs || 'unknown'}.json`);
+    click(href, name);
     return { ok: true };
   }
   catch { return fail('DOWNLOAD_FAILED', '导出失败，请重试'); }
@@ -144,4 +162,4 @@ function downloadFeedbackRecord(entry, ports = {}) {
   finally { if (href && revoke) setTimeout(() => /** @type {((url: string) => void)} */ (revoke)(/** @type {string} */ (href)), 0); }
 }
 
-export { appendLocalFeedback, downloadFeedbackRecord, feedbackExportRecord, readLocalFeedback, removeLocalFeedback };
+export { appendLocalFeedback, downloadFeedbackRecord, downloadFeedbackRecords, feedbackExportRecord, readLocalFeedback, removeLocalFeedback };

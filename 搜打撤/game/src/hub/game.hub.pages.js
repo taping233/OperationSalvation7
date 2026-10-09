@@ -1,5 +1,5 @@
 /* 由 game.hub.js 拆出（2026-09-22 六文件重构批3）：六页签 HTML 与物资/仓库抽屉
- * （商店/仓库/宠物/升级/人物/收藏室·成就 + openStashItem/openRawItem）。
+ * （商店/仓库/宠物/升级/人物/收藏室·成就 + openStashCardView/openRawItem；2026-10-06 旧 openStashItem 弹窗废除）。
  * 逐字搬迁（hubAchHTML 注入 hubCollectionView 形参为唯一签名理顺点，体不变）；
  * renderHub 回调经 game.hub.bridge.js 的 slots 间接调用，本文件不 import 壳。 */
 const SDT = window.SDT;
@@ -104,8 +104,8 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
           const marked = B.isCollected(s.card);
           const mat = B.materialInfo ? B.materialInfo(s.card) : null;
           return `<button type="button" class="stash-cell${marked ? ' collected' : ''}${mat ? ' is-material' : ''}" data-act="stashItem" data-i="${i}"
-              aria-label="${escAttr(s.card.name)}${s.count > 1 ? ` ×${s.count}` : ''}，${mat ? '使用材料' : '卖出或收藏'}"
-              title="${escAttr(s.card.name)}${s.count > 1 ? ` ×${s.count}` : ''} · ${mat ? '点击使用（材料不可卖出）' : '点击卖出 / 收藏'}">
+              aria-label="${escAttr(s.card.name)}${s.count > 1 ? ` ×${s.count}` : ''}，点击查看大图"
+              title="${escAttr(s.card.name)}${s.count > 1 ? ` ×${s.count}` : ''} · 点击看大图；卖出 / 收藏在大图页脚入口">
             ${SDT.Cards.cardHTML(s.card, 'sm')}
             ${s.count > 1 ? `<b class="stack-count">×${s.count}</b>` : ''}
             ${marked ? '<span class="cell-mark">[[icon:sparkles]]</span>' : ''}
@@ -192,131 +192,211 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       </section>`;
   }
 
-  // 仓库物品弹窗：卡面预览 + 使用（材料卡 / 宠物蛋） / 卖出 / 收藏
-  function openStashItem(i) {
+  // 仓库看卡·操作台（2026-10-06 二次改版，老板反馈「不要回到旧弹窗、要看得清」）：
+  // 点卡直接开大卡特写，卖出 / 收藏 / 使用 / 孵化全部在特写页脚完成——卡始终是
+  // 大图，没有第二层小卡弹窗。不可回退操作（高价/最后一张/整堆/收藏用掉）改按钮
+  // 就地二次确认（变红 2.6s 内再点才执行），不再跳确认页。动作前按卡名重读仓库
+  // 栈防串位；卖出/取消收藏等只改数量的动作就地刷新页脚，特写不关不闪。
+  function openStashCardView(i) {
     const B = SDT.Base;
     const s = B.data.stash[i];
     if (!s) { hubBridge.renderHub(); return; }
-    // 宠物蛋（需求 #2）：仓库中点击孵化——消耗 1 张宠物蛋 + 50 币，随机孵出未拥有的宠物
-    if (s.card.id === B.PET_EGG_ID) {
-      const unowned = B.PETS.filter(p => !B.ownedPets().includes(p.id));
-      const poor = B.data.coins < B.HATCH_COST;
-      game.state = 'modal';
-      _set_cardPageOpen(false);
-      UI.showOverlay('[[icon:crystal]] 宠物蛋', `
-        <div class="ov-shell stash-shell" data-index="01">
-        <div class="stash-pop-card">${SDT.Cards.cardHTML(s.card, 'sm')}</div>
-        <p class="ov-stats">×${s.count} 张 · 孵化消耗：宠物蛋 ×1 + <b class="gold">50 币</b>（储备 ${B.data.coins}）</p>
-        <p class="ov-note">[[icon:paw]] 孵化将随机获得 1 只<b>未拥有</b>的宠物${unowned.length ? `（还差 ${unowned.length} 只集齐）` : ''}。${unowned.length ? '' : '已集齐全部宠物，蛋可以留着收藏。'}</p>
-        <div class="ov-btns">
-          <button class="ov-btn ok" data-act="hatchEgg" ${!unowned.length || poor ? 'disabled' : ''}>[[icon:paw]] 孵化（-1 蛋 -50 币）</button>
-        </div>
-        <div class="ov-btns"><button class="ov-btn" data-act="stashBack">↩ 返回仓库</button></div>
-        </div><!-- /.stash-shell -->`);
-      UI.act('hatchEgg', () => {
-        const r = B.hatchPet();
-        if (r.ok) {
-          Sfx.ding();
-          UI.log(`[[icon:paw]] 孵化成功！获得宠物<b>「${esc(r.pet.name)}」</b>——${esc(r.pet.desc)}（可在仓库页携带 / 升级页升级）`, 'loot');
-          SDT.Meta.checkUnlocks();
-        } else if (r.why === 'poor') UI.log('[[icon:coin]] 储备币不足 50，无法孵化（卖出仓库卡牌攒币）', 'warn');
-        else if (r.why === 'all') UI.log('[[icon:paw]] 已经集齐全部宠物了', 'dim');
-        else if (r.why === 'save') UI.log('基地存档未保存，宠物蛋与储备币均未消耗', 'warn');
-        else UI.log('[[icon:crystal]] 仓库里没有宠物蛋了', 'warn');
-        hubBridge.renderHub();
-      });
-      UI.act('stashBack', () => hubBridge.renderHub());
-      return;
-    }
-    // 材料卡（木材/口粮/钥匙）：只能使用折入真实物资，不可卖出换币（2026-09-08 定版）
-    const mat = B.materialInfo ? B.materialInfo(s.card) : null;
-    if (mat) {
-      const per = B.materialAmount(s.card);
-      game.state = 'modal';
-      _set_cardPageOpen(false);   // 弹窗层级：只能通过按钮返回仓库（Esc 不关闭）
-      UI.showOverlay('[[icon:archive]] 仓库材料', `
-        <div class="ov-shell stash-shell" data-index="02">
-        <div class="stash-pop-card">${SDT.Cards.cardHTML(s.card, 'sm')}</div>
-        <p class="ov-stats">×${s.count} 张 · 每张折入<b class="gold">${mat.label} ×${per}</b></p>
-        <p class="ov-note">[[icon:wood]] 材料可直接使用变成真正的${mat.label}；材料是基地的根基，<b>不可卖出换币</b>。</p>
-        <div class="ov-btns">
-          <button class="ov-btn ok" data-act="matUseOne">[[icon:check]] 使用 1 张</button>
-          <button class="ov-btn ok" data-act="matUseAll" ${s.count < 2 ? 'disabled' : ''}>[[icon:check]] 全部使用（×${s.count}）</button>
-        </div>
-        <div class="ov-btns"><button class="ov-btn" data-act="stashBack">↩ 返回仓库</button></div>
-        </div><!-- /.stash-shell -->`);
-      // 使用 one/all 共享体（差异仅 all 标志；材料使用无逐张数量语义）
-      const useStashMaterial = (all) => {
-        const r = B.useStashMaterial(s.card.name, all);
-        if (r.ok) { Sfx.ding(); UI.log(r.msg, 'loot'); }
-        // A6-STASH-02：失败（如存档写满）必须给提示，否则弹层关闭但操作未生效且无解释
-        else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');
-        hubBridge.renderHub();
-      };
-      const useOne = () => useStashMaterial(false);
-      const useAll = () => useStashMaterial(true);
-      const confirmMaterial = (message, run) => {
-        UI.showOverlay('[[icon:question]] 确认使用', `<p class="ov-note">${message}</p><div class="ov-btns">
-          <button class="ov-btn" data-act="matConfirmCancel">保留，返回仓库</button>
-          <button class="ov-btn danger" data-act="matConfirmOk">确认使用</button>
-        </div>`, 'glass', { initialFocus: '[data-act="matConfirmCancel"]' });
-        UI.act('matConfirmCancel', () => openStashItem(i));
-        UI.act('matConfirmOk', run);
-      };
-      UI.act('matUseOne', () => {
-        if (s.count === 1) { confirmMaterial(`这是仓库里的最后一张${mat.label}卡，使用后卡牌将消失。`, useOne); return; }
-        useOne();
-      });
-      UI.act('matUseAll', () => {
-        confirmMaterial(`使用全部 ${s.count} 张${mat.label}卡，卡牌将从仓库移除并折入基地物资。`, useAll);
-      });
-      UI.act('stashBack', () => hubBridge.renderHub());
-      return;
-    }
-    const marked = B.isCollected(s.card);
-    const price = SDT.Cards.sellPrice(s.card);
-    const special = isSpecialCollect(s.card);
-    const confirmStashAction = (message, run) => {
-      UI.showOverlay('[[icon:question]] 确认操作', `
-        <p class="ov-note">${message}</p>
-        <div class="ov-btns">
-          <button class="ov-btn" data-act="stashConfirmCancel">保留，返回仓库</button>
-          <button class="ov-btn danger" data-act="stashConfirmOk">确认操作</button>
-        </div>`, 'glass', { initialFocus: '[data-act="stashConfirmCancel"]' });
-      UI.act('stashConfirmCancel', () => openStashItem(i));
-      UI.act('stashConfirmOk', () => run());
+    const card = s.card;
+    const mat = B.materialInfo ? B.materialInfo(card) : null;
+    const isEgg = card.id === B.PET_EGG_ID;
+    const isPack = card.id === 'tt-econpack';
+    const special = isSpecialCollect(card);
+    const price = (mat || isEgg) ? 0 : SDT.Cards.sellPrice(card);
+
+    // 动作前按卡名重读堆（索引可能因增删移位）；堆没了返回 null（收回特写回仓库）
+    const freshStack = () => {
+      const idx = B.data.stash.findIndex(x => x.card.name === card.name);
+      return idx >= 0 ? B.data.stash[idx] : null;
     };
-    // 职业收藏室（2026-09-16 Item 15 定版）：收藏即用掉（从仓库移除），每次收藏都转化熟练度经验；
-    // 收藏进度（data.collection）只在首次登记。旧「同一张只计一次/卡牌保留」口径作废。
-    const convertType = !!s.card.cls && (s.card.rarity === '职业' || s.card.type === '能力卡');
-    const convertible = convertType && !marked;
-    game.state = 'modal';
-    _set_cardPageOpen(false);   // 弹窗层级：只能通过按钮返回仓库（Esc 不关闭）
-    UI.showOverlay(marked ? '[[icon:sparkles]] 已收藏' : '[[icon:archive]] 仓库物品', `
-      <div class="ov-shell stash-shell" data-index="03">
-      <div class="stash-pop-card">${SDT.Cards.cardHTML(s.card, 'sm')}</div>
-      <p class="ov-stats">×${s.count} 张 · 收购价 <b class="gold">${price} 币</b>/张
-        ${s.count > 1 ? `（全部卖出 +${price * s.count} 币）` : ''}</p>
-      ${special ? '<p class="ov-note">[[icon:sparkles]] <b>特殊收藏品</b>——收藏后可完成对应成就，且收藏期间不可卖出。</p>' : ''}
-      ${marked && !convertType ? '<p class="ov-note">[[icon:sparkles]] 收藏中的物品受保护：取消收藏后才能卖出（图鉴记录会保留）。</p>' : ''}
-      ${convertible ? `<p class="ov-note">[[icon:medal]] <b>职业收藏室</b>：收藏即用掉这张卡（从仓库移除、不再占格），转化为对应人物的熟练度经验——<b>重复收藏重复获得经验</b>（同一张卡只有首次收藏推进收藏进度）。</p>` : ''}
-      <div class="ov-btns">
-        ${s.card.id === 'tt-econpack' ? `<button class="ov-btn ok" data-act="econpackUse">[[icon:cards]] 使用（获得 5 张随机卡牌）</button>` : ''}
-        ${convertible
-          ? `<button class="ov-btn ok" data-act="collCollectOne">[[icon:medal]] 收藏 1 张（+${s.card.type === '能力卡' ? 50 : 10} 经验 · 卡牌用掉）</button>${s.count > 1 ? `<button class="ov-btn" data-act="collCollectAll">全部收藏（×${s.count}）</button>` : ''}`
-          : `<button class="ov-btn${marked ? '' : ' ok'}" data-act="collToggle">${marked ? '[[icon:sparkles]] 取消收藏' : '[[icon:sparkles]] 收藏'}</button>`}
-        <button class="ov-btn${marked ? ' ok' : ''}" data-act="sellOne" ${marked ? 'disabled' : ''}>[[icon:coin]] 卖出 1 张（+${price}）</button>
-      </div>
-      <div class="ov-btns">
-        <button class="ov-btn" data-act="sellAll" ${marked || s.count < 2 ? 'disabled' : ''}>[[icon:coin]] 全部卖出（+${price * s.count} 币）</button>
-        <button class="ov-btn" data-act="stashBack">↩ 返回仓库</button>
-      </div>
-      </div><!-- /.stash-shell -->`);
-    const useEconPack = () => {
-      // 经济卡包（2026-09-09 审计补实装）：仓库界面点击使用，获得 5 张随机卡牌。
-      // 只在基地仓库可用（局内不可用是定版）；局外没有对局，拆包所得必须入卡牌仓库——
-      // 塞进对局背包（game.ownedCards）会在下次开局被清空，卡就白丢了（2026-09-19 审计 P1-4）
-      if (s.card.id !== 'tt-econpack') return;
+    const closeZoom = () => {
+      const z = document.getElementById('cardZoom');
+      const bd = z ? z.querySelector('.cz-backdrop') : null;
+      if (bd) bd.click();
+    };
+
+    // 页脚 HTML 函数化：动作后重算数量/价格/按钮态，就地替换（特写不重建）
+    const footerHTML = () => {
+      const cur = freshStack();
+      const n = cur ? cur.count : 0;
+      const marked = B.isCollected(card);
+      const convertType = !!card.cls && (card.rarity === '职业' || card.type === '能力卡');
+      const convertible = convertType && !marked;
+      const collectXp = card.type === '能力卡' ? 50 : 10;
+      const notes = [];
+      if (isEgg) {
+        const unowned = B.PETS.filter(p => !B.ownedPets().includes(p.id));
+        notes.push(`孵化消耗宠物蛋 ×1 + <b class="gold">50 币</b>，随机获得 1 只<b>未拥有</b>的宠物${unowned.length ? `（还差 ${unowned.length} 只集齐）` : '——已集齐全部宠物，蛋可以留着收藏'}。`);
+      } else if (mat) {
+        notes.push(`材料卡：使用后折入真正的${mat.label}（每张 ×${B.materialAmount(card)}）；材料是基地的根基，<b>不可卖出换币</b>。`);
+      } else {
+        if (special) notes.push('<b>特殊收藏品</b>——收藏后可完成对应成就，收藏期间不可卖出。');
+        if (marked && !convertType) notes.push('已收藏受保护：取消收藏后才能卖出（图鉴记录保留）。');
+        if (convertible) notes.push('<b>职业收藏室</b>：收藏即用掉这张卡（从仓库移除），转化为对应人物的熟练度经验——重复收藏重复获得经验。');
+      }
+      const noteHTML = notes.length ? `<p class="ov-note">${notes.join('<br>')}</p>` : '';
+      const info = isEgg ? `×${n} 张 · 孵化消耗 50 币（储备 <b class="gold">${B.data.coins}</b> 币）`
+        : mat ? `×${n} 张 · 每张折入 <b class="gold">${mat.label} ×${B.materialAmount(card)}</b>`
+        : `×${n} 张 · 收购价 <b class="gold">${price} 币</b>/张${n > 1 ? ` · 全部卖出 +${price * n} 币` : ''}`;
+      const btns = [];
+      const blocked = marked && !convertType;   // 收藏保护：取消收藏前禁卖
+      if (isEgg) {
+        const unowned = B.PETS.filter(p => !B.ownedPets().includes(p.id));
+        const poor = B.data.coins < B.HATCH_COST;
+        btns.push(`<button class="ov-btn ok" data-act="stashHatch"${!unowned.length || poor ? ' disabled' : ''}>孵化（-1 蛋 -50 币）</button>`);
+      } else if (isPack) {
+        btns.push('<button class="ov-btn ok" data-act="stashOpenPack">使用（获得 5 张随机卡牌）</button>');
+      } else if (mat) {
+        btns.push(`<button class="ov-btn ok" data-act="stashUseMat">使用 1 张（折入${mat.label} ×${B.materialAmount(card)}）</button>`);
+        if (n > 1) btns.push(`<button class="ov-btn" data-act="stashUseMatAll">全部使用（×${n}）</button>`);
+      } else {
+        if (convertible) {
+          btns.push(`<button class="ov-btn ok" data-act="stashCollectOne">收藏 1 张（+${collectXp} 经验 · 卡牌用掉）</button>`);
+          if (n > 1) btns.push(`<button class="ov-btn" data-act="stashCollectAll">全部收藏（×${n}）</button>`);
+        } else {
+          btns.push(`<button class="ov-btn${marked ? '' : ' ok'}" data-act="stashCollectToggle">${marked ? '取消收藏' : '收藏'}</button>`);
+        }
+        btns.push(`<button class="ov-btn" data-act="stashSellOne"${blocked ? ' disabled' : ''}>卖出 1 张（+${price} 币）</button>`);
+        if (n > 1) btns.push(`<button class="ov-btn" data-act="stashSellAll"${blocked ? ' disabled' : ''}>全部卖出 ×${n}（+${price * n} 币）</button>`);
+      }
+      return `<p class="ov-note"><b>${esc(card.name)}</b> · ${esc(card.type === '能力卡' ? '能力' : card.type)}${card.rarity && card.rarity !== '职业' ? ' · ' + esc(card.rarity) : ''}</p>
+        <p class="ov-note">${info}</p>
+        ${noteHTML}
+        <div class="ov-btns">${btns.join('')}</div>`;
+    };
+    const refreshZoom = () => {
+      const zoom = document.getElementById('cardZoom');
+      if (!zoom) return;
+      if (!freshStack()) { closeZoom(); return; }
+      const foot = zoom.querySelector('.cz-foot');
+      if (foot) foot.innerHTML = footerHTML();
+    };
+
+    // 就地二次确认：首点变红「确认？」，2.6s 内再点才执行（页脚刷新会自然解除）
+    const armOrRun = (act, run) => {
+      const btn = document.querySelector(`#cardZoom .cz-foot [data-act="${act}"]`);
+      if (!btn) return;
+      if (btn.dataset.arm === '1') { run(); return; }
+      btn.dataset.arm = '1';
+      btn.dataset.armLabel = btn.textContent;
+      btn.textContent = '确认？';
+      btn.classList.add('danger');
+      setTimeout(() => {
+        if (!btn.isConnected || btn.dataset.arm !== '1') return;
+        delete btn.dataset.arm;
+        btn.textContent = btn.dataset.armLabel;
+        btn.classList.remove('danger');
+      }, 2600);
+    };
+    const needConfirmSell = () => {
+      const cur = freshStack();
+      return !cur || price >= 5 || cur.count <= 1;
+    };
+
+    // —— 卖出（数量口径与旧管理弹窗一致：高价/最后一张需确认；整堆一律确认）——
+    const sell = (all) => {
+      const cur = freshStack();
+      if (!cur) { closeZoom(); return; }
+      const r = B.sellStashCards(card.name, all ? cur.count : 1);
+      if (r.ok) { Sfx.ding(); UI.log(r.msg, 'coin'); }
+      // A6-STASH-02：失败（如存档写满）必须给提示，否则特写关了但卡未减、币未到账
+      else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');
+      hubBridge.renderHub();
+      refreshZoom();   // 堆卖空时内部会收回特写
+    };
+    UI.act('stashSellOne', () => {
+      if (needConfirmSell()) { armOrRun('stashSellOne', () => sell(false)); return; }
+      sell(false);
+    });
+    UI.act('stashSellAll', () => { armOrRun('stashSellAll', () => sell(true)); });
+
+    // —— 收藏（普通卡只记录不消耗；职业卡/能力卡收藏即用掉，2026-09-16 Item 15 定版）——
+    UI.act('stashCollectToggle', () => {
+      const cur = freshStack();
+      if (!cur) { closeZoom(); return; }
+      const now = B.collectToggle(card);
+      if (now === null) { UI.log('基地存档未保存，收藏状态未改变', 'warn'); return; }
+      Sfx.ding();
+      // 经验结算必须最先：checkUnlocks → syncCollXp 会把已收藏的职业卡回填为
+      // 「已结算」，若先于 onCollect 执行，首次收藏的 +10 就被吃掉了
+      SDT.Meta.onCollect(card, now);
+      // 2026-09-10 留言 #39 定版：收藏只记录 + 转化经验，卡牌保留在仓库
+      UI.log(now
+        ? `[[icon:sparkles]] 已收藏【<b>${esc(card.name)}</b>】入职业收藏室，转化为人物熟练度经验（卡牌保留在仓库）${special ? '（特殊收藏品）' : ''}`
+        : `[[icon:sparkles]] 已取消收藏【<b>${esc(card.name)}</b>】`, now ? 'loot' : 'dim');
+      SDT.Meta.checkUnlocks();
+      hubBridge.renderHub();
+      refreshZoom();
+    });
+    const convertStash = async (n, logText) => {
+      const cur = freshStack();
+      if (!cur) { closeZoom(); return; }
+      const first = !B.isCollected(card);
+      const read = readBase(B.slot);
+      if (!read.ok) { UI.log(homeErrorMessage(read), 'warn'); return; }
+      const result = await convertCollection({ slotId: B.slot, requestId: homeRequestId('stash-collect'), expectedRevision: read.revision }, { stackKey: stackKeyOf(cur), count: n });
+      if (!result.ok) { UI.log(result.message || '收藏失败，卡牌未消耗', 'warn'); refreshZoom(); return; }
+      Sfx.ding();
+      UI.log(logText(first), 'loot');
+      hubBridge.renderHub();
+      refreshZoom();
+    };
+    UI.act('stashCollectOne', () => {
+      armOrRun('stashCollectOne', () => convertStash(1, first =>
+        `[[icon:medal]] 已收藏【<b>${esc(card.name)}</b>】并转化为人物经验（卡牌用掉，不再占格${first ? '，收藏进度 +1' : ''}）`));
+    });
+    UI.act('stashCollectAll', () => {
+      armOrRun('stashCollectAll', () => {
+        const cur = freshStack();
+        const n = cur ? cur.count : 0;
+        convertStash(n, () => `[[icon:medal]] 已收藏【<b>${esc(card.name)}</b>】×${n}，全部转化为人物经验（卡牌用掉）`);
+      });
+    });
+
+    // —— 材料使用（不可卖出，2026-09-08 定版；最后一张/整堆需确认）——
+    const useMat = (all) => {
+      const cur = freshStack();
+      if (!cur) { closeZoom(); return; }
+      const r = B.useStashMaterial(card.name, all);
+      if (r.ok) { Sfx.ding(); UI.log(r.msg, 'loot'); }
+      else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');
+      hubBridge.renderHub();
+      refreshZoom();
+    };
+    UI.act('stashUseMat', () => {
+      const cur = freshStack();
+      if (cur && cur.count === 1) { armOrRun('stashUseMat', () => useMat(false)); return; }
+      useMat(false);
+    });
+    UI.act('stashUseMatAll', () => { armOrRun('stashUseMatAll', () => useMat(true)); });
+
+    // —— 宠物蛋孵化（消耗 1 蛋 + 50 币，随机未拥有宠物）——
+    UI.act('stashHatch', () => {
+      const cur = freshStack();
+      if (!cur) { closeZoom(); return; }
+      const r = B.hatchPet();
+      if (r.ok) {
+        Sfx.ding();
+        UI.log(`[[icon:paw]] 孵化成功！获得宠物<b>「${esc(r.pet.name)}」</b>——${esc(r.pet.desc)}（可在仓库页携带 / 升级页升级）`, 'loot');
+        SDT.Meta.checkUnlocks();
+      } else if (r.why === 'poor') UI.log('[[icon:coin]] 储备币不足 50，无法孵化（卖出仓库卡牌攒币）', 'warn');
+      else if (r.why === 'all') UI.log('[[icon:paw]] 已经集齐全部宠物了', 'dim');
+      else if (r.why === 'save') UI.log('基地存档未保存，宠物蛋与储备币均未消耗', 'warn');
+      else UI.log('[[icon:crystal]] 仓库里没有宠物蛋了', 'warn');
+      hubBridge.renderHub();
+      if (r.ok) closeZoom();
+      else refreshZoom();
+    });
+
+    // —— 经济卡包使用（2026-09-09 审计补实装）：获得 5 张随机卡牌，必须入卡牌仓库——
+    // 局外没有对局，塞进对局背包（game.ownedCards）会在下次开局被清空（2026-09-19 审计 P1-4）
+    const openPack = () => {
+      const cur = freshStack();
+      if (!cur) { closeZoom(); return; }
       if (B.stashRoom() < 5) { UI.log(`[[icon:archive]] 仓库空位不足 5 格（现 ${B.stashRoom()}）——先卖出或扩建仓库再拆包`, 'warn'); return; }
       const pool = SDT.Cards.all().filter(c => SDT.Cards.isRandomObtainable(c));
       if (!pool.length) { UI.log('[[icon:cards]] 卡牌库是空的，没有可获得的卡牌', 'warn'); return; }
@@ -324,85 +404,20 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       for (let k = 0; k < 5; k++) {
         cards.push({ card: { ...pool[Math.floor(Random.random('loot') * pool.length)] }, count: 1 });
       }
-      const result = B.openCardPack(s.card.id, cards);
+      const result = B.openCardPack(card.id, cards);
       if (!result.ok) { UI.log(result.msg || '卡包已变化，请重新打开仓库', 'warn'); return; }
-      UI.log(`[[icon:cards]] <b>经济卡包</b>：拆开获得 5 张随机卡牌（入卡牌仓库）`, 'loot');
+      UI.log('[[icon:cards]] <b>经济卡包</b>：拆开获得 5 张随机卡牌（入卡牌仓库）', 'loot');
       hubBridge.renderHub();
+      refreshZoom();
     };
-    UI.act('econpackUse', () => {
-      if (s.card.id !== 'tt-econpack') return;
-      if (s.count === 1) { confirmStashAction('这是仓库里的最后一个经济卡包，拆开后卡包将消失。', useEconPack); return; }
-      useEconPack();
+    UI.act('stashOpenPack', () => {
+      const cur = freshStack();
+      if (cur && cur.count === 1) { armOrRun('stashOpenPack', openPack); return; }
+      openPack();
     });
-    // 收藏 one/all 共享体（差异仅数量、幂等 requestId 与日志文案）
-    const convertStash = async (n, requestId, logText) => {
-      const read = readBase(B.slot);
-      if (!read.ok) { UI.log(homeErrorMessage(read), 'warn'); return; }
-      const result = await convertCollection({ slotId: B.slot, requestId: homeRequestId(requestId), expectedRevision: read.revision }, { stackKey: stackKeyOf(s), count: n });
-      if (!result.ok) { UI.log(result.message || '收藏失败，卡牌未消耗', 'warn'); return; }
-      Sfx.ding();
-      UI.log(logText, 'loot');
-      hubBridge.renderHub();
-    };
-    const collectOne = async () => {
-      // 2026-09-16 定版（Item 15）：职业卡/能力卡收藏即用掉——重复收藏重复获得经验，进度只记首次
-      const first = !B.isCollected(s.card);
-      await convertStash(1, 'collect-one', `[[icon:medal]] 已收藏【<b>${esc(s.card.name)}</b>】并转化为人物经验（卡牌用掉，不再占格${first ? '，收藏进度 +1' : ''}）`);
-    };
-    UI.act('collCollectOne', () => {
-      if (!convertType) return;
-      confirmStashAction(`收藏【${esc(s.card.name)}】会消耗 1 张卡并转化为人物熟练度经验。`, collectOne);
-    });
-    const collectAll = async () => {
-      if (!convertType) return;
-      await convertStash(s.count, 'collect-all', `[[icon:medal]] 已收藏【<b>${esc(s.card.name)}</b>】×${s.count}，全部转化为人物经验（卡牌用掉）`);
-    };
-    UI.act('collCollectAll', () => {
-      if (!convertType) return;
-      confirmStashAction(`收藏【${esc(s.card.name)}】×${s.count} 会消耗整堆卡牌，并转化为人物熟练度经验。`, collectAll);
-    });
-    UI.act('collToggle', () => {
-      const now = B.collectToggle(s.card);
-      if (now === null) { UI.log('基地存档未保存，收藏状态未改变', 'warn'); return; }
-      Sfx.ding();
-      // 经验结算必须最先：checkUnlocks → syncCollXp 会把已收藏的职业卡回填为
-      // 「已结算」，若先于 onCollect 执行，首次收藏的 +10 就被吃掉了
-      SDT.Meta.onCollect(s.card, now);
-      // 2026-09-10 留言 #39 定版：收藏只记录 + 转化经验，卡牌保留在仓库——
-      // 此前整堆从仓库删除（玩家感受等同卖出）。重复收藏入口已被收藏记录挡住，经验不重复发放。
-      UI.log(now
-        ? `[[icon:sparkles]] 已收藏【<b>${esc(s.card.name)}</b>】入职业收藏室，转化为人物熟练度经验（卡牌保留在仓库）${isSpecialCollect(s.card) ? '（特殊收藏品）' : ''}`
-        : `[[icon:sparkles]] 已取消收藏【<b>${esc(s.card.name)}</b>】`, now ? 'loot' : 'dim');
-      SDT.Meta.checkUnlocks();
-      hubBridge.renderHub();
-    });
-    // 卖出 one/all 共享体（差异仅数量）
-    const sellStash = (n) => {
-      const r = B.sellStashCards(s.card.name, n);
-      if (r.ok) { Sfx.ding(); UI.log(r.msg, 'coin'); }
-      // A6-STASH-02：失败（如存档写满）必须给提示，否则弹层关闭但卡未减少、币未到账
-      else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');
-      hubBridge.renderHub();
-    };
-    const sellOne = () => sellStash(1);
-    UI.act('sellOne', () => {
-      if (price >= 5 || s.count === 1) {
-        confirmStashAction(`卖出【${esc(s.card.name)}】将获得 ${price} 币${s.count === 1 ? '，这也是仓库里的最后一张' : ''}。`, sellOne);
-        return;
-      }
-      sellOne();
-    });
-    const sellAll = () => sellStash(s.count);
-    UI.act('sellAll', () => {
-      if (price >= 5 || s.count === 1) {
-        confirmStashAction(`卖出【${esc(s.card.name)}】整堆（×${s.count}）将获得 ${price * s.count} 币，操作不可撤回。`, sellAll);
-        return;
-      }
-      sellAll();
-    });
-    UI.act('stashBack', () => hubBridge.renderHub());
-  }
 
+    UI.showCardZoom(card, { footer: footerHTML() });
+  }
   // 基地物资（木材/口粮）：材料不可卖出换币（2026-09-08 定版）——只作展示说明
   function openRawItem(kind) {
     const B = SDT.Base;
@@ -647,4 +662,4 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       ${content}`;
   }
 
-export { hubShopHTML, hubStashHTML, openStashItem, openRawItem, hubUpgradeHTML, hubClassesHTML, hubAchHTML, HUB_SHOP_GOODS, hubShopGoodsCard };
+export { hubShopHTML, hubStashHTML, openStashCardView, openRawItem, hubUpgradeHTML, hubClassesHTML, hubAchHTML, HUB_SHOP_GOODS, hubShopGoodsCard };

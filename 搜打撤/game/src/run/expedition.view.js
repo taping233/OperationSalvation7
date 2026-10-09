@@ -40,9 +40,14 @@ export function expeditionRoutes(game) {
 }
 
 export function expeditionObjective(game) {
+  if (game.layerIdx >= 3 && game.bossKilled) return { tone: 'gold', text: '首脑已击破 · 前往终局撤离点，完成通关' };
   if (game.hp > 0 && game.hp / game.maxHp <= .25) return { tone: 'danger', text: '生命危急 · 留意火堆与治疗补给' };
-  if (game.layerIdx === 2) return { tone: 'safe', text: '撤离已开放 · 找到信标，献祭 3 张卡牌' };
-  if (game.layerIdx >= 3) return { tone: 'gold', text: game.bossKilled ? '首脑已击破 · 前往终局撤离点' : '最终区域 · 经祭坛挑战首脑' };
+  if (game.layerIdx === 2) return { tone: 'safe', text: '献祭 3 张卡牌可紧急撤离 · 或经闸门深入第四层，挑战首脑' };
+  if (game.layerIdx >= 3) {
+    if (!game.altarActivated) return { tone: 'gold', text: '最终区域 · 前往祭坛，弃 3 张卡牌解锁首脑' };
+    if (game.altarRewardPending) return { tone: 'gold', text: '祭坛已激活 · 返回祭坛领取奖励，再挑战首脑' };
+    return { tone: 'gold', text: '祭坛已激活 · 前往首脑巢穴，编组牌库迎战' };
+  }
   // W1-10（2026-09-27 R2）：闸门方向信号。此前目标文案零导航信息（评审三轮走查
   // 「只见相邻类型」）。读层门派生数据算最近前进闸门的方位角+直线步数——纯信息
   // 呈现：门节点本就随地图持久渲染（renderer PERSISTENT_TYPES），不给自动寻路、不揭迷雾。

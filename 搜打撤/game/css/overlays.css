@@ -11,11 +11,11 @@
   .card-slot, .safe-slot { background: #1e1e1e; }
   .bag-grid.safe-grid .bag-slot.empty.safe-empty { border-color: #555555; background: rgba(126,126,126,.08); }
   /* 2026-09-10 留言 #26：珍珠盒扩格（只收资源卡）与普通空格视觉区分 */
-  .bag-grid .bag-slot.empty.pearl-empty { border-style: dashed; border-color: #b9a86e;
-    background: radial-gradient(circle at 50% 42%, rgba(220,196,138,.16), rgba(20,20,20,0) 72%); }
+  .bag-grid .bag-slot.empty.pearl-empty { border-style: dashed; border-color: #c8af5f;
+    background: radial-gradient(circle at 50% 42%, rgba(232,207,126,.16), rgba(20,20,20,0) 72%); }
   .pk-list { display: flex; flex-direction: column; gap: 4px; max-height: 22vh; overflow-y: auto; }
   .pk-row { display: flex; justify-content: space-between; align-items: center; gap: 8px;
-    padding: 4px 8px; border: 1px solid #343434; border-radius: 8px; background: #191919;
+    padding: 4px 8px; border: 1px solid #343434; border-radius:0; background: #191919;
     font-size: 12.5px; text-align: left; }
   .pk-row .dim, .dim { color: #959595; font-size: 11.5px; }
   .pk-row .ic { width: 14px; height: 14px; vertical-align: -0.18em; }
@@ -26,13 +26,13 @@
   .pk-card .hs-card { width: 10em; height: 14em; font-size: clamp(9px, .82vw, 11px); max-width: 100%; }
   .pk-card .pk-tag { position: absolute; left: 3px; right: 3px; bottom: 3px; z-index: 5; text-align: center;
     font-size: 10px; letter-spacing: .05em; color: #f0c9c9; background: rgba(28,10,10,.82);
-    border: 1px solid rgba(198,96,96,.5); border-radius: 4px; padding: 1px 0; pointer-events: none; }
+    border: 1px solid rgba(198,96,96,.5); border-radius:0; padding: 1px 0; pointer-events: none; }
   .res-chip { border: 1px solid var(--line2); border-radius: 999px; padding: 4px 12px;
     font-size: 12.5px; color: #d5d5d5; white-space: nowrap;
     background: rgba(0,0,0,.18); box-shadow: inset 0 1px 3px rgba(0,0,0,.3); }
   .res-chip .ic { width: 14px; height: 14px; vertical-align: -0.2em; }
   .res-chip b { color: var(--gold); }
-  .base-card { border: 1px solid #343434; border-radius: 12px; background: linear-gradient(180deg, #222222, #191919);
+  .base-card { border: 1px solid #343434; border-radius:0; background: linear-gradient(180deg, #222222, #191919);
     padding: 12px 14px; box-shadow: inset 0 1px 0 rgba(240,240,240,.04); }
   .base-card h3 { margin: 0 0 8px; font-size: 14px; color: #e4e4e4; }
   .base-card h3 .ic { width: 15px; height: 15px; vertical-align: -0.2em; }
@@ -43,11 +43,11 @@
   .base-bar i { display: block; height: 100%; background: linear-gradient(90deg,#8a8a8a,#b3b3b3); }
   .base-bar.green i { background: linear-gradient(90deg,#7a7a7a,#c4c4c4); }
   .pet-row { display: flex; gap: 10px; align-items: center; font-size: 12.5px; color: #d5d5d5; margin-bottom: 6px; }
-  .ok-hint { color: #8fbf8a; }
+  .ok-hint { color: #a1a4a8; }
   .bt-hpwrap { position: relative; height: 14px; border-radius: 999px; background: #151515;
     overflow: hidden; margin: 5px 0 3px; max-width: 380px;
     border: 1px solid #3b3b3b; box-shadow: inset 0 2px 4px rgba(0,0,0,.5); }
-  .bt-hpwrap i { display: block; height: 100%; background: linear-gradient(90deg,#6f9e6a,#8fbf8a);
+  .bt-hpwrap i { display: block; height: 100%; background: linear-gradient(90deg,#808488,#a1a4a8);
     transition: width .25s; }
   .bt-hpwrap span { position: absolute; inset: 0; text-align: center; font-size: 10.5px;
     line-height: 14px; color: #ffffff; text-shadow: 0 1px 2px #000000; }
@@ -77,7 +77,7 @@
     border: 1.5px solid #454545; box-shadow: 0 2px 5px rgba(0,0,0,.5); }
   /* 注能选牌：被注能的本体压暗描边；消耗目标用黄铜图钉（.sel）标记 */
   .bt-card.infuse-self { opacity: .55; outline: 2px dashed #888888; outline-offset: 3px; border-radius: .9em; }
-  .bt-infuse { margin: 0 2px 8px; padding: 8px 12px; border: 1px solid #555555; border-radius: 10px;
+  .bt-infuse { margin: 0 2px 8px; padding: 8px 12px; border: 1px solid #555555; border-radius:0;
     background: linear-gradient(180deg, rgba(72,72,72,.28), rgba(23,23,23,.5));
     color: #cecece; font-size: 12.5px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .bt-infuse b { color: #b4b4b4; }
@@ -109,20 +109,20 @@
     background: linear-gradient(180deg, #7d7d7d, #3d3d3d);
     border: 1.5px solid #272727; box-shadow: 0 2px 5px rgba(0,0,0,.5), 0 0 8px rgba(120,120,120,.5); }
   /* 需求 #16：费用变动——降低 = 绿字，提高 = 红字（角标与卡面左上角费用同色） */
-  .bt-cost1.cost-mod.mod-down { background: linear-gradient(180deg, #3f9d5f, #1d5c35); border-color: #143c23;
-    box-shadow: 0 2px 5px rgba(0,0,0,.5), 0 0 8px rgba(90,220,140,.55); }
+  .bt-cost1.cost-mod.mod-down { background: linear-gradient(180deg, #5a6168, #323539); border-color: #212326;
+    box-shadow: 0 2px 5px rgba(0,0,0,.5), 0 0 8px rgba(90,177,220,.55); }
   .bt-cost1.cost-mod.mod-up   { background: linear-gradient(180deg, #c7513f, #7c2418); border-color: #551710;
     box-shadow: 0 2px 5px rgba(0,0,0,.5), 0 0 8px rgba(255,110,80,.55); }
   .hsc-cost.cost-mod { color: #ffffff; }
-  .hsc-cost.cost-mod.mod-down { background: #2f7d4c !important; box-shadow: 0 0 8px rgba(90,220,140,.65); }
+  .hsc-cost.cost-mod.mod-down { background: #464c51 !important; box-shadow: 0 0 8px rgba(90,177,220,.65); }
   .hsc-cost.cost-mod.mod-up   { background: #a03d2d !important; box-shadow: 0 0 8px rgba(255,110,80,.65); }
   /* 需求 #15：手牌上的「注能」角标——点击进入注能流程（直接点卡则不注能打出） */
   .bt-infchip { position: absolute; z-index: 5; right: -6px; bottom: -6px; display: inline-flex; align-items: center; gap: 3px;
-    padding: 3px 8px; border-radius: 999px; font-size: 10.5px; font-weight: 800; color: #ffe9a8;
-    background: linear-gradient(180deg, rgba(64,52,110,.96), rgba(34,26,64,.96));
-    border: 1.5px solid rgba(190,160,255,.75); box-shadow: 0 2px 6px rgba(0,0,0,.5);
+    padding: 3px 8px; border-radius: 999px; font-size: 10.5px; font-weight: 800; color: #ffeba8;
+    background: linear-gradient(180deg, rgba(66,71,76,.96), rgba(37,40,42,.96));
+    border: 1.5px solid rgba(202,208,213,.75); box-shadow: 0 2px 6px rgba(0,0,0,.5);
     cursor: pointer; transition: transform .12s, box-shadow .12s; }
-  .bt-infchip:hover { transform: translateY(-1px) scale(1.05); box-shadow: 0 3px 10px rgba(120,80,255,.55); }
+  .bt-infchip:hover { transform: translateY(-1px) scale(1.05); box-shadow: 0 3px 10px rgba(80,197,255,.55); }
   .bt-infchip:active { transform: scale(.96); }
   .bt-infchip img { width: 11px; height: 11px; }
 
@@ -133,7 +133,7 @@
     backdrop-filter: none; }
   #title[hidden], #exitScr[hidden] { display: none; }
   .menu { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
-  .menu-btn { width: 252px; padding: 13px; font-size: 15.5px; letter-spacing: 6px; border-radius: 10px;
+  .menu-btn { width: 252px; padding: 13px; font-size: 15.5px; letter-spacing: 6px; border-radius:0;
     border: 1px solid rgba(171,171,171,.4); background: rgba(34,34,34,.6); color: var(--amber-soft);
     font-family: var(--serif); font-weight: 700;
     box-shadow: inset 0 1px 0 rgba(237,237,237,.08), 0 4px 12px rgba(0,0,0,.35);
@@ -153,24 +153,24 @@
   /* 选档页占满整个界面（突破 .card.page 的 1220x880 限制） */
   #overlay .card.page:has(.slot-page) { width: 100%; height: 100%; max-width: none; max-height: none; }
   #overlay .card .pg.slot-page { background:
-    radial-gradient(ellipse 120% 90% at 50% 30%, #3b4a7a 0%, #2a3560 34%, #1b2444 62%, #121731 100%); }
+    radial-gradient(ellipse 120% 90% at 50% 30%, #4a5055 0%, #383d41 34%, #272a2d 62%, #1b1d20 100%); }
   .slot-page::before { content: ''; position: absolute; inset: -20%; z-index: 0;
     background:
-      radial-gradient(ellipse 42% 34% at 30% 62%, rgba(129,142,222,.34), transparent 68%),
-      radial-gradient(ellipse 38% 30% at 72% 40%, rgba(96,180,208,.22), transparent 70%),
-      radial-gradient(ellipse 50% 40% at 52% 84%, rgba(58,52,110,.55), transparent 72%);
+      radial-gradient(ellipse 42% 34% at 30% 62%, rgba(129,191,222,.34), transparent 68%),
+      radial-gradient(ellipse 38% 30% at 72% 40%, rgba(138,154,166,.22), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 52% 84%, rgba(66,71,76,.55), transparent 72%);
     filter: blur(2px); animation: slotMist 26s ease-in-out infinite alternate; }
   .slot-page::after { content: ''; position: absolute; inset: 0; z-index: 0;
     background:
-      linear-gradient(180deg, rgba(10,12,28,.42), transparent 26%, transparent 62%, rgba(8,10,22,.6)),
-      linear-gradient(90deg, rgba(10,12,28,.5), transparent 30%, transparent 70%, rgba(10,12,28,.5)); }
+      linear-gradient(180deg, rgba(16,17,18,.42), transparent 26%, transparent 62%, rgba(12,13,14,.6)),
+      linear-gradient(90deg, rgba(16,17,18,.5), transparent 30%, transparent 70%, rgba(16,17,18,.5)); }
   @keyframes slotMist { from { transform: translate3d(-2.5%, -1%, 0) scale(1); }
     to { transform: translate3d(2.5%, 1.5%, 0) scale(1.08); } }
 
   /* 背景层：光斑 bokeh + 发光鹿马剪影 + 鸟群（手绘 SVG，缓慢漂移/呼吸） */
   .slot-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
   .slot-bg .bokeh { position: absolute; border-radius: 50%;
-    background: radial-gradient(circle at 38% 34%, rgba(255,255,255,.85), rgba(196,214,255,.28) 55%, transparent 72%);
+    background: radial-gradient(circle at 38% 34%, rgba(255,255,255,.85), rgba(222,226,229,.28) 55%, transparent 72%);
     filter: blur(1px); opacity: .5; animation: slotBokeh 9s ease-in-out infinite alternate; }
   .slot-bg .bokeh:nth-child(1) { left: 8%;  top: 16%; width: 10px;  height: 10px;  animation-delay: -1s; }
   .slot-bg .bokeh:nth-child(2) { left: 20%; top: 64%; width: 16px;  height: 16px;  animation-delay: -4s; opacity: .34; }
@@ -182,14 +182,14 @@
   .slot-bg .bokeh:nth-child(8) { left: 93%; top: 70%; width: 11px;  height: 11px;  animation-delay: -2.7s; opacity: .42; }
   @keyframes slotBokeh { from { transform: translate3d(0, 0, 0); opacity: .22; }
     to { transform: translate3d(14px, -22px, 0); opacity: .66; } }
-  .slot-bg .sil { position: absolute; color: #fdf6e8;
-    filter: drop-shadow(0 0 14px rgba(253,246,232,.75)) drop-shadow(0 0 42px rgba(190,205,255,.4));
+  .slot-bg .sil { position: absolute; color: #f4f3f1;
+    filter: drop-shadow(0 0 14px rgba(244,243,241,.75)) drop-shadow(0 0 42px rgba(219,222,226,.4));
     opacity: .85; animation: silBreathe 7s ease-in-out infinite alternate; }
   .slot-bg .sil-horse { left: 18%; top: 13%; width: clamp(90px, 10vw, 150px); transform: scaleX(-1); }
   .slot-bg .sil-deer { left: 60%; top: 8%; width: clamp(110px, 12vw, 180px); animation-delay: -3.5s; }
   .slot-bg .sil-birds { position: absolute; left: 34%; top: 9%; width: clamp(200px, 24vw, 380px);
-    color: #f4eede; opacity: .6;
-    filter: drop-shadow(0 0 8px rgba(244,238,222,.6));
+    color: #ebeae7; opacity: .6;
+    filter: drop-shadow(0 0 8px rgba(235,234,231,.6));
     animation: birdsDrift 30s linear infinite alternate; }
   /* 呼吸只动 opacity：drop-shadow 参数逐帧变化会迫使全屏 SVG 每帧重光栅（选档页掉帧主因） */
   @keyframes silBreathe { from { opacity: .55; } to { opacity: .95; } }
@@ -198,16 +198,16 @@
   .slot-page-head { position: relative; z-index: 1; flex-shrink: 0; text-align: center;
     padding: clamp(52px, 8.5vh, 78px) 0 2px; }
   #overlay .slot-page-head h2 { font-size: clamp(22px, 2.6vw, 30px); letter-spacing: 14px; text-indent: 14px;
-    color: #f2f4fa; font-weight: 400;
-    text-shadow: 0 0 18px rgba(150,170,255,.55), 0 2px 6px rgba(0,0,10,.7); }
+    color: #f6f6f6; font-weight: 400;
+    text-shadow: 0 0 18px rgba(196,203,209,.55), 0 2px 6px rgba(4,4,5,.7); }
   .slot-page-en { display: block; margin-top: 6px; font: 10px 'Cascadia Code', monospace;
-    letter-spacing: .5em; text-indent: .5em; color: #9aa6cf; }
+    letter-spacing: .5em; text-indent: .5em; color: #aeb6bb; }
   .slot-page-rule { display: block; position: relative; width: min(420px, 46%); height: 1px;
     margin: 14px auto 0;
-    background: linear-gradient(90deg, transparent, #b9c2e8 30%, #b9c2e8 70%, transparent); }
+    background: linear-gradient(90deg, transparent, #ced0d3 30%, #ced0d3 70%, transparent); }
   .slot-page-rule::after { content: ''; position: absolute; left: 50%; top: 50%; width: 7px; height: 7px;
-    transform: translate(-50%, -50%) rotate(45deg); background: #eef0ff;
-    box-shadow: 0 0 10px rgba(200,210,255,.95); }
+    transform: translate(-50%, -50%) rotate(45deg); background: #f5f6f8;
+    box-shadow: 0 0 10px rgba(224,227,231,.95); }
   /* U6（2026-09-19 走查）：帮助「?」随标题行排布（原孤悬页面左上角，视觉上像误放的悬浮点） */
   .slot-page-help { position: absolute; right: clamp(20px, 8vw, 140px); top: clamp(56px, 8.8vh, 84px); }
 
@@ -217,18 +217,18 @@
   .slot-card { position: relative; flex: 0 1 236px; min-width: 0; max-width: 250px; display: flex;
     flex-direction: column; align-items: center; text-align: center; cursor: pointer;
     padding: clamp(18px, 3vh, 32px) 14px 14px; color: inherit; font-family: inherit;
-    border: 1px solid rgba(130,148,200,.32);
-    background: linear-gradient(180deg, rgba(16,20,42,.9), rgba(9,11,26,.94));
-    box-shadow: 0 14px 34px rgba(2,4,16,.6), inset 0 0 30px rgba(120,140,220,.05);
+    border: 1px solid rgba(156,166,174,.32);
+    background: linear-gradient(180deg, rgba(24,26,27,.9), rgba(14,15,16,.94));
+    box-shadow: 0 14px 34px rgba(7,8,8,.6), inset 0 0 30px rgba(120,187,220,.05);
     transition: border-color .18s, box-shadow .18s, transform .18s; }
-  .slot-page .slot-card:hover { border-color: rgba(200,212,250,.75); transform: translateY(-4px);
-    box-shadow: 0 0 24px rgba(150,170,255,.25), 0 18px 38px rgba(2,4,16,.65); }
+  .slot-page .slot-card:hover { border-color: rgba(222,225,228,.75); transform: translateY(-4px);
+    box-shadow: 0 0 24px rgba(196,203,209,.25), 0 18px 38px rgba(7,8,8,.65); }
   .slot-page .slot-card:active { transform: scale(.98); }
   /* 图标区：渐变白体 SVG + 外发光呼吸；空档压暗 */
   .slot-card-art { position: relative; flex: 1 1 auto; min-height: clamp(90px, 17vh, 156px);
     width: 100%; display: flex; align-items: center; justify-content: center; }
   .slot-card-art .slot-ico { width: clamp(76px, 13vh, 122px); height: clamp(76px, 13vh, 122px);
-    filter: drop-shadow(0 0 11px rgba(224,236,255,.9)) drop-shadow(0 0 34px rgba(160,185,255,.5));
+    filter: drop-shadow(0 0 11px rgba(238,240,241,.9)) drop-shadow(0 0 34px rgba(202,208,213,.5));
     animation: icoBreathe 4.5s ease-in-out infinite alternate; }
   /* 呼吸只动 opacity（合成器线程），filter 保持静态——drop-shadow 尺寸逐帧变化会每帧重 blur 整个图标 */
   @keyframes icoBreathe { from { opacity: .66; } to { opacity: 1; } }
@@ -236,29 +236,29 @@
   /* 图标下的四芒星光（有档才有） */
   .slot-card-spark { position: absolute; bottom: 3%; left: 50%; width: 10px; height: 10px;
     transform: translateX(-50%) rotate(45deg);
-    background: radial-gradient(circle, #ffffff 28%, rgba(255,240,200,.85) 55%, transparent 72%);
-    box-shadow: 0 0 10px #ffeecb, 0 0 24px rgba(255,233,196,.85); }
+    background: radial-gradient(circle, #ffffff 28%, rgba(232,230,223,.85) 55%, transparent 72%);
+    box-shadow: 0 0 10px #eae7e0, 0 0 24px rgba(231,227,220,.85); }
   .slot-page .slot-card:not(.filled) .slot-card-spark { display: none; }
   .slot-page .slot-card-name { flex-shrink: 0; margin-top: 10px; font-family: var(--serif); font-weight: 400;
-    font-size: clamp(17px, 1.9vw, 22px); letter-spacing: 6px; text-indent: 6px; color: #f4f6fc;
-    text-shadow: 0 0 12px rgba(170,190,255,.5); }
+    font-size: clamp(17px, 1.9vw, 22px); letter-spacing: 6px; text-indent: 6px; color: #f8f8f8;
+    text-shadow: 0 0 12px rgba(207,212,218,.5); }
   .slot-page .slot-card-sub { flex-shrink: 0; margin-top: 4px; font: 9px 'Cascadia Code', monospace;
-    letter-spacing: .45em; text-indent: .45em; color: #8f9cc9; }
+    letter-spacing: .45em; text-indent: .45em; color: #a5adb3; }
   .slot-card-rule { flex-shrink: 0; width: 74%; height: 1px; margin: 10px 0;
-    background: linear-gradient(90deg, transparent, rgba(200,212,250,.6), transparent); }
+    background: linear-gradient(90deg, transparent, rgba(222,225,228,.6), transparent); }
   .slot-page .slot-card-desc { flex: 1 1 auto; min-height: 0; width: 100%; overflow: hidden;
-    font-size: 12px; line-height: 1.7; color: #c2cbe4; }
+    font-size: 12px; line-height: 1.7; color: #d1d3d5; }
   .slot-card-desc .si-line { text-align: left; margin-bottom: 9px; }
   .slot-card-desc .si-line em { font-style: normal; display: block; font-size: 9px;
-    letter-spacing: .3em; color: #97a3cc; }
-  .slot-card-desc .si-line b { color: #f0f3fb; font-weight: 600; }
+    letter-spacing: .3em; color: #abb3b8; }
+  .slot-card-desc .si-line b { color: #f5f5f6; font-weight: 600; }
   .slot-card-desc .si-sub { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
-    overflow: hidden; color: #97a2c6; font-size: 10.5px; line-height: 1.6; }
-  .slot-page .slot-empty { color: #8f9cc9; letter-spacing: 2px; font-size: 11px; }
+    overflow: hidden; color: #a9afb4; font-size: 10.5px; line-height: 1.6; }
+  .slot-page .slot-empty { color: #a5adb3; letter-spacing: 2px; font-size: 11px; }
   .slot-page .slot-card-cta { flex-shrink: 0; margin-top: 12px; padding: 8px 20px; font-size: 12px;
-    letter-spacing: 3px; color: #eaf0fd; border: 1px solid rgba(200,212,250,.45);
-    background: rgba(200,212,250,.07); transition: all .18s; }
-  .slot-page .slot-card.filled:hover .slot-card-cta { background: #d8bc86; border-color: #d8bc86; color: #152e3b; }
+    letter-spacing: 3px; color: #f2f3f5; border: 1px solid rgba(222,225,228,.45);
+    background: rgba(222,225,228,.07); transition: all .18s; }
+  .slot-page .slot-card.filled:hover .slot-card-cta { background: #e4cb7a; border-color: #e4cb7a; color: #212326; }
   /* 覆盖/删除：hover 卡片才浮现 */
   .slot-page .slot-card-ops { flex-shrink: 0; display: flex; gap: 8px; margin-top: 9px;
     opacity: 0; transform: translateY(4px); transition: opacity .18s, transform .18s;
@@ -279,21 +279,21 @@
   .ov-btn.arm, .mini-btn.arm { border-color: #5c5c5c; background: #2c2c2c; color: #ffffff; }
 
   /* 左上角按钮（旧侧栏头部样式已移除，样式见 #topBtns） */
-  #btnHome, #btnMute { padding: 3px 9px; font-size: 12px; border-radius: 6px; border: 1px solid var(--line2);
+  #btnHome, #btnMute { padding: 3px 9px; font-size: 12px; border-radius:0; border: 1px solid var(--line2);
     background: #212121; color: #959595; cursor: pointer; transition: all .15s; }
   #btnHome:hover, #btnMute:hover { color: var(--amber-soft); border-color: #6f6f6f; transform: translateY(-1px); }
   /* 左上角红色退出按钮（参照 ARKNights 风格） */
   #btnHome.exit-btn { width: 44px; height: 44px; padding: 0; display: flex; align-items: center; justify-content: center;
-    border-radius: 8px; border: none;
-    background: linear-gradient(160deg, #A02020 0%, #701616 100%);
+    border-radius:0; border: none;
+    background: linear-gradient(160deg, #a02020 0%, #701616 100%);
     color: #f3eae8; box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 2px 6px rgba(0,0,0,.45); }
-  #btnHome.exit-btn:hover { background: linear-gradient(160deg, #B82A2A 0%, #82201B 100%);
+  #btnHome.exit-btn:hover { background: linear-gradient(160deg, #b82a2a 0%, #82201b 100%);
     border: none; color: #ffffff; transform: translateY(-1px); }
   #btnHome.exit-btn:active { transform: scale(.95); }
   #btnHome.exit-btn svg { display: block; }
 
   #invList li b { margin-left: auto; color: #c4c4c4; font-weight: 600; }
-  .tier { font-size: 10px; font-weight: 700; border-radius: 4px; padding: 1px 5px; min-width: 20px;
+  .tier { font-size: 10px; font-weight: 700; border-radius:0; padding: 1px 5px; min-width: 20px;
     text-align: center; }
 
   .log-panel #log { font-size: 12.5px; line-height: 1.5; }
@@ -324,7 +324,7 @@
   #pixiFx canvas { display: block; width: 100%; height: 100%; pointer-events: none; }
   #tooltip { position: absolute; pointer-events: none; z-index: 10; max-width: 250px;
     background: rgba(19,19,19,.96); border: 1px solid rgba(171,171,171,.45); border-left: 3px solid var(--amber);
-    border-radius: 8px; padding: 8px 11px; font-size: 12.5px; line-height: 1.55;
+    border-radius:0; padding: 8px 11px; font-size: 12.5px; line-height: 1.55;
     box-shadow: 0 6px 20px rgba(0,0,0,.55); }
   #tooltip b { display: block; color: #e6e6e6; font-size: 13px; margin-bottom: 2px; }
   #tooltip span { display: block; color: #afafaf; }
@@ -333,8 +333,8 @@
   #overlay { position: absolute; inset: 0; z-index: 20; display: flex; align-items: center;
     justify-content: center; background: rgba(8,8,8,.75); backdrop-filter: blur(5px);
     animation: ovFadeIn .16s ease; }
-  #overlay:focus { outline: 2px solid #e1c98d; outline-offset: -4px; }
-  #overlay :focus-visible { outline: 2px solid #f0d3a0; outline-offset: 3px; }
+  #overlay:focus { outline: 2px solid #ecd382; outline-offset: -4px; }
+  #overlay :focus-visible { outline: 2px solid #f9e297; outline-offset: 3px; }
   #overlay[hidden] { display: none; }  /* display:flex 会盖过 hidden 的 UA 默认值，必须显式声明 */
   /* 地图格子房间页：覆盖整个游戏窗口，场景、战斗与结算在同一全屏层连续切换。 */
   #overlay.room-view { position: fixed; inset: 0; z-index: 100; padding: 0;
@@ -373,7 +373,7 @@
   #overlay .card.swap { animation: cardSwap .28s cubic-bezier(.22,1,.36,1); }
   @keyframes cardSwap { from { opacity: 0; transform: translateY(16px); } }
   #overlay .card { width: min(430px, 90%); background: linear-gradient(180deg, #232323, #171717);
-    border: 1px solid #5f5f5f; border-radius: 14px; padding: 26px 24px 22px; text-align: center;
+    border: 1px solid #5f5f5f; border-radius:0; padding: 26px 24px 22px; text-align: center;
     position: relative; overflow: hidden;
     box-shadow: 0 18px 60px rgba(0,0,0,.65), inset 0 0 0 1px rgba(237,237,237,.05);
     animation: cardIn .22s cubic-bezier(.22,1,.36,1); }
@@ -390,7 +390,7 @@
   .ov-stats b { color: #e4e4e4; } .gold, .ov-stats b.gold { color: #c4c4c4; }
   .ov-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
   .ov-btns .ov-btn { grid-column: auto; }
-  .ov-btn { padding: 11px 18px; font-size: 13.5px; font-weight: 600; border-radius: 9px; cursor: pointer;
+  .ov-btn { padding: 11px 18px; font-size: 13.5px; font-weight: 600; border-radius:0; cursor: pointer;
     border: 1px solid var(--line2); background: linear-gradient(180deg, #2f2f2f, #1c1c1c); color: var(--txt);
     box-shadow: inset 0 1px 0 rgba(240,240,240,.06);
     transition: all .15s; }
@@ -405,7 +405,7 @@
 
   /* 首页留言弹层的输入框（写给 Friday 的建议） */
   .sug-textarea { width:100%; min-height:150px; padding:12px 14px; margin-bottom:12px;
-    background:rgba(0,0,0,.32); border:1px solid #3a3a3a; border-radius:8px;
+    background:rgba(0,0,0,.32); border:1px solid #3a3a3a; border-radius:0;
     color:#e4e4e4; font:inherit; font-size:13.5px; line-height:1.6; resize:vertical;
     transition:border-color .15s ease; }
   .sug-textarea:focus { outline:none; border-color:#8b8b8b; }
@@ -415,11 +415,11 @@
 
   /* 全局右键建议层：叠加在任意界面之上，不占用 overlay 系统 */
   #sugLayer { position:fixed; inset:0; z-index:900; display:grid; place-items:center;
-    background:rgba(8,10,12,.62); backdrop-filter:blur(3px); }
+    background:rgba(8,9,9,.62); backdrop-filter:blur(3px); }
   #sugLayer[hidden] { display:none; }
   #sugLayer .sug-panel { width:min(520px, 92vw); padding:22px 24px 18px;
     max-height:min(90vh, 760px); overflow:auto;
-    background:linear-gradient(180deg, #262626, #171717); border:1px solid #454545; border-radius:14px;
+    background:linear-gradient(180deg, #262626, #171717); border:1px solid #454545; border-radius:0;
     box-shadow:0 18px 50px rgba(0,0,0,.55), inset 0 1px 0 rgba(240,240,240,.07); }
   #sugLayer .sug-head { margin:0 0 10px; font-size:16.5px; font-weight:700; color:#ececec; letter-spacing:.06em; }
   #sugLayer .sug-where { margin:0 0 6px; color:#c9c9c9; font-size:12.5px; line-height:1.7;
@@ -431,16 +431,16 @@
   .sugin-detail b { display:block; color:#8b8b8b; font-size:10px; letter-spacing:.08em; }
 
   /* ============ 职业宝箱（黑箱，2026-09-06）：只掉落职业卡牌 ============ */
-  .cls-chest-note { color: #c9b98a; }
-  .cls-chest-note b { color: #e8d9a8; }
-  .bt-card.cls-chest .hs-card { border-color: #15151b; box-shadow: 0 .34em 1em rgba(0,0,0,.65), inset 0 0 0 1px #2c2c36;
-    background: linear-gradient(165deg, #2a2a33 0%, #12121a 55%, #1d1d26 100%); }
+  .cls-chest-note { color: #d5c17e; }
+  .cls-chest-note b { color: #f1de9f; }
+  .bt-card.cls-chest .hs-card { border-color: #141517; box-shadow: 0 .34em 1em rgba(0,0,0,.65), inset 0 0 0 1px #282b2e;
+    background: linear-gradient(165deg, #26292c 0%, #121315 55%, #1b1d20 100%); }
 
   /* ============ 撤离失败页（2026-09-13 留言：UI 重做 + 背景透明） ============
      原来整屏铺 room-view 的 #0c0c0c 深灰渐变（战场与画布全被盖死），现在改成
      「战败战报」：背景只留一层可透视的暗纱，战果收进居中玻璃面板。
      模式标记由 UI.showOverlay(..., 'doom') 打在 #overlay 上（ui.js）。 */
-  #overlay.room-view.fx-doom { background: rgba(6,8,12,.5); backdrop-filter: blur(3px) saturate(.72);
+  #overlay.room-view.fx-doom { background: rgba(7,8,8,.5); backdrop-filter: blur(3px) saturate(.72);
     animation: ovFadeIn .22s ease; }
   #overlay.room-view.fx-doom .card.room { background: none; border: 0; box-shadow: none;
     padding: clamp(16px,3vh,30px) clamp(18px,4vw,44px); overflow: hidden; justify-content: center; }
@@ -453,23 +453,23 @@
 
   .doom-panel { width: min(720px, 94%); padding: 24px 26px 20px; text-align: center;
     background: linear-gradient(180deg, rgba(30,19,21,.82), rgba(11,9,11,.9));
-    border: 1px solid rgba(200,80,60,.42); border-radius: 16px;
+    border: 1px solid rgba(200,80,60,.42); border-radius:0;
     box-shadow: 0 30px 80px rgba(0,0,0,.72), inset 0 0 0 1px rgba(255,255,255,.05),
       inset 0 1px 0 rgba(255,180,150,.14);
     animation: doomIn .5s cubic-bezier(.22,1,.36,1); }
   @keyframes doomIn { from { opacity: 0; transform: translateY(28px) scale(.96); } }
   .doom-sub { margin: 0 0 18px; color: #d9b6ae; font-size: 13.5px; letter-spacing: .14em; }
   .doom-stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-bottom: 16px; }
-  .doom-stat { padding: 10px 8px 11px; border-radius: 10px; background: rgba(255,255,255,.045);
+  .doom-stat { padding: 10px 8px 11px; border-radius:0; background: rgba(255,255,255,.045);
     border: 1px solid rgba(255,255,255,.08);
     animation: doomStatIn .5s cubic-bezier(.22,1,.36,1) backwards;
     animation-delay: calc(var(--i, 0) * 110ms + 140ms); }
   @keyframes doomStatIn { from { opacity: 0; transform: translateY(16px); } }
   .ds-k { display: block; color: #8e878d; font-size: 11.5px; letter-spacing: .14em; margin-bottom: 6px; }
-  .ds-v { font: 800 21px/1.1 ui-monospace, monospace; color: #eae5df; }
-  .ds-v.bad { color: #ff8f74; } .ds-v.good { color: #86dfbf; }
+  .ds-v { font: 800 21px/1.1 ui-monospace, monospace; color: #e5e5e4; }
+  .ds-v.bad { color: #ff8f74; } .ds-v.good { color: #86c1df; }
   .doom-loot { margin-bottom: 16px; }
-  .doom-loot-h { margin: 0 0 10px; color: #dfc28d; font-size: 12.5px; letter-spacing: .12em; }
+  .doom-loot-h { margin: 0 0 10px; color: #ead282; font-size: 12.5px; letter-spacing: .12em; }
   .doom-cards { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; }
   .doom-card { display: inline-flex;
     animation: doomCardIn .5s cubic-bezier(.22,1,.36,1) backwards;
@@ -478,7 +478,7 @@
   .doom-cards .hs-card { font-size: 9.5px; }
   .doom-more { color: #9b9691; font-size: 12px; }
   #overlay .doom-panel .ov-note { color: #9b9691; font-size: 12.5px; margin: 0 0 16px; line-height: 1.7; }
-  #overlay .doom-panel .ov-note b { color: #e0dad4; }
+  #overlay .doom-panel .ov-note b { color: #dbdad9; }
   .doom-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
   #overlay .doom-btns .ov-btn { padding: 13px 18px; font-size: 14px; }
   #overlay .doom-btns .ov-btn.ok { border-color: rgba(255,138,92,.55);
@@ -489,11 +489,11 @@
 #overlay .card { position: relative; }
 #overlay .card .ov-x { position: absolute; top: 10px; right: 12px; z-index: 5;
   width: 30px; height: 30px; border-radius: 50%;
-  border: 1px solid rgba(160,185,195,.4); background: rgba(14,32,42,.6);
-  color: #b9ccd3; font-size: 17px; line-height: 1; cursor: pointer;
+  border: 1px solid rgba(173,178,182,.4); background: rgba(23,25,26,.6);
+  color: #c3c7c9; font-size: 17px; line-height: 1; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   transition: all .15s; }
-#overlay .card .ov-x:hover { background: rgba(46,74,88,.9); color: #fff; border-color: rgba(200,220,228,.7); }
+#overlay .card .ov-x:hover { background: rgba(55,59,63,.9); color: #ffffff; border-color: rgba(212,214,216,.7); }
 #overlay .card .ov-x:active { transform: scale(.92); }
 /* hidden 属性会被上面的 display:flex 覆盖（作者样式>UA默认），显式补回隐藏态 */
 #overlay .card .ov-x[hidden] { display: none; }
@@ -502,13 +502,13 @@
  * 单例 fixed 挂 body（term-tips.js），跟随触发词条定位；视觉走药水提示栏同族纸白底+近黑字（09-13 定版口径） */
 .term-tip { position: fixed; z-index: 9999; pointer-events: none;
   width: max-content; max-width: min(88vw, 420px);
-  padding: 8px 14px; border: 1px solid rgba(122,107,84,.45); border-radius: 10px;
-  background: rgba(250,247,238,.96); color: #1c1a16;
+  padding: 8px 14px; border: 1px solid rgba(122,111,84,.45); border-radius:0;
+  background: rgba(244,244,244,.96); color: #1c1a16;
   font-size: clamp(12px, 1.2vw, 13.5px); line-height: 1.65;
-  box-shadow: 0 4px 14px rgba(40,32,20,.42); }
+  box-shadow: 0 4px 14px rgba(40,34,20,.42); }
 .term-tip img, .term-tip svg { width: 15px; height: 15px; vertical-align: -2px; margin-right: 3px; }
-.term-tip b { color: #5a3c14; }
-.term-tip .term-tip-sep { color: #a08e6e; padding: 0 2px; }
+.term-tip b { color: #5a4514; }
+.term-tip .term-tip-sep { color: #ae9c60; padding: 0 2px; }
 .term-tip[hidden] { display: none; }
 
 /* ═══ 统一弹层壳 .ov-shell（2026-09-25 UI 统一批·中心）═══
@@ -516,11 +516,11 @@
    用法：弹层根元素挂 class="ov-shell" + data-index="02"（编号按页内清单序）；
    页面专属内容仍在各自 page-*.css 里写，壳只管外框语言。 */
 .ov-shell { position: relative;
-  background: linear-gradient(180deg, #20262c, #171c22);
-  border: 1px solid rgba(217,187,130,.28);
+  background: linear-gradient(180deg, #1f2124, #17191b);
+  border: 1px solid rgba(230,203,118,.28);
   border-radius: var(--radius-panel, 2px);
   box-shadow: 0 24px 70px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06); }
 .ov-shell::before { content: ''; position: absolute; top: 0; left: 8%; right: 8%; height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(217,187,130,.85), transparent); }
+  background: linear-gradient(90deg, transparent, rgba(230,203,118,.85), transparent); }
 .ov-shell::after { content: attr(data-index); position: absolute; top: 10px; right: 16px;
-  font-size: 10px; letter-spacing: .3em; color: rgba(217,187,130,.5); pointer-events: none; }
+  font-size: 10px; letter-spacing: .3em; color: rgba(230,203,118,.5); pointer-events: none; }
