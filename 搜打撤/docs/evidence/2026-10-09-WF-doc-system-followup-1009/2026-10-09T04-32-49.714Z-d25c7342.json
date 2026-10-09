@@ -1,0 +1,2453 @@
+{
+  "schemaVersion": 1,
+  "task": "WF-doc-system-followup-1009",
+  "kind": "automated-local-check",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "scripts/acceptance-gate.mjs",
+    "--target-tests",
+    "tests/workflow-task.test.js",
+    "tests/docs-consistency.test.js"
+  ],
+  "cwd": "D:\\素材\\代号柒\\搜打撤",
+  "startedAt": "2026-10-09T04:32:49.875Z",
+  "endedAt": "2026-10-09T04:32:51.853Z",
+  "head": "baf60de2d68c9191fd3cf5c62985cd354bfa07c9",
+  "statusBefore": "M ../AGENTS.md\n M ../README.md\n M README.md\n M docs/AGENT-TOOLBOX.md\n M docs/BASE-DIRECT-WRITE-AUDIT-2026-09-29.md\n M docs/DEBT-CAMPAIGN-2026-10.md\n M docs/DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md\n M docs/M-BATCH-MATRIX.md\n M docs/PARALLEL-REGISTRY.md\n M docs/PENDING.md\n M docs/PERF-LEDGER-2026-09-29.md\n M docs/PHOTOLIB-PERF-TASK-2026-09-29.md\n M docs/QUICKSTART.md\n M docs/README.md\n M docs/STATUS.md\n M docs/UI-TOKEN-SYSTEM-PROPOSAL.md\n M docs/WORKFLOW-TOOLS.md\n M docs/agent-iteration-playbook.md\n M docs/agent-protocol.md\n M docs/architecture.md\n M docs/asset-audit-debt.md\n M docs/audio-system.md\n M docs/cards/README.md\n M docs/character-bible/README.md\n M docs/class-consolidation.md\n M docs/development.md\n M docs/game-compendium.md\n M docs/performance.md\n M docs/production/README.md\n M docs/production/design/GDD.md\n M docs/production/engineering/CODE-DATA-WORKFLOW.md\n M docs/production/management/DECISIONS.md\n M docs/production/management/ITERATION-BOARD.md\n M docs/production/management/NEXT-CYCLE-TECH-PLAN.md\n M docs/production/project/CHARTER.md\n M docs/production/qa/ACCEPTANCE-MATRIX.md\n M docs/quality-gates.md\n M docs/roadmap.md\n M docs/rules.md\n M docs/save-format.md\n M docs/terminology.md\n M game/assets/cards/spell-tt3-holy-water.webp\n M game/css/title-p0.css\n M game/data/cards-sync.json\n M game/index.html\n M game/src/README.md\n M game/src/battle/core/battle.core.js\n M game/src/battle/core/battle.engine.js\n M game/src/battle/effects/effect-steps.m2.js\n M game/src/cards/card-rules.schema.js\n M game/src/cards/cards.data.js\n M game/src/cards/cards.sync.face-refresh.js\n M game/src/cards/cards.sync.m9.js\n M game/src/cards/cards.view.js\n M game/src/generated/art-manifest.js\n M game/src/hub/game.hub.js\n M game/src/hub/game.hub.pages.js\n M game/src/ui/feedback.local.js\n M game/src/ui/game.menu.js\n M game/src/ui/term-tips.js\n M scripts/workflow-task.mjs\n M tests/battle-lifecycle.test.js\n M tests/card-art-coverage.test.js\n M tests/hand-cost-patterns.test.js\n M tests/home-async-lifecycle.test.js\n M tests/hub-flow-regression.test.js\n M tests/m8-data.test.js\n M tests/m9-data.test.js\n M tests/r7b-feedback.test.js\n M tests/workflow-task.test.js\n?? ../nul\n?? bash.exe.stackdump\n?? docs/archive/WF-ledger-context-1009/\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-40-53.381Z-9a1affee-staged.json\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-56-38.896Z-d5ca5df9-staged.json\n?? docs/evidence/2026-10-02-seven-departments-review/tmp/contact-3.png\n?? docs/evidence/2026-10-02-staged-check/2026-10-02T01-22-15.433Z-e5d284fd-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-19-39.159Z-5fbee550-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-27-43.086Z-63530fe5-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-46-33.917Z-9cb2485d-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-51-21.366Z-f2ed6511-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-59-11.935Z-35c52133-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-03-58.112Z-5cc22689-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-08-10.704Z-da12b315-staged.json\n?? docs/evidence/2026-10-04-WF-home-minako-layout/before-1280x720.png\n?? docs/evidence/2026-10-04-WF-home-minako-layout/r2-1280x720.png\n?? docs/evidence/2026-10-04-WF-home-minako-layout/r3-final-1280x720.png\n?? docs/evidence/2026-10-05-WF-card-ally-redesign/before/\n?? docs/evidence/2026-10-05-WF-exe-1005/\n?? docs/evidence/2026-10-05-WF-feedback-inbox-polish/\n?? docs/evidence/2026-10-05-WF-inbox-export-all/\n?? docs/evidence/2026-10-05-WF-music-continuity-review/\n?? docs/evidence/2026-10-05-WF-music-explore-battle-v4/\n?? docs/evidence/2026-10-05-WF-music-gap/\n?? docs/evidence/2026-10-05-WF-music-identity/\n?? docs/evidence/2026-10-05-WF-music-independent-review/\n?? docs/evidence/2026-10-05-WF-music-missing-bgm/\n?? docs/evidence/2026-10-05-WF-music-piano-two-hands/\n?? docs/evidence/2026-10-05-WF-music-title-v4/\n?? docs/evidence/2026-10-05-WF-music-title-v5/\n?? docs/evidence/2026-10-05-WF-music-title-v6/\n?? docs/evidence/2026-10-05-WF-music-title-v7/\n?? docs/evidence/2026-10-05-WF-music-title-v8/\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-25-13.937Z-efceee45-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-29-39.744Z-c5028f6a-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-33-43.811Z-46b41035-staged.json\n?? docs/evidence/2026-10-05-WF-title-visuals/\n?? docs/evidence/2026-10-05-WF-ui-art-step1/implementation/before/\n?? docs/evidence/2026-10-05-WF-wu-parts-full/before-face-leg.png\n?? docs/evidence/2026-10-05-WF-wu-parts-full/browser-static-000.jpg\n?? docs/evidence/2026-10-05-WF-wu-parts-full/gaze-bindings.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/geometry-check.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/preview.pid\n?? docs/evidence/2026-10-05-WF-wu-parts-full/proportion-bindings.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-hurt-v1.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-hurt-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-v3.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-v4.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-03-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-16-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-16-v3.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-17-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-17-v3.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-19-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-19-v3.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-20-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-21-v2.json\n?? docs/evidence/2026-10-06-WF-stash-card-view/\n?? docs/evidence/2026-10-08-art-reference-board/\n?? docs/evidence/2026-10-08-xhs-project-intro/\n?? docs/evidence/2026-10-09-WF-doc-system-1009/\n?? docs/evidence/2026-10-09-WF-doc-system-followup-1009/\n?? docs/evidence/2026-10-09-WF-four-layer-slice-1009/\n?? docs/evidence/2026-10-09-art-direction-brief/\n?? docs/evidence/2026-10-09-art-mood-board/\n?? docs/evidence/2026-10-09-art-style-samples/\n?? docs/evidence/2026-10-09-cross-category-art-v2/\n?? docs/evidence/2026-10-09-cross-category-art/\n?? docs/evidence/2026-10-09-m1-style-refinement/\n?? docs/evidence/2026-10-09-xhs-full-post-draft/\n?? docs/evidence/2026-10-09-xhs-post-concept/\n?? docs/evidence/2026-10-09-xhs-reference-comparison/\n?? docs/evidence/2026-10-09-xhs-triptych-art/\n?? docs/production/art/ART-DIRECTION-BRIEF.md\n?? game/art-source/characters/wu-parts-v1/\n?? game/css/cover-hub.css\n?? game/css/page-transitions.css\n?? 搜打撤/",
+  "statusAfter": "M ../AGENTS.md\n M ../README.md\n M README.md\n M docs/AGENT-TOOLBOX.md\n M docs/BASE-DIRECT-WRITE-AUDIT-2026-09-29.md\n M docs/DEBT-CAMPAIGN-2026-10.md\n M docs/DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md\n M docs/M-BATCH-MATRIX.md\n M docs/PARALLEL-REGISTRY.md\n M docs/PENDING.md\n M docs/PERF-LEDGER-2026-09-29.md\n M docs/PHOTOLIB-PERF-TASK-2026-09-29.md\n M docs/QUICKSTART.md\n M docs/README.md\n M docs/STATUS.md\n M docs/UI-TOKEN-SYSTEM-PROPOSAL.md\n M docs/WORKFLOW-TOOLS.md\n M docs/agent-iteration-playbook.md\n M docs/agent-protocol.md\n M docs/architecture.md\n M docs/asset-audit-debt.md\n M docs/audio-system.md\n M docs/cards/README.md\n M docs/character-bible/README.md\n M docs/class-consolidation.md\n M docs/development.md\n M docs/game-compendium.md\n M docs/performance.md\n M docs/production/README.md\n M docs/production/design/GDD.md\n M docs/production/engineering/CODE-DATA-WORKFLOW.md\n M docs/production/management/DECISIONS.md\n M docs/production/management/ITERATION-BOARD.md\n M docs/production/management/NEXT-CYCLE-TECH-PLAN.md\n M docs/production/project/CHARTER.md\n M docs/production/qa/ACCEPTANCE-MATRIX.md\n M docs/quality-gates.md\n M docs/roadmap.md\n M docs/rules.md\n M docs/save-format.md\n M docs/terminology.md\n M game/assets/cards/spell-tt3-holy-water.webp\n M game/css/title-p0.css\n M game/data/cards-sync.json\n M game/index.html\n M game/src/README.md\n M game/src/battle/core/battle.core.js\n M game/src/battle/core/battle.engine.js\n M game/src/battle/effects/effect-steps.m2.js\n M game/src/cards/card-rules.schema.js\n M game/src/cards/cards.data.js\n M game/src/cards/cards.sync.face-refresh.js\n M game/src/cards/cards.sync.m9.js\n M game/src/cards/cards.view.js\n M game/src/generated/art-manifest.js\n M game/src/hub/game.hub.js\n M game/src/hub/game.hub.pages.js\n M game/src/ui/feedback.local.js\n M game/src/ui/game.menu.js\n M game/src/ui/term-tips.js\n M scripts/workflow-task.mjs\n M tests/battle-lifecycle.test.js\n M tests/card-art-coverage.test.js\n M tests/hand-cost-patterns.test.js\n M tests/home-async-lifecycle.test.js\n M tests/hub-flow-regression.test.js\n M tests/m8-data.test.js\n M tests/m9-data.test.js\n M tests/r7b-feedback.test.js\n M tests/workflow-task.test.js\n?? ../nul\n?? bash.exe.stackdump\n?? docs/archive/WF-ledger-context-1009/\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-40-53.381Z-9a1affee-staged.json\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-56-38.896Z-d5ca5df9-staged.json\n?? docs/evidence/2026-10-02-seven-departments-review/tmp/contact-3.png\n?? docs/evidence/2026-10-02-staged-check/2026-10-02T01-22-15.433Z-e5d284fd-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-19-39.159Z-5fbee550-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-27-43.086Z-63530fe5-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-46-33.917Z-9cb2485d-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-51-21.366Z-f2ed6511-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-59-11.935Z-35c52133-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-03-58.112Z-5cc22689-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-08-10.704Z-da12b315-staged.json\n?? docs/evidence/2026-10-04-WF-home-minako-layout/before-1280x720.png\n?? docs/evidence/2026-10-04-WF-home-minako-layout/r2-1280x720.png\n?? docs/evidence/2026-10-04-WF-home-minako-layout/r3-final-1280x720.png\n?? docs/evidence/2026-10-05-WF-card-ally-redesign/before/\n?? docs/evidence/2026-10-05-WF-exe-1005/\n?? docs/evidence/2026-10-05-WF-feedback-inbox-polish/\n?? docs/evidence/2026-10-05-WF-inbox-export-all/\n?? docs/evidence/2026-10-05-WF-music-continuity-review/\n?? docs/evidence/2026-10-05-WF-music-explore-battle-v4/\n?? docs/evidence/2026-10-05-WF-music-gap/\n?? docs/evidence/2026-10-05-WF-music-identity/\n?? docs/evidence/2026-10-05-WF-music-independent-review/\n?? docs/evidence/2026-10-05-WF-music-missing-bgm/\n?? docs/evidence/2026-10-05-WF-music-piano-two-hands/\n?? docs/evidence/2026-10-05-WF-music-title-v4/\n?? docs/evidence/2026-10-05-WF-music-title-v5/\n?? docs/evidence/2026-10-05-WF-music-title-v6/\n?? docs/evidence/2026-10-05-WF-music-title-v7/\n?? docs/evidence/2026-10-05-WF-music-title-v8/\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-25-13.937Z-efceee45-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-29-39.744Z-c5028f6a-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-33-43.811Z-46b41035-staged.json\n?? docs/evidence/2026-10-05-WF-title-visuals/\n?? docs/evidence/2026-10-05-WF-ui-art-step1/implementation/before/\n?? docs/evidence/2026-10-05-WF-wu-parts-full/before-face-leg.png\n?? docs/evidence/2026-10-05-WF-wu-parts-full/browser-static-000.jpg\n?? docs/evidence/2026-10-05-WF-wu-parts-full/gaze-bindings.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/geometry-check.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/preview.pid\n?? docs/evidence/2026-10-05-WF-wu-parts-full/proportion-bindings.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-hurt-v1.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-hurt-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-v3.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-02-v4.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-03-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-16-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-16-v3.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-17-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-17-v3.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-19-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-19-v3.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-20-v2.json\n?? docs/evidence/2026-10-05-WF-wu-parts-full/request-21-v2.json\n?? docs/evidence/2026-10-06-WF-stash-card-view/\n?? docs/evidence/2026-10-08-art-reference-board/\n?? docs/evidence/2026-10-08-xhs-project-intro/\n?? docs/evidence/2026-10-09-WF-doc-system-1009/\n?? docs/evidence/2026-10-09-WF-doc-system-followup-1009/\n?? docs/evidence/2026-10-09-WF-four-layer-slice-1009/\n?? docs/evidence/2026-10-09-art-direction-brief/\n?? docs/evidence/2026-10-09-art-mood-board/\n?? docs/evidence/2026-10-09-art-style-samples/\n?? docs/evidence/2026-10-09-cross-category-art-v2/\n?? docs/evidence/2026-10-09-cross-category-art/\n?? docs/evidence/2026-10-09-m1-style-refinement/\n?? docs/evidence/2026-10-09-xhs-full-post-draft/\n?? docs/evidence/2026-10-09-xhs-post-concept/\n?? docs/evidence/2026-10-09-xhs-reference-comparison/\n?? docs/evidence/2026-10-09-xhs-triptych-art/\n?? docs/production/art/ART-DIRECTION-BRIEF.md\n?? game/art-source/characters/wu-parts-v1/\n?? game/css/cover-hub.css\n?? game/css/page-transitions.css\n?? 搜打撤/",
+  "before": {
+    "sha256": "36a52783116af4965afb156b2d57b1271682c5ab1add61b2a369240249ba5837",
+    "manifest": [
+      {
+        "file": "../AGENTS.md",
+        "sha256": "097d7d42d0e4176e17e619ad9b7e38c3489dd22940f1d7d63bf34112fe97f542"
+      },
+      {
+        "file": "../NovelAI生图功能手册-AI接手版.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": ".githooks/pre-commit",
+        "sha256": "47893464ecbcb80013cbd41db3db5cd3db5c7429a0cbffc9dbb0e6912ba52068"
+      },
+      {
+        "file": "AGENTS.md",
+        "kind": "existence",
+        "sha256": "5ad38304b535c2987dbd24657c1a11b884984ff600d9f389deb0d4e634fee792"
+      },
+      {
+        "file": "docs/",
+        "kind": "inventory",
+        "sha256": "836cd71ad1ee3cf025cf13c5e4ac561c6b9f2501ef9f6c8d9b62f7fbe7a64c3b"
+      },
+      {
+        "file": "docs/...args",
+        "kind": "existence",
+        "sha256": "5ad38304b535c2987dbd24657c1a11b884984ff600d9f389deb0d4e634fee792"
+      },
+      {
+        "file": "docs/agent-iteration-playbook.md",
+        "sha256": "5b428ea7ca96beaeb53c8a4e3809138bae43ddf39988477e518a54566985a7c7"
+      },
+      {
+        "file": "docs/agent-protocol.md",
+        "sha256": "1efd3ab8e93a94efed727b6d7c96d15cb5248d30d4af3cd3bbf10ef0878b7538"
+      },
+      {
+        "file": "docs/AGENT-TOOLBOX.md",
+        "sha256": "97abeaf177f62e6c0dfb20c540e8f5f132c7c9bedeae3bc028dcd99469effd54"
+      },
+      {
+        "file": "docs/architecture.md",
+        "sha256": "10c4371cf28ce0f61ad176bd5466be25b02e764277193757c3397328d5f937e3"
+      },
+      {
+        "file": "docs/archive/",
+        "kind": "inventory",
+        "sha256": "a2ad9856efa55903dd6aa7c04d993347094ad2bbdb42342a473cf564836ca221"
+      },
+      {
+        "file": "docs/archive/card-migration-2026-09-27/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/engineering-2026-09-27/LONG-TERM-PLAN-2026-09-27.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/engineering-2026-09-27/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/lean-workflow-2026-09-30/manifest.json",
+        "sha256": "8d55d73f32d212830e09fd785f636f679d02e84a2e57ade4f8a175e3e3b0aa8b"
+      },
+      {
+        "file": "docs/archive/lean-workflow-2026-09-30/originals/docs/quality-gates.md",
+        "sha256": "d878e9147383c34609fee1b474b4733510ceec57f35e2234ac2a82da4bf84ead"
+      },
+      {
+        "file": "docs/archive/lean-workflow-2026-09-30/originals/docs/README.md",
+        "sha256": "148664e1bed4086fc80e35b00dc8043d0332ea3c1a321297d9292491de59cd44"
+      },
+      {
+        "file": "docs/archive/lean-workflow-2026-09-30/originals/docs/SPEC-PROCESS.md",
+        "sha256": "422586f92dfdc05a55d6d9434327c0f94c3e8fd792421f8921639fa8c19fd050"
+      },
+      {
+        "file": "docs/archive/lean-workflow-2026-09-30/originals/docs/STATUS.md",
+        "sha256": "6122e26050d8033e6c79e4afab370e67f4b49cd3e75c6e6a57ed9389b8a8e2cb"
+      },
+      {
+        "file": "docs/archive/lean-workflow-2026-09-30/originals/docs/WORKFLOW-TOOLS.md",
+        "sha256": "bb2a2926baa67423a38cfa0aa4109af74ec90f5ab379c4921c40011878104bf0"
+      },
+      {
+        "file": "docs/archive/lean-workflow-2026-09-30/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/lean-workflow-2026-09-30/source-manifest.json",
+        "kind": "existence",
+        "sha256": "5ad38304b535c2987dbd24657c1a11b884984ff600d9f389deb0d4e634fee792"
+      },
+      {
+        "file": "docs/archive/LEGACY-MATERIALS-INDEX-2026-09.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/records-2026-09-28",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/records-2026-09-28/ACCEPTANCE-FAST-GATE-RESULT-2026-09-28.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/records-2026-09-28/BUILD-OUTPUT-CLEANUP-2026-09-28.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/records-2026-09-28/PROJECT-FOLDER-INVENTORY-2026-09-28.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/records-2026-09-28/REFACTOR-2026-09-28.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/records-2026-09-28/VITE-IAB-PERFORMANCE-2026-09-28.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/SPEC-PROCESS.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/status",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/status/PROJECT-STATUS-2026-09-27.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/three-track-2026-09-27",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/ui-loop-2026-09-26",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/WF-ledger-context-1009/originals/docs/PARALLEL-REGISTRY.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/WF-ledger-context-1009/originals/docs/PENDING.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/workflow-2026-09-30/manifest.json",
+        "sha256": "880c7e1e45782bb294bf6d3740588c7843d56d00838bd8c4b5b6d56c5b10914c"
+      },
+      {
+        "file": "docs/archive/workflow-2026-09-30/originals/docs/production/management/ITERATION-BOARD.md",
+        "sha256": "eb5c2340ee9812749b131015882c749fb1b6d9db048d6c9cd956b26a0be31773"
+      },
+      {
+        "file": "docs/archive/workflow-2026-09-30/originals/docs/SPEC-PROCESS.md",
+        "sha256": "9c5ced3e2b16e82f24f6b1e729fb78b9e8c54b9b258c4cf6298a6af0caf10e3e"
+      },
+      {
+        "file": "docs/archive/workflow-2026-09-30/README.md",
+        "sha256": "ea89f113f35d578cfa69290ee45520c4cb5295d008e973c0861bee13ba2fd3d0"
+      },
+      {
+        "file": "docs/archive/workflow-2026-09-30/source-manifest.json",
+        "kind": "existence",
+        "sha256": "5ad38304b535c2987dbd24657c1a11b884984ff600d9f389deb0d4e634fee792"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/manifest.json",
+        "sha256": "4b7faa132d135df969c4300f2f7d33c79a95ead1d2dfe02cadb1966c36bcb6cc"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/originals/AGENTS.md",
+        "sha256": "64de3328036ec86faca20cbc7eeb9ac63d120dc6dc9de44c9467f20db8fb0ed1"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/originals/docs/agent-protocol.md",
+        "sha256": "67d6b9f98d18eaf7f19727a0fa518d95a959b6bcc3a161a3403a02afd6a9f0a5"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/originals/docs/production/engineering/MAKER-HANDBOOK.md",
+        "sha256": "39d23cbc584ee93b039fb0caf7cecf0cd93b50eb875e63bb900e227e47935006"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/originals/docs/production/qa/ACCEPTANCE-MATRIX.md",
+        "sha256": "21084123a023b1617f479f1ff05fd790ad72f2284dba112b8c35b9a483ed6115"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/originals/docs/quality-gates.md",
+        "sha256": "9cd5c8dbf0f9c9647065fca3f23bfb06d6b511ed155cbbce148e05c6787da2ca"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/originals/docs/README.md",
+        "sha256": "87ba4d361dd6f7017959e937e2b7e1e8f62edbe40498badf7ded500d069d2cb0"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/originals/docs/WORKFLOW-TOOLS.md",
+        "sha256": "ed6bbf88acb03f44e4dbc782a2a2e1ffdbf094d1ac464727c7037dee0540f52a"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/originals/scripts/page-snapshot.mjs",
+        "sha256": "403591bb0fb193d76994fdabb5f1847c421639ef36a25e2fd1cc3c3a44e9d9ba"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/README.md",
+        "sha256": "2a3ff2aa22bd5cbf9c8096594da0c5a76b0169faecca7274cd93b339fe7b6246"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/source-manifest.json",
+        "sha256": "301717c3e52a133b1a6bed71f1deafa18f61a73a7716e30a1fda33d8846fd749"
+      },
+      {
+        "file": "docs/archive/workflow-review-state-2026-09-30/manifest.json",
+        "sha256": "24c32b100227dc7a15c2b2c0b4ddc6048a7a7bf0d4e05cc561231dafffe87e29"
+      },
+      {
+        "file": "docs/archive/workflow-review-state-2026-09-30/originals/docs/production/management/DECISIONS.md",
+        "sha256": "5c0c38a28fca3ba0fabb2fa4825368aebe6a031715c5e0fbb56be0131a5e77a0"
+      },
+      {
+        "file": "docs/archive/workflow-review-state-2026-09-30/originals/docs/production/management/ITERATION-BOARD.md",
+        "sha256": "b9030800aedfdecab862d3d82e4543b655156224773e0ff84998b435e59912db"
+      },
+      {
+        "file": "docs/archive/workflow-review-state-2026-09-30/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/workflow-review-state-2026-09-30/source-manifest.json",
+        "kind": "existence",
+        "sha256": "5ad38304b535c2987dbd24657c1a11b884984ff600d9f389deb0d4e634fee792"
+      },
+      {
+        "file": "docs/archive/workflow-routing-2026-09-30/manifest.json",
+        "sha256": "b052dfcb6ad343e2fab37eb7804c0dcb7828e89cf6d3d86caa938bf826f8317a"
+      },
+      {
+        "file": "docs/archive/workflow-routing-2026-09-30/originals/docs/production/management/NEXT-CYCLE-TECH-PLAN.md",
+        "sha256": "de96fad4802108c396a80bdab06f4336a34ee2bd645c81cece2e2d285231cf99"
+      },
+      {
+        "file": "docs/archive/workflow-routing-2026-09-30/originals/docs/README.md",
+        "sha256": "e7fabc2dc2076ef3368a4bc380a0ce9690869b2dc7b4d9153b336a543a4c60d5"
+      },
+      {
+        "file": "docs/archive/workflow-routing-2026-09-30/README.md",
+        "sha256": "1d09646ccbd3a0150b5ab893dbf2d7d892003eabd92da6f44a8d61a52dd3376a"
+      },
+      {
+        "file": "docs/archive/workflow-routing-2026-09-30/source-manifest.json",
+        "kind": "existence",
+        "sha256": "5ad38304b535c2987dbd24657c1a11b884984ff600d9f389deb0d4e634fee792"
+      },
+      {
+        "file": "docs/asset-audit-debt.json",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/asset-audit-debt.md",
+        "sha256": "d2d3458dadb0869c9707935976a4336e5f718900617f4fb040f07b21023f9061"
+      },
+      {
+        "file": "docs/audio-system.md",
+        "sha256": "eb60fa3bf5095ca5307bcd21ba9eb910aa9c4aadc00701bdc8ba6a21eb65a067"
+      },
+      {
+        "file": "docs/BASE-DIRECT-WRITE-AUDIT-2026-09-29.md",
+        "sha256": "754b860526481b12ef0b8220b74233c496213c3c1611499e6a32a8fccbc29a99"
+      },
+      {
+        "file": "docs/cards/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/changelog.md",
+        "sha256": "f69ee2dd32f00f7738282e648df42b9e4140882c106a3695f273a526e1aebd34"
+      },
+      {
+        "file": "docs/character-bible/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/class-consolidation.md",
+        "sha256": "fbe9cb10b580a9636b5b99cbc4469de4bddf1b0b3c289995594e283fbf0d30ce"
+      },
+      {
+        "file": "docs/dataset",
+        "kind": "existence",
+        "sha256": "5ad38304b535c2987dbd24657c1a11b884984ff600d9f389deb0d4e634fee792"
+      },
+      {
+        "file": "docs/DEBT-CAMPAIGN-2026-10.md",
+        "sha256": "94e9d495ebf2e592daf1a145f8c68f0ebf2ce53cea6aedb83cd78c4693089b3c"
+      },
+      {
+        "file": "docs/design.md",
+        "sha256": "dc31715f81bc6e179cb86d725c114c5ba3637669340a8cb0495a64a96286a7d5"
+      },
+      {
+        "file": "docs/development.md",
+        "sha256": "285a83564f0f51ab3651b87bad10c8e8261d881f73a2d446feb1d5396cfb1b0f"
+      },
+      {
+        "file": "docs/DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md",
+        "sha256": "bcaa1918174e6bcc27f620948d32fa195be7bfbe5d8a4d803a1938c6ca459db9"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-full-repository-review/task.json",
+        "sha256": "56c99a5e2f865aac7d3651fafd2c4bc771b87034342b4b92c51284c0f6fbf817"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-lean-workflow/task.json",
+        "sha256": "fb10db8484d2015531c6f50d1142e56d40b78114f3c470810f54d0cec377b00f"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-workflow-completion/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-workflow-review-fixes/task.json",
+        "sha256": "7529efb752cfe4d3875ab415597adc4b88f63bad9ee9c8885aa9ef9a7b37d840"
+      },
+      {
+        "file": "docs/evidence/2026-10-01-acceptance-scenes/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-1/task.json",
+        "sha256": "87f5c33558af6f52c7a50b9fe86f8f5133ed0a58b3e9ef380ca53fc604a9329b"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-2/task.json",
+        "sha256": "6bdb06bbbf26bcbc029e167c0d6a6bd21420e098e2c4329f96035d3de72bd902"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-3/task.json",
+        "sha256": "852fcd7f7a2da7e7ae70951eeb352d3e4c882112f900c9d052fd15d24c314ddc"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-automation/task.json",
+        "sha256": "ee4018aad4f0e98cd82c9104476a6c217e7000b8e42e1531ad4a39c5a87749ae"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-decouple/task.json",
+        "sha256": "2250963edfa165dea21d46d679d03c2b1295f30cbd47fd09da74cdb3c958f27d"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-redesign/task.json",
+        "sha256": "d6c88a124e7d714f29e28fe61a86e0d8a528b42a21575aa437ac7ec4097d445c"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-production-research/task.json",
+        "sha256": "bb2934f113227ef9b03071f2c7656e0a61b320a13c3b59e751e7917f8a4f3c27"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes-crossplatform/task.json",
+        "sha256": "af714f27e7067293f4b2fd00ab38b9d476650e6342c0c971b1533c5fe9507167"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes/task.json",
+        "sha256": "4bf05ca76394be31df66ac841a98b6e8a6c9c1a93b0bedcd7f4d012a3cdaf0a3"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-review/task.json",
+        "sha256": "cefc4ecf8fe895d9bd322122b6d380660e6d42b2df0f10e98eb3e119973f7586"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-v2/task.json",
+        "sha256": "776320fc8065871d96b6bce0c0806e325518717ed0b20e09077ca77539e9274c"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-experience-art-plan/refs/visual-reference-review.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-experience-art-plan/task.json",
+        "sha256": "e3ea75d9bb5fbf657664cfc0521e93bab1381b735647a7a4fcc9224939ae605b"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-experience-art-exec/task.json",
+        "sha256": "5751581ca69fe5ba1d81c4d803fe01cce046b85d15a55887f58c031ad626ed0c"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-home-art-v2/task.json",
+        "sha256": "2f4eb76b9c9594d7594f6dd04127dd44035204ed9c4a394d2f646ac112de63ea"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-home-layout/task.json",
+        "sha256": "6f74540ad681ec952da2e8ec1d49b36b8321cfce09319ce6508d3046731febf6"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-xart-z1/task.json",
+        "sha256": "6c872e2e62530e22818ef3bbf5c49343a206647ec59dac0523184f2de4a676ea"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-1004/task.json",
+        "sha256": "3179b2f8a0919fe52a1b5f7b77156c057e91eed06ca04cacbce78cdd6d99cfe1"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r2/task.json",
+        "sha256": "e20177c47ef50180968058350a01d053d0869912d33424bd93d3d3f58dfd98ec"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r3/task.json",
+        "sha256": "8f3cfeca13faf07df5d021fb4c13c3806ae623a4c49bdd5e4f386dd03200e7c2"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r4/task.json",
+        "sha256": "6230d9073433b0c4e7f92a2a122b749af131053c529f9e25b9d10b9294caaafe"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r5/task.json",
+        "sha256": "c7e969cd6fb3646dedf66d88b7ef78b7697228aa0158a7353a5fba1f60e63c3f"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-photo-studio-unified/task.json",
+        "sha256": "5b3b6a5e64dcd00a1db4ec607585efd0dd1219ee36f1c2dc421b64d75afb2f01"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/task.json",
+        "sha256": "beff569b4672957dfd05f7bcd9be0b557ce9723e57027db0f8820826c0e2671b"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-xingyue-fullmoon/task.json",
+        "sha256": "b2cc8f2eb4839568fa83656113c07df3fa01dc10619e285081754a2f06b8d7e8"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-xingyue-wind-song/task.json",
+        "sha256": "0a5ee0d13ac9fa61bfd8e8202c059a95e28351c884d3609f1287256a7f05529c"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-card-ally-redesign/task.json",
+        "sha256": "cb1eb9a7ae68374d3ddf23c96c4433e7d8e4013e0d7bc5ce926269f2c7066ce7"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-flow-practice/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-music-independent-review/task.json",
+        "sha256": "5268a56c5bd8b6aa9b060a0ce58de90dfb204033a43887571565c56f03fdb16c"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-music-integration/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-request-batching/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-wu-parts-full/task.json",
+        "sha256": "eb37eee3cf2cf597442a9b163009b055289f01ca7712da63e01f212a27fc8737"
+      },
+      {
+        "file": "docs/evidence/2026-10-08-art-reference-board/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-08-art-reference-board/reference-board.html",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-art-mood-board/mood-board.html",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-art-style-samples/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-WF-doc-system-1009/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-WF-doc-system-followup-1009/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-WF-doc-system-followup-1009/task.json",
+        "sha256": "4d124db4e05cf1f1c1b67186ad287b07cd31f43a0f04df434b9b2f09cbd9d142"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-WF-four-layer-slice-1009/task.json",
+        "sha256": "4e0c6027eec84c23a7d665173f212cbf6c2276a12d4f25a3acd995d9fbaa279e"
+      },
+      {
+        "file": "docs/evidence/agent-output-inventory-2026-09-28.tsv",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/game-shots",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/LOW-COST-OPTIMIZATIONS-2026-09-28.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/game-compendium.md",
+        "sha256": "7a4ac3fcac85e35549ef21cd5d18fe98f0f90bc4670ff36b8ee69568de45ddd8"
+      },
+      {
+        "file": "docs/M-BATCH-EXCLUSIONS.md",
+        "sha256": "8f0f5d3f42a43546b08e2a5d35f1d89c385b64702d0944bf53fff0aba0042909"
+      },
+      {
+        "file": "docs/M-BATCH-MATRIX.md",
+        "sha256": "1f3d5dc4159be775a9506708f426a409c527db6e4a8e4d73503db71c322e70d2"
+      },
+      {
+        "file": "docs/modules/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/PARALLEL-DISPATCH-PLAYBOOK.md",
+        "sha256": "f5bb34bf892ee2eb292455f8450f7ee5892a7ce36d7ccb6025b1ab5e8ff91ede"
+      },
+      {
+        "file": "docs/PARALLEL-REGISTRY.md",
+        "sha256": "4c2fde96bda426f584f7a546e8695cdbdc76ef990cf054d6aa66e84097f2c1c5"
+      },
+      {
+        "file": "docs/PENDING.md",
+        "sha256": "79ce0101f4b6298f015dd5b7d660aee4d329067b49579e79464e0da768e53b45"
+      },
+      {
+        "file": "docs/PERF-LEDGER-2026-09-29.md",
+        "sha256": "b7a68ba14823ac56c95370c013dbccb66e19bef5adefd7f8d0c4c12fafc357f4"
+      },
+      {
+        "file": "docs/performance.md",
+        "sha256": "9e43777b022789648d1b433a19db8e43daf8040ca9f048c10159f05fbffc7737"
+      },
+      {
+        "file": "docs/PHOTOLIB-PERF-TASK-2026-09-29.md",
+        "sha256": "6ac29550db09565fbdbaa521579be18f426f55ea1f36634d3ad2cf7ac1f13433"
+      },
+      {
+        "file": "docs/previews/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/production/",
+        "kind": "inventory",
+        "sha256": "7879971388668ac6ff6d2333568f51cb200ab78ff377d5370341fa22ca6345f2"
+      },
+      {
+        "file": "docs/production/art/",
+        "kind": "inventory",
+        "sha256": "fd610c44d9f739c3d7eff838c19cab3566bb20bfa0eb20574e7a2b15a09e7870"
+      },
+      {
+        "file": "docs/production/art/ART-DIRECTION-BRIEF.md",
+        "sha256": "352bde6805b1a4ee5b05e215f3700513c85a1065e8c2e2070368a96980004b5f"
+      },
+      {
+        "file": "docs/production/art/VISUAL-BIBLE.md",
+        "sha256": "23c259391eab0af206dbc2a4f4366bfce304659a117fab17f12d6868a2541351"
+      },
+      {
+        "file": "docs/production/design/",
+        "kind": "inventory",
+        "sha256": "a100d80fdb9159f7434f087958ed1f52f3b8d3581a8a699d77738fb52fcbdaea"
+      },
+      {
+        "file": "docs/production/design/GDD.md",
+        "sha256": "5f74dbf0ad2c0c34c0f34db4aec9308a137332ee6132aafc8e1ff7a877feeb34"
+      },
+      {
+        "file": "docs/production/engineering/",
+        "kind": "inventory",
+        "sha256": "01af05471c95931ae29973687cfcc52fd442b0f1e5b305a07a61e69a162ed38e"
+      },
+      {
+        "file": "docs/production/engineering/AGENT-EXPERIMENTS.md",
+        "sha256": "cd30e929e7defebb9334f71986b3f5c10329c159f0864bf9ff2052db4b405e43"
+      },
+      {
+        "file": "docs/production/engineering/CODE-DATA-WORKFLOW.md",
+        "sha256": "0a5d8e53c8bd82b89792479a3ab4e10b064a3c8cd26daf4bb69af540924757a7"
+      },
+      {
+        "file": "docs/production/engineering/MAKER-HANDBOOK.md",
+        "sha256": "0254b101b956d38434703589cbfdb8fd025cf12d4324504654a637af70fda73a"
+      },
+      {
+        "file": "docs/production/management/",
+        "kind": "inventory",
+        "sha256": "17014bda2e4a1b35e0ec7ca72001eaf2256f84a2325bbbabf8a74f470d389c3f"
+      },
+      {
+        "file": "docs/production/management/DECISIONS.md",
+        "sha256": "90734e8058804dd25fc7386198f6ec8de8ece7dff2187918f8d5e818e93ec923"
+      },
+      {
+        "file": "docs/production/management/ITERATION-BOARD.md",
+        "sha256": "3dd8599163af1ad8179ff40b043c42c75d577136f2b48d3436b5e38faf4bc238"
+      },
+      {
+        "file": "docs/production/management/NEXT-CYCLE-TECH-PLAN.md",
+        "sha256": "6d6feb77c58eb09bc2d0c8b9c9ffae96c959853a2991574f07af9771a16a61d3"
+      },
+      {
+        "file": "docs/production/project/",
+        "kind": "inventory",
+        "sha256": "5b19417f0da52f9a71ad04fda296916595beff94fcdc24ea5945b287d5594874"
+      },
+      {
+        "file": "docs/production/project/CHARTER.md",
+        "sha256": "4c4fb95cdc7d60cd8b3a5f300900c0a41b85234580be533472342403e4634a9e"
+      },
+      {
+        "file": "docs/production/qa/",
+        "kind": "inventory",
+        "sha256": "e0c84e913cd1419b37044dbf8a043f55fa5d5bd32da0176faea373b4f0f9a418"
+      },
+      {
+        "file": "docs/production/qa/ACCEPTANCE-MATRIX.md",
+        "sha256": "1c9b11f6c806f9bc8aff9c8e5c4b04f54cf2dfc410e621c0fb4d938b9b0c60e4"
+      },
+      {
+        "file": "docs/production/README.md",
+        "sha256": "0c31fc3fccbe2fc9bbcd760b161219a5a7dee10be509863ce65390283cee590e"
+      },
+      {
+        "file": "docs/quality-gates.md",
+        "sha256": "7b4e7f282f3d1689c4354c93500dd26a0883f675a9cd84637a58a6b2eab4b3a9"
+      },
+      {
+        "file": "docs/QUICKSTART.md",
+        "sha256": "cb5d3b2c4bc49a0ce52759e8944d9a4bef9ee5dc9c2749d84b34fa6788b7f7d9"
+      },
+      {
+        "file": "docs/README.md",
+        "sha256": "6fe7c8f503e208f5fc7c1123b119e50a433ed9ddee862f311426c2c384eb097a"
+      },
+      {
+        "file": "docs/roadmap.md",
+        "sha256": "9f47ee5dbbdd4c89e9299b85232eaf98d61c4bab26fff4162353a8d2ed48e639"
+      },
+      {
+        "file": "docs/rules.md",
+        "sha256": "ccd088ae13d0438d0f10cd2c971a80fc6629bc92852b9725f9d03258a60d0a0d"
+      },
+      {
+        "file": "docs/save-format.md",
+        "sha256": "753d71602f80b453cc90097afd1e347e6c700425996d5d55769825c95ab3d2f0"
+      },
+      {
+        "file": "docs/STATUS.md",
+        "sha256": "6d8571265c3fe53bc6a52aa29f2d8c94676a8171d6a8ec4cc867bd17401345ff"
+      },
+      {
+        "file": "docs/terminology.md",
+        "sha256": "09ca9e4c9adb303a9acd5c11c55b7b2c3cf0a5a325bec49ddd4a076d9d27442c"
+      },
+      {
+        "file": "docs/UI-ART-OVERHAUL-GUIDE.md",
+        "sha256": "d24c08f6a793333d4c95d2ee51d3fea3146c40c175e105451184370fb4cd2129"
+      },
+      {
+        "file": "docs/ui-art-overhaul/references/diagnosis.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/ui-art-overhaul/references/implementation.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/ui-art-overhaul/references/templates.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/ui-art-overhaul/references/verification.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/ui-art-overhaul/SKILL.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/UI-TOKEN-SYSTEM-PROPOSAL.md",
+        "sha256": "39de5418067a0382e8714b59a5fd81f97074071f126553b37c9513dc0594a4a4"
+      },
+      {
+        "file": "docs/WORKFLOW-TOOLS.md",
+        "sha256": "3d8cea403732d30f1c4d6f34819ba27922bf93ddb31e9e975decbcfd90c0b170"
+      },
+      {
+        "file": "eslint.config.js",
+        "sha256": "e29079fdc795c560e4ba742018455f2ba098192581ef847bb3f6e2a32bda26ae"
+      },
+      {
+        "file": "game/assets/asset-manifest.json",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "game/assets/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "game/assets/scenes/hub-wallpaper.webp",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "game/assets/ui/photo-studio-generated-assets.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "game/css/base.css",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "game/css/winter.css",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "game/src/",
+        "kind": "inventory",
+        "sha256": "6469f79f9781d2715dce55c2c8704108e25ee60d8ffbfab71c0d9445cc35e2ed"
+      },
+      {
+        "file": "game/src/README.md",
+        "sha256": "64034968c547fa6c1594394cb4b0955e3e809dd2a1e3f2d7d58be0239357b093"
+      },
+      {
+        "file": "jsconfig.battle-settlement.json",
+        "sha256": "ff9c6acca637b6583dc514e35f0870e8c39aa903f758919364ca3a10c4478f03"
+      },
+      {
+        "file": "jsconfig.battle-snapshot.json",
+        "sha256": "3fb7f26a7982e73c077b006c059b9a565b4353689ad04e0e634ebbe1b46a35c2"
+      },
+      {
+        "file": "jsconfig.card-rules.json",
+        "sha256": "426fb5f7c2781a1cf9427f29d326bea7e47cde4cd9338b99b3d178593632230d"
+      },
+      {
+        "file": "jsconfig.json",
+        "sha256": "3f2e1bd99ddc0cb8eb95ef70a7818e56fbcc687a8970d4615d6319396dbc2da1"
+      },
+      {
+        "file": "jsconfig.strict-foundations.json",
+        "sha256": "7d2f1e714dc03b4a67604a3928a5d1172c5214c6fce00443bacf4e56c6668c90"
+      },
+      {
+        "file": "jsconfig.strict-hand-selection.json",
+        "sha256": "4a4b2d33af7297b95a05976e5bc81aaf0baf3e64e3b8313516013994fbf11ba0"
+      },
+      {
+        "file": "jsconfig.strict-selection.json",
+        "sha256": "a141c4996d7ed5630a222e882738c6bf22c5473527a3c9e53e82686a8bd88f98"
+      },
+      {
+        "file": "jsconfig.strict-ui.json",
+        "sha256": "a53bcb7a075a6fab45f5b1076b97cb3449e3313eca05b193da1ede8ec5695abc"
+      },
+      {
+        "file": "package-lock.json",
+        "sha256": "c72e1da1f98d590f1d4b5b4f13530020af00fc5a328c86f3a9619daa610eed73"
+      },
+      {
+        "file": "package.json",
+        "sha256": "7700e3529505ec3917cc1478cb8028afd4efec1325c158f1b3b11db38620b697"
+      },
+      {
+        "file": "README.md",
+        "sha256": "2936a3f2bc66b9374febc6e12180e3f3df67bb0b57cce5310d201c003aab2c5a"
+      },
+      {
+        "file": "scripts/acceptance-gate.mjs",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "scripts/check-types.mjs",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "scripts/index-validation.mjs",
+        "sha256": "87f22638c641c310a84248dd75d03c00481c11a1bb20c8e2e0e4277ecf5fdb06"
+      },
+      {
+        "file": "scripts/registry-paths.mjs",
+        "sha256": "0136ea2b0902fde11479ec2bed780c6335b8c66d7b2d1cbd718f9410a29fd9ef"
+      },
+      {
+        "file": "scripts/workflow-dependencies.mjs",
+        "sha256": "534fa5b554dbfc112c8f683d9ba4c9aa837bc0d53b76e1c7660f3346c0fb129b"
+      },
+      {
+        "file": "scripts/workflow-ledger.mjs",
+        "sha256": "efb861b047e39bf9a3ef2670de619151eb2c2c5a5a7da78a9162cda15bd4d61f"
+      },
+      {
+        "file": "scripts/workflow-task-input.mjs",
+        "sha256": "585e23ceb860779d4e6b5b113c5820357b1668ac293d41bc9ff42a1506e246a9"
+      },
+      {
+        "file": "scripts/workflow-task.mjs",
+        "sha256": "a179172c6b5c25b8ff20b9663be8da8b63e053c51c8acecff81f5d288f67cf63"
+      },
+      {
+        "file": "tests/docs-consistency.test.js",
+        "sha256": "d766f3e45845bc9f8a889ab29f6160f1b95e4561986d948f6ad756d7acf0afc6"
+      },
+      {
+        "file": "tests/workflow-task.test.js",
+        "sha256": "c9ade20025b88de427bd80d9ed545d3716ac8e7a0560a8bc6d7ed6a19c6698ca"
+      },
+      {
+        "file": "vite.config.js",
+        "sha256": "384b2fe4cc46d026e7345d309eb89ee9363b1a33403688004baa7f054dabec5c"
+      }
+    ],
+    "environment": {
+      "node": "v24.13.0",
+      "platform": "win32",
+      "arch": "x64",
+      "dependencies": {
+        "vitest": "3.2.7",
+        "vite": "6.4.3",
+        "typescript": "7.0.2",
+        "eslint": "10.11.0",
+        "jsdom": "25.0.1",
+        "acorn": "8.18.0",
+        "acorn-walk": "8.3.5"
+      },
+      "ci": null,
+      "nodeOptions": null,
+      "forceFullTests": null
+    },
+    "documents": true,
+    "assets": false,
+    "selection": {
+      "mode": "targeted",
+      "roots": [
+        "tests/workflow-task.test.js",
+        "tests/docs-consistency.test.js"
+      ],
+      "files": [
+        "../AGENTS.md",
+        "README.md",
+        "docs/AGENT-TOOLBOX.md",
+        "docs/BASE-DIRECT-WRITE-AUDIT-2026-09-29.md",
+        "docs/DEBT-CAMPAIGN-2026-10.md",
+        "docs/DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md",
+        "docs/M-BATCH-EXCLUSIONS.md",
+        "docs/M-BATCH-MATRIX.md",
+        "docs/PARALLEL-DISPATCH-PLAYBOOK.md",
+        "docs/PARALLEL-REGISTRY.md",
+        "docs/PENDING.md",
+        "docs/PERF-LEDGER-2026-09-29.md",
+        "docs/PHOTOLIB-PERF-TASK-2026-09-29.md",
+        "docs/QUICKSTART.md",
+        "docs/README.md",
+        "docs/STATUS.md",
+        "docs/UI-ART-OVERHAUL-GUIDE.md",
+        "docs/UI-TOKEN-SYSTEM-PROPOSAL.md",
+        "docs/WORKFLOW-TOOLS.md",
+        "docs/agent-iteration-playbook.md",
+        "docs/agent-protocol.md",
+        "docs/architecture.md",
+        "docs/archive/lean-workflow-2026-09-30/manifest.json",
+        "docs/archive/lean-workflow-2026-09-30/originals/docs/README.md",
+        "docs/archive/lean-workflow-2026-09-30/originals/docs/SPEC-PROCESS.md",
+        "docs/archive/lean-workflow-2026-09-30/originals/docs/STATUS.md",
+        "docs/archive/lean-workflow-2026-09-30/originals/docs/WORKFLOW-TOOLS.md",
+        "docs/archive/lean-workflow-2026-09-30/originals/docs/quality-gates.md",
+        "docs/archive/workflow-2026-09-30/README.md",
+        "docs/archive/workflow-2026-09-30/manifest.json",
+        "docs/archive/workflow-2026-09-30/originals/docs/SPEC-PROCESS.md",
+        "docs/archive/workflow-2026-09-30/originals/docs/production/management/ITERATION-BOARD.md",
+        "docs/archive/workflow-completion-2026-09-30/README.md",
+        "docs/archive/workflow-completion-2026-09-30/manifest.json",
+        "docs/archive/workflow-completion-2026-09-30/originals/AGENTS.md",
+        "docs/archive/workflow-completion-2026-09-30/originals/docs/README.md",
+        "docs/archive/workflow-completion-2026-09-30/originals/docs/WORKFLOW-TOOLS.md",
+        "docs/archive/workflow-completion-2026-09-30/originals/docs/agent-protocol.md",
+        "docs/archive/workflow-completion-2026-09-30/originals/docs/production/engineering/MAKER-HANDBOOK.md",
+        "docs/archive/workflow-completion-2026-09-30/originals/docs/production/qa/ACCEPTANCE-MATRIX.md",
+        "docs/archive/workflow-completion-2026-09-30/originals/docs/quality-gates.md",
+        "docs/archive/workflow-completion-2026-09-30/originals/scripts/page-snapshot.mjs",
+        "docs/archive/workflow-completion-2026-09-30/source-manifest.json",
+        "docs/archive/workflow-review-state-2026-09-30/manifest.json",
+        "docs/archive/workflow-review-state-2026-09-30/originals/docs/production/management/DECISIONS.md",
+        "docs/archive/workflow-review-state-2026-09-30/originals/docs/production/management/ITERATION-BOARD.md",
+        "docs/archive/workflow-routing-2026-09-30/README.md",
+        "docs/archive/workflow-routing-2026-09-30/manifest.json",
+        "docs/archive/workflow-routing-2026-09-30/originals/docs/README.md",
+        "docs/archive/workflow-routing-2026-09-30/originals/docs/production/management/NEXT-CYCLE-TECH-PLAN.md",
+        "docs/asset-audit-debt.md",
+        "docs/audio-system.md",
+        "docs/changelog.md",
+        "docs/class-consolidation.md",
+        "docs/design.md",
+        "docs/development.md",
+        "docs/game-compendium.md",
+        "docs/performance.md",
+        "docs/production/README.md",
+        "docs/production/art/ART-DIRECTION-BRIEF.md",
+        "docs/production/art/VISUAL-BIBLE.md",
+        "docs/production/design/GDD.md",
+        "docs/production/engineering/AGENT-EXPERIMENTS.md",
+        "docs/production/engineering/CODE-DATA-WORKFLOW.md",
+        "docs/production/engineering/MAKER-HANDBOOK.md",
+        "docs/production/management/DECISIONS.md",
+        "docs/production/management/ITERATION-BOARD.md",
+        "docs/production/management/NEXT-CYCLE-TECH-PLAN.md",
+        "docs/production/project/CHARTER.md",
+        "docs/production/qa/ACCEPTANCE-MATRIX.md",
+        "docs/quality-gates.md",
+        "docs/roadmap.md",
+        "docs/rules.md",
+        "docs/save-format.md",
+        "docs/terminology.md",
+        "game/src/README.md",
+        "scripts/index-validation.mjs",
+        "scripts/registry-paths.mjs",
+        "scripts/workflow-dependencies.mjs",
+        "scripts/workflow-ledger.mjs",
+        "scripts/workflow-task-input.mjs",
+        "scripts/workflow-task.mjs",
+        "tests/docs-consistency.test.js",
+        "tests/workflow-task.test.js"
+      ],
+      "existence": [
+        "../AGENTS.md",
+        "../NovelAI生图功能手册-AI接手版.md",
+        "AGENTS.md",
+        "README.md",
+        "docs/...args",
+        "docs/AGENT-TOOLBOX.md",
+        "docs/BASE-DIRECT-WRITE-AUDIT-2026-09-29.md",
+        "docs/DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md",
+        "docs/M-BATCH-EXCLUSIONS.md",
+        "docs/M-BATCH-MATRIX.md",
+        "docs/PARALLEL-DISPATCH-PLAYBOOK.md",
+        "docs/PARALLEL-REGISTRY.md",
+        "docs/PENDING.md",
+        "docs/PERF-LEDGER-2026-09-29.md",
+        "docs/PHOTOLIB-PERF-TASK-2026-09-29.md",
+        "docs/QUICKSTART.md",
+        "docs/README.md",
+        "docs/STATUS.md",
+        "docs/UI-ART-OVERHAUL-GUIDE.md",
+        "docs/UI-TOKEN-SYSTEM-PROPOSAL.md",
+        "docs/WORKFLOW-TOOLS.md",
+        "docs/agent-iteration-playbook.md",
+        "docs/agent-protocol.md",
+        "docs/architecture.md",
+        "docs/archive/LEGACY-MATERIALS-INDEX-2026-09.md",
+        "docs/archive/README.md",
+        "docs/archive/SPEC-PROCESS.md",
+        "docs/archive/WF-ledger-context-1009/originals/docs/PARALLEL-REGISTRY.md",
+        "docs/archive/WF-ledger-context-1009/originals/docs/PENDING.md",
+        "docs/archive/card-migration-2026-09-27/README.md",
+        "docs/archive/engineering-2026-09-27/LONG-TERM-PLAN-2026-09-27.md",
+        "docs/archive/engineering-2026-09-27/README.md",
+        "docs/archive/lean-workflow-2026-09-30/README.md",
+        "docs/archive/lean-workflow-2026-09-30/source-manifest.json",
+        "docs/archive/records-2026-09-28",
+        "docs/archive/records-2026-09-28/ACCEPTANCE-FAST-GATE-RESULT-2026-09-28.md",
+        "docs/archive/records-2026-09-28/BUILD-OUTPUT-CLEANUP-2026-09-28.md",
+        "docs/archive/records-2026-09-28/PROJECT-FOLDER-INVENTORY-2026-09-28.md",
+        "docs/archive/records-2026-09-28/REFACTOR-2026-09-28.md",
+        "docs/archive/records-2026-09-28/VITE-IAB-PERFORMANCE-2026-09-28.md",
+        "docs/archive/status",
+        "docs/archive/status/PROJECT-STATUS-2026-09-27.md",
+        "docs/archive/three-track-2026-09-27",
+        "docs/archive/ui-loop-2026-09-26",
+        "docs/archive/workflow-2026-09-30/README.md",
+        "docs/archive/workflow-2026-09-30/manifest.json",
+        "docs/archive/workflow-2026-09-30/source-manifest.json",
+        "docs/archive/workflow-completion-2026-09-30/manifest.json",
+        "docs/archive/workflow-completion-2026-09-30/source-manifest.json",
+        "docs/archive/workflow-review-state-2026-09-30/README.md",
+        "docs/archive/workflow-review-state-2026-09-30/source-manifest.json",
+        "docs/archive/workflow-routing-2026-09-30/README.md",
+        "docs/archive/workflow-routing-2026-09-30/manifest.json",
+        "docs/archive/workflow-routing-2026-09-30/source-manifest.json",
+        "docs/asset-audit-debt.json",
+        "docs/audio-system.md",
+        "docs/cards/README.md",
+        "docs/changelog.md",
+        "docs/character-bible/README.md",
+        "docs/dataset",
+        "docs/design.md",
+        "docs/development.md",
+        "docs/evidence/2026-09-30-workflow-completion/README.md",
+        "docs/evidence/2026-10-01-acceptance-scenes/README.md",
+        "docs/evidence/2026-10-03-experience-art-plan/refs/visual-reference-review.md",
+        "docs/evidence/2026-10-05-WF-flow-practice/README.md",
+        "docs/evidence/2026-10-05-WF-music-integration/README.md",
+        "docs/evidence/2026-10-05-WF-request-batching/README.md",
+        "docs/evidence/2026-10-08-art-reference-board/README.md",
+        "docs/evidence/2026-10-08-art-reference-board/reference-board.html",
+        "docs/evidence/2026-10-09-WF-doc-system-1009/README.md",
+        "docs/evidence/2026-10-09-WF-doc-system-followup-1009/README.md",
+        "docs/evidence/2026-10-09-art-mood-board/mood-board.html",
+        "docs/evidence/2026-10-09-art-style-samples/README.md",
+        "docs/evidence/LOW-COST-OPTIMIZATIONS-2026-09-28.md",
+        "docs/evidence/README.md",
+        "docs/evidence/agent-output-inventory-2026-09-28.tsv",
+        "docs/evidence/game-shots",
+        "docs/game-compendium.md",
+        "docs/modules/README.md",
+        "docs/performance.md",
+        "docs/previews/README.md",
+        "docs/production/README.md",
+        "docs/production/art/VISUAL-BIBLE.md",
+        "docs/production/design/GDD.md",
+        "docs/production/engineering/AGENT-EXPERIMENTS.md",
+        "docs/production/engineering/CODE-DATA-WORKFLOW.md",
+        "docs/production/engineering/MAKER-HANDBOOK.md",
+        "docs/production/management/DECISIONS.md",
+        "docs/production/management/ITERATION-BOARD.md",
+        "docs/production/management/NEXT-CYCLE-TECH-PLAN.md",
+        "docs/production/project/CHARTER.md",
+        "docs/production/qa/ACCEPTANCE-MATRIX.md",
+        "docs/quality-gates.md",
+        "docs/roadmap.md",
+        "docs/rules.md",
+        "docs/save-format.md",
+        "docs/terminology.md",
+        "docs/ui-art-overhaul/SKILL.md",
+        "docs/ui-art-overhaul/references/diagnosis.md",
+        "docs/ui-art-overhaul/references/implementation.md",
+        "docs/ui-art-overhaul/references/templates.md",
+        "docs/ui-art-overhaul/references/verification.md",
+        "game/assets/README.md",
+        "game/assets/asset-manifest.json",
+        "game/assets/scenes/hub-wallpaper.webp",
+        "game/assets/ui/photo-studio-generated-assets.md",
+        "game/css/base.css",
+        "game/css/winter.css",
+        "game/src/README.md",
+        "scripts/acceptance-gate.mjs",
+        "scripts/check-types.mjs"
+      ],
+      "inventories": [
+        {
+          "directory": "docs",
+          "kind": "current-documents",
+          "recursive": false
+        },
+        {
+          "directory": "docs/production",
+          "kind": "current-documents",
+          "recursive": true
+        },
+        {
+          "directory": "docs/production/art",
+          "kind": "current-documents",
+          "recursive": true
+        },
+        {
+          "directory": "docs/production/design",
+          "kind": "current-documents",
+          "recursive": true
+        },
+        {
+          "directory": "docs/production/engineering",
+          "kind": "current-documents",
+          "recursive": true
+        },
+        {
+          "directory": "docs/production/management",
+          "kind": "current-documents",
+          "recursive": true
+        },
+        {
+          "directory": "docs/production/project",
+          "kind": "current-documents",
+          "recursive": true
+        },
+        {
+          "directory": "docs/production/qa",
+          "kind": "current-documents",
+          "recursive": true
+        },
+        {
+          "directory": "docs/archive",
+          "kind": "workflow-batches"
+        },
+        {
+          "directory": "game/src",
+          "kind": "source-domains"
+        }
+      ],
+      "contracts": [
+        {
+          "kind": "fixture",
+          "reason": "task reads/writes only its mkdtemp root and declared report/log fixture"
+        },
+        {
+          "kind": "documentation",
+          "reason": "current docs/archive contracts; task report assertions use the test temporary root"
+        }
+      ],
+      "reason": "逐根独立证明输入范围；未知根不能借其他测试的fixture契约豁免"
+    },
+    "groups": {
+      "code": "079e09c1038b1e1a4b67b6d1e1ac5d2e153c588aceb59c4693c0b79027e02344",
+      "docs": "823b201c56aeb385c5f533a60bc1f3f493bad41adb507fe9908c38a94bc370f0",
+      "state": "c4357e5282ebdca6bfe1b2b36d7217f53d8529cc2f33fa408e34526c53700181",
+      "environment": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4"
+    },
+    "limits": [
+      "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+    ]
+  },
+  "after": {
+    "sha256": "36a52783116af4965afb156b2d57b1271682c5ab1add61b2a369240249ba5837",
+    "manifest": [
+      {
+        "file": "../AGENTS.md",
+        "sha256": "097d7d42d0e4176e17e619ad9b7e38c3489dd22940f1d7d63bf34112fe97f542"
+      },
+      {
+        "file": "../NovelAI生图功能手册-AI接手版.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": ".githooks/pre-commit",
+        "sha256": "47893464ecbcb80013cbd41db3db5cd3db5c7429a0cbffc9dbb0e6912ba52068"
+      },
+      {
+        "file": "AGENTS.md",
+        "kind": "existence",
+        "sha256": "5ad38304b535c2987dbd24657c1a11b884984ff600d9f389deb0d4e634fee792"
+      },
+      {
+        "file": "docs/",
+        "kind": "inventory",
+        "sha256": "836cd71ad1ee3cf025cf13c5e4ac561c6b9f2501ef9f6c8d9b62f7fbe7a64c3b"
+      },
+      {
+        "file": "docs/...args",
+        "kind": "existence",
+        "sha256": "5ad38304b535c2987dbd24657c1a11b884984ff600d9f389deb0d4e634fee792"
+      },
+      {
+        "file": "docs/agent-iteration-playbook.md",
+        "sha256": "5b428ea7ca96beaeb53c8a4e3809138bae43ddf39988477e518a54566985a7c7"
+      },
+      {
+        "file": "docs/agent-protocol.md",
+        "sha256": "1efd3ab8e93a94efed727b6d7c96d15cb5248d30d4af3cd3bbf10ef0878b7538"
+      },
+      {
+        "file": "docs/AGENT-TOOLBOX.md",
+        "sha256": "97abeaf177f62e6c0dfb20c540e8f5f132c7c9bedeae3bc028dcd99469effd54"
+      },
+      {
+        "file": "docs/architecture.md",
+        "sha256": "10c4371cf28ce0f61ad176bd5466be25b02e764277193757c3397328d5f937e3"
+      },
+      {
+        "file": "docs/archive/",
+        "kind": "inventory",
+        "sha256": "a2ad9856efa55903dd6aa7c04d993347094ad2bbdb42342a473cf564836ca221"
+      },
+      {
+        "file": "docs/archive/card-migration-2026-09-27/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/engineering-2026-09-27/LONG-TERM-PLAN-2026-09-27.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/engineering-2026-09-27/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/lean-workflow-2026-09-30/manifest.json",
+        "sha256": "8d55d73f32d212830e09fd785f636f679d02e84a2e57ade4f8a175e3e3b0aa8b"
+      },
+      {
+        "file": "docs/archive/lean-workflow-2026-09-30/originals/docs/quality-gates.md",
+        "sha256": "d878e9147383c34609fee1b474b4733510ceec57f35e2234ac2a82da4bf84ead"
+      },
+      {
+        "file": "docs/archive/lean-workflow-2026-09-30/originals/docs/README.md",
+        "sha256": "148664e1bed4086fc80e35b00dc8043d0332ea3c1a321297d9292491de59cd44"
+      },
+      {
+        "file": "docs/archive/lean-workflow-2026-09-30/originals/docs/SPEC-PROCESS.md",
+        "sha256": "422586f92dfdc05a55d6d9434327c0f94c3e8fd792421f8921639fa8c19fd050"
+      },
+      {
+        "file": "docs/archive/lean-workflow-2026-09-30/originals/docs/STATUS.md",
+        "sha256": "6122e26050d8033e6c79e4afab370e67f4b49cd3e75c6e6a57ed9389b8a8e2cb"
+      },
+      {
+        "file": "docs/archive/lean-workflow-2026-09-30/originals/docs/WORKFLOW-TOOLS.md",
+        "sha256": "bb2a2926baa67423a38cfa0aa4109af74ec90f5ab379c4921c40011878104bf0"
+      },
+      {
+        "file": "docs/archive/lean-workflow-2026-09-30/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/lean-workflow-2026-09-30/source-manifest.json",
+        "kind": "existence",
+        "sha256": "5ad38304b535c2987dbd24657c1a11b884984ff600d9f389deb0d4e634fee792"
+      },
+      {
+        "file": "docs/archive/LEGACY-MATERIALS-INDEX-2026-09.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/records-2026-09-28",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/records-2026-09-28/ACCEPTANCE-FAST-GATE-RESULT-2026-09-28.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/records-2026-09-28/BUILD-OUTPUT-CLEANUP-2026-09-28.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/records-2026-09-28/PROJECT-FOLDER-INVENTORY-2026-09-28.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/records-2026-09-28/REFACTOR-2026-09-28.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/records-2026-09-28/VITE-IAB-PERFORMANCE-2026-09-28.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/SPEC-PROCESS.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/status",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/status/PROJECT-STATUS-2026-09-27.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/three-track-2026-09-27",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/ui-loop-2026-09-26",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/WF-ledger-context-1009/originals/docs/PARALLEL-REGISTRY.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/WF-ledger-context-1009/originals/docs/PENDING.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/workflow-2026-09-30/manifest.json",
+        "sha256": "880c7e1e45782bb294bf6d3740588c7843d56d00838bd8c4b5b6d56c5b10914c"
+      },
+      {
+        "file": "docs/archive/workflow-2026-09-30/originals/docs/production/management/ITERATION-BOARD.md",
+        "sha256": "eb5c2340ee9812749b131015882c749fb1b6d9db048d6c9cd956b26a0be31773"
+      },
+      {
+        "file": "docs/archive/workflow-2026-09-30/originals/docs/SPEC-PROCESS.md",
+        "sha256": "9c5ced3e2b16e82f24f6b1e729fb78b9e8c54b9b258c4cf6298a6af0caf10e3e"
+      },
+      {
+        "file": "docs/archive/workflow-2026-09-30/README.md",
+        "sha256": "ea89f113f35d578cfa69290ee45520c4cb5295d008e973c0861bee13ba2fd3d0"
+      },
+      {
+        "file": "docs/archive/workflow-2026-09-30/source-manifest.json",
+        "kind": "existence",
+        "sha256": "5ad38304b535c2987dbd24657c1a11b884984ff600d9f389deb0d4e634fee792"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/manifest.json",
+        "sha256": "4b7faa132d135df969c4300f2f7d33c79a95ead1d2dfe02cadb1966c36bcb6cc"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/originals/AGENTS.md",
+        "sha256": "64de3328036ec86faca20cbc7eeb9ac63d120dc6dc9de44c9467f20db8fb0ed1"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/originals/docs/agent-protocol.md",
+        "sha256": "67d6b9f98d18eaf7f19727a0fa518d95a959b6bcc3a161a3403a02afd6a9f0a5"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/originals/docs/production/engineering/MAKER-HANDBOOK.md",
+        "sha256": "39d23cbc584ee93b039fb0caf7cecf0cd93b50eb875e63bb900e227e47935006"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/originals/docs/production/qa/ACCEPTANCE-MATRIX.md",
+        "sha256": "21084123a023b1617f479f1ff05fd790ad72f2284dba112b8c35b9a483ed6115"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/originals/docs/quality-gates.md",
+        "sha256": "9cd5c8dbf0f9c9647065fca3f23bfb06d6b511ed155cbbce148e05c6787da2ca"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/originals/docs/README.md",
+        "sha256": "87ba4d361dd6f7017959e937e2b7e1e8f62edbe40498badf7ded500d069d2cb0"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/originals/docs/WORKFLOW-TOOLS.md",
+        "sha256": "ed6bbf88acb03f44e4dbc782a2a2e1ffdbf094d1ac464727c7037dee0540f52a"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/originals/scripts/page-snapshot.mjs",
+        "sha256": "403591bb0fb193d76994fdabb5f1847c421639ef36a25e2fd1cc3c3a44e9d9ba"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/README.md",
+        "sha256": "2a3ff2aa22bd5cbf9c8096594da0c5a76b0169faecca7274cd93b339fe7b6246"
+      },
+      {
+        "file": "docs/archive/workflow-completion-2026-09-30/source-manifest.json",
+        "sha256": "301717c3e52a133b1a6bed71f1deafa18f61a73a7716e30a1fda33d8846fd749"
+      },
+      {
+        "file": "docs/archive/workflow-review-state-2026-09-30/manifest.json",
+        "sha256": "24c32b100227dc7a15c2b2c0b4ddc6048a7a7bf0d4e05cc561231dafffe87e29"
+      },
+      {
+        "file": "docs/archive/workflow-review-state-2026-09-30/originals/docs/production/management/DECISIONS.md",
+        "sha256": "5c0c38a28fca3ba0fabb2fa4825368aebe6a031715c5e0fbb56be0131a5e77a0"
+      },
+      {
+        "file": "docs/archive/workflow-review-state-2026-09-30/originals/docs/production/management/ITERATION-BOARD.md",
+        "sha256": "b9030800aedfdecab862d3d82e4543b655156224773e0ff84998b435e59912db"
+      },
+      {
+        "file": "docs/archive/workflow-review-state-2026-09-30/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/archive/workflow-review-state-2026-09-30/source-manifest.json",
+        "kind": "existence",
+        "sha256": "5ad38304b535c2987dbd24657c1a11b884984ff600d9f389deb0d4e634fee792"
+      },
+      {
+        "file": "docs/archive/workflow-routing-2026-09-30/manifest.json",
+        "sha256": "b052dfcb6ad343e2fab37eb7804c0dcb7828e89cf6d3d86caa938bf826f8317a"
+      },
+      {
+        "file": "docs/archive/workflow-routing-2026-09-30/originals/docs/production/management/NEXT-CYCLE-TECH-PLAN.md",
+        "sha256": "de96fad4802108c396a80bdab06f4336a34ee2bd645c81cece2e2d285231cf99"
+      },
+      {
+        "file": "docs/archive/workflow-routing-2026-09-30/originals/docs/README.md",
+        "sha256": "e7fabc2dc2076ef3368a4bc380a0ce9690869b2dc7b4d9153b336a543a4c60d5"
+      },
+      {
+        "file": "docs/archive/workflow-routing-2026-09-30/README.md",
+        "sha256": "1d09646ccbd3a0150b5ab893dbf2d7d892003eabd92da6f44a8d61a52dd3376a"
+      },
+      {
+        "file": "docs/archive/workflow-routing-2026-09-30/source-manifest.json",
+        "kind": "existence",
+        "sha256": "5ad38304b535c2987dbd24657c1a11b884984ff600d9f389deb0d4e634fee792"
+      },
+      {
+        "file": "docs/asset-audit-debt.json",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/asset-audit-debt.md",
+        "sha256": "d2d3458dadb0869c9707935976a4336e5f718900617f4fb040f07b21023f9061"
+      },
+      {
+        "file": "docs/audio-system.md",
+        "sha256": "eb60fa3bf5095ca5307bcd21ba9eb910aa9c4aadc00701bdc8ba6a21eb65a067"
+      },
+      {
+        "file": "docs/BASE-DIRECT-WRITE-AUDIT-2026-09-29.md",
+        "sha256": "754b860526481b12ef0b8220b74233c496213c3c1611499e6a32a8fccbc29a99"
+      },
+      {
+        "file": "docs/cards/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/changelog.md",
+        "sha256": "f69ee2dd32f00f7738282e648df42b9e4140882c106a3695f273a526e1aebd34"
+      },
+      {
+        "file": "docs/character-bible/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/class-consolidation.md",
+        "sha256": "fbe9cb10b580a9636b5b99cbc4469de4bddf1b0b3c289995594e283fbf0d30ce"
+      },
+      {
+        "file": "docs/dataset",
+        "kind": "existence",
+        "sha256": "5ad38304b535c2987dbd24657c1a11b884984ff600d9f389deb0d4e634fee792"
+      },
+      {
+        "file": "docs/DEBT-CAMPAIGN-2026-10.md",
+        "sha256": "94e9d495ebf2e592daf1a145f8c68f0ebf2ce53cea6aedb83cd78c4693089b3c"
+      },
+      {
+        "file": "docs/design.md",
+        "sha256": "dc31715f81bc6e179cb86d725c114c5ba3637669340a8cb0495a64a96286a7d5"
+      },
+      {
+        "file": "docs/development.md",
+        "sha256": "285a83564f0f51ab3651b87bad10c8e8261d881f73a2d446feb1d5396cfb1b0f"
+      },
+      {
+        "file": "docs/DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md",
+        "sha256": "bcaa1918174e6bcc27f620948d32fa195be7bfbe5d8a4d803a1938c6ca459db9"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-full-repository-review/task.json",
+        "sha256": "56c99a5e2f865aac7d3651fafd2c4bc771b87034342b4b92c51284c0f6fbf817"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-lean-workflow/task.json",
+        "sha256": "fb10db8484d2015531c6f50d1142e56d40b78114f3c470810f54d0cec377b00f"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-workflow-completion/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-workflow-review-fixes/task.json",
+        "sha256": "7529efb752cfe4d3875ab415597adc4b88f63bad9ee9c8885aa9ef9a7b37d840"
+      },
+      {
+        "file": "docs/evidence/2026-10-01-acceptance-scenes/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-1/task.json",
+        "sha256": "87f5c33558af6f52c7a50b9fe86f8f5133ed0a58b3e9ef380ca53fc604a9329b"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-2/task.json",
+        "sha256": "6bdb06bbbf26bcbc029e167c0d6a6bd21420e098e2c4329f96035d3de72bd902"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-3/task.json",
+        "sha256": "852fcd7f7a2da7e7ae70951eeb352d3e4c882112f900c9d052fd15d24c314ddc"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-automation/task.json",
+        "sha256": "ee4018aad4f0e98cd82c9104476a6c217e7000b8e42e1531ad4a39c5a87749ae"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-decouple/task.json",
+        "sha256": "2250963edfa165dea21d46d679d03c2b1295f30cbd47fd09da74cdb3c958f27d"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-redesign/task.json",
+        "sha256": "d6c88a124e7d714f29e28fe61a86e0d8a528b42a21575aa437ac7ec4097d445c"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-production-research/task.json",
+        "sha256": "bb2934f113227ef9b03071f2c7656e0a61b320a13c3b59e751e7917f8a4f3c27"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes-crossplatform/task.json",
+        "sha256": "af714f27e7067293f4b2fd00ab38b9d476650e6342c0c971b1533c5fe9507167"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes/task.json",
+        "sha256": "4bf05ca76394be31df66ac841a98b6e8a6c9c1a93b0bedcd7f4d012a3cdaf0a3"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-review/task.json",
+        "sha256": "cefc4ecf8fe895d9bd322122b6d380660e6d42b2df0f10e98eb3e119973f7586"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-v2/task.json",
+        "sha256": "776320fc8065871d96b6bce0c0806e325518717ed0b20e09077ca77539e9274c"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-experience-art-plan/refs/visual-reference-review.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-experience-art-plan/task.json",
+        "sha256": "e3ea75d9bb5fbf657664cfc0521e93bab1381b735647a7a4fcc9224939ae605b"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-experience-art-exec/task.json",
+        "sha256": "5751581ca69fe5ba1d81c4d803fe01cce046b85d15a55887f58c031ad626ed0c"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-home-art-v2/task.json",
+        "sha256": "2f4eb76b9c9594d7594f6dd04127dd44035204ed9c4a394d2f646ac112de63ea"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-home-layout/task.json",
+        "sha256": "6f74540ad681ec952da2e8ec1d49b36b8321cfce09319ce6508d3046731febf6"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-xart-z1/task.json",
+        "sha256": "6c872e2e62530e22818ef3bbf5c49343a206647ec59dac0523184f2de4a676ea"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-1004/task.json",
+        "sha256": "3179b2f8a0919fe52a1b5f7b77156c057e91eed06ca04cacbce78cdd6d99cfe1"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r2/task.json",
+        "sha256": "e20177c47ef50180968058350a01d053d0869912d33424bd93d3d3f58dfd98ec"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r3/task.json",
+        "sha256": "8f3cfeca13faf07df5d021fb4c13c3806ae623a4c49bdd5e4f386dd03200e7c2"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r4/task.json",
+        "sha256": "6230d9073433b0c4e7f92a2a122b749af131053c529f9e25b9d10b9294caaafe"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r5/task.json",
+        "sha256": "c7e969cd6fb3646dedf66d88b7ef78b7697228aa0158a7353a5fba1f60e63c3f"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-photo-studio-unified/task.json",
+        "sha256": "5b3b6a5e64dcd00a1db4ec607585efd0dd1219ee36f1c2dc421b64d75afb2f01"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/task.json",
+        "sha256": "beff569b4672957dfd05f7bcd9be0b557ce9723e57027db0f8820826c0e2671b"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-xingyue-fullmoon/task.json",
+        "sha256": "b2cc8f2eb4839568fa83656113c07df3fa01dc10619e285081754a2f06b8d7e8"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-xingyue-wind-song/task.json",
+        "sha256": "0a5ee0d13ac9fa61bfd8e8202c059a95e28351c884d3609f1287256a7f05529c"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-card-ally-redesign/task.json",
+        "sha256": "cb1eb9a7ae68374d3ddf23c96c4433e7d8e4013e0d7bc5ce926269f2c7066ce7"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-flow-practice/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-music-independent-review/task.json",
+        "sha256": "5268a56c5bd8b6aa9b060a0ce58de90dfb204033a43887571565c56f03fdb16c"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-music-integration/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-request-batching/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-wu-parts-full/task.json",
+        "sha256": "eb37eee3cf2cf597442a9b163009b055289f01ca7712da63e01f212a27fc8737"
+      },
+      {
+        "file": "docs/evidence/2026-10-08-art-reference-board/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-08-art-reference-board/reference-board.html",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-art-mood-board/mood-board.html",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-art-style-samples/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-WF-doc-system-1009/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-WF-doc-system-followup-1009/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-WF-doc-system-followup-1009/task.json",
+        "sha256": "4d124db4e05cf1f1c1b67186ad287b07cd31f43a0f04df434b9b2f09cbd9d142"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-WF-four-layer-slice-1009/task.json",
+        "sha256": "4e0c6027eec84c23a7d665173f212cbf6c2276a12d4f25a3acd995d9fbaa279e"
+      },
+      {
+        "file": "docs/evidence/agent-output-inventory-2026-09-28.tsv",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/game-shots",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/LOW-COST-OPTIMIZATIONS-2026-09-28.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/evidence/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/game-compendium.md",
+        "sha256": "7a4ac3fcac85e35549ef21cd5d18fe98f0f90bc4670ff36b8ee69568de45ddd8"
+      },
+      {
+        "file": "docs/M-BATCH-EXCLUSIONS.md",
+        "sha256": "8f0f5d3f42a43546b08e2a5d35f1d89c385b64702d0944bf53fff0aba0042909"
+      },
+      {
+        "file": "docs/M-BATCH-MATRIX.md",
+        "sha256": "1f3d5dc4159be775a9506708f426a409c527db6e4a8e4d73503db71c322e70d2"
+      },
+      {
+        "file": "docs/modules/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/PARALLEL-DISPATCH-PLAYBOOK.md",
+        "sha256": "f5bb34bf892ee2eb292455f8450f7ee5892a7ce36d7ccb6025b1ab5e8ff91ede"
+      },
+      {
+        "file": "docs/PARALLEL-REGISTRY.md",
+        "sha256": "4c2fde96bda426f584f7a546e8695cdbdc76ef990cf054d6aa66e84097f2c1c5"
+      },
+      {
+        "file": "docs/PENDING.md",
+        "sha256": "79ce0101f4b6298f015dd5b7d660aee4d329067b49579e79464e0da768e53b45"
+      },
+      {
+        "file": "docs/PERF-LEDGER-2026-09-29.md",
+        "sha256": "b7a68ba14823ac56c95370c013dbccb66e19bef5adefd7f8d0c4c12fafc357f4"
+      },
+      {
+        "file": "docs/performance.md",
+        "sha256": "9e43777b022789648d1b433a19db8e43daf8040ca9f048c10159f05fbffc7737"
+      },
+      {
+        "file": "docs/PHOTOLIB-PERF-TASK-2026-09-29.md",
+        "sha256": "6ac29550db09565fbdbaa521579be18f426f55ea1f36634d3ad2cf7ac1f13433"
+      },
+      {
+        "file": "docs/previews/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/production/",
+        "kind": "inventory",
+        "sha256": "7879971388668ac6ff6d2333568f51cb200ab78ff377d5370341fa22ca6345f2"
+      },
+      {
+        "file": "docs/production/art/",
+        "kind": "inventory",
+        "sha256": "fd610c44d9f739c3d7eff838c19cab3566bb20bfa0eb20574e7a2b15a09e7870"
+      },
+      {
+        "file": "docs/production/art/ART-DIRECTION-BRIEF.md",
+        "sha256": "352bde6805b1a4ee5b05e215f3700513c85a1065e8c2e2070368a96980004b5f"
+      },
+      {
+        "file": "docs/production/art/VISUAL-BIBLE.md",
+        "sha256": "23c259391eab0af206dbc2a4f4366bfce304659a117fab17f12d6868a2541351"
+      },
+      {
+        "file": "docs/production/design/",
+        "kind": "inventory",
+        "sha256": "a100d80fdb9159f7434f087958ed1f52f3b8d3581a8a699d77738fb52fcbdaea"
+      },
+      {
+        "file": "docs/production/design/GDD.md",
+        "sha256": "5f74dbf0ad2c0c34c0f34db4aec9308a137332ee6132aafc8e1ff7a877feeb34"
+      },
+      {
+        "file": "docs/production/engineering/",
+        "kind": "inventory",
+        "sha256": "01af05471c95931ae29973687cfcc52fd442b0f1e5b305a07a61e69a162ed38e"
+      },
+      {
+        "file": "docs/production/engineering/AGENT-EXPERIMENTS.md",
+        "sha256": "cd30e929e7defebb9334f71986b3f5c10329c159f0864bf9ff2052db4b405e43"
+      },
+      {
+        "file": "docs/production/engineering/CODE-DATA-WORKFLOW.md",
+        "sha256": "0a5d8e53c8bd82b89792479a3ab4e10b064a3c8cd26daf4bb69af540924757a7"
+      },
+      {
+        "file": "docs/production/engineering/MAKER-HANDBOOK.md",
+        "sha256": "0254b101b956d38434703589cbfdb8fd025cf12d4324504654a637af70fda73a"
+      },
+      {
+        "file": "docs/production/management/",
+        "kind": "inventory",
+        "sha256": "17014bda2e4a1b35e0ec7ca72001eaf2256f84a2325bbbabf8a74f470d389c3f"
+      },
+      {
+        "file": "docs/production/management/DECISIONS.md",
+        "sha256": "90734e8058804dd25fc7386198f6ec8de8ece7dff2187918f8d5e818e93ec923"
+      },
+      {
+        "file": "docs/production/management/ITERATION-BOARD.md",
+        "sha256": "3dd8599163af1ad8179ff40b043c42c75d577136f2b48d3436b5e38faf4bc238"
+      },
+      {
+        "file": "docs/production/management/NEXT-CYCLE-TECH-PLAN.md",
+        "sha256": "6d6feb77c58eb09bc2d0c8b9c9ffae96c959853a2991574f07af9771a16a61d3"
+      },
+      {
+        "file": "docs/production/project/",
+        "kind": "inventory",
+        "sha256": "5b19417f0da52f9a71ad04fda296916595beff94fcdc24ea5945b287d5594874"
+      },
+      {
+        "file": "docs/production/project/CHARTER.md",
+        "sha256": "4c4fb95cdc7d60cd8b3a5f300900c0a41b85234580be533472342403e4634a9e"
+      },
+      {
+        "file": "docs/production/qa/",
+        "kind": "inventory",
+        "sha256": "e0c84e913cd1419b37044dbf8a043f55fa5d5bd32da0176faea373b4f0f9a418"
+      },
+      {
+        "file": "docs/production/qa/ACCEPTANCE-MATRIX.md",
+        "sha256": "1c9b11f6c806f9bc8aff9c8e5c4b04f54cf2dfc410e621c0fb4d938b9b0c60e4"
+      },
+      {
+        "file": "docs/production/README.md",
+        "sha256": "0c31fc3fccbe2fc9bbcd760b161219a5a7dee10be509863ce65390283cee590e"
+      },
+      {
+        "file": "docs/quality-gates.md",
+        "sha256": "7b4e7f282f3d1689c4354c93500dd26a0883f675a9cd84637a58a6b2eab4b3a9"
+      },
+      {
+        "file": "docs/QUICKSTART.md",
+        "sha256": "cb5d3b2c4bc49a0ce52759e8944d9a4bef9ee5dc9c2749d84b34fa6788b7f7d9"
+      },
+      {
+        "file": "docs/README.md",
+        "sha256": "6fe7c8f503e208f5fc7c1123b119e50a433ed9ddee862f311426c2c384eb097a"
+      },
+      {
+        "file": "docs/roadmap.md",
+        "sha256": "9f47ee5dbbdd4c89e9299b85232eaf98d61c4bab26fff4162353a8d2ed48e639"
+      },
+      {
+        "file": "docs/rules.md",
+        "sha256": "ccd088ae13d0438d0f10cd2c971a80fc6629bc92852b9725f9d03258a60d0a0d"
+      },
+      {
+        "file": "docs/save-format.md",
+        "sha256": "753d71602f80b453cc90097afd1e347e6c700425996d5d55769825c95ab3d2f0"
+      },
+      {
+        "file": "docs/STATUS.md",
+        "sha256": "6d8571265c3fe53bc6a52aa29f2d8c94676a8171d6a8ec4cc867bd17401345ff"
+      },
+      {
+        "file": "docs/terminology.md",
+        "sha256": "09ca9e4c9adb303a9acd5c11c55b7b2c3cf0a5a325bec49ddd4a076d9d27442c"
+      },
+      {
+        "file": "docs/UI-ART-OVERHAUL-GUIDE.md",
+        "sha256": "d24c08f6a793333d4c95d2ee51d3fea3146c40c175e105451184370fb4cd2129"
+      },
+      {
+        "file": "docs/ui-art-overhaul/references/diagnosis.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/ui-art-overhaul/references/implementation.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/ui-art-overhaul/references/templates.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/ui-art-overhaul/references/verification.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/ui-art-overhaul/SKILL.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "docs/UI-TOKEN-SYSTEM-PROPOSAL.md",
+        "sha256": "39de5418067a0382e8714b59a5fd81f97074071f126553b37c9513dc0594a4a4"
+      },
+      {
+        "file": "docs/WORKFLOW-TOOLS.md",
+        "sha256": "3d8cea403732d30f1c4d6f34819ba27922bf93ddb31e9e975decbcfd90c0b170"
+      },
+      {
+        "file": "eslint.config.js",
+        "sha256": "e29079fdc795c560e4ba742018455f2ba098192581ef847bb3f6e2a32bda26ae"
+      },
+      {
+        "file": "game/assets/asset-manifest.json",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "game/assets/README.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "game/assets/scenes/hub-wallpaper.webp",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "game/assets/ui/photo-studio-generated-assets.md",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "game/css/base.css",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "game/css/winter.css",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "game/src/",
+        "kind": "inventory",
+        "sha256": "6469f79f9781d2715dce55c2c8704108e25ee60d8ffbfab71c0d9445cc35e2ed"
+      },
+      {
+        "file": "game/src/README.md",
+        "sha256": "64034968c547fa6c1594394cb4b0955e3e809dd2a1e3f2d7d58be0239357b093"
+      },
+      {
+        "file": "jsconfig.battle-settlement.json",
+        "sha256": "ff9c6acca637b6583dc514e35f0870e8c39aa903f758919364ca3a10c4478f03"
+      },
+      {
+        "file": "jsconfig.battle-snapshot.json",
+        "sha256": "3fb7f26a7982e73c077b006c059b9a565b4353689ad04e0e634ebbe1b46a35c2"
+      },
+      {
+        "file": "jsconfig.card-rules.json",
+        "sha256": "426fb5f7c2781a1cf9427f29d326bea7e47cde4cd9338b99b3d178593632230d"
+      },
+      {
+        "file": "jsconfig.json",
+        "sha256": "3f2e1bd99ddc0cb8eb95ef70a7818e56fbcc687a8970d4615d6319396dbc2da1"
+      },
+      {
+        "file": "jsconfig.strict-foundations.json",
+        "sha256": "7d2f1e714dc03b4a67604a3928a5d1172c5214c6fce00443bacf4e56c6668c90"
+      },
+      {
+        "file": "jsconfig.strict-hand-selection.json",
+        "sha256": "4a4b2d33af7297b95a05976e5bc81aaf0baf3e64e3b8313516013994fbf11ba0"
+      },
+      {
+        "file": "jsconfig.strict-selection.json",
+        "sha256": "a141c4996d7ed5630a222e882738c6bf22c5473527a3c9e53e82686a8bd88f98"
+      },
+      {
+        "file": "jsconfig.strict-ui.json",
+        "sha256": "a53bcb7a075a6fab45f5b1076b97cb3449e3313eca05b193da1ede8ec5695abc"
+      },
+      {
+        "file": "package-lock.json",
+        "sha256": "c72e1da1f98d590f1d4b5b4f13530020af00fc5a328c86f3a9619daa610eed73"
+      },
+      {
+        "file": "package.json",
+        "sha256": "7700e3529505ec3917cc1478cb8028afd4efec1325c158f1b3b11db38620b697"
+      },
+      {
+        "file": "README.md",
+        "sha256": "2936a3f2bc66b9374febc6e12180e3f3df67bb0b57cce5310d201c003aab2c5a"
+      },
+      {
+        "file": "scripts/acceptance-gate.mjs",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "scripts/check-types.mjs",
+        "kind": "existence",
+        "sha256": "4d4c7eee2e28d03cb2dbf3df639c3290ade66e18755e83caade2d8f37bd8c044"
+      },
+      {
+        "file": "scripts/index-validation.mjs",
+        "sha256": "87f22638c641c310a84248dd75d03c00481c11a1bb20c8e2e0e4277ecf5fdb06"
+      },
+      {
+        "file": "scripts/registry-paths.mjs",
+        "sha256": "0136ea2b0902fde11479ec2bed780c6335b8c66d7b2d1cbd718f9410a29fd9ef"
+      },
+      {
+        "file": "scripts/workflow-dependencies.mjs",
+        "sha256": "534fa5b554dbfc112c8f683d9ba4c9aa837bc0d53b76e1c7660f3346c0fb129b"
+      },
+      {
+        "file": "scripts/workflow-ledger.mjs",
+        "sha256": "efb861b047e39bf9a3ef2670de619151eb2c2c5a5a7da78a9162cda15bd4d61f"
+      },
+      {
+        "file": "scripts/workflow-task-input.mjs",
+        "sha256": "585e23ceb860779d4e6b5b113c5820357b1668ac293d41bc9ff42a1506e246a9"
+      },
+      {
+        "file": "scripts/workflow-task.mjs",
+        "sha256": "a179172c6b5c25b8ff20b9663be8da8b63e053c51c8acecff81f5d288f67cf63"
+      },
+      {
+        "file": "tests/docs-consistency.test.js",
+        "sha256": "d766f3e45845bc9f8a889ab29f6160f1b95e4561986d948f6ad756d7acf0afc6"
+      },
+      {
+        "file": "tests/workflow-task.test.js",
+        "sha256": "c9ade20025b88de427bd80d9ed545d3716ac8e7a0560a8bc6d7ed6a19c6698ca"
+      },
+      {
+        "file": "vite.config.js",
+        "sha256": "384b2fe4cc46d026e7345d309eb89ee9363b1a33403688004baa7f054dabec5c"
+      }
+    ],
+    "environment": {
+      "node": "v24.13.0",
+      "platform": "win32",
+      "arch": "x64",
+      "dependencies": {
+        "vitest": "3.2.7",
+        "vite": "6.4.3",
+        "typescript": "7.0.2",
+        "eslint": "10.11.0",
+        "jsdom": "25.0.1",
+        "acorn": "8.18.0",
+        "acorn-walk": "8.3.5"
+      },
+      "ci": null,
+      "nodeOptions": null,
+      "forceFullTests": null
+    },
+    "documents": true,
+    "assets": false,
+    "selection": {
+      "mode": "targeted",
+      "roots": [
+        "tests/workflow-task.test.js",
+        "tests/docs-consistency.test.js"
+      ],
+      "files": [
+        "../AGENTS.md",
+        "README.md",
+        "docs/AGENT-TOOLBOX.md",
+        "docs/BASE-DIRECT-WRITE-AUDIT-2026-09-29.md",
+        "docs/DEBT-CAMPAIGN-2026-10.md",
+        "docs/DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md",
+        "docs/M-BATCH-EXCLUSIONS.md",
+        "docs/M-BATCH-MATRIX.md",
+        "docs/PARALLEL-DISPATCH-PLAYBOOK.md",
+        "docs/PARALLEL-REGISTRY.md",
+        "docs/PENDING.md",
+        "docs/PERF-LEDGER-2026-09-29.md",
+        "docs/PHOTOLIB-PERF-TASK-2026-09-29.md",
+        "docs/QUICKSTART.md",
+        "docs/README.md",
+        "docs/STATUS.md",
+        "docs/UI-ART-OVERHAUL-GUIDE.md",
+        "docs/UI-TOKEN-SYSTEM-PROPOSAL.md",
+        "docs/WORKFLOW-TOOLS.md",
+        "docs/agent-iteration-playbook.md",
+        "docs/agent-protocol.md",
+        "docs/architecture.md",
+        "docs/archive/lean-workflow-2026-09-30/manifest.json",
+        "docs/archive/lean-workflow-2026-09-30/originals/docs/README.md",
+        "docs/archive/lean-workflow-2026-09-30/originals/docs/SPEC-PROCESS.md",
+        "docs/archive/lean-workflow-2026-09-30/originals/docs/STATUS.md",
+        "docs/archive/lean-workflow-2026-09-30/originals/docs/WORKFLOW-TOOLS.md",
+        "docs/archive/lean-workflow-2026-09-30/originals/docs/quality-gates.md",
+        "docs/archive/workflow-2026-09-30/README.md",
+        "docs/archive/workflow-2026-09-30/manifest.json",
+        "docs/archive/workflow-2026-09-30/originals/docs/SPEC-PROCESS.md",
+        "docs/archive/workflow-2026-09-30/originals/docs/production/management/ITERATION-BOARD.md",
+        "docs/archive/workflow-completion-2026-09-30/README.md",
+        "docs/archive/workflow-completion-2026-09-30/manifest.json",
+        "docs/archive/workflow-completion-2026-09-30/originals/AGENTS.md",
+        "docs/archive/workflow-completion-2026-09-30/originals/docs/README.md",
+        "docs/archive/workflow-completion-2026-09-30/originals/docs/WORKFLOW-TOOLS.md",
+        "docs/archive/workflow-completion-2026-09-30/originals/docs/agent-protocol.md",
+        "docs/archive/workflow-completion-2026-09-30/originals/docs/production/engineering/MAKER-HANDBOOK.md",
+        "docs/archive/workflow-completion-2026-09-30/originals/docs/production/qa/ACCEPTANCE-MATRIX.md",
+        "docs/archive/workflow-completion-2026-09-30/originals/docs/quality-gates.md",
+        "docs/archive/workflow-completion-2026-09-30/originals/scripts/page-snapshot.mjs",
+        "docs/archive/workflow-completion-2026-09-30/source-manifest.json",
+        "docs/archive/workflow-review-state-2026-09-30/manifest.json",
+        "docs/archive/workflow-review-state-2026-09-30/originals/docs/production/management/DECISIONS.md",
+        "docs/archive/workflow-review-state-2026-09-30/originals/docs/production/management/ITERATION-BOARD.md",
+        "docs/archive/workflow-routing-2026-09-30/README.md",
+        "docs/archive/workflow-routing-2026-09-30/manifest.json",
+        "docs/archive/workflow-routing-2026-09-30/originals/docs/README.md",
+        "docs/archive/workflow-routing-2026-09-30/originals/docs/production/management/NEXT-CYCLE-TECH-PLAN.md",
+        "docs/asset-audit-debt.md",
+        "docs/audio-system.md",
+        "docs/changelog.md",
+        "docs/class-consolidation.md",
+        "docs/design.md",
+        "docs/development.md",
+        "docs/game-compendium.md",
+        "docs/performance.md",
+        "docs/production/README.md",
+        "docs/production/art/ART-DIRECTION-BRIEF.md",
+        "docs/production/art/VISUAL-BIBLE.md",
+        "docs/production/design/GDD.md",
+        "docs/production/engineering/AGENT-EXPERIMENTS.md",
+        "docs/production/engineering/CODE-DATA-WORKFLOW.md",
+        "docs/production/engineering/MAKER-HANDBOOK.md",
+        "docs/production/management/DECISIONS.md",
+        "docs/production/management/ITERATION-BOARD.md",
+        "docs/production/management/NEXT-CYCLE-TECH-PLAN.md",
+        "docs/production/project/CHARTER.md",
+        "docs/production/qa/ACCEPTANCE-MATRIX.md",
+        "docs/quality-gates.md",
+        "docs/roadmap.md",
+        "docs/rules.md",
+        "docs/save-format.md",
+        "docs/terminology.md",
+        "game/src/README.md",
+        "scripts/index-validation.mjs",
+        "scripts/registry-paths.mjs",
+        "scripts/workflow-dependencies.mjs",
+        "scripts/workflow-ledger.mjs",
+        "scripts/workflow-task-input.mjs",
+        "scripts/workflow-task.mjs",
+        "tests/docs-consistency.test.js",
+        "tests/workflow-task.test.js"
+      ],
+      "existence": [
+        "../AGENTS.md",
+        "../NovelAI生图功能手册-AI接手版.md",
+        "AGENTS.md",
+        "README.md",
+        "docs/...args",
+        "docs/AGENT-TOOLBOX.md",
+        "docs/BASE-DIRECT-WRITE-AUDIT-2026-09-29.md",
+        "docs/DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md",
+        "docs/M-BATCH-EXCLUSIONS.md",
+        "docs/M-BATCH-MATRIX.md",
+        "docs/PARALLEL-DISPATCH-PLAYBOOK.md",
+        "docs/PARALLEL-REGISTRY.md",
+        "docs/PENDING.md",
+        "docs/PERF-LEDGER-2026-09-29.md",
+        "docs/PHOTOLIB-PERF-TASK-2026-09-29.md",
+        "docs/QUICKSTART.md",
+        "docs/README.md",
+        "docs/STATUS.md",
+        "docs/UI-ART-OVERHAUL-GUIDE.md",
+        "docs/UI-TOKEN-SYSTEM-PROPOSAL.md",
+        "docs/WORKFLOW-TOOLS.md",
+        "docs/agent-iteration-playbook.md",
+        "docs/agent-protocol.md",
+        "docs/architecture.md",
+        "docs/archive/LEGACY-MATERIALS-INDEX-2026-09.md",
+        "docs/archive/README.md",
+        "docs/archive/SPEC-PROCESS.md",
+        "docs/archive/WF-ledger-context-1009/originals/docs/PARALLEL-REGISTRY.md",
+        "docs/archive/WF-ledger-context-1009/originals/docs/PENDING.md",
+        "docs/archive/card-migration-2026-09-27/README.md",
+        "docs/archive/engineering-2026-09-27/LONG-TERM-PLAN-2026-09-27.md",
+        "docs/archive/engineering-2026-09-27/README.md",
+        "docs/archive/lean-workflow-2026-09-30/README.md",
+        "docs/archive/lean-workflow-2026-09-30/source-manifest.json",
+        "docs/archive/records-2026-09-28",
+        "docs/archive/records-2026-09-28/ACCEPTANCE-FAST-GATE-RESULT-2026-09-28.md",
+        "docs/archive/records-2026-09-28/BUILD-OUTPUT-CLEANUP-2026-09-28.md",
+        "docs/archive/records-2026-09-28/PROJECT-FOLDER-INVENTORY-2026-09-28.md",
+        "docs/archive/records-2026-09-28/REFACTOR-2026-09-28.md",
+        "docs/archive/records-2026-09-28/VITE-IAB-PERFORMANCE-2026-09-28.md",
+        "docs/archive/status",
+        "docs/archive/status/PROJECT-STATUS-2026-09-27.md",
+        "docs/archive/three-track-2026-09-27",
+        "docs/archive/ui-loop-2026-09-26",
+        "docs/archive/workflow-2026-09-30/README.md",
+        "docs/archive/workflow-2026-09-30/manifest.json",
+        "docs/archive/workflow-2026-09-30/source-manifest.json",
+        "docs/archive/workflow-completion-2026-09-30/manifest.json",
+        "docs/archive/workflow-completion-2026-09-30/source-manifest.json",
+        "docs/archive/workflow-review-state-2026-09-30/README.md",
+        "docs/archive/workflow-review-state-2026-09-30/source-manifest.json",
+        "docs/archive/workflow-routing-2026-09-30/README.md",
+        "docs/archive/workflow-routing-2026-09-30/manifest.json",
+        "docs/archive/workflow-routing-2026-09-30/source-manifest.json",
+        "docs/asset-audit-debt.json",
+        "docs/audio-system.md",
+        "docs/cards/README.md",
+        "docs/changelog.md",
+        "docs/character-bible/README.md",
+        "docs/dataset",
+        "docs/design.md",
+        "docs/development.md",
+        "docs/evidence/2026-09-30-workflow-completion/README.md",
+        "docs/evidence/2026-10-01-acceptance-scenes/README.md",
+        "docs/evidence/2026-10-03-experience-art-plan/refs/visual-reference-review.md",
+        "docs/evidence/2026-10-05-WF-flow-practice/README.md",
+        "docs/evidence/2026-10-05-WF-music-integration/README.md",
+        "docs/evidence/2026-10-05-WF-request-batching/README.md",
+        "docs/evidence/2026-10-08-art-reference-board/README.md",
+        "docs/evidence/2026-10-08-art-reference-board/reference-board.html",
+        "docs/evidence/2026-10-09-WF-doc-system-1009/README.md",
+        "docs/evidence/2026-10-09-WF-doc-system-followup-1009/README.md",
+        "docs/evidence/2026-10-09-art-mood-board/mood-board.html",
+        "docs/evidence/2026-10-09-art-style-samples/README.md",
+        "docs/evidence/LOW-COST-OPTIMIZATIONS-2026-09-28.md",
+        "docs/evidence/README.md",
+        "docs/evidence/agent-output-inventory-2026-09-28.tsv",
+        "docs/evidence/game-shots",
+        "docs/game-compendium.md",
+        "docs/modules/README.md",
+        "docs/performance.md",
+        "docs/previews/README.md",
+        "docs/production/README.md",
+        "docs/production/art/VISUAL-BIBLE.md",
+        "docs/production/design/GDD.md",
+        "docs/production/engineering/AGENT-EXPERIMENTS.md",
+        "docs/production/engineering/CODE-DATA-WORKFLOW.md",
+        "docs/production/engineering/MAKER-HANDBOOK.md",
+        "docs/production/management/DECISIONS.md",
+        "docs/production/management/ITERATION-BOARD.md",
+        "docs/production/management/NEXT-CYCLE-TECH-PLAN.md",
+        "docs/production/project/CHARTER.md",
+        "docs/production/qa/ACCEPTANCE-MATRIX.md",
+        "docs/quality-gates.md",
+        "docs/roadmap.md",
+        "docs/rules.md",
+        "docs/save-format.md",
+        "docs/terminology.md",
+        "docs/ui-art-overhaul/SKILL.md",
+        "docs/ui-art-overhaul/references/diagnosis.md",
+        "docs/ui-art-overhaul/references/implementation.md",
+        "docs/ui-art-overhaul/references/templates.md",
+        "docs/ui-art-overhaul/references/verification.md",
+        "game/assets/README.md",
+        "game/assets/asset-manifest.json",
+        "game/assets/scenes/hub-wallpaper.webp",
+        "game/assets/ui/photo-studio-generated-assets.md",
+        "game/css/base.css",
+        "game/css/winter.css",
+        "game/src/README.md",
+        "scripts/acceptance-gate.mjs",
+        "scripts/check-types.mjs"
+      ],
+      "inventories": [
+        {
+          "directory": "docs",
+          "kind": "current-documents",
+          "recursive": false
+        },
+        {
+          "directory": "docs/production",
+          "kind": "current-documents",
+          "recursive": true
+        },
+        {
+          "directory": "docs/production/art",
+          "kind": "current-documents",
+          "recursive": true
+        },
+        {
+          "directory": "docs/production/design",
+          "kind": "current-documents",
+          "recursive": true
+        },
+        {
+          "directory": "docs/production/engineering",
+          "kind": "current-documents",
+          "recursive": true
+        },
+        {
+          "directory": "docs/production/management",
+          "kind": "current-documents",
+          "recursive": true
+        },
+        {
+          "directory": "docs/production/project",
+          "kind": "current-documents",
+          "recursive": true
+        },
+        {
+          "directory": "docs/production/qa",
+          "kind": "current-documents",
+          "recursive": true
+        },
+        {
+          "directory": "docs/archive",
+          "kind": "workflow-batches"
+        },
+        {
+          "directory": "game/src",
+          "kind": "source-domains"
+        }
+      ],
+      "contracts": [
+        {
+          "kind": "fixture",
+          "reason": "task reads/writes only its mkdtemp root and declared report/log fixture"
+        },
+        {
+          "kind": "documentation",
+          "reason": "current docs/archive contracts; task report assertions use the test temporary root"
+        }
+      ],
+      "reason": "逐根独立证明输入范围；未知根不能借其他测试的fixture契约豁免"
+    },
+    "groups": {
+      "code": "079e09c1038b1e1a4b67b6d1e1ac5d2e153c588aceb59c4693c0b79027e02344",
+      "docs": "823b201c56aeb385c5f533a60bc1f3f493bad41adb507fe9908c38a94bc370f0",
+      "state": "c4357e5282ebdca6bfe1b2b36d7217f53d8529cc2f33fa408e34526c53700181",
+      "environment": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4"
+    },
+    "limits": [
+      "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+    ]
+  },
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "validation": {
+    "mode": "targeted",
+    "paths": [],
+    "tests": [
+      "tests/workflow-task.test.js",
+      "tests/docs-consistency.test.js"
+    ],
+    "reasons": [
+      "显式测试列表"
+    ],
+    "executed": true
+  },
+  "outcome": "passed",
+  "log": "docs/evidence/2026-10-09-WF-doc-system-followup-1009/2026-10-09T04-32-49.714Z-d25c7342.log",
+  "logSha256": "b8e1094c687b94643547324bd9fac4aed605c097d289f662d137bcb29091020d",
+  "limits": [
+    "仅本命令覆盖范围；没有 build、实页、真实 hover、玩家存档或远端 CI 验收",
+    "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+  ],
+  "freshness": {
+    "eligibleForReview": true,
+    "codeEligibleForReview": true,
+    "result": "candidate",
+    "parts": {
+      "code": {
+        "before": "079e09c1038b1e1a4b67b6d1e1ac5d2e153c588aceb59c4693c0b79027e02344",
+        "after": "079e09c1038b1e1a4b67b6d1e1ac5d2e153c588aceb59c4693c0b79027e02344",
+        "current": "079e09c1038b1e1a4b67b6d1e1ac5d2e153c588aceb59c4693c0b79027e02344",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "candidate",
+        "eligibleForReview": true
+      },
+      "docs": {
+        "before": "823b201c56aeb385c5f533a60bc1f3f493bad41adb507fe9908c38a94bc370f0",
+        "after": "823b201c56aeb385c5f533a60bc1f3f493bad41adb507fe9908c38a94bc370f0",
+        "current": "823b201c56aeb385c5f533a60bc1f3f493bad41adb507fe9908c38a94bc370f0",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "candidate",
+        "eligibleForReview": true
+      },
+      "state": {
+        "before": "c4357e5282ebdca6bfe1b2b36d7217f53d8529cc2f33fa408e34526c53700181",
+        "after": "c4357e5282ebdca6bfe1b2b36d7217f53d8529cc2f33fa408e34526c53700181",
+        "current": "c4357e5282ebdca6bfe1b2b36d7217f53d8529cc2f33fa408e34526c53700181",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "candidate",
+        "eligibleForReview": true
+      },
+      "environment": {
+        "before": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4",
+        "after": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4",
+        "current": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "candidate",
+        "eligibleForReview": true
+      }
+    },
+    "recheck": [],
+    "limits": [
+      "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+    ]
+  }
+}

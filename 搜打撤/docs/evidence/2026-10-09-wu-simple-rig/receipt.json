@@ -1,0 +1,132 @@
+{
+  "status": "candidate-delivered",
+  "acquisition": "内置image_gen重绘分件，裁切与透明碎点整理，脚本生成简单绑定草稿和离线预览",
+  "spineImport": "not-verified",
+  "files": [
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/build_rig.py",
+      "bytes": 10866,
+      "sha256": "57764ff7ff7a2954376ead680ffb0bb1917b975fe53361ec0e238e21b1af58d6"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/export_parts.py",
+      "bytes": 2450,
+      "sha256": "0dd0a7ac1428e642e5adba7277093919e90afdda9c75e2d184c454a3f6eed06e"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/four-actions-overview.png",
+      "bytes": 322525,
+      "sha256": "db9bda166363b9d88d529556eeaddc268a312cd9b5e7f8b93330d96d66b27108"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/index.html",
+      "bytes": 991510,
+      "sha256": "644ac2a4392084923dffe707ff0cf92aa7a0e6d4e650bb1f7ecb38c50b40f87d"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/parts-manifest.json",
+      "bytes": 3307,
+      "sha256": "8587906cb722fc065f6196f204427ba03d2cb46e0381998e8cfe1b80e29b7b74"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/parts-overview.png",
+      "bytes": 568417,
+      "sha256": "3051b86f1165166ebcb53006fd647bcfc2c742bf4044b50aa266330453d2d3a8"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/parts-sheet-source.png",
+      "bytes": 948302,
+      "sha256": "ee3f7facd83c99888bb47128939853abc5b432608af06f6abcb4df6d73f65ba2"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/pose-attack.png",
+      "bytes": 321690,
+      "sha256": "a2e622a0099ee3cdb07919675b0cfeaa433e1286c76b010537904b3b776e38a2"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/pose-death.png",
+      "bytes": 309647,
+      "sha256": "98c8c072137ab457b48b4e267df18ccf22c487f02586842512f8ed99526b2bd1"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/pose-hurt.png",
+      "bytes": 337115,
+      "sha256": "afb4b0c8b6e7f8dd01b52dc0987b6398611f47491d26abbde66cbc0537cd77b3"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/pose-idle.png",
+      "bytes": 334765,
+      "sha256": "483b22ddfff52e9ab06b0888c5c80f8f554e3b6d359dcb547e45913680d7d64b"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/README.md",
+      "bytes": 2128,
+      "sha256": "fc11329026c812a4f8842e863344c30a2301a5ace1e4f99ae48b9bc6b8afe585"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/render_frames.py",
+      "bytes": 3672,
+      "sha256": "342a9be25adef6a685f1c4605adbd5cf2c06359aae9042c5f9f628242ce3a5ca"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/validation.json",
+      "bytes": 1022,
+      "sha256": "0d21a0e6ff05b6b9c90d219671786e42cfc81cc3e1728c18ee3dd520cdbedd68"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/wu-simple-rig.zip",
+      "bytes": 2362552,
+      "sha256": "3e7537692720dcbea020c0f3c8c4b349961838f7779cd3486557352fead79a5b"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/wu-simple.spine.json",
+      "bytes": 15730,
+      "sha256": "6a82e65c1bccdab0be8ffa1ea1429f3bcda3c21a19f677c549f6b9f6d96eef16"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/images/body.png",
+      "bytes": 130274,
+      "sha256": "c2eed9f89dcff7a6a81cbdea0c1af72d59038c69f6cade47dcf5afc0923ff2bc"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/images/free_arm_hand.png",
+      "bytes": 63670,
+      "sha256": "0261af7feec193af32fb8f46727e4a159bd4eda324792de6a9ab0d96e061e84e"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/images/front_leg_boot.png",
+      "bytes": 62169,
+      "sha256": "67f5bf6b1fa4476be4e9266d1491cbe7cbf1fd7761abedadf9630d048785832b"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/images/head.png",
+      "bytes": 129479,
+      "sha256": "e3a56a16a35bddfb3b69efd3469d6ce94c97b32a485ee3ce8c7f189d223de58f"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/images/ponytail.png",
+      "bytes": 123710,
+      "sha256": "27b7b87abee68403eb0768ccf056499a7b6cdb960698f4620ee3fa46cfed1111"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/images/rear_leg_boot.png",
+      "bytes": 58660,
+      "sha256": "a5bba38d0c101ba6357051fb0b4a488779981c639b758291a6412f07e2fc2a8d"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/images/sword_forearm_hand.png",
+      "bytes": 61773,
+      "sha256": "360b6701da1a859b558eab0238091b19bcb12c911251a2251936a53028dfa309"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/images/sword_upper_arm.png",
+      "bytes": 55196,
+      "sha256": "10ffb16426883802e8ffdda4ca36c4ad8a39c0494cbb98f5e1a6d93e019034ce"
+    },
+    {
+      "path": ".tmp/imagegen/wu-simple-rig-20261009/images/sword.png",
+      "bytes": 49793,
+      "sha256": "bd47c0659b0027762e3fec00394b823ad42c7ea1756604e990e242a93542692a"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "exitCode": 0,
+  "checks": {
+    "48k_stereo_32bars": true,
+    "finite_no_clipping": true,
+    "matched_loudness": true,
+    "opening_backing_present": true,
+    "piano_velocity_varies": true,
+    "pedal_spans_varied": true,
+    "input_and_delivery_hashes": true,
+    "mp3_decodes": true,
+    "ogg_decodes": true,
+    "ogg_frames_and_seam": true,
+    "opening_theme_pitches_and_onsets_preserved": true,
+    "second_and_return_A_changed": true
+  },
+  "ogg_seam_jump": 0.0005393661558628082,
+  "ordinary_step_p99": 0.02564512014389031,
+  "matched_excerpt": {
+    "segment": [
+      12,
+      60
+    ],
+    "method": "same independent review features(); V7 prior exact WAV hash verified; V8 freshly calculated",
+    "V7": {
+      "side_percent": 2.6526776677179966,
+      "centroid_mean_hz": 775.773536708134,
+      "bands_percent": [
+        0.8238514341999884,
+        12.958284570536202,
+        69.90366226586524,
+        16.16903484829568,
+        0.1441347585692856,
+        0.0010152919506318389,
+        2.5280117960652255e-05
+      ],
+      "rms_1s_p90_p10_db": 4.991278762932794
+    },
+    "V8": {
+      "side_percent": 4.1713302251651045,
+      "centroid_mean_hz": 966.5034514286527,
+      "bands_percent": [
+        0.3877602336228681,
+        6.088590554814303,
+        74.79691233385361,
+        18.335140358825623,
+        0.3852487292371461,
+        0.00627960592945221,
+        6.674895104216553e-05
+      ],
+      "rms_1s_p90_p10_db": 6.691638686830892
+    }
+  },
+  "loudness_difference_lu": 0.0,
+  "limit": "No human audition claimed. Metrics diagnose changes, not musical quality. No game integration or build."
+}

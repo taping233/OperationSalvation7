@@ -1,0 +1,82 @@
+{
+  "reference_page": "https://www.xiaohongshu.com/explore/6abf6eb900000000180142c0",
+  "author": "NoriZC",
+  "method": "Codex 内置浏览器 pageAssets.bundle / 已观察 img.downloadMedia",
+  "inputs": [
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\wu.webp",
+      "sha256": "a7c5d4e2242558337f5f5a8b8df71cda875af73586ec70657b45836f01466c6c"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\fireball.webp",
+      "sha256": "7914dc16f67995fb0086d1fea184674c4332c418ceee9a4d50306a4cb7536e9a"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "参考-1.webp",
+      "bytes": 117902,
+      "sha256": "b4ed8573ada41f7e3dcc9e36b0e1d663c1b2a8e12571dd0ae9b4d8d33d9a4005"
+    },
+    {
+      "name": "参考-2.webp",
+      "bytes": 72816,
+      "sha256": "88146c719198f05e210a4542ff2b10b9c36ea26b9bb610b37f42fe7f690093e5"
+    },
+    {
+      "name": "参考-3.webp",
+      "bytes": 150666,
+      "sha256": "0d03a6899ae012d9112b1e066a2d13b2562ff04b54b15ec04f10eaa089818d14"
+    },
+    {
+      "name": "参考-半身.webp",
+      "bytes": 100184,
+      "sha256": "c0484a634d5dcf9c63ce5c3903b08c969b490fca7a88274755450a63ee8e6963"
+    },
+    {
+      "name": "参考-角色近景.webp",
+      "bytes": 105076,
+      "sha256": "2454cd93963a5db0d412e55adc2c8f933a7a605e7635acbdd3085186a6f08516"
+    },
+    {
+      "name": "参考A-角色半身.webp",
+      "bytes": 91720,
+      "sha256": "136adb1f5c3be45efb186c261b65c77bb58cd9759040574eda16d2b87eca781b"
+    },
+    {
+      "name": "参考A-角色近景.webp",
+      "bytes": 91268,
+      "sha256": "ae77fd5e1c6dad55f6cb184f1890652463f357dbbdb53354336f9de5b6e09b2b"
+    },
+    {
+      "name": "参考与概念-A.png",
+      "bytes": 932437,
+      "sha256": "3937ca049c7d9fcae2b95879eea7396139185c4dc61f1e84b93292cf14b73da8"
+    },
+    {
+      "name": "参考与概念-B.png",
+      "bytes": 1108493,
+      "sha256": "56546771bad5e02a6a374b79b56a4788a21c6ae4fdd6b2354cfc9f50318c3c2b"
+    },
+    {
+      "name": "概念A-近景封面.png",
+      "bytes": 656105,
+      "sha256": "a2e0906245078f48f6835e55ff66df2f25d9c0189d2f71d17a57abf34b9fbe2b"
+    },
+    {
+      "name": "概念A-近景封面.svg",
+      "bytes": 779758,
+      "sha256": "5e92d5b8ab2b90c2b9f817b40b5268f9d0b48fe6a397da8ea79f99ce90ed293a"
+    },
+    {
+      "name": "概念B-三栏拼接.png",
+      "bytes": 780646,
+      "sha256": "4e2c1a8d8d613a60b665f759cd8689234f07a91109f452cc90594de580e19191"
+    },
+    {
+      "name": "概念B-三栏拼接.svg",
+      "bytes": 951539,
+      "sha256": "4ba0f031085a9d95196e823e77d73d56695fd34124197e5a8aacb5fe6f935090"
+    }
+  ]
+}

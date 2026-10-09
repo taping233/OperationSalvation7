@@ -1,0 +1,125 @@
+{
+  "method": "内置imagegen生成关键姿态；已有Pillow/NumPy/OpenCV提取对齐；复现 python pack_sprite.py <原始帧图路径>",
+  "files": [
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/.gitignore",
+      "bytes": 90,
+      "sha256": "dcfdfb10deea2589ab2d3a8cea19671be1a7b76e62ab0fc4681b5e18463b674a",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/generated-sheet.png",
+      "bytes": 1680200,
+      "sha256": "7154117f7c9f6aa95d39da5253854a26e04293be897c02d115b3053707c10bef",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/hurt-00.png",
+      "bytes": 364478,
+      "sha256": "484895aa505493825202539d4b7cfadf7c63c33997633b7940982a6634dbc63f",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/hurt-00.webp",
+      "bytes": 222082,
+      "sha256": "997ed716456fb7302773602de2ac7fe93330a39ac20fe6c372f0dd1d05c70baf",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/hurt-01.png",
+      "bytes": 174290,
+      "sha256": "cd8313055c37e0da39ea6ac1e0c48644fdfecd20d9c3fc2eac12ac3caff5b989",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/hurt-01.webp",
+      "bytes": 115228,
+      "sha256": "ae390bca02b23acd1abed198fb485bef8eda1fb790875ae0d7217ba3584a94bf",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/hurt-02.png",
+      "bytes": 180201,
+      "sha256": "7ae07482c37c1b15db5bff7a72cbe0545a0ec18103fb8cb2ac5cbce8ff345d20",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/hurt-02.webp",
+      "bytes": 119284,
+      "sha256": "9d4e2c58f8a0005c3f70861adabd8394f35e94fbd46303e4374ddf522a20e4a1",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/hurt-03.png",
+      "bytes": 364478,
+      "sha256": "484895aa505493825202539d4b7cfadf7c63c33997633b7940982a6634dbc63f",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/hurt-03.webp",
+      "bytes": 222082,
+      "sha256": "997ed716456fb7302773602de2ac7fe93330a39ac20fe6c372f0dd1d05c70baf",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/index.html",
+      "bytes": 5183,
+      "sha256": "2c25134f302107cc4015678b2fafc6cc91b4f75467edb53d83c37fe93cf111dc",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/pack_sprite.py",
+      "bytes": 5119,
+      "sha256": "f8eb00871566b67523e04a0551949308000f721947f167c56039ca79a2cc6f47",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/README.md",
+      "bytes": 1029,
+      "sha256": "5f0c465b534c773f77ce56156fde393990f74a04bb1784148baa75b962f902d1",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/request.json",
+      "bytes": 2749,
+      "sha256": "f555dce016910e2c6e910dedb9ab1f3fd08bac5624963256f686c8d2f1f2d38e",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/sprite.json",
+      "bytes": 1877,
+      "sha256": "9137017d1c941cefa0daba0d44207137ab7a1b2813b35dc779969360b2cf1ccf",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/validation.json",
+      "bytes": 558,
+      "sha256": "25262deb4cb07e68c32aec4c5e4bb6bbaa1e73a73c5052481ff3066a32efde4d",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/wu-hurt-preview.gif",
+      "bytes": 271302,
+      "sha256": "fd19024c3271ec71701d0b9df343875e08e4b73f056f6da0fbc8364a647e12ce",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/wu-hurt-preview.webp",
+      "bytes": 179782,
+      "sha256": "16736aafebd5297a6839b90f08c1646cb28541c168a933b23896b394c6f355be",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/wu-hurt-sheet.png",
+      "bytes": 1102801,
+      "sha256": "c6a65aa635dd456a999d3c2734e33d509a1e226ead1941d21ed781eee1186856",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-hurt-sprite-20261009/wu-hurt-sheet.webp",
+      "bytes": 481520,
+      "sha256": "30ef7f7e579e15d730c74d329419a2f70dce30879693487dafd75d9cec1f816c",
+      "localOnly": false
+    }
+  ]
+}

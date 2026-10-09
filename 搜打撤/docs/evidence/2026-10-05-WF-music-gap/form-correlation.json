@@ -1,0 +1,39 @@
+{
+  "method": "1-second RMS, Gaussian smoothing sigma1.3s, resample relative progress10%-90% to200points, Pearson correlation between pieces; excludes intro/outro edges; indicates shared loudness contour not musical quality",
+  "pairs": {
+    "demo": [
+      {
+        "a": "霜窗回声 · 室内乐精修",
+        "b": "灰线行军 · 室内乐精修",
+        "correlation": 0.9497477645121256
+      },
+      {
+        "a": "霜窗回声 · 室内乐精修",
+        "b": "黑脉交锋 · 管弦乐精修",
+        "correlation": 0.9319933115220013
+      },
+      {
+        "a": "灰线行军 · 室内乐精修",
+        "b": "黑脉交锋 · 管弦乐精修",
+        "correlation": 0.9498119682792311
+      }
+    ],
+    "reference": [
+      {
+        "a": "停滞之地",
+        "b": "山雪欲来",
+        "correlation": -0.1755582455663159
+      },
+      {
+        "a": "停滞之地",
+        "b": "回想",
+        "correlation": 0.5785952001294049
+      },
+      {
+        "a": "山雪欲来",
+        "b": "回想",
+        "correlation": -0.40227158193818674
+      }
+    ]
+  }
+}

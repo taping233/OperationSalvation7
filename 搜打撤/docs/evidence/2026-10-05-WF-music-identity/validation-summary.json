@@ -1,0 +1,161 @@
+{
+  "status": "passed",
+  "head": "e87034b835f094c2cb7a0c3b86dc70d56c74db5f",
+  "remote_refs_refreshed": false,
+  "checks": [
+    {
+      "round": "A",
+      "role": "title",
+      "seconds": 102.85714583333333,
+      "frames": 4937143,
+      "peak_dbfs": -1.968991607427597,
+      "rms_dbfs": -18.002023696899414,
+      "six_section_rms_dbfs": [
+        -17.962429212816424,
+        -17.365463771019968,
+        -17.643674657197526,
+        -19.768239481887928,
+        -16.894026230381243,
+        -19.02308905402532
+      ],
+      "ogg_frames_match": true,
+      "ogg_seam_jump": 0.0006313100457191467,
+      "adjacent_step_p99": 0.02651086702942848,
+      "hashes_match": true,
+      "mp3_ogg_decode": "passed"
+    },
+    {
+      "round": "A",
+      "role": "explore",
+      "seconds": 90.0,
+      "frames": 4320000,
+      "peak_dbfs": -1.2453998625278473,
+      "rms_dbfs": -18.256014585494995,
+      "six_section_rms_dbfs": [
+        -18.6054803475588,
+        -17.265964230106597,
+        -17.71225093388935,
+        -21.283146917908155,
+        -17.04203477798288,
+        -18.874247253901622
+      ],
+      "ogg_frames_match": true,
+      "ogg_seam_jump": 0.0011780764907598495,
+      "adjacent_step_p99": 0.03198782190680491,
+      "hashes_match": true,
+      "mp3_ogg_decode": "passed"
+    },
+    {
+      "round": "A",
+      "role": "battle",
+      "seconds": 92.90322916666666,
+      "frames": 4459355,
+      "peak_dbfs": -1.21350459754467,
+      "rms_dbfs": -18.239572048187256,
+      "six_section_rms_dbfs": [
+        -19.380085740704246,
+        -16.829266186787212,
+        -17.720006412722206,
+        -20.875980865998205,
+        -16.701364920143696,
+        -19.487562097535694
+      ],
+      "ogg_frames_match": true,
+      "ogg_seam_jump": 0.00420340895652771,
+      "adjacent_step_p99": 0.053072939254343504,
+      "hashes_match": true,
+      "mp3_ogg_decode": "passed"
+    },
+    {
+      "round": "B",
+      "role": "title",
+      "seconds": 102.85714583333333,
+      "frames": 4937143,
+      "peak_dbfs": -1.209614872932434,
+      "rms_dbfs": -18.89853835105896,
+      "six_section_rms_dbfs": [
+        -19.47162019165859,
+        -17.874995817537624,
+        -17.902905441668004,
+        -22.027537065756974,
+        -17.25621016713802,
+        -20.74227857816585
+      ],
+      "ogg_frames_match": true,
+      "ogg_seam_jump": 0.0008024303242564201,
+      "adjacent_step_p99": 0.02747344240546226,
+      "hashes_match": true,
+      "mp3_ogg_decode": "passed"
+    },
+    {
+      "round": "B",
+      "role": "explore",
+      "seconds": 90.0,
+      "frames": 4320000,
+      "peak_dbfs": -1.209614872932434,
+      "rms_dbfs": -18.629871606826782,
+      "six_section_rms_dbfs": [
+        -19.668332628978686,
+        -17.569006878796102,
+        -17.43102388811287,
+        -22.662550120913366,
+        -16.95071139368077,
+        -19.873892210272558
+      ],
+      "ogg_frames_match": true,
+      "ogg_seam_jump": 0.0013282569125294685,
+      "adjacent_step_p99": 0.03163623470813035,
+      "hashes_match": true,
+      "mp3_ogg_decode": "passed"
+    },
+    {
+      "round": "B",
+      "role": "battle",
+      "seconds": 92.90322916666666,
+      "frames": 4459355,
+      "peak_dbfs": -1.209614872932434,
+      "rms_dbfs": -19.5858895778656,
+      "six_section_rms_dbfs": [
+        -21.23177850608117,
+        -17.866176774700385,
+        -18.88948282127622,
+        -22.667632143051584,
+        -17.879721557163645,
+        -21.24404917489517
+      ],
+      "ogg_frames_match": true,
+      "ogg_seam_jump": 0.0045985206961631775,
+      "adjacent_step_p99": 0.050742338150739585,
+      "hashes_match": true,
+      "mp3_ogg_decode": "passed"
+    }
+  ],
+  "actual_round_differences": [
+    {
+      "role": "title",
+      "project_bytes_differ": true,
+      "audio_sha256_differ": true
+    },
+    {
+      "role": "explore",
+      "project_bytes_differ": true,
+      "audio_sha256_differ": true
+    },
+    {
+      "role": "battle",
+      "project_bytes_differ": true,
+      "audio_sha256_differ": true
+    }
+  ],
+  "distinct_written_main_score_signatures": [
+    "cce2a4fe205e3402b299023d67bdf357e576c9b06a45c9d72f0acd5d6f9501dd",
+    "896e695401506da75fbecb794ee973a55d31bd4b42bf3cdea8b440a5ef853aa7",
+    "62424f2fb27c9b6793e01edc8f3958b8c14f7dba9b119f197cfd0ca9d6998e3c"
+  ],
+  "limits": [
+    "Not a human listening verdict",
+    "Distinct score hashes are evidence of different written notes, not an aesthetic identity guarantee",
+    "No game integration, GUI test, full game test, build or remote CI in this candidate-only iteration"
+  ],
+  "source_reference": "msr-reference-analysis.json: 3 official recordings analysed via stream; no retained source audio"
+}

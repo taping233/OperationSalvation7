@@ -1,0 +1,62 @@
+[
+  {
+    "song": "停滞之地",
+    "url": "https://monster-siren.hypergryph.com/music/125099",
+    "segment": [
+      12,
+      60
+    ],
+    "estimated_bpm": 135.99917763157896,
+    "centroid_hz": 1380.3714097860836,
+    "rms_blocks_dbfs": [
+      -18.657407252947454,
+      -18.535591563972822,
+      -16.390455614932648,
+      -17.141581485423302,
+      -15.96690576074514,
+      -16.486582852951337
+    ],
+    "segment_pcm_sha256": "74a529acbe957b28365eb1736563de8a68fa68180baf90aec665b7a06b476973",
+    "limit": "Automatic tempo/dynamics/timbre descriptors, not verified instrumentation or human listening; no melody or samples reused."
+  },
+  {
+    "song": "山雪欲来",
+    "url": "https://monster-siren.hypergryph.com/music/306834",
+    "segment": [
+      12,
+      60
+    ],
+    "estimated_bpm": 161.4990234375,
+    "centroid_hz": 960.3797165234319,
+    "rms_blocks_dbfs": [
+      -14.11102646075353,
+      -12.553661873202909,
+      -12.760885573907629,
+      -14.273370752686137,
+      -14.606140583775705,
+      -12.03093744550201
+    ],
+    "segment_pcm_sha256": "d17d1c09a3738a59ae1e52f91a6ba383254dd0e9ce4adfefbcd29fcf24f032c1",
+    "limit": "Automatic tempo/dynamics/timbre descriptors, not verified instrumentation or human listening; no melody or samples reused."
+  },
+  {
+    "song": "回想",
+    "url": "https://monster-siren.hypergryph.com/music/697622",
+    "segment": [
+      12,
+      60
+    ],
+    "estimated_bpm": 117.45383522727273,
+    "centroid_hz": 913.1222586810078,
+    "rms_blocks_dbfs": [
+      -14.084315905666617,
+      -17.578061555786327,
+      -16.183759239805887,
+      -14.926529345254568,
+      -18.433806999591344,
+      -16.02170513328334
+    ],
+    "segment_pcm_sha256": "9375e9a9673e8c7f3ba24437a91de4313cce0a6c2212ed8e85aa7c592f07fe98",
+    "limit": "Automatic tempo/dynamics/timbre descriptors, not verified instrumentation or human listening; no melody or samples reused."
+  }
+]

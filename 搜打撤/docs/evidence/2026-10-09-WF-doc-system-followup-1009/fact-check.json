@@ -1,0 +1,95 @@
+{
+  "recordedAt": "2026-10-09T04:35:37.548Z",
+  "ok": true,
+  "checks": [
+    {
+      "name": "基础四层节点与文档一致",
+      "passed": true,
+      "detail": [
+        {
+          "seed": 0,
+          "nodes": [
+            7,
+            12,
+            17,
+            17
+          ],
+          "valid": true
+        },
+        {
+          "seed": 1,
+          "nodes": [
+            7,
+            12,
+            17,
+            17
+          ],
+          "valid": true
+        },
+        {
+          "seed": 77001,
+          "nodes": [
+            7,
+            12,
+            17,
+            17
+          ],
+          "valid": true
+        }
+      ]
+    },
+    {
+      "name": "宠物等级、升级费用与安全格例外",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "祭坛兑换使用能力卡池",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "仍活跃的其他占用保持不变，后续释放记录可定位",
+      "passed": true,
+      "detail": {
+        "checked": 8,
+        "releasedAfterSnapshot": [
+          "Friday（Codex WF-cross-category-art-v2）"
+        ],
+        "addedAfterSnapshot": [
+          "Friday（Codex 四层垂直切片 WF-four-layer-slice-1009）"
+        ],
+        "applicationPreservedActive": true
+      }
+    },
+    {
+      "name": "未决事项原始行保持不变",
+      "passed": true,
+      "detail": {
+        "checked": 18
+      }
+    },
+    {
+      "name": "台账历史副本字节与原校验值一致",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "旧格式记录报告为不完整，不补造任务状态",
+      "passed": true,
+      "detail": {
+        "skipped": 1
+      }
+    },
+    {
+      "name": "标准任务创建与读取成功",
+      "passed": true,
+      "detail": {}
+    }
+  ],
+  "limits": [
+    "只证明所列事实、状态保护与工具入口",
+    "未验证全部卡牌效果或游戏实页",
+    "历史原文保持时点身份"
+  ]
+}

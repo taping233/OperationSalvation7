@@ -1,0 +1,124 @@
+{
+  "recordedAt": "2026-10-09T04:01:39.450Z",
+  "ok": true,
+  "checks": [
+    {
+      "name": "历史原文与保护文档字节未变",
+      "passed": true,
+      "detail": {
+        "checked": 803,
+        "changed": []
+      }
+    },
+    {
+      "name": "修改文档的本地链接与标题锚点",
+      "passed": true,
+      "detail": {
+        "checkedLinks": 378,
+        "checkedAnchors": 17
+      }
+    },
+    {
+      "name": "规则预算",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "仓库上限与升级消费的源码依据",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "音频曲目及播放器入口",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "已删除的 Pixi 粒子入口不再写为当前模块",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "空闲渲染与角色路径",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "五项实际任务的导航与源码可定位",
+      "passed": true,
+      "detail": [
+        {
+          "task": "调整仓库容量",
+          "entry": "rules.md",
+          "source": "game/src/core/rule-config.js"
+        },
+        {
+          "task": "替换场景配乐",
+          "entry": "audio-system.md",
+          "source": "game/src/audio/sound.music.catalog.js"
+        },
+        {
+          "task": "策略晋级",
+          "entry": "agent-iteration-playbook.md",
+          "source": "game/tools/agent-ledger.mjs"
+        },
+        {
+          "task": "存档恢复",
+          "entry": "save-format.md",
+          "source": "game/src/run/map-snapshot.js"
+        },
+        {
+          "task": "文档归档",
+          "entry": "WORKFLOW-TOOLS.md",
+          "source": "../AGENTS.md"
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "changedDocuments": [
+    "../AGENTS.md",
+    "../README.md",
+    "docs/agent-iteration-playbook.md",
+    "docs/agent-protocol.md",
+    "docs/AGENT-TOOLBOX.md",
+    "docs/architecture.md",
+    "docs/asset-audit-debt.md",
+    "docs/audio-system.md",
+    "docs/BASE-DIRECT-WRITE-AUDIT-2026-09-29.md",
+    "docs/cards/README.md",
+    "docs/character-bible/README.md",
+    "docs/class-consolidation.md",
+    "docs/DEBT-CAMPAIGN-2026-10.md",
+    "docs/development.md",
+    "docs/DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md",
+    "docs/PARALLEL-REGISTRY.md",
+    "docs/PERF-LEDGER-2026-09-29.md",
+    "docs/performance.md",
+    "docs/PHOTOLIB-PERF-TASK-2026-09-29.md",
+    "docs/production/design/GDD.md",
+    "docs/production/engineering/CODE-DATA-WORKFLOW.md",
+    "docs/production/management/DECISIONS.md",
+    "docs/production/management/ITERATION-BOARD.md",
+    "docs/production/management/NEXT-CYCLE-TECH-PLAN.md",
+    "docs/production/project/CHARTER.md",
+    "docs/production/qa/ACCEPTANCE-MATRIX.md",
+    "docs/production/README.md",
+    "docs/quality-gates.md",
+    "docs/QUICKSTART.md",
+    "docs/README.md",
+    "docs/roadmap.md",
+    "docs/rules.md",
+    "docs/save-format.md",
+    "docs/STATUS.md",
+    "docs/UI-TOKEN-SYSTEM-PROPOSAL.md",
+    "docs/WORKFLOW-TOOLS.md",
+    "game/src/README.md",
+    "README.md"
+  ],
+  "limits": [
+    "人工选择的文档事实与任务路由检查，不证明全部玩法数值或游戏运行",
+    "历史按字节保护，未逐篇重审历史结论",
+    "其他会话占用文件只核对字节，未做正文修改"
+  ]
+}

@@ -1,0 +1,1484 @@
+{
+  "title": "冷线交锋",
+  "bpm": 120,
+  "notes": [
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 0,
+      "length": 1.1,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 1.5,
+      "length": 0.55,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 3,
+      "length": 0.55,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "haze",
+      "key": 52,
+      "beat": 0,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 55,
+      "beat": 0,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 59,
+      "beat": 0,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "mechanical",
+      "key": 55,
+      "beat": 0.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 59,
+      "beat": 1.75,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 52,
+      "beat": 3.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 4,
+      "length": 1.1,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 5.5,
+      "length": 0.55,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 47,
+      "beat": 7,
+      "length": 0.55,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "haze",
+      "key": 52,
+      "beat": 4,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 55,
+      "beat": 4,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 59,
+      "beat": 4,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "mechanical",
+      "key": 55,
+      "beat": 4.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 59,
+      "beat": 5.75,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 52,
+      "beat": 7.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 8,
+      "length": 1.1,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 9.5,
+      "length": 0.55,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 11,
+      "length": 0.55,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "haze",
+      "key": 52,
+      "beat": 8,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 55,
+      "beat": 8,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 59,
+      "beat": 8,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "mechanical",
+      "key": 55,
+      "beat": 8.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 59,
+      "beat": 9.75,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 52,
+      "beat": 11.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 12,
+      "length": 1.1,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 13.5,
+      "length": 0.55,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 47,
+      "beat": 15,
+      "length": 0.55,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "haze",
+      "key": 52,
+      "beat": 12,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 55,
+      "beat": 12,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 59,
+      "beat": 12,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "mechanical",
+      "key": 55,
+      "beat": 12.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 59,
+      "beat": 13.75,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 52,
+      "beat": 15.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 16,
+      "length": 0.7,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 16.75,
+      "length": 0.4,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 18.5,
+      "length": 0.6,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 52,
+      "beat": 19.5,
+      "length": 0.35,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "haze",
+      "key": 52,
+      "beat": 16,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 55,
+      "beat": 16,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 59,
+      "beat": 16,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "mechanical",
+      "key": 55,
+      "beat": 16.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 59,
+      "beat": 17.0,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 52,
+      "beat": 17.75,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 55,
+      "beat": 19.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "pressure",
+      "key": 36,
+      "beat": 20,
+      "length": 0.7,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 36,
+      "beat": 20.75,
+      "length": 0.4,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 43,
+      "beat": 22.5,
+      "length": 0.6,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 48,
+      "beat": 23.5,
+      "length": 0.35,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "haze",
+      "key": 48,
+      "beat": 20,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 55,
+      "beat": 20,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 59,
+      "beat": 20,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "mechanical",
+      "key": 55,
+      "beat": 20.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 59,
+      "beat": 21.0,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 48,
+      "beat": 21.75,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 55,
+      "beat": 23.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "pressure",
+      "key": 38,
+      "beat": 24,
+      "length": 0.7,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 38,
+      "beat": 24.75,
+      "length": 0.4,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 38,
+      "beat": 26.5,
+      "length": 0.6,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 50,
+      "beat": 27.5,
+      "length": 0.35,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "haze",
+      "key": 50,
+      "beat": 24,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 57,
+      "beat": 24,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 62,
+      "beat": 24,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "mechanical",
+      "key": 57,
+      "beat": 24.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 62,
+      "beat": 25.0,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 50,
+      "beat": 25.75,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 57,
+      "beat": 27.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "pressure",
+      "key": 35,
+      "beat": 28,
+      "length": 0.7,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 35,
+      "beat": 28.75,
+      "length": 0.4,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 42,
+      "beat": 30.5,
+      "length": 0.6,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 47,
+      "beat": 31.5,
+      "length": 0.35,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "haze",
+      "key": 47,
+      "beat": 28,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 54,
+      "beat": 28,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 57,
+      "beat": 28,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "mechanical",
+      "key": 54,
+      "beat": 28.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 57,
+      "beat": 29.0,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 47,
+      "beat": 29.75,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 54,
+      "beat": 31.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 32,
+      "length": 2.6,
+      "gain": 0.17,
+      "voice": "pressure"
+    },
+    {
+      "track": "haze",
+      "key": 52,
+      "beat": 32,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 55,
+      "beat": 32,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 59,
+      "beat": 32,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "mechanical",
+      "key": 55,
+      "beat": 32.5,
+      "length": 0.64,
+      "gain": 0.035,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 59,
+      "beat": 35,
+      "length": 0.64,
+      "gain": 0.035,
+      "voice": "mechanical"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 36,
+      "length": 2.6,
+      "gain": 0.17,
+      "voice": "pressure"
+    },
+    {
+      "track": "haze",
+      "key": 52,
+      "beat": 36,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 55,
+      "beat": 36,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 59,
+      "beat": 36,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "mechanical",
+      "key": 55,
+      "beat": 36.5,
+      "length": 0.64,
+      "gain": 0.035,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 59,
+      "beat": 39,
+      "length": 0.64,
+      "gain": 0.035,
+      "voice": "mechanical"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 40,
+      "length": 0.7,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 40.75,
+      "length": 0.4,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 42.5,
+      "length": 0.6,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 52,
+      "beat": 43.5,
+      "length": 0.35,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "haze",
+      "key": 52,
+      "beat": 40,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 55,
+      "beat": 40,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 59,
+      "beat": 40,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "mechanical",
+      "key": 55,
+      "beat": 40.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 59,
+      "beat": 41.0,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 52,
+      "beat": 41.75,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 55,
+      "beat": 43.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "pressure",
+      "key": 36,
+      "beat": 44,
+      "length": 0.7,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 36,
+      "beat": 44.75,
+      "length": 0.4,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 43,
+      "beat": 46.5,
+      "length": 0.6,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 48,
+      "beat": 47.5,
+      "length": 0.35,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "haze",
+      "key": 48,
+      "beat": 44,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 55,
+      "beat": 44,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 59,
+      "beat": 44,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "mechanical",
+      "key": 55,
+      "beat": 44.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 59,
+      "beat": 45.0,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 48,
+      "beat": 45.75,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 55,
+      "beat": 47.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "pressure",
+      "key": 38,
+      "beat": 48,
+      "length": 0.7,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 38,
+      "beat": 48.75,
+      "length": 0.4,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 38,
+      "beat": 50.5,
+      "length": 0.6,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 50,
+      "beat": 51.5,
+      "length": 0.35,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "haze",
+      "key": 50,
+      "beat": 48,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 57,
+      "beat": 48,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 62,
+      "beat": 48,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "mechanical",
+      "key": 57,
+      "beat": 48.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 62,
+      "beat": 49.0,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 50,
+      "beat": 49.75,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 57,
+      "beat": 51.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "pressure",
+      "key": 35,
+      "beat": 52,
+      "length": 0.7,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 35,
+      "beat": 52.75,
+      "length": 0.4,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 42,
+      "beat": 54.5,
+      "length": 0.6,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 47,
+      "beat": 55.5,
+      "length": 0.35,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "haze",
+      "key": 47,
+      "beat": 52,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 54,
+      "beat": 52,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 57,
+      "beat": 52,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "mechanical",
+      "key": 54,
+      "beat": 52.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 57,
+      "beat": 53.0,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 47,
+      "beat": 53.75,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 54,
+      "beat": 55.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 56,
+      "length": 0.7,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 56.75,
+      "length": 0.4,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 58.5,
+      "length": 0.6,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "pressure",
+      "key": 52,
+      "beat": 59.5,
+      "length": 0.35,
+      "gain": 0.24,
+      "voice": "pressure"
+    },
+    {
+      "track": "haze",
+      "key": 52,
+      "beat": 56,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 55,
+      "beat": 56,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "haze",
+      "key": 59,
+      "beat": 56,
+      "length": 4.35,
+      "gain": 0.038,
+      "voice": "haze"
+    },
+    {
+      "track": "mechanical",
+      "key": 55,
+      "beat": 56.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 59,
+      "beat": 57.0,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 52,
+      "beat": 57.75,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "mechanical",
+      "key": 55,
+      "beat": 59.25,
+      "length": 0.64,
+      "gain": 0.07,
+      "voice": "mechanical"
+    },
+    {
+      "track": "signal",
+      "key": 64,
+      "beat": 8,
+      "length": 0.68,
+      "gain": 0.082,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 67,
+      "beat": 8.9,
+      "length": 0.34,
+      "gain": 0.082,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 66,
+      "beat": 9.6,
+      "length": 0.52,
+      "gain": 0.082,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 64,
+      "beat": 16,
+      "length": 0.68,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 67,
+      "beat": 16.9,
+      "length": 0.34,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 66,
+      "beat": 17.6,
+      "length": 0.52,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 62,
+      "beat": 18.65,
+      "length": 0.88,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 64,
+      "beat": 20.3,
+      "length": 1.0,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 59,
+      "beat": 21.65,
+      "length": 0.58,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 62,
+      "beat": 22.55,
+      "length": 0.76,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 62,
+      "beat": 24,
+      "length": 0.68,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 65,
+      "beat": 24.9,
+      "length": 0.34,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 64,
+      "beat": 25.6,
+      "length": 0.52,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 60,
+      "beat": 26.65,
+      "length": 0.88,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 62,
+      "beat": 28.3,
+      "length": 1.0,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 57,
+      "beat": 29.65,
+      "length": 0.58,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 60,
+      "beat": 30.55,
+      "length": 0.76,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 64,
+      "beat": 40,
+      "length": 0.68,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 67,
+      "beat": 40.9,
+      "length": 0.34,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 66,
+      "beat": 41.6,
+      "length": 0.52,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 62,
+      "beat": 42.65,
+      "length": 0.88,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 64,
+      "beat": 44.3,
+      "length": 1.0,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 59,
+      "beat": 45.65,
+      "length": 0.58,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 62,
+      "beat": 46.55,
+      "length": 0.76,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 65,
+      "beat": 48,
+      "length": 0.68,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 68,
+      "beat": 48.9,
+      "length": 0.34,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 67,
+      "beat": 49.6,
+      "length": 0.52,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 63,
+      "beat": 50.65,
+      "length": 0.88,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 65,
+      "beat": 52.3,
+      "length": 1.0,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 60,
+      "beat": 53.65,
+      "length": 0.58,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 63,
+      "beat": 54.55,
+      "length": 0.76,
+      "gain": 0.135,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 67,
+      "beat": 56.2,
+      "length": 0.62,
+      "gain": 0.128,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 66,
+      "beat": 57.2,
+      "length": 0.52,
+      "gain": 0.128,
+      "voice": "signal"
+    },
+    {
+      "track": "signal",
+      "key": 64,
+      "beat": 58.1,
+      "length": 1.85,
+      "gain": 0.128,
+      "voice": "signal"
+    },
+    {
+      "track": "pressure",
+      "key": 40,
+      "beat": 58,
+      "length": 1.9,
+      "gain": 0.19,
+      "voice": "pressure"
+    }
+  ],
+  "sections": [
+    {
+      "start": 0,
+      "end": 8,
+      "role": "pressure and fragmented signal"
+    },
+    {
+      "start": 8,
+      "end": 16,
+      "role": "full motif and breakbeat"
+    },
+    {
+      "start": 16,
+      "end": 20,
+      "role": "bass hold and sparse mechanical reply"
+    },
+    {
+      "start": 20,
+      "end": 30,
+      "role": "motif return and tonic ending"
+    }
+  ]
+}

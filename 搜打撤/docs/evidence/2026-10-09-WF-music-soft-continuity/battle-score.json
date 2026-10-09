@@ -1,0 +1,3486 @@
+{
+  "role": "battle",
+  "bpm": 128,
+  "notes": [
+    {
+      "part": "Electric guitar drive",
+      "beat": 0,
+      "start": 0,
+      "key": 52,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 0,
+      "start": 0.007833276739276659,
+      "key": 59,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 0,
+      "start": 0.004503119911717085,
+      "key": 28,
+      "duration": 0.2578125,
+      "velocity": 74,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 0.75,
+      "start": 0.35607775802857616,
+      "key": 28,
+      "duration": 0.1546875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 1.5,
+      "start": 0.7081841374667783,
+      "key": 52,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 1.5,
+      "start": 0.7007333094828299,
+      "key": 59,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 1.5,
+      "start": 0.6970303736078095,
+      "key": 28,
+      "duration": 0.234375,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 2.5,
+      "start": 1.1786651836806734,
+      "key": 52,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 2.5,
+      "start": 1.1745372736539688,
+      "key": 59,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 2.5,
+      "start": 1.1664843169860966,
+      "key": 28,
+      "duration": 0.1640625,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 3.25,
+      "start": 1.5303359153754892,
+      "key": 28,
+      "duration": 0.24375000000000002,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 0,
+      "start": 0,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 78,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 1.5,
+      "start": 0.7116408925528369,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 58,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 1,
+      "start": 0.46027599640546135,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 54,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 3,
+      "start": 1.4077810621473599,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 57,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 0.0,
+      "start": 0,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 1.0,
+      "start": 0.46746289472745994,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 2.0,
+      "start": 0.9349485765556658,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 3.0,
+      "start": 1.3978947550996226,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 0,
+      "start": 0.0032554987185924086,
+      "key": 49,
+      "duration": 0.515625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 4,
+      "start": 1.8740168578256313,
+      "key": 52,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 4,
+      "start": 1.881486001680476,
+      "key": 59,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 4,
+      "start": 1.883970264816869,
+      "key": 28,
+      "duration": 0.2578125,
+      "velocity": 74,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 4.75,
+      "start": 2.2214402101134403,
+      "key": 28,
+      "duration": 0.1546875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 5.5,
+      "start": 2.5720357941785723,
+      "key": 52,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 5.5,
+      "start": 2.5785076733475516,
+      "key": 59,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 5.5,
+      "start": 2.5850203127715696,
+      "key": 28,
+      "duration": 0.234375,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 6.5,
+      "start": 3.052499823976041,
+      "key": 52,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 6.5,
+      "start": 3.045216400409785,
+      "key": 59,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 6.5,
+      "start": 3.0486347575235198,
+      "key": 28,
+      "duration": 0.1640625,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 7.25,
+      "start": 3.3996037018643945,
+      "key": 28,
+      "duration": 0.24375000000000002,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 4,
+      "start": 1.8790111158962566,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 78,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 5.5,
+      "start": 2.582436416277964,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 58,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 5,
+      "start": 2.3388415213347837,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 54,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 7,
+      "start": 3.281208588641408,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 57,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 4.0,
+      "start": 1.8697149420424508,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 5.0,
+      "start": 2.3429154902211513,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 6.0,
+      "start": 2.816096761151094,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 7.0,
+      "start": 3.275408262711147,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 6.25,
+      "start": 2.9241454148610533,
+      "key": 52,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 6.25,
+      "start": 2.923972366519834,
+      "key": 55,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 6.25,
+      "start": 2.9357998840934494,
+      "key": 62,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 8,
+      "start": 3.7548095724391812,
+      "key": 48,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 8,
+      "start": 3.743575028623913,
+      "key": 55,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 8,
+      "start": 3.7555612349183374,
+      "key": 24,
+      "duration": 0.2578125,
+      "velocity": 74,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 8.75,
+      "start": 4.096418307253781,
+      "key": 24,
+      "duration": 0.1546875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 9.5,
+      "start": 4.462062097144474,
+      "key": 48,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 9.5,
+      "start": 4.453113003129538,
+      "key": 55,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 9.5,
+      "start": 4.454579746789445,
+      "key": 24,
+      "duration": 0.234375,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 10.5,
+      "start": 4.9161624218523405,
+      "key": 48,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 10.5,
+      "start": 4.917559421818128,
+      "key": 55,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 10.5,
+      "start": 4.9292178006986935,
+      "key": 24,
+      "duration": 0.1640625,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 11.25,
+      "start": 5.279825485935539,
+      "key": 24,
+      "duration": 0.24375000000000002,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 8,
+      "start": 3.741277333786647,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 78,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 9.5,
+      "start": 4.454370341248279,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 58,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 9,
+      "start": 4.223096897300708,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 54,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 11,
+      "start": 5.159229844707371,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 57,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 8.0,
+      "start": 3.753840668485445,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 9.0,
+      "start": 4.218020137566424,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 10.0,
+      "start": 4.693083406721837,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 11.0,
+      "start": 5.147807051259261,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 12,
+      "start": 5.633187268618905,
+      "key": 48,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 12,
+      "start": 5.631861838790417,
+      "key": 55,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 12,
+      "start": 5.619059881847962,
+      "key": 24,
+      "duration": 0.2578125,
+      "velocity": 74,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 12.75,
+      "start": 5.968087908366175,
+      "key": 24,
+      "duration": 0.1546875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 13.5,
+      "start": 6.330612333473503,
+      "key": 48,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 13.5,
+      "start": 6.3295577023449665,
+      "key": 55,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 13.5,
+      "start": 6.324814057525381,
+      "key": 24,
+      "duration": 0.234375,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 14.5,
+      "start": 6.793235389163386,
+      "key": 48,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 14.5,
+      "start": 6.799487604367219,
+      "key": 55,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 14.5,
+      "start": 6.791583750703496,
+      "key": 24,
+      "duration": 0.1640625,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 15.25,
+      "start": 7.149719096510933,
+      "key": 24,
+      "duration": 0.24375000000000002,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 12,
+      "start": 5.6264963093301334,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 78,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 13.5,
+      "start": 6.328059682023705,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 58,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 13,
+      "start": 6.097407877073249,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 54,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 15,
+      "start": 7.030291267341651,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 57,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 12.0,
+      "start": 5.624959556623566,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 13.0,
+      "start": 6.086549011051709,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 14.0,
+      "start": 6.557554809267962,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 15.0,
+      "start": 7.023903507535177,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 15.75,
+      "start": 7.390469240821955,
+      "key": 38,
+      "duration": 0.07968750000000001,
+      "velocity": 46,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 14.25,
+      "start": 6.686899156842707,
+      "key": 48,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 14.25,
+      "start": 6.6716756239178565,
+      "key": 51,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 14.25,
+      "start": 6.6790528075274755,
+      "key": 58,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 16,
+      "start": 7.502203205493401,
+      "key": 50,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 16,
+      "start": 7.505364844576407,
+      "key": 57,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 16,
+      "start": 7.506127222506422,
+      "key": 26,
+      "duration": 0.2578125,
+      "velocity": 74,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 16.75,
+      "start": 7.844387836733799,
+      "key": 26,
+      "duration": 0.1546875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 17.5,
+      "start": 8.205374561015033,
+      "key": 50,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 17.5,
+      "start": 8.210721579411432,
+      "key": 57,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 17.5,
+      "start": 8.20724531598363,
+      "key": 26,
+      "duration": 0.234375,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 18.5,
+      "start": 8.667106103062556,
+      "key": 50,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 18.5,
+      "start": 8.675879228961845,
+      "key": 57,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 18.5,
+      "start": 8.671711329594656,
+      "key": 26,
+      "duration": 0.1640625,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 19.25,
+      "start": 9.02818584739114,
+      "key": 26,
+      "duration": 0.24375000000000002,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 16,
+      "start": 7.500241040763472,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 78,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 17.5,
+      "start": 8.207824293468654,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 58,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 17,
+      "start": 7.977407672693445,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 54,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 19,
+      "start": 8.914959965753779,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 57,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 16.0,
+      "start": 7.4998209412004595,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 17.0,
+      "start": 7.964889940441559,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 18.0,
+      "start": 8.43962688538277,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 19.0,
+      "start": 8.911989396902465,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 20,
+      "start": 9.367322413185473,
+      "key": 50,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 20,
+      "start": 9.368803516507205,
+      "key": 57,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 20,
+      "start": 9.380492444761297,
+      "key": 26,
+      "duration": 0.2578125,
+      "velocity": 74,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 20.75,
+      "start": 9.730057352898317,
+      "key": 26,
+      "duration": 0.1546875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 21.5,
+      "start": 10.08101032026149,
+      "key": 50,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 21.5,
+      "start": 10.078567834497209,
+      "key": 57,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 21.5,
+      "start": 10.076748946789795,
+      "key": 26,
+      "duration": 0.234375,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 22.5,
+      "start": 10.550779919516952,
+      "key": 50,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 22.5,
+      "start": 10.543463402761134,
+      "key": 57,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 22.5,
+      "start": 10.542842358053012,
+      "key": 26,
+      "duration": 0.1640625,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 23.25,
+      "start": 10.903942533213916,
+      "key": 26,
+      "duration": 0.24375000000000002,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 20,
+      "start": 9.370940014435035,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 78,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 21.5,
+      "start": 10.072470208166358,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 58,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 21,
+      "start": 9.837903933315694,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 54,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 23,
+      "start": 10.7895851192594,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 57,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 20.0,
+      "start": 9.373506513212988,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 21.0,
+      "start": 9.845774458593901,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 22.0,
+      "start": 10.321241015056001,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 23.0,
+      "start": 10.783738512233077,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 22.25,
+      "start": 10.435140714934247,
+      "key": 50,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 22.25,
+      "start": 10.42134790334337,
+      "key": 53,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 22.25,
+      "start": 10.424302839284126,
+      "key": 60,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 24,
+      "start": 11.253814414814485,
+      "key": 47,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 24,
+      "start": 11.24409127637862,
+      "key": 54,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 24,
+      "start": 11.249206327456164,
+      "key": 23,
+      "duration": 0.2578125,
+      "velocity": 74,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 24.75,
+      "start": 11.606811540862068,
+      "key": 23,
+      "duration": 0.1546875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 25.5,
+      "start": 11.952881731080991,
+      "key": 47,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 25.5,
+      "start": 11.953950083252566,
+      "key": 54,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 25.5,
+      "start": 11.958860667941293,
+      "key": 23,
+      "duration": 0.234375,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 26.5,
+      "start": 12.422513784942543,
+      "key": 47,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 26.5,
+      "start": 12.415294509519095,
+      "key": 54,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 26.5,
+      "start": 12.414671662954865,
+      "key": 23,
+      "duration": 0.1640625,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 27.25,
+      "start": 12.781099945229615,
+      "key": 23,
+      "duration": 0.24375000000000002,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 24,
+      "start": 11.25225502281556,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 78,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 25.5,
+      "start": 11.949646933988765,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 58,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 25,
+      "start": 11.714290560627465,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 54,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 27,
+      "start": 12.649704430276367,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 57,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 24.0,
+      "start": 11.247966537147253,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 25.0,
+      "start": 11.714613806643229,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 26.0,
+      "start": 12.180611600354714,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 27.0,
+      "start": 12.653469126340674,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 28,
+      "start": 13.121353831272833,
+      "key": 47,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 28,
+      "start": 13.11898444379922,
+      "key": 54,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 28,
+      "start": 13.129491971110543,
+      "key": 23,
+      "duration": 0.2578125,
+      "velocity": 74,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 28.75,
+      "start": 13.47901205463206,
+      "key": 23,
+      "duration": 0.1546875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 29.5,
+      "start": 13.827907601715683,
+      "key": 47,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 29.5,
+      "start": 13.828231379162508,
+      "key": 54,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 29.5,
+      "start": 13.832375122763645,
+      "key": 23,
+      "duration": 0.234375,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 30.5,
+      "start": 14.30117011668505,
+      "key": 47,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 30.5,
+      "start": 14.288726719248679,
+      "key": 54,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 30.5,
+      "start": 14.297072929315442,
+      "key": 23,
+      "duration": 0.1640625,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 31.25,
+      "start": 14.649918925710603,
+      "key": 23,
+      "duration": 0.24375000000000002,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 28,
+      "start": 13.117802415566056,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 78,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 29.5,
+      "start": 13.823049838910421,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 58,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 29,
+      "start": 13.600648480816735,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 54,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 31,
+      "start": 14.538629357902332,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 57,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 28.0,
+      "start": 13.125752942072992,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 29.0,
+      "start": 13.589432406734216,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 30.0,
+      "start": 14.055211437992304,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 31.0,
+      "start": 14.525595581098212,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 31.75,
+      "start": 14.885007589372686,
+      "key": 38,
+      "duration": 0.07968750000000001,
+      "velocity": 46,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 30.25,
+      "start": 14.186842466044684,
+      "key": 47,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 30.25,
+      "start": 14.171553750202504,
+      "key": 50,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 30.25,
+      "start": 14.188496724953376,
+      "key": 57,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 32,
+      "start": 15.004481357384217,
+      "key": 52,
+      "duration": 0.609375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 32,
+      "start": 14.999326232947517,
+      "key": 59,
+      "duration": 0.609375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 32,
+      "start": 14.99283105055143,
+      "key": 28,
+      "duration": 0.6562500000000001,
+      "velocity": 74,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 34.5,
+      "start": 16.163999435925717,
+      "key": 52,
+      "duration": 0.28125,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 34.5,
+      "start": 16.169245628160684,
+      "key": 59,
+      "duration": 0.28125,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 34.5,
+      "start": 16.171549621792877,
+      "key": 28,
+      "duration": 0.328125,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 32,
+      "start": 15.002921414873816,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 78,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 33,
+      "start": 15.464483691393223,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 54,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 35,
+      "start": 16.403201373287413,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 57,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 32.0,
+      "start": 14.991712701159503,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 33.0,
+      "start": 15.469944215368406,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 34.0,
+      "start": 15.934529704460868,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 35.0,
+      "start": 16.409128361688943,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 36,
+      "start": 16.878884431132324,
+      "key": 52,
+      "duration": 0.609375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 36,
+      "start": 16.876220729565148,
+      "key": 59,
+      "duration": 0.609375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 36,
+      "start": 16.881087298482836,
+      "key": 28,
+      "duration": 0.6562500000000001,
+      "velocity": 74,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 38.5,
+      "start": 18.043309049064504,
+      "key": 52,
+      "duration": 0.28125,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 38.5,
+      "start": 18.05148913955807,
+      "key": 59,
+      "duration": 0.28125,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 38.5,
+      "start": 18.04987725161356,
+      "key": 28,
+      "duration": 0.328125,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 36,
+      "start": 16.88300670407028,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 78,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 37,
+      "start": 17.345675842127985,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 54,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 39,
+      "start": 18.290137358385397,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 57,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 36.0,
+      "start": 16.874963010404258,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 37.0,
+      "start": 17.345628168108533,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 38.0,
+      "start": 17.818261669737215,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 39.0,
+      "start": 18.281310635172165,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 40,
+      "start": 18.749957120997042,
+      "key": 48,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 40,
+      "start": 18.745440217701578,
+      "key": 55,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 40,
+      "start": 18.748327555858722,
+      "key": 24,
+      "duration": 0.2578125,
+      "velocity": 74,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 40.75,
+      "start": 19.099915180535408,
+      "key": 24,
+      "duration": 0.1546875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 41.5,
+      "start": 19.46155521322322,
+      "key": 48,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 41.5,
+      "start": 19.460339128558232,
+      "key": 55,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 41.5,
+      "start": 19.45502451018066,
+      "key": 24,
+      "duration": 0.234375,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 42.5,
+      "start": 19.916359215663924,
+      "key": 48,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 42.5,
+      "start": 19.92352218925865,
+      "key": 55,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 42.5,
+      "start": 19.92141322775047,
+      "key": 24,
+      "duration": 0.1640625,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 43.25,
+      "start": 20.272210803370797,
+      "key": 24,
+      "duration": 0.24375000000000002,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 40,
+      "start": 18.7440218999729,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 78,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 41.5,
+      "start": 19.446455027174576,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 58,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 41,
+      "start": 19.22723235330239,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 54,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 43,
+      "start": 20.15439517203363,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 57,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 40.0,
+      "start": 18.758962315109734,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 41.0,
+      "start": 19.22276380155789,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 42.0,
+      "start": 19.68112646436602,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 43.0,
+      "start": 20.149822561497963,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 40,
+      "start": 18.746421121991144,
+      "key": 49,
+      "duration": 0.515625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 44,
+      "start": 20.624809354357435,
+      "key": 48,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 44,
+      "start": 20.62770326715439,
+      "key": 55,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 44,
+      "start": 20.63170305737747,
+      "key": 24,
+      "duration": 0.2578125,
+      "velocity": 74,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 44.75,
+      "start": 20.983381932112348,
+      "key": 24,
+      "duration": 0.1546875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 45.5,
+      "start": 21.320207925237963,
+      "key": 48,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 45.5,
+      "start": 21.32762416935852,
+      "key": 55,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 45.5,
+      "start": 21.327278403230803,
+      "key": 24,
+      "duration": 0.234375,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 46.5,
+      "start": 21.7982445675519,
+      "key": 48,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 46.5,
+      "start": 21.792357556391146,
+      "key": 55,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 46.5,
+      "start": 21.790016811513237,
+      "key": 24,
+      "duration": 0.1640625,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 47.25,
+      "start": 22.152047903572292,
+      "key": 24,
+      "duration": 0.24375000000000002,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 44,
+      "start": 20.62877869022909,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 78,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 45.5,
+      "start": 21.334673355218488,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 58,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 45,
+      "start": 21.099915478999904,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 54,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 47,
+      "start": 22.03132460578214,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 57,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 44.0,
+      "start": 20.623675807369743,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 45.0,
+      "start": 21.09113559264717,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 46.0,
+      "start": 21.556179431045212,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 47.0,
+      "start": 22.036840249773917,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 46.25,
+      "start": 21.68630619208259,
+      "key": 48,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 46.25,
+      "start": 21.68528164305022,
+      "key": 51,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 46.25,
+      "start": 21.686256786597596,
+      "key": 58,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 48,
+      "start": 22.5018582205754,
+      "key": 50,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 48,
+      "start": 22.491474436235613,
+      "key": 57,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 48,
+      "start": 22.505744298688732,
+      "key": 26,
+      "duration": 0.2578125,
+      "velocity": 74,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 48.75,
+      "start": 22.852428498981247,
+      "key": 26,
+      "duration": 0.1546875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 49.5,
+      "start": 23.204458899079363,
+      "key": 50,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 49.5,
+      "start": 23.202216724319822,
+      "key": 57,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 49.5,
+      "start": 23.20887205332747,
+      "key": 26,
+      "duration": 0.234375,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 50.5,
+      "start": 23.666993285851714,
+      "key": 50,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 50.5,
+      "start": 23.6757974849232,
+      "key": 57,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 50.5,
+      "start": 23.675301467418556,
+      "key": 26,
+      "duration": 0.1640625,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 51.25,
+      "start": 24.031517357813748,
+      "key": 26,
+      "duration": 0.24375000000000002,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 48,
+      "start": 22.508209890139163,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 78,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 49.5,
+      "start": 23.201910881893674,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 58,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 49,
+      "start": 22.973503051588978,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 54,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 51,
+      "start": 23.908340343937628,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 57,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 48.0,
+      "start": 22.496904310416397,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 49.0,
+      "start": 22.970605985983546,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 50.0,
+      "start": 23.439139969255613,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 51.0,
+      "start": 23.906879251907668,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 52,
+      "start": 24.37225321252159,
+      "key": 50,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 52,
+      "start": 24.368401901933964,
+      "key": 57,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 52,
+      "start": 24.375767904738296,
+      "key": 26,
+      "duration": 0.2578125,
+      "velocity": 74,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 52.75,
+      "start": 24.72833075457093,
+      "key": 26,
+      "duration": 0.1546875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 53.5,
+      "start": 25.084271600289416,
+      "key": 50,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 53.5,
+      "start": 25.073787669514203,
+      "key": 57,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 53.5,
+      "start": 25.085923590109463,
+      "key": 26,
+      "duration": 0.234375,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 54.5,
+      "start": 25.550402536279027,
+      "key": 50,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 54.5,
+      "start": 25.54517787657612,
+      "key": 57,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 54.5,
+      "start": 25.55017641772976,
+      "key": 26,
+      "duration": 0.1640625,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 55.25,
+      "start": 25.893333666820315,
+      "key": 26,
+      "duration": 0.24375000000000002,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 52,
+      "start": 24.369450228346846,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 78,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 53.5,
+      "start": 25.07967494176541,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 58,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 53,
+      "start": 24.848124782952006,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 54,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 55,
+      "start": 25.781284996820123,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 57,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 52.0,
+      "start": 24.383945871553266,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 53.0,
+      "start": 24.848107247147883,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 54.0,
+      "start": 25.309351526557727,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 55.0,
+      "start": 25.788275513833536,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 55.75,
+      "start": 26.126749969280493,
+      "key": 38,
+      "duration": 0.07968750000000001,
+      "velocity": 46,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 54.25,
+      "start": 25.436111763316283,
+      "key": 50,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 54.25,
+      "start": 25.42185361378485,
+      "key": 53,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 54.25,
+      "start": 25.43404640809212,
+      "key": 60,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 56,
+      "start": 26.255872864493803,
+      "key": 47,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 56,
+      "start": 26.25791542116787,
+      "key": 54,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 56,
+      "start": 26.246360828196355,
+      "key": 23,
+      "duration": 0.2578125,
+      "velocity": 74,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 56.75,
+      "start": 26.595508309928714,
+      "key": 23,
+      "duration": 0.1546875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 57.5,
+      "start": 26.951367776774784,
+      "key": 47,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 57.5,
+      "start": 26.945592447764078,
+      "key": 54,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 57.5,
+      "start": 26.95819601208996,
+      "key": 23,
+      "duration": 0.234375,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 58.5,
+      "start": 27.412965670509802,
+      "key": 47,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 58.5,
+      "start": 27.41550811219911,
+      "key": 54,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 58.5,
+      "start": 27.41705348743037,
+      "key": 23,
+      "duration": 0.1640625,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 59.25,
+      "start": 27.771575415087405,
+      "key": 23,
+      "duration": 0.24375000000000002,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 56,
+      "start": 26.246209624812952,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 78,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 57.5,
+      "start": 26.946263346525406,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 58,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 57,
+      "start": 26.72332937242249,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 54,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 59,
+      "start": 27.660098678065502,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 57,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 56.0,
+      "start": 26.252805374364474,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 57.0,
+      "start": 26.722411138510846,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 58.0,
+      "start": 27.19069199621708,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 59.0,
+      "start": 27.65446160722426,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 60,
+      "start": 28.13399929161829,
+      "key": 52,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 60,
+      "start": 28.133445787271473,
+      "key": 59,
+      "duration": 0.2109375,
+      "velocity": 68,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 60,
+      "start": 28.11653039923445,
+      "key": 28,
+      "duration": 0.2578125,
+      "velocity": 74,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 60.75,
+      "start": 28.479300143526714,
+      "key": 28,
+      "duration": 0.1546875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 61.5,
+      "start": 28.828628620569873,
+      "key": 52,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 61.5,
+      "start": 28.834287043384506,
+      "key": 59,
+      "duration": 0.1875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 61.5,
+      "start": 28.828704174048013,
+      "key": 28,
+      "duration": 0.234375,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 62.5,
+      "start": 29.299429455395718,
+      "key": 52,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Electric guitar drive",
+      "beat": 62.5,
+      "start": 29.289466723002253,
+      "key": 59,
+      "duration": 0.1171875,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 62.5,
+      "start": 29.294255066109216,
+      "key": 28,
+      "duration": 0.1640625,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Finger bass",
+      "beat": 63.25,
+      "start": 29.64953431440987,
+      "key": 28,
+      "duration": 0.24375000000000002,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 60,
+      "start": 28.13396734702024,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 78,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 61.5,
+      "start": 28.824573623619745,
+      "key": 36,
+      "duration": 0.09375,
+      "velocity": 58,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 61,
+      "start": 28.58673780919563,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 54,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 63,
+      "start": 29.536451187332098,
+      "key": 38,
+      "duration": 0.09375,
+      "velocity": 57,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 60.0,
+      "start": 28.12195971346403,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 61.0,
+      "start": 28.59654529852052,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 62.0,
+      "start": 29.0601967749969,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Drum groove",
+      "beat": 63.0,
+      "start": 29.539909755510347,
+      "key": 42,
+      "duration": 0.056249999999999994,
+      "velocity": 44,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 62.25,
+      "start": 29.177870396135905,
+      "key": 52,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 62.25,
+      "start": 29.18630351353709,
+      "key": 55,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "Keyboard stabs",
+      "beat": 62.25,
+      "start": 29.187590937066812,
+      "key": 62,
+      "duration": 0.2015625,
+      "velocity": 51,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 0,
+      "start": 0,
+      "key": 76,
+      "duration": 0.22499999999999998,
+      "velocity": 67,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 0.75,
+      "start": 0.35973498106164936,
+      "key": 79,
+      "duration": 0.11249999999999999,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 1.3,
+      "start": 0.6090510602061399,
+      "key": 78,
+      "duration": 0.196875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 2.1,
+      "start": 0.9856895585708145,
+      "key": 74,
+      "duration": 0.3046875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 3.2,
+      "start": 1.5046842456699123,
+      "key": 71,
+      "duration": 0.1875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 4.25,
+      "start": 2.000091993641827,
+      "key": 74,
+      "duration": 0.22499999999999998,
+      "velocity": 67,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 5.2,
+      "start": 2.4360958801261288,
+      "key": 76,
+      "duration": 0.328125,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 6.5,
+      "start": 3.0543333388919867,
+      "key": 71,
+      "duration": 0.2578125,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 8,
+      "start": 3.757972855270068,
+      "key": 76,
+      "duration": 0.22499999999999998,
+      "velocity": 67,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 8.75,
+      "start": 4.103554552646543,
+      "key": 79,
+      "duration": 0.11249999999999999,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 9.3,
+      "start": 4.3552337260880325,
+      "key": 78,
+      "duration": 0.196875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 10.1,
+      "start": 4.730042864424236,
+      "key": 74,
+      "duration": 0.3046875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 11.2,
+      "start": 5.246569723678197,
+      "key": 71,
+      "duration": 0.1875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 12.25,
+      "start": 5.749251392920945,
+      "key": 74,
+      "duration": 0.22499999999999998,
+      "velocity": 67,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 13.2,
+      "start": 6.192104990233125,
+      "key": 76,
+      "duration": 0.328125,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 14.5,
+      "start": 6.79533803427677,
+      "key": 71,
+      "duration": 0.2578125,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 16,
+      "start": 7.500097589854259,
+      "key": 72,
+      "duration": 0.22499999999999998,
+      "velocity": 67,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 16.75,
+      "start": 7.8495212585206104,
+      "key": 75,
+      "duration": 0.11249999999999999,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 17.3,
+      "start": 8.110147062818362,
+      "key": 74,
+      "duration": 0.196875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 18.1,
+      "start": 8.489051360244096,
+      "key": 70,
+      "duration": 0.3046875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 19.2,
+      "start": 8.995071821370184,
+      "key": 67,
+      "duration": 0.1875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 20.25,
+      "start": 9.49163517489606,
+      "key": 70,
+      "duration": 0.22499999999999998,
+      "velocity": 67,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 21.2,
+      "start": 9.941368018961795,
+      "key": 72,
+      "duration": 0.328125,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 22.5,
+      "start": 10.545508146231336,
+      "key": 67,
+      "duration": 0.2578125,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 24,
+      "start": 11.248864382845047,
+      "key": 75,
+      "duration": 0.22499999999999998,
+      "velocity": 67,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 24.75,
+      "start": 11.608489806864764,
+      "key": 78,
+      "duration": 0.11249999999999999,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 25.3,
+      "start": 11.851763281802782,
+      "key": 77,
+      "duration": 0.196875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 26.1,
+      "start": 12.23135367604972,
+      "key": 73,
+      "duration": 0.3046875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 27.2,
+      "start": 12.743862207790043,
+      "key": 70,
+      "duration": 0.1875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 28.25,
+      "start": 13.241587119440258,
+      "key": 73,
+      "duration": 0.22499999999999998,
+      "velocity": 67,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 29.2,
+      "start": 13.690317068159695,
+      "key": 75,
+      "duration": 0.328125,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 30.5,
+      "start": 14.305393506573774,
+      "key": 70,
+      "duration": 0.2578125,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 40,
+      "start": 18.742967080212775,
+      "key": 76,
+      "duration": 0.22499999999999998,
+      "velocity": 67,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 40.75,
+      "start": 19.092876196822395,
+      "key": 79,
+      "duration": 0.11249999999999999,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 41.3,
+      "start": 19.35514761853473,
+      "key": 78,
+      "duration": 0.196875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 42.1,
+      "start": 19.732353367515756,
+      "key": 74,
+      "duration": 0.3046875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 43.2,
+      "start": 20.25871076318677,
+      "key": 71,
+      "duration": 0.1875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 44.25,
+      "start": 20.73419551951955,
+      "key": 74,
+      "duration": 0.22499999999999998,
+      "velocity": 67,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 45.2,
+      "start": 21.18470733807291,
+      "key": 76,
+      "duration": 0.328125,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 46.5,
+      "start": 21.79748128000259,
+      "key": 71,
+      "duration": 0.2578125,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 48,
+      "start": 22.502490914946478,
+      "key": 72,
+      "duration": 0.22499999999999998,
+      "velocity": 67,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 48.75,
+      "start": 22.849170328154834,
+      "key": 75,
+      "duration": 0.11249999999999999,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 49.3,
+      "start": 23.10058274803509,
+      "key": 74,
+      "duration": 0.196875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 50.1,
+      "start": 23.487643046548104,
+      "key": 70,
+      "duration": 0.3046875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 51.2,
+      "start": 24.001821352921585,
+      "key": 67,
+      "duration": 0.1875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 52.25,
+      "start": 24.492835983247467,
+      "key": 70,
+      "duration": 0.22499999999999998,
+      "velocity": 67,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 53.2,
+      "start": 24.940129831909516,
+      "key": 72,
+      "duration": 0.328125,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 54.5,
+      "start": 25.551328760940564,
+      "key": 67,
+      "duration": 0.2578125,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 56,
+      "start": 26.255850139133223,
+      "key": 75,
+      "duration": 0.22499999999999998,
+      "velocity": 67,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 56.75,
+      "start": 26.603750520453204,
+      "key": 78,
+      "duration": 0.11249999999999999,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 57.3,
+      "start": 26.866060244790788,
+      "key": 77,
+      "duration": 0.196875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 58.1,
+      "start": 27.233148722993384,
+      "key": 73,
+      "duration": 0.3046875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 59.2,
+      "start": 27.74227253305441,
+      "key": 70,
+      "duration": 0.1875,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 60.25,
+      "start": 28.2385019160555,
+      "key": 73,
+      "duration": 0.22499999999999998,
+      "velocity": 67,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 61.2,
+      "start": 28.685931025358965,
+      "key": 75,
+      "duration": 0.328125,
+      "velocity": 56,
+      "hand": null
+    },
+    {
+      "part": "FM hook",
+      "beat": 62.5,
+      "start": 29.30445271876512,
+      "key": 70,
+      "duration": 0.2578125,
+      "velocity": 56,
+      "hand": null
+    }
+  ],
+  "parts": {
+    "Electric guitar drive": {
+      "patch": 29,
+      "target": -31,
+      "pan": -0.23,
+      "kind": "fluid",
+      "wet": 0.12
+    },
+    "Finger bass": {
+      "patch": 34,
+      "target": -30,
+      "pan": 0,
+      "kind": "fluid",
+      "wet": 0.08
+    },
+    "Drum groove": {
+      "patch": 0,
+      "target": -31,
+      "pan": 0.02,
+      "kind": "drums",
+      "wet": 0.06
+    },
+    "FM hook": {
+      "patch": 0,
+      "target": -28,
+      "pan": 0.08,
+      "kind": "fm",
+      "wet": 0.28
+    },
+    "Keyboard stabs": {
+      "patch": 5,
+      "target": -34,
+      "pan": 0.3,
+      "kind": "fluid",
+      "wet": 0.24
+    }
+  },
+  "sections": [
+    {
+      "start": 0,
+      "end": 7.5,
+      "parts": [
+        "Electric guitar drive",
+        "Finger bass",
+        "Drum groove",
+        "FM hook",
+        "Keyboard stabs"
+      ]
+    },
+    {
+      "start": 7.5,
+      "end": 15,
+      "parts": [
+        "Electric guitar drive",
+        "Finger bass",
+        "Drum groove",
+        "FM hook",
+        "Keyboard stabs"
+      ]
+    },
+    {
+      "start": 15,
+      "end": 18.75,
+      "parts": [
+        "Electric guitar drive",
+        "Finger bass",
+        "Drum groove"
+      ]
+    },
+    {
+      "start": 18.75,
+      "end": 22.5,
+      "parts": [
+        "Electric guitar drive",
+        "Finger bass",
+        "Drum groove",
+        "FM hook",
+        "Keyboard stabs"
+      ]
+    },
+    {
+      "start": 22.5,
+      "end": 29,
+      "parts": [
+        "Electric guitar drive",
+        "Finger bass",
+        "Drum groove",
+        "FM hook",
+        "Keyboard stabs"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-09-WF-music-soft-continuity/battle-rewrite-30s.wav",
+      "bytes": 8640044,
+      "sha256": "6f748fb4290f8efa3b30ab758858a019b8cd0715811026ae1deb963b150efdb0"
+    },
+    {
+      "path": "docs/evidence/2026-10-09-WF-music-soft-continuity/battle-rewrite-30s.mp3",
+      "bytes": 961580,
+      "sha256": "2ada69016d6aab3d88918914d2644ec7496d4609460f28329f9d40a037a41873"
+    }
+  ],
+  "stems_rms": {
+    "Electric guitar drive": 0.026977840210971188,
+    "Finger bass": 0.031109177116776243,
+    "Drum groove": 0.02466528015329009,
+    "FM hook": 0.03780954314439349,
+    "Keyboard stabs": 0.009031557833334493
+  },
+  "note_count_before": 494,
+  "note_count_after": 374,
+  "master_attenuation_db": -4
+}

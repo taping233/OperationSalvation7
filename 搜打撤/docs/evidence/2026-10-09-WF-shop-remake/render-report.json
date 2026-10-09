@@ -1,0 +1,32 @@
+{
+  "title": "灯下交易",
+  "seconds": 30.0,
+  "bpm": 96,
+  "tracks": [
+    "piano-hook",
+    "muted-horn",
+    "jazz-guitar",
+    "upright-bass",
+    "vibraphone",
+    "brushes",
+    "rim"
+  ],
+  "peak_dbfs": -5.380046521120297,
+  "rms_dbfs": -20.038010555490544,
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-09-WF-shop-remake/shop-lamplight-deal-30s.wav",
+      "bytes": 8640044,
+      "sha256": "480b3e702ac9fd21cfba3a59530cf80d3c342e04c7e4b581b166f0ed6938582e"
+    },
+    {
+      "path": "docs/evidence/2026-10-09-WF-shop-remake/shop-lamplight-deal-30s.mp3",
+      "bytes": 961625,
+      "sha256": "79cee76063c653131567ca7c94d3b5830f3a03fa441854ddbdedc76366fd3ce3"
+    }
+  ],
+  "limits": [
+    "SoundFont rendering and procedural brushes; not a live studio performance.",
+    "30-second sketch has a brief fade; not a final seamless game loop."
+  ]
+}

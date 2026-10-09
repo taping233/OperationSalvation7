@@ -1,0 +1,36 @@
+{
+  "source": "Codex in-app browser via cua_repl; tab 1; http://127.0.0.1:5200/",
+  "date": "2026-10-09",
+  "viewport": [
+    1523,
+    956
+  ],
+  "method": "requestAnimationFrame intervals, 5 seconds, idle homepage; CDP Runtime.evaluate on the built-in tab",
+  "before": {
+    "fps": 106.4,
+    "p95Ms": 14,
+    "slowFramesOver25Ms": 6,
+    "frames": 533,
+    "petals": 8
+  },
+  "after": {
+    "fps": 142.97,
+    "p95Ms": 7.1,
+    "slowFramesOver25Ms": 1,
+    "frames": 715,
+    "petals": 0
+  },
+  "afterReturn": {
+    "fps": 141.2,
+    "p95Ms": 7.1,
+    "slowFramesOver25Ms": 2,
+    "frames": 706,
+    "petals": 0
+  },
+  "consoleErrors": [],
+  "screenshot": {
+    "path": "home-after.png",
+    "bytes": 188074,
+    "sha256": "920d72d1da120e823f1b7531ea3cc5f2a4f5902e490744e629c88b12b6281d03"
+  }
+}

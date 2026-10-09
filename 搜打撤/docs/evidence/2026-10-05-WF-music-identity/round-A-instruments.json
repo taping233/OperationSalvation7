@@ -1,0 +1,254 @@
+[
+  {
+    "role": "title",
+    "track": "Piano theme",
+    "group": "lead",
+    "rms_dbfs": -43.915518229940545,
+    "peak_dbfs": -28.514891144839286,
+    "suggested_db": 0.9155182299405453,
+    "initial_volume": 103
+  },
+  {
+    "role": "title",
+    "track": "Piano undercurrent",
+    "group": "accompaniment",
+    "rms_dbfs": -47.43183859604696,
+    "peak_dbfs": -34.5283531512608,
+    "suggested_db": -1.5681614039530416,
+    "initial_volume": 74
+  },
+  {
+    "role": "title",
+    "track": "Low strings",
+    "group": "pad",
+    "rms_dbfs": -54.6073303595964,
+    "peak_dbfs": -41.05902533805066,
+    "suggested_db": 1.6073303595964035,
+    "initial_volume": 42
+  },
+  {
+    "role": "title",
+    "track": "Woodwind answer",
+    "group": "counter",
+    "rms_dbfs": -54.14914677633252,
+    "peak_dbfs": -40.650601938088556,
+    "suggested_db": 5.149146776332522,
+    "initial_volume": 45
+  },
+  {
+    "role": "title",
+    "track": "Soft bass",
+    "group": "bass",
+    "rms_dbfs": -44.1370465468822,
+    "peak_dbfs": -33.71248684337679,
+    "suggested_db": -1.8629534531177967,
+    "initial_volume": 72
+  },
+  {
+    "role": "title",
+    "track": "Brush pulse",
+    "group": "drums",
+    "rms_dbfs": -64.63961090911884,
+    "peak_dbfs": -45.46665552760988,
+    "suggested_db": 6.0,
+    "initial_volume": 18
+  },
+  {
+    "role": "title",
+    "track": "Celesta detail",
+    "group": "signature",
+    "rms_dbfs": -62.949792717818454,
+    "peak_dbfs": -45.711343896946495,
+    "suggested_db": 6.0,
+    "initial_volume": 35
+  },
+  {
+    "role": "title",
+    "track": "Muted strings",
+    "group": "pad",
+    "rms_dbfs": -57.56321363645769,
+    "peak_dbfs": -46.28009516862997,
+    "suggested_db": 4.563213636457689,
+    "initial_volume": 31
+  },
+  {
+    "role": "title",
+    "track": "Triangle detail",
+    "group": "detail",
+    "rms_dbfs": -85.92986498144151,
+    "peak_dbfs": -62.226203599436985,
+    "suggested_db": 6.0,
+    "initial_volume": 11
+  },
+  {
+    "role": "explore",
+    "track": "Piano travel theme",
+    "group": "lead",
+    "rms_dbfs": -41.95478682003949,
+    "peak_dbfs": -28.316514509186202,
+    "suggested_db": -1.0452131799605127,
+    "initial_volume": 102
+  },
+  {
+    "role": "explore",
+    "track": "Pizzicato rhythm",
+    "group": "accompaniment",
+    "rms_dbfs": -51.22000974722327,
+    "peak_dbfs": -34.064053300479046,
+    "suggested_db": 2.2200097472232727,
+    "initial_volume": 85
+  },
+  {
+    "role": "explore",
+    "track": "Clarinet response",
+    "group": "counter",
+    "rms_dbfs": -55.06889692419465,
+    "peak_dbfs": -40.74650608891485,
+    "suggested_db": 6.0,
+    "initial_volume": 47
+  },
+  {
+    "role": "explore",
+    "track": "String horizon",
+    "group": "pad",
+    "rms_dbfs": -52.0028579647021,
+    "peak_dbfs": -39.28606773855985,
+    "suggested_db": -0.9971420352978981,
+    "initial_volume": 52
+  },
+  {
+    "role": "explore",
+    "track": "Moving bass",
+    "group": "bass",
+    "rms_dbfs": -47.19224491810525,
+    "peak_dbfs": -32.61156332769819,
+    "suggested_db": 1.1922449181052528,
+    "initial_volume": 73
+  },
+  {
+    "role": "explore",
+    "track": "Chamber drums",
+    "group": "drums",
+    "rms_dbfs": -57.13570851474405,
+    "peak_dbfs": -38.48153460532785,
+    "suggested_db": 6.0,
+    "initial_volume": 22
+  },
+  {
+    "role": "explore",
+    "track": "Celesta detail",
+    "group": "signature",
+    "rms_dbfs": -61.231001576013696,
+    "peak_dbfs": -42.943268946429846,
+    "suggested_db": 6.0,
+    "initial_volume": 35
+  },
+  {
+    "role": "explore",
+    "track": "Muted strings",
+    "group": "pad",
+    "rms_dbfs": -54.607912273598984,
+    "peak_dbfs": -40.40023024353331,
+    "suggested_db": 1.6079122735989841,
+    "initial_volume": 31
+  },
+  {
+    "role": "explore",
+    "track": "Triangle detail",
+    "group": "detail",
+    "rms_dbfs": -85.03716433147576,
+    "peak_dbfs": -61.72620296414954,
+    "suggested_db": 6.0,
+    "initial_volume": 11
+  },
+  {
+    "role": "battle",
+    "track": "Strings theme",
+    "group": "lead",
+    "rms_dbfs": -44.20485698267985,
+    "peak_dbfs": -28.71257668260337,
+    "suggested_db": 1.2048569826798499,
+    "initial_volume": 112
+  },
+  {
+    "role": "battle",
+    "track": "Horn answer",
+    "group": "counter",
+    "rms_dbfs": -48.64858345505178,
+    "peak_dbfs": -31.963608525974276,
+    "suggested_db": -0.35141654494822205,
+    "initial_volume": 52
+  },
+  {
+    "role": "battle",
+    "track": "Pizzicato drive",
+    "group": "accompaniment",
+    "rms_dbfs": -52.59924911573414,
+    "peak_dbfs": -37.182698034499154,
+    "suggested_db": 3.599249115734139,
+    "initial_volume": 43
+  },
+  {
+    "role": "battle",
+    "track": "Low strings",
+    "group": "pad",
+    "rms_dbfs": -52.703015933919694,
+    "peak_dbfs": -39.653792963911705,
+    "suggested_db": -0.2969840660803058,
+    "initial_volume": 39
+  },
+  {
+    "role": "battle",
+    "track": "Dark bass",
+    "group": "bass",
+    "rms_dbfs": -44.65237980088774,
+    "peak_dbfs": -31.695305593228262,
+    "suggested_db": -1.3476201991122565,
+    "initial_volume": 80
+  },
+  {
+    "role": "battle",
+    "track": "Timpani gestures",
+    "group": "percussion",
+    "rms_dbfs": -46.49928921759111,
+    "peak_dbfs": -29.9054777662618,
+    "suggested_db": -3.5007107824088877,
+    "initial_volume": 42
+  },
+  {
+    "role": "battle",
+    "track": "Battle groove",
+    "group": "drums",
+    "rms_dbfs": -52.86613136341153,
+    "peak_dbfs": -35.92107804571972,
+    "suggested_db": 4.866131363411533,
+    "initial_volume": 21
+  },
+  {
+    "role": "battle",
+    "track": "Celesta detail",
+    "group": "signature",
+    "rms_dbfs": -59.33881701393781,
+    "peak_dbfs": -41.3451388333441,
+    "suggested_db": 5.338817013937813,
+    "initial_volume": 35
+  },
+  {
+    "role": "battle",
+    "track": "Muted strings",
+    "group": "pad",
+    "rms_dbfs": -53.42443705714689,
+    "peak_dbfs": -40.21011286855593,
+    "suggested_db": 0.4244370571468892,
+    "initial_volume": 31
+  },
+  {
+    "role": "battle",
+    "track": "Triangle detail",
+    "group": "detail",
+    "rms_dbfs": -86.73166077399347,
+    "peak_dbfs": -63.32620366580918,
+    "suggested_db": 6.0,
+    "initial_volume": 11
+  }
+]

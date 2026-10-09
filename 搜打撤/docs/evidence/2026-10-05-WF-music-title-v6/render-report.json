@@ -1,0 +1,1135 @@
+{
+  "title": "霜窗回声 · 第六版",
+  "seconds": 91.4285625,
+  "bpm": 84,
+  "engine": "Installed LMMS + FluidSynth 1.1.6",
+  "strings_score_and_automation_exactly_preserved": {
+    "Strings left": "ae0a0ec03d5fef209fd8bfb061522ce905bc48ecdc85d91d97940302ae6cf0fb",
+    "Strings right": "d8f2163590eb154d5c1d37d71e023ac4f29ee3573207be81a94f9754d24b6357",
+    "Cello foundation": "d17597ca27bd39df963f244509451d1352242bd7ed973984ce0622d49f8affcc",
+    "Strings left long-phrase expression": "f809c34402da771297bad21b2955de923f606a88083b4b2613c77e962b520742",
+    "Strings right long-phrase expression": "a7cf1ede9828df1194bcf1ce4aa56e06a10212f7918a7b264b4dbcfa72aeafda",
+    "Cello foundation long-phrase expression": "0aff5eb53eb7967e662621f0f759c2789295b643fb7831923b62e2d4e1a69b31"
+  },
+  "piano_processing": [
+    {
+      "source_track": "Piano melody",
+      "old_native_rms": 0.009615018032491207,
+      "pedalled_rms_before_gain": 0.007919711992144585,
+      "gain": 0.8594897755917471,
+      "relative_to_previous_rms_db": -3,
+      "pedal_events_first_cycle": [
+        {
+          "beat": 0.0,
+          "cc64": 127
+        },
+        {
+          "beat": 1.92,
+          "cc64": 0
+        },
+        {
+          "beat": 2.025,
+          "cc64": 127
+        },
+        {
+          "beat": 3.92,
+          "cc64": 0
+        },
+        {
+          "beat": 4.025,
+          "cc64": 127
+        },
+        {
+          "beat": 5.92,
+          "cc64": 0
+        },
+        {
+          "beat": 6.025,
+          "cc64": 127
+        },
+        {
+          "beat": 7.92,
+          "cc64": 0
+        },
+        {
+          "beat": 8.025,
+          "cc64": 127
+        },
+        {
+          "beat": 9.92,
+          "cc64": 0
+        },
+        {
+          "beat": 10.025,
+          "cc64": 127
+        },
+        {
+          "beat": 11.92,
+          "cc64": 0
+        },
+        {
+          "beat": 12.025,
+          "cc64": 127
+        },
+        {
+          "beat": 13.92,
+          "cc64": 0
+        },
+        {
+          "beat": 14.025,
+          "cc64": 127
+        },
+        {
+          "beat": 15.92,
+          "cc64": 0
+        },
+        {
+          "beat": 16.025,
+          "cc64": 127
+        },
+        {
+          "beat": 17.92,
+          "cc64": 0
+        },
+        {
+          "beat": 18.025,
+          "cc64": 127
+        },
+        {
+          "beat": 19.92,
+          "cc64": 0
+        },
+        {
+          "beat": 20.025,
+          "cc64": 127
+        },
+        {
+          "beat": 21.92,
+          "cc64": 0
+        },
+        {
+          "beat": 22.025,
+          "cc64": 127
+        },
+        {
+          "beat": 23.92,
+          "cc64": 0
+        },
+        {
+          "beat": 24.025,
+          "cc64": 127
+        },
+        {
+          "beat": 25.92,
+          "cc64": 0
+        },
+        {
+          "beat": 26.025,
+          "cc64": 127
+        },
+        {
+          "beat": 27.92,
+          "cc64": 0
+        },
+        {
+          "beat": 28.025,
+          "cc64": 127
+        },
+        {
+          "beat": 29.92,
+          "cc64": 0
+        },
+        {
+          "beat": 30.025,
+          "cc64": 127
+        },
+        {
+          "beat": 31.92,
+          "cc64": 0
+        },
+        {
+          "beat": 32.025,
+          "cc64": 127
+        },
+        {
+          "beat": 33.92,
+          "cc64": 0
+        },
+        {
+          "beat": 34.025,
+          "cc64": 127
+        },
+        {
+          "beat": 35.92,
+          "cc64": 0
+        },
+        {
+          "beat": 36.025,
+          "cc64": 127
+        },
+        {
+          "beat": 37.92,
+          "cc64": 0
+        },
+        {
+          "beat": 38.025,
+          "cc64": 127
+        },
+        {
+          "beat": 39.92,
+          "cc64": 0
+        },
+        {
+          "beat": 40.025,
+          "cc64": 127
+        },
+        {
+          "beat": 41.92,
+          "cc64": 0
+        },
+        {
+          "beat": 42.025,
+          "cc64": 127
+        },
+        {
+          "beat": 43.92,
+          "cc64": 0
+        },
+        {
+          "beat": 44.025,
+          "cc64": 127
+        },
+        {
+          "beat": 45.92,
+          "cc64": 0
+        },
+        {
+          "beat": 46.025,
+          "cc64": 127
+        },
+        {
+          "beat": 47.92,
+          "cc64": 0
+        },
+        {
+          "beat": 48.025,
+          "cc64": 127
+        },
+        {
+          "beat": 49.92,
+          "cc64": 0
+        },
+        {
+          "beat": 50.025,
+          "cc64": 127
+        },
+        {
+          "beat": 51.92,
+          "cc64": 0
+        },
+        {
+          "beat": 52.025,
+          "cc64": 127
+        },
+        {
+          "beat": 53.92,
+          "cc64": 0
+        },
+        {
+          "beat": 54.025,
+          "cc64": 127
+        },
+        {
+          "beat": 55.92,
+          "cc64": 0
+        },
+        {
+          "beat": 56.025,
+          "cc64": 127
+        },
+        {
+          "beat": 57.92,
+          "cc64": 0
+        },
+        {
+          "beat": 58.025,
+          "cc64": 127
+        },
+        {
+          "beat": 59.92,
+          "cc64": 0
+        },
+        {
+          "beat": 60.025,
+          "cc64": 127
+        },
+        {
+          "beat": 61.92,
+          "cc64": 0
+        },
+        {
+          "beat": 62.025,
+          "cc64": 127
+        },
+        {
+          "beat": 63.92,
+          "cc64": 0
+        },
+        {
+          "beat": 64.025,
+          "cc64": 127
+        },
+        {
+          "beat": 65.92,
+          "cc64": 0
+        },
+        {
+          "beat": 66.025,
+          "cc64": 127
+        },
+        {
+          "beat": 67.92,
+          "cc64": 0
+        },
+        {
+          "beat": 68.025,
+          "cc64": 127
+        },
+        {
+          "beat": 69.92,
+          "cc64": 0
+        },
+        {
+          "beat": 70.025,
+          "cc64": 127
+        },
+        {
+          "beat": 71.92,
+          "cc64": 0
+        },
+        {
+          "beat": 72.025,
+          "cc64": 127
+        },
+        {
+          "beat": 73.92,
+          "cc64": 0
+        },
+        {
+          "beat": 74.025,
+          "cc64": 127
+        },
+        {
+          "beat": 75.92,
+          "cc64": 0
+        },
+        {
+          "beat": 76.025,
+          "cc64": 127
+        },
+        {
+          "beat": 77.92,
+          "cc64": 0
+        },
+        {
+          "beat": 78.025,
+          "cc64": 127
+        },
+        {
+          "beat": 79.92,
+          "cc64": 0
+        },
+        {
+          "beat": 80.025,
+          "cc64": 127
+        },
+        {
+          "beat": 81.92,
+          "cc64": 0
+        },
+        {
+          "beat": 82.025,
+          "cc64": 127
+        },
+        {
+          "beat": 83.92,
+          "cc64": 0
+        },
+        {
+          "beat": 84.025,
+          "cc64": 127
+        },
+        {
+          "beat": 85.92,
+          "cc64": 0
+        },
+        {
+          "beat": 86.025,
+          "cc64": 127
+        },
+        {
+          "beat": 87.92,
+          "cc64": 0
+        },
+        {
+          "beat": 88.025,
+          "cc64": 127
+        },
+        {
+          "beat": 89.92,
+          "cc64": 0
+        },
+        {
+          "beat": 90.025,
+          "cc64": 127
+        },
+        {
+          "beat": 91.92,
+          "cc64": 0
+        },
+        {
+          "beat": 92.025,
+          "cc64": 127
+        },
+        {
+          "beat": 93.92,
+          "cc64": 0
+        },
+        {
+          "beat": 94.025,
+          "cc64": 127
+        },
+        {
+          "beat": 95.92,
+          "cc64": 0
+        },
+        {
+          "beat": 96.025,
+          "cc64": 127
+        },
+        {
+          "beat": 97.92,
+          "cc64": 0
+        },
+        {
+          "beat": 98.025,
+          "cc64": 127
+        },
+        {
+          "beat": 99.92,
+          "cc64": 0
+        },
+        {
+          "beat": 100.025,
+          "cc64": 127
+        },
+        {
+          "beat": 101.92,
+          "cc64": 0
+        },
+        {
+          "beat": 102.025,
+          "cc64": 127
+        },
+        {
+          "beat": 103.92,
+          "cc64": 0
+        },
+        {
+          "beat": 104.025,
+          "cc64": 127
+        },
+        {
+          "beat": 105.92,
+          "cc64": 0
+        },
+        {
+          "beat": 106.025,
+          "cc64": 127
+        },
+        {
+          "beat": 107.92,
+          "cc64": 0
+        },
+        {
+          "beat": 108.025,
+          "cc64": 127
+        },
+        {
+          "beat": 109.92,
+          "cc64": 0
+        },
+        {
+          "beat": 110.025,
+          "cc64": 127
+        },
+        {
+          "beat": 111.92,
+          "cc64": 0
+        },
+        {
+          "beat": 112.025,
+          "cc64": 127
+        },
+        {
+          "beat": 113.92,
+          "cc64": 0
+        },
+        {
+          "beat": 114.025,
+          "cc64": 127
+        },
+        {
+          "beat": 115.92,
+          "cc64": 0
+        },
+        {
+          "beat": 116.025,
+          "cc64": 127
+        },
+        {
+          "beat": 117.92,
+          "cc64": 0
+        },
+        {
+          "beat": 118.025,
+          "cc64": 127
+        },
+        {
+          "beat": 119.92,
+          "cc64": 0
+        },
+        {
+          "beat": 120.025,
+          "cc64": 127
+        },
+        {
+          "beat": 121.92,
+          "cc64": 0
+        },
+        {
+          "beat": 122.025,
+          "cc64": 127
+        },
+        {
+          "beat": 123.92,
+          "cc64": 0
+        },
+        {
+          "beat": 124.025,
+          "cc64": 127
+        },
+        {
+          "beat": 125.92,
+          "cc64": 0
+        },
+        {
+          "beat": 126.025,
+          "cc64": 127
+        },
+        {
+          "beat": 127.92,
+          "cc64": 0
+        }
+      ],
+      "piano_clip_sha256": "a73dd27083b5be8b1af95cc70755122e0e98d9d648dd8b52d91b205023367abd",
+      "piano_clip_path": ".tmp/music-workstation/title-v6/Piano-melody-pedalled.wav",
+      "piano_clip_bytes": 70217224
+    },
+    {
+      "source_track": "Quiet piano harmony",
+      "old_native_rms": 0.0010109184077009559,
+      "pedalled_rms_before_gain": 0.003347381018102169,
+      "gain": 0.19055087860024186,
+      "relative_to_previous_rms_db": -4,
+      "pedal_events_first_cycle": [
+        {
+          "beat": 0.0,
+          "cc64": 127
+        },
+        {
+          "beat": 1.92,
+          "cc64": 0
+        },
+        {
+          "beat": 2.025,
+          "cc64": 127
+        },
+        {
+          "beat": 3.92,
+          "cc64": 0
+        },
+        {
+          "beat": 4.025,
+          "cc64": 127
+        },
+        {
+          "beat": 5.92,
+          "cc64": 0
+        },
+        {
+          "beat": 6.025,
+          "cc64": 127
+        },
+        {
+          "beat": 7.92,
+          "cc64": 0
+        },
+        {
+          "beat": 8.025,
+          "cc64": 127
+        },
+        {
+          "beat": 9.92,
+          "cc64": 0
+        },
+        {
+          "beat": 10.025,
+          "cc64": 127
+        },
+        {
+          "beat": 11.92,
+          "cc64": 0
+        },
+        {
+          "beat": 12.025,
+          "cc64": 127
+        },
+        {
+          "beat": 13.92,
+          "cc64": 0
+        },
+        {
+          "beat": 14.025,
+          "cc64": 127
+        },
+        {
+          "beat": 15.92,
+          "cc64": 0
+        },
+        {
+          "beat": 16.025,
+          "cc64": 127
+        },
+        {
+          "beat": 17.92,
+          "cc64": 0
+        },
+        {
+          "beat": 18.025,
+          "cc64": 127
+        },
+        {
+          "beat": 19.92,
+          "cc64": 0
+        },
+        {
+          "beat": 20.025,
+          "cc64": 127
+        },
+        {
+          "beat": 21.92,
+          "cc64": 0
+        },
+        {
+          "beat": 22.025,
+          "cc64": 127
+        },
+        {
+          "beat": 23.92,
+          "cc64": 0
+        },
+        {
+          "beat": 24.025,
+          "cc64": 127
+        },
+        {
+          "beat": 25.92,
+          "cc64": 0
+        },
+        {
+          "beat": 26.025,
+          "cc64": 127
+        },
+        {
+          "beat": 27.92,
+          "cc64": 0
+        },
+        {
+          "beat": 28.025,
+          "cc64": 127
+        },
+        {
+          "beat": 29.92,
+          "cc64": 0
+        },
+        {
+          "beat": 30.025,
+          "cc64": 127
+        },
+        {
+          "beat": 31.92,
+          "cc64": 0
+        },
+        {
+          "beat": 32.025,
+          "cc64": 127
+        },
+        {
+          "beat": 33.92,
+          "cc64": 0
+        },
+        {
+          "beat": 34.025,
+          "cc64": 127
+        },
+        {
+          "beat": 35.92,
+          "cc64": 0
+        },
+        {
+          "beat": 36.025,
+          "cc64": 127
+        },
+        {
+          "beat": 37.92,
+          "cc64": 0
+        },
+        {
+          "beat": 38.025,
+          "cc64": 127
+        },
+        {
+          "beat": 39.92,
+          "cc64": 0
+        },
+        {
+          "beat": 40.025,
+          "cc64": 127
+        },
+        {
+          "beat": 41.92,
+          "cc64": 0
+        },
+        {
+          "beat": 42.025,
+          "cc64": 127
+        },
+        {
+          "beat": 43.92,
+          "cc64": 0
+        },
+        {
+          "beat": 44.025,
+          "cc64": 127
+        },
+        {
+          "beat": 45.92,
+          "cc64": 0
+        },
+        {
+          "beat": 46.025,
+          "cc64": 127
+        },
+        {
+          "beat": 47.92,
+          "cc64": 0
+        },
+        {
+          "beat": 48.025,
+          "cc64": 127
+        },
+        {
+          "beat": 49.92,
+          "cc64": 0
+        },
+        {
+          "beat": 50.025,
+          "cc64": 127
+        },
+        {
+          "beat": 51.92,
+          "cc64": 0
+        },
+        {
+          "beat": 52.025,
+          "cc64": 127
+        },
+        {
+          "beat": 53.92,
+          "cc64": 0
+        },
+        {
+          "beat": 54.025,
+          "cc64": 127
+        },
+        {
+          "beat": 55.92,
+          "cc64": 0
+        },
+        {
+          "beat": 56.025,
+          "cc64": 127
+        },
+        {
+          "beat": 57.92,
+          "cc64": 0
+        },
+        {
+          "beat": 58.025,
+          "cc64": 127
+        },
+        {
+          "beat": 59.92,
+          "cc64": 0
+        },
+        {
+          "beat": 60.025,
+          "cc64": 127
+        },
+        {
+          "beat": 61.92,
+          "cc64": 0
+        },
+        {
+          "beat": 62.025,
+          "cc64": 127
+        },
+        {
+          "beat": 63.92,
+          "cc64": 0
+        },
+        {
+          "beat": 64.025,
+          "cc64": 127
+        },
+        {
+          "beat": 65.92,
+          "cc64": 0
+        },
+        {
+          "beat": 66.025,
+          "cc64": 127
+        },
+        {
+          "beat": 67.92,
+          "cc64": 0
+        },
+        {
+          "beat": 68.025,
+          "cc64": 127
+        },
+        {
+          "beat": 69.92,
+          "cc64": 0
+        },
+        {
+          "beat": 70.025,
+          "cc64": 127
+        },
+        {
+          "beat": 71.92,
+          "cc64": 0
+        },
+        {
+          "beat": 72.025,
+          "cc64": 127
+        },
+        {
+          "beat": 73.92,
+          "cc64": 0
+        },
+        {
+          "beat": 74.025,
+          "cc64": 127
+        },
+        {
+          "beat": 75.92,
+          "cc64": 0
+        },
+        {
+          "beat": 76.025,
+          "cc64": 127
+        },
+        {
+          "beat": 77.92,
+          "cc64": 0
+        },
+        {
+          "beat": 78.025,
+          "cc64": 127
+        },
+        {
+          "beat": 79.92,
+          "cc64": 0
+        },
+        {
+          "beat": 80.025,
+          "cc64": 127
+        },
+        {
+          "beat": 81.92,
+          "cc64": 0
+        },
+        {
+          "beat": 82.025,
+          "cc64": 127
+        },
+        {
+          "beat": 83.92,
+          "cc64": 0
+        },
+        {
+          "beat": 84.025,
+          "cc64": 127
+        },
+        {
+          "beat": 85.92,
+          "cc64": 0
+        },
+        {
+          "beat": 86.025,
+          "cc64": 127
+        },
+        {
+          "beat": 87.92,
+          "cc64": 0
+        },
+        {
+          "beat": 88.025,
+          "cc64": 127
+        },
+        {
+          "beat": 89.92,
+          "cc64": 0
+        },
+        {
+          "beat": 90.025,
+          "cc64": 127
+        },
+        {
+          "beat": 91.92,
+          "cc64": 0
+        },
+        {
+          "beat": 92.025,
+          "cc64": 127
+        },
+        {
+          "beat": 93.92,
+          "cc64": 0
+        },
+        {
+          "beat": 94.025,
+          "cc64": 127
+        },
+        {
+          "beat": 95.92,
+          "cc64": 0
+        },
+        {
+          "beat": 96.025,
+          "cc64": 127
+        },
+        {
+          "beat": 97.92,
+          "cc64": 0
+        },
+        {
+          "beat": 98.025,
+          "cc64": 127
+        },
+        {
+          "beat": 99.92,
+          "cc64": 0
+        },
+        {
+          "beat": 100.025,
+          "cc64": 127
+        },
+        {
+          "beat": 101.92,
+          "cc64": 0
+        },
+        {
+          "beat": 102.025,
+          "cc64": 127
+        },
+        {
+          "beat": 103.92,
+          "cc64": 0
+        },
+        {
+          "beat": 104.025,
+          "cc64": 127
+        },
+        {
+          "beat": 105.92,
+          "cc64": 0
+        },
+        {
+          "beat": 106.025,
+          "cc64": 127
+        },
+        {
+          "beat": 107.92,
+          "cc64": 0
+        },
+        {
+          "beat": 108.025,
+          "cc64": 127
+        },
+        {
+          "beat": 109.92,
+          "cc64": 0
+        },
+        {
+          "beat": 110.025,
+          "cc64": 127
+        },
+        {
+          "beat": 111.92,
+          "cc64": 0
+        },
+        {
+          "beat": 112.025,
+          "cc64": 127
+        },
+        {
+          "beat": 113.92,
+          "cc64": 0
+        },
+        {
+          "beat": 114.025,
+          "cc64": 127
+        },
+        {
+          "beat": 115.92,
+          "cc64": 0
+        },
+        {
+          "beat": 116.025,
+          "cc64": 127
+        },
+        {
+          "beat": 117.92,
+          "cc64": 0
+        },
+        {
+          "beat": 118.025,
+          "cc64": 127
+        },
+        {
+          "beat": 119.92,
+          "cc64": 0
+        },
+        {
+          "beat": 120.025,
+          "cc64": 127
+        },
+        {
+          "beat": 121.92,
+          "cc64": 0
+        },
+        {
+          "beat": 122.025,
+          "cc64": 127
+        },
+        {
+          "beat": 123.92,
+          "cc64": 0
+        },
+        {
+          "beat": 124.025,
+          "cc64": 127
+        },
+        {
+          "beat": 125.92,
+          "cc64": 0
+        },
+        {
+          "beat": 126.025,
+          "cc64": 127
+        },
+        {
+          "beat": 127.92,
+          "cc64": 0
+        }
+      ],
+      "piano_clip_sha256": "a224b017cb6484bbd6fbcd6d54707948086a098720fc687cef2374c8df88eaae",
+      "piano_clip_path": ".tmp/music-workstation/title-v6/Quiet-piano-harmony-pedalled.wav",
+      "piano_clip_bytes": 70217224
+    }
+  ],
+  "old_master_gain_db": 22.100102312914082,
+  "extra_safety_gain_db": 0.0,
+  "peak_dbfs": -3.242093324661255,
+  "rms_dbfs": -17.983566522598267,
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v6/01-title-frostglass-v6.mmp",
+      "bytes": 68469,
+      "sha256": "ad105b9c0f3ab293e84917e496c005ab638ad15127ea414e8144631113517750"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v6/01-title-frostglass-v6.wav",
+      "bytes": 26331470,
+      "sha256": "0d68addbc98e237b951f416705bf064ee04c79a1301ff83fcf414350ef720368"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v6/01-title-frostglass-v6.mp3",
+      "bytes": 2927697,
+      "sha256": "e603e258314dfe3c912af250d40018109d1baeb0838404d8879ae57a20591d4c"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v6/01-title-frostglass-v6.ogg",
+      "bytes": 1352647,
+      "sha256": "ea9285ad54589ebf3ead0fc9d57e94436fedb622ec1a5e48206d223fc8c53f13"
+    }
+  ],
+  "limitations": [
+    "No new string notes, dynamics or soundfont",
+    "Piano clips are editable by regenerating MIDI-event rendering; native LMMS project contains frozen piano audio",
+    "Sustain pedal measurement does not prove the piano is subjectively better",
+    "User has not yet authorised removing piano; this candidate retains it"
+  ],
+  "loudness_matched": true,
+  "old_loudness": {
+    "input_i": "-15.53",
+    "input_tp": "-3.81",
+    "input_lra": "2.50",
+    "input_thresh": "-25.76",
+    "output_i": "-23.19",
+    "output_tp": "-11.37",
+    "output_lra": "2.60",
+    "output_thresh": "-33.43",
+    "normalization_type": "dynamic",
+    "target_offset": "0.19"
+  },
+  "unmatched_v6_loudness": {
+    "input_i": "-18.52",
+    "input_tp": "-6.23",
+    "input_lra": "2.50",
+    "input_thresh": "-28.71",
+    "output_i": "-23.21",
+    "output_tp": "-10.65",
+    "output_lra": "2.80",
+    "output_thresh": "-33.42",
+    "normalization_type": "dynamic",
+    "target_offset": "0.21"
+  },
+  "final_common_gain_db": 2.9899999999999998,
+  "loudness_note": "Overall level aligned for audition. Piano remains -3/-4dB relative to the unchanged string performance.",
+  "final_loudness": {
+    "input_i": "-15.53",
+    "input_tp": "-3.24",
+    "input_lra": "2.60",
+    "input_thresh": "-25.72",
+    "output_i": "-23.21",
+    "output_tp": "-10.65",
+    "output_lra": "2.80",
+    "output_thresh": "-33.42",
+    "normalization_type": "dynamic",
+    "target_offset": "0.21"
+  }
+}

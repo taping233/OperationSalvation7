@@ -1,0 +1,673 @@
+{
+  "role": "explore",
+  "title": "灰线行军 · 动机精修",
+  "bpm": 112,
+  "seconds": 30.0,
+  "parts": [
+    {
+      "name": "Piano path melody",
+      "note_count": 20,
+      "retained_melodic_recording": false,
+      "patch": 0,
+      "db": -25,
+      "pan": -0.08,
+      "bank": 0,
+      "wet": 0.42,
+      "hz": 6500
+    },
+    {
+      "name": "Clarinet phrase answer",
+      "note_count": 8,
+      "retained_melodic_recording": false,
+      "patch": 71,
+      "db": -27,
+      "pan": 0.15,
+      "bank": 0,
+      "wet": 0.45,
+      "hz": 6500
+    },
+    {
+      "name": "Nylon recurring cell",
+      "note_count": 32,
+      "retained_melodic_recording": false,
+      "patch": 24,
+      "db": -32,
+      "pan": -0.32,
+      "bank": 0,
+      "wet": 0.22,
+      "hz": 6500
+    },
+    {
+      "name": "Cello route",
+      "note_count": 6,
+      "retained_melodic_recording": false,
+      "patch": 42,
+      "db": -36,
+      "pan": 0.25,
+      "bank": 0,
+      "wet": 0.35,
+      "hz": 6500
+    },
+    {
+      "name": "Acoustic bass foundation",
+      "note_count": 14,
+      "retained_melodic_recording": false,
+      "patch": 32,
+      "db": -35,
+      "pan": 0,
+      "bank": 0,
+      "wet": 0.1,
+      "hz": 2300
+    },
+    {
+      "name": "Vibraphone signpost",
+      "note_count": 3,
+      "retained_melodic_recording": false,
+      "patch": 11,
+      "db": -40,
+      "pan": 0.33,
+      "bank": 0,
+      "wet": 0.65,
+      "hz": 6500
+    }
+  ],
+  "notes": [
+    {
+      "part": "Piano path melody",
+      "beat": 0.07072,
+      "key": 65,
+      "duration": 1.92,
+      "velocity": 57
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 2.07133,
+      "key": 62,
+      "duration": 1.92,
+      "velocity": 54
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 4.06439,
+      "key": 60,
+      "duration": 1.92,
+      "velocity": 54
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 6.07102,
+      "key": 65,
+      "duration": 1.92,
+      "velocity": 52
+    },
+    {
+      "part": "Clarinet phrase answer",
+      "beat": 8.06731,
+      "key": 81,
+      "duration": 1.65,
+      "velocity": 52
+    },
+    {
+      "part": "Clarinet phrase answer",
+      "beat": 10.06946,
+      "key": 77,
+      "duration": 1.65,
+      "velocity": 49
+    },
+    {
+      "part": "Clarinet phrase answer",
+      "beat": 12.0661,
+      "key": 72,
+      "duration": 1.65,
+      "velocity": 49
+    },
+    {
+      "part": "Clarinet phrase answer",
+      "beat": 14.07418,
+      "key": 69,
+      "duration": 1.65,
+      "velocity": 47
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 16.0719,
+      "key": 64,
+      "duration": 1.92,
+      "velocity": 57
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 18.07489,
+      "key": 69,
+      "duration": 1.92,
+      "velocity": 54
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 20.06798,
+      "key": 67,
+      "duration": 1.92,
+      "velocity": 54
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 22.06853,
+      "key": 64,
+      "duration": 1.92,
+      "velocity": 52
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 24.07089,
+      "key": 67,
+      "duration": 1.92,
+      "velocity": 57
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 26.06741,
+      "key": 64,
+      "duration": 1.92,
+      "velocity": 54
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 28.07445,
+      "key": 69,
+      "duration": 1.92,
+      "velocity": 54
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 30.06525,
+      "key": 67,
+      "duration": 1.92,
+      "velocity": 52
+    },
+    {
+      "part": "Clarinet phrase answer",
+      "beat": 32.06849,
+      "key": 79,
+      "duration": 1.65,
+      "velocity": 52
+    },
+    {
+      "part": "Clarinet phrase answer",
+      "beat": 34.06927,
+      "key": 77,
+      "duration": 1.65,
+      "velocity": 49
+    },
+    {
+      "part": "Clarinet phrase answer",
+      "beat": 36.07253,
+      "key": 82,
+      "duration": 1.65,
+      "velocity": 49
+    },
+    {
+      "part": "Clarinet phrase answer",
+      "beat": 38.06841,
+      "key": 81,
+      "duration": 1.65,
+      "velocity": 47
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 40.07072,
+      "key": 65,
+      "duration": 1.92,
+      "velocity": 57
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 42.07302,
+      "key": 62,
+      "duration": 1.92,
+      "velocity": 54
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 44.06516,
+      "key": 69,
+      "duration": 1.92,
+      "velocity": 54
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 46.06508,
+      "key": 62,
+      "duration": 1.92,
+      "velocity": 52
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 48.06766,
+      "key": 64,
+      "duration": 1.92,
+      "velocity": 57
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 50.06949,
+      "key": 69,
+      "duration": 1.92,
+      "velocity": 54
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 52.06434,
+      "key": 67,
+      "duration": 1.92,
+      "velocity": 54
+    },
+    {
+      "part": "Piano path melody",
+      "beat": 54.06809,
+      "key": 64,
+      "duration": 1.92,
+      "velocity": 52
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 0.24432,
+      "key": 57,
+      "duration": 0.8,
+      "velocity": 42
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 1.10855,
+      "key": 62,
+      "duration": 0.7,
+      "velocity": 33
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 1.89984,
+      "key": 65,
+      "duration": 1.5,
+      "velocity": 34
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 4.491,
+      "key": 57,
+      "duration": 0.75,
+      "velocity": 35
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 5.40602,
+      "key": 65,
+      "duration": 1.8,
+      "velocity": 36
+    },
+    {
+      "part": "Acoustic bass foundation",
+      "beat": 0,
+      "key": 38,
+      "duration": 3.6,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass foundation",
+      "beat": 4.00426,
+      "key": 45,
+      "duration": 3.5,
+      "velocity": 37
+    },
+    {
+      "part": "Vibraphone signpost",
+      "beat": 6.85426,
+      "key": 76,
+      "duration": 1.7,
+      "velocity": 29
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 8.24222,
+      "key": 57,
+      "duration": 0.8,
+      "velocity": 42
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 9.09522,
+      "key": 62,
+      "duration": 0.7,
+      "velocity": 33
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 9.90273,
+      "key": 65,
+      "duration": 1.5,
+      "velocity": 34
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 12.49395,
+      "key": 57,
+      "duration": 0.75,
+      "velocity": 35
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 13.40396,
+      "key": 65,
+      "duration": 1.8,
+      "velocity": 36
+    },
+    {
+      "part": "Acoustic bass foundation",
+      "beat": 8.00393,
+      "key": 34,
+      "duration": 3.6,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass foundation",
+      "beat": 12.00651,
+      "key": 45,
+      "duration": 3.5,
+      "velocity": 37
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 16.24171,
+      "key": 53,
+      "duration": 0.8,
+      "velocity": 42
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 17.09525,
+      "key": 57,
+      "duration": 0.7,
+      "velocity": 33
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 17.8935,
+      "key": 60,
+      "duration": 1.5,
+      "velocity": 34
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 20.5055,
+      "key": 53,
+      "duration": 0.75,
+      "velocity": 35
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 21.3939,
+      "key": 60,
+      "duration": 1.8,
+      "velocity": 36
+    },
+    {
+      "part": "Acoustic bass foundation",
+      "beat": 16.00615,
+      "key": 29,
+      "duration": 3.6,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass foundation",
+      "beat": 20.00374,
+      "key": 41,
+      "duration": 3.5,
+      "velocity": 37
+    },
+    {
+      "part": "Cello route",
+      "beat": 16.20341,
+      "key": 41,
+      "duration": 3.5,
+      "velocity": 34
+    },
+    {
+      "part": "Cello route",
+      "beat": 20.39202,
+      "key": 48,
+      "duration": 3.1,
+      "velocity": 31
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 24.25272,
+      "key": 55,
+      "duration": 0.8,
+      "velocity": 42
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 25.10322,
+      "key": 60,
+      "duration": 0.7,
+      "velocity": 33
+    },
+    {
+      "part": "Acoustic bass foundation",
+      "beat": 23.99802,
+      "key": 36,
+      "duration": 3.6,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass foundation",
+      "beat": 27.99436,
+      "key": 43,
+      "duration": 3.5,
+      "velocity": 37
+    },
+    {
+      "part": "Vibraphone signpost",
+      "beat": 30.84222,
+      "key": 69,
+      "duration": 1.7,
+      "velocity": 29
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 32.2596,
+      "key": 55,
+      "duration": 0.8,
+      "velocity": 42
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 33.10176,
+      "key": 58,
+      "duration": 0.7,
+      "velocity": 33
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 33.89841,
+      "key": 62,
+      "duration": 1.5,
+      "velocity": 34
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 36.49482,
+      "key": 55,
+      "duration": 0.75,
+      "velocity": 35
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 37.4029,
+      "key": 62,
+      "duration": 1.8,
+      "velocity": 36
+    },
+    {
+      "part": "Acoustic bass foundation",
+      "beat": 32.00671,
+      "key": 31,
+      "duration": 3.6,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass foundation",
+      "beat": 36.00056,
+      "key": 43,
+      "duration": 3.5,
+      "velocity": 37
+    },
+    {
+      "part": "Cello route",
+      "beat": 32.2003,
+      "key": 43,
+      "duration": 3.5,
+      "velocity": 34
+    },
+    {
+      "part": "Cello route",
+      "beat": 36.40488,
+      "key": 50,
+      "duration": 3.1,
+      "velocity": 31
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 40.25549,
+      "key": 53,
+      "duration": 0.8,
+      "velocity": 42
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 41.10312,
+      "key": 58,
+      "duration": 0.7,
+      "velocity": 33
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 41.89997,
+      "key": 62,
+      "duration": 1.5,
+      "velocity": 34
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 44.49731,
+      "key": 53,
+      "duration": 0.75,
+      "velocity": 35
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 45.39307,
+      "key": 62,
+      "duration": 1.8,
+      "velocity": 36
+    },
+    {
+      "part": "Acoustic bass foundation",
+      "beat": 40.00118,
+      "key": 34,
+      "duration": 3.6,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass foundation",
+      "beat": 43.99395,
+      "key": 41,
+      "duration": 3.5,
+      "velocity": 37
+    },
+    {
+      "part": "Cello route",
+      "beat": 40.20544,
+      "key": 46,
+      "duration": 3.5,
+      "velocity": 34
+    },
+    {
+      "part": "Cello route",
+      "beat": 44.3936,
+      "key": 50,
+      "duration": 3.1,
+      "velocity": 31
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 48.25991,
+      "key": 57,
+      "duration": 0.8,
+      "velocity": 42
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 49.10323,
+      "key": 61,
+      "duration": 0.7,
+      "velocity": 33
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 49.89756,
+      "key": 64,
+      "duration": 1.5,
+      "velocity": 34
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 52.50605,
+      "key": 57,
+      "duration": 0.75,
+      "velocity": 35
+    },
+    {
+      "part": "Nylon recurring cell",
+      "beat": 53.39438,
+      "key": 64,
+      "duration": 1.8,
+      "velocity": 36
+    },
+    {
+      "part": "Acoustic bass foundation",
+      "beat": 47.99085,
+      "key": 33,
+      "duration": 3.6,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass foundation",
+      "beat": 51.99495,
+      "key": 45,
+      "duration": 3.5,
+      "velocity": 37
+    },
+    {
+      "part": "Vibraphone signpost",
+      "beat": 54.85095,
+      "key": 67,
+      "duration": 1.6499999999999986,
+      "velocity": 29
+    }
+  ],
+  "shapes": {},
+  "source": [],
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-09-WF-music-refinement/explore-refined-30s.wav",
+      "bytes": 8640044,
+      "sha256": "76a22225d74800616af98d6293e3fbc43f302e89fb9ca5ae12aa11969f10025a"
+    },
+    {
+      "path": "docs/evidence/2026-10-09-WF-music-refinement/explore-refined-30s.mp3",
+      "bytes": 961620,
+      "sha256": "74b4aa084643e1a3c75e49dffcf0a9a5ba79dd16bc79ee2599e8bf8cf0a886da"
+    }
+  ],
+  "peak_dbfs": -5.471602393611859,
+  "rms_dbfs": -20.519545858949883
+}

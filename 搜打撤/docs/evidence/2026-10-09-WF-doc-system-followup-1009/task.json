@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-doc-system-followup-1009",
+  "date": "2026-10-09",
+  "owner": "Friday",
+  "goal": "恢复任务登记并核对功能文档，整理状态台账的现行与历史入口",
+  "paths": [
+    "scripts/workflow-task.mjs",
+    "tests/workflow-task.test.js",
+    "docs/STATUS.md",
+    "docs/README.md",
+    "docs/rules.md",
+    "docs/save-format.md",
+    "docs/WORKFLOW-TOOLS.md",
+    "docs/roadmap.md",
+    "docs/PARALLEL-REGISTRY.md",
+    "docs/PENDING.md",
+    "docs/archive/WF-ledger-context-1009",
+    "docs/evidence/2026-10-09-WF-doc-system-followup-1009"
+  ],
+  "doneWhen": [
+    "旧格式记录被单独报告，标准任务可新建和读取，原证据保留",
+    "核对规则说明与相关源码，差异有来源，保护在途改动",
+    "当前状态入口能按路径查询，历史与未验证事项明确分开"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-10-09-WF-doc-system-followup-1009/2026-10-09T04-32-49.714Z-d25c7342.json",
+      "result": "passed",
+      "sha256": "3f435df664f0332b43910de4bda2282b112b624179c703af19eef080ce6a2191",
+      "verification": "recorded-result-only-not-current-freshness"
+    },
+    {
+      "kind": "manual",
+      "description": "文档守卫557链接、8项事实与状态保护检查及差异格式通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "在途卡牌/术语/图鉴/美术未作正文修改，未做游戏实页或全部卡效重验"
+  ],
+  "updatedAt": "2026-10-09T04:34:58.680Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

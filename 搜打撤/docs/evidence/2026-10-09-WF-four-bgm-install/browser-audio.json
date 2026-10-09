@@ -1,0 +1,106 @@
+[
+  [
+    {
+      "decoded": true,
+      "playing": true,
+      "scene": "title",
+      "status": "正在渐入…"
+    },
+    {
+      "decoded": false,
+      "playing": false,
+      "scene": "board",
+      "status": "按需加载"
+    },
+    {
+      "decoded": false,
+      "playing": false,
+      "scene": "battle",
+      "status": "按需加载"
+    },
+    {
+      "decoded": false,
+      "playing": false,
+      "scene": "shop",
+      "status": "按需加载"
+    }
+  ],
+  [
+    {
+      "decoded": true,
+      "playing": true,
+      "scene": "title",
+      "status": "正在渐出…"
+    },
+    {
+      "decoded": true,
+      "playing": true,
+      "scene": "board",
+      "status": "正在渐入…"
+    },
+    {
+      "decoded": false,
+      "playing": false,
+      "scene": "battle",
+      "status": "按需加载"
+    },
+    {
+      "decoded": false,
+      "playing": false,
+      "scene": "shop",
+      "status": "按需加载"
+    }
+  ],
+  [
+    {
+      "decoded": true,
+      "playing": false,
+      "scene": "title",
+      "status": "已试听"
+    },
+    {
+      "decoded": true,
+      "playing": true,
+      "scene": "board",
+      "status": "正在渐出…"
+    },
+    {
+      "decoded": true,
+      "playing": true,
+      "scene": "battle",
+      "status": "正在渐入…"
+    },
+    {
+      "decoded": false,
+      "playing": false,
+      "scene": "shop",
+      "status": "按需加载"
+    }
+  ],
+  [
+    {
+      "decoded": true,
+      "playing": false,
+      "scene": "title",
+      "status": "已试听"
+    },
+    {
+      "decoded": true,
+      "playing": false,
+      "scene": "board",
+      "status": "已试听"
+    },
+    {
+      "decoded": true,
+      "playing": true,
+      "scene": "battle",
+      "status": "正在渐出…"
+    },
+    {
+      "decoded": true,
+      "playing": true,
+      "scene": "shop",
+      "status": "正在渐入…"
+    }
+  ]
+]

@@ -1,0 +1,92 @@
+[
+  [
+    {
+      "currentTime": 18.082538,
+      "duration": 30,
+      "error": null,
+      "paused": true,
+      "scene": "title"
+    },
+    {
+      "currentTime": 3.194091,
+      "duration": 30,
+      "error": null,
+      "paused": false,
+      "scene": "explore"
+    },
+    {
+      "currentTime": 0,
+      "duration": 30,
+      "error": null,
+      "paused": true,
+      "scene": "battle"
+    },
+    {
+      "currentTime": 0,
+      "duration": 30,
+      "error": null,
+      "paused": true,
+      "scene": "shop"
+    }
+  ],
+  [
+    {
+      "currentTime": 18.082538,
+      "duration": 30,
+      "error": null,
+      "paused": true,
+      "scene": "title"
+    },
+    {
+      "currentTime": 3.240416,
+      "duration": 30,
+      "error": null,
+      "paused": true,
+      "scene": "explore"
+    },
+    {
+      "currentTime": 0.184173,
+      "duration": 30,
+      "error": null,
+      "paused": false,
+      "scene": "battle"
+    },
+    {
+      "currentTime": 0,
+      "duration": 30,
+      "error": null,
+      "paused": true,
+      "scene": "shop"
+    }
+  ],
+  [
+    {
+      "currentTime": 18.082538,
+      "duration": 30,
+      "error": null,
+      "paused": true,
+      "scene": "title"
+    },
+    {
+      "currentTime": 3.240416,
+      "duration": 30,
+      "error": null,
+      "paused": true,
+      "scene": "explore"
+    },
+    {
+      "currentTime": 0.345549,
+      "duration": 30,
+      "error": null,
+      "paused": true,
+      "scene": "battle"
+    },
+    {
+      "currentTime": 0.08513,
+      "duration": 30,
+      "error": null,
+      "paused": false,
+      "scene": "shop"
+    }
+  ]
+]

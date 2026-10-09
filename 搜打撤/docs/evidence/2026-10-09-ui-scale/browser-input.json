@@ -1,0 +1,70 @@
+{
+  "actions": [
+    {
+      "detail": "竖屏真实点击进入城市并返回主菜单",
+      "type": "real-input"
+    },
+    {
+      "detail": "内置viewport核对16:9、4:3、宽屏及竖屏缩放",
+      "type": "static-inspection"
+    },
+    {
+      "detail": "恢复当前窗口后主页截图",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "id": "mStart"
+      },
+      "identity": "mStart",
+      "key": "start",
+      "rect": {
+        "height": 154.9250030517578,
+        "width": 716.7999877929688,
+        "x": 138.2375030517578,
+        "y": 637.9125366210938
+      },
+      "selector": "#mStart",
+      "styles": {
+        "font-size": "13.3333px",
+        "zoom": "1.31296"
+      },
+      "tag": "BUTTON",
+      "text": "\n            \n            进入城市\n            \n          "
+    }
+  ],
+  "observedAt": "2026-10-09T11:22:27.886Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 1418,
+      "width": 2560
+    }
+  },
+  "scene": "统一缩放主页",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-09-ui-scale/home.png"
+  ],
+  "selectors": [
+    {
+      "key": "start",
+      "selector": "#mStart"
+    }
+  ]
+}

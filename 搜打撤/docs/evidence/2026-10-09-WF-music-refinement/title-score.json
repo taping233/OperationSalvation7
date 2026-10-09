@@ -1,0 +1,518 @@
+{
+  "role": "title",
+  "title": "霜窗回声 · 暗流精修",
+  "bpm": 84,
+  "seconds": 30.0,
+  "parts": [
+    {
+      "name": "Piano original melody",
+      "note_count": 0,
+      "retained_melodic_recording": true,
+      "patch": 0,
+      "db": -25,
+      "pan": -0.07,
+      "bank": 0,
+      "wet": 0.6,
+      "hz": 7200
+    },
+    {
+      "name": "Piano open support",
+      "note_count": 21,
+      "retained_melodic_recording": false,
+      "patch": 0,
+      "db": -35,
+      "pan": 0.18,
+      "bank": 0,
+      "wet": 0.4,
+      "hz": 6500
+    },
+    {
+      "name": "Cello undercurrent",
+      "note_count": 21,
+      "retained_melodic_recording": false,
+      "patch": 42,
+      "db": -34,
+      "pan": -0.23,
+      "bank": 0,
+      "wet": 0.5,
+      "hz": 4100
+    },
+    {
+      "name": "Suspended viola",
+      "note_count": 9,
+      "retained_melodic_recording": false,
+      "patch": 41,
+      "db": -37,
+      "pan": 0.25,
+      "bank": 0,
+      "wet": 0.6,
+      "hz": 4800
+    },
+    {
+      "name": "Quiet electric colour",
+      "note_count": 6,
+      "retained_melodic_recording": false,
+      "patch": 4,
+      "db": -40,
+      "pan": 0.32,
+      "bank": 0,
+      "wet": 0.65,
+      "hz": 4500
+    },
+    {
+      "name": "Harp punctuation",
+      "note_count": 3,
+      "retained_melodic_recording": false,
+      "patch": 46,
+      "db": -43,
+      "pan": -0.36,
+      "bank": 0,
+      "wet": 0.65,
+      "hz": 6500
+    }
+  ],
+  "notes": [
+    {
+      "part": "Piano open support",
+      "beat": 0,
+      "key": 48,
+      "duration": 3.5,
+      "velocity": 38
+    },
+    {
+      "part": "Piano open support",
+      "beat": 2.14474,
+      "key": 55,
+      "duration": 3.6,
+      "velocity": 30
+    },
+    {
+      "part": "Piano open support",
+      "beat": 4.09855,
+      "key": 60,
+      "duration": 3.3,
+      "velocity": 33
+    },
+    {
+      "part": "Piano open support",
+      "beat": 6.19738,
+      "key": 63,
+      "duration": 2.3,
+      "velocity": 28
+    },
+    {
+      "part": "Quiet electric colour",
+      "beat": 0.54699,
+      "key": 63,
+      "duration": 7.2,
+      "velocity": 27
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 0.07529,
+      "key": 48,
+      "duration": 2.05,
+      "velocity": 38
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 2.08105,
+      "key": 47,
+      "duration": 2.05,
+      "velocity": 33
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 4.08349,
+      "key": 46,
+      "duration": 2.05,
+      "velocity": 33
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 6.07467,
+      "key": 44,
+      "duration": 2.05,
+      "velocity": 33
+    },
+    {
+      "part": "Harp punctuation",
+      "beat": 6.50616,
+      "key": 74,
+      "duration": 2.1,
+      "velocity": 27
+    },
+    {
+      "part": "Piano open support",
+      "beat": 7.99082,
+      "key": 44,
+      "duration": 3.5,
+      "velocity": 38
+    },
+    {
+      "part": "Piano open support",
+      "beat": 10.14707,
+      "key": 55,
+      "duration": 3.6,
+      "velocity": 30
+    },
+    {
+      "part": "Piano open support",
+      "beat": 12.0956,
+      "key": 56,
+      "duration": 3.3,
+      "velocity": 33
+    },
+    {
+      "part": "Piano open support",
+      "beat": 14.19941,
+      "key": 60,
+      "duration": 2.3,
+      "velocity": 28
+    },
+    {
+      "part": "Quiet electric colour",
+      "beat": 8.55864,
+      "key": 60,
+      "duration": 7.2,
+      "velocity": 27
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 8.08102,
+      "key": 44,
+      "duration": 2.05,
+      "velocity": 38
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 10.08957,
+      "key": 43,
+      "duration": 2.05,
+      "velocity": 33
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 12.08918,
+      "key": 41,
+      "duration": 2.05,
+      "velocity": 33
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 14.08598,
+      "key": 40,
+      "duration": 2.05,
+      "velocity": 33
+    },
+    {
+      "part": "Suspended viola",
+      "beat": 8.99525,
+      "key": 48,
+      "duration": 3.1,
+      "velocity": 32
+    },
+    {
+      "part": "Suspended viola",
+      "beat": 12.69563,
+      "key": 55,
+      "duration": 3.0,
+      "velocity": 32
+    },
+    {
+      "part": "Piano open support",
+      "beat": 15.99143,
+      "key": 41,
+      "duration": 3.5,
+      "velocity": 38
+    },
+    {
+      "part": "Piano open support",
+      "beat": 18.15403,
+      "key": 48,
+      "duration": 3.6,
+      "velocity": 30
+    },
+    {
+      "part": "Piano open support",
+      "beat": 20.09347,
+      "key": 53,
+      "duration": 3.3,
+      "velocity": 33
+    },
+    {
+      "part": "Piano open support",
+      "beat": 22.19596,
+      "key": 56,
+      "duration": 2.3,
+      "velocity": 28
+    },
+    {
+      "part": "Quiet electric colour",
+      "beat": 16.55472,
+      "key": 56,
+      "duration": 7.2,
+      "velocity": 27
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 16.07616,
+      "key": 41,
+      "duration": 2.05,
+      "velocity": 38
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 18.07138,
+      "key": 43,
+      "duration": 2.05,
+      "velocity": 33
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 20.08334,
+      "key": 44,
+      "duration": 2.05,
+      "velocity": 33
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 22.0868,
+      "key": 46,
+      "duration": 2.05,
+      "velocity": 33
+    },
+    {
+      "part": "Harp punctuation",
+      "beat": 22.49621,
+      "key": 67,
+      "duration": 2.1,
+      "velocity": 27
+    },
+    {
+      "part": "Piano open support",
+      "beat": 23.99822,
+      "key": 43,
+      "duration": 3.5,
+      "velocity": 38
+    },
+    {
+      "part": "Piano open support",
+      "beat": 26.15627,
+      "key": 50,
+      "duration": 3.6,
+      "velocity": 30
+    },
+    {
+      "part": "Piano open support",
+      "beat": 28.10928,
+      "key": 55,
+      "duration": 3.3,
+      "velocity": 33
+    },
+    {
+      "part": "Piano open support",
+      "beat": 30.20645,
+      "key": 60,
+      "duration": 2.3,
+      "velocity": 28
+    },
+    {
+      "part": "Quiet electric colour",
+      "beat": 24.54546,
+      "key": 60,
+      "duration": 7.2,
+      "velocity": 27
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 24.08003,
+      "key": 43,
+      "duration": 2.05,
+      "velocity": 38
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 26.07391,
+      "key": 50,
+      "duration": 2.05,
+      "velocity": 33
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 28.07065,
+      "key": 53,
+      "duration": 2.05,
+      "velocity": 33
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 30.08193,
+      "key": 47,
+      "duration": 2.05,
+      "velocity": 33
+    },
+    {
+      "part": "Suspended viola",
+      "beat": 25.00145,
+      "key": 48,
+      "duration": 3.1,
+      "velocity": 32
+    },
+    {
+      "part": "Suspended viola",
+      "beat": 28.70876,
+      "key": 50,
+      "duration": 3.0,
+      "velocity": 32
+    },
+    {
+      "part": "Piano open support",
+      "beat": 32.00833,
+      "key": 48,
+      "duration": 3.5,
+      "velocity": 38
+    },
+    {
+      "part": "Piano open support",
+      "beat": 34.14689,
+      "key": 55,
+      "duration": 3.6,
+      "velocity": 30
+    },
+    {
+      "part": "Piano open support",
+      "beat": 36.10527,
+      "key": 60,
+      "duration": 3.3,
+      "velocity": 33
+    },
+    {
+      "part": "Piano open support",
+      "beat": 38.20349,
+      "key": 63,
+      "duration": 2.3,
+      "velocity": 28
+    },
+    {
+      "part": "Quiet electric colour",
+      "beat": 32.54122,
+      "key": 63,
+      "duration": 7.2,
+      "velocity": 27
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 32.07607,
+      "key": 48,
+      "duration": 2.05,
+      "velocity": 38
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 34.0861,
+      "key": 46,
+      "duration": 2.05,
+      "velocity": 33
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 36.08187,
+      "key": 44,
+      "duration": 2.05,
+      "velocity": 33
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 38.07572,
+      "key": 43,
+      "duration": 2.05,
+      "velocity": 33
+    },
+    {
+      "part": "Suspended viola",
+      "beat": 32.9981,
+      "key": 51,
+      "duration": 3.1,
+      "velocity": 32
+    },
+    {
+      "part": "Suspended viola",
+      "beat": 36.69751,
+      "key": 55,
+      "duration": 3.0,
+      "velocity": 32
+    },
+    {
+      "part": "Harp punctuation",
+      "beat": 38.49903,
+      "key": 74,
+      "duration": 2.1,
+      "velocity": 27
+    },
+    {
+      "part": "Piano open support",
+      "beat": 39.99209,
+      "key": 48,
+      "duration": 2.5,
+      "velocity": 38
+    },
+    {
+      "part": "Quiet electric colour",
+      "beat": 40.5404,
+      "key": 60,
+      "duration": 1.9500000000000028,
+      "velocity": 27
+    },
+    {
+      "part": "Cello undercurrent",
+      "beat": 40.07025,
+      "key": 48,
+      "duration": 2.05,
+      "velocity": 38
+    },
+    {
+      "part": "Suspended viola",
+      "beat": 27.40882,
+      "key": 60,
+      "duration": 3.0,
+      "velocity": 35
+    },
+    {
+      "part": "Suspended viola",
+      "beat": 30.55964,
+      "key": 59,
+      "duration": 1.3,
+      "velocity": 32
+    },
+    {
+      "part": "Suspended viola",
+      "beat": 32.05784,
+      "key": 60,
+      "duration": 5.8,
+      "velocity": 31
+    }
+  ],
+  "shapes": {},
+  "source": [
+    {
+      "path": ".tmp/music-workstation/piano-two-hands/01-title-frostglass-v10-Piano-right-hand.wav",
+      "bytes": 35108656,
+      "sha256": "14dbdf6f3eeece75371d975330ab8d21086133362eb422ee7f03be4156c2cd4f"
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-09-WF-music-refinement/title-refined-30s.wav",
+      "bytes": 8640044,
+      "sha256": "d80550c64d4310603c857d5b8a2b4ebd74938b75e2fd8843808b9442d0be9e13"
+    },
+    {
+      "path": "docs/evidence/2026-10-09-WF-music-refinement/title-refined-30s.mp3",
+      "bytes": 961620,
+      "sha256": "5e1ce2218ee2a8384b2743d790a4ae36b8bd2fdeeb1af8e4a8b3308b3f52ad23"
+    }
+  ],
+  "peak_dbfs": -6.760588697705879,
+  "rms_dbfs": -21.536919188709206
+}

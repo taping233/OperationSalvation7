@@ -1,0 +1,37 @@
+{
+  "reference": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\wu.webp",
+  "reference_sha256": "a7c5d4e2242558337f5f5a8b8df71cda875af73586ec70657b45836f01466c6c",
+  "method": "内置 image_gen 制作三份插画；Pillow/SVG 后台排版，素材只等比缩放不裁切",
+  "outputs": [
+    {
+      "file": "01-衣装细节.png",
+      "bytes": 1675390,
+      "sha256": "78b018f194686ae186780985b1cde7700bd1149ae6d9316c386910a072c2d582"
+    },
+    {
+      "file": "02-人物近景.png",
+      "bytes": 1879478,
+      "sha256": "e65a46495cf6c9b6c562be49b7e6ef9a91a5c1aa2976a7e0b949bfd4fcb5c985"
+    },
+    {
+      "file": "03-武器细节.png",
+      "bytes": 1612499,
+      "sha256": "2c15b3d13447a6890b1d67d407737671803f14600ec5f15e3a36f4a12b8d4ae9"
+    },
+    {
+      "file": "三栏宣传概念图-v3.png",
+      "bytes": 1023709,
+      "sha256": "784f7d13773620ddb42ffba57f603028a0d3c11a962ff821a57882abb17417b4"
+    },
+    {
+      "file": "三栏宣传概念图-v3.svg",
+      "bytes": 1270481,
+      "sha256": "df926753922647b3189f18aa964ac234bd60f4411a56c642dc625e0940c90976"
+    },
+    {
+      "file": "缩略检查.png",
+      "bytes": 213112,
+      "sha256": "7a05e8db062ada6b7a5442d7267bb80b7e3a910b425091baec21666dd123e735"
+    }
+  ]
+}

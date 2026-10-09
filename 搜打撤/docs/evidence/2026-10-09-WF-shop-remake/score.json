@@ -1,0 +1,1428 @@
+{
+  "title": "灯下交易",
+  "bpm": 96,
+  "meter": "4/4",
+  "bars": 12,
+  "chords": [
+    "Cm6/9",
+    "Cm6/9",
+    "Db9#11",
+    "G7b9",
+    "Fm9",
+    "Bb13",
+    "Ebmaj9",
+    "G7alt",
+    "Cm6/9",
+    "Abmaj9",
+    "Dm7b5/G",
+    "G7b9 - Cm6/9"
+  ],
+  "events": [
+    {
+      "track": "upright-bass",
+      "beat": 0.0,
+      "key": 36,
+      "length": 0.82,
+      "velocity": 66
+    },
+    {
+      "track": "upright-bass",
+      "beat": 1.012,
+      "key": 43,
+      "length": 0.82,
+      "velocity": 49
+    },
+    {
+      "track": "upright-bass",
+      "beat": 2.0,
+      "key": 48,
+      "length": 0.82,
+      "velocity": 57
+    },
+    {
+      "track": "upright-bass",
+      "beat": 3.012,
+      "key": 35,
+      "length": 0.82,
+      "velocity": 44
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 0.62,
+      "key": 51,
+      "length": 0.6,
+      "velocity": 40
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 0.638,
+      "key": 57,
+      "length": 0.6,
+      "velocity": 41
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 0.656,
+      "key": 62,
+      "length": 0.6,
+      "velocity": 42
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 2.62,
+      "key": 51,
+      "length": 0.6,
+      "velocity": 36
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 2.638,
+      "key": 57,
+      "length": 0.6,
+      "velocity": 37
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 2.656,
+      "key": 62,
+      "length": 0.6,
+      "velocity": 38
+    },
+    {
+      "track": "upright-bass",
+      "beat": 4.0,
+      "key": 36,
+      "length": 0.82,
+      "velocity": 66
+    },
+    {
+      "track": "upright-bass",
+      "beat": 5.012,
+      "key": 43,
+      "length": 0.82,
+      "velocity": 49
+    },
+    {
+      "track": "upright-bass",
+      "beat": 6.0,
+      "key": 48,
+      "length": 0.82,
+      "velocity": 57
+    },
+    {
+      "track": "upright-bass",
+      "beat": 7.012,
+      "key": 36,
+      "length": 0.82,
+      "velocity": 44
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 4.62,
+      "key": 51,
+      "length": 0.6,
+      "velocity": 40
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 4.638,
+      "key": 57,
+      "length": 0.6,
+      "velocity": 41
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 4.656,
+      "key": 62,
+      "length": 0.6,
+      "velocity": 42
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 6.62,
+      "key": 51,
+      "length": 0.6,
+      "velocity": 36
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 6.638,
+      "key": 57,
+      "length": 0.6,
+      "velocity": 37
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 6.656,
+      "key": 62,
+      "length": 0.6,
+      "velocity": 38
+    },
+    {
+      "track": "upright-bass",
+      "beat": 8.0,
+      "key": 37,
+      "length": 0.82,
+      "velocity": 66
+    },
+    {
+      "track": "upright-bass",
+      "beat": 9.012,
+      "key": 44,
+      "length": 0.82,
+      "velocity": 49
+    },
+    {
+      "track": "upright-bass",
+      "beat": 10.0,
+      "key": 49,
+      "length": 0.82,
+      "velocity": 57
+    },
+    {
+      "track": "upright-bass",
+      "beat": 11.012,
+      "key": 32,
+      "length": 0.82,
+      "velocity": 44
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 8.62,
+      "key": 53,
+      "length": 0.6,
+      "velocity": 40
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 8.638,
+      "key": 59,
+      "length": 0.6,
+      "velocity": 41
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 8.656,
+      "key": 63,
+      "length": 0.6,
+      "velocity": 42
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 10.62,
+      "key": 53,
+      "length": 0.6,
+      "velocity": 36
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 10.638,
+      "key": 59,
+      "length": 0.6,
+      "velocity": 37
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 10.656,
+      "key": 63,
+      "length": 0.6,
+      "velocity": 38
+    },
+    {
+      "track": "upright-bass",
+      "beat": 12.0,
+      "key": 31,
+      "length": 0.82,
+      "velocity": 66
+    },
+    {
+      "track": "upright-bass",
+      "beat": 13.012,
+      "key": 38,
+      "length": 0.82,
+      "velocity": 49
+    },
+    {
+      "track": "upright-bass",
+      "beat": 14.0,
+      "key": 41,
+      "length": 0.82,
+      "velocity": 57
+    },
+    {
+      "track": "upright-bass",
+      "beat": 15.012,
+      "key": 42,
+      "length": 0.82,
+      "velocity": 44
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 12.62,
+      "key": 53,
+      "length": 0.6,
+      "velocity": 40
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 12.638,
+      "key": 59,
+      "length": 0.6,
+      "velocity": 41
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 12.656,
+      "key": 62,
+      "length": 0.6,
+      "velocity": 42
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 14.62,
+      "key": 53,
+      "length": 0.6,
+      "velocity": 36
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 14.638,
+      "key": 59,
+      "length": 0.6,
+      "velocity": 37
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 14.656,
+      "key": 62,
+      "length": 0.6,
+      "velocity": 38
+    },
+    {
+      "track": "upright-bass",
+      "beat": 16.0,
+      "key": 29,
+      "length": 0.82,
+      "velocity": 66
+    },
+    {
+      "track": "upright-bass",
+      "beat": 17.012,
+      "key": 36,
+      "length": 0.82,
+      "velocity": 49
+    },
+    {
+      "track": "upright-bass",
+      "beat": 18.0,
+      "key": 41,
+      "length": 0.82,
+      "velocity": 57
+    },
+    {
+      "track": "upright-bass",
+      "beat": 19.012,
+      "key": 33,
+      "length": 0.82,
+      "velocity": 44
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 16.62,
+      "key": 51,
+      "length": 0.6,
+      "velocity": 40
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 16.638,
+      "key": 55,
+      "length": 0.6,
+      "velocity": 41
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 16.656,
+      "key": 56,
+      "length": 0.6,
+      "velocity": 42
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 18.62,
+      "key": 51,
+      "length": 0.6,
+      "velocity": 36
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 18.638,
+      "key": 55,
+      "length": 0.6,
+      "velocity": 37
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 18.656,
+      "key": 56,
+      "length": 0.6,
+      "velocity": 38
+    },
+    {
+      "track": "piano-hook",
+      "beat": 16.16,
+      "key": 55,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 16.185,
+      "key": 56,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 16.21,
+      "key": 60,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 18.55,
+      "key": 55,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 18.575,
+      "key": 56,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 18.6,
+      "key": 60,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "upright-bass",
+      "beat": 20.0,
+      "key": 34,
+      "length": 0.82,
+      "velocity": 66
+    },
+    {
+      "track": "upright-bass",
+      "beat": 21.012,
+      "key": 41,
+      "length": 0.82,
+      "velocity": 49
+    },
+    {
+      "track": "upright-bass",
+      "beat": 22.0,
+      "key": 46,
+      "length": 0.82,
+      "velocity": 57
+    },
+    {
+      "track": "upright-bass",
+      "beat": 23.012,
+      "key": 38,
+      "length": 0.82,
+      "velocity": 44
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 20.62,
+      "key": 50,
+      "length": 0.6,
+      "velocity": 40
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 20.638,
+      "key": 56,
+      "length": 0.6,
+      "velocity": 41
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 20.656,
+      "key": 60,
+      "length": 0.6,
+      "velocity": 42
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 22.62,
+      "key": 50,
+      "length": 0.6,
+      "velocity": 36
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 22.638,
+      "key": 56,
+      "length": 0.6,
+      "velocity": 37
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 22.656,
+      "key": 60,
+      "length": 0.6,
+      "velocity": 38
+    },
+    {
+      "track": "piano-hook",
+      "beat": 20.16,
+      "key": 56,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 20.185,
+      "key": 60,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 20.21,
+      "key": 67,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 22.55,
+      "key": 56,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 22.575,
+      "key": 60,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 22.6,
+      "key": 67,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "upright-bass",
+      "beat": 24.0,
+      "key": 39,
+      "length": 0.82,
+      "velocity": 66
+    },
+    {
+      "track": "upright-bass",
+      "beat": 25.012,
+      "key": 46,
+      "length": 0.82,
+      "velocity": 49
+    },
+    {
+      "track": "upright-bass",
+      "beat": 26.0,
+      "key": 51,
+      "length": 0.82,
+      "velocity": 57
+    },
+    {
+      "track": "upright-bass",
+      "beat": 27.012,
+      "key": 32,
+      "length": 0.82,
+      "velocity": 44
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 24.62,
+      "key": 50,
+      "length": 0.6,
+      "velocity": 40
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 24.638,
+      "key": 55,
+      "length": 0.6,
+      "velocity": 41
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 24.656,
+      "key": 58,
+      "length": 0.6,
+      "velocity": 42
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 26.62,
+      "key": 50,
+      "length": 0.6,
+      "velocity": 36
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 26.638,
+      "key": 55,
+      "length": 0.6,
+      "velocity": 37
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 26.656,
+      "key": 58,
+      "length": 0.6,
+      "velocity": 38
+    },
+    {
+      "track": "piano-hook",
+      "beat": 24.16,
+      "key": 55,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 24.185,
+      "key": 58,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 24.21,
+      "key": 65,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 26.55,
+      "key": 55,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 26.575,
+      "key": 58,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 26.6,
+      "key": 65,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "upright-bass",
+      "beat": 28.0,
+      "key": 31,
+      "length": 0.82,
+      "velocity": 66
+    },
+    {
+      "track": "upright-bass",
+      "beat": 29.012,
+      "key": 38,
+      "length": 0.82,
+      "velocity": 49
+    },
+    {
+      "track": "upright-bass",
+      "beat": 30.0,
+      "key": 41,
+      "length": 0.82,
+      "velocity": 57
+    },
+    {
+      "track": "upright-bass",
+      "beat": 31.012,
+      "key": 42,
+      "length": 0.82,
+      "velocity": 44
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 28.62,
+      "key": 53,
+      "length": 0.6,
+      "velocity": 40
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 28.638,
+      "key": 59,
+      "length": 0.6,
+      "velocity": 41
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 28.656,
+      "key": 63,
+      "length": 0.6,
+      "velocity": 42
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 30.62,
+      "key": 53,
+      "length": 0.6,
+      "velocity": 36
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 30.638,
+      "key": 59,
+      "length": 0.6,
+      "velocity": 37
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 30.656,
+      "key": 63,
+      "length": 0.6,
+      "velocity": 38
+    },
+    {
+      "track": "piano-hook",
+      "beat": 28.16,
+      "key": 59,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 28.185,
+      "key": 63,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 28.21,
+      "key": 68,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 30.55,
+      "key": 59,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 30.575,
+      "key": 63,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "piano-hook",
+      "beat": 30.6,
+      "key": 68,
+      "length": 0.68,
+      "velocity": 34
+    },
+    {
+      "track": "upright-bass",
+      "beat": 32.0,
+      "key": 36,
+      "length": 0.82,
+      "velocity": 66
+    },
+    {
+      "track": "upright-bass",
+      "beat": 33.012,
+      "key": 43,
+      "length": 0.82,
+      "velocity": 49
+    },
+    {
+      "track": "upright-bass",
+      "beat": 34.0,
+      "key": 48,
+      "length": 0.82,
+      "velocity": 57
+    },
+    {
+      "track": "upright-bass",
+      "beat": 35.012,
+      "key": 33,
+      "length": 0.82,
+      "velocity": 44
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 32.62,
+      "key": 51,
+      "length": 0.6,
+      "velocity": 40
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 32.638,
+      "key": 57,
+      "length": 0.6,
+      "velocity": 41
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 32.656,
+      "key": 62,
+      "length": 0.6,
+      "velocity": 42
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 34.62,
+      "key": 51,
+      "length": 0.6,
+      "velocity": 36
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 34.638,
+      "key": 57,
+      "length": 0.6,
+      "velocity": 37
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 34.656,
+      "key": 62,
+      "length": 0.6,
+      "velocity": 38
+    },
+    {
+      "track": "upright-bass",
+      "beat": 36.0,
+      "key": 32,
+      "length": 0.82,
+      "velocity": 66
+    },
+    {
+      "track": "upright-bass",
+      "beat": 37.012,
+      "key": 39,
+      "length": 0.82,
+      "velocity": 49
+    },
+    {
+      "track": "upright-bass",
+      "beat": 38.0,
+      "key": 44,
+      "length": 0.82,
+      "velocity": 57
+    },
+    {
+      "track": "upright-bass",
+      "beat": 39.012,
+      "key": 32,
+      "length": 0.82,
+      "velocity": 44
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 36.62,
+      "key": 55,
+      "length": 0.6,
+      "velocity": 40
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 36.638,
+      "key": 58,
+      "length": 0.6,
+      "velocity": 41
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 36.656,
+      "key": 60,
+      "length": 0.6,
+      "velocity": 42
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 38.62,
+      "key": 55,
+      "length": 0.6,
+      "velocity": 36
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 38.638,
+      "key": 58,
+      "length": 0.6,
+      "velocity": 37
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 38.656,
+      "key": 60,
+      "length": 0.6,
+      "velocity": 38
+    },
+    {
+      "track": "upright-bass",
+      "beat": 40.0,
+      "key": 31,
+      "length": 0.82,
+      "velocity": 66
+    },
+    {
+      "track": "upright-bass",
+      "beat": 41.012,
+      "key": 38,
+      "length": 0.82,
+      "velocity": 49
+    },
+    {
+      "track": "upright-bass",
+      "beat": 42.0,
+      "key": 43,
+      "length": 0.82,
+      "velocity": 57
+    },
+    {
+      "track": "upright-bass",
+      "beat": 43.012,
+      "key": 30,
+      "length": 0.82,
+      "velocity": 44
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 40.62,
+      "key": 53,
+      "length": 0.6,
+      "velocity": 40
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 40.638,
+      "key": 56,
+      "length": 0.6,
+      "velocity": 41
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 40.656,
+      "key": 60,
+      "length": 0.6,
+      "velocity": 42
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 42.62,
+      "key": 53,
+      "length": 0.6,
+      "velocity": 36
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 42.638,
+      "key": 56,
+      "length": 0.6,
+      "velocity": 37
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 42.656,
+      "key": 60,
+      "length": 0.6,
+      "velocity": 38
+    },
+    {
+      "track": "upright-bass",
+      "beat": 44.0,
+      "key": 31,
+      "length": 0.82,
+      "velocity": 66
+    },
+    {
+      "track": "upright-bass",
+      "beat": 45.012,
+      "key": 38,
+      "length": 0.82,
+      "velocity": 49
+    },
+    {
+      "track": "upright-bass",
+      "beat": 46.0,
+      "key": 43,
+      "length": 0.82,
+      "velocity": 57
+    },
+    {
+      "track": "upright-bass",
+      "beat": 47.012,
+      "key": 35,
+      "length": 0.82,
+      "velocity": 44
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 44.62,
+      "key": 53,
+      "length": 0.6,
+      "velocity": 40
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 44.638,
+      "key": 59,
+      "length": 0.6,
+      "velocity": 41
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 44.656,
+      "key": 62,
+      "length": 0.6,
+      "velocity": 42
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 46.62,
+      "key": 53,
+      "length": 0.6,
+      "velocity": 36
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 46.638,
+      "key": 59,
+      "length": 0.6,
+      "velocity": 37
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 46.656,
+      "key": 62,
+      "length": 0.6,
+      "velocity": 38
+    },
+    {
+      "track": "piano-hook",
+      "beat": 0.15,
+      "key": 67,
+      "length": 0.4,
+      "velocity": 72
+    },
+    {
+      "track": "piano-hook",
+      "beat": 0.63,
+      "key": 69,
+      "length": 0.24,
+      "velocity": 54
+    },
+    {
+      "track": "piano-hook",
+      "beat": 1.15,
+      "key": 70,
+      "length": 0.64,
+      "velocity": 69
+    },
+    {
+      "track": "piano-hook",
+      "beat": 2.65,
+      "key": 62,
+      "length": 0.44,
+      "velocity": 62
+    },
+    {
+      "track": "piano-hook",
+      "beat": 3.2,
+      "key": 63,
+      "length": 0.54,
+      "velocity": 64
+    },
+    {
+      "track": "piano-hook",
+      "beat": 4.25,
+      "key": 67,
+      "length": 0.61,
+      "velocity": 68
+    },
+    {
+      "track": "piano-hook",
+      "beat": 5.65,
+      "key": 62,
+      "length": 0.4,
+      "velocity": 57
+    },
+    {
+      "track": "piano-hook",
+      "beat": 6.25,
+      "key": 60,
+      "length": 1.1,
+      "velocity": 65
+    },
+    {
+      "track": "piano-hook",
+      "beat": 8.15,
+      "key": 68,
+      "length": 0.43,
+      "velocity": 69
+    },
+    {
+      "track": "piano-hook",
+      "beat": 8.65,
+      "key": 67,
+      "length": 0.29,
+      "velocity": 53
+    },
+    {
+      "track": "piano-hook",
+      "beat": 9.2,
+      "key": 65,
+      "length": 0.73,
+      "velocity": 65
+    },
+    {
+      "track": "piano-hook",
+      "beat": 10.7,
+      "key": 63,
+      "length": 0.6,
+      "velocity": 60
+    },
+    {
+      "track": "piano-hook",
+      "beat": 12.2,
+      "key": 62,
+      "length": 0.5,
+      "velocity": 67
+    },
+    {
+      "track": "piano-hook",
+      "beat": 13.15,
+      "key": 59,
+      "length": 0.6,
+      "velocity": 60
+    },
+    {
+      "track": "piano-hook",
+      "beat": 14.65,
+      "key": 60,
+      "length": 0.73,
+      "velocity": 62
+    },
+    {
+      "track": "piano-hook",
+      "beat": 32.15,
+      "key": 67,
+      "length": 0.4,
+      "velocity": 72
+    },
+    {
+      "track": "piano-hook",
+      "beat": 32.63,
+      "key": 69,
+      "length": 0.24,
+      "velocity": 54
+    },
+    {
+      "track": "piano-hook",
+      "beat": 33.15,
+      "key": 70,
+      "length": 0.64,
+      "velocity": 69
+    },
+    {
+      "track": "piano-hook",
+      "beat": 34.65,
+      "key": 62,
+      "length": 0.3,
+      "velocity": 60
+    },
+    {
+      "track": "piano-hook",
+      "beat": 35.12,
+      "key": 63,
+      "length": 0.24,
+      "velocity": 59
+    },
+    {
+      "track": "piano-hook",
+      "beat": 35.65,
+      "key": 67,
+      "length": 0.32,
+      "velocity": 64
+    },
+    {
+      "track": "piano-hook",
+      "beat": 36.25,
+      "key": 70,
+      "length": 0.56,
+      "velocity": 68
+    },
+    {
+      "track": "piano-hook",
+      "beat": 37.65,
+      "key": 67,
+      "length": 0.39,
+      "velocity": 57
+    },
+    {
+      "track": "piano-hook",
+      "beat": 38.25,
+      "key": 63,
+      "length": 1.18,
+      "velocity": 65
+    },
+    {
+      "track": "piano-hook",
+      "beat": 40.2,
+      "key": 65,
+      "length": 0.5,
+      "velocity": 68
+    },
+    {
+      "track": "piano-hook",
+      "beat": 41.15,
+      "key": 62,
+      "length": 0.61,
+      "velocity": 60
+    },
+    {
+      "track": "piano-hook",
+      "beat": 42.65,
+      "key": 60,
+      "length": 0.45,
+      "velocity": 62
+    },
+    {
+      "track": "piano-hook",
+      "beat": 43.22,
+      "key": 62,
+      "length": 0.46,
+      "velocity": 58
+    },
+    {
+      "track": "piano-hook",
+      "beat": 44.2,
+      "key": 59,
+      "length": 0.53,
+      "velocity": 65
+    },
+    {
+      "track": "piano-hook",
+      "beat": 45.15,
+      "key": 62,
+      "length": 0.55,
+      "velocity": 59
+    },
+    {
+      "track": "piano-hook",
+      "beat": 46.25,
+      "key": 60,
+      "length": 1.7,
+      "velocity": 65
+    },
+    {
+      "track": "muted-horn",
+      "beat": 7.35,
+      "key": 63,
+      "length": 0.46,
+      "velocity": 43
+    },
+    {
+      "track": "muted-horn",
+      "beat": 15.1,
+      "key": 59,
+      "length": 0.66,
+      "velocity": 44
+    },
+    {
+      "track": "muted-horn",
+      "beat": 16.3,
+      "key": 68,
+      "length": 0.68,
+      "velocity": 53
+    },
+    {
+      "track": "muted-horn",
+      "beat": 17.65,
+      "key": 67,
+      "length": 0.55,
+      "velocity": 47
+    },
+    {
+      "track": "muted-horn",
+      "beat": 18.7,
+      "key": 65,
+      "length": 0.92,
+      "velocity": 51
+    },
+    {
+      "track": "muted-horn",
+      "beat": 20.25,
+      "key": 62,
+      "length": 0.73,
+      "velocity": 53
+    },
+    {
+      "track": "muted-horn",
+      "beat": 21.6,
+      "key": 60,
+      "length": 0.42,
+      "velocity": 46
+    },
+    {
+      "track": "muted-horn",
+      "beat": 22.65,
+      "key": 67,
+      "length": 0.94,
+      "velocity": 54
+    },
+    {
+      "track": "muted-horn",
+      "beat": 24.3,
+      "key": 65,
+      "length": 1.09,
+      "velocity": 52
+    },
+    {
+      "track": "muted-horn",
+      "beat": 25.7,
+      "key": 62,
+      "length": 0.63,
+      "velocity": 46
+    },
+    {
+      "track": "muted-horn",
+      "beat": 26.8,
+      "key": 58,
+      "length": 0.92,
+      "velocity": 49
+    },
+    {
+      "track": "muted-horn",
+      "beat": 28.25,
+      "key": 63,
+      "length": 0.53,
+      "velocity": 54
+    },
+    {
+      "track": "muted-horn",
+      "beat": 29.15,
+      "key": 62,
+      "length": 0.57,
+      "velocity": 49
+    },
+    {
+      "track": "muted-horn",
+      "beat": 30.6,
+      "key": 59,
+      "length": 1.1,
+      "velocity": 52
+    },
+    {
+      "track": "muted-horn",
+      "beat": 39.25,
+      "key": 60,
+      "length": 0.54,
+      "velocity": 43
+    },
+    {
+      "track": "vibraphone",
+      "beat": 6.6,
+      "key": 79,
+      "length": 1.15,
+      "velocity": 31
+    },
+    {
+      "track": "vibraphone",
+      "beat": 14.65,
+      "key": 74,
+      "length": 1.15,
+      "velocity": 31
+    },
+    {
+      "track": "vibraphone",
+      "beat": 30.8,
+      "key": 80,
+      "length": 1.15,
+      "velocity": 31
+    },
+    {
+      "track": "vibraphone",
+      "beat": 38.75,
+      "key": 75,
+      "length": 1.15,
+      "velocity": 31
+    },
+    {
+      "track": "vibraphone",
+      "beat": 46.5,
+      "key": 79,
+      "length": 1.15,
+      "velocity": 31
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 46.1,
+      "key": 51,
+      "length": 2.5,
+      "velocity": 37
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 46.1,
+      "key": 57,
+      "length": 2.5,
+      "velocity": 37
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 46.1,
+      "key": 62,
+      "length": 2.5,
+      "velocity": 37
+    },
+    {
+      "track": "jazz-guitar",
+      "beat": 46.1,
+      "key": 67,
+      "length": 2.5,
+      "velocity": 37
+    },
+    {
+      "track": "upright-bass",
+      "beat": 46.05,
+      "key": 36,
+      "length": 2.0,
+      "velocity": 57
+    }
+  ],
+  "sections": {
+    "0-10s": "piano hook",
+    "10-20s": "muted horn reply, piano moves to support",
+    "20-30s": "varied hook return and cadence"
+  },
+  "reference": "商人坎诺特 official MSR song 880369; atmospheric reference only, no samples or imported notes"
+}

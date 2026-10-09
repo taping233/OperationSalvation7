@@ -1,0 +1,132 @@
+{
+  "recordedAt": "2026-10-09T05:07:01.017Z",
+  "ok": true,
+  "checks": [
+    {
+      "name": "原迁移集合与稳定 id 保持",
+      "passed": true,
+      "detail": {
+        "targetCount": 150
+      }
+    },
+    {
+      "name": "五角色元数据与参考副本",
+      "passed": true,
+      "detail": [
+        {
+          "id": "wu",
+          "metadata": true,
+          "referenceMatchesRuntime": true
+        },
+        {
+          "id": "changwuyu",
+          "metadata": true,
+          "referenceMatchesRuntime": true
+        },
+        {
+          "id": "baita",
+          "metadata": true,
+          "referenceMatchesRuntime": true
+        },
+        {
+          "id": "heixiang",
+          "metadata": true,
+          "referenceMatchesRuntime": true
+        },
+        {
+          "id": "xingyue",
+          "metadata": true,
+          "referenceMatchesRuntime": true
+        }
+      ]
+    },
+    {
+      "name": "他会话美术简报原文保留",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "当前方向与历史配方分层",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "立绘尺寸与文档对应",
+      "passed": true,
+      "detail": [
+        {
+          "id": "wu",
+          "width": 1024,
+          "height": 1536
+        },
+        {
+          "id": "changwuyu",
+          "width": 2560,
+          "height": 1440
+        },
+        {
+          "id": "baita",
+          "width": 2560,
+          "height": 1440
+        },
+        {
+          "id": "heixiang",
+          "width": 2560,
+          "height": 1440
+        },
+        {
+          "id": "xingyue",
+          "width": 2560,
+          "height": 1440
+        }
+      ]
+    },
+    {
+      "name": "正式图鉴与已核对预览一致",
+      "passed": true,
+      "detail": {
+        "cards": "272"
+      }
+    },
+    {
+      "name": "图鉴机制引用可定位",
+      "passed": true,
+      "detail": {
+        "sourcePaths": [
+          "game/src/hub/meta.js",
+          "game/src/core/rule-config.js",
+          "game/src/core/rules.js",
+          "game/src/run/map-generator.js",
+          "game/src/battle/core/battle.core.js",
+          "game/src/battle/effects/battle.target-rules.js",
+          "game/src/battle/bag/battle.deck.js",
+          "game/src/battle/core/combat.js",
+          "game/src/cards/cards.js",
+          "game/src/hub/game.hub.js",
+          "game/src/hub/game.bag.js",
+          "game/src/run/game.run.flow.js",
+          "game/src/run/game.run.shop.js",
+          "game/src/run/game.run.altar.js",
+          "game/src/battle/core/battle.core.js",
+          "game/src/battle/core/battle.lifecycle.js",
+          "game/src/run/game.nest.js",
+          "game/src/hub/game.storage.js",
+          "game/src/hub/meta.js",
+          "game/src/hub/base.js"
+        ]
+      }
+    },
+    {
+      "name": "本轮文档相对链接",
+      "passed": true,
+      "detail": {
+        "checkedLinks": 164,
+        "missing": []
+      }
+    }
+  ],
+  "limits": [
+    "字段、来源、生成快照与文档职责核对；不证明全部卡牌行为或游戏实页",
+    "没有图像生成、替换或新的审美认可"
+  ]
+}

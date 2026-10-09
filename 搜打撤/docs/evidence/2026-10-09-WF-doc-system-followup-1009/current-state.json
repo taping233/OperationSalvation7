@@ -1,0 +1,28 @@
+{
+  "tasksReadable": 32,
+  "skipped": [
+    {
+      "file": "docs/evidence/2026-10-05-WF-card-ally-redesign/task.json",
+      "reason": "任务文件身份不匹配"
+    }
+  ],
+  "incomplete": true,
+  "pending": {
+    "open": 18,
+    "resolved": 0
+  },
+  "registry": {
+    "editing": 9,
+    "complete-uncommitted": 0,
+    "settled": 0,
+    "released": 0
+  },
+  "bytes": {
+    "registry": 52635,
+    "pending": 18736
+  },
+  "notes": [
+    "counts are observed state, not automatic closure",
+    "old evidence remains unchanged"
+  ]
+}

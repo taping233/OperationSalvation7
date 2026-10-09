@@ -1,0 +1,161 @@
+{
+  "method": "复用原待机PNG端点；同一基准导出与收势比例校正；复现 python v3/pack_sprite.py",
+  "files": [
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/.gitignore",
+      "bytes": 93,
+      "sha256": "b0545f0c5e6acc7160fc38e4b289d587c6478c89e3f2fba5a1a61cd0ada84b29",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-00.png",
+      "bytes": 364478,
+      "sha256": "484895aa505493825202539d4b7cfadf7c63c33997633b7940982a6634dbc63f",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-00.webp",
+      "bytes": 222082,
+      "sha256": "997ed716456fb7302773602de2ac7fe93330a39ac20fe6c372f0dd1d05c70baf",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-01.png",
+      "bytes": 176931,
+      "sha256": "e050f657cfa5c14aa89316ed5a77f49ec685b9fa2cbf5cac98d971ca0d726bd4",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-01.webp",
+      "bytes": 124054,
+      "sha256": "6834ee3992c4caa00ccc4dc2894ad02e4913af5216461768d66afb6d39a5c3ca",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-02.png",
+      "bytes": 221233,
+      "sha256": "d54efb0a535f093097b33a529952bcb6c7b52373335487ffc435a7521fba9efe",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-02.webp",
+      "bytes": 156220,
+      "sha256": "9c92b2574fb9728c388763818274be7f57d872b8f0fbf2439460bbe7dda72586",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-03.png",
+      "bytes": 182304,
+      "sha256": "adc5b161918ca8ad5b98bd22818995529ff9966b057e6bf329d34c596efcbdd2",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-03.webp",
+      "bytes": 128266,
+      "sha256": "32d6fbb743596af1e20a1d0639522608c10fb4083635df7386c23620c6fdd1a8",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-04.png",
+      "bytes": 180522,
+      "sha256": "682714ef549b88fbd526b88d1a2cc64e2fc40483e522fda4c1ce75ac5dd32e6d",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-04.webp",
+      "bytes": 126938,
+      "sha256": "1d4bda2e213dac9813aad73387ad53d29b1970d12c740a3926dd48478256e5d0",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-05.png",
+      "bytes": 199849,
+      "sha256": "d07045315f40ec3a1f6678a2291a0aa9bb0868af5e2906d308630e13c31379c3",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-05.webp",
+      "bytes": 139246,
+      "sha256": "b1f3b40d85de13794293218a8fb56ef584fd20058aefc4281e900a27b95c171c",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-06.png",
+      "bytes": 196289,
+      "sha256": "d4b533592f74387db2b32f2e2639a0d83a4859a5f622a417d680266b0344977c",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-06.webp",
+      "bytes": 137876,
+      "sha256": "405fa09e5a3358070f2217de21538dc09063e6369825ce1a4dfa00e17893d1ca",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-07.png",
+      "bytes": 364478,
+      "sha256": "484895aa505493825202539d4b7cfadf7c63c33997633b7940982a6634dbc63f",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-07.webp",
+      "bytes": 222082,
+      "sha256": "997ed716456fb7302773602de2ac7fe93330a39ac20fe6c372f0dd1d05c70baf",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/index.html",
+      "bytes": 5091,
+      "sha256": "3da0a30f4a2adfcf0bade9f72f12ec9b94ae7ffbd4464cd8ca3cb1542dea6c64",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/pack_sprite.py",
+      "bytes": 4028,
+      "sha256": "a3ec97f6fbe6092fd2f87b81b666cd3395eb92498f1f71409d6b2bfef89aca68",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/README.md",
+      "bytes": 907,
+      "sha256": "eb86d47e126aac56809ccee4f148a098c4db71fafe9253b780d6b471868f5db2",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/sprite.json",
+      "bytes": 1342,
+      "sha256": "ef223fee31036fd75e7a2f29e49c62ee3e740b19ba1fd9728d702c6ec22e882f",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/validation.json",
+      "bytes": 1025,
+      "sha256": "eb08b782e9c820f315a42dbd6fff44d72207466880e41757e1d83ee9a0211355",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/wu-attack-preview.gif",
+      "bytes": 581799,
+      "sha256": "103c2893d1f0f71e323cf65c2137890fd352b4be120838566598584188a28b06",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/wu-attack-preview.webp",
+      "bytes": 445764,
+      "sha256": "f65ffd48aca71fb2b8c39a9c8c69a4ed717e0a59384e8856ce2ca49cf65d9bee",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/wu-attack-sheet.png",
+      "bytes": 1933221,
+      "sha256": "32e148d0deb9926adc18183dc5460f523aa1fc22c1da7be3184708d8f5401614",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-attack-sprite-20261009/v3/wu-attack-sheet.webp",
+      "bytes": 1296576,
+      "sha256": "0fa1b55ae1c5218eb68a0f602b084118cfc01afd5eb6307d5db56529728e7cfd",
+      "localOnly": true
+    }
+  ]
+}

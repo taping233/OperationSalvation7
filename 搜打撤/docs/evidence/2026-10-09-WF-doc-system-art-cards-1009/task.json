@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-doc-system-art-cards-1009",
+  "date": "2026-10-09",
+  "owner": "Friday",
+  "goal": "整理美术与角色文档的现行和历史范围，修复图鉴生成器的陈旧机制说明，保留占用正文",
+  "paths": [
+    "scripts/generate-compendium.mjs",
+    "tests/compendium.test.js",
+    "docs/production/art/VISUAL-BIBLE.md",
+    "docs/character-bible",
+    "docs/cards/README.md",
+    "docs/README.md",
+    "docs/STATUS.md",
+    "docs/terminology.md",
+    "docs/M-BATCH-MATRIX.md",
+    "docs/game-compendium.md",
+    "docs/archive/WF-art-doc-context-1009",
+    "docs/archive/WF-card-doc-context-1009",
+    "docs/evidence/2026-10-09-WF-doc-system-art-cards-1009"
+  ],
+  "doneWhen": [
+    "美术方向、身份参考与历史配方分开，未新造审美认可",
+    "图鉴生成说明与现行入口一致，正式文档由生成器更新并通过检查",
+    "术语与迁移矩阵已按老板释放确认接手，历史基线和稳定集合保留"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-10-09-WF-doc-system-art-cards-1009/2026-10-09T05-07-01.840Z-e74bf3f2.json",
+      "result": "passed",
+      "sha256": "87510eed3164bff1f5d9924a2fd3b2f1a1879a0e16a554442c1a2214df4159af",
+      "verification": "recorded-result-only-not-current-freshness"
+    },
+    {
+      "kind": "manual",
+      "description": "8项文档与来源核对、文档守卫和差异格式通过，释放确认已登记",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "未重验全部卡牌行为或游戏实页；图片、个人模板和他会话源码改动未修改"
+  ],
+  "updatedAt": "2026-10-09T05:09:56.100Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

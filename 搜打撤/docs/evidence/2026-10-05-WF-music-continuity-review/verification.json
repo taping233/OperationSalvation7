@@ -1,0 +1,203 @@
+{
+  "status": "passed",
+  "exitCode": 0,
+  "checks": {
+    "old_source_inputs_unchanged": true,
+    "title_frames_stereo": true,
+    "title_finite_no_clip": true,
+    "title_file_stem_hashes": true,
+    "title_score_inside_cycle": true,
+    "title_no_same_key_overlap_chokes": true,
+    "title_mmp_stem_paths_resolve": true,
+    "title_mmp_loop_wrapper_correct": true,
+    "title_loudness_target": true,
+    "title_transition_max_below_6db": true,
+    "title_long_lead_notes": true,
+    "title_continuous_carrier_at_boundaries": true,
+    "title_mp3_decode": true,
+    "title_ogg_decode": true,
+    "title_ogg_loop": true,
+    "explore_frames_stereo": true,
+    "explore_finite_no_clip": true,
+    "explore_file_stem_hashes": true,
+    "explore_score_inside_cycle": true,
+    "explore_no_same_key_overlap_chokes": true,
+    "explore_mmp_stem_paths_resolve": true,
+    "explore_mmp_loop_wrapper_correct": true,
+    "explore_loudness_target": true,
+    "explore_transition_max_below_6db": true,
+    "explore_transition_jumps_reduced": true,
+    "explore_long_lead_notes": true,
+    "explore_continuous_carrier_at_boundaries": true,
+    "explore_mp3_decode": true,
+    "explore_ogg_decode": true,
+    "explore_ogg_loop": true,
+    "battle_frames_stereo": true,
+    "battle_finite_no_clip": true,
+    "battle_file_stem_hashes": true,
+    "battle_score_inside_cycle": true,
+    "battle_no_same_key_overlap_chokes": true,
+    "battle_mmp_stem_paths_resolve": true,
+    "battle_mmp_loop_wrapper_correct": true,
+    "battle_loudness_target": true,
+    "battle_transition_max_below_6db": true,
+    "battle_transition_jumps_reduced": true,
+    "battle_long_lead_notes": true,
+    "battle_continuous_carrier_at_boundaries": true,
+    "battle_mp3_decode": true,
+    "battle_ogg_decode": true,
+    "battle_ogg_loop": true,
+    "actual_public_classical_project_parsed": true,
+    "reference_fingerprints": true
+  },
+  "cues": [
+    {
+      "role": "title",
+      "seconds": 91.4285625,
+      "old_max_transition_change_db": 2.979095437375644,
+      "new_max_transition_change_db": 4.315126127774747,
+      "boundaries": [
+        {
+          "bar": 8,
+          "seconds": 22.857142857142858,
+          "2s_median_change_db": 4.315126127774747
+        },
+        {
+          "bar": 16,
+          "seconds": 45.714285714285715,
+          "2s_median_change_db": -2.031320538692391
+        },
+        {
+          "bar": 24,
+          "seconds": 68.57142857142857,
+          "2s_median_change_db": 4.134187692325703
+        }
+      ],
+      "lead_notes": 52,
+      "lead_median_duration_seconds": 1.4714285714285715,
+      "lead_notes_under350ms": 0,
+      "all_note_on_events_per_second": 1.5750001538086087,
+      "new_adjacent_250ms_db_change_p95": 6.468712080785128,
+      "old_adjacent_250ms_db_change_p95": 7.381245871070146,
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-6.34",
+        "input_lra": "2.20",
+        "input_thresh": "-28.50",
+        "output_i": "-23.16",
+        "output_tp": "-11.04",
+        "output_lra": "2.40",
+        "output_thresh": "-33.16",
+        "normalization_type": "dynamic",
+        "target_offset": "0.16"
+      },
+      "ogg_seam": 0.0019369721412658691
+    },
+    {
+      "role": "explore",
+      "seconds": 102.85714583333333,
+      "old_max_transition_change_db": 9.841659113767953,
+      "new_max_transition_change_db": 1.982299054781663,
+      "boundaries": [
+        {
+          "bar": 8,
+          "seconds": 17.142857142857142,
+          "2s_median_change_db": 0.36738838632164317
+        },
+        {
+          "bar": 20,
+          "seconds": 42.857142857142854,
+          "2s_median_change_db": 0.5031777040336962
+        },
+        {
+          "bar": 28,
+          "seconds": 60.0,
+          "2s_median_change_db": 1.212044715283895
+        },
+        {
+          "bar": 40,
+          "seconds": 85.71428571428571,
+          "2s_median_change_db": 1.982299054781663
+        }
+      ],
+      "lead_notes": 96,
+      "lead_median_duration_seconds": 1.05,
+      "lead_notes_under350ms": 0,
+      "all_note_on_events_per_second": 3.3638887915541438,
+      "new_adjacent_250ms_db_change_p95": 5.030769695288579,
+      "old_adjacent_250ms_db_change_p95": 7.919421246438035,
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-6.64",
+        "input_lra": "1.80",
+        "input_thresh": "-28.50",
+        "output_i": "-23.11",
+        "output_tp": "-11.42",
+        "output_lra": "1.60",
+        "output_thresh": "-33.11",
+        "normalization_type": "dynamic",
+        "target_offset": "0.11"
+      },
+      "ogg_seam": 0.0019463151693344116
+    },
+    {
+      "role": "battle",
+      "seconds": 92.90322916666666,
+      "old_max_transition_change_db": 13.972023331693094,
+      "new_max_transition_change_db": 2.2833466984336575,
+      "boundaries": [
+        {
+          "bar": 6,
+          "seconds": 11.612903225806452,
+          "2s_median_change_db": 0.67218434379512
+        },
+        {
+          "bar": 18,
+          "seconds": 34.83870967741935,
+          "2s_median_change_db": 1.8775382464764583
+        },
+        {
+          "bar": 26,
+          "seconds": 50.32258064516129,
+          "2s_median_change_db": -0.4136025801654455
+        },
+        {
+          "bar": 30,
+          "seconds": 58.064516129032256,
+          "2s_median_change_db": -0.26598875556197044
+        },
+        {
+          "bar": 42,
+          "seconds": 81.29032258064517,
+          "2s_median_change_db": -2.2833466984336575
+        }
+      ],
+      "lead_notes": 89,
+      "lead_median_duration_seconds": 1.0161290322580645,
+      "lead_notes_under350ms": 0,
+      "all_note_on_events_per_second": 5.683333127772963,
+      "new_adjacent_250ms_db_change_p95": 2.65705584382514,
+      "old_adjacent_250ms_db_change_p95": 7.143860975529303,
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-6.40",
+        "input_lra": "1.40",
+        "input_thresh": "-28.50",
+        "output_i": "-22.89",
+        "output_tp": "-10.18",
+        "output_lra": "1.30",
+        "output_thresh": "-32.89",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.11"
+      },
+      "ogg_seam": 0.0016917921602725983
+    }
+  ],
+  "scope": "Latest originals retained; three new candidates. One public classical project and three bundled projects parsed without executing them.",
+  "limits": [
+    "No human listening claimed; fatigue is a user listening judgement.",
+    "2s transition diagnostic is not a universal musical standard; 6dB is this task local guard.",
+    "Single-note attack probes are not universal patch latency.",
+    "Frozen pre-master LMMS paths checked; projects not separately native-rendered."
+  ]
+}

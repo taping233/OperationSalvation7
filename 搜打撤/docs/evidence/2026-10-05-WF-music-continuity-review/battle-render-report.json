@@ -1,0 +1,411 @@
+{
+  "role": "battle",
+  "title": "黑脉交锋 · 连贯反击",
+  "stem": "03-battle-blackpulse-v5",
+  "bars": 48,
+  "bpm": 124,
+  "seconds": 92.90322916666666,
+  "sections": [
+    {
+      "start_bar": 0,
+      "end_bar": 6,
+      "name": "immediate connected pulse"
+    },
+    {
+      "start_bar": 6,
+      "end_bar": 18,
+      "name": "conflict"
+    },
+    {
+      "start_bar": 18,
+      "end_bar": 26,
+      "name": "gradual escalation"
+    },
+    {
+      "start_bar": 26,
+      "end_bar": 30,
+      "name": "continuous release"
+    },
+    {
+      "start_bar": 30,
+      "end_bar": 42,
+      "name": "gradual counterstrike"
+    },
+    {
+      "start_bar": 42,
+      "end_bar": 48,
+      "name": "connected pivot"
+    }
+  ],
+  "tracks": [
+    {
+      "name": "Violin sung challenge",
+      "program": 40,
+      "bank": 0,
+      "notes": 89,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Violin-sung-challenge.wav",
+        "bytes": 35674928,
+        "sha256": "588788d4843d6c4a8fa20661a21b7cf39808a70ee66e539cbf97ae6ae01a8d09"
+      },
+      "pan": -24,
+      "target_active_rms_dbfs": -24,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0.04,
+      "cc64_used": false
+    },
+    {
+      "name": "Pizzicato motor",
+      "program": 45,
+      "bank": 0,
+      "notes": 96,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Pizzicato-motor.wav",
+        "bytes": 35674928,
+        "sha256": "20b2255bf23eeabe8677696b1ae8e1decd130ff464bb409dcb999e8647447ed0"
+      },
+      "pan": -37,
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Cello steady pulse",
+      "program": 42,
+      "bank": 0,
+      "notes": 96,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Cello-steady-pulse.wav",
+        "bytes": 35674928,
+        "sha256": "b856549698a00652333bb80e05b130a3e69d3f52d9e29199404a103dcd4c9044"
+      },
+      "pan": 28,
+      "target_active_rms_dbfs": -34,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0.04,
+      "cc64_used": false
+    },
+    {
+      "name": "Stable bass",
+      "program": 43,
+      "bank": 0,
+      "notes": 48,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Stable-bass.wav",
+        "bytes": 35674928,
+        "sha256": "d3dbf8e14d5b981262a9d65de5e2ae1058d2f0c347ad13d4c585de3234873cc3"
+      },
+      "pan": 0,
+      "target_active_rms_dbfs": -33,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Horn answer",
+      "program": 60,
+      "bank": 0,
+      "notes": 20,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Horn-answer.wav",
+        "bytes": 35674928,
+        "sha256": "1f45a7b5c3ff3d7e530119584992fa135913b0da05acd4cffa66bab9605724ea"
+      },
+      "pan": -14,
+      "target_active_rms_dbfs": -33,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Trumpet peak",
+      "program": 56,
+      "bank": 0,
+      "notes": 5,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Trumpet-peak.wav",
+        "bytes": 35674928,
+        "sha256": "eb02f0ef858fa0cb8533ee01e622d67e63d4f64cd61cb565278e3f901cbb32cc"
+      },
+      "pan": 20,
+      "target_active_rms_dbfs": -38,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Trombone support",
+      "program": 57,
+      "bank": 0,
+      "notes": 5,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Trombone-support.wav",
+        "bytes": 35674928,
+        "sha256": "28e9ad1593c23e4a9ad74003fa12715729b886a3130859ff0ba6b8aa552a434b"
+      },
+      "pan": 10,
+      "target_active_rms_dbfs": -39,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Bassoon release",
+      "program": 70,
+      "bank": 0,
+      "notes": 4,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Bassoon-release.wav",
+        "bytes": 35674928,
+        "sha256": "d8f82724cd655ac8fc77c59085aab285e05eb7434634b4853d92e2109a7cc463"
+      },
+      "pan": 19,
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Piano release",
+      "program": 0,
+      "bank": 0,
+      "notes": 4,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Piano-release.wav",
+        "bytes": 35674928,
+        "sha256": "598f84c9ee750aec1837f5b0e0df9d7e3a0f51c435660e9d72658c3592d8d176"
+      },
+      "pan": -4,
+      "target_active_rms_dbfs": -38,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": true
+    },
+    {
+      "name": "Harp transitions",
+      "program": 46,
+      "bank": 0,
+      "notes": 6,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Harp-transitions.wav",
+        "bytes": 35674928,
+        "sha256": "1b11cd87f0cab1b90bfea1e871bf7ca5cab80fc488db19e198a27dd126c402ca"
+      },
+      "pan": -29,
+      "target_active_rms_dbfs": -42,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Continuous string bridge",
+      "program": 49,
+      "bank": 0,
+      "notes": 15,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Continuous-string-bridge.wav",
+        "bytes": 35674928,
+        "sha256": "50346ce36bcdeba348a42ea0c5329020083a6635f95c2b8a2eac5790c604423b"
+      },
+      "pan": 35,
+      "target_active_rms_dbfs": -32,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Timpani anchors",
+      "program": 47,
+      "bank": 0,
+      "notes": 48,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Timpani-anchors.wav",
+        "bytes": 35674928,
+        "sha256": "aa21183a7fc4616ad30c443fe52b560bab9ffe551706f3c0739b8bdd3fd4d3fd"
+      },
+      "pan": -6,
+      "target_active_rms_dbfs": -36,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Restrained drums",
+      "program": 48,
+      "bank": 128,
+      "notes": 92,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Restrained-drums.wav",
+        "bytes": 35674928,
+        "sha256": "12d28a970ca5444d4e6c2bade921aec0507bb1c40ead07c3a39af08c3c2766c6"
+      },
+      "pan": 0,
+      "target_active_rms_dbfs": -37,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    }
+  ],
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.4065278298146895,
+      0.6754268740881246
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-6.40",
+    "input_lra": "1.40",
+    "input_thresh": "-28.50",
+    "output_i": "-22.89",
+    "output_tp": "-10.18",
+    "output_lra": "1.30",
+    "output_thresh": "-32.89",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.11"
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-continuity-review/03-battle-blackpulse-v5.mmp",
+      "bytes": 12094,
+      "sha256": "12e076e25f522eb229dd144e4c4cdfd0f0b3f52015a6ccdb1a38d3a54150d89d"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-continuity-review/03-battle-blackpulse-v5.wav",
+      "bytes": 26756174,
+      "sha256": "5e5424b157c4451b8297de6a9e5d613981b9a0e98b2d3f824e7c704480a73331"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-continuity-review/03-battle-blackpulse-v5.mp3",
+      "bytes": 2974548,
+      "sha256": "0ca3ea6b93e8844603746b2a3159e7eb5ca41058b836725a81c14cc0a986ab93"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-continuity-review/03-battle-blackpulse-v5.ogg",
+      "bytes": 1723856,
+      "sha256": "4d07b6f6e3b5b57c6890e7a02c2455fc1cb87d4f1e23edd5031d7e214e7afdf9"
+    }
+  ],
+  "native_project": "frozen pre-master stems, paths checked; not separately native-rendered",
+  "subjective_listening": "not claimed; user audition required"
+}

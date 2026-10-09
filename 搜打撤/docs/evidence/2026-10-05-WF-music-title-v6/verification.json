@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "seconds": 91.4285625,
+  "strings_and_three_expression_curves_exactly_preserved": true,
+  "real_cc64_pedal_probe": {
+    "plain": {
+      "held": 0.005721365567296743,
+      "after_key_release": 4.2558789573377e-05
+    },
+    "pedal": {
+      "held": 0.005721365567296743,
+      "after_key_release": 0.0031749175395816565
+    },
+    "pedal_tail_gain_db": 37.45486365017112,
+    "engine_version": "1.1.6"
+  },
+  "overall_loudness_difference_lu": 0.0,
+  "ogg_frames_match": true,
+  "ogg_seam_jump": 0.00043046101927757263,
+  "ordinary_step_p99": 0.02391137296333909,
+  "hashes_and_decode": "passed",
+  "pcm_clipping": false,
+  "subjective_quality": "Requires user listening; pedal tail test does not guarantee better musical phrasing"
+}

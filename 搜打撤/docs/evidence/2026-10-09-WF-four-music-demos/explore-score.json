@@ -1,0 +1,831 @@
+{
+  "role": "explore",
+  "bpm": 112,
+  "retained_source": {
+    "path": "docs/evidence/2026-10-05-WF-music-piano-two-hands/02-explore-ashline-v6.wav",
+    "bytes": 29622902,
+    "sha256": "459abc9546dc5146c618cefc7cbaa35cef37121dfddbb6045f4965674455d986"
+  },
+  "basis": "same original 0-30s foreground; additive original supporting arrangement",
+  "new_tracks": {
+    "Nylon path": {
+      "patch": 24,
+      "target_dbfs": -34,
+      "pan": -0.38,
+      "bank": 0
+    },
+    "Oboe distant answer": {
+      "patch": 68,
+      "target_dbfs": -36,
+      "pan": 0.28,
+      "bank": 0
+    },
+    "Viola crosscurrent": {
+      "patch": 41,
+      "target_dbfs": -38,
+      "pan": 0.42,
+      "bank": 0
+    },
+    "Vibraphone frost": {
+      "patch": 11,
+      "target_dbfs": -40,
+      "pan": -0.22,
+      "bank": 0
+    },
+    "Acoustic footsteps": {
+      "patch": 0,
+      "target_dbfs": -43,
+      "pan": 0.12,
+      "bank": 128
+    }
+  },
+  "new_events": [
+    {
+      "track": "Nylon path",
+      "beat": 0.2,
+      "midi": 57,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Nylon path",
+      "beat": 1.4,
+      "midi": 65,
+      "length": 1.9,
+      "velocity": 38
+    },
+    {
+      "track": "Nylon path",
+      "beat": 3.1,
+      "midi": 62,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Nylon path",
+      "beat": 4.4,
+      "midi": 57,
+      "length": 1.9,
+      "velocity": 38
+    },
+    {
+      "track": "Nylon path",
+      "beat": 5.6,
+      "midi": 65,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Nylon path",
+      "beat": 7.2,
+      "midi": 62,
+      "length": 1.9,
+      "velocity": 38
+    },
+    {
+      "track": "Viola crosscurrent",
+      "beat": 1.5,
+      "midi": 57,
+      "length": 2.8,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crosscurrent",
+      "beat": 5.1,
+      "midi": 65,
+      "length": 2.5,
+      "velocity": 39
+    },
+    {
+      "track": "Vibraphone frost",
+      "beat": 3.35,
+      "midi": 76,
+      "length": 1.6,
+      "velocity": 37
+    },
+    {
+      "track": "Vibraphone frost",
+      "beat": 7.1,
+      "midi": 77,
+      "length": 1.5,
+      "velocity": 31
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 0.0,
+      "midi": 76,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 2.6,
+      "midi": 75,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 4.25,
+      "midi": 76,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 6.75,
+      "midi": 75,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Nylon path",
+      "beat": 8.2,
+      "midi": 57,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Nylon path",
+      "beat": 9.4,
+      "midi": 65,
+      "length": 1.9,
+      "velocity": 38
+    },
+    {
+      "track": "Nylon path",
+      "beat": 11.1,
+      "midi": 62,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Nylon path",
+      "beat": 12.4,
+      "midi": 57,
+      "length": 1.9,
+      "velocity": 38
+    },
+    {
+      "track": "Nylon path",
+      "beat": 13.6,
+      "midi": 65,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Nylon path",
+      "beat": 15.2,
+      "midi": 62,
+      "length": 1.9,
+      "velocity": 38
+    },
+    {
+      "track": "Viola crosscurrent",
+      "beat": 9.5,
+      "midi": 57,
+      "length": 2.8,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crosscurrent",
+      "beat": 13.1,
+      "midi": 65,
+      "length": 2.5,
+      "velocity": 39
+    },
+    {
+      "track": "Oboe distant answer",
+      "beat": 10.7,
+      "midi": 77,
+      "length": 1.3,
+      "velocity": 40
+    },
+    {
+      "track": "Oboe distant answer",
+      "beat": 12.25,
+      "midi": 74,
+      "length": 1.7,
+      "velocity": 40
+    },
+    {
+      "track": "Oboe distant answer",
+      "beat": 14.7,
+      "midi": 69,
+      "length": 1.0,
+      "velocity": 40
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 8.0,
+      "midi": 76,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 10.6,
+      "midi": 75,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 12.25,
+      "midi": 76,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 14.75,
+      "midi": 75,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Nylon path",
+      "beat": 16.2,
+      "midi": 53,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Nylon path",
+      "beat": 19.1,
+      "midi": 57,
+      "length": 1.9,
+      "velocity": 38
+    },
+    {
+      "track": "Nylon path",
+      "beat": 21.6,
+      "midi": 60,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Viola crosscurrent",
+      "beat": 17.5,
+      "midi": 53,
+      "length": 2.8,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crosscurrent",
+      "beat": 21.1,
+      "midi": 60,
+      "length": 2.5,
+      "velocity": 39
+    },
+    {
+      "track": "Oboe distant answer",
+      "beat": 18.7,
+      "midi": 72,
+      "length": 1.3,
+      "velocity": 40
+    },
+    {
+      "track": "Oboe distant answer",
+      "beat": 20.25,
+      "midi": 69,
+      "length": 1.7,
+      "velocity": 40
+    },
+    {
+      "track": "Oboe distant answer",
+      "beat": 22.7,
+      "midi": 65,
+      "length": 1.0,
+      "velocity": 40
+    },
+    {
+      "track": "Vibraphone frost",
+      "beat": 19.35,
+      "midi": 67,
+      "length": 1.6,
+      "velocity": 37
+    },
+    {
+      "track": "Vibraphone frost",
+      "beat": 23.1,
+      "midi": 72,
+      "length": 1.5,
+      "velocity": 31
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 16.0,
+      "midi": 76,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 18.6,
+      "midi": 75,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 20.25,
+      "midi": 76,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 22.75,
+      "midi": 75,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Nylon path",
+      "beat": 24.2,
+      "midi": 55,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Nylon path",
+      "beat": 25.4,
+      "midi": 64,
+      "length": 1.9,
+      "velocity": 38
+    },
+    {
+      "track": "Nylon path",
+      "beat": 27.1,
+      "midi": 60,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Nylon path",
+      "beat": 28.4,
+      "midi": 55,
+      "length": 1.9,
+      "velocity": 38
+    },
+    {
+      "track": "Nylon path",
+      "beat": 29.6,
+      "midi": 64,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Nylon path",
+      "beat": 31.2,
+      "midi": 60,
+      "length": 1.9,
+      "velocity": 38
+    },
+    {
+      "track": "Viola crosscurrent",
+      "beat": 25.5,
+      "midi": 55,
+      "length": 2.8,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crosscurrent",
+      "beat": 29.1,
+      "midi": 64,
+      "length": 2.5,
+      "velocity": 39
+    },
+    {
+      "track": "Oboe distant answer",
+      "beat": 26.7,
+      "midi": 76,
+      "length": 1.3,
+      "velocity": 40
+    },
+    {
+      "track": "Oboe distant answer",
+      "beat": 28.25,
+      "midi": 72,
+      "length": 1.7,
+      "velocity": 40
+    },
+    {
+      "track": "Oboe distant answer",
+      "beat": 30.7,
+      "midi": 67,
+      "length": 1.0,
+      "velocity": 40
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 24.0,
+      "midi": 76,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 26.6,
+      "midi": 75,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 28.25,
+      "midi": 76,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 30.75,
+      "midi": 75,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Nylon path",
+      "beat": 32.2,
+      "midi": 55,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Nylon path",
+      "beat": 33.4,
+      "midi": 62,
+      "length": 1.9,
+      "velocity": 38
+    },
+    {
+      "track": "Nylon path",
+      "beat": 35.1,
+      "midi": 58,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Nylon path",
+      "beat": 36.4,
+      "midi": 55,
+      "length": 1.9,
+      "velocity": 38
+    },
+    {
+      "track": "Nylon path",
+      "beat": 37.6,
+      "midi": 62,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Nylon path",
+      "beat": 39.2,
+      "midi": 58,
+      "length": 1.9,
+      "velocity": 38
+    },
+    {
+      "track": "Viola crosscurrent",
+      "beat": 33.5,
+      "midi": 55,
+      "length": 2.8,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crosscurrent",
+      "beat": 37.1,
+      "midi": 62,
+      "length": 2.5,
+      "velocity": 39
+    },
+    {
+      "track": "Oboe distant answer",
+      "beat": 34.7,
+      "midi": 74,
+      "length": 1.3,
+      "velocity": 40
+    },
+    {
+      "track": "Oboe distant answer",
+      "beat": 36.25,
+      "midi": 70,
+      "length": 1.7,
+      "velocity": 40
+    },
+    {
+      "track": "Oboe distant answer",
+      "beat": 38.7,
+      "midi": 67,
+      "length": 1.0,
+      "velocity": 40
+    },
+    {
+      "track": "Vibraphone frost",
+      "beat": 35.35,
+      "midi": 69,
+      "length": 1.6,
+      "velocity": 37
+    },
+    {
+      "track": "Vibraphone frost",
+      "beat": 39.1,
+      "midi": 74,
+      "length": 1.5,
+      "velocity": 31
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 32.0,
+      "midi": 76,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 34.6,
+      "midi": 75,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 36.25,
+      "midi": 76,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 38.75,
+      "midi": 75,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Nylon path",
+      "beat": 40.2,
+      "midi": 53,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Nylon path",
+      "beat": 43.1,
+      "midi": 58,
+      "length": 1.9,
+      "velocity": 38
+    },
+    {
+      "track": "Nylon path",
+      "beat": 45.6,
+      "midi": 62,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Viola crosscurrent",
+      "beat": 41.5,
+      "midi": 53,
+      "length": 2.8,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crosscurrent",
+      "beat": 45.1,
+      "midi": 62,
+      "length": 2.5,
+      "velocity": 39
+    },
+    {
+      "track": "Oboe distant answer",
+      "beat": 42.7,
+      "midi": 74,
+      "length": 1.3,
+      "velocity": 40
+    },
+    {
+      "track": "Oboe distant answer",
+      "beat": 44.25,
+      "midi": 70,
+      "length": 1.7,
+      "velocity": 40
+    },
+    {
+      "track": "Oboe distant answer",
+      "beat": 46.7,
+      "midi": 65,
+      "length": 1.0,
+      "velocity": 40
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 40.0,
+      "midi": 76,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 42.6,
+      "midi": 75,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 44.25,
+      "midi": 76,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 46.75,
+      "midi": 75,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Nylon path",
+      "beat": 48.2,
+      "midi": 57,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Nylon path",
+      "beat": 49.4,
+      "midi": 64,
+      "length": 1.9,
+      "velocity": 38
+    },
+    {
+      "track": "Nylon path",
+      "beat": 51.1,
+      "midi": 61,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Nylon path",
+      "beat": 52.4,
+      "midi": 57,
+      "length": 1.9,
+      "velocity": 38
+    },
+    {
+      "track": "Nylon path",
+      "beat": 53.6,
+      "midi": 64,
+      "length": 1.9,
+      "velocity": 47
+    },
+    {
+      "track": "Nylon path",
+      "beat": 55.2,
+      "midi": 61,
+      "length": 1.4,
+      "velocity": 38
+    },
+    {
+      "track": "Viola crosscurrent",
+      "beat": 49.5,
+      "midi": 57,
+      "length": 2.8,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crosscurrent",
+      "beat": 53.1,
+      "midi": 64,
+      "length": 2.5,
+      "velocity": 39
+    },
+    {
+      "track": "Oboe distant answer",
+      "beat": 50.7,
+      "midi": 76,
+      "length": 1.3,
+      "velocity": 40
+    },
+    {
+      "track": "Oboe distant answer",
+      "beat": 52.25,
+      "midi": 73,
+      "length": 1.7,
+      "velocity": 40
+    },
+    {
+      "track": "Oboe distant answer",
+      "beat": 54.7,
+      "midi": 69,
+      "length": 1.0,
+      "velocity": 40
+    },
+    {
+      "track": "Vibraphone frost",
+      "beat": 51.35,
+      "midi": 67,
+      "length": 1.6,
+      "velocity": 37
+    },
+    {
+      "track": "Vibraphone frost",
+      "beat": 55.1,
+      "midi": 76,
+      "length": 1.5,
+      "velocity": 31
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 48.0,
+      "midi": 76,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 50.6,
+      "midi": 75,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 52.25,
+      "midi": 76,
+      "length": 0.2,
+      "velocity": 32
+    },
+    {
+      "track": "Acoustic footsteps",
+      "beat": 54.75,
+      "midi": 75,
+      "length": 0.2,
+      "velocity": 32
+    }
+  ],
+  "harmony_blocks": [
+    [
+      50,
+      57,
+      62,
+      65,
+      76
+    ],
+    [
+      46,
+      57,
+      62,
+      65,
+      69
+    ],
+    [
+      41,
+      53,
+      57,
+      60,
+      67
+    ],
+    [
+      48,
+      55,
+      60,
+      64,
+      69
+    ],
+    [
+      43,
+      55,
+      58,
+      62,
+      69
+    ],
+    [
+      46,
+      53,
+      58,
+      62,
+      69
+    ],
+    [
+      45,
+      57,
+      61,
+      64,
+      67
+    ],
+    [
+      50,
+      57,
+      62,
+      65,
+      74
+    ]
+  ],
+  "harmony_block_beats": 8
+}

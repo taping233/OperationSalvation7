@@ -1,0 +1,404 @@
+{
+  "role": "explore",
+  "title": "灰线行军 · 连续行旅",
+  "stem": "02-explore-ashline-v5",
+  "bars": 48,
+  "bpm": 112,
+  "seconds": 102.85714583333333,
+  "sections": [
+    {
+      "start_bar": 0,
+      "end_bar": 8,
+      "name": "orientation"
+    },
+    {
+      "start_bar": 8,
+      "end_bar": 20,
+      "name": "exchange"
+    },
+    {
+      "start_bar": 20,
+      "end_bar": 28,
+      "name": "connected clearing"
+    },
+    {
+      "start_bar": 28,
+      "end_bar": 40,
+      "name": "new route"
+    },
+    {
+      "start_bar": 40,
+      "end_bar": 48,
+      "name": "smooth return"
+    }
+  ],
+  "tracks": [
+    {
+      "name": "Piano traveller",
+      "program": 0,
+      "bank": 0,
+      "notes": 96,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Piano-traveller.wav",
+        "bytes": 39497232,
+        "sha256": "502194435195c7a42ad0f8db89ee65296a2578754170f849bf984e56898349bf"
+      },
+      "pan": -7,
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          72,
+          1
+        ],
+        [
+          80,
+          0.76
+        ],
+        [
+          88,
+          0.6
+        ],
+        [
+          100,
+          0.6
+        ],
+        [
+          112,
+          0.85
+        ],
+        [
+          120,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": true
+    },
+    {
+      "name": "Pizzicato steps",
+      "program": 45,
+      "bank": 0,
+      "notes": 72,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Pizzicato-steps.wav",
+        "bytes": 39497232,
+        "sha256": "4ebee1a1c1817150286ecbd8c00f0720288bba3b41cfcd6cffc74a6a1ea01998"
+      },
+      "pan": 30,
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Clarinet replies",
+      "program": 71,
+      "bank": 0,
+      "notes": 5,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Clarinet-replies.wav",
+        "bytes": 39497232,
+        "sha256": "71b7b1ee605ba0399543e6cffb9a82db8c351ee3fac24d58ed3b77ba8bf14a72"
+      },
+      "pan": -24,
+      "target_active_rms_dbfs": -34,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Oboe clearing",
+      "program": 68,
+      "bank": 0,
+      "notes": 23,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Oboe-clearing.wav",
+        "bytes": 39497232,
+        "sha256": "ac70c884bc810fecb293f61eb1a4e23807561074248e19a74b15faf801decb24"
+      },
+      "pan": 18,
+      "target_active_rms_dbfs": -29,
+      "continuous_gain_points": [
+        [
+          0,
+          0
+        ],
+        [
+          72,
+          0
+        ],
+        [
+          80,
+          0.24
+        ],
+        [
+          88,
+          0.55
+        ],
+        [
+          100,
+          0.55
+        ],
+        [
+          112,
+          0.18
+        ],
+        [
+          120,
+          0
+        ],
+        [
+          192,
+          0
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Flute breeze",
+      "program": 73,
+      "bank": 0,
+      "notes": 2,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Flute-breeze.wav",
+        "bytes": 39497232,
+        "sha256": "67fa24476ab56049b3ce1c915d2986ea6e636eccbdbe7697c02dc23cf07823d9"
+      },
+      "pan": -12,
+      "target_active_rms_dbfs": -39,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Harp turning points",
+      "program": 46,
+      "bank": 0,
+      "notes": 6,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Harp-turning-points.wav",
+        "bytes": 39497232,
+        "sha256": "309fb9e1749547a7a4f3aaa158e0e80025485c144882015dcf9702af63c3d302"
+      },
+      "pan": -33,
+      "target_active_rms_dbfs": -39,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Continuous string bridge",
+      "program": 49,
+      "bank": 0,
+      "notes": 16,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Continuous-string-bridge.wav",
+        "bytes": 39497232,
+        "sha256": "eecc6997297070fc0fed212a6c10903d050eb3af5bbc1faae92065ff047e6f45"
+      },
+      "pan": -35,
+      "target_active_rms_dbfs": -33,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Cello road",
+      "program": 42,
+      "bank": 0,
+      "notes": 24,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Cello-road.wav",
+        "bytes": 39497232,
+        "sha256": "815ef394028953de8441f1145a4de4604208b5ebca9211b154b5dbaf2e65316c"
+      },
+      "pan": 29,
+      "target_active_rms_dbfs": -36,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0.04,
+      "cc64_used": false
+    },
+    {
+      "name": "Stable bass",
+      "program": 43,
+      "bank": 0,
+      "notes": 48,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Stable-bass.wav",
+        "bytes": 39497232,
+        "sha256": "d4f82595e3c80479e84c366ac574d9d067430f5ffe0fe618a776366db8dd2924"
+      },
+      "pan": 0,
+      "target_active_rms_dbfs": -34,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Celeste frost",
+      "program": 8,
+      "bank": 0,
+      "notes": 6,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Celeste-frost.wav",
+        "bytes": 39497232,
+        "sha256": "e987f82019e8835af96bbb3b47abde0b055b36ac63ea356247ab798130d72801"
+      },
+      "pan": 31,
+      "target_active_rms_dbfs": -45,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Quiet drum pulse",
+      "program": 48,
+      "bank": 128,
+      "notes": 48,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Quiet-drum-pulse.wav",
+        "bytes": 39497232,
+        "sha256": "1d1e2b35fca6873b418c5cc0f391a3c31d364d1231379e4bba8c240142b57ec2"
+      },
+      "pan": 0,
+      "target_active_rms_dbfs": -40,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          192,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    }
+  ],
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.36449444764292754,
+      0.6915524384629758
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-6.64",
+    "input_lra": "1.80",
+    "input_thresh": "-28.50",
+    "output_i": "-23.11",
+    "output_tp": "-11.42",
+    "output_lra": "1.60",
+    "output_thresh": "-33.11",
+    "normalization_type": "dynamic",
+    "target_offset": "0.11"
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-continuity-review/02-explore-ashline-v5.mmp",
+      "bytes": 10286,
+      "sha256": "3f552523affd2f7190403d827a944e26b5bcfb88644e060b19e61c6f85209758"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-continuity-review/02-explore-ashline-v5.wav",
+      "bytes": 29622902,
+      "sha256": "d2b88883d1d52620ec5c96e890d16a6f9b52b3f970539e4ed47a6af59a4dbd5b"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-continuity-review/02-explore-ashline-v5.mp3",
+      "bytes": 3293268,
+      "sha256": "3ae5944d0ca73c3392de944f316e4b0681d3c3d9e033dc0a21d55494061a97ae"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-continuity-review/02-explore-ashline-v5.ogg",
+      "bytes": 1776555,
+      "sha256": "f0df7b611f19eb7a3e01ae81981ccb8e73ebf8bff1797f7b62f01d9d2354f3f5"
+    }
+  ],
+  "native_project": "frozen pre-master stems, paths checked; not separately native-rendered",
+  "subjective_listening": "not claimed; user audition required"
+}

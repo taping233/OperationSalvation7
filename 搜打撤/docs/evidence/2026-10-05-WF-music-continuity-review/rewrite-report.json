@@ -1,0 +1,1118 @@
+{
+  "source_inputs_unchanged": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v8/01-title-frostglass-v8.wav",
+      "bytes": 26331470,
+      "sha256": "a48653a0b72b247ae5a3b1b031a82c54f7a859025d293c5ffaacbfabb802051f"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-identity/round-B/02-explore-ashline-v3.mmp",
+      "bytes": 140753,
+      "sha256": "0036c8ef77ac8d8260baa422716ed7ce3b4706fa4741a74adf374d77ff473887"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-identity/round-B/03-battle-blackpulse-v3.mmp",
+      "bytes": 179054,
+      "sha256": "784c1e04c1861a48e09cd91be67bac159c88173a77285381572bbf5f81eb10ae"
+    },
+    {
+      "path": ".tmp/music-workstation/GeneralUser-GS.sf2",
+      "bytes": 32319396,
+      "sha256": "9575028c7a1f589f5770fccc8cff2734566af40cd26ed836944e9a5152688cfe"
+    }
+  ],
+  "cues": [
+    {
+      "role": "title",
+      "title": "霜窗回声 · 连贯乐句",
+      "stem": "01-title-frostglass-v9",
+      "bars": 32,
+      "bpm": 84,
+      "seconds": 91.4285625,
+      "sections": [
+        {
+          "start_bar": 0,
+          "end_bar": 8,
+          "name": "long A"
+        },
+        {
+          "start_bar": 8,
+          "end_bar": 16,
+          "name": "connected answer"
+        },
+        {
+          "start_bar": 16,
+          "end_bar": 24,
+          "name": "soft B"
+        },
+        {
+          "start_bar": 24,
+          "end_bar": 32,
+          "name": "resolved return"
+        }
+      ],
+      "tracks": [
+        {
+          "name": "Piano sung theme",
+          "program": 0,
+          "bank": 0,
+          "notes": 52,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Piano-sung-theme.wav",
+            "bytes": 35108656,
+            "sha256": "809f1cbb7a06c98baef823f349abed1addc704d474113a03470af2efaba37d06"
+          },
+          "pan": -5,
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              128,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": true
+        },
+        {
+          "name": "Piano open harmony",
+          "program": 0,
+          "bank": 0,
+          "notes": 32,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Piano-open-harmony.wav",
+            "bytes": 35108656,
+            "sha256": "2c226986f6835c5a3c761d78a738d92fd066d094210fccea5bbb3c600e550bc3"
+          },
+          "pan": 12,
+          "target_active_rms_dbfs": -34,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              128,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": true
+        },
+        {
+          "name": "Continuous strings",
+          "program": 49,
+          "bank": 0,
+          "notes": 12,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Continuous-strings.wav",
+            "bytes": 35108656,
+            "sha256": "a4153a48b94ed9613d382d545040280e86d2a01ba2cf4d8c9ea96c37d68291f8"
+          },
+          "pan": -32,
+          "target_active_rms_dbfs": -34,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              128,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Viola gentle reply",
+          "program": 41,
+          "bank": 0,
+          "notes": 8,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Viola-gentle-reply.wav",
+            "bytes": 35108656,
+            "sha256": "6f6afcdc4115a1473c77a0cc332a817f90e866fe969cf51694f9a7c172698433"
+          },
+          "pan": 24,
+          "target_active_rms_dbfs": -37,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              128,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0.04,
+          "cc64_used": false
+        },
+        {
+          "name": "Cello bridge",
+          "program": 42,
+          "bank": 0,
+          "notes": 16,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Cello-bridge.wav",
+            "bytes": 35108656,
+            "sha256": "702e0b3069047bdebbfaabe9d6bb756dcc5cb14308e99a4657f3870c55b29a59"
+          },
+          "pan": 29,
+          "target_active_rms_dbfs": -36,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              128,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0.04,
+          "cc64_used": false
+        },
+        {
+          "name": "Stable bass",
+          "program": 43,
+          "bank": 0,
+          "notes": 16,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Stable-bass.wav",
+            "bytes": 35108656,
+            "sha256": "40a0b4338890aedc333190ea5f50a354b19f9af35924dacc6936b435c2a02659"
+          },
+          "pan": 0,
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              128,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Harp glimmer",
+          "program": 46,
+          "bank": 0,
+          "notes": 4,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Harp-glimmer.wav",
+            "bytes": 35108656,
+            "sha256": "f734b68ac148c75795e490f4b6ad2aca978f1a486caf15f68ae71aad1c40e70b"
+          },
+          "pan": -23,
+          "target_active_rms_dbfs": -41,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              128,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Clarinet breath",
+          "program": 71,
+          "bank": 0,
+          "notes": 4,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Clarinet-breath.wav",
+            "bytes": 35108656,
+            "sha256": "72745f29afdb20e7f81b32841c2168cfb9913e0541608390fa1a63973b98ae9b"
+          },
+          "pan": 17,
+          "target_active_rms_dbfs": -31,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              128,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        }
+      ],
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.34812803200715914,
+          0.5113138283636129
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-6.34",
+        "input_lra": "2.20",
+        "input_thresh": "-28.50",
+        "output_i": "-23.16",
+        "output_tp": "-11.04",
+        "output_lra": "2.40",
+        "output_thresh": "-33.16",
+        "normalization_type": "dynamic",
+        "target_offset": "0.16"
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-continuity-review/01-title-frostglass-v9.mmp",
+          "bytes": 7649,
+          "sha256": "36c08aafd3ca59e1c64af9753aa7435f7413bb00f37709225ace77bbc7f02b9d"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-continuity-review/01-title-frostglass-v9.wav",
+          "bytes": 26331470,
+          "sha256": "560980cf2347f2f7af4529b62d679a92c0c2cea758e0395f8de0b771ecda854e"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-continuity-review/01-title-frostglass-v9.mp3",
+          "bytes": 2927700,
+          "sha256": "b2a80b5369bf95aae018512700cb987d7c65b096a71df8988d33e27b32d7cb3c"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-continuity-review/01-title-frostglass-v9.ogg",
+          "bytes": 1477693,
+          "sha256": "e1526961fb977108a32650eea3de4009b68c77a4e4c5dd5ad074c45b019b1a61"
+        }
+      ],
+      "native_project": "frozen pre-master stems, paths checked; not separately native-rendered",
+      "subjective_listening": "not claimed; user audition required"
+    },
+    {
+      "role": "explore",
+      "title": "灰线行军 · 连续行旅",
+      "stem": "02-explore-ashline-v5",
+      "bars": 48,
+      "bpm": 112,
+      "seconds": 102.85714583333333,
+      "sections": [
+        {
+          "start_bar": 0,
+          "end_bar": 8,
+          "name": "orientation"
+        },
+        {
+          "start_bar": 8,
+          "end_bar": 20,
+          "name": "exchange"
+        },
+        {
+          "start_bar": 20,
+          "end_bar": 28,
+          "name": "connected clearing"
+        },
+        {
+          "start_bar": 28,
+          "end_bar": 40,
+          "name": "new route"
+        },
+        {
+          "start_bar": 40,
+          "end_bar": 48,
+          "name": "smooth return"
+        }
+      ],
+      "tracks": [
+        {
+          "name": "Piano traveller",
+          "program": 0,
+          "bank": 0,
+          "notes": 96,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Piano-traveller.wav",
+            "bytes": 39497232,
+            "sha256": "502194435195c7a42ad0f8db89ee65296a2578754170f849bf984e56898349bf"
+          },
+          "pan": -7,
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              72,
+              1
+            ],
+            [
+              80,
+              0.76
+            ],
+            [
+              88,
+              0.6
+            ],
+            [
+              100,
+              0.6
+            ],
+            [
+              112,
+              0.85
+            ],
+            [
+              120,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": true
+        },
+        {
+          "name": "Pizzicato steps",
+          "program": 45,
+          "bank": 0,
+          "notes": 72,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Pizzicato-steps.wav",
+            "bytes": 39497232,
+            "sha256": "4ebee1a1c1817150286ecbd8c00f0720288bba3b41cfcd6cffc74a6a1ea01998"
+          },
+          "pan": 30,
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Clarinet replies",
+          "program": 71,
+          "bank": 0,
+          "notes": 5,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Clarinet-replies.wav",
+            "bytes": 39497232,
+            "sha256": "71b7b1ee605ba0399543e6cffb9a82db8c351ee3fac24d58ed3b77ba8bf14a72"
+          },
+          "pan": -24,
+          "target_active_rms_dbfs": -34,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Oboe clearing",
+          "program": 68,
+          "bank": 0,
+          "notes": 23,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Oboe-clearing.wav",
+            "bytes": 39497232,
+            "sha256": "ac70c884bc810fecb293f61eb1a4e23807561074248e19a74b15faf801decb24"
+          },
+          "pan": 18,
+          "target_active_rms_dbfs": -29,
+          "continuous_gain_points": [
+            [
+              0,
+              0
+            ],
+            [
+              72,
+              0
+            ],
+            [
+              80,
+              0.24
+            ],
+            [
+              88,
+              0.55
+            ],
+            [
+              100,
+              0.55
+            ],
+            [
+              112,
+              0.18
+            ],
+            [
+              120,
+              0
+            ],
+            [
+              192,
+              0
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Flute breeze",
+          "program": 73,
+          "bank": 0,
+          "notes": 2,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Flute-breeze.wav",
+            "bytes": 39497232,
+            "sha256": "67fa24476ab56049b3ce1c915d2986ea6e636eccbdbe7697c02dc23cf07823d9"
+          },
+          "pan": -12,
+          "target_active_rms_dbfs": -39,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Harp turning points",
+          "program": 46,
+          "bank": 0,
+          "notes": 6,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Harp-turning-points.wav",
+            "bytes": 39497232,
+            "sha256": "309fb9e1749547a7a4f3aaa158e0e80025485c144882015dcf9702af63c3d302"
+          },
+          "pan": -33,
+          "target_active_rms_dbfs": -39,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Continuous string bridge",
+          "program": 49,
+          "bank": 0,
+          "notes": 16,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Continuous-string-bridge.wav",
+            "bytes": 39497232,
+            "sha256": "eecc6997297070fc0fed212a6c10903d050eb3af5bbc1faae92065ff047e6f45"
+          },
+          "pan": -35,
+          "target_active_rms_dbfs": -33,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Cello road",
+          "program": 42,
+          "bank": 0,
+          "notes": 24,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Cello-road.wav",
+            "bytes": 39497232,
+            "sha256": "815ef394028953de8441f1145a4de4604208b5ebca9211b154b5dbaf2e65316c"
+          },
+          "pan": 29,
+          "target_active_rms_dbfs": -36,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0.04,
+          "cc64_used": false
+        },
+        {
+          "name": "Stable bass",
+          "program": 43,
+          "bank": 0,
+          "notes": 48,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Stable-bass.wav",
+            "bytes": 39497232,
+            "sha256": "d4f82595e3c80479e84c366ac574d9d067430f5ffe0fe618a776366db8dd2924"
+          },
+          "pan": 0,
+          "target_active_rms_dbfs": -34,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Celeste frost",
+          "program": 8,
+          "bank": 0,
+          "notes": 6,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Celeste-frost.wav",
+            "bytes": 39497232,
+            "sha256": "e987f82019e8835af96bbb3b47abde0b055b36ac63ea356247ab798130d72801"
+          },
+          "pan": 31,
+          "target_active_rms_dbfs": -45,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Quiet drum pulse",
+          "program": 48,
+          "bank": 128,
+          "notes": 48,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/02-explore-ashline-v5-Quiet-drum-pulse.wav",
+            "bytes": 39497232,
+            "sha256": "1d1e2b35fca6873b418c5cc0f391a3c31d364d1231379e4bba8c240142b57ec2"
+          },
+          "pan": 0,
+          "target_active_rms_dbfs": -40,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        }
+      ],
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.36449444764292754,
+          0.6915524384629758
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-6.64",
+        "input_lra": "1.80",
+        "input_thresh": "-28.50",
+        "output_i": "-23.11",
+        "output_tp": "-11.42",
+        "output_lra": "1.60",
+        "output_thresh": "-33.11",
+        "normalization_type": "dynamic",
+        "target_offset": "0.11"
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-continuity-review/02-explore-ashline-v5.mmp",
+          "bytes": 10286,
+          "sha256": "3f552523affd2f7190403d827a944e26b5bcfb88644e060b19e61c6f85209758"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-continuity-review/02-explore-ashline-v5.wav",
+          "bytes": 29622902,
+          "sha256": "d2b88883d1d52620ec5c96e890d16a6f9b52b3f970539e4ed47a6af59a4dbd5b"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-continuity-review/02-explore-ashline-v5.mp3",
+          "bytes": 3293268,
+          "sha256": "3ae5944d0ca73c3392de944f316e4b0681d3c3d9e033dc0a21d55494061a97ae"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-continuity-review/02-explore-ashline-v5.ogg",
+          "bytes": 1776555,
+          "sha256": "f0df7b611f19eb7a3e01ae81981ccb8e73ebf8bff1797f7b62f01d9d2354f3f5"
+        }
+      ],
+      "native_project": "frozen pre-master stems, paths checked; not separately native-rendered",
+      "subjective_listening": "not claimed; user audition required"
+    },
+    {
+      "role": "battle",
+      "title": "黑脉交锋 · 连贯反击",
+      "stem": "03-battle-blackpulse-v5",
+      "bars": 48,
+      "bpm": 124,
+      "seconds": 92.90322916666666,
+      "sections": [
+        {
+          "start_bar": 0,
+          "end_bar": 6,
+          "name": "immediate connected pulse"
+        },
+        {
+          "start_bar": 6,
+          "end_bar": 18,
+          "name": "conflict"
+        },
+        {
+          "start_bar": 18,
+          "end_bar": 26,
+          "name": "gradual escalation"
+        },
+        {
+          "start_bar": 26,
+          "end_bar": 30,
+          "name": "continuous release"
+        },
+        {
+          "start_bar": 30,
+          "end_bar": 42,
+          "name": "gradual counterstrike"
+        },
+        {
+          "start_bar": 42,
+          "end_bar": 48,
+          "name": "connected pivot"
+        }
+      ],
+      "tracks": [
+        {
+          "name": "Violin sung challenge",
+          "program": 40,
+          "bank": 0,
+          "notes": 89,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Violin-sung-challenge.wav",
+            "bytes": 35674928,
+            "sha256": "588788d4843d6c4a8fa20661a21b7cf39808a70ee66e539cbf97ae6ae01a8d09"
+          },
+          "pan": -24,
+          "target_active_rms_dbfs": -24,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0.04,
+          "cc64_used": false
+        },
+        {
+          "name": "Pizzicato motor",
+          "program": 45,
+          "bank": 0,
+          "notes": 96,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Pizzicato-motor.wav",
+            "bytes": 35674928,
+            "sha256": "20b2255bf23eeabe8677696b1ae8e1decd130ff464bb409dcb999e8647447ed0"
+          },
+          "pan": -37,
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Cello steady pulse",
+          "program": 42,
+          "bank": 0,
+          "notes": 96,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Cello-steady-pulse.wav",
+            "bytes": 35674928,
+            "sha256": "b856549698a00652333bb80e05b130a3e69d3f52d9e29199404a103dcd4c9044"
+          },
+          "pan": 28,
+          "target_active_rms_dbfs": -34,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0.04,
+          "cc64_used": false
+        },
+        {
+          "name": "Stable bass",
+          "program": 43,
+          "bank": 0,
+          "notes": 48,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Stable-bass.wav",
+            "bytes": 35674928,
+            "sha256": "d3dbf8e14d5b981262a9d65de5e2ae1058d2f0c347ad13d4c585de3234873cc3"
+          },
+          "pan": 0,
+          "target_active_rms_dbfs": -33,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Horn answer",
+          "program": 60,
+          "bank": 0,
+          "notes": 20,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Horn-answer.wav",
+            "bytes": 35674928,
+            "sha256": "1f45a7b5c3ff3d7e530119584992fa135913b0da05acd4cffa66bab9605724ea"
+          },
+          "pan": -14,
+          "target_active_rms_dbfs": -33,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Trumpet peak",
+          "program": 56,
+          "bank": 0,
+          "notes": 5,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Trumpet-peak.wav",
+            "bytes": 35674928,
+            "sha256": "eb02f0ef858fa0cb8533ee01e622d67e63d4f64cd61cb565278e3f901cbb32cc"
+          },
+          "pan": 20,
+          "target_active_rms_dbfs": -38,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Trombone support",
+          "program": 57,
+          "bank": 0,
+          "notes": 5,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Trombone-support.wav",
+            "bytes": 35674928,
+            "sha256": "28e9ad1593c23e4a9ad74003fa12715729b886a3130859ff0ba6b8aa552a434b"
+          },
+          "pan": 10,
+          "target_active_rms_dbfs": -39,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Bassoon release",
+          "program": 70,
+          "bank": 0,
+          "notes": 4,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Bassoon-release.wav",
+            "bytes": 35674928,
+            "sha256": "d8f82724cd655ac8fc77c59085aab285e05eb7434634b4853d92e2109a7cc463"
+          },
+          "pan": 19,
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Piano release",
+          "program": 0,
+          "bank": 0,
+          "notes": 4,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Piano-release.wav",
+            "bytes": 35674928,
+            "sha256": "598f84c9ee750aec1837f5b0e0df9d7e3a0f51c435660e9d72658c3592d8d176"
+          },
+          "pan": -4,
+          "target_active_rms_dbfs": -38,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": true
+        },
+        {
+          "name": "Harp transitions",
+          "program": 46,
+          "bank": 0,
+          "notes": 6,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Harp-transitions.wav",
+            "bytes": 35674928,
+            "sha256": "1b11cd87f0cab1b90bfea1e871bf7ca5cab80fc488db19e198a27dd126c402ca"
+          },
+          "pan": -29,
+          "target_active_rms_dbfs": -42,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Continuous string bridge",
+          "program": 49,
+          "bank": 0,
+          "notes": 15,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Continuous-string-bridge.wav",
+            "bytes": 35674928,
+            "sha256": "50346ce36bcdeba348a42ea0c5329020083a6635f95c2b8a2eac5790c604423b"
+          },
+          "pan": 35,
+          "target_active_rms_dbfs": -32,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Timpani anchors",
+          "program": 47,
+          "bank": 0,
+          "notes": 48,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Timpani-anchors.wav",
+            "bytes": 35674928,
+            "sha256": "aa21183a7fc4616ad30c443fe52b560bab9ffe551706f3c0739b8bdd3fd4d3fd"
+          },
+          "pan": -6,
+          "target_active_rms_dbfs": -36,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        },
+        {
+          "name": "Restrained drums",
+          "program": 48,
+          "bank": 128,
+          "notes": 92,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/continuity-rewrite/03-battle-blackpulse-v5-Restrained-drums.wav",
+            "bytes": 35674928,
+            "sha256": "12d28a970ca5444d4e6c2bade921aec0507bb1c40ead07c3a39af08c3c2766c6"
+          },
+          "pan": 0,
+          "target_active_rms_dbfs": -37,
+          "continuous_gain_points": [
+            [
+              0,
+              1
+            ],
+            [
+              192,
+              1
+            ]
+          ],
+          "note_anticipation_seconds": 0,
+          "cc64_used": false
+        }
+      ],
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.4065278298146895,
+          0.6754268740881246
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-6.40",
+        "input_lra": "1.40",
+        "input_thresh": "-28.50",
+        "output_i": "-22.89",
+        "output_tp": "-10.18",
+        "output_lra": "1.30",
+        "output_thresh": "-32.89",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.11"
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-continuity-review/03-battle-blackpulse-v5.mmp",
+          "bytes": 12094,
+          "sha256": "12e076e25f522eb229dd144e4c4cdfd0f0b3f52015a6ccdb1a38d3a54150d89d"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-continuity-review/03-battle-blackpulse-v5.wav",
+          "bytes": 26756174,
+          "sha256": "5e5424b157c4451b8297de6a9e5d613981b9a0e98b2d3f824e7c704480a73331"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-continuity-review/03-battle-blackpulse-v5.mp3",
+          "bytes": 2974548,
+          "sha256": "0ca3ea6b93e8844603746b2a3159e7eb5ca41058b836725a81c14cc0a986ab93"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-continuity-review/03-battle-blackpulse-v5.ogg",
+          "bytes": 1723856,
+          "sha256": "4d07b6f6e3b5b57c6890e7a02c2455fc1cb87d4f1e23edd5031d7e214e7afdf9"
+        }
+      ],
+      "native_project": "frozen pre-master stems, paths checked; not separately native-rendered",
+      "subjective_listening": "not claimed; user audition required"
+    }
+  ],
+  "scope": "one new version each of title/explore/battle; no game/config edits"
+}

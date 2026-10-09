@@ -1,0 +1,11 @@
+{
+  "targetIssues": [],
+  "globalErrors": [
+    {
+      "code": "unlisted",
+      "path": "cards/spell-tt3-holy-water.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "bb00ab50a57ce14f0c048d4114796be579f44f085290f63f05755ad8c7f27752"
+    }
+  ]
+}

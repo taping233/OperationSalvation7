@@ -1,0 +1,28 @@
+{
+  "current": 272,
+  "retired": 49,
+  "migratedOrMerged": 2,
+  "historicalOnly": 8,
+  "cardIds": 331,
+  "cardFaces": 816,
+  "wordMainEntries": 331,
+  "wordHistoricalFaces": 485,
+  "renderedPages": 115,
+  "extractionFailures": 0,
+  "docsCheck": "passed",
+  "visualReview": "115 页图像复核，无裁切、重叠、缺字或空白页",
+  "files": {
+    "catalog.json": {
+      "bytes": 2085675,
+      "sha256": "7655a8d7f0de3537f885ccf868f55a3e5b8051e4207acd8597717ae319fdbd4b"
+    },
+    "代号柒现役与历史卡牌总录.docx": {
+      "bytes": 68096,
+      "sha256": "49ff9b7592ce4a176c48898e6b7ac366fad6b165567f00954e5816823144c8e6"
+    },
+    "render-final\\代号柒现役与历史卡牌总录.pdf": {
+      "bytes": 2768595,
+      "sha256": "c087aaf2efb637c94f0c25381773a1e2f4e90087a008bd7090e575ad61ce722a"
+    }
+  }
+}

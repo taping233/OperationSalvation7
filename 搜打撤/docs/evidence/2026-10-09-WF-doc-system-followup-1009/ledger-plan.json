@@ -1,0 +1,25 @@
+{
+  "plans": [
+    {
+      "file": "docs/PARALLEL-REGISTRY.md",
+      "expectedSha256": "d6a0ba704109375c630cc5971cb16fbe55c9595263eb68812ae576f4ca2c6522",
+      "preview": "PARALLEL-REGISTRY-preview.md",
+      "previewSha256": "1dcffd19879eb8739c22b5544475352abc16c456ae0b1a32ce817a82e5709a7a",
+      "bytesBefore": 124823,
+      "bytesAfter": 51860,
+      "preservedActive": true,
+      "historyIndexRows": 139
+    },
+    {
+      "file": "docs/PENDING.md",
+      "expectedSha256": "1e349ba6e25129e319b1c27478fd1d61cee6ae7f88cbbaf4be8774ab4103d704",
+      "preview": "PENDING-preview.md",
+      "previewSha256": "1c180260989e0546350a126c79599f0daa864122b097b69166239d8f478ed718",
+      "bytesBefore": 20559,
+      "bytesAfter": 18743,
+      "preservedActive": true,
+      "historyIndexRows": 21
+    }
+  ],
+  "method": "preserve-original-copy-then-revise-history-index"
+}

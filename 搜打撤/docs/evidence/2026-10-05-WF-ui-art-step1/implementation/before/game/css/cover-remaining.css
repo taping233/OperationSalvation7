@@ -1,0 +1,7 @@
+/* 2026-10-05: uncovered UI only. Recent covers are deliberately not imported or replaced.
+   cover-hub.css is an excluded, unmounted candidate under the latest freeze instruction. */
+@import url('./cover-system.css');
+@import url('./cover-details.css');
+@import url('./cover-run.css');
+@import url('./cover-battle-shell.css');
+@import url('./cover-secondary.css');

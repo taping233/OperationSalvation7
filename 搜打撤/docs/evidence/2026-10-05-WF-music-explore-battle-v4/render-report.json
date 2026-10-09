@@ -1,0 +1,1599 @@
+{
+  "source_inputs_unchanged": [
+    {
+      "path": ".tmp/music-workstation/GeneralUser-GS.sf2",
+      "bytes": 32319396,
+      "sha256": "9575028c7a1f589f5770fccc8cff2734566af40cd26ed836944e9a5152688cfe"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-identity/round-B/02-explore-ashline-v3.mmp",
+      "bytes": 140753,
+      "sha256": "0036c8ef77ac8d8260baa422716ed7ce3b4706fa4741a74adf374d77ff473887"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-identity/round-B/02-explore-ashline-v3.wav",
+      "bytes": 25920044,
+      "sha256": "8003696c27fade00a3cdd5dec1dea6a454fedc187ad45b6ac2f61e1c3b4d5a26"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-identity/round-B/03-battle-blackpulse-v3.mmp",
+      "bytes": 179054,
+      "sha256": "784c1e04c1861a48e09cd91be67bac159c88173a77285381572bbf5f81eb10ae"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-identity/round-B/03-battle-blackpulse-v3.wav",
+      "bytes": 26756174,
+      "sha256": "539b2620cfc004b7ec6b13d7febb0d13c089081486eca1dea2852d696e82400c"
+    }
+  ],
+  "tracks": [
+    {
+      "role": "explore",
+      "title": "灰线行军 · 木管行旅",
+      "stem": "02-explore-ashline-v4",
+      "bpm": 116,
+      "bars": 48,
+      "seconds": 99.31035416666667,
+      "sections": [
+        {
+          "start_bar": 0,
+          "end_bar": 8,
+          "name": "orientation"
+        },
+        {
+          "start_bar": 8,
+          "end_bar": 20,
+          "name": "woodwind exchange"
+        },
+        {
+          "start_bar": 20,
+          "end_bar": 28,
+          "name": "clearing"
+        },
+        {
+          "start_bar": 28,
+          "end_bar": 40,
+          "name": "new route"
+        },
+        {
+          "start_bar": 40,
+          "end_bar": 48,
+          "name": "changed return"
+        }
+      ],
+      "tracks": [
+        {
+          "name": "Piano traveller",
+          "program": 0,
+          "bank": 0,
+          "pan": -6,
+          "notes": 111,
+          "velocity_range": [
+            49,
+            64
+          ],
+          "target_active_rms_dbfs": -25,
+          "gain_db": 23.063222171469757,
+          "cc11_expression_used": true,
+          "piano_cc64": [
+            {
+              "beat": 0.025,
+              "cc64": 127
+            },
+            {
+              "beat": 3.25,
+              "cc64": 0
+            },
+            {
+              "beat": 4.025,
+              "cc64": 127
+            },
+            {
+              "beat": 6.55,
+              "cc64": 0
+            },
+            {
+              "beat": 8.025,
+              "cc64": 127
+            },
+            {
+              "beat": 11.25,
+              "cc64": 0
+            },
+            {
+              "beat": 12.025,
+              "cc64": 127
+            },
+            {
+              "beat": 14.55,
+              "cc64": 0
+            },
+            {
+              "beat": 16.025,
+              "cc64": 127
+            },
+            {
+              "beat": 19.25,
+              "cc64": 0
+            },
+            {
+              "beat": 20.025,
+              "cc64": 127
+            },
+            {
+              "beat": 22.55,
+              "cc64": 0
+            },
+            {
+              "beat": 24.025,
+              "cc64": 127
+            },
+            {
+              "beat": 27.25,
+              "cc64": 0
+            },
+            {
+              "beat": 28.025,
+              "cc64": 127
+            },
+            {
+              "beat": 30.55,
+              "cc64": 0
+            },
+            {
+              "beat": 32.025,
+              "cc64": 127
+            },
+            {
+              "beat": 35.25,
+              "cc64": 0
+            },
+            {
+              "beat": 36.025,
+              "cc64": 127
+            },
+            {
+              "beat": 38.55,
+              "cc64": 0
+            },
+            {
+              "beat": 40.025,
+              "cc64": 127
+            },
+            {
+              "beat": 43.25,
+              "cc64": 0
+            },
+            {
+              "beat": 44.025,
+              "cc64": 127
+            },
+            {
+              "beat": 46.55,
+              "cc64": 0
+            },
+            {
+              "beat": 48.025,
+              "cc64": 127
+            },
+            {
+              "beat": 51.25,
+              "cc64": 0
+            },
+            {
+              "beat": 52.025,
+              "cc64": 127
+            },
+            {
+              "beat": 54.55,
+              "cc64": 0
+            },
+            {
+              "beat": 56.025,
+              "cc64": 127
+            },
+            {
+              "beat": 59.25,
+              "cc64": 0
+            },
+            {
+              "beat": 60.025,
+              "cc64": 127
+            },
+            {
+              "beat": 62.55,
+              "cc64": 0
+            },
+            {
+              "beat": 64.025,
+              "cc64": 127
+            },
+            {
+              "beat": 67.25,
+              "cc64": 0
+            },
+            {
+              "beat": 68.025,
+              "cc64": 127
+            },
+            {
+              "beat": 70.55,
+              "cc64": 0
+            },
+            {
+              "beat": 72.025,
+              "cc64": 127
+            },
+            {
+              "beat": 75.25,
+              "cc64": 0
+            },
+            {
+              "beat": 76.025,
+              "cc64": 127
+            },
+            {
+              "beat": 78.55,
+              "cc64": 0
+            },
+            {
+              "beat": 80.025,
+              "cc64": 127
+            },
+            {
+              "beat": 82.9,
+              "cc64": 0
+            },
+            {
+              "beat": 84.025,
+              "cc64": 127
+            },
+            {
+              "beat": 86.2,
+              "cc64": 0
+            },
+            {
+              "beat": 88.025,
+              "cc64": 127
+            },
+            {
+              "beat": 90.9,
+              "cc64": 0
+            },
+            {
+              "beat": 92.025,
+              "cc64": 127
+            },
+            {
+              "beat": 94.2,
+              "cc64": 0
+            },
+            {
+              "beat": 96.025,
+              "cc64": 127
+            },
+            {
+              "beat": 98.9,
+              "cc64": 0
+            },
+            {
+              "beat": 100.025,
+              "cc64": 127
+            },
+            {
+              "beat": 102.2,
+              "cc64": 0
+            },
+            {
+              "beat": 104.025,
+              "cc64": 127
+            },
+            {
+              "beat": 106.9,
+              "cc64": 0
+            },
+            {
+              "beat": 108.025,
+              "cc64": 127
+            },
+            {
+              "beat": 110.2,
+              "cc64": 0
+            },
+            {
+              "beat": 112.025,
+              "cc64": 127
+            },
+            {
+              "beat": 115.25,
+              "cc64": 0
+            },
+            {
+              "beat": 116.025,
+              "cc64": 127
+            },
+            {
+              "beat": 118.55,
+              "cc64": 0
+            },
+            {
+              "beat": 120.025,
+              "cc64": 127
+            },
+            {
+              "beat": 123.25,
+              "cc64": 0
+            },
+            {
+              "beat": 124.025,
+              "cc64": 127
+            },
+            {
+              "beat": 126.55,
+              "cc64": 0
+            },
+            {
+              "beat": 128.025,
+              "cc64": 127
+            },
+            {
+              "beat": 131.25,
+              "cc64": 0
+            },
+            {
+              "beat": 132.025,
+              "cc64": 127
+            },
+            {
+              "beat": 134.55,
+              "cc64": 0
+            },
+            {
+              "beat": 136.025,
+              "cc64": 127
+            },
+            {
+              "beat": 139.25,
+              "cc64": 0
+            },
+            {
+              "beat": 140.025,
+              "cc64": 127
+            },
+            {
+              "beat": 142.55,
+              "cc64": 0
+            },
+            {
+              "beat": 144.025,
+              "cc64": 127
+            },
+            {
+              "beat": 147.25,
+              "cc64": 0
+            },
+            {
+              "beat": 148.025,
+              "cc64": 127
+            },
+            {
+              "beat": 150.55,
+              "cc64": 0
+            },
+            {
+              "beat": 152.025,
+              "cc64": 127
+            },
+            {
+              "beat": 155.25,
+              "cc64": 0
+            },
+            {
+              "beat": 156.025,
+              "cc64": 127
+            },
+            {
+              "beat": 158.55,
+              "cc64": 0
+            },
+            {
+              "beat": 160.025,
+              "cc64": 127
+            },
+            {
+              "beat": 162.9,
+              "cc64": 0
+            },
+            {
+              "beat": 164.025,
+              "cc64": 127
+            },
+            {
+              "beat": 166.2,
+              "cc64": 0
+            },
+            {
+              "beat": 168.025,
+              "cc64": 127
+            },
+            {
+              "beat": 170.9,
+              "cc64": 0
+            },
+            {
+              "beat": 172.025,
+              "cc64": 127
+            },
+            {
+              "beat": 174.2,
+              "cc64": 0
+            },
+            {
+              "beat": 176.025,
+              "cc64": 127
+            },
+            {
+              "beat": 178.9,
+              "cc64": 0
+            },
+            {
+              "beat": 180.025,
+              "cc64": 127
+            },
+            {
+              "beat": 182.2,
+              "cc64": 0
+            },
+            {
+              "beat": 184.025,
+              "cc64": 127
+            },
+            {
+              "beat": 186.9,
+              "cc64": 0
+            },
+            {
+              "beat": 188.025,
+              "cc64": 127
+            },
+            {
+              "beat": 190.2,
+              "cc64": 0
+            }
+          ],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/02-explore-ashline-v4-Piano-traveller.wav",
+            "bytes": 38135264,
+            "sha256": "f5cbc7515259b13f693832f51571896eda5ddcdeea141b69a4898e3d9ec7575f"
+          }
+        },
+        {
+          "name": "Pizzicato steps",
+          "program": 45,
+          "bank": 0,
+          "pan": 34,
+          "notes": 92,
+          "velocity_range": [
+            40,
+            52
+          ],
+          "target_active_rms_dbfs": -32,
+          "gain_db": 20.89241348065994,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/02-explore-ashline-v4-Pizzicato-steps.wav",
+            "bytes": 38135264,
+            "sha256": "8865f80eaf05128dd9f6b4d0793cf35dae15152f8c331555e8002e0aa6a30dd1"
+          }
+        },
+        {
+          "name": "Clarinet replies",
+          "program": 71,
+          "bank": 0,
+          "pan": -24,
+          "notes": 26,
+          "velocity_range": [
+            47,
+            54
+          ],
+          "target_active_rms_dbfs": -29,
+          "gain_db": 17.654061262459763,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/02-explore-ashline-v4-Clarinet-replies.wav",
+            "bytes": 38135264,
+            "sha256": "2126ac25a69d3190e9fe4f4417e0c392ff07269aa8b77d3efbd055a817c9e682"
+          }
+        },
+        {
+          "name": "Oboe clearing",
+          "program": 68,
+          "bank": 0,
+          "pan": 17,
+          "notes": 12,
+          "velocity_range": [
+            49,
+            49
+          ],
+          "target_active_rms_dbfs": -31,
+          "gain_db": 21.01359603039387,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/02-explore-ashline-v4-Oboe-clearing.wav",
+            "bytes": 38135264,
+            "sha256": "6229e21ff514c28ec4ba8b81476f182f2449aab0e39a59ff87c8a65340e6f60c"
+          }
+        },
+        {
+          "name": "Flute breeze",
+          "program": 73,
+          "bank": 0,
+          "pan": -12,
+          "notes": 11,
+          "velocity_range": [
+            47,
+            48
+          ],
+          "target_active_rms_dbfs": -33,
+          "gain_db": 9.007892863970362,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/02-explore-ashline-v4-Flute-breeze.wav",
+            "bytes": 38135264,
+            "sha256": "eef6c3f6b0777698b5ab3cc1bd58429b82bec22aa2f08a2d7823270a6ba8b79c"
+          }
+        },
+        {
+          "name": "Bassoon inner line",
+          "program": 70,
+          "bank": 0,
+          "pan": 21,
+          "notes": 8,
+          "velocity_range": [
+            39,
+            43
+          ],
+          "target_active_rms_dbfs": -35,
+          "gain_db": 19.355228342023064,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/02-explore-ashline-v4-Bassoon-inner-line.wav",
+            "bytes": 38135264,
+            "sha256": "a6c3dea155a3f9b44a0c1d6d011fcbdd1aec92930f4409a5577fcbb50fac5f85"
+          }
+        },
+        {
+          "name": "Harp turning points",
+          "program": 46,
+          "bank": 0,
+          "pan": -35,
+          "notes": 56,
+          "velocity_range": [
+            33,
+            39
+          ],
+          "target_active_rms_dbfs": -35,
+          "gain_db": 15.029298763504325,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/02-explore-ashline-v4-Harp-turning-points.wav",
+            "bytes": 38135264,
+            "sha256": "15c841b5627e2ef9b3c0a6ac15fa89d6f2ffa871bad9fa77a8bdd72c214f6b0c"
+          }
+        },
+        {
+          "name": "Violin horizon",
+          "program": 40,
+          "bank": 0,
+          "pan": -42,
+          "notes": 24,
+          "velocity_range": [
+            44,
+            49
+          ],
+          "target_active_rms_dbfs": -32,
+          "gain_db": 12.54649134177351,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/02-explore-ashline-v4-Violin-horizon.wav",
+            "bytes": 38135264,
+            "sha256": "e5ff059ec2dcb7e577caf6d18e26a9550f6fcacb1b8d63303ec62ea948e91bc2"
+          }
+        },
+        {
+          "name": "Viola moving middle",
+          "program": 41,
+          "bank": 0,
+          "pan": 27,
+          "notes": 24,
+          "velocity_range": [
+            36,
+            42
+          ],
+          "target_active_rms_dbfs": -35,
+          "gain_db": 14.599236490966536,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/02-explore-ashline-v4-Viola-moving-middle.wav",
+            "bytes": 38135264,
+            "sha256": "c2ad196aa58aeedae35939eefbcb01a7b83bf174d1728cbc358b1ca45e9f6fd2"
+          }
+        },
+        {
+          "name": "Cello road",
+          "program": 42,
+          "bank": 0,
+          "pan": 36,
+          "notes": 48,
+          "velocity_range": [
+            45,
+            45
+          ],
+          "target_active_rms_dbfs": -34,
+          "gain_db": 11.919801409172216,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/02-explore-ashline-v4-Cello-road.wav",
+            "bytes": 38135264,
+            "sha256": "bf2d871f2fe27c265bf8cc7751c6d12490ce7408990919c93ff66d843853f9ff"
+          }
+        },
+        {
+          "name": "Double bass",
+          "program": 43,
+          "bank": 0,
+          "pan": 0,
+          "notes": 48,
+          "velocity_range": [
+            42,
+            48
+          ],
+          "target_active_rms_dbfs": -33,
+          "gain_db": 16.290787537674532,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/02-explore-ashline-v4-Double-bass.wav",
+            "bytes": 38135264,
+            "sha256": "a66a0d7c555f5869f4e19b141ba34e9312dd29a98c6647ad0a187033a9f2af78"
+          }
+        },
+        {
+          "name": "Soft long strings",
+          "program": 49,
+          "bank": 0,
+          "pan": 12,
+          "notes": 48,
+          "velocity_range": [
+            40,
+            40
+          ],
+          "target_active_rms_dbfs": -36,
+          "gain_db": 16.660868156694036,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/02-explore-ashline-v4-Soft-long-strings.wav",
+            "bytes": 38135264,
+            "sha256": "48a7d2719b0b9ffde6b50856707dca337031565bd29966d6223e18970a8a1729"
+          }
+        },
+        {
+          "name": "Celeste frost",
+          "program": 8,
+          "bank": 0,
+          "pan": 32,
+          "notes": 6,
+          "velocity_range": [
+            39,
+            39
+          ],
+          "target_active_rms_dbfs": -42,
+          "gain_db": 18.41620136025743,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/02-explore-ashline-v4-Celeste-frost.wav",
+            "bytes": 38135264,
+            "sha256": "b6d3560dfce78e936322b61d285b1d2e5859dae5206837942c467871e7fa7b1c"
+          }
+        },
+        {
+          "name": "Chamber percussion",
+          "program": 48,
+          "bank": 128,
+          "pan": 0,
+          "notes": 64,
+          "velocity_range": [
+            31,
+            40
+          ],
+          "target_active_rms_dbfs": -36,
+          "gain_db": 16.71336679517661,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/02-explore-ashline-v4-Chamber-percussion.wav",
+            "bytes": 38135264,
+            "sha256": "941ccf564eff27f151b097289a1a2cbba348beb5fea19d07feaa9ef3155f5c13"
+          }
+        },
+        {
+          "name": "Triangle",
+          "program": 48,
+          "bank": 128,
+          "pan": 38,
+          "notes": 6,
+          "velocity_range": [
+            30,
+            30
+          ],
+          "target_active_rms_dbfs": -47,
+          "gain_db": 24.570169497314183,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/02-explore-ashline-v4-Triangle.wav",
+            "bytes": 38135264,
+            "sha256": "d9ad8fce49959715a44511799af8290c83a876bcb08118b3915a0017d425e151"
+          }
+        }
+      ],
+      "engine": "Existing LMMS FluidSynth library + GeneralUser GS 2.0.3 BETA; stems directly mixed, frozen LMMS pre-master project included",
+      "old_loudness": {
+        "input_i": "-16.35",
+        "input_tp": "-1.20",
+        "input_lra": "5.70",
+        "input_thresh": "-26.42",
+        "output_i": "-22.87",
+        "output_tp": "-8.05",
+        "output_lra": "5.70",
+        "output_thresh": "-32.95",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.13"
+      },
+      "final_loudness": {
+        "input_i": "-17.43",
+        "input_tp": "-0.91",
+        "input_lra": "9.10",
+        "input_thresh": "-27.64",
+        "output_i": "-21.86",
+        "output_tp": "-5.94",
+        "output_lra": "8.40",
+        "output_thresh": "-32.02",
+        "normalization_type": "dynamic",
+        "target_offset": "-1.14"
+      },
+      "post_gain_db": 2.720887416307149,
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-explore-battle-v4/02-explore-ashline-v4.mmp",
+          "bytes": 13787,
+          "sha256": "4dfbc0ba4fb89f2bb16fa325ffe0debabffc13edc4696cab1cbc3d26c86e3a6a"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-explore-battle-v4/02-explore-ashline-v4.wav",
+          "bytes": 28601426,
+          "sha256": "3764992b8f0bae154a45542411f7da9912a381592b3ef7563e50e6e0806dbe5b"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-explore-battle-v4/02-explore-ashline-v4.mp3",
+          "bytes": 3179604,
+          "sha256": "b5c39b62473166748199649d55de1f25c816e288d2ae44b9d791e705400ff5f6"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-explore-battle-v4/02-explore-ashline-v4.ogg",
+          "bytes": 1834673,
+          "sha256": "2eadf222598864a379265df83cd1bc23e2992955d88be56c6af1a38b5f1f9652"
+        }
+      ],
+      "subjective_listening": "not claimed; user audition required"
+    },
+    {
+      "role": "battle",
+      "title": "黑脉交锋 · 铜管反击",
+      "stem": "03-battle-blackpulse-v4",
+      "bpm": 132,
+      "bars": 48,
+      "seconds": 87.27272916666666,
+      "sections": [
+        {
+          "start_bar": 0,
+          "end_bar": 6,
+          "name": "immediate tension"
+        },
+        {
+          "start_bar": 6,
+          "end_bar": 18,
+          "name": "conflict"
+        },
+        {
+          "start_bar": 18,
+          "end_bar": 26,
+          "name": "escalation"
+        },
+        {
+          "start_bar": 26,
+          "end_bar": 30,
+          "name": "release"
+        },
+        {
+          "start_bar": 30,
+          "end_bar": 42,
+          "name": "counterstrike"
+        },
+        {
+          "start_bar": 42,
+          "end_bar": 48,
+          "name": "pivot to loop"
+        }
+      ],
+      "tracks": [
+        {
+          "name": "Violin challenge",
+          "program": 48,
+          "bank": 0,
+          "pan": -33,
+          "notes": 129,
+          "velocity_range": [
+            62,
+            82
+          ],
+          "target_active_rms_dbfs": -24,
+          "gain_db": 20.61150890092761,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/03-battle-blackpulse-v4-Violin-challenge.wav",
+            "bytes": 33512816,
+            "sha256": "a0a9cfec9602018577f2aaa8b6bdb35e365afdad58020da906ae9c8f41674dc4"
+          }
+        },
+        {
+          "name": "Violin counter",
+          "program": 40,
+          "bank": 0,
+          "pan": 36,
+          "notes": 32,
+          "velocity_range": [
+            46,
+            49
+          ],
+          "target_active_rms_dbfs": -31,
+          "gain_db": 11.933811336070503,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/03-battle-blackpulse-v4-Violin-counter.wav",
+            "bytes": 33512816,
+            "sha256": "747585f842f936d5736e1bd87f007af8bb619f35b8c2760d370292d579cb7756"
+          }
+        },
+        {
+          "name": "Viola drive",
+          "program": 45,
+          "bank": 0,
+          "pan": -43,
+          "notes": 96,
+          "velocity_range": [
+            43,
+            54
+          ],
+          "target_active_rms_dbfs": -32,
+          "gain_db": 20.665719597033167,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/03-battle-blackpulse-v4-Viola-drive.wav",
+            "bytes": 33512816,
+            "sha256": "b4f3dc0e0a6f5227adcebe48dac1e4692c46fd217f9df14ad9ea20fb625fdf88"
+          }
+        },
+        {
+          "name": "Cello ostinato",
+          "program": 42,
+          "bank": 0,
+          "pan": 28,
+          "notes": 136,
+          "velocity_range": [
+            42,
+            57
+          ],
+          "target_active_rms_dbfs": -31,
+          "gain_db": 22.844905074809667,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/03-battle-blackpulse-v4-Cello-ostinato.wav",
+            "bytes": 33512816,
+            "sha256": "a0e598f276a39545ca6bdba5b3e87fcef4ac8242769b50679bf2087c912040d7"
+          }
+        },
+        {
+          "name": "Double bass",
+          "program": 43,
+          "bank": 0,
+          "pan": 0,
+          "notes": 48,
+          "velocity_range": [
+            42,
+            55
+          ],
+          "target_active_rms_dbfs": -31,
+          "gain_db": 16.32540119667162,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/03-battle-blackpulse-v4-Double-bass.wav",
+            "bytes": 33512816,
+            "sha256": "2a2c9b9479dbc84d8eb5075527c723a8cf349d72eaa031fad1642323187658c8"
+          }
+        },
+        {
+          "name": "Horn calls",
+          "program": 60,
+          "bank": 0,
+          "pan": -20,
+          "notes": 32,
+          "velocity_range": [
+            55,
+            62
+          ],
+          "target_active_rms_dbfs": -28,
+          "gain_db": 10.047131986766642,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/03-battle-blackpulse-v4-Horn-calls.wav",
+            "bytes": 33512816,
+            "sha256": "34e8487b4745ad27e99f29111e156632c583cb0d8fe3ff169e1b5bcb5ed14035"
+          }
+        },
+        {
+          "name": "Trumpet counterstrike",
+          "program": 56,
+          "bank": 0,
+          "pan": 19,
+          "notes": 30,
+          "velocity_range": [
+            54,
+            61
+          ],
+          "target_active_rms_dbfs": -32,
+          "gain_db": 14.550856699197528,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/03-battle-blackpulse-v4-Trumpet-counterstrike.wav",
+            "bytes": 33512816,
+            "sha256": "0a3e333288f211753ab743f5dc967ff6aa08ab1bcd1a0d7b18cf45e9f00a36c9"
+          }
+        },
+        {
+          "name": "Trombone weight",
+          "program": 57,
+          "bank": 0,
+          "pan": 12,
+          "notes": 20,
+          "velocity_range": [
+            48,
+            52
+          ],
+          "target_active_rms_dbfs": -34,
+          "gain_db": 13.887306320609149,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/03-battle-blackpulse-v4-Trombone-weight.wav",
+            "bytes": 33512816,
+            "sha256": "2eaf79d174f60810f762910c8a11d724a8ee906d60e8e718c1d9e5d7de5ec68d"
+          }
+        },
+        {
+          "name": "Bassoon release",
+          "program": 70,
+          "bank": 0,
+          "pan": 28,
+          "notes": 4,
+          "velocity_range": [
+            43,
+            48
+          ],
+          "target_active_rms_dbfs": -35,
+          "gain_db": 21.794437307222644,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/03-battle-blackpulse-v4-Bassoon-release.wav",
+            "bytes": 33512816,
+            "sha256": "3e668eff5a26f59e93fffa9e24ee7eb50ac259b5f1ce593d9301a919061fd40f"
+          }
+        },
+        {
+          "name": "Oboe warning",
+          "program": 68,
+          "bank": 0,
+          "pan": -12,
+          "notes": 3,
+          "velocity_range": [
+            43,
+            43
+          ],
+          "target_active_rms_dbfs": -35,
+          "gain_db": 14.01182995966349,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/03-battle-blackpulse-v4-Oboe-warning.wav",
+            "bytes": 33512816,
+            "sha256": "d54c649145cbfb9c6470ce12a2c97a8533a88034abe1f8d50fd3dd170f3c3fbe"
+          }
+        },
+        {
+          "name": "Piano accents",
+          "program": 0,
+          "bank": 0,
+          "pan": -5,
+          "notes": 4,
+          "velocity_range": [
+            39,
+            42
+          ],
+          "target_active_rms_dbfs": -34,
+          "gain_db": 30.409595340179795,
+          "cc11_expression_used": true,
+          "piano_cc64": [
+            {
+              "beat": 0.025,
+              "cc64": 127
+            },
+            {
+              "beat": 3.25,
+              "cc64": 0
+            },
+            {
+              "beat": 4.025,
+              "cc64": 127
+            },
+            {
+              "beat": 6.55,
+              "cc64": 0
+            },
+            {
+              "beat": 8.025,
+              "cc64": 127
+            },
+            {
+              "beat": 11.25,
+              "cc64": 0
+            },
+            {
+              "beat": 12.025,
+              "cc64": 127
+            },
+            {
+              "beat": 14.55,
+              "cc64": 0
+            },
+            {
+              "beat": 16.025,
+              "cc64": 127
+            },
+            {
+              "beat": 19.25,
+              "cc64": 0
+            },
+            {
+              "beat": 20.025,
+              "cc64": 127
+            },
+            {
+              "beat": 22.55,
+              "cc64": 0
+            },
+            {
+              "beat": 24.025,
+              "cc64": 127
+            },
+            {
+              "beat": 27.25,
+              "cc64": 0
+            },
+            {
+              "beat": 28.025,
+              "cc64": 127
+            },
+            {
+              "beat": 30.55,
+              "cc64": 0
+            },
+            {
+              "beat": 32.025,
+              "cc64": 127
+            },
+            {
+              "beat": 35.25,
+              "cc64": 0
+            },
+            {
+              "beat": 36.025,
+              "cc64": 127
+            },
+            {
+              "beat": 38.55,
+              "cc64": 0
+            },
+            {
+              "beat": 40.025,
+              "cc64": 127
+            },
+            {
+              "beat": 43.25,
+              "cc64": 0
+            },
+            {
+              "beat": 44.025,
+              "cc64": 127
+            },
+            {
+              "beat": 46.55,
+              "cc64": 0
+            },
+            {
+              "beat": 48.025,
+              "cc64": 127
+            },
+            {
+              "beat": 51.25,
+              "cc64": 0
+            },
+            {
+              "beat": 52.025,
+              "cc64": 127
+            },
+            {
+              "beat": 54.55,
+              "cc64": 0
+            },
+            {
+              "beat": 56.025,
+              "cc64": 127
+            },
+            {
+              "beat": 59.25,
+              "cc64": 0
+            },
+            {
+              "beat": 60.025,
+              "cc64": 127
+            },
+            {
+              "beat": 62.55,
+              "cc64": 0
+            },
+            {
+              "beat": 64.025,
+              "cc64": 127
+            },
+            {
+              "beat": 67.25,
+              "cc64": 0
+            },
+            {
+              "beat": 68.025,
+              "cc64": 127
+            },
+            {
+              "beat": 70.55,
+              "cc64": 0
+            },
+            {
+              "beat": 72.025,
+              "cc64": 127
+            },
+            {
+              "beat": 75.25,
+              "cc64": 0
+            },
+            {
+              "beat": 76.025,
+              "cc64": 127
+            },
+            {
+              "beat": 78.55,
+              "cc64": 0
+            },
+            {
+              "beat": 80.025,
+              "cc64": 127
+            },
+            {
+              "beat": 83.25,
+              "cc64": 0
+            },
+            {
+              "beat": 84.025,
+              "cc64": 127
+            },
+            {
+              "beat": 86.55,
+              "cc64": 0
+            },
+            {
+              "beat": 88.025,
+              "cc64": 127
+            },
+            {
+              "beat": 91.25,
+              "cc64": 0
+            },
+            {
+              "beat": 92.025,
+              "cc64": 127
+            },
+            {
+              "beat": 94.55,
+              "cc64": 0
+            },
+            {
+              "beat": 96.025,
+              "cc64": 127
+            },
+            {
+              "beat": 99.25,
+              "cc64": 0
+            },
+            {
+              "beat": 100.025,
+              "cc64": 127
+            },
+            {
+              "beat": 102.55,
+              "cc64": 0
+            },
+            {
+              "beat": 104.025,
+              "cc64": 127
+            },
+            {
+              "beat": 106.9,
+              "cc64": 0
+            },
+            {
+              "beat": 108.025,
+              "cc64": 127
+            },
+            {
+              "beat": 110.2,
+              "cc64": 0
+            },
+            {
+              "beat": 112.025,
+              "cc64": 127
+            },
+            {
+              "beat": 114.9,
+              "cc64": 0
+            },
+            {
+              "beat": 116.025,
+              "cc64": 127
+            },
+            {
+              "beat": 118.2,
+              "cc64": 0
+            },
+            {
+              "beat": 120.025,
+              "cc64": 127
+            },
+            {
+              "beat": 123.25,
+              "cc64": 0
+            },
+            {
+              "beat": 124.025,
+              "cc64": 127
+            },
+            {
+              "beat": 126.55,
+              "cc64": 0
+            },
+            {
+              "beat": 128.025,
+              "cc64": 127
+            },
+            {
+              "beat": 131.25,
+              "cc64": 0
+            },
+            {
+              "beat": 132.025,
+              "cc64": 127
+            },
+            {
+              "beat": 134.55,
+              "cc64": 0
+            },
+            {
+              "beat": 136.025,
+              "cc64": 127
+            },
+            {
+              "beat": 139.25,
+              "cc64": 0
+            },
+            {
+              "beat": 140.025,
+              "cc64": 127
+            },
+            {
+              "beat": 142.55,
+              "cc64": 0
+            },
+            {
+              "beat": 144.025,
+              "cc64": 127
+            },
+            {
+              "beat": 147.25,
+              "cc64": 0
+            },
+            {
+              "beat": 148.025,
+              "cc64": 127
+            },
+            {
+              "beat": 150.55,
+              "cc64": 0
+            },
+            {
+              "beat": 152.025,
+              "cc64": 127
+            },
+            {
+              "beat": 155.25,
+              "cc64": 0
+            },
+            {
+              "beat": 156.025,
+              "cc64": 127
+            },
+            {
+              "beat": 158.55,
+              "cc64": 0
+            },
+            {
+              "beat": 160.025,
+              "cc64": 127
+            },
+            {
+              "beat": 163.25,
+              "cc64": 0
+            },
+            {
+              "beat": 164.025,
+              "cc64": 127
+            },
+            {
+              "beat": 166.55,
+              "cc64": 0
+            },
+            {
+              "beat": 168.025,
+              "cc64": 127
+            },
+            {
+              "beat": 170.9,
+              "cc64": 0
+            },
+            {
+              "beat": 172.025,
+              "cc64": 127
+            },
+            {
+              "beat": 174.2,
+              "cc64": 0
+            },
+            {
+              "beat": 176.025,
+              "cc64": 127
+            },
+            {
+              "beat": 178.9,
+              "cc64": 0
+            },
+            {
+              "beat": 180.025,
+              "cc64": 127
+            },
+            {
+              "beat": 182.2,
+              "cc64": 0
+            },
+            {
+              "beat": 184.025,
+              "cc64": 127
+            },
+            {
+              "beat": 186.9,
+              "cc64": 0
+            },
+            {
+              "beat": 188.025,
+              "cc64": 127
+            },
+            {
+              "beat": 190.2,
+              "cc64": 0
+            }
+          ],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/03-battle-blackpulse-v4-Piano-accents.wav",
+            "bytes": 33512816,
+            "sha256": "272fcc6dcc7e449fbc9a4d729b4b9f10f814d6b66eb1a45446e3bfbe8b12d992"
+          }
+        },
+        {
+          "name": "Harp transitions",
+          "program": 46,
+          "bank": 0,
+          "pan": -31,
+          "notes": 20,
+          "velocity_range": [
+            33,
+            42
+          ],
+          "target_active_rms_dbfs": -38,
+          "gain_db": 9.253701461738071,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/03-battle-blackpulse-v4-Harp-transitions.wav",
+            "bytes": 33512816,
+            "sha256": "4232035aa389f900f7240e1a1d2a49f62138e8c0b3468cf0ff242320833986a6"
+          }
+        },
+        {
+          "name": "Long string tension",
+          "program": 49,
+          "bank": 0,
+          "pan": 40,
+          "notes": 24,
+          "velocity_range": [
+            47,
+            47
+          ],
+          "target_active_rms_dbfs": -35,
+          "gain_db": 12.686326568142327,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/03-battle-blackpulse-v4-Long-string-tension.wav",
+            "bytes": 33512816,
+            "sha256": "dce43fe1a75ea663b0b48e9cf0a916ce3c11867a256e52f9056fb1223e23a3e0"
+          }
+        },
+        {
+          "name": "Timpani",
+          "program": 47,
+          "bank": 0,
+          "pan": -6,
+          "notes": 44,
+          "velocity_range": [
+            42,
+            55
+          ],
+          "target_active_rms_dbfs": -32,
+          "gain_db": 12.392217092454356,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/03-battle-blackpulse-v4-Timpani.wav",
+            "bytes": 33512816,
+            "sha256": "f407ee37cf310ea8dd136ed00f93546b1c608fad09820ac340b5e87fd360e505"
+          }
+        },
+        {
+          "name": "Orchestral drums",
+          "program": 48,
+          "bank": 128,
+          "pan": 0,
+          "notes": 120,
+          "velocity_range": [
+            27,
+            62
+          ],
+          "target_active_rms_dbfs": -33,
+          "gain_db": 13.346411177660627,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/03-battle-blackpulse-v4-Orchestral-drums.wav",
+            "bytes": 33512816,
+            "sha256": "8a0a40d13781fbc33fea67c2254e8d8f0ef4f4d5f32c8231410d5c907d0be64c"
+          }
+        },
+        {
+          "name": "Metal punctuation",
+          "program": 48,
+          "bank": 128,
+          "pan": 35,
+          "notes": 4,
+          "velocity_range": [
+            48,
+            48
+          ],
+          "target_active_rms_dbfs": -43,
+          "gain_db": 13.26508998634511,
+          "cc11_expression_used": true,
+          "piano_cc64": [],
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/explore-battle-v4/03-battle-blackpulse-v4-Metal-punctuation.wav",
+            "bytes": 33512816,
+            "sha256": "e82d8c73fdd07c9c2d36cafee035d2f8c11a435f465e155340ac67c9c450568e"
+          }
+        }
+      ],
+      "engine": "Existing LMMS FluidSynth library + GeneralUser GS 2.0.3 BETA; stems directly mixed, frozen LMMS pre-master project included",
+      "old_loudness": {
+        "input_i": "-16.86",
+        "input_tp": "-1.18",
+        "input_lra": "5.30",
+        "input_thresh": "-26.88",
+        "output_i": "-22.91",
+        "output_tp": "-7.48",
+        "output_lra": "5.80",
+        "output_thresh": "-32.93",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.09"
+      },
+      "final_loudness": {
+        "input_i": "-18.02",
+        "input_tp": "-0.91",
+        "input_lra": "9.80",
+        "input_thresh": "-28.29",
+        "output_i": "-21.23",
+        "output_tp": "-5.63",
+        "output_lra": "8.50",
+        "output_thresh": "-31.49",
+        "normalization_type": "dynamic",
+        "target_offset": "-1.77"
+      },
+      "post_gain_db": 0.236038617548002,
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-explore-battle-v4/03-battle-blackpulse-v4.mmp",
+          "bytes": 14688,
+          "sha256": "1a4a2997f61e9ad2e9f1bb61c58ebff679ffc9ed9168fa4d8217ba06d3e41219"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-explore-battle-v4/03-battle-blackpulse-v4.wav",
+          "bytes": 25134590,
+          "sha256": "bc2e77449f30f61b206661f2d7cf9010f04ad0a819d1cc2de8d2b078d9b2f22b"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-explore-battle-v4/03-battle-blackpulse-v4.mp3",
+          "bytes": 2794836,
+          "sha256": "652c6a237ccf88f70861b4d9e83c410831b96db3c1bef2054057021ca7e0b38f"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-explore-battle-v4/03-battle-blackpulse-v4.ogg",
+          "bytes": 1706060,
+          "sha256": "e3cd63fb906cb12f7b4b124160e4667b7d92b01a122171e4fc3274e2396c968d"
+        }
+      ],
+      "subjective_listening": "not claimed; user audition required"
+    }
+  ],
+  "scope": "two new V4 candidates; title V8 and game untouched"
+}

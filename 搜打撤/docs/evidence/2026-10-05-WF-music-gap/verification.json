@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "霜窗回声 · 室内乐精修",
+      "individual_record_matches": true,
+      "numeric_values_finite": true,
+      "input_pcm_fingerprint_matches": true
+    },
+    {
+      "name": "灰线行军 · 室内乐精修",
+      "individual_record_matches": true,
+      "numeric_values_finite": true,
+      "input_pcm_fingerprint_matches": true
+    },
+    {
+      "name": "黑脉交锋 · 管弦乐精修",
+      "individual_record_matches": true,
+      "numeric_values_finite": true,
+      "input_pcm_fingerprint_matches": true
+    },
+    {
+      "name": "停滞之地",
+      "individual_record_matches": true,
+      "numeric_values_finite": true
+    },
+    {
+      "name": "山雪欲来",
+      "individual_record_matches": true,
+      "numeric_values_finite": true
+    },
+    {
+      "name": "回想",
+      "individual_record_matches": true,
+      "numeric_values_finite": true
+    }
+  ],
+  "plots_visually_checked": [
+    "comparison.png",
+    "full-dynamics.png"
+  ],
+  "figure_fonts_and_labels": "Chinese legible; axes/labels in bounds; no clipping seen",
+  "initial_analysis_process": "Data completed; final console print failed on Python3.8 dict union. Print compatibility patched; measurements unchanged; independent data and input verification passed.",
+  "file_sizes_under_1MB": true,
+  "head": "e87034b835f094c2cb7a0c3b86dc70d56c74db5f",
+  "remote_refs_refreshed": false,
+  "music_files_changed": false
+}

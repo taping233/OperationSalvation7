@@ -1,0 +1,71 @@
+{
+  "recordedAt": "2026-10-09T04:43:16.874Z",
+  "records": [
+    {
+      "file": "docs/terminology.md",
+      "bytes": 3057,
+      "sha256": "09ca9e4c9adb303a9acd5c11c55b7b2c3cf0a5a325bec49ddd4a076d9d27442c"
+    },
+    {
+      "file": "docs/M-BATCH-MATRIX.md",
+      "bytes": 51878,
+      "sha256": "1f3d5dc4159be775a9506708f426a409c527db6e4a8e4d73503db71c322e70d2"
+    },
+    {
+      "file": "docs/game-compendium.md",
+      "bytes": 33095,
+      "sha256": "7a4ac3fcac85e35549ef21cd5d18fe98f0f90bc4670ff36b8ee69568de45ddd8"
+    },
+    {
+      "file": "docs/production/art/ART-DIRECTION-BRIEF.md",
+      "bytes": 4547,
+      "sha256": "352bde6805b1a4ee5b05e215f3700513c85a1065e8c2e2070368a96980004b5f"
+    },
+    {
+      "file": "docs/production/art/VISUAL-BIBLE.md",
+      "bytes": 14489,
+      "sha256": "23c259391eab0af206dbc2a4f4366bfce304659a117fab17f12d6868a2541351"
+    },
+    {
+      "file": "docs/character-bible/README.md",
+      "bytes": 2239,
+      "sha256": "db4636c43d55b96e7b12918722eed0ef859129fd1e7006cace07313ab3ffcfd8"
+    },
+    {
+      "file": "docs/character-bible/wu.md",
+      "bytes": 5033,
+      "sha256": "8a3e755a5c5e45fdea433865479d684fc8cea84312a07374b2506dc27a0a9a0d"
+    },
+    {
+      "file": "docs/character-bible/changwuyu.md",
+      "bytes": 4717,
+      "sha256": "fdaf0d10086bf4a43812853375eb1d605b2cf07da857e11d1ada95826ae944d7"
+    },
+    {
+      "file": "docs/character-bible/baita.md",
+      "bytes": 3300,
+      "sha256": "9e4de4399267445d5d02a929bad0cda6c0784533105bba74ea208dc3ea9dd1d1"
+    },
+    {
+      "file": "docs/character-bible/heixiang.md",
+      "bytes": 4119,
+      "sha256": "aa00a00e9e1eea02f8082cd94197b6d924037f8dd1985a462cb0fb88e1dad28f"
+    },
+    {
+      "file": "docs/character-bible/xingyue.md",
+      "bytes": 4395,
+      "sha256": "0694c4b28f5d48e16855c24bdbc37d56442af23db578e351ef3c9cfad1018d17"
+    },
+    {
+      "file": "scripts/generate-compendium.mjs",
+      "bytes": 7941,
+      "sha256": "8bdc609de4443601d751c747f80b1f2adeb0fa6ea45ec286ba978057f86b8c53"
+    },
+    {
+      "file": "tests/compendium.test.js",
+      "bytes": 3747,
+      "sha256": "8f94bf61be7e1e5570a340d54b7ba1522a9ec1fb24240b7a263552b044f0052f"
+    }
+  ],
+  "method": "read-only-evidence-copies; character-bible is outside workflow archive snapshot scope"
+}

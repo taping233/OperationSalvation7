@@ -1,0 +1,59 @@
+{
+  "sources": [
+    {
+      "path": ".tmp/music-workstation/title-v7/v7-full.wav",
+      "bytes": 71313546,
+      "sha256": "16f38d25bf898fa5a01f21a311546d66150af18298fa7e78b7b426affe01e88a"
+    },
+    {
+      "path": ".tmp/music-workstation/title-v7/v7-backing-only.wav",
+      "bytes": 71313546,
+      "sha256": "3b6bbe117c05cf2f00511e08400f5fe8e17c7b60085679b432b5048ea6dc87c0"
+    }
+  ],
+  "fit_gain_db": 24.720000001226058,
+  "reconstruction_error_relative_db": -125.5363697917614,
+  "limit": "Backing is native muted-piano export. Piano is full minus backing, including render differences, not isolated dry piano. Last 96 seam samples excluded from fit.",
+  "opening_0_2": {
+    "backing_rms_relative_full": 0.29634091893224873,
+    "backing_over_piano_band_db": [
+      15.210283486743785,
+      8.503380016729459,
+      -14.517905379925429,
+      -6.650871984660202,
+      6.882136331723383,
+      9.619460374636617,
+      1.633857823150646
+    ],
+    "normalized_spectral_overlap": 0.24254650989701845,
+    "backing_piano_waveform_correlation": -0.03828113907453328
+  },
+  "legacy_12_60": {
+    "backing_rms_relative_full": 0.4572040595240027,
+    "backing_over_piano_band_db": [
+      17.013977274098174,
+      8.136395383988376,
+      -9.695848742461305,
+      -8.185858827704427,
+      6.3144845810859795,
+      13.864683935445077,
+      14.761357748135781
+    ],
+    "normalized_spectral_overlap": 0.3783753801447412,
+    "backing_piano_waveform_correlation": 0.005469968985329355
+  },
+  "late_60_84": {
+    "backing_rms_relative_full": 0.43339008688999486,
+    "backing_over_piano_band_db": [
+      16.655461206791728,
+      15.221088721240912,
+      -10.985660582682135,
+      -7.2760678374124685,
+      5.7241458229847915,
+      13.411808700141915,
+      18.49995253515561
+    ],
+    "normalized_spectral_overlap": 0.3301880943302142,
+    "backing_piano_waveform_correlation": -0.01954731516229611
+  }
+}

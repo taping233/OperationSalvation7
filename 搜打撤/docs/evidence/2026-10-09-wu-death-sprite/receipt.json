@@ -1,0 +1,173 @@
+{
+  "method": "内置imagegen生成关键姿态；已有Pillow/NumPy/OpenCV提取对齐；复现 python pack_sprite.py <原始帧图路径>",
+  "files": [
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/.gitignore",
+      "bytes": 91,
+      "sha256": "b548d025ff87aa8e24aa19366435e6e89b43fdad1c381fc8e09b4aaf7b6bad11",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/death-00.png",
+      "bytes": 364478,
+      "sha256": "484895aa505493825202539d4b7cfadf7c63c33997633b7940982a6634dbc63f",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/death-00.webp",
+      "bytes": 222082,
+      "sha256": "997ed716456fb7302773602de2ac7fe93330a39ac20fe6c372f0dd1d05c70baf",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/death-01.png",
+      "bytes": 155841,
+      "sha256": "df5a1236f3e078920555b130801fef18b1a683f4be2859ff8e462dd5655ede4d",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/death-01.webp",
+      "bytes": 105314,
+      "sha256": "e0ac8476f3a04fae1ce4f33d1a859508be1647b80d30457205b59f87d0703e71",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/death-02.png",
+      "bytes": 146109,
+      "sha256": "93169274aee4781af15fbf4c71d487e18fd19a7ef349d3fcee9f8b0daddd9744",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/death-02.webp",
+      "bytes": 97652,
+      "sha256": "1ed0ab258f471010735632752f36d424f269f222b85a47e550668cb06d49a2ba",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/death-03.png",
+      "bytes": 146466,
+      "sha256": "fcd0e20ad6fda07f4c6a4556bfd2e75f1950c51ae29b7640d5e0573e86d3d4fb",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/death-03.webp",
+      "bytes": 99152,
+      "sha256": "6833ae139af001a723c892b2e884a368ff7ed4d6b057bcd17b458f61dee73e5a",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/death-04.png",
+      "bytes": 132123,
+      "sha256": "f7305ebc59ea3dc1692ffcef898471f3d0ab0cdabb56a9ea186892f689cb1b0b",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/death-04.webp",
+      "bytes": 91004,
+      "sha256": "94f7ef5dbbf32fcbe39e355dccca857b7af49f99fe87f847b91e7f52df030fd3",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/death-05.png",
+      "bytes": 109812,
+      "sha256": "916110592f13f21e3bdc8522a8eb6a89b76e0e0261fbef65ea4e7d217d654437",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/death-05.webp",
+      "bytes": 75750,
+      "sha256": "675be854518b5649198ab6e398f011038183c1cd1e72ac584fbe4ea480c2c929",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/death-06.png",
+      "bytes": 110492,
+      "sha256": "e56c1b104d15a4d3bedf399a0b8344c96565cca012b18ec149ad99a147746c19",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/death-06.webp",
+      "bytes": 76694,
+      "sha256": "1a1cf015fdc5bd9d7b9aed58c52c410117eafdc78bb5a74a6385d576fcd888e2",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/death-07.png",
+      "bytes": 110492,
+      "sha256": "e56c1b104d15a4d3bedf399a0b8344c96565cca012b18ec149ad99a147746c19",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/death-07.webp",
+      "bytes": 76694,
+      "sha256": "1a1cf015fdc5bd9d7b9aed58c52c410117eafdc78bb5a74a6385d576fcd888e2",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/generated-sheet.png",
+      "bytes": 1166455,
+      "sha256": "1f7552669d402b8cfdad7d901be45b84b929419c714695811317a09c57013318",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/index.html",
+      "bytes": 5043,
+      "sha256": "904e69c4bbb0b80850ab9056af1d81d2a6c20c7f95f2eff60e88ec2b78b3e397",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/pack_sprite.py",
+      "bytes": 5715,
+      "sha256": "ad63e6aae796c8a91bf73143410d144338550ece4b96d42aa639701fe7cae91f",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/README.md",
+      "bytes": 1191,
+      "sha256": "28752fadea6402b093327b27d17afa0944497b21bed803e391f9e9a731289abb",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/request.json",
+      "bytes": 3416,
+      "sha256": "8eaab88cabe8eb7c2cccccdb44ed645b90eeaf968476d0b580ad4cf860e23e07",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/sprite.json",
+      "bytes": 2960,
+      "sha256": "110f01861fcda009e636f35436354ce0fa59dda8e5be4d42de37dfd76f650768",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/validation.json",
+      "bytes": 928,
+      "sha256": "5d10d18b4903b9b1f02ac4baf37620acc5dc6acbbf68fd03658d9af24ef1f9b5",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/wu-death-preview.gif",
+      "bytes": 382431,
+      "sha256": "22a59df98cb10abfa2605b4541fd30d07300adf0f349c0567fba40f87a5a8822",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/wu-death-preview.webp",
+      "bytes": 294322,
+      "sha256": "1e8bc52751f6bf07072908cc375f0950bc0ea59cbef39e21a01883f3b9851a10",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/wu-death-sheet.png",
+      "bytes": 1196745,
+      "sha256": "ff57d1ca1e4bc04b9739d277f4919a8d355bea7e0945356c4f2b122a8a3f3b0f",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-death-sprite-20261009/wu-death-sheet.webp",
+      "bytes": 792954,
+      "sha256": "01d2384cd30fcf0c0115f1cd54b999bda372ed23d9022f041642acb34e89ec38",
+      "localOnly": false
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "title": "霜窗回声 · 第七版",
+  "seconds": 91.4285625,
+  "bpm": 84,
+  "opening_harmony_patterns_added": {
+    "Strings left": 8,
+    "Strings right": 8,
+    "Cello foundation": 8
+  },
+  "new_layers": [
+    {
+      "name": "Warm orchestral bed",
+      "program": 49,
+      "volume": 48,
+      "role": "sustained harmony; no independent melodic line"
+    },
+    {
+      "name": "Viola middle foundation",
+      "program": 41,
+      "volume": 34,
+      "role": "sustained harmony; no independent melodic line"
+    },
+    {
+      "name": "Double bass foundation",
+      "program": 43,
+      "volume": 38,
+      "role": "sustained harmony; no independent melodic line"
+    }
+  ],
+  "native_instrument_tracks": 8,
+  "piano_tracks_preserved": {
+    "Piano melody": "fd9480083f66a4886aee6171be18c8deb4f0a153d3b6f6e9b523e30b0ee0e3b5",
+    "Quiet piano harmony": "158449310c02daf66308464dea72dca5ced697a33046332936cd907e782b1143"
+  },
+  "opening_support_first_2s_rms_ratio": 0.2963408986892617,
+  "opening_support_rms_dbfs": -27.19803271569113,
+  "opening_first_200ms_backing_rms": 0.031020567737587414,
+  "final_loudness": {
+    "input_i": "-15.53",
+    "input_tp": "-3.30",
+    "input_lra": "2.30",
+    "input_thresh": "-25.54",
+    "output_i": "-23.22",
+    "output_tp": "-10.92",
+    "output_lra": "2.10",
+    "output_thresh": "-33.22",
+    "normalization_type": "dynamic",
+    "target_offset": "0.22"
+  },
+  "previous_loudness": {
+    "input_i": "-15.53",
+    "input_tp": "-3.24",
+    "input_lra": "2.60",
+    "input_thresh": "-25.72",
+    "output_i": "-23.21",
+    "output_tp": "-10.65",
+    "output_lra": "2.80",
+    "output_thresh": "-33.42",
+    "normalization_type": "dynamic",
+    "target_offset": "0.21"
+  },
+  "common_gain_db": 24.72,
+  "peak_dbfs": -3.304647117744741,
+  "rms_dbfs": -17.734799232461743,
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v7/01-title-frostglass-v7.mmp",
+      "bytes": 96345,
+      "sha256": "50b7a609e777317f69727b36fe8285fb2965825b66c92636ca5d769c134c1fbb"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v7/01-title-frostglass-v7.wav",
+      "bytes": 26331470,
+      "sha256": "f1903f7c88380a9e879b114886544faa8d4cee10493db4a1399ea277a4dd6744"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v7/01-title-frostglass-v7.mp3",
+      "bytes": 2927697,
+      "sha256": "c6ddcfa8081549ca97313539b3035df7515aa4a8948f6e8677ce05ffc1157007"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v7/01-title-frostglass-v7.ogg",
+      "bytes": 1474708,
+      "sha256": "eee559ef11c46118937f02e07449575b262c7d4323656a14b4cb4e2da88191ae"
+    }
+  ],
+  "limits": [
+    "Backing ratio is not a subjective quality score",
+    "Piano frozen recordings and soft pedal remain V6; only sustained accompaniment changed",
+    "User listening decides whether backing level and clarity are appropriate"
+  ]
+}

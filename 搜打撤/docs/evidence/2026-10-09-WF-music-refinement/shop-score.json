@@ -1,0 +1,1884 @@
+{
+  "role": "shop",
+  "title": "灯下交易 · 问答精修",
+  "bpm": 96,
+  "seconds": 30.0,
+  "parts": [
+    {
+      "name": "Piano short hook",
+      "note_count": 55,
+      "retained_melodic_recording": false,
+      "patch": 0,
+      "db": -23.5,
+      "pan": -0.12,
+      "bank": 0,
+      "wet": 0.28,
+      "hz": 6500
+    },
+    {
+      "name": "Muted horn takes lead",
+      "note_count": 12,
+      "retained_melodic_recording": false,
+      "patch": 59,
+      "db": -25.5,
+      "pan": 0.13,
+      "bank": 0,
+      "wet": 0.3,
+      "hz": 6500
+    },
+    {
+      "name": "Guitar sparse comping",
+      "note_count": 66,
+      "retained_melodic_recording": false,
+      "patch": 26,
+      "db": -34,
+      "pan": 0.33,
+      "bank": 0,
+      "wet": 0.18,
+      "hz": 6500
+    },
+    {
+      "name": "Acoustic bass coherent walk",
+      "note_count": 48,
+      "retained_melodic_recording": false,
+      "patch": 32,
+      "db": -28,
+      "pan": 0,
+      "bank": 0,
+      "wet": 0.08,
+      "hz": 2700
+    },
+    {
+      "name": "Brush-kit groove",
+      "note_count": 72,
+      "retained_melodic_recording": false,
+      "patch": 40,
+      "db": -38,
+      "pan": -0.07,
+      "bank": 128,
+      "wet": 0.05,
+      "hz": 6500
+    },
+    {
+      "name": "Vibraphone rare punctuation",
+      "note_count": 3,
+      "retained_melodic_recording": false,
+      "patch": 11,
+      "db": -40,
+      "pan": -0.3,
+      "bank": 0,
+      "wet": 0.5,
+      "hz": 6500
+    }
+  ],
+  "notes": [
+    {
+      "part": "Piano short hook",
+      "beat": 16.15671,
+      "key": 55,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 16.17098,
+      "key": 56,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 16.21594,
+      "key": 60,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 18.53568,
+      "key": 55,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 18.57823,
+      "key": 56,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 18.61337,
+      "key": 60,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 20.15579,
+      "key": 56,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 20.19268,
+      "key": 60,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 20.20061,
+      "key": 67,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 22.55817,
+      "key": 56,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 22.56442,
+      "key": 60,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 22.60099,
+      "key": 67,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 24.1518,
+      "key": 55,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 24.17061,
+      "key": 58,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 24.21226,
+      "key": 65,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 26.5567,
+      "key": 55,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 26.57545,
+      "key": 58,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 26.60423,
+      "key": 65,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 28.14588,
+      "key": 59,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 28.18117,
+      "key": 63,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 28.22085,
+      "key": 68,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 30.54607,
+      "key": 59,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 30.58223,
+      "key": 63,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 30.59189,
+      "key": 68,
+      "duration": 0.68,
+      "velocity": 29
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 0.14002,
+      "key": 67,
+      "duration": 0.4,
+      "velocity": 72
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 0.63554,
+      "key": 69,
+      "duration": 0.24,
+      "velocity": 54
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 1.14637,
+      "key": 70,
+      "duration": 0.64,
+      "velocity": 69
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 2.64881,
+      "key": 62,
+      "duration": 0.44,
+      "velocity": 62
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 3.20185,
+      "key": 63,
+      "duration": 0.54,
+      "velocity": 64
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 4.261,
+      "key": 67,
+      "duration": 0.61,
+      "velocity": 68
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 5.64376,
+      "key": 62,
+      "duration": 0.4,
+      "velocity": 57
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 6.23719,
+      "key": 60,
+      "duration": 1.1,
+      "velocity": 65
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 8.14311,
+      "key": 68,
+      "duration": 0.43,
+      "velocity": 69
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 8.64341,
+      "key": 67,
+      "duration": 0.29,
+      "velocity": 53
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 9.19086,
+      "key": 65,
+      "duration": 0.73,
+      "velocity": 65
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 10.68991,
+      "key": 63,
+      "duration": 0.6,
+      "velocity": 60
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 12.20695,
+      "key": 62,
+      "duration": 0.5,
+      "velocity": 67
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 13.13634,
+      "key": 59,
+      "duration": 0.6,
+      "velocity": 60
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 14.63731,
+      "key": 60,
+      "duration": 0.73,
+      "velocity": 62
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 32.14533,
+      "key": 67,
+      "duration": 0.4,
+      "velocity": 72
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 32.62271,
+      "key": 69,
+      "duration": 0.24,
+      "velocity": 54
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 33.14174,
+      "key": 70,
+      "duration": 0.64,
+      "velocity": 69
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 34.66096,
+      "key": 62,
+      "duration": 0.3,
+      "velocity": 60
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 35.11613,
+      "key": 63,
+      "duration": 0.24,
+      "velocity": 59
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 35.64999,
+      "key": 67,
+      "duration": 0.32,
+      "velocity": 64
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 36.24239,
+      "key": 70,
+      "duration": 0.56,
+      "velocity": 68
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 37.65526,
+      "key": 67,
+      "duration": 0.39,
+      "velocity": 57
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 38.25897,
+      "key": 63,
+      "duration": 1.18,
+      "velocity": 65
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 40.18658,
+      "key": 65,
+      "duration": 0.5,
+      "velocity": 68
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 41.16358,
+      "key": 62,
+      "duration": 0.61,
+      "velocity": 60
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 42.64628,
+      "key": 60,
+      "duration": 0.45,
+      "velocity": 62
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 43.22021,
+      "key": 62,
+      "duration": 0.46,
+      "velocity": 58
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 44.20552,
+      "key": 59,
+      "duration": 0.53,
+      "velocity": 65
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 45.16035,
+      "key": 62,
+      "duration": 0.55,
+      "velocity": 59
+    },
+    {
+      "part": "Piano short hook",
+      "beat": 46.25688,
+      "key": 60,
+      "duration": 1.7,
+      "velocity": 65
+    },
+    {
+      "part": "Muted horn takes lead",
+      "beat": 16.28923,
+      "key": 68,
+      "duration": 0.6256,
+      "velocity": 54
+    },
+    {
+      "part": "Muted horn takes lead",
+      "beat": 17.64532,
+      "key": 67,
+      "duration": 0.5060000000000001,
+      "velocity": 48
+    },
+    {
+      "part": "Muted horn takes lead",
+      "beat": 18.70064,
+      "key": 65,
+      "duration": 0.8464,
+      "velocity": 52
+    },
+    {
+      "part": "Muted horn takes lead",
+      "beat": 20.2549,
+      "key": 62,
+      "duration": 0.6716,
+      "velocity": 54
+    },
+    {
+      "part": "Muted horn takes lead",
+      "beat": 21.60416,
+      "key": 60,
+      "duration": 0.3864,
+      "velocity": 47
+    },
+    {
+      "part": "Muted horn takes lead",
+      "beat": 22.65806,
+      "key": 67,
+      "duration": 0.8648,
+      "velocity": 55
+    },
+    {
+      "part": "Muted horn takes lead",
+      "beat": 24.30209,
+      "key": 65,
+      "duration": 1.0028000000000001,
+      "velocity": 53
+    },
+    {
+      "part": "Muted horn takes lead",
+      "beat": 25.69627,
+      "key": 62,
+      "duration": 0.5796,
+      "velocity": 47
+    },
+    {
+      "part": "Muted horn takes lead",
+      "beat": 26.80365,
+      "key": 58,
+      "duration": 0.8464,
+      "velocity": 50
+    },
+    {
+      "part": "Muted horn takes lead",
+      "beat": 28.25676,
+      "key": 63,
+      "duration": 0.48760000000000003,
+      "velocity": 55
+    },
+    {
+      "part": "Muted horn takes lead",
+      "beat": 29.1567,
+      "key": 62,
+      "duration": 0.5244,
+      "velocity": 50
+    },
+    {
+      "part": "Muted horn takes lead",
+      "beat": 30.61549,
+      "key": 59,
+      "duration": 1.0120000000000002,
+      "velocity": 53
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 0,
+      "key": 36,
+      "duration": 0.85,
+      "velocity": 62
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 0.99735,
+      "key": 39,
+      "duration": 0.85,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 1.9975,
+      "key": 43,
+      "duration": 0.85,
+      "velocity": 52
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 3.00203,
+      "key": 37,
+      "duration": 0.66,
+      "velocity": 40
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 0.64553,
+      "key": 51,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 0.66724,
+      "key": 57,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 0.68371,
+      "key": 62,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 2.686,
+      "key": 51,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 2.69489,
+      "key": 57,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 2.71202,
+      "key": 62,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 0,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 1.99741,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 0.64316,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 1.64236,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 2.64239,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 3.64352,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 3.99264,
+      "key": 36,
+      "duration": 0.85,
+      "velocity": 62
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 5.00006,
+      "key": 39,
+      "duration": 0.85,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 5.99995,
+      "key": 43,
+      "duration": 0.85,
+      "velocity": 52
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 6.99627,
+      "key": 36,
+      "duration": 0.66,
+      "velocity": 40
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 4.64618,
+      "key": 51,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 4.66366,
+      "key": 57,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 4.68993,
+      "key": 62,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 6.67675,
+      "key": 51,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 6.69994,
+      "key": 57,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 6.71347,
+      "key": 62,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 4.00369,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 6.00299,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 4.6401,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 5.63776,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 6.64113,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 7.64195,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 8.00571,
+      "key": 37,
+      "duration": 0.85,
+      "velocity": 62
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 8.99978,
+      "key": 41,
+      "duration": 0.85,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 10.00638,
+      "key": 32,
+      "duration": 0.85,
+      "velocity": 52
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 10.99237,
+      "key": 32,
+      "duration": 0.66,
+      "velocity": 40
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 8.64779,
+      "key": 53,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 8.66676,
+      "key": 59,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 8.68935,
+      "key": 63,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 10.67569,
+      "key": 53,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 10.70206,
+      "key": 59,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 10.71089,
+      "key": 63,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 7.9968,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 10.00219,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 8.63625,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 9.63911,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 10.6366,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 11.64456,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 11.99697,
+      "key": 31,
+      "duration": 0.85,
+      "velocity": 62
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 12.99226,
+      "key": 35,
+      "duration": 0.85,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 14.00066,
+      "key": 38,
+      "duration": 0.85,
+      "velocity": 52
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 15.00174,
+      "key": 30,
+      "duration": 0.66,
+      "velocity": 40
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 13.65189,
+      "key": 53,
+      "duration": 0.45,
+      "velocity": 35
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 13.66294,
+      "key": 59,
+      "duration": 0.45,
+      "velocity": 35
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 13.68833,
+      "key": 62,
+      "duration": 0.45,
+      "velocity": 35
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 11.99724,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 14.00323,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 12.64362,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 13.64469,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 14.64445,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 15.63819,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 16.00571,
+      "key": 29,
+      "duration": 0.85,
+      "velocity": 62
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 17.00775,
+      "key": 32,
+      "duration": 0.85,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 18.00508,
+      "key": 36,
+      "duration": 0.85,
+      "velocity": 52
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 18.99354,
+      "key": 33,
+      "duration": 0.66,
+      "velocity": 40
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 16.65103,
+      "key": 51,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 16.67328,
+      "key": 55,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 16.68642,
+      "key": 60,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 18.6816,
+      "key": 51,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 18.69509,
+      "key": 55,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 18.72084,
+      "key": 60,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 16.0006,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 17.99583,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 16.63548,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 17.64066,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 18.63563,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 19.63918,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 20.00674,
+      "key": 34,
+      "duration": 0.85,
+      "velocity": 62
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 21.00176,
+      "key": 38,
+      "duration": 0.85,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 22.00231,
+      "key": 41,
+      "duration": 0.85,
+      "velocity": 52
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 23.00688,
+      "key": 38,
+      "duration": 0.66,
+      "velocity": 40
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 20.64515,
+      "key": 50,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 20.66547,
+      "key": 56,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 20.68571,
+      "key": 60,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 22.68349,
+      "key": 50,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 22.69591,
+      "key": 56,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 22.71401,
+      "key": 60,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 19.99936,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 22.00032,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 20.64305,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 21.64173,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 22.63457,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 23.6421,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 23.99349,
+      "key": 39,
+      "duration": 0.85,
+      "velocity": 62
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 25.00291,
+      "key": 43,
+      "duration": 0.85,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 26.00148,
+      "key": 34,
+      "duration": 0.85,
+      "velocity": 52
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 26.99238,
+      "key": 42,
+      "duration": 0.66,
+      "velocity": 40
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 24.64832,
+      "key": 50,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 24.67225,
+      "key": 55,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 24.68895,
+      "key": 58,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 26.67496,
+      "key": 50,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 26.70024,
+      "key": 55,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 26.71231,
+      "key": 58,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 23.99825,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 26.00082,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 24.63516,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 25.63867,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 26.64144,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 27.64442,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 28.00309,
+      "key": 31,
+      "duration": 0.85,
+      "velocity": 62
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 29.0017,
+      "key": 35,
+      "duration": 0.85,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 30.00224,
+      "key": 38,
+      "duration": 0.85,
+      "velocity": 52
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 31.00465,
+      "key": 35,
+      "duration": 0.66,
+      "velocity": 40
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 29.65498,
+      "key": 53,
+      "duration": 0.45,
+      "velocity": 35
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 29.6733,
+      "key": 59,
+      "duration": 0.45,
+      "velocity": 35
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 29.6893,
+      "key": 63,
+      "duration": 0.45,
+      "velocity": 35
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 28.00144,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 29.99608,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 28.6368,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 29.6403,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 30.63511,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 31.63717,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 31.99556,
+      "key": 36,
+      "duration": 0.85,
+      "velocity": 62
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 33.0069,
+      "key": 39,
+      "duration": 0.85,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 33.99892,
+      "key": 43,
+      "duration": 0.85,
+      "velocity": 52
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 34.99616,
+      "key": 33,
+      "duration": 0.66,
+      "velocity": 40
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 32.64661,
+      "key": 51,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 32.66859,
+      "key": 57,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 32.68194,
+      "key": 62,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 34.68232,
+      "key": 51,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 34.69242,
+      "key": 57,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 34.71456,
+      "key": 62,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 31.999,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 33.99517,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 32.63949,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 33.64083,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 34.6392,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 35.6348,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 35.99585,
+      "key": 32,
+      "duration": 0.85,
+      "velocity": 62
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 36.99668,
+      "key": 36,
+      "duration": 0.85,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 38.00366,
+      "key": 39,
+      "duration": 0.85,
+      "velocity": 52
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 39.00383,
+      "key": 32,
+      "duration": 0.66,
+      "velocity": 40
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 36.6504,
+      "key": 55,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 36.66276,
+      "key": 58,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 36.68199,
+      "key": 60,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 38.6837,
+      "key": 55,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 38.69594,
+      "key": 58,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 38.72103,
+      "key": 60,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 36.00182,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 37.9954,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 36.64264,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 37.63841,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 38.64206,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 39.6362,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 39.99513,
+      "key": 31,
+      "duration": 0.85,
+      "velocity": 62
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 41.00661,
+      "key": 34,
+      "duration": 0.85,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 42.00215,
+      "key": 38,
+      "duration": 0.85,
+      "velocity": 52
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 42.99826,
+      "key": 32,
+      "duration": 0.66,
+      "velocity": 40
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 40.6482,
+      "key": 53,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 40.66742,
+      "key": 56,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 40.6843,
+      "key": 60,
+      "duration": 0.45,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 42.68035,
+      "key": 53,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 42.70154,
+      "key": 56,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 42.71224,
+      "key": 60,
+      "duration": 0.45,
+      "velocity": 33
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 40.00393,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 42.00328,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 40.64572,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 41.6388,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 42.64252,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 43.64374,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 44.0024,
+      "key": 31,
+      "duration": 0.85,
+      "velocity": 62
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 44.99691,
+      "key": 35,
+      "duration": 0.85,
+      "velocity": 45
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 46.00766,
+      "key": 36,
+      "duration": 0.85,
+      "velocity": 52
+    },
+    {
+      "part": "Acoustic bass coherent walk",
+      "beat": 46.99952,
+      "key": 36,
+      "duration": 0.66,
+      "velocity": 40
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 45.64963,
+      "key": 53,
+      "duration": 0.45,
+      "velocity": 35
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 45.66686,
+      "key": 59,
+      "duration": 0.45,
+      "velocity": 35
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 45.68875,
+      "key": 62,
+      "duration": 0.45,
+      "velocity": 35
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 46.18739,
+      "key": 51,
+      "duration": 1.7,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 46.20456,
+      "key": 57,
+      "duration": 1.7,
+      "velocity": 36
+    },
+    {
+      "part": "Guitar sparse comping",
+      "beat": 46.22591,
+      "key": 62,
+      "duration": 1.7,
+      "velocity": 36
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 44.00362,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 45.99554,
+      "key": 38,
+      "duration": 0.31,
+      "velocity": 28
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 44.63502,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 45.63875,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 46.63409,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Brush-kit groove",
+      "beat": 47.63459,
+      "key": 51,
+      "duration": 0.12,
+      "velocity": 20
+    },
+    {
+      "part": "Vibraphone rare punctuation",
+      "beat": 7.09158,
+      "key": 79,
+      "duration": 1.0,
+      "velocity": 27
+    },
+    {
+      "part": "Vibraphone rare punctuation",
+      "beat": 31.2015,
+      "key": 74,
+      "duration": 1.0,
+      "velocity": 27
+    },
+    {
+      "part": "Vibraphone rare punctuation",
+      "beat": 46.6944,
+      "key": 79,
+      "duration": 1.0,
+      "velocity": 27
+    }
+  ],
+  "shapes": {},
+  "source": [],
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-09-WF-music-refinement/shop-refined-30s.wav",
+      "bytes": 8640044,
+      "sha256": "4adcca6fedb157aba208fde38bdadd15283b4a050ff4dc0ef8b979eb39d4f09e"
+    },
+    {
+      "path": "docs/evidence/2026-10-09-WF-music-refinement/shop-refined-30s.mp3",
+      "bytes": 961620,
+      "sha256": "2f689a9609191c07a245b27a7b6a3e4ff58b0b2203f44e1a902ef5f60ad4e472"
+    }
+  ],
+  "peak_dbfs": -6.1612153874899835,
+  "rms_dbfs": -20.533965143815056
+}

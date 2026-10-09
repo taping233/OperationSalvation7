@@ -1,0 +1,147 @@
+{
+  "status": "passed",
+  "exitCode": 0,
+  "checks": {
+    "only_v7_and_three_references": true,
+    "title-v7_7_windows": true,
+    "title-v7_windows_inside_audio": true,
+    "title-v7_finite": true,
+    "title-v7_bands_sum_100": true,
+    "title-v7_self_distance_symmetric": true,
+    "125099_7_windows": true,
+    "125099_windows_inside_audio": true,
+    "125099_finite": true,
+    "125099_bands_sum_100": true,
+    "125099_self_distance_symmetric": true,
+    "306834_7_windows": true,
+    "306834_windows_inside_audio": true,
+    "306834_finite": true,
+    "306834_bands_sum_100": true,
+    "306834_self_distance_symmetric": true,
+    "697622_7_windows": true,
+    "697622_windows_inside_audio": true,
+    "697622_finite": true,
+    "697622_bands_sum_100": true,
+    "697622_self_distance_symmetric": true,
+    "piano_xml_preserved": true,
+    "piano_note_record_quantized_matches_v5_xml": true,
+    "frozen_piano_sha_matches_v6": true,
+    "native_full_reconstructs_final": true,
+    "backing_opening_ratio_reproduces_render_report": true,
+    "title_hash_matches_render_report": true,
+    "constant_gain_invariance": true
+  },
+  "input_manifest": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v7/01-title-frostglass-v7.wav",
+      "bytes": 26331470,
+      "sha256": "f1903f7c88380a9e879b114886544faa8d4cee10493db4a1399ea277a4dd6744"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v7/01-title-frostglass-v7.mmp",
+      "bytes": 96345,
+      "sha256": "50b7a609e777317f69727b36fe8285fb2965825b66c92636ca5d769c134c1fbb"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v7/render.py",
+      "bytes": 9001,
+      "sha256": "22509f733d90eeaccab0ac47454d1a4edab0d0c1ef61f162b0a5f213bcfe9ae8"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v7/render-report.json",
+      "bytes": 3002,
+      "sha256": "9ba9d56e5272ae5020b2675df6e2a0c6e444eed33d3757465534ec389cc70868"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v7/verification.json",
+      "bytes": 658,
+      "sha256": "ccb5477b388a272d1b335622b7d3517e303f0b4dfcce982c27396fa2653df5b6"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v5/01-title-frostglass-v5.mmp",
+      "bytes": 93661,
+      "sha256": "8005364c542cd51c2c6481aafd8b6404350555b4b5b49c943d5223827d786b7b"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v5/render-report.json",
+      "bytes": 69978,
+      "sha256": "dd930e28d50aa8d7e5d3524fd883580b44e15e5d398c45842ab3e4fc0a0e11ed"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v6/01-title-frostglass-v6.mmp",
+      "bytes": 68469,
+      "sha256": "ad105b9c0f3ab293e84917e496c005ab638ad15127ea414e8144631113517750"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v6/render-report.json",
+      "bytes": 22724,
+      "sha256": "b381c61363962c46dd01cdde110e1b79481eaaac6a0975abeb06fa09f9723c98"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v6/render.py",
+      "bytes": 9088,
+      "sha256": "097bb4272073bc9f5f179f500da4a3553d215e3d5a86f959937e19507ca6bcab"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v6/fluid_engine.py",
+      "bytes": 2435,
+      "sha256": "0b9e0325540b77932ccf9c5ad0a12a2b326c745249ef347289b3ef957a5c46eb"
+    },
+    {
+      "path": ".tmp/music-workstation/title-v7/v7-full.wav",
+      "bytes": 71313546,
+      "sha256": "16f38d25bf898fa5a01f21a311546d66150af18298fa7e78b7b426affe01e88a"
+    },
+    {
+      "path": ".tmp/music-workstation/title-v7/v7-backing-only.wav",
+      "bytes": 71313546,
+      "sha256": "3b6bbe117c05cf2f00511e08400f5fe8e17c7b60085679b432b5048ea6dc87c0"
+    },
+    {
+      "path": ".tmp/music-workstation/title-v6/Piano-melody-pedalled.wav",
+      "bytes": 70217224,
+      "sha256": "a73dd27083b5be8b1af95cc70755122e0e98d9d648dd8b52d91b205023367abd"
+    },
+    {
+      "path": ".tmp/music-workstation/title-v6/Quiet-piano-harmony-pedalled.wav",
+      "bytes": 70217224,
+      "sha256": "a224b017cb6484bbd6fbcd6d54707948086a098720fc687cef2374c8df88eaae"
+    }
+  ],
+  "gain_probe": {
+    "centroid_delta_hz": 0.0,
+    "band_percent_max_delta": 0.0,
+    "side_percent_delta": 0.0,
+    "rms_gain_delta_db": -6.020599913279625,
+    "onset_count_equal": true
+  },
+  "old_reference_method_reproduction": [
+    {
+      "name": "停滞之地",
+      "centroid_abs_delta_hz": 0.0,
+      "mono_onset_rate_abs_delta": 0.0,
+      "mono_periodicity_abs_delta": 0.0,
+      "lufs_abs_delta": 0.0
+    },
+    {
+      "name": "山雪欲来",
+      "centroid_abs_delta_hz": 0.0,
+      "mono_onset_rate_abs_delta": 0.0,
+      "mono_periodicity_abs_delta": 5.960464477539063e-08,
+      "lufs_abs_delta": 0.0
+    },
+    {
+      "name": "回想",
+      "centroid_abs_delta_hz": 0.0,
+      "mono_onset_rate_abs_delta": 0.0,
+      "mono_periodicity_abs_delta": 5.960464477539063e-08,
+      "lufs_abs_delta": 0.0
+    }
+  ],
+  "recovered_runs": "Initial calculation stopped on zero-energy trailing seconds in reference. Fixed explicit zero-energy band handling. Signed URL rotation prevented first resume; stable media filename checked on next resume. Failed runs are not marked passed.",
+  "limits": [
+    "No human listening or reference scores/stems available.",
+    "Only existing title/backing native exports; residual piano not a dry isolated track.",
+    "Final plot appearance inspected separately; no game/build/full suite needed."
+  ]
+}

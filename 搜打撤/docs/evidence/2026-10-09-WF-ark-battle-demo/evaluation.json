@@ -1,0 +1,40 @@
+{
+  "metrics": {
+    "seconds": 30.0,
+    "finite": true,
+    "clipped_samples": 0,
+    "interior_silent_halfseconds": 0,
+    "interior_halfseconds": 57,
+    "low_side_mid_ratio": 0.0005215208405696698,
+    "low_side_mid_measurement": "FFT RMS ratio in exact 20-120Hz band",
+    "legacy_lowpass_weighted_side_mid_ratio": 0.019508669286966027,
+    "stereo_correlation": 0.9961164572818579,
+    "crest_db": 15.004907362326732,
+    "section_rms_dbfs": [
+      -23.59555389890491,
+      -20.83786813592283,
+      -22.946951931707723,
+      -20.96348734910048
+    ],
+    "input_i": -20.83,
+    "input_tp": -7.04,
+    "input_lra": 4.6,
+    "input_thresh": -31.05
+  },
+  "checks": {
+    "duration_30s": true,
+    "finite_audio": true,
+    "no_clipped_samples": true,
+    "lossy_true_peak_below_minus_1": true,
+    "role_loudness_window": true,
+    "no_unintended_interior_silence": true,
+    "mono_low_end": true,
+    "stereo_correlation_nonnegative": true
+  },
+  "review": [],
+  "passed": true,
+  "internal_loudness_target": [
+    -22,
+    -18
+  ]
+}

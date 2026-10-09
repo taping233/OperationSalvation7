@@ -1,0 +1,2236 @@
+{
+  "role": "battle",
+  "title": "黑脉交锋 · 节奏精修",
+  "bpm": 124,
+  "seconds": 30.0,
+  "parts": [
+    {
+      "name": "Violin retained challenge",
+      "note_count": 23,
+      "retained_melodic_recording": false,
+      "patch": 40,
+      "db": -23,
+      "pan": -0.17,
+      "bank": 0,
+      "wet": 0.45,
+      "hz": 6500
+    },
+    {
+      "name": "Horn actual reply",
+      "note_count": 6,
+      "retained_melodic_recording": false,
+      "patch": 60,
+      "db": -26,
+      "pan": 0.2,
+      "bank": 0,
+      "wet": 0.32,
+      "hz": 6500
+    },
+    {
+      "name": "Cello unified motor",
+      "note_count": 45,
+      "retained_melodic_recording": false,
+      "patch": 42,
+      "db": -30,
+      "pan": -0.23,
+      "bank": 0,
+      "wet": 0.18,
+      "hz": 4300
+    },
+    {
+      "name": "Stable low bass",
+      "note_count": 16,
+      "retained_melodic_recording": false,
+      "patch": 43,
+      "db": -32,
+      "pan": 0,
+      "bank": 0,
+      "wet": 0.15,
+      "hz": 2200
+    },
+    {
+      "name": "Drum centre",
+      "note_count": 192,
+      "retained_melodic_recording": false,
+      "patch": 0,
+      "db": -32,
+      "pan": 0.03,
+      "bank": 128,
+      "wet": 0.05,
+      "hz": 6500
+    },
+    {
+      "name": "String harmony bridge",
+      "note_count": 8,
+      "retained_melodic_recording": false,
+      "patch": 49,
+      "db": -36,
+      "pan": 0.33,
+      "bank": 0,
+      "wet": 0.55,
+      "hz": 5100
+    },
+    {
+      "name": "Timpani transitions only",
+      "note_count": 6,
+      "retained_melodic_recording": false,
+      "patch": 47,
+      "db": -34,
+      "pan": 0.14,
+      "bank": 0,
+      "wet": 0.22,
+      "hz": 3600
+    }
+  ],
+  "notes": [
+    {
+      "part": "Violin retained challenge",
+      "beat": 0.02866,
+      "key": 64,
+      "duration": 2.0,
+      "velocity": 60
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 2.02603,
+      "key": 62,
+      "duration": 2.0,
+      "velocity": 57
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 4.03389,
+      "key": 67,
+      "duration": 2.0,
+      "velocity": 57
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 6.02707,
+      "key": 64,
+      "duration": 2.0,
+      "velocity": 55
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 8.03253,
+      "key": 67,
+      "duration": 2.0,
+      "velocity": 60
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 10.02755,
+      "key": 60,
+      "duration": 2.0,
+      "velocity": 57
+    },
+    {
+      "part": "Horn actual reply",
+      "beat": 12.02607,
+      "key": 59,
+      "duration": 1.76,
+      "velocity": 60
+    },
+    {
+      "part": "Horn actual reply",
+      "beat": 14.02704,
+      "key": 60,
+      "duration": 1.76,
+      "velocity": 58
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 16.0323,
+      "key": 66,
+      "duration": 2.0,
+      "velocity": 60
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 18.02718,
+      "key": 62,
+      "duration": 2.0,
+      "velocity": 57
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 22.03143,
+      "key": 64,
+      "duration": 2.0,
+      "velocity": 55
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 24.0296,
+      "key": 63,
+      "duration": 2.0,
+      "velocity": 60
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 26.03123,
+      "key": 69,
+      "duration": 2.0,
+      "velocity": 57
+    },
+    {
+      "part": "Horn actual reply",
+      "beat": 28.02807,
+      "key": 66,
+      "duration": 1.76,
+      "velocity": 60
+    },
+    {
+      "part": "Horn actual reply",
+      "beat": 30.03299,
+      "key": 71,
+      "duration": 1.76,
+      "velocity": 58
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 32.02771,
+      "key": 64,
+      "duration": 2.0,
+      "velocity": 60
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 34.03181,
+      "key": 60,
+      "duration": 2.0,
+      "velocity": 57
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 38.03225,
+      "key": 64,
+      "duration": 2.0,
+      "velocity": 55
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 40.03392,
+      "key": 67,
+      "duration": 2.0,
+      "velocity": 60
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 42.02942,
+      "key": 60,
+      "duration": 2.0,
+      "velocity": 57
+    },
+    {
+      "part": "Horn actual reply",
+      "beat": 44.03192,
+      "key": 59,
+      "duration": 1.76,
+      "velocity": 60
+    },
+    {
+      "part": "Horn actual reply",
+      "beat": 46.02835,
+      "key": 64,
+      "duration": 1.76,
+      "velocity": 58
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 48.03193,
+      "key": 66,
+      "duration": 2.0,
+      "velocity": 60
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 50.03171,
+      "key": 62,
+      "duration": 2.0,
+      "velocity": 57
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 52.02711,
+      "key": 59,
+      "duration": 2.0,
+      "velocity": 57
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 54.0319,
+      "key": 62,
+      "duration": 2.0,
+      "velocity": 55
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 56.02935,
+      "key": 63,
+      "duration": 2.0,
+      "velocity": 60
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 58.03203,
+      "key": 66,
+      "duration": 2.0,
+      "velocity": 57
+    },
+    {
+      "part": "Violin retained challenge",
+      "beat": 60.02859,
+      "key": 65,
+      "duration": 2.0,
+      "velocity": 57
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 0,
+      "key": 40,
+      "duration": 0.62,
+      "velocity": 58
+    },
+    {
+      "part": "Drum centre",
+      "beat": 0,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 63
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 1.50222,
+      "key": 40,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 1.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 2.49224,
+      "key": 52,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 2.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Drum centre",
+      "beat": 1.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 3.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 0.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 1.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 1.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 2.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 2.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 3.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 3.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Stable low bass",
+      "beat": 0,
+      "key": 28,
+      "duration": 3.6,
+      "velocity": 42
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 4.00709,
+      "key": 40,
+      "duration": 0.62,
+      "velocity": 58
+    },
+    {
+      "part": "Drum centre",
+      "beat": 4.0,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 63
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 5.50895,
+      "key": 40,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 5.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 6.50497,
+      "key": 52,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 6.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Drum centre",
+      "beat": 5.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 7.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 4.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 4.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 5.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 5.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 6.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 6.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 7.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 7.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Stable low bass",
+      "beat": 3.99687,
+      "key": 28,
+      "duration": 3.6,
+      "velocity": 42
+    },
+    {
+      "part": "String harmony bridge",
+      "beat": 0.12358,
+      "key": 55,
+      "duration": 7.8,
+      "velocity": 35
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 7.99475,
+      "key": 36,
+      "duration": 0.62,
+      "velocity": 58
+    },
+    {
+      "part": "Drum centre",
+      "beat": 8.0,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 63
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 9.49779,
+      "key": 36,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 9.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 10.50597,
+      "key": 48,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 10.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Drum centre",
+      "beat": 9.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 11.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 8.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 8.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 9.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 9.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 10.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 10.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 11.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 11.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Stable low bass",
+      "beat": 8.00335,
+      "key": 24,
+      "duration": 3.6,
+      "velocity": 42
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 12.00537,
+      "key": 36,
+      "duration": 0.62,
+      "velocity": 58
+    },
+    {
+      "part": "Drum centre",
+      "beat": 12.0,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 63
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 13.49403,
+      "key": 36,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 13.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 14.50375,
+      "key": 48,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 14.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Drum centre",
+      "beat": 13.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 15.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 12.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 12.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 13.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 13.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 14.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 14.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 15.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 15.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Stable low bass",
+      "beat": 12.00722,
+      "key": 24,
+      "duration": 3.6,
+      "velocity": 42
+    },
+    {
+      "part": "String harmony bridge",
+      "beat": 8.12586,
+      "key": 55,
+      "duration": 7.8,
+      "velocity": 35
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 15.99125,
+      "key": 38,
+      "duration": 0.62,
+      "velocity": 58
+    },
+    {
+      "part": "Drum centre",
+      "beat": 16.0,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 63
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 17.50258,
+      "key": 38,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 17.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 18.50721,
+      "key": 50,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 18.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Drum centre",
+      "beat": 17.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 19.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 16.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 16.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 17.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 17.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 18.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 18.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 19.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 19.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Stable low bass",
+      "beat": 16.00626,
+      "key": 26,
+      "duration": 3.6,
+      "velocity": 42
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 20.00742,
+      "key": 38,
+      "duration": 0.62,
+      "velocity": 58
+    },
+    {
+      "part": "Drum centre",
+      "beat": 20.0,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 63
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 21.50912,
+      "key": 38,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 21.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 22.50326,
+      "key": 50,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 22.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Drum centre",
+      "beat": 21.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 23.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 20.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 20.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 21.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 21.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 22.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 22.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 23.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 23.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Stable low bass",
+      "beat": 19.99805,
+      "key": 26,
+      "duration": 3.6,
+      "velocity": 42
+    },
+    {
+      "part": "String harmony bridge",
+      "beat": 16.1214,
+      "key": 54,
+      "duration": 7.8,
+      "velocity": 35
+    },
+    {
+      "part": "Timpani transitions only",
+      "beat": 22.49171,
+      "key": 38,
+      "duration": 0.7,
+      "velocity": 35
+    },
+    {
+      "part": "Timpani transitions only",
+      "beat": 23.24547,
+      "key": 38,
+      "duration": 0.55,
+      "velocity": 44
+    },
+    {
+      "part": "Timpani transitions only",
+      "beat": 23.7557,
+      "key": 38,
+      "duration": 0.42,
+      "velocity": 51
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 24.00803,
+      "key": 35,
+      "duration": 0.62,
+      "velocity": 58
+    },
+    {
+      "part": "Drum centre",
+      "beat": 24.0,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 63
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 25.49652,
+      "key": 35,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 25.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 26.49674,
+      "key": 47,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 26.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Drum centre",
+      "beat": 25.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 27.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 24.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 24.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 25.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 25.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 26.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 26.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 27.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 27.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Stable low bass",
+      "beat": 24.00583,
+      "key": 23,
+      "duration": 3.6,
+      "velocity": 42
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 27.99902,
+      "key": 35,
+      "duration": 0.62,
+      "velocity": 58
+    },
+    {
+      "part": "Drum centre",
+      "beat": 28.0,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 63
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 29.4977,
+      "key": 35,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 29.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 30.49768,
+      "key": 47,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 30.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Drum centre",
+      "beat": 29.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 31.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 28.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 28.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 29.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 29.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 30.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 30.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 31.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 31.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Stable low bass",
+      "beat": 27.99717,
+      "key": 23,
+      "duration": 3.6,
+      "velocity": 42
+    },
+    {
+      "part": "String harmony bridge",
+      "beat": 24.11793,
+      "key": 54,
+      "duration": 7.8,
+      "velocity": 35
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 32.00325,
+      "key": 33,
+      "duration": 0.62,
+      "velocity": 58
+    },
+    {
+      "part": "Drum centre",
+      "beat": 32.0,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 63
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 34.49071,
+      "key": 33,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 34.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Drum centre",
+      "beat": 33.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 35.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 32.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 33.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 34.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 35.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Stable low bass",
+      "beat": 31.99519,
+      "key": 21,
+      "duration": 3.6,
+      "velocity": 42
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 35.99307,
+      "key": 33,
+      "duration": 0.62,
+      "velocity": 58
+    },
+    {
+      "part": "Drum centre",
+      "beat": 36.0,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 63
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 38.49837,
+      "key": 33,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 38.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Drum centre",
+      "beat": 37.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 39.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 36.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 37.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 38.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 39.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Stable low bass",
+      "beat": 36.00923,
+      "key": 21,
+      "duration": 3.6,
+      "velocity": 42
+    },
+    {
+      "part": "String harmony bridge",
+      "beat": 32.11446,
+      "key": 57,
+      "duration": 7.8,
+      "velocity": 35
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 39.99815,
+      "key": 36,
+      "duration": 0.62,
+      "velocity": 58
+    },
+    {
+      "part": "Drum centre",
+      "beat": 40.0,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 63
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 41.50553,
+      "key": 36,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 41.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 42.4905,
+      "key": 48,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 42.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Drum centre",
+      "beat": 41.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 43.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 40.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 40.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 41.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 41.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 42.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 42.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 43.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 43.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Stable low bass",
+      "beat": 39.99743,
+      "key": 24,
+      "duration": 3.6,
+      "velocity": 42
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 44.00796,
+      "key": 36,
+      "duration": 0.62,
+      "velocity": 58
+    },
+    {
+      "part": "Drum centre",
+      "beat": 44.0,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 63
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 45.50446,
+      "key": 36,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 45.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 46.49772,
+      "key": 48,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 46.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Drum centre",
+      "beat": 45.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 47.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 44.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 44.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 45.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 45.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 46.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 46.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 47.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 47.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Stable low bass",
+      "beat": 44.00066,
+      "key": 24,
+      "duration": 3.6,
+      "velocity": 42
+    },
+    {
+      "part": "String harmony bridge",
+      "beat": 40.12307,
+      "key": 55,
+      "duration": 7.8,
+      "velocity": 35
+    },
+    {
+      "part": "Timpani transitions only",
+      "beat": 46.50952,
+      "key": 36,
+      "duration": 0.7,
+      "velocity": 35
+    },
+    {
+      "part": "Timpani transitions only",
+      "beat": 47.24234,
+      "key": 40,
+      "duration": 0.55,
+      "velocity": 44
+    },
+    {
+      "part": "Timpani transitions only",
+      "beat": 47.74321,
+      "key": 36,
+      "duration": 0.42,
+      "velocity": 51
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 47.99411,
+      "key": 38,
+      "duration": 0.62,
+      "velocity": 58
+    },
+    {
+      "part": "Drum centre",
+      "beat": 48.0,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 63
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 49.50102,
+      "key": 38,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 49.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 50.49701,
+      "key": 50,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 50.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Drum centre",
+      "beat": 49.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 51.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 48.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 48.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 49.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 49.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 50.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 50.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 51.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 51.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Stable low bass",
+      "beat": 48.00122,
+      "key": 26,
+      "duration": 3.6,
+      "velocity": 42
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 51.99704,
+      "key": 38,
+      "duration": 0.62,
+      "velocity": 58
+    },
+    {
+      "part": "Drum centre",
+      "beat": 52.0,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 63
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 53.49158,
+      "key": 38,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 53.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 54.49101,
+      "key": 50,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 54.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Drum centre",
+      "beat": 53.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 55.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 52.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 52.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 53.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 53.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 54.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 54.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 55.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 55.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Stable low bass",
+      "beat": 52.00489,
+      "key": 26,
+      "duration": 3.6,
+      "velocity": 42
+    },
+    {
+      "part": "String harmony bridge",
+      "beat": 48.11701,
+      "key": 55,
+      "duration": 7.8,
+      "velocity": 35
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 55.99569,
+      "key": 35,
+      "duration": 0.62,
+      "velocity": 58
+    },
+    {
+      "part": "Drum centre",
+      "beat": 56.0,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 63
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 57.50329,
+      "key": 35,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 57.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 58.50897,
+      "key": 47,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 58.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Drum centre",
+      "beat": 57.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 59.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 56.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 56.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 57.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 57.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 58.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 58.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 59.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 59.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Stable low bass",
+      "beat": 56.00736,
+      "key": 23,
+      "duration": 3.6,
+      "velocity": 42
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 59.99027,
+      "key": 35,
+      "duration": 0.62,
+      "velocity": 58
+    },
+    {
+      "part": "Drum centre",
+      "beat": 60.0,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 63
+    },
+    {
+      "part": "Cello unified motor",
+      "beat": 61.49161,
+      "key": 35,
+      "duration": 0.62,
+      "velocity": 43
+    },
+    {
+      "part": "Drum centre",
+      "beat": 61.5,
+      "key": 36,
+      "duration": 0.23,
+      "velocity": 46
+    },
+    {
+      "part": "Drum centre",
+      "beat": 61.0,
+      "key": 38,
+      "duration": 0.2,
+      "velocity": 48
+    },
+    {
+      "part": "Drum centre",
+      "beat": 60.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 60.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Drum centre",
+      "beat": 61.0,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 31
+    },
+    {
+      "part": "Drum centre",
+      "beat": 61.5,
+      "key": 42,
+      "duration": 0.12,
+      "velocity": 23
+    },
+    {
+      "part": "Stable low bass",
+      "beat": 59.99279,
+      "key": 23,
+      "duration": 2.5,
+      "velocity": 42
+    },
+    {
+      "part": "String harmony bridge",
+      "beat": 56.12609,
+      "key": 54,
+      "duration": 6.380000000000003,
+      "velocity": 35
+    }
+  ],
+  "shapes": {
+    "Cello unified motor": [
+      [
+        0,
+        0.85
+      ],
+      [
+        24,
+        1
+      ],
+      [
+        32,
+        1
+      ],
+      [
+        34,
+        0.62
+      ],
+      [
+        38,
+        0.62
+      ],
+      [
+        40,
+        1.08
+      ],
+      [
+        62,
+        1
+      ]
+    ],
+    "Drum centre": [
+      [
+        0,
+        0.9
+      ],
+      [
+        24,
+        1
+      ],
+      [
+        32,
+        1
+      ],
+      [
+        34,
+        0.72
+      ],
+      [
+        38,
+        0.72
+      ],
+      [
+        40,
+        1.05
+      ],
+      [
+        62,
+        1
+      ]
+    ]
+  },
+  "source": [],
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-09-WF-music-refinement/battle-refined-30s.wav",
+      "bytes": 8640044,
+      "sha256": "be5dbaf27400f52e0cb4b3d53daffd37073d58c5c509ab0c41c5448f72dfcac9"
+    },
+    {
+      "path": "docs/evidence/2026-10-09-WF-music-refinement/battle-refined-30s.mp3",
+      "bytes": 961620,
+      "sha256": "71daeead8a2bd15dd7b7cefb548b26dbfbd96aa184295068f2f821a91d9ad7b8"
+    }
+  ],
+  "peak_dbfs": -4.186993632581791,
+  "rms_dbfs": -18.573844480203594
+}

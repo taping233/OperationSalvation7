@@ -1,0 +1,289 @@
+{
+  "internal_targets": {
+    "title": [
+      -22,
+      -18
+    ],
+    "explore": [
+      -20,
+      -16
+    ],
+    "battle": [
+      -18,
+      -14
+    ],
+    "shop": [
+      -22,
+      -17
+    ]
+  },
+  "scope": "30-second MP3 production checks; not a commercial certification or aesthetic score",
+  "peak_ceiling_dbTP": -1,
+  "checks": [
+    {
+      "role": "title",
+      "retained_unchanged": false,
+      "initial": {
+        "seconds": 30.0,
+        "finite": true,
+        "clipped_samples": 0,
+        "interior_silent_halfseconds": 1,
+        "interior_halfseconds": 57,
+        "low_side_mid_ratio": 0.43675220242638296,
+        "stereo_correlation": 0.15338047969150936,
+        "crest_db": 18.542457369403934,
+        "section_rms_dbfs": [
+          -22.569148547336532,
+          -22.46219969527282,
+          -22.676830322429538,
+          -24.618958852354833
+        ],
+        "input_i": -20.37,
+        "input_tp": -4.46,
+        "input_lra": 9.5,
+        "input_thresh": -30.93
+      },
+      "final": {
+        "seconds": 30.0,
+        "finite": true,
+        "clipped_samples": 0,
+        "interior_silent_halfseconds": 1,
+        "interior_halfseconds": 57,
+        "low_side_mid_ratio": 0.43675220242638296,
+        "stereo_correlation": 0.15338047969150936,
+        "crest_db": 18.542457369403934,
+        "section_rms_dbfs": [
+          -22.569148547336532,
+          -22.46219969527282,
+          -22.676830322429538,
+          -24.618958852354833
+        ],
+        "input_i": -20.37,
+        "input_tp": -4.46,
+        "input_lra": 9.5,
+        "input_thresh": -30.93
+      },
+      "hand_check": {
+        "left": {
+          "max_simultaneous_key_span_semitones": 23,
+          "max_depressed_keys": 3
+        },
+        "right": {
+          "max_simultaneous_key_span_semitones": 9,
+          "max_depressed_keys": 3
+        }
+      },
+      "checks": {
+        "duration_30s": true,
+        "finite_audio": true,
+        "no_clipped_samples": true,
+        "lossy_true_peak_below_minus_1": true,
+        "role_loudness_window": true,
+        "no_unintended_interior_silence": false,
+        "mono_low_end": false,
+        "stereo_correlation_nonnegative": true,
+        "piano_hand_spans": false,
+        "piano_depressed_keys": true
+      },
+      "review_flags": [],
+      "repairs": [],
+      "production_checks_passed": false,
+      "file": {
+        "path": "docs/evidence/2026-10-09-WF-music-redirection/title-rewrite-30s.mp3",
+        "sha256": "e1ffa9986ef0edc6fb263edec306458d3b7b15e928bc14dc900523ac3cf3405b"
+      }
+    },
+    {
+      "role": "explore",
+      "retained_unchanged": false,
+      "initial": {
+        "seconds": 30.0,
+        "finite": true,
+        "clipped_samples": 0,
+        "interior_silent_halfseconds": 0,
+        "interior_halfseconds": 57,
+        "low_side_mid_ratio": 0.0677035453402196,
+        "stereo_correlation": 0.9844989556767545,
+        "crest_db": 17.68144392906103,
+        "section_rms_dbfs": [
+          -20.72948954928,
+          -20.97857110096369,
+          -20.695883844877706,
+          -21.118451618351965
+        ],
+        "input_i": -17.83,
+        "input_tp": -3.19,
+        "input_lra": 2.8,
+        "input_thresh": -28.15
+      },
+      "final": {
+        "seconds": 30.0,
+        "finite": true,
+        "clipped_samples": 0,
+        "interior_silent_halfseconds": 0,
+        "interior_halfseconds": 57,
+        "low_side_mid_ratio": 0.0677035453402196,
+        "stereo_correlation": 0.9844989556767545,
+        "crest_db": 17.68144392906103,
+        "section_rms_dbfs": [
+          -20.72948954928,
+          -20.97857110096369,
+          -20.695883844877706,
+          -21.118451618351965
+        ],
+        "input_i": -17.83,
+        "input_tp": -3.19,
+        "input_lra": 2.8,
+        "input_thresh": -28.15
+      },
+      "hand_check": null,
+      "checks": {
+        "duration_30s": true,
+        "finite_audio": true,
+        "no_clipped_samples": true,
+        "lossy_true_peak_below_minus_1": true,
+        "role_loudness_window": true,
+        "no_unintended_interior_silence": true,
+        "mono_low_end": true,
+        "stereo_correlation_nonnegative": true
+      },
+      "review_flags": [],
+      "repairs": [],
+      "production_checks_passed": true,
+      "file": {
+        "path": "docs/evidence/2026-10-09-WF-music-redirection/explore-rewrite-30s.mp3",
+        "sha256": "e8a1868a5d4d3552b9f110c3ba7e310c58a2b29bb8f95b4a7e3325caf6b60b82"
+      }
+    },
+    {
+      "role": "battle",
+      "retained_unchanged": false,
+      "initial": {
+        "seconds": 30.0,
+        "finite": true,
+        "clipped_samples": 0,
+        "interior_silent_halfseconds": 0,
+        "interior_halfseconds": 57,
+        "low_side_mid_ratio": 0.031652544213405194,
+        "stereo_correlation": 0.9911137286687183,
+        "crest_db": 16.747711920155346,
+        "section_rms_dbfs": [
+          -17.824108944535762,
+          -18.29699041953984,
+          -18.62451053532218,
+          -17.855579178720607
+        ],
+        "input_i": -15.33,
+        "input_tp": -1.51,
+        "input_lra": 1.5,
+        "input_thresh": -25.39
+      },
+      "final": {
+        "seconds": 30.0,
+        "finite": true,
+        "clipped_samples": 0,
+        "interior_silent_halfseconds": 0,
+        "interior_halfseconds": 57,
+        "low_side_mid_ratio": 0.031652544213405194,
+        "stereo_correlation": 0.9911137286687183,
+        "crest_db": 16.747711920155346,
+        "section_rms_dbfs": [
+          -17.824108944535762,
+          -18.29699041953984,
+          -18.62451053532218,
+          -17.855579178720607
+        ],
+        "input_i": -15.33,
+        "input_tp": -1.51,
+        "input_lra": 1.5,
+        "input_thresh": -25.39
+      },
+      "hand_check": null,
+      "checks": {
+        "duration_30s": true,
+        "finite_audio": true,
+        "no_clipped_samples": true,
+        "lossy_true_peak_below_minus_1": true,
+        "role_loudness_window": true,
+        "no_unintended_interior_silence": true,
+        "mono_low_end": true,
+        "stereo_correlation_nonnegative": true
+      },
+      "review_flags": [],
+      "repairs": [],
+      "production_checks_passed": true,
+      "file": {
+        "path": "docs/evidence/2026-10-09-WF-music-redirection/battle-rewrite-30s.mp3",
+        "sha256": "897c5f2530380ec9010b69c9c442bf98363612c2bf172ff3954dcda28b0b1faa"
+      }
+    },
+    {
+      "role": "shop",
+      "retained_unchanged": true,
+      "initial": {
+        "seconds": 30.0,
+        "finite": true,
+        "clipped_samples": 0,
+        "interior_silent_halfseconds": 0,
+        "interior_halfseconds": 57,
+        "low_side_mid_ratio": 0.04509088634874313,
+        "stereo_correlation": 0.9862687653557829,
+        "crest_db": 14.657634412287305,
+        "section_rms_dbfs": [
+          -19.346120337801572,
+          -20.979279959198823,
+          -19.94578979009787,
+          -19.918629645480827
+        ],
+        "input_i": -18.07,
+        "input_tp": -5.38,
+        "input_lra": 2.6,
+        "input_thresh": -28.09
+      },
+      "final": {
+        "seconds": 30.0,
+        "finite": true,
+        "clipped_samples": 0,
+        "interior_silent_halfseconds": 0,
+        "interior_halfseconds": 57,
+        "low_side_mid_ratio": 0.04509088634874313,
+        "stereo_correlation": 0.9862687653557829,
+        "crest_db": 14.657634412287305,
+        "section_rms_dbfs": [
+          -19.346120337801572,
+          -20.979279959198823,
+          -19.94578979009787,
+          -19.918629645480827
+        ],
+        "input_i": -18.07,
+        "input_tp": -5.38,
+        "input_lra": 2.6,
+        "input_thresh": -28.09
+      },
+      "hand_check": null,
+      "checks": {
+        "duration_30s": true,
+        "finite_audio": true,
+        "no_clipped_samples": true,
+        "lossy_true_peak_below_minus_1": true,
+        "role_loudness_window": true,
+        "no_unintended_interior_silence": true,
+        "mono_low_end": true,
+        "stereo_correlation_nonnegative": true
+      },
+      "review_flags": [],
+      "repairs": [],
+      "production_checks_passed": true,
+      "file": {
+        "path": "docs/evidence/2026-10-09-WF-shop-remake/shop-lamplight-deal-30s.mp3",
+        "sha256": "79cee76063c653131567ca7c94d3b5830f3a03fa441854ddbdedc76366fd3ce3"
+      }
+    }
+  ],
+  "interpretation": [
+    "LUFS ranges are role-specific internal draft targets, not a universal game-audio standard.",
+    "LRA and crest flags are review prompts, not forced artistic failures.",
+    "Hand-span measurements count held keys; pedalled resonance is excluded.",
+    "Numerical checks cannot certify melody, timbre, groove or emotional fit."
+  ]
+}

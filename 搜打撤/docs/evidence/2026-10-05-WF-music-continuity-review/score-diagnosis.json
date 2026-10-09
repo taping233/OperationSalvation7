@@ -1,0 +1,24 @@
+[
+  {
+    "role": "explore",
+    "lead": "Piano traveller",
+    "lead_notes": 111,
+    "lead_note_duration_median_seconds": 0.4241379310344827,
+    "lead_note_duration_below_350ms": 35,
+    "successive_leaps_7_or_more": 11,
+    "all_note_on_events_per_second": 5.8805555555555555,
+    "CC11_implementation": "integer step each beat; no interpolation across section changes",
+    "max_note_on_events_in_1beat": 12
+  },
+  {
+    "role": "battle",
+    "lead": "Violin challenge",
+    "lead_notes": 129,
+    "lead_note_duration_median_seconds": 0.34015000000000006,
+    "lead_note_duration_below_350ms": 81,
+    "successive_leaps_7_or_more": 28,
+    "all_note_on_events_per_second": 8.547916666666667,
+    "CC11_implementation": "integer step each beat; no interpolation across section changes",
+    "max_note_on_events_in_1beat": 11
+  }
+]

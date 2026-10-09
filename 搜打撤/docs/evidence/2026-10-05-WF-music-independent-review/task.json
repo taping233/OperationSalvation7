@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-music-independent-review",
+  "date": "2026-10-05",
+  "owner": "Friday",
+  "goal": "独立分析最新标题曲V7与三首官方参考；探索战斗取消",
+  "paths": [
+    "docs/evidence/2026-10-05-WF-music-independent-review"
+  ],
+  "doneWhen": [
+    "多片段频谱节奏动态声场段落数据、原生及分轨审计、中文报告图表和定向验证完成"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "独立四份音频七窗口计算、28项数值与来源检查、源指纹复核、两图目视和自有链接检查完成",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "docs-check 344链接零发现；自有diff-check通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "未人工试听；官方原谱与分轨不可得；建议未实施"
+  ],
+  "updatedAt": "2026-10-05T11:47:11.950Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "cid": "125099",
+    "api": "https://monster-siren.hypergryph.com/api/song/125099",
+    "http": 200,
+    "response_sha256": "7f39cc99b0d3b71beb7baf0b1651cfadda3943f2d2a129bcbfaf1b346262b100",
+    "song_page": "https://monster-siren.hypergryph.com/music/125099",
+    "sourceUrl": "https://res01.hycdn.cn/c32701c37a6fcd42b5179c271e419ef6/6AC3B623/siren/audio/20221203/15c611b7fe8c28661ca6844610481591.wav"
+  },
+  {
+    "cid": "306834",
+    "api": "https://monster-siren.hypergryph.com/api/song/306834",
+    "http": 200,
+    "response_sha256": "fbdd86bb443d5b71d66faa000317bda034dcf72bb14f0a6a26dbf8bdc7f10978",
+    "song_page": "https://monster-siren.hypergryph.com/music/306834",
+    "sourceUrl": "https://res01.hycdn.cn/a419a7f42609e01e3a721d78d76b461d/6AC3B623/siren/audio/20221203/425cd75609dbe8c99804097de5fa45fd.wav"
+  },
+  {
+    "cid": "697622",
+    "api": "https://monster-siren.hypergryph.com/api/song/697622",
+    "http": 200,
+    "response_sha256": "57eb2faba6c20b53437788cf720b1efa88eb194c221c03bf407403e183fa3a04",
+    "song_page": "https://monster-siren.hypergryph.com/music/697622",
+    "sourceUrl": "https://res01.hycdn.cn/068a09d7a67953a74c9b2a2139c533aa/6AC3B623/siren/audio/20231125/438ea8b32d1a4792b707ca140b9122e3.wav"
+  }
+]

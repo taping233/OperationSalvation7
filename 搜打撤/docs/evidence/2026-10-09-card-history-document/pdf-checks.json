@@ -1,0 +1,1371 @@
+{
+  "pages": 216,
+  "mainEntries": 331,
+  "historicalFaces": 485,
+  "totalFaces": 816,
+  "illustrationFiles": 194,
+  "bookmarks": 596,
+  "layoutOverflows": [],
+  "pdfBytes": 5429809,
+  "pdfSha256": "331bafe437a10981b0e4dbddc6cc727b7badef7422fb7f7596c3467afa3f4fa3",
+  "mainPages": {
+    "cc-unmoved": 8,
+    "tt7-imitate": 8,
+    "cmtn233trmeg": 8,
+    "cc-dual-wield": 8,
+    "tt7-sneak": 9,
+    "tt7-fullstrike": 9,
+    "tt3-purify-arrow": 9,
+    "cmtn2jc142dj": 9,
+    "starter-attack": 10,
+    "tt7-swordimmortal": 10,
+    "tt3-frostfall": 10,
+    "tt3wu-shike": 10,
+    "tt3-bandage": 11,
+    "tt7-ironcharge": 11,
+    "tt2-bloodblade": 11,
+    "tt3-hold-fast": 11,
+    "tt7-bulwark": 12,
+    "tt2-shoot": 12,
+    "tt3sp-shadowbug": 12,
+    "tt7-thundergrudge": 12,
+    "tt7-marchrush": 13,
+    "tt3-dig-treasure": 13,
+    "tt3-execute": 13,
+    "tt7-whirlwind": 13,
+    "tt2-block": 14,
+    "tt3-noon-duel": 14,
+    "tt7-armup": 14,
+    "tt3-venom-arrow": 14,
+    "tt3-qi-wave": 15,
+    "tt2-jianghu": 15,
+    "cmtn1wnhhym": 15,
+    "tt3-flux-slash": 15,
+    "cmtn0pbkmnvc": 16,
+    "tt7-meteorrain": 16,
+    "tt7-stealth": 16,
+    "tt3-life-arrow": 16,
+    "cmtn1i64j7y7": 17,
+    "tt3-wave-slash": 17,
+    "tt3-armor-rush": 17,
+    "tt2-piercearrow": 17,
+    "tt7-demonbreaker": 18,
+    "cc-last-stand": 18,
+    "tt3-skewer": 18,
+    "tt3-arrow-rain": 18,
+    "tt2-forestarrow": 19,
+    "tt3-fatal-pierce": 19,
+    "tt7-bloodpoison": 19,
+    "tt3-blood-arrow": 19,
+    "cc-cursed-blade": 20,
+    "tt2-swiftarrow": 20,
+    "tt2-comboarrow": 20,
+    "tt3-double-shot": 20,
+    "cc-rapid-fire": 21,
+    "cc-chase-slash": 21,
+    "tt3-reshot": 21,
+    "tt7-goldencicada": 21,
+    "tt7-ironphalanx": 22,
+    "tt2-turtlearmor": 22,
+    "cmtn0xt0zr7": 22,
+    "tt3-frost-slash": 22,
+    "tt8-dragonblade": 23,
+    "tt7-throwblade": 23,
+    "tt3-fly-arrowhawk": 23,
+    "tt7-ghostblade": 23,
+    "tt7-twinfireball": 24,
+    "tt12-unstableray": 24,
+    "cc-double-boom": 24,
+    "cc-ember-burst": 24,
+    "tt12-elemburst": 25,
+    "tt7-elementstorm": 25,
+    "tt12-chargeray": 25,
+    "cmtn1lbhbqi4": 25,
+    "tt3-ice-spike": 26,
+    "tt7-frozenight": 26,
+    "tt12-freezeray": 26,
+    "cmtn1p9vb5au": 26,
+    "cmtn1gfhczzj": 27,
+    "tt12-backupcell": 27,
+    "tt3sp-devour": 27,
+    "tt7-bloodpotion": 27,
+    "tt7-livingwater": 28,
+    "tt7-holyheal": 28,
+    "tt3-holy-shield": 28,
+    "tt3-firm-barrier": 28,
+    "tt12-basicdev": 29,
+    "tt7-arcanebolt": 29,
+    "tt12-sporewall": 29,
+    "tt3-treasure-hunt": 29,
+    "tt12-barriermend": 30,
+    "tt7-recruit": 30,
+    "cc-demon": 30,
+    "tt7-smite": 30,
+    "tt12-infectray": 31,
+    "tt7-provoke": 31,
+    "cmtn28jv33wx": 31,
+    "tt3-grope": 31,
+    "tt7-meteorstrong": 32,
+    "tt3sp-shadowshot": 32,
+    "tt3-thornfield": 32,
+    "cc-poison-burst": 32,
+    "tt3-toxin": 33,
+    "tt7-bladebloom": 33,
+    "tt7-holyglow": 33,
+    "tt3-holy-water": 33,
+    "cmtna0nb1yxt": 34,
+    "cc-mana-surge": 34,
+    "tt7-maxsupply": 34,
+    "tt7-stratagem": 34,
+    "tt7-abysscurse": 35,
+    "tt3-nature-form": 35,
+    "cmtn1ntxzoc4": 35,
+    "tt3-fireball": 35,
+    "cmtn1epgt20j": 36,
+    "cc-lava-blast": 36,
+    "tt7-burnharvest": 36,
+    "tt3-magic-lamp": 36,
+    "cmtn125e1nk0": 37,
+    "tt8-curse1": 37,
+    "tt8-curse2": 37,
+    "tt8-curse3": 37,
+    "tt8-curse4": 38,
+    "tt7-silence": 38,
+    "tt12-breakthrough": 38,
+    "tt7-energize": 38,
+    "cc-rot-seed": 39,
+    "tt3-nuke-ray": 39,
+    "tt3-petal": 39,
+    "tt3sp-flowerzhen": 39,
+    "tt3sp-magicoil": 40,
+    "tt3sp-bloodstorm": 40,
+    "tt12-firecracker": 40,
+    "tt12-felguard": 40,
+    "tt5-galaxy-voyage": 41,
+    "tt3sp-silverthorn": 41,
+    "tt3-chain-lightning": 41,
+    "tt3sp-dodge": 41,
+    "tt3-thunderblast": 42,
+    "tt3-flame-storm": 42,
+    "tt12-saturate": 42,
+    "tt12-hitechrd": 42,
+    "tt12-magicfind": 43,
+    "cmtn1r10xnl1": 43,
+    "tt12-raydragon": 43,
+    "tt3-element-seal": 44,
+    "tt3-twinwater-mail": 44,
+    "tt3-fate-wheel": 44,
+    "tt3-holy-staff": 44,
+    "tt3-master-staff": 45,
+    "tt8-heavensword": 45,
+    "tt8-archdemon": 45,
+    "tt3-wolf-bow": 45,
+    "tt7-arcanescroll": 46,
+    "tt2-frostsword": 46,
+    "tt2-treasuremap": 46,
+    "tt12-raygun": 46,
+    "tt3-light-mail": 47,
+    "tt2-venomstaff": 47,
+    "tt2-wreck": 47,
+    "tt3-staff": 47,
+    "tt3-deep-seal": 48,
+    "tt3-deep-diary": 48,
+    "tt3-crimson-pouch": 48,
+    "tt3-chaos-eye": 48,
+    "tt7-talisman": 49,
+    "tt2-pearlbox": 49,
+    "tt3-azure-sword": 49,
+    "tt3-sapper-bomb": 49,
+    "tt7-naturestaff": 50,
+    "tt3-grass-armor": 50,
+    "tt3-silver-runesword": 50,
+    "tt8-demonslay": 50,
+    "tt3-reverse-bow": 51,
+    "tt3eq-mistbox": 51,
+    "tt3-longsword": 51,
+    "tt2-apollo": 51,
+    "tt3-blooddrinker": 52,
+    "tt3-immortal-blade": 52,
+    "tt3eq-boiler": 52,
+    "tt7-darkfort": 52,
+    "tt3sp-doom": 53,
+    "tt3-iceheart-potion": 53,
+    "tt3-turnabout-potion": 53,
+    "cmtmvq6ss84l": 53,
+    "tt-token-color": 54,
+    "tt-token-gold": 54,
+    "tt4-shine-token": 54,
+    "cmtn6bge52qt": 54,
+    "starter-emergency-bandage": 55,
+    "tt-medneedle": 55,
+    "tt3-blue-potion": 55,
+    "tt3-savior-elixir": 55,
+    "tt3-demon-potion": 56,
+    "tt3-mixed-potion": 56,
+    "tt3-python-potion": 56,
+    "tt4-smoke-bomb": 56,
+    "tt3-houyi-potion": 57,
+    "tt3-mystery-potion": 57,
+    "tt3-mind-potion": 57,
+    "tt-crystal": 57,
+    "tt4-woodify": 58,
+    "tt-jinchuangyao": 58,
+    "tt-key": 59,
+    "tt3-wood-bundle": 59,
+    "tt-key-one": 59,
+    "tt-keys-bunch": 59,
+    "tt3-ration-double": 60,
+    "tt-rations": 60,
+    "tt-wood-lots": 60,
+    "pet-egg": 60,
+    "tt-wood": 61,
+    "tt3-garnet-marble": 61,
+    "tt-econpack": 61,
+    "tt-gold": 61,
+    "tt3-diamond": 62,
+    "tt-copper": 62,
+    "tt-silver": 62,
+    "tt8-hero-descender": 63,
+    "tt8-hero-mage": 63,
+    "tt8-hero-sealer": 63,
+    "tt8-hero-guardian": 63,
+    "tt8-hero-ranger": 64,
+    "tt8-hero-sword": 64,
+    "tt8-hero-priest": 64,
+    "tt8-abyss-sovereign": 64,
+    "tt8-hero-assassin": 65,
+    "tt8-hero-warlock": 65,
+    "tt8-hero-summoner": 65,
+    "tt8-hero-warrior": 65,
+    "tt6-relief": 66,
+    "ev19-fireballs": 66,
+    "ev19-gamble": 66,
+    "tt6-goldmine": 66,
+    "tt6-mystery": 67,
+    "cmtn7qttxqo4": 67,
+    "ev19-recode": 67,
+    "tt6-bandits": 67,
+    "tt6-systemsupply": 68,
+    "tt6-airdrop": 68,
+    "ev19-arrows": 68,
+    "tt6-goldhammer": 68,
+    "tt6-chestdraw": 69,
+    "ev19-quartermaster": 69,
+    "ev19-pearlbox": 69,
+    "ev19-potions": 69,
+    "tt6-demondeal": 70,
+    "ev19-vital": 70,
+    "ev19-classchest": 70,
+    "foe-bandit": 71,
+    "foe-orc_jav": 71,
+    "foe-boss_orc": 71,
+    "foe-wolf_rider": 71,
+    "foe-esper_echo": 72,
+    "cmtn7err0a7": 72,
+    "tt8-curseimmune": 72,
+    "tt8-energycap": 72,
+    "tt8-nofocus": 73,
+    "tt8-healplus": 73,
+    "foe-dragon": 73,
+    "foe-boss_elem": 73,
+    "cmtn79743r2n": 74,
+    "cmtn6ulm4boj": 74,
+    "foe-grass_el": 74,
+    "foe-fire_el": 74,
+    "foe-esper_candle": 75,
+    "foe-orc_axe": 75,
+    "foe-esper_crow": 75,
+    "foe-archer": 75,
+    "foe-infantry": 76,
+    "foe-cavalry": 76,
+    "foe-boss_general": 76,
+    "foe-water_el": 76,
+    "foe-esper_silence": 77,
+    "tt3-pindown": 78,
+    "cc-prep": 78,
+    "c0i00": 78,
+    "starter-recruit-drill": 78,
+    "cc-jianghu": 79,
+    "cc-treasure": 79,
+    "tt3-hop-strike": 79,
+    "tt3-plate": 79,
+    "tt2-greenarrow": 80,
+    "cc-chargefb": 81,
+    "tt3-freeze": 81,
+    "tt3-toxic-potion": 81,
+    "cc-thousand": 81,
+    "cc-doom": 82,
+    "tt3-fate-potion": 82,
+    "cc-holysrc": 82,
+    "tt3-copy-potion": 82,
+    "tt3-resurrect": 83,
+    "tt3-arcane-wisdom": 83,
+    "tt3-ice-arrow": 83,
+    "tt3-shadow-clone": 83,
+    "tt7-drunksong": 84,
+    "tt3sp-search": 84,
+    "tt3-fish-out": 84,
+    "tt3sp-poisonfog": 84,
+    "tt3-heal-potion": 85,
+    "cc-manasupply": 85,
+    "cc-flameform": 85,
+    "tt3-flame-potion": 85,
+    "tt3sp-rageoil": 86,
+    "tt3-snipe": 86,
+    "tt3sp-mysticsummon": 86,
+    "cc-deathray": 86,
+    "cc-petal": 87,
+    "tt3-blood-feast": 87,
+    "tt3sp-cursewave": 87,
+    "tt3-galaxy-mirage": 87,
+    "cc-stormfb": 88,
+    "cc-darkform": 88,
+    "tt5-archstaff": 89,
+    "tt3-dark-blade": 89,
+    "tt3-turtle": 89,
+    "tt2-pouch": 89,
+    "tt3-mana-blood": 90,
+    "tt3-windchaser": 90,
+    "tt-peach": 91,
+    "tt3-bleed-potion": 91,
+    "starter-ration": 92,
+    "tt6-timeskip": 93,
+    "builtin-sha": 94,
+    "builtin-jinchuangyao": 95,
+    "tt7-bloodthirst": 96,
+    "tt7-bloodblade": 96,
+    "builtin-fuyuanyao": 97,
+    "starter-ration-kit": 98,
+    "relay-cover": 98,
+    "relay-tool": 98,
+    "relay-battery": 98,
+    "tt6-supplystand": 99
+  },
+  "historyPages": {
+    "cc-unmoved": 100,
+    "tt7-imitate": 100,
+    "tt7-sneak": 101,
+    "tt7-fullstrike": 101,
+    "tt3-purify-arrow": 102,
+    "starter-attack": 102,
+    "tt7-swordimmortal": 102,
+    "tt3-frostfall": 103,
+    "tt3wu-shike": 103,
+    "tt3-bandage": 103,
+    "tt7-ironcharge": 104,
+    "tt2-bloodblade": 104,
+    "tt3-hold-fast": 105,
+    "tt7-bulwark": 105,
+    "tt2-shoot": 105,
+    "tt3sp-shadowbug": 106,
+    "tt7-thundergrudge": 106,
+    "tt7-marchrush": 107,
+    "tt3-dig-treasure": 107,
+    "tt3-execute": 108,
+    "tt7-whirlwind": 108,
+    "tt2-block": 109,
+    "tt3-noon-duel": 109,
+    "tt7-armup": 110,
+    "tt3-venom-arrow": 110,
+    "tt3-qi-wave": 110,
+    "tt2-jianghu": 111,
+    "cmtn1wnhhym": 111,
+    "tt3-flux-slash": 111,
+    "cmtn0pbkmnvc": 112,
+    "tt7-meteorrain": 112,
+    "tt7-stealth": 113,
+    "tt3-life-arrow": 113,
+    "tt3-wave-slash": 113,
+    "tt3-armor-rush": 114,
+    "tt2-piercearrow": 114,
+    "tt7-demonbreaker": 114,
+    "tt3-skewer": 115,
+    "tt3-arrow-rain": 115,
+    "tt2-forestarrow": 115,
+    "tt3-fatal-pierce": 116,
+    "tt7-bloodpoison": 116,
+    "tt3-blood-arrow": 116,
+    "tt2-swiftarrow": 117,
+    "tt2-comboarrow": 117,
+    "tt3-double-shot": 117,
+    "tt3-reshot": 118,
+    "tt7-goldencicada": 118,
+    "tt7-ironphalanx": 119,
+    "tt2-turtlearmor": 119,
+    "tt3-frost-slash": 119,
+    "tt8-dragonblade": 120,
+    "tt7-throwblade": 120,
+    "tt3-fly-arrowhawk": 120,
+    "tt7-ghostblade": 121,
+    "tt7-twinfireball": 121,
+    "tt12-unstableray": 122,
+    "tt12-elemburst": 122,
+    "tt7-elementstorm": 122,
+    "tt3-ice-spike": 123,
+    "tt7-frozenight": 123,
+    "tt3sp-devour": 124,
+    "tt7-bloodpotion": 124,
+    "tt7-livingwater": 125,
+    "tt7-holyheal": 125,
+    "tt3-holy-shield": 126,
+    "tt3-firm-barrier": 126,
+    "tt7-arcanebolt": 127,
+    "tt3-treasure-hunt": 127,
+    "tt7-recruit": 127,
+    "cc-demon": 128,
+    "tt7-smite": 128,
+    "tt7-provoke": 129,
+    "tt3-grope": 129,
+    "tt7-meteorstrong": 129,
+    "tt3sp-shadowshot": 130,
+    "tt3-thornfield": 130,
+    "tt3-toxin": 131,
+    "tt7-bladebloom": 131,
+    "tt7-holyglow": 131,
+    "tt3-holy-water": 132,
+    "tt7-maxsupply": 132,
+    "tt7-stratagem": 133,
+    "tt7-abysscurse": 133,
+    "tt3-nature-form": 134,
+    "tt3-fireball": 134,
+    "tt7-burnharvest": 135,
+    "tt3-magic-lamp": 136,
+    "tt8-curse1": 136,
+    "tt8-curse2": 137,
+    "tt8-curse3": 137,
+    "tt8-curse4": 138,
+    "tt7-silence": 138,
+    "tt7-energize": 139,
+    "tt3-nuke-ray": 139,
+    "tt3-petal": 140,
+    "tt3sp-flowerzhen": 140,
+    "tt3sp-magicoil": 141,
+    "tt3sp-bloodstorm": 141,
+    "tt5-galaxy-voyage": 141,
+    "tt3sp-silverthorn": 142,
+    "tt3-chain-lightning": 142,
+    "tt3sp-dodge": 142,
+    "tt3-thunderblast": 143,
+    "tt3-flame-storm": 143,
+    "tt3-element-seal": 144,
+    "tt3-twinwater-mail": 144,
+    "tt3-fate-wheel": 144,
+    "tt3-holy-staff": 145,
+    "tt3-master-staff": 145,
+    "tt8-heavensword": 145,
+    "tt8-archdemon": 146,
+    "tt3-wolf-bow": 146,
+    "tt7-arcanescroll": 147,
+    "tt2-frostsword": 147,
+    "tt2-treasuremap": 147,
+    "tt3-light-mail": 148,
+    "tt2-venomstaff": 148,
+    "tt2-wreck": 149,
+    "tt3-staff": 149,
+    "tt3-deep-seal": 149,
+    "tt3-deep-diary": 149,
+    "tt3-crimson-pouch": 150,
+    "tt3-chaos-eye": 150,
+    "tt7-talisman": 151,
+    "tt2-pearlbox": 151,
+    "tt3-azure-sword": 151,
+    "tt3-sapper-bomb": 152,
+    "tt7-naturestaff": 152,
+    "tt3-grass-armor": 153,
+    "tt3-silver-runesword": 153,
+    "tt8-demonslay": 153,
+    "tt3-reverse-bow": 154,
+    "tt3eq-mistbox": 154,
+    "tt3-longsword": 155,
+    "tt2-apollo": 155,
+    "tt3-blooddrinker": 156,
+    "tt3-immortal-blade": 156,
+    "tt3eq-boiler": 157,
+    "tt7-darkfort": 157,
+    "tt3sp-doom": 158,
+    "tt3-iceheart-potion": 158,
+    "tt3-turnabout-potion": 159,
+    "cmtmvq6ss84l": 159,
+    "tt-token-color": 159,
+    "tt-token-gold": 160,
+    "tt4-shine-token": 161,
+    "starter-emergency-bandage": 161,
+    "tt-medneedle": 162,
+    "tt3-blue-potion": 162,
+    "tt3-savior-elixir": 163,
+    "tt3-demon-potion": 164,
+    "tt3-mixed-potion": 164,
+    "tt3-python-potion": 164,
+    "tt4-smoke-bomb": 165,
+    "tt3-houyi-potion": 165,
+    "tt3-mystery-potion": 165,
+    "tt3-mind-potion": 165,
+    "tt-crystal": 166,
+    "tt4-woodify": 166,
+    "tt-jinchuangyao": 167,
+    "tt-key": 168,
+    "tt3-wood-bundle": 168,
+    "tt-key-one": 168,
+    "tt-keys-bunch": 169,
+    "tt3-ration-double": 169,
+    "tt-rations": 170,
+    "tt-wood-lots": 170,
+    "tt-wood": 170,
+    "tt3-garnet-marble": 170,
+    "tt-econpack": 171,
+    "tt-gold": 172,
+    "tt3-diamond": 172,
+    "tt-copper": 173,
+    "tt-silver": 173,
+    "tt8-hero-descender": 174,
+    "tt8-hero-mage": 175,
+    "tt8-hero-sealer": 176,
+    "tt8-hero-guardian": 178,
+    "tt8-hero-ranger": 179,
+    "tt8-hero-sword": 180,
+    "tt8-hero-priest": 181,
+    "tt8-hero-assassin": 182,
+    "tt8-hero-warlock": 182,
+    "tt8-hero-summoner": 184,
+    "tt8-hero-warrior": 185,
+    "tt6-relief": 186,
+    "tt6-goldmine": 187,
+    "tt6-mystery": 188,
+    "cmtn7qttxqo4": 189,
+    "tt6-bandits": 190,
+    "tt6-systemsupply": 191,
+    "tt6-airdrop": 193,
+    "tt6-goldhammer": 194,
+    "tt6-chestdraw": 194,
+    "tt6-demondeal": 195,
+    "ev19-vital": 196,
+    "foe-bandit": 197,
+    "foe-orc_jav": 197,
+    "foe-boss_orc": 197,
+    "foe-wolf_rider": 198,
+    "cmtn7err0a7": 198,
+    "tt8-curseimmune": 198,
+    "tt8-energycap": 199,
+    "tt8-nofocus": 199,
+    "tt8-healplus": 200,
+    "foe-dragon": 200,
+    "foe-boss_elem": 201,
+    "cmtn79743r2n": 201,
+    "cmtn6ulm4boj": 201,
+    "foe-grass_el": 202,
+    "foe-fire_el": 202,
+    "foe-orc_axe": 203,
+    "foe-archer": 203,
+    "foe-infantry": 203,
+    "foe-cavalry": 204,
+    "foe-boss_general": 204,
+    "foe-water_el": 204,
+    "tt3-pindown": 205,
+    "cc-prep": 205,
+    "tt3-hop-strike": 205,
+    "tt3-plate": 206,
+    "cc-chargefb": 206,
+    "cc-thousand": 206,
+    "cc-holysrc": 207,
+    "tt3-arcane-wisdom": 207,
+    "tt3-ice-arrow": 207,
+    "tt7-drunksong": 208,
+    "tt3sp-search": 208,
+    "tt3-fish-out": 208,
+    "tt3-heal-potion": 209,
+    "cc-manasupply": 209,
+    "tt3sp-rageoil": 209,
+    "tt3-snipe": 210,
+    "tt3sp-mysticsummon": 210,
+    "cc-petal": 210,
+    "tt3-blood-feast": 211,
+    "tt3sp-cursewave": 211,
+    "tt5-archstaff": 211,
+    "tt3-dark-blade": 212,
+    "tt3-turtle": 212,
+    "builtin-sha": 212
+  },
+  "artSources": [
+    {
+      "path": "game\\assets\\cards\\wu-void.webp",
+      "sha256": "e2597435801ed90d2b8ac266efc0de81efa7f6a366db35494938723894fbe0c2"
+    },
+    {
+      "path": "game\\assets\\cards\\dark-eclipse.webp",
+      "sha256": "2724799c1e660dbe1249b652be3b9c8f5e37051ee7af618388782be345abaf70"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt7-ironcharge.webp",
+      "sha256": "1ed7125314d23bcb3e35c2ea0d1f1b8b1405b47ceb473784faf90611be042caf"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-cc-unmoved.webp",
+      "sha256": "644a916c116f66b712bce3b6e91d5f7b4a961b777ba0bbf5b3079baabdc2cdce"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt7-imitate.webp",
+      "sha256": "da084556b2b4dc1d556f43595af6e7a6c23920dc561100e02056095c29f841de"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-cmtn233trmeg.webp",
+      "sha256": "2a8d242414ae0b244e7a97510a23d7753a0970d077c221713a7c240e43decca9"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-cc-dual-wield.webp",
+      "sha256": "6dfda06c488f90b0554d9660cf8136e2cdefe7d15328ddcdc373c124eb379008"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt7-sneak.webp",
+      "sha256": "6a2305d4e03268c9126e8d7f762db00916b7564ef9418f718366068792c6ec16"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt7-fullstrike.webp",
+      "sha256": "ceeb4e2e189d2bcf484af11d6aee0611f30c8d8979b0b779ad84e3d332d2812c"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-purify-arrow.webp",
+      "sha256": "afc5d5fa91a67976dab152fb892668f11ae5fe31ee1c3b1353fab64b048bcb6d"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-cmtn2jc142dj.webp",
+      "sha256": "0e4ea9d372988387455d37ffbe655c4dffeb02a748db54a0def120a156ca1318"
+    },
+    {
+      "path": "game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+      "sha256": "53dea24ee26429da15f5cc24faa202f20a55012ac122fce6c042e9ad07478c15"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt7-swordimmortal.webp",
+      "sha256": "361d7b74b61be9a8e418c39a1cabd8ec10a648d409a7409f0b8c982cd3088c97"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-frostfall.webp",
+      "sha256": "14fd2c818ae06a1e1746dac0cba8264ef234a13aca5f3fe6288be43dc821cf5e"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3wu-shike.webp",
+      "sha256": "ffc54a1fd79ac161520e951203540abb75afa06b702ac2d5908e5cffeea1bdec"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-bandage.webp",
+      "sha256": "2eaf22e8598a0a096009fb49c19d4f5c5b3f5525851aa875a37fba9fe5ef9c47"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt2-bloodblade.webp",
+      "sha256": "befb38ad85ffdbf7683daaa43e1b2f3bcbacf8388fd13d58e6fa270977609d9a"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-hold-fast.webp",
+      "sha256": "d9363bec54386c33b6a124956036e5386b82b34d11b24a5c0a2fdf4da47653eb"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt7-bulwark.webp",
+      "sha256": "e1a9184ac32876d9141d58ce3bc661aa8962b057808f504ce01e9265127f381b"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt2-shoot.webp",
+      "sha256": "6d8643860cdd4e830b9776f5972ab063cbdfbd0a835a617948f2c13270f127ac"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3sp-shadowbug.webp",
+      "sha256": "a8b1c251ae18545ceb04637c16af127191e68727ca67c1168567e02bca52e9d2"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt7-thundergrudge.webp",
+      "sha256": "9b222502ad6aab6373747e977eb40d856ac6302c03e469dfa1ea7a085def2e38"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt7-marchrush.webp",
+      "sha256": "3069f04dd87b888a4bbac0e1a9ef7a39842c249be22b48ff442bcea130566ef1"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-dig-treasure.webp",
+      "sha256": "5387c5e55985fa65c4ace16df4c14fe963aa01bc1e3c1f05d3a2470e192d2860"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-execute.webp",
+      "sha256": "2298350ee926329b14912930281d59bee78f3b7c3039ca339e7911876084d5f0"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt7-whirlwind.webp",
+      "sha256": "eae62f8946c0368b76866ca0291278fa523482e4b43931f9ebd41b729f767d18"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt2-block.webp",
+      "sha256": "03d6b296103cf27f5aaaa57ce80a1e7efd34ca7788b412bd354324b9100332a9"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-noon-duel.webp",
+      "sha256": "bb0d4022f0d113f2df67939d1ade87ae0243571acb0333e1908807c68bd471fe"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt7-armup.webp",
+      "sha256": "869752a891dad1bb8074ef50f04849a27c84dfc34dbc1323ca1130b7f2c09d05"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-venom-arrow.webp",
+      "sha256": "8a62117246cf826e4a8ee792549105a3509b642acf1ff40c57bd2020528070eb"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-qi-wave.webp",
+      "sha256": "8b6fee7a7a334b0e4201291713587f550ea4ebafb2b9e0f0d67a1df8b694dc0c"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt2-jianghu.webp",
+      "sha256": "f496aa97b2731e3da5b693a9d39dd46f51efb57bc55fbf4163da212606aaf889"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-cmtn1wnhhym.webp",
+      "sha256": "631ff1e8c63cc2a6aedbc2fb26e11585a1f801722341d2cb6acf3355cdec83df"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-flux-slash.webp",
+      "sha256": "04092e58feb5a638236b285723ebfa957552b8101dc7dfe9a169a954bfd6735f"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-cmtn0pbkmnvc.webp",
+      "sha256": "4914b3d0f08c1135da66d1e162cce7800f65f5b2e518f4c196911c09af42ad11"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt7-meteorrain.webp",
+      "sha256": "35683467cbb9eaa5a0f9f6ebcf7a76e48ca392a31e746391c9b8ed1e1e18a5ce"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt7-stealth.webp",
+      "sha256": "4838f19d1edf9976d314a9a73bb9c3f6400e147d85298a01fe8f209985c21ee5"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-life-arrow.webp",
+      "sha256": "2b9f8d40268853ab01f1d56f584f4fc8c9fb87363e7812116f8ef242e815802b"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-cmtn1i64j7y7.webp",
+      "sha256": "8b79b85c3ed7f3f7f058bfe69aa2c9b832f84640fc5a4f428f23ae14be6166ab"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-wave-slash.webp",
+      "sha256": "6a366d57c81c5012942a34fdb52c6a9d92fdc885cecb5ace4eaf19c425a73b8f"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-armor-rush.webp",
+      "sha256": "754af3560a6d7d74555e2ea745682093a1b6bb252d09ba63d2db9be0781084fb"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt2-piercearrow.webp",
+      "sha256": "3df8ff9d3561e73c7bfba0e43cd5a3cb8a49e9dcfcbad33b4728e32d9d922f5e"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt7-demonbreaker.webp",
+      "sha256": "c43b18024a9b9746d6149be9be8fbc18ce3beca7232cb03567170c51daaadd47"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-cc-last-stand.webp",
+      "sha256": "2ad36b46f4608530756c0b2f31dded98318b91cdbd81fb3d83d14fd1e0c01404"
+    },
+    {
+      "path": "game\\assets\\cards\\expedition-starters\\pierce.webp",
+      "sha256": "dc75312d62b6bee3c4618c3696ac72726fc2b51d57fba928a17c3808152a67b2"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-arrow-rain.webp",
+      "sha256": "e58adf9ca36014205b59e8c1ff4cdacbdfb042615195b080d83f2fbc5e9737a6"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt2-forestarrow.webp",
+      "sha256": "1151e89ccb6ddca2ea43fc55d196f82ee64980bb5375591896a1db1e3d083a16"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-fatal-pierce.webp",
+      "sha256": "01100f3cb80e5b8ae15e39070986d78ea5426e1e91802b3970a871c49de8d921"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt7-bloodpoison.webp",
+      "sha256": "a33fd10407f47b90fa00e0edf2c3e0ab8dc88572702dbda2f1c2ec5236e4378b"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-blood-arrow.webp",
+      "sha256": "3d015dafc896520b62d05387bbc8959c2731af83ba3f353f6076bff117e6a62c"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-cc-cursed-blade.webp",
+      "sha256": "0bc649e99c8f3f31a042490395f238dfc604a232c9dbf04afb768f265c99b2ed"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt2-swiftarrow.webp",
+      "sha256": "0b8d28be3f8d3f4281ec65461ff8c229153fc778bb765e190c93d9d39fb526a1"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt2-comboarrow.webp",
+      "sha256": "0a9eb2c05f1a84521d12d536b19cd67682ad658b7aef6bab715160cf3c05bc75"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-double-shot.webp",
+      "sha256": "ac4ef873b155809c1941252a77c51056409ca5f0bb6115957866513f0e374574"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-cc-rapid-fire.webp",
+      "sha256": "02ee486c725dbc1d16fdbfb8204c6249b8fc8d553b4b8edbfe3f09b928e7e019"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-cc-chase-slash.webp",
+      "sha256": "58646f3ddd7fa00495a3170b02586c229bde3fd26355482f946c86ef1fc47010"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-reshot.webp",
+      "sha256": "78c0248811b62dc31206dcdc0efd044576f723da944727122f0fc25b74b3f108"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt7-goldencicada.webp",
+      "sha256": "989d38efcc86dc8f464070c80397280a48d48ac3217ca8defd5c37c2e1dcdbaa"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt7-ironphalanx.webp",
+      "sha256": "e987b05feab31f158dc595bacda64429ad6e728b17795fef5fdbc950ca04ab5e"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt2-turtlearmor.webp",
+      "sha256": "e534489c33dc9b3561cc16d3b22f2914c6021cc51f3181d658c9bc3f63c9bbe3"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-cmtn0xt0zr7.webp",
+      "sha256": "98b78e2ef72fcfd833b0da11252040c129f5931fb0cc518193a57405eb78729c"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-frost-slash.webp",
+      "sha256": "b42fcbce9513b83ad22df87e5f0e30fe8d80b63a859a7fa52b32ba836d0b8815"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt8-dragonblade.webp",
+      "sha256": "86afc67f288857fb3b6a66df5e21f77d139ff4d08636922f5bcb145fbade4869"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt7-throwblade.webp",
+      "sha256": "7c592d5cae15c921f77ee94687270827075eb95406bcfb26e94fac30c6a8722b"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt3-fly-arrowhawk.webp",
+      "sha256": "c1426d37dec54dccd139333b88f2f197134f3c62e66b8c64637dc3040450cfcf"
+    },
+    {
+      "path": "game\\assets\\cards\\martial-tt7-ghostblade.webp",
+      "sha256": "1d69874fee4e249aa030270dede0ce9dcfd52132607aca02fc15c76054d6d302"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-twinfireball.webp",
+      "sha256": "7a0d28ba68ef7b606acb37be58375a789103d66b2eb7f8b7cc7cf64f7da3ef4e"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt12-unstableray.webp",
+      "sha256": "3c538a6ac822d04ada0247f5c4487bb5315c586d2f6d18b91d6a0c2b1e30559b"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-cc-double-boom.webp",
+      "sha256": "fc9eae30846126e292421696cea143e4e90ec997e32245589271d8a6b591749a"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-cc-ember-burst.webp",
+      "sha256": "64cadd082bb6cc3f9cfa9a655b3b27f85821bd09e14ebb9398486f5efe5c4738"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt12-elemburst.webp",
+      "sha256": "de879de6634f907d739008fdf4505c04bfeb6272d099586be1d26ccbd4ab2608"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-elementstorm.webp",
+      "sha256": "091a3d15bfa7049c08944a25a4a0f62b0693afa23ac14969ccc865abd8d4e9ab"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt12-chargeray.webp",
+      "sha256": "2f844bfd3c11a5f3f3d41b3440d3e85da4022abb77844ba327b0f8f3977ede99"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-cmtn1lbhbqi4.webp",
+      "sha256": "c63bae23694c756f6184933bc1dec212dfa1e5f63cdb68abf4736adc72b6654b"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3-ice-spike.webp",
+      "sha256": "a1afbe4d225fbe54f27aa2eab912c00d860dbed744a0c83026ac34710f8f134e"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-frozenight.webp",
+      "sha256": "8f211e9c148852e7a1fc84efc0c2ebb9b16829d2a83ff3289c3d71fb83cca13f"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt12-freezeray.webp",
+      "sha256": "e853f59720bf7dcf7130161c983d2d7bd9a98fc4ebf53ecbdfb5c9e7d863a6c7"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-cmtn1p9vb5au.webp",
+      "sha256": "9a020575033b90ed5c29a3355b921f27b53c21b695ad862449a21983aabfbc0a"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-cmtn1gfhczzj.webp",
+      "sha256": "1e3e0e7b588315f666e5ade4910116c48e6a1e8a2325b623db252d14b240ebe8"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt12-backupcell.webp",
+      "sha256": "43b394246b62256ebc81c4cadfec065b0f4da6672df3d7e08fe5d74a73c1e8bb"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3sp-devour.webp",
+      "sha256": "21839e9148c7a3df984fe529f3ac62b4da225e9cefdd4f1f1875dd9c5ae41f57"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-bloodpotion.webp",
+      "sha256": "086bbfc19fe32c16fa4790fed0dbce533b1044807408346f6333de4a633d5d7a"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-livingwater.webp",
+      "sha256": "2a71d9d09d41ea994c7f3a688042991daf1d85b88089268537af4e6f21b3fe03"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-holyheal.webp",
+      "sha256": "6e6d946eca66ddc22b58114cde6c08e450aebd5ab7b6a89016f355e2f7d4d56d"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3-holy-shield.webp",
+      "sha256": "4fa2977dcc97c355fb05b13694eb54ac6373fa131323de9ecccca10f7596b5a2"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3-firm-barrier.webp",
+      "sha256": "cc9a4677d200f6db2fa2dcb70c2a72bdc592c45a73c7dbbf7d7f9ca00a925a3b"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt12-basicdev.webp",
+      "sha256": "1f4e758f9d1609b44911b913bf861e28f6ba013cec5c90f3f391a24e672464a8"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-arcanebolt.webp",
+      "sha256": "10c9690c1d83e4016d447c05c0dd0445dc7e6cd1ff82a9905af0752ad3e4c37d"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt12-sporewall.webp",
+      "sha256": "83e4003a41b2d91602049d7a4f6b871bc09bf539a8c6da3cf274953e3d7f7d55"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3-treasure-hunt.webp",
+      "sha256": "cbe2b9d59e799127e845cf7cfcefb56f3ab18d3dcf4e9ac4759b90da07097bee"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt12-barriermend.webp",
+      "sha256": "26f15c0b94d746337466a0333ea361ecb949ee9953e45f4958ced439628b3c8b"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-recruit.webp",
+      "sha256": "edd92348d55422f875de10ab9a20663adb98e66a975692b5c34c646004843b0e"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-cc-demon.webp",
+      "sha256": "b08f261709c9d7a14f6e3130e8466cf82334efd435dab96a8daa83150624cd20"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-smite.webp",
+      "sha256": "c3210dd20ee7939182b4779473b143fc8aec754ef7adc6b4818f129947ff99df"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt12-infectray.webp",
+      "sha256": "b9b5c1f45f6d2aa3e327f3da3776ad6dc38dc748b302616fe0681b30cd964714"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-provoke.webp",
+      "sha256": "15ee8d0be46eaa7c4da99e92118beab710669e14352ea65ebc627b74fd1c6e13"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-cmtn28jv33wx.webp",
+      "sha256": "dcc403edd74e1bad2f523ee012977167f165ff47ef9bb1e6ab3f276381b81cde"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3-grope.webp",
+      "sha256": "b8856034393c74efb97842deba3690f82b5c5aea4a73382bbdfb9e6b531272c2"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-meteorstrong.webp",
+      "sha256": "1b9b24ab45ad210d86c1a06e0ebaf327cda4a4441f9b5f50ada554a69cb9a933"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3sp-shadowshot.webp",
+      "sha256": "d7572b56797e2745bf1762e14851534d982d7ed9a7bf476422e6ccf81034aced"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3-thornfield.webp",
+      "sha256": "50c641334be528791f20eabae958300ee1f2f0b101776714097ac4cae29ec138"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-cc-poison-burst.webp",
+      "sha256": "5b49bed2642c49c4f2c5390684dfdcae51f202bb7dfb8c40d676cd03932c077a"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3-toxin.webp",
+      "sha256": "8d14d59ec3d2cfe6aceda789d5334f70650e1dc94d997943f5c47cb8839e2784"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-bladebloom.webp",
+      "sha256": "757a27c6e1c49b2f702f70eabbdcfee93136a3f84a4210a7caeaa7dc2ac5cbda"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-holyglow.webp",
+      "sha256": "9df1ec5a8a3d636c6bf91352540b1c0dc969303087dbdfc136469c848e69b99d"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3-holy-water.webp",
+      "sha256": "44160bd1b65f2c72918c90fb8a2b5d5862cd8bd807252fa93f687f2434975353"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-cmtna0nb1yxt.webp",
+      "sha256": "67465e8e22f4dbe4fe412ffa7e0de775fee3c754bc6a4bca84b57badb6d392d7"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-cc-mana-surge.webp",
+      "sha256": "12c50b19d71921d91932ef7118118d29d58fc0eaed515c9f9787e75e6b40ea3f"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-maxsupply.webp",
+      "sha256": "f0741c8aa50af1a62f85b79f06e90a3306d82a5bb0b6ebd0bfeb68c3ecfd6664"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-stratagem.webp",
+      "sha256": "b8ad205d480d949f9955e830037a3d2d5cdde5d0182528fbd2e63e8d5ffc90e7"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-abysscurse.webp",
+      "sha256": "ff946a84ea76afd5ae72afc1cb958e1992d3edbf53723cb941b7783c3f81c940"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3-nature-form.webp",
+      "sha256": "eb3cad5eef916f9ee00b29c548ba55e583992f4fe544f08cabed4d1421d20ec4"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-cmtn1ntxzoc4.webp",
+      "sha256": "65cd895f20e36280898676a64249a7e875342718fd371e75c7057efeaeb10d2b"
+    },
+    {
+      "path": "game\\assets\\cards\\expedition-starters\\fireball.webp",
+      "sha256": "7914dc16f67995fb0086d1fea184674c4332c418ceee9a4d50306a4cb7536e9a"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-cmtn1epgt20j.webp",
+      "sha256": "03ee21b764ec31171944ef9fc9eb2634ba311bd0a49602801de6c8a69e0141b2"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-cc-lava-blast.webp",
+      "sha256": "698e4f81eaa1b6c9b99e553757eb2ce7bf82ee127d8815fd86f77dc543eaea4a"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-burnharvest.webp",
+      "sha256": "f673628f92cf391aa4e0b0f2e76dbab1535517a93c5b59f9f1b0f30feff4d1fc"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3-magic-lamp.webp",
+      "sha256": "6579cd339860ab774c251ea2cc971d7f6f7fb15953342a30f8d9d864be3422d2"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-cmtn125e1nk0.webp",
+      "sha256": "99104e5b25da9fc2269cab6b9554839dfd84176176676ca9db2615980395a0de"
+    },
+    {
+      "path": "game\\assets\\cards\\curse-drain.webp",
+      "sha256": "53bef1f129ee7e7f4e4b3f8c3e8110c0dae242aa80fb898bc5aba3c251ff143c"
+    },
+    {
+      "path": "game\\assets\\cards\\curse-freeze.webp",
+      "sha256": "d5e2b5342eb4973e6b57b8ef424c928e2ca8a9aebe46411c341e43e44970622b"
+    },
+    {
+      "path": "game\\assets\\cards\\curse-venom.webp",
+      "sha256": "139a8eec7b9f2b14ed4cf199f0ee35183cc1553f9e78244477a4e7a7d4033c06"
+    },
+    {
+      "path": "game\\assets\\cards\\curse-silence.webp",
+      "sha256": "fad355b9941d49dec576407508e9d1f272bebe0d99868a390c309fe39338500c"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-silence.webp",
+      "sha256": "3b61af3f98e5be1fe76c995a8cb4371ca63205362a57a6ef1b6608e3aeb26d21"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt12-breakthrough.webp",
+      "sha256": "c341ba04cf8d832d4c985f1e080f47783f65b54de9912271c8810defac61fb12"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt7-energize.webp",
+      "sha256": "0b462273c430be468802025d49f50da1931368ecf75797f8a7853b66d2d810f7"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-cc-rot-seed.webp",
+      "sha256": "8e92bcefc2a5e98bfe1eed445706c359d4fbf9ba280cf5fba173bcdc17f7d44d"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3-nuke-ray.webp",
+      "sha256": "f90f39d8465fe7500d61f419c46095a74a745c8d6215862cbfbec835f8bfe0f4"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3-petal.webp",
+      "sha256": "981e7dfe081acbd69f74a33a64c37c48fc0c2a3dc56499ed31f8611879bdc369"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3sp-flowerzhen.webp",
+      "sha256": "81de6ab5f64e3606e0267ddd2fc0fb978c170ea341f8c92797e29819c794bf26"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3sp-magicoil.webp",
+      "sha256": "bd3b10e7ead3d8ac4f103070db116ffbfecbf07215575f845af95e7ac022eaaf"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3sp-bloodstorm.webp",
+      "sha256": "f0535adac8596b1890f0b55600037da8664f1eab62312861c1a7f5a961bac9fc"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt12-firecracker.webp",
+      "sha256": "ebaffc91748f393dbff02399d1e858f800225c95a73fef8961119dcc7b4d75cb"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt12-felguard.webp",
+      "sha256": "c8db5f16b606e0c1eb113a82285fcab4dba1531aa82373b43744f7e8c2699d8d"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt5-galaxy-voyage.webp",
+      "sha256": "7eff59fe30cda4fda03da386237b114f3c8a8cee26e22134efcdc1b08eeb4b40"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3sp-silverthorn.webp",
+      "sha256": "39bf95c19584a3abba1acfc11cefdd05cff2f0267bf8f6dbe9dc0b8304ccbd96"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3-chain-lightning.webp",
+      "sha256": "58cf31130d8ead51603e2e8dbe59f8b24a45982475f19b4a79c12be9acc25314"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3sp-dodge.webp",
+      "sha256": "92348e8dec2b6b0a20ddd56ffc599d69474a828f657659864f6ebc19ac738c35"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3-thunderblast.webp",
+      "sha256": "ffca3ccae47e5ebaf13dd824ef04c0abbd6dcdfb0be6a76ea0eb0719675b5718"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt3-flame-storm.webp",
+      "sha256": "caef1fcb3f79b9d83718be0e00f14c7cd126ee7cdb9a176940434dd5dd0275a3"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt12-saturate.webp",
+      "sha256": "2a4740306197d3a2f3484b5c2f87334f12206cbdc4b807763f1e974e9104ef67"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt12-hitechrd.webp",
+      "sha256": "833d9697edb4ad7e42a919f0c4281793f37881171050dc4bf5fd31c0e9247f23"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt12-magicfind.webp",
+      "sha256": "5bd0f0a938d8263a8eebe5e469ead0ad18c4052aecb6c3c61d4a77a635b9faf0"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-cmtn1r10xnl1.webp",
+      "sha256": "8aa7ef07669e8b6d5492fb7d6f90ececbd961d98e125558bc85d5ca86b6c4997"
+    },
+    {
+      "path": "game\\assets\\cards\\spell-tt12-raydragon.webp",
+      "sha256": "169c3e886fec238c68226e8dd27cb92da9bfadc7e680581358fee6867fcd2239"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-element-seal.webp",
+      "sha256": "631376d11209ee99dc861c076e90f225a1c20ae4930e132854b3a674110127cb"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-twinwater-mail.webp",
+      "sha256": "dbc216c2807f438278217745d198491a0d2eff36ea0b9008bb11e18532846e2c"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-fate-wheel.webp",
+      "sha256": "69bd24f9d1595a2cb03da05ddb1da0d0b526003c1505d4967ff40ab2d35c352c"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-holy-staff.webp",
+      "sha256": "393b4b902d50384abf7f0bb4deca68dc003ee4ee0689c1319107f06f6f0c5944"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-master-staff.webp",
+      "sha256": "7b9d774764254bdee559a3c4261ef4bc71502a789b14f39091f3c847de9ae502"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt8-heavensword.webp",
+      "sha256": "61539f6a00d221399f3632b009145c8e367b91049abead5b374c47fba2329648"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt8-archdemon.webp",
+      "sha256": "b3cb93997a286dc377716e4fa8a68b2114719131ab899a9167663e90202e93bd"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-wolf-bow.webp",
+      "sha256": "064e9a1915b2bd0d08a436c728da572d27fa2bcb8cec31f88fd0330d820a8440"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt7-arcanescroll.webp",
+      "sha256": "c0c13360988b38d03b785870a74e8bf14256431d978ce2aaf2b9af368e36d4d8"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt2-frostsword.webp",
+      "sha256": "6fdd4393495a5df036057a027a0cd74606ce535c0dc871c2ed54f27441ec1b2b"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt2-treasuremap.webp",
+      "sha256": "f2c217b15a3e12c6a295b42280afae6d4bfd16bd3f2db6cd07243bbe5ca5b681"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt12-raygun.webp",
+      "sha256": "33b23a76a966bf6a68351e23d11ec44606fa4f48cc37f6b3e0266253912cac8e"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-light-mail.webp",
+      "sha256": "4c6b009fe68134468282b053d8ee64e054fd4eac5f63b5c617cff69b904178bb"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt2-venomstaff.webp",
+      "sha256": "38e24f967374f1eecfcd4a94d71536fe9f6def17f463fad9b64a0c1a0c7ef7d9"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt2-wreck.webp",
+      "sha256": "bbe517d50807a202c91eec5961311227a4e5250b90d9403c9f031214baa6eeff"
+    },
+    {
+      "path": "game\\assets\\cards\\expedition-starters\\staff.webp",
+      "sha256": "b833936aca0a405d2d79c0482ff72eeeddb511dcfd9f4452962c2601441e270b"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-deep-seal.webp",
+      "sha256": "89b2f9f4658c97d89b60d03736f5c150373a0e3ba95351f1c6dc7ed52a6dd430"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-deep-diary.webp",
+      "sha256": "e2268dd3c72c065fe9d4b689a383dd29497feff8f62c029f7fdd402bd293dc6d"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-crimson-pouch.webp",
+      "sha256": "7c1806f100ced27300980c23c96c22d1725aba1b9ec31d805f430c767a42c431"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-chaos-eye.webp",
+      "sha256": "9345e422b945e04c21d7718904a20561cce79dd68f4b49ebbaef468e5422f760"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt7-talisman.webp",
+      "sha256": "3a480e5a704603f1d5772156d86e186567fd66b067eaf6878352bc4ea121edad"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt2-pearlbox.webp",
+      "sha256": "2dd1921d7eda3f260ec74be23decc0a70cb6925812fd4e16d1ba0e1e7305e65b"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-azure-sword.webp",
+      "sha256": "37848ef2a4c8f08910f7bffcfc5f999081df0fc6e15d29916f399c5773c462d7"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-sapper-bomb.webp",
+      "sha256": "a1d5f419e1c550773e70bca5b38f06d14e9084c050ed1dff89378dffcc7c5755"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt7-naturestaff.webp",
+      "sha256": "41090f4869adb6d555ec9b9bf4226f4633a024cb2d415f4da414bc99bd5a1783"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-grass-armor.webp",
+      "sha256": "cbc2f31e13294e5a2b4d89b60ae0b739975ea9290692918a1dad0379090f6f2a"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-silver-runesword.webp",
+      "sha256": "05a7fb6ec9d8124ce5f489b7f8657e05a9d2af864296a89d8344b782b4582be4"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt8-demonslay.webp",
+      "sha256": "2e23c289d99acf110ba152b58d2d136bafeee0c7f5bc1613c6475d9b35c3d64e"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-reverse-bow.webp",
+      "sha256": "6711e1b9399f49d7691d92a283fdbc117daeb66b2184a26ad6a564384a585dfd"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3eq-mistbox.webp",
+      "sha256": "994b8cd1b2bc7561a47a99cac7b566678aecb8d1682bdcd2d93ce3dc7124b36b"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-longsword.webp",
+      "sha256": "cd77206731d28083bb42dee3a6a322078dee78dd873f5715e919e942b208ddf2"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt2-apollo.webp",
+      "sha256": "58ad8e30c59eb955fb8487194639359a3cff838e94b62588df6a2734671ce1ca"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-blooddrinker.webp",
+      "sha256": "cd60db6930ca4b73487e3db5e90f1be1fcd7ba0770d846f2ded6915b3242b963"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-immortal-blade.webp",
+      "sha256": "8070edfb98448203545d3ee0ae9993babb30ffc13f50697b6050429d9edca3ac"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3eq-boiler.webp",
+      "sha256": "36b56466991bb94a276a5df468a848b314ed510861e71932da1e6b5105a7a7f8"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt7-darkfort.webp",
+      "sha256": "f101a4485d53ce23cd16655d4985c4e761e4a60d182ca7574164ef296febd615"
+    },
+    {
+      "path": "game\\assets\\cards\\expedition-starters\\rations.webp",
+      "sha256": "0ed68ff2d42e7e9abc5f1341a227a341c9f65d5cdecf9b4ff5be7d6fe9d6daad"
+    },
+    {
+      "path": "game\\assets\\cards\\resources\\wood.webp",
+      "sha256": "f47065bda4a26f43f2f8b3c692042c619cb1834ab55674b1c04e45e0ab136ba5"
+    },
+    {
+      "path": "game\\assets\\cards\\lore-raving.webp",
+      "sha256": "01dd5ea11686c5e1d75a48c2d19d761772f9c3a837455a7bed10b938e5aec3f3"
+    },
+    {
+      "path": "game\\assets\\cards\\bound-shadow.webp",
+      "sha256": "262476293cb39eecaeddeacbe406a3d6ea2e3faeb8f6acde2a378b712791e5a5"
+    },
+    {
+      "path": "game\\assets\\cards\\wu-heavensword.webp",
+      "sha256": "2a3dbdd25f0250d5801751e6079ee4a5315d17f5bc3389c981abc6f5cd22bcfc"
+    },
+    {
+      "path": "game\\assets\\cards\\wu-myriadswords.webp",
+      "sha256": "cc3fe1d9b39340e4d83dd3882395dff4e23a65cd5928be74c90ade9fb98164cc"
+    },
+    {
+      "path": "game\\assets\\cards\\creature-cmtn7err0a7.webp",
+      "sha256": "c55dce8b648595a03569765083ced56dbf30e567aacdec24905ca5aad09a5b61"
+    },
+    {
+      "path": "game\\assets\\cards\\creature-tt8-curseimmune.webp",
+      "sha256": "24494c64f808940a980aea8decf87689c8db00fafd8c2e639fc08d3880096146"
+    },
+    {
+      "path": "game\\assets\\cards\\creature-tt8-energycap.webp",
+      "sha256": "bdd1f5d1f47605a05c961553c77aed1338336318902d8cddc235f084e4d6bf23"
+    },
+    {
+      "path": "game\\assets\\cards\\creature-tt8-nofocus.webp",
+      "sha256": "87ee008ad4a15d607d4936762a3b95c496bf9c0f89dde0595eb188e456e0555e"
+    },
+    {
+      "path": "game\\assets\\cards\\creature-tt8-healplus.webp",
+      "sha256": "e9a479ab60d659fcd58dbd5a852e81a926425f85154c5912b191f498fbe33784"
+    },
+    {
+      "path": "game\\assets\\cards\\creature-cmtn79743r2n.webp",
+      "sha256": "e4cfa9099cdeb17e2f3496f648afc2d1c74a53f9b7fc7ef71d9b5166b7101745"
+    },
+    {
+      "path": "game\\assets\\cards\\creature-cmtn6ulm4boj.webp",
+      "sha256": "d7bcb677ab5b101e6050d0b71cc7ab27cd06f629b39946a8ba4d9d56f70191ae"
+    }
+  ],
+  "renderedPages": 216,
+  "internalLinks": 1030,
+  "indexLinks": 331,
+  "brokenLinks": [],
+  "visualReview": "封面、所有内容页总览与重点长卡原图复核，分页修订后核对旧卡面标题与首条记录同页"
+}

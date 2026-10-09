@@ -1,0 +1,120 @@
+{
+  "status": "passed",
+  "exitCode": 0,
+  "local_links": 5,
+  "source_manifest_rechecked": 15,
+  "changed": [],
+  "plots_visually_inspected": [
+    "overview.png",
+    "development.png"
+  ],
+  "scope": "only V7, 3 references; no audio files created",
+  "docs_check": {
+    "ok": true,
+    "checkedRelativeLinks": 344,
+    "findings": [],
+    "evidence_excluded_by_docs_checker": "self report 5 links separately checked"
+  },
+  "git_diff_check": {
+    "exitCode": 0,
+    "scope": "self evidence + registry"
+  },
+  "all_self_files_below_1MB": true,
+  "artifacts": [
+    {
+      "path": "125099.json",
+      "bytes": 334553,
+      "sha256": "52e04fd1f554ccdac4e55103a9d9b400ca42e4ba127664df00df26f19a2a926e"
+    },
+    {
+      "path": "306834.json",
+      "bytes": 204631,
+      "sha256": "f67c6108f0e7a021cb951e731e5cd5d5818b2d6c6fe21b7952646e99e585d36d"
+    },
+    {
+      "path": "697622.json",
+      "bytes": 252791,
+      "sha256": "be146ed892426633565c7bbaccfac58cb6b723f4a114eed3565f97c9e4a91dd2"
+    },
+    {
+      "path": "analyze.py",
+      "bytes": 17411,
+      "sha256": "3b19081dd7f5cc65ece8ad0f82463684e4c8af4e6942c8e1d1eba4a520161e79"
+    },
+    {
+      "path": "comparison.json",
+      "bytes": 640968,
+      "sha256": "3fa810576ceafd11ba2f1f27f931fca77d4a66fb6a09fb4ea47df021f1627670"
+    },
+    {
+      "path": "development.png",
+      "bytes": 406931,
+      "sha256": "b638854c886d8a790010b9457d6e2d25faadf1eb32c101eed729e4b0c7682c77"
+    },
+    {
+      "path": "native-audit.json",
+      "bytes": 40496,
+      "sha256": "5120bb69a4fe74304356080c3fad76882c2a9a4992620ae8876bbeb9643cc9be"
+    },
+    {
+      "path": "official-song-125099.json",
+      "bytes": 389,
+      "sha256": "7201e851133101d6a2e005b59ec1dec405adf39a95393475fb10b0ee060b0df6"
+    },
+    {
+      "path": "official-song-306834.json",
+      "bytes": 389,
+      "sha256": "3abae07d7ef7a3fade6d9faf7b4e6596566bcc606713c80be2735d99c4fc3393"
+    },
+    {
+      "path": "official-song-697622.json",
+      "bytes": 383,
+      "sha256": "597c6e8d199704897732573a70d2902cd1a80c9189c672e69fbf58111f83d4da"
+    },
+    {
+      "path": "overview.png",
+      "bytes": 181451,
+      "sha256": "f115fad9fbf737aa5ea7ebf1e4401353ed8a3656d2493a8693b355e5e026c72e"
+    },
+    {
+      "path": "plot.py",
+      "bytes": 4516,
+      "sha256": "54cd300e6101991361e214bc13acbc91f015b5b584f78c9fbb2f77bbb74a52b8"
+    },
+    {
+      "path": "README.md",
+      "bytes": 13199,
+      "sha256": "6ffbf94f70a2e4aee10a57c903f77550c1e17eb548d043d690a96bd096556901"
+    },
+    {
+      "path": "sources.json",
+      "bytes": 1278,
+      "sha256": "ae2f7fb5022bd360f5fa14b52390e7f067189c2b09416dd99017e5d0c500a171"
+    },
+    {
+      "path": "stem-audit.json",
+      "bytes": 1978,
+      "sha256": "a3874674618fe7c14728a25bbc17b4a3d92a17420c5bf98dc2aca4e50eb58c8a"
+    },
+    {
+      "path": "task.json",
+      "bytes": 1115,
+      "sha256": "5268a56c5bd8b6aa9b060a0ce58de90dfb204033a43887571565c56f03fdb16c"
+    },
+    {
+      "path": "title-v7.json",
+      "bytes": 146373,
+      "sha256": "8b7306a93b5875cabd228fabb7bddc7607f8ef6a0ea83d12f01940407bd4be4e"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 5604,
+      "sha256": "b28c2e5d41a9afce45c4540719db96ced91bb65143f25c0dee39ecce55307fa6"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 5497,
+      "sha256": "469a6d3ccf9a8d062122c696a51f0b820a3810c6449efce9a6e0c669b92a33a8"
+    }
+  ]
+}

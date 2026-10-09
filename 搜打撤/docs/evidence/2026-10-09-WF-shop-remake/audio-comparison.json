@@ -1,0 +1,82 @@
+[
+  {
+    "role": "reference",
+    "path": ".tmp\\shop-reference-1009\\cannot-the-trader.mp3",
+    "first_30s_loudness": {
+      "input_i": "-10.00",
+      "input_tp": "0.61",
+      "input_lra": "3.00",
+      "input_thresh": "-20.00",
+      "output_i": "-20.19",
+      "output_tp": "-7.55",
+      "output_lra": "2.70",
+      "output_thresh": "-30.19",
+      "normalization_type": "dynamic",
+      "target_offset": "0.19"
+    }
+  },
+  {
+    "role": "title",
+    "path": "docs\\evidence\\2026-10-09-WF-four-music-demos\\title-revised-30s.mp3",
+    "first_30s_loudness": {
+      "input_i": "-18.77",
+      "input_tp": "-5.98",
+      "input_lra": "1.80",
+      "input_thresh": "-28.80",
+      "output_i": "-20.05",
+      "output_tp": "-7.15",
+      "output_lra": "2.00",
+      "output_thresh": "-30.07",
+      "normalization_type": "dynamic",
+      "target_offset": "0.05"
+    }
+  },
+  {
+    "role": "explore",
+    "path": "docs\\evidence\\2026-10-09-WF-four-music-demos\\explore-revised-30s.mp3",
+    "first_30s_loudness": {
+      "input_i": "-18.12",
+      "input_tp": "-5.88",
+      "input_lra": "1.30",
+      "input_thresh": "-28.12",
+      "output_i": "-19.94",
+      "output_tp": "-7.62",
+      "output_lra": "1.20",
+      "output_thresh": "-29.94",
+      "normalization_type": "dynamic",
+      "target_offset": "-0.06"
+    }
+  },
+  {
+    "role": "battle",
+    "path": "docs\\evidence\\2026-10-09-WF-four-music-demos\\battle-revised-30s.mp3",
+    "first_30s_loudness": {
+      "input_i": "-19.02",
+      "input_tp": "-6.55",
+      "input_lra": "2.00",
+      "input_thresh": "-29.02",
+      "output_i": "-19.63",
+      "output_tp": "-7.65",
+      "output_lra": "1.20",
+      "output_thresh": "-29.63",
+      "normalization_type": "dynamic",
+      "target_offset": "-0.37"
+    }
+  },
+  {
+    "role": "shop",
+    "path": "docs\\evidence\\2026-10-09-WF-four-music-demos\\shop-revised-30s.mp3",
+    "first_30s_loudness": {
+      "input_i": "-19.17",
+      "input_tp": "-7.08",
+      "input_lra": "3.20",
+      "input_thresh": "-29.17",
+      "output_i": "-19.61",
+      "output_tp": "-8.09",
+      "output_lra": "1.80",
+      "output_thresh": "-29.61",
+      "normalization_type": "dynamic",
+      "target_offset": "-0.39"
+    }
+  }
+]

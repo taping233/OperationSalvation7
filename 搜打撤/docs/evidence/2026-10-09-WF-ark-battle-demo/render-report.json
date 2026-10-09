@@ -1,0 +1,46 @@
+{
+  "title": "冷线交锋",
+  "seconds": 30.0,
+  "bpm": 120,
+  "tracks": [
+    "pressure",
+    "haze",
+    "mechanical",
+    "kick",
+    "hat",
+    "impact",
+    "snare",
+    "metal",
+    "signal"
+  ],
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-09-WF-ark-battle-demo/battle-coldfront-30s.wav",
+      "bytes": 8640044,
+      "sha256": "4d03472e71e227e8c5b424b0b764d2b1edd45faad8808931c20e0bede6b15b1c"
+    },
+    {
+      "path": "docs/evidence/2026-10-09-WF-ark-battle-demo/battle-coldfront-30s.mp3",
+      "bytes": 961625,
+      "sha256": "d521db8721a82c4bdb0642d183f3f3c3e56174da5973763e4e05e1e70c8bec45"
+    }
+  ],
+  "retained_files": [
+    {
+      "path": "game/assets/music-demo/01-title-frostglass.ogg",
+      "bytes": 718863,
+      "sha256": "d5c69dbc3bb85c7078d866b9881fd96040532175334f96976faff9a19a431c07"
+    },
+    {
+      "path": "game/assets/music-demo/02-explore-ashline.ogg",
+      "bytes": 838678,
+      "sha256": "c0960cd2fefeb60b24a8b2d6264290763ffe8edde31b738ae04b42e934a01458"
+    },
+    {
+      "path": "docs/evidence/2026-10-09-WF-shop-remake/shop-lamplight-deal-30s.mp3",
+      "bytes": 961625,
+      "sha256": "79cee76063c653131567ca7c94d3b5830f3a03fa441854ddbdedc76366fd3ce3"
+    }
+  ],
+  "scope": "Entirely new electronic battle composition; original title/exploration and previous shop directly referenced. No Arknights recording or melody imported."
+}

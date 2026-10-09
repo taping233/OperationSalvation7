@@ -1,0 +1,139 @@
+{
+  "role": "battle",
+  "title": "黑脉交锋 · 管弦乐精修",
+  "bpm": 124,
+  "seconds": 92.90322916666666,
+  "native_engine": "LMMS 1.2.2 sf2player/FluidSynth, sinc-best, 2x oversampling, 48k float render",
+  "tracks": {
+    "Strings theme": {
+      "program": 48,
+      "bank": 0,
+      "volume": 133.112,
+      "pan": 8,
+      "notes": 136,
+      "final_note_count": 136
+    },
+    "Horn answer": {
+      "program": 60,
+      "bank": 0,
+      "volume": 52.0,
+      "pan": -23,
+      "notes": 24,
+      "final_note_count": 24
+    },
+    "Pizzicato drive": {
+      "program": 45,
+      "bank": 0,
+      "volume": 60.739,
+      "pan": -16,
+      "notes": 288,
+      "final_note_count": 272
+    },
+    "Low strings": {
+      "program": 49,
+      "bank": 0,
+      "volume": 39.0,
+      "pan": 17,
+      "notes": 48,
+      "final_note_count": 48
+    },
+    "Dark bass": {
+      "program": 43,
+      "bank": 0,
+      "volume": 68.88,
+      "pan": 0,
+      "notes": 264,
+      "final_note_count": 264
+    },
+    "Timpani gestures": {
+      "program": 47,
+      "bank": 0,
+      "volume": 28.07,
+      "pan": -8,
+      "notes": 48,
+      "final_note_count": 48
+    },
+    "Battle groove": {
+      "program": 48,
+      "bank": 128,
+      "volume": 28.004,
+      "pan": 0,
+      "notes": 174,
+      "final_note_count": 174
+    },
+    "Celesta detail": {
+      "program": 8,
+      "bank": 0,
+      "volume": 46.673,
+      "pan": 19,
+      "notes": 48,
+      "final_note_count": 44
+    },
+    "Muted strings": {
+      "program": 49,
+      "bank": 0,
+      "volume": 31.0,
+      "pan": -20,
+      "notes": 72,
+      "final_note_count": 72
+    },
+    "Triangle detail": {
+      "program": 48,
+      "bank": 128,
+      "volume": 15.538,
+      "pan": 35,
+      "notes": 12,
+      "final_note_count": 12
+    }
+  },
+  "cycles_rendered": 2,
+  "delivered_cycle": 2,
+  "raw_peak": 0.09758445620536804,
+  "peak_dbfs": -1.209614872932434,
+  "rms_dbfs": -19.5858895778656,
+  "post_master_gain_db": 19.305040677787144,
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-identity/round-B/03-battle-blackpulse-v3.mmp",
+      "bytes": 179054,
+      "sha256": "784c1e04c1861a48e09cd91be67bac159c88173a77285381572bbf5f81eb10ae"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-identity/round-B/03-battle-blackpulse-v3.wav",
+      "bytes": 26756174,
+      "sha256": "539b2620cfc004b7ec6b13d7febb0d13c089081486eca1dea2852d696e82400c"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-identity/round-B/03-battle-blackpulse-v3.mp3",
+      "bytes": 2974551,
+      "sha256": "0eb865df565e183a638d4d07c59022a59d45a9a2a757accc95a7aa8253d9e26f"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-identity/round-B/03-battle-blackpulse-v3.ogg",
+      "bytes": 1794813,
+      "sha256": "01b7ddc5c085c6e878943042f3ce2a81a31162b27a956c5add8c09614e184a03"
+    }
+  ],
+  "listening": "user listening required; numerical checks cannot establish aesthetic improvement",
+  "round": "B",
+  "bars": 48,
+  "groups": {
+    "Strings theme": "lead",
+    "Horn answer": "counter",
+    "Pizzicato drive": "accompaniment",
+    "Low strings": "pad",
+    "Dark bass": "bass",
+    "Timpani gestures": "percussion",
+    "Battle groove": "drums",
+    "Celesta detail": "signature",
+    "Muted strings": "pad",
+    "Triangle detail": "detail"
+  },
+  "common_elements": [
+    "soft bowed strings",
+    "sparse acoustic celesta and triangle",
+    "same restrained hall"
+  ],
+  "subjective_listening": "not claimed; requires user listening",
+  "instrument_palette_validation": "acoustic/orchestral soundfont programs; no electronic synth or drum-machine kit"
+}

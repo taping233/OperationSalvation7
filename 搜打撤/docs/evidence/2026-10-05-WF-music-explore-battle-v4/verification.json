@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "exitCode": 0,
+  "checks": {
+    "old_audio_scores_and_font_unchanged": true,
+    "explore_48k_stereo_duration": true,
+    "explore_finite_no_clipping": true,
+    "explore_hashes_and_stems": true,
+    "explore_sections_cover_cycle": true,
+    "explore_performed_cc11_and_piano_cc64": true,
+    "explore_notes_inside_cycle": true,
+    "explore_native_frozen_stems_resolve": true,
+    "explore_richer_orchestral_palette": true,
+    "explore_mp3_decodes": true,
+    "explore_ogg_decodes": true,
+    "explore_ogg_loop": true,
+    "battle_48k_stereo_duration": true,
+    "battle_finite_no_clipping": true,
+    "battle_hashes_and_stems": true,
+    "battle_sections_cover_cycle": true,
+    "battle_performed_cc11_and_piano_cc64": true,
+    "battle_notes_inside_cycle": true,
+    "battle_native_frozen_stems_resolve": true,
+    "battle_richer_orchestral_palette": true,
+    "battle_low_instrument_ranges": true,
+    "battle_mp3_decodes": true,
+    "battle_ogg_decodes": true,
+    "battle_ogg_loop": true,
+    "different_section_scripts": true
+  },
+  "cues": [
+    {
+      "role": "explore",
+      "seconds": 99.31035416666667,
+      "tracks": 15,
+      "unique_programs": 14,
+      "side_energy_full_percent": 3.6930101878930133,
+      "lufs": "-17.43",
+      "lra": "9.10",
+      "ogg_seam_jump": 0.0004056170582771301,
+      "normal_step_p99": 0.034456125646829594,
+      "loudness_delta_from_old": -1.0799999999999983
+    },
+    {
+      "role": "battle",
+      "seconds": 87.27272916666666,
+      "tracks": 16,
+      "unique_programs": 15,
+      "side_energy_full_percent": 8.48863399516467,
+      "lufs": "-18.02",
+      "lra": "9.80",
+      "ogg_seam_jump": 0.0007451899582520127,
+      "normal_step_p99": 0.04396061912178993,
+      "loudness_delta_from_old": -1.1600000000000001
+    }
+  ],
+  "scope": "Two V4 candidates; new stems directly mixed. Frozen LMMS pre-master project paths validated, not separately native-rendered. No human audition claimed."
+}

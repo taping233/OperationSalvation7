@@ -1,0 +1,139 @@
+{
+  "title": "霜窗回声 · 第八版",
+  "seconds": 91.4285625,
+  "bpm": 84,
+  "bars": 32,
+  "source_inputs_unchanged": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v7/01-title-frostglass-v7.wav",
+      "bytes": 26331470,
+      "sha256": "f1903f7c88380a9e879b114886544faa8d4cee10493db4a1399ea277a4dd6744"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v7/01-title-frostglass-v7.mmp",
+      "bytes": 96345,
+      "sha256": "50b7a609e777317f69727b36fe8285fb2965825b66c92636ca5d769c134c1fbb"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v5/render-report.json",
+      "bytes": 69978,
+      "sha256": "dd930e28d50aa8d7e5d3524fd883580b44e15e5d398c45842ab3e4fc0a0e11ed"
+    },
+    {
+      "path": ".tmp/music-workstation/GeneralUser-GS.sf2",
+      "bytes": 32319396,
+      "sha256": "9575028c7a1f589f5770fccc8cff2734566af40cd26ed836944e9a5152688cfe"
+    }
+  ],
+  "form": [
+    "A",
+    "A-prime",
+    "B",
+    "A-double-prime"
+  ],
+  "piano_processing": [
+    {
+      "source_track": "Piano melody",
+      "notes_per_cycle": 101,
+      "midi_channel_cc10_pans": [
+        38,
+        45,
+        52,
+        59,
+        66,
+        73,
+        80,
+        87
+      ],
+      "velocity_range": [
+        40,
+        64
+      ],
+      "relative_clip_rms_db": -0.7,
+      "clip": {
+        "path": ".tmp/music-workstation/title-v8/Piano-melody-v8.wav",
+        "bytes": 70217224,
+        "sha256": "391ad62f82f6c51a27ee1360b9a2ff2aab0c69be7d5453b51c54c8ed73262f1a"
+      }
+    },
+    {
+      "source_track": "Quiet piano harmony",
+      "notes_per_cycle": 60,
+      "midi_channel_cc10_pans": [
+        31,
+        40,
+        49,
+        58,
+        67,
+        76,
+        85,
+        94
+      ],
+      "velocity_range": [
+        28,
+        39
+      ],
+      "relative_clip_rms_db": -1.2,
+      "clip": {
+        "path": ".tmp/music-workstation/title-v8/Quiet-piano-harmony-v8.wav",
+        "bytes": 70217224,
+        "sha256": "5f1175922c6a3f68da0b81dc6555fe7bbafbd62cf5cbffcc5e433725de792da5"
+      }
+    }
+  ],
+  "native_performance_tracks": 8,
+  "post_gain_db": 25.5,
+  "previous_loudness": {
+    "input_i": "-15.53",
+    "input_tp": "-3.30",
+    "input_lra": "2.30",
+    "input_thresh": "-25.54",
+    "output_i": "-23.22",
+    "output_tp": "-10.92",
+    "output_lra": "2.10",
+    "output_thresh": "-33.22",
+    "normalization_type": "dynamic",
+    "target_offset": "0.22"
+  },
+  "final_loudness": {
+    "input_i": "-15.53",
+    "input_tp": "-1.83",
+    "input_lra": "4.40",
+    "input_thresh": "-25.59",
+    "output_i": "-23.01",
+    "output_tp": "-9.54",
+    "output_lra": "4.10",
+    "output_thresh": "-33.08",
+    "normalization_type": "dynamic",
+    "target_offset": "0.01"
+  },
+  "opening_backing_rms_ratio": 0.29117579234947927,
+  "opening_backing_first_200ms_rms": 0.015528537850654606,
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v8/01-title-frostglass-v8.mmp",
+      "bytes": 91872,
+      "sha256": "a6659874193ba2f619abdd0133064a77ab702cdeda2f21c3be3c73e0b8e4f712"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v8/01-title-frostglass-v8.wav",
+      "bytes": 26331470,
+      "sha256": "a48653a0b72b247ae5a3b1b031a82c54f7a859025d293c5ffaacbfabb802051f"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v8/01-title-frostglass-v8.mp3",
+      "bytes": 2927697,
+      "sha256": "b2661be95db6cde0984c128eee3ba35171228e318864e6c649ff22b5e21999e9"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-title-v8/01-title-frostglass-v8.ogg",
+      "bytes": 1593536,
+      "sha256": "b1dcbcd4cb795ab85e290bea40decaefa060f6a49a35d82ea140c356bc904347"
+    }
+  ],
+  "source_delivery": "Original V7 preserved. New WAV/MP3/OGG and native MMP; piano clips own ignored temp. Existing LMMS/GS only.",
+  "limits": [
+    "Objective space, phrasing and decode checks do not prove subjective quality. User audition decides.",
+    "No reference music copied; original theme retained."
+  ]
+}

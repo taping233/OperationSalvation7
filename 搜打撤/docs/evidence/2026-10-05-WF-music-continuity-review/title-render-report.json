@@ -1,0 +1,276 @@
+{
+  "role": "title",
+  "title": "霜窗回声 · 连贯乐句",
+  "stem": "01-title-frostglass-v9",
+  "bars": 32,
+  "bpm": 84,
+  "seconds": 91.4285625,
+  "sections": [
+    {
+      "start_bar": 0,
+      "end_bar": 8,
+      "name": "long A"
+    },
+    {
+      "start_bar": 8,
+      "end_bar": 16,
+      "name": "connected answer"
+    },
+    {
+      "start_bar": 16,
+      "end_bar": 24,
+      "name": "soft B"
+    },
+    {
+      "start_bar": 24,
+      "end_bar": 32,
+      "name": "resolved return"
+    }
+  ],
+  "tracks": [
+    {
+      "name": "Piano sung theme",
+      "program": 0,
+      "bank": 0,
+      "notes": 52,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Piano-sung-theme.wav",
+        "bytes": 35108656,
+        "sha256": "809f1cbb7a06c98baef823f349abed1addc704d474113a03470af2efaba37d06"
+      },
+      "pan": -5,
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          128,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": true
+    },
+    {
+      "name": "Piano open harmony",
+      "program": 0,
+      "bank": 0,
+      "notes": 32,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Piano-open-harmony.wav",
+        "bytes": 35108656,
+        "sha256": "2c226986f6835c5a3c761d78a738d92fd066d094210fccea5bbb3c600e550bc3"
+      },
+      "pan": 12,
+      "target_active_rms_dbfs": -34,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          128,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": true
+    },
+    {
+      "name": "Continuous strings",
+      "program": 49,
+      "bank": 0,
+      "notes": 12,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Continuous-strings.wav",
+        "bytes": 35108656,
+        "sha256": "a4153a48b94ed9613d382d545040280e86d2a01ba2cf4d8c9ea96c37d68291f8"
+      },
+      "pan": -32,
+      "target_active_rms_dbfs": -34,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          128,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Viola gentle reply",
+      "program": 41,
+      "bank": 0,
+      "notes": 8,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Viola-gentle-reply.wav",
+        "bytes": 35108656,
+        "sha256": "6f6afcdc4115a1473c77a0cc332a817f90e866fe969cf51694f9a7c172698433"
+      },
+      "pan": 24,
+      "target_active_rms_dbfs": -37,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          128,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0.04,
+      "cc64_used": false
+    },
+    {
+      "name": "Cello bridge",
+      "program": 42,
+      "bank": 0,
+      "notes": 16,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Cello-bridge.wav",
+        "bytes": 35108656,
+        "sha256": "702e0b3069047bdebbfaabe9d6bb756dcc5cb14308e99a4657f3870c55b29a59"
+      },
+      "pan": 29,
+      "target_active_rms_dbfs": -36,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          128,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0.04,
+      "cc64_used": false
+    },
+    {
+      "name": "Stable bass",
+      "program": 43,
+      "bank": 0,
+      "notes": 16,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Stable-bass.wav",
+        "bytes": 35108656,
+        "sha256": "40a0b4338890aedc333190ea5f50a354b19f9af35924dacc6936b435c2a02659"
+      },
+      "pan": 0,
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          128,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Harp glimmer",
+      "program": 46,
+      "bank": 0,
+      "notes": 4,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Harp-glimmer.wav",
+        "bytes": 35108656,
+        "sha256": "f734b68ac148c75795e490f4b6ad2aca978f1a486caf15f68ae71aad1c40e70b"
+      },
+      "pan": -23,
+      "target_active_rms_dbfs": -41,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          128,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    },
+    {
+      "name": "Clarinet breath",
+      "program": 71,
+      "bank": 0,
+      "notes": 4,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Clarinet-breath.wav",
+        "bytes": 35108656,
+        "sha256": "72745f29afdb20e7f81b32841c2168cfb9913e0541608390fa1a63973b98ae9b"
+      },
+      "pan": 17,
+      "target_active_rms_dbfs": -31,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          128,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false
+    }
+  ],
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.34812803200715914,
+      0.5113138283636129
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-6.34",
+    "input_lra": "2.20",
+    "input_thresh": "-28.50",
+    "output_i": "-23.16",
+    "output_tp": "-11.04",
+    "output_lra": "2.40",
+    "output_thresh": "-33.16",
+    "normalization_type": "dynamic",
+    "target_offset": "0.16"
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-continuity-review/01-title-frostglass-v9.mmp",
+      "bytes": 7649,
+      "sha256": "36c08aafd3ca59e1c64af9753aa7435f7413bb00f37709225ace77bbc7f02b9d"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-continuity-review/01-title-frostglass-v9.wav",
+      "bytes": 26331470,
+      "sha256": "560980cf2347f2f7af4529b62d679a92c0c2cea758e0395f8de0b771ecda854e"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-continuity-review/01-title-frostglass-v9.mp3",
+      "bytes": 2927700,
+      "sha256": "b2a80b5369bf95aae018512700cb987d7c65b096a71df8988d33e27b32d7cb3c"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-continuity-review/01-title-frostglass-v9.ogg",
+      "bytes": 1477693,
+      "sha256": "e1526961fb977108a32650eea3de4009b68c77a4e4c5dd5ad074c45b019b1a61"
+    }
+  ],
+  "native_project": "frozen pre-master stems, paths checked; not separately native-rendered",
+  "subjective_listening": "not claimed; user audition required"
+}

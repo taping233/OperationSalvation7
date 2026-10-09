@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "seconds": 91.4285625,
+  "native_instrument_tracks": 5,
+  "v4_piano_line": {
+    "notes": 125,
+    "coverage_percent": 58.73325892857141,
+    "largest_rest_beats": 5.041666666666657,
+    "median_pitch_step_semitones": 3.0,
+    "leaps_over_octave": 4
+  },
+  "v5_piano_line": {
+    "notes": 100,
+    "coverage_percent": 97.98177083333348,
+    "largest_rest_beats": 0.0833333333333357,
+    "median_pitch_step_semitones": 2.0,
+    "leaps_over_octave": 0
+  },
+  "ogg_frames_match": true,
+  "ogg_seam_jump": 0.00044543296098709106,
+  "ordinary_step_p99": 0.023838209137320487,
+  "all_file_hashes_match": true,
+  "media_decode": "passed",
+  "pcm_clipping": false,
+  "limit": "Score continuity and decoder checks cannot establish a good melody. User listening decides."
+}

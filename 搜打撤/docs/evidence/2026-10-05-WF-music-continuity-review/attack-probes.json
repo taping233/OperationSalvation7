@@ -1,0 +1,47 @@
+{
+  "method": "single note A4 velocity60; 10ms RMS above 50% median from 0.5-1.2s after note-on; only one pitch/velocity, not universal latency",
+  "records": [
+    {
+      "program": 0,
+      "note": 69,
+      "velocity": 60,
+      "first_10ms_block_above_half_median_sustain_ms": 0,
+      "peak_to_sustain_ratio": 2.7372052478104125
+    },
+    {
+      "program": 40,
+      "note": 69,
+      "velocity": 60,
+      "first_10ms_block_above_half_median_sustain_ms": 80,
+      "peak_to_sustain_ratio": 1.181838206612278
+    },
+    {
+      "program": 48,
+      "note": 69,
+      "velocity": 60,
+      "first_10ms_block_above_half_median_sustain_ms": 130,
+      "peak_to_sustain_ratio": 1.9462478070221405
+    },
+    {
+      "program": 49,
+      "note": 69,
+      "velocity": 60,
+      "first_10ms_block_above_half_median_sustain_ms": 210,
+      "peak_to_sustain_ratio": 1.9462478070221405
+    },
+    {
+      "program": 68,
+      "note": 69,
+      "velocity": 60,
+      "first_10ms_block_above_half_median_sustain_ms": 50,
+      "peak_to_sustain_ratio": 1.2797553525863243
+    },
+    {
+      "program": 71,
+      "note": 69,
+      "velocity": 60,
+      "first_10ms_block_above_half_median_sustain_ms": 40,
+      "peak_to_sustain_ratio": 1.0082663939429373
+    }
+  ]
+}

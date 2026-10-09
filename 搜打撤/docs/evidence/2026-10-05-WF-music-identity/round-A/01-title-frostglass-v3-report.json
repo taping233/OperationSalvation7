@@ -1,0 +1,121 @@
+{
+  "role": "title",
+  "title": "霜窗回声 · 室内乐精修",
+  "bpm": 112,
+  "seconds": 102.85714583333333,
+  "native_engine": "LMMS 1.2.2 sf2player/FluidSynth, sinc-best, 2x oversampling, 48k float render",
+  "tracks": {
+    "Piano theme": {
+      "program": 0,
+      "bank": 0,
+      "volume": 103,
+      "pan": -7,
+      "notes": 105
+    },
+    "Piano undercurrent": {
+      "program": 0,
+      "bank": 0,
+      "volume": 74,
+      "pan": 13,
+      "notes": 112
+    },
+    "Low strings": {
+      "program": 49,
+      "bank": 0,
+      "volume": 42,
+      "pan": -15,
+      "notes": 24
+    },
+    "Woodwind answer": {
+      "program": 71,
+      "bank": 0,
+      "volume": 45,
+      "pan": -25,
+      "notes": 16
+    },
+    "Soft bass": {
+      "program": 43,
+      "bank": 0,
+      "volume": 72,
+      "pan": 0,
+      "notes": 96
+    },
+    "Brush pulse": {
+      "program": 48,
+      "bank": 128,
+      "volume": 18,
+      "pan": 0,
+      "notes": 57
+    },
+    "Celesta detail": {
+      "program": 8,
+      "bank": 0,
+      "volume": 35,
+      "pan": 19,
+      "notes": 48
+    },
+    "Muted strings": {
+      "program": 49,
+      "bank": 0,
+      "volume": 31,
+      "pan": -20,
+      "notes": 72
+    },
+    "Triangle detail": {
+      "program": 48,
+      "bank": 128,
+      "volume": 11,
+      "pan": 35,
+      "notes": 12
+    }
+  },
+  "cycles_rendered": 2,
+  "delivered_cycle": 2,
+  "raw_peak": 0.06883250176906586,
+  "peak_dbfs": -1.968991607427597,
+  "rms_dbfs": -18.002023696899414,
+  "post_master_gain_db": 21.66903339776736,
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-identity/round-A/01-title-frostglass-v3.mmp",
+      "bytes": 101584,
+      "sha256": "a1c4ace2b68550acaebd4ffa638588512f6ecf33d03578f03e35a1b44659c10a"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-identity/round-A/01-title-frostglass-v3.wav",
+      "bytes": 29622902,
+      "sha256": "16de95bbfa9458a439166c17518ac81f5f853b8f7ea5114652c5ea00618a74a4"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-identity/round-A/01-title-frostglass-v3.mp3",
+      "bytes": 3293271,
+      "sha256": "e0b481a3f97840bec574ebcf715331a01b8a899d12394598e0fa61894efc6c36"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-identity/round-A/01-title-frostglass-v3.ogg",
+      "bytes": 1673796,
+      "sha256": "fe72a7e3cb825d76899fc2f951c3d0f2e66b267128e4b4241eaeff569872fec0"
+    }
+  ],
+  "listening": "user listening required; numerical checks cannot establish aesthetic improvement",
+  "round": "A",
+  "bars": 48,
+  "groups": {
+    "Piano theme": "lead",
+    "Piano undercurrent": "accompaniment",
+    "Low strings": "pad",
+    "Woodwind answer": "counter",
+    "Soft bass": "bass",
+    "Brush pulse": "drums",
+    "Celesta detail": "signature",
+    "Muted strings": "pad",
+    "Triangle detail": "detail"
+  },
+  "common_elements": [
+    "soft bowed strings",
+    "sparse acoustic celesta and triangle",
+    "same restrained hall"
+  ],
+  "subjective_listening": "not claimed; requires user listening",
+  "instrument_palette_validation": "acoustic/orchestral soundfont programs; no electronic synth or drum-machine kit"
+}

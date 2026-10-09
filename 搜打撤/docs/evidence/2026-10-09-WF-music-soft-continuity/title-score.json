@@ -1,0 +1,919 @@
+{
+  "role": "title",
+  "bpm": 72,
+  "notes": [
+    {
+      "part": "Piano two hands",
+      "beat": 0,
+      "start": 0,
+      "key": 67,
+      "duration": 1.328125,
+      "velocity": 57,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 1.5,
+      "start": 1.263125,
+      "key": 63,
+      "duration": 0.5955124999999999,
+      "velocity": 49,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 2.13,
+      "start": 1.7936375,
+      "key": 65,
+      "duration": 0.7976125000000001,
+      "velocity": 52,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 3,
+      "start": 2.52625,
+      "key": 67,
+      "duration": 1.034145833333334,
+      "velocity": 55,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 4.15,
+      "start": 3.495395833333334,
+      "key": 72,
+      "duration": 1.6321041666666658,
+      "velocity": 57,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 6,
+      "start": 5.0625,
+      "key": 70,
+      "duration": 0.8104333333333336,
+      "velocity": 49,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 6.88,
+      "start": 5.807933333333334,
+      "key": 67,
+      "duration": 0.9455666666666662,
+      "velocity": 52,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 8.1,
+      "start": 6.8385,
+      "key": 68,
+      "duration": 1.3170500000000005,
+      "velocity": 56,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 9.63,
+      "start": 8.09055,
+      "key": 67,
+      "duration": 0.8178666666666676,
+      "velocity": 49,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 10.55,
+      "start": 8.843416666666668,
+      "key": 63,
+      "duration": 1.2515833333333313,
+      "velocity": 49,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 12,
+      "start": 10.03,
+      "key": 65,
+      "duration": 0.9955333333333347,
+      "velocity": 53,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 13.12,
+      "start": 10.960533333333334,
+      "key": 67,
+      "duration": 0.796133333333334,
+      "velocity": 55,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 14,
+      "start": 11.691666666666668,
+      "key": 72,
+      "duration": 1.6618749999999993,
+      "velocity": 57,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 16.1,
+      "start": 13.438541666666667,
+      "key": 75,
+      "duration": 1.300520833333334,
+      "velocity": 57,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 17.55,
+      "start": 14.674062500000002,
+      "key": 72,
+      "duration": 0.6529374999999971,
+      "velocity": 50,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 18.24,
+      "start": 15.261999999999999,
+      "key": 70,
+      "duration": 0.7551875000000039,
+      "velocity": 49,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 19.05,
+      "start": 15.952187500000003,
+      "key": 68,
+      "duration": 0.9559375000000014,
+      "velocity": 52,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 20.1,
+      "start": 16.843125000000004,
+      "key": 67,
+      "duration": 1.3683333333333274,
+      "velocity": 55,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 21.7,
+      "start": 18.14645833333333,
+      "key": 65,
+      "duration": 0.6515000000000044,
+      "velocity": 49,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 22.42,
+      "start": 18.732958333333336,
+      "key": 63,
+      "duration": 1.2867499999999987,
+      "velocity": 49,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 24.1,
+      "start": 20.104708333333335,
+      "key": 62,
+      "duration": 0.9967916666666654,
+      "velocity": 51,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 25.2,
+      "start": 21.0365,
+      "key": 65,
+      "duration": 0.8019625000000006,
+      "velocity": 53,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 26.07,
+      "start": 21.7734625,
+      "key": 67,
+      "duration": 1.7428083333333297,
+      "velocity": 57,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 28.15,
+      "start": 23.53127083333333,
+      "key": 67,
+      "duration": 0.8599958333333384,
+      "velocity": 50,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 29.12,
+      "start": 24.32626666666667,
+      "key": 71,
+      "duration": 0.8411291666666658,
+      "velocity": 51,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 30.25,
+      "start": 25.252395833333335,
+      "key": 72,
+      "duration": 4.333333333333334,
+      "velocity": 56,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 4.18,
+      "start": 3.5208083333333335,
+      "key": 63,
+      "duration": 0.65,
+      "velocity": 36,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 4.2219999999999995,
+      "start": 3.556385833333333,
+      "key": 67,
+      "duration": 0.65,
+      "velocity": 38,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 14.03,
+      "start": 11.716591666666666,
+      "key": 65,
+      "duration": 0.65,
+      "velocity": 36,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 14.072,
+      "start": 11.751486666666667,
+      "key": 68,
+      "duration": 0.65,
+      "velocity": 38,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 16.13,
+      "start": 13.464104166666667,
+      "key": 68,
+      "duration": 0.65,
+      "velocity": 36,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 16.172,
+      "start": 13.499891666666668,
+      "key": 72,
+      "duration": 0.65,
+      "velocity": 38,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 26.1,
+      "start": 21.798875000000002,
+      "key": 59,
+      "duration": 0.65,
+      "velocity": 36,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 26.142000000000003,
+      "start": 21.834452500000005,
+      "key": 62,
+      "duration": 0.65,
+      "velocity": 38,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 30.3,
+      "start": 25.293375,
+      "key": 63,
+      "duration": 0.65,
+      "velocity": 36,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 30.342000000000002,
+      "start": 25.327797500000003,
+      "key": 67,
+      "duration": 0.65,
+      "velocity": 38,
+      "hand": "right"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 0.025,
+      "start": 0.021052083333333336,
+      "key": 36,
+      "duration": 0.35,
+      "velocity": 36,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 0.82,
+      "start": 0.6905083333333334,
+      "key": 48,
+      "duration": 0.4166666666666667,
+      "velocity": 29,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 1.5,
+      "start": 1.263125,
+      "key": 51,
+      "duration": 0.9166666666666667,
+      "velocity": 31,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 1.535,
+      "start": 1.2925979166666666,
+      "key": 55,
+      "duration": 0.9166666666666667,
+      "velocity": 29,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 3.05,
+      "start": 2.5683541666666665,
+      "key": 62,
+      "duration": 0.49166666666666664,
+      "velocity": 28,
+      "hand": "left"
+    },
+    {
+      "part": "Quiet air harmony",
+      "beat": 0.2,
+      "start": 0.1684166666666667,
+      "key": 51,
+      "duration": 3.25,
+      "velocity": 35,
+      "hand": null
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 4.025,
+      "start": 3.389510416666667,
+      "key": 36,
+      "duration": 0.35,
+      "velocity": 36,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 4.82,
+      "start": 4.062941666666667,
+      "key": 48,
+      "duration": 0.4166666666666667,
+      "velocity": 29,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 5.5,
+      "start": 4.638958333333334,
+      "key": 51,
+      "duration": 0.9166666666666667,
+      "velocity": 31,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 5.535,
+      "start": 4.668606250000001,
+      "key": 55,
+      "duration": 0.9166666666666667,
+      "velocity": 29,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 7.05,
+      "start": 5.9519375,
+      "key": 60,
+      "duration": 0.49166666666666664,
+      "velocity": 28,
+      "hand": "left"
+    },
+    {
+      "part": "Quiet air harmony",
+      "beat": 4.2,
+      "start": 3.5377500000000004,
+      "key": 51,
+      "duration": 3.25,
+      "velocity": 35,
+      "hand": null
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 8.025,
+      "start": 6.777125000000001,
+      "key": 32,
+      "duration": 0.35,
+      "velocity": 36,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 8.82,
+      "start": 7.427700000000001,
+      "key": 44,
+      "duration": 0.4166666666666667,
+      "velocity": 29,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 9.5,
+      "start": 7.984166666666667,
+      "key": 51,
+      "duration": 0.9166666666666667,
+      "velocity": 31,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 9.535,
+      "start": 8.012808333333334,
+      "key": 55,
+      "duration": 0.9166666666666667,
+      "velocity": 29,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 11.05,
+      "start": 9.252583333333334,
+      "key": 58,
+      "duration": 0.49166666666666664,
+      "velocity": 28,
+      "hand": "left"
+    },
+    {
+      "part": "Quiet air harmony",
+      "beat": 8.2,
+      "start": 6.920333333333333,
+      "key": 51,
+      "duration": 3.25,
+      "velocity": 35,
+      "hand": null
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 12.025,
+      "start": 10.050770833333335,
+      "key": 32,
+      "duration": 0.35,
+      "velocity": 36,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 12.82,
+      "start": 10.711283333333334,
+      "key": 44,
+      "duration": 0.4166666666666667,
+      "velocity": 29,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 13.5,
+      "start": 11.27625,
+      "key": 48,
+      "duration": 0.9166666666666667,
+      "velocity": 31,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 13.535,
+      "start": 11.305329166666667,
+      "key": 55,
+      "duration": 0.9166666666666667,
+      "velocity": 29,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 15.05,
+      "start": 12.564041666666668,
+      "key": 60,
+      "duration": 0.49166666666666664,
+      "velocity": 28,
+      "hand": "left"
+    },
+    {
+      "part": "Quiet air harmony",
+      "beat": 12.2,
+      "start": 10.196166666666667,
+      "key": 48,
+      "duration": 3.25,
+      "velocity": 35,
+      "hand": null
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 16.025,
+      "start": 13.374635416666665,
+      "key": 29,
+      "duration": 0.35,
+      "velocity": 36,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 16.82,
+      "start": 14.052041666666668,
+      "key": 41,
+      "duration": 0.4166666666666667,
+      "velocity": 29,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 17.5,
+      "start": 14.631458333333335,
+      "key": 48,
+      "duration": 0.9166666666666667,
+      "velocity": 31,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 17.535,
+      "start": 14.66128125,
+      "key": 56,
+      "duration": 0.9166666666666667,
+      "velocity": 29,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 19.05,
+      "start": 15.952187500000003,
+      "key": 60,
+      "duration": 0.49166666666666664,
+      "velocity": 28,
+      "hand": "left"
+    },
+    {
+      "part": "Quiet air harmony",
+      "beat": 16.2,
+      "start": 13.52375,
+      "key": 48,
+      "duration": 3.25,
+      "velocity": 35,
+      "hand": null
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 20.025,
+      "start": 16.78203125,
+      "key": 29,
+      "duration": 0.35,
+      "velocity": 36,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 20.82,
+      "start": 17.429625,
+      "key": 41,
+      "duration": 0.4166666666666667,
+      "velocity": 29,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 21.5,
+      "start": 17.983541666666667,
+      "key": 48,
+      "duration": 0.9166666666666667,
+      "velocity": 31,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 21.535,
+      "start": 18.012052083333334,
+      "key": 55,
+      "duration": 0.9166666666666667,
+      "velocity": 29,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 23.05,
+      "start": 19.246145833333337,
+      "key": 56,
+      "duration": 0.49166666666666664,
+      "velocity": 28,
+      "hand": "left"
+    },
+    {
+      "part": "Quiet air harmony",
+      "beat": 20.2,
+      "start": 16.92458333333333,
+      "key": 48,
+      "duration": 3.25,
+      "velocity": 35,
+      "hand": null
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 24.025,
+      "start": 20.04117708333333,
+      "key": 31,
+      "duration": 0.35,
+      "velocity": 36,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 24.82,
+      "start": 20.714608333333334,
+      "key": 43,
+      "duration": 0.4166666666666667,
+      "velocity": 29,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 25.5,
+      "start": 21.290625,
+      "key": 53,
+      "duration": 0.9166666666666667,
+      "velocity": 31,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 25.535,
+      "start": 21.320272916666667,
+      "key": 60,
+      "duration": 0.9166666666666667,
+      "velocity": 29,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 27.05,
+      "start": 22.603604166666667,
+      "key": 62,
+      "duration": 0.49166666666666664,
+      "velocity": 28,
+      "hand": "left"
+    },
+    {
+      "part": "Quiet air harmony",
+      "beat": 24.2,
+      "start": 20.189416666666666,
+      "key": 53,
+      "duration": 3.25,
+      "velocity": 35,
+      "hand": null
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 28.025,
+      "start": 23.428822916666668,
+      "key": 31,
+      "duration": 0.35,
+      "velocity": 36,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 28.82,
+      "start": 24.08039166666667,
+      "key": 43,
+      "duration": 0.4166666666666667,
+      "velocity": 29,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 29.5,
+      "start": 24.637708333333336,
+      "key": 53,
+      "duration": 0.33333333333333337,
+      "velocity": 31,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 29.535,
+      "start": 24.66639375,
+      "key": 59,
+      "duration": 0.33333333333333337,
+      "velocity": 29,
+      "hand": "left"
+    },
+    {
+      "part": "Quiet air harmony",
+      "beat": 28.2,
+      "start": 23.57225,
+      "key": 53,
+      "duration": 3.25,
+      "velocity": 35,
+      "hand": null
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 30.025,
+      "start": 25.067989583333333,
+      "key": 36,
+      "duration": 0.35,
+      "velocity": 36,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 30.82,
+      "start": 25.719558333333335,
+      "key": 48,
+      "duration": 0.4166666666666667,
+      "velocity": 29,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 31.5,
+      "start": 26.276875,
+      "key": 51,
+      "duration": 0.9166666666666667,
+      "velocity": 31,
+      "hand": "left"
+    },
+    {
+      "part": "Piano two hands",
+      "beat": 31.535,
+      "start": 26.30556041666667,
+      "key": 55,
+      "duration": 0.9166666666666667,
+      "velocity": 29,
+      "hand": "left"
+    },
+    {
+      "part": "Quiet air harmony",
+      "beat": 30.2,
+      "start": 25.21141666666667,
+      "key": 51,
+      "duration": 5.0,
+      "velocity": 35,
+      "hand": null
+    }
+  ],
+  "parts": {
+    "Piano two hands": {
+      "patch": 0,
+      "target": -25,
+      "pan": 0,
+      "kind": "piano",
+      "wet": 0.5
+    },
+    "Quiet air harmony": {
+      "patch": 0,
+      "target": -40,
+      "pan": 0,
+      "kind": "air",
+      "wet": 0.55
+    }
+  },
+  "sections": [
+    {
+      "start": 0,
+      "end": 6.7,
+      "parts": [
+        "Piano two hands",
+        "Quiet air harmony"
+      ]
+    },
+    {
+      "start": 6.7,
+      "end": 13.3,
+      "parts": [
+        "Piano two hands",
+        "Quiet air harmony"
+      ]
+    },
+    {
+      "start": 13.3,
+      "end": 20,
+      "parts": [
+        "Piano two hands",
+        "Quiet air harmony"
+      ]
+    },
+    {
+      "start": 20,
+      "end": 29,
+      "parts": [
+        "Piano two hands",
+        "Quiet air harmony"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-09-WF-music-soft-continuity/title-rewrite-30s.wav",
+      "bytes": 8640044,
+      "sha256": "32649c3cab1744846f7a73a8d0a2f6ee437c4e02ef67cbabf4e05d7ee00d87a1"
+    },
+    {
+      "path": "docs/evidence/2026-10-09-WF-music-soft-continuity/title-rewrite-30s.mp3",
+      "bytes": 961580,
+      "sha256": "30c5f3b308b974ccbe2cc7985a4decacbd046ae22dcefa483c7ffaeca0d3bafc"
+    }
+  ],
+  "stems_rms": {
+    "Piano two hands": 0.05623399583872992,
+    "Quiet air harmony": 0.009970090688428244
+  },
+  "legato_key_gap_before_seconds": [
+    0.2214583333333333,
+    0.17217916666666655,
+    0.2576125,
+    0.26914583333333386,
+    0.25043749999999854,
+    0.27876666666666683,
+    0.16389999999999993,
+    0.1020500000000002,
+    0.2362000000000002,
+    0.2282499999999974,
+    0.18053333333333477,
+    0.27280000000000015,
+    0.27187499999999964,
+    0.23552083333333407,
+    0.17127083333333104,
+    0.23185416666667003,
+    0.18260416666666757,
+    0.2616666666666596,
+    0.1281666666666723,
+    0.3467500000000001,
+    0.18179166666666546,
+    0.28696250000000134,
+    0.6744749999999975,
+    0.32832916666667344,
+    0.35946249999999935
+  ],
+  "legato_key_gap_after_seconds": [
+    -0.06499999999999995,
+    -0.06499999999999995,
+    -0.06499999999999995,
+    -0.06499999999999995,
+    -0.0649999999999995,
+    -0.06500000000000039,
+    0.08499999999999996,
+    -0.0649999999999995,
+    -0.0649999999999995,
+    -0.0649999999999995,
+    -0.0649999999999995,
+    -0.0649999999999995,
+    0.08499999999999908,
+    -0.0649999999999995,
+    -0.0649999999999995,
+    -0.0649999999999995,
+    -0.06500000000000128,
+    -0.06500000000000128,
+    -0.06500000000000128,
+    0.08500000000000085,
+    -0.06500000000000128,
+    -0.06500000000000128,
+    0.015000000000000568,
+    -0.06500000000000128,
+    0.08500000000000085
+  ],
+  "master_attenuation_db": 0
+}

@@ -1,0 +1,440 @@
+[
+  {
+    "role": "title",
+    "title": "霜窗回声 · 暗流精修",
+    "bpm": 84,
+    "seconds": 30.0,
+    "parts": [
+      {
+        "name": "Piano original melody",
+        "note_count": 0,
+        "retained_melodic_recording": true,
+        "patch": 0,
+        "db": -25,
+        "pan": -0.07,
+        "bank": 0,
+        "wet": 0.6,
+        "hz": 7200
+      },
+      {
+        "name": "Piano open support",
+        "note_count": 21,
+        "retained_melodic_recording": false,
+        "patch": 0,
+        "db": -35,
+        "pan": 0.18,
+        "bank": 0,
+        "wet": 0.4,
+        "hz": 6500
+      },
+      {
+        "name": "Cello undercurrent",
+        "note_count": 21,
+        "retained_melodic_recording": false,
+        "patch": 42,
+        "db": -34,
+        "pan": -0.23,
+        "bank": 0,
+        "wet": 0.5,
+        "hz": 4100
+      },
+      {
+        "name": "Suspended viola",
+        "note_count": 9,
+        "retained_melodic_recording": false,
+        "patch": 41,
+        "db": -37,
+        "pan": 0.25,
+        "bank": 0,
+        "wet": 0.6,
+        "hz": 4800
+      },
+      {
+        "name": "Quiet electric colour",
+        "note_count": 6,
+        "retained_melodic_recording": false,
+        "patch": 4,
+        "db": -40,
+        "pan": 0.32,
+        "bank": 0,
+        "wet": 0.65,
+        "hz": 4500
+      },
+      {
+        "name": "Harp punctuation",
+        "note_count": 3,
+        "retained_melodic_recording": false,
+        "patch": 46,
+        "db": -43,
+        "pan": -0.36,
+        "bank": 0,
+        "wet": 0.65,
+        "hz": 6500
+      }
+    ],
+    "shapes": {},
+    "source": [
+      {
+        "path": ".tmp/music-workstation/piano-two-hands/01-title-frostglass-v10-Piano-right-hand.wav",
+        "bytes": 35108656,
+        "sha256": "14dbdf6f3eeece75371d975330ab8d21086133362eb422ee7f03be4156c2cd4f"
+      }
+    ],
+    "files": [
+      {
+        "path": "docs/evidence/2026-10-09-WF-music-refinement/title-refined-30s.wav",
+        "bytes": 8640044,
+        "sha256": "d80550c64d4310603c857d5b8a2b4ebd74938b75e2fd8843808b9442d0be9e13"
+      },
+      {
+        "path": "docs/evidence/2026-10-09-WF-music-refinement/title-refined-30s.mp3",
+        "bytes": 961620,
+        "sha256": "5e1ce2218ee2a8384b2743d790a4ae36b8bd2fdeeb1af8e4a8b3308b3f52ad23"
+      }
+    ],
+    "peak_dbfs": -6.760588697705879,
+    "rms_dbfs": -21.536919188709206
+  },
+  {
+    "role": "explore",
+    "title": "灰线行军 · 动机精修",
+    "bpm": 112,
+    "seconds": 30.0,
+    "parts": [
+      {
+        "name": "Piano path melody",
+        "note_count": 20,
+        "retained_melodic_recording": false,
+        "patch": 0,
+        "db": -25,
+        "pan": -0.08,
+        "bank": 0,
+        "wet": 0.42,
+        "hz": 6500
+      },
+      {
+        "name": "Clarinet phrase answer",
+        "note_count": 8,
+        "retained_melodic_recording": false,
+        "patch": 71,
+        "db": -27,
+        "pan": 0.15,
+        "bank": 0,
+        "wet": 0.45,
+        "hz": 6500
+      },
+      {
+        "name": "Nylon recurring cell",
+        "note_count": 32,
+        "retained_melodic_recording": false,
+        "patch": 24,
+        "db": -32,
+        "pan": -0.32,
+        "bank": 0,
+        "wet": 0.22,
+        "hz": 6500
+      },
+      {
+        "name": "Cello route",
+        "note_count": 6,
+        "retained_melodic_recording": false,
+        "patch": 42,
+        "db": -36,
+        "pan": 0.25,
+        "bank": 0,
+        "wet": 0.35,
+        "hz": 6500
+      },
+      {
+        "name": "Acoustic bass foundation",
+        "note_count": 14,
+        "retained_melodic_recording": false,
+        "patch": 32,
+        "db": -35,
+        "pan": 0,
+        "bank": 0,
+        "wet": 0.1,
+        "hz": 2300
+      },
+      {
+        "name": "Vibraphone signpost",
+        "note_count": 3,
+        "retained_melodic_recording": false,
+        "patch": 11,
+        "db": -40,
+        "pan": 0.33,
+        "bank": 0,
+        "wet": 0.65,
+        "hz": 6500
+      }
+    ],
+    "shapes": {},
+    "source": [],
+    "files": [
+      {
+        "path": "docs/evidence/2026-10-09-WF-music-refinement/explore-refined-30s.wav",
+        "bytes": 8640044,
+        "sha256": "76a22225d74800616af98d6293e3fbc43f302e89fb9ca5ae12aa11969f10025a"
+      },
+      {
+        "path": "docs/evidence/2026-10-09-WF-music-refinement/explore-refined-30s.mp3",
+        "bytes": 961620,
+        "sha256": "74b4aa084643e1a3c75e49dffcf0a9a5ba79dd16bc79ee2599e8bf8cf0a886da"
+      }
+    ],
+    "peak_dbfs": -5.471602393611859,
+    "rms_dbfs": -20.519545858949883
+  },
+  {
+    "role": "battle",
+    "title": "黑脉交锋 · 节奏精修",
+    "bpm": 124,
+    "seconds": 30.0,
+    "parts": [
+      {
+        "name": "Violin retained challenge",
+        "note_count": 23,
+        "retained_melodic_recording": false,
+        "patch": 40,
+        "db": -23,
+        "pan": -0.17,
+        "bank": 0,
+        "wet": 0.45,
+        "hz": 6500
+      },
+      {
+        "name": "Horn actual reply",
+        "note_count": 6,
+        "retained_melodic_recording": false,
+        "patch": 60,
+        "db": -26,
+        "pan": 0.2,
+        "bank": 0,
+        "wet": 0.32,
+        "hz": 6500
+      },
+      {
+        "name": "Cello unified motor",
+        "note_count": 45,
+        "retained_melodic_recording": false,
+        "patch": 42,
+        "db": -30,
+        "pan": -0.23,
+        "bank": 0,
+        "wet": 0.18,
+        "hz": 4300
+      },
+      {
+        "name": "Stable low bass",
+        "note_count": 16,
+        "retained_melodic_recording": false,
+        "patch": 43,
+        "db": -32,
+        "pan": 0,
+        "bank": 0,
+        "wet": 0.15,
+        "hz": 2200
+      },
+      {
+        "name": "Drum centre",
+        "note_count": 192,
+        "retained_melodic_recording": false,
+        "patch": 0,
+        "db": -32,
+        "pan": 0.03,
+        "bank": 128,
+        "wet": 0.05,
+        "hz": 6500
+      },
+      {
+        "name": "String harmony bridge",
+        "note_count": 8,
+        "retained_melodic_recording": false,
+        "patch": 49,
+        "db": -36,
+        "pan": 0.33,
+        "bank": 0,
+        "wet": 0.55,
+        "hz": 5100
+      },
+      {
+        "name": "Timpani transitions only",
+        "note_count": 6,
+        "retained_melodic_recording": false,
+        "patch": 47,
+        "db": -34,
+        "pan": 0.14,
+        "bank": 0,
+        "wet": 0.22,
+        "hz": 3600
+      }
+    ],
+    "shapes": {
+      "Cello unified motor": [
+        [
+          0,
+          0.85
+        ],
+        [
+          24,
+          1
+        ],
+        [
+          32,
+          1
+        ],
+        [
+          34,
+          0.62
+        ],
+        [
+          38,
+          0.62
+        ],
+        [
+          40,
+          1.08
+        ],
+        [
+          62,
+          1
+        ]
+      ],
+      "Drum centre": [
+        [
+          0,
+          0.9
+        ],
+        [
+          24,
+          1
+        ],
+        [
+          32,
+          1
+        ],
+        [
+          34,
+          0.72
+        ],
+        [
+          38,
+          0.72
+        ],
+        [
+          40,
+          1.05
+        ],
+        [
+          62,
+          1
+        ]
+      ]
+    },
+    "source": [],
+    "files": [
+      {
+        "path": "docs/evidence/2026-10-09-WF-music-refinement/battle-refined-30s.wav",
+        "bytes": 8640044,
+        "sha256": "be5dbaf27400f52e0cb4b3d53daffd37073d58c5c509ab0c41c5448f72dfcac9"
+      },
+      {
+        "path": "docs/evidence/2026-10-09-WF-music-refinement/battle-refined-30s.mp3",
+        "bytes": 961620,
+        "sha256": "71daeead8a2bd15dd7b7cefb548b26dbfbd96aa184295068f2f821a91d9ad7b8"
+      }
+    ],
+    "peak_dbfs": -4.186993632581791,
+    "rms_dbfs": -18.573844480203594
+  },
+  {
+    "role": "shop",
+    "title": "灯下交易 · 问答精修",
+    "bpm": 96,
+    "seconds": 30.0,
+    "parts": [
+      {
+        "name": "Piano short hook",
+        "note_count": 55,
+        "retained_melodic_recording": false,
+        "patch": 0,
+        "db": -23.5,
+        "pan": -0.12,
+        "bank": 0,
+        "wet": 0.28,
+        "hz": 6500
+      },
+      {
+        "name": "Muted horn takes lead",
+        "note_count": 12,
+        "retained_melodic_recording": false,
+        "patch": 59,
+        "db": -25.5,
+        "pan": 0.13,
+        "bank": 0,
+        "wet": 0.3,
+        "hz": 6500
+      },
+      {
+        "name": "Guitar sparse comping",
+        "note_count": 66,
+        "retained_melodic_recording": false,
+        "patch": 26,
+        "db": -34,
+        "pan": 0.33,
+        "bank": 0,
+        "wet": 0.18,
+        "hz": 6500
+      },
+      {
+        "name": "Acoustic bass coherent walk",
+        "note_count": 48,
+        "retained_melodic_recording": false,
+        "patch": 32,
+        "db": -28,
+        "pan": 0,
+        "bank": 0,
+        "wet": 0.08,
+        "hz": 2700
+      },
+      {
+        "name": "Brush-kit groove",
+        "note_count": 72,
+        "retained_melodic_recording": false,
+        "patch": 40,
+        "db": -38,
+        "pan": -0.07,
+        "bank": 128,
+        "wet": 0.05,
+        "hz": 6500
+      },
+      {
+        "name": "Vibraphone rare punctuation",
+        "note_count": 3,
+        "retained_melodic_recording": false,
+        "patch": 11,
+        "db": -40,
+        "pan": -0.3,
+        "bank": 0,
+        "wet": 0.5,
+        "hz": 6500
+      }
+    ],
+    "shapes": {},
+    "source": [],
+    "files": [
+      {
+        "path": "docs/evidence/2026-10-09-WF-music-refinement/shop-refined-30s.wav",
+        "bytes": 8640044,
+        "sha256": "4adcca6fedb157aba208fde38bdadd15283b4a050ff4dc0ef8b979eb39d4f09e"
+      },
+      {
+        "path": "docs/evidence/2026-10-09-WF-music-refinement/shop-refined-30s.mp3",
+        "bytes": 961620,
+        "sha256": "2f689a9609191c07a245b27a7b6a3e4ff58b0b2203f44e1a902ef5f60ad4e472"
+      }
+    ],
+    "peak_dbfs": -6.1612153874899835,
+    "rms_dbfs": -20.533965143815056
+  }
+]

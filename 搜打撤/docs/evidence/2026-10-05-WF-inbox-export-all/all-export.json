@@ -1,0 +1,735 @@
+{
+  "formatVersion": 1,
+  "exportedAt": "2026-10-05T15:40:15.882Z",
+  "total": 13,
+  "records": [
+    {
+      "formatVersion": 1,
+      "ts": "2026-10-04T08:21:09.135Z",
+      "gameVersion": "v0.60.0",
+      "page": {
+        "id": "cardlib",
+        "name": "卡牌库"
+      },
+      "target": {
+        "name": "卡牌库 · lib-head-name"
+      },
+      "at": {
+        "x": 14,
+        "y": 7
+      },
+      "text": "太丑了，上面你参考别的游戏重新做一下前端",
+      "steps": "",
+      "expected": "",
+      "actual": "",
+      "diagnostics": {
+        "count": 5,
+        "recent": [
+          {
+            "at": "2026-10-04T16:41:33.758Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.044Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.295Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.585Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.838Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          }
+        ]
+      },
+      "done": false
+    },
+    {
+      "formatVersion": 1,
+      "ts": "2026-10-04T08:22:42.309Z",
+      "gameVersion": "v0.60.0",
+      "page": {
+        "id": "cardlib",
+        "name": "卡牌库"
+      },
+      "target": {
+        "name": "卡牌库 · 按钮「恶魔之力法术」"
+      },
+      "at": {
+        "x": 27,
+        "y": 62
+      },
+      "text": "这张卡重新生成卡面，你注意比例和画风，星月有两个形态，暗影形态的人设参考禁咒的卡面图，这张卡的卡面就是暗影形态的",
+      "steps": "",
+      "expected": "",
+      "actual": "",
+      "diagnostics": {
+        "count": 5,
+        "recent": [
+          {
+            "at": "2026-10-04T16:41:33.758Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.044Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.295Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.585Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.838Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          }
+        ]
+      },
+      "done": false
+    },
+    {
+      "formatVersion": 1,
+      "ts": "2026-10-04T08:23:46.586Z",
+      "gameVersion": "v0.60.0",
+      "page": {
+        "id": "state:title",
+        "name": "标题页"
+      },
+      "target": {
+        "name": "标题页 · 按钮「进入远征档案 EXPEDITION AR」"
+      },
+      "at": {
+        "x": 75,
+        "y": 88
+      },
+      "text": "这里要加点光线特效",
+      "steps": "",
+      "expected": "",
+      "actual": "",
+      "diagnostics": {
+        "count": 5,
+        "recent": [
+          {
+            "at": "2026-10-04T16:41:33.758Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.044Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.295Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.585Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.838Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          }
+        ]
+      },
+      "done": false
+    },
+    {
+      "formatVersion": 1,
+      "ts": "2026-10-04T08:24:18.232Z",
+      "gameVersion": "v0.60.0",
+      "page": {
+        "id": "settings",
+        "name": "设置页"
+      },
+      "target": {
+        "name": "设置页 · pg-head"
+      },
+      "at": {
+        "x": 10,
+        "y": 5
+      },
+      "text": "这个设置的图标比例不对，重新生成",
+      "steps": "",
+      "expected": "",
+      "actual": "",
+      "diagnostics": {
+        "count": 5,
+        "recent": [
+          {
+            "at": "2026-10-04T16:41:33.758Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.044Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.295Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.585Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.838Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          }
+        ]
+      },
+      "done": false
+    },
+    {
+      "formatVersion": 1,
+      "ts": "2026-10-04T08:27:07.366Z",
+      "gameVersion": "v0.60.0",
+      "page": {
+        "id": "hub-deploy",
+        "name": "基地 · 出发"
+      },
+      "target": {
+        "name": "基地 · 出发 · 按钮「← 返回」"
+      },
+      "at": {
+        "x": 20,
+        "y": 6
+      },
+      "text": "这个返回应该是返回选档界面",
+      "steps": "",
+      "expected": "",
+      "actual": "",
+      "diagnostics": {
+        "count": 5,
+        "recent": [
+          {
+            "at": "2026-10-04T16:41:33.758Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.044Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.295Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.585Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.838Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          }
+        ]
+      },
+      "done": false
+    },
+    {
+      "formatVersion": 1,
+      "ts": "2026-10-04T08:29:32.230Z",
+      "gameVersion": "v0.60.0",
+      "page": {
+        "id": "hub-deploy",
+        "name": "基地 · 出发"
+      },
+      "target": {
+        "name": "基地 · 出发 · 按钮「」"
+      },
+      "at": {
+        "x": 25,
+        "y": 6
+      },
+      "text": "这个问号说明删掉",
+      "steps": "",
+      "expected": "",
+      "actual": "",
+      "diagnostics": {
+        "count": 5,
+        "recent": [
+          {
+            "at": "2026-10-04T16:41:33.758Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.044Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.295Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.585Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.838Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          }
+        ]
+      },
+      "done": false
+    },
+    {
+      "formatVersion": 1,
+      "ts": "2026-10-04T08:30:14.242Z",
+      "gameVersion": "v0.60.0",
+      "page": {
+        "id": "hub-deploy",
+        "name": "基地 · 出发"
+      },
+      "target": {
+        "name": "基地 · 出发 · deploy-mission-copy"
+      },
+      "at": {
+        "x": 46,
+        "y": 32
+      },
+      "text": "进来的过渡动画太丑了，你自己实机看一下优化",
+      "steps": "",
+      "expected": "",
+      "actual": "",
+      "diagnostics": {
+        "count": 5,
+        "recent": [
+          {
+            "at": "2026-10-04T16:41:33.758Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.044Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.295Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.585Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.838Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          }
+        ]
+      },
+      "done": false
+    },
+    {
+      "formatVersion": 1,
+      "ts": "2026-10-04T08:33:51.833Z",
+      "gameVersion": "v0.60.0",
+      "page": {
+        "id": "state:title",
+        "name": "标题页"
+      },
+      "target": {
+        "name": "标题页 · 按钮「远征手册」"
+      },
+      "at": {
+        "x": 17,
+        "y": 5
+      },
+      "text": "这个界面点进去全部重做，做成新手引导，要配图说明，文案不要ai味太重，简单说明全流程和一些特殊的机制，可以做成分页制的",
+      "steps": "",
+      "expected": "",
+      "actual": "",
+      "diagnostics": {
+        "count": 5,
+        "recent": [
+          {
+            "at": "2026-10-04T16:41:33.758Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.044Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.295Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.585Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.838Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          }
+        ]
+      },
+      "done": false
+    },
+    {
+      "formatVersion": 1,
+      "ts": "2026-10-04T09:10:06.015Z",
+      "gameVersion": "v0.60.0",
+      "page": {
+        "id": "cardlib",
+        "name": "卡牌库"
+      },
+      "target": {
+        "name": "卡牌库 · 按钮「」"
+      },
+      "at": {
+        "x": 6,
+        "y": 3
+      },
+      "text": "退出照相馆缺少动画",
+      "steps": "",
+      "expected": "",
+      "actual": "",
+      "diagnostics": {
+        "count": 5,
+        "recent": [
+          {
+            "at": "2026-10-04T16:41:33.758Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.044Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.295Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.585Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.838Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          }
+        ]
+      },
+      "done": false
+    },
+    {
+      "formatVersion": 1,
+      "ts": "2026-10-04T09:53:07.075Z",
+      "gameVersion": "v0.60.0",
+      "page": {
+        "id": "classselect",
+        "name": "选人页"
+      },
+      "target": {
+        "name": "选人页 · art-figure"
+      },
+      "at": {
+        "x": 59,
+        "y": 43
+      },
+      "text": "不要上下晃动，改为左右轻微平移",
+      "steps": "",
+      "expected": "",
+      "actual": "",
+      "diagnostics": {
+        "count": 5,
+        "recent": [
+          {
+            "at": "2026-10-04T16:41:33.758Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.044Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.295Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.585Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.838Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          }
+        ]
+      },
+      "done": false
+    },
+    {
+      "formatVersion": 1,
+      "ts": "2026-10-04T09:53:42.293Z",
+      "gameVersion": "v0.60.0",
+      "page": {
+        "id": "mode:page",
+        "name": "全屏页"
+      },
+      "target": {
+        "name": "全屏页 · pool-grid"
+      },
+      "at": {
+        "x": 37,
+        "y": 84
+      },
+      "text": "角色卡池的界面ui太丑了，都没有对齐，从头重新设计",
+      "steps": "",
+      "expected": "",
+      "actual": "",
+      "diagnostics": {
+        "count": 5,
+        "recent": [
+          {
+            "at": "2026-10-04T16:41:33.758Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.044Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.295Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.585Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.838Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          }
+        ]
+      },
+      "done": false
+    },
+    {
+      "formatVersion": 1,
+      "ts": "2026-10-04T09:54:15.163Z",
+      "gameVersion": "v0.60.0",
+      "page": {
+        "id": "classselect",
+        "name": "选人页"
+      },
+      "target": {
+        "name": "选人页 · art-figure"
+      },
+      "at": {
+        "x": 64,
+        "y": 42
+      },
+      "text": "左右轻微平移的速度要很慢很慢",
+      "steps": "",
+      "expected": "",
+      "actual": "",
+      "diagnostics": {
+        "count": 5,
+        "recent": [
+          {
+            "at": "2026-10-04T16:41:33.758Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.044Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.295Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.585Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.838Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          }
+        ]
+      },
+      "done": false
+    },
+    {
+      "formatVersion": 1,
+      "ts": "2026-10-04T09:54:34.699Z",
+      "gameVersion": "v0.60.0",
+      "page": {
+        "id": "state:idle",
+        "name": "对局地图"
+      },
+      "target": {
+        "name": "游戏画布（对局地图）"
+      },
+      "at": {
+        "x": 36,
+        "y": 14
+      },
+      "text": "把这个提示栏删掉",
+      "steps": "",
+      "expected": "",
+      "actual": "",
+      "diagnostics": {
+        "count": 5,
+        "recent": [
+          {
+            "at": "2026-10-04T16:41:33.758Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.044Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:47:11.295Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.585Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          },
+          {
+            "at": "2026-10-04T16:55:56.838Z",
+            "source": "window.error",
+            "name": "Error",
+            "code": "UNKNOWN"
+          }
+        ]
+      },
+      "done": false
+    }
+  ]
+}

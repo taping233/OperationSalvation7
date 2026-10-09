@@ -1,0 +1,19 @@
+{
+  "basis": "round-A-instruments.json: real native per-instrument renders; chosen gains reflect musical role rather than equal loudness",
+  "volume_db": {
+    "title": {"Piano theme":0.8,"Piano undercurrent":-2,"Low strings":1,"Woodwind answer":4,"Soft bass":-1.5,"Brush pulse":1.5,"Celesta detail":4,"Muted strings":2,"Triangle detail":3},
+    "explore": {"Piano travel theme":0,"Pizzicato rhythm":2.4,"Clarinet response":5,"String horizon":-1,"Moving bass":0,"Chamber drums":3.5,"Celesta detail":4,"Muted strings":1,"Triangle detail":3},
+    "battle": {"Strings theme":1.5,"Horn answer":0,"Pizzicato drive":3,"Low strings":0,"Dark bass":-1.3,"Timpani gestures":-3.5,"Battle groove":2.5,"Celesta detail":2.5,"Muted strings":0,"Triangle detail":3}
+  },
+  "arrangement": [
+    "Give note velocities a phrase arc instead of constant repetition",
+    "Thin accompaniment further during each piece's quiet bridge",
+    "Reduce common celesta detail under the main statements so it remains an identifying accent",
+    "Let title lower strings open their register on the final return",
+    "Sustain exploration clarinet response through the last return",
+    "Delay battle brass responses by a quarter beat to clear string attacks",
+    "Add a few individually written piano ornaments on later returns",
+    "Reduce extra common hall reflections from 7.5% to 4.5%"
+  ],
+  "not_claimed": "No human listening comparison is fabricated. These are measured balance corrections and editorial composition decisions; the user evaluates aesthetic success."
+}

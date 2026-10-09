@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "seconds": 91.4285625,
+  "all_8_instrument_tracks_start_at_beat_zero": true,
+  "piano_track_xml_unchanged": {
+    "Piano melody": true,
+    "Quiet piano harmony": true
+  },
+  "previous_string_note_patterns_after_opening_preserved": true,
+  "opening_support_2s_rms_ratio": 0.2963408986892617,
+  "opening_support_dbfs": -27.19803271569113,
+  "first_200ms_backing_present": true,
+  "media_decode_and_hashes": "passed",
+  "ogg_frames_match": true,
+  "ogg_seam_jump": 0.0015545450150966644,
+  "ordinary_step_p99": 0.023490575402975056,
+  "pcm_clipping": false,
+  "subjective_level_and_clarity": "Needs user listening"
+}

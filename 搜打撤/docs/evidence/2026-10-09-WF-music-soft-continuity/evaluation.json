@@ -1,0 +1,94 @@
+{
+  "scope": "Only two modified cues remeasured; battle loudness target intentionally lowered to -22..-18 LUFS",
+  "results": [
+    {
+      "role": "title",
+      "metrics": {
+        "seconds": 30.0,
+        "finite": true,
+        "clipped_samples": 0,
+        "interior_silent_halfseconds": 0,
+        "interior_halfseconds": 57,
+        "low_side_mid_ratio": 0.0017576847324206528,
+        "low_side_mid_measurement": "FFT RMS ratio in exact 20-120Hz band",
+        "legacy_lowpass_weighted_side_mid_ratio": 0.2260657493665017,
+        "stereo_correlation": 0.35039907077857024,
+        "crest_db": 19.775070058190064,
+        "section_rms_dbfs": [
+          -22.901117545448294,
+          -22.27608864662376,
+          -22.717621849090392,
+          -24.241852468580607
+        ],
+        "input_i": -20.66,
+        "input_tp": -3.23,
+        "input_lra": 6.6,
+        "input_thresh": -31.2
+      },
+      "hands": {
+        "left": {
+          "max_simultaneous_key_span_semitones": 8,
+          "max_depressed_keys": 2
+        },
+        "right": {
+          "max_simultaneous_key_span_semitones": 9,
+          "max_depressed_keys": 4
+        }
+      },
+      "checks": {
+        "duration_30s": true,
+        "finite_audio": true,
+        "no_clipped_samples": true,
+        "lossy_true_peak_below_minus_1": true,
+        "role_loudness_window": true,
+        "no_unintended_interior_silence": true,
+        "mono_low_end": true,
+        "stereo_correlation_nonnegative": true,
+        "piano_hand_spans": true,
+        "piano_depressed_keys": true
+      },
+      "review": [],
+      "passed": true
+    },
+    {
+      "role": "battle",
+      "metrics": {
+        "seconds": 30.0,
+        "finite": true,
+        "clipped_samples": 0,
+        "interior_silent_halfseconds": 0,
+        "interior_halfseconds": 57,
+        "low_side_mid_ratio": 0.009314309367036798,
+        "low_side_mid_measurement": "FFT RMS ratio in exact 20-120Hz band",
+        "legacy_lowpass_weighted_side_mid_ratio": 0.013863042884862689,
+        "stereo_correlation": 0.9928788480010279,
+        "crest_db": 17.29845481002599,
+        "section_rms_dbfs": [
+          -22.33160024100644,
+          -22.671352223960287,
+          -22.993874488966863,
+          -22.196375724435477
+        ],
+        "input_i": -20.46,
+        "input_tp": -5.36,
+        "input_lra": 1.4,
+        "input_thresh": -30.56
+      },
+      "hands": null,
+      "checks": {
+        "duration_30s": true,
+        "finite_audio": true,
+        "no_clipped_samples": true,
+        "lossy_true_peak_below_minus_1": true,
+        "role_loudness_window": true,
+        "no_unintended_interior_silence": true,
+        "mono_low_end": true,
+        "stereo_correlation_nonnegative": true
+      },
+      "review": [
+        "Small 30s LRA: inspect phrase contrast; short excerpts make LRA uncertain"
+      ],
+      "passed": true
+    }
+  ]
+}

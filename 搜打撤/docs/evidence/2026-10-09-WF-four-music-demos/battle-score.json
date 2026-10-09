@@ -1,0 +1,2245 @@
+{
+  "role": "battle",
+  "bpm": 124,
+  "retained_source": {
+    "path": "docs/evidence/2026-10-05-WF-music-piano-two-hands/03-battle-blackpulse-v6.wav",
+    "bytes": 26756174,
+    "sha256": "6880372f3b438d9dffd28218ed4e5078ef7008c5ea2b869a35cb81aa441984b0"
+  },
+  "basis": "same original 0-30s foreground; additive original supporting arrangement",
+  "new_tracks": {
+    "Viola crossrhythm": {
+      "patch": 45,
+      "target_dbfs": -33,
+      "pan": -0.4,
+      "bank": 0
+    },
+    "Horn counterstrike": {
+      "patch": 60,
+      "target_dbfs": -32,
+      "pan": 0.3,
+      "bank": 0
+    },
+    "Guitar low weight": {
+      "patch": 30,
+      "target_dbfs": -34,
+      "pan": -0.16,
+      "bank": 0
+    },
+    "Timpani moving accents": {
+      "patch": 47,
+      "target_dbfs": -33,
+      "pan": 0.08,
+      "bank": 0
+    },
+    "Combat drums": {
+      "patch": 0,
+      "target_dbfs": -34,
+      "pan": 0,
+      "bank": 128
+    }
+  },
+  "new_events": [
+    {
+      "track": "Viola crossrhythm",
+      "beat": 0.0,
+      "midi": 52,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 0.75,
+      "midi": 55,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 1.5,
+      "midi": 59,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 2.0,
+      "midi": 55,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 2.75,
+      "midi": 52,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 3.5,
+      "midi": 59,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 0.0,
+      "midi": 40,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 0.0,
+      "midi": 47,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 2.5,
+      "midi": 40,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 2.5,
+      "midi": 47,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Combat drums",
+      "beat": 0.0,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 62
+    },
+    {
+      "track": "Combat drums",
+      "beat": 1.75,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 40
+    },
+    {
+      "track": "Combat drums",
+      "beat": 2.0,
+      "midi": 38,
+      "length": 0.24,
+      "velocity": 53
+    },
+    {
+      "track": "Combat drums",
+      "beat": 3.5,
+      "midi": 42,
+      "length": 0.24,
+      "velocity": 30
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 0.0,
+      "midi": 40,
+      "length": 0.7,
+      "velocity": 48
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 1.5,
+      "midi": 40,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 3.25,
+      "midi": 40,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 4.0,
+      "midi": 52,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 4.75,
+      "midi": 55,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 5.5,
+      "midi": 59,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 6.0,
+      "midi": 55,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 6.75,
+      "midi": 52,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 7.5,
+      "midi": 59,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 4.0,
+      "midi": 40,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 4.0,
+      "midi": 47,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 6.5,
+      "midi": 40,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 6.5,
+      "midi": 47,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Combat drums",
+      "beat": 4.0,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 62
+    },
+    {
+      "track": "Combat drums",
+      "beat": 5.75,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 40
+    },
+    {
+      "track": "Combat drums",
+      "beat": 6.0,
+      "midi": 38,
+      "length": 0.24,
+      "velocity": 53
+    },
+    {
+      "track": "Combat drums",
+      "beat": 7.5,
+      "midi": 42,
+      "length": 0.24,
+      "velocity": 30
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 4.0,
+      "midi": 40,
+      "length": 0.7,
+      "velocity": 48
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 5.5,
+      "midi": 40,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 7.25,
+      "midi": 40,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 8.0,
+      "midi": 52,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 8.75,
+      "midi": 55,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 9.5,
+      "midi": 60,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 10.0,
+      "midi": 55,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 10.75,
+      "midi": 52,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 11.5,
+      "midi": 60,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 8.0,
+      "midi": 36,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 8.0,
+      "midi": 43,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 10.5,
+      "midi": 36,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 10.5,
+      "midi": 43,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Combat drums",
+      "beat": 8.0,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 62
+    },
+    {
+      "track": "Combat drums",
+      "beat": 9.75,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 40
+    },
+    {
+      "track": "Combat drums",
+      "beat": 10.0,
+      "midi": 38,
+      "length": 0.24,
+      "velocity": 53
+    },
+    {
+      "track": "Combat drums",
+      "beat": 11.5,
+      "midi": 42,
+      "length": 0.24,
+      "velocity": 30
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 8.0,
+      "midi": 36,
+      "length": 0.7,
+      "velocity": 48
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 9.5,
+      "midi": 36,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 11.25,
+      "midi": 36,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 12.0,
+      "midi": 52,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 12.75,
+      "midi": 55,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 13.5,
+      "midi": 60,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 14.0,
+      "midi": 55,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 14.75,
+      "midi": 52,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 15.5,
+      "midi": 60,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 12.0,
+      "midi": 36,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 12.0,
+      "midi": 43,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 14.5,
+      "midi": 36,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 14.5,
+      "midi": 43,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Combat drums",
+      "beat": 12.0,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 62
+    },
+    {
+      "track": "Combat drums",
+      "beat": 13.75,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 40
+    },
+    {
+      "track": "Combat drums",
+      "beat": 14.0,
+      "midi": 38,
+      "length": 0.24,
+      "velocity": 53
+    },
+    {
+      "track": "Combat drums",
+      "beat": 15.5,
+      "midi": 42,
+      "length": 0.24,
+      "velocity": 30
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 12.0,
+      "midi": 36,
+      "length": 0.7,
+      "velocity": 48
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 13.5,
+      "midi": 36,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 15.25,
+      "midi": 36,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 9.25,
+      "midi": 60,
+      "length": 1.1,
+      "velocity": 56
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 11.0,
+      "midi": 55,
+      "length": 0.65,
+      "velocity": 47
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 13.0,
+      "midi": 64,
+      "length": 1.1,
+      "velocity": 54
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 14.5,
+      "midi": 60,
+      "length": 1.3,
+      "velocity": 50
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 16.0,
+      "midi": 50,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 16.75,
+      "midi": 54,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 17.5,
+      "midi": 57,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 18.0,
+      "midi": 54,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 18.75,
+      "midi": 50,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 19.5,
+      "midi": 57,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 16.0,
+      "midi": 38,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 16.0,
+      "midi": 45,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 18.5,
+      "midi": 38,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 18.5,
+      "midi": 45,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Combat drums",
+      "beat": 16.0,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 62
+    },
+    {
+      "track": "Combat drums",
+      "beat": 17.75,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 40
+    },
+    {
+      "track": "Combat drums",
+      "beat": 18.0,
+      "midi": 38,
+      "length": 0.24,
+      "velocity": 53
+    },
+    {
+      "track": "Combat drums",
+      "beat": 19.5,
+      "midi": 42,
+      "length": 0.24,
+      "velocity": 30
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 16.0,
+      "midi": 38,
+      "length": 0.7,
+      "velocity": 48
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 17.5,
+      "midi": 38,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 19.25,
+      "midi": 38,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 20.0,
+      "midi": 50,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 20.75,
+      "midi": 54,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 21.5,
+      "midi": 57,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 22.0,
+      "midi": 54,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 22.75,
+      "midi": 50,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 23.5,
+      "midi": 57,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 20.0,
+      "midi": 38,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 20.0,
+      "midi": 45,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 22.5,
+      "midi": 38,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 22.5,
+      "midi": 45,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Combat drums",
+      "beat": 20.0,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 62
+    },
+    {
+      "track": "Combat drums",
+      "beat": 21.75,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 40
+    },
+    {
+      "track": "Combat drums",
+      "beat": 22.0,
+      "midi": 38,
+      "length": 0.24,
+      "velocity": 53
+    },
+    {
+      "track": "Combat drums",
+      "beat": 23.5,
+      "midi": 42,
+      "length": 0.24,
+      "velocity": 30
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 20.0,
+      "midi": 38,
+      "length": 0.7,
+      "velocity": 48
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 21.5,
+      "midi": 38,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 23.25,
+      "midi": 38,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 17.25,
+      "midi": 57,
+      "length": 1.1,
+      "velocity": 56
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 19.0,
+      "midi": 54,
+      "length": 0.65,
+      "velocity": 47
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 21.0,
+      "midi": 62,
+      "length": 1.1,
+      "velocity": 54
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 22.5,
+      "midi": 57,
+      "length": 1.3,
+      "velocity": 50
+    },
+    {
+      "track": "Combat drums",
+      "beat": 22.75,
+      "midi": 45,
+      "length": 0.16,
+      "velocity": 30
+    },
+    {
+      "track": "Combat drums",
+      "beat": 23.0,
+      "midi": 38,
+      "length": 0.16,
+      "velocity": 34
+    },
+    {
+      "track": "Combat drums",
+      "beat": 23.25,
+      "midi": 45,
+      "length": 0.16,
+      "velocity": 38
+    },
+    {
+      "track": "Combat drums",
+      "beat": 23.5,
+      "midi": 38,
+      "length": 0.16,
+      "velocity": 42
+    },
+    {
+      "track": "Combat drums",
+      "beat": 23.75,
+      "midi": 45,
+      "length": 0.16,
+      "velocity": 46
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 24.0,
+      "midi": 51,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 24.75,
+      "midi": 54,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 25.5,
+      "midi": 57,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 26.0,
+      "midi": 54,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 26.75,
+      "midi": 51,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 27.5,
+      "midi": 57,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 24.0,
+      "midi": 35,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 24.0,
+      "midi": 42,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 26.5,
+      "midi": 35,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 26.5,
+      "midi": 42,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Combat drums",
+      "beat": 24.0,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 62
+    },
+    {
+      "track": "Combat drums",
+      "beat": 25.75,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 40
+    },
+    {
+      "track": "Combat drums",
+      "beat": 26.0,
+      "midi": 38,
+      "length": 0.24,
+      "velocity": 53
+    },
+    {
+      "track": "Combat drums",
+      "beat": 27.5,
+      "midi": 42,
+      "length": 0.24,
+      "velocity": 30
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 24.0,
+      "midi": 35,
+      "length": 0.7,
+      "velocity": 48
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 25.5,
+      "midi": 35,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 27.25,
+      "midi": 35,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 28.0,
+      "midi": 51,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 28.75,
+      "midi": 54,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 29.5,
+      "midi": 57,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 30.0,
+      "midi": 54,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 30.75,
+      "midi": 51,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 31.5,
+      "midi": 57,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 28.0,
+      "midi": 35,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 28.0,
+      "midi": 42,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 30.5,
+      "midi": 35,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 30.5,
+      "midi": 42,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Combat drums",
+      "beat": 28.0,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 62
+    },
+    {
+      "track": "Combat drums",
+      "beat": 29.75,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 40
+    },
+    {
+      "track": "Combat drums",
+      "beat": 30.0,
+      "midi": 38,
+      "length": 0.24,
+      "velocity": 53
+    },
+    {
+      "track": "Combat drums",
+      "beat": 31.5,
+      "midi": 42,
+      "length": 0.24,
+      "velocity": 30
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 28.0,
+      "midi": 35,
+      "length": 0.7,
+      "velocity": 48
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 29.5,
+      "midi": 35,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 31.25,
+      "midi": 35,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 25.25,
+      "midi": 57,
+      "length": 1.1,
+      "velocity": 56
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 27.0,
+      "midi": 54,
+      "length": 0.65,
+      "velocity": 47
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 29.0,
+      "midi": 63,
+      "length": 1.1,
+      "velocity": 54
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 30.5,
+      "midi": 57,
+      "length": 1.3,
+      "velocity": 50
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 32.0,
+      "midi": 52,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 32.75,
+      "midi": 57,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 33.5,
+      "midi": 60,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 34.0,
+      "midi": 57,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 34.75,
+      "midi": 52,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 35.5,
+      "midi": 60,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 32.0,
+      "midi": 33,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 32.0,
+      "midi": 40,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 34.5,
+      "midi": 33,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 34.5,
+      "midi": 40,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Combat drums",
+      "beat": 32.0,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 62
+    },
+    {
+      "track": "Combat drums",
+      "beat": 33.75,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 40
+    },
+    {
+      "track": "Combat drums",
+      "beat": 34.0,
+      "midi": 38,
+      "length": 0.24,
+      "velocity": 53
+    },
+    {
+      "track": "Combat drums",
+      "beat": 35.5,
+      "midi": 42,
+      "length": 0.24,
+      "velocity": 30
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 32.0,
+      "midi": 33,
+      "length": 0.7,
+      "velocity": 48
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 33.5,
+      "midi": 33,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 35.25,
+      "midi": 33,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 36.0,
+      "midi": 52,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 36.75,
+      "midi": 57,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 37.5,
+      "midi": 60,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 38.0,
+      "midi": 57,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 38.75,
+      "midi": 52,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 39.5,
+      "midi": 60,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 36.0,
+      "midi": 33,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 36.0,
+      "midi": 40,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 38.5,
+      "midi": 33,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 38.5,
+      "midi": 40,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Combat drums",
+      "beat": 36.0,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 62
+    },
+    {
+      "track": "Combat drums",
+      "beat": 37.75,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 40
+    },
+    {
+      "track": "Combat drums",
+      "beat": 38.0,
+      "midi": 38,
+      "length": 0.24,
+      "velocity": 53
+    },
+    {
+      "track": "Combat drums",
+      "beat": 39.5,
+      "midi": 42,
+      "length": 0.24,
+      "velocity": 30
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 36.0,
+      "midi": 33,
+      "length": 0.7,
+      "velocity": 48
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 37.5,
+      "midi": 33,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 39.25,
+      "midi": 33,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 33.25,
+      "midi": 60,
+      "length": 1.1,
+      "velocity": 56
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 35.0,
+      "midi": 57,
+      "length": 0.65,
+      "velocity": 47
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 37.0,
+      "midi": 64,
+      "length": 1.1,
+      "velocity": 54
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 38.5,
+      "midi": 60,
+      "length": 1.3,
+      "velocity": 50
+    },
+    {
+      "track": "Combat drums",
+      "beat": 38.75,
+      "midi": 45,
+      "length": 0.16,
+      "velocity": 30
+    },
+    {
+      "track": "Combat drums",
+      "beat": 39.0,
+      "midi": 38,
+      "length": 0.16,
+      "velocity": 34
+    },
+    {
+      "track": "Combat drums",
+      "beat": 39.25,
+      "midi": 45,
+      "length": 0.16,
+      "velocity": 38
+    },
+    {
+      "track": "Combat drums",
+      "beat": 39.5,
+      "midi": 38,
+      "length": 0.16,
+      "velocity": 42
+    },
+    {
+      "track": "Combat drums",
+      "beat": 39.75,
+      "midi": 45,
+      "length": 0.16,
+      "velocity": 46
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 40.0,
+      "midi": 52,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 40.75,
+      "midi": 55,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 41.5,
+      "midi": 60,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 42.0,
+      "midi": 55,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 42.75,
+      "midi": 52,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 43.5,
+      "midi": 60,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 40.0,
+      "midi": 36,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 40.0,
+      "midi": 43,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 42.5,
+      "midi": 36,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 42.5,
+      "midi": 43,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Combat drums",
+      "beat": 40.0,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 62
+    },
+    {
+      "track": "Combat drums",
+      "beat": 41.75,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 40
+    },
+    {
+      "track": "Combat drums",
+      "beat": 42.0,
+      "midi": 38,
+      "length": 0.24,
+      "velocity": 53
+    },
+    {
+      "track": "Combat drums",
+      "beat": 43.5,
+      "midi": 42,
+      "length": 0.24,
+      "velocity": 30
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 40.0,
+      "midi": 36,
+      "length": 0.7,
+      "velocity": 48
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 41.5,
+      "midi": 36,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 43.25,
+      "midi": 36,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 44.0,
+      "midi": 52,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 44.75,
+      "midi": 55,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 45.5,
+      "midi": 60,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 46.0,
+      "midi": 55,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 46.75,
+      "midi": 52,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 47.5,
+      "midi": 60,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 44.0,
+      "midi": 36,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 44.0,
+      "midi": 43,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 46.5,
+      "midi": 36,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 46.5,
+      "midi": 43,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Combat drums",
+      "beat": 44.0,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 62
+    },
+    {
+      "track": "Combat drums",
+      "beat": 45.75,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 40
+    },
+    {
+      "track": "Combat drums",
+      "beat": 46.0,
+      "midi": 38,
+      "length": 0.24,
+      "velocity": 53
+    },
+    {
+      "track": "Combat drums",
+      "beat": 47.5,
+      "midi": 42,
+      "length": 0.24,
+      "velocity": 30
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 44.0,
+      "midi": 36,
+      "length": 0.7,
+      "velocity": 48
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 45.5,
+      "midi": 36,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 47.25,
+      "midi": 36,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 41.25,
+      "midi": 60,
+      "length": 1.1,
+      "velocity": 56
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 43.0,
+      "midi": 55,
+      "length": 0.65,
+      "velocity": 47
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 45.0,
+      "midi": 64,
+      "length": 1.1,
+      "velocity": 54
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 46.5,
+      "midi": 60,
+      "length": 1.3,
+      "velocity": 50
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 48.0,
+      "midi": 50,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 48.75,
+      "midi": 55,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 49.5,
+      "midi": 59,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 50.0,
+      "midi": 55,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 50.75,
+      "midi": 50,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 51.5,
+      "midi": 59,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 48.0,
+      "midi": 38,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 48.0,
+      "midi": 45,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 50.5,
+      "midi": 38,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 50.5,
+      "midi": 45,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Combat drums",
+      "beat": 48.0,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 62
+    },
+    {
+      "track": "Combat drums",
+      "beat": 49.75,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 40
+    },
+    {
+      "track": "Combat drums",
+      "beat": 50.0,
+      "midi": 38,
+      "length": 0.24,
+      "velocity": 53
+    },
+    {
+      "track": "Combat drums",
+      "beat": 51.5,
+      "midi": 42,
+      "length": 0.24,
+      "velocity": 30
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 48.0,
+      "midi": 38,
+      "length": 0.7,
+      "velocity": 48
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 49.5,
+      "midi": 38,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 51.25,
+      "midi": 38,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 52.0,
+      "midi": 50,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 52.75,
+      "midi": 55,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 53.5,
+      "midi": 59,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 54.0,
+      "midi": 55,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 54.75,
+      "midi": 50,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 55.5,
+      "midi": 59,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 52.0,
+      "midi": 38,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 52.0,
+      "midi": 45,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 54.5,
+      "midi": 38,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 54.5,
+      "midi": 45,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Combat drums",
+      "beat": 52.0,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 62
+    },
+    {
+      "track": "Combat drums",
+      "beat": 53.75,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 40
+    },
+    {
+      "track": "Combat drums",
+      "beat": 54.0,
+      "midi": 38,
+      "length": 0.24,
+      "velocity": 53
+    },
+    {
+      "track": "Combat drums",
+      "beat": 55.5,
+      "midi": 42,
+      "length": 0.24,
+      "velocity": 30
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 52.0,
+      "midi": 38,
+      "length": 0.7,
+      "velocity": 48
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 53.5,
+      "midi": 38,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 55.25,
+      "midi": 38,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 49.25,
+      "midi": 59,
+      "length": 1.1,
+      "velocity": 56
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 51.0,
+      "midi": 55,
+      "length": 0.65,
+      "velocity": 47
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 53.0,
+      "midi": 62,
+      "length": 1.1,
+      "velocity": 54
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 54.5,
+      "midi": 59,
+      "length": 1.3,
+      "velocity": 50
+    },
+    {
+      "track": "Combat drums",
+      "beat": 54.75,
+      "midi": 45,
+      "length": 0.16,
+      "velocity": 30
+    },
+    {
+      "track": "Combat drums",
+      "beat": 55.0,
+      "midi": 38,
+      "length": 0.16,
+      "velocity": 34
+    },
+    {
+      "track": "Combat drums",
+      "beat": 55.25,
+      "midi": 45,
+      "length": 0.16,
+      "velocity": 38
+    },
+    {
+      "track": "Combat drums",
+      "beat": 55.5,
+      "midi": 38,
+      "length": 0.16,
+      "velocity": 42
+    },
+    {
+      "track": "Combat drums",
+      "beat": 55.75,
+      "midi": 45,
+      "length": 0.16,
+      "velocity": 46
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 56.0,
+      "midi": 51,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 56.75,
+      "midi": 54,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 57.5,
+      "midi": 57,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 58.0,
+      "midi": 54,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 58.75,
+      "midi": 51,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 59.5,
+      "midi": 57,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 56.0,
+      "midi": 35,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 56.0,
+      "midi": 42,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 58.5,
+      "midi": 35,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 58.5,
+      "midi": 42,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Combat drums",
+      "beat": 56.0,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 62
+    },
+    {
+      "track": "Combat drums",
+      "beat": 57.75,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 40
+    },
+    {
+      "track": "Combat drums",
+      "beat": 58.0,
+      "midi": 38,
+      "length": 0.24,
+      "velocity": 53
+    },
+    {
+      "track": "Combat drums",
+      "beat": 59.5,
+      "midi": 42,
+      "length": 0.24,
+      "velocity": 30
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 56.0,
+      "midi": 35,
+      "length": 0.7,
+      "velocity": 48
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 57.5,
+      "midi": 35,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 59.25,
+      "midi": 35,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 60.0,
+      "midi": 51,
+      "length": 0.35,
+      "velocity": 55
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 60.75,
+      "midi": 54,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Viola crossrhythm",
+      "beat": 61.5,
+      "midi": 57,
+      "length": 0.35,
+      "velocity": 39
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 60.0,
+      "midi": 35,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Guitar low weight",
+      "beat": 60.0,
+      "midi": 42,
+      "length": 0.72,
+      "velocity": 55
+    },
+    {
+      "track": "Combat drums",
+      "beat": 60.0,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 62
+    },
+    {
+      "track": "Combat drums",
+      "beat": 61.75,
+      "midi": 36,
+      "length": 0.24,
+      "velocity": 40
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 60.0,
+      "midi": 35,
+      "length": 0.7,
+      "velocity": 48
+    },
+    {
+      "track": "Timpani moving accents",
+      "beat": 61.5,
+      "midi": 35,
+      "length": 0.7,
+      "velocity": 31
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 57.25,
+      "midi": 57,
+      "length": 1.1,
+      "velocity": 56
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 59.0,
+      "midi": 54,
+      "length": 0.65,
+      "velocity": 47
+    },
+    {
+      "track": "Horn counterstrike",
+      "beat": 61.0,
+      "midi": 63,
+      "length": 1.1,
+      "velocity": 54
+    }
+  ],
+  "harmony_blocks": [
+    [
+      40,
+      52,
+      55,
+      59,
+      66
+    ],
+    [
+      36,
+      52,
+      55,
+      60,
+      64
+    ],
+    [
+      38,
+      50,
+      54,
+      57,
+      64
+    ],
+    [
+      35,
+      51,
+      54,
+      57,
+      63
+    ],
+    [
+      33,
+      52,
+      57,
+      60,
+      64
+    ],
+    [
+      36,
+      52,
+      55,
+      60,
+      67
+    ],
+    [
+      38,
+      50,
+      55,
+      59,
+      64
+    ],
+    [
+      35,
+      51,
+      54,
+      57,
+      65
+    ]
+  ],
+  "harmony_block_beats": 8
+}

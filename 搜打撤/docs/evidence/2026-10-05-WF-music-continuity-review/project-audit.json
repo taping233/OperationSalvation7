@@ -1,0 +1,1890 @@
+[
+  {
+    "label": "LMMS bundled Ashore.mmpz",
+    "path": ".tmp/music-workstation/LMMS/data/projects/demos/Ashore.mmpz",
+    "sha256": "ed12c6214ecd66d683c6774749e5e9692a08f2eaab783392ea62ed3d936a44b5",
+    "bpm": "140",
+    "project_notes": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Verdana'; font-size:11pt; font-weight:600; font-style:normal;\">\n<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans'; font-size:10pt; font-weight:400;\"><br /></p></body></html>",
+    "tracks": [
+      {
+        "name": "Pad",
+        "patterns": 12,
+        "notes": 204,
+        "start_bars": [
+          0.0,
+          20.0,
+          4.0,
+          8.0,
+          12.0,
+          16.0,
+          60.0,
+          64.0,
+          28.0,
+          36.0,
+          44.0,
+          52.0
+        ],
+        "note_length_ticks_range": [
+          192,
+          192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Saw",
+        "patterns": 21,
+        "notes": 163,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "note_length_ticks_range": [
+          12,
+          96
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Master Low",
+        "patterns": 21,
+        "notes": 57,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "note_length_ticks_range": [
+          12,
+          96
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Hyper Arp",
+        "patterns": 21,
+        "notes": 120,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "note_length_ticks_range": [
+          12,
+          60
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Bassliner",
+        "patterns": 21,
+        "notes": 65,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "note_length_ticks_range": [
+          24,
+          96
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Waves",
+        "patterns": 21,
+        "notes": 1,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "note_length_ticks_range": [
+          384,
+          384
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Bubbles",
+        "patterns": 21,
+        "notes": 1,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "note_length_ticks_range": [
+          144,
+          144
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Kick TR-909",
+        "patterns": 21,
+        "notes": 17,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          -192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "HandClap",
+        "patterns": 21,
+        "notes": 12,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          -192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Snare II",
+        "patterns": 21,
+        "notes": 35,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          12
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Snare (acoustic)",
+        "patterns": 21,
+        "notes": 21,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          24
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "C-HiHat",
+        "patterns": 21,
+        "notes": 35,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          -192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "C-HiHat",
+        "patterns": 21,
+        "notes": 20,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          -192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "O-HiHat",
+        "patterns": 21,
+        "notes": 25,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          -192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "C-HiHat TR-606",
+        "patterns": 21,
+        "notes": 14,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          -192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Cymbal TR-606",
+        "patterns": 21,
+        "notes": 1,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          -192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Crash",
+        "patterns": 21,
+        "notes": 1,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          -192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Arp",
+        "patterns": 5,
+        "notes": 595,
+        "start_bars": [
+          20.0,
+          28.0,
+          72.0,
+          12.0,
+          16.0
+        ],
+        "note_length_ticks_range": [
+          12,
+          96
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Arp Bass",
+        "patterns": 3,
+        "notes": 49,
+        "start_bars": [
+          20.0,
+          72.0,
+          28.0
+        ],
+        "note_length_ticks_range": [
+          24,
+          96
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Drums volume up",
+        "patterns": 0,
+        "notes": 0,
+        "start_bars": [],
+        "note_length_ticks_range": null,
+        "automation_patterns": 1,
+        "automation_points": 64
+      },
+      {
+        "name": "Snares volume up",
+        "patterns": 0,
+        "notes": 0,
+        "start_bars": [],
+        "note_length_ticks_range": null,
+        "automation_patterns": 4,
+        "automation_points": 488
+      },
+      {
+        "name": "Automation track",
+        "patterns": 0,
+        "notes": 0,
+        "start_bars": [],
+        "note_length_ticks_range": null,
+        "automation_patterns": 3,
+        "automation_points": 3
+      }
+    ]
+  },
+  {
+    "label": "LMMS bundled Impulslogik-Zen.mmpz",
+    "path": ".tmp/music-workstation/LMMS/data/projects/demos/Impulslogik-Zen.mmpz",
+    "sha256": "c4bb45ad37792b38cc57d91997f7bbecd9eae7e8db2e87b69cacb9c45be4ed34",
+    "bpm": "140",
+    "project_notes": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Verdana'; font-size:11pt; font-weight:600; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; color:#e0e0e0;\">Schreiben Sie hier Ihre Projekt-Notizen auf.</span></p></body></html>",
+    "tracks": [
+      {
+        "name": "Standard-Preset",
+        "patterns": 50,
+        "notes": 466,
+        "start_bars": [
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          3.0,
+          1.0,
+          5.0,
+          7.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0,
+          42.0,
+          44.0,
+          46.0,
+          48.0,
+          50.0,
+          52.0,
+          54.0,
+          56.0,
+          58.0,
+          60.0,
+          62.0,
+          64.0,
+          66.0,
+          68.0,
+          70.0,
+          72.0,
+          74.0,
+          76.0,
+          78.0,
+          88.0,
+          90.0,
+          92.0,
+          94.0,
+          96.0,
+          98.0,
+          100.0,
+          102.0,
+          104.0,
+          106.0
+        ],
+        "note_length_ticks_range": [
+          12,
+          24
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Standard-Preset",
+        "patterns": 4,
+        "notes": 34,
+        "start_bars": [
+          0.0,
+          2.0,
+          4.0,
+          6.0
+        ],
+        "note_length_ticks_range": [
+          12,
+          24
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Standard-Preset",
+        "patterns": 34,
+        "notes": 458,
+        "start_bars": [
+          32.0,
+          38.0,
+          34.0,
+          42.0,
+          36.0,
+          40.0,
+          44.0,
+          46.0,
+          48.0,
+          50.0,
+          52.0,
+          54.0,
+          56.0,
+          58.0,
+          60.0,
+          62.0,
+          64.0,
+          66.0,
+          68.0,
+          70.0,
+          72.0,
+          74.0,
+          76.0,
+          78.0,
+          88.0,
+          90.0,
+          92.0,
+          94.0,
+          96.0,
+          98.0,
+          100.0,
+          102.0,
+          104.0,
+          106.0
+        ],
+        "note_length_ticks_range": [
+          12,
+          18
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "kick_hard01.ogg",
+        "patterns": 8,
+        "notes": 5,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          12
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "bassdrum04.ogg",
+        "patterns": 8,
+        "notes": 27,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          -192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "hihat_closed01.ogg",
+        "patterns": 8,
+        "notes": 27,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          -192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "shaker02.ogg",
+        "patterns": 8,
+        "notes": 3,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          -192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "ride01.ogg",
+        "patterns": 8,
+        "notes": 32,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          -192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "clap04.ogg",
+        "patterns": 8,
+        "notes": 1,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          -192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "snare01.ogg",
+        "patterns": 8,
+        "notes": 19,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          -192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "crash01.ogg",
+        "patterns": 8,
+        "notes": 1,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0
+        ],
+        "note_length_ticks_range": [
+          192,
+          192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "snare06.ogg",
+        "patterns": 8,
+        "notes": 8,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          -192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "hihat_opened02.ogg",
+        "patterns": 8,
+        "notes": 8,
+        "start_bars": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          -192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Automation track",
+        "patterns": 0,
+        "notes": 0,
+        "start_bars": [],
+        "note_length_ticks_range": null,
+        "automation_patterns": 4,
+        "automation_points": 516
+      },
+      {
+        "name": "Standard-Preset",
+        "patterns": 13,
+        "notes": 314,
+        "start_bars": [
+          56.0,
+          52.0,
+          48.0,
+          60.0,
+          88.0,
+          92.0,
+          96.0,
+          100.0,
+          104.0,
+          80.0,
+          108.0,
+          127.0,
+          112.0
+        ],
+        "note_length_ticks_range": [
+          6,
+          96
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Standard-Preset",
+        "patterns": 10,
+        "notes": 344,
+        "start_bars": [
+          64.0,
+          68.0,
+          72.0,
+          76.0,
+          96.0,
+          100.0,
+          88.0,
+          92.0,
+          104.0,
+          108.0
+        ],
+        "note_length_ticks_range": [
+          12,
+          13
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Automation track",
+        "patterns": 0,
+        "notes": 0,
+        "start_bars": [],
+        "note_length_ticks_range": null,
+        "automation_patterns": 1,
+        "automation_points": 257
+      },
+      {
+        "name": "chorus01.ogg",
+        "patterns": 4,
+        "notes": 32,
+        "start_bars": [
+          88.0,
+          96.0,
+          104.0,
+          112.0
+        ],
+        "note_length_ticks_range": [
+          384,
+          384
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Automation track",
+        "patterns": 0,
+        "notes": 0,
+        "start_bars": [],
+        "note_length_ticks_range": null,
+        "automation_patterns": 21,
+        "automation_points": 1732
+      }
+    ]
+  },
+  {
+    "label": "LMMS bundled Skiessi/Skiessi-TurningPoint.mmpz",
+    "path": ".tmp/music-workstation/LMMS/data/projects/demos/Skiessi/Skiessi-TurningPoint.mmpz",
+    "sha256": "92deb227b435ce1a8767cc4c1946366b53f29df795e5753240ac436d776947be",
+    "bpm": "180",
+    "project_notes": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Verdana'; font-size:11pt; font-weight:600; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Bitstream Vera Sans'; font-size:16pt; color:#00ff00;\">[</span><span style=\" font-family:'Bitstream Vera Sans'; font-size:16pt; color:#ffffff;\">Turning point</span><span style=\" font-family:'Bitstream Vera Sans'; font-size:16pt; color:#00ff00;\">]</span></p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Bitstream Vera Sans'; font-size:10pt; font-weight:400; color:#00ff00;\">by </span><span style=\" font-family:'Bitstream Vera Sans'; font-size:10pt; color:#00ff00;\">Skiessi</span></p></body></html>",
+    "tracks": [
+      {
+        "name": "hihat_closed05.ogg",
+        "patterns": 60,
+        "notes": 480,
+        "start_bars": [
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0,
+          21.0,
+          22.0,
+          23.0,
+          24.0,
+          25.0,
+          26.0,
+          27.0,
+          28.0,
+          29.0,
+          30.0,
+          31.0,
+          32.0,
+          33.0,
+          34.0,
+          35.0,
+          37.0,
+          36.0,
+          38.0,
+          39.0,
+          80.0,
+          81.0,
+          82.0,
+          83.0,
+          84.0,
+          85.0,
+          86.0,
+          87.0,
+          88.0,
+          89.0,
+          90.0,
+          91.0,
+          92.0,
+          93.0,
+          95.0,
+          94.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          96.0,
+          97.0,
+          98.0,
+          99.0,
+          100.0,
+          101.0,
+          102.0,
+          103.0,
+          104.0,
+          105.0,
+          106.0,
+          107.0,
+          108.0,
+          109.0,
+          110.0,
+          111.0
+        ],
+        "note_length_ticks_range": [
+          24,
+          24
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "bassdrum_acoustic01.ogg",
+        "patterns": 56,
+        "notes": 176,
+        "start_bars": [
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0,
+          21.0,
+          22.0,
+          23.0,
+          24.0,
+          25.0,
+          26.0,
+          27.0,
+          28.0,
+          29.0,
+          30.0,
+          31.0,
+          32.0,
+          33.0,
+          34.0,
+          35.0,
+          36.0,
+          37.0,
+          38.0,
+          39.0,
+          80.0,
+          81.0,
+          82.0,
+          83.0,
+          84.0,
+          85.0,
+          86.0,
+          87.0,
+          88.0,
+          89.0,
+          90.0,
+          91.0,
+          92.0,
+          93.0,
+          94.0,
+          95.0,
+          96.0,
+          97.0,
+          98.0,
+          99.0,
+          100.0,
+          101.0,
+          102.0,
+          103.0,
+          104.0,
+          105.0,
+          106.0,
+          107.0,
+          108.0,
+          109.0,
+          110.0,
+          111.0
+        ],
+        "note_length_ticks_range": [
+          24,
+          24
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "snare07.ogg",
+        "patterns": 48,
+        "notes": 649,
+        "start_bars": [
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          20.0,
+          21.0,
+          22.0,
+          23.0,
+          24.0,
+          25.0,
+          26.0,
+          27.0,
+          28.0,
+          29.0,
+          30.0,
+          31.0,
+          32.0,
+          33.0,
+          34.0,
+          36.0,
+          38.0,
+          37.0,
+          35.0,
+          39.0,
+          88.0,
+          89.0,
+          90.0,
+          94.0,
+          91.0,
+          95.0,
+          92.0,
+          93.0,
+          96.0,
+          104.0,
+          105.0,
+          97.0,
+          98.0,
+          106.0,
+          107.0,
+          111.0,
+          110.0,
+          99.0,
+          108.0,
+          109.0,
+          102.0,
+          103.0,
+          100.0,
+          101.0
+        ],
+        "note_length_ticks_range": [
+          3,
+          21
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "snare07.ogg",
+        "patterns": 48,
+        "notes": 649,
+        "start_bars": [
+          16.0,
+          17.0,
+          18.0,
+          19.0,
+          23.0,
+          22.0,
+          21.0,
+          20.0,
+          24.0,
+          25.0,
+          26.0,
+          27.0,
+          28.0,
+          29.0,
+          30.0,
+          31.0,
+          38.0,
+          33.0,
+          32.0,
+          36.0,
+          34.0,
+          37.0,
+          35.0,
+          39.0,
+          88.0,
+          89.0,
+          94.0,
+          90.0,
+          91.0,
+          95.0,
+          92.0,
+          93.0,
+          96.0,
+          104.0,
+          105.0,
+          97.0,
+          106.0,
+          102.0,
+          110.0,
+          98.0,
+          111.0,
+          107.0,
+          99.0,
+          108.0,
+          109.0,
+          100.0,
+          101.0,
+          103.0
+        ],
+        "note_length_ticks_range": [
+          3,
+          21
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "kick_soft01.ogg",
+        "patterns": 32,
+        "notes": 64,
+        "start_bars": [
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          24.0,
+          26.0,
+          28.0,
+          30.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          88.0,
+          90.0,
+          92.0,
+          94.0,
+          86.0,
+          84.0,
+          80.0,
+          82.0,
+          96.0,
+          98.0,
+          100.0,
+          102.0,
+          104.0,
+          106.0,
+          108.0,
+          110.0
+        ],
+        "note_length_ticks_range": [
+          72,
+          312
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Default preset",
+        "patterns": 56,
+        "notes": 176,
+        "start_bars": [
+          0.0,
+          2.0,
+          4.0,
+          6.0,
+          8.0,
+          10.0,
+          12.0,
+          14.0,
+          16.0,
+          18.0,
+          20.0,
+          22.0,
+          30.0,
+          24.0,
+          26.0,
+          28.0,
+          32.0,
+          34.0,
+          36.0,
+          38.0,
+          40.0,
+          42.0,
+          44.0,
+          46.0,
+          48.0,
+          50.0,
+          52.0,
+          54.0,
+          56.0,
+          58.0,
+          60.0,
+          62.0,
+          64.0,
+          66.0,
+          68.0,
+          70.0,
+          72.0,
+          74.0,
+          76.0,
+          78.0,
+          80.0,
+          82.0,
+          84.0,
+          86.0,
+          92.0,
+          94.0,
+          88.0,
+          90.0,
+          96.0,
+          98.0,
+          104.0,
+          106.0,
+          100.0,
+          102.0,
+          108.0,
+          110.0
+        ],
+        "note_length_ticks_range": [
+          32,
+          240
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "snare01.ogg",
+        "patterns": 32,
+        "notes": 64,
+        "start_bars": [
+          24.0,
+          25.0,
+          26.0,
+          27.0,
+          28.0,
+          29.0,
+          30.0,
+          31.0,
+          32.0,
+          33.0,
+          34.0,
+          35.0,
+          36.0,
+          37.0,
+          38.0,
+          39.0,
+          96.0,
+          97.0,
+          98.0,
+          99.0,
+          100.0,
+          101.0,
+          102.0,
+          103.0,
+          104.0,
+          105.0,
+          106.0,
+          107.0,
+          108.0,
+          109.0,
+          110.0,
+          111.0
+        ],
+        "note_length_ticks_range": [
+          24,
+          24
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "snare01.ogg",
+        "patterns": 24,
+        "notes": 48,
+        "start_bars": [
+          36.0,
+          37.0,
+          38.0,
+          39.0,
+          32.0,
+          33.0,
+          34.0,
+          35.0,
+          96.0,
+          97.0,
+          98.0,
+          99.0,
+          100.0,
+          101.0,
+          102.0,
+          103.0,
+          104.0,
+          106.0,
+          105.0,
+          107.0,
+          108.0,
+          109.0,
+          110.0,
+          111.0
+        ],
+        "note_length_ticks_range": [
+          24,
+          24
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Default preset",
+        "patterns": 12,
+        "notes": 640,
+        "start_bars": [
+          32.0,
+          36.0,
+          48.0,
+          40.0,
+          44.0,
+          56.0,
+          64.0,
+          72.0,
+          80.0,
+          88.0,
+          96.0,
+          104.0
+        ],
+        "note_length_ticks_range": [
+          24,
+          24
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Default preset",
+        "patterns": 12,
+        "notes": 640,
+        "start_bars": [
+          32.0,
+          36.0,
+          48.0,
+          40.0,
+          44.0,
+          56.0,
+          64.0,
+          72.0,
+          80.0,
+          88.0,
+          96.0,
+          104.0
+        ],
+        "note_length_ticks_range": [
+          24,
+          24
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "crash02.ogg",
+        "patterns": 7,
+        "notes": 7,
+        "start_bars": [
+          31.0,
+          15.0,
+          47.0,
+          63.0,
+          79.0,
+          95.0,
+          111.0
+        ],
+        "note_length_ticks_range": [
+          384,
+          384
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "orion_string01.ogg",
+        "patterns": 10,
+        "notes": 100,
+        "start_bars": [
+          48.0,
+          56.0,
+          64.0,
+          72.0,
+          80.0,
+          88.0,
+          96.0,
+          104.0,
+          112.0,
+          120.0
+        ],
+        "note_length_ticks_range": [
+          384,
+          768
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Default preset",
+        "patterns": 6,
+        "notes": 82,
+        "start_bars": [
+          62.0,
+          70.0,
+          78.0,
+          86.0,
+          94.0,
+          102.0
+        ],
+        "note_length_ticks_range": [
+          6,
+          96
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "hihat_closed03.ogg",
+        "patterns": 16,
+        "notes": 64,
+        "start_bars": [
+          96.0,
+          97.0,
+          98.0,
+          99.0,
+          100.0,
+          101.0,
+          102.0,
+          103.0,
+          104.0,
+          105.0,
+          106.0,
+          107.0,
+          108.0,
+          109.0,
+          110.0,
+          111.0
+        ],
+        "note_length_ticks_range": [
+          48,
+          48
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Automation track",
+        "patterns": 0,
+        "notes": 0,
+        "start_bars": [],
+        "note_length_ticks_range": null,
+        "automation_patterns": 8,
+        "automation_points": 1283
+      }
+    ]
+  },
+  {
+    "label": "Spring Wind / LMMS Sharing Platform 9365",
+    "path": "docs/evidence/2026-10-05-WF-music-continuity-review/reference-SpringWind.mmpz",
+    "sha256": "1c00283e8437b5e472ef1fa60a071482107a7d52741284a5208f7fc4875c1ba7",
+    "bpm": "60",
+    "project_notes": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt; font-weight:600; text-decoration: underline; color:#e0e0e0;\">&quot;Spring Wind&quot;</span></p>\n<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:7pt; color:#e0e0e0;\">in A Maj.</span></p>\n<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; color:#e0e0e0;\"> </span><span style=\" font-size:8pt; color:#e0e0e0;\">by VortexSupernova </span><a href=\"https://vortexsupernova.deviantart.com\"><span style=\" font-size:8pt; text-decoration: underline; color:#0000ee;\">https://vortexsupernova.deviantart.com</span></a></p>\n<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt; color:#e0e0e0;\"><br /></p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt; color:#e0e0e0;\">This is originally a second movement for my old piano composition I made when I was 14 but I feel its structure is way too far from the first movement so I separated it :P</span></p>\n<p style=\"-qt-paragraph-type:empty; margi",
+    "tracks": [
+      {
+        "name": "Wind FX",
+        "patterns": 1,
+        "notes": 6,
+        "start_bars": [
+          0.0
+        ],
+        "note_length_ticks_range": [
+          276,
+          3648
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Triangle",
+        "patterns": 2,
+        "notes": 4,
+        "start_bars": [
+          1.0,
+          39.0
+        ],
+        "note_length_ticks_range": [
+          192,
+          192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Main Background Chimes",
+        "patterns": 1,
+        "notes": 417,
+        "start_bars": [
+          4.0
+        ],
+        "note_length_ticks_range": [
+          12,
+          192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Chorus Background Chimes",
+        "patterns": 1,
+        "notes": 241,
+        "start_bars": [
+          9.0
+        ],
+        "note_length_ticks_range": [
+          12,
+          12
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Melody",
+        "patterns": 1,
+        "notes": 165,
+        "start_bars": [
+          6.0
+        ],
+        "note_length_ticks_range": [
+          48,
+          144
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Harp",
+        "patterns": 1,
+        "notes": 482,
+        "start_bars": [
+          9.0
+        ],
+        "note_length_ticks_range": [
+          12,
+          12
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Droplets",
+        "patterns": 1,
+        "notes": 37,
+        "start_bars": [
+          30.0
+        ],
+        "note_length_ticks_range": [
+          12,
+          12
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Sine Synth",
+        "patterns": 2,
+        "notes": 110,
+        "start_bars": [
+          9.0,
+          39.0
+        ],
+        "note_length_ticks_range": [
+          48,
+          768
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Cymbals",
+        "patterns": 2,
+        "notes": 1,
+        "start_bars": [
+          0.0,
+          1.0
+        ],
+        "note_length_ticks_range": [
+          192,
+          192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Cymbals",
+        "patterns": 2,
+        "notes": 1,
+        "start_bars": [
+          0.0,
+          1.0
+        ],
+        "note_length_ticks_range": [
+          420,
+          420
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "kick_distorted01.ogg",
+        "patterns": 2,
+        "notes": 0,
+        "start_bars": [
+          0.0,
+          1.0
+        ],
+        "note_length_ticks_range": null,
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "kick_distorted01.ogg",
+        "patterns": 2,
+        "notes": 2,
+        "start_bars": [
+          0.0,
+          1.0
+        ],
+        "note_length_ticks_range": [
+          -192,
+          -192
+        ],
+        "automation_patterns": 0,
+        "automation_points": 0
+      },
+      {
+        "name": "Automation track",
+        "patterns": 0,
+        "notes": 0,
+        "start_bars": [],
+        "note_length_ticks_range": null,
+        "automation_patterns": 5,
+        "automation_points": 0
+      }
+    ],
+    "page": "https://lmms.io/lsp/?action=show&file=9365",
+    "download": "https://lmms.io/lsp/download_file.php?file=9365&name=SpringWind.mmpz"
+  }
+]

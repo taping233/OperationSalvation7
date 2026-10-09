@@ -1,0 +1,130 @@
+{
+  "role": "explore",
+  "title": "灰线行军 · 室内乐精修",
+  "bpm": 128,
+  "seconds": 90.0,
+  "native_engine": "LMMS 1.2.2 sf2player/FluidSynth, sinc-best, 2x oversampling, 48k float render",
+  "tracks": {
+    "Piano travel theme": {
+      "program": 0,
+      "bank": 0,
+      "volume": 102.0,
+      "pan": -9,
+      "notes": 123,
+      "final_note_count": 124
+    },
+    "Pizzicato rhythm": {
+      "program": 45,
+      "bank": 0,
+      "volume": 112.052,
+      "pan": 24,
+      "notes": 176,
+      "final_note_count": 168
+    },
+    "Clarinet response": {
+      "program": 71,
+      "bank": 0,
+      "volume": 83.579,
+      "pan": -22,
+      "notes": 16,
+      "final_note_count": 16
+    },
+    "String horizon": {
+      "program": 48,
+      "bank": 0,
+      "volume": 46.345,
+      "pan": 10,
+      "notes": 24,
+      "final_note_count": 24
+    },
+    "Moving bass": {
+      "program": 43,
+      "bank": 0,
+      "volume": 73.0,
+      "pan": 0,
+      "notes": 192,
+      "final_note_count": 192
+    },
+    "Chamber drums": {
+      "program": 48,
+      "bank": 128,
+      "volume": 32.917,
+      "pan": 0,
+      "notes": 148,
+      "final_note_count": 148
+    },
+    "Celesta detail": {
+      "program": 8,
+      "bank": 0,
+      "volume": 55.471,
+      "pan": 19,
+      "notes": 72,
+      "final_note_count": 64
+    },
+    "Muted strings": {
+      "program": 49,
+      "bank": 0,
+      "volume": 34.783,
+      "pan": -20,
+      "notes": 72,
+      "final_note_count": 72
+    },
+    "Triangle detail": {
+      "program": 48,
+      "bank": 128,
+      "volume": 15.538,
+      "pan": 35,
+      "notes": 12,
+      "final_note_count": 12
+    }
+  },
+  "cycles_rendered": 2,
+  "delivered_cycle": 2,
+  "raw_peak": 0.08469230681657791,
+  "peak_dbfs": -1.209614872932434,
+  "rms_dbfs": -18.629871606826782,
+  "post_master_gain_db": 20.850305699040664,
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-identity/round-B/02-explore-ashline-v3.mmp",
+      "bytes": 140753,
+      "sha256": "0036c8ef77ac8d8260baa422716ed7ce3b4706fa4741a74adf374d77ff473887"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-identity/round-B/02-explore-ashline-v3.wav",
+      "bytes": 25920044,
+      "sha256": "8003696c27fade00a3cdd5dec1dea6a454fedc187ad45b6ac2f61e1c3b4d5a26"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-identity/round-B/02-explore-ashline-v3.mp3",
+      "bytes": 2881623,
+      "sha256": "ec3299b34d94418c9091080eba0833d0cd19af7369040da957a71899c0f6edef"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-identity/round-B/02-explore-ashline-v3.ogg",
+      "bytes": 1597317,
+      "sha256": "f14009723e4ad375bb811079c4ffb5a26f6f7c3cb78c15256104c4d05d7d54d0"
+    }
+  ],
+  "listening": "user listening required; numerical checks cannot establish aesthetic improvement",
+  "round": "B",
+  "bars": 48,
+  "groups": {
+    "Piano travel theme": "lead",
+    "Pizzicato rhythm": "accompaniment",
+    "Clarinet response": "counter",
+    "String horizon": "pad",
+    "Moving bass": "bass",
+    "Chamber drums": "drums",
+    "Celesta detail": "signature",
+    "Muted strings": "pad",
+    "Triangle detail": "detail"
+  },
+  "common_elements": [
+    "soft bowed strings",
+    "sparse acoustic celesta and triangle",
+    "same restrained hall"
+  ],
+  "subjective_listening": "not claimed; requires user listening",
+  "instrument_palette_validation": "acoustic/orchestral soundfont programs; no electronic synth or drum-machine kit"
+}

@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "exitCode": 0,
+  "local_links": 6,
+  "audio_and_reference_ignored": 10,
+  "verification_checks": 47,
+  "script_sha256": {
+    "diagnose.py": "bf925893e93c0de308714ce09d9030ed2f9778d4ab1759e2441b692f8de1c545",
+    "probe-attacks.py": "238e38dabc2f4e59e190f2b9f849df666a755cf093d2bc8892f33392200c3c03",
+    "rewrite.py": "0caad34d2dfc78e935b428f86be31775115d66dfa6c9b6452a0bcdf32186b632",
+    "verify.py": "f668f3aedee784a2efe4f061ba6f4f5e54b9f3c7384b8c08a69268bbadfc236e"
+  },
+  "unverified": [
+    "human listening",
+    "separate native LMMS render"
+  ]
+}

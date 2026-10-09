@@ -1,0 +1,267 @@
+{
+  "role": "title",
+  "stem": "01-title-frostglass-v10",
+  "title": "霜窗回声 · 双手钢琴",
+  "bpm": 84,
+  "bars": 32,
+  "seconds": 91.4285625,
+  "tracks": [
+    {
+      "name": "Piano right hand",
+      "program": 0,
+      "bank": 0,
+      "notes": 52,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/piano-two-hands/01-title-frostglass-v10-Piano-right-hand.wav",
+        "bytes": 35108656,
+        "sha256": "14dbdf6f3eeece75371d975330ab8d21086133362eb422ee7f03be4156c2cd4f"
+      },
+      "pan": 8,
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          128,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": true,
+      "hand": "right"
+    },
+    {
+      "name": "Piano left hand",
+      "program": 0,
+      "bank": 0,
+      "notes": 96,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/piano-two-hands/01-title-frostglass-v10-Piano-left-hand.wav",
+        "bytes": 35108656,
+        "sha256": "3e22b654e19c5e394d6905df6cd26329fc65c62c7175a254cb7bb4c7bb98dac4"
+      },
+      "pan": -17,
+      "target_active_rms_dbfs": -28.5,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          128,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": true,
+      "hand": "left"
+    },
+    {
+      "name": "Continuous strings",
+      "program": 49,
+      "bank": 0,
+      "notes": 12,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Continuous-strings.wav",
+        "bytes": 35108656,
+        "sha256": "a4153a48b94ed9613d382d545040280e86d2a01ba2cf4d8c9ea96c37d68291f8"
+      },
+      "pan": -32,
+      "target_active_rms_dbfs": -34,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          128,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false,
+      "reused_unchanged": true
+    },
+    {
+      "name": "Viola gentle reply",
+      "program": 41,
+      "bank": 0,
+      "notes": 8,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Viola-gentle-reply.wav",
+        "bytes": 35108656,
+        "sha256": "6f6afcdc4115a1473c77a0cc332a817f90e866fe969cf51694f9a7c172698433"
+      },
+      "pan": 24,
+      "target_active_rms_dbfs": -37,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          128,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0.04,
+      "cc64_used": false,
+      "reused_unchanged": true
+    },
+    {
+      "name": "Cello bridge",
+      "program": 42,
+      "bank": 0,
+      "notes": 16,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Cello-bridge.wav",
+        "bytes": 35108656,
+        "sha256": "702e0b3069047bdebbfaabe9d6bb756dcc5cb14308e99a4657f3870c55b29a59"
+      },
+      "pan": 29,
+      "target_active_rms_dbfs": -36,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          128,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0.04,
+      "cc64_used": false,
+      "reused_unchanged": true
+    },
+    {
+      "name": "Stable bass",
+      "program": 43,
+      "bank": 0,
+      "notes": 16,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Stable-bass.wav",
+        "bytes": 35108656,
+        "sha256": "40a0b4338890aedc333190ea5f50a354b19f9af35924dacc6936b435c2a02659"
+      },
+      "pan": 0,
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          128,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false,
+      "reused_unchanged": true
+    },
+    {
+      "name": "Harp glimmer",
+      "program": 46,
+      "bank": 0,
+      "notes": 4,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Harp-glimmer.wav",
+        "bytes": 35108656,
+        "sha256": "f734b68ac148c75795e490f4b6ad2aca978f1a486caf15f68ae71aad1c40e70b"
+      },
+      "pan": -23,
+      "target_active_rms_dbfs": -41,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          128,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false,
+      "reused_unchanged": true
+    },
+    {
+      "name": "Clarinet breath",
+      "program": 71,
+      "bank": 0,
+      "notes": 4,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/continuity-rewrite/01-title-frostglass-v9-Clarinet-breath.wav",
+        "bytes": 35108656,
+        "sha256": "72745f29afdb20e7f81b32841c2168cfb9913e0541608390fa1a63973b98ae9b"
+      },
+      "pan": 17,
+      "target_active_rms_dbfs": -31,
+      "continuous_gain_points": [
+        [
+          0,
+          1
+        ],
+        [
+          128,
+          1
+        ]
+      ],
+      "note_anticipation_seconds": 0,
+      "cc64_used": false,
+      "reused_unchanged": true
+    }
+  ],
+  "previous_stem": "01-title-frostglass-v9",
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-5.39",
+    "input_lra": "2.20",
+    "input_thresh": "-28.50",
+    "output_i": "-23.21",
+    "output_tp": "-9.93",
+    "output_lra": "2.30",
+    "output_thresh": "-33.21",
+    "normalization_type": "dynamic",
+    "target_offset": "0.21"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.35928602239881796,
+      0.37195009607469187
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-piano-two-hands/01-title-frostglass-v10.mmp",
+      "bytes": 7639,
+      "sha256": "f3beb4127bb4bdacfb21773969994a3cf43c1eedf2d2e6fc5b19e842e1dbe976"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-piano-two-hands/01-title-frostglass-v10-piano.mid",
+      "bytes": 2022,
+      "sha256": "c8e9809e1f9769c7338fd3df4db03278765e5ba23b921a02592d2b85ae773ca1"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-piano-two-hands/01-title-frostglass-v10.wav",
+      "bytes": 26331470,
+      "sha256": "07d8c38088de5b2a8a172c9048d60c4e6dfc4a94a65c617dfd98bbfdc3c118d9"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-piano-two-hands/01-title-frostglass-v10.mp3",
+      "bytes": 2927700,
+      "sha256": "c818ab4caa9702512de50e7e6c81942be20224b4f09d3e3510cc40f716738431"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-piano-two-hands/01-title-frostglass-v10.ogg",
+      "bytes": 1479305,
+      "sha256": "36655053f8ff6241a918763419566226bae797c767e21909942992738617bdcc"
+    }
+  ],
+  "scope": "Piano hands revised. All orchestral frozen stems exactly reused. Pre-master MMP not separately native-rendered. No human audition claimed."
+}

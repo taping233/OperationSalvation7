@@ -1,0 +1,373 @@
+[
+  {
+    "role": "title",
+    "title": "霜窗回声 · 室内乐精修",
+    "bpm": 112,
+    "seconds": 102.85714583333333,
+    "native_engine": "LMMS 1.2.2 sf2player/FluidSynth, sinc-best, 2x oversampling, 48k float render",
+    "tracks": {
+      "Piano theme": {
+        "program": 0,
+        "bank": 0,
+        "volume": 103,
+        "pan": -7,
+        "notes": 105
+      },
+      "Piano undercurrent": {
+        "program": 0,
+        "bank": 0,
+        "volume": 74,
+        "pan": 13,
+        "notes": 112
+      },
+      "Low strings": {
+        "program": 49,
+        "bank": 0,
+        "volume": 42,
+        "pan": -15,
+        "notes": 24
+      },
+      "Woodwind answer": {
+        "program": 71,
+        "bank": 0,
+        "volume": 45,
+        "pan": -25,
+        "notes": 16
+      },
+      "Soft bass": {
+        "program": 43,
+        "bank": 0,
+        "volume": 72,
+        "pan": 0,
+        "notes": 96
+      },
+      "Brush pulse": {
+        "program": 48,
+        "bank": 128,
+        "volume": 18,
+        "pan": 0,
+        "notes": 57
+      },
+      "Celesta detail": {
+        "program": 8,
+        "bank": 0,
+        "volume": 35,
+        "pan": 19,
+        "notes": 48
+      },
+      "Muted strings": {
+        "program": 49,
+        "bank": 0,
+        "volume": 31,
+        "pan": -20,
+        "notes": 72
+      },
+      "Triangle detail": {
+        "program": 48,
+        "bank": 128,
+        "volume": 11,
+        "pan": 35,
+        "notes": 12
+      }
+    },
+    "cycles_rendered": 2,
+    "delivered_cycle": 2,
+    "raw_peak": 0.06883250176906586,
+    "peak_dbfs": -1.968991607427597,
+    "rms_dbfs": -18.002023696899414,
+    "post_master_gain_db": 21.66903339776736,
+    "files": [
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-identity/round-A/01-title-frostglass-v3.mmp",
+        "bytes": 101584,
+        "sha256": "a1c4ace2b68550acaebd4ffa638588512f6ecf33d03578f03e35a1b44659c10a"
+      },
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-identity/round-A/01-title-frostglass-v3.wav",
+        "bytes": 29622902,
+        "sha256": "16de95bbfa9458a439166c17518ac81f5f853b8f7ea5114652c5ea00618a74a4"
+      },
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-identity/round-A/01-title-frostglass-v3.mp3",
+        "bytes": 3293271,
+        "sha256": "e0b481a3f97840bec574ebcf715331a01b8a899d12394598e0fa61894efc6c36"
+      },
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-identity/round-A/01-title-frostglass-v3.ogg",
+        "bytes": 1673796,
+        "sha256": "fe72a7e3cb825d76899fc2f951c3d0f2e66b267128e4b4241eaeff569872fec0"
+      }
+    ],
+    "listening": "user listening required; numerical checks cannot establish aesthetic improvement",
+    "round": "A",
+    "bars": 48,
+    "groups": {
+      "Piano theme": "lead",
+      "Piano undercurrent": "accompaniment",
+      "Low strings": "pad",
+      "Woodwind answer": "counter",
+      "Soft bass": "bass",
+      "Brush pulse": "drums",
+      "Celesta detail": "signature",
+      "Muted strings": "pad",
+      "Triangle detail": "detail"
+    },
+    "common_elements": [
+      "soft bowed strings",
+      "sparse acoustic celesta and triangle",
+      "same restrained hall"
+    ],
+    "subjective_listening": "not claimed; requires user listening",
+    "instrument_palette_validation": "acoustic/orchestral soundfont programs; no electronic synth or drum-machine kit"
+  },
+  {
+    "role": "explore",
+    "title": "灰线行军 · 室内乐精修",
+    "bpm": 128,
+    "seconds": 90.0,
+    "native_engine": "LMMS 1.2.2 sf2player/FluidSynth, sinc-best, 2x oversampling, 48k float render",
+    "tracks": {
+      "Piano travel theme": {
+        "program": 0,
+        "bank": 0,
+        "volume": 102,
+        "pan": -9,
+        "notes": 123
+      },
+      "Pizzicato rhythm": {
+        "program": 45,
+        "bank": 0,
+        "volume": 85,
+        "pan": 24,
+        "notes": 176
+      },
+      "Clarinet response": {
+        "program": 71,
+        "bank": 0,
+        "volume": 47,
+        "pan": -22,
+        "notes": 16
+      },
+      "String horizon": {
+        "program": 48,
+        "bank": 0,
+        "volume": 52,
+        "pan": 10,
+        "notes": 24
+      },
+      "Moving bass": {
+        "program": 43,
+        "bank": 0,
+        "volume": 73,
+        "pan": 0,
+        "notes": 192
+      },
+      "Chamber drums": {
+        "program": 48,
+        "bank": 128,
+        "volume": 22,
+        "pan": 0,
+        "notes": 148
+      },
+      "Celesta detail": {
+        "program": 8,
+        "bank": 0,
+        "volume": 35,
+        "pan": 19,
+        "notes": 72
+      },
+      "Muted strings": {
+        "program": 49,
+        "bank": 0,
+        "volume": 31,
+        "pan": -20,
+        "notes": 72
+      },
+      "Triangle detail": {
+        "program": 48,
+        "bank": 128,
+        "volume": 11,
+        "pan": 35,
+        "notes": 12
+      }
+    },
+    "cycles_rendered": 2,
+    "delivered_cycle": 2,
+    "raw_peak": 0.07171478122472763,
+    "peak_dbfs": -1.2453998625278473,
+    "rms_dbfs": -18.256014585494995,
+    "post_master_gain_db": 22.065293504168295,
+    "files": [
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-identity/round-A/02-explore-ashline-v3.mmp",
+        "bytes": 142314,
+        "sha256": "f6f36a4a534740f284028f7006908d1ba35ca765a607c0dd050de7f371418881"
+      },
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-identity/round-A/02-explore-ashline-v3.wav",
+        "bytes": 25920044,
+        "sha256": "a7c092a306c26d8a874177119408a2d1263cd5efb44445cc811ebcc973958a8e"
+      },
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-identity/round-A/02-explore-ashline-v3.mp3",
+        "bytes": 2881623,
+        "sha256": "1aac4d35449b77db6a03252feb452667440c4b4db3bc5fe4d52eedd36980f8b8"
+      },
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-identity/round-A/02-explore-ashline-v3.ogg",
+        "bytes": 1607775,
+        "sha256": "6463e65de41f947460a6add45735594d69afc64548bd05f483ca7e1df3e31354"
+      }
+    ],
+    "listening": "user listening required; numerical checks cannot establish aesthetic improvement",
+    "round": "A",
+    "bars": 48,
+    "groups": {
+      "Piano travel theme": "lead",
+      "Pizzicato rhythm": "accompaniment",
+      "Clarinet response": "counter",
+      "String horizon": "pad",
+      "Moving bass": "bass",
+      "Chamber drums": "drums",
+      "Celesta detail": "signature",
+      "Muted strings": "pad",
+      "Triangle detail": "detail"
+    },
+    "common_elements": [
+      "soft bowed strings",
+      "sparse acoustic celesta and triangle",
+      "same restrained hall"
+    ],
+    "subjective_listening": "not claimed; requires user listening",
+    "instrument_palette_validation": "acoustic/orchestral soundfont programs; no electronic synth or drum-machine kit"
+  },
+  {
+    "role": "battle",
+    "title": "黑脉交锋 · 管弦乐精修",
+    "bpm": 124,
+    "seconds": 92.90322916666666,
+    "native_engine": "LMMS 1.2.2 sf2player/FluidSynth, sinc-best, 2x oversampling, 48k float render",
+    "tracks": {
+      "Strings theme": {
+        "program": 48,
+        "bank": 0,
+        "volume": 112,
+        "pan": 8,
+        "notes": 136
+      },
+      "Horn answer": {
+        "program": 60,
+        "bank": 0,
+        "volume": 52,
+        "pan": -23,
+        "notes": 24
+      },
+      "Pizzicato drive": {
+        "program": 45,
+        "bank": 0,
+        "volume": 43,
+        "pan": -16,
+        "notes": 288
+      },
+      "Low strings": {
+        "program": 49,
+        "bank": 0,
+        "volume": 39,
+        "pan": 17,
+        "notes": 48
+      },
+      "Dark bass": {
+        "program": 43,
+        "bank": 0,
+        "volume": 80,
+        "pan": 0,
+        "notes": 264
+      },
+      "Timpani gestures": {
+        "program": 47,
+        "bank": 0,
+        "volume": 42,
+        "pan": -8,
+        "notes": 48
+      },
+      "Battle groove": {
+        "program": 48,
+        "bank": 128,
+        "volume": 21,
+        "pan": 0,
+        "notes": 174
+      },
+      "Celesta detail": {
+        "program": 8,
+        "bank": 0,
+        "volume": 35,
+        "pan": 19,
+        "notes": 48
+      },
+      "Muted strings": {
+        "program": 49,
+        "bank": 0,
+        "volume": 31,
+        "pan": -20,
+        "notes": 72
+      },
+      "Triangle detail": {
+        "program": 48,
+        "bank": 128,
+        "volume": 11,
+        "pan": 35,
+        "notes": 12
+      }
+    },
+    "cycles_rendered": 2,
+    "delivered_cycle": 2,
+    "raw_peak": 0.07250256836414337,
+    "peak_dbfs": -1.21350459754467,
+    "rms_dbfs": -18.239572048187256,
+    "post_master_gain_db": 21.530377928342794,
+    "files": [
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-identity/round-A/03-battle-blackpulse-v3.mmp",
+        "bytes": 181126,
+        "sha256": "12054050ded463f8d1372437bda8378afc0d6077648e7a4e7b55ad4be9d7290b"
+      },
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-identity/round-A/03-battle-blackpulse-v3.wav",
+        "bytes": 26756174,
+        "sha256": "4a4c1ca8a8b806cfd3dabb891056527ecaf70ed9ad493326637721f9547b5379"
+      },
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-identity/round-A/03-battle-blackpulse-v3.mp3",
+        "bytes": 2974551,
+        "sha256": "0eaf6608382df839ecc9602f519fb33b00c73bc7c337c64bc85bcaeb48d14307"
+      },
+      {
+        "path": "docs/evidence/2026-10-05-WF-music-identity/round-A/03-battle-blackpulse-v3.ogg",
+        "bytes": 1786516,
+        "sha256": "c607ad919ff1a7a4c3c14e7bd6206fe7965443ae0905f22b7b92aa48f765cec7"
+      }
+    ],
+    "listening": "user listening required; numerical checks cannot establish aesthetic improvement",
+    "round": "A",
+    "bars": 48,
+    "groups": {
+      "Strings theme": "lead",
+      "Horn answer": "counter",
+      "Pizzicato drive": "accompaniment",
+      "Low strings": "pad",
+      "Dark bass": "bass",
+      "Timpani gestures": "percussion",
+      "Battle groove": "drums",
+      "Celesta detail": "signature",
+      "Muted strings": "pad",
+      "Triangle detail": "detail"
+    },
+    "common_elements": [
+      "soft bowed strings",
+      "sparse acoustic celesta and triangle",
+      "same restrained hall"
+    ],
+    "subjective_listening": "not claimed; requires user listening",
+    "instrument_palette_validation": "acoustic/orchestral soundfont programs; no electronic synth or drum-machine kit"
+  }
+]

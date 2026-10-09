@@ -1,0 +1,617 @@
+{
+  "method": "内置imagegen生成平静马尾基准，FFmpeg连续呼吸烘焙，Pillow打包；复现见v2/bake.ps1",
+  "files": [
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/.gitignore",
+      "bytes": 257,
+      "sha256": "80c1e69afd8c3aa241fc6712e720fafee7374d6359fda8396fafb3fbd0f498c4",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/export-report.json",
+      "bytes": 3886,
+      "sha256": "0b2c3345b57d242de3ecb9b728f302d81d77f15780c467fa7dcf5d640668e20f",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/export_sprite.py",
+      "bytes": 3002,
+      "sha256": "a1423506b7dd2d8c78ee4e648a57a7db42a2cf422b835e22f71119e625a3ca3f",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/generated-sheet.png",
+      "bytes": 1822818,
+      "sha256": "2551fe3d42175ea4d28e07d8ef99ab766e1b77f85bde52146562fe8fe57678c3",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/idle-00.png",
+      "bytes": 457969,
+      "sha256": "a8cbdfeabeba2ed934603f0cb35c881d97f780dfe6c7970724d0d956022123b7",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/idle-00.webp",
+      "bytes": 178616,
+      "sha256": "05d12a793b03a2e753fb20a20c385207c9ab8d328a1a2585019f66e1d8ec8cdf",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/idle-01.png",
+      "bytes": 453790,
+      "sha256": "aea5e1ecd8a241f1bf47d26c5d0cdcefecf4b477f18de757db113caf7cedea51",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/idle-01.webp",
+      "bytes": 179432,
+      "sha256": "9dadc67c0579d3c94d23bb132db7ded4a4531d4e930beb502df50f2f37b7bedb",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/idle-02.png",
+      "bytes": 455009,
+      "sha256": "6a53c5ff82b5edd13a3c9f6333f8f350f9c335ea4e37f2664790307a9f40efb9",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/idle-02.webp",
+      "bytes": 176026,
+      "sha256": "ce0caeef896f57a5155ccc558b53a2561f00bdb2fabcff2c71a9e01814cfe5a8",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/idle-03.png",
+      "bytes": 455530,
+      "sha256": "6bc7b8017d96eb91ea20a4cccf2ee42ece6c0f03b74db02cef4fd3426380bdd5",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/idle-03.webp",
+      "bytes": 181536,
+      "sha256": "adacd3fbdb6991e81494ebb451586277553d0355ad3818d5b4c63e933b7865f3",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/index.html",
+      "bytes": 3133,
+      "sha256": "a2935470eea666137c4d73b388d958fe1fef5bc44923af4a14a3e79ae619a27d",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/README.md",
+      "bytes": 1131,
+      "sha256": "bd4b82cc188d3243ff3bcc99378e6ffe8f490c3611a25767a627563a9acb1c29",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/sprite.json",
+      "bytes": 1198,
+      "sha256": "b1be1cf9ac358a93ef785dc96b2cd480fd91d85dcd63ca9c936455f6116ad133",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/bake.ps1",
+      "bytes": 744,
+      "sha256": "5d21a8c3beb6e533f9028b01a75f29ca1ce63cbf895b8997b19b909e78399083",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/base.png",
+      "bytes": 1300270,
+      "sha256": "8dcd450ea7216f78c51bb0cd47943edc20eb9b3e1c2ee8be33a33b87f0bd1439",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-000.png",
+      "bytes": 364478,
+      "sha256": "484895aa505493825202539d4b7cfadf7c63c33997633b7940982a6634dbc63f",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-001.png",
+      "bytes": 332907,
+      "sha256": "c1988ed15554ccfba08ef1c2c2188460a7ac3f44110570414f6f332ec8e3c182",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-002.png",
+      "bytes": 332889,
+      "sha256": "2113235d4e9c238e8e6748f59fd96b433b86302f89958eec50a2a8c9bdd9973f",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-003.png",
+      "bytes": 332782,
+      "sha256": "be2b9b251f88c557553c27b9f9826c5c49fd39f64beffe35b273cd6579e3f9c8",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-004.png",
+      "bytes": 332246,
+      "sha256": "74c30adef1c35f52e94814d36bedd465f3d536dc5ff1d2b35b7e76486d2c8eaa",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-005.png",
+      "bytes": 331656,
+      "sha256": "fca75aa55434d2585859ddfae523b0231a6cc7b6a9b3848f3d7a80652a6db414",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-006.png",
+      "bytes": 331354,
+      "sha256": "0cf04a9f1871c16851edfc98a66ed54e801a9b8d6fa0cb66285e1233835baa89",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-007.png",
+      "bytes": 330740,
+      "sha256": "6e64020d9aa7553a298c2e7daa914980085d46e849dcb24983cd381443c64d05",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-008.png",
+      "bytes": 329728,
+      "sha256": "cc1dc2af153541b84caf6cc353a9e23b6bf0772d640ed35d96d442c5317412f3",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-009.png",
+      "bytes": 328240,
+      "sha256": "e3be608e511925924f268a2a74f34cc114b29a7f2d00067a982493fb27dc4bd5",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-010.png",
+      "bytes": 328457,
+      "sha256": "413ec8811973d4c939ed550715e54ddd9a7d8e3b2284a294e84c8d3d5ab28c23",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-011.png",
+      "bytes": 329057,
+      "sha256": "25d97e123db885d72ac32f5965c78b633625ad600ad3cc90e858abac11e9c7b3",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-012.png",
+      "bytes": 330249,
+      "sha256": "650b7fb3c60368711c00e945aa47bdb18c9845b66e0b07d12cebc121fa023b1f",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-013.png",
+      "bytes": 332996,
+      "sha256": "42234720bdb238bd8436b17064a802361df3eeebea38f845f8cfc72d24422e5f",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-014.png",
+      "bytes": 331867,
+      "sha256": "f4e55c8b12c3f7097d5a9f4c934e8eebce25ccbc4c703c63ec738a9e60400381",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-015.png",
+      "bytes": 330868,
+      "sha256": "39464a954070755aca267cf3ef0e4d88457f1248f94398f3fda66dec5f9f8f2a",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-016.png",
+      "bytes": 329857,
+      "sha256": "f3b9d7e15f158cd9b86b9a2a763684c1d56681eec28f65dd6868d6f74c4801fa",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-017.png",
+      "bytes": 328490,
+      "sha256": "590944dcce4516a08b874be3e08ecdee938a53d3f5aa53557ace0dc1101294df",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-018.png",
+      "bytes": 329340,
+      "sha256": "46adb1e87d8d5b1d7bb7bd6acbd92cdc6b3b682e3a07c9bbe72d211e98f122de",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-019.png",
+      "bytes": 330865,
+      "sha256": "0ed85f71a257b107eee118ca1b8eeda03b83e16248321e0caa5015c20f639f9e",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-020.png",
+      "bytes": 333015,
+      "sha256": "923d652a6058f7b2335414e472e47fad40f70143c26bb3cab35f8042959e78c0",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-021.png",
+      "bytes": 331717,
+      "sha256": "83e8494d60833ea9fe14b1feebfcdf17995b451f94f10c46b3e63236df9a5de1",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-022.png",
+      "bytes": 330202,
+      "sha256": "6d81a5c6434905a9e5dd166c0f05a86abb43d58f7f28bae9e55717938afa6bd9",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-023.png",
+      "bytes": 329900,
+      "sha256": "0cad76895fa89c8c245fa1e46fe84e355789b207bd96a1b08d0f9615f5f2caa6",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-024.png",
+      "bytes": 329105,
+      "sha256": "667a70362028b3050f55b52f66f7f750b37090172af981f4a0f0dcfd5ee9fd05",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-025.png",
+      "bytes": 329711,
+      "sha256": "9da7b3d2c6bc859cec185f637cce8c66575d776904f3ba2400af6f57a7a617eb",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-026.png",
+      "bytes": 330736,
+      "sha256": "eb2be7cea389abcb33ccade2dd42f3cbbd49f71104b4fc5458bfec4095a3ff18",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-027.png",
+      "bytes": 331867,
+      "sha256": "419dfec67d23b5731e41fcce69f0106d2f824d39c1495288bf9d2ac5d4a7786d",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-028.png",
+      "bytes": 333040,
+      "sha256": "3f0a61393f9fc243560cecb776118027c722811ec9d054b3d7ec15aad8a85645",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-029.png",
+      "bytes": 332144,
+      "sha256": "2066c74ac30e027777d73786ff41f2d58fca0f731d0a08ec9d036db0e3390c0c",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-030.png",
+      "bytes": 331474,
+      "sha256": "8b0f2c33aebb4800745cc9608f1f4fa53348c3d1247e676747ef4d705676793f",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-031.png",
+      "bytes": 330552,
+      "sha256": "4d134c087c17a6c26d0aa671fd1eb8ac1b670969b19b5445d6562102bb8a857c",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-032.png",
+      "bytes": 330439,
+      "sha256": "2ad81d9d47c90905119741ad0ae76349f06872662d0b40cfb521f59b54118b68",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-033.png",
+      "bytes": 330486,
+      "sha256": "1ad69f65982b317d977d8f994e828d49e30bdf39d13e64a8ffc8cb447d213b64",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-034.png",
+      "bytes": 330293,
+      "sha256": "b24f65d0186f7a6430e3c1fb66a6df6f5eaeff61efc440b3d8e8b759ae21f989",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-035.png",
+      "bytes": 330216,
+      "sha256": "a74e1e5963c5e6e63b7a0f9a10cb6ba296121fd70353d11eba164920712bc250",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-036.png",
+      "bytes": 327876,
+      "sha256": "3b68904d0eb3abfbf03fae69930867f7b88fc77a57b3a91950936b82d8aee0ce",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-037.png",
+      "bytes": 330216,
+      "sha256": "a74e1e5963c5e6e63b7a0f9a10cb6ba296121fd70353d11eba164920712bc250",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-038.png",
+      "bytes": 330293,
+      "sha256": "b24f65d0186f7a6430e3c1fb66a6df6f5eaeff61efc440b3d8e8b759ae21f989",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-039.png",
+      "bytes": 330486,
+      "sha256": "1ad69f65982b317d977d8f994e828d49e30bdf39d13e64a8ffc8cb447d213b64",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-040.png",
+      "bytes": 330439,
+      "sha256": "2ad81d9d47c90905119741ad0ae76349f06872662d0b40cfb521f59b54118b68",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-041.png",
+      "bytes": 330552,
+      "sha256": "4d134c087c17a6c26d0aa671fd1eb8ac1b670969b19b5445d6562102bb8a857c",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-042.png",
+      "bytes": 331474,
+      "sha256": "8b0f2c33aebb4800745cc9608f1f4fa53348c3d1247e676747ef4d705676793f",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-043.png",
+      "bytes": 332144,
+      "sha256": "2066c74ac30e027777d73786ff41f2d58fca0f731d0a08ec9d036db0e3390c0c",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-044.png",
+      "bytes": 333040,
+      "sha256": "3f0a61393f9fc243560cecb776118027c722811ec9d054b3d7ec15aad8a85645",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-045.png",
+      "bytes": 331867,
+      "sha256": "419dfec67d23b5731e41fcce69f0106d2f824d39c1495288bf9d2ac5d4a7786d",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-046.png",
+      "bytes": 330736,
+      "sha256": "eb2be7cea389abcb33ccade2dd42f3cbbd49f71104b4fc5458bfec4095a3ff18",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-047.png",
+      "bytes": 329711,
+      "sha256": "9da7b3d2c6bc859cec185f637cce8c66575d776904f3ba2400af6f57a7a617eb",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-048.png",
+      "bytes": 329105,
+      "sha256": "667a70362028b3050f55b52f66f7f750b37090172af981f4a0f0dcfd5ee9fd05",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-049.png",
+      "bytes": 329900,
+      "sha256": "0cad76895fa89c8c245fa1e46fe84e355789b207bd96a1b08d0f9615f5f2caa6",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-050.png",
+      "bytes": 330202,
+      "sha256": "6d81a5c6434905a9e5dd166c0f05a86abb43d58f7f28bae9e55717938afa6bd9",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-051.png",
+      "bytes": 331717,
+      "sha256": "83e8494d60833ea9fe14b1feebfcdf17995b451f94f10c46b3e63236df9a5de1",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-052.png",
+      "bytes": 333015,
+      "sha256": "923d652a6058f7b2335414e472e47fad40f70143c26bb3cab35f8042959e78c0",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-053.png",
+      "bytes": 330865,
+      "sha256": "0ed85f71a257b107eee118ca1b8eeda03b83e16248321e0caa5015c20f639f9e",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-054.png",
+      "bytes": 329340,
+      "sha256": "46adb1e87d8d5b1d7bb7bd6acbd92cdc6b3b682e3a07c9bbe72d211e98f122de",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-055.png",
+      "bytes": 328490,
+      "sha256": "590944dcce4516a08b874be3e08ecdee938a53d3f5aa53557ace0dc1101294df",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-056.png",
+      "bytes": 329857,
+      "sha256": "f3b9d7e15f158cd9b86b9a2a763684c1d56681eec28f65dd6868d6f74c4801fa",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-057.png",
+      "bytes": 330868,
+      "sha256": "39464a954070755aca267cf3ef0e4d88457f1248f94398f3fda66dec5f9f8f2a",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-058.png",
+      "bytes": 331867,
+      "sha256": "f4e55c8b12c3f7097d5a9f4c934e8eebce25ccbc4c703c63ec738a9e60400381",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-059.png",
+      "bytes": 332996,
+      "sha256": "42234720bdb238bd8436b17064a802361df3eeebea38f845f8cfc72d24422e5f",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-060.png",
+      "bytes": 330249,
+      "sha256": "650b7fb3c60368711c00e945aa47bdb18c9845b66e0b07d12cebc121fa023b1f",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-061.png",
+      "bytes": 329057,
+      "sha256": "25d97e123db885d72ac32f5965c78b633625ad600ad3cc90e858abac11e9c7b3",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-062.png",
+      "bytes": 328457,
+      "sha256": "413ec8811973d4c939ed550715e54ddd9a7d8e3b2284a294e84c8d3d5ab28c23",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-063.png",
+      "bytes": 328240,
+      "sha256": "e3be608e511925924f268a2a74f34cc114b29a7f2d00067a982493fb27dc4bd5",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-064.png",
+      "bytes": 329728,
+      "sha256": "cc1dc2af153541b84caf6cc353a9e23b6bf0772d640ed35d96d442c5317412f3",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-065.png",
+      "bytes": 330740,
+      "sha256": "6e64020d9aa7553a298c2e7daa914980085d46e849dcb24983cd381443c64d05",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-066.png",
+      "bytes": 331354,
+      "sha256": "0cf04a9f1871c16851edfc98a66ed54e801a9b8d6fa0cb66285e1233835baa89",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-067.png",
+      "bytes": 331656,
+      "sha256": "fca75aa55434d2585859ddfae523b0231a6cc7b6a9b3848f3d7a80652a6db414",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-068.png",
+      "bytes": 332246,
+      "sha256": "74c30adef1c35f52e94814d36bedd465f3d536dc5ff1d2b35b7e76486d2c8eaa",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-069.png",
+      "bytes": 332782,
+      "sha256": "be2b9b251f88c557553c27b9f9826c5c49fd39f64beffe35b273cd6579e3f9c8",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-070.png",
+      "bytes": 332889,
+      "sha256": "2113235d4e9c238e8e6748f59fd96b433b86302f89958eec50a2a8c9bdd9973f",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-071.png",
+      "bytes": 332907,
+      "sha256": "c1988ed15554ccfba08ef1c2c2188460a7ac3f44110570414f6f332ec8e3c182",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/index.html",
+      "bytes": 3251,
+      "sha256": "3826d5a466e2ac3cec4f0bc07b33156f8deaa7622b95a8a54342292d3ab92bf8",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/pack_sprite.py",
+      "bytes": 2222,
+      "sha256": "78a294edf5e3573f14825359abd0a19c7c01fb59d8168b516e9b80958e4211c8",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/request.json",
+      "bytes": 1694,
+      "sha256": "e45173c93fe67e840f5fee1edff08a158759a64a4e815f604b9fd086bea12fa3",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/sprite.json",
+      "bytes": 1814,
+      "sha256": "f25cffa36477d875f032c59b69bbdcde61f51381d72578cf2284e8d899822328",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/validation.json",
+      "bytes": 168,
+      "sha256": "5a35a96ff15649c79567ad9b12e0192436d3f030c37c6b0fa1aadac392e5e43b",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/wu-idle-preview.gif",
+      "bytes": 4485465,
+      "sha256": "16c06a0d05e6f9e186965500a78dd45cd2164eda1a76d22ba037e63ef252d77f",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/wu-idle-preview.webp",
+      "bytes": 2616452,
+      "sha256": "41878b7f155334d29a9b0d1867ccfa92d389767f27af684fbbc9e3561d9387c0",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/wu-idle-sheet.png",
+      "bytes": 10218796,
+      "sha256": "51d7be5d257a664f12733b664ac845b75a2b77067ffe55300785576cd4880e34",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/v2/wu-idle-sheet.webp",
+      "bytes": 4811240,
+      "sha256": "eebde5274f9beb5569865bd60944c8d9bb98599db9514aaac22cc32f452c13ad",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/wu-idle-preview.gif",
+      "bytes": 532073,
+      "sha256": "a45418e6c6ed9894ec159aedae3dd5cef673fdcadb8aab1e926b48c3203dd629",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/wu-idle-preview.webp",
+      "bytes": 1475794,
+      "sha256": "89fad6ea86470970ca60129719c403b03dc39b580157aa325f405223e58556bf",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/wu-idle-sheet.png",
+      "bytes": 1815835,
+      "sha256": "b620082eca020ac320c4fa464912bc447badf21f0fdc5dec72131e65272b6c40",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/wu-idle-sprite-20261009/wu-idle-sheet.webp",
+      "bytes": 724772,
+      "sha256": "cdf2a25115936439b133410d7c5049c675c616837fde7809149f2ba75b115d89",
+      "localOnly": false
+    }
+  ]
+}

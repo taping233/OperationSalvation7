@@ -1,0 +1,121 @@
+{
+  "asset": "reconstruction/wallpaper-wu-1004.webp",
+  "manifestMatched": true,
+  "targetIssues": [],
+  "otherErrors": [
+    {
+      "code": "unlisted",
+      "path": "cards/spell-tt3-holy-water.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "bb00ab50a57ce14f0c048d4114796be579f44f085290f63f05755ad8c7f27752"
+    },
+    {
+      "code": "unlisted",
+      "path": "fonts/oxanium-latin-500-normal.woff2",
+      "detail": "no manifest registration",
+      "fingerprint": "e6557f4937872b04368e2446d69f632502a1468bfb91d7805cac76132834d387"
+    },
+    {
+      "code": "unlisted",
+      "path": "fonts/oxanium-latin-700-normal.woff2",
+      "detail": "no manifest registration",
+      "fingerprint": "82ad27dfd372fd972ca2d7b1e0af88334889c403a0effc38708ec4864fd34ca9"
+    },
+    {
+      "code": "unlisted",
+      "path": "fonts/rajdhani-latin-600-normal.woff2",
+      "detail": "no manifest registration",
+      "fingerprint": "6b32075f181ee1f56b869246b12f0f1ab948c843dfc59870ef275090198d7df7"
+    },
+    {
+      "code": "unlisted",
+      "path": "fonts/rajdhani-latin-700-normal.woff2",
+      "detail": "no manifest registration",
+      "fingerprint": "a50e2512113ac313be10f257bcf6f79f8b268846cc41da1cc338eb08c77623de"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/barcode.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "fc5a5a686bfb2e2cad3f232fd522f7f8949f5271b169e37f4e3e9b2c4ac6e890"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/chevrons.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "db7bd493093401cab805e8aac0e41ade1b26b73dc0a574bf40af57599baf770d"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/corner.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "1a4e50879262ce5b72711b60fbc6a03513b261aaaedcb7008170581bf064a0a7"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/dot-matrix.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "1bb32b749b060d0c777eda4abc84557971988db02f0e8aa5bef34d753d7dc999"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/frame-cut.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "8781fb21d5446d3aa01a9b3869324de17f832efb6cbff1252888333bd7eac888"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/grid-fine.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "2dba5dce28be93bf84304af2abc9f43adb5d5b6b0533e7b2d6a1082156713827"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/hatch.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "cd0c909672eab5e7cdb251db90f392b0d0dcece612b0d0443afb18c329eed4e4"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/hazard.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "0a61a916a1b78d9d875c6ba3a39711a8a05a2f4274bbbb928ceafe81499dd6be"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/hex-tile.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "a68aa2984624dc8695317a5354943be2df26ab4b4704bbfdbf8f88a03e5c0fcc"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/noise.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "3885d26f12ecc5fe90c0efcb3921110970ca9c385426db5f202bc2e4a69dced4"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/rhodes-mark.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "9576aad4185c68dad680b432828ed4bd14c421d2cc63525ce2572d990f4f92ed"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/scanline.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "9f6f2dfd5b7d01d7340d8469013f0c5b6e293ec44565b941535ee325bb3de334"
+    }
+  ],
+  "tests": "title-wallpaper 5/5 passed",
+  "browser": {
+    "url": "http://127.0.0.1:5200/",
+    "window": [
+      1523,
+      956
+    ],
+    "wallpaper": "snow",
+    "cache": "snow-expanded-1009",
+    "consoleErrors": 0,
+    "input": "新建内置浏览器页并刷新；只读DOM与截图"
+  }
+}
