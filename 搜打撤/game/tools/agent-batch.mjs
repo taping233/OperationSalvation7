@@ -49,6 +49,10 @@ async function installSeedService() {
   });
 }
 const POLICY = argOf('policy', 'greedy');
+if (!['greedy', 'random', 'llm'].includes(POLICY)) {
+  console.error(`[agent-batch] 未知策略：${POLICY}（可用：greedy、random、llm）`);
+  process.exit(2);
+}
 const OUT_DIR = resolve(process.cwd(), argOf('out', 'output/agent/'));
 const MAX_STEPS = parseInt(argOf('max-steps', '2000'), 10) || 2000;
 const DRIVER = argOf('driver', POLICY);
@@ -77,10 +81,16 @@ const pushText = (bucket, detail) => {
   bucket.push(text);
   if (bucket.length > 40) bucket.shift();
 };
-process.on('unhandledRejection', (e) => pushText(errorBucket, `[unhandledRejection] ${e && (e.stack || e.message) || e}`));
-process.on('uncaughtException', (e) => pushText(errorBucket, `[uncaughtException] ${e && (e.stack || e.message) || e}`));   // 记录但不杀进程，继续跑批
 const rawConsoleError = console.error.bind(console);
 console.error = (...args) => { pushText(errorBucket, `[console.error] ${args.map(String).join(' ')}`); rawConsoleError(...args); };
+const reportUnhandled = (kind, error) => {
+  const detail = error && (error.stack || error.message) || error;
+  pushText(errorBucket, `[${kind}] ${detail}`);
+  rawConsoleError(`[agent-batch] ${kind}:`, detail);
+  process.exitCode = 1;
+};
+process.on('unhandledRejection', error => reportUnhandled('unhandledRejection', error));
+process.on('uncaughtException', error => reportUnhandled('uncaughtException', error));
 
 const dom = new JSDOM(`<!DOCTYPE html><html><body>${body}</body></html>`, {
   url: 'http://localhost/',
@@ -91,6 +101,8 @@ const dom = new JSDOM(`<!DOCTYPE html><html><body>${body}</body></html>`, {
   }),
 });
 const win = dom.window;
+const NodeAbortController = globalThis.AbortController;
+const NodeAbortSignal = globalThis.AbortSignal;
 const define = (name, value) => {
   try { Object.defineProperty(globalThis, name, { value, configurable: true, writable: true }); }
   catch { /* 已有只读全局：跳过 */ }
@@ -99,7 +111,7 @@ for (const key of [
   'window', 'document', 'navigator', 'localStorage', 'sessionStorage', 'location',
   'HTMLElement', 'HTMLCanvasElement', 'Element', 'Node', 'NodeFilter', 'Event', 'CustomEvent',
   'getComputedStyle', 'requestAnimationFrame', 'cancelAnimationFrame', 'DOMParser',
-  'Image', 'Blob', 'FileReader', 'MutationObserver',
+  'Image', 'Blob', 'FileReader', 'MutationObserver', 'AbortController', 'AbortSignal',
 ]) {
   if (win[key] !== undefined) define(key, win[key]);
 }
@@ -113,12 +125,24 @@ define('matchMedia', win.matchMedia || ((query) => ({ matches: false, media: que
 // 旧回落写成恒拒绝——注释承诺的「其他 URL 透传」从未成立，llm 批跑的绝对地址
 // 端点永远打不出去（decide 静默退化贪心）。按原意图回落 Node 原生 fetch。
 const nativeFetch = typeof fetch === 'function' ? fetch.bind(globalThis) : null;
+const useNativeFetch = !win.fetch && !!nativeFetch;
 const realFetch = win.fetch ? win.fetch.bind(win)
   : nativeFetch || (() => Promise.reject(new Error('jsdom 无 fetch 且无原生 fetch')));
 win.fetch = (input, init) => {
   const url = typeof input === 'string' ? input : (input && input.url) || String(input);
   if (String(url).includes('version.json')) {
     return Promise.resolve({ ok: true, status: 200, json: async () => ({ version: '0.0.0' }), text: async () => '{"version":"0.0.0"}' });
+  }
+  // jsdom 的 signal 可用于 DOM 事件；Node fetch 只接受 Node 自己的 AbortSignal。
+  if (useNativeFetch && init?.signal && NodeAbortController && NodeAbortSignal
+      && !(init.signal instanceof NodeAbortSignal)) {
+    const source = init.signal;
+    const controller = new NodeAbortController();
+    const abort = () => controller.abort(source.reason);
+    if (source.aborted) abort();
+    else source.addEventListener('abort', abort, { once: true });
+    return Promise.resolve().then(() => realFetch(input, { ...init, signal: controller.signal }))
+      .finally(() => source.removeEventListener('abort', abort));
   }
   return realFetch(input, init);
 };
@@ -311,7 +335,7 @@ const cleanup = async () => {
 // 旧写法 Agent.policies['llm'] 落空后静默回落 greedy，记录却标 llm——假 LLM 数据。
 // 配置完整性由上方 fail-fast 把守，这里按名取正确的决策工厂。
 const policyFactory = POLICY === 'llm' ? Agent.llm.decide
-  : (Agent.policies[POLICY] || Agent.policies.greedy);
+  : Agent.policies[POLICY];
 const DEBUG_STEPS = parseInt(argOf('debug-steps', '0'), 10) || 0;
 if (DEBUG_STEPS) globalThis.__sigdbg = true;
 const SCDBG = argOf('scdbg', '0') === '1';
@@ -593,4 +617,4 @@ if (summary.deathBucket && Object.keys(summary.deathBucket).length) {
   const top = Object.entries(summary.deathBucket).sort((a, b) => b[1] - a[1]).slice(0, 6);
   console.log(`[agent-batch] 死因分桶: ${top.map(([k, v]) => `${k}=${v}`).join(' · ')}`);
 }
-process.exit(0);
+process.exit(process.exitCode || 0);
