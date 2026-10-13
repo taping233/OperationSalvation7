@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-friday-runtime-assets-1014",
+  "date": "2026-10-14",
+  "owner": "Friday",
+  "goal": "修复现有运行包两张场景图的可复现分发，保持图片原字节与私有范围",
+  "paths": [
+    "game/assets/scenes/battle/winter-transit-1011/.gitignore",
+    "game/assets/scenes/battle/winter-transit-1011/far.webp",
+    "game/assets/scenes/shop/.gitignore",
+    "game/assets/scenes/shop/shop-cardstyle-approved-1011.webp",
+    "docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/README.md"
+  ],
+  "doneWhen": [
+    "两张运行图指纹与制作回执一致且进入正常Git提交",
+    "定向冻结门通过并正常推送，归档输入包含两张图"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "两张原图与原回执SHA吻合，五文件隔离quick门通过，已正常提交推送e2e42ec3并核对远端",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "最终归档与Library上传由同会话随后交付，实际ID和最终SHA以平台结果为准；未做新的视觉验收或自然游玩"
+  ],
+  "updatedAt": "2026-10-13T17:53:39.090Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

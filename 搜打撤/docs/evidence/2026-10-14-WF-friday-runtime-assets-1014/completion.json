@@ -1,0 +1,20 @@
+{
+  "receipt": {
+    "acquisition": "本项目工作区对应相对路径；大于1MB原报告不入Git",
+    "path": "docs\\evidence\\2026-10-14-WF-friday-runtime-assets-1014\\2026-10-13T17-50-31.504Z-f157ed90-staged.json",
+    "bytes": 3291051,
+    "sha256": "1db2d7ab6eeb41c5845aca000b82b8a8df908dc436cd13756a3715fe308b5bd3"
+  },
+  "sourceCommit": "e2e42ec3ed889ca8bd3e712738f2352319eea4eb",
+  "remoteConfirmed": "origin/master",
+  "validation": "passed",
+  "secretScan": {
+    "skipped": 0,
+    "paths": 5,
+    "bytes": 2443249,
+    "findings": 0
+  },
+  "vitest": "skipped by asset-only selection",
+  "mode": "quick",
+  "archiveAndLibrary": "随后交付，平台结果未在本工程记录预先确认"
+}

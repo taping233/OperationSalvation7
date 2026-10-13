@@ -12,3 +12,5 @@ CI 对 `c6d9848c3703cbeab53b071d0c8473e653363c99` 暴露两张运行图未进入
 另已只读核对旧档的两份本地原稿：`workflow-completion-2026-09-30/originals/docs/production/engineering/MAKER-HANDBOOK.md` 为4425字节，SHA256 `39d23cbc584ee93b039fb0caf7cecf0cd93b50eb875e63bb900e227e47935006`；`originals/AGENTS.md` 为3588字节，SHA256 `64de3328036ec86faca20cbc7eeb9ac63d120dc6dc9de44c9467f20db8fb0ed1`。两份都与旧清单期望一致。原始字节单独保存在本地 `.tmp/friday-original-archive-bytes-1014/`，供同用户交接，不修改旧清单、原稿或行尾策略；远端历史差异由云端继续处理。
 
 验证与远端结果以相邻任务记录和本轮最终交付为准；原有完整质量门证据见[运行包记录](../2026-10-14-WF-friday-runtime-ship-1013/README.md)，本轮不重跑全量测试。平台内置浏览器此前不可用，未声称自然游玩或新的视觉验收通过。
+
+补图工程阶段已正常提交并推送至私有 `origin/master`：`e2e42ec3ed889ca8bd3e712738f2352319eea4eb`，远端 SHA 已核对。隔离 quick 门通过语法、数据、8组类型契约、lint及增量素材检查；本轮纯资产变更按门选取跳过 Vitest，未重跑全量。原 hook 精确复用收据，不使用跳过变量。秘密扫描覆盖全部5个暂存文件、2443249字节，0命中、0跳过。摘要见相邻 `completion.json`；归档和 Library 交付结果由本轮随后完成并以最终平台返回为准。
