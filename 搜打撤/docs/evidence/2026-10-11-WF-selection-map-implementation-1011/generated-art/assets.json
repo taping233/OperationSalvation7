@@ -1,0 +1,54 @@
+[
+  {
+    "key": "small",
+    "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a12a56-fff8-7393-a312-6f8f01036d55\\exec-a6dd0ed1-3ba3-4628-b67c-8bc626946f66.png",
+    "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/generated-art/source/small-selected.png",
+    "sourceBytes": 838387,
+    "sourceSha256": "a39c125f3d58a5412c82e0dac599ab744d6b51ce6c514d9084872c04c599e952",
+    "runtime": "game/assets/scenes/rewards/chest-small-1011-v2.webp",
+    "bytes": 526708,
+    "sha256": "ed43f22a4fbb9af6977e22bf17e7b642ee928174839918164d4eed93467e3f8a",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "alphaBBox": [
+      0,
+      71,
+      1041,
+      1119
+    ],
+    "encoding": "WebP",
+    "tool": "built-in image_gen",
+    "conversion": "Pillow WebP encoding only; no repaint/composite/resize",
+    "status": "rejected-by-user-not-adopted",
+    "decision": "User rejected snow chest / unlayered battle wallpaper and style mismatch; do not integrate."
+  },
+  {
+    "key": "battle",
+    "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a12a56-fff8-7393-a312-6f8f01036d55\\exec-bb45f0eb-dfd7-472e-9e26-80b598e8a0ae.png",
+    "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/generated-art/source/battle-selected.png",
+    "sourceBytes": 2289868,
+    "sourceSha256": "e02e78b1868429c4e05fee6cafb64cfa593c133ea307227b4af5c728dfadead1",
+    "runtime": "game/assets/scenes/battle/winter-street-1011-v2.webp",
+    "bytes": 213906,
+    "sha256": "49df9916f15b71439edb975ea83d944df8265b64545e67d57615f4b9f315f10a",
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGB",
+    "alphaExtrema": null,
+    "alphaBBox": null,
+    "encoding": "WebP",
+    "tool": "built-in image_gen",
+    "conversion": "Pillow WebP encoding only; no repaint/composite/resize",
+    "status": "rejected-by-user-not-adopted",
+    "decision": "User rejected snow chest / unlayered battle wallpaper and style mismatch; do not integrate."
+  }
+]

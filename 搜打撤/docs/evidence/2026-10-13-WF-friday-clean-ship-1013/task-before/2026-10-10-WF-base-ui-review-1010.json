@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-base-ui-review-1010",
+  "date": "2026-10-10",
+  "owner": "Friday",
+  "goal": "对照明日方舟仓库、绝区零与1999，重做基地和二级页；按内容清楚、点击符合预期、统一手绘块面逐片比较迭代",
+  "paths": [
+    "game/src/hub/game.hub.js",
+    "game/src/hub/hub.warehouse.js",
+    "game/src/hub/hub.personnel.js",
+    "game/src/hub/hub.presentation.js",
+    "game/src/hub/hub.facilities.js",
+    "game/src/hub/hub.archive.js",
+    "game/src/hub/hub.visuals.js",
+    "game/src/hub/game.hub.pages.js",
+    "game/src/hub/game.hub.depart.js",
+    "game/css/base-camp-rework.css"
+  ],
+  "doneWhen": [
+    "六入口及人物、伙伴、仓库、补给、扩建、档案二级页完成统一呈现；关键点击链和立绘换图实页通过；相关定向检查通过或明确独立阻塞"
+  ],
+  "stage": "planned",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "已用Codex内置浏览器实际审阅基地六入口和相关二级状态，对照方舟仓库/干员/基建、绝区零、1999参考；评估与计划已保存",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "docs-check.json；现行文档检查退出码0",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "老板最新要求先完成评估与计划：产品源码和素材尚未修改接入，完整整改与实施后复核仍未完成",
+    "两张宠物样稿均未接入；第一稿否决，第二稿需纠正蓝眼和虎牙的人设混用后再比较",
+    "未覆盖真实资产交易、满仓、非空复原、已记录故事；未做实施后游戏测试与性能比较"
+  ],
+  "updatedAt": "2026-10-10T14:45:47.986Z"
+}

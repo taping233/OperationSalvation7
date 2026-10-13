@@ -1,0 +1,545 @@
+{
+  "status": "implemented-unverified-per-user",
+  "uniqueTextures": 63,
+  "dimensions": [
+    768,
+    512
+  ],
+  "sequences": {
+    "idle": 72,
+    "atk": 12,
+    "hurt": 19,
+    "death": 28,
+    "cast": 12
+  },
+  "durationMs": {
+    "idle": 3000,
+    "atk": 500,
+    "hurt": 792,
+    "death": 1167,
+    "cast": 500
+  },
+  "assets": [
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f000.webp",
+      "ext": "webp",
+      "bytes": 217306,
+      "sha256": "f7df78ee7bc717f0bcb42a7b1e22334043360e8624801845adf7d04a5acc234e",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f001.webp",
+      "ext": "webp",
+      "bytes": 216350,
+      "sha256": "448657ff06c669b478eea526a972cd9554175a77083bf48bfaf7a9ac3a9e58bd",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f002.webp",
+      "ext": "webp",
+      "bytes": 216494,
+      "sha256": "13f5c5601db3dc3bbe0a2ae18933d7e044bef12a7041eae7eaf52e52a30ee41f",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f003.webp",
+      "ext": "webp",
+      "bytes": 216450,
+      "sha256": "d36c1629c0760f2e43ef36de74faf1b5654fc9a7f381ab33bc2808b11f02de65",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f004.webp",
+      "ext": "webp",
+      "bytes": 216452,
+      "sha256": "4f5731ab995c62a9b570aad2486da3c23b133f8162f2bae975dc51f9d54c6444",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f005.webp",
+      "ext": "webp",
+      "bytes": 216316,
+      "sha256": "c2368cedf4dd743c289054bc972174ad7ead46f205effb3c629e65e7c6230f61",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f006.webp",
+      "ext": "webp",
+      "bytes": 216356,
+      "sha256": "27dcbfd1035c6017ae748c7e92e27c90fb4c6a00056483db71891c2a0daada87",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f007.webp",
+      "ext": "webp",
+      "bytes": 216302,
+      "sha256": "34b6c4aa279b736c5543c3c2a2abd3cbeca3bdb0c4a7fa28de70d00470dc2e2d",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f008.webp",
+      "ext": "webp",
+      "bytes": 216174,
+      "sha256": "9b610acb59ecc4ea00404d994bfa8a6b729c845fb928958c85493f7c10ffae68",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f009.webp",
+      "ext": "webp",
+      "bytes": 216278,
+      "sha256": "439b05fb8c3e3eba4fed6af3013230699681c7ecf9f5b8e1cedf370179398e3e",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f010.webp",
+      "ext": "webp",
+      "bytes": 215934,
+      "sha256": "8621ca64dde78d5723512935a93954e5a2f778c7735573c206252e2d9071b989",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f011.webp",
+      "ext": "webp",
+      "bytes": 216348,
+      "sha256": "73dffa601b67db19f398f7de786bb0343544178643c142eec08e28fee83a8569",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f012.webp",
+      "ext": "webp",
+      "bytes": 215994,
+      "sha256": "40c3681dd1e216a7e51bc70f4b1fc15824dcd226d550120cf8ccb8e6912ffaae",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f013.webp",
+      "ext": "webp",
+      "bytes": 215940,
+      "sha256": "31ff66c3c705d5452547e6a9fab7c0a6ccedc610505ff56ae11a9082085d2d5f",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f014.webp",
+      "ext": "webp",
+      "bytes": 216176,
+      "sha256": "782f6e37b3d06eb7d4e39fd1a3d98a89fdcefe6d6e77e814c4b285ba00553502",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f015.webp",
+      "ext": "webp",
+      "bytes": 216158,
+      "sha256": "ae60907069bf13916298daa3f7944f3a40aab349c9232a4055247e13e90fa9b3",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f016.webp",
+      "ext": "webp",
+      "bytes": 216060,
+      "sha256": "94e245f39ea350aa953820892020783c74891dc4136e225a27853c642899e54e",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f017.webp",
+      "ext": "webp",
+      "bytes": 216112,
+      "sha256": "05c4718f3fc260062c2458bf71f92590da0d73e193b691c5b311613cf65799f1",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f018.webp",
+      "ext": "webp",
+      "bytes": 216038,
+      "sha256": "4dc3ecb4636af51c44f314ba65ec7b68951ea6b7b437c9eeeb78ee4ccc66b40e",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f019.webp",
+      "ext": "webp",
+      "bytes": 216044,
+      "sha256": "34a65d279df2f982726f2b8466fd3ce7b89bd30235021b5ab25dac829407c0d9",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f020.webp",
+      "ext": "webp",
+      "bytes": 216274,
+      "sha256": "92b318cc95ab8d3d650f2b9b64d2c90271d86ca84b20802816bd78af98c276fc",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f021.webp",
+      "ext": "webp",
+      "bytes": 216056,
+      "sha256": "3d6c4fe1744f08f0f2f85d5562362f7d27e656b002bee4e1502a36613f7f07e3",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f022.webp",
+      "ext": "webp",
+      "bytes": 216254,
+      "sha256": "49df67f7b4b70100d1a2e13d0bc71f4dc9afb1eb8ef25245e0a6ba4dc0fd8b30",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f023.webp",
+      "ext": "webp",
+      "bytes": 216294,
+      "sha256": "fa66d7e8074b2faac141b784f9f01be5bbc1345690a97cc199125c082066ea3f",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f024.webp",
+      "ext": "webp",
+      "bytes": 215990,
+      "sha256": "c8f42e11c3ff25ebeea577d77f15a59bae8c3d0c92a0577d9655a5d1158d723b",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f025.webp",
+      "ext": "webp",
+      "bytes": 216138,
+      "sha256": "4acd224dde00ea8ceb28da16fb685b9346ac135d112fd81fe60d7a34310e6912",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f026.webp",
+      "ext": "webp",
+      "bytes": 216052,
+      "sha256": "b0285f71bdd8383b1a1bf64bb823a2f41aabad0a0a626fd999008738782c9f27",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f027.webp",
+      "ext": "webp",
+      "bytes": 216246,
+      "sha256": "62bf3fc84f5fc693a4de8fa4a16d84e45f3a42dcecdebf7bd0d1960ab37e17b6",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f028.webp",
+      "ext": "webp",
+      "bytes": 216326,
+      "sha256": "57bfb8377915e043044ad6748143c2d83ab861ed903e7a6a9808312541e5c23c",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f029.webp",
+      "ext": "webp",
+      "bytes": 216094,
+      "sha256": "f3d3218394c8da9b9579d7c5d55f5bd7319b4f9ecd237dce001b99e2d6e4915a",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f030.webp",
+      "ext": "webp",
+      "bytes": 216324,
+      "sha256": "d73d7c00c4bd63db14c5ae01c19e3bbecdde124bde2084454fe567d948e45a68",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f031.webp",
+      "ext": "webp",
+      "bytes": 216352,
+      "sha256": "ad525d37718deb4526a29021939353ae7ea96115f521545dd78d2191ab0fa0dc",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f032.webp",
+      "ext": "webp",
+      "bytes": 216060,
+      "sha256": "7bb2a79a4160709e3d7d5b702b4b0b319d8ea0f4eba85481d75586437470167c",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f033.webp",
+      "ext": "webp",
+      "bytes": 216296,
+      "sha256": "dddeca5ccf8a34ae94b228014de5034151c3da97ff160908b790884f2416b368",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f034.webp",
+      "ext": "webp",
+      "bytes": 216120,
+      "sha256": "d18bee6eec1a7e1fbe968bc489e159100fbaae85303da31df783dcaa2cceb629",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f035.webp",
+      "ext": "webp",
+      "bytes": 216078,
+      "sha256": "7fadbfbe21f899d95167d7467bdf6f82118c7807878be8ed0697a9211da12524",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f036.webp",
+      "ext": "webp",
+      "bytes": 215960,
+      "sha256": "145aeb31a26920d3ec157b5516add4de1566d2b2f8c20d97e286a53a0842bd9f",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f037.webp",
+      "ext": "webp",
+      "bytes": 217992,
+      "sha256": "2ba328270d3a96928cd44161ed0e92b95b94e13e067a8fa70407063133d34e09",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f038.webp",
+      "ext": "webp",
+      "bytes": 220542,
+      "sha256": "cd3b1414314d0821d7b0adcb84c85cff2d25c915cc2f58fe08f75742386e09a9",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f039.webp",
+      "ext": "webp",
+      "bytes": 217716,
+      "sha256": "63393c8519afcb2d2f37f853cab3c6ee0157f1fcf6de2f8af3c32e00d68870ca",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f040.webp",
+      "ext": "webp",
+      "bytes": 175744,
+      "sha256": "f3d94519e1a82221c92d73a0bb1eb69fe748076fe6081f6fe63798a43989697d",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f041.webp",
+      "ext": "webp",
+      "bytes": 174096,
+      "sha256": "339ef7e9b1b83aef6e3ab2dbb216fdc92c0152b950cc24bd96e30b629fd2b4be",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f042.webp",
+      "ext": "webp",
+      "bytes": 175088,
+      "sha256": "ecb1546fb89fbae6beef4823b3fb33b89aa83808380aaa2b7860ef08b628562b",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f043.webp",
+      "ext": "webp",
+      "bytes": 189102,
+      "sha256": "36ad5ddabb269e278b2c5267803801f3f359e0959895bc75749ba7b2f252a7df",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f044.webp",
+      "ext": "webp",
+      "bytes": 176272,
+      "sha256": "ea6a69ce888bb12529d4b53a7e11844c3ff24e397dd6e6d9cffb892aa51b0c18",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f045.webp",
+      "ext": "webp",
+      "bytes": 176120,
+      "sha256": "432b35bee4521f86f901a06bc40a568e9e1fdcc07507e4fd61be61de31e6b482",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f046.webp",
+      "ext": "webp",
+      "bytes": 176228,
+      "sha256": "281d59db77438b4590805e9a4630fd404ddcc1ef2d85731453116779c7898772",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f047.webp",
+      "ext": "webp",
+      "bytes": 173712,
+      "sha256": "501bced5eab399423a75df8ad5671dd3c66b3c7a1f1f03398e76f29b8e05dd11",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f048.webp",
+      "ext": "webp",
+      "bytes": 174852,
+      "sha256": "08a35b9581ce44898c333db70c30d971c3b56aa192b2d668f74ae15d4acddf3e",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f049.webp",
+      "ext": "webp",
+      "bytes": 175514,
+      "sha256": "c75d1276031acb33ec28e05b6ca61f34b97429e0a454bd36c76cd1372ba2e60f",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f050.webp",
+      "ext": "webp",
+      "bytes": 189360,
+      "sha256": "73ae9ee428ac6132861782113cb38020e73b50af033b41aba93a263eb7d1370c",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f051.webp",
+      "ext": "webp",
+      "bytes": 175570,
+      "sha256": "3c345dc64244a5bd68573736b4b9af4323026d62f19a564c8baab3f2d9e939bc",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f052.webp",
+      "ext": "webp",
+      "bytes": 174902,
+      "sha256": "466f8a4dd9597f0a79c314e657f2cb82c723def2bc4cbe36ea2f5b46344de4a1",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f053.webp",
+      "ext": "webp",
+      "bytes": 174508,
+      "sha256": "f893555c30fec7cfef3b0447805a480ee83e299f6398e3c4beee8c56981d0c8d",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f054.webp",
+      "ext": "webp",
+      "bytes": 176774,
+      "sha256": "a4f9aafe4ffe020da8d9603bd4719f646363e9e1b30cd47f59bc5cc4b57c9680",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f055.webp",
+      "ext": "webp",
+      "bytes": 178140,
+      "sha256": "1a3f007048e5d4f3d6859696b559799ae272c12d7e1f249cdb2a269948b463d5",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f056.webp",
+      "ext": "webp",
+      "bytes": 180328,
+      "sha256": "2daf37b9f3534ef2778985fd3ace279a79bcfc7403db770cd3e2b500c609aca9",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f057.webp",
+      "ext": "webp",
+      "bytes": 122304,
+      "sha256": "8ef3ef332a80ad35694547604f84d00781319bef5a61d81eda5ac2a5d1c8219b",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f058.webp",
+      "ext": "webp",
+      "bytes": 128730,
+      "sha256": "63d423f8648da4785f9831ff6e76f15017f5cc91eedf3919aefad63ac021b573",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f059.webp",
+      "ext": "webp",
+      "bytes": 104992,
+      "sha256": "c3a53adb82ae2186bae82c6ef62c726cbda57202746f7578c1f364768ddc34cc",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f060.webp",
+      "ext": "webp",
+      "bytes": 108404,
+      "sha256": "19a49855c7ab137c405e7511baa3a93e0d325cb8c716d5d31ab93f852aa199cf",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f061.webp",
+      "ext": "webp",
+      "bytes": 89904,
+      "sha256": "ec28ab88bd4451ab0b630e530f2643bcd93517b15492f18539f0456038700a4a",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/f062.webp",
+      "ext": "webp",
+      "bytes": 81690,
+      "sha256": "957dd036fa67cc23d5045b5c7c16c4429a7d9e2d1fa8f9cd6402ad9fa8b75731",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/neutral.webp",
+      "ext": "webp",
+      "bytes": 217306,
+      "sha256": "f7df78ee7bc717f0bcb42a7b1e22334043360e8624801845adf7d04a5acc234e",
+      "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    },
+    {
+      "path": "portraits/battle/changwuyu.webp",
+      "ext": "webp",
+      "bytes": 217306,
+      "sha256": "f7df78ee7bc717f0bcb42a7b1e22334043360e8624801845adf7d04a5acc234e",
+      "license": "项目自有（认可Sprite待机基准）",
+      "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
+    }
+  ],
+  "checks": "按老板停止检查要求，未新增验证"
+}

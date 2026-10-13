@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "starter-attack",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-727b6144-4f96-4357-9022-d900484b9496.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-basicattack/cards-expedition-starters-basic-attack-source.png",
+        "bytes": 1677323,
+        "sha256": "6503f60493c54effd387e99e72fa4435a0dbe3b677fe8ee5bc8eccaba519abcf"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-basicattack/cards-expedition-starters-basic-attack-full-before.webp",
+          "bytes": 31098,
+          "sha256": "53dea24ee26429da15f5cc24faa202f20a55012ac122fce6c042e9ad07478c15"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-basicattack/cards-expedition-starters-basic-attack-thumb-before.webp",
+          "bytes": 7280,
+          "sha256": "be94f7b043fa248160471b78c8720fa75a6c230a97a91835f32f9bc19c727bed"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/expedition-starters/basic-attack.webp",
+          "bytes": 73920,
+          "sha256": "2aaee25e9d22346de240f3bce32595ef9acac900023b1d9ee98888bf83e6d676",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/expedition-starters/basic-attack.webp",
+          "bytes": 9586,
+          "sha256": "a7907af3692586c01f4a446c60acab92cc74e11bb90950f574826b237cf5c271",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "basicattack-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/expedition-starters/basic-attack.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 73920,
+            "sha256": "2aaee25e9d22346de240f3bce32595ef9acac900023b1d9ee98888bf83e6d676",
+            "source": "docs/evidence/2026-10-10-basicattack/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/expedition-starters/basic-attack.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 7280,
+            "sha256": "be94f7b043fa248160471b78c8720fa75a6c230a97a91835f32f9bc19c727bed",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/expedition-starters/basic-attack.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 9586,
+            "sha256": "a7907af3692586c01f4a446c60acab92cc74e11bb90950f574826b237cf5c271",
+            "source": "docs/evidence/2026-10-10-basicattack/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 842,
+  "manifest_count_after": 843
+}

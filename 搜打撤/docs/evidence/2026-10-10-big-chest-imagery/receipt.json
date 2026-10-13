@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "cmtn28jv33wx",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a125fc-1da2-7300-83db-f2b39e275c76\\exec-3d8fe613-10ab-40d6-b9c4-809c891b62bb.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-big-chest-imagery/cards-spell-cmtn28jv33wx-source.png",
+        "bytes": 2073274,
+        "sha256": "eaa92607db12dac984d2f74e893f17888d8c9ccfb4562e44c4c30893cdccdf65"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-big-chest-imagery/cards-spell-cmtn28jv33wx-full-before.webp",
+          "bytes": 116660,
+          "sha256": "dcc403edd74e1bad2f523ee012977167f165ff47ef9bb1e6ab3f276381b81cde"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-big-chest-imagery/cards-spell-cmtn28jv33wx-thumb-before.webp",
+          "bytes": 19668,
+          "sha256": "b278bf5eda644f6a1bb71790b60e2cc5414cb696b3a19c36a08fdc4b0e5711f6"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-cmtn28jv33wx.webp",
+          "bytes": 160716,
+          "sha256": "378e5b726cf71864c6b472a7d6d92bb33c28beb18f7f60b011bfc8f89d78bfdb",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-cmtn28jv33wx.webp",
+          "bytes": 20112,
+          "sha256": "b60597269fc771d9eb267e828e1e6fc5123c11011f9d61ed2cdda1581014f2c0",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "big-chest-search-rough-20261005",
+      "revision_after": "big-chest-imagery-nai-builtin-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-cmtn28jv33wx.webp",
+            "ext": "webp",
+            "bytes": 116660,
+            "sha256": "dcc403edd74e1bad2f523ee012977167f165ff47ef9bb1e6ab3f276381b81cde",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-05-WF-big-chest-search/images.json"
+          },
+          "after": {
+            "path": "cards/spell-cmtn28jv33wx.webp",
+            "ext": "webp",
+            "bytes": 160716,
+            "sha256": "378e5b726cf71864c6b472a7d6d92bb33c28beb18f7f60b011bfc8f89d78bfdb",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-big-chest-imagery/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-cmtn28jv33wx.webp",
+            "ext": "webp",
+            "bytes": 19668,
+            "sha256": "b278bf5eda644f6a1bb71790b60e2cc5414cb696b3a19c36a08fdc4b0e5711f6",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-05-WF-big-chest-search/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-cmtn28jv33wx.webp",
+            "ext": "webp",
+            "bytes": 20112,
+            "sha256": "b60597269fc771d9eb267e828e1e6fc5123c11011f9d61ed2cdda1581014f2c0",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-big-chest-imagery/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1117,
+  "manifest_count_after": 1117
+}

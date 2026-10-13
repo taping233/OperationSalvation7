@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-12T18:28:11.787Z",
+  "target": "D:\\素材\\代号柒\\搜打撤\\.tmp\\WF-four-player-fixes-1013\\runtime",
+  "assets": "只读复用共享素材junction",
+  "dependencies": "复用现有node_modules junction，未安装",
+  "fingerprint": {
+    "game/src/ui/interface-motion.js": "3a9f2366651b76663c4b7f11ae5bd36e4f3057a4cb99a25a611d80bb7edd84dd",
+    "game/src/run/game.run.flow.js": "1a22103927f8cea47827cd36ec2e028cb11a66f1884fe073f40ab5c772bd257f",
+    "game/src/run/game.run.scenes.js": "25f10f69392d7c71ba3601c1847da7a8a31e3ce06c3e865b9fb4aac6a1732c4f",
+    "game/src/battle/core/battle.enemy-phase.js": "15c0a38aa5fc33cd0e0775aeffc7ce21be9e4b10f77896ddfaffaf177c31dee2"
+  },
+  "fingerprintKind": "首次P1候选写入后的四个文件，不是共享源码原始基线；共享基线及候选终态见patch-manifest.json"
+}

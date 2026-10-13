@@ -1,0 +1,42 @@
+{
+  "thread": "01a133b8-aebd-7632-82ed-19b6c8df3aac",
+  "reference": "retained Arknights IS7 blackflow board",
+  "checkedLinks": 10,
+  "tests": {
+    "files": 7,
+    "passed": 96,
+    "failed": 0
+  },
+  "entries": [
+    {
+      "path": "game/src/core/map-node-art.js",
+      "bytes": 8917,
+      "sha256": "0242dba850cce6374e7d55af2b439de00ef1e7fd02feb332647172fc2da5caea"
+    },
+    {
+      "path": "game/src/core/renderer.js",
+      "bytes": 22668,
+      "sha256": "4de58822fc37876136640d02f988f437f251e0b9c7cb350099aac9a2be1a5e2f"
+    },
+    {
+      "path": "game/assets/scenes/map-nodes/blank-symbol-foreground-1013-v1.webp",
+      "bytes": 82836,
+      "sha256": "40205615135a43089f0d80ef7233c33e2049fa4a79052dbc5b43da1b9944ab2a"
+    },
+    {
+      "path": "tests/map-node-state.test.js",
+      "bytes": 2652,
+      "sha256": "3ae0f3be54614b729617cfd702f8269a36889452190e03c37043910cf12fc08f"
+    },
+    {
+      "path": "docs/evidence/2026-10-13-WF-expedition-experience-1013/map-blank-is7-integrated-1920.png",
+      "bytes": 98860,
+      "sha256": "fe0cd44eaee16b3d627968d9116da1d5d3a16152898996f876b407870f9bc557"
+    },
+    {
+      "path": "docs/evidence/2026-10-13-WF-expedition-experience-1013/map-blank-is7-moving-1920.png",
+      "bytes": 93161,
+      "sha256": "44557e7b000785387d7185c97c7096824caef84c68753059a7b86d8fddf4de75"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt7-bladebloom",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-da31ef9f-1a57-406d-9f69-04df26251f82.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-bladebloom/cards-spell-tt7-bladebloom-source.png",
+        "bytes": 2009223,
+        "sha256": "2a54c1f4dd0df7eb1b6da1ee4ff838d48af016e6d70efdf58289d6fd2ba32fd3"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-bladebloom/cards-spell-tt7-bladebloom-full-before.webp",
+          "bytes": 66696,
+          "sha256": "757a27c6e1c49b2f702f70eabbdcfee93136a3f84a4210a7caeaa7dc2ac5cbda"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-bladebloom/cards-spell-tt7-bladebloom-thumb-before.webp",
+          "bytes": 20352,
+          "sha256": "d0f6a7529d4adaaef2d6994200ccc9bd15116ffb35b224625154788e5dd80bf1"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-bladebloom.webp",
+          "bytes": 154696,
+          "sha256": "07e0c8fc28f218372ade6a8b0d62bba2b20fbf50375bbe2e1133aeb77cdf0f0a",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-bladebloom.webp",
+          "bytes": 24348,
+          "sha256": "d88dcae8f4cdcc415662bcb4809494df78b5955c0497cbd000ad9e064a4dcd2f",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "bladebloom-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt7-bladebloom.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 154696,
+            "sha256": "07e0c8fc28f218372ade6a8b0d62bba2b20fbf50375bbe2e1133aeb77cdf0f0a",
+            "source": "docs/evidence/2026-10-10-bladebloom/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-bladebloom.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 20352,
+            "sha256": "d0f6a7529d4adaaef2d6994200ccc9bd15116ffb35b224625154788e5dd80bf1",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-bladebloom.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 24348,
+            "sha256": "d88dcae8f4cdcc415662bcb4809494df78b5955c0497cbd000ad9e064a4dcd2f",
+            "source": "docs/evidence/2026-10-10-bladebloom/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 841,
+  "manifest_count_after": 842
+}

@@ -1,0 +1,170 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-frostfall",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-7ab52925-203a-4020-9e00-0bb6167e5faa.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-generic-martial-faceless/cards-martial-tt3-frostfall-source.png",
+        "bytes": 2275103,
+        "sha256": "230d3bdc2f5a75a3b96f14b156a622d7ba4f3020de72b3ce074fbe47edc8f97c"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-generic-martial-faceless/cards-martial-tt3-frostfall-full-before.webp",
+          "bytes": 273276,
+          "sha256": "7ee2d7f2b91d7fce2c8c5cc7b230f35f63004e2cdb003eed3a8c230703b35a15"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-generic-martial-faceless/cards-martial-tt3-frostfall-thumb-before.webp",
+          "bytes": 37110,
+          "sha256": "8ff0eb12112d0dca2f35507e5992e33a54c7a3614e8eca1778fbe1f9ac3618bb"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-frostfall.webp",
+          "bytes": 193218,
+          "sha256": "f3f8adb9e2ef7da5ee7c36160d045921181a2e5b380fe29fbd5fa99409c08aa7",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-frostfall.webp",
+          "bytes": 29236,
+          "sha256": "9532319e4fad670def8c0c9e19dae24793c8c7979e963562d626bddb74612893",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt3-frostfall-generic-no-character-20261010",
+      "revision_after": "tt3-frostfall-cropped-action-builtin-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt3-frostfall.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 273276,
+            "sha256": "7ee2d7f2b91d7fce2c8c5cc7b230f35f63004e2cdb003eed3a8c230703b35a15",
+            "source": "docs/evidence/2026-10-10-card-fixes/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt3-frostfall.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 193218,
+            "sha256": "f3f8adb9e2ef7da5ee7c36160d045921181a2e5b380fe29fbd5fa99409c08aa7",
+            "source": "docs/evidence/2026-10-10-generic-martial-faceless/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt3-frostfall.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 37110,
+            "sha256": "8ff0eb12112d0dca2f35507e5992e33a54c7a3614e8eca1778fbe1f9ac3618bb",
+            "source": "docs/evidence/2026-10-10-card-fixes/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt3-frostfall.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 29236,
+            "sha256": "9532319e4fad670def8c0c9e19dae24793c8c7979e963562d626bddb74612893",
+            "source": "docs/evidence/2026-10-10-generic-martial-faceless/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-fly-arrowhawk",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-4677f27c-0d3b-40d3-a95c-c09f82f52f3c.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-generic-martial-faceless/cards-martial-tt3-fly-arrowhawk-source.png",
+        "bytes": 2107462,
+        "sha256": "9d33b9f3c16ab79f33acda3b4668c610a122b4439caed9c8c4d3cd8122e1b375"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-generic-martial-faceless/cards-martial-tt3-fly-arrowhawk-full-before.webp",
+          "bytes": 257134,
+          "sha256": "53aeaa6f4d222ebfb3cacd65112d703a73736cffa32a6084feb2eb99b51e8d54"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-generic-martial-faceless/cards-martial-tt3-fly-arrowhawk-thumb-before.webp",
+          "bytes": 35230,
+          "sha256": "4bdb8c6449afa48139858d2bb4a614da95db57873c027ba448a9b90dcfac959e"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-fly-arrowhawk.webp",
+          "bytes": 156648,
+          "sha256": "0aa54d002fba5919ab437b0440b3d7624a9a733f7bdac61ca26566fd3511bc33",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-fly-arrowhawk.webp",
+          "bytes": 21726,
+          "sha256": "6c03e1ce7f86ba36a4a4381bf36634870324b30391ab13482edbc064411438c3",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt3-fly-arrowhawk-generic-no-character-20261010",
+      "revision_after": "tt3-fly-arrowhawk-cropped-action-builtin-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt3-fly-arrowhawk.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 257134,
+            "sha256": "53aeaa6f4d222ebfb3cacd65112d703a73736cffa32a6084feb2eb99b51e8d54",
+            "source": "docs/evidence/2026-10-10-card-fixes/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt3-fly-arrowhawk.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 156648,
+            "sha256": "0aa54d002fba5919ab437b0440b3d7624a9a733f7bdac61ca26566fd3511bc33",
+            "source": "docs/evidence/2026-10-10-generic-martial-faceless/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt3-fly-arrowhawk.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 35230,
+            "sha256": "4bdb8c6449afa48139858d2bb4a614da95db57873c027ba448a9b90dcfac959e",
+            "source": "docs/evidence/2026-10-10-card-fixes/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt3-fly-arrowhawk.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 21726,
+            "sha256": "6c03e1ce7f86ba36a4a4381bf36634870324b30391ab13482edbc064411438c3",
+            "source": "docs/evidence/2026-10-10-generic-martial-faceless/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 885,
+  "manifest_count_after": 885
+}

@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-double-shot",
+      "asset": "cards/martial-tt3-double-shot.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a125fc-1da2-7300-83db-f2b39e275c76/exec-f7558cd5-1e8b-4455-860a-798fedbcf35b.png",
+      "revision": "repeat-shot-three-hits-20261011",
+      "prompt": "Use case: structural correction and style-transfer. One square martial card illustration for 连射.\nImage 1 is the NAI layout: keep the angled wooden target filling right half, arrows coming from left, and solid blue backdrop. It is missing the third arrow and event. Image 2 初始攻击 is STYLE only for economical matter, broad gray/brown planes, selective contours and contact contrast. Image 3 revised simple 飞身劈 is STYLE only for few elements, sparse structural lines and matte color inside forms; no swords or hands.\nShow THREE successive arrows hitting a single thick battered wooden target. Exactly TWO are ALREADY EMBEDDED near its upper-left/center region, small slate-gray shafts and two quiet feather shapes each extending toward left. They point diagonally upper-right, almost parallel. Add ONE THIRD arriving arrow just below them, slightly closer/larger: its sharp steel tip is JUST ENTERING the wood at a third nearby point, a small jagged notch and TWO short wood splinters define impact. The target must overlap/hide the tip of the two earlier arrows; the arriving arrow's tip remains partly visible at the contact. Third arrow comes from lower-left, a short narrow muted ivory trailing motion accent behind it gives ongoing serial action. Keep all three shafts separate; three shafts, three feather tails, three penetration points, no fourth arrow, no bundle or fan volley. Move three contact points closer into a compact diagonal rhythm instead of widely spaced decorative display. Crop target right edge out of frame; remove lower stand/pole from draft. Plain wood surface, no bullseye rings, writing or painted symbols.\nClear expressive dark colored contour lines of varying pressure CLOSE arrow/wood silhouettes. Sparse selective lines explain shaft connection, fletching and contact cuts. No many fine feathers, tiny binding rings or precise product hardware. Fill forms with connected opaque matte ochre/umber wood planes and muted slate-gray arrows, one or two broad shadows and restrained pale accents. Long broad swipes INSIDE the wood forms replace draft's fine grain and canvas texture. Keep quiet interiors, a few principal board seams only. Strongest small pale contrast at the third arrival notch, nearby dark slot and splinter edges. No wood grain networks, glossy metal, grain filter, hundreds of scratches or little triangular facets.\nBACKGROUND ONE UNIFORM SOLID muted deep PETROL BLUE, no gradients, abstract brush patches, landscape or floor. No bow, crossbow, figures, hands, sparks, magical blue flames, oversized trails, extra props, text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/.tmp/nai/output/repeat-shot-20261011/shot.png",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/expedition-starters/basic-attack.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt3-fly-arrowhawk.webp"
+      ]
+    }
+  ]
+}

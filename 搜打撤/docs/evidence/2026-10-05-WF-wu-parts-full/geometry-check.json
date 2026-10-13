@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "samples": 484,
+  "modes": [
+    "static",
+    "idle",
+    "attack",
+    "hit"
+  ],
+  "worstBoneError": 2.2737367544323206e-13,
+  "checks": [
+    "static reference landmarks",
+    "finite joints",
+    "eight fixed bone lengths",
+    "planted feet",
+    "sword size",
+    "sword tip within full-body camera",
+    "loop endpoints"
+  ],
+  "limits": [
+    "geometry evidence only; appearance, alpha seams and motion perception require native browser inspection"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "21",
+  "slug": "left-boot",
+  "version": 2,
+  "prompt": "Generate ONLY Wu's REAR/LEFT black ankle boot, specifically matching the lower-LEFT boot of combat reference 1. Camera is three-quarter FRONT view for this rear foot: front of toe and outside of boot visible, toe projects partly toward viewer and slightly screen-right, with SHORTER projected toe length. Do NOT use the long side-on silhouette of the foreground/right boot. Preserve the same short black ankle shaft, low chunky heel, thick sole and tiny cobalt-blue pull tab at rim. Slim elegant ankle boot with compact foreshortened foot, overall silhouette height roughly 1.5 times its width, not a wide stretched clown shoe. Matte black/charcoal with a few neutral gray painted planes and sparse simple creases, same hand-painted low-detail anime style as references. Clean dark open rim for separate calf, no leg/skin, socks, extra straps, lacework, logos or other boot. One complete boot on genuine transparent PNG, ample margins, no shadow/aura/background/text.",
+  "refs": [
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\wu-battle-base-frame000.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\reference.png"
+  ],
+  "tool": "built-in imagegen",
+  "stage": "candidate"
+}

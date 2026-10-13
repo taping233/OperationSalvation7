@@ -1,0 +1,230 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt12-saturate",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a125cc-1257-7b52-b519-742cc71dafda\\exec-dd9fb6a9-6416-4280-a4de-5255ad194061.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-spell-redraw/cards-spell-tt12-saturate-source.png",
+        "bytes": 1630481,
+        "sha256": "c2a13b8b4e7c1bdaf3f90f8ded8f66f3fdc832463df64de6c151ff2084b6573e"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-spell-redraw/cards-spell-tt12-saturate-full-before.webp",
+          "bytes": 52238,
+          "sha256": "2a4740306197d3a2f3484b5c2f87334f12206cbdc4b807763f1e974e9104ef67"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-spell-redraw/cards-spell-tt12-saturate-thumb-before.webp",
+          "bytes": 13218,
+          "sha256": "77f01c430721cc1a267613586bafda4bd9dca1c969187f33f5b22d39afdf48db"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt12-saturate.webp",
+          "bytes": 84348,
+          "sha256": "784c921a66e4aca697390583b6cd6227cbd1df70a96396e9df9bb69e2858f3fc",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt12-saturate.webp",
+          "bytes": 10950,
+          "sha256": "fd7cfef8e4cb42c67a53d1395c394c70fd556f59df697d93c7390db67e44b3ce",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "rough-original-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt12-saturate.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 84348,
+            "sha256": "784c921a66e4aca697390583b6cd6227cbd1df70a96396e9df9bb69e2858f3fc",
+            "source": "docs/evidence/2026-10-10-spell-redraw/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt12-saturate.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 13218,
+            "sha256": "77f01c430721cc1a267613586bafda4bd9dca1c969187f33f5b22d39afdf48db",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt12-saturate.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 10950,
+            "sha256": "fd7cfef8e4cb42c67a53d1395c394c70fd556f59df697d93c7390db67e44b3ce",
+            "source": "docs/evidence/2026-10-10-spell-redraw/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt12-freezeray",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a125cc-1257-7b52-b519-742cc71dafda\\exec-3e129d1f-5ede-48f8-a4cd-7c4b5ad22061.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-spell-redraw/cards-spell-tt12-freezeray-source.png",
+        "bytes": 1502667,
+        "sha256": "9e89a1422dd26402cf3d18cb3058fd1912a6fcf15d38c4333811d80539a015d5"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-spell-redraw/cards-spell-tt12-freezeray-full-before.webp",
+          "bytes": 31778,
+          "sha256": "e853f59720bf7dcf7130161c983d2d7bd9a98fc4ebf53ecbdfb5c9e7d863a6c7"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-spell-redraw/cards-spell-tt12-freezeray-thumb-before.webp",
+          "bytes": 8548,
+          "sha256": "c197973ae211dd7ed53115a9672b8d40d5653178d5a7d89cd75b4dbeca48019c"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt12-freezeray.webp",
+          "bytes": 63748,
+          "sha256": "34cbee0740507acebbb799422b9bf9b9f6dab1ca80dbfb156c56de441aea5fa5",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt12-freezeray.webp",
+          "bytes": 8578,
+          "sha256": "432bfbc93b0d9d62dc71c10e7de9aed7168f6348445eccf351d32a8ab025a209",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "rough-original-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt12-freezeray.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 63748,
+            "sha256": "34cbee0740507acebbb799422b9bf9b9f6dab1ca80dbfb156c56de441aea5fa5",
+            "source": "docs/evidence/2026-10-10-spell-redraw/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt12-freezeray.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 8548,
+            "sha256": "c197973ae211dd7ed53115a9672b8d40d5653178d5a7d89cd75b4dbeca48019c",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt12-freezeray.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 8578,
+            "sha256": "432bfbc93b0d9d62dc71c10e7de9aed7168f6348445eccf351d32a8ab025a209",
+            "source": "docs/evidence/2026-10-10-spell-redraw/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "cc-ember-burst",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a125cc-1257-7b52-b519-742cc71dafda\\exec-6bbe62a7-afb0-43a9-b7d9-41441d31c8aa.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-spell-redraw/cards-spell-cc-ember-burst-source.png",
+        "bytes": 2047871,
+        "sha256": "9291ab6e129136bf237090b75d1182815782fbaac51cbe9a1f8cee8684c3a958"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-spell-redraw/cards-spell-cc-ember-burst-full-before.webp",
+          "bytes": 110794,
+          "sha256": "64cadd082bb6cc3f9cfa9a655b3b27f85821bd09e14ebb9398486f5efe5c4738"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-spell-redraw/cards-spell-cc-ember-burst-thumb-before.webp",
+          "bytes": 19162,
+          "sha256": "61fd38e7f8d9c1a2e7dbd2727f509b9f2b8b0929bc6ff06d8beba5f8c6e7be2d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-cc-ember-burst.webp",
+          "bytes": 166278,
+          "sha256": "3fd779e39a5035b229fe8bfd57c8f26517b132365de7986911b29943e812f8b1",
+          "size": [
+            1516,
+            1037
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-cc-ember-burst.webp",
+          "bytes": 17554,
+          "sha256": "73cf0e48d98a08af72b91e8958545ae0350867b9ce1a2004d0a21f6645981198",
+          "size": [
+            448,
+            306
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "rough-original-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-cc-ember-burst.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 166278,
+            "sha256": "3fd779e39a5035b229fe8bfd57c8f26517b132365de7986911b29943e812f8b1",
+            "source": "docs/evidence/2026-10-10-spell-redraw/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-cc-ember-burst.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 19162,
+            "sha256": "61fd38e7f8d9c1a2e7dbd2727f509b9f2b8b0929bc6ff06d8beba5f8c6e7be2d",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-cc-ember-burst.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17554,
+            "sha256": "73cf0e48d98a08af72b91e8958545ae0350867b9ce1a2004d0a21f6645981198",
+            "source": "docs/evidence/2026-10-10-spell-redraw/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1087,
+  "manifest_count_after": 1090
+}

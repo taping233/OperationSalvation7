@@ -1,0 +1,230 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt7-twinfireball",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-4193f2aa-36ab-4d7a-8d0a-417b51fd780c.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-triple-change-glow/cards-spell-tt7-twinfireball-source.png",
+        "bytes": 1641676,
+        "sha256": "eeb15827c9caab81ab327d3bd33ef1fc86620eeac59e2fb69fb01c7664782c23"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-triple-change-glow/cards-spell-tt7-twinfireball-full-before.webp",
+          "bytes": 68126,
+          "sha256": "7a0d28ba68ef7b606acb37be58375a789103d66b2eb7f8b7cc7cf64f7da3ef4e"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-triple-change-glow/cards-spell-tt7-twinfireball-thumb-before.webp",
+          "bytes": 17886,
+          "sha256": "dfe0f816352da0b0c77e76f37b227c18d8f731907b7108112e41c5448c64fc04"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-twinfireball.webp",
+          "bytes": 104126,
+          "sha256": "c6af47e5342f3bee45e4855e5f0eab34915646d25c6863fca656a8ee559700e6",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-twinfireball.webp",
+          "bytes": 15556,
+          "sha256": "e13f8ff4046cc02eed58964de866d18e68a8b0d8400f3c71520d6a22ef33082f",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt7-twinfireball-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt7-twinfireball.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 104126,
+            "sha256": "c6af47e5342f3bee45e4855e5f0eab34915646d25c6863fca656a8ee559700e6",
+            "source": "docs/evidence/2026-10-10-triple-change-glow/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-twinfireball.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17886,
+            "sha256": "dfe0f816352da0b0c77e76f37b227c18d8f731907b7108112e41c5448c64fc04",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-twinfireball.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15556,
+            "sha256": "e13f8ff4046cc02eed58964de866d18e68a8b0d8400f3c71520d6a22ef33082f",
+            "source": "docs/evidence/2026-10-10-triple-change-glow/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "cmtn1p9vb5au",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-a7ea5eeb-bd66-4474-bd3b-95fac0505771.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-triple-change-glow/cards-spell-cmtn1p9vb5au-source.png",
+        "bytes": 1919641,
+        "sha256": "6cf893a58f5cc36ef01ccb356c7aed6fcc0194fb3bdc20a7bd0c0e47f4b753e6"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-triple-change-glow/cards-spell-cmtn1p9vb5au-full-before.webp",
+          "bytes": 76636,
+          "sha256": "9a020575033b90ed5c29a3355b921f27b53c21b695ad862449a21983aabfbc0a"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-triple-change-glow/cards-spell-cmtn1p9vb5au-thumb-before.webp",
+          "bytes": 22978,
+          "sha256": "133d1cc63ffcd5ca8295bdcdece951d3b688818ba81b730cc1635eaf6df25535"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-cmtn1p9vb5au.webp",
+          "bytes": 146902,
+          "sha256": "1b2ebb34859bb5625f5a3a766e986de93c63d5cfade7b4a82a50e9bc50df547f",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-cmtn1p9vb5au.webp",
+          "bytes": 25090,
+          "sha256": "8ef44ff115560a58f440a5babf6d31e1cb889fb584c06466b0abf08e31e0e558",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "cmtn1p9vb5au-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-cmtn1p9vb5au.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 146902,
+            "sha256": "1b2ebb34859bb5625f5a3a766e986de93c63d5cfade7b4a82a50e9bc50df547f",
+            "source": "docs/evidence/2026-10-10-triple-change-glow/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-cmtn1p9vb5au.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 22978,
+            "sha256": "133d1cc63ffcd5ca8295bdcdece951d3b688818ba81b730cc1635eaf6df25535",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-cmtn1p9vb5au.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 25090,
+            "sha256": "8ef44ff115560a58f440a5babf6d31e1cb889fb584c06466b0abf08e31e0e558",
+            "source": "docs/evidence/2026-10-10-triple-change-glow/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-holyglow",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-28f5d1e9-ce14-4673-9d00-5e0435b5fdcb.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-triple-change-glow/cards-spell-tt7-holyglow-source.png",
+        "bytes": 1981115,
+        "sha256": "ba581470973093595fb774a54024f62c80412e551cb3eedb6299d21cf20e585a"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-triple-change-glow/cards-spell-tt7-holyglow-full-before.webp",
+          "bytes": 107502,
+          "sha256": "9df1ec5a8a3d636c6bf91352540b1c0dc969303087dbdfc136469c848e69b99d"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-triple-change-glow/cards-spell-tt7-holyglow-thumb-before.webp",
+          "bytes": 24122,
+          "sha256": "7b691a068fd4e90ed2ea598ca4d80814086e225b18318ff5bb0214a5a69afc33"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-holyglow.webp",
+          "bytes": 165222,
+          "sha256": "229303715f51993b9836558c64c8c23ce07af32e427b62a386f91b1978d09226",
+          "size": [
+            1440,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-holyglow.webp",
+          "bytes": 19432,
+          "sha256": "b8b3f1cdb8063740ab921cf168c30df1e54b81b8648141a12f543f68f757ae87",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt7-holyglow-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt7-holyglow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 165222,
+            "sha256": "229303715f51993b9836558c64c8c23ce07af32e427b62a386f91b1978d09226",
+            "source": "docs/evidence/2026-10-10-triple-change-glow/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-holyglow.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 24122,
+            "sha256": "7b691a068fd4e90ed2ea598ca4d80814086e225b18318ff5bb0214a5a69afc33",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-holyglow.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 19432,
+            "sha256": "b8b3f1cdb8063740ab921cf168c30df1e54b81b8648141a12f543f68f757ae87",
+            "source": "docs/evidence/2026-10-10-triple-change-glow/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 852,
+  "manifest_count_after": 855
+}

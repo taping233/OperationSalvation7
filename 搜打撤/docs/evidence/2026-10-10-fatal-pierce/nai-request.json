@@ -1,0 +1,21 @@
+{
+  "card_id": "tt3-fatal-pierce",
+  "model": "nai-diffusion-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 1361397567,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nno humans, spear, armor, broken armor, close-up, foreshortening, dutch angle, motion blur, simple background\n\nThe camera is just beyond the exit side of a single thick charcoal armor plate, looking diagonally along the axis of a spear at the instant of penetration. One broad steel spearhead bursts toward the viewer from a tight jagged opening slightly left of center. Its continuous central ridge and two large clean blade planes run from the dark shaft in the upper-left distance to a sharp point in the lower-right foreground. The point remains entirely inside the square frame, and the spearhead occupies almost half the image diagonal. The armor plate curves across the lower-left half of the frame, with two large torn metal lips bent outward at the puncture. A few distinct heavy fragments rotate away to the upper-right; leave clear gaps between fragments so the central weapon silhouette reads immediately. A short crimson tassel tied behind the blade is pulled backward toward the upper-left, opposing the forward thrust. Concentrate a narrow dark-crimson mark at the puncture rim as an abstract sign of a fatal wound, with no visible body or gore. A single broad pale diagonal wedge behind the spear separates the blade from an otherwise dark warm-charcoal and gray-blue abstract background. Directional light catches one blade plane and the newly torn metal edges; the reverse blade plane and plate interior stay dark. The tip, the torn opening and the backward red tassel form the clear hierarchy. Keep the image a close material study of piercing force, not a battle scene. No warrior, hands, face, landscape or architecture.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, girl, boy, hands, face, body, gore, organs, blood spray, multiple spears, sword, ornate weapon, flame, sparks, particle cloud, detailed scenery",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\fatal-pierce-20261010\\fatal-pierce.png",
+  "installed": false,
+  "design": "沿枪轴看向穿透点；枪尖迎面突出、甲片外翻、红缨逆向甩开；深灰与灰蓝抽象背景加一块浅色斜面。"
+}

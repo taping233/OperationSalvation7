@@ -1,0 +1,36 @@
+{
+  "fire": {
+    "prompt": "Original game map node cutout, small-size symbolic object, not a miniature scene. Input 1 is reference ONLY for isolated subject size and asymmetrical composition on black, do NOT copy the curled human/animal/organs. Input2 is actual project card art ONLY for painterly broad opaque strokes and hard-edge large light/shadow planes. Create a future-city REST/RECOVERY symbol: one compact portable heat-cell, cream ceramic U-shaped protective cradle around a warm amber vertical capsule with a dark grey short carrying arch, 3-4 large value groups, minimal purposeful details. Subject occupies ONLY central 48-52% of square canvas width and height, complete clear silhouette, slightly tilted three-quarter angle. Subtle sparse amber dust and a very small faint side halo only at upper right, fading to transparent, NOT strong cyan neon or all-around glow. Actual transparent background; NO background circle (the UI will draw black disk), no floor, no buildings, no winter snow, no text, no people/animals/skulls/organs, no logos, no glossy CGI/PBR, no dense rivets. This is a hand-painted symbolic future-city object, designed to be readable inside a black 60-80px node.",
+    "tool": "builtin imagegen",
+    "references": [
+      {
+        "path": "is7-node-research/source/rest.webp",
+        "role": "subject size and asymmetric composition only; human/organ identity excluded"
+      },
+      {
+        "path": "game/assets/cards/equip-tt2-pearlbox.webp",
+        "role": "project paint reference"
+      }
+    ],
+    "result": "Generated images are saved to C:\\Users\\太平\\.codex\\generated_images\\01a12b5e-4fc9-7522-8fbc-c8b2bf9cb89e as C:\\Users\\太平\\.codex\\generated_images\\01a12b5e-4fc9-7522-8fbc-c8b2bf9cb89e\\exec-bd145754-a5df-4711-bf03-46b7f61c2a69.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  },
+  "battle": {
+    "prompt": "Original hand-painted game map BATTLE node symbolic isolated object on actual transparent square canvas. Input1 reference ONLY subject size/asymmetric focal composition, never copy animal skull or rib bones. Inputs2 and3 actual project card artwork ONLY painterly wide opaque color planes/hard-edge light shadow and complete silhouette. Future-city danger symbol: a BROKEN angular security drone faceplate, cream ceramic armor split into two staggered large shards around one muted red triangular optical lens, with three short dark graphite antenna spars behind it. Not a humanoid robot head, not a whole robot, not street or shop scene. Strong memorable diagonal silhouette, 3-4 large hard-edged value groups, loose broad internal brush strokes, no tiny mechanical greebles. Object only 48-52% of square canvas, quiet generous transparent margins. Very sparse red-brown dust and tiny faint glow at lower left only, no full outline neon, no eye laser, no ground, no buildings, no text, no people/animals/organs/bones, no glossy CGI/PBR or white sticker outline. Intended as a 60-80px node on a near-black disk, elegant symbolic silhouette first.",
+    "tool": "builtin imagegen",
+    "references": [
+      {
+        "path": "is7-node-research/source/battle_normal.webp",
+        "role": "composition only; animal skull identity excluded"
+      },
+      {
+        "path": "game/assets/cards/equip-tt2-pearlbox.webp",
+        "role": "project paint reference"
+      },
+      {
+        "path": "game/assets/cards/expedition-starters/basic-attack.webp",
+        "role": "hard-edge material paint reference"
+      }
+    ],
+    "result": "Generated images are saved to C:\\Users\\太平\\.codex\\generated_images\\01a12b5e-4fc9-7522-8fbc-c8b2bf9cb89e as C:\\Users\\太平\\.codex\\generated_images\\01a12b5e-4fc9-7522-8fbc-c8b2bf9cb89e\\exec-b87e1631-30db-4054-8511-0e1c9f052953.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  }
+}

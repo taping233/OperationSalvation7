@@ -1,0 +1,20 @@
+{
+  "scene": "last-lamp",
+  "model": "nai-diffusion-4-5-full",
+  "recipeVersion": "1.3",
+  "width": 1344,
+  "height": 768,
+  "seed": 10131531,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nwide anime game event background, abandoned winter school passage, broken windows, snow blowing inside, old evacuation sign with two faded opposite arrows and a single warm emergency lantern, no people\n\nOriginal story event illustration, no UI.\n\nLandscape 1344x768 illustration. The sign and lantern form a strong, simple focal silhouette in the left half. The lower left has dark quiet space for story text. The right 40 percent is a dim low-detail continuation of the passage for interactive choices. Keep the scene readable at game-screen size.\n\nCold muted blue-gray snow and charcoal shadows, small warm amber lantern accent, broad opaque planes, hard and soft edges mixed, visible economical brush marks. No photorealistic architecture, fine surface noise, or smooth airbrush.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, photorealistic, realistic 3d, detailed stone texture, tiny windows, bright white snow field, text, lettering, signage words, interface, buttons, panels, logos, people, watermark",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\WF-expedition-event-1013\\last-lamp-nai.png",
+  "status": "NAI draft; internal redraw required before installation"
+}

@@ -1,0 +1,37 @@
+{
+  "status": "generated-candidate-not-approved",
+  "channel": "existing tools/nai_gen.py, single generate_image call",
+  "model": "nai-diffusion-4-5-full",
+  "recipeVersion": "1.3",
+  "artistBlock": "1.2::miv4t::, 0.8::quasarcake::",
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "seed": 1011353401,
+  "width": 1344,
+  "height": 768,
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nAn original indoor temporary supply stall. One adult anime shopkeeper, short brown hair, warm brown eyes, a plain dark knitted cap, muted scarf and charcoal work coat with a small dull terracotta-red cloth accent. The shopkeeper stands calmly behind one compact counter at the far LEFT edge; a clear expressive face and two coherent hands resting naturally on the counter. No named character or story role.\n\nOne wide landscape game-art style calibration image, not a finished game screenshot. The subject is a temporary shop interior. No interface is drawn.\n\nStrict asymmetric layout: merchant silhouette entirely within LEFT x6-26 percent and y18-65 percent. Counter, hands and one small warm lamp are contained entirely within LEFT x2-28 percent, with no tabletop extension crossing into the centre. RIGHT x32-97 percent and y16-82 percent is a continuous quiet merchandise-safe plane formed from only two or three broad interior curtain/wall masses, no shelf clutter, no boxes, no openings. Upper 12 percent and lower 14 percent are calm and contain no important props. A wide horizontal indoor scene, no central exit or receding street, no snow. Avoid symmetry and avoid a centrally placed character.\n\nUse warm gray, deep muted teal, neutral charcoal and one modest ochre-red cloth group. Distinguish cloth, counter and metal through broad color groups. Build each major material from three or four large confident light/shadow planes with broad directionally meaningful painterly strokes, loose uneven hand-painted edges and complete readable silhouettes. Selectively refine the face, eyes, hands and counter contact; simplify all clothing folds and environmental surfaces. The right merchandise field has low contrast, not black emptiness. A small amber lamp has a precise small highlight without bloom. This is economical opaque anime brush painting, not an environment made of uniformly sized little triangles or faceted polygons. No photorealistic material textures, no detailed brick or woodgrain, no PBR, no shiny floor.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "negativePrompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, snow, snowflakes, exterior, blue ribbon, blue bow, roses, silver ponytail, white hair, goggles, Wu, Neow, bucket helmet, silver cape, central bright doorway, bright window, long counter, counter crossing center, shelf clutter, stacks of crates, products, cards, card frames, interface, ui, prices, lettering, numbers, woodgrain, brick texture, pbr, photorealistic, shiny floor, reflections, lens flare, bloom, particles, low poly, polygon mesh, uniform triangular facets, tiny repeated brush strokes, many small color fragments, symmetrical composition, centered person",
+  "characterPrompt": "An original adult human shopkeeper with short brown hair, a plain dark knit cap and muted scarf, charcoal coat, clear expressive face and coherent hands, behind a compact counter at the far left.",
+  "naiImageReferences": [],
+  "styleObservationOnly": [
+    "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-tt7-stealth.webp",
+    "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\equip-tt2-pearlbox.webp",
+    "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\equip-tt3-crimson-pouch.webp"
+  ],
+  "notImageInputs": "NAI current client accepts text only; observed card files were not sent as image conditioning.",
+  "referenceSHA256": {
+    "martial-tt7-stealth.webp": "4838f19d1edf9976d314a9a73bb9c3f6400e147d85298a01fe8f209985c21ee5",
+    "equip-tt2-pearlbox.webp": "2dd1921d7eda3f260ec74be23decc0a70cb6925812fd4e16d1ba0e1e7305e65b",
+    "equip-tt3-crimson-pouch.webp": "25ec4354678c02e55b720c0ee168b3a3490a6df83e274dbd6810f8f3ec042a78"
+  },
+  "outputPath": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\art-calibration\\shop\\source\\nai-shop-calibration-v1.png",
+  "actualSeed": 1011353401,
+  "bytes": 664147,
+  "sha256": "ee80c7d0bcda4c75acbe32a06ddae3636bf9ec3abff2d1d9b7a03e0826c2ea7e"
+}

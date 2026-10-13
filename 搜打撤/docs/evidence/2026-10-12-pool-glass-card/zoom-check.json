@@ -1,0 +1,20 @@
+[
+  {
+    "actual": 38,
+    "available": 73,
+    "description": "造成（你的攻击力 - 3）点攻击伤害；对目标附加 1 层流血，并抽 1 张牌。",
+    "gridRows": "155.088px 34.4608px 77.5442px 20.0996px",
+    "host": "#poolGrid .hs-card",
+    "name": "飞刃偷袭",
+    "nameTopRatio": 0.5392231162151961
+  },
+  {
+    "actual": 59,
+    "available": 134,
+    "description": "造成（你的攻击力 - 3）点攻击伤害；对目标附加 1 层流血，并抽 1 张牌。",
+    "gridRows": "268.902px 59.746px 134.451px 34.8493px",
+    "host": "#cardZoom .hs-card",
+    "name": "飞刃偷袭",
+    "nameTopRatio": 0.5392384917848506
+  }
+]

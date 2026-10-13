@@ -1,0 +1,16 @@
+{
+  "card_id": "tt12-chargeray",
+  "card_name": "充能射线",
+  "tool": "built-in image_gen",
+  "status": "candidate-delivered",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-73dfbc72-e185-412e-bfe5-2f34d2c15255.png",
+  "output": ".tmp/imagegen/2026-10-11-chargeray/chargeray-redraw.png",
+  "sha256": "25815c847715ba19aabd24c33afb46858ed284b85d5228e3ac40c51b16a235b6",
+  "bytes": 1434620,
+  "acquisition": "Copied from built-in ImageGen output",
+  "visual_review": "已查看工具返回画作：左侧手掌与黑灰金边袖口、三道橙金圆环、向右横向光束与浅灰留白保留，宽笔块面重绘",
+  "runtime_installed": false,
+  "tests_run": false,
+  "build_run": false,
+  "committed": false
+}

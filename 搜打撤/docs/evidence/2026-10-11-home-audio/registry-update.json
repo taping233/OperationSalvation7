@@ -1,0 +1,9 @@
+{
+  "cells": [
+    "Friday（Codex 主页音频与恢复修正 WF-home-audio-1011）",
+    "game/src/audio/sound.js、sound.music.player.js；game/src/ui/home-menu-motion.js、page-loading.js、camp-entry.js仅共享时长；game/css/home-menu-motion.css、page-loading.css；tests/sound-music.test.js、title-wallpaper.test.js、page-loading.test.js；docs/audio-system.md、development.md仅照相馆过场段；docs/evidence/2026-10-11-home-audio/；本表自有行",
+    "老板追加修主页恢复闪帧、左右及按钮入场层次；已选择照相馆统一成就同款；保留原有其他会话完成改动",
+    "10-11",
+    "编辑中；本会话01a12b04；复用5200/PID21616，无自建服务、不build、不提交"
+  ]
+}

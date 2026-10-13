@@ -1,0 +1,433 @@
+{
+  "at": "2026-10-12T20:32:29.551Z",
+  "imageCheck": "原生截图JPEG签名/大小，原png后缀保留，同字节jpg用于查看；外观见实页图据",
+  "missingLinks": [],
+  "browserErrors": 0,
+  "browserWarnings": 29,
+  "files": [
+    {
+      "name": "baseline-existing-failures.json",
+      "bytes": 12327,
+      "sha256": "6d3ebc645a501afde87e453ccb36b31cc25f4733a85d9962a1aadead12d59d82"
+    },
+    {
+      "name": "batch1-tests.json",
+      "bytes": 29954,
+      "sha256": "f7c33bddf537b954f37a6c27b325bfd482aaafb2df4d2ba692e5e31b5b2ee555"
+    },
+    {
+      "name": "batch2-final-tests.json",
+      "bytes": 3964,
+      "sha256": "8cd843320b8349f54b7e5d772d2bd5a0263d0d801ff787777d237ba958bc1642"
+    },
+    {
+      "name": "batch2-tests.json",
+      "bytes": 6715,
+      "sha256": "9462a637d2b0f844563432d2c0e087d9a2e63d0d581eef30e4879a0a13a2efd5"
+    },
+    {
+      "name": "batch3-target-tests.json",
+      "bytes": 44110,
+      "sha256": "4fbede22da6f45cbc6a5e0c1e024e57afdefb33b5d06d329f1f533720c13b771"
+    },
+    {
+      "name": "batch3-tests.json",
+      "bytes": 38527,
+      "sha256": "946dff3594c04de8f832ecdeeb3ab6cda3878b2763e7a3e121585518208215d9"
+    },
+    {
+      "name": "browser-console.json",
+      "bytes": 6319,
+      "sha256": "fd698e4944695947cef112c978aad78e78511787812345190b0e035d559887d0"
+    },
+    {
+      "name": "closeout.json",
+      "bytes": 1000,
+      "sha256": "fe52b0699004a12c72b050c1d8955064e3fba66e7b78b9ffcb460e66c7550387"
+    },
+    {
+      "name": "core-fixes.patch",
+      "bytes": 63734,
+      "sha256": "ee3a7bc55d08ecc1ad04547ee83b7b357c2c379c7744cb0f4c4256d62b3b97db"
+    },
+    {
+      "name": "final-description-tests.json",
+      "bytes": 8710,
+      "sha256": "5589e57b5438589f230d3c9f18824a7e94a3a6247a6678908c35a726f910eb49"
+    },
+    {
+      "name": "final-new-regressions.json",
+      "bytes": 11773,
+      "sha256": "1e4b98949558a96509771a1a2977e683d54e583f14eb237bb462c4f5823c3e50"
+    },
+    {
+      "name": "final-storage-view-tests.json",
+      "bytes": 38953,
+      "sha256": "b9763e7b4787f19b5bbcf924fdafc9400fdabc49b5414bdb55d7da8511fd7dbc"
+    },
+    {
+      "name": "final-target-tests.json",
+      "bytes": 85472,
+      "sha256": "fa8f522d59c4da185bc03384221d707cd0361392f7a0f09f7b5b3258cf1cc923"
+    },
+    {
+      "name": "G01-complete-ax.txt",
+      "bytes": 1669,
+      "sha256": "4655b9253774e2df2ea17d96006752e270a12c4618fffbcef69647f009cd6c76"
+    },
+    {
+      "name": "G01-complete.jpg",
+      "bytes": 46263,
+      "sha256": "fa6f8ccbaf6af6f9a9969951d8287aab4554357bb7c3a37ae13b0321ea7deb02",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G01-complete.png",
+      "bytes": 46263,
+      "sha256": "fa6f8ccbaf6af6f9a9969951d8287aab4554357bb7c3a37ae13b0321ea7deb02",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G02-after-bag-ax.txt",
+      "bytes": 1655,
+      "sha256": "d2756454323f4b04e559f096dba11d3b6549fd639897da1405ccc843b2d419f8"
+    },
+    {
+      "name": "G02-after-bag.jpg",
+      "bytes": 40176,
+      "sha256": "c112ba8d39e50d3ad4a36bbe64b2f9d0e787101f8a2e52e5d98fd4844b1cd7e4",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G02-after-bag.png",
+      "bytes": 40176,
+      "sha256": "c112ba8d39e50d3ad4a36bbe64b2f9d0e787101f8a2e52e5d98fd4844b1cd7e4",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G03-after-refresh-ax.txt",
+      "bytes": 467,
+      "sha256": "de4d44d7ac58b60c994865f84862d49084ef07bebcee9aba1edc63dfea856790"
+    },
+    {
+      "name": "G03-after-refresh.jpg",
+      "bytes": 41643,
+      "sha256": "dae8a2911ec2715b3ee5972c113559667075d94690bc6a3d0ef8fb8771d6add9",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G03-after-refresh.png",
+      "bytes": 41643,
+      "sha256": "dae8a2911ec2715b3ee5972c113559667075d94690bc6a3d0ef8fb8771d6add9",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G03-attempt1-failed-ax.txt",
+      "bytes": 272,
+      "sha256": "c32649080b8ce2343b02ac5e5b425864b321e3210c966d848f39119acf3d38ab"
+    },
+    {
+      "name": "G03-attempt1-failed.jpg",
+      "bytes": 62442,
+      "sha256": "57be08f871075adf5c6d35bb53637d78060513e2163122fb350bd32f1791d1d0",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G03-attempt1-failed.png",
+      "bytes": 62442,
+      "sha256": "57be08f871075adf5c6d35bb53637d78060513e2163122fb350bd32f1791d1d0",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G03-before-refresh-ax.txt",
+      "bytes": 499,
+      "sha256": "134379fb30d47b60cb4f8f311938f5cb17320826db085b243eb9977315d1d1b1"
+    },
+    {
+      "name": "G03-before-refresh.jpg",
+      "bytes": 44607,
+      "sha256": "7455e4fecb8775e27db26c0dd218ead316b2c2522270bf6c707ad4ed2e735376",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G03-before-refresh.png",
+      "bytes": 44607,
+      "sha256": "7455e4fecb8775e27db26c0dd218ead316b2c2522270bf6c707ad4ed2e735376",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G03-claimed-after-refresh-ax.txt",
+      "bytes": 433,
+      "sha256": "1913fec2f62e7f412c085b203968edd0f334511a085b2e61b1b1368798657fb3"
+    },
+    {
+      "name": "G03-claimed-before-refresh-ax.txt",
+      "bytes": 467,
+      "sha256": "c2f19954f9bfa01d31fe06a4bb520247ff79a5b88a7252679841b25389b96952"
+    },
+    {
+      "name": "G03-final-binding-tests.json",
+      "bytes": 3899,
+      "sha256": "4b18a6f3313adbbd5c11ac0fa0376913b4ee1a4ff717afc72bf5be77cab637f8"
+    },
+    {
+      "name": "G03-shared-baseline-repro.json",
+      "bytes": 997,
+      "sha256": "fb1102718f4cbb4603f2dcd8bcb0988cf8a1da08189d8fd959b2bc7380c71940"
+    },
+    {
+      "name": "G03-shared-baseline-repro.test.js",
+      "bytes": 2157,
+      "sha256": "61584708468e32d71ede1bbf124c66610f127fdd62eb785361a6076b9d2c8ee0"
+    },
+    {
+      "name": "G04-after-reward.jpg",
+      "bytes": 57668,
+      "sha256": "932a74a9c931c92a584be7c3263b7c641179d6bd53af15fb49d1cd8bb6834a7c",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G04-after-reward.json",
+      "bytes": 329,
+      "sha256": "abc4192aec315a8f33801dc397d2e68e7ac302224c2b3e364e72b58abd83bd7a"
+    },
+    {
+      "name": "G04-after-reward.png",
+      "bytes": 57668,
+      "sha256": "932a74a9c931c92a584be7c3263b7c641179d6bd53af15fb49d1cd8bb6834a7c",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G05-after-kill-ax.txt",
+      "bytes": 1276,
+      "sha256": "78f01be30edd57445f8048baa1edfe1b6d8ad0ddceb0558359409265be34f162"
+    },
+    {
+      "name": "G05-after-kill.jpg",
+      "bytes": 118758,
+      "sha256": "48ea16432c061cb149ebed030fc1ebf3131254e6ae06d051e2e49cc44542e72e",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G05-after-kill.png",
+      "bytes": 118758,
+      "sha256": "48ea16432c061cb149ebed030fc1ebf3131254e6ae06d051e2e49cc44542e72e",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G06-after-ax.txt",
+      "bytes": 948,
+      "sha256": "7b60d47370b198ebcfa8ab2b44d298ec6b61f7cc4a72ce7b4c841eb40b9463e8"
+    },
+    {
+      "name": "G06-after.jpg",
+      "bytes": 139637,
+      "sha256": "877a442e7790a991d57e8ee269e321a5e74fba698a5d8f512ae3addb2835c31a",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G06-after.png",
+      "bytes": 139637,
+      "sha256": "877a442e7790a991d57e8ee269e321a5e74fba698a5d8f512ae3addb2835c31a",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G06-before-ax.txt",
+      "bytes": 948,
+      "sha256": "70ba3edb9992df4967db9335fefd9d04ac7d4b9bf6c7af81db41f69d154868a6"
+    },
+    {
+      "name": "G06-before.jpg",
+      "bytes": 140061,
+      "sha256": "df68fcc855c471b4dab3d2e31f643173fdc426c6643731da84e624350623cbce",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G06-before.png",
+      "bytes": 140061,
+      "sha256": "df68fcc855c471b4dab3d2e31f643173fdc426c6643731da84e624350623cbce",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G07-capacity-ax.txt",
+      "bytes": 210,
+      "sha256": "a54b833ca2b15face9c78b0d37cd4f7129b62bd38eb16eb9fffa44d3b7adabfb"
+    },
+    {
+      "name": "G07-capacity.jpg",
+      "bytes": 66605,
+      "sha256": "5b925ef5214d72953cb20731bc17cdfdc2fdd9f3e36e42ce629c4a57034ff517",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G07-capacity.png",
+      "bytes": 66605,
+      "sha256": "5b925ef5214d72953cb20731bc17cdfdc2fdd9f3e36e42ce629c4a57034ff517",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G08-battle-start-ax.txt",
+      "bytes": 715,
+      "sha256": "8a7f54f4c234912fca8b039251b1895cb3e7236c2858ce870e51cd1c0abb9803"
+    },
+    {
+      "name": "G08-battle-start.jpg",
+      "bytes": 129431,
+      "sha256": "e3d2d1c81c2d92acc4bf7fc1fd4759bf5c954687421bd56f7b275e756c5a3ebc",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G08-battle-start.png",
+      "bytes": 129431,
+      "sha256": "e3d2d1c81c2d92acc4bf7fc1fd4759bf5c954687421bd56f7b275e756c5a3ebc",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G08-selection-ax.txt",
+      "bytes": 511,
+      "sha256": "07679f0142897535297ef4dede57a22b764628fcd53cce333c04648886df0a42"
+    },
+    {
+      "name": "G09-after.jpg",
+      "bytes": 140252,
+      "sha256": "c9771d4a252a8e7b03147cb5aadc9485f015b5137641daad571a4abb2f18d8ae",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G09-after.png",
+      "bytes": 140252,
+      "sha256": "c9771d4a252a8e7b03147cb5aadc9485f015b5137641daad571a4abb2f18d8ae",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G09-before.jpg",
+      "bytes": 134996,
+      "sha256": "a085cdf84f74a3b3e1bcef29b879775603c359ccacdb0dcaf31d8c33153f792f",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G09-before.png",
+      "bytes": 134996,
+      "sha256": "a085cdf84f74a3b3e1bcef29b879775603c359ccacdb0dcaf31d8c33153f792f",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G09-current-window.json",
+      "bytes": 854,
+      "sha256": "c451822a32dc3e4c1f74486db5ad6719fe858dcaf8be6bbbebff3cb777111ae3"
+    },
+    {
+      "name": "G10-fallback-ax.txt",
+      "bytes": 559,
+      "sha256": "7e211e7b823556e0603f4856145677f8cb2a49e839d13a51de8a23c4a0470109"
+    },
+    {
+      "name": "G10-fallback.jpg",
+      "bytes": 127736,
+      "sha256": "0b57029a573ceaf8c1700c8f4404d09c4d7c5d6a52e9ddfb396898842705d74c",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G10-fallback.png",
+      "bytes": 127736,
+      "sha256": "0b57029a573ceaf8c1700c8f4404d09c4d7c5d6a52e9ddfb396898842705d74c",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G11-turn2-ax.txt",
+      "bytes": 272,
+      "sha256": "c32649080b8ce2343b02ac5e5b425864b321e3210c966d848f39119acf3d38ab"
+    },
+    {
+      "name": "G11-turn2.jpg",
+      "bytes": 116001,
+      "sha256": "510a3a434ce5e9954a1ba924de5c72ad3ecaf61ade472e3684b4b3b725ee5558",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G11-turn2.png",
+      "bytes": 116001,
+      "sha256": "510a3a434ce5e9954a1ba924de5c72ad3ecaf61ade472e3684b4b3b725ee5558",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G11-turn3-ax.txt",
+      "bytes": 272,
+      "sha256": "c32649080b8ce2343b02ac5e5b425864b321e3210c966d848f39119acf3d38ab"
+    },
+    {
+      "name": "G11-turn3.jpg",
+      "bytes": 115981,
+      "sha256": "513e9f74256d0eb8e8fe4296f6d061887518048bce4c25bd2884d8fa352b29c2",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G11-turn3.png",
+      "bytes": 115981,
+      "sha256": "513e9f74256d0eb8e8fe4296f6d061887518048bce4c25bd2884d8fa352b29c2",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G12-full-rules-ax.txt",
+      "bytes": 1028,
+      "sha256": "d0f17eb016fd725087bf6b1883ae8b8fac131eee480223d3271c7c013da8a1ba"
+    },
+    {
+      "name": "G12-full-rules.jpg",
+      "bytes": 134565,
+      "sha256": "e29842b5d3153cc515b463c27f98492c82c980cff7c22103f33c47f71e9f7e13",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "G12-full-rules.png",
+      "bytes": 134565,
+      "sha256": "e29842b5d3153cc515b463c27f98492c82c980cff7c22103f33c47f71e9f7e13",
+      "actualFormat": "JPEG"
+    },
+    {
+      "name": "isolation.json",
+      "bytes": 851,
+      "sha256": "097df88e3b1fa219ab6a39b51fc128dbf1bb7cd065a0ee98e78bb06067c6cc2d"
+    },
+    {
+      "name": "patch-manifest.json",
+      "bytes": 10603,
+      "sha256": "a154e963ebdd3ae4d2c2c82160918110e5b3012a55a98cd05df0769200092b24"
+    },
+    {
+      "name": "prepare-patches.mjs",
+      "bytes": 4124,
+      "sha256": "97ef1380c396a6354a49f241388aa286cbd26ef9afe749b8bd8029da569c6fc6"
+    },
+    {
+      "name": "prepare.mjs",
+      "bytes": 2205,
+      "sha256": "922b7457d710db4fd76111dc03c81eb39acb6650868eab9bd1e9c053ff8e98a3"
+    },
+    {
+      "name": "qa-init.mjs",
+      "bytes": 6683,
+      "sha256": "121422d132cf4bb79227d9b18260a2e132ecf5170aedf0be66b8d2731e857889"
+    },
+    {
+      "name": "README.md",
+      "bytes": 7839,
+      "sha256": "be3596251d1415ff1207e74b200ff3d0cb0438ec7eb57a6a9d26b1af429a531e"
+    },
+    {
+      "name": "task.json",
+      "bytes": 1330,
+      "sha256": "3beea4e7168b185cab0837ca315d316640b5e1fb4e5115473e5fc6bae31ccb2c"
+    },
+    {
+      "name": "ui-fixes.patch",
+      "bytes": 8874,
+      "sha256": "3d2b53b837ee22da4dfb751ae3da831328a460915aa7a0d2a4c0487c2ead71cb"
+    },
+    {
+      "name": "updated-regressions.json",
+      "bytes": 9376,
+      "sha256": "b961f68a0dfa1b0c98032aaa797e8f7431ecd8e253a02a6d8d33092d59775f64"
+    }
+  ]
+}

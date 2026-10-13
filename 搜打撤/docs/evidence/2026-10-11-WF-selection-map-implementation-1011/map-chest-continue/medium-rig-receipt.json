@@ -1,0 +1,658 @@
+{
+  "kind": "medium",
+  "fps": 24,
+  "frames": [
+    "/assets/scenes/chests/medium-rig-640-v1/frame-00.webp",
+    "/assets/scenes/chests/medium-rig-640-v1/frame-01.webp",
+    "/assets/scenes/chests/medium-rig-640-v1/frame-02.webp",
+    "/assets/scenes/chests/medium-rig-640-v1/frame-03.webp",
+    "/assets/scenes/chests/medium-rig-640-v1/frame-04.webp",
+    "/assets/scenes/chests/medium-rig-640-v1/frame-05.webp",
+    "/assets/scenes/chests/medium-rig-640-v1/frame-06.webp",
+    "/assets/scenes/chests/medium-rig-640-v1/frame-07.webp",
+    "/assets/scenes/chests/medium-rig-640-v1/frame-08.webp",
+    "/assets/scenes/chests/medium-rig-640-v1/frame-09.webp",
+    "/assets/scenes/chests/medium-rig-640-v1/frame-10.webp",
+    "/assets/scenes/chests/medium-rig-640-v1/frame-11.webp",
+    "/assets/scenes/chests/medium-rig-640-v1/frame-12.webp",
+    "/assets/scenes/chests/medium-rig-640-v1/frame-13.webp",
+    "/assets/scenes/chests/medium-rig-640-v1/frame-14.webp",
+    "/assets/scenes/chests/medium-rig-640-v1/frame-15.webp",
+    "/assets/scenes/chests/medium-rig-640-v1/frame-16.webp",
+    "/assets/scenes/chests/medium-rig-640-v1/frame-17.webp"
+  ],
+  "hingeSourcePixels": [
+    [
+      380,
+      500
+    ],
+    [
+      1170,
+      654
+    ]
+  ],
+  "bodyInvariant": "same RGBA body bytes composited each frame",
+  "framesReceipt": [
+    {
+      "frame": 0,
+      "angle": 0,
+      "hinge": [
+        [
+          380,
+          500
+        ],
+        [
+          1170,
+          654
+        ]
+      ],
+      "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+      "bytes": 643182,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 1,
+      "angle": 0,
+      "hinge": [
+        [
+          380,
+          500
+        ],
+        [
+          1170,
+          654
+        ]
+      ],
+      "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+      "bytes": 643182,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 2,
+      "angle": 0,
+      "hinge": [
+        [
+          380,
+          500
+        ],
+        [
+          1170,
+          654
+        ]
+      ],
+      "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+      "bytes": 643182,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 3,
+      "angle": 2,
+      "hinge": [
+        [
+          380,
+          500
+        ],
+        [
+          1170,
+          654
+        ]
+      ],
+      "sha256": "e12a3dd6a4e6843a9fbb416c2c34067b160483603927946a4dea023a56b1550b",
+      "bytes": 643518,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 4,
+      "angle": 5,
+      "hinge": [
+        [
+          380,
+          500
+        ],
+        [
+          1170,
+          654
+        ]
+      ],
+      "sha256": "06412732701b7784a440b907dabefbadf1896088ea05b7d7d95d0546254fe41b",
+      "bytes": 646744,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 5,
+      "angle": 10,
+      "hinge": [
+        [
+          380,
+          500
+        ],
+        [
+          1170,
+          654
+        ]
+      ],
+      "sha256": "1b4c69216e9567b1f990e7a1589746934f68113ccf7cf020f25adab0b26dbc03",
+      "bytes": 629792,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 6,
+      "angle": 17,
+      "hinge": [
+        [
+          380,
+          500
+        ],
+        [
+          1170,
+          654
+        ]
+      ],
+      "sha256": "be1e03f49b3777ba6a8113c42da4578d5e89bbafa6ee505c77769dfed6417e06",
+      "bytes": 612078,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 7,
+      "angle": 26,
+      "hinge": [
+        [
+          380,
+          500
+        ],
+        [
+          1170,
+          654
+        ]
+      ],
+      "sha256": "bc270061bc8cec9379688793e3d110f1fc3a62cce16cd3b017329ab0fd105e34",
+      "bytes": 589424,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 8,
+      "angle": 37,
+      "hinge": [
+        [
+          380,
+          500
+        ],
+        [
+          1170,
+          654
+        ]
+      ],
+      "sha256": "47158af5913abfa92a500669d11bc39a9ee10648d14f7a11208f0e894e6e92ea",
+      "bytes": 631424,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 9,
+      "angle": 49,
+      "hinge": [
+        [
+          380,
+          500
+        ],
+        [
+          1170,
+          654
+        ]
+      ],
+      "sha256": "d2d9a3542caa8a0a45860c189fc27285920e18f60eb4a2010366c9fc35c1ae37",
+      "bytes": 721898,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 10,
+      "angle": 61,
+      "hinge": [
+        [
+          380,
+          500
+        ],
+        [
+          1170,
+          654
+        ]
+      ],
+      "sha256": "9776c1b80b0c937bb5299695e8e1d1aed837c8514be08009154f9bbe557af8fd",
+      "bytes": 801686,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 11,
+      "angle": 72,
+      "hinge": [
+        [
+          380,
+          500
+        ],
+        [
+          1170,
+          654
+        ]
+      ],
+      "sha256": "c150a3ac827c42507b18d8debed5c85ec024b58c485e5adf354ed5e020f3c798",
+      "bytes": 859722,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 12,
+      "angle": 82,
+      "hinge": [
+        [
+          380,
+          500
+        ],
+        [
+          1170,
+          654
+        ]
+      ],
+      "sha256": "360774e5d972dd5f007f1f91a61633cb34c2d85cfebffc9c59dffedff9c7cac1",
+      "bytes": 903232,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 13,
+      "angle": 90,
+      "hinge": [
+        [
+          380,
+          500
+        ],
+        [
+          1170,
+          654
+        ]
+      ],
+      "sha256": "ae338a4aac3d89a5dd7c6ef14067ddf7d67ea19ed6ace7a06358346beda3d353",
+      "bytes": 924400,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 14,
+      "angle": 97,
+      "hinge": [
+        [
+          380,
+          500
+        ],
+        [
+          1170,
+          654
+        ]
+      ],
+      "sha256": "13192f1d4fdb8794abfeb97907e2a80c5a01fbd5dde609aea1cbdd80325cb5b3",
+      "bytes": 944076,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 15,
+      "angle": 102,
+      "hinge": [
+        [
+          380,
+          500
+        ],
+        [
+          1170,
+          654
+        ]
+      ],
+      "sha256": "dd1d299273c6a1cf64360818588eab531ba28bcdb51bf0618672653e2f2a2061",
+      "bytes": 954854,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 16,
+      "angle": 105,
+      "hinge": [
+        [
+          380,
+          500
+        ],
+        [
+          1170,
+          654
+        ]
+      ],
+      "sha256": "8db593ca1e301e321eb8150ac8353e3c6283c426ea6e4b3f8a1ab4dfafddba73",
+      "bytes": 958186,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 17,
+      "angle": 105,
+      "hinge": [
+        [
+          380,
+          500
+        ],
+        [
+          1170,
+          654
+        ]
+      ],
+      "sha256": "8db593ca1e301e321eb8150ac8353e3c6283c426ea6e4b3f8a1ab4dfafddba73",
+      "bytes": 958186,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    }
+  ],
+  "sourceFrames": [
+    "/assets/scenes/chests/medium-rig-v1/frame-00.webp",
+    "/assets/scenes/chests/medium-rig-v1/frame-01.webp",
+    "/assets/scenes/chests/medium-rig-v1/frame-02.webp",
+    "/assets/scenes/chests/medium-rig-v1/frame-03.webp",
+    "/assets/scenes/chests/medium-rig-v1/frame-04.webp",
+    "/assets/scenes/chests/medium-rig-v1/frame-05.webp",
+    "/assets/scenes/chests/medium-rig-v1/frame-06.webp",
+    "/assets/scenes/chests/medium-rig-v1/frame-07.webp",
+    "/assets/scenes/chests/medium-rig-v1/frame-08.webp",
+    "/assets/scenes/chests/medium-rig-v1/frame-09.webp",
+    "/assets/scenes/chests/medium-rig-v1/frame-10.webp",
+    "/assets/scenes/chests/medium-rig-v1/frame-11.webp",
+    "/assets/scenes/chests/medium-rig-v1/frame-12.webp",
+    "/assets/scenes/chests/medium-rig-v1/frame-13.webp",
+    "/assets/scenes/chests/medium-rig-v1/frame-14.webp",
+    "/assets/scenes/chests/medium-rig-v1/frame-15.webp",
+    "/assets/scenes/chests/medium-rig-v1/frame-16.webp",
+    "/assets/scenes/chests/medium-rig-v1/frame-17.webp"
+  ],
+  "runtimeDimensions": [
+    640,
+    640
+  ],
+  "runtimeFps": 24,
+  "runtimeReceipt": [
+    {
+      "url": "/assets/scenes/chests/medium-rig-640-v1/frame-00.webp",
+      "bytes": 191356,
+      "sha256": "8b8e8fd18cf9165acedeca46fe968720bb94048f8e16a3007051314763adff72",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/medium-rig-640-v1/frame-01.webp",
+      "bytes": 191356,
+      "sha256": "8b8e8fd18cf9165acedeca46fe968720bb94048f8e16a3007051314763adff72",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/medium-rig-640-v1/frame-02.webp",
+      "bytes": 191356,
+      "sha256": "8b8e8fd18cf9165acedeca46fe968720bb94048f8e16a3007051314763adff72",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/medium-rig-640-v1/frame-03.webp",
+      "bytes": 192418,
+      "sha256": "73a89c7209796383e4dab46ee193cc2d4db153c4364e5670b13750f7dc6e38d1",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/medium-rig-640-v1/frame-04.webp",
+      "bytes": 192152,
+      "sha256": "35a2c92d7545be1f3f6361e9d3db9722b66025d132893b5efdd4d4e9eb5045d8",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/medium-rig-640-v1/frame-05.webp",
+      "bytes": 191562,
+      "sha256": "5c8c64f6111fbac9a32d1e374c4b5970670db942d153955acf16fea973867266",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/medium-rig-640-v1/frame-06.webp",
+      "bytes": 186902,
+      "sha256": "af3f91b70314b59e80596f435e0a951b39417004d89aef35e414aaf65f693217",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/medium-rig-640-v1/frame-07.webp",
+      "bytes": 179380,
+      "sha256": "dae0dbc3f38968942581dfbe8858a8b133b4dedc74c014ba14184aa2b3acc2e6",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/medium-rig-640-v1/frame-08.webp",
+      "bytes": 193256,
+      "sha256": "534574ba7f807bbbf593e0bbf26dadaed8d55edb6db9db9beb3e14b27fe295e2",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/medium-rig-640-v1/frame-09.webp",
+      "bytes": 215096,
+      "sha256": "4f461fe71726fa7af02ec1adcb819af128897f6728d5875b6989cdd2247b31d6",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/medium-rig-640-v1/frame-10.webp",
+      "bytes": 235546,
+      "sha256": "445748a80a200de35e6b9f879ae92935f732995b029794f35abb81f0c52ffd27",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/medium-rig-640-v1/frame-11.webp",
+      "bytes": 250360,
+      "sha256": "23338436564b9a4fffa6dc15d729d391e937c8f2f82ad83633767a13531a6b0e",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/medium-rig-640-v1/frame-12.webp",
+      "bytes": 260920,
+      "sha256": "e298010d110a256d9c82138a37295a250328e53744dba22f89f9deacc04990aa",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/medium-rig-640-v1/frame-13.webp",
+      "bytes": 266132,
+      "sha256": "1f4ca606cd80a9e19dbc73e565d9999cbf40cd8269cc4f97de98c80117b6ceed",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/medium-rig-640-v1/frame-14.webp",
+      "bytes": 272194,
+      "sha256": "e8094f34ce84d35ad17d2f2bf2d39bfba224c604a26726c2252529d0f528a1b1",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/medium-rig-640-v1/frame-15.webp",
+      "bytes": 276092,
+      "sha256": "e6e82e54452e29fee86e341084a00bdeac8b046a2a0281eac524f01de2f2ddf9",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/medium-rig-640-v1/frame-16.webp",
+      "bytes": 277964,
+      "sha256": "cc001beadc53d5447f0e14e9b89fe8b67e04051376e1dd4a6c8d423396554bef",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/medium-rig-640-v1/frame-17.webp",
+      "bytes": 277964,
+      "sha256": "cc001beadc53d5447f0e14e9b89fe8b67e04051376e1dd4a6c8d423396554bef",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-skewer",
+      "asset": "cards/expedition-starters/pierce.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a125fc-1da2-7300-83db-f2b39e275c76/exec-9b24397e-e9bd-4d4b-8d41-0600de0c2dea.png",
+      "revision": "pierce-exit-closeup-rough-20261011",
+      "prompt": "Use case: structural correction and style-transfer. One square card illustration for 穿刺.\nImage 1 is a FLAWED NAI draft: preserve its lower-left to upper-right weapon axis and cool blue-gray abstract background, but REPLACE the ring-shaped armor and hooked blade with the correct forms below. Image 2 is approved 铸甲: STYLE ONLY, opaque broad steel-gray planes, curved loaded-brush swipes, grouped dark shadows, economical surface and concentrated contact contrast. Image 3 初始攻击 is STYLE ONLY for clear steel silhouettes, sparse pale edge accents and broad directional painting; never copy its sword arrangement.\nShow the EXIT side of one armor plate just pierced by one steel spear. One STRAIGHT symmetric triangular spearhead projects toward the viewer and lower-left, its pointed tip at lower-left within the frame, enlarged by foreshortening. Broad central ridge, two straight cutting edges taper to ONE sharp tip. No hooked notch, crescent blade, scythe or sword guard. Its neck goes through a small jagged hole near right-center and disappears BEHIND the armor. The dark curved ARMOR SHEET is a large continuous charcoal-blue surface occupying upper-right and extending beyond the top/right frame; not a disk, ring, donut, helmet or pipe. The hole fits the spear neck closely and is much smaller than the plate. Three irregular bent steel lips curl outward toward the viewer around the exit; show thickness, pale steel torn edges and a small dark hole. The nearest lip partially overlaps the spear neck to make penetration unmistakable. Do not expose a huge circular opening. Strongest bright-dark edges belong to this contact area, while the spear's long ridge gets only a restrained broad ivory-gray highlight. No flying debris, blood, people or sparks.\nPaint everything with the actual broad opaque matte brush handling of Images 2–3. Large connected steel-gray/charcoal color masses, long loaded flat-brush swipes follow the spear and curve of armor; a few blunt dabs explain the bent lip turns. Hard grouped shadows and a few broad middle tones give real volume. Broken endings and selective overpaint surround quiet stretches. No fine contour network, smooth glossy metal, dense scratches, tiny angular facets, canvas/grain filter, or polished 3D. Preserve the draft's cool blue-gray backdrop as a few broad subdued paint masses with one muted gray-ochre diagonal sweep; the background stays abstract. All nonessential armor/weapon structure cropped; no full shield, complete shaft or extra props. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/.tmp/nai/output/pierce-redraw-20261011/pierce.png",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt2-turtlearmor.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/expedition-starters/basic-attack.webp"
+      ]
+    }
+  ]
+}

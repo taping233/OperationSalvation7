@@ -1,0 +1,745 @@
+{
+  "status": "passed",
+  "exitCode": 0,
+  "checks": {
+    "source_game_font_and_originals_unchanged": true,
+    "exact_11_unique_missing_cues": true,
+    "all_current_node_scenes_covered": true,
+    "all_coverage_targets_exist": true,
+    "base_frames_channels_finite_peak": true,
+    "base_hashes_and_stems": true,
+    "base_notes_inside_cycle": true,
+    "base_all_tracks_played": true,
+    "base_long_lead_notes": true,
+    "base_meter_and_mmp_paths": true,
+    "base_native_clip_length": true,
+    "base_loudness_safe": true,
+    "base_two_hand_piano_midi": true,
+    "base_left_bass_chords_span": true,
+    "base_mp3_decode": true,
+    "base_ogg_decode": true,
+    "base_ogg_loop": true,
+    "shop_frames_channels_finite_peak": true,
+    "shop_hashes_and_stems": true,
+    "shop_notes_inside_cycle": true,
+    "shop_all_tracks_played": true,
+    "shop_long_lead_notes": true,
+    "shop_meter_and_mmp_paths": true,
+    "shop_native_clip_length": true,
+    "shop_loudness_safe": true,
+    "shop_mp3_decode": true,
+    "shop_ogg_decode": true,
+    "shop_ogg_loop": true,
+    "fire_frames_channels_finite_peak": true,
+    "fire_hashes_and_stems": true,
+    "fire_notes_inside_cycle": true,
+    "fire_all_tracks_played": true,
+    "fire_long_lead_notes": true,
+    "fire_meter_and_mmp_paths": true,
+    "fire_native_clip_length": true,
+    "fire_loudness_safe": true,
+    "fire_two_hand_piano_midi": true,
+    "fire_left_bass_chords_span": true,
+    "fire_mp3_decode": true,
+    "fire_ogg_decode": true,
+    "fire_ogg_loop": true,
+    "event_frames_channels_finite_peak": true,
+    "event_hashes_and_stems": true,
+    "event_notes_inside_cycle": true,
+    "event_all_tracks_played": true,
+    "event_long_lead_notes": true,
+    "event_meter_and_mmp_paths": true,
+    "event_native_clip_length": true,
+    "event_loudness_safe": true,
+    "event_mp3_decode": true,
+    "event_ogg_decode": true,
+    "event_ogg_loop": true,
+    "altar_frames_channels_finite_peak": true,
+    "altar_hashes_and_stems": true,
+    "altar_notes_inside_cycle": true,
+    "altar_all_tracks_played": true,
+    "altar_long_lead_notes": true,
+    "altar_meter_and_mmp_paths": true,
+    "altar_native_clip_length": true,
+    "altar_loudness_safe": true,
+    "altar_mp3_decode": true,
+    "altar_ogg_decode": true,
+    "altar_ogg_loop": true,
+    "extraction_frames_channels_finite_peak": true,
+    "extraction_hashes_and_stems": true,
+    "extraction_notes_inside_cycle": true,
+    "extraction_all_tracks_played": true,
+    "extraction_long_lead_notes": true,
+    "extraction_meter_and_mmp_paths": true,
+    "extraction_native_clip_length": true,
+    "extraction_loudness_safe": true,
+    "extraction_mp3_decode": true,
+    "extraction_ogg_decode": true,
+    "extraction_ogg_loop": true,
+    "boss-governor_frames_channels_finite_peak": true,
+    "boss-governor_hashes_and_stems": true,
+    "boss-governor_notes_inside_cycle": true,
+    "boss-governor_all_tracks_played": true,
+    "boss-governor_long_lead_notes": true,
+    "boss-governor_meter_and_mmp_paths": true,
+    "boss-governor_native_clip_length": true,
+    "boss-governor_loudness_safe": true,
+    "boss-governor_mp3_decode": true,
+    "boss-governor_ogg_decode": true,
+    "boss-governor_ogg_loop": true,
+    "boss-brood_frames_channels_finite_peak": true,
+    "boss-brood_hashes_and_stems": true,
+    "boss-brood_notes_inside_cycle": true,
+    "boss-brood_all_tracks_played": true,
+    "boss-brood_long_lead_notes": true,
+    "boss-brood_meter_and_mmp_paths": true,
+    "boss-brood_native_clip_length": true,
+    "boss-brood_loudness_safe": true,
+    "boss-brood_mp3_decode": true,
+    "boss-brood_ogg_decode": true,
+    "boss-brood_ogg_loop": true,
+    "boss-psionic_frames_channels_finite_peak": true,
+    "boss-psionic_hashes_and_stems": true,
+    "boss-psionic_notes_inside_cycle": true,
+    "boss-psionic_all_tracks_played": true,
+    "boss-psionic_long_lead_notes": true,
+    "boss-psionic_meter_and_mmp_paths": true,
+    "boss-psionic_native_clip_length": true,
+    "boss-psionic_loudness_safe": true,
+    "boss-psionic_mp3_decode": true,
+    "boss-psionic_ogg_decode": true,
+    "boss-psionic_ogg_loop": true,
+    "success_frames_channels_finite_peak": true,
+    "success_hashes_and_stems": true,
+    "success_notes_inside_cycle": true,
+    "success_all_tracks_played": true,
+    "success_long_lead_notes": true,
+    "success_meter_and_mmp_paths": true,
+    "success_native_clip_length": true,
+    "success_loudness_safe": true,
+    "success_mp3_decode": true,
+    "success_ogg_decode": true,
+    "success_ogg_loop": true,
+    "defeat_frames_channels_finite_peak": true,
+    "defeat_hashes_and_stems": true,
+    "defeat_notes_inside_cycle": true,
+    "defeat_all_tracks_played": true,
+    "defeat_long_lead_notes": true,
+    "defeat_meter_and_mmp_paths": true,
+    "defeat_native_clip_length": true,
+    "defeat_loudness_safe": true,
+    "defeat_two_hand_piano_midi": true,
+    "defeat_left_bass_chords_span": true,
+    "defeat_mp3_decode": true,
+    "defeat_ogg_decode": true,
+    "defeat_ogg_loop": true,
+    "eleven_distinct_interval_rhythm_hooks": true,
+    "multiple_meters_and_forms": true
+  },
+  "cues": [
+    {
+      "id": "base",
+      "title": "晨霜归所",
+      "seconds": 68.5714375,
+      "meter": [
+        3,
+        4
+      ],
+      "key": "F major",
+      "tracks": 7,
+      "lufs": "-18.49",
+      "lra": "1.60",
+      "section_2s_changes_db": [
+        0.5813127461983463,
+        1.4777184267678223,
+        2.3703656420827173
+      ],
+      "ogg_seam": 0.002916323021054268,
+      "has_two_hand_piano": true
+    },
+    {
+      "id": "shop",
+      "title": "铜灯市集",
+      "seconds": 96.0,
+      "meter": [
+        5,
+        4
+      ],
+      "key": "C dorian",
+      "tracks": 6,
+      "lufs": "-18.50",
+      "lra": "1.70",
+      "section_2s_changes_db": [
+        0.9680900963372636,
+        0.97699756976521,
+        0.922651346179336
+      ],
+      "ogg_seam": 0.006036706268787384,
+      "has_two_hand_piano": false
+    },
+    {
+      "id": "fire",
+      "title": "炉边长夜",
+      "seconds": 80.0,
+      "meter": [
+        6,
+        8
+      ],
+      "key": "G major",
+      "tracks": 8,
+      "lufs": "-18.50",
+      "lra": "2.00",
+      "section_2s_changes_db": [
+        0.42978768507013854,
+        0.20273299758714813,
+        0.30661263863530763
+      ],
+      "ogg_seam": 0.0009137503802776337,
+      "has_two_hand_piano": true
+    },
+    {
+      "id": "event",
+      "title": "余烬来信",
+      "seconds": 98.46154166666666,
+      "meter": [
+        4,
+        4
+      ],
+      "key": "A minor",
+      "tracks": 6,
+      "lufs": "-18.50",
+      "lra": "1.90",
+      "section_2s_changes_db": [
+        1.1172980617988166,
+        2.8765084764936617,
+        1.6239346411659703
+      ],
+      "ogg_seam": 0.0010507330298423767,
+      "has_two_hand_piano": false
+    },
+    {
+      "id": "altar",
+      "title": "幽核回响",
+      "seconds": 84.705875,
+      "meter": [
+        4,
+        4
+      ],
+      "key": "F-sharp minor",
+      "tracks": 6,
+      "lufs": "-18.50",
+      "lra": "2.20",
+      "section_2s_changes_db": [
+        1.0940348620513305,
+        1.1680599005793297,
+        -1.3482932001347336
+      ],
+      "ogg_seam": 0.0012594405561685562,
+      "has_two_hand_piano": false
+    },
+    {
+      "id": "extraction",
+      "title": "渡口倒数",
+      "seconds": 62.222229166666665,
+      "meter": [
+        7,
+        8
+      ],
+      "key": "D mixolydian",
+      "tracks": 7,
+      "lufs": "-18.50",
+      "lra": "1.40",
+      "section_2s_changes_db": [
+        2.7508515978618107,
+        2.7131263833490635,
+        0.43216783062356967
+      ],
+      "ogg_seam": 0.0020031388849020004,
+      "has_two_hand_piano": false
+    },
+    {
+      "id": "boss-governor",
+      "title": "铁律封城",
+      "seconds": 64.0,
+      "meter": [
+        4,
+        4
+      ],
+      "key": "D minor",
+      "tracks": 8,
+      "lufs": "-18.50",
+      "lra": "1.20",
+      "section_2s_changes_db": [
+        0.6298963985258581,
+        1.1430500918350397,
+        0.5648025332493205
+      ],
+      "ogg_seam": 0.0012923777103424072,
+      "has_two_hand_piano": false
+    },
+    {
+      "id": "boss-brood",
+      "title": "腐巢微光",
+      "seconds": 64.0,
+      "meter": [
+        6,
+        8
+      ],
+      "key": "B minor",
+      "tracks": 7,
+      "lufs": "-18.50",
+      "lra": "1.10",
+      "section_2s_changes_db": [
+        1.294296177252825,
+        1.2667005042031825,
+        0.048595697221717415
+      ],
+      "ogg_seam": 0.0011240323074162006,
+      "has_two_hand_piano": false
+    },
+    {
+      "id": "boss-psionic",
+      "title": "折镜之主",
+      "seconds": 60.0,
+      "meter": [
+        3,
+        4
+      ],
+      "key": "E-flat minor",
+      "tracks": 7,
+      "lufs": "-18.50",
+      "lra": "1.10",
+      "section_2s_changes_db": [
+        0.5556297517921749,
+        0.14033200675932989,
+        -0.2432402941231473
+      ],
+      "ogg_seam": 0.0016739089041948318,
+      "has_two_hand_piano": false
+    },
+    {
+      "id": "success",
+      "title": "归航余晖",
+      "seconds": 46.956520833333336,
+      "meter": [
+        3,
+        4
+      ],
+      "key": "A major",
+      "tracks": 7,
+      "lufs": "-18.50",
+      "lra": "2.10",
+      "section_2s_changes_db": [
+        -1.0368319802382722,
+        0.888924516083538,
+        0.2143417245736856
+      ],
+      "ogg_seam": 0.0010465830564498901,
+      "has_two_hand_piano": false
+    },
+    {
+      "id": "defeat",
+      "title": "未熄之灯",
+      "seconds": 80.0,
+      "meter": [
+        4,
+        4
+      ],
+      "key": "G minor",
+      "tracks": 7,
+      "lufs": "-18.50",
+      "lra": "1.90",
+      "section_2s_changes_db": [
+        -0.504244587899187,
+        2.0486056146851936,
+        2.163321564679734
+      ],
+      "ogg_seam": 0.001215355470776558,
+      "has_two_hand_piano": true
+    }
+  ],
+  "normalized_hook_signatures": {
+    "base": [
+      [
+        0.0,
+        0,
+        1.41
+      ],
+      [
+        1.5,
+        3,
+        1.41
+      ],
+      [
+        3.0,
+        5,
+        1.41
+      ],
+      [
+        4.5,
+        3,
+        1.41
+      ]
+    ],
+    "shop": [
+      [
+        0.0,
+        0,
+        1.96
+      ],
+      [
+        2.0,
+        3,
+        3.46
+      ],
+      [
+        5.5,
+        2,
+        2.46
+      ],
+      [
+        8.0,
+        -4,
+        1.96
+      ]
+    ],
+    "fire": [
+      [
+        0.0,
+        0,
+        1.46
+      ],
+      [
+        1.5,
+        -2,
+        1.96
+      ],
+      [
+        3.5,
+        -4,
+        1.21
+      ],
+      [
+        4.75,
+        -9,
+        1.21
+      ]
+    ],
+    "event": [
+      [
+        0.0,
+        0,
+        2.46
+      ],
+      [
+        2.5,
+        3,
+        1.96
+      ],
+      [
+        4.5,
+        2,
+        1.96
+      ],
+      [
+        6.5,
+        -5,
+        1.46
+      ]
+    ],
+    "altar": [
+      [
+        0.0,
+        0,
+        2.96
+      ],
+      [
+        3.0,
+        3,
+        1.46
+      ],
+      [
+        4.5,
+        5,
+        1.46
+      ],
+      [
+        6.0,
+        0,
+        1.96
+      ]
+    ],
+    "extraction": [
+      [
+        0.0,
+        0,
+        1.46
+      ],
+      [
+        1.5,
+        -1,
+        1.96
+      ],
+      [
+        3.5,
+        -5,
+        1.46
+      ],
+      [
+        5.0,
+        -8,
+        1.96
+      ]
+    ],
+    "boss-governor": [
+      [
+        0.0,
+        0,
+        1.96
+      ],
+      [
+        2.0,
+        -4,
+        1.96
+      ],
+      [
+        4.0,
+        -7,
+        1.96
+      ],
+      [
+        6.0,
+        -4,
+        1.96
+      ]
+    ],
+    "boss-brood": [
+      [
+        0.0,
+        0,
+        0.71
+      ],
+      [
+        0.75,
+        -4,
+        2.21
+      ],
+      [
+        3.0,
+        -7,
+        1.46
+      ],
+      [
+        4.5,
+        -5,
+        1.46
+      ]
+    ],
+    "boss-psionic": [
+      [
+        0.0,
+        0,
+        1.21
+      ],
+      [
+        1.25,
+        -2,
+        1.71
+      ],
+      [
+        3.0,
+        -5,
+        1.46
+      ],
+      [
+        4.5,
+        -9,
+        1.46
+      ]
+    ],
+    "success": [
+      [
+        0.0,
+        0,
+        0.96
+      ],
+      [
+        1.0,
+        4,
+        1.96
+      ],
+      [
+        3.0,
+        7,
+        1.46
+      ],
+      [
+        4.5,
+        9,
+        1.46
+      ]
+    ],
+    "defeat": [
+      [
+        0.0,
+        0,
+        2.46
+      ],
+      [
+        2.5,
+        -2,
+        1.96
+      ],
+      [
+        4.5,
+        -5,
+        1.96
+      ],
+      [
+        6.5,
+        -9,
+        1.46
+      ]
+    ]
+  },
+  "structures": {
+    "base": {
+      "meter": [
+        3,
+        4
+      ],
+      "sections": [
+        0,
+        8,
+        20,
+        28
+      ]
+    },
+    "shop": {
+      "meter": [
+        5,
+        4
+      ],
+      "sections": [
+        0,
+        6,
+        14,
+        24
+      ]
+    },
+    "fire": {
+      "meter": [
+        6,
+        8
+      ],
+      "sections": [
+        0,
+        12,
+        20,
+        28
+      ]
+    },
+    "event": {
+      "meter": [
+        4,
+        4
+      ],
+      "sections": [
+        0,
+        6,
+        18,
+        26
+      ]
+    },
+    "altar": {
+      "meter": [
+        4,
+        4
+      ],
+      "sections": [
+        0,
+        8,
+        16,
+        22
+      ]
+    },
+    "extraction": {
+      "meter": [
+        7,
+        8
+      ],
+      "sections": [
+        0,
+        4,
+        14,
+        24
+      ]
+    },
+    "boss-governor": {
+      "meter": [
+        4,
+        4
+      ],
+      "sections": [
+        0,
+        6,
+        18,
+        26
+      ]
+    },
+    "boss-brood": {
+      "meter": [
+        6,
+        8
+      ],
+      "sections": [
+        0,
+        10,
+        18,
+        28
+      ]
+    },
+    "boss-psionic": {
+      "meter": [
+        3,
+        4
+      ],
+      "sections": [
+        0,
+        8,
+        14,
+        24
+      ]
+    },
+    "success": {
+      "meter": [
+        3,
+        4
+      ],
+      "sections": [
+        0,
+        4,
+        12,
+        20
+      ]
+    },
+    "defeat": {
+      "meter": [
+        4,
+        4
+      ],
+      "sections": [
+        0,
+        8,
+        14,
+        22
+      ]
+    }
+  },
+  "scope": "11 generated candidates only; all current scenes assigned, game not integrated.",
+  "limits": [
+    "No human audition claimed.",
+    "Hook uniqueness verifies first phrase intervals and rhythm, not aesthetic originality.",
+    "Frozen pre-master LMMS projects paths checked, not separately native-rendered."
+  ]
+}

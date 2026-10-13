@@ -1,0 +1,455 @@
+{
+  "id": "base",
+  "title": "晨霜归所",
+  "stem": "04-base-morning-haven",
+  "idea": "安稳的三拍驻地小圆舞曲；钢琴双手主导，单簧管只在句尾接话，B段把旋律交给弦乐色彩。",
+  "key": "F major",
+  "meter": [
+    3,
+    4
+  ],
+  "bpm_quarter": 84,
+  "bars": 32,
+  "total_beats": 96.0,
+  "seconds": 68.5714375,
+  "tracks": [
+    {
+      "name": "Piano right hand",
+      "program": 0,
+      "bank": 0,
+      "hand": "right",
+      "notes": 64,
+      "pan": 7,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/04-base-morning-haven-Piano-right-hand.wav",
+        "bytes": 26331520,
+        "sha256": "c5059d3aee1a3cdac063f2ddd3186054aa5325f636f8c3c7643e037e73eae8e1"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.97
+        ],
+        [
+          18.0,
+          0.97
+        ],
+        [
+          30.0,
+          1
+        ],
+        [
+          54.0,
+          1
+        ],
+        [
+          66.0,
+          1.04
+        ],
+        [
+          78.0,
+          1.04
+        ],
+        [
+          90.0,
+          0.94
+        ],
+        [
+          90.0,
+          0.94
+        ],
+        [
+          96.0,
+          0.97
+        ]
+      ],
+      "cc64_used": true
+    },
+    {
+      "name": "Piano left hand",
+      "program": 0,
+      "bank": 0,
+      "hand": "left",
+      "notes": 96,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/04-base-morning-haven-Piano-left-hand.wav",
+        "bytes": 26331520,
+        "sha256": "2d28ecf637ae3a14f8d5f51c86ba54f124dc049183031b174e8f553ebd38d8f5"
+      },
+      "target_active_rms_dbfs": -28.5,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          18.0,
+          0.83
+        ],
+        [
+          30.0,
+          0.92
+        ],
+        [
+          54.0,
+          0.92
+        ],
+        [
+          66.0,
+          0.98
+        ],
+        [
+          78.0,
+          0.98
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ]
+      ],
+      "cc64_used": true
+    },
+    {
+      "name": "Clarinet window",
+      "program": 71,
+      "bank": 0,
+      "hand": null,
+      "notes": 10,
+      "pan": 23,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/04-base-morning-haven-Clarinet-window.wav",
+        "bytes": 26331520,
+        "sha256": "74e8504bf07fc522d2975cdcee787f975f55743603a33e96fb016e3c47b90ff5"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.35
+        ],
+        [
+          18.0,
+          0.35
+        ],
+        [
+          30.0,
+          0.8
+        ],
+        [
+          54.0,
+          0.8
+        ],
+        [
+          66.0,
+          0.92
+        ],
+        [
+          78.0,
+          0.92
+        ],
+        [
+          90.0,
+          0.48
+        ],
+        [
+          90.0,
+          0.48
+        ],
+        [
+          96.0,
+          0.35
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Cello hearth",
+      "program": 42,
+      "bank": 0,
+      "hand": null,
+      "notes": 32,
+      "pan": 30,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/04-base-morning-haven-Cello-hearth.wav",
+        "bytes": 26331520,
+        "sha256": "bb42262ab99f59c5b425abe4e078c8cb3addb57e7f0a4f2bce9513845243f6d6"
+      },
+      "target_active_rms_dbfs": -36,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          18.0,
+          0.83
+        ],
+        [
+          30.0,
+          0.92
+        ],
+        [
+          54.0,
+          0.92
+        ],
+        [
+          66.0,
+          0.98
+        ],
+        [
+          78.0,
+          0.98
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Warm bowed room",
+      "program": 49,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": -29,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/04-base-morning-haven-Warm-bowed-room.wav",
+        "bytes": 26331520,
+        "sha256": "5181455a2d15098e317c8ce3b4a2a089032831bbd01b39fd7c2af3326c9ab68b"
+      },
+      "target_active_rms_dbfs": -34,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          18.0,
+          0.83
+        ],
+        [
+          30.0,
+          0.92
+        ],
+        [
+          54.0,
+          0.92
+        ],
+        [
+          66.0,
+          0.98
+        ],
+        [
+          78.0,
+          0.98
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Harp morning",
+      "program": 46,
+      "bank": 0,
+      "hand": null,
+      "notes": 20,
+      "pan": -30,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/04-base-morning-haven-Harp-morning.wav",
+        "bytes": 26331520,
+        "sha256": "a79b35ff8a3225c73806de332e67830d6d73c92af3a4375aa3a628a8e84a3e34"
+      },
+      "target_active_rms_dbfs": -41,
+      "continuous_gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          18.0,
+          0.68
+        ],
+        [
+          30.0,
+          0.72
+        ],
+        [
+          54.0,
+          0.72
+        ],
+        [
+          66.0,
+          0.84
+        ],
+        [
+          78.0,
+          0.84
+        ],
+        [
+          90.0,
+          0.58
+        ],
+        [
+          90.0,
+          0.58
+        ],
+        [
+          96.0,
+          0.68
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/04-base-morning-haven-Steady-low-foundation.wav",
+        "bytes": 26331520,
+        "sha256": "91ac451d5cea9f3895b302fda94ccb8f7dfde0e6feaf6981ffe4e297b603a69f"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          18.0,
+          0.83
+        ],
+        [
+          30.0,
+          0.92
+        ],
+        [
+          54.0,
+          0.92
+        ],
+        [
+          66.0,
+          0.98
+        ],
+        [
+          78.0,
+          0.98
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.49",
+    "input_tp": "-6.56",
+    "input_lra": "1.60",
+    "input_thresh": "-28.49",
+    "output_i": "-22.89",
+    "output_tp": "-11.09",
+    "output_lra": "1.50",
+    "output_thresh": "-32.89",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.11"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.2641170545432695,
+      0.7407976998845969
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/04-base-morning-haven.mmp",
+      "bytes": 6705,
+      "sha256": "bdbdc948b0af4c52bcd9285937d4a88c70db7abd09b6f06d7803c274330b3be2"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/04-base-morning-haven.wav",
+      "bytes": 19748618,
+      "sha256": "5b83d0eed9e8a42b44b4a11ec6757be9c613a245ac72d06a5ff72d3cc188a8c8"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/04-base-morning-haven.mp3",
+      "bytes": 2196548,
+      "sha256": "a747f8b808e3203a6cd941af49ec5bb770f45c44b153b93b6d56606429582b6e"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/04-base-morning-haven.ogg",
+      "bytes": 1089372,
+      "sha256": "9264f07f975fa2ccb83e2ae5bc483280d67c13874db6db4cee742172ac868c3a"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/04-base-morning-haven-piano.mid",
+      "bytes": 2062,
+      "sha256": "dcaca8b978b715b9ecdbc5345749719d91727caf67d83ae727c96c885d8ebf33"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "opening"
+    },
+    {
+      "start_bar": 8,
+      "name": "first development"
+    },
+    {
+      "start_bar": 20,
+      "name": "contrast"
+    },
+    {
+      "start_bar": 28,
+      "name": "connected return"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed"
+}

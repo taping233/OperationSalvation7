@@ -1,0 +1,25 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5371/four-player-qa.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 84-85, 94-95, 104-105, 115-116, 125-126, 135-136, 145-146, 155-156, 165-166, 170, 193-194
++						204 container
++							205 text 古朴 古朴
++						206 container
++							207 text 古朴 古朴
++						208 container
++							209 text 古朴 古朴
++						210 container
++							211 text 史诗 史诗
++						212 container
++							213 text 古朴 古朴
++						214 container
++							215 text 古朴 古朴
++						216 container
++							217 text 衍生 衍生
++						218 container
++							219 text 古朴 古朴
++						220 container
++							221 text 史诗 史诗
++					222 text 能量不足：需要 6，当前 2
++						223 container
++							224 text 史诗 史诗
+The focused UI element is 188 button 关闭规则，返回手牌

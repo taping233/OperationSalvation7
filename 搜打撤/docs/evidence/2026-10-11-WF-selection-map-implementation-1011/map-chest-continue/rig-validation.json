@@ -1,0 +1,95 @@
+{
+  "rigs": [
+    {
+      "kind": "small",
+      "passed": true,
+      "frames": 18,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "fps": 24,
+      "fixedHinge": true,
+      "lowerBodyVisibleRGBAIdentical": true,
+      "maximumBytes": 843574,
+      "runtimeMaximumBytes": 248260
+    },
+    {
+      "kind": "medium",
+      "passed": true,
+      "frames": 18,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "fps": 24,
+      "fixedHinge": true,
+      "lowerBodyVisibleRGBAIdentical": true,
+      "maximumBytes": 958186,
+      "runtimeMaximumBytes": 277964
+    },
+    {
+      "kind": "large",
+      "passed": true,
+      "frames": 18,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "fps": 24,
+      "fixedHinge": true,
+      "lowerBodyVisibleRGBAIdentical": true,
+      "maximumBytes": 1040916,
+      "runtimeMaximumBytes": 298396
+    },
+    {
+      "kind": "class",
+      "passed": true,
+      "frames": 18,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "fps": 24,
+      "fixedHinge": true,
+      "lowerBodyVisibleRGBAIdentical": true,
+      "maximumBytes": 917980,
+      "runtimeMaximumBytes": 261222
+    },
+    {
+      "kind": "boss",
+      "passed": true,
+      "frames": 18,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "fps": 24,
+      "fixedHinge": true,
+      "lowerBodyVisibleRGBAIdentical": true,
+      "maximumBytes": 972700,
+      "runtimeMaximumBytes": 284980
+    }
+  ],
+  "limitation": "Alpha-zero hidden RGB can be optimized by WebP encoder; painted body remains fixed; visual approval pending."
+}

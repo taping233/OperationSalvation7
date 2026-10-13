@@ -1,0 +1,12 @@
+{
+  "id": "02",
+  "slug": "head-neck",
+  "version": 4,
+  "prompt": "Edit ONLY the iris/pupil gaze direction in image 1. Preserve its pretty new face, all eyelid shapes, brows, mouth with tiny fang, scalp/ears/neck silhouette, skin paint, canvas size 1254x1254 and exact placement. BOTH eyes should look toward a target at SCREEN RIGHT as in combat reference 2. Keep cyan-blue iris sizes and sparse highlights the same. Near/left-visible eye iris moves slightly right within its eye opening; far/right-visible eye iris moves more clearly toward the right side of its opening so the two eyes share ONE consistent rightward gaze, not looking toward viewer or inward toward each other. Approximate shifts: near iris 10–15 pixels right and far iris 30–40 pixels right in the current canvas, as anatomy allows, with coherent whites around them. Do not change face angle, expression, proportions or add hair/accessories. Actual transparent PNG with zero alpha outside the original head. One gaze-corrected head+neck sprite only, no shadow/aura/background/text.",
+  "refs": [
+    "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\characters\\wu-parts-v1\\part-02-head-neck-v3.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\wu-battle-base-frame000.png"
+  ],
+  "tool": "built-in imagegen",
+  "stage": "candidate"
+}

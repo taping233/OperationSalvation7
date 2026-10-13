@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "card_id": "tt7-stratagem",
+      "asset": "cards/spell-tt7-stratagem.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-2a80d71e-6e6e-4d62-b543-b44fd6f4562e.png",
+      "revision": "baita-stratagem-profession-builtin-20261010",
+      "prompt": "Repaint Image1 NovelAI draft as the profession card 法师锦囊, starring Baita. Image1 is the body pose and WHITE BACKGROUND reference: keep seated side-turn/forward lean, face upper left, working hands at left-middle, long hair trailing behind, skirt/legs and crop. Correct the duplicated prop: there must be exactly ONE spell sachet, held by her near hand. REMOVE the separate giant floating pouch at lower-right and combine its design into the held pouch, slightly enlarging that held pouch so the opening and contents are readable. Her other hand pinches ONE selected ivory-gold folded spell leaf from that opening; exactly TWO secondary folded leaves remain tucked inside. The selected leaf begins unfolding diagonally to the right into one broad gold-ivory magical shape. Every effect must visibly originate at the single held pouch; no detached prop or duplicated bag. Preserve SOLID WHITE background and all empty white spaces, do not replace with gray/teal/brown scenery or add colored patches. The gold leaf uses readable warm shadow planes against white. Image2 is EXCLUSIVE identity: young adult female Baita, recognizable calm gentle anime face with clear GREEN EYES, very long DARK BROWN WAVY CURLY HAIR, swept bangs and two small gold clips, white long-sleeved high-collar blouse with cuff buttons, dark forest-green suspender long dress with wide straps and gold buckles, white socks/black shoes. No blonde/straight hair, witch hat, staff, cake, fork or flower. Do not copy Image2 eating pose or props. Image3 supplies APPROVED hand-painted card finish only: matte opaque grouped color masses, broad direction swipes, handmade decisive light-shadow shapes, sparse structural colored lines and selective face/hand detail. Baita's green eyes and delicate face must be clear, not doll simplified. Hands need believable five fingers and connected shoulders/elbows/wrists; show one hand gripping pouch rim and other two fingers selecting the leaf. Hair forms substantial wavy locks with quiet dark brown masses and selected broad highlights, not hundreds of small ringlets. Blouse/dress retain principal fold planes and cloth tension at elbows/waist with broad handmade strokes, not smooth glossy chiffon or paper-cut polygons. Pouch is dark green fabric with restrained gold edge and simple cord, no coins or metallic treasure chest. Optional chair support stays secondary, no ornate room. Face/hand/pouch are focal, remaining surfaces economical. No fine filigree, dense microfolds/strands, airbrush gloss, grain filter, tiny scratches, triangle mosaic, impasto ridges, rule text, UI, frame or watermark. Single square profession card illustration.",
+      "references": [
+        "D:/素材/代号柒/.tmp/nai/output/baita-stratagem-20261010/draft.png",
+        "D:/素材/代号柒/搜打撤/docs/character-bible/ref-images/baita.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/hero-summoner.webp"
+      ]
+    }
+  ]
+}

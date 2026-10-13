@@ -1,0 +1,130 @@
+- main:
+  - text: 金币
+  - generic: "6"
+  - text: 攻击
+  - generic: "4"
+  - button "离开对局":
+  - button:
+  - button:
+  - generic: 当前生命
+  - generic: 26/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog "bag 背包":
+    - button "关闭": ×
+    - heading "背包" [level=2]:
+      - text: 背包
+      - button:
+    - generic: 金币 6
+    - generic: 物资估值 0
+    - img "gem"
+    - text: 员工通行证A碎片 1/2
+    - button "关闭背包":
+      - generic: 返回
+    - region "随身背包":
+      - heading "随身背包 11/25 格 按稀有度 按种类" [level=3]:
+        - text: 随身背包
+        - generic: 11/25 格
+        - button "按稀有度"
+        - button "按种类"
+      - paragraph: 点击卡面查看详情 · 按住拖动整理
+      - generic: "1"
+      - img "寻宝"
+      - generic: 寻宝
+      - generic: 法术 · 古朴 古朴
+      - generic: 造成 4 点法术伤害，并发现 1 张卡牌。
+      - generic: ×1
+      - generic: "1"
+      - img "迅疾箭"
+      - generic: 迅疾箭
+      - generic: 武术 · 古朴 古朴
+      - img "cards"
+      - text: 抽 1
+      - generic: 造成（你的攻击力 - 1）点攻击伤害，抽 1 张牌。
+      - generic: ×1
+      - img "长剑"
+      - generic: 长剑
+      - generic: 装备 · 古朴 古朴
+      - generic: 你的攻击力增加 1 点。
+      - generic: ×2
+      - generic: "1"
+      - img "花鸩"
+      - generic: 花鸩
+      - generic: 法术 · 史诗 史诗
+      - generic: 使 1 名角色的中毒层数翻倍，并立即触发该角色的 1 次毒伤。
+      - generic: ×1
+      - img "流血药水"
+      - generic: 流血药水
+      - generic: 道具 · 稀有 稀有
+      - generic: 造成 2 点固定伤害；对目标附加 1 层流血。
+      - generic: ×1
+      - img "口粮"
+      - generic: 口粮
+      - generic: 资源 · 稀有 稀有
+      - generic: 升级宠物。
+      - generic: ×1
+      - img "珍珠盒"
+      - generic: 珍珠盒
+      - generic: 装备 · 稀有 稀有
+      - generic: 本牌内置 3×3 格空间，可容纳所有类型的资源卡牌。
+      - generic: ×1
+      - generic: "1"
+      - img "法力光波"
+      - generic: 法力光波
+      - generic: 法术 · 古朴 古朴
+      - generic: 造成 5 点法术伤害。
+      - generic: ×1
+      - generic: "6"
+      - img "后备能源"
+      - generic: 后备能源
+      - generic: 法术 · 史诗 史诗
+      - img "cards"
+      - text: 抽 2
+      - generic: 抽 2 张牌，并回复你的全部能量；你的消耗口袋中每有 1 张法术牌，本牌费用减少 1 点。
+      - generic: ×1
+      - generic: "1"
+      - img "连射"
+      - generic: 连射
+      - generic: 武术 · 稀有 稀有
+      - generic: 造成 2 点固定伤害；本牌的伤害效果触发 3 次。
+      - generic: ×1
+      - img "法杖"
+      - generic: 法杖
+      - generic: 装备 · 古朴 古朴
+      - generic: 你的法伤增加 1 点。
+      - generic: ×1
+    - complementary:
+      - region "安全格":
+        - heading "安全格 1/2 格" [level=3]:
+          - text: 安全格
+          - generic: 1/2 格
+        - paragraph: 撤离失败时运回基地 · 拖入存放，拖回取出
+        - generic: "2"
+        - img "圣光之源"
+        - generic: 圣光之源
+        - generic: 法术 · 星月专属 职业
+        - img "cards"
+        - text: 抽 5
+        - generic: 抽 5 张牌。
+        - generic: ×1
+      - region "消耗口袋":
+        - heading "消耗口袋 3 张 · 暂不可用" [level=3]:
+          - text: 消耗口袋
+          - generic: 3 张 · 暂不可用
+        - paragraph: 已用过的卡牌 · 在火堆或用道具复原
+        - generic: "1"
+        - img "气功波"
+        - generic: 气功波
+        - generic: 武术 · 古朴 古朴
+        - img "cards"
+        - text: 抽 1
+        - generic: 抽 1 张牌；对全体敌人造成等同于抽到卡牌价格的固定伤害。
+        - generic: "1"
+        - img "法力光波"
+        - generic: 法力光波
+        - generic: 法术 · 古朴 古朴
+        - generic: 造成 5 点法术伤害。
+        - generic: "2"
+        - img "余烬爆裂"
+        - generic: 余烬爆裂
+        - generic: 法术 · 稀有 稀有
+        - generic: 对全体敌人造成 2 点法术伤害；若本次伤害击杀敌人，本牌额外施放 1 次。

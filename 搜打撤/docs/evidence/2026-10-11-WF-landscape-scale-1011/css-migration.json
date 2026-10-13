@@ -1,0 +1,369 @@
+{
+  "baseline": [
+    1920,
+    1080
+  ],
+  "reachableStylesheets": 78,
+  "files": [
+    {
+      "file": "game/css/base.css",
+      "beforeSha256": "318bb1e05d0ba9b65e7ef3375d08995e33815c9b9577d9da15cdfe1f1755c06e",
+      "afterSha256": "20034355e9b4845795c5183318a4ad31d22a39a8084e67cfc06de56e1ec2b199",
+      "removedMedia": 1,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 7
+    },
+    {
+      "file": "game/css/cards.css",
+      "beforeSha256": "4b938d9ce137cd6372c9af309f7ac8b6fb2524e015e098b24c93ed2382fcca99",
+      "afterSha256": "51c99bbabb76382e6f56346aa0e157338377cf08c287cafc56970aa2c3703435",
+      "removedMedia": 1,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 2
+    },
+    {
+      "file": "game/css/overlays.css",
+      "beforeSha256": "db7e75a1b3a7721148b23a229349fd8f446eb7994e38b1c0f2d706fe5d400b0b",
+      "afterSha256": "790aa812c8a86e6efb8ad58d99af10bc9ffef4aaecf7c1302a834fd0233c66d9",
+      "removedMedia": 1,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 32
+    },
+    {
+      "file": "game/css/hub.css",
+      "beforeSha256": "a0bbd06b291a7d7f340c4d022d43666583ffa0c7f5506d62cd85b2fe10635a5a",
+      "afterSha256": "26074a3d58abda3e0177e5ad0678c0ea1ba0d89e67b9255c6344f1a63fbae9a5",
+      "removedMedia": 0,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 4
+    },
+    {
+      "file": "game/css/battle.css",
+      "beforeSha256": "edd274f99c48e8800c596400f1ab0ac15c55e015767863e5cd194899264d0ac3",
+      "afterSha256": "a305c83697a4c69e87153a7a55100f9a9779975d85885a3a943ecb16779abc06",
+      "removedMedia": 1,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 32
+    },
+    {
+      "file": "game/css/scenes.css",
+      "beforeSha256": "9c296b8cbff16faa7cabad5dea767efccd97998d2fdf7ad6ead0b17aac1f949b",
+      "afterSha256": "efccf73e96e0dab7979cd9b9e7fff7e5544c64820124c19fd98dd6911e7b3b2c",
+      "removedMedia": 2,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 16
+    },
+    {
+      "file": "game/css/lab-ending.css",
+      "beforeSha256": "c33a1bcb2f30dec96b9a008b67eec3c81d29ff86d8717e886b309c1b26d39af2",
+      "afterSha256": "0a86a880e2d2ce640f00973bd34a74462f4a8f06e9b3c11c72098586017675a0",
+      "removedMedia": 0,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 1
+    },
+    {
+      "file": "game/css/winter.css",
+      "beforeSha256": "bfb9d913fd59e2bdcaf24e633b66e89248c22f0ff2cb7f689a0b43182a19d613",
+      "afterSha256": "e3a45806faf8b570e33b23dec3a52d0687fd4e14706b1475b765bfb44c210f5b",
+      "removedMedia": 5,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 40
+    },
+    {
+      "file": "game/css/expedition.css",
+      "beforeSha256": "ab42c8a9db446b1022cfd2018205b8423d3d985be6d2ae54976945edc99a0a34",
+      "afterSha256": "24caa415e729758d95a0ec4d328fb278264f37be5f8ed35ae1f3b69236a5a82c",
+      "removedMedia": 4,
+      "desktopMediaUnwrapped": 1,
+      "viewportUnitsReplaced": 4
+    },
+    {
+      "file": "game/css/expedition-map.css",
+      "beforeSha256": "5d7ffe949fe30afd294416ca39b090318faac0bca3a3800c4eed5e07cf1e9e03",
+      "afterSha256": "e004bc84d5cdc3f2771f3e4621d69246c05d95cbc9d02d4247560d6920b5b4a8",
+      "removedMedia": 4,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 1
+    },
+    {
+      "file": "game/css/expedition-hub.css",
+      "beforeSha256": "c98b368bea0befbd54f337288e3eafab365f7deba7514624c9f0637378347f71",
+      "afterSha256": "e94603eb25ce7d0624996df878e99a55ca3e8f674cdbccd567e8760dec71e960",
+      "removedMedia": 5,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 9
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "beforeSha256": "47d0f9a37cf605e4771bd71574bbd5517491b7f3adbd295a2f8b5608e4d6e1e9",
+      "afterSha256": "3f703713687359dfe99d6c7a89bafac2ef82e70b6ab3c011626cad9a54990049",
+      "removedMedia": 4,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 5
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "beforeSha256": "eb817822bc6b7217150a17b06c42cdcaa36c83fffec1352f718623e8ac3de48b",
+      "afterSha256": "9a164aabbd43beae3a268cb0cb1ab25f71d0273755e50aa364aa09436ac70bd0",
+      "removedMedia": 4,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 6
+    },
+    {
+      "file": "game/css/expedition-battle.css",
+      "beforeSha256": "00a872c85688a03768996b89fbe1b9cb0c9d1042d34d0cddf2c8b1aaa5c6db80",
+      "afterSha256": "07abd805c4c7b9436d5934ab254132311c222acb2786d18bd7411f1d0f249eda",
+      "removedMedia": 9,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 23
+    },
+    {
+      "file": "game/css/expedition-library.css",
+      "beforeSha256": "50a52d6c046ece4d36f19a4fa6b5b300a7a094dafa7852789bf46313058ebba2",
+      "afterSha256": "2118f87fef8d5d3c083e8d5d143c793c1b5bcd2be1115cfb5fecbd47194cc4dd",
+      "removedMedia": 1,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 0
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "beforeSha256": "c209064acaa896d88774ef2252bbd46f8062b96e0ce6851521eb04264c52529d",
+      "afterSha256": "c676cd25417784b34f58ae79c0d6879e2a10de6c59a229c2fee63bda7f29863a",
+      "removedMedia": 11,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 25
+    },
+    {
+      "file": "game/css/expedition-shop.css",
+      "beforeSha256": "c4cf1fb52c2d5f0ece6c061f7e6bf29afa8a6411498eaef5593c3b4cda03ce8e",
+      "afterSha256": "1c2cb06fa9469a231a419cc4f77c79ced311c955b651a1a0bf73d07cabcf9585",
+      "removedMedia": 8,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 2
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "beforeSha256": "5baf7c36618dd1d5e6ce94ef5ff151d8fb9fcaf0f3676ddfa4566e2786d25ff7",
+      "afterSha256": "136394ea2950385f8000d4a8b08fb50f352cbc420f80f6914a58aa68824325b6",
+      "removedMedia": 2,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 4
+    },
+    {
+      "file": "game/css/page-slot-select.css",
+      "beforeSha256": "80a815e9e801690c37caa3eb55ef8bf4bad005763e73abd1d554d6ad42ddfa2f",
+      "afterSha256": "60124790205506e9754524eb4d31369f442ac019e7fe58a98d23115bb05577c2",
+      "removedMedia": 2,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 6
+    },
+    {
+      "file": "game/css/page-settings.css",
+      "beforeSha256": "0bd522f58eb70fadb3ed24343e52df5ed71b5ba61e7283e1c9cc0a27e2985d5c",
+      "afterSha256": "5f0d3e1929eb0089bb551ea65a0d7c831a371ed62f276b06d3847cc39e5f2e0a",
+      "removedMedia": 1,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 1
+    },
+    {
+      "file": "game/css/page-datapage.css",
+      "beforeSha256": "067da7dbfeb3b304553cde520dfd0b9353fceab08bb5c67339548e0d238dbf2d",
+      "afterSha256": "54f1ea084a185799ee89ac7c30560859fbfc83ba1d8d9d5cc2c5dc25494662cb",
+      "removedMedia": 2,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 1
+    },
+    {
+      "file": "game/css/page-ach.css",
+      "beforeSha256": "7fb610bf9220234df3d090f285c05cd4f656d9f1ee2d577eec6d5ac8e9efe727",
+      "afterSha256": "7df9869e2586e78dd086c135ab24a1a3e7864b7235f8ff3dc8af48f6f4750208",
+      "removedMedia": 0,
+      "desktopMediaUnwrapped": 1,
+      "viewportUnitsReplaced": 0
+    },
+    {
+      "file": "game/css/page-expedition-hud.css",
+      "beforeSha256": "5496f6662bf1de541ad717031de5377e5e6f36ef3a6c017de5c794d9896525e6",
+      "afterSha256": "872f9fbbf8daa54b8b51ca5eebc057060eb8ef8d2af709439d47438434072d00",
+      "removedMedia": 0,
+      "desktopMediaUnwrapped": 1,
+      "viewportUnitsReplaced": 0
+    },
+    {
+      "file": "game/css/pocket-strip.css",
+      "beforeSha256": "0c16c63c48a5ee73a588311bf938f226721585d99d890997611469bbe37ed0d3",
+      "afterSha256": "f55b012ff49afd8e270115fbb1f6f3b2de7c555b33aff107c98b1da8b2399a78",
+      "removedMedia": 1,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 0
+    },
+    {
+      "file": "game/css/page-battle-ui.css",
+      "beforeSha256": "94dad02ed0a1215be36a3a32433064232f0d856d5fcfe2c19f8d78e0de34134d",
+      "afterSha256": "ba29d17cffd584837e1c1f4936f7d2e5ad80e2f2b6b64f738f3c15e561bd37fc",
+      "removedMedia": 1,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 1
+    },
+    {
+      "file": "game/css/base-camp-compact.css",
+      "beforeSha256": "ee654728c444503be68492bd784a6a02d0d45997f7bb9aaf1c0a1fb53473d5e2",
+      "afterSha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9",
+      "removedMedia": 1,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 0
+    },
+    {
+      "file": "game/css/camp-entry.css",
+      "beforeSha256": "eb7165b79ad547b9e428e884f3d454ca5afbf5e7fd8ce1b5c6a64a43cafd3147",
+      "afterSha256": "65d17e18758bbaee181183d992e02757edc7df393191970a523fdc2490c7332c",
+      "removedMedia": 0,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 3
+    },
+    {
+      "file": "game/css/home-linked-interactions.css",
+      "beforeSha256": "597df9d92f8c522f151c4da9630990a418080e5d7883f49a6153eeff17dc7a2f",
+      "afterSha256": "b6d70c2d361d93fb65a251948332ee3d06e89161151b64ee43eb646e54f0ddc4",
+      "removedMedia": 0,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 0
+    },
+    {
+      "file": "game/css/title-achievements.css",
+      "beforeSha256": "bffb79dd626cb62d233bcffca3c357e33f8c046c1d7c5d0ca87e8e01e6fc5cbc",
+      "afterSha256": "39bf8169417b6d74aace905e3426fcfe530e50bac1f520c21aa3b813109f7d68",
+      "removedMedia": 2,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 1
+    },
+    {
+      "file": "game/css/beginner-guide.css",
+      "beforeSha256": "85363e92506559979b4e0b892df6e86fd713a484723f1400f2acebae1c208cc1",
+      "afterSha256": "75a4769a6fa0a3e40230823f76f77c0d88b9891a81186c607fcf489875658852",
+      "removedMedia": 2,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 0
+    },
+    {
+      "file": "game/css/archive-back.css",
+      "beforeSha256": "9158fcb820774907f1e410c1d76690c9f3246e640a6e61a0c612c04f278e2217",
+      "afterSha256": "29e9ff37b078d113073a1e2a8b79a4ab014200ce4a3dc7ab8bd0297756f0dd76",
+      "removedMedia": 1,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 0
+    },
+    {
+      "file": "game/css/page-loading.css",
+      "beforeSha256": "68c0ea28da202456b9e55c107f52177f91f4940c6577a7d66a2c80d843143720",
+      "afterSha256": "ce6879c6afca9e0bc2d5c17d611207ffc0192494dc86ed12f26154252893abd5",
+      "removedMedia": 0,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 1
+    },
+    {
+      "file": "game/css/photo-studio-mounts.css",
+      "beforeSha256": "a2871d9d88d4bcadd55a0b88136be7d3fdfa2ac78993d3e92837d2efb983c248",
+      "afterSha256": "9c036b4cca8cedc4b2f02724c5f6b396b146855afa580422c30af6ba8c7ff7fe",
+      "removedMedia": 1,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 1
+    },
+    {
+      "file": "game/css/photo-studio-unified.css",
+      "beforeSha256": "d7c032573a15c9ca53a77c72431741452cc890d5d47bcc26d7adb7d6e8bfa496",
+      "afterSha256": "1e7812e8abb9a0302b7397295b5910b4dc15f55ddf610a3c8860e31bd9ed040d",
+      "removedMedia": 5,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 8
+    },
+    {
+      "file": "game/css/preparation.css",
+      "beforeSha256": "1b802b2a0e21963c171cea2707765f6f990a082c682876fe567f754bd62e740e",
+      "afterSha256": "b962d914de10d1169ae822bfa408ae8bdf309d1a8f3668adf8975f09fc1f3c83",
+      "removedMedia": 2,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 1
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "beforeSha256": "a6bbeade485f507fab8f150052c14f42c1c9ce63621ea5a9284ef670552e4012",
+      "afterSha256": "1b8d3f851df23999bf2310a47038d4396b91f47fb2f9b391bf5e65db432fd56e",
+      "removedMedia": 0,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 1
+    },
+    {
+      "file": "game/css/inventory-zoom.css",
+      "beforeSha256": "f09c3ce207ca599b59d70a5e69742b36cb7b4d1c52e794bec79078b5d02b351f",
+      "afterSha256": "3b21c365452b3a1a2c6937f7c6fabd88139c74006321854a1769aedcf22f6f5b",
+      "removedMedia": 0,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 1
+    },
+    {
+      "file": "game/css/base-panel-layout.css",
+      "beforeSha256": "75f5e5972d3d9277e51e004841d9a40ff0598268e5edf7bff3bac79070ad04a9",
+      "afterSha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9",
+      "removedMedia": 1,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 0
+    },
+    {
+      "file": "game/css/base-cohesion-v5.css",
+      "beforeSha256": "7757093f873ef3b1d9bcafdf5a2b823f4a484c2198ce5842931ccf0cf610ca34",
+      "afterSha256": "f020574ba7ea72ff84b466776010d7589dc22ee8d343b1fffd56ff0e271dd1b0",
+      "removedMedia": 1,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 0
+    },
+    {
+      "file": "game/css/base-rooms-v7.css",
+      "beforeSha256": "a505cc19f20fa8677010902d5cf314c9d70d21e87bc2d16ded6e19e583af44f1",
+      "afterSha256": "c3a19c0d3b22030e021f69c24f7ed9ecfdceff2697ec7217eac74fc79309f1a2",
+      "removedMedia": 2,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 5
+    },
+    {
+      "file": "game/css/base-shop-v3.css",
+      "beforeSha256": "438a8265801683b1a629259402cb57e1938f0667ac2471f8fe1644540703323b",
+      "afterSha256": "3eaadb7fdabc2374e7c9bf0662421123895dee2e3605011732d273eef2ef6acc",
+      "removedMedia": 0,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 2
+    },
+    {
+      "file": "game/css/home-scene.css",
+      "beforeSha256": "c252e1c5e5803856a13fe28ecd6f75a5b1c87f800c3a8aca59a39a1581863179",
+      "afterSha256": "741e523f66723658de5d7f8e936cf6f06442c8ca38fc748bba09cc3c1d6f17c7",
+      "removedMedia": 1,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 0
+    },
+    {
+      "file": "game/css/home-polish.css",
+      "beforeSha256": "c67ee8b82fe84b76306a03d846c21a68f810ea442cb0ee30d67881b3015fa0d0",
+      "afterSha256": "aa938b86f233dd2c403f1d811b910ad3e670511206b34221036124e7ad74bd6f",
+      "removedMedia": 1,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 0
+    },
+    {
+      "file": "game/css/home-layers.css",
+      "beforeSha256": "79fde5ba2d8976384d26db8e78a2d44c09f9e94ea1cee32375abeb6a35db4489",
+      "afterSha256": "f70672b4d60d4213a1a76564e81c0579a51255636aa0c30636302edf6b5e9804",
+      "removedMedia": 0,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 1
+    },
+    {
+      "file": "game/css/motion-transitions.css",
+      "beforeSha256": "24f9a5723563aedce615eff519057e13221e04d539420567a9a4734e5fa35400",
+      "afterSha256": "e22a1c9391009ed780aca7146137c4329117d27f4a343ce6571bdf232825af97",
+      "removedMedia": 0,
+      "desktopMediaUnwrapped": 0,
+      "viewportUnitsReplaced": 4
+    }
+  ]
+}

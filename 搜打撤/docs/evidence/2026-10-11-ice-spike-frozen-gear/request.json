@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-ice-spike",
+      "asset": "cards/spell-tt3-ice-spike.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a125fc-1da2-7300-83db-f2b39e275c76/exec-bd285d69-8be8-4a49-b3a5-38dd8721f2e9.png",
+      "revision": "ice-spike-frozen-gear-20261011",
+      "prompt": "Use case: structural correction and style-transfer. One square card illustration for 冰刺. Image 1 is a flawed NAI layout: keep the massive bronze cogwheel cropped on the right and solid deep navy-blue background, but replace the ice axle with an incoming ice spike that JAMS THE OUTER TEETH. Image 2 初始攻击 is STYLE reference for grouped material planes, spare handmade lines and concentrated contact point. Image 3 corrected 摸索 is STYLE reference for clearly drawn closed forms and calm color inside contours, not its subjects.\nA heavy bronze cogwheel shown in three-quarter view occupies the right two thirds, upper-right/right side cropped. Its front face, broad circular rim and SIX OR SEVEN visible large outer teeth have readable thickness. An incoming jagged ice spike runs diagonally from LOWER-LEFT toward RIGHT-CENTER, with its broad root cropped at lower-left and its ONE SHARP TIP lodged BETWEEN TWO OUTER TEETH on the near left rim. Point MUST face toward the wheel, not away. This is an external obstacle jamming a rotating cog, never a central axle, ice emerging from wheel face, attached cone or gear ornament. Remove the draft's bronze collar. The two teeth physically bracket the pointed tip, their inner edges pressing against opposite sides of the spike. Small pale ice contact wedge and hard bronze-shadow edge concentrate the main contrast.\nFrost spreads directly from this lodged tip across THREE adjacent teeth and a short part of the rim, transforming warm ochre/umber bronze into irregular connected pale cyan/blue-gray ice crust. Leave the rest of the wheel warm muted bronze. The scene captures a moving machine abruptly frozen by an ice spell. One short dark muted motion curve behind the upper rim is sufficient, no particles or speed-line cloud. No other gears, clock face, number markings, people, weapons, room or scenery.\nThe ice spike has a slightly irregular but coherent pointed silhouette, firm blue-gray contour lines, one main ridge and THREE OR FOUR broad ice planes. Pale cyan face, muted blue-gray side, restrained ivory ridge accent, no tiny diamond mosaics, fine cracks or polished gem rendering. Gear forms use confident varying dark colored contours and selected thickness/rim lines, broad matte ochre/umber/steel-gray grouped shadows INSIDE the defined forms. A few opaque wide strokes turn metal and ice; keep surfaces calm and sparse, not glossy gradients or detailed product render. Essential linework closes silhouettes and explains contact; it must not become fine etching or many evenly traced seams. Frost crust has a few irregular edge points, not many flakes or separate shards.\nBACKGROUND IS ONE UNIFORM SOLID DEEP NAVY BLUE. NO gradient, brush patches, glow wash or environment. No text, card frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/.tmp/nai/output/ice-spike-frozen-gear-20261011/ice.png",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/expedition-starters/basic-attack.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt3-grope.webp"
+      ]
+    }
+  ]
+}

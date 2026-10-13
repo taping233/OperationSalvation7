@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "card_id": "cmtn1wnhhym",
+      "asset": "cards/martial-cmtn1wnhhym.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a125fc-1da2-7300-83db-f2b39e275c76/exec-c284240c-c54a-4df9-ba02-a08052a7034e.png",
+      "revision": "wu-jianghu-class-open-forehead-20261010",
+      "prompt": "Use case: precise-object-edit. Input 1 is the edit target, a finished illustration of Wu offering three blank ivory cards. Input 2 is her standing identity reference: use ONLY the FRONT HAIRLINE AND BANGS from this reference, never the pose, weapon, costume or white background.\nCorrect the front bangs of Input 1 to match Input 2. REMOVE the large solid curtain of silver hair that hangs vertically over the forehead toward the left eye. Open a broad clearly visible skin-colored forehead between the hairline and both eyebrows. Front hair is parted and swept diagonally OUTWARD toward the two temples, a few short sparse tapered fringe tips at the sides, not straight thick bangs. The center forehead should be visibly exposed from hairline down to the brow region, as an open triangular/trapezoid skin plane, rather than merely drawing an eyebrow over hair. Both eyebrows and eyes must remain unobstructed. Match the reference's actual forehead exposure and side-parted fringe shape at the target's existing tilted head angle. Keep the same face and facial proportions.\nKeep the existing small thin-frame round black sunglasses resting on top of her head, high above the eyebrows. Preserve black rose, blue bow, high straight silver ponytail. Keep the EXACT existing expression, cyan eyes, fang smile, hand and three cards, body pose, garment, crop, blue-gray/teal background, and broad opaque matte brushwork. Change ONLY front hair/forehead skin plane. Paint new hair in a few coherent broad silver masses and the forehead in clean warm skin planes, using the existing hard-edged directional wide brush painting; no fine hair strands or polished shading. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-cmtn1wnhhym.webp",
+        "D:/素材/代号柒/搜打撤/docs/character-bible/ref-images/wu.webp"
+      ]
+    }
+  ]
+}

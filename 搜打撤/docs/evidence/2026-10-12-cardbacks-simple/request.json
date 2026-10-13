@@ -1,0 +1,106 @@
+{
+  "workflow": "Built-in ImageGen redesign: one focal emblem, quiet color-field background, simple complete border, project card-art style",
+  "user_instruction": "主要要简化卡背画面，现在太复杂了不符合游戏画风",
+  "base_receipt": "../2026-10-12-cardbacks-common-style/receipt.json",
+  "items": [
+    {
+      "id": "classic",
+      "name": "行囊粗布",
+      "concept": "一个粗布结",
+      "asset": "card-backs/classic.webp",
+      "imagegen_prompt": "Create ONE new simplified fantasy playing-card BACK artwork, portrait 2:3, flat front-on, full bleed. All supplied images are our PROJECT'S ACTUAL CARD ART STYLE references only: use their low-detail hand-painted anime finish, large connected opaque color planes, a few confident wide strokes, hard grouped shadows and selective restrained midtones. Do not copy their swords, slash beams, chest, pose or composition. The previous card-back designs were too crowded; this version must have ONE focal emblem and large calm negative space. Simplicity is about FEWER OBJECTS and a cleaner composition, not adding texture to a complicated layout. Card theme: 行囊粗布. ONE large folded ochre cloth knot at the center, with two broad cloth ends and one simple dark tie. Just a few principal fold planes, no fabric pattern or rope winding around the picture. Warm sand/umber against quiet blue-grey. COMPOSITION: one centered oversized readable emblem, about 55-65% of canvas width, surrounded by generous quiet space. Background is only two or three broad subdued painted color fields, nearly unpatterned. Add one SIMPLE CLOSED rectangular border on all four sides: a single dark slate band with a restrained muted-gold inner edge, uniform visual weight, no corner plates, jewels, layered frames, bolts, notches, vertical reinforcing strips or extra decoration. The border remains complete and clearly visible but secondary to the main symbol. Complete clear silhouettes, very economical interiors, matte opaque paint, a few wide directional stroke endings and broad light/shadow planes. Avoid tiny marks, fine material patterns, fine scales, dense engraving, ornamental swirls, speckled grain, all-over brush flakes, photorealism, glossy 3D and vector-perfect flat filling. No text, letters, numbers, logos, UI, table, card mockup or margins outside the artwork.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-ecc4123e-7cf7-46ce-b7ce-ffe0f2a48fa0.png",
+      "generation_method": "builtin-simple-redesign"
+    },
+    {
+      "id": "wolf",
+      "name": "猎手皮纸",
+      "concept": "一支贯月箭",
+      "asset": "card-backs/wolf.webp",
+      "imagegen_prompt": "Create ONE new simplified fantasy playing-card BACK artwork, portrait 2:3, flat front-on, full bleed. All supplied images are our PROJECT'S ACTUAL CARD ART STYLE references only: use their low-detail hand-painted anime finish, large connected opaque color planes, a few confident wide strokes, hard grouped shadows and selective restrained midtones. Do not copy their swords, slash beams, chest, pose or composition. The previous card-back designs were too crowded; this version must have ONE focal emblem and large calm negative space. Simplicity is about FEWER OBJECTS and a cleaner composition, not adding texture to a complicated layout. Card theme: 猎手皮纸. ONE compound hunting emblem: a large ivory crescent pierced vertically by a single red arrow. The crescent is a plain strong shape with one broad shadow turn. Keep the arrow simple and readable. No antlers, parchment maps, tracks, straps or additional arrows. Ivory and crimson against quiet steel-blue. COMPOSITION: one centered oversized readable emblem, about 55-65% of canvas width, surrounded by generous quiet space. Background is only two or three broad subdued painted color fields, nearly unpatterned. Add one SIMPLE CLOSED rectangular border on all four sides: a single dark slate band with a restrained muted-gold inner edge, uniform visual weight, no corner plates, jewels, layered frames, bolts, notches, vertical reinforcing strips or extra decoration. The border remains complete and clearly visible but secondary to the main symbol. Complete clear silhouettes, very economical interiors, matte opaque paint, a few wide directional stroke endings and broad light/shadow planes. Avoid tiny marks, fine material patterns, fine scales, dense engraving, ornamental swirls, speckled grain, all-over brush flakes, photorealism, glossy 3D and vector-perfect flat filling. No text, letters, numbers, logos, UI, table, card mockup or margins outside the artwork.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-3d314864-eaf6-4c27-a8e6-f323b0f5a9fa.png",
+      "generation_method": "builtin-simple-redesign"
+    },
+    {
+      "id": "coin",
+      "name": "富商锦缎",
+      "concept": "一枚方孔金币",
+      "asset": "card-backs/coin.webp",
+      "imagegen_prompt": "Create ONE new simplified fantasy playing-card BACK artwork, portrait 2:3, flat front-on, full bleed. All supplied images are our PROJECT'S ACTUAL CARD ART STYLE references only: use their low-detail hand-painted anime finish, large connected opaque color planes, a few confident wide strokes, hard grouped shadows and selective restrained midtones. Do not copy their swords, slash beams, chest, pose or composition. The previous card-back designs were too crowded; this version must have ONE focal emblem and large calm negative space. Simplicity is about FEWER OBJECTS and a cleaner composition, not adding texture to a complicated layout. Card theme: 富商锦缎. ONE large antique-gold coin with a square central hole, slightly irregular handmade outer contour and only 3 or 4 broad light/shadow planes. A single broad muted red color patch behind it suggests silk, without depicting another object. No koi, gemstone, ribbons, tassels, engraved markings or stacked coins. Muted gold and burgundy against quiet charcoal blue-grey. COMPOSITION: one centered oversized readable emblem, about 55-65% of canvas width, surrounded by generous quiet space. Background is only two or three broad subdued painted color fields, nearly unpatterned. Add one SIMPLE CLOSED rectangular border on all four sides: a single dark slate band with a restrained muted-gold inner edge, uniform visual weight, no corner plates, jewels, layered frames, bolts, notches, vertical reinforcing strips or extra decoration. The border remains complete and clearly visible but secondary to the main symbol. Complete clear silhouettes, very economical interiors, matte opaque paint, a few wide directional stroke endings and broad light/shadow planes. Avoid tiny marks, fine material patterns, fine scales, dense engraving, ornamental swirls, speckled grain, all-over brush flakes, photorealism, glossy 3D and vector-perfect flat filling. No text, letters, numbers, logos, UI, table, card mockup or margins outside the artwork.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-e00af0ea-442f-4093-8817-4f0a4e7fe0d9.png",
+      "generation_method": "builtin-simple-redesign"
+    },
+    {
+      "id": "vault",
+      "name": "仓廪木纹",
+      "concept": "一支麦穗",
+      "asset": "card-backs/vault.webp",
+      "imagegen_prompt": "Create ONE new simplified fantasy playing-card BACK artwork, portrait 2:3, flat front-on, full bleed. All supplied images are our PROJECT'S ACTUAL CARD ART STYLE references only: use their low-detail hand-painted anime finish, large connected opaque color planes, a few confident wide strokes, hard grouped shadows and selective restrained midtones. Do not copy their swords, slash beams, chest, pose or composition. The previous card-back designs were too crowded; this version must have ONE focal emblem and large calm negative space. Simplicity is about FEWER OBJECTS and a cleaner composition, not adding texture to a complicated layout. Card theme: 仓廪木纹. ONE large golden wheat head with a short curved stem and at most two broad leaves. About six paired chunky grain groups, not tiny individual seed details. Keep the silhouette clean and expressive. No wooden spiral, keyhole, lock, mineral inlays, braces or extra wheat heads. Harvest gold/olive against quiet warm brown-grey. COMPOSITION: one centered oversized readable emblem, about 55-65% of canvas width, surrounded by generous quiet space. Background is only two or three broad subdued painted color fields, nearly unpatterned. Add one SIMPLE CLOSED rectangular border on all four sides: a single dark slate band with a restrained muted-gold inner edge, uniform visual weight, no corner plates, jewels, layered frames, bolts, notches, vertical reinforcing strips or extra decoration. The border remains complete and clearly visible but secondary to the main symbol. Complete clear silhouettes, very economical interiors, matte opaque paint, a few wide directional stroke endings and broad light/shadow planes. Avoid tiny marks, fine material patterns, fine scales, dense engraving, ornamental swirls, speckled grain, all-over brush flakes, photorealism, glossy 3D and vector-perfect flat filling. No text, letters, numbers, logos, UI, table, card mockup or margins outside the artwork.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-5fc14734-09f5-4d3b-91ac-0c7466e06301.png",
+      "generation_method": "builtin-simple-redesign"
+    },
+    {
+      "id": "boss",
+      "name": "弑神黑曜",
+      "concept": "一块赤缝黑曜",
+      "asset": "card-backs/boss.webp",
+      "imagegen_prompt": "Create ONE new simplified fantasy playing-card BACK artwork, portrait 2:3, flat front-on, full bleed. All supplied images are our PROJECT'S ACTUAL CARD ART STYLE references only: use their low-detail hand-painted anime finish, large connected opaque color planes, a few confident wide strokes, hard grouped shadows and selective restrained midtones. Do not copy their swords, slash beams, chest, pose or composition. The previous card-back designs were too crowded; this version must have ONE focal emblem and large calm negative space. Simplicity is about FEWER OBJECTS and a cleaner composition, not adding texture to a complicated layout. Card theme: 弑神黑曜. ONE tall black obsidian shard with one bold red fissure. Use 4 or 5 large black/charcoal facet planes and one concentrated crimson cut; the strong shard silhouette is enough. No crown, halo, wings, fragments, spikes, cloth or additional crystals. Black and red against quiet dark plum-grey. COMPOSITION: one centered oversized readable emblem, about 55-65% of canvas width, surrounded by generous quiet space. Background is only two or three broad subdued painted color fields, nearly unpatterned. Add one SIMPLE CLOSED rectangular border on all four sides: a single dark slate band with a restrained muted-gold inner edge, uniform visual weight, no corner plates, jewels, layered frames, bolts, notches, vertical reinforcing strips or extra decoration. The border remains complete and clearly visible but secondary to the main symbol. Complete clear silhouettes, very economical interiors, matte opaque paint, a few wide directional stroke endings and broad light/shadow planes. Avoid tiny marks, fine material patterns, fine scales, dense engraving, ornamental swirls, speckled grain, all-over brush flakes, photorealism, glossy 3D and vector-perfect flat filling. No text, letters, numbers, logos, UI, table, card mockup or margins outside the artwork.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-db1f5b9f-a382-4562-badd-b1ac34a7953a.png",
+      "generation_method": "builtin-simple-redesign"
+    },
+    {
+      "id": "altar",
+      "name": "核心星轨",
+      "concept": "一个单环晶核",
+      "asset": "card-backs/altar.webp",
+      "imagegen_prompt": "Create ONE new simplified fantasy playing-card BACK artwork, portrait 2:3, flat front-on, full bleed. All supplied images are our PROJECT'S ACTUAL CARD ART STYLE references only: use their low-detail hand-painted anime finish, large connected opaque color planes, a few confident wide strokes, hard grouped shadows and selective restrained midtones. Do not copy their swords, slash beams, chest, pose or composition. The previous card-back designs were too crowded; this version must have ONE focal emblem and large calm negative space. Simplicity is about FEWER OBJECTS and a cleaner composition, not adding texture to a complicated layout. Card theme: 核心星轨. ONE cyan crystalline core circled by ONE broad antique-gold orbital ring. Make the ring's front/back overlap readable, but keep it simple. Crystal has only a few large blue light/shadow planes. No eclipse sphere inside, multiple orbital bands, star-map diagrams, corner stars, dials, markings or glow particles. Cyan and gold against quiet indigo-grey. COMPOSITION: one centered oversized readable emblem, about 55-65% of canvas width, surrounded by generous quiet space. Background is only two or three broad subdued painted color fields, nearly unpatterned. Add one SIMPLE CLOSED rectangular border on all four sides: a single dark slate band with a restrained muted-gold inner edge, uniform visual weight, no corner plates, jewels, layered frames, bolts, notches, vertical reinforcing strips or extra decoration. The border remains complete and clearly visible but secondary to the main symbol. Complete clear silhouettes, very economical interiors, matte opaque paint, a few wide directional stroke endings and broad light/shadow planes. Avoid tiny marks, fine material patterns, fine scales, dense engraving, ornamental swirls, speckled grain, all-over brush flakes, photorealism, glossy 3D and vector-perfect flat filling. No text, letters, numbers, logos, UI, table, card mockup or margins outside the artwork.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-d7e9592a-a0df-4151-8e22-2bf99c495d5c.png",
+      "generation_method": "builtin-simple-redesign"
+    },
+    {
+      "id": "pet",
+      "name": "忠犬爪印",
+      "concept": "一个爪印",
+      "asset": "card-backs/pet.webp",
+      "imagegen_prompt": "Create ONE new simplified fantasy playing-card BACK artwork, portrait 2:3, flat front-on, full bleed. All supplied images are our PROJECT'S ACTUAL CARD ART STYLE references only: use their low-detail hand-painted anime finish, large connected opaque color planes, a few confident wide strokes, hard grouped shadows and selective restrained midtones. Do not copy their swords, slash beams, chest, pose or composition. The previous card-back designs were too crowded; this version must have ONE focal emblem and large calm negative space. Simplicity is about FEWER OBJECTS and a cleaner composition, not adding texture to a complicated layout. Card theme: 忠犬爪印. ONE large warm-ivory paw print: exactly FOUR toe shapes and ONE larger lower pad, arranged as a single clear paw silhouette. A few broad cream shadow planes explain gentle volume. No collar, heart loop, buckle, hanging charm, ribbons, dog face, stars, leaves or additional paw prints. Warm ivory against quiet moss-green. COMPOSITION: one centered oversized readable emblem, about 55-65% of canvas width, surrounded by generous quiet space. Background is only two or three broad subdued painted color fields, nearly unpatterned. Add one SIMPLE CLOSED rectangular border on all four sides: a single dark slate band with a restrained muted-gold inner edge, uniform visual weight, no corner plates, jewels, layered frames, bolts, notches, vertical reinforcing strips or extra decoration. The border remains complete and clearly visible but secondary to the main symbol. Complete clear silhouettes, very economical interiors, matte opaque paint, a few wide directional stroke endings and broad light/shadow planes. Avoid tiny marks, fine material patterns, fine scales, dense engraving, ornamental swirls, speckled grain, all-over brush flakes, photorealism, glossy 3D and vector-perfect flat filling. No text, letters, numbers, logos, UI, table, card mockup or margins outside the artwork.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-ea12bb6a-8a91-4718-afc3-ee99f7051bd2.png",
+      "generation_method": "builtin-simple-redesign"
+    }
+  ],
+  "frame_requirement": "Complete enclosing border on all four sides."
+}

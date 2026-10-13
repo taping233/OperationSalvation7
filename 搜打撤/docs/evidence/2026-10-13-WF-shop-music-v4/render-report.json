@@ -1,0 +1,117 @@
+{
+  "seconds": 60.0,
+  "bpm": 112,
+  "bars": 28,
+  "peak": 0.60653,
+  "sample_jump": 0.0,
+  "sample_sources": [
+    {
+      "path": ".tmp/music-workstation/salamander-mini/A2v6.flac",
+      "bytes": 1877093,
+      "sha256": "5f4c946e63b95631d7cf014335cdc8bd1c9d8f08c0f15d81e7744a1b8bf5594a"
+    },
+    {
+      "path": ".tmp/music-workstation/salamander-mini/A3v6.flac",
+      "bytes": 1763993,
+      "sha256": "dd193a700831d5f70bedbbee5b5dc444e7cc8bc591da7afd39435988b7d86041"
+    },
+    {
+      "path": ".tmp/music-workstation/salamander-mini/A4v11.flac",
+      "bytes": 1452468,
+      "sha256": "2bf49b0d725034cfde6d1d1541d7b0f0310f7c33566974330ab964f0a5e49108"
+    },
+    {
+      "path": ".tmp/music-workstation/salamander-mini/C3v6.flac",
+      "bytes": 1737740,
+      "sha256": "ba2fc308c3a6cd20797df32cc67b786be510178f0e36e8906165fa0f56d89bc2"
+    },
+    {
+      "path": ".tmp/music-workstation/salamander-mini/C5v11.flac",
+      "bytes": 1464734,
+      "sha256": "c1b19a5b7d6abdd65bed50584c8db20f382404dd93448c5f5e4fc2e79af6e73d"
+    },
+    {
+      "path": ".tmp/music-workstation/salamander-mini/D#3v6.flac",
+      "bytes": 1745644,
+      "sha256": "85b680ac6a5c723991400442bdb0f4d7f2c4034fcbb7150d7c65462026cc5daa"
+    },
+    {
+      "path": ".tmp/music-workstation/salamander-mini/D#4v11.flac",
+      "bytes": 1572307,
+      "sha256": "1f68a1dcb3432166d66c65746c6decfca49b9ea994800b9961410bfa8b62fbbd"
+    },
+    {
+      "path": ".tmp/music-workstation/salamander-mini/F#3v6.flac",
+      "bytes": 1802747,
+      "sha256": "74450756324f4bd405dcb576c483349af159cf0f9e4696d75b1c0a5e222f107c"
+    },
+    {
+      "path": ".tmp/music-workstation/salamander-mini/F#4v11.flac",
+      "bytes": 1481344,
+      "sha256": "fa5cb25f1c8444eed4c8fc8d06df199a58adb5300936cb974b57f29276b0bdbd"
+    },
+    {
+      "path": ".tmp/music-workstation/vsco-ce/50/glock_medium_C6_01.wav",
+      "bytes": 1271310,
+      "sha256": "e942cbf502cf6731df2925945fe3234c876cb63f047d91007b6929887f9e4904"
+    },
+    {
+      "path": ".tmp/music-workstation/vsco-ce/50/KHOboe_stac_Bb3_ff2.wav",
+      "bytes": 77358,
+      "sha256": "e9afb27027c781fa425fc03079f79d87f5f890f58e64bd4c05d8bd18c0568e21"
+    },
+    {
+      "path": ".tmp/music-workstation/vsco-ce/50/KHOboe_stac_D4_ff2.wav",
+      "bytes": 66270,
+      "sha256": "49663e9cbe51ad2e800893ef039ee35e2332ee516c0d81c21ea3c84fa788421d"
+    },
+    {
+      "path": ".tmp/music-workstation/vsco-ce/50/KHOboe_vib_Ab4_ff1.wav",
+      "bytes": 1141036,
+      "sha256": "30b1365fa3c9d82f5076a39f7d7846cb7454977d70b7b083fd141a6eba5fb860"
+    },
+    {
+      "path": ".tmp/music-workstation/vsco-ce/50/KHOboe_vib_D5_ff1.wav",
+      "bytes": 995740,
+      "sha256": "0515a618f254bbf4361bf7e6476f4430a52f30b9380fb1c67a74287d39bd01a8"
+    },
+    {
+      "path": ".tmp/music-workstation/vsco-ce/50/LLVln_ArcoVib_A3_mf.wav",
+      "bytes": 2909318,
+      "sha256": "94446115a561bb4b924f98263c08c5fedb7b7a8557f9011ae72b01c37e2ce9f5"
+    },
+    {
+      "path": ".tmp/music-workstation/vsco-ce/50/LLVln_ArcoVib_A4_mf.wav",
+      "bytes": 2462946,
+      "sha256": "2007a44849c8dcbda30b50720f8b8ae9cb9bcba7e5d40f00c86cc04f9411ff47"
+    },
+    {
+      "path": ".tmp/music-workstation/vsco-ce/50/PSBassoon_A#1_v2_2.wav",
+      "bytes": 1071716,
+      "sha256": "ee89036f4bab8039f423897a4a085d47943cc12e5c362380d48f0ef34fcfed7a"
+    },
+    {
+      "path": ".tmp/music-workstation/vsco-ce/50/snare3_f_1.wav",
+      "bytes": 151684,
+      "sha256": "d27fb463d827937e93e029d9a131a6695259790b3c883d01e5fdba6da5d52b75"
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-13-WF-shop-music-v4/05-shop-lamplight-deal-v4.wav",
+      "bytes": 17280044,
+      "sha256": "0da42a2c240d895a97eb0ab1975013be70c34124699d2727456bb52f71e37ee6"
+    },
+    {
+      "path": "docs/evidence/2026-10-13-WF-shop-music-v4/05-shop-lamplight-deal-v4.mp3",
+      "bytes": 1921580,
+      "sha256": "07d5c3b5e04fbd46f8668ce124b2e4278eb37315c320b1b43bc05cf7ca096aee"
+    },
+    {
+      "path": "docs/evidence/2026-10-13-WF-shop-music-v4/05-shop-lamplight-deal-v4.ogg",
+      "bytes": 911230,
+      "sha256": "d84f7f3f4f176153f16b9fe91c01db91411056394ff6b557472c9839107f3749"
+    }
+  ],
+  "method": "Recorded Salamander piano and VSCO 2 CE instruments; no FluidSynth, synthesized notes or sample library in game assets."
+}

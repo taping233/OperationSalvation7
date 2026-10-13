@@ -1,0 +1,8 @@
+{
+  "cells": [
+    "Friday（Codex 照相馆开场黑屏清除 WF-photo-opening-black-1011）",
+    "game/src/ui/page-loading.js、game/css/page-loading.css；tests/page-loading.test.js；docs/development.md仅照相馆过场段；docs/evidence/2026-10-11-photo-opening-black/",
+    "10-11：准备期黑底及暂停切幕已去掉，保留来源画面、就绪后挂成就同款切幕；减少动态效果改透明准备层；44/44定向测试、ESLint/docs/diff守卫及当前内置真实入口通过",
+    "完成未提交，编辑释放；本会话01a12b04；复用5200，无自建服务、不build、不提交；减少动态效果未另做实页切换"
+  ]
+}

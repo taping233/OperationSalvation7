@@ -1,0 +1,116 @@
+{
+  "input": "Real CUA/locator clicks; read-only DOM inspection",
+  "routes": [
+    {
+      "route": "shop",
+      "blocks": 0,
+      "cardAnimation": "none",
+      "cardOpacity": "1",
+      "entry": null,
+      "overlayAnimation": "ovFadeIn",
+      "overlayOpacity": "1",
+      "phase": null,
+      "surface": null
+    },
+    {
+      "route": "upgrade",
+      "blocks": 0,
+      "cardAnimation": "none",
+      "cardOpacity": "1",
+      "entry": null,
+      "overlayAnimation": "ovFadeIn",
+      "overlayOpacity": "1",
+      "phase": null,
+      "surface": null
+    },
+    {
+      "route": "characters",
+      "blocks": 0,
+      "cardAnimation": "none",
+      "cardOpacity": "1",
+      "entry": null,
+      "overlayAnimation": "ovFadeIn",
+      "overlayOpacity": "1",
+      "phase": null,
+      "surface": null
+    },
+    {
+      "route": "character detail",
+      "blocks": 0,
+      "cardAnimation": "none",
+      "cardOpacity": "1",
+      "entry": null,
+      "overlayAnimation": "ovFadeIn",
+      "overlayOpacity": "1",
+      "phase": null,
+      "surface": null
+    },
+    {
+      "route": "collection",
+      "blocks": 0,
+      "cardAnimation": "none",
+      "cardOpacity": "1",
+      "entry": null,
+      "overlayAnimation": "ovFadeIn",
+      "overlayOpacity": "1",
+      "phase": null,
+      "surface": null
+    },
+    {
+      "route": "achievements",
+      "blocks": 0,
+      "cardAnimation": "none",
+      "cardOpacity": "1",
+      "entry": null,
+      "overlayAnimation": "ovFadeIn",
+      "overlayOpacity": "1",
+      "phase": null,
+      "surface": null
+    },
+    {
+      "route": "stash",
+      "blocks": 0,
+      "cardAnimation": "none",
+      "cardOpacity": "1",
+      "entry": null,
+      "overlayAnimation": "ovFadeIn",
+      "overlayOpacity": "1",
+      "phase": null,
+      "surface": null
+    },
+    {
+      "route": "pocket",
+      "blocks": 0,
+      "cardAnimation": "none",
+      "cardOpacity": "1",
+      "entry": null,
+      "overlayAnimation": "ovFadeIn",
+      "overlayOpacity": "1",
+      "phase": null,
+      "surface": null
+    },
+    {
+      "route": "pets",
+      "blocks": 0,
+      "cardAnimation": "none",
+      "cardOpacity": "1",
+      "entry": null,
+      "overlayAnimation": "ovFadeIn",
+      "overlayOpacity": "1",
+      "phase": null,
+      "surface": null
+    }
+  ],
+  "finalShell": {
+    "blocks": 0,
+    "cardAnimation": "none",
+    "cardOpacity": "1",
+    "overlayAnimation": "none",
+    "overlayOpacity": "1",
+    "phase": null,
+    "viewport": [
+      1280,
+      720
+    ]
+  }
+}

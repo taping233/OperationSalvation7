@@ -1,0 +1,36 @@
+{
+  "source": "Codex in-app browser current natural window",
+  "height": 956,
+  "images": [
+    {
+      "loaded": true,
+      "natural": [
+        1672,
+        941
+      ],
+      "src": "camp-redraw-a12.webp"
+    },
+    {
+      "loaded": true,
+      "natural": [
+        1280,
+        720
+      ],
+      "src": "reference-gfl2-personal.jpg"
+    },
+    {
+      "loaded": true,
+      "natural": [
+        1672,
+        941
+      ],
+      "src": "camp-redraw-a11.webp"
+    }
+  ],
+  "scrollWidth": 638,
+  "width": 654,
+  "actions": [
+    "existing reference tab navigated to local comparison artifact"
+  ],
+  "gameRuntimeModified": false
+}

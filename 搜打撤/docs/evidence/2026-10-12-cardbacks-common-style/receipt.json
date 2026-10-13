@@ -1,0 +1,126 @@
+{
+  "workflow": "Built-in ImageGen style-transfer on seven completed E-design card backs, using current project card-art style references",
+  "verification": "Generated images viewed; no tests/browser/audit/build requested",
+  "manifest_count": 1159,
+  "items": [
+    {
+      "id": "classic",
+      "name": "行囊粗布",
+      "concept": "远行之门与罗盘绳路",
+      "path": "card-backs/classic.webp",
+      "bytes": 93408,
+      "sha256": "f7c63167c3193c7c0b81686eebcf323842ffc6778eb0bc8766a96491da4eeee6",
+      "generation_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-1a5671e3-f78b-435c-9569-a9314a6186e6.png",
+      "generation_sha256": "32e7ec920425b594644b540019a62bc05307e81b23efd58b2a6d6dac80db4346",
+      "saved_source": ".tmp/imagegen/cardbacks-common-style-20261012/classic-source.png",
+      "backup": ".tmp/imagegen/cardbacks-common-style-20261012/classic-before.webp",
+      "backup_sha256": "c14a42d623a9d1bdaf718ea474d53792b6e0e01ae153f52caf1d92df1b98b4f0",
+      "size": [
+        512,
+        768
+      ]
+    },
+    {
+      "id": "wolf",
+      "name": "猎手皮纸",
+      "concept": "鹿角弓与贯月赤箭",
+      "path": "card-backs/wolf.webp",
+      "bytes": 89104,
+      "sha256": "0d2748979514f0131b1b4669946566dedd6f29e3f0c040d8ef4375703ecb086d",
+      "generation_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-a1452455-af43-4b79-9a0f-3c9859ca3061.png",
+      "generation_sha256": "fb6d6d58470e7b4bed671d0881ef70f42c6d404ab1b4b470f1e05633b6dc362c",
+      "saved_source": ".tmp/imagegen/cardbacks-common-style-20261012/wolf-source.png",
+      "backup": ".tmp/imagegen/cardbacks-common-style-20261012/wolf-before.webp",
+      "backup_sha256": "06fb433922a3039842909bf54e5b8c716b977995c926badd7ea7bd87b1c93c73",
+      "size": [
+        512,
+        768
+      ]
+    },
+    {
+      "id": "coin",
+      "name": "富商锦缎",
+      "concept": "锦鲤金库封印",
+      "path": "card-backs/coin.webp",
+      "bytes": 85808,
+      "sha256": "dde670e91954542e572386713c0a52bf41df9861d42b4ae9b2298e8203608749",
+      "generation_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-28fa0c12-dc5b-47f0-a0ee-f50fabdce080.png",
+      "generation_sha256": "cbf45668f868cb4722c6629b39bf71c043f0498fddebb5e92b760b399fcc7563",
+      "saved_source": ".tmp/imagegen/cardbacks-common-style-20261012/coin-source.png",
+      "backup": ".tmp/imagegen/cardbacks-common-style-20261012/coin-before.webp",
+      "backup_sha256": "ec47f8be31342e62e8fb7334b126a0563acfea9fb3fc9fc50ec639a3e30fdaad",
+      "size": [
+        512,
+        768
+      ]
+    },
+    {
+      "id": "vault",
+      "name": "仓廪木纹",
+      "concept": "年轮麦穗与种子锁孔",
+      "path": "card-backs/vault.webp",
+      "bytes": 90854,
+      "sha256": "4629a1a5bf3e5256d2c0b3df03311082572a40c1374cd49f86a1280994a29de5",
+      "generation_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-6f2977d4-788e-49cc-b37a-6326818637cd.png",
+      "generation_sha256": "7cb75da8380f8b72e4950bfb80d2157a392e43b91474a0feb7013415f27277ff",
+      "saved_source": ".tmp/imagegen/cardbacks-common-style-20261012/vault-source.png",
+      "backup": ".tmp/imagegen/cardbacks-common-style-20261012/vault-before.webp",
+      "backup_sha256": "2f5644d617af7cffd03ff2904c3724782b1a382a2e536f32442fea4c8dbe695d",
+      "size": [
+        512,
+        768
+      ]
+    },
+    {
+      "id": "boss",
+      "name": "弑神黑曜",
+      "concept": "断冠坠入黑曜裂隙",
+      "path": "card-backs/boss.webp",
+      "bytes": 75194,
+      "sha256": "8e4a6ab235a0728a2e1c796bd22c1cb9125025900f3e9e16345a838927e201a8",
+      "generation_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-f28a7554-75a5-41f1-b45d-4554dab05588.png",
+      "generation_sha256": "82753c026a0766fc53d7883af05549629c235abeb952e1ddce51d317fb72a3c6",
+      "saved_source": ".tmp/imagegen/cardbacks-common-style-20261012/boss-source.png",
+      "backup": ".tmp/imagegen/cardbacks-common-style-20261012/boss-before.webp",
+      "backup_sha256": "9f32d640725a82ee8dc13c792ec4d5d03652252b78c7dc7c9503aa76b2468921",
+      "size": [
+        512,
+        768
+      ]
+    },
+    {
+      "id": "altar",
+      "name": "核心星轨",
+      "concept": "折叠天体仪与蚀日晶核",
+      "path": "card-backs/altar.webp",
+      "bytes": 82192,
+      "sha256": "ef503a1b5feeb7390d034fec97388e4a813076168f30489e310d4cc25bd74137",
+      "generation_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-bf1b7091-9161-49ff-8795-7e870e49bd93.png",
+      "generation_sha256": "e1f2ed6dbfb11522aa63095fdc15906269f33e717bc2e496c2bd05b23a0a8b70",
+      "saved_source": ".tmp/imagegen/cardbacks-common-style-20261012/altar-source.png",
+      "backup": ".tmp/imagegen/cardbacks-common-style-20261012/altar-before.webp",
+      "backup_sha256": "d1a85d7556708bc220937f60b9266d8f9ae97e1b3b44955294e3927bde0d78bd",
+      "size": [
+        512,
+        768
+      ]
+    },
+    {
+      "id": "pet",
+      "name": "忠犬爪印",
+      "concept": "项圈守护的爪印星座",
+      "path": "card-backs/pet.webp",
+      "bytes": 75570,
+      "sha256": "ac4f62f5c771fa6d86d4ad4645c61b09af61900eb76cc77e45de8ac3a90f819f",
+      "generation_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-d4d15efe-5cc9-4a91-bfb9-19a39b4a99d3.png",
+      "generation_sha256": "e88ba1f517f64f361982365e85aeec5a5f5fb6457a615dae01d8af1225f1f8c5",
+      "saved_source": ".tmp/imagegen/cardbacks-common-style-20261012/pet-source.png",
+      "backup": ".tmp/imagegen/cardbacks-common-style-20261012/pet-before.webp",
+      "backup_sha256": "a0a9b391fb027220445c990353277080ca57379e9d743309fa48353658bf05a5",
+      "size": [
+        512,
+        768
+      ]
+    }
+  ]
+}

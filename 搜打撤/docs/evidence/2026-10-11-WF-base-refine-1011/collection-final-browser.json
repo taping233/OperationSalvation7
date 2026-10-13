@@ -1,0 +1,309 @@
+{
+  "nodes": [
+    {
+      "attributes": {
+        "aria-label": "返回基地",
+        "data-act": "hubHome"
+      },
+      "identity": "返回基地",
+      "key": "back",
+      "rect": {
+        "height": 39.62249755859375,
+        "width": 43.22249984741211,
+        "x": 22.012500762939453,
+        "y": 14
+      },
+      "selector": "#hubMain .hub-back",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(235, 235, 235)",
+        "display": "flex",
+        "font-size": "12.5px"
+      },
+      "tag": "BUTTON",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-view": "ach/cards"
+      },
+      "identity": "收藏室奖励 ↗卡背 ↗故事 ↗全部类型0 张已收藏←暂无卡牌→尚未收藏卡牌在仓库收藏卡牌后，会陈列在这里。前往仓库 →",
+      "key": "main",
+      "rect": {
+        "height": 885.9625244140625,
+        "width": 653.6000366210938,
+        "x": 0,
+        "y": 71.93777465820312
+      },
+      "selector": "#hubMain .hub-page",
+      "styles": {
+        "background-color": "rgb(226, 231, 229)",
+        "color": "rgb(27, 42, 52)",
+        "display": "block",
+        "font-size": "18px"
+      },
+      "tag": "MAIN",
+      "text": "收藏室奖励 ↗卡背 ↗故事 ↗全部类型0 张已收藏←暂无卡牌→尚未收藏卡牌在仓库收藏卡牌后，会陈列在这里。前往仓库 →"
+    },
+    {
+      "attributes": {},
+      "identity": "基地",
+      "key": "heading",
+      "rect": {
+        "height": 28.61250114440918,
+        "width": 48.42499923706055,
+        "x": 92.0500030517578,
+        "y": 19.912500381469727
+      },
+      "selector": "#hubMain h2",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(230, 233, 237)",
+        "display": "block",
+        "font-size": "22px"
+      },
+      "tag": "H2",
+      "text": "基地"
+    },
+    {
+      "attributes": {},
+      "identity": "收藏室",
+      "key": "heading",
+      "rect": {
+        "height": 50.42499923706055,
+        "width": 153.8625030517578,
+        "x": 24.012500762939453,
+        "y": 106.3200912475586
+      },
+      "selector": "#hubMain h2",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(27, 42, 52)",
+        "display": "block",
+        "font-size": "42px"
+      },
+      "tag": "H2",
+      "text": "收藏室"
+    },
+    {
+      "attributes": {
+        "aria-label": "返回基地",
+        "data-act": "hubHome"
+      },
+      "identity": "返回基地",
+      "key": "action",
+      "rect": {
+        "height": 39.62249755859375,
+        "width": 43.22249984741211,
+        "x": 22.012500762939453,
+        "y": 14
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(235, 235, 235)",
+        "display": "flex",
+        "font-size": "12.5px"
+      },
+      "tag": "BUTTON",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-act": "hubCollectionView",
+        "data-view": "rewards"
+      },
+      "identity": "奖励 ↗",
+      "key": "action",
+      "rect": {
+        "height": 48.01250076293945,
+        "width": 65.4375,
+        "x": 358.0500183105469,
+        "y": 107.52009582519533
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(92, 108, 115)",
+        "display": "block",
+        "font-size": "20px"
+      },
+      "tag": "BUTTON",
+      "text": "奖励 ↗"
+    },
+    {
+      "attributes": {
+        "data-act": "hubCollectionView",
+        "data-view": "backs"
+      },
+      "identity": "卡背 ↗",
+      "key": "action",
+      "rect": {
+        "height": 48.01250076293945,
+        "width": 65.4375,
+        "x": 453.5,
+        "y": 107.52009582519533
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(92, 108, 115)",
+        "display": "block",
+        "font-size": "20px"
+      },
+      "tag": "BUTTON",
+      "text": "卡背 ↗"
+    },
+    {
+      "attributes": {
+        "data-act": "hubCollectionView",
+        "data-view": "stories"
+      },
+      "identity": "故事 ↗",
+      "key": "action",
+      "rect": {
+        "height": 48.01250076293945,
+        "width": 65.4375,
+        "x": 548.9500122070312,
+        "y": 107.52009582519533
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(92, 108, 115)",
+        "display": "block",
+        "font-size": "20px"
+      },
+      "tag": "BUTTON",
+      "text": "故事 ↗"
+    },
+    {
+      "attributes": {
+        "aria-label": "上一页卡牌",
+        "data-browser-page": "previous"
+      },
+      "identity": "上一页卡牌",
+      "key": "action",
+      "rect": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgb(246, 247, 241)",
+        "color": "rgb(27, 42, 52)",
+        "display": "grid",
+        "font-size": "24px"
+      },
+      "tag": "BUTTON",
+      "text": "←"
+    },
+    {
+      "attributes": {
+        "aria-label": "下一页卡牌",
+        "data-browser-page": "next"
+      },
+      "identity": "下一页卡牌",
+      "key": "action",
+      "rect": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgb(246, 247, 241)",
+        "color": "rgb(27, 42, 52)",
+        "display": "grid",
+        "font-size": "24px"
+      },
+      "tag": "BUTTON",
+      "text": "→"
+    },
+    {
+      "attributes": {
+        "data-act": "hubTab",
+        "data-tab": "stash",
+        "data-view": "cards"
+      },
+      "identity": "前往仓库 →",
+      "key": "action",
+      "rect": {
+        "height": 57.962501525878906,
+        "width": 156.33750915527344,
+        "x": 241.02500915527344,
+        "y": 418.0451354980469
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgb(246, 247, 241)",
+        "color": "rgb(27, 42, 52)",
+        "display": "flex",
+        "font-size": "21px"
+      },
+      "tag": "BUTTON",
+      "text": "前往仓库 →"
+    }
+  ],
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 654
+    }
+  },
+  "selectors": [
+    {
+      "key": "back",
+      "selector": "#hubMain .hub-back"
+    },
+    {
+      "key": "main",
+      "selector": "#hubMain .hub-page"
+    },
+    {
+      "key": "heading",
+      "selector": "#hubMain h2"
+    },
+    {
+      "key": "action",
+      "selector": "#hubMain button"
+    },
+    {
+      "key": "canvas",
+      "selector": "#hubMain .courtyard-v3-canvas"
+    }
+  ],
+  "schemaVersion": 1,
+  "kind": "browser-snapshot",
+  "scene": "base-collection-owned",
+  "observedAt": "2026-10-11T05:09:12.861Z",
+  "collector": {
+    "platform": "Codex",
+    "browser": "iab",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "actions": [
+    {
+      "type": "real-input",
+      "detail": "进入档位01→队员→招式→返回队员→伙伴→孵化→返回伙伴→返回队员；人物切换黑像→选择培养卡牌→补给→返回后勤→返回队员保留黑像；外观按Escape回队员；后勤→扩建→返回后勤→返回基地；普通后勤入口清除人物筛选；收藏室→奖励→成就目标按Escape回奖励→收藏里程碑→返回奖励→返回收藏室；卡背→猎手皮纸→查看解锁目标→返回卡背保留选择；庭院→投喂→暂停→继续；观雨→大雨→苔绿→声音开→声音关；台面真实点击出现雨圈散开"
+    },
+    {
+      "type": "screenshot",
+      "detail": "当前窗口实页截取"
+    }
+  ],
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "screenshots": [
+    "docs/evidence/2026-10-11-WF-base-refine-1011/collection-final.jpg"
+  ]
+}

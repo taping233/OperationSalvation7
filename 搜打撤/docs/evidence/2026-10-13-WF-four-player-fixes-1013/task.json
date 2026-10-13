@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-four-player-fixes-1013",
+  "date": "2026-10-13",
+  "owner": "Friday",
+  "goal": "分批修复四线试玩确认问题；P1先行，隔离验收后在安全窗口集成",
+  "paths": [
+    ".tmp/WF-four-player-fixes-1013",
+    "docs/evidence/2026-10-13-WF-four-player-fixes-1013"
+  ],
+  "doneWhen": [
+    "确认项实现与定向验证完成，实页及未核边界有证据",
+    "安全协调后共享源码保留他人成果并登记归属"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "12项隔离实现；P1及G03/G04/G05/G06/G07/G08/G09/G10/G12当前窗口输入或明确构造证据已记录",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "新增回归32通过；扩大237过1基线失败；后补存档呈现111及费用说明23通过，范围见README",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "共享源码未集成，等待PENDING41占用状态及UI属地协调",
+    "完整自然通关、全量测试、build、CI、多尺寸、全部入口、音频听感未覆盖"
+  ],
+  "updatedAt": "2026-10-12T20:28:16.528Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

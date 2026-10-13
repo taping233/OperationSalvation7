@@ -1,0 +1,116 @@
+{
+  "scene": {
+    "result": {
+      "type": "object",
+      "value": {
+        "done": true,
+        "report": {
+          "assertions": [
+            {
+              "detail": "进入时 phase=title",
+              "name": "前置可跳节点（battle）",
+              "pass": true
+            },
+            {
+              "detail": "",
+              "name": "目标就绪（前置完成）",
+              "pass": true
+            },
+            {
+              "detail": "",
+              "name": "目标页出现过（battle）",
+              "pass": true
+            },
+            {
+              "detail": "stopReason=until steps=63",
+              "name": "无单步异常",
+              "pass": true
+            },
+            {
+              "detail": "",
+              "name": "战斗已结算离场",
+              "pass": true
+            },
+            {
+              "detail": "0 → 1",
+              "name": "战斗计数增长",
+              "pass": true
+            },
+            {
+              "detail": "hp=25",
+              "name": "生命值 sane",
+              "pass": true
+            }
+          ],
+          "durationMs": 6240,
+          "errors": [],
+          "final": {
+            "coins": 0,
+            "fought": 1,
+            "hp": 25,
+            "layer": 1,
+            "node": 0,
+            "overlay": null,
+            "phase": "overlay",
+            "runActive": true
+          },
+          "ok": true,
+          "pass": true,
+          "scene": "battle",
+          "steps": 63,
+          "stopReason": "until",
+          "title": "单场遭遇战",
+          "turbo": false
+        },
+        "started": true
+      }
+    }
+  },
+  "vfx": {
+    "result": {
+      "type": "object",
+      "value": [
+        {
+          "cls": "sts-float dmg fx-impact phys",
+          "loaded": false,
+          "src": "",
+          "text": "-4"
+        },
+        {
+          "cls": "sts-float stk sticker-boom fx-routine sticker",
+          "loaded": true,
+          "src": "assets/battle/fx-sticker-boom.svg?v=0.60.0",
+          "text": ""
+        },
+        {
+          "cls": "sts-float stk stk-late stk-cheer fx-routine",
+          "loaded": false,
+          "src": "",
+          "text": "干净利落！"
+        },
+        {
+          "cls": "sts-float dmg fx-impact phys",
+          "loaded": false,
+          "src": "",
+          "text": "-4"
+        },
+        {
+          "cls": "sts-float stk sticker-boom fx-routine sticker",
+          "loaded": true,
+          "src": "assets/battle/fx-sticker-boom.svg?v=0.60.0",
+          "text": ""
+        },
+        {
+          "cls": "sts-float stk stk-late stk-cheer fx-routine",
+          "loaded": false,
+          "src": "",
+          "text": "好剑！"
+        }
+      ]
+    }
+  },
+  "input": "existing Agent scene automatic command driver; not native mouse gameplay",
+  "origin": "http://localhost:5200",
+  "muted": true,
+  "storage": "in-memory isolated"
+}

@@ -1,0 +1,141 @@
+{
+  "archive": {
+    "ok": true,
+    "schemaVersion": 1,
+    "at": "2026-10-13T15:39:49.010Z",
+    "task": "WF-friday-takeover-1013",
+    "method": "copy-original-before-revision",
+    "items": [
+      {
+        "source": "docs/PARALLEL-REGISTRY.md",
+        "target": "docs/archive/WF-friday-takeover-1013/originals/docs/PARALLEL-REGISTRY.md",
+        "sha256": "8b55718f615b815c6be90f65a101394850efe7e093d29f5f3e6eead110059f7d",
+        "replacedBy": "docs/evidence/2026-10-13-WF-friday-clean-ship-1013/README.md"
+      },
+      {
+        "source": "docs/PENDING.md",
+        "target": "docs/archive/WF-friday-takeover-1013/originals/docs/PENDING.md",
+        "sha256": "c6b4594fed445712067eee67be04e4922c23aecd5032c9adeeadf322d54bd5c7",
+        "replacedBy": "docs/evidence/2026-10-13-WF-friday-clean-ship-1013/README.md"
+      }
+    ],
+    "limits": [
+      "原文保持字节，内部相对链接仍以 source 原位置解释",
+      "本命令未修改源文件；替代状态由负责人核实并在现行入口注明"
+    ]
+  },
+  "releases": [
+    {
+      "key": "WF-pets-nai-six-1013",
+      "before": "| Friday（Codex 六宠 NAI 原图 WF-pets-nai-six-1013） | docs/evidence/2026-10-13-WF-pets-nai-six/；本表自有行 | 老板要求六宠 NAI 重画、内置画风重置并实装；独立生成，避开另一会话旧宠物目录 | 10-13 | 编辑中；六张 NAI 选图已齐，内置 fire 完成，其余五张连续网络发送失败；实装与旧图清理待产物及具体删除清单确认，不提交 |",
+      "after": "| Friday（Codex 六宠 NAI 原图 WF-pets-nai-six-1013） | docs/evidence/2026-10-13-WF-pets-nai-six/；本表自有行 | 老板要求六宠 NAI 重画、内置画风重置并实装；独立生成，避开另一会话旧宠物目录；原状态：编辑中；六张 NAI 选图已齐，内置 fire 完成，其余五张连续网络发送失败；实装与旧图清理待产物及具体删除清单确认，不提交 | 10-13 已释放（老板确认所有对话结束，由WF-friday-clean-ship-1013接管核对；未验收成果仍保留，解除占用不表示完成） |",
+      "expectedSha256": "a6cd2ad4a614aeecbdc0bb85eae41bbca41c0030a501ec197d1816d0c3f87a9b"
+    },
+    {
+      "key": "WF-pets-nai-redraw-1013",
+      "before": "| Friday（Codex 宠物内置重绘 WF-pets-nai-redraw-1013） | docs/evidence/2026-10-13-WF-pets-nai-redraw/；本表自有行 | 老板改为内置生成六宠，按所给机械概念图的画风与精度制作独立候选；不覆盖现有未提交素材 | 10-13 | 编辑中；NAI 两次请求均未抵达 API，改用老板授权的内置生图；无新服务、不提交 |",
+      "after": "| Friday（Codex 宠物内置重绘 WF-pets-nai-redraw-1013） | docs/evidence/2026-10-13-WF-pets-nai-redraw/；本表自有行 | 老板改为内置生成六宠，按所给机械概念图的画风与精度制作独立候选；不覆盖现有未提交素材；原状态：编辑中；NAI 两次请求均未抵达 API，改用老板授权的内置生图；无新服务、不提交 | 10-13 已释放（老板确认所有对话结束，由WF-friday-clean-ship-1013接管核对；未验收成果仍保留，解除占用不表示完成） |",
+      "expectedSha256": "c3a7745d0d35d8b12bdc51d26bceb59ba9f792041cd7148b0034e08b7622c738"
+    },
+    {
+      "key": "WF-teaser-pv-v3-1013",
+      "before": "| Friday（Codex 先导PV分镜重设计 WF-teaser-pv-v3-1013） | pv/teaser-v3-2026-10-13/；docs/evidence/2026-10-13-WF-teaser-pv-v3-1013/；本表自有行；当前工作树 Vite 5337/PID 4012 由本会话启动供当前游戏实页取图 | 按老板反馈接管并重做PV：补动作与玩法信息，生成缺失镜头美术，先交可审分镜，再制作动态预览与成片 | 10-13 | 编辑中；独立v3目录，保留v1/v2草稿；5337/PID 4012 仅本会话使用，结束时核身份停止；未提交 |",
+      "after": "| Friday（Codex 先导PV分镜重设计 WF-teaser-pv-v3-1013） | pv/teaser-v3-2026-10-13/；docs/evidence/2026-10-13-WF-teaser-pv-v3-1013/；本表自有行；当前工作树 Vite 5337/PID 4012 由本会话启动供当前游戏实页取图 | 按老板反馈接管并重做PV：补动作与玩法信息，生成缺失镜头美术，先交可审分镜，再制作动态预览与成片；原状态：编辑中；独立v3目录，保留v1/v2草稿；5337/PID 4012 仅本会话使用，结束时核身份停止；未提交 | 10-13 已释放（老板确认所有对话结束，由WF-friday-clean-ship-1013接管核对；未验收成果仍保留，解除占用不表示完成） |",
+      "expectedSha256": "b0e58f57e3ea0c1ddae44aa8d307b88795304e8d0cd92e522bd3a84650d81215"
+    },
+    {
+      "key": "WF-teaser-pv-v2-1013",
+      "before": "| Friday（Codex 先导PV重做 WF-teaser-pv-v2-1013） | pv/teaser-v2-2026-10-13/；docs/evidence/2026-10-13-WF-teaser-pv-v2-1013/task.json；本表自有行；不占用游戏服务 | 按老板审片反馈重做：只用现行认可素材与原创生成画面，突出人物和丰富卡牌，重构分镜运镜、文字和图形元素并完成程序渲染与开源剪辑 | 10-13 | 编辑中；第一版保留为被否决草稿；新版本独立目录，不改游戏源码与现行素材；未提交 |",
+      "after": "| Friday（Codex 先导PV重做 WF-teaser-pv-v2-1013） | pv/teaser-v2-2026-10-13/；docs/evidence/2026-10-13-WF-teaser-pv-v2-1013/task.json；本表自有行；不占用游戏服务 | 按老板审片反馈重做：只用现行认可素材与原创生成画面，突出人物和丰富卡牌，重构分镜运镜、文字和图形元素并完成程序渲染与开源剪辑；原状态：编辑中；第一版保留为被否决草稿；新版本独立目录，不改游戏源码与现行素材；未提交 | 10-13 已释放（老板确认所有对话结束，由WF-friday-clean-ship-1013接管核对；未验收成果仍保留，解除占用不表示完成） |",
+      "expectedSha256": "c107975e74f02f4e98c2e86de06ec63ef78257fd80a4655ae583ffbecae94fe7"
+    },
+    {
+      "key": "WF-completed-pack-1013-b2",
+      "before": "| Friday（Codex 完成成果安全打包 WF-completed-pack-1013-b2 / 01a134bc） | 当前 Git index、workflow ship 完成候选预览；docs/evidence/2026-10-13-WF-completed-pack-1013-b2/；本表自有行；不占PV在途目录或源码编辑属地 | 老板明确要求提交；审查全部完成未提交成果，按代码/文档分组落库，排除PV与其他在途/待决/会话中间文件 | 10-13 | 编辑中；已分批落库工作流b2dbe48d/68981ba7、批跑f615e735、卡牌浏览646be25b、设计审计c1a8c712、城廓来源6d8ea5a0、台账归档cff7e58a、卡牌文案2da08e0b；庭院独立引擎9件已暂存待full冻结；运行素材/manifest与PV/待决/中间件继续隔离，未推送 |",
+      "after": "| Friday（Codex 完成成果安全打包 WF-completed-pack-1013-b2 / 01a134bc） | 当前 Git index、workflow ship 完成候选预览；docs/evidence/2026-10-13-WF-completed-pack-1013-b2/；本表自有行；不占PV在途目录或源码编辑属地 | 老板明确要求提交；审查全部完成未提交成果，按代码/文档分组落库，排除PV与其他在途/待决/会话中间文件；原状态：编辑中；已分批落库工作流b2dbe48d/68981ba7、批跑f615e735、卡牌浏览646be25b、设计审计c1a8c712、城廓来源6d8ea5a0、台账归档cff7e58a、卡牌文案2da08e0b；庭院独立引擎9件已暂存待full冻结；运行素材/manifest与PV/待决/中间件继续隔离，未推送 | 10-13 已释放（老板确认所有对话结束，由WF-friday-clean-ship-1013接管核对；未验收成果仍保留，解除占用不表示完成） |",
+      "expectedSha256": "1e6931989217e59be46a18ca763aa1bddde1eefdb3befa26265f478d52805cdb"
+    }
+  ],
+  "closed": [
+    {
+      "file": "docs/evidence/2026-10-13-WF-completed-pack-1013-b2/task.json",
+      "beforeSha256": "3517d4544e2785d608d0a720b2d0bfc16a81cafff94ab041a5dc38f61bbbde13",
+      "from": "doing",
+      "to": "partial"
+    },
+    {
+      "file": "docs/evidence/2026-10-13-WF-teaser-pv-v3-1013/task.json",
+      "beforeSha256": "98362dc0a807fc4ace6e8a4f49c26ce8617fe403bf8952835afab688d216072e",
+      "from": "doing",
+      "to": "partial"
+    },
+    {
+      "file": "docs/evidence/2026-10-13-WF-teaser-pv-v2-1013/task.json",
+      "beforeSha256": "baf68a356f9e143c3c23c592848b44eb38de29d6c698162122e54f5b9eea87d2",
+      "from": "doing",
+      "to": "partial"
+    },
+    {
+      "file": "docs/evidence/2026-10-12-WF-battle-ui-overhaul/task.json",
+      "beforeSha256": "02ffa2e217f2d6b7affb141e4f26b09c68b9d0075af329be5054c8b8493fdc1f",
+      "from": "doing",
+      "to": "partial"
+    },
+    {
+      "file": "docs/evidence/2026-10-12-WF-zzz-base-overhaul/task.json",
+      "beforeSha256": "688f270e1d4bbbe231f135beca6da2ba98152a6d6977b4e9049709177558822d",
+      "from": "doing",
+      "to": "partial"
+    },
+    {
+      "file": "docs/evidence/2026-10-09-WF-four-layer-slice-1009/task.json",
+      "beforeSha256": "4e0c6027eec84c23a7d665173f212cbf6c2276a12d4f25a3acd995d9fbaa279e",
+      "from": "doing",
+      "to": "partial"
+    },
+    {
+      "file": "docs/evidence/2026-10-05-WF-wu-parts-full/task.json",
+      "beforeSha256": "eb37eee3cf2cf597442a9b163009b055289f01ca7712da63e01f212a27fc8737",
+      "from": "doing",
+      "to": "partial"
+    }
+  ],
+  "skipped": [
+    {
+      "file": "docs/evidence/2026-10-05-WF-card-ally-redesign/task.json",
+      "id": "WF-card-ally-redesign",
+      "date": "2026-10-05",
+      "reason": "任务文件身份不匹配"
+    },
+    {
+      "file": "docs/evidence/2026-10-09-base-camp-redo/task.json",
+      "id": "base-camp-redo",
+      "date": "2026-10-09",
+      "reason": "任务文件身份不匹配"
+    },
+    {
+      "file": "docs/evidence/2026-10-10-base-pages/task.json",
+      "id": "base-pages",
+      "date": "2026-10-10",
+      "reason": "任务文件身份不匹配"
+    },
+    {
+      "file": "docs/evidence/2026-10-12-WF-four-character-skins/task.json",
+      "id": "WF-four-character-skins",
+      "date": "2026-10-12",
+      "reason": "任务文件身份不匹配"
+    },
+    {
+      "file": "docs/evidence/2026-10-12-WF-selfplay-fixes/task.json",
+      "id": "WF-selfplay-fixes",
+      "date": "2026-10-12",
+      "reason": "任务文件身份不匹配"
+    }
+  ],
+  "registry": {
+    "editing": 1,
+    "complete-uncommitted": 38,
+    "settled": 0,
+    "released": 0
+  }
+}

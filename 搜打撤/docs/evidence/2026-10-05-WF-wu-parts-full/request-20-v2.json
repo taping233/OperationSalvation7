@@ -1,0 +1,14 @@
+{
+  "id": "20",
+  "slug": "left-calf",
+  "version": 2,
+  "prompt": "ONE isolated Wu animation limb segment on genuine transparent PNG. Hand-painted anime matching the confirmed combat reference, simple broad opaque cream/peach skin planes with restrained warm-neutral shadow, LOW detail, economical hard-edge brush marks. Anatomically graceful feminine leg with smooth natural silhouette, not bony, muscular, knotty or faceted skin sculpture. No photorealism, no wounds or gore. Neutral VERTICAL segment for a bone rig: same camera-side anatomy as reference but limb centerline nearly straight, with NO baked knee bend or kink. Both joining ends fully painted with softly rounded overlap caps, no dark cut lines or visible cut surfaces. Keep first/last 10% of each joining region a consistent light-peach tone for seamless overlap. No clothing, footwear, other limbs, labels, grid, background, shadow or aura. Only the requested segment. Part 20: ONLY character-LEFT CALF, neutral nearly vertical knee-to-ankle segment, rear-side counterpart to right calf in image 4. Match image 3 left-thigh joining tone and image 4 graceful shape, slightly slimmer rear projection. Top cap width around one fifth of length, gentle calf fullness in upper third with max width one quarter of length, then a continuous taper to narrow ankle around one eighth of length. No thigh, projecting kneecap, hard knee notch, foot, toes, boot or baked bend. Soft rounded FULLY PAINTED overlap caps, no dark horizontal cut line or visible cut-surface ellipse. Two or three quiet large skin planes, no knotted bony points or scattered white diamond facets. One lower-leg sprite only.",
+  "refs": [
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\wu-battle-base-frame000.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\reference.png",
+    "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\characters\\wu-parts-v1\\part-19-left-thigh-v2.png",
+    "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\characters\\wu-parts-v1\\part-17-right-calf-v3.png"
+  ],
+  "tool": "built-in imagegen",
+  "stage": "candidate"
+}

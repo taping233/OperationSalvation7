@@ -1,0 +1,15 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5371/four-player-qa.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 190-200
+~						149 text 1
++						190 image 初始攻击
++						191 text 初始攻击 武术 · 初始
++						192 container
++							193 text 初始 初始
++						194 container
++							195 text 史诗 史诗
++					196 image sparkles
++					197 text 能量不足：需要 6，当前 2
++						198 container
++							199 text 古朴 古朴
+The focused UI element is 99 button 牌库：初始攻击×2（点击查看）

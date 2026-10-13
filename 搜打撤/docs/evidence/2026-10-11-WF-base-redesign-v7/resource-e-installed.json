@@ -1,0 +1,104 @@
+{
+  "version": "E",
+  "approved": "老板要求接入上一轮推荐的黑灰+青绿版本",
+  "sourceRelativeToCodexHome": "generated_images/01a12b26-919c-7300-aa9b-e2a97244fb78/exec-9f78a23d-0ce4-4324-b72b-7e7cddc17853.png",
+  "sourceBytes": 1330502,
+  "sourceSha256": "65d43e9c119ecb8903b48c0b04b340f5de2dcfedc5f83e97598006788a28acaf",
+  "acquisition": "内置ImageGen，参考绝区零右上资源栏的E版配色重绘",
+  "processing": "按alpha主连通域完整切图，保留16像素边缘，等比缩入256px透明画布",
+  "assets": [
+    {
+      "path": "icons/base-v12/wood.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 33768,
+      "sha256": "299816248cd2942980c91296894dc02222138d559aa4f2b11d8e4d7e2677da8c",
+      "source": "docs/evidence/2026-10-11-WF-base-redesign-v7/resource-e-installed.json",
+      "cropBox": [
+        242,
+        50,
+        776,
+        528
+      ],
+      "size": [
+        256,
+        256
+      ],
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "icons/base-v12/rations.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 36678,
+      "sha256": "7300927382ad2ab0fefebbfa05a4360f85f80d4749b56d91d999b8839485ee6d",
+      "source": "docs/evidence/2026-10-11-WF-base-redesign-v7/resource-e-installed.json",
+      "cropBox": [
+        799,
+        58,
+        1319,
+        532
+      ],
+      "size": [
+        256,
+        256
+      ],
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "icons/base-v12/key.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 28378,
+      "sha256": "5e7330ec7a053660f1d1ab4a59ebb061913d9c700719b0a86c9fbaceb941882d",
+      "source": "docs/evidence/2026-10-11-WF-base-redesign-v7/resource-e-installed.json",
+      "cropBox": [
+        288,
+        535,
+        748,
+        971
+      ],
+      "size": [
+        256,
+        256
+      ],
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "icons/base-v12/coin.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 37876,
+      "sha256": "332cc538789afa76ffe1d4238f1a8a5b41734644fab42c37162d6da9688214dc",
+      "source": "docs/evidence/2026-10-11-WF-base-redesign-v7/resource-e-installed.json",
+      "cropBox": [
+        822,
+        534,
+        1265,
+        972
+      ],
+      "size": [
+        256,
+        256
+      ],
+      "alpha": [
+        0,
+        255
+      ]
+    }
+  ],
+  "implemented": "数字在前、图标在后；深色双线圆角数量胶囊；文字名称保留于无障碍名称；木材口粮沿原查看卡牌入口",
+  "unverified": [
+    "未做游戏实页检查、测试或build；整体基地其它美术继续暂停"
+  ],
+  "updatedAt": "2026-10-11T15:25:27.697052+00:00"
+}

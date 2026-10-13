@@ -1,0 +1,508 @@
+{
+  "id": "fire",
+  "title": "炉边长夜",
+  "stem": "06-fire-embers-and-snow",
+  "idea": "六八拍摇摆的营火；长笛、尼龙弦与双手钢琴，极轻火星般竖琴，没有行军鼓点。",
+  "key": "G major",
+  "meter": [
+    6,
+    8
+  ],
+  "bpm_quarter": 72,
+  "bars": 32,
+  "total_beats": 96.0,
+  "seconds": 80.0,
+  "tracks": [
+    {
+      "name": "Flute warm breath",
+      "program": 73,
+      "bank": 0,
+      "hand": null,
+      "notes": 64,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/06-fire-embers-and-snow-Flute-warm-breath.wav",
+        "bytes": 30720088,
+        "sha256": "167ad519c8ddd84dcef4b292acc687a02cd018ee6f65d7811bde5d8ae92403f1"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.97
+        ],
+        [
+          30.0,
+          0.97
+        ],
+        [
+          42.0,
+          1
+        ],
+        [
+          54.0,
+          1
+        ],
+        [
+          66.0,
+          1.04
+        ],
+        [
+          78.0,
+          1.04
+        ],
+        [
+          90.0,
+          0.94
+        ],
+        [
+          90.0,
+          0.94
+        ],
+        [
+          96.0,
+          0.97
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Piano right hand",
+      "program": 0,
+      "bank": 0,
+      "hand": "right",
+      "notes": 32,
+      "pan": 8,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/06-fire-embers-and-snow-Piano-right-hand.wav",
+        "bytes": 30720088,
+        "sha256": "16c82ac594978858e1cd2876d5e5444def9a148e8f27c9a16cd92af606ded375"
+      },
+      "target_active_rms_dbfs": -32,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          30.0,
+          0.83
+        ],
+        [
+          42.0,
+          0.92
+        ],
+        [
+          54.0,
+          0.92
+        ],
+        [
+          66.0,
+          0.98
+        ],
+        [
+          78.0,
+          0.98
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ]
+      ],
+      "cc64_used": true
+    },
+    {
+      "name": "Piano left hand",
+      "program": 0,
+      "bank": 0,
+      "hand": "left",
+      "notes": 96,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/06-fire-embers-and-snow-Piano-left-hand.wav",
+        "bytes": 30720088,
+        "sha256": "c08c1b39c8a05e91e2bdda264f4fef9d26c2b5fd5bd3f719e00a4480ac7163b3"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          30.0,
+          0.83
+        ],
+        [
+          42.0,
+          0.92
+        ],
+        [
+          54.0,
+          0.92
+        ],
+        [
+          66.0,
+          0.98
+        ],
+        [
+          78.0,
+          0.98
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ]
+      ],
+      "cc64_used": true
+    },
+    {
+      "name": "Nylon beside flame",
+      "program": 24,
+      "bank": 0,
+      "hand": null,
+      "notes": 64,
+      "pan": -28,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/06-fire-embers-and-snow-Nylon-beside-flame.wav",
+        "bytes": 30720088,
+        "sha256": "292187173dfe8df1cc94bc6edcea1c412ebe526532a922b61c9bda8762ac7ef1"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          30.0,
+          0.83
+        ],
+        [
+          42.0,
+          0.92
+        ],
+        [
+          54.0,
+          0.92
+        ],
+        [
+          66.0,
+          0.98
+        ],
+        [
+          78.0,
+          0.98
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Viola blanket",
+      "program": 41,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 28,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/06-fire-embers-and-snow-Viola-blanket.wav",
+        "bytes": 30720088,
+        "sha256": "b7fc81c3dd7c557a255ab79e793bdd95505e119b4d31354ea5e7ddb67e8d118d"
+      },
+      "target_active_rms_dbfs": -36,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          30.0,
+          0.83
+        ],
+        [
+          42.0,
+          0.92
+        ],
+        [
+          54.0,
+          0.92
+        ],
+        [
+          66.0,
+          0.98
+        ],
+        [
+          78.0,
+          0.98
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Cello slow breath",
+      "program": 42,
+      "bank": 0,
+      "hand": null,
+      "notes": 32,
+      "pan": 17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/06-fire-embers-and-snow-Cello-slow-breath.wav",
+        "bytes": 30720088,
+        "sha256": "d19e3da0b9205aa3a537b27057809f439847b5825720e0f5cc22122304ff53e3"
+      },
+      "target_active_rms_dbfs": -37,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          30.0,
+          0.83
+        ],
+        [
+          42.0,
+          0.92
+        ],
+        [
+          54.0,
+          0.92
+        ],
+        [
+          66.0,
+          0.98
+        ],
+        [
+          78.0,
+          0.98
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Harp spark",
+      "program": 46,
+      "bank": 0,
+      "hand": null,
+      "notes": 20,
+      "pan": -20,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/06-fire-embers-and-snow-Harp-spark.wav",
+        "bytes": 30720088,
+        "sha256": "df1361613236da279cf63f402e682cc6077598636babf2f264da84b39a965608"
+      },
+      "target_active_rms_dbfs": -42,
+      "continuous_gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          30.0,
+          0.68
+        ],
+        [
+          42.0,
+          0.72
+        ],
+        [
+          54.0,
+          0.72
+        ],
+        [
+          66.0,
+          0.84
+        ],
+        [
+          78.0,
+          0.84
+        ],
+        [
+          90.0,
+          0.58
+        ],
+        [
+          90.0,
+          0.58
+        ],
+        [
+          96.0,
+          0.68
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/06-fire-embers-and-snow-Steady-low-foundation.wav",
+        "bytes": 30720088,
+        "sha256": "e56f678df84f303f5db89938f3ab5c18956138be1fdc8a2d3b89c0f220b0c8ae"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          30.0,
+          0.83
+        ],
+        [
+          42.0,
+          0.92
+        ],
+        [
+          54.0,
+          0.92
+        ],
+        [
+          66.0,
+          0.98
+        ],
+        [
+          78.0,
+          0.98
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-7.33",
+    "input_lra": "2.00",
+    "input_thresh": "-28.50",
+    "output_i": "-22.92",
+    "output_tp": "-11.82",
+    "output_lra": "1.90",
+    "output_thresh": "-32.92",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.08"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.40458255798625176,
+      0.3371358424557188
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/06-fire-embers-and-snow.mmp",
+      "bytes": 7591,
+      "sha256": "43f4a6e160e1f4542837b4a97a2d977298cddc3d94a24d3f0cf164586014ee79"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/06-fire-embers-and-snow.wav",
+      "bytes": 23040044,
+      "sha256": "1b30d7df4017c37f8ea261f449481296a74cfa93bcde94ffd9c7325748e887c9"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/06-fire-embers-and-snow.mp3",
+      "bytes": 2562116,
+      "sha256": "ca5b14e276dde3b2bea7ed57715a303d4132d4603d53e8c72c562367c99c360f"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/06-fire-embers-and-snow.ogg",
+      "bytes": 1254860,
+      "sha256": "f25691b346e1fc7bc00d91650dd123fa5c0d7cb030ea63c996b6fdabba208839"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/06-fire-embers-and-snow-piano.mid",
+      "bytes": 1822,
+      "sha256": "a6bc46cd8468e7c001fac06591109a24f59a8050ad97083717ef212c8789197e"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "opening"
+    },
+    {
+      "start_bar": 12,
+      "name": "first development"
+    },
+    {
+      "start_bar": 20,
+      "name": "contrast"
+    },
+    {
+      "start_bar": 28,
+      "name": "connected return"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed"
+}

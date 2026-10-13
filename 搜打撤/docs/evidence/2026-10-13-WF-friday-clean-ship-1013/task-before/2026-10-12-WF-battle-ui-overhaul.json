@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-battle-ui-overhaul",
+  "date": "2026-10-12",
+  "owner": "Friday",
+  "goal": "三个Sol medium子代理改造进入远征后的地图、事件、战斗、奖励领取、商店与详情，依据AI参考板实装并集成",
+  "paths": [
+    "game/src/battle/view",
+    "game/src/run/expedition.view.js",
+    "game/src/core/renderer.js",
+    "game/src/game.boot.js",
+    "game/src/ui/node-scene-view.js",
+    "game/src/run/game.run.scenes.js",
+    "game/src/run/chests.js",
+    "game/src/run/game.run.shop.js",
+    "game/css/expedition-battle.css",
+    "game/css/battle-hand-overhaul.css",
+    "game/css/combat-feedback.css",
+    "game/css/expedition-map.css",
+    "game/css/page-expedition-hud.css",
+    "game/css/entry-events.css",
+    "game/css/expedition-rewards.css",
+    "game/css/expedition-shop.css",
+    "docs/evidence/2026-10-12-WF-battle-ui-overhaul",
+    "docs/evidence/2026-10-12-WF-ark-ui-reference-1012/reference-board.md"
+  ],
+  "doneWhen": [
+    "三代理完成远征地图/事件/战斗/奖励/商店/详情实际接入，保留规则与他人未提交成果",
+    "各页面层级与输入状态符合参考板和战斗补充，去向与反馈真实明确",
+    "完成相关定向检查与独立当前窗口内置浏览器集成，未覆盖明确记录"
+  ],
+  "stage": "doing",
+  "checks": [],
+  "unverified": [],
+  "updatedAt": "2026-10-12T11:24:44.515Z"
+}

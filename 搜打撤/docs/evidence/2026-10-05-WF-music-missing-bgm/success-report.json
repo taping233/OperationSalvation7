@@ -1,0 +1,450 @@
+{
+  "id": "success",
+  "title": "归航余晖",
+  "stem": "13-success-homeward-glow",
+  "idea": "成功撤离、首脑胜利与通关结算：柔圆号和温暖大调，不做刺耳连续胜利号角，末句自然回落。",
+  "key": "A major",
+  "meter": [
+    3,
+    4
+  ],
+  "bpm_quarter": 92,
+  "bars": 24,
+  "total_beats": 72.0,
+  "seconds": 46.956520833333336,
+  "tracks": [
+    {
+      "name": "Horn homeward",
+      "program": 60,
+      "bank": 0,
+      "hand": null,
+      "notes": 48,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/13-success-homeward-glow-Horn-homeward.wav",
+        "bytes": 18031392,
+        "sha256": "d21af0d7220ccfdff1f77e869e0f6de968ac691f0bd053a976cbb81cab03b2ff"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.97
+        ],
+        [
+          6.0,
+          0.97
+        ],
+        [
+          18.0,
+          1
+        ],
+        [
+          30.0,
+          1
+        ],
+        [
+          42.0,
+          1.04
+        ],
+        [
+          54.0,
+          1.04
+        ],
+        [
+          66.0,
+          0.94
+        ],
+        [
+          66.0,
+          0.94
+        ],
+        [
+          72.0,
+          0.97
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Violin horizon gold",
+      "program": 40,
+      "bank": 0,
+      "hand": null,
+      "notes": 8,
+      "pan": -31,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/13-success-homeward-glow-Violin-horizon-gold.wav",
+        "bytes": 18031392,
+        "sha256": "5c86872f054e65fc4dc208b35e9a38b0b3124b74412fa645b8f1cf10f82df7b7"
+      },
+      "target_active_rms_dbfs": -33,
+      "continuous_gain_points": [
+        [
+          0,
+          0.35
+        ],
+        [
+          6.0,
+          0.35
+        ],
+        [
+          18.0,
+          0.8
+        ],
+        [
+          30.0,
+          0.8
+        ],
+        [
+          42.0,
+          0.92
+        ],
+        [
+          54.0,
+          0.92
+        ],
+        [
+          66.0,
+          0.48
+        ],
+        [
+          66.0,
+          0.48
+        ],
+        [
+          72.0,
+          0.35
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Cello return",
+      "program": 42,
+      "bank": 0,
+      "hand": null,
+      "notes": 24,
+      "pan": 29,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/13-success-homeward-glow-Cello-return.wav",
+        "bytes": 18031392,
+        "sha256": "560aebee80979ddb2997d99edf3b2f583d4ec34596b56d0171a6bc3e539cede0"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          6.0,
+          0.83
+        ],
+        [
+          18.0,
+          0.92
+        ],
+        [
+          30.0,
+          0.92
+        ],
+        [
+          42.0,
+          0.98
+        ],
+        [
+          54.0,
+          0.98
+        ],
+        [
+          66.0,
+          0.85
+        ],
+        [
+          66.0,
+          0.85
+        ],
+        [
+          72.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Harp carried treasures",
+      "program": 46,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": -24,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/13-success-homeward-glow-Harp-carried-treasures.wav",
+        "bytes": 18031392,
+        "sha256": "fb50fb9cfe5da1f15c020a33db197924ce3348f101c488a768b3c57e62e91bd0"
+      },
+      "target_active_rms_dbfs": -37,
+      "continuous_gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          6.0,
+          0.68
+        ],
+        [
+          18.0,
+          0.72
+        ],
+        [
+          30.0,
+          0.72
+        ],
+        [
+          42.0,
+          0.84
+        ],
+        [
+          54.0,
+          0.84
+        ],
+        [
+          66.0,
+          0.58
+        ],
+        [
+          66.0,
+          0.58
+        ],
+        [
+          72.0,
+          0.68
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Trumpet final sunlight",
+      "program": 56,
+      "bank": 0,
+      "hand": null,
+      "notes": 8,
+      "pan": 20,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/13-success-homeward-glow-Trumpet-final-sunlight.wav",
+        "bytes": 18031392,
+        "sha256": "025e5c53cf5b31a15344170d7e0b2a4e2633373fef739a587355e92820509c56"
+      },
+      "target_active_rms_dbfs": -40,
+      "continuous_gain_points": [
+        [
+          0,
+          0.35
+        ],
+        [
+          6.0,
+          0.35
+        ],
+        [
+          18.0,
+          0.8
+        ],
+        [
+          30.0,
+          0.8
+        ],
+        [
+          42.0,
+          0.92
+        ],
+        [
+          54.0,
+          0.92
+        ],
+        [
+          66.0,
+          0.48
+        ],
+        [
+          66.0,
+          0.48
+        ],
+        [
+          72.0,
+          0.35
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Celeste quiet reward",
+      "program": 8,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 31,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/13-success-homeward-glow-Celeste-quiet-reward.wav",
+        "bytes": 18031392,
+        "sha256": "47ca527e4c2d61d85dcbab4b927beecd367f1b4e02e90e57767a754c82a54c0a"
+      },
+      "target_active_rms_dbfs": -43,
+      "continuous_gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          6.0,
+          0.68
+        ],
+        [
+          18.0,
+          0.72
+        ],
+        [
+          30.0,
+          0.72
+        ],
+        [
+          42.0,
+          0.84
+        ],
+        [
+          54.0,
+          0.84
+        ],
+        [
+          66.0,
+          0.58
+        ],
+        [
+          66.0,
+          0.58
+        ],
+        [
+          72.0,
+          0.68
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 12,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/13-success-homeward-glow-Steady-low-foundation.wav",
+        "bytes": 18031392,
+        "sha256": "187dd89b62f4802ce4637ce98728f18312b2e2aa6d6e54090c65dab19fc9ab14"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          6.0,
+          0.83
+        ],
+        [
+          18.0,
+          0.92
+        ],
+        [
+          30.0,
+          0.92
+        ],
+        [
+          42.0,
+          0.98
+        ],
+        [
+          54.0,
+          0.98
+        ],
+        [
+          66.0,
+          0.85
+        ],
+        [
+          66.0,
+          0.85
+        ],
+        [
+          72.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-7.51",
+    "input_lra": "2.10",
+    "input_thresh": "-28.50",
+    "output_i": "-22.82",
+    "output_tp": "-12.07",
+    "output_lra": "1.70",
+    "output_thresh": "-32.82",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.18"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.4185934660649234,
+      0.6430757541768783
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/13-success-homeward-glow.mmp",
+      "bytes": 6777,
+      "sha256": "cb895da3fee447102a2e6780bd658885971e33710d3486b333247e2e94578b74"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/13-success-homeward-glow.wav",
+      "bytes": 13523522,
+      "sha256": "33a0d6c1c6edfb344dcd9c652f58a02a41b139741b02d9774f6130a54192fd05"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/13-success-homeward-glow.mp3",
+      "bytes": 1504580,
+      "sha256": "fa6fffb6eda32f1875bd7a79638f395c72af9c4ed1cc82e9481e4dcbeda5c61b"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/13-success-homeward-glow.ogg",
+      "bytes": 750763,
+      "sha256": "7e0b04bf99a58a576a15f89989d2792a57c43f1f7dc76b7c2ca5d917b9fd981d"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "opening"
+    },
+    {
+      "start_bar": 4,
+      "name": "first development"
+    },
+    {
+      "start_bar": 12,
+      "name": "contrast"
+    },
+    {
+      "start_bar": 20,
+      "name": "connected return"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed"
+}

@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-holy-water",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12470-95d7-75e0-9477-03361e04258c\\exec-ede76f62-6cbf-4351-9bee-ce24a40d3526.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-healing-original/cards-spell-tt3-holy-water-source.png",
+        "bytes": 1977928,
+        "sha256": "fa35ff22eb45579f837c17a3f95a4d8bbb46441db9826bfe17453be113cfae22"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-healing-original/cards-spell-tt3-holy-water-full-before.webp",
+          "bytes": 134916,
+          "sha256": "c14fbc71bc8bca45d6c2fa6b745b4a77b17ca1571186023544331a80df0d4199"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-healing-original/cards-spell-tt3-holy-water-thumb-before.webp",
+          "bytes": 15976,
+          "sha256": "908a2ec9211a7a4c2e84ea06f1e8d0421743aa8d08d6c748155e9f2f6b90996b"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-holy-water.webp",
+          "bytes": 140324,
+          "sha256": "1070e7e0c092699405807f2138cf50ff535a0b677967dc2654437c28cceff066",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-holy-water.webp",
+          "bytes": 16450,
+          "sha256": "eb841a2c60fef34fa3a403091cf3e6fc858bdb4b768e43bc27da1d2095ca6f88",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": "healing-drop-rough-20261010",
+      "revision_after": "healing-original-hands-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt3-holy-water.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 134916,
+            "sha256": "c14fbc71bc8bca45d6c2fa6b745b4a77b17ca1571186023544331a80df0d4199",
+            "source": "docs/evidence/2026-10-10-healing-redraw/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt3-holy-water.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 140324,
+            "sha256": "1070e7e0c092699405807f2138cf50ff535a0b677967dc2654437c28cceff066",
+            "source": "docs/evidence/2026-10-10-healing-original/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-holy-water.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15976,
+            "sha256": "908a2ec9211a7a4c2e84ea06f1e8d0421743aa8d08d6c748155e9f2f6b90996b",
+            "source": "docs/evidence/2026-10-10-healing-redraw/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-holy-water.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 16450,
+            "sha256": "eb841a2c60fef34fa3a403091cf3e6fc858bdb4b768e43bc27da1d2095ca6f88",
+            "source": "docs/evidence/2026-10-10-healing-original/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 901,
+  "manifest_count_after": 901
+}

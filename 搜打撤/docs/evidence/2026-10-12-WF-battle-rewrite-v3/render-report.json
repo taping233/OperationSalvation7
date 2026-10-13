@@ -1,0 +1,90 @@
+{
+  "bpm": 128,
+  "seconds": 30,
+  "engine": "LMMS 1.2.2 / FluidSynth; new theme native render, three verified v2 stems reused; v2 mastering preserved",
+  "master_gain_db": 20.549999999999997,
+  "mp3_measurement": {
+    "input_i": -19.51,
+    "input_tp": -3.54,
+    "input_lra": 3.2,
+    "input_thresh": -29.58
+  },
+  "checks": {
+    "exact_30s": true,
+    "finite": true,
+    "no_clipping": true,
+    "true_peak_below_minus_1": true,
+    "target_lufs": true,
+    "all_native_stems_non_silent": true
+  },
+  "stem_rms_dbfs": {
+    "low": -40.103106604673286,
+    "beat": -55.945436726088346,
+    "detail": -58.2659677918474,
+    "theme": -49.82815320483325
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v3/battle-shadowtide-v3-30s.mmp",
+      "bytes": 38804,
+      "sha256": "234f4975763e47ba6daa1b87493be3c20d2b3da98cd2d09ae87665a788a6d906"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v3/battle-shadowtide-v3-30s.wav",
+      "bytes": 8640044,
+      "sha256": "536def79c38dbb47afbe3b5cc2e88494d5045c9b978389e293f2ceae11fd7370"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v3/battle-shadowtide-v3-30s.mp3",
+      "bytes": 961605,
+      "sha256": "29b6c939651930bfcb7b0e102437c4593b460bc6c6e6986596d04058615843e7"
+    },
+    {
+      "path": ".tmp/music-workstation/GeneralUser-GS.sf2",
+      "bytes": 32319396,
+      "sha256": "9575028c7a1f589f5770fccc8cff2734566af40cd26ed836944e9a5152688cfe"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v3/low-native.wav",
+      "bytes": 12240010,
+      "sha256": "9648a3b26d421d47ba5260d948c4be6a90920a9f30f1d35b42bcf7da27276b05"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v3/beat-native.wav",
+      "bytes": 12240010,
+      "sha256": "e830121df1012f2f201f268835ce6b92114ab412d5ea4ef42e386780f7aed885"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v3/theme-native.wav",
+      "bytes": 12240010,
+      "sha256": "aeca3557350a2c0f3dc916ca5b4fbd10ae62406ccfcba0b9cf7f403d9090a6b7"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v3/detail-native.wav",
+      "bytes": 12240010,
+      "sha256": "fa200a70f2134253e0cc6faafee13edada8332270b16384e56aaf2ef8ad17bdc"
+    }
+  ],
+  "reference_samples_used": false,
+  "listening": "Pending user audition; comparison uses audio measurements and editable score, not human listening.",
+  "reused_stems": [
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v3/low-native.wav",
+      "source": "docs/evidence/2026-10-12-WF-battle-rewrite-v2/low-native.wav",
+      "sha256": "9648a3b26d421d47ba5260d948c4be6a90920a9f30f1d35b42bcf7da27276b05",
+      "method": "Byte-identical copy of verified v2 native stem"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v3/beat-native.wav",
+      "source": "docs/evidence/2026-10-12-WF-battle-rewrite-v2/beat-native.wav",
+      "sha256": "e830121df1012f2f201f268835ce6b92114ab412d5ea4ef42e386780f7aed885",
+      "method": "Byte-identical copy of verified v2 native stem"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v3/detail-native.wav",
+      "source": "docs/evidence/2026-10-12-WF-battle-rewrite-v2/detail-native.wav",
+      "sha256": "fa200a70f2134253e0cc6faafee13edada8332270b16384e56aaf2ef8ad17bdc",
+      "method": "Byte-identical copy of verified v2 native stem"
+    }
+  ]
+}

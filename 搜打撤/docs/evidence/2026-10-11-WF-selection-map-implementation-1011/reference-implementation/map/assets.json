@@ -1,0 +1,50 @@
+[
+  {
+    "path": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/reference-implementation/map/source/battle-security-shard-v1.png",
+    "bytes": 537669,
+    "sha256": "6605a8fb4d0a1e6432e1c67e9787adf6f35c7db83fa68bef7842e7219015f235",
+    "width": 1254,
+    "height": 1254,
+    "alpha": [
+      0,
+      255
+    ],
+    "obtained": "built-in imagegen source; runtime is 512px lossless WebP encoding"
+  },
+  {
+    "path": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/reference-implementation/map/source/rest-heat-cell-v1.png",
+    "bytes": 592198,
+    "sha256": "1d91417eea484184c64be846f78cb262ca3062c7e374777bfbfa04d038675f40",
+    "width": 1254,
+    "height": 1254,
+    "alpha": [
+      0,
+      255
+    ],
+    "obtained": "built-in imagegen source; runtime is 512px lossless WebP encoding"
+  },
+  {
+    "path": "game/assets/scenes/map-nodes/battle-security-shard-1011.webp",
+    "bytes": 68314,
+    "sha256": "0ae9a6bed89201af11fe22c9ee807dbddd03c3e86a01f7206e5e3ff447d12610",
+    "width": 512,
+    "height": 512,
+    "alpha": [
+      0,
+      255
+    ],
+    "obtained": "built-in imagegen source; runtime is 512px lossless WebP encoding"
+  },
+  {
+    "path": "game/assets/scenes/map-nodes/rest-heat-cell-1011.webp",
+    "bytes": 80176,
+    "sha256": "ea177d2c97939cd941582214c1a39e2380f353c3da8fa84505ea0fafd1c760e0",
+    "width": 512,
+    "height": 512,
+    "alpha": [
+      0,
+      255
+    ],
+    "obtained": "built-in imagegen source; runtime is 512px lossless WebP encoding"
+  }
+]

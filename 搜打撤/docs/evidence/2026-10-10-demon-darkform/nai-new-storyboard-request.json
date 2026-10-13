@@ -1,0 +1,22 @@
+{
+  "card_id": "cc-demon",
+  "model": "nai-diffusion-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 333529474,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1girl, solo, calm expression, closed mouth, looking at viewer, shadow, claws, magic, dark background, from below, full body, standing, arm up, open hand\n\nCharacter 1 stands in a turning three-quarter pose, with the near boot pinning the edge of her own long shadow on a single abstract plane. The rest of that shadow rises diagonally into an immense black-violet demonic claw behind and beside her. Her raised open palm meets one broad finger of that claw, as though calmly accepting power from a much greater presence. Her other arm rests near the hip instead of pressing her chest. A thin restrained dark-red line connects the dim glow near her heart to the palm contact point, suggesting a cost while the large black claw gathers power. Her face remains unmoved: relaxed brows, steady eyes and a small neutral closed mouth. The cape sweeps opposite the raised arm and the low braid follows the shoulder turn. Show the complete connected figure from hair to both grounded boots. Her face, palm contact and pinned shadow form one upward diagonal. The close dark claw creates scale and foreground overlap without covering her face. Surround them with quiet subdued charcoal, desaturated violet and a small deep-burgundy abstract field, choosing value separation so the black robe, claw, pale face and hair remain distinct. The demonic presence is a single abstract claw, not another humanoid body.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "girl, young adult woman, delicate composed anime face, purple eyes, very pale low-saturation golden hair with faint warm ivory undertone, straight dense bangs with a nearly even edge above brows, smooth rounded crown, two long straight sidelocks framing cheeks, low side braid gathered behind neck, dark black-indigo crescent hairclip above bangs on viewer-right, black-gray high-collared priestess long robe, muted purple short cape with restrained gold trim, black gloves, dark short boots",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, boy, male, bright yellow hair, orange hair, honey gold hair, metallic gold hair, side-swept bangs, fluffy crown, braided crown, horns on character, white priestess dress, teal cape, white background, pastel background, wicked grin, evil smirk, angry expression, exaggerated expression, lamp, lantern, staff, sword, held orb, blood, wound, gore, full demon body, multiple people, white border, inset illustration, detached torso, cropped feet, contact sheet, character sheet",
+  "stage": "只生成新NAI分镜，等待老板评价，不进入内置重绘",
+  "design": "低机位全身，靴踏影子，抬手与巨大影爪碰掌，远手收侧，心口暗红细流连到接触点。",
+  "identity_source": "老板最新认可禁咒式直刘海/低侧辫/极浅淡金可见颜色、不动声色暗牧",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\demon-darkform-20261010\\demon-storyboard-fullbody.png"
+}

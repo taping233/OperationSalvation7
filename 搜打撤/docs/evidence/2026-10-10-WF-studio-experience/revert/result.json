@@ -1,0 +1,67 @@
+{
+  "task": "WF-photo-revert-1010",
+  "status": "complete-uncommitted",
+  "date": "2026-10-10",
+  "files": [
+    {
+      "file": "game/src/hub/game.cardslib.page.js",
+      "sha256": "0fa716408e46e518a85a5763ef6a9519bd0387407d156039acb34c5dfa6bdf14"
+    },
+    {
+      "file": "game/css/photo-studio-unified.css",
+      "sha256": "5a48e3c36f425ccd0149424acf6af1793c35a971373dd38829e8febdc63457e3"
+    },
+    {
+      "file": "game/css/photo-studio-zoom-motion.css",
+      "sha256": "d4918b1effd88d3add908500ad39c6682f3351def78e7b2feab38177d3481e40"
+    },
+    {
+      "file": "game/src/ui/ui.js",
+      "sha256": "41651b993a27f1f6fb9b6db8ce12d9b327aae2b8fa549fbf0b01e86d8293f67c"
+    },
+    {
+      "file": "tests/boot.test.js",
+      "sha256": "678e7418003e34735568233d028f57fe5c92c99eab37cdd2f98d23c4c17873da"
+    },
+    {
+      "file": "tests/photo-zoom-lifecycle.test.js",
+      "sha256": "98be6df465a9c513ddd725e457e80b39d36d23c8c0f42a3e19407a791cb07f32"
+    }
+  ],
+  "baseline": {
+    "originalCSS": true,
+    "originalBootTests": true,
+    "pageOnlyTwoMotionLines": true,
+    "source": "../result.json initialFiles"
+  },
+  "motion": {
+    "preset": "atelier",
+    "entryMs": 420,
+    "informationMs": 340,
+    "informationDelayMs": 100,
+    "backdropMs": 240,
+    "closeMs": 120
+  },
+  "checks": {
+    "testFiles": 7,
+    "testsPassed": 83,
+    "testsFailed": 0,
+    "eslint": "passed",
+    "syntax": "passed",
+    "cssParse": "passed",
+    "diff": "passed",
+    "browser": "Codex iab current-window; real click/open/close/during-entry close/reopen",
+    "consoleErrors": 0
+  },
+  "limits": [
+    "full suite not run",
+    "build not run",
+    "other viewports not run",
+    "frame-time and long-term memory not sampled"
+  ],
+  "retainedUnused": "game/css/photo-studio-motion.css candidate; not imported or approved for shipping",
+  "services": {
+    "shared5200": "retained",
+    "own5329": "PID320 identity verified stopped; no listener"
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "method": "Built-in ImageGen; RGBA WebP and existing thumbnail color bake, alpha preserved",
+  "verification": "Only generated image inspection; no tests/browser/build",
+  "items": [
+    {
+      "card_id": "tt-key",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-resources/key-source.png",
+        "bytes": 330452,
+        "sha256": "eb651f2395c354acac7a52df853148687437a0caf00550eed61e8b19cef3a41b"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-resources/key-full-before.webp",
+          "bytes": 44578,
+          "sha256": "18e78fb050480efcb516f241a38d1cf8a5cfa069d93d5cfb3ec234c3195f2d40"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-resources/key-thumb-before.webp",
+          "bytes": 5196,
+          "sha256": "5ff99d94b527fd4f4947406d45fd496da613fb97916e3c8f407f59c8907610d7"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/resources/key.webp",
+          "bytes": 69742,
+          "sha256": "834025a3efbbfbad3d9b3c446eea950c42f314a14fca5ecf274cbdb6342d0ffc"
+        },
+        {
+          "path": "game/assets/thumbs/cards/resources/key.webp",
+          "bytes": 12454,
+          "sha256": "b75fe347df39b217bb875510f98cbbefe449850bb63fef4821e5c37bdc922a31"
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "resource-key-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/resources/key.webp",
+            "ext": "webp",
+            "bytes": 44578,
+            "license": "项目自有（自制/AI 生成）"
+          },
+          "after": {
+            "path": "cards/resources/key.webp",
+            "ext": "webp",
+            "bytes": 69742,
+            "license": "项目自有（自制/AI 生成）",
+            "sha256": "834025a3efbbfbad3d9b3c446eea950c42f314a14fca5ecf274cbdb6342d0ffc",
+            "source": "docs/evidence/2026-10-10-resources/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/resources/key.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 5196,
+            "sha256": "5ff99d94b527fd4f4947406d45fd496da613fb97916e3c8f407f59c8907610d7",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/resources/key.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 12454,
+            "sha256": "b75fe347df39b217bb875510f98cbbefe449850bb63fef4821e5c37bdc922a31",
+            "source": "docs/evidence/2026-10-10-resources/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt-key-one",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-resources/key-one-source.png",
+        "bytes": 900643,
+        "sha256": "a983708b307019fc87589d72956e91d4cfa3b4db2c8c9add29d3829444cf6431"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-resources/key-one-full-before.webp",
+          "bytes": 92768,
+          "sha256": "daaae891df1e3e7cb98c98eb466426f2971c0e5efa17b4c6e7dd70aba03d7fac"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-resources/key-one-thumb-before.webp",
+          "bytes": 12812,
+          "sha256": "615a6f62238508e1758d981060a0b385d3a4a9dbc56560c918693af3c2726333"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/resources/key-one.webp",
+          "bytes": 198516,
+          "sha256": "4c8772129b18452aa76f36978edc78a57f2a70778403dbc509863f1e334f9767"
+        },
+        {
+          "path": "game/assets/thumbs/cards/resources/key-one.webp",
+          "bytes": 33968,
+          "sha256": "f4bae1790f57eab02114ae4c777595186f4f9231c785d95098a21eee004a4dbf"
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "resource-key-one-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/resources/key-one.webp",
+            "ext": "webp",
+            "bytes": 92768,
+            "license": "项目自有（自制/AI 生成）"
+          },
+          "after": {
+            "path": "cards/resources/key-one.webp",
+            "ext": "webp",
+            "bytes": 198516,
+            "license": "项目自有（自制/AI 生成）",
+            "sha256": "4c8772129b18452aa76f36978edc78a57f2a70778403dbc509863f1e334f9767",
+            "source": "docs/evidence/2026-10-10-resources/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/resources/key-one.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 12812,
+            "sha256": "615a6f62238508e1758d981060a0b385d3a4a9dbc56560c918693af3c2726333",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/resources/key-one.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 33968,
+            "sha256": "f4bae1790f57eab02114ae4c777595186f4f9231c785d95098a21eee004a4dbf",
+            "source": "docs/evidence/2026-10-10-resources/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "manifest_count_after": 831
+}

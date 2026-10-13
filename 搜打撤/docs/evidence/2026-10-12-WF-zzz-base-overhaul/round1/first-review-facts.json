@@ -1,0 +1,244 @@
+{
+  "origin": "http://127.0.0.1:5335",
+  "viewport": "当前窗口1280×720；未设置覆盖",
+  "fixture": "qa-fixture.json构造独立存档数据；导航/选择/详情开关/领取均为真实输入",
+  "facts": [
+    {
+      "nav": [
+        {
+          "rect": {
+            "h": 68.5250015258789,
+            "w": 172.3874969482422,
+            "x": 26.662500381469727,
+            "y": 651.4750366210938
+          },
+          "text": "基地当前房间"
+        },
+        {
+          "rect": {
+            "h": 68.5250015258789,
+            "w": 172.3874969482422,
+            "x": 202.375,
+            "y": 651.4750366210938
+          },
+          "text": "配置"
+        },
+        {
+          "rect": {
+            "h": 68.5250015258789,
+            "w": 172.3874969482422,
+            "x": 378.0874938964844,
+            "y": 651.4750366210938
+          },
+          "text": "后勤"
+        },
+        {
+          "rect": {
+            "h": 68.5250015258789,
+            "w": 172.3874969482422,
+            "x": 553.7999877929688,
+            "y": 651.4750366210938
+          },
+          "text": "交易所"
+        },
+        {
+          "rect": {
+            "h": 68.5250015258789,
+            "w": 172.3874969482422,
+            "x": 729.5125122070312,
+            "y": 651.4750366210938
+          },
+          "text": "收藏室6"
+        },
+        {
+          "rect": {
+            "h": 68.5250015258789,
+            "w": 172.3874969482422,
+            "x": 905.2250366210938,
+            "y": 651.4750366210938
+          },
+          "text": "建设"
+        },
+        {
+          "rect": {
+            "h": 68.5250015258789,
+            "w": 172.3874969482422,
+            "x": 1080.9375,
+            "y": 651.4750366210938
+          },
+          "text": "庭院"
+        }
+      ],
+      "overflows": [],
+      "page": "home",
+      "resources": "48木材24口粮5钥匙2400储备币",
+      "view": "deploy/",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "font": [],
+      "page": "person-profile",
+      "rects": []
+    },
+    {
+      "actions": [],
+      "page": "skin-preview"
+    },
+    {
+      "browser": [
+        {
+          "bounds": {
+            "h": 335.4750061035156,
+            "y": 229.875
+          },
+          "client": [
+            1767,
+            503
+          ],
+          "scroll": [
+            1767,
+            503
+          ]
+        }
+      ],
+      "page": "warehouse",
+      "screenScale": 0.6666666666666666,
+      "summary": "当前浏览追斩3 张 · 收藏保护查看详情 ↗"
+    },
+    {
+      "elements": [
+        {
+          "attrs": [
+            [
+              "data-card-browser",
+              "warehouse"
+            ],
+            [
+              "data-empty",
+              "false"
+            ]
+          ],
+          "class": "card-browser",
+          "css": {
+            "columns": "none",
+            "display": "flex",
+            "font": "18px",
+            "gap": "normal",
+            "height": "503.212px",
+            "overflow": "hidden",
+            "rows": "none"
+          },
+          "rect": {
+            "h": 335.4750061035156,
+            "w": 1177.875,
+            "x": 43.462501525878906,
+            "y": 229.875
+          }
+        }
+      ],
+      "page": "warehouse-layout"
+    },
+    {
+      "buttons": [],
+      "elements": [
+        {
+          "class": "trade-v5-reading",
+          "rect": {
+            "h": 268.3374938964844,
+            "w": 289.07501220703125,
+            "x": 928.2625122070312,
+            "y": 199.8500061035156
+          }
+        }
+      ],
+      "page": "trade-selected"
+    },
+    {
+      "nav": "收藏室当前房间5",
+      "notice": " 成就奖励已入账",
+      "outcome": "unclaimed",
+      "page": "reward-after-claim",
+      "pending": "待领取5成就奖励老练搜刮者可领取 ›成就奖励猎手可领取 ›成就奖励传说典藏可领取 ›成就奖励博物学家可领取 ›收藏奖励收集 5 张可领取 ›成就目标 ›收藏里程碑 ›",
+      "receipt": "尚未领取初出茅庐奖励尚未领取，领取记录未改变。具体原因请查看本次提示。确认 · 返回浏览",
+      "wood": "50木材24口粮5钥匙2400储备币"
+    },
+    {
+      "copy": "设施扩建出征背包当前容量16 格→扩建后容量17 格扩建材料木材50 / 2持有 / 需要确认扩建→",
+      "page": "build",
+      "visibleControls": [
+        {
+          "disabled": false,
+          "rect": {
+            "h": 37.275001525878906,
+            "w": 569.2999877929688,
+            "x": 642.7000122070312,
+            "y": 580.6000366210938
+          },
+          "text": "确认扩建→"
+        }
+      ]
+    },
+    {
+      "head": [
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(240, 244, 243)",
+          "font": "16px",
+          "text": "环境设置"
+        }
+      ],
+      "page": "courtyard",
+      "rects": []
+    },
+    {
+      "failedVisibleImages": [],
+      "page": "photo-return",
+      "selected": "禁咒I",
+      "tab": [
+        "全部，268张"
+      ],
+      "zoom": true
+    }
+  ],
+  "logs": [
+    {
+      "level": "debug",
+      "message": "[vite] connecting...",
+      "timestamp": "2026-10-12T11:29:15.592Z",
+      "url": "http://127.0.0.1:5335/@vite/client"
+    },
+    {
+      "level": "debug",
+      "message": "[vite] connected.",
+      "timestamp": "2026-10-12T11:29:15.600Z",
+      "url": "http://127.0.0.1:5335/@vite/client"
+    },
+    {
+      "level": "debug",
+      "message": "[vite] connecting...",
+      "timestamp": "2026-10-12T11:32:41.087Z",
+      "url": "http://127.0.0.1:5335/@vite/client"
+    },
+    {
+      "level": "debug",
+      "message": "[vite] connected.",
+      "timestamp": "2026-10-12T11:32:41.134Z",
+      "url": "http://127.0.0.1:5335/@vite/client"
+    },
+    {
+      "level": "debug",
+      "message": "[vite] connecting...",
+      "timestamp": "2026-10-12T11:32:51.610Z",
+      "url": "http://127.0.0.1:5335/@vite/client"
+    },
+    {
+      "level": "debug",
+      "message": "[vite] connected.",
+      "timestamp": "2026-10-12T11:32:51.632Z",
+      "url": "http://127.0.0.1:5335/@vite/client"
+    }
+  ]
+}

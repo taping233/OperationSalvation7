@@ -1,0 +1,1098 @@
+{
+  "kind": "static-style-pruning",
+  "testRun": false,
+  "loadingOrder": [
+    "game/css/base-camp-roster.css",
+    "game/css/base-camp.css",
+    "game/css/base-camp-compact.css",
+    "game/css/base-camp-rework.css"
+  ],
+  "sourceBaseline": [
+    {
+      "file": "game/css/base-camp-roster.css",
+      "sha256": "e94fe022034143477aac3d968e1f148445b91783bb92d410276e2c9727a8d42a"
+    },
+    {
+      "file": "game/css/base-camp.css",
+      "sha256": "cb52b5188b8bd79954bcb268e21f0f65ed261c31c821df38301dd778e3f2e22a"
+    },
+    {
+      "file": "game/css/base-camp-compact.css",
+      "sha256": "a67e301569bd3c3da665379015c41ff51d4deb642d2b18822ab027d869f354f2"
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "sha256": "e05597139222977f7c8063de23a82f72a117e4b7b1d3860bd134e321ae7a06c4"
+    }
+  ],
+  "retiredClasses": [
+    "hub-upgrade-layout",
+    "up-card",
+    "up-cap",
+    "camp-capacity-steps",
+    "camp-upgrade-copy",
+    "up-pets",
+    "person-workspace",
+    "person-tabs",
+    "person-tab",
+    "person-layout",
+    "person-portrait",
+    "person-heading",
+    "person-stats",
+    "person-skins",
+    "stash-grid-shell",
+    "stash-main-section"
+  ],
+  "removals": [
+    {
+      "kind": "retired-functional-branch",
+      "file": "game/css/base-camp.css",
+      "line": 121,
+      "before": "#overlay #hubMain.pg.hub.base-camp :is(.stash-workspace, .person-workspace)",
+      "after": "#overlay #hubMain.pg.hub.base-camp :is(.stash-workspace)"
+    },
+    {
+      "kind": "retired-functional-branch",
+      "file": "game/css/base-camp.css",
+      "line": 122,
+      "before": "#overlay #hubMain.pg.hub.base-camp :is(.stash-sections, .collection-tabs, .person-tabs)",
+      "after": "#overlay #hubMain.pg.hub.base-camp :is(.stash-sections, .collection-tabs)"
+    },
+    {
+      "kind": "retired-functional-branch",
+      "file": "game/css/base-camp.css",
+      "line": 123,
+      "before": "#overlay #hubMain.pg.hub.base-camp :is(.stash-section-tab, .collection-tabs button, .person-tab)",
+      "after": "#overlay #hubMain.pg.hub.base-camp :is(.stash-section-tab, .collection-tabs button)"
+    },
+    {
+      "kind": "retired-functional-branch",
+      "file": "game/css/base-camp.css",
+      "line": 124,
+      "before": "#overlay #hubMain.pg.hub.base-camp :is(.stash-section-tab.on, .collection-tabs button.on, .person-tab.on)",
+      "after": "#overlay #hubMain.pg.hub.base-camp :is(.stash-section-tab.on, .collection-tabs button.on)"
+    },
+    {
+      "kind": "retired-functional-branch",
+      "file": "game/css/base-camp.css",
+      "line": 125,
+      "before": "#overlay #hubMain.pg.hub.base-camp :is(.stash-section-tab small, .person-tab span)",
+      "after": "#overlay #hubMain.pg.hub.base-camp :is(.stash-section-tab small)"
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 127,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .stash-main-section",
+      "declarations": 2
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 136,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .stash-grid-shell",
+      "declarations": 3
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 201,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .hub-upgrade-layout",
+      "declarations": 3
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 202,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .up-card",
+      "declarations": 2
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 205,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .up-cap",
+      "declarations": 3
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 206,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .up-cap b",
+      "declarations": 4
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 207,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .up-cap small",
+      "declarations": 3
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 210,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-capacity-steps",
+      "declarations": 3
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 211,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-capacity-steps span",
+      "declarations": 3
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 212,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-capacity-steps span.filled",
+      "declarations": 1
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 214,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-upgrade-copy h3",
+      "declarations": 3
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 215,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-upgrade-copy small",
+      "declarations": 3
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 216,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-upgrade-copy p",
+      "declarations": 2
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 218,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .up-pets",
+      "declarations": 1
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 219,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-tabs",
+      "declarations": 1
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 220,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-tab",
+      "declarations": 3
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 221,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-tab b",
+      "declarations": 2
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 222,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-layout",
+      "declarations": 4
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 223,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-portrait",
+      "declarations": 5
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 224,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-portrait::before",
+      "declarations": 8
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 225,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-portrait img",
+      "declarations": 8
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 226,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-portrait::after",
+      "declarations": 8
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 228,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-heading",
+      "declarations": 4
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 229,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-heading h3",
+      "declarations": 4
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 230,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-heading span",
+      "declarations": 5
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 231,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-stats",
+      "declarations": 6
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 232,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-stats small",
+      "declarations": 4
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 233,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-stats b",
+      "declarations": 2
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 234,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-stats em",
+      "declarations": 2
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp.css",
+      "line": 240,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-skins",
+      "declarations": 3
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp-compact.css",
+      "line": 69,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .hub-upgrade-layout",
+      "declarations": 1
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp-compact.css",
+      "line": 71,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-tab",
+      "declarations": 2
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp-compact.css",
+      "line": 72,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-tab b",
+      "declarations": 1
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp-compact.css",
+      "line": 73,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-tab span",
+      "declarations": 1
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp-compact.css",
+      "line": 74,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-layout",
+      "declarations": 3
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp-compact.css",
+      "line": 75,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-portrait",
+      "declarations": 2
+    },
+    {
+      "kind": "retired-rule",
+      "file": "game/css/base-camp-compact.css",
+      "line": 77,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-heading h3",
+      "declarations": 1
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 264,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .ach-row",
+      "context": "",
+      "property": "padding",
+      "value": "21px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 148,
+          "value": "18px 20px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 236,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-details p",
+      "context": "",
+      "property": "line-height",
+      "value": "1.8",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 87,
+          "value": "1.7",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 236,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-details p",
+      "context": "",
+      "property": "font-size",
+      "value": "17px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 87,
+          "value": "21px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 235,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-details h4",
+      "context": "",
+      "property": "margin",
+      "value": "25px 0 12px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 86,
+          "value": "0 0 10px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 235,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .person-details h4",
+      "context": "",
+      "property": "font-size",
+      "value": "19px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 86,
+          "value": "16px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 198,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .shop-price-tag",
+      "context": "",
+      "property": "font-size",
+      "value": "19px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 124,
+          "value": "16px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 198,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .shop-price-tag",
+      "context": "",
+      "property": "margin-top",
+      "value": "auto",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 124,
+          "value": "auto",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 190,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-product",
+      "context": "",
+      "property": "background",
+      "value": "#faf9f0",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 118,
+          "value": "var(--camp-sheet)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 190,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-product",
+      "context": "",
+      "property": "padding",
+      "value": "26px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 118,
+          "value": "16px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 190,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-product",
+      "context": "",
+      "property": "gap",
+      "value": "18px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 118,
+          "value": "12px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 189,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .shop-shelf",
+      "context": "",
+      "property": "gap",
+      "value": "24px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 117,
+          "value": "18px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 189,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .shop-shelf",
+      "context": "",
+      "property": "grid-template-columns",
+      "value": "repeat(2, minmax(0, 1fr))",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 117,
+          "value": "repeat(4, minmax(0, 1fr))",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 189,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .shop-shelf",
+      "context": "",
+      "property": "display",
+      "value": "grid",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 117,
+          "value": "grid",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 188,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-reserve-value span",
+      "context": "",
+      "property": "font-size",
+      "value": "14px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 115,
+          "value": "20px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 186,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-reserve-value",
+      "context": "",
+      "property": "margin",
+      "value": "25px 0",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 113,
+          "value": "0",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 186,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-reserve-value",
+      "context": "",
+      "property": "gap",
+      "value": "12px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 113,
+          "value": "8px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 186,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-reserve-value",
+      "context": "",
+      "property": "align-items",
+      "value": "baseline",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 113,
+          "value": "center",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 186,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-reserve-value",
+      "context": "",
+      "property": "display",
+      "value": "flex",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 113,
+          "value": "flex",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 181,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-shop-intro",
+      "context": "",
+      "property": "color",
+      "value": "#edf0df",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 110,
+          "value": "var(--camp-ink)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 181,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-shop-intro",
+      "context": "",
+      "property": "background",
+      "value": "#29434a",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 110,
+          "value": "#dce7ed",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 181,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-shop-intro",
+      "context": "",
+      "property": "padding",
+      "value": "29px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 110,
+          "value": "14px 20px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 180,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-shop-layout",
+      "context": "",
+      "property": "gap",
+      "value": "32px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 109,
+          "value": "22px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 180,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-shop-layout",
+      "context": "",
+      "property": "display",
+      "value": "grid",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 109,
+          "value": "flex",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 61,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-section-head p",
+      "context": "",
+      "property": "font-size",
+      "value": "17px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 22,
+          "value": "21px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 61,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-section-head p",
+      "context": "",
+      "property": "margin",
+      "value": "8px 0 0",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 22,
+          "value": "2px 0 0",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 59,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-section-head small",
+      "context": "",
+      "property": "color",
+      "value": "#76817c",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 23,
+          "value": "#57717e",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 58,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-section-head",
+      "context": "",
+      "property": "margin-bottom",
+      "value": "26px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 20,
+          "value": "18px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 58,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .camp-section-head",
+      "context": "",
+      "property": "gap",
+      "value": "11px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 20,
+          "value": "6px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 56,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .hub-page",
+      "context": "",
+      "property": "background",
+      "value": "var(--camp-paper)",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 19,
+          "value": "var(--camp-paper)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 56,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .hub-page",
+      "context": "",
+      "property": "padding",
+      "value": "36px 46px 46px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 19,
+          "value": "26px 32px 30px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 46,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .hub-tab.on::before",
+      "context": "",
+      "property": "background",
+      "value": "#e3c985",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 14,
+          "value": "#83c7d6",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 45,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .hub-tab.on",
+      "context": "",
+      "property": "box-shadow",
+      "value": "inset 0 0 0 1px #56717a",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 13,
+          "value": "none",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 45,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .hub-tab.on",
+      "context": "",
+      "property": "background",
+      "value": "#314853",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 13,
+          "value": "#2d4b59",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 40,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .hub-tab",
+      "context": "",
+      "property": "padding",
+      "value": "15px 16px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 10,
+          "value": "13px 12px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 40,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .hub-tab",
+      "context": "",
+      "property": "min-height",
+      "value": "76px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 10,
+          "value": "70px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 40,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .hub-tab",
+      "context": "",
+      "property": "gap",
+      "value": "14px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 10,
+          "value": "11px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 36,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .hub-tabs",
+      "context": "",
+      "property": "padding",
+      "value": "32px 18px 22px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 9,
+          "value": "26px 14px 20px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 36,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .hub-tabs",
+      "context": "",
+      "property": "gap",
+      "value": "7px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 9,
+          "value": "5px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 35,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .hub-body",
+      "context": "",
+      "property": "grid-template-columns",
+      "value": "240px minmax(0, 1fr)",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 7,
+          "value": "205px minmax(0, 1fr)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 23,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .hub-head",
+      "context": "",
+      "property": "padding",
+      "value": "18px 38px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 8,
+          "value": "14px 28px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "kind": "shadowed-declaration",
+      "file": "game/css/base-camp.css",
+      "line": 22,
+      "selector": "#overlay #hubMain.pg.hub.base-camp .hub-head",
+      "context": "",
+      "property": "min-height",
+      "value": "98px",
+      "important": false,
+      "replacedBy": [
+        {
+          "file": "game/css/base-camp-rework.css",
+          "line": 8,
+          "value": "72px",
+          "important": false
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "file": "game/css/base-camp.css",
+      "beforeHash": "cb52b5188b8bd79954bcb268e21f0f65ed261c31c821df38301dd778e3f2e22a",
+      "beforeBytes": 48570,
+      "afterBytes": 43881,
+      "afterHash": "6a216a50d9e026d14df3b9e48212436ebb3bace90d73183538fb269bfa5940cc"
+    },
+    {
+      "file": "game/css/base-camp-compact.css",
+      "beforeHash": "a67e301569bd3c3da665379015c41ff51d4deb642d2b18822ab027d869f354f2",
+      "beforeBytes": 11857,
+      "afterBytes": 11250,
+      "afterHash": "ee654728c444503be68492bd784a6a02d0d45997f7bb9aaf1c0a1fb53473d5e2"
+    }
+  ],
+  "applied": true,
+  "appliedAt": "2026-10-10T10:14:19.788Z"
+}

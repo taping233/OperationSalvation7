@@ -1,0 +1,117 @@
+- main:
+  - text: 金币
+  - generic: "4"
+  - text: 攻击
+  - generic: "4"
+  - button "离开对局":
+  - button:
+  - button:
+  - generic: 当前生命
+  - generic: 31/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog "bag 背包":
+    - button "关闭": ×
+    - heading "背包" [level=2]:
+      - text: 背包
+      - button:
+    - generic: 金币 4
+    - generic: 物资估值 0
+    - button "关闭背包" [active]:
+      - generic: 返回
+    - region "随身背包":
+      - heading "随身背包 11/16 格 按稀有度 按种类" [level=3]:
+        - text: 随身背包
+        - generic: 11/16 格
+        - button "按稀有度"
+        - button "按种类"
+      - paragraph: 点击卡面查看详情 · 按住拖动整理
+      - generic: "1"
+      - img "初始攻击"
+      - generic: 初始攻击
+      - generic: 武术 · 初始 初始
+      - generic: 造成等同于你的攻击力的攻击伤害。
+      - generic: ×2
+      - generic: "1"
+      - img "黑暗形态"
+      - generic: 黑暗形态
+      - generic: 法术 · 常无欲专属 职业
+      - generic: 本场战斗中，每当你发现卡牌时，发现的候选项增加 1 个。
+      - generic: ×1
+      - generic: "1"
+      - img "冰刺"
+      - generic: 冰刺
+      - generic: 法术 · 古朴 古朴
+      - generic: 造成 2 点法术伤害；对目标附加冰冻。
+      - generic: ×1
+      - generic: "1"
+      - img "灵能召唤"
+      - generic: 灵能召唤
+      - generic: 法术 · 稀有 稀有
+      - generic: 发现 1 张注能卡牌，并使该牌无需注能。
+      - generic: ×1
+      - img "两把钥匙"
+      - generic: 两把钥匙
+      - generic: 资源 · 稀有 稀有
+      - generic: 钥匙 ×2。
+      - generic: ×1
+      - img "元素符印"
+      - generic: 元素符印
+      - generic: 装备 · 稀有 稀有
+      - img "cards"
+      - text: 抽 2
+      - generic: 本场战斗中，你累计注能 3 张卡牌后解锁：你的法伤增加 2 点，并抽 2 张牌。
+      - generic: ×1
+      - generic: "1"
+      - img "闪电链"
+      - generic: 闪电链
+      - generic: 法术 · 古朴 古朴
+      - generic: 造成 3 点法术伤害；本牌的伤害效果触发 2 次。
+      - generic: ×1
+      - generic: "2"
+      - img "龙焰射线"
+      - generic: 龙焰射线
+      - generic: 法术 · 古朴 古朴
+      - img "crystal"
+      - text: 注能 1
+      - generic: 注能（1）：
+      - text: 造成 11 点法术伤害。
+      - generic: ×1
+      - img "大量木材"
+      - generic: 大量木材
+      - generic: 资源 · 稀有 稀有
+      - generic: 木材 ×2。
+      - generic: ×1
+      - generic: "2"
+      - img "神秘召唤"
+      - generic: 神秘召唤
+      - generic: 法术 · 史诗 史诗
+      - generic: 发现 1 张传说卡牌。
+      - generic: ×1
+      - img "草甲"
+      - generic: 草甲
+      - generic: 装备 · 古朴 古朴
+      - img "plate"
+      - text: 甲 5
+      - generic: 装备本牌时，你获得 5 点护甲。
+      - generic: ×1
+    - complementary:
+      - region "安全格":
+        - heading "安全格 0/2 格" [level=3]:
+          - text: 安全格
+          - generic: 0/2 格
+        - paragraph: 撤离失败时运回基地 · 拖入存放，拖回取出
+      - region "消耗口袋":
+        - heading "消耗口袋 2 张 · 暂不可用" [level=3]:
+          - text: 消耗口袋
+          - generic: 2 张 · 暂不可用
+        - paragraph: 已用过的卡牌 · 在火堆或用道具复原
+        - generic: "1"
+        - img "寻宝"
+        - generic: 寻宝
+        - generic: 法术 · 古朴 古朴
+        - generic: 造成 4 点法术伤害，并发现 1 张卡牌。
+        - generic: "1"
+        - img "箭雨"
+        - generic: 箭雨
+        - generic: 武术 · 古朴 古朴
+        - generic: 对全体敌人造成（你的攻击力 - 1）点攻击伤害。

@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-treasure-hunt",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a125fc-1da2-7300-83db-f2b39e275c76\\exec-a5adfa71-3f1d-4bdc-95e3-efdaa5dc751b.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-treasure-hunt-redraw/cards-spell-tt3-treasure-hunt-source.png",
+        "bytes": 2073689,
+        "sha256": "dc8e6b6b88e97f55bf6181c832ff37aa3a599f0f423514f0e62f22195c6d5970"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-treasure-hunt-redraw/cards-spell-tt3-treasure-hunt-full-before.webp",
+          "bytes": 160758,
+          "sha256": "cbe2b9d59e799127e845cf7cfcefb56f3ab18d3dcf4e9ac4759b90da07097bee"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-treasure-hunt-redraw/cards-spell-tt3-treasure-hunt-thumb-before.webp",
+          "bytes": 27388,
+          "sha256": "7ff495ef6fc0fb6c39c946132efb9b34e8ca9e8d6c738894bc1a512603bd5ef2"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-treasure-hunt.webp",
+          "bytes": 125244,
+          "sha256": "9ba2e3f27552b5b58f20caec466e9d96298e1d2da4ead8afbb177669cd86d611",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-treasure-hunt.webp",
+          "bytes": 14290,
+          "sha256": "66f8f5704e4452a9777831d62730de87e393c61b03ea17f4f72c38a30c303c03",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt3-treasure-hunt-creative-rough-20261005",
+      "revision_after": "treasure-hunt-split-map-rough-20261011",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt3-treasure-hunt.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 160758,
+            "sha256": "cbe2b9d59e799127e845cf7cfcefb56f3ab18d3dcf4e9ac4759b90da07097bee",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt3-treasure-hunt.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 125244,
+            "sha256": "9ba2e3f27552b5b58f20caec466e9d96298e1d2da4ead8afbb177669cd86d611",
+            "source": "docs/evidence/2026-10-11-treasure-hunt-redraw/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-treasure-hunt.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 27388,
+            "sha256": "7ff495ef6fc0fb6c39c946132efb9b34e8ca9e8d6c738894bc1a512603bd5ef2",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-treasure-hunt.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 14290,
+            "sha256": "66f8f5704e4452a9777831d62730de87e393c61b03ea17f4f72c38a30c303c03",
+            "source": "docs/evidence/2026-10-11-treasure-hunt-redraw/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1117,
+  "manifest_count_after": 1117
+}

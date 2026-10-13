@@ -1,0 +1,8 @@
+{
+  "cells": [
+    "Friday（Codex 首页配乐精修 WF-title-music-rework-1013 / 本聊天）",
+    "game/assets/music-demo/01-title-frostglass-v11.ogg；sound.music.catalog.js仅title；asset-manifest仅本曲条目；game/music-demo.html首页说明；docs/audio-system.md首页描述；docs/evidence/2026-10-13-WF-title-music-rework/",
+    "10-13",
+    "完成未提交、编辑释放；旧右手52音保留，A2/B/A3重新分工；新OGG 907921字节，指纹/清单/解码/内置浏览器真实播放通过；docs:check、ESLint、diff-check通过；音频定向测试11/12，唯一失败为既有静音卸载断言；参考对照残余差距见README；5338本会话PID34684已停且端口复核空闲；不build/提交/推送"
+  ]
+}

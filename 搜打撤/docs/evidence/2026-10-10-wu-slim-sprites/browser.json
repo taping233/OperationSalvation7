@@ -1,0 +1,24 @@
+{
+  "platform": "Codex in-app browser",
+  "url": "http://127.0.0.1:5200/art-source/characters/wu-slim-sprites-20261010/index.html",
+  "viewport": "current window; no override",
+  "inputs": "actual browser locator clicks",
+  "ready": true,
+  "frameSize": [576, 560],
+  "checks": {
+    "idleLoopVisible": true,
+    "attackReturnsToIdle": true,
+    "hurtReturnsToIdle": true,
+    "deathStopsAtFrame6": true,
+    "chainEndsInDeath": true
+  },
+  "chainFinalStatus": "死亡 · 6/6 · 已暂停 · 保持倒地",
+  "notes": [
+    "Fixed preview-only bubbling handler: select button[data-action] instead of all elements carrying data-action.",
+    "Long waitFor call timed out at the browser tool boundary; subsequent actual snapshot confirmed chain ended in death.",
+    "Initial /game/art-source URL fell back to the game page; corrected against Vite GAME_ROOT to /art-source.",
+    "Dev logs contained earlier fallback game-page icon/version errors; not attributed to the animation preview.",
+    "No official battle integration was changed or tested."
+  ],
+  "screenshots": ["idle-preview.png", "death-preview.png"]
+}

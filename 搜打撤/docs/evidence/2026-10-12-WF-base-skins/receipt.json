@@ -1,0 +1,62 @@
+[
+  {
+    "skin": "casual",
+    "path": "portraits/full/wu-casual-v12.webp",
+    "size": [
+      1024,
+      1536
+    ],
+    "bounds": [
+      279,
+      10,
+      931,
+      1508
+    ],
+    "alpha": [
+      0,
+      254
+    ],
+    "bytes": 182972,
+    "sha256": "25f2326bed57889df6978decf34c8646bb39e8642e57f9a188757a3752f81b41"
+  },
+  {
+    "skin": "spring",
+    "path": "portraits/full/wu-spring-v12.webp",
+    "size": [
+      1024,
+      1536
+    ],
+    "bounds": [
+      279,
+      16,
+      927,
+      1504
+    ],
+    "alpha": [
+      0,
+      254
+    ],
+    "bytes": 200240,
+    "sha256": "fd40ff0eedc3124badce493f5fef6534a5435f6e082677e66c2c5fe4f2daf907"
+  },
+  {
+    "skin": "beach",
+    "path": "portraits/full/wu-beach-v12.webp",
+    "size": [
+      1024,
+      1536
+    ],
+    "bounds": [
+      117,
+      6,
+      928,
+      1492
+    ],
+    "alpha": [
+      0,
+      254
+    ],
+    "bytes": 202332,
+    "sha256": "b44bbc2dcaff81b5ff0941d31594bf6431b95b1ac96bcf0d919148915a54ed39"
+  }
+]

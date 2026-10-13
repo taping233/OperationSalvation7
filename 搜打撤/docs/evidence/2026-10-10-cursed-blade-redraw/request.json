@@ -1,0 +1,14 @@
+{
+  "prompt": "Use case: style-transfer. Redraw image 1, Cursed Blade game card illustration. Image 1 defines the original composition and object; images 2-4 are painting-style references only, do not copy their people or clothing. Preserve the landscape 4:3 frame and centrally placed black sword pointing straight down, planted in a cracked ground impact point near the bottom center. The grip rises above its thorn-shaped crossguard and is cropped at the top edge. Preserve the short broken chains hanging from each end of the horizontal guard, long dark blade, vivid violet rune line down the blade's center, and several broad twisting dark-purple wisps wrapping around it. Keep the relative sword scale, head-on camera, ground perspective, dark blue-teal background vertical silhouettes and tiny muted green light on the left. Make the blade's main black and slate-teal planes clearly readable; purple runes are a few small crisp geometric accents. Strongest local contrast at the planted tip and nearby cracked ground, with broad pale lavender ground planes and several dark directional fractures converging on the tip. Simplify background into a few quiet dark upright masses, violet atmosphere into broad matte purple shapes rather than glossy bloom; do not invent detailed scenery. No people, extra weapons or extra ornaments. Rough hand-painted anime color study: large connected opaque color masses, a few wide directional swipes and blunt dabs, confident handmade edges, selective incomplete brush endings, strong grouped shadows and quiet areas. Secondary chains and hilt need only enough structural marks to read. No dense engraving, fine scratch networks, all-over grain filters, glossy 3D, commercial airbrush polish or facet mosaics. No text, frame, watermark or UI.",
+  "references": [
+    "D:/素材/代号柒/搜打撤/game/assets/cards/martial-cc-cursed-blade.webp",
+    "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+    "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+    "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+  ],
+  "tool": "built-in image_gen",
+  "output": ".tmp/imagegen/cursed-blade-redraw-20261010/cursed-blade.png",
+  "integrated": true,
+  "sha256": "C2FAEB3A9FB7372EA64588E77B7BD1419F06C226EC0CE9009CA3C4CEC8F349FD",
+  "acquisition": "内置 image_gen 生成后复制至项目"
+}

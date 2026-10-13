@@ -1,0 +1,18 @@
+/* 保留逐卡构图修正；卡面外观统一由 card-layout-selected.css 维护。
+   data-asset-key 由 art.js 写在 img 上，选择器与卡面文件一一对应。 */
+img[data-asset-key="card-equip-tt3-light-mail"]{object-position:80% 50%!important}
+img[data-asset-key="card-equip-tt3-holy-staff"]{object-position:50% 25%!important}
+img[data-asset-key="card-equip-tt2-venomstaff"]{object-position:50% 22%!important}
+img[data-asset-key="card-martial-tt3-skewer"]{object-position:65% 60%!important}
+img[data-asset-key="card-martial-cmtn1i64j7y7"]{object-position:50% 35%!important}
+img[data-asset-key="card-martial-cmtn1wnhhym"]{object-position:50% 60%!important}
+img[data-asset-key="card-wu-myriadswords"]{object-position:50% 40%!important}
+/* 迭代评审批次（09-20 美术岗 P1）：构图异常存量补丁——细火线居中/船压顶部/剑修灰底占比小，
+   裁切窗拉回主体；全量构图清单与重裁排产见评审报告 */
+img[data-asset-key="card-spell-tt3-fireball"]{object-position:50% 42%!important}
+img[data-asset-key="card-spell-tt5-galaxy-voyage"]{object-position:50% 28%!important}
+img[data-asset-key="card-martial-tt7-swordimmortal"]{object-position:50% 38%!important}
+/* —— 自原 expedition-cards.css 保留的非皮肤条目（2026-09-12 删历史皮时并入）—— */
+.hs-card .hsc-art img[src*="expedition-starters"],.hs-card .hsc-art img[src*="wu-"]{object-position:50% 28%}
+.hs-card .hsc-kw span{background:#25282b;border-color:#8b91954d;color:#c9ccce;border-radius:.2em}
+.hs-card .rv-beam{opacity:.55}

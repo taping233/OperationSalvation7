@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt2-forestarrow",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12470-95d7-75e0-9477-03361e04258c\\exec-cea6dd66-f6ae-49c8-b9f1-32576304a41d.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-echo-arrow/cards-martial-tt2-forestarrow-source.png",
+        "bytes": 1866403,
+        "sha256": "dfe94268a5c2c3d163be51bf0a990ce39127cf57a749ff1a821bab714fcfd9e4"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-echo-arrow/cards-martial-tt2-forestarrow-full-before.webp",
+          "bytes": 174508,
+          "sha256": "1151e89ccb6ddca2ea43fc55d196f82ee64980bb5375591896a1db1e3d083a16"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-echo-arrow/cards-martial-tt2-forestarrow-thumb-before.webp",
+          "bytes": 26606,
+          "sha256": "fece2b5cdb9ca3b1492ca701ce65c626106263a9e13879fc9e77f5a2d869ade8"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt2-forestarrow.webp",
+          "bytes": 120488,
+          "sha256": "96df23660c97abaa9d2e77c2d6328b9052c419179b4e718a3d7b64d41703e1b2",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt2-forestarrow.webp",
+          "bytes": 15500,
+          "sha256": "1a4e851eb95066abeb65bd9e218073790a5bfa86256d0f77ef3acfac98760d72",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt2-forestarrow-creative-rough-20261005",
+      "revision_after": "echo-arrow-wave-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt2-forestarrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 174508,
+            "sha256": "1151e89ccb6ddca2ea43fc55d196f82ee64980bb5375591896a1db1e3d083a16",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt2-forestarrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 120488,
+            "sha256": "96df23660c97abaa9d2e77c2d6328b9052c419179b4e718a3d7b64d41703e1b2",
+            "source": "docs/evidence/2026-10-10-echo-arrow/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt2-forestarrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 26606,
+            "sha256": "fece2b5cdb9ca3b1492ca701ce65c626106263a9e13879fc9e77f5a2d869ade8",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt2-forestarrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 15500,
+            "sha256": "1a4e851eb95066abeb65bd9e218073790a5bfa86256d0f77ef3acfac98760d72",
+            "source": "docs/evidence/2026-10-10-echo-arrow/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 903,
+  "manifest_count_after": 903
+}

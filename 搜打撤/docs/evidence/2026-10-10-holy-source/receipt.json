@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt7-livingwater",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12470-95d7-75e0-9477-03361e04258c\\exec-40126d93-b292-4ace-b10e-b9b4ed0e507a.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-holy-source/cards-spell-tt7-livingwater-source.png",
+        "bytes": 2248756,
+        "sha256": "9aee9e2e8d9e3f9af7bd27e5d76f59ea869ea9f225d3377a0c23b57fa4c296fc"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-holy-source/cards-spell-tt7-livingwater-full-before.webp",
+          "bytes": 39018,
+          "sha256": "2a71d9d09d41ea994c7f3a688042991daf1d85b88089268537af4e6f21b3fe03"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-holy-source/cards-spell-tt7-livingwater-thumb-before.webp",
+          "bytes": 5798,
+          "sha256": "a01191c4dbb00a085016127e78e9b737506c0e4e3e75f3335e4c525738de53e1"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-livingwater.webp",
+          "bytes": 185618,
+          "sha256": "497f35eff05e288feff55abdbcbd01df4e1af861e430301efcf2c119e0144a33",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-livingwater.webp",
+          "bytes": 20222,
+          "sha256": "d561f6d5e465d82227ea206a8608d61af9bf01c54a00d6f262fe2253d1dd4c7a",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "xingyue-holy-source-dawn-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt7-livingwater.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 185618,
+            "sha256": "497f35eff05e288feff55abdbcbd01df4e1af861e430301efcf2c119e0144a33",
+            "source": "docs/evidence/2026-10-10-holy-source/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-livingwater.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 5798,
+            "sha256": "a01191c4dbb00a085016127e78e9b737506c0e4e3e75f3335e4c525738de53e1",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-livingwater.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 20222,
+            "sha256": "d561f6d5e465d82227ea206a8608d61af9bf01c54a00d6f262fe2253d1dd4c7a",
+            "source": "docs/evidence/2026-10-10-holy-source/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 888,
+  "manifest_count_after": 889
+}

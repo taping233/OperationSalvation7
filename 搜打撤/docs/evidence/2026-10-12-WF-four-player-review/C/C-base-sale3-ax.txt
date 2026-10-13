@@ -1,0 +1,229 @@
+- main:
+  - text: 金币 攻击 ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - button "返回后勤":
+    - heading "基地" [level=2]
+    - generic: 档案 / 01
+    - generic "基地物资":
+      - generic "木材 0":
+        - generic: "0"
+        - generic: 木材
+        - text: 木材
+      - generic "口粮 0":
+        - generic: "0"
+        - generic: 口粮
+        - text: 口粮
+      - generic "钥匙 0":
+        - generic: "0"
+        - generic: 钥匙
+        - text: 钥匙
+      - generic "储备币 3":
+        - generic: "3"
+        - generic: 储备币
+        - text: 储备币
+    - main:
+      - heading "交易所" [level=2]
+      - generic "储备币 3":
+        - generic: "3"
+        - generic: 储备币
+        - text: 储备币
+      - navigation "交易方式":
+        - button "购入商品":
+          - generic: ▣
+          - generic: 购入商品
+        - button "出售卡牌" [pressed]:
+          - generic: ⇄
+          - generic: 出售卡牌
+        - button "后勤仓库":
+          - generic: ▦
+          - generic: 后勤仓库
+      - region "仓库卡牌":
+        - navigation "商品类别":
+          - button "全部" [pressed]
+          - button "基地补给"
+          - button "战斗卡牌"
+        - generic: 仓库可售卡牌
+        - generic: 11 种
+        - button "破甲急袭，持有 1" [pressed]:
+          - generic: "2"
+          - img "破甲急袭"
+          - generic: 破甲急袭
+          - generic: 武术 · 稀有 稀有
+          - generic: 造成（你的攻击力 + 4）点攻击伤害；对目标附加 2 层流血。
+          - generic: 破甲急袭
+          - generic: 持有 1
+          - generic "储备币 3":
+            - generic: "3"
+            - generic: 储备币
+            - text: 储备币
+        - button "气功波，持有 1":
+          - generic: "1"
+          - img "气功波"
+          - generic: 气功波
+          - generic: 武术 · 古朴 古朴
+          - img "cards"
+          - text: 抽 1
+          - generic: 抽 1 张牌；对全体敌人造成等同于抽到卡牌价格的固定伤害。
+          - generic: 气功波
+          - generic: 持有 1
+          - generic "储备币 2":
+            - generic: "2"
+            - generic: 储备币
+            - text: 储备币
+        - button "冰刺，持有 1":
+          - generic: "1"
+          - img "冰刺"
+          - generic: 冰刺
+          - generic: 法术 · 古朴 古朴
+          - generic: 造成 2 点法术伤害；对目标附加冰冻。
+          - generic: 冰刺
+          - generic: 持有 1
+          - generic "储备币 1":
+            - generic: "1"
+            - generic: 储备币
+            - text: 储备币
+        - button "违禁烟火，持有 2":
+          - generic: "0"
+          - img "违禁烟火"
+          - generic: 违禁烟火
+          - generic: 法术 · 古朴 古朴
+          - generic: 对全体敌人造成 1 点固定伤害。
+          - generic: 违禁烟火
+          - generic: 持有 2
+          - generic "储备币 1":
+            - generic: "1"
+            - generic: 储备币
+            - text: 储备币
+        - button "毒箭，持有 1":
+          - generic: "1"
+          - img "毒箭"
+          - generic: 毒箭
+          - generic: 武术 · 古朴 古朴
+          - generic: 造成（你的攻击力 - 1）点攻击伤害；对目标附加 1 层中毒。
+          - generic: 毒箭
+          - generic: 持有 1
+          - generic "储备币 2":
+            - generic: "2"
+            - generic: 储备币
+            - text: 储备币
+        - button "能量饮料，持有 1":
+          - generic: "0"
+          - img "能量饮料"
+          - generic: 能量饮料
+          - generic: 道具 · 古朴 古朴
+          - img "heart"
+          - text: 回 6
+          - generic: 你回复 6 点生命。
+          - generic: 能量饮料
+          - generic: 持有 1
+          - generic "储备币 2":
+            - generic: "2"
+            - generic: 储备币
+            - text: 储备币
+        - button "孢子城墙，持有 1":
+          - generic: "1"
+          - img "孢子城墙"
+          - generic: 孢子城墙
+          - generic: 法术 · 古朴 古朴
+          - img "plate"
+          - text: 甲 6
+          - generic: 对 1 名敌人附加 2 层中毒；你获得 6 点护甲。
+          - generic: 孢子城墙
+          - generic: 持有 1
+          - generic "储备币 1":
+            - generic: "1"
+            - generic: 储备币
+            - text: 储备币
+        - button "生命箭，持有 1":
+          - generic: "1"
+          - img "生命箭"
+          - generic: 生命箭
+          - generic: 武术 · 古朴 古朴
+          - generic: 造成（你的攻击力 - 1）点攻击伤害；随机获得 1 张卡牌。
+          - generic: 生命箭
+          - generic: 持有 1
+          - generic "储备币 2":
+            - generic: "2"
+            - generic: 储备币
+            - text: 储备币
+        - button "闪电链，持有 1":
+          - generic: "1"
+          - img "闪电链"
+          - generic: 闪电链
+          - generic: 法术 · 古朴 古朴
+          - generic: 造成 3 点法术伤害；本牌的伤害效果触发 2 次。
+          - generic: 闪电链
+          - generic: 持有 1
+          - generic "储备币 2":
+            - generic: "2"
+            - generic: 储备币
+            - text: 储备币
+        - button "镭射，持有 1":
+          - generic: "1"
+          - img "镭射"
+          - generic: 镭射
+          - generic: 法术 · 古朴 古朴
+          - img "crystal"
+          - text: 注能 1
+          - generic: 造成 5 点法术伤害；注能（1）：本牌伤害增加 3 点。
+          - generic: 镭射
+          - generic: 持有 1
+          - generic "储备币 2":
+            - generic: "2"
+            - generic: 储备币
+            - text: 储备币
+        - button "银河之旅，持有 1":
+          - generic: "2"
+          - img "银河之旅"
+          - generic: 银河之旅
+          - generic: 法术 · 传说 传说
+          - generic: 本场战斗中，你的所有招式均为 1 费。
+          - generic: 银河之旅
+          - generic: 持有 1
+          - generic "储备币 5":
+            - generic: "5"
+            - generic: 储备币
+            - text: 储备币
+      - region "交易台":
+        - text: 出售卡牌 · 稀有 · 武术
+        - heading "破甲急袭" [level=3]
+        - generic "破甲急袭卡面":
+          - generic: "2"
+          - img "破甲急袭"
+          - generic: 破甲急袭
+          - generic: 武术 · 稀有 稀有
+          - generic: 造成（你的攻击力 + 4）点攻击伤害；对目标附加 2 层流血。
+        - paragraph: 攻（+4），附加 2 层流血。
+        - paragraph: 当前持有 1 张
+        - generic "出售账面":
+          - term: 单价
+          - definition: 3 储备币
+          - term: 出售数量
+          - definition: 1 张
+          - term: 总收入
+          - definition: 3 储备币
+          - term: 当前余额
+          - definition: 3 储备币
+          - button "出售 ×1 · +3 币" [active]:
+            - generic: 出售 ×1 · +3 币
+            - generic: →
+    - navigation "基地房间":
+      - button "基地":
+        - generic: 基地
+      - button "配置":
+        - generic: 配置
+      - button "后勤":
+        - generic: 后勤
+      - button "交易所 当前房间" [pressed]:
+        - generic: 交易所
+        - generic: 当前房间
+      - button "收藏室 4项奖励可领取":
+        - generic: 收藏室
+        - emphasis: "4"
+      - button "建设":
+        - generic: 建设
+      - button "庭院":
+        - generic: 庭院
+    - status:
+      - img "check"
+      - text: 出售铜币 ×1 · 储备 +3 币

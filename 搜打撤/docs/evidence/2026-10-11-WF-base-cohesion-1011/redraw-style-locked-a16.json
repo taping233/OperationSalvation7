@@ -1,0 +1,29 @@
+{
+  "stage": "A16",
+  "status": "generated-style-review-not-final",
+  "directionRecord": "redraw-a16-style-lock.md",
+  "userDirection": "复杂度够；只继续画风/配色/光照；当前太真实，画风锁定与主参考一致",
+  "references": [
+    {
+      "path": "docs/evidence/2026-10-11-WF-base-cohesion-1011/reference-gfl2-personal.jpg",
+      "use": "画风/光色主要参照"
+    },
+    {
+      "path": "C:/Users/太平/.codex/generated_images/01a128f5-bd4a-7891-91c7-ab5106c5d409/exec-b21f64a1-ee2a-4718-9edd-c8eca95e0edb.png",
+      "use": "只保留相机/空间/物件位置数量，不继承摄影材质"
+    }
+  ],
+  "prompt": "重新绘制成【二维手绘商业二游背景】，画风锁定第一张《少前2》参考的游戏美术表现。第二张仅提供已确定的构图、透视和物件位置。最重要的是改变第二张的摄影/PBR表面画法：这次不是颜色滤镜，也不要再生成仿真实内照片。所有家具、空间、物件数量、左侧大近景椅和斜伸扶手保持；不要增加细节复杂度、符号或设施。\n\nSTYLE PRIORITY: a clearly DRAWN 2D anime game environment, selective fine line accents, deliberately designed layered painted colour planes, a few broad soft volume transitions, confident illustration edges. Repaint every surface according to form and occlusion. The chair upholstery, carpet and jacket become 2-3 large painted value/colour masses each: ZERO visible woven fibres, zero photographic grain, zero microscopic roughness/scratches, zero photo-texture. Only major folds, pressed fabric shapes and necessary seams remain. Hard edges are selectively drawn at desk/window/frame/occlusion, softly lit edges can merge into adjacent planes. No continuous outline around every object. Metals have restrained painted edge highlights, not physically glossy specular rendering. Floor is a quiet matte painted grey plane, no mirrored fire stripe. No canvas grain, thick oily brushwork, antique watercolour or grey paper overlay. Preserve convincing perspective and grounded contact while the visual finish is unambiguously painted and anime.\n\nLearn the FIRST reference's MATERIAL COLOUR HARMONY and LIGHT STRUCTURE rather than copying its content. Make midtone colours visibly richer and distinguishable: softly grey-green walls/cabinet planes, graphite green-grey frames, muted SAGE/GREY-TEAL chair cloth, dusty denim/slate-blue jacket, warm ivory/sand worktop, warm-white map/linen, a small MUTED MUSTARD cushion and warm TERRACOTTA/ORANGE bedding. These are real material colours, not a rainbow filter or brown monochrome. Cool blue/green-grey shadow planes and reflected fill unify the room. Keep their identities in shadow instead of painting every shadow brown.\n\nRelight through the SAME LEFT WINDOW: pale winter thin-cloud DAYLIGHT, neutral slightly warm key light like reference 1, continuous over the map/worktop, chair top and broad floor plane; shadows have softly painted cool grey-green transitions, short contact shadows and consistent direction. Winter sky reflection supplies gentle cool fill. Window remains bright, city outside only a few faint low-contrast painted grey-blue silhouettes above pale snow. Do not detail buildings or make photographic blur. The desk lamp only adds a small warm-white accent on the working paper. The bed/tea lights become weak unobtrusive practical fill with very limited orange cast. The small fire gives local amber colour only to nearby floor/wall; no orange light throughout the cabin. Clear midtones, harmonious light/dark hierarchy, no crushed black, global yellow cast or sterile uniformly lit grey room. The working map/book group is clearest; near chair is a large calm framing colour shape; rear bed/cabinets are quieter. Full 16:9 original hand-painted game background, no people, UI, text, logo, flags, emblems or added props.",
+  "runtimeApplied": false,
+  "receipt": {
+    "path": "C:/Users/太平/.codex/generated_images/01a128f5-bd4a-7891-91c7-ab5106c5d409/exec-4fb45ed5-8c91-4eaa-88e7-e2ba26018d10.png",
+    "bytes": 1750988,
+    "sha256": "447d62053536f09b05fd2ab303fb131b0fc6ff4eeaf7802737586c2065dbd6ce",
+    "excludedFromGit": true
+  },
+  "rootReview": [
+    "空间和物件数量保留；近椅、外套、床品和柜体明显转为绘制色面，照片织纹减少",
+    "灰绿座椅、蓝灰外套、土黄软垫、暖白纸面与陶土寝具实际区分；左窗薄云日光形成同向受光",
+    "仍需按真实参考比较边缘层次与辅助灯暖染，不代表老板已认可一致"
+  ]
+}

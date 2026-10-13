@@ -1,0 +1,42 @@
+[
+  {
+    "path": "game/src/ui/home-menu-motion.js",
+    "sha256": "80D7C86A9DD29E86824280A086BC424981EC270A99CE9CA9958355FED8A96BDA",
+    "mtime": "2026-10-11T11:08:10.2126211Z"
+  },
+  {
+    "path": "game/css/home-menu-motion.css",
+    "sha256": "37B13C5381B214B5671635F7D29B1FA5884B21CCEE1F3D00C83CF9BB5135E83B",
+    "mtime": "2026-10-11T10:58:14.4860497Z"
+  },
+  {
+    "path": "game/src/ui/page-loading.js",
+    "sha256": "ABBB9B99C6E580E5122209B45D0AED1FE802C174A428FBD5CF0FD44EB3560CA7",
+    "mtime": "2026-10-11T03:08:15.4918386Z"
+  },
+  {
+    "path": "game/css/page-loading.css",
+    "sha256": "B35A1FF6FB03422588B43A6829562ABD2C8D89571C9A627E30A99217CF4DCD2A",
+    "mtime": "2026-10-11T03:04:31.5049231Z"
+  },
+  {
+    "path": "game/src/ui/camp-entry.js",
+    "sha256": "E01A246FEE2E02D22A9D7634E7E8378AACAE184FD3E96CB1C16C51C90D62244F",
+    "mtime": "2026-10-10T12:35:51.7955603Z"
+  },
+  {
+    "path": "tests/title-wallpaper.test.js",
+    "sha256": "3D9C495A5B61D9D9E800B2C7E64FFE912BC55AA477EAF24D8DE418B38CFD59A0",
+    "mtime": "2026-10-05T11:49:52.3927142Z"
+  },
+  {
+    "path": "tests/page-loading.test.js",
+    "sha256": "8905C3CFA4E999052BC113DAAC6C20867AAA86FC59202206283DE9639E58DE60",
+    "mtime": "2026-10-04T03:24:47.8268890Z"
+  },
+  {
+    "path": "docs/development.md",
+    "sha256": "8BC75B3B31850BD23162DF571EEE286D5AD7D2A019BCFD06DCFEACBE4B488004",
+    "mtime": "2026-10-11T11:41:59.0622738Z"
+  }
+]

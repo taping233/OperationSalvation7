@@ -1,0 +1,63 @@
+{
+  "actions": [
+    {
+      "detail": "点击飞刃偷袭放大→关闭→点击偷袭放大，两名称高度相同",
+      "type": "real-input"
+    },
+    {
+      "detail": "飞刃偷袭放大最终截图",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "not-collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "\n    \n    0\n    \n    偷袭\n    武术 · 无专属\n    \n    \n    造成（你的攻击力 - 1）点攻击伤害。\n    -1\n    \n    3\n  ",
+      "key": "zoom",
+      "rect": {
+        "height": 424.4875183105469,
+        "width": 284.38751220703125,
+        "x": 660.7999877929688,
+        "y": 195.0124969482422
+      },
+      "selector": "#cardZoom .hs-card",
+      "styles": {
+        "gridRows": "268.902px 59.746px 134.451px 34.8493px"
+      },
+      "tag": "DIV",
+      "text": "\n    \n    0\n    \n    偷袭\n    武术 · 无专属\n    \n    \n    造成（你的攻击力 - 1）点攻击伤害。\n    -1\n    \n    3\n  "
+    }
+  ],
+  "observedAt": "2026-10-12T10:04:14.161Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 1606
+    }
+  },
+  "scene": "角色卡池放大同步",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-12-pool-glass-card/pool-zoom-final.png"
+  ],
+  "selectors": [
+    {
+      "key": "zoom",
+      "selector": "#cardZoom .hs-card"
+    }
+  ]
+}

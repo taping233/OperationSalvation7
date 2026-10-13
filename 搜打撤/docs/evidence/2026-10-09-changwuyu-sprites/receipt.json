@@ -1,0 +1,917 @@
+{
+  "method": "内置imagegen基准与姿态；FFmpeg呼吸烘焙；Pillow/OpenCV透明导出与局部保护；复现脚本位于素材目录",
+  "files": [
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/.gitignore",
+      "bytes": 298,
+      "sha256": "b6062e06798ade878e394bc173730f1e9ae3dc56fe397890e0c5f6eddfab1bc7",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/anatomical-left-source.png",
+      "bytes": 1678284,
+      "sha256": "e69122446203cf30f6414d641d8b5742cc22d36a1c251f604662a6b6d774ef2e",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/final-request.json",
+      "bytes": 1569,
+      "sha256": "4b5fb6ea4f4ff7bddf9fe934d8ebc0b1438ceee83e1aa03b59b48dda6b23569f",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/frame-00.png",
+      "bytes": 354863,
+      "sha256": "30c12759545b1fc4621ea320020ec89f700b30fb08879b24d68511e98c508526",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/frame-00.webp",
+      "bytes": 217306,
+      "sha256": "f7df78ee7bc717f0bcb42a7b1e22334043360e8624801845adf7d04a5acc234e",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/frame-01.png",
+      "bytes": 346453,
+      "sha256": "a89cd6659f837e9c00dbf4e5e301d49f7852a14c4ad744bdc506640cb1e7aa8e",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/frame-01.webp",
+      "bytes": 217556,
+      "sha256": "76c7e7eee6347e8c1d3fbb0134d58c3fff96d711074add7b8e45736d71fc3eac",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/frame-02.png",
+      "bytes": 350506,
+      "sha256": "4f32af945774cee9520ef8a7ec147d5e8ad87826463f5b1ec166ae8b2e4ab915",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/frame-02.webp",
+      "bytes": 220532,
+      "sha256": "660542ee43e3e14841a2876c98c6a0fbf7f89e1ceab35c3f4b014a6aa96994b3",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/frame-03.png",
+      "bytes": 345734,
+      "sha256": "e79f70299062cd8ae024d18bc555124ceee1555591990a6768cff41aba9472dc",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/frame-03.webp",
+      "bytes": 217114,
+      "sha256": "9bd74204423d433e22bce97801b556282e69b750fa74177646e6892bd04258dc",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/frame-04.png",
+      "bytes": 354863,
+      "sha256": "30c12759545b1fc4621ea320020ec89f700b30fb08879b24d68511e98c508526",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/frame-04.webp",
+      "bytes": 217306,
+      "sha256": "f7df78ee7bc717f0bcb42a7b1e22334043360e8624801845adf7d04a5acc234e",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/frame-05.png",
+      "bytes": 208576,
+      "sha256": "a622f9a7878675a1d8cc5bda9a885a7f736aaebe5afb20146036da7503b55d46",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/frame-05.webp",
+      "bytes": 147560,
+      "sha256": "efea6933749afc86dcf88864b06e3759d25119043c5db241047a704de2ebe052",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/frame-06.png",
+      "bytes": 354863,
+      "sha256": "30c12759545b1fc4621ea320020ec89f700b30fb08879b24d68511e98c508526",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/frame-06.webp",
+      "bytes": 217306,
+      "sha256": "f7df78ee7bc717f0bcb42a7b1e22334043360e8624801845adf7d04a5acc234e",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/frame-07.png",
+      "bytes": 354863,
+      "sha256": "30c12759545b1fc4621ea320020ec89f700b30fb08879b24d68511e98c508526",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/frame-07.webp",
+      "bytes": 217306,
+      "sha256": "f7df78ee7bc717f0bcb42a7b1e22334043360e8624801845adf7d04a5acc234e",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/left-source.png",
+      "bytes": 1676088,
+      "sha256": "6622189920da4fbcb92ba0f202135f0148ab9268bb54b4d047f5b3add9cb30f5",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/preview.gif",
+      "bytes": 397464,
+      "sha256": "76f141a7e97f502b05fac458c1f8937bf000fbfa3b647a826b6cacc40dd38190",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/preview.webp",
+      "bytes": 112678,
+      "sha256": "4e1faa2eb4091d4dd102bd9c3e0234cc3f30737770f42dd8ad0849e5de8f17d9",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/review-all-poses.png",
+      "bytes": 112786,
+      "sha256": "fa9b8923eee589e243d3ac5b4e4eb5d6fb394dc571c3002f8d956bf6798ea49c",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/sheet.png",
+      "bytes": 841485,
+      "sha256": "39b5ef5f2188e171d76722976cb45b51a32ef6fd97c5f447abb835e9820c06b1",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/sheet.webp",
+      "bytes": 504220,
+      "sha256": "9e875c237de49e7a9f4ddc90d8041ebfa5d306cff667b81a80dfc7f35348d8cc",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/source.png",
+      "bytes": 1236207,
+      "sha256": "bb733128ade96d82ead5c06b07bf519bdce662ced4665723b38ead04aabbc21b",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/sprite.json",
+      "bytes": 1161,
+      "sha256": "04d63a1803156c33bd767487ce5a1c2d9e82f829c3190f60954f31559797efee",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/attack/validation.json",
+      "bytes": 630,
+      "sha256": "743203e488349dd6836ea6433fb05dd5fd274b0d86b035a65fe43b5c55c3f88f",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/bake_idle.ps1",
+      "bytes": 720,
+      "sha256": "4f93e66e9d7bcf17553feb35364c62213d86af48c80b89e17ee3f2cc906af104",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/base-reference.webp",
+      "bytes": 801002,
+      "sha256": "48dca767c1201812da6de176172f675c77b3034ad403f58de16e59957701c092",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/base.png",
+      "bytes": 1298511,
+      "sha256": "dd78f89c985184e34c117f95bebe2f149f5e801f94639a8a4a6ef66c5f180632",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/frame-00.png",
+      "bytes": 354863,
+      "sha256": "30c12759545b1fc4621ea320020ec89f700b30fb08879b24d68511e98c508526",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/frame-00.webp",
+      "bytes": 217306,
+      "sha256": "f7df78ee7bc717f0bcb42a7b1e22334043360e8624801845adf7d04a5acc234e",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/frame-01.png",
+      "bytes": 196571,
+      "sha256": "af8ed731ecc5d6c27e6abf54070b90dd4f59d13c488ad44a7187fdb9dc34f41d",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/frame-01.webp",
+      "bytes": 131636,
+      "sha256": "ca647d82d92abb2153f1b30741b6ad251fdd48e64b4d9ab859aa42422a8a90ff",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/frame-02.png",
+      "bytes": 180913,
+      "sha256": "6a3186318db4ee494e69eb4d2f512b07f1878d7c40f150b7d88160c96225cd2f",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/frame-02.webp",
+      "bytes": 121302,
+      "sha256": "9b46c5113817959fd57a09c5c9ea13cc0ccc14422e942d51af9048566616b6ff",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/frame-03.png",
+      "bytes": 163978,
+      "sha256": "8f811609022aa17f437bdbf16379b6815c2760bd14f25ac9be77afc3ba68a00c",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/frame-03.webp",
+      "bytes": 108820,
+      "sha256": "c600fa2fa5fe53e243b8f085fdd273091d31dc98443ec8c846392e189e6b2ebc",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/frame-04.png",
+      "bytes": 162951,
+      "sha256": "9521ee1a2d47c7b9ef1be0ff13011e0c8216a991fce914f3c079b97449da521e",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/frame-04.webp",
+      "bytes": 110778,
+      "sha256": "88f09f9c24024b6ded092bc106d62392a144d83a5ec1125b36fd309fee066488",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/frame-05.png",
+      "bytes": 174771,
+      "sha256": "986c463b159df074bd3904901c881ecd42c8afe05b1054f50ab642b6bf0b9287",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/frame-05.webp",
+      "bytes": 117776,
+      "sha256": "e2d5c3deafa20c5b7aaf6112987db452f5f7252d3375a57f9a91caf67eb01fe8",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/frame-06.png",
+      "bytes": 113449,
+      "sha256": "a398ddb076d6959cc6d3e0f6466b71be285231899bdbb34aa6cd6e33b82416a1",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/frame-06.webp",
+      "bytes": 76212,
+      "sha256": "e68c42e2b5ea9f4f7679e61e78923b1f0a0263098f8b73c806014f6133e42f8e",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/frame-07.png",
+      "bytes": 113449,
+      "sha256": "a398ddb076d6959cc6d3e0f6466b71be285231899bdbb34aa6cd6e33b82416a1",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/frame-07.webp",
+      "bytes": 76212,
+      "sha256": "e68c42e2b5ea9f4f7679e61e78923b1f0a0263098f8b73c806014f6133e42f8e",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/preview.gif",
+      "bytes": 491034,
+      "sha256": "c63029e879dfef65dde61fe53e09161ce254d45c4d0f3d0f4dfe2b5dc3b3dbf2",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/preview.webp",
+      "bytes": 316154,
+      "sha256": "c25374a8c205d290266e4e37c5386fe70f029abdf8f7f3a7b0ff78fa1d0e8052",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/sheet.png",
+      "bytes": 1378955,
+      "sha256": "49817d2eac2cc21cb8762768707ea9ebbcc5fda5afd7819126d55bd73c08871b",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/sheet.webp",
+      "bytes": 927948,
+      "sha256": "cf2893bd0e1b0e98b41060300f95776d1164e9d344620cd4e43862ca16f3cd07",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/source.png",
+      "bytes": 1327528,
+      "sha256": "0ed18fd60485b04edd3e8cb3b33b684fd7791fcecd567d24041e040191b0f162",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/sprite.json",
+      "bytes": 2783,
+      "sha256": "ddedcaa3cfceacbec28ce7ffdabe50741034acd7f6e8313be949c33338c6a9a7",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/death/validation.json",
+      "bytes": 814,
+      "sha256": "c859ac06803955e3a37b110353d6cc4b388d36083bd4a4f9774a4a462c0f6cb6",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/hurt/frame-00.png",
+      "bytes": 354863,
+      "sha256": "30c12759545b1fc4621ea320020ec89f700b30fb08879b24d68511e98c508526",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/hurt/frame-00.webp",
+      "bytes": 217306,
+      "sha256": "f7df78ee7bc717f0bcb42a7b1e22334043360e8624801845adf7d04a5acc234e",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/hurt/frame-01.png",
+      "bytes": 213772,
+      "sha256": "4aeb08e0ef23aba832e02967816737a9c5a4fd585b50cff2cc08a6d5c613e8d7",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/hurt/frame-01.webp",
+      "bytes": 139198,
+      "sha256": "e16f4930b6d32a3dec839da46b6bb7fcb5813e943519e4bc68e73c9cb128f9e1",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/hurt/frame-02.png",
+      "bytes": 221831,
+      "sha256": "6da23699994329c6e49b21a8aa5b540610451e7c9c7b85ce38cffa63c7002585",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/hurt/frame-02.webp",
+      "bytes": 149394,
+      "sha256": "c289c0a4ca728a299cbcec7e9a01238187e7bb5cb24d612a5291fd4519903a5b",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/hurt/frame-03.png",
+      "bytes": 354863,
+      "sha256": "30c12759545b1fc4621ea320020ec89f700b30fb08879b24d68511e98c508526",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/hurt/frame-03.webp",
+      "bytes": 217306,
+      "sha256": "f7df78ee7bc717f0bcb42a7b1e22334043360e8624801845adf7d04a5acc234e",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/hurt/preview.gif",
+      "bytes": 343782,
+      "sha256": "6e831f606225b3229cad6a5b2e9d7c917f4bdcb34d73102ab52d46fb5d4e668b",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/hurt/preview.webp",
+      "bytes": 185904,
+      "sha256": "7a2efd8fe1c48f747a1fa743b43ff041ac4a0d2d17f48925e892f6f4444ee717",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/hurt/sheet.png",
+      "bytes": 1154809,
+      "sha256": "c7389ee1e7f5483710e7b6e8bbae21ff96e25cc1951431ff5eeb32fecdbbcc68",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/hurt/sheet.webp",
+      "bytes": 539058,
+      "sha256": "bfe00fe795143668f37df58275a75cf2000b9037bccfc0e531b3bdd38f0fa418",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/hurt/source.png",
+      "bytes": 1682850,
+      "sha256": "61479348775d5658b451cbc3ec25c1266198555f50e6e7e4a0e48daf312d8fcd",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/hurt/sprite.json",
+      "bytes": 1803,
+      "sha256": "dc3811ead5299cdd10d54c86f85e9674b917dbd717d3f450687a95fb4f162df4",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/hurt/validation.json",
+      "bytes": 565,
+      "sha256": "617fb2bdce2bb68516afc8be4e15f4e4c6f77123110ef5a347d8ad0e368ea1ed",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-000.png",
+      "bytes": 354863,
+      "sha256": "30c12759545b1fc4621ea320020ec89f700b30fb08879b24d68511e98c508526",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-001.png",
+      "bytes": 312828,
+      "sha256": "b46e0ffc68c9828cd420b38b41a7698d4f50b3817f06197f6ca55bb351907dd1",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-002.png",
+      "bytes": 312922,
+      "sha256": "1140d07eefea47b0eba59485fe6f40fb8d0e203eb038781887fde7bc3d520345",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-003.png",
+      "bytes": 312679,
+      "sha256": "db668254a1eed4c75bed159a53e185bfcf1fd1a77641ab429da4cca27eb55796",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-004.png",
+      "bytes": 312405,
+      "sha256": "bad7830e02c43f7654893fc497d8b535541ecb13f5b809cd7933d88d87f08a2b",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-005.png",
+      "bytes": 312038,
+      "sha256": "267a2581cb36e2bdde242e959843d02baed73359c2d74a1d1cd3d58c2a7d6264",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-006.png",
+      "bytes": 311396,
+      "sha256": "c68e5ac31e15c8b100a63c7365eb0a750d8b024bbd57fa8eaad1c662f1434813",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-007.png",
+      "bytes": 310756,
+      "sha256": "b34b8bf29d0142098f866d3a4805b51a7a54da3ecb4d8d0381a3484280ab2ee6",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-008.png",
+      "bytes": 310133,
+      "sha256": "934ae7b8a507c4e15608c127a6720dc25da0221a85c8a4bbb6dd8b736dc0e00d",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-009.png",
+      "bytes": 309486,
+      "sha256": "5512d92caffafb8edccb8416f4360852ab6873703150f4ab89aaeb410f068eb5",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-010.png",
+      "bytes": 309779,
+      "sha256": "32d4b81cb0de1e19a22ee606162412235fd785d870c8b2a4278f38c711f8b9dd",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-011.png",
+      "bytes": 310779,
+      "sha256": "3d90e6300d7a9a66b5c8714631bbc92bdc9b1f805fe6cf4a7a1320edd4f707e2",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-012.png",
+      "bytes": 311944,
+      "sha256": "95ccbe834ecce2b0cf762106986aace67424894d957b82f882688ca1d4244a1b",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-013.png",
+      "bytes": 312951,
+      "sha256": "555dbb472bd56ab328a1aa41f4f90e3a53793087a3caa97d49b64c88b0409ea8",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-014.png",
+      "bytes": 312291,
+      "sha256": "658da3ead392e334f0f57683be24d7fd0ffd786039ad66edf98824b09e2731d3",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-015.png",
+      "bytes": 311121,
+      "sha256": "04f97a2ccbc84f724a4527078b9510b7e2226e5b4eaac827aa9f3ade5007dfa0",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-016.png",
+      "bytes": 310071,
+      "sha256": "46dd642a17cddedd4248633d75aa12db08348a1748d0f6d058769b8c9fb2d785",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-017.png",
+      "bytes": 309978,
+      "sha256": "c27242875d9539d97ef677fda259104e546bc715be38a540cfb3ff9eeae5447c",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-018.png",
+      "bytes": 311046,
+      "sha256": "e4c3c7c4697f3ad174610b942775788a73d77b4cba2e57ddefa91349b52c480b",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-019.png",
+      "bytes": 312495,
+      "sha256": "53d3d9f7a2a6ab8b3b4a91903eb307a498a3c2086a3e8bbd0352d71396c04c99",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-020.png",
+      "bytes": 313154,
+      "sha256": "eb8a2a972aa8b7ced6dda9db7a1d4faf112703daf853f7b822c587896e74f416",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-021.png",
+      "bytes": 312097,
+      "sha256": "dd1593984bbf45a2238d34def5bcdf9a706589716e2e5a3a5b7d31075217d698",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-022.png",
+      "bytes": 310764,
+      "sha256": "2bc9b9347949a69609d0b0ac991ba3b1a901ecec6b09925a1e6dd2325419d775",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-023.png",
+      "bytes": 310258,
+      "sha256": "ec82058e84548da8965b2515a3dbbfeff4768ae42d17ec4000b32cb3d658ae59",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-024.png",
+      "bytes": 310248,
+      "sha256": "5133518355d4154558da940dd7372712832f201b6cb88a1327b7baa88b94f6b6",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-025.png",
+      "bytes": 311490,
+      "sha256": "896fcc9d6fab8724ae10d0565a3e7c0f3fda0298c0fb35e322bf0ae89ea1eca0",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-026.png",
+      "bytes": 312523,
+      "sha256": "9054b75bb9bdfb9e5d10abeb8bbf44c6bd529e7d4033aaefc25fb310148c3be5",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-027.png",
+      "bytes": 313211,
+      "sha256": "cfa9f683f01913b656ead7a32caf77b3a50ea6986699793e064536a38c4a4687",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-028.png",
+      "bytes": 313283,
+      "sha256": "df66ebc8ea7dbb0c1e68349c838acda9fa859a4e30c1fa44ff01966db0701cc8",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-029.png",
+      "bytes": 312483,
+      "sha256": "b3adc22c212a4b3eb44681a428740ca7e95a2513faf624895f18cd513751fd7b",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-030.png",
+      "bytes": 311830,
+      "sha256": "ac762dd008ce27e61277e91a9c37bf3fb919a1ec417fdfa5d323b92bf6200025",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-031.png",
+      "bytes": 311152,
+      "sha256": "cd5fb8b2da6a62b0c59e2c9e7e4a05498b0504e3d499db38c288369d584f0b6d",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-032.png",
+      "bytes": 310999,
+      "sha256": "7e86a46a7f1db785fa1abe5d9787320a3ca1b068791da38df3223e70613f0a3e",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-033.png",
+      "bytes": 310877,
+      "sha256": "457dfe630a37491e78044dab979baba3306926116804ee4c611f6e25d5cf222c",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-034.png",
+      "bytes": 310716,
+      "sha256": "af61b884e6ec6383659af5e71788f3a52224e2d012734488ce23405616985a78",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-035.png",
+      "bytes": 310557,
+      "sha256": "bebb7dbaaf0a8e73077d8836db2e1cb4ae9e01a227be3e025bc9acd2d229d860",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-036.png",
+      "bytes": 309856,
+      "sha256": "5c89c7c2808ca1127541f05048d2153ef99598854591666fa9d431bebe673f78",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-037.png",
+      "bytes": 310557,
+      "sha256": "bebb7dbaaf0a8e73077d8836db2e1cb4ae9e01a227be3e025bc9acd2d229d860",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-038.png",
+      "bytes": 310716,
+      "sha256": "af61b884e6ec6383659af5e71788f3a52224e2d012734488ce23405616985a78",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-039.png",
+      "bytes": 310877,
+      "sha256": "457dfe630a37491e78044dab979baba3306926116804ee4c611f6e25d5cf222c",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-040.png",
+      "bytes": 310999,
+      "sha256": "7e86a46a7f1db785fa1abe5d9787320a3ca1b068791da38df3223e70613f0a3e",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-041.png",
+      "bytes": 311152,
+      "sha256": "cd5fb8b2da6a62b0c59e2c9e7e4a05498b0504e3d499db38c288369d584f0b6d",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-042.png",
+      "bytes": 311830,
+      "sha256": "ac762dd008ce27e61277e91a9c37bf3fb919a1ec417fdfa5d323b92bf6200025",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-043.png",
+      "bytes": 312483,
+      "sha256": "b3adc22c212a4b3eb44681a428740ca7e95a2513faf624895f18cd513751fd7b",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-044.png",
+      "bytes": 313283,
+      "sha256": "df66ebc8ea7dbb0c1e68349c838acda9fa859a4e30c1fa44ff01966db0701cc8",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-045.png",
+      "bytes": 313211,
+      "sha256": "cfa9f683f01913b656ead7a32caf77b3a50ea6986699793e064536a38c4a4687",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-046.png",
+      "bytes": 312523,
+      "sha256": "9054b75bb9bdfb9e5d10abeb8bbf44c6bd529e7d4033aaefc25fb310148c3be5",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-047.png",
+      "bytes": 311490,
+      "sha256": "896fcc9d6fab8724ae10d0565a3e7c0f3fda0298c0fb35e322bf0ae89ea1eca0",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-048.png",
+      "bytes": 310248,
+      "sha256": "5133518355d4154558da940dd7372712832f201b6cb88a1327b7baa88b94f6b6",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-049.png",
+      "bytes": 310258,
+      "sha256": "ec82058e84548da8965b2515a3dbbfeff4768ae42d17ec4000b32cb3d658ae59",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-050.png",
+      "bytes": 310764,
+      "sha256": "2bc9b9347949a69609d0b0ac991ba3b1a901ecec6b09925a1e6dd2325419d775",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-051.png",
+      "bytes": 312097,
+      "sha256": "dd1593984bbf45a2238d34def5bcdf9a706589716e2e5a3a5b7d31075217d698",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-052.png",
+      "bytes": 313154,
+      "sha256": "eb8a2a972aa8b7ced6dda9db7a1d4faf112703daf853f7b822c587896e74f416",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-053.png",
+      "bytes": 312495,
+      "sha256": "53d3d9f7a2a6ab8b3b4a91903eb307a498a3c2086a3e8bbd0352d71396c04c99",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-054.png",
+      "bytes": 311046,
+      "sha256": "e4c3c7c4697f3ad174610b942775788a73d77b4cba2e57ddefa91349b52c480b",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-055.png",
+      "bytes": 309978,
+      "sha256": "c27242875d9539d97ef677fda259104e546bc715be38a540cfb3ff9eeae5447c",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-056.png",
+      "bytes": 310071,
+      "sha256": "46dd642a17cddedd4248633d75aa12db08348a1748d0f6d058769b8c9fb2d785",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-057.png",
+      "bytes": 311121,
+      "sha256": "04f97a2ccbc84f724a4527078b9510b7e2226e5b4eaac827aa9f3ade5007dfa0",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-058.png",
+      "bytes": 312291,
+      "sha256": "658da3ead392e334f0f57683be24d7fd0ffd786039ad66edf98824b09e2731d3",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-059.png",
+      "bytes": 312951,
+      "sha256": "555dbb472bd56ab328a1aa41f4f90e3a53793087a3caa97d49b64c88b0409ea8",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-060.png",
+      "bytes": 311944,
+      "sha256": "95ccbe834ecce2b0cf762106986aace67424894d957b82f882688ca1d4244a1b",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-061.png",
+      "bytes": 310779,
+      "sha256": "3d90e6300d7a9a66b5c8714631bbc92bdc9b1f805fe6cf4a7a1320edd4f707e2",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-062.png",
+      "bytes": 309779,
+      "sha256": "32d4b81cb0de1e19a22ee606162412235fd785d870c8b2a4278f38c711f8b9dd",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-063.png",
+      "bytes": 309486,
+      "sha256": "5512d92caffafb8edccb8416f4360852ab6873703150f4ab89aaeb410f068eb5",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-064.png",
+      "bytes": 310133,
+      "sha256": "934ae7b8a507c4e15608c127a6720dc25da0221a85c8a4bbb6dd8b736dc0e00d",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-065.png",
+      "bytes": 310756,
+      "sha256": "b34b8bf29d0142098f866d3a4805b51a7a54da3ecb4d8d0381a3484280ab2ee6",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-066.png",
+      "bytes": 311396,
+      "sha256": "c68e5ac31e15c8b100a63c7365eb0a750d8b024bbd57fa8eaad1c662f1434813",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-067.png",
+      "bytes": 312038,
+      "sha256": "267a2581cb36e2bdde242e959843d02baed73359c2d74a1d1cd3d58c2a7d6264",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-068.png",
+      "bytes": 312405,
+      "sha256": "bad7830e02c43f7654893fc497d8b535541ecb13f5b809cd7933d88d87f08a2b",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-069.png",
+      "bytes": 312679,
+      "sha256": "db668254a1eed4c75bed159a53e185bfcf1fd1a77641ab429da4cca27eb55796",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-070.png",
+      "bytes": 312922,
+      "sha256": "1140d07eefea47b0eba59485fe6f40fb8d0e203eb038781887fde7bc3d520345",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/frames/idle-071.png",
+      "bytes": 312828,
+      "sha256": "b46e0ffc68c9828cd420b38b41a7698d4f50b3817f06197f6ca55bb351907dd1",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/preview.webp",
+      "bytes": 2423078,
+      "sha256": "215db4838dac745abcad68b8d7280bc3c0e765c40754c8d0d17adb864bc5c007",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/sheet.png",
+      "bytes": 9372518,
+      "sha256": "e28c6519533e7d2e1d4c3913ef134f655d8c753620c3f0eabeeaf3bee4628190",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/sheet.webp",
+      "bytes": 6561754,
+      "sha256": "9fc51c4c8dcbbd1fb64595f3f1239e234b468356ec3f7f604d2edd4e1ef2a64e",
+      "localOnly": true
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/sprite.json",
+      "bytes": 1765,
+      "sha256": "b3d708f4892e33688b81b262e2e51c3a60ce99141c7571368f720f359cf3e35b",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/idle/validation.json",
+      "bytes": 272,
+      "sha256": "d15a6ffc5f27def111a5cae965ecba5eb4388cf4ebe88dea362ab0e10a88a261",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/index.html",
+      "bytes": 5618,
+      "sha256": "0e416d830f113671795cdc3c721be782ed4d1badd84e904f387603d6268ad4e9",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/pack_action.py",
+      "bytes": 6948,
+      "sha256": "5ec282d1970033713a624febfdbca64a7f9ea6c326bf7f311ec39f77514e874b",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/pack_idle.py",
+      "bytes": 1781,
+      "sha256": "2bc6863eae08ddadee5c78139d553688c898615645d8dec07b3cf03b675a315d",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/pack_left_attack.py",
+      "bytes": 5000,
+      "sha256": "73a831a3a92755477eef5d1a4e36ef7f19e99c57f01f0bdbf881d0a58153288a",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/README.md",
+      "bytes": 2438,
+      "sha256": "ef78260c7f672079914101d7433f4600fbf0aebdb8f1f27c833207f2592703c1",
+      "localOnly": false
+    },
+    {
+      "path": "game/art-source/characters/changwuyu-sprites-20261009/requests.json",
+      "bytes": 6861,
+      "sha256": "aa3025747fd694369be0c46f9a8cd2c5b471f469025f4d280be950ed183bc341",
+      "localOnly": false
+    }
+  ]
+}

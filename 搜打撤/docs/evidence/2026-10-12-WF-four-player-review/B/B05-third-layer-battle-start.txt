@@ -1,0 +1,174 @@
+- complementary:
+  - navigation "远征工具":
+    - img "星月 Q版小人"
+    - generic: 当前 · 遭遇战
+    - button "bag 背包 携带卡牌 10/25 B" [disabled]:
+      - img "bag"
+      - text: 背包
+      - generic: 携带卡牌
+      - strong: 10/25
+      - generic: B
+    - button "lock 安全格 保护物资 1/2" [disabled]:
+      - img "lock"
+      - text: 安全格
+      - generic: 保护物资
+      - strong: 1/2
+    - button "cards 消耗口袋 待复原卡牌 2" [disabled]:
+      - img "cards"
+      - text: 消耗口袋
+      - generic: 待复原卡牌
+      - strong: "2"
+    - button "map 定位 当前位置 F" [disabled]:
+      - img "map"
+      - text: 定位
+      - generic: 当前位置
+      - generic: F
+    - button "map 总览 已知区域 G" [disabled]:
+      - img "map"
+      - text: 总览
+      - generic: 已知区域
+      - generic: G
+- main:
+  - navigation "远征章节":
+    - generic: 冻土遗迹
+    - generic: 第 3 层 / 4
+  - generic: "2"
+  - generic: "4"
+  - button "离开对局":
+  - button:
+  - button:
+  - generic: 当前生命
+  - generic: 35/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - img "flask"
+    - text: 道具
+    - img "flask"
+    - generic: 流血药水
+    - text: ↳敌
+    - generic: 冬境街区 · 遭遇
+    - generic: 第 1 回合
+    - generic: 你的行动
+    - generic: 选择手牌，或结束回合
+    - text: 星月
+    - generic: 你
+    - generic: 35/35
+    - img "swords"
+    - text: "4"
+    - button "甲壳变异体的意图：攻击 · 4。点击查看完整说明" [active]:
+      - img "swords"
+      - generic: "4"
+    - img "orc_axe"
+    - generic: 甲壳变异体
+    - img "swords"
+    - text: "4"
+    - generic: 7/7
+    - button "甲壳变异体的意图：攻击 · 4。点击查看完整说明":
+      - img "swords"
+      - generic: "4"
+    - img "orc_axe"
+    - generic: 甲壳变异体
+    - img "swords"
+    - text: "4"
+    - generic: 7/7
+    - generic: 当前能量
+    - img "bolt"
+    - generic: "2"
+    - generic: /2
+    - generic "职业技能与手牌分栏":
+      - button "heart 圣疗 1 能量 · 每回合一次":
+        - img "heart"
+        - text: 圣疗
+        - generic: 1 能量 · 每回合一次
+    - button "圣光之源 · 2 费。费用 2 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）":
+      - generic: "2"
+      - img "圣光之源"
+      - generic: 圣光之源
+      - generic: 法术 · 星月专属 职业
+      - img "cards"
+      - text: 抽 5
+      - generic: 抽 5 张牌。
+      - img "heart"
+    - button "查看圣光之源完整规则": 规则
+    - button "迅疾箭 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）":
+      - generic: "1"
+      - img "迅疾箭"
+      - generic: 迅疾箭
+      - generic: 武术 · 古朴 古朴
+      - img "cards"
+      - text: 抽 1
+      - generic: 造成（你的攻击力 - 1）点攻击伤害，抽 1 张牌。
+      - img "swords"
+    - button "查看迅疾箭完整规则": 规则
+    - button "长剑 · 0 费。费用 0 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）":
+      - generic: "0"
+      - img "长剑"
+      - generic: 长剑
+      - generic: 装备 · 古朴 古朴
+      - generic: 你的攻击力增加 1 点。
+      - img "heart"
+    - button "查看长剑完整规则": 规则
+    - button "余烬爆裂 · 2 费。费用 2 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）":
+      - generic: "2"
+      - img "余烬爆裂"
+      - generic: 余烬爆裂
+      - generic: 法术 · 稀有 稀有
+      - generic: 对全体敌人造成 2 点法术伤害；若本次伤害击杀敌人，本牌额外施放 1 次。
+      - img "swords"
+    - button "查看余烬爆裂完整规则": 规则
+    - button "花鸩 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）":
+      - generic: "1"
+      - img "花鸩"
+      - generic: 花鸩
+      - generic: 法术 · 史诗 史诗
+      - generic: 使 1 名角色的中毒层数翻倍，并立即触发该角色的 1 次毒伤。
+      - img "swords"
+    - button "查看花鸩完整规则": 规则
+    - button "气功波 · 1 费。费用 1 · 点击直接打出，也可拖到战场空地（悬停看完整描述）":
+      - generic: "1"
+      - img "气功波"
+      - generic: 气功波
+      - generic: 武术 · 古朴 古朴
+      - img "cards"
+      - text: 抽 1
+      - generic: 抽 1 张牌；对全体敌人造成等同于抽到卡牌价格的固定伤害。
+      - img "sparkles"
+    - button "查看气功波完整规则": 规则
+    - button "珍珠盒 · 0 费。费用 0 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）":
+      - generic: "0"
+      - img "珍珠盒"
+      - generic: 珍珠盒
+      - generic: 装备 · 稀有 稀有
+      - generic: 本牌内置 3×3 格空间，可容纳所有类型的资源卡牌。
+      - img "heart"
+    - button "查看珍珠盒完整规则": 规则
+    - button "法力光波 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）":
+      - generic: "1"
+      - img "法力光波"
+      - generic: 法力光波
+      - generic: 法术 · 古朴 古朴
+      - generic: 造成 5 点法术伤害。
+      - generic: ×2
+      - img "swords"
+    - button "查看法力光波完整规则": 规则
+    - button "寻宝 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）":
+      - generic: "1"
+      - img "寻宝"
+      - generic: 寻宝
+      - generic: 法术 · 古朴 古朴
+      - generic: 造成 4 点法术伤害，并发现 1 张卡牌。
+      - img "swords"
+    - button "查看寻宝完整规则": 规则
+    - generic "战术操作":
+      - button "bag 背包":
+        - img "bag"
+        - text: 背包
+      - button "runner 撤离（判负）":
+        - img "runner"
+        - text: 撤离（判负）
+      - button "gear 设置":
+        - img "gear"
+        - text: 设置
+      - button "skip 结束回合":
+        - img "skip"
+        - text: 结束回合

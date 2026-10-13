@@ -1,0 +1,25 @@
+{
+  "bodyClasses": "interface-motion",
+  "canvas": {
+    "height": 1016,
+    "width": 2007
+  },
+  "haze": {
+    "animation": "map-snow-haze",
+    "transform": "matrix(1, 0, 0, 1, -52.674, -2.33479)"
+  },
+  "snow": {
+    "animation": "map-snow-drift",
+    "duration": "14s",
+    "opacity": "0.65",
+    "pointerEvents": "none",
+    "transform": "matrix(1, 0, 0, 1, -139.486, -17.0544)",
+    "visibility": "visible"
+  },
+  "url": "http://localhost:5200/",
+  "window": {
+    "dpr": 1.25,
+    "height": 956,
+    "width": 1606
+  }
+}

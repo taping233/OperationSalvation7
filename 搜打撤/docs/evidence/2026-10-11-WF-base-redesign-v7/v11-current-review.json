@@ -1,0 +1,86 @@
+{
+  "unverified": [
+    "当前实现尚未得到老板美术认可；仅原绝区零参考图已认可",
+    "正式档01没有已收藏卡牌、已记录长故事或可领/已领取奖励，未构造此类存档",
+    "未出征/购买/出售/培养/领奖；未运行测试/build/多尺寸/性能比较/提交/推送",
+    "后勤/建设/庭院沿前次实现，本轮未逐页精修"
+  ],
+  "platform": "Codex In-app Browser",
+  "slot": "01",
+  "date": "2026-10-11",
+  "status": "implemented_pending_user_visual_review",
+  "schemaVersion": 1,
+  "task": "WF-base-redesign-v7",
+  "observations": [
+    "首页：顶部独立资源胶囊、侧主行动/难度、底部六入口；原A21图加载，方向样板为已确认绝区零原截图",
+    "人物：无1024×1536原竖图object-fit contain；立绘和资料区均白色，完整人物在当前窗口可见；星月切换已实际浏览",
+    "交易：四列商品与右侧交易台，卡牌及物资两种商品实际浏览；余额不足提示可读，购买禁用",
+    "收藏：未收藏空态、卡背原图/选中、未解锁条件、故事空态和奖励空态已实际浏览",
+    "导航旧黄色伪元素已移除，子页青蓝标线可见；进出大页与来源返回沿原入口",
+    "本任务最后捕获console error为0"
+  ],
+  "viewport": {
+    "width": 1523,
+    "zoom": 0.793229,
+    "height": 956
+  },
+  "images": [
+    {
+      "sha256": "15d04261c413435866bc3f2252e474e7d3ded1a2a3f0a89a7df1f0bcae8fe3c5",
+      "path": "visual-check/v11-base-home-latest.jpg",
+      "bytes": 123064
+    },
+    {
+      "sha256": "7988adc526ad817afd4bd1799595eff5f8f389e893a88899d1392d7d8e3dfaec",
+      "path": "visual-check/v11-personnel-wu-latest.jpg",
+      "bytes": 63933
+    },
+    {
+      "sha256": "f10d548e2acaf45f0cbafcb758441fa724b5b27237dab1f4f11aa15e1f20b6d5",
+      "path": "visual-check/v11-trade-four-columns-final.jpg",
+      "bytes": 58154
+    },
+    {
+      "sha256": "2e226bb6308c539c776f99ee06eb846a9dfba0cfdb8a256720eaace9f48a20a1",
+      "path": "visual-check/v11-collection-backs-final.jpg",
+      "bytes": 81214
+    },
+    {
+      "sha256": "793dd5a97e68ce06208088568bfcf8ea0fd9332faaaef8e71430ffb7304768cc",
+      "path": "visual-check/v11-collection-locked-final.jpg",
+      "bytes": 86126
+    },
+    {
+      "sha256": "d5958c9257002d5861b0230962b48ff270cabac33bfae2d8e815e2453778ce30",
+      "path": "visual-check/v11-collection-story-empty.jpg",
+      "bytes": 33259
+    },
+    {
+      "sha256": "62b301c01189a50203f19258334d6836ea6c3de941d0bea2dcd42ba9f15a9e00",
+      "path": "visual-check/v11-collection-reward-empty.jpg",
+      "bytes": 22411
+    }
+  ],
+  "tab": "1",
+  "thread": "01a12b26-919c-7300-aa9b-e2a97244fb78",
+  "url": "http://localhost:5200/",
+  "sourceFingerprint": [
+    {
+      "path": "game/css/base-home-v7.css",
+      "sha256": "4d0c842e3ea1b69585cde5a602cc8eba5d395b0cf533f049403e97e2008f83ae"
+    },
+    {
+      "path": "game/css/base-framework-v7.css",
+      "sha256": "74ea107da44bda86e6437f3caca8b96d5001800eda4a8d46c8ddeae88860f3c6"
+    },
+    {
+      "path": "game/css/base-rooms-v7.css",
+      "sha256": "a505cc19f20fa8677010902d5cf314c9d70d21e87bc2d16ded6e19e583af44f1"
+    },
+    {
+      "path": "game/src/hub/hub.home-icons-v10.js",
+      "sha256": "8421ee3d9f7f9330fe297477a5ac1ddb2bb885a26e24bb9105b9a3cb341e7b62"
+    }
+  ],
+  "input": "cua原生点击/Playwright可见控件点击与Shift+Tab；无构造事件、无存档注入"
+}

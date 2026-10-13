@@ -1,0 +1,20 @@
+{
+  "card_id": "tt7-maxsupply",
+  "model": "nai-diffusion-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 767127936,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1girl, solo, slight smile, looking down, simple background, book, open book, magic, from below, cowboy shot, sitting, leaning back, outstretched arm, open hand\n\nCharacter 1 sits sideways on a partially visible carved wooden chair, caught midway through a small turning motion. Her face is near the upper-right third and remains clearly visible, with both green eyes readable. One hand presses an open antique book securely against her lap; the other reaches toward the viewer, palm upward, and becomes the near foreground gesture. Broad ivory-gold page-like streams of mana rise from the open book and curl in one clear path into her receiving palm. The nearest light fold brightens her fingertips, the book edge and the underside of her cheek. She watches the mana arrive with a small composed smile rather than attacking. Her long dark curls and green dress respond to the turning motion, forming a counter-curve around the book and arm. The face, palm and lap book are the three readable subjects of this profession-card illustration; keep the chair secondary and only partly shown. Use a few quiet pale warm background color planes and a restrained muted green shadow plane appropriate to the mana flow, without constructing a room, shelves or a scenic environment.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "girl, young adult woman, gentle composed anime face, emerald green eyes, very long dark brown wavy curly hair, large grouped curls, swept bangs, two small gold metal hairclips parting bangs away from her eyes, white long-sleeved high-collar blouse with cuff buttons, dark forest-green suspender long dress with wide straps and simple gold buckles, white short socks, black shoes",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, boy, male, blonde hair, silver hair, blue eyes, golden eyes, straight hair, witch hat, staff, wand, cake, fork, food, giant floating book hiding face, library room, bookshelves, scenery, duplicate person, white border, inset illustration, detached torso, disembodied hand, contact sheet, character sheet",
+  "design": "白塔坐姿半转身，一手压膝上书，一手向前接金白页状魔力，脸/掌/书近中景。",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\baita-manasupply-20261010\\draft.png"
+}

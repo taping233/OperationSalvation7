@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt2-swiftarrow",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12470-95d7-75e0-9477-03361e04258c\\exec-522bf49c-f6fe-4b73-b167-ac9090671079.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-swiftarrow/cards-martial-tt2-swiftarrow-source.png",
+        "bytes": 1536021,
+        "sha256": "fdaad146a41d3fdb55651502ec4cb3beeca66ae0d502234a8ed580704fd8f244"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-swiftarrow/cards-martial-tt2-swiftarrow-full-before.webp",
+          "bytes": 167046,
+          "sha256": "0b8d28be3f8d3f4281ec65461ff8c229153fc778bb765e190c93d9d39fb526a1"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-swiftarrow/cards-martial-tt2-swiftarrow-thumb-before.webp",
+          "bytes": 26622,
+          "sha256": "3408202e0c252334b8b62f2bb8c2a2ee08dc9377df1b8252b075f4131525f75a"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt2-swiftarrow.webp",
+          "bytes": 49694,
+          "sha256": "ef9015ac95e94958562e2e2642e00fc59355450355baf4bdebff695cc5adfac8",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt2-swiftarrow.webp",
+          "bytes": 6632,
+          "sha256": "028e9ffa125336f1ac4558380488b2d497c7d08a71dbfb901dbe272615784116",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt2-swiftarrow-creative-rough-20261005",
+      "revision_after": "swiftarrow-v45-wind-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt2-swiftarrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 167046,
+            "sha256": "0b8d28be3f8d3f4281ec65461ff8c229153fc778bb765e190c93d9d39fb526a1",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt2-swiftarrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 49694,
+            "sha256": "ef9015ac95e94958562e2e2642e00fc59355450355baf4bdebff695cc5adfac8",
+            "source": "docs/evidence/2026-10-10-swiftarrow/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt2-swiftarrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 26622,
+            "sha256": "3408202e0c252334b8b62f2bb8c2a2ee08dc9377df1b8252b075f4131525f75a",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt2-swiftarrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 6632,
+            "sha256": "028e9ffa125336f1ac4558380488b2d497c7d08a71dbfb901dbe272615784116",
+            "source": "docs/evidence/2026-10-10-swiftarrow/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 896,
+  "manifest_count_after": 896
+}

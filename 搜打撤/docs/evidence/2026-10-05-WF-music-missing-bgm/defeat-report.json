@@ -1,0 +1,455 @@
+{
+  "id": "defeat",
+  "title": "未熄之灯",
+  "stem": "14-defeat-unextinguished-lamp",
+  "idea": "死亡或放弃结算的温柔收束；大提琴、双手钢琴与双簧管，保留重新出发的微光。",
+  "key": "G minor",
+  "meter": [
+    4,
+    4
+  ],
+  "bpm_quarter": 72,
+  "bars": 24,
+  "total_beats": 96.0,
+  "seconds": 80.0,
+  "tracks": [
+    {
+      "name": "Cello last ember",
+      "program": 42,
+      "bank": 0,
+      "hand": null,
+      "notes": 48,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/14-defeat-unextinguished-lamp-Cello-last-ember.wav",
+        "bytes": 30720088,
+        "sha256": "841698d2764d65f41eeca59cce34c028835718921510be0bcaae2e1b1bde4c22"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.97
+        ],
+        [
+          24.0,
+          0.97
+        ],
+        [
+          40.0,
+          1
+        ],
+        [
+          48.0,
+          1
+        ],
+        [
+          64.0,
+          1.04
+        ],
+        [
+          80.0,
+          1.04
+        ],
+        [
+          88.0,
+          0.94
+        ],
+        [
+          96.0,
+          0.94
+        ],
+        [
+          96.0,
+          0.97
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Piano right hand",
+      "program": 0,
+      "bank": 0,
+      "hand": "right",
+      "notes": 24,
+      "pan": 8,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/14-defeat-unextinguished-lamp-Piano-right-hand.wav",
+        "bytes": 30720088,
+        "sha256": "8d0094bfbf6820ec491d40ec23378ad9560fe59b64854d4d92d65d83cfa5f7ec"
+      },
+      "target_active_rms_dbfs": -32,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          24.0,
+          0.83
+        ],
+        [
+          40.0,
+          0.92
+        ],
+        [
+          48.0,
+          0.92
+        ],
+        [
+          64.0,
+          0.98
+        ],
+        [
+          80.0,
+          0.98
+        ],
+        [
+          88.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ],
+        [
+          96.0,
+          0.85
+        ]
+      ],
+      "cc64_used": true
+    },
+    {
+      "name": "Piano left hand",
+      "program": 0,
+      "bank": 0,
+      "hand": "left",
+      "notes": 72,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/14-defeat-unextinguished-lamp-Piano-left-hand.wav",
+        "bytes": 30720088,
+        "sha256": "a716849d93e6daf362847148776757b66b645f874ba40aa88b6c0c560f002715"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          24.0,
+          0.83
+        ],
+        [
+          40.0,
+          0.92
+        ],
+        [
+          48.0,
+          0.92
+        ],
+        [
+          64.0,
+          0.98
+        ],
+        [
+          80.0,
+          0.98
+        ],
+        [
+          88.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ],
+        [
+          96.0,
+          0.85
+        ]
+      ],
+      "cc64_used": true
+    },
+    {
+      "name": "Oboe remembered road",
+      "program": 68,
+      "bank": 0,
+      "hand": null,
+      "notes": 8,
+      "pan": 18,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/14-defeat-unextinguished-lamp-Oboe-remembered-road.wav",
+        "bytes": 30720088,
+        "sha256": "5d72578ad238372fc1bbc1bca5e7b3260ff74084811fe3785879a113f5a75440"
+      },
+      "target_active_rms_dbfs": -36,
+      "continuous_gain_points": [
+        [
+          0,
+          0.35
+        ],
+        [
+          24.0,
+          0.35
+        ],
+        [
+          40.0,
+          0.8
+        ],
+        [
+          48.0,
+          0.8
+        ],
+        [
+          64.0,
+          0.92
+        ],
+        [
+          80.0,
+          0.92
+        ],
+        [
+          88.0,
+          0.48
+        ],
+        [
+          96.0,
+          0.35
+        ],
+        [
+          96.0,
+          0.48
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Slow strings shelter",
+      "program": 49,
+      "bank": 0,
+      "hand": null,
+      "notes": 12,
+      "pan": -31,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/14-defeat-unextinguished-lamp-Slow-strings-shelter.wav",
+        "bytes": 30720088,
+        "sha256": "e3e5a287e8769995fc2fe5a126629378e952af56efe6f3874a5463b70cff965f"
+      },
+      "target_active_rms_dbfs": -34,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          24.0,
+          0.83
+        ],
+        [
+          40.0,
+          0.92
+        ],
+        [
+          48.0,
+          0.92
+        ],
+        [
+          64.0,
+          0.98
+        ],
+        [
+          80.0,
+          0.98
+        ],
+        [
+          88.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ],
+        [
+          96.0,
+          0.85
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Harp small hope",
+      "program": 46,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": -24,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/14-defeat-unextinguished-lamp-Harp-small-hope.wav",
+        "bytes": 30720088,
+        "sha256": "d746d0a3f93bb5db5f04689fb2d9b5a1dac3a2358f024ba2e28dd700b53722b8"
+      },
+      "target_active_rms_dbfs": -43,
+      "continuous_gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          24.0,
+          0.68
+        ],
+        [
+          40.0,
+          0.72
+        ],
+        [
+          48.0,
+          0.72
+        ],
+        [
+          64.0,
+          0.84
+        ],
+        [
+          80.0,
+          0.84
+        ],
+        [
+          88.0,
+          0.58
+        ],
+        [
+          96.0,
+          0.58
+        ],
+        [
+          96.0,
+          0.68
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 12,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/14-defeat-unextinguished-lamp-Steady-low-foundation.wav",
+        "bytes": 30720088,
+        "sha256": "73396173ec21f607eb0569909a6d3ed3b54ce71cf2c94c2089ff6e2e23577b35"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          24.0,
+          0.83
+        ],
+        [
+          40.0,
+          0.92
+        ],
+        [
+          48.0,
+          0.92
+        ],
+        [
+          64.0,
+          0.98
+        ],
+        [
+          80.0,
+          0.98
+        ],
+        [
+          88.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ],
+        [
+          96.0,
+          0.85
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-5.93",
+    "input_lra": "1.90",
+    "input_thresh": "-28.50",
+    "output_i": "-22.82",
+    "output_tp": "-10.38",
+    "output_lra": "1.80",
+    "output_thresh": "-32.82",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.18"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.4660813482361644,
+      0.6575693815674288
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/14-defeat-unextinguished-lamp.mmp",
+      "bytes": 6782,
+      "sha256": "ba7c235fd9f17833c213acd45a95fa1e4299182da913c559fd4873a0e8a9a550"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/14-defeat-unextinguished-lamp.wav",
+      "bytes": 23040044,
+      "sha256": "d15ae428a7ace4014f55a7f40eac067efc0c035e9c2d305d072adaa83733abcf"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/14-defeat-unextinguished-lamp.mp3",
+      "bytes": 2562116,
+      "sha256": "da3f879228e4823c739b923212c72708a76d3bcb6424955b1de2a9a4468819eb"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/14-defeat-unextinguished-lamp.ogg",
+      "bytes": 1524338,
+      "sha256": "9860308cea18aad3984e41356db83439d647bf3fc0fb08140080077cf3a4af0f"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/14-defeat-unextinguished-lamp-piano.mid",
+      "bytes": 1394,
+      "sha256": "094794f24f6b605546b99212f0368c3f50931dabf5cb3b6c6b8fa774ddb5128e"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "opening"
+    },
+    {
+      "start_bar": 8,
+      "name": "first development"
+    },
+    {
+      "start_bar": 14,
+      "name": "contrast"
+    },
+    {
+      "start_bar": 22,
+      "name": "connected return"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed"
+}

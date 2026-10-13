@@ -1,0 +1,126 @@
+{
+  "workflow": "Built-in ImageGen border-only edits on seven simple card backs; themed corners and restrained bands, central emblems retained",
+  "verification": "Generated images viewed; no tests/browser/audit/build requested",
+  "manifest_count": 1162,
+  "items": [
+    {
+      "id": "classic",
+      "name": "行囊粗布",
+      "concept": "粗布包与折布角框",
+      "path": "card-backs/classic.webp",
+      "bytes": 42426,
+      "sha256": "85ed4e4b3593ae984eb4f34674d99daea073e5c8f2a33510e7c981a9d0dfd439",
+      "generation_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-455564fd-1b42-425c-9132-957eee76c15f.png",
+      "generation_sha256": "1d4ef3549cf5ffdc5cf8fe29aaf873a9c1c3d4d9c4256f2a6460bd383adb61d7",
+      "saved_source": ".tmp/imagegen/cardbacks-border-design-20261012/classic-source.png",
+      "backup": ".tmp/imagegen/cardbacks-border-design-20261012/classic-before.webp",
+      "backup_sha256": "40fa8e876ccdd5d839d8dee003ce96b506c56c81e3f513395b8eefd0e89448cf",
+      "size": [
+        512,
+        768
+      ]
+    },
+    {
+      "id": "wolf",
+      "name": "猎手皮纸",
+      "concept": "月箭与皮纸猎角框",
+      "path": "card-backs/wolf.webp",
+      "bytes": 32312,
+      "sha256": "558841b3d2976321b9f3eae2e65c6aba595a33e48f67fc9097bc3593f388da94",
+      "generation_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-eb4586a4-59f6-442a-94fa-be460737f7e2.png",
+      "generation_sha256": "ccb2dec576582609d507c0e083b3d8bfd4372af5904a496d03573c2ef3b75943",
+      "saved_source": ".tmp/imagegen/cardbacks-border-design-20261012/wolf-source.png",
+      "backup": ".tmp/imagegen/cardbacks-border-design-20261012/wolf-before.webp",
+      "backup_sha256": "9f4935edaa7d1517e708a408f255f4d64974722383f7d93928e29e10a39fd4a6",
+      "size": [
+        512,
+        768
+      ]
+    },
+    {
+      "id": "coin",
+      "name": "富商锦缎",
+      "concept": "金币与赤锦包角框",
+      "path": "card-backs/coin.webp",
+      "bytes": 40876,
+      "sha256": "54f2290120e52fac1d27c31379f97581a6afc002ce914a1fbae620f714e15dfa",
+      "generation_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-24c36edd-2da6-4954-b07c-202e83fd6212.png",
+      "generation_sha256": "e545d943a0b4d81c1a40846a945af5fac4a5a3399a900dba8f1f4a607e85e559",
+      "saved_source": ".tmp/imagegen/cardbacks-border-design-20261012/coin-source.png",
+      "backup": ".tmp/imagegen/cardbacks-border-design-20261012/coin-before.webp",
+      "backup_sha256": "304361f94978157c82f00eabcb06395b123d8e012be547e511347f91a8b01c34",
+      "size": [
+        512,
+        768
+      ]
+    },
+    {
+      "id": "vault",
+      "name": "仓廪木纹",
+      "concept": "麦穗与木榫角框",
+      "path": "card-backs/vault.webp",
+      "bytes": 36168,
+      "sha256": "9cec0e24ce5b755353f3b66c24dbf03c427ea90ba54cfa6415e7c03c8940d412",
+      "generation_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-4a1c0dd7-be8b-4d18-990f-cf6043ef2f3e.png",
+      "generation_sha256": "ada1f262d580e1f54b81bb2b1ecd1c24864c86774bc399f53237c1a53fbacca9",
+      "saved_source": ".tmp/imagegen/cardbacks-border-design-20261012/vault-source.png",
+      "backup": ".tmp/imagegen/cardbacks-border-design-20261012/vault-before.webp",
+      "backup_sha256": "f7d20e0b24a9456626005c6e6ce8b44dee1940f9f6e4a5d6ea39452e8fe79f4b",
+      "size": [
+        512,
+        768
+      ]
+    },
+    {
+      "id": "boss",
+      "name": "弑神黑曜",
+      "concept": "赤缝黑曜与切面角框",
+      "path": "card-backs/boss.webp",
+      "bytes": 31070,
+      "sha256": "d858b18aae38da4eff6383dc925209d44f2ef8660db27d287ddbf5e2b695f11c",
+      "generation_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-aa3f7a31-ee34-4bc3-bbdd-da8f4813ff11.png",
+      "generation_sha256": "979489bf1c8ec28e996a9c468c732c3008b6f7339fd37bfc49d4c3f6454ac27c",
+      "saved_source": ".tmp/imagegen/cardbacks-border-design-20261012/boss-source.png",
+      "backup": ".tmp/imagegen/cardbacks-border-design-20261012/boss-before.webp",
+      "backup_sha256": "4c2622077c44cc9a6adfaa3eb4cbdb53133afe17db53ffe1f8c2204eb0f08080",
+      "size": [
+        512,
+        768
+      ]
+    },
+    {
+      "id": "altar",
+      "name": "核心星轨",
+      "concept": "单环晶核与星轨弧框",
+      "path": "card-backs/altar.webp",
+      "bytes": 32720,
+      "sha256": "1735c45fcadc6326a77bb2cac2199d25b75a1afab81ff898fd171f0540e928ce",
+      "generation_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-bba1263f-88e7-4a8a-9931-ed6737a5969a.png",
+      "generation_sha256": "5e94e9f1392fea6b8d3555ede9f2227eeb15c184cd60ec6a1ff985b0594aa5f2",
+      "saved_source": ".tmp/imagegen/cardbacks-border-design-20261012/altar-source.png",
+      "backup": ".tmp/imagegen/cardbacks-border-design-20261012/altar-before.webp",
+      "backup_sha256": "f5303ac1374916ef1b6d3bec8641d301af0e03d30d73d4537605b4e6d4b4e42e",
+      "size": [
+        512,
+        768
+      ]
+    },
+    {
+      "id": "pet",
+      "name": "忠犬爪印",
+      "concept": "爪印与皮革搭扣框",
+      "path": "card-backs/pet.webp",
+      "bytes": 30662,
+      "sha256": "d9d6191b69b60ba15413d85bfd85bf24fcf8a3de30e6a23d095ca7e80c3391a0",
+      "generation_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-5e908dda-8b72-44d6-a90a-b63998441bb9.png",
+      "generation_sha256": "c6857fca04bb281e1da4dad10d21fd202ef90f8bbaba09c3dce6253adeb6c9a9",
+      "saved_source": ".tmp/imagegen/cardbacks-border-design-20261012/pet-source.png",
+      "backup": ".tmp/imagegen/cardbacks-border-design-20261012/pet-before.webp",
+      "backup_sha256": "266a1d9bcbe53603e0cbde56c3f2735b02af650fb6cf062865e72772dd0c4875",
+      "size": [
+        512,
+        768
+      ]
+    }
+  ]
+}

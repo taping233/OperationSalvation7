@@ -1,0 +1,23 @@
+{
+  "raw": ".tmp\\imagegen\\map-blank-is7-1013\\source.png",
+  "asset": "game\\assets\\scenes\\map-nodes\\blank-symbol-foreground-1013-v1.webp",
+  "size": [
+    512,
+    512
+  ],
+  "bounds": [
+    86,
+    77,
+    435,
+    443
+  ],
+  "alphaExtrema": [
+    0,
+    255
+  ],
+  "sourceBytes": 733979,
+  "assetBytes": 82836,
+  "sourceSha256": "f83d23f7aa6303cea99bc7c6bc82213ef87a2d567f0b20269e64bda605ef99dd",
+  "assetSha256": "40205615135a43089f0d80ef7233c33e2049fa4a79052dbc5b43da1b9944ab2a",
+  "conversion": "Lanczos downscale to512,losslessWebP;alpha retained;224 only measures bounds"
+}

@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt7-holyheal",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-baf05892-2c04-47e7-a6e5-9aea3f03497b.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-holyheal/cards-spell-tt7-holyheal-source.png",
+        "bytes": 2043046,
+        "sha256": "4371a8fd493a476279947698587819e30e9b92cdeecdff35d29fe48000a1d72c"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-holyheal/cards-spell-tt7-holyheal-full-before.webp",
+          "bytes": 84984,
+          "sha256": "6e6d946eca66ddc22b58114cde6c08e450aebd5ab7b6a89016f355e2f7d4d56d"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-holyheal/cards-spell-tt7-holyheal-thumb-before.webp",
+          "bytes": 19008,
+          "sha256": "200fe2ccbd8c5abe49052da967feed97cd1bb483bacd408640d63fd5b54ab162"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-holyheal.webp",
+          "bytes": 162432,
+          "sha256": "e8dcae276b9883a2c505acff6633d7a672f97e58286fa5f89117d5853636e801",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-holyheal.webp",
+          "bytes": 20640,
+          "sha256": "93fda161adc562501d2324fc67200d77587d9b0b98ae6a039504a563dc8b6aa9",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "holyheal-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt7-holyheal.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 162432,
+            "sha256": "e8dcae276b9883a2c505acff6633d7a672f97e58286fa5f89117d5853636e801",
+            "source": "docs/evidence/2026-10-10-holyheal/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-holyheal.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 19008,
+            "sha256": "200fe2ccbd8c5abe49052da967feed97cd1bb483bacd408640d63fd5b54ab162",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-holyheal.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 20640,
+            "sha256": "93fda161adc562501d2324fc67200d77587d9b0b98ae6a039504a563dc8b6aa9",
+            "source": "docs/evidence/2026-10-10-holyheal/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 838,
+  "manifest_count_after": 839
+}

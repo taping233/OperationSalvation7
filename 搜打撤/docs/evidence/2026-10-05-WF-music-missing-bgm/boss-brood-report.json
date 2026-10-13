@@ -1,0 +1,450 @@
+{
+  "id": "boss-brood",
+  "title": "腐巢微光",
+  "stem": "11-boss-brood-pale-nest",
+  "idea": "变异巢母的六八拍隐伏；低单簧管、巴松、木质马林巴与颤弦，像缓慢呼吸的巢，而非军鼓战争。",
+  "key": "B minor",
+  "meter": [
+    6,
+    8
+  ],
+  "bpm_quarter": 90,
+  "bars": 32,
+  "total_beats": 96.0,
+  "seconds": 64.0,
+  "tracks": [
+    {
+      "name": "Clarinet lurking",
+      "program": 71,
+      "bank": 0,
+      "hand": null,
+      "notes": 64,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/11-boss-brood-pale-nest-Clarinet-lurking.wav",
+        "bytes": 24576088,
+        "sha256": "3155f9b775086ede136379363cec279ef475cf1f70116513b52144654486eee1"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.97
+        ],
+        [
+          24.0,
+          0.97
+        ],
+        [
+          36.0,
+          1
+        ],
+        [
+          48.0,
+          1
+        ],
+        [
+          60.0,
+          1.04
+        ],
+        [
+          78.0,
+          1.04
+        ],
+        [
+          90.0,
+          0.94
+        ],
+        [
+          90.0,
+          0.94
+        ],
+        [
+          96.0,
+          0.97
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Tremolo nest walls",
+      "program": 44,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": -31,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/11-boss-brood-pale-nest-Tremolo-nest-walls.wav",
+        "bytes": 24576088,
+        "sha256": "a2196e14e98290a2930cc79b0c5aca9eeafe8f1675622e59e2727d2b058f03a0"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          24.0,
+          0.83
+        ],
+        [
+          36.0,
+          0.92
+        ],
+        [
+          48.0,
+          0.92
+        ],
+        [
+          60.0,
+          0.98
+        ],
+        [
+          78.0,
+          0.98
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Bassoon roots",
+      "program": 70,
+      "bank": 0,
+      "hand": null,
+      "notes": 10,
+      "pan": 22,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/11-boss-brood-pale-nest-Bassoon-roots.wav",
+        "bytes": 24576088,
+        "sha256": "cc63c0e28c56d6eb1a0b5c258b59e26392a664039c7c31fe1693663f2016658a"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.35
+        ],
+        [
+          24.0,
+          0.35
+        ],
+        [
+          36.0,
+          0.8
+        ],
+        [
+          48.0,
+          0.8
+        ],
+        [
+          60.0,
+          0.92
+        ],
+        [
+          78.0,
+          0.92
+        ],
+        [
+          90.0,
+          0.48
+        ],
+        [
+          90.0,
+          0.48
+        ],
+        [
+          96.0,
+          0.35
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Cello crawling answer",
+      "program": 42,
+      "bank": 0,
+      "hand": null,
+      "notes": 32,
+      "pan": 32,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/11-boss-brood-pale-nest-Cello-crawling-answer.wav",
+        "bytes": 24576088,
+        "sha256": "bbe1051228d9aedf9247fa8b9e787bb98cd522e0cccbb3cf3f79ed58480f99ae"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          24.0,
+          0.83
+        ],
+        [
+          36.0,
+          0.92
+        ],
+        [
+          48.0,
+          0.92
+        ],
+        [
+          60.0,
+          0.98
+        ],
+        [
+          78.0,
+          0.98
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Marimba hollow bones",
+      "program": 12,
+      "bank": 0,
+      "hand": null,
+      "notes": 64,
+      "pan": -24,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/11-boss-brood-pale-nest-Marimba-hollow-bones.wav",
+        "bytes": 24576088,
+        "sha256": "96da2a4330073b8006e3e9795429c74fe679ac0f1d4b5c254e50277e5d29b404"
+      },
+      "target_active_rms_dbfs": -38,
+      "continuous_gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          24.0,
+          0.68
+        ],
+        [
+          36.0,
+          0.72
+        ],
+        [
+          48.0,
+          0.72
+        ],
+        [
+          60.0,
+          0.84
+        ],
+        [
+          78.0,
+          0.84
+        ],
+        [
+          90.0,
+          0.58
+        ],
+        [
+          90.0,
+          0.58
+        ],
+        [
+          96.0,
+          0.68
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Viola spores",
+      "program": 41,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/11-boss-brood-pale-nest-Viola-spores.wav",
+        "bytes": 24576088,
+        "sha256": "5f0341161b96192fbd524eb60b103fdd536564fdf80b3d880ac1ccd0c9624e75"
+      },
+      "target_active_rms_dbfs": -38,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          24.0,
+          0.83
+        ],
+        [
+          36.0,
+          0.92
+        ],
+        [
+          48.0,
+          0.92
+        ],
+        [
+          60.0,
+          0.98
+        ],
+        [
+          78.0,
+          0.98
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/11-boss-brood-pale-nest-Steady-low-foundation.wav",
+        "bytes": 24576088,
+        "sha256": "1c5551e444c39b4aaf6e209643888260643bea58a9cf160113e91be7e7d272e4"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          24.0,
+          0.83
+        ],
+        [
+          36.0,
+          0.92
+        ],
+        [
+          48.0,
+          0.92
+        ],
+        [
+          60.0,
+          0.98
+        ],
+        [
+          78.0,
+          0.98
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-8.48",
+    "input_lra": "1.10",
+    "input_thresh": "-28.50",
+    "output_i": "-22.93",
+    "output_tp": "-12.96",
+    "output_lra": "1.20",
+    "output_thresh": "-32.93",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.07"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.3784899048619827,
+      0.372891554346108
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/11-boss-brood-pale-nest.mmp",
+      "bytes": 6757,
+      "sha256": "412f75d84c09947bed554a42e1301b0f7654555da024c5886cdfa63f894ebc59"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/11-boss-brood-pale-nest.wav",
+      "bytes": 18432044,
+      "sha256": "ab06223976b949c171b0bd8ee2b32fc9476c71e4e04d3e170f516f9d3e7809b3"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/11-boss-brood-pale-nest.mp3",
+      "bytes": 2049860,
+      "sha256": "84a577a69b1561a3e10a4d14339eb4c29c41797748f6c6534fa30da9b7ad911d"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/11-boss-brood-pale-nest.ogg",
+      "bytes": 1061633,
+      "sha256": "3edcda5d7d524f4e8bd864612eb316f69ae5a78cfa0b40e8face0dbd0d0ead75"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "opening"
+    },
+    {
+      "start_bar": 10,
+      "name": "first development"
+    },
+    {
+      "start_bar": 18,
+      "name": "contrast"
+    },
+    {
+      "start_bar": 28,
+      "name": "connected return"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed"
+}

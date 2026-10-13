@@ -1,0 +1,4522 @@
+{
+  "title": "影潮交锋",
+  "bpm": 128,
+  "bars": 16,
+  "seconds": 30,
+  "progression": [
+    "Dm",
+    "Dm",
+    "Bb",
+    "Bb",
+    "Gm",
+    "Gm",
+    "A7",
+    "A7",
+    "Dm",
+    "Bb",
+    "Dm",
+    "Bb",
+    "Gm",
+    "A7",
+    "A7",
+    "Dm"
+  ],
+  "sections": [
+    "Entrance",
+    "Entrance",
+    "Statement",
+    "Statement",
+    "Statement",
+    "Statement",
+    "Continuation",
+    "Continuation",
+    "Breathing",
+    "Breathing",
+    "Return",
+    "Return",
+    "Return",
+    "Return",
+    "Cadence",
+    "Cadence"
+  ],
+  "tracks": {
+    "Pizzicato engine": {
+      "program": 45,
+      "bank": 0,
+      "volume": 48,
+      "pan": -18,
+      "notes": 98
+    },
+    "Violin motif": {
+      "program": 40,
+      "bank": 0,
+      "volume": 61,
+      "pan": 12,
+      "notes": 51
+    },
+    "Viola reply": {
+      "program": 41,
+      "bank": 0,
+      "volume": 43,
+      "pan": -22,
+      "notes": 18
+    },
+    "Cello tension": {
+      "program": 42,
+      "bank": 0,
+      "volume": 38,
+      "pan": 15,
+      "notes": 31
+    },
+    "Tine piano": {
+      "program": 4,
+      "bank": 0,
+      "volume": 38,
+      "pan": -12,
+      "notes": 24
+    },
+    "Muted brass answer": {
+      "program": 59,
+      "bank": 0,
+      "volume": 30,
+      "pan": 22,
+      "notes": 8
+    },
+    "Harp transition": {
+      "program": 46,
+      "bank": 0,
+      "volume": 33,
+      "pan": -28,
+      "notes": 16
+    },
+    "Synth bass pulse": {
+      "program": 38,
+      "bank": 0,
+      "volume": 40,
+      "pan": 0,
+      "notes": 64
+    },
+    "Dark glass": {
+      "program": 8,
+      "bank": 0,
+      "volume": 25,
+      "pan": 30,
+      "notes": 8
+    },
+    "Air pad": {
+      "program": 89,
+      "bank": 0,
+      "volume": 17,
+      "pan": 0,
+      "notes": 15
+    },
+    "Electronic broken beat": {
+      "program": 25,
+      "bank": 128,
+      "volume": 39,
+      "pan": 0,
+      "notes": 202
+    },
+    "Low percussion": {
+      "program": 116,
+      "bank": 0,
+      "volume": 23,
+      "pan": 0,
+      "notes": 14
+    }
+  },
+  "events": [
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 0.0,
+      "midi": 57,
+      "length_beats": 0.25,
+      "velocity": 71,
+      "section": "Entrance"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 0.5208333333333334,
+      "midi": 65,
+      "length_beats": 0.25,
+      "velocity": 50,
+      "section": "Entrance"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 1.25,
+      "midi": 62,
+      "length_beats": 0.25,
+      "velocity": 74,
+      "section": "Entrance"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 1.75,
+      "midi": 69,
+      "length_beats": 0.25,
+      "velocity": 53,
+      "section": "Entrance"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 2.4791666666666665,
+      "midi": 57,
+      "length_beats": 0.25,
+      "velocity": 69,
+      "section": "Entrance"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 3.0208333333333335,
+      "midi": 65,
+      "length_beats": 0.25,
+      "velocity": 46,
+      "section": "Entrance"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 3.5,
+      "midi": 62,
+      "length_beats": 0.25,
+      "velocity": 52,
+      "section": "Entrance"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 4.0,
+      "midi": 57,
+      "length_beats": 0.25,
+      "velocity": 69,
+      "section": "Entrance"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 4.479166666666667,
+      "midi": 65,
+      "length_beats": 0.25,
+      "velocity": 49,
+      "section": "Entrance"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 5.25,
+      "midi": 62,
+      "length_beats": 0.25,
+      "velocity": 74,
+      "section": "Entrance"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 5.770833333333333,
+      "midi": 69,
+      "length_beats": 0.25,
+      "velocity": 48,
+      "section": "Entrance"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 6.520833333333333,
+      "midi": 57,
+      "length_beats": 0.25,
+      "velocity": 72,
+      "section": "Entrance"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 7.0,
+      "midi": 65,
+      "length_beats": 0.25,
+      "velocity": 52,
+      "section": "Entrance"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 7.5,
+      "midi": 62,
+      "length_beats": 0.25,
+      "velocity": 52,
+      "section": "Entrance"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 8.0,
+      "midi": 58,
+      "length_beats": 0.25,
+      "velocity": 70,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 8.520833333333334,
+      "midi": 65,
+      "length_beats": 0.25,
+      "velocity": 51,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 9.270833333333334,
+      "midi": 62,
+      "length_beats": 0.25,
+      "velocity": 71,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 9.75,
+      "midi": 69,
+      "length_beats": 0.25,
+      "velocity": 53,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 10.520833333333334,
+      "midi": 58,
+      "length_beats": 0.25,
+      "velocity": 69,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 11.0,
+      "midi": 65,
+      "length_beats": 0.25,
+      "velocity": 46,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 11.520833333333334,
+      "midi": 62,
+      "length_beats": 0.25,
+      "velocity": 48,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 12.0,
+      "midi": 58,
+      "length_beats": 0.25,
+      "velocity": 69,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 12.520833333333334,
+      "midi": 65,
+      "length_beats": 0.25,
+      "velocity": 51,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 13.25,
+      "midi": 62,
+      "length_beats": 0.25,
+      "velocity": 73,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 13.75,
+      "midi": 69,
+      "length_beats": 0.25,
+      "velocity": 49,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 14.479166666666666,
+      "midi": 58,
+      "length_beats": 0.25,
+      "velocity": 70,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 14.979166666666666,
+      "midi": 65,
+      "length_beats": 0.25,
+      "velocity": 51,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 15.5,
+      "midi": 62,
+      "length_beats": 0.25,
+      "velocity": 51,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 16.0,
+      "midi": 58,
+      "length_beats": 0.25,
+      "velocity": 71,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 16.520833333333332,
+      "midi": 67,
+      "length_beats": 0.25,
+      "velocity": 45,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 17.270833333333332,
+      "midi": 62,
+      "length_beats": 0.25,
+      "velocity": 71,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 17.75,
+      "midi": 69,
+      "length_beats": 0.25,
+      "velocity": 51,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 18.5,
+      "midi": 58,
+      "length_beats": 0.25,
+      "velocity": 70,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 18.979166666666668,
+      "midi": 67,
+      "length_beats": 0.25,
+      "velocity": 45,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 19.5,
+      "midi": 62,
+      "length_beats": 0.25,
+      "velocity": 49,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 20.0,
+      "midi": 58,
+      "length_beats": 0.25,
+      "velocity": 72,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 20.479166666666668,
+      "midi": 67,
+      "length_beats": 0.25,
+      "velocity": 52,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 21.229166666666668,
+      "midi": 62,
+      "length_beats": 0.25,
+      "velocity": 70,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 21.729166666666668,
+      "midi": 69,
+      "length_beats": 0.25,
+      "velocity": 47,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 22.5,
+      "midi": 58,
+      "length_beats": 0.25,
+      "velocity": 71,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 22.979166666666668,
+      "midi": 67,
+      "length_beats": 0.25,
+      "velocity": 52,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 23.5,
+      "midi": 62,
+      "length_beats": 0.25,
+      "velocity": 48,
+      "section": "Statement"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 24.020833333333332,
+      "midi": 55,
+      "length_beats": 0.25,
+      "velocity": 74,
+      "section": "Continuation"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 24.520833333333332,
+      "midi": 64,
+      "length_beats": 0.25,
+      "velocity": 52,
+      "section": "Continuation"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 25.25,
+      "midi": 61,
+      "length_beats": 0.25,
+      "velocity": 70,
+      "section": "Continuation"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 25.729166666666668,
+      "midi": 70,
+      "length_beats": 0.25,
+      "velocity": 45,
+      "section": "Continuation"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 26.5,
+      "midi": 55,
+      "length_beats": 0.25,
+      "velocity": 75,
+      "section": "Continuation"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 27.0,
+      "midi": 64,
+      "length_beats": 0.25,
+      "velocity": 53,
+      "section": "Continuation"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 27.479166666666668,
+      "midi": 61,
+      "length_beats": 0.25,
+      "velocity": 47,
+      "section": "Continuation"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 28.0,
+      "midi": 55,
+      "length_beats": 0.25,
+      "velocity": 69,
+      "section": "Continuation"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 28.5,
+      "midi": 64,
+      "length_beats": 0.25,
+      "velocity": 51,
+      "section": "Continuation"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 29.229166666666668,
+      "midi": 61,
+      "length_beats": 0.25,
+      "velocity": 76,
+      "section": "Continuation"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 29.75,
+      "midi": 70,
+      "length_beats": 0.25,
+      "velocity": 49,
+      "section": "Continuation"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 30.5,
+      "midi": 55,
+      "length_beats": 0.25,
+      "velocity": 73,
+      "section": "Continuation"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 30.979166666666668,
+      "midi": 64,
+      "length_beats": 0.25,
+      "velocity": 47,
+      "section": "Continuation"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 31.5,
+      "midi": 61,
+      "length_beats": 0.25,
+      "velocity": 49,
+      "section": "Continuation"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 32.0,
+      "midi": 57,
+      "length_beats": 0.4583333333333333,
+      "velocity": 63,
+      "section": "Breathing"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 33.520833333333336,
+      "midi": 65,
+      "length_beats": 0.4583333333333333,
+      "velocity": 36,
+      "section": "Breathing"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 35.0,
+      "midi": 62,
+      "length_beats": 0.4583333333333333,
+      "velocity": 62,
+      "section": "Breathing"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 36.0,
+      "midi": 58,
+      "length_beats": 0.4583333333333333,
+      "velocity": 61,
+      "section": "Breathing"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 37.479166666666664,
+      "midi": 65,
+      "length_beats": 0.4583333333333333,
+      "velocity": 34,
+      "section": "Breathing"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 39.020833333333336,
+      "midi": 62,
+      "length_beats": 0.4583333333333333,
+      "velocity": 62,
+      "section": "Breathing"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 40.020833333333336,
+      "midi": 69,
+      "length_beats": 0.25,
+      "velocity": 72,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 40.520833333333336,
+      "midi": 77,
+      "length_beats": 0.25,
+      "velocity": 48,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 41.270833333333336,
+      "midi": 74,
+      "length_beats": 0.25,
+      "velocity": 71,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 41.75,
+      "midi": 81,
+      "length_beats": 0.25,
+      "velocity": 46,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 42.479166666666664,
+      "midi": 69,
+      "length_beats": 0.25,
+      "velocity": 69,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 43.0,
+      "midi": 77,
+      "length_beats": 0.25,
+      "velocity": 52,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 43.479166666666664,
+      "midi": 74,
+      "length_beats": 0.25,
+      "velocity": 52,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 44.020833333333336,
+      "midi": 70,
+      "length_beats": 0.25,
+      "velocity": 70,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 44.520833333333336,
+      "midi": 77,
+      "length_beats": 0.25,
+      "velocity": 48,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 45.25,
+      "midi": 74,
+      "length_beats": 0.25,
+      "velocity": 72,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 45.729166666666664,
+      "midi": 81,
+      "length_beats": 0.25,
+      "velocity": 46,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 46.520833333333336,
+      "midi": 70,
+      "length_beats": 0.25,
+      "velocity": 74,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 47.0,
+      "midi": 77,
+      "length_beats": 0.25,
+      "velocity": 47,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 47.520833333333336,
+      "midi": 74,
+      "length_beats": 0.25,
+      "velocity": 52,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 48.0,
+      "midi": 70,
+      "length_beats": 0.25,
+      "velocity": 73,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 48.520833333333336,
+      "midi": 79,
+      "length_beats": 0.25,
+      "velocity": 50,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 49.229166666666664,
+      "midi": 74,
+      "length_beats": 0.25,
+      "velocity": 70,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 49.75,
+      "midi": 81,
+      "length_beats": 0.25,
+      "velocity": 49,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 50.5,
+      "midi": 70,
+      "length_beats": 0.25,
+      "velocity": 69,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 50.979166666666664,
+      "midi": 79,
+      "length_beats": 0.25,
+      "velocity": 48,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 51.479166666666664,
+      "midi": 74,
+      "length_beats": 0.25,
+      "velocity": 52,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 52.020833333333336,
+      "midi": 67,
+      "length_beats": 0.25,
+      "velocity": 73,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 52.5,
+      "midi": 76,
+      "length_beats": 0.25,
+      "velocity": 46,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 53.270833333333336,
+      "midi": 73,
+      "length_beats": 0.25,
+      "velocity": 73,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 53.770833333333336,
+      "midi": 82,
+      "length_beats": 0.25,
+      "velocity": 50,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 54.5,
+      "midi": 67,
+      "length_beats": 0.25,
+      "velocity": 74,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 55.0,
+      "midi": 76,
+      "length_beats": 0.25,
+      "velocity": 48,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 55.520833333333336,
+      "midi": 73,
+      "length_beats": 0.25,
+      "velocity": 48,
+      "section": "Return"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 56.0,
+      "midi": 67,
+      "length_beats": 0.25,
+      "velocity": 69,
+      "section": "Cadence"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 56.520833333333336,
+      "midi": 76,
+      "length_beats": 0.25,
+      "velocity": 50,
+      "section": "Cadence"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 57.25,
+      "midi": 73,
+      "length_beats": 0.25,
+      "velocity": 70,
+      "section": "Cadence"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 57.75,
+      "midi": 82,
+      "length_beats": 0.25,
+      "velocity": 50,
+      "section": "Cadence"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 58.479166666666664,
+      "midi": 67,
+      "length_beats": 0.25,
+      "velocity": 75,
+      "section": "Cadence"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 58.979166666666664,
+      "midi": 76,
+      "length_beats": 0.25,
+      "velocity": 52,
+      "section": "Cadence"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 59.520833333333336,
+      "midi": 73,
+      "length_beats": 0.25,
+      "velocity": 45,
+      "section": "Cadence"
+    },
+    {
+      "track": "Pizzicato engine",
+      "start_beats": 60.0,
+      "midi": 69,
+      "length_beats": 0.25,
+      "velocity": 72,
+      "section": "Cadence"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 8.020833333333334,
+      "midi": 74,
+      "length_beats": 0.6458333333333334,
+      "velocity": 75,
+      "section": "Statement"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 8.75,
+      "midi": 77,
+      "length_beats": 0.4375,
+      "velocity": 66,
+      "section": "Statement"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 9.5,
+      "midi": 76,
+      "length_beats": 0.3958333333333333,
+      "velocity": 67,
+      "section": "Statement"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 10.270833333333334,
+      "midi": 81,
+      "length_beats": 0.9166666666666666,
+      "velocity": 84,
+      "section": "Statement"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 11.479166666666666,
+      "midi": 79,
+      "length_beats": 0.3541666666666667,
+      "velocity": 67,
+      "section": "Statement"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 12.25,
+      "midi": 77,
+      "length_beats": 0.7291666666666666,
+      "velocity": 75,
+      "section": "Statement"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 13.25,
+      "midi": 74,
+      "length_beats": 0.6458333333333334,
+      "velocity": 68,
+      "section": "Statement"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 14.25,
+      "midi": 72,
+      "length_beats": 0.4166666666666667,
+      "velocity": 63,
+      "section": "Statement"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 15.020833333333334,
+      "midi": 74,
+      "length_beats": 0.8125,
+      "velocity": 73,
+      "section": "Statement"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 16.020833333333332,
+      "midi": 74,
+      "length_beats": 0.6458333333333334,
+      "velocity": 81,
+      "section": "Statement"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 16.770833333333332,
+      "midi": 77,
+      "length_beats": 0.4375,
+      "velocity": 73,
+      "section": "Statement"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 17.5,
+      "midi": 79,
+      "length_beats": 0.3958333333333333,
+      "velocity": 67,
+      "section": "Statement"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 18.25,
+      "midi": 82,
+      "length_beats": 0.9166666666666666,
+      "velocity": 81,
+      "section": "Statement"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 19.520833333333332,
+      "midi": 81,
+      "length_beats": 0.3541666666666667,
+      "velocity": 67,
+      "section": "Statement"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 20.270833333333332,
+      "midi": 79,
+      "length_beats": 0.7083333333333334,
+      "velocity": 80,
+      "section": "Statement"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 21.25,
+      "midi": 77,
+      "length_beats": 0.6458333333333334,
+      "velocity": 67,
+      "section": "Statement"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 22.25,
+      "midi": 74,
+      "length_beats": 0.4166666666666667,
+      "velocity": 61,
+      "section": "Statement"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 23.020833333333332,
+      "midi": 76,
+      "length_beats": 0.7916666666666666,
+      "velocity": 74,
+      "section": "Statement"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 24.020833333333332,
+      "midi": 76,
+      "length_beats": 0.4166666666666667,
+      "velocity": 76,
+      "section": "Continuation"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 24.770833333333332,
+      "midi": 73,
+      "length_beats": 0.4375,
+      "velocity": 70,
+      "section": "Continuation"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 25.479166666666668,
+      "midi": 76,
+      "length_beats": 0.4375,
+      "velocity": 74,
+      "section": "Continuation"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 26.25,
+      "midi": 79,
+      "length_beats": 0.4375,
+      "velocity": 82,
+      "section": "Continuation"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 27.020833333333332,
+      "midi": 77,
+      "length_beats": 0.6458333333333334,
+      "velocity": 71,
+      "section": "Continuation"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 28.020833333333332,
+      "midi": 76,
+      "length_beats": 0.3958333333333333,
+      "velocity": 76,
+      "section": "Continuation"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 28.729166666666668,
+      "midi": 73,
+      "length_beats": 0.3958333333333333,
+      "velocity": 66,
+      "section": "Continuation"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 29.5,
+      "midi": 70,
+      "length_beats": 0.3958333333333333,
+      "velocity": 61,
+      "section": "Continuation"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 30.270833333333332,
+      "midi": 69,
+      "length_beats": 1.25,
+      "velocity": 67,
+      "section": "Continuation"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 40.0,
+      "midi": 74,
+      "length_beats": 0.6458333333333334,
+      "velocity": 82,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 40.75,
+      "midi": 77,
+      "length_beats": 0.4375,
+      "velocity": 79,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 41.5,
+      "midi": 76,
+      "length_beats": 0.3958333333333333,
+      "velocity": 72,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 42.25,
+      "midi": 81,
+      "length_beats": 0.9166666666666666,
+      "velocity": 81,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 43.520833333333336,
+      "midi": 79,
+      "length_beats": 0.3541666666666667,
+      "velocity": 71,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 44.229166666666664,
+      "midi": 77,
+      "length_beats": 0.7083333333333334,
+      "velocity": 82,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 45.229166666666664,
+      "midi": 74,
+      "length_beats": 0.625,
+      "velocity": 72,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 46.229166666666664,
+      "midi": 72,
+      "length_beats": 0.3958333333333333,
+      "velocity": 67,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 47.0,
+      "midi": 74,
+      "length_beats": 0.7916666666666666,
+      "velocity": 84,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 48.0,
+      "midi": 79,
+      "length_beats": 0.6458333333333334,
+      "velocity": 84,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 48.770833333333336,
+      "midi": 82,
+      "length_beats": 0.4375,
+      "velocity": 81,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 49.520833333333336,
+      "midi": 81,
+      "length_beats": 0.3958333333333333,
+      "velocity": 74,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 50.229166666666664,
+      "midi": 86,
+      "length_beats": 0.875,
+      "velocity": 82,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 51.5,
+      "midi": 84,
+      "length_beats": 0.3541666666666667,
+      "velocity": 72,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 52.0,
+      "midi": 85,
+      "length_beats": 0.4166666666666667,
+      "velocity": 83,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 52.770833333333336,
+      "midi": 82,
+      "length_beats": 0.4166666666666667,
+      "velocity": 74,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 53.5,
+      "midi": 81,
+      "length_beats": 0.6458333333333334,
+      "velocity": 79,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 54.5,
+      "midi": 79,
+      "length_beats": 0.4375,
+      "velocity": 73,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 55.25,
+      "midi": 76,
+      "length_beats": 0.5416666666666666,
+      "velocity": 71,
+      "section": "Return"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 56.0,
+      "midi": 77,
+      "length_beats": 0.6458333333333334,
+      "velocity": 78,
+      "section": "Cadence"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 56.770833333333336,
+      "midi": 76,
+      "length_beats": 0.6458333333333334,
+      "velocity": 71,
+      "section": "Cadence"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 57.5,
+      "midi": 73,
+      "length_beats": 0.6666666666666666,
+      "velocity": 71,
+      "section": "Cadence"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 58.479166666666664,
+      "midi": 69,
+      "length_beats": 0.8958333333333334,
+      "velocity": 62,
+      "section": "Cadence"
+    },
+    {
+      "track": "Violin motif",
+      "start_beats": 60.0,
+      "midi": 74,
+      "length_beats": 3.2083333333333335,
+      "velocity": 71,
+      "section": "Cadence"
+    },
+    {
+      "track": "Viola reply",
+      "start_beats": 6.0,
+      "midi": 62,
+      "length_beats": 0.6458333333333334,
+      "velocity": 59,
+      "section": "Contrary-register response"
+    },
+    {
+      "track": "Viola reply",
+      "start_beats": 6.75,
+      "midi": 65,
+      "length_beats": 0.5416666666666666,
+      "velocity": 66,
+      "section": "Contrary-register response"
+    },
+    {
+      "track": "Viola reply",
+      "start_beats": 7.479166666666667,
+      "midi": 62,
+      "length_beats": 0.3958333333333333,
+      "velocity": 50,
+      "section": "Contrary-register response"
+    },
+    {
+      "track": "Viola reply",
+      "start_beats": 14.0,
+      "midi": 62,
+      "length_beats": 0.6458333333333334,
+      "velocity": 55,
+      "section": "Contrary-register response"
+    },
+    {
+      "track": "Viola reply",
+      "start_beats": 14.729166666666666,
+      "midi": 65,
+      "length_beats": 0.5416666666666666,
+      "velocity": 64,
+      "section": "Contrary-register response"
+    },
+    {
+      "track": "Viola reply",
+      "start_beats": 15.520833333333334,
+      "midi": 62,
+      "length_beats": 0.3958333333333333,
+      "velocity": 55,
+      "section": "Contrary-register response"
+    },
+    {
+      "track": "Viola reply",
+      "start_beats": 22.0,
+      "midi": 62,
+      "length_beats": 0.6458333333333334,
+      "velocity": 56,
+      "section": "Contrary-register response"
+    },
+    {
+      "track": "Viola reply",
+      "start_beats": 22.729166666666668,
+      "midi": 67,
+      "length_beats": 0.5416666666666666,
+      "velocity": 61,
+      "section": "Contrary-register response"
+    },
+    {
+      "track": "Viola reply",
+      "start_beats": 23.520833333333332,
+      "midi": 62,
+      "length_beats": 0.3958333333333333,
+      "velocity": 55,
+      "section": "Contrary-register response"
+    },
+    {
+      "track": "Viola reply",
+      "start_beats": 38.020833333333336,
+      "midi": 62,
+      "length_beats": 0.6458333333333334,
+      "velocity": 58,
+      "section": "Contrary-register response"
+    },
+    {
+      "track": "Viola reply",
+      "start_beats": 38.770833333333336,
+      "midi": 65,
+      "length_beats": 0.5416666666666666,
+      "velocity": 62,
+      "section": "Contrary-register response"
+    },
+    {
+      "track": "Viola reply",
+      "start_beats": 39.520833333333336,
+      "midi": 62,
+      "length_beats": 0.3958333333333333,
+      "velocity": 50,
+      "section": "Contrary-register response"
+    },
+    {
+      "track": "Viola reply",
+      "start_beats": 46.0,
+      "midi": 62,
+      "length_beats": 0.6458333333333334,
+      "velocity": 59,
+      "section": "Contrary-register response"
+    },
+    {
+      "track": "Viola reply",
+      "start_beats": 46.75,
+      "midi": 65,
+      "length_beats": 0.5416666666666666,
+      "velocity": 62,
+      "section": "Contrary-register response"
+    },
+    {
+      "track": "Viola reply",
+      "start_beats": 47.479166666666664,
+      "midi": 62,
+      "length_beats": 0.3958333333333333,
+      "velocity": 49,
+      "section": "Contrary-register response"
+    },
+    {
+      "track": "Viola reply",
+      "start_beats": 54.0,
+      "midi": 61,
+      "length_beats": 0.6458333333333334,
+      "velocity": 61,
+      "section": "Contrary-register response"
+    },
+    {
+      "track": "Viola reply",
+      "start_beats": 54.729166666666664,
+      "midi": 64,
+      "length_beats": 0.5416666666666666,
+      "velocity": 62,
+      "section": "Contrary-register response"
+    },
+    {
+      "track": "Viola reply",
+      "start_beats": 55.5,
+      "midi": 61,
+      "length_beats": 0.3958333333333333,
+      "velocity": 48,
+      "section": "Contrary-register response"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 0.020833333333333332,
+      "midi": 50,
+      "length_beats": 1.6041666666666667,
+      "velocity": 56,
+      "section": "Entrance"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 2.1041666666666665,
+      "midi": 57,
+      "length_beats": 1.5,
+      "velocity": 45,
+      "section": "Entrance"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 4.020833333333333,
+      "midi": 50,
+      "length_beats": 1.6041666666666667,
+      "velocity": 59,
+      "section": "Entrance"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 6.083333333333333,
+      "midi": 57,
+      "length_beats": 1.5,
+      "velocity": 43,
+      "section": "Entrance"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 8.0,
+      "midi": 46,
+      "length_beats": 1.6041666666666667,
+      "velocity": 54,
+      "section": "Statement"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 10.104166666666666,
+      "midi": 53,
+      "length_beats": 1.5,
+      "velocity": 48,
+      "section": "Statement"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 12.0,
+      "midi": 46,
+      "length_beats": 1.6041666666666667,
+      "velocity": 61,
+      "section": "Statement"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 14.083333333333334,
+      "midi": 53,
+      "length_beats": 1.5,
+      "velocity": 42,
+      "section": "Statement"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 16.0,
+      "midi": 43,
+      "length_beats": 1.6041666666666667,
+      "velocity": 57,
+      "section": "Statement"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 18.083333333333332,
+      "midi": 50,
+      "length_beats": 1.5,
+      "velocity": 49,
+      "section": "Statement"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 20.0,
+      "midi": 43,
+      "length_beats": 1.6041666666666667,
+      "velocity": 61,
+      "section": "Statement"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 22.083333333333332,
+      "midi": 50,
+      "length_beats": 1.5,
+      "velocity": 44,
+      "section": "Statement"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 24.0,
+      "midi": 45,
+      "length_beats": 1.6041666666666667,
+      "velocity": 61,
+      "section": "Continuation"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 26.083333333333332,
+      "midi": 52,
+      "length_beats": 1.5,
+      "velocity": 44,
+      "section": "Continuation"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 28.020833333333332,
+      "midi": 45,
+      "length_beats": 1.6041666666666667,
+      "velocity": 58,
+      "section": "Continuation"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 30.104166666666668,
+      "midi": 52,
+      "length_beats": 1.5,
+      "velocity": 48,
+      "section": "Continuation"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 32.0,
+      "midi": 50,
+      "length_beats": 1.6041666666666667,
+      "velocity": 59,
+      "section": "Breathing"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 34.083333333333336,
+      "midi": 57,
+      "length_beats": 1.5,
+      "velocity": 48,
+      "section": "Breathing"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 36.020833333333336,
+      "midi": 46,
+      "length_beats": 1.6041666666666667,
+      "velocity": 61,
+      "section": "Breathing"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 38.104166666666664,
+      "midi": 53,
+      "length_beats": 1.5,
+      "velocity": 42,
+      "section": "Breathing"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 40.0,
+      "midi": 50,
+      "length_beats": 1.6041666666666667,
+      "velocity": 55,
+      "section": "Return"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 42.104166666666664,
+      "midi": 57,
+      "length_beats": 1.5,
+      "velocity": 47,
+      "section": "Return"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 44.0,
+      "midi": 46,
+      "length_beats": 1.6041666666666667,
+      "velocity": 60,
+      "section": "Return"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 46.083333333333336,
+      "midi": 53,
+      "length_beats": 1.5,
+      "velocity": 47,
+      "section": "Return"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 48.0,
+      "midi": 43,
+      "length_beats": 1.6041666666666667,
+      "velocity": 56,
+      "section": "Return"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 50.104166666666664,
+      "midi": 50,
+      "length_beats": 1.5,
+      "velocity": 46,
+      "section": "Return"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 52.0,
+      "midi": 45,
+      "length_beats": 1.6041666666666667,
+      "velocity": 55,
+      "section": "Return"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 54.104166666666664,
+      "midi": 52,
+      "length_beats": 1.5,
+      "velocity": 48,
+      "section": "Return"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 56.020833333333336,
+      "midi": 45,
+      "length_beats": 1.6041666666666667,
+      "velocity": 55,
+      "section": "Cadence"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 58.083333333333336,
+      "midi": 52,
+      "length_beats": 1.5,
+      "velocity": 42,
+      "section": "Cadence"
+    },
+    {
+      "track": "Cello tension",
+      "start_beats": 60.0,
+      "midi": 50,
+      "length_beats": 3.1041666666666665,
+      "velocity": 50,
+      "section": "Cadence"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 0.020833333333333332,
+      "midi": 57,
+      "length_beats": 1.1041666666666667,
+      "velocity": 60,
+      "section": "Entrance"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 0.7291666666666666,
+      "midi": 62,
+      "length_beats": 1.1041666666666667,
+      "velocity": 46,
+      "section": "Entrance"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 1.7291666666666667,
+      "midi": 65,
+      "length_beats": 1.1041666666666667,
+      "velocity": 39,
+      "section": "Entrance"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 2.5,
+      "midi": 69,
+      "length_beats": 1.1041666666666667,
+      "velocity": 47,
+      "section": "Entrance"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 4.020833333333333,
+      "midi": 57,
+      "length_beats": 1.1041666666666667,
+      "velocity": 54,
+      "section": "Entrance"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 4.770833333333333,
+      "midi": 62,
+      "length_beats": 1.1041666666666667,
+      "velocity": 41,
+      "section": "Entrance"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 5.770833333333333,
+      "midi": 65,
+      "length_beats": 1.1041666666666667,
+      "velocity": 45,
+      "section": "Entrance"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 6.479166666666667,
+      "midi": 69,
+      "length_beats": 1.1041666666666667,
+      "velocity": 46,
+      "section": "Entrance"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 32.0,
+      "midi": 57,
+      "length_beats": 1.1041666666666667,
+      "velocity": 54,
+      "section": "Breathing"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 32.75,
+      "midi": 62,
+      "length_beats": 1.1041666666666667,
+      "velocity": 44,
+      "section": "Breathing"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 33.729166666666664,
+      "midi": 65,
+      "length_beats": 1.1041666666666667,
+      "velocity": 43,
+      "section": "Breathing"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 34.5,
+      "midi": 69,
+      "length_beats": 1.1041666666666667,
+      "velocity": 45,
+      "section": "Breathing"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 36.0,
+      "midi": 58,
+      "length_beats": 1.1041666666666667,
+      "velocity": 57,
+      "section": "Breathing"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 36.75,
+      "midi": 62,
+      "length_beats": 1.1041666666666667,
+      "velocity": 47,
+      "section": "Breathing"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 37.729166666666664,
+      "midi": 65,
+      "length_beats": 1.1041666666666667,
+      "velocity": 42,
+      "section": "Breathing"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 38.5,
+      "midi": 69,
+      "length_beats": 1.1041666666666667,
+      "velocity": 42,
+      "section": "Breathing"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 56.020833333333336,
+      "midi": 55,
+      "length_beats": 1.1041666666666667,
+      "velocity": 56,
+      "section": "Cadence"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 56.770833333333336,
+      "midi": 61,
+      "length_beats": 1.1041666666666667,
+      "velocity": 46,
+      "section": "Cadence"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 57.729166666666664,
+      "midi": 64,
+      "length_beats": 1.1041666666666667,
+      "velocity": 41,
+      "section": "Cadence"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 58.5,
+      "midi": 70,
+      "length_beats": 1.1041666666666667,
+      "velocity": 40,
+      "section": "Cadence"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 60.0,
+      "midi": 57,
+      "length_beats": 1.1041666666666667,
+      "velocity": 57,
+      "section": "Cadence"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 60.75,
+      "midi": 62,
+      "length_beats": 1.1041666666666667,
+      "velocity": 43,
+      "section": "Cadence"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 61.75,
+      "midi": 65,
+      "length_beats": 1.1041666666666667,
+      "velocity": 46,
+      "section": "Cadence"
+    },
+    {
+      "track": "Tine piano",
+      "start_beats": 62.5,
+      "midi": 69,
+      "length_beats": 1.1041666666666667,
+      "velocity": 39,
+      "section": "Cadence"
+    },
+    {
+      "track": "Muted brass answer",
+      "start_beats": 22.25,
+      "midi": 79,
+      "length_beats": 0.5416666666666666,
+      "velocity": 53,
+      "section": "Short offbeat brass reply"
+    },
+    {
+      "track": "Muted brass answer",
+      "start_beats": 23.020833333333332,
+      "midi": 74,
+      "length_beats": 0.7083333333333334,
+      "velocity": 48,
+      "section": "Short offbeat brass reply"
+    },
+    {
+      "track": "Muted brass answer",
+      "start_beats": 30.25,
+      "midi": 76,
+      "length_beats": 0.5416666666666666,
+      "velocity": 55,
+      "section": "Short offbeat brass reply"
+    },
+    {
+      "track": "Muted brass answer",
+      "start_beats": 30.979166666666668,
+      "midi": 73,
+      "length_beats": 0.7083333333333334,
+      "velocity": 52,
+      "section": "Short offbeat brass reply"
+    },
+    {
+      "track": "Muted brass answer",
+      "start_beats": 46.229166666666664,
+      "midi": 77,
+      "length_beats": 0.5416666666666666,
+      "velocity": 56,
+      "section": "Short offbeat brass reply"
+    },
+    {
+      "track": "Muted brass answer",
+      "start_beats": 46.979166666666664,
+      "midi": 74,
+      "length_beats": 0.7083333333333334,
+      "velocity": 47,
+      "section": "Short offbeat brass reply"
+    },
+    {
+      "track": "Muted brass answer",
+      "start_beats": 54.25,
+      "midi": 76,
+      "length_beats": 0.5416666666666666,
+      "velocity": 59,
+      "section": "Short offbeat brass reply"
+    },
+    {
+      "track": "Muted brass answer",
+      "start_beats": 55.020833333333336,
+      "midi": 73,
+      "length_beats": 0.7083333333333334,
+      "velocity": 46,
+      "section": "Short offbeat brass reply"
+    },
+    {
+      "track": "Harp transition",
+      "start_beats": 6.75,
+      "midi": 69,
+      "length_beats": 0.6041666666666666,
+      "velocity": 44,
+      "section": "Harmonic pickup"
+    },
+    {
+      "track": "Harp transition",
+      "start_beats": 6.916666666666667,
+      "midi": 74,
+      "length_beats": 0.6041666666666666,
+      "velocity": 49,
+      "section": "Harmonic pickup"
+    },
+    {
+      "track": "Harp transition",
+      "start_beats": 7.104166666666667,
+      "midi": 77,
+      "length_beats": 0.6041666666666666,
+      "velocity": 54,
+      "section": "Harmonic pickup"
+    },
+    {
+      "track": "Harp transition",
+      "start_beats": 7.270833333333333,
+      "midi": 81,
+      "length_beats": 0.6041666666666666,
+      "velocity": 54,
+      "section": "Harmonic pickup"
+    },
+    {
+      "track": "Harp transition",
+      "start_beats": 30.75,
+      "midi": 67,
+      "length_beats": 0.6041666666666666,
+      "velocity": 50,
+      "section": "Harmonic pickup"
+    },
+    {
+      "track": "Harp transition",
+      "start_beats": 30.916666666666668,
+      "midi": 73,
+      "length_beats": 0.6041666666666666,
+      "velocity": 50,
+      "section": "Harmonic pickup"
+    },
+    {
+      "track": "Harp transition",
+      "start_beats": 31.125,
+      "midi": 76,
+      "length_beats": 0.6041666666666666,
+      "velocity": 51,
+      "section": "Harmonic pickup"
+    },
+    {
+      "track": "Harp transition",
+      "start_beats": 31.291666666666668,
+      "midi": 82,
+      "length_beats": 0.6041666666666666,
+      "velocity": 57,
+      "section": "Harmonic pickup"
+    },
+    {
+      "track": "Harp transition",
+      "start_beats": 38.770833333333336,
+      "midi": 70,
+      "length_beats": 0.6041666666666666,
+      "velocity": 44,
+      "section": "Harmonic pickup"
+    },
+    {
+      "track": "Harp transition",
+      "start_beats": 38.916666666666664,
+      "midi": 74,
+      "length_beats": 0.6041666666666666,
+      "velocity": 47,
+      "section": "Harmonic pickup"
+    },
+    {
+      "track": "Harp transition",
+      "start_beats": 39.104166666666664,
+      "midi": 77,
+      "length_beats": 0.6041666666666666,
+      "velocity": 53,
+      "section": "Harmonic pickup"
+    },
+    {
+      "track": "Harp transition",
+      "start_beats": 39.291666666666664,
+      "midi": 81,
+      "length_beats": 0.6041666666666666,
+      "velocity": 53,
+      "section": "Harmonic pickup"
+    },
+    {
+      "track": "Harp transition",
+      "start_beats": 54.75,
+      "midi": 67,
+      "length_beats": 0.6041666666666666,
+      "velocity": 45,
+      "section": "Harmonic pickup"
+    },
+    {
+      "track": "Harp transition",
+      "start_beats": 54.916666666666664,
+      "midi": 73,
+      "length_beats": 0.6041666666666666,
+      "velocity": 51,
+      "section": "Harmonic pickup"
+    },
+    {
+      "track": "Harp transition",
+      "start_beats": 55.104166666666664,
+      "midi": 76,
+      "length_beats": 0.6041666666666666,
+      "velocity": 52,
+      "section": "Harmonic pickup"
+    },
+    {
+      "track": "Harp transition",
+      "start_beats": 55.291666666666664,
+      "midi": 82,
+      "length_beats": 0.6041666666666666,
+      "velocity": 60,
+      "section": "Harmonic pickup"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 0.0,
+      "midi": 38,
+      "length_beats": 0.375,
+      "velocity": 79,
+      "section": "Entrance"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 0.7708333333333334,
+      "midi": 38,
+      "length_beats": 0.375,
+      "velocity": 60,
+      "section": "Entrance"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 1.5,
+      "midi": 38,
+      "length_beats": 0.375,
+      "velocity": 59,
+      "section": "Entrance"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 2.75,
+      "midi": 38,
+      "length_beats": 0.375,
+      "velocity": 62,
+      "section": "Entrance"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 3.4791666666666665,
+      "midi": 50,
+      "length_beats": 0.375,
+      "velocity": 61,
+      "section": "Entrance"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 4.0,
+      "midi": 38,
+      "length_beats": 0.375,
+      "velocity": 84,
+      "section": "Entrance"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 5.25,
+      "midi": 38,
+      "length_beats": 0.375,
+      "velocity": 61,
+      "section": "Entrance"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 6.479166666666667,
+      "midi": 38,
+      "length_beats": 0.375,
+      "velocity": 64,
+      "section": "Entrance"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 7.25,
+      "midi": 38,
+      "length_beats": 0.375,
+      "velocity": 60,
+      "section": "Entrance"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 8.0,
+      "midi": 34,
+      "length_beats": 0.375,
+      "velocity": 78,
+      "section": "Statement"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 8.75,
+      "midi": 34,
+      "length_beats": 0.375,
+      "velocity": 59,
+      "section": "Statement"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 9.5,
+      "midi": 34,
+      "length_beats": 0.375,
+      "velocity": 64,
+      "section": "Statement"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 10.770833333333334,
+      "midi": 34,
+      "length_beats": 0.375,
+      "velocity": 60,
+      "section": "Statement"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 11.520833333333334,
+      "midi": 46,
+      "length_beats": 0.375,
+      "velocity": 57,
+      "section": "Statement"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 12.0,
+      "midi": 34,
+      "length_beats": 0.375,
+      "velocity": 80,
+      "section": "Statement"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 13.25,
+      "midi": 34,
+      "length_beats": 0.375,
+      "velocity": 60,
+      "section": "Statement"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 14.520833333333334,
+      "midi": 34,
+      "length_beats": 0.375,
+      "velocity": 60,
+      "section": "Statement"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 15.25,
+      "midi": 34,
+      "length_beats": 0.375,
+      "velocity": 59,
+      "section": "Statement"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 16.0,
+      "midi": 31,
+      "length_beats": 0.375,
+      "velocity": 79,
+      "section": "Statement"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 16.75,
+      "midi": 31,
+      "length_beats": 0.375,
+      "velocity": 61,
+      "section": "Statement"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 17.520833333333332,
+      "midi": 31,
+      "length_beats": 0.375,
+      "velocity": 56,
+      "section": "Statement"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 18.729166666666668,
+      "midi": 31,
+      "length_beats": 0.375,
+      "velocity": 56,
+      "section": "Statement"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 19.520833333333332,
+      "midi": 43,
+      "length_beats": 0.375,
+      "velocity": 57,
+      "section": "Statement"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 20.0,
+      "midi": 31,
+      "length_beats": 0.375,
+      "velocity": 81,
+      "section": "Statement"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 21.229166666666668,
+      "midi": 31,
+      "length_beats": 0.375,
+      "velocity": 58,
+      "section": "Statement"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 22.520833333333332,
+      "midi": 31,
+      "length_beats": 0.375,
+      "velocity": 61,
+      "section": "Statement"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 23.25,
+      "midi": 31,
+      "length_beats": 0.375,
+      "velocity": 59,
+      "section": "Statement"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 24.0,
+      "midi": 33,
+      "length_beats": 0.375,
+      "velocity": 82,
+      "section": "Continuation"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 24.729166666666668,
+      "midi": 33,
+      "length_beats": 0.375,
+      "velocity": 57,
+      "section": "Continuation"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 25.520833333333332,
+      "midi": 33,
+      "length_beats": 0.375,
+      "velocity": 59,
+      "section": "Continuation"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 26.75,
+      "midi": 33,
+      "length_beats": 0.375,
+      "velocity": 62,
+      "section": "Continuation"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 27.5,
+      "midi": 45,
+      "length_beats": 0.375,
+      "velocity": 60,
+      "section": "Continuation"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 28.0,
+      "midi": 33,
+      "length_beats": 0.375,
+      "velocity": 85,
+      "section": "Continuation"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 29.270833333333332,
+      "midi": 33,
+      "length_beats": 0.375,
+      "velocity": 57,
+      "section": "Continuation"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 30.479166666666668,
+      "midi": 33,
+      "length_beats": 0.375,
+      "velocity": 62,
+      "section": "Continuation"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 31.25,
+      "midi": 33,
+      "length_beats": 0.375,
+      "velocity": 61,
+      "section": "Continuation"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 32.020833333333336,
+      "midi": 38,
+      "length_beats": 0.8541666666666666,
+      "velocity": 84,
+      "section": "Breathing"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 34.5,
+      "midi": 38,
+      "length_beats": 0.8541666666666666,
+      "velocity": 61,
+      "section": "Breathing"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 36.020833333333336,
+      "midi": 34,
+      "length_beats": 0.8541666666666666,
+      "velocity": 78,
+      "section": "Breathing"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 38.520833333333336,
+      "midi": 34,
+      "length_beats": 0.8541666666666666,
+      "velocity": 63,
+      "section": "Breathing"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 40.020833333333336,
+      "midi": 38,
+      "length_beats": 0.375,
+      "velocity": 79,
+      "section": "Return"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 40.770833333333336,
+      "midi": 38,
+      "length_beats": 0.375,
+      "velocity": 56,
+      "section": "Return"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 41.520833333333336,
+      "midi": 38,
+      "length_beats": 0.375,
+      "velocity": 57,
+      "section": "Return"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 42.729166666666664,
+      "midi": 38,
+      "length_beats": 0.375,
+      "velocity": 60,
+      "section": "Return"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 43.5,
+      "midi": 50,
+      "length_beats": 0.375,
+      "velocity": 60,
+      "section": "Return"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 44.020833333333336,
+      "midi": 34,
+      "length_beats": 0.375,
+      "velocity": 78,
+      "section": "Return"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 45.25,
+      "midi": 34,
+      "length_beats": 0.375,
+      "velocity": 61,
+      "section": "Return"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 46.479166666666664,
+      "midi": 34,
+      "length_beats": 0.375,
+      "velocity": 61,
+      "section": "Return"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 47.25,
+      "midi": 34,
+      "length_beats": 0.375,
+      "velocity": 57,
+      "section": "Return"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 48.020833333333336,
+      "midi": 31,
+      "length_beats": 0.375,
+      "velocity": 84,
+      "section": "Return"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 48.75,
+      "midi": 31,
+      "length_beats": 0.375,
+      "velocity": 63,
+      "section": "Return"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 49.5,
+      "midi": 31,
+      "length_beats": 0.375,
+      "velocity": 62,
+      "section": "Return"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 50.770833333333336,
+      "midi": 31,
+      "length_beats": 0.375,
+      "velocity": 63,
+      "section": "Return"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 51.5,
+      "midi": 43,
+      "length_beats": 0.375,
+      "velocity": 60,
+      "section": "Return"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 52.0,
+      "midi": 33,
+      "length_beats": 0.375,
+      "velocity": 77,
+      "section": "Return"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 53.25,
+      "midi": 33,
+      "length_beats": 0.375,
+      "velocity": 63,
+      "section": "Return"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 54.520833333333336,
+      "midi": 33,
+      "length_beats": 0.375,
+      "velocity": 62,
+      "section": "Return"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 55.270833333333336,
+      "midi": 33,
+      "length_beats": 0.375,
+      "velocity": 63,
+      "section": "Return"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 56.0,
+      "midi": 33,
+      "length_beats": 0.375,
+      "velocity": 80,
+      "section": "Cadence"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 56.729166666666664,
+      "midi": 33,
+      "length_beats": 0.375,
+      "velocity": 58,
+      "section": "Cadence"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 57.520833333333336,
+      "midi": 33,
+      "length_beats": 0.375,
+      "velocity": 60,
+      "section": "Cadence"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 58.770833333333336,
+      "midi": 33,
+      "length_beats": 0.375,
+      "velocity": 61,
+      "section": "Cadence"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 59.5,
+      "midi": 45,
+      "length_beats": 0.375,
+      "velocity": 61,
+      "section": "Cadence"
+    },
+    {
+      "track": "Synth bass pulse",
+      "start_beats": 60.0,
+      "midi": 38,
+      "length_beats": 0.375,
+      "velocity": 78,
+      "section": "Cadence"
+    },
+    {
+      "track": "Dark glass",
+      "start_beats": 5.75,
+      "midi": 89,
+      "length_beats": 0.7916666666666666,
+      "velocity": 49,
+      "section": "Distant point accents"
+    },
+    {
+      "track": "Dark glass",
+      "start_beats": 7.25,
+      "midi": 86,
+      "length_beats": 0.7083333333333334,
+      "velocity": 45,
+      "section": "Distant point accents"
+    },
+    {
+      "track": "Dark glass",
+      "start_beats": 21.75,
+      "midi": 91,
+      "length_beats": 0.7916666666666666,
+      "velocity": 53,
+      "section": "Distant point accents"
+    },
+    {
+      "track": "Dark glass",
+      "start_beats": 23.25,
+      "midi": 86,
+      "length_beats": 0.7083333333333334,
+      "velocity": 42,
+      "section": "Distant point accents"
+    },
+    {
+      "track": "Dark glass",
+      "start_beats": 37.770833333333336,
+      "midi": 89,
+      "length_beats": 0.7916666666666666,
+      "velocity": 50,
+      "section": "Distant point accents"
+    },
+    {
+      "track": "Dark glass",
+      "start_beats": 39.229166666666664,
+      "midi": 86,
+      "length_beats": 0.7083333333333334,
+      "velocity": 42,
+      "section": "Distant point accents"
+    },
+    {
+      "track": "Dark glass",
+      "start_beats": 45.75,
+      "midi": 89,
+      "length_beats": 0.7916666666666666,
+      "velocity": 53,
+      "section": "Distant point accents"
+    },
+    {
+      "track": "Dark glass",
+      "start_beats": 47.270833333333336,
+      "midi": 86,
+      "length_beats": 0.7083333333333334,
+      "velocity": 47,
+      "section": "Distant point accents"
+    },
+    {
+      "track": "Air pad",
+      "start_beats": 0.0,
+      "midi": 62,
+      "length_beats": 7.708333333333333,
+      "velocity": 42,
+      "section": "Quiet harmonic air"
+    },
+    {
+      "track": "Air pad",
+      "start_beats": 0.0,
+      "midi": 65,
+      "length_beats": 7.708333333333333,
+      "velocity": 47,
+      "section": "Quiet harmonic air"
+    },
+    {
+      "track": "Air pad",
+      "start_beats": 0.0,
+      "midi": 69,
+      "length_beats": 7.708333333333333,
+      "velocity": 42,
+      "section": "Quiet harmonic air"
+    },
+    {
+      "track": "Air pad",
+      "start_beats": 16.0,
+      "midi": 62,
+      "length_beats": 7.708333333333333,
+      "velocity": 43,
+      "section": "Quiet harmonic air"
+    },
+    {
+      "track": "Air pad",
+      "start_beats": 16.020833333333332,
+      "midi": 67,
+      "length_beats": 7.708333333333333,
+      "velocity": 49,
+      "section": "Quiet harmonic air"
+    },
+    {
+      "track": "Air pad",
+      "start_beats": 16.020833333333332,
+      "midi": 69,
+      "length_beats": 7.708333333333333,
+      "velocity": 46,
+      "section": "Quiet harmonic air"
+    },
+    {
+      "track": "Air pad",
+      "start_beats": 32.0,
+      "midi": 62,
+      "length_beats": 7.708333333333333,
+      "velocity": 45,
+      "section": "Quiet harmonic air"
+    },
+    {
+      "track": "Air pad",
+      "start_beats": 32.020833333333336,
+      "midi": 65,
+      "length_beats": 7.708333333333333,
+      "velocity": 45,
+      "section": "Quiet harmonic air"
+    },
+    {
+      "track": "Air pad",
+      "start_beats": 32.0,
+      "midi": 69,
+      "length_beats": 7.708333333333333,
+      "velocity": 42,
+      "section": "Quiet harmonic air"
+    },
+    {
+      "track": "Air pad",
+      "start_beats": 40.0,
+      "midi": 62,
+      "length_beats": 7.708333333333333,
+      "velocity": 46,
+      "section": "Quiet harmonic air"
+    },
+    {
+      "track": "Air pad",
+      "start_beats": 40.0,
+      "midi": 65,
+      "length_beats": 7.708333333333333,
+      "velocity": 46,
+      "section": "Quiet harmonic air"
+    },
+    {
+      "track": "Air pad",
+      "start_beats": 40.020833333333336,
+      "midi": 69,
+      "length_beats": 7.708333333333333,
+      "velocity": 43,
+      "section": "Quiet harmonic air"
+    },
+    {
+      "track": "Air pad",
+      "start_beats": 56.020833333333336,
+      "midi": 61,
+      "length_beats": 7.104166666666667,
+      "velocity": 47,
+      "section": "Quiet harmonic air"
+    },
+    {
+      "track": "Air pad",
+      "start_beats": 56.0,
+      "midi": 64,
+      "length_beats": 7.104166666666667,
+      "velocity": 43,
+      "section": "Quiet harmonic air"
+    },
+    {
+      "track": "Air pad",
+      "start_beats": 56.0,
+      "midi": 70,
+      "length_beats": 7.104166666666667,
+      "velocity": 43,
+      "section": "Quiet harmonic air"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 0.0,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 81,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 1.75,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 65,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 2.5,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 65,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 0.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 47,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 1.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 51,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 2.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 50,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 3.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 50,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 4.020833333333333,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 89,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 4.770833333333333,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 68,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 6.270833333333333,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 64,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 7.520833333333333,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 64,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 5.0,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 79,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 6.979166666666667,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 76,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 4.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 47,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 4.479166666666667,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 33,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 4.979166666666667,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 48,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 5.479166666666667,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 31,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 6.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 47,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 6.5,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 28,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 7.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 50,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 7.479166666666667,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 30,
+      "section": "Entrance"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 8.020833333333334,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 82,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 9.75,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 67,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 10.5,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 67,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 8.979166666666666,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 78,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 10.979166666666666,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 77,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 8.020833333333334,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 47,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 8.479166666666666,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 32,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 9.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 48,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 9.5,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 26,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 10.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 47,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 10.520833333333334,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 31,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 11.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 46,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 11.520833333333334,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 30,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 8.0,
+      "midi": 49,
+      "length_beats": 0.3541666666666667,
+      "velocity": 38,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 12.0,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 84,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 12.75,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 66,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 14.25,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 71,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 15.5,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 66,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 13.0,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 77,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 15.0,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 77,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 12.020833333333334,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 48,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 12.520833333333334,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 29,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 12.979166666666666,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 46,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 13.479166666666666,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 30,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 13.979166666666666,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 49,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 14.479166666666666,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 34,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 15.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 45,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 15.5,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 26,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 14.75,
+      "midi": 38,
+      "length_beats": 0.08333333333333333,
+      "velocity": 24,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 15.75,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 32,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 16.0,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 84,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 17.75,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 67,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 18.520833333333332,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 63,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 17.020833333333332,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 77,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 19.0,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 79,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 16.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 50,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 16.5,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 27,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 17.020833333333332,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 52,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 17.520833333333332,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 27,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 17.979166666666668,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 49,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 18.520833333333332,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 32,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 19.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 50,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 19.5,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 30,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 20.020833333333332,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 82,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 20.75,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 69,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 22.25,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 63,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 23.5,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 68,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 21.020833333333332,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 77,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 23.0,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 80,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 20.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 45,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 20.520833333333332,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 30,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 21.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 46,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 21.5,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 27,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 21.979166666666668,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 46,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 22.479166666666668,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 33,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 23.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 49,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 23.520833333333332,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 32,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 22.729166666666668,
+      "midi": 38,
+      "length_beats": 0.08333333333333333,
+      "velocity": 27,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 23.75,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 28,
+      "section": "Statement"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 24.0,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 82,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 25.75,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 66,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 26.479166666666668,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 64,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 24.979166666666668,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 75,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 27.0,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 80,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 24.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 46,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 24.479166666666668,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 34,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 25.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 48,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 25.520833333333332,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 30,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 26.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 50,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 26.5,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 33,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 27.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 52,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 27.479166666666668,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 27,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 28.020833333333332,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 88,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 28.729166666666668,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 63,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 30.229166666666668,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 65,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 31.479166666666668,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 71,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 28.979166666666668,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 79,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 30.979166666666668,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 78,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 28.020833333333332,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 44,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 28.520833333333332,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 33,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 29.020833333333332,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 49,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 29.479166666666668,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 30,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 30.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 47,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 30.5,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 28,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 31.020833333333332,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 46,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 31.520833333333332,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 26,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 31.229166666666668,
+      "midi": 45,
+      "length_beats": 0.14583333333333334,
+      "velocity": 44,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 31.520833333333332,
+      "midi": 47,
+      "length_beats": 0.14583333333333334,
+      "velocity": 49,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 31.729166666666668,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 62,
+      "section": "Continuation"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 32.020833333333336,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 89,
+      "section": "Breathing"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 34.770833333333336,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 63,
+      "section": "Breathing"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 34.0,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 50,
+      "section": "Breathing"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 32.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 51,
+      "section": "Breathing"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 33.520833333333336,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 27,
+      "section": "Breathing"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 35.020833333333336,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 51,
+      "section": "Breathing"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 36.020833333333336,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 83,
+      "section": "Breathing"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 38.729166666666664,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 68,
+      "section": "Breathing"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 38.0,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 52,
+      "section": "Breathing"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 36.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 46,
+      "section": "Breathing"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 37.5,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 33,
+      "section": "Breathing"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 38.979166666666664,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 51,
+      "section": "Breathing"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 39.25,
+      "midi": 45,
+      "length_beats": 0.14583333333333334,
+      "velocity": 47,
+      "section": "Breathing"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 39.5,
+      "midi": 47,
+      "length_beats": 0.14583333333333334,
+      "velocity": 51,
+      "section": "Breathing"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 39.729166666666664,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 64,
+      "section": "Breathing"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 40.0,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 82,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 41.770833333333336,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 70,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 42.5,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 67,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 40.979166666666664,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 75,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 43.0,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 73,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 40.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 50,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 40.5,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 30,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 41.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 46,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 41.5,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 27,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 42.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 47,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 42.5,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 30,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 43.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 44,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 43.520833333333336,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 33,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 40.0,
+      "midi": 49,
+      "length_beats": 0.3541666666666667,
+      "velocity": 33,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 44.0,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 82,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 44.729166666666664,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 70,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 46.270833333333336,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 70,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 47.520833333333336,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 68,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 44.979166666666664,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 79,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 47.020833333333336,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 80,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 44.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 45,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 44.520833333333336,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 27,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 44.979166666666664,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 47,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 45.5,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 29,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 46.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 50,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 46.5,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 30,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 46.979166666666664,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 52,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 47.479166666666664,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 30,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 46.75,
+      "midi": 38,
+      "length_beats": 0.08333333333333333,
+      "velocity": 30,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 47.729166666666664,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 28,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 48.0,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 82,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 49.770833333333336,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 68,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 50.5,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 67,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 49.020833333333336,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 79,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 50.979166666666664,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 79,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 48.020833333333336,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 48,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 48.520833333333336,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 29,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 49.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 48,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 49.520833333333336,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 31,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 50.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 51,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 50.5,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 27,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 50.979166666666664,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 44,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 51.479166666666664,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 32,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 52.0,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 84,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 52.729166666666664,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 70,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 54.270833333333336,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 64,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 55.479166666666664,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 69,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 53.0,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 81,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 55.0,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 76,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 52.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 52,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 52.520833333333336,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 33,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 53.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 52,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 53.520833333333336,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 27,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 53.979166666666664,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 51,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 54.520833333333336,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 30,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 54.979166666666664,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 47,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 55.479166666666664,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 26,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 54.770833333333336,
+      "midi": 38,
+      "length_beats": 0.08333333333333333,
+      "velocity": 26,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 55.75,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 28,
+      "section": "Return"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 56.0,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 85,
+      "section": "Cadence"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 57.770833333333336,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 67,
+      "section": "Cadence"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 58.5,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 63,
+      "section": "Cadence"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 57.0,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 79,
+      "section": "Cadence"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 59.0,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 80,
+      "section": "Cadence"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 56.020833333333336,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 45,
+      "section": "Cadence"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 56.5,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 29,
+      "section": "Cadence"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 57.020833333333336,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 46,
+      "section": "Cadence"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 57.520833333333336,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 32,
+      "section": "Cadence"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 58.020833333333336,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 44,
+      "section": "Cadence"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 58.520833333333336,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 34,
+      "section": "Cadence"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 58.979166666666664,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 45,
+      "section": "Cadence"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 59.5,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 30,
+      "section": "Cadence"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 59.25,
+      "midi": 45,
+      "length_beats": 0.14583333333333334,
+      "velocity": 46,
+      "section": "Cadence"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 59.479166666666664,
+      "midi": 47,
+      "length_beats": 0.14583333333333334,
+      "velocity": 55,
+      "section": "Cadence"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 59.75,
+      "midi": 38,
+      "length_beats": 0.125,
+      "velocity": 57,
+      "section": "Cadence"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 60.0,
+      "midi": 36,
+      "length_beats": 0.125,
+      "velocity": 83,
+      "section": "Cadence"
+    },
+    {
+      "track": "Electronic broken beat",
+      "start_beats": 60.0,
+      "midi": 42,
+      "length_beats": 0.08333333333333333,
+      "velocity": 52,
+      "section": "Cadence"
+    },
+    {
+      "track": "Low percussion",
+      "start_beats": 6.5,
+      "midi": 43,
+      "length_beats": 0.22916666666666666,
+      "velocity": 48,
+      "section": "Sparse transition weight"
+    },
+    {
+      "track": "Low percussion",
+      "start_beats": 7.520833333333333,
+      "midi": 48,
+      "length_beats": 0.20833333333333334,
+      "velocity": 43,
+      "section": "Sparse transition weight"
+    },
+    {
+      "track": "Low percussion",
+      "start_beats": 14.5,
+      "midi": 43,
+      "length_beats": 0.22916666666666666,
+      "velocity": 55,
+      "section": "Sparse transition weight"
+    },
+    {
+      "track": "Low percussion",
+      "start_beats": 15.520833333333334,
+      "midi": 48,
+      "length_beats": 0.20833333333333334,
+      "velocity": 42,
+      "section": "Sparse transition weight"
+    },
+    {
+      "track": "Low percussion",
+      "start_beats": 22.520833333333332,
+      "midi": 43,
+      "length_beats": 0.22916666666666666,
+      "velocity": 48,
+      "section": "Sparse transition weight"
+    },
+    {
+      "track": "Low percussion",
+      "start_beats": 23.5,
+      "midi": 48,
+      "length_beats": 0.20833333333333334,
+      "velocity": 41,
+      "section": "Sparse transition weight"
+    },
+    {
+      "track": "Low percussion",
+      "start_beats": 30.5,
+      "midi": 43,
+      "length_beats": 0.22916666666666666,
+      "velocity": 54,
+      "section": "Sparse transition weight"
+    },
+    {
+      "track": "Low percussion",
+      "start_beats": 31.5,
+      "midi": 48,
+      "length_beats": 0.20833333333333334,
+      "velocity": 45,
+      "section": "Sparse transition weight"
+    },
+    {
+      "track": "Low percussion",
+      "start_beats": 46.5,
+      "midi": 43,
+      "length_beats": 0.22916666666666666,
+      "velocity": 54,
+      "section": "Sparse transition weight"
+    },
+    {
+      "track": "Low percussion",
+      "start_beats": 47.479166666666664,
+      "midi": 48,
+      "length_beats": 0.20833333333333334,
+      "velocity": 46,
+      "section": "Sparse transition weight"
+    },
+    {
+      "track": "Low percussion",
+      "start_beats": 54.520833333333336,
+      "midi": 43,
+      "length_beats": 0.22916666666666666,
+      "velocity": 51,
+      "section": "Sparse transition weight"
+    },
+    {
+      "track": "Low percussion",
+      "start_beats": 55.5,
+      "midi": 48,
+      "length_beats": 0.20833333333333334,
+      "velocity": 42,
+      "section": "Sparse transition weight"
+    },
+    {
+      "track": "Low percussion",
+      "start_beats": 58.520833333333336,
+      "midi": 43,
+      "length_beats": 0.22916666666666666,
+      "velocity": 52,
+      "section": "Sparse transition weight"
+    },
+    {
+      "track": "Low percussion",
+      "start_beats": 59.5,
+      "midi": 48,
+      "length_beats": 0.20833333333333334,
+      "velocity": 43,
+      "section": "Sparse transition weight"
+    }
+  ]
+}

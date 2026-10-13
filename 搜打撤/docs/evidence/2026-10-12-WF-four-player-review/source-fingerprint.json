@@ -1,0 +1,47 @@
+{
+  "capturedAt": "2026-10-13T01:08:49.6020094+08:00",
+  "head": "cdd5c1a83695ec901225c7c76eebcd56e63d3ecf",
+  "version": "0.60.0",
+  "origin": "http://127.0.0.1:5354",
+  "mixedWorkspace": true,
+  "files": [
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.flow.js",
+      "Hash": "E277D966B417FDDBD6231EA6255582B79A2B5F953FDFFA2BA1759CE102EA580A"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.scenes.js",
+      "Hash": "31993DC9B3A1F23C12FDAF9FB74571F196161E8B7ABD10C2CFD23BE95673F693"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.altar.js",
+      "Hash": "7B8D7DD0E2019A1FFD7F5E8933E4B3AC6625F8930ECD3DDCC83B659C53D058B6"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\hub\\game.bag.js",
+      "Hash": "740B2E435B0CDA9F4726F75C7860EFEC1F276A58D77921F41A5B262F0909DD02"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\ui\\overlay.js",
+      "Hash": "3130656BAD569867B589B9D7344F4B52D023B71E63F8F2DCDA46184DCC5B148C"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\ui\\interface-motion.js",
+      "Hash": "F3BEA2C4E07EBE751726484012EEDC1871CC3D5224F7D3C49722D434F6CDD3BA"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\game\\src\\battle\\core\\battle.resolution.js",
+      "Hash": "CEA1E2076B1CDFDE3F04A72B6C4D0B4F5A97289058557BF4B497F11B3AA54925"
+    }
+  ],
+  "viteLogTail": [
+    "  VITE v6.4.3  ready in 589 ms",
+    "",
+    "  ➜  Local:   http://127.0.0.1:5354/",
+    "22:23:01 [vite] (client) hmr update /css/feedback-oct12.css?direct",
+    "22:23:51 [vite] (client) page reload src/audio/sound.music.catalog.js",
+    "22:23:51 [vite] (client) page reload music-demo.html",
+    "22:27:19 [vite] (client) hmr update /css/feedback-oct12.css?direct",
+    "22:51:15 [vite] (client) hmr update /css/roster-departure-v2.css?direct"
+  ]
+}

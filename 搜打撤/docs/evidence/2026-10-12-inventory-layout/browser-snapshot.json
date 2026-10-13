@@ -1,0 +1,178 @@
+{
+  "actions": [
+    {
+      "detail": "当前窗口：进入档位01→后勤→点击充能射线/治愈；关闭按钮及Esc返回原卡焦点",
+      "type": "real-input"
+    },
+    {
+      "detail": "稳定帧截图；完整边框、资料与操作区",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"1\\n    \\n    充能射线\\n    法术 · 稀有\\n    \\n    \\n    造成 5 点法术伤害；本牌在你的手牌中时，你每注能 1 张卡牌，本牌伤害增加 2 点。\\n    5'法伤\",\"class\":\"cz-card cz-flip\"}",
+      "key": "card",
+      "rect": {
+        "height": 500.5462036132813,
+        "width": 335.3428955078125,
+        "x": 377.1798095703125,
+        "y": 201.63772583007812
+      },
+      "selector": "#cardZoom .cz-card",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(227, 230, 228)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "597.041px",
+        "line-height": "normal",
+        "opacity": "0.999919",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "matrix(1.0023, 0, 0, 1.0023, 1.37635, 0.266965)",
+        "visibility": "visible",
+        "width": "399.99px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    充能射线\n    法术 · 稀有\n    \n    \n    造成 5 点法术伤害；本牌在你的手牌中时，你每注能 1 张卡牌，本牌伤害增加 2 点。\n    5'法伤"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"ARTICLE\",\"text\":\"充能射线法术 · 稀有卡牌效果造成 5 点法术伤害；本牌在你的手牌中时，你每注能 1 张卡牌，本牌伤害增加 2 点。持有 1 张仓库卡牌加入收藏，卡牌保留在仓库收藏卡牌\",\"class\":\"inventory-zoom-info\"}",
+      "key": "info",
+      "rect": {
+        "height": 468.4125061035156,
+        "width": 434.9500122070313,
+        "x": 794.625,
+        "y": 217.4750061035156
+      },
+      "selector": "#cardZoom .inventory-zoom-info",
+      "styles": {
+        "background-color": "rgba(24, 35, 45, 0.95)",
+        "border-radius": "18px",
+        "color": "rgb(237, 243, 244)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "559.995px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "36px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "519.99px"
+      },
+      "tag": "ARTICLE",
+      "text": "充能射线法术 · 稀有卡牌效果造成 5 点法术伤害；本牌在你的手牌中时，你每注能 1 张卡牌，本牌伤害增加 2 点。持有 1 张仓库卡牌加入收藏，卡牌保留在仓库收藏卡牌"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"持有 1 张仓库卡牌加入收藏，卡牌保留在仓库收藏卡牌\",\"class\":\"cz-foot\"}",
+      "key": "footer",
+      "rect": {
+        "height": 127.5625,
+        "width": 373.125,
+        "x": 825.5375366210938,
+        "y": 527.4125366210938
+      },
+      "selector": "#cardZoom .cz-foot",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(237, 243, 244)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "152.503px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "24px 0px 0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "446.077px"
+      },
+      "tag": "DIV",
+      "text": "持有 1 张仓库卡牌加入收藏，卡牌保留在仓库收藏卡牌"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"BUTTON\",\"text\":\"\",\"class\":\"cz-close\"}",
+      "key": "close",
+      "rect": {
+        "height": 33.45000076293945,
+        "width": 33.45000076293945,
+        "x": 1175.25,
+        "y": 238.3500061035156
+      },
+      "selector": "#cardZoom .cz-close",
+      "styles": {
+        "background-color": "rgba(255, 255, 255, 0.03)",
+        "border-radius": "50%",
+        "color": "rgb(220, 233, 237)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "39.99px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "39.99px"
+      },
+      "tag": "BUTTON",
+      "text": ""
+    }
+  ],
+  "observedAt": "2026-10-12T09:53:55.567Z",
+  "page": {
+    "origin": "http://localhost:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 1606
+    }
+  },
+  "scene": "warehouse-card-inspection-layout",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-12-inventory-layout/after-rare.png"
+  ],
+  "selectors": [
+    {
+      "key": "card",
+      "selector": "#cardZoom .cz-card"
+    },
+    {
+      "key": "info",
+      "selector": "#cardZoom .inventory-zoom-info"
+    },
+    {
+      "key": "footer",
+      "selector": "#cardZoom .cz-foot"
+    },
+    {
+      "key": "close",
+      "selector": "#cardZoom .cz-close"
+    }
+  ]
+}

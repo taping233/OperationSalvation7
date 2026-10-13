@@ -1,0 +1,21 @@
+{
+  "card_id": "tt3-nature-form",
+  "model": "nai-diffusion-4-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 970876243,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1girl, solo, upper body, from below, standing, raised arm, outstretched arm, looking at viewer, calm expression, closed mouth, full moon, simple background\n\nThe priestess fills the lower-right half of the square, her torso turning diagonally upward to the left. One arm rises above her head with relaxed fingertips tracing the lower-right edge of a flat full moon behind her; the other arm reaches across the lower foreground with an open palm. The complete ivory moon disk sits in the upper-left, about two fifths of the frame width, BEHIND both hands and shoulders, never held between her palms. Her calm face is clear near the right-center, framed by the raised white sleeve and deep teal cape. The cape and low braid sweep toward lower right, reinforcing the upward gesture. Use three primary masses: quiet deep indigo-gray backdrop, flat ivory moon, connected white-and-teal figure. The disk has no spherical shading or crater detail. Background is a solid dark indigo-gray with one subtle muted violet color transition; no white background or scenery. Paint the large sleeve, cape and hair as broad quiet planes, keep only face and gesture selectively clear.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "girl, priestess, pale blonde hair, straight bangs, cheek sidelocks, low side braid, golden eyes, white crescent hair ornament, white high collar dress, dark teal cape, gold trim, dark wrist guards, bare fingers",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, green eyes, purple eyes, silver hair, blue hair, side-swept bangs, bare shoulders, missing cape, purple cape, white background, holding ball, sphere, globe, craters, stars, particles, ornate clothes, fine hair strands, dense wrinkles, extra arms, extra hands, border",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\fullmoon-smite-20261010\\fullmoon.png",
+  "installed": false,
+  "design": "抬手引出身后平面满月，另一掌横伸前景，人物/袖/披肩沿上升斜线组织；深靛灰背景，惩击宽笔块面为内置重绘基准。"
+}

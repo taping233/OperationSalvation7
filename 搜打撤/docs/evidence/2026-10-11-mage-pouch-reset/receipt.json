@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt7-stratagem",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a125fc-1da2-7300-83db-f2b39e275c76\\exec-531b249f-b5f0-4028-87b9-11d5dae9c699.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-mage-pouch-reset/cards-spell-tt7-stratagem-source.png",
+        "bytes": 2284318,
+        "sha256": "2e36b610b919828f3a41b9b159946264a8478f96ac0933df8f90f57c4973cdf6"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-mage-pouch-reset/cards-spell-tt7-stratagem-full-before.webp",
+          "bytes": 133784,
+          "sha256": "ebe53f6f1adcfaa66602c4c0a785ab5d651e422c276873d1e20d3d0008d79412"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-mage-pouch-reset/cards-spell-tt7-stratagem-thumb-before.webp",
+          "bytes": 20708,
+          "sha256": "2e8ecf898a897619b2d5d99933c0bdd9762b4df4558fe1409c842c6121a8cf5f"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-stratagem.webp",
+          "bytes": 197780,
+          "sha256": "cba5b895b8a6c2d05ee3bd27c58dae821d23ab88adcbe7722dbbf7630e3d4e5e",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-stratagem.webp",
+          "bytes": 24240,
+          "sha256": "d01b923822d020a66c59b9b1003056024231f8a23f5c5ad6493530fa269a6863",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "baita-stratagem-profession-builtin-20261010",
+      "revision_after": "baita-stratagem-indigo-reset-20261011",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-stratagem.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 133784,
+            "sha256": "ebe53f6f1adcfaa66602c4c0a785ab5d651e422c276873d1e20d3d0008d79412",
+            "source": "docs/evidence/2026-10-10-baita-stratagem/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-stratagem.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 197780,
+            "sha256": "cba5b895b8a6c2d05ee3bd27c58dae821d23ab88adcbe7722dbbf7630e3d4e5e",
+            "source": "docs/evidence/2026-10-11-mage-pouch-reset/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-stratagem.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 20708,
+            "sha256": "2e8ecf898a897619b2d5d99933c0bdd9762b4df4558fe1409c842c6121a8cf5f",
+            "source": "docs/evidence/2026-10-10-baita-stratagem/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-stratagem.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 24240,
+            "sha256": "d01b923822d020a66c59b9b1003056024231f8a23f5c5ad6493530fa269a6863",
+            "source": "docs/evidence/2026-10-11-mage-pouch-reset/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1120,
+  "manifest_count_after": 1120
+}

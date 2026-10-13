@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-bandage",
+      "asset": "cards/martial-tt3-bandage.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-c8a31e29-431c-4466-9912-fa093f2f11f5.png",
+      "revision": "bandage-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the bandage game-card edit target, preserving its original SQUARE composition closely: a single white cloth bandage roll floating at center, viewed from slightly above with clearly visible oval hollow beige cardboard core. A broad loose strip of white bandage extends around the lower half in a large open elliptical loop, crossing behind and rising along the right side of the roll; the other visible loose portion curls upward in an S shape and exits the TOP edge. Keep roll size, placement, core perspective, lower loop trajectory and upper strip twists from the original. Pale warm ivory-cream background, muted cool gray-blue cloth shadows, quiet soft light. No hands, patient, wounds, characters, medical symbols or new props. Images 2, 3, 4 are DRAWING STYLE references only; borrow broad opaque hand-painted construction, never subjects or clothing. Rough hand-painted anime color study: large connected opaque masses, a few wide directional curved swipes and blunt dabs, handmade edges and selective unfinished areas. Give roll and cloth thickness through broad ivory light planes and cool gray-blue shadow planes, a few decisive dark core accents. Suggest rolled layers with only a few broad curved marks, no dense concentric fine lines. Keep strip front/back overlaps and twists readable and coherent, with restrained edge accents. Matte muted colors, clear hard-edged light-shadow grouping and quiet large areas. No uniformly thin vector outlines, glossy 3D, photoreal gauze texture, dense fabric fibers, tiny facet mosaics or all-over grain/texture filters. Simple warm pale abstract backdrop, no text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt3-bandage.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    }
+  ]
+}

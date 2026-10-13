@@ -1,0 +1,15 @@
+{
+  "card_id": "tt12-chargeray",
+  "card_name": "充能射线",
+  "mode": "candidate",
+  "tool": "built-in image_gen",
+  "source": "C:/Users/太平/.codex/generated_images/01a128ee-d0f5-74e2-a11c-dcfeff29f424/exec-73dfbc72-e185-412e-bfe5-2f34d2c15255.png",
+  "output": ".tmp/imagegen/2026-10-11-chargeray/chargeray-redraw.png",
+  "prompt": "Use case: style-transfer. Redraw the game-card illustration 充能射线 as a rough hand-painted anime color study. Image 1 is the EDIT TARGET, authoritative for the composition, cropped hand, dark sleeve with gold cuff, three orange-gold charging rings, horizontal ray and pale gray backdrop. Images 2–4 are ONLY references for broad opaque anime brushwork; do not introduce their people, faces, hats, costumes, props or text.\n\nKeep landscape 4:3. A single forearm enters from the left at mid-height, dark charcoal-blue loose sleeve and one broad muted gold cuff, open pale hand reaching toward the right. Most of the arm and body remain cropped beyond the left edge; do not reveal a face or full person. The ray begins near the palm at about half the image height and travels straight horizontally to the right, continuing beyond the right edge. Keep the ray slender and extremely straight: one bright cream-white core with restrained warm golden edges. Exactly three upright elliptical orange-gold rings surround the ray at spaced positions in the left and central half. Each ring is perpendicular to the beam and painted as a few thick curved strokes, with a brighter near edge and a muted orange far edge. Preserve the original ring spacing, ray direction, hand placement and large quiet upper and lower negative spaces.\n\nConstruct sleeve and cuff in a small number of connected opaque dark and gray-blue planes, broad directional swipes and blunt accents. Readable anime hand with economical fingers and a few warm-gray shadow shapes. Simplify cuff decoration into broad broken gold shapes. Rings and beam have handmade painted edges and concentrated light; do not use fine particles or smooth digital neon halos to express energy. Keep the light pale cool-gray background almost uniform, with only a few large faint paint passes, no physical environment or props.\n\nLarge connected matte color masses, hard handmade shadow boundaries and selectively unfinished brush endings, calm secondary surfaces, few wide strokes that explain form. No fine cloth wrinkles, dense metallic engraving, tiny facet mosaics, glossy 3D, airbrushed finish, grain/canvas filter, sparks, extra rings or scattered particles. No text, frame, border, watermark or UI.",
+  "references": [
+    "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt12-chargeray.webp",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+  ]
+}

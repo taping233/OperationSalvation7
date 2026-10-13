@@ -1,0 +1,24 @@
+[
+  {
+    "scene": "last-lamp",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1341b-e17c-7de3-ad87-7422eb6ef359\\exec-9bde1abb-4a5d-4a39-a8a8-8244e616c381.png",
+    "sourceSha256": "002d2350440f4d6a1d11636fdab1d96bd8a747810b38c04adb80f9adec3c986e",
+    "target": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\scenes\\event-last-lamp-1013-v1.webp",
+    "targetSha256": "d31d167fc46e6e48eaa73626ca63893eb7d168942845dd0b3e8759854a2ab630",
+    "width": 1659,
+    "height": 948,
+    "bytes": 99106,
+    "pipeline": "NAI draft -> built-in internal redraw -> WebP encode"
+  },
+  {
+    "scene": "goldmine",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1341b-e17c-7de3-ad87-7422eb6ef359\\exec-af24e82d-c2fd-46a3-9131-c3cb98ca2e7c.png",
+    "sourceSha256": "59cfff40ca5775e95c6fb0fe19d42e5f32462fb978b3f88ff668f03a211a416a",
+    "target": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\scenes\\event-tt6-goldmine-1013-v2.webp",
+    "targetSha256": "63dd597b66143e46d11ec6f00c62d33ec10d468e8db45dd04fb6c63d9da8ad62",
+    "width": 1659,
+    "height": 948,
+    "bytes": 102098,
+    "pipeline": "NAI draft -> built-in internal redraw -> WebP encode"
+  }
+]

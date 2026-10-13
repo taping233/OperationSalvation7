@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-nonbrowser-repairs-1013",
+  "date": "2026-10-13",
+  "owner": "Friday",
+  "goal": "分批修复当前非实页代码门禁、已登记功能风险与素材清单问题，保护既有未提交成果",
+  "paths": [
+    "game/src/",
+    "game/assets/",
+    "game/selftest.js",
+    "tests/",
+    "scripts/asset-audit-lib.cjs",
+    "docs/PENDING.md",
+    "docs/PARALLEL-REGISTRY.md",
+    "docs/evidence/2026-10-13-WF-nonbrowser-repairs-1013/"
+  ],
+  "doneWhen": [
+    "已选问题逐项定性并完成安全修复或明确阻断",
+    "每项改动有对应定向验证与剩余风险记录"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "组合定向Vitest 15文件160项通过，日志 targeted-final.log",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "lint、语法386文件、docs守卫598链接、零依赖自测均退出0",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "全树素材审计剩余273项未登记，退出1",
+      "result": "failed"
+    }
+  ],
+  "unverified": [
+    "修订后的全量Vitest未重跑；前次全量49失败另有1个worker超时",
+    "按老板要求暂不做游戏实页；远端CI和build未覆盖",
+    "PENDING #26 旧多箱实页情景未复验；双剑语义和休眠方舟素材仍待决策"
+  ],
+  "updatedAt": "2026-10-13T10:55:30.522Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

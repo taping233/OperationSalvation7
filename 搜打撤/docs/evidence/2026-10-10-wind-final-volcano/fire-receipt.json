@@ -1,0 +1,30 @@
+[
+  {
+    "label": "候选1",
+    "path": ".tmp/imagegen/wind-final-volcano-1010/fireNew1.png",
+    "bytes": 2590749,
+    "sha256": "029185fdccef8d507aec944b45ff6f64d6c3d6acba2530551cf5bfd833940a36",
+    "status": "人物身份错误，未选"
+  },
+  {
+    "label": "候选2",
+    "path": ".tmp/imagegen/wind-final-volcano-1010/fireNew2.png",
+    "bytes": 2289823,
+    "sha256": "69c3f4446de4d8a8a4aa474a1453258245878c1f4748d772919413f9d52cd62b",
+    "status": "人物身份未锁定，未选"
+  },
+  {
+    "label": "候选3",
+    "path": ".tmp/imagegen/wind-final-volcano-1010/fireNew3.png",
+    "bytes": 2120164,
+    "sha256": "1157304365202808e60fdc22d2c44a7d75ef1a80958036dbee48d619ccb99344",
+    "status": "老板认可构图，要求修正常无欲男性身份与脸"
+  },
+  {
+    "label": "候选3男性修正版",
+    "path": ".tmp/imagegen/wind-final-volcano-1010/fireMaleFix.png",
+    "bytes": 2043454,
+    "sha256": "6f5e6b29a5043f90850f9c3edeb052b53d5f5391c22e8fb0b5804266b2fe7b98",
+    "status": "待老板评价，未替换火山卡面"
+  }
+]

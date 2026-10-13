@@ -1,0 +1,23 @@
+{
+  "stage": "A10",
+  "status": "generated-style-comparison-needs-refinement",
+  "reason": "A9自检后针对性修正远景焦点、纹理、炉/寝具间距和画法；保留规划与配色",
+  "references": [
+    "C:/Users/太平/.codex/generated_images/01a128f5-bd4a-7891-91c7-ab5106c5d409/exec-c4e628a9-388e-484d-ace6-8f89bb4f9948.png",
+    "docs/evidence/2026-10-11-WF-base-cohesion-1011/reference-gfl2-personal.jpg",
+    "docs/evidence/2026-10-11-WF-base-cohesion-1011/reference-official-bg-02.jpg"
+  ],
+  "prompt": "Refine the FIRST image, keeping its coherent ROOM LAYOUT, desk size, seated eye-level perspective, neutral colour comfort, human-scale furniture and especially the LARGE dark near-left foreground chair with the diagonal projecting armrest. The second and third images are the style/colour references: selective painterly 2D game-background edges, comfortable neutral colour families with cool shaded planes, matte surfaces. Make the first image feel like a beautifully painted commercial anime game background rather than a realistic military prefab photograph. Keep believable object construction and perspective, but replace granular surface texture, tiny metal fittings and abundant seam detail with clean, broad painted colour/light planes, gentle simplified shading and a few elegant drawn edges. Foreground chair has readable charcoal-blue reflected light, softer internal edges and minimal hardware. Middle work table is the visual focus, warm neutral light-grey, showing a large open map, document folder, one compact communication terminal and one useful task lamp. Preserve its leg/knee space and usable desk area. Remove extra stacked little books, pen cup clutter and scattered side crates. Keep ONE unobtrusive closed drawer unit under its left end. Make the floor a calm matte warm grey plane with just a few perspective-defining broad joins and soft shadows; REMOVE the patterned rugs entirely and all mottled floor scratches. Walls use large clean ivory-grey and muted grey-teal colour planes; simplify vents, wall fittings, ceiling hardware and rivets. Remove the hanging wall maps/posters. Keep the practical utility/storage area: two truly identical dark grey equipment cases neatly in one lower cabinet bay, with only a water dispenser and thermos/cup tray above. Keep one along-wall bed/bench with a pillow and one muted terracotta-grey blanket, human scale. Relocate the small enclosed modern fireplace towards the near right wall/corner, away from the sleeping berth: leave a visibly substantial clear fireproof wall/floor interval between bedding and heater, no fire beside the pillow or fabric. Preserve the centre aisle and give the heater a simple straight flue. A single small contained amber fire, not a glowing lightbox. Most important: make the window a QUIET secondary light source. Remove mountains, individual trees, roads, urban windows and skyline detail. Outside only pale snow and a distant city suggested by a handful of VERY low-contrast misty blue-grey architectural brush masses, no distinct landmark, no high-contrast focal building, no photographic blur/bokeh. Lower exterior contrast and window brightness so the work surface remains the most readable area. Soft diffuse cool outdoor light balanced by gentle warm-white light at the desk and a small amber hearth; no global blue/yellow tint, crushed black or obvious volumetric sunbeam. The neutral ivory, restrained grey-teal, slate blue and tiny warm textile accents should feel comfortably harmonious like reference 2. Dry indoors, winter only outside and at fireplace. Near-future postmodern functional camp outside a city, roughly a century from now, restrained contemporary-to-future furniture silhouettes. No old wooden rustic furniture, ornaments, symbols, emblems, UI, text, logos, people, weapon racks, neon or sci-fi greebles. Full landscape 16:9 illustration. Keep the furniture organisation; this is a targeted visual refinement, not a new layout.",
+  "runtimeApplied": false,
+  "receipt": {
+    "path": "C:/Users/太平/.codex/generated_images/01a128f5-bd4a-7891-91c7-ab5106c5d409/exec-9e52a1da-5695-4170-a28f-21c79aa6a8df.png",
+    "bytes": 1663355,
+    "sha256": "abea20baa646ceb56d47b25818afa412c4910030271988dea7ad5e49f9e0757b",
+    "excludedFromGit": true
+  },
+  "review": [
+    "地面纹理已简化，主桌和近景椅保留；炉已向前移",
+    "对少前2仍有差距：全局泛黄、表面过平整/光亮、缺少选择性边缘与生活状态",
+    "老板最新指定少前2为主要画风参照，继续针对画法和冷暖关系修正"
+  ]
+}

@@ -1,0 +1,83 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5351/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5351/
+	2 container hubMain
+		3 container
+			4 button 返回基地
+			5 heading 基地, Value: 2
+				6 text 基地
+			7 text 档案 / 01
+			8 container 基地物资
+				9 container 木材 0
+					10 text 0
+					11 text 木材
+					12 text 木材
+				13 container 口粮 0
+					14 text 0
+					15 text 口粮
+					16 text 口粮
+				17 container 钥匙 0
+					18 text 0
+					19 text 钥匙
+					20 text 钥匙
+				21 container 储备币 0
+					22 text 0
+					23 text 储备币
+					24 text 储备币
+		25 container
+			26 image 无完整立绘
+			27 container
+				28 heading 无, Value: 2
+					29 text 无
+				30 text 默认外观
+			31 container 人物切换
+				32 checkbox Description: 查看无, Value: 1
+					33 image 无
+					34 text 无
+				35 checkbox Description: 查看黑像, Value: 0
+					36 image 黑像
+					37 text 黑像
+				38 checkbox Description: 查看星月, Value: 0
+					39 image 星月
+					40 text 星月
+				41 checkbox Description: 查看白塔, Value: 0
+					42 image 白塔
+					43 text 白塔
+				44 checkbox Description: 查看常无欲, Value: 0
+					45 image 常无欲
+					46 text 常无欲
+			47 container
+				48 text 侠客 · 浏览档案
+				49 heading 无, Value: 3
+					50 text 无
+				51 text 人物培养
+			52 container
+				53 text Lv.2
+				54 heading 出征加成, Value: 4
+					55 text 出征加成
+				56 text 生命上限 +1 下一级 · 生命上限 +2
+			57 container
+				58 heading 熟练度, Value: 4
+					59 text 熟练度
+				60 progress indicator Description: 人物熟练度, Value: 63
+				61 text 63 / 90 XP 用该人物的职业卡或能力卡培养；卡牌转为经验并消耗。
+			62 button 选择培养卡牌
+			63 container 角色操作
+				64 checkbox 培养, Value: 1
+				65 checkbox 招式, Value: 0
+				66 checkbox 外观, Value: 0
+				67 button 伙伴
+		68 container 基地房间
+			69 checkbox 基地, Value: 0
+			70 checkbox 配置 当前房间, Value: 1
+				71 text 配置
+				72 text 当前房间
+			73 checkbox 后勤, Value: 0
+			74 checkbox 交易所, Value: 0
+			75 checkbox 收藏室 1项奖励可领取, Value: 0
+				76 text 收藏室
+				77 container 1项奖励可领取
+					78 text 1
+			79 checkbox 建设, Value: 0
+			80 checkbox 庭院, Value: 0
+
+The focused UI element is 70 checkbox 配置 当前房间, Value: 1

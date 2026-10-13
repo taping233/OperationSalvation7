@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-code-audit-efficiency-1013",
+  "date": "2026-10-13",
+  "owner": "Friday",
+  "goal": "审计Vite前端、持久化结算与Node工程工具，删除已证实冗余代码、修复Bug并针对实测瓶颈提高效率",
+  "paths": [
+    "game/src/",
+    "game/tools/",
+    "scripts/",
+    "tests/",
+    "docs/evidence/2026-10-13-WF-code-audit-efficiency-1013/",
+    "docs/PARALLEL-REGISTRY.md"
+  ],
+  "doneWhen": [
+    "各域有可复核发现清单，区分已修、待决与未证实",
+    "范围内安全修复和冗余清理有定向验证，性能变化有同条件证据"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "组合定向Vitest 6文件33项通过，lint语法docs自测与diff检查退出0",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "卡牌浏览200卡100次load同条件jsdom对照约202ms降为约9ms且行为回归通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "全量Vitest 350文件349过1败，素材审计273未登记，另有1次worker更新超时",
+      "result": "failed"
+    }
+  ],
+  "unverified": [
+    "按老板此前指示暂不游戏实页；真实帧率、照相馆视觉、build与远端CI未覆盖",
+    "未跟踪的base-design-preview-v6.js有旧会话完成归属，未获精确路径删除批准，本轮未动",
+    "战斗遮罩指针热点未有同条件实页性能数据，未改"
+  ],
+  "updatedAt": "2026-10-13T11:59:44.149Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

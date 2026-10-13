@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-completed-pack-1013-b2",
+  "date": "2026-10-13",
+  "owner": "Friday",
+  "goal": "按老板明确指令审查并提交当前工作树全部完成未提交成果，排除PV等在途、待决和会话中间文件，不推送",
+  "paths": [
+    "docs/evidence/2026-10-13-WF-completed-pack-1013-b2/",
+    "docs/PARALLEL-REGISTRY.md"
+  ],
+  "doneWhen": [
+    "完成候选归属、index、在途mtime与质量门核对后按子系统提交",
+    "提交后复核HEAD、剩余未提交归属与排除清单"
+  ],
+  "stage": "doing",
+  "checks": [],
+  "unverified": [],
+  "updatedAt": "2026-10-13T12:08:39.269Z"
+}

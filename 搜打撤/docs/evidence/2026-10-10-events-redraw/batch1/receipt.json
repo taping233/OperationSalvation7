@@ -1,0 +1,191 @@
+{
+  "method": "Built-in ImageGen; scoped scene WebP/thumbnail encoding",
+  "verification": "No tests/browser/build run",
+  "items": [
+    {
+      "card_id": "tt6-demondeal",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-2f4cbca6-3543-4f88-a510-215128fc0830.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch1/event-tt6-demondeal-source.png",
+        "sha256": "a66cf365271fbed9ad380a2ffc38d1379cd5634956f5da6daf1bd39d734bdb70"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch1/event-tt6-demondeal-full-before.webp",
+          "sha256": "ec917334ee911d03ad19ab892e0c6aff2a1d57a4f6fac1e37134cdeec9cd95a5"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch1/event-tt6-demondeal-thumb-before.webp",
+          "sha256": "b77fcad43f7c0260b958694ffa57f6cb04640530f7f2713a310c89e59eac5641"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-tt6-demondeal.webp",
+          "ext": "webp",
+          "license": "项目自有（AI 生成）",
+          "bytes": 209318,
+          "sha256": "17d09b78747805a1197e0e7b79520999c9079b87bcee8ccbe09cb8e7b27f6c5b",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch1/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-tt6-demondeal.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 21100,
+          "sha256": "7e9960ad6f4bd1d7cf0923514dd753de32692660b9fb215e2f39f9ed26d701db",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch1/receipt.json"
+        }
+      ]
+    },
+    {
+      "card_id": "tt6-bandits",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-8cc03e7d-4c1a-4945-9813-83a8b5d526c9.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch1/event-bandits-anime-v2-source.png",
+        "sha256": "46a114a7665932e6d3fae789baa13571417e98f10d2a8ffd46581402f495a15c"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch1/event-bandits-anime-v2-full-before.webp",
+          "sha256": "a93e9ac444df216885b825a7c7d9c01df5d6c571c75beccca600876901a422bd"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch1/event-bandits-anime-v2-thumb-before.webp",
+          "sha256": "76924a383f674ffc025c4de8191437de53291f086171bd37cf48e90341f20de0"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-bandits-anime-v2.webp",
+          "ext": "webp",
+          "bytes": 273038,
+          "license": "项目自有（自制/AI 生成）",
+          "sha256": "cab87e94b210462de724cd372aad53e1e8faefa27db5a1d365c64ccee5471844",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch1/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-bandits-anime-v2.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 28166,
+          "sha256": "27821a77c3d446668e031a79853e222a8839a953b427f8f68c0729abfccbacbc",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch1/receipt.json"
+        }
+      ]
+    },
+    {
+      "card_id": "tt6-mystery",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-2fab5166-b801-476d-87a4-89d33193ba51.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch1/event-tt6-mystery-source.png",
+        "sha256": "9d5cb49ff3dc467afe92ddd90a74c23eb51cd165999e038d6381b8f1225c90c1"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch1/event-tt6-mystery-full-before.webp",
+          "sha256": "4341bc951f1302cc9f5c01bf0b1cb90c6fd79170dd202e5b3f83703bab4ef556"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch1/event-tt6-mystery-thumb-before.webp",
+          "sha256": "1b521ed2a4fbf6f289c81d1ae962a919fcbdc504b3970f42f0cc8b39b3e6023e"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-tt6-mystery.webp",
+          "ext": "webp",
+          "license": "项目自有（AI 生成）",
+          "bytes": 224206,
+          "sha256": "f7ddd7b58ad238d24d716cee4a60a93c504c95c8ca7b2c0b73ec1ee7d6c70c2c",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch1/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-tt6-mystery.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 24782,
+          "sha256": "1cd86ea38ad534502341ff9d575e1be7bddb6c03e5ae9e1f321aa9d4f42bec40",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch1/receipt.json"
+        }
+      ]
+    },
+    {
+      "card_id": "tt6-goldmine",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-c19b26e4-2375-46cf-b66c-108142996ded.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch1/event-tt6-goldmine-source.png",
+        "sha256": "4726cef1856ebdeb2b270d041ca735dc8ce745cf41455c9095066659a29a69c2"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch1/event-tt6-goldmine-full-before.webp",
+          "sha256": "7b3982bc29aa84be315cec3eb681f889859e3b11543af6265de4adf7773f75bf"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch1/event-tt6-goldmine-thumb-before.webp",
+          "sha256": "3bc228496e0f8f989f7017011b5fcbd54b43f77dbecc6f99fc1df12a7186ce25"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-tt6-goldmine.webp",
+          "ext": "webp",
+          "license": "项目自有（AI 生成）",
+          "bytes": 246234,
+          "sha256": "db6d97c2896be47b148a219641e4cb2ce0df7af096621586f63d3644299e23f9",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch1/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-tt6-goldmine.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 29266,
+          "sha256": "d1b63a634f7aa8e8fbd582f2158e91863f238dfdb59e148c9975a3d666ea9985",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch1/receipt.json"
+        }
+      ]
+    },
+    {
+      "card_id": "tt6-goldhammer",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-2880d4f8-9837-47a5-b303-12ea625a2907.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch1/event-tt6-goldhammer-source.png",
+        "sha256": "0ffe73bb99b1c83ef663895db76b570b54f7ddfd757a374128e7b0304f874b8f"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch1/event-tt6-goldhammer-full-before.webp",
+          "sha256": "22a4c43522efb6794c3587b12a3120c39b77d64904c5cdd07fecff36dfcfc624"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch1/event-tt6-goldhammer-thumb-before.webp",
+          "sha256": "b0e1f16a9644d201e064d9bc8c144e5f268095fd74912a5f68eececedfaa86fd"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-tt6-goldhammer.webp",
+          "ext": "webp",
+          "license": "项目自有（AI 生成）",
+          "bytes": 178954,
+          "sha256": "80b980d111f6c3dae8f8355c3dbbbe722839cba76d049b6bf07b2f4f75f16ecc",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch1/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-tt6-goldhammer.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 20414,
+          "sha256": "e96e8e8185600d3f5883c286827e1ae28ea8c672bf2eb2107bf0bf8e5686bd61",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch1/receipt.json"
+        }
+      ]
+    }
+  ]
+}

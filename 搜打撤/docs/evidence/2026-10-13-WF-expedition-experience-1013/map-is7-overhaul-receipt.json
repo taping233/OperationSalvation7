@@ -1,0 +1,61 @@
+{
+  "thread": "01a133b8-aebd-7632-82ed-19b6c8df3aac",
+  "status": "本轮样式实现与构造页检查完成，真实对局由主协调同步复核",
+  "tests": {
+    "files": 7,
+    "passed": 98,
+    "failed": 0
+  },
+  "syntax": "3 JS files passed",
+  "diffCheck": "passed;existing CRLF warnings",
+  "browser": {
+    "platform": "Codex IAB",
+    "width": 1920,
+    "height": 1080,
+    "source": "isolated fixture/current authored source",
+    "consoleErrors": 0,
+    "fullRunVerified": false
+  },
+  "entries": [
+    {
+      "path": "game/src/core/renderer.js",
+      "bytes": 23075,
+      "sha256": "45a48035d3c1913a635ff9e371ea9823a7d0931d4be33625e2b7b6d8f72c65cd"
+    },
+    {
+      "path": "game/src/core/map-node-art.js",
+      "bytes": 10487,
+      "sha256": "2a8f824c9aeb783e01e3f2a81010459a8edea55bd804dd4f71210545600773fb"
+    },
+    {
+      "path": "game/src/run/map-travel-path.js",
+      "bytes": 3327,
+      "sha256": "62c3b13b0ccaba74b77b07a49f89836bf207c5fd3f0a38e905299e0e3f246aae"
+    },
+    {
+      "path": "game/css/page-expedition-hud.css",
+      "bytes": 37941,
+      "sha256": "4d67598ad7ba3be6051c8ae0cf411c52aba6b7ddd90f60725012679c616f2966"
+    },
+    {
+      "path": "tests/map-travel-path.test.js",
+      "bytes": 8368,
+      "sha256": "cd4ec0e523f8894fc8a13b53e596752ac77a7e98ee9cc6bc6b05085974a21176"
+    },
+    {
+      "path": "docs/evidence/2026-10-13-WF-expedition-experience-1013/map-is7-overhaul-shop-1920.png",
+      "bytes": 82027,
+      "sha256": "45f52243d5a9e1c356173e0db09865d53cf955afac167577854559f652c871f8"
+    },
+    {
+      "path": "docs/evidence/2026-10-13-WF-expedition-experience-1013/map-is7-overhaul-risk-1920.png",
+      "bytes": 81208,
+      "sha256": "811f412586495c1c57b8bb3d31b0624c207ad1bc5d72116e3f1ae9235d27a30c"
+    },
+    {
+      "path": "docs/evidence/2026-10-13-WF-expedition-experience-1013/map-is7-overhaul-moving-1920.png",
+      "bytes": 76505,
+      "sha256": "5ddd8b2d790521f4ff130cc0cb9a8976eaf33379f2425f2688a8e8c1243893b3"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-12",
+  "scope": "Read-only visual review; no game source changes or repair authorization inferred",
+  "url": "http://localhost:5337/",
+  "origin": "Own review origin, slot 02 created by this chat",
+  "viewport": {
+    "width": 1523,
+    "height": 956,
+    "dpr": 1.25
+  },
+  "input": "Real built-in-browser inputs: restore own saved run, G overview; no node travel, rewards or save overwrite",
+  "screenshot": "01-entry-map.png",
+  "result": "failed",
+  "met": [
+    "Near-black background is actually visible",
+    "Action-log and next-route panels absent",
+    "Current character position mark present"
+  ],
+  "failures": [
+    "Node subjects read as tiny product thumbnails; reference's symbolic silhouette and object focus not achieved",
+    "Chest icon visibly smaller than other node subjects; generic image rectangle scale includes transparent margins",
+    "Black disk, local colored halo, particulate edges and trails too weak to establish reference's layered node identity",
+    "Bottom remains avatar/action-value/location instruction strip plus bag button; repeated current avatar/location rather than unified functional navigation"
+  ],
+  "limits": [
+    "Only current entry with two reachable nodes observed; other painted types not visually reviewed",
+    "Overview includes current/adjacent/previously seen nodes by camera source; initial sparse visibility is not evidence of missing map generation",
+    "No changes made to geometry, fog or global scaling"
+  ],
+  "suggestedNext": [
+    "Normalize subject drawing by visible artwork bounds and node family rather than source canvas size",
+    "Strengthen localized node light and textured boundary while keeping broad black background quiet",
+    "Consolidate duplicate current-character/location information and organize bottom navigation"
+  ]
+}

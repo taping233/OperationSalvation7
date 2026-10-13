@@ -1,0 +1,32 @@
+{
+  "card_id": "tt-copper",
+  "card_name": "铜币",
+  "tool": "built-in image_gen",
+  "status": "candidate-delivered",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-dff00d43-9c50-460b-9651-cce0ef283f67.png",
+  "output": ".tmp/imagegen/2026-10-11-copper-redraw/copper-redraw.png",
+  "sha256": "6d119678f15b5e2a98ebf8029f9984a8eba0a0f8b88c45d9b6322af24b105e84",
+  "bytes": 1694268,
+  "acquisition": "Copied from built-in ImageGen output, original alpha preserved",
+  "visual_review": "已查看工具返回画作：单枚铜币、原有叶形与横杆压印徽记、厚币缘与铜红/冷灰宽色面；透明底",
+  "image_mode": "RGBA",
+  "image_size": [
+    1254,
+    1254
+  ],
+  "alpha_extrema": [
+    0,
+    255
+  ],
+  "corner_alpha": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "transparent_pixels": 701048,
+  "runtime_installed": false,
+  "tests_run": false,
+  "build_run": false,
+  "committed": false
+}

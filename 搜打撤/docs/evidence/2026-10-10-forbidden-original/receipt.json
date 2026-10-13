@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt8-hero-warlock",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12204-0a82-72b2-9a07-d1b72c8d8b18\\exec-5788b849-c8b8-4ca8-a2da-1642848994a7.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-forbidden-original/cards-dark-eclipse-source.png",
+        "bytes": 1780586,
+        "sha256": "9bf22a40c80da3b4b7ded7d0f725793993023964c1261cf2c5e5061ff8f18af6"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-forbidden-original/cards-dark-eclipse-full-before.webp",
+          "bytes": 87880,
+          "sha256": "2724799c1e660dbe1249b652be3b9c8f5e37051ee7af618388782be345abaf70"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-forbidden-original/cards-dark-eclipse-thumb-before.webp",
+          "bytes": 22180,
+          "sha256": "2d69fa67789b55bb97e3dda00af7ce4420783503da431a48f634c6f0b90e702f"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/dark-eclipse.webp",
+          "bytes": 114828,
+          "sha256": "be45d434b10d40958cb1ab585953bad21849b325eb81d39cda0e469f12073caf",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/dark-eclipse.webp",
+          "bytes": 18920,
+          "sha256": "13a29e0242f8fb3d3acad32649f9993163abb61ab133bc2da7180ad29e0cdbb9",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "forbidden-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/dark-eclipse.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 114828,
+            "sha256": "be45d434b10d40958cb1ab585953bad21849b325eb81d39cda0e469f12073caf",
+            "source": "docs/evidence/2026-10-10-forbidden-original/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/dark-eclipse.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 22180,
+            "sha256": "2d69fa67789b55bb97e3dda00af7ce4420783503da431a48f634c6f0b90e702f",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/dark-eclipse.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 18920,
+            "sha256": "13a29e0242f8fb3d3acad32649f9993163abb61ab133bc2da7180ad29e0cdbb9",
+            "source": "docs/evidence/2026-10-10-forbidden-original/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 826,
+  "manifest_count_after": 827
+}

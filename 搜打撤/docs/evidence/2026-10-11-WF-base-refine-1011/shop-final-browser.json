@@ -1,0 +1,362 @@
+{
+  "nodes": [
+    {
+      "attributes": {
+        "aria-label": "返回后勤",
+        "data-act": "logisticsParent"
+      },
+      "identity": "返回后勤",
+      "key": "back",
+      "rect": {
+        "height": 39.62249755859375,
+        "width": 43.22249984741211,
+        "x": 22.012500762939453,
+        "y": 14
+      },
+      "selector": "#hubMain .hub-back",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(235, 235, 235)",
+        "display": "flex",
+        "font-size": "12.5px"
+      },
+      "tag": "BUTTON",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-view": "shop/"
+      },
+      "identity": "补给储备币 0\n    \n        穿刺武术\n        \n          \n          ↗\n        \n        \n          持有 0 张\n           6\n        \n        \n          购买 ×1→\n          还需 6 储备币\n        \n      \n        法杖装备\n        \n  ",
+      "key": "main",
+      "rect": {
+        "height": 885.9625244140625,
+        "width": 653.6000366210938,
+        "x": 0,
+        "y": 70.0374984741211
+      },
+      "selector": "#hubMain .hub-page",
+      "styles": {
+        "background-color": "rgb(226, 231, 229)",
+        "color": "rgb(27, 42, 52)",
+        "display": "block",
+        "font-size": "18px"
+      },
+      "tag": "MAIN",
+      "text": "补给储备币 0\n    \n        穿刺武术\n        \n          \n          ↗\n        \n        \n          持有 0 张\n           6\n        \n        \n          购买 ×1→\n          还需 6 储备币\n        \n      \n        法杖装备\n        \n          \n          ↗\n        \n        \n          持有 0 张\n           6\n        \n        \n          购买 ×1→\n          还需 6 储备币\n        \n      \n        口粮基地物资\n        \n          \n          ↗\n        \n        \n          持有 0 份\n           4\n        \n        \n          购买 ×1→\n          还需 4 储备币\n        \n      \n        木材基地物资\n        \n          \n          ↗\n        \n        \n          持有 0 个\n           4\n "
+    },
+    {
+      "attributes": {},
+      "identity": "基地",
+      "key": "heading",
+      "rect": {
+        "height": 28.61250114440918,
+        "width": 48.42499923706055,
+        "x": 92.0500030517578,
+        "y": 19.912500381469727
+      },
+      "selector": "#hubMain h2",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(230, 233, 237)",
+        "display": "block",
+        "font-size": "22px"
+      },
+      "tag": "H2",
+      "text": "基地"
+    },
+    {
+      "attributes": {},
+      "identity": "补给",
+      "key": "heading",
+      "rect": {
+        "height": 45.625,
+        "width": 79.07500457763672,
+        "x": 24.012500762939453,
+        "y": 98.0500030517578
+      },
+      "selector": "#hubMain h2",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(27, 42, 52)",
+        "display": "block",
+        "font-size": "38px"
+      },
+      "tag": "H2",
+      "text": "补给"
+    },
+    {
+      "attributes": {
+        "aria-label": "返回后勤",
+        "data-act": "logisticsParent"
+      },
+      "identity": "返回后勤",
+      "key": "action",
+      "rect": {
+        "height": 39.62249755859375,
+        "width": 43.22249984741211,
+        "x": 22.012500762939453,
+        "y": 14
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(235, 235, 235)",
+        "display": "flex",
+        "font-size": "12.5px"
+      },
+      "tag": "BUTTON",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "aria-label": "查看穿刺详情",
+        "data-act": "shopPreview",
+        "data-i": "0"
+      },
+      "identity": "查看穿刺详情",
+      "key": "action",
+      "rect": {
+        "height": 260.1499938964844,
+        "width": 266.38751220703125,
+        "x": 38.01250076293945,
+        "y": 233.3125
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(27, 42, 52)",
+        "display": "flex",
+        "font-size": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "↗"
+    },
+    {
+      "attributes": {
+        "aria-label": "购买穿刺 ×1，6 储备币，还需 6 储备币",
+        "data-act": "shopBuy",
+        "data-i": "0"
+      },
+      "identity": "购买穿刺 ×1，6 储备币，还需 6 储备币",
+      "key": "action",
+      "rect": {
+        "height": 57.962501525878906,
+        "width": 266.38751220703125,
+        "x": 38.01250076293945,
+        "y": 553.2750244140625
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgb(210, 218, 214)",
+        "color": "rgb(115, 126, 134)",
+        "display": "flex",
+        "font-size": "21px"
+      },
+      "tag": "BUTTON",
+      "text": "购买 ×1→"
+    },
+    {
+      "attributes": {
+        "aria-label": "查看法杖详情",
+        "data-act": "shopPreview",
+        "data-i": "1"
+      },
+      "identity": "查看法杖详情",
+      "key": "action",
+      "rect": {
+        "height": 260.1499938964844,
+        "width": 267.1875,
+        "x": 333.20001220703125,
+        "y": 233.3125
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(27, 42, 52)",
+        "display": "flex",
+        "font-size": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "↗"
+    },
+    {
+      "attributes": {
+        "aria-label": "购买法杖 ×1，6 储备币，还需 6 储备币",
+        "data-act": "shopBuy",
+        "data-i": "1"
+      },
+      "identity": "购买法杖 ×1，6 储备币，还需 6 储备币",
+      "key": "action",
+      "rect": {
+        "height": 57.962501525878906,
+        "width": 267.1875,
+        "x": 333.20001220703125,
+        "y": 553.2750244140625
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgb(210, 218, 214)",
+        "color": "rgb(115, 126, 134)",
+        "display": "flex",
+        "font-size": "21px"
+      },
+      "tag": "BUTTON",
+      "text": "购买 ×1→"
+    },
+    {
+      "attributes": {
+        "aria-label": "查看口粮详情",
+        "data-act": "rawItem",
+        "data-kind": "rations"
+      },
+      "identity": "查看口粮详情",
+      "key": "action",
+      "rect": {
+        "height": 260.1499938964844,
+        "width": 266.38751220703125,
+        "x": 38.01250076293945,
+        "y": 711.2750244140625
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(27, 42, 52)",
+        "display": "flex",
+        "font-size": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "↗"
+    },
+    {
+      "attributes": {
+        "aria-label": "购买口粮 ×1，4 储备币，还需 4 储备币",
+        "data-act": "shopBuy",
+        "data-i": "2"
+      },
+      "identity": "购买口粮 ×1，4 储备币，还需 4 储备币",
+      "key": "action",
+      "rect": {
+        "height": 57.962501525878906,
+        "width": 266.38751220703125,
+        "x": 38.01250076293945,
+        "y": 1031.237548828125
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgb(210, 218, 214)",
+        "color": "rgb(115, 126, 134)",
+        "display": "flex",
+        "font-size": "21px"
+      },
+      "tag": "BUTTON",
+      "text": "购买 ×1→"
+    },
+    {
+      "attributes": {
+        "aria-label": "查看木材详情",
+        "data-act": "rawItem",
+        "data-kind": "wood"
+      },
+      "identity": "查看木材详情",
+      "key": "action",
+      "rect": {
+        "height": 260.1499938964844,
+        "width": 267.1875,
+        "x": 333.20001220703125,
+        "y": 711.2750244140625
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(27, 42, 52)",
+        "display": "flex",
+        "font-size": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "↗"
+    },
+    {
+      "attributes": {
+        "aria-label": "购买木材 ×1，4 储备币，还需 4 储备币",
+        "data-act": "shopBuy",
+        "data-i": "3"
+      },
+      "identity": "购买木材 ×1，4 储备币，还需 4 储备币",
+      "key": "action",
+      "rect": {
+        "height": 57.962501525878906,
+        "width": 267.1875,
+        "x": 333.20001220703125,
+        "y": 1031.237548828125
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgb(210, 218, 214)",
+        "color": "rgb(115, 126, 134)",
+        "display": "flex",
+        "font-size": "21px"
+      },
+      "tag": "BUTTON",
+      "text": "购买 ×1→"
+    }
+  ],
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 654
+    }
+  },
+  "selectors": [
+    {
+      "key": "back",
+      "selector": "#hubMain .hub-back"
+    },
+    {
+      "key": "main",
+      "selector": "#hubMain .hub-page"
+    },
+    {
+      "key": "heading",
+      "selector": "#hubMain h2"
+    },
+    {
+      "key": "action",
+      "selector": "#hubMain button"
+    },
+    {
+      "key": "canvas",
+      "selector": "#hubMain .courtyard-v3-canvas"
+    }
+  ],
+  "schemaVersion": 1,
+  "kind": "browser-snapshot",
+  "scene": "base-shop-shelf",
+  "observedAt": "2026-10-11T05:11:55.107Z",
+  "collector": {
+    "platform": "Codex",
+    "browser": "iab",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "actions": [
+    {
+      "type": "real-input",
+      "detail": "进入档位01→队员→招式→返回队员→伙伴→孵化→返回伙伴→返回队员；人物切换黑像→选择培养卡牌→补给→返回后勤→返回队员保留黑像；外观按Escape回队员；后勤→扩建→返回后勤→返回基地；普通后勤入口清除人物筛选；收藏室→奖励→成就目标按Escape回奖励→收藏里程碑→返回奖励→返回收藏室；卡背→猎手皮纸→查看解锁目标→返回卡背保留选择；庭院→投喂→暂停→继续；观雨→大雨→苔绿→声音开→声音关；台面真实点击出现雨圈散开"
+    },
+    {
+      "type": "screenshot",
+      "detail": "当前窗口实页截取"
+    }
+  ],
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "screenshots": [
+    "docs/evidence/2026-10-11-WF-base-refine-1011/shop-final.jpg"
+  ]
+}

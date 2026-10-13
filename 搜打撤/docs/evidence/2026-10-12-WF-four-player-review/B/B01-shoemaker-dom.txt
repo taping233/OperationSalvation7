@@ -1,0 +1,26 @@
+- main:
+  - text: 金币
+  - generic: "3"
+  - text: 攻击
+  - generic: "4"
+  - button "离开对局":
+  - button:
+  - button:
+  - generic: 当前生命
+  - generic: 34/35
+  - button "背包 6/16":
+    - generic: 背包
+    - generic: 6/16
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - text: 风雪哨线
+    - generic: 第 2 层
+    - region "事件与叙事":
+      - heading "tools 修鞋铺 · 修整行装" [level=2]:
+        - img "tools"
+        - text: 修鞋铺 · 修整行装
+      - region "事件叙述": 老师傅顺手替你把装备修好了——可以从消耗口袋复原 1 张卡牌（点击卡面复原）
+    - region "事件选项":
+      - paragraph: （消耗口袋里没有可复原的卡牌）
+    - button "继续旅程" [active]:
+      - text: 继续旅程

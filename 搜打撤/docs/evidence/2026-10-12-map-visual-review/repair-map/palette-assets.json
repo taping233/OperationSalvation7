@@ -1,0 +1,30 @@
+[
+  {
+    "name": "passage-transit-core",
+    "runtime": "game\\assets\\scenes\\map-nodes\\passage-transit-core-palette-1012-v3.webp",
+    "bounds": [
+      112,
+      62,
+      437,
+      475
+    ],
+    "source": "docs\\evidence\\2026-10-12-map-visual-review\\repair-map\\source\\passage-transit-core-palette-v3.png",
+    "sourceSHA256": "c1a2ee418ec3caccd3a7fdb9f2e023df4953a423156de24edea02250c36ffb98",
+    "runtimeSHA256": "f6b480a10da5624168e62af688172c47b832dfb0deb5c588df91343e976c15bf",
+    "runtimeBytes": 146620
+  },
+  {
+    "name": "shop-exchange-token",
+    "runtime": "game\\assets\\scenes\\map-nodes\\shop-exchange-token-palette-1012-v3.webp",
+    "bounds": [
+      88,
+      44,
+      444,
+      486
+    ],
+    "source": "docs\\evidence\\2026-10-12-map-visual-review\\repair-map\\source\\shop-exchange-token-palette-v3.png",
+    "sourceSHA256": "7f49d8e9119abb05b6d6cb3ad219d217c5d3dccae0b33d0db7d64b0dc0840440",
+    "runtimeSHA256": "3e7a6a6f77a10ba3a2eeba29a1ace0ab9a7415362575d973c4e3b49e140d79f7",
+    "runtimeBytes": 171656
+  }
+]

@@ -1,0 +1,120 @@
+{
+  "workflow": "Built-in ImageGen border-only edits on seven simple card backs; themed corners and restrained bands, central emblems retained",
+  "user_instruction": "卡的边框缺少设计",
+  "base_receipt": "../2026-10-12-cardbacks-simple/receipt.json",
+  "items": [
+    {
+      "id": "classic",
+      "name": "行囊粗布",
+      "concept": "粗布包与折布角框",
+      "asset": "card-backs/classic.webp",
+      "base_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-simple-20261012\\classic-source.png",
+      "imagegen_prompt": "BORDER-DESIGN EDIT. Input 1 is the CURRENT simplified card back and is the edit target. Preserve its sole central emblem, silhouette, object count, placement, scale, palette and calm background as closely as possible. Do not redesign the central illustration. Inputs 2,3,4 are PROJECT CARD ART STYLE references only for large opaque color masses, broad directional strokes, hard grouped shadows and economical material drawing. Do not copy their weapons, slash beams or chest. Replace the plain thin rectangular gold outline with a DISTINCTIVE BUT RESTRAINED THEMED CARD-BACK FRAME. Keep the overall set coherent: the new enclosing frame uses a dark outer binding band, a clear inner boundary and four purposeful corner shapes. All FOUR sides and FOUR corners remain complete. The frame occupies roughly 6% of canvas width at left/right and similar substantial painted thickness at top/bottom. Decorations stay inside that border band and do not spread into the central picture. A readable frame silhouette and a few thematic shapes matter more than ornamental detail. A weathered ochre canvas binding frame with a dark slate outer edge and a narrow darker inner seam. Four broad folded-cloth triangular corner overlaps, each with only two large cream stitches. The side bands remain calm and plain. Shape the binding with a few broad cloth shadow planes; no fabric pattern, winding rope or extra center objects. STYLE: match the existing project's low-detail hand-painted anime artwork. Complete clear shapes, connected matte opaque color planes, a few broad shadow turns, wide strokes and restrained highlights. Keep the long edge surfaces calm, preserve generous quiet space in the center and avoid covering surfaces with texture. No dense micro-pattern, all-over scratches, fine engraving, jewellery clutter, thin decorative line networks, glossy 3D, photoreal materials, words, letters, numbers, logos or UI. Single portrait 2:3 front-on artwork, full bleed, no mockup, tabletop or outside margin. Change the border only; preserve the central simple emblem.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-simple-20261012\\classic-source.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-455564fd-1b42-425c-9132-957eee76c15f.png",
+      "generation_method": "builtin-border-edit"
+    },
+    {
+      "id": "wolf",
+      "name": "猎手皮纸",
+      "concept": "月箭与皮纸猎角框",
+      "asset": "card-backs/wolf.webp",
+      "base_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-simple-20261012\\wolf-source.png",
+      "imagegen_prompt": "BORDER-DESIGN EDIT. Input 1 is the CURRENT simplified card back and is the edit target. Preserve its sole central emblem, silhouette, object count, placement, scale, palette and calm background as closely as possible. Do not redesign the central illustration. Inputs 2,3,4 are PROJECT CARD ART STYLE references only for large opaque color masses, broad directional strokes, hard grouped shadows and economical material drawing. Do not copy their weapons, slash beams or chest. Replace the plain thin rectangular gold outline with a DISTINCTIVE BUT RESTRAINED THEMED CARD-BACK FRAME. Keep the overall set coherent: the new enclosing frame uses a dark outer binding band, a clear inner boundary and four purposeful corner shapes. All FOUR sides and FOUR corners remain complete. The frame occupies roughly 6% of canvas width at left/right and similar substantial painted thickness at top/bottom. Decorations stay inside that border band and do not spread into the central picture. A readable frame silhouette and a few thematic shapes matter more than ornamental detail. A muted tan parchment-and-leather binding frame over a charcoal outer band. At the four corners, use bold compact arrowhead-shaped ivory/tan corner braces with a small dark leather fold underneath, all contained within the border zone. Keep the long side bands clean; only two small crimson seam accents. No antlers, maps, extra arrow shafts or tracks inside the picture. STYLE: match the existing project's low-detail hand-painted anime artwork. Complete clear shapes, connected matte opaque color planes, a few broad shadow turns, wide strokes and restrained highlights. Keep the long edge surfaces calm, preserve generous quiet space in the center and avoid covering surfaces with texture. No dense micro-pattern, all-over scratches, fine engraving, jewellery clutter, thin decorative line networks, glossy 3D, photoreal materials, words, letters, numbers, logos or UI. Single portrait 2:3 front-on artwork, full bleed, no mockup, tabletop or outside margin. Change the border only; preserve the central simple emblem.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-simple-20261012\\wolf-source.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-eb4586a4-59f6-442a-94fa-be460737f7e2.png",
+      "generation_method": "builtin-border-edit"
+    },
+    {
+      "id": "coin",
+      "name": "富商锦缎",
+      "concept": "金币与赤锦包角框",
+      "asset": "card-backs/coin.webp",
+      "base_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-simple-20261012\\coin-source.png",
+      "imagegen_prompt": "BORDER-DESIGN EDIT. Input 1 is the CURRENT simplified card back and is the edit target. Preserve its sole central emblem, silhouette, object count, placement, scale, palette and calm background as closely as possible. Do not redesign the central illustration. Inputs 2,3,4 are PROJECT CARD ART STYLE references only for large opaque color masses, broad directional strokes, hard grouped shadows and economical material drawing. Do not copy their weapons, slash beams or chest. Replace the plain thin rectangular gold outline with a DISTINCTIVE BUT RESTRAINED THEMED CARD-BACK FRAME. Keep the overall set coherent: the new enclosing frame uses a dark outer binding band, a clear inner boundary and four purposeful corner shapes. All FOUR sides and FOUR corners remain complete. The frame occupies roughly 6% of canvas width at left/right and similar substantial painted thickness at top/bottom. Decorations stay inside that border band and do not spread into the central picture. A readable frame silhouette and a few thematic shapes matter more than ornamental detail. A deep burgundy brocade binding frame with a restrained broad antique-gold inner edge. At four corners, tuck the red band into simple folded diamond-shaped silk knots with one clear gold shadow/light turn. Long edge bands stay quiet. No floral embroidery, filigree, coins attached to the border, gemstones, tassels or added center ribbons. STYLE: match the existing project's low-detail hand-painted anime artwork. Complete clear shapes, connected matte opaque color planes, a few broad shadow turns, wide strokes and restrained highlights. Keep the long edge surfaces calm, preserve generous quiet space in the center and avoid covering surfaces with texture. No dense micro-pattern, all-over scratches, fine engraving, jewellery clutter, thin decorative line networks, glossy 3D, photoreal materials, words, letters, numbers, logos or UI. Single portrait 2:3 front-on artwork, full bleed, no mockup, tabletop or outside margin. Change the border only; preserve the central simple emblem.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-simple-20261012\\coin-source.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-24c36edd-2da6-4954-b07c-202e83fd6212.png",
+      "generation_method": "builtin-border-edit"
+    },
+    {
+      "id": "vault",
+      "name": "仓廪木纹",
+      "concept": "麦穗与木榫角框",
+      "asset": "card-backs/vault.webp",
+      "base_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-simple-20261012\\vault-source.png",
+      "imagegen_prompt": "BORDER-DESIGN EDIT. Input 1 is the CURRENT simplified card back and is the edit target. Preserve its sole central emblem, silhouette, object count, placement, scale, palette and calm background as closely as possible. Do not redesign the central illustration. Inputs 2,3,4 are PROJECT CARD ART STYLE references only for large opaque color masses, broad directional strokes, hard grouped shadows and economical material drawing. Do not copy their weapons, slash beams or chest. Replace the plain thin rectangular gold outline with a DISTINCTIVE BUT RESTRAINED THEMED CARD-BACK FRAME. Keep the overall set coherent: the new enclosing frame uses a dark outer binding band, a clear inner boundary and four purposeful corner shapes. All FOUR sides and FOUR corners remain complete. The frame occupies roughly 6% of canvas width at left/right and similar substantial painted thickness at top/bottom. Decorations stay inside that border band and do not spread into the central picture. A readable frame silhouette and a few thematic shapes matter more than ornamental detail. A deep walnut wooden binding frame made from four substantial calm beam-like painted bands. Four visible interlocking mortise-joint corner shapes, each explained with one dark notch and one restrained muted-gold cap. A few large olive/honey wood planes, not detailed woodgrain. No nails network, metal belts crossing the picture, locks, keyholes or extra wheat. STYLE: match the existing project's low-detail hand-painted anime artwork. Complete clear shapes, connected matte opaque color planes, a few broad shadow turns, wide strokes and restrained highlights. Keep the long edge surfaces calm, preserve generous quiet space in the center and avoid covering surfaces with texture. No dense micro-pattern, all-over scratches, fine engraving, jewellery clutter, thin decorative line networks, glossy 3D, photoreal materials, words, letters, numbers, logos or UI. Single portrait 2:3 front-on artwork, full bleed, no mockup, tabletop or outside margin. Change the border only; preserve the central simple emblem.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-simple-20261012\\vault-source.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-4a1c0dd7-be8b-4d18-990f-cf6043ef2f3e.png",
+      "generation_method": "builtin-border-edit"
+    },
+    {
+      "id": "boss",
+      "name": "弑神黑曜",
+      "concept": "赤缝黑曜与切面角框",
+      "asset": "card-backs/boss.webp",
+      "base_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-simple-20261012\\boss-source.png",
+      "imagegen_prompt": "BORDER-DESIGN EDIT. Input 1 is the CURRENT simplified card back and is the edit target. Preserve its sole central emblem, silhouette, object count, placement, scale, palette and calm background as closely as possible. Do not redesign the central illustration. Inputs 2,3,4 are PROJECT CARD ART STYLE references only for large opaque color masses, broad directional strokes, hard grouped shadows and economical material drawing. Do not copy their weapons, slash beams or chest. Replace the plain thin rectangular gold outline with a DISTINCTIVE BUT RESTRAINED THEMED CARD-BACK FRAME. Keep the overall set coherent: the new enclosing frame uses a dark outer binding band, a clear inner boundary and four purposeful corner shapes. All FOUR sides and FOUR corners remain complete. The frame occupies roughly 6% of canvas width at left/right and similar substantial painted thickness at top/bottom. Decorations stay inside that border band and do not spread into the central picture. A readable frame silhouette and a few thematic shapes matter more than ornamental detail. An angular near-black obsidian binding frame with four chunky cut-facet corner caps. Use only two or three large charcoal shadow planes per corner, restrained thin antique-gold inner separators and two short oxblood-red inlay seams on opposing corners. Strong clean silhouette and slightly clipped corner geometry, while the full rectangular perimeter stays closed. No spikes entering the center, crown, halo, fragments or extra gems. STYLE: match the existing project's low-detail hand-painted anime artwork. Complete clear shapes, connected matte opaque color planes, a few broad shadow turns, wide strokes and restrained highlights. Keep the long edge surfaces calm, preserve generous quiet space in the center and avoid covering surfaces with texture. No dense micro-pattern, all-over scratches, fine engraving, jewellery clutter, thin decorative line networks, glossy 3D, photoreal materials, words, letters, numbers, logos or UI. Single portrait 2:3 front-on artwork, full bleed, no mockup, tabletop or outside margin. Change the border only; preserve the central simple emblem.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-simple-20261012\\boss-source.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-aa3f7a31-ee34-4bc3-bbdd-da8f4813ff11.png",
+      "generation_method": "builtin-border-edit"
+    },
+    {
+      "id": "altar",
+      "name": "核心星轨",
+      "concept": "单环晶核与星轨弧框",
+      "asset": "card-backs/altar.webp",
+      "base_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-simple-20261012\\altar-source.png",
+      "imagegen_prompt": "BORDER-DESIGN EDIT. Input 1 is the CURRENT simplified card back and is the edit target. Preserve its sole central emblem, silhouette, object count, placement, scale, palette and calm background as closely as possible. Do not redesign the central illustration. Inputs 2,3,4 are PROJECT CARD ART STYLE references only for large opaque color masses, broad directional strokes, hard grouped shadows and economical material drawing. Do not copy their weapons, slash beams or chest. Replace the plain thin rectangular gold outline with a DISTINCTIVE BUT RESTRAINED THEMED CARD-BACK FRAME. Keep the overall set coherent: the new enclosing frame uses a dark outer binding band, a clear inner boundary and four purposeful corner shapes. All FOUR sides and FOUR corners remain complete. The frame occupies roughly 6% of canvas width at left/right and similar substantial painted thickness at top/bottom. Decorations stay inside that border band and do not spread into the central picture. A readable frame silhouette and a few thematic shapes matter more than ornamental detail. A midnight-navy binding frame with four broad antique-gold arc-shaped corner brackets, each echoing part of an orbit. Include one compact cyan inlay plane at each corner and keep the intervening side bands quiet. A single continuous inner edge completes the enclosure; arcs are sparse and bold, not fine engraved diagrams. No added central orbital rings, star maps, dials, glyphs or scattered stars. STYLE: match the existing project's low-detail hand-painted anime artwork. Complete clear shapes, connected matte opaque color planes, a few broad shadow turns, wide strokes and restrained highlights. Keep the long edge surfaces calm, preserve generous quiet space in the center and avoid covering surfaces with texture. No dense micro-pattern, all-over scratches, fine engraving, jewellery clutter, thin decorative line networks, glossy 3D, photoreal materials, words, letters, numbers, logos or UI. Single portrait 2:3 front-on artwork, full bleed, no mockup, tabletop or outside margin. Change the border only; preserve the central simple emblem.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-simple-20261012\\altar-source.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-bba1263f-88e7-4a8a-9931-ed6737a5969a.png",
+      "generation_method": "builtin-border-edit"
+    },
+    {
+      "id": "pet",
+      "name": "忠犬爪印",
+      "concept": "爪印与皮革搭扣框",
+      "asset": "card-backs/pet.webp",
+      "base_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-simple-20261012\\pet-source.png",
+      "imagegen_prompt": "BORDER-DESIGN EDIT. Input 1 is the CURRENT simplified card back and is the edit target. Preserve its sole central emblem, silhouette, object count, placement, scale, palette and calm background as closely as possible. Do not redesign the central illustration. Inputs 2,3,4 are PROJECT CARD ART STYLE references only for large opaque color masses, broad directional strokes, hard grouped shadows and economical material drawing. Do not copy their weapons, slash beams or chest. Replace the plain thin rectangular gold outline with a DISTINCTIVE BUT RESTRAINED THEMED CARD-BACK FRAME. Keep the overall set coherent: the new enclosing frame uses a dark outer binding band, a clear inner boundary and four purposeful corner shapes. All FOUR sides and FOUR corners remain complete. The frame occupies roughly 6% of canvas width at left/right and similar substantial painted thickness at top/bottom. Decorations stay inside that border band and do not spread into the central picture. A readable frame silhouette and a few thematic shapes matter more than ornamental detail. A dark-navy leather binding frame with four warm-tan rounded strap-cuff corner overlaps and small restrained brass caps. Two broad cream stitch marks near each long-side end, no dense stitch pattern. Warm friendly curved corner shapes within a clean closed frame, expressed as a few matte leather planes. No collar loop around the center, heart, buckle across the paw, hanging charms, extra paw marks or dog portrait. STYLE: match the existing project's low-detail hand-painted anime artwork. Complete clear shapes, connected matte opaque color planes, a few broad shadow turns, wide strokes and restrained highlights. Keep the long edge surfaces calm, preserve generous quiet space in the center and avoid covering surfaces with texture. No dense micro-pattern, all-over scratches, fine engraving, jewellery clutter, thin decorative line networks, glossy 3D, photoreal materials, words, letters, numbers, logos or UI. Single portrait 2:3 front-on artwork, full bleed, no mockup, tabletop or outside margin. Change the border only; preserve the central simple emblem.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-simple-20261012\\pet-source.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-5e908dda-8b72-44d6-a90a-b63998441bb9.png",
+      "generation_method": "builtin-border-edit"
+    }
+  ],
+  "frame_requirement": "Complete enclosing border on all four sides."
+}

@@ -1,0 +1,87 @@
+{
+  "provider": "NovelAI",
+  "recipeVersion": "1.3",
+  "width": 1344,
+  "height": 768,
+  "model": "nai-diffusion-4-5-full",
+  "seed": 1773210094,
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nno humans, no characters, a single cozy winter expedition outpost interior, three-quarter elevated architectural cutaway, connected rooms in one believable stone and dark timber building, open front wall, snow visible outside the porch, a compact storeroom with crates and shelving at the upper left, a merchant counter with canvas bags and a brass scale at the upper right, a large central planning desk with an unfolded paper map and a small lamp, a rest corner with chairs and hung coats in the lower left, a quiet archive cabinet and book shelves in the lower right, warm lamps glowing through cold winter daylight\n\nOne coherent game base environment painting with readable facilities; no interface, no icons, no labels, no lettering.\n\nWide 7:4 composition. The whole building footprint is visible inside the frame with generous quiet breathing space around it. Strong broad silhouettes; clear walking space connects the facilities. Show each cabinet, counter and table as part of the same room architecture, never as disconnected floating tiles.\n\nMuted deep olive, charcoal timber and warm desaturated stone; restrained amber lamp pools, pale winter snow. Broad opaque paint planes, hard structural edges and selective detail on functional props; one consistent light direction.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "negativePrompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, photorealistic, neon, cyberpunk, glossy plastic, anime girl, wallpaper portrait, flat icon sheet, multiple buildings, board game grid, floating islands, miniature figurines, tiny busy detail, bright white background",
+  "parameters": {
+    "params_version": 3,
+    "width": 1344,
+    "height": 768,
+    "scale": 6.5,
+    "sampler": "k_euler_ancestral",
+    "steps": 28,
+    "variety_plus": true,
+    "n_samples": 1,
+    "ucPresetId": "none",
+    "qualityPresetId": "none",
+    "autoSmea": false,
+    "straight_alpha": false,
+    "dynamic_thresholding": false,
+    "controlnet_strength": 1,
+    "legacy": false,
+    "legacy_v3_extend": false,
+    "legacy_uc": false,
+    "add_original_image": true,
+    "cfg_rescale": 0.0,
+    "noise_schedule": "karras",
+    "use_coords": false,
+    "normalize_reference_strength_multiple": true,
+    "inpaintImg2ImgStrength": 1.0,
+    "seed": 1773210094,
+    "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, photorealistic, neon, cyberpunk, glossy plastic, anime girl, wallpaper portrait, flat icon sheet, multiple buildings, board game grid, floating islands, miniature figurines, tiny busy detail, bright white background",
+    "characterPrompts": [
+      {
+        "prompt": "",
+        "uc": "",
+        "center": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "enabled": true
+      }
+    ],
+    "v4_prompt": {
+      "caption": {
+        "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\nno humans, no characters, a single cozy winter expedition outpost interior, three-quarter elevated architectural cutaway, connected rooms in one believable stone and dark timber building, open front wall, snow visible outside the porch, a compact storeroom with crates and shelving at the upper left, a merchant counter with canvas bags and a brass scale at the upper right, a large central planning desk with an unfolded paper map and a small lamp, a rest corner with chairs and hung coats in the lower left, a quiet archive cabinet and book shelves in the lower right, warm lamps glowing through cold winter daylight\n\nOne coherent game base environment painting with readable facilities; no interface, no icons, no labels, no lettering.\n\nWide 7:4 composition. The whole building footprint is visible inside the frame with generous quiet breathing space around it. Strong broad silhouettes; clear walking space connects the facilities. Show each cabinet, counter and table as part of the same room architecture, never as disconnected floating tiles.\n\nMuted deep olive, charcoal timber and warm desaturated stone; restrained amber lamp pools, pale winter snow. Broad opaque paint planes, hard structural edges and selective detail on functional props; one consistent light direction.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+        "char_captions": [
+          {
+            "char_caption": "",
+            "centers": [
+              {
+                "x": 0.5,
+                "y": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": false,
+      "use_order": true
+    },
+    "v4_negative_prompt": {
+      "caption": {
+        "base_caption": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, photorealistic, neon, cyberpunk, glossy plastic, anime girl, wallpaper portrait, flat icon sheet, multiple buildings, board game grid, floating islands, miniature figurines, tiny busy detail, bright white background",
+        "char_captions": [
+          {
+            "char_caption": "",
+            "centers": [
+              {
+                "x": 0.5,
+                "y": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": false,
+      "use_order": true
+    },
+    "deliberate_euler_ancestral_bug": false,
+    "prefer_brownian": true
+  },
+  "purpose": "NAI草图，之后以自有imagegen重绘作基地环境"
+}

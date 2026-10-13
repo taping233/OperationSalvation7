@@ -1,0 +1,607 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-element-seal",
+      "generated_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\element-seal-redraw-20261010\\element-seal.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-equip-tt3-element-seal-source.png",
+        "bytes": 1508758,
+        "sha256": "0ef91b1b9e1719702437c2100870ebef66d80c04742c9f93116a6dff5b76f6b7"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-equip-tt3-element-seal-full-before.webp",
+          "bytes": 38538,
+          "sha256": "631376d11209ee99dc861c076e90f225a1c20ae4930e132854b3a674110127cb"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-equip-tt3-element-seal-thumb-before.webp",
+          "bytes": 6166,
+          "sha256": "24a1654d49ec621a808a1f7ec836e4206598b8d320f430b3dacd274b623efc1e"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt3-element-seal.webp",
+          "bytes": 50382,
+          "sha256": "267efc0236ad401a948ce323415a5dba76399a2baca439c47e00353cd92def47",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt3-element-seal.webp",
+          "bytes": 6960,
+          "sha256": "96a415b80fb62236cf08f632d760d19dafe224099515faa6504e2c0a433c81f8",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "element-seal-original-rough-20261005",
+      "revision_after": "element-seal-redraw-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/equip-tt3-element-seal.webp",
+            "ext": "webp",
+            "bytes": 38538,
+            "sha256": "631376d11209ee99dc861c076e90f225a1c20ae4930e132854b3a674110127cb",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-05-WF-eight-items-rough/images.json"
+          },
+          "after": {
+            "path": "cards/equip-tt3-element-seal.webp",
+            "ext": "webp",
+            "bytes": 50382,
+            "sha256": "267efc0236ad401a948ce323415a5dba76399a2baca439c47e00353cd92def47",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-art-candidates-install/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/equip-tt3-element-seal.webp",
+            "ext": "webp",
+            "bytes": 6166,
+            "sha256": "24a1654d49ec621a808a1f7ec836e4206598b8d320f430b3dacd274b623efc1e",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-05-WF-eight-items-rough/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/equip-tt3-element-seal.webp",
+            "ext": "webp",
+            "bytes": 6960,
+            "sha256": "96a415b80fb62236cf08f632d760d19dafe224099515faa6504e2c0a433c81f8",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-art-candidates-install/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt12-felguard",
+      "generated_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\fel-bats-redraw-20261010\\felguard.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-spell-tt12-felguard-source.png",
+        "bytes": 1819994,
+        "sha256": "1f15b756c502f8eb45a7937e5b82f0d1072608c72c32a31a0e5ebad00a161896"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-spell-tt12-felguard-full-before.webp",
+          "bytes": 45292,
+          "sha256": "c8db5f16b606e0c1eb113a82285fcab4dba1531aa82373b43744f7e8c2699d8d"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-spell-tt12-felguard-thumb-before.webp",
+          "bytes": 12354,
+          "sha256": "f8c3d5ae4707d5c20256f8b2303cf2d866d7d8e29458d499ee8141a2955fc8cc"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt12-felguard.webp",
+          "bytes": 95376,
+          "sha256": "fb6f7b8a0a39ce13e04dcbbb0501fd87b99a6ded3b901e720bbf14aea316b0eb",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt12-felguard.webp",
+          "bytes": 11596,
+          "sha256": "3e5632089318b5ec9e6157de10ed603486b85ed7f7a5753d3daa04c7fb5be17d",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "felguard-redraw-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt12-felguard.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 95376,
+            "sha256": "fb6f7b8a0a39ce13e04dcbbb0501fd87b99a6ded3b901e720bbf14aea316b0eb",
+            "source": "docs/evidence/2026-10-10-art-candidates-install/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt12-felguard.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 12354,
+            "sha256": "f8c3d5ae4707d5c20256f8b2303cf2d866d7d8e29458d499ee8141a2955fc8cc",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt12-felguard.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 11596,
+            "sha256": "3e5632089318b5ec9e6157de10ed603486b85ed7f7a5753d3daa04c7fb5be17d",
+            "source": "docs/evidence/2026-10-10-art-candidates-install/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3sp-bloodstorm",
+      "generated_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\fel-bats-redraw-20261010\\bloodstorm.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-spell-tt3sp-bloodstorm-source.png",
+        "bytes": 1692344,
+        "sha256": "22de87dc645b5acd20579bce17d56f764cdd60ac5a6f5ee21dceaf6eebfa73e0"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-spell-tt3sp-bloodstorm-full-before.webp",
+          "bytes": 55540,
+          "sha256": "f0535adac8596b1890f0b55600037da8664f1eab62312861c1a7f5a961bac9fc"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-spell-tt3sp-bloodstorm-thumb-before.webp",
+          "bytes": 15076,
+          "sha256": "f0eff7452f331ce3def05e8a405b7519668db747c8e3835874c50501d203c2dc"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3sp-bloodstorm.webp",
+          "bytes": 105402,
+          "sha256": "453f529202847700a04a320133e3fa01afcc4a1bd991b3c2db04ffd0793107cf",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3sp-bloodstorm.webp",
+          "bytes": 14936,
+          "sha256": "64943cbf87360063b85d8d77bfdac320b51720ba42154407b1e3881395ab894c",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "bloodstorm-redraw-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt3sp-bloodstorm.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 105402,
+            "sha256": "453f529202847700a04a320133e3fa01afcc4a1bd991b3c2db04ffd0793107cf",
+            "source": "docs/evidence/2026-10-10-art-candidates-install/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3sp-bloodstorm.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15076,
+            "sha256": "f0eff7452f331ce3def05e8a405b7519668db747c8e3835874c50501d203c2dc",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3sp-bloodstorm.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 14936,
+            "sha256": "64943cbf87360063b85d8d77bfdac320b51720ba42154407b1e3881395ab894c",
+            "source": "docs/evidence/2026-10-10-art-candidates-install/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "cc-cursed-blade",
+      "generated_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cursed-blade-redraw-20261010\\cursed-blade.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-martial-cc-cursed-blade-source.png",
+        "bytes": 1866412,
+        "sha256": "c2faeb3a9fb7372ea64588e77b7bd1419f06c226ec0ce9009ca3c4cec8f349fd"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-martial-cc-cursed-blade-full-before.webp",
+          "bytes": 108650,
+          "sha256": "0bc649e99c8f3f31a042490395f238dfc604a232c9dbf04afb768f265c99b2ed"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-martial-cc-cursed-blade-thumb-before.webp",
+          "bytes": 15142,
+          "sha256": "907b7076a9a59c89c7c567910bb68dc002fb3bb622170dfc66b282c12ab78060"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-cc-cursed-blade.webp",
+          "bytes": 118198,
+          "sha256": "da631f31f641d8b5efbfec8bc6d0829e464d26a337f3a8bbaa48c5fe77923cba",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-cc-cursed-blade.webp",
+          "bytes": 15314,
+          "sha256": "745f7b2139b84e5de2a8c77629a750c442b89457d5183573ba51f273fcb1be8c",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "cursed-blade-redraw-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-cc-cursed-blade.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 118198,
+            "sha256": "da631f31f641d8b5efbfec8bc6d0829e464d26a337f3a8bbaa48c5fe77923cba",
+            "source": "docs/evidence/2026-10-10-art-candidates-install/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-cc-cursed-blade.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15142,
+            "sha256": "907b7076a9a59c89c7c567910bb68dc002fb3bb622170dfc66b282c12ab78060",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-cc-cursed-blade.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15314,
+            "sha256": "745f7b2139b84e5de2a8c77629a750c442b89457d5183573ba51f273fcb1be8c",
+            "source": "docs/evidence/2026-10-10-art-candidates-install/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-wolf-bow",
+      "generated_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\equip-redraw-20261010\\wolf-bow.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-equip-tt3-wolf-bow-source.png",
+        "bytes": 1720127,
+        "sha256": "802cc5039d2b5493b011ce3853e846dc3162b25773b249714892e6c3e527c60d"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-equip-tt3-wolf-bow-full-before.webp",
+          "bytes": 23950,
+          "sha256": "064e9a1915b2bd0d08a436c728da572d27fa2bcb8cec31f88fd0330d820a8440"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-equip-tt3-wolf-bow-thumb-before.webp",
+          "bytes": 4938,
+          "sha256": "30c3f8c8577d534a62cbc8c440dfb2575d05824ad92a3ded68ad7e9094d3170f"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt3-wolf-bow.webp",
+          "bytes": 73274,
+          "sha256": "ea1d58f405f3c2d26a242263015ea4c10aca9d064b8089d3891a4dc04ea7a147",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt3-wolf-bow.webp",
+          "bytes": 8538,
+          "sha256": "209ea2036f503e0fdf9cd8afc27657db08b57b648a6856d267edeb58006c67b5",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "wolf-bow-redraw-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/equip-tt3-wolf-bow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 73274,
+            "sha256": "ea1d58f405f3c2d26a242263015ea4c10aca9d064b8089d3891a4dc04ea7a147",
+            "source": "docs/evidence/2026-10-10-art-candidates-install/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/equip-tt3-wolf-bow.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 4938,
+            "sha256": "30c3f8c8577d534a62cbc8c440dfb2575d05824ad92a3ded68ad7e9094d3170f",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/equip-tt3-wolf-bow.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 8538,
+            "sha256": "209ea2036f503e0fdf9cd8afc27657db08b57b648a6856d267edeb58006c67b5",
+            "source": "docs/evidence/2026-10-10-art-candidates-install/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-holy-staff",
+      "generated_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\equip-redraw-20261010\\holy-staff.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-equip-tt3-holy-staff-source.png",
+        "bytes": 1549806,
+        "sha256": "e3eccb3b93942cd9b567f4e4a59cd1fe38e05645dfa2786afab422d747474d2f"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-equip-tt3-holy-staff-full-before.webp",
+          "bytes": 27050,
+          "sha256": "393b4b902d50384abf7f0bb4deca68dc003ee4ee0689c1319107f06f6f0c5944"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-equip-tt3-holy-staff-thumb-before.webp",
+          "bytes": 4182,
+          "sha256": "bbebfc0f0dd1311d932d317cd29fab97a45939470f4bd9d717b480277932dba1"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt3-holy-staff.webp",
+          "bytes": 42650,
+          "sha256": "7b229535eb83e16b62b964cbfc85141cdcef90cee13cbd8f28e745d13deaf0f4",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt3-holy-staff.webp",
+          "bytes": 5914,
+          "sha256": "23732a12d933c8dc7b5f233eccf6130df2b4f3151dd372cc16f2fff027893026",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "holy-staff-redraw-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/equip-tt3-holy-staff.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 42650,
+            "sha256": "7b229535eb83e16b62b964cbfc85141cdcef90cee13cbd8f28e745d13deaf0f4",
+            "source": "docs/evidence/2026-10-10-art-candidates-install/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/equip-tt3-holy-staff.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 4182,
+            "sha256": "bbebfc0f0dd1311d932d317cd29fab97a45939470f4bd9d717b480277932dba1",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/equip-tt3-holy-staff.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 5914,
+            "sha256": "23732a12d933c8dc7b5f233eccf6130df2b4f3151dd372cc16f2fff027893026",
+            "source": "docs/evidence/2026-10-10-art-candidates-install/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-crimson-pouch",
+      "generated_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\equip-redraw-20261010\\crimson-pouch.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-equip-tt3-crimson-pouch-source.png",
+        "bytes": 1445682,
+        "sha256": "d04e74757365d71c9fcd40685af4241197e00489fdb93625b861dd7f6e1f2082"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-equip-tt3-crimson-pouch-full-before.webp",
+          "bytes": 38430,
+          "sha256": "7c1806f100ced27300980c23c96c22d1725aba1b9ec31d805f430c767a42c431"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-equip-tt3-crimson-pouch-thumb-before.webp",
+          "bytes": 4690,
+          "sha256": "06aee85514875eba6f0b58578e7ce7a36467861ccdc9675b6fb9476f23f3c1b0"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt3-crimson-pouch.webp",
+          "bytes": 39202,
+          "sha256": "25ec4354678c02e55b720c0ee168b3a3490a6df83e274dbd6810f8f3ec042a78",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt3-crimson-pouch.webp",
+          "bytes": 5058,
+          "sha256": "fa273946487f6561fc9e4198d7579d8c7eaf02a4a43b7a688f1b8549ec54dcd8",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "crimson-pouch-redraw-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/equip-tt3-crimson-pouch.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 39202,
+            "sha256": "25ec4354678c02e55b720c0ee168b3a3490a6df83e274dbd6810f8f3ec042a78",
+            "source": "docs/evidence/2026-10-10-art-candidates-install/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/equip-tt3-crimson-pouch.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 4690,
+            "sha256": "06aee85514875eba6f0b58578e7ce7a36467861ccdc9675b6fb9476f23f3c1b0",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/equip-tt3-crimson-pouch.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 5058,
+            "sha256": "fa273946487f6561fc9e4198d7579d8c7eaf02a4a43b7a688f1b8549ec54dcd8",
+            "source": "docs/evidence/2026-10-10-art-candidates-install/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt12-sporewall",
+      "generated_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\sporewall-redraw-20261010\\sporewall-redraw.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-spell-tt12-sporewall-source.png",
+        "bytes": 1833084,
+        "sha256": "94c51ddd20c6c2a13d37f4b45d7581898d13416e5d0058311cf73749cd3111af"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-spell-tt12-sporewall-full-before.webp",
+          "bytes": 68758,
+          "sha256": "83e4003a41b2d91602049d7a4f6b871bc09bf539a8c6da3cf274953e3d7f7d55"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-art-candidates-install/cards-spell-tt12-sporewall-thumb-before.webp",
+          "bytes": 17988,
+          "sha256": "d6906987072e11725d7938bfeed6a096b9b6645a9d920bfecd7758b9d50f9669"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt12-sporewall.webp",
+          "bytes": 128062,
+          "sha256": "f98d45ebecf0d9e4d4863dde7a5d7ff5f4b4953c6ae07959d5898c3dc8ddd53f",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt12-sporewall.webp",
+          "bytes": 17114,
+          "sha256": "3be806ee733a17249f74912b094d29c5da90322e2ad97f2db73976e52bb7c6a4",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "sporewall-redraw-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt12-sporewall.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 128062,
+            "sha256": "f98d45ebecf0d9e4d4863dde7a5d7ff5f4b4953c6ae07959d5898c3dc8ddd53f",
+            "source": "docs/evidence/2026-10-10-art-candidates-install/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt12-sporewall.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17988,
+            "sha256": "d6906987072e11725d7938bfeed6a096b9b6645a9d920bfecd7758b9d50f9669",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt12-sporewall.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17114,
+            "sha256": "3be806ee733a17249f74912b094d29c5da90322e2ad97f2db73976e52bb7c6a4",
+            "source": "docs/evidence/2026-10-10-art-candidates-install/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1071,
+  "manifest_count_after": 1078
+}

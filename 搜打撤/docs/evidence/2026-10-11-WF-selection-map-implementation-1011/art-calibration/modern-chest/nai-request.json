@@ -1,0 +1,28 @@
+{
+  "status": "candidate-not-approved",
+  "model": "nai-diffusion-4-5-full",
+  "recipeVersion": "1.3",
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "width": 1344,
+  "height": 768,
+  "seed": 1011629502,
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nobject focus, no humans, one CLOSED MODERN SUPPLY CASE. Shape described directly from the observed Arknights Technical Investigation Supplies case: a LOW WIDE light-colored engineering case with softly chamfered rounded corners, a flat thick inset lid, a warm orange rectangular inset on the upper lid, a compact recessed rectangular front catch and carrying-grip recess. Short gray edge protectors, continuous clean lid/body seam. Broad front visible, shallow right-side depth and top plane in a three-quarter view. Compact synthetic composite casing, NOT a wooden fantasy chest, not a black barrel chest. The complete silhouette has a useful elegant industrial form with a few large structural parts. No text or logos on the orange lid inset. Closed flush latch, no old keyhole, no padlock.\n\nOne beautiful finished modern prop for a future science-fiction city card game, not cyberpunk. This NAI call has no image-reference input; structural observations are encoded as text only. A later image edit will combine the real reference picture and actual project card style.\n\n1344 by 768 wide canvas. Chest centered occupying about 65 percent width and 58 percent height, fully visible with clean margins. View from upper-left front showing top, broad front and right side. Rear lid hinge is at the top rear edge, clear mechanical alignment. Quiet plain pale neutral background only, no floor or scene. This single box will later use consistent opening animation frames.\n\nWarm ivory/off-white main casing, one soft coral-orange lid inset, muted blue-gray side shadow and neutral dark-gray small latch. Attractive calm color balance based on the project pearlbox card pale blue-gray inner planes and soft red/brass outer color groups, and crimson-pouch card large uninterrupted color masses. Three or four large hard-edged light/shadow groups with economical wide directional painterly marks. Complete coherent outer contour, loose painterly internal edge transitions, smooth broad silhouettes without plastic CGI shading. Focus detail only at the compact catch and lid seam. Surfaces quiet, no repeated tiny scratches or random triangular brush facets. Low-to-medium contrast, luminous light body rather than a dark black block. No illuminated strip around the box.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "negativePrompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, hands, characters, multiple cases, open case, snow, ice, old wooden chest, wood panels, wood grain, leather, medieval, castle, gigantic gold lock, keyhole, padlock, archaic corner ornaments, engraving, patterns, dense rivets, bolts everywhere, black main body, dark barrel chest, blue bands, glowing outline, neon, cyberpunk, light ring, magical runes, light beam, particles, giant scratches, thick fake brush texture, 3d render, CGI, PBR, shiny plastic, smooth airbrush, pixel art, UI, text, letters, label, logo, watermark, floor, scenery",
+  "naiImageReferences": [],
+  "observedStructure": "art-research-reset/references/ark-technical-supply.jpg",
+  "observedPaintStyle": [
+    "equip-tt2-pearlbox.webp",
+    "equip-tt3-crimson-pouch.webp"
+  ],
+  "source": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\art-calibration\\modern-chest\\source\\nai-modern-supply-v1.png",
+  "actualSeed": 1011629502,
+  "bytes": 609060,
+  "sha256": "f53919fa1648c8eab64081659f13b4206127b238b9d8c881485f992c89870b8d"
+}

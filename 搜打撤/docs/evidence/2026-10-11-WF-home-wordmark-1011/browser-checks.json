@@ -1,0 +1,125 @@
+{
+  "collector": "Codex/iab/cua/current-window",
+  "previewImages": [
+    {
+      "height": 680,
+      "loaded": true,
+      "src": "ornaments-v1.svg",
+      "width": 1000
+    },
+    {
+      "height": 941,
+      "loaded": true,
+      "src": "cn-wordmark-v2.png",
+      "width": 1672
+    },
+    {
+      "height": 140,
+      "loaded": true,
+      "src": "english-v1.svg",
+      "width": 640
+    },
+    {
+      "height": 941,
+      "loaded": true,
+      "src": "cn-wordmark-v2.png",
+      "width": 1672
+    },
+    {
+      "height": 140,
+      "loaded": true,
+      "src": "english-v1.svg",
+      "width": 640
+    },
+    {
+      "height": 680,
+      "loaded": true,
+      "src": "ornaments-v1.svg",
+      "width": 1000
+    }
+  ],
+  "creditsInitial": {
+    "glass": "blur(24px) saturate(0.7)",
+    "open": true,
+    "phase": "a",
+    "rows": [
+      {
+        "animation": "creditsNameIn",
+        "delay": "0.08s",
+        "duration": "0.64s",
+        "flight": "-80px",
+        "name": "制作人 程序 测试 美术 动画太平",
+        "transform": "matrix(1, 0, 0, 1, -80, 0)"
+      },
+      {
+        "animation": "creditsNameIn",
+        "delay": "0.14s",
+        "duration": "0.64s",
+        "flight": "80px",
+        "name": "游戏设计师创",
+        "transform": "matrix(1, 0, 0, 1, 80, 0)"
+      },
+      {
+        "animation": "creditsNameIn",
+        "delay": "0.24s",
+        "duration": "0.64s",
+        "flight": "80px",
+        "name": "精神支柱Tang",
+        "transform": "matrix(1, 0, 0, 1, 80, 0)"
+      }
+    ]
+  },
+  "creditsReplay": {
+    "open": true,
+    "phase": "a",
+    "rows": [
+      {
+        "animation": "creditsNameIn",
+        "duration": "0.64s",
+        "flight": "-80px"
+      },
+      {
+        "animation": "creditsNameIn",
+        "duration": "0.64s",
+        "flight": "80px"
+      },
+      {
+        "animation": "creditsNameIn",
+        "duration": "0.64s",
+        "flight": "80px"
+      }
+    ]
+  },
+  "creditsFinal": {
+    "glass": "blur(24px) saturate(0.7)",
+    "horizontalOverflow": false,
+    "open": true,
+    "rows": [
+      {
+        "flight": "-80px",
+        "transform": "none"
+      },
+      {
+        "flight": "80px",
+        "transform": "none"
+      },
+      {
+        "flight": "80px",
+        "transform": "none"
+      }
+    ]
+  },
+  "realInputs": [
+    "点击制作名单",
+    "返回按钮关闭",
+    "再次点击打开",
+    "返回按钮关闭"
+  ],
+  "esc": "工具输入未证实关闭，未计通过；本轮只改CSS，关闭逻辑未改",
+  "limits": [
+    "只验当前窗口",
+    "未测FPS",
+    "未切换系统减少动态偏好",
+    "字标v2候选尚未接入主页"
+  ]
+}

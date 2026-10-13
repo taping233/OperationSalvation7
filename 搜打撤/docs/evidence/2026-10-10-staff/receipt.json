@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-staff",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-85ba7b20-66a7-479e-89a9-1eea3b3f470c.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-staff/cards-expedition-starters-staff-source.png",
+        "bytes": 1616678,
+        "sha256": "ef54c6cec5ebcf222c0450e8e4c1912560e8133c74b38e546131d37c7291576b"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-staff/cards-expedition-starters-staff-full-before.webp",
+          "bytes": 28932,
+          "sha256": "b833936aca0a405d2d79c0482ff72eeeddb511dcfd9f4452962c2601441e270b"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-staff/cards-expedition-starters-staff-thumb-before.webp",
+          "bytes": 7124,
+          "sha256": "7b5c312cd332ba6507e24288b2b7310475aa874953bb04a96ed7572c0fad020f"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/expedition-starters/staff.webp",
+          "bytes": 44662,
+          "sha256": "0da053df958c8362fdbcdb3b1b2cac2fb4054e943069795ae2acdaed0764d4f3",
+          "size": [
+            1108,
+            1420
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/expedition-starters/staff.webp",
+          "bytes": 5244,
+          "sha256": "9640f1b8ab9fbbf7d4e8fed80cfbb3731c5ad77c51465c6a89917aa62925060d",
+          "size": [
+            350,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "staff-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/expedition-starters/staff.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 44662,
+            "sha256": "0da053df958c8362fdbcdb3b1b2cac2fb4054e943069795ae2acdaed0764d4f3",
+            "source": "docs/evidence/2026-10-10-staff/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/expedition-starters/staff.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 7124,
+            "sha256": "7b5c312cd332ba6507e24288b2b7310475aa874953bb04a96ed7572c0fad020f",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/expedition-starters/staff.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 5244,
+            "sha256": "9640f1b8ab9fbbf7d4e8fed80cfbb3731c5ad77c51465c6a89917aa62925060d",
+            "source": "docs/evidence/2026-10-10-staff/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 892,
+  "manifest_count_after": 893
+}

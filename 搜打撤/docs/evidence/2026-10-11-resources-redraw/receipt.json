@@ -1,0 +1,333 @@
+{
+  "method": "Built-in ImageGen; one call per item; original PNG alpha preserved",
+  "items": [
+    {
+      "name": "keys-bunch",
+      "card_id": "tt-keys-bunch",
+      "card_name": "两把钥匙",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-03a9b9e1-cb7c-4ae2-aaae-c93bfd5036dd.png",
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/keys-bunch.png",
+      "image_mode": "RGBA",
+      "image_size": [
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparent_pixels": 1260519,
+      "visual_review": "工具返回画作已查看；原有主形/数量/构图保留，粗手绘宽笔块面重绘",
+      "sha256": "28751adc9aa137cc1cbdfb565056366fd21235052ee65f726494ac6e62892fee",
+      "bytes": 703599,
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "wood",
+      "card_id": "tt-wood",
+      "card_name": "木材",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-1a14b251-1874-4048-a67b-96c3f39136c4.png",
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/wood.png",
+      "image_mode": "RGBA",
+      "image_size": [
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparent_pixels": 910422,
+      "visual_review": "工具返回画作已查看；原有主形/数量/构图保留，粗手绘宽笔块面重绘",
+      "sha256": "e22c2f02e4005077cc106368e4acbb6d89a9b9c0670a0abd3577eea63e668771",
+      "bytes": 1196998,
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "wood-lots",
+      "card_id": "tt-wood-lots",
+      "card_name": "大量木材",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-9b16c6bd-e669-4b17-8427-3346f7fb8395.png",
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/wood-lots.png",
+      "image_mode": "RGBA",
+      "image_size": [
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparent_pixels": 769726,
+      "visual_review": "工具返回画作已查看；原有主形/数量/构图保留，粗手绘宽笔块面重绘",
+      "sha256": "ac03cc55d23922328509abca022c0ed7ebe420fdcbc10cae6923c18faa240a50",
+      "bytes": 1491300,
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "wood-bundle",
+      "card_id": "tt3-wood-bundle",
+      "card_name": "木材捆",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-0b9add43-1ea2-4b74-adb6-b8398aa7a672.png",
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/wood-bundle.png",
+      "image_mode": "RGBA",
+      "image_size": [
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparent_pixels": 775925,
+      "visual_review": "工具返回画作已查看；原有主形/数量/构图保留，粗手绘宽笔块面重绘",
+      "sha256": "f4851e481fc9c7d576958c717c29670d48ca9acab24960547a6b8934b38bc35c",
+      "bytes": 1419034,
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "ration",
+      "card_id": "tt-rations",
+      "card_name": "口粮",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-1c48a9d0-7951-4789-bcd0-9a89e6e61513.png",
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/ration.png",
+      "image_mode": "RGBA",
+      "image_size": [
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparent_pixels": 871114,
+      "visual_review": "工具返回画作已查看；原有主形/数量/构图保留，粗手绘宽笔块面重绘",
+      "sha256": "f1b97e0c8c223d0a22e72ea2278dd6eb59042bf7d5da24a3291760f66439e56e",
+      "bytes": 1340377,
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "ration-double",
+      "card_id": "tt3-ration-double",
+      "card_name": "双份口粮",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-92009071-4f69-43da-a5a1-458aa0edff6d.png",
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/ration-double.png",
+      "image_mode": "RGBA",
+      "image_size": [
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparent_pixels": 782698,
+      "visual_review": "工具返回画作已查看；原有主形/数量/构图保留，粗手绘宽笔块面重绘",
+      "sha256": "6561a2c97805f21d9257d91696ecdcf84100e38cb9437727b6d245daacfed615",
+      "bytes": 1323738,
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "coin-silver",
+      "card_id": "tt-silver",
+      "card_name": "银币",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-430b97ca-56a0-4147-9b2a-ba744fa4fcc0.png",
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/coin-silver.png",
+      "image_mode": "RGBA",
+      "image_size": [
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparent_pixels": 885217,
+      "visual_review": "工具返回画作已查看；原有主形/数量/构图保留，粗手绘宽笔块面重绘",
+      "sha256": "193ba788561b04b0b434473a3355d39a398baab2c5b1b8207dd1243774b0d421",
+      "bytes": 1183512,
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "coin-gold",
+      "card_id": "tt-gold",
+      "card_name": "金币",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-84076700-2779-450e-8298-66f15d97d3bf.png",
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/coin-gold.png",
+      "image_mode": "RGBA",
+      "image_size": [
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparent_pixels": 724589,
+      "visual_review": "工具返回画作已查看；原有主形/数量/构图保留，粗手绘宽笔块面重绘",
+      "sha256": "8c2305985e982f2e482983f77f444f93e6beeb77ca85a6b50e5ddad4210a7800",
+      "bytes": 1471831,
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "diamond",
+      "card_id": "tt3-diamond",
+      "card_name": "钻石",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-9d0ebb9c-0ea2-4bbc-8ca4-2645972034c5.png",
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/diamond.png",
+      "image_mode": "RGBA",
+      "image_size": [
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparent_pixels": 875727,
+      "visual_review": "工具返回画作已查看；原有主形/数量/构图保留，粗手绘宽笔块面重绘",
+      "sha256": "ef23f97b395eecc476e447687c1bae1d591782b73195550decdb104b2bae6f01",
+      "bytes": 1101837,
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "garnet-marble",
+      "card_id": "tt3-garnet-marble",
+      "card_name": "石榴石",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-f6438ac9-6cb0-4452-8fa8-ff8b7a1c218c.png",
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/garnet-marble.png",
+      "image_mode": "RGBA",
+      "image_size": [
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparent_pixels": 712880,
+      "visual_review": "工具返回画作已查看；原有主形/数量/构图保留，粗手绘宽笔块面重绘",
+      "sha256": "a2917eceff993885c758bee4f7770d6c56d495f6723b383a8503bbee5e5a6212",
+      "bytes": 1387243,
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "econpack",
+      "card_id": "tt-econpack",
+      "card_name": "经济包",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-bceea9f2-c83e-4569-a0ef-10b6ae657bd2.png",
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/econpack.png",
+      "image_mode": "RGBA",
+      "image_size": [
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparent_pixels": 827106,
+      "visual_review": "工具返回画作已查看；原有主形/数量/构图保留，粗手绘宽笔块面重绘",
+      "sha256": "12a35361076d31e82022a8603d3b51e36aa2d4c7ad73867b73893f38b6ecd764",
+      "bytes": 1341286,
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "pet-egg",
+      "card_id": "pet-egg",
+      "card_name": "伙伴蛋",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-3459745e-5e9f-4d78-aa98-3712d2a8bcde.png",
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/pet-egg.png",
+      "image_mode": "RGBA",
+      "image_size": [
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparent_pixels": 787819,
+      "visual_review": "工具返回画作已查看；原有主形/数量/构图保留，粗手绘宽笔块面重绘",
+      "sha256": "62226a38ffcd6e85281450793e78f1668e3e9c10b16b4d20bc60790a2facb763",
+      "bytes": 1205735,
+      "status": "candidate-delivered"
+    }
+  ],
+  "tests_run": false,
+  "build_run": false,
+  "runtime_installed": false,
+  "committed": false
+}

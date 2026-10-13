@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-12",
+  "platform": "Codex In-app Browser",
+  "input": "真实控件click/check/uncheck与Esc；read-only DOM检查；仅参考板，未操作游戏",
+  "checks": [
+    {
+      "test": "仓库不足保留待领取",
+      "button": "领取奖励",
+      "count": "2",
+      "dialog": false,
+      "status": "仓库空间不足，奖励尚未领取。可查看后勤或扩建；本演示取消勾选后重试。"
+    },
+    {
+      "test": "成功反馈出现前计数与原行已同步",
+      "count": "1",
+      "destination": "去向：后勤仓库",
+      "dialog": true,
+      "received": "卡卡牌 × 1",
+      "rowDisabled": true
+    },
+    {
+      "test": "Esc仅关闭成功反馈",
+      "button": "✓ 已领取",
+      "count": "1",
+      "dialog": false
+    },
+    {
+      "test": "确认只关闭，全部领取记录保留",
+      "count": "0",
+      "dialog": false,
+      "disabled": true,
+      "status": "示例奖励全部已领取。仍留在收藏室，已领取记录保留。"
+    },
+    {
+      "test": "人物事件正文与选择",
+      "buttons": [
+        "查看交接单 →",
+        "稍后处理"
+      ],
+      "copy": "“交接单放在桌上了。要现在看看，还是稍后再来？”\n\n这是一段演示文案，用于展示人物、正文与选择的分区。",
+      "state": "正文与选择"
+    },
+    {
+      "test": "稍后处理保持未完成",
+      "state": "待处理"
+    },
+    {
+      "test": "已处理重读不再次执行",
+      "buttons": [
+        "返回事件入口"
+      ],
+      "state": "已处理 · 重读"
+    },
+    {
+      "test": "奖励参考原图可放大",
+      "image": "images/task-rewards.jpg",
+      "open": true,
+      "title": "活动奖励清单与已领取状态"
+    },
+    {
+      "test": "当前窗口版式",
+      "chapters": 21,
+      "failedVisibleImages": [],
+      "loadedImages": 23,
+      "overflow": false,
+      "referenceImages": 31,
+      "url": "http://127.0.0.1:5319/reference-board.html#claim-flow",
+      "viewport": [
+        1606,
+        956
+      ]
+    }
+  ],
+  "logs": [
+    {
+      "level": "warn",
+      "message": "[GPT] PubAdsService.getTargeting is deprecated, use googletag.getConfig('targeting') instead.\nhttps://goo.gle/gpt-message#200",
+      "timestamp": "2026-10-12T10:46:22.151Z",
+      "url": "https://securepubads.g.doubleclick.net/pagead/managed/js/gpt/m202610080101/pubads_impl.js?cb=122881522"
+    }
+  ]
+}

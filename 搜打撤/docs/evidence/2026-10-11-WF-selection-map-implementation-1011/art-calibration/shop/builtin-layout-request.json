@@ -1,0 +1,9 @@
+{
+  "status": "request-dispatched-candidate-not-approved",
+  "channel": "built-in image_gen",
+  "transparent_background": false,
+  "prompt": "Make only a layout correction to this painted shop calibration sample. Preserve the current brushwork, color palette, original brown-haired merchant's face/clothes/hands, small lamp and indoor curtain/wall design. The merchant and counter group is currently too wide. Reduce that ENTIRE left group proportionally to about 72% of its current size (do not squash anatomy), keep it anchored at the left edge, with the counter top near 60% of canvas height. The right end of the counter and all hands/arms must be entirely to the LEFT of the first quarter of the canvas; leave a narrow quiet gap before the right merchandise field begins around28%. Extend the existing quiet curtain/wall and floor into the vacated area with the same broad opaque directional brush planes and low contrast. Keep the face clearly readable, but make the group a supporting shop identity area rather than occupying38% width. No counter, person, lamp or high-contrast object may extend into the right72%. Do not add UI/cards/text/shelf products, a bright doorway, snow or new props. Do not change this back into clean lineart, smooth shading or a low-poly scene. Maintain widescreen composition. Only reposition/resize this coherent left group and continue existing painted interior behind it.",
+  "editTarget": "C:/Users/太平/.codex/generated_images/01a12a56-fff8-7393-a312-6f8f01036d55/exec-287ad1e7-5df8-41d8-a615-b3de80b85596.png",
+  "correction": "merchant and counter width still about38%, target within left28%; preserve current paint",
+  "gameIntegration": false
+}

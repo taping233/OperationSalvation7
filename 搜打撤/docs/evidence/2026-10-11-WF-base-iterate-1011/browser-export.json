@@ -1,0 +1,187 @@
+{
+  "actions": [
+    {
+      "detail": "成就/收藏切换、外观后回流培养、Enter键进入培养、仓库搜索/无结果/品质筛选、仓库扩建设施定位、招式连续翻页/详情关闭焦点",
+      "type": "real-input"
+    },
+    {
+      "detail": "当前窗口稳定收藏布局截图",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "已收藏0 / 68",
+      "key": "total",
+      "rect": {
+        "height": 90.4124984741211,
+        "width": 269.6875,
+        "x": 60.275001525878906,
+        "y": 219.08750915527344
+      },
+      "selector": ".av3-collection-total",
+      "styles": {
+        "color": "rgb(37, 45, 54)",
+        "display": "grid",
+        "font-size": "18px"
+      },
+      "tag": "DIV",
+      "text": "已收藏0 / 68"
+    },
+    {
+      "attributes": {},
+      "identity": "01收集 5 张 木材 ×30 / 5",
+      "key": "stage",
+      "rect": {
+        "height": 87.25,
+        "width": 252.1000061035156,
+        "x": 60.275001525878906,
+        "y": 360.26251220703125
+      },
+      "selector": ".av3-milestone",
+      "styles": {
+        "color": "rgb(37, 45, 54)",
+        "display": "grid",
+        "font-size": "18px"
+      },
+      "tag": "ARTICLE",
+      "text": "01收集 5 张 木材 ×30 / 5"
+    },
+    {
+      "attributes": {},
+      "identity": "02收集 15 张 口粮 ×50 / 15",
+      "key": "stage",
+      "rect": {
+        "height": 87.25,
+        "width": 252.1125030517578,
+        "x": 344.1000061035156,
+        "y": 360.26251220703125
+      },
+      "selector": ".av3-milestone",
+      "styles": {
+        "color": "rgb(37, 45, 54)",
+        "display": "grid",
+        "font-size": "18px"
+      },
+      "tag": "ARTICLE",
+      "text": "02收集 15 张 口粮 ×50 / 15"
+    },
+    {
+      "attributes": {},
+      "identity": "03收集 30 张 钥匙 ×100 / 30",
+      "key": "stage",
+      "rect": {
+        "height": 87.25,
+        "width": 252.1125030517578,
+        "x": 627.9375,
+        "y": 360.26251220703125
+      },
+      "selector": ".av3-milestone",
+      "styles": {
+        "color": "rgb(37, 45, 54)",
+        "display": "grid",
+        "font-size": "18px"
+      },
+      "tag": "ARTICLE",
+      "text": "03收集 30 张 钥匙 ×100 / 30"
+    },
+    {
+      "attributes": {},
+      "identity": "04收集 45 张 传说卡 ×20 / 45",
+      "key": "stage",
+      "rect": {
+        "height": 87.25,
+        "width": 252.1125030517578,
+        "x": 911.7750244140624,
+        "y": 360.26251220703125
+      },
+      "selector": ".av3-milestone",
+      "styles": {
+        "color": "rgb(37, 45, 54)",
+        "display": "grid",
+        "font-size": "18px"
+      },
+      "tag": "ARTICLE",
+      "text": "04收集 45 张 传说卡 ×20 / 45"
+    },
+    {
+      "attributes": {},
+      "identity": "05收集完成 宠物蛋 ×10 / 68",
+      "key": "stage",
+      "rect": {
+        "height": 87.25,
+        "width": 252.1125030517578,
+        "x": 1195.612548828125,
+        "y": 360.26251220703125
+      },
+      "selector": ".av3-milestone",
+      "styles": {
+        "color": "rgb(37, 45, 54)",
+        "display": "grid",
+        "font-size": "18px"
+      },
+      "tag": "ARTICLE",
+      "text": "05收集完成 宠物蛋 ×10 / 68"
+    },
+    {
+      "attributes": {},
+      "identity": "前往队员培养 →",
+      "key": "action",
+      "rect": {
+        "height": 46.28750228881836,
+        "width": 157.60000610351562,
+        "x": 60.275001525878906,
+        "y": 511.75
+      },
+      "selector": ".av3-collection-actions button",
+      "styles": {
+        "color": "rgb(37, 45, 54)",
+        "display": "flex",
+        "font-size": "21px"
+      },
+      "tag": "BUTTON",
+      "text": "前往队员培养 →"
+    }
+  ],
+  "observedAt": "2026-10-11T03:32:11.540Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 1523
+    }
+  },
+  "scene": "base-collection-v4",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-11-WF-base-iterate-1011/collection-after.png"
+  ],
+  "selectors": [
+    {
+      "key": "total",
+      "selector": ".av3-collection-total"
+    },
+    {
+      "key": "stage",
+      "selector": ".av3-milestone"
+    },
+    {
+      "key": "action",
+      "selector": ".av3-collection-actions button"
+    }
+  ]
+}

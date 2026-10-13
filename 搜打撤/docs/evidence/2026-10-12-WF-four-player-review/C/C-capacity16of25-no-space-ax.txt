@@ -1,0 +1,73 @@
+- complementary:
+  - navigation "远征工具":
+    - img "常无欲 Q版小人"
+    - generic: 当前 · 物资点
+    - button "bag 背包 携带卡牌 16/25 B" [disabled]:
+      - img "bag"
+      - text: 背包
+      - generic: 携带卡牌
+      - strong: 16/25
+      - generic: B
+    - button "lock 安全格 保护物资 0/2" [disabled]:
+      - img "lock"
+      - text: 安全格
+      - generic: 保护物资
+      - strong: 0/2
+    - button "cards 消耗口袋 待复原卡牌 3" [disabled]:
+      - img "cards"
+      - text: 消耗口袋
+      - generic: 待复原卡牌
+      - strong: "3"
+    - button "map 定位 当前位置 F" [disabled]:
+      - img "map"
+      - text: 定位
+      - generic: 当前位置
+      - generic: F
+    - button "map 总览 已知区域 G" [disabled]:
+      - img "map"
+      - text: 总览
+      - generic: 已知区域
+      - generic: G
+- main:
+  - navigation "远征章节":
+    - generic: 污染核心
+    - generic: 第 4 层 / 4
+  - generic: "1"
+  - generic: "4"
+  - button "离开对局":
+  - button:
+  - button:
+  - generic: 当前生命
+  - generic: 30/35
+  - button "背包 16/25":
+    - generic: 背包
+    - generic: 16/25
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog "archive 收获 · 小型物资箱 · 第 1 / 1":
+    - button "关闭": ×
+    - heading "搜刮完成" [level=3]
+    - generic: 小型物资箱
+    - generic: 1 张待领
+    - generic: 本次金币 待收取 +1
+    - paragraph: 1 张卡牌
+    - paragraph:
+      - img "bag"
+      - text: 背包 16/25 格：按当前卡牌顺序预计可收 0 张、1 张放不下；批量领取时实际结果按逐张容量判定，放不下的会散落。 背包内最低估值：「龙焰射线」1 币。
+    - button "查看治愈详情":
+      - generic: "1"
+      - img "治愈"
+      - generic: 治愈
+      - generic: 法术 · 古朴 古朴
+      - img "heart"
+      - text: 回 5
+      - generic: 你回复 5 点生命，并净化自身。
+      - text: 估值
+      - img "coin"
+      - text: "2"
+      - text: 古朴
+    - complementary "所选卡牌详情":
+      - generic: 选择一张卡牌查看规则与去向
+    - generic: 背包 16/25 格 · 已入背包 0 张
+    - status: 点击卡牌先查看，随后收下
+    - button "1 张待领 · 离开"
+    - button "全部收下（预计 1 张放不下）"

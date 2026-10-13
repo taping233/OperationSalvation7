@@ -1,0 +1,70 @@
+{
+  "bpm": 128,
+  "seconds": 30,
+  "engine": "LMMS 1.2.2 / FluidSynth, four native stems, 48kHz sinc-best 2x",
+  "master_gain_db": 20.200000000000003,
+  "mp3_measurement": {
+    "input_i": -19.5,
+    "input_tp": -5.09,
+    "input_lra": 3.7,
+    "input_thresh": -29.6
+  },
+  "checks": {
+    "exact_30s": true,
+    "finite": true,
+    "no_clipping": true,
+    "true_peak_below_minus_1": true,
+    "target_lufs": true,
+    "all_native_stems_non_silent": true
+  },
+  "stem_rms_dbfs": {
+    "low": -40.103106604673286,
+    "beat": -55.945436726088346,
+    "theme": -49.216144321481195,
+    "detail": -58.2659677918474
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v2/battle-shadowtide-v2-30s.mmp",
+      "bytes": 37893,
+      "sha256": "4a072792eb30e2d30bec8845ed341b8c6e074f240fb2653b1f11140bd1d4ca5d"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v2/battle-shadowtide-v2-30s.wav",
+      "bytes": 8640044,
+      "sha256": "dddd6759a82ca57ce40681a82777cbcd606ae856872995ba1dac8902453c6ff7"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v2/battle-shadowtide-v2-30s.mp3",
+      "bytes": 961605,
+      "sha256": "9ea02096bdf6ee096a17704d69bb424a2dedc1caf3af81ab3495f0fd73e1ec3e"
+    },
+    {
+      "path": ".tmp/music-workstation/GeneralUser-GS.sf2",
+      "bytes": 32319396,
+      "sha256": "9575028c7a1f589f5770fccc8cff2734566af40cd26ed836944e9a5152688cfe"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v2/low-native.wav",
+      "bytes": 12240010,
+      "sha256": "9648a3b26d421d47ba5260d948c4be6a90920a9f30f1d35b42bcf7da27276b05"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v2/beat-native.wav",
+      "bytes": 12240010,
+      "sha256": "e830121df1012f2f201f268835ce6b92114ab412d5ea4ef42e386780f7aed885"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v2/theme-native.wav",
+      "bytes": 12240010,
+      "sha256": "ec6a5bf27ea1a943e3ba77b83fea950036c86843d076ce528dd84d42fd6a0af6"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v2/detail-native.wav",
+      "bytes": 12240010,
+      "sha256": "fa200a70f2134253e0cc6faafee13edada8332270b16384e56aaf2ef8ad17bdc"
+    }
+  ],
+  "reference_samples_used": false,
+  "listening": "Pending user audition; comparison uses audio measurements and editable score, not human listening."
+}

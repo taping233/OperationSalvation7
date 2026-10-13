@@ -1,0 +1,27 @@
+{
+  "status": "candidate-not-approved",
+  "conversion": "WebP quality95/method6; no resize, crop or repaint",
+  "assets": [
+    {
+      "path": "docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\roster-entry-continue\\source\\builtin-modern-winter-entry-v1.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 1941364,
+      "sha256": "9f71da7f048aa3aab4b0deddb2ec1c0804cdc75a35ae3effbc5f8a5af04656cb"
+    },
+    {
+      "path": "docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\roster-entry-continue\\source\\builtin-modern-winter-entry-v2.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 1939295,
+      "sha256": "2a10faf8434397a76a7d2daf81e3c3002aff191f9b37861f6558a0e6092dfe97"
+    },
+    {
+      "path": "game\\assets\\scenes\\entry\\modern-winter-entry-1011-v2.webp",
+      "width": 1672,
+      "height": 941,
+      "bytes": 233244,
+      "sha256": "7066dd7f26e4006ec8005f5b927f62c237439edcfe94cee694acd27890075331"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "actions": [
+    {
+      "detail": "原生AX点击进入档位01、出征整备、五人头像、春日皮肤及标准；未确认出征",
+      "type": "real-input"
+    },
+    {
+      "detail": "五人立绘截图与人工完整性核对",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "class": "cls2-fullart"
+      },
+      "identity": "wu",
+      "key": "stage",
+      "rect": {
+        "height": 727.7250366210938,
+        "width": 995.7000122070312,
+        "x": 610.2875366210938,
+        "y": 65.23750305175781
+      },
+      "selector": ".cls2-fullart",
+      "styles": {
+        "bottom": "0px",
+        "height": "870.008px",
+        "translate": "none",
+        "width": "1190.38px"
+      },
+      "tag": "DIV",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "class": "art-figure"
+      },
+      "identity": "figure-wu",
+      "key": "portrait",
+      "rect": {
+        "height": 692.1749877929688,
+        "width": 461.4500122070313,
+        "x": 841.5855712890625,
+        "y": 84.375
+      },
+      "selector": ".cls2-fullart img.art-figure",
+      "styles": {
+        "bottom": "19.6214px",
+        "height": "827.507px",
+        "translate": "-57.764%",
+        "width": "551.671px"
+      },
+      "tag": "IMG",
+      "text": ""
+    }
+  ],
+  "observedAt": "2026-10-12T09:59:30.327Z",
+  "page": {
+    "origin": "http://localhost:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 1606
+    }
+  },
+  "scene": "出征选人标准立绘统一",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-12-roster-align/wu.png",
+    "docs/evidence/2026-10-12-roster-align/changwuyu.png",
+    "docs/evidence/2026-10-12-roster-align/baita.png",
+    "docs/evidence/2026-10-12-roster-align/heixiang.png",
+    "docs/evidence/2026-10-12-roster-align/xingyue.png"
+  ],
+  "selectors": [
+    {
+      "key": "stage",
+      "selector": ".cls2-fullart"
+    },
+    {
+      "key": "portrait",
+      "selector": ".cls2-fullart img.art-figure"
+    }
+  ]
+}

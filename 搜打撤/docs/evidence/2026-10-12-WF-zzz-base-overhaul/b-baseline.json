@@ -1,0 +1,29 @@
+{
+  "note": "Trade baseline reconstructed by reversing the first localized patch after baseline request; other five files captured before this task edits.",
+  "manifest": [
+    {
+      "file": "base-logistics-trade-v12.css",
+      "sha256": "e27222d1d5a81a903b3d2130fb4533a420c4d24662bf41a8774cef69982f2ccb"
+    },
+    {
+      "file": "base-personnel-v12.css",
+      "sha256": "909e0aa10c323068f643c3c33bac4df07d4d9b6777f442443b6dd5b607b050a4"
+    },
+    {
+      "file": "hub.personnel.js",
+      "sha256": "c99c783dce335de06bbdcb37d00d48fe54ceb2f211efa3b17e58f3b9b9502802"
+    },
+    {
+      "file": "hub.trade-shop-v5.js",
+      "sha256": "3e1f3c1aea3643f848bcd290244dd14e9b8e937e8a10d75887361beac6f0d77e"
+    },
+    {
+      "file": "hub.warehouse-categories-v7.js",
+      "sha256": "209aebf8e4d64faa0b234614a4725f17d5dcbd2121ff9b4e720f4972065a6b2d"
+    },
+    {
+      "file": "hub.warehouse.js",
+      "sha256": "f94b7ae312a78eb8276ee1f7518afccedb05b0f5d269a51ee2f2dfa3fa4f81e7"
+    }
+  ]
+}

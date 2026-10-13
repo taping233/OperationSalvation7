@@ -1,0 +1,230 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt7-burnharvest",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-aa52e5c8-b331-497d-a9c7-b058b8581f2b.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-three-spells-redraw/cards-spell-tt7-burnharvest-source.png",
+        "bytes": 1669286,
+        "sha256": "19dc0a67bef396d2d6a675c16e1d9a860e8b828b16a476541c3293e3dc2c773b"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-three-spells-redraw/cards-spell-tt7-burnharvest-full-before.webp",
+          "bytes": 59800,
+          "sha256": "f673628f92cf391aa4e0b0f2e76dbab1535517a93c5b59f9f1b0f30feff4d1fc"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-three-spells-redraw/cards-spell-tt7-burnharvest-thumb-before.webp",
+          "bytes": 14802,
+          "sha256": "5784fcecbed5a20b8cc23a7e250e0ab11b39c3be3549db0e418d3a034542e933"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-burnharvest.webp",
+          "bytes": 108038,
+          "sha256": "9a5157d2bf216cf6422a2de011cb0859bd619569ae5554c25609bfa8ebe31ed3",
+          "size": [
+            1440,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-burnharvest.webp",
+          "bytes": 13866,
+          "sha256": "a8d2b82fc376b6b863e1c9a0e2e484bf8b82e02f8041efa5e71ca3217c2ce5a3",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt7-burnharvest-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt7-burnharvest.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 108038,
+            "sha256": "9a5157d2bf216cf6422a2de011cb0859bd619569ae5554c25609bfa8ebe31ed3",
+            "source": "docs/evidence/2026-10-10-three-spells-redraw/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-burnharvest.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 14802,
+            "sha256": "5784fcecbed5a20b8cc23a7e250e0ab11b39c3be3549db0e418d3a034542e933",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-burnharvest.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 13866,
+            "sha256": "a8d2b82fc376b6b863e1c9a0e2e484bf8b82e02f8041efa5e71ca3217c2ce5a3",
+            "source": "docs/evidence/2026-10-10-three-spells-redraw/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-frozenight",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-bf4ef246-d3f0-464f-9ad6-8f9529db0787.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-three-spells-redraw/cards-spell-tt7-frozenight-source.png",
+        "bytes": 1917343,
+        "sha256": "2a54b660048c245f0dddf8247ec89f0882de3ebc99a4a14dceb4b24f20963a58"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-three-spells-redraw/cards-spell-tt7-frozenight-full-before.webp",
+          "bytes": 65276,
+          "sha256": "8f211e9c148852e7a1fc84efc0c2ebb9b16829d2a83ff3289c3d71fb83cca13f"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-three-spells-redraw/cards-spell-tt7-frozenight-thumb-before.webp",
+          "bytes": 20012,
+          "sha256": "837143ffb3c4d015ffb6756120dd4d9ccbb4a4972922759546dfbcfbe4476fbf"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-frozenight.webp",
+          "bytes": 162896,
+          "sha256": "a55f14a60da6d4d07f461a1bc1a66ee76f35a81b81486cb361f1a3701224f669",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-frozenight.webp",
+          "bytes": 25516,
+          "sha256": "b9ee8afee9987c0fe53c2cbfe7a001711aeaa4776424a7a9d90dd968b7fe39b0",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt7-frozenight-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt7-frozenight.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 162896,
+            "sha256": "a55f14a60da6d4d07f461a1bc1a66ee76f35a81b81486cb361f1a3701224f669",
+            "source": "docs/evidence/2026-10-10-three-spells-redraw/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-frozenight.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 20012,
+            "sha256": "837143ffb3c4d015ffb6756120dd4d9ccbb4a4972922759546dfbcfbe4476fbf",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-frozenight.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 25516,
+            "sha256": "b9ee8afee9987c0fe53c2cbfe7a001711aeaa4776424a7a9d90dd968b7fe39b0",
+            "source": "docs/evidence/2026-10-10-three-spells-redraw/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "cmtn1lbhbqi4",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-c7709bb3-8ecd-4fe3-9aef-ae6af139c094.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-three-spells-redraw/cards-spell-cmtn1lbhbqi4-source.png",
+        "bytes": 2075101,
+        "sha256": "7a84820fbc6cde018a02adecb542ba02161cf1276a2ec88eadf36e06f757de4f"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-three-spells-redraw/cards-spell-cmtn1lbhbqi4-full-before.webp",
+          "bytes": 100642,
+          "sha256": "c63bae23694c756f6184933bc1dec212dfa1e5f63cdb68abf4736adc72b6654b"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-three-spells-redraw/cards-spell-cmtn1lbhbqi4-thumb-before.webp",
+          "bytes": 25862,
+          "sha256": "8bc6284711fd6c9b45bf64dd6f7df36ae972d74e87da3f81ea1b7bdc9e47786c"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-cmtn1lbhbqi4.webp",
+          "bytes": 192366,
+          "sha256": "41a081d90d03dfce7fdebfea1d445fc64de2eeb675d2b146942c4f65d3718aaf",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-cmtn1lbhbqi4.webp",
+          "bytes": 25088,
+          "sha256": "6712dbf9cb47a95cede452ccadeaa8e1b423aae0224ebf774fbe19db51eaef2e",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "cmtn1lbhbqi4-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-cmtn1lbhbqi4.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 192366,
+            "sha256": "41a081d90d03dfce7fdebfea1d445fc64de2eeb675d2b146942c4f65d3718aaf",
+            "source": "docs/evidence/2026-10-10-three-spells-redraw/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-cmtn1lbhbqi4.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 25862,
+            "sha256": "8bc6284711fd6c9b45bf64dd6f7df36ae972d74e87da3f81ea1b7bdc9e47786c",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-cmtn1lbhbqi4.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 25088,
+            "sha256": "6712dbf9cb47a95cede452ccadeaa8e1b423aae0224ebf774fbe19db51eaef2e",
+            "source": "docs/evidence/2026-10-10-three-spells-redraw/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 831,
+  "manifest_count_after": 834
+}

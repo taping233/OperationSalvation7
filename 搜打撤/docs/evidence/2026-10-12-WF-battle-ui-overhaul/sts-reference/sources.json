@@ -1,0 +1,47 @@
+[
+  {
+    "id": 0,
+    "path": "steam-00.jpg",
+    "image_url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/646570/ss_c171816f7ecd35b5b46d2fa27532f4c5b8ca3cc5.1920x1080.jpg?t=1774015376",
+    "source": "https://store.steampowered.com/app/646570/Slay_the_Spire/",
+    "sha256": "82c30d3444cd2a30d9c252005f39b81f3d99507efa6f75bcdd767d20dec37c90",
+    "bytes": 269407,
+    "purpose": "开发者Steam商店截图，设计分析参考"
+  },
+  {
+    "id": 1,
+    "path": "steam-01.jpg",
+    "image_url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/646570/ss_01aa3e7759e457bfbf2422f31c325d7b3ba8a6eb.1920x1080.jpg?t=1774015376",
+    "source": "https://store.steampowered.com/app/646570/Slay_the_Spire/",
+    "sha256": "c17f51c280502584fd54e78a78c8b8c8e6567192a38b61e3a9227572c88a1b5a",
+    "bytes": 308360,
+    "purpose": "开发者Steam商店截图，设计分析参考"
+  },
+  {
+    "id": 2,
+    "path": "steam-02.jpg",
+    "image_url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/646570/ss_b757436d08ba08292796bfed9c60e7cc99d5f2c3.1920x1080.jpg?t=1774015376",
+    "source": "https://store.steampowered.com/app/646570/Slay_the_Spire/",
+    "sha256": "24b5d1c0a95aa119265d0cab033db53ca985a7f07e12efd52519b66b516423d2",
+    "bytes": 206484,
+    "purpose": "开发者Steam商店截图，设计分析参考"
+  },
+  {
+    "id": 3,
+    "path": "steam-03.jpg",
+    "image_url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/646570/ss_1299d7fe55771cf564848c5046fbef7936178440.1920x1080.jpg?t=1774015376",
+    "source": "https://store.steampowered.com/app/646570/Slay_the_Spire/",
+    "sha256": "b7cbb9f8f9c2de804fa8137f5f09635595786e000dfb22a14cda4c84a7fb151c",
+    "bytes": 138888,
+    "purpose": "开发者Steam商店截图，设计分析参考"
+  },
+  {
+    "id": "multi",
+    "path": "combat-multi.jpg",
+    "image_url": "https://minireview.io/common/uploads/review/bce0a7deaa364bf342ec61ac7846312d.jpg",
+    "source": "https://minireview.io/deck-building/slay-the-spire",
+    "sha256": "2abb350690a6cabafc7ca5ae5c516e7037783ec88b6e31ad41cdb099fe0c6d95",
+    "bytes": 168731,
+    "purpose": "评测页面游戏截图；多敌人意图与状态位置参考"
+  }
+]

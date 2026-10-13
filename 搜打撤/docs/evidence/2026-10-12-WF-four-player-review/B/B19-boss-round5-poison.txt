@@ -1,0 +1,124 @@
+- complementary:
+  - navigation "远征工具":
+    - img "星月 Q版小人"
+    - generic: 当前 · 首脑
+    - button "bag 背包 携带卡牌 14/25 B" [disabled]:
+      - img "bag"
+      - text: 背包
+      - generic: 携带卡牌
+      - strong: 14/25
+      - generic: B
+    - button "lock 安全格 保护物资 1/2" [disabled]:
+      - img "lock"
+      - text: 安全格
+      - generic: 保护物资
+      - strong: 1/2
+    - button "cards 消耗口袋 待复原卡牌 16" [disabled]:
+      - img "cards"
+      - text: 消耗口袋
+      - generic: 待复原卡牌
+      - strong: "16"
+    - button "map 定位 当前位置 F" [disabled]:
+      - img "map"
+      - text: 定位
+      - generic: 当前位置
+      - generic: F
+    - button "map 总览 已知区域 G" [disabled]:
+      - img "map"
+      - text: 总览
+      - generic: 已知区域
+      - generic: G
+- main:
+  - navigation "远征章节":
+    - generic: 污染核心
+    - generic: 第 4 层 / 4
+  - generic: "10"
+  - generic: "4"
+  - button "离开对局":
+  - button:
+  - button:
+  - generic: 当前生命
+  - generic: 19/38
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - generic: 冬核深处 · 首脑遭遇
+    - generic: 第 5 回合
+    - generic: 你的行动
+    - button "牌库：剑荡妖邪×1，毒箭×1，邪能护体×1，迅疾箭×1，毒杖×1（点击查看）": 5牌库
+    - generic: 2弃牌
+    - button "墓地：圣光之源×1，珍珠盒×1（被消耗的牌 · 不参与洗回 · 点击查看）":
+      - img "skull"
+      - text: 2消耗
+    - generic: 能量已耗尽
+    - text: 星月
+    - generic: 你
+    - generic: 19/38
+    - img "swords"
+    - text: "4"
+    - img "skull"
+    - text: 中毒 4
+    - img "tools"
+    - text: 毒杖
+    - button "变异巢母的意图：双击并施加诅咒 · 4 ×2（共8）。点击查看完整说明":
+      - img "tools"
+      - generic: 4×2
+    - img "boss_orc"
+    - generic: 变异巢母
+    - img "swords"
+    - text: 4×2
+    - img "tools"
+    - text: 狂乱
+    - generic: 4/45
+    - img "skull"
+    - text: 中毒 15
+    - generic: 当前能量
+    - img "bolt"
+    - generic: "0"
+    - generic: /2
+    - generic "职业技能与手牌分栏":
+      - button "fire 惩戒 1 能量 · 每回合一次" [disabled]:
+        - img "fire"
+        - text: 惩戒
+        - generic: 1 能量 · 每回合一次
+    - button "霜月斩 · 2 费。费用 2 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）" [disabled]:
+      - generic: "2"
+      - img "霜月斩"
+      - generic: 霜月斩
+      - generic: 武术 · 史诗 史诗
+      - generic: 造成（你的攻击力 + 2）点攻击伤害；对目标附加冰冻与禁疗，持续 1 回合。
+      - img "swords"
+      - text: 能量不足：需要 2，当前 0
+    - button "查看霜月斩完整规则": 规则
+    - button "连击箭 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）" [disabled]:
+      - generic: "1"
+      - img "连击箭"
+      - generic: 连击箭
+      - generic: 武术 · 古朴 古朴
+      - generic: 造成（你的攻击力 - 1）点攻击伤害；若你打出的上一张牌是武术牌，本牌变为 0 费。
+      - img "swords"
+      - text: 能量不足：需要 1，当前 0
+    - button "查看连击箭完整规则": 规则
+    - button "治愈 · 1 费。费用 1 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）" [disabled]:
+      - generic: "1"
+      - img "治愈"
+      - generic: 治愈
+      - generic: 法术 · 古朴 古朴
+      - img "heart"
+      - text: 回 5
+      - generic: 你回复 5 点生命，并净化自身。
+      - img "heart"
+      - text: 能量不足：需要 1，当前 0
+    - button "查看治愈完整规则": 规则
+    - generic "战术操作":
+      - button "bag 背包":
+        - img "bag"
+        - text: 背包
+      - button "runner 撤离（判负）":
+        - img "runner"
+        - text: 撤离（判负）
+      - button "gear 设置":
+        - img "gear"
+        - text: 设置
+      - button "skip 结束回合":
+        - img "skip"
+        - text: 结束回合

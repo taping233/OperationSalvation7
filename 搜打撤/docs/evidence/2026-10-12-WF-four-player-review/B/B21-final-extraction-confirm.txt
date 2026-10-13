@@ -1,0 +1,31 @@
+- main:
+  - text: 金币
+  - generic: "10"
+  - text: 攻击
+  - generic: "4"
+  - button "离开对局":
+  - button:
+  - button:
+  - generic: 当前生命
+  - generic: 7/38
+  - button "背包 12/16":
+    - generic: 背包
+    - generic: 12/16
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - button "关闭": ×
+    - text: 第4层 · 污染核心
+    - generic: 第 4 层
+    - heading "exit 终局撤离点" [level=2]:
+      - img "exit"
+      - text: 终局撤离点
+    - generic: 污染核心的首脑已被击破——撤离信标无条件放行
+    - paragraph:
+      - img "coin"
+      - text: 提醒：随身 10 币不会带回基地——离开前记得回商店花掉。
+    - button "立即撤离 带着全部战利品返回基地" [active]:
+      - generic: 立即撤离
+      - generic: 带着全部战利品返回基地
+    - button "继续深入 留在地图上，继续选择相邻节点":
+      - generic: 继续深入
+      - generic: 留在地图上，继续选择相邻节点

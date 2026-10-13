@@ -1,0 +1,21 @@
+# 致命穿刺 · 4.5简化版
+
+清楚侧角：一支枪尖斜穿一块深色甲片；中央小破口、静灰蓝背景；去红缨、碎甲与复杂裂纹。
+
+Prompt:
+```text
+1.2::miv4t::, 0.8::quasarcake::
+
+no humans, spear, broken armor, close-up, from side, simple background
+
+One silver spearhead pierces one dark armor plate. Show the contact from a clear side angle: the short black shaft enters from upper left, passes through a single small hole at center, and the silver pointed blade emerges toward lower right. The armor is one broad flat charcoal plate tilted across the opposite diagonal, with its simple outer shape readable. A thin bright torn rim around the hole makes the passage through the plate obvious; the rest of the plate remains solid. Keep the spear and plate silhouettes separate except at this one contact. Two broad blade planes and one dark plate plane are enough. A small dark red mark sits only at the puncture. Quiet solid muted gray-blue background, generous empty space around the two objects. No tassel, flying fragments, extra plates or elaborate cracking.
+
+masterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.
+
+A complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.
+```
+
+UC:
+```text
+flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, hands, body, gore, blood spray, tassel, ribbon, flying debris, fragments, multiple weapons, sword, ornate weapon, sparks, particles, complex background, dense cracks, border
+```

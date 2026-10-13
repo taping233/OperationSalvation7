@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "cc-demon",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12470-95d7-75e0-9477-03361e04258c\\exec-da20e8a1-1ef1-4129-8e04-42515c586dbd.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-demon-half/cards-spell-cc-demon-source.png",
+        "bytes": 2030730,
+        "sha256": "83f53d2fabb2d41643d51e9df793b602317a110413b03011e94d71820301508f"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-demon-half/cards-spell-cc-demon-full-before.webp",
+          "bytes": 224892,
+          "sha256": "0aaab18c9a4776a1f3cc4685e8f7a3f74c8e82e6a87177dbc1f810a8463496c2"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-demon-half/cards-spell-cc-demon-thumb-before.webp",
+          "bytes": 26302,
+          "sha256": "7468b938ecd7a1df866cb94a63687f348de236b5a50b50210717ebbb5b534730"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-cc-demon.webp",
+          "bytes": 127854,
+          "sha256": "13b7162e0c7586f4083ab35922f36972f786cf81b70b024f092a75f3dadbac5f",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-cc-demon.webp",
+          "bytes": 17462,
+          "sha256": "2abeba1fce18b1776fb76f05d9ef5784f672f218cd1a2181738e75c067d69a6a",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "xingyue-darkpriest-demon-fullbody-builtin-20261010",
+      "revision_after": "xingyue-demon-halfbody-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-cc-demon.webp",
+            "ext": "webp",
+            "bytes": 224892,
+            "sha256": "0aaab18c9a4776a1f3cc4685e8f7a3f74c8e82e6a87177dbc1f810a8463496c2",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-demon-darkform/demon-final/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-cc-demon.webp",
+            "ext": "webp",
+            "bytes": 127854,
+            "sha256": "13b7162e0c7586f4083ab35922f36972f786cf81b70b024f092a75f3dadbac5f",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-demon-half/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-cc-demon.webp",
+            "ext": "webp",
+            "bytes": 26302,
+            "sha256": "7468b938ecd7a1df866cb94a63687f348de236b5a50b50210717ebbb5b534730",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-demon-darkform/demon-final/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-cc-demon.webp",
+            "ext": "webp",
+            "bytes": 17462,
+            "sha256": "2abeba1fce18b1776fb76f05d9ef5784f672f218cd1a2181738e75c067d69a6a",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-demon-half/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1092,
+  "manifest_count_after": 1092
+}

@@ -1,0 +1,218 @@
+{
+  "actions": [
+    {
+      "detail": "真实点击筛选、翻动相片、预览放大/收回、搜索/重置、关闭/重开；方向键换片与滚动；未编辑存档或背签文字",
+      "type": "real-input"
+    },
+    {
+      "detail": "稳定首屏、普通照片、长名称与多行规则、空结果及大图截图",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"SECTION\",\"text\":\"浏览馆藏重置筛选\\n            \\n    全部268\\n    \\n    武术64\\n    \\n    法术79\\n    \\n    生物25\\n    \\n    道具20\\n    \\n    装备34\\n    \\n    事件19\\n    \\n    能力12\\n    \\n    资源15\\n    \\n            \\n              搜索照片\\n              稀有度不限\",\"class\":\"studio-filterbar\"}",
+      "key": "filter",
+      "rect": {
+        "height": 184.375,
+        "width": 1061.050048828125,
+        "x": 22.200000762939453,
+        "y": 80.11250305175781
+      },
+      "selector": ".studio-filterbar",
+      "styles": {
+        "background-color": "rgb(238, 236, 229)",
+        "border-radius": "0px",
+        "color": "rgb(45, 48, 52)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "232.436px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "17px 20px 18px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1337.63px"
+      },
+      "tag": "SECTION",
+      "text": "浏览馆藏重置筛选\n            \n    全部268\n    \n    武术64\n    \n    法术79\n    \n    生物25\n    \n    道具20\n    \n    装备34\n    \n    事件19\n    \n    能力12\n    \n    资源15\n    \n            \n              搜索照片\n              稀有度不限"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"全部照片268张\\n            悬停选片 · 点击放大 · / 搜索\\n            翻动相片 ↝\",\"class\":\"studio-shelf-head\"}",
+      "key": "results",
+      "rect": {
+        "height": 37.275001525878906,
+        "width": 1061.050048828125,
+        "x": 22.200000762939453,
+        "y": 274
+      },
+      "selector": ".studio-shelf-head",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(238, 241, 232)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "46.9915px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "6px 10px 0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1337.63px"
+      },
+      "tag": "DIV",
+      "text": "全部照片268张\n            悬停选片 · 点击放大 · / 搜索\n            翻动相片 ↝"
+    },
+    {
+      "attributes": {
+        "aria-current": "true",
+        "data-card": "tt8-curse1"
+      },
+      "identity": "{\"data-card\":\"tt8-curse1\",\"aria-current\":\"true\"}",
+      "key": "selection",
+      "rect": {
+        "height": 236.375,
+        "width": 242.0500030517578,
+        "x": 32.5,
+        "y": 348.5375061035156
+      },
+      "selector": "#libGrid [aria-current=\"true\"]",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 228, 225)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "297.991px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "305.145px"
+      },
+      "tag": "BUTTON",
+      "text": "禁咒I法术"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"ASIDE\",\"text\":\"选片台卡面 · 信息 · 背签\\n    \\n    \\n    禁咒I\\n  \\n    \\n    费用0法术棱彩\\n    \\n    抽到时施放：夺取 1 点攻击力。\\n    藏品编号 № 99\\n    \\n    ‹ 上一片1 / 268下一片 ›\\n    查看大图与背签\",\"class\":\"library-inspector\"}",
+      "key": "inspector",
+      "rect": {
+        "height": 856.8500366210938,
+        "width": 398.7124938964844,
+        "x": 1102.2874755859375,
+        "y": 80.11250305175781
+      },
+      "selector": ".library-inspector",
+      "styles": {
+        "background-color": "rgb(238, 236, 229)",
+        "border-radius": "0px",
+        "color": "rgb(37, 54, 62)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "1080.2px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "20px 20px 22px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "502.645px"
+      },
+      "tag": "ASIDE",
+      "text": "选片台卡面 · 信息 · 背签\n    \n    \n    禁咒I\n  \n    \n    费用0法术棱彩\n    \n    抽到时施放：夺取 1 点攻击力。\n    藏品编号 № 99\n    \n    ‹ 上一片1 / 268下一片 ›\n    查看大图与背签"
+    },
+    {
+      "attributes": {
+        "data-photo-mount": "prismatic",
+        "data-rarity": "棱彩"
+      },
+      "identity": "{\"data-photo-mount\":\"prismatic\",\"data-rarity\":\"棱彩\"}",
+      "key": "preview",
+      "rect": {
+        "height": 316.8000183105469,
+        "width": 365.3875122070313,
+        "x": 1121.3250732421875,
+        "y": 159.60000610351562
+      },
+      "selector": "#libPreview .studio-preview-paper",
+      "styles": {
+        "background-color": "rgb(244, 238, 225)",
+        "border-radius": "0px",
+        "color": "rgb(170, 174, 177)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "399.38px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "6.8px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "460.633px"
+      },
+      "tag": "SPAN",
+      "text": "禁咒I"
+    }
+  ],
+  "observedAt": "2026-10-10T04:07:41.840Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 1523
+    }
+  },
+  "scene": "照相馆首屏",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-10-WF-studio-experience/after.png"
+  ],
+  "selectors": [
+    {
+      "key": "filter",
+      "selector": ".studio-filterbar"
+    },
+    {
+      "key": "results",
+      "selector": ".studio-shelf-head"
+    },
+    {
+      "key": "selection",
+      "selector": "#libGrid [aria-current=\"true\"]"
+    },
+    {
+      "key": "inspector",
+      "selector": ".library-inspector"
+    },
+    {
+      "key": "preview",
+      "selector": "#libPreview .studio-preview-paper"
+    }
+  ]
+}

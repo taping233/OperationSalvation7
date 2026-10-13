@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-wu-parts-full",
+  "date": "2026-10-05",
+  "owner": "Friday",
+  "goal": "完成无的22件部件、拼装和三种动画小样，自检不达标则重画",
+  "paths": [
+    "game/art-source/characters/wu-parts-v1/",
+    "docs/evidence/2026-10-05-WF-wu-parts-full/"
+  ],
+  "doneWhen": [
+    "22件透明PNG齐全并具有编号、SHA256、尺寸与获取记录",
+    "当前窗口内置浏览器实检拼装外观、关节遮挡与三种动画小样",
+    "不达标问题已修正并复核，保存最终验收证据"
+  ],
+  "stage": "doing",
+  "checks": [],
+  "unverified": [],
+  "updatedAt": "2026-10-05T03:33:18.927Z"
+}

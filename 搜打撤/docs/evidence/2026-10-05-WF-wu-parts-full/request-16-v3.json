@@ -1,0 +1,12 @@
+{
+  "id": "16",
+  "slug": "right-thigh",
+  "version": 3,
+  "prompt": "Edit image 1, the neutral RIGHT THIGH animation sprite, to give Wu healthier, fuller upper-leg proportions matching the character reference in image 2. Keep SAME segment height, neutral nearly vertical centerline, skin tones, brush style and transparent canvas placement. Increase width of UPPER and MIDDLE thigh by approximately 40–45 percent, with an attractive natural rounded outer curve and gentle inner taper. The fuller volume must continue through the middle portion that is visible below the skirt, not only at the hidden hip cap. Lower quarter tapers smoothly into the knee cap, which is only about 10 percent wider than before and remains modest, no knotted bone or huge knee bulge. Do NOT make it longer or include calf/foot. Keep clean softly rounded fully painted joining caps, light-peach joining tone, no dark horizontal cut line. Same economical hand-painted anime large opaque skin planes, low detail, no glossy 3D or dense muscle shading. One feminine anatomical thigh segment only, no clothing, other limbs, labels, shadow, aura or background; genuine transparent PNG.",
+  "refs": [
+    "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\characters\\wu-parts-v1\\part-16-right-thigh-v2.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\wu-battle-base-frame000.png"
+  ],
+  "tool": "built-in imagegen",
+  "stage": "candidate"
+}

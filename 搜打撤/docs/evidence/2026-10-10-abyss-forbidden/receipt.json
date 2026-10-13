@@ -1,0 +1,157 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt8-abyss-sovereign",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12204-0a82-72b2-9a07-d1b72c8d8b18\\exec-2c55eaa1-687e-4a4b-933d-8e8ce23d8929.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-abyss-forbidden/cards-hero-abysssovereign-source.png",
+        "bytes": 1879316,
+        "sha256": "f896ef076205af1e06c6cdd45a20296bf37fd712c7bf0d1a637f6d05163e3902"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-abyss-forbidden/cards-hero-abysssovereign-full-before.webp",
+          "bytes": 75000,
+          "sha256": "0f9a5adc347408801ed3ace5f44c1c7623a35ae789c180648d9b4fac1140e185"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-abyss-forbidden/cards-hero-abysssovereign-thumb-before.webp",
+          "bytes": 19858,
+          "sha256": "e1e250b46c3722d0d2f91c2ac2745ac23b01a41fe4bb81e1286606f8e8a7c65f"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/hero-abysssovereign.webp",
+          "bytes": 115042,
+          "sha256": "582a95febc1cacaeda0bc9eacc0b46722a82a2d73d1a1256318b3e3935f209b0",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/hero-abysssovereign.webp",
+          "bytes": 16654,
+          "sha256": "28c4063d1bd4cc434c54e63bb68a41a073d57b108c38658f4481dc87dca48a3a",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "abyss-sovereign-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/hero-abysssovereign.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 115042,
+            "sha256": "582a95febc1cacaeda0bc9eacc0b46722a82a2d73d1a1256318b3e3935f209b0",
+            "source": "docs/evidence/2026-10-10-abyss-forbidden/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/hero-abysssovereign.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 19858,
+            "sha256": "e1e250b46c3722d0d2f91c2ac2745ac23b01a41fe4bb81e1286606f8e8a7c65f",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/hero-abysssovereign.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 16654,
+            "sha256": "28c4063d1bd4cc434c54e63bb68a41a073d57b108c38658f4481dc87dca48a3a",
+            "source": "docs/evidence/2026-10-10-abyss-forbidden/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt8-hero-warlock",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12204-0a82-72b2-9a07-d1b72c8d8b18\\exec-4b45979f-53a6-4ce4-9250-9141075d493c.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-abyss-forbidden/cards-hero-forbidden-source.png",
+        "bytes": 2051087,
+        "sha256": "dec940aeb8ad988ec1e8be64b985973cabd3aa705431ca3c0673ec4e3cc40259"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-abyss-forbidden/cards-hero-forbidden-full-before.webp",
+          "bytes": 101998,
+          "sha256": "9e30fcd9e8394875c3f2f8e3611c8738d16a5d0226900eb15466e9e19cb50cd8"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-abyss-forbidden/cards-hero-forbidden-thumb-before.webp",
+          "bytes": 24504,
+          "sha256": "685d3e2d76c7dc80717ac64ac2155828ac611b199b20042d09a535b558c13395"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/hero-forbidden.webp",
+          "bytes": 176422,
+          "sha256": "51337e13a7f8890ad1f4e83a019e7d2d7d24b3fba78671d645c97fd46a9f7e21",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/hero-forbidden.webp",
+          "bytes": 23552,
+          "sha256": "894a08abd73f0411866a092ea7e34b980595b0958197cc0e0ecc1b38fdd46031",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "forbidden-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/hero-forbidden.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 176422,
+            "sha256": "51337e13a7f8890ad1f4e83a019e7d2d7d24b3fba78671d645c97fd46a9f7e21",
+            "source": "docs/evidence/2026-10-10-abyss-forbidden/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/hero-forbidden.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 24504,
+            "sha256": "685d3e2d76c7dc80717ac64ac2155828ac611b199b20042d09a535b558c13395",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/hero-forbidden.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 23552,
+            "sha256": "894a08abd73f0411866a092ea7e34b980595b0958197cc0e0ecc1b38fdd46031",
+            "source": "docs/evidence/2026-10-10-abyss-forbidden/receipt.json"
+          }
+        }
+      ],
+      "status": "Rejected candidate; unused legacy assets restored from own backups"
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 826,
+  "manifest_count_after": 828
+}

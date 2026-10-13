@@ -1,0 +1,230 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt7-meteorstrong",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-0081356d-e76f-4799-b5eb-fad43a8acec7.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-meteor-ray-abyss/cards-spell-tt7-meteorstrong-source.png",
+        "bytes": 1961380,
+        "sha256": "dcf0c4c4af7a7ad7cd0bc55bd7cac14a785b406c2a9575ddf034269ece125b76"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-meteor-ray-abyss/cards-spell-tt7-meteorstrong-full-before.webp",
+          "bytes": 98666,
+          "sha256": "1b9b24ab45ad210d86c1a06e0ebaf327cda4a4441f9b5f50ada554a69cb9a933"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-meteor-ray-abyss/cards-spell-tt7-meteorstrong-thumb-before.webp",
+          "bytes": 24928,
+          "sha256": "61b9c9461bf9ae09c7f43f7085908725d834c5c18eb85885cabc77673d29e449"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-meteorstrong.webp",
+          "bytes": 165476,
+          "sha256": "d611963142a6ecb46053c9daed51ff0845dbc1dc3bfdc19e70dccf60249c05c4",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-meteorstrong.webp",
+          "bytes": 22570,
+          "sha256": "aa45a50b45968963c326841df345a21ef425450116fee5a4461848f9bc9c1839",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt7-meteorstrong-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt7-meteorstrong.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 165476,
+            "sha256": "d611963142a6ecb46053c9daed51ff0845dbc1dc3bfdc19e70dccf60249c05c4",
+            "source": "docs/evidence/2026-10-10-meteor-ray-abyss/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-meteorstrong.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 24928,
+            "sha256": "61b9c9461bf9ae09c7f43f7085908725d834c5c18eb85885cabc77673d29e449",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-meteorstrong.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 22570,
+            "sha256": "aa45a50b45968963c326841df345a21ef425450116fee5a4461848f9bc9c1839",
+            "source": "docs/evidence/2026-10-10-meteor-ray-abyss/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-nuke-ray",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-ced10ce9-705f-45df-8bff-41580f30b9fb.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-meteor-ray-abyss/cards-spell-tt3-nuke-ray-source.png",
+        "bytes": 1683483,
+        "sha256": "61a517a0061cab0fe8bea0928066acaad32739d1febbb005f9faa1249ea5c051"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-meteor-ray-abyss/cards-spell-tt3-nuke-ray-full-before.webp",
+          "bytes": 47286,
+          "sha256": "f90f39d8465fe7500d61f419c46095a74a745c8d6215862cbfbec835f8bfe0f4"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-meteor-ray-abyss/cards-spell-tt3-nuke-ray-thumb-before.webp",
+          "bytes": 12622,
+          "sha256": "11ce9f03eee6f4bac1e96ab710e5aec396bce680e9beedb7d66b73a5c5022bfb"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-nuke-ray.webp",
+          "bytes": 94466,
+          "sha256": "5cad5ea9163bd36b918cb44177ead495983ab730dc10f0c596be1baf4d7e8bff",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-nuke-ray.webp",
+          "bytes": 12658,
+          "sha256": "a68ec65924bb508dbe90039272d8a0dc76f2906ecb1140692250439399f912d4",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt3-nuke-ray-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt3-nuke-ray.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 94466,
+            "sha256": "5cad5ea9163bd36b918cb44177ead495983ab730dc10f0c596be1baf4d7e8bff",
+            "source": "docs/evidence/2026-10-10-meteor-ray-abyss/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-nuke-ray.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 12622,
+            "sha256": "11ce9f03eee6f4bac1e96ab710e5aec396bce680e9beedb7d66b73a5c5022bfb",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-nuke-ray.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 12658,
+            "sha256": "a68ec65924bb508dbe90039272d8a0dc76f2906ecb1140692250439399f912d4",
+            "source": "docs/evidence/2026-10-10-meteor-ray-abyss/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-abysscurse",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-9b21cd5e-29ae-47a8-bffe-d7331c931c10.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-meteor-ray-abyss/cards-spell-tt7-abysscurse-source.png",
+        "bytes": 1846354,
+        "sha256": "822350bb25e9893534e5d875a49832eafbc0fc68d4f0250508c0e5b91cd2cd0a"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-meteor-ray-abyss/cards-spell-tt7-abysscurse-full-before.webp",
+          "bytes": 64370,
+          "sha256": "ff946a84ea76afd5ae72afc1cb958e1992d3edbf53723cb941b7783c3f81c940"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-meteor-ray-abyss/cards-spell-tt7-abysscurse-thumb-before.webp",
+          "bytes": 16912,
+          "sha256": "107397f12ef2ae802cded59e6b2ba8297469c83b77b601c8139def3e948b2c99"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-abysscurse.webp",
+          "bytes": 133962,
+          "sha256": "af8047027ae6c5082269ceae1bfdeb7a48bad083c52d053cbc9adf82fec4948a",
+          "size": [
+            1440,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-abysscurse.webp",
+          "bytes": 17298,
+          "sha256": "8176dffeca42c5091a2460f82fc14dfe5bd4d4edb44dd8ae56e0cf18a41b63b9",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt7-abysscurse-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt7-abysscurse.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 133962,
+            "sha256": "af8047027ae6c5082269ceae1bfdeb7a48bad083c52d053cbc9adf82fec4948a",
+            "source": "docs/evidence/2026-10-10-meteor-ray-abyss/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-abysscurse.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 16912,
+            "sha256": "107397f12ef2ae802cded59e6b2ba8297469c83b77b601c8139def3e948b2c99",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-abysscurse.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17298,
+            "sha256": "8176dffeca42c5091a2460f82fc14dfe5bd4d4edb44dd8ae56e0cf18a41b63b9",
+            "source": "docs/evidence/2026-10-10-meteor-ray-abyss/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 845,
+  "manifest_count_after": 848
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-base-framework-1011",
+  "date": "2026-10-11",
+  "owner": "Friday（Codex 基地接管 01a12ab6）",
+  "goal": "接管基地有效上下文，A21接入，框架先行，三版对照与真实参考",
+  "paths": [
+    "game/src/hub/game.hub.js",
+    "game/src/hub/hub.home-v3.js",
+    "game/src/hub/hub.presentation.js",
+    "game/src/hub/hub.navigation-v6.js",
+    "game/css/base-home-v3.css",
+    "game/css/base-framework-v6.css",
+    "game/base-design-options.html",
+    "game/src/ui/base-design-preview-v6.js",
+    "docs/development.md",
+    "docs/evidence/2026-10-11-WF-base-cohesion-1011/current-art-direction.md",
+    "docs/evidence/2026-10-11-WF-base-cohesion-1011/task.json",
+    "docs/evidence/2026-10-11-WF-base-framework-1011"
+  ],
+  "doneWhen": [
+    "老板认可的A21写入真实首页引用，A框架和常驻导航实现",
+    "B/C候选与真实游戏参考在同一画板展示",
+    "按老板要求不检测测试，明确待用户验收，记录本轮实现和接管边界"
+  ],
+  "stage": "done",
+  "checks": [],
+  "unverified": [
+    "未运行检测、测试、构建或浏览器验收；三版与远程参考图的实页显示待老板查看。",
+    "原5200仅复用URL，未创建服务或确认监听；B/C为候选，正式游戏当前采用A。",
+    "画板重播是设计示意；原对话测试不覆盖本次增量；整体基地美术仍按反馈继续细化。"
+  ],
+  "updatedAt": "2026-10-11T11:43:48.8510463+00:00"
+}

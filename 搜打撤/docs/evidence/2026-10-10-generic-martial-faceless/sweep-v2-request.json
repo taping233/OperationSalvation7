@@ -1,0 +1,26 @@
+{
+  "card_id": "tt3-frostfall",
+  "model": "nai-diffusion-5-full",
+  "seed": 535586832,
+  "width": 1024,
+  "height": 1024,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1boy, solo, extreme close-up, cropped head, cropped torso, sword, holding sword, gauntlets, foreshortening, mask, slashing, abstract background\n\nFrame this as a close shot of a single sword passing THROUGH a huge black demon mask, not a full-body character portrait. The anonymous swordsman is mostly OUTSIDE the left edge: a connected shoulder fragment, sleeve and enormous gloved sword hand enter from the lower-left corner. His entire head and face are outside the canvas. The clenched hand and compact crossguard occupy the lower-left quarter. The silver blade projects from this grip across the center toward the upper-right, wide near the guard and narrowing in perspective. A single enormous flat ink-black demonic mask occupies the upper-right half. It is an abstract broken shell with two horn-like points and a simple hollow eye cutout, not a living humanoid monster. The sword is caught just after cutting through the mask: its upper and lower halves slide apart on either side of the cutting plane, leaving a sharp pale diagonal gap. The blade crosses IN FRONT of the lower half and emerges THROUGH the split; the two edges visibly line up with its path. One broad muted crimson cloth strip tied around the swordsman wrist lags in a reverse curve toward the left, indicating the sweep without another weapon or glowing ring. Show the gloved fingers actually enclosing the grip, an unbroken wrist-sleeve-arm connection and a physically continuous blade. The viewpoint is nearly level with the cutting plane, making the glove and blade loom toward us while the mask sits one plane behind. The glove is the dark foreground anchor; the blade and opened gap form the brightest narrow shape; the broken mask is the large dark counterweight. Use quiet pale stone-gray negative space on the upper-left and lower-right, charcoal masses, desaturated violet inside the mask, and only the small muted crimson cloth accent. Focus detail at the grip and mask break, while sleeve and background stay as broad matte painted planes. No body posed in front of a backdrop; no wall of smoke, particle explosion or giant beam.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "boy, anonymous adult swordsman, only a cropped forearm and part of the upper torso in frame, plain charcoal martial sleeve, simple dark steel wrist guard, black leather glove, one silver straight sword with a dark undecorated grip and small straight crossguard",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, face, visible eyes, facial profile, head in frame, portrait, full body, standing, neutral pose, brown ninja outfit, girl, long hair, ponytail, goggles, glasses, orange scarf, crescent ornament, ornate armor, huge cape, staff, two swords, floating sword, oversized hilt, needle-thin sword, realistic smoke, giant laser, explosion, many particles, detailed scenery, contact sheet",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\generic-martial-20261010\\sweep-v2.png",
+  "references": [
+    "game/assets/cards/martial-tt2-block.webp",
+    "game/assets/cards/martial-tt3-fatal-pierce.webp",
+    "game/assets/cards/martial-cc-dual-wield.webp"
+  ],
+  "reference_usage": "人工分析近景裁切/兵刃比例/碰撞点，不向V5传参考图",
+  "installed": false
+}

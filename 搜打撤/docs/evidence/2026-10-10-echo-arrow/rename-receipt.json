@@ -1,0 +1,10 @@
+{
+  "card_id": "tt2-forestarrow",
+  "before": "绿化箭",
+  "after": "回音箭",
+  "verification": "源码有效卡库可求值，tt2-forestarrow名称为回音箭；TABLETOP10引用生成的canonical条目；未测试套件/实页",
+  "changed": 1,
+  "added": 0,
+  "retired": 0,
+  "method": "sync-cards-from-live.mjs; source library snapshot with one name edit"
+}

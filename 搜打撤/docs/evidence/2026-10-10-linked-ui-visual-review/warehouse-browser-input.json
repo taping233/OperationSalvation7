@@ -1,0 +1,144 @@
+{
+  "actions": [
+    {
+      "detail": "选中神灯→放大阅读→关闭回仓库；未交易或写存档",
+      "type": "real-input"
+    },
+    {
+      "detail": "当前1920×1080内置浏览器截图",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"1\\n    \\n    神灯\\n    法术 · 史诗\\n    甲 5\\n    \\n    抉择：1° 发现 1 张牌并将其释放；2° 消灭 1 名受伤敌人（非 BOSS）；3° 冰冻 2 名角色，获得5 点护甲。\\n    \\n    \\n    4\",\"class\":\"hs-card tp1 rv3 sm\"}",
+      "key": "card",
+      "rect": {
+        "height": 302.3500061035156,
+        "width": 202.5625,
+        "x": 952.875,
+        "y": 344.3999938964844
+      },
+      "selector": ".stash-cell[data-name=\"神灯\"] .hs-card",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "4.08px",
+        "color": "rgb(0, 0, 0)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "302.35px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "202.562px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    神灯\n    法术 · 史诗\n    甲 5\n    \n    抉择：1° 发现 1 张牌并将其释放；2° 消灭 1 名受伤敌人（非 BOSS）；3° 冰冻 2 名角色，获得5 点护甲。\n    \n    \n    4"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"法术 · 史诗\",\"class\":\"hsc-type\"}",
+      "key": "tier",
+      "rect": {
+        "height": 15.574999809265137,
+        "width": 56.26250076293945,
+        "x": 1089.5374755859375,
+        "y": 354.8125
+      },
+      "selector": ".stash-cell[data-name=\"神灯\"] .hsc-type",
+      "styles": {
+        "background-color": "rgba(22, 33, 43, 0.9)",
+        "border-radius": "1.88915px",
+        "color": "rgba(0, 0, 0, 0)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "9.44573px",
+        "height": "15.575px",
+        "line-height": "15.5855px",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "56.2625px"
+      },
+      "tag": "DIV",
+      "text": "法术 · 史诗"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"B\",\"text\":\"×1\",\"class\":\"stack-count\"}",
+      "key": "count",
+      "rect": {
+        "height": 35.60000228881836,
+        "width": 39.650001525878906,
+        "x": 1111.7874755859375,
+        "y": 667.0499877929688
+      },
+      "selector": ".stash-cell[data-name=\"神灯\"] .stack-count",
+      "styles": {
+        "background-color": "rgb(36, 73, 88)",
+        "border-radius": "3px",
+        "color": "rgb(247, 251, 253)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "20px",
+        "height": "35.6px",
+        "line-height": "28px",
+        "opacity": "1",
+        "padding": "3px 7px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "39.65px"
+      },
+      "tag": "B",
+      "text": "×1"
+    }
+  ],
+  "observedAt": "2026-10-10T14:08:17.372Z",
+  "page": {
+    "origin": "http://localhost:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.0000000149011612,
+      "height": 1080,
+      "width": 1920
+    }
+  },
+  "scene": "1920×1080仓库新卡面",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-10-linked-ui-visual-review/desktop-warehouse-card-style-after.jpg"
+  ],
+  "selectors": [
+    {
+      "key": "card",
+      "selector": ".stash-cell[data-name=\"神灯\"] .hs-card"
+    },
+    {
+      "key": "tier",
+      "selector": ".stash-cell[data-name=\"神灯\"] .hsc-type"
+    },
+    {
+      "key": "count",
+      "selector": ".stash-cell[data-name=\"神灯\"] .stack-count"
+    }
+  ]
+}

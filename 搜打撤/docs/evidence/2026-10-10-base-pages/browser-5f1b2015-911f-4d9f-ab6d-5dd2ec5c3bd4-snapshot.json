@@ -1,0 +1,110 @@
+{
+  "actions": [
+    {
+      "detail": "主线5200档位01只读复核：进入基地、仓库搜索无匹配与清除、补给四商品、建设收益/缺口、直达伙伴、人物、成就与锁定卡背预览；未执行主线交易或开局。",
+      "type": "real-input"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "{\"id\":\"hubMain\",\"class\":\"pg hub hub-stash base-camp\"}",
+      "key": "shell",
+      "rect": {
+        "height": 720,
+        "width": 1280,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#hubMain",
+      "styles": {
+        "background": "rgb(237, 241, 243)",
+        "color": "rgb(37, 57, 69)",
+        "display": "flex",
+        "opacity": "1"
+      },
+      "tag": "DIV",
+      "text": "基地\n          档案 / 01\n          \n             木材 0\n             口粮 0\n             钥匙 0\n             储备 0 币\n          \n        \n        \n          基地事务 / BASE出征EXPEDITION01仓库STORAGE02补给SUPPLIES03基地建设WOR"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"id\":\"\",\"class\":\"hub-tabs\"}",
+      "key": "nav",
+      "rect": {
+        "height": 672,
+        "width": 136.66250610351562,
+        "x": 0,
+        "y": 48
+      },
+      "selector": ".hub-tabs",
+      "styles": {
+        "background": "rgb(28, 42, 50)",
+        "color": "rgb(37, 57, 69)",
+        "display": "flex",
+        "opacity": "1"
+      },
+      "tag": "NAV",
+      "text": "基地事务 / BASE出征EXPEDITION01仓库STORAGE02补给SUPPLIES03基地建设WORKSHOP04人物与伙伴PERSONNEL05档案ARCHIVES06\n          EXPEDITION BASE · VII"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"id\":\"\",\"class\":\"warehouse-inspector\"}",
+      "key": "detail",
+      "rect": {
+        "height": 442.6625061035156,
+        "width": 280,
+        "x": 963.4750366210938,
+        "y": 255.8125
+      },
+      "selector": ".warehouse-inspector",
+      "styles": {
+        "background": "rgb(251, 252, 253)",
+        "color": "rgb(37, 57, 69)",
+        "display": "block",
+        "opacity": "1"
+      },
+      "tag": "ASIDE",
+      "text": "1\n    \n    箭雨\n    武术 · 古朴\n    \n    \n    攻（-1），目标为敌方全体。\n    -1\n    \n    2\n  \n    武术 / 古朴箭雨\n    攻（-1），目标为敌方全体。\n    持有1 张收购价2 币 / 张\n    放大查看\n    加入收藏会保留卡牌，并保护它不被卖出。\n    加入收藏卖出 1 张"
+    }
+  ],
+  "observedAt": "2026-10-10T09:17:21.119Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "scene": "base-pages-mainline-final",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-10-base-pages/main-warehouse.jpg"
+  ],
+  "selectors": [
+    {
+      "key": "shell",
+      "selector": "#hubMain"
+    },
+    {
+      "key": "nav",
+      "selector": ".hub-tabs"
+    },
+    {
+      "key": "detail",
+      "selector": ".warehouse-inspector"
+    }
+  ]
+}

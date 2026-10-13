@@ -1,0 +1,53 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5351/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5351/
+	2 container hubMain
+		3 container
+			4 button 返回选档
+			5 heading 基地, Value: 2
+				6 text 基地
+			7 text 档案 / 01
+			8 container 基地物资
+				9 container 木材 0
+					10 text 0
+					11 text 木材
+					12 text 木材
+				13 container 口粮 0
+					14 text 0
+					15 text 口粮
+					16 text 口粮
+				17 container 钥匙 0
+					18 text 0
+					19 text 钥匙
+					20 text 钥匙
+				21 container 储备币 0
+					22 text 0
+					23 text 储备币
+					24 text 储备币
+		25 container
+			26 container 基地事务
+				27 heading 基地事务, Value: 3
+					28 text 基地事务
+				29 button 待领取 1 收藏与成就奖励
+					30 text 待领取
+					31 text 1
+					32 text 收藏与成就奖励
+			33 button 出征整备, ID: btnDeploy
+				34 text 出征整备
+			35 container 行动难度
+				36 checkbox 正常入城, Value: 1
+				37 checkbox 直入敌腹, Value: 0
+		38 container 基地房间
+			39 checkbox 基地 当前房间, Value: 1
+				40 text 基地
+				41 text 当前房间
+			42 checkbox 配置, Value: 0
+			43 checkbox 后勤, Value: 0
+			44 checkbox 交易所, Value: 0
+			45 checkbox 收藏室 1项奖励可领取, Value: 0
+				46 text 收藏室
+				47 container 1项奖励可领取
+					48 text 1
+			49 checkbox 建设, Value: 0
+			50 checkbox 庭院, Value: 0
+
+The focused UI element is 39 checkbox 基地 当前房间, Value: 1

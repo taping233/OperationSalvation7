@@ -1,0 +1,67 @@
+{
+  "actions": [
+    {
+      "detail": "通过内置浏览器按钮输入进入只看壁纸，再恢复界面；两态检查见checks.json",
+      "type": "real-input"
+    },
+    {
+      "detail": "恢复界面后的DOM与计算样式只读采集",
+      "type": "static-inspection"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "class": "home-ghost"
+      },
+      "identity": "home-ghost",
+      "key": "ghost",
+      "rect": {
+        "height": 720,
+        "width": 1280,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#title .home-ghost",
+      "styles": {
+        "display": "block",
+        "transform": "none",
+        "visibility": "visible"
+      },
+      "tag": "DIV",
+      "text": "CODE NAME 7CODE NAME 7CODE NAME 7CODE NAME 7"
+    }
+  ],
+  "observedAt": "2026-10-11T03:11:39.224Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "scene": "wallpaper-ghost-restored",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-11-wallpaper-ghost/wallpaper-only.jpg"
+  ],
+  "selectors": [
+    {
+      "key": "ghost",
+      "selector": "#title .home-ghost"
+    }
+  ]
+}

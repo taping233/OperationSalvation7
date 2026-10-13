@@ -1,0 +1,26 @@
+{
+  "firstEscape": {
+    "choices": 0,
+    "page": true,
+    "panel": true
+  },
+  "secondEscape": {
+    "focus": "筛选与排序",
+    "page": true,
+    "panel": false
+  },
+  "selected": {
+    "chip": "传说 ×",
+    "result": "13"
+  },
+  "visual": {
+    "headerAfter": "none",
+    "headerGlass": "blur(18px) saturate(0.8)",
+    "obsoleteLabels": 0,
+    "panelGlass": "blur(18px) saturate(0.75)",
+    "viewport": [
+      1280,
+      720
+    ]
+  }
+}

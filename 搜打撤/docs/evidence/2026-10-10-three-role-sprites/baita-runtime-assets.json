@@ -1,0 +1,997 @@
+{
+  "files": [
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/neutral.webp",
+      "bytes": 82640,
+      "sha256": "e540f65b610dd5a0e3dfa8d3678d9ed9c3dbfde3f1181eac2f92482eedae9589",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-000.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-001.webp",
+      "bytes": 82616,
+      "sha256": "baf4997ea7046b70ae9b5c39a3dcf414fa0da192408f5a7753f7a521ad1d19aa",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-002.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-002.webp",
+      "bytes": 82476,
+      "sha256": "b8e340281531409f84bd8a85e5bc8b847b03d9477207cddf4c098dba4304a886",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-003.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-003.webp",
+      "bytes": 82412,
+      "sha256": "cc223277afdf4b2f38d029b68545db14cd9ac85834029efc75a40b3277e659be",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-004.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-004.webp",
+      "bytes": 82044,
+      "sha256": "94774516ff592d36bcdca4d7431aa6851f7182494ee39d0d6d82ee005aaefaf1",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-005.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-005.webp",
+      "bytes": 82042,
+      "sha256": "6f6c9160bd0bdaf114244eb655cf6d2fd89776d0e6bb5fd000186d0c63e70193",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-006.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-006.webp",
+      "bytes": 81886,
+      "sha256": "4cf24807beb72ce640a65f203e2d28cd9de8aa63239032e1ad7f46e34f0d7372",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-007.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-007.webp",
+      "bytes": 81768,
+      "sha256": "eae10c98e87625885ee7b9389a553fa19265c81ec00abec3508a929c1c51adbd",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-008.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-008.webp",
+      "bytes": 81878,
+      "sha256": "d05db792b69e049688a81cef4688abb68488ec9316c830025b284932d6d458d0",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-009.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-009.webp",
+      "bytes": 81876,
+      "sha256": "ebc8abd05cb854788542cda8236f9e937b92baa9c51e875416ac6002acbbb067",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-010.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-010.webp",
+      "bytes": 81898,
+      "sha256": "e35bb2234dca5c69df365e965eb278d9b17e493287249c2324d4db2e995738e5",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-011.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-011.webp",
+      "bytes": 81886,
+      "sha256": "7f6bf8cf53e957749eb39707e51d854940efb78a52ef483807b469978ea3bff9",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-012.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-012.webp",
+      "bytes": 82170,
+      "sha256": "45c563bd7ad753c3bcd82c26d3abdb1c7c616cfc24a90b4346d7727816f5e8c5",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-013.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-013.webp",
+      "bytes": 82070,
+      "sha256": "fabd04e2e0d90033008d83497c15d7cfe139c232ece468a9858fd8622f594a48",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-014.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-014.webp",
+      "bytes": 81844,
+      "sha256": "6b7d521de3ef1a0868723f0c2bdc223118b3109ee5aab01535a15a4e5b12ee9d",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-015.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-015.webp",
+      "bytes": 81824,
+      "sha256": "c471c2a92f4429f5e27688e3ef243b6e54a9de056f5b8a0cb4e46d7830b16444",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-016.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-016.webp",
+      "bytes": 81826,
+      "sha256": "4a46f640a2a7d04913bd7c0d5f6e716ce5ddd67cf67651d2a929714a4bc720f2",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-017.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-017.webp",
+      "bytes": 81908,
+      "sha256": "f53d63077b3d8c397396d79c0502f827cb3cbc3c48733cba795566a70445245d",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-018.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-018.webp",
+      "bytes": 82226,
+      "sha256": "1af52d2c2ae6dd574c9d1c3327be91503358e635b7d314bc35138563a1aa7c69",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-019.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-019.webp",
+      "bytes": 82330,
+      "sha256": "339041c406d9a4cc2d7bdd4ed0eeb85142aaae9ad028b9ee0ea8ea925c55b935",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-020.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-020.webp",
+      "bytes": 82098,
+      "sha256": "278a77fb7b891ba12f7a2e7c30bc9764480757e7c8b751b71d5a892d2a89ece7",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-021.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-021.webp",
+      "bytes": 81712,
+      "sha256": "68846319ce7a0554ff950ccda89c82fe640c212882af0ce0503858926ccd8660",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-022.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-022.webp",
+      "bytes": 81796,
+      "sha256": "178f25be2ff725eed0bc02ff4a69588859a1c49a543797299d8d83af8920b57d",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-023.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-023.webp",
+      "bytes": 81818,
+      "sha256": "947245624ac802485c13a95fe2d5be9c53ca73eec418bbdd8fd6041bdd3be781",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-024.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-024.webp",
+      "bytes": 81812,
+      "sha256": "e0637c8e30dc67392c0fad042fb211182a6049ac90ff7ad24b1e51115b559f13",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-025.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-025.webp",
+      "bytes": 81918,
+      "sha256": "2a99d163f59045d4322774d5ee6d807c8a450ddc652348dae28af1697557048f",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-026.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-026.webp",
+      "bytes": 82188,
+      "sha256": "f7163fa2cd7f36885eb53c86720eafc7a4e7ddeeba3fc018cdc0812d832ea632",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-027.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-027.webp",
+      "bytes": 81994,
+      "sha256": "b88f40860e499221345ccf292b095305a1e80275a75e17648c6737dc8d78ae49",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-028.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-028.webp",
+      "bytes": 81778,
+      "sha256": "3f1b51346ce9f7bb3dc7413fab56222e154e1fb0cd5f7b09b43dcf820488afe8",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-029.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-029.webp",
+      "bytes": 81936,
+      "sha256": "d01dd48cfcca97009a6a6b017528c5b6d350e63fb5d11895ca028443f402db95",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-030.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-030.webp",
+      "bytes": 81770,
+      "sha256": "ff72a13d6e5c99e6368c367a5bed9492d71231661877df7a21623bccc2b19989",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-031.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-031.webp",
+      "bytes": 81776,
+      "sha256": "6270f931c3eb56c6597f97a35fe1e7cbc48a9b69384d8405fe693407383bd213",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-032.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-032.webp",
+      "bytes": 81864,
+      "sha256": "57554bf9f7fe269dc4a5e646d41da4dcc60c923f579f29864c10e1048cdd9b26",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-033.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-033.webp",
+      "bytes": 81858,
+      "sha256": "76ecf89a20e25e9ba2666e750b369a3693e4b3b357c9631aa0ae8f2f4b6f4ce3",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-034.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-034.webp",
+      "bytes": 81918,
+      "sha256": "401dbf3f170a72bf81abfdbde892564abfe0c937af0ac7acadb2d0d5fefb66cb",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-035.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-035.webp",
+      "bytes": 81920,
+      "sha256": "d50992e41c7f2fa4bfea8be93442bb8227e604e23b8d51de128dffb737b5abe7",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-036.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-036.webp",
+      "bytes": 89450,
+      "sha256": "ac9efe58f4751bd86dee5c2f95b36fc6a2e8fff20cd761ff994f43d3551b5107",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-001.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-037.webp",
+      "bytes": 92422,
+      "sha256": "df6e9e718e96c68d0efff7e32e0d39ac1ad80abfe08b9ab8163607b84c479a3f",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-002.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-038.webp",
+      "bytes": 97786,
+      "sha256": "56dbf08cd4d0c243a46b80193cc1482fecffec41b89528c2aa31f19954097c64",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-003.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-039.webp",
+      "bytes": 99110,
+      "sha256": "f3786b1181ec34f97d964a5ffb3eef06b0f54c4ef30f610aeee04c1dafdfd03f",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-004.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-040.webp",
+      "bytes": 93172,
+      "sha256": "740dae9e56e62e7c26e961cf2f04db1a1f33f07d69d49db4c0d127e6ecafb6e8",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-005.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-041.webp",
+      "bytes": 90858,
+      "sha256": "747a8d6c771253d752891f38fc524c8139816f9b42b52a7dbc440f91f99ebdb9",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-006.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-042.webp",
+      "bytes": 94912,
+      "sha256": "3d235d13f088f1c633693b1315e9fd1c362c0ced2d6a1ac25dd8fad67d6cab60",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/hurt-001.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-043.webp",
+      "bytes": 92752,
+      "sha256": "416cf9ab7d82918693b766934f0b320e80d7cf2daf45bc2b9fefa1e6586883b7",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/hurt-002.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-044.webp",
+      "bytes": 106752,
+      "sha256": "3f24497d42fbf3fe16420ddc3f5d1155fc5e579f6cf594fa3226fd98ddb7877e",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-001.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-045.webp",
+      "bytes": 108848,
+      "sha256": "128c03409c96fe6327635eae350eb5e497afd4c1e5973c717b58b77c3157bd71",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-002.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-046.webp",
+      "bytes": 108974,
+      "sha256": "5ebf9082787c341f5a87e67cdafb336e1e4eb767d1a70e5c62990c0919caa0a2",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-003.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-047.webp",
+      "bytes": 102376,
+      "sha256": "4d39cb757985815feaa912779abb7ff0cf3d853feed7946eb856df2b4ba1ddd9",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-004.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-048.webp",
+      "bytes": 94788,
+      "sha256": "aea80921446c87d5266c0f9f03fd0ddf7241ea6724f83acba67882b758627239",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-005.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/frame-049.webp",
+      "bytes": 92264,
+      "sha256": "1ee3d42bce02d99b8b4e046ecb1719ac3a0db0127d816fc499395234f4113353",
+      "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-006.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    }
+  ],
+  "catalog": {
+    "width": 512,
+    "height": 342,
+    "sequences": {
+      "idle": [
+        "sprite-v1/neutral",
+        "sprite-v1/neutral",
+        "sprite-v1/frame-001",
+        "sprite-v1/frame-002",
+        "sprite-v1/frame-003",
+        "sprite-v1/frame-004",
+        "sprite-v1/frame-005",
+        "sprite-v1/frame-006",
+        "sprite-v1/frame-007",
+        "sprite-v1/frame-008",
+        "sprite-v1/frame-009",
+        "sprite-v1/frame-010",
+        "sprite-v1/frame-011",
+        "sprite-v1/frame-012",
+        "sprite-v1/frame-013",
+        "sprite-v1/frame-014",
+        "sprite-v1/frame-015",
+        "sprite-v1/frame-016",
+        "sprite-v1/frame-017",
+        "sprite-v1/frame-018",
+        "sprite-v1/frame-019",
+        "sprite-v1/frame-020",
+        "sprite-v1/frame-021",
+        "sprite-v1/frame-022",
+        "sprite-v1/frame-023",
+        "sprite-v1/frame-024",
+        "sprite-v1/frame-025",
+        "sprite-v1/frame-026",
+        "sprite-v1/frame-027",
+        "sprite-v1/frame-028",
+        "sprite-v1/frame-029",
+        "sprite-v1/frame-030",
+        "sprite-v1/frame-031",
+        "sprite-v1/frame-032",
+        "sprite-v1/frame-033",
+        "sprite-v1/frame-034",
+        "sprite-v1/frame-035",
+        "sprite-v1/frame-034",
+        "sprite-v1/frame-033",
+        "sprite-v1/frame-032",
+        "sprite-v1/frame-031",
+        "sprite-v1/frame-030",
+        "sprite-v1/frame-029",
+        "sprite-v1/frame-028",
+        "sprite-v1/frame-027",
+        "sprite-v1/frame-026",
+        "sprite-v1/frame-025",
+        "sprite-v1/frame-024",
+        "sprite-v1/frame-023",
+        "sprite-v1/frame-022",
+        "sprite-v1/frame-021",
+        "sprite-v1/frame-020",
+        "sprite-v1/frame-019",
+        "sprite-v1/frame-018",
+        "sprite-v1/frame-017",
+        "sprite-v1/frame-016",
+        "sprite-v1/frame-015",
+        "sprite-v1/frame-014",
+        "sprite-v1/frame-013",
+        "sprite-v1/frame-012",
+        "sprite-v1/frame-011",
+        "sprite-v1/frame-010",
+        "sprite-v1/frame-009",
+        "sprite-v1/frame-008",
+        "sprite-v1/frame-007",
+        "sprite-v1/frame-006",
+        "sprite-v1/frame-005",
+        "sprite-v1/frame-004",
+        "sprite-v1/frame-003",
+        "sprite-v1/frame-002",
+        "sprite-v1/frame-001",
+        "sprite-v1/neutral"
+      ],
+      "atk": [
+        "sprite-v1/neutral",
+        "sprite-v1/frame-036",
+        "sprite-v1/frame-036",
+        "sprite-v1/frame-037",
+        "sprite-v1/frame-038",
+        "sprite-v1/frame-038",
+        "sprite-v1/frame-039",
+        "sprite-v1/frame-040",
+        "sprite-v1/frame-041",
+        "sprite-v1/neutral"
+      ],
+      "hurt": [
+        "sprite-v1/neutral",
+        "sprite-v1/frame-042",
+        "sprite-v1/frame-042",
+        "sprite-v1/frame-042",
+        "sprite-v1/frame-043",
+        "sprite-v1/frame-043",
+        "sprite-v1/frame-043",
+        "sprite-v1/neutral"
+      ],
+      "death": [
+        "sprite-v1/neutral",
+        "sprite-v1/frame-044",
+        "sprite-v1/frame-044",
+        "sprite-v1/frame-044",
+        "sprite-v1/frame-045",
+        "sprite-v1/frame-045",
+        "sprite-v1/frame-046",
+        "sprite-v1/frame-046",
+        "sprite-v1/frame-046",
+        "sprite-v1/frame-047",
+        "sprite-v1/frame-047",
+        "sprite-v1/frame-048",
+        "sprite-v1/frame-048",
+        "sprite-v1/frame-048",
+        "sprite-v1/frame-049",
+        "sprite-v1/frame-049",
+        "sprite-v1/frame-049",
+        "sprite-v1/frame-049",
+        "sprite-v1/frame-049",
+        "sprite-v1/frame-049",
+        "sprite-v1/frame-049"
+      ],
+      "cast": [
+        "sprite-v1/neutral",
+        "sprite-v1/frame-036",
+        "sprite-v1/frame-036",
+        "sprite-v1/frame-037",
+        "sprite-v1/frame-038",
+        "sprite-v1/frame-038",
+        "sprite-v1/frame-039",
+        "sprite-v1/frame-040",
+        "sprite-v1/frame-041",
+        "sprite-v1/neutral"
+      ]
+    },
+    "timings": {
+      "idle": [
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42
+      ],
+      "atk": [
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42
+      ],
+      "hurt": [
+        41,
+        42,
+        42,
+        42,
+        41,
+        42,
+        42,
+        42
+      ],
+      "death": [
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42
+      ],
+      "cast": [
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42
+      ]
+    },
+    "fixedGeometry": true,
+    "assetVersion": "sprite-v1",
+    "facing": "right"
+  },
+  "checks": {
+    "passed": true,
+    "role": "baita",
+    "uniqueRuntimeTextures": 50,
+    "frameSize": [
+      768,
+      512
+    ],
+    "runtimeSize": [
+      512,
+      342
+    ],
+    "exactIdleAttackHurtEndpoints": true,
+    "fixedIdleLower147Rows": true,
+    "fixedCanvasAndGroupScale": true,
+    "deathHoldLast": true,
+    "durationMs": {
+      "idle": 3000,
+      "atk": 417,
+      "hurt": 334,
+      "death": 875
+    },
+    "bounds": {
+      "idle": [
+        [
+          145,
+          69,
+          466,
+          484
+        ],
+        [
+          145,
+          69,
+          466,
+          484
+        ],
+        [
+          145,
+          69,
+          466,
+          484
+        ],
+        [
+          145,
+          69,
+          466,
+          484
+        ],
+        [
+          145,
+          69,
+          466,
+          484
+        ],
+        [
+          145,
+          69,
+          466,
+          484
+        ],
+        [
+          145,
+          69,
+          466,
+          484
+        ],
+        [
+          145,
+          68,
+          466,
+          484
+        ],
+        [
+          145,
+          68,
+          466,
+          484
+        ],
+        [
+          145,
+          68,
+          466,
+          484
+        ],
+        [
+          145,
+          68,
+          466,
+          484
+        ],
+        [
+          145,
+          68,
+          466,
+          484
+        ],
+        [
+          145,
+          68,
+          466,
+          484
+        ],
+        [
+          145,
+          68,
+          466,
+          484
+        ],
+        [
+          145,
+          68,
+          466,
+          484
+        ],
+        [
+          145,
+          68,
+          466,
+          484
+        ],
+        [
+          145,
+          68,
+          466,
+          484
+        ],
+        [
+          145,
+          68,
+          466,
+          484
+        ],
+        [
+          145,
+          68,
+          466,
+          484
+        ],
+        [
+          145,
+          68,
+          466,
+          484
+        ],
+        [
+          145,
+          68,
+          466,
+          484
+        ],
+        [
+          145,
+          67,
+          466,
+          484
+        ],
+        [
+          145,
+          67,
+          466,
+          484
+        ],
+        [
+          145,
+          67,
+          466,
+          484
+        ],
+        [
+          145,
+          67,
+          466,
+          484
+        ],
+        [
+          145,
+          67,
+          466,
+          484
+        ],
+        [
+          145,
+          67,
+          466,
+          484
+        ],
+        [
+          145,
+          67,
+          466,
+          484
+        ],
+        [
+          145,
+          67,
+          466,
+          484
+        ],
+        [
+          145,
+          67,
+          466,
+          484
+        ],
+        [
+          145,
+          67,
+          466,
+          484
+        ],
+        [
+          145,
+          67,
+          466,
+          484
+        ],
+        [
+          145,
+          67,
+          466,
+          484
+        ],
+        [
+          145,
+          67,
+          466,
+          484
+        ],
+        [
+          145,
+          67,
+          466,
+          484
+        ],
+        [
+          145,
+          67,
+          466,
+          484
+        ],
+        [
+          145,
+          67,
+          466,
+          484
+        ]
+      ],
+      "atk": [
+        [
+          145,
+          69,
+          466,
+          484
+        ],
+        [
+          145,
+          69,
+          482,
+          484
+        ],
+        [
+          145,
+          71,
+          480,
+          484
+        ],
+        [
+          145,
+          86,
+          531,
+          484
+        ],
+        [
+          145,
+          81,
+          523,
+          484
+        ],
+        [
+          145,
+          82,
+          478,
+          484
+        ],
+        [
+          145,
+          81,
+          482,
+          484
+        ],
+        [
+          145,
+          69,
+          466,
+          484
+        ]
+      ],
+      "hurt": [
+        [
+          145,
+          69,
+          466,
+          484
+        ],
+        [
+          145,
+          83,
+          525,
+          484
+        ],
+        [
+          145,
+          72,
+          481,
+          484
+        ],
+        [
+          145,
+          69,
+          466,
+          484
+        ]
+      ],
+      "death": [
+        [
+          145,
+          69,
+          466,
+          484
+        ],
+        [
+          145,
+          67,
+          514,
+          484
+        ],
+        [
+          145,
+          78,
+          572,
+          484
+        ],
+        [
+          145,
+          132,
+          662,
+          484
+        ],
+        [
+          145,
+          133,
+          653,
+          484
+        ],
+        [
+          145,
+          161,
+          674,
+          484
+        ],
+        [
+          145,
+          157,
+          668,
+          484
+        ]
+      ]
+    },
+    "coverage": "静态导出检查；姿态与动作自然度另做当前窗口内置预览核验"
+  }
+}

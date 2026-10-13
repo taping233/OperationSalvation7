@@ -1,0 +1,74 @@
+[
+  {
+    "id": "A",
+    "title": "提起火幕",
+    "tags": "1boy, solo, slight smile, looking up, dark background, fire, smoke, from below, full body, standing, arm up",
+    "scene": "Character 1 stands in a turning three-quarter pose with his weight on the rear foot. His raised hand appears to lift an immense sheet of eruptive fire behind him like a heavy curtain. The fire folds upward into one towering curved shape; its lower edge remains compressed and dark while the lifted edge opens into brilliant molten light. The other hand calmly holds the cloak near his hip. His face stays visible beneath the hat, his eyes following the lifted fire. His cloak swings against the rising flame, creating opposing diagonals. Show the complete figure from hat to boots, with the feet grounded on one simple dark abstract plane. The huge fire curtain frames him without hiding his silhouette; distant smoke becomes a few quiet masses. Design the background color and lighting around the fire curtain and clear separation of face, black robe and boots.",
+    "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1boy, solo, slight smile, looking up, dark background, fire, smoke, from below, full body, standing, arm up\n\nCharacter 1 stands in a turning three-quarter pose with his weight on the rear foot. His raised hand appears to lift an immense sheet of eruptive fire behind him like a heavy curtain. The fire folds upward into one towering curved shape; its lower edge remains compressed and dark while the lifted edge opens into brilliant molten light. The other hand calmly holds the cloak near his hip. His face stays visible beneath the hat, his eyes following the lifted fire. His cloak swings against the rising flame, creating opposing diagonals. Show the complete figure from hat to boots, with the feet grounded on one simple dark abstract plane. The huge fire curtain frames him without hiding his silhouette; distant smoke becomes a few quiet masses. Design the background color and lighting around the fire curtain and clear separation of face, black robe and boots.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+    "character_prompt": "boy, elegant mysterious young man, youthful refined masculine face, slender jaw, narrow almond-shaped golden yellow eyes, delicate nose, small mouth, pale skin, round thin metal frame eyeglasses, slender pointed elf ears, silver-grey long hair gathered into a low bun, two long sidelocks, short messy bangs, black wide-brim witch hat with a slender bent tip drooping to the right, purple hat lining, black high-collar long robe, restrained thin gold piping, small gold buttons, large cloak with purple lining, white feather with a gold-set blue sapphire brooch on the left chest, black leather gloves, black lace-up boots",
+    "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, female, child, old man, aged face, broad jaw, elongated chin, huge round eyes, makeup, beard, staff, wand, feathered hat, hat feather, playing cards, card decks, magic circle, circular portal, realistic volcano landscape, white border, inset illustration, character sheet, contact sheet, detached torso, disembodied hand",
+    "model": "nai-diffusion-5-full",
+    "width": 1024,
+    "height": 1024,
+    "parameters": {
+      "steps": 28,
+      "scale": 6.5,
+      "cfg_rescale": 0.0,
+      "sampler": "k_euler_ancestral",
+      "noise_schedule": "karras",
+      "variety_plus": true
+    },
+    "recipe_version": "1.3",
+    "seed": 1302230271,
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\volcano-free-v8-20261010\\A.png",
+    "installed": false
+  },
+  {
+    "id": "B",
+    "title": "压住怒潮",
+    "tags": "1boy, solo, calm expression, slight smile, looking down, dark background, fire, smoke, from side, upper body, leaning forward, outstretched arm, open hand",
+    "scene": "Character 1 is seen in a close three-quarter side view, his face prominent above the nearer hand. He gently presses his palm against an invisible boundary, keeping a colossal molten surge behind it compressed like a suspended wave. The dark-red crest curls over his shoulder, frozen a moment before release. A narrow ivory fissure opens at the point just beyond his fingertips and a single short tongue of fire escapes. His calm small smile contrasts with the enormous stored force. The leaning shoulder and continuous arm form a strong diagonal; the other hand remains near his waist. Use the boundary between dark pressure and pale molten light as the main background shape, with quiet space around his face. The upper-body crop occurs at the canvas edge and his robe remains connected through the bottom edge.",
+    "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1boy, solo, calm expression, slight smile, looking down, dark background, fire, smoke, from side, upper body, leaning forward, outstretched arm, open hand\n\nCharacter 1 is seen in a close three-quarter side view, his face prominent above the nearer hand. He gently presses his palm against an invisible boundary, keeping a colossal molten surge behind it compressed like a suspended wave. The dark-red crest curls over his shoulder, frozen a moment before release. A narrow ivory fissure opens at the point just beyond his fingertips and a single short tongue of fire escapes. His calm small smile contrasts with the enormous stored force. The leaning shoulder and continuous arm form a strong diagonal; the other hand remains near his waist. Use the boundary between dark pressure and pale molten light as the main background shape, with quiet space around his face. The upper-body crop occurs at the canvas edge and his robe remains connected through the bottom edge.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+    "character_prompt": "boy, elegant mysterious young man, youthful refined masculine face, slender jaw, narrow almond-shaped golden yellow eyes, delicate nose, small mouth, pale skin, round thin metal frame eyeglasses, slender pointed elf ears, silver-grey long hair gathered into a low bun, two long sidelocks, short messy bangs, black wide-brim witch hat with a slender bent tip drooping to the right, purple hat lining, black high-collar long robe, restrained thin gold piping, small gold buttons, large cloak with purple lining, white feather with a gold-set blue sapphire brooch on the left chest, black leather gloves, black lace-up boots",
+    "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, female, child, old man, aged face, broad jaw, elongated chin, huge round eyes, makeup, beard, staff, wand, feathered hat, hat feather, playing cards, card decks, magic circle, circular portal, realistic volcano landscape, white border, inset illustration, character sheet, contact sheet, detached torso, disembodied hand",
+    "model": "nai-diffusion-5-full",
+    "width": 1024,
+    "height": 1024,
+    "parameters": {
+      "steps": 28,
+      "scale": 6.5,
+      "cfg_rescale": 0.0,
+      "sampler": "k_euler_ancestral",
+      "noise_schedule": "karras",
+      "variety_plus": true
+    },
+    "recipe_version": "1.3",
+    "seed": 640596089,
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\volcano-free-v8-20261010\\B.png",
+    "installed": false
+  },
+  {
+    "id": "C",
+    "title": "从火中探身",
+    "tags": "1boy, solo, slight smile, looking at viewer, dark background, fire, smoke, from below, cowboy shot, foreshortening, leaning forward, outstretched arm, open hand",
+    "scene": "The viewer is inside the eruptive fire looking up toward Character 1. His nearer gloved hand reaches toward the lens and becomes the large foreground shape, while his clearly visible face sits behind it near the upper third. He twists his shoulders through a gap in a huge sweeping flame wall, looking directly toward the viewer with a restrained confident smile. His far arm draws the cloak back so it arcs across the opposite side of the frame. Broad molten streaks sweep past the lens at the edges, with a quiet opening around his eyes and glasses. His upper legs and connected robe continue into the bottom crop; the perspective enlarges the near hand and compresses the torso naturally. Let foreground fire, middle figure and distant smoke form three clear depth layers, with the background hue chosen for the face and gesture to read.",
+    "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1boy, solo, slight smile, looking at viewer, dark background, fire, smoke, from below, cowboy shot, foreshortening, leaning forward, outstretched arm, open hand\n\nThe viewer is inside the eruptive fire looking up toward Character 1. His nearer gloved hand reaches toward the lens and becomes the large foreground shape, while his clearly visible face sits behind it near the upper third. He twists his shoulders through a gap in a huge sweeping flame wall, looking directly toward the viewer with a restrained confident smile. His far arm draws the cloak back so it arcs across the opposite side of the frame. Broad molten streaks sweep past the lens at the edges, with a quiet opening around his eyes and glasses. His upper legs and connected robe continue into the bottom crop; the perspective enlarges the near hand and compresses the torso naturally. Let foreground fire, middle figure and distant smoke form three clear depth layers, with the background hue chosen for the face and gesture to read.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+    "character_prompt": "boy, elegant mysterious young man, youthful refined masculine face, slender jaw, narrow almond-shaped golden yellow eyes, delicate nose, small mouth, pale skin, round thin metal frame eyeglasses, slender pointed elf ears, silver-grey long hair gathered into a low bun, two long sidelocks, short messy bangs, black wide-brim witch hat with a slender bent tip drooping to the right, purple hat lining, black high-collar long robe, restrained thin gold piping, small gold buttons, large cloak with purple lining, white feather with a gold-set blue sapphire brooch on the left chest, black leather gloves, black lace-up boots",
+    "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, female, child, old man, aged face, broad jaw, elongated chin, huge round eyes, makeup, beard, staff, wand, feathered hat, hat feather, playing cards, card decks, magic circle, circular portal, realistic volcano landscape, white border, inset illustration, character sheet, contact sheet, detached torso, disembodied hand",
+    "model": "nai-diffusion-5-full",
+    "width": 1024,
+    "height": 1024,
+    "parameters": {
+      "steps": 28,
+      "scale": 6.5,
+      "cfg_rescale": 0.0,
+      "sampler": "k_euler_ancestral",
+      "noise_schedule": "karras",
+      "variety_plus": true
+    },
+    "recipe_version": "1.3",
+    "seed": 109201683,
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\volcano-free-v8-20261010\\C.png",
+    "installed": false
+  }
+]

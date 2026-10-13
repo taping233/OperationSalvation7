@@ -1,0 +1,9 @@
+{
+  "id": "02",
+  "variant": "hurt",
+  "prompt": "Edit ONLY the facial expression of this exact transparent Wu head+neck animation sprite. Preserve the exact canvas size, placement, scalp/head silhouette, ears, neck outline, face shape, viewing angle, skin colors and painterly anime style. This is an expression variant for a brief hit reaction, NOT a new character. Change confident smiling expression to a restrained flinch: both eyes briefly closed into simple natural curved eyelids, brows mildly tense, mouth small and tightened with a hint of the same tiny fang if visible. No exaggerated crying, yelling, blood, bruises or injury. Leave bald scalp and short neck exactly the same so existing separate hair layers still register without movement. No hair, goggles, flower, ribbon, shoulders, torso, labels, shadow, background or glow. Genuine transparent PNG; keep zero alpha outside the original solid head silhouette. Do not enlarge, recenter, change proportions, rotate the head, or redraw a different face.",
+  "refs": [
+    "D:/素材/代号柒/搜打撤/game/art-source/characters/wu-parts-v1/part-02-head-neck-v1.png"
+  ],
+  "tool": "built-in imagegen"
+}

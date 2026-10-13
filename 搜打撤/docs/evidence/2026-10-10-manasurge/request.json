@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "card_id": "cc-mana-surge",
+      "asset": "cards/spell-cc-mana-surge.webp",
+      "revision": "manasurge-original-rough-20261010",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-cc-mana-surge.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "prompt": "Style-transfer. Redraw FIRST image 法力奔涌 preserving exact original LANDSCAPE 4:3 composition, dramatic low upward camera, framing, proportions and positions. Huge dark circular stone/metal fountain reservoir fills bottom foreground, luminous cyan-white liquid mana pours in broad streams over its rim. From center rises ONE tall twisting spiral cyan-white energy column, looping ribbons narrowing upward and exiting TOP image edge. Preserve original spiral flow direction, round cyan magical ring around upper-middle column with sparse abstract runic marks, floating pale cyan/lavender diamond crystal shards on both sides of column at original positions and scales. Dark navy night sky and subdued shadowy cliff/building silhouettes flank both sides, keep original perspective and negative space. No characters, new props or composition changes. Use broad connected opaque cyan/cream directional swaths to paint spiral, overflow and crystal planes; simplify fine cracks and dense particles to sparse purposeful marks, reduce all-over sky glitter. Images 2–4 are STYLE ONLY references for broad opaque brush construction, not characters, clothes or poses. Rough hand-painted anime illustration made of large connected opaque color masses, limited wide curved strokes and blunt dabs, decisive handmade edges and grouped hard shadows, expressive selective overlaps amid quiet regions. Mostly matte muted blue/navy palette with concentrated cyan-white accents. No glossy 3D, photoreal liquid, smooth airbrushed glow, tiny facet mosaics, decorative clutter, all-over grain/texture filters. No text, frame, watermark or UI; magical ring uses abstract symbols, not readable writing.",
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-0e1a2164-57bf-43f9-a3b5-b5e8626e102a.png"
+    }
+  ]
+}

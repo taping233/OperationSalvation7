@@ -1,0 +1,27 @@
+[
+  {
+    "path": "game/src/ui/page-loading.js",
+    "sha256": "5D7A98E8DED2AF34FC36CE9DFC54C1BCC2684AB8934CCB7403376014E83AFCD9",
+    "bytes": 5001
+  },
+  {
+    "path": "game/css/page-loading.css",
+    "sha256": "68C0EA28DA202456B9E55C107F52177F91F4940C6577A7D66A2C80D843143720",
+    "bytes": 2111
+  },
+  {
+    "path": "tests/page-loading.test.js",
+    "sha256": "46D17F46993E455B403E697D139E3B2DC49375962F6EEC7ACC5679DBBEB957B1",
+    "bytes": 6956
+  },
+  {
+    "path": "docs/development.md",
+    "sha256": "B5DF611DB1D9C2B0A56DF063592FD4BAC205D8C4C99A52935EACDF8B0F097E58",
+    "bytes": 24431
+  },
+  {
+    "path": "docs/evidence/2026-10-11-photo-opening-black/opening.png",
+    "sha256": "D04EF3A8DEF4FD0770AF826658EE3A192545842B2EDF4D34F08CF4406BA5B35A",
+    "bytes": 96917
+  }
+]

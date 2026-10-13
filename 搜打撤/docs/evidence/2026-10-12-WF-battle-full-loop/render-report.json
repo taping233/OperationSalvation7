@@ -1,0 +1,134 @@
+{
+  "bpm": 128,
+  "bars": 64,
+  "seconds": 120,
+  "sections": [
+    {
+      "name": "Theme",
+      "start_bar": 0,
+      "bars": 16,
+      "start_seconds": 0.0,
+      "end_seconds": 30.0
+    },
+    {
+      "name": "Development",
+      "start_bar": 16,
+      "bars": 16,
+      "start_seconds": 30.0,
+      "end_seconds": 60.0
+    },
+    {
+      "name": "Breathing",
+      "start_bar": 32,
+      "bars": 8,
+      "start_seconds": 60.0,
+      "end_seconds": 75.0
+    },
+    {
+      "name": "Return",
+      "start_bar": 40,
+      "bars": 16,
+      "start_seconds": 75.0,
+      "end_seconds": 105.0
+    },
+    {
+      "name": "Turnaround",
+      "start_bar": 56,
+      "bars": 8,
+      "start_seconds": 105.0,
+      "end_seconds": 120.0
+    }
+  ],
+  "master_gain_db": 20.630000000000003,
+  "opus_measurement": {
+    "input_i": -19.5,
+    "input_tp": -2.64,
+    "input_lra": 3.3,
+    "input_thresh": -29.63
+  },
+  "checks": {
+    "exact_120s_48k_pcm": true,
+    "finite_pcm": true,
+    "no_clipping": true,
+    "no_halfsecond_silence": true,
+    "sample_boundary_below_normal_p99": true,
+    "seam_curvature_below_normal_p99": true,
+    "opus_sample_accurate_length": true,
+    "two_cycles_exact_duration": true,
+    "opus_boundary_below_normal_p99": true,
+    "true_peak_below_minus_1": true,
+    "matched_approved_loudness": true,
+    "no_large_100ms_boundary_energy_drop": true,
+    "harmonic_turnaround_A7_to_Dm": true
+  },
+  "decoded_formats": {
+    "battle-shadowtide-full-loop.ogg": {
+      "frames": 5760000,
+      "seconds": 120.0,
+      "finite": true,
+      "decoded_endpoint_step": 0.0016823150217533112,
+      "decoded_seam_second_difference": 0.016826141625642776
+    },
+    "battle-shadowtide-full-loop.mp3": {
+      "frames": 5760000,
+      "seconds": 120.0,
+      "finite": true,
+      "decoded_endpoint_step": 0.0037888027727603912,
+      "decoded_seam_second_difference": 0.02108115702867508
+    },
+    "battle-shadowtide-full-loop-two-cycles.mp3": {
+      "frames": 11520000,
+      "seconds": 240.0,
+      "finite": true,
+      "decoded_endpoint_step": 0.0037888027727603912,
+      "decoded_seam_second_difference": 0.02108115702867508
+    }
+  },
+  "seam": {
+    "pcm_endpoint_step": 0.0,
+    "ordinary_adjacent_step_p99": 0.04268217086791992,
+    "pcm_seam_second_difference": 0.0011034011840820312,
+    "first_vs_last_100ms_rms_db": 4.816362781309765,
+    "endpoint_correction_ms": 2,
+    "endpoint_correction_pre_master_amplitude": [
+      -0.00015896745026111603,
+      -1.118239015340805e-05
+    ],
+    "fade_in_or_out": false,
+    "note": "Acoustic sample continuity checks do not constitute human listening."
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-full-loop/battle-shadowtide-full-loop.mmp",
+      "bytes": 141197,
+      "sha256": "377dc72286cdab4dff2d532d968094024ce43f6e8fd64aabecba3411f6dd5352"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-full-loop/battle-shadowtide-full-loop.wav",
+      "bytes": 34560044,
+      "sha256": "8f9c64132bf7463e95c48bc2bb573fab4d54f8a05f4299b0141ce78812072e9b"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-full-loop/battle-shadowtide-full-loop.ogg",
+      "bytes": 2738157,
+      "sha256": "8f12878a4c732ac1ef9aec7fa48531022eb70fc9e03627ac7358ca98e9ce943d"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-full-loop/battle-shadowtide-full-loop.mp3",
+      "bytes": 3841612,
+      "sha256": "e5cfb5024032e00e2419e873499946a6b6ee5cf41ba438858d70f07981ace745"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-full-loop/battle-shadowtide-full-loop-two-cycles.mp3",
+      "bytes": 7681580,
+      "sha256": "6531a8eb3a2b32fecf8b5505942b59c70886e72acdce3b9a0fcf0b5befd3085b"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-full-loop/score.json",
+      "bytes": 317992,
+      "sha256": "fd746bbef572f47b6e95fa3eca91a7807b9cc90d85faa1d8f657d713b72ec094"
+    }
+  ],
+  "method": "Five LMMS stems rendered for two native cycles; second cycle retained; periodic filters/gain/reflections and 2ms endpoint correction; no zero padding or demo fades.",
+  "listening": "User audition pending; Ogg Opus and WAV preserve the verified loop frame count. MP3 player looping depends on gapless support."
+}

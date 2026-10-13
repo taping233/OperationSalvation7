@@ -1,0 +1,102 @@
+{
+  "task": "WF-studio-live-1010",
+  "status": "complete-uncommitted",
+  "files": [
+    {
+      "file": "game/css/photo-studio-unified.css",
+      "bytes": 30514,
+      "sha256": "680da4685351d0d91a1be516fa2d32aca53cb932bc7074f6f0a2e908ea929c44"
+    },
+    {
+      "file": "game/css/photo-studio-archive.css",
+      "bytes": 20577,
+      "sha256": "a90f48ab9627ceec03ccfe66ea50d1edd067bb3f87aca143bda0ceb17a95f329"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.page.js",
+      "bytes": 50777,
+      "sha256": "49d7dd6e43665b75a9c5aa92f879a2b08c1ccdecbb3777bd708781f5865c3952"
+    },
+    {
+      "file": "docs/evidence/2026-10-10-WF-studio-live-1010/00-before.png",
+      "bytes": 163233,
+      "sha256": "c06e451b8c1cd91432c531483dc28e240c521ef2ff537ac0bcabeb592a77f739"
+    },
+    {
+      "file": "docs/evidence/2026-10-10-WF-studio-live-1010/07-final-gallery.png",
+      "bytes": 166803,
+      "sha256": "41f683e8eda4097427ad21086967b91424d6506e7d1d19dfcd6ac29783afe0ac"
+    },
+    {
+      "file": "docs/evidence/2026-10-10-WF-studio-live-1010/04-photo-detail.png",
+      "bytes": 90630,
+      "sha256": "c09ec08c4fd8535e5f1fe384d4690a09fa030797f37acad3015a19b3099a7e17"
+    },
+    {
+      "file": "docs/evidence/2026-10-10-WF-studio-live-1010/02-filter-menu.png",
+      "bytes": 163818,
+      "sha256": "1d6f897ea034c5f6887829f4790b284483584fe450f8aad406d0b750c04385ad"
+    },
+    {
+      "file": "docs/evidence/2026-10-10-WF-studio-live-1010/03-proof-mount.png",
+      "bytes": 66922,
+      "sha256": "c22dd72e0e41934e3263c999fc47563a73fb16771d2dca9fd1151c1a37316cd8"
+    },
+    {
+      "file": "docs/evidence/2026-10-10-WF-studio-live-1010/05-long-copy.png",
+      "bytes": 89590,
+      "sha256": "7d5bbfd1d5316625985ed8b600927e8c8dea398aa69154663a38756663cb5e05"
+    },
+    {
+      "file": "docs/evidence/2026-10-10-WF-studio-live-1010/06-empty.png",
+      "bytes": 43646,
+      "sha256": "3c839cbd49fd43c1a0b5c45a2b0522965fa220423887182bd0ec8b3fd21ed85a"
+    }
+  ],
+  "checks": {
+    "targeted": {
+      "files": 5,
+      "passed": 72
+    },
+    "finalBoot": {
+      "passed": 17
+    },
+    "cssParse": "passed",
+    "syntax": "passed",
+    "eslint": "passed",
+    "docs": "passed",
+    "diffWhitespace": "passed",
+    "browser": "passed-in-specified-window",
+    "consoleErrors": 0
+  },
+  "geometry": {
+    "paperLeft": 1103.862548828125,
+    "titleTextLeft": 1116.550048828125,
+    "firstFieldTextLeft": 1116.550048828125,
+    "effectTextLeft": 1116.550048828125,
+    "fieldHeight": 50.26250076293945
+  },
+  "service": {
+    "port": 5341,
+    "pid": 36084,
+    "state": "stopped",
+    "cwd": "D:/素材/代号柒/搜打撤",
+    "script": ".tmp/studio-live-1010/stable-preview.mjs",
+    "main5200": "preserved",
+    "temporaryViewport": "reset",
+    "portVerification": "5341-no-listener"
+  },
+  "unverified": [
+    "全库逐张构图",
+    "系统减少动态切换",
+    "帧率/长期内存/全量/构建"
+  ],
+  "intermediateExcluded": [
+    ".tmp/studio-live-1010/",
+    "01-iteration.png"
+  ],
+  "ledgerClosed": {
+    "date": "2026-10-10",
+    "reason": "老板要求结束任务台账；改动保留、未提交"
+  }
+}

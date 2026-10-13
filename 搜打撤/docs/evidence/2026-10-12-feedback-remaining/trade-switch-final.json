@@ -1,0 +1,23 @@
+{
+  "tradeOne": {
+    "result": {
+      "type": "object",
+      "value": {
+        "animations": [],
+        "name": "木材",
+        "zoomVisible": false
+      }
+    }
+  },
+  "tradeTwo": {
+    "result": {
+      "type": "object",
+      "value": {
+        "animations": [],
+        "name": "法杖",
+        "zoomVisible": false
+      }
+    }
+  },
+  "input": "native material/card clicks; constructed read-only shop navigation without save slot"
+}

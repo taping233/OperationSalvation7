@@ -1,0 +1,10 @@
+{
+  "card_id": "tt2-block",
+  "model": "nai-diffusion-4-5-full",
+  "status": 429,
+  "retry_after_minutes": 15,
+  "message": "老板令续跑后再次HTTP429；客户端仍要求冷却15分钟，停止重复请求",
+  "attempts": 2,
+  "generated": false,
+  "installed": false
+}

@@ -1,0 +1,110 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5351/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5351/
+	1 container viewport
+		2 button 背包 13/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 13/16
+		5 container
+			6 text 第4层 · 污染核心 第 4 层
+			7 heading crystal 祭坛回赠 · 复原, Value: 2
+				8 image crystal
+				9 text  祭坛回赠 · 复原
+			10 text 还可从消耗口袋中复原  3  张（最多 3 张）· 点击卡牌复原 ·  复原=撤离全额带回，否则每张仅 1/3 幸存  · 道具/装备共 2 张不可复原
+			11 container
+				12 text 1
+				13 image 镭射
+				14 text 镭射 法术 · 古朴
+				15 container
+					16 text 古朴 古朴
+				17 image crystal
+				18 text 注能 1 造成  5  点 法术伤害 ； 注能 （ 1 ）：本牌 伤害 增加  3  点。
+			19 container
+				20 text 1
+				21 image 流光斩
+				22 text 流光斩 武术 · 传说
+				23 container
+					24 text 传说 传说
+				25 text 造成（你的攻击力 -  1 ）点 攻击伤害 ；对目标附加  2  层 流血 ；将  1  张「流光照影」洗入你的 牌库 。
+			26 container
+				27 text 1
+				28 image 格挡
+				29 text 格挡 武术 · 古朴
+				30 container
+					31 text 古朴 古朴
+				32 text 本 回合 ，你受到的每段 伤害 降为  1  点。
+			33 container
+				34 text 2
+				35 image 法力奔涌
+				36 text 法力奔涌 法术 · 传说
+				37 container
+					38 text 传说 传说
+				39 text 对随机敌人施放  4  个随机法术，这些法术均视为已 注能 。
+			40 container
+				41 text 1
+				42 image 闪电链
+				43 text 闪电链 法术 · 古朴
+				44 container
+					45 text 古朴 古朴
+				46 text 造成  3  点 法术伤害 ；本牌的 伤害 效果触发  2  次。
+			47 container
+				48 text 1
+				49 image 生命箭
+				50 text 生命箭 武术 · 古朴
+				51 container
+					52 text 古朴 古朴
+				53 text 造成（你的攻击力 -  1 ）点 攻击伤害 ；随机获得  1  张卡牌。
+			54 container
+				55 text 1
+				56 image 箭雨
+				57 text 箭雨 武术 · 古朴
+				58 container
+					59 text 古朴 古朴
+				60 text 对全体敌人造成（你的攻击力 -  1 ）点 攻击伤害 。
+			61 container
+				62 text 1
+				63 image 毒箭
+				64 text 毒箭 武术 · 古朴
+				65 container
+					66 text 古朴 古朴
+				67 text 造成（你的攻击力 -  1 ）点 攻击伤害 ；对目标附加  1  层 中毒 。
+			68 container
+				69 text 2
+				70 image 熔岩爆破
+				71 text 熔岩爆破 法术 · 稀有
+				72 container
+					73 text 稀有 稀有
+				74 text 造成  9  点 法术伤害 ，并获得  1  张「二次爆炸」。
+			75 container
+				76 text 0
+				77 image 射击
+				78 text 射击 武术 · 古朴
+				79 container
+					80 text 古朴 古朴
+				81 text 造成  2  点 固定伤害 。
+			82 container
+				83 text 1
+				84 image 寻宝
+				85 text 寻宝 法术 · 古朴
+				86 container
+					87 text 古朴 古朴
+				88 text 造成  4  点 法术伤害 ，并 发现 1  张卡牌。
+			89 container
+				90 text 1
+				91 image 包扎
+				92 text 包扎 武术 · 古朴
+				93 container
+					94 text 古朴 古朴
+				95 image heart
+				96 text 回 3
+				97 image plate
+				98 text 甲 3 你回复  3  点 生命 ，并获得  3  点 护甲 。
+			99 container
+				100 text 2
+				101 image 破甲急袭
+				102 text 破甲急袭 武术 · 稀有
+				103 container
+					104 text 稀有 稀有
+				105 text 造成（你的攻击力 +  4 ）点 攻击伤害 ；对目标附加  2  层 流血 。
+			106 button 继续旅程
+
+The focused UI element is 106 button 继续旅程

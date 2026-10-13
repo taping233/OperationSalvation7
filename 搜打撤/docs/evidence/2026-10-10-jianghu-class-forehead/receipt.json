@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "cmtn1wnhhym",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a125fc-1da2-7300-83db-f2b39e275c76\\exec-c284240c-c54a-4df9-ba02-a08052a7034e.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-jianghu-class-forehead/cards-martial-cmtn1wnhhym-source.png",
+        "bytes": 1980207,
+        "sha256": "764e6dbe71e22c8495cd0392b518a1af3e60cace9182b253f1eda2fb12ad9fb1"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-jianghu-class-forehead/cards-martial-cmtn1wnhhym-full-before.webp",
+          "bytes": 175866,
+          "sha256": "056083b124e35c22119524b773a0c7dc4df841ea392d469c8e2662e469963119"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-jianghu-class-forehead/cards-martial-cmtn1wnhhym-thumb-before.webp",
+          "bytes": 24946,
+          "sha256": "ded68f5ef7d282919b5464a52cd2ec3c0ad9f075027e80a5884cd6077854e1b1"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-cmtn1wnhhym.webp",
+          "bytes": 154604,
+          "sha256": "3e10c60073b98739f29549501f1d8220916c9841fb57144b8a32c3085a8ff077",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-cmtn1wnhhym.webp",
+          "bytes": 24380,
+          "sha256": "bb5d2c22569af9de651e727e070342ee7947d8dcc3a82cd576631973093036e0",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "wu-jianghu-class-nai-builtin-20261010",
+      "revision_after": "wu-jianghu-class-open-forehead-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-cmtn1wnhhym.webp",
+            "ext": "webp",
+            "bytes": 175866,
+            "sha256": "056083b124e35c22119524b773a0c7dc4df841ea392d469c8e2662e469963119",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-jianghu-class-redraw/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-cmtn1wnhhym.webp",
+            "ext": "webp",
+            "bytes": 154604,
+            "sha256": "3e10c60073b98739f29549501f1d8220916c9841fb57144b8a32c3085a8ff077",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-jianghu-class-forehead/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-cmtn1wnhhym.webp",
+            "ext": "webp",
+            "bytes": 24946,
+            "sha256": "ded68f5ef7d282919b5464a52cd2ec3c0ad9f075027e80a5884cd6077854e1b1",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-jianghu-class-redraw/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-cmtn1wnhhym.webp",
+            "ext": "webp",
+            "bytes": 24380,
+            "sha256": "bb5d2c22569af9de651e727e070342ee7947d8dcc3a82cd576631973093036e0",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-jianghu-class-forehead/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1117,
+  "manifest_count_after": 1117
+}

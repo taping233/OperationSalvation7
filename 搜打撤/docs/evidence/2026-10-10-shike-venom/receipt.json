@@ -1,0 +1,156 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3wu-shike",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-de7ab67a-4e4d-457d-86cb-aef40ed5c10b.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-shike-venom/cards-martial-tt3wu-shike-source.png",
+        "bytes": 1411871,
+        "sha256": "6701033a797f1128a87c6f7d4e7ecfb49ef67933511509f619fa74b53564056d"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-shike-venom/cards-martial-tt3wu-shike-full-before.webp",
+          "bytes": 25154,
+          "sha256": "ffc54a1fd79ac161520e951203540abb75afa06b702ac2d5908e5cffeea1bdec"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-shike-venom/cards-martial-tt3wu-shike-thumb-before.webp",
+          "bytes": 3734,
+          "sha256": "1cb00cc46c650f1c613aff24f0aa1193007605c21b212445b3c66857ef7bd4e1"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3wu-shike.webp",
+          "bytes": 31352,
+          "sha256": "f282d8a37f106a039c233103e092b663ea48b38e8a54a70d511056484bd10907",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3wu-shike.webp",
+          "bytes": 4328,
+          "sha256": "2450bad2a8ec16f77a6a53d2acdf7398ab414ad8859e0cc8fe4f23442bf3d7b8",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "shike-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt3wu-shike.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 31352,
+            "sha256": "f282d8a37f106a039c233103e092b663ea48b38e8a54a70d511056484bd10907",
+            "source": "docs/evidence/2026-10-10-shike-venom/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt3wu-shike.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 3734,
+            "sha256": "1cb00cc46c650f1c613aff24f0aa1193007605c21b212445b3c66857ef7bd4e1",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt3wu-shike.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 4328,
+            "sha256": "2450bad2a8ec16f77a6a53d2acdf7398ab414ad8859e0cc8fe4f23442bf3d7b8",
+            "source": "docs/evidence/2026-10-10-shike-venom/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-venom-arrow",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-5bdaf77d-349f-4ab1-ab15-c5a545e9e9f7.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-shike-venom/cards-martial-tt3-venom-arrow-source.png",
+        "bytes": 1649977,
+        "sha256": "686169b330944256c0addf302c7bb9437fbe3b8ba8bb3affca9c1198dc646700"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-shike-venom/cards-martial-tt3-venom-arrow-full-before.webp",
+          "bytes": 64314,
+          "sha256": "8a62117246cf826e4a8ee792549105a3509b642acf1ff40c57bd2020528070eb"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-shike-venom/cards-martial-tt3-venom-arrow-thumb-before.webp",
+          "bytes": 3408,
+          "sha256": "a10b9d88167c5e50b6afa1122ee1cb74ebe5642a76cc875c4089c2f0b6edb0fe"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-venom-arrow.webp",
+          "bytes": 38142,
+          "sha256": "80053a5800216f33756833d4fb335b94e157d3ca2ee2f9e8de3dfdaf1f927667",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-venom-arrow.webp",
+          "bytes": 5186,
+          "sha256": "08d278fca6de8103a78ac4c610ec85863f9b53f075115c8d302a923238c03ed5",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "venom-arrow-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt3-venom-arrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 38142,
+            "sha256": "80053a5800216f33756833d4fb335b94e157d3ca2ee2f9e8de3dfdaf1f927667",
+            "source": "docs/evidence/2026-10-10-shike-venom/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt3-venom-arrow.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 3408,
+            "sha256": "a10b9d88167c5e50b6afa1122ee1cb74ebe5642a76cc875c4089c2f0b6edb0fe",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt3-venom-arrow.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 5186,
+            "sha256": "08d278fca6de8103a78ac4c610ec85863f9b53f075115c8d302a923238c03ed5",
+            "source": "docs/evidence/2026-10-10-shike-venom/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 901,
+  "manifest_count_after": 903
+}

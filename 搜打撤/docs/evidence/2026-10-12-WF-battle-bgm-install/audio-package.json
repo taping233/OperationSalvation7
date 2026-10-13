@@ -1,0 +1,16 @@
+{
+  "approved_source": "docs/evidence/2026-10-12-WF-battle-full-loop-v2/battle-shadowtide-full-loop-v2.ogg",
+  "runtime": {
+    "path": "music-demo/03-battle-shadowtide-full-v2.ogg",
+    "ext": "ogg",
+    "bytes": 2738407,
+    "sha256": "51195783d125aa6205015de3442696ec9c7969d80396b9ea3ea379eed3a445b8",
+    "license": "Project original composition; GeneralUser GS sample license v2.0 permits music creation.",
+    "source": "docs/evidence/2026-10-12-WF-battle-bgm-install/audio-package.json"
+  },
+  "seconds": 120,
+  "method": "Byte-for-byte copy of user-approved Ogg Opus loop; no re-encoding",
+  "old_files_policy": "Retained inactive; no historical audio deleted",
+  "other_manifest_entries_preserved": true,
+  "battle_route": "Ordinary combat and all bosses share MUSIC_TRACKS.battle"
+}

@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "thread": "01a133b8-aebd-7632-82ed-19b6c8df3aac",
+  "scope": "地图接班、状态收尾、独立构造页；game.run.flow.js只拥有moveTo，整文件可能同时有其他代理下半部增量",
+  "tests": {
+    "failed": 0,
+    "files": 7,
+    "passed": 95
+  },
+  "browser": {
+    "consoleErrors": 0,
+    "source": "现行源码独立fixture，主游戏tabs未操作",
+    "height": 1080,
+    "platform": "Codex IAB",
+    "width": 1920
+  },
+  "entries": [
+    {
+      "path": "game/src/core/renderer.js",
+      "bytes": 22202,
+      "sha256": "9582a5d076c705d96ea0e3af3b3688d1dfa725e57036fa9ee976837f50134af7",
+      "capturedMtime": "2026-10-13T13:22:15.5953072+08:00"
+    },
+    {
+      "path": "game/src/core/map-node-art.js",
+      "bytes": 8584,
+      "sha256": "f44ca77298c86b427fa81dcd3417d2180c1dec4916ee327bce6b0b92dcda6a5c",
+      "capturedMtime": "2026-10-13T13:22:15.5931125+08:00"
+    },
+    {
+      "path": "game/src/core/camera.js",
+      "bytes": 7409,
+      "sha256": "b76f8e16dc24ddb18ceb7e82e25a5fe032ce1e89f71371f0790ade407fbe7c7a",
+      "capturedMtime": "2026-10-13T12:03:07.0332865+08:00"
+    },
+    {
+      "path": "game/src/run/expedition.view.js",
+      "bytes": 14046,
+      "sha256": "4c23f5d7e52efdc617fa048f544deb79016a8d3f10472e91abc2e0141c14518f",
+      "capturedMtime": "2026-10-13T13:36:33.3647450+08:00"
+    },
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "bytes": 51313,
+      "sha256": "bee49766b5a53a92277965f2a628e27e96233c40313b61fba9b92a61be8ce39c",
+      "capturedMtime": "2026-10-13T13:36:33.9534108+08:00"
+    },
+    {
+      "path": "game/src/run/map-travel-path.js",
+      "bytes": 2958,
+      "sha256": "f6ac49b78a0b6f4921a87fa6e808d7f8a0afae481779772cb856aee4d56e7f93",
+      "capturedMtime": "2026-10-13T13:06:28.0297501+08:00"
+    },
+    {
+      "path": "game/src/game.boot.js",
+      "bytes": 40724,
+      "sha256": "5bd336a082a03844c0d39ecff053ba297fc8cb0d4a0e39c39aa51b7150563c9c",
+      "capturedMtime": "2026-10-13T13:08:14.4576907+08:00"
+    },
+    {
+      "path": "game/css/expedition-map.css",
+      "bytes": 2356,
+      "sha256": "cd0a1edd15f9037f4bcd3aea564a9f0051e519fb8c00197e653ba7c66ba9d2a0",
+      "capturedMtime": "2026-10-13T12:06:36.9460223+08:00"
+    },
+    {
+      "path": "game/css/page-expedition-hud.css",
+      "bytes": 37762,
+      "sha256": "ca557fa8c616f704339fcd04cee872faf98b870507b6c7ec3c62593249d0acf3",
+      "capturedMtime": "2026-10-13T12:18:22.4005620+08:00"
+    },
+    {
+      "path": "game/css/feedback-oct12.css",
+      "bytes": 5616,
+      "sha256": "f88fb87fc11c2f38087f03fcebbf1e4e1970311591ec503ca20dc5ccea888b1b",
+      "capturedMtime": "2026-10-13T12:53:36.0813319+08:00"
+    },
+    {
+      "path": "tests/map-travel-motion.test.js",
+      "bytes": 7723,
+      "sha256": "4603209f48bffe854693eed68453b7fd78f1b6c2458ab46666ff6e4e7dec732a",
+      "capturedMtime": "2026-10-13T13:39:40.3002654+08:00"
+    },
+    {
+      "path": "tests/map-travel-path.test.js",
+      "bytes": 7761,
+      "sha256": "5dfe3d4022a631ba77fa56f774a2801350b79dfa88be4a81990760fe5946becd",
+      "capturedMtime": "2026-10-13T13:37:23.2416390+08:00"
+    },
+    {
+      "path": "tests/fixtures/map-replica.html",
+      "bytes": 5700,
+      "sha256": "70c025ff83f799af3b53dc55d6b38b4b01ebec5c4ffb46a1c95d328ad346a36d",
+      "capturedMtime": "2026-10-13T13:43:19.3239129+08:00"
+    },
+    {
+      "path": "docs/evidence/2026-10-13-WF-expedition-experience-1013/map-current-fixture-1920.png",
+      "bytes": 90080,
+      "sha256": "961a01853f7cd2d3b29ee1b571c9863046ba4fc3b6687306c491beda5f1ea308",
+      "capturedMtime": "2026-10-13T13:40:45.8142906+08:00"
+    },
+    {
+      "path": "docs/evidence/2026-10-13-WF-expedition-experience-1013/map-detail-fixture-1920.png",
+      "bytes": 97272,
+      "sha256": "a0f0e564e2011cfc6cd34cfe20648218d34ebb8497233511238a90e02903dbd4",
+      "capturedMtime": "2026-10-13T13:41:26.1137294+08:00"
+    },
+    {
+      "path": "docs/evidence/2026-10-13-WF-expedition-experience-1013/map-route-fixture-1920.png",
+      "bytes": 97765,
+      "sha256": "f4d16c13042fc6a4da9368e20c3d9186e8267b35251fe85547aac3d79246a523",
+      "capturedMtime": "2026-10-13T13:41:48.9313990+08:00"
+    },
+    {
+      "path": "docs/evidence/2026-10-13-WF-expedition-experience-1013/map-midpoint-fixture-1920.png",
+      "bytes": 92949,
+      "sha256": "28b5934d0ce466d561208a80a0322c7be28bb44c65ad27c17620656c7417ad83",
+      "capturedMtime": "2026-10-13T13:44:17.0035989+08:00"
+    }
+  ]
+}

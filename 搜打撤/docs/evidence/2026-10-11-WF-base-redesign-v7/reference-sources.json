@@ -1,0 +1,116 @@
+{
+  "task": "WF-base-redesign-v7",
+  "date": "2026-10-11",
+  "owner": "base_design_references",
+  "status": "reference_research_complete_pending_user_visual_review",
+  "method": "Web source search plus HTTP image preview in memory; no browser, no game tests, no build, no third-party image files saved.",
+  "measurement_notice": "Layout ratios are approximate visual observations. Suggested font sizes and motion timings are implementation choices, not original-game official specifications.",
+  "screenshots": [
+    {
+      "id": "R01",
+      "game": "Girls' Frontline 2: Exilium",
+      "screen": "Main home menu",
+      "source_page": "https://lutris.net/games/girls-frontline-2-exilium/",
+      "image_url": "https://lutris.net/media/games/screenshots/Screenshot_20250210_221836.png",
+      "image_http_status": 200,
+      "visually_viewed": true,
+      "local_binary_saved": false,
+      "reference_priority": "primary_home_skeleton",
+      "visible_observations": ["Full-screen scene with character around 35% of horizontal span", "Right-aligned open navigation without individual heavy card backgrounds", "Primary action approximately 1.8 times secondary entry text height", "Navigation concentrated in rightmost approximately 25%"],
+      "implementation_mapping": "Full wallpaper plus four open entries: sortie, refit, warehouse, shop; no permanent icon sidebar or small refitting station on home.",
+      "dynamic_behavior_verified": false
+    },
+    {
+      "id": "R02",
+      "game": "Reverse: 1999",
+      "screen": "Main home menu",
+      "source_page": "https://www.sportskeeda.com/esports/reverse-1999-apple-build-guide",
+      "image_url": "https://staticg.sportskeeda.com/editor/2023/11/bbbcf-16989432687869-1920.jpg?w=840",
+      "source_page_access_note": "Article body unavailable to web reader; image independently retrieved and viewed.",
+      "image_http_status": 200,
+      "visually_viewed": true,
+      "local_binary_saved": false,
+      "reference_priority": "home_primary_action_and_negative_space",
+      "visible_observations": ["Clear room center", "Resources in a single top-right line", "Large ticket-shaped primary action above smaller destination entries", "Supporting entries do not form a thick continuous sidebar"],
+      "implementation_mapping": "One prominent main action with larger surrounding space; keep room and painterly material dominant.",
+      "dynamic_behavior_verified": false
+    },
+    {
+      "id": "R03",
+      "game": "Reverse: 1999",
+      "screen": "Warehouse materials",
+      "source_page": "https://note.com/takeyori/n/n26c937d0cfdc",
+      "image_url": "https://assets.st-note.com/production/uploads/images/220854821/picture_pc_8a9f6307dc53697cf0b2d00d6487154d.png?width=1200",
+      "source_version_note": "Source author identifies screenshots as October 2025; used as a visual reference, not evidence of the current game version.",
+      "image_http_status": 200,
+      "visually_viewed": true,
+      "local_binary_saved": false,
+      "reference_priority": "primary_warehouse_skeleton",
+      "visible_observations": ["1200 by 554 preview", "Back and home controls at top-left", "Four local categories with approximately 16% width allocation", "Six-column, four-row material grid; approximately 93-pixel cells and 37-pixel horizontal gaps", "Active category expressed by accent text and diamond", "Quantity and rarity concentrated at cell bottom"],
+      "implementation_mapping": "Full warehouse page, local categories, spacious content grid; detail is another full page or a fixed right-side region, not a new small floating window.",
+      "dynamic_behavior_verified": false
+    },
+    {
+      "id": "R04",
+      "game": "Arknights",
+      "screen": "Credit shop",
+      "source_page": "https://forum.gamer.com.tw/C.php?bsn=33651&snA=2287",
+      "image_url": "https://truth.bahamut.com.tw/s01/202007/733e80d514aa6fb40f880574f36173c7.JPG",
+      "source_page_access_note": "Forum page returned 403; image independently retrieved and viewed.",
+      "image_http_status": 200,
+      "visually_viewed": true,
+      "local_binary_saved": false,
+      "reference_priority": "primary_shop_skeleton",
+      "visible_observations": ["1920 by 1080 preview", "Horizontal category navigation below top navigation and resources", "Selected tab has light surface and accent top edge", "Five-column, two-row product grid", "Title top, item center, price bottom", "Sold-out state is large and visibly overlays unavailable objects"],
+      "implementation_mapping": "Full shop page, horizontal category tabs and large product cells; start with four columns appropriate to the project content.",
+      "dynamic_behavior_verified": false
+    },
+    {
+      "id": "R05",
+      "game": "Honkai: Star Rail",
+      "screen": "Phone menu",
+      "source_page": "https://forum.gamer.com.tw/C.php?bsn=72822&snA=1156",
+      "image_url": "https://truth.bahamut.com.tw/s01/202304/28c2975704cbde9ceae7ed9f3f74878b.JPG",
+      "source_page_access_note": "Forum page returned 403; image independently retrieved and viewed.",
+      "image_http_status": 200,
+      "visually_viewed": true,
+      "local_binary_saved": false,
+      "reference_priority": "secondary_more_page_only",
+      "visible_observations": ["Character and scene approximately 57% of width", "Profile and function menu approximately 36% of width", "System actions placed in a narrow far-right column", "Consistent light icon and border language", "Visible close action at top-right"],
+      "implementation_mapping": "Move secondary features to an independent more page; do not reuse the dense icon grid as the new base homepage.",
+      "dynamic_behavior_verified": false
+    }
+  ],
+  "teaching_sources": [
+    {
+      "id": "T01",
+      "publisher": "Microsoft",
+      "title": "Fluent 2 Layout",
+      "url": "https://fluent2.microsoft.design/layout",
+      "authority": "official_design_system",
+      "content_access": "full official page read",
+      "supported_principles": ["Proximity signals relationship", "Spacing can group content without extra graphical dividers", "Empty space can increase importance", "Four-pixel spacing base unit"],
+      "project_application": "Use a consistent spacing ramp and fewer independent panel backgrounds."
+    },
+    {
+      "id": "T02",
+      "publisher": "Apple",
+      "title": "The details of UI typography, WWDC20",
+      "url": "https://developer.apple.com/videos/play/wwdc2020/10175/",
+      "authority": "official_design_talk",
+      "content_access": "official video page and transcript read",
+      "supported_principles": ["Text styles combine weight, size, and leading", "Size alone may not sufficiently distinguish subtle hierarchy", "Long text can benefit from increased leading"],
+      "project_application": "Define fixed title, item-name, body, and secondary text roles; reserve decorative typography for large titles."
+    },
+    {
+      "id": "T03",
+      "publisher": "Google Material Components",
+      "title": "Motion",
+      "url": "https://github.com/material-components/material-components-android/blob/master/docs/theming/Motion.md?plain=1",
+      "authority": "official_component_design_and_implementation_documentation",
+      "content_access": "official repository document read",
+      "supported_principles": ["Shared axis represents spatial or navigational relationships", "Parent-child navigation may use the z axis", "Forward and backward transitions need coordinated configuration", "Fade through suits destinations without a strong relationship", "Documented default shared-axis duration is 300ms and standard easing is cubic-bezier(0.4, 0, 0.2, 1)"],
+      "project_application": "Use paired transitions for home/detail navigation and fade-through for unrelated full pages; do not treat decorative idle motion as navigation feedback."
+    }
+  ]
+}

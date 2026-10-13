@@ -1,0 +1,42 @@
+{
+  "matched_0_to_30_seconds": {
+    "old": {
+      "onsets_per_second": 2.53,
+      "texture_movement": 0.626,
+      "side_energy_percent": 9.8
+    },
+    "new": {
+      "onsets_per_second": 2.8,
+      "texture_movement": 0.312,
+      "side_energy_percent": 6.8
+    },
+    "reference": {
+      "onsets_per_second": 2.37,
+      "texture_movement": 0.47,
+      "side_energy_percent": 8.6
+    }
+  },
+  "tempo_bpm": {
+    "old": 96,
+    "new": 112
+  },
+  "score_event_counts": {
+    "old": {
+      "first_30s_notes": 127,
+      "first_30s_shorter_than_0_7_beats": 71
+    },
+    "new": {
+      "first_30s_notes": 127,
+      "first_30s_shorter_than_0_7_beats": 71
+    }
+  },
+  "loop": {
+    "decoded_seconds": 60.0,
+    "sample_jump": 0.0,
+    "start_end_100ms_rms_delta_db": -4.22,
+    "quietest_half_second_dbfs": -28.11,
+    "sample_peak": 0.6004
+  },
+  "checks_passed": true,
+  "limits": "Transient peaks use log-frequency spectral flux and are comparable only within this report. More spectral movement or width is not a quality score; reference intro and structure differ. No human audition claimed."
+}

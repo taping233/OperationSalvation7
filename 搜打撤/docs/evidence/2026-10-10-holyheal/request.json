@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "card_id": "tt7-holyheal",
+      "asset": "cards/spell-tt7-holyheal.webp",
+      "revision": "holyheal-original-rough-20261010",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-holyheal.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "prompt": "Use case: style-transfer. Redraw FIRST image 圣光治愈 preserving its exact original LANDSCAPE 896:679 composition, tight frontal chest-up crop, subject scale and pose. Xingyue centered, eyes CLOSED with calm prayerful expression, head slightly bowed, pale blonde blunt bangs and long hair with braid on viewer right. Preserve crescent hairpin clipped flat into hair above bangs slightly to viewer right, tilted resting on hair, not floating. Deep teal short cape with gold border and broad gold chest clasp over white high-collar priest dress. BOTH bare hands held symmetrically across chest, fingers extending inward over a small horizontal rectangular glowing white card with GOLD BORDER, positioned center lower chest. Preserve original finger and wrist directions and clear readable fingers. Warm gold sacred light branches from card into hands and downward across torso; simplify to a few broad purposeful branches and opaque warm light shapes, not dense fine lightning. Dark muted slate-blue/gray abstract background, unchanged camera and crop. Images 2–4 are STYLE ONLY references: blue-gold portrait for broad opaque brush construction, dark-coat portrait for grouped cloth masses, brown-haired portrait for anime facial drawing. Do not copy their identities, outfits, poses, palettes or text. STYLE: rough hand-painted anime, large connected opaque color masses, limited broad curved directional swipes and blunt dabs, hard grouped shadows and decisive handmade edges, expressive selective overlaps with quiet regions. Hair into substantial coherent locks, broad shadow turns and few irregular highlight swaths. Cloth into principal fold planes with economical structure lines. Anime facial proportions and restrained face/neck planes, eyes remain closed. Matte mostly muted colored grays with concentrated warm gold and teal accents. No fine strands, dense wrinkles, tiny angular facet mosaics, glossy 3D, smooth airbrushed rendering or all-over texture/grain filters. No text, frame, watermark or UI.",
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-baf05892-2c04-47e7-a6e5-9aea3f03497b.png"
+    }
+  ]
+}

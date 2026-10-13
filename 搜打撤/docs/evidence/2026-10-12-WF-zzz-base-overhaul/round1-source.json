@@ -1,0 +1,92 @@
+[
+  {
+    "path": "game/src/hub/hub.navigation-v7.js",
+    "bytes": 1093,
+    "sha256": "9f0f7e7e1f0caed7ab5701dd9b6c382c3a3a2de5ba3ad38ff34c900d99a67bb6"
+  },
+  {
+    "path": "game/src/hub/hub.courtyard-v3.js",
+    "bytes": 11198,
+    "sha256": "b4e5ce4bf2806a2da872a37b69ca8ca26a29a8ea71ab42d9b30ed318b42d2724"
+  },
+  {
+    "path": "game/src/hub/photo-studio-tabs.js",
+    "bytes": 2046,
+    "sha256": "d0f418ebac1e101e757ba888b5004c83e88d7d7cdd5f46999176e97d5fb5c3b7"
+  },
+  {
+    "path": "game/css/base-home-v7.css",
+    "bytes": 7533,
+    "sha256": "eaac9a360bdee20f823f5a90c921d34cb3604a4e6ff776b5e840f45f33a4904b"
+  },
+  {
+    "path": "game/css/base-framework-v7.css",
+    "bytes": 7923,
+    "sha256": "0e108b8b243e29598a6a5c0be3b62d32bec62a19eb0e56dd99f6824705e1297d"
+  },
+  {
+    "path": "game/css/base-courtyard-v3.css",
+    "bytes": 5812,
+    "sha256": "2fb250ef39c1efa443db577f845e42dd8fda3a010bc2802423c124061352ab81"
+  },
+  {
+    "path": "game/css/photo-studio-room-effects.css",
+    "bytes": 4681,
+    "sha256": "fa2b6b95bec7472ac5ad4eeb99737f305b82ca79c81427bb49949ccf7bf05630"
+  },
+  {
+    "path": "game/src/hub/hub.personnel.js",
+    "bytes": 21762,
+    "sha256": "49f3ed04014444f48827a9747d720eb327e4965debeca45e11ec8029fac73ad2"
+  },
+  {
+    "path": "game/src/hub/hub.warehouse.js",
+    "bytes": 12268,
+    "sha256": "6090ed5fe4af46672bd9d74b2b2916264807e29100eb5b25c69b64d273e6149d"
+  },
+  {
+    "path": "game/src/hub/hub.trade-shop-v5.js",
+    "bytes": 16255,
+    "sha256": "a61ee960ef48f403cba97c383b66439c96ff5e4d1ff5f46ab6ca795a4aa0ba27"
+  },
+  {
+    "path": "game/css/base-personnel-v12.css",
+    "bytes": 26435,
+    "sha256": "e2878915a826995ffa6c434ddd9fe6d6e25182e3006d85b252b30c5e1ee196e5"
+  },
+  {
+    "path": "game/css/base-logistics-trade-v12.css",
+    "bytes": 14788,
+    "sha256": "0360ecd2b8ce6694d69b42fb3ab922bd607365eaa895aaf900cdc90de55f7917"
+  },
+  {
+    "path": "game/src/hub/hub.archive-v3.js",
+    "bytes": 19176,
+    "sha256": "9a051b3129883845c52010983d0385ca6a806b66fba29b85fa4956b51529c8b2"
+  },
+  {
+    "path": "game/src/hub/hub.collection-v4.js",
+    "bytes": 6464,
+    "sha256": "f3ed5306feef27dd995e09386f368ef08dd83d444cd2e472a56ad2f8cb3e1200"
+  },
+  {
+    "path": "game/src/hub/hub.facilities.js",
+    "bytes": 4320,
+    "sha256": "39bf6dcdcf9f3c16517246c452d6d648931076286fed3fe1526960257a4af2df"
+  },
+  {
+    "path": "game/css/base-archive-facilities-v12.css",
+    "bytes": 27319,
+    "sha256": "fad6ee8dd6348be454716befd5342190fb7c3132a1bafeeccec9ed46aeebb1ec"
+  },
+  {
+    "path": "game/src/hub/hub.reward-feedback.js",
+    "bytes": 5043,
+    "sha256": "1ef8c93dcb1da1b935e54ebaf27ca8a989ee3e5445db360711c8338239cde902"
+  },
+  {
+    "path": "game/css/base-reward-feedback.css",
+    "bytes": 1470,
+    "sha256": "5d0483831e88c4693db525d20da4a47c3264162d278f53c262ebae7ec272a715"
+  }
+]

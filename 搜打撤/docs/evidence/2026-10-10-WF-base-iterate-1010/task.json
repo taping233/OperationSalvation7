@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-base-iterate-1010",
+  "date": "2026-10-10",
+  "owner": "Friday",
+  "goal": "按老板否决意见重做基地：以方舟肉鸽入口和仓库为完整样板统一层级、双排通用卡牌、独立商店/归档/队员页；保留原交易玩法",
+  "paths": [
+    "game/src/hub/game.hub.js",
+    "game/src/hub/game.hub.pages.js",
+    "game/src/hub/game.hub.depart.js",
+    "game/src/hub/hub.warehouse.js",
+    "game/src/hub/hub.personnel.js",
+    "game/src/hub/hub.presentation.js",
+    "game/src/hub/hub.facilities.js",
+    "game/src/hub/hub.archive.js",
+    "game/src/hub/hub.visuals.js",
+    "game/src/hub/hub.home-v3.js",
+    "game/src/hub/hub.materials.js",
+    "game/src/hub/hub.shop-v3.js",
+    "game/src/hub/hub.archive-v3.js",
+    "game/src/hub/hub.courtyard-v3.js",
+    "game/src/hub/courtyard-vendor/",
+    "game/src/ui/card-browser.js",
+    "game/src/ui/inventory-zoom.js",
+    "game/src/ui/ui.js",
+    "game/css/base-camp-rework.css",
+    "game/css/base-home-v3.css",
+    "game/css/base-shop-v3.css",
+    "game/css/base-archive-v3.css",
+    "game/css/base-courtyard-v3.css",
+    "game/css/card-browser.css",
+    "game/css/inventory-zoom.css",
+    "game/assets/icons/base-v3/",
+    "game/assets/vendor/base-courtyard/",
+    "game/art-source/ui/base-v3/",
+    "tests/base-ui-sample.test.js",
+    "tests/hub-pages-rework.test.js",
+    "tests/hub-shop-v3.test.js",
+    "tests/hub-archive-v3.test.js",
+    "tests/hub-courtyard-v3.test.js",
+    "tests/hub-upgrade-render.test.js",
+    "tests/hub-flow-regression.test.js",
+    "tests/premium-ui-pages.test.js",
+    "docs/development.md"
+  ],
+  "doneWhen": [
+    "关键信息清楚、点击符合预期、画风统一；仓库/培养/外观/后勤/档案链实页通过，相关定向检查通过"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "115项独立定向用例通过；目标lint、32项语法/CSS解析、保护footer原字节SHA一致，报告见本目录验证记录",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "Codex内置浏览器当前1280x720窗口逐页比较并修订；主页/双排/详情/归档/商店/扩建/外观/庭院/临时整备真实输入覆盖见README与16张final截图；实际资产动作未执行",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "最终审美是否符合老板预期仍待实看，当前交付不代表老板认可最终成品",
+    "未进行其他尺寸、真实购买卖出复原成长领奖、非空见闻、完整本地门/build/提交/推送",
+    "扩大定向检查发现另会话照相馆两条结构断言失败，未动其范围，原失败报告保留"
+  ],
+  "updatedAt": "2026-10-10T18:00:23.064Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

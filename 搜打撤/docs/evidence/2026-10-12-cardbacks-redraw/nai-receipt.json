@@ -1,0 +1,62 @@
+[
+  {
+    "id": "classic",
+    "started_at": "2026-10-12T00:02:28.725957+08:00",
+    "status": "generated",
+    "path": "D:\\素材\\代号柒\\.tmp\\nai\\output\\cardbacks-redraw-20261012\\classic.png",
+    "seed": 1573953710,
+    "bytes": 1539502,
+    "sha256": "6261eb9e20e4e508fa26ef0be0cb602263eb748e914c398e5cb67df8b2c1fcef",
+    "request_log": "HTTP 200 seed=1573953710 768x1152 channel=0(--noproxy)\nSAVED D:\\素材\\代号柒\\.tmp\\nai\\output\\cardbacks-redraw-20261012\\classic.png 768x1152 1539502 bytes\n",
+    "finished_at": "2026-10-12T00:02:43.167228+08:00"
+  },
+  {
+    "id": "wolf",
+    "started_at": "2026-10-12T00:02:43.167228+08:00",
+    "status": "generated",
+    "path": "D:\\素材\\代号柒\\.tmp\\nai\\output\\cardbacks-redraw-20261012\\wolf.png",
+    "seed": 1593003159,
+    "bytes": 1295363,
+    "sha256": "2a8d4e016b2b45087a8a92cf195388bdbb2654daea91628ea87ff73f8629c41d",
+    "request_log": "HTTP 200 seed=1593003159 768x1152 channel=0(--noproxy)\nSAVED D:\\素材\\代号柒\\.tmp\\nai\\output\\cardbacks-redraw-20261012\\wolf.png 768x1152 1295363 bytes\n",
+    "finished_at": "2026-10-12T00:03:44.287532+08:00"
+  },
+  {
+    "id": "coin",
+    "started_at": "2026-10-12T00:03:44.287532+08:00",
+    "status": "generated",
+    "path": "D:\\素材\\代号柒\\.tmp\\nai\\output\\cardbacks-redraw-20261012\\coin.png",
+    "seed": 1592857896,
+    "bytes": 1095471,
+    "sha256": "b7396c5a340d964dc194cb0fd7c828f0be76c62d8953a312b8966a00d7e708e7",
+    "request_log": "HTTP 200 seed=1592857896 768x1152 channel=0(--noproxy)\nSAVED D:\\素材\\代号柒\\.tmp\\nai\\output\\cardbacks-redraw-20261012\\coin.png 768x1152 1095471 bytes\n",
+    "finished_at": "2026-10-12T00:04:43.295937+08:00"
+  },
+  {
+    "id": "vault",
+    "started_at": "2026-10-12T00:04:43.295937+08:00",
+    "status": "generated",
+    "path": "D:\\素材\\代号柒\\.tmp\\nai\\output\\cardbacks-redraw-20261012\\vault.png",
+    "seed": 864952694,
+    "bytes": 1691863,
+    "sha256": "7954e7b8442f85d322e28a812accf23e066aa165e11c3657f4c803a08f7c8c0b",
+    "request_log": "HTTP 200 seed=864952694 768x1152 channel=0(--noproxy)\nSAVED D:\\素材\\代号柒\\.tmp\\nai\\output\\cardbacks-redraw-20261012\\vault.png 768x1152 1691863 bytes\n",
+    "finished_at": "2026-10-12T00:05:44.302062+08:00"
+  },
+  {
+    "id": "boss",
+    "started_at": "2026-10-12T00:05:44.302062+08:00",
+    "status": "failed",
+    "error": "NAI HTTP 429：冷却 15 分钟后重跑",
+    "request_log": "HTTP 429 seed=1837761429 768x1152 channel=0(--noproxy)\n",
+    "finished_at": "2026-10-12T00:06:36.984194+08:00"
+  },
+  {
+    "id": "boss",
+    "started_at": "2026-10-12T00:35:58.565512+08:00",
+    "status": "failed",
+    "error": "NAI HTTP 429：冷却 15 分钟后重跑",
+    "request_log": "HTTP 429 seed=1241224992 768x1152 channel=0(--noproxy)\n",
+    "finished_at": "2026-10-12T00:36:01.520596+08:00"
+  }
+]

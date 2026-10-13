@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-purify-arrow",
+      "asset": "cards/martial-tt3-purify-arrow.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-bec9dcd8-eeca-4e4a-a26a-489e0287e652.png",
+      "revision": "purify-arrow-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the purifying arrow game-card edit target. Retain the original SQUARE abstract composition closely: one thin pure white vertical beam centered spanning nearly the full height, with a bright four-point cross flare at the upper-middle. A broad violet-purple ribbon of magical energy spirals around the white beam, its largest open loop at the top, crossing in front diagonally, then successive loops become progressively smaller and paler toward a very narrow point near the bottom. Preserve loop count and winding direction, width progression, vertical placement and flare position from image 1. Quiet pale warm cream-yellow backdrop with a restrained soft light aura. The subject is symbolic purifying light, not a solid physical arrow or fabric object. No characters, hands, bows, extra props or scenery. Images 2, 3, 4 are DRAWING STYLE references only; borrow broad opaque hand-painted construction, never subjects or clothing. Rough hand-painted anime color study built from large connected opaque masses, a few wide directional curved swipes and blunt dabs, handmade edges and selective unfinished areas. Give purple ribbon coherent broad violet shadow planes and pale lilac light planes, avoid parallel fine stripe networks. Keep white beam and cross flare brightest and clean; main upper purple turns readable, lower turns progressively economical. Muted colored grays with concentrated purple accents, decisive grouped hard-edged light and shadow, quiet large areas. No uniformly thin vector outlines, glossy 3D, photorealism, tiny facet mosaics, dense decoration or all-over grain/texture filters. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt3-purify-arrow.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    }
+  ]
+}

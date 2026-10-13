@@ -1,0 +1,166 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5354/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/
+	2 container
+		3 image flask
+		4 text  道具
+		5 image flask
+		6 text 复原药水
+		148 text 冬境街区 · 遭遇
+		149 text 第 3 回合
+		150 text 注能选牌
+		151 text 已选 0/1 张
+		11 container btSelf
+			12 container
+				13 text 黑像
+				14 text 你
+				15 text 9/35
+				16 image swords
+				17 text  4 · 
+				18 image plate
+				19 text  甲 1 · 格挡中
+		20 container
+			21 button 甲壳变异体的意图：攻击 · 2。点击查看完整说明
+				22 image swords
+				23 text 2
+			24 image orc_axe
+			25 container
+				26 text 甲壳变异体
+				27 image swords
+				28 text 2
+				29 text 2/7
+				30 image blood
+				31 text  流血 1
+				32 image arrow
+				33 text  攻击降低 3回合
+			34 button 甲壳变异体的意图：攻击 · 4。点击查看完整说明
+				35 image swords
+				36 text 4
+			37 image orc_axe
+			38 container
+				39 text 甲壳变异体
+				40 image swords
+				41 text 4
+				42 text 2/7
+		152 image flask
+		153 text 注能(1)
+		154 text ：选择
+		155 text 1
+		156 text 张手牌消耗，才能打出【龙焰射线】 （已选
+		157 text 0/1
+		158 text · 同名堆叠每点一次消耗一张 · 被消耗的牌战后进消耗口袋，可在火堆复原）
+		159 button 不注能直接打出
+		160 button (disabled) swords 发动
+			161 image swords
+			162 text  发动
+		163 button cross 取消
+			164 image cross
+			165 text  取消
+		43 container
+			44 text 当前能量
+			45 image bolt
+			46 text 1
+			47 text /2
+		48 container 职业技能与手牌分栏
+			49 button (disabled) swords 猛击 2 能量 · 每回合一次
+				50 image swords
+				51 text 猛击 2 能量 · 每回合一次
+		52 container
+			53 checkbox Description: 包扎 · 1 费。点击选择消耗（注能）· 本叠还有 2 张, Value: 0
+				182 container
+					183 text 1
+					184 image 包扎
+					185 text 包扎 武术 · 古朴
+					265 container
+						266 text 古朴 古朴
+					188 image heart
+					189 text 回 3
+					190 image plate
+					191 text 甲 3 你回复  3  点 生命 ，并获得  3  点 护甲 。
+				192 text ×2
+			66 button 查看包扎完整规则
+			67 checkbox Description: 灵能召唤 · 1 费。点击选择消耗（注能）, Value: 0
+				193 container
+					194 text 1
+					195 image 灵能召唤
+					196 text 灵能召唤 法术 · 稀有
+					267 container
+						268 text 稀有 稀有
+					199 text 发现 1  张 注能 卡牌，并使该牌无需 注能 。
+			76 button 查看灵能召唤完整规则
+			77 checkbox Description: 割蚀 · 1 费。点击选择消耗（注能）, Value: 0
+				200 container
+					201 text 1
+					202 image 割蚀
+					203 text 割蚀 武术 · 古朴
+					269 container
+						270 text 古朴 古朴
+					206 text 使  1  名敌人的攻击力降低  2  点，持续  3 回合 ；对该敌人附加  1  层 流血 。
+			86 button 查看割蚀完整规则
+			87 checkbox Description: 法杖 · 0 费。点击选择消耗（注能）, Value: 0
+				207 container
+					208 text 0
+					209 image 法杖
+					210 text 法杖 装备 · 古朴
+					271 container
+						272 text 古朴 古朴
+					213 text 你的 法伤 增加  1  点。
+			96 button 查看法杖完整规则
+			97 checkbox Description: 高端研发 · 1 费。点击选择消耗（注能）, Value: 0
+				214 container
+					215 text 1
+					216 image 高端研发
+					217 text 高端研发 法术 · 稀有
+					273 container
+						274 text 稀有 稀有
+					220 text 发现 1  张  2  费 招式 ；每个 回合开始时 ，所选卡牌的费用减少  1  点。
+			106 button 查看高端研发完整规则
+			123 checkbox Description: 二刀流 · 1 费。点击选择消耗（注能）, Value: 0
+				221 container
+					222 text 1
+					223 image 二刀流
+					224 text 二刀流 武术 · 稀有
+					275 container
+						276 text 稀有 稀有
+					227 text 发现 1  张武术牌，并额外获得该牌的  1  张复制。
+			132 button 查看二刀流完整规则
+			133 checkbox Description: 厉兵秣马 · 1 费。点击选择消耗（注能）, Value: 0
+				228 container
+					229 text 1
+					230 image 厉兵秣马
+					231 text 厉兵秣马 武术 · 黑像专属
+					277 container
+						278 text 职业 职业
+					234 image cards
+					235 text 抽 2
+					236 image plate
+					237 text 甲 12 你获得  12  点 护甲 ，并抽  2  张牌。
+				238 image bolt
+				239 text 1
+			147 button 查看厉兵秣马完整规则
+			240 checkbox Description: 龙焰射线 · 1 费。正在注能的卡牌, Value: 0
+				241 container
+					242 text 1
+					243 image 龙焰射线
+					244 text 龙焰射线 法术 · 古朴
+					279 container
+						280 text 古朴 古朴
+					247 image crystal
+					248 text 注能 1 注能 （ 1 ）： 造成  11  点 法术伤害 。
+				249 image bolt
+				250 text 1
+			251 button 查看龙焰射线完整规则
+		252 container 战术操作
+			253 button (disabled) bag 背包
+				254 image bag
+				255 text  背包
+			256 button (disabled) runner 撤离（判负）
+				257 image runner
+				258 text  撤离（判负）
+			259 button gear 设置
+				260 image gear
+				261 text  设置
+			262 button (disabled) skip 结束回合
+				263 image skip
+				264 text  结束回合
+
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/

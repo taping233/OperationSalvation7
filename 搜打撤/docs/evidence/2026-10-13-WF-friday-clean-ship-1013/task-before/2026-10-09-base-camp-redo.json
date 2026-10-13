@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-base-camp-redo-1009",
+  "date": "2026-10-09",
+  "owner": "Friday（Codex 基地统一美术）",
+  "goal": "基地与各级子页面更好看、设计合理、点击有满足感并保持统一画风",
+  "paths": [
+    "game/src/hub/game.hub.js",
+    "game/src/hub/game.hub.pages.js",
+    "game/src/hub/game.hub.depart.js",
+    "game/css/base-camp.css",
+    "game/index.html",
+    "docs/evidence/2026-10-09-base-camp-redo",
+    "game/src/run/game.run.altar.js",
+    "game/src/ui/interface-motion.js",
+    "game/css/base-camp-roster.css",
+    "game/css/base-camp-compact.css",
+    "tests/hub-flow-regression.test.js",
+    "tests/surface-motion.test.js"
+  ],
+  "doneWhen": [
+    "六个基地分区和其二三级详情采用统一设计",
+    "当前窗口内置浏览器关键路径可操作",
+    "相关定向回归通过且未核项明确"
+  ],
+  "stage": "doing",
+  "checks": [
+    "10-09 基地定向11文件85项通过，JS ESLint及3个CSS解析通过",
+    "10-10 切页黑屏返修4文件52项通过；当前1280×720内置浏览器9条主/二级切页路径外壳稳定、错误0"
+  ],
+  "unverified": [
+    "原整体美术窄窗子页收尾尚未最终确认；本轮切页修复已完成",
+    "全量与build未跑，未做帧率基准"
+  ],
+  "updatedAt": "2026-10-09T16:18:55.030Z"
+}

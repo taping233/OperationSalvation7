@@ -1,0 +1,40 @@
+{
+  "metrics": [
+    "伤害词条5法术"
+  ],
+  "name": "爆燃火球",
+  "reading": [
+    254,
+    254
+  ],
+  "singleResultDisabled": true,
+  "viewport": [
+    1280,
+    720
+  ],
+  "menu": {
+    "bottom": 358.6750183105469,
+    "focused": "棱彩",
+    "menuBottom": 364.2250061035156,
+    "menuTop": 164.22500610351562,
+    "scrollTop": 97.1999969482422,
+    "top": 330.5500183105469,
+    "visible": true
+  },
+  "scrub": {
+    "focus": "libPosition",
+    "name": "大法师之杖",
+    "position": "136",
+    "text": "136 / 268"
+  },
+  "empty": {
+    "count": "0",
+    "hintColor": "rgb(116, 107, 88)",
+    "positionPresent": false
+  },
+  "final": {
+    "name": "爆燃火球",
+    "position": "2 / 8",
+    "result": "8"
+  }
+}

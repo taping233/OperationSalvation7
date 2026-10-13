@@ -1,0 +1,233 @@
+[
+  {
+    "id": "arknights-is3-map",
+    "game": "明日方舟 · 水月与深蓝之树",
+    "section": "map",
+    "title": "天光海岸：分叉地图与固定上下栏",
+    "sourcePage": "https://github.com/MaaAssistantArknights/MaaAssistantArknights/issues/2000",
+    "imageUrl": "https://user-images.githubusercontent.com/78369668/192969562-bd46a40a-fd6c-4a1a-94b1-a4bd5af4ecd9.png",
+    "observations": [
+      "已在 Codex 内置浏览器直接查看原图。",
+      "顶部左侧生命与等级、中央区域名、右侧资源，底部左侧藏品、右侧队伍；地图居中。",
+      "节点图标放在统一短标签上；白色箭头表示分支，青色线/标签突出当前路线，错过的分支降透明度。",
+      "底图是低对比灰黑场景，节点与路线比环境更亮。"
+    ],
+    "adaptation": [
+      "本作地图保持直接点节点，把节点图标与中文短标签做成统一单位。",
+      "生命/层名/资源与底部背包工具的位置跨节点页保持一致。",
+      "用单一强调色连接当前位置与可走方向；背景降低对比。"
+    ],
+    "motionVerified": false,
+    "localFile": "reference-images/arknights-is3-map.png"
+  },
+  {
+    "id": "arknights-is3-event",
+    "game": "明日方舟 · 水月与深蓝之树",
+    "section": "event",
+    "title": "骑士事件：左场景叙事、右纵向选择",
+    "sourcePage": "https://www.mumuplayer.com/blog/arknights-integrated-strategies-roguelike-mode-guide.html",
+    "imageUrl": "https://r.res.easebar.com/pic/20250612/6e6a1c13-c164-412d-9aed-2faff5df3e6d.png",
+    "observations": [
+      "已在 Codex 内置浏览器直接查看原图；原图含模拟器窗口边缘，中央为真实游戏界面。",
+      "事件大图占左侧约六成，标题和短叙事位于左下；右侧三项等宽选择纵向排列。",
+      "每个选项先呈现短动作标题，下面就近写资源消耗或收益；第三项仍处于同一选择序列。",
+      "顶部资源栏与底部队伍/藏品条保留，不把完整资源摘要再写进叙事区。"
+    ],
+    "adaptation": [
+      "本作事件和休整页按左场景/叙事、右决策分栏复刻。",
+      "把已有选项的成本、条件与结果紧邻动作标题，保持一屏阅读。",
+      "保留原有剧情与效果，只替换排版和状态表达。"
+    ],
+    "motionVerified": false,
+    "localFile": "reference-images/arknights-is3-event.png"
+  },
+  {
+    "id": "arknights-is6-reward",
+    "game": "明日方舟 · 岁的界园志异",
+    "section": "reward",
+    "title": "战利品：逐项领取与独立离开",
+    "sourcePage": "https://www.taptap.cn/moment/764250650560171652",
+    "imageUrl": "https://img2-tc.tapimg.com/moment/etag/FoD9d_8iQVPGTZiqOjdOCEybAZsb_20260124221129.png/_tap_ugc.jpg",
+    "observations": [
+      "已在 Codex 内置浏览器直接查看原图。",
+      "两张纵向奖励卡靠左排列，每张依次为大物品图、名称、效果说明、底部收下按钮。",
+      "直接离开是卡组右侧独立大图标，与领取按钮有明显空间分隔。",
+      "背景压暗并模糊，顶部资源与底部工具栏仍保留；不使用横跨全屏的多层奖励摘要。"
+    ],
+    "adaptation": [
+      "本作战后奖励、宝箱与搜刮界面统一物品/说明/领取的卡内顺序。",
+      "领取和继续前进分区；按本作真实规则标明任选其一或逐项领取。",
+      "已领取状态原位反馈，避免剩余卡片突然跳位。"
+    ],
+    "motionVerified": false,
+    "localFile": "reference-images/arknights-is6-reward.jpg"
+  },
+  {
+    "id": "arknights-is6-shop",
+    "game": "明日方舟 · 岁的界园志异",
+    "section": "shop",
+    "title": "道中商店：角色区、规则货架、独立离开",
+    "sourcePage": "https://is-central.github.io/is6-sui/is6-progression/",
+    "imageUrl": "https://is-central.github.io/guides/is6-sui/is6-progression/shop-rob-button.png",
+    "observations": [
+      "已在 Codex 内置浏览器直接查看原图；左下红框是攻略作者标注，不能作为原游戏样式复制。",
+      "左侧为商人立绘和短对白，中右侧为统一网格商品；商品名位于上缘，价格位于右下。",
+      "刷新与特殊互动独立于普通商品，离开使用右侧固定大按钮。",
+      "顶底两条常驻状态栏沿用地图结构。"
+    ],
+    "adaptation": [
+      "本作商店保留左侧角色/气氛区，商品使用稳定网格和固定价格基线。",
+      "购买、刷新、离开分别占明确区域；缺货或资金不足只改变商品状态。",
+      "商品图继续使用本作资产，不接入参考截图中的物品或角色。"
+    ],
+    "motionVerified": false,
+    "localFile": "reference-images/arknights-is6-shop.png"
+  },
+  {
+    "id": "arknights-is6-battle",
+    "game": "明日方舟 · 岁的界园志异",
+    "section": "battle",
+    "title": "作战 HUD：中央战场、边缘资源与操作",
+    "sourcePage": "https://www.taptap.cn/moment/696802777363385677",
+    "imageUrl": "https://img2-tc.tapimg.com/moment/etag/FnPAWTJG-D-XbMHbyXpNkw3qL0Z_.jpg/_tap_ugc.jpg",
+    "observations": [
+      "已在 Codex 内置浏览器直接查看原图。",
+      "上中是敌人进度与生命，右上是速度和暂停，右下是费用与可放置数。",
+      "可部署角色牌贴底边排列，中央保留完整战场；HUD不把信息分散到战场内部的多个大面板。",
+      "单位血条等局部反馈贴近对象，资源总量和系统操作固定在画面边缘。"
+    ],
+    "adaptation": [
+      "本作战斗保留牌战玩法，把回合/生命/资源、主要行动和手牌安排到稳定边缘区域。",
+      "敌人意图和伤害贴近战斗对象，次要日志降低视觉权重。",
+      "战斗内弹层使用同一遮罩与关闭逻辑，避免改变底层战场位置。"
+    ],
+    "motionVerified": false,
+    "localFile": "reference-images/arknights-is6-battle.jpg"
+  },
+  {
+    "id": "arknights-is6-node-detail",
+    "game": "明日方舟 · 岁的界园志异",
+    "section": "map",
+    "title": "选中紧急作战：地图保留、右侧详情与出发",
+    "sourcePage": "https://note.com/yobunsp/n/n4454327963dd",
+    "imageUrl": "https://assets.st-note.com/img/1768583382-xLBzaZfwoU53QbspEknYtVPc.png?width=1200",
+    "observations": [
+      "网页检索定位原图后下载到本地参考证据，以 view_image 直接查看；本轮内置浏览器暂不可用。",
+      "地图仍占左侧大区，当前节点青色标签，选定方向以白色箭头连接；其他节点明显变灰。",
+      "右侧约三成宽度从上到下排列节点类型/名称、简介、敌人与地图资料入口、红色危险摘要和大号出发按钮。",
+      "顶部/底部状态条没有重新排布，当前地点与选定目标可在同屏分辨。"
+    ],
+    "adaptation": [
+      "本作节点单击后保留地图主体，右侧展示唯一选中地点，不另建下一步路线列表。",
+      "详情顺序固定为节点身份、可见说明、进入条件/风险、主操作；明确区分当前所在与即将前往。",
+      "采用方形图标底与短标签，当前路线、可选路线、其他已知路线分级。"
+    ],
+    "motionVerified": false,
+    "localFile": "reference-images/arknights-is6-node-detail.png"
+  },
+  {
+    "id": "slay-the-spire-event",
+    "game": "杀戮尖塔",
+    "section": "event",
+    "title": "幽灵议会：事件图、叙事、代价明确的选项",
+    "sourcePage": "https://store.playstation.com/en-au/product/EP3717-CUSA15338_00-SLAYTHESPIREGAME/",
+    "imageUrl": "https://image.api.playstation.com/cdn/EP3717/CUSA15338_00/FREE_CONTENTBhpwPPGeunCCfhrxLMqP/rknipGOS_4.jpg",
+    "observations": [
+      "PlayStation 官方商店实机截图，下载到本地参考证据后直接看图。",
+      "一块中央事件面板容纳左侧大图、右侧叙事和右下两条等宽选项；标题是面板上缘的一条短横幅。",
+      "接受选项在同一行写明收益与最大生命代价，收益词用绿、损失用红；拒绝单独一行。",
+      "顶部生命/钱/药水等状态保留，面板外围背景降低明度。"
+    ],
+    "adaptation": [
+      "本作长事件采用稳定的图文两栏，选择区始终在叙事下方固定对齐。",
+      "把本作已确定的收益、损失、概率与条件直接写在选项内，避免选择后才解释可预见代价。",
+      "借鉴邻近关系和颜色语义，不把参考游戏的剧情、数值或卡牌规则带入。"
+    ],
+    "motionVerified": false,
+    "localFile": "reference-images/slay-the-spire-event.jpg"
+  },
+  {
+    "id": "slay-the-spire-reward",
+    "game": "杀戮尖塔",
+    "section": "reward",
+    "title": "战后搜刮：单列领取清单与右下继续出口",
+    "sourcePage": "https://forgottenarbiter.github.io/Is-Every-Seed-Winnable/",
+    "imageUrl": "https://forgottenarbiter.github.io/images/image-20200627105705915.png",
+    "observations": [
+      "作者实机截图，下载后直接查看；原图带桌面窗口标题栏。",
+      "战场背景整体压暗，中央只有一张纵向面板；金币、遗物、药水、加卡作为四个等宽条目。",
+      "每条左图标右名称，卡牌选择先以一个入口呈现，没有同时铺开所有后续选择。",
+      "右下跳过奖励位于领取面板外，顶部资源栏仍可见。"
+    ],
+    "adaptation": [
+      "本作混合战利品先做单层清单，把需要二次选择的卡牌奖励作为清楚的入口。",
+      "领取完成、已放弃和仍待处理的条目原位区分，继续离开只有一个出口。",
+      "减少战后页重复标题、统计框和同时展开的次级面板。"
+    ],
+    "motionVerified": false,
+    "localFile": "reference-images/slay-the-spire-rewards.png"
+  },
+  {
+    "id": "slay-the-spire-shop",
+    "game": "杀戮尖塔",
+    "section": "shop",
+    "title": "商店完整货架：卡牌、遗物、药水、服务分组",
+    "sourcePage": "https://steamcommunity.com/sharedfiles/filedetails/?id=1613845715",
+    "imageUrl": "https://steamuserimages-a.akamaihd.net/ugc/957481092836674403/6624A9C5B5DE95F0AD4A3654AC01CF8CE7E1D639/",
+    "observations": [
+      "Steam 社区实机攻略截图，下载后直接查看。",
+      "商品直接陈列在同一块货架底上，五张职业卡在上排，两张无色卡在左下；遗物与药水另成两排，移除服务在右下。",
+      "每个商品的价格放在其正下方，卡牌面本身显示费用和效果，避免重复详情框。",
+      "折扣仅在对应卡角挂出标识，离开固定在左下并与购买区分离。"
+    ],
+    "adaptation": [
+      "本作商品按卡牌/消耗品/特殊服务分组，统一卡牌尺寸和价格基线。",
+      "卡内保留读牌信息，价格与购买状态在卡外稳定呈现。",
+      "特殊服务独立成一个区块，避免与普通货品按钮混排。"
+    ],
+    "motionVerified": false,
+    "localFile": "reference-images/slay-the-spire-shop.jpg"
+  },
+  {
+    "id": "slay-the-spire-battle",
+    "game": "杀戮尖塔",
+    "section": "battle",
+    "title": "牌战执行瞬间：手牌、能量、敌我状态固定",
+    "sourcePage": "https://store.playstation.com/en-au/product/EP3717-CUSA15338_00-SLAYTHESPIREGAME/",
+    "imageUrl": "https://image.api.playstation.com/cdn/EP3717/CUSA15338_00/FREE_CONTENTwCJ6F2qy2BC4wVsSKgOX/BDMOeOAZ_2.jpg",
+    "observations": [
+      "PlayStation 官方商店实机截图，下载后直接看图。",
+      "敌我单位占画面中部两侧，生命和状态直接贴在单位下方；手牌沿底边排列。",
+      "能量与抽牌堆在左下，弃牌堆在右下，结束回合在右侧手牌上方。",
+      "中央放大展示一张正在呈现的牌；闪电和伤害数字靠近受击目标。静帧不能证明动画顺序与持续时间。"
+    ],
+    "adaptation": [
+      "本作牌战以此作为手牌、能量、结束回合、敌人意图的空间参考。",
+      "读牌放大与施放反馈有独立区域，避免说明浮层遮挡目标状态。",
+      "特效指向操作结果，资源数值固定原位；动效时序另做真实交互验证。"
+    ],
+    "motionVerified": false,
+    "localFile": "reference-images/slay-the-spire-official-2.jpg"
+  },
+  {
+    "id": "slay-the-spire-shop-detail",
+    "game": "杀戮尖塔",
+    "section": "shop",
+    "title": "商品阅读态：局部放大、关键词说明与不足价格",
+    "sourcePage": "https://store.playstation.com/en-au/product/EP3717-CUSA15338_00-SLAYTHESPIREGAME/",
+    "imageUrl": "https://image.api.playstation.com/cdn/EP3717/CUSA15338_00/FREE_CONTENTACx8Wh4gfRN1wEuRea7C/KANnXytG_6.jpg",
+    "observations": [
+      "PlayStation 官方商店实机截图，下载后直接看图。",
+      "被指向的卡牌比相邻卡更大，关键词 Exhaust 在卡旁独立小框解释，其他货架仍可见。",
+      "顶部金币为129，189、157、258、194等超过余额的价格为红色，能负担的价格为白色。",
+      "卡牌阅读态没有另弹全屏详情页；离开按钮仍在原位。"
+    ],
+    "adaptation": [
+      "本作商品可在当前位置展开必要读牌信息与关键词，保持货架空间连续。",
+      "资金不足在价格附近直接表达，同时给按钮明确不可购买状态。",
+      "放大态不得挤动相邻商品或把提示残留到下一页。"
+    ],
+    "motionVerified": false,
+    "localFile": "reference-images/slay-the-spire-official-6.jpg"
+  }
+]

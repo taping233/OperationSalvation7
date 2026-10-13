@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-fly-arrowhawk",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a125fc-1da2-7300-83db-f2b39e275c76\\exec-e56e7b44-20ec-4701-93e7-eb4618f62733.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-flying-cleave-simple/cards-martial-tt3-fly-arrowhawk-source.png",
+        "bytes": 1761983,
+        "sha256": "bc936f6aa4329fd3918539f92506edcb8a88dfee505a4547d3f3ceaf4e792ee6"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-flying-cleave-simple/cards-martial-tt3-fly-arrowhawk-full-before.webp",
+          "bytes": 97762,
+          "sha256": "50f6573e8e4183e146fcd09da15194ba59331a6aa2a1b63d3707965bb583aedf"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-flying-cleave-simple/cards-martial-tt3-fly-arrowhawk-thumb-before.webp",
+          "bytes": 15452,
+          "sha256": "867ff760999e55c05e614bf3343f22ec149c505d25b490d4da63536cba9d5ef6"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-fly-arrowhawk.webp",
+          "bytes": 61896,
+          "sha256": "da631d9c93e50c6b78779078e62ebd33002b8aad695afced3557667629aa236a",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-fly-arrowhawk.webp",
+          "bytes": 8808,
+          "sha256": "9d033376025c5b148eeedc6450881d2bbbbb150274f80fd423769a3452c04fc1",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "flying-cleave-line-action-20261011",
+      "revision_after": "flying-cleave-simple-stroke-20261011",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt3-fly-arrowhawk.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 97762,
+            "sha256": "50f6573e8e4183e146fcd09da15194ba59331a6aa2a1b63d3707965bb583aedf",
+            "source": "docs/evidence/2026-10-11-flying-cleave/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt3-fly-arrowhawk.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 61896,
+            "sha256": "da631d9c93e50c6b78779078e62ebd33002b8aad695afced3557667629aa236a",
+            "source": "docs/evidence/2026-10-11-flying-cleave-simple/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt3-fly-arrowhawk.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 15452,
+            "sha256": "867ff760999e55c05e614bf3343f22ec149c505d25b490d4da63536cba9d5ef6",
+            "source": "docs/evidence/2026-10-11-flying-cleave/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt3-fly-arrowhawk.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 8808,
+            "sha256": "9d033376025c5b148eeedc6450881d2bbbbb150274f80fd423769a3452c04fc1",
+            "source": "docs/evidence/2026-10-11-flying-cleave-simple/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1121,
+  "manifest_count_after": 1121
+}

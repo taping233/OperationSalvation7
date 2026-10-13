@@ -1,0 +1,100 @@
+Browser tab: 2, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5354/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/
+	1 container viewport
+		2 button 背包 8/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 8/16
+		5 container archive 搜刮！战斗胜利 · 首脑保险柜 · 第 1 / 1, ID: overlay
+			6 container
+				7 button Description: 关闭, ID: ovCloseX
+				8 container
+					9 heading 战斗胜利, Value: 3
+						10 text 战斗胜利
+					11 text 首脑保险柜
+					12 text 6 张待领
+					13 text 6  张卡牌
+					14 checkbox Description: 查看草甲详情, Value: 0
+						15 container
+							16 text 0
+							17 image 草甲
+							18 text 草甲 装备 · 古朴
+							97 container
+								98 text 古朴 古朴
+							21 image plate
+							22 text 甲 5 装备 本牌时，你获得  5  点 护甲 。
+						23 text 估值
+						24 image coin
+						25 text 2
+						99 text 古朴
+					27 checkbox Description: 查看影噬详情, Value: 0
+						28 container
+							29 text 1
+							30 image 影噬
+							31 text 影噬 武术 · 稀有
+							100 container
+								101 text 稀有 稀有
+							34 text 本 回合 ，你偷取  1  名敌人的攻击力，直到该敌人的攻击力降至  1  点。
+						35 text 估值
+						36 image coin
+						37 text 3
+						102 text 稀有
+					39 checkbox Description: 查看连射详情, Value: 0
+						40 container
+							41 text 1
+							42 image 连射
+							43 text 连射 武术 · 稀有
+							103 container
+								104 text 稀有 稀有
+							46 text 造成  2  点 固定伤害 ；本牌的 伤害 效果触发  3  次。
+						47 text 估值
+						48 image coin
+						49 text 2
+						105 text 稀有
+					51 checkbox Description: 查看射线枪详情, Value: 0
+						52 container
+							53 text 0
+							54 image 射线枪
+							55 text 射线枪 装备 · 古朴
+							106 container
+								107 text 古朴 古朴
+							58 text 主动技能 ： 发现 1  张射线牌，并直接施放。
+						59 text 估值
+						60 image coin
+						61 text 1
+						108 text 古朴
+					63 checkbox Description: 查看毒爆详情, Value: 0
+						64 container
+							65 text 1
+							66 image 毒爆
+							67 text 毒爆 法术 · 史诗
+							109 container
+								110 text 史诗 史诗
+							70 text 立即触发目标的  2  次全部毒伤。
+						71 text 估值
+						72 image coin
+						73 text 4
+						111 text 史诗
+					75 checkbox Description: 查看金币详情, Value: 0
+						76 container
+							77 text 0
+							78 image 金币
+							79 text 金币 资源 · 史诗
+							112 container
+								113 text 史诗 史诗
+							82 text 贵重货币，可出售。
+						83 text 估值
+						84 image coin
+						85 text 9
+						114 text 史诗
+					87 text 本战击败  1  名敌人 · 剩余生命  33/35
+					88 button (collapsed) 本战背包卡结算 · 入口袋 9 张 · 消散 1 张 · 保留 10 张, Secondary Actions: Expand
+						89 text 本战背包卡结算 · 入口袋 9 张 · 消散 1 张 · 保留 10 张
+					90 container 所选卡牌详情
+						91 text 选择一张卡牌查看规则与去向
+					92 text 背包 8/16 格 · 已入背包 0 张
+					93 text 点击卡牌先查看，随后收下
+					94 container
+						95 button 6 张待领 · 离开
+						96 button 全部收下
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/

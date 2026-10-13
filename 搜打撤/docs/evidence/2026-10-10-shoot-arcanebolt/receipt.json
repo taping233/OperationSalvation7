@@ -1,0 +1,156 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt2-shoot",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12204-0a82-72b2-9a07-d1b72c8d8b18\\exec-3ba03f34-ff23-4c5e-a843-4359d0627b03.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-shoot-arcanebolt/cards-martial-tt2-shoot-source.png",
+        "bytes": 1696553,
+        "sha256": "bc52a41eb708696296351f53be6a447334d9caccef327529fe3322b8e3806115"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-shoot-arcanebolt/cards-martial-tt2-shoot-full-before.webp",
+          "bytes": 38378,
+          "sha256": "6d8643860cdd4e830b9776f5972ab063cbdfbd0a835a617948f2c13270f127ac"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-shoot-arcanebolt/cards-martial-tt2-shoot-thumb-before.webp",
+          "bytes": 7632,
+          "sha256": "7da40637a4f93bd8dd9e7c9071197c678057ddcda37845938ba7d2773132b0ec"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt2-shoot.webp",
+          "bytes": 77274,
+          "sha256": "7c6df9d94686433230650e4974bfa18a8bb13ec410a5a575a6780a4fad1b1d37",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt2-shoot.webp",
+          "bytes": 10156,
+          "sha256": "94a7cbb1a9932398c3fde164d348b7715ace1ce86c0e9a607ff5083cfd1b10e3",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "martial-tt2-shoot-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt2-shoot.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 77274,
+            "sha256": "7c6df9d94686433230650e4974bfa18a8bb13ec410a5a575a6780a4fad1b1d37",
+            "source": "docs/evidence/2026-10-10-shoot-arcanebolt/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt2-shoot.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 7632,
+            "sha256": "7da40637a4f93bd8dd9e7c9071197c678057ddcda37845938ba7d2773132b0ec",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt2-shoot.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 10156,
+            "sha256": "94a7cbb1a9932398c3fde164d348b7715ace1ce86c0e9a607ff5083cfd1b10e3",
+            "source": "docs/evidence/2026-10-10-shoot-arcanebolt/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-arcanebolt",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12204-0a82-72b2-9a07-d1b72c8d8b18\\exec-452f5da3-a654-4b70-b0cc-36f5de5f081f.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-shoot-arcanebolt/cards-spell-tt7-arcanebolt-source.png",
+        "bytes": 2056534,
+        "sha256": "3c8e5254ec28c66176fd1da1d90ee32ba5e87fd7008cd1dec11df2491bd2cf45"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-shoot-arcanebolt/cards-spell-tt7-arcanebolt-full-before.webp",
+          "bytes": 55412,
+          "sha256": "10c9690c1d83e4016d447c05c0dd0445dc7e6cd1ff82a9905af0752ad3e4c37d"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-shoot-arcanebolt/cards-spell-tt7-arcanebolt-thumb-before.webp",
+          "bytes": 18380,
+          "sha256": "a29aeadda4845d0a142d81eff15973c2f568536ac36e234dcdf56acf26dc7d10"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-arcanebolt.webp",
+          "bytes": 157072,
+          "sha256": "fa42362ea3fb39b4752196e4b671bd0ae1c0c2634077a01c6912dc1b152cedb9",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-arcanebolt.webp",
+          "bytes": 23188,
+          "sha256": "f0e9281749aa9068b03eec9bcaaa47778af6ef8faa493e6e2e3819e14ba26e5b",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "spell-tt7-arcanebolt-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt7-arcanebolt.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 157072,
+            "sha256": "fa42362ea3fb39b4752196e4b671bd0ae1c0c2634077a01c6912dc1b152cedb9",
+            "source": "docs/evidence/2026-10-10-shoot-arcanebolt/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-arcanebolt.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 18380,
+            "sha256": "a29aeadda4845d0a142d81eff15973c2f568536ac36e234dcdf56acf26dc7d10",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-arcanebolt.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 23188,
+            "sha256": "f0e9281749aa9068b03eec9bcaaa47778af6ef8faa493e6e2e3819e14ba26e5b",
+            "source": "docs/evidence/2026-10-10-shoot-arcanebolt/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 828,
+  "manifest_count_after": 830
+}

@@ -1,0 +1,38 @@
+{
+  "matched_0_to_30_seconds": {
+    "old": {
+      "onsets_per_second": 3.07,
+      "texture_movement": 0.245,
+      "side_energy_percent": 0.7
+    },
+    "new": {
+      "onsets_per_second": 3.43,
+      "texture_movement": 0.339,
+      "side_energy_percent": 9.8
+    },
+    "reference": {
+      "onsets_per_second": 2.8,
+      "texture_movement": 0.149,
+      "side_energy_percent": 8.6
+    }
+  },
+  "score_event_counts": {
+    "old": {
+      "first_30s_notes": 200,
+      "first_30s_shorter_than_0_7_beats": 131
+    },
+    "new": {
+      "first_30s_notes": 127,
+      "first_30s_shorter_than_0_7_beats": 71
+    }
+  },
+  "loop": {
+    "decoded_seconds": 60.0,
+    "sample_jump": 0.0,
+    "start_end_100ms_rms_delta_db": -3.01,
+    "quietest_half_second_dbfs": -27.22,
+    "sample_peak": 0.6125
+  },
+  "checks_passed": true,
+  "limits": "Onsets are detected transients, not authored note counts. More spectral movement or width is not a quality score; reference intro and structure differ. No human audition claimed."
+}

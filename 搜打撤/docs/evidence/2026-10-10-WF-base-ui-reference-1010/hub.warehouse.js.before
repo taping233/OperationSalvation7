@@ -1,0 +1,141 @@
+import { esc, escAttr } from '../core/shared.js';
+import { readBase } from './base.commands.js';
+import { convertCollection, stackKeyOf } from './collection.commands.js';
+import { homeRequestId } from './game.hub.bridge.js';
+import { Random } from '../core/random.js';
+
+const state = { slot: null, query: '', type: '', rarity: '', name: '', confirm: '', busy: false };
+export function clearWarehouseFilters() { Object.assign(state, { query: '', type: '', rarity: '', name: '', confirm: '' }); }
+const convertible = card => !!card.cls && (card.rarity === '职业' || card.type === '能力卡');
+function matches(stack) {
+  return (!state.query || stack.card.name.includes(state.query)) && (!state.type || stack.card.type === state.type)
+    && (!state.rarity || stack.card.rarity === state.rarity);
+}
+function synchronize(base) {
+  if (state.slot !== base.slot) Object.assign(state, { slot: base.slot, query: '', type: '', rarity: '', name: '', confirm: '', busy: false });
+  const rows = base.data.stash.filter(matches);
+  if (!rows.some(stack => stack.card.name === state.name)) state.name = rows[0]?.card.name || '';
+  return rows;
+}
+function buttons(base, stack) {
+  const { card, count } = stack;
+  const marked = base.isCollected(card);
+  const special = card.id === base.PET_EGG_ID || card.id === 'tt-econpack' || base.materialInfo?.(card);
+  const action = (id, label, disabled = false) => `<button type="button" class="mini-btn${id === 'collect' || id === 'use' ? ' ok' : ''}" data-act="warehouseAction" data-operation="${id}"${disabled || state.busy ? ' disabled' : ''}>${label}</button>`;
+  if (card.id === base.PET_EGG_ID) return action('use', '孵化伙伴', base.data.coins < base.HATCH_COST || base.ownedPets().length >= base.PETS.length);
+  if (special) return action('use', '使用 1 张');
+  return action('collect', convertible(card) ? '归档培养 1 张' : marked ? '取消收藏' : '加入收藏')
+    + action('sell', '卖出 1 张', marked && !convertible(card))
+    + (count > 1 ? action('sellAll', `卖出全部 ×${count}`, marked && !convertible(card)) : '');
+}
+function detail(base, cards) {
+  const stack = base.data.stash.find(item => item.card.name === state.name);
+  if (!stack) return '<div class="warehouse-idle"><span>[[icon:archive]]</span><h3>选择一张卡牌</h3><p>在左侧浏览，在这里查看和管理。</p></div>';
+  const { card, count } = stack;
+  const isMaterial = base.materialInfo?.(card);
+  const sale = cards.sellPrice?.(card) ?? 0;
+  const notes = card.id === base.PET_EGG_ID ? `孵化消耗 1 枚蛋和 ${base.HATCH_COST} 储备币，获得尚未拥有的伙伴。`
+    : card.id === 'tt-econpack' ? '使用消耗 1 张卡包，获得 5 张随机卡牌；需要 5 个仓库空位。'
+    : isMaterial ? '使用后折入基地物资；材料不可卖出。'
+    : convertible(card) ? `归档消耗 1 张，获得 ${card.type === '能力卡' ? 50 : 10} 人物经验。`
+    : base.isCollected(card) ? '已收藏并保护；取消收藏后可以卖出。' : '加入收藏会保留卡牌，并保护它不被卖出。';
+  return `<div class="warehouse-detail-art">${cards.cardHTML(card, 'sm')}</div>
+    <header><small>${esc(card.type)} / ${esc(card.rarity)}</small><h3>${esc(card.name)}</h3></header>
+    <p class="warehouse-description">${esc(card.desc || '')}</p>
+    <dl class="warehouse-facts"><div><dt>持有</dt><dd>${count} 张</dd></div><div><dt>收购价</dt><dd>${isMaterial || card.id === base.PET_EGG_ID || card.id === 'tt-econpack' ? '不可出售' : `${sale} 币 / 张`}</dd></div></dl>
+    <button type="button" class="mini-btn warehouse-enlarge" data-act="warehouseZoom">放大查看</button>
+    <p class="warehouse-operation-note">${esc(notes)}</p>
+    <div class="warehouse-operations"${state.confirm ? ' hidden' : ''}>${buttons(base, stack)}</div>
+    ${state.confirm ? `<div class="warehouse-confirm" role="status"><b>${state.confirm === 'collect' ? '消耗卡牌并转为人物经验？' : state.confirm === 'sellAll' ? `卖出 ${count} 张，获得 ${sale * count} 币？` : state.confirm === 'sell' ? `卖出 1 张，获得 ${sale} 币？` : '确认消耗这张卡牌？'}</b><button class="mini-btn ok" data-act="warehouseConfirm"${state.busy ? ' disabled' : ''}>确认</button><button class="mini-btn" data-act="warehouseCancel">取消</button></div>` : ''}`;
+}
+export function warehouseHTML() {
+  const { Base: base, Cards: cards } = window.SDT;
+  const rows = synchronize(base);
+  const options = (field, label) => `<option value="">${label}</option>` + [...new Set(base.data.stash.map(s => s.card[field]))].filter(Boolean).map(value => `<option${state[field] === value ? ' selected' : ''} value="${escAttr(value)}">${esc(value)}</option>`).join('');
+  return `<div class="stash-workspace stash-view-cards warehouse-v2">
+    <header class="camp-section-head"><small>STORAGE / 战利品</small><h2>仓库</h2><p>浏览、收藏与归档，为下一次远征做好准备。</p></header>
+    <nav class="stash-sections" aria-label="仓库分区"><button class="stash-section-tab on" data-act="hubStashView" data-view="cards" aria-pressed="true">卡牌仓库 <small>${base.stashUsed()}/${base.stashCap()}</small></button><button class="stash-section-tab" data-act="hubStashView" data-view="pocket" aria-pressed="false">待复原卡牌 <small>${base.data.pocket.reduce((n, s) => n + s.count, 0)}</small></button></nav>
+    <div class="warehouse-toolbar"><label class="warehouse-search"><span>搜索</span><input data-warehouse-filter="query" aria-label="搜索仓库卡牌" placeholder="搜索卡牌名称" value="${escAttr(state.query)}"></label><select data-warehouse-filter="type" aria-label="筛选卡牌类型">${options('type', '全部类型')}</select><select data-warehouse-filter="rarity" aria-label="筛选卡牌品质">${options('rarity', '全部品质')}</select><span data-warehouse-count>${rows.length} 种卡牌</span><button class="mini-btn" data-act="rawItem" data-kind="wood" aria-label="查看木材">[[icon:wood]] ${base.data.wood}</button><button class="mini-btn" data-act="rawItem" data-kind="rations" aria-label="查看口粮">[[icon:bread]] ${base.data.rations}</button></div>
+    <div class="warehouse-layout"><section class="warehouse-browser" aria-label="卡牌陈列"><div class="stash-cardgrid">${base.data.stash.map(stack => `<button type="button" class="stash-cell${stack.card.name === state.name ? ' selected' : ''}${base.isCollected(stack.card) ? ' collected' : ''}" data-act="warehousePick" data-name="${escAttr(stack.card.name)}" aria-label="选择${escAttr(stack.card.name)}" aria-pressed="${stack.card.name === state.name}"${matches(stack) ? '' : ' hidden'}>${cards.cardHTML(stack.card, 'sm')}<b class="stack-count">×${stack.count}</b>${base.isCollected(stack.card) ? '<span class="cell-mark">[[icon:check]]</span>' : ''}</button>`).join('')}</div><div class="warehouse-no-results"${rows.length ? ' hidden' : ''}><h3>${base.data.stash.length ? '没有匹配的卡牌' : '这里，等着你的战利品'}</h3><p>成功撤离后存入战利品，也可以购买基础补给。</p><button class="mini-btn" data-act="${base.data.stash.length ? 'warehouseReset' : 'hubTab'}" data-tab="shop">${base.data.stash.length ? '清除筛选' : '前往补给'}</button></div></section>
+    <aside class="warehouse-inspector" aria-label="选中卡牌详情">${detail(base, cards)}</aside></div></div>`;
+}
+export function bindWarehouse({ ui, base, cards, meta, sound, refresh, notify }) {
+  const root = document.querySelector('.warehouse-v2');
+  if (!root) return;
+  const rich = html => window.SDT.Icons.rich ? window.SDT.Icons.rich(html) : html;
+  const update = () => {
+    const rows = synchronize(base);
+    for (const button of root.querySelectorAll('.stash-cell')) {
+      const stack = base.data.stash.find(s => s.card.name === button.dataset.name);
+      button.hidden = !stack || !matches(stack);
+      button.classList.toggle('selected', button.dataset.name === state.name);
+      button.setAttribute('aria-pressed', String(button.dataset.name === state.name));
+    }
+    root.querySelector('[data-warehouse-count]').textContent = `${rows.length} 种卡牌`;
+    root.querySelector('.warehouse-no-results').hidden = rows.length > 0;
+    root.querySelector('.warehouse-inspector').innerHTML = rich(detail(base, cards));
+    if (state.confirm) root.querySelector('.warehouse-inspector').scrollTop = root.querySelector('.warehouse-inspector').scrollHeight;
+  };
+  for (const input of root.querySelectorAll('[data-warehouse-filter]')) {
+    input.addEventListener(input.tagName === 'SELECT' ? 'change' : 'input', () => {
+      state[input.dataset.warehouseFilter] = input.value;
+      state.confirm = '';
+      update();
+    });
+  }
+  ui.act('warehousePick', data => { state.name = data.name; state.confirm = ''; update(); sound.tick(); });
+  ui.act('warehouseReset', () => {
+    clearWarehouseFilters();
+    for (const input of root.querySelectorAll('[data-warehouse-filter]')) input.value = '';
+    update();
+  });
+  ui.act('warehouseZoom', () => {
+    const stack = base.data.stash.find(s => s.card.name === state.name);
+    const from = [...root.querySelectorAll('.stash-cell')].find(button => button.dataset.name === state.name && !button.hidden);
+    if (stack) ui.showCardZoom(stack.card, { from });
+  });
+  ui.act('warehouseCancel', () => { state.confirm = ''; update(); });
+  const run = async operation => {
+    if (state.busy) return;
+    const stack = base.data.stash.find(s => s.card.name === state.name);
+    if (!stack) { refresh(); return; }
+    state.busy = true;
+    const slot = base.slot;
+    update();
+    let result;
+    try {
+      if (operation === 'collect' && convertible(stack.card)) {
+        const read = readBase(base.slot);
+        result = read.ok ? await convertCollection({ slotId: base.slot, requestId: homeRequestId('warehouse-collect'), expectedRevision: read.revision }, { stackKey: stackKeyOf(stack), count: 1 }) : read;
+      } else if (operation === 'collect') {
+        const now = base.collectToggle(stack.card);
+        if (now !== null) { meta.onCollect(stack.card, now); meta.checkUnlocks(); }
+        result = { ok: now !== null, msg: now ? '已加入收藏，卡牌保留。' : '已取消收藏。' };
+      } else if (operation === 'sell' || operation === 'sellAll') result = base.sellStashCards(stack.card.name, operation === 'sellAll' ? stack.count : 1);
+      else if (stack.card.id === base.PET_EGG_ID) result = base.hatchPet();
+      else if (stack.card.id === 'tt-econpack') {
+        const pool = cards.all().filter(c => cards.isRandomObtainable(c));
+        if (base.stashRoom() < 5 || !pool.length) result = { ok: false, msg: '需要 5 个仓库空位才能使用卡包。' };
+        else result = base.openCardPack(stack.card.id, Array.from({ length: 5 }, () => ({ card: { ...pool[Math.floor(Random.random('loot') * pool.length)] }, count: 1 })));
+      } else result = base.useStashMaterial(stack.card.name, false);
+      if (base.slot !== slot) return;
+      if (result?.ok) { sound.ding(); meta.checkUnlocks(); }
+      ui.log(result?.message || result?.msg || (result?.ok ? '仓库操作已保存。' : '操作未保存，请重试。'), result?.ok ? 'ok' : 'warn');
+      notify?.(result?.message || result?.msg || (result?.ok ? '仓库操作已保存。' : '操作未保存，请重试。'), result?.ok ? 'ok' : 'warn');
+    } catch {
+      if (base.slot === slot) {
+        ui.log('操作遇到异常，请核对仓库状态后重试。', 'warn');
+        notify?.('操作遇到异常，请核对仓库状态后重试。', 'warn');
+      }
+    } finally { if (base.slot === slot && state.slot === slot) { state.busy = false; state.confirm = ''; refresh(); } }
+  };
+  ui.act('warehouseAction', data => {
+    if (state.busy) return;
+    const stack = base.data.stash.find(s => s.card.name === state.name);
+    if (!stack) return;
+    if (data.operation === 'collect' && !convertible(stack.card)) { void run(data.operation); return; }
+    state.confirm = data.operation;
+    update();
+  });
+  ui.act('warehouseConfirm', () => { if (state.confirm) void run(state.confirm); });
+}

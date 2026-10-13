@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-blood-arrow",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-24d48e30-53b4-47ec-9c7f-741d44252d8d.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-blood-arrow/cards-martial-tt3-blood-arrow-source.png",
+        "bytes": 1390728,
+        "sha256": "3d07838e098868aa19b04440cd298a3596c8d496d8cd1f49593c5a5c46915b29"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-blood-arrow/cards-martial-tt3-blood-arrow-full-before.webp",
+          "bytes": 18536,
+          "sha256": "3d015dafc896520b62d05387bbc8959c2731af83ba3f353f6076bff117e6a62c"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-blood-arrow/cards-martial-tt3-blood-arrow-thumb-before.webp",
+          "bytes": 4242,
+          "sha256": "8508a29f1a9021ce07671ce946ca9ec744be5c42178be78c18f3bb17c995d571"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-blood-arrow.webp",
+          "bytes": 31704,
+          "sha256": "bb9137e1c247815ae49d401508d43fcc323c87e629d89dd224c2442caa00c0f3",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-blood-arrow.webp",
+          "bytes": 4754,
+          "sha256": "5f5727160ba2c4871866133989fe00d6635037ff7b45d6c0fb0dfa873f7bbbed",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "blood-arrow-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt3-blood-arrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 31704,
+            "sha256": "bb9137e1c247815ae49d401508d43fcc323c87e629d89dd224c2442caa00c0f3",
+            "source": "docs/evidence/2026-10-10-blood-arrow/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt3-blood-arrow.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 4242,
+            "sha256": "8508a29f1a9021ce07671ce946ca9ec744be5c42178be78c18f3bb17c995d571",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt3-blood-arrow.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 4754,
+            "sha256": "5f5727160ba2c4871866133989fe00d6635037ff7b45d6c0fb0dfa873f7bbbed",
+            "source": "docs/evidence/2026-10-10-blood-arrow/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 891,
+  "manifest_count_after": 892
+}

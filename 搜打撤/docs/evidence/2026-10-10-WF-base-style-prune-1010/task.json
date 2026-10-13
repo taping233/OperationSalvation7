@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-base-style-prune-1010",
+  "date": "2026-10-10",
+  "owner": "Friday（Codex 基地旧样式清理）",
+  "goal": "删除基地前端无页面生成的旧布局样式与同作用域已被完全覆盖的声明，保留当前布局及其他页面行为",
+  "paths": [
+    "game/css/base-camp.css",
+    "game/css/base-camp-compact.css",
+    "game/css/base-camp-rework.css",
+    "docs/evidence/2026-10-10-WF-base-style-prune-1010"
+  ],
+  "doneWhen": [
+    "每项删除有静态引用或级联覆盖依据，旧样式删除完成并留存差异",
+    "遵守老板不测试约定，不执行浏览器验收、build或提交"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "静态引用与级联依据完成；删除37旧规则、5退役选择器分支、41完全覆盖声明，减少5296字节",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "写入后指纹与计划一致，仅修改base-camp.css及base-camp-compact.css，四来源写前并发守卫通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "沿老板不测试约定，未运行测试/浏览器验收/多尺寸/build；待老板实页查看，未提交"
+  ],
+  "updatedAt": "2026-10-10T10:14:56.623Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

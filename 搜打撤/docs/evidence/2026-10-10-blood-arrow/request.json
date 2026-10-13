@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-blood-arrow",
+      "asset": "cards/martial-tt3-blood-arrow.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-24d48e30-53b4-47ec-9c7f-741d44252d8d.png",
+      "revision": "blood-arrow-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the blood arrow fantasy game-card edit target. Preserve its SQUARE close-up composition closely: one slender crimson arrow vertically centered pointing straight DOWN. The narrow long shaft enters from the top edge and extends to a triangular broadhead around the lower third; shaft and arrowhead feel formed from dark blood-red material with selective pale silver-white reflections. The triangular broadhead has two slightly raised outer shoulders and a sharp bottom point. A small red droplet hangs just below the point. Keep original subject proportions, placement, top crop and downward orientation, with large negative space on both sides. Plain deep burgundy background, no character, wounds, hands, bow, feathers, extra arrows or props. Images 2, 3, 4 are DRAWING STYLE references only; borrow their broad opaque painting grammar, never their subjects or costume motifs. Rough hand-painted anime color study: large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Model the shaft and broadhead with broad dark burgundy shadow planes, muted crimson middle planes and a few decisive broken pale reflections, giving readable structure without glossy photographic liquid rendering. Concentrate brighter red at the arrowhead and droplet. Keep sparse, coherent long strokes on the shaft; quiet dark background. Clear grouped hard-edged light and shadow, matte muted colors with selective richer accents. No photorealism, glossy 3D, dense tiny highlights, facet mosaics, detailed engravings, all-over texture or grain filters. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt3-blood-arrow.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    }
+  ]
+}

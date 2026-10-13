@@ -1,0 +1,9 @@
+{
+  "cells": [
+    "Friday（Codex 基地实施迭代 WF-base-iterate-1010）",
+    "game/src/hub/game.hub{,.pages,.depart}.js；hub.{warehouse,personnel,presentation,facilities,archive,visuals,home-v3,materials,shop-v3,archive-v3,courtyard-v3}.js；src/hub/courtyard-vendor/；src/ui/{card-browser,inventory-zoom}.js及ui.js仅库存详情点击；css/base-camp-rework.css及base-*-v3/card-browser/inventory-zoom.css；icons/base-v3/及本任务证据/测试；不碰pages仓库footerHTML/base-camp.css的camp-card-actions；docs/development.md仅基地行为段；hub-flow及premium仅基地断言",
+    "老板已明确接手并否决上一轮审美；按方舟肉鸽入口/仓库完整样板重做。子任务商店与庭院归shop_redesign、归档归archive_redesign，根负责主页/仓库/队员/壳与交互修复",
+    "10-10",
+    "重做实施中；上一轮实页不合格；复用5200/PID21616，无新服务、不build、不提交；当前平台内置浏览器当前窗口"
+  ]
+}

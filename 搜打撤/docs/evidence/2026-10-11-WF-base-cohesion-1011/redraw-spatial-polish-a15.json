@@ -1,0 +1,20 @@
+{
+  "stage": "A15",
+  "status": "generated-before-style-steering",
+  "directionRecord": "redraw-a14-spatial-direction.md",
+  "source": "C:/Users/太平/.codex/generated_images/01a128f5-bd4a-7891-91c7-ab5106c5d409/exec-117c09e2-24c9-475b-93e5-cfebe07f6aa6.png",
+  "reason": [
+    "办公椅竞争前景并压住桌边/通道读法，推入桌内侧转",
+    "床头/饮水灯带竞争工作焦点，降低辅助光；炉侧反光更漫反射",
+    "饮水台的接近路径在机位下不够清楚，交代既有净空，不改整体分组"
+  ],
+  "prompt": "Edit this ORIGINAL game-room illustration with ONLY these targeted spatial/readability/light corrections. Keep the new room design, camera, colour palette, winter side window, large close LEFT rest chair and diagonal armrest, low side table, wide diagonal work desk, back-left tea alcove, back-right sleeping berth, front-right equipment cases and separate right-wall fireplace. Keep comfortable grey-green, blue-grey, warm sand/ivory, ochre and terracotta material colours. No layout replacement and no extra props.\n\n1. The CENTRAL-RIGHT working chair currently creates an oversized competing foreground mass. Push it TOWARDS and PARTLY UNDER the desk by roughly half its seat depth, slightly farther from the camera, and turn its backrest about 25 degrees toward the desk. Maintain normal human furniture size; this is a position/orientation change, not shrinking the chair. Show its useful backrest but hide much of the seat and near arm beneath the desk. Reopen the visual line from the table edge to the floor/bed approach and right aisle. The left foreground rest chair remains the sole dominant near silhouette. Keep map, record folio and terminal readable with real desk contact and cast shadows.\n\n2. Reduce the brightness of the visible bed-alcove and drinking-closet light strips by about one third; they should be unobtrusive practical reading/tea lights with local soft falloff, not equal focal highlights. Sleeping linen remains softly readable, less luminous than the work paper. The desk lamp's warm-white pool is concentrated on the map and open record, with a small shadow from the terminal and a slightly darker front table edge. Retain the left window's broad cool diffuse key light and consistent soft shadows; no added direct-sun band, mysterious light spot or yellow filter. The contained fire gives a small physically local warm reflection on nearest floor/side panel only; soften its floor sheen so no sharp mirrored fire stripe appears.\n\n3. Make the EXISTING approach to the tea alcove legible: a small visible free floor/service gap beyond the desk's far edge, with natural neutral bounced light and clear grounded shadows. The table corner and partition must not visibly seal off the standing place in front of the counter. Keep the same overall group positions, preserve the main route, and do not invent another doorway or room.\n\nPreserve the commercial anime game-background finish, believable perspective and understated lived-in fabric folds. A little selective edge variation is welcome, no noisy weave enhancement, no global blur, no added text, signs, logos, people, emblems, weapon props or clutter. Full 16:9.",
+  "runtimeApplied": false,
+  "receipt": {
+    "path": "C:/Users/太平/.codex/generated_images/01a128f5-bd4a-7891-91c7-ab5106c5d409/exec-b21f64a1-ee2a-4718-9edd-c8eca95e0edb.png",
+    "bytes": 1946114,
+    "sha256": "cb5edee0552fd223d41dd84681acdb5de02b74d0c1d9729d542322d870815ba1",
+    "excludedFromGit": true
+  },
+  "latestUserDirection": "复杂度已经够；配色、光照和画法仍不如主要参考，画风太真实；此后固定复杂度，只重绘画法/光色"
+}

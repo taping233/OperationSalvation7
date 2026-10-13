@@ -1,0 +1,186 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5354/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/
+	1 container bag 背包, ID: overlay
+		2 container
+			3 button Description: 关闭, ID: ovCloseX
+			4 container ovBody
+				5 container
+					6 heading 背包 , Value: 2
+						7 text 背包 
+						8 button
+					9 text 金币  10 物资估值  0
+					10 button 关闭背包
+				11 container 随身背包
+					12 heading 随身背包 15/16 格 按稀有度 按种类, Value: 3
+						13 text 随身背包 15/16 格
+						14 button 按稀有度
+						15 button 按种类
+					16 text 点击卡面查看详情 · 按住拖动整理
+					17 container
+						18 container
+							19 text 1
+							20 image 包扎
+							21 text 包扎 武术 · 古朴
+							22 container
+								23 text 古朴 古朴
+							24 image heart
+							25 text 回 3
+							26 image plate
+							27 text 甲 3 你回复  3  点 生命 ，并获得  3  点 护甲 。
+						28 text ×2
+					29 container
+						30 container
+							31 text 1
+							32 image 灵能召唤
+							33 text 灵能召唤 法术 · 稀有
+							34 container
+								35 text 稀有 稀有
+							36 text 发现 1  张 注能 卡牌，并使该牌无需 注能 。
+						37 text ×1
+					38 container
+						39 container
+							40 text 2
+							41 image 诅咒之刃
+							42 text 诅咒之刃 武术 · 稀有
+							43 container
+								44 text 稀有 稀有
+							45 text 造成（你的攻击力 +  3 ）点 攻击伤害 ；对目标附加你手牌中的 招式 所具有的全部 诅咒 效果。
+						46 text ×1
+					47 container
+						48 container
+							49 text 2
+							50 image 破甲重斩
+							51 text 破甲重斩 武术 · 黑像专属
+							52 container
+								53 text 职业 职业
+							54 image plate
+							55 text 甲 4 造成（你的攻击力 +  5 ）点 攻击伤害 ；对目标附加破甲，持续  2 回合 ；若本次 伤害 击杀敌人，你获得  4  点 护甲 。
+						56 text ×1
+					57 container
+						58 container
+							59 text 2
+							60 image 不变应万变
+							61 text 不变应万变 武术 · 黑像专属
+							62 container
+								63 text 职业 职业
+							64 image plate
+							65 text 甲 4 本 回合 ，你受到的每段 伤害 降为  1  点；你获得  4  点 护甲 。
+						66 text ×1
+					67 container
+						68 container
+							69 image 一把钥匙
+							70 text 一把钥匙 资源 · 古朴
+							71 container
+								72 text 古朴 古朴
+							73 text 解锁大门。
+						74 text ×1
+					75 container
+						76 container
+							77 text 1
+							78 image 割蚀
+							79 text 割蚀 武术 · 古朴
+							80 container
+								81 text 古朴 古朴
+							82 text 使  1  名敌人的攻击力降低  2  点，持续  3 回合 ；对该敌人附加  1  层 流血 。
+						83 text ×1
+					84 container
+						85 container
+							86 image 法杖
+							87 text 法杖 装备 · 古朴
+							88 container
+								89 text 古朴 古朴
+							90 text 你的 法伤 增加  1  点。
+						91 text ×1
+					92 container
+						93 container
+							94 text 1
+							95 image 高端研发
+							96 text 高端研发 法术 · 稀有
+							97 container
+								98 text 稀有 稀有
+							99 text 发现 1  张  2  费 招式 ；每个 回合开始时 ，所选卡牌的费用减少  1  点。
+						100 text ×1
+					101 container
+						102 container
+							103 text 2
+							104 image 龙焰射线
+							105 text 龙焰射线 法术 · 古朴
+							106 container
+								107 text 古朴 古朴
+							108 image crystal
+							109 text 注能 1 注能 （ 1 ）： 造成  11  点 法术伤害 。
+						110 text ×1
+					111 container
+						112 container
+							113 image 员工通行证C
+							114 text 员工通行证C 道具 · 传说
+							115 container
+								116 text 传说 传说
+							117 text 发现 1  张传说卡。
+						118 text ×1
+					119 container
+						120 container
+							121 text 1
+							122 image 二刀流
+							123 text 二刀流 武术 · 稀有
+							124 container
+								125 text 稀有 稀有
+							126 text 发现 1  张武术牌，并额外获得该牌的  1  张复制。
+						127 text ×1
+					128 container
+						129 container
+							130 text 2
+							131 image 厉兵秣马
+							132 text 厉兵秣马 武术 · 黑像专属
+							133 container
+								134 text 职业 职业
+							135 image cards
+							136 text 抽 2
+							137 image plate
+							138 text 甲 12 你获得  12  点 护甲 ，并抽  2  张牌。
+						139 text ×1
+					140 container
+						141 container
+							142 text 2
+							143 image 旋风斩
+							144 text 旋风斩 武术 · 黑像专属
+							145 container
+								146 text 职业 职业
+							147 text 对全体敌人造成（你的攻击力 +  1 ）点 攻击伤害 。
+						148 text ×1
+					149 container
+						150 container
+							151 text 1
+							152 image 连射
+							153 text 连射 武术 · 稀有
+							154 container
+								155 text 稀有 稀有
+							156 text 造成  2  点 固定伤害 ；本牌的 伤害 效果触发  3  次。
+						157 text ×2
+				158 container
+					159 container 安全格
+						160 heading 安全格 1/2 格, Value: 3
+							161 text 安全格 1/2 格
+						162 text 撤离失败时运回基地 · 拖入存放，拖回取出
+						163 container
+							164 container
+								165 image 两把钥匙
+								166 text 两把钥匙 资源 · 稀有
+								167 container
+									168 text 稀有 稀有
+								169 text 钥匙 × 2 。
+							170 text ×1
+					171 container 消耗口袋
+						172 heading 消耗口袋 1 张 · 暂不可用, Value: 3
+							173 text 消耗口袋 1 张 · 暂不可用
+						174 text 已用过的卡牌 · 在火堆或用道具复原
+						175 container
+							176 text 0
+							177 image 毒药
+							178 text 毒药 法术 · 古朴
+							179 container
+								180 text 古朴 古朴
+							181 image cards
+							182 text 抽 1 对目标附加  1  层 中毒 ，并抽  1  张牌。
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/

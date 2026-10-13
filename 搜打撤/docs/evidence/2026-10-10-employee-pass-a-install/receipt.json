@@ -1,0 +1,35 @@
+{
+  "method": "Built-in ImageGen candidate; RGBA WebP encoding with existing thumbnail color transform; alpha preserved",
+  "card_id": "cmtmvq6ss84l",
+  "revision": "employee-pass-a-redraw-20261010",
+  "backups": [
+    {
+      "path": ".tmp/imagegen/employee-pass-a-install-20261010/full-before.webp",
+      "bytes": 277178,
+      "sha256": "1ad9b02e8bdc3db5b611eb6941f04a4e04fc7793b827ac09506c08da27edb459"
+    },
+    {
+      "path": ".tmp/imagegen/employee-pass-a-install-20261010/thumb-before.webp",
+      "bytes": 8666,
+      "sha256": "69fc0f044f6f78efbb035b4d5991687c74b59f99ee8ef64595e39fe93072e90e"
+    }
+  ],
+  "raw": {
+    "path": ".tmp/imagegen/employee-pass-a-install-20261010/source.png",
+    "bytes": 857912,
+    "sha256": "dd0569c5ed773aa0dba5d0fc4f501fe9f60eb5c92ce37c221d25e7723aaba4c6"
+  },
+  "outputs": [
+    {
+      "path": "game/assets/cards/items/cmtmvq6ss84l.webp",
+      "bytes": 128136,
+      "sha256": "bb28b6a8b7913608456447b505f22eacc263b09348670299c6aa20b1084fe343"
+    },
+    {
+      "path": "game/assets/thumbs/cards/items/cmtmvq6ss84l.webp",
+      "bytes": 20812,
+      "sha256": "6ed85fd2dab1bf7dda6f49f88b8aa45ca9c92cafa10cc2bee5aa8bdebb997938"
+    }
+  ],
+  "verification": "Not run: tests/browser/build"
+}

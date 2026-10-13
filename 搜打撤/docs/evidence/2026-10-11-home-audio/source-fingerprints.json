@@ -1,0 +1,67 @@
+[
+  {
+    "path": "game/src/audio/sound.js",
+    "sha256": "1F1DE55F57A2A04704DB9055534F780BF01C60895640F517CB7D7173D063A473",
+    "mtime": "2026-10-11T12:56:31.8309585Z"
+  },
+  {
+    "path": "game/src/audio/sound.music.player.js",
+    "sha256": "3673C42B8EAD89E42CBB79F6375E8613969F900DA1C437A6EED8A0B632A1A869",
+    "mtime": "2026-10-11T12:56:31.8330680Z"
+  },
+  {
+    "path": "game/src/ui/home-menu-motion.js",
+    "sha256": "A9A9FF34070D032790C64288190431037F753D746652CB752FCB435CDC57CF1E",
+    "mtime": "2026-10-11T13:04:32.4698155Z"
+  },
+  {
+    "path": "game/src/ui/page-loading.js",
+    "sha256": "D289E97359699F0D4B142FD2F39F1F77AA5BBAD02D8D40FA1D074CC8046AD966",
+    "mtime": "2026-10-11T13:04:32.4748536Z"
+  },
+  {
+    "path": "game/src/ui/camp-entry.js",
+    "sha256": "B33A309035EEDBA80102A5E3E9EF7705F79240F30C5F792F5E8DDC0C4FE85CE0",
+    "mtime": "2026-10-11T13:04:32.4738458Z"
+  },
+  {
+    "path": "game/css/home-menu-motion.css",
+    "sha256": "EB4D1D680084D761A5C8AD7A2DB6DC8EBDBF4551572BFCF7D1655276EF4D61E2",
+    "mtime": "2026-10-11T13:04:32.4718191Z"
+  },
+  {
+    "path": "game/css/page-loading.css",
+    "sha256": "E8F0B5FAC5CF763E42AE01C9617DB590BA4DE535C96800919567E83B6EBB48D1",
+    "mtime": "2026-10-11T13:04:32.4768623Z"
+  },
+  {
+    "path": "tests/sound-music.test.js",
+    "sha256": "B19FB4B83318E413CA9489B2B253F7E63923A7954275523E2028AE2990443639",
+    "mtime": "2026-10-11T12:56:31.8340835Z"
+  },
+  {
+    "path": "tests/title-wallpaper.test.js",
+    "sha256": "D058ADB0C0F134D2135C84AB5C0C7BF26D49D87ECF7BFD929F95979179B0B4EF",
+    "mtime": "2026-10-11T13:05:32.1117158Z"
+  },
+  {
+    "path": "tests/home-menu-motion.test.js",
+    "sha256": "B6A2D383067B3364AC2F961F405CFA5221527DA617834E3DBA8861530828B538",
+    "mtime": "2026-10-11T13:05:32.1117158Z"
+  },
+  {
+    "path": "tests/page-loading.test.js",
+    "sha256": "E61044413EB87554F3F7836C81C3B5C9DCDAED333CD67CCF67FADAC1A5A1C9B5",
+    "mtime": "2026-10-11T13:04:32.4806283Z"
+  },
+  {
+    "path": "docs/audio-system.md",
+    "sha256": "D7998C4B6C3093C12D9BA4C0FA705A77C20194EDF9F35B3660F607D4B4477F6E",
+    "mtime": "2026-10-11T12:56:31.8350796Z"
+  },
+  {
+    "path": "docs/development.md",
+    "sha256": "76FCFFB7783A2B355F93D27E8EC153B79F876B3266C4C372A83BCD951EBCF258",
+    "mtime": "2026-10-11T13:05:32.1136504Z"
+  }
+]

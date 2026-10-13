@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-sapper-bomb",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-2cdadf50-cf6e-4631-8bb5-6bc1ac657a2f.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-sapper-bomb/cards-equip-tt3-sapper-bomb-source.png",
+        "bytes": 1634099,
+        "sha256": "319b88af9843ed364b20d22b009a7a1793af57f0ed758f3c2799c14b2bca2c40"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-sapper-bomb/cards-equip-tt3-sapper-bomb-full-before.webp",
+          "bytes": 53470,
+          "sha256": "a1d5f419e1c550773e70bca5b38f06d14e9084c050ed1dff89378dffcc7c5755"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-sapper-bomb/cards-equip-tt3-sapper-bomb-thumb-before.webp",
+          "bytes": 9422,
+          "sha256": "f3d483bed065e83696c92421ef29f3f553119e9a994f1d051fef3b3a6ca02d3d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt3-sapper-bomb.webp",
+          "bytes": 69448,
+          "sha256": "b3a9de01772a7bbf4d35ffa96c405f56821a24aea9ce685888e693850e4e0d21",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt3-sapper-bomb.webp",
+          "bytes": 11030,
+          "sha256": "83f5cea1eb6f8a7d01e9463dec969856f1f2c98229bfb89e2a831a9ebc81e230",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "sapper-bomb-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/equip-tt3-sapper-bomb.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 69448,
+            "sha256": "b3a9de01772a7bbf4d35ffa96c405f56821a24aea9ce685888e693850e4e0d21",
+            "source": "docs/evidence/2026-10-10-sapper-bomb/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/equip-tt3-sapper-bomb.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 9422,
+            "sha256": "f3d483bed065e83696c92421ef29f3f553119e9a994f1d051fef3b3a6ca02d3d",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/equip-tt3-sapper-bomb.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 11030,
+            "sha256": "83f5cea1eb6f8a7d01e9463dec969856f1f2c98229bfb89e2a831a9ebc81e230",
+            "source": "docs/evidence/2026-10-10-sapper-bomb/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 890,
+  "manifest_count_after": 891
+}

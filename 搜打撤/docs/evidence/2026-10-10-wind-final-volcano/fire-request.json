@@ -1,0 +1,51 @@
+{
+  "wind": "老板选定附件已接入，见wind/receipt.json",
+  "fire": "三候选未锁定男性身份；老板认可第三构图，已据现行常无欲男性立绘修正，待评价",
+  "items": [
+    {
+      "label": "候选1",
+      "style": "花开两面人物厚涂参考",
+      "status": "人物身份错误，未选",
+      "prompt": "Single square game-card composition draft, 充能火山. Preserve selected C storyboard: elevated diagonal view, slender androgynous mage in upper left with silver long hair, gold eyes, thin round glasses, pointed ears, oversized black witch hat, muted violet coat and black gloves. A gloved hand reaches diagonally toward lower right; a few black spell-paper fragments descend into a volcanic energy funnel there; one curved energy sweep links upper right to its pale hot center. No held fireball or literal landscape. No text/UI/frame. The attached flower card is STYLE ONLY, not subject/pose. Match that card's intimate anime face drawing, warm matte opaque gouache masses, irregular chunky but controlled hair locks, broad cloth planes and small purposeful colored structural lines. VARIANT 1: quiet portrait painting emphasis, restrained dark-purple and warm-gray large masses, ochre burnt-orange energy with limited ivory highlights. Character face and fingers selectively clear, coat surfaces mostly quiet, energy funnel simple curved bands with handmade edges. Low overall saturation and restrained contrast like flower-card cloth/hair. Visible economical painted coverage without fine scratch textures or thick oil ridges. Borrow the reference's broad HAND-PAINTED anime finish, not its girl/flower/clothes/background split. Do not make dark fragmented cloak shards or dozens of vivid thin fire strokes.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-112708bd-8676-4ff6-a500-d68e818df34c.png",
+      "saved": ".tmp/imagegen/wind-final-volcano-1010/fireNew1.png",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/hero-summoner.webp"
+      ]
+    },
+    {
+      "label": "候选2",
+      "style": "青龙偃月斩宽笔特效参考",
+      "status": "人物身份未锁定，未选",
+      "prompt": "Single square game-card composition draft, 充能火山. Preserve selected C storyboard: elevated diagonal view, slender androgynous mage in upper left with silver long hair, gold eyes, thin round glasses, pointed ears, oversized black witch hat, muted violet coat and black gloves. A gloved hand reaches diagonally toward lower right; a few black spell-paper fragments descend into a volcanic energy funnel there; one curved energy sweep links upper right to its pale hot center. No held fireball or literal landscape. No text/UI/frame. Attached dragon-slash card is the SOLE painting-style authority, not subject or pose. VARIANT 2: spare energetic wide-brush painting like that card: enormous quiet dark blue-gray negative-space masses, compact mage upper-left, one sweeping orange/ivory curved eruption dominates lower right. Translate its cyan dragon brushstroke language to a broad flame funnel: blunt large direction strokes and a few broken hand-painted boundaries, simplified symbolic magic, not detailed realistic flame or rock. Mage coat a few broad blue-black/violet planes, hair few substantial pale locks, readable modest anime face lines and economical glove. Strong light-dark composition, tiny concentrated warm highlights; empty surfaces deliberately quiet. No ornamental border, background scenery, texture filter, impasto, angular mosaics or full-frame confetti. Do not copy dragon, warrior or weapon from reference.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-0199bd8d-e075-45ea-8ff9-13104868c048.png",
+      "saved": ".tmp/imagegen/wind-final-volcano-1010/fireNew2.png",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt8-dragonblade.webp"
+      ]
+    },
+    {
+      "label": "候选3",
+      "style": "天剑诛魔冷暗硬边参考",
+      "status": "老板认可构图，要求修正常无欲男性身份与脸",
+      "prompt": "Single square game-card composition draft, 充能火山. Preserve selected C storyboard: elevated diagonal view, slender androgynous mage in upper left with silver long hair, gold eyes, thin round glasses, pointed ears, oversized black witch hat, muted violet coat and black gloves. A gloved hand reaches diagonally toward lower right; a few black spell-paper fragments descend into a volcanic energy funnel there; one curved energy sweep links upper right to its pale hot center. No held fireball or literal landscape. No text/UI/frame. Attached heavenly-sword card is STYLE ONLY. VARIANT 3: clean confident hand-painted anime with broad HARD-EDGE VALUE BLOCKS and expansive quiet surfaces matching reference: a deep ink-blue field, mage's violet-black cloak as one large connected dark shape, silver hair as a few crisp pale planes, a few brush bands define turns. Glove and small anime face readable, spare structural drawing. Use a large pale gold-white eruptive crescent/funnel with muted orange shadow side at lower right, a small cobalt-violet accent on mage. Bold broad value grouping and simple luminous silhouette like reference sword versus blue backdrop; irregular paint-edge variation, very little internal texture. More reserved and crisp than a swirling painterly fire illustration. Keep selected diagonal mage-to-funnel arrangement, not reference's frontal standing pose. Do not copy swords, white-haired girl identity, dress or ribbons. No glossy gradients, thick oily texture, dense short strokes, scattered triangular facets or uniform vector contour.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-0dd4314b-d578-4956-96e3-5689ce8aa816.png",
+      "saved": ".tmp/imagegen/wind-final-volcano-1010/fireNew3.png",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/wu-heavensword.webp"
+      ]
+    },
+    {
+      "label": "候选3男性修正版",
+      "style": "沿候选3构图与画法，常无欲定稿立绘作为唯一身份参考",
+      "status": "待老板评价，未替换火山卡面",
+      "prompt": "Precise identity correction of Image1 game-card draft. KEEP Image1 composition, elevated diagonal camera, mage position upper-left, reaching hand, dark cards, gold-white curved eruptive funnel lower-right, scale relationships, blue backdrop and broad opaque hard-edge paint language. Image2 is the EXCLUSIVE CHARACTER IDENTITY authority: Chang Wuyu is an ADULT MAN, not female or androgynous-girl redesign. Reproduce his actual face from Image2 with same long masculine facial proportions, restrained narrow golden eyes, nose/cheek/jaw structure, thin round glasses and small composed smile; preserve the gentle refined male identity, do not invent beard or exaggerated muscular masculinity. Replace Image1's girlish babyface completely. Correct hair to silver-gray LOW BUN behind his head plus long sidelocks falling beside shoulders, as Image2, not loose feminine flowing masses. Pointed ears, black bent-tip wide-brim hat with purple lining, black high-collared robe with violet lining, gold edges, black glove. Restore WHITE FEATHER and BLUE SAPPHIRE gold clasp brooch at his LEFT CHEST, like Image2, no moon pendant. Male straight chest and shoulder anatomy in robe. Image2 identity does not authorize copying its standing pose, white background, hand-on-glasses pose or accompanying fireball; keep Image1 action and framing. Make only character identity/face/hair/chest accessory changes, keep the chosen third composition and bold color shapes. Hand-painted anime, broad matte opaque planes and selective face/glove detail consistent with Image1, no fine-grain overlay or glossy 3D. Single square, no text/UI/frame.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-875ad99d-e469-411c-b953-e5557c3cbb9d.png",
+      "saved": ".tmp/imagegen/wind-final-volcano-1010/fireMaleFix.png",
+      "references": [
+        "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-0dd4314b-d578-4956-96e3-5689ce8aa816.png",
+        "D:/素材/代号柒/搜打撤/docs/character-bible/ref-images/changwuyu.webp"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+// 基地壳只挂载一次；浏览状态留在界面，交易继续使用原命令入口。
+export function presentHub(ui, html, icons) {
+  const current = document.getElementById('hubMain');
+  if (!current || ui.el?.overlay?.hidden || ui.el?.overlay?.classList.contains('closing')) {
+    ui.showOverlay('', html, 'page');
+    positionNavigation(document.getElementById('hubMain'));
+    return;
+  }
+  const template = document.createElement('template');
+  template.innerHTML = icons.rich ? icons.rich(html) : html;
+  const next = template.content.querySelector('#hubMain');
+  const page = current.querySelector('.hub-page');
+  const nextPage = next.querySelector('.hub-page');
+  const previousTab = current.querySelector('.hub-tab.on')?.dataset.tab;
+  const nextTab = next.querySelector('.hub-tab.on')?.dataset.tab;
+  const changed = page.dataset.view !== nextPage.dataset.view;
+  current.className = next.className;
+  const resources = current.querySelector('.hub-res');
+  const nextResources = next.querySelector('.hub-res');
+  if (resources.innerHTML !== nextResources.innerHTML) resources.innerHTML = nextResources.innerHTML;
+  current.querySelector('.hub-slot-label').textContent = next.querySelector('.hub-slot-label').textContent;
+  for (const button of current.querySelectorAll('.hub-tab')) {
+    const replacement = next.querySelector(`.hub-tab[data-tab="${button.dataset.tab}"]`);
+    button.className = replacement.className;
+    button.setAttribute('aria-pressed', replacement.getAttribute('aria-pressed'));
+    if (button.innerHTML !== replacement.innerHTML) button.innerHTML = replacement.innerHTML;
+  }
+  page.getAnimations?.().forEach(animation => animation.cancel());
+  page.className = nextPage.className.replace(' page-in', '');
+  page.dataset.view = nextPage.dataset.view;
+  const keptPortrait = updatePersonnel(page, nextPage, reducedMotion());
+  if (!keptPortrait) page.innerHTML = nextPage.innerHTML;
+  positionNavigation(current);
+  current.querySelector('.camp-notice')?.remove();
+  const notice = next.querySelector('.camp-notice');
+  if (notice) current.append(notice);
+  ui._acts = {};
+  if (changed && !keptPortrait && !reducedMotion() && page.animate) {
+    const subpage = previousTab === nextTab;
+    page.animate([
+      { opacity: .35, transform: subpage ? 'translateX(10px)' : 'translateY(12px)' },
+      { opacity: 1, transform: 'none' },
+    ], { duration: subpage ? 140 : 220, easing: 'cubic-bezier(.16,1,.3,1)' });
+  }
+}
+
+function reducedMotion() {
+  return document.body.classList.contains('reduce-motion') || !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+}
+function positionNavigation(root) {
+  const nav = root?.querySelector('.hub-tabs'), target = nav?.querySelector('.hub-tab.on');
+  if (!target) return;
+  let marker = nav.querySelector('.camp-navigation-indicator');
+  if (!marker) { marker = document.createElement('span'); marker.className = 'camp-navigation-indicator'; marker.setAttribute('aria-hidden', 'true'); nav.append(marker); }
+  marker.style.height = `${target.offsetHeight}px`;
+  marker.style.transform = `translateY(${target.offsetTop}px)`;
+  const page = root.querySelector('.hub-page'), inspector = root.querySelector('.warehouse-inspector');
+  if (page && inspector && page.clientHeight) inspector.style.maxHeight = `${Math.max(400, page.clientHeight - inspector.offsetTop - 32)}px`;
+}
+function updatePersonnel(page, next, reduced) {
+  const hero = page.querySelector('.person-hero'), nextHero = next.querySelector('.person-hero');
+  const details = page.querySelector('.person-stage .person-details'), nextDetails = next.querySelector('.person-stage .person-details');
+  if (!hero || !nextHero || !details || !nextDetails) return false;
+  const image = hero.querySelector('img'), nextImage = nextHero.querySelector('img');
+  const changedPerson = image.alt !== nextImage.alt;
+  if (image.src !== nextImage.src) image.src = nextImage.src;
+  image.alt = nextImage.alt;
+  hero.dataset.skin = nextHero.dataset.skin;
+  hero.querySelector('figcaption').innerHTML = nextHero.querySelector('figcaption').innerHTML;
+  for (const nav of page.querySelectorAll('.person-groups, .person-sections')) nav.innerHTML = next.querySelector(`.${nav.className}`).innerHTML;
+  for (const button of page.querySelectorAll('.person-face')) {
+    const replacement = next.querySelector(`.person-face[data-character="${button.dataset.character}"]`);
+    button.className = replacement.className; button.setAttribute('aria-pressed', replacement.getAttribute('aria-pressed'));
+  }
+  details.getAnimations?.().forEach(animation => animation.cancel());
+  hero.getAnimations?.().forEach(animation => animation.cancel());
+  details.innerHTML = nextDetails.innerHTML;
+  if (!reduced && details.animate) details.animate([{ opacity: .4, transform: 'translateX(10px)' }, { opacity: 1, transform: 'none' }], { duration: 160, easing: 'ease-out' });
+  if (changedPerson && !reduced && hero.animate) hero.animate([{ opacity: .45, transform: 'translateX(-12px)' }, { opacity: 1, transform: 'none' }], { duration: 240, easing: 'ease-out' });
+  return true;
+}
+
+export function bindHubBrowse(root, scroll, focus) {
+  const page = root.querySelector('.hub-page');
+  page.onscroll = () => scroll.set(page.dataset.view, page.scrollTop);
+  if (root.dataset.browseBound) return;
+  root.dataset.browseBound = 'true';
+  const remember = event => {
+    const control = event.target.closest?.('[data-act]');
+    if (control) focus.set(page.dataset.view, { ...control.dataset });
+  };
+  root.addEventListener('focusin', remember);
+  root.addEventListener('click', remember, true);
+}
+
+export function restoreHubFocus(viewKey, focus) {
+  const restore = () => {
+    if (document.querySelector('#hubMain .hub-page')?.dataset.view !== viewKey) return;
+    const data = focus.get(viewKey);
+    if (!data) return;
+    const target = [...document.querySelectorAll('#hubMain [data-act]')].find(element =>
+      Object.entries(data).every(([key, value]) => key === 'initialFocus' || element.dataset[key] === value));
+    target?.setAttribute('data-initial-focus', '');
+    target?.focus({ preventScroll: true });
+  };
+  if (!document.getElementById('cardZoom')) { restore(); return null; }
+  const observer = new MutationObserver(() => {
+    if (document.getElementById('cardZoom')) return;
+    observer.disconnect(); restore();
+  });
+  observer.observe(document.body, { childList: true });
+  return observer;
+}

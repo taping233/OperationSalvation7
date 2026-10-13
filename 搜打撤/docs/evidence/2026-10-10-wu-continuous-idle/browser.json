@@ -1,0 +1,17 @@
+{
+  "platform": "Codex in-app browser",
+  "url": "http://127.0.0.1:5200/art-source/characters/wu-slim-sprites-20261010/continuous-idle/index.html",
+  "viewport": "current window; no override",
+  "inputScope": "real locator clicks: export, pause, reset, next frame, resume",
+  "ready": true,
+  "nativeCanvas": [576, 560],
+  "exportedFrameCount": 72,
+  "exportSource": "C:/Users/太平/Downloads/wu-continuous-idle-72 (1).zip",
+  "loopEndpointCheckIncluded": true,
+  "observedStepState": "新版 2/72 · 24帧/秒 · 已暂停",
+  "observedResumeState": "新版 8/72 · 24帧/秒 · 播放中",
+  "errorWarnLogs": [],
+  "visualReview": "same face/dress silhouette remains stable; continuous small chest/hand movement; no pose swaps or ground jumps",
+  "screenshot": "comparison.png",
+  "limits": "idle preview and exported frames only; no battle integration or other actions"
+}

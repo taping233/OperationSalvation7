@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-12",
+  "scope": "only three invalid XML comments and their new exact manifest entries",
+  "assets": [
+    {
+      "path": "battle/fx-sticker-boom.svg",
+      "ext": "svg",
+      "license": "项目既有 SVG（原来源未重新核实；本轮仅修 XML 注释）",
+      "bytes": 622,
+      "sha256": "eca66c857d088328ab69985fd060bd7efb925e54a60585ad60dabdcd76b6bcd0",
+      "source": "docs/evidence/2026-10-12-feedback-remaining/combat-followup.md"
+    },
+    {
+      "path": "battle/fx-sticker-hurt.svg",
+      "ext": "svg",
+      "license": "项目既有 SVG（原来源未重新核实；本轮仅修 XML 注释）",
+      "bytes": 658,
+      "sha256": "95bbd27bc13f4ce352c711bd46c12f556578576f36c149a5acd42f8abaf6c082",
+      "source": "docs/evidence/2026-10-12-feedback-remaining/combat-followup.md"
+    },
+    {
+      "path": "battle/fx-sticker-heal.svg",
+      "ext": "svg",
+      "license": "项目既有 SVG（原来源未重新核实；本轮仅修 XML 注释）",
+      "bytes": 517,
+      "sha256": "6d4e97b16b47846f3adfe56ef5b6243507903955053a5c245dd37e22599334b3",
+      "source": "docs/evidence/2026-10-12-feedback-remaining/combat-followup.md"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-12",
+  "items": [
+    {
+      "skin": "casual",
+      "source": "C:/Users/太平/.codex/generated_images/01a12ba3-50bc-7202-8283-c7fd92faa263/exec-fe697313-074a-414e-adb1-996a95cecac2.png",
+      "asset": "portraits/full/wu-casual-v12.webp",
+      "prompt": "Reference 1 controls Wu's identity and painterly art style: the SAME young adult anime woman, silver-white straight high ponytail, cyan-blue eyes, black round goggles above the forehead, black rose and blue ribbon together at the ponytail root, subtle confident little fang smile. Reference 2 controls ONLY the skin's outfit/theme, not its old seated framing, background or face. Reference 3 controls natural adult leg proportions; no chibi, no giant head, no exaggerated long legs. Economical opaque hand-painted anime, broad connected matte color masses, hard-edged cool-grey shadows, loose visible brush strokes, very little detail; prioritize readable eyes and hands. No glossy 3D, smooth airbrush, fine hair strands, dense textile folds or texture noise.\nSpring motorcycling casual skin. Preserve the original oversized cobalt-blue crewneck sweatshirt, black shorts and charcoal lace-up ankle boots. Render her standing with both boots fully visible, one hand casually resting at her hip. Keep the same identity accessories on the forehead and ponytail. No motorcycle or flowers. The sweatshirt's folds should be a few broad planes.\nCreate exactly ONE full-body standing skin portrait, portrait canvas 1024x1536, genuinely transparent background. Same anatomy and scale across this set: roughly 7.5-head adult proportions; body centered at x=512, top of hair around y=80, soles of both shoes on y=1460; complete hair, hands and footwear visible with generous margin. Relaxed upright three-quarter front catalog pose, shoulders level, no strong foreshortening. No scenery, seating, motorcycle, branches, furniture, city, water, text, frame or watermark. Clothing may vary but body proportions must match the reference.",
+      "references": [
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu-casual.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/wu-battle-base-frame000.png"
+      ]
+    },
+    {
+      "skin": "spring",
+      "source": "C:/Users/太平/.codex/generated_images/01a12ba3-50bc-7202-8283-c7fd92faa263/exec-a90b9be0-453b-48e8-bfd9-9b1f5c0cadc8.png",
+      "asset": "portraits/full/wu-spring-v12.webp",
+      "prompt": "Reference 1 controls Wu's identity and painterly art style: the SAME young adult anime woman, silver-white straight high ponytail, cyan-blue eyes, black round goggles above the forehead, black rose and blue ribbon together at the ponytail root, subtle confident little fang smile. Reference 2 controls ONLY the skin's outfit/theme, not its old seated framing, background or face. Reference 3 controls natural adult leg proportions; no chibi, no giant head, no exaggerated long legs. Economical opaque hand-painted anime, broad connected matte color masses, hard-edged cool-grey shadows, loose visible brush strokes, very little detail; prioritize readable eyes and hands. No glossy 3D, smooth airbrush, fine hair strands, dense textile folds or texture noise.\nNew Year qipao skin. Preserve the original red high-collar long qipao, restrained warm gold edging and dark embroidered low shoes, but simplify decorative marks to a few painterly accents. Standing naturally, holding one small neutral-grey tea cup at waist height. Complete shoes visible. Keep Wu's long straight ponytail, forehead goggles and black rose/blue ribbon anchors despite the costume change. No chair, table, lantern or plum branches. No exaggerated slit or sexualized pose.\nCreate exactly ONE full-body standing skin portrait, portrait canvas 1024x1536, genuinely transparent background. Same anatomy and scale across this set: roughly 7.5-head adult proportions; body centered at x=512, top of hair around y=80, soles of both shoes on y=1460; complete hair, hands and footwear visible with generous margin. Relaxed upright three-quarter front catalog pose, shoulders level, no strong foreshortening. No scenery, seating, motorcycle, branches, furniture, city, water, text, frame or watermark. Clothing may vary but body proportions must match the reference.",
+      "references": [
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu-spring.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/wu-battle-base-frame000.png"
+      ]
+    },
+    {
+      "skin": "beach",
+      "source": "C:/Users/太平/.codex/generated_images/01a12ba3-50bc-7202-8283-c7fd92faa263/exec-49db3d3f-b006-4779-8b60-dc20b97f2e77.png",
+      "asset": "portraits/full/wu-beach-v12.webp",
+      "prompt": "Reference 1 controls Wu's identity and painterly art style: the SAME young adult anime woman, silver-white straight high ponytail, cyan-blue eyes, black round goggles above the forehead, black rose and blue ribbon together at the ponytail root, subtle confident little fang smile. Reference 2 controls ONLY the skin's outfit/theme, not its old seated framing, background or face. Reference 3 controls natural adult leg proportions; no chibi, no giant head, no exaggerated long legs. Economical opaque hand-painted anime, broad connected matte color masses, hard-edged cool-grey shadows, loose visible brush strokes, very little detail; prioritize readable eyes and hands. No glossy 3D, smooth airbrush, fine hair strands, dense textile folds or texture noise.\nSummer water-gun skin for the SAME adult character. Preserve a modest navy-blue one-piece swimsuit with a few large white stars, loose white open summer jacket and one simplified orange-and-grey toy water blaster held down at her side. Neutral upright non-sexual character-catalog pose, blue-grey flat beach sandals with both soles on the shared baseline. Keep ponytail, forehead goggles and black rose/blue ribbon identity anchors. No scenery, block to sit on, skyline or water.\nCreate exactly ONE full-body standing skin portrait, portrait canvas 1024x1536, genuinely transparent background. Same anatomy and scale across this set: roughly 7.5-head adult proportions; body centered at x=512, top of hair around y=80, soles of both shoes on y=1460; complete hair, hands and footwear visible with generous margin. Relaxed upright three-quarter front catalog pose, shoulders level, no strong foreshortening. No scenery, seating, motorcycle, branches, furniture, city, water, text, frame or watermark. Clothing may vary but body proportions must match the reference.",
+      "references": [
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu-beach.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/wu-battle-base-frame000.png"
+      ]
+    }
+  ]
+}

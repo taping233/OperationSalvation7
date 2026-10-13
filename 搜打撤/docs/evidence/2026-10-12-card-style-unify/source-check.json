@@ -1,0 +1,41 @@
+{
+  "files": [
+    {
+      "path": "game/css/cards.css",
+      "beforeSha256": "51c99bbabb76382e6f56346aa0e157338377cf08c287cafc56970aa2c3703435",
+      "afterSha256": "3594bf2e459c668fb58a466586a4214e9950c0454dc729842611af6284285d4b"
+    },
+    {
+      "path": "game/css/base-cohesion-v5.css",
+      "beforeSha256": "f020574ba7ea72ff84b466776010d7589dc22ee8d343b1fffd56ff0e271dd1b0",
+      "afterSha256": "3d2ddd89fb7e1e3d11d7cc3d2d35295ba0e05d1e967ddfeb987ff49f79aa777e"
+    },
+    {
+      "path": "game/css/page-shop.css",
+      "beforeSha256": "39e0aee0f6e81a72ee48072f84fc9ff8882a69713c417d3d7ec62e9855f0fc06",
+      "afterSha256": "ad559010709f6cd9e98feb7d82b2904474754ae3a819e83051124318cc2446bb"
+    },
+    {
+      "path": "game/css/departure-cover.css",
+      "beforeSha256": "06a407e2f5c9156f7751594150e7f3e6349bc41095f4b20b68860d7f2941094a",
+      "afterSha256": "de1c2b26e6b2c6ea8dcf4eb1267d4b1d43e10859cececed46e3af4c5d4c04c8f"
+    },
+    {
+      "path": "game/css/expedition-inventory.css",
+      "beforeSha256": "1081dedb8d00cbdd73586699ca216f6a2807201fa717ab2539633c2d4293787f",
+      "afterSha256": "751e1b14cd0187de07bf2e83da9854e7ee9387e1d214a5f2fa7723e709257043"
+    },
+    {
+      "path": "game/css/scenes.css",
+      "beforeSha256": "772c48469722cb0ee38de25f46d8dbe369e0ff390110ca2a786c6df8bcd2b06c",
+      "afterSha256": "9cd4265bfb974c6d784234176b5472143fde46e4508853aeee50f219437a026c"
+    },
+    {
+      "path": "game/css/tactical-card-redesign.css",
+      "beforeSha256": "7dd9878931bf0c5ef4bdca33d3790e5682d9f04cef92e64508f5eff02fd3f8d5",
+      "afterSha256": "0ec4ac746cb4660db08a33bc9695ef86548ecb268f597153550f1dba4732a398"
+    }
+  ],
+  "cssParse": "passed",
+  "backup": "node_modules/.cache/card-style-unify-1012-before"
+}

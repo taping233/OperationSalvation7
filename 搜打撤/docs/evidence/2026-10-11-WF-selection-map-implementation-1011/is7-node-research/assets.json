@@ -1,0 +1,319 @@
+{
+  "sourcePage": "https://arkrog.com/tool/blackflowmap",
+  "sourceModule": "https://arkrog.com/assets-v2/index-C-GScw2O.js",
+  "provenance": "20 labels from public site module; 4 supplementary labels qualified. 22 260x260 node assets plus 45x45 empty and 176x176 anchor. No evidence of higher-resolution official source. Original alpha retained, native size displayed on black.",
+  "assets": [
+    {
+      "id": "battle_normal",
+      "label": "作战",
+      "url": "https://arkrog.com/images/map/battle_normal.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "6b26cea6338513406a241415964e06c4a20ae0af91b6740fb02496a32ed5dffd",
+      "bytes": 14080,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "battle_elite",
+      "label": "紧急作战",
+      "url": "https://arkrog.com/images/map/battle_elite.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "c37a0c93f98819fb778d239d2f2b9f059d3bdef98bce263c4ce4b63f6af77686",
+      "bytes": 13038,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "battle_savage",
+      "label": "“居民”据点",
+      "url": "https://arkrog.com/images/map/battle_savage.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "809d4acc1340ddb1c4d3b593441fbb5b185e6bf7b050cebd07e6d186ede4a0fd",
+      "bytes": 13906,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "battle_boss_cadejo",
+      "label": "险路恶敌（cadejo）",
+      "url": "https://arkrog.com/images/map/battle_boss_cadejo.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "85befaff2e86d1fbdd2853054931640318f7a43908849536d21e8141c2fac3d8",
+      "bytes": 20006,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "battle_mid_boss_shsgzd",
+      "label": "特殊首脑（名称未核）",
+      "url": "https://arkrog.com/images/map/battle_mid_boss_shsgzd.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "9cc2947c28b86147bd1d0b04d659d0d8296b5bba6bfb824325556b3304a08d51",
+      "bytes": 18308,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "shop",
+      "label": "诡意行商",
+      "url": "https://arkrog.com/images/map/shop.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "794e06d5bb4f7d5ffcae6bff2329ef25b4bddcae138a7b737667a82cfc877cd9",
+      "bytes": 10240,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "scrap_shop",
+      "label": "秘境行商",
+      "url": "https://arkrog.com/images/map/scrap_shop.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "028af8dba4e8868799290f3c703a02d7f78fad78b156a0f030f5b694583bb800",
+      "bytes": 9382,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "rest",
+      "label": "安全的角落",
+      "url": "https://arkrog.com/images/map/rest.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "6411930696ba7c1c1648099524efadea8219edece27b523a9b9c7cfd180a5d5f",
+      "bytes": 10988,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "incident",
+      "label": "不期而遇",
+      "url": "https://arkrog.com/images/map/incident.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "2df185e2cb0ab8f8cdd1e7076295999e15a06c3437c58d7c8108fe4d693d7645",
+      "bytes": 10524,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "wish",
+      "label": "得偿所愿",
+      "url": "https://arkrog.com/images/map/wish.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "5fcb48af1da0e90de66cb4b7b69cc8366ab8cad93304f11d80ff65e85767b2cb",
+      "bytes": 10542,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "sacrifice",
+      "label": "失与得",
+      "url": "https://arkrog.com/images/map/sacrifice.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "ff7375bf26433d7d866e02c217483ed5fe0186117d5513f0fa494227c6004584",
+      "bytes": 10334,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "expedition",
+      "label": "先行一步",
+      "url": "https://arkrog.com/images/map/expedition.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "1adfe41d92d6cb0ccea4eba78839517a4992d15a165a6b45a1b3249620a63478",
+      "bytes": 10326,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "duel",
+      "label": "狭路相逢",
+      "url": "https://arkrog.com/images/map/duel.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "cd8ae8bc98dc5b71d3480f77e7288e44bc49184194bf46c0103a6863a78d9ce3",
+      "bytes": 12528,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "door",
+      "label": "曲折密道",
+      "url": "https://arkrog.com/images/map/door.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "3991a1126858c525820b09d4d5513d902e697ddeadcefc34678a0edfaa51ea05",
+      "bytes": 14574,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "portal",
+      "label": "误入奇境",
+      "url": "https://arkrog.com/images/map/portal.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "103147306ffec9a432ff521fae1d631a6dd22bbf0e23ad2dd28db8ce24960af6",
+      "bytes": 7668,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "evacuate",
+      "label": "险路小径",
+      "url": "https://arkrog.com/images/map/evacuate.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "718e800d7f38de5e9d7cf641be20fbdea2a4fa77a4c8d6fb670404110f79cc96",
+      "bytes": 17632,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "employ",
+      "label": "应急助力",
+      "url": "https://arkrog.com/images/map/employ.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "6303c17767abec316acdcb6582416f06ae45c37015a8f083a8a7e5a909bd056c",
+      "bytes": 10238,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "light",
+      "label": "羽瞰点",
+      "url": "https://arkrog.com/images/map/light.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "c1fd134436cb1baca422f23863d77fd072329169ac3a158a8ba52a8c60e9ac03",
+      "bytes": 9250,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "story",
+      "label": "命运所指",
+      "url": "https://arkrog.com/images/map/story.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "63b59a5d942291e713f8c5f49d7c732ca317ceaa0659a43e0035a35d68b5d812",
+      "bytes": 11080,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "final",
+      "label": "区域终点（资源ID）",
+      "url": "https://arkrog.com/images/map/final.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "6a438ddd427f546167e378aeaf5747331850aa7138c4f7b23ba8755995ee3a53",
+      "bytes": 16190,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "hide_battle",
+      "label": "未知的凶戾",
+      "url": "https://arkrog.com/images/map/hide_battle.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "018ba63678f84e3e4d1770a59af683122737300006f50f1a365492419e519e15",
+      "bytes": 11678,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "hide_invisible",
+      "label": "未知的诡秘",
+      "url": "https://arkrog.com/images/map/hide_invisible.webp",
+      "size": [
+        260,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "8adbb8cdf9a26b5bd5d1b63c171c7c51fa8fdf3b594f50678a0ef0a0d29ed5ab",
+      "bytes": 10248,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "empty",
+      "label": "林间空地",
+      "url": "https://arkrog.com/images/map/empty.webp",
+      "size": [
+        45,
+        45
+      ],
+      "mode": "RGBA",
+      "sha256": "5f9f373989f446caea5b52874a51bf3e0fcadc375830fce8edbdf14a7c103edb",
+      "bytes": 1402,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    },
+    {
+      "id": "cursor_anchor",
+      "label": "定位标记",
+      "url": "https://arkrog.com/images/map/cursor_anchor.webp",
+      "size": [
+        176,
+        176
+      ],
+      "mode": "RGBA",
+      "sha256": "dd75b1644d0e5e1a801806c86667911c84cff7665bb143718f23a50d712d3e37",
+      "bytes": 1552,
+      "role": "Third-party publicly provided reference asset only, not integrated into game"
+    }
+  ]
+}

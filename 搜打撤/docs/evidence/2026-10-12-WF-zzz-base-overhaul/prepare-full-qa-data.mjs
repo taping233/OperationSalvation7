@@ -1,0 +1,17 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const evidence=path.dirname(fileURLToPath(import.meta.url));
+const repo=path.resolve(evidence,'../../..');
+const game=path.join(repo,'.tmp/zzz-base-observe-1012/game');
+const base=JSON.parse(await fs.readFile(path.join(evidence,'qa-fixture.json'),'utf8')).base;
+const cards=JSON.parse(await fs.readFile(path.join(repo,'game/data/cards-sync.json'),'utf8')).cards;
+base.stash=cards.slice(0,25).map(card=>({card,count:1}));
+base.stats.labTotalScore=1500;
+await fs.writeFile(path.join(evidence,'qa-full-fixture.json'),JSON.stringify({origin:'http://127.0.0.1:5335',slot:2,base,purpose:'仓库满的领取拒绝；只构造5335独立测试档位，不改变规则与玩家数据'},null,2));
+await fs.writeFile(path.join(game,'qa-full-seed.js'),`if(location.origin==='http://127.0.0.1:5335'&&sessionStorage.getItem('zzz-base-qa-full')!=='full-slot2-v2'){localStorage.setItem('sdt-base-v2-slot2',${JSON.stringify(JSON.stringify(base))});sessionStorage.setItem('zzz-base-qa-full','full-slot2-v2');}\n`);
+const indexFile=path.join(game,'index.html');
+let html=await fs.readFile(indexFile,'utf8');
+if(!html.includes('/qa-full-seed.js'))html=html.replace('<head>','<head>\n<script src="/qa-full-seed.js"></script>');
+await fs.writeFile(indexFile,html);
+console.log(JSON.stringify({origin:'http://127.0.0.1:5335',slot:2,capacityUsed:25,mainDataChanged:false}));

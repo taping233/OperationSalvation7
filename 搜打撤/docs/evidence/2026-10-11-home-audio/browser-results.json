@@ -1,0 +1,345 @@
+{
+  "source": "Codex In-app Browser",
+  "url": "http://localhost:5200/",
+  "viewport": "1523x956",
+  "input": "真实按钮点击；悬停使用当前内置浏览器 CDP 鼠标输入；临时只读动画采样与音频节点探针已清理或随刷新移除",
+  "restoreBefore": {
+    "frames": 189,
+    "first": {
+      "ms": 13,
+      "phase": "in",
+      "scene": {
+        "opacity": "0",
+        "animation": "homeDrift, homeWake",
+        "delay": "0s, 0s"
+      },
+      "left": {
+        "opacity": "0",
+        "animation": "homeRestoreLeft",
+        "delay": "0s"
+      },
+      "right": {
+        "opacity": "0",
+        "animation": "homeRestoreRight",
+        "delay": "0.08s"
+      },
+      "start": {
+        "opacity": "1",
+        "animation": "none",
+        "delay": "0.16s"
+      }
+    },
+    "last": {
+      "ms": 1601,
+      "phase": "rest",
+      "scene": {
+        "opacity": "0.972843",
+        "animation": "homeDrift, homeWake",
+        "delay": "0s, 0s"
+      },
+      "left": {
+        "opacity": "1",
+        "animation": "none",
+        "delay": "0s"
+      },
+      "right": {
+        "opacity": "1",
+        "animation": "none",
+        "delay": "0s"
+      },
+      "start": {
+        "opacity": "1",
+        "animation": "none",
+        "delay": "0s"
+      }
+    },
+    "sceneMin": 0,
+    "phaseChange": [
+      {
+        "ms": 13,
+        "phase": "in",
+        "scene": {
+          "opacity": "0",
+          "animation": "homeDrift, homeWake",
+          "delay": "0s, 0s"
+        },
+        "start": {
+          "opacity": "1",
+          "animation": "none",
+          "delay": "0.16s"
+        }
+      },
+      {
+        "ms": 746,
+        "phase": "rest",
+        "scene": {
+          "opacity": "0.567721",
+          "animation": "homeDrift, homeWake",
+          "delay": "0s, 0s"
+        },
+        "start": {
+          "opacity": "1",
+          "animation": "none",
+          "delay": "0s"
+        }
+      }
+    ]
+  },
+  "restoreAfter": {
+    "frames": 200,
+    "first": {
+      "ms": 14,
+      "phase": "in",
+      "scene": {
+        "opacity": "1",
+        "animation": "homeDrift",
+        "delay": "0s"
+      },
+      "left": {
+        "opacity": "0",
+        "animation": "homeRestoreLeft",
+        "delay": "0s"
+      },
+      "right": {
+        "opacity": "0",
+        "animation": "homeRestoreRight",
+        "delay": "0.28s"
+      },
+      "start": {
+        "opacity": "0",
+        "animation": "homeRestoreItem",
+        "delay": "0.17s"
+      },
+      "guide": {
+        "opacity": "0",
+        "animation": "homeRestoreItem",
+        "delay": "0.27s"
+      },
+      "achievements": {
+        "opacity": "0",
+        "animation": "homeRestoreItem",
+        "delay": "0.43s"
+      },
+      "photo": {
+        "opacity": "0",
+        "animation": "homeRestoreItem",
+        "delay": "0.51s"
+      }
+    },
+    "last": {
+      "ms": 1709,
+      "phase": "rest",
+      "scene": {
+        "opacity": "1",
+        "animation": "homeDrift",
+        "delay": "0s"
+      },
+      "left": {
+        "opacity": "1",
+        "animation": "none",
+        "delay": "0s"
+      },
+      "right": {
+        "opacity": "1",
+        "animation": "none",
+        "delay": "0s"
+      },
+      "start": {
+        "opacity": "1",
+        "animation": "none",
+        "delay": "0s"
+      },
+      "guide": {
+        "opacity": "1",
+        "animation": "none",
+        "delay": "0s"
+      },
+      "achievements": {
+        "opacity": "1",
+        "animation": "none",
+        "delay": "0s"
+      },
+      "photo": {
+        "opacity": "1",
+        "animation": "none",
+        "delay": "0s"
+      }
+    },
+    "sceneMin": 1,
+    "phaseChange": [
+      {
+        "ms": 14,
+        "phase": "in",
+        "scene": {
+          "opacity": "1",
+          "animation": "homeDrift",
+          "delay": "0s"
+        },
+        "start": {
+          "opacity": "0",
+          "animation": "homeRestoreItem",
+          "delay": "0.17s"
+        }
+      },
+      {
+        "ms": 1374,
+        "phase": "rest",
+        "scene": {
+          "opacity": "1",
+          "animation": "homeDrift",
+          "delay": "0s"
+        },
+        "start": {
+          "opacity": "1",
+          "animation": "none",
+          "delay": "0s"
+        }
+      }
+    ]
+  },
+  "achievementCut": {
+    "first": {
+      "ms": 211,
+      "loading": false,
+      "leaving": false,
+      "cut": {
+        "name": "campCutReveal",
+        "duration": "0.8s",
+        "state": "running"
+      },
+      "scenery": {
+        "name": "campSceneryPass",
+        "duration": "0.74s",
+        "state": "running"
+      },
+      "caption": {
+        "name": "campEntryCaption",
+        "duration": "0.76s",
+        "state": "running"
+      },
+      "register": {
+        "name": "campRegisterReveal",
+        "duration": "0.7s",
+        "state": "running"
+      }
+    },
+    "last": {
+      "ms": 1168,
+      "loading": false,
+      "leaving": false,
+      "cut": {
+        "name": "campCutReveal",
+        "duration": "0.8s",
+        "state": "running"
+      },
+      "scenery": {
+        "name": "campSceneryPass",
+        "duration": "0.74s",
+        "state": "running"
+      },
+      "caption": {
+        "name": "campEntryCaption",
+        "duration": "0.76s",
+        "state": "running"
+      },
+      "register": {
+        "name": "campRegisterReveal",
+        "duration": "0.7s",
+        "state": "running"
+      }
+    },
+    "frames": 93
+  },
+  "photoCut": {
+    "first": {
+      "ms": 200,
+      "loading": true,
+      "leaving": false,
+      "cut": {
+        "name": "campCutReveal",
+        "duration": "0.8s",
+        "state": "paused"
+      },
+      "scenery": {
+        "name": "campSceneryPass",
+        "duration": "0.74s",
+        "state": "paused"
+      },
+      "caption": {
+        "name": "campEntryCaption",
+        "duration": "0.76s",
+        "state": "paused"
+      },
+      "register": {
+        "name": "campRegisterReveal",
+        "duration": "0.7s",
+        "state": "paused"
+      }
+    },
+    "revealing": {
+      "ms": 474,
+      "loading": true,
+      "leaving": true,
+      "cut": {
+        "name": "campCutReveal",
+        "duration": "0.8s",
+        "state": "running"
+      },
+      "scenery": {
+        "name": "campSceneryPass",
+        "duration": "0.74s",
+        "state": "running"
+      },
+      "caption": {
+        "name": "campEntryCaption",
+        "duration": "0.76s",
+        "state": "running"
+      },
+      "register": {
+        "name": "campRegisterReveal",
+        "duration": "0.7s",
+        "state": "running"
+      }
+    },
+    "last": {
+      "ms": 1410,
+      "loading": true,
+      "leaving": true,
+      "cut": {
+        "name": "campCutReveal",
+        "duration": "0.8s",
+        "state": "running"
+      },
+      "scenery": {
+        "name": "campSceneryPass",
+        "duration": "0.74s",
+        "state": "running"
+      },
+      "caption": {
+        "name": "campEntryCaption",
+        "duration": "0.76s",
+        "state": "running"
+      },
+      "register": {
+        "name": "campRegisterReveal",
+        "duration": "0.7s",
+        "state": "running"
+      }
+    },
+    "frames": 109,
+    "studio": true,
+    "coverRemoved": true
+  },
+  "audio": {
+    "autoplayAttempted": true,
+    "freshNavigationBlockedByBrowser": true,
+    "firstClickPlaying": true,
+    "titleHoverGain": 0.055,
+    "titleHoverRate": 0.82,
+    "titleHoverLowpassHz": 1200
+  },
+  "limitations": [
+    "未作主观听感评价",
+    "浏览器每次刷新仍限制无交互的音频播放"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "card_id": "tt2-turtlearmor",
+      "asset": "cards/martial-tt2-turtlearmor.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a125fc-1da2-7300-83db-f2b39e275c76/exec-2b224041-9d68-4736-9e4e-6924eafd8452.png",
+      "revision": "forge-armor-contact-rough-20261011",
+      "prompt": "Use case: style-transfer with structural correction. Create one square card illustration for 铸甲: forging equipment into protective armor.\nInput 1 is the NovelAI draft, controls diagonal camera/crop, hammer descending from upper-left, steel plate supported at lower-right, dark blue and rust-orange abstract background. Fix its malformed hammer and cylindrical plate. Input 2 is the user-approved 寻宝 painting: STYLE ONLY, broad directional opaque matte swipes, confident handmade edges, grouped hard shadows, calm large material masses, concentrated event focus. Input 3 初始攻击 is STYLE ONLY for steel planes, economical material handling and the clear small contact accent. Do not copy their chest, search rays or swords.\nShow a heavy SINGLE square-faced forge hammer descending diagonally from upper-left; short visible handle section exits the upper-left edge. ONE rectangular steel hammer head only, NO second horizontal head, pointed spike or duplicate handle. Its broad bottom face actually TOUCHES the heated armor at center, no gap. In lower-right is a recognizable curved BREASTPLATE metal shell: shallow concave neckline toward upper-right, small shoulder-edge segment, curved convex chest plane sweeping down beyond lower/right edge. Not a tube, cylinder, bucket, ingot or armor being worn. Rest its underside on a dark cropped anvil block along the bottom. A narrow warm orange strip under the hammer is being pressed smooth into the armor. Armor is intact, newly shaped, not cracked, shattered or damaged. Tiny ivory-orange core at contact, only TWO short muted ochre spark strokes pointing away. Keep whole hammer handle, full armor and anvil secondary portions cropped; event center must dominate the picture.\nRepaint in the broad brush grammar of Inputs 2–3. Loaded flat brush, wide curved steel-gray strokes establish the breastplate volume; a broad cool shadow and a few restrained midtone turns; large quiet painted areas. Hammer planes made from blunt charcoal dabs and sparse steel-gray highlights. A few muted umber/orange underpaint remnants show near the heated edge. Broad long uneven swipes follow downward hammer and curved armor; hard grouped shadows and uneven handmade stroke endings. Keep sharpest bright-dark contact edge at the forging point. No black contour network, fine etching, smooth metal gradients, polished photographic reflections, little triangular facet mosaics, granular filter or all-over scratch texture.\nPreserve the deep blue-gray background with ONE broad muted rust-orange diagonal color sweep, painted as large subdued masses, no flames or workshop environment. No characters, hands, faces, decorative armor motifs, extra tools, rubble or scattered sparks. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/.tmp/nai/output/forge-armor-20261011/armor.png",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt3-treasure-hunt.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/expedition-starters/basic-attack.webp"
+      ]
+    }
+  ]
+}

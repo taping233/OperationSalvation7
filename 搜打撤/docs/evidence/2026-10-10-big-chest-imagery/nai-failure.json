@@ -1,0 +1,8 @@
+{
+  "status": "blocked",
+  "reason": "NAI HTTP 429 shared cooldown",
+  "retry_not_before": "2026-10-10 22:44:34 +08:00",
+  "installed": false,
+  "existing_assets_unchanged": true,
+  "attempt_count": 2
+}

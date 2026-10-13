@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-base-pages-1010",
+  "date": "2026-10-10",
+  "owner": "Friday（Codex 基地分页执行）",
+  "goal": "执行已确认的二游参考方案，重整基地六分页、局部切换动效与整备返回逻辑",
+  "paths": [
+    "game/src/hub/game.hub.js",
+    "game/src/hub/game.hub.pages.js",
+    "game/src/hub/game.hub.depart.js",
+    "game/src/hub/hub.presentation.js",
+    "game/src/hub/hub.warehouse.js",
+    "game/src/hub/hub.personnel.js",
+    "game/src/hub/hub.facilities.js",
+    "game/src/hub/hub.archive.js",
+    "game/src/run/game.run.altar.js",
+    "game/css/base-camp-rework.css",
+    "tests/hub-pages-rework.test.js",
+    "tests/departure-browse-state.test.js",
+    "tests/hub-upgrade-render.test.js",
+    "tests/surface-motion.test.js",
+    "docs/evidence/2026-10-10-base-pages"
+  ],
+  "doneWhen": [
+    "六个基地入口及人物/伙伴/档案子分页接入",
+    "整备往返保留草稿，换档隔离",
+    "当前窗口内置浏览器和相关回归有证据"
+  ],
+  "stage": "done",
+  "updatedAt": "2026-10-10T09:19:26.821Z",
+  "checks": [
+    "11 文件 86 项定向测试通过（含 contracts、architecture-boundaries）",
+    "相关 JS/测试 ESLint 通过",
+    "8 个现行类型配置检查通过",
+    "基地样式 PostCSS 解析通过",
+    "Codex IAB 当前1280×720窗口：主线5200六分页及关键子页只读复核；当前主线日志错误0",
+    "5352隔离档案真实输入：收藏保护/取消、确认卖出/入账、购买木材、外观预览/应用、整备返回与换人保留卡牌；该阶段日志错误0",
+    "两份浏览器来源/操作类型/DOM样式快照经workflow browser import登记"
+  ],
+  "unverified": [
+    "未跑全量测试或生产构建；共享树中其他任务仍在编辑",
+    "未采样FPS或长时间内存",
+    "资源充足的孵化、伙伴培养、扩建成功与正式开局后完整对局未做本轮实页验收；原有命令保留"
+  ]
+}

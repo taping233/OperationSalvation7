@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-bandage",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-c8a31e29-431c-4466-9912-fa093f2f11f5.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-bandage/cards-martial-tt3-bandage-source.png",
+        "bytes": 1587227,
+        "sha256": "51518ab722438c1cbf740c320b5195cac5458a26c4fbbfdf1fce7e934ea5298e"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-bandage/cards-martial-tt3-bandage-full-before.webp",
+          "bytes": 28024,
+          "sha256": "2eaf22e8598a0a096009fb49c19d4f5c5b3f5525851aa875a37fba9fe5ef9c47"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-bandage/cards-martial-tt3-bandage-thumb-before.webp",
+          "bytes": 3240,
+          "sha256": "c54e84625bf6dca5824b84c5acfae9b5f26f4f666203c332df1abbe87c2f88e3"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-bandage.webp",
+          "bytes": 47216,
+          "sha256": "8ae192b2361a6a0e1adcd57572d47c1d19f487449fb39f6d16dd5cc781578d59",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-bandage.webp",
+          "bytes": 5464,
+          "sha256": "8b8fd264e38c40ffe4cc22b9609dd1cf1d355e0abe1b5fe350e21ca02c9f70ad",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "bandage-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt3-bandage.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 47216,
+            "sha256": "8ae192b2361a6a0e1adcd57572d47c1d19f487449fb39f6d16dd5cc781578d59",
+            "source": "docs/evidence/2026-10-10-bandage/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt3-bandage.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 3240,
+            "sha256": "c54e84625bf6dca5824b84c5acfae9b5f26f4f666203c332df1abbe87c2f88e3",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt3-bandage.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 5464,
+            "sha256": "8b8fd264e38c40ffe4cc22b9609dd1cf1d355e0abe1b5fe350e21ca02c9f70ad",
+            "source": "docs/evidence/2026-10-10-bandage/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 903,
+  "manifest_count_after": 904
+}

@@ -1,0 +1,36 @@
+{
+  "kind": "small",
+  "status": "first sample; direction review pending",
+  "tool": "builtin imagegen",
+  "model": "not returned",
+  "seed": "not returned",
+  "generated_path": "C:\\Users\\太平\\.codex\\generated_images\\01a12a93-2933-7bc1-b347-7b666e9a2d7f\\exec-08371c6d-205b-4434-ac18-6c6a366d99df.png",
+  "source": "docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\art-research-reset\\chest-cardstyle\\source\\chest-small-cardstyle-1011-v1.png",
+  "source_bytes": 1231891,
+  "source_sha256": "2e5244e7880263cf9eef64c460cb848096766e3380f92192c8335635b998ac05",
+  "output": "game\\assets\\scenes\\rewards\\chest-small-cardstyle-1011-v1.webp",
+  "output_bytes": 815604,
+  "output_sha256": "ce11a73fa18d93700c93b4ef8fb518e1925be3af4261b142eafded0cba89042a",
+  "size": [
+    1254,
+    1254
+  ],
+  "mode": "RGBA",
+  "alpha_extrema": [
+    0,
+    255
+  ],
+  "lossless_rgba_byte_equal": true,
+  "crop": false,
+  "resize": false,
+  "style_references": [
+    {
+      "path": "game\\assets\\cards\\equip-tt2-pearlbox.webp",
+      "sha256": "2dd1921d7eda3f260ec74be23decc0a70cb6925812fd4e16d1ba0e1e7305e65b"
+    },
+    {
+      "path": "game\\assets\\cards\\equip-tt3-crimson-pouch.webp",
+      "sha256": "25ec4354678c02e55b720c0ee168b3a3490a6df83e274dbd6810f8f3ec042a78"
+    }
+  ]
+}

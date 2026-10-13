@@ -1,0 +1,72 @@
+[
+  {
+    "name": "rest-heat-cell",
+    "runtime": "game\\assets\\scenes\\map-nodes\\rest-heat-cell-style-1012-v2.webp",
+    "bounds": [
+      97,
+      40,
+      450,
+      472
+    ],
+    "source": "docs\\evidence\\2026-10-12-map-visual-review\\repair-map\\source\\rest-heat-cell-style-v2.png",
+    "sourceSHA256": "5407a0d58f04b135667dac8222b3e76c1fa82776ddc44c584668fd93b6a5c5f8",
+    "runtimeSHA256": "99a2179f3a5ffabba9ad035a32db294a6631342d4718d7c3bc012d3abf9b1dd9",
+    "runtimeBytes": 179626
+  },
+  {
+    "name": "battle-security-shard",
+    "runtime": "game\\assets\\scenes\\map-nodes\\battle-security-shard-style-1012-v2.webp",
+    "bounds": [
+      91,
+      35,
+      464,
+      483
+    ],
+    "source": "docs\\evidence\\2026-10-12-map-visual-review\\repair-map\\source\\battle-security-shard-style-v2.png",
+    "sourceSHA256": "80f74511b0393567972a16a4b717f92cf166666c5960ef88354fec08b995b80d",
+    "runtimeSHA256": "4e5f5202e99415f199fa32f76933238bc16970580b349abc7f0898ea8b39e113",
+    "runtimeBytes": 142158
+  },
+  {
+    "name": "shop-exchange-token",
+    "runtime": "game\\assets\\scenes\\map-nodes\\shop-exchange-token-style-1012-v2.webp",
+    "bounds": [
+      89,
+      68,
+      444,
+      453
+    ],
+    "source": "docs\\evidence\\2026-10-12-map-visual-review\\repair-map\\source\\shop-exchange-token-style-v2.png",
+    "sourceSHA256": "10ec9dec76d7451756796cda5731732b954708731624ea4c724b60a4a4919522",
+    "runtimeSHA256": "a2bc2a953c7d435c0c50c98775893f78c686048b2eeddb0022c69951280d334d",
+    "runtimeBytes": 177964
+  },
+  {
+    "name": "event-record-fragments",
+    "runtime": "game\\assets\\scenes\\map-nodes\\event-record-fragments-style-1012-v2.webp",
+    "bounds": [
+      126,
+      43,
+      400,
+      470
+    ],
+    "source": "docs\\evidence\\2026-10-12-map-visual-review\\repair-map\\source\\event-record-fragments-style-v2.png",
+    "sourceSHA256": "a3205994b7b152ead96b63fc3c5c71cb2feac29348eb30148899dab88de09658",
+    "runtimeSHA256": "5c7d930ed799aedd5be81f3801666ee516d7d71defccbe651f1cbc1974945084",
+    "runtimeBytes": 149144
+  },
+  {
+    "name": "passage-transit-core",
+    "runtime": "game\\assets\\scenes\\map-nodes\\passage-transit-core-style-1012-v2.webp",
+    "bounds": [
+      114,
+      75,
+      435,
+      463
+    ],
+    "source": "docs\\evidence\\2026-10-12-map-visual-review\\repair-map\\source\\passage-transit-core-style-v2.png",
+    "sourceSHA256": "92b345c9b1fec37e5ef8a1567c2a5b0cc42c5b89b293f0170034973310dce582",
+    "runtimeSHA256": "12dab51ed6fb5bee8ceb055f4f84c6bd16bfd55ea2ba128e6789552608468053",
+    "runtimeBytes": 149218
+  }
+]

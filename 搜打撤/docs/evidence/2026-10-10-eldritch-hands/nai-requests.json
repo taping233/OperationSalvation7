@@ -1,0 +1,90 @@
+[
+  {
+    "number": "1",
+    "card_id": "tt8-curseimmune",
+    "asset": "creature-tt8-curseimmune.webp",
+    "gesture": "托握",
+    "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nhand focus, disembodied hand, claws, wrist cuff, chains, white background\n\nOne single isolated hand and short forearm belonging to the same eldritch god. Charcoal-black matte skin with muted deep-violet planes, elongated palm bones, five long articulated fingers including one opposable thumb, tapering claw tips. The anatomy is recognizably a hand but has severe angular knuckles and a few broad irregular obsidian-like ridges across the back of the hand. A restrained violet inner glow appears only in two or three deep joint creases. A plain black sealing cuff encircles the wrist, marked by one pale diamond seal; a few broad gray chain links hang from the cuff. The short forearm ends in a simple tapered shadow shape, not bloody tissue. The hand fills most of the square, wrist/forearm remains inside the frame, with a small clear margin around claws and chain. Plain white background is only a draft backdrop; the final asset will be genuinely transparent. Use large matte opaque planes and restrained directional brush marks; readable knuckles and gesture, quiet low-detail cuff and chains. Palm upward in a three-quarter view; the long fingers curve inward around an empty center as if cradling an invisible weight. The thumb is clearly separate, and the palm basin is visible. Wrist enters from lower left.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+    "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, human person, full body, face, head, torso, multiple hands, extra arms, feet, foot, toes, legs, shoes, tentacle fingers, extra digits, palm eye, gore, blood, dismemberment wound, weapon, background scenery, white border, card frame, glossy metal armor, photorealism",
+    "character_prompt": "",
+    "model": "nai-diffusion-5-full",
+    "width": 1024,
+    "height": 1024,
+    "parameters": {
+      "steps": 28,
+      "scale": 6.5,
+      "cfg_rescale": 0.0,
+      "sampler": "k_euler_ancestral",
+      "noise_schedule": "karras",
+      "variety_plus": true
+    },
+    "seed": 620897018,
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\eldritch-hands-20261010\\hand-1.png"
+  },
+  {
+    "number": "2",
+    "card_id": "tt8-energycap",
+    "asset": "creature-tt8-energycap.webp",
+    "gesture": "张掌",
+    "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nhand focus, disembodied hand, claws, wrist cuff, chains, white background\n\nOne single isolated hand and short forearm belonging to the same eldritch god. Charcoal-black matte skin with muted deep-violet planes, elongated palm bones, five long articulated fingers including one opposable thumb, tapering claw tips. The anatomy is recognizably a hand but has severe angular knuckles and a few broad irregular obsidian-like ridges across the back of the hand. A restrained violet inner glow appears only in two or three deep joint creases. A plain black sealing cuff encircles the wrist, marked by one pale diamond seal; a few broad gray chain links hang from the cuff. The short forearm ends in a simple tapered shadow shape, not bloody tissue. The hand fills most of the square, wrist/forearm remains inside the frame, with a small clear margin around claws and chain. Plain white background is only a draft backdrop; the final asset will be genuinely transparent. Use large matte opaque planes and restrained directional brush marks; readable knuckles and gesture, quiet low-detail cuff and chains. An upright open palm faces three-quarter toward the viewer. All five digits are clearly separated in a broad fan; the thumb sweeps outward rather than duplicating a finger. Wrist enters from below.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+    "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, human person, full body, face, head, torso, multiple hands, extra arms, feet, foot, toes, legs, shoes, tentacle fingers, extra digits, palm eye, gore, blood, dismemberment wound, weapon, background scenery, white border, card frame, glossy metal armor, photorealism",
+    "character_prompt": "",
+    "model": "nai-diffusion-5-full",
+    "width": 1024,
+    "height": 1024,
+    "parameters": {
+      "steps": 28,
+      "scale": 6.5,
+      "cfg_rescale": 0.0,
+      "sampler": "k_euler_ancestral",
+      "noise_schedule": "karras",
+      "variety_plus": true
+    },
+    "seed": 423294055,
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\eldritch-hands-20261010\\hand-2.png"
+  },
+  {
+    "number": "3",
+    "card_id": "tt8-nofocus",
+    "asset": "creature-tt8-nofocus.webp",
+    "gesture": "勾爪",
+    "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nhand focus, disembodied hand, claws, wrist cuff, chains, white background\n\nOne single isolated hand and short forearm belonging to the same eldritch god. Charcoal-black matte skin with muted deep-violet planes, elongated palm bones, five long articulated fingers including one opposable thumb, tapering claw tips. The anatomy is recognizably a hand but has severe angular knuckles and a few broad irregular obsidian-like ridges across the back of the hand. A restrained violet inner glow appears only in two or three deep joint creases. A plain black sealing cuff encircles the wrist, marked by one pale diamond seal; a few broad gray chain links hang from the cuff. The short forearm ends in a simple tapered shadow shape, not bloody tissue. The hand fills most of the square, wrist/forearm remains inside the frame, with a small clear margin around claws and chain. Plain white background is only a draft backdrop; the final asset will be genuinely transparent. Use large matte opaque planes and restrained directional brush marks; readable knuckles and gesture, quiet low-detail cuff and chains. The back of the hand faces the viewer in a foreshortened three-quarter view. The five digits curl forward in a hooked grasp, with staggered knuckles and readable gaps, like closing on something. Wrist enters from upper left and fingertips point toward lower right.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+    "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, human person, full body, face, head, torso, multiple hands, extra arms, feet, foot, toes, legs, shoes, tentacle fingers, extra digits, palm eye, gore, blood, dismemberment wound, weapon, background scenery, white border, card frame, glossy metal armor, photorealism",
+    "character_prompt": "",
+    "model": "nai-diffusion-5-full",
+    "width": 1024,
+    "height": 1024,
+    "parameters": {
+      "steps": 28,
+      "scale": 6.5,
+      "cfg_rescale": 0.0,
+      "sampler": "k_euler_ancestral",
+      "noise_schedule": "karras",
+      "variety_plus": true
+    },
+    "seed": 1094211399,
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\eldritch-hands-20261010\\hand-3.png"
+  },
+  {
+    "number": "4",
+    "card_id": "tt8-healplus",
+    "asset": "creature-tt8-healplus.webp",
+    "gesture": "攥拳",
+    "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nhand focus, disembodied hand, claws, wrist cuff, chains, white background\n\nOne single isolated hand and short forearm belonging to the same eldritch god. Charcoal-black matte skin with muted deep-violet planes, elongated palm bones, five long articulated fingers including one opposable thumb, tapering claw tips. The anatomy is recognizably a hand but has severe angular knuckles and a few broad irregular obsidian-like ridges across the back of the hand. A restrained violet inner glow appears only in two or three deep joint creases. A plain black sealing cuff encircles the wrist, marked by one pale diamond seal; a few broad gray chain links hang from the cuff. The short forearm ends in a simple tapered shadow shape, not bloody tissue. The hand fills most of the square, wrist/forearm remains inside the frame, with a small clear margin around claws and chain. Plain white background is only a draft backdrop; the final asset will be genuinely transparent. Use large matte opaque planes and restrained directional brush marks; readable knuckles and gesture, quiet low-detail cuff and chains. A clenched fist seen from a low three-quarter angle. Four fingers fold into the palm and the opposable thumb lies across them; a strong broad knuckle arc and the cuff establish the silhouette. Wrist enters from lower right. Do not leave additional extended fingers.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+    "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, human person, full body, face, head, torso, multiple hands, extra arms, feet, foot, toes, legs, shoes, tentacle fingers, extra digits, palm eye, gore, blood, dismemberment wound, weapon, background scenery, white border, card frame, glossy metal armor, photorealism",
+    "character_prompt": "",
+    "model": "nai-diffusion-5-full",
+    "width": 1024,
+    "height": 1024,
+    "parameters": {
+      "steps": 28,
+      "scale": 6.5,
+      "cfg_rescale": 0.0,
+      "sampler": "k_euler_ancestral",
+      "noise_schedule": "karras",
+      "variety_plus": true
+    },
+    "seed": 1849600942,
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\eldritch-hands-20261010\\hand-4.png"
+  }
+]

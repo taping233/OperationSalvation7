@@ -1,0 +1,52 @@
+- main:
+  - text: 金币 攻击 ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - button "返回伙伴" [active]:
+    - heading "基地" [level=2]
+    - generic: 档案 / 02
+    - generic "基地物资":
+      - generic "木材 0":
+        - generic: "0"
+        - generic: 木材
+        - text: 木材
+      - generic "口粮 0":
+        - generic: "0"
+        - generic: 口粮
+        - text: 口粮
+      - generic "钥匙 0":
+        - generic: "0"
+        - generic: 钥匙
+        - text: 钥匙
+      - generic "储备币 2":
+        - generic: "2"
+        - generic: 储备币
+        - text: 储备币
+    - main:
+      - heading "孵化伙伴" [level=2]
+      - img "宠物蛋"
+      - heading "伙伴孵化" [level=3]
+      - button "返回伙伴"
+      - paragraph: 随机获得一位尚未拥有的伙伴。
+      - term: 伙伴蛋
+      - definition: 1 / 1
+      - term: 储备币
+      - definition: 2 / 50
+      - button "孵化伙伴" [disabled]
+      - status: 还需 48 储备币
+    - navigation "基地房间":
+      - button "基地":
+        - generic: 基地
+      - button "配置 当前房间" [pressed]:
+        - generic: 配置
+        - generic: 当前房间
+      - button "后勤":
+        - generic: 后勤
+      - button "交易所":
+        - generic: 交易所
+      - button "收藏室 4项奖励可领取":
+        - generic: 收藏室
+        - emphasis: "4"
+      - button "建设":
+        - generic: 建设
+      - button "庭院":
+        - generic: 庭院

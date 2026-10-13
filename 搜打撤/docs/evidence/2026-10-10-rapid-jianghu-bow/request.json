@@ -1,0 +1,43 @@
+{
+  "items": [
+    {
+      "card_id": "cc-rapid-fire",
+      "asset": "cards/martial-cc-rapid-fire.webp",
+      "prompt": "Style-transfer. Redraw FIRST image 连续射击 preserving exact original LANDSCAPE 4:3 composition, close side camera, crop, object proportions and directions. A large dark steel/brown wood repeating crossbow extends HORIZONTALLY from cropped RIGHT edge towards LEFT at mid-height; grip and black-gloved hand remain partially cropped at lower right. Curved bow limb vertical at viewer left of body, taut triangular bowstring geometry, one loaded arrow points left, TWO fired bolts above weapon fly horizontally LEFT with orange rightward trails. Preserve three small falling brass casings below, subdued gray-ochre sky and dark ground silhouettes at bottom; simplify ground to broad abstract masses. Same action and placements, no character face or added weapons. Images 2–4 are STYLE ONLY references for broad opaque brushwork, not characters, clothes or poses. Rough hand-painted anime color study, large connected opaque color masses, a few broad directional swipes and blunt dabs, decisive handmade edges and grouped hard shadows, selective expressive coverage amid quiet regions. Objects use coherent broad painted planes, sparse structural lines and economical opaque highlights. Matte muted colors with concentrated focal accents. No photoreal metal, glossy 3D, smooth airbrush, tiny facet mosaics, dense mechanical microdetail, all-over grain/texture filters. No text, frame, watermark or UI.",
+      "revision": "cc-rapid-fire-original-rough-20261010",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-cc-rapid-fire.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-8b5f2a94-8919-4e0e-8c9d-17743ed4dbe6.png"
+    },
+    {
+      "card_id": "tt2-jianghu",
+      "asset": "cards/martial-tt2-jianghu.webp",
+      "prompt": "Style-transfer. Redraw FIRST image 江湖救急 preserving exact original SQUARE composition and proportions. ONE narrow extremely tall vertical golden-white beam descends from top center, widens slightly towards bright impact point at lower center; angular gold/cream sparks fan outward diagonally around lower impact, sparse longer streaks. Dark muted slate-gray flat backdrop with large quiet negative space. Same beam height, width, location and spark silhouette; do not add characters, weapons or scenery. Repaint beam and sparks as broad decisive opaque cream-gold directional strokes, restrained halo, remove granular noise and dense micro-sparks. Images 2–4 are STYLE ONLY references for broad opaque brushwork, not characters, clothes or poses. Rough hand-painted anime color study, large connected opaque color masses, a few broad directional swipes and blunt dabs, decisive handmade edges and grouped hard shadows, selective expressive coverage amid quiet regions. Objects use coherent broad painted planes, sparse structural lines and economical opaque highlights. Matte muted colors with concentrated focal accents. No photoreal metal, glossy 3D, smooth airbrush, tiny facet mosaics, dense mechanical microdetail, all-over grain/texture filters. No text, frame, watermark or UI.",
+      "revision": "tt2-jianghu-original-rough-20261010",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt2-jianghu.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-966f2b1c-0681-4efa-ab37-df2ffc5f3280.png"
+    },
+    {
+      "card_id": "tt3-reverse-bow",
+      "asset": "cards/equip-tt3-reverse-bow.webp",
+      "prompt": "Style-transfer. Redraw FIRST image 连弩 preserving exact original SQUARE composition, three-quarter overhead object view, crop and proportions. SINGLE compact futuristic dark blue-gray repeating crossbow floats centered diagonally, front bow assembly extends left, long body and paired bolt-feed tubes run towards upper-right, chunky grip angles down-right with small squared magazine end near lower right. Preserve curved blue bow limbs on left, thin taut RED strings, paired pale blue-gray bolts along top, original major mounting brackets and trigger guard. Simplify tiny screws/engraving into sparse necessary structural marks while preserving recognisable mechanism and silhouette. Uniform muted brown/ochre backdrop, no hands or character or extra props. Metal broad matte blue-gray planes with a few opaque light accents, no slick polished metal. Images 2–4 are STYLE ONLY references for broad opaque brushwork, not characters, clothes or poses. Rough hand-painted anime color study, large connected opaque color masses, a few broad directional swipes and blunt dabs, decisive handmade edges and grouped hard shadows, selective expressive coverage amid quiet regions. Objects use coherent broad painted planes, sparse structural lines and economical opaque highlights. Matte muted colors with concentrated focal accents. No photoreal metal, glossy 3D, smooth airbrush, tiny facet mosaics, dense mechanical microdetail, all-over grain/texture filters. No text, frame, watermark or UI.",
+      "revision": "tt3-reverse-bow-original-rough-20261010",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt3-reverse-bow.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-e1e6f4a0-1786-4d0f-8a39-70171d1d569a.png"
+    }
+  ]
+}

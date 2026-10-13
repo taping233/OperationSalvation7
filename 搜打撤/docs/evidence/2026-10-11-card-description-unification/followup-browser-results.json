@@ -1,0 +1,64 @@
+{
+  "platform": "Codex In-app Browser",
+  "url": "http://127.0.0.1:5200/",
+  "viewport": {
+    "height": 956,
+    "width": 1523
+  },
+  "input": "真实搜索、关联卡名点击与大图开关",
+  "linkedFireball": {
+    "before": {
+      "natural": [
+        1441,
+        1092
+      ],
+      "frame": [
+        658.7625,
+        646.075
+      ],
+      "ratioFallback": 1,
+      "observation": "上下深色衬底可见"
+    },
+    "after": {
+      "frame": [
+        733.7750244140625,
+        556.0499877929688
+      ],
+      "frameRatio": 1.3196206105974508,
+      "natural": [
+        1441,
+        1092
+      ],
+      "naturalRatio": 1.3195970695970696,
+      "ratio": "1.3195970695970696"
+    },
+    "screenshot": "linked-fireball-fixed.png"
+  },
+  "prismatic": {
+    "computedStyles": [
+      {
+        "background": "linear-gradient(105deg, rgb(160, 68, 110), rgb(156, 104, 26) 25%, rgb(45, 116, 104) 45%, rgb(61, 101, 160) 68%, rgb(120, 82, 146) 85%, rgb(160, 68, 110))",
+        "clip": "text",
+        "fill": "rgba(0, 0, 0, 0)",
+        "text": "棱彩"
+      },
+      {
+        "background": "linear-gradient(105deg, rgb(160, 68, 110), rgb(156, 104, 26) 25%, rgb(45, 116, 104) 45%, rgb(61, 101, 160) 68%, rgb(120, 82, 146) 85%, rgb(160, 68, 110))",
+        "clip": "text",
+        "fill": "rgba(0, 0, 0, 0)",
+        "text": "棱彩"
+      },
+      {
+        "background": "linear-gradient(105deg, rgb(160, 68, 110), rgb(156, 104, 26) 25%, rgb(45, 116, 104) 45%, rgb(61, 101, 160) 68%, rgb(120, 82, 146) 85%, rgb(160, 68, 110))",
+        "clip": "text",
+        "fill": "rgba(0, 0, 0, 0)",
+        "text": "棱彩"
+      }
+    ],
+    "screenshots": [
+      "prismatic-gallery-fixed.png",
+      "prismatic-zoom-fixed.png"
+    ]
+  },
+  "errors": []
+}

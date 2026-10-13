@@ -1,0 +1,56 @@
+- main:
+  - text: 金币 攻击 ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - button "返回选档" [active]:
+    - heading "基地" [level=2]
+    - generic: 档案 / 02
+    - generic "基地物资":
+      - generic "木材 0":
+        - generic: "0"
+        - generic: 木材
+        - text: 木材
+      - generic "口粮 0":
+        - generic: "0"
+        - generic: 口粮
+        - text: 口粮
+      - generic "钥匙 0":
+        - generic: "0"
+        - generic: 钥匙
+        - text: 钥匙
+      - generic "储备币 2":
+        - generic: "2"
+        - generic: 储备币
+        - text: 储备币
+    - main:
+      - complementary "基地事务":
+        - heading "基地事务" [level=3]
+        - button "待领取 4 收藏与成就奖励":
+          - text: 待领取
+          - emphasis: "4"
+          - generic: 收藏与成就奖励
+          - generic: ›
+      - button "出征整备":
+        - generic: 出征整备
+        - generic: →
+      - group "行动难度":
+        - button "正常入城" [pressed]
+        - button "直入敌腹"
+      - navigation "基地其他操作":
+        - button "待复原 11 →"
+    - navigation "基地房间":
+      - button "基地 当前房间" [pressed]:
+        - generic: 基地
+        - generic: 当前房间
+      - button "配置":
+        - generic: 配置
+      - button "后勤":
+        - generic: 后勤
+      - button "交易所":
+        - generic: 交易所
+      - button "收藏室 4项奖励可领取":
+        - generic: 收藏室
+        - emphasis: "4"
+      - button "建设":
+        - generic: 建设
+      - button "庭院":
+        - generic: 庭院

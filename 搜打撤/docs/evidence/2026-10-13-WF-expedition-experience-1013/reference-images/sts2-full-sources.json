@@ -1,0 +1,16 @@
+[
+  {
+    "file": "docs\\evidence\\2026-10-13-WF-expedition-experience-1013\\reference-images\\sts2-current-1.png",
+    "source": "https://www.megacrit.com/images/steam_screenshot1_new.png",
+    "sha256": "4ad5f844c542c1b7cf49300082e3dea7d07bec85d6467087c6bcd1c8fecd7dca",
+    "bytes": 3093707,
+    "git": "exclude (>1MB reference image)"
+  },
+  {
+    "file": "docs\\evidence\\2026-10-13-WF-expedition-experience-1013\\reference-images\\sts2-current-2.png",
+    "source": "https://www.megacrit.com/images/steam_screenshot2_new.png",
+    "sha256": "fa8911645048a688d75ae6f1dd0d3415fe6924f4e3911fab4d52863b639ba207",
+    "bytes": 3079563,
+    "git": "exclude (>1MB reference image)"
+  }
+]

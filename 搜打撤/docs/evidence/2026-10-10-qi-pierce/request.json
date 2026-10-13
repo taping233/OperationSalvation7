@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-qi-wave",
+      "asset": "cards/martial-tt3-qi-wave.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-bbc75da0-5269-413c-9232-21f8dee112e0.png",
+      "revision": "qi-wave-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the qi wave game-card edit target, retaining the SQUARE original composition closely: centered luminous white energy orb at slightly below center, surrounded by broad swirling ivory-white and pale mint bands forming a circular spiral; a larger open U-shaped outer wave curls upward at both sides around the lower part, and a tall turquoise flame-like aura rises behind the orb toward top center. Keep original relative sizes, silhouette, circular motion direction and plain muted mint-green background. This is pure symbolic energy, no solid mountains, rocks, characters, hands, weapons or scenery. Replace dense thin contour networks with a small number of coherent wide opaque curved strokes and clear light/shadow planes, keep white orb brightest and undetailed, mint aura subordinate. Images 2, 3, 4 are DRAWING STYLE references only; borrow broad opaque painting construction, never their subjects or costume motifs. Rough hand-painted anime color study built from large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Clear grouped hard-edged light and shadow, matte muted colors with concentrated accents. Keep secondary regions quiet. No uniformly thin vector outlines, glossy 3D, photorealism, dense fine lines, tiny facet mosaics or all-over texture/grain filters. Abstract pure-color backdrop; no text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt3-qi-wave.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    },
+    {
+      "card_id": "tt2-piercearrow",
+      "asset": "cards/martial-tt2-piercearrow.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-c86b0551-e523-4bb2-8252-0d4c992d17ed.png",
+      "revision": "piercearrow-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the armor-piercing arrow game-card edit target, retaining the SQUARE original composition closely: a tall silver-gray pointed shield or armor plate centered, upright and seen from the front with a shallow angle; a long dark arrow extends from the impact at the shield center toward the RIGHT edge, feathered tail at far right, having traveled LEFT into the plate. Impact cracks radiate from the center; the LEFT side of the plate breaks away into scattered angular fragments flying left, with concentrated red-orange force glow among the broken pieces. Keep shield outline, proportions, central impact location, arrow orientation and fragment motion. Quiet charcoal blue-gray background. No character, hands or extra weapons. Construct shield with broad cool gray planes; explain damage with a handful of decisive dark branching marks and large disconnected fragments instead of a dense scratch network. Arrow silhouette and feathered tail clearly readable, left burst painted with broad restrained red-orange swipes. Images 2, 3, 4 are DRAWING STYLE references only; borrow broad opaque painting construction, never their subjects or costume motifs. Rough hand-painted anime color study built from large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Clear grouped hard-edged light and shadow, matte muted colors with concentrated accents. Keep secondary regions quiet. No uniformly thin vector outlines, glossy 3D, photorealism, dense fine lines, tiny facet mosaics or all-over texture/grain filters. Abstract pure-color backdrop; no text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt2-piercearrow.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    }
+  ]
+}

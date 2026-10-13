@@ -1,0 +1,29 @@
+{
+  "approvedCandidate": "A21",
+  "authorization": "老板：可以了 接入吧",
+  "styleExperiment": "E3",
+  "requestChain": [
+    "style-lab-requests.json",
+    "camp-e3-application-a18.json",
+    "camp-detail-a19.json",
+    "camp-textile-a20.json",
+    "camp-plain-materials-a21.json"
+  ],
+  "source": {
+    "path": "C:\\Users\\太平\\.codex\\generated_images\\01a128f5-bd4a-7891-91c7-ab5106c5d409\\exec-710ed4ab-ed27-4625-bf72-ba5a1c095cdd.png",
+    "bytes": 1981491,
+    "sha256": "afd58e3e556cb715ed0f217971ccdce0742e1a5d3f803eb9de26ff86a569e82e",
+    "excludedFromGit": true
+  },
+  "runtime": {
+    "path": "game/assets/scenes/base-operations-v5.webp",
+    "bytes": 125046,
+    "sha256": "118acc163f59520641c1eeee8aebb7506482c112f1230f8c60031c1b9f09427e",
+    "size": [
+      1672,
+      941
+    ]
+  },
+  "operation": "same-size WebP encoding only; no crop, resize or pixel edits",
+  "referenceUse": "GFL2 original used for study/style reference only, not runtime content"
+}

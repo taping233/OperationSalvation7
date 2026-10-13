@@ -1,0 +1,311 @@
+{
+  "time": "2026-10-10T17:53:17.491Z",
+  "checks": [
+    {
+      "file": "game/src/hub/game.hub.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "game/src/hub/game.hub.pages.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "game/src/hub/game.hub.depart.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "game/src/hub/hub.warehouse.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "game/src/hub/hub.personnel.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "game/src/hub/hub.presentation.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "game/src/hub/hub.facilities.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "game/src/hub/hub.archive.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "game/src/hub/hub.visuals.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "game/src/hub/hub.home-v3.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "game/src/hub/hub.materials.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "game/src/hub/hub.shop-v3.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "game/src/hub/hub.archive-v3.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "game/src/hub/hub.courtyard-v3.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "game/src/ui/card-browser.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "game/src/ui/inventory-zoom.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "game/src/ui/ui.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "check": "postcss",
+      "passed": true
+    },
+    {
+      "file": "game/css/base-home-v3.css",
+      "check": "postcss",
+      "passed": true
+    },
+    {
+      "file": "game/css/base-shop-v3.css",
+      "check": "postcss",
+      "passed": true
+    },
+    {
+      "file": "game/css/base-archive-v3.css",
+      "check": "postcss",
+      "passed": true
+    },
+    {
+      "file": "game/css/base-courtyard-v3.css",
+      "check": "postcss",
+      "passed": true
+    },
+    {
+      "file": "game/css/card-browser.css",
+      "check": "postcss",
+      "passed": true
+    },
+    {
+      "file": "game/css/inventory-zoom.css",
+      "check": "postcss",
+      "passed": true
+    },
+    {
+      "file": "tests/base-ui-sample.test.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "tests/hub-pages-rework.test.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "tests/hub-shop-v3.test.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "tests/hub-archive-v3.test.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "tests/hub-courtyard-v3.test.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "tests/hub-upgrade-render.test.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "tests/hub-flow-regression.test.js",
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "file": "tests/premium-ui-pages.test.js",
+      "check": "syntax",
+      "passed": true
+    }
+  ],
+  "protectedFooter": {
+    "sameBytes": true,
+    "sameContent": true,
+    "beforeSha256": "260e5ae5346df12a4d8edb739605a944d7ac494617ae4de1e2e64d9da6c4c076",
+    "currentSha256": "260e5ae5346df12a4d8edb739605a944d7ac494617ae4de1e2e64d9da6c4c076"
+  },
+  "files": [
+    {
+      "file": "game/src/hub/game.hub.js",
+      "sha256": "f7b804d68782ccb4c3c31ac5f4061764a29fa06f379da51ee0b994e22b7f94fe"
+    },
+    {
+      "file": "game/src/hub/game.hub.pages.js",
+      "sha256": "1f8124d2eb067ca556e429b1da18863870d33e16d955ea259464a916fb609080"
+    },
+    {
+      "file": "game/src/hub/game.hub.depart.js",
+      "sha256": "71f91d013af61ea23ba947540aac61d25383093b1a95788fe4a391f5651a6050"
+    },
+    {
+      "file": "game/src/hub/hub.warehouse.js",
+      "sha256": "394906fa30a1eb73d32dc4ac11a885f5eb228f08e298744d48c0a678b3695dfd"
+    },
+    {
+      "file": "game/src/hub/hub.personnel.js",
+      "sha256": "9526068c77442e248598f6a973a4e27ad3f06f8b0b2e660338a9a783b0a70bae"
+    },
+    {
+      "file": "game/src/hub/hub.presentation.js",
+      "sha256": "1feee9df05bfeb0e14812c33b42e724b3a05df8a87ba450513eedee31e13967c"
+    },
+    {
+      "file": "game/src/hub/hub.facilities.js",
+      "sha256": "02620363bd4a6afe4cf5199b760f22748b4fdfc13a7ce952051e81201c5fa42b"
+    },
+    {
+      "file": "game/src/hub/hub.archive.js",
+      "sha256": "925bdb4f56b12ae976f643758121af1ede64b4047952ae7abb242f555e0ba2bb"
+    },
+    {
+      "file": "game/src/hub/hub.visuals.js",
+      "sha256": "d1bed11ef33f62405a936cbab192f961312a88c86b81bebf291cb91cc0b7fad3"
+    },
+    {
+      "file": "game/src/hub/hub.home-v3.js",
+      "sha256": "403d11739efe898db5d7b8687afd84448bcf60bc248e7494f45b2c0e9b2d4e14"
+    },
+    {
+      "file": "game/src/hub/hub.materials.js",
+      "sha256": "6da487eb8e4524a58941ec1a599092f4713ac4cf2bc4c955cba8f62c05018054"
+    },
+    {
+      "file": "game/src/hub/hub.shop-v3.js",
+      "sha256": "3495753c8e78926cee20d709a6d525104b00dc1921fdc7558e9027304d573977"
+    },
+    {
+      "file": "game/src/hub/hub.archive-v3.js",
+      "sha256": "fe3b80890efa135988847d673895862ecb492678c7497ba68ec45b01a3cac02a"
+    },
+    {
+      "file": "game/src/hub/hub.courtyard-v3.js",
+      "sha256": "0188a6138aadb4198a98e2828fa1cee5eac3c7705ec62b541fa526b231e9f3df"
+    },
+    {
+      "file": "game/src/ui/card-browser.js",
+      "sha256": "6c75b9ea51519e9124331f113f734ed2c8ed305b5788d63945a4180fa26c24aa"
+    },
+    {
+      "file": "game/src/ui/inventory-zoom.js",
+      "sha256": "8c978e8901483999a19165a98a8549cf199b28941c3ba50d7f31040dc7ac8acb"
+    },
+    {
+      "file": "game/src/ui/ui.js",
+      "sha256": "e3fe6497749ec601d39dca446d74732b5b356ea58640cac9567ee5e5c81c8ba9"
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "sha256": "a4abd992febf9247d1bee86f51c6a00e5d550ce617bdde78c8205ba6845077eb"
+    },
+    {
+      "file": "game/css/base-home-v3.css",
+      "sha256": "6f9acbbe3d55d62b1240bdb6b2cdbfb5ce151eff225ba596248cfbaa21502aaa"
+    },
+    {
+      "file": "game/css/base-shop-v3.css",
+      "sha256": "9d3f5d078a5c56d11b0069ccf1ed0d61e83f2359a59de2fafc6b2e2e2abd71d9"
+    },
+    {
+      "file": "game/css/base-archive-v3.css",
+      "sha256": "773c1259957a584005adc2d146f91e7101951f816f5555da2f855d03b9c6c465"
+    },
+    {
+      "file": "game/css/base-courtyard-v3.css",
+      "sha256": "f614eaf7bdebf310b3e9c0209dc5318c2d2fa5a1661bbc886d76bbd56d8d5717"
+    },
+    {
+      "file": "game/css/card-browser.css",
+      "sha256": "f9b8245f6d2bc88b0705320b71ebc55a2aa1e942904e85216cbe3f0e6a845f8b"
+    },
+    {
+      "file": "game/css/inventory-zoom.css",
+      "sha256": "f09c3ce207ca599b59d70a5e69742b36cb7b4d1c52e794bec79078b5d02b351f"
+    },
+    {
+      "file": "tests/base-ui-sample.test.js",
+      "sha256": "c39946fc4386338c135430b35b97292dba0537d95b8ca61bbaa2f61c9fa38c08"
+    },
+    {
+      "file": "tests/hub-pages-rework.test.js",
+      "sha256": "286959f576896b5e7870ba4636ac9e41b5dec8885e762b7f6323b02c52645121"
+    },
+    {
+      "file": "tests/hub-shop-v3.test.js",
+      "sha256": "6b65c72f30658e2692ae7f2412a9a472c8642c1adaf9b82425385f66ee614699"
+    },
+    {
+      "file": "tests/hub-archive-v3.test.js",
+      "sha256": "0a18616d05ddd72a398db745006fd63b85c998aafab0c9d9393efbb247e0d3c2"
+    },
+    {
+      "file": "tests/hub-courtyard-v3.test.js",
+      "sha256": "dd06dced5e4b002ce0b74aba3e6d635e54e6fa9734e79e684207b4ae43bb9b37"
+    },
+    {
+      "file": "tests/hub-upgrade-render.test.js",
+      "sha256": "10c8a11af7c441e21982f92cdb5e450fe558376376717286b29064616127e5ea"
+    },
+    {
+      "file": "tests/hub-flow-regression.test.js",
+      "sha256": "f225f0067f5e069d77a767544c485416db472e046e2fea6ffb879f51117ddfae"
+    },
+    {
+      "file": "tests/premium-ui-pages.test.js",
+      "sha256": "3a62bd89a35deda51dfd28f37c8d8c89454ce16043983130ff06024d6ed53c6d"
+    },
+    {
+      "file": "docs/development.md",
+      "sha256": "9c35c63348f57a108b8b2863201b713e544ee59a0f4572d722b35ca64d8881c9"
+    }
+  ],
+  "notRun": [
+    "build",
+    "full project test suite",
+    "full project lint/typecheck"
+  ],
+  "sharedBoundary": "premium-ui-pages photo assertions unchanged; only base describe updated"
+}

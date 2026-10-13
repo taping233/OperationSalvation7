@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-sapper-bomb",
+      "asset": "cards/equip-tt3-sapper-bomb.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-2cdadf50-cf6e-4631-8bb5-6bc1ac657a2f.png",
+      "revision": "sapper-bomb-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the miner dynamite game-card edit target. Retain the original SQUARE framing and composition closely: a single floating compact bundle of five red cylindrical sticks, its long axis tilted slightly from lower left to upper right, visible circular lower ends, several dark charcoal ropes crossing and wrapping around the middle. Two curved dark fuses emerge separately from the top and spread toward the upper left and upper right, each with a small bright white-orange ignition point and a few energetic orange sparks. Keep subject size, placement, tilt, fuse directions and spacing from image 1. Quiet plain dark gray background. No characters, hands, tools, scenery or extra props. Images 2, 3, 4 are DRAWING STYLE references only; borrow their opaque broad brush construction, never characters, clothes or motifs. Rough hand-painted anime color study built from large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Model each red cylinder with broad muted vermilion light planes and deep burgundy shadow planes, enough dimensionality to read the bundle but few surface marks. Rope overlaps are readable with economical broad dark strokes and a few highlighted turns, no densely drawn fibers. Paint sparks as a small number of bold warm strokes around concentrated bright centers rather than fine wire-like line webs. Matte colored grays with concentrated red and orange accents, clear grouped hard-edged shadows. No uniform thin vector outlining, detailed engineering diagram, photoreal textures, glossy 3D, tiny facet mosaics or all-over grain/texture filters. Simple charcoal-gray abstract background, no text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt3-sapper-bomb.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    }
+  ]
+}

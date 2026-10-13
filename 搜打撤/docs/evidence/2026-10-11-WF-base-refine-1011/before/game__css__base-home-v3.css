@@ -1,0 +1,48 @@
+#overlay #hubMain.pg.hub.base-camp .hub-body { grid-template-columns:minmax(0,1fr); }
+#overlay #hubMain.pg.hub.base-camp.base-home { background:var(--camp-dark,#202b37); }
+#overlay #hubMain.pg.hub.base-camp.base-home .hub-head { position:absolute; inset:0 0 auto; z-index:5; background:linear-gradient(#16202fbd,#16202f30); border:0; }
+#overlay #hubMain.pg.hub.base-camp.base-home .camp-brand, #overlay #hubMain.pg.hub.base-camp.base-home .hub-slot-label { display:none; }
+#overlay #hubMain.pg.hub.base-camp.base-home .hub-body { height:100%; }
+#overlay #hubMain.pg.hub.base-camp.base-home .hub-page { padding:0; background:none; overflow:hidden; scrollbar-gutter:auto; }
+#overlay #hubMain.pg.hub.base-camp .hub-res:empty { display:none; }
+#overlay #hubMain.pg.hub.base-camp .base-resource-strip { display:flex; flex-wrap:wrap; align-items:center; gap:28px; }
+#overlay #hubMain.pg.hub.base-camp .base-resource-value { display:flex; align-items:center; gap:8px; font:18px/1.4 var(--font-ui); }
+#overlay #hubMain.pg.hub.base-camp .base-resource-value b { font:600 26px/1.3 var(--font-num); }
+#overlay #hubMain.pg.hub.base-camp .base-painted-icon { width:36px; height:36px; object-fit:contain; }
+#overlay #hubMain.pg.hub.base-camp .base-home-v3 { position:relative; height:100%; overflow:hidden; background:linear-gradient(90deg,#141e2ae0 0%,#141e2a90 19%,#141e2a00 46%),linear-gradient(0deg,#151f2cba,transparent 43%),url('../assets/scenes/hub-wallpaper.webp') center/cover; color:#fff; }
+#overlay #hubMain.pg.hub.base-camp .base-home-title { position:absolute; left:76px; top:160px; }
+#overlay #hubMain.pg.hub.base-camp .base-home-title > span { font:15px/1.5 var(--font-mono); letter-spacing:.34em; color:#c2c8ce; }
+#overlay #hubMain.pg.hub.base-camp .base-home-title h2 { display:block; border:0; padding:0; margin:9px 0 0; font:500 56px/1.25 var(--font-ui); letter-spacing:.16em; color:#fff; text-shadow:0 3px 20px #10192366; }
+#overlay #hubMain.pg.hub.base-camp .base-home-places { display:flex; flex-direction:column; gap:6px; position:absolute; left:72px; top:300px; width:288px; }
+#overlay #hubMain.pg.hub.base-camp .base-home-place { position:relative; display:flex; align-items:center; gap:20px; min-height:73px; padding:14px 18px 14px 6px; text-align:left; border:0; border-left:3px solid transparent; border-radius:0; background:transparent; color:#fff; cursor:pointer; transition:background .15s,transform .15s; }
+#overlay #hubMain.pg.hub.base-camp .base-home-place:hover { background:#f4f5f01c; border-left-color:#bb6658; transform:translateX(6px); }
+#overlay #hubMain.pg.hub.base-camp .base-home-place b { font:500 30px/1.4 var(--font-ui); letter-spacing:.12em; }
+#overlay #hubMain.pg.hub.base-camp .base-home-place small { margin-left:auto; color:#c8cbd0; font:17px/1.4 var(--font-num); }
+#overlay #hubMain.pg.hub.base-camp .base-home-place i { margin-left:auto; font:21px/1 var(--font-ui); font-style:normal; color:#a8b2bc; }
+#overlay #hubMain.pg.hub.base-camp .base-home-place small + i { margin-left:0; }
+#overlay #hubMain.pg.hub.base-camp .base-home-place em { background:#b55346; min-width:21px; padding:3px; font:600 16px/1 var(--font-num); text-align:center; }
+#overlay #hubMain.pg.hub.base-camp .base-home-pending { padding:10px 8px; text-align:left; border:0; background:none; color:#d9afa7; font-size:20px; cursor:pointer; }
+#overlay #hubMain.pg.hub.base-camp .base-home-leisure { position:absolute; left:80px; bottom:68px; display:flex; align-items:center; gap:22px; color:#778593; }
+#overlay #hubMain.pg.hub.base-camp .base-home-leisure button { padding:12px 0; background:none; border:0; color:#c5ccd4; font:21px/1.4 var(--font-ui); cursor:pointer; }
+#overlay #hubMain.pg.hub.base-camp .base-home-leisure button:hover { color:white; }
+#overlay #hubMain.pg.hub.base-camp .base-home-departure { display:flex; flex-direction:column; align-items:stretch; gap:24px; position:absolute; right:76px; bottom:68px; width:425px; }
+#overlay #hubMain.pg.hub.base-camp .base-home-difficulty { display:flex; align-items:center; justify-content:flex-end; gap:16px; }
+#overlay #hubMain.pg.hub.base-camp .base-home-difficulty > div { display:flex; gap:0; background:#172330a8; backdrop-filter:blur(12px); }
+#overlay #hubMain.pg.hub.base-camp .base-home-difficulty button { padding:12px 24px; border:0; border-bottom:2px solid transparent; color:#aebac6; background:none; font:21px/1.4 var(--font-ui); cursor:pointer; }
+#overlay #hubMain.pg.hub.base-camp .base-home-difficulty button.on { border-bottom-color:#d9a79c; color:white; background:#f3efdf10; }
+#overlay #hubMain.pg.hub.base-camp .base-difficulty-detail { position:relative; }
+#overlay #hubMain.pg.hub.base-camp .base-difficulty-detail summary { list-style:none; display:grid; place-items:center; width:27px; height:27px; border:1px solid #b9c7d0; border-radius:50%; color:#dbe2e7; font:italic 18px/1 Georgia,serif; cursor:pointer; }
+#overlay #hubMain.pg.hub.base-camp .base-difficulty-detail > div { position:absolute; right:0; bottom:48px; width:330px; padding:28px; background:#edf0f1f2; color:#252d36; backdrop-filter:blur(16px); box-shadow:0 20px 60px #10182180; }
+#overlay #hubMain.pg.hub.base-camp .base-difficulty-detail h3 { font-size:27px; margin:0 0 20px; }
+#overlay #hubMain.pg.hub.base-camp .base-difficulty-detail dl { margin:0; }
+#overlay #hubMain.pg.hub.base-camp .base-difficulty-detail dl div { display:flex; justify-content:space-between; gap:25px; margin:14px 0; font-size:21px; }
+#overlay #hubMain.pg.hub.base-camp .base-difficulty-detail dd { margin:0; font-weight:600; }
+#overlay #hubMain.pg.hub.base-camp .base-home-launch #btnDeploy { display:flex; align-items:center; gap:18px; width:100%; min-height:100px; padding:24px 32px; border:0; border-radius:0; background:#b55346eb; color:white; box-shadow:0 18px 38px #10182455; font:500 32px/1.4 var(--font-ui); cursor:pointer; backdrop-filter:blur(12px); transition:background .15s; }
+#overlay #hubMain.pg.hub.base-camp .base-home-launch #btnDeploy:hover { background:#c26454; }
+#overlay #hubMain.pg.hub.base-camp .base-home-launch #btnDeploy > span { margin-left:auto; font-size:39px; font-weight:300; }
+#overlay #hubMain.pg.hub.base-camp .base-home-draft { display:block; margin:0 0 12px; font-size:20px; text-align:right; color:#cdd6df; }
+#overlay #hubMain.pg.hub.base-camp .base-home-nest { border:0; padding:16px 0; width:100%; background:none; color:#d7dee5; text-align:right; font-size:21px; cursor:pointer; }
+#overlay #hubMain.pg.hub.base-camp.base-home .base-resource-value { color:#e0e3e7; }
+#overlay #hubMain.pg.hub.base-camp.base-home .base-resource-value b { color:white; }
+#overlay #hubMain.pg.hub.base-camp button.base-resource-value { border:0; border-radius:0; padding:0; background:none; color:inherit; cursor:pointer; }
+#overlay #hubMain.pg.hub.base-camp button.base-resource-value:hover { opacity:.75; }

@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-base-iterate-1011",
+  "date": "2026-10-11",
+  "owner": "Friday",
+  "goal": "基地前端继续迭代：统一按钮/动效与子页留白，收藏室只展已收藏卡牌，收藏奖励移至次级界面；壁纸暂缓",
+  "paths": [
+    "game/src/hub/game.hub.js",
+    "game/src/hub/hub.personnel.js",
+    "game/src/hub/hub.warehouse.js",
+    "game/src/hub/hub.facilities.js",
+    "game/src/hub/hub.home-v3.js",
+    "game/src/hub/hub.presentation.js",
+    "game/src/hub/hub.archive-v3.js",
+    "game/src/hub/hub.shop-v3.js",
+    "game/src/hub/base-motion-v4.js",
+    "game/css/base-camp-rework.css",
+    "game/css/base-home-v3.css",
+    "game/css/base-archive-v3.css",
+    "game/css/base-shop-v3.css",
+    "game/css/base-controls-v4.css",
+    "tests/base-ui-sample.test.js",
+    "tests/hub-archive-v3.test.js",
+    "tests/hub-shop-v3.test.js",
+    "tests/hub-pages-rework.test.js",
+    "tests/hub-flow-regression.test.js",
+    "tests/premium-ui-pages.test.js",
+    "tests/hub-upgrade-render.test.js",
+    "docs/development.md",
+    "tests/base-motion-v4.test.js",
+    "game/src/hub/hub.collection-v4.js",
+    "game/css/base-collection-v4.css",
+    "tests/hub-collection-v4.test.js",
+    "game/src/hub/hub.archive.js"
+  ],
+  "doneWhen": [
+    "收藏室只读取当前档已收藏卡牌，不复制人物完整招式库",
+    "收藏奖励独立次级页面，返回回到收藏室，成就/卡背/故事功能保留",
+    "按钮/动效/子页指引完成定向检查与当前内置窗口复核"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "89项定向测试、ESLint、11项JS语法、6项CSS解析、docs守卫与diff检查通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "Codex当前窗口真实输入验证收藏空态、奖励次级页及返回和Esc、卡背目标定位；前轮培养仓库招式扩建路径保留",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "真实档案收藏为空，非空陈列和筛选放大由构造用例覆盖；审美待老板查看",
+    "壁纸按老板要求暂缓；未真实购买扩建培养领奖应用卡背或开新局",
+    "未做多尺寸、性能A/B、全量或build；代码未提交推送"
+  ],
+  "updatedAt": "2026-10-11T03:46:17.080Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

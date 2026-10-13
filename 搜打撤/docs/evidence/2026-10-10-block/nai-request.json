@@ -1,0 +1,21 @@
+{
+  "card_id": "tt2-block",
+  "model": "nai-diffusion-4-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 854684490,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\ngauntlet, clenched hand, arm, sword, blocking, close-up, from side, simple background\n\nShow only one armored forearm and one incoming blade at the instant of a successful block. The defender forearm rises from the lower-right crop across the foreground toward a closed black-gloved fist at the left edge. A single broad dark steel wrist guard covers the back of the forearm, forming one strong curved plane. One silver sword blade descends from the upper-right crop and stops against the raised outer ridge of that wrist guard just above center. The sword cutting edge touches the armor at one clearly visible point; the blade never enters the arm. The glove and wrist guard belong to the same continuous forearm, with the arm continuing out of frame at lower right. Blade and arm oppose one another, creating a readable crossed silhouette and a small open dark wedge behind their contact. One compact ivory glint and two short ochre-gold paint swipes at the contact suggest the sudden arrested strike. Keep the sword face pale silver, the glove near-black, and the guard muted charcoal with just one broad light plane. Background is a few broad muted slate-blue and warm ivory diagonal planes following the collision, with quiet space above the fist. Tight crop, no complete warrior, second hand, face, shield, elaborate armor ornament, scattered debris or particle cloud.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, face, full body, multiple hands, extra arms, shield, multiple swords, sword piercing arm, blood, ornate armor, intricate engraving, many sparks, particles, scenery",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\block-20261010\\block.png",
+  "installed": false,
+  "design": "单臂横向顶住斜劈刀刃；接触点亮、交叉轮廓清楚；两笔短金色冲击，灰蓝/暖白背景。"
+}

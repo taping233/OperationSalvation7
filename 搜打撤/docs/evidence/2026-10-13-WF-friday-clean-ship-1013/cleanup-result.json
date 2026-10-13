@@ -1,0 +1,42 @@
+{
+  "method": "reversible-move",
+  "items": [
+    {
+      "source": "搜打撤/.tmp-m05-vite-4179.err.log",
+      "recovery": ".tmp/friday-recovery-20261013-1545/搜打撤/.tmp-m05-vite-4179.err.log",
+      "bytes": 228,
+      "sha256": "D7D1C43882578DB670CED3BCACC11D49278D5702B0750569DD8E0626E907D2BD"
+    },
+    {
+      "source": "搜打撤/.tmp-m05-vite-4179.out.log",
+      "recovery": ".tmp/friday-recovery-20261013-1545/搜打撤/.tmp-m05-vite-4179.out.log",
+      "bytes": 8173,
+      "sha256": "FA41148E729C407A864B8A7252A0F835EA87C8D3448B9D8C37961CC4B39F5FD8"
+    },
+    {
+      "source": "搜打撤/.tmp-preview.log",
+      "recovery": ".tmp/friday-recovery-20261013-1545/搜打撤/.tmp-preview.log",
+      "bytes": 164,
+      "sha256": "C320604078F9AA092EBA4A9B72C416DE1112D367754510D3B60F84E3CFE95444"
+    },
+    {
+      "source": "搜打撤/.tmp-review-tests.log",
+      "recovery": ".tmp/friday-recovery-20261013-1545/搜打撤/.tmp-review-tests.log",
+      "bytes": 18060,
+      "sha256": "29FD118FFB4097B5124AABBDD02CEA10FF1DFE6CBB0F33E5C8E3723F00243573"
+    },
+    {
+      "source": "搜打撤/.tmp-vitest-final.log",
+      "recovery": ".tmp/friday-recovery-20261013-1545/搜打撤/.tmp-vitest-final.log",
+      "bytes": 9840,
+      "sha256": "74A789F54AD8EEF14DD49489A93423200EF5DA5F0317832F87D716D75DDB0935"
+    },
+    {
+      "source": "搜打撤/bash.exe.stackdump",
+      "recovery": ".tmp/friday-recovery-20261013-1545/搜打撤/bash.exe.stackdump",
+      "bytes": 1196,
+      "sha256": "2CB921FEBA303795B0C855C3E27AE5B4BD455699929E5F5A4A1DA46876EF0689"
+    }
+  ],
+  "restore": "按本清单将 recovery 移回 source；先确认原路径为空，逐件复核SHA256"
+}

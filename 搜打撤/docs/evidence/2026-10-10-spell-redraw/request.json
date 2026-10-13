@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "card_id": "tt12-saturate",
+      "asset": "cards/spell-tt12-saturate.webp",
+      "prompt": "Use case: style-transfer. Redraw image 1 (Saturation Strike card) with its EXACT original composition, landscape framing and proportions. Image 2 is drawing-style reference only; do not copy its character. Preserve the enormous left/central dark slate and blue fan-shaped rocky impact mass, pale top facets, sparse magenta fissures and the brilliant white-lilac strike point at center-right. Preserve the thin white beam entering from the lower right and the burst spikes pointing right, plus the small magenta streak on the left. Keep the pale warm cream empty background. Simplify the numerous little internal splinters into a few larger connected broad painted planes, keeping the silhouette and impact readable. Rough hand-painted anime color study. Large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Matte muted colors with concentrated accents. Hard-edged grouped light and shadow; coherent volumes, low detail density, broad quiet areas. No tiny facet mosaics, glossy 3D, airbrush bloom, dense scratches or all-over texture filters. No text, frame, watermark or UI.",
+      "revision": "rough-original-20261010",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt12-saturate.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a125cc-1257-7b52-b519-742cc71dafda/exec-dd9fb6a9-6416-4280-a4de-5255ad194061.png"
+    },
+    {
+      "card_id": "tt12-freezeray",
+      "asset": "cards/spell-tt12-freezeray.webp",
+      "prompt": "Use case: style-transfer. Redraw image 1 (Freezing Ray card) preserving its EXACT original composition, landscape framing and object scale. Image 2 is drawing-style reference only; do not copy its character. Keep the huge dark armored gloved hand cropped by left and bottom edges, projecting a single narrow cyan ray diagonally up-right to the ice impact at upper right. Preserve the large pale cyan spiked ice burst centered over the small blue armored mechanical target with dangling limbs on the right. The target stays tiny relative to the foreground hand; do not replace it with a person. Preserve the long diagonal empty space and plain muted warm gray/taupe backdrop. Group the ice into fewer strong spear-like planes, simplify glove plates and target details, concentrate white accents at the freeze contact. Rough hand-painted anime color study. Large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Matte muted colors with concentrated accents. Hard-edged grouped light and shadow; coherent volumes, low detail density, broad quiet areas. No tiny facet mosaics, glossy 3D, airbrush bloom, dense scratches or all-over texture filters. No text, frame, watermark or UI.",
+      "revision": "rough-original-20261010",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt12-freezeray.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a125cc-1257-7b52-b519-742cc71dafda/exec-3e129d1f-5ede-48f8-a4cd-7c4b5ad22061.png"
+    },
+    {
+      "card_id": "cc-ember-burst",
+      "asset": "cards/spell-cc-ember-burst.webp",
+      "prompt": "Use case: style-transfer. Redraw image 1 (Ember Burst card) preserving its EXACT original composition, landscape framing and original proportions. Image 2 is drawing-style reference only; do not copy its character. Preserve the broad mound of charcoal-gray ash and rubble across the lower half, and the wide elliptical orange fire ring suspended horizontally around its top at mid-height, seen slightly from above. Preserve sparse tossed fragments to either side and the dark warm charcoal backdrop with large subdued smoke masses. Keep the elliptical central opening, broad lateral stretch of flames, and upward flame tips. Reduce hundreds of tiny embers and debris into a few purposeful pieces; turn ash and flame into large opaque directional brush masses with readable major volumes. Orange and pale-yellow focal fire against muted gray mound; no added characters, buildings or scenery. Rough hand-painted anime color study. Large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Matte muted colors with concentrated accents. Hard-edged grouped light and shadow; coherent volumes, low detail density, broad quiet areas. No tiny facet mosaics, glossy 3D, airbrush bloom, dense scratches or all-over texture filters. No text, frame, watermark or UI.",
+      "revision": "rough-original-20261010",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-cc-ember-burst.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a125cc-1257-7b52-b519-742cc71dafda/exec-6bbe62a7-afb0-43a9-b7d9-41441d31c8aa.png"
+    }
+  ]
+}

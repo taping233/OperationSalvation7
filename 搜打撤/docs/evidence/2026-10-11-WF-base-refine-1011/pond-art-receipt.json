@@ -1,0 +1,13 @@
+{
+  "generatedBy": "内置ImageGen",
+  "style": "artifact-template-wu，仅画风，无人物",
+  "source": "game/art-source/ui/courtyard-v4/pond-source.png",
+  "sourceSha256": "e7b459601d9c9646af8d2fb6fb364c5eca31873a38c8981cd81af39aa3a06525",
+  "sourceBytes": 2233781,
+  "sourceExcludedFromGit": true,
+  "path": "game/assets/scenes/courtyard-pond-v4.webp",
+  "bytes": 188050,
+  "sha256": "95864cff3f37d71a1decdcd991df4dfa1f786976d897c338038c7e87d05e1842",
+  "conversion": "Pillow WebP质量88/method6，保留原尺寸，不改画面",
+  "role": "静态俯视庭院浅水与岸边；无鱼/涟漪/UI，程序绘制动态前景"
+}

@@ -1,0 +1,127 @@
+{
+  "workflow": "Built-in ImageGen style-transfer on seven completed E-design card backs, using current project card-art style references",
+  "user_instruction": "再叠一次我们项目的通用画风",
+  "base_receipt": "../2026-10-12-cardbacks-e-style/receipt.json",
+  "items": [
+    {
+      "id": "classic",
+      "name": "行囊粗布",
+      "concept": "远行之门与罗盘绳路",
+      "keep": "Preserve the folded tan canvas, cyan compass-star inside its diamond opening, winding teal rope, small compass charm and existing straps. Group the cloth into main fold planes and the rope into a few broad turns; replace miniature brocade-like fabric patterns with calm ochre color areas and a few major stitches.",
+      "asset": "card-backs/classic.webp",
+      "base_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-e-style-20261012\\classic-source.png",
+      "imagegen_prompt": "STYLE-TRANSFER EDIT of Input 1 only, ONE complete portrait 2:3 card-back artwork. Input 1 is the current finished card back: preserve its composition, object arrangement, relative sizes, palette, central vertical framework and distinctive subject. Inputs 2, 3, 4 are our PROJECT'S ACTUAL CARD ART STYLE references, in order chase-slash, initial attack and treasure-hunt. Borrow their large connected color planes, broad directional opaque brush construction, hard grouped shadows, selective midtone turns and low-detail hand-painted anime illustration finish. Do not copy their weapons, chest, slash beams, subjects, poses or backgrounds. The requested change is the drawing style, not the design. Preserve the folded tan canvas, cyan compass-star inside its diamond opening, winding teal rope, small compass charm and existing straps. Group the cloth into main fold planes and the rope into a few broad turns; replace miniature brocade-like fabric patterns with calm ochre color areas and a few major stitches. PAINTING: complete readable silhouettes and clear structure, simplified interiors. Build each material from substantial connected opaque color masses and a few broad curved/elongated swipes that explain form direction. Handmade edges, varied stroke width, a few deliberate structural accents and restrained highlights; enough quiet surfaces to breathe. Keep grouped light/shadow and existing warm/cool color relationships. Reduce fine ornamental linework, dense engraving, scale grids, floral fabric micro-patterns, stone cracks and uniform aged/grain texture; simplify the existing background cloud pattern into a few broad subdued shapes. Do not replace fine detail with thousands of little brush flakes or triangular facets. Keep the same CLOSED continuous metal border on ALL FOUR sides and all FOUR angular corners, the same thickness and inset boundary, expressed through broad dark planes and a few large antique-gold edge strokes. Do not remove, thin away or crop the enclosing frame. No glossy 3D, photoreal material, flat one-tone vector filling, airbrushed polish, all-over texture filters, words, logos, numbers, UI or card mockup. Full bleed, no outside margin.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-e-style-20261012\\classic-source.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-1a5671e3-f78b-435c-9569-a9314a6186e6.png",
+      "generation_method": "builtin-style-transfer"
+    },
+    {
+      "id": "wolf",
+      "name": "猎手皮纸",
+      "concept": "鹿角弓与贯月赤箭",
+      "keep": "Preserve the two antlers, large ivory crescent, crimson central arrow, parchment side panels and existing hunting-track silhouettes. Render antlers and parchment with a few decisive shape planes, simplify scratches and hide grain, keep the arrow and moon silhouette clear.",
+      "asset": "card-backs/wolf.webp",
+      "base_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-e-style-20261012\\wolf-source.png",
+      "imagegen_prompt": "STYLE-TRANSFER EDIT of Input 1 only, ONE complete portrait 2:3 card-back artwork. Input 1 is the current finished card back: preserve its composition, object arrangement, relative sizes, palette, central vertical framework and distinctive subject. Inputs 2, 3, 4 are our PROJECT'S ACTUAL CARD ART STYLE references, in order chase-slash, initial attack and treasure-hunt. Borrow their large connected color planes, broad directional opaque brush construction, hard grouped shadows, selective midtone turns and low-detail hand-painted anime illustration finish. Do not copy their weapons, chest, slash beams, subjects, poses or backgrounds. The requested change is the drawing style, not the design. Preserve the two antlers, large ivory crescent, crimson central arrow, parchment side panels and existing hunting-track silhouettes. Render antlers and parchment with a few decisive shape planes, simplify scratches and hide grain, keep the arrow and moon silhouette clear. PAINTING: complete readable silhouettes and clear structure, simplified interiors. Build each material from substantial connected opaque color masses and a few broad curved/elongated swipes that explain form direction. Handmade edges, varied stroke width, a few deliberate structural accents and restrained highlights; enough quiet surfaces to breathe. Keep grouped light/shadow and existing warm/cool color relationships. Reduce fine ornamental linework, dense engraving, scale grids, floral fabric micro-patterns, stone cracks and uniform aged/grain texture; simplify the existing background cloud pattern into a few broad subdued shapes. Do not replace fine detail with thousands of little brush flakes or triangular facets. Keep the same CLOSED continuous metal border on ALL FOUR sides and all FOUR angular corners, the same thickness and inset boundary, expressed through broad dark planes and a few large antique-gold edge strokes. Do not remove, thin away or crop the enclosing frame. No glossy 3D, photoreal material, flat one-tone vector filling, airbrushed polish, all-over texture filters, words, logos, numbers, UI or card mockup. Full bleed, no outside margin.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-e-style-20261012\\wolf-source.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-a1452455-af43-4b79-9a0f-3c9859ca3061.png",
+      "generation_method": "builtin-style-transfer"
+    },
+    {
+      "id": "coin",
+      "name": "富商锦缎",
+      "concept": "锦鲤金库封印",
+      "keep": "Preserve both opposing koi, the large gold vault-ring, central square opening and green jade sphere, diagonal red silk and frame. Group each fish body into principal gold/red volume planes with only a few selective scale indications; simplify the silk's floral embroidery into broad quiet red masses.",
+      "asset": "card-backs/coin.webp",
+      "base_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-e-style-20261012\\coin-source.png",
+      "imagegen_prompt": "STYLE-TRANSFER EDIT of Input 1 only, ONE complete portrait 2:3 card-back artwork. Input 1 is the current finished card back: preserve its composition, object arrangement, relative sizes, palette, central vertical framework and distinctive subject. Inputs 2, 3, 4 are our PROJECT'S ACTUAL CARD ART STYLE references, in order chase-slash, initial attack and treasure-hunt. Borrow their large connected color planes, broad directional opaque brush construction, hard grouped shadows, selective midtone turns and low-detail hand-painted anime illustration finish. Do not copy their weapons, chest, slash beams, subjects, poses or backgrounds. The requested change is the drawing style, not the design. Preserve both opposing koi, the large gold vault-ring, central square opening and green jade sphere, diagonal red silk and frame. Group each fish body into principal gold/red volume planes with only a few selective scale indications; simplify the silk's floral embroidery into broad quiet red masses. PAINTING: complete readable silhouettes and clear structure, simplified interiors. Build each material from substantial connected opaque color masses and a few broad curved/elongated swipes that explain form direction. Handmade edges, varied stroke width, a few deliberate structural accents and restrained highlights; enough quiet surfaces to breathe. Keep grouped light/shadow and existing warm/cool color relationships. Reduce fine ornamental linework, dense engraving, scale grids, floral fabric micro-patterns, stone cracks and uniform aged/grain texture; simplify the existing background cloud pattern into a few broad subdued shapes. Do not replace fine detail with thousands of little brush flakes or triangular facets. Keep the same CLOSED continuous metal border on ALL FOUR sides and all FOUR angular corners, the same thickness and inset boundary, expressed through broad dark planes and a few large antique-gold edge strokes. Do not remove, thin away or crop the enclosing frame. No glossy 3D, photoreal material, flat one-tone vector filling, airbrushed polish, all-over texture filters, words, logos, numbers, UI or card mockup. Full bleed, no outside margin.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-e-style-20261012\\coin-source.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-28fa0c12-dc5b-47f0-a0ee-f50fabdce080.png",
+      "generation_method": "builtin-style-transfer"
+    },
+    {
+      "id": "vault",
+      "name": "仓廪木纹",
+      "concept": "年轮麦穗与种子锁孔",
+      "keep": "Preserve the spiralling wooden ring bands, green mineral inlays, two sweeping gold wheat heads and seed-shaped keyhole. Use broad curved brush planes for wood, a few quiet green turns for inlays and large blunt grouped grains for wheat; remove fine woodgrain networks.",
+      "asset": "card-backs/vault.webp",
+      "base_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-e-style-20261012\\vault-source.png",
+      "imagegen_prompt": "STYLE-TRANSFER EDIT of Input 1 only, ONE complete portrait 2:3 card-back artwork. Input 1 is the current finished card back: preserve its composition, object arrangement, relative sizes, palette, central vertical framework and distinctive subject. Inputs 2, 3, 4 are our PROJECT'S ACTUAL CARD ART STYLE references, in order chase-slash, initial attack and treasure-hunt. Borrow their large connected color planes, broad directional opaque brush construction, hard grouped shadows, selective midtone turns and low-detail hand-painted anime illustration finish. Do not copy their weapons, chest, slash beams, subjects, poses or backgrounds. The requested change is the drawing style, not the design. Preserve the spiralling wooden ring bands, green mineral inlays, two sweeping gold wheat heads and seed-shaped keyhole. Use broad curved brush planes for wood, a few quiet green turns for inlays and large blunt grouped grains for wheat; remove fine woodgrain networks. PAINTING: complete readable silhouettes and clear structure, simplified interiors. Build each material from substantial connected opaque color masses and a few broad curved/elongated swipes that explain form direction. Handmade edges, varied stroke width, a few deliberate structural accents and restrained highlights; enough quiet surfaces to breathe. Keep grouped light/shadow and existing warm/cool color relationships. Reduce fine ornamental linework, dense engraving, scale grids, floral fabric micro-patterns, stone cracks and uniform aged/grain texture; simplify the existing background cloud pattern into a few broad subdued shapes. Do not replace fine detail with thousands of little brush flakes or triangular facets. Keep the same CLOSED continuous metal border on ALL FOUR sides and all FOUR angular corners, the same thickness and inset boundary, expressed through broad dark planes and a few large antique-gold edge strokes. Do not remove, thin away or crop the enclosing frame. No glossy 3D, photoreal material, flat one-tone vector filling, airbrushed polish, all-over texture filters, words, logos, numbers, UI or card mockup. Full bleed, no outside margin.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-e-style-20261012\\vault-source.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-6f2977d4-788e-49cc-b37a-6326818637cd.png",
+      "generation_method": "builtin-style-transfer"
+    },
+    {
+      "id": "boss",
+      "name": "弑神黑曜",
+      "concept": "断冠坠入黑曜裂隙",
+      "keep": "Preserve the cracked ivory crown, tall black obsidian diamond with red fissure, broken halo arcs, sparse large suspended fragments and dark red fabric accents. Use large connected black/bone/red masses and a few clear hard shadow turns; keep the red fissure as the focal accent.",
+      "asset": "card-backs/boss.webp",
+      "base_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-e-style-20261012\\boss-source.png",
+      "imagegen_prompt": "STYLE-TRANSFER EDIT of Input 1 only, ONE complete portrait 2:3 card-back artwork. Input 1 is the current finished card back: preserve its composition, object arrangement, relative sizes, palette, central vertical framework and distinctive subject. Inputs 2, 3, 4 are our PROJECT'S ACTUAL CARD ART STYLE references, in order chase-slash, initial attack and treasure-hunt. Borrow their large connected color planes, broad directional opaque brush construction, hard grouped shadows, selective midtone turns and low-detail hand-painted anime illustration finish. Do not copy their weapons, chest, slash beams, subjects, poses or backgrounds. The requested change is the drawing style, not the design. Preserve the cracked ivory crown, tall black obsidian diamond with red fissure, broken halo arcs, sparse large suspended fragments and dark red fabric accents. Use large connected black/bone/red masses and a few clear hard shadow turns; keep the red fissure as the focal accent. PAINTING: complete readable silhouettes and clear structure, simplified interiors. Build each material from substantial connected opaque color masses and a few broad curved/elongated swipes that explain form direction. Handmade edges, varied stroke width, a few deliberate structural accents and restrained highlights; enough quiet surfaces to breathe. Keep grouped light/shadow and existing warm/cool color relationships. Reduce fine ornamental linework, dense engraving, scale grids, floral fabric micro-patterns, stone cracks and uniform aged/grain texture; simplify the existing background cloud pattern into a few broad subdued shapes. Do not replace fine detail with thousands of little brush flakes or triangular facets. Keep the same CLOSED continuous metal border on ALL FOUR sides and all FOUR angular corners, the same thickness and inset boundary, expressed through broad dark planes and a few large antique-gold edge strokes. Do not remove, thin away or crop the enclosing frame. No glossy 3D, photoreal material, flat one-tone vector filling, airbrushed polish, all-over texture filters, words, logos, numbers, UI or card mockup. Full bleed, no outside margin.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-e-style-20261012\\boss-source.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-f28a7554-75a5-41f1-b45d-4554dab05588.png",
+      "generation_method": "builtin-style-transfer"
+    },
+    {
+      "id": "altar",
+      "name": "核心星轨",
+      "concept": "折叠天体仪与蚀日晶核",
+      "keep": "Preserve the intersecting antique-gold orbital bands, cyan crystal containing the black eclipsed core, four corner stars and sparse broad star-map arcs. Simplify engraved markings and tiny stars into a few purposeful accents, crystal into a small number of large blue light/shadow planes. Keep the bands' front/back overlaps readable.",
+      "asset": "card-backs/altar.webp",
+      "base_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-e-style-20261012\\altar-source.png",
+      "imagegen_prompt": "STYLE-TRANSFER EDIT of Input 1 only, ONE complete portrait 2:3 card-back artwork. Input 1 is the current finished card back: preserve its composition, object arrangement, relative sizes, palette, central vertical framework and distinctive subject. Inputs 2, 3, 4 are our PROJECT'S ACTUAL CARD ART STYLE references, in order chase-slash, initial attack and treasure-hunt. Borrow their large connected color planes, broad directional opaque brush construction, hard grouped shadows, selective midtone turns and low-detail hand-painted anime illustration finish. Do not copy their weapons, chest, slash beams, subjects, poses or backgrounds. The requested change is the drawing style, not the design. Preserve the intersecting antique-gold orbital bands, cyan crystal containing the black eclipsed core, four corner stars and sparse broad star-map arcs. Simplify engraved markings and tiny stars into a few purposeful accents, crystal into a small number of large blue light/shadow planes. Keep the bands' front/back overlaps readable. PAINTING: complete readable silhouettes and clear structure, simplified interiors. Build each material from substantial connected opaque color masses and a few broad curved/elongated swipes that explain form direction. Handmade edges, varied stroke width, a few deliberate structural accents and restrained highlights; enough quiet surfaces to breathe. Keep grouped light/shadow and existing warm/cool color relationships. Reduce fine ornamental linework, dense engraving, scale grids, floral fabric micro-patterns, stone cracks and uniform aged/grain texture; simplify the existing background cloud pattern into a few broad subdued shapes. Do not replace fine detail with thousands of little brush flakes or triangular facets. Keep the same CLOSED continuous metal border on ALL FOUR sides and all FOUR angular corners, the same thickness and inset boundary, expressed through broad dark planes and a few large antique-gold edge strokes. Do not remove, thin away or crop the enclosing frame. No glossy 3D, photoreal material, flat one-tone vector filling, airbrushed polish, all-over texture filters, words, logos, numbers, UI or card mockup. Full bleed, no outside margin.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-e-style-20261012\\altar-source.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-bf1b7091-9161-49ff-8795-7e870e49bd93.png",
+      "generation_method": "builtin-style-transfer"
+    },
+    {
+      "id": "pet",
+      "name": "忠犬爪印",
+      "concept": "项圈守护的爪印星座",
+      "keep": "Preserve the heart-shaped navy dog collar, brass buckle and hanging charm, four ivory toe islands and one large paw pad, tan protective side ribbons and green backdrop. Use connected dark leather masses, large ivory paw shapes and a few broad metal highlights; remove floral microtexture and scattered tiny shiny marks.",
+      "asset": "card-backs/pet.webp",
+      "base_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-e-style-20261012\\pet-source.png",
+      "imagegen_prompt": "STYLE-TRANSFER EDIT of Input 1 only, ONE complete portrait 2:3 card-back artwork. Input 1 is the current finished card back: preserve its composition, object arrangement, relative sizes, palette, central vertical framework and distinctive subject. Inputs 2, 3, 4 are our PROJECT'S ACTUAL CARD ART STYLE references, in order chase-slash, initial attack and treasure-hunt. Borrow their large connected color planes, broad directional opaque brush construction, hard grouped shadows, selective midtone turns and low-detail hand-painted anime illustration finish. Do not copy their weapons, chest, slash beams, subjects, poses or backgrounds. The requested change is the drawing style, not the design. Preserve the heart-shaped navy dog collar, brass buckle and hanging charm, four ivory toe islands and one large paw pad, tan protective side ribbons and green backdrop. Use connected dark leather masses, large ivory paw shapes and a few broad metal highlights; remove floral microtexture and scattered tiny shiny marks. PAINTING: complete readable silhouettes and clear structure, simplified interiors. Build each material from substantial connected opaque color masses and a few broad curved/elongated swipes that explain form direction. Handmade edges, varied stroke width, a few deliberate structural accents and restrained highlights; enough quiet surfaces to breathe. Keep grouped light/shadow and existing warm/cool color relationships. Reduce fine ornamental linework, dense engraving, scale grids, floral fabric micro-patterns, stone cracks and uniform aged/grain texture; simplify the existing background cloud pattern into a few broad subdued shapes. Do not replace fine detail with thousands of little brush flakes or triangular facets. Keep the same CLOSED continuous metal border on ALL FOUR sides and all FOUR angular corners, the same thickness and inset boundary, expressed through broad dark planes and a few large antique-gold edge strokes. Do not remove, thin away or crop the enclosing frame. No glossy 3D, photoreal material, flat one-tone vector filling, airbrushed polish, all-over texture filters, words, logos, numbers, UI or card mockup. Full bleed, no outside margin.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-e-style-20261012\\pet-source.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-chase-slash.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\expedition-starters\\basic-attack.webp",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3-treasure-hunt.webp"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-d4d15efe-5cc9-4a91-bfb9-19a39b4a99d3.png",
+      "generation_method": "builtin-style-transfer"
+    }
+  ],
+  "user_correction": "Seven card backs require clearly enclosing continuous borders and four distinct corners."
+}

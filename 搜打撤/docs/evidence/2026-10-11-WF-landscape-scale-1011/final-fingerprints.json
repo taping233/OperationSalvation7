@@ -1,0 +1,213 @@
+{
+  "time": "2026-10-11T14:20:29.585Z",
+  "files": [
+    {
+      "file": "game/css/base.css",
+      "sha256": "20034355e9b4845795c5183318a4ad31d22a39a8084e67cfc06de56e1ec2b199"
+    },
+    {
+      "file": "game/css/cards.css",
+      "sha256": "51c99bbabb76382e6f56346aa0e157338377cf08c287cafc56970aa2c3703435"
+    },
+    {
+      "file": "game/css/overlays.css",
+      "sha256": "790aa812c8a86e6efb8ad58d99af10bc9ffef4aaecf7c1302a834fd0233c66d9"
+    },
+    {
+      "file": "game/css/hub.css",
+      "sha256": "26074a3d58abda3e0177e5ad0678c0ea1ba0d89e67b9255c6344f1a63fbae9a5"
+    },
+    {
+      "file": "game/css/battle.css",
+      "sha256": "a305c83697a4c69e87153a7a55100f9a9779975d85885a3a943ecb16779abc06"
+    },
+    {
+      "file": "game/css/scenes.css",
+      "sha256": "efccf73e96e0dab7979cd9b9e7fff7e5544c64820124c19fd98dd6911e7b3b2c"
+    },
+    {
+      "file": "game/css/lab-ending.css",
+      "sha256": "0a86a880e2d2ce640f00973bd34a74462f4a8f06e9b3c11c72098586017675a0"
+    },
+    {
+      "file": "game/css/winter.css",
+      "sha256": "e3a45806faf8b570e33b23dec3a52d0687fd4e14706b1475b765bfb44c210f5b"
+    },
+    {
+      "file": "game/css/expedition.css",
+      "sha256": "24caa415e729758d95a0ec4d328fb278264f37be5f8ed35ae1f3b69236a5a82c"
+    },
+    {
+      "file": "game/css/expedition-map.css",
+      "sha256": "e004bc84d5cdc3f2771f3e4621d69246c05d95cbc9d02d4247560d6920b5b4a8"
+    },
+    {
+      "file": "game/css/expedition-hub.css",
+      "sha256": "e94603eb25ce7d0624996df878e99a55ca3e8f674cdbccd567e8760dec71e960"
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "sha256": "3f703713687359dfe99d6c7a89bafac2ef82e70b6ab3c011626cad9a54990049"
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "sha256": "9a164aabbd43beae3a268cb0cb1ab25f71d0273755e50aa364aa09436ac70bd0"
+    },
+    {
+      "file": "game/css/expedition-battle.css",
+      "sha256": "07abd805c4c7b9436d5934ab254132311c222acb2786d18bd7411f1d0f249eda"
+    },
+    {
+      "file": "game/css/expedition-library.css",
+      "sha256": "2118f87fef8d5d3c083e8d5d143c793c1b5bcd2be1115cfb5fecbd47194cc4dd"
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "sha256": "c676cd25417784b34f58ae79c0d6879e2a10de6c59a229c2fee63bda7f29863a"
+    },
+    {
+      "file": "game/css/expedition-shop.css",
+      "sha256": "1c2cb06fa9469a231a419cc4f77c79ced311c955b651a1a0bf73d07cabcf9585"
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "sha256": "136394ea2950385f8000d4a8b08fb50f352cbc420f80f6914a58aa68824325b6"
+    },
+    {
+      "file": "game/css/page-slot-select.css",
+      "sha256": "60124790205506e9754524eb4d31369f442ac019e7fe58a98d23115bb05577c2"
+    },
+    {
+      "file": "game/css/page-settings.css",
+      "sha256": "5f0d3e1929eb0089bb551ea65a0d7c831a371ed62f276b06d3847cc39e5f2e0a"
+    },
+    {
+      "file": "game/css/page-datapage.css",
+      "sha256": "54f1ea084a185799ee89ac7c30560859fbfc83ba1d8d9d5cc2c5dc25494662cb"
+    },
+    {
+      "file": "game/css/page-ach.css",
+      "sha256": "7df9869e2586e78dd086c135ab24a1a3e7864b7235f8ff3dc8af48f6f4750208"
+    },
+    {
+      "file": "game/css/page-expedition-hud.css",
+      "sha256": "872f9fbbf8daa54b8b51ca5eebc057060eb8ef8d2af709439d47438434072d00"
+    },
+    {
+      "file": "game/css/pocket-strip.css",
+      "sha256": "f55b012ff49afd8e270115fbb1f6f3b2de7c555b33aff107c98b1da8b2399a78"
+    },
+    {
+      "file": "game/css/page-battle-ui.css",
+      "sha256": "ba29d17cffd584837e1c1f4936f7d2e5ad80e2f2b6b64f738f3c15e561bd37fc"
+    },
+    {
+      "file": "game/css/base-camp-compact.css",
+      "sha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9"
+    },
+    {
+      "file": "game/css/camp-entry.css",
+      "sha256": "65d17e18758bbaee181183d992e02757edc7df393191970a523fdc2490c7332c"
+    },
+    {
+      "file": "game/css/home-linked-interactions.css",
+      "sha256": "b6d70c2d361d93fb65a251948332ee3d06e89161151b64ee43eb646e54f0ddc4"
+    },
+    {
+      "file": "game/css/title-achievements.css",
+      "sha256": "39bf8169417b6d74aace905e3426fcfe530e50bac1f520c21aa3b813109f7d68"
+    },
+    {
+      "file": "game/css/beginner-guide.css",
+      "sha256": "75a4769a6fa0a3e40230823f76f77c0d88b9891a81186c607fcf489875658852"
+    },
+    {
+      "file": "game/css/archive-back.css",
+      "sha256": "29e9ff37b078d113073a1e2a8b79a4ab014200ce4a3dc7ab8bd0297756f0dd76"
+    },
+    {
+      "file": "game/css/page-loading.css",
+      "sha256": "ce6879c6afca9e0bc2d5c17d611207ffc0192494dc86ed12f26154252893abd5"
+    },
+    {
+      "file": "game/css/photo-studio-mounts.css",
+      "sha256": "9c036b4cca8cedc4b2f02724c5f6b396b146855afa580422c30af6ba8c7ff7fe"
+    },
+    {
+      "file": "game/css/photo-studio-unified.css",
+      "sha256": "1e7812e8abb9a0302b7397295b5910b4dc15f55ddf610a3c8860e31bd9ed040d"
+    },
+    {
+      "file": "game/css/preparation.css",
+      "sha256": "b962d914de10d1169ae822bfa408ae8bdf309d1a8f3668adf8975f09fc1f3c83"
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "sha256": "1b8d3f851df23999bf2310a47038d4396b91f47fb2f9b391bf5e65db432fd56e"
+    },
+    {
+      "file": "game/css/inventory-zoom.css",
+      "sha256": "3b21c365452b3a1a2c6937f7c6fabd88139c74006321854a1769aedcf22f6f5b"
+    },
+    {
+      "file": "game/css/base-panel-layout.css",
+      "sha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9"
+    },
+    {
+      "file": "game/css/base-cohesion-v5.css",
+      "sha256": "f020574ba7ea72ff84b466776010d7589dc22ee8d343b1fffd56ff0e271dd1b0"
+    },
+    {
+      "file": "game/css/base-rooms-v7.css",
+      "sha256": "c3a19c0d3b22030e021f69c24f7ed9ecfdceff2697ec7217eac74fc79309f1a2"
+    },
+    {
+      "file": "game/css/base-shop-v3.css",
+      "sha256": "3eaadb7fdabc2374e7c9bf0662421123895dee2e3605011732d273eef2ef6acc"
+    },
+    {
+      "file": "game/css/home-scene.css",
+      "sha256": "741e523f66723658de5d7f8e936cf6f06442c8ca38fc748bba09cc3c1d6f17c7"
+    },
+    {
+      "file": "game/css/home-polish.css",
+      "sha256": "aa938b86f233dd2c403f1d811b910ad3e670511206b34221036124e7ad74bd6f"
+    },
+    {
+      "file": "game/css/home-layers.css",
+      "sha256": "f70672b4d60d4213a1a76564e81c0579a51255636aa0c30636302edf6b5e9804"
+    },
+    {
+      "file": "game/css/motion-transitions.css",
+      "sha256": "e22a1c9391009ed780aca7146137c4329117d27f4a343ce6571bdf232825af97"
+    },
+    {
+      "file": "game/src/ui/ui-scale.js",
+      "sha256": "d9f6f5872e0065b4af9875a3f786796adf2d2ad6615871434129aa7607113235"
+    },
+    {
+      "file": "game/css/ui-scale.css",
+      "sha256": "83705767f816c8aee8e7d463be424881ebf27c714ddc5f29648a97ac7895ebe1"
+    },
+    {
+      "file": "game/src/ui/term-tips.js",
+      "sha256": "744980b249a9f50a8ed2d14d2b7544ebaac996bc1c8579470dff659cbdf79813"
+    },
+    {
+      "file": "game/src/battle/view/battle.aim.js",
+      "sha256": "b12177b144e1c13ef942895f078674fea526722da43236c7dbc1ea677ee540ae"
+    },
+    {
+      "file": "game/src/hub/photo-studio-controls.js",
+      "sha256": "0096f293b823e517df8b58bf49d9a052ba84beac87014fdf8217925d284fabd5"
+    },
+    {
+      "file": "tests/ui-scale.test.js",
+      "sha256": "066e6a83575b28d1d7898e1d95918ed79988e7d9a278fa20b088dca25685fa09"
+    },
+    {
+      "file": "docs/development.md",
+      "sha256": "91b53dfe45adc3cb102c0adfafd17bac191f5d6450a621de4abbdc5181570a2d"
+    }
+  ]
+}

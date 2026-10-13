@@ -1,0 +1,64 @@
+{
+  "status": "四张候选待老板选择，未替换卡面",
+  "selected_compositions": {
+    "volcano": "C",
+    "wind": "C"
+  },
+  "approved_style_anchors": [
+    "花开两面",
+    "青龙偃月斩",
+    "惩击"
+  ],
+  "items": [
+    {
+      "label": "火山1",
+      "emphasis": "人物与手势优先",
+      "prompt": "References 1-3 are the exact APPROVED ART STYLE: match their anime facial drawing, modest structural linework, matte opaque color grouping, broad directional paint marks and restrained finish. Faces and hands clear like refs1/3; substantial grouped locks and principal cloth folds, economical dark blue-gray backdrop like refs2/3. Painted shape edges vary naturally. Match their brush scale RELATIVE TO THE SUBJECT; internal surfaces mostly quiet with selected form-building swipes. No oil impasto or thick paint ridges, no random texture coating, no graphic flat poster, no heavy ink outlines, no faceted polygon mosaic, no refined hair filaments or dense decorative folds. Fire/rain should be painted as simplified broad gestures like ref2 dragon-energy and ref3 golden light, not detailed material simulations. Borrow only DRAWING LANGUAGE and rendering economy from refs1-3, do not import their props/characters/poses. Single square rough anime card draft, no text/frame/UI. Reference4 supplies CHARACTER IDENTITY ONLY: silver-haired long-haired Chang Wuyu with gold eyes, thin round glasses, pointed ears, oversized black/violet witch hat, dark violet-black coat and gloves. Selected composition C: elevated diagonal camera looking down, witch head/hat and upper torso in upper left, one reaching black-gloved hand points diagonally toward lower right; a few dark paper cards descend into a large curved volcanic energy funnel in lower right with a pale small hot center, a broad orange sweep joins right upper edge to the funnel. No literal landscape and no held fireball. DRAFT V1 emphasis: character face and gloved gesture clearly readable, face occupies about 12 percent of frame width, hat/torso/hand form one connected dark shape. Orange funnel occupies lower-right third, rest of background broad quiet desaturated violet-gray. Hold energy palette in gray-red/orange with a small ivory hot core; strongly grouped illumination, sparse warm reflected marks on glove. Same muted grounded painting feel as approved cards.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-d72be5a1-f8cd-41f6-8883-ce6f1d651236.png",
+      "saved": ".tmp/imagegen/ability-anchors-1010/v1.png",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/hero-summoner.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt8-dragonblade.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-smite.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/hero-volcano.webp"
+      ]
+    },
+    {
+      "label": "火山2",
+      "emphasis": "能量弧与喷发优先",
+      "prompt": "References 1-3 are the exact APPROVED ART STYLE: match their anime facial drawing, modest structural linework, matte opaque color grouping, broad directional paint marks and restrained finish. Faces and hands clear like refs1/3; substantial grouped locks and principal cloth folds, economical dark blue-gray backdrop like refs2/3. Painted shape edges vary naturally. Match their brush scale RELATIVE TO THE SUBJECT; internal surfaces mostly quiet with selected form-building swipes. No oil impasto or thick paint ridges, no random texture coating, no graphic flat poster, no heavy ink outlines, no faceted polygon mosaic, no refined hair filaments or dense decorative folds. Fire/rain should be painted as simplified broad gestures like ref2 dragon-energy and ref3 golden light, not detailed material simulations. Borrow only DRAWING LANGUAGE and rendering economy from refs1-3, do not import their props/characters/poses. Single square rough anime card draft, no text/frame/UI. Reference4 supplies CHARACTER IDENTITY ONLY: silver-haired Chang Wuyu, gold eyes/thin round glasses/pointed ears, black witch hat with violet lining, dark violet coat and gloves. Selected C composition: elevated diagonal camera, witch upper-left, forward glove pointing toward lower-right volcanic funnel, a few dark spell-card fragments entering its hot core, one broad orange energy arc crosses diagonally. DRAFT V2 emphasis: the curved erupting energy is the primary big shape, like ref2's dragon slash dominating frame. Character concentrated at upper-left one-third, face selectively readable, connected coat silhouette kept quiet; vortex and arc make an unmistakable broad curved orange/ivory hook across lower-right half. Convey power with 3-4 large connected orange masses and a few opaque direction swipes, not dozens of thin sparks or textured rock swirls. Rest of frame muted blue-violet gray abstract color planes. No literal volcano scenery, no floating round fireball; concentration and eruption as a symbolic broad painted shape. Match approved cards' controlled broad brush handling.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-5d851452-d80a-47ea-8a43-921b47db449a.png",
+      "saved": ".tmp/imagegen/ability-anchors-1010/v2.png",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/hero-summoner.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt8-dragonblade.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-smite.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/hero-volcano.webp"
+      ]
+    },
+    {
+      "label": "风吟1",
+      "emphasis": "人物与吟唱优先",
+      "prompt": "References 1-3 are the exact APPROVED ART STYLE: match their anime facial drawing, modest structural linework, matte opaque color grouping, broad directional paint marks and restrained finish. Faces and hands clear like refs1/3; substantial grouped locks and principal cloth folds, economical dark blue-gray backdrop like refs2/3. Painted shape edges vary naturally. Match their brush scale RELATIVE TO THE SUBJECT; internal surfaces mostly quiet with selected form-building swipes. No oil impasto or thick paint ridges, no random texture coating, no graphic flat poster, no heavy ink outlines, no faceted polygon mosaic, no refined hair filaments or dense decorative folds. Fire/rain should be painted as simplified broad gestures like ref2 dragon-energy and ref3 golden light, not detailed material simulations. Borrow only DRAWING LANGUAGE and rendering economy from refs1-3, do not import their props/characters/poses. Single square rough anime card draft, no text/frame/UI. Xingyue is the woman in reference3; borrow her face, pale golden hair, low braid, white crescent hairclip, white priestess dress and teal cape with restrained gold borders. Do not borrow ref3 pose or beam. Selected composition C: frontal centered figure in lower two-thirds, chin slightly lifted and eyes softly closed singing, one hand at heart and another low open palm to viewer left, immense pale cropped crescent at top, broad pale rain marks descend through a few large plain spell-paper leaves around her, cape forms a broad connected teal triangle at bottom. DRAFT W1 emphasis: intimate clearly drawn anime face and readable hands are the focus, character is larger and occupies 65 percent of frame height. Keep hair in substantial long locks, dress as principal broad ivory fold planes with modest gray-green shadows. Pale moon arc and rain stay subdued and sparse above, leaves only a handful of plain silhouettes. Dark slate blue-gray background has big quiet strokes like ref3, teal cape and muted gold hair supply character color. No elaborate patterns or luminous airbrush halo; matte simplified opaque painting matching the three approved cards.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-dbf06351-0b89-4ba2-ac77-5d4bda86a5d5.png",
+      "saved": ".tmp/imagegen/ability-anchors-1010/w1.png",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/hero-summoner.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt8-dragonblade.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-smite.webp"
+      ]
+    },
+    {
+      "label": "风吟2",
+      "emphasis": "月弧与甘霖优先",
+      "prompt": "References 1-3 are the exact APPROVED ART STYLE: match their anime facial drawing, modest structural linework, matte opaque color grouping, broad directional paint marks and restrained finish. Faces and hands clear like refs1/3; substantial grouped locks and principal cloth folds, economical dark blue-gray backdrop like refs2/3. Painted shape edges vary naturally. Match their brush scale RELATIVE TO THE SUBJECT; internal surfaces mostly quiet with selected form-building swipes. No oil impasto or thick paint ridges, no random texture coating, no graphic flat poster, no heavy ink outlines, no faceted polygon mosaic, no refined hair filaments or dense decorative folds. Fire/rain should be painted as simplified broad gestures like ref2 dragon-energy and ref3 golden light, not detailed material simulations. Borrow only DRAWING LANGUAGE and rendering economy from refs1-3, do not import their props/characters/poses. Single square rough anime card draft, no text/frame/UI. Character identity from reference3: Xingyue, pale golden long hair with low braid, gold eyes, white crescent clip, white priestess dress and dark teal cape with restrained gold trim. Pose DIFFERENT from reference3. Selected composition C: frontal centered singing priestess in lower half, chin upward, one hand over heart and other low open palm, enormous cropped pale moon arc top-center casts a broad downward blessing rain through a few large spell-paper leaf shapes; dark cape is a grounded triangular base. DRAFT W2 emphasis: celestial rain and moon occupy upper half as one large ivory/gold shape against dark blue-gray, person a smaller centered anchor in lower half. Paint the rain as 4-6 broad interrupted vertical pale brush swipes, not many thin lines; use a few simple paper silhouettes to connect moon and hands. Clear face with economical anime marks, broad hair locks and principal cloth planes. Larger surrounding negative space and stronger light-dark hierarchy analogous to ref2 dragon-energy/ref3 lightbeam. Matte warm ivory and quiet desaturated teal; no photoreal rain, glow blur, thick oil texture, ornate details or poster-flat silhouettes. Preserve approved cards' handmade broad opaque brush language.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-00344bc9-e7eb-4e29-a6c0-ad2547464064.png",
+      "saved": ".tmp/imagegen/ability-anchors-1010/w2.png",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/hero-summoner.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt8-dragonblade.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-smite.webp"
+      ]
+    }
+  ]
+}

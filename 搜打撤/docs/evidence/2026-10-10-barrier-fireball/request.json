@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-firm-barrier",
+      "asset": "cards/spell-tt3-firm-barrier.webp",
+      "prompt": "Style-transfer. Redraw FIRST image 坚冰结界 preserving exact original SQUARE composition, frontal three-quarter camera, crop and placements. Baita occupies right half, long brown curly hair flowing down right, green eyes and small confident smile, gold hoop earrings, white long-sleeved blouse/deep green pinafore dress and oval blue brooch. Preserve BOTH arms folded across one another on top of enormous translucent pale cyan rectangular ICE WALL at lower left, same leaning posture, hand placement and elbow positions. Ice wall fills lower-left quadrant, top face visible at mid-height, right vertical edge at center. Render ice as a few broad cream/cyan/blue hard-edge planes and sparse purposeful structural strokes, no intricate facets. Pale cyan flat background. No extra props. Images 2–4 are STYLE ONLY references for broad opaque brushwork, grouped dark cloth and anime facial drawing, don't copy identities/outfits/poses. Rough hand-painted anime color study, large connected opaque color masses, limited broad directional curved swipes and blunt dabs, decisive handmade edges and grouped hard shadows, selective expressive coverage amid quiet regions. Hair into substantial coherent locks, cloth into principal fold planes. Readable hands, clear anime face, economical structural accents. Matte muted colors with concentrated elemental accents. No fine strands, dense wrinkles, tiny facet mosaics, glossy 3D, smooth airbrush, all-over grain/texture filters. Flat abstract backdrop, no text, frame, watermark or UI.",
+      "revision": "tt3-firm-barrier-original-rough-20261010",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt3-firm-barrier.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-2fcffa95-e0c1-460c-808e-42110fa47ca2.png"
+    },
+    {
+      "card_id": "tt3-fireball",
+      "asset": "cards/expedition-starters/fireball.webp",
+      "prompt": "Style-transfer. Redraw FIRST image 火球 preserving exact original LANDSCAPE 896:679 composition, subject scale and placements. ONE large spherical orange fireball centered, bright white/cream core surrounded by coherent red-orange circular flame mass, loose curling orange flame tongues around perimeter with same swirl direction and sparse detached flame tips. Pale peach/cream flat backdrop. Preserve original fireball diameter and negative space. Repaint flame using broad connected opaque orange/coral/ochre swaths, irregular curved brush shapes and hard grouped edges around white-hot core. No character, hands, scenery or extra fireballs; no photoreal smoke or busy sparks. Images 2–4 are STYLE ONLY references for broad opaque brushwork, grouped dark cloth and anime facial drawing, don't copy identities/outfits/poses. Rough hand-painted anime color study, large connected opaque color masses, limited broad directional curved swipes and blunt dabs, decisive handmade edges and grouped hard shadows, selective expressive coverage amid quiet regions. Hair into substantial coherent locks, cloth into principal fold planes. Readable hands, clear anime face, economical structural accents. Matte muted colors with concentrated elemental accents. No fine strands, dense wrinkles, tiny facet mosaics, glossy 3D, smooth airbrush, all-over grain/texture filters. Flat abstract backdrop, no text, frame, watermark or UI.",
+      "revision": "tt3-fireball-original-rough-20261010",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/expedition-starters/fireball.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-97eca08d-57e1-448e-ab8b-3b0a332f523a.png"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3sp-shadowshot",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12204-0a82-72b2-9a07-d1b72c8d8b18\\exec-396aa600-0f2b-4ed1-b77b-850788abfe51.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-shadowshot/cards-spell-tt3sp-shadowshot-source.png",
+        "bytes": 1877470,
+        "sha256": "b17bd58b5734eeff00204033a38841387ffa526884803ccf3cfca743c702b59f"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-shadowshot/cards-spell-tt3sp-shadowshot-full-before.webp",
+          "bytes": 61378,
+          "sha256": "d7572b56797e2745bf1762e14851534d982d7ed9a7bf476422e6ccf81034aced"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-shadowshot/cards-spell-tt3sp-shadowshot-thumb-before.webp",
+          "bytes": 16442,
+          "sha256": "e38fbe0bd9e796e4ae0ffe9bc35129b17b5eaebec259163f883b94a3ff0794f8"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3sp-shadowshot.webp",
+          "bytes": 123470,
+          "sha256": "d374417a94af440d50759110201f1b1341cf94b259ce8e9f502335c90b6008d6",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3sp-shadowshot.webp",
+          "bytes": 16420,
+          "sha256": "433577fbf864289aa0a3e2d7852eaa53e2a4e8a14f5d6cd062d492429c9e7de5",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "shadowshot-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt3sp-shadowshot.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 123470,
+            "sha256": "d374417a94af440d50759110201f1b1341cf94b259ce8e9f502335c90b6008d6",
+            "source": "docs/evidence/2026-10-10-shadowshot/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3sp-shadowshot.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 16442,
+            "sha256": "e38fbe0bd9e796e4ae0ffe9bc35129b17b5eaebec259163f883b94a3ff0794f8",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3sp-shadowshot.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 16420,
+            "sha256": "433577fbf864289aa0a3e2d7852eaa53e2a4e8a14f5d6cd062d492429c9e7de5",
+            "source": "docs/evidence/2026-10-10-shadowshot/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 830,
+  "manifest_count_after": 831
+}

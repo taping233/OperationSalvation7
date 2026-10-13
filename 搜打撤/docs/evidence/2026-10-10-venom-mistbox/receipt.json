@@ -1,0 +1,156 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt2-venomstaff",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-79f60ba8-1fda-48bf-b9b2-94c1848fa6e4.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-venom-mistbox/cards-equip-tt2-venomstaff-source.png",
+        "bytes": 1334378,
+        "sha256": "5de983c03adbae70217108663191bf28b152270d7221b9902c7f3ca5799b79d3"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-venom-mistbox/cards-equip-tt2-venomstaff-full-before.webp",
+          "bytes": 23276,
+          "sha256": "38e24f967374f1eecfcd4a94d71536fe9f6def17f463fad9b64a0c1a0c7ef7d9"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-venom-mistbox/cards-equip-tt2-venomstaff-thumb-before.webp",
+          "bytes": 3452,
+          "sha256": "3afef62cd7616d49e85309dd048a348fbe18379d938b09ac8298120ff0bc16ba"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt2-venomstaff.webp",
+          "bytes": 26284,
+          "sha256": "42c6b27296164f27db52976d3e7e41c19999a07bb4ddda95171b35b8c43e3752",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt2-venomstaff.webp",
+          "bytes": 3958,
+          "sha256": "46cd1102e0fde0d7f101560b194a4db51c1ea6723c465ef3f8fe9ce43afd02ba",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt2-venomstaff-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/equip-tt2-venomstaff.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 26284,
+            "sha256": "42c6b27296164f27db52976d3e7e41c19999a07bb4ddda95171b35b8c43e3752",
+            "source": "docs/evidence/2026-10-10-venom-mistbox/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/equip-tt2-venomstaff.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 3452,
+            "sha256": "3afef62cd7616d49e85309dd048a348fbe18379d938b09ac8298120ff0bc16ba",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/equip-tt2-venomstaff.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 3958,
+            "sha256": "46cd1102e0fde0d7f101560b194a4db51c1ea6723c465ef3f8fe9ce43afd02ba",
+            "source": "docs/evidence/2026-10-10-venom-mistbox/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3eq-mistbox",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-ae3cb78f-a833-4dd1-9493-d4010429377b.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-venom-mistbox/cards-equip-tt3eq-mistbox-source.png",
+        "bytes": 1810231,
+        "sha256": "75d51f895dc950572394857401e194fb355d2811049b52e0a3f9f5e4a41fcb0e"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-venom-mistbox/cards-equip-tt3eq-mistbox-full-before.webp",
+          "bytes": 90568,
+          "sha256": "994b8cd1b2bc7561a47a99cac7b566678aecb8d1682bdcd2d93ce3dc7124b36b"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-venom-mistbox/cards-equip-tt3eq-mistbox-thumb-before.webp",
+          "bytes": 22494,
+          "sha256": "f208ba54104d1e988f62d7dbed7b2aef95545229ebc1dc85b5ea17406b7bd63f"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt3eq-mistbox.webp",
+          "bytes": 120320,
+          "sha256": "ede2b6e07dabd3bf9aef34973129790289e9e5145976c6a5f0a18de8d972031f",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt3eq-mistbox.webp",
+          "bytes": 20336,
+          "sha256": "a140eb54ce2a8dc029d554506a6c632ab4960bb33de1ef1a40e18cf8ff9b4f0e",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt3eq-mistbox-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/equip-tt3eq-mistbox.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 120320,
+            "sha256": "ede2b6e07dabd3bf9aef34973129790289e9e5145976c6a5f0a18de8d972031f",
+            "source": "docs/evidence/2026-10-10-venom-mistbox/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/equip-tt3eq-mistbox.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 22494,
+            "sha256": "f208ba54104d1e988f62d7dbed7b2aef95545229ebc1dc85b5ea17406b7bd63f",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/equip-tt3eq-mistbox.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 20336,
+            "sha256": "a140eb54ce2a8dc029d554506a6c632ab4960bb33de1ef1a40e18cf8ff9b4f0e",
+            "source": "docs/evidence/2026-10-10-venom-mistbox/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 881,
+  "manifest_count_after": 883
+}

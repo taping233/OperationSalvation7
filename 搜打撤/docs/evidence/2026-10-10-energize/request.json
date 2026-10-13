@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "card_id": "tt7-energize",
+      "asset": "cards/spell-tt7-energize.webp",
+      "revision": "energize-original-rough-20261010",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-energize.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "prompt": "Use case: style-transfer. Redraw FIRST image 聚能 preserving exact original SQUARE composition, waist-up three-quarter frontal camera, crop, subject scale and pose. Baita centered towards right, deep brown very long curly hair flowing on both sides especially right, green eyes half-lidded looking downward with gentle quiet small smile, head tilted towards viewer left resting close to luminous orb. Gold hoop earrings, white collared long-sleeve blouse, deep green pinafore dress and blue oval gemstone brooch at throat. Preserve original BOTH arms tenderly hugging ONE large pale cyan-white energy sphere against chest at middle-left; lower forearm crosses horizontally in front of sphere, upper hand rests over sphere near chin, fingertips visible. Same sphere diameter and positions; no extra spheres. Preserve pale cyan flat abstract backdrop and strong cool sphere light on sleeves and lower face. Paint sphere as a coherent circular opaque pale cyan mass with broad white core and a few broad cool edge planes, restrained halo, not photographic glass. Images 2–4 are STYLE ONLY references for broad opaque brushwork, grouped fabric and anime facial drawing; do not copy their character identities, clothes, poses or palettes. STYLE: rough hand-painted anime illustration built from large connected opaque color masses, limited broad directional curved swipes and blunt dabs, grouped hard shadows and decisive handmade edges, selective overlapping expressive coverage amid quiet areas. Hair into substantial coherent wavy locks with few broad shadow turns and irregular highlights, no fine strands. Cloth into principal fold planes with economical structural accents, no dense wrinkle network. Readable hands, clear anime eyes, simple nose/mouth and restrained face/neck planes. Matte mostly muted colors with concentrated cyan-white accent. No glossy 3D, smooth airbrushed splash art, tiny angular facet mosaics, dense bright scratches, all-over grain or texture filters. No text, frame, watermark or UI.",
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-06bde6bd-df2d-4f69-9fe3-f288a27e25de.png"
+    }
+  ]
+}

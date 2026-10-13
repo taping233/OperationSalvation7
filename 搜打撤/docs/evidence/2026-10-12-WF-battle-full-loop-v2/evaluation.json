@@ -1,0 +1,85 @@
+{
+  "transitions": {
+    "45": {
+      "before": {
+        "before_midi": 57,
+        "after_midi": 79,
+        "leap_semitones": 22,
+        "before_seconds": 44.6484375,
+        "after_seconds": 45.1171875
+      },
+      "after": {
+        "before_midi": 77,
+        "after_midi": 79,
+        "leap_semitones": 2,
+        "before_seconds": 44.6484375,
+        "after_seconds": 45.1171875
+      }
+    },
+    "75": {
+      "before": {
+        "before_midi": 57,
+        "after_midi": 74,
+        "leap_semitones": 17,
+        "before_seconds": 74.6484375,
+        "after_seconds": 75.1171875
+      },
+      "after": {
+        "before_midi": 73,
+        "after_midi": 74,
+        "leap_semitones": 1,
+        "before_seconds": 74.6484375,
+        "after_seconds": 75.1171875
+      }
+    }
+  },
+  "old_boundary_levels": {
+    "45": {
+      "before_halfsecond_dbfs": -21.733341647794436,
+      "after_halfsecond_dbfs": -17.125075620729294,
+      "increase_db": 4.608266027065142
+    },
+    "75": {
+      "before_halfsecond_dbfs": -24.022955538765387,
+      "after_halfsecond_dbfs": -17.505699587822704,
+      "increase_db": 6.517255950942683
+    }
+  },
+  "new_boundary_levels": {
+    "45": {
+      "before_halfsecond_dbfs": -21.997557701273806,
+      "after_halfsecond_dbfs": -17.151578567326776,
+      "increase_db": 4.845979133947029
+    },
+    "75": {
+      "before_halfsecond_dbfs": -19.206075920412506,
+      "after_halfsecond_dbfs": -17.889189258448678,
+      "increase_db": 1.316886661963828
+    }
+  },
+  "old_core_drum_events": 523,
+  "new_core_drum_events": 525,
+  "original_events_as_share_of_new_drum_events": 0.9961904761904762,
+  "checks": {
+    "all_events_outside_four_transition_bars_preserved": true,
+    "all_original_drum_onsets_and_durations_preserved": true,
+    "only_two_added_core_drum_events": true,
+    "45s_transition_at_most_two_semitones": true,
+    "75s_transition_at_most_two_semitones": true,
+    "75s_energy_jump_reduced": true,
+    "exact_120s_48k_pcm": true,
+    "finite_pcm": true,
+    "no_clipping": true,
+    "no_halfsecond_silence": true,
+    "sample_boundary_below_normal_p99": true,
+    "seam_curvature_below_normal_p99": true,
+    "opus_sample_accurate_length": true,
+    "two_cycles_exact_duration": true,
+    "opus_boundary_below_normal_p99": true,
+    "true_peak_below_minus_1": true,
+    "matched_approved_loudness": true,
+    "no_large_100ms_boundary_energy_drop": true,
+    "harmonic_turnaround_A7_to_Dm": true
+  },
+  "scope": "Score comparison and matched decoded OGG half-second RMS windows. Not actual listening or an aesthetic score."
+}

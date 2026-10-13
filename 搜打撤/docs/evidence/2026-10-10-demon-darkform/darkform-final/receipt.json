@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "cmtn1r10xnl1",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-5961896d-3844-4fce-a811-329b5155a4b1.png",
+      "raw": {
+        "path": ".tmp/imagegen/darkform-final/cards-spell-cmtn1r10xnl1-source.png",
+        "bytes": 2018794,
+        "sha256": "8a4cce04195866972970e08f376971291b8cf30a43156c79092952e7666ea29b"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/darkform-final/cards-spell-cmtn1r10xnl1-full-before.webp",
+          "bytes": 67778,
+          "sha256": "8aa7ef07669e8b6d5492fb7d6f90ececbd961d98e125558bc85d5ca86b6c4997"
+        },
+        {
+          "path": ".tmp/imagegen/darkform-final/cards-spell-cmtn1r10xnl1-thumb-before.webp",
+          "bytes": 17258,
+          "sha256": "47280a8278836a5138c33bb80c472d4eb0c379690e20d299c3f59ffa6c44fb4d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-cmtn1r10xnl1.webp",
+          "bytes": 126080,
+          "sha256": "67b6ea50ddf9b3a5c95e9edd2395896600a492c0d5e54e726d2ef4b7dc220f5d",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-cmtn1r10xnl1.webp",
+          "bytes": 15764,
+          "sha256": "bb8dcc1ae55056f0c6ddd63e4dddde52c8a077578289eaaf12d91fe9e1c8ff77",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "changwuyu-darkform-oppressive-builtin-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-cmtn1r10xnl1.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 126080,
+            "sha256": "67b6ea50ddf9b3a5c95e9edd2395896600a492c0d5e54e726d2ef4b7dc220f5d",
+            "source": "docs/evidence/2026-10-10-demon-darkform/darkform-final/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-cmtn1r10xnl1.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17258,
+            "sha256": "47280a8278836a5138c33bb80c472d4eb0c379690e20d299c3f59ffa6c44fb4d",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-cmtn1r10xnl1.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15764,
+            "sha256": "bb8dcc1ae55056f0c6ddd63e4dddde52c8a077578289eaaf12d91fe9e1c8ff77",
+            "source": "docs/evidence/2026-10-10-demon-darkform/darkform-final/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 873,
+  "manifest_count_after": 874
+}

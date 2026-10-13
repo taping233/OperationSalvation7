@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-double-shot",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a125fc-1da2-7300-83db-f2b39e275c76\\exec-f7558cd5-1e8b-4455-860a-798fedbcf35b.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-repeat-shot/cards-martial-tt3-double-shot-source.png",
+        "bytes": 1762051,
+        "sha256": "d450194be59b922d4292ea9b0b0b590962a5e2878084ae07020c3f81b53d0cf0"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-repeat-shot/cards-martial-tt3-double-shot-full-before.webp",
+          "bytes": 147256,
+          "sha256": "ac4ef873b155809c1941252a77c51056409ca5f0bb6115957866513f0e374574"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-repeat-shot/cards-martial-tt3-double-shot-thumb-before.webp",
+          "bytes": 20762,
+          "sha256": "e435ffecf8107875ba9ecc9a873acb2d75ec00d4594714f87c0b99de11380cae"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-double-shot.webp",
+          "bytes": 125988,
+          "sha256": "611d357010717376b882bfaabc298336d9383c4bdbdf52fb04a552ccc9af3024",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-double-shot.webp",
+          "bytes": 17184,
+          "sha256": "f5d2406a5b85644ceea2865d898f47dd4663c444a5c9c777e51dca71b3cf1aea",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt3-double-shot-creative-rough-20261005",
+      "revision_after": "repeat-shot-three-hits-20261011",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt3-double-shot.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 147256,
+            "sha256": "ac4ef873b155809c1941252a77c51056409ca5f0bb6115957866513f0e374574",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt3-double-shot.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 125988,
+            "sha256": "611d357010717376b882bfaabc298336d9383c4bdbdf52fb04a552ccc9af3024",
+            "source": "docs/evidence/2026-10-11-repeat-shot/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt3-double-shot.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 20762,
+            "sha256": "e435ffecf8107875ba9ecc9a873acb2d75ec00d4594714f87c0b99de11380cae",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt3-double-shot.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 17184,
+            "sha256": "f5d2406a5b85644ceea2865d898f47dd4663c444a5c9c777e51dca71b3cf1aea",
+            "source": "docs/evidence/2026-10-11-repeat-shot/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1122,
+  "manifest_count_after": 1122
+}

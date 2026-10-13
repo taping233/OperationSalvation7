@@ -1,0 +1,8 @@
+{
+  "cells": [
+    "Friday（Codex 照相馆入口闪白移除 WF-photo-shutter-remove-1011）",
+    "game/css/home-polish.css仅照相馆快门闪白及对应关键帧；docs/evidence/2026-10-11-photo-opening-black/shutter-*",
+    "10-11：已删白色快门规则及hpShutter关键帧；运行源码零引用、diff检查通过；内置真实点击95帧透明度全0、动画none，切幕保留且照相馆正常打开",
+    "完成未提交，编辑释放；本会话01a12b04；纯CSS未跑Vitest；复用5200，无自建服务、不build、不提交"
+  ]
+}

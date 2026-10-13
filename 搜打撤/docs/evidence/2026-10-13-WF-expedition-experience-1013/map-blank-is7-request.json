@@ -1,0 +1,12 @@
+{
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept / style-transfer. Create ONE production game-map icon sprite for an empty / exhausted location in an original winter-fantasy city game. Input 1 battle-symbol-foreground-1012-v5.webp and input 2 event-symbol-foreground-1012-v5.webp are STYLE references only: inherit their pale painterly, broad opaque angular brush masses, irregular organic silhouette, sparse surface detail and sharp layered light/dark planes, not their subjects or saturated colors. Input 3 empty.webp is an Arknights IS7 REFERENCE only for quiet small-node hierarchy; do not copy its pixels or use its flat circular mark as the finished asset. Subject: a small silver-grey EMPTY SEED HUSK, an irregular broken organic stone/shell loop enclosing a clearly EMPTY transparent center. The form is roughly round but not a geometric perfect ring: 3 to 4 economical curved brush masses, one small open gap on the upper right, slightly heavier lower-left fragment, pale cool ivory upper edge and muted slate-blue underside. Restrained, calm and visibly depleted; no reward core or magical flame. Painterly anime fantasy emblem with large hard-edged color planes and visible economical hand-painted edges. Front-facing isolated emblem, centered square canvas, fully visible, broad generous transparent padding. Main silhouette approximately 50% of canvas width. At 24–32 pixels it should read as one quiet hollow shape. Real transparent alpha outside AND through its hollow center. No background, no black/grey backing plate, no UI frame, no drop shadow, no circular neon aura, no particles, no letters, text, numbers, minus sign, prohibited sign, checkmark, interface, character, weapon, building or realistic scene. Do not paint checkerboard or colored fringes. Output one transparent square sprite only.",
+  "references": [
+    "D:\\素材\\代号柒\\搜打撤\\game\\assets\\scenes\\map-nodes\\battle-symbol-foreground-1012-v5.webp",
+    "D:\\素材\\代号柒\\搜打撤\\game\\assets\\scenes\\map-nodes\\event-symbol-foreground-1012-v5.webp",
+    "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\is7-node-research\\source\\empty.webp"
+  ],
+  "source": "C:/Users/太平/.codex/generated_images/01a133b8-aebd-7632-82ed-19b6c8df3aac/exec-3aca1a5f-21ca-42a8-87d6-1e0760979382.png",
+  "asset": "game/assets/scenes/map-nodes/blank-symbol-foreground-1013-v1.webp",
+  "transparent_background": true
+}

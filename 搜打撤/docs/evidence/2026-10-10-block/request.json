@@ -1,0 +1,13 @@
+{
+  "items": [
+    {
+      "card_id": "tt2-block",
+      "asset": "cards/martial-tt2-block.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\nai\\output\\block-20261010\\block.png",
+      "revision": "block-nai45-direct-20261010",
+      "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\ngauntlet, clenched hand, arm, sword, blocking, close-up, from side, simple background\n\nShow only one armored forearm and one incoming blade at the instant of a successful block. The defender forearm rises from the lower-right crop across the foreground toward a closed black-gloved fist at the left edge. A single broad dark steel wrist guard covers the back of the forearm, forming one strong curved plane. One silver sword blade descends from the upper-right crop and stops against the raised outer ridge of that wrist guard just above center. The sword cutting edge touches the armor at one clearly visible point; the blade never enters the arm. The glove and wrist guard belong to the same continuous forearm, with the arm continuing out of frame at lower right. Blade and arm oppose one another, creating a readable crossed silhouette and a small open dark wedge behind their contact. One compact ivory glint and two short ochre-gold paint swipes at the contact suggest the sudden arrested strike. Keep the sword face pale silver, the glove near-black, and the guard muted charcoal with just one broad light plane. Background is a few broad muted slate-blue and warm ivory diagonal planes following the collision, with quiet space above the fist. Tight crop, no complete warrior, second hand, face, shield, elaborate armor ornament, scattered debris or particle cloud.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+      "references": [],
+      "method": "NovelAI 4.5 direct; user authorized installation after built-in redraw was rejected"
+    }
+  ]
+}

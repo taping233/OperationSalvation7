@@ -1,0 +1,13 @@
+{
+  "id": "19",
+  "slug": "left-thigh",
+  "version": 3,
+  "prompt": "Edit image 1, Wu's neutral LEFT THIGH sprite, to match the fuller healthier upper-leg proportions of image 2 and right-thigh paint in image 3. Keep same segment height, neutral nearly vertical centerline, skin tones, broad brush planes and transparent placement. Upper and middle thigh should be visibly fuller by roughly 40–45 percent, including the middle portion exposed below skirt; NOT just a wide hidden hip cap followed by a skinny tube. Lower quarter gradually narrows to a modest knee cap only about 10 percent wider than before. Smooth graceful feminine contour, not muscular, bony or knotted. Same light peach at both fully painted rounded joining ends, no dark line across the cap. No extra leg length, calf, foot, skirt or other object. Low-detail hand-painted anime, a few opaque cream/peach masses, no glow, shadow or background. One upper-leg component only.",
+  "refs": [
+    "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\characters\\wu-parts-v1\\part-19-left-thigh-v2.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\wu-battle-base-frame000.png",
+    "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\characters\\wu-parts-v1\\part-16-right-thigh-v3.png"
+  ],
+  "tool": "built-in imagegen",
+  "stage": "candidate"
+}

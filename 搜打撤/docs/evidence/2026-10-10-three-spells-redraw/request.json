@@ -1,0 +1,43 @@
+{
+  "items": [
+    {
+      "card_id": "tt7-burnharvest",
+      "asset": "cards/spell-tt7-burnharvest.webp",
+      "prompt": "Use case: style-transfer. Redraw the FIRST image, 爆燃火球, preserving its original landscape 896:679 composition, camera, crop, pose, proportions and movement direction. Changwuyu occupies the left half, in three-quarter side view facing right, one black-gloved arm stretched horizontally to the right, palm releasing a small bright white-hot red-orange fireball at the right, with thin horizontal beam exiting right edge. Keep huge bent black witch hat with purple underside, silver-gray long sidelocks and low bun, yellow eyes behind fine ROUND eyeglasses, pointed ear, black high-collar robe, gold trim, lavender cape sweeping left and white feather with blue gemstone at chest. No staff. Preserve flat muted gray-purple background and generous right-side negative space. Images 2–4 are STYLE ONLY references for broad opaque brushwork, dark cloth masses and anime face; do not copy their identities, outfits or poses. Rough hand-painted anime illustration. Large connected opaque color masses, a few wide directional curved swipes and blunt dabs, decisive handmade hard shadow edges, selective unfinished coverage with quiet regions. Hair grouped in substantial locks, clothing grouped in main fold planes. Clear anime eyes and readable hands, economical face marks. Matte muted colors with concentrated accents. No fine strands, dense wrinkles, tiny facets, glossy rendering or all-over texture filters. Flat abstract backdrop, no text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-burnharvest.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-aa52e5c8-b331-497d-a9c7-b058b8581f2b.png",
+      "revision": "tt7-burnharvest-original-rough-20261010"
+    },
+    {
+      "card_id": "tt7-frozenight",
+      "asset": "cards/spell-tt7-frozenight.webp",
+      "prompt": "Use case: style-transfer. Redraw the FIRST image, 冰封千里, preserving its original SQUARE composition, front camera, crop and pose. Baita centered from head to below waist, deep brown long curly hair flowing broadly on both sides, green eyes and calm playful small smile, gold earrings, white long-sleeved blouse with pale blue shadows, deep green pinafore dress and blue pendant. One hand held just below chin, the other on viewer right making the original two-finger casting gesture. Behind her retain SIX evenly spaced upright translucent ice columns in one horizontal row, three on each side of head, each containing a small frozen blue human silhouette. Keep original light cyan flat background, pale lower area, sparse ice shards at column bases and small yellow snap accent near fingers. Simplify curls into large wavy grouped locks, ice into broad hard-edge planes. No books, chair or extra props. Images 2–4 are STYLE ONLY references, do not borrow identity, colors, poses or clothes. Rough hand-painted anime illustration. Large connected opaque color masses, a few wide directional curved swipes and blunt dabs, decisive handmade hard shadow edges, selective unfinished coverage with quiet regions. Hair grouped in substantial locks, clothing grouped in main fold planes. Clear anime eyes and readable hands, economical face marks. Matte muted colors with concentrated accents. No fine strands, dense wrinkles, tiny facets, glossy rendering or all-over texture filters. Flat abstract backdrop, no text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-frozenight.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-bf4ef246-d3f0-464f-9ad6-8f9529db0787.png",
+      "revision": "tt7-frozenight-original-rough-20261010"
+    },
+    {
+      "card_id": "cmtn1lbhbqi4",
+      "asset": "cards/spell-cmtn1lbhbqi4.webp",
+      "prompt": "Use case: style-transfer. Redraw the FIRST image, 充能火球, preserving original landscape 896:679 composition, tight chest-up crop, side-facing camera and exact major placements. Changwuyu occupies right two-thirds, turned towards viewer left and looking down at glowing fire gathered between his two black-gloved hands in lower left. Upper glove is vertical beside flame, lower palm cups it from below. Orange flame ribbons circle a small white-hot core in broad tilted loops, matching original positions and spiral direction. Huge bent black witch hat fills top edge with purple underside; silver-gray long sidelocks, low bun behind pointed ear, yellow eyes behind fine ROUND eyeglasses, black high collar and gold trim, lavender cloak, white feather and blue gemstone gold brooch on viewer right chest. Flat muted mauve-gray background. No staff or extra objects. Images 2–4 are STYLE ONLY references for broad opaque brushwork, dark cloth and anime faces, do not copy identity, pose or outfit. Rough hand-painted anime illustration. Large connected opaque color masses, a few wide directional curved swipes and blunt dabs, decisive handmade hard shadow edges, selective unfinished coverage with quiet regions. Hair grouped in substantial locks, clothing grouped in main fold planes. Clear anime eyes and readable hands, economical face marks. Matte muted colors with concentrated accents. No fine strands, dense wrinkles, tiny facets, glossy rendering or all-over texture filters. Flat abstract backdrop, no text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-cmtn1lbhbqi4.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-c7709bb3-8ecd-4fe3-9aef-ae6af139c094.png",
+      "revision": "cmtn1lbhbqi4-original-rough-20261010"
+    }
+  ]
+}

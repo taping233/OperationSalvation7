@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-selection-map-implementation-1011",
+  "date": "2026-10-11",
+  "owner": "Friday",
+  "goal": "按老板逐项授权，由三个GPT-6.1-sol代理参考优秀实机/美术原则多轮重做整条远征界面与相关新素材；保留机制，整套成型后交老板统一过目",
+  "paths": [
+    "game/src/run/chests.js",
+    "game/src/run/game.run.shop.js",
+    "game/src/run/game.run.scenes.js",
+    "game/src/run/game.run.altar.js",
+    "game/src/hub/game.hub.depart.js",
+    "game/src/hub/departure.view-updates.js",
+    "game/src/hub/departure.summary.js",
+    "game/src/hub/game.bag.settle.js",
+    "game/src/core/renderer.js",
+    "game/src/ui/expedition-feedback.js",
+    "game/css/expedition-rewards.css",
+    "game/css/expedition-shop.css",
+    "game/css/expedition-map.css",
+    "game/css/expedition-battle.css",
+    "game/css/page-expedition-hud.css",
+    "docs/evidence/2026-10-11-WF-selection-map-implementation-1011",
+    "docs/evidence/2026-10-11-selection-map-plan/DISPATCH.md",
+    "game/src/ui/hud.js",
+    "game/src/game.boot.js",
+    "game/src/ui/game.menu.js",
+    "game/src/battle/view/battle.view.js",
+    "game/src/battle/view/battle.overlays.js",
+    "game/src/battle/view/battle.piles.view.js",
+    "game/src/hub/game.bag.js",
+    "game/css/expedition-inventory.css",
+    "game/css/base-camp-rework.css",
+    "game/src/run/expedition.view.js",
+    "tests/expedition-log-preference.test.js",
+    "game/assets/scenes/shop",
+    "game/assets/scenes/entry",
+    "game/assets/scenes/rewards",
+    "game/assets/scenes/battle"
+  ],
+  "doneWhen": [
+    "人物/整备、地图/导航、商店、整页入城/事件、统一继续过场、战斗主与附加、背包、奖励/透明宝箱均有来源驱动多轮制作记录与可审阅成品；必要定向检查和未覆盖边界清楚，不改机制/不覆盖他人属地，老板最后统一审阅"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "首批旧骨架12文件119项集成定向通过，integration-tests.log；不能证明后续重做通过。",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "No automated tests or build",
+    "Event examples sampled in temporary IAB page, not exhaustive; multi-option, very long narrative and locked states not visually sampled",
+    "No exhaustive map type/four-layer run review",
+    "No performance baseline comparison or quality equivalence claim",
+    "No commit/push/publication; overall aesthetics awaiting user review"
+  ],
+  "updatedAt": "2026-10-11T18:42:20.610557+00:00",
+  "continuation": {
+    "thread": "01a12b5c-6c58-74e3-b9da-322f76197ba0",
+    "agents": [
+      "roster_entry",
+      "map_chest",
+      "battle_node"
+    ],
+    "stage": "doing",
+    "scope": "Same authorized display overhaul; no build or commit"
+  },
+  "referenceImplementation": {
+    "stage": "complete-uncommitted",
+    "agents": {
+      "map_chest": "map/navigation/node art",
+      "roster_entry": "roster/departure/entry/events",
+      "battle_node": "battle/shop/rewards"
+    },
+    "root": "inventory/design integration",
+    "userAcceptance": true,
+    "tests": "User explicitly waived; no tests/lint/browser/build",
+    "acceptance": "Awaiting user visual review; tests/checks explicitly waived",
+    "previewSession": 49181,
+    "previewPort": 5337,
+    "editingReleased": true
+  },
+  "visualRepair": {
+    "date": "2026-10-12",
+    "stage": "await-user-art-review",
+    "evidence": "docs\\evidence\\2026-10-12-map-visual-review\\source-layout-repair.json",
+    "result": "Complete source/asset/CSS version loaded into original user tab 6; prior mixed runtime corrected. Overall aesthetics await user review.",
+    "limits": [
+      "No automated tests or build",
+      "Event examples sampled in temporary IAB page, not exhaustive; multi-option, very long narrative and locked states not visually sampled",
+      "No exhaustive map type/four-layer run review",
+      "No performance baseline comparison or quality equivalence claim",
+      "No commit/push/publication; overall aesthetics awaiting user review"
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "card_id": "tt3wu-shike",
+      "asset": "cards/martial-tt3wu-shike.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-de7ab67a-4e4d-457d-86cb-aef40ed5c10b.png",
+      "revision": "shike-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the cutting erosion game-card edit target, retaining original SQUARE composition closely: one long narrow vertical slash-shaped dark fissure perfectly centered on a quiet pale cool gray surface. The split is widest around the middle, tapered to needle-like ends at top and bottom, spans about 85 percent of height but less than 12 percent of width. Jagged raised torn gray-white edges, charcoal interior, a few small detached dark fragments below the lower tip. Keep original silhouette, width, placement and gray monochrome palette. This is an abstract symbolic cut in a surface, not a bodily wound: no flesh, blood, character, weapon or scenery. Repaint torn edge thickness and depth through a small number of broad directional gray planes, white edge strokes and dark inner masses, with clear readable raised lips. Keep surrounding background flat and quiet; no dense scratches or photographic concrete texture. Images 2, 3, 4 are DRAWING STYLE references only; borrow broad opaque hand-painted construction, never subjects or costume motifs. Rough hand-painted anime color study, large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Clear grouped hard-edged light and shadow, matte muted colors with concentrated accents, quiet large areas. No glossy 3D, photorealism, uniform vector outlines, fine line networks, tiny facet mosaics or all-over grain/texture filters. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt3wu-shike.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    },
+    {
+      "card_id": "tt3-venom-arrow",
+      "asset": "cards/martial-tt3-venom-arrow.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-5bdaf77d-349f-4ab1-ab15-c5a545e9e9f7.png",
+      "revision": "venom-arrow-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the poison arrow game-card edit target, retaining original SQUARE close-up composition closely: one vertical vivid poison-green arrow pointing straight DOWN, centered. Thick straight narrow shaft enters from TOP frame, widening into a large triangular broadhead with horizontal shoulders around upper third and point around lower-middle. Viscous green poison coats arrowhead, with a few rounded hanging lobes on its lower-left edge; a single long thin drip trails downward from its pointed tip, ending in a rounded drop near bottom. Preserve original crop, shape, proportions, placement and quiet deep forest-green background. No fletching, bow, character, wound, hands or extra props. Give arrow and coating volume using broad moss-green shadow planes, brighter lime-green main planes and a few pale green directional accents. Keep poison color as concentrated focal accent against muted green background, readable triangular head and thin drip; no glassy photographic liquid highlights. Sparse economical coating shapes instead of decorative bubbles or splashes. Images 2, 3, 4 are DRAWING STYLE references only; borrow broad opaque hand-painted construction, never subjects or costume motifs. Rough hand-painted anime color study, large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Clear grouped hard-edged light and shadow, matte muted colors with concentrated accents, quiet large areas. No glossy 3D, photorealism, uniform vector outlines, fine line networks, tiny facet mosaics or all-over grain/texture filters. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt3-venom-arrow.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    }
+  ]
+}

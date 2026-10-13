@@ -1,0 +1,46 @@
+{
+  "task": "WF-studio-archive-code-1010",
+  "status": "complete-uncommitted",
+  "files": [
+    {
+      "file": "game/css/photo-studio-archive.css",
+      "sha256": "0b794a88b0768f9cde322bc77ab97b63c2bafe06f3e47c13146b1a8b3f1cb3ea"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.page.js",
+      "sha256": "51483e87807da3e5203c615a1fe2ef41f5a16b233c4d5018114067f93f39c814"
+    },
+    {
+      "file": "game/src/hub/photo-studio-tabs.js",
+      "sha256": "ea46c8df653f1648ba88b901923b588d470ed33054ab61e314d5368780549a9b"
+    },
+    {
+      "file": "tests/photo-studio-tabs.test.js",
+      "sha256": "56c0f83cafba5166b9c2df828c7b0c00997b2b8018674ed78b2837753f11f367"
+    }
+  ],
+  "checks": {
+    "targeted": {
+      "files": 5,
+      "passed": 72
+    },
+    "cssParse": "passed",
+    "syntax": "passed",
+    "eslint": "passed",
+    "diffWhitespace": "passed",
+    "docs": "passed"
+  },
+  "codeColourRatios": {
+    "legendBefore": 3.45,
+    "legendAfter": 4.95,
+    "countBefore": 2.62,
+    "countAfter": 6.46
+  },
+  "unverified": [
+    "实页美术、字体、尺寸与滚动",
+    "真实hover与多尺寸",
+    "帧率、长期内存和全量/构建"
+  ],
+  "browserUsed": false,
+  "newService": false
+}

@@ -1,0 +1,31 @@
+{
+  "capturedAtUtc": "2026-10-12T18:18:35.1692351Z",
+  "reviewState": "complete-uncommitted",
+  "gameSourceEditedByThisReview": false,
+  "outcomes": {
+    "C": "boss-win/extraction/base-return",
+    "B": "boss-win/extraction/base-return",
+    "A": "boss-defeat/base-return",
+    "D": "boss-win/extraction/base-return; guard defect affected"
+  },
+  "priorityIssues": 12,
+  "artifactValidation": "artifact-validation.json",
+  "imageAudit": "image-audit.json",
+  "docsCheck": {
+    "evidenceSkippedByGuard": true,
+    "checkedRelativeLinks": 596,
+    "command": "npm run --silent docs:check -- --json",
+    "exitCode": 0,
+    "findings": 0
+  },
+  "runtimeRegistration": "WF-review-runtime-5351-5354",
+  "processesStopped": [],
+  "temporaryInputs": ".tmp/WF-four-player-review-close and original registry-input.json are process inputs; exclude from future packaging",
+  "handoff": {
+    "threadId": "01a1315a-c3e2-7183-a8a5-e53d533eb1a1",
+    "title": "按四线试玩报告分批修复",
+    "host": "local",
+    "status": "active",
+    "initialProgress": "已核三项P1链路，将在隔离副本修复验证；战斗UI另有会话占用，暂避呈现文件"
+  }
+}

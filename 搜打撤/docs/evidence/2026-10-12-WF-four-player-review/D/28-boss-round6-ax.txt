@@ -1,0 +1,117 @@
+Browser tab: 2, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5354/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/
+	1 container
+		141 text 冬核深处 · 首脑遭遇
+		142 text 第 6 回合
+		143 text 你的行动
+		144 button 牌库：邪能护体×1，回音箭×2，厉兵秣马×1（点击查看）
+			145 text 4
+			146 text 牌库
+		8 text 9 弃牌
+		9 button 墓地：（空）（被消耗的牌 · 不参与洗回 · 点击查看）
+			10 image skull
+			11 text 0
+			12 text 消耗
+		147 text 选择手牌，或结束回合
+		14 container btSelf
+			15 container
+				16 text 黑像
+				17 text 你
+				18 text 35/35
+				148 image swords
+				149 text  4 · 格挡中
+		23 container
+			24 button 肃清总督的意图：攻击·回合末强化 · 15。点击查看完整说明
+				150 image arrow
+				151 text 15
+			27 image boss_general
+			152 text 肃清总督
+			153 image swords
+			154 text 15
+			155 image arrow
+			156 text  军威
+			137 container
+				157 text 33/50
+			139 image skull
+			140 text  中毒 1
+		158 container
+			159 text 当前能量
+			160 image bolt
+			161 text 2
+			162 text /2
+		42 container 职业技能与手牌分栏
+			163 button swords 猛击 2 能量 · 每回合一次
+				164 image swords
+				165 text 猛击
+				166 text 2 能量 · 每回合一次
+		46 container
+			47 checkbox Description: 治愈 · 1 费。费用 1 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）, Value: 0
+				48 container
+					49 text 1
+					50 image 治愈
+					51 text 治愈 法术 · 古朴
+					200 container
+						201 text 古朴 古朴
+					54 image heart
+					55 text 回 5 你回复  5  点 生命 ，并 净化 自身。
+				56 image heart
+			58 button 查看治愈完整规则
+			59 checkbox (disabled) Description: 后备能源 · 6 费。费用 6 · 点击直接打出，也可拖到战场空地（悬停看完整描述）, Value: 0
+				60 container
+					61 text 6
+					62 image 后备能源
+					63 text 后备能源 法术 · 史诗
+					202 container
+						203 text 史诗 史诗
+					66 image cards
+					67 text 抽 2 抽  2  张牌，并回复你的全部 能量 ；你的 消耗 口袋中每有  1  张法术牌，本牌费用减少  1  点。
+				68 image sparkles
+				204 text 能量不足：需要 6，当前 2
+			70 button 查看后备能源完整规则
+			71 checkbox Description: 圣光治愈 · 1 费。费用 1 · 点击直接打出，也可拖到战场空地（悬停看完整描述）, Value: 0
+				72 container
+					73 text 1
+					74 image 圣光治愈
+					75 text 圣光治愈 法术 · 星月专属
+					205 container
+						206 text 职业 职业
+					78 image crystal
+					79 text 注能 1 注能 （ 1 ）： 你回复等同于被 注能 卡牌价格  2  倍的 生命 。
+				80 image sparkles
+			82 button 查看圣光治愈完整规则
+			118 checkbox Description: 连续射击 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+				119 container
+					120 text 1
+					121 image 连续射击
+					122 text 连续射击 武术 · 史诗
+					207 container
+						208 text 史诗 史诗
+					125 text 对目标造成  2  点 固定伤害 ；本 回合 你此前每打出  1  张 招式 ，本牌的 伤害 效果触发  1  次。
+				126 image swords
+			127 button 查看连续射击完整规则
+			176 checkbox Description: 毒药 · 0 费。费用 0 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+				177 container
+					178 text 0
+					179 image 毒药
+					180 text 毒药 法术 · 古朴
+					209 container
+						210 text 古朴 古朴
+					183 image cards
+					184 text 抽 1 对目标附加  1  层 中毒 ，并抽  1  张牌。
+				185 image swords
+			186 button 查看毒药完整规则
+		187 container 战术操作
+			188 button bag 背包
+				189 image bag
+				190 text  背包
+			191 button runner 撤离（判负）
+				192 image runner
+				193 text  撤离（判负）
+			194 button gear 设置
+				195 image gear
+				196 text  设置
+			197 button skip 结束回合
+				198 image skip
+				199 text  结束回合
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/

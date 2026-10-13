@@ -1,0 +1,172 @@
+{
+  "actions": [
+    {
+      "detail": "制作名单点击打开、返回按钮关闭、再次打开",
+      "type": "real-input"
+    },
+    {
+      "detail": "读取左右入场参数与玻璃材质；Esc输入未证实关闭，未计通过",
+      "type": "static-inspection"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "not-collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "id": "homeCredits"
+      },
+      "identity": "{\"id\":\"homeCredits\"}",
+      "key": "dialog",
+      "rect": {
+        "height": 421.3250122070313,
+        "width": 533.3250122070312,
+        "x": 373.3374938964844,
+        "y": 149.33750915527344
+      },
+      "selector": "#homeCredits",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "6px",
+        "color": "rgb(233, 237, 240)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "631.987px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "64px 32px 28px",
+        "pointer-events": "auto",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "visibility": "visible",
+        "width": "799.987px"
+      },
+      "tag": "DIALOG",
+      "text": "CREDITS制作名单\n          制作团队\n          \n            制作人 程序 测试 美术 动画太平\n            游戏设计师创\n          \n          特别鸣谢\n          \n            精神支柱Tang\n          \n          \n          额外感谢 大模型\n          \n   "
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"制作人 程序 测试 美术 动画太平\",\"class\":\"\"}",
+      "key": "names",
+      "rect": {
+        "height": 65.9625015258789,
+        "width": 201.3249969482422,
+        "x": 433.3374938964844,
+        "y": 303.0375061035156
+      },
+      "selector": "#homeCredits .home-makers-list div",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(233, 237, 240)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "98.9437px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "2px 12px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "301.987px"
+      },
+      "tag": "DIV",
+      "text": "制作人 程序 测试 美术 动画太平"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"游戏设计师创\",\"class\":\"\"}",
+      "key": "names",
+      "rect": {
+        "height": 65.9625015258789,
+        "width": 201.33750915527344,
+        "x": 645.3250122070312,
+        "y": 303.0375061035156
+      },
+      "selector": "#homeCredits .home-makers-list div",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(233, 237, 240)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "98.9437px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "2px 12px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "302.006px"
+      },
+      "tag": "DIV",
+      "text": "游戏设计师创"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"精神支柱Tang\",\"class\":\"\"}",
+      "key": "names",
+      "rect": {
+        "height": 60.36249923706055,
+        "width": 413.3250122070313,
+        "x": 433.3374938964844,
+        "y": 407.6499938964844
+      },
+      "selector": "#homeCredits .home-makers-list div",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(233, 237, 240)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "90.5437px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "2px 12px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "619.987px"
+      },
+      "tag": "DIV",
+      "text": "精神支柱Tang"
+    }
+  ],
+  "observedAt": "2026-10-11T07:25:55.498Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "scene": "credits-side-flight",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-11-WF-home-wordmark-1011/credits-final.jpg"
+  ],
+  "selectors": [
+    {
+      "key": "dialog",
+      "selector": "#homeCredits"
+    },
+    {
+      "key": "names",
+      "selector": "#homeCredits .home-makers-list div"
+    }
+  ]
+}

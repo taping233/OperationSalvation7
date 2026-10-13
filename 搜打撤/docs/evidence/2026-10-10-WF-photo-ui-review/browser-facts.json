@@ -1,0 +1,279 @@
+{
+  "source": "Codex in-app browser",
+  "url": "http://127.0.0.1:5200",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "mode": "read-only source review and real browser inputs; no note edits; no viewport override",
+  "facts": [
+    {
+      "classes": "pg card-library-page photo-studio-v3 studio-index-layout studio-unified",
+      "gridMotion": {
+        "animation": "libGridIn",
+        "transition": "0s"
+      },
+      "images": [
+        {
+          "alt": "禁咒I",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/curse-drain.webp?v=0.60.0"
+        },
+        {
+          "alt": "禁咒II",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/curse-freeze.webp?v=0.60.0"
+        },
+        {
+          "alt": "禁咒III",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/curse-venom.webp?v=0.60.0"
+        },
+        {
+          "alt": "禁咒IV",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/curse-silence.webp?v=0.60.0"
+        },
+        {
+          "alt": "白梅落影·妄",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/wu-void.webp?art=wu-class-final-20261004&v=0.60.0"
+        },
+        {
+          "alt": "博览者的狂语",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/lore-raving.webp?art=baita-lore-raving-original-composition-v6-20261004&v=0.60.0"
+        },
+        {
+          "alt": "充能火山",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/hero-volcano.webp?art=changwuyu-volcano-abstract-block-20261004&v=0.60.0"
+        },
+        {
+          "alt": "花开两面",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/hero-summoner.webp?art=baita-two-blooms-original-rough-20261010&v=0.60.0"
+        },
+        {
+          "alt": "禁术解放",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/dark-eclipse.webp?v=0.60.0"
+        },
+        {
+          "alt": "浪掷风吟",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/hero-sacredrain.webp?art=xingyue-wind-song-abstract-20261004&v=0.60.0"
+        },
+        {
+          "alt": "青龙化身",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/hero-warrior.webp?art=heixiang-azure-original-rough-20261004&v=0.60.0"
+        },
+        {
+          "alt": "深渊主宰·妲莉薇特",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/hero-abysssovereign.webp?v=0.60.0"
+        },
+        {
+          "alt": "圣剑化身",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/hero-sacredsword.webp?art=heixiang-sacredsword-original-rough-20261004&v=0.60.0"
+        },
+        {
+          "alt": "受缚之残影",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/bound-shadow.webp?art=changwuyu-bound-shadow-rough-20261004&v=0.60.0"
+        },
+        {
+          "alt": "天剑诛魔·云阳",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/wu-heavensword.webp?art=wu-heavensword-face-v4-empty-hand-20261004&v=0.60.0"
+        },
+        {
+          "alt": "无量仙剑·云风",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/wu-myriadswords.webp?art=wu-myriadswords-rough-face-20261004&v=0.60.0"
+        },
+        {
+          "alt": "封印肢体1",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/creature-tt8-curseimmune.webp?art=sealed-limb-1-transparent-20261004&v=0.60.0"
+        },
+        {
+          "alt": "封印肢体2",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/creature-tt8-energycap.webp?art=sealed-limb-2-transparent-20261004&v=0.60.0"
+        },
+        {
+          "alt": "封印肢体3",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/creature-tt8-nofocus.webp?art=sealed-limb-3-hand-reuse-20261010&v=0.60.0"
+        },
+        {
+          "alt": "封印肢体4",
+          "complete": true,
+          "filter": "none",
+          "naturalWidth": 448,
+          "opacity": "1",
+          "src": "assets/thumbs/cards/creature-tt8-healplus.webp?art=sealed-limb-4-hand-reuse-20261010&v=0.60.0"
+        }
+      ],
+      "step": "initial",
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      }
+    },
+    {
+      "grid": {
+        "animation": "libGridIn",
+        "class": "lib-grid",
+        "duration": "0.2s"
+      },
+      "previewMotion": {
+        "animation": "none",
+        "transition": "0s"
+      },
+      "rarity": {
+        "background": "rgb(225, 226, 227)",
+        "clip": "border-box",
+        "color": "rgb(102, 88, 121)",
+        "fill": "rgba(0, 0, 0, 0)",
+        "fontSize": "12.5px",
+        "image": "linear-gradient(100deg, rgb(135, 82, 107), rgb(87, 93, 100), rgb(92, 99, 106))",
+        "text": "棱彩"
+      },
+      "step": "settled-martial",
+      "tileAnimation": "none"
+    },
+    {
+      "classes": "cz-photo",
+      "exists": true,
+      "paper": {
+        "opacity": "1",
+        "transition": "0.14s, 0.14s"
+      },
+      "photo": {
+        "naturalWidth": 1448,
+        "src": "http://127.0.0.1:5200/assets/cards/martial-tt8-dragonblade.webp?art=heixiang-dragonblade-original-rough-20261005&v=0.60.0"
+      },
+      "rare": [
+        {
+          "clip": "text",
+          "color": "rgb(102, 88, 121)",
+          "fill": "rgba(0, 0, 0, 0)",
+          "image": "linear-gradient(100deg, rgb(135, 82, 107), rgb(87, 93, 100), rgb(92, 99, 106))",
+          "text": "青龙偃月斩"
+        },
+        {
+          "clip": "text",
+          "color": "rgb(102, 88, 121)",
+          "fill": "rgba(0, 0, 0, 0)",
+          "image": "linear-gradient(100deg, rgb(135, 82, 107), rgb(87, 93, 100), rgb(92, 99, 106))",
+          "text": "棱彩"
+        }
+      ],
+      "step": "zoom"
+    },
+    {
+      "info": {
+        "background": "rgb(233, 232, 230)",
+        "opacity": "1"
+      },
+      "infoRect": {
+        "bottom": 495.5250244140625,
+        "height": 288.0500183105469,
+        "left": 792.5625,
+        "right": 1041.0625,
+        "top": 207.4750061035156,
+        "width": 248.5,
+        "x": 792.5625,
+        "y": 207.4750061035156
+      },
+      "layout": {
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      },
+      "photoRect": {
+        "bottom": 536.2875213623047,
+        "height": 369.5750122070313,
+        "left": 258.0625,
+        "right": 747.8374938964844,
+        "top": 166.71250915527344,
+        "width": 489.7749938964844,
+        "x": 258.0625,
+        "y": 166.71250915527344
+      },
+      "root": {
+        "backdrop": "none",
+        "background": "rgba(0, 0, 0, 0)",
+        "opacity": "1"
+      },
+      "step": "settled-zoom"
+    },
+    {
+      "galleryPresent": true,
+      "step": "escape-from-zoom",
+      "titleVisible": true,
+      "zoomPresent": false
+    }
+  ],
+  "errors": []
+}

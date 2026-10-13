@@ -1,0 +1,176 @@
+- complementary:
+  - navigation "远征工具":
+    - img "常无欲 Q版小人"
+    - generic: 当前 · 遭遇战
+    - button "bag 背包 携带卡牌 18/25 B":
+      - img "bag"
+      - text: 背包
+      - generic: 携带卡牌
+      - strong: 18/25
+      - generic: B
+    - button "lock 安全格 保护物资 0/2":
+      - img "lock"
+      - text: 安全格
+      - generic: 保护物资
+      - strong: 0/2
+    - button "cards 消耗口袋 待复原卡牌 5":
+      - img "cards"
+      - text: 消耗口袋
+      - generic: 待复原卡牌
+      - strong: "5"
+    - button "map 定位 当前位置 F":
+      - img "map"
+      - text: 定位
+      - generic: 当前位置
+      - generic: F
+    - button "map 总览 已知区域 G":
+      - img "map"
+      - text: 总览
+      - generic: 已知区域
+      - generic: G
+- main:
+  - navigation "远征章节":
+    - generic: 污染核心
+    - generic: 第 4 层 / 4
+  - generic: "5"
+  - generic: "4"
+  - button "离开对局":
+  - button:
+  - button:
+  - generic: 当前生命
+  - generic: 33/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - img "flask"
+    - text: 道具
+    - img "flask"
+    - generic: 能量饮料
+    - generic: 冬境街区 · 遭遇
+    - generic: 第 1 回合
+    - generic: 你的行动
+    - generic: 选择手牌，或结束回合
+    - text: 常无欲
+    - generic: 你
+    - generic: 33/35
+    - img "swords"
+    - text: "4"
+    - button "灼热异变体的意图：攻击并灼烧 · 10。点击查看完整说明" [active]:
+      - img "fire"
+      - generic: "10"
+    - img "fire_el"
+    - generic: 灼热异变体
+    - img "swords"
+    - text: "10"
+    - generic: 7/7
+    - generic: 当前能量
+    - img "bolt"
+    - generic: "2"
+    - generic: /2
+    - generic "职业技能与手牌分栏":
+      - button "fire 火球 2 能量 · 每回合一次":
+        - img "fire"
+        - text: 火球
+        - generic: 2 能量 · 每回合一次
+      - button "还有另一栏手牌，当前第 1 栏，共 2 栏":
+        - img "cards"
+        - text: 第 1/2 栏
+    - button "初始攻击 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）":
+      - generic: "1"
+      - img "初始攻击"
+      - generic: 初始攻击
+      - generic: 武术 · 初始 初始
+      - generic: 造成等同于你的攻击力的攻击伤害。
+      - img "swords"
+    - button "查看初始攻击完整规则": 规则
+    - button "黑暗形态 · 1 费。费用 1 · 点击直接打出，也可拖到战场空地（悬停看完整描述）":
+      - generic: "1"
+      - img "黑暗形态"
+      - generic: 黑暗形态
+      - generic: 法术 · 常无欲专属 职业
+      - generic: 本场战斗中，每当你发现卡牌时，发现的候选项增加 1 个。
+      - img "sparkles"
+    - button "查看黑暗形态完整规则": 规则
+    - button "灵能召唤 · 1 费。费用 1 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）":
+      - generic: "1"
+      - img "灵能召唤"
+      - generic: 灵能召唤
+      - generic: 法术 · 稀有 稀有
+      - generic: 发现 1 张注能卡牌，并使该牌无需注能。
+      - img "heart"
+    - button "查看灵能召唤完整规则": 规则
+    - button "元素符印 · 0 费。费用 0 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）":
+      - generic: "0"
+      - img "元素符印"
+      - generic: 元素符印
+      - generic: 装备 · 稀有 稀有
+      - img "cards"
+      - text: 抽 2
+      - generic: 本场战斗中，你累计注能 3 张卡牌后解锁：你的法伤增加 2 点，并抽 2 张牌。
+      - img "heart"
+    - button "查看元素符印完整规则": 规则
+    - button "龙焰射线 · 2 费。费用 2 · 点击进入注能（选 1 张手牌消耗强化打出），注能条内也可「不注能直接打出」或拖到敌人身上直打（悬停看完整描述）":
+      - generic: "2"
+      - img "龙焰射线"
+      - generic: 龙焰射线
+      - generic: 法术 · 古朴 古朴
+      - img "crystal"
+      - text: 注能 1
+      - generic: 注能（1）：
+      - text: 造成 11 点法术伤害。
+      - img "swords"
+      - button "crystal 注能1":
+        - img "crystal"
+        - text: 注能1
+    - button "查看龙焰射线完整规则": 规则
+    - button "神秘召唤 · 2 费。费用 2 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）":
+      - generic: "2"
+      - img "神秘召唤"
+      - generic: 神秘召唤
+      - generic: 法术 · 史诗 史诗
+      - generic: 发现 1 张传说卡牌。
+      - img "heart"
+    - button "查看神秘召唤完整规则": 规则
+    - button "珍珠盒 · 0 费。费用 0 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）":
+      - generic: "0"
+      - img "珍珠盒"
+      - generic: 珍珠盒
+      - generic: 装备 · 稀有 稀有
+      - generic: 本牌内置 3×3 格空间，可容纳所有类型的资源卡牌。
+      - img "heart"
+    - button "查看珍珠盒完整规则": 规则
+    - button "寻宝图 · 0 费。 无法打出：「牌库」词条只有对战 BOSS 时生效——普通战斗没有牌库与墓地，无法打出" [disabled]:
+      - generic: "0"
+      - img "寻宝图"
+      - generic: 寻宝图
+      - generic: 装备 · 古朴 古朴
+      - img "cards"
+      - text: 抽 1
+      - generic: 主动技能：
+      - text: 将 1 张「搜索大宝箱」洗入你的牌库，并抽 1 张牌。
+      - text: 「牌库」词条只有对战 BOSS 时生效——普通战斗没有牌库与墓地，无法打出
+    - button "查看寻宝图完整规则": 规则
+    - button "包扎 · 1 费。费用 1 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）":
+      - generic: "1"
+      - img "包扎"
+      - generic: 包扎
+      - generic: 武术 · 古朴 古朴
+      - img "heart"
+      - text: 回 3
+      - img "plate"
+      - text: 甲 3
+      - generic: 你回复 3 点生命，并获得 3 点护甲。
+      - img "heart"
+    - button "查看包扎完整规则": 规则
+    - generic "战术操作":
+      - button "bag 背包":
+        - img "bag"
+        - text: 背包
+      - button "runner 撤离（判负）":
+        - img "runner"
+        - text: 撤离（判负）
+      - button "gear 设置":
+        - img "gear"
+        - text: 设置
+      - button "skip 结束回合":
+        - img "skip"
+        - text: 结束回合

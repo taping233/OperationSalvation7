@@ -1,0 +1,44 @@
+[
+  {
+    "id": "sts-official-battle",
+    "game": "杀戮尖塔 · Mega Crit 官方图库",
+    "section": "battle",
+    "title": "前景大卡、中央战场、左右固定行动",
+    "sourcePage": "https://www.megacrit.com/press-kits/slay-the-spire/",
+    "imageUrl": "https://www.megacrit.com/images/ss8.jpg",
+    "observations": [
+      "主代理在 Codex 内置浏览器直接查看官方原图。",
+      "手牌贴底边成扇形，聚焦的 Thunderclap 放大到中央前景，其他牌退到两旁。",
+      "能量在左下，End Turn 在右下；敌人意图在单位上方，生命贴单位脚边。",
+      "顶部资源栏贯穿画面，中央主要留给战斗单位。"
+    ],
+    "adaptation": [
+      "以此作为战斗区构图主参考，保留本作卡框、人物和冬境场景。",
+      "按老板明确要求，点击手牌打开完整大卡；使用按钮再进入目标选择。",
+      "大卡关闭回到同一手牌位置，状态变化只更新对应对象。"
+    ],
+    "motionVerified": false,
+    "localFile": "reference-images/sts-official-battle.jpg"
+  },
+  {
+    "id": "sts-official-shop",
+    "game": "杀戮尖塔 · Mega Crit 官方图库",
+    "section": "shop",
+    "title": "整张货架与紧贴商品的价格",
+    "sourcePage": "https://www.megacrit.com/press-kits/slay-the-spire/",
+    "imageUrl": "https://www.megacrit.com/images/ss4.jpg",
+    "observations": [
+      "主代理在 Codex 内置浏览器直接查看官方原图。",
+      "商品共同铺在一张布面上，卡牌大于道具；价格在每个商品正下方。",
+      "商人的手进入画面，形成明确的交易场景身份；离开位于左侧独立按钮。",
+      "商品并未逐件装在沉重的弹窗或表格中。"
+    ],
+    "adaptation": [
+      "本作保留已确认行商背景，让货架成为主内容。",
+      "商品卡与价格成组，点击先放大阅读；购买与离开分成独立动作。",
+      "减少货架、卡槽、商品、详情之间的重复边框。"
+    ],
+    "motionVerified": false,
+    "localFile": "reference-images/sts-official-shop.jpg"
+  }
+]

@@ -1,0 +1,352 @@
+{
+  "actions": [
+    {
+      "detail": "真实进入、下拉稀有度、普通/棱彩选片、打开大图、备注聚焦、Esc返焦、快速收回重开、长名称与说明搜索、无匹配及重置、分类切换；未输入或保存备注",
+      "type": "real-input"
+    },
+    {
+      "detail": "点击墙上禁咒I并Esc收回，指针保留在原卡；:hover为真，transform Y处于抬升过程，transition 140ms、filter none",
+      "inputKind": "real-input",
+      "type": "hover"
+    },
+    {
+      "detail": "核对主标题左对齐、名称实际可见/衬线字体、纸签边线及首列文字起点一致、三列等高、列表160ms零延迟、分类150ms、照片420ms",
+      "type": "static-inspection"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"PHOTOGRAPH ARCHIVE / WINTER RECORDS\\n          照相馆\",\"class\":\"lib-head-title\"}",
+      "key": "header",
+      "rect": {
+        "height": 44.025001525878906,
+        "width": 213.2624969482422,
+        "x": 77.7249984741211,
+        "y": 10.100000381469728
+      },
+      "selector": ".lib-head-title",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 228, 225)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "55.501px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "268.854px"
+      },
+      "tag": "DIV",
+      "text": "PHOTOGRAPH ARCHIVE / WINTER RECORDS\n          照相馆"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"H3\",\"text\":\"禁咒I\",\"class\":\"studio-dossier-name\"}",
+      "key": "title",
+      "rect": {
+        "height": 25.700000762939453,
+        "width": 362.2375183105469,
+        "x": 1116.550048828125,
+        "y": 507.3999938964844
+      },
+      "selector": ".studio-dossier-name",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(102, 88, 121)",
+        "display": "block",
+        "font-family": "\"Noto Serif SC\", \"Source Han Serif SC\", SimSun, serif",
+        "font-size": "24px",
+        "height": "32.3992px",
+        "line-height": "32.4px",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "456.662px"
+      },
+      "tag": "H3",
+      "text": "禁咒I"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"SPAN\",\"text\":\"\",\"class\":\"studio-photo-paper studio-preview-paper rv7\"}",
+      "key": "paper",
+      "rect": {
+        "height": 329.75,
+        "width": 389.2124938964844,
+        "x": 1103.862548828125,
+        "y": 132.1374969482422
+      },
+      "selector": ".studio-preview-paper",
+      "styles": {
+        "background-color": "rgb(233, 225, 211)",
+        "border-radius": "0px",
+        "color": "rgb(170, 174, 177)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "415.706px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "4.8px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "490.668px"
+      },
+      "tag": "SPAN",
+      "text": ""
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"SPAN\",\"text\":\"类型法术\",\"class\":\"studio-file-field\"}",
+      "key": "fields",
+      "rect": {
+        "height": 50.26250076293945,
+        "width": 125.51250457763672,
+        "x": 1103.862548828125,
+        "y": 548.9500122070312
+      },
+      "selector": ".studio-file-field",
+      "styles": {
+        "background-color": "rgb(228, 220, 205)",
+        "border-radius": "0px",
+        "color": "rgb(48, 48, 46)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "63.3644px",
+        "line-height": "21.7px",
+        "opacity": "1",
+        "padding": "10px 16px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "158.23px"
+      },
+      "tag": "SPAN",
+      "text": "类型法术"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"SPAN\",\"text\":\"稀有度棱彩\",\"class\":\"studio-file-field\"}",
+      "key": "fields",
+      "rect": {
+        "height": 50.26250076293945,
+        "width": 125.51250457763672,
+        "x": 1235.7125244140625,
+        "y": 548.9500122070312
+      },
+      "selector": ".studio-file-field",
+      "styles": {
+        "background-color": "rgb(228, 220, 205)",
+        "border-radius": "0px",
+        "color": "rgb(48, 48, 46)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "63.3644px",
+        "line-height": "21.7px",
+        "opacity": "1",
+        "padding": "10px 16px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "158.23px"
+      },
+      "tag": "SPAN",
+      "text": "稀有度棱彩"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"SPAN\",\"text\":\"费用0\",\"class\":\"studio-file-field\"}",
+      "key": "fields",
+      "rect": {
+        "height": 50.26250076293945,
+        "width": 125.51250457763672,
+        "x": 1367.5625,
+        "y": 548.9500122070312
+      },
+      "selector": ".studio-file-field",
+      "styles": {
+        "background-color": "rgb(228, 220, 205)",
+        "border-radius": "0px",
+        "color": "rgb(48, 48, 46)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "63.3644px",
+        "line-height": "21.7px",
+        "opacity": "1",
+        "padding": "10px 16px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "158.23px"
+      },
+      "tag": "SPAN",
+      "text": "费用0"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"P\",\"text\":\"抽到时施放：夺取 1 点攻击力。\",\"class\":\"pv-desc\"}",
+      "key": "effect",
+      "rect": {
+        "height": 47.462501525878906,
+        "width": 389.2124938964844,
+        "x": 1103.862548828125,
+        "y": 605.5499877929688
+      },
+      "selector": ".pv-desc",
+      "styles": {
+        "background-color": "rgb(228, 220, 205)",
+        "border-radius": "0px",
+        "color": "rgb(48, 52, 56)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Noto Sans SC\", sans-serif",
+        "font-size": "15px",
+        "height": "59.8345px",
+        "line-height": "27px",
+        "opacity": "1",
+        "padding": "14px 16px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "490.668px"
+      },
+      "tag": "P",
+      "text": "抽到时施放：夺取 1 点攻击力。"
+    },
+    {
+      "attributes": {
+        "id": "libPreview"
+      },
+      "identity": "{\"id\":\"libPreview\"}",
+      "key": "preview",
+      "rect": {
+        "height": 803.2374877929688,
+        "width": 398.7124938964844,
+        "x": 1099.112548828125,
+        "y": 122.625
+      },
+      "selector": ".library-preview",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(170, 174, 177)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "1012.62px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "12px 6px 16px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "502.645px"
+      },
+      "tag": "DIV",
+      "text": "照片档案 / PHOTO FILE№ 99禁咒I\n    类型法术稀有度棱彩费用0\n    \n    抽到时施放：夺取 1 点攻击力。\n    \n    ‹ 上一片1 / 268下一片 ›\n    查看大图与背签↗"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"BUTTON\",\"text\":\"查看大图与背签↗\",\"class\":\"studio-zoom\"}",
+      "key": "cta",
+      "rect": {
+        "height": 34.900001525878906,
+        "width": 389.2124938964844,
+        "x": 1103.862548828125,
+        "y": 703.75
+      },
+      "selector": ".studio-zoom",
+      "styles": {
+        "background-color": "rgb(228, 220, 205)",
+        "border-radius": "0px",
+        "color": "rgb(52, 48, 44)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Noto Sans SC\", sans-serif",
+        "font-size": "14px",
+        "height": "43.9974px",
+        "line-height": "19.6px",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "490.668px"
+      },
+      "tag": "BUTTON",
+      "text": "查看大图与背签↗"
+    }
+  ],
+  "observedAt": "2026-10-10T07:24:49.096Z",
+  "page": {
+    "origin": "http://127.0.0.1:5341",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.0000000149011612,
+      "height": 956,
+      "width": 1523
+    }
+  },
+  "scene": "studio-live-final",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-10-WF-studio-live-1010/07-final-gallery.png",
+    "docs/evidence/2026-10-10-WF-studio-live-1010/04-photo-detail.png",
+    "docs/evidence/2026-10-10-WF-studio-live-1010/02-filter-menu.png",
+    "docs/evidence/2026-10-10-WF-studio-live-1010/03-proof-mount.png",
+    "docs/evidence/2026-10-10-WF-studio-live-1010/05-long-copy.png",
+    "docs/evidence/2026-10-10-WF-studio-live-1010/06-empty.png"
+  ],
+  "selectors": [
+    {
+      "key": "header",
+      "selector": ".lib-head-title"
+    },
+    {
+      "key": "title",
+      "selector": ".studio-dossier-name"
+    },
+    {
+      "key": "paper",
+      "selector": ".studio-preview-paper"
+    },
+    {
+      "key": "fields",
+      "selector": ".studio-file-field"
+    },
+    {
+      "key": "effect",
+      "selector": ".pv-desc"
+    },
+    {
+      "key": "preview",
+      "selector": ".library-preview"
+    },
+    {
+      "key": "cta",
+      "selector": ".studio-zoom"
+    }
+  ]
+}

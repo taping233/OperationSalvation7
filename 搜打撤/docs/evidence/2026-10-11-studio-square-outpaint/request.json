@@ -1,0 +1,184 @@
+{
+  "items": [
+    {
+      "card_id": "tt2-frostsword",
+      "asset": "cards/studio-expanded/tt2-frostsword.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a124be-a2bf-7933-85ed-3d8969194b20\\exec-0398c847-7bc8-4970-8cb6-aa679ef7ee03.png",
+      "revision": "studio-square-outpaint-20261011",
+      "prompt": "Use case: precise-object-edit / background expansion. Edit target Image 1: existing equipment card, icy blue sword; cyan backdrop. Image 2 is ONLY a brushwork style reference; DO NOT insert its character, clothing or sword. Return a square 1:1 full-bleed game-card illustration, approximately 1024x1024. OUTPAINT Image 1 into a square. Keep the existing subject, its design, pose, silhouette, diagonal/upright orientation, camera view and proportions faithfully. Fit the entire original rectangular image into the center of the new square without stretching or cropping the subject, then extend ONLY the matching background into the newly available top/bottom or side areas. Continue the original background color masses and economical broad hand-painted brushwork, matte muted colors, hard-edged light/shadow, very low detail density. Existing object details stay as in Image 1. Do not zoom or add new items, scenery, characters, labels, frames, border lines, black bars or letterboxing. Keep the background opaque and continuous to every edge. This is background expansion, not an equipment redesign.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt2-frostsword.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "original_asset": "cards/equip-tt2-frostsword.webp"
+    },
+    {
+      "card_id": "tt3-fate-wheel",
+      "asset": "cards/studio-expanded/tt3-fate-wheel.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a124be-a2bf-7933-85ed-3d8969194b20\\exec-c1fe6a37-3b96-46f0-ba1c-02652bbba497.png",
+      "revision": "studio-square-outpaint-20261011",
+      "prompt": "Use case: precise-object-edit / background expansion. Edit target Image 1: existing equipment card, gold pocket watch; pale cream backdrop. Image 2 is ONLY a brushwork style reference; DO NOT insert its character, clothing or sword. Return a square 1:1 full-bleed game-card illustration, approximately 1024x1024. OUTPAINT Image 1 into a square. Keep the existing subject, its design, pose, silhouette, diagonal/upright orientation, camera view and proportions faithfully. Fit the entire original rectangular image into the center of the new square without stretching or cropping the subject, then extend ONLY the matching background into the newly available top/bottom or side areas. Continue the original background color masses and economical broad hand-painted brushwork, matte muted colors, hard-edged light/shadow, very low detail density. Existing object details stay as in Image 1. Do not zoom or add new items, scenery, characters, labels, frames, border lines, black bars or letterboxing. Keep the background opaque and continuous to every edge. This is background expansion, not an equipment redesign.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt3-fate-wheel.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "original_asset": "cards/equip-tt3-fate-wheel.webp"
+    },
+    {
+      "card_id": "tt3-staff",
+      "asset": "cards/studio-expanded/tt3-staff.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a124be-a2bf-7933-85ed-3d8969194b20\\exec-f1fab5d1-5677-464a-ba41-01af5ebec2dd.png",
+      "revision": "studio-square-outpaint-20261011",
+      "prompt": "Use case: precise-object-edit / background expansion. Edit target Image 1: existing equipment card, upright silver staff with floating blue crystal; dark slate blue backdrop. Image 2 is ONLY a brushwork style reference; DO NOT insert its character, clothing or sword. Return a square 1:1 full-bleed game-card illustration, approximately 1024x1024. OUTPAINT Image 1 into a square. Keep the existing subject, its design, pose, silhouette, diagonal/upright orientation, camera view and proportions faithfully. Fit the entire original rectangular image into the center of the new square without stretching or cropping the subject, then extend ONLY the matching background into the newly available top/bottom or side areas. Continue the original background color masses and economical broad hand-painted brushwork, matte muted colors, hard-edged light/shadow, very low detail density. Existing object details stay as in Image 1. Do not zoom or add new items, scenery, characters, labels, frames, border lines, black bars or letterboxing. Keep the background opaque and continuous to every edge. This is background expansion, not an equipment redesign.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/expedition-starters/staff.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "original_asset": "cards/expedition-starters/staff.webp"
+    },
+    {
+      "card_id": "tt3-wolf-bow",
+      "asset": "cards/studio-expanded/tt3-wolf-bow.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a124be-a2bf-7933-85ed-3d8969194b20\\exec-d26bfe53-4adc-498a-9b1f-0439d0b50814.png",
+      "revision": "studio-square-outpaint-20261011",
+      "prompt": "Use case: precise-object-edit / background expansion. Edit target Image 1: existing equipment card, silver-blue wolf bow; pale blue backdrop. Image 2 is ONLY a brushwork style reference; DO NOT insert its character, clothing or sword. Return a square 1:1 full-bleed game-card illustration, approximately 1024x1024. OUTPAINT Image 1 into a square. Keep the existing subject, its design, pose, silhouette, diagonal/upright orientation, camera view and proportions faithfully. Fit the entire original rectangular image into the center of the new square without stretching or cropping the subject, then extend ONLY the matching background into the newly available top/bottom or side areas. Continue the original background color masses and economical broad hand-painted brushwork, matte muted colors, hard-edged light/shadow, very low detail density. Existing object details stay as in Image 1. Do not zoom or add new items, scenery, characters, labels, frames, border lines, black bars or letterboxing. Keep the background opaque and continuous to every edge. This is background expansion, not an equipment redesign.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt3-wolf-bow.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "original_asset": "cards/equip-tt3-wolf-bow.webp"
+    },
+    {
+      "card_id": "tt3-twinwater-mail",
+      "asset": "cards/studio-expanded/tt3-twinwater-mail.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a124be-a2bf-7933-85ed-3d8969194b20\\exec-c587f0d6-cea9-4b63-b01b-a2c37ed6f5b6.png",
+      "revision": "studio-square-outpaint-20261011",
+      "prompt": "Use case: precise-object-edit / background expansion. Image 1 is the EDIT TARGET: angular cyan ice armor; muted blue backdrop. Image 2 is ONLY an economical painterly brushwork reference; do not add its character or clothing. Output a square 1:1 opaque full-bleed game-card illustration. Outpaint Image 1 into a square by fitting the complete existing rectangle centrally without stretching it, then extending only its matching painted background into the top/bottom or side gaps. Faithfully preserve the original object design, proportions, orientation, silhouette, composition, colors and camera. Keep original intentional lateral-edge crops; do not invent missing weapon parts. Background should continue the original broad, matte, low-detail color masses and hard-edged economical brushwork. No new objects, people, scenery, particles, frame, labels, text, border or black letterbox bars. Do not redesign or enlarge the equipment.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt3-twinwater-mail.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "original_asset": "cards/equip-tt3-twinwater-mail.webp"
+    },
+    {
+      "card_id": "tt3-grass-armor",
+      "asset": "cards/studio-expanded/tt3-grass-armor.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a124be-a2bf-7933-85ed-3d8969194b20\\exec-02d012f0-79fb-473a-a769-ff51905b49a9.png",
+      "revision": "studio-square-outpaint-20261011",
+      "prompt": "Use case: precise-object-edit / background expansion. Image 1 is the EDIT TARGET: green grass and vine armor; pale yellow-green backdrop. Image 2 is ONLY an economical painterly brushwork reference; do not add its character or clothing. Output a square 1:1 opaque full-bleed game-card illustration. Outpaint Image 1 into a square by fitting the complete existing rectangle centrally without stretching it, then extending only its matching painted background into the top/bottom or side gaps. Faithfully preserve the original object design, proportions, orientation, silhouette, composition, colors and camera. Keep original intentional lateral-edge crops; do not invent missing weapon parts. Background should continue the original broad, matte, low-detail color masses and hard-edged economical brushwork. No new objects, people, scenery, particles, frame, labels, text, border or black letterbox bars. Do not redesign or enlarge the equipment.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt3-grass-armor.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "original_asset": "cards/equip-tt3-grass-armor.webp"
+    },
+    {
+      "card_id": "tt3-blooddrinker",
+      "asset": "cards/studio-expanded/tt3-blooddrinker.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a124be-a2bf-7933-85ed-3d8969194b20\\exec-c890dd98-8382-41f2-81a3-f831c4f70b9a.png",
+      "revision": "studio-square-outpaint-20261011",
+      "prompt": "Use case: precise-object-edit / background expansion. Image 1 is the EDIT TARGET: curved red bloodied blade close-up; warm cream backdrop. Image 2 is ONLY an economical painterly brushwork reference; do not add its character or clothing. Output a square 1:1 opaque full-bleed game-card illustration. Outpaint Image 1 into a square by fitting the complete existing rectangle centrally without stretching it, then extending only its matching painted background into the top/bottom or side gaps. Faithfully preserve the original object design, proportions, orientation, silhouette, composition, colors and camera. Keep original intentional lateral-edge crops; do not invent missing weapon parts. Background should continue the original broad, matte, low-detail color masses and hard-edged economical brushwork. No new objects, people, scenery, particles, frame, labels, text, border or black letterbox bars. Do not redesign or enlarge the equipment.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt3-blooddrinker.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "original_asset": "cards/equip-tt3-blooddrinker.webp"
+    },
+    {
+      "card_id": "tt8-demonslay",
+      "asset": "cards/studio-expanded/tt8-demonslay.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a124be-a2bf-7933-85ed-3d8969194b20\\exec-d93bed4c-5105-4a10-b44a-3d24ee8e7558.png",
+      "revision": "studio-square-outpaint-20261011",
+      "prompt": "Use case: precise-object-edit / background expansion. Image 1 is the EDIT TARGET: upright dark sword with red blade edges; charcoal and muted burgundy backdrop. Image 2 is ONLY an economical painterly brushwork reference; do not add its character or clothing. Output a square 1:1 opaque full-bleed game-card illustration. Outpaint Image 1 into a square by fitting the complete existing rectangle centrally without stretching it, then extending only its matching painted background into the top/bottom or side gaps. Faithfully preserve the original object design, proportions, orientation, silhouette, composition, colors and camera. Keep original intentional lateral-edge crops; do not invent missing weapon parts. Background should continue the original broad, matte, low-detail color masses and hard-edged economical brushwork. No new objects, people, scenery, particles, frame, labels, text, border or black letterbox bars. Do not redesign or enlarge the equipment.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt8-demonslay.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "original_asset": "cards/equip-tt8-demonslay.webp"
+    },
+    {
+      "card_id": "tt8-archdemon",
+      "asset": "cards/studio-expanded/tt8-archdemon.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a124be-a2bf-7933-85ed-3d8969194b20\\exec-6c9afd97-11e6-4716-a42f-928a6be84705.png",
+      "revision": "studio-square-outpaint-20261011",
+      "prompt": "Use case: precise-object-edit / background expansion. Image 1 is the EDIT TARGET: upright black-red demonic sword with gold crossguard; muted plum-charcoal backdrop. Image 2 is ONLY an economical hand-painted anime brushwork reference; no character/clothes from it may appear. Produce a square 1:1 opaque full-bleed game-card illustration by OUTPAINTING Image 1. Keep the entire original rectangular composition centrally, no subject cropping or stretching. Extend matching existing background into newly available sides or top/bottom until all square edges are covered. Preserve the original equipment silhouette, proportions, orientation, existing rune/halo/ray identity features, viewpoint, colors and brushwork. Keep original intentional crops at lateral edges. Low-detail matte background color masses with broad directional opaque brush marks, no new scenery, objects, characters, text, frame, interface, black bars or letterboxing. Do not redesign the equipment or invent a new action.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt8-archdemon.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "original_asset": "cards/equip-tt8-archdemon.webp"
+    },
+    {
+      "card_id": "tt8-heavensword",
+      "asset": "cards/studio-expanded/tt8-heavensword.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a124be-a2bf-7933-85ed-3d8969194b20\\exec-91c72b41-d4f8-4faf-bac2-521ef359ff9b.png",
+      "revision": "studio-square-outpaint-20261011",
+      "prompt": "Use case: precise-object-edit / background expansion. Image 1 is the EDIT TARGET: upright luminous gold sword and circular halo; blue painted sky backdrop. Image 2 is ONLY an economical hand-painted anime brushwork reference; no character/clothes from it may appear. Produce a square 1:1 opaque full-bleed game-card illustration by OUTPAINTING Image 1. Keep the entire original rectangular composition centrally, no subject cropping or stretching. Extend matching existing background into newly available sides or top/bottom until all square edges are covered. Preserve the original equipment silhouette, proportions, orientation, existing rune/halo/ray identity features, viewpoint, colors and brushwork. Keep original intentional crops at lateral edges. Low-detail matte background color masses with broad directional opaque brush marks, no new scenery, objects, characters, text, frame, interface, black bars or letterboxing. Do not redesign the equipment or invent a new action.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt8-heavensword.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "original_asset": "cards/equip-tt8-heavensword.webp"
+    },
+    {
+      "card_id": "tt7-arcanescroll",
+      "asset": "cards/studio-expanded/tt7-arcanescroll.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a124be-a2bf-7933-85ed-3d8969194b20\\exec-ca2a0dc4-89d6-43fc-bb34-cf4b99c9f0e4.png",
+      "revision": "studio-square-outpaint-20261011",
+      "prompt": "Use case: precise-object-edit / background expansion. Image 1 is the EDIT TARGET: curled parchment with turquoise runes; muted violet backdrop. Image 2 is ONLY an economical hand-painted anime brushwork reference; no character/clothes from it may appear. Produce a square 1:1 opaque full-bleed game-card illustration by OUTPAINTING Image 1. Keep the entire original rectangular composition centrally, no subject cropping or stretching. Extend matching existing background into newly available sides or top/bottom until all square edges are covered. Preserve the original equipment silhouette, proportions, orientation, existing rune/halo/ray identity features, viewpoint, colors and brushwork. Keep original intentional crops at lateral edges. Low-detail matte background color masses with broad directional opaque brush marks, no new scenery, objects, characters, text, frame, interface, black bars or letterboxing. Do not redesign the equipment or invent a new action.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt7-arcanescroll.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "original_asset": "cards/equip-tt7-arcanescroll.webp"
+    },
+    {
+      "card_id": "tt12-raygun",
+      "asset": "cards/studio-expanded/tt12-raygun.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a124be-a2bf-7933-85ed-3d8969194b20\\exec-265b66fe-a66b-44cd-b561-8ff7d9265533.png",
+      "revision": "studio-square-outpaint-20261011",
+      "prompt": "Use case: precise-object-edit / background expansion. Image 1 is the EDIT TARGET: gold-and-black handheld raygun emitting cyan ray; pale lavender backdrop. Image 2 is ONLY an economical hand-painted anime brushwork reference; no character/clothes from it may appear. Produce a square 1:1 opaque full-bleed game-card illustration by OUTPAINTING Image 1. Keep the entire original rectangular composition centrally, no subject cropping or stretching. Extend matching existing background into newly available sides or top/bottom until all square edges are covered. Preserve the original equipment silhouette, proportions, orientation, existing rune/halo/ray identity features, viewpoint, colors and brushwork. Keep original intentional crops at lateral edges. Low-detail matte background color masses with broad directional opaque brush marks, no new scenery, objects, characters, text, frame, interface, black bars or letterboxing. Do not redesign the equipment or invent a new action.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt12-raygun.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "original_asset": "cards/equip-tt12-raygun.webp"
+    }
+  ],
+  "ui_comparison": {
+    "references": [
+      {
+        "title": "星铁光锥档案测试期截图",
+        "url": "https://cdn.oneesports.gg/wp-content/uploads/2023/04/HonkaiStarRail_LightCones_DataBank_beta-1-1024x576.jpg"
+      },
+      {
+        "title": "1999心相测试期截图",
+        "url": "https://oss-community.eagle.cool/resource/attachment/57df7e31-94ae-4c6a-b359-620fe39c2b7d/307a7fe2.webp/orginal"
+      }
+    ],
+    "findings": [
+      "未选中框饰偏亮，选中与普通照片主次不足",
+      "筛选条件激活状态太淡",
+      "详情小标签和位置数字偏小"
+    ],
+    "changes": [
+      "未选中框饰亮度收至0.9，选中照片名称加重；原高亮框饰/金线保留",
+      "筛选激活增加暖底与细底线、箭头身份提示，删原灰色激活旧规则",
+      "费用标签/位置数字14px、多指标标签16px，保留纯文字详情、留白和固定操作区"
+    ]
+  },
+  "integration": {
+    "new_asset_directory": "game/assets/cards/studio-expanded/",
+    "original_assets": "retained unchanged",
+    "metadata": "12 scoped cardArtOverrides/cardArtRevisions; 24 asset manifest entries; 12 thumbnail index entries",
+    "verification": "仅观察内置生图返回画作；无实页/测试/资产审计/build/提交",
+    "preserved": [
+      "藏品编号",
+      "卡牌引用查看",
+      "抽牌转初始攻击说明",
+      "稀有蓝夹子",
+      "透明卡面衬底",
+      "已做的前端缓存优化"
+    ]
+  }
+}

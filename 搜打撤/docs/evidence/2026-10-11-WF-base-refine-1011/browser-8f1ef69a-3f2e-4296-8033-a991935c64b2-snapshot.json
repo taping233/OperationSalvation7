@@ -1,0 +1,216 @@
+{
+  "nodes": [
+    {
+      "attributes": {
+        "aria-label": "返回收藏室",
+        "data-act": "archiveMain"
+      },
+      "identity": "返回收藏室",
+      "key": "back",
+      "rect": {
+        "height": 39.62249755859375,
+        "width": 43.22249984741211,
+        "x": 22.012500762939453,
+        "y": 14
+      },
+      "selector": "#hubMain .hub-back",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(235, 235, 235)",
+        "display": "flex",
+        "font-size": "12.5px"
+      },
+      "tag": "BUTTON",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-view": "ach/rewards"
+      },
+      "identity": "奖励成就目标 ↗收藏里程碑 ↗暂无待领取奖励",
+      "key": "main",
+      "rect": {
+        "height": 885.9625244140625,
+        "width": 653.6000366210938,
+        "x": 0,
+        "y": 70.0374984741211
+      },
+      "selector": "#hubMain .hub-page",
+      "styles": {
+        "background-color": "rgb(226, 231, 229)",
+        "color": "rgb(27, 42, 52)",
+        "display": "block",
+        "font-size": "18px"
+      },
+      "tag": "MAIN",
+      "text": "奖励成就目标 ↗收藏里程碑 ↗暂无待领取奖励"
+    },
+    {
+      "attributes": {},
+      "identity": "基地",
+      "key": "heading",
+      "rect": {
+        "height": 28.61250114440918,
+        "width": 48.42499923706055,
+        "x": 92.0500030517578,
+        "y": 19.912500381469727
+      },
+      "selector": "#hubMain h2",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(230, 233, 237)",
+        "display": "block",
+        "font-size": "22px"
+      },
+      "tag": "H2",
+      "text": "基地"
+    },
+    {
+      "attributes": {},
+      "identity": "奖励",
+      "key": "heading",
+      "rect": {
+        "height": 50.42499923706055,
+        "width": 110.57500457763672,
+        "x": 22.960636138916016,
+        "y": 98.0500030517578
+      },
+      "selector": "#hubMain h2",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(27, 42, 52)",
+        "display": "block",
+        "font-size": "42px"
+      },
+      "tag": "H2",
+      "text": "奖励"
+    },
+    {
+      "attributes": {
+        "aria-label": "返回收藏室",
+        "data-act": "archiveMain"
+      },
+      "identity": "返回收藏室",
+      "key": "action",
+      "rect": {
+        "height": 39.62249755859375,
+        "width": 43.22249984741211,
+        "x": 22.012500762939453,
+        "y": 14
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(235, 235, 235)",
+        "display": "flex",
+        "font-size": "12.5px"
+      },
+      "tag": "BUTTON",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-act": "hubCollectionView",
+        "data-view": "achievements"
+      },
+      "identity": "成就目标 ↗",
+      "key": "action",
+      "rect": {
+        "height": 42.61249923706055,
+        "width": 100.1750030517578,
+        "x": 373.97314453125,
+        "y": 216.1000061035156
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(92, 108, 115)",
+        "display": "block",
+        "font-size": "19px"
+      },
+      "tag": "BUTTON",
+      "text": "成就目标 ↗"
+    },
+    {
+      "attributes": {
+        "data-act": "hubCollectionView",
+        "data-view": "classes"
+      },
+      "identity": "收藏里程碑 ↗",
+      "key": "action",
+      "rect": {
+        "height": 42.61249923706055,
+        "width": 119.1875,
+        "x": 494.1481628417969,
+        "y": 216.1000061035156
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(92, 108, 115)",
+        "display": "block",
+        "font-size": "19px"
+      },
+      "tag": "BUTTON",
+      "text": "收藏里程碑 ↗"
+    }
+  ],
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 654
+    }
+  },
+  "selectors": [
+    {
+      "key": "back",
+      "selector": "#hubMain .hub-back"
+    },
+    {
+      "key": "main",
+      "selector": "#hubMain .hub-page"
+    },
+    {
+      "key": "heading",
+      "selector": "#hubMain h2"
+    },
+    {
+      "key": "action",
+      "selector": "#hubMain button"
+    },
+    {
+      "key": "canvas",
+      "selector": "#hubMain .courtyard-v3-canvas"
+    }
+  ],
+  "schemaVersion": 1,
+  "kind": "browser-snapshot",
+  "scene": "base-rewards-inbox",
+  "observedAt": "2026-10-11T05:09:28.957Z",
+  "collector": {
+    "platform": "Codex",
+    "browser": "iab",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "actions": [
+    {
+      "type": "real-input",
+      "detail": "进入档位01→队员→招式→返回队员→伙伴→孵化→返回伙伴→返回队员；人物切换黑像→选择培养卡牌→补给→返回后勤→返回队员保留黑像；外观按Escape回队员；后勤→扩建→返回后勤→返回基地；普通后勤入口清除人物筛选；收藏室→奖励→成就目标按Escape回奖励→收藏里程碑→返回奖励→返回收藏室；卡背→猎手皮纸→查看解锁目标→返回卡背保留选择；庭院→投喂→暂停→继续；观雨→大雨→苔绿→声音开→声音关；台面真实点击出现雨圈散开"
+    },
+    {
+      "type": "screenshot",
+      "detail": "当前窗口实页截取"
+    }
+  ],
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "screenshots": [
+    "docs/evidence/2026-10-11-WF-base-refine-1011/rewards-final.jpg"
+  ]
+}

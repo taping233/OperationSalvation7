@@ -1,0 +1,450 @@
+{
+  "id": "boss-psionic",
+  "title": "折镜之主",
+  "stem": "12-boss-psionic-broken-mirrors",
+  "idea": "异能领主的镜厅三拍：颤音琴与钟琴交错，管风琴守住低部；同句不同方向的回答形成折射感。",
+  "key": "E-flat minor",
+  "meter": [
+    3,
+    4
+  ],
+  "bpm_quarter": 96,
+  "bars": 32,
+  "total_beats": 96.0,
+  "seconds": 60.0,
+  "tracks": [
+    {
+      "name": "Vibraphone mirror",
+      "program": 11,
+      "bank": 0,
+      "hand": null,
+      "notes": 64,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/12-boss-psionic-broken-mirrors-Vibraphone-mirror.wav",
+        "bytes": 23040088,
+        "sha256": "7d2e14e6981686d3431f1fe69d46122612359ff203fb2969237bcf559a415957"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.97
+        ],
+        [
+          18.0,
+          0.97
+        ],
+        [
+          30.0,
+          1
+        ],
+        [
+          36.0,
+          1
+        ],
+        [
+          48.0,
+          1.04
+        ],
+        [
+          66.0,
+          1.04
+        ],
+        [
+          78.0,
+          0.94
+        ],
+        [
+          90.0,
+          0.94
+        ],
+        [
+          96.0,
+          0.97
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Celeste reflection",
+      "program": 8,
+      "bank": 0,
+      "hand": null,
+      "notes": 22,
+      "pan": 31,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/12-boss-psionic-broken-mirrors-Celeste-reflection.wav",
+        "bytes": 23040088,
+        "sha256": "70e0075d33056056284c98446077b0c5927e8e05675c7fd6c89f2e10d6a7264c"
+      },
+      "target_active_rms_dbfs": -38,
+      "continuous_gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          18.0,
+          0.68
+        ],
+        [
+          30.0,
+          0.72
+        ],
+        [
+          36.0,
+          0.72
+        ],
+        [
+          48.0,
+          0.84
+        ],
+        [
+          66.0,
+          0.84
+        ],
+        [
+          78.0,
+          0.58
+        ],
+        [
+          90.0,
+          0.58
+        ],
+        [
+          96.0,
+          0.68
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Organ shadow",
+      "program": 19,
+      "bank": 0,
+      "hand": null,
+      "notes": 32,
+      "pan": -22,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/12-boss-psionic-broken-mirrors-Organ-shadow.wav",
+        "bytes": 23040088,
+        "sha256": "e346c0bc005d59396c94a29e1ddc95009576643f6fd6ad0d85615106896a3253"
+      },
+      "target_active_rms_dbfs": -36,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          18.0,
+          0.83
+        ],
+        [
+          30.0,
+          0.92
+        ],
+        [
+          36.0,
+          0.92
+        ],
+        [
+          48.0,
+          0.98
+        ],
+        [
+          66.0,
+          0.98
+        ],
+        [
+          78.0,
+          0.85
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Violin narrow light",
+      "program": 40,
+      "bank": 0,
+      "hand": null,
+      "notes": 10,
+      "pan": 25,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/12-boss-psionic-broken-mirrors-Violin-narrow-light.wav",
+        "bytes": 23040088,
+        "sha256": "ecf7f2de2ca45fcc9064c5cd66c2e61207c218d605dbb954692b3042eb97799b"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.35
+        ],
+        [
+          18.0,
+          0.35
+        ],
+        [
+          30.0,
+          0.8
+        ],
+        [
+          36.0,
+          0.8
+        ],
+        [
+          48.0,
+          0.92
+        ],
+        [
+          66.0,
+          0.92
+        ],
+        [
+          78.0,
+          0.48
+        ],
+        [
+          90.0,
+          0.48
+        ],
+        [
+          96.0,
+          0.35
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Viola dark glass",
+      "program": 41,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": -34,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/12-boss-psionic-broken-mirrors-Viola-dark-glass.wav",
+        "bytes": 23040088,
+        "sha256": "f0a7da10b61be67a122f8308578423b66e35c2e729eda0dbad7205570eb4a069"
+      },
+      "target_active_rms_dbfs": -36,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          18.0,
+          0.83
+        ],
+        [
+          30.0,
+          0.92
+        ],
+        [
+          36.0,
+          0.92
+        ],
+        [
+          48.0,
+          0.98
+        ],
+        [
+          66.0,
+          0.98
+        ],
+        [
+          78.0,
+          0.85
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Harp fractured image",
+      "program": 46,
+      "bank": 0,
+      "hand": null,
+      "notes": 22,
+      "pan": 18,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/12-boss-psionic-broken-mirrors-Harp-fractured-image.wav",
+        "bytes": 23040088,
+        "sha256": "0f0377815f061310a8e7b06003335da73bf3817f9104029ff35159f1bb40d704"
+      },
+      "target_active_rms_dbfs": -42,
+      "continuous_gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          18.0,
+          0.68
+        ],
+        [
+          30.0,
+          0.72
+        ],
+        [
+          36.0,
+          0.72
+        ],
+        [
+          48.0,
+          0.84
+        ],
+        [
+          66.0,
+          0.84
+        ],
+        [
+          78.0,
+          0.58
+        ],
+        [
+          90.0,
+          0.58
+        ],
+        [
+          96.0,
+          0.68
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/12-boss-psionic-broken-mirrors-Steady-low-foundation.wav",
+        "bytes": 23040088,
+        "sha256": "5a462dabe18a9386285279460f94332064c81a5ad327d446d0eac0e2cc234c25"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          18.0,
+          0.83
+        ],
+        [
+          30.0,
+          0.92
+        ],
+        [
+          36.0,
+          0.92
+        ],
+        [
+          48.0,
+          0.98
+        ],
+        [
+          66.0,
+          0.98
+        ],
+        [
+          78.0,
+          0.85
+        ],
+        [
+          90.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-7.67",
+    "input_lra": "1.10",
+    "input_thresh": "-28.50",
+    "output_i": "-22.95",
+    "output_tp": "-12.16",
+    "output_lra": "1.00",
+    "output_thresh": "-32.95",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.05"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.46934565143506635,
+      0.23190025518966234
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/12-boss-psionic-broken-mirrors.mmp",
+      "bytes": 6807,
+      "sha256": "579f5fdab039c88734a897f78f62d66bbb2b939013926fde2d2f5729c5d8ca0d"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/12-boss-psionic-broken-mirrors.wav",
+      "bytes": 17280044,
+      "sha256": "d1995cfc49f4fa70e94d2a7fa4d90dcb108edca5f316ae74e82618aefbb37a93"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/12-boss-psionic-broken-mirrors.mp3",
+      "bytes": 1921604,
+      "sha256": "646cb96381c9e5483a89043d9cae07700d3eb9144156f4c9d1fe7725208c3dab"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/12-boss-psionic-broken-mirrors.ogg",
+      "bytes": 1025835,
+      "sha256": "f71bda17dd4267b0c5192f868401ba57c986acf79a0522c8610d722ea3f5477a"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "opening"
+    },
+    {
+      "start_bar": 8,
+      "name": "first development"
+    },
+    {
+      "start_bar": 14,
+      "name": "contrast"
+    },
+    {
+      "start_bar": 24,
+      "name": "connected return"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed"
+}

@@ -1,0 +1,31 @@
+{
+  "status": "complete-uncommitted",
+  "findings_resolved": [
+    "P01",
+    "P02",
+    "P03:four-curse-cards",
+    "P04"
+  ],
+  "targeted_tests": {
+    "files": 6,
+    "passed": 71,
+    "exit_code": 0
+  },
+  "image_outputs": 8,
+  "own_asset_issues": 0,
+  "generated_cards": 4,
+  "source_sha256": {
+    "game/src/hub/game.cardslib.page.js": "0664c4cadf3e73d0bc8bef57a3a4df35b42def68500f0702f2a0c3c8584764d3",
+    "game/css/photo-studio-unified.css": "db3208d9886db11704c50a745de589a3ab7ac3ced1109c247c7c3b483559feb2",
+    "tests/boot.test.js": "678e7418003e34735568233d028f57fe5c92c99eab37cdd2f98d23c4c17873da",
+    "game/data/art-mapping.json": "ed08a6a5ef0bd2d39be9df789dfc3a642c595c67beee2b6c8cfbf24a392b4b30"
+  },
+  "browser": "browser-facts.json",
+  "not_run": [
+    "build",
+    "full_suite",
+    "commit",
+    "push",
+    "fps_baseline"
+  ]
+}

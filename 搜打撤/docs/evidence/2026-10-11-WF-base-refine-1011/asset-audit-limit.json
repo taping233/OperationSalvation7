@@ -1,0 +1,1105 @@
+{
+  "observedAt": "2026-10-11T05:14:59.262Z",
+  "ownAssetErrors": [],
+  "errors": [
+    {
+      "code": "bytes-mismatch",
+      "path": "cards/hero-volcano.webp",
+      "detail": "registered=172894; actual=213708",
+      "fingerprint": "4c3a8430fa5094ce8bab3116392fd8069ca4899339eed15d8b41e81e60755193"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "cards/hero-volcano.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "4811bf84280b66888805ec934aba57700f6dab07cf8f8f21e8e69989fef3cb67"
+    },
+    {
+      "code": "unlisted",
+      "path": "fonts/oxanium-latin-500-normal.woff2",
+      "detail": "no manifest registration",
+      "fingerprint": "e6557f4937872b04368e2446d69f632502a1468bfb91d7805cac76132834d387"
+    },
+    {
+      "code": "unlisted",
+      "path": "fonts/oxanium-latin-700-normal.woff2",
+      "detail": "no manifest registration",
+      "fingerprint": "82ad27dfd372fd972ca2d7b1e0af88334889c403a0effc38708ec4864fd34ca9"
+    },
+    {
+      "code": "unlisted",
+      "path": "fonts/rajdhani-latin-600-normal.woff2",
+      "detail": "no manifest registration",
+      "fingerprint": "6b32075f181ee1f56b869246b12f0f1ab948c843dfc59870ef275090198d7df7"
+    },
+    {
+      "code": "unlisted",
+      "path": "fonts/rajdhani-latin-700-normal.woff2",
+      "detail": "no manifest registration",
+      "fingerprint": "a50e2512113ac313be10f257bcf6f79f8b268846cc41da1cc338eb08c77623de"
+    },
+    {
+      "code": "unlisted",
+      "path": "icons/base-v3/archive.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "273aefa76ff537c4290bf15064c20569a5e7b1af13a86e650cf5c9ca8eb72a35"
+    },
+    {
+      "code": "unlisted",
+      "path": "icons/base-v3/base-home-v1.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "bfdacb8cb27f228fe8151aa4e56ce6202968ff4bf694476a8d1c73e7eadeab44"
+    },
+    {
+      "code": "unlisted",
+      "path": "icons/base-v3/coin.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "4e0af3f9d8d5851d8fcbedec8a9ace65a7fcb8d2f7d485bf4ea2874acb2ce04d"
+    },
+    {
+      "code": "unlisted",
+      "path": "icons/base-v3/companion-cat.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "556dc66631f82091d5c9710cdd4373407d33e8fb3ebdf90fdbf12a4eca3a318c"
+    },
+    {
+      "code": "unlisted",
+      "path": "icons/base-v3/companion-dog.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a406e4933d8671cdd08cd8858a5f3480eccb176e5d72600073bca83c7dd60d85"
+    },
+    {
+      "code": "unlisted",
+      "path": "icons/base-v3/companion-falcon.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "f577fdc70414042af2c6ef1efcfee9106deef03062c69f311875ee302494bc2f"
+    },
+    {
+      "code": "unlisted",
+      "path": "icons/base-v3/companion-fire.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "91915b14fa69497e861e777197836bd8b86160c24e455447510f174a249507df"
+    },
+    {
+      "code": "unlisted",
+      "path": "icons/base-v3/companion-penguin.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "0c410a5b18c6869904c919a6d88e17d1be5293cf16073be61ad027cc6ea00795"
+    },
+    {
+      "code": "unlisted",
+      "path": "icons/base-v3/companion-robot.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "9b799fca32b7085943fcf386715e4d075143653f373df1d30bfd774fd2d4eb1d"
+    },
+    {
+      "code": "unlisted",
+      "path": "icons/base-v3/expedition.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "e7a91b79882fbd8069049d1df60fd9fc1eff5ba440b589dd63825df3567dd581"
+    },
+    {
+      "code": "unlisted",
+      "path": "icons/base-v3/key.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "9075ca86cb437e1239a5aec6fdc03b8e5ec07c29ed561e1d17dcded057c3cdaf"
+    },
+    {
+      "code": "unlisted",
+      "path": "icons/base-v3/personnel.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "aefde88d5c1175fe0c2a41b49bb47b17996f963448f3bfad767c288fc8e98103"
+    },
+    {
+      "code": "unlisted",
+      "path": "icons/base-v3/rations.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "dcc1de0e198c659f2469fe22c78c9e19e29d8975dbbdf8639e16cf7c8037a145"
+    },
+    {
+      "code": "unlisted",
+      "path": "icons/base-v3/rune.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "847cd30129cdbc43d9f9018f82c329a9ad1de299557831ae0c3470c24abb5e00"
+    },
+    {
+      "code": "unlisted",
+      "path": "icons/base-v3/shop.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "30bd4631578d54d61fd72e2f24ee5e5c36535079a55c16985c1592627df429e1"
+    },
+    {
+      "code": "unlisted",
+      "path": "icons/base-v3/warehouse.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "7948b2d375c2e6474f8727351670dec3ccfdc460fc0f1d7c16a342f6d9b49868"
+    },
+    {
+      "code": "unlisted",
+      "path": "icons/base-v3/wood.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "0c24f35ede92b1ccb402dde3b58f0715f83d8e3249b2ea4fe0d2760728b76c33"
+    },
+    {
+      "code": "unlisted",
+      "path": "portraits/frames/changwuyu/sprite-v1/animations.json",
+      "detail": "no manifest registration",
+      "fingerprint": "38213192c055ab572912ad1388cd827930eec743371a74fc23f492c4b047b772"
+    },
+    {
+      "code": "unlisted",
+      "path": "portraits/frames/wu/sprite-v1/animations.json",
+      "detail": "no manifest registration",
+      "fingerprint": "a69c1667e4f2a1a512f01dadb34d0dbb8aebc98a0ce08200a8c95673f7d9b252"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/base-home-v4.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "11b1251f02e8bcfdc33580b15b7f7145e5992d197d9f3ab7436c6ffbc90d8a44"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/camp-transition-city-v1.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "3dcdf0a4d1ece3f9f4021bf417fb5d796c6dcd84c92065a83a335861d4db6287"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/creature-cmtn6ulm4boj.webp",
+      "detail": "registered=10916; actual=63140",
+      "fingerprint": "1123e1091550b9d59d945b83ee390a96970b09e2e4ded5f1aea499363def81f3"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/creature-cmtn6ulm4boj.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "6df70fc44971d37ad0834b4139cf895e518282e69cf071e55cbd9bc33cbfa85c"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/creature-cmtn79743r2n.webp",
+      "detail": "registered=16968; actual=129018",
+      "fingerprint": "a8422782eece2fb987232fad92ce868ed3f07922fa41e3ddbe7d071134862ae9"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/creature-cmtn79743r2n.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "d6ed27caa4ebd20c1fb18c65b2f4ba6a0b94f09715f981f0c204139da1e150fb"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/creature-cmtn7err0a7.webp",
+      "detail": "registered=13500; actual=107498",
+      "fingerprint": "40bd2311ba85c7af11b6e1e71cca7d4521baf3e686963016416b992f3720e286"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/creature-cmtn7err0a7.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "eeb7a0f73af984e0302c918b021526fb02ee7976847c1ad81c889b7a4f0f9a02"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/equip-tt3-chaos-eye.webp",
+      "detail": "registered=12034; actual=95782",
+      "fingerprint": "985389327c973e770a8580b695f25302d3961a8e3d94a2c62d9c44070684c32a"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/equip-tt3-chaos-eye.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "6b7daac6df2e57c3fbb9828bda21d96c7141da7b571e0f3ab53561a67ef68c4b"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/equip-tt3-deep-seal.webp",
+      "detail": "registered=7304; actual=50652",
+      "fingerprint": "f9ea723a2c4619fdc895931399b2131488fa5fd74434ff09fefaf531f393f387"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/equip-tt3-deep-seal.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "d2884e29db4f0f62e0ee85a43d21c37c97a367c9c408a541afb824929efb37e6"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/equip-tt3-immortal-blade.webp",
+      "detail": "registered=5834; actual=25844",
+      "fingerprint": "db8cbba1866e545b1b59ebde2b13c828378b073c24ed9e0d9ad5f2a6533b62e0"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/equip-tt3-immortal-blade.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "c0849ded28aa2239d88212a2d80b877bc99dc9450eba88f63d505a8d8bde59ac"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/equip-tt3-master-staff.webp",
+      "detail": "registered=7320; actual=44500",
+      "fingerprint": "7be086f599cc6cdd0384daabf5c3db66bc0c58de36d1c1c0675d1914d0b7b32a"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/equip-tt3-master-staff.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "690ad86779e077de0307de6862a937ab05b360da134ea78959e121ccaf7dcc23"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/equip-tt3-silver-runesword.webp",
+      "detail": "registered=7828; actual=39794",
+      "fingerprint": "f6f6b666db8e0163fbd1ee8955d925bd5a6a8a0a78676f90d705833f13db6cab"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/equip-tt3-silver-runesword.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "c2268b37a58210f2ef1d85306612e62ed1abd3fde7632c7c351546008bf62e44"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/equip-tt3-staff.webp",
+      "detail": "registered=2652; actual=16954",
+      "fingerprint": "52ed3ad2e8ed422bed14ecbf6158d2729a9b67c686297d1c314b8d8e878f82ba"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/equip-tt3-staff.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "3f278337d64410ca5eef7706908d79e35a7a83285aedf34603b1360b54ad0ba0"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/equip-tt3eq-boiler.webp",
+      "detail": "registered=8390; actual=57272",
+      "fingerprint": "2a999af171691778076f4435c1b4ba69e6ae7c037399209ff98af2e38a83a392"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/equip-tt3eq-boiler.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "8069a96c5936d036b790f2af40d8c08f72d4dff0020ee5f807f9d7d663e473b4"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/event.webp",
+      "detail": "registered=55098; actual=393872",
+      "fingerprint": "dc276bb8539ce531862b0b641e4bbbed0351ddb1b3436fb49fc8b21bca6ac663"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/event.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "30e1ffa950d0bd1fe813d466b244dd288d9993ea3d2a4f8c444b9a3b9c6ccb57"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/expedition-starters/rations.webp",
+      "detail": "registered=12772; actual=91972",
+      "fingerprint": "5979a818611a831101ad7fef89d1b42e8bbbe7d62286194f1b804d0881d65417"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/expedition-starters/rations.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "5577ae440e5e3faa7f7a35ee8fc09b2f8726874ad8312667ac04b6c2e916dc52"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/hero-volcano.webp",
+      "detail": "registered=27280; actual=27728",
+      "fingerprint": "e8c4d3254454c79e52f6fe70466829bd0474346b8cabea2c022891b46f0206e1"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/hero-volcano.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "a52c426ae89ba6fbf02d63f5725e036ba0924c4a51851dbdfcda3823872782ed"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/builtin-fuyuanyao.webp",
+      "detail": "registered=7538; actual=38758",
+      "fingerprint": "11794ee5982263464eef1a5eaffcd719b62821f747c3509c17dfe02a7a09db21"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/builtin-fuyuanyao.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "6d670a21f03d85d0e207a10d44f46c89a2709744b0d030049a2ef88c2e834c10"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/starter-emergency-bandage.webp",
+      "detail": "registered=6704; actual=36086",
+      "fingerprint": "30670c0ea792ade108ca16d809393ec28bbf3e8b9f1476153af13f1cf0e26caa"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/starter-emergency-bandage.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "ec97790effca3ff309f0e8cff2e214daf480a6a9bd3665cd1ffd65c9cd557866"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/tt-crystal.webp",
+      "detail": "registered=5540; actual=37074",
+      "fingerprint": "1d59023b38ca7db029f4cd1cdef4fec07fdf11f22e46813d4306414a4005e6f6"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/tt-crystal.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "facc9d23bb22b912f2f08924f81e46cb469fabd597c75324edc165b836b99122"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/tt-jinchuangyao.webp",
+      "detail": "registered=4854; actual=26854",
+      "fingerprint": "0ae53465c315269abd0aba0d4ce2820e366475ca7d8f24be754cbeae802cb32c"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/tt-jinchuangyao.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "c91cf86942f1e9895b882999b8e8e8eb9750cda264daa0a207ada832fc2151f9"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/tt-medneedle.webp",
+      "detail": "registered=4982; actual=28032",
+      "fingerprint": "e819a04f3484e4f1160a93444543ac406acd8238783f211368ed70b2e500034e"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/tt-medneedle.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "6a68d073737685471933fd2bdadbfb9e08ea4d3044224cee650ae8ea4a739f36"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/tt-token-gold.webp",
+      "detail": "registered=5614; actual=41304",
+      "fingerprint": "8f2ac06159276be1b6d6a44173b8a0bcbc728b456d543a12f5da0ee586582f57"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/tt-token-gold.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "f0307020c52610849659d605ddcf81fbd24f7228654a0319e1dc9230325be345"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/tt3-blue-potion.webp",
+      "detail": "registered=5902; actual=43650",
+      "fingerprint": "54de1157f0ff1db3c04bf9f929f114e6d121c2c87140556f54a8c0f9b9d650ba"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/tt3-blue-potion.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "61235ab9cdaf7214aba36b31f9f45a0d168ec9937b2f053d6f30f3f82901f6ab"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/tt3-demon-potion.webp",
+      "detail": "registered=2308; actual=13188",
+      "fingerprint": "e58cdd45395a406fdd245bc4cda3b5e7a7ade45f93bd98e5608adb9c320add1e"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/tt3-demon-potion.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "ed468e45145f7a3e96ccd0fb54ca04e40455678bd7acb2a5eff4251bb63db89b"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/tt3-houyi-potion.webp",
+      "detail": "registered=7534; actual=41254",
+      "fingerprint": "b97f1ff6c8ab87fa16b7a368cfbbad2996c450fbb8923cafe0137f2a17d88e17"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/tt3-houyi-potion.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "5c408aabf3bb7515b4e65d1bd6ecb24a78eb3b23006ee516de96ed8d5042d681"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/tt3-iceheart-potion.webp",
+      "detail": "registered=7670; actual=38020",
+      "fingerprint": "3059cfea4c2672e91ba0915c3d6297bdedc16872c7b882bc956eb466227bb2ad"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/tt3-iceheart-potion.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "dc2800dd1240cf00dbef7f3140d3cf5f261522da836741330ff69c41982adf44"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/tt3-mind-potion.webp",
+      "detail": "registered=7202; actual=50762",
+      "fingerprint": "c3ec6aecaf7af5bc8c2ad34beef2bc599f72fd4088fe1243f6f2ae4841bbe96c"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/tt3-mind-potion.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "9f3ec640e0edf22645fb98a50bf00eee292f9483b03e1da6f6acc95466b2bc7a"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/tt3-mixed-potion.webp",
+      "detail": "registered=2866; actual=15680",
+      "fingerprint": "6a37824a9f3d6409796b206525d2d246a19a2ebd10578151a6455d886fdac144"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/tt3-mixed-potion.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "bd476623f63c0cb7cca652352344abfcf2fd81b19e2cda25cbed97a280ea6495"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/tt3-mystery-potion.webp",
+      "detail": "registered=5676; actual=39060",
+      "fingerprint": "e4425e2145fa75be2cd59b45fe3f1dd6135a0bccc29f28d4a057e0344b41796e"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/tt3-mystery-potion.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "e8e24cf77684103377e8bbf66dfd97251230533536cea5f896d0344bf4d0a9f0"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/tt3-python-potion.webp",
+      "detail": "registered=5768; actual=32240",
+      "fingerprint": "171fbd371cf0a507e8eae683f751944cd72c8d87b1794bdbe535449344915b43"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/tt3-python-potion.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "236539c7d211595ac2909edb62f15035dfaac7dabd9b0f11748972f47bc31957"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/tt3-savior-elixir.webp",
+      "detail": "registered=7118; actual=42610",
+      "fingerprint": "59190806d5efd597b068ae0f17a954ec1df6a89966c0389d348d56e5778c3ba9"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/tt3-savior-elixir.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "f0a3a4c0408ad48c51d732e9a6da6dd60303c2db4d93fe7ec1a795b847a624ad"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/tt3-turnabout-potion.webp",
+      "detail": "registered=4402; actual=24914",
+      "fingerprint": "c153521c2c780abaed1bcb557fd3cc8ebb4098b27abee7c8451c3810be5c3181"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/tt3-turnabout-potion.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "4181bd6444b256b0935f0f90c013d801527aaabeacfe28594c5e157f2b3dd6be"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/tt3sp-doom.webp",
+      "detail": "registered=4448; actual=32342",
+      "fingerprint": "332f597dc76926432d6ce63fc1f33def378418d27e933145017ba175b756ab17"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/tt3sp-doom.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "5475d7973029de3d0fa4341e22586d1476683a2ca0f3824ddfb2d28b11ff2824"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/tt4-shine-token.webp",
+      "detail": "registered=5972; actual=49168",
+      "fingerprint": "2fd150dead370e912214dff66521cc158781cacc3b37dabdfddc29d44782d492"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/tt4-shine-token.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "a0c2221442c9887629ef5f6d2a141767e1a2b587081b8ce6d2eb8bd1eeda692d"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/tt4-smoke-bomb.webp",
+      "detail": "registered=6238; actual=37318",
+      "fingerprint": "8ff811bc21bd7578b9633fd08d97c615a7188c6a4d5b6519e81541f28f79b03c"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/tt4-smoke-bomb.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "7a39c3868443b8cfcca43fad47418380129004eedab4486b1f57925f8b89a899"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/items/tt4-woodify.webp",
+      "detail": "registered=5774; actual=35578",
+      "fingerprint": "b68bb912526fcd79b0ef574dfca220835f7098f5bac91f5d1a017ac5a2cb4874"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/items/tt4-woodify.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "6bc3f577b86505bfa37fa76c3747de375940f40c51235d207c0dc0f0378ab305"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/martial-tt3-skewer.webp",
+      "detail": "registered=6570; actual=40898",
+      "fingerprint": "6a9345425bc080efb0d448fe49a2abdf4e2f178e2db90701a8eb7194ba16540c"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/martial-tt3-skewer.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "d72cb95746d89aa7211b99cc5c9f40325b76b9d1e7c997b66568b49112cd2863"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/martial-tt3-wave-slash.webp",
+      "detail": "registered=12438; actual=76268",
+      "fingerprint": "eece57b19102a6966ef06267a6fc924501d7af29b22490cbfffc347d655fea3c"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/martial-tt3-wave-slash.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "175b736058f06a835876aefcd68ce5e8c642d707f174196d204331c6d328c656"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/resources/coin-copper.webp",
+      "detail": "registered=13210; actual=94710",
+      "fingerprint": "2cb7220741b96d0bf9b46efa7d3987e0e9e6be5f9024038c28233eac97f796be"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/resources/coin-copper.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "128e9b63977ac335c5338f140e84f5e845ccabe797e738c3c00ff702bae767ea"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/resources/coin-gold.webp",
+      "detail": "registered=13092; actual=98510",
+      "fingerprint": "c63c3aeb417e298bc11c73eb918d37eaf450bdaa2caa3de5198236f8151034b6"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/resources/coin-gold.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "9d6050cc570e716a67082a6ffd06d45ad469afbffb11ec0e0624bc61e590f693"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/resources/coin-silver.webp",
+      "detail": "registered=8956; actual=79218",
+      "fingerprint": "c696d63ec602703e655143fc3817ac39e67ea4ff0563995ce8a02d9db295dcf5"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/resources/coin-silver.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "21d28da672a31b807c08b7a31cf0973b187b8314f6b165bbf6d348f72ea31d9b"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/resources/diamond.webp",
+      "detail": "registered=7780; actual=63180",
+      "fingerprint": "d518d7c5dc933e433dd3d0111a652fd926d65f7b73fb0f75d32c0006c037e3d8"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/resources/diamond.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "b434aebf629f1f2cb21a9a082f82d640b4cc8e7bcd3a567b4af56b8731761edd"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/resources/econpack.webp",
+      "detail": "registered=9760; actual=59554",
+      "fingerprint": "21d1416b261de72583e625df982a23ed137d08142e5074b4031043faa7fc7bc7"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/resources/econpack.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "298b514f036449570187be3b40c93d877fee3f9815a0e3030c434bbc29f9aa72"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/resources/garnet-marble.webp",
+      "detail": "registered=7628; actual=65538",
+      "fingerprint": "78e868e5e298937db9c597b657668802169c99ae920569045ddcefe8463ea881"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/resources/garnet-marble.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "d1d91955f93b39a7951c8395652fa93f715d391bda7123787b254ef1087a46c5"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/resources/keys-bunch.webp",
+      "detail": "registered=9248; actual=56400",
+      "fingerprint": "9545dbd6cab8778aa13739b2deb42a3d3619e8486aa034fcf91ce27ed09f528e"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/resources/keys-bunch.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "d9cb418f80493d7cf336af827be3050369de3a6ccb0c97df07480d1640267d28"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/resources/pet-egg.webp",
+      "detail": "registered=6158; actual=58880",
+      "fingerprint": "39c50935e522315d56431c483e203c164dd7930506d097d57a56c7474c928527"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/resources/pet-egg.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "867d0f0d77762b7f6f0d6732bf35df806ec88fe8fec84198e363885825c93699"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/resources/ration-double.webp",
+      "detail": "registered=11052; actual=78872",
+      "fingerprint": "9ea578340d19b0a32c2fa65ac83f80a6fe1b38512708c80665f7ec0c22d3d990"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/resources/ration-double.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "49da2e23936baaaf27b6cdef8bed1a32da16dc11d4f6db4c59c081ce25b88251"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/resources/ration-std.webp",
+      "detail": "registered=11922; actual=77976",
+      "fingerprint": "d2bb33e3d2464437202d0ebf3e0e591e340781e47624bd6d560969b23586ac53"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/resources/ration-std.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "fa19f3aed6f51d86033a686c6a6ed2cba31271ebb8ba7a2c4c36595d2c0df873"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/resources/ration.webp",
+      "detail": "registered=12772; actual=91972",
+      "fingerprint": "c7b084bd649a2b389d3ae69b9643cf9c3b9a3169ab68efeac4792d21b4d3a3ce"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/resources/ration.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "1e8ea4cba255e1fbc78d3431301d66b4c420b9b9f9ef0940062e570a0a2184e2"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/resources/wood-bundle.webp",
+      "detail": "registered=13268; actual=81762",
+      "fingerprint": "f6b963f80418897179d0cb8bce1c1d8f9d962aef418f8022ff9f6dadbe8865a4"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/resources/wood-bundle.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "b2a2f1e7dfe501e4d2dd6d38c8827a60e6ae16da0361f2104918c94114720ec2"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/resources/wood-lots.webp",
+      "detail": "registered=12140; actual=97144",
+      "fingerprint": "f694ef2dbffbf42b8af3fb6dbfb0f5e58d095e55f568d47992323e0f2533ea7b"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/resources/wood-lots.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "d55fd2aca68212d31eb25a3f2bbd1254dfedbec6ab68d231593f43fd28c3c83e"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/resources/wood.webp",
+      "detail": "registered=8390; actual=55326",
+      "fingerprint": "bde9e5df77a3bffb8015cc2cc598ef91bae02bc42dbf1e2bb362ee3db082f1fc"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/resources/wood.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "7785b3909f17add1a66d64536dc61e4ce204b3f3d32a6e11c549203d5a8c488b"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/spell-tt3-fireball.webp",
+      "detail": "registered=6434; actual=61254",
+      "fingerprint": "358d31ff596bcf686172ccabcfeb495ab472138c0a6f9373930c7e2fb04c69e4"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/spell-tt3-fireball.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "680fb77d3595cb7790aac88b54387bfb3da3df8d2911eb7f8d9732c180f223e8"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/spell-tt3-thunderblast.webp",
+      "detail": "registered=20166; actual=127140",
+      "fingerprint": "5d168a52bb8236f5af118440654159410c800cbc2cb29839d74621b26861cce4"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/spell-tt3-thunderblast.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "73a7774325a077f2ea9c9ffc9e8c56176466a3339c6b0831e263737e5ee72d54"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/cards/spell-tt5-galaxy-voyage.webp",
+      "detail": "registered=10840; actual=55042",
+      "fingerprint": "173666847dbdd6c9c80e1545b51b7eb142f4ef605d2168de61bf91d4f049f01f"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/cards/spell-tt5-galaxy-voyage.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "34e72c25273076cfb99c6ccc18fab9cab32cf4e04a6e0fa345e7c77df2caa14f"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/scenes/scene-chest-boss-anime-v1.webp",
+      "detail": "registered=14882; actual=95232",
+      "fingerprint": "1ea134ce6f9d5f42c2f76335e7038b7ef7268fc0c00fa834f5827badb5760f8d"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/scenes/scene-chest-boss-anime-v1.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "103913efd90863968536956fc63debf15f32714fcd739d305679426ccac0a746"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/scenes/scene-chest-class-anime-v1.webp",
+      "detail": "registered=8476; actual=71490",
+      "fingerprint": "75140ca82885d3823eb3ae63a57e0d1536ca57effa6945577ec31b0527809615"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/scenes/scene-chest-class-anime-v1.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "a41aa622a7669ad0cc9e35b51c810b158d71ceeb2f6360cc5e4e301b93e1f5b3"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/scenes/scene-chest-large-anime-v1.webp",
+      "detail": "registered=15436; actual=109926",
+      "fingerprint": "d6512d1335d0d84d6999e98452d553c27bfa12f9f627b6a88e8a695dff6784f6"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/scenes/scene-chest-large-anime-v1.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "a00e42e7697f4cc88c9ce5e9e442cea94a04a15951ef1ac5eb0aaca2264379f2"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/scenes/scene-chest-medium-anime-v1.webp",
+      "detail": "registered=11858; actual=97124",
+      "fingerprint": "52b306a12a931327ac8ee4f5f4764d2718657159a5f5e3ba1765761bfe6111a0"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/scenes/scene-chest-medium-anime-v1.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "8006950ddf69c32a635d37d91f2097a3c99ffd706a9bc06489873ab56b2f0bde"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/scenes/scene-chest-small-anime-v1.webp",
+      "detail": "registered=11580; actual=91964",
+      "fingerprint": "99e7c0576b418a376cabbd2bae60952a83df58f8160526beb5c219119b24553b"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/scenes/scene-chest-small-anime-v1.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "a33dde765536c23cf2b6281805c2c85f011d876323337692e43a6d5d463c02e6"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/scenes/winter-expedition/core.webp",
+      "detail": "registered=5204; actual=41236",
+      "fingerprint": "9ebd73239dcabfca400243315c76713db83ea9b64fbd29d71aeed084d885f48a"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/scenes/winter-expedition/core.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "12c49280633508db5f289d632fa7e601257ab802ebabe41212be2dd7d50ef674"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/scenes/winter-expedition/greenhouse.webp",
+      "detail": "registered=6568; actual=41798",
+      "fingerprint": "bd5a116bb1922964592aeb88fce68fb115ae12e7a0593c17309d2e17011d28f4"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/scenes/winter-expedition/greenhouse.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "2600cff8d5d4fdff3e75c0539832065932bd94f9f5f21022bfd524db973806ce"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/scenes/winter-expedition/outskirts.webp",
+      "detail": "registered=6318; actual=48478",
+      "fingerprint": "b9b04d7758c730335f88950bf1c0ee3cd37c82b330030625ad4d598ccf82b0a1"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/scenes/winter-expedition/outskirts.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "811001eb87cfee8ed0c8feff8914c486d17d040952bdf7806eb3bbcda4273003"
+    },
+    {
+      "code": "bytes-mismatch",
+      "path": "thumbs/scenes/winter-expedition/sanctuary.webp",
+      "detail": "registered=5546; actual=42894",
+      "fingerprint": "b8d27fd447e94ab704becc1cbebd0fc562569770f99e4efc2f5bdc9a4f5cd63c"
+    },
+    {
+      "code": "sha256-mismatch",
+      "path": "thumbs/scenes/winter-expedition/sanctuary.webp",
+      "detail": "registered hash differs from file",
+      "fingerprint": "35e6a523f7587c09b5cf3f2f31562a1aa7f704ceadfdc1566fb9a74ba1a02b1c"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/barcode.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "fc5a5a686bfb2e2cad3f232fd522f7f8949f5271b169e37f4e3e9b2c4ac6e890"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/chevrons.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "db7bd493093401cab805e8aac0e41ade1b26b73dc0a574bf40af57599baf770d"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/corner.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "1a4e50879262ce5b72711b60fbc6a03513b261aaaedcb7008170581bf064a0a7"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/dot-matrix.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "1bb32b749b060d0c777eda4abc84557971988db02f0e8aa5bef34d753d7dc999"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/frame-cut.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "8781fb21d5446d3aa01a9b3869324de17f832efb6cbff1252888333bd7eac888"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/grid-fine.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "2dba5dce28be93bf84304af2abc9f43adb5d5b6b0533e7b2d6a1082156713827"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/hatch.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "cd0c909672eab5e7cdb251db90f392b0d0dcece612b0d0443afb18c329eed4e4"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/hazard.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "0a61a916a1b78d9d875c6ba3a39711a8a05a2f4274bbbb928ceafe81499dd6be"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/hex-tile.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "a68aa2984624dc8695317a5354943be2df26ab4b4704bbfdbf8f88a03e5c0fcc"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/noise.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "3885d26f12ecc5fe90c0efcb3921110970ca9c385426db5f202bc2e4a69dced4"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/rhodes-mark.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "9576aad4185c68dad680b432828ed4bd14c421d2cc63525ce2572d990f4f92ed"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/ak/scanline.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "9f6f2dfd5b7d01d7340d8469013f0c5b6e293ec44565b941535ee325bb3de334"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/corner-class.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "b52ac06998bc0e62367c5be941195ca6351ab2805de49d79ca085e99c71c0da9"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/corner-epic.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "41db707fac2f0ef67d2a76563d24fa4173b5957a50b5ba8815cc86d0b0bd91c7"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/corner-plain.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "be751fb27ab0891f861e2fc8a104657524ad8ac2eab07a86ffc33e3432a64b30"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/corner-prismatic.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "70284802159a581e47ce18cf146286b6142b67dbe259eead37dc38026d464b74"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/corner-rare.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "549f52d83d2cb97932e345ab85e5f24481d3932a933bb647d6e74488c30167a2"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/mount-epic.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "ba1d2fb57a423535cc2c84206eb8dce44f20627b8a957f82da93cd1ebb2b9113"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/mount-prismatic.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "1e59710d596c4892263e05654002d1c726c67e1ecf240504d7622a7a8872f19b"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/mount-thumbnail-class.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "caf909c35a1aeb8c54853b9f0dd89528fa0eee1459b942c833f73ea96566f8b0"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/mount-thumbnail-derived.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "8dfcf6b3799f9169cf24e2996208122858710fb3ee45488eb290efaf7f5b8c1f"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/mount-thumbnail-epic.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "8dfaedca3ff0fe60c8826f5a9ba091be004de0abebdd81b9a117acdd86dda680"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/mount-thumbnail-plain.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "14a1d1025257cd2d8e0b019162993c12ccdbcd796272718c9a59c85c8f86fc6d"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/mount-thumbnail-prismatic.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "18aaf33275ad0ebcc0d25678fd63c5167eb1eaacac539ac54d0630013f190137"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/mount-thumbnail-proof.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "da2edfeff6d5c42c4ef53f7abc24584b32bc6d96033927738d248a34541af1b5"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/mount-thumbnail-rare.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "0b018abde0befb7e6908350b5ad654fb0b19e562dbcfa781c4ff47dba1d9ac91"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/rails-class.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "171e1f43e1fe80dbe0f51d5e85f364185cfee6c792799d4da22343f85a3306d2"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/rails-epic.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "9191a62059771eb935c281c08b2f2a7825b91de45154fe496fea3a6559dd23e8"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/rails-plain.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "3d51dbb62ee99400160fd29b8655abe83547bc85449d376a976c5b1ac5959d61"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/rails-prismatic.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "2b7c2893b0d0c628b9bf66d8a52350084e438088514f86345c3f9ed142d38641"
+    },
+    {
+      "code": "unlisted",
+      "path": "ui/photo-studio/rails-rare.svg",
+      "detail": "no manifest registration",
+      "fingerprint": "0c9ea90b30df2219275652b9d5d9634603cce56307f6651c12cad22ffd134044"
+    },
+    {
+      "code": "unlisted",
+      "path": "vendor/base-courtyard/KoiPond.js",
+      "detail": "no manifest registration",
+      "fingerprint": "172b9d9fd81ebc47c89c2f9e3a3cd4b969353d88abc9bdb5fb34715a9d30910d"
+    },
+    {
+      "code": "unlisted",
+      "path": "vendor/base-courtyard/RainRenderer.js",
+      "detail": "no manifest registration",
+      "fingerprint": "8dfcf27f13ff5ebcd6304b260e42b2b9172cbb67e1e723d84be28127281f421a"
+    },
+    {
+      "code": "unlisted",
+      "path": "vendor/base-courtyard/RainSimulation.js",
+      "detail": "no manifest registration",
+      "fingerprint": "aa4840124efc4be3776c0851fd229eefb6e1d4f5549c00bc7ac976584dbd4ac1"
+    }
+  ],
+  "warningsCount": 636
+}

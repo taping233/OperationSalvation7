@@ -1,0 +1,42 @@
+- complementary:
+  - navigation "远征工具":
+    - img "常无欲 Q版小人"
+    - generic: 当前 · 祭坛
+    - button "bag 背包 携带卡牌 12/16 B":
+      - img "bag"
+      - text: 背包
+      - generic: 携带卡牌
+      - strong: 12/16
+      - generic: B
+    - button "lock 安全格 保护物资 0/2":
+      - img "lock"
+      - text: 安全格
+      - generic: 保护物资
+      - strong: 0/2
+    - button "cards 消耗口袋 待复原卡牌 10":
+      - img "cards"
+      - text: 消耗口袋
+      - generic: 待复原卡牌
+      - strong: "10"
+    - button "map 定位 当前位置 F":
+      - img "map"
+      - text: 定位
+      - generic: 当前位置
+      - generic: F
+    - button "map 总览 已知区域 G":
+      - img "map"
+      - text: 总览
+      - generic: 已知区域
+      - generic: G
+- main:
+  - navigation "远征章节":
+    - generic: 污染核心
+    - generic: 第 4 层 / 4
+  - generic: "16"
+  - generic: "4"
+  - button "离开对局":
+  - button:
+  - button:
+  - generic: 当前生命
+  - generic: 35/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT

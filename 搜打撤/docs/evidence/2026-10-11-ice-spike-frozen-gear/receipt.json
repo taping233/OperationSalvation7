@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-ice-spike",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a125fc-1da2-7300-83db-f2b39e275c76\\exec-bd285d69-8be8-4a49-b3a5-38dd8721f2e9.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-ice-spike-frozen-gear/cards-spell-tt3-ice-spike-source.png",
+        "bytes": 1790020,
+        "sha256": "af6639e79c32fb759ea38805c8b86cd1a4d7dea1886f04953e6829a80927fa5b"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-ice-spike-frozen-gear/cards-spell-tt3-ice-spike-full-before.webp",
+          "bytes": 134484,
+          "sha256": "a1afbe4d225fbe54f27aa2eab912c00d860dbed744a0c83026ac34710f8f134e"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-ice-spike-frozen-gear/cards-spell-tt3-ice-spike-thumb-before.webp",
+          "bytes": 24282,
+          "sha256": "771245639bf0d4862fedd873fc818f3ca1496abeed654decc400745cfd18d35a"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-ice-spike.webp",
+          "bytes": 115182,
+          "sha256": "4d6f37cdfca69aaac5d25778714f4cc5baf760dc84e061b2ff0474912127b9d2",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-ice-spike.webp",
+          "bytes": 16690,
+          "sha256": "6ddc0e3f7b123518d2de78e1c626dd0d761b56cff90699dc9423d828ba196824",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt3-ice-spike-creative-rough-20261005",
+      "revision_after": "ice-spike-frozen-gear-20261011",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt3-ice-spike.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 134484,
+            "sha256": "a1afbe4d225fbe54f27aa2eab912c00d860dbed744a0c83026ac34710f8f134e",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt3-ice-spike.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 115182,
+            "sha256": "4d6f37cdfca69aaac5d25778714f4cc5baf760dc84e061b2ff0474912127b9d2",
+            "source": "docs/evidence/2026-10-11-ice-spike-frozen-gear/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-ice-spike.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 24282,
+            "sha256": "771245639bf0d4862fedd873fc818f3ca1496abeed654decc400745cfd18d35a",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-ice-spike.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 16690,
+            "sha256": "6ddc0e3f7b123518d2de78e1c626dd0d761b56cff90699dc9423d828ba196824",
+            "source": "docs/evidence/2026-10-11-ice-spike-frozen-gear/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1122,
+  "manifest_count_after": 1122
+}

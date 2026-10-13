@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "card_id": "tt12-raygun",
+      "asset": "cards/equip-tt12-raygun.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-eb55fba3-5410-42f6-a8b0-46db8fe94b76.png",
+      "revision": "raygun-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the ray gun card edit target. Closely retain its original LANDSCAPE composition, camera angle, weapon silhouette and proportions: a single floating compact sci-fi pistol seen in three-quarter side view, brass gold boxy upper housing, dark graphite curved grip descending toward the lower left, open trigger guard below the middle, large oval faceted blue crystal emitter on the front at the upper right. A narrow bright cyan ray shoots from that blue crystal diagonally upward right and exits the right edge. Keep the weapon positioned left of center with open space to the right, and the plain pale lavender backdrop. No hand, character or added props. Images 2, 3, 4 are DRAWING-STYLE references only; borrow their broad opaque brush construction and muted color masses, never their identities or costume motifs. Rough hand-painted anime color study: large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Describe brass volume with broad muted ochre-gold light planes and colored gray shadow planes, just a few confident highlights. Group the dark grip into large matte charcoal planes. Selectively draw the trigger guard and blue crystal clearly; other small mechanical detail stays economical. Keep the beam thin and clear, with restrained glow. No fine engraving, dense mechanical greebles, facet mosaics outside the crystal, polished photoreal chrome, glossy 3D or all-over grain/texture filters. Simple pure-color pale lavender background. No text, frame, watermark or UI. Match the original landscape aspect ratio.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt12-raygun.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-treasure-hunt",
+      "asset": "cards/spell-tt3-treasure-hunt.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a125fc-1da2-7300-83db-f2b39e275c76/exec-29e9c9c4-4f89-4da8-9d7b-69c01b160018.png",
+      "revision": "treasure-hunt-search-strokes-rough-20261011",
+      "prompt": "Use case: style-transfer with composition correction. Repaint the first NovelAI image as one square game-card illustration for 寻宝.\nImage 1 supplies the NEW composition idea and muted blue-gray background: an ochre wooden treasure chest revealed by two long pale searching strokes. Correct its oversized chest, thin outlined wood details, missed convergence and stray gold fragment. Images 2 (追斩) and 3 (初始攻击) are DRAWING STYLE references, especially long directional opaque brush shapes, connected gray-blue forms, hard shadows, broad quiet material planes and a small concentrated event-center accent. Do not copy their swords or scenery.\nMake the CLOSED domed treasure chest a little smaller, about one third of frame width, fully contained near right-center. The curved lid, front seam, one center latch and two dull gray metal end bands remain immediately recognizable. Rear/right side merges into dark slate-blue overpaint as it is being uncovered. TWO long slender pale silver-blue searching strokes enter from upper-left and lower-left and converge DIRECTLY on its front latch, creating a strong open V. Correct both disconnected trajectories of the draft into this single contact point. Keep a tiny ivory-gold accent at that meeting, not a broad light source. The searching strokes peel dark concealment paint away into two rough broad swipes toward the right. Remove the small gold fragment below the box. Large cool blue-gray negative space remains calm. No extra objects or landscape.\nMatch the paint handling and material economy of Images 2 and 3 closely. Opaque matte hand-painted broad swipes and blunt dabs; clear grouped hard-edged light and shadow with a few deliberate broad midtones; strokes have direction and irregular handmade endings, overlapping underpaint shows selectively. The chest lid is built by broad curved ochre/umber swipes, sides by elongated brown planes, each metal band by two or three blue-gray planes and sparse muted cream accents. Merge the draft's fine wood grain, black contour network and edge grooves into large quiet masses. Do not outline every edge. Searching marks have sharp light cores with broader broken gray-blue brushed fringes like the slashes of Image 2. At the latch, use the selective small strong contrast of Image 3's collision without adding weapons or sparks. Background is brushed blue-gray color variation with broad quieter areas, no geographic scenery.\nAvoid flat cube/vector diagrams, smooth airbrushed surfaces, glossy metal, fine lines, tiny stroke noise, many triangular facets, canvas/grain filters, all-over scratches, elaborate hinges, bloom, scattered sparks. No people, hands, faces, maps or playing cards. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/.tmp/nai/output/treasure-hunt-brush-v2-20261011/treasure.png",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-cc-chase-slash.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/expedition-starters/basic-attack.webp"
+      ]
+    }
+  ]
+}

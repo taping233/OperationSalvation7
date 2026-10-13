@@ -1,0 +1,22 @@
+{
+  "card_id": "tt3-fly-arrowhawk",
+  "model": "nai-diffusion-4-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 558358642,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1other, solo, jumping, knees bent, two-handed grip, sword, from below, close-up, foreshortening, dutch angle, head out of frame, hand-drawn linework\n\nAn anonymous warrior is airborne in the upper-left, both knees tucked up; head and face are completely cropped above the frame. Both hands grip ONE short sword handle at upper-left; the broad straight steel blade sweeps down diagonally toward lower-right, ending at a small dark abstract impact plane. The nearer boot sole fills the left foreground, the farther bent leg and boot are smaller behind it. Torso weight follows the blade; short tunic hem and belt tails sweep opposite the downward strike. Background is a quiet muted blue-gray and dark burgundy combination, with one short ivory slash at the lower-right impact.\n\nUse clear expressive tapered contour and structural lines to define hands, blade, joints and boots. Keep color and broad grouped shadow planes WITHIN these defined forms; principal cloth folds only. Steel is matte gray with one broad restrained ivory highlight. A few wide directional strokes turn volumes inside contours. Do not cover silhouettes or background in scattered rough paint patches; retain quiet interior stretches and readable anatomy.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "other, anonymous warrior, charcoal gray short tunic, gray trousers, black boots, dark gloves, ivory wrist wraps, short dark belt",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, visible head, visible face, named character, ponytail, goggles, cape, extra limbs, extra swords, separated hands, long sword handle, fine wrinkles, ornate armor, scattered texture, facet mosaic, grain filter, scenery, flesh, blood",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\flying-cleave-20261011\\cleave.png",
+  "installed": false,
+  "design": "匿名腾空下劈低机位，头脸出框、近靴前景、长剑向右下；线条先建形，色块收在形体内。",
+  "uc_override": "仅本图移除clean closed lineart排除项以落实老板线条要求，不改共享配方"
+}

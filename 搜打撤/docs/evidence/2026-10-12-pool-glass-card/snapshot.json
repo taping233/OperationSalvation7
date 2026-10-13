@@ -1,0 +1,339 @@
+{
+  "actions": [
+    {
+      "detail": "档位01→出征整备→无与白塔卡池翻页→白塔第1页",
+      "type": "real-input"
+    },
+    {
+      "detail": "当前窗口最终外观",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "\n          返回\n          角色卡池\n          白塔13张\n        ",
+      "key": "header",
+      "rect": {
+        "height": 66.0250015258789,
+        "width": 1605.987548828125,
+        "x": 0,
+        "y": 0
+      },
+      "selector": ".cls-pool-page .pg-head",
+      "styles": {
+        "backdropFilter": "blur(16px) saturate(1.15)",
+        "background": "rgba(0, 0, 0, 0) linear-gradient(110deg, rgba(228, 244, 250, 0.14), rgba(168, 200, 219, 0.05)) repeat scroll 0% 0% / auto padding-box border-box",
+        "fontSize": "16px"
+      },
+      "tag": "HEADER",
+      "text": "\n          返回\n          角色卡池\n          白塔13张\n        "
+    },
+    {
+      "attributes": {},
+      "identity": "坚冰结界",
+      "key": "name",
+      "rect": {
+        "height": 28.825000762939453,
+        "width": 138.875,
+        "x": 337.5500183105469,
+        "y": 368.2749938964844
+      },
+      "selector": "#poolGrid .hsc-name",
+      "styles": {
+        "backdropFilter": "none",
+        "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+        "fontSize": "17.5332px"
+      },
+      "tag": "DIV",
+      "text": "坚冰结界"
+    },
+    {
+      "attributes": {},
+      "identity": "奥术弹",
+      "key": "name",
+      "rect": {
+        "height": 28.825000762939453,
+        "width": 138.875,
+        "x": 547.7374877929688,
+        "y": 368.2749938964844
+      },
+      "selector": "#poolGrid .hsc-name",
+      "styles": {
+        "backdropFilter": "none",
+        "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+        "fontSize": "17.5332px"
+      },
+      "tag": "DIV",
+      "text": "奥术弹"
+    },
+    {
+      "attributes": {},
+      "identity": "聚能",
+      "key": "name",
+      "rect": {
+        "height": 28.825000762939453,
+        "width": 138.875,
+        "x": 757.9249877929688,
+        "y": 368.2749938964844
+      },
+      "selector": "#poolGrid .hsc-name",
+      "styles": {
+        "backdropFilter": "none",
+        "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+        "fontSize": "17.5332px"
+      },
+      "tag": "DIV",
+      "text": "聚能"
+    },
+    {
+      "attributes": {},
+      "identity": "冰封千里",
+      "key": "name",
+      "rect": {
+        "height": 28.825000762939453,
+        "width": 138.875,
+        "x": 968.1000366210938,
+        "y": 368.2749938964844
+      },
+      "selector": "#poolGrid .hsc-name",
+      "styles": {
+        "backdropFilter": "none",
+        "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+        "fontSize": "17.5332px"
+      },
+      "tag": "DIV",
+      "text": "冰封千里"
+    },
+    {
+      "attributes": {},
+      "identity": "法师锦囊",
+      "key": "name",
+      "rect": {
+        "height": 28.825000762939453,
+        "width": 138.875,
+        "x": 1178.2874755859375,
+        "y": 368.2749938964844
+      },
+      "selector": "#poolGrid .hsc-name",
+      "styles": {
+        "backdropFilter": "none",
+        "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+        "fontSize": "17.5332px"
+      },
+      "tag": "DIV",
+      "text": "法师锦囊"
+    },
+    {
+      "attributes": {},
+      "identity": "永恒绽放",
+      "key": "name",
+      "rect": {
+        "height": 28.825000762939453,
+        "width": 138.875,
+        "x": 1388.4749755859375,
+        "y": 368.2749938964844
+      },
+      "selector": "#poolGrid .hsc-name",
+      "styles": {
+        "backdropFilter": "none",
+        "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+        "fontSize": "17.5332px"
+      },
+      "tag": "DIV",
+      "text": "永恒绽放"
+    },
+    {
+      "attributes": {},
+      "identity": "征召",
+      "key": "name",
+      "rect": {
+        "height": 28.825000762939453,
+        "width": 138.875,
+        "x": 337.5500183105469,
+        "y": 662.125
+      },
+      "selector": "#poolGrid .hsc-name",
+      "styles": {
+        "backdropFilter": "none",
+        "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+        "fontSize": "17.5332px"
+      },
+      "tag": "DIV",
+      "text": "征召"
+    },
+    {
+      "attributes": {},
+      "identity": "使 1 名角色的冰冻延长 1 回合，并抽 1 张牌。",
+      "key": "desc",
+      "rect": {
+        "height": 60.91250228881836,
+        "width": 147.08750915527344,
+        "x": 333.4375,
+        "y": 397.1000061035156
+      },
+      "selector": "#poolGrid .hsc-desc",
+      "styles": {
+        "backdropFilter": "none",
+        "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+        "fontSize": "10.5199px"
+      },
+      "tag": "DIV",
+      "text": "使 1 名角色的冰冻延长 1 回合，并抽 1 张牌。"
+    },
+    {
+      "attributes": {},
+      "identity": "造成 1 点法术伤害，并抽 1 张牌。",
+      "key": "desc",
+      "rect": {
+        "height": 60.91250228881836,
+        "width": 147.08750915527344,
+        "x": 543.625,
+        "y": 397.1000061035156
+      },
+      "selector": "#poolGrid .hsc-desc",
+      "styles": {
+        "backdropFilter": "none",
+        "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+        "fontSize": "10.5199px"
+      },
+      "tag": "DIV",
+      "text": "造成 1 点法术伤害，并抽 1 张牌。"
+    },
+    {
+      "attributes": {},
+      "identity": "你获得 1 点能量。",
+      "key": "desc",
+      "rect": {
+        "height": 60.91250228881836,
+        "width": 147.08750915527344,
+        "x": 753.8125,
+        "y": 397.1000061035156
+      },
+      "selector": "#poolGrid .hsc-desc",
+      "styles": {
+        "backdropFilter": "none",
+        "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+        "fontSize": "10.5199px"
+      },
+      "tag": "DIV",
+      "text": "你获得 1 点能量。"
+    },
+    {
+      "attributes": {},
+      "identity": "对全体敌人附加冰冻，持续 1 回合。",
+      "key": "desc",
+      "rect": {
+        "height": 60.91250228881836,
+        "width": 147.08750915527344,
+        "x": 963.9874877929688,
+        "y": 397.1000061035156
+      },
+      "selector": "#poolGrid .hsc-desc",
+      "styles": {
+        "backdropFilter": "none",
+        "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+        "fontSize": "10.5199px"
+      },
+      "tag": "DIV",
+      "text": "对全体敌人附加冰冻，持续 1 回合。"
+    },
+    {
+      "attributes": {},
+      "identity": "本牌内置 1×3 格空间，可存放 3 张法术牌；打出本牌时，选择其中 1 张，直接施放。",
+      "key": "desc",
+      "rect": {
+        "height": 60.91250228881836,
+        "width": 147.08750915527344,
+        "x": 1174.175048828125,
+        "y": 397.1000061035156
+      },
+      "selector": "#poolGrid .hsc-desc",
+      "styles": {
+        "backdropFilter": "none",
+        "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+        "fontSize": "10.5199px"
+      },
+      "tag": "DIV",
+      "text": "本牌内置 1×3 格空间，可存放 3 张法术牌；打出本牌时，选择其中 1 张，直接施放。"
+    },
+    {
+      "attributes": {},
+      "identity": "发现 1 张卡牌并直接施放；你获得其余 2 张候选卡牌。",
+      "key": "desc",
+      "rect": {
+        "height": 60.91250228881836,
+        "width": 147.08750915527344,
+        "x": 1384.362548828125,
+        "y": 397.1000061035156
+      },
+      "selector": "#poolGrid .hsc-desc",
+      "styles": {
+        "backdropFilter": "none",
+        "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+        "fontSize": "10.5199px"
+      },
+      "tag": "DIV",
+      "text": "发现 1 张卡牌并直接施放；你获得其余 2 张候选卡牌。"
+    },
+    {
+      "attributes": {},
+      "identity": "召唤 2 名「步兵」（攻击力 4 点，生命 4 点），为你抵挡伤害并自动战斗。",
+      "key": "desc",
+      "rect": {
+        "height": 60.91250228881836,
+        "width": 147.08750915527344,
+        "x": 333.4375,
+        "y": 690.9500122070312
+      },
+      "selector": "#poolGrid .hsc-desc",
+      "styles": {
+        "backdropFilter": "none",
+        "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+        "fontSize": "10.5199px"
+      },
+      "tag": "DIV",
+      "text": "召唤 2 名「步兵」（攻击力 4 点，生命 4 点），为你抵挡伤害并自动战斗。"
+    }
+  ],
+  "observedAt": "2026-10-12T10:00:54.548Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 1606
+    }
+  },
+  "scene": "角色卡池最终排版",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-12-pool-glass-card/pool-final.png"
+  ],
+  "selectors": [
+    {
+      "key": "header",
+      "selector": ".cls-pool-page .pg-head"
+    },
+    {
+      "key": "name",
+      "selector": "#poolGrid .hsc-name"
+    },
+    {
+      "key": "desc",
+      "selector": "#poolGrid .hsc-desc"
+    }
+  ]
+}

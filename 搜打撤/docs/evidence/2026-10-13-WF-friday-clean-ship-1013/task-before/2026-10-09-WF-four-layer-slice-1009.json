@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-four-layer-slice-1009",
+  "date": "2026-10-09",
+  "owner": "Friday（Codex 四层垂直切片）",
+  "goal": "制作从基地整备至四层首脑与终局撤离通关的可试玩切片，核对并补齐流程缺口",
+  "paths": [
+    "docs/evidence/2026-10-09-WF-four-layer-slice-1009"
+  ],
+  "doneWhen": [
+    "四层主流程缺口经源码和当前窗口实页核对，范围内修复有定向证据",
+    "完成与受阻项分开记录，存档与奖励重复边界可核对"
+  ],
+  "stage": "doing",
+  "checks": [],
+  "unverified": [],
+  "updatedAt": "2026-10-09T04:29:36.529Z"
+}

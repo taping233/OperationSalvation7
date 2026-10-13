@@ -1,0 +1,20 @@
+{
+  "heixiang": {
+    "source": "C:/Users/太平/.codex/generated_images/01a125ae-679a-7681-8849-23d7c86b7ed6/exec-99fb8808-5555-4b65-93da-dc3e2b05a814.png",
+    "prompt": "Edit image 1, the newly drawn chibi avatar. Image 2 is the authoritative card reference for scar position and geometry. Correct ONLY the facial scar on image-right / his left side: REMOVE the diagonal scar that lies across the lower cheek toward the ear. Recreate the card's narrow almost VERTICAL stitched scar: starts at the left temple beside outer end of eyebrow, goes down beside the OUTER corner of his left eye and descends along the lateral cheek toward the jaw, roughly parallel to the side of the face, with three short horizontal cross-stitches. It is HIGHER and nearer the outer eye than the current diagonal lower-cheek scar. Follow the exact anatomical route shown on image 2. Preserve existing head, amber eyes, expression, silver forelock, scarf, armor, chibi proportions, block-painted brushwork and transparent background. No extra scars or text.",
+    "references": [
+      "C:/Users/太平/.codex/generated_images/01a125ae-679a-7681-8849-23d7c86b7ed6/exec-91bb83d8-3d73-4188-9100-6cd89a8727bc.png",
+      "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt7-armup.webp"
+    ]
+  },
+  "dark": {
+    "id": "xingyue-dark",
+    "asset": "portraits/avatars/xingyue-dark.webp",
+    "source": "C:/Users/太平/.codex/generated_images/01a125ae-679a-7681-8849-23d7c86b7ed6/exec-c5db413e-87c5-480b-a5a6-14cd3b905af4.png",
+    "prompt": "Create an additional dark-priest version of image 1, the chibi Xingyue avatar. Image 2 (curse-drain) is authoritative for dark-priest identity, exact hair shape/color, eye color, clothing and dark crescent. Keep image 1's square centered large-head small chest-bust chibi format, coarse opaque block-painted brushwork and clean transparent background. Change to violet eyes, almost-black indigo crescent hair ornament clipped at same image-right location as image 1, black-gray high-neck priest clothes with restrained gold trim and PURPLE shoulder cape. Hair matches image 2's very pale low-saturation blonde base and cool-gray shaded planes, rounded smooth crown, tidy straight blunt fringe, long straight side locks and low tied braid; do not retain fluffy long loose side hair from image 1. Calm reserved face. Entire hairstyle and ornament in frame. A few broad directional matte brushstrokes, selective face clarity, low fine detail. No magic effects, scene, text, borders, watermark or UI.",
+    "references": [
+      "C:/Users/太平/.codex/generated_images/01a125ae-679a-7681-8849-23d7c86b7ed6/exec-d6c62c52-6555-46eb-89ee-30d7c48ce532.png",
+      "D:/素材/代号柒/搜打撤/game/assets/cards/curse-drain.webp"
+    ]
+  }
+}

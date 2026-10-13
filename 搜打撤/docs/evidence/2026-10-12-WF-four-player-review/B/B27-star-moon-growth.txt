@@ -1,0 +1,81 @@
+- main:
+  - text: 金币 攻击 ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - button "返回基地":
+    - heading "基地" [level=2]
+    - generic: 档案 / 02
+    - generic "基地物资":
+      - generic "木材 0":
+        - generic: "0"
+        - generic: 木材
+        - text: 木材
+      - generic "口粮 0":
+        - generic: "0"
+        - generic: 口粮
+        - text: 口粮
+      - generic "钥匙 0":
+        - generic: "0"
+        - generic: 钥匙
+        - text: 钥匙
+      - generic "储备币 2":
+        - generic: "2"
+        - generic: 储备币
+        - text: 储备币
+    - main:
+      - figure "星月 默认外观":
+        - img "星月完整立绘"
+        - heading "星月" [level=2]
+        - text: 默认外观
+      - navigation "人物切换":
+        - button "查看无":
+          - img "无"
+          - generic: 无
+        - button "查看黑像":
+          - img "黑像"
+          - generic: 黑像
+        - button "查看星月" [active] [pressed]:
+          - img "星月"
+          - generic: 星月
+        - button "查看白塔":
+          - img "白塔"
+          - generic: 白塔
+        - button "查看常无欲":
+          - img "常无欲"
+          - generic: 常无欲
+      - article:
+        - generic: 牧师 · 浏览档案
+        - heading "星月" [level=3]
+        - generic: 人物培养
+        - generic: Lv.3
+        - heading "出征加成" [level=4]
+        - paragraph: 生命上限 +2
+        - paragraph: 下一级 · 生命上限 +3
+        - heading "熟练度" [level=4]
+        - progressbar "人物熟练度"
+        - paragraph: 116 / 130 XP
+        - paragraph: 用该人物的职业卡或能力卡培养；卡牌转为经验并消耗。
+        - button "选择培养卡牌":
+          - generic: 选择培养卡牌
+          - generic: →
+      - navigation "角色操作":
+        - button "培养" [pressed]
+        - button "招式"
+        - button "外观"
+        - button "伙伴"
+    - navigation "基地房间":
+      - button "基地":
+        - generic: 基地
+      - button "配置 当前房间" [pressed]:
+        - generic: 配置
+        - generic: 当前房间
+      - button "后勤":
+        - generic: 后勤
+      - button "交易所":
+        - generic: 交易所
+      - button "收藏室 4项奖励可领取":
+        - generic: 收藏室
+        - emphasis: "4"
+      - button "建设":
+        - generic: 建设
+      - button "庭院":
+        - generic: 庭院

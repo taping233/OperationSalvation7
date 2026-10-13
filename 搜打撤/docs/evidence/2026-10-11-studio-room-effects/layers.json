@@ -1,0 +1,45 @@
+[
+  {
+    "animation": "none",
+    "opacity": "1",
+    "parent": "clib-main",
+    "selector": ".studio-room-scene",
+    "z": "1"
+  },
+  {
+    "animation": "none",
+    "opacity": "1",
+    "parent": "pg card-library-page photo-studio-v3 studio-index-layout studio-unified studio-archive",
+    "selector": ".clib-main",
+    "z": "1"
+  },
+  {
+    "animation": "none",
+    "backboardOpacity": "0.68",
+    "opacity": "1",
+    "parent": "clib-main",
+    "selector": ".studio-catalog",
+    "z": "auto"
+  },
+  {
+    "animation": "surfacePageIn",
+    "opacity": "1",
+    "parent": "studio-catalog",
+    "selector": "#libGrid",
+    "z": "2"
+  },
+  {
+    "animation": "surfacePageIn",
+    "opacity": "1",
+    "parent": "clib-main",
+    "selector": ".library-inspector",
+    "z": "2"
+  },
+  {
+    "animation": "studio-room-beam",
+    "opacity": "0.847306",
+    "parent": "studio-room-scene",
+    "selector": ".room-beam",
+    "z": "auto"
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "card_id": "tt3-grope",
+  "model": "nai-diffusion-4-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 492742874,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nno humans, lantern, floating object, playing cards, close-up, dutch angle, 1.4::gouache painting, thick opaque brush strokes, painterly edges::\n\nA small old square lantern floats near the upper-left, its warm ivory window occupying only one tenth of the frame width. One broad dim amber search-light swathe stretches diagonally toward the lower-right through deep indigo-gray obscurity. Exactly two blank rectangular cards are partly uncovered near right-center: one angled ivory face and one muted ochre card behind it, both lower halves hidden by broad dark violet paint masses. The light reveals only their upper corners and a small strip of face; most of the image remains quiet darkness. There is no floor, room or landscape, only overlapping indigo, gray-violet and muted blue color masses.\n\nBroad loaded brush swipes follow the search-light diagonal. The lantern frame is built with blunt charcoal and dull gray dabs, a single quiet warm window. Cards have broad matte ivory and ochre faces with angular violet shadows, no inset borders. Dark paint overlaps the card silhouettes to suggest tentative discovery. Keep sparse hard lit edges at the revealed corners. Use connected opaque masses, broad directional overlaps and uneven endings, with restrained middle tones rather than smooth luminous gradients.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, hands, faces, rocks, room, scenery, extra lanterns, extra cards, card symbols, card text, ornate metalwork, fine linework, vector art, glossy 3d render, all-over grain, particles, bright full-frame glow",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\grope-redraw-20261011\\grope.png",
+  "installed": false,
+  "design": "微光探路意象；小提灯光带揭开两张卡边角，深靛灰紫抽象暗场，无人物岩石。"
+}

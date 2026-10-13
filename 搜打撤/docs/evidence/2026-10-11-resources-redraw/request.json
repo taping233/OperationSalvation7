@@ -1,0 +1,212 @@
+{
+  "authorization": "老板：把没有重绘的资源全部重绘了吧",
+  "scope": "12 unrepainted active resource-card artworks; retain previously redrawn copper, one key and three keys; exclude retired starter-ration",
+  "mode": "candidate",
+  "tool": "built-in image_gen",
+  "items": [
+    {
+      "name": "keys-bunch",
+      "card_id": "tt-keys-bunch",
+      "card_name": "两把钥匙",
+      "target": "D:/素材/代号柒/搜打撤/game/assets/cards/resources/keys-bunch.webp",
+      "prompt": "Use case: style-transfer. Redraw the item in image 1 as rough hand-painted anime game-resource art. Image 1 is the composition and object target. Images 2–4 are ONLY broad opaque brushwork references; never copy their people, costumes, props, words or watermark. Rebuild with distinctly fewer, larger connected opaque color masses, several wide directional swipes and blunt dabs, hard handmade shadow edges and selective broken stroke endings. Substantial quiet surfaces, readable main form and a few structural accents. Muted warm/cool material colors with concentrated highlights. No polished 3D, airbrush gloss, dense texture, thin scratch networks, all-over grain filters or microscopic ornament. Preserve the target's number of objects, pose, orientation and main proportions.\n\nSUBJECT: Exactly two long metal keys cross in an X, with large faceted hexagonal champagne-gold heads near the upper left and upper right, a small silver linking ring between them, long cool-gray shafts extending to lower opposite corners and chunky dark teeth near the bottoms. Keep the two-key count, crossings, long proportions and original three-quarter view. Simplify head bevels and metal reflection into a few large painted planes.\n\nSquare canvas. Center the complete item with clear margins; object group fills roughly 70–75 percent of the canvas. Actual transparent alpha everywhere outside the object, including gaps between parts. No painted backing swatch, environment, black/white backdrop, drawn checkerboard, floor shadow, glow, particles or extra objects. No letters, numbers, text, card frame, border, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/resources/keys-bunch.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+      ],
+      "transparent_background": true,
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/keys-bunch.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-03a9b9e1-cb7c-4ae2-aaae-c93bfd5036dd.png",
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "wood",
+      "card_id": "tt-wood",
+      "card_name": "木材",
+      "target": "D:/素材/代号柒/搜打撤/game/assets/cards/resources/wood.webp",
+      "prompt": "Use case: style-transfer. Redraw the item in image 1 as rough hand-painted anime game-resource art. Image 1 is the composition and object target. Images 2–4 are ONLY broad opaque brushwork references; never copy their people, costumes, props, words or watermark. Rebuild with distinctly fewer, larger connected opaque color masses, several wide directional swipes and blunt dabs, hard handmade shadow edges and selective broken stroke endings. Substantial quiet surfaces, readable main form and a few structural accents. Muted warm/cool material colors with concentrated highlights. No polished 3D, airbrush gloss, dense texture, thin scratch networks, all-over grain filters or microscopic ornament. Preserve the target's number of objects, pose, orientation and main proportions.\n\nSUBJECT: Exactly one short thick log runs diagonally from upper left to lower right, with the pale oval cut end facing the viewer on the right. Muted pink-brown bark across the upper surface, cool slate dark underside, cream end grain. Use one or two broad growth-ring arcs and a few lengthwise wide bark strokes; keep broken bark ends, avoid fine grain.\n\nSquare canvas. Center the complete item with clear margins; object group fills roughly 70–75 percent of the canvas. Actual transparent alpha everywhere outside the object, including gaps between parts. No painted backing swatch, environment, black/white backdrop, drawn checkerboard, floor shadow, glow, particles or extra objects. No letters, numbers, text, card frame, border, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/resources/wood.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+      ],
+      "transparent_background": true,
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/wood.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-1a14b251-1874-4048-a67b-96c3f39136c4.png",
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "wood-lots",
+      "card_id": "tt-wood-lots",
+      "card_name": "大量木材",
+      "target": "D:/素材/代号柒/搜打撤/game/assets/cards/resources/wood-lots.webp",
+      "prompt": "Use case: style-transfer. Redraw the item in image 1 as rough hand-painted anime game-resource art. Image 1 is the composition and object target. Images 2–4 are ONLY broad opaque brushwork references; never copy their people, costumes, props, words or watermark. Rebuild with distinctly fewer, larger connected opaque color masses, several wide directional swipes and blunt dabs, hard handmade shadow edges and selective broken stroke endings. Substantial quiet surfaces, readable main form and a few structural accents. Muted warm/cool material colors with concentrated highlights. No polished 3D, airbrush gloss, dense texture, thin scratch networks, all-over grain filters or microscopic ornament. Preserve the target's number of objects, pose, orientation and main proportions.\n\nSUBJECT: Exactly two rough short log pieces cross in an X, one from upper left to lower right in front and one from upper right to lower left behind. Preserve their visible overlap, blunt irregular cut ends and chunky timber proportions. Pale warm tan upper planes, purple-brown and cool blue-gray sides, broad longitudinal swipes, few end-grain arcs, no rope or extra log.\n\nSquare canvas. Center the complete item with clear margins; object group fills roughly 70–75 percent of the canvas. Actual transparent alpha everywhere outside the object, including gaps between parts. No painted backing swatch, environment, black/white backdrop, drawn checkerboard, floor shadow, glow, particles or extra objects. No letters, numbers, text, card frame, border, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/resources/wood-lots.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+      ],
+      "transparent_background": true,
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/wood-lots.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-9b16c6bd-e669-4b17-8427-3346f7fb8395.png",
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "wood-bundle",
+      "card_id": "tt3-wood-bundle",
+      "card_name": "木材捆",
+      "target": "D:/素材/代号柒/搜打撤/game/assets/cards/resources/wood-bundle.webp",
+      "prompt": "Use case: style-transfer. Redraw the item in image 1 as rough hand-painted anime game-resource art. Image 1 is the composition and object target. Images 2–4 are ONLY broad opaque brushwork references; never copy their people, costumes, props, words or watermark. Rebuild with distinctly fewer, larger connected opaque color masses, several wide directional swipes and blunt dabs, hard handmade shadow edges and selective broken stroke endings. Substantial quiet surfaces, readable main form and a few structural accents. Muted warm/cool material colors with concentrated highlights. No polished 3D, airbrush gloss, dense texture, thin scratch networks, all-over grain filters or microscopic ornament. Preserve the target's number of objects, pose, orientation and main proportions.\n\nSUBJECT: Exactly four short thick logs stacked as a two-by-two compact bundle. Four round pale cut ends face the viewer on the left; logs extend backward to the right. One ochre rope band wraps around the middle-right of the entire bundle, not each log separately. Preserve the horizontal three-quarter view and arrangement, large plum-brown bark planes, broad cream end-grain strokes. No tiny fibers or many growth rings.\n\nSquare canvas. Center the complete item with clear margins; object group fills roughly 70–75 percent of the canvas. Actual transparent alpha everywhere outside the object, including gaps between parts. No painted backing swatch, environment, black/white backdrop, drawn checkerboard, floor shadow, glow, particles or extra objects. No letters, numbers, text, card frame, border, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/resources/wood-bundle.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+      ],
+      "transparent_background": true,
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/wood-bundle.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-0b9add43-1ea2-4b74-adb6-b8398aa7a672.png",
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "ration",
+      "card_id": "tt-rations",
+      "card_name": "口粮",
+      "target": "D:/素材/代号柒/搜打撤/game/assets/cards/resources/ration.webp",
+      "prompt": "Use case: style-transfer. Redraw the item in image 1 as rough hand-painted anime game-resource art. Image 1 is the composition and object target. Images 2–4 are ONLY broad opaque brushwork references; never copy their people, costumes, props, words or watermark. Rebuild with distinctly fewer, larger connected opaque color masses, several wide directional swipes and blunt dabs, hard handmade shadow edges and selective broken stroke endings. Substantial quiet surfaces, readable main form and a few structural accents. Muted warm/cool material colors with concentrated highlights. No polished 3D, airbrush gloss, dense texture, thin scratch networks, all-over grain filters or microscopic ornament. Preserve the target's number of objects, pose, orientation and main proportions.\n\nSUBJECT: A single rustic round brown bread loaf with two large pale diagonal scoring cuts, partly wrapped in one crumpled cream and muted teal paper sheet. Keep a small simple reddish-brown spoon lying along the lower right side, as in the target. Bread dominates upper center, wrapper spreads into broad pointed folds below. Build crust with warm ochre and desaturated brown shadow blocks and only several broad baked marks, no dense pores or speckles.\n\nSquare canvas. Center the complete item with clear margins; object group fills roughly 70–75 percent of the canvas. Actual transparent alpha everywhere outside the object, including gaps between parts. No painted backing swatch, environment, black/white backdrop, drawn checkerboard, floor shadow, glow, particles or extra objects. No letters, numbers, text, card frame, border, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/resources/ration.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+      ],
+      "transparent_background": true,
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/ration.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-1c48a9d0-7951-4789-bcd0-9a89e6e61513.png",
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "ration-double",
+      "card_id": "tt3-ration-double",
+      "card_name": "双份口粮",
+      "target": "D:/素材/代号柒/搜打撤/game/assets/cards/resources/ration-double.webp",
+      "prompt": "Use case: style-transfer. Redraw the item in image 1 as rough hand-painted anime game-resource art. Image 1 is the composition and object target. Images 2–4 are ONLY broad opaque brushwork references; never copy their people, costumes, props, words or watermark. Rebuild with distinctly fewer, larger connected opaque color masses, several wide directional swipes and blunt dabs, hard handmade shadow edges and selective broken stroke endings. Substantial quiet surfaces, readable main form and a few structural accents. Muted warm/cool material colors with concentrated highlights. No polished 3D, airbrush gloss, dense texture, thin scratch networks, all-over grain filters or microscopic ornament. Preserve the target's number of objects, pose, orientation and main proportions.\n\nSUBJECT: Exactly two plump rectangular cream-paper ration parcels stand side by side, separately outlined, a small transparent gap between them. Each is tied once at the waist with an olive-ochre cord and a simple bow. Preserve the different leaning silhouettes, warm ivory front planes and gray-green shaded lower folds. One principal fold per major surface, readable bows using a few broad strokes, no printed labels.\n\nSquare canvas. Center the complete item with clear margins; object group fills roughly 70–75 percent of the canvas. Actual transparent alpha everywhere outside the object, including gaps between parts. No painted backing swatch, environment, black/white backdrop, drawn checkerboard, floor shadow, glow, particles or extra objects. No letters, numbers, text, card frame, border, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/resources/ration-double.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+      ],
+      "transparent_background": true,
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/ration-double.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-92009071-4f69-43da-a5a1-458aa0edff6d.png",
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "coin-silver",
+      "card_id": "tt-silver",
+      "card_name": "银币",
+      "target": "D:/素材/代号柒/搜打撤/game/assets/cards/resources/coin-silver.webp",
+      "prompt": "Use case: style-transfer. Redraw the item in image 1 as rough hand-painted anime game-resource art. Image 1 is the composition and object target. Images 2–4 are ONLY broad opaque brushwork references; never copy their people, costumes, props, words or watermark. Rebuild with distinctly fewer, larger connected opaque color masses, several wide directional swipes and blunt dabs, hard handmade shadow edges and selective broken stroke endings. Substantial quiet surfaces, readable main form and a few structural accents. Muted warm/cool material colors with concentrated highlights. No polished 3D, airbrush gloss, dense texture, thin scratch networks, all-over grain filters or microscopic ornament. Preserve the target's number of objects, pose, orientation and main proportions.\n\nSUBJECT: One thick circular silver coin in a mildly oblique front view, with a raised outer rim and recessed inner circular border. Preserve the large simple crescent-moon relief on its face. Silver-white, slate-blue and lavender-gray metal planes, a few wide pale highlights following the rim and crescent. No coin stack, no denomination, no extra engraving. Calm broad matte face, crisp readable raised crescent.\n\nSquare canvas. Center the complete item with clear margins; object group fills roughly 70–75 percent of the canvas. Actual transparent alpha everywhere outside the object, including gaps between parts. No painted backing swatch, environment, black/white backdrop, drawn checkerboard, floor shadow, glow, particles or extra objects. No letters, numbers, text, card frame, border, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/resources/coin-silver.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+      ],
+      "transparent_background": true,
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/coin-silver.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-430b97ca-56a0-4147-9b2a-ba744fa4fcc0.png",
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "coin-gold",
+      "card_id": "tt-gold",
+      "card_name": "金币",
+      "target": "D:/素材/代号柒/搜打撤/game/assets/cards/resources/coin-gold.webp",
+      "prompt": "Use case: style-transfer. Redraw the item in image 1 as rough hand-painted anime game-resource art. Image 1 is the composition and object target. Images 2–4 are ONLY broad opaque brushwork references; never copy their people, costumes, props, words or watermark. Rebuild with distinctly fewer, larger connected opaque color masses, several wide directional swipes and blunt dabs, hard handmade shadow edges and selective broken stroke endings. Substantial quiet surfaces, readable main form and a few structural accents. Muted warm/cool material colors with concentrated highlights. No polished 3D, airbrush gloss, dense texture, thin scratch networks, all-over grain filters or microscopic ornament. Preserve the target's number of objects, pose, orientation and main proportions.\n\nSUBJECT: One thick round gold coin in the original mildly oblique front view. Preserve its raised outer rim, inner circular border and central large eight-point starburst relief with alternating long and short rays. Muted warm ochre gold, honey-colored middle planes and purple-gray shadows, several short pale gold rim swipes. A couple of small worn rim notches only. No stack, denomination or extra ornament; make the main star readable from a thumbnail.\n\nSquare canvas. Center the complete item with clear margins; object group fills roughly 70–75 percent of the canvas. Actual transparent alpha everywhere outside the object, including gaps between parts. No painted backing swatch, environment, black/white backdrop, drawn checkerboard, floor shadow, glow, particles or extra objects. No letters, numbers, text, card frame, border, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/resources/coin-gold.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+      ],
+      "transparent_background": true,
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/coin-gold.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-84076700-2779-450e-8298-66f15d97d3bf.png",
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "diamond",
+      "card_id": "tt3-diamond",
+      "card_name": "钻石",
+      "target": "D:/素材/代号柒/搜打撤/game/assets/cards/resources/diamond.webp",
+      "prompt": "Use case: style-transfer. Redraw the item in image 1 as rough hand-painted anime game-resource art. Image 1 is the composition and object target. Images 2–4 are ONLY broad opaque brushwork references; never copy their people, costumes, props, words or watermark. Rebuild with distinctly fewer, larger connected opaque color masses, several wide directional swipes and blunt dabs, hard handmade shadow edges and selective broken stroke endings. Substantial quiet surfaces, readable main form and a few structural accents. Muted warm/cool material colors with concentrated highlights. No polished 3D, airbrush gloss, dense texture, thin scratch networks, all-over grain filters or microscopic ornament. Preserve the target's number of objects, pose, orientation and main proportions.\n\nSUBJECT: One large cut diamond, broad flat top, wide horizontal middle girdle and a tapered triangular lower point, viewed from the same slightly elevated frontal angle. Preserve its squat upper crown and pointed lower half. Build crystal from only a few large coherent facets in cream, pale peach, cool cyan-gray and muted violet shadow, a few small crisp opaque corner highlights. Facets follow the real crystal, not a noisy triangular paint mosaic; no sparkle particles or glow.\n\nSquare canvas. Center the complete item with clear margins; object group fills roughly 70–75 percent of the canvas. Actual transparent alpha everywhere outside the object, including gaps between parts. No painted backing swatch, environment, black/white backdrop, drawn checkerboard, floor shadow, glow, particles or extra objects. No letters, numbers, text, card frame, border, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/resources/diamond.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+      ],
+      "transparent_background": true,
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/diamond.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-9d0ebb9c-0ea2-4bbc-8ca4-2645972034c5.png",
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "garnet-marble",
+      "card_id": "tt3-garnet-marble",
+      "card_name": "石榴石",
+      "target": "D:/素材/代号柒/搜打撤/game/assets/cards/resources/garnet-marble.webp",
+      "prompt": "Use case: style-transfer. Redraw the item in image 1 as rough hand-painted anime game-resource art. Image 1 is the composition and object target. Images 2–4 are ONLY broad opaque brushwork references; never copy their people, costumes, props, words or watermark. Rebuild with distinctly fewer, larger connected opaque color masses, several wide directional swipes and blunt dabs, hard handmade shadow edges and selective broken stroke endings. Substantial quiet surfaces, readable main form and a few structural accents. Muted warm/cool material colors with concentrated highlights. No polished 3D, airbrush gloss, dense texture, thin scratch networks, all-over grain filters or microscopic ornament. Preserve the target's number of objects, pose, orientation and main proportions.\n\nSUBJECT: One spherical deep wine-red garnet marble, near-round silhouette, broad dark plum body, warm crimson inner turn near lower left and a restrained pale cool reflection on upper right. Express volume and translucent depth with a few large curved opaque painted areas and a small clear highlight, not smooth photoreal glass or a shiny 3D render. Keep it one red sphere with no pedestal, surrounding sparkles or extra gems.\n\nSquare canvas. Center the complete item with clear margins; object group fills roughly 70–75 percent of the canvas. Actual transparent alpha everywhere outside the object, including gaps between parts. No painted backing swatch, environment, black/white backdrop, drawn checkerboard, floor shadow, glow, particles or extra objects. No letters, numbers, text, card frame, border, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/resources/garnet-marble.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+      ],
+      "transparent_background": true,
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/garnet-marble.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-f6438ac9-6cb0-4452-8fa8-ff8b7a1c218c.png",
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "econpack",
+      "card_id": "tt-econpack",
+      "card_name": "经济包",
+      "target": "D:/素材/代号柒/搜打撤/game/assets/cards/resources/econpack.webp",
+      "prompt": "Use case: style-transfer. Redraw the item in image 1 as rough hand-painted anime game-resource art. Image 1 is the composition and object target. Images 2–4 are ONLY broad opaque brushwork references; never copy their people, costumes, props, words or watermark. Rebuild with distinctly fewer, larger connected opaque color masses, several wide directional swipes and blunt dabs, hard handmade shadow edges and selective broken stroke endings. Substantial quiet surfaces, readable main form and a few structural accents. Muted warm/cool material colors with concentrated highlights. No polished 3D, airbrush gloss, dense texture, thin scratch networks, all-over grain filters or microscopic ornament. Preserve the target's number of objects, pose, orientation and main proportions.\n\nSUBJECT: One squat beige drawstring pouch in the original three-quarter view, broad gray-purple side shadow and several blank ivory slips fanned upright from its mouth. Preserve the gathered top, one braided cord simplified into several broad segments, two short tassel ends hanging on the left with small green and violet bead accents, and one subtle side seam. Large quiet bag planes, a few structural fold swipes, 4–5 blank paper shapes, no writing, money denominations or extra props.\n\nSquare canvas. Center the complete item with clear margins; object group fills roughly 70–75 percent of the canvas. Actual transparent alpha everywhere outside the object, including gaps between parts. No painted backing swatch, environment, black/white backdrop, drawn checkerboard, floor shadow, glow, particles or extra objects. No letters, numbers, text, card frame, border, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/resources/econpack.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+      ],
+      "transparent_background": true,
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/econpack.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-bceea9f2-c83e-4569-a0ef-10b6ae657bd2.png",
+      "status": "candidate-delivered"
+    },
+    {
+      "name": "pet-egg",
+      "card_id": "pet-egg",
+      "card_name": "伙伴蛋",
+      "target": "D:/素材/代号柒/搜打撤/game/assets/cards/resources/pet-egg.webp",
+      "prompt": "Use case: style-transfer. Redraw the item in image 1 as rough hand-painted anime game-resource art. Image 1 is the composition and object target. Images 2–4 are ONLY broad opaque brushwork references; never copy their people, costumes, props, words or watermark. Rebuild with distinctly fewer, larger connected opaque color masses, several wide directional swipes and blunt dabs, hard handmade shadow edges and selective broken stroke endings. Substantial quiet surfaces, readable main form and a few structural accents. Muted warm/cool material colors with concentrated highlights. No polished 3D, airbrush gloss, dense texture, thin scratch networks, all-over grain filters or microscopic ornament. Preserve the target's number of objects, pose, orientation and main proportions.\n\nSUBJECT: One upright intact egg with a narrow rounded top and a broad rounded base. Preserve pale muted mint-cyan shell, a broad slate-gray shadow on the right and bottom, a few pale yellow irregular spots on the upper right and one restrained opaque white highlight on the upper left. Group shell color into a few large gently curved hand-painted planes with handmade shadow boundaries. No cracks, emerging creature, pedestal, nest, glow or tiny decorative patterns.\n\nSquare canvas. Center the complete item with clear margins; object group fills roughly 70–75 percent of the canvas. Actual transparent alpha everywhere outside the object, including gaps between parts. No painted backing swatch, environment, black/white backdrop, drawn checkerboard, floor shadow, glow, particles or extra objects. No letters, numbers, text, card frame, border, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/resources/pet-egg.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+      ],
+      "transparent_background": true,
+      "output": ".tmp/imagegen/2026-10-11-resources-redraw/pet-egg.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-3459745e-5e9f-4d78-aa98-3712d2a8bcde.png",
+      "status": "candidate-delivered"
+    }
+  ]
+}

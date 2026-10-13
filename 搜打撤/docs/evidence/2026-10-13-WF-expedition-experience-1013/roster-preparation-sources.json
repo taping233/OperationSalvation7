@@ -1,0 +1,42 @@
+[
+  {
+    "id": "hsr-character-selection-framing",
+    "game": "崩坏：星穹铁道",
+    "section": "roster",
+    "title": "队伍选人：固定人物展示与统一头像候选",
+    "sourcePage": "https://interfaceingame.com/screenshots/honkai-star-rail-team-selection/",
+    "imageUrl": "https://interfaceingame.com/wp-content/uploads/honkai-star-rail/honkai-star-rail-team-selection.png",
+    "localFile": "../2026-10-11-selection-map-plan/references/HSR-team-selection.png",
+    "observations": [
+      "本轮已通过 view_image 实际查看 1920×1080 原截图。",
+      "左侧候选头像使用相同容器与明亮选中边缘，主人物展示与操作确认保持固定位置。",
+      "候选区域以半透明面板承托，背景仍可辨识；人物主体与文字没有整体模糊。"
+    ],
+    "adaptation": [
+      "五位标准人物与三套场景皮肤进入同一个固定展示框，透明/全身图按已知画面边界校准，横幅皮肤完整包含。",
+      "皮肤缩略图改为等大容器，文字、选中边框、勾选与 aria-pressed 同步。",
+      "整备的玻璃模糊由老板本轮明确要求；参考图只支持透明承托与主次关系，不声称截图可证明动态模糊参数。"
+    ],
+    "motionVerified": false,
+    "sourceLimit": "第三方实机截图库，版本与拍摄日期未标注；不复制角色或星空资产。"
+  },
+  {
+    "id": "zzz-preparation-container-rhythm",
+    "game": "绝区零",
+    "section": "preparation",
+    "title": "VR 自定义训练：候选容器与固定操作区",
+    "sourcePage": "https://www.hoyolab.com/article/30636268",
+    "imageUrl": "https://upload-os-bbs.hoyolab.com/upload/2024/07/05/370699319/df91f4130bed0f07c0ce84ea79c181d0_551250015581684224.png",
+    "localFile": "../2026-10-11-WF-selection-map-implementation-1011/art-reference-collection/roster-entry/zzz-custom-preparation-original.png",
+    "observations": [
+      "本轮已通过 view_image 实际查看 1546×857 原截图。",
+      "候选对象图、名称、成本在每个一致的纵向容器中；已配置槽位与候选列表分区，底部确认稳定。"
+    ],
+    "adaptation": [
+      "本作仓库候选与当前携带继续保持独立分区、各自滚动，卡牌图像锐利，容量与出发保持稳定。",
+      "借鉴容器、留白与操作区关系，不移植训练敌人、电量或 Save Plan 业务。"
+    ],
+    "motionVerified": false,
+    "sourceLimit": "HoYoLAB 社区作者的训练敌人编排实机，不是出征携带界面。"
+  }
+]

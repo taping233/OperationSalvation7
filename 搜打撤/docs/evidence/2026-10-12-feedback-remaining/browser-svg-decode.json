@@ -1,0 +1,28 @@
+{
+  "result": {
+    "type": "object",
+    "value": [
+      {
+        "height": 150,
+        "loaded": true,
+        "ms": 11,
+        "name": "boom",
+        "width": 150
+      },
+      {
+        "height": 150,
+        "loaded": true,
+        "ms": 14,
+        "name": "hurt",
+        "width": 150
+      },
+      {
+        "height": 150,
+        "loaded": true,
+        "ms": 14,
+        "name": "heal",
+        "width": 150
+      }
+    ]
+  }
+}

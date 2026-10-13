@@ -1,0 +1,21 @@
+{
+  "card_id": "tt3-life-arrow",
+  "model": "nai-diffusion-4-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 1741380782,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nno humans, arrow, arrowhead, sprout, leaves, simple background\n\nOne slender wooden arrow flies diagonally upward from lower left to upper right. A small clean pale silver pointed head, one straight dark wooden shaft, and exactly two fresh tender-green leaves growing at its rear end form the entire subject. The two leaves replace feather fletching and sweep backward gently in the air. The old dry wood becoming fresh leaves suggests life awakening and moving forward. Keep a clear conventional arrow silhouette and generous quiet space around it. The shaft is one broad stroke, the leaves two coherent green shapes, the arrowhead two simple light and shadow planes. Solid muted warm ivory-gray background; a faint broad sage sweep behind the leaves suggests forward motion. No bird, branch, flower, floating seed, particles, ornaments or scenery.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, hands, bird, branch, multiple arrows, bow, target, flowers, dense foliage, forest, scenery, particles, sparks, ornate weapon, intricate leaf veins",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\life-arrow-20261010\\life-arrow-v2.png",
+  "installed": false,
+  "design": "老板修正：必须有箭、少元素、多意象；一支木箭尾端生两片嫩叶，枯木萌芽与向前飞行表达生命。"
+}

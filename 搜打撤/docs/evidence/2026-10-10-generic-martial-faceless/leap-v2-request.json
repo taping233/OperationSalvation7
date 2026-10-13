@@ -1,0 +1,26 @@
+{
+  "card_id": "tt3-fly-arrowhawk",
+  "model": "nai-diffusion-5-full",
+  "seed": 1594972245,
+  "width": 1024,
+  "height": 1024,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1boy, solo, from below, close-up, cropped head, jumping, sword, holding sword, foreshortening, motion blur, dynamic pose, abstract background\n\nDesign an extreme low-angle close shot from directly under an airborne downward sword chop. The anonymous fighter enters diagonally from the upper-left: his HEAD is fully above and outside the picture, while the cropped shoulder, connected forearms, bent waist and two airborne legs remain within the shot. His gloved hands grip one sword hilt near the upper-left edge in front of his raised shoulder. The blade travels from that hilt toward the lower-right foreground, sharply enlarged by perspective. The broad silver blade occupies the main diagonal and about one-third of the composition; the nearer cutting edge is close to the camera, and its point approaches the lower-right corner. His near knee is pulled up behind the hands, while the near boot sole turns toward us in the left middle foreground; the other bent leg recedes toward the upper-left. The visible boot has a simple heavy rectangular sole, not a detailed product diagram, and remains connected to the trouser leg. The coat hem whips upward away from the downward-moving sword, forming a broad dark arc behind the waist. The blade is at the instant before contact with an oblique charcoal band in the lower-right; a small muted oxblood triangular chip begins to lift from this band. The sword, hands, shoulders and coiled hips must form one plausible connected motion; no floating blade, extra arm or elongated impossibly thin sword. The nearest sword edge occludes part of the torso, while the boot and folded trouser leg supply clear airborne depth. Keep a large quiet bone-gray field on the right above the blade and a muted deep wine-red field on the left. A single broad ivory directional smear follows the lower blade edge, rather than many speed lines or sparks. The visual hierarchy is one oversized steel blade, one dark boot and compressed limb group, one small impact accent. No face, no scenic setting, no centered full-body brown-clothed mannequin, no cape, no ornate costume.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "boy, anonymous adult martial fighter, head completely outside the upper-left edge of the crop, plain charcoal-black short martial coat, dull gray loose trousers, simple wrist wraps, black gloves, plain worn black boots, one steel chopping sword with a short plain hilt",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, face, visible eyes, facial profile, head in frame, portrait, full body, standing, neutral pose, brown ninja outfit, girl, long hair, ponytail, goggles, glasses, orange scarf, crescent ornament, ornate armor, huge cape, staff, two swords, floating sword, oversized hilt, needle-thin sword, realistic smoke, giant laser, explosion, many particles, detailed scenery, contact sheet",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\generic-martial-20261010\\leap-v2.png",
+  "references": [
+    "game/assets/cards/martial-tt2-block.webp",
+    "game/assets/cards/martial-tt3-fatal-pierce.webp",
+    "game/assets/cards/martial-cc-dual-wield.webp"
+  ],
+  "reference_usage": "人工分析近景裁切/兵刃比例/碰撞点，不向V5传参考图",
+  "installed": false
+}

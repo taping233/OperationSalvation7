@@ -1,0 +1,75 @@
+[
+  {
+    "layer": "far",
+    "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/winter-layer-continue/source/far.png",
+    "sourceSha256": "ee99c3e705017cc4c8ffdb084828523ce27b8409c929297f271cd5900d33766f",
+    "runtime": "game/assets/scenes/battle/winter-transit-1011/far.webp",
+    "runtimeSha256": "3677892095e1d1e3cf428bfe6c4da8fdcebd9a1154bebe7eb519b3ea4ee5eda4",
+    "bytes": 1259138,
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGB",
+    "alpha": null,
+    "status": "Generated winter candidate, actual layered integration pending; not user acceptance",
+    "method": "Built-in imagegen weather edit with exact prior layer and actual card paintings, then lossless encoding"
+  },
+  {
+    "layer": "mid",
+    "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/winter-layer-continue/source/mid.png",
+    "sourceSha256": "353eea018833885735ca7c82f6defbfbd4a009551d57ee49c38bd43ae65a8db0",
+    "runtime": "game/assets/scenes/battle/winter-transit-1011/mid.webp",
+    "runtimeSha256": "511b6ec6075f114cefc723b4f6a9908bafac976e8c19892d409e53c2b05c172b",
+    "bytes": 361598,
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      255
+    ],
+    "status": "Generated winter candidate, actual layered integration pending; not user acceptance",
+    "method": "Built-in imagegen weather edit with exact prior layer and actual card paintings, then lossless encoding"
+  },
+  {
+    "layer": "ground",
+    "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/winter-layer-continue/source/ground.png",
+    "sourceSha256": "7e49b85acc39d5637785655e88e52b74a9e2362157ccee4905d36ebdd796482a",
+    "runtime": "game/assets/scenes/battle/winter-transit-1011/ground.webp",
+    "runtimeSha256": "c93ee6ae1353b77721004920adc2236ecf42815baaab75a55c6da8933c31c755",
+    "bytes": 647394,
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      255
+    ],
+    "status": "Generated winter candidate, actual layered integration pending; not user acceptance",
+    "method": "Built-in imagegen weather edit with exact prior layer and actual card paintings, then lossless encoding"
+  },
+  {
+    "layer": "foreground",
+    "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/winter-layer-continue/source/foreground.png",
+    "sourceSha256": "43dd7424ea6af52ecd1a2d72fce34815b723723e7885ef7e812b7da659b17dda",
+    "runtime": "game/assets/scenes/battle/winter-transit-1011/foreground.webp",
+    "runtimeSha256": "ee3b723bc76c755dec08786c146cf1073e1f18457185c4505277c647cd068ef0",
+    "bytes": 89726,
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      255
+    ],
+    "status": "Generated winter candidate, actual layered integration pending; not user acceptance",
+    "method": "Built-in imagegen weather edit with exact prior layer and actual card paintings, then lossless encoding"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "id": "02-hurt",
+  "slug": "head-neck",
+  "version": 2,
+  "prompt": "Edit ONLY the expression of this exact Wu head+neck sprite for a brief hit reaction. Preserve the SAME 1254x1254 canvas, placement, head/scalp/ear/neck silhouette, face shape, skin colors and brush style. Keep the newly redrawn pretty compact face and short rounded chin. Close both eyes into natural curved eyelids, brows gently tense, mouth small with a restrained flinch and a tiny hint of the same fang if visible; no wide grin, crying, shouting, blood or injury. No change to viewing angle or proportions. Keep bald scalp and short neck for existing separate hair overlays, no added hair or other accessories. Actual transparent background with zero alpha around the original head silhouette, no shadow/aura/text. One registration-matched expression variant only.",
+  "refs": [
+    "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\characters\\wu-parts-v1\\part-02-head-neck-v3.png"
+  ],
+  "tool": "built-in imagegen",
+  "stage": "candidate"
+}

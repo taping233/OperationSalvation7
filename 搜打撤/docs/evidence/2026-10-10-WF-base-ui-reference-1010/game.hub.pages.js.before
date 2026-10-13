@@ -1,0 +1,537 @@
+/* 基地内页与物资/卡牌特写。动作契约由基地壳绑定；本文件只组织陈列与局部操作。
+ * renderHub 经 game.hub.bridge.js 的 slots 调用，避免内页与壳互相依赖。 */
+const SDT = window.SDT;
+const UI = window.SDT.UI;
+import { warehouseHTML } from './hub.warehouse.js';
+import { personnelHTML } from './hub.personnel.js';
+import { facilitiesHTML } from './hub.facilities.js';
+import { cardBackGalleryHTML, achievementFiltersHTML } from './hub.archive.js';
+import { characterFor, characterName } from '../core/characters.js';
+import { esc } from '../core/shared.js';
+import { assetUrl } from '../core/asset-url.js';
+import { MAP } from '../run/game.session.js';
+import { escAttr } from '../core/shared.js';
+import { game } from '../run/game.session.js';
+import { Sfx, _set_cardPageOpen } from './game.cardslib.js';
+import { Random } from '../core/random.js';
+import { readBase } from './base.commands.js';
+import { convertCollection, stackKeyOf } from './collection.commands.js';
+import { homeErrorMessage } from '../home/home.presenter.js';
+import { validateLastLampState } from '../home/story.last-lamp.js';
+import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // 别名防局部 slots（收藏槽位等）遮蔽
+  // —— 仓库页：卡牌仓库（容量 / 卖出 / 收藏）+ 消耗口袋 + 物资 ——
+  // 特殊收藏品：传说卡与桌游珍宝——[[icon:sparkles]]收藏后完成对应成就
+  const SPECIAL_COLLECT_IDS = new Set(['tt-gold', 'tt-token-color', 'tt-econpack']);
+  const isSpecialCollect = (card) => !!card &&
+    (card.rarity === '传说' || SPECIAL_COLLECT_IDS.has(card.id));
+
+  // —— 局外商店（2026-09-16 留言「局外商店提供基础卡牌」）——
+  // 用储备币（卖出所得，不进局）购买基础卡，直接入卡牌仓库；初始攻击每局自动携带、
+  // 火球为衍生牌不外售，故货架只放可入库的基础招式/装备/资源卡。
+  // 2026-09-17 留言「买的木材没到账」：口粮/木材改为直接折入基地物资（老板预期=看物资计数），
+  // 卡牌货架只留基础招式/装备
+  const HUB_SHOP_GOODS = [
+    { id: 'tt3-skewer',  price: 6, tip: '基础招式 · 造成 2 点伤害，无视护甲' },
+    { id: 'tt3-staff',   price: 6, tip: '基础装备 · 法伤 +1' },
+    { material: 'rations', name: '口粮', price: 4, tip: '基地物资 +1 · 升级宠物' },
+    { material: 'wood',    name: '木材', price: 4, tip: '基地物资 +1 · 扩建背包与仓库' },
+  ];
+  const hubShopGoodsCard = (g) => g.id === 'sha'
+    ? { ...SDT.Cards.SHA }
+    : (SDT.Cards.all().find(c => c.id === g.id) || null);
+  const sectionHead = (index, name, note = '') => `<header class="camp-section-head"><small>${index}</small><h2>${name}</h2>${note ? `<p>${note}</p>` : ''}</header>`;
+  function hubShopHTML() {
+    const B = SDT.Base;
+    const room = B.stashRoom();
+    const rows = HUB_SHOP_GOODS.map((g, i) => {
+      const affordCoin = B.data.coins >= g.price;
+      const roomOk = g.material ? true : room > 0;
+      const afford = affordCoin && roomOk;
+      const why = !affordCoin ? '储备币不足' : (roomOk ? (g.material ? '买入物资' : '买入仓库') : '仓库已满');
+      const whyIco = !affordCoin ? '[[icon:coin]]' : '[[icon:archive]]';
+      const card = g.material ? null : hubShopGoodsCard(g);
+      const visual = g.material
+        ? `<span class="shelf-ico">[[icon:${g.material === 'wood' ? 'wood' : 'bread'}]]</span>`
+        : (card ? SDT.Cards.cardHTML(card, 'sm') : '');
+      const name = g.material ? esc(g.name) : (card ? esc(card.name) : '');
+      const kind = g.material ? '基地物资' : (card ? esc(card.type) : '');
+      const tip = card?.desc || g.tip;
+      return `<article class="shelf-item camp-product${g.material ? ' camp-product-material' : ''}${afford ? '' : ' poor'}">
+        <span class="shelf-visual">${visual}</span>
+        <span class="shelf-info"><small>${kind}</small><b>${name}</b><span class="dim">${esc(tip)}</span>
+          ${afford ? '' : `<span class="poor-why">${whyIco} ${escAttr(why)}</span>`}</span>
+        <button type="button" class="mini-btn ok shop-price-tag" data-act="shopBuy" data-i="${i}" ${afford ? '' : 'disabled'} title="${escAttr(why)}" aria-label="购买${escAttr(g.material ? g.name : card?.name || '卡牌')}，${g.price}储备币">[[icon:coin]] ${g.price} <span>购买</span></button>
+      </article>`;
+    }).join('');
+    const shelfBody = rows || `<div class="shop-soldout camp-empty">
+        <span class="so-seal">[[icon:door]] 今日货已售罄</span>
+        <span class="so-en">SOLD OUT · NEXT CARAVAN SOON</span>
+      </div>`;
+    return `
+      ${sectionHead('03 / SUPPLY', '补给商店', '准备下一趟远征，从一份可靠的补给开始。')}
+      <div class="camp-shop-layout">
+        <aside class="camp-shop-intro">
+          <span class="section-kicker">BASE RESERVE</span>
+          <div class="camp-reserve-value">[[icon:coin]] <b>${B.data.coins}</b><span>储备币</span></div>
+          <p>卡牌买入仓库，在出发整备时携带；木材与口粮直接计入基地物资。</p>
+          <span class="base-line">仓库可用 <b>${room}</b> 格</span>
+          <button type="button" class="mini-btn" data-act="hubTab" data-tab="stash" data-view="cards">[[icon:archive]] 管理仓库</button>
+          <small>卖出仓库卡牌可获得储备币。</small>
+        </aside>
+        <section class="shop-shelf" aria-label="基地补给商品">${shelfBody}</section>
+      </div>`;
+  }
+
+  function hubStashHTML(view = 'cards') {
+    if (view === 'cards') return warehouseHTML();
+    const B = SDT.Base;
+    const used = B.stashUsed(), cap = B.stashCap();
+    const pkN = B.data.pocket.reduce((a, b) => a + b.count, 0);
+    const sectionTabs = `<nav class="stash-sections" aria-label="仓库分区">
+      <button class="stash-section-tab${view === 'cards' ? ' on' : ''}" data-act="hubStashView" data-view="cards" aria-pressed="${view === 'cards'}">[[icon:archive]] 卡牌仓库 <small>${used}/${cap}</small></button>
+      <button class="stash-section-tab${view === 'pocket' ? ' on' : ''}" data-act="hubStashView" data-view="pocket" aria-pressed="${view === 'pocket'}">[[icon:pocket]] 待复原卡牌 <small>${pkN}</small></button>
+      
+    </nav>`;
+    const heading = sectionHead('02 / STORAGE', '仓库', '带回的战利品与等待复原的卡牌。');
+    if (view === 'pets') return `<div class="stash-workspace stash-view-pets">${heading}${sectionTabs}${hubPetsHTML()}</div>`;
+    // 复原可用性按真实钥匙储备判定（A6-STASH-01：restore 只认 data.keys，不折算仓库材料卡；
+    // 之前用 keyCount() 折算会让按钮亮起但点击报钥匙不足）
+    const keys = B.data.keys || 0;
+    // 09-20 高级感改造批2：卡牌仓库从文字行改卡面网格——复用出征整备/收藏室同款
+    // cardHTML('sm') 卡面，点击仍走 stashItem 弹窗（卖出/收藏交互不变）
+    const stashRows = view === 'cards' && B.data.stash.length
+      ? `<div class="stash-cardgrid">${B.data.stash.map((s, i) => {
+          const marked = B.isCollected(s.card);
+          const mat = B.materialInfo ? B.materialInfo(s.card) : null;
+          return `<button type="button" class="stash-cell${marked ? ' collected' : ''}${mat ? ' is-material' : ''}" data-act="stashItem" data-i="${i}"
+              aria-label="${escAttr(s.card.name)}${s.count > 1 ? ` ×${s.count}` : ''}，点击查看大图"
+              title="${escAttr(s.card.name)}${s.count > 1 ? ` ×${s.count}` : ''} · 查看与管理">
+            ${SDT.Cards.cardHTML(s.card, 'sm')}
+            ${s.count > 1 ? `<b class="stack-count">×${s.count}</b>` : ''}
+            ${marked ? '<span class="cell-mark">[[icon:sparkles]]</span>' : ''}
+            ${mat ? '<span class="cell-tag">可使用</span>' : ''}
+          </button>`;
+        }).join('')}</div>`
+      : `<div class="stash-empty camp-empty">
+          <span class="empty-ico">[[icon:archive]]</span>
+          <b>这里，等着你的战利品</b>
+          <span>成功撤离后把战利品存入仓库，也可先购买基础卡牌。</span>
+          <button type="button" class="mini-btn ok" data-act="hubTab" data-tab="shop">[[icon:coin]] 前往补给商店</button>
+        </div>`;
+    // 消耗口袋：按稀有度用钥匙复原（需求 #1/#11：古朴1/稀有2/史诗3/传说4）；行首挂小卡面缩略
+    const pocketRows = view === 'pocket' && B.data.pocket.length
+      ? B.data.pocket.map((p, i) => {
+          const cost = B.pocketKeyCost(p);
+          const afford = keys >= cost;
+          return `<div class="pk-row pocket-row"><span class="pocket-thumb">${SDT.Cards.cardHTML(p.card, 'sm')}</span>
+            <span class="pocket-info"><b>${esc(p.card.name)}</b>${p.count > 1 ? ` ×${p.count}` : ''}
+              <span class="dim">· ${esc(p.card.rarity || '?')}</span></span>
+            <button type="button" class="mini-btn ok" data-act="restoreCard" data-i="${i}" ${afford ? '' : 'disabled'}
+              title="${afford ? '消耗钥匙复原到卡牌仓库' : '钥匙不足'}" aria-label="复原${escAttr(p.card.name)}，消耗${cost}把钥匙">[[icon:key]] ×${cost} 复原</button></div>`;
+        }).join('')
+      : `<div class="stash-placeholder camp-empty"><span class="sp-ico">[[icon:pocket]]</span><b>暂时没有待复原卡牌</b><span>对战消耗的卡牌有 1/3 概率随撤离回到这里。</span><button type="button" class="mini-btn" data-act="hubStashView" data-view="cards">[[icon:archive]] 返回卡牌仓库</button></div>`;
+    if (view === 'pocket') return `<div class="stash-workspace stash-view-pocket">${heading}${sectionTabs}
+        <section class="hub-card warehouse-panel">
+          <header class="warehouse-heading"><div><h3>待复原卡牌</h3><p class="base-line">暂存 <b>${pkN}</b> 张</p></div><span class="camp-pocket-keys">[[icon:key]] <b>${keys}</b> 钥匙</span></header>
+          <p class="ov-note stash-pocket-note">古朴 / 稀有 / 史诗 / 传说依次消耗 1 / 2 / 3 / 4 把钥匙。<b>下一次出发后口袋清空。</b></p>
+          <div class="stash-list">${pocketRows}</div>
+        </section></div>`;
+    return `<div class="stash-workspace stash-view-cards">${heading}${sectionTabs}
+        <section class="hub-card warehouse-panel">
+          <header class="warehouse-heading">
+            <div><h3>战利品陈列</h3><p class="base-line"><b>${used}</b> / ${cap} 张 · 点选卡牌查看与管理</p></div>
+            <div class="warehouse-materials">
+            <button type="button" class="material-cell${B.data.wood > 0 ? '' : ' zero'}" data-act="rawItem" data-kind="wood" aria-label="木材 ×${B.data.wood}，基地建设材料，不可卖出" title="基地建设材料 · 不可卖出">
+              <span class="mat-ico">[[icon:wood]]</span><span>木材</span><b>${B.data.wood}</b>
+            </button>
+            <button type="button" class="material-cell${B.data.rations > 0 ? '' : ' zero'}" data-act="rawItem" data-kind="rations" aria-label="口粮 ×${B.data.rations}，基地建设材料，不可卖出" title="基地建设材料 · 不可卖出">
+              <span class="mat-ico">[[icon:bread]]</span><span>口粮</span><b>${B.data.rations}</b>
+            </button>
+            </div>
+          </header>
+          <div class="base-bar"><i style="width:${(used / cap * 100).toFixed(1)}%"></i></div>
+          <div class="stash-scroll">${stashRows}</div>
+        </section></div>`;
+  }
+
+  // —— 宠物栏（需求 #4：仓库界面增加宠物系统；孵化走宠物蛋弹窗）——
+  function hubPetsHTML() {
+    const B = SDT.Base;
+    const owned = B.ownedPets();
+    const sel = B.carriedPet();
+    const lockedN = B.PETS.length - owned.length;
+    const rows = B.PETS.map(p => {
+      const have = owned.includes(p.id);
+      if (!have) return '';
+      const lv = B.petLevel(p.id);
+      const on = sel && sel.id === p.id;
+      return `<article class="pk-row pet-row${on ? ' on' : ''}">
+        <div class="camp-pet-identity"><span class="camp-pet-icon">[[icon:${p.icon}]]</span><span><b>${esc(p.name)}</b><small>Lv.${lv} / ${B.PET_LEVEL_MAX}</small></span></div>
+        <span class="pet-ops">
+          ${on ? '<span class="got">[[icon:check]] 携带中</span>'
+            : `<button type="button" class="mini-btn ok" data-act="selPet" data-id="${p.id}" aria-label="携带${escAttr(p.name)}出战">选择伙伴</button>`}
+        </span>
+        <span class="dim pet-desc">${esc(p.desc.replace(/^携带效果：/, ''))}</span>
+        <span class="camp-pet-progress" aria-label="等级${lv}，最高${B.PET_LEVEL_MAX}级">${Array.from({ length: B.PET_LEVEL_MAX }, (_, index) => `<i${index < lv ? ' class="filled"' : ''}></i>`).join('')}</span>
+      </article>`;
+    }).join('');
+    const hasEgg = B.data.stash.some(s => s.card.id === B.PET_EGG_ID);
+    return `
+      <section class="hub-card pet-sec warehouse-panel">
+        <header class="warehouse-heading"><div><h3>远征伙伴</h3><p class="base-line">已相遇 <b>${owned.length}</b> / ${B.PETS.length} 只 · 每次携带 1 只</p></div><button type="button" class="mini-btn" data-act="hubTab" data-tab="upgrade">[[icon:bread]] 培养伙伴</button></header>
+        <div class="stash-list camp-pet-list">${rows}</div>
+        <div class="pet-sec-head">
+          <div class="camp-pet-hatch"><h4>${lockedN > 0 ? `还有 ${lockedN} 位伙伴等待相遇` : '伙伴图鉴已集齐'}</h4><p>宠物蛋 + ${B.HATCH_COST} 储备币，随机孵化一只尚未拥有的伙伴。</p>
+          ${hasEgg ? '<button type="button" class="mini-btn ok" data-act="hubStashView" data-view="cards">[[icon:crystal]] 查看仓库中的宠物蛋</button>' : '<span class="dim">宠物蛋可在远征宝箱中获得。</span>'}
+          <details class="pet-help"><summary>获取与培养规则</summary><p class="ov-note">初始伙伴「汪汪狗」自动获得。宠物蛋从宝箱 0.7% 起掉落；每开箱未出 +3%，每赢一场战斗再 +0.2%。用口粮升级伙伴，携带不同伙伴时安全格数量不同。</p></details></div>
+          <img class="pet-egg-art" src="${assetUrl('assets/ui/emblems/pet-egg.png')}" alt="宠物蛋插画" decoding="async" draggable="false" loading="lazy">
+        </div>
+      </section>`;
+  }
+
+  // 仓库看卡·操作台（2026-10-06 二次改版，老板反馈「不要回到旧弹窗、要看得清」）：
+  // 点卡直接开大卡特写，卖出 / 收藏 / 使用 / 孵化全部在特写页脚完成——卡始终是
+  // 大图，没有第二层小卡弹窗。不可回退操作（高价/最后一张/整堆/收藏用掉）改按钮
+  // 就地二次确认（变红 2.6s 内再点才执行），不再跳确认页。动作前按卡名重读仓库
+  // 栈防串位；卖出/取消收藏等只改数量的动作就地刷新页脚，特写不关不闪。
+  function openStashCardView(i) {
+    const B = SDT.Base;
+    const s = B.data.stash[i];
+    if (!s) { hubBridge.renderHub(); return; }
+    const card = s.card;
+    const mat = B.materialInfo ? B.materialInfo(card) : null;
+    const isEgg = card.id === B.PET_EGG_ID;
+    const isPack = card.id === 'tt-econpack';
+    const special = isSpecialCollect(card);
+    const price = (mat || isEgg) ? 0 : SDT.Cards.sellPrice(card);
+
+    // 动作前按卡名重读堆（索引可能因增删移位）；堆没了返回 null（收回特写回仓库）
+    const freshStack = () => {
+      const idx = B.data.stash.findIndex(x => x.card.name === card.name);
+      return idx >= 0 ? B.data.stash[idx] : null;
+    };
+    const closeZoom = () => {
+      const z = document.getElementById('cardZoom');
+      const bd = z ? z.querySelector('.cz-backdrop') : null;
+      if (bd) bd.click();
+    };
+
+    // 页脚 HTML 函数化：动作后重算数量/价格/按钮态，就地替换（特写不重建）
+    const footerHTML = () => {
+      const cur = freshStack();
+      const n = cur ? cur.count : 0;
+      const marked = B.isCollected(card);
+      const convertType = !!card.cls && (card.rarity === '职业' || card.type === '能力卡');
+      const convertible = convertType && !marked;
+      const collectXp = card.type === '能力卡' ? 50 : 10;
+      const btns = [];
+      const blocked = marked && !convertType;   // 收藏保护：取消收藏前禁卖
+      if (isEgg) {
+        const unowned = B.PETS.filter(p => !B.ownedPets().includes(p.id));
+        const poor = B.data.coins < B.HATCH_COST;
+        btns.push(`<button class="ov-btn ok" data-act="stashHatch"${!unowned.length || poor ? ' disabled' : ''}>孵化（-1 蛋 -50 币）</button>`);
+      } else if (isPack) {
+        btns.push('<button class="ov-btn ok" data-act="stashOpenPack">使用（获得 5 张随机卡牌）</button>');
+      } else if (mat) {
+        btns.push(`<button class="ov-btn ok" data-act="stashUseMat">使用 1 张（折入${mat.label} ×${B.materialAmount(card)}）</button>`);
+        if (n > 1) btns.push(`<button class="ov-btn" data-act="stashUseMatAll">全部使用（×${n}）</button>`);
+      } else {
+        if (convertible) {
+          btns.push(`<button class="ov-btn ok" data-act="stashCollectOne">收藏 1 张（+${collectXp} 经验 · 卡牌用掉）</button>`);
+          if (n > 1) btns.push(`<button class="ov-btn" data-act="stashCollectAll">全部收藏（×${n}）</button>`);
+        } else {
+          btns.push(`<button class="ov-btn${marked ? '' : ' ok'}" data-act="stashCollectToggle">${marked ? '取消收藏' : '收藏'}</button>`);
+        }
+        btns.push(`<button class="ov-btn" data-act="stashSellOne"${blocked ? ' disabled' : ''}>卖出 1 张（+${price} 币）</button>`);
+        if (n > 1) btns.push(`<button class="ov-btn" data-act="stashSellAll"${blocked ? ' disabled' : ''}>全部卖出 ×${n}（+${price * n} 币）</button>`);
+      }
+      const saleValue = mat || isEgg || isPack
+        ? '<span class="inspect-unavailable">不可出售</span>'
+        : `<small>收购价</small><strong>${price}<span> 币 / 张</span></strong>`;
+      return `<div class="camp-detail camp-card-actions"><div class="inspect-meta"><div class="inspect-price">${saleValue}</div><span class="inspect-count">仓库 ${n} 张</span></div><div class="ov-btns">${btns.join('')}</div></div>`;
+    };
+    const refreshZoom = () => {
+      const zoom = document.getElementById('cardZoom');
+      if (!zoom) return;
+      if (!freshStack()) { closeZoom(); return; }
+      const foot = zoom.querySelector('.cz-foot');
+      if (foot) foot.innerHTML = footerHTML();
+    };
+
+    // 就地二次确认：首点变红「确认？」，2.6s 内再点才执行（页脚刷新会自然解除）
+    const armOrRun = (act, run) => {
+      const btn = document.querySelector(`#cardZoom .cz-foot [data-act="${act}"]`);
+      if (!btn) return;
+      if (btn.dataset.arm === '1') { run(); return; }
+      btn.dataset.arm = '1';
+      btn.dataset.armLabel = btn.textContent;
+      btn.textContent = '确认？';
+      btn.classList.add('danger');
+      setTimeout(() => {
+        if (!btn.isConnected || btn.dataset.arm !== '1') return;
+        delete btn.dataset.arm;
+        btn.textContent = btn.dataset.armLabel;
+        btn.classList.remove('danger');
+      }, 2600);
+    };
+    const needConfirmSell = () => {
+      const cur = freshStack();
+      return !cur || price >= 5 || cur.count <= 1;
+    };
+
+    // —— 卖出（数量口径与旧管理弹窗一致：高价/最后一张需确认；整堆一律确认）——
+    const sell = (all) => {
+      const cur = freshStack();
+      if (!cur) { closeZoom(); return; }
+      const r = B.sellStashCards(card.name, all ? cur.count : 1);
+      if (r.ok) { Sfx.ding(); UI.log(r.msg, 'coin'); }
+      // A6-STASH-02：失败（如存档写满）必须给提示，否则特写关了但卡未减、币未到账
+      else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');
+      hubBridge.renderHub();
+      refreshZoom();   // 堆卖空时内部会收回特写
+    };
+    UI.act('stashSellOne', () => {
+      if (needConfirmSell()) { armOrRun('stashSellOne', () => sell(false)); return; }
+      sell(false);
+    });
+    UI.act('stashSellAll', () => { armOrRun('stashSellAll', () => sell(true)); });
+
+    // —— 收藏（普通卡只记录不消耗；职业卡/能力卡收藏即用掉，2026-09-16 Item 15 定版）——
+    UI.act('stashCollectToggle', () => {
+      const cur = freshStack();
+      if (!cur) { closeZoom(); return; }
+      const now = B.collectToggle(card);
+      if (now === null) { UI.log('基地存档未保存，收藏状态未改变', 'warn'); return; }
+      Sfx.ding();
+      // 经验结算必须最先：checkUnlocks → syncCollXp 会把已收藏的职业卡回填为
+      // 「已结算」，若先于 onCollect 执行，首次收藏的 +10 就被吃掉了
+      SDT.Meta.onCollect(card, now);
+      // 2026-09-10 留言 #39 定版：收藏只记录 + 转化经验，卡牌保留在仓库
+      UI.log(now
+        ? `[[icon:sparkles]] 已收藏【<b>${esc(card.name)}</b>】入职业收藏室，转化为人物熟练度经验（卡牌保留在仓库）${special ? '（特殊收藏品）' : ''}`
+        : `[[icon:sparkles]] 已取消收藏【<b>${esc(card.name)}</b>】`, now ? 'loot' : 'dim');
+      SDT.Meta.checkUnlocks();
+      hubBridge.renderHub();
+      refreshZoom();
+    });
+    const convertStash = async (n, logText) => {
+      const cur = freshStack();
+      if (!cur) { closeZoom(); return; }
+      const first = !B.isCollected(card);
+      const read = readBase(B.slot);
+      if (!read.ok) { UI.log(homeErrorMessage(read), 'warn'); return; }
+      const result = await convertCollection({ slotId: B.slot, requestId: homeRequestId('stash-collect'), expectedRevision: read.revision }, { stackKey: stackKeyOf(cur), count: n });
+      if (!result.ok) { UI.log(result.message || '收藏失败，卡牌未消耗', 'warn'); refreshZoom(); return; }
+      Sfx.ding();
+      UI.log(logText(first), 'loot');
+      hubBridge.renderHub();
+      refreshZoom();
+    };
+    UI.act('stashCollectOne', () => {
+      armOrRun('stashCollectOne', () => convertStash(1, first =>
+        `[[icon:medal]] 已收藏【<b>${esc(card.name)}</b>】并转化为人物经验（卡牌用掉，不再占格${first ? '，收藏进度 +1' : ''}）`));
+    });
+    UI.act('stashCollectAll', () => {
+      armOrRun('stashCollectAll', () => {
+        const cur = freshStack();
+        const n = cur ? cur.count : 0;
+        convertStash(n, () => `[[icon:medal]] 已收藏【<b>${esc(card.name)}</b>】×${n}，全部转化为人物经验（卡牌用掉）`);
+      });
+    });
+
+    // —— 材料使用（不可卖出，2026-09-08 定版；最后一张/整堆需确认）——
+    const useMat = (all) => {
+      const cur = freshStack();
+      if (!cur) { closeZoom(); return; }
+      const r = B.useStashMaterial(card.name, all);
+      if (r.ok) { Sfx.ding(); UI.log(r.msg, 'loot'); }
+      else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');
+      hubBridge.renderHub();
+      refreshZoom();
+    };
+    UI.act('stashUseMat', () => {
+      const cur = freshStack();
+      if (cur && cur.count === 1) { armOrRun('stashUseMat', () => useMat(false)); return; }
+      useMat(false);
+    });
+    UI.act('stashUseMatAll', () => { armOrRun('stashUseMatAll', () => useMat(true)); });
+
+    // —— 宠物蛋孵化（消耗 1 蛋 + 50 币，随机未拥有宠物）——
+    UI.act('stashHatch', () => {
+      const cur = freshStack();
+      if (!cur) { closeZoom(); return; }
+      const r = B.hatchPet();
+      if (r.ok) {
+        Sfx.ding();
+        UI.log(`[[icon:paw]] 孵化成功！获得宠物<b>「${esc(r.pet.name)}」</b>——${esc(r.pet.desc)}（可在仓库页携带 / 升级页升级）`, 'loot');
+        SDT.Meta.checkUnlocks();
+      } else if (r.why === 'poor') UI.log('[[icon:coin]] 储备币不足 50，无法孵化（卖出仓库卡牌攒币）', 'warn');
+      else if (r.why === 'all') UI.log('[[icon:paw]] 已经集齐全部宠物了', 'dim');
+      else if (r.why === 'save') UI.log('基地存档未保存，宠物蛋与储备币均未消耗', 'warn');
+      else UI.log('[[icon:crystal]] 仓库里没有宠物蛋了', 'warn');
+      hubBridge.renderHub();
+      if (r.ok) closeZoom();
+      else refreshZoom();
+    });
+
+    // —— 经济卡包使用（2026-09-09 审计补实装）：获得 5 张随机卡牌，必须入卡牌仓库——
+    // 局外没有对局，塞进对局背包（game.ownedCards）会在下次开局被清空（2026-09-19 审计 P1-4）
+    const openPack = () => {
+      const cur = freshStack();
+      if (!cur) { closeZoom(); return; }
+      if (B.stashRoom() < 5) { UI.log(`[[icon:archive]] 仓库空位不足 5 格（现 ${B.stashRoom()}）——先卖出或扩建仓库再拆包`, 'warn'); return; }
+      const pool = SDT.Cards.all().filter(c => SDT.Cards.isRandomObtainable(c));
+      if (!pool.length) { UI.log('[[icon:cards]] 卡牌库是空的，没有可获得的卡牌', 'warn'); return; }
+      const cards = [];
+      for (let k = 0; k < 5; k++) {
+        cards.push({ card: { ...pool[Math.floor(Random.random('loot') * pool.length)] }, count: 1 });
+      }
+      const result = B.openCardPack(card.id, cards);
+      if (!result.ok) { UI.log(result.msg || '卡包已变化，请重新打开仓库', 'warn'); return; }
+      UI.log('[[icon:cards]] <b>经济卡包</b>：拆开获得 5 张随机卡牌（入卡牌仓库）', 'loot');
+      hubBridge.renderHub();
+      refreshZoom();
+    };
+    UI.act('stashOpenPack', () => {
+      const cur = freshStack();
+      if (cur && cur.count === 1) { armOrRun('stashOpenPack', openPack); return; }
+      openPack();
+    });
+
+    UI.showCardZoom(card, { footer: footerHTML() });
+  }
+  // 基地物资（木材/口粮）：材料不可卖出换币（2026-09-08 定版）——只作展示说明
+  function openRawItem(kind) {
+    const B = SDT.Base;
+    const item = kind === 'wood' ? MAP.items.wood : MAP.items.rations;
+    const have = B.data[kind];
+    game.state = 'modal';
+    _set_cardPageOpen(false);   // 弹窗层级：只能通过按钮返回仓库
+    UI.showOverlay(`[[icon:archive]] ${item.name}`, `
+      <div class="ov-shell stash-shell camp-detail" data-index="04">
+      <span class="camp-upgrade-glyph">[[icon:${kind === 'wood' ? 'wood' : 'bread'}]]</span>
+      <div class="camp-detail-copy"><small>BASE / MATERIAL</small><p class="ov-stats">储备 <b>${have}</b> 个</p>
+      <p class="ov-note">${kind === 'wood' ? '用于扩建背包与仓库容量。' : '用于培养宠物，提升安全格容量。'}<br>基地建设物资不可卖出换币。</p></div>
+      <div class="ov-btns"><button type="button" class="ov-btn" data-act="stashBack2">[[icon:archive]] 返回仓库</button></div>
+      </div><!-- /.stash-shell -->`);
+    UI.act('stashBack2', () => hubBridge.renderHub());
+  }
+
+  // —— 升级页：背包扩建 + 仓库扩建 + 宠物升级（保险升级改为宠物升级，需求 #2/#14）——
+  function hubUpgradeHTML() { return facilitiesHTML(); }
+
+  function hubClassesHTML(view = 'wu') { return personnelHTML(view, collRoomHTML); }
+
+  // —— 职业收藏室（2026-09-09：成就系统 → 成就与职业收藏室系统）——
+  // 仓库中收藏的职业卡与能力卡陈列于此；进度只计不同的职业卡 + 能力卡，
+  // 达成 5/15/30/45/全收集里程碑可各领一次奖励（见 meta.js COLL_MILESTONES）。
+  function collRoomHTML() {
+    const M = SDT.Meta, B = SDT.Base;
+    const total = M.collTotal();
+    const prog = M.collProgress();
+    const pct = total ? Math.min(100, prog / total * 100) : 0;
+    const msRows = M.COLL_MILESTONES.map(m => {
+      const need = M.collMsNeed(m);
+      const reached = M.collMsReached(m);
+      const claimed = M.isCollClaimed(m.id);
+      return `<div class="coll-ms${claimed ? ' done' : reached ? ' reach' : ''}">
+        <b>收藏 ${need} 张</b>
+        <span class="rw">${M.collRewardText(m)}</span>
+        ${claimed ? '<span class="got">[[icon:check]] 已领取</span>'
+          : reached ? `<button type="button" class="mini-btn ok" data-act="claimColl" data-id="${m.id}" aria-label="领取收藏${need}张的阶段奖励">领取奖励</button>`
+          : `<span class="dim">${prog} / ${need}</span>`}
+      </div>`;
+    }).join('');
+    // 收藏池只取一次（此前每个职业重算一遍 collectPool）
+    const poolAll = M.collectPool();
+    const groups = SDT.Cards.CLASSES.map((cls, index) => {
+      const pool = poolAll.filter(c => c.cls === cls);
+      const gotN = pool.filter(c => B.isCollected(c)).length;
+      const accent = characterFor(cls)?.color || '#d9bb82';
+      const slots = pool.map(c => B.isCollected(c)
+        ? `<button type="button" class="coll-slot on" data-act="collZoom" data-id="${escAttr(c.id)}"
+             aria-label="查看已收藏的${escAttr(c.name)}" title="${escAttr(c.name)} · 已收藏">${SDT.Cards.cardHTML(c, 'sm')}</button>`
+        : `<div class="coll-slot off" title="${escAttr(c.name)} · 尚未收藏"><span>[[icon:lock]]</span><b class="camp-uncollected-name">${esc(c.name)}</b><small>${esc(c.type === '能力卡' ? '能力卡' : '职业卡')}</small></div>`).join('');
+      return `<details class="coll-group camp-coll-group" style="--role-accent:${escAttr(accent)}"${index === 0 ? ' open' : ''}>
+        <summary class="coll-group-head">
+          <span class="coll-group-identity"><b>${esc(characterName(cls))}</b><small>${esc(cls)}</small></span>
+          <span class="dim">查看收藏</span>
+          <strong class="coll-group-count">${gotN}<small> / ${pool.length} 张</small></strong>
+        </summary>
+        <div class="coll-cards">${slots}</div>
+      </details>`;
+    }).join('');
+    return `
+      <section class="hub-card coll-room">
+        <header class="warehouse-heading"><div><h3>人物收藏</h3><p class="base-line">已归档 <b>${prog}</b> / ${total} 张</p></div><button type="button" class="mini-btn" data-act="hubTab" data-tab="stash" data-view="cards">[[icon:archive]] 前往仓库收藏</button></header>
+        <p class="ov-note">收藏会消耗卡牌并转为人物经验：职业卡 <b>+10</b>，能力卡 <b>+50</b>。重复收藏仍获得经验，首次收藏推进图鉴与阶段奖励。</p>
+        <div class="base-bar"><i style="width:${pct.toFixed(1)}%"></i></div>
+        <div class="coll-ms-list">${msRows}</div>
+        ${groups}
+      </section>`;
+  }
+
+  // —— 成就页 ——（2026-09-09：升级为「成就与职业收藏室」——卡背图鉴 + 成就 + 职业收藏室）
+  function hubAchHTML(hubCollectionView) {
+    const M = SDT.Meta, B = SDT.Base;
+    const doneN = M.ACHIEVEMENTS.filter(a => M.isUnlocked(a)).length;
+    // 奖励卡 id→卡索引一次建表（此前每个带卡奖励的成就都全库线性扫一遍）
+    const cardById = new Map(SDT.Cards.all().map(c => [c.id, c]));
+    const rank = a => M.isClaimed(a.id) ? 2 : M.isUnlocked(a) ? 0 : 1;
+    const rows = [...M.ACHIEVEMENTS].sort((a, b) => rank(a) - rank(b)).map(a => {
+      const unlocked = M.isUnlocked(a), claimed = M.isClaimed(a.id);
+      let rw = [
+        a.reward.wood ? `[[icon:wood]] ×${a.reward.wood}` : '',
+        a.reward.rations ? `[[icon:bread]] ×${a.reward.rations}` : '',
+        a.reward.keys ? `[[icon:key]] ×${a.reward.keys}` : '',
+        a.reward.card ? `[[icon:cards]] ${(cardById.get(a.reward.card) || {}).name || '稀有卡牌'}` : '',
+      ].filter(Boolean).join(' ');
+      if (a.back) {
+        const bd = (SDT.Cards.CARD_BACKS || []).find(b => b.id === a.back);
+        if (bd) rw += (rw ? ' ' : '') + `[[icon:cards]] ${bd.name}`;
+      }
+      return `
+      <article class="ach-row${unlocked ? ' done' : ''}${unlocked && !claimed ? ' claimable' : ''}" data-status="${claimed ? 'done' : unlocked ? 'claimable' : 'progress'}">
+        <div class="ach-ico">${a.icon}</div>
+        <div class="ach-info"><b>${esc(a.name)}</b><span>${esc(a.desc)}</span><small class="rw">${rw || '成就纪念'}</small></div>
+        <div class="ach-ops">${
+          claimed ? '<span class="got">[[icon:check]] 已领取</span>'
+          : unlocked ? `<button type="button" class="mini-btn ok" data-act="claimAch" data-id="${a.id}" aria-label="领取${escAttr(a.name)}成就奖励">领取奖励</button>`
+          : '<span class="dim">[[icon:lock]] 待完成</span>'
+        }</div>
+      </article>`;
+    }).join('');
+    // 卡背图鉴：默认卡背恒可用，其余随成就领取解锁（每档存档独立）
+    const backsHTML = cardBackGalleryHTML(B, SDT.Cards);
+    const collTotal = M.collTotal();
+    const collProgress = M.collProgress();
+    const unlockedBacks = (SDT.Cards.CARD_BACKS || []).filter(b => B.isBackUnlocked(b.id)).length;
+    const storyCheck = validateLastLampState(B.data.story);
+    const storyState = storyCheck.ok ? storyCheck.value : null;
+    // 09-25 A 组：见闻纪念收成一行「档案条」，并入收藏档案室标题卡（不再单独占一整块）
+    const storyStrip = !storyCheck.ok
+      ? `<div class="story-strip"><span class="ss-tag">[[icon:notes]] 见闻纪念</span>故事记录无法读取，原数据已保留。</div>`
+      : storyState.stage < 3
+        ? `<div class="story-strip"><span class="ss-tag">[[icon:notes]] 见闻纪念 · ${storyState.stage}/3</span>${storyState.stage ? '《最后一盏引路灯》的线索已记入档案，等待下一次探索。' : '尚未记录环境故事——撤离途中会有机会记下。'}不影响地图与战力。</div>`
+        : storyState.ending === 'open_beacon'
+          ? `<div class="story-strip"><span class="ss-tag">[[icon:notes]] 见闻纪念 · 北门远灯</span>你让灯光越过风雪，公共疏散线也随之暴露。</div>`
+          : `<div class="story-strip"><span class="ss-tag">[[icon:notes]] 见闻纪念 · 遮光近照</span>你让窄光留在墙边，近路仍隐蔽，远处却看不见出口。</div>`;
+    const achBody = `${achievementFiltersHTML(M)}<div class="ach-list">${rows}</div>`;
+    const content = hubCollectionView === 'achievements'
+      ? `<section class="hub-card collection-panel"><h3>[[icon:trophy]] 成就记录 <span class="set-tip">${doneN} / ${M.ACHIEVEMENTS.length} 已解锁</span></h3>${achBody}</section>`
+      : hubCollectionView === 'classes'
+        ? collRoomHTML()
+        : hubCollectionView === 'stories' ? `<section class="hub-card collection-panel story-archive"><h3>见闻纪念</h3>${storyStrip}</section>`
+        : `<section class="hub-card collection-panel"><h3>[[icon:cards]] 卡背图鉴 <span class="set-tip">${unlockedBacks} / ${(SDT.Cards.CARD_BACKS || []).length} 已解锁</span></h3>${backsHTML}</section>`;
+    return `
+      ${sectionHead('06 / ARCHIVE', '档案室')}
+      <p class="camp-collection-summary">卡背 <b>${unlockedBacks}/${(SDT.Cards.CARD_BACKS || []).length}</b><span>·</span>成就 <b>${doneN}/${M.ACHIEVEMENTS.length}</b><span>·</span>人物收藏 <b>${collProgress}/${collTotal}</b></p>
+      <nav class="collection-tabs" aria-label="收藏分类">
+        <button type="button" class="${hubCollectionView === 'backs' ? 'on' : ''}" data-act="hubCollectionView" data-view="backs" aria-pressed="${hubCollectionView === 'backs'}">[[icon:cards]] 卡背图鉴</button>
+        <button type="button" class="${hubCollectionView === 'achievements' ? 'on' : ''}" data-act="hubCollectionView" data-view="achievements" aria-pressed="${hubCollectionView === 'achievements'}">[[icon:trophy]] 成就记录</button>
+        <button type="button" class="${hubCollectionView === 'stories' ? 'on' : ''}" data-act="hubCollectionView" data-view="stories" aria-pressed="${hubCollectionView === 'stories'}">[[icon:notes]] 见闻纪念</button>
+      </nav>
+      ${content}`;
+  }
+
+export { hubShopHTML, hubStashHTML, openStashCardView, openRawItem, hubUpgradeHTML, hubClassesHTML, hubAchHTML, HUB_SHOP_GOODS, hubShopGoodsCard };

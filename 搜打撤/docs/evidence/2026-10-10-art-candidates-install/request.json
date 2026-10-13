@@ -1,0 +1,121 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-element-seal",
+      "asset": "cards/equip-tt3-element-seal.webp",
+      "source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\element-seal-redraw-20261010\\element-seal.png",
+      "revision": "element-seal-redraw-20261010",
+      "prompt": "Use case: style-transfer. Redraw the supplied original Elemental Sigil card illustration in rough hand-painted anime concept-art style. The reference is the composition target. Preserve its square canvas, camera, central placement and generous dark-purple negative space: a pale warm gold diamond-shaped flat sigil occupies the middle lower region (left edge around 34%, right edge 67%, top vertex 33%, bottom vertex 64%). Preserve the two orange-red and icy pale-cyan flame streams rising from its left and right upper sides; the right flame reaches higher, and the small dark round cores remain in the same places. Keep the original diamond silhouette, proportions, layered flame overlap and upward directions. No characters, added props or new symbols. Repaint the gold surface into a few coherent large matte planes with clear warm/cool shadow grouping. Flames use a few bold connected opaque curved swipes and blunt broken tips; cyan inner flame and red-orange outer flame remain legible. Large connected opaque color masses, broad directional brush marks and handmade hard edges, selective structural accents, quiet interiors. Muted base colors with concentrated flame accents. Avoid tiny shard mosaics, fine scratch texture, grain filters, glossy 3D and airbrushed gradients. Background remains one quiet deep violet field. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-05-WF-eight-items-rough/originals-before-repaint/full-equip-tt3-element-seal.webp"
+      ],
+      "candidate_sha256": "0ef91b1b9e1719702437c2100870ebef66d80c04742c9f93116a6dff5b76f6b7",
+      "origin_request": "docs/evidence/2026-10-10-element-seal-redraw/request.json"
+    },
+    {
+      "card_id": "tt12-felguard",
+      "asset": "cards/spell-tt12-felguard.webp",
+      "source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\fel-bats-redraw-20261010\\felguard.png",
+      "revision": "felguard-redraw-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, Fel Protection game spell card. Image 1 is the composition target and character identity; images 2-4 are painting-style references only, do not copy their identities or costumes. Preserve landscape 4:3 composition: front-facing dark hooded mage at center, face concealed beneath the hood, lower robe cropped by bottom edge, raised open gloved hand on image right. A large broad purple-black magical shield covers the torso with the original coarse connected triangular relief planes; preserve its overall shield silhouette and a few large angular volumes rather than creating a mosaic of tiny facets. Two red-pink energy rays attack from the left and right edges and stop at the shield. Preserve dark chains extending to both sides with pointed hook ends, and three pale floating paper sheets around the shield, against a plain muted gray-green field. Retain the subject positions, relative sizes, and quiet backdrop. Clarify the interaction where rays meet the shield with small concentrated pink accents and darker purple shield planes, do not add explosions or extra characters. Hood and robe painted as broad substantial dark cloth masses, a few directional folds, readable raised hand. Rough hand-painted anime color study, large connected opaque masses, wide directional swipes, blunt dabs, matte muted colors, decisive handmade edges, selective unfinished marks and quiet areas. Shield is the large focal prop, background and secondary chains economical. No glossy rendering, airbrushed bloom, dense engraving, dense wrinkles, all-over texture filters, tiny facet noise, text, watermark, UI or frame.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt12-felguard.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "candidate_sha256": "1f15b756c502f8eb45a7937e5b82f0d1072608c72c32a31a0e5ebad00a161896",
+      "origin_request": "docs/evidence/2026-10-10-fel-bats-redraw/request.json"
+    },
+    {
+      "card_id": "tt3sp-bloodstorm",
+      "asset": "cards/spell-tt3sp-bloodstorm.webp",
+      "source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\fel-bats-redraw-20261010\\bloodstorm.png",
+      "revision": "bloodstorm-redraw-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, Blood Bat Storm spell game card. Image 1 determines original composition and subject; images 2-4 are brush-style references only, do not copy their people or costumes. Preserve square frame and a single centered scarlet bat swarm vortex, broad round open funnel at the top, tapering through a spiraling cone to a thin downward point near the bottom. Preserve its scale, position and dark near-black burgundy plain backdrop with ample negative space. The vortex is made of bats, NOT a thorn bush or cloud of shards: show several clear larger bat silhouettes at the top rim and outer edges with paired membranous wings and tiny bodies, their wings curling with the collective spiral; the majority of the swarm merges into large connected crimson and dark wine-red curved bands. Use strong dark/light separation to explain the hollow top opening and the tightening rotating funnel. Do not individually outline hundreds of tiny bats. Bright scarlet focal accents concentrated at the upper opening and a few forward wing planes, quieter deep-red shadow bands below; no people, ground or scenery. Rough hand-painted anime color study, large connected opaque masses, a few broad curved directional swipes and blunt dabs, decisive handmade edges, grouped shadows, matte colors, selective unfinished marks with quiet regions. No fine tangled line networks, dense micro-detail, faceted shard mosaics, glossy 3D, airbrushed glow or all-over grain filters. No text, frame, UI or watermark.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt3sp-bloodstorm.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "candidate_sha256": "22de87dc645b5acd20579bce17d56f764cdd60ac5a6f5ee21dceaf6eebfa73e0",
+      "origin_request": "docs/evidence/2026-10-10-fel-bats-redraw/request.json"
+    },
+    {
+      "card_id": "cc-cursed-blade",
+      "asset": "cards/martial-cc-cursed-blade.webp",
+      "source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cursed-blade-redraw-20261010\\cursed-blade.png",
+      "revision": "cursed-blade-redraw-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, Cursed Blade game card illustration. Image 1 defines the original composition and object; images 2-4 are painting-style references only, do not copy their people or clothing. Preserve the landscape 4:3 frame and centrally placed black sword pointing straight down, planted in a cracked ground impact point near the bottom center. The grip rises above its thorn-shaped crossguard and is cropped at the top edge. Preserve the short broken chains hanging from each end of the horizontal guard, long dark blade, vivid violet rune line down the blade's center, and several broad twisting dark-purple wisps wrapping around it. Keep the relative sword scale, head-on camera, ground perspective, dark blue-teal background vertical silhouettes and tiny muted green light on the left. Make the blade's main black and slate-teal planes clearly readable; purple runes are a few small crisp geometric accents. Strongest local contrast at the planted tip and nearby cracked ground, with broad pale lavender ground planes and several dark directional fractures converging on the tip. Simplify background into a few quiet dark upright masses, violet atmosphere into broad matte purple shapes rather than glossy bloom; do not invent detailed scenery. No people, extra weapons or extra ornaments. Rough hand-painted anime color study: large connected opaque color masses, a few wide directional swipes and blunt dabs, confident handmade edges, selective incomplete brush endings, strong grouped shadows and quiet areas. Secondary chains and hilt need only enough structural marks to read. No dense engraving, fine scratch networks, all-over grain filters, glossy 3D, commercial airbrush polish or facet mosaics. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-cc-cursed-blade.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "candidate_sha256": "c2faeb3a9fb7372ea64588e77b7bd1419f06c226ec0ce9009ca3c4cec8f349fd",
+      "origin_request": "docs/evidence/2026-10-10-cursed-blade-redraw/request.json"
+    },
+    {
+      "card_id": "tt3-wolf-bow",
+      "asset": "cards/equip-tt3-wolf-bow.webp",
+      "source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\equip-redraw-20261010\\wolf-bow.png",
+      "revision": "wolf-bow-redraw-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, Tianlang longbow game equipment card. Image 1 defines the object and original landscape composition; images 2-4 define brushwork only, do not copy their people or clothes. Preserve the unusual horizontal blue-silver bow spanning almost the full image width, its slightly curved symmetrical limbs with dark blue pointed tips, central sculpted wolf-head grip, thin cyan horizontal bowstring above the limbs, and long narrow vertical central ornament with a wolf-head motif at the upper and lower end. Keep this object orientation and silhouette, no arrows or humans. Make the bow's construction and wolf-shaped central detail readable through a few bold planes rather than pale fine linework. Use cool gray silver and dark slate-blue masses with restrained cyan accents; backdrop a simple pale muted ice-blue field. Rough hand-painted anime illustration, large connected opaque color masses, a few broad directional swipes and blunt dabs, decisive handmade edges and selective unfinished marks. Group light and shadow clearly, matte muted colors with concentrated accents. Readable main structure, economical secondary marks, quiet areas. No fine etched decoration, dense folds, facet mosaics, glossy 3D, airbrush finish, all-over grain or texture filters. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt3-wolf-bow.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "candidate_sha256": "802cc5039d2b5493b011ce3853e846dc3162b25773b249714892e6c3e527c60d",
+      "origin_request": "docs/evidence/2026-10-10-equip-redraw/request.json"
+    },
+    {
+      "card_id": "tt3-holy-staff",
+      "asset": "cards/equip-tt3-holy-staff.webp",
+      "source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\equip-redraw-20261010\\holy-staff.png",
+      "revision": "holy-staff-redraw-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, Holy Staff game equipment card. Image 1 is the composition and object target; images 2-4 are painting grammar references only, no copying people. Preserve the square canvas and full-length upright centered staff: long slender pale icy-white shaft, small gold end fittings, large gold sun-disc head in the upper part with a circular halo ring and long pointed cardinal rays plus shorter diagonal rays. Keep the head-to-shaft ratio and ample space on both sides, no person or extra objects. Build a readable sacred sun emblem using broad warm ochre shadows, pale gold light planes and sparse decisive structural edges. Shaft uses a few pale blue-gray planes and restrained warm fittings. Repaint the flat original with strong grouped shadows and handmade broad opaque strokes. Background a quiet flat muted warm cream field; no dense background brush texture. Rough hand-painted anime illustration, large connected opaque color masses, a few broad directional swipes and blunt dabs, decisive handmade edges and selective unfinished marks. Group light and shadow clearly, matte muted colors with concentrated accents. Readable main structure, economical secondary marks, quiet areas. No fine etched decoration, dense folds, facet mosaics, glossy 3D, airbrush finish, all-over grain or texture filters. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt3-holy-staff.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "candidate_sha256": "e3eccb3b93942cd9b567f4e4a59cd1fe38e05645dfa2786afab422d747474d2f",
+      "origin_request": "docs/evidence/2026-10-10-equip-redraw/request.json"
+    },
+    {
+      "card_id": "tt3-crimson-pouch",
+      "asset": "cards/equip-tt3-crimson-pouch.webp",
+      "source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\equip-redraw-20261010\\crimson-pouch.png",
+      "revision": "crimson-pouch-redraw-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, Crimson Silk Pouch equipment game card. Image 1 defines the subject and square composition; images 2-4 are brushwork references only, not their characters or clothing. Preserve the centered hanging crimson silk pouch, black thin suspension cords entering from the top, flared irregular open mouth in the upper-middle, narrow cinched neck with dark braided drawstring, rounded broad pouch body below and two thin dangling cord ends below its base. Keep the original scale and placement against a plain deep muted burgundy field, no characters, text or extra props. Focus on a tangible cloth volume made of a handful of large curved opaque crimson planes, darker wine-red grouped side shadows, a few broad directional folds from the cinch. The open mouth has a restrained pale coral-pink inner light painted as a broad simple color mass, not a glossy bloom. Preserve the black cord contrast. A few economical edge and seam accents only. Background remains flat and quiet. Rough hand-painted anime illustration, large connected opaque color masses, a few broad directional swipes and blunt dabs, decisive handmade edges and selective unfinished marks. Group light and shadow clearly, matte muted colors with concentrated accents. Readable main structure, economical secondary marks, quiet areas. No fine etched decoration, dense folds, facet mosaics, glossy 3D, airbrush finish, all-over grain or texture filters. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt3-crimson-pouch.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "candidate_sha256": "d04e74757365d71c9fcd40685af4241197e00489fdb93625b861dd7f6e1f2082",
+      "origin_request": "docs/evidence/2026-10-10-equip-redraw/request.json"
+    },
+    {
+      "card_id": "tt12-sporewall",
+      "asset": "cards/spell-tt12-sporewall.webp",
+      "source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\sporewall-redraw-20261010\\sporewall-redraw.png",
+      "revision": "sporewall-redraw-20261010",
+      "prompt": "Use case: style-transfer. Redraw the spore wall card illustration in image 1, keeping its original landscape composition and aspect ratio. Image 1 is the composition target; images 2,3,4 are painting-style references only, do not copy their characters or costumes. Preserve the low-angle view, the enormous pale mint mushroom column slightly right of center with its broad cap near the top, staggered smaller mushroom columns forming a wall to its left and right, tangled brown root-like bases along the bottom. Keep the tiny dark-clothed human in the lower center-left, leaning right with a raised hand, and the concentrated cloud of vivid green spores just above and around that gesture. Preserve relative sizes, overlapping silhouettes, camera position and the muted gray-purple solid backdrop with open space around the mushroom silhouette. Do not add architecture or extra characters. Repaint as a rough hand-painted anime color study: large connected opaque masses, a few wide directional swipes and blunt dabs, confident handmade edges and selective unfinished areas. Simplify mushroom gills into several broad directional marks and roots into major interlocking dark/light shapes. Clearly grouped cool mint illuminated faces and gray teal shadows, dark brown roots, green spores as the concentrated bright accent. Keep necessary volume without fine scratched line networks, dense surface texture, glossy rendering, airbrushed glow, facet mosaics or grain filters. Human remains small and economical as a scale cue. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt12-sporewall.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "candidate_sha256": "94c51ddd20c6c2a13d37f4b45d7581898d13416e5d0058311cf73749cd3111af",
+      "origin_request": "docs/evidence/2026-10-10-sporewall-redraw/request.json"
+    }
+  ]
+}

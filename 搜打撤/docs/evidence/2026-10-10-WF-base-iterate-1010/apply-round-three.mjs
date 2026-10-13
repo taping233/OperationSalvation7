@@ -1,0 +1,16 @@
+import fs from 'node:fs';
+import { createRequire } from 'node:module';
+import path from 'node:path';
+const require = createRequire(path.join(process.cwd(), 'package.json'));
+const postcss = require('postcss');
+const file='game/css/base-camp-rework.css';
+const prefix='#overlay #hubMain.pg.hub.base-camp';
+const old=postcss.parse(fs.readFileSync(file,'utf8'));
+const next=postcss.parse(fs.readFileSync(new URL('./style-round-three.css',import.meta.url),'utf8'));
+next.walkRules(rule=>{rule.selectors=rule.selectors.map(s=>s==='&'?prefix:`${prefix} ${s}`)});
+const replacements=new Set(); next.walkRules(rule=>replacements.add(rule.selector));
+let removed=0;
+old.walkRules(rule=>{if(replacements.has(rule.selector) || /warehouse-inspector|warehouse-reading|warehouse-actionbar|warehouse-operations|warehouse-confirm|warehouse-detail-art|material-inventory|material-item-art|material-detail-art|material-source|material-grid|person-pool-reader|person-collection/.test(rule.selector)){rule.remove();removed++}});
+old.append(next.nodes);
+fs.writeFileSync(file,old.toString()+'\n');
+console.log(JSON.stringify({removed,bytes:Buffer.byteLength(old.toString())}));

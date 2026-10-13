@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-base-ui-reference-1010",
+  "date": "2026-10-10",
+  "owner": "Friday（Codex 二游参考基地整改）",
+  "goal": "按独立审核与真实二游参考实施基地六页排版、美术层级、阅读操作和可中断动效，待老板实页验收",
+  "paths": [
+    "game/src/hub/hub.personnel.js",
+    "game/src/hub/hub.warehouse.js",
+    "game/src/hub/hub.facilities.js",
+    "game/src/hub/hub.archive.js",
+    "game/src/hub/hub.presentation.js",
+    "game/src/hub/game.hub.pages.js",
+    "game/src/hub/game.hub.depart.js",
+    "game/css/base-camp-rework.css",
+    "game/src/hub/hub.visuals.js",
+    "docs/evidence/2026-10-10-WF-base-ui-reference-1010"
+  ],
+  "doneWhen": [
+    "六页均实施报告主要修正，既有交易数值与存档命令不变",
+    "当前样式直接修改不堆退役覆盖，改动及未验收边界记录完整"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "六页呈现及局部浏览逻辑实施完成；当前样式直接重整，新增原生矢量徽章；未执行验收测试",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "改动记录、九个来源指纹和原字节基线已保存；特写编辑按当前区域原字节保护，玩法数值及存档命令未改",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "按老板此前不测试约定，未跑测试/lint/类型/build/浏览器/多尺寸；所有当前画面、动画、交互和性能实际效果待老板验收",
+    "资源充足/满仓/满级/归档成功/奖励领取/孵化/非空复原/故事阅读异步回填/快速连切与减少动态效果等未做实页操作；旧测试与旧截图不覆盖本次"
+  ],
+  "updatedAt": "2026-10-10T11:28:24.970Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

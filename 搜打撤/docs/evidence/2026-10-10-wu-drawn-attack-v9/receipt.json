@@ -1,0 +1,13 @@
+{
+  "version": "v9",
+  "status": "candidate-unreviewed",
+  "method": "built-in imagegen; one six-pose sheet plus local weapon edit",
+  "path": "game/art-source/characters/wu-slim-sprites-20261010/drawn-attack-v9/attack-keyframes.png",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1243b-1e89-7443-8aca-d1d95c3ab781\\exec-39dfe4b0-945d-4121-8744-62ba3ca72eb4.png",
+  "bytes": 2079674,
+  "sha256": "767BFDEA57C156A020686A550C58073D6B6D36AFBEA46C9E2A19E5A6DB22F477",
+  "acquisition": "copied unchanged from native imagegen output",
+  "integration": "none",
+  "tests": "not run per user instruction",
+  "limitation": "Gray vignette remains visible in generated output despite transparency request; no consistency acceptance claimed"
+}

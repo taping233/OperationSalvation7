@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-life-arrow",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12470-95d7-75e0-9477-03361e04258c\\exec-f01b0940-ac34-47f7-b607-b378ba403d77.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-life-arrow/cards-martial-tt3-life-arrow-source.png",
+        "bytes": 1463298,
+        "sha256": "3d9525e0241c435dd67090c68be901cffb48722d70a0bf879601e73e27dd7ef6"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-life-arrow/cards-martial-tt3-life-arrow-full-before.webp",
+          "bytes": 138094,
+          "sha256": "2b9f8d40268853ab01f1d56f584f4fc8c9fb87363e7812116f8ef242e815802b"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-life-arrow/cards-martial-tt3-life-arrow-thumb-before.webp",
+          "bytes": 22318,
+          "sha256": "8ae02a65fd850268a8228735ee6630cdd762d9e21e8427dd1414bab8b983c265"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-life-arrow.webp",
+          "bytes": 32032,
+          "sha256": "c4844dc60f3eea78fc7ccca7a66c4685aab90f881ac9ade97696923675c99bc5",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-life-arrow.webp",
+          "bytes": 5192,
+          "sha256": "936d65ae121774201ab79d4de6d70edd348b78dafc227db05fe494633f605fee",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt3-life-arrow-creative-rough-20261005",
+      "revision_after": "life-arrow-new-growth-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt3-life-arrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 138094,
+            "sha256": "2b9f8d40268853ab01f1d56f584f4fc8c9fb87363e7812116f8ef242e815802b",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt3-life-arrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 32032,
+            "sha256": "c4844dc60f3eea78fc7ccca7a66c4685aab90f881ac9ade97696923675c99bc5",
+            "source": "docs/evidence/2026-10-10-life-arrow/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt3-life-arrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 22318,
+            "sha256": "8ae02a65fd850268a8228735ee6630cdd762d9e21e8427dd1414bab8b983c265",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt3-life-arrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 5192,
+            "sha256": "936d65ae121774201ab79d4de6d70edd348b78dafc227db05fe494633f605fee",
+            "source": "docs/evidence/2026-10-10-life-arrow/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 903,
+  "manifest_count_after": 903
+}

@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "card_id": "tt2-swiftarrow",
+      "asset": "cards/martial-tt2-swiftarrow.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12470-95d7-75e0-9477-03361e04258c/exec-522bf49c-f6fe-4b73-b167-ac9090671079.png",
+      "revision": "swiftarrow-v45-wind-rough-20261010",
+      "prompt": "Repaint input 1 as one square finished rough hand-painted anime martial-card illustration, 迅疾箭, conveying speed through a single arrow and two abstract wind strokes.\nInput 1 locks the spare composition: one thin arrow traveling diagonally from bottom left to upper right, generous empty space, two trailing cyan-blue marks, and a solid muted warm gray/taupe background. Preserve that background, layout and quietness. Input 2, blood-arrow card, is a STYLE reference for broad opaque blade planes, coherent silhouette and concentrated focal detail, not its red color or vertical pose.\nCorrect the object into a clearly readable lightweight ARROW: a small clean sharp silver triangular/leaf-shaped head at the upper-right third, one straight slender dark shaft, and just two grouped pale blue feather vanes near the lower-left end. It must not look like a double-ended metal needle; replace the pointed rear end with short feather vanes and a small nock. Keep arrowhead modest and light, far smaller than the shaft length. Two broad cyan-blue tapering wind swipes peel backward from the fletching toward lower-left, with irregular dry endings, never dense repeated motion lines. The arrowhead gets a small crisp ivory glint; shaft and feathers remain economical. Whole image reads as one fast light arrow crossing calm space. No bow, target, impact, person, hands, multiple arrows, sparks, extra ornaments or detailed environment.\n\nRough hand-painted anime color study, large connected opaque masses, a few wide directional swipes and blunt dabs with handmade edges. Silver head has two broad cold light/shadow planes; dark shaft one clear stroke; feathers two connected masses rather than individual barbs. Quiet matte muted colors, concentrated cyan accent. Retain selective overlaps and broken paint endings around calm regions; no uniform closed black outline, patterned mesh, photographic texture, glossy 3D, smooth airbrush, facet mosaics, dense scratches, all-over grain or canvas filters. Clear silhouette before material detail. No text, border, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/.tmp/nai/output/swiftarrow-20261010/swiftarrow.png",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt3-blood-arrow.webp"
+      ]
+    }
+  ]
+}

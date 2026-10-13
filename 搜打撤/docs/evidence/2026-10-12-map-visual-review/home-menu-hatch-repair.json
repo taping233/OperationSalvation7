@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-12",
+  "file": "game/css/home-polish.css",
+  "cause": [
+    "Runtime snapshot missed prior removal of four hatch declarations",
+    "Non-hover ordinary menus still inherited global hatch through title-p0.css"
+  ],
+  "change": "Disable --ak-tex-hatch only on home-plate, preserving existing contour/glass/motion; source and serving snapshot synchronized",
+  "visual": "All 7 menu after-backgrounds contain no hatch texture in current IAB tab; screenshot 29-home-no-diagonal-hatch.png",
+  "automatedTests": false,
+  "commit": false,
+  "sourceSha256": "1fc79e632c252f2547552efad30d2dd1c431afab6bfb6365e891b0bcc3393c0f"
+}

@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-dig-treasure",
+      "asset": "cards/martial-tt3-dig-treasure.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-8c3907b3-6225-493d-adb9-e5e0aa5afbaf.png",
+      "revision": "dig-treasure-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the dig treasure game-card edit target, retaining its SQUARE composition, viewpoint and object positions closely. One open orange-brown wooden treasure chest at lower center, viewed from slightly above in three-quarter view. Its rectangular lid hinges upward toward the BACK RIGHT, chest full of gold coins. One long upright shovel stands over the chest, its pale metal spade resting among the coins near left-center and its slender ochre shaft rising toward the top center, ending in a pale D-shaped handle. A few scattered coins lie around the chest on a single simplified ochre earth patch; quiet brown background. Preserve original chest size, perspective, lid opening, shovel angle and proportions. No character, hands, extra tools, scenery or new props. Images 2, 3, 4 are DRAWING STYLE references only, borrow broad opaque brush construction and muted masses, never subjects or clothing. Rough hand-painted anime color study: large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Model chest boards with broad warm orange-ochre light planes and burnt umber shadows, economical pale brass fittings. Clearly readable shovel silhouette with broad gray-ivory blade planes, darker edges and a simple handle. Group coins into a coherent gold mass with selectively clear coin shapes at the front, no individually outlined dense field. Earth is an abstract large flat ochre shape with a few broad marks, no detailed landscape. Muted warm colored grays, concentrated gold focal accents, clear hard-edged shadow grouping. No uniform thin vector outlines, glossy 3D, photographic wood grain, dense small scratches, facet mosaics or all-over grain/texture filters. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt3-dig-treasure.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    }
+  ]
+}

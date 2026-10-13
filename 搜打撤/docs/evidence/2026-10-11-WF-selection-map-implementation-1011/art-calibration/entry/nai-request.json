@@ -1,0 +1,35 @@
+{
+  "status": "candidate-not-approved",
+  "model": "nai-diffusion-4-5-full",
+  "recipeVersion": "1.3",
+  "artistBlock": "1.2::miv4t::, 0.8::quasarcake::",
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "width": 1344,
+  "height": 768,
+  "seed": 1011367301,
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nscenery, indoors, no humans. An original calm city-arrival threshold alcove, a simple side-supported entrance setting rather than a vista down a street. LEFT side has one broad ash-gray stone wall and a single thick quiet doorway upright; RIGHT side has one broad muted ochre-red wooden door plane and a dark teal interior shadow. Warm gray plaster and dark teal space behind them establish arrival without a central exit. No specific historical faction, no signs or story objects.\n\nOne wide landscape full-page game reward background calibration image. The actual reward objects will be drawn separately in code; this image contains only quiet supporting architecture.\n\nAsymmetric large framing masses confined to left x0-25 percent and right x75-100 percent. Centre x28-72 percent and y12-82 percent is one continuous calm low-contrast warm-gray and deep-muted-teal painted space. No doorway, open sky, vanishing point, tower or bright light in the centre. The lower middle is a broad matte ground plane with at most two large color masses; no tiled floor or small fragments. Upper 10 percent and bottom 12 percent contain no important architectural detail. Broad shallow spatial depth with no perspective street; the side structures frame the empty centre without enclosing it in a graphic border. Entire environment is readable as a simple sheltered threshold.\n\nWarm-gray stone, muted ochre-red wood and cool dark-teal shadows are three clear material color groups. Model each material using only three or four broad opaque light and shadow planes. Directional long brush masses, loose uneven brush edges, sparse hard structural edges, complete simple shapes. A very small pale warm-light accent may stay at one far side only; no glowing centre, no dramatic spotlight. Keep the environment low detail and low contrast so foreground rewards remain the focal point. Cloth-like and wood-like material response expressed through painterly planes, not surface texture. No uniformly small triangles, no low-poly mesh, no airbrush gradients, no detailed masonry, no wood grain, no shiny PBR surfaces. Simplify structure as strongly as the project pearlbox and crimson-pouch card pictures.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "negativePrompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, person, people, character, face, girl, boy, animal, whale, Neow, snow, snowflakes, snowy street, central doorway, central bright exit, central light, central tower, symmetrical gate, castle panorama, city street, vanishing road, bricks, tiles, masonry detail, woodgrain, uniform triangles, small polygon faces, low poly, polygon mesh, glossy 3d, pbr, photorealism, reflections, shiny ground, lens flare, bloom, particles, blue ribbon, roses, products, cards, card frames, ui, interface, prices, captions, letters, numbers, ornate arches, many repeated windows, clutter",
+  "characterPrompt": "",
+  "naiImageReferences": [],
+  "observedStyleOnly": [
+    "martial-tt7-stealth.webp",
+    "equip-tt2-pearlbox.webp",
+    "equip-tt3-crimson-pouch.webp"
+  ],
+  "cardSHA256": {
+    "martial-tt7-stealth.webp": "4838f19d1edf9976d314a9a73bb9c3f6400e147d85298a01fe8f209985c21ee5",
+    "equip-tt2-pearlbox.webp": "2dd1921d7eda3f260ec74be23decc0a70cb6925812fd4e16d1ba0e1e7305e65b",
+    "equip-tt3-crimson-pouch.webp": "25ec4354678c02e55b720c0ee168b3a3490a6df83e274dbd6810f8f3ec042a78"
+  },
+  "source": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\art-calibration\\entry\\source\\nai-entry-calibration-v1.png",
+  "actualSeed": 1011367301,
+  "bytes": 712747,
+  "sha256": "03822662ac73e5cc20ed3101d487fde43717be7c4ffc5c49039d1f932a5d4071"
+}

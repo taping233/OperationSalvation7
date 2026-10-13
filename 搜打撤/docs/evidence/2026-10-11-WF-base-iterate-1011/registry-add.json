@@ -1,0 +1,9 @@
+{
+  "cells": [
+    "Friday（Codex 基地继续迭代 WF-base-iterate-1011）",
+    "game/src/hub/{game.hub,hub.personnel,hub.warehouse,hub.facilities,hub.home-v3,hub.presentation,hub.archive-v3,hub.shop-v3,base-motion-v4}.js；css/base-{camp-rework,home-v3,archive-v3,shop-v3,controls-v4}.css；scenes/base-home-v4.webp及art-source/ui/base-v4/；自有tests/证据；docs/development.md仅基地段；不碰旧仓库特写footer/camp-card-actions及照相馆",
+    "老板令继续；归档去招式重复归archive_redesign，shop减法归shop_redesign，NAI→内置重绘壁纸归base_art，根负责其他页减法/按钮/动效与实页整合",
+    "10-11",
+    "编辑中；复用5200/PID21616，无新服务、不build、不提交；只验当前平台内置浏览器当前窗口"
+  ]
+}

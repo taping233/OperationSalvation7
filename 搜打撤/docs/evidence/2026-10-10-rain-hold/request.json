@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-arrow-rain",
+      "asset": "cards/martial-tt3-arrow-rain.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-2f2251fa-a52a-4ff8-88cf-01b962181d80.png",
+      "revision": "arrow-rain-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the arrow rain game-card edit target, preserving its original SQUARE composition closely. A dense multitude of straight thin arrows plunge vertically DOWN from the top edge. Their silver-gray pointed heads form a large downward triangular arrangement, spanning almost the entire width at the top and narrowing progressively to a tiny clustered tip near bottom center. Long ochre-gray shafts continue out of the top frame. Keep original broad-to-narrow silhouette, downward motion, head positions distributed through the triangular mass and large quiet dark blue-gray side spaces. Pure symbolic volley, no characters, bows, ground or scene. Make selected nearer arrowheads clearly readable in broad silver planes, smaller distant arrows merge into economical muted grouped directional marks; keep dense volley impression without uniformly tracing every tiny shaft or feather. Front arrows selectively brighter, quiet charcoal and muted steel-blue background. Images 2, 3, 4 are DRAWING STYLE references only; borrow broad opaque construction, never their subjects or clothes. Rough hand-painted anime color study, large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Clear grouped hard-edged shadows, matte muted colors and concentrated accents. No uniformly thin vector outlines, glossy 3D, photoreal materials, tiny facet mosaics, dense surface scratches or all-over grain/texture filters. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt3-arrow-rain.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    },
+    {
+      "card_id": "tt3-hold-fast",
+      "asset": "cards/martial-tt3-hold-fast.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-6d6c288a-2957-4565-9c99-7f20da9cc0d3.png",
+      "revision": "hold-fast-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the hold fast game-card edit target, preserving its original SQUARE composition closely. One massive broad straight sword centered upright, hilt at the TOP and blade planted into cracked earth at the BOTTOM. Long blue grip, pale gold pointed pommel and compact pale gold crossguard. Enormous tapering ivory-white blade bordered with pale gold, bold symmetrical angular gold V-shaped decoration, muted blue triangular shoulder inlays and a small blue diamond near the bottom. Keep original width, length, silhouette, centered placement, blade motifs and planting position. Sparse dark earth cracks radiate outward beneath the tip across lower portion. Plain muted warm taupe-ochre background. No character, hand, shield, extra weapon or new scenery. Model blade and gold edges with broad ivory and warm gray planes, grouped ochre shadows, economical cool blue accents and decisive long strokes. Keep structural geometric decoration readable but no extra ornament, fine engraving or dense scratch networks. Earth only a few broad dark broken marks around contact, background quiet. Images 2, 3, 4 are DRAWING STYLE references only; borrow broad opaque construction, never their subjects or clothes. Rough hand-painted anime color study, large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Clear grouped hard-edged shadows, matte muted colors and concentrated accents. No uniformly thin vector outlines, glossy 3D, photoreal materials, tiny facet mosaics, dense surface scratches or all-over grain/texture filters. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt3-hold-fast.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    }
+  ]
+}

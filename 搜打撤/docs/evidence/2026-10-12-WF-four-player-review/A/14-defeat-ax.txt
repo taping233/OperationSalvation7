@@ -1,0 +1,37 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5351/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5351/
+	2 container skull 撤离失败, ID: overlay
+		3 container
+			4 heading skull 撤离失败, Value: 2, ID: ovTitle
+				5 image skull
+				6 text  撤离失败
+			7 container ovBody
+				8 text 生命归零 · 远征到此为止
+				9 container
+					10 image cross
+					11 text  散失：卡牌  14  张（含 【命运钟表】、【迷之匣】、【后备能源】、【毒杖】、【命运钟表】） · 口袋散失 15 张
+				12 text 损失物资 0 抢运回基地 1 张 安全格占用 1/2
+				13 container
+					14 image medal
+					15 text  熟练度成长
+				16 container 熟练度 70%
+				17 container
+					18 text 本局  +5 XP  · 63/90 · 差  27  点升级 · 回基地人物页签可查看
+				19 container
+					20 image lock
+					21 text  宠物阿七抢运回基地
+				22 container
+					23 text 0
+					24 image 大量木材
+					25 text 大量木材 资源 · 稀有
+					35 container
+						36 text 稀有 稀有
+					28 text 木材 × 2 。
+				29 button home 回基地
+					30 image home
+					31 text  回基地
+				32 button skull 再出发
+					33 image skull
+					34 text  再出发
+
+The focused UI element is 29 button home 回基地

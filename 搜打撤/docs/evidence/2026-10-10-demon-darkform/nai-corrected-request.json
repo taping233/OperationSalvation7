@@ -1,0 +1,25 @@
+{
+  "id": "demon",
+  "card_id": "cc-demon",
+  "name": "恶魔之力",
+  "tags": "1girl, solo, focused expression, looking down, magic, shadow, claws, simple background, from below, cowboy shot, leaning forward, outstretched arm, open hand, hand on own chest",
+  "character_prompt": "girl, young adult woman, delicate anime face, purple eyes, pale golden long hair with a warm gold base color, straight bangs, long sidelocks and side braid gathered into low ponytail, dark black-indigo crescent hairclip above bangs on viewer-right, black-gray high-collared priestess long robe, muted purple short cape with restrained gold edging, black gloves",
+  "scene": "Character 1 leans into a turning forward motion, one hand firmly against her heart while her nearer open palm reaches into the foreground. A small warm-gold light at her chest is drawn along the arm into a narrow dark-red current. An immense disembodied shadow claw rises behind the extended palm, enclosing that red current between broad black-violet fingers. The two gestures form a diagonal of exchange: her own warm life-light dwindles while the borrowed dark power gathers near the foreground hand. Her face remains clearly readable above the shoulder, expression controlled rather than monstrous. The long braid and teal cape sweep opposite the reaching arm. Keep the demonic presence as one abstract claw silhouette, secondary to her face and hand, with a concentrated red/ivory energy accent. Use quiet abstract background color planes chosen to separate ivory dress, teal cape and dark claw; the torso continues through the crop.",
+  "extra_uc": "boy, male, horns on character, black hair, silver hair, purple eyes, black priestess outfit, lamp, lantern, blood, wound, gore, full demon body, multiple people",
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1girl, solo, smirk, narrowed eyes, looking at viewer, magic, shadow, claws, dark background, from below, cowboy shot, leaning forward, outstretched arm, open hand, hand on own chest\n\nCharacter 1 leans into a turning forward motion, one hand firmly against her heart while her nearer open palm reaches into the foreground. A small warm-gold light at her chest is drawn along the arm into a narrow dark-red current. An immense disembodied shadow claw rises behind the extended palm, enclosing that red current between broad black-violet fingers. The two gestures form a diagonal of exchange: her own warm life-light dwindles while the borrowed dark power gathers near the foreground hand. Her face remains clearly readable above the shoulder, expression showing a sharp controlled smirk and tension in the brow as she masters the borrowed force. The long braid and cape sweep opposite the reaching arm. Keep the demonic presence as one abstract claw silhouette, secondary to her face and hand, with a concentrated red/ivory energy accent. Use subdued charcoal, muted black-violet and deep burgundy abstract background planes extending to all four edges. The pale face and golden hair remain separate from the black-gray robe and shadow claw. Red energy is the small concentrated accent; the torso and robe continue through the lower crop.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, boy, male, silver hair, white hair, gray hair, white crescent clip, white priestess dress, teal cape, horns on character, lamp, lantern, blood, wound, gore, full demon body, multiple people, white background, white border, bright pastel background, inset illustration, detached torso, contact sheet, character sheet",
+  "model": "nai-diffusion-5-full",
+  "width": 1024,
+  "height": 1024,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "seed": 371544895,
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\demon-darkform-20261010\\demon-dark-priest-gold.png",
+  "correction": "暗牧仍金发；银白误判与光牧稿均未接入；表情改带紧张眉眼的锐利冷笑，不用白底"
+}

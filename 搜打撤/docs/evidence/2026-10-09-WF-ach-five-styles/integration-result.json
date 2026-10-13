@@ -1,0 +1,26 @@
+{
+  "status": "complete-uncommitted",
+  "generated_new_images": 0,
+  "medals": 130,
+  "styles": 5,
+  "targeted_tests": {
+    "files": 3,
+    "passed": 45,
+    "exit_code": 0
+  },
+  "own_asset_issues": 0,
+  "global_asset_errors_outside_scope": 21,
+  "browser_evidence": "browser-checks.json",
+  "source_sha256": {
+    "game/src/ui/achievement-gallery.js": "2e394d36c81adddd5bc91cd1791c2485363b1830e1e1d141d0e76b3831e47382",
+    "game/src/ui/achievement-medals.js": "78bbdbf29831ecbe7a158ed62c50aecb983220d7dcc46022e33bb55459f7fb6a",
+    "game/css/title-achievements.css": "177b674cfd3e9cf1553da7406a8b041a75f72e245b10af17c1ecd4f36b04998a",
+    "tests/achievement-gallery.test.js": "dad6ebd7caf857b7f2d84732aa96d9355b37d9c1b03671887142863fca561a0c"
+  },
+  "not_run": [
+    "build",
+    "full_suite",
+    "commit",
+    "push"
+  ]
+}

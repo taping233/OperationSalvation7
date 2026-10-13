@@ -1,0 +1,112 @@
+[
+  {
+    "name": "after-00.jpg",
+    "camp": true,
+    "underlay": {
+      "background": "rgb(16, 25, 31)",
+      "content": "\"\"",
+      "display": "block",
+      "transform": "matrix(1, 0, 0, 1, 0, 0)",
+      "zIndex": "29"
+    }
+  },
+  {
+    "name": "after-01.jpg",
+    "camp": true,
+    "underlay": {
+      "background": "rgb(16, 25, 31)",
+      "content": "\"\"",
+      "display": "block",
+      "transform": "matrix(1, 0, 0, 1, 39.4972, 0)",
+      "zIndex": "29"
+    }
+  },
+  {
+    "name": "after-02.jpg",
+    "camp": true,
+    "underlay": {
+      "background": "rgb(16, 25, 31)",
+      "content": "\"\"",
+      "display": "block",
+      "transform": "matrix(1, 0, 0, 1, 1285.02, 0)",
+      "zIndex": "29"
+    }
+  },
+  {
+    "name": "after-03.jpg",
+    "camp": true,
+    "underlay": {
+      "background": "rgb(16, 25, 31)",
+      "content": "\"\"",
+      "display": "block",
+      "transform": "matrix(1, 0, 0, 1, 2339.04, 0)",
+      "zIndex": "29"
+    }
+  },
+  {
+    "name": "after-04.jpg",
+    "camp": true,
+    "underlay": {
+      "background": "rgb(16, 25, 31)",
+      "content": "\"\"",
+      "display": "block",
+      "transform": "matrix(1, 0, 0, 1, 2438.72, 0)",
+      "zIndex": "29"
+    }
+  },
+  {
+    "name": "after-05.jpg",
+    "camp": false,
+    "underlay": {
+      "background": "rgba(0, 0, 0, 0)",
+      "content": "\"\"",
+      "display": "none",
+      "transform": "none",
+      "zIndex": "auto"
+    }
+  },
+  {
+    "name": "after-06.jpg",
+    "camp": false,
+    "underlay": {
+      "background": "rgba(0, 0, 0, 0)",
+      "content": "\"\"",
+      "display": "none",
+      "transform": "none",
+      "zIndex": "auto"
+    }
+  },
+  {
+    "name": "after-07.jpg",
+    "camp": false,
+    "underlay": {
+      "background": "rgba(0, 0, 0, 0)",
+      "content": "\"\"",
+      "display": "none",
+      "transform": "none",
+      "zIndex": "auto"
+    }
+  },
+  {
+    "name": "after-08.jpg",
+    "camp": false,
+    "underlay": {
+      "background": "rgba(0, 0, 0, 0)",
+      "content": "\"\"",
+      "display": "none",
+      "transform": "none",
+      "zIndex": "auto"
+    }
+  },
+  {
+    "name": "after-09.jpg",
+    "camp": false,
+    "underlay": {
+      "background": "rgba(0, 0, 0, 0)",
+      "content": "\"\"",
+      "display": "none",
+      "transform": "none",
+      "zIndex": "auto"
+    }
+  }
+]

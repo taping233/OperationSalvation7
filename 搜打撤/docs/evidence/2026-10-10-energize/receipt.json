@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt7-energize",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-06bde6bd-df2d-4f69-9fe3-f288a27e25de.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-energize/cards-spell-tt7-energize-source.png",
+        "bytes": 1830224,
+        "sha256": "ccc56474dbf512e02e5e06c89223623c384059f4436b461202de6e26fdd1d068"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-energize/cards-spell-tt7-energize-full-before.webp",
+          "bytes": 62772,
+          "sha256": "0b462273c430be468802025d49f50da1931368ecf75797f8a7853b66d2d810f7"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-energize/cards-spell-tt7-energize-thumb-before.webp",
+          "bytes": 19808,
+          "sha256": "d24bce77fd2030a802b64dff93cf1bf17f7e4d8f3eb91e03ec8b81850e8f849d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-energize.webp",
+          "bytes": 129750,
+          "sha256": "8c42682984774901301fd6327be2626f0d59f4c4625cc8a9832d0bc8c7cd9734",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-energize.webp",
+          "bytes": 21430,
+          "sha256": "8675deec2cbddf97202f04f00d7168794af822963b88e8867dacd57fcf9e4195",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "energize-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt7-energize.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 129750,
+            "sha256": "8c42682984774901301fd6327be2626f0d59f4c4625cc8a9832d0bc8c7cd9734",
+            "source": "docs/evidence/2026-10-10-energize/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-energize.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 19808,
+            "sha256": "d24bce77fd2030a802b64dff93cf1bf17f7e4d8f3eb91e03ec8b81850e8f849d",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-energize.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 21430,
+            "sha256": "8675deec2cbddf97202f04f00d7168794af822963b88e8867dacd57fcf9e4195",
+            "source": "docs/evidence/2026-10-10-energize/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 845,
+  "manifest_count_after": 846
+}

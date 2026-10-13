@@ -1,0 +1,160 @@
+{
+  "actions": [
+    {
+      "detail": "隔离origin新档01：选星月→整备→出发→文字选项→两张大卡→查看/关闭完整规则→继续探索返回地图；未注入合成事件。",
+      "type": "real-input"
+    },
+    {
+      "detail": "事件文字页与领取后的大卡奖励页均为同一自然窗口。",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "hidden": "",
+        "id": "overlay"
+      },
+      "identity": "{\"id\":\"overlay\",\"hidden\":\"\"}",
+      "key": "overlay",
+      "rect": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#overlay",
+      "styles": {
+        "background-color": "rgba(5, 6, 8, 0.82)",
+        "border-radius": "0px",
+        "color": "rgb(227, 230, 228)",
+        "display": "none",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "auto",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "auto"
+      },
+      "tag": "DIV",
+      "text": "×"
+    },
+    {
+      "attributes": {
+        "id": "expeditionChapter"
+      },
+      "identity": "{\"id\":\"expeditionChapter\"}",
+      "key": "chapter",
+      "rect": {
+        "height": 0,
+        "width": 340,
+        "x": 633.2000122070312,
+        "y": 17
+      },
+      "selector": "#expeditionChapter",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(240, 240, 237)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "0px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "none",
+        "transform": "matrix(1, 0, 0, 1, -170, 0)",
+        "visibility": "visible",
+        "width": "340px"
+      },
+      "tag": "NAV",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "id": "hpText"
+      },
+      "identity": "{\"id\":\"hpText\"}",
+      "key": "hp",
+      "rect": {
+        "height": 33,
+        "width": 184,
+        "x": 138,
+        "y": 40.5
+      },
+      "selector": "#hpText",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(240, 240, 239)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "29px",
+        "height": "33px",
+        "line-height": "33px",
+        "opacity": "1",
+        "padding": "0px 10px",
+        "pointer-events": "none",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "184px"
+      },
+      "tag": "B",
+      "text": "30/30"
+    }
+  ],
+  "observedAt": "2026-10-12T10:24:38.387Z",
+  "page": {
+    "origin": "http://127.0.0.1:5312",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 1606
+    }
+  },
+  "scene": "entry-text-option-reveal-return",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-12-entry-event-reveal/01-entry-event.png",
+    "docs/evidence/2026-10-12-entry-event-reveal/02-rewards-reveal.png"
+  ],
+  "selectors": [
+    {
+      "key": "overlay",
+      "selector": "#overlay"
+    },
+    {
+      "key": "chapter",
+      "selector": "#expeditionChapter"
+    },
+    {
+      "key": "hp",
+      "selector": "#hpText"
+    },
+    {
+      "key": "eventClosed",
+      "selector": ".entry-scene"
+    },
+    {
+      "key": "rewardClosed",
+      "selector": ".entry-reward-scene"
+    }
+  ]
+}

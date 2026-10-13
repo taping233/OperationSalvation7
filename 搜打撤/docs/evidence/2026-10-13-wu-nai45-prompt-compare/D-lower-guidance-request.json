@@ -1,0 +1,81 @@
+{
+  "input": "1.2::miv4t::, 0.8::quasarcake::\n\n1girl, solo, original character, full body, head to boots visible, front three-quarter view, relaxed standing pose, legs lightly crossed, both arms hanging naturally, a confident small fang smile, quiet off-white background, ample clear margins, no scenery, no text.\n\nUse a quiet, loosely brushed background without scenery, leaving the complete character silhouette as the focal point; preserve the specified pose.\n\nhand-painted anime game character illustration, painterly, complete clear silhouette, large opaque brush masses, broad directional strokes, hard-edged grouped light and shadow, muted charcoal and colored grays, small concentrated blue accents, coherent large hair locks, quiet cloth planes, selective fine detail on face, eyes, goggles, rose and sword hilt, visible but economical brush texture, restrained highlights, clean anime face.",
+  "model": "nai-diffusion-4-5-full",
+  "action": "generate",
+  "parameters": {
+    "params_version": 3,
+    "width": 832,
+    "height": 1216,
+    "scale": 5.0,
+    "sampler": "k_euler_ancestral",
+    "steps": 28,
+    "variety_plus": true,
+    "n_samples": 1,
+    "ucPresetId": "none",
+    "qualityPresetId": "none",
+    "autoSmea": false,
+    "straight_alpha": false,
+    "dynamic_thresholding": false,
+    "controlnet_strength": 1,
+    "legacy": false,
+    "legacy_v3_extend": false,
+    "legacy_uc": false,
+    "add_original_image": true,
+    "cfg_rescale": 0.0,
+    "noise_schedule": "karras",
+    "use_coords": false,
+    "normalize_reference_strength_multiple": true,
+    "inpaintImg2ImgStrength": 1.0,
+    "seed": 1278087392,
+    "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, extra people, duplicate sword, unsheathed sword, stockings, thighhighs, blue patterned underskirt, floor-length skirt, cropped head, cropped feet, hair over one eye, glowing weapon, logo",
+    "characterPrompts": [
+      {
+        "prompt": "girl, slender young adult woman, pale skin, cyan-blue eyes, silver-white long hair in a high ponytail, loose bangs framing both visible eyes, blue satin ribbon bow at ponytail root, black rose hair ornament on her left side (viewer right), matte black round goggles on top of head, small visible fang, black and charcoal off-shoulder long-sleeved dress, layered ruffled neckline and sleeve cuffs, narrow black waist tie, irregular layered skirt ending above knees, bare legs, black ankle boots, one long straight black sword fully sheathed diagonally across her back, hilt above her right shoulder, scabbard tip below the left side of the skirt.",
+        "uc": "",
+        "center": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "enabled": true
+      }
+    ],
+    "v4_prompt": {
+      "caption": {
+        "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\n1girl, solo, original character, full body, head to boots visible, front three-quarter view, relaxed standing pose, legs lightly crossed, both arms hanging naturally, a confident small fang smile, quiet off-white background, ample clear margins, no scenery, no text.\n\nUse a quiet, loosely brushed background without scenery, leaving the complete character silhouette as the focal point; preserve the specified pose.\n\nhand-painted anime game character illustration, painterly, complete clear silhouette, large opaque brush masses, broad directional strokes, hard-edged grouped light and shadow, muted charcoal and colored grays, small concentrated blue accents, coherent large hair locks, quiet cloth planes, selective fine detail on face, eyes, goggles, rose and sword hilt, visible but economical brush texture, restrained highlights, clean anime face.",
+        "char_captions": [
+          {
+            "char_caption": "girl, slender young adult woman, pale skin, cyan-blue eyes, silver-white long hair in a high ponytail, loose bangs framing both visible eyes, blue satin ribbon bow at ponytail root, black rose hair ornament on her left side (viewer right), matte black round goggles on top of head, small visible fang, black and charcoal off-shoulder long-sleeved dress, layered ruffled neckline and sleeve cuffs, narrow black waist tie, irregular layered skirt ending above knees, bare legs, black ankle boots, one long straight black sword fully sheathed diagonally across her back, hilt above her right shoulder, scabbard tip below the left side of the skirt.",
+            "centers": [
+              {
+                "x": 0.5,
+                "y": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": false,
+      "use_order": true
+    },
+    "v4_negative_prompt": {
+      "caption": {
+        "base_caption": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, extra people, duplicate sword, unsheathed sword, stockings, thighhighs, blue patterned underskirt, floor-length skirt, cropped head, cropped feet, hair over one eye, glowing weapon, logo",
+        "char_captions": [
+          {
+            "char_caption": "",
+            "centers": [
+              {
+                "x": 0.5,
+                "y": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": false,
+      "use_order": true
+    },
+    "deliberate_euler_ancestral_bug": false,
+    "prefer_brownian": true
+  }
+}

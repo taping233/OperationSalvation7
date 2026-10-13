@@ -1,0 +1,36 @@
+Browser tab: 2, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5354/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/
+	2 container viewport
+		3 button 背包 10/16, ID: bagBtnFloat
+			4 text 背包
+			5 text 10/16
+		6 container archive 收获 · 小型物资箱 · 第 1 / 1, ID: overlay
+			7 container
+				8 button Description: 关闭, ID: ovCloseX
+				9 container
+					10 heading 搜刮完成, Value: 3
+						11 text 搜刮完成
+					12 text 小型物资箱
+					13 text 1 张待领
+					14 text 本次金币 待收取 +1 1  张卡牌
+					15 checkbox Description: 查看法杖详情, Value: 0
+						16 container
+							17 text 0
+							18 image 法杖
+							19 text 法杖 装备 · 古朴
+							34 container
+								35 text 古朴 古朴
+							22 text 你的 法伤 增加  1  点。
+						23 text 估值
+						24 image coin
+						25 text 2
+						36 text 古朴
+					27 container 所选卡牌详情
+						28 text 选择一张卡牌查看规则与去向
+					29 text 背包 10/16 格 · 已入背包 0 张
+					30 text 点击卡牌先查看，随后收下
+					31 container
+						32 button 1 张待领 · 离开
+						33 button 全部收下
+
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/

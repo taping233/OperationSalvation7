@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-dig-treasure",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-8c3907b3-6225-493d-adb9-e5e0aa5afbaf.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-dig-treasure/cards-martial-tt3-dig-treasure-source.png",
+        "bytes": 1680270,
+        "sha256": "71a0b3ce835e4b18c5b7420c197b446d17a70f4786eaf39d0564c46e6304373e"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-dig-treasure/cards-martial-tt3-dig-treasure-full-before.webp",
+          "bytes": 72926,
+          "sha256": "5387c5e55985fa65c4ace16df4c14fe963aa01bc1e3c1f05d3a2470e192d2860"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-dig-treasure/cards-martial-tt3-dig-treasure-thumb-before.webp",
+          "bytes": 12532,
+          "sha256": "c6bc3d351e355379a37cee06e840e1b1bf12945635a5e786eb071a6d8bef26c8"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-dig-treasure.webp",
+          "bytes": 91566,
+          "sha256": "70bbd692bb802a8b5e38628b958e51f1f9344fcb2b4921813b5323783a098063",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-dig-treasure.webp",
+          "bytes": 13746,
+          "sha256": "7528f763d7fd81ba9e222143a6c9dae864d1bafb489647ae8b23facba78d4e28",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "dig-treasure-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt3-dig-treasure.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 91566,
+            "sha256": "70bbd692bb802a8b5e38628b958e51f1f9344fcb2b4921813b5323783a098063",
+            "source": "docs/evidence/2026-10-10-dig-treasure/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt3-dig-treasure.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 12532,
+            "sha256": "c6bc3d351e355379a37cee06e840e1b1bf12945635a5e786eb071a6d8bef26c8",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt3-dig-treasure.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 13746,
+            "sha256": "7528f763d7fd81ba9e222143a6c9dae864d1bafb489647ae8b23facba78d4e28",
+            "source": "docs/evidence/2026-10-10-dig-treasure/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 892,
+  "manifest_count_after": 893
+}

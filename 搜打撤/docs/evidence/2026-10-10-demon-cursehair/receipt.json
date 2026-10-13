@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "cc-demon",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12470-95d7-75e0-9477-03361e04258c\\exec-b0773176-aca7-4048-82c9-15218a8df3dd.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-demon-cursehair/cards-spell-cc-demon-source.png",
+        "bytes": 1831171,
+        "sha256": "e3a930aee711607d42b2f1707fcf5a5a72d97434f8795ddd0e2cb3a8895dc009"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-demon-cursehair/cards-spell-cc-demon-full-before.webp",
+          "bytes": 98518,
+          "sha256": "b9f62ee84b42914cd2609b1d6caeb5a1850a58158e6b01cb3ed10f97f6c16763"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-demon-cursehair/cards-spell-cc-demon-thumb-before.webp",
+          "bytes": 15336,
+          "sha256": "c2899038e8f334be60b1ebde0289c1b26390e9c79ad933d6da48263fcccd0334"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-cc-demon.webp",
+          "bytes": 103868,
+          "sha256": "4e610d682b34c150eac3323204764f8d8d878d4d7743e79bae24c59f27701b66",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-cc-demon.webp",
+          "bytes": 15854,
+          "sha256": "c0d8ba10e9d78f11dd8403464d268a6d41c4e5bb903a65d164c0ddfbec795537",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "xingyue-demon-halfbody-broad-hair-20261010",
+      "revision_after": "xingyue-demon-curse-hair-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-cc-demon.webp",
+            "ext": "webp",
+            "bytes": 98518,
+            "sha256": "b9f62ee84b42914cd2609b1d6caeb5a1850a58158e6b01cb3ed10f97f6c16763",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-demon-hair/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-cc-demon.webp",
+            "ext": "webp",
+            "bytes": 103868,
+            "sha256": "4e610d682b34c150eac3323204764f8d8d878d4d7743e79bae24c59f27701b66",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-demon-cursehair/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-cc-demon.webp",
+            "ext": "webp",
+            "bytes": 15336,
+            "sha256": "c2899038e8f334be60b1ebde0289c1b26390e9c79ad933d6da48263fcccd0334",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-demon-hair/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-cc-demon.webp",
+            "ext": "webp",
+            "bytes": 15854,
+            "sha256": "c0d8ba10e9d78f11dd8403464d268a6d41c4e5bb903a65d164c0ddfbec795537",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-demon-cursehair/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1108,
+  "manifest_count_after": 1108
+}

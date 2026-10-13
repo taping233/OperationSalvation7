@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "card_id": "tt7-arcanescroll",
+      "asset": "cards/equip-tt7-arcanescroll.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-63c8ae43-bde7-4db8-b2b1-cba49c35a99e.png",
+      "revision": "arcanescroll-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw the arcane torn scroll card in image 1, the edit target, keeping its original portrait composition and framing closely: one vertically hanging floating parchment centered, occupying roughly the middle 45 percent of the width and 77 percent of the height; top and bottom horizontal rolled ends with their spiral openings visible on the RIGHT; irregular torn side edges; the lower parchment bends gently left, exactly as in the original. Keep the luminous turquoise circular geometric magic seal at the upper third of the parchment, and glowing turquoise illegible arcane glyph marks running down its length and across both rolls. Retain the quiet purple-gray background and sparse upward drifting cyan sparks. No characters, hands, tables, new props, or different camera angle. Images 2, 3, 4 are DRAWING STYLE references only: borrow broad opaque hand-painted construction and muted color masses, never their subjects or clothing. Repaint the parchment and rolled ends with large connected matte gray-beige masses, a few wide directional swipes and blunt dabs, grouped hard-edged cool shadows, visibly handmade edges, and selective unfinished areas. Make the scroll's curl and thickness readable with economical structure. Keep glyphs as grouped stylized arcane marks rather than densely fine typography; make the seal readable and luminous but subordinate to the overall scroll silhouette. Mostly muted colored grays, concentrated mint turquoise accents. No glossy 3D, photoreal textures, facet mosaics, all-over grain or texture filter, or intricate ornamental clutter. Pure-color abstract backdrop with a few broad purple-gray tonal masses. No readable text, frame, watermark or UI. Match the original portrait aspect ratio.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt7-arcanescroll.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    }
+  ]
+}

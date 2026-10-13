@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "card_id": "tt2-shoot",
+      "asset": "cards/martial-tt2-shoot.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12204-0a82-72b2-9a07-d1b72c8d8b18/exec-3ba03f34-ff23-4c5e-a843-4359d0627b03.png",
+      "revision": "martial-tt2-shoot-original-rough-20261010",
+      "prompt": "Repaint the supplied original game card Shooting as a square illustration. Input 1 is the original edit target. Preserve centered vertical antique flintlock long rifle, muzzle up and wooden butt down, entire silhouette in frame. Keep silver gray barrel and simple silver lock mechanism, muted brown wooden stock, the bright gold-white firing flash centered behind upper-middle gun and smoke ribbon leaving muzzle curling clockwise toward upper right. No person or hands. Simplify engraved metal into a few broad structural marks. Background is quiet charcoal green-gray solid color masses. Inputs 2-4 are drawing-style only. Rough hand-painted anime color study. Large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Group hair into substantial locks and cloth into principal fold planes. Clear anime eyes and readable hands, economical face marks; other regions coarse and quiet. Matte muted colors with concentrated accents. No fine strands, dense wrinkles, facet mosaics, glossy rendering or all-over texture filters. Pure-color abstract backdrop; elements only as symbolic imagery. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt2-shoot.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    },
+    {
+      "card_id": "tt7-arcanebolt",
+      "asset": "cards/spell-tt7-arcanebolt.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12204-0a82-72b2-9a07-d1b72c8d8b18/exec-452f5da3-a654-4b70-b0cc-36f5de5f081f.png",
+      "revision": "spell-tt7-arcanebolt-original-rough-20261010",
+      "prompt": "Repaint original Arcane Bolt game card as a square hand-painted anime illustration. Input 1 is original authoritative composition: close waist-up portrait of brown long wavy-haired female mage Baita, facing viewer, one green eye open and other eye winking, gentle playful smile, hand strongly foreshortened toward camera in finger-gun casting gesture; a tiny concentrated bright cyan magical bolt at fingertip, gold hoop earrings and blue jewel at collar. Preserve framing, hand size/placement, facial gesture and quiet pale blue background. Input 2 is current character identity only: dark brown long wavy hair with two simple gold side hair clips, green eyes, white high-neck long-sleeve blouse, deep green pinafore dress with broad straps. Do not copy sitting pose, cake, chair or books from identity reference. Inputs 3-5 are painting-style only. Rough hand-painted anime color study. Large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Group hair into substantial locks and cloth into principal fold planes. Clear anime eyes and readable hands, economical face marks; other regions coarse and quiet. Matte muted colors with concentrated accents. No fine strands, dense wrinkles, facet mosaics, glossy rendering or all-over texture filters. Pure-color abstract backdrop; elements only as symbolic imagery. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-arcanebolt.webp",
+        "D:/素材/代号柒/搜打撤/docs/character-bible/ref-images/baita.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    }
+  ]
+}

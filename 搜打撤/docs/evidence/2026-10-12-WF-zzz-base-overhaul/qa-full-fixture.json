@@ -1,0 +1,814 @@
+{
+  "origin": "http://127.0.0.1:5335",
+  "slot": 2,
+  "base": {
+    "wood": 48,
+    "rations": 24,
+    "keys": 5,
+    "bagUp": 0,
+    "safeUp": 0,
+    "stashUp": 0,
+    "coins": 2400,
+    "nestUnlocked": false,
+    "runes": [],
+    "nestBagUp": 0,
+    "eggPity": 0,
+    "stash": [
+      {
+        "card": {
+          "cost": 2,
+          "desc": "攻（+0），本回合每打出一张其他武术，费用-1。",
+          "dmg": 0,
+          "dmgType": "attack",
+          "id": "cc-chase-slash",
+          "name": "追斩",
+          "rarity": "稀有",
+          "type": "武术",
+          "value": 2
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 2,
+          "desc": "攻（+3），附加手牌中的招式所具有的全部诅咒效果。",
+          "dmg": 3,
+          "dmgType": "attack",
+          "id": "cc-cursed-blade",
+          "name": "诅咒之刃",
+          "rarity": "稀有",
+          "type": "武术",
+          "value": 3
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 1,
+          "desc": "对所有敌人造成 3 点法术伤害。",
+          "dmg": 3,
+          "dmgType": "spell",
+          "id": "cc-double-boom",
+          "name": "二次爆炸",
+          "rarity": "衍生",
+          "sellable": false,
+          "type": "法术",
+          "value": 0
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 1,
+          "desc": "发现一张武术卡并额外获得1张复制。",
+          "id": "cc-dual-wield",
+          "name": "二刀流",
+          "rarity": "稀有",
+          "type": "武术",
+          "value": 2
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 2,
+          "desc": "对全体敌人造成 2 点法术伤害；若击杀敌人，再施放一次。",
+          "dmg": 2,
+          "dmgType": "spell",
+          "id": "cc-ember-burst",
+          "name": "余烬爆裂",
+          "rarity": "稀有",
+          "type": "法术",
+          "value": 3
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 2,
+          "desc": "攻（+3）；若本牌为最后一张手牌，效果触发 2 次。",
+          "dmg": 3,
+          "dmgType": "attack",
+          "id": "cc-last-stand",
+          "name": "破釜沉舟",
+          "rarity": "稀有",
+          "type": "武术",
+          "value": 3
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 2,
+          "desc": "造成9点法术伤害，获得1张「二次爆炸」。",
+          "dmg": 9,
+          "dmgType": "spell",
+          "id": "cc-lava-blast",
+          "name": "熔岩爆破",
+          "rarity": "稀有",
+          "type": "法术",
+          "value": 4
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 2,
+          "desc": "对随机敌人释放4个随机法术（这些随机法术默认已注能）。",
+          "dmg": 0,
+          "id": "cc-mana-surge",
+          "name": "法力奔涌",
+          "rarity": "传说",
+          "sellable": false,
+          "type": "法术",
+          "value": 5
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 1,
+          "desc": "立即触发 2 次目标全部毒伤。",
+          "id": "cc-poison-burst",
+          "name": "毒爆",
+          "rarity": "史诗",
+          "type": "法术",
+          "value": 4
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 1,
+          "desc": "本回合每打出一张其他招式，造成2点固定伤害（触发次数＝本回合已打出的招式数）。",
+          "dmg": 2,
+          "dmgType": "fixed",
+          "id": "cc-rapid-fire",
+          "name": "连续射击",
+          "rarity": "史诗",
+          "type": "武术",
+          "value": 3
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 1,
+          "desc": "对 1 名敌人附加 2 层中毒；其死亡时，将中毒层数转移给另一名敌人。",
+          "id": "cc-rot-seed",
+          "name": "腐化之种",
+          "rarity": "史诗",
+          "type": "法术",
+          "value": 4
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 2,
+          "desc": "发现一张传说卡。",
+          "dmg": 0,
+          "id": "cmtn125e1nk0",
+          "name": "神秘召唤",
+          "rarity": "史诗",
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "self",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "acquire",
+                  "n": 1,
+                  "pool": {
+                    "kind": "传说"
+                  },
+                  "dest": "discover"
+                }
+              ]
+            }
+          },
+          "sellable": false,
+          "type": "法术",
+          "value": 4
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cls": "侠客",
+          "cost": 0,
+          "desc": "随机获得3张临时卡牌，回合开始时将其消耗。",
+          "dmg": 0,
+          "id": "cmtn1wnhhym",
+          "name": "江湖救急-改",
+          "rarity": "职业",
+          "sellable": false,
+          "type": "武术",
+          "unrandom": true,
+          "value": 3
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 0,
+          "desc": "攻击力4生命4，优先为主人承受伤害，自动攻击敌人",
+          "id": "cmtn6ulm4boj",
+          "name": "步兵",
+          "rarity": "衍生",
+          "sellable": false,
+          "type": "生物",
+          "unrandom": true,
+          "value": 0
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 0,
+          "desc": "回合开始时对所有敌方角色各施加一层随机诅咒，优先不重复。",
+          "dmg": 0,
+          "id": "cmtn79743r2n",
+          "name": "末日浩劫之门",
+          "rarity": "棱彩",
+          "sellable": false,
+          "type": "生物",
+          "unrandom": true,
+          "value": 0
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "armor": 5,
+          "cost": 0,
+          "desc": "回合开始时随机获取一项祝福，对全体友方施放，优先不重复。（获得潜行，持续 1 回合。获得 1 点攻击力。法伤 +1。减伤 1。获得 5 点护甲。净化。从这些中随机）",
+          "dmg": 0,
+          "id": "cmtn7err0a7",
+          "name": "天国之门",
+          "rarity": "棱彩",
+          "sellable": false,
+          "type": "生物",
+          "value": 0
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 0,
+          "desc": "可以孵化宠物。",
+          "dmg": 0,
+          "id": "pet-egg",
+          "name": "宠物蛋",
+          "rarity": "传说",
+          "sellable": false,
+          "type": "资源",
+          "unrandom": true,
+          "value": 5
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 0,
+          "desc": "在背包中才能使用，可以复原最多 3 张卡牌。",
+          "dmg": 0,
+          "id": "tt-crystal",
+          "name": "能源结晶",
+          "rarity": "史诗",
+          "sellable": false,
+          "type": "道具",
+          "value": 3
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 0,
+          "desc": "解锁大门。",
+          "dmg": 0,
+          "id": "tt-key",
+          "name": "一把钥匙",
+          "rarity": "古朴",
+          "sellable": false,
+          "type": "资源",
+          "value": 2
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 0,
+          "desc": "钥匙 ×3。",
+          "dmg": 0,
+          "id": "tt-key-one",
+          "name": "三把钥匙",
+          "rarity": "史诗",
+          "sellable": false,
+          "type": "资源",
+          "value": 6
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 0,
+          "desc": "钥匙 ×2。",
+          "dmg": 0,
+          "id": "tt-keys-bunch",
+          "name": "两把钥匙",
+          "rarity": "稀有",
+          "sellable": false,
+          "type": "资源",
+          "value": 4
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 0,
+          "desc": "随机获取 1 张传说卡（不含棱彩卡）。",
+          "dmg": 0,
+          "id": "tt-token-gold",
+          "name": "员工通行证B",
+          "rarity": "史诗",
+          "type": "道具",
+          "value": 4
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "armor": 3,
+          "cost": 1,
+          "desc": "攻（-1），+3 甲。",
+          "dmg": -1,
+          "dmgType": "attack",
+          "id": "tt2-forestarrow",
+          "name": "回音箭",
+          "rarity": "古朴",
+          "rules": {
+            "version": 1,
+            "battle": {
+              "target": {
+                "side": "enemy",
+                "area": false
+              }
+            },
+            "triggers": {
+              "onPlay": [
+                {
+                  "op": "damage",
+                  "amountField": "dmg",
+                  "target": "chosenEnemy"
+                },
+                {
+                  "op": "armor",
+                  "amount": 3
+                }
+              ]
+            }
+          },
+          "type": "武术",
+          "value": 2
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 1,
+          "desc": "造成 4 点法术伤害。",
+          "dmg": 4,
+          "dmgType": "spell",
+          "id": "tt3-fireball",
+          "name": "火球",
+          "rarity": "衍生",
+          "sellable": false,
+          "type": "法术",
+          "unrandom": true,
+          "value": 1
+        },
+        "count": 1
+      },
+      {
+        "card": {
+          "cost": 0,
+          "desc": "漂亮的小玩意，可出售。",
+          "dmg": 0,
+          "id": "tt3-garnet-marble",
+          "name": "石榴弹珠",
+          "rarity": "古朴",
+          "sellable": true,
+          "type": "资源",
+          "value": 4
+        },
+        "count": 1
+      }
+    ],
+    "pocket": [],
+    "pets": {
+      "dog": {
+        "lv": 1,
+        "ts": 0
+      }
+    },
+    "petSel": "dog",
+    "collection": {
+      "cc-chase-slash": {
+        "name": "追斩",
+        "rarity": "稀有",
+        "ts": 0
+      },
+      "cc-cursed-blade": {
+        "name": "诅咒之刃",
+        "rarity": "稀有",
+        "ts": 0
+      },
+      "cc-double-boom": {
+        "name": "二次爆炸",
+        "rarity": "衍生",
+        "ts": 0
+      },
+      "cc-dual-wield": {
+        "name": "二刀流",
+        "rarity": "稀有",
+        "ts": 0
+      },
+      "cc-ember-burst": {
+        "name": "余烬爆裂",
+        "rarity": "稀有",
+        "ts": 0
+      },
+      "cc-last-stand": {
+        "name": "破釜沉舟",
+        "rarity": "稀有",
+        "ts": 0
+      },
+      "cc-lava-blast": {
+        "name": "熔岩爆破",
+        "rarity": "稀有",
+        "ts": 0
+      },
+      "cc-mana-surge": {
+        "name": "法力奔涌",
+        "rarity": "传说",
+        "ts": 0
+      },
+      "cc-poison-burst": {
+        "name": "毒爆",
+        "rarity": "史诗",
+        "ts": 0
+      },
+      "cc-rapid-fire": {
+        "name": "连续射击",
+        "rarity": "史诗",
+        "ts": 0
+      },
+      "cc-rot-seed": {
+        "name": "腐化之种",
+        "rarity": "史诗",
+        "ts": 0
+      },
+      "cmtn125e1nk0": {
+        "name": "神秘召唤",
+        "rarity": "史诗",
+        "ts": 0
+      },
+      "cmtn1wnhhym": {
+        "name": "江湖救急-改",
+        "rarity": "职业",
+        "ts": 0
+      },
+      "cmtn6ulm4boj": {
+        "name": "步兵",
+        "rarity": "衍生",
+        "ts": 0
+      },
+      "cmtn79743r2n": {
+        "name": "末日浩劫之门",
+        "rarity": "棱彩",
+        "ts": 0
+      },
+      "cmtn7err0a7": {
+        "name": "天国之门",
+        "rarity": "棱彩",
+        "ts": 0
+      },
+      "pet-egg": {
+        "name": "宠物蛋",
+        "rarity": "传说",
+        "ts": 0
+      },
+      "tt-crystal": {
+        "name": "能源结晶",
+        "rarity": "史诗",
+        "ts": 0
+      },
+      "tt-key": {
+        "name": "一把钥匙",
+        "rarity": "古朴",
+        "ts": 0
+      },
+      "tt-key-one": {
+        "name": "三把钥匙",
+        "rarity": "史诗",
+        "ts": 0
+      },
+      "tt-keys-bunch": {
+        "name": "两把钥匙",
+        "rarity": "稀有",
+        "ts": 0
+      },
+      "tt-token-gold": {
+        "name": "员工通行证B",
+        "rarity": "史诗",
+        "ts": 0
+      },
+      "tt2-forestarrow": {
+        "name": "回音箭",
+        "rarity": "古朴",
+        "ts": 0
+      },
+      "tt3-fireball": {
+        "name": "火球",
+        "rarity": "衍生",
+        "ts": 0
+      },
+      "tt3-garnet-marble": {
+        "name": "石榴弹珠",
+        "rarity": "古朴",
+        "ts": 0
+      },
+      "tt3-holy-shield": {
+        "name": "圣盾",
+        "rarity": "职业",
+        "ts": 0
+      },
+      "tt3-holy-water": {
+        "name": "治愈",
+        "rarity": "古朴",
+        "ts": 0
+      },
+      "tt3-immortal-blade": {
+        "name": "骷髅王剑",
+        "rarity": "传说",
+        "ts": 0
+      },
+      "tt3-savior-elixir": {
+        "name": "斗神酒",
+        "rarity": "传说",
+        "ts": 0
+      },
+      "tt3eq-mistbox": {
+        "name": "迷之匣",
+        "rarity": "史诗",
+        "ts": 0
+      },
+      "tt3sp-doom": {
+        "name": "TNT",
+        "rarity": "史诗",
+        "ts": 0
+      },
+      "tt4-shine-token": {
+        "name": "员工通行证C",
+        "rarity": "传说",
+        "ts": 0
+      },
+      "tt5-galaxy-voyage": {
+        "name": "银河之旅",
+        "rarity": "传说",
+        "ts": 0
+      },
+      "tt6-goldhammer": {
+        "name": "满电动力锤",
+        "rarity": "衍生",
+        "ts": 0
+      },
+      "tt6-mystery": {
+        "name": "神秘补给",
+        "rarity": "衍生",
+        "ts": 0
+      },
+      "tt6-systemsupply": {
+        "name": "系统补给",
+        "rarity": "衍生",
+        "ts": 0
+      },
+      "tt7-demonbreaker": {
+        "name": "破甲重斩",
+        "rarity": "职业",
+        "ts": 0
+      },
+      "tt7-elementstorm": {
+        "name": "元素风暴",
+        "rarity": "职业",
+        "ts": 0
+      },
+      "tt7-ironcharge": {
+        "name": "厉兵秣马",
+        "rarity": "职业",
+        "ts": 0
+      },
+      "tt7-meteorstrong": {
+        "name": "星陨之力",
+        "rarity": "职业",
+        "ts": 0
+      },
+      "tt7-naturestaff": {
+        "name": "自然法杖",
+        "rarity": "稀有",
+        "ts": 0
+      },
+      "tt7-talisman": {
+        "name": "灵符",
+        "rarity": "稀有",
+        "ts": 0
+      },
+      "tt7-whirlwind": {
+        "name": "旋风斩",
+        "rarity": "职业",
+        "ts": 0
+      },
+      "tt8-abyss-sovereign": {
+        "name": "深渊主宰·妲莉薇特",
+        "rarity": "棱彩",
+        "ts": 0
+      },
+      "tt8-curse1": {
+        "name": "禁咒I",
+        "rarity": "衍生",
+        "ts": 0
+      },
+      "tt8-curse2": {
+        "name": "禁咒II",
+        "rarity": "衍生",
+        "ts": 0
+      },
+      "tt8-curse3": {
+        "name": "禁咒III",
+        "rarity": "衍生",
+        "ts": 0
+      },
+      "tt8-curse4": {
+        "name": "禁咒IV",
+        "rarity": "衍生",
+        "ts": 0
+      },
+      "tt8-curseimmune": {
+        "name": "封印肢体1",
+        "rarity": "棱彩",
+        "ts": 0
+      },
+      "tt8-energycap": {
+        "name": "封印肢体2",
+        "rarity": "棱彩",
+        "ts": 0
+      },
+      "tt8-healplus": {
+        "name": "封印肢体4",
+        "rarity": "棱彩",
+        "ts": 0
+      },
+      "tt8-hero-descender": {
+        "name": "充能火山",
+        "rarity": "古朴",
+        "ts": 0
+      },
+      "tt8-hero-mage": {
+        "name": "博览者的狂语",
+        "rarity": "稀有",
+        "ts": 0
+      },
+      "tt8-hero-sealer": {
+        "name": "受缚之残影",
+        "rarity": "棱彩",
+        "ts": 0
+      },
+      "tt8-hero-summoner": {
+        "name": "花开两面",
+        "rarity": "棱彩",
+        "ts": 0
+      },
+      "tt8-hero-warlock": {
+        "name": "禁术解放",
+        "rarity": "稀有",
+        "ts": 0
+      },
+      "tt8-nofocus": {
+        "name": "封印肢体3",
+        "rarity": "棱彩",
+        "ts": 0
+      }
+    },
+    "selMode": "standard",
+    "classes": {},
+    "stats": {
+      "nestBossKills": [],
+      "reviveKills": 0,
+      "turnMovesMax": 0,
+      "battleEquipsMax": 0,
+      "extracts": 3,
+      "deaths": 0,
+      "kills": 15,
+      "actions": 80,
+      "playSeconds": 0,
+      "bossKills": [],
+      "bestRunCoins": 0,
+      "stashTotal": 0,
+      "labTotalScore": 1500
+    },
+    "achClaimed": {},
+    "collClaimed": {},
+    "collXp": {
+      "cc-chase-slash": true,
+      "cc-cursed-blade": true,
+      "cc-double-boom": true,
+      "cc-dual-wield": true,
+      "cc-ember-burst": true,
+      "cc-last-stand": true,
+      "cc-lava-blast": true,
+      "cc-mana-surge": true,
+      "cc-poison-burst": true,
+      "cc-rapid-fire": true,
+      "cc-rot-seed": true,
+      "cmtn125e1nk0": true,
+      "cmtn1wnhhym": true,
+      "cmtn6ulm4boj": true,
+      "cmtn79743r2n": true,
+      "cmtn7err0a7": true,
+      "pet-egg": true,
+      "tt-crystal": true,
+      "tt-key": true,
+      "tt-key-one": true,
+      "tt-keys-bunch": true,
+      "tt-token-gold": true,
+      "tt2-forestarrow": true,
+      "tt3-fireball": true,
+      "tt3-garnet-marble": true,
+      "tt3-holy-shield": true,
+      "tt3-holy-water": true,
+      "tt3-immortal-blade": true,
+      "tt3-savior-elixir": true,
+      "tt3eq-mistbox": true,
+      "tt3sp-doom": true,
+      "tt4-shine-token": true,
+      "tt5-galaxy-voyage": true,
+      "tt6-goldhammer": true,
+      "tt6-mystery": true,
+      "tt6-systemsupply": true,
+      "tt7-demonbreaker": true,
+      "tt7-elementstorm": true,
+      "tt7-ironcharge": true,
+      "tt7-meteorstrong": true,
+      "tt7-naturestaff": true,
+      "tt7-talisman": true,
+      "tt7-whirlwind": true,
+      "tt8-abyss-sovereign": true,
+      "tt8-curse1": true,
+      "tt8-curse2": true,
+      "tt8-curse3": true,
+      "tt8-curse4": true,
+      "tt8-curseimmune": true,
+      "tt8-energycap": true,
+      "tt8-healplus": true,
+      "tt8-hero-descender": true,
+      "tt8-hero-mage": true,
+      "tt8-hero-sealer": true,
+      "tt8-hero-summoner": true,
+      "tt8-hero-warlock": true,
+      "tt8-nofocus": true
+    },
+    "backs": {
+      "classic": true
+    },
+    "backSel": "classic",
+    "home": {
+      "owned": {},
+      "placements": [],
+      "displays": []
+    },
+    "appearance": {
+      "characterSkins": {},
+      "selectedSkins": {}
+    },
+    "goals": {
+      "tracked": [],
+      "presets": {}
+    },
+    "story": {
+      "flags": {},
+      "outcomes": {}
+    },
+    "_m01": {
+      "revision": 0,
+      "requests": {}
+    },
+    "version": 2
+  },
+  "purpose": "仓库满的领取拒绝；只构造5335独立测试档位，不改变规则与玩家数据"
+}

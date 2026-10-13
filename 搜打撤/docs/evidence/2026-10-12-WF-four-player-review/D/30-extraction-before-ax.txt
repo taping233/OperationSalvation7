@@ -1,0 +1,192 @@
+Browser tab: 2, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5354/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/
+	1 container viewport
+		2 button 背包 15/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 15/16
+		5 container exMain
+			6 container
+				7 heading exit 撤离成功 · 整理入库, Value: 2
+					8 image exit
+					9 text  撤离成功 · 整理入库
+				10 button
+				11 text 把背包中的物品放回仓库——未入库的卡牌将在撤离中丢失
+				12 image archive
+				13 text  仓库容量  0/25  张
+				14 image coin
+				15 text  随身币不带回（ 33  币留在局中）
+			16 text EXTRACTION REPORT
+			17 text 战利品已回收，正在等待你的入库决定
+			18 text 容量 0/25 · 未入库卡牌会在完成整理时丢失
+			19 container
+				20 heading bag 背包卡牌 点击卡面放入仓库, Value: 3
+					21 image bag
+					22 text  背包卡牌  点击卡面放入仓库
+				23 button 入库 法杖
+					24 container
+						25 text 0
+						26 image 法杖
+						27 text 法杖 装备 · 古朴
+						28 container
+							29 text 古朴 古朴
+						30 text 你的 法伤 增加  1  点。
+				31 button 入库 两把钥匙
+					32 container
+						33 text 0
+						34 image 两把钥匙
+						35 text 两把钥匙 资源 · 稀有
+						36 container
+							37 text 稀有 稀有
+						38 text 钥匙 × 2 。
+				39 button 入库 厉兵秣马
+					40 container
+						41 text 2
+						42 image 厉兵秣马
+						43 text 厉兵秣马 武术 · 黑像专属
+						44 container
+							45 text 职业 职业
+						46 image cards
+						47 text 抽 2
+						48 image plate
+						49 text 甲 12 你获得  12  点 护甲 ，并抽  2  张牌。
+				50 button 入库 后备能源
+					51 container
+						52 text 6
+						53 image 后备能源
+						54 text 后备能源 法术 · 史诗
+						55 container
+							56 text 史诗 史诗
+						57 image cards
+						58 text 抽 2 抽  2  张牌，并回复你的全部 能量 ；你的 消耗 口袋中每有  1  张法术牌，本牌费用减少  1  点。
+				59 button 入库 一捆木材
+					60 container
+						61 text 0
+						62 image 一捆木材
+						63 text 一捆木材 资源 · 史诗
+						64 container
+							65 text 史诗 史诗
+						66 text 木材 × 3 。
+				67 button 入库 回音箭
+					68 container
+						69 text 1
+						70 image 回音箭
+						71 text 回音箭 武术 · 古朴
+						72 container
+							73 text 古朴 古朴
+						74 image plate
+						75 text 甲 3 造成（你的攻击力 -  1 ）点 攻击伤害 ；你获得  3  点 护甲 。
+				76 button 入库 治愈
+					77 container
+						78 text 1
+						79 image 治愈
+						80 text 治愈 法术 · 古朴
+						81 container
+							82 text 古朴 古朴
+						83 image heart
+						84 text 回 5 你回复  5  点 生命 ，并 净化 自身。
+				85 button 入库 斗神酒
+					86 container
+						87 text 0
+						88 image 斗神酒
+						89 text 斗神酒 道具 · 传说
+						90 container
+							91 text 传说 传说
+						92 image heart
+						93 text 回 99 你回复  99  点 生命 。
+				94 button 入库 阿猫的礼物
+					95 container
+						96 text 0
+						97 image 阿猫的礼物
+						98 text 阿猫的礼物 装备 · 史诗
+						99 container
+							100 text 史诗 史诗
+						101 text 你 发现 或随机获得本牌时，回复  1  点 能量 ，并随机获得另  1  张卡牌。
+				102 button 入库 邪能护体
+					103 container
+						104 text 2
+						105 image 邪能护体
+						106 text 邪能护体 法术 · 史诗
+						107 container
+							108 text 史诗 史诗
+						109 image cards
+						110 text 抽 3
+						111 image crystal
+						112 text 注能 2 注能 （ 2 ）： 抽  3  张牌；本 回合 ，你免疫所有 伤害 和 诅咒 效果。
+				113 button 入库 草甲
+					114 container
+						115 text 0
+						116 image 草甲
+						117 text 草甲 装备 · 古朴
+						118 container
+							119 text 古朴 古朴
+						120 image plate
+						121 text 甲 5 装备 本牌时，你获得  5  点 护甲 。
+				122 button 入库 影噬
+					123 container
+						124 text 1
+						125 image 影噬
+						126 text 影噬 武术 · 稀有
+						127 container
+							128 text 稀有 稀有
+						129 text 本 回合 ，你偷取  1  名敌人的攻击力，直到该敌人的攻击力降至  1  点。
+				130 button 入库 连射
+					131 container
+						132 text 1
+						133 image 连射
+						134 text 连射 武术 · 稀有
+						135 container
+							136 text 稀有 稀有
+						137 text 造成  2  点 固定伤害 ；本牌的 伤害 效果触发  3  次。
+				138 button 入库 射线枪
+					139 container
+						140 text 0
+						141 image 射线枪
+						142 text 射线枪 装备 · 古朴
+						143 container
+							144 text 古朴 古朴
+						145 text 主动技能 ： 发现 1  张射线牌，并直接施放。
+				146 button 入库 毒爆
+					147 container
+						148 text 1
+						149 image 毒爆
+						150 text 毒爆 法术 · 史诗
+						151 container
+							152 text 史诗 史诗
+						153 text 立即触发目标的  2  次全部毒伤。
+				154 button 入库 金币
+					155 container
+						156 text 0
+						157 image 金币
+						158 text 金币 资源 · 史诗
+						159 container
+							160 text 史诗 史诗
+						161 text 贵重货币，可出售。
+				162 button 入库 员工通行证C
+					163 container
+						164 text 0
+						165 image 员工通行证C
+						166 text 员工通行证C 道具 · 传说
+						167 container
+							168 text 传说 传说
+						169 text 发现 1  张传说卡。
+			170 container
+				171 heading archive 自动入库, Value: 3
+					172 image archive
+					173 text  自动入库
+				174 image wood
+				175 text  木材 × 0 已入库（扩建背包/仓库用）
+				176 image bread
+				177 text  口粮 × 0 已入库（升级安全格用）
+				178 image pocket
+				179 text  消耗口袋 每张 1/3 概率保留 · 带回 7 张（基地可复原）· 散失 19 张
+				180 button archive 全部入库（17/17 张可入）
+					181 image archive
+					182 text  全部入库（17/17 张可入）
+				183 button sparkles 智能整理（优先价值最高 · 上限仓库空格）
+					184 image sparkles
+					185 text  智能整理（优先价值最高 · 上限仓库空格）
+				186 button check 完成整理（17 张将丢失）, ID: btnDeploy
+					187 image check
+					188 text  完成整理（17 张将丢失）
+
+The focused UI element is 10 button

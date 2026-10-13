@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-nonbrowser-failures-b2-1013",
+  "date": "2026-10-13",
+  "owner": "Friday",
+  "goal": "分簇定性并修复上一轮全量测试中仍存在的非实页失败，保护已完成未提交成果",
+  "paths": [
+    "game/src/hub/",
+    "game/src/run/",
+    "game/css/photo-studio-unified.css",
+    "tests/",
+    "docs/evidence/2026-10-13-WF-nonbrowser-failures-b2-1013/",
+    "docs/PARALLEL-REGISTRY.md"
+  ],
+  "doneWhen": [
+    "选定失败簇各有当前复现、最小修复或明确阻断",
+    "改动有定向测试及静态检查结果并记录剩余边界"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "基地35项及架构32项、地图37项、卡牌与邻近121项等各簇定向回归通过，详见README",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "lint、语法386文件、docs守卫598链接和diff检查退出0",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "最终全量Vitest 350文件348过2败、2942用例2928过2败12跳",
+      "result": "failed"
+    }
+  ],
+  "unverified": [
+    "资产审计仍有273项未登记素材，来源归属未齐",
+    "agent-batch子进程静默退出，runner超时行为尚未检验",
+    "按老板要求不做游戏实页；照相馆门头视觉排布未验证，build与远端CI未覆盖"
+  ],
+  "updatedAt": "2026-10-13T11:24:59.781Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

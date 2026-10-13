@@ -1,0 +1,651 @@
+[
+  {
+    "path": "game/css/card-v3.css",
+    "removed": [
+      {
+        "line": 13,
+        "selector": ".hs-card"
+      },
+      {
+        "line": 14,
+        "selector": ".hs-card.cf0"
+      },
+      {
+        "line": 15,
+        "selector": ".hs-card.cf1"
+      },
+      {
+        "line": 16,
+        "selector": ".hs-card.cf2"
+      },
+      {
+        "line": 17,
+        "selector": ".hs-card.cf3"
+      },
+      {
+        "line": 18,
+        "selector": ".hs-card.cf4"
+      },
+      {
+        "line": 20,
+        "selector": ".hs-card"
+      },
+      {
+        "line": 21,
+        "selector": ".hs-card.rv1"
+      },
+      {
+        "line": 22,
+        "selector": ".hs-card.rv2"
+      },
+      {
+        "line": 23,
+        "selector": ".hs-card.rv3"
+      },
+      {
+        "line": 24,
+        "selector": ".hs-card.rv4"
+      },
+      {
+        "line": 25,
+        "selector": ".hs-card.rv5"
+      },
+      {
+        "line": 26,
+        "selector": ".hs-card.rv6"
+      },
+      {
+        "line": 27,
+        "selector": ".hs-card.rv7"
+      },
+      {
+        "line": 28,
+        "selector": ".hs-card.rv-prism"
+      },
+      {
+        "line": 30,
+        "selector": ".hs-card,#overlay .lib-cardwrap .hs-card,#cardZoom .hs-card"
+      },
+      {
+        "line": 41,
+        "selector": ".hs-card::before"
+      },
+      {
+        "line": 53,
+        "selector": ".hs-card .hsc-name,#overlay .hs-card .hsc-name,#cardZoom .hs-card .hsc-name"
+      },
+      {
+        "line": 74,
+        "selector": ".hs-card.rv7 .hsc-name,.hs-card.rv-prism .hsc-name,\r\n#overlay .hs-card.rv7 .hsc-name,#overlay .hs-card.rv-prism .hsc-name,\r\n#cardZoom .hs-card.rv7 .hsc-name,#cardZoom .hs-card.rv-prism .hsc-name"
+      },
+      {
+        "line": 79,
+        "selector": ".hs-card.rv7 .hsc-name span,.hs-card.rv-prism .hsc-name span"
+      },
+      {
+        "line": 83,
+        "selector": ".hs-card .hsc-art"
+      },
+      {
+        "line": 90,
+        "selector": ".hs-card .hsc-type"
+      },
+      {
+        "line": 102,
+        "selector": ".hs-card .hsc-desc"
+      },
+      {
+        "line": 110,
+        "selector": ".hs-card .hsc-cost"
+      },
+      {
+        "line": 119,
+        "selector": ".hs-card .hsc-cost.cost-mod.mod-down"
+      },
+      {
+        "line": 122,
+        "selector": ".hs-card .hsc-cost.cost-mod.mod-up"
+      },
+      {
+        "line": 126,
+        "selector": ".hs-card .hsc-dmg"
+      },
+      {
+        "line": 134,
+        "selector": ".hs-card .hsc-val"
+      },
+      {
+        "line": 139,
+        "selector": ".hs-card .hsc-gem"
+      },
+      {
+        "line": 141,
+        "selector": ".hs-card .hsc-desc .d-num"
+      },
+      {
+        "line": 142,
+        "selector": ".hs-card .hsc-desc .d-kw"
+      },
+      {
+        "line": 143,
+        "selector": ".hs-card .hsc-desc .d-term"
+      },
+      {
+        "line": 154,
+        "selector": ".hs-card"
+      },
+      {
+        "line": 155,
+        "selector": "#overlay .lib-cardwrap .hs-card"
+      },
+      {
+        "line": 156,
+        "selector": ".hs-card .hsc-art,\r\n#overlay .lib-cardwrap .hsc-art,\r\n.hs-card.lib .hsc-art"
+      },
+      {
+        "line": 190,
+        "selector": "#cardZoom .hs-card .hsc-desc"
+      },
+      {
+        "line": 191,
+        "selector": ".hs-card .rv-beam::before"
+      },
+      {
+        "line": 199,
+        "selector": ".hs-card .hsc-art"
+      },
+      {
+        "line": 200,
+        "selector": ".hs-card .hsc-art::after"
+      },
+      {
+        "line": 203,
+        "selector": ".hs-card .hsc-art::before"
+      }
+    ]
+  },
+  {
+    "path": "game/css/winter.css",
+    "removed": [
+      {
+        "line": 14,
+        "selector": "#overlay .lib-cardwrap:where(:not(.studio-photo)) .hs-card"
+      },
+      {
+        "line": 15,
+        "selector": "#overlay .lib-cardwrap:where(:not(.studio-photo)) .hsc-art"
+      },
+      {
+        "line": 16,
+        "selector": "#overlay .lib-cardwrap:where(:not(.studio-photo)) .hsc-art .art-card-image"
+      },
+      {
+        "line": 35,
+        "selector": "#overlay .lib-cardwrap:where(:not(.studio-photo)) .hsc-cost,\n#overlay .lib-cardwrap:where(:not(.studio-photo)) .hsc-val"
+      },
+      {
+        "line": 482,
+        "selector": "#overlay .lib-cardwrap:where(:not(.studio-photo)) .hsc-art"
+      },
+      {
+        "line": 483,
+        "selector": "#overlay .lib-cardwrap:where(:not(.studio-photo)) .hsc-art .art-card-image"
+      },
+      {
+        "line": 484,
+        "selector": "#overlay .lib-cardwrap:where(:not(.studio-photo)) .hs-card"
+      },
+      {
+        "line": 485,
+        "selector": "#overlay .lib-cardwrap:where(:not(.studio-photo)) .hsc-name"
+      },
+      {
+        "line": 512,
+        "selector": "#cardZoom .cz-card .hsc-art img"
+      },
+      {
+        "line": 628,
+        "selector": ".hs-card"
+      },
+      {
+        "line": 637,
+        "selector": ".hs-card.rv0"
+      },
+      {
+        "line": 637,
+        "selector": ".hs-card.rv1"
+      },
+      {
+        "line": 637,
+        "selector": ".hs-card.rv2"
+      },
+      {
+        "line": 637,
+        "selector": ".hs-card.rv3"
+      },
+      {
+        "line": 637,
+        "selector": ".hs-card.rv4"
+      },
+      {
+        "line": 637,
+        "selector": ".hs-card.rv5"
+      },
+      {
+        "line": 637,
+        "selector": ".hs-card.rv6"
+      },
+      {
+        "line": 637,
+        "selector": ".hs-card.rv7"
+      },
+      {
+        "line": 637,
+        "selector": ".hs-card.rv-prism"
+      },
+      {
+        "line": 638,
+        "selector": ".hs-card .hsc-name"
+      },
+      {
+        "line": 641,
+        "selector": ".hs-card .hsc-gem"
+      },
+      {
+        "line": 645,
+        "selector": ".hs-card .hsc-art"
+      },
+      {
+        "line": 650,
+        "selector": ".hs-card"
+      },
+      {
+        "line": 656,
+        "selector": ".hs-card .hsc-name"
+      },
+      {
+        "line": 661,
+        "selector": ".hs-card.tp0"
+      },
+      {
+        "line": 662,
+        "selector": ".hs-card.tp1"
+      },
+      {
+        "line": 663,
+        "selector": ".hs-card.tp2"
+      },
+      {
+        "line": 664,
+        "selector": ".hs-card.tp3"
+      },
+      {
+        "line": 665,
+        "selector": ".hs-card.tp4"
+      },
+      {
+        "line": 666,
+        "selector": ".hs-card.tp5"
+      },
+      {
+        "line": 667,
+        "selector": ".hs-card.tp6"
+      },
+      {
+        "line": 668,
+        "selector": ".hs-card.tp7"
+      },
+      {
+        "line": 672,
+        "selector": "#overlay .lib-cardwrap:where(:not(.studio-photo)) .hs-card"
+      },
+      {
+        "line": 676,
+        "selector": "#overlay .lib-cardwrap:where(:not(.studio-photo)) .hs-card .hsc-art"
+      },
+      {
+        "line": 682,
+        "selector": ".hs-card"
+      },
+      {
+        "line": 693,
+        "selector": ".hs-card::before"
+      },
+      {
+        "line": 704,
+        "selector": ".hs-card.tp0"
+      },
+      {
+        "line": 705,
+        "selector": ".hs-card.tp1"
+      },
+      {
+        "line": 706,
+        "selector": ".hs-card.tp2"
+      },
+      {
+        "line": 707,
+        "selector": ".hs-card.tp3"
+      },
+      {
+        "line": 708,
+        "selector": ".hs-card.tp4"
+      },
+      {
+        "line": 709,
+        "selector": ".hs-card.tp5"
+      },
+      {
+        "line": 710,
+        "selector": ".hs-card.tp6"
+      },
+      {
+        "line": 711,
+        "selector": ".hs-card.tp7"
+      },
+      {
+        "line": 713,
+        "selector": ".hs-card .hsc-name"
+      },
+      {
+        "line": 727,
+        "selector": ".hs-card .hsc-art"
+      },
+      {
+        "line": 736,
+        "selector": ".hs-card .hsc-art .art-card-image"
+      },
+      {
+        "line": 738,
+        "selector": ".hs-card .hsc-type"
+      },
+      {
+        "line": 750,
+        "selector": ".hs-card .hsc-kw"
+      },
+      {
+        "line": 751,
+        "selector": ".hs-card .hsc-gem"
+      },
+      {
+        "line": 753,
+        "selector": ".hs-card.rv7 .hsc-gem,.hs-card.rv-prism .hsc-gem"
+      },
+      {
+        "line": 754,
+        "selector": ".hs-card .hsc-desc"
+      },
+      {
+        "line": 765,
+        "selector": ".hs-card .hsc-cost,.hs-card .hsc-val"
+      },
+      {
+        "line": 768,
+        "selector": ".hs-card .hsc-name"
+      },
+      {
+        "line": 777,
+        "selector": ".hs-card"
+      },
+      {
+        "line": 788,
+        "selector": ".hs-card::before"
+      },
+      {
+        "line": 794,
+        "selector": ".hs-card .hsc-cost"
+      },
+      {
+        "line": 804,
+        "selector": ".hs-card .hsc-name"
+      },
+      {
+        "line": 815,
+        "selector": ".hs-card .hsc-art"
+      },
+      {
+        "line": 824,
+        "selector": ".hs-card .hsc-art .art-card-image"
+      },
+      {
+        "line": 825,
+        "selector": ".hs-card .hsc-type"
+      },
+      {
+        "line": 835,
+        "selector": ".hs-card .hsc-kw"
+      },
+      {
+        "line": 836,
+        "selector": ".hs-card .hsc-gem"
+      },
+      {
+        "line": 844,
+        "selector": ".hs-card .hsc-desc"
+      },
+      {
+        "line": 854,
+        "selector": ".hs-card .hsc-dmg,.hs-card .hsc-val"
+      },
+      {
+        "line": 857,
+        "selector": ".hs-card .hsc-name"
+      },
+      {
+        "line": 932,
+        "selector": ".hs-card .hsc-name"
+      },
+      {
+        "line": 939,
+        "selector": ".hs-card.rv0 .hsc-name"
+      },
+      {
+        "line": 940,
+        "selector": ".hs-card.rv1 .hsc-name"
+      },
+      {
+        "line": 941,
+        "selector": ".hs-card.rv2 .hsc-name"
+      },
+      {
+        "line": 942,
+        "selector": ".hs-card.rv3 .hsc-name"
+      },
+      {
+        "line": 943,
+        "selector": ".hs-card.rv4 .hsc-name"
+      },
+      {
+        "line": 944,
+        "selector": ".hs-card.rv5 .hsc-name"
+      },
+      {
+        "line": 945,
+        "selector": ".hs-card.rv6 .hsc-name"
+      },
+      {
+        "line": 948,
+        "selector": ".hs-card.rv7 .hsc-name,.hs-card.rv-prism .hsc-name"
+      },
+      {
+        "line": 949,
+        "selector": ".hs-card.rv7 .hsc-name span,.hs-card.rv-prism .hsc-name span"
+      },
+      {
+        "line": 956,
+        "selector": ".hs-card"
+      },
+      {
+        "line": 964,
+        "selector": ".hs-card.tp0"
+      },
+      {
+        "line": 965,
+        "selector": ".hs-card.tp1"
+      },
+      {
+        "line": 966,
+        "selector": ".hs-card.tp2"
+      },
+      {
+        "line": 967,
+        "selector": ".hs-card.tp3"
+      },
+      {
+        "line": 968,
+        "selector": ".hs-card.tp4"
+      },
+      {
+        "line": 969,
+        "selector": ".hs-card.tp5"
+      },
+      {
+        "line": 970,
+        "selector": ".hs-card.tp6"
+      },
+      {
+        "line": 971,
+        "selector": ".hs-card.tp7"
+      },
+      {
+        "line": 972,
+        "selector": ".hs-card .hsc-desc"
+      },
+      {
+        "line": 977,
+        "selector": ".hs-card .hsc-art"
+      },
+      {
+        "line": 983,
+        "selector": ".hs-card::before"
+      },
+      {
+        "line": 986,
+        "selector": ".hs-card .hsc-type"
+      },
+      {
+        "line": 987,
+        "selector": ".hs-card.tp0 .hsc-type"
+      },
+      {
+        "line": 988,
+        "selector": ".hs-card.tp1 .hsc-type"
+      },
+      {
+        "line": 989,
+        "selector": ".hs-card.tp2 .hsc-type"
+      },
+      {
+        "line": 990,
+        "selector": ".hs-card.tp3 .hsc-type"
+      },
+      {
+        "line": 991,
+        "selector": ".hs-card.tp4 .hsc-type"
+      },
+      {
+        "line": 992,
+        "selector": ".hs-card.tp5 .hsc-type"
+      },
+      {
+        "line": 993,
+        "selector": ".hs-card.tp6 .hsc-type"
+      },
+      {
+        "line": 994,
+        "selector": ".hs-card.tp7 .hsc-type"
+      },
+      {
+        "line": 998,
+        "selector": ".hs-card .hsc-art .art-card-image.art-hero-fit"
+      },
+      {
+        "line": 1003,
+        "selector": "#overlay .lib-cardwrap:where(:not(.studio-photo)) .hsc-art .art-card-image.art-hero-fit"
+      },
+      {
+        "line": 1046,
+        "selector": "#overlay .card.chest .bt-hand .hs-card"
+      },
+      {
+        "line": 1047,
+        "selector": "#overlay .card.chest .bt-hand[data-n=\"5\"] .hs-card"
+      },
+      {
+        "line": 1048,
+        "selector": "#overlay .card.chest .bt-hand[data-n=\"6\"] .hs-card,\r\n#overlay .card.chest .bt-hand:not([data-n]) .hs-card"
+      },
+      {
+        "line": 1359,
+        "selector": "#overlay .card.chest .bt-hand .hs-card"
+      }
+    ]
+  },
+  {
+    "path": "game/css/battle.css",
+    "removed": [
+      {
+        "line": 449,
+        "selector": ".hsc-desc span"
+      },
+      {
+        "line": 455,
+        "selector": ".bt-card.compact .hsc-desc,\r\n.bt-card.compact .hsc-type,\r\n.bt-card.compact .hsc-kw,\r\n.bt-card.compact .hsc-val"
+      },
+      {
+        "line": 460,
+        "selector": ".sts-hand .bt-slot:hover .bt-card.compact:not(.off) .hsc-desc,\r\n.sts-hand .bt-slot:hover .bt-card.compact:not(.off) .hsc-type,\r\n.sts-hand .bt-slot:hover .bt-card.compact:not(.off) .hsc-kw,\r\n.sts-hand .bt-slot:hover .bt-card.compact:not(.off) .hsc-val"
+      },
+      {
+        "line": 466,
+        "selector": ".bt-card.compact.sel .hsc-desc,\r\n.bt-card.compact.infuse-self .hsc-desc"
+      },
+      {
+        "line": 473,
+        "selector": ".sts-hand .hs-card .hsc-desc"
+      },
+      {
+        "line": 474,
+        "selector": ".sts-hand .hs-card .hsc-desc span"
+      }
+    ]
+  },
+  {
+    "path": "game/css/expedition-battle.css",
+    "removed": [
+      {
+        "line": 110,
+        "selector": "#overlay .battle-stage.sts .sts-hand[data-readable=\"true\"] .bt-card.compact .hsc-desc"
+      },
+      {
+        "line": 111,
+        "selector": "#overlay .battle-stage.sts .sts-hand[data-readable=\"true\"] .bt-card.compact .hsc-desc > span:not(.bt-rulehint)"
+      }
+    ]
+  },
+  {
+    "path": "game/css/ak-skin.css",
+    "removed": [
+      {
+        "line": 62,
+        "selector": ".hs-card"
+      },
+      {
+        "line": 66,
+        "selector": ".hs-card::before"
+      },
+      {
+        "line": 73,
+        "selector": ".rv5"
+      },
+      {
+        "line": 74,
+        "selector": ".rv5"
+      },
+      {
+        "line": 202,
+        "selector": ".hs-card::after"
+      }
+    ]
+  }
+]

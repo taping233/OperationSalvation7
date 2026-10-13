@@ -1,0 +1,86 @@
+[
+  {
+    "name": "passage",
+    "runtime": "game\\assets\\scenes\\map-nodes\\passage-symbol-foreground-1012-v5.webp",
+    "bounds": [
+      105,
+      61,
+      405,
+      447
+    ],
+    "source": "docs\\evidence\\2026-10-12-map-visual-review\\direct-is7-rebuild\\source\\passage-foreground-v5.png",
+    "sourceSHA256": "41f65988cda13f9d3902a64bf98b3a461c941e9741b36e349eb6fae0331218f4",
+    "runtimeSHA256": "d34a0b8ab3105d97f9428707d33a0ea60812325bbbc50a9d4c1f6c1aceb400f8",
+    "bytes": 93940
+  },
+  {
+    "name": "fire",
+    "runtime": "game\\assets\\scenes\\map-nodes\\fire-symbol-foreground-1012-v5.webp",
+    "bounds": [
+      82,
+      120,
+      428,
+      410
+    ],
+    "source": "docs\\evidence\\2026-10-12-map-visual-review\\direct-is7-rebuild\\source\\fire-foreground-v5.png",
+    "sourceSHA256": "015b8ba3eb284db50b0cc9a7a2768ac407c16ca95c03ce4e0941c8ffbfa1c92a",
+    "runtimeSHA256": "e145548da1a0ee66277e112f0ccd76aeeef8ad2ed3df26e335c42cc0184a316e",
+    "bytes": 75156
+  },
+  {
+    "name": "supply",
+    "runtime": "game\\assets\\scenes\\map-nodes\\supply-symbol-foreground-1012-v5.webp",
+    "bounds": [
+      86,
+      82,
+      432,
+      433
+    ],
+    "source": "docs\\evidence\\2026-10-12-map-visual-review\\direct-is7-rebuild\\source\\supply-foreground-v5.png",
+    "sourceSHA256": "cfa627e1cf727d12225b7371f77c5e2900c07fc49f80ded3daf2040cfbdf137d",
+    "runtimeSHA256": "78264daa8743dbbd26efcc4f48b6df223106d8bde8d9f292eb490a43af5b145f",
+    "bytes": 72068
+  },
+  {
+    "name": "battle",
+    "runtime": "game\\assets\\scenes\\map-nodes\\battle-symbol-foreground-1012-v5.webp",
+    "bounds": [
+      75,
+      32,
+      429,
+      477
+    ],
+    "source": "docs\\evidence\\2026-10-12-map-visual-review\\direct-is7-rebuild\\source\\battle-foreground-v5.png",
+    "sourceSHA256": "6a2c12c09cc496be837cb769e695bd7063fa12375ea9e84eb6568f95e6e6b6b9",
+    "runtimeSHA256": "9241f51308b4dc172921cc37f56303d9361a17c520d55d33e7761ff029bb5f19",
+    "bytes": 125126
+  },
+  {
+    "name": "shop",
+    "runtime": "game\\assets\\scenes\\map-nodes\\shop-symbol-foreground-1012-v5.webp",
+    "bounds": [
+      106,
+      69,
+      440,
+      478
+    ],
+    "source": "docs\\evidence\\2026-10-12-map-visual-review\\direct-is7-rebuild\\source\\shop-foreground-v5.png",
+    "sourceSHA256": "83a75efc03c363f307d3c77fd42e93981a26f5e371e7e2c4278bf02f2d010d20",
+    "runtimeSHA256": "4fb22693b2c332bac0b3b5e775d4492382696558426f27ae1932bd853d5e3224",
+    "bytes": 97304
+  },
+  {
+    "name": "event",
+    "runtime": "game\\assets\\scenes\\map-nodes\\event-symbol-foreground-1012-v5.webp",
+    "bounds": [
+      95,
+      53,
+      448,
+      482
+    ],
+    "source": "docs\\evidence\\2026-10-12-map-visual-review\\direct-is7-rebuild\\source\\event-foreground-v5.png",
+    "sourceSHA256": "16f43474eb8904dd7e2488fdb2da98f5bcb309d5f0a1cb3c64b799d71c4c58a8",
+    "runtimeSHA256": "6df8d522aab6d7f5edddd98cb66a10d5e7c4cbfdeecd042997d87fa7854b0999",
+    "bytes": 105828
+  }
+]

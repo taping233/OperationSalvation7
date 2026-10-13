@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-ark-ui-reference-1012",
+  "date": "2026-10-12",
+  "owner": "Friday",
+  "goal": "整理明日方舟肉鸽可用于代号柒的美术/UI/交互图文参考板，包含事件、领取奖励、地图与详情建议，不改游戏",
+  "paths": [
+    "docs/evidence/2026-10-12-WF-ark-ui-reference-1012"
+  ],
+  "doneWhen": [
+    "AI可直接读取的正文包含来源观察、精选原则、具体布局与交互状态",
+    "老板可删减改造的授权明确，图片结构注释与玩家文案区分",
+    "完成内容审读与修订，按老板要求不追加测试或视觉验收"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [],
+  "unverified": [
+    "修订后图版按老板要求未追加视觉验收；本轮只做内容审读，没有游戏改动或测试"
+  ],
+  "updatedAt": "2026-10-12T11:09:28.651Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

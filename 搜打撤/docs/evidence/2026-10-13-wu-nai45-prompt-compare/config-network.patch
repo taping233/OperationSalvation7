@@ -1,0 +1,14 @@
+diff --git a/.codex/config.toml b/.codex/config.toml
+--- a/.codex/config.toml
++++ b/.codex/config.toml
+@@ -3,3 +3,10 @@
+ 
+ # Superseded 2026-09-27: all 26 exclusions are now in user config.
+ # No project skill overrides remain; re-enable skills in the user config only.
++
++[sandbox_workspace_write]
++network_access = true
++
++[features.network_proxy]
++enabled = true
++domains = { "image.novelai.net" = "allow" }

@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "kind": "browser-snapshot",
+  "observedAt": "2026-10-10T05:50:54.855Z",
+  "scene": "成就点击黑边修复后",
+  "collector": {
+    "platform": "Codex",
+    "browser": "iab",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 606
+    }
+  },
+  "selectors": [
+    {
+      "key": "scroll",
+      "selector": ".ag-scroll"
+    },
+    {
+      "key": "detail",
+      "selector": ".ag-detail"
+    }
+  ],
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": ".ag-scroll",
+      "key": "scroll",
+      "rect": {
+        "height": 579.1749877929688,
+        "width": 555.2875366210938,
+        "x": 5.675000190734863,
+        "y": 363.1875
+      },
+      "selector": ".ag-scroll",
+      "styles": {
+        "overflow-x": "hidden",
+        "overflow-y": "auto",
+        "scrollbar-gutter": "stable"
+      },
+      "tag": "DIV",
+      "text": ""
+    },
+    {
+      "attributes": {},
+      "identity": ".ag-detail",
+      "key": "detail",
+      "rect": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "selector": ".ag-detail",
+      "styles": {
+        "overflow-x": "hidden",
+        "overflow-y": "auto",
+        "scrollbar-gutter": "stable"
+      },
+      "tag": "SECTION",
+      "text": ""
+    }
+  ],
+  "actions": [
+    {
+      "type": "real-input",
+      "detail": "远征/战斗分类及奖章真实点击；关闭键和Esc返回；Shift+Tab在详情内"
+    },
+    {
+      "type": "static-inspection",
+      "detail": "列表/详情overflow-x为hidden，列表gutter为stable；稳定态无横向溢出"
+    }
+  ],
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "screenshots": [
+    "docs/evidence/2026-10-10-ach-motion/click-edge-fixed.jpg"
+  ]
+}

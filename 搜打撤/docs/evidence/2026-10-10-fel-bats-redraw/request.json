@@ -1,0 +1,29 @@
+{
+  "tool": "built-in image_gen",
+  "acquisition": "生成后复制至项目",
+  "integrated": true,
+  "items": [
+    {
+      "prompt": "Use case: style-transfer. Redraw image 1, Fel Protection game spell card. Image 1 is the composition target and character identity; images 2-4 are painting-style references only, do not copy their identities or costumes. Preserve landscape 4:3 composition: front-facing dark hooded mage at center, face concealed beneath the hood, lower robe cropped by bottom edge, raised open gloved hand on image right. A large broad purple-black magical shield covers the torso with the original coarse connected triangular relief planes; preserve its overall shield silhouette and a few large angular volumes rather than creating a mosaic of tiny facets. Two red-pink energy rays attack from the left and right edges and stop at the shield. Preserve dark chains extending to both sides with pointed hook ends, and three pale floating paper sheets around the shield, against a plain muted gray-green field. Retain the subject positions, relative sizes, and quiet backdrop. Clarify the interaction where rays meet the shield with small concentrated pink accents and darker purple shield planes, do not add explosions or extra characters. Hood and robe painted as broad substantial dark cloth masses, a few directional folds, readable raised hand. Rough hand-painted anime color study, large connected opaque masses, wide directional swipes, blunt dabs, matte muted colors, decisive handmade edges, selective unfinished marks and quiet areas. Shield is the large focal prop, background and secondary chains economical. No glossy rendering, airbrushed bloom, dense engraving, dense wrinkles, all-over texture filters, tiny facet noise, text, watermark, UI or frame.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt12-felguard.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "output": ".tmp/imagegen/fel-bats-redraw-20261010/felguard.png",
+      "sha256": "1F15B756C502F8EB45A7937E5B82F0D1072608C72C32A31A0E5EBAD00A161896"
+    },
+    {
+      "prompt": "Use case: style-transfer. Redraw image 1, Blood Bat Storm spell game card. Image 1 determines original composition and subject; images 2-4 are brush-style references only, do not copy their people or costumes. Preserve square frame and a single centered scarlet bat swarm vortex, broad round open funnel at the top, tapering through a spiraling cone to a thin downward point near the bottom. Preserve its scale, position and dark near-black burgundy plain backdrop with ample negative space. The vortex is made of bats, NOT a thorn bush or cloud of shards: show several clear larger bat silhouettes at the top rim and outer edges with paired membranous wings and tiny bodies, their wings curling with the collective spiral; the majority of the swarm merges into large connected crimson and dark wine-red curved bands. Use strong dark/light separation to explain the hollow top opening and the tightening rotating funnel. Do not individually outline hundreds of tiny bats. Bright scarlet focal accents concentrated at the upper opening and a few forward wing planes, quieter deep-red shadow bands below; no people, ground or scenery. Rough hand-painted anime color study, large connected opaque masses, a few broad curved directional swipes and blunt dabs, decisive handmade edges, grouped shadows, matte colors, selective unfinished marks with quiet regions. No fine tangled line networks, dense micro-detail, faceted shard mosaics, glossy 3D, airbrushed glow or all-over grain filters. No text, frame, UI or watermark.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt3sp-bloodstorm.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "output": ".tmp/imagegen/fel-bats-redraw-20261010/bloodstorm.png",
+      "sha256": "22DE87DC645B5ACD20579BCE17D56F764CDD60AC5A6F5EE21DCEAF6EEBFA73E0"
+    }
+  ]
+}

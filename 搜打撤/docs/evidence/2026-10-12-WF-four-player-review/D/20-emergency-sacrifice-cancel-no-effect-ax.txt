@@ -1,0 +1,180 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5354/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/
+	2 container viewport
+		3 button 背包 16/16 满, ID: bagBtnFloat
+			4 text 背包
+			5 text 16/16
+			178 text 满
+		7 container crystal 选择要献祭的卡牌, ID: overlay
+			8 container
+				9 button Description: 关闭, ID: ovCloseX
+				10 heading crystal 选择要献祭的卡牌, Value: 2, ID: ovTitle
+					11 image crystal
+					12 text  选择要献祭的卡牌
+				13 container ovBody
+					14 container
+						15 text 选择  3  张卡牌献祭（已选  0 ）
+					16 container
+						17 container
+							18 text 1
+							19 image 包扎
+							20 text 包扎 武术 · 古朴
+							179 container
+								180 text 古朴 古朴
+							23 image heart
+							24 text 回 3
+							25 image plate
+							26 text 甲 3 你回复  3  点 生命 ，并获得  3  点 护甲 。
+						27 text 1 费
+						28 container
+							29 text 1
+							30 image 灵能召唤
+							31 text 灵能召唤 法术 · 稀有
+							181 container
+								182 text 稀有 稀有
+							34 text 发现 1  张 注能 卡牌，并使该牌无需 注能 。
+						35 text 1 费
+						36 container
+							37 text 0
+							38 image 一把钥匙
+							39 text 一把钥匙 资源 · 古朴
+							183 container
+								184 text 古朴 古朴
+							42 text 解锁大门。
+						43 text 0 费
+						44 container
+							45 text 1
+							46 image 割蚀
+							47 text 割蚀 武术 · 古朴
+							185 container
+								186 text 古朴 古朴
+							50 text 使  1  名敌人的攻击力降低  2  点，持续  3 回合 ；对该敌人附加  1  层 流血 。
+						51 text 1 费
+						52 container
+							53 text 1
+							54 image 包扎
+							55 text 包扎 武术 · 古朴
+							187 container
+								188 text 古朴 古朴
+							58 image heart
+							59 text 回 3
+							60 image plate
+							61 text 甲 3 你回复  3  点 生命 ，并获得  3  点 护甲 。
+						62 text 1 费
+						63 container
+							64 text 0
+							65 image 法杖
+							66 text 法杖 装备 · 古朴
+							189 container
+								190 text 古朴 古朴
+							69 text 你的 法伤 增加  1  点。
+						70 text 0 费
+						71 container
+							72 text 0
+							73 image 两把钥匙
+							74 text 两把钥匙 资源 · 稀有
+							191 container
+								192 text 稀有 稀有
+							77 text 钥匙 × 2 。
+						78 text 0 费
+						79 container
+							80 text 1
+							81 image 二刀流
+							82 text 二刀流 武术 · 稀有
+							193 container
+								194 text 稀有 稀有
+							85 text 发现 1  张武术牌，并额外获得该牌的  1  张复制。
+						86 text 1 费
+						87 container
+							88 text 2
+							89 image 厉兵秣马
+							90 text 厉兵秣马 武术 · 黑像专属
+							195 container
+								196 text 职业 职业
+							93 image cards
+							94 text 抽 2
+							95 image plate
+							96 text 甲 12 你获得  12  点 护甲 ，并抽  2  张牌。
+						97 text 2 费
+						98 container
+							99 text 0
+							100 image 复原药水
+							101 text 复原药水 道具 · 稀有
+							197 container
+								198 text 稀有 稀有
+							104 text 只能在背包中使用；复原最多  2  张卡牌。
+						105 text 0 费
+						106 container
+							107 text 0
+							108 image 口粮
+							109 text 口粮 资源 · 稀有
+							199 container
+								200 text 稀有 稀有
+							112 text 升级宠物。
+						113 text 0 费
+						114 container
+							115 text 0
+							116 image 天狼长弓
+							117 text 天狼长弓 装备 · 稀有
+							201 container
+								202 text 稀有 稀有
+							120 text 回合开始时 ，随机获得  1  张箭系列卡牌，并使其变为  0  费。
+						121 text 0 费
+						122 container
+							123 text 0
+							124 image 长剑
+							125 text 长剑 装备 · 古朴
+							203 container
+								204 text 古朴 古朴
+							128 text 你的攻击力增加  1  点。
+						129 text 0 费
+						130 container
+							131 text 0
+							132 image 违禁烟火
+							133 text 违禁烟火 法术 · 古朴
+							205 container
+								206 text 古朴 古朴
+							136 text 对全体敌人造成  1  点 固定伤害 。
+						137 text 0 费
+						138 container
+							139 text 1
+							140 image 坚盾
+							141 text 坚盾 武术 · 黑像专属
+							207 container
+								208 text 职业 职业
+							144 image plate
+							145 text 甲 8 你获得  8  点 护甲 ；下 回合开始时 ，你失去  4  点 护甲 。
+						146 text 1 费
+						147 container
+							148 text 2
+							149 image 诅咒之刃
+							150 text 诅咒之刃 武术 · 稀有
+							209 container
+								210 text 稀有 稀有
+							153 text 造成（你的攻击力 +  3 ）点 攻击伤害 ；对目标附加你手牌中的 招式 所具有的全部 诅咒 效果。
+						154 text 2 费
+						155 container
+							156 text 1
+							157 image 高端研发
+							158 text 高端研发 法术 · 稀有
+							211 container
+								212 text 稀有 稀有
+							161 text 发现 1  张  2  费 招式 ；每个 回合开始时 ，所选卡牌的费用减少  1  点。
+						162 text 1 费
+						163 container
+							164 text 1
+							165 image 闪电链
+							166 text 闪电链 法术 · 古朴
+							213 container
+								214 text 古朴 古朴
+							169 text 造成  3  点 法术伤害 ；本牌的 伤害 效果触发  2  次。
+						170 text 1 费
+					171 container
+						172 button (disabled) crystal 确认献祭
+							173 image crystal
+							174 text  确认献祭
+						175 button exit 取消
+							176 image exit
+							177 text  取消
+
+The focused UI element is 9 button Description: 关闭, ID: ovCloseX

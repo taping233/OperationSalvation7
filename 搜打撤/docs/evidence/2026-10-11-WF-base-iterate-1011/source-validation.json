@@ -1,0 +1,127 @@
+{
+  "observedAt": "2026-10-11T03:44:28.888Z",
+  "syntax": {
+    "passed": 11,
+    "paths": [
+      "game/src/hub/game.hub.js",
+      "game/src/hub/hub.personnel.js",
+      "game/src/hub/hub.warehouse.js",
+      "game/src/hub/hub.facilities.js",
+      "game/src/hub/hub.home-v3.js",
+      "game/src/hub/hub.archive.js",
+      "game/src/hub/hub.archive-v3.js",
+      "game/src/hub/hub.collection-v4.js",
+      "game/src/hub/hub.presentation.js",
+      "game/src/hub/hub.shop-v3.js",
+      "game/src/hub/base-motion-v4.js"
+    ]
+  },
+  "css": {
+    "passed": 6,
+    "paths": [
+      "game/css/base-camp-rework.css",
+      "game/css/base-home-v3.css",
+      "game/css/base-archive-v3.css",
+      "game/css/base-shop-v3.css",
+      "game/css/base-controls-v4.css",
+      "game/css/base-collection-v4.css"
+    ]
+  },
+  "targeted": {
+    "files": 11,
+    "passed": 89,
+    "failed": 0,
+    "success": true,
+    "premiumScope": "仅基地2项，其余7项未执行"
+  },
+  "protectedFooter": {
+    "expected": "260e5ae5346df12a4d8edb739605a944d7ac494617ae4de1e2e64d9da6c4c076",
+    "extractionMatches": true,
+    "hashes": [
+      "260e5ae5346df12a4d8edb739605a944d7ac494617ae4de1e2e64d9da6c4c076",
+      "9e23774474266858c2b1f5170fa4df1bf516ff844eaf86d80ea575eeb4195ef0",
+      "10d9b36cefe7b9d52123bab55574955057399fd6082d2ecf678b5cefb8cac5c3",
+      "44c35e7d8f56857a1ed9949d7d8a31e2a0851c300cf47fb190a4d5ec525fbf52"
+    ]
+  },
+  "eslint": "passed",
+  "docsCheck": "passed",
+  "diffCheck": "passed",
+  "unverified": [
+    "没有性能A/B或呈现帧率结论",
+    "未进行真实购买/扩建/培养/领奖/应用卡背",
+    "壁纸按老板要求暂缓",
+    "未build/全量/提交/推送",
+    "真实档案收藏为空；非空陈列/筛选/放大与退役记录由jsdom构造用例覆盖，未操作真实收藏写入"
+  ],
+  "inputs": [
+    {
+      "path": "game/src/hub/game.hub.js",
+      "sha256": "a783786c6a8df0c2808c8c0f8b82392e41f1e2e59fefe879bfe5307e2e2f0083"
+    },
+    {
+      "path": "game/src/hub/hub.personnel.js",
+      "sha256": "bb7a5e741b5960b4dbb4e4695eaa7b9ad4a10949e85eaf8358e1949cd5d9bc5b"
+    },
+    {
+      "path": "game/src/hub/hub.warehouse.js",
+      "sha256": "92642fbcf2ced3e4e18399ca49268d546d1a95b67cc136774513fd992514b59d"
+    },
+    {
+      "path": "game/src/hub/hub.facilities.js",
+      "sha256": "4a5b67d9d8c2d75ec63ed9720b317618a882c2debff63841cad58e3a84d919f7"
+    },
+    {
+      "path": "game/src/hub/hub.home-v3.js",
+      "sha256": "7c1c7c57eb581ed48835e1d59e3c01ed880a4c354da88b8d85b1604284347b31"
+    },
+    {
+      "path": "game/src/hub/hub.archive.js",
+      "sha256": "6ae64ed5b5458588e98487d54d089080df17a7ffce9dc25ad3b8530d9b40c97f"
+    },
+    {
+      "path": "game/src/hub/hub.archive-v3.js",
+      "sha256": "75ffb2eefa32d09193c3baa079c70ec997f400dd3bd79bd4ca47a6369b0fee9b"
+    },
+    {
+      "path": "game/src/hub/hub.collection-v4.js",
+      "sha256": "c97654b9433e7e4d6e1e04f4179070dd530948a7591218cf012b2012ea0262f5"
+    },
+    {
+      "path": "game/src/hub/hub.presentation.js",
+      "sha256": "2a785069798ed8a1e997d9ad25f2aa27b228073b7acc4d84b7b2e1b446fe9c15"
+    },
+    {
+      "path": "game/src/hub/hub.shop-v3.js",
+      "sha256": "930ed83b4ba4d4e1c0357a850e9293bd6e7cf89ed3b33cf51dc1e6ab01cb7f5d"
+    },
+    {
+      "path": "game/src/hub/base-motion-v4.js",
+      "sha256": "a6b34f97de2b405e62a119fddca4bf4c2c1763b038686a7c16aef705efe08756"
+    },
+    {
+      "path": "game/css/base-camp-rework.css",
+      "sha256": "ca0065133a7aac1c86e079a31102f545651ab8f70b1758620495927144caeaa6"
+    },
+    {
+      "path": "game/css/base-home-v3.css",
+      "sha256": "6f9acbbe3d55d62b1240bdb6b2cdbfb5ce151eff225ba596248cfbaa21502aaa"
+    },
+    {
+      "path": "game/css/base-archive-v3.css",
+      "sha256": "53a875ad1a05d6ad2a57866d431a90ff699dfd39a9acc666fc71f177929e0eb4"
+    },
+    {
+      "path": "game/css/base-shop-v3.css",
+      "sha256": "2c5e23151005eb4b23351c1985a8a383db56f4bb5e962a09b95d45b2e879d648"
+    },
+    {
+      "path": "game/css/base-controls-v4.css",
+      "sha256": "635b5b54ef34fc7742bfc9a704e68d88df74b3000536d7be05e6df7b4f21b514"
+    },
+    {
+      "path": "game/css/base-collection-v4.css",
+      "sha256": "ef552a29a4f0e6ad4d866f9c98bbd69cde166078338b9ad760e80022b17c755f"
+    }
+  ]
+}

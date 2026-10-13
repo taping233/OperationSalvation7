@@ -1,0 +1,50 @@
+[
+  {
+    "scene": "camp",
+    "model": "nai-diffusion-4-5-full",
+    "seed": 101026800,
+    "path": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\ui\\cut-scenes-20261010\\camp-nai-v2.png",
+    "bytes": 889582,
+    "sha256": "e3c69cbeda5313078f55c6b36daef9bc8ac47820d155e1fd779987063d9cac57"
+  },
+  {
+    "scene": "photo",
+    "model": "nai-diffusion-4-5-full",
+    "seed": 101026801,
+    "path": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\ui\\cut-scenes-20261010\\photo-nai-v2.png",
+    "bytes": 922928,
+    "sha256": "a663457798804887e27b45e6d00da5a90900f4fd94187c7bb9659e1a9822b3c4"
+  },
+  {
+    "scene": "field",
+    "model": "nai-diffusion-4-5-full",
+    "seed": 101026802,
+    "path": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\ui\\cut-scenes-20261010\\field-nai-v2.png",
+    "bytes": 950013,
+    "sha256": "3a1c1e7687b7b57923676c72f35570ab52b3c5d4d22ff3867ab8c6e3f2f25982"
+  },
+  {
+    "scene": "battle",
+    "model": "nai-diffusion-4-5-full",
+    "seed": 101026803,
+    "path": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\ui\\cut-scenes-20261010\\battle-nai-v2.png",
+    "bytes": 974882,
+    "sha256": "b8b9ab1e95a963404b40d133c548e72530fb0353b8a073baa0b6ad160776f4d8"
+  },
+  {
+    "scene": "achievement",
+    "model": "nai-diffusion-4-5-full",
+    "seed": 101026804,
+    "path": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\ui\\cut-scenes-20261010\\achievement-nai-v2.png",
+    "bytes": 1116496,
+    "sha256": "f24d4c0d8f8a06c3ebedbbf149936448eb12e579527d6e9a2bdb9776bfb147ed"
+  },
+  {
+    "scene": "boss",
+    "model": "nai-diffusion-4-5-full",
+    "seed": 101026805,
+    "path": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\ui\\cut-scenes-20261010\\boss-nai-v2.png",
+    "bytes": 1240243,
+    "sha256": "c353fb96d574a423c5ac3a50dee0edc1843078ae6bdc08b43660a27ae186c0fa"
+  }
+]

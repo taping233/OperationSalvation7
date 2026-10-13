@@ -1,0 +1,25 @@
+{
+  "tool": "built-in image_gen",
+  "items": [
+    {
+      "id": "heixiang",
+      "asset": "portraits/avatars/heixiang.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a125ae-679a-7681-8849-23d7c86b7ed6/exec-5d219d77-1e65-4a43-a348-e706377b66a5.png",
+      "prompt": "Edit image 1 (Heixiang chibi avatar) ONLY to normalize the apparent head size in this six-character avatar set. Image 2 (Xingyue) is solely a measurement/composition reference, DO NOT transfer her features or style onto him. On the square canvas make Heixiang's visible face oval (excluding ears/hair) approximately the SAME width and apparent size as image 2, about 43% of canvas width, currently he is much larger. Uniformly reduce the entire existing Heixiang bust to about 74% of its current scale, place centered horizontally with eye midpoint around 55% canvas height, leave transparent padding around it. Do not enlarge or redraw the shoulders to fill the empty space. Keep his masculine tan face, amber eyes, silver forelock, confident smirk, vertical stitched scar at the outer eye/temple descending to cheek on viewer-right, orange scarf, dark armor and EXACT same block-painted style. Existing scar geometry is correct and must stay. Full hair silhouette contained. Transparent square background, no text.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/avatars/heixiang.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/avatars/xingyue.webp"
+      ]
+    },
+    {
+      "id": "changwuyu",
+      "asset": "portraits/avatars/changwuyu.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a125ae-679a-7681-8849-23d7c86b7ed6/exec-ff332a62-b1e3-4b13-9413-892d082b96e7.png",
+      "prompt": "Edit image 1 (Changwuyu chibi avatar) ONLY to normalize the apparent head size in this six-character avatar set. Image 2 (Xingyue) is solely a measurement/composition reference, DO NOT transfer her features or style onto him. Make Changwuyu's visible face oval excluding elf ears, hair and hat approximately the SAME width and apparent size as image 2, about 43% canvas width, currently his face is much smaller. Enlarge his actual head/face and matching hair, ears and glasses by about 30%, keeping face centered horizontally and eye midpoint around 55% canvas height. Reduce the enormous hat RELATIVE to the enlarged head so whole crooked tip and brim remain within the square canvas with transparent margin; keep same hat shape and purple underside, still a broad wizard hat. Small chest bust at bottom. Preserve his masculine silver-gray long side locks and low bun, golden eyes, thin round glasses, pointed ears, confident subtle smile, black high collar, gold trim and white feather blue jewel brooch. Same opaque coarse block-painted brushwork, same identity, no repainting details into fine glossy rendering. Transparent background, no text.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/avatars/changwuyu.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/avatars/xingyue.webp"
+      ]
+    }
+  ]
+}

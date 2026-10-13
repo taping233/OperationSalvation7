@@ -1,0 +1,53 @@
+{
+  "stage": "doing",
+  "goal": "按老板否决意见重做基地：以方舟肉鸽入口和仓库为完整样板统一层级、双排通用卡牌、独立商店/归档/队员页；保留原交易玩法",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "上一轮主页与跨页审美被老板否决，重新按完整参考样板实施",
+      "result": "failed"
+    }
+  ],
+  "unverified": [
+    "重做后的当前窗口实页与交互链仍待复核"
+  ],
+  "paths": [
+    "game/src/hub/game.hub.js",
+    "game/src/hub/game.hub.pages.js",
+    "game/src/hub/game.hub.depart.js",
+    "game/src/hub/hub.warehouse.js",
+    "game/src/hub/hub.personnel.js",
+    "game/src/hub/hub.presentation.js",
+    "game/src/hub/hub.facilities.js",
+    "game/src/hub/hub.archive.js",
+    "game/src/hub/hub.visuals.js",
+    "game/src/hub/hub.home-v3.js",
+    "game/src/hub/hub.materials.js",
+    "game/src/hub/hub.shop-v3.js",
+    "game/src/hub/hub.archive-v3.js",
+    "game/src/hub/hub.courtyard-v3.js",
+    "game/src/hub/courtyard-vendor/",
+    "game/src/ui/card-browser.js",
+    "game/src/ui/inventory-zoom.js",
+    "game/src/ui/ui.js",
+    "game/css/base-camp-rework.css",
+    "game/css/base-home-v3.css",
+    "game/css/base-shop-v3.css",
+    "game/css/base-archive-v3.css",
+    "game/css/base-courtyard-v3.css",
+    "game/css/card-browser.css",
+    "game/css/inventory-zoom.css",
+    "game/assets/icons/base-v3/",
+    "game/assets/vendor/base-courtyard/",
+    "game/art-source/ui/base-v3/",
+    "tests/base-ui-sample.test.js",
+    "tests/hub-pages-rework.test.js",
+    "tests/hub-shop-v3.test.js",
+    "tests/hub-archive-v3.test.js",
+    "tests/hub-courtyard-v3.test.js",
+    "tests/hub-upgrade-render.test.js",
+    "tests/hub-flow-regression.test.js",
+    "tests/premium-ui-pages.test.js",
+    "docs/development.md"
+  ]
+}

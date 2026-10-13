@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt7-ironphalanx",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1299a-9dbe-7b93-b481-c2354d8aafb2\\exec-fb7df941-4278-4e56-9512-f8381a37cb16.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-ironphalanx-redraw/cards-martial-tt7-ironphalanx-source.png",
+        "bytes": 2070896,
+        "sha256": "280f03392cd951656e5ba613b6cdb23d01a0894c0dbef9c76857adf85728f9ce"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-ironphalanx-redraw/cards-martial-tt7-ironphalanx-full-before.webp",
+          "bytes": 99434,
+          "sha256": "e987b05feab31f158dc595bacda64429ad6e728b17795fef5fdbc950ca04ab5e"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-ironphalanx-redraw/cards-martial-tt7-ironphalanx-thumb-before.webp",
+          "bytes": 17298,
+          "sha256": "eb3a305ea17a366504fa87b81ca71bcb1019e8004cf1ed9e85f07cb0e389fba9"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-ironphalanx.webp",
+          "bytes": 160680,
+          "sha256": "20e7ec3668a04bf65250985ca15db75c5f3cb86f5f50b1fae13fd8d9aaa2908f",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-ironphalanx.webp",
+          "bytes": 18014,
+          "sha256": "5b8f97c37339258585f4f55d07c1b2700f036d6cba57c5e711593bdf0d3b1e7b",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "heixiang-ironphalanx-original-rough-20261011",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt7-ironphalanx.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 160680,
+            "sha256": "20e7ec3668a04bf65250985ca15db75c5f3cb86f5f50b1fae13fd8d9aaa2908f",
+            "source": "docs/evidence/2026-10-11-ironphalanx-redraw/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt7-ironphalanx.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17298,
+            "sha256": "eb3a305ea17a366504fa87b81ca71bcb1019e8004cf1ed9e85f07cb0e389fba9",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt7-ironphalanx.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 18014,
+            "sha256": "5b8f97c37339258585f4f55d07c1b2700f036d6cba57c5e711593bdf0d3b1e7b",
+            "source": "docs/evidence/2026-10-11-ironphalanx-redraw/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1121,
+  "manifest_count_after": 1122
+}

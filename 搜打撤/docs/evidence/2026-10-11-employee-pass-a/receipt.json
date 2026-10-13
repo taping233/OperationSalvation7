@@ -1,0 +1,21 @@
+{
+  "card_id": "cmtmvq6ss84l",
+  "card_name": "员工通行证A",
+  "tool": "built-in image_gen",
+  "status": "candidate-delivered",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-7432ac55-c21b-4729-bbe8-8729a7fce567.png",
+  "output": ".tmp/imagegen/2026-10-11-employee-pass-a/employee-pass-a-redraw.png",
+  "sha256": "a0bb24c5f8bc66b6ee94106504fa9e9c5c5bf4879b7333a52c9e8ed9fdaf7888",
+  "bytes": 1089844,
+  "acquisition": "Copied from built-in ImageGen output, original alpha preserved",
+  "visual_review": "已查看工具返回画作：深青灰证面、香槟金细边、几何徽记、金属扣与芯片；无字母A及暖白刷底",
+  "image_mode": "RGBA",
+  "image_size": [1254,1254],
+  "alpha_extrema": [0,255],
+  "corner_alpha": [0,0,0,0],
+  "transparent_pixels": 1068910,
+  "runtime_installed": false,
+  "tests_run": false,
+  "build_run": false,
+  "committed": false
+}

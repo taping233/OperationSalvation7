@@ -1,0 +1,14 @@
+{
+  "tool": "built-in image_gen",
+  "card_id": "cmtmvq6ss84l",
+  "asset": "cards/items/cmtmvq6ss84l.webp",
+  "prompt": "Use case: style-transfer. Redraw the supplied Employee Access Pass A game item illustration as rough hand-painted anime prop art. Input image is the object and composition target. Preserve the square canvas, one centered vertical rectangular badge tilted clockwise, viewed from a slight elevated oblique angle. Its top sits near the upper-middle, lower-left corner projects to the lower-left, lower-right corner near lower-middle; preserve the original object scale and ample space. Retain the pale ivory chunky rounded rectangular holder, dark charcoal recessed side fittings, single silver clip rising above the top-center opening, small ochre star at the upper-left, warm amber upper card face and muted slate-teal lower section. Preserve the large pale cream roundel in the middle of the badge, but place one clear hand-painted uppercase letter 'A' in dark charcoal at its center, the only readable text. Simplify the original tiny printed writing and bottom barcode into a few restrained dark abstract blocks and spaced short bars without words or numbers. Make the badge and metal clip structurally readable with a few broad ivory light planes, cool gray shadows and ochre accents. Keep a simple irregular warm-cream painted swatch immediately behind the badge, surrounded by genuinely transparent empty canvas; do not add a black background, checkerboard, scenery, hands or characters. Rough hand-painted anime illustration built from large connected opaque color masses, a limited set of wide directional strokes and blunt dabs, grouped hard-edge light and shadow and decisive handmade edges. Quiet larger surfaces, selective structural accents at the clip, corners and letter. Matte muted colors, no glossy product render, airbrush finish, fine engraving, tiny noisy facets or all-over grain filters. No text other than A, no watermark or UI. Preserve alpha transparency outside the badge and local cream swatch.",
+  "references": [
+    "D:/素材/代号柒/搜打撤/game/assets/cards/items/cmtmvq6ss84l.webp"
+  ],
+  "transparent_background": true,
+  "output": ".tmp/imagegen/employee-pass-a-redraw-20261010/employee-pass-a.png",
+  "generated_source": "C:/Users/太平/.codex/generated_images/01a12559-c245-7cc2-be4c-39bf847a3bd2/exec-9aea8ac2-cc33-4c7c-ae74-f2ae5e43173f.png",
+  "sha256": "dd0569c5ed773aa0dba5d0fc4f501fe9f60eb5c92ce37c221d25e7723aaba4c6",
+  "integrated": true
+}

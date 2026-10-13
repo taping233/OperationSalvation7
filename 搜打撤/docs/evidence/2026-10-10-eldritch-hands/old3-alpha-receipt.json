@@ -1,0 +1,41 @@
+{
+  "card_id": "tt8-nofocus",
+  "new_art_completed": false,
+  "method": "Preserve old artwork and restore original alpha only",
+  "source": ".tmp/imagegen/hands/cards-creature-tt8-nofocus-source.png",
+  "source_sha256": "24494c64f808940a980aea8decf87689c8db00fafd8c2e639fc08d3880096146",
+  "before": [
+    {
+      "path": "cards/creature-tt8-nofocus.webp",
+      "bytes": 60192,
+      "sha256": "7d99590414095633b4e885a8c976f77af286856e6cb1e92db4c551c81683d284",
+      "backup": ".tmp/imagegen/2026-10-10-eldritch-hands/old3-alpha/full-before.webp"
+    },
+    {
+      "path": "thumbs/cards/creature-tt8-nofocus.webp",
+      "bytes": 7844,
+      "sha256": "4010f492cfe71f31ae8496759f0e17dfc0731419e66fa369d509d929e41c24b7",
+      "backup": ".tmp/imagegen/2026-10-10-eldritch-hands/old3-alpha/thumb-before.webp"
+    }
+  ],
+  "after": [
+    {
+      "path": "cards/creature-tt8-nofocus.webp",
+      "bytes": 133996,
+      "sha256": "58e9db4c7650039ac2501eecd651c3e557d255a90035487f031e03ebff985144",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "thumbs/cards/creature-tt8-nofocus.webp",
+      "bytes": 25764,
+      "sha256": "d35bb1037a980c189a5a9bf9f51586c5d0bab171f9ace5a01062fe535018ef17",
+      "alpha_range": [
+        0,
+        255
+      ]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "tool": "built-in image_gen",
+  "items": [
+    {
+      "id": "wu",
+      "path": "portraits/avatars/wu.webp",
+      "bytes": 265352,
+      "sha256": "6327daa0f426efa105bb6481c494a16eff8d4b6d80dedb41b8df34372eec3920",
+      "oldSha256": "5f955ca09eff42f143077e86444db4072f30c26dce7b3e8a9eb096fe6ce146e0",
+      "source": ".tmp/imagegen/chibi-avatars-20261010/wu-source.png",
+      "sourceSha256": "d85bd1b9c783211f61c8ab064ea6dadcec5dcda0521a9d2fd1739ff4e4e7f008",
+      "size": [
+        1024,
+        1024
+      ],
+      "transparent": true,
+      "status": "default avatar replaced"
+    },
+    {
+      "id": "changwuyu",
+      "path": "portraits/avatars/changwuyu.webp",
+      "bytes": 234306,
+      "sha256": "ea6b1263d2e6118b3a048135ef6c9b8fdea77b2d53210c3ef7dbc25c8a6cb370",
+      "oldSha256": "293557dda2466168ca67e40c10a6f83c13eac51986f9057d9136ebc6485de24a",
+      "source": ".tmp/imagegen/chibi-avatars-20261010/changwuyu-source.png",
+      "sourceSha256": "507956acf739d9ea2176459d9fe8abb09894da2f24fe2d6f9ad0e5b7359caaef",
+      "size": [
+        1024,
+        1024
+      ],
+      "transparent": true,
+      "status": "default avatar replaced"
+    },
+    {
+      "id": "baita",
+      "path": "portraits/avatars/baita.webp",
+      "bytes": 244096,
+      "sha256": "2bb8f3552a3992dbc66d5ad3befe5def78040e9984afcabb5fa26828e525e08b",
+      "oldSha256": "4ca757b2e393680643e7c2f0658b81dd7e2af354887157fa1c209720efd7c80e",
+      "source": ".tmp/imagegen/chibi-avatars-20261010/baita-source.png",
+      "sourceSha256": "082c2a8a68f00671c3dfd5bcd88b57e12d1318f572964ccefc73e0c17cea63a7",
+      "size": [
+        1024,
+        1024
+      ],
+      "transparent": true,
+      "status": "default avatar replaced"
+    },
+    {
+      "id": "heixiang",
+      "path": "portraits/avatars/heixiang.webp",
+      "bytes": 167218,
+      "sha256": "7e1129f35a7b82192518210a3e9ee8178895c70da1fea6a0b52c848fe0127fac",
+      "oldSha256": "cc4ff4dd4061171af8e31ba30788d20fd0f2e3d7703ae66ad45e290b90da928a",
+      "source": ".tmp/imagegen/chibi-avatars-20261010/heixiang-source.png",
+      "sourceSha256": "a0ffe4dd91deaab1588c53e7643e91afcd30085503dc280e1155c84590fa1f9f",
+      "size": [
+        1024,
+        1024
+      ],
+      "transparent": true,
+      "status": "default avatar replaced"
+    },
+    {
+      "id": "xingyue",
+      "path": "portraits/avatars/xingyue.webp",
+      "bytes": 258720,
+      "sha256": "9385c5e0576dfb9ca711006f062311fff6e12ae66c22d924082c61e2dd182dd1",
+      "oldSha256": "f96d5cb5eab758d8797007408dd360009c54fc6fd6663a8e80fca3f21da78be9",
+      "source": ".tmp/imagegen/chibi-avatars-20261010/xingyue-source.png",
+      "sourceSha256": "31231e486d2531f944a3200e33265e5a48b426e5ce7dd895d6e0272692495021",
+      "size": [
+        1024,
+        1024
+      ],
+      "transparent": true,
+      "status": "default avatar replaced"
+    },
+    {
+      "id": "xingyue-dark",
+      "path": "portraits/avatars/xingyue-dark.webp",
+      "bytes": 235282,
+      "sha256": "f451b76012f69757e633687a5a2b064758909779547d71a11d298e448dc10f03",
+      "oldSha256": null,
+      "source": ".tmp/imagegen/chibi-avatars-20261010/xingyue-dark-source.png",
+      "sourceSha256": "55cf1ca22edb4ee7f6fb03653132500c000d42e1294e02a2e9d28f70c384c181",
+      "size": [
+        1024,
+        1024
+      ],
+      "transparent": true,
+      "status": "additional asset; no automatic form switching"
+    }
+  ],
+  "verification": "generated images visually inspected; no tests, build or browser acceptance",
+  "backupDirectory": ".tmp/imagegen/chibi-avatars-20261010"
+}

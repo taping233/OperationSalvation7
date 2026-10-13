@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-12",
+  "status": "implemented-awaiting-user-art-review",
+  "userDirection": [
+    "Directly imitate the attached IS7 screenshot; minimize independent design.",
+    "Light and depth are composited layers.",
+    "Change colors instead of copying purple/green; winter cool blue/cyan-white with sparse amber.",
+    "Map and shop prior overall design rejected; collision-free controls did not constitute art acceptance.",
+    "Event UI also rejected; add hierarchy, fine detail and composited directional light to map."
+  ],
+  "reference": "C:/Users/太平/AppData/Local/Temp/codex-clipboard-9fa6ff46-655b-4d93-b7d9-f65fa44bf71c.png",
+  "shopReference": "../2026-10-11-WF-selection-map-implementation-1011/art-reference-collection/shop-reward-bag/is7-source-2.jpg",
+  "runtimeAsset": "game/assets/scenes/map-nodes/map-atmosphere-is7-1012.webp",
+  "generatedOriginal": "C:/Users/太平/.codex/generated_images/01a12b5c-6c58-74e3-b9da-322f76197ba0/exec-9c82b9c2-f437-4b1e-98d8-e64c537e00f9.png",
+  "implementation": [
+    "HUD: left return/life, centered current region, right resources; continuous bottom inventory/tool groups.",
+    "Shop: translucent full goods tile, top actual name, complete card, bottom-right dominant price; existing shopping commands retained.",
+    "Map: monochrome subdued texture, separately composited winter mist/light and particles, organic route strips, white selected rings, plain node labels, symbolic node art."
+  ],
+  "evidence": {
+    "map": "28-current-window-map.png",
+    "eventExample": "25-event-lighting-layout.png",
+    "shopWithEpic": "23-shop-epic-source-tile.png"
+  },
+  "runtime": {
+    "url": "http://localhost:5337/",
+    "execSession": 25028,
+    "snapshot": ".tmp/selection-map-observe-1011/game",
+    "tab": 6,
+    "temporary5338Stopped": true,
+    "temporaryDevModeRestored": true,
+    "pid": 11800,
+    "httpStatus": 200
+  },
+  "limits": [
+    "No automated tests or build",
+    "Event examples sampled in temporary IAB page, not exhaustive; multi-option, very long narrative and locked states not visually sampled",
+    "No exhaustive map type/four-layer run review",
+    "No performance baseline comparison or quality equivalence claim",
+    "No commit/push/publication; overall aesthetics awaiting user review"
+  ],
+  "runtimeAssetSha256": "db2c4768a388e612ed7ce9da11657b6fc81d0698268afc13713287b76894babe",
+  "runtimeAssetBytes": 148558,
+  "generatedOriginalSha256": "709adcd97d83cdb7cced586dc8621fc46a173f143ddbd38c401aff56d9f28add",
+  "generatedOriginalBytes": 2101540,
+  "result": "Complete source/asset/CSS version loaded into original user tab 6; prior mixed runtime corrected. Overall aesthetics await user review.",
+  "finalViewport": {
+    "width": 1523,
+    "height": 956,
+    "dpr": 1.5,
+    "source": "read-only DOM in original user IAB tab 6; no viewport override"
+  },
+  "preservedProgress": {
+    "slot": 2,
+    "hp": "35/35",
+    "coins": 3,
+    "bag": "6/16",
+    "method": "normal saved-run continuation; no overwrite/new-run/hidden-state injection"
+  },
+  "finalChanges": [
+    "Foreground symbols separated from cached black disks, side halos and particles",
+    "Current node cached white rim/fog; original avatar restored inside clipped circle",
+    "Background structure with separate directional shafts, local cold/amber haze and dust; excessive blur removed",
+    "True visible roads drawn as organic grey bands; geometry/fog/next unchanged",
+    "Source-like edge HUD and continuous bottom group strip",
+    "Source-like full transparent shop tiles, name strip and bottom-right dominant price",
+    "Event local reading veil, thin state groups, no heavy narrative box or white action block; original story/outcomes preserved"
+  ],
+  "sourceHashes": {
+    "src/core/renderer.js": "4c96707dc72483196f4d196e2868947652c395a7c73013c63184d9b2728bad2b",
+    "src/core/map-node-art.js": "a0a2732843bd9da17161fdbb150224676ff40df373615079efa62e064154f9e9",
+    "src/core/camera.js": "9a4c4665b7e5ac56afcf42952fde43cce4ec41098d617e222745aba0acf3a192",
+    "src/run/expedition.view.js": "3adf2570fc0a302656877eabd47610b4a5eafa97e7325b1babbcc2cd27f4b415",
+    "src/run/game.run.shop.js": "195a54dee5b488bb19ec94a5bbe97cacfb315281532863dbc880cea751126d8b",
+    "css/entry-events.css": "b8d262aae2cee5a31e10a20d31bdcda86dae1708af5926f99c622cb8bc29aeb3",
+    "css/page-expedition-hud.css": "3d98acec8d08daa25be3cfda78e2b6c3f42e179d40603fed49b21e41804773a1",
+    "css/expedition-map.css": "cb2610a28ba73a4eb6ca90d5af6f06f47703dcb3906a9785e656e5c90dbf8dd2",
+    "css/expedition-shop.css": "6cf4d7447c99a287c2a833badf2e8e989a35fc91c937d8bdb2c79bc9e65abf2a"
+  }
+}

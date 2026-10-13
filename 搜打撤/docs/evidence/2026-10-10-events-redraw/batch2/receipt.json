@@ -1,0 +1,191 @@
+{
+  "method": "Built-in ImageGen; scoped scene WebP/thumbnail encoding",
+  "verification": "No tests/browser/build run",
+  "items": [
+    {
+      "card_id": "tt6-relief",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-234e1971-1dbb-42eb-85cd-90fc54ce2c3b.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch2/event-tt6-relief-source.png",
+        "sha256": "e45a070791c78007aa432262c1f7174e59e1d3ec2ae5a32227bf2cf8671362e3"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch2/event-tt6-relief-full-before.webp",
+          "sha256": "d8f81b86a62e6e0e7505e5adbbeea44590be1c661909f769b56d6dfcbb0a2411"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch2/event-tt6-relief-thumb-before.webp",
+          "sha256": "c803d3e209eca3c6eeabc9f0d337214bbfa941a93489f219c14fd4a9b651d6df"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-tt6-relief.webp",
+          "ext": "webp",
+          "license": "项目自有（AI 生成）",
+          "bytes": 214686,
+          "sha256": "015bb2ee85e8d4cfebd4f40d845e9686d1ae62d0dc9d83dc5fda371583866d33",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-tt6-relief.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 23396,
+          "sha256": "7c6f4f378decb9e36eea81c7176a2c623913c974324de5c510cd266806af2566",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+        }
+      ]
+    },
+    {
+      "card_id": "tt6-airdrop",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-f3c94ac6-4e8f-4fce-8468-d75741bcabf6.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch2/event-tt6-airdrop-source.png",
+        "sha256": "446c42be6bde8e1fc622f39954264512553d4c42b58d2801269c0ecb4f77d369"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch2/event-tt6-airdrop-full-before.webp",
+          "sha256": "4537554b11b52daebca03de228898e5254f5bffffba3c5a67e43a0d1ff396c4d"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch2/event-tt6-airdrop-thumb-before.webp",
+          "sha256": "01c55190f61addb87bbc3151d16b1d5effbd22482a72ed0fde2488f7e14832ac"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-tt6-airdrop.webp",
+          "ext": "webp",
+          "license": "项目自有（AI 生成）",
+          "bytes": 298472,
+          "sha256": "45696509c54403824c47c326a1ee235f79a812a5f1243c9a42490aa44ae588ae",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-tt6-airdrop.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 30826,
+          "sha256": "773b909967d40d6d7050762850a74ea609b30a7e3d7f5f87760dbbe10ac9563a",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+        }
+      ]
+    },
+    {
+      "card_id": "tt6-chestdraw",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-8807d454-25f5-4b5f-8c88-d57d3c5b5982.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch2/event-tt6-chestdraw-source.png",
+        "sha256": "cb4cd2c3f66aef8814d6488c6cddd9eac7aea240b75a14ad2eb716139d0845a1"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch2/event-tt6-chestdraw-full-before.webp",
+          "sha256": "b82be9e8c395f0471c0a8a08b9f803b7ed02cbd7444870ac97556be44fff2e93"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch2/event-tt6-chestdraw-thumb-before.webp",
+          "sha256": "31b4ae7d0ae48a17d1c55e09141c3c713e5ca46c5e79c9fa1138ed35abcb41f5"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-tt6-chestdraw.webp",
+          "ext": "webp",
+          "license": "项目自有（AI 生成）",
+          "bytes": 197786,
+          "sha256": "08e1f8dfa0ebaeeb5a852dc05fce660c27585161872c4dbee77be608f473dde4",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-tt6-chestdraw.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 21770,
+          "sha256": "d5852d60fa19e6d6bf0f15388186bee21000186ea4dce459fb27a2b97cb08f52",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+        }
+      ]
+    },
+    {
+      "card_id": "tt6-systemsupply",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-8f4a69b6-0352-4bce-932e-5ff6f435058c.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch2/event-tt6-systemsupply-source.png",
+        "sha256": "a34d8b1e47e432bf7ec8b050e199bb7e08678fead87d029121e13584f70fbd15"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch2/event-tt6-systemsupply-full-before.webp",
+          "sha256": "c9ac9248744901fb05e357ee5692eb9878978aa6b751ee789f2f40de57ba897c"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch2/event-tt6-systemsupply-thumb-before.webp",
+          "sha256": "cbb9d1c9c51397a696c094f899cecf5ce782b03f99bc6ead8920ad05e249cb50"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-tt6-systemsupply.webp",
+          "ext": "webp",
+          "license": "项目自有（AI 生成）",
+          "bytes": 168112,
+          "sha256": "b1e3e4c01f75b5d30e87bc9660cbaa33e9f43dc3470d3970e11325454f092c4f",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-tt6-systemsupply.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 20832,
+          "sha256": "77c33dfdb8dce8e8db5cb4382248d710244a26bef57a6bc7fda8602d1d895e27",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+        }
+      ]
+    },
+    {
+      "card_id": "cmtn7qttxqo4",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-648e0b76-bd62-48aa-b623-7e4af0cbd32e.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch2/event-cmtn7qttxqo4-source.png",
+        "sha256": "d2490becaa38381c847257944191641e7df3c3de2bc2e7260f5d5006be67f375"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch2/event-cmtn7qttxqo4-full-before.webp",
+          "sha256": "d031240d82e9a64e523658c23bb919de303a6da22ef1fc51f019acfacfc97638"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch2/event-cmtn7qttxqo4-thumb-before.webp",
+          "sha256": "394ebc09bd16451f05669d8cb6cb1a6af6901f2dc53217251be06bad02aff6fe"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-cmtn7qttxqo4.webp",
+          "ext": "webp",
+          "license": "项目自有（AI 生成）",
+          "bytes": 251196,
+          "sha256": "d0b671aff6b533deceb518df56ba100ff84efac923fdea1ab7d69a525cc57cff",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-cmtn7qttxqo4.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 27080,
+          "sha256": "015ba5473a75b4ebe4f0862d54938d59dfa2fc08e4d8462031ae4b76a642f2be",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch2/receipt.json"
+        }
+      ]
+    }
+  ]
+}

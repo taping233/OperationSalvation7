@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-fatal-pierce",
+      "asset": "cards/martial-tt3-fatal-pierce.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12470-95d7-75e0-9477-03361e04258c/exec-937cac4a-8394-47d8-be22-3c1fab747f32.png",
+      "revision": "fatal-pierce-v45-simple-rough-20261010",
+      "prompt": "Edit input 1 into a simple instantly readable martial game-card painting: ONE SILVER SPEAR PIERCING ONE DARK ARMOR PLATE. This is a structural correction, not a detail embellishment.\nInput 1 locks the quiet solid muted gray-blue BACKGROUND, square format, restrained palette and sparse layout. Its current giant triangular combined object is an error: DO NOT preserve that merged silhouette. Input 2 (blood-arrow card) is a reference only for a clean isolated weapon silhouette and economical broad paint. Do not copy its red arrow or background.\n\nShow just two distinct objects crossing at center. A single moderately sized flat dark charcoal armor plate, approximately a tilted quadrilateral, occupies the middle third of the square, across the bottom-left to top-right diagonal. Its outline must be simple and fully distinguishable. One straight spear runs upper-left to lower-right along the opposite diagonal. A short narrow black shaft enters from the upper-left frame edge, goes BEHIND the plate, and ONE pointed SILVER LEAF-SHAPED SPEARHEAD emerges THROUGH a small hole at the center of the plate toward the lower-right. The spearhead is long and slender, with two large blade planes and one central ridge, and its sharp point ends before the lower-right edge. The visible blade must be much narrower than the plate. The plate cannot become a giant spear blade. Make the depth and occlusion explicit: shaft behind plate, small torn hole surrounding socket, pointed silver blade in front of plate. A thin ivory exposed-metal rim around the hole and a tiny dark crimson mark are the only damage details. The plate remains one connected quiet dark shape. Generous gray-blue negative space surrounds both objects. The read must be: spear passes through armor. No red tassel, ribbon, flying chips, fragments, extra plates, explosion, flare, complicated jagged rim, crack network, human, hand or scenery.\n\nRough hand-painted anime concept illustration: large connected opaque color masses, a few broad directional brush swipes and blunt dabs, coherent quiet dark plate, two broad silver/blue-gray blade planes, decisive handmade edges. Selective clarity at the tiny contact and sharp tip, secondary shaft and background simple. Matte muted colors and a small crimson focal accent. No fine engravings, dense scratches, triangular facet mosaics, glossy 3D, photoreal chrome, smooth airbrush, all-over grain/canvas filters, text, watermark, frame or UI. Keep exactly one spear and one armor plate; simplicity and recognizable penetration come before material detail.",
+      "references": [
+        "D:/素材/代号柒/.tmp/nai/output/fatal-pierce-20261010/fatal-pierce-v45.png",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt3-blood-arrow.webp"
+      ]
+    }
+  ]
+}

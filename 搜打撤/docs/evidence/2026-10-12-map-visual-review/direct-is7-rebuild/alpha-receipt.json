@@ -1,0 +1,110 @@
+[
+  {
+    "name": "passage",
+    "runtimeAlphaRange": [
+      0,
+      255
+    ],
+    "runtimeVisibleBounds": [
+      105,
+      61,
+      405,
+      447
+    ],
+    "sourceAlphaRange": [
+      0,
+      255
+    ],
+    "alphaThresholdAppliedToPixels": false
+  },
+  {
+    "name": "fire",
+    "runtimeAlphaRange": [
+      0,
+      255
+    ],
+    "runtimeVisibleBounds": [
+      82,
+      120,
+      428,
+      410
+    ],
+    "sourceAlphaRange": [
+      0,
+      255
+    ],
+    "alphaThresholdAppliedToPixels": false
+  },
+  {
+    "name": "supply",
+    "runtimeAlphaRange": [
+      0,
+      255
+    ],
+    "runtimeVisibleBounds": [
+      86,
+      82,
+      432,
+      433
+    ],
+    "sourceAlphaRange": [
+      0,
+      255
+    ],
+    "alphaThresholdAppliedToPixels": false
+  },
+  {
+    "name": "battle",
+    "runtimeAlphaRange": [
+      0,
+      255
+    ],
+    "runtimeVisibleBounds": [
+      75,
+      32,
+      429,
+      477
+    ],
+    "sourceAlphaRange": [
+      0,
+      255
+    ],
+    "alphaThresholdAppliedToPixels": false
+  },
+  {
+    "name": "shop",
+    "runtimeAlphaRange": [
+      0,
+      255
+    ],
+    "runtimeVisibleBounds": [
+      106,
+      69,
+      440,
+      478
+    ],
+    "sourceAlphaRange": [
+      0,
+      255
+    ],
+    "alphaThresholdAppliedToPixels": false
+  },
+  {
+    "name": "event",
+    "runtimeAlphaRange": [
+      0,
+      255
+    ],
+    "runtimeVisibleBounds": [
+      95,
+      53,
+      448,
+      482
+    ],
+    "sourceAlphaRange": [
+      0,
+      255
+    ],
+    "alphaThresholdAppliedToPixels": false
+  }
+]

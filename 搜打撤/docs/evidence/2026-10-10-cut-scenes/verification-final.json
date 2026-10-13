@@ -1,0 +1,19 @@
+{
+  "ownAssets": 11,
+  "sourceAndAssetShaPassed": true,
+  "ownAssetIssues": [],
+  "ownErrors": [],
+  "unrelatedAssetErrors": 23,
+  "tests": {
+    "files": 4,
+    "total": 38,
+    "passed": 37,
+    "failed": 1,
+    "unrelatedFailure": "achievement-gallery.test.js:30 current empty copy 尚未获得奖章 vs prior 第一枚奖章"
+  },
+  "eslint": "passed",
+  "docsCheck": "passed",
+  "browser": "browser-final.json",
+  "build": "not run",
+  "commit": "not authorized"
+}

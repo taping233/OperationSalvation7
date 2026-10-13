@@ -1,0 +1,237 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3sp-flowerzhen",
+      "generated_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\2026-10-11-flowerzhen\\flowerzhen-redraw.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-card-candidates-install/cards-spell-tt3sp-flowerzhen-source.png",
+        "bytes": 1618185,
+        "sha256": "f6fe077994a310bb3449a8a14a8d7bcc3d068f81252a76e8e6f167aa42ee77df"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-card-candidates-install/cards-spell-tt3sp-flowerzhen-full-before.webp",
+          "bytes": 23362,
+          "sha256": "81de6ab5f64e3606e0267ddd2fc0fb978c170ea341f8c92797e29819c794bf26"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-card-candidates-install/cards-spell-tt3sp-flowerzhen-thumb-before.webp",
+          "bytes": 7170,
+          "sha256": "a1cfc1f0648b1330c76cf1b7279ab9eb4cf931039f271f9604639e02cedae8e4"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3sp-flowerzhen.webp",
+          "bytes": 49838,
+          "sha256": "10b88bf284089d9ca20d2c757fe5f2696706bed6457c811aaa142ea6fe1bdf5d",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3sp-flowerzhen.webp",
+          "bytes": 7228,
+          "sha256": "0b52632dd1720d7b7493c20f0f37ba77a04b4f6c908bb7d8c10dc88f9102b71b",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "flowerzhen-original-rough-20261011",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt3sp-flowerzhen.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 49838,
+            "sha256": "10b88bf284089d9ca20d2c757fe5f2696706bed6457c811aaa142ea6fe1bdf5d",
+            "source": "docs/evidence/2026-10-11-card-candidates-install/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3sp-flowerzhen.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 7170,
+            "sha256": "a1cfc1f0648b1330c76cf1b7279ab9eb4cf931039f271f9604639e02cedae8e4",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3sp-flowerzhen.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 7228,
+            "sha256": "0b52632dd1720d7b7493c20f0f37ba77a04b4f6c908bb7d8c10dc88f9102b71b",
+            "source": "docs/evidence/2026-10-11-card-candidates-install/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "cc-cursed-blade",
+      "generated_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\2026-10-11-cursed-blade\\cursed-blade-redraw.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-card-candidates-install/cards-martial-cc-cursed-blade-source.png",
+        "bytes": 1946368,
+        "sha256": "de28d1bdf164c99132e53c45600fb73cb0a9e28fa44994a3f1bf4a5ffc29ef18"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-card-candidates-install/cards-martial-cc-cursed-blade-full-before.webp",
+          "bytes": 118198,
+          "sha256": "da631f31f641d8b5efbfec8bc6d0829e464d26a337f3a8bbaa48c5fe77923cba"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-card-candidates-install/cards-martial-cc-cursed-blade-thumb-before.webp",
+          "bytes": 15314,
+          "sha256": "745f7b2139b84e5de2a8c77629a750c442b89457d5183573ba51f273fcb1be8c"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-cc-cursed-blade.webp",
+          "bytes": 134888,
+          "sha256": "8c9ce779611a3f61bf5d5549d6bd4711d5db2b3b824f98d9343af6fdc0cfff8e",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-cc-cursed-blade.webp",
+          "bytes": 15550,
+          "sha256": "e4383fd8c2a1549e36b1b6622976e6f2d698381d824c9ea5fd968693e4513cd2",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": "cursed-blade-redraw-20261010",
+      "revision_after": "cursed-blade-original-rough-20261011",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-cc-cursed-blade.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 118198,
+            "sha256": "da631f31f641d8b5efbfec8bc6d0829e464d26a337f3a8bbaa48c5fe77923cba",
+            "source": "docs/evidence/2026-10-10-art-candidates-install/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-cc-cursed-blade.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 134888,
+            "sha256": "8c9ce779611a3f61bf5d5549d6bd4711d5db2b3b824f98d9343af6fdc0cfff8e",
+            "source": "docs/evidence/2026-10-11-card-candidates-install/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-cc-cursed-blade.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15314,
+            "sha256": "745f7b2139b84e5de2a8c77629a750c442b89457d5183573ba51f273fcb1be8c",
+            "source": "docs/evidence/2026-10-10-art-candidates-install/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-cc-cursed-blade.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15550,
+            "sha256": "e4383fd8c2a1549e36b1b6622976e6f2d698381d824c9ea5fd968693e4513cd2",
+            "source": "docs/evidence/2026-10-11-card-candidates-install/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt12-chargeray",
+      "generated_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\2026-10-11-chargeray\\chargeray-redraw.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-card-candidates-install/cards-spell-tt12-chargeray-source.png",
+        "bytes": 1434620,
+        "sha256": "25815c847715ba19aabd24c33afb46858ed284b85d5228e3ac40c51b16a235b6"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-card-candidates-install/cards-spell-tt12-chargeray-full-before.webp",
+          "bytes": 20306,
+          "sha256": "2f844bfd3c11a5f3f3d41b3440d3e85da4022abb77844ba327b0f8f3977ede99"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-card-candidates-install/cards-spell-tt12-chargeray-thumb-before.webp",
+          "bytes": 5738,
+          "sha256": "9434b8bbf6c5794da67c4ab0b15d112ad4828d8aabc2d5179202b9f92e1d2a2c"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt12-chargeray.webp",
+          "bytes": 47326,
+          "sha256": "7ac973c05025245478ee53cb1c558b6f833c781b94aba755695a6a9d466db8e9",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt12-chargeray.webp",
+          "bytes": 5574,
+          "sha256": "b8c9fb7edc9cc3626d0bbaca9dcf28a174e5c2a6020487a9c82c63da95846af8",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "chargeray-original-rough-20261011",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt12-chargeray.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 47326,
+            "sha256": "7ac973c05025245478ee53cb1c558b6f833c781b94aba755695a6a9d466db8e9",
+            "source": "docs/evidence/2026-10-11-card-candidates-install/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt12-chargeray.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 5738,
+            "sha256": "9434b8bbf6c5794da67c4ab0b15d112ad4828d8aabc2d5179202b9f92e1d2a2c",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt12-chargeray.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 5574,
+            "sha256": "b8c9fb7edc9cc3626d0bbaca9dcf28a174e5c2a6020487a9c82c63da95846af8",
+            "source": "docs/evidence/2026-10-11-card-candidates-install/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1117,
+  "manifest_count_after": 1119
+}

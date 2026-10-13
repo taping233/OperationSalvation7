@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-teaser-pv-v3-1013",
+  "date": "2026-10-13",
+  "owner": "Friday",
+  "goal": "重做升格会的冬日猜想先导PV：补充现行玩法信息和原创动作画面，先交新版分镜，再完成动态预览与成片",
+  "paths": [
+    "pv/teaser-v3-2026-10-13",
+    "docs/evidence/2026-10-13-WF-teaser-pv-v3-1013"
+  ],
+  "doneWhen": [
+    "新版分镜覆盖角色、卡牌动作链、地图与撤离抉择并完成视觉复核",
+    "缺失动作素材来源和身份锚点已记录并复核",
+    "动态预览与1080p有声成片完成画面和音频核验"
+  ],
+  "stage": "partial",
+  "checks": [],
+  "unverified": [
+    "10-13老板确认所有对话已结束；本轮释放执行状态，原未完成范围保留，后续须按当前证据重新核验"
+  ],
+  "updatedAt": "2026-10-13T15:39:49.247Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

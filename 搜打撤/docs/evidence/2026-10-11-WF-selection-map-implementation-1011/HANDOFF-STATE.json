@@ -1,0 +1,437 @@
+{
+  "schema": 1,
+  "createdAt": "2026-10-11T14:26:26.940Z",
+  "purpose": "Transfer unfinished authorized task to fresh chat; not final acceptance",
+  "task": "WF-selection-map-implementation-1011",
+  "stage": "doing",
+  "owner": "Friday",
+  "sourceThread": {
+    "id": "01a12a56-fff8-7393-a312-6f8f01036d55",
+    "title": "评估选人到地图节点体验"
+  },
+  "project": {
+    "id": "625b317a-ae85-4433-a37a-bc4e9091ec22",
+    "workspace": "D:\\素材\\代号柒",
+    "implementation": "D:\\素材\\代号柒\\搜打撤",
+    "environment": "local"
+  },
+  "head": "cdd5c1a83695ec901225c7c76eebcd56e63d3ecf",
+  "oldEditingReleased": true,
+  "children": [
+    {
+      "name": "roster_departure",
+      "model": "gpt-6.1-sol",
+      "frozen": true,
+      "inFlightTools": false,
+      "services": [],
+      "latest": "Modern winter entry art not started; old threshold image remains unapproved"
+    },
+    {
+      "name": "map_battle_art",
+      "model": "gpt-6.1-sol",
+      "frozen": true,
+      "inFlightTools": false,
+      "services": [],
+      "latest": "Modern chest 00-04 candidate; hinge drift 60-92 sourcepx; body/lid scheme not begun; map/bag new layout not visually accepted"
+    },
+    {
+      "name": "selection_map_implementation",
+      "model": "gpt-6.1-sol",
+      "frozen": true,
+      "inFlightTools": false,
+      "services": [],
+      "latest": "Four BATTLE_SCENERY URLs and five CHEST_FRAME_SETS empty; latest guards still need focused review"
+    }
+  ],
+  "userConstraints": {
+    "art": "Actual project card art",
+    "world": "Future science-fiction city, restrained technology, not ancient/cyberpunk",
+    "weather": "Winter",
+    "mechanics": "Preserve existing mechanics",
+    "approvedFrozen": "shop-card-style-approved.png only",
+    "finalAcceptance": "User will inspect whole package after research-driven iteration",
+    "delegation": "Fresh three GPT-6.1-sol subagents",
+    "noCommit": true,
+    "noBuild": true
+  },
+  "services": {
+    "ownStopped": {
+      "port": 5337,
+      "pid": 29048,
+      "session": 52204,
+      "method": "identity confirmed then Ctrl+C",
+      "snapshot": ".tmp/selection-map-observe-1011"
+    },
+    "lastSharedListener": {
+      "port": 5200,
+      "pid": 21616,
+      "action": "untouched"
+    },
+    "warning": "Live state may change; never inherit old PTY or kill historical/unowned PIDs"
+  },
+  "interfaces": {
+    "battleSceneryUrls": "empty",
+    "chestFrameGroups": "five empty",
+    "chestRig": "not started",
+    "winterSceneArt": "not started, five summer-like candidates preserved"
+  },
+  "sourceSnapshot": [
+    {
+      "file": "game/src/run/game.run.altar.js",
+      "exists": true,
+      "bytes": 72584,
+      "sha256": "9ae3f5aff88b8af697b1c1156103992b5dce74f0ca8531d8208d657038bf48a5",
+      "mtime": "2026-10-11T11:47:50.346Z"
+    },
+    {
+      "file": "game/src/hub/game.hub.depart.js",
+      "exists": true,
+      "bytes": 22339,
+      "sha256": "ea311410cab071356959e268828f69186a38ec8da379e85402fbc0b5bb429a40",
+      "mtime": "2026-10-11T11:22:07.601Z"
+    },
+    {
+      "file": "game/src/hub/departure.view-updates.js",
+      "exists": true,
+      "bytes": 6842,
+      "sha256": "541bfacc840369606b88346981196ec7eca6de95d20b0ea681349f100add8f26",
+      "mtime": "2026-10-11T10:49:22.101Z"
+    },
+    {
+      "file": "game/src/hub/departure.summary.js",
+      "exists": true,
+      "bytes": 1502,
+      "sha256": "0890c1d29a2a2ef51f7e3fed4f7c7d1706f7b61f124dd6ca725e237eb9fc39dd",
+      "mtime": "2026-10-11T10:53:03.927Z"
+    },
+    {
+      "file": "game/src/ui/node-scene-view.js",
+      "exists": true,
+      "bytes": 1611,
+      "sha256": "5e74b5b90ea9ea30aeb558c4142d6c906dcd791f0cf03b1bd539b5d779c27106",
+      "mtime": "2026-10-11T13:05:26.991Z"
+    },
+    {
+      "file": "game/src/run/game.run.scenes.js",
+      "exists": true,
+      "bytes": 21910,
+      "sha256": "70d19542eb32476fab00a95179ea4ba6137a05c13f7624c30baac9bd847f5b63",
+      "mtime": "2026-10-11T11:55:45.748Z"
+    },
+    {
+      "file": "game/src/ui/game.menu.js",
+      "exists": true,
+      "bytes": 62894,
+      "sha256": "9ddd985df5acee91bfe85e7f83ec9fcc562e0f9fb16f9325b0c2af1fa181add1",
+      "mtime": "2026-10-11T11:46:42.210Z"
+    },
+    {
+      "file": "game/src/ui/expedition-feedback.js",
+      "exists": true,
+      "bytes": 2014,
+      "sha256": "46bf0d0215d265e9b9e33613bed8118b1a0be74f735f38a9b2a91da2516fcd74",
+      "mtime": "2026-10-11T11:48:23.651Z"
+    },
+    {
+      "file": "game/src/core/renderer.js",
+      "exists": true,
+      "bytes": 29417,
+      "sha256": "a13c768d66103e010db59a1e17d8a2e3ae6cbd89a66f7e37318d387ff5da1911",
+      "mtime": "2026-10-11T11:46:15.264Z"
+    },
+    {
+      "file": "game/src/run/expedition.view.js",
+      "exists": true,
+      "bytes": 9017,
+      "sha256": "316959ed0557c057e87594a9815190bbed96ac5860966e50d1908802f9ae1267",
+      "mtime": "2026-10-11T11:51:07.821Z"
+    },
+    {
+      "file": "game/src/ui/hud.js",
+      "exists": true,
+      "bytes": 11503,
+      "sha256": "9786c2ddb772772719e43fc83a7124dd110355ada4ffc5a0faf7d526b57dc3f4",
+      "mtime": "2026-10-11T11:48:51.327Z"
+    },
+    {
+      "file": "game/src/game.boot.js",
+      "exists": true,
+      "bytes": 40424,
+      "sha256": "3cb5a22e347aa3e5d277586aced96f6265b642098fe79dc09dc2cc20139c7b0f",
+      "mtime": "2026-10-11T11:46:15.269Z"
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "exists": true,
+      "bytes": 43641,
+      "sha256": "f44dc47bb9bbbb204a762799209ba0c1249f4fb89f65085fe3d64eb87c9e42fd",
+      "mtime": "2026-10-11T11:55:37.083Z"
+    },
+    {
+      "file": "game/src/run/chests.js",
+      "exists": true,
+      "bytes": 30801,
+      "sha256": "2fec5bacd14ce449701710e3c1167d729385c558a9f0e8f62b90d5feeed3f134",
+      "mtime": "2026-10-11T13:56:44.114Z"
+    },
+    {
+      "file": "game/src/run/game.run.shop.js",
+      "exists": true,
+      "bytes": 26900,
+      "sha256": "e3a599d30ce8e1f135b1a789a60148d081a69bf9ecde69ff8fbf25ac8cde0d7a",
+      "mtime": "2026-10-11T11:41:28.061Z"
+    },
+    {
+      "file": "game/src/hub/game.bag.settle.js",
+      "exists": true,
+      "bytes": 21893,
+      "sha256": "28a558918b33bffffcc0cad0d185d94a00c7bd8ec125176658f75c96e5d3e27e",
+      "mtime": "2026-10-11T10:57:07.118Z"
+    },
+    {
+      "file": "game/src/battle/view/battle.view.js",
+      "exists": true,
+      "bytes": 52994,
+      "sha256": "3e861a71d6c13bdf2c1faed921dfdecdd9827369789931a85e3cc3a31e72062c",
+      "mtime": "2026-10-11T13:53:37.849Z"
+    },
+    {
+      "file": "game/src/battle/view/battle.overlays.js",
+      "exists": true,
+      "bytes": 15400,
+      "sha256": "daabb1b5a2bbf80184adf8737fe5b0708f1be0ec046a023cd66ba6d020c26570",
+      "mtime": "2026-10-11T13:04:21.083Z"
+    },
+    {
+      "file": "game/src/battle/view/battle.piles.view.js",
+      "exists": true,
+      "bytes": 3259,
+      "sha256": "e98ef3647ef2d74e4f7c2b0cc0c192722ee4194824b3ab31d7919d2c7a304320",
+      "mtime": "2026-10-11T11:59:29.507Z"
+    },
+    {
+      "file": "game/src/ui/cinematics.js",
+      "exists": true,
+      "bytes": 7630,
+      "sha256": "ee0942c3915bff5820f3d52f334628d0bdefea04e646444c9bfec9895ef2f835",
+      "mtime": "2026-10-11T13:09:34.406Z"
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "exists": true,
+      "bytes": 39141,
+      "sha256": "1b8d3f851df23999bf2310a47038d4396b91f47fb2f9b391bf5e65db432fd56e",
+      "mtime": "2026-10-11T14:13:52.788Z"
+    },
+    {
+      "file": "game/css/departure-cover.css",
+      "exists": true,
+      "bytes": 15291,
+      "sha256": "06a407e2f5c9156f7751594150e7f3e6349bc41095f4b20b68860d7f2941094a",
+      "mtime": "2026-10-11T10:50:08.732Z"
+    },
+    {
+      "file": "game/css/entry-events.css",
+      "exists": true,
+      "bytes": 6099,
+      "sha256": "0a09aa03c6e0bab8ed2d231689ba49e92cef117b1ec9310c84782f76ebcdcc6e",
+      "mtime": "2026-10-11T13:09:18.927Z"
+    },
+    {
+      "file": "game/css/expedition-map.css",
+      "exists": true,
+      "bytes": 7538,
+      "sha256": "e004bc84d5cdc3f2771f3e4621d69246c05d95cbc9d02d4247560d6920b5b4a8",
+      "mtime": "2026-10-11T14:13:52.751Z"
+    },
+    {
+      "file": "game/css/page-expedition-hud.css",
+      "exists": true,
+      "bytes": 21365,
+      "sha256": "872f9fbbf8daa54b8b51ca5eebc057060eb8ef8d2af709439d47438434072d00",
+      "mtime": "2026-10-11T14:13:52.772Z"
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "exists": true,
+      "bytes": 22357,
+      "sha256": "3f703713687359dfe99d6c7a89bafac2ef82e70b6ab3c011626cad9a54990049",
+      "mtime": "2026-10-11T14:13:52.756Z"
+    },
+    {
+      "file": "game/css/expedition-shop.css",
+      "exists": true,
+      "bytes": 22451,
+      "sha256": "1c2cb06fa9469a231a419cc4f77c79ced311c955b651a1a0bf73d07cabcf9585",
+      "mtime": "2026-10-11T14:13:52.763Z"
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "exists": true,
+      "bytes": 13125,
+      "sha256": "9a164aabbd43beae3a268cb0cb1ab25f71d0273755e50aa364aa09436ac70bd0",
+      "mtime": "2026-10-11T14:13:52.757Z"
+    },
+    {
+      "file": "game/css/expedition-battle.css",
+      "exists": true,
+      "bytes": 24472,
+      "sha256": "07abd805c4c7b9436d5934ab254132311c222acb2786d18bd7411f1d0f249eda",
+      "mtime": "2026-10-11T14:13:52.758Z"
+    },
+    {
+      "file": "docs/production/art/ART-DIRECTION-BRIEF.md",
+      "exists": true,
+      "bytes": 4994,
+      "sha256": "0798d50e353b65ed277b5cd6385851a3e415f2219cb1e29ddffc22fe13634e67",
+      "mtime": "2026-10-11T13:33:43.220Z"
+    },
+    {
+      "file": "game/assets/scenes/shop/shop-cardstyle-approved-1011.webp",
+      "exists": true,
+      "bytes": 1181460,
+      "sha256": "d150710921cd395438f44d98798312e71c9e10f15df887d528909c83e4f335d2",
+      "mtime": "2026-10-11T13:14:01.920Z"
+    }
+  ],
+  "stageAssets": [
+    {
+      "key": "future-stage-composite",
+      "file": "handoff-art/source/future-stage-composite.png",
+      "original": "C:\\Users\\太平\\.codex\\generated_images\\01a12a56-fff8-7393-a312-6f8f01036d55\\exec-51ae9450-2494-4f39-a41c-826d285ef4e5.png",
+      "sha256": "f29d278fd3c117815a465b3ba8dd0c2725da93baa987626ddd54ac5a91cfbb0d",
+      "bytes": 1785056,
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "alpha": null,
+      "status": "summer-like future-city composition study; winter weather still required; not adopted"
+    },
+    {
+      "key": "future-far",
+      "file": "handoff-art/source/future-far.png",
+      "original": "C:\\Users\\太平\\.codex\\generated_images\\01a12a56-fff8-7393-a312-6f8f01036d55\\exec-9b5db149-51ce-421c-b9ed-bb052eeefc46.png",
+      "sha256": "6bc53c4327e2cdaed5cf3b8f7307b5279d4f07d7b880f230d72293802f0d51d9",
+      "bytes": 1718824,
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "alpha": null,
+      "status": "opaque far skyline; summer-like sky, needs winter correction; not adopted"
+    },
+    {
+      "key": "future-mid",
+      "file": "handoff-art/source/future-mid.png",
+      "original": "C:\\Users\\太平\\.codex\\generated_images\\01a12a56-fff8-7393-a312-6f8f01036d55\\exec-3dee411c-b3b8-4f56-a332-18eb4b1fa974.png",
+      "sha256": "f19dc30782973816103e552cd1f4a30acb29af1beab5f11ef500608a1a85aef1",
+      "bytes": 518505,
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "status": "transparent mid structures; greenery needs winter correction; not adopted"
+    },
+    {
+      "key": "future-ground",
+      "file": "handoff-art/source/future-ground.png",
+      "original": "C:\\Users\\太平\\.codex\\generated_images\\01a12a56-fff8-7393-a312-6f8f01036d55\\exec-b04b759f-ab07-4678-a18d-2b0ec5abcc5a.png",
+      "sha256": "d81fd3746a31937f8f606cfc0a70dff2ca547dd2b5128f09025efb8bf1790e70",
+      "bytes": 972465,
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        254
+      ],
+      "status": "transparent horizontal standing platform; same canvas; not adopted"
+    },
+    {
+      "key": "future-foreground",
+      "file": "handoff-art/source/future-foreground.png",
+      "original": "C:\\Users\\太平\\.codex\\generated_images\\01a12a56-fff8-7393-a312-6f8f01036d55\\exec-c746ae85-ff92-406a-885a-c987b7fcc164.png",
+      "sha256": "f996372fdf9e624318b24e7ba21fdc81c9ac2e1872c27d5b58c9b4fda01823ff",
+      "bytes": 177720,
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "status": "transparent corner covers; winter edge treatment pending; not adopted"
+    },
+    {
+      "key": "rejected-ancient-stage",
+      "file": "handoff-art/source/rejected-ancient-stage.png",
+      "original": "C:\\Users\\太平\\.codex\\generated_images\\01a12a56-fff8-7393-a312-6f8f01036d55\\exec-d4082972-5d8f-4cb7-ab97-b6bc3c8d22a8.png",
+      "sha256": "7e4b9b2ff2f34d8bbd9ba5d9259e008fc749f4fbdb34cb0f35bf83c8a38244fd",
+      "bytes": 1950798,
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "alpha": null,
+      "status": "rejected ancient stone/flags/dome direction; never integrate"
+    }
+  ],
+  "chestFrames": [
+    {
+      "file": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-calibration/modern-chest/source/modern-supply-frame-00.png",
+      "exists": true,
+      "bytes": 926419,
+      "sha256": "6af2206e7f4b8025dea25da1ef8a0d942d070dacf2bfb6f5b1b81fad05f1c757",
+      "mtime": "2026-10-11T13:33:31.013Z"
+    },
+    {
+      "file": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-calibration/modern-chest/source/modern-supply-frame-01.png",
+      "exists": true,
+      "bytes": 849592,
+      "sha256": "5dc681dafa7b0237199c8e2288e120f089576c6d959cdce62a8578290d489f3b",
+      "mtime": "2026-10-11T13:37:05.319Z"
+    },
+    {
+      "file": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-calibration/modern-chest/source/modern-supply-frame-02.png",
+      "exists": true,
+      "bytes": 874227,
+      "sha256": "5b14085acb22c0c91be068f84e932fe3cb0a2a14a6d09f1c9ef64b3c90fc4d58",
+      "mtime": "2026-10-11T13:38:58.062Z"
+    },
+    {
+      "file": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-calibration/modern-chest/source/modern-supply-frame-03.png",
+      "exists": true,
+      "bytes": 1076294,
+      "sha256": "9fd881a2633b5a269edd52120e163b7ef343be4830c830436ab2a86363bff611",
+      "mtime": "2026-10-11T13:43:23.054Z"
+    },
+    {
+      "file": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-calibration/modern-chest/source/modern-supply-frame-04.png",
+      "exists": true,
+      "bytes": 1305168,
+      "sha256": "f66edbaec95d9a7082abc60ec14fb840b5633cc03beaa668ad04444af5673870",
+      "mtime": "2026-10-11T13:48:00.253Z"
+    }
+  ],
+  "handoffFile": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/HANDOFF-NEXT-CHAT.md",
+  "readOrder": [
+    "HANDOFF-NEXT-CHAT.md",
+    "HANDOFF-STATE.json",
+    "task.json",
+    "Domain implementation notes as needed"
+  ],
+  "warning": "Hash is a handoff observation, not exclusive ownership of entire file. Protect other owners existing hunks; preserve rejected assets; no tests, generation, source cleanup or commit performed while packaging."
+}

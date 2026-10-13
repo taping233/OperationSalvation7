@@ -1,0 +1,69 @@
+{
+  "items": [
+    {
+      "card_id": "tt6-demondeal",
+      "asset": "scenes/event-tt6-demondeal.webp",
+      "prompt": "Style-transfer. Redraw FIRST image preserving its original landscape aspect ratio, camera, framing, character identities, positions, actions, main props, proportions, motion directions and background perspective. Flooded industrial tunnel, two men waist-deep at center exchange open olive case, left bandaged arm reaches right, masked supplier on right, red lamps reflected in water, hanging cables and sparks, blue fog and strong corridor perspective. Preserve this exact composition; repaint surfaces in broad opaque brushwork. Fill canvas with painting, remove source's white screenshot-like margins. STYLE: rough hand-painted anime environment illustration with complete readable silhouettes and large connected opaque color masses. Broad directional swipes and blunt dabs, hard grouped light/shadow, decisive handmade edges, selective structural drawing, quiet regions. Characters with anime faces and coherent hair locks; architecture and equipment simplified into major planes and perspective lines. Retain original scene mood and muted cool/warm palette, concentrated accent lights. Substantially simplify internal detail, cables into main grouped paths, debris into big shapes, reflections into broad swaths. No tiny facet mosaics, glossy 3D, photorealism, smooth airbrush, all-over grain or texture filter. No text, watermark or UI. Images 2–4 are STYLE ONLY references, do not borrow their identities, outfits, props or poses.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/scenes/event-tt6-demondeal.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-2f4cbca6-3543-4f88-a510-215128fc0830.png",
+      "revision": "event-original-rough-20261010"
+    },
+    {
+      "card_id": "tt6-bandits",
+      "asset": "scenes/event-bandits-anime-v2.webp",
+      "prompt": "Style-transfer. Redraw FIRST image preserving its original landscape aspect ratio, camera, framing, character identities, positions, actions, main props, proportions, motion directions and background perspective. Flooded abandoned shopping concourse, three dark hooded scavengers in lower middle, broken escalator on right, sagging translucent sheets overhead, storefront blocks and cold ceiling lights, same spacing and silhouettes. Preserve this exact composition; repaint surfaces in broad opaque brushwork. Fill canvas with painting, remove source's white screenshot-like margins. STYLE: rough hand-painted anime environment illustration with complete readable silhouettes and large connected opaque color masses. Broad directional swipes and blunt dabs, hard grouped light/shadow, decisive handmade edges, selective structural drawing, quiet regions. Characters with anime faces and coherent hair locks; architecture and equipment simplified into major planes and perspective lines. Retain original scene mood and muted cool/warm palette, concentrated accent lights. Substantially simplify internal detail, cables into main grouped paths, debris into big shapes, reflections into broad swaths. No tiny facet mosaics, glossy 3D, photorealism, smooth airbrush, all-over grain or texture filter. No text, watermark or UI. Images 2–4 are STYLE ONLY references, do not borrow their identities, outfits, props or poses.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/scenes/event-bandits-anime-v2.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-8cc03e7d-4c1a-4945-9813-83a8b5d526c9.png",
+      "revision": "event-original-rough-20261010"
+    },
+    {
+      "card_id": "tt6-mystery",
+      "asset": "scenes/event-tt6-mystery.webp",
+      "prompt": "Style-transfer. Redraw FIRST image preserving its original landscape aspect ratio, camera, framing, character identities, positions, actions, main props, proportions, motion directions and background perspective. Cold damaged laboratory corridor, kneeling young man at lower center-right opens tall supply cabinet glowing warm yellow, sealed crate at left, broken glass walls recede symmetrically, fallen stool on right, pale blue light. Preserve this exact composition; repaint surfaces in broad opaque brushwork. Fill canvas with painting, remove source's white screenshot-like margins. STYLE: rough hand-painted anime environment illustration with complete readable silhouettes and large connected opaque color masses. Broad directional swipes and blunt dabs, hard grouped light/shadow, decisive handmade edges, selective structural drawing, quiet regions. Characters with anime faces and coherent hair locks; architecture and equipment simplified into major planes and perspective lines. Retain original scene mood and muted cool/warm palette, concentrated accent lights. Substantially simplify internal detail, cables into main grouped paths, debris into big shapes, reflections into broad swaths. No tiny facet mosaics, glossy 3D, photorealism, smooth airbrush, all-over grain or texture filter. No text, watermark or UI. Images 2–4 are STYLE ONLY references, do not borrow their identities, outfits, props or poses.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/scenes/event-tt6-mystery.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-2fab5166-b801-476d-87a4-89d33193ba51.png",
+      "revision": "event-original-rough-20261010"
+    },
+    {
+      "card_id": "tt6-goldmine",
+      "asset": "scenes/event-tt6-goldmine.webp",
+      "prompt": "Style-transfer. Redraw FIRST image preserving its original landscape aspect ratio, camera, framing, character identities, positions, actions, main props, proportions, motion directions and background perspective. Collapsed industrial excavation outdoors, two workers in yellow suits and helmets centered lower half, one kneels left and one stands right under diagonal fallen beam, orange cones and cable coil, rubble on both sides and teal sky. Preserve this exact composition; repaint surfaces in broad opaque brushwork. Fill canvas with painting, remove source's white screenshot-like margins. STYLE: rough hand-painted anime environment illustration with complete readable silhouettes and large connected opaque color masses. Broad directional swipes and blunt dabs, hard grouped light/shadow, decisive handmade edges, selective structural drawing, quiet regions. Characters with anime faces and coherent hair locks; architecture and equipment simplified into major planes and perspective lines. Retain original scene mood and muted cool/warm palette, concentrated accent lights. Substantially simplify internal detail, cables into main grouped paths, debris into big shapes, reflections into broad swaths. No tiny facet mosaics, glossy 3D, photorealism, smooth airbrush, all-over grain or texture filter. No text, watermark or UI. Images 2–4 are STYLE ONLY references, do not borrow their identities, outfits, props or poses.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/scenes/event-tt6-goldmine.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-c19b26e4-2375-46cf-b66c-108142996ded.png",
+      "revision": "event-original-rough-20261010"
+    },
+    {
+      "card_id": "tt6-goldhammer",
+      "asset": "scenes/event-tt6-goldhammer.webp",
+      "prompt": "Style-transfer. Redraw FIRST image preserving its original landscape aspect ratio, camera, framing, character identities, positions, actions, main props, proportions, motion directions and background perspective. Dark industrial workshop, anime young worker leans forward center using enormous electrically charged block hammer hitting lower left ground, long shaft diagonally up-right, orange machine and cabinets on right, hanging tools left, violet cold light. Preserve this exact composition; repaint surfaces in broad opaque brushwork. Fill canvas with painting, remove source's white screenshot-like margins. STYLE: rough hand-painted anime environment illustration with complete readable silhouettes and large connected opaque color masses. Broad directional swipes and blunt dabs, hard grouped light/shadow, decisive handmade edges, selective structural drawing, quiet regions. Characters with anime faces and coherent hair locks; architecture and equipment simplified into major planes and perspective lines. Retain original scene mood and muted cool/warm palette, concentrated accent lights. Substantially simplify internal detail, cables into main grouped paths, debris into big shapes, reflections into broad swaths. No tiny facet mosaics, glossy 3D, photorealism, smooth airbrush, all-over grain or texture filter. No text, watermark or UI. Images 2–4 are STYLE ONLY references, do not borrow their identities, outfits, props or poses.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/scenes/event-tt6-goldhammer.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-2880d4f8-9837-47a5-b303-12ea625a2907.png",
+      "revision": "event-original-rough-20261010"
+    }
+  ]
+}

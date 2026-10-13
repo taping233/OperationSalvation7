@@ -1,0 +1,147 @@
+{
+  "observedAt": "2026-10-11T05:14:59.262Z",
+  "syntax": {
+    "passed": 12,
+    "paths": [
+      "game/src/hub/game.hub.js",
+      "game/src/hub/hub.personnel.js",
+      "game/src/hub/hub.presentation.js",
+      "game/src/hub/hub.home-v3.js",
+      "game/src/hub/hub.courtyard-v3.js",
+      "game/src/hub/hub.warehouse.js",
+      "game/src/hub/hub.archive-v3.js",
+      "game/src/hub/hub.shop-v3.js",
+      "game/src/hub/hub.collection-v4.js",
+      "game/src/hub/base-motion-v4.js",
+      "game/src/hub/courtyard.rain-tableau.js",
+      "game/src/hub/courtyard-vendor/KoiPond.js"
+    ]
+  },
+  "css": {
+    "passed": 8,
+    "paths": [
+      "game/css/base-camp-rework.css",
+      "game/css/base-home-v3.css",
+      "game/css/base-archive-v3.css",
+      "game/css/base-shop-v3.css",
+      "game/css/base-controls-v4.css",
+      "game/css/base-collection-v4.css",
+      "game/css/base-courtyard-v3.css",
+      "game/css/base-panel-layout.css"
+    ]
+  },
+  "targeted": {
+    "files": 14,
+    "passed": 116,
+    "failed": 0,
+    "success": true,
+    "premiumBasePassed": 2,
+    "premiumSkipped": 7
+  },
+  "protectedFooter": {
+    "expected": "260e5ae5346df12a4d8edb739605a944d7ac494617ae4de1e2e64d9da6c4c076",
+    "actual": "260e5ae5346df12a4d8edb739605a944d7ac494617ae4de1e2e64d9da6c4c076",
+    "unchanged": true
+  },
+  "eslint": "passed",
+  "docsCheck": "passed",
+  "pondAsset": {
+    "path": "game/assets/scenes/courtyard-pond-v4.webp",
+    "bytes": 188050,
+    "sha256": "95864cff3f37d71a1decdcd991df4dfa1f786976d897c338038c7e87d05e1842",
+    "manifestMatches": true,
+    "scopedErrors": []
+  },
+  "globalAssetGate": {
+    "passed": false,
+    "errors": 183,
+    "scope": "全库增量门仍检出本任务之外的新债，不修改其他属地；新池塘条目单独通过"
+  },
+  "inputs": [
+    {
+      "path": "game/src/hub/game.hub.js",
+      "sha256": "584fb4cd99c877aac571ed209c731daef43d81d1f4f676318a12f172dbbc9641"
+    },
+    {
+      "path": "game/src/hub/hub.personnel.js",
+      "sha256": "e387b34f7cebbe660b4387aefa167d6482894392002673a2d410de47b0d22122"
+    },
+    {
+      "path": "game/src/hub/hub.presentation.js",
+      "sha256": "d8bb8a29e65ad1dda58ee08149c99e535d1ed4c5bb3e5f092ebc8a63d2ab99fd"
+    },
+    {
+      "path": "game/src/hub/hub.home-v3.js",
+      "sha256": "5ec54614084dae63d8d2d4ee432e5efc2ad0d4ec2c027e477e46bd5f7ea75a6e"
+    },
+    {
+      "path": "game/src/hub/hub.courtyard-v3.js",
+      "sha256": "845d01145ced085114d63602f633687b61c2a382536771ec4ca086d9a489da9e"
+    },
+    {
+      "path": "game/src/hub/hub.warehouse.js",
+      "sha256": "38a44e9f66d3b77af0ab235b6ed643c6b58385e405db8925906cf99358407226"
+    },
+    {
+      "path": "game/src/hub/hub.archive-v3.js",
+      "sha256": "a59f8a2e50b40f7ceb5f8a53e6cec5c6e83f7f20bffe8285e2cbfba0e1178858"
+    },
+    {
+      "path": "game/src/hub/hub.shop-v3.js",
+      "sha256": "df3cf12c188722f18b83bf3b575010e414db6dc94dbebe292fcb8e920d5536a4"
+    },
+    {
+      "path": "game/src/hub/hub.collection-v4.js",
+      "sha256": "c97654b9433e7e4d6e1e04f4179070dd530948a7591218cf012b2012ea0262f5"
+    },
+    {
+      "path": "game/src/hub/base-motion-v4.js",
+      "sha256": "a6b34f97de2b405e62a119fddca4bf4c2c1763b038686a7c16aef705efe08756"
+    },
+    {
+      "path": "game/src/hub/courtyard.rain-tableau.js",
+      "sha256": "342019be513814b4c9ecac33e382ebb581e982fa9bde22c42a0cbb428c78fbb4"
+    },
+    {
+      "path": "game/src/hub/courtyard-vendor/KoiPond.js",
+      "sha256": "4aaca5843112f2a489e9b673acf254577994309273807a17c65e1b1c98825a6f"
+    },
+    {
+      "path": "game/css/base-camp-rework.css",
+      "sha256": "94d5ee166a6404e8b52308bb9fd3d74abd747da2174f6e6eb984b50c933a1e74"
+    },
+    {
+      "path": "game/css/base-home-v3.css",
+      "sha256": "52ad4f700930ecd5e6ff7c7cc27f2a5502803f219b040f44e418695300381a71"
+    },
+    {
+      "path": "game/css/base-archive-v3.css",
+      "sha256": "a29b4338dcefba350ab4f6150a6529155641cdb13e79a6482b6b3ad46dab80b7"
+    },
+    {
+      "path": "game/css/base-shop-v3.css",
+      "sha256": "438a8265801683b1a629259402cb57e1938f0667ac2471f8fe1644540703323b"
+    },
+    {
+      "path": "game/css/base-controls-v4.css",
+      "sha256": "2d02f35d8eefd53bcd9f875ef81018e50c52378ab798cee7828be6cef9fcb217"
+    },
+    {
+      "path": "game/css/base-collection-v4.css",
+      "sha256": "ef552a29a4f0e6ad4d866f9c98bbd69cde166078338b9ad760e80022b17c755f"
+    },
+    {
+      "path": "game/css/base-courtyard-v3.css",
+      "sha256": "7c05ac07ee0d3dae1b6413528130e93ea89dfd8139584c1849780a40cc85c973"
+    },
+    {
+      "path": "game/css/base-panel-layout.css",
+      "sha256": "75f5e5972d3d9277e51e004841d9a40ff0598268e5edf7bff3bac79070ad04a9"
+    }
+  ],
+  "unverified": [
+    "真实非空收藏/可领奖/待复原由构造测试覆盖，实页档位01为空；未真实购买、扩建、培养、领奖、应用卡背或外观",
+    "仅当前内置窗口；未调整视口，未做多尺寸或性能A/B",
+    "未build、全量测试、提交或推送；壁纸沿老板要求暂缓"
+  ]
+}

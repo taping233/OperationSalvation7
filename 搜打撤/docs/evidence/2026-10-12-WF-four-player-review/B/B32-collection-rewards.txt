@@ -1,0 +1,99 @@
+- main:
+  - text: 金币 攻击 ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - button "返回收藏室":
+    - heading "基地" [level=2]
+    - generic: 档案 / 02
+    - generic "基地物资":
+      - generic "木材 0":
+        - generic: "0"
+        - generic: 木材
+        - text: 木材
+      - generic "口粮 0":
+        - generic: "0"
+        - generic: 口粮
+        - text: 口粮
+      - generic "钥匙 0":
+        - generic: "0"
+        - generic: 钥匙
+        - text: 钥匙
+      - generic "储备币 2":
+        - generic: "2"
+        - generic: 储备币
+        - text: 储备币
+    - main:
+      - heading "收藏室" [level=2]
+      - generic: 奖励
+      - navigation "收藏室目录":
+        - button "01 已收藏":
+          - generic: "01"
+          - generic: 已收藏
+          - generic: ›
+        - button "02 奖励" [active] [pressed]:
+          - generic: "02"
+          - generic: 奖励
+          - generic: ›
+        - button "03 成就目标":
+          - generic: "03"
+          - generic: 成就目标
+          - generic: ›
+        - button "04 收藏里程碑":
+          - generic: "04"
+          - generic: 收藏里程碑
+          - generic: ›
+        - button "05 卡背":
+          - generic: "05"
+          - generic: 卡背
+          - generic: ›
+        - button "06 故事":
+          - generic: "06"
+          - generic: 故事
+          - generic: ›
+      - main:
+        - heading "待领取" [level=3]
+        - generic: "4"
+        - button "成就奖励 初出茅庐 可领取 ›" [pressed]:
+          - generic: 成就奖励
+          - generic: 初出茅庐
+          - generic: 可领取 ›
+        - button "成就奖励 猎手 可领取 ›":
+          - generic: 成就奖励
+          - generic: 猎手
+          - generic: 可领取 ›
+        - button "成就奖励 破壁者 可领取 ›":
+          - generic: 成就奖励
+          - generic: 破壁者
+          - generic: 可领取 ›
+        - button "成就奖励 崭露头角 可领取 ›":
+          - generic: 成就奖励
+          - generic: 崭露头角
+          - generic: 可领取 ›
+        - navigation:
+          - button "成就目标 ›"
+          - button "收藏里程碑 ›"
+        - complementary:
+          - article:
+            - text: 成就 · 可领取
+            - heading "初出茅庐" [level=3]
+            - paragraph: 首次撤离成功
+            - generic: 奖励预览
+            - img "wood"
+            - text: 木材 ×2
+            - button "领取奖励"
+    - navigation "基地房间":
+      - button "基地":
+        - generic: 基地
+      - button "配置":
+        - generic: 配置
+      - button "后勤":
+        - generic: 后勤
+      - button "交易所":
+        - generic: 交易所
+      - button "收藏室 当前房间 4项奖励可领取" [pressed]:
+        - generic: 收藏室
+        - generic: 当前房间
+        - emphasis: "4"
+      - button "建设":
+        - generic: 建设
+      - button "庭院":
+        - generic: 庭院

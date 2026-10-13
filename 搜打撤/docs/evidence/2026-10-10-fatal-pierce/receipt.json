@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-fatal-pierce",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12470-95d7-75e0-9477-03361e04258c\\exec-9c9b2a37-289c-45ea-8af2-9effe4a45dbd.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-fatal-pierce/cards-martial-tt3-fatal-pierce-source.png",
+        "bytes": 1919002,
+        "sha256": "51c202f9caa626fa37eb157d27baf7868df13af79935a69bb90d4b2ec9b21102"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-fatal-pierce/cards-martial-tt3-fatal-pierce-full-before.webp",
+          "bytes": 162140,
+          "sha256": "01100f3cb80e5b8ae15e39070986d78ea5426e1e91802b3970a871c49de8d921"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-fatal-pierce/cards-martial-tt3-fatal-pierce-thumb-before.webp",
+          "bytes": 26238,
+          "sha256": "4a60d1eec7132c7dd708c22eed1373415a113a36170b2cceb83f35288381d2f5"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-fatal-pierce.webp",
+          "bytes": 138306,
+          "sha256": "b8e8f6976aea2d6f5b33e6e73889331b89e96c44bf56f0d04d7bf83c934abf99",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-fatal-pierce.webp",
+          "bytes": 18546,
+          "sha256": "a26bd99850f35bfb2f4ee56c128f063f336211968f93d10185083a60aa228238",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt3-fatal-pierce-creative-rough-20261005",
+      "revision_after": "fatal-pierce-armor-break-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt3-fatal-pierce.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 162140,
+            "sha256": "01100f3cb80e5b8ae15e39070986d78ea5426e1e91802b3970a871c49de8d921",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt3-fatal-pierce.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 138306,
+            "sha256": "b8e8f6976aea2d6f5b33e6e73889331b89e96c44bf56f0d04d7bf83c934abf99",
+            "source": "docs/evidence/2026-10-10-fatal-pierce/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt3-fatal-pierce.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 26238,
+            "sha256": "4a60d1eec7132c7dd708c22eed1373415a113a36170b2cceb83f35288381d2f5",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt3-fatal-pierce.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 18546,
+            "sha256": "a26bd99850f35bfb2f4ee56c128f063f336211968f93d10185083a60aa228238",
+            "source": "docs/evidence/2026-10-10-fatal-pierce/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 891,
+  "manifest_count_after": 891
+}

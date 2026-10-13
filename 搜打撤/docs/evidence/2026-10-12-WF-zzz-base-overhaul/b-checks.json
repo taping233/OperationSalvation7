@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-12",
+  "checks": {
+    "jsSyntax": {
+      "command": "node --check (3 modified JS files)",
+      "exitCode": 0
+    },
+    "cssParse": {
+      "command": "postcss.parse (2 modified CSS files)",
+      "exitCode": 0,
+      "rules": [
+        140,
+        113
+      ]
+    },
+    "directTests": {
+      "command": "node node_modules/vitest/vitest.mjs run tests/hub-trade-shop-v5.test.js tests/hub-personnel-navigation.test.js --reporter=dot",
+      "exitCode": 0,
+      "files": 2,
+      "passed": 15
+    },
+    "warehouseNeighbors": {
+      "command": "node node_modules/vitest/vitest.mjs run tests/hub-pages-rework.test.js tests/base-ui-sample.test.js --reporter=dot",
+      "exitCode": 1,
+      "passed": 16,
+      "failed": 6
+    },
+    "warehouseBaseline": {
+      "command": "Same neighbor tests with read-only pre-load plugin substituting only the pre-edit warehouse source",
+      "exitCode": 1,
+      "passed": 16,
+      "failed": 6,
+      "note": "Exactly the same six failures; shared sources never swapped. Config receipt renamed to b-baseline-check.config.md after run."
+    }
+  },
+  "files": [
+    {
+      "file": "game/src/hub/hub.personnel.js",
+      "sha256": "49f3ed04014444f48827a9747d720eb327e4965debeca45e11ec8029fac73ad2"
+    },
+    {
+      "file": "game/src/hub/hub.warehouse.js",
+      "sha256": "6090ed5fe4af46672bd9d74b2b2916264807e29100eb5b25c69b64d273e6149d"
+    },
+    {
+      "file": "game/src/hub/hub.trade-shop-v5.js",
+      "sha256": "a61ee960ef48f403cba97c383b66439c96ff5e4d1ff5f46ab6ca795a4aa0ba27"
+    },
+    {
+      "file": "game/css/base-personnel-v12.css",
+      "sha256": "e2878915a826995ffa6c434ddd9fe6d6e25182e3006d85b252b30c5e1ee196e5"
+    },
+    {
+      "file": "game/css/base-logistics-trade-v12.css",
+      "sha256": "0360ecd2b8ce6694d69b42fb3ab922bd607365eaa895aaf900cdc90de55f7917"
+    }
+  ],
+  "visualStatus": "待主会话当前窗口内置浏览器验收"
+}

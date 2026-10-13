@@ -1,0 +1,37 @@
+{
+  "status": "记忆核实后v5提示词已整理，尚未生成",
+  "model": "nai-diffusion-5-full",
+  "recipe_version": "1.3",
+  "width": 1024,
+  "height": 1024,
+  "seed": null,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1boy, solo, calm expression, gentle smile, looking down, simple background, volcanic eruption, molten lava, glowing crater, smoke, floating cards, from above, upper body, leaning forward, outstretched arm, open hand\n\nCharacter 1 fills the upper-left foreground, his reaching hand nearer to the viewer at the center. His face remains readable beneath the hat brim; his torso continues through the lower-left crop. At the lower right, large charcoal-colored shapes enclose an oblique elliptical volcanic vent. Molten orange lava wells up inside its cracked dark rim. Three burning black spell cards fall from his fingers into the vent, adding heat and pressure. A broad wedge of incandescent lava bursts upward from the vent toward the upper-right, with one thick curved fiery plume and a dark smoke mass trailing behind it. The vent and plume read as a charging volcano in abstract color shapes. The blast lights the underside of his fingers and cheek and pulls his cloak along the diagonal flow. Plain deep ink-blue background, even flat color extending to all four canvas edges; the character, dark vent rim and eruptive plume belong to one continuous image.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "boy, elegant mysterious young man, refined youthful male features, pale skin, silver-grey long hair with two side locks falling to the waist, low bun at the back, short messy bangs under the hat, black wide-brim witch hat with deep purple inner lining, neat slender hat tip gently curving and drooping to the right, round thin metal frame eyeglasses, golden yellow eyes behind the lenses, pointy elf ears, black high-collar long coat with thin gold piping only along the front edges and cuffs, small gold buttons, solid plain black fabric, large cloak with purple inner lining, white feather ornament with a gold-set sapphire brooch on the left chest, black leather gloves",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, female, child, old man, aged face, broad jaw, elongated chin, wrinkles, staff, wand, feathered hat, hat feather, magic circle, circular portal, energy ring, spiral vortex, crescent moon, white background, white border, paper background, inset illustration, detached torso, disembodied hand, contact sheet, character sheet, realistic landscape, mottled background, gradient background",
+  "style_source": "tools/nai_style.py原文，经nai_prompt_clean构建；无额外画风块",
+  "artist": "1.2::miv4t::, 0.8::quasarcake::",
+  "style_block_sha256": "57e90347fff4158a5515506f688f0278dca819add5f521486bcebf21df413653",
+  "identity_source": {
+    "current": "docs/character-bible/changwuyu.md及ref-images/changwuyu.webp",
+    "historical_text_only": "../.tmp/nai/output/card-pilot-hero3-20260923-020544/changwuyu-hero.payload.json",
+    "note": "恢复清秀青年男性身份用词；不把历史构图/背景当现行，文本不能保证脸逐像素一致"
+  },
+  "memory_sources": [
+    "C:/Users/太平/.zcode/cli/memories/projects/project-9f3e184c77472436/memory/nai-artist-style-verified.md",
+    "C:/Users/太平/.zcode/cli/memories/projects/project-9f3e184c77472436/memory/nai-v5-prompt-pitfalls.md"
+  ],
+  "changes": {
+    "face": "撤掉泛化的slender masculine face，不以拉长脸/宽下颌制造男性；恢复原稿青年男性、低发髻鬓发、圆镜黄瞳。",
+    "volcano": "撤掉旋涡/两条同心弧/热点魔法环；暗色块面形成倾斜火山口，熔岩积压向右上喷出；保留三卡投入与已选对角线。",
+    "style": "正式双画师链与现行STYLE_BLOCK逐字沿用，撤掉此前自加1.3画风加权及改写段。背景采用记忆里的纯色卡面口径。"
+  },
+  "installed": false
+}

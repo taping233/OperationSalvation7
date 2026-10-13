@@ -1,0 +1,67 @@
+import { esc, escAttr } from '../core/shared.js';
+import { characterFor } from '../core/characters.js';
+import { getCharacter } from './collection.commands.js';
+import { MAP } from '../run/game.session.js';
+
+const browse = { slot: null, group: 'people', section: 'profile', pet: '', skins: new Map() };
+export const personnelViewKey = () => `${browse.group}/${browse.section}/${browse.pet}`;
+export function setPersonnelGroup(group) { browse.group = group === 'pets' ? 'pets' : 'people'; }
+const tab = (action, field, value, label, selected) => `<button type="button" class="mini-btn${selected ? ' ok' : ''}" data-act="${action}" data-${field}="${value}" aria-pressed="${selected}">${label}</button>`;
+function petsHTML(base) {
+  const pets = base.PETS || [];
+  const owned = base.ownedPets();
+  const selected = pets.find(pet => pet.id === browse.pet) || base.carriedPet() || pets[0];
+  if (!selected) return '<div class="camp-empty"><h3>暂无伙伴档案</h3></div>';
+  browse.pet = selected.id;
+  const have = owned.includes(selected.id);
+  const lv = have ? base.petLevel(selected.id) : 1;
+  const maxed = lv >= base.PET_LEVEL_MAX;
+  const cost = base.petUpCost(selected.id);
+  const safe = Math.min(MAP.rules.safeMax, MAP.rules.safeStart + lv - 1) + (selected.effect?.safeBonus || 0);
+  const nextSafe = Math.min(MAP.rules.safeMax, MAP.rules.safeStart + lv) + (selected.effect?.safeBonus || 0);
+  const carried = base.carriedPet()?.id === selected.id;
+  const hasEgg = base.data.stash.some(stack => stack.card.id === base.PET_EGG_ID && stack.count > 0);
+  return `<div class="person-stage partner-stage"><nav class="person-roster" aria-label="伙伴档案切换">${pets.map(pet => `<button class="person-face${pet.id === selected.id ? ' on' : ''}" data-act="personPet" data-id="${pet.id}" aria-label="查看${escAttr(pet.name)}" aria-pressed="${pet.id === selected.id}"><span>[[icon:${pet.icon}]]</span><b>${esc(pet.name)}</b><small>${owned.includes(pet.id) ? `Lv.${base.petLevel(pet.id)}` : '未相遇'}</small></button>`).join('')}</nav>
+    <div class="partner-display"><span class="partner-emblem">[[icon:${selected.icon}]]</span><small>EXPEDITION COMPANION</small><h3>${esc(selected.name)}</h3><p>${esc(selected.desc.replace(/^携带效果：/, ''))}</p><span class="partner-state">${carried ? '携带中' : have ? '已相遇' : '等待相遇'}</span></div>
+    <article class="person-details partner-details"><small>随行伙伴 / ${owned.length}·${pets.length}</small><h3>${esc(selected.name)}</h3><dl class="warehouse-facts"><div><dt>等级</dt><dd>${have ? `Lv.${lv}` : '未拥有'}</dd></div><div><dt>携带时安全格</dt><dd>${safe} 格</dd></div></dl>
+    <button class="mini-btn ok" data-act="selPet" data-id="${selected.id}"${!have || carried ? ' disabled' : ''}>${carried ? '当前携带' : '携带出征'}</button>
+    <section><h4>伙伴培养</h4><p>${maxed ? '已满级' : `Lv.${lv} → ${lv + 1} · 安全格 ${safe} → ${nextSafe}`}</p><button class="mini-btn ok" data-act="upPet" data-id="${selected.id}"${!have || maxed || base.data.rations < cost ? ' disabled' : ''}>${maxed ? '已满级' : `[[icon:bread]] ${cost} 口粮 · 培养`}</button><p class="hint">${!have ? '相遇后可以培养。' : maxed ? '伙伴已完成培养。' : base.data.rations < cost ? `口粮不足，还需 ${cost - base.data.rations}` : `拥有 ${base.data.rations} 口粮`}</p></section>
+    <section><h4>孵化新伙伴</h4><p>消耗 1 枚蛋与 ${base.HATCH_COST} 储备币，随机获得尚未拥有的伙伴。</p><button class="mini-btn" data-act="personHatch"${!hasEgg || base.data.coins < base.HATCH_COST || owned.length >= pets.length ? ' disabled' : ''}>孵化伙伴</button><p class="hint">${owned.length >= pets.length ? '伙伴已集齐' : !hasEgg ? '宠物蛋可从远征宝箱获得。' : base.data.coins < base.HATCH_COST ? `还需 ${base.HATCH_COST - base.data.coins} 储备币` : '已具备孵化条件'}</p></section></article></div>`;
+}
+export function personnelHTML(view, collectionHTML) {
+  const { Base: base, Meta: meta, Art: art, Cards: cards } = window.SDT;
+  if (browse.slot !== base.slot) { browse.slot = base.slot; browse.skins.clear(); browse.pet = ''; }
+  const header = `<header class="camp-section-head"><small>PERSONNEL / 远征者</small><h2>人物与伙伴</h2></header><nav class="person-groups" aria-label="远征者分类">${tab('personGroup', 'group', 'people', '人物档案', browse.group === 'people')}${tab('personGroup', 'group', 'pets', '远征伙伴', browse.group === 'pets')}</nav>`;
+  if (browse.group === 'pets') return `<div class="personnel-v2">${header}${petsHTML(base)}</div>`;
+  const roster = meta.classSummary().map(stats => ({ stats, character: characterFor(stats.cls) })).filter(entry => entry.character);
+  const selected = roster.find(entry => entry.character.id === view) || roster[0];
+  if (!selected) return `${header}<div class="camp-empty">暂无人物档案</div>`;
+  const { stats, character } = selected;
+  const owned = getCharacter(base.data, character.id);
+  const equipped = owned?.selectedSkinId || 'default';
+  const skin = browse.skins.get(character.id) || equipped;
+  const skins = owned?.availableSkinIds || ['default'];
+  const skinNames = new Map(art.listSkins(stats.cls).map(item => [item.id, item.name]));
+  const pool = cards.classPool(stats.cls);
+  const pct = stats.maxed ? 100 : Math.min(100, stats.need ? stats.xp / stats.need * 100 : 0);
+  let content;
+  if (browse.section === 'appearance') content = `<h4>外观预览</h4><div class="person-skin-grid">${skins.map(id => `<button class="person-skin${id === skin ? ' on' : ''}" data-act="personPreviewSkin" data-character="${character.id}" data-skin="${escAttr(id)}" aria-pressed="${id === skin}"><img src="${escAttr(art.skinUrl(stats.cls, id))}" alt="${escAttr(skinNames.get(id) || '默认外观')}" loading="lazy"><b>${esc(skinNames.get(id) || '默认')}</b><small>${id === equipped ? '已装备' : '可预览'}</small></button>`).join('')}</div><button class="mini-btn ok" data-act="selectCharacterSkin" data-character="${character.id}" data-skin="${escAttr(skin)}"${skin === equipped ? ' disabled' : ''}>${skin === equipped ? '当前外观已装备' : '应用此外观'}</button>`;
+  else if (browse.section === 'pool') content = `<h4>专属卡池 · ${pool.length} 张</h4><div class="person-pool">${pool.map(card => `<button class="person-pool-card" data-act="personCardZoom" data-id="${escAttr(card.id)}" aria-label="查看${escAttr(card.name)}">${cards.cardHTML(card, 'sm')}<span>${base.isCollected(card) ? '已归档' : '未归档'}</span></button>`).join('')}</div><button class="mini-btn" data-act="hubTab" data-tab="stash" data-view="cards">前往仓库归档培养</button>`;
+  else content = `<dl class="warehouse-facts"><div><dt>熟练度</dt><dd>Lv.${stats.lv}${stats.maxed ? ' · MAX' : ''}</dd></div><div><dt>专属卡池</dt><dd>${stats.pool} 张</dd></div></dl><section><h4>出征加成</h4><p class="person-perk-value">${esc(meta.perkText(stats.lv))}</p></section><section><h4>培养进度</h4><div class="person-progress-track"><i style="width:${pct}%"></i></div><p>${stats.maxed ? '熟练度已满' : `经验 ${stats.xp} / ${stats.need}`}</p><p class="hint">归档职业卡与能力卡，消耗卡牌并获得人物经验。</p><button class="mini-btn" data-act="personSection" data-section="pool">查看专属卡池</button></section>`;
+  const sections = `<nav class="person-sections" aria-label="人物内容">${[['profile', '档案'], ['pool', '卡池'], ['appearance', '外观'], ['collection', '收藏奖励']].map(([id, label]) => tab('personSection', 'section', id, label, browse.section === id)).join('')}</nav>`;
+  if (browse.section === 'collection') return `<div class="personnel-v2">${header}${sections}<div class="person-collection">${collectionHTML()}</div></div>`;
+  return `<div class="personnel-v2">${header}${sections}<div class="person-stage"><nav class="person-roster" aria-label="人物档案切换">${roster.map(entry => `<button class="person-face${entry.character.id === character.id ? ' on' : ''}" data-act="hubPersonView" data-character="${entry.character.id}" aria-label="查看${escAttr(entry.character.name)}的档案" aria-pressed="${entry.character.id === character.id}"><img src="${escAttr(art.skinUrl(entry.stats.cls, 'default'))}" alt=""><b>${esc(entry.character.name)}</b><small>${esc(entry.character.rulesetId)}</small></button>`).join('')}</nav><figure class="person-hero" data-skin="${escAttr(skin)}"><img src="${escAttr(art.skinUrl(stats.cls, skin))}" alt="${escAttr(character.name)}立绘" decoding="async"><figcaption><small>${esc(character.rulesetId)}</small><h3>${esc(character.name)}</h3><span>${esc(character.desc || '')}</span></figcaption></figure><article class="person-details"><header><small>${esc(character.rulesetId)} / PERSONNEL</small><h3>${esc(character.name)}</h3></header>${content}</article></div></div>`;
+}
+export function bindPersonnel({ ui, refresh, sound }) {
+  ui.act('personGroup', data => { setPersonnelGroup(data.group); sound.tick(); refresh(); });
+  ui.act('personSection', data => { if (!['profile', 'pool', 'appearance', 'collection'].includes(data.section)) return; browse.section = data.section; sound.tick(); refresh(); });
+  ui.act('personPet', data => { browse.pet = data.id; sound.tick(); refresh(); });
+  ui.act('personPreviewSkin', data => { browse.skins.set(data.character, data.skin); sound.tick(); refresh(); });
+  ui.act('personCardZoom', data => { const card = window.SDT.Cards.all().find(c => c.id === data.id); if (card) ui.showCardZoom(card); });
+  ui.act('personHatch', () => {
+    const result = window.SDT.Base.hatchPet();
+    ui.log(result.ok ? `孵化成功：${result.pet.name}` : result.msg || '孵化条件不足，资源未改变。', result.ok ? 'ok' : 'warn');
+    if (result.ok) { sound.ding(); window.SDT.Meta.checkUnlocks(); browse.pet = result.pet.id; }
+    refresh();
+  });
+}

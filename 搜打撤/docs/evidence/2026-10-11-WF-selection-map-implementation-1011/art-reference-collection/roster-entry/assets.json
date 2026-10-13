@@ -1,0 +1,132 @@
+{
+  "date": "2026-10-11",
+  "status": "research-only; no game integration",
+  "assets": [
+    {
+      "label": "RE01 星铁队伍选人实机",
+      "target": "选人候选头像/当前人物/查看与确认",
+      "sourceURL": "https://interfaceingame.com/screenshots/honkai-star-rail-team-selection/",
+      "originalURL": "https://interfaceingame.com/wp-content/uploads/honkai-star-rail/honkai-star-rail-team-selection.png",
+      "provenance": "玩家实机截图库；版本和拍摄日期未标注，早期角色/等级画面；不是官方独立立绘或UI工程",
+      "observation": "左侧三张头像卡共用固定框，白亮选中边框与角色右侧展示对应；底部Details与Add独立。本项目对应五人头像、换人时保外壳和查看/确认分工，不复制3D人物或星空风格。",
+      "newOrReused": "reused",
+      "date": "unknown",
+      "width": 1920,
+      "height": 1080,
+      "format": "PNG",
+      "originalPath": "docs/evidence/2026-10-11-selection-map-plan/references/HSR-team-selection.png",
+      "bytes": 566779,
+      "sha256": "19619a2935ab8edc213e7d191bab69e5b7c87d117efc59289741cc2eeb60d94e",
+      "viewed": "tools.view_image; 2026-10-11",
+      "acquisition": "Original response bytes; reused files retained at their original local paths; no resize/crop/re-encode"
+    },
+    {
+      "label": "RE02 绝区零VR训练敌人编排实机",
+      "target": "布局辅助：空槽/敌人候选/固定确认区",
+      "sourceURL": "https://www.hoyolab.com/article/30636268",
+      "originalURL": "https://upload-os-bbs.hoyolab.com/upload/2024/07/05/370699319/df91f4130bed0f07c0ce84ea79c181d0_551250015581684224.png",
+      "provenance": "HoYoLAB社区作者uid370699319的VR Gameplay Introduction实机教学原上传；2024-07-05。画面为VR训练敌人编排/自定义计划，候选是Tyrfing、Alpeca、Hoplital等敌人，底部为Battery Cost与Save Plan；不是玩家出征携带或仓库。非官方独立UI源。",
+      "observation": "仅借鉴左空槽、右敌人候选与底部固定确认的布局；不能作为本项目实际携带、容量或资源回执证据，不移植敌人编排/训练电量规则。",
+      "newOrReused": "new",
+      "date": "2024-07-05",
+      "width": 1546,
+      "height": 857,
+      "format": "PNG",
+      "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-reference-collection/roster-entry/zzz-custom-preparation-original.png",
+      "bytes": 1431298,
+      "sha256": "75da5e45803ea0bec04a175099f68c7da537125846c421a0929d8bc51cb4c8f2",
+      "viewed": "tools.view_image; 2026-10-11",
+      "acquisition": "Original response bytes; reused files retained at their original local paths; no resize/crop/re-encode"
+    },
+    {
+      "label": "RE03 STS2 Neow开局实机",
+      "target": "完整入城页主焦点/持续资源/奖励区域",
+      "sourceURL": "https://www.pcgamer.com/games/roguelike/slay-the-spire-2-early-access-features/",
+      "originalURL": "https://cdn.mos.cms.futurecdn.net/hEAn7QQ33igbBM6hbWPF3N.jpg",
+      "provenance": "PC Gamer实机文章的Mega Crit版权截图；画面右上v0.98.2与2026-03-09；非官方独立UI图层",
+      "observation": "角色大主体覆盖全屏中央，名字/短对白形成阅读焦点；顶部资源持续可见，三条奖励放下方暗色承托。本项目只对应入城完整页/已获职业卡/唯一继续，不移植Neow身份和三选一。",
+      "newOrReused": "reused",
+      "date": "2026-03-09",
+      "width": 1920,
+      "height": 1080,
+      "format": "JPEG",
+      "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/entry-events/references/sts2-neow-pcgamer.jpg",
+      "bytes": 305522,
+      "sha256": "8f4db80858965a891b8eab7674002dc43435df67bc7485645cf15baf0f680cb3",
+      "viewed": "tools.view_image; 2026-10-11",
+      "acquisition": "Original response bytes; reused files retained at their original local paths; no resize/crop/re-encode"
+    },
+    {
+      "label": "RE04 STS2 Ranwid事件实机",
+      "target": "事件场景/叙事/动作与后果分层",
+      "sourceURL": "https://www.pcgamer.com/games/roguelike/slay-the-spire-2-early-access-features/",
+      "originalURL": "https://cdn.mos.cms.futurecdn.net/zBUHmoDEx334RdStjSbShd.jpg",
+      "provenance": "PC Gamer实机文章的Mega Crit版权截图；右上v0.98.0与2026-03-05；非独立事件角色透明源",
+      "observation": "左侧老者与暗树，右侧完整标题/三段叙事和三条选择；黄色动作标题、白色后果同一承托，资源仍留顶部。本项目对应叙事滚动区/真实选项/局部明度承托；不是过场动效的帧或时长证据。",
+      "newOrReused": "reused",
+      "date": "2026-03-05",
+      "width": 1920,
+      "height": 1080,
+      "format": "JPEG",
+      "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/entry-events/references/sts2-event-pcgamer.jpg",
+      "bytes": 234562,
+      "sha256": "098173d47582b875363cca6fcb764cd1aa9f98f2b1efa5b4bc36b3aaaa933a64",
+      "viewed": "tools.view_image; 2026-10-11",
+      "acquisition": "Original response bytes; reused files retained at their original local paths; no resize/crop/re-encode"
+    },
+    {
+      "label": "RE05 方舟IS7 未涉足之树事件整页",
+      "target": "事件三选项/左侧完整叙事/持续资源与底部收藏队伍",
+      "sourceURL": "https://img2-tc.tapimg.com/moment/etag/FoSl1WbPlNMC4t77BV9Gdepq5bw3_20260720001135.jpg/_tap_ugc.jpg",
+      "originalURL": "https://img2-tc.tapimg.com/moment/etag/FoSl1WbPlNMC4t77BV9Gdepq5bw3_20260720001135.jpg/_tap_ugc.jpg",
+      "provenance": "根会话本轮取得的TapTap玩家IS7实机原提供图；图片URL日期2026-07-20，帖子修改7月19日，具体补丁未标；1080x485提供尺寸，非官方独立UI资产。跨域引用原文件，不复制。",
+      "observation": "中央树场景，左下完整事件标题/叙事；右侧探索内部、探索源头、休息三选项，各用亮动作条和暗色后果区；顶部持续资源、底部收藏/零件/队伍。对应本项目事件动作/真实后果分区及导航层级；不能从静图推发生概率或动画。图内上方甜美的伤口是主题/路线标题，未涉足之树才是事件。",
+      "newOrReused": "new-cross-domain-reference",
+      "date": "2026-07-20 CDN date; patch unlabelled",
+      "sourcePage": "https://www.taptap.cn/moment/828059228320039824",
+      "sourcePageTitle": "小刻也能懂的黑流树海三结局前置及机制介绍",
+      "width": 1080,
+      "height": 485,
+      "format": "JPEG",
+      "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-reference-collection/map-navigation/source/is7-selected-route-a.jpg",
+      "bytes": 81686,
+      "sha256": "649d81b6c401eb62eb612fcc924556de68caed18793472c238ff9107bb9b5efc",
+      "viewed": "tools.view_image; 2026-10-11",
+      "acquisition": "Original response bytes; reused files retained at their original local paths; no resize/crop/re-encode"
+    }
+  ],
+  "notPrimary": [
+    {
+      "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-reference-collection/roster-entry/zzz-agent-info.webp",
+      "width": 642,
+      "height": 361,
+      "bytes": 69008,
+      "sha256": "165c8b9b8e45f6e348895a78e098a20f72cb22fd761006bf86a24e2c0f3e50a8",
+      "reasonNotPrimary": "642x361 low-resolution role-info composition only; primary catalog uses current IS7 event for new incremental evidence",
+      "viewed": "tools.view_image; 2026-10-11"
+    },
+    {
+      "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-reference-collection/roster-entry/zzz-equipment-selection.webp",
+      "width": 642,
+      "height": 361,
+      "bytes": 85754,
+      "sha256": "3fa31d5e4a2ba84dbe98d3f4125d7e7eb9e78c664f01fe5aaaff3e6c82377575",
+      "reasonNotPrimary": "642x361 low-resolution duplicate equipment layout; primary catalog uses HD custom-preparation instead",
+      "viewed": "tools.view_image; 2026-10-11"
+    },
+    {
+      "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-reference-collection/roster-entry/zzz-combat-plan-original.png",
+      "width": 1542,
+      "height": 854,
+      "bytes": 1587901,
+      "sha256": "2cf218edac93b84cec6d27410d3c4d9c733bb36d7e979544c72b5acd96fbec0a",
+      "reasonNotPrimary": "HD category screen inspected; less direct than custom-preparation for actual selected loadout",
+      "viewed": "tools.view_image; 2026-10-11"
+    }
+  ],
+  "gaps": [
+    "No verified current-2026 ZZZ/HSR selection UI screenshot; older screenshots explicitly dated/unknown-version.",
+    "No official independently published editable UI panels, transparent character or event-background source obtained.",
+    "No continue/resume city-cut motion sequence or temporal sampling obtained; STS2 whole-page references only support static scene hierarchy."
+  ]
+}

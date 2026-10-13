@@ -1,0 +1,20 @@
+{
+  "manifest_entry_matches": true,
+  "approved_source_hash_matches": true,
+  "full_decode_passed": true,
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "opus",
+        "sample_rate": "48000",
+        "channels": 2
+      }
+    ],
+    "format": {
+      "duration": "120.006500"
+    }
+  },
+  "global_asset_audit": "400 other errors and 623 historical warnings; not a global pass"
+}

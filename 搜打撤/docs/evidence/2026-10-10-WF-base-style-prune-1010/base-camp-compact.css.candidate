@@ -1,0 +1,118 @@
+/* 当前内置浏览器的窄面板：基地采用原生像素排版，仍沿用全局缩放用于地图与其他界面。
+   逆缩放与尺寸同步抵消，DOM 拖放使用真实元素位置，不改 UiScale 或游戏坐标。 */
+@media (max-width: 900px) {
+  #overlay .card.page:has(.base-camp, .camp-depart-detail, [data-base-departure="true"]),
+  #overlay .card:has(.stash-shell.camp-detail),
+  body:has(.base-camp, .camp-depart-detail, [data-base-departure="true"]) #cardZoom {
+    --camp-window-scale: min(calc(100vw / 1920px), calc(100vh / 1080px));
+    zoom: calc(1 / var(--camp-window-scale));
+  }
+  #overlay .card.page:has(.base-camp, .camp-depart-detail, [data-base-departure="true"]) {
+    width: 100%; height: 100%;
+  }
+  #overlay .card:has(.stash-shell.camp-detail) { width: 500px; max-width: 94%; padding: 25px; }
+  body:has(.base-camp, .camp-depart-detail, [data-base-departure="true"]) #cardZoom {
+    inset: 0 auto auto 0; width: 100%; height: 100%;
+  }
+  #overlay #hubMain.pg.hub.base-camp .hub-head { flex-wrap: wrap; gap: 12px; padding: 14px 20px; min-height: 80px; }
+  #overlay #hubMain.pg.hub.base-camp .camp-brand h2 { font-size: 23px; }
+  #overlay #hubMain.pg.hub.base-camp .camp-brand small { font-size: 9px; }
+  #overlay #hubMain.pg.hub.base-camp .hub-slot-label { margin-left: auto; padding-left: 12px; font-size: 11px; }
+  #overlay #hubMain.pg.hub.base-camp .hub-res { flex-basis: 100%; justify-content: space-between; margin: 0; padding-top: 10px; border-top: 1px solid #42555a; gap: 8px; }
+  #overlay #hubMain.pg.hub.base-camp .res-chip { gap: 7px; font-size: 12px; }
+  #overlay #hubMain.pg.hub.base-camp .res-chip b { font-size: 20px; }
+  #overlay #hubMain.pg.hub.base-camp .res-chip .ic { width: 18px; height: 18px; }
+  #overlay #hubMain.pg.hub.base-camp .hub-body { display: flex; flex-direction: column; }
+  #overlay #hubMain.pg.hub.base-camp .hub-tabs { flex-direction: row; gap: 4px; padding: 8px; flex: none; }
+  #overlay #hubMain.pg.hub.base-camp :is(.camp-nav-caption, .camp-nav-foot, .camp-nav-index, .tab-txt small) { display: none; }
+  #overlay #hubMain.pg.hub.base-camp .hub-tab { flex: 1; min-width: 0; min-height: 62px; padding: 9px 4px; flex-direction: column; justify-content: center; gap: 6px; }
+  #overlay #hubMain.pg.hub.base-camp .hub-tab::before { top: auto; bottom: 0; height: 3px; left: 12px; right: 12px; width: auto; }
+  #overlay #hubMain.pg.hub.base-camp .tab-ico { width: 22px; height: 22px; }
+  #overlay #hubMain.pg.hub.base-camp .tab-ico .ic { width: 20px; height: 20px; }
+  #overlay #hubMain.pg.hub.base-camp .tab-txt b { font-size: 14px; }
+  #overlay #hubMain.pg.hub.base-camp .hub-page { flex: 1; padding: 24px; }
+  #overlay #hubMain.pg.hub.base-camp .camp-section-head { gap: 9px; margin-bottom: 22px; }
+  #overlay #hubMain.pg.hub.base-camp .camp-section-head h2 { font-size: 29px; }
+  #overlay #hubMain.pg.hub.base-camp .camp-section-head p { font-size: 14px; }
+  #overlay #hubMain.pg.hub.base-camp .camp-depart-mission { grid-template-columns: 1fr; min-height: 0; }
+  #overlay #hubMain.pg.hub.base-camp .camp-depart-art { height: 370px; }
+  #overlay #hubMain.pg.hub.base-camp .camp-depart-art figcaption { padding: 60px 25px 25px; }
+  #overlay #hubMain.pg.hub.base-camp .camp-depart-art figcaption b { font-size: 22px; }
+  #overlay #hubMain.pg.hub.base-camp .camp-depart-dossier { padding: 26px; gap: 22px; }
+  #overlay #hubMain.pg.hub.base-camp .mode-card { padding: 17px; }
+  #overlay #hubMain.pg.hub.base-camp .mode-info b { font-size: 19px; }
+  #overlay #hubMain.pg.hub.base-camp .mode-info span { font-size: 14px; }
+  #overlay #hubMain.pg.hub.base-camp .deploy-mission-target b { font-size: 28px; }
+  #overlay #hubMain.pg.hub.base-camp .deploy-primary { min-height: 60px; font-size: 21px; }
+  #overlay #hubMain.pg.hub.base-camp.hub-deploy .hub-page { padding-bottom: 110px; }
+  #overlay #hubMain.pg.hub.base-camp.hub-deploy button[data-act="deploy"] { position: fixed; left: 24px; right: 24px; bottom: 20px; width: auto; z-index: 15; box-shadow: 0 4px 0 #ad9451, 0 12px 30px #19353b30; }
+  #overlay #hubMain.pg.hub.base-camp .hub-card { padding: 22px; }
+  #overlay #hubMain.pg.hub.base-camp :is(.stash-section-tab, .collection-tabs button) { flex: 1; justify-content: center; padding: 12px 8px; gap: 7px; font-size: 15px; }
+  #overlay #hubMain.pg.hub.base-camp :is(.stash-sections, .collection-tabs) { margin-bottom: 22px; }
+  #overlay #hubMain.pg.hub.base-camp .warehouse-heading { flex-wrap: wrap; gap: 16px; }
+  #overlay #hubMain.pg.hub.base-camp .warehouse-heading h3 { font-size: 22px; }
+  #overlay #hubMain.pg.hub.base-camp .warehouse-materials { margin-left: auto; }
+  #overlay #hubMain.pg.hub.base-camp .material-cell { padding: 10px 12px; font-size: 13px; }
+  #overlay #hubMain.pg.hub.base-camp .stash-cardgrid { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 18px; }
+  #overlay #hubMain.pg.hub.base-camp .camp-pet-list { grid-template-columns: 1fr; }
+  #overlay #hubMain.pg.hub.base-camp .pet-ops { flex-wrap: wrap; }
+  #overlay #hubMain.pg.hub.base-camp .pet-sec-head { flex-wrap: wrap; }
+  #overlay #hubMain.pg.hub.base-camp .pet-egg-art { width: 85px; height: 85px; }
+  #overlay #hubMain.pg.hub.base-camp .camp-shop-layout { grid-template-columns: 1fr; gap: 22px; }
+  #overlay #hubMain.pg.hub.base-camp .camp-shop-intro { padding: 24px; }
+  #overlay #hubMain.pg.hub.base-camp .camp-reserve-value { margin: 16px 0; }
+  #overlay #hubMain.pg.hub.base-camp .camp-reserve-value b { font-size: 48px; }
+  #overlay #hubMain.pg.hub.base-camp .shop-shelf { gap: 18px; }
+  #overlay #hubMain.pg.hub.base-camp .camp-product { padding: 18px; }
+  #overlay #hubMain.pg.hub.base-camp .shelf-visual { height: 230px; }
+  #overlay #hubMain.pg.hub.base-camp .shelf-info b { font-size: 21px; }
+  #overlay #hubMain.pg.hub.base-camp .camp-upgrade-reserve { flex-wrap: wrap; gap: 12px 22px; }
+  #overlay #hubMain.pg.hub.base-camp .person-details { padding: 25px; }
+  #overlay #hubMain.pg.hub.base-camp .ach-list { grid-template-columns: 1fr; }
+  #overlay #hubMain.pg.hub.base-camp .coll-group-head { flex-wrap: wrap; gap: 12px; padding: 18px; }
+  #overlay #hubMain.pg.hub.base-camp .coll-group-head .dim { display: none; }
+  #overlay #hubMain.pg.hub.base-camp .coll-cards { padding: 18px; gap: 13px; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  #overlay #hubMain.pg.hub.base-camp .camp-notice { left: 18px; right: 18px; bottom: 18px; padding: 16px; font-size: 15px; }
+  #overlay #depMain.pg.hub.camp-detail .hub-head { padding: 20px 20px 20px 82px; min-height: 88px; }
+  #overlay #depMain.pg.hub.camp-detail .ak-back-tl { left: 20px; top: 23px; width: 42px; height: 42px; }
+  #overlay #depMain.pg.hub.camp-detail .camp-detail-heading h2 { font-size: 25px; }
+  #overlay #depMain.pg.hub.camp-detail .res-chip { font-size: 14px; }
+  #overlay #depMain.pg.hub.camp-detail .res-chip b { font-size: 20px; }
+  #overlay #depMain.pg.hub.camp-detail .dep-body { display: block; padding: 22px; }
+  #overlay #depMain.pg.hub.camp-detail .camp-depart-person { display: none; }
+  #overlay #depMain.pg.hub.camp-detail :is(.dep-storage, .dep-pack) { height: auto; min-height: 0; margin-bottom: 22px; overflow: visible; }
+  #overlay #depMain.pg.hub.camp-detail .dep-cards { flex: none; height: auto; overflow: visible; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  #overlay #depMain.pg.hub.camp-detail .bag-grid { flex: none; height: auto; min-height: 230px; max-height: 480px; overflow-y: auto; }
+  #overlay #depMain.pg.hub.camp-detail .dep-foot { padding: 18px 22px; gap: 16px; flex-wrap: wrap; }
+  #overlay #depMain.pg.hub.camp-detail .camp-depart-next { display: none; }
+  #overlay #depMain.pg.hub.camp-detail #btnDeploy { width: auto; min-width: 220px; flex: 1; font-size: 19px; }
+  #overlay .card.page .pg.cls2-page[data-base-departure="true"] { padding-bottom: 166px; }
+  #overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-stage { top: auto; bottom: auto; height: auto; }
+  #overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-panel { width: 46%; padding: 24px 22px; }
+  #overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-fullart { width: 56%; }
+  #overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-strip { height: 166px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; padding: 12px 16px 70px; }
+  #overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-face { width: 100%; height: 82px; min-width: 0; }
+  #overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-face b { font-size: 13px; }
+  #overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-confirm { left: 16px; right: 16px; bottom: 13px; width: auto; height: 48px; }
+  #overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-stats { gap: 10px; }
+  #overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-stats > div { padding: 13px 10px; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] { --camp-pool-card: 180px; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] .pg-head { gap: 14px; padding: 18px; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] .pool-archive-title h2 { font-size: 24px; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] .pool-head-badge { padding: 6px 10px; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] .pool-main { flex-direction: column; padding: 18px; gap: 18px; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] .pool-side { flex: 0 0 260px; width: 100%; padding: 18px; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] .pv-head { margin-bottom: 10px; padding-bottom: 8px; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] .pv-body { display: grid; grid-template-columns: 140px 1fr; gap: 10px 24px; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] .pv-body > .hs-card.lg { grid-row: 1 / 3; width: 140px; font-size: 14px; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] .pv-meta { margin: 0; align-self: start; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] .pv-hint { margin: 0; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] .pv-rule { margin: 14px 0 0; padding-top: 12px; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] .pool-catalog-head { padding: 14px; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] .pool-filters { gap: 8px; padding: 0 14px 14px; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] .pool-grid { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); padding: 18px; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] .cls-foot { padding: 14px 18px; gap: 16px; flex-wrap: wrap; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] .pool-pager { gap: 10px; flex: 1; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] .pool-pageinfo { min-width: 0; flex: 1; font-size: 13px; }
+  #overlay .card.page .pg.cls-pool-page[data-base-departure="true"] .cls-foot > .ov-btn { flex: 1; min-width: 100px; }
+}

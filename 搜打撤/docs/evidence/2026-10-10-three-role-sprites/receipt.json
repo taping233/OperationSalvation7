@@ -1,0 +1,2480 @@
+[
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/pack_sprites.py",
+    "bytes": 10812,
+    "sha256": "3423f1280bc062d93ef8c6ef494e0548f72ded959ac63e82630bd5645d1cee40",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/README.md",
+    "bytes": 806,
+    "sha256": "1cb5895c7fd6be0a90e79dce6e8414aefc111f639e04d289dc8a4cb41503702a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/alignment.json",
+    "bytes": 1732,
+    "sha256": "f0ecbab7189cebbb06214088c4608cc2cd144ece9a84ca68a0547cf71a55869b",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/animations.json",
+    "bytes": 5845,
+    "sha256": "003fcb787254c7502a45ca458d067442f28fcb03b191f609f72541decf779d49",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/attack-source.png",
+    "bytes": 2269167,
+    "sha256": "a2df83de33f5fe4262f11213946d5e85ec1991a101bfd2ac2eb6ce86c95c4101",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/base-right-source.png",
+    "bytes": 1440843,
+    "sha256": "03bd12c3ea04ff4ebeb2b949267478eedb3b4755afa60946112fed8a0a650754",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/base-source.png",
+    "bytes": 1313529,
+    "sha256": "a3aa2ca66ce3c5ea3d4a3f5a5b77579a14d6c28c2621e8a31bf9c6e69f4e7e53",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/death-source.png",
+    "bytes": 1549421,
+    "sha256": "9feb9f28a14bf62e7bd646d4e449ee58c2e6e5afdc683f23ecb2f02c5e4c15ac",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/hurt-source.png",
+    "bytes": 1894389,
+    "sha256": "5c0f88d954f827b5d36fe498f386e6db0b8cd94b030c8c4004daa9a30178e198",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/validation.json",
+    "bytes": 4699,
+    "sha256": "3cc2d0f488ac7b7c2782a18a17940b0286e98e2939c3ecba725c732c8a294769",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-000.png",
+    "bytes": 197307,
+    "sha256": "a95d30d388d7ae70071f9ed8ea910967c21b9bc7ac001e24514044bc8c69a3d5",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-000.webp",
+    "bytes": 158462,
+    "sha256": "429ceed8cb4e0c256f5dfd68ba3096e629a142747e0042c7deecef2d85134c71",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-001.png",
+    "bytes": 221813,
+    "sha256": "e063129b898da9a4fe8f56cfaf58db247ce73604001b3762bcdda3bee730499f",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-001.webp",
+    "bytes": 178400,
+    "sha256": "60220f1034b27e46b653a185f928755820dcd2eafa24f457950459e1cfa72b90",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-002.png",
+    "bytes": 228167,
+    "sha256": "7c2e6c8442e3c3c0e9016ad6cb994ec3b3ea9ef04c1dd50cc214c249944d0289",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-002.webp",
+    "bytes": 185486,
+    "sha256": "3564bb51b0f3434b4c0ba5955bcfaad2b29ceb2f0c4f9ff21af20ed2aa1a4034",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-003.png",
+    "bytes": 232656,
+    "sha256": "26942ea624e76566be987737f869d9af6f1ab54d42445cfd49dc50a1fbf56ac0",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-003.webp",
+    "bytes": 207160,
+    "sha256": "a34bb6e6b75e0cca6c3385194b61a35f67c966ba84b41ef2e8549e2cff58f9f8",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-004.png",
+    "bytes": 237532,
+    "sha256": "3a147ac177c770d84d53d201cab01886337f5df5572efaac1ea5e57f1d3df76e",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-004.webp",
+    "bytes": 198224,
+    "sha256": "a8a0c155693c072df47b2dd4f2e075ab11e1431db7d3b1c940f9bb4abfb04741",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-005.png",
+    "bytes": 224526,
+    "sha256": "e3b88c2c65780145b2484c5bc5b6842e56744fae05a71a449e67837a13c93710",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-005.webp",
+    "bytes": 181360,
+    "sha256": "fa7a6011b8d9b4c40fe7ba02b8e1c7408b47898f9dbd32f31ad9dbfe11712b66",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-006.png",
+    "bytes": 218313,
+    "sha256": "211e2cccf63ae2e610472c1825d7af9edf3d4759953468103b0b90223cebea16",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-006.webp",
+    "bytes": 179976,
+    "sha256": "a9d96e40d74d7a7b936bb2752a93369eaf1063022a4e07f805fe37df970c6054",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-007.png",
+    "bytes": 197307,
+    "sha256": "a95d30d388d7ae70071f9ed8ea910967c21b9bc7ac001e24514044bc8c69a3d5",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-007.webp",
+    "bytes": 158462,
+    "sha256": "429ceed8cb4e0c256f5dfd68ba3096e629a142747e0042c7deecef2d85134c71",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-000.png",
+    "bytes": 197307,
+    "sha256": "a95d30d388d7ae70071f9ed8ea910967c21b9bc7ac001e24514044bc8c69a3d5",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-000.webp",
+    "bytes": 158462,
+    "sha256": "429ceed8cb4e0c256f5dfd68ba3096e629a142747e0042c7deecef2d85134c71",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-001.png",
+    "bytes": 263223,
+    "sha256": "83da427f38a1933164b18a3836572517942503881b92ed2c062e71900a879ef4",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-001.webp",
+    "bytes": 215506,
+    "sha256": "e019f8981e8edec742485edd0d57b22fdba5f9e64aed5507a64a0716fa4b53ec",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-002.png",
+    "bytes": 266741,
+    "sha256": "8ea2adc1932ec9c7cfda08f4435bebc9d7ba2c2a324eb4267c62d6c2d162e892",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-002.webp",
+    "bytes": 231456,
+    "sha256": "b4d1dee25c59caefea5102d91f40cc773396aff68a4260f5160b97d8ee84a052",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-003.png",
+    "bytes": 245628,
+    "sha256": "0ad0558966792f161b375b9ab09dcf699a9e0d089e658e9751906b257d3c8221",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-003.webp",
+    "bytes": 202724,
+    "sha256": "6ed38b340d9d0863a125ba5a5f625ef04588ff286fb933adad9f7a2fd19f8029",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-004.png",
+    "bytes": 228116,
+    "sha256": "e4cfb210bca54ba7c15d8c177d00471cd12d6a2dc14c7adb04834e9b39a427aa",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-004.webp",
+    "bytes": 189436,
+    "sha256": "cf667a931eed71ed1bcc1ecdef7e34d26385920b542b759cddd851e064bee945",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-005.png",
+    "bytes": 192690,
+    "sha256": "7dd75ef95b5894000503f10c9b208144fb009ae254da0e782c568516a57e36fe",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-005.webp",
+    "bytes": 212270,
+    "sha256": "b3dcb03b166911faaa186e4f4e461758f196c0eb3ac7477c41ba5ff8f8baffe8",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-006.png",
+    "bytes": 185558,
+    "sha256": "fed7b2d10a1473b88f57f0ea8dc99c34252059ebff475256f844fd30c70b7fc6",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-006.webp",
+    "bytes": 205594,
+    "sha256": "82ab9b57bed44fd6d8ceb89c40892e75d713899e1b0d04391d88c45e4a351eac",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/hurt-000.png",
+    "bytes": 197307,
+    "sha256": "a95d30d388d7ae70071f9ed8ea910967c21b9bc7ac001e24514044bc8c69a3d5",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/hurt-000.webp",
+    "bytes": 158462,
+    "sha256": "429ceed8cb4e0c256f5dfd68ba3096e629a142747e0042c7deecef2d85134c71",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/hurt-001.png",
+    "bytes": 230197,
+    "sha256": "7dd0fe8a258750100bfeb8ff0f3120b240d2cd91d133a956c7062cfded72cb22",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/hurt-001.webp",
+    "bytes": 201308,
+    "sha256": "2b73b08a27796aa55f7ecee7a4273cbf3cbe29095c83458d1a9ff1ac056d89e2",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/hurt-002.png",
+    "bytes": 228341,
+    "sha256": "75b0771669a8ecc2ca7f45c114b4b5560ccb259d62cae948c1682ef749b07e1c",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/hurt-002.webp",
+    "bytes": 184406,
+    "sha256": "5a01900492e0af4300263fbddeb3f8267d3c8d7f798486cb190ea021ec223550",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/hurt-003.png",
+    "bytes": 197307,
+    "sha256": "a95d30d388d7ae70071f9ed8ea910967c21b9bc7ac001e24514044bc8c69a3d5",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/hurt-003.webp",
+    "bytes": 158462,
+    "sha256": "429ceed8cb4e0c256f5dfd68ba3096e629a142747e0042c7deecef2d85134c71",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-000.png",
+    "bytes": 197307,
+    "sha256": "a95d30d388d7ae70071f9ed8ea910967c21b9bc7ac001e24514044bc8c69a3d5",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-000.webp",
+    "bytes": 158462,
+    "sha256": "429ceed8cb4e0c256f5dfd68ba3096e629a142747e0042c7deecef2d85134c71",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-001.png",
+    "bytes": 197307,
+    "sha256": "a95d30d388d7ae70071f9ed8ea910967c21b9bc7ac001e24514044bc8c69a3d5",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-001.webp",
+    "bytes": 158462,
+    "sha256": "429ceed8cb4e0c256f5dfd68ba3096e629a142747e0042c7deecef2d85134c71",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-002.png",
+    "bytes": 198699,
+    "sha256": "fe5643a9c1766257b1aabb45c866e3001a34ee3a5356eab57ee211c0aff4a7a1",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-002.webp",
+    "bytes": 159060,
+    "sha256": "8ad4dfed6b107b2131b3f4da34f5f16f66ffba5fcb78e491e637f60135e35b12",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-003.png",
+    "bytes": 198746,
+    "sha256": "5159642ed7619556890672dc735111edd94b68c75cf3764b01e2880d6fa300ae",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-003.webp",
+    "bytes": 155848,
+    "sha256": "18e154ace80bfef6a3b40a7b476fe28347070d72af6e11a312d8bb23535aabc2",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-004.png",
+    "bytes": 198688,
+    "sha256": "572ed4ff6ca9fe1124308e1e6bafb2838240ebd2f8b668c2044bba27b3780184",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-004.webp",
+    "bytes": 155792,
+    "sha256": "0a3a31f8fb1172df8221bdb443f46930cfe5fa0781de075db16ee63923ccb095",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-005.png",
+    "bytes": 198392,
+    "sha256": "b941a397326fcbf9e8347f74a00fd00bf3ee710f1291f8238aa90c457c007a02",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-005.webp",
+    "bytes": 155590,
+    "sha256": "d06f52aa3a967f1b523603b9e490dded0b870cd6f5263332f48d6c8016ae5e30",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-006.png",
+    "bytes": 197718,
+    "sha256": "6434086f03213d9fda3ad684defb7e48f3b4c03bcf11910690d658e16f8c4d47",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-006.webp",
+    "bytes": 155222,
+    "sha256": "fb43223a36e0fb46d39e745bed64669e8bf5cd5bcb89475abd98d46d48066d19",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-007.png",
+    "bytes": 197128,
+    "sha256": "6524ed4048e6004ad5b7632ec687c1077a70b6ed12bc5dfae38445abfbd22381",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-007.webp",
+    "bytes": 154856,
+    "sha256": "34ebea0d58e277e11593bf4608c1fc9b44c0a2117b506873b9ddf9f22fd19fc6",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-008.png",
+    "bytes": 196594,
+    "sha256": "491549a6c6dff4d70630c420532fc4b148b4722490abaeda7e5cc0ef5a24138d",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-008.webp",
+    "bytes": 157600,
+    "sha256": "f0137f300973895e30460752a590b4d4e942fdae7154dbc843043d34aad6580a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-009.png",
+    "bytes": 195818,
+    "sha256": "4fa1ff396d0f7bae815e1c33f7c56d05699d2e3aad98182a7a34a68f5f96b054",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-009.webp",
+    "bytes": 156804,
+    "sha256": "5e217141e4d5d3930be6076df9a4817601a80d69f824faac95dde3d95aa5b40e",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-010.png",
+    "bytes": 195823,
+    "sha256": "02cb14d16cca2c33ba2e34821e228e29bca28c99df6f4ed7f21ec71eecf92167",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-010.webp",
+    "bytes": 157232,
+    "sha256": "fe899a6707c910bcf86d668d7eb85d8ba44d0fb570d8c65f2d83b00787e13990",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-011.png",
+    "bytes": 196189,
+    "sha256": "94e3e97f030d708a7434b24e3dbabbf06847196487840b209492911fc84582ab",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-011.webp",
+    "bytes": 157428,
+    "sha256": "afafa72a39214909887c89249bc4066e4ac29b662b01e9f770b0049ca73b95a9",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-012.png",
+    "bytes": 196966,
+    "sha256": "59af1d76c04695fb0c1623ca69df052b4efdd7366e5f4c506a41bb5f70361335",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-012.webp",
+    "bytes": 157984,
+    "sha256": "0664fac35d0d433ac235b83eea0aafb9b8725d1bb150ec4bf5a4973fef0667ea",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-013.png",
+    "bytes": 196625,
+    "sha256": "431e8372b31fcecaa03b749f5b8b9183985d92514848bd19d3d355456984db65",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-013.webp",
+    "bytes": 157590,
+    "sha256": "68b9168ea39032b6853169d68c42513dcb4e7104ef16871756aadd28368f07cd",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-014.png",
+    "bytes": 197763,
+    "sha256": "8f5397f74acf486b1637359766169496962f221ced532a9aebced875880c8a47",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-014.webp",
+    "bytes": 158342,
+    "sha256": "53c2436c8f7f170dc87068343805c9c6b682a3a7139abdc7525993e542adc82f",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-015.png",
+    "bytes": 197140,
+    "sha256": "4479e0fd83b35a0ab35f1bc4c20d67638f24ddb70cbe91bc04d3a3c7f9fbae97",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-015.webp",
+    "bytes": 154538,
+    "sha256": "7b8ce6a61aac2290534106cee84c9b78a08ffc13ff1b0f5e1eda7dd6d5ec2685",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-016.png",
+    "bytes": 196360,
+    "sha256": "c83d7087b332cdb7ae5094326d191d987839b94a8395cd5055a5a904f69a1196",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-016.webp",
+    "bytes": 154004,
+    "sha256": "e9e59cbc3961ba4a2c5909c191393e9db241d59fc7bb9e67ee7caab30a556d00",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-017.png",
+    "bytes": 196365,
+    "sha256": "b60f7efe092d3e20a192f0abaaa86ace3fdfdeeac637baf646986e56b47e57dc",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-017.webp",
+    "bytes": 154032,
+    "sha256": "6f10b6d86649a14c91d8c6ad8fd206a247563f467c6e40601470ca0e30ca24f8",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-018.png",
+    "bytes": 196650,
+    "sha256": "3eebff0097023698d996c6f650f5c97d5fb486c77bbc84a85581cf45138011d9",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-018.webp",
+    "bytes": 157478,
+    "sha256": "10957452a70bdc78fb98f974444ac6fe08a2d618d200738710235568eef91ce0",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-019.png",
+    "bytes": 197327,
+    "sha256": "7ab07eca6b20e34e9623e7e5d1099fb1c525aeb1ccc16d60507f63b4b3f60b12",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-019.webp",
+    "bytes": 158048,
+    "sha256": "dc97736dd78eb14c5f060df8188647670ec0effdb8f159324fee13469fcc582a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-020.png",
+    "bytes": 198089,
+    "sha256": "6491359819a39562eda38d5859e788fc06a2ef00f46a6d9fd5aa642ee4ee9e18",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-020.webp",
+    "bytes": 158312,
+    "sha256": "31168657e8937691b976b838f1a25f2c7580bfee2abd6df4c1facb975a83e7e0",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-021.png",
+    "bytes": 197843,
+    "sha256": "436f9885aabefcd3d13ad2e5316ba1be4bca95f6d82c7f4112558f4c51594c4b",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-021.webp",
+    "bytes": 158194,
+    "sha256": "7962163383ea5d6647ab706504a5ed090de0964429823c0fa928a29fbdc45baf",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-022.png",
+    "bytes": 197428,
+    "sha256": "0a24be4ce3280d6f2d73f5810e8978ae377d6f49da39b51cd2ca6ef648075bed",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-022.webp",
+    "bytes": 154212,
+    "sha256": "1fe155071d4d72534b88807daef60845712c5a0107edf121c41b719fe494a738",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-023.png",
+    "bytes": 196376,
+    "sha256": "7d5b56ccd1f5482f86812bef6f1ad939f3335d0fdf736f439c874c6194789ab9",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-023.webp",
+    "bytes": 156638,
+    "sha256": "e32b91ff40d90b4d36c15741049cea68d5c2348f4aa1dc33efd524d8cf790a7f",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-024.png",
+    "bytes": 196533,
+    "sha256": "24285ab5a1379db50094d6ff2ae3214b3d29d5375b006a0163d8cbcc0ebadb4c",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-024.webp",
+    "bytes": 157082,
+    "sha256": "64aa2c9d59b3a3f61d9c4fb67fdc9bb4b1eda18c4cd8ca439687cd22b00c077f",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-025.png",
+    "bytes": 196762,
+    "sha256": "833e2b58dcfc7db5d8452ed1cdcb09877a407f9f744bf3a3c895fde1f7cc8d0b",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-025.webp",
+    "bytes": 154098,
+    "sha256": "6d8b4e0b0a4fe9d1303cae6ccd38a53739be213e650afb0f4b46652710576ec1",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-026.png",
+    "bytes": 197268,
+    "sha256": "a62c335f20896d8a942e970524fb14fdbd896d8f5547d7f21284d404b30018c1",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-026.webp",
+    "bytes": 154610,
+    "sha256": "8150d12ed20e6f1314b9597bcb05dd9b3ee6011b1377d90586f7a4ca459282bf",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-027.png",
+    "bytes": 197052,
+    "sha256": "bdb901fcc16f0c1364d792be50c9775977a1254cfabd019266b1a55e6af0a41e",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-027.webp",
+    "bytes": 154248,
+    "sha256": "103cdc29decc1dec673408a0e5bea0c7fc741e0f8631bd9e8ebe3520acb79875",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-028.png",
+    "bytes": 198182,
+    "sha256": "22f900b94be1e3a47daf961a52d0ae1a8d5a2fd650ec7a68c6cf4beacffacea3",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-028.webp",
+    "bytes": 155004,
+    "sha256": "fb312a6c52160d8c5bd6d11ac1ff2bf4a2345d4760104b9041b852ccba7e66c6",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-029.png",
+    "bytes": 197953,
+    "sha256": "58b7d7c4f74cea33f761de32074a89a505dae713f0ab0b0451200f6ff8783292",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-029.webp",
+    "bytes": 154914,
+    "sha256": "15d5733ec3f76a12c088aba027a60188fc793c0c6655b1e84a962b8a6966dc88",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-030.png",
+    "bytes": 197861,
+    "sha256": "1d942ee1053e41fc4da92d9463e1336b5ce9141fec38a302eb7a5987e5ba0470",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-030.webp",
+    "bytes": 154744,
+    "sha256": "b5cbaa9e9eeffba93f086cbb142b1e84736cfacff04af64a18384b5d3dfae3a4",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-031.png",
+    "bytes": 197286,
+    "sha256": "4f18bb6ace0cc4befd8aef36db139588a7efe601672eeb8978c9235eb86ddd0b",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-031.webp",
+    "bytes": 154372,
+    "sha256": "6cd7934662854900a10d2c2c04f48550c625290e96dd7a57513f500ef1e10f6d",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-032.png",
+    "bytes": 196991,
+    "sha256": "cd2681b2cedb851f1da84a21c2a207eede56a18050e5d0ce37c90978d0cb4a7a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-032.webp",
+    "bytes": 154278,
+    "sha256": "f0267a666e015248b989bd409a31f52a474f190253d26c8378e58bc404627bd6",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-033.png",
+    "bytes": 197096,
+    "sha256": "53ee6b8afa96a43a87c7d4960eff0b4018e11468853e087ff103862fe725bc99",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-033.webp",
+    "bytes": 153942,
+    "sha256": "b8fc46423571558a602ba90cd049e2859b66895b5b7c674cc0ab1c6b6940c394",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-034.png",
+    "bytes": 197042,
+    "sha256": "973699733636c6d5a3af83e7b1281bfaf2e44525bdd06ff28231f374c795187b",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-034.webp",
+    "bytes": 153834,
+    "sha256": "68671ddc5c4079a21b251d59aef39c6dce41be8d68946b41907e85b2fb5e31f1",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-035.png",
+    "bytes": 196418,
+    "sha256": "8513edcf6f25ff352399e3368796d3073d6985cf45e07da6525843f810b966d9",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-035.webp",
+    "bytes": 153352,
+    "sha256": "8c94a9012473c6b73069cdda08453ba752b45011d92d920fff5089c99f42b875",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-036.png",
+    "bytes": 196413,
+    "sha256": "4439f27051f82ec393db32840377e1629235f48cdf210b0ebd8896da9dc6a1bd",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-036.webp",
+    "bytes": 153358,
+    "sha256": "3d66d322eeddbff37c5c27042940b4e6d08fc7e58d83390b3ea5ec44ca9adbcd",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/animations.json",
+    "bytes": 5325,
+    "sha256": "e834fc26969fdc44d15be767a8d2739c2c1c6dd92fd087621edde6acd071f303",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-001.webp",
+    "bytes": 64408,
+    "sha256": "d1ef78920d569e2ac986ef4f2e16a9756a15a3d3018fdd5a47c32aa415e93f4e",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-002.webp",
+    "bytes": 64312,
+    "sha256": "73bab4bdf61b631fe9bc545f9c764f210c5743c81b87b10b90a180a36665059a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-003.webp",
+    "bytes": 64210,
+    "sha256": "c5a8873ea99ac9cf5ae684ad30184ade64a0bfe4a2a2811555b5335020cb4853",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-004.webp",
+    "bytes": 64088,
+    "sha256": "776d3f9b15df9227346832a811ca5852a1ecbe946d3e28eca16871d57c1f9266",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-005.webp",
+    "bytes": 64096,
+    "sha256": "863d26f301d1b51d37a051da9bb856358eb93a64ab4c8f6c808a6c687fa92efd",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-006.webp",
+    "bytes": 63982,
+    "sha256": "a5b63afe600dbf23ada94183ba010aa5b7e075ce6a6c2c95815802f0307c5a14",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-007.webp",
+    "bytes": 63940,
+    "sha256": "847e4b912153789c0d99960ab958fb7282eec67b5bfcfa75b729a89b765c78c1",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-008.webp",
+    "bytes": 63972,
+    "sha256": "6ef03cea5b1b09fd08ef77cab323ca6ba2106ce85d50df54b2593a32fd199046",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-009.webp",
+    "bytes": 64034,
+    "sha256": "1926dce9499c81cf1f7290945144f5e845d01ed4cf44ffc02c396d06788f85d3",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-010.webp",
+    "bytes": 63984,
+    "sha256": "018c231926c1d397449f56f19b32ed4f497b2ebb10b3a9bbb1a0d2c21fbb2bd8",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-011.webp",
+    "bytes": 64052,
+    "sha256": "e38e706f75bba95dac63c4f6065fb6af5784c391ecec064c6d1efe4fe58cdc5f",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-012.webp",
+    "bytes": 64296,
+    "sha256": "a79ebfece90a7ca67237f60e8619d5b4cebfc65b407cbbe786da946680268f4f",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-013.webp",
+    "bytes": 64250,
+    "sha256": "932a2d0f41df0b25377538cb41059043908b5d7bca3aef80da28ca6d9f751241",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-014.webp",
+    "bytes": 63998,
+    "sha256": "5212ab780b98027e3cec3060a06832c4c4515100ae1a3cf6e7dca558acbd1479",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-015.webp",
+    "bytes": 63986,
+    "sha256": "f6338b10853592523c3e3965cbf9510a1943eb0606eb29ef802a97beb5c30d51",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-016.webp",
+    "bytes": 64032,
+    "sha256": "4c592d8c22c512e9ffda532139c7aa87d1fd698d8c9ab753be075c9640787690",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-017.webp",
+    "bytes": 64090,
+    "sha256": "6185ef022bee5fe2ac1ec294761e0350e648dacf6a4da6c24396f66daf30b61b",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-018.webp",
+    "bytes": 64230,
+    "sha256": "cd991dc17989042030c4919a6293667d44b24ba0780c1d849941db47fbf130e2",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-019.webp",
+    "bytes": 64394,
+    "sha256": "46743e23ed22cadb871f57d45f5974df167d676ada01546e3b470f2aafa0a004",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-020.webp",
+    "bytes": 64198,
+    "sha256": "251b6c14f93fdf15505982eb78a969baf08bbdbf9f7d907884a99cec23db048e",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-021.webp",
+    "bytes": 64050,
+    "sha256": "71822af0aea4025a012e40501fbca7349d2c05bc0c29c6b9d416623ca32bf7a3",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-022.webp",
+    "bytes": 64120,
+    "sha256": "5275601a5984f64d573440fc01b6ac141bd1892c72e959bece68c16deeea1231",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-023.webp",
+    "bytes": 64192,
+    "sha256": "52bcf2c33a010bcf57654fedb196b9c9f8f55766af38b55a2a47c914c6603c4d",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-024.webp",
+    "bytes": 64056,
+    "sha256": "749118fd388a3b20e9d054497bad720e34cf9dfc510a3a648014ac05b0c9c273",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-025.webp",
+    "bytes": 64212,
+    "sha256": "8c62c378a6ec911c39f0d25739d92b23d1cd12e343e7f947456b49ba2d108f9b",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-026.webp",
+    "bytes": 64372,
+    "sha256": "0dde47d12f8a34a854b87af00f84f6408ab918a9ee5374e1bf860ace08c755ca",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-027.webp",
+    "bytes": 64190,
+    "sha256": "0a98c2df96d52b592635a58e70b8ea1d7df1aa16167166b39faefa45d29d2a19",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-028.webp",
+    "bytes": 64122,
+    "sha256": "9eceae9b6ec9e26964b78e165006c08eccfea99be34b1878c0226a17e496bf4f",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-029.webp",
+    "bytes": 64184,
+    "sha256": "6824317c1982737a74196a54ab335268d0ece58b2e97e283f745f73ec704f7a1",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-030.webp",
+    "bytes": 64098,
+    "sha256": "8c93f67de47877f79ea954ea11c8f2fd48844985214b48bb460c5b1c259e035a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-031.webp",
+    "bytes": 64274,
+    "sha256": "76495eb89fe41a399d1f57a8bcdd19e022a839169926546383f5b326bff8a47e",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-032.webp",
+    "bytes": 64230,
+    "sha256": "509bb98a6b72dc15d575a358dabd0a4480a89e5b805331af87d2ff2c4bed44e7",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-033.webp",
+    "bytes": 64170,
+    "sha256": "db0e4c14610331d8547607ad027f20a21c07c082ad3b8aa3cbc8315d013dc9e2",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-034.webp",
+    "bytes": 64258,
+    "sha256": "576f5177c67630765856a8a8fbb7f0944baf10ae3d42c395e4b031f6f3444c8d",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-035.webp",
+    "bytes": 64250,
+    "sha256": "6f055faa30e77e0a37c0ad79331d9e3c8e1435fd0b572eff17c4ee344395ad4a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-036.webp",
+    "bytes": 69946,
+    "sha256": "d5d917ae3410be405dccdf41921601138dc20d1b0c6e30b9676a5d9ccfb06c76",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-037.webp",
+    "bytes": 71772,
+    "sha256": "c5a6d999cff988c699c2636455546afea6e82386c7ebdb1a56c10c5e1784dcfc",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-038.webp",
+    "bytes": 74790,
+    "sha256": "745e3086099730bfbe00b1da74976f9e2900d69c3e2a7d6bddcc75cc692baaf4",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-039.webp",
+    "bytes": 77014,
+    "sha256": "a23b5b7741b471e5f29a7ffd02420268ce45d4fbdd5f7d034fbaa6f2de3f0af3",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-040.webp",
+    "bytes": 71402,
+    "sha256": "d1ef29477ada1749f3f887bf2cb8ac968e90683d9b8aba4d9b26f6e4f83647d0",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-041.webp",
+    "bytes": 69708,
+    "sha256": "c8062e0c23f6b229f0f94dab32f58b63b85df0abff697628e4d6c72f7134b49b",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-042.webp",
+    "bytes": 72562,
+    "sha256": "ed85ed4f16ec6251412f3f401dec79faa947035cddf52e52dbbe745dd1f54ddb",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-043.webp",
+    "bytes": 72700,
+    "sha256": "62aa60295e9b97d9437419fcde07b7af0de3553441e6c8e4c1d974c69cfec781",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-044.webp",
+    "bytes": 84934,
+    "sha256": "b8d3603f5b77d150c86a1e76b3a02be71f299720d402d2156747edee811a01d4",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-045.webp",
+    "bytes": 85354,
+    "sha256": "2857ffe58ed173d2d6524009d21710c2acffb1aec89eefa938aab77c96132b05",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-046.webp",
+    "bytes": 79748,
+    "sha256": "6570a4938ae585d6fa1056e29cf742f5bc986308bdebd3fdc8924baf35fdb534",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-047.webp",
+    "bytes": 73506,
+    "sha256": "db7f29d8156ec25a1e1dd268832b29bd23e4b340c508f0142712e620fe651e60",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-048.webp",
+    "bytes": 62106,
+    "sha256": "bed1976a2905c5b8680608b0e1025c28186a1343918f644ae97387a8797e2d9b",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/frame-049.webp",
+    "bytes": 59682,
+    "sha256": "40c41b05802d98fdf962cd4869a08440cd74ec44114f79a11cb70fd775771334",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/export-draft-intermediate/assets/portraits/frames/baita/sprite-v1/neutral.webp",
+    "bytes": 64444,
+    "sha256": "d8fc52e77f03988e3792450f432102b8da326098fa1df8dbac0de4fe1e328ba1",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/alignment.json",
+    "bytes": 1720,
+    "sha256": "863b27b12e7a2cb9b3580069a9c7980189b12c5a297fb5497ebad98eb9963feb",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/animations.json",
+    "bytes": 5848,
+    "sha256": "940916e7dcafa309ddb1a50e33b11e71c15848b93ba48e02c2223de5a30b59d1",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/attack-source.png",
+    "bytes": 1927544,
+    "sha256": "974db3a5ea21b0d4d19ce0fcd62859b53f2b9c5129d5b8529bc0efab33d4d7a5",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/base-right-source.png",
+    "bytes": 1473268,
+    "sha256": "6c736f4f0baf1ad5ad2cba23b7fdbf5d3d3019618010c61775700f8af49d331c",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/base-source.png",
+    "bytes": 1354893,
+    "sha256": "f00b0f7db8e54c453d83cf202d8fd3e373e6a885e4fa73642f23059b92ff0cd4",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/death-source.png",
+    "bytes": 1081759,
+    "sha256": "ba04d58df54c1743a253a534332540199e176de8d4383629020025e678e86c3c",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/hurt-source.png",
+    "bytes": 1877601,
+    "sha256": "dabda760363c202a5527e4639f72da5354d05e198c90c663a928cdcda08ad0a0",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/validation.json",
+    "bytes": 4751,
+    "sha256": "ff0812da3b1e69deecd3a504c1f786939e498bf999a8f3dbd673728cb12b218d",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-000.png",
+    "bytes": 135947,
+    "sha256": "143bf6f29ab434fcc1e51140c6cf41172d331fde63765318a7245b3fd1ef986d",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-000.webp",
+    "bytes": 130756,
+    "sha256": "0a7a689327531e50a4a29b6a6108633cd9c0fb858a34ef91da909f54861e4181",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-001.png",
+    "bytes": 168484,
+    "sha256": "5b1e72f4b7015d7ee7bef194947c6946f5ae89538501445474c6bdbcb6bab0d6",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-001.webp",
+    "bytes": 146728,
+    "sha256": "f0106ed594c32592c2bb045d7071c143b2cc3d569942b29f65586359b1e33928",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-002.png",
+    "bytes": 177979,
+    "sha256": "7b8729690a3d507ab1a1da8e3f0e2001421e2e2a1fbfd262a3ce07ae7b0a4791",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-002.webp",
+    "bytes": 134182,
+    "sha256": "c8950b8db5841d27862d4aceff0428bf74632ede96e67a3e0772d489a5cd6f57",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-003.png",
+    "bytes": 190114,
+    "sha256": "24c02a5930c45d60dc81705639e53f03e65296e82da7ec00e3f3dacb4bf0f4ba",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-003.webp",
+    "bytes": 189442,
+    "sha256": "bf3bf31bb73bda74771099c5e51c432d6c791d1c548a41e45b8b20e255f61f1e",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-004.png",
+    "bytes": 166015,
+    "sha256": "a1cf451843aac01ef7a762c0198475aef40565e74b3154074f95b2bfd27a5cff",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-004.webp",
+    "bytes": 169074,
+    "sha256": "39dfe64a7513e482ad9aed3951c7840c3c1cf56b9afda1f005079a74f0a70d4b",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-005.png",
+    "bytes": 157117,
+    "sha256": "9e56549872a79c36b593932f313c65d447b1aa021b59940a1cbf6d5a0d01dda5",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-005.webp",
+    "bytes": 187252,
+    "sha256": "7b0d533c3539af53eb69c211db50aa9a71268ed98ad16fce2ad0906ceb7dd624",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-006.png",
+    "bytes": 152177,
+    "sha256": "3b88e84c9948ff797a97f2794e07dc195c00973779361f407a567b8bf1be30e0",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-006.webp",
+    "bytes": 146406,
+    "sha256": "f84d8f89184ec4782369c63d6915acfd0720542ba9995854498f384ac28c6b99",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-007.png",
+    "bytes": 135947,
+    "sha256": "143bf6f29ab434fcc1e51140c6cf41172d331fde63765318a7245b3fd1ef986d",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-007.webp",
+    "bytes": 130756,
+    "sha256": "0a7a689327531e50a4a29b6a6108633cd9c0fb858a34ef91da909f54861e4181",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-000.png",
+    "bytes": 135947,
+    "sha256": "143bf6f29ab434fcc1e51140c6cf41172d331fde63765318a7245b3fd1ef986d",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-000.webp",
+    "bytes": 130756,
+    "sha256": "0a7a689327531e50a4a29b6a6108633cd9c0fb858a34ef91da909f54861e4181",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-001.png",
+    "bytes": 136152,
+    "sha256": "3f5ccfef2ab345b0b3d17fed0eebd1b96d86d784527ac86cf2f2d6b512fba3c7",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-001.webp",
+    "bytes": 122664,
+    "sha256": "53bb1e1ebe4fa490cbb0d23a90e7b8c5acd1174a6770fda255075a6ab672682c",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-002.png",
+    "bytes": 127875,
+    "sha256": "93ff44b12215df76bcaf685f7798136f412a3f71326fd760f349d6d7dfbd574e",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-002.webp",
+    "bytes": 182652,
+    "sha256": "bdb4887bb32516e562b8bde684d11bc29fedf5503c0d31d153284eb6ab8d7db6",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-003.png",
+    "bytes": 112513,
+    "sha256": "a1a52578fc950a9b1e23fcb587e67e6f15c2e58d375431ce6957d2a9d557c130",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-003.webp",
+    "bytes": 122788,
+    "sha256": "0240c90b81efb9137a2951791b6656eb6ebb166d0019538b1c97883ad9e59a98",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-004.png",
+    "bytes": 97371,
+    "sha256": "24bc1d8ac9297715dc02c40e7fcb30867b9cfb68a6f8652f04746f5deceda3e1",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-004.webp",
+    "bytes": 196328,
+    "sha256": "3f6d43e3a51c3bbbf0448a27b2535f583efcafa1ae5b8ff90c954a5ef6833d07",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-005.png",
+    "bytes": 76497,
+    "sha256": "aa8cafc9552d3e8205a7884ab362b82740ce4b35803766b698f90565a9ff8685",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-005.webp",
+    "bytes": 197094,
+    "sha256": "4e7eee61583a53c6be2d09506f8604ce764a5dec6abfe166416013042a067d70",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-006.png",
+    "bytes": 71276,
+    "sha256": "800d61cfe4b77535f89bfcdaae60a9c7a9b4346428c12f364610db65b57e9729",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-006.webp",
+    "bytes": 196864,
+    "sha256": "ab11160cf755347687201c63ba005576d1c66d5b18077252f24e273873b423e5",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/hurt-000.png",
+    "bytes": 135947,
+    "sha256": "143bf6f29ab434fcc1e51140c6cf41172d331fde63765318a7245b3fd1ef986d",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/hurt-000.webp",
+    "bytes": 130756,
+    "sha256": "0a7a689327531e50a4a29b6a6108633cd9c0fb858a34ef91da909f54861e4181",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/hurt-001.png",
+    "bytes": 140949,
+    "sha256": "a97fff37047cbf40df6c2fa625adcb97ddf56bc27ecda10e0ce8fe2f35c18e55",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/hurt-001.webp",
+    "bytes": 136424,
+    "sha256": "d23b6f92011bd1f0815d4e5d5e9d2ff02711719207a76489202c1c096756558a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/hurt-002.png",
+    "bytes": 146405,
+    "sha256": "b6346f458b2b13a93cc7c9b65374bd7361ae5f146a45f47f1ed4a9beafd1becc",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/hurt-002.webp",
+    "bytes": 133260,
+    "sha256": "5987a441f14dec07e622856084dba351cf5846930e04328a58195f8381701010",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/hurt-003.png",
+    "bytes": 135947,
+    "sha256": "143bf6f29ab434fcc1e51140c6cf41172d331fde63765318a7245b3fd1ef986d",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/hurt-003.webp",
+    "bytes": 130756,
+    "sha256": "0a7a689327531e50a4a29b6a6108633cd9c0fb858a34ef91da909f54861e4181",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-000.png",
+    "bytes": 135947,
+    "sha256": "143bf6f29ab434fcc1e51140c6cf41172d331fde63765318a7245b3fd1ef986d",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-000.webp",
+    "bytes": 130756,
+    "sha256": "0a7a689327531e50a4a29b6a6108633cd9c0fb858a34ef91da909f54861e4181",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-001.png",
+    "bytes": 135947,
+    "sha256": "143bf6f29ab434fcc1e51140c6cf41172d331fde63765318a7245b3fd1ef986d",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-001.webp",
+    "bytes": 130756,
+    "sha256": "0a7a689327531e50a4a29b6a6108633cd9c0fb858a34ef91da909f54861e4181",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-002.png",
+    "bytes": 137956,
+    "sha256": "274b25c2729792ced77dd311133bc72bd5bbf277bb85d3345c48c231ceeda8dc",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-002.webp",
+    "bytes": 119100,
+    "sha256": "4dbbb18861e84b7164650a743382e4b7499c811fde8952da3edf44c887878c2a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-003.png",
+    "bytes": 138419,
+    "sha256": "5ea90388febd4a26f8e2ecebc939cdeba28f62621fdb490b2df8e4051cbf55a2",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-003.webp",
+    "bytes": 119500,
+    "sha256": "a9f150152654960fe7745162c07894166c7d9d13faff47f9e38bb2ced234d04c",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-004.png",
+    "bytes": 138455,
+    "sha256": "148e83e46621190e2d78e22b9c09a4708cf164b334d5e56462caa5215ec78485",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-004.webp",
+    "bytes": 119540,
+    "sha256": "dce2b78ed58356c7d683bb6f94d780e5ed003dd4a68321853f347a56a3cb0774",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-005.png",
+    "bytes": 138311,
+    "sha256": "a2c2369f12c20b65db6e4265b70c4108efb4a636c35d9d578c00bacd788285ca",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-005.webp",
+    "bytes": 119640,
+    "sha256": "68aeef264fbbef7e388d205bf08b98b522bbdfa7d1191a9407141e37617ed5c0",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-006.png",
+    "bytes": 137868,
+    "sha256": "2ec2064d4aa82d4d13c03adb08857db040dfa9551e756953ab8746f1b557ab36",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-006.webp",
+    "bytes": 132614,
+    "sha256": "258f3f0acfb4c99898d9fe5e08d8467fe185a04d835b752c89e2f7cc56a02a6e",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-007.png",
+    "bytes": 137559,
+    "sha256": "7d0b85f20f5377f9f5a1527a4620f2920db5e4886410c8ba1767b6b290bcdf5a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-007.webp",
+    "bytes": 132226,
+    "sha256": "54f2dc6e5dbcb934b439940a009fc8eb924f06c0efc1ebe81297ab089d0668af",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-008.png",
+    "bytes": 136928,
+    "sha256": "edc115d3f4c443528d521e1411240cb64c19b8960cebe3cc1755c5315f0d0b6e",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-008.webp",
+    "bytes": 131768,
+    "sha256": "cdb2e376db8f338b25a0f745021b3e623f75e5f7061fd1f0f5e4714efa291faf",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-009.png",
+    "bytes": 135607,
+    "sha256": "d7bc1f9c4a458875f6e1140c307b2e623a40176db5cdee61be07691b270e5578",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-009.webp",
+    "bytes": 130278,
+    "sha256": "76bb86c3349c52c5346dbbd04558b5d06127896576b7aedd68642fc3a518e324",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-010.png",
+    "bytes": 136988,
+    "sha256": "1309ee55fca8512e703f93a385125d8e2c49ef044bc0b4178ffbbed60258b430",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-010.webp",
+    "bytes": 131658,
+    "sha256": "93d2865c6ba4bf54cb02d0e95e5e92573fe79772f490b2250de8f6c5f73c099e",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-011.png",
+    "bytes": 137557,
+    "sha256": "cafbe9b6cc7db5189e5635416d7267666a6d93a7ad25731df746435313429283",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-011.webp",
+    "bytes": 132100,
+    "sha256": "695d1ed0ad93cc864e06198dee21b8765f8fa0310d0bec1d74b097fdf92577ce",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-012.png",
+    "bytes": 138244,
+    "sha256": "b9ba7b416038a6835266fe95b6278ff3739124f93b691fc43a3b9aed547159b0",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-012.webp",
+    "bytes": 132846,
+    "sha256": "cc96fa613fa1e81344a5b7b21684b7c31defe8277f0b1640e9ebf3358b1f92f9",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-013.png",
+    "bytes": 137164,
+    "sha256": "703b1af2ef6377470ae8936b43a880d6d20531050c8b59a976fb5d5375fc578a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-013.webp",
+    "bytes": 131912,
+    "sha256": "535f9aa6df48067db09809fa44b6fcdaad0ea751424b8fd19fd317919b1c257f",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-014.png",
+    "bytes": 138876,
+    "sha256": "e206487ed4b94a867e28fb9705a411abdb92334dc89087c0c013d39809c344b0",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-014.webp",
+    "bytes": 122682,
+    "sha256": "8a09e5d129121a0064e9f2b21d172d93595b667cb653034519e7113d165aa6c2",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-015.png",
+    "bytes": 138160,
+    "sha256": "d20ee092e6a4435b600d6558f92e489913a715856bfa4f223326b452a15b4cf9",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-015.webp",
+    "bytes": 121960,
+    "sha256": "fda887627d44b07df73c941c093946921245816ed0eec28f0b8e6c7d7affd7a6",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-016.png",
+    "bytes": 137364,
+    "sha256": "e398094e7c82b3f0faa775ac72c8c09fa01eccdf00002ac7c3eca8e701ef670b",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-016.webp",
+    "bytes": 131646,
+    "sha256": "7ae79afa3ce737eb3812e66ba0856dfba300f1a44df4034fcc5f80f02fa01f0a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-017.png",
+    "bytes": 137385,
+    "sha256": "0d74340d70be194cf42524b6e20cf57145d67b56d12731662e7b3251d3568a14",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-017.webp",
+    "bytes": 131570,
+    "sha256": "f6e93eb8d8c8311af48e9f95de1277d2b40ad7acd9ab2a98a6ed8c00bbefe948",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-018.png",
+    "bytes": 138018,
+    "sha256": "6e2e4258a6b06fe401dc9368377f03f7b3178b3f767ff0b9c6a370fe007de1fd",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-018.webp",
+    "bytes": 132086,
+    "sha256": "3070f6b028e5498a3f7e1e11b79b81bfdf28d81e7de05f2ff3169487487682e1",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-019.png",
+    "bytes": 138856,
+    "sha256": "d7730a9ecbe7a811e6ce1bd53fb71177f78bfa28db2c2e9a9df335e3de56ab57",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-019.webp",
+    "bytes": 122614,
+    "sha256": "17b8e68bd56a4d3a321e4d030b091a092a5aa89c456ef1febe4ca4d5f5d2eb1b",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-020.png",
+    "bytes": 139576,
+    "sha256": "4570fb171826ed94e42ba94b94ce5c8daab692153d27e39469f781fae69d367f",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-020.webp",
+    "bytes": 122692,
+    "sha256": "1cb26f35ace8d98b3a332e21e9d77f916ca0d82a9ce64e02f47e13d0ff0364d9",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-021.png",
+    "bytes": 139034,
+    "sha256": "2d8a29db6bd3d2843309609ffcf43cef73156601a687aa19dd02fd7e3d578caf",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-021.webp",
+    "bytes": 122490,
+    "sha256": "3dcd24ff3c716ed21cc741d4819a58300345e79797959b4c2de6d5e8a9b6676d",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-022.png",
+    "bytes": 138450,
+    "sha256": "f7c2f40d7df4c4b5b4917cc95999518950dc0bd1779d641683fb3f6b71661108",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-022.webp",
+    "bytes": 121600,
+    "sha256": "8f6e0c38077272d280d249b83549f2fa4d742b5ebfdb1b017569d07d5b0e18df",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-023.png",
+    "bytes": 136848,
+    "sha256": "b0c85c475129eeee1ae63d20d00cd8be07e9449bf01549430ab3128726d1770f",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-023.webp",
+    "bytes": 120004,
+    "sha256": "afd35554fb9a240a968a8d75b95653c07d5744d02e98dbf7709c38cf2e8950ba",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-024.png",
+    "bytes": 138069,
+    "sha256": "b53905f7ae3a4cb3add8b2d206f3d6127d20f347bab969d9d2412f3bbb1ca63e",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-024.webp",
+    "bytes": 121268,
+    "sha256": "5aa213b95a568cdf63a43c5a8479b50661d8ce5b07acfc4448261de1c7eba6d7",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-025.png",
+    "bytes": 138555,
+    "sha256": "fbba14f8e4db3265e3488dcd75c9f2dca782723fdcc32a306709eee52d5cef2a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-025.webp",
+    "bytes": 121556,
+    "sha256": "ea16587a45984c322568d8d97f1ca91607487678d1a24723db3240537b9724f6",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-026.png",
+    "bytes": 139102,
+    "sha256": "3d327bdf57a55532373c23318b94cdbc4c61fd131b4ac132d6003c4dbbb1156e",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-026.webp",
+    "bytes": 122316,
+    "sha256": "34e0b4d9de1230c5c0be6bedca17649aaff848b7f9b15be6685302b60c2b9a34",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-027.png",
+    "bytes": 138131,
+    "sha256": "a9f2a43da270461373bb8a4d88e3a220e981661e0fcd1a9ccd5220addcfaa7c4",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-027.webp",
+    "bytes": 121470,
+    "sha256": "1b61850b8c512d257c8117e46ad59ed75afebd8d798e8b60a7b9d2e467f19136",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-028.png",
+    "bytes": 140000,
+    "sha256": "7f69dd877b737626e18e1cb8f539ee5685713530d2880392a2a30840a7856905",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-028.webp",
+    "bytes": 122578,
+    "sha256": "cbf1cfa1374fe49d205574c683dd92af12f238530918871739ba2d4d9aab2fa2",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-029.png",
+    "bytes": 139545,
+    "sha256": "e66a4255e6aed20ffd0bb73018aa88a2d91d113837ac854c5a02ea1978368386",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-029.webp",
+    "bytes": 122410,
+    "sha256": "efbf58df86ce01a577be35f13ce55626e3f7e8676cc648aab23ce1791e90fe53",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-030.png",
+    "bytes": 139215,
+    "sha256": "b7c509de4d15213874c2b4d642c42a820b23a4f2d51c9afda0ebfd82c520af36",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-030.webp",
+    "bytes": 121948,
+    "sha256": "7a027ddb0e0d7ea0b3c4d3a4db3fb9830f88b01126e140eccd87d395387bd170",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-031.png",
+    "bytes": 138909,
+    "sha256": "09234701cbc7e5138e29b0315ed0697f8dd119f8b9f68f9dff2f2ee3f2bcf56c",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-031.webp",
+    "bytes": 121562,
+    "sha256": "c1f1848d12e416f78a5a53c1b81adfb5dcdd9e01187668d6daaf42faefb6e04e",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-032.png",
+    "bytes": 138316,
+    "sha256": "471dcd1029c58a4bd59feecaa68c889ad9c47d9046a3225d76097ffbe5cfb07c",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-032.webp",
+    "bytes": 121336,
+    "sha256": "7ebcba7e3a90bc983aa8525458587140130ee017f99cee1f1413160bca32c194",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-033.png",
+    "bytes": 138295,
+    "sha256": "16c0aef468e4d849c864115607b86e0324e0fcb78bbf52575cd05ce60a9eefd8",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-033.webp",
+    "bytes": 121188,
+    "sha256": "61e3737da1e97728808e3ae8b97796530ea70017ec0d7393f28cfc13e66cf780",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-034.png",
+    "bytes": 138100,
+    "sha256": "4739785ae65e1d1109c8b64ccc19efd271d8bbcd5bb82814e3151b01e69d62f3",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-034.webp",
+    "bytes": 121074,
+    "sha256": "249d235b9d8ee96a8f3061cb4f32ccc77bb35ea05f5d7f28bac7661754314f54",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-035.png",
+    "bytes": 137129,
+    "sha256": "ef36e49181d6dc95ca003dd079b877fcb4c7e01129ac8f0b5a9f2a1dd14f13fc",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-035.webp",
+    "bytes": 119858,
+    "sha256": "bafd54aa45a8e096e83ed3d04a5bda60f45a0b1a346f1f252b58bf6c5ecb9656",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-036.png",
+    "bytes": 137143,
+    "sha256": "6f010b51a20b12cbbdd1762b700f670ca82a1f77b270ca2c0e0e4478fbc3831a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-036.webp",
+    "bytes": 119858,
+    "sha256": "f74f509121cec5202765f8d808fef28fa8d013f12c07878cb88379b97fcb0fc0",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/alignment.json",
+    "bytes": 1733,
+    "sha256": "63a990693636c065bd432a2fce3ab522319c200ab35d971e16d0a58eb5cb7eab",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/animations.json",
+    "bytes": 5847,
+    "sha256": "33f64e00d7eab43857799d31a78b4cdd401e6d3a9eb413fd629b0a186048652c",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/attack-source.png",
+    "bytes": 2185820,
+    "sha256": "c0764a82364a756aeb66a18f530b6c0300fd0aac63e7d63d043a5c8ea32d8fec",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/base-right-source.png",
+    "bytes": 1600897,
+    "sha256": "25ad47cb351e40dacdeab8c77d72c0e0c7afeafc48a866020f69cd52a30dba34",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/base-source.png",
+    "bytes": 1400936,
+    "sha256": "8bbf8a60a79854b579941f00d6efe4673085a0743cd7ecb0cd5f5407e593d40f",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/death-source.png",
+    "bytes": 1512680,
+    "sha256": "6d7129ecb5116bcf6d3fcd38e84b7ff3ec26cb5e329b0e456df986360b836772",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/hurt-source.png",
+    "bytes": 2023568,
+    "sha256": "468cebff92a448a752cf2ebbaf85b9b36c8125dae85b0700cab7e2827b4df84f",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/validation.json",
+    "bytes": 4703,
+    "sha256": "3738d5909d56ce26e973bac0306bde75b41568b18999a28f9fb3fdf24b95f22a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-000.png",
+    "bytes": 202181,
+    "sha256": "2ac84e0a680340215d3e830506eeecc9801ede1e6423158a08b99512da17b070",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-000.webp",
+    "bytes": 179742,
+    "sha256": "78759ea314c729f1e642285e4c17d471ac40b6ce805b3fd495eb5740d4d2278a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-001.png",
+    "bytes": 216616,
+    "sha256": "12895911aa4e57db8dbd41fcc874dacd66beef8fb3a2f6464c8a874006d93e0f",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-001.webp",
+    "bytes": 192950,
+    "sha256": "be01f7d0f37c617eb40ee619b7e1160488ac6d3f524e3103add8f17be7869e9f",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-002.png",
+    "bytes": 201101,
+    "sha256": "67e38160df58f6d741f47b751d21bd36b99b208c26b62bc07cd7a5169b0ab8ef",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-002.webp",
+    "bytes": 181490,
+    "sha256": "d55d0322401740287b12fc4b7c47e989d9332642de17cb0bc871bc37c8f0925c",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-003.png",
+    "bytes": 222390,
+    "sha256": "d47489d73680f38f7300d75a46fbe042e5a96520eff7bc0c41a8bb94f4a0e12b",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-003.webp",
+    "bytes": 183664,
+    "sha256": "e893071eb8e5f5e7b860f43add2e40603fe230c14f6767bd578205126a4d85f6",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-004.png",
+    "bytes": 222916,
+    "sha256": "dd2c4b7e0b5c866fdd14a5cab51b65537d938e065dce0c270b9c6d23b623bcbc",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-004.webp",
+    "bytes": 211176,
+    "sha256": "d5b91fab8a1c8fcc1a742067e4b8e97df39cd6e9c34a08e35d1feb3f4a303f48",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-005.png",
+    "bytes": 210517,
+    "sha256": "a6b0e022d1a5d52db4cd0140c22c013cc61411a22c2cb002b801ed777e363d9a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-005.webp",
+    "bytes": 173492,
+    "sha256": "e6f4af42b14b0d43325eef3060179c05379f0da97f56bcfeac98e1d5b0be1530",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-006.png",
+    "bytes": 203735,
+    "sha256": "7dc8906a89f968766f6624005258452e880ae081ae722897599aea6d1df50cb0",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-006.webp",
+    "bytes": 171422,
+    "sha256": "79e8a3fdd5805a6e71b240ad8408946da8b7bd7d4bb1f00986c43db7351d594a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-007.png",
+    "bytes": 202181,
+    "sha256": "2ac84e0a680340215d3e830506eeecc9801ede1e6423158a08b99512da17b070",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-007.webp",
+    "bytes": 179742,
+    "sha256": "78759ea314c729f1e642285e4c17d471ac40b6ce805b3fd495eb5740d4d2278a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-000.png",
+    "bytes": 202181,
+    "sha256": "2ac84e0a680340215d3e830506eeecc9801ede1e6423158a08b99512da17b070",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-000.webp",
+    "bytes": 179742,
+    "sha256": "78759ea314c729f1e642285e4c17d471ac40b6ce805b3fd495eb5740d4d2278a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-001.png",
+    "bytes": 176972,
+    "sha256": "529854cdfe54e904de66be4a58149d4a05817c27a01a721023558dd5730acba2",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-001.webp",
+    "bytes": 146994,
+    "sha256": "7f6a30755c78db87952a1d62d73553c94a707051e210bdc924a82becf3c9c34c",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-002.png",
+    "bytes": 175663,
+    "sha256": "bfa71ccaf1f6dad25e76fafd3cb5602231b77d8c38dbcae6c310b5219da67ed4",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-002.webp",
+    "bytes": 150076,
+    "sha256": "caf49683b129639d9bd8cb675b1e4fe31af9de1625d454a0c33bb3a52c4ab423",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-003.png",
+    "bytes": 137670,
+    "sha256": "1db0b2a8da13bdb3a4bf22f971a976bf72c0e266636df65bc0a6abf35c895ff7",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-003.webp",
+    "bytes": 137156,
+    "sha256": "07b13f97b23952c8059e76f6440ad3fded664c17707b8d531d72a693f11f702d",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-004.png",
+    "bytes": 137323,
+    "sha256": "34f5a812f1732c40b6aee7df5f50d6c52a3cbff6470438a934965b7afebd17fb",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-004.webp",
+    "bytes": 225484,
+    "sha256": "2f466b02caacf744e80da7ca394bce04b483164a5ec450efaa0267783c2c2ece",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-005.png",
+    "bytes": 108504,
+    "sha256": "bce42afc51812b5344e4115c6a79eceb8ae911c0efc33055ea8e7c567c9f4125",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-005.webp",
+    "bytes": 226180,
+    "sha256": "6528427c8435588c81e8038f59d26fdcd9097b697ae8be9a18ed53a60782d512",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-006.png",
+    "bytes": 95463,
+    "sha256": "fa8db3919e085e7fa2f0406b13664cb0f5db50ac8b0182b6106ee9747cf1ab30",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-006.webp",
+    "bytes": 220690,
+    "sha256": "9c302de4911725fcc599b12bd5b2fd0dd9d7664d777a4d45ac80aefe62e46fa3",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/hurt-000.png",
+    "bytes": 202181,
+    "sha256": "2ac84e0a680340215d3e830506eeecc9801ede1e6423158a08b99512da17b070",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/hurt-000.webp",
+    "bytes": 179742,
+    "sha256": "78759ea314c729f1e642285e4c17d471ac40b6ce805b3fd495eb5740d4d2278a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/hurt-001.png",
+    "bytes": 218439,
+    "sha256": "37a787f104a317e6729c804e2265dbe5ef759d0ce50f68d6fbc444b8855fe8d7",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/hurt-001.webp",
+    "bytes": 209628,
+    "sha256": "8e249bbde914f40399966795c97ae642037a2345eb8e194dfdb975ddccf4835e",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/hurt-002.png",
+    "bytes": 232265,
+    "sha256": "ff85a7c48d5a1cbc8709ca4f2f0c6075fc788ded2c113e53a724f7913fe039d0",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/hurt-002.webp",
+    "bytes": 194030,
+    "sha256": "ebcaa430e8a1c914505ef67aa33904538690e058b4f92007a16e381750d05b6c",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/hurt-003.png",
+    "bytes": 202181,
+    "sha256": "2ac84e0a680340215d3e830506eeecc9801ede1e6423158a08b99512da17b070",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/hurt-003.webp",
+    "bytes": 179742,
+    "sha256": "78759ea314c729f1e642285e4c17d471ac40b6ce805b3fd495eb5740d4d2278a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-000.png",
+    "bytes": 202181,
+    "sha256": "2ac84e0a680340215d3e830506eeecc9801ede1e6423158a08b99512da17b070",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-000.webp",
+    "bytes": 179742,
+    "sha256": "78759ea314c729f1e642285e4c17d471ac40b6ce805b3fd495eb5740d4d2278a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-001.png",
+    "bytes": 202181,
+    "sha256": "2ac84e0a680340215d3e830506eeecc9801ede1e6423158a08b99512da17b070",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-001.webp",
+    "bytes": 179742,
+    "sha256": "78759ea314c729f1e642285e4c17d471ac40b6ce805b3fd495eb5740d4d2278a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-002.png",
+    "bytes": 205680,
+    "sha256": "b672cb9d9e3500b09a63d75a5a4e89a7edd6eb34b8fb33cbeb9df3acdcd0ecc2",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-002.webp",
+    "bytes": 177314,
+    "sha256": "be9f8f3f5169e90dcfdc2d3e8235f9ad952d8c391e0c743d4eeec8d9c474e3ce",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-003.png",
+    "bytes": 205862,
+    "sha256": "9ae37e59f128b453f689984776a5901f13ea30b8eea194397ffae5f183effc31",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-003.webp",
+    "bytes": 177586,
+    "sha256": "fe1c6e5e6902152ebe5dd8c1ad587991230e18ce15005ca4e31373fb8e2cee08",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-004.png",
+    "bytes": 205795,
+    "sha256": "d623faf4e4dd0bd1e9ed9f7c2f57796b401a93a494730344b24064b4953f16e8",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-004.webp",
+    "bytes": 177812,
+    "sha256": "cfa7d6122eb9ee092ca957b5b46a459a797db991d2f2b9d1209d96f7e33200cc",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-005.png",
+    "bytes": 205524,
+    "sha256": "e49a5f820fac701fe00fe4d4fab1a5d42ca5f3634e61d996744df2b0c6bfcedc",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-005.webp",
+    "bytes": 181896,
+    "sha256": "43d6585524572d27baa7d2effd191fe4d78e6aaa37ff6a09a004234c8aa3b4d7",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-006.png",
+    "bytes": 204396,
+    "sha256": "ba198b16347a2776d84dba80b10569aa3698b1d7e341bc50692992fd2766e77a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-006.webp",
+    "bytes": 181206,
+    "sha256": "aa77c0991ad2af580e382a7695144ec2e12456fe8f4d3441adc7f7cb9fc46310",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-007.png",
+    "bytes": 203831,
+    "sha256": "ead85f19c52b40f0e4f286936af30b4eeefa0372123ab629fa9e890e34fb07d1",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-007.webp",
+    "bytes": 181952,
+    "sha256": "17d20e77673eff66f061a58058ce725692af276fec4aea3d3e40b443bb16de35",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-008.png",
+    "bytes": 203288,
+    "sha256": "a8dd5f908cf387e3a7790180d82ec836279ac0e9283e72bfe0db51f1e22f28c2",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-008.webp",
+    "bytes": 181342,
+    "sha256": "b65347eae4cb84e52f8834196b78bab74c3cffa090d8ee6bc2f0de44d400f466",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-009.png",
+    "bytes": 200932,
+    "sha256": "43646d7cca9ed0fd2ea843a590a7793c54683ca7fcfffdc659b6b7febf31b9f6",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-009.webp",
+    "bytes": 179738,
+    "sha256": "d23df110cb6a92c24ff3317755c01db036f5a57c18fa8f8492c8a110a3572812",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-010.png",
+    "bytes": 203051,
+    "sha256": "d742a015792c2f38c30a4547d60e0ba7072d02312de1160a7d6c270ea57ced0d",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-010.webp",
+    "bytes": 181032,
+    "sha256": "2a6fa021295317f142e39a8fbe374174af91ce44b57efe39e11f12d24a1515fe",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-011.png",
+    "bytes": 203510,
+    "sha256": "075fb0a2fa4f7beaa651204fb3bcc8005f30b1db15bbcbfb43a4608f4d8bf0c5",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-011.webp",
+    "bytes": 181550,
+    "sha256": "2856b7d6305c4a60b03ef777973b3d05050d532eee02e9c4190d3bda1b356535",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-012.png",
+    "bytes": 205038,
+    "sha256": "469381425f0b3bbf63010420946c1b219c04d8bd6d271db8ebfcfa4a1dbcfddb",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-012.webp",
+    "bytes": 181422,
+    "sha256": "c3f584aff5c7f7fbef6658030cd9efbc9c046d911a0767085814b267e67be194",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-013.png",
+    "bytes": 203072,
+    "sha256": "3bc9fecc286cf4d956d53f2c48297f0cc0d05f529fde2cffc0216bc7e0880706",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-013.webp",
+    "bytes": 180114,
+    "sha256": "3821dce345261e2d476689a0b510b8006d96afef9a94d833ce3f1e3b3dd7b370",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-014.png",
+    "bytes": 206008,
+    "sha256": "ae3f869f7cb7d35444abe028d90c5bc74e103d0f1516db586d7145b59ebb94ea",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-014.webp",
+    "bytes": 181708,
+    "sha256": "ca04f21b43353893fdf0581074fe49703a2555547aeef040f68173965487376b",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-015.png",
+    "bytes": 204536,
+    "sha256": "eef74114b906fd0471d49a25b71a05c2587219d65bda5f319b0bd411f8959de7",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-015.webp",
+    "bytes": 181986,
+    "sha256": "36ef61499be81d8c118608b1d1e633df756e2b751e7b3a7637a2b9506059a727",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-016.png",
+    "bytes": 203569,
+    "sha256": "22d2dda8da3e3a40c6e8e530f40047b77653b7eab86539b8835f482eb1c4a295",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-016.webp",
+    "bytes": 181130,
+    "sha256": "73392c59ceb92d974abb416e50f6cc5e301e9aacd24e13c839d40aa35fb7baf4",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-017.png",
+    "bytes": 203543,
+    "sha256": "2ccea2c0db5e5184ead1f456acba755ff32d4539d9ac1f8247a70caf5243287a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-017.webp",
+    "bytes": 181128,
+    "sha256": "7b6974346143cb7117418e364e2f6f00a35f3f4c0edd283377ab87b5d7878263",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-018.png",
+    "bytes": 204232,
+    "sha256": "cadcf6de8ee1992ff9d898dd1ac104ec82d6f888b8bac3a806e4d00cf9bd5ba8",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-018.webp",
+    "bytes": 181710,
+    "sha256": "d1526f926f46191eb3927a05eac89691135d5c1b8f5f04994ba1219c7532ccc8",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-019.png",
+    "bytes": 205863,
+    "sha256": "2734e7104d7bfbafdefdade51b0c409eba42b36ffd80f15422a82f12a12d43c4",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-019.webp",
+    "bytes": 182824,
+    "sha256": "dff678c4e822606c1969dc09578bc7895646eb361820c24c1bd3588ec814823d",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-020.png",
+    "bytes": 206890,
+    "sha256": "3302e3884995e0f6faa2d645b1488c6c87131a70c0af871c6ed3aa9bfdf68f3e",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-020.webp",
+    "bytes": 177724,
+    "sha256": "c31659511f7ca393d35b6539254e84ea46f820d3598e0743da1a8b0a82467166",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-021.png",
+    "bytes": 206233,
+    "sha256": "a2fbada1c15899c94dd417650d1e688217c65ee878c2efb80ca775493a65e324",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-021.webp",
+    "bytes": 170694,
+    "sha256": "9d9c9eba9fb3b6cbc5708e744cf0965b3cf9c462403ed10ab04a479ce1f279ea",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-022.png",
+    "bytes": 204989,
+    "sha256": "07d534b98b5f7f5c07e5540509eae9f26396962d773962c49aff25259f2ee674",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-022.webp",
+    "bytes": 169666,
+    "sha256": "43ec6dcca6065fda6a6e1d6e2baf385ff38f0c82c8e0207fbbf05ca2d9487e17",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-023.png",
+    "bytes": 202385,
+    "sha256": "4311fed2b5fd7340acf53d6b44d708490b2ab44e8df050c5b7e295be274c2faf",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-023.webp",
+    "bytes": 179262,
+    "sha256": "9aff80616a4e1d81df89643f021cb75b4ceff6be8341bd4cf4e5968f4fdcf5d9",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-024.png",
+    "bytes": 204356,
+    "sha256": "757777c46e882338a21ec09fadcd89d8d5167528ee15d8cbae5fba04e00e454a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-024.webp",
+    "bytes": 169248,
+    "sha256": "e16c39dc9e5f24d78fa29c639d96c4d5cae5b126d16efbccf7f27dd10c2a8bb6",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-025.png",
+    "bytes": 204720,
+    "sha256": "c8697da66952c379325e653ccd3358626f64b6881ac11b6dbe2df95cf76fae18",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-025.webp",
+    "bytes": 169734,
+    "sha256": "8680ea4656a15ea81f3841a6dd6d561020f62e67515e1432d82ac5a9cda305a4",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-026.png",
+    "bytes": 206223,
+    "sha256": "834e6e01fedce32dd4e503945eb9364d6b53ab98a7a94dc7060bb0cd15972db6",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-026.webp",
+    "bytes": 170732,
+    "sha256": "57c2dfaeeec8363c9ce203dd0bf11ab6f2eb75e9be6867ae410a191acb8846c7",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-027.png",
+    "bytes": 204223,
+    "sha256": "9d97dc06c972982c806bb7a3f8cc7ccea718483b0f557c50b6c5674989e2e148",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-027.webp",
+    "bytes": 180172,
+    "sha256": "88096e441343664e4982cbdc8846651b41f3b9e2dd37fc01b8c12f3d1ed84f4e",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-028.png",
+    "bytes": 207388,
+    "sha256": "e17719345245c8bd7f58ae06ab572a695499c1b7a7542ad70e44e479d39267ef",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-028.webp",
+    "bytes": 167844,
+    "sha256": "debb0827d4765735b14965cb2e4cc20fc02eb950c27bb791d528120ea63d8fab",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-029.png",
+    "bytes": 206694,
+    "sha256": "23f0c6cecd41a93cf689e05725551f85d53d31b57086479e649512a99fa1b217",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-029.webp",
+    "bytes": 170192,
+    "sha256": "9a76aa99e3469f6c9af3f6df0414a3fb92ff49cf9b36dc0c5d07b5eafe82a213",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-030.png",
+    "bytes": 206079,
+    "sha256": "70e5bebcb24253cdd0c8a37da931cea19f75881048de21ff06f3c1863df6656e",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-030.webp",
+    "bytes": 170252,
+    "sha256": "b2a73602da5b61c460d25fef8f8423ef6c4da7186c4458e64abfd0e468c0a90a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-031.png",
+    "bytes": 205451,
+    "sha256": "6acf2055485b15465ca393981ab22d305771cc877ba249cc95c311f76f2dd785",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-031.webp",
+    "bytes": 169826,
+    "sha256": "f9e0101c8443abe98cd25ae61b4cf47f66e74f5d472cdc51fc97b5051cbf919d",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-032.png",
+    "bytes": 204990,
+    "sha256": "1116bd4e969d393c97c8b228f1982307e3a6666e4b332c32da57f236d7368dce",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-032.webp",
+    "bytes": 169586,
+    "sha256": "0a2354f61a0ac47502b81a30eaf6118d4aadea074d922839d80c4fcd21b39fcd",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-033.png",
+    "bytes": 204799,
+    "sha256": "48f6d2723430b910683c8dc1543c7daf8896b929bbeda2c1fa50df5798531f0f",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-033.webp",
+    "bytes": 169364,
+    "sha256": "11ec13b189c855866e97b1391595b805a36789945d727414fab9c43e8632e829",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-034.png",
+    "bytes": 204479,
+    "sha256": "203d5bddf6aee34bfc48391a4f91bd675dc2fcb611e13c2663473e8981b32cc8",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-034.webp",
+    "bytes": 169152,
+    "sha256": "56ddf0068ac7840e131d63789a11c9ea9562b31a09b2a25bb74f5c62b1bcb32a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-035.png",
+    "bytes": 202697,
+    "sha256": "c39e04e6c200d9bc86a35182ef4bfc30c3ce5a1c3eb24b08a84d79d8fe8ee9d2",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-035.webp",
+    "bytes": 167754,
+    "sha256": "661ed8a575f34b23e15a5b12a5de71a7302f3ddf5e220422945c65b38e0c986a",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-036.png",
+    "bytes": 202644,
+    "sha256": "949c66a303a8ec357a05e1eb15f79fb7fd39715768c0f2e8526c2cf82d584c34",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  },
+  {
+    "path": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-036.webp",
+    "bytes": 167766,
+    "sha256": "859e53c36cf76758399d1fdf19effdacf69644a71fe7785ad259ba35b5d6c636",
+    "acquisition": "内置imagegen生成后复制，或执行pack_sprites.py重导出"
+  }
+]

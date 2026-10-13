@@ -1,0 +1,12 @@
+import { readLedger, planLedger, applyLedger } from '../../../scripts/workflow-ledger.mjs';
+const root=process.cwd();
+const state=readLedger(root,'registry');
+const row=state.rows.find(row=>row.key==='WF-selection-map-implementation-1011');
+if(!row) throw new Error('Task registry missing');
+const cells=[...row.cells];
+if(!cells[1].includes('.tmp/selection-map-observe-1011')) cells[1]+='；game/css/base-camp-rework.css仅选人steps/avatar；.tmp/selection-map-observe-1011纯运行副本与独立Vite配置';
+if(!cells[1].includes('battle.view.js')) cells[1]+='；地图renderer仅drawIcons/drawNodeLabels/drawLinks/drawCurrentNodeFrame视觉；expedition.view.js仅展示不动4层目标/机制；hud.js与game.boot.js仅日志默认开关。战斗view/battle.view.js、battle.overlays.js、battle.piles.view.js仅展示与专属CSS由node写。entry/events场景壳与feedback-entry由roster写；ui/game.menu.js仅继续分支统一city-cut一行。新增专属场景/透明宝箱素材与本批次重做记录，详REBUILD-SCOPE';
+if(!cells[1].includes('ui/cinematics.js')) cells[1]+='；ui/cinematics.js仅战斗回执context/有效稀有度展示；docs/production/art/ART-DIRECTION-BRIEF.md仅老板明确未来城市/卡面画法最新约束；批准shop图无损runtime与专属素材；宝箱多帧播放/唯一揭晓仅chests自有域';
+cells[4]='旧会话已冻结并释放本批编辑占用，老板要求将全部有效上下文交给新对话继续；三个6.1-sol子代理无在飞工具/服务，所有未提交改动保留，task仍doing。交接入口docs/evidence/2026-10-11-WF-selection-map-implementation-1011/HANDOFF-NEXT-CHAT.md及HANDOFF-STATE.json。自建5337 PID29048 exec52204已确认身份停止，最后只见共享5200 PID21616；保留.tmp/selection-map-observe-1011快照，不沿用旧PTY。批准shop图冻结，其他继续：冬季未来科幻城市/卡面画法、现代箱多帧开盖、真实四景层战场、整页entry/events、map/nav/bag/reward。新对话核实时属地后承接本行；尚未整套美术通过，不build不提交';
+const plan=planLedger(root,{kind:'registry',action:'update',key:row.key,owner:'Friday',cells});
+console.log(applyLedger(root,plan,state.sha256));

@@ -1,0 +1,106 @@
+{
+  "bpm": 128,
+  "seconds": 30,
+  "mp3_measurement": {
+    "input_i": -19.5,
+    "input_tp": -2.74,
+    "input_lra": 3.0,
+    "input_thresh": -29.58
+  },
+  "master_gain_db": 20.53,
+  "checks": {
+    "all_v3_score_events_preserved": true,
+    "exact_30s": true,
+    "finite_pcm": true,
+    "no_clipping": true,
+    "true_peak_below_minus_1": true,
+    "matched_loudness": true,
+    "active_section_energy_variation_reduced": true
+  },
+  "v3_envelope_span_db": {
+    "full": 6.624654402313148,
+    "active": 5.6526533231524745
+  },
+  "v4_envelope_span_db": {
+    "full": 5.215644867982476,
+    "active": 4.143930538300488
+  },
+  "bus_adjustments_db": {
+    "bass_static": -0.5,
+    "kick_static": 0.8,
+    "snare_hats_percussion_static": 2
+  },
+  "provenance": [
+    {
+      "file": "docs/evidence/2026-10-12-WF-battle-rewrite-v4/beat-native.wav",
+      "source": "docs/evidence/2026-10-12-WF-battle-rewrite-v3/beat-native.wav",
+      "method": "Byte-identical v3 native stem reuse"
+    },
+    {
+      "file": "docs/evidence/2026-10-12-WF-battle-rewrite-v4/theme-native.wav",
+      "source": "docs/evidence/2026-10-12-WF-battle-rewrite-v3/theme-native.wav",
+      "method": "Byte-identical v3 native stem reuse"
+    },
+    {
+      "file": "docs/evidence/2026-10-12-WF-battle-rewrite-v4/detail-native.wav",
+      "source": "docs/evidence/2026-10-12-WF-battle-rewrite-v3/detail-native.wav",
+      "method": "Byte-identical v3 native stem reuse"
+    },
+    {
+      "file": "docs/evidence/2026-10-12-WF-battle-rewrite-v4/bass-native.wav",
+      "method": "Native LMMS isolated render of unchanged v3 bass/cello or kick track"
+    },
+    {
+      "file": "docs/evidence/2026-10-12-WF-battle-rewrite-v4/kick-native.wav",
+      "method": "Native LMMS isolated render of unchanged v3 bass/cello or kick track"
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v4/battle-shadowtide-v4-30s.mmp",
+      "bytes": 38806,
+      "sha256": "e2035bf540fffa444454777732d857a683e490878e57d12ba0f7c3049b43da6e"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v4/battle-shadowtide-v4-30s.wav",
+      "bytes": 8640044,
+      "sha256": "48f71353eac2c713306ddb88d1fbf52265cbd0119e5a088fd3ed2641014377b2"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v4/battle-shadowtide-v4-30s.mp3",
+      "bytes": 961605,
+      "sha256": "1b8c45158b0078332eeb6e9bb5c8bc46687e02e9fa4bf252f904ebd51ca95069"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v4/score.json",
+      "bytes": 59461,
+      "sha256": "7b3c166f1c2d23b039b7019b4c8b022aa2da8a158605cbf40dff4ff3877b391d"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v4/bass-native.wav",
+      "bytes": 12240010,
+      "sha256": "9f22f619b8f9766737e148684e65859220229b567919f93616a82ab7018cdea9"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v4/kick-native.wav",
+      "bytes": 12240010,
+      "sha256": "bd89c13d7cfb4df5b7f1fb6dc10a1aefb44d4cdb2ac50a08237ca4c3db1076eb"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v4/beat-native.wav",
+      "bytes": 12240010,
+      "sha256": "e830121df1012f2f201f268835ce6b92114ab412d5ea4ef42e386780f7aed885"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v4/theme-native.wav",
+      "bytes": 12240010,
+      "sha256": "aeca3557350a2c0f3dc916ca5b4fbd10ae62406ccfcba0b9cf7f403d9090a6b7"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-v4/detail-native.wav",
+      "bytes": 12240010,
+      "sha256": "fa200a70f2134253e0cc6faafee13edada8332270b16384e56aaf2ef8ad17bdc"
+    }
+  ],
+  "listening": "No actual listening; mix revision assessed with scope checks and audio measurements, pending user audition."
+}

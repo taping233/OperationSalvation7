@@ -1,0 +1,26 @@
+[
+  {
+    "before": {
+      "path": "cards/creature-tt8-nofocus.webp",
+      "bytes": 86486,
+      "sha256": "ce5039d8d5e88d814372b522e2d1edc3615b3c388ee5bb3a069e0df14ca0f209"
+    },
+    "after": {
+      "path": "cards/creature-tt8-nofocus.webp",
+      "bytes": 166676,
+      "sha256": "56fb15663b298b558f5d9939ca6592e9177f89abd04f92ee629885c40454d7e5"
+    }
+  },
+  {
+    "before": {
+      "path": "thumbs/cards/creature-tt8-nofocus.webp",
+      "bytes": 11808,
+      "sha256": "027f87f9a2b06ccba0dc07fe47d8b812f3d044573eb373b3729deadb17d04f2d"
+    },
+    "after": {
+      "path": "thumbs/cards/creature-tt8-nofocus.webp",
+      "bytes": 30336,
+      "sha256": "40586f025a3f75beaae809dc88d067517620d37c87dafa21dab750e712fe61d1"
+    }
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "status": "approved-E-for-seven-cardbacks",
+  "sample": "富商锦缎",
+  "workflow": "Existing NAI theme seed and game visual references; built-in ImageGen candidates",
+  "runtime_assets": "Unchanged by these candidates",
+  "items": [
+    {
+      "id": "D",
+      "name": "锦蝶秘印",
+      "basis": "重返未来：1999",
+      "reference_page": "https://re1999.movergames.com/index.html?type=0",
+      "preview": "docs/evidence/2026-10-12-cardbacks-redraw/gacha-d.webp",
+      "preview_sha256": "58671a83494349259c69d6234eb043f5fefd514e2b84f7acf2aa6d9f6fb74e3d",
+      "raw": ".tmp/imagegen/cardbacks-gacha-approval-20261012/D-source.png",
+      "raw_sha256": "54ddf16a2ef79d662b3a5df7aa4709760405d2b161ce4f5d83cfff5900ab80b7",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-6ccbfd18-0e50-4011-8d1c-e87bb2f4de76.png"
+    },
+    {
+      "id": "E",
+      "name": "金库封印",
+      "basis": "明日方舟",
+      "reference_page": "https://ak.gryphline.com/",
+      "preview": "docs/evidence/2026-10-12-cardbacks-redraw/gacha-e.webp",
+      "preview_sha256": "2f4d6880d9ae0db9eb415d35fc0c4e4d5352286af4a9b0b85ee5a3a8c2618664",
+      "raw": ".tmp/imagegen/cardbacks-gacha-approval-20261012/E-source.png",
+      "raw_sha256": "cddea3b7a801a07fcc85a2fa65c548f5ed710487c8c591c64e467ae81be97fc7",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-93570af2-720e-47d9-8288-33fcc291ae19.png"
+    },
+    {
+      "id": "F",
+      "name": "招财浪潮",
+      "basis": "绝区零",
+      "reference_page": "https://store.steampowered.com/app/4162040/",
+      "preview": "docs/evidence/2026-10-12-cardbacks-redraw/gacha-f.webp",
+      "preview_sha256": "9dcb724eeb8f126587b4444e0242ba1c0a801f4291f6ac609ccd658065b7dc3e",
+      "raw": ".tmp/imagegen/cardbacks-gacha-approval-20261012/F-source.png",
+      "raw_sha256": "1c38a202c58ba6a59ab8ca630610385e3e7f26ae22fd0e89a48d46a8770b3763",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-0e49f66a-feb1-4f37-b1d7-549e4972ea33.png"
+    }
+  ]
+}

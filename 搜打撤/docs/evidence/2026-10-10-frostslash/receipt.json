@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-frost-slash",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-88bb48a6-52ac-4023-aecc-a358aaa2d536.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-frostslash/cards-martial-tt3-frost-slash-source.png",
+        "bytes": 1598642,
+        "sha256": "447e4cae1368f18acf3d7df58d21359cdd48c80ecaabe4f2ff8e58aef5b948bb"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-frostslash/cards-martial-tt3-frost-slash-full-before.webp",
+          "bytes": 30360,
+          "sha256": "b42fcbce9513b83ad22df87e5f0e30fe8d80b63a859a7fa52b32ba836d0b8815"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-frostslash/cards-martial-tt3-frost-slash-thumb-before.webp",
+          "bytes": 3444,
+          "sha256": "6316bc73603535f5aa9ce0070ab0b42f201d7ec12ab05d36f1e2172839fb53a3"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-frost-slash.webp",
+          "bytes": 40714,
+          "sha256": "d8720a7647de5a619267ffa30b1d5f9b13113e6c332e5e91f5dc65cf805acd7a",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-frost-slash.webp",
+          "bytes": 5444,
+          "sha256": "0716ddef077e7c06a07f2fcac23d5a7c643643756fce288cf64314d543ba22ee",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "frostslash-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt3-frost-slash.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 40714,
+            "sha256": "d8720a7647de5a619267ffa30b1d5f9b13113e6c332e5e91f5dc65cf805acd7a",
+            "source": "docs/evidence/2026-10-10-frostslash/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt3-frost-slash.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 3444,
+            "sha256": "6316bc73603535f5aa9ce0070ab0b42f201d7ec12ab05d36f1e2172839fb53a3",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt3-frost-slash.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 5444,
+            "sha256": "0716ddef077e7c06a07f2fcac23d5a7c643643756fce288cf64314d543ba22ee",
+            "source": "docs/evidence/2026-10-10-frostslash/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 886,
+  "manifest_count_after": 887
+}

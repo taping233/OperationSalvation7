@@ -1,0 +1,21 @@
+{
+  "card_id": "tt3-treasure-hunt",
+  "model": "nai-diffusion-4-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 1651909015,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nno humans, from above, close-up, torn map, floating playing card, abstract background, rough painting, thick brush strokes, opaque paint, limited palette, hard shadows\n\nOne dark weathered folded map cuts diagonally across the lower two thirds of the image. Its central fold splits open into a deep indigo slit; one single golden rectangular card rises from this slit toward the upper-right. The card overlaps the torn map edges and occupies one quarter of the frame width. Only two primary shapes: the broad folded map and the golden card. Background consists of quiet slate teal and deep indigo color masses. Keep the map blank except for one short broken ochre path ending at the opening.\n\nPaint the map as three broad opaque gray-brown fold planes, with blunt irregular edges and no paper grain. The card is one matte ochre plane with a small pale-yellow edge, not a glowing glass panel. Use a few very wide directional brush swipes, each stroke spanning a substantial part of an object. Hard shadow shapes explain the folds; large interior surfaces remain quiet. Keep the sharpest light-dark edge at the emerging card and slit. No tiny contour lines, intricate patterns or scattered marks.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, person, face, hands, arms, magnifying glass, compass, treasure chest, coins, jewels, lettering, card symbols, ornate border, detailed map, fine linework, dense hatching, paper texture, tiny brush strokes, granular noise, polished illustration, glossy highlights, bloom, particles, scenery",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\treasure-hunt-redraw-20261011\\treasure.png",
+  "installed": false,
+  "design": "俯视裂开的折叠地图，一张金色卡从中央裂口浮起；青灰深靛背景，宽笔硬边明暗、两个主形。"
+}

@@ -1,0 +1,45 @@
+{
+  "doneWhen": [
+    "归档不再复制招式库，入口明确抵达培养",
+    "新壁纸按NAI→内置重绘真正接入，按钮/动效/留白和信息层级在当前内置窗口实际比较迭代通过",
+    "相关定向检查通过，真实输入与未核边界如实记录"
+  ],
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "老板反馈上一轮招式/归档重复、旧壁纸、按钮无设计、动效不足、子页杂乱；按本轮标准继续迭代",
+      "result": "failed"
+    }
+  ],
+  "stage": "doing",
+  "paths": [
+    "game/src/hub/game.hub.js",
+    "game/src/hub/hub.personnel.js",
+    "game/src/hub/hub.warehouse.js",
+    "game/src/hub/hub.facilities.js",
+    "game/src/hub/hub.home-v3.js",
+    "game/src/hub/hub.presentation.js",
+    "game/src/hub/hub.archive-v3.js",
+    "game/src/hub/hub.shop-v3.js",
+    "game/src/hub/base-motion-v4.js",
+    "game/css/base-camp-rework.css",
+    "game/css/base-home-v3.css",
+    "game/css/base-archive-v3.css",
+    "game/css/base-shop-v3.css",
+    "game/css/base-controls-v4.css",
+    "game/assets/scenes/base-home-v4.webp",
+    "game/art-source/ui/base-v4/",
+    "tests/base-ui-sample.test.js",
+    "tests/hub-archive-v3.test.js",
+    "tests/hub-shop-v3.test.js",
+    "tests/hub-pages-rework.test.js",
+    "tests/hub-flow-regression.test.js",
+    "tests/premium-ui-pages.test.js",
+    "tests/hub-upgrade-render.test.js",
+    "docs/development.md"
+  ],
+  "goal": "继续基地迭代：消除招式与归档重复、NAI初稿加内置重绘新壁纸、设计按钮并丰富顺滑反馈、子页信息减法与留白",
+  "unverified": [
+    "本轮画面及交互仍待复核"
+  ]
+}

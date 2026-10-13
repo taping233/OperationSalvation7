@@ -1,0 +1,93 @@
+[
+  {
+    "id": "classic",
+    "name": "行囊粗布",
+    "path": "card-backs/classic.webp",
+    "ext": "webp",
+    "bytes": 129180,
+    "sha256": "1cae38184ac55ecaa815c869a77dbe1b9f8807027a15cf58a8bf28753d75fc46",
+    "license": "项目自有（内置imagegen生成，老板确认画风并授权全套制作）",
+    "source": "docs/evidence/2026-10-10-cardbacks-seven/receipt.json",
+    "generationSource": "C:\\Users\\太平\\.codex\\generated_images\\01a12182-883a-7c62-9101-2d18bb64c305\\exec-1e33600e-5e18-469d-b3bf-7216f20fb263.png",
+    "generationSha256": "565e07623662d56836e32926cd5eba98547705204acae93bfe95a077af873d4f",
+    "promptBrief": "黄褐粗布拼接、米黄缝线、束口绳结"
+  },
+  {
+    "id": "wolf",
+    "name": "猎手皮纸",
+    "path": "card-backs/wolf.webp",
+    "ext": "webp",
+    "bytes": 119502,
+    "sha256": "b8975fccb1bc17d0411200d5ff8f659435a88b74b71fa721bdd44d8da07354f6",
+    "license": "项目自有（内置imagegen生成，老板确认画风并授权全套制作）",
+    "source": "docs/evidence/2026-10-10-cardbacks-seven/receipt.json",
+    "generationSource": "C:\\Users\\太平\\.codex\\generated_images\\01a12182-883a-7c62-9101-2d18bb64c305\\exec-f710400b-c5af-479d-92a6-b3113d75698d.png",
+    "generationSha256": "74df5ed48903acba784cfded068aca29151f52f3b6389b4c63ab409abfe961f7",
+    "promptBrief": "暖皮纸、狼首猎手纹章、交叉箭"
+  },
+  {
+    "id": "coin",
+    "name": "富商锦缎",
+    "path": "card-backs/coin.webp",
+    "ext": "webp",
+    "bytes": 104972,
+    "sha256": "5b64537c00e07bd9d97c15991ec097c1b8cc0505034ea8eb75e281ed891a9ee4",
+    "license": "项目自有（内置imagegen生成，老板确认画风并授权全套制作）",
+    "source": "docs/evidence/2026-10-10-cardbacks-seven/receipt.json",
+    "generationSource": "C:\\Users\\太平\\.codex\\generated_images\\01a12182-883a-7c62-9101-2d18bb64c305\\exec-05a181b3-c130-4150-be47-2c39ea20ddab.png",
+    "generationSha256": "4eec9ed26aa8eccd85116b80db80c47b7f2f9a50d2df3f19a207052bcbffed49",
+    "promptBrief": "朱红锦缎、金色钱币和织纹"
+  },
+  {
+    "id": "vault",
+    "name": "仓廪木纹",
+    "path": "card-backs/vault.webp",
+    "ext": "webp",
+    "bytes": 111418,
+    "sha256": "68b7c26e4bb5f7ffec5d6784cc438b67fbf92cdf85d47217d89b395fd68ae3d1",
+    "license": "项目自有（内置imagegen生成，老板确认画风并授权全套制作）",
+    "source": "docs/evidence/2026-10-10-cardbacks-seven/receipt.json",
+    "generationSource": "C:\\Users\\太平\\.codex\\generated_images\\01a12182-883a-7c62-9101-2d18bb64c305\\exec-d28d94dd-ca35-4cc9-93b9-e955920edc52.png",
+    "generationSha256": "19cffcde956a20748b451c52c30249ba7b34bf274956deed7d6e27fa72cbb23e",
+    "promptBrief": "蜜褐木板、仓储铁扣、麦穗"
+  },
+  {
+    "id": "boss",
+    "name": "弑神黑曜",
+    "path": "card-backs/boss.webp",
+    "ext": "webp",
+    "bytes": 94778,
+    "sha256": "dbd0159deb8919cd53fbd7f6b3329f63122e1f38a2eb0167c8584ec2859b6504",
+    "license": "项目自有（内置imagegen生成，老板确认画风并授权全套制作）",
+    "source": "docs/evidence/2026-10-10-cardbacks-seven/receipt.json",
+    "generationSource": "C:\\Users\\太平\\.codex\\generated_images\\01a12182-883a-7c62-9101-2d18bb64c305\\exec-aa0afbf5-3031-49e7-837c-1a9a069d4435.png",
+    "generationSha256": "d8e7e3e296132a9b87e100b8065840b5659f92366fb023c0a6ad270dccbd138d",
+    "promptBrief": "黑曜石、暗红裂隙、剑与破碎魔面"
+  },
+  {
+    "id": "altar",
+    "name": "核心星轨",
+    "path": "card-backs/altar.webp",
+    "ext": "webp",
+    "bytes": 84316,
+    "sha256": "1070f868d338cad19301172ea4fffd42a4aab82b05b3640d48979df9b8d10fbc",
+    "license": "项目自有（内置imagegen生成，老板确认画风并授权全套制作）",
+    "source": "docs/evidence/2026-10-10-cardbacks-seven/receipt.json",
+    "generationSource": "C:\\Users\\太平\\.codex\\generated_images\\01a12182-883a-7c62-9101-2d18bb64c305\\exec-c39dc1c9-5190-4ba0-9d93-3d979cad4191.png",
+    "generationSha256": "ce606ffe3e0e446cabf583e6997f44ba5a907656edbe67a935c6c90369be8d79",
+    "promptBrief": "靛紫星空、金色轨道和琥珀核心"
+  },
+  {
+    "id": "pet",
+    "name": "忠犬爪印",
+    "path": "card-backs/pet.webp",
+    "ext": "webp",
+    "bytes": 117660,
+    "sha256": "f0110e64beb62f47914bf0a9947e48042e0f6e35ce4013144944a231e1bef669",
+    "license": "项目自有（内置imagegen生成，老板确认画风并授权全套制作）",
+    "source": "docs/evidence/2026-10-10-cardbacks-seven/receipt.json",
+    "generationSource": "C:\\Users\\太平\\.codex\\generated_images\\01a12182-883a-7c62-9101-2d18bb64c305\\exec-77c520e9-222a-4647-908b-4e50b694daf5.png",
+    "generationSha256": "b5c2f471e1b406aab73e97c83363ad7bc0ef5fe7124ea5bcaf90b26e95e7fe81",
+    "promptBrief": "苔绿布面、米黄爪印、棕色项圈环"
+  }
+]

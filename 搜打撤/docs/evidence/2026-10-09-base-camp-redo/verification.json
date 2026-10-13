@@ -1,0 +1,64 @@
+{
+  "checkedAt": "2026-10-09T15:42:33.528Z",
+  "tests": {
+    "files": 11,
+    "passed": 85,
+    "failed": 0,
+    "runner": "Vitest 3.2.7",
+    "scope": [
+      "hub-flow-regression",
+      "departure-class-confirmation",
+      "full-review-regressions-hub",
+      "hub-upgrade-render",
+      "game-hub-preparation-feature",
+      "home-async-lifecycle",
+      "hub-architecture",
+      "premium-ui-pages",
+      "contracts",
+      "architecture-boundaries",
+      "base-departure"
+    ],
+    "pretest": false,
+    "build": false
+  },
+  "eslint": "4 game sources + hub-flow regression passed",
+  "css": "3 sources parsed with PostCSS",
+  "inputs": [
+    {
+      "path": "game/index.html",
+      "sha256": "c65310c9ffbd700edf34878221d4fd8aec6b4124d64ee7345e89db6535b0734d"
+    },
+    {
+      "path": "game/src/hub/game.hub.js",
+      "sha256": "dbe0be9c4e59fc1b18ab0cb2c55779856f573d8363e75db6dced169f7a4d2870"
+    },
+    {
+      "path": "game/src/hub/game.hub.pages.js",
+      "sha256": "0eb4580f29e9ed9f45083f8e245573080b3481cbac812e9bc4b99b2da1a6f808"
+    },
+    {
+      "path": "game/src/hub/game.hub.depart.js",
+      "sha256": "4a75cab5093fef9c3ff4675463404163eecaafd602735fff5da39a79d2731724"
+    },
+    {
+      "path": "game/src/run/game.run.altar.js",
+      "sha256": "e5e42bee2bd6e1f62691f730ba9f302e56a40629130a08267391f27a7c282d7e"
+    },
+    {
+      "path": "game/css/base-camp.css",
+      "sha256": "731dad29578ef1cdae6c276b9a426f00b681f0433be90d1e4e3ac8fc39ba5ee2"
+    },
+    {
+      "path": "game/css/base-camp-roster.css",
+      "sha256": "e7937e283d33a4069f8fe0e8617b923ad1b46f39249b5393a45c94ebcbfe55c0"
+    },
+    {
+      "path": "game/css/base-camp-compact.css",
+      "sha256": "160966f09d0979dc08b93b54715effb9d3512c59a5146d0e0cae9ed59502d5d1"
+    },
+    {
+      "path": "tests/hub-flow-regression.test.js",
+      "sha256": "c63d37906091a55add6e2f5a739c8016275ee6fea9aa30066de6a512608081d3"
+    }
+  ]
+}

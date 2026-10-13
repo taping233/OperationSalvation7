@@ -1,0 +1,159 @@
+/* Character dossier: agent roster, full illustration, information, integrated tabs.
+   Companion bench: display + right terminal + lower companion roster.
+   Reference receipts: docs/evidence/2026-10-11-WF-base-redesign-v7/personnel-v12.md */
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-page:has(> .personnel-v12) { background:#fff; --camp-ink:#16191e; --camp-muted:#727780; --camp-line:#d7dadd; --camp-accent:#16191e; --camp-action:#16191e; --camp-action-hover:#383e46; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 { padding:0; background:#fff; color:#16191e; width:100%; min-width:0; height:calc(var(--game-layout-height,1080px) - 260px); min-height:0; overflow:hidden; box-sizing:border-box; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 :is(h2,h3,h4,b) { font-family:var(--base-font-title,'Microsoft YaHei',sans-serif); font-weight:900; letter-spacing:-.035em; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-workspace { display:grid; grid-template-columns:minmax(320px,1.05fr) minmax(420px,1fr); grid-template-rows:104px minmax(0,1fr) 62px; gap:16px 24px; height:100%; min-height:0; padding:18px 28px 22px; box-sizing:border-box; overflow:hidden; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-art { grid-column:1; grid-row:1/4; display:grid; grid-template-rows:minmax(0,1fr) auto; min-height:0; min-width:0; margin:0; background:#fff; overflow:hidden; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-image-stage { position:relative; min-width:0; min-height:0; overflow:hidden; background:#fff; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-image-stage > img { display:block; width:100%; height:100%; min-height:0; max-height:100%; object-fit:contain; object-position:center; margin:0; padding:0; background:#fff; filter:none; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-image-stage > img[data-portrait-fit="body"] { position:absolute; left:50%; bottom:var(--portrait-bottom,4%); width:auto; height:calc(100% * var(--portrait-height,.92)); max-width:none; max-height:none; transform:translateX(var(--portrait-center,-50%)); }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-art figcaption { padding:12px 24px 0; color:#16191e; background:#fff; border:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-art h2 { font-size:42px; line-height:1.1; margin:0 0 6px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-art figcaption span { color:#727780; font-size:15px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-strip { grid-column:2; grid-row:1; display:flex; align-items:stretch; align-self:start; width:fit-content; max-width:100%; height:104px; gap:10px; background:transparent; padding:0; border:0; border-radius:0; box-shadow:none; backdrop-filter:none; min-width:0; overflow-x:auto; scrollbar-width:thin; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-choice { position:relative; flex:0 0 108px; display:flex; flex-direction:column; align-items:center; justify-content:center; width:108px; min-width:108px; max-width:108px; padding:4px; gap:4px; overflow:hidden; border:2px solid transparent; border-radius:10px; background:#edf1f3; color:#26323b; cursor:pointer; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-avatar { position:relative; display:block; flex:none; width:76px; height:68px; overflow:hidden; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-avatar > :is(img,svg) { position:absolute; display:block; left:50%; bottom:var(--avatar-bottom,3%); width:auto; max-width:none; height:calc(100% * var(--avatar-height,.94)); max-height:none; margin:0; padding:0; object-fit:contain; transform:translateX(var(--avatar-center,-50%)); }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-choice b { font-size:14px; line-height:18px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-choice.on { border-color:#6aaebd; background:#d8eef2; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-data { grid-column:2; grid-row:2; display:flex; flex-direction:column; min-height:0; padding:24px; border:2px solid #32363d; border-radius:16px; background:#e9ebee; min-width:0; box-shadow:0 3px 0 #131619; overflow:hidden; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-identity { position:relative; flex:none; padding:18px 22px; background:#15191e; color:white; border-radius:16px; margin-bottom:20px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-identity h3 { font-size:36px; line-height:1.15; margin:4px 0 12px; color:white; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-identity small { color:#bac0c6; font-size:13px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-identity > span { font-size:15px; color:#9edce7; font-weight:800; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-data-content { color:#16191e; flex:1; min-height:0; overflow:auto; padding-right:6px; scrollbar-gutter:stable; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-data-content h4 { font-size:20px; margin:10px 0; color:#16191e; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-data-content p { font-size:16px; line-height:1.65; margin:8px 0 14px; color:#303640; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-data-content .hint { font-size:14px; color:#69717b; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-sections { grid-column:2; grid-row:3; display:flex; align-items:stretch; padding:5px; background:#1d2126; border:2px solid #30363c; border-radius:16px; gap:4px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-sections button { flex:1; border:0; border-radius:10px; padding:9px 10px; color:#fff; background:transparent; font:900 20px var(--base-font-title,'Microsoft YaHei',sans-serif); cursor:pointer; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-sections button.on { background:#9edce7; color:#12171b; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-growth-summary { border:0; padding:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-level { display:block; color:#fff; background:#1d2126; padding:12px 22px; border-radius:34px; font-size:32px; font-weight:900; line-height:1.15; margin-bottom:18px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-perk-value { border-radius:24px; padding:12px 18px; background:#d9dde1; font-weight:800; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-growth-progress { border-top:1px solid #c4c9cf; margin-top:20px; padding-top:12px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-growth-actions { position:sticky; bottom:0; padding:12px 0 0; background:#e9ebee; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-progress-track { height:12px; border:2px solid #23272c; border-radius:20px; overflow:hidden; background:#c9ced3; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-progress-track i { height:100%; background:#7fc5d4; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 :is(.mini-btn,.base-command) { min-height:40px; border:2px solid #32373d; border-radius:12px; padding:9px 18px; color:#fff; background:#252a30; box-shadow:none; font-weight:800; font-size:15px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .base-command.base-command-primary { color:#fff; background:#252a30; border-color:#32373d; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 button:disabled { opacity:.45; cursor:default; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 :is(button,input,select):focus-visible { outline:3px solid #5197ab; outline-offset:3px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-skill-detail { display:flex; flex-direction:column; gap:18px; min-height:0; padding:0; border:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-skill-card { pointer-events:none; width:200px; margin:18px auto 14px; overflow:visible; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-skill-card > * { width:200px; max-width:200px; height:283px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-skill-copy small { color:#66717a; font-size:12px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-skill-copy p { max-height:none; overflow:visible; white-space:pre-line; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-pool-toolbar { display:flex; flex-wrap:wrap; gap:8px; padding:14px 0; margin:0; border:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .pool-type-tabs { display:flex; gap:6px; flex-wrap:wrap; width:100%; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .pool-type-tabs .mini-btn { min-height:32px; padding:5px 12px; font-size:13px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .pool-type-tabs .ok { color:#12171b; background:#9edce7; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 :is(input,select) { min-width:0; padding:8px 12px; border:1px solid #a9b2bd; border-radius:6px; background:white; color:#20262d; font-size:13px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .card-browser-track { --card-browser-min:110px; gap:10px; padding:0; justify-content:start; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-pool-card { display:flex; flex-direction:column; min-width:0; border:2px solid #69737e; border-radius:13px; background:#23282f; color:white; padding:6px; gap:4px; box-shadow:none; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-pool-card.on { border-color:#62b2c6; background:#394e57; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-pool-card > span:last-child { font-size:11px; color:#c6d0d8; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .pool-card-art { display:block; height:95px; overflow:hidden; pointer-events:none; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .pool-card-art > * { transform:scale(.55); transform-origin:top left; width:180%; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-skin-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; padding:14px 0; max-height:300px; overflow:auto; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-skin { display:flex; flex-direction:column; padding:6px; min-width:0; border:2px solid #b3bac3; border-radius:12px; background:#fff; color:#16191e; gap:4px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-skin.on { border-color:#1c677c; box-shadow:0 0 0 2px #9edce7; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-skin img { width:100%; height:150px; object-fit:contain; background:#fff; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-skin b { font-size:14px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-skin small { color:#69747f; font-size:12px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-page-head { padding:20px 32px 0; margin:0; border:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-page-head h2 { color:#16191e; font-size:36px; margin:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .companion-toolbar { display:flex; gap:16px; justify-content:flex-end; align-items:center; padding:12px 32px; color:#222831; background:#fff; border:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-stage { display:grid; grid-template-columns:minmax(340px,1.6fr) minmax(330px,1fr); grid-template-rows:minmax(0,1fr) 154px; gap:20px 32px; height:calc(100% - 142px); min-height:0; box-sizing:border-box; padding:0 32px 24px; background:#fff; overflow:hidden; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-display { grid-column:1; grid-row:1; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#fff; min-height:0; height:100%; box-sizing:border-box; padding:10px 28px; border:0; box-shadow:none; color:#16191e; overflow:hidden; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-display > .companion-art { width:min(100%,390px); height:calc(100% - 110px); min-height:0; object-fit:contain; margin:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-display h3 { margin:8px 0; color:#16191e; font-size:32px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-display small { color:#727780; font-size:13px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-state { padding:6px 16px; border:0; border-radius:20px; color:white; background:#252b31; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-details { grid-column:2; grid-row:1; align-self:stretch; display:flex; flex-direction:column; gap:12px; min-height:0; height:100%; box-sizing:border-box; overflow:auto; padding:24px; border:8px solid #24292f; border-radius:26px; background:#3a414a; color:#fff; box-shadow:0 4px 0 #13171b; --camp-ink:#fff; --camp-muted:#b9c3ca; --camp-line:#64707b; --camp-accent:#9edce7; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-details :is(h3,h4,p,dd,dt) { color:white; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 :is(.partner-details,.companion-hatch) > * { flex:none; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-details h3 { font-size:27px; margin:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-details h4 { font-size:20px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-details p { font-size:15px; line-height:1.6; margin:0 0 10px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .warehouse-facts { display:grid; gap:8px; margin:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .warehouse-facts > div { display:flex; justify-content:space-between; padding:9px 14px; background:#20262c; border-radius:24px; border:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .companion-growth { display:flex; flex-direction:column; gap:8px; padding:10px; border:0; background:#242b33; border-radius:14px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-stage .person-roster { grid-column:1/3; grid-row:2; display:flex; flex-wrap:nowrap; flex-direction:row; gap:10px; width:100%; overflow-x:auto; padding:10px; background:#24292f; border-radius:14px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-stage .person-face { display:flex; flex:1 0 110px; min-width:110px; max-width:175px; flex-direction:column; align-items:center; padding:7px; min-height:132px; gap:4px; background:#343b44; color:white; border:2px solid transparent; border-radius:12px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-stage .person-face.on { border-color:#9edce7; background:#40575f; color:white; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-stage .person-face .companion-art { width:100%; height:80px; object-fit:contain; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-stage .person-face b { font-size:16px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-stage .person-face small { color:#bdc8d1; font-size:12px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .companion-hatch-scene { display:grid; grid-template-columns:minmax(340px,1.6fr) minmax(330px,1fr); grid-template-rows:minmax(0,1fr); gap:32px; padding:24px 32px 32px; height:calc(100% - 85px); min-height:0; box-sizing:border-box; background:#fff; overflow:hidden; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .companion-hatch-art { display:flex; align-items:center; justify-content:center; min-height:0; padding:30px; border:0; background:#fff; box-shadow:none; overflow:hidden; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .companion-hatch-art :is(img,svg) { max-width:360px; max-height:100%; width:100%; height:100%; object-fit:contain; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .companion-hatch { display:flex; flex-direction:column; gap:22px; align-self:center; max-height:100%; min-height:0; box-sizing:border-box; overflow:auto; padding:28px; background:#3a414a; color:white; border:8px solid #24292f; border-radius:26px; box-shadow:0 4px 0 #13171b; --camp-ink:#fff; --camp-muted:#b9c3ca; --camp-line:#64707b; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .companion-hatch :is(h3,p) { color:white; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .companion-hatch h3 { font-size:32px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .companion-hatch p { font-size:16px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 [hidden] { display:none; }
+
+/* 角色页覆盖旧共用直角按钮，并保留外层圆角矩形。 */
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-page:has(> .personnel-v12) { background:transparent; border-radius:0; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 { background:#fff; border-radius:24px; overflow:hidden; clip-path:inset(0 round 24px); }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 button.base-command[data-act] { border-radius:12px; overflow:hidden; clip-path:none; }
+
+/* 角色页深色区块使用半透明深灰，文字和选中强调保留。 */
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 :is(.pv12-identity,.pv12-sections,.person-level) { background:rgba(22,29,35,.68); backdrop-filter:blur(12px); }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-choice { background:#edf1f3; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-choice.on { background:#d8eef2; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 button.base-command[data-act] { background:rgba(22,29,35,.72); color:#fff; border-color:#89959d70; backdrop-filter:blur(12px); }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 button.base-command[data-act]:hover:not(:disabled) { background:rgba(22,29,35,.82); }
+
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-choice:hover:not(.on) { background:#e1ecef; }
+
+/* 招式页：整页卡牌目录，点击卡牌在共用放大页阅读。 */
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-pool-catalog { grid-column:1; grid-row:1/4; display:flex; flex-direction:column; min-width:0; min-height:0; gap:12px; padding:0 12px 0 0; overflow:hidden; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-pool-catalog > [data-card-browser] { display:flex; flex-direction:column; flex:1; min-height:0; overflow:hidden; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-pool-catalog .card-browser-track { flex:1; min-height:0; overflow:hidden; align-content:start; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-pool-catalog .card-browser-footer { flex:none; margin-top:12px; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-pool-catalog .person-pool-toolbar { padding:0 0 8px; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-pool-catalog .card-browser-track { --card-browser-min:216px; gap:18px; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-pool-catalog .pool-card-art { height:269px; overflow:visible; margin:16px 0 12px; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-pool-catalog .pool-card-art > * { width:180px; max-width:180px; height:269px; transform:none; margin:0 auto; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-pool-catalog .person-pool-card { align-items:center; background:#edf1f3; color:#26323b; border-color:transparent; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-pool-catalog .person-pool-card.on { background:#d8eef2; border-color:#6aaebd; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-pool-catalog .person-pool-card > span:last-child { color:#697780; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 [hidden] { display:none; }
+
+/* 招式列表固定卡面分区；长说明在放大页完整阅读。 */
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-pool-catalog .hs-card {
+  width:180px!important; min-width:180px!important; max-width:180px!important;
+  height:269px!important; min-height:0!important; max-height:269px!important;
+  aspect-ratio:272/406!important; grid-template-rows:minmax(0,1fr) 28px 56px 16px!important;
+  gap:0!important; box-sizing:border-box;
+}
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-pool-catalog .hs-card .hsc-name {
+  grid-row:2; height:28px!important; min-height:28px!important; max-height:28px;
+  width:calc(100% - 20px)!important; margin:0 10px!important; padding:0!important;
+  font-size:16px!important; line-height:20px!important; white-space:nowrap!important;
+  align-items:center!important; overflow:hidden!important;
+}
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-pool-catalog .hs-card .hsc-name span { display:block; max-width:100%; white-space:nowrap!important; overflow:hidden; text-overflow:ellipsis; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-pool-catalog .hs-card .hsc-desc {
+  grid-row:3; height:56px!important; min-height:56px!important; max-height:56px!important;
+  width:calc(100% - 20px)!important; margin:0 10px!important; padding:2px 0 6px!important;
+  font-size:10px!important; line-height:16px!important; overflow:hidden!important; box-sizing:border-box;
+}
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-pool-catalog .hs-card .hsc-desc > span {
+  display:-webkit-box!important; -webkit-box-orient:vertical; -webkit-line-clamp:3!important;
+  overflow:hidden!important; max-height:48px;
+}
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-pool-catalog .hs-card .hsc-kw {
+  grid-row:4; height:16px; max-height:16px; margin:0 10px!important; padding:0!important;
+  font-size:8px!important; line-height:12px; overflow:hidden!important;
+}
+
+/* 招式目录占满人物工作区，人物切换与操作各占一行。 */
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12[data-section="pool"] .pv12-agent-workspace { grid-template-columns:minmax(0,1fr); grid-template-rows:104px minmax(0,1fr) 62px; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12[data-section="pool"] .pv12-agent-strip { grid-column:1; grid-row:1; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12[data-section="pool"] .pv12-pool-catalog { grid-column:1; grid-row:2; padding:0; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12[data-section="pool"] .pv12-sections { grid-column:1; grid-row:3; }

@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt7-maxsupply",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-37c69e8e-9761-4573-b10b-4001b65f80dd.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-baita-manasupply/cards-spell-tt7-maxsupply-source.png",
+        "bytes": 2337956,
+        "sha256": "18efdfcae1a61a6efe8e0350af389a77690d0bfb7b906e5bac03726fd0a21446"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-baita-manasupply/cards-spell-tt7-maxsupply-full-before.webp",
+          "bytes": 26790,
+          "sha256": "f0741c8aa50af1a62f85b79f06e90a3306d82a5bb0b6ebd0bfeb68c3ecfd6664"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-baita-manasupply/cards-spell-tt7-maxsupply-thumb-before.webp",
+          "bytes": 7424,
+          "sha256": "fff2b0ef9f8cdbb5f894a4cf322999716e2e9ff8fbe1fe496067bbbde4e53206"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-maxsupply.webp",
+          "bytes": 228798,
+          "sha256": "889780cc936f8f9474e00fdb7b1dbdf24e284e5256f521368d1ed6520abe0f5d",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-maxsupply.webp",
+          "bytes": 26284,
+          "sha256": "f7883dcce64252c2a56bc33ad243358187615710731f34242fab4481bd523f0d",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "baita-manasupply-profession-builtin-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt7-maxsupply.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 228798,
+            "sha256": "889780cc936f8f9474e00fdb7b1dbdf24e284e5256f521368d1ed6520abe0f5d",
+            "source": "docs/evidence/2026-10-10-baita-manasupply/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-maxsupply.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 7424,
+            "sha256": "fff2b0ef9f8cdbb5f894a4cf322999716e2e9ff8fbe1fe496067bbbde4e53206",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-maxsupply.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 26284,
+            "sha256": "f7883dcce64252c2a56bc33ad243358187615710731f34242fab4481bd523f0d",
+            "source": "docs/evidence/2026-10-10-baita-manasupply/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 834,
+  "manifest_count_after": 835
+}

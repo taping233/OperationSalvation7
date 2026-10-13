@@ -1,0 +1,15 @@
+{
+  "card_id": "tt3sp-flowerzhen",
+  "card_name": "花鸩",
+  "mode": "candidate",
+  "tool": "built-in image_gen",
+  "source": "C:/Users/太平/.codex/generated_images/01a128ee-d0f5-74e2-a11c-dcfeff29f424/exec-37d1b094-0bfa-4396-b14c-7f69e1c4c304.png",
+  "output": ".tmp/imagegen/2026-10-11-flowerzhen/flowerzhen-redraw.png",
+  "prompt": "Use case: style-transfer. Redraw the square game-card illustration 花鸩. Image 1 is the EDIT TARGET and the authority for subject, composition and palette. Images 2–4 are ONLY brushwork references; borrow their broad opaque hand-painted anime painting grammar, never their people, costumes, props or text.\n\nPreserve image 1's simple front-view composition: one floating dark violet poisonous flower slightly above the center, occupying about half the image width; thick layered curled and pointed petals opening upward and outward, charcoal-plum shadows, blue-violet turning planes. Its small luminous magenta opening faces the viewer. From that opening one very narrow vivid purple stream of viscous poison hangs straight down through the lower half, ending in a large suspended teardrop near the bottom and one tiny detached droplet below. Keep the bloom-to-drip proportions, silhouette, empty space and upright direction. No stem, leaves, vase, bird, character, ground or scenery.\n\nRepaint with fewer, larger connected color masses and a few broad curved opaque strokes that follow each substantial petal. Hard handmade shadow edges, selective broken stroke endings, quiet matte petal surfaces, just enough structure around the opening and overlapping petals. The darkest outer petals form one clear silhouette; concentrate the strongest purple accents at the opening and poison. Avoid thin etched petal veins, tiny facet mosaics, glossy 3D or smooth airbrush rendering, excessive bloom and uniform grain or canvas filters.\n\nBackground remains a quiet opaque burgundy/crimson field darkening into plum below, summarized in a few very broad painted masses. No decorative objects or particles. Square 1:1, full image, no text, border, frame, watermark or UI.",
+  "references": [
+    "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3sp-flowerzhen.webp",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+  ]
+}

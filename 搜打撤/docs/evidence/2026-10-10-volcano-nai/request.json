@@ -1,0 +1,25 @@
+{
+  "card_id": "tt8-hero-descender",
+  "channel": "NovelAI via tools/nai_gen.py",
+  "model": "nai-diffusion-4-5-full",
+  "recipe_version": "1.3",
+  "cleanup_version": "1.0",
+  "width": 1024,
+  "height": 1024,
+  "seed": 101010031,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nOne male mage channels energy from consumed spell cards into a volcanic eruption.\n\nOne square ability-card illustration for 充能火山, without card frame or text.\n\nElevated diagonal camera looking down. The mage head, broad hat and upper torso occupy the upper-left third. One black-gloved hand reaches diagonally toward the lower right. Three dark spell-paper silhouettes descend from the glove into an eruptive magical funnel at lower right. One large curved energy sweep connects the upper-right edge with the funnel, forming a clear diagonal and curved visual path. Keep a small pale hot center surrounded by broad gold, ivory and restrained orange energy shapes, with quiet deep blue-gray negative space between mage and eruption. No physical landscape or held round fireball. Face and reaching hand remain readable.\n\n1.25::large connected opaque color masses, broad directional brushwork, grouped light and shadow planes, selective detail::, matte muted colored grays with a concentrated gold-orange accent. Group hair into a few substantial locks and robe into principal fold planes. Resolve the anime face, glasses, eyes and glove gesture clearly; leave coat surfaces and background quieter. Paint the eruption with a few confident curved wide strokes. Brush marks describe form and motion; do not add uniform surface grain or fine scratches. Reduce decorative trimming and isolated bright flecks.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, girl, woman, female, breasts, feminine face, child, baby face, loose unbound long hair, staff, wand, tiny hair strands, dense wrinkles, ornate filigree, fragmented polygon facets, fine sparks confetti, all-over grain overlay, thick oil paint ridges, realistic landscape, photorealism",
+  "character_prompt": "1boy, solo, adult male, male mage, refined masculine face, longer face proportions, restrained narrow golden eyes, thin round eyeglasses, pointed ears, silver gray hair, low hair bun behind head, two long sidelocks over shoulders, black bent-tip wide-brim witch hat with purple lining, black high-collared robe, violet cloak lining, restrained gold edging, black gloves, white feather and blue sapphire gold clasp brooch on his left chest, composed small smile, no staff",
+  "中文调整": "保持共享配方v1.3；仅本次加强大色面、方向性宽笔、明暗分组与脸手选择性细化，减少碎发碎褶与装饰。男性身份单列角色栏。",
+  "人设来源": "docs/character-bible/changwuyu.md现行权威；人物立绘只作人工核对，本客户端没有传输参考图。",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\volcano-painterly-20261010\\volcano-nai.png",
+  "installed": false
+}

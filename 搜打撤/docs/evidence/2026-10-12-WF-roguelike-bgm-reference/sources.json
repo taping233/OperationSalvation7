@@ -1,0 +1,65 @@
+[
+  {
+    "file": "01-phantom-battle1.m4a",
+    "part": "战斗曲1 (m_bat_rglk1normal1)",
+    "source": "https://www.bilibili.com/video/BV1Ar4y1U7nq/?p=3",
+    "bytes": 4037334,
+    "sha256": "85c0e4a0cbba6d0a3d906efec2da51183f8718b933121550512ae3c7baa2dadc",
+    "duration": 102,
+    "method": "Public Bilibili DASH audio stream; original AAC retained; ffmpeg full decode passed."
+  },
+  {
+    "file": "02-phantom-battle2.m4a",
+    "part": "战斗曲2 (m_bat_rglk1normal2)",
+    "source": "https://www.bilibili.com/video/BV1Ar4y1U7nq/?p=5",
+    "bytes": 4773501,
+    "sha256": "492e412490907a1e8ce4ff9107b6230703dd6a88da4dc66e81ff90385a9907b7",
+    "duration": 120,
+    "method": "Public Bilibili DASH audio stream; original AAC retained; ffmpeg full decode passed."
+  },
+  {
+    "file": "03-mizuki-battle1.m4a",
+    "part": "战斗曲1 (m_bat_rglk2normal1)",
+    "source": "https://www.bilibili.com/video/BV1wg411e7QT/?p=11",
+    "bytes": 3446277,
+    "sha256": "b3c67abd657f96f390593a748c32a43f7418c68aa10d0ab504e40b5164a46571",
+    "duration": 87,
+    "method": "Public Bilibili DASH audio stream; original AAC retained; ffmpeg full decode passed."
+  },
+  {
+    "file": "04-mizuki-battle2.m4a",
+    "part": "战斗曲2 (m_bat_rglk2normal2)",
+    "source": "https://www.bilibili.com/video/BV1wg411e7QT/?p=12",
+    "bytes": 4194551,
+    "sha256": "3e70441a0d8ad64d3b9eebfddf3904c67395afcef76902a23804eb9d3feb2318",
+    "duration": 106,
+    "method": "Public Bilibili DASH audio stream; original AAC retained; ffmpeg full decode passed."
+  },
+  {
+    "file": "05-sami-hunt.m4a",
+    "part": "猎食 战斗曲1",
+    "source": "https://www.bilibili.com/video/BV1hM4y1x7ar/?p=5",
+    "bytes": 4258068,
+    "sha256": "43b3d8d8373fff4d28061cd1279b3067100ec3661f45787998edff85372419fd",
+    "duration": 248,
+    "method": "Public Bilibili DASH audio stream; original AAC retained; ffmpeg full decode passed."
+  },
+  {
+    "file": "06-sami-soulcall.m4a",
+    "part": "呼魂 战斗曲2",
+    "source": "https://www.bilibili.com/video/BV1hM4y1x7ar/?p=6",
+    "bytes": 5213525,
+    "sha256": "61eb7bffb56c4dd4e3bf04be7364b2eb1e0c16184cfc87e2c76e537abdf9c2ef",
+    "duration": 263,
+    "method": "Public Bilibili DASH audio stream; original AAC retained; ffmpeg full decode passed."
+  },
+  {
+    "file": "07-sami-annihilation.m4a",
+    "part": "泯灭 战斗曲3",
+    "source": "https://www.bilibili.com/video/BV1hM4y1x7ar/?p=7",
+    "bytes": 4259507,
+    "sha256": "a90f6dde6d6782936bf86b4ac8b914a9cb68d36873e98a29edf4d920a70b03e3",
+    "duration": 265,
+    "method": "Public Bilibili DASH audio stream; original AAC retained; ffmpeg full decode passed."
+  }
+]

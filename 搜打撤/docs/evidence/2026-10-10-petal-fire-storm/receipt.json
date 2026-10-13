@@ -1,0 +1,230 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-petal",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-fda6b75b-2307-4281-8ef9-3b06c1753088.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-petal-fire-storm/cards-spell-tt3-petal-source.png",
+        "bytes": 1905218,
+        "sha256": "52451b2b4675d91c8916250faf75fb7adb9f1feafafc4752aa4feeeccda15324"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-petal-fire-storm/cards-spell-tt3-petal-full-before.webp",
+          "bytes": 88612,
+          "sha256": "981e7dfe081acbd69f74a33a64c37c48fc0c2a3dc56499ed31f8611879bdc369"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-petal-fire-storm/cards-spell-tt3-petal-thumb-before.webp",
+          "bytes": 20682,
+          "sha256": "1e9cccf3c59106362b2edfe03cbf5526c2f4558c046fa44924f20005acc92982"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-petal.webp",
+          "bytes": 146072,
+          "sha256": "cfb9d7a503f291ce6062d8404eb60c27b751179729cca183aa333092c4335d94",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-petal.webp",
+          "bytes": 21092,
+          "sha256": "e4ebbeb415559737229518ef1264d9f0e1222321fcd3d5dc88fdbc6930f2bea3",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt3-petal-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt3-petal.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 146072,
+            "sha256": "cfb9d7a503f291ce6062d8404eb60c27b751179729cca183aa333092c4335d94",
+            "source": "docs/evidence/2026-10-10-petal-fire-storm/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-petal.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 20682,
+            "sha256": "1e9cccf3c59106362b2edfe03cbf5526c2f4558c046fa44924f20005acc92982",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-petal.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 21092,
+            "sha256": "e4ebbeb415559737229518ef1264d9f0e1222321fcd3d5dc88fdbc6930f2bea3",
+            "source": "docs/evidence/2026-10-10-petal-fire-storm/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "cmtn1ntxzoc4",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-5f86f6cb-a140-45af-a946-f0bd36e10b14.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-petal-fire-storm/cards-spell-cmtn1ntxzoc4-source.png",
+        "bytes": 1990562,
+        "sha256": "31992db37fa01d15e3b0da5b42eb0e4add376d20e909547fa7e19f81ca360a63"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-petal-fire-storm/cards-spell-cmtn1ntxzoc4-full-before.webp",
+          "bytes": 101614,
+          "sha256": "65cd895f20e36280898676a64249a7e875342718fd371e75c7057efeaeb10d2b"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-petal-fire-storm/cards-spell-cmtn1ntxzoc4-thumb-before.webp",
+          "bytes": 29604,
+          "sha256": "9809fef4f7799de4cd75d281b1840db2d2ee33fa44655ac4693ca022f3d3bf6b"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-cmtn1ntxzoc4.webp",
+          "bytes": 186816,
+          "sha256": "6377efde882f646ab6df32a107d7c3febc52c219084450c161224e931cb2dc21",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-cmtn1ntxzoc4.webp",
+          "bytes": 33002,
+          "sha256": "30f743a4e95034a9a40e4109aa8e7925972aab7892ab06dfee2f64b8f0e075ba",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "cmtn1ntxzoc4-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-cmtn1ntxzoc4.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 186816,
+            "sha256": "6377efde882f646ab6df32a107d7c3febc52c219084450c161224e931cb2dc21",
+            "source": "docs/evidence/2026-10-10-petal-fire-storm/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-cmtn1ntxzoc4.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 29604,
+            "sha256": "9809fef4f7799de4cd75d281b1840db2d2ee33fa44655ac4693ca022f3d3bf6b",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-cmtn1ntxzoc4.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 33002,
+            "sha256": "30f743a4e95034a9a40e4109aa8e7925972aab7892ab06dfee2f64b8f0e075ba",
+            "source": "docs/evidence/2026-10-10-petal-fire-storm/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-flame-storm",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-2aee109a-aeb5-4670-b752-45b8bf3c8e72.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-petal-fire-storm/cards-spell-tt3-flame-storm-source.png",
+        "bytes": 1834324,
+        "sha256": "6e86a6232b83bd89b8ef73b3de6b18e1f6139f7ee6e5c67ebc4bcdfa860d4554"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-petal-fire-storm/cards-spell-tt3-flame-storm-full-before.webp",
+          "bytes": 70696,
+          "sha256": "caef1fcb3f79b9d83718be0e00f14c7cd126ee7cdb9a176940434dd5dd0275a3"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-petal-fire-storm/cards-spell-tt3-flame-storm-thumb-before.webp",
+          "bytes": 18570,
+          "sha256": "b158e2899c3b4d218b880952dd1c838a2480c6253ece37de2bbe264e7179c334"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-flame-storm.webp",
+          "bytes": 139714,
+          "sha256": "c1c99ade6f1ab43412332cb56ff2950de4765f2c7dd1f735274036fae11a2e38",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-flame-storm.webp",
+          "bytes": 18256,
+          "sha256": "17b3134ce1b45fce977599598f50103be1dd4ce1c2c5c59f01f63dc9b2689955",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt3-flame-storm-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt3-flame-storm.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 139714,
+            "sha256": "c1c99ade6f1ab43412332cb56ff2950de4765f2c7dd1f735274036fae11a2e38",
+            "source": "docs/evidence/2026-10-10-petal-fire-storm/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-flame-storm.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 18570,
+            "sha256": "b158e2899c3b4d218b880952dd1c838a2480c6253ece37de2bbe264e7179c334",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-flame-storm.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 18256,
+            "sha256": "17b3134ce1b45fce977599598f50103be1dd4ce1c2c5c59f01f63dc9b2689955",
+            "source": "docs/evidence/2026-10-10-petal-fire-storm/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 835,
+  "manifest_count_after": 838
+}

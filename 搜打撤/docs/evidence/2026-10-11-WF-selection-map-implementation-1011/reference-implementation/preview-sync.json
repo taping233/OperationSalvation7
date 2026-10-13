@@ -1,0 +1,30 @@
+{
+  "mode": "Copy of stable authorized source and assets, no tests or browser inspection",
+  "files": [
+    "game/src/run/game.run.altar.js",
+    "game/src/hub/game.hub.depart.js",
+    "game/src/ui/node-scene-view.js",
+    "game/css/entry-events.css",
+    "game/css/departure-selected.css",
+    "game/css/roster-reference.css",
+    "game/src/battle/view/battle.view.js",
+    "game/src/battle/view/battle.overlays.js",
+    "game/src/run/game.run.shop.js",
+    "game/css/expedition-battle.css",
+    "game/css/expedition-shop.css",
+    "game/css/expedition-rewards.css",
+    "game/src/hub/game.bag.js",
+    "game/css/expedition-inventory.css",
+    "game/src/core/renderer.js",
+    "game/src/core/map-node-art.js",
+    "game/src/run/expedition.view.js",
+    "game/css/expedition-map.css",
+    "game/css/page-expedition-hud.css",
+    "game/assets/scenes/map-nodes/battle-security-shard-1011.webp",
+    "game/assets/scenes/map-nodes/event-record-fragments-1011.webp",
+    "game/assets/scenes/map-nodes/passage-transit-core-1011.webp",
+    "game/assets/scenes/map-nodes/rest-heat-cell-1011.webp",
+    "game/assets/scenes/map-nodes/shop-exchange-token-1011.webp"
+  ],
+  "port": 5337
+}

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-zzz-base-overhaul",
+  "date": "2026-10-12",
+  "owner": "Friday",
+  "goal": "三个GPT-6.1-sol medium子代理按绝区零参考板实施基地美术/UI/交互改造",
+  "paths": [
+    "game/src/hub/hub.presentation.js",
+    "game/src/hub/hub.reward-feedback.js",
+    "game/css/base-reward-feedback.css",
+    "tests/hub-personnel-actions.test.js",
+    "game/src/hub/hub.home-v3.js",
+    "game/src/hub/hub.navigation-v7.js",
+    "game/src/hub/hub.personnel.js",
+    "game/src/hub/hub.warehouse.js",
+    "game/src/hub/hub.trade-shop-v5.js",
+    "game/src/hub/hub.archive-v3.js",
+    "game/src/hub/hub.archive.js",
+    "game/src/hub/hub.collection-v4.js",
+    "game/src/hub/hub.facilities.js",
+    "game/src/hub/hub.courtyard-v3.js",
+    "game/css/base-home-v7.css",
+    "game/css/base-framework-v7.css",
+    "game/css/base-personnel-v12.css",
+    "game/css/base-logistics-trade-v12.css",
+    "game/css/base-archive-facilities-v12.css",
+    "game/css/base-collection-v4.css",
+    "game/css/base-courtyard-v3.css",
+    "docs/evidence/2026-10-12-WF-zzz-base-overhaul"
+  ],
+  "doneWhen": [
+    "三线已实际接入且不改变玩法存档与保护属地",
+    "首轮全部完成后统一对照参考板视觉检查，交原三Sol medium子代理返工并复核修改点",
+    "相关定向检查及Codex内置当前窗口关键链路通过，未覆盖明确记录"
+  ],
+  "stage": "partial",
+  "checks": [],
+  "unverified": [
+    "10-13老板确认所有对话已结束；本轮释放执行状态，原未完成范围保留，后续须按当前证据重新核验"
+  ],
+  "updatedAt": "2026-10-13T15:39:49.276Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

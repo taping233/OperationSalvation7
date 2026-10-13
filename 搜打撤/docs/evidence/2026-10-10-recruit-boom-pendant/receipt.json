@@ -1,0 +1,230 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt7-recruit",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-1bb70309-f55f-4186-937a-ab1998bee7d8.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-recruit-boom-pendant/cards-spell-tt7-recruit-source.png",
+        "bytes": 1704629,
+        "sha256": "001565605de1d15aeee810d28e1e62757f21bce607c8310e8451be3c69061987"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-recruit-boom-pendant/cards-spell-tt7-recruit-full-before.webp",
+          "bytes": 59902,
+          "sha256": "edd92348d55422f875de10ab9a20663adb98e66a975692b5c34c646004843b0e"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-recruit-boom-pendant/cards-spell-tt7-recruit-thumb-before.webp",
+          "bytes": 20374,
+          "sha256": "a89df9e68326e05e11a45e323fd4d4d15c8d27164befb088308e8cb41b168a4d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-recruit.webp",
+          "bytes": 109472,
+          "sha256": "8fb149a60dd256494f947be67bbd0ef537d272525c8e7e58c61a496ef114a383",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-recruit.webp",
+          "bytes": 18688,
+          "sha256": "90e93fe4129363dac7dbdaedac82ee0a1dbcaa244b0f40f43c1c4becde012b3e",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt7-recruit-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt7-recruit.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 109472,
+            "sha256": "8fb149a60dd256494f947be67bbd0ef537d272525c8e7e58c61a496ef114a383",
+            "source": "docs/evidence/2026-10-10-recruit-boom-pendant/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-recruit.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 20374,
+            "sha256": "a89df9e68326e05e11a45e323fd4d4d15c8d27164befb088308e8cb41b168a4d",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-recruit.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 18688,
+            "sha256": "90e93fe4129363dac7dbdaedac82ee0a1dbcaa244b0f40f43c1c4becde012b3e",
+            "source": "docs/evidence/2026-10-10-recruit-boom-pendant/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "cc-double-boom",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-34170469-edd4-4c72-a8db-eb8e1cef8686.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-recruit-boom-pendant/cards-spell-cc-double-boom-source.png",
+        "bytes": 1768839,
+        "sha256": "aaa0c3171497b12d79fcbbf97a02739e9270737491de9eb94a54e2d62cad1954"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-recruit-boom-pendant/cards-spell-cc-double-boom-full-before.webp",
+          "bytes": 56654,
+          "sha256": "fc9eae30846126e292421696cea143e4e90ec997e32245589271d8a6b591749a"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-recruit-boom-pendant/cards-spell-cc-double-boom-thumb-before.webp",
+          "bytes": 11304,
+          "sha256": "7a753f0d66a2e8ce9bad2d02f71c2d70806561ab1c8824b19df5bb52d435dc29"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-cc-double-boom.webp",
+          "bytes": 106402,
+          "sha256": "71d5e5fd43a2f139281ae2129a6b00439e8b1108acecba6d1cc1bfe156d25050",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-cc-double-boom.webp",
+          "bytes": 12846,
+          "sha256": "17ffdd09a98b73dab884c35814d4fbaa9faae5b06335170c6c9c8ccb82f01c02",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "cc-double-boom-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-cc-double-boom.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 106402,
+            "sha256": "71d5e5fd43a2f139281ae2129a6b00439e8b1108acecba6d1cc1bfe156d25050",
+            "source": "docs/evidence/2026-10-10-recruit-boom-pendant/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-cc-double-boom.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 11304,
+            "sha256": "7a753f0d66a2e8ce9bad2d02f71c2d70806561ab1c8824b19df5bb52d435dc29",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-cc-double-boom.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 12846,
+            "sha256": "17ffdd09a98b73dab884c35814d4fbaa9faae5b06335170c6c9c8ccb82f01c02",
+            "source": "docs/evidence/2026-10-10-recruit-boom-pendant/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-darkfort",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-9b209ef9-bc48-4340-a69c-305685681247.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-recruit-boom-pendant/cards-equip-tt7-darkfort-source.png",
+        "bytes": 1467431,
+        "sha256": "ca12ea09693ee5ea28d4147bc020f92e555b95b290b216eda6877a2d4b6b55ae"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-recruit-boom-pendant/cards-equip-tt7-darkfort-full-before.webp",
+          "bytes": 56200,
+          "sha256": "f101a4485d53ce23cd16655d4985c4e761e4a60d182ca7574164ef296febd615"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-recruit-boom-pendant/cards-equip-tt7-darkfort-thumb-before.webp",
+          "bytes": 5776,
+          "sha256": "ecd7131aee33cd8bbd664b2680cdb8d7790d8dd01b778e116f9cf2483afd3d2c"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt7-darkfort.webp",
+          "bytes": 24332,
+          "sha256": "cb9071cd2ed8768fc69a7be122d2898b2666c969a21413b977e8a651f00f7b12",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt7-darkfort.webp",
+          "bytes": 3488,
+          "sha256": "d163f00ab114b9bf7c1c725bf60910d902682093c829fef7b6d387c2e627f42c",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt7-darkfort-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/equip-tt7-darkfort.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 24332,
+            "sha256": "cb9071cd2ed8768fc69a7be122d2898b2666c969a21413b977e8a651f00f7b12",
+            "source": "docs/evidence/2026-10-10-recruit-boom-pendant/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/equip-tt7-darkfort.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 5776,
+            "sha256": "ecd7131aee33cd8bbd664b2680cdb8d7790d8dd01b778e116f9cf2483afd3d2c",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/equip-tt7-darkfort.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 3488,
+            "sha256": "d163f00ab114b9bf7c1c725bf60910d902682093c829fef7b6d387c2e627f42c",
+            "source": "docs/evidence/2026-10-10-recruit-boom-pendant/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 849,
+  "manifest_count_after": 852
+}

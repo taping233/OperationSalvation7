@@ -1,0 +1,16 @@
+{
+  "card_id": "cc-cursed-blade",
+  "card_name": "诅咒之刃",
+  "tool": "built-in image_gen",
+  "status": "candidate-delivered",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-7997a3f9-bf8f-47aa-ba4f-b057674b54f7.png",
+  "output": ".tmp/imagegen/2026-10-11-cursed-blade/cursed-blade-redraw.png",
+  "sha256": "de28d1bdf164c99132e53c45600fb73cb0a9e28fa44994a3f1bf4a5ffc29ef18",
+  "bytes": 1946368,
+  "acquisition": "Copied from built-in ImageGen output",
+  "visual_review": "已查看工具返回画作：竖直黑剑、断链、紫咒纹、剑尖入地与放射裂口保留；背景和地面宽笔块面概括",
+  "runtime_installed": false,
+  "tests_run": false,
+  "build_run": false,
+  "committed": false
+}

@@ -1,0 +1,234 @@
+{
+  "count": 38,
+  "beforeSha256": "85ab9f73a57a2171a9c4184e41c3ca8e5550ef10f32f36a32fdda5d423f9bedb",
+  "owners": [
+    {
+      "key": "WF-zzz-base-reference-1012",
+      "owner": "Friday（Codex 绝区零基地参考板 WF-zzz-base-reference-1012 / 01a12fb5）",
+      "paths": "docs/evidence/2026-10-12-zzz-base-reference/；本表自有行；127.0.0.1:5319只读参考板服务，PID32380，exec68491，cwd同参考目录",
+      "status": "完成未提交、编辑释放；21主题/14实图/123细节/约1.26万汉字/2演示；SHA与本地链接、语法、docs守卫通过；Codex当前窗口1606×956真实点击验证事件/领奖成功失败/确认与Esc/原图放大；证据README与browser/static-verification；5319保留供老板阅读，只读白名单非游戏服务；无游戏修改/build/提交"
+    },
+    {
+      "key": "WF-departure-rules-remove-1012",
+      "owner": "Friday（Codex 整备规则文字删除 WF-departure-rules-remove-1012 / 01a12f90）",
+      "paths": "game/src/hub/game.hub.depart.js仅规则说明块；tests/departure-browse-state.test.js仅对应断言；docs/evidence/2026-10-12-departure-rules-remove/；本表自有行",
+      "status": "完成未提交、编辑释放；规则说明已移除，3文件42项测试通过；Codex内置当前窗口真实点击到达整备，说明节点不存在，console error为空；证据2026-10-12-departure-rules-remove；复用5200/PID36028，非本会话服务；无新服务/build/提交"
+    },
+    {
+      "key": "WF-wu-career-frame-1012",
+      "owner": "Friday（Codex 无职业框候选 WF-wu-career-frame-1012 / 01a12f6f）",
+      "paths": "game/css/card-frames/{wu-career-preview,career}/；game/css/wu-career-frame-preview.css；game/css/card-layout-selected.css仅职业框导入；game/src/wu-career-frame-preview.js；game/src/rarity-design-lab.js仅末尾独立模块接入（避开他会话接入说明）；docs/cards/career-frames.md；docs/evidence/2026-10-12-wu-career-frame/；本表自有行",
+      "status": "完成未提交、编辑释放；五人物框及无主素框已接入rv6；CSS/JS/XML、映射与资源路径通过；无首款预览已观察，五人物正式入口未实页；按老板要求不再展示；无build/提交/新服务"
+    },
+    {
+      "key": "WF-large-card-row-1012",
+      "owner": "Friday（Codex 大卡单排 WF-large-card-row-1012 / 01a12f6f）",
+      "paths": "game/css/base-personnel-v12.css仅招式；game/css/base-logistics-trade-v12.css仅仓库卡排；game/src/hub/hub.navigation-v7.js仅角色改配置文案；docs/evidence/2026-10-12-large-card-row/；本表自有行",
+      "status": "完成未提交、编辑释放；两CSS解析、Codex内置当前窗口招式分页/点卡/搜索/两角色与仓库5种大卡已核验；招式无底板；追加归档状态18px/下移6px、导航角色改配置，内置实页已核验；证据2026-10-12-large-card-row；库存多页未实测，未build/提交/新服务"
+    },
+    {
+      "key": "WF-feedback-default-1012",
+      "owner": "Friday（Codex 留言默认修复 WF-feedback-default-1012 / 接班01a12f5a）",
+      "paths": "game/src/ui/{page-motion-profiles,surface-motion}.js仅继承基地方向；game/css/base-page-motion-v7.css仅继承基地方向；game/src/audio/{sound,sound.music.player}.js仅生命周期清理；game/css/home-layers.css仅黄线；game/css/inventory-zoom.css仅仓库操作区；docs/audio-system.md；docs/evidence/2026-10-12-feedback-default/；本表自有行",
+      "status": "完成未提交、编辑释放；BGM重复实例/HMR释放、黄线18秒一程、仓库紧凑按钮已实现，效果未实测；未碰WF-stash-inspect的footer与base-camp属地；证据见同目录README.md；按老板要求无测试/实页/build/提交/新服务"
+    },
+    {
+      "key": "WF-pool-wallpaper-1012",
+      "owner": "Friday（Codex 单区招式与新春壁纸 WF-pool-wallpaper-1012）",
+      "paths": "game/src/hub/hub.personnel.js仅招式布局与点击；game/css/base-personnel-v12.css仅招式单区；game/src/core/art.js仅spring映射；game/assets/portraits/full/wu-spring-v15.webp；game/assets/asset-manifest.json仅新增素材；docs/evidence/2026-10-12-pool-wallpaper/；四角色皮肤HANDOFF-CURRENT仅spring现状",
+      "status": "完成未提交、编辑释放；老板明确不验证，最终版未测试/实页；复用5200，无新服务/build/提交"
+    },
+    {
+      "key": "WF-minimax-animation-1012",
+      "owner": "Friday（Codex MiniMax动画切换 WF-minimax-animation-1012）",
+      "paths": "docs/evidence/2026-10-12-minimax-animation/；game/art-source/characters/wu-minimax-20261012/；本表自有行",
+      "status": "完成未提交、编辑释放；待老板确认白底基准，非透明运行素材；未上传/生成视频、未改运行帧，无新服务/build/提交"
+    },
+    {
+      "key": "WF-title-glass-1012",
+      "owner": "Friday（Codex 启动首页样式恢复 WF-title-glass-1012 / 01a12ba3）",
+      "paths": "game/css/{title-p0,home-polish,home-layers}.css；docs/evidence/2026-10-12-WF-title-glass/；本表自有行",
+      "status": "老板否决本轮两版并要求原版，已按匹配的修改前副本恢复三个首页 CSS；编辑释放，原共享未提交设计归属保留；恢复原版后仅按老板要求去掉首页按钮细斜纹，贴层/轮廓/玻璃/动效保留，完成未提交、编辑释放；基地改动未动；沿不测试要求，无实页/build/提交/服务操作"
+    },
+    {
+      "key": "WF-base-redesign-v7",
+      "owner": "Friday（Codex 基地大页重做 WF-base-redesign-v7 / 新会话接班，原01a12b26）",
+      "paths": "追加hub.presentation.js仅角色稳定节点与基地分块；ui/page-motion-profiles.js仅base-content配置、surface-motion.js仅按页面配置错峰上限；base-motion-v4.js仅共用局部刷新；根：game/src/hub/{game.hub,hub.home-v3,hub.navigation-v7,hub.home-icons-v10,base-page-motion-v7,hub.materials}.js；game/css/{base-framework-v7,base-home-v7,base-page-motion-v7}.css；game/assets/icons/base-v12/、asset-manifest仅新增四图；base-design-preview-v7；development基地段；自有证据与台账。Sol中 personnel：hub.personnel.js/base-personnel-v12.css；logistics_trade：hub.warehouse.js/hub.warehouse-categories-v7.js/hub.trade-shop-v5.js/base-logistics-trade-v12.css；archive_facilities：hub.archive-v3.js/hub.collection-v4.js/hub.facilities.js/hub.courtyard-v3.js仅HTML/base-archive-facilities-v12.css；本轮core/art.js仅三皮肤文件映射、portraits/full/wu-{casual,spring,beach}-v12.webp与三条manifest；自有皮肤证据2026-10-12-WF-base-skins",
+      "status": "整体基地UI整改仍暂停，局部改动完成未提交归属保留；已认可春日机车v14接入；旗袍闭裙与泳装景深版本仅候选，默认无原版保留；按老板要求移交四角色十二款新皮肤任务，原会话随后不再写源码。无测试/build/提交/推送/服务操作；有效生图交接见2026-10-12-WF-four-character-skins/HANDOFF-CURRENT.md。"
+    },
+    {
+      "key": null,
+      "owner": "Friday（Codex 无六帧稿展示 wu-v9-sheet-display-1010）",
+      "paths": "game/art-source/characters/wu-slim-sprites-20261010/action-gallery/{index.html,README.md}；game/art-source/characters/wu-slim-sprites-20261010/drawn-attack-v9/README.md；本表自有行",
+      "status": "完成未提交、编辑释放；仅原图展示，下面动作播放器沿用旧版本；按老板约定未检查测试，复用5200，无新服务、不build、不提交"
+    },
+    {
+      "key": null,
+      "owner": "Friday（Codex 无攻击一致性重绘 wu-drawn-attack-v9-1010）",
+      "paths": "game/art-source/characters/wu-slim-sprites-20261010/drawn-attack-v9/；docs/evidence/2026-10-10-wu-drawn-attack-v9/；本表自有行",
+      "status": "完成未提交、编辑释放；内置imagegen同图六姿势及局部剑型修订；候选待老板查看，工具输出灰背景仍残留；原图/提示/获取路径/SHA已留存；未额外检查测试，未接入，无新服务、不build、不提交"
+    },
+    {
+      "key": null,
+      "owner": "Friday（Codex 无整帧攻击试绘 wu-drawn-attack-v8-1010）",
+      "paths": "game/art-source/characters/wu-slim-sprites-20261010/drawn-attack-v8/；game/art-source/characters/wu-slim-sprites-20261010/action-gallery/{gallery.js,index.html,README.md}；docs/evidence/2026-10-10-wu-drawn-attack-v8/；本表自有行",
+      "status": "完成未提交、编辑释放；内置imagegen四张完整攻击绘画帧，已接四动作页；慢蓄力/快斩/短停/缓收，旧攻击保留；按老板要求未检查测试，复用5200，无新服务、不build、不提交"
+    },
+    {
+      "key": null,
+      "owner": "Friday（Codex 展示页待机再次增幅 wu-gallery-idle-more-1010）",
+      "paths": "game/art-source/characters/wu-slim-sprites-20261010/action-gallery/{idle.js,README.md}；本表自有行",
+      "status": "完成未提交、编辑释放；呼吸与手摆较上轮再加50%；按老板要求只修改，未检查测试；复用5200，无新服务、不build、不提交"
+    },
+    {
+      "key": null,
+      "owner": "Friday（Codex 展示页待机增幅 wu-gallery-idle-1010）",
+      "paths": "game/art-source/characters/wu-slim-sprites-20261010/action-gallery/{idle.js,gallery.js,README.md}；docs/evidence/2026-10-10-wu-action-gallery/待机增幅；本表自有行",
+      "status": "完成未提交、编辑释放；胸肩呼吸2.2倍与持剑臂摆动增幅；老板追加后续只调不检测，自行查看；原动作资产只读，复用5200，无新服务、不build、不提交"
+    },
+    {
+      "key": "WF-run-city-cut-1010",
+      "owner": "Friday（Codex 地图战斗城廓过场 WF-run-city-cut-1010）",
+      "paths": "game/src/run/game.run.scenes.js仅过场呈现/战斗节点配置；game/src/run/game.run.altar.js仅出征presentation；game/src/ui/camp-entry.js共享工厂注释；game/src/ui/interface-motion.js仅城廓分支跳过通用编排；game/css/camp-entry.css仅city-run-transition；docs/development.md；docs/evidence/2026-10-10-camp-cut/；本表自有行",
+      "status": "完成未提交、编辑释放；按老板要求免测试/实页、待老板验收；无服务、不build、不提交"
+    },
+    {
+      "key": null,
+      "owner": "Friday（Codex 无四动作展示 wu-action-gallery-1010）",
+      "paths": "game/art-source/characters/wu-slim-sprites-20261010/action-gallery/；docs/evidence/2026-10-10-wu-action-gallery/；本表自有行",
+      "status": "完成未提交、编辑释放；四组同页、播放/暂停/逐帧/放大返回/顺序演示；当前Codex实页真实控件验收、ready=true/error=null、顺序结束死亡帧4停留；语法与docs守卫通过；既有资产只读，复用5200，无新服务、不build、不提交"
+    },
+    {
+      "key": "WF-studio-city-cut-1010",
+      "owner": "Friday（Codex 照相馆城廓过场 WF-studio-city-cut-1010）",
+      "paths": "game/src/ui/{camp-entry,page-loading}.js；game/css/{camp-entry,page-loading}.css；game/src/hub/game.cardslib.js仅加载presentation；docs/development.md；docs/evidence/2026-10-10-camp-cut/；本表自有行",
+      "status": "完成未提交、编辑释放；按老板要求免测试/实页，待老板验收；无服务、不build、不提交"
+    },
+    {
+      "key": null,
+      "owner": "Friday（Codex 无逐帧死亡重绘 wu-drawn-death-v2-1010）",
+      "paths": "game/art-source/characters/wu-slim-sprites-20261010/drawn-death-v2/；docs/evidence/2026-10-10-wu-drawn-death-v2/；本表自有行",
+      "status": "完成未提交、编辑释放；内置imagegen四张完整透明绘画帧，闭眼/失衡/跪撑/侧倒/躺倒；当前Codex实页逐帧及单次播放核对，最后帧停留；候选未实装；旧死亡停用，无新服务、不build、不提交"
+    },
+    {
+      "key": "WF-camp-cut-1010",
+      "owner": "Friday（Codex 基地切面转场 WF-camp-cut-1010）",
+      "paths": "game/src/ui/camp-entry.js；game/css/camp-entry.css；game/art-source/ui/camp-transition-20261010/；game/assets/scenes/camp-transition-city-v1.webp；tests/archive-motion.test.js；docs/development.md动效入口；docs/evidence/2026-10-10-camp-cut/；本表自有行",
+      "status": "完成未提交、编辑释放；新图42692字节，PNG本地保留并排除git；按老板要求免测试/实页，待老板验收；无服务，不build、不提交"
+    },
+    {
+      "key": "WF-blood-arrow-1010",
+      "owner": "Friday（Codex 血箭重绘 WF-blood-arrow-1010）",
+      "paths": "game/assets/{cards,thumbs/cards}/martial-tt3-blood-arrow.webp；game/data/art-mapping.json仅本卡revision；asset-manifest.json仅两条/count；docs/evidence/2026-10-10-blood-arrow/request.json、receipt.json；本表自有行",
+      "status": "完成未提交、编辑释放；已看生成画作，未测试/实页/build，无新服务、不提交"
+    },
+    {
+      "key": "WF-sapper-bomb-1010",
+      "owner": "Friday（Codex 矿工炸药重绘 WF-sapper-bomb-1010）",
+      "paths": "game/assets/{cards,thumbs/cards}/equip-tt3-sapper-bomb.webp；game/data/art-mapping.json仅本卡revision；asset-manifest.json仅两条/count；docs/evidence/2026-10-10-sapper-bomb/request.json、receipt.json；本表自有行",
+      "status": "完成未提交、编辑释放；已看生成画作，未测试/实页/build，无新服务、不提交"
+    },
+    {
+      "key": "WF-moon-longsword-1010",
+      "owner": "Friday（Codex 满月接入与长剑重绘 WF-moon-longsword-1010）",
+      "paths": "game/assets/{cards,thumbs/cards}/{spell-tt3-nature-form,equip-tt3-longsword}.webp；game/data/art-mapping.json仅两卡revision；asset-manifest.json仅对应条目/count；docs/evidence/2026-10-10-moon-longsword/request.json、receipt.json；本表自有行",
+      "status": "完成未提交、编辑释放；已看生成画作，未测试/实页/build，无新服务、不提交"
+    },
+    {
+      "key": "WF-repeat-shot-1011",
+      "owner": "Friday（Codex 连射重绘 WF-repeat-shot-1011）",
+      "paths": "game/assets/{cards,thumbs/cards}/martial-tt3-double-shot.webp；game/data/art-mapping.json仅本卡revision；asset-manifest.json仅两条/count；docs/evidence/2026-10-11-repeat-shot/；本表自有行",
+      "status": "完成未提交、编辑释放；已看成图，大小图同源；无服务，未测试/实页/build、不提交"
+    },
+    {
+      "key": "WF-ice-spike-1011",
+      "owner": "Friday（Codex 冰刺重出 WF-ice-spike-1011）",
+      "paths": "game/assets/{cards,thumbs/cards}/spell-tt3-ice-spike.webp；game/data/art-mapping.json仅本卡revision；asset-manifest.json仅两条/count；docs/evidence/2026-10-11-ice-spike-{redraw,frozen-gear}/；本表自有行",
+      "status": "完成未提交、编辑释放；已看成图，大小图同源；无服务，未测试/实页/build、不提交"
+    },
+    {
+      "key": "WF-flying-cleave-1011",
+      "owner": "Friday（Codex 飞身劈重绘 WF-flying-cleave-1011）",
+      "paths": "game/assets/{cards,thumbs/cards}/martial-tt3-fly-arrowhawk.webp；game/data/art-mapping.json仅本卡revision；asset-manifest.json仅两条/count；docs/evidence/2026-10-11-flying-cleave{,-simple}/；本表自有行",
+      "status": "完成未提交、编辑释放；已看成图，大小图同源；无服务，未测试/实页/build、不提交"
+    },
+    {
+      "key": "WF-grope-1011",
+      "owner": "Friday（Codex 摸索两步重绘 WF-grope-1011）",
+      "paths": "game/assets/{cards,thumbs/cards}/spell-tt3-grope.webp；game/data/art-mapping.json仅tt3-grope revision；asset-manifest.json仅两条/count；docs/evidence/2026-10-11-grope-{redraw,line-repaint}/；本表自有行",
+      "status": "完成未提交、编辑释放；已看成图，大小图同源接入；无服务，未测试/实页/build、不提交"
+    },
+    {
+      "key": "WF-mage-pouch-1011",
+      "owner": "Friday（Codex 法师锦囊有色底重置 WF-mage-pouch-1011）",
+      "paths": "game/assets/{cards,thumbs/cards}/spell-tt7-stratagem.webp；game/data/art-mapping.json仅tt7-stratagem revision；asset-manifest.json仅两条/count；docs/evidence/2026-10-11-mage-pouch-reset/；本表自有行",
+      "status": "完成未提交、编辑释放；已看成图，大小图同源；无服务，未测试/实页/build、不提交"
+    },
+    {
+      "key": "WF-pierce-1011",
+      "owner": "Friday（Codex 穿刺重绘 WF-pierce-1011）",
+      "paths": "game/assets/{cards,thumbs/cards}/expedition-starters/pierce.webp；game/data/art-mapping.json仅tt3-skewer revision；asset-manifest.json仅两条/count；docs/evidence/2026-10-11-pierce-{redraw,thorn-bell}/；本表自有行",
+      "status": "完成未提交、编辑释放；已看成图，原图/缩略图同源；无服务，未测试/实页/build、不提交"
+    },
+    {
+      "key": "WF-forge-armor-1011",
+      "owner": "Friday（Codex 铸甲重绘 WF-forge-armor-1011）",
+      "paths": "game/assets/{cards,thumbs/cards}/martial-tt2-turtlearmor.webp；game/data/art-mapping.json仅本卡revision；asset-manifest.json仅两条/count；docs/evidence/2026-10-11-forge-armor/；本表自有行",
+      "status": "完成未提交、编辑释放；已看成图，原图/缩略图同源；无服务，未测试/实页/build、不提交"
+    },
+    {
+      "key": "WF-treasure-hunt-1011",
+      "owner": "Friday（Codex 寻宝重出 WF-treasure-hunt-1011）",
+      "paths": "game/assets/{cards,thumbs/cards}/spell-tt3-treasure-hunt.webp；game/data/art-mapping.json仅本卡revision；asset-manifest.json仅两条/count；docs/evidence/2026-10-11-treasure-hunt-{redraw,searchlight,brush-v2}/；本表自有行",
+      "status": "完成未提交、编辑释放；已看生成画作，大小图同源接入；NAI仍偏细线且未收束已定向修正；无服务，未测试/实页/build、不提交"
+    },
+    {
+      "key": "WF-big-chest-imagery-1010",
+      "owner": "Friday（Codex 搜索大宝箱意象重绘 WF-big-chest-imagery-1010）",
+      "paths": "game/assets/{cards,thumbs/cards}/spell-cmtn28jv33wx.webp；game/data/art-mapping.json仅本卡revision；asset-manifest.json仅两条/count；docs/evidence/2026-10-10-big-chest-imagery/；本表自有行",
+      "status": "完成未提交、编辑释放；已看生成画作，原图/缩略图同源；无新服务，未测试/实页/build、不提交"
+    },
+    {
+      "key": "WF-jianghu-class-1010",
+      "owner": "Friday（Codex 职业江湖救急改重绘 WF-jianghu-class-1010）",
+      "paths": "game/assets/{cards,thumbs/cards}/martial-cmtn1wnhhym.webp；game/data/art-mapping.json仅本卡revision；asset-manifest.json仅两条/count；docs/evidence/2026-10-10-jianghu-class-{redraw,forehead}/；本表自有行",
+      "status": "完成未提交、编辑释放；已看局部修图，原图/缩略图同源接入；无新服务，未测试/实页/build、不提交"
+    },
+    {
+      "key": "WF-base-ui-polish-1010",
+      "owner": "Friday（Codex 基地二游迭代 WF-base-ui-polish-1010）",
+      "paths": "game/src/hub/hub.{personnel,warehouse,presentation}.js；game/src/hub/game.hub.depart.js仅提示；game/src/hub/departure.view-updates.js仅焦点/计数；game/css/base-camp-rework.css；docs/evidence/2026-10-10-WF-base-ui-polish-1010/；本表自有行",
+      "status": "完成未提交、编辑释放；未测试/lint/类型/浏览器/build，待老板实页验收；玩法/存档/资源命令与原画不改，无新服务、不提交"
+    },
+    {
+      "key": "WF-base-ui-reference-1010",
+      "owner": "Friday（Codex 二游参考基地整改 WF-base-ui-reference-1010）",
+      "paths": "game/src/hub/hub.{personnel,warehouse,facilities,archive,presentation,visuals}.js；game/src/hub/game.hub.pages.js仅商店/待复原/归档奖励/成就见闻呈现；game/src/hub/game.hub.depart.js仅出征呈现；game/css/base-camp-rework.css；docs/evidence/2026-10-10-WF-base-ui-reference-1010/；本表自有行",
+      "status": "完成未提交、编辑释放；实施记录与九来源指纹已保存；按老板约定未测试/lint/类型/实页/build，待老板验收；无新服务、不提交"
+    },
+    {
+      "key": "WF-base-style-prune-1010",
+      "owner": "Friday（Codex 基地旧样式清理 WF-base-style-prune-1010）",
+      "paths": "game/css/base-camp.css、game/css/base-camp-compact.css；docs/evidence/2026-10-10-WF-base-style-prune-1010/；本表自有行",
+      "status": "完成未提交、编辑释放；仅静态清理与写入指纹核对；未测试/实页/build，待老板查看；其他CSS/JS/入口及放大层属地未改，无新服务、不提交"
+    },
+    {
+      "key": "WF-base-design-audit-1010",
+      "owner": "Friday（Codex 独立基地设计审核 WF-base-design-audit-1010）",
+      "paths": "docs/evidence/2026-10-10-WF-base-design-audit-1010/；本表自有行；5200仅只读浏览",
+      "status": "完成未提交、编辑释放；未改源码/旧任务、未跑测试/交易/培养/开局；动画与条件状态缺口已标明；无新服务、不提交"
+    },
+    {
+      "key": null,
+      "owner": "Friday（Codex 无动画实装 wu-sprite-install-1009）",
+      "paths": "game/src/battle/view/battle.frames.js；game/src/battle/view/battle.frame-catalog.js；game/src/battle/core/battle.presentation.js；game/src/battle/core/battle.lifecycle.js；game/assets/portraits/frames/wu/sprite-v1/；game/assets/asset-manifest.json仅对应条目；tests/battle-frames-lifecycle.test.js；另含新增定向测试；docs/evidence/2026-10-09-wu-sprite-install/；game/assets/README.md",
+      "status": "10-10老板确认原会话已结束，编辑占用释放；共用播放器与素材说明交由three-role-sprites-1010接管并保留既有改动；原任务验证状态未追溯，复用5200，无新服务、不build、不提交"
+    },
+    {
+      "key": "WF-base-camp-redo-1009",
+      "owner": "Friday（Codex 本会话，基地统一美术 WF-base-camp-redo-1009）",
+      "paths": "game/src/hub/{game.hub.js,game.hub.pages.js,game.hub.depart.js}；game/src/run/game.run.altar.js 仅可取消出征选角/卡池作用域标记；game/css/base-camp{,-roster,-compact}.css；game/index.html 仅基地样式链；tests/hub-flow-regression.test.js；10-10追加 game/src/ui/interface-motion.js仅基地刷新分支、tests/surface-motion.test.js对应回归；docs/evidence/2026-10-09-base-camp-redo/；本表自有行；复用5200，无新服务",
+      "status": "待验收；本轮切页黑屏修复完成未提交、编辑释放；原整体窄窗收尾见任务记录"
+    }
+  ]
+}

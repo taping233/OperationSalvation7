@@ -1,0 +1,167 @@
+/* 2026-10-10 老板确认的第一款：共用卡牌正面样式。
+   最后加载；覆盖正式卡牌、悬停预览与购买/出牌克隆；消费现行 hs-card/rv* 标记，不改数据、费用、出牌或发现命令。 */
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card {
+  --tier: #929b9f; --tier-light: #e3e9eb; --tier-label: '初始';
+  --tier-rim: linear-gradient(135deg, var(--tier-light), var(--tier) 25%, #25313b 55%, var(--tier-light));
+  display: grid !important; container-type: inline-size; grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto auto auto;
+  min-height: 14.93em; height: auto !important; aspect-ratio: 272 / 406 !important;
+  padding: .14em !important; border: 1px solid var(--tier-light) !important;
+  border-radius: .34em !important; background: var(--tier-rim) !important;
+  box-shadow: 0 .3em .7em #0006 !important; overflow: visible;
+}
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv1 { --tier: #929b9f; --tier-light: #e3e9eb; --tier-label: '古朴'; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv2 { --tier: #509ccb; --tier-light: #c0e7ff; --tier-label: '稀有'; box-shadow: 0 .3em .7em #0007, 0 0 .3em #3180c24d !important; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv3 { --tier: #9e72ce; --tier-light: #e3caff; --tier-label: '史诗'; box-shadow: 0 .3em .7em #0007, 0 0 .45em #9954dc55 !important; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv4 { --tier: #d0a13d; --tier-light: #ffe6a3; --tier-label: '传说'; box-shadow: 0 .3em .7em #0008, 0 0 .45em #e4ac3b4d !important; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv5 { --tier: #6c9c9f; --tier-light: #b4dad5; --tier-label: '衍生'; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv6 { --tier: #364451; --tier-light: #c4d0d9; --tier-label: '职业'; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card:is(.rv7, .rv-prism) {
+  --tier: #c2b5eb; --tier-light: #f9e4f3; --tier-label: '棱彩';
+  --tier-rim: linear-gradient(135deg, #f6c7e9, #f6df9d, #a3ecda, #adc9f8, #c9b6ef);
+  box-shadow: 0 .3em .7em #0008, -.1em 0 .4em #eda3dc4d, .1em 0 .4em #9ed5eb4d !important;
+}
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card::before { display: none !important; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card:is(.rv3, .rv4)::before {
+  content: '' !important; display: block !important; position: absolute !important;
+  inset: -1px !important; padding: 1px !important; border: 0 !important;
+  border-radius: inherit !important; pointer-events: none !important; z-index: 6 !important;
+  background: linear-gradient(115deg, transparent, var(--tier-light) 45%, #fff8 55%, transparent) !important;
+  box-shadow: none !important;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: cardTierEdgeLight 9s ease-in-out infinite;
+}
+@keyframes cardTierEdgeLight { 0%, 100% { opacity: .2; } 50% { opacity: .85; } }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card::after {
+  content: '' !important; display: block !important; position: absolute !important;
+  inset: .15em !important; width: auto !important; height: auto !important;
+  border-radius: .22em; pointer-events: none; z-index: 1;
+  background: linear-gradient(transparent 49%, #10182394 65%, #101823ec 82%, #0c131ded 100%) !important;
+  opacity: 1 !important; box-shadow: none !important;
+}
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card:is(.rv7, .rv-prism)::after {
+  background: linear-gradient(transparent 49%, #10182394 65%, #101823ec 82%, #0c131ded 100%), linear-gradient(122deg, transparent 22%, #f9b5e937 28%, #ffe69c37 35%, #9ff5d838 42%, #a9d5ff30 48%, #d6b9ff30 54%, transparent 61%) !important;
+}
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-art {
+  position: absolute !important; inset: .15em !important; width: auto !important;
+  height: auto !important; min-height: 0 !important; aspect-ratio: auto !important;
+  margin: 0 !important; padding: 0 !important; border: 0 !important;
+  border-radius: .22em !important; box-shadow: none !important; z-index: 0 !important;
+}
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-art :is(.art-card-image, .art-hero-fit) {
+  width: 100% !important; height: 100% !important; object-fit: cover !important; padding: 0 !important;
+}
+/* 金蝉脱壳保留人物与草替身：横幅按卡宽 130% 靠上展示。 */
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-art:has(img[data-asset-key="card-martial-tt7-goldencicada"]) {
+  background: #1e2130 !important; overflow: hidden !important;
+}
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-art img[data-asset-key="card-martial-tt7-goldencicada"] {
+  position: absolute; top: 0 !important; left: -15% !important;
+  width: 130% !important; height: auto !important; object-fit: contain !important;
+}
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-art::before,
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-art::after { display: none !important; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-name {
+  position: relative !important; grid-row: 2; z-index: 3 !important;
+  width: calc(100% - 1.4em) !important; min-height: 1.35em !important;
+  margin: 0 .7em .38em !important; padding: 0 !important;
+  border: 0 !important; border-radius: 0 !important; clip-path: none !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  background: none !important; box-shadow: none !important;
+  color: #f5f5f2 !important; font-size: 9.2cqw !important; line-height: 1.35; letter-spacing: .04em !important;
+  text-shadow: 0 2px 2px #000b !important; white-space: normal !important;
+}
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-name span {
+  color: #f5f5f2 !important; background: none !important; -webkit-text-stroke: 0 !important;
+  white-space: normal !important; overflow-wrap: anywhere; text-align: center;
+}
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv3 .hsc-name span { color: #f0defe !important; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv4 .hsc-name span,
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card:is(.rv7, .rv-prism) .hsc-name span {
+  color: transparent !important; background-clip: text !important; -webkit-background-clip: text !important;
+  text-shadow: none !important; filter: drop-shadow(0 2px 1px #000);
+}
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv4 .hsc-name span { background-image: linear-gradient(105deg, #d09a3e, #f9dd98 22%, #fff3cd 45%, #d7a947 58%, #ffe9a9 82%, #ba8730) !important; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card:is(.rv7, .rv-prism) .hsc-name span { background-image: linear-gradient(105deg, #f4b9df, #fff0c5 25%, #baf4e0 45%, #bcd6ff 68%, #e7c8ff 85%, #ffe7f8) !important; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-cost {
+  position: absolute !important; top: -.22em !important; left: -.33em !important;
+  width: 19.5cqw !important; height: 19.5cqw !important; z-index: 8 !important;
+  border: .11em solid #c2d2d8 !important; border-radius: .44em !important;
+  background: linear-gradient(135deg, #a3c6d2, #24516a 38%, #122c42 80%) !important;
+  color: #effcff !important; font-size: 9.93cqw; transform: rotate(-4deg);
+  box-shadow: 0 2px 0 #10181c, 0 0 0 1px #32454f !important;
+  text-shadow: 0 2px 2px #000c !important; clip-path: none !important;
+}
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-cost.mod-down { background: linear-gradient(135deg, #b8e6d2, #286e57 40%, #123b2c) !important; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-cost.mod-up { background: linear-gradient(135deg, #f5cbc0, #a55240 40%, #53271e) !important; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-type {
+  position: absolute !important; top: 3.2%; right: 4.4%; z-index: 4 !important;
+  display: block !important; width: 28% !important; height: 1.65em; min-height: 0;
+  margin: 0 !important; padding: 0 !important; border: 1px solid var(--tier) !important;
+  border-radius: .2em !important; background: #16212be6 !important;
+  color: transparent !important; font-size: 4.78cqw !important; line-height: 1.65;
+  box-shadow: none !important; letter-spacing: .06em !important; overflow: hidden;
+}
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-type > * { visibility: hidden; pointer-events: none; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-type::after {
+  content: var(--tier-label); position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center; padding-left: 1.2em;
+  color: var(--tier-light); font-weight: 700; pointer-events: none;
+}
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-gem {
+  display: block !important; position: absolute !important; top: calc(3.2% + .1em) !important; left: auto !important; right: 24% !important; z-index: 5;
+  width: 5.5cqw !important; height: 7.7cqw !important; margin: 0 !important; transform: none !important;
+  border: 1px solid var(--tier-light); border-radius: 50% !important;
+  background: radial-gradient(ellipse at 35% 28%, var(--tier-light), var(--tier) 45%, #263241 95%) !important;
+  box-shadow: 0 1px 2px #0008 !important;
+}
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card:is(.rv7, .rv-prism) .hsc-gem { background: conic-gradient(#f6c7e9, #f6df9d, #a3ecda, #adc9f8, #c9b6ef, #f6c7e9) !important; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc {
+  position: relative !important; grid-row: 3; z-index: 3;
+  display: block !important; width: calc(100% - 1.4em) !important;
+  min-height: 2.2em; height: auto !important; margin: 0 .7em .45em !important;
+  padding: 0 !important; border: 0 !important; border-radius: 0 !important;
+  background: none !important; color: #f1f3f4 !important; box-shadow: none !important;
+  font-size: 5.52cqw !important; line-height: 1.7; text-align: left; overflow: visible !important;
+}
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc > span {
+  display: block !important; -webkit-line-clamp: unset !important; overflow: visible !important;
+}
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc .d-num { color: #f1f3f4 !important; font-size: 1.05em !important; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc .d-kw { color: #eee4ce !important; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc .d-term { color: #c5e3ed !important; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-kw {
+  position: relative; grid-row: 4; z-index: 3 !important;
+  margin: 0 .4em .35em !important; justify-content: center; flex-wrap: wrap;
+}
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card :is(.hsc-dmg, .hsc-val) { display: none !important; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .rv-beam { z-index: 6; padding: 1px; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .rv-beam::before {
+  background: linear-gradient(115deg, #f6c7e9, #f6df9d, #a3ecda, #adc9f8, #c9b6ef, #f6c7e9) !important;
+}
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv-gold .rv-beam::before { background: linear-gradient(115deg, #d0a13d, #fff0bd, #d7a947, #ffdf84, #d0a13d) !important; }
+body.reduce-motion :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card::before,
+body.reduce-motion :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .rv-beam::before { animation: none !important; }
+@media(prefers-reduced-motion: reduce) {
+  body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card::before,
+  body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .rv-beam::before { animation: none !important; }
+}
+
+/* Accepted ink ornaments: effective rarity drives the same full-art decoration. */
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card { --card-ornament: none; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv2 { --card-ornament: url('./card-ornaments/rare.svg'); }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv3 { --card-ornament: url('./card-ornaments/epic.svg'); }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv4 { --card-ornament: url('./card-ornaments/legendary.svg'); }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card:is(.rv7, .rv-prism) { --card-ornament: url('./card-ornaments/prism.svg'); }
+/* Let the decorative pseudo-element sit above the reading gradient; art stays below it. */
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-art { z-index: auto !important; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-art::after {
+  content: '' !important; display: block !important; position: absolute !important;
+  inset: 0 !important; width: auto !important; height: auto !important;
+  background: var(--card-ornament) center / 100% 100% no-repeat !important;
+  border: 0 !important; border-radius: inherit !important; box-shadow: none !important;
+  clip-path: inset(0 round .22em); opacity: 1 !important; z-index: 4 !important;
+  pointer-events: none !important;
+}

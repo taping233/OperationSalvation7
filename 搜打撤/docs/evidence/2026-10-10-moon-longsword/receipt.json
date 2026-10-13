@@ -1,0 +1,163 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-nature-form",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-e810a454-633d-42ed-9fa6-a6dd98f2c97d.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-moon-longsword/cards-spell-tt3-nature-form-source.png",
+        "bytes": 2047542,
+        "sha256": "422b425f210576c84089ce6f07f35d8841ed8154feb41c554e87b6fcadfdfbb2"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-moon-longsword/cards-spell-tt3-nature-form-full-before.webp",
+          "bytes": 229904,
+          "sha256": "eb3cad5eef916f9ee00b29c548ba55e583992f4fe544f08cabed4d1421d20ec4"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-moon-longsword/cards-spell-tt3-nature-form-thumb-before.webp",
+          "bytes": 40126,
+          "sha256": "1eb425ede8250cd0d1b61928039908d617deb6f7bcc7f79f8118d93e205eb143"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-nature-form.webp",
+          "bytes": 142786,
+          "sha256": "19d2327d152786c28136aa5c9377ae353e816bd5133dd9737029435c56fe557c",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-nature-form.webp",
+          "bytes": 20046,
+          "sha256": "5e605edc8f8cb881b9035e65fdc3d0b9bda0cd40482487a17e34a5d12c0ae327",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "xingyue-fullmoon-completing-arcs-20261005",
+      "revision_after": "xingyue-fullmoon-unveiling-builtin-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt3-nature-form.webp",
+            "ext": "webp",
+            "bytes": 229904,
+            "sha256": "eb3cad5eef916f9ee00b29c548ba55e583992f4fe544f08cabed4d1421d20ec4",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-05-WF-fullmoon-creative/images.json"
+          },
+          "after": {
+            "path": "cards/spell-tt3-nature-form.webp",
+            "ext": "webp",
+            "bytes": 142786,
+            "sha256": "19d2327d152786c28136aa5c9377ae353e816bd5133dd9737029435c56fe557c",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-moon-longsword/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-nature-form.webp",
+            "ext": "webp",
+            "bytes": 40126,
+            "sha256": "1eb425ede8250cd0d1b61928039908d617deb6f7bcc7f79f8118d93e205eb143",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-05-WF-fullmoon-creative/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-nature-form.webp",
+            "ext": "webp",
+            "bytes": 20046,
+            "sha256": "5e605edc8f8cb881b9035e65fdc3d0b9bda0cd40482487a17e34a5d12c0ae327",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-moon-longsword/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-longsword",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-29bddb0e-2b6a-4154-b5c2-d6664b5cb7d8.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-moon-longsword/cards-equip-tt3-longsword-source.png",
+        "bytes": 1549633,
+        "sha256": "7a4e0441913efc820f23260d68a628da67ab568a68125b93d337b52d929c1767"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-moon-longsword/cards-equip-tt3-longsword-full-before.webp",
+          "bytes": 33594,
+          "sha256": "cd77206731d28083bb42dee3a6a322078dee78dd873f5715e919e942b208ddf2"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-moon-longsword/cards-equip-tt3-longsword-thumb-before.webp",
+          "bytes": 3462,
+          "sha256": "f1d145433d233e384b1d48b7514cb9657a0fa5296743cc2bbe31b7f4856a56b7"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt3-longsword.webp",
+          "bytes": 21530,
+          "sha256": "442cb55cfb451e4633359500301679c933b6981510577f61380d59de08b43724",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt3-longsword.webp",
+          "bytes": 3008,
+          "sha256": "9f38fc3000b197eb4150e0420a8dc6722bf74f15961a95dcb306a52ecb99375c",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "longsword-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/equip-tt3-longsword.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 21530,
+            "sha256": "442cb55cfb451e4633359500301679c933b6981510577f61380d59de08b43724",
+            "source": "docs/evidence/2026-10-10-moon-longsword/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/equip-tt3-longsword.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 3462,
+            "sha256": "f1d145433d233e384b1d48b7514cb9657a0fa5296743cc2bbe31b7f4856a56b7",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/equip-tt3-longsword.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 3008,
+            "sha256": "9f38fc3000b197eb4150e0420a8dc6722bf74f15961a95dcb306a52ecb99375c",
+            "source": "docs/evidence/2026-10-10-moon-longsword/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 888,
+  "manifest_count_after": 889
+}

@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-grope",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a125fc-1da2-7300-83db-f2b39e275c76\\exec-f3aad655-6e5e-4690-8708-80e36492bce7.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-grope-redraw/cards-spell-tt3-grope-source.png",
+        "bytes": 2110916,
+        "sha256": "e9c7e861f197bb8f711aff15fb02c1efb7ad3838a0df72cbb60e95076fc8061f"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-grope-redraw/cards-spell-tt3-grope-full-before.webp",
+          "bytes": 92034,
+          "sha256": "b8856034393c74efb97842deba3690f82b5c5aea4a73382bbdfb9e6b531272c2"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-grope-redraw/cards-spell-tt3-grope-thumb-before.webp",
+          "bytes": 14958,
+          "sha256": "cac1c9df9cb0d9764f278d0685089935a703e0d3d030001fcb9e5c6ecca46198"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-grope.webp",
+          "bytes": 131454,
+          "sha256": "26aa7e173f784747c2786da73a0379244d152d7895d37173b2c504c96d641990",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-grope.webp",
+          "bytes": 10660,
+          "sha256": "5e94d736ac5b43af6e6042a330246600a3004202cdfaca1c2a80350b78aa4765",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt3-grope-creative-rough-20261005",
+      "revision_after": "grope-lantern-discovery-rough-20261011",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt3-grope.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 92034,
+            "sha256": "b8856034393c74efb97842deba3690f82b5c5aea4a73382bbdfb9e6b531272c2",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt3-grope.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 131454,
+            "sha256": "26aa7e173f784747c2786da73a0379244d152d7895d37173b2c504c96d641990",
+            "source": "docs/evidence/2026-10-11-grope-redraw/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-grope.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 14958,
+            "sha256": "cac1c9df9cb0d9764f278d0685089935a703e0d3d030001fcb9e5c6ecca46198",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-grope.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 10660,
+            "sha256": "5e94d736ac5b43af6e6042a330246600a3004202cdfaca1c2a80350b78aa4765",
+            "source": "docs/evidence/2026-10-11-grope-redraw/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1121,
+  "manifest_count_after": 1121
+}

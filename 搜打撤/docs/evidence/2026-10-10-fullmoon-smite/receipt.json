@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-nature-form",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12470-95d7-75e0-9477-03361e04258c\\exec-60d01be5-efcb-492b-9ec0-9dfa2f76019d.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-fullmoon-smite/cards-spell-tt3-nature-form-source.png",
+        "bytes": 1907197,
+        "sha256": "49b2091e38e50b969fcc5703c214275285c4e672cf0c9595e3c706f5730e2cb6"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-fullmoon-smite/cards-spell-tt3-nature-form-full-before.webp",
+          "bytes": 122834,
+          "sha256": "d46f182bc366b046839e8d41c6e6471005430c0ff799aadea57ff7f91352058f"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-fullmoon-smite/cards-spell-tt3-nature-form-thumb-before.webp",
+          "bytes": 18478,
+          "sha256": "7f651ea9b8c8f6fbd50283caf1effc5887465f118fad0dadb26ba3ce353c8d11"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-nature-form.webp",
+          "bytes": 104532,
+          "sha256": "aa204293c9336ee0cbbc7936a090a0b84ccac523e7e4ab4e726c6820a883156a",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-nature-form.webp",
+          "bytes": 15402,
+          "sha256": "4e1a372e0ad854a3d5bdefd2ea4ace21854b66d1c6d82eb5a4a2d9da5a8153de",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "xingyue-fullmoon-gradient-rough-20261010",
+      "revision_after": "xingyue-fullmoon-smite-style-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt3-nature-form.webp",
+            "ext": "webp",
+            "bytes": 122834,
+            "sha256": "d46f182bc366b046839e8d41c6e6471005430c0ff799aadea57ff7f91352058f",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-fullmoon-redo/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt3-nature-form.webp",
+            "ext": "webp",
+            "bytes": 104532,
+            "sha256": "aa204293c9336ee0cbbc7936a090a0b84ccac523e7e4ab4e726c6820a883156a",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-fullmoon-smite/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-nature-form.webp",
+            "ext": "webp",
+            "bytes": 18478,
+            "sha256": "7f651ea9b8c8f6fbd50283caf1effc5887465f118fad0dadb26ba3ce353c8d11",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-fullmoon-redo/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-nature-form.webp",
+            "ext": "webp",
+            "bytes": 15402,
+            "sha256": "4e1a372e0ad854a3d5bdefd2ea4ace21854b66d1c6d82eb5a4a2d9da5a8153de",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-fullmoon-smite/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1117,
+  "manifest_count_after": 1117
+}

@@ -1,0 +1,28 @@
+import { esc, escAttr } from '../core/shared.js';
+
+let slot = null, preview = '', status = 'all';
+export function cardBackGalleryHTML(base, cards) {
+  if (slot !== base.slot) { slot = base.slot; preview = ''; status = 'all'; }
+  const backs = cards.CARD_BACKS || [];
+  const selected = backs.find(back => back.id === preview) || backs.find(back => back.id === base.backSel()) || backs[0];
+  if (!selected) return '<p>暂无卡背档案</p>';
+  preview = selected.id;
+  const unlocked = base.isBackUnlocked(selected.id), equipped = base.backSel() === selected.id;
+  return `<div class="archive-backs-layout"><div class="back-grid">${backs.map(back => `<button type="button" class="back-card${back.id === preview ? ' on' : ''}" data-act="previewBack" data-id="${escAttr(back.id)}" aria-pressed="${back.id === preview}" aria-label="预览${escAttr(back.name)}"><span class="back-thumb">${cards.cardBackHTML(back.id)}</span><b>${esc(back.name)}</b><span class="dim">${base.isBackUnlocked(back.id) ? base.backSel() === back.id ? '使用中' : '已解锁' : '未解锁'}</span></button>`).join('')}</div><aside class="archive-back-preview"><div class="back-preview-art">${cards.cardBackHTML(selected.id)}</div><h3>${esc(selected.name)}</h3><p>${esc(selected.from || '默认卡背')}</p><button class="mini-btn ok" data-act="selBack" data-id="${escAttr(selected.id)}"${!unlocked || equipped ? ' disabled' : ''}>${equipped ? '当前卡背' : unlocked ? '应用卡背' : '尚未解锁'}</button></aside></div>`;
+}
+export function achievementFiltersHTML(meta) {
+  if (slot !== window.SDT.Base.slot) { slot = window.SDT.Base.slot; preview = ''; status = 'all'; }
+  const category = achievement => meta.isClaimed(achievement.id) ? 'done' : meta.isUnlocked(achievement) ? 'claimable' : 'progress';
+  return `<nav class="archive-status" aria-label="成就状态">${[['all', '全部'], ['claimable', '可领取'], ['progress', '进行中'], ['done', '已完成']].map(([id, name]) => `<button class="mini-btn${status === id ? ' ok' : ''}" data-act="archiveStatus" data-status="${id}" aria-pressed="${status === id}">${name} <small>${meta.ACHIEVEMENTS.filter(a => id === 'all' || category(a) === id).length}</small></button>`).join('')}</nav><p class="archive-empty" role="status" hidden>当前分类暂无成就记录。</p>`;
+}
+export function bindArchive(ui, refresh) {
+  const apply = () => {
+    for (const row of document.querySelectorAll('#hubMain .ach-row[data-status]')) row.hidden = status !== 'all' && row.dataset.status !== status;
+    const empty = document.querySelector('#hubMain .archive-empty');
+    if (empty) empty.hidden = [...document.querySelectorAll('#hubMain .ach-row')].some(row => !row.hidden);
+    for (const button of document.querySelectorAll('#hubMain [data-act="archiveStatus"]')) { button.classList.toggle('ok', button.dataset.status === status); button.setAttribute('aria-pressed', String(button.dataset.status === status)); }
+  };
+  apply();
+  ui.act('archiveStatus', data => { if (!['all', 'claimable', 'progress', 'done'].includes(data.status)) return; status = data.status; apply(); });
+  ui.act('previewBack', data => { preview = data.id; refresh(); });
+}

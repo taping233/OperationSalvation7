@@ -1,0 +1,57 @@
+{
+  "actions": [
+    {
+      "detail": "隔离预览档位04进入白塔整备，无出发；实际输入复验卡名去重。档位05另实走新局、物资、火堆、普通战与收取，存档复载；开发者商店用真实查看与金币不足购买控件，不写档。未构造游戏状态。",
+      "type": "real-input"
+    },
+    {
+      "detail": "本快照只读当前整备DOM与计算样式。",
+      "type": "static-inspection"
+    },
+    {
+      "detail": "18-preparation-clean.jpg；未指定viewport，随当前Codex窗口自然变化。",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "not-collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [],
+  "observedAt": "2026-10-11T11:29:59.768Z",
+  "page": {
+    "origin": "http://127.0.0.1:5337",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 1523
+    }
+  },
+  "scene": "整备卡名去重与摘要对比复验",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/current-window/18-preparation-clean.jpg"
+  ],
+  "selectors": [
+    {
+      "key": "summary",
+      "selector": "#depSummary"
+    },
+    {
+      "key": "warehouse",
+      "selector": "#depPool button"
+    },
+    {
+      "key": "confirm",
+      "selector": "#btnDeploy"
+    }
+  ]
+}

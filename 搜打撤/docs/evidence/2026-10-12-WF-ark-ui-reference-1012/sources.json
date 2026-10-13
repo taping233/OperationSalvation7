@@ -1,0 +1,163 @@
+{
+  "date": "2026-10-12",
+  "purpose": "图文参考板中的来源截图，仅用于分析",
+  "refs": [
+    {
+      "id": "event",
+      "image": "https://img2-tc.tapimg.com/moment/etag/Fi5cOyfvXIqroux0e4VS-zscOaUl.jpg/_tap_ugc.jpg",
+      "source": "https://www.taptap.cn/moment/695668996837474839",
+      "caption": "明日方舟 · 岁的界园志异 · 事件静态截图",
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-12-WF-ark-ui-reference-1012\\refs\\event.png",
+      "sha256": "dfdc92140c39cb1ef6c95de858f47afc48b2f2762a8ba72a6f40180a51eeb04a",
+      "bytes": 84827
+    },
+    {
+      "id": "map",
+      "image": "https://i.imgur.com/lmDe4UH.png",
+      "source": "https://forum.gamer.com.tw/C.php?bsn=33651&snA=9019",
+      "caption": "明日方舟 · 水月与深蓝之树 · 地图静态截图",
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-12-WF-ark-ui-reference-1012\\refs\\map.png",
+      "sha256": "879124a406ce0f270d8b291a3ce1ad53f647303ccae9e4fe27ddfdd8b55e0038",
+      "bytes": 864705
+    },
+    {
+      "id": "shop",
+      "image": "https://is-central.github.io/guides/is6-sui/is6-progression/shop-rob-button.png",
+      "source": "https://is-central.github.io/is6-sui/is6-progression/",
+      "caption": "明日方舟 · 岁的界园志异 · 商店静态截图",
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-12-WF-ark-ui-reference-1012\\refs\\shop.png",
+      "sha256": "8ff04fd2bc49ad2421aff3950ed5b2686f02b279587c72b15a79901ad6ab029a",
+      "bytes": 2115698
+    }
+  ],
+  "project_assets": [
+    {
+      "path": "game/assets/scenes/camp-transition-city-v1.webp",
+      "sha256": "da4904fb29c62a72dd43220b5f6bf8fd57eb33e7a5beae3effcaed2fdc736a5d",
+      "usage": "布局示意，不证明素材最终认可"
+    },
+    {
+      "path": "game/assets/cards/spell-tt3-ice-spike.webp",
+      "sha256": "4d6f37cdfca69aaac5d25778714f4cc5baf760dc84e061b2ff0474912127b9d2",
+      "usage": "布局示意，不证明素材最终认可"
+    },
+    {
+      "path": "game/assets/cards/martial-tt3-double-shot.webp",
+      "sha256": "611d357010717376b882bfaabc298336d9383c4bdbdf52fb04a552ccc9af3024",
+      "usage": "布局示意，不证明素材最终认可"
+    },
+    {
+      "path": "game/assets/cards/martial-tt3-bandage.webp",
+      "sha256": "8ae192b2361a6a0e1adcd57572d47c1d19f487449fb39f6d16dd5cc781578d59",
+      "usage": "布局示意，不证明素材最终认可"
+    }
+  ],
+  "output": [
+    {
+      "path": "reference-board.md",
+      "sha256": "5a2d9f81652ff89e1e7d4eec31e4c5422be7ea5aaf7691072e6ed9d152b32abd",
+      "bytes": 16146,
+      "acquisition": "内容审读后手工编写的AI主入口"
+    },
+    {
+      "path": "output/arknights-ui-reference-board.pdf",
+      "sha256": "9aa803e2a18bccc983c79c5030811b2bfba08a7eb1138fd934811ecf5a72b6b7",
+      "bytes": 10007936,
+      "acquisition": "build_board.py生成；超1MB二进制不进入git"
+    },
+    {
+      "path": "reference-board.html",
+      "sha256": "bcfc18645b1c8054dc7760ef9d2afa35a78c8ec9b296fa66571edc3af8f6fc3f",
+      "bytes": 2702616,
+      "acquisition": "build_board.py生成；超1MB二进制不进入git"
+    },
+    {
+      "path": "output/overview.jpg",
+      "sha256": "055c71ca5e64afa59b4dace52eea8471bf8e9f28ab8841cc227847cc30268658",
+      "bytes": 364530,
+      "acquisition": "build_board.py生成；超1MB二进制不进入git"
+    },
+    {
+      "path": "output/plate-01.jpg",
+      "sha256": "0c8cd923532e019711e727234e71e51e66672e119aa24bc22af9a40e50c1c197",
+      "bytes": 128036,
+      "acquisition": "build_board.py生成；超1MB二进制不进入git"
+    },
+    {
+      "path": "output/plate-02.jpg",
+      "sha256": "915deffd940a74191a740e3572b3a7577a1210ee6d3e5aef9ed0a6ea5be7345c",
+      "bytes": 207170,
+      "acquisition": "build_board.py生成；超1MB二进制不进入git"
+    },
+    {
+      "path": "output/plate-03.jpg",
+      "sha256": "e0ca38e1fa22d49ea5a9315d01f917abf66ed6bfe64544028f71d902ee9ac092",
+      "bytes": 152629,
+      "acquisition": "build_board.py生成；超1MB二进制不进入git"
+    },
+    {
+      "path": "output/plate-04.jpg",
+      "sha256": "ecf8018b407eb7dfab8a08da9214c7095940de14cb42dd14ae5e5dc4f0b61a7e",
+      "bytes": 149915,
+      "acquisition": "build_board.py生成；超1MB二进制不进入git"
+    },
+    {
+      "path": "output/plate-05.jpg",
+      "sha256": "fd18ee86a32836239beab219f76b532f11f25688bf7009d0e401e3e17c668dca",
+      "bytes": 164208,
+      "acquisition": "build_board.py生成；超1MB二进制不进入git"
+    },
+    {
+      "path": "output/plate-06.jpg",
+      "sha256": "30850737b940d28ab6a3b9791f523f2e039f95f7c18c96529fcf43e51ca9c2fa",
+      "bytes": 142218,
+      "acquisition": "build_board.py生成；超1MB二进制不进入git"
+    },
+    {
+      "path": "output/plate-07.jpg",
+      "sha256": "418a8f7f0dfd90f3b37193983b60ffb401c67549bc315c6c987652709e2f9a1c",
+      "bytes": 167504,
+      "acquisition": "build_board.py生成；超1MB二进制不进入git"
+    },
+    {
+      "path": "output/plate-08.jpg",
+      "sha256": "bff7806dc4d04e93389e2dba314aa517b2b32c47117a519cc0b91fb791e6928d",
+      "bytes": 142108,
+      "acquisition": "build_board.py生成；超1MB二进制不进入git"
+    },
+    {
+      "path": "output/plate-09.jpg",
+      "sha256": "c9948303cef6f1cbd3e5e37ba8fcf8a8a41e9fd559a024cb2a061584ddf57466",
+      "bytes": 164878,
+      "acquisition": "build_board.py生成；超1MB二进制不进入git"
+    },
+    {
+      "path": "output/plate-10.jpg",
+      "sha256": "33200ba39ebc67cd2ffc2d8980c27a15d41e3588c1bec79ffb862e677ece80fc",
+      "bytes": 206934,
+      "acquisition": "build_board.py生成；超1MB二进制不进入git"
+    },
+    {
+      "path": "output/plate-11.jpg",
+      "sha256": "6f198be86a7555b062ce79feba501caf6f36f898183b2968c709c695dd4b921d",
+      "bytes": 146982,
+      "acquisition": "build_board.py生成；超1MB二进制不进入git"
+    },
+    {
+      "path": "output/plate-12.jpg",
+      "sha256": "58f01c3c1d554c1da9a5a1ba7ce10dbd025fc79fb0a6ff6da316d71cda632151",
+      "bytes": 117939,
+      "acquisition": "build_board.py生成；超1MB二进制不进入git"
+    },
+    {
+      "path": "output/plate-13.jpg",
+      "sha256": "5a1e4a4592b627f6a224413143e0db325c3720d53dd5200f76450ab7ce2c2bae",
+      "bytes": 128028,
+      "acquisition": "build_board.py生成；超1MB二进制不进入git"
+    }
+  ],
+  "scope": "仅参考资料；未修改游戏、美术基准、玩法与存档",
+  "ai_entry": "reference-board.md",
+  "source_evidence": "静态截图仅证明可见布局；操作链路、尺寸与时长为我方建议",
+  "revision_review": "2026-10-12按老板要求完成内容审读；本轮未追加游戏测试或视觉验收"
+}

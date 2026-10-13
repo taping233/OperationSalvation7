@@ -1,0 +1,63 @@
+- complementary:
+  - navigation "远征工具":
+    - img "常无欲 Q版小人"
+    - generic: 当前 · 空白节点
+    - button "bag 背包 携带卡牌 16/25 B" [disabled]:
+      - img "bag"
+      - text: 背包
+      - generic: 携带卡牌
+      - strong: 16/25
+      - generic: B
+    - button "lock 安全格 保护物资 0/2" [disabled]:
+      - img "lock"
+      - text: 安全格
+      - generic: 保护物资
+      - strong: 0/2
+    - button "cards 消耗口袋 待复原卡牌 6" [disabled]:
+      - img "cards"
+      - text: 消耗口袋
+      - generic: 待复原卡牌
+      - strong: "6"
+    - button "map 定位 当前位置 F" [disabled]:
+      - img "map"
+      - text: 定位
+      - generic: 当前位置
+      - generic: F
+    - button "map 总览 已知区域 G" [disabled]:
+      - img "map"
+      - text: 总览
+      - generic: 已知区域
+      - generic: G
+- main:
+  - navigation "远征章节":
+    - generic: 污染核心
+    - generic: 第 4 层 / 4
+  - generic: "5"
+  - generic: "4"
+  - button "离开对局":
+  - button:
+  - button:
+  - generic: 当前生命
+  - generic: 33/35
+  - button "背包 16/25":
+    - generic: 背包
+    - generic: 16/25
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog "question 背包说明":
+    - button "关闭": ×
+    - heading "question 背包说明" [level=2]:
+      - img "question"
+      - text: 背包说明
+    - paragraph:
+      - generic: 背包格
+      - text: 物资与卡牌混占格数（同名堆叠只占 1 格）。双击卡牌翻面看卡背；按住拖动整理顺序，拖入右侧安全格即存入。
+    - paragraph:
+      - generic: 安全格
+      - text: 由宠物阿七看守：撤离失败或放弃对局时，只有安全格里的卡牌会被抢运回基地，其余全部丢失。容量在基地「升级」页用口粮升级。
+    - paragraph:
+      - generic: 消耗口袋
+      - text: 对小怪用过的卡、注能消耗的卡会进到这里：本局无法再用，容量无限。撤离时每张仅 1/3 概率带回基地口袋（用钥匙复原）；局内火堆每次休整可复原 2 张；道具「能源结晶」可就地复原 3 张。
+    - paragraph:
+      - generic: 丢弃
+      - text: 把卡牌拖到背包页面外的空地可申请丢弃 1 张——丢弃的牌无法取回，请谨慎操作。
+    - button "↩ 返回" [active]

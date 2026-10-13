@@ -1,0 +1,96 @@
+{
+  "actions": [
+    {
+      "detail": "进入城市→档位01→出征整备→下一步选择卡牌；未确认出发",
+      "type": "real-input"
+    },
+    {
+      "detail": "规则说明节点不存在，整备与出发按钮存在",
+      "type": "static-inspection"
+    },
+    {
+      "detail": "当前窗口截图",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "id": "depMain"
+      },
+      "identity": "depMain",
+      "key": "page",
+      "rect": {
+        "height": 720,
+        "width": 1280,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#depMain",
+      "styles": {
+        "display": "flex"
+      },
+      "tag": "DIV",
+      "text": "EXPEDITION / 03出征整备\n          01 模式02 人物03 整备\n          \n        \n        \n          \n            \n            DEPARTURE CHECKLIST本次人物：无更换人物\n          \n          \n            仓库候选 点击或拖拽带入\n            "
+    },
+    {
+      "attributes": {
+        "id": "btnDeploy"
+      },
+      "identity": "btnDeploy",
+      "key": "start",
+      "rect": {
+        "height": 39.85000228881836,
+        "width": 200,
+        "x": 1060.5374755859375,
+        "y": 666.0250244140625
+      },
+      "selector": "#depMain [data-act=\"confirmDeploy\"]",
+      "styles": {
+        "display": "flex"
+      },
+      "tag": "BUTTON",
+      "text": "出发 →"
+    }
+  ],
+  "observedAt": "2026-10-12T10:06:51.180Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "scene": "整备规则说明移除",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-12-departure-rules-remove/departure.png"
+  ],
+  "selectors": [
+    {
+      "key": "page",
+      "selector": "#depMain"
+    },
+    {
+      "key": "rules",
+      "selector": "#depMain .dep-rules"
+    },
+    {
+      "key": "start",
+      "selector": "#depMain [data-act=\"confirmDeploy\"]"
+    }
+  ]
+}

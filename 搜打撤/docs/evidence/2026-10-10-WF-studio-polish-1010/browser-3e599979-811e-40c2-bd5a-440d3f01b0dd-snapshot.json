@@ -1,0 +1,285 @@
+{
+  "actions": [
+    {
+      "detail": "真实打开照相馆、分类、下一片、放大、聚焦备注、Esc收回、入场时收回重开、空搜索、长文案搜索、初始装裱筛选和重置；备注未输入或改写",
+      "type": "real-input"
+    },
+    {
+      "detail": "实测列表160ms无延迟、分类标记150ms、预览160ms、照片420ms；标题24px、焦点映射、完整原图与长文案无溢出",
+      "type": "static-inspection"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"浏览馆藏找到 268 张重置筛选\\n            \\n    全部268\\n    \\n    武术64\\n    \\n    法术79\\n    \\n    生物25\\n    \\n    道具20\\n    \\n    装备34\\n    \\n    事件19\\n    \\n    能力12\\n    \\n    资源15\\n    \\n            \\n              搜索照片\\n           \",\"class\":\"clib-main\"}",
+      "key": "wall",
+      "rect": {
+        "height": 669.3375244140625,
+        "width": 1280,
+        "x": 0,
+        "y": 50.66250228881836
+      },
+      "selector": ".clib-main",
+      "styles": {
+        "background-color": "rgb(181, 189, 193)",
+        "border-radius": "0px",
+        "color": "rgb(229, 228, 225)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "1004.01px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "20px 28px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1920px"
+      },
+      "tag": "DIV",
+      "text": "浏览馆藏找到 268 张重置筛选\n            \n    全部268\n    \n    武术64\n    \n    法术79\n    \n    生物25\n    \n    道具20\n    \n    装备34\n    \n    事件19\n    \n    能力12\n    \n    资源15\n    \n            \n              搜索照片\n           "
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"SECTION\",\"text\":\"浏览馆藏找到 268 张重置筛选\\n            \\n    全部268\\n    \\n    武术64\\n    \\n    法术79\\n    \\n    生物25\\n    \\n    道具20\\n    \\n    装备34\\n    \\n    事件19\\n    \\n    能力12\\n    \\n    资源15\\n    \\n            \\n              搜索照片\\n           \",\"class\":\"studio-filterbar\"}",
+      "key": "filter",
+      "rect": {
+        "height": 134.6750030517578,
+        "width": 946.4125366210938,
+        "x": 18.662500381469727,
+        "y": 64.7874984741211
+      },
+      "selector": ".studio-filterbar",
+      "styles": {
+        "background-color": "rgb(220, 225, 227)",
+        "border-radius": "0px",
+        "color": "rgb(45, 48, 52)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "202.012px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "12px 18px 13px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1419.62px"
+      },
+      "tag": "SECTION",
+      "text": "浏览馆藏找到 268 张重置筛选\n            \n    全部268\n    \n    武术64\n    \n    法术79\n    \n    生物25\n    \n    道具20\n    \n    装备34\n    \n    事件19\n    \n    能力12\n    \n    资源15\n    \n            \n              搜索照片\n           "
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"SPAN\",\"text\":\"禁咒I法术\",\"class\":\"studio-photo-paper\"}",
+      "key": "paper",
+      "rect": {
+        "height": 203.8625030517578,
+        "width": 219,
+        "x": 24.662500381469727,
+        "y": 232.125
+      },
+      "selector": "#libGrid .lib-cardwrap[aria-current=\"true\"] .studio-photo-paper",
+      "styles": {
+        "background-color": "rgb(242, 239, 231)",
+        "border-radius": "0px",
+        "color": "rgb(229, 228, 225)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "305.794px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "6.8px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "328.5px"
+      },
+      "tag": "SPAN",
+      "text": "禁咒I法术"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"B\",\"text\":\"禁咒I\",\"class\":\"\"}",
+      "key": "title",
+      "rect": {
+        "height": 21.600000381469727,
+        "width": 39.78750228881836,
+        "x": 1100.6375732421875,
+        "y": 374.2375183105469
+      },
+      "selector": ".studio-preview-paper .studio-photo-caption b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(102, 88, 121)",
+        "display": "block",
+        "font-family": "\"Noto Serif SC\", \"Source Han Serif SC\", \"Songti SC\", SimSun, STSong, serif",
+        "font-size": "24px",
+        "height": "32.4px",
+        "line-height": "32.4px",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "59.6812px"
+      },
+      "tag": "B",
+      "text": "禁咒I"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"禁咒I法术\",\"class\":\"lib-item selected\"}",
+      "key": "selection",
+      "rect": {
+        "height": 217.8625030517578,
+        "width": 223,
+        "x": 22.662500381469727,
+        "y": 222.125
+      },
+      "selector": ".lib-item.selected",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 228, 225)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "326.794px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "15px 3px 6px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "334.5px"
+      },
+      "tag": "DIV",
+      "text": "禁咒I法术"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"全部268\\n    \\n    武术64\\n    \\n    法术79\\n    \\n    生物25\\n    \\n    道具20\\n    \\n    装备34\\n    \\n    事件19\\n    \\n    能力12\\n    \\n    资源15\",\"class\":\"clib-tabs\"}",
+      "key": "navigation",
+      "rect": {
+        "height": 33.57500076293945,
+        "width": 920.8125,
+        "x": 31.462499618530273,
+        "y": 102.4375
+      },
+      "selector": ".clib-tabs",
+      "styles": {
+        "background-color": "rgba(248, 247, 245, 0.03)",
+        "border-radius": "0px",
+        "color": "rgb(45, 48, 52)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "50.3625px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "4px 0px 8px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1381.22px"
+      },
+      "tag": "DIV",
+      "text": "全部268\n    \n    武术64\n    \n    法术79\n    \n    生物25\n    \n    道具20\n    \n    装备34\n    \n    事件19\n    \n    能力12\n    \n    资源15"
+    },
+    {
+      "attributes": {
+        "data-asset-key": "card-tt8-curse1"
+      },
+      "identity": "{\"data-asset-key\":\"card-tt8-curse1\"}",
+      "key": "preview",
+      "rect": {
+        "height": 231.75,
+        "width": 231.75,
+        "x": 1004.6625366210938,
+        "y": 133.6875
+      },
+      "selector": ".studio-preview-paper img",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(170, 174, 177)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "15px",
+        "height": "347.625px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "347.625px"
+      },
+      "tag": "IMG",
+      "text": ""
+    }
+  ],
+  "observedAt": "2026-10-10T05:45:14.413Z",
+  "page": {
+    "origin": "http://127.0.0.1:5331",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "scene": "studio-polish-final-gallery",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-10-WF-studio-polish-1010/07-final-gallery.png",
+    "docs/evidence/2026-10-10-WF-studio-polish-1010/04-photo-detail.png",
+    "docs/evidence/2026-10-10-WF-studio-polish-1010/05-long-copy.png",
+    "docs/evidence/2026-10-10-WF-studio-polish-1010/06-proof-mount.png"
+  ],
+  "selectors": [
+    {
+      "key": "wall",
+      "selector": ".clib-main"
+    },
+    {
+      "key": "filter",
+      "selector": ".studio-filterbar"
+    },
+    {
+      "key": "paper",
+      "selector": "#libGrid .lib-cardwrap[aria-current=\"true\"] .studio-photo-paper"
+    },
+    {
+      "key": "title",
+      "selector": ".studio-preview-paper .studio-photo-caption b"
+    },
+    {
+      "key": "selection",
+      "selector": ".lib-item.selected"
+    },
+    {
+      "key": "navigation",
+      "selector": ".clib-tabs"
+    },
+    {
+      "key": "preview",
+      "selector": ".studio-preview-paper img"
+    }
+  ]
+}

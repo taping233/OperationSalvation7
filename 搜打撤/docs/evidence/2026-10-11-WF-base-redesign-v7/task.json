@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-base-redesign-v7",
+  "date": "2026-10-11",
+  "owner": "Friday（Codex 基地接班 01a12ba3）",
+  "goal": "整个基地按网上真实绝区零/二游界面重做，常驻导航统一底部玻璃，保留原画与白底人物",
+  "paths": [
+    "game/src/hub/game.hub.js",
+    "game/src/hub/hub.home-v3.js",
+    "game/src/hub/hub.home-icons-v10.js",
+    "game/src/hub/hub.warehouse.js",
+    "game/src/hub/hub.navigation-v7.js",
+    "game/src/hub/hub.warehouse-categories-v7.js",
+    "game/src/hub/base-page-motion-v7.js",
+    "game/css/base-home-v7.css",
+    "game/css/base-framework-v7.css",
+    "game/css/base-rooms-v7.css",
+    "game/css/base-page-motion-v7.css",
+    "game/base-design-options.html",
+    "game/src/ui/base-design-preview-v7.js",
+    "game/src/ui/base-preview-rooms-v7.js",
+    "docs/evidence/2026-10-11-WF-base-redesign-v7",
+    "docs/development.md",
+    "game/src/hub/hub.visuals.js",
+    "game/src/hub/hub.materials.js",
+    "game/assets/icons/base-v12",
+    "game/assets/asset-manifest.json",
+    "game/src/hub/hub.personnel.js",
+    "game/src/hub/hub.trade-shop-v5.js",
+    "game/css/base-personnel-v12.css",
+    "game/css/base-logistics-trade-v12.css"
+  ],
+  "doneWhen": [
+    "最新基地真实当前窗口目检及用户认可",
+    "人物共用横向白底与大页逻辑保留",
+    "逐页完善交易/收藏等房间，参考明确、无多余文字"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "本轮首页/人物/交易/收藏在Codex当前1523×956正式档01实页目检，详情见v11-current-review.md",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "真实队员往返、Shift+Tab反馈与商品/卡背选择；本任务页面捕获error为0",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "整体基地继续暂停；本轮仅恢复物资图标/数量框、资源只读悬停名称及基地左右进入动效的定向修改",
+    "目标两模块语法通过；未进行游戏实页、全量测试/build/提交/推送；当前实现待老板查看",
+    "追加基地事务栏、角色名称/圆角/头像、仓库去重与单击放大、交易完整卡牌及币值统一已实现；老板明确不测试，未语法/实页/build，待老板查看。"
+  ],
+  "updatedAt": "2026-10-11T15:57:36.191Z"
+}

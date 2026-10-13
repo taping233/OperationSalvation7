@@ -1,0 +1,21 @@
+{
+  "card_id": "tt3-ice-spike",
+  "model": "nai-diffusion-4-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 1430732005,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nno humans, icicle, ice magic, close-up, foreshortening, dutch angle, hand-drawn linework, painterly\n\nONE long tapered ice spike shoots diagonally from upper-left toward the lower-right foreground, its sharp tip fully visible just inside the bottom-right. The broad root sits near upper-left center; one short curved frost crescent behind it indicates freezing, with no other shards. The ice spike has a clear central ridge and three or four large planar faces; its silhouette is one connected sharp form. Background is a quiet deep petrol-blue to muted gray-violet color transition with ample negative space.\n\nFirm sparse colored contour lines define the ice silhouette and a few internal plane divisions. Broad matte pale cyan, blue-gray and deep teal paint turns stay inside these enclosed planes. One restrained ivory edge highlight leads to the tip; one broad translucent cyan midtone suggests ice. Use a few long directional brush swipes inside the ice faces, not many little triangular facets or fine cracks. Keep background free of brush debris.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, hands, faces, multiple ice spikes, ice cluster, scattered shards, snowflakes, particles, tiny facets, dense cracks, snow scene, weapons, ornate patterns, glossy 3d render, granular filter, fine ink hatching, full-frame glow",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\ice-spike-redraw-20261011\\ice.png",
+  "installed": false,
+  "design": "一根长冰刺与短冻结弧痕，清楚外轮廓与脊线、形体内主要冰面；深青蓝灰紫背景。"
+}

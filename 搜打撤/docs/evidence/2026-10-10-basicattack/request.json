@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "card_id": "starter-attack",
+      "asset": "cards/expedition-starters/basic-attack.webp",
+      "revision": "basicattack-original-rough-20261010",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/expedition-starters/basic-attack.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "prompt": "Use case: style-transfer. Redraw FIRST image 初始攻击 preserving exact original LANDSCAPE 896:679 composition, front camera, sword proportions and placements. TWO long steel swords crossed diagonally into a large X. Brown cloth-wrapped grips at lower-left and lower-right, black pommel caps, each sword blade extends toward the opposite upper corner and exits image edge. Preserve distinctive large curved steel guards near center below collision, mirrored guards forming original broad U-like outline. At crossing point center, bright small white and pale turquoise collision star with long narrow horizontal ray, shorter diagonal/vertical rays, and few tiny warm ochre sparks. Preserve pale blue-gray flat abstract background. No hands, characters or extra weapons. Steel rendered as broad gray-blue opaque painted planes with few hard cream highlights, brown grips as grouped cloth bands with economical markings, avoid polished photographic metal or complex engraving. Images 2–4 are STYLE ONLY references for large opaque brush masses and confident simplified painting, do not copy characters, poses or clothes. STYLE: rough hand-painted anime color study, large connected opaque masses, few broad directional swipes and blunt dabs, decisive handmade edges, grouped hard shadows, selective overlapping coverage with large quiet regions. Matte muted colors with concentrated turquoise-white accent at collision. No glossy 3D, smooth airbrush, tiny facet mosaics, fine surface scratches, all-over grain/texture filters. No text, frame, watermark or UI.",
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-727b6144-4f96-4357-9022-d900484b9496.png"
+    }
+  ]
+}

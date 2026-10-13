@@ -1,0 +1,9 @@
+{
+  "card_id": "cc-demon",
+  "model": "nai-diffusion-4-5-full",
+  "status": "shared cooldown",
+  "retry_after_seconds_at_last_attempt": 533,
+  "generated": false,
+  "installed": false,
+  "note": "老板令续跑；客户端共享429冷却延长，本次未发送生成请求，未重复轮询"
+}

@@ -1,0 +1,397 @@
+{
+  "id": "event",
+  "title": "余烬来信",
+  "stem": "07-event-letter-in-ashes",
+  "idea": "奇遇和叙事选择的低密度问答；双簧管像说话，颤音琴只作标点，留出阅读空间。",
+  "key": "A minor",
+  "meter": [
+    4,
+    4
+  ],
+  "bpm_quarter": 78,
+  "bars": 32,
+  "total_beats": 128.0,
+  "seconds": 98.46154166666666,
+  "tracks": [
+    {
+      "name": "Oboe storyteller",
+      "program": 68,
+      "bank": 0,
+      "hand": null,
+      "notes": 64,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/07-event-letter-in-ashes-Oboe-storyteller.wav",
+        "bytes": 37809320,
+        "sha256": "69230a8357ce56e62e8f55be964b97d8423bd690b23d3abd58e1f312db42a14b"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.97
+        ],
+        [
+          16.0,
+          0.97
+        ],
+        [
+          32.0,
+          1
+        ],
+        [
+          64.0,
+          1
+        ],
+        [
+          80.0,
+          1.04
+        ],
+        [
+          96.0,
+          1.04
+        ],
+        [
+          112.0,
+          0.94
+        ],
+        [
+          120.0,
+          0.94
+        ],
+        [
+          128.0,
+          0.97
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Vibraphone ink",
+      "program": 11,
+      "bank": 0,
+      "hand": null,
+      "notes": 20,
+      "pan": -22,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/07-event-letter-in-ashes-Vibraphone-ink.wav",
+        "bytes": 37809320,
+        "sha256": "cc48ccd3bdfde076516a990ab51af97e72d18649a90b665b9706f69f5edf1241"
+      },
+      "target_active_rms_dbfs": -38,
+      "continuous_gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          16.0,
+          0.68
+        ],
+        [
+          32.0,
+          0.72
+        ],
+        [
+          64.0,
+          0.72
+        ],
+        [
+          80.0,
+          0.84
+        ],
+        [
+          96.0,
+          0.84
+        ],
+        [
+          112.0,
+          0.58
+        ],
+        [
+          120.0,
+          0.58
+        ],
+        [
+          128.0,
+          0.68
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Bassoon question",
+      "program": 70,
+      "bank": 0,
+      "hand": null,
+      "notes": 10,
+      "pan": 24,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/07-event-letter-in-ashes-Bassoon-question.wav",
+        "bytes": 37809320,
+        "sha256": "d05e24cfd391c8446acd6e241048c1109c42f67fd15a8812f9d7f4b416d77496"
+      },
+      "target_active_rms_dbfs": -36,
+      "continuous_gain_points": [
+        [
+          0,
+          0.35
+        ],
+        [
+          16.0,
+          0.35
+        ],
+        [
+          32.0,
+          0.8
+        ],
+        [
+          64.0,
+          0.8
+        ],
+        [
+          80.0,
+          0.92
+        ],
+        [
+          96.0,
+          0.92
+        ],
+        [
+          112.0,
+          0.48
+        ],
+        [
+          120.0,
+          0.48
+        ],
+        [
+          128.0,
+          0.35
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Muted paper strings",
+      "program": 49,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": -31,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/07-event-letter-in-ashes-Muted-paper-strings.wav",
+        "bytes": 37809320,
+        "sha256": "6b40ef45a0e74cb4eb3483e44b8eb691556b9c60ee36f4535f38de466754cea1"
+      },
+      "target_active_rms_dbfs": -34,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          16.0,
+          0.83
+        ],
+        [
+          32.0,
+          0.92
+        ],
+        [
+          64.0,
+          0.92
+        ],
+        [
+          80.0,
+          0.98
+        ],
+        [
+          96.0,
+          0.98
+        ],
+        [
+          112.0,
+          0.85
+        ],
+        [
+          120.0,
+          0.85
+        ],
+        [
+          128.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Harp page turn",
+      "program": 46,
+      "bank": 0,
+      "hand": null,
+      "notes": 20,
+      "pan": 29,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/07-event-letter-in-ashes-Harp-page-turn.wav",
+        "bytes": 37809320,
+        "sha256": "8b959abf73e3d1103b0d88d6d0a839343ed9de2159e9205f43aac1a4c48b1fb8"
+      },
+      "target_active_rms_dbfs": -42,
+      "continuous_gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          16.0,
+          0.68
+        ],
+        [
+          32.0,
+          0.72
+        ],
+        [
+          64.0,
+          0.72
+        ],
+        [
+          80.0,
+          0.84
+        ],
+        [
+          96.0,
+          0.84
+        ],
+        [
+          112.0,
+          0.58
+        ],
+        [
+          120.0,
+          0.58
+        ],
+        [
+          128.0,
+          0.68
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/07-event-letter-in-ashes-Steady-low-foundation.wav",
+        "bytes": 37809320,
+        "sha256": "cf4da6d9e467b0b698d37d99d18e2c2f4c46e34c029ad0de46b56b77058ee80b"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          16.0,
+          0.83
+        ],
+        [
+          32.0,
+          0.92
+        ],
+        [
+          64.0,
+          0.92
+        ],
+        [
+          80.0,
+          0.98
+        ],
+        [
+          96.0,
+          0.98
+        ],
+        [
+          112.0,
+          0.85
+        ],
+        [
+          120.0,
+          0.85
+        ],
+        [
+          128.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-8.87",
+    "input_lra": "1.90",
+    "input_thresh": "-28.50",
+    "output_i": "-23.09",
+    "output_tp": "-13.46",
+    "output_lra": "1.90",
+    "output_thresh": "-33.09",
+    "normalization_type": "dynamic",
+    "target_offset": "0.09"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.3053162177334819,
+      0.4591218111987464
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/07-event-letter-in-ashes.mmp",
+      "bytes": 5858,
+      "sha256": "4cd2730abccd93759f7be30f0212d8debae61d010cdc8f79e861888323a3dfbd"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/07-event-letter-in-ashes.wav",
+      "bytes": 28356968,
+      "sha256": "6f45239ae20dd902f583fa92a6f8a1a81e0e418f7b6a1ded3a01217216c571e4"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/07-event-letter-in-ashes.mp3",
+      "bytes": 3152708,
+      "sha256": "ddcc7095d85c03cb536f321314df7367f0b5229f59ed1168fe16da185dd027c0"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/07-event-letter-in-ashes.ogg",
+      "bytes": 1724045,
+      "sha256": "8e22971cc09475e2f819fa8387d42e4e49043690cb11e0943a36024fcebb008c"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "opening"
+    },
+    {
+      "start_bar": 6,
+      "name": "first development"
+    },
+    {
+      "start_bar": 18,
+      "name": "contrast"
+    },
+    {
+      "start_bar": 26,
+      "name": "connected return"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed"
+}

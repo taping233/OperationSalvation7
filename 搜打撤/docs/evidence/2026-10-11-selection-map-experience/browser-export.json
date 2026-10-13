@@ -1,0 +1,173 @@
+{
+  "actions": [
+    {
+      "detail": "真实控件点击：档位04基地、五人切换、无卡池、整备出发、启程补给、物资收取、火堆、首场遭遇胜利、战后奖励滚动与收取、消耗教学、商店补一张初始攻击、闸门进入第二层。未构造游戏状态。",
+      "type": "real-input"
+    },
+    {
+      "detail": "当前窗口逐场景截图；未设置viewport或执行多尺寸测试。",
+      "type": "screenshot"
+    },
+    {
+      "detail": "终点地图DOM与计算样式只读采集。",
+      "type": "static-inspection"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "id": "routePanel"
+      },
+      "identity": "routePanel",
+      "key": "routes",
+      "rect": {
+        "height": 135.6374969482422,
+        "width": 1169.4375,
+        "x": 334.7250061035156,
+        "y": 809.2625122070312
+      },
+      "selector": "#routePanel",
+      "styles": {
+        "color": "rgb(227, 230, 228)",
+        "font-size": "16px",
+        "opacity": "1"
+      },
+      "tag": "SECTION",
+      "text": "下一步 · 1 条路线下一层闸门在东方向 · 直线约 5 格 · 沿路搜集补给\n      \n    \n    物资点搜寻卡牌与补给\n    ↗\n  \n      点击路线或地图亮环前进 Space 选择 · X 确认 · B 背包"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"BUTTON\",\"text\":\"物资点搜寻卡牌与补给\\n    ↗\"}",
+      "key": "route-buttons",
+      "rect": {
+        "height": 42.962501525878906,
+        "width": 1166.2874755859375,
+        "x": 336.3000183105469,
+        "y": 858.6375122070312
+      },
+      "selector": "#routePanel button",
+      "styles": {
+        "color": "rgb(236, 236, 236)",
+        "font-size": "13.3333px",
+        "opacity": "1"
+      },
+      "tag": "BUTTON",
+      "text": "物资点搜寻卡牌与补给\n    ↗"
+    },
+    {
+      "attributes": {
+        "id": "hpText"
+      },
+      "identity": "hpText",
+      "key": "health",
+      "rect": {
+        "height": 14.27500057220459,
+        "width": 47.57500076293945,
+        "x": 189.5500030517578,
+        "y": 35.275001525878906
+      },
+      "selector": "#hpText",
+      "styles": {
+        "color": "rgb(31, 178, 255)",
+        "font-size": "18px",
+        "opacity": "1"
+      },
+      "tag": "B",
+      "text": "35/35"
+    },
+    {
+      "attributes": {
+        "id": "resHud"
+      },
+      "identity": "resHud",
+      "key": "resources",
+      "rect": {
+        "height": 26.962499618530273,
+        "width": 150.6999969482422,
+        "x": 1355.050048828125,
+        "y": 15.862500190734863
+      },
+      "selector": "#resHud",
+      "styles": {
+        "color": "rgb(227, 230, 228)",
+        "font-size": "16px",
+        "opacity": "1"
+      },
+      "tag": "DIV",
+      "text": "1\n      \n      \n        \n          \n          \n          \n          \n        \n        4"
+    },
+    {
+      "attributes": {
+        "id": "expeditionChapter"
+      },
+      "identity": "expeditionChapter",
+      "key": "chapters",
+      "rect": {
+        "height": 197.6875,
+        "width": 142.77500915527344,
+        "x": 22.200000762939453,
+        "y": 84.875
+      },
+      "selector": "#expeditionChapter",
+      "styles": {
+        "color": "rgb(183, 187, 190)",
+        "font-size": "16px",
+        "opacity": "1"
+      },
+      "tag": "NAV",
+      "text": "EXPEDITION / 0201第1层 · 外围荒地02第2层 · 风雪哨线03第3层 · 冻土遗迹高危 · 精英 3%04第4层 · 污染核心极高危 · 精英 10%"
+    }
+  ],
+  "observedAt": "2026-10-11T09:53:35.372Z",
+  "page": {
+    "origin": "http://localhost:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 1523
+    }
+  },
+  "scene": "selection-to-map-real-input-audit",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-11-selection-map-experience/09-map-entry.jpg",
+    "docs/evidence/2026-10-11-selection-map-experience/12-battle-entry.jpg",
+    "docs/evidence/2026-10-11-selection-map-experience/13-battle-reward-before-scroll.jpg",
+    "docs/evidence/2026-10-11-selection-map-experience/14-battle-reward-after-scroll.jpg",
+    "docs/evidence/2026-10-11-selection-map-experience/18-layer-two-entry.jpg"
+  ],
+  "selectors": [
+    {
+      "key": "routes",
+      "selector": "#routePanel"
+    },
+    {
+      "key": "route-buttons",
+      "selector": "#routePanel button"
+    },
+    {
+      "key": "health",
+      "selector": "#hpText"
+    },
+    {
+      "key": "resources",
+      "selector": "#resHud"
+    },
+    {
+      "key": "chapters",
+      "selector": "#expeditionChapter"
+    }
+  ]
+}

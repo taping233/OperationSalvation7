@@ -1,0 +1,147 @@
+{
+  "ok": true,
+  "file": "docs/evidence/2026-10-11-WF-base-refine-1011/task.json",
+  "action": "close",
+  "expectedSha256": "de0d1370203731894222111b1b76d3257047a2e5f4f3935160a8595a5ddf6353",
+  "before": {
+    "schemaVersion": 1,
+    "id": "WF-base-refine-1011",
+    "date": "2026-10-11",
+    "owner": "Friday",
+    "goal": "先完成基地层级与跳转返回，合并后勤和奖励，拆分队员与庭院次级流程，再按二游规范及实机参考定向迭代美术UI动效",
+    "paths": [
+      "game/src/hub/game.hub.js",
+      "game/src/hub/hub.personnel.js",
+      "game/src/hub/hub.presentation.js",
+      "game/src/hub/hub.home-v3.js",
+      "game/src/hub/hub.courtyard-v3.js",
+      "game/src/hub/courtyard-vendor/KoiPond.js",
+      "game/src/hub/courtyard-vendor/SOURCE.md",
+      "game/src/hub/courtyard.rain-tableau.js",
+      "game/src/hub/base-motion-v4.js",
+      "game/css/base-camp-rework.css",
+      "game/css/base-home-v3.css",
+      "game/css/base-archive-v3.css",
+      "game/css/base-shop-v3.css",
+      "game/css/base-controls-v4.css",
+      "game/css/base-collection-v4.css",
+      "game/css/base-courtyard-v3.css",
+      "game/assets/scenes/courtyard-pond-v4.webp",
+      "game/art-source/ui/courtyard-v4",
+      "game/assets/asset-manifest.json",
+      "tests/hub-courtyard-v3.test.js",
+      "tests/courtyard-rain-tableau.test.js",
+      "tests/hub-flow-regression.test.js",
+      "tests/base-ui-sample.test.js",
+      "tests/premium-ui-pages.test.js",
+      "docs/development.md",
+      "game/src/hub/hub.shop-v3.js",
+      "tests/hub-shop-v3.test.js",
+      "tests/courtyard-koi.test.js",
+      "game/src/hub/hub.warehouse.js",
+      "tests/hub-personnel-navigation.test.js",
+      "game/src/hub/hub.archive-v3.js",
+      "tests/hub-archive-v3.test.js",
+      "game/css/base-panel-layout.css",
+      "tests/hub-pages-rework.test.js"
+    ],
+    "doneWhen": [
+      "后勤/队员/收藏与奖励/庭院层级清楚，入口与父级返回完整，定向与真实输入通过",
+      "伙伴与孵化等次级流程清楚，人物美术完整且比例合理",
+      "观雨呈现手绘透视平台落雨水圈，池塘有岸边浅水植物与鱼群互动，生命周期检查通过",
+      "必要定向检查及实际输入记录完整，不改玩法存档，不build不提交"
+    ],
+    "stage": "doing",
+    "checks": [],
+    "unverified": [],
+    "updatedAt": "2026-10-11T04:05:52.199Z"
+  },
+  "task": {
+    "schemaVersion": 1,
+    "id": "WF-base-refine-1011",
+    "date": "2026-10-11",
+    "owner": "Friday",
+    "goal": "先完成基地层级与跳转返回，合并后勤和奖励，拆分队员与庭院次级流程，再按二游规范及实机参考定向迭代美术UI动效",
+    "paths": [
+      "game/src/hub/game.hub.js",
+      "game/src/hub/hub.personnel.js",
+      "game/src/hub/hub.presentation.js",
+      "game/src/hub/hub.home-v3.js",
+      "game/src/hub/hub.courtyard-v3.js",
+      "game/src/hub/courtyard-vendor/KoiPond.js",
+      "game/src/hub/courtyard-vendor/SOURCE.md",
+      "game/src/hub/courtyard.rain-tableau.js",
+      "game/src/hub/base-motion-v4.js",
+      "game/css/base-camp-rework.css",
+      "game/css/base-home-v3.css",
+      "game/css/base-archive-v3.css",
+      "game/css/base-shop-v3.css",
+      "game/css/base-controls-v4.css",
+      "game/css/base-collection-v4.css",
+      "game/css/base-courtyard-v3.css",
+      "game/assets/scenes/courtyard-pond-v4.webp",
+      "game/art-source/ui/courtyard-v4",
+      "game/assets/asset-manifest.json",
+      "tests/hub-courtyard-v3.test.js",
+      "tests/courtyard-rain-tableau.test.js",
+      "tests/hub-flow-regression.test.js",
+      "tests/base-ui-sample.test.js",
+      "tests/premium-ui-pages.test.js",
+      "docs/development.md",
+      "game/src/hub/hub.shop-v3.js",
+      "tests/hub-shop-v3.test.js",
+      "tests/courtyard-koi.test.js",
+      "game/src/hub/hub.warehouse.js",
+      "tests/hub-personnel-navigation.test.js",
+      "game/src/hub/hub.archive-v3.js",
+      "tests/hub-archive-v3.test.js",
+      "game/css/base-panel-layout.css",
+      "tests/hub-pages-rework.test.js"
+    ],
+    "doneWhen": [
+      "后勤/队员/收藏与奖励/庭院层级清楚，入口与父级返回完整，定向与真实输入通过",
+      "伙伴与孵化等次级流程清楚，人物美术完整且比例合理",
+      "观雨呈现手绘透视平台落雨水圈，池塘有岸边浅水植物与鱼群互动，生命周期检查通过",
+      "必要定向检查及实际输入记录完整，不改玩法存档，不build不提交"
+    ],
+    "stage": "complete-uncommitted",
+    "checks": [
+      {
+        "kind": "manual",
+        "description": "116项相关测试加2项premium基地检查通过，12个JS语法和8个CSS解析、定向lint、docs与自有diff通过",
+        "result": "passed"
+      },
+      {
+        "kind": "manual",
+        "description": "Codex内置当前窗口真实输入和六景导入通过，父级返回、培养来源、庭院设置与点击已核实，控制台error0",
+        "result": "passed"
+      },
+      {
+        "kind": "manual",
+        "description": "新池塘188050字节及SHA清单一致，单条素材问题0；仓库特写footer保护SHA一致",
+        "result": "passed"
+      },
+      {
+        "kind": "manual",
+        "description": "全库素材门183条任务之外问题，已保存asset-audit-limit.json，不扩大修复",
+        "result": "failed"
+      }
+    ],
+    "unverified": [
+      "真实非空收藏/待领/待复原仅构造测试覆盖；未真实购买培养扩建领奖应用外观；未多尺寸性能AB、build全量提交推送；壁纸暂缓"
+    ],
+    "updatedAt": "2026-10-11T05:15:00.653Z",
+    "closure": {
+      "kind": "manual",
+      "doneWhenConfirmed": true,
+      "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+    }
+  },
+  "limits": [
+    "预览不写入",
+    "仅任务执行记录；不更新 REGISTRY、STATUS 或需求规格",
+    "手工声明不是独立验收；报告结果未核对当前 freshness"
+  ],
+  "dryRun": true,
+  "bytes": 3276
+}

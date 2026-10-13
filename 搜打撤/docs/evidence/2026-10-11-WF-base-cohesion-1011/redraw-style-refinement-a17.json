@@ -1,0 +1,21 @@
+{
+  "stage": "A17",
+  "status": "generated-user-rejected-too-flat",
+  "directionRecord": "redraw-a16-style-lock.md",
+  "source": "C:/Users/太平/.codex/generated_images/01a128f5-bd4a-7891-91c7-ab5106c5d409/exec-4fb45ed5-8c91-4eaa-88e7-e2ba26018d10.png",
+  "reference": "docs/evidence/2026-10-11-WF-base-cohesion-1011/reference-gfl2-personal.jpg",
+  "reason": [
+    "A16已色面化/材料分色，但地毯重复纹仍密",
+    "近椅/外套转折过整齐，需局部柔化而不整图模糊",
+    "窗偏冷蓝与日照硬边仍不如主参考，调整中性暖白窗光/柔和半影"
+  ],
+  "prompt": "Refine the SECOND image while retaining its newly established DRAWN 2D anime game-background style, room layout, exact object count, camera, large close left chair/armrest and material-colour identities. FIRST image is the locked Girls' Frontline 2 game-art reference for edge variation and light/colour harmony. Do NOT restore photographic material rendering and do NOT add complexity or props. This is a final targeted painting/light pass, not a new scene.\n\nOnly three changes:\n1. The foreground carpet's dense repeated woven ornamental pattern is distracting and inconsistent with the drawn surfaces. Remove the pattern completely. Paint the rug as a simple desaturated grey-SAGE/olive-grey material mass with 2 broad soft value regions and no grain or fibre detail. Retain its existing shape and floor contact. Keep all furniture in position.\n2. The chair fabric and jacket have overly polygonal, neat cut-face value shapes. Repaint these SAME folds and volumes with more naturally irregular and locally soft painted transition edges like reference 1: a few rounded cloth volume turns, pressed seams and broken brush joins. Keep deep grey-green chair, dusty blue-grey garment, ochre cushion and terracotta bed linen distinct. Main silhouette and projecting arm remain clear, fine selective seam/occlusion lines remain. Do not outline every object, blur the whole image, add texture or move the cloth. Broader painted form, not a low-poly CG model or a photograph.\n3. Align light to reference 1's warmer NEUTRAL-IVORY window glow and soft atmospheric transitions. Desaturate the outside cool-blue cast toward pale winter ivory/grey daylight while retaining faint distant grey-blue city silhouettes and outside snow. Light from the existing left window still falls coherently onto map, chair top, table and floor, but the floor/column cast-shadow edges have broader softer penumbrae and the brightest cloth edges gently merge with reflected light. Maintain cooler grey-green/blue-grey shadow fill; no yellow film, glowing rays, extra lamps, global mist or crushed black. The desk's map/record grouping stays the clearest local focus. Auxiliary tea/bed lights are quieter than the work group, fire stays a small near-floor amber accent. Existing illustrated material colours remain more vivid than grey-brown, matte floor never mirrors fire.\n\nOriginal commercial anime game environment illustration, convincingly hand-painted planes, nuanced middle values and selective linework, comfortable calm colour harmony; full 16:9. No photo/PBR fabric weave, micro-detail, text, logo, UI, signs, emblems or new objects.",
+  "runtimeApplied": false,
+  "receipt": {
+    "path": "C:/Users/太平/.codex/generated_images/01a128f5-bd4a-7891-91c7-ab5106c5d409/exec-fd4b0268-f68f-4b0a-a6db-466436d5b98e.png",
+    "bytes": 1716208,
+    "sha256": "8ad2b372065ec65747777f000d77ce1443b552a23df27d6a314796cff1f53fef",
+    "excludedFromGit": true
+  },
+  "userFeedback": "太平；细节又太少；和原版仍不同。恢复有体积的游戏背景与选择性细化，物件数量不增"
+}

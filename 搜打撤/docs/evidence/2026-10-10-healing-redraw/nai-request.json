@@ -1,0 +1,21 @@
+{
+  "card_id": "tt3-holy-water",
+  "model": "nai-diffusion-4-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 595248652,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nno humans, potion, glass bottle, water drop, light, simple background\n\nA single small clear glass healing-potion bottle stands upright near the center of a square illustration. The bottle has a short narrow neck, a plain stopper and one gently rounded body, occupying about half the image height. Inside it, one large luminous cyan teardrop floats just above a shallow pool of pale blue liquid. Keep the drop silhouette unmistakable and the glass described by only two broad pale reflection planes. One soft warm ivory halo behind the bottle suggests restoration; leave generous quiet space around it. Solid muted warm gray-beige background, concentrated cyan accent and a small warm highlight. No hands, people, labels, lettering, decorative filigree, particles, landscape or extra objects.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, hands, multiple bottles, ornate bottle, label, cross symbol, wings, particles, sparks, detailed scenery, photorealistic glass",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\healing-20261010\\healing.png",
+  "installed": false,
+  "design": "一只小药瓶，瓶内一滴青蓝光与浅液面，瓶后少量暖光晕；暖灰底大量留白。"
+}

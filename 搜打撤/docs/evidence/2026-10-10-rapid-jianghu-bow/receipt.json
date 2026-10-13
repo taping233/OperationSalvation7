@@ -1,0 +1,230 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "cc-rapid-fire",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-8b5f2a94-8919-4e0e-8c9d-17743ed4dbe6.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-rapid-jianghu-bow/cards-martial-cc-rapid-fire-source.png",
+        "bytes": 2001115,
+        "sha256": "a8e1d6cfd164f10aa31037420e3c61f9cac3ea9905a626f87b9022646a6c9a0e"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-rapid-jianghu-bow/cards-martial-cc-rapid-fire-full-before.webp",
+          "bytes": 90602,
+          "sha256": "02ee486c725dbc1d16fdbfb8204c6249b8fc8d553b4b8edbfe3f09b928e7e019"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-rapid-jianghu-bow/cards-martial-cc-rapid-fire-thumb-before.webp",
+          "bytes": 10874,
+          "sha256": "2295f82912c467c47c8f6e926790192a30eb7c850aec48d078e464d79011922a"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-cc-rapid-fire.webp",
+          "bytes": 118284,
+          "sha256": "dfc04ce0872779019d706332839a70113e6605f29fc52d53b77ca4d22dc1d4f7",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-cc-rapid-fire.webp",
+          "bytes": 13144,
+          "sha256": "ba92280679b5e446d49c5e0af356b34c7b7ee9b98d5daa60334315074d76f3df",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "cc-rapid-fire-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-cc-rapid-fire.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 118284,
+            "sha256": "dfc04ce0872779019d706332839a70113e6605f29fc52d53b77ca4d22dc1d4f7",
+            "source": "docs/evidence/2026-10-10-rapid-jianghu-bow/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-cc-rapid-fire.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 10874,
+            "sha256": "2295f82912c467c47c8f6e926790192a30eb7c850aec48d078e464d79011922a",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-cc-rapid-fire.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 13144,
+            "sha256": "ba92280679b5e446d49c5e0af356b34c7b7ee9b98d5daa60334315074d76f3df",
+            "source": "docs/evidence/2026-10-10-rapid-jianghu-bow/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt2-jianghu",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-966f2b1c-0681-4efa-ab37-df2ffc5f3280.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-rapid-jianghu-bow/cards-martial-tt2-jianghu-source.png",
+        "bytes": 1745133,
+        "sha256": "bc9e99acb8170d8b79ae14f290695ebee39112e75f4f1d8a5e1c309f6477b920"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-rapid-jianghu-bow/cards-martial-tt2-jianghu-full-before.webp",
+          "bytes": 71396,
+          "sha256": "f496aa97b2731e3da5b693a9d39dd46f51efb57bc55fbf4163da212606aaf889"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-rapid-jianghu-bow/cards-martial-tt2-jianghu-thumb-before.webp",
+          "bytes": 12362,
+          "sha256": "29c44461b9f14ca2e95b4b62937ed4a34cb7d93ab196f861eb7117e80982ba1e"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt2-jianghu.webp",
+          "bytes": 88972,
+          "sha256": "1721dd2d65b76cfaec3d895cf717a3a19fb7f35c5298e49e96920ec7fa821bf6",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt2-jianghu.webp",
+          "bytes": 13280,
+          "sha256": "c0e4eb64464648b9dc3f9a587bae3dbc376db439ad2619ec41d6336f892c15b4",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt2-jianghu-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt2-jianghu.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 88972,
+            "sha256": "1721dd2d65b76cfaec3d895cf717a3a19fb7f35c5298e49e96920ec7fa821bf6",
+            "source": "docs/evidence/2026-10-10-rapid-jianghu-bow/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt2-jianghu.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 12362,
+            "sha256": "29c44461b9f14ca2e95b4b62937ed4a34cb7d93ab196f861eb7117e80982ba1e",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt2-jianghu.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 13280,
+            "sha256": "c0e4eb64464648b9dc3f9a587bae3dbc376db439ad2619ec41d6336f892c15b4",
+            "source": "docs/evidence/2026-10-10-rapid-jianghu-bow/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-reverse-bow",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-e1e6f4a0-1786-4d0f-8a39-70171d1d569a.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-rapid-jianghu-bow/cards-equip-tt3-reverse-bow-source.png",
+        "bytes": 1806752,
+        "sha256": "9abebdf249b1bd87ed48ae4170accce1a54b57839460eba9e2d181c812be6c6f"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-rapid-jianghu-bow/cards-equip-tt3-reverse-bow-full-before.webp",
+          "bytes": 73014,
+          "sha256": "6711e1b9399f49d7691d92a283fdbc117daeb66b2184a26ad6a564384a585dfd"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-rapid-jianghu-bow/cards-equip-tt3-reverse-bow-thumb-before.webp",
+          "bytes": 11064,
+          "sha256": "fa10b5edeb89bef690ab2cd80132a0fed630353fab938edc437df491c2ab2860"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt3-reverse-bow.webp",
+          "bytes": 89634,
+          "sha256": "3b9693639e0d693cb22859228e9d1e6664d0b126789d0e22a4d8aeb2daebfc59",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt3-reverse-bow.webp",
+          "bytes": 13498,
+          "sha256": "40f83d90b8e2ce9a2f9fbf1a54b0355de74c16bf3967a4a36130798c7b0c17fc",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt3-reverse-bow-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/equip-tt3-reverse-bow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 89634,
+            "sha256": "3b9693639e0d693cb22859228e9d1e6664d0b126789d0e22a4d8aeb2daebfc59",
+            "source": "docs/evidence/2026-10-10-rapid-jianghu-bow/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/equip-tt3-reverse-bow.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 11064,
+            "sha256": "fa10b5edeb89bef690ab2cd80132a0fed630353fab938edc437df491c2ab2860",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/equip-tt3-reverse-bow.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 13498,
+            "sha256": "40f83d90b8e2ce9a2f9fbf1a54b0355de74c16bf3967a4a36130798c7b0c17fc",
+            "source": "docs/evidence/2026-10-10-rapid-jianghu-bow/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 877,
+  "manifest_count_after": 880
+}

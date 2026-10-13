@@ -1,0 +1,21 @@
+{
+  "card_id": "cmtn28jv33wx",
+  "model": "nai-diffusion-4-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 759937316,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nno humans, treasure chest, open chest, floating object, from below, dutch angle, close-up, playing cards, abstract background\n\nA single battered dark wooden treasure chest floats tilted in the lower-left, its large near corner cropped by the bottom edge. The open lid recedes sharply toward the upper-left; the mouth of the chest is a deep violet void. One broad curling golden ribbon of paint erupts from inside the chest and arcs toward the upper-right. Exactly three separate blank ivory rectangular cards tumble along this single curved path: one large near the mouth, one medium at right-center, one small at upper-right. The cards are flat rectangles, not books, sheets or stacks. The box occupies the lower half and the curling ribbon connects it to the three cards across the upper half. Background is two abstract color masses, deep plum purple and burnt orange, with a restrained transition. Use a dreamlike impossible perspective, a few blunt wooden planes and dull metal bands, broad strokes instead of wood grain. The strongest warm accent is at the chest opening; no landscape, coins, gems, extra props or decorative particles.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, person, face, hands, arms, coins, jewels, books, card symbols, card text, stacked cards, landscape, room, photorealistic wood grain, ornate metalwork, tiny particles",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\big-chest-imagery-20261010\\chest.png",
+  "installed": false,
+  "design": "无人物；低机位倾斜悬空宝箱，三张卡沿金色宽弧涌出，深紫与赭橙抽象背景。"
+}

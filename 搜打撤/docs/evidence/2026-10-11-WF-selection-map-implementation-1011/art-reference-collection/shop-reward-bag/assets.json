@@ -1,0 +1,147 @@
+{
+  "status": "research-only",
+  "assets": [
+    {
+      "label": "IS7商店与购买确认双状态",
+      "target": "商店/服务与货位分工",
+      "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-reference-collection/shop-reward-bag/is7-source-2.jpg",
+      "sourceURL": "https://www.sina.cn/news/detail/5321883478393227.html",
+      "mediaURL": "https://wx1.sinaimg.cn/large/0078uMncgy1if7mqhr55nj335s2ubkjm.jpg",
+      "width": 4096,
+      "height": 3683,
+      "bytes": 2747166,
+      "SHA256": "044c777bdc8d9ee5878d529f986035c1177d1f405b5fdf9f804ab074b24b695c",
+      "provenance": "玩家实机截图拼图，微博作者@我是麦当子，经新浪文章展示；带攻略大字覆盖，非官方UI稿，非干净整页；图内黑流树海商人对白与玻利瓦尔肤层区域可见",
+      "observation": "上半是左商人右商品/投资服务与离开，下半是同商店中央购买确认；对象、价格、确认/算了分区。大字覆盖部分商品底区，不能据此测未遮挡区域。",
+      "newOrReused": "new",
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "viewImageChecked": true,
+      "acquiredAt": "2026-10-11"
+    },
+    {
+      "label": "STS2官方Rare卡展示开发GIF",
+      "target": "高稀有卡陈列/局部边框与亮度差异",
+      "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-reference-collection/shop-reward-bag/sts2-official-rare-qol.gif",
+      "sourceURL": "https://megacrit.com/news/2024-11-07-neowsletter-issue-4/",
+      "mediaURL": "https://megacrit.com/images/shiny_rare_qol.gif",
+      "width": 912,
+      "height": 525,
+      "bytes": 3002273,
+      "SHA256": "0e157a3ac5dc8485dcc731ec016fe3107066f85638144dad43661072e48df37a",
+      "provenance": "Mega Crit官方2024-11-07开发日志，明确work in progress，早期开发样本；不是2026正式版本证据。view_image看首帧与12/24/36/47取样联系板，没有声称实时播放或测演出时长",
+      "observation": "三个卡牌自身完整，中央Gold Axe采用金边/金名带与外围局部金光，另两张保持低饱和边。取样中的光条形态不同，稀有焦点局限到对象而非整页。",
+      "newOrReused": "new",
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "viewImageChecked": true,
+      "acquiredAt": "2026-10-11",
+      "inspectionPreview": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-reference-collection/shop-reward-bag/sts2-official-rare-samples.jpg",
+      "inspectedFrameIndices": [
+        0,
+        12,
+        24,
+        36,
+        47
+      ],
+      "sourceFrameCount": 48,
+      "realtimePlaybackVerified": false
+    },
+    {
+      "label": "STS2开发者奖励整页",
+      "target": "奖励揭晓/结果对象与独立退出",
+      "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/reward-redesign/references/sts2-developer-reward.png",
+      "sourceURL": "https://straypixels.net/sts2-multiplayer-timeline/",
+      "mediaURL": "https://straypixels.net/assets/sts2-multiplayer-timeline/sts2-mp-reward.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 508777,
+      "SHA256": "e81f005b87e3fc0b91d43ed829e74162615f77ae3075445aa1edfcb554794938",
+      "provenance": "STS2多人实现者开发记录所用实际游戏截图，2026-04-05/v0.99.1可由图内右上核；旧轮原字节复用，本轮view_image重看",
+      "observation": "Blood Vial单件收益占中间窄列，名称与图标成组，解释贴对象，Skip独立右侧；上方资源保持，环境只承托结果。",
+      "newOrReused": "reused",
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "viewImageChecked": true,
+      "acquiredAt": "2026-10-11"
+    },
+    {
+      "label": "暗黑地牢Strongbox透明开闭资源",
+      "target": "宝箱开闭身份/铰链与箱身参照",
+      "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-research-reset/references/dd-strongbox.png",
+      "sourceURL": "https://darkestdungeon.hintbook.co/curios/",
+      "mediaURL": "",
+      "width": 998,
+      "height": 474,
+      "bytes": 79478,
+      "SHA256": "fd75860a86336b3e50860b36b3c96634c991334f87fd8fa7259d2c750117c5a1",
+      "provenance": "社区curio资料所用游戏物件图：同张PNG中开闭两态与中央红柱，非连续动画帧；透明资源，原来源不能证明工作文件或实际rig",
+      "observation": "两态前锁、两道结构箍与下箱身身份可比；盖面从关闭顶面变为内侧面。只学开闭结构和完整轮廓，不采用木箱题材、密黑排线或中央红柱。",
+      "newOrReused": "reused",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "viewImageChecked": true,
+      "acquiredAt": "2026-10-11"
+    },
+    {
+      "label": "1999仓库用途网格",
+      "target": "背包用途分区/数量与局部稀有色",
+      "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/bag-redesign/references/r99-warehouse.png",
+      "sourceURL": "https://note.com/takeyori/n/n26c937d0cfdc",
+      "mediaURL": "https://assets.st-note.com/production/uploads/images/220854821/picture_pc_8a9f6307dc53697cf0b2d00d6487154d.png?width=1200",
+      "width": 1200,
+      "height": 554,
+      "bytes": 368380,
+      "SHA256": "11a4e21a814170ac1500e5299e007e04a814ef82a1ff8f00cef9c9ae25f36ba9",
+      "provenance": "玩家2025-10实机图，来源作者注明；日服仓库。非同人稿；本轮view_image重看",
+      "observation": "左分类、规则物件网格、数量单位置与局部品质底条；不逐格重复长规则。不能证明安全格/死亡保护或消耗口袋规则。",
+      "newOrReused": "reused",
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "viewImageChecked": true,
+      "acquiredAt": "2026-10-11"
+    },
+    {
+      "label": "星铁遗器列表/详情整页",
+      "target": "背包列表与特写动作分工",
+      "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/bag-redesign/references/hsr-inventory.png",
+      "sourceURL": "https://news.17173.com/z/xqtd/content/09072024/183616691.shtml",
+      "mediaURL": "",
+      "width": 960,
+      "height": 600,
+      "bytes": 963888,
+      "SHA256": "c771740329e321f3c61233df33b34c706f966dceea2cf39fec30a382b186532d",
+      "provenance": "2024-09-07媒体攻略所用实机图，米游社图床原字节旧轮保存；右上红框为文章标注，本轮view_image重看",
+      "observation": "左网格只图/等级/锁状态，中间放大选中对象，右侧完整属性与底部动作。安全存放不是此图业务，不移植强化/套装机制。",
+      "newOrReused": "reused",
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "viewImageChecked": true,
+      "acquiredAt": "2026-10-11"
+    }
+  ],
+  "gaps": [
+    "无无标注IS7商店完整原屏；本次高分辨率双状态图有大字覆盖",
+    "现代箱透明原资源：PRTS沙盘页超时，wiki.gg技术调查补给不可访问，未取得",
+    "安全箱高清实页GamesFuze原图403；不将仓库分类图当死亡保护证据",
+    "连续开箱实时录像未播放；DD图只两静态状态，官方Rare GIF仅取样看图",
+    "消耗口袋没有完全等同的外部机制界面；本项目规则仍由现行代码给出"
+  ],
+  "unselectedSourceImages": [
+    "is7-source-0.jpg：追猎教程字覆盖，非本域核心",
+    "is7-source-1.jpg：地图教程字覆盖，非本域核心"
+  ],
+  "writes": "only this evidence directory; no game assets integrated"
+}

@@ -1,0 +1,11 @@
+{
+  "method": "Built-in ImageGen",
+  "prompt": "Use case: style-transfer. Redraw the supplied original Elemental Sigil card illustration in rough hand-painted anime concept-art style. The reference is the composition target. Preserve its square canvas, camera, central placement and generous dark-purple negative space: a pale warm gold diamond-shaped flat sigil occupies the middle lower region (left edge around 34%, right edge 67%, top vertex 33%, bottom vertex 64%). Preserve the two orange-red and icy pale-cyan flame streams rising from its left and right upper sides; the right flame reaches higher, and the small dark round cores remain in the same places. Keep the original diamond silhouette, proportions, layered flame overlap and upward directions. No characters, added props or new symbols. Repaint the gold surface into a few coherent large matte planes with clear warm/cool shadow grouping. Flames use a few bold connected opaque curved swipes and blunt broken tips; cyan inner flame and red-orange outer flame remain legible. Large connected opaque color masses, broad directional brush marks and handmade hard edges, selective structural accents, quiet interiors. Muted base colors with concentrated flame accents. Avoid tiny shard mosaics, fine scratch texture, grain filters, glossy 3D and airbrushed gradients. Background remains one quiet deep violet field. No text, frame, watermark or UI.",
+  "references": [
+    "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-05-WF-eight-items-rough/originals-before-repaint/full-equip-tt3-element-seal.webp"
+  ],
+  "generated_source": "C:/Users/太平/.codex/generated_images/01a12559-c245-7cc2-be4c-39bf847a3bd2/exec-92251765-0003-41b9-a613-db8759a5ccd3.png",
+  "candidate": ".tmp/imagegen/element-seal-redraw-20261010/element-seal.png",
+  "status": "已接入，来源与备份见2026-10-10-art-candidates-install/receipt.json；未测试、未提交",
+  "sha256": "0ef91b1b9e1719702437c2100870ebef66d80c04742c9f93116a6dff5b76f6b7"
+}

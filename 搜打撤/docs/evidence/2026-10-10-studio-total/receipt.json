@@ -1,0 +1,111 @@
+{
+  "task": "WF-studio-total-1010",
+  "date": "2026-10-10",
+  "status": "implemented-current-window-reviewed",
+  "authorization": "不需要收尾测试，执行即可",
+  "scope": "照相馆总方案的分类浏览、排版、美术、功能逻辑与馆内动效",
+  "implemented": [
+    "分类、筛选、排序上下文按照片ID与可见锚点保存，最多64组",
+    "分类恢复原浏览位置；排序保留有效照片；重置回默认条件和首张",
+    "翻片与方向键定位实际照片，窗口化挂载和缩略图继续复用",
+    "分类数量随搜索、人物、稀有度条件更新；条件可逐项移除",
+    "中文输入法组合阶段暂停搜索刷新；关闭后不重绘图库",
+    "分类页签支持左右键、Home、End与焦点状态",
+    "紧凑分类/筛选区与连续档案纸，说明独立滚动，底部操作固定",
+    "翻片复用底部按钮节点，照片身份、序号与大图入口同步",
+    "低对比环境、暖相纸微纹理、纸边厚度、接触阴影与名称层级",
+    "选中提示独立于稀有度，保留现有八种装裱、夹子与插画",
+    "分类方向进入与可见窗口90ms短退，快切中断旧画面，最多24格副本",
+    "翻片200ms、分类240ms、排序160ms、筛选130ms、搜索120ms、悬停100ms",
+    "减少动态效果、整页重建和关闭时的动效清理",
+    "沿用原取片放大、备注保存与入口城廓过场"
+  ],
+  "reference_pages": [
+    "https://www.oneesports.gg/honkai-star-rail/honkai-star-rail-guide-genshin/",
+    "https://community-cn.eagle.cool/resource/57df7e31-94ae-4c6a-b359-620fe39c2b7d",
+    "https://jingyan.baidu.com/article/154b4631dbf42a69cb8f4179.html",
+    "https://www.zcool.com.cn/article/ZMTYyODI1Ng==.html"
+  ],
+  "verification": {
+    "tests": "not-run-by-user-request",
+    "browser": {
+      "result": "passed-listed-scenarios",
+      "url": "http://127.0.0.1:5200/",
+      "platform": "Codex in-app browser",
+      "viewport": [
+        1280,
+        720
+      ],
+      "input": "真实浏览器点击、输入和菜单选择；DOM只读测量，无游戏状态注入",
+      "facts": {
+        "footerTop": 614.8500366210938,
+        "obsoleteStyles": [],
+        "photoHeight": 356.8125,
+        "position": "2 / 268",
+        "readingScroll": 0,
+        "restoredName": "禁咒II",
+        "viewport": [
+          1280,
+          720
+        ],
+        "emptyCount": "0",
+        "legendary": {
+          "count": "13",
+          "mount": "legendary",
+          "name": "斗神酒"
+        },
+        "consoleErrors": [],
+        "disabledReset": {
+          "background": "rgba(0, 0, 0, 0)",
+          "disabled": true,
+          "opacity": "0.35"
+        }
+      },
+      "search": {
+        "query": "火球",
+        "results": 8
+      },
+      "zoom": "真实打开与收回，来源照片与选片一致",
+      "screenshots": [
+        "visual-review/gallery.jpg",
+        "visual-review/search.jpg",
+        "visual-review/empty.jpg",
+        "visual-review/legendary.jpg",
+        "visual-review/zoom.jpg"
+      ],
+      "interruptions": "共享开发服热重载导致部分操作中断，重进后完成上述场景"
+    },
+    "performance_comparison": "not-run",
+    "build": "not-run",
+    "commit": "not-requested"
+  },
+  "new_services": [],
+  "remaining": "未覆盖多尺寸、系统减少动态效果、真实中文输入法组合过程、整库逐张裁切、全量测试和性能对比；本轮完成当前窗口的列出场景",
+  "followupAuthorization": "自己视觉检查，并删除不用的前端代码以消除覆盖",
+  "frontendCleanup": {
+    "owner": "game/css/photo-studio-unified.css",
+    "mounts": "game/css/photo-studio-mounts.css",
+    "photoViewRulesMoved": 92,
+    "retainedSharedButtonRules": 15,
+    "removedFiles": [
+      "game/css/photo-studio-archive.css",
+      "game/css/photo-studio-craft.css",
+      "game/css/photo-studio-cover.css",
+      "game/css/photo-studio-motion.css",
+      "game/css/page-cardslib.css"
+    ],
+    "removedCode": [
+      "失效的旧标题三击波浪彩蛋及其定时器",
+      "多代图库结构、装饰、尺寸、逐项动效规则",
+      "旧页面专属重复入场动效",
+      "禁用重置按钮的旧悬停底色"
+    ],
+    "recoverableWorkingCopies": ".tmp/studio-css-before-1010/"
+  },
+  "sources": {
+    "game/css/photo-studio-unified.css": "bf4418a29ce2d85ac86623779af2a4e224957f738db2c395793df293992950db",
+    "game/css/photo-studio-mounts.css": "c653ebcf89e3f3ac0aa4b866fa57388b9a1825fdbc1a52b10e0ec7df9c3ebb2b",
+    "game/src/hub/game.cardslib.page.js": "61ba889c26e6529abc9bf4e632ac0c6489fe65c626af4a10e8fe5c897171de91",
+    "game/src/hub/photo-studio-navigation.js": "6552a678e3dd15e6dee10128ad29de017ddba38783e308bea16aeca7f328b2cb"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-nature-form",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12470-95d7-75e0-9477-03361e04258c\\exec-519b5dea-dab7-4708-af9e-21c287dcf636.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-fullmoon-redo/cards-spell-tt3-nature-form-source.png",
+        "bytes": 1916407,
+        "sha256": "e9a73305fb5913f6c7da9feb407ff44a134f4ff0df20a7ac2bc606b530ca4f0c"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-fullmoon-redo/cards-spell-tt3-nature-form-full-before.webp",
+          "bytes": 142786,
+          "sha256": "19d2327d152786c28136aa5c9377ae353e816bd5133dd9737029435c56fe557c"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-fullmoon-redo/cards-spell-tt3-nature-form-thumb-before.webp",
+          "bytes": 20046,
+          "sha256": "5e605edc8f8cb881b9035e65fdc3d0b9bda0cd40482487a17e34a5d12c0ae327"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-nature-form.webp",
+          "bytes": 122834,
+          "sha256": "d46f182bc366b046839e8d41c6e6471005430c0ff799aadea57ff7f91352058f",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-nature-form.webp",
+          "bytes": 18478,
+          "sha256": "7f651ea9b8c8f6fbd50283caf1effc5887465f118fad0dadb26ba3ce353c8d11",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "xingyue-fullmoon-unveiling-builtin-20261010",
+      "revision_after": "xingyue-fullmoon-gradient-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt3-nature-form.webp",
+            "ext": "webp",
+            "bytes": 142786,
+            "sha256": "19d2327d152786c28136aa5c9377ae353e816bd5133dd9737029435c56fe557c",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-moon-longsword/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt3-nature-form.webp",
+            "ext": "webp",
+            "bytes": 122834,
+            "sha256": "d46f182bc366b046839e8d41c6e6471005430c0ff799aadea57ff7f91352058f",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-fullmoon-redo/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-nature-form.webp",
+            "ext": "webp",
+            "bytes": 20046,
+            "sha256": "5e605edc8f8cb881b9035e65fdc3d0b9bda0cd40482487a17e34a5d12c0ae327",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-moon-longsword/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-nature-form.webp",
+            "ext": "webp",
+            "bytes": 18478,
+            "sha256": "7f651ea9b8c8f6fbd50283caf1effc5887465f118fad0dadb26ba3ce353c8d11",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-fullmoon-redo/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1117,
+  "manifest_count_after": 1117
+}

@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-deep-diary",
+      "generated_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\deep-curse-redraw-20261010\\deep-curse.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-deep-curse-install/cards-equip-tt3-deep-diary-source.png",
+        "bytes": 1513403,
+        "sha256": "f5275082171f85e643a816ae89bdd20700f0e7f0fdf81a06138d9b2dfceb2dfa"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-deep-curse-install/cards-equip-tt3-deep-diary-full-before.webp",
+          "bytes": 57228,
+          "sha256": "e2268dd3c72c065fe9d4b689a383dd29497feff8f62c029f7fdd402bd293dc6d"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-deep-curse-install/cards-equip-tt3-deep-diary-thumb-before.webp",
+          "bytes": 10324,
+          "sha256": "11a4866f1369678ad6952e1fd0eb9c973bb0ea0b63f2dad7b23669b1af86410b"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt3-deep-diary.webp",
+          "bytes": 60180,
+          "sha256": "d93ff2f66861dd2e1f2cebcbda52a2539e39f9cc08c5acfd798b4f6546202fed",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt3-deep-diary.webp",
+          "bytes": 9184,
+          "sha256": "3d0382d71caa5a51e07d419d32835b3df0e2bea8a90d161e1f025b7fad6217f1",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "deep-curse-original-rough-20261011",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/equip-tt3-deep-diary.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 60180,
+            "sha256": "d93ff2f66861dd2e1f2cebcbda52a2539e39f9cc08c5acfd798b4f6546202fed",
+            "source": "docs/evidence/2026-10-11-deep-curse-install/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/equip-tt3-deep-diary.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 10324,
+            "sha256": "11a4866f1369678ad6952e1fd0eb9c973bb0ea0b63f2dad7b23669b1af86410b",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/equip-tt3-deep-diary.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 9184,
+            "sha256": "3d0382d71caa5a51e07d419d32835b3df0e2bea8a90d161e1f025b7fad6217f1",
+            "source": "docs/evidence/2026-10-11-deep-curse-install/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1119,
+  "manifest_count_after": 1120
+}

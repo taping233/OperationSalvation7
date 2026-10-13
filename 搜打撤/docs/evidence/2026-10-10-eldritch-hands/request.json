@@ -1,0 +1,44 @@
+{
+  "items": [
+    {
+      "card_id": "tt8-curseimmune",
+      "asset": "cards/creature-tt8-curseimmune.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-f3b55190-75db-471a-869c-905dbd85acc0.png",
+      "revision": "eldritch-hand-1-transparent-20261010",
+      "prompt": "Transform this reference hand into sealed limb 1: a CUPPED eldritch god HAND holding an empty invisible weight. Retain reference family design and exactly five-digit anatomy: charcoal-black organic skin, muted dark-violet planes, broad knuckle ridges, long dark claws, a few tiny violet joint cracks, black wrist cuff with one ivory diamond, two or three heavy gray chain links. CHANGE pose: short forearm enters lower left, open palm faces upward and slightly toward viewer, FOUR named fingers index/middle/ring/little arc gently inward on the right side with four separately visible claw tips, while a distinct opposable thumb arcs on the left. Five tips total, clean gaps, no sixth digit. Palm forms a shallow visible basin, not a clenched fist or an upright flat fan. Use the same restrained matte hand-painted anime finish as reference: large connected opaque planes, broad directional strokes, handmade hard shadow boundaries, sparse clear structural marks at joints, quiet surfaces; no shiny silver armor/glove/robot, pores, dense wrinkles, ornate metal carving, fine scratches, oil ridges, grain overlays or triangle mosaic. Whole hand/cuff/chains and all tips inside square with margin; clean shadow taper at forearm, no wound. One isolated cutout on REAL transparent alpha background, no colored/white/black backdrop, no baked checkerboard, floor or cast shadow. No person/head/body/feet/toes/additional hand/held object, no text/frame/UI/watermark.",
+      "references": [
+        "C:/Users/太平/.codex/generated_images/01a121b9-fd6d-72f3-b531-cf6d6a4bb583/exec-008f9463-773f-4aca-87e8-79acc9caa049.png"
+      ]
+    },
+    {
+      "card_id": "tt8-energycap",
+      "asset": "cards/creature-tt8-energycap.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-008f9463-773f-4aca-87e8-79acc9caa049.png",
+      "revision": "eldritch-hand-2-transparent-20261010",
+      "prompt": "Repaint the NovelAI draft as sealed limb 2: exactly ONE upright open HAND of an eldritch god on a genuinely TRANSPARENT background. Keep draft's five-finger fan and short forearm from lower center. It must have FIVE readable separate digits: opposable thumb out left, index/middle/ring/little fingers staggered upward, with clean gaps. FAMILY DESIGN: matte charcoal-black ORGANIC supernatural skin, muted deep-violet broad planes, elongated palm and severe knuckle ridges, dark long tapered claws, tiny violet light only in a few joint cracks, a simple black sealing wrist cuff with ONE ivory diamond, two or three simple heavy gray chain links. Not shiny silver armor, a metal glove or robot gauntlet. PAINT: rough hand-painted ANIME, large connected opaque matte color masses, wide purposeful direction strokes, handmade hard shadow boundaries and sparse colored structural marks at knuckles; palm has quiet broad surfaces, fingers readable, cuff and chains economical. Moderate selective anatomy detail, no pores, tiny wrinkles/filigree, narrow scratch lines, glossy silver plates, thick oil ridges, all-over noise or triangle facet mosaics. Entire hand, all claw tips and chain links stay inside square with small margin. Short stump ends in a tapered shadow edge, no bloody wound. True alpha cutout: NO white/black/colored backdrop, no checkerboard baked into pixels, no floor/cast shadow, no head/body/feet/toes/extra hands/held object/gore, no text/frame/UI/watermark.",
+      "references": [
+        "D:/素材/代号柒/.tmp/nai/output/eldritch-hands-20261010/hand-2.png"
+      ]
+    },
+    {
+      "card_id": "tt8-healplus",
+      "asset": "cards/creature-tt8-healplus.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-f4942183-7d6b-42b7-bf88-9dfcbe682ab2.png",
+      "revision": "eldritch-hand-4-transparent-20261010",
+      "prompt": "Repaint Image1 as sealed limb 4: exactly one clenched FIST of the same eldritch god. Image1 gives low three-quarter fist composition, short wrist entering lower right. Image2 is family DESIGN/PAINT reference only: matte charcoal-black organic skin, muted violet broad planes, severe knuckle ridges and tapered dark claws, tiny violet joint cracks, black sealing wrist cuff with simple ivory diamond and 2-3 heavy gray chain links. Do not copy its open/cupped gesture. Correct draft anatomy: FOUR fingers fold clearly INTO the palm with a strong arcing row of four knuckles, ONE opposable thumb wraps across the folded fingers. Five digits total, no stacked rows of claws, extra knuckles or protruding sixth finger. Claw tips tuck near the palm and are only selectively visible; recognizable fist silhouette. Maintain readable organic joints, not metallic armor or a robot gauntlet. Whole fist/wrist/chains inside square margin, no gore. Match restrained rough hand-painted anime: connected opaque masses, broad direction swipes, handmade hard shadow edges, sparse structural lines and quiet matte surfaces. No shiny silver plates, dense grooves/pores/filigree, fine scratches, oil ridges or facet mosaics. Real transparent alpha background, no black/white/color backdrop, baked checkerboard, floor or cast shadow. No body/head/feet/toes/extra hand, no text/frame/UI/watermark.",
+      "references": [
+        "D:/素材/代号柒/.tmp/nai/output/eldritch-hands-20261010/hand-4.png",
+        "C:/Users/太平/.codex/generated_images/01a121b9-fd6d-72f3-b531-cf6d6a4bb583/exec-0416d294-6470-47f8-8dcc-d45060a07206.png"
+      ]
+    }
+  ],
+  "uncompleted": [
+    {
+      "card_id": "tt8-nofocus",
+      "reason": "内置重绘5次网络失败，未返回图片，保留旧图",
+      "nai_draft": ".tmp/nai/output/eldritch-hands-20261010/hand-3.png",
+      "last_prompt": "Create a single square transparent-background game asset: ONE organic HAND of an eldritch god in a hooked forward grasp, designed as sealed limb 3. Back of hand faces the viewer in three-quarter side view. A short forearm enters from upper left, the long palm angles toward lower right, and four long articulated fingers curl down/forward in a staggered arc. A clearly separate opposable thumb curls in from the left side of the palm. Exactly five digits with distinct knuckles and clean gaps, each tapering to a dark claw. All fingertips and chain links fit comfortably inside the square canvas with margin. The hand is charcoal-black matte supernatural skin with muted deep-violet broad shadow planes, elongated palm bones and severe but organic knuckle ridges. Tiny concentrated violet light appears only in a few joint cracks. A plain black sealing cuff encircles the wrist, carrying one ivory diamond seal; two or three heavy gray chain links hang beneath it. Forearm ends in a clean tapered shadow shape, no bloody wound. It belongs to the same family as dark violet-black cupped hand, upright open hand and clenched fist assets. Rough hand-painted ANIME illustration: large connected opaque matte color masses, broad economical direction strokes following the palm/fingers, handmade hard light-shadow boundaries, sparse structural lines at key knuckles, readable hand gesture and quiet secondary surfaces. No polished metal glove, robot, silver reflective panels, tiny wrinkles/pores, decorative carvings, all-over grain, fine scratches, oil impasto or triangular facet mosaic. TRUE ALPHA TRANSPARENCY throughout all empty background and finger gaps. No background color, paper, floor, cast shadow, baked checkerboard, text, UI, frame, watermark, person/head/body, feet/toes, extra hands or held object.",
+      "last_references": []
+    }
+  ]
+}

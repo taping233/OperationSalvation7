@@ -1,0 +1,59 @@
+{
+  "model": "nai-diffusion-5-full",
+  "recipe_version": "1.3",
+  "width": 1024,
+  "height": 1024,
+  "seed": null,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1boy, solo, calm expression, slight smile, looking down, dark background, fire, magic, floating cards, limited palette, from above, upper body, leaning forward, outstretched arm, open hand\n\n1.2::miv4t::, 0.8::quasarcake::\n\nCharacter 1 occupies the upper-left of the square composition, with his reaching hand nearer to the viewer at the center. His torso remains joined to that arm and continues out of the lower-left crop. His face and reaching hand are the focal points of the figure: the hat frames the face without dwarfing it, and the cloak stays behind his shoulders instead of forming an oversized bright flag across the upper-right half. He releases three small black spell cards toward a fiery vortex inside the lower-right quadrant. Its hot core remains visibly inside the image, separated from the bottom and right edges by dark background. The cards recede along a diagonal into that core, their edges burning away. Two broad orange-gold bands curl inward around the small ivory core, forming a readable spiral; one outer surge then rises along the right side. Dark gaps separate the curved bands. The core is a small concentrated hot point rather than a large radial white explosion. The surge lights only the lower-facing edges of his fingers and cheek and pulls the cloak along its flow. The reflected warmth does not recolor the whole hand; the large robe and cloak shadows stay matte and subdued.\n\n1.3::opaque broad color masses, clear shadow planes, grouped hair locks, principal cloth folds::, matte painting, selective facial detail. Resolve the eyes, glasses and finger gesture selectively. Most hair and cloth surfaces use connected color planes with only a few wide directional swipes, not narrow outlined strips or continuous silky highlights. Keep dark surfaces quiet. The background is one continuous abstract field of ink blue and charcoal violet, painted edge to edge behind the figure and eruption. Volcanic pressure is expressed through dark color layers and fire; there is no visible paper surface, inset rectangular painting, frame or separate blank region.\n\npainterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Directional light separates the principal light and shadow planes without long smooth reflective gradients. Build volumes from confident planes of light and shadow with visible brush edges, with handmade brush edges inside the illustration. The dark background covers the entire canvas and reaches all four image edges without unpainted margins. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "boy, adult male, slender masculine face, silver-gray hair, long hair, low hair bun, two long sidelocks, golden eyes, pointy ears, thin round glasses, black bent-tip wide-brim witch hat, purple hat lining, black high-collared long robe, purple cloak lining, gold trim, black gloves, white feather and blue sapphire gold clasp brooch on his left chest",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, female, child, breasts, staff, wand, white background, detached torso, disembodied hand, contact sheet, character sheet, realistic landscape, crescent moon, thin flame jet, dense fine strokes, grain overlay, ornate filigree, white border, unpainted margins, inset illustration, paper background, feathered hat, hat feather, radial white explosion, glossy fabric, silky hair highlights, thin contour tracing",
+  "skill": "C:/Users/太平/.zcode/skills/nai5-prompting/SKILL.md",
+  "checks": {
+    "one_count_in_main": true,
+    "character_starts_with_boy": true,
+    "appearance_only_in_character": true,
+    "camera_pose_as_phrases": true,
+    "one_background_kind": "dark background",
+    "relations_as_sentences": true,
+    "artist_source": "tools/nai_style.py ARTIST_BLOCK，项目已提供，不自编",
+    "uc_source": "项目build_uc基线与本图排除项，API预设none，无前端预设重复",
+    "seed": "本轮随机，不复用固定对照seed"
+  },
+  "installed": false,
+  "status": "v4已根据v3视觉检查离线优化，未调用API",
+  "parent_request": "request.json",
+  "parent_receipt": "receipt.json",
+  "changes": [
+    {
+      "group": "画幅完整性",
+      "observed": "白边和内部矩形暗底形成纸上插画",
+      "change": "粗笔边缘限制在画内；暗底满幅；追加白边/纸底/嵌套画面排除"
+    },
+    {
+      "group": "火山交互与能量形状",
+      "observed": "纸牌链条存在，但白爆点挤在右下角且缺少旋涡",
+      "change": "核心移到画内下右；两条宽弧围绕小热点；暗间隙明确旋涡；保留三牌卷入关系"
+    },
+    {
+      "group": "焦点与画法",
+      "observed": "巨帽与亮紫披风抢焦点；细线和平滑反光较多；帽上误加羽毛",
+      "change": "脸手优先，帽仅框脸，披风后置并灰化；强调块面，压细线/长反光；排除帽羽"
+    }
+  ],
+  "unchanged": [
+    "男性原创人设角色栏",
+    "画师串",
+    "人数/表情/视线/机位/姿势词组",
+    "V5 Full、尺寸和客户端参数",
+    "已选对角线分镜"
+  ],
+  "seed_note": "若下一轮授权生成，由客户端随机生成新seed；本轮只优化提示词。"
+}

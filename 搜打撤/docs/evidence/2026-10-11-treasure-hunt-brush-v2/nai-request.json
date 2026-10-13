@@ -1,0 +1,21 @@
+{
+  "card_id": "tt3-treasure-hunt",
+  "model": "nai-diffusion-4-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 1242435099,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nno humans, treasure chest, from above, three-quarter view, abstract background, 1.4::gouache painting, thick opaque brush strokes, painterly edges::\n\nAn old brass-bound wooden treasure chest fills the right-center, about one third of the image width, with a curved lid and a clearly visible front latch. Two elongated pale silver-blue strokes sweep from upper-left and lower-left toward the latch, revealing the chest out of a deep slate-blue painted obscurity. The strongest small ivory-gold accent sits where the strokes meet the latch; the surrounding background is muted cool blue-gray.\n\nLay down paint with a wide loaded flat brush: broad curved strokes wrap the chest lid, long oblique strokes explain its side, and blunt dabs turn the metal bands. Let warm brown underpainting show at a few broken stroke endings. Overlap broad ochre, umber and cool gray strokes to make the box feel solid. Use decisive hard-edged cast shadows with a few intermediate color turns, not outlined flat polygons. The searching marks have sharp light cores surrounded by long irregular blue-gray brush swipes. Keep brush direction readable and the large masses connected, with selective unfinished edges and quieter stretches between paint marks. Broad brushed color variation continues into the background. Focus the clearest painting on the latch and near lid edge.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, hands, map, playing cards, vector art, geometric diagram, flat outlined cube, uniform flat fill, thin ink outlines, fine wood grain, ornamental engraving, dense tiny facets, all-over noise filter, glossy 3d render, lens flare, scattered particles",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\treasure-hunt-brush-v2-20261011\\treasure.png",
+  "installed": false,
+  "design": "保留共享画师链/画风全文，移除少数平面/轮廓化措辞，强化宽笔覆盖与体积转折；两道寻宝笔势汇到箱锁。"
+}

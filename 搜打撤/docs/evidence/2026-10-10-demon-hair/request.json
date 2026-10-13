@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "card_id": "cc-demon",
+      "asset": "cards/spell-cc-demon.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12470-95d7-75e0-9477-03361e04258c/exec-abc71be2-0ec2-4b93-ab28-ba668b3ca437.png",
+      "revision": "xingyue-demon-halfbody-broad-hair-20261010",
+      "prompt": "Edit ONLY THE HAIR in this existing hand-painted anime card illustration. Keep the composition, face shape, purple eyes, expression, crescent ornament, clothing, hands, spectral claw, background, lighting, palette and crop as close to the input as possible. Do not redesign any of these parts.\n\nThe current hair is too busy with small pale scratches, tiny angular highlights and many internal strand marks. Simplify it dramatically into COHERENT LARGE HAIR MASSES while preserving its exact hairstyle silhouette: smooth rounded crown, dense straight fringe, two long cheek sidelocks, and the thick low side braid at image-left. Preserve the very pale muted golden/ivory hair colors and gray warm/cool shadows; do not turn it yellow or recolor it.\nCrown: one quiet pale base mass, one broad curved gray shadow turn, and just one or two large softly broken opaque highlight swaths. Fringe: group into four or five substantial contiguous locks, each a quiet shape with only a broad shadow plane; remove needle-sized segmentation, fine vertical strand lines and scattered scratch highlights. Sidelocks: one long pale mass per lock and a single broad shadow turn, with a few purposeful contour accents only. Braid: retain its woven silhouette but build each large braid segment from one quiet ivory plane and one broad muted gray shadow; no individually delineated strands, chipped highlight confetti or dozens of angular fragments. Hair tips remain simplified broad tapered groups.\nUse a few wide directional curved paint strokes with handmade edges to explain the form, quiet interiors and selective overlaps. This is broad opaque hand-painted anime simplification, not a blur, smoothing filter, vector fill or change of medium. Remove fine detail rather than adding texture. Leave the face and eyes as selectively detailed focal points. Keep all non-hair content unchanged. No text, watermark, frame or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-cc-demon.webp"
+      ]
+    }
+  ]
+}

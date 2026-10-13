@@ -1,0 +1,129 @@
+{
+  "time": "2026-10-10T18:00:22.628Z",
+  "tests": {
+    "uniquePassed": 115,
+    "reports": [
+      "accepted-targeted-tests.json",
+      "premium-base-tests.json",
+      "zoom-placement-tests.json"
+    ],
+    "scope": "related target tests; not full repository suite"
+  },
+  "browser": {
+    "provider": "Codex In-app Browser",
+    "url": "http://127.0.0.1:5200/",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "slot": 1,
+    "realInput": [
+      "navigation",
+      "card open/read/close/focus",
+      "skill page 2/open/return",
+      "achievement choice/back objective",
+      "appearance preview/restored",
+      "difficulty/restored normal",
+      "rain intensity",
+      "pond feed",
+      "departure temporary add card/reset reload"
+    ],
+    "notPerformed": [
+      "real purchase/sale/restore/growth/reward/skin application",
+      "start new run",
+      "other viewports"
+    ],
+    "finalErrors": [],
+    "finalResources": {
+      "wood": 0,
+      "rations": 0,
+      "keys": 0,
+      "coins": 0,
+      "stashCards": 5
+    }
+  },
+  "screenshots": [
+    {
+      "file": "appearance-preview-final.jpg",
+      "bytes": 84689,
+      "sha256": "5a84133e444abe970beac784111ae9c3d733e50161a5f9797fad70ced261b310"
+    },
+    {
+      "file": "archive-backs-final.jpg",
+      "bytes": 59210,
+      "sha256": "460695c14718dcd190c870f9192ddf25024b89694db244296d61a01e8d139b6f"
+    },
+    {
+      "file": "archive-character-final.jpg",
+      "bytes": 75905,
+      "sha256": "59a24b24dcc7ed0a7745aa2febe34af1abe7c4037d9afa3db5482301693bfc38"
+    },
+    {
+      "file": "archive-room-final.jpg",
+      "bytes": 43799,
+      "sha256": "82e7887e95824ffc598028068053bebd2ca4c271cb67439ada4f06b89aaef89b"
+    },
+    {
+      "file": "archive-story-final.jpg",
+      "bytes": 22460,
+      "sha256": "a4e3cc2c2141634196a19a6cd4979b90f8262122216a9f75925d7f6bc31f3ba2"
+    },
+    {
+      "file": "departure-character-final.jpg",
+      "bytes": 74763,
+      "sha256": "d0abfbfd7c78ba2136b66df2fb122fff526256cc5301080d0508dd740dadadbe"
+    },
+    {
+      "file": "departure-preparation-final.jpg",
+      "bytes": 78955,
+      "sha256": "61637f10047fee6c1fa7da653f58f559bce7eb2dcac912506090d4a915bdd115"
+    },
+    {
+      "file": "difficulty-detail-final.jpg",
+      "bytes": 149923,
+      "sha256": "9e62699924f30fb415e0815a6fbaf4b43558574e8395d7e9ecabb4feb4a19173"
+    },
+    {
+      "file": "expansion-final.jpg",
+      "bytes": 31495,
+      "sha256": "e9a8f22cd9fb3977ee05bcd2b0e9da4a2af080cd3ea05ed27a7c74404a647a2a"
+    },
+    {
+      "file": "home-final.jpg",
+      "bytes": 153788,
+      "sha256": "544e962b2b3c2bcf9e61a83fe1fbc58bc701f44ba79e6faae04b044964fba5ef"
+    },
+    {
+      "file": "inventory-detail-final.jpg",
+      "bytes": 34716,
+      "sha256": "5de3f5a7b3a3ac519641f9f3ccaaf9cf7d38e6eda0626792e9ded30ce0c18ed2"
+    },
+    {
+      "file": "koi-final.jpg",
+      "bytes": 30588,
+      "sha256": "88b0bd582c1d0df6135929d0c241029df63f92cfb6f7530c1fa01ab3113c509b"
+    },
+    {
+      "file": "rain-final.jpg",
+      "bytes": 36012,
+      "sha256": "d5fbd2214cd550adbcc9d55d8a373cc1a3fb12d614a394f0b2c2fd8451f8f069"
+    },
+    {
+      "file": "shop-final.jpg",
+      "bytes": 35901,
+      "sha256": "91fe44a803affcfb31139f56aa0ea5b90aa37ab2398fafdb5a26d396f6936d2d"
+    },
+    {
+      "file": "skills-final.jpg",
+      "bytes": 93529,
+      "sha256": "a837a7d7ddc3f42c8f67af4478b78fb9ef418b0f9f16645d08b8f110c432476d"
+    },
+    {
+      "file": "warehouse-final.jpg",
+      "bytes": 49327,
+      "sha256": "56f6b8eefad6311c6a1f767b51355aefd5e7bc3c4205811e8215ba1133f9af76"
+    }
+  ],
+  "sourceValidation": "source-validation.json",
+  "boundary": "Two unrelated photo structure assertions remain failed in earlier expanded check; not edited."
+}

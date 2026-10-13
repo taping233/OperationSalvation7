@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-execute",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a125cc-1257-7b52-b519-742cc71dafda\\exec-851137ad-54c4-4fe7-8426-3743a43ac05a.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-execute-redraw/cards-martial-tt3-execute-source.png",
+        "bytes": 1813584,
+        "sha256": "6916b3ebf99c6176b8ac9c5532d09b254a7824af6171386d65bf89eb4d910c83"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-execute-redraw/cards-martial-tt3-execute-full-before.webp",
+          "bytes": 86912,
+          "sha256": "2298350ee926329b14912930281d59bee78f3b7c3039ca339e7911876084d5f0"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-execute-redraw/cards-martial-tt3-execute-thumb-before.webp",
+          "bytes": 17834,
+          "sha256": "43c2f085f06f35c4e271b6ff04e1aef1521aba8bbcd4e8b06580f7fedd969f11"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-execute.webp",
+          "bytes": 108472,
+          "sha256": "23e3f2dcdc00f95bb9471181bd2b4809e06be12850a27c8ad04650f61b99f787",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-execute.webp",
+          "bytes": 16630,
+          "sha256": "978104bda1ae7b299e95ec8e81f33e9b3e87c47175a4fa24fb2b78f98a917f4b",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "execute-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt3-execute.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 108472,
+            "sha256": "23e3f2dcdc00f95bb9471181bd2b4809e06be12850a27c8ad04650f61b99f787",
+            "source": "docs/evidence/2026-10-10-execute-redraw/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt3-execute.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17834,
+            "sha256": "43c2f085f06f35c4e271b6ff04e1aef1521aba8bbcd4e8b06580f7fedd969f11",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt3-execute.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 16630,
+            "sha256": "978104bda1ae7b299e95ec8e81f33e9b3e87c47175a4fa24fb2b78f98a917f4b",
+            "source": "docs/evidence/2026-10-10-execute-redraw/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1091,
+  "manifest_count_after": 1092
+}

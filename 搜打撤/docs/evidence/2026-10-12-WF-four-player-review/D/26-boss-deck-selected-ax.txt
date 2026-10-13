@@ -1,0 +1,195 @@
+Browser tab: 2, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5354/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/
+	1 container demon BOSS战 · 编组牌库, ID: overlay
+		2 container
+			3 heading demon BOSS战 · 编组牌库, Value: 3
+				4 image demon
+				5 text  BOSS战 · 编组牌库
+			6 text 第 1 回合 · 能量 0/2 本局首脑： 肃清总督 （攻击 5 · 生命 50）——从背包选  15  张 招式 / 装备 / 能力卡 ，与  0  张初始攻击组成牌库 · 开局抽 5 张 · 每回合开始抽 1 张 · 每回合固定 2 费
+			7 container
+				8 image question
+				9 text 肃清总督  词缀【
+				10 image arrow
+				11 text  军威】每个回合结束时攻击力 +2
+			12 container
+				13 image lock
+				14 text  固定编入：初始攻击 ×0（初始攻击不足 5 张——部分进消耗口袋了） · 
+				15 image cross
+				16 text  道具 / 资源 / 事件卡与初始攻击不可选入 · 
+				17 image bolt
+				18 text  「对战开始时」装备编入即生效（卡面带角标）
+			19 heading 可选卡牌 已选 15 张（至少 15）, Value: 3
+				20 text 可选卡牌  已选 15 张（至少 15）
+			21 checkbox Description: 编入或移出 灵能召唤, Value: 1
+				22 container
+					23 text 1
+					24 image 灵能召唤
+					25 text 灵能召唤 法术 · 稀有
+					192 container
+						193 text 稀有 稀有
+					28 text 发现 1  张 注能 卡牌，并使该牌无需 注能 。
+				194 text 已编入
+			30 checkbox Description: 编入或移出 包扎, Value: 1
+				31 container
+					32 text 1
+					33 image 包扎
+					34 text 包扎 武术 · 古朴
+					195 container
+						196 text 古朴 古朴
+					37 image heart
+					38 text 回 3
+					39 image plate
+					40 text 甲 3 你回复  3  点 生命 ，并获得  3  点 护甲 。
+				197 text 已编入
+			42 checkbox Description: 编入或移出 法杖, Value: 0
+				43 container
+					44 text 0
+					45 image 法杖
+					46 text 法杖 装备 · 古朴
+					198 container
+						199 text 古朴 古朴
+					49 text 你的 法伤 增加  1  点。
+			50 checkbox Description: 编入或移出 二刀流, Value: 1
+				51 container
+					52 text 1
+					53 image 二刀流
+					54 text 二刀流 武术 · 稀有
+					200 container
+						201 text 稀有 稀有
+					57 text 发现 1  张武术牌，并额外获得该牌的  1  张复制。
+				202 text 已编入
+			59 checkbox Description: 编入或移出 厉兵秣马, Value: 1
+				60 container
+					61 text 2
+					62 image 厉兵秣马
+					63 text 厉兵秣马 武术 · 黑像专属
+					203 container
+						204 text 职业 职业
+					66 image cards
+					67 text 抽 2
+					68 image plate
+					69 text 甲 12 你获得  12  点 护甲 ，并抽  2  张牌。
+				205 text 已编入
+			71 checkbox Description: 编入或移出 坚盾, Value: 1
+				72 container
+					73 text 1
+					74 image 坚盾
+					75 text 坚盾 武术 · 黑像专属
+					206 container
+						207 text 职业 职业
+					78 image plate
+					79 text 甲 8 你获得  8  点 护甲 ；下 回合开始时 ，你失去  4  点 护甲 。
+				208 text 已编入
+			81 checkbox Description: 编入或移出 后备能源, Value: 1
+				82 container
+					83 text 6
+					84 image 后备能源
+					85 text 后备能源 法术 · 史诗
+					209 container
+						210 text 史诗 史诗
+					88 image cards
+					89 text 抽 2 抽  2  张牌，并回复你的全部 能量 ；你的 消耗 口袋中每有  1  张法术牌，本牌费用减少  1  点。
+				211 text 已编入
+			91 checkbox Description: 编入或移出 正午决战, Value: 1
+				92 container
+					93 text 1
+					94 image 正午决战
+					95 text 正午决战 武术 · 史诗
+					212 container
+						213 text 史诗 史诗
+					98 text 下 回合开始时 ，对目标连开  4  枪，每枪造成  2  点 固定伤害 。
+				214 text 已编入
+			100 checkbox Description: 编入或移出 毒药, Value: 1
+				101 container
+					102 text 0
+					103 image 毒药
+					104 text 毒药 法术 · 古朴
+					215 container
+						216 text 古朴 古朴
+					107 image cards
+					108 text 抽 1 对目标附加  1  层 中毒 ，并抽  1  张牌。
+				217 text 已编入
+			110 checkbox Description: 编入或移出 回音箭, Value: 1
+				111 container
+					112 text 1
+					113 image 回音箭
+					114 text 回音箭 武术 · 古朴
+					218 container
+						219 text 古朴 古朴
+					117 image plate
+					118 text 甲 3 造成（你的攻击力 -  1 ）点 攻击伤害 ；你获得  3  点 护甲 。
+				220 text 已编入
+			120 checkbox Description: 编入或移出 连续射击, Value: 1
+				121 container
+					122 text 1
+					123 image 连续射击
+					124 text 连续射击 武术 · 史诗
+					221 container
+						222 text 史诗 史诗
+					127 text 对目标造成  2  点 固定伤害 ；本 回合 你此前每打出  1  张 招式 ，本牌的 伤害 效果触发  1  次。
+				223 text 已编入
+			129 checkbox Description: 编入或移出 治愈, Value: 1
+				130 container
+					131 text 1
+					132 image 治愈
+					133 text 治愈 法术 · 古朴
+					224 container
+						225 text 古朴 古朴
+					136 image heart
+					137 text 回 5 你回复  5  点 生命 ，并 净化 自身。
+				226 text 已编入
+			139 checkbox Description: 编入或移出 回音箭, Value: 1
+				140 container
+					141 text 1
+					142 image 回音箭
+					143 text 回音箭 武术 · 古朴
+					227 container
+						228 text 古朴 古朴
+					146 image plate
+					147 text 甲 3 造成（你的攻击力 -  1 ）点 攻击伤害 ；你获得  3  点 护甲 。
+				229 text 已编入
+			149 checkbox Description: 编入或移出 影噬, Value: 1
+				150 container
+					151 text 1
+					152 image 影噬
+					153 text 影噬 武术 · 稀有
+					230 container
+						231 text 稀有 稀有
+					156 text 本 回合 ，你偷取  1  名敌人的攻击力，直到该敌人的攻击力降至  1  点。
+				232 text 已编入
+			158 checkbox Description: 编入或移出 毒药, Value: 1
+				159 container
+					160 text 0
+					161 image 毒药
+					162 text 毒药 法术 · 古朴
+					233 container
+						234 text 古朴 古朴
+					165 image cards
+					166 text 抽 1 对目标附加  1  层 中毒 ，并抽  1  张牌。
+				235 text 已编入
+			168 checkbox Description: 编入或移出 阿猫的礼物, Value: 0
+				169 container
+					170 text 0
+					171 image 阿猫的礼物
+					172 text 阿猫的礼物 装备 · 史诗
+					236 container
+						237 text 史诗 史诗
+					175 text 你 发现 或随机获得本牌时，回复  1  点 能量 ，并随机获得另  1  张卡牌。
+			176 checkbox Description: 编入或移出 邪能护体, Value: 1
+				177 container
+					178 text 2
+					179 image 邪能护体
+					180 text 邪能护体 法术 · 史诗
+					238 container
+						239 text 史诗 史诗
+					183 image cards
+					184 text 抽 3
+					185 image crystal
+					186 text 注能 2 注能 （ 2 ）： 抽  3  张牌；本 回合 ，你免疫所有 伤害 和 诅咒 效果。
+				240 text 已编入
+			188 button swords 开始战斗（牌库 15 张）
+				189 image swords
+				190 text  开始战斗（牌库 15 张）
+			191 button ↩ 放弃挑战
+
+The focused UI element is 176 checkbox Description: 编入或移出 邪能护体, Value: 1

@@ -1,0 +1,46 @@
+{
+  "status": "范围内返工完成，待主会话同窗口复核",
+  "files": [
+    {
+      "file": "game/src/hub/hub.personnel.js",
+      "sha256": "3cb3e9b3f12dfe7acfdbd30ab2cae43da5738bf1724679c3a04c85a8856b2973"
+    },
+    {
+      "file": "game/src/hub/hub.warehouse.js",
+      "sha256": "0292ca9ddcf3b2b01052471fedf06ae6c52d74e85b2dff0d6e5758634c2dc016"
+    },
+    {
+      "file": "game/css/base-personnel-v12.css",
+      "sha256": "950c5d1fb6cd5e805289eb0d217472a161b25532d1d42baf944154f768881274"
+    },
+    {
+      "file": "game/css/base-logistics-trade-v12.css",
+      "sha256": "3b0c888fdce9ea4384d29bf964d73644be8cca234a5165037a02bf83afb8e835"
+    }
+  ],
+  "checks": [
+    {
+      "command": "Acorn parse modified personnel and warehouse JS; postcss.parse modified two CSS",
+      "exitCode": 0
+    },
+    {
+      "command": "node node_modules/vitest/vitest.mjs run tests/hub-trade-shop-v5.test.js tests/hub-personnel-navigation.test.js tests/hub-personnel-actions.test.js --reporter=dot",
+      "exitCode": 0,
+      "passed": 17,
+      "files": 3
+    }
+  ],
+  "contracts": {
+    "actions": ".pv12-data-actions unchanged; parent synchronizes through hub.presentation.js",
+    "type": "--base-type-body:22px / --base-type-label:19px from A; about 14.7 / 12.7 screen px at 2/3 zoom",
+    "primary": "#e2c891 warm gold for actual execute commands; selected categories remain #9edce7"
+  },
+  "notRun": [
+    "browser",
+    "service",
+    "build",
+    "full suite",
+    "commit"
+  ],
+  "visualStatus": "只读首轮截图确认问题来源；未执行返工后视觉验收"
+}

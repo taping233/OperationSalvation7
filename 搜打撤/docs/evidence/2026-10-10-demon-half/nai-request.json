@@ -1,0 +1,21 @@
+{
+  "card_id": "cc-demon",
+  "model": "nai-diffusion-4-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 767015868,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1girl, solo, upper body, three-quarter view, looking at viewer, calm expression, closed mouth, raised hand, open hand, shadow, magic, simple background\n\nThe character is shown from head to waist in a square frame, placed left of center, shoulders turned gently to the right while her calm face looks back toward the viewer. Her nearer gloved hand rises just in front of her right shoulder, palm open facing outward, fingers naturally separated. A single larger purple-black spectral claw opens beyond this palm in the right half, like the outward extension of her restrained gesture. The spectral hand is one connected dark silhouette with three large curved pointed finger shapes, partly cropped at the right edge, not a second person. A narrow violet rim separates the dark claw from the quiet backdrop. Her other gloved hand rests quietly at her waist beneath the cape, with no additional gesture. The face, open palm and spectral silhouette form a clear triangular arrangement; leave calm space around the hair and eyes. A tiny muted crimson glint sits at the transition from glove to shadow, never crossing the face. Her low side braid falls on the left quiet side, her purple cape sweeps back in one broad plane. Connected shoulders, chest and waist remain readable beneath the high-collared dark priestess clothes. Background is quiet deep gray-violet and charcoal abstract planes, without red streak networks, scenery, symbols or particle clouds.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "girl, young adult priestess, composed delicate face, violet eyes, very pale low-saturation light golden hair, straight dense bangs, rounded smooth crown, long straight cheek sidelocks, one thick low side braid, dark indigo crescent hair ornament above bangs, black-gray high-collared priestess dress, muted purple short cape with sparse gold edging, black gloves",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, full body, legs, feet, angry expression, evil grin, bright yellow hair, orange hair, fluffy hair, side-swept bangs, white priestess clothes, green cape, extra arms, extra human hands, multiple characters, wings, horns on girl, many claws, laser, red streaks, particles, ornate background, border",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\demon-half-20261010\\demon-half.png",
+  "installed": false,
+  "design": "腰以上侧身暗牧星月：肩前抬掌，掌外单只紫黑影爪；脸/掌/爪三角主次，低辫与披肩大面，安静深灰紫背景。"
+}

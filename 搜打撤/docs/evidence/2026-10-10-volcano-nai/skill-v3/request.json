@@ -1,0 +1,31 @@
+{
+  "model": "nai-diffusion-5-full",
+  "recipe_version": "1.3",
+  "width": 1024,
+  "height": 1024,
+  "seed": 1586848622,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1boy, solo, calm expression, slight smile, looking down, dark background, fire, magic, floating cards, limited palette, from above, upper body, leaning forward, outstretched arm, open hand\n\n1.2::miv4t::, 0.8::quasarcake::\n\nCharacter 1 occupies the upper-left of the square composition, with his reaching hand nearer to the viewer at the center. His torso remains joined to that arm and continues out of the lower-left crop. He releases three small black spell cards toward a fiery vortex at the lower right. The cards recede along a diagonal, their edges burning away as they feed the eruption. A broad orange-gold surge curls up the right edge from a small ivory hot core, leaving deep ink-blue and charcoal-violet negative space inside the curve. The surge lights his fingers and cheek from below and pulls the cloak along its flow.\n\nopaque broad color masses, clear shadow planes, grouped hair locks, principal cloth folds, matte painting, selective facial detail. Paint the volcanic surge in a few broad directional swipes; keep dark surfaces quiet. The background is abstract volcanic pressure expressed by dark color layers and eruptive fire, not a physical mountain or a landscape.\n\npainterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "boy, adult male, slender masculine face, silver-gray hair, long hair, low hair bun, two long sidelocks, golden eyes, pointy ears, thin round glasses, black bent-tip wide-brim witch hat, purple hat lining, black high-collared long robe, purple cloak lining, gold trim, black gloves, white feather and blue sapphire gold clasp brooch on his left chest",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, female, child, breasts, staff, wand, white background, detached torso, disembodied hand, contact sheet, character sheet, realistic landscape, crescent moon, thin flame jet, dense fine strokes, grain overlay, ornate filigree",
+  "skill": "C:/Users/太平/.zcode/skills/nai5-prompting/SKILL.md",
+  "checks": {
+    "one_count_in_main": true,
+    "character_starts_with_boy": true,
+    "appearance_only_in_character": true,
+    "camera_pose_as_phrases": true,
+    "one_background_kind": "dark background",
+    "relations_as_sentences": true,
+    "artist_source": "tools/nai_style.py ARTIST_BLOCK，项目已提供，不自编",
+    "uc_source": "项目build_uc基线与本图排除项，API预设none，无前端预设重复",
+    "seed": "本轮随机，不复用固定对照seed"
+  },
+  "installed": false
+}

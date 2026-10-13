@@ -1,0 +1,243 @@
+{
+  "nodes": [
+    {
+      "attributes": {
+        "aria-label": "返回基地",
+        "data-act": "hubHome"
+      },
+      "identity": "返回基地",
+      "key": "back",
+      "rect": {
+        "height": 39.62249755859375,
+        "width": 43.22249984741211,
+        "x": 22.012500762939453,
+        "y": 14
+      },
+      "selector": "#hubMain .hub-back",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(246, 247, 241)",
+        "display": "flex",
+        "font-size": "12.5px"
+      },
+      "tag": "BUTTON",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-view": "courtyard/koi"
+      },
+      "identity": "冬日庭院\n    \n      \n      \n    \n    观鱼观雨\n      轻点水面 · 投喂锦鲤\n      环境设置水声与互动投喂声音：关暂停",
+      "key": "main",
+      "rect": {
+        "height": 956,
+        "width": 653.6000366210938,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#hubMain .hub-page",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(27, 42, 52)",
+        "display": "block",
+        "font-size": "18px"
+      },
+      "tag": "MAIN",
+      "text": "冬日庭院\n    \n      \n      \n    \n    观鱼观雨\n      轻点水面 · 投喂锦鲤\n      环境设置水声与互动投喂声音：关暂停"
+    },
+    {
+      "attributes": {},
+      "identity": "基地",
+      "key": "heading",
+      "rect": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#hubMain h2",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(230, 233, 237)",
+        "display": "block",
+        "font-size": "22px"
+      },
+      "tag": "H2",
+      "text": "基地"
+    },
+    {
+      "attributes": {},
+      "identity": "冬日庭院",
+      "key": "heading",
+      "rect": {
+        "height": 39.01250076293945,
+        "width": 132.0749969482422,
+        "x": 130.46250915527344,
+        "y": 34.01250076293945
+      },
+      "selector": "#hubMain h2",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(246, 247, 241)",
+        "display": "block",
+        "font-size": "30px"
+      },
+      "tag": "H2",
+      "text": "冬日庭院"
+    },
+    {
+      "attributes": {
+        "aria-label": "返回基地",
+        "data-act": "hubHome"
+      },
+      "identity": "返回基地",
+      "key": "action",
+      "rect": {
+        "height": 39.62249755859375,
+        "width": 43.22249984741211,
+        "x": 22.012500762939453,
+        "y": 14
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(246, 247, 241)",
+        "display": "flex",
+        "font-size": "12.5px"
+      },
+      "tag": "BUTTON",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "aria-pressed": "true",
+        "data-act": "hubTab",
+        "data-initial-focus": "",
+        "data-tab": "courtyard",
+        "data-view": "koi"
+      },
+      "identity": "观鱼",
+      "key": "action",
+      "rect": {
+        "height": 54.41250228881836,
+        "width": 100.0500030517578,
+        "x": 24.012500762939453,
+        "y": 815.0625
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgb(23, 42, 53)",
+        "color": "rgb(246, 247, 241)",
+        "display": "block",
+        "font-size": "20px"
+      },
+      "tag": "BUTTON",
+      "text": "观鱼"
+    },
+    {
+      "attributes": {
+        "aria-pressed": "false",
+        "data-act": "hubTab",
+        "data-tab": "courtyard",
+        "data-view": "rain"
+      },
+      "identity": "观雨",
+      "key": "action",
+      "rect": {
+        "height": 54.41250228881836,
+        "width": 100.0500030517578,
+        "x": 124.0625,
+        "y": 815.0625
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgb(246, 247, 241)",
+        "color": "rgb(27, 42, 52)",
+        "display": "block",
+        "font-size": "20px"
+      },
+      "tag": "BUTTON",
+      "text": "观雨"
+    },
+    {
+      "attributes": {
+        "aria-label": "锦鲤池：点击水面投喂"
+      },
+      "identity": "锦鲤池：点击水面投喂",
+      "key": "canvas",
+      "rect": {
+        "height": 956,
+        "width": 653.6000366210938,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#hubMain .courtyard-v3-canvas",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(27, 42, 52)",
+        "display": "block",
+        "font-size": "18px"
+      },
+      "tag": "CANVAS",
+      "text": ""
+    }
+  ],
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 654
+    }
+  },
+  "selectors": [
+    {
+      "key": "back",
+      "selector": "#hubMain .hub-back"
+    },
+    {
+      "key": "main",
+      "selector": "#hubMain .hub-page"
+    },
+    {
+      "key": "heading",
+      "selector": "#hubMain h2"
+    },
+    {
+      "key": "action",
+      "selector": "#hubMain button"
+    },
+    {
+      "key": "canvas",
+      "selector": "#hubMain .courtyard-v3-canvas"
+    }
+  ],
+  "schemaVersion": 1,
+  "kind": "browser-snapshot",
+  "scene": "base-pond-shallow-water",
+  "observedAt": "2026-10-11T05:12:36.123Z",
+  "collector": {
+    "platform": "Codex",
+    "browser": "iab",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "actions": [
+    {
+      "type": "real-input",
+      "detail": "进入档位01→队员→招式→返回队员→伙伴→孵化→返回伙伴→返回队员；人物切换黑像→选择培养卡牌→补给→返回后勤→返回队员保留黑像；外观按Escape回队员；后勤→扩建→返回后勤→返回基地；普通后勤入口清除人物筛选；收藏室→奖励→成就目标按Escape回奖励→收藏里程碑→返回奖励→返回收藏室；卡背→猎手皮纸→查看解锁目标→返回卡背保留选择；庭院→投喂→暂停→继续；观雨→大雨→苔绿→声音开→声音关；台面真实点击出现雨圈散开"
+    },
+    {
+      "type": "screenshot",
+      "detail": "当前窗口实页截取"
+    }
+  ],
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "screenshots": [
+    "docs/evidence/2026-10-11-WF-base-refine-1011/pond-final.jpg"
+  ]
+}

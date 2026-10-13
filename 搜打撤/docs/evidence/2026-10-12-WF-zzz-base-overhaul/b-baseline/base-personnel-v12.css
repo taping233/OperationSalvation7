@@ -1,0 +1,150 @@
+/* Character dossier: agent roster, full illustration, information, integrated tabs.
+   Companion bench: painted subject + shared dark glass + lower companion roster.
+   Reference receipts: docs/evidence/2026-10-11-WF-base-redesign-v7/personnel-v12.md */
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-page:has(> .personnel-v12) { background:transparent; --camp-ink:#f0f4f3; --camp-muted:#bccbd0; --camp-line:#d2e3e32e; --camp-accent:#9edce7; --camp-action:#9edce7; --camp-action-hover:#bce8ee; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 { padding:0; background:transparent; color:#f0f4f3; width:100%; min-width:0; height:calc(var(--game-layout-height,1080px) - 260px); min-height:0; overflow:hidden; box-sizing:border-box; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 :is(h2,h3,h4,b) { font-family:var(--base-font-title,'Microsoft YaHei',sans-serif); font-weight:900; letter-spacing:-.035em; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-workspace { display:grid; grid-template-columns:minmax(360px,1fr) minmax(580px,1fr); grid-template-rows:92px minmax(0,1fr) 58px; gap:16px 24px; height:100%; min-height:0; padding:16px 24px; box-sizing:border-box; overflow:hidden; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-art { grid-column:1; grid-row:1/4; display:grid; grid-template-rows:minmax(0,1fr) auto; min-height:0; min-width:0; margin:0; background:rgba(20,29,35,.82); overflow:hidden; border-radius:14px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-image-stage { position:relative; min-width:0; min-height:0; overflow:hidden; background:transparent; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-image-stage > img { display:block; width:100%; height:100%; min-height:0; max-height:100%; object-fit:contain; object-position:center; margin:0; padding:0; background:transparent; filter:none; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-image-stage > img[data-portrait-fit="body"] { position:absolute; left:50%; bottom:var(--portrait-bottom,4%); width:auto; height:calc(100% * var(--portrait-height,.92)); max-width:none; max-height:none; transform:translateX(var(--portrait-center,-50%)); }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-art figcaption { padding:12px 20px 16px; color:#f0f4f3; background:transparent; border:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-art h2 { font-size:42px; line-height:1.1; margin:0 0 6px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-art figcaption span { color:#bccbd0; font-size:20px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-strip { grid-column:2; grid-row:1; display:flex; align-items:stretch; align-self:start; width:fit-content; max-width:100%; height:92px; gap:10px; background:transparent; padding:0; border:0; border-radius:0; box-shadow:none; backdrop-filter:none; min-width:0; overflow-x:auto; scrollbar-width:thin; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-choice { position:relative; flex:0 0 108px; display:flex; flex-direction:column; align-items:center; justify-content:center; width:108px; min-width:108px; max-width:108px; padding:4px; gap:4px; overflow:hidden; border:2px solid transparent; border-radius:10px; background:#18272cb3; color:#f0f4f3; cursor:pointer; border-width:1px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-avatar { position:relative; display:block; flex:none; width:64px; height:52px; overflow:hidden; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-avatar > :is(img,svg) { position:absolute; display:block; left:50%; bottom:var(--avatar-bottom,3%); width:auto; max-width:none; height:calc(100% * var(--avatar-height,.94)); max-height:none; margin:0; padding:0; object-fit:contain; transform:translateX(var(--avatar-center,-50%)); }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-choice b { font-size:19px; line-height:24px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-choice.on { border-color:#9edce7; background:#9edce729; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-data { grid-column:2; grid-row:2; display:flex; flex-direction:column; min-height:0; padding:20px 24px; border:1px solid #d2e3e32e; border-radius:14px; background:rgba(20,29,35,.82); min-width:0; box-shadow:none; overflow:hidden; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-identity { position:relative; flex:none; padding:0 0 12px; background:transparent; color:white; border-radius:0; margin-bottom:12px; display:flex; align-items:baseline; gap:16px; border-bottom:1px solid #d2e3e32e; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-identity h3 { font-size:28px; line-height:1.15; margin:0; color:#f0f4f3; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-identity small { color:#bccbd0; font-size:19px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-identity > span { font-size:20px; color:#9edce7; font-weight:800; margin-left:auto; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-data-content { color:#f0f4f3; flex:1; min-height:0; overflow:auto; padding-right:6px; scrollbar-gutter:auto; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-data-content h4 { font-size:23px; margin:8px 0; color:#f0f4f3; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-data-content p { font-size:22px; line-height:1.5; margin:6px 0 10px; color:#f0f4f3; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-data-content .hint { font-size:20px; color:#bccbd0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-sections { grid-column:2; grid-row:3; display:flex; align-items:stretch; padding:5px; background:rgba(20,29,35,.82); border:1px solid #d2e3e32e; border-radius:12px; gap:4px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-sections button { flex:1; border:0; border-radius:10px; padding:9px 10px; color:#fff; background:transparent; font:900 20px var(--base-font-title,'Microsoft YaHei',sans-serif); cursor:pointer; font-size:22px; font-weight:700; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-sections button.on { background:#9edce7; color:#12171b; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-growth-summary { border:0; padding:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-level { display:inline-block; color:#fff; background:transparent; padding:0; border-radius:0; font-size:32px; font-weight:900; line-height:1.15; margin-bottom:8px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-perk-value { border-radius:8px; padding:8px 12px; background:#9edce719; font-weight:800; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-growth-progress { border-top:1px solid #d2e3e32e; margin-top:14px; padding-top:8px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-growth-actions { position:static; bottom:0; padding:8px 0 0; background:transparent; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-progress-track { height:10px; border:1px solid #d2e3e32e; border-radius:20px; overflow:hidden; background:#080e14; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-progress-track i { height:100%; background:#7fc5d4; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 :is(.mini-btn,.base-command) { min-height:50px; border:1px solid #d2e3e32e; border-radius:9px; padding:8px 16px; color:#f0f4f3; background:#263840; box-shadow:none; font-weight:700; font-size:21px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .base-command.base-command-primary { color:#14252b; background:#9edce7; border-color:transparent; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 button:disabled { opacity:.66; cursor:default; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 :is(button,input,select):focus-visible { outline:3px solid #5197ab; outline-offset:3px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-skill-detail { display:flex; flex-direction:column; gap:18px; min-height:0; padding:0; border:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-skill-card { pointer-events:none; width:200px; margin:18px auto 14px; overflow:visible; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-skill-card > * { width:200px; max-width:200px; height:283px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-skill-copy small { color:#66717a; font-size:12px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-skill-copy p { max-height:none; overflow:visible; white-space:pre-line; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-pool-toolbar { display:flex; flex-wrap:wrap; gap:8px; padding:14px 0; margin:0; border:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .pool-type-tabs { display:flex; gap:6px; flex-wrap:wrap; width:100%; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .pool-type-tabs .mini-btn { min-height:32px; padding:5px 12px; font-size:13px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .pool-type-tabs .ok { color:#12171b; background:#9edce7; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 :is(input,select) { min-width:0; padding:8px 12px; border:1px solid #a9b2bd; border-radius:6px; background:#15232b; color:#f0f4f3; font-size:20px; border-color:#d2e3e32e; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-skin-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; padding:8px 0; max-height:none; overflow:visible; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-skin { display:flex; flex-direction:column; padding:6px; min-width:0; border:1px solid #d2e3e32e; border-radius:12px; background:#15232b; color:#f0f4f3; gap:4px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-skin.on { border-color:#1c677c; box-shadow:0 0 0 2px #9edce7; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-skin img { width:100%; height:116px; object-fit:contain; background:transparent; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-skin b { font-size:20px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-skin small { color:#bccbd0; font-size:18px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-page-head { padding:20px 32px 0; margin:0; border:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-page-head h2 { color:#f0f4f3; font-size:36px; margin:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .companion-toolbar { display:flex; gap:16px; justify-content:flex-end; align-items:center; padding:10px 28px; color:#f0f4f3; background:transparent; border:0; font-size:21px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-stage { display:grid; grid-template-columns:minmax(340px,1fr) minmax(620px,1.15fr); grid-template-rows:minmax(0,1fr) 126px; gap:16px 24px; height:calc(100% - 142px); min-height:0; box-sizing:border-box; padding:0 28px 18px; background:transparent; overflow:hidden; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-display { grid-column:1; grid-row:1; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(20,29,35,.82); min-height:0; height:100%; box-sizing:border-box; padding:10px 28px; border:0; box-shadow:none; color:#f0f4f3; overflow:hidden; border-radius:14px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-display > .companion-art { width:min(100%,470px); height:calc(100% - 100px); min-height:0; object-fit:contain; margin:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-display h3 { margin:8px 0; color:#f0f4f3; font-size:32px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-display small { color:#727780; font-size:13px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-state { padding:6px 16px; border:0; border-radius:20px; color:white; background:#252b31; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-details { grid-column:2; grid-row:1; align-self:stretch; display:flex; flex-direction:column; gap:10px; min-height:0; height:100%; box-sizing:border-box; overflow:auto; padding:18px 24px; border:1px solid #d2e3e32e; border-radius:14px; background:rgba(20,29,35,.82); color:#fff; box-shadow:none; --camp-ink:#fff; --camp-muted:#b9c3ca; --camp-line:#64707b; --camp-accent:#9edce7; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-details :is(h3,h4,p,dd,dt) { color:white; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 :is(.partner-details,.companion-hatch) > * { flex:none; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-details h3 { font-size:27px; margin:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-details h4 { font-size:23px; margin:10px 0 6px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-details p { font-size:21px; line-height:1.45; margin:0 0 6px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .warehouse-facts { display:grid; gap:16px; margin:0; grid-template-columns:1fr 1fr; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .warehouse-facts > div { display:flex; justify-content:space-between; padding:6px 0; background:transparent; border-radius:0; border:0; font-size:21px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .companion-growth { display:flex; flex-direction:row; gap:24px; padding:6px 0; border:0; background:transparent; border-radius:14px; font-size:21px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-stage .person-roster { grid-column:1/3; grid-row:2; display:flex; flex-wrap:nowrap; flex-direction:row; gap:10px; width:100%; overflow-x:auto; padding:8px; background:rgba(20,29,35,.82); border-radius:14px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-stage .person-face { display:flex; flex:1 0 110px; min-width:110px; max-width:175px; flex-direction:column; align-items:center; padding:4px; min-height:108px; gap:4px; background:transparent; color:white; border:2px solid transparent; border-radius:12px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-stage .person-face.on { border-color:#9edce7; background:#40575f; color:white; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-stage .person-face .companion-art { width:100%; height:62px; object-fit:contain; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-stage .person-face b { font-size:20px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-stage .person-face small { color:#bdc8d1; font-size:18px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .companion-hatch-scene { display:grid; grid-template-columns:minmax(340px,1.6fr) minmax(330px,1fr); grid-template-rows:minmax(0,1fr); gap:32px; padding:24px 32px 32px; height:calc(100% - 85px); min-height:0; box-sizing:border-box; background:transparent; overflow:hidden; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .companion-hatch-art { display:flex; align-items:center; justify-content:center; min-height:0; padding:30px; border:0; background:rgba(20,29,35,.82); box-shadow:none; overflow:hidden; border-radius:14px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .companion-hatch-art :is(img,svg) { max-width:360px; max-height:100%; width:100%; height:100%; object-fit:contain; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .companion-hatch { display:flex; flex-direction:column; gap:22px; align-self:center; max-height:100%; min-height:0; box-sizing:border-box; overflow:auto; padding:28px; background:rgba(20,29,35,.82); color:white; border:1px solid #d2e3e32e; border-radius:14px; box-shadow:none; --camp-ink:#fff; --camp-muted:#b9c3ca; --camp-line:#64707b; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .companion-hatch :is(h3,p) { color:white; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .companion-hatch h3 { font-size:32px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .companion-hatch p { font-size:22px; line-height:1.55; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 [hidden] { display:none; }
+
+/* 角色页覆盖旧共用直角按钮，并保留外层圆角矩形。 */
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-page:has(> .personnel-v12) { background:transparent; border-radius:0; --camp-ink:#f0f4f3; --camp-muted:#bccbd0; --camp-line:#d2e3e32e; --camp-accent:#9edce7; --camp-action:#9edce7; --camp-action-hover:#bce8ee; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 { background:transparent; border-radius:24px; overflow:hidden; clip-path:inset(0 round 24px); color:#f0f4f3; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 button.base-command[data-act] { border-radius:12px; overflow:hidden; clip-path:none; }
+
+/* 角色页深色区块使用半透明深灰，文字和选中强调保留。 */
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 :is(.pv12-identity,.pv12-sections,.person-level) { background:rgba(22,29,35,.68); backdrop-filter:blur(12px); }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-choice { background:#18272cb3; color:#f0f4f3; border-width:1px; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-choice.on { background:#9edce729; border-color:#9edce7; }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 button.base-command[data-act] { background:rgba(22,29,35,.72); color:#fff; border-color:#89959d70; backdrop-filter:blur(12px); }
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 button.base-command[data-act]:hover:not(:disabled) { background:rgba(22,29,35,.82); }
+
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-choice:hover:not(.on) { background:#e1ecef; }
+
+/* 招式：大卡单排目录；卡面沿用共用外观，点击查看完整说明。 */
+#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12[data-section="pool"] {
+  background:#e8ebed;
+  & .pv12-agent-workspace { grid-template-columns:minmax(360px,1fr) minmax(580px,1fr); grid-template-rows:92px minmax(0,1fr) 58px; gap:16px 24px; padding:16px 24px; }
+  & .pv12-agent-strip { grid-column:1; grid-row:1; height:92px; gap:12px; }
+  & .pv12-agent-choice { min-width:104px; width:104px; flex-basis:104px; border-radius:8px; background:#18272cb3; color:#f0f4f3; border-width:1px; }
+  & .pv12-agent-choice.on { background:#9edce729; border-color:#9edce7; }
+  & .pv12-agent-avatar { height:52px; width:64px; }
+  & .pv12-sections { grid-column:1; grid-row:3; border-radius:12px; background:rgba(20,29,35,.82); backdrop-filter:none; border:1px solid #d2e3e32e; }
+  & .pv12-pool-catalog { grid-column:1; grid-row:2; display:flex; flex-direction:column; gap:8px; min-width:0; min-height:0; padding:0; overflow:hidden; }
+  & .pool-controls { flex:none; }
+  & .person-pool-toolbar { flex-wrap:nowrap; align-items:center; gap:10px; padding:0 0 10px; border-bottom:1px solid #bac3c9; }
+  & .pool-type-tabs { width:auto; flex:none; flex-wrap:nowrap; }
+  & .pool-type-tabs .mini-btn { border-radius:7px; padding:8px 16px; min-height:38px; font-size:15px; }
+  & .person-pool-toolbar input { margin-left:auto; width:230px; }
+  & [data-person-pool-count] { flex:none; color:#46545d; font-size:15px; font-weight:700; }
+  & [data-card-browser] { flex:1; display:flex; flex-direction:column; min-height:0; overflow:hidden; }
+  & .card-browser-track { --card-browser-min:320px; gap:24px; flex:1; min-height:0; padding:6px 10px; align-content:center; justify-content:center; overflow-y:auto; }
+  & .person-pool-card { display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:0; width:100%; max-width:none; gap:16px; padding:18px 20px 12px; border:0; border-radius:0; background:transparent; color:#25343e; box-sizing:border-box; box-shadow:none; }
+  & .person-pool-card:hover { background:transparent; transform:none; }
+  & .person-pool-card.on { background:transparent; border:0; box-shadow:none; }
+  & .pool-card-art { display:block; pointer-events:none; width:272px; max-width:100%; height:auto; aspect-ratio:272/406; overflow:visible; margin:0; filter:none; }
+  & .pool-card-art > .hs-card { width:100%!important; max-width:none!important; min-width:0!important; height:auto!important; min-height:0!important; margin:0; transform:none; font-size:16px; }
+  & .person-pool-card > span:last-child { position:relative; top:6px; color:#566874; font-size:18px; line-height:24px; font-weight:700; letter-spacing:.08em; }
+  & .card-browser-footer { flex:none; margin:6px 0 0; padding:4px 0; color:#38454e; font-size:17px; }
+  & .card-browser-page { width:48px; height:38px; border:1px solid #9cabb3; border-radius:8px; background:#f6f8f9; color:#25333b; }
+  & .card-browser-page:hover:not(:disabled) { background:#25333b; color:#fff; }
+  & [hidden] { display:none; }
+}
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .partner-details .camp-costs { font-size:21px; margin:8px 0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .source-link { display:inline-flex; align-self:flex-start; font-size:20px; margin-top:8px; color:#9edce7; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-skin img { height:96px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-details { gap:6px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .warehouse-facts { padding:0; border:0; min-height:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .warehouse-facts > div { padding:0; border:0; min-height:0; align-items:center; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-stage:has(.partner-state.carried) [data-act="selPet"] { display:none; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-details > section { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-details > section > :is(h4,.companion-growth,.camp-costs,.source-link) { grid-column:1/-1; margin:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-details .camp-costs { padding:8px 0; min-height:0; border:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-details .camp-costs > div { display:flex; align-items:center; justify-content:space-between; padding:0; gap:12px; border:0; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-details .camp-costs :is(dt,dd) { margin:0; font-size:22px; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-details .camp-costs dd { display:flex; gap:10px; align-items:baseline; }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-details .hint { align-self:center; margin:0; }
+body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .personnel-v12 button.source-link { font-size:20px; min-height:36px; padding:2px 0; justify-content:flex-start; color:#9edce7; background:transparent; }

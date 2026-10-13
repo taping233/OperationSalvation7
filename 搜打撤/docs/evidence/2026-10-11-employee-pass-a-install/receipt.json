@@ -1,0 +1,94 @@
+{
+  "method": "Built-in ImageGen candidate; RGBA WebP encoding with existing thumbnail color transform; alpha preserved",
+  "card_id": "cmtmvq6ss84l",
+  "revision_before": "employee-pass-a-redraw-20261010",
+  "revision_after": "employee-pass-a-premium-no-letter-transparent-20261011",
+  "backups": [
+    {
+      "path": ".tmp/imagegen/2026-10-11-employee-pass-a-install/full-before.webp",
+      "bytes": 128136,
+      "sha256": "bb28b6a8b7913608456447b505f22eacc263b09348670299c6aa20b1084fe343"
+    },
+    {
+      "path": ".tmp/imagegen/2026-10-11-employee-pass-a-install/thumb-before.webp",
+      "bytes": 20812,
+      "sha256": "6ed85fd2dab1bf7dda6f49f88b8aa45ca9c92cafa10cc2bee5aa8bdebb997938"
+    }
+  ],
+  "raw": {
+    "path": ".tmp/imagegen/2026-10-11-employee-pass-a-install/source.png",
+    "bytes": 1089844,
+    "sha256": "a0bb24c5f8bc66b6ee94106504fa9e9c5c5bf4879b7333a52c9e8ed9fdaf7888"
+  },
+  "outputs": [
+    {
+      "path": "game/assets/cards/items/cmtmvq6ss84l.webp",
+      "bytes": 141564,
+      "sha256": "ecde07324e3c6cceb3e6f71c05777d2206ebf21996f714364bbc6f144f0236b6",
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/cards/items/cmtmvq6ss84l.webp",
+      "bytes": 21852,
+      "sha256": "608adbd518518ee22223c5c4efe9c14942032b697e420da62c913e803e7c328a",
+      "mode": "RGBA",
+      "size": [
+        448,
+        448
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    }
+  ],
+  "manifest_patches": [
+    {
+      "before": {
+        "path": "cards/items/cmtmvq6ss84l.webp",
+        "ext": "webp",
+        "license": "项目自有（AI 生成）",
+        "bytes": 128136,
+        "sha256": "bb28b6a8b7913608456447b505f22eacc263b09348670299c6aa20b1084fe343",
+        "source": "docs/evidence/2026-10-10-employee-pass-a-install/receipt.json"
+      },
+      "after": {
+        "path": "cards/items/cmtmvq6ss84l.webp",
+        "ext": "webp",
+        "license": "项目自有（AI 生成）",
+        "bytes": 141564,
+        "sha256": "ecde07324e3c6cceb3e6f71c05777d2206ebf21996f714364bbc6f144f0236b6",
+        "source": "docs/evidence/2026-10-11-employee-pass-a-install/receipt.json"
+      }
+    },
+    {
+      "before": {
+        "path": "thumbs/cards/items/cmtmvq6ss84l.webp",
+        "ext": "webp",
+        "license": "项目自有（自制/AI 生成）",
+        "bytes": 20812,
+        "sha256": "6ed85fd2dab1bf7dda6f49f88b8aa45ca9c92cafa10cc2bee5aa8bdebb997938",
+        "source": "docs/evidence/2026-10-10-employee-pass-a-install/receipt.json"
+      },
+      "after": {
+        "path": "thumbs/cards/items/cmtmvq6ss84l.webp",
+        "ext": "webp",
+        "license": "项目自有（自制/AI 生成）",
+        "bytes": 21852,
+        "sha256": "608adbd518518ee22223c5c4efe9c14942032b697e420da62c913e803e7c328a",
+        "source": "docs/evidence/2026-10-11-employee-pass-a-install/receipt.json"
+      }
+    }
+  ],
+  "manifest_count_before": 1119,
+  "manifest_count_after": 1119,
+  "verification": "Not run: tests/browser/build"
+}

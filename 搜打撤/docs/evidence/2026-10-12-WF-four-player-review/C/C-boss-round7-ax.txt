@@ -1,0 +1,133 @@
+- complementary:
+  - navigation "远征工具":
+    - img "常无欲 Q版小人"
+    - generic: 当前 · 首脑
+    - button "bag 背包 携带卡牌 12/16 B" [disabled]:
+      - img "bag"
+      - text: 背包
+      - generic: 携带卡牌
+      - strong: 12/16
+      - generic: B
+    - button "lock 安全格 保护物资 0/2" [disabled]:
+      - img "lock"
+      - text: 安全格
+      - generic: 保护物资
+      - strong: 0/2
+    - button "cards 消耗口袋 待复原卡牌 10" [disabled]:
+      - img "cards"
+      - text: 消耗口袋
+      - generic: 待复原卡牌
+      - strong: "10"
+    - button "map 定位 当前位置 F" [disabled]:
+      - img "map"
+      - text: 定位
+      - generic: 当前位置
+      - generic: F
+    - button "map 总览 已知区域 G" [disabled]:
+      - img "map"
+      - text: 总览
+      - generic: 已知区域
+      - generic: G
+- main:
+  - navigation "远征章节":
+    - generic: 污染核心
+    - generic: 第 4 层 / 4
+  - generic: "16"
+  - generic: "4"
+  - button "离开对局":
+  - button:
+  - button:
+  - generic: 当前生命
+  - generic: 8/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - generic: 冬核深处 · 首脑遭遇
+    - generic: 第 7 回合
+    - generic: 你的行动
+    - button "牌库：龙焰射线×1（点击查看）": 1牌库
+    - generic: 0弃牌
+    - button "墓地：深海咒印×1，包扎×1，灵能召唤×1，突破进展×1（被消耗的牌 · 不参与洗回 · 点击查看）":
+      - img "skull"
+      - text: 4消耗
+    - generic: 选择手牌，或结束回合
+    - text: 常无欲
+    - generic: 你
+    - generic: 8/35
+    - img "swords"
+    - text: "4"
+    - button "肃清总督的意图：攻击·回合末强化 · 17。点击查看完整说明":
+      - img "arrow"
+      - generic: "17"
+    - img "boss_general"
+    - generic: 肃清总督
+    - img "swords"
+    - text: "17"
+    - img "arrow"
+    - text: 军威
+    - generic: 2/50
+    - img "skull"
+    - text: 中毒 2
+    - generic: 当前能量
+    - img "bolt"
+    - generic: "2"
+    - generic: /2
+    - generic "职业技能与手牌分栏":
+      - button "fire 火球 2 能量 · 每回合一次":
+        - img "fire"
+        - text: 火球
+        - generic: 2 能量 · 每回合一次
+    - button "孢子城墙 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）":
+      - generic: "1"
+      - img "孢子城墙"
+      - generic: 孢子城墙
+      - generic: 法术 · 古朴 古朴
+      - img "plate"
+      - text: 甲 6
+      - generic: 对 1 名敌人附加 2 层中毒；你获得 6 点护甲。
+      - img "swords"
+    - button "查看孢子城墙完整规则": 规则
+    - button "邪能护体 · 2 费。费用 2 · 点击进入注能（选 2 张手牌消耗强化打出），注能条内也可「不注能直接打出」（悬停看完整描述）":
+      - generic: "2"
+      - img "邪能护体"
+      - generic: 邪能护体
+      - generic: 法术 · 史诗 史诗
+      - img "cards"
+      - text: 抽 3
+      - img "crystal"
+      - text: 注能 2
+      - generic: 注能（2）：
+      - text: 抽 3 张牌；本回合，你免疫所有伤害和诅咒效果。
+      - img "sparkles"
+      - button "crystal 注能2":
+        - img "crystal"
+        - text: 注能2
+    - button "查看邪能护体完整规则": 规则
+    - button "棘刺之地 · 2 费。费用 2 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）":
+      - generic: "2"
+      - img "棘刺之地"
+      - generic: 棘刺之地
+      - generic: 法术 · 稀有 稀有
+      - generic: 对全体敌人附加 2 层中毒，并立即触发每名敌人的 1 次毒伤。
+      - img "swords"
+    - button "查看棘刺之地完整规则": 规则
+    - button "霜月斩 · 2 费。费用 2 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）":
+      - generic: "2"
+      - img "霜月斩"
+      - generic: 霜月斩
+      - generic: 武术 · 史诗 史诗
+      - generic: 造成（你的攻击力 + 2）点攻击伤害；对目标附加冰冻与禁疗，持续 1 回合。
+      - img "swords"
+    - button "查看霜月斩完整规则": 规则
+    - generic "战术操作":
+      - button "bag 背包":
+        - img "bag"
+        - text: 背包
+      - button "runner 撤离（判负）":
+        - img "runner"
+        - text: 撤离（判负）
+      - button "gear 设置":
+        - img "gear"
+        - text: 设置
+      - button "skip 结束回合":
+        - img "skip"
+        - text: 结束回合

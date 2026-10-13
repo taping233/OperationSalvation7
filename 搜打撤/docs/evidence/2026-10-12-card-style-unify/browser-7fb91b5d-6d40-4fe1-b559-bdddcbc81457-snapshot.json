@@ -1,0 +1,1932 @@
+{
+  "actions": [
+    {
+      "detail": "正式Cards.cardHTML与运行样式顺序；九类容器63张构造卡面；仅限定样本宿主卡宽，不改卡内外观",
+      "type": "static-inspection"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"1\\n    \\n    初始攻击\\n    武术 · 初始\\n    \\n    \\n    造成等同于你的攻击力的攻击伤害。\\n    \\n    \\n    1\",\"class\":\"hs-card tp0 rv0 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 230.7250061035156,
+        "y": 317.13751220703125
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "3.06px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "9px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.26px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    初始攻击\n    武术 · 初始\n    \n    \n    造成等同于你的攻击力的攻击伤害。\n    \n    \n    1"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    铜币\\n    资源 · 古朴\\n    \\n    \\n    可出售。\\n    \\n    \\n    3\",\"class\":\"hs-card tp7 rv1 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 613.5250244140625,
+        "y": 317.13751220703125
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "3.06px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "9px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.26px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    铜币\n    资源 · 古朴\n    \n    \n    可出售。\n    \n    \n    3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    应急绷带\\n    道具 · 稀有\\n    回 12\\n    \\n    你回复 12 点生命。\",\"class\":\"hs-card tp3 rv2 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 996.3250122070312,
+        "y": 317.13751220703125
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "3.06px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "9px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.26px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    应急绷带\n    道具 · 稀有\n    回 12\n    \n    你回复 12 点生命。"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    金币\\n    资源 · 史诗\\n    \\n    \\n    贵重货币，可出售。\\n    \\n    \\n    9\",\"class\":\"hs-card tp7 rv3 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 230.7250061035156,
+        "y": 891.5375366210938
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "3.06px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "9px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.26px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    金币\n    资源 · 史诗\n    \n    \n    贵重货币，可出售。\n    \n    \n    9"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    剑荡妖邪\\n    武术 · 传说\\n    \\n    \\n    造成（你的攻击力 + 5）点攻击伤害；选择手牌中的 1 张武术牌，直接施放。\\n    +5\\n    \\n    5\",\"class\":\"hs-card tp0 rv4 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 613.5250244140625,
+        "y": 891.5375366210938
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "3.06px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "9px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.26px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    剑荡妖邪\n    武术 · 传说\n    \n    \n    造成（你的攻击力 + 5）点攻击伤害；选择手牌中的 1 张武术牌，直接施放。\n    +5\n    \n    5"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    风暴火球\\n    法术 · 常无欲专属\\n    \\n    \\n    对每名敌人施放 1 次「火球」。\\n    4'法伤\\n    \\n    3\",\"class\":\"hs-card tp1 rv6 cf4 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 996.3250122070312,
+        "y": 891.5375366210938
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "3.06px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "9px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.26px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    风暴火球\n    法术 · 常无欲专属\n    \n    \n    对每名敌人施放 1 次「火球」。\n    4'法伤\n    \n    3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    白梅落影·妄\\n    能力卡 · 棱彩\\n    \\n    \\n    遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。\\n    \\n    \\n    8\",\"class\":\"hs-card tp6 rv-prism cf1 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 230.7250061035156,
+        "y": 1465.9375
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "3.06px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "9px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.26px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    白梅落影·妄\n    能力卡 · 棱彩\n    \n    \n    遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。\n    \n    \n    8"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"1\\n    \\n    初始攻击\\n    武术 · 初始\\n    \\n    \\n    造成等同于你的攻击力的攻击伤害。\\n    \\n    \\n    1\",\"class\":\"hs-card tp0 rv0 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 56.125,
+        "y": 1951.5125732421875
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    初始攻击\n    武术 · 初始\n    \n    \n    造成等同于你的攻击力的攻击伤害。\n    \n    \n    1"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    铜币\\n    资源 · 古朴\\n    \\n    \\n    可出售。\\n    \\n    \\n    3\",\"class\":\"hs-card tp7 rv1 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 234.7875061035156,
+        "y": 1951.5125732421875
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    铜币\n    资源 · 古朴\n    \n    \n    可出售。\n    \n    \n    3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    应急绷带\\n    道具 · 稀有\\n    回 12\\n    \\n    你回复 12 点生命。\",\"class\":\"hs-card tp3 rv2 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 413.4500122070313,
+        "y": 1951.5125732421875
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    应急绷带\n    道具 · 稀有\n    回 12\n    \n    你回复 12 点生命。"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    金币\\n    资源 · 史诗\\n    \\n    \\n    贵重货币，可出售。\\n    \\n    \\n    9\",\"class\":\"hs-card tp7 rv3 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 592.1124877929688,
+        "y": 1951.5125732421875
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    金币\n    资源 · 史诗\n    \n    \n    贵重货币，可出售。\n    \n    \n    9"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    剑荡妖邪\\n    武术 · 传说\\n    \\n    \\n    造成（你的攻击力 + 5）点攻击伤害；选择手牌中的 1 张武术牌，直接施放。\\n    +5\\n    \\n    5\",\"class\":\"hs-card tp0 rv4 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 770.7750244140625,
+        "y": 1951.5125732421875
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    剑荡妖邪\n    武术 · 传说\n    \n    \n    造成（你的攻击力 + 5）点攻击伤害；选择手牌中的 1 张武术牌，直接施放。\n    +5\n    \n    5"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    风暴火球\\n    法术 · 常无欲专属\\n    \\n    \\n    对每名敌人施放 1 次「火球」。\\n    4'法伤\\n    \\n    3\",\"class\":\"hs-card tp1 rv6 cf4 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 949.4375,
+        "y": 1951.5125732421875
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    风暴火球\n    法术 · 常无欲专属\n    \n    \n    对每名敌人施放 1 次「火球」。\n    4'法伤\n    \n    3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    白梅落影·妄\\n    能力卡 · 棱彩\\n    \\n    \\n    遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。\\n    \\n    \\n    8\",\"class\":\"hs-card tp6 rv-prism cf1 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 56.125,
+        "y": 2162.625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    白梅落影·妄\n    能力卡 · 棱彩\n    \n    \n    遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。\n    \n    \n    8"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"1\\n    \\n    初始攻击\\n    武术 · 初始\\n    \\n    \\n    造成等同于你的攻击力的攻击伤害。\\n    \\n    \\n    1\",\"class\":\"hs-card tp0 rv0 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 230.7250061035156,
+        "y": 2683
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.76px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.96px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    初始攻击\n    武术 · 初始\n    \n    \n    造成等同于你的攻击力的攻击伤害。\n    \n    \n    1"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    铜币\\n    资源 · 古朴\\n    \\n    \\n    可出售。\\n    \\n    \\n    3\",\"class\":\"hs-card tp7 rv1 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 613.5250244140625,
+        "y": 2683
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.76px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.96px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    铜币\n    资源 · 古朴\n    \n    \n    可出售。\n    \n    \n    3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    应急绷带\\n    道具 · 稀有\\n    回 12\\n    \\n    你回复 12 点生命。\",\"class\":\"hs-card tp3 rv2 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 996.3250122070312,
+        "y": 2683
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.76px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.96px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    应急绷带\n    道具 · 稀有\n    回 12\n    \n    你回复 12 点生命。"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    金币\\n    资源 · 史诗\\n    \\n    \\n    贵重货币，可出售。\\n    \\n    \\n    9\",\"class\":\"hs-card tp7 rv3 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 230.7250061035156,
+        "y": 3256.60009765625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.76px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.96px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    金币\n    资源 · 史诗\n    \n    \n    贵重货币，可出售。\n    \n    \n    9"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    剑荡妖邪\\n    武术 · 传说\\n    \\n    \\n    造成（你的攻击力 + 5）点攻击伤害；选择手牌中的 1 张武术牌，直接施放。\\n    +5\\n    \\n    5\",\"class\":\"hs-card tp0 rv4 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 613.5250244140625,
+        "y": 3256.60009765625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.76px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.96px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    剑荡妖邪\n    武术 · 传说\n    \n    \n    造成（你的攻击力 + 5）点攻击伤害；选择手牌中的 1 张武术牌，直接施放。\n    +5\n    \n    5"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    风暴火球\\n    法术 · 常无欲专属\\n    \\n    \\n    对每名敌人施放 1 次「火球」。\\n    4'法伤\\n    \\n    3\",\"class\":\"hs-card tp1 rv6 cf4 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 996.3250122070312,
+        "y": 3256.60009765625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.76px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.96px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    风暴火球\n    法术 · 常无欲专属\n    \n    \n    对每名敌人施放 1 次「火球」。\n    4'法伤\n    \n    3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    白梅落影·妄\\n    能力卡 · 棱彩\\n    \\n    \\n    遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。\\n    \\n    \\n    8\",\"class\":\"hs-card tp6 rv-prism cf1 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 230.7250061035156,
+        "y": 3830.199951171875
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.76px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.96px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    白梅落影·妄\n    能力卡 · 棱彩\n    \n    \n    遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。\n    \n    \n    8"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"1\\n    \\n    初始攻击\\n    武术 · 初始\\n    \\n    \\n    造成等同于你的攻击力的攻击伤害。\\n    \\n    \\n    1\",\"class\":\"hs-card tp0 rv0 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 55.32500076293945,
+        "y": 4314.5
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.76px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.96px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    初始攻击\n    武术 · 初始\n    \n    \n    造成等同于你的攻击力的攻击伤害。\n    \n    \n    1"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    铜币\\n    资源 · 古朴\\n    \\n    \\n    可出售。\\n    \\n    \\n    3\",\"class\":\"hs-card tp7 rv1 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 233.9875030517578,
+        "y": 4314.5
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.76px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.96px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    铜币\n    资源 · 古朴\n    \n    \n    可出售。\n    \n    \n    3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    应急绷带\\n    道具 · 稀有\\n    回 12\\n    \\n    你回复 12 点生命。\",\"class\":\"hs-card tp3 rv2 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 412.6499938964844,
+        "y": 4314.5
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.76px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.96px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    应急绷带\n    道具 · 稀有\n    回 12\n    \n    你回复 12 点生命。"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    金币\\n    资源 · 史诗\\n    \\n    \\n    贵重货币，可出售。\\n    \\n    \\n    9\",\"class\":\"hs-card tp7 rv3 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 591.3125,
+        "y": 4314.5
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.76px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.96px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    金币\n    资源 · 史诗\n    \n    \n    贵重货币，可出售。\n    \n    \n    9"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    剑荡妖邪\\n    武术 · 传说\\n    \\n    \\n    造成（你的攻击力 + 5）点攻击伤害；选择手牌中的 1 张武术牌，直接施放。\\n    +5\\n    \\n    5\",\"class\":\"hs-card tp0 rv4 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 769.9750366210938,
+        "y": 4314.5
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.76px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.96px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    剑荡妖邪\n    武术 · 传说\n    \n    \n    造成（你的攻击力 + 5）点攻击伤害；选择手牌中的 1 张武术牌，直接施放。\n    +5\n    \n    5"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    风暴火球\\n    法术 · 常无欲专属\\n    \\n    \\n    对每名敌人施放 1 次「火球」。\\n    4'法伤\\n    \\n    3\",\"class\":\"hs-card tp1 rv6 cf4 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 948.6375122070312,
+        "y": 4314.5
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.76px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.96px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    风暴火球\n    法术 · 常无欲专属\n    \n    \n    对每名敌人施放 1 次「火球」。\n    4'法伤\n    \n    3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    白梅落影·妄\\n    能力卡 · 棱彩\\n    \\n    \\n    遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。\\n    \\n    \\n    8\",\"class\":\"hs-card tp6 rv-prism cf1 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 55.32500076293945,
+        "y": 4548.9375
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.76px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "14px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.96px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    白梅落影·妄\n    能力卡 · 棱彩\n    \n    \n    遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。\n    \n    \n    8"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"1\\n    \\n    初始攻击\\n    武术 · 初始\\n    \\n    \\n    造成等同于你的攻击力的攻击伤害。\\n    \\n    \\n    1\",\"class\":\"hs-card tp0 rv0 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 56.125,
+        "y": 4866.30029296875
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    初始攻击\n    武术 · 初始\n    \n    \n    造成等同于你的攻击力的攻击伤害。\n    \n    \n    1"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    铜币\\n    资源 · 古朴\\n    \\n    \\n    可出售。\\n    \\n    \\n    3\",\"class\":\"hs-card tp7 rv1 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 234.7875061035156,
+        "y": 4866.30029296875
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    铜币\n    资源 · 古朴\n    \n    \n    可出售。\n    \n    \n    3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    应急绷带\\n    道具 · 稀有\\n    回 12\\n    \\n    你回复 12 点生命。\",\"class\":\"hs-card tp3 rv2 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 413.4500122070313,
+        "y": 4866.30029296875
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    应急绷带\n    道具 · 稀有\n    回 12\n    \n    你回复 12 点生命。"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    金币\\n    资源 · 史诗\\n    \\n    \\n    贵重货币，可出售。\\n    \\n    \\n    9\",\"class\":\"hs-card tp7 rv3 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 592.1124877929688,
+        "y": 4866.30029296875
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    金币\n    资源 · 史诗\n    \n    \n    贵重货币，可出售。\n    \n    \n    9"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    剑荡妖邪\\n    武术 · 传说\\n    \\n    \\n    造成（你的攻击力 + 5）点攻击伤害；选择手牌中的 1 张武术牌，直接施放。\\n    +5\\n    \\n    5\",\"class\":\"hs-card tp0 rv4 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 770.7750244140625,
+        "y": 4866.30029296875
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    剑荡妖邪\n    武术 · 传说\n    \n    \n    造成（你的攻击力 + 5）点攻击伤害；选择手牌中的 1 张武术牌，直接施放。\n    +5\n    \n    5"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    风暴火球\\n    法术 · 常无欲专属\\n    \\n    \\n    对每名敌人施放 1 次「火球」。\\n    4'法伤\\n    \\n    3\",\"class\":\"hs-card tp1 rv6 cf4 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 949.4375,
+        "y": 4866.30029296875
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    风暴火球\n    法术 · 常无欲专属\n    \n    \n    对每名敌人施放 1 次「火球」。\n    4'法伤\n    \n    3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    白梅落影·妄\\n    能力卡 · 棱彩\\n    \\n    \\n    遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。\\n    \\n    \\n    8\",\"class\":\"hs-card tp6 rv-prism cf1 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 56.125,
+        "y": 5077.41259765625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    白梅落影·妄\n    能力卡 · 棱彩\n    \n    \n    遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。\n    \n    \n    8"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"1\\n    \\n    初始攻击\\n    武术 · 初始\\n    \\n    \\n    造成等同于你的攻击力的攻击伤害。\\n    \\n    \\n    1\",\"class\":\"hs-card tp0 rv0 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 230.7250061035156,
+        "y": 5597.78759765625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.42px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.82px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    初始攻击\n    武术 · 初始\n    \n    \n    造成等同于你的攻击力的攻击伤害。\n    \n    \n    1"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    铜币\\n    资源 · 古朴\\n    \\n    \\n    可出售。\\n    \\n    \\n    3\",\"class\":\"hs-card tp7 rv1 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 613.5250244140625,
+        "y": 5597.78759765625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.42px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.82px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    铜币\n    资源 · 古朴\n    \n    \n    可出售。\n    \n    \n    3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    应急绷带\\n    道具 · 稀有\\n    回 12\\n    \\n    你回复 12 点生命。\",\"class\":\"hs-card tp3 rv2 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 996.3250122070312,
+        "y": 5597.78759765625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.42px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.82px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    应急绷带\n    道具 · 稀有\n    回 12\n    \n    你回复 12 点生命。"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    金币\\n    资源 · 史诗\\n    \\n    \\n    贵重货币，可出售。\\n    \\n    \\n    9\",\"class\":\"hs-card tp7 rv3 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 230.7250061035156,
+        "y": 6171.3876953125
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.42px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.82px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    金币\n    资源 · 史诗\n    \n    \n    贵重货币，可出售。\n    \n    \n    9"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    剑荡妖邪\\n    武术 · 传说\\n    \\n    \\n    造成（你的攻击力 + 5）点攻击伤害；选择手牌中的 1 张武术牌，直接施放。\\n    +5\\n    \\n    5\",\"class\":\"hs-card tp0 rv4 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 613.5250244140625,
+        "y": 6171.3876953125
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.42px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.82px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    剑荡妖邪\n    武术 · 传说\n    \n    \n    造成（你的攻击力 + 5）点攻击伤害；选择手牌中的 1 张武术牌，直接施放。\n    +5\n    \n    5"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    风暴火球\\n    法术 · 常无欲专属\\n    \\n    \\n    对每名敌人施放 1 次「火球」。\\n    4'法伤\\n    \\n    3\",\"class\":\"hs-card tp1 rv6 cf4 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 996.3250122070312,
+        "y": 6171.3876953125
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.42px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.82px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    风暴火球\n    法术 · 常无欲专属\n    \n    \n    对每名敌人施放 1 次「火球」。\n    4'法伤\n    \n    3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    白梅落影·妄\\n    能力卡 · 棱彩\\n    \\n    \\n    遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。\\n    \\n    \\n    8\",\"class\":\"hs-card tp6 rv-prism cf1 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 230.7250061035156,
+        "y": 6744.98779296875
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.42px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.82px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    白梅落影·妄\n    能力卡 · 棱彩\n    \n    \n    遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。\n    \n    \n    8"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"1\\n    \\n    初始攻击\\n    武术 · 初始\\n    \\n    \\n    造成等同于你的攻击力的攻击伤害。\\n    \\n    \\n    1\",\"class\":\"hs-card tp0 rv0 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 55.32500076293945,
+        "y": 7206.10009765625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(232, 224, 208)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "19.2px",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    初始攻击\n    武术 · 初始\n    \n    \n    造成等同于你的攻击力的攻击伤害。\n    \n    \n    1"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    铜币\\n    资源 · 古朴\\n    \\n    \\n    可出售。\\n    \\n    \\n    3\",\"class\":\"hs-card tp7 rv1 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 233.9875030517578,
+        "y": 7206.10009765625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(232, 224, 208)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "19.2px",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    铜币\n    资源 · 古朴\n    \n    \n    可出售。\n    \n    \n    3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    应急绷带\\n    道具 · 稀有\\n    回 12\\n    \\n    你回复 12 点生命。\",\"class\":\"hs-card tp3 rv2 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 412.6499938964844,
+        "y": 7206.10009765625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(232, 224, 208)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "19.2px",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    应急绷带\n    道具 · 稀有\n    回 12\n    \n    你回复 12 点生命。"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    金币\\n    资源 · 史诗\\n    \\n    \\n    贵重货币，可出售。\\n    \\n    \\n    9\",\"class\":\"hs-card tp7 rv3 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 591.3125,
+        "y": 7206.10009765625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(232, 224, 208)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "19.2px",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    金币\n    资源 · 史诗\n    \n    \n    贵重货币，可出售。\n    \n    \n    9"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    剑荡妖邪\\n    武术 · 传说\\n    \\n    \\n    造成（你的攻击力 + 5）点攻击伤害；选择手牌中的 1 张武术牌，直接施放。\\n    +5\\n    \\n    5\",\"class\":\"hs-card tp0 rv4 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 769.9750366210938,
+        "y": 7206.10009765625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(232, 224, 208)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "19.2px",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    剑荡妖邪\n    武术 · 传说\n    \n    \n    造成（你的攻击力 + 5）点攻击伤害；选择手牌中的 1 张武术牌，直接施放。\n    +5\n    \n    5"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    风暴火球\\n    法术 · 常无欲专属\\n    \\n    \\n    对每名敌人施放 1 次「火球」。\\n    4'法伤\\n    \\n    3\",\"class\":\"hs-card tp1 rv6 cf4 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 948.6375122070312,
+        "y": 7206.10009765625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(232, 224, 208)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "19.2px",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    风暴火球\n    法术 · 常无欲专属\n    \n    \n    对每名敌人施放 1 次「火球」。\n    4'法伤\n    \n    3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    白梅落影·妄\\n    能力卡 · 棱彩\\n    \\n    \\n    遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。\\n    \\n    \\n    8\",\"class\":\"hs-card tp6 rv-prism cf1 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 55.32500076293945,
+        "y": 7417.21240234375
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(232, 224, 208)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "19.2px",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    白梅落影·妄\n    能力卡 · 棱彩\n    \n    \n    遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。\n    \n    \n    8"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"1\\n    \\n    初始攻击\\n    武术 · 初始\\n    \\n    \\n    造成等同于你的攻击力的攻击伤害。\\n    \\n    \\n    1\",\"class\":\"hs-card tp0 rv0 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 55.32500076293945,
+        "y": 7726.3125
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    初始攻击\n    武术 · 初始\n    \n    \n    造成等同于你的攻击力的攻击伤害。\n    \n    \n    1"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    铜币\\n    资源 · 古朴\\n    \\n    \\n    可出售。\\n    \\n    \\n    3\",\"class\":\"hs-card tp7 rv1 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 233.9875030517578,
+        "y": 7726.3125
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    铜币\n    资源 · 古朴\n    \n    \n    可出售。\n    \n    \n    3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    应急绷带\\n    道具 · 稀有\\n    回 12\\n    \\n    你回复 12 点生命。\",\"class\":\"hs-card tp3 rv2 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 412.6499938964844,
+        "y": 7726.3125
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    应急绷带\n    道具 · 稀有\n    回 12\n    \n    你回复 12 点生命。"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    金币\\n    资源 · 史诗\\n    \\n    \\n    贵重货币，可出售。\\n    \\n    \\n    9\",\"class\":\"hs-card tp7 rv3 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 591.3125,
+        "y": 7726.3125
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    金币\n    资源 · 史诗\n    \n    \n    贵重货币，可出售。\n    \n    \n    9"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    剑荡妖邪\\n    武术 · 传说\\n    \\n    \\n    造成（你的攻击力 + 5）点攻击伤害；选择手牌中的 1 张武术牌，直接施放。\\n    +5\\n    \\n    5\",\"class\":\"hs-card tp0 rv4 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 769.9750366210938,
+        "y": 7726.3125
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    剑荡妖邪\n    武术 · 传说\n    \n    \n    造成（你的攻击力 + 5）点攻击伤害；选择手牌中的 1 张武术牌，直接施放。\n    +5\n    \n    5"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    风暴火球\\n    法术 · 常无欲专属\\n    \\n    \\n    对每名敌人施放 1 次「火球」。\\n    4'法伤\\n    \\n    3\",\"class\":\"hs-card tp1 rv6 cf4 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 948.6375122070312,
+        "y": 7726.3125
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    风暴火球\n    法术 · 常无欲专属\n    \n    \n    对每名敌人施放 1 次「火球」。\n    4'法伤\n    \n    3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    白梅落影·妄\\n    能力卡 · 棱彩\\n    \\n    \\n    遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。\\n    \\n    \\n    8\",\"class\":\"hs-card tp6 rv-prism cf1 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 55.32500076293945,
+        "y": 7937.42529296875
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(255, 255, 255)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    白梅落影·妄\n    能力卡 · 棱彩\n    \n    \n    遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。\n    \n    \n    8"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"1\\n    \\n    初始攻击\\n    武术 · 初始\\n    \\n    \\n    造成等同于你的攻击力的攻击伤害。\\n    \\n    \\n    1\",\"class\":\"hs-card tp0 rv0 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 55.32500076293945,
+        "y": 8246.525390625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(236, 236, 237)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    初始攻击\n    武术 · 初始\n    \n    \n    造成等同于你的攻击力的攻击伤害。\n    \n    \n    1"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    铜币\\n    资源 · 古朴\\n    \\n    \\n    可出售。\\n    \\n    \\n    3\",\"class\":\"hs-card tp7 rv1 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 233.9875030517578,
+        "y": 8246.525390625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(236, 236, 237)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    铜币\n    资源 · 古朴\n    \n    \n    可出售。\n    \n    \n    3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    应急绷带\\n    道具 · 稀有\\n    回 12\\n    \\n    你回复 12 点生命。\",\"class\":\"hs-card tp3 rv2 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 412.6499938964844,
+        "y": 8246.525390625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(236, 236, 237)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    应急绷带\n    道具 · 稀有\n    回 12\n    \n    你回复 12 点生命。"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"0\\n    \\n    金币\\n    资源 · 史诗\\n    \\n    \\n    贵重货币，可出售。\\n    \\n    \\n    9\",\"class\":\"hs-card tp7 rv3 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 591.3125,
+        "y": 8246.525390625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(236, 236, 237)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    金币\n    资源 · 史诗\n    \n    \n    贵重货币，可出售。\n    \n    \n    9"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    剑荡妖邪\\n    武术 · 传说\\n    \\n    \\n    造成（你的攻击力 + 5）点攻击伤害；选择手牌中的 1 张武术牌，直接施放。\\n    +5\\n    \\n    5\",\"class\":\"hs-card tp0 rv4 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 769.9750366210938,
+        "y": 8246.525390625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(236, 236, 237)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    剑荡妖邪\n    武术 · 传说\n    \n    \n    造成（你的攻击力 + 5）点攻击伤害；选择手牌中的 1 张武术牌，直接施放。\n    +5\n    \n    5"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    风暴火球\\n    法术 · 常无欲专属\\n    \\n    \\n    对每名敌人施放 1 次「火球」。\\n    4'法伤\\n    \\n    3\",\"class\":\"hs-card tp1 rv6 cf4 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 948.6375122070312,
+        "y": 8246.525390625
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(236, 236, 237)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    风暴火球\n    法术 · 常无欲专属\n    \n    \n    对每名敌人施放 1 次「火球」。\n    4'法伤\n    \n    3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"2\\n    \\n    白梅落影·妄\\n    能力卡 · 棱彩\\n    \\n    \\n    遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。\\n    \\n    \\n    8\",\"class\":\"hs-card tp6 rv-prism cf1 sm\"}",
+      "key": "cards",
+      "rect": {
+        "height": 179.1125030517578,
+        "width": 120,
+        "x": 55.32500076293945,
+        "y": 8457.6376953125
+      },
+      "selector": ".fixture .hs-card",
+      "styles": {
+        "background-color": "rgb(38, 52, 64)",
+        "border-radius": "4.08px",
+        "color": "rgb(236, 236, 237)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "12px",
+        "height": "268.669px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "1.68px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "180px"
+      },
+      "tag": "DIV",
+      "text": "2\n    \n    白梅落影·妄\n    能力卡 · 棱彩\n    \n    \n    遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。\n    \n    \n    8"
+    }
+  ],
+  "observedAt": "2026-10-12T10:49:14.142Z",
+  "page": {
+    "origin": "http://localhost:5200",
+    "pathname": "/@fs/D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/docs/evidence/2026-10-12-card-style-unify/cascade-fixture.html",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "scene": "卡牌九类容器构造样本",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-12-card-style-unify/cascade.jpg"
+  ],
+  "selectors": [
+    {
+      "key": "cards",
+      "selector": ".fixture .hs-card"
+    }
+  ]
+}

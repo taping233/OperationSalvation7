@@ -1,0 +1,389 @@
+{
+  "nodes": [
+    {
+      "attributes": {
+        "aria-label": "返回基地",
+        "data-act": "hubHome"
+      },
+      "identity": "返回基地",
+      "key": "back",
+      "rect": {
+        "height": 44.025001525878906,
+        "width": 48.025001525878906,
+        "x": 22.012500762939453,
+        "y": 14
+      },
+      "selector": "#hubMain .hub-back",
+      "styles": {
+        "background-color": "rgb(80, 84, 79)",
+        "color": "rgb(255, 255, 255)",
+        "display": "flex",
+        "font-size": "12.5px"
+      },
+      "tag": "BUTTON",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-view": "classes/heixiang/people/profile//browse"
+      },
+      "identity": "队员招式 ↗外观 ↗伙伴 ↗无黑像星月白塔常无欲黑像专属招式 13 张人物培养Lv.1出征加成生命上限 +0下一级 · 生命上限 +1熟练度0 / 50 XP在仓库归档该人物的职业卡或能力卡，获得经验。选择培养卡牌→",
+      "key": "main",
+      "rect": {
+        "height": 885.9625244140625,
+        "width": 653.6000366210938,
+        "x": 0,
+        "y": 70.0374984741211
+      },
+      "selector": "#hubMain .hub-page",
+      "styles": {
+        "background-color": "rgb(226, 231, 229)",
+        "color": "rgb(27, 42, 52)",
+        "display": "block",
+        "font-size": "18px"
+      },
+      "tag": "MAIN",
+      "text": "队员招式 ↗外观 ↗伙伴 ↗无黑像星月白塔常无欲黑像专属招式 13 张人物培养Lv.1出征加成生命上限 +0下一级 · 生命上限 +1熟练度0 / 50 XP在仓库归档该人物的职业卡或能力卡，获得经验。选择培养卡牌→"
+    },
+    {
+      "attributes": {},
+      "identity": "基地",
+      "key": "heading",
+      "rect": {
+        "height": 28.61250114440918,
+        "width": 48.42499923706055,
+        "x": 92.0500030517578,
+        "y": 19.912500381469727
+      },
+      "selector": "#hubMain h2",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(230, 233, 237)",
+        "display": "block",
+        "font-size": "22px"
+      },
+      "tag": "H2",
+      "text": "基地"
+    },
+    {
+      "attributes": {},
+      "identity": "队员",
+      "key": "heading",
+      "rect": {
+        "height": 37.51250076293945,
+        "width": 80.4375,
+        "x": 24.012500762939453,
+        "y": 101.9000015258789
+      },
+      "selector": "#hubMain h2",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(27, 42, 52)",
+        "display": "block",
+        "font-size": "30px"
+      },
+      "tag": "H2",
+      "text": "队员"
+    },
+    {
+      "attributes": {
+        "aria-label": "返回基地",
+        "data-act": "hubHome"
+      },
+      "identity": "返回基地",
+      "key": "action",
+      "rect": {
+        "height": 44.025001525878906,
+        "width": 48.025001525878906,
+        "x": 22.012500762939453,
+        "y": 14
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgb(80, 84, 79)",
+        "color": "rgb(255, 255, 255)",
+        "display": "flex",
+        "font-size": "12.5px"
+      },
+      "tag": "BUTTON",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-act": "personSection",
+        "data-section": "pool"
+      },
+      "identity": "招式 ↗",
+      "key": "action",
+      "rect": {
+        "height": 45.212501525878906,
+        "width": 58.88750076293945,
+        "x": 393.7000122070313,
+        "y": 98.0500030517578
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(92, 108, 115)",
+        "display": "block",
+        "font-size": "18px"
+      },
+      "tag": "BUTTON",
+      "text": "招式 ↗"
+    },
+    {
+      "attributes": {
+        "data-act": "personSection",
+        "data-section": "appearance"
+      },
+      "identity": "外观 ↗",
+      "key": "action",
+      "rect": {
+        "height": 45.212501525878906,
+        "width": 58.88750076293945,
+        "x": 474.6000061035156,
+        "y": 98.0500030517578
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(92, 108, 115)",
+        "display": "block",
+        "font-size": "18px"
+      },
+      "tag": "BUTTON",
+      "text": "外观 ↗"
+    },
+    {
+      "attributes": {
+        "data-act": "personGroup",
+        "data-group": "pets"
+      },
+      "identity": "伙伴 ↗",
+      "key": "action",
+      "rect": {
+        "height": 45.212501525878906,
+        "width": 58.88750076293945,
+        "x": 555.5,
+        "y": 98.0500030517578
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(92, 108, 115)",
+        "display": "block",
+        "font-size": "18px"
+      },
+      "tag": "BUTTON",
+      "text": "伙伴 ↗"
+    },
+    {
+      "attributes": {
+        "aria-label": "查看无的档案",
+        "aria-pressed": "false",
+        "data-act": "hubPersonView",
+        "data-character": "wu"
+      },
+      "identity": "查看无的档案",
+      "key": "action",
+      "rect": {
+        "height": 107.0250015258789,
+        "width": 90.05000305175781,
+        "x": 24.012500762939453,
+        "y": 186.875
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(246, 247, 241, 0.44)",
+        "color": "rgb(92, 108, 115)",
+        "display": "flex",
+        "font-size": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "无"
+    },
+    {
+      "attributes": {
+        "aria-label": "查看黑像的档案",
+        "aria-pressed": "true",
+        "data-act": "hubPersonView",
+        "data-character": "heixiang"
+      },
+      "identity": "查看黑像的档案",
+      "key": "action",
+      "rect": {
+        "height": 107.0250015258789,
+        "width": 90.05000305175781,
+        "x": 122.0625,
+        "y": 186.875
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgb(23, 42, 53)",
+        "color": "rgb(246, 247, 241)",
+        "display": "flex",
+        "font-size": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "黑像"
+    },
+    {
+      "attributes": {
+        "aria-label": "查看星月的档案",
+        "aria-pressed": "false",
+        "data-act": "hubPersonView",
+        "data-character": "xingyue"
+      },
+      "identity": "查看星月的档案",
+      "key": "action",
+      "rect": {
+        "height": 107.0250015258789,
+        "width": 90.05000305175781,
+        "x": 220.1125030517578,
+        "y": 186.875
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(246, 247, 241, 0.44)",
+        "color": "rgb(92, 108, 115)",
+        "display": "flex",
+        "font-size": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "星月"
+    },
+    {
+      "attributes": {
+        "aria-label": "查看白塔的档案",
+        "aria-pressed": "false",
+        "data-act": "hubPersonView",
+        "data-character": "baita"
+      },
+      "identity": "查看白塔的档案",
+      "key": "action",
+      "rect": {
+        "height": 107.0250015258789,
+        "width": 90.05000305175781,
+        "x": 318.1625061035156,
+        "y": 186.875
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(246, 247, 241, 0.44)",
+        "color": "rgb(92, 108, 115)",
+        "display": "flex",
+        "font-size": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "白塔"
+    },
+    {
+      "attributes": {
+        "aria-label": "查看常无欲的档案",
+        "aria-pressed": "false",
+        "data-act": "hubPersonView",
+        "data-character": "changwuyu"
+      },
+      "identity": "查看常无欲的档案",
+      "key": "action",
+      "rect": {
+        "height": 107.0250015258789,
+        "width": 90.05000305175781,
+        "x": 416.2124938964844,
+        "y": 186.875
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgba(246, 247, 241, 0.44)",
+        "color": "rgb(92, 108, 115)",
+        "display": "flex",
+        "font-size": "13.3333px"
+      },
+      "tag": "BUTTON",
+      "text": "常无欲"
+    },
+    {
+      "attributes": {
+        "data-act": "hubTab",
+        "data-character": "heixiang",
+        "data-tab": "stash",
+        "data-view": "cards"
+      },
+      "identity": "选择培养卡牌→",
+      "key": "action",
+      "rect": {
+        "height": 57.962501525878906,
+        "width": 540.75,
+        "x": 48.82500076293945,
+        "y": 1265.925048828125
+      },
+      "selector": "#hubMain button",
+      "styles": {
+        "background-color": "rgb(23, 42, 53)",
+        "color": "rgb(245, 245, 240)",
+        "display": "flex",
+        "font-size": "21px"
+      },
+      "tag": "BUTTON",
+      "text": "选择培养卡牌→"
+    }
+  ],
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 654
+    }
+  },
+  "selectors": [
+    {
+      "key": "back",
+      "selector": "#hubMain .hub-back"
+    },
+    {
+      "key": "main",
+      "selector": "#hubMain .hub-page"
+    },
+    {
+      "key": "heading",
+      "selector": "#hubMain h2"
+    },
+    {
+      "key": "action",
+      "selector": "#hubMain button"
+    },
+    {
+      "key": "canvas",
+      "selector": "#hubMain .courtyard-v3-canvas"
+    }
+  ],
+  "schemaVersion": 1,
+  "kind": "browser-snapshot",
+  "scene": "base-personnel-profile",
+  "observedAt": "2026-10-11T05:11:37.999Z",
+  "collector": {
+    "platform": "Codex",
+    "browser": "iab",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "actions": [
+    {
+      "type": "real-input",
+      "detail": "进入档位01→队员→招式→返回队员→伙伴→孵化→返回伙伴→返回队员；人物切换黑像→选择培养卡牌→补给→返回后勤→返回队员保留黑像；外观按Escape回队员；后勤→扩建→返回后勤→返回基地；普通后勤入口清除人物筛选；收藏室→奖励→成就目标按Escape回奖励→收藏里程碑→返回奖励→返回收藏室；卡背→猎手皮纸→查看解锁目标→返回卡背保留选择；庭院→投喂→暂停→继续；观雨→大雨→苔绿→声音开→声音关；台面真实点击出现雨圈散开"
+    },
+    {
+      "type": "screenshot",
+      "detail": "当前窗口实页截取"
+    }
+  ],
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "screenshots": [
+    "docs/evidence/2026-10-11-WF-base-refine-1011/personnel-final.jpg"
+  ]
+}

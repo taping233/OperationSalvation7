@@ -1,0 +1,35 @@
+{
+  "stage": "A18",
+  "status": "generated-E3-applied-to-camp-not-final",
+  "experiment": "E3",
+  "selectionRecord": "style-lab-requests.json",
+  "effectiveStyle": "Use the attached image as a STRICT visual rendering reference. Match its actual amount and placement of surface detail, rounded cloth volume, thin metal bevels, edge contrast, gentle haze, shadow colour and rich middle-value colour transitions as closely as possible. Match its bright neutral-warm window, grey-green shaded interior, local cream highlights, subtle warm fabric accents, and gradual depth softening. Adapt this exact visual treatment to the fixed new room subject. Study the reference's cushion, white pillow, cabinet panels and daylight falloff directly. Do not invent another look, add a global filter, simplify all materials into flat faces or turn everything into crisply textured photography. Do not copy its room contents, writing, logos or ornamental marks. Texture remains locally selective and subordinate to shape, light and mood.",
+  "layoutSource": "A15（空间与复杂度固定）",
+  "references": [
+    {
+      "path": "C:/Users/太平/Downloads/BG_None_PersonalLounge_01.png",
+      "role": "原始主要画法/光色参考"
+    },
+    {
+      "path": "C:/Users/太平/.codex/generated_images/01a128f5-bd4a-7891-91c7-ab5106c5d409/exec-e0449468-46c2-4c35-ab50-37a1950bddcd.png",
+      "role": "实验E3正例校准"
+    },
+    {
+      "path": "C:/Users/太平/.codex/generated_images/01a128f5-bd4a-7891-91c7-ab5106c5d409/exec-b21f64a1-ee2a-4718-9edd-c8eca95e0edb.png",
+      "role": "仅相机与营地家具位置/数量"
+    }
+  ],
+  "prompt": "Apply the selected STYLE EXPERIMENT to our existing camp. Reference 1 is the ORIGINAL Girls' Frontline 2 background and is the strict primary rendering/light/colour target. Reference 2 is successful experiment E3, a secondary positive example of the intended middle-value depth and warm-white window/grey-green shadows. Reference 3 is OUR fixed camp layout: use it ONLY for camera, furniture design/position, object count and room function. Completely replace reference 3's surface/light finish with the calibrated reference-1/E3 treatment; do not copy the test room's furniture layout or scenery. Preserve the large close LEFT rest chair and diagonal near armrest, blue-grey draped garment/ochre cushion, its low side table and mug, wide diagonal work desk with map/open record/compact terminal/task lamp, partly tucked working chair, back-left separate tea alcove, back-right berth/terracotta linen, front-right equipment bay with two matching cases, and separate enclosed right-wall fireplace. Maintain clear right aisle, real chair/knee clearance and proper bed/fire separation. No extra objects, decorations, symbols or increasing scene complexity. Near-future postmodern city-outskirts winter expedition camp, not a spaceship bridge or ancient room. Outside only pale snow and very faint distant modern city brush masses; no mountains, rock scenery, castles, detailed building windows or indoor snow.\n\nUse the attached image as a STRICT visual rendering reference. Match its actual amount and placement of surface detail, rounded cloth volume, thin metal bevels, edge contrast, gentle haze, shadow colour and rich middle-value colour transitions as closely as possible. Match its bright neutral-warm window, grey-green shaded interior, local cream highlights, subtle warm fabric accents, and gradual depth softening. Adapt this exact visual treatment to the fixed new room subject. Study the reference's cushion, white pillow, cabinet panels and daylight falloff directly. Do not invent another look, add a global filter, simplify all materials into flat faces or turn everything into crisply textured photography. Do not copy its room contents, writing, logos or ornamental marks. Texture remains locally selective and subordinate to shape, light and mood.\n\nCalibration detail from actual comparison: cloth textures and fine seams should emerge mainly in illuminated/near focal transitions and fade/merge in shadow, not uniformly cover the entire chair/blanket/rug with crisp micro-grain. Metal has material-specific edge softness and thin local bevel light, not an equally sharp continuous contour. Retain rounded nuanced volume, fine paper/page stack and terminal structure at the working surface, softly bounced coloured light and contact shadows. No flat polygonal cel faces, no global blur, no blanket zero-texture rule and no hyperreal photographic finish. Match the primary source's actual balanced selective detail. Window key neutral warm-white, grey-green fill shadows keep richer colours; E3's slightly excessive warm/ochre cast should be tempered toward the original. The task lamp and small fire are subordinate local sources, floor reflection rough and restrained. Original production-quality game background 16:9.",
+  "runtimeApplied": false,
+  "receipt": {
+    "path": "C:/Users/太平/.codex/generated_images/01a128f5-bd4a-7891-91c7-ab5106c5d409/exec-bca7ab26-861d-4823-ac45-6a350421efef.png",
+    "bytes": 2174800,
+    "sha256": "5e1581b94e39d6df079dd348ee6ae5ff01d0d676777786cbc7cc7b71e414d089",
+    "excludedFromGit": true
+  },
+  "review": [
+    "E3暖白窗光、空气层和圆润体积保留，纸张/终端/框架层次比A17清楚",
+    "近椅与地毯细纹仍比较持续突出，墙/地中间色仍偏黄褐，不能标原画风一致",
+    "老板追加已授权下一片：桌面电脑工作位、柜体统一、清除不明多余部件"
+  ]
+}

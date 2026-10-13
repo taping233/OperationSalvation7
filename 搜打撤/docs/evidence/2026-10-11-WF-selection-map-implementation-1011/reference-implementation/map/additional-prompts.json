@@ -1,0 +1,46 @@
+{
+  "shop": {
+    "prompt": "Original future-city SHOP map symbol on genuine transparent square canvas. Input1 ONLY guides isolated symbolic subject occupancy and asymmetric side light, do NOT copy curled tentacles or organisms. Input2 ONLY guides actual project broad opaque painterly strokes and hard-edged value planes. Make one compact trading token assembly: two staggered ivory ceramic exchange discs with broad worn champagne metal rims, a single muted coral rectangular insert seated through the front disc and one dark graphite curved clasp joining the discs. No text/numbers/currency logo, no coin piles, no animal/human/organs. Clear recognizable overlap silhouette, 3-4 big value groups, economical directional brush marks, not CGI/PBR. Object occupies central 50% canvas width and height, large empty transparent margins. Tiny sparse amber dust and faint lower-right warm haze only, no all-around neon glow. No background disk (UI draws it), no floor, no storefront/buildings/street, no snow. Small game node object, useful at60-80px.",
+    "references": [
+      {
+        "path": "is7-node-research/source/shop.webp",
+        "role": "composition only; tentacles excluded"
+      },
+      {
+        "path": "game/assets/cards/equip-tt2-pearlbox.webp",
+        "role": "project paint"
+      }
+    ],
+    "output": "Generated images are saved to C:\\Users\\太平\\.codex\\generated_images\\01a12b5e-4fc9-7522-8fbc-c8b2bf9cb89e as C:\\Users\\太平\\.codex\\generated_images\\01a12b5e-4fc9-7522-8fbc-c8b2bf9cb89e\\exec-b4e99107-cc16-4bf4-9e4e-5459266783a3.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  },
+  "event": {
+    "prompt": "Original future-city EVENT/UNKNOWN RECORD map symbol, isolated on actual transparent square canvas. Input1 only symbolic subject scale/asymmetric composition, never copy pink animal or legs. Input2 project paint guidance ONLY broad opaque brush planes, hard-edged large light/shadow and selectively defined contour. Subject: three staggered broken ivory ceramic memory-record wafers, one broad muted blue-grey inset panel and a tiny copper connector along one broken edge, tied composition by a curved dark graphite filament. Not paper book, not floating glass magic shards, no words/screens/data glyphs. Memorable diagonal layered broken-slab silhouette, few large structural shapes, 3-4 value groups, no CGI/PBR/greebles. Occupy central50% canvas with generous transparent margins. A few low bright cyan-white dust specks and faint haze on upper-left side only, not neon circuitry or full rim glow. No background circle/UI/no ground/no scene/building/no snow/no people/animals/organs. Painterly symbolic object readable at60-80px.",
+    "references": [
+      {
+        "path": "is7-node-research/source/incident.webp",
+        "role": "composition only; animal excluded"
+      },
+      {
+        "path": "game/assets/cards/equip-tt2-pearlbox.webp",
+        "role": "project paint"
+      }
+    ],
+    "output": "Generated images are saved to C:\\Users\\太平\\.codex\\generated_images\\01a12b5e-4fc9-7522-8fbc-c8b2bf9cb89e as C:\\Users\\太平\\.codex\\generated_images\\01a12b5e-4fc9-7522-8fbc-c8b2bf9cb89e\\exec-20b39cbe-93c5-4ffe-9864-7a3ca952ea1c.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "status": "not inspected after user stopped checks"
+  },
+  "passage": {
+    "prompt": "Original future-city PASSAGE/TRANSIT map symbolic isolated object, actual transparent square canvas. Input1 composition guidance ONLY subject size and asymmetrical side light, do NOT copy hands/branches/tunnel silhouette. Input2 actual project paint ONLY economical broad opaque hard-edged value planes. Create a compact transit permission core: one open horseshoe-shaped ivory composite housing with broad squared chamfer corners, a muted sage-grey small oval power capsule floating aligned inside its central opening, two short graphite rails framing the hollow opening, one narrow pale amber slit on one side. It is ONE manufactured symbolic core, not a gate building or street scene, not a golden fantasy key, no animal/people/organs. Clean unmistakable open-center silhouette, 3-4 large values, no glossy CGI/PBR or tiny mechanical detail. Entire object central50% canvas, generous transparent margin. Sparse warm white grain and faint side glow only at right, no neon full outline, no UI/background circle/text/floor/buildings/snow. Hand painted future-city object readable at60-80px.",
+    "references": [
+      {
+        "path": "is7-node-research/source/evacuate.webp",
+        "role": "composition only; hands/branches excluded"
+      },
+      {
+        "path": "game/assets/cards/equip-tt2-pearlbox.webp",
+        "role": "project paint"
+      }
+    ],
+    "output": "Generated images are saved to C:\\Users\\太平\\.codex\\generated_images\\01a12b5e-4fc9-7522-8fbc-c8b2bf9cb89e as C:\\Users\\太平\\.codex\\generated_images\\01a12b5e-4fc9-7522-8fbc-c8b2bf9cb89e\\exec-723a86d4-fdc9-4fab-8dbb-967b01dd1895.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "status": "not inspected after user stopped checks"
+  }
+}

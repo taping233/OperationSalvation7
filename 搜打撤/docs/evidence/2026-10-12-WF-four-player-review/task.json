@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-four-player-review",
+  "date": "2026-10-12",
+  "owner": "Friday",
+  "goal": "四人各自新档完整体验当前垂直切片并汇总缺陷与视觉体验问题，只审查不改游戏",
+  "paths": [
+    "docs/evidence/2026-10-12-WF-four-player-review"
+  ],
+  "doneWhen": [
+    "四份新档体验报告含路线结束状态、功能覆盖、复现证据与未核项，去重汇总交付"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "四条原新档均已真实结算并回基地，四份报告和十二项去重清单已核",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "本目录八十一张图片解码且小于1MB，十六条本地链接及十三份已有JSON检查通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "文档守卫通过，检查596条相对链接且0findings；evidence另验不混称通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "所有随机卡牌节点、完整拖拽键盘、减少动态与声音听感等未核范围见四份报告",
+    "混合工作区与页签清理干扰已单列；D通关受格挡超期及重复领奖测试轨迹影响，非平衡验收",
+    "B线出售铜币被自动审批拒绝，未执行或绕过",
+    "原5351至5354服务未停止，当前PID身份未复核，另保留WF-review-runtime-5351-5354登记"
+  ],
+  "updatedAt": "2026-10-12T18:18:34.983Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

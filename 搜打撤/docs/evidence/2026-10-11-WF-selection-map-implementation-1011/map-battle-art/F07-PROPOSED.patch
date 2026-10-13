@@ -1,0 +1,16 @@
+--- a/game/src/run/expedition.view.js
++++ b/game/src/run/expedition.view.js
+@@
+-      cleared, selected: game.moveTarget?.li === li && game.moveTarget?.idx === idx }];
++      direction: door ? (door.reverse ? 'return' : 'deeper') : cleared ? 'return' : 'explore',
++      cleared, selected: game.moveTarget?.li === li && game.moveTarget?.idx === idx }];
+@@
+-  const key = `${disabled ? 1 : 0}|${objective.tone}|${objective.text}|${routes.map(r => r.idx).join(',')}`;
++  const key = JSON.stringify([disabled, game.layerIdx, game.trackPos, objective.tone, objective.text,
++    routes.map(r => [r.li, r.idx, r.name, r.hint, r.direction, r.cleared, r.selected, r.tone])]);
+@@
+-  options.innerHTML = routes.map(r => `<button type="button" class="route-option${r.selected ? ' selected' : ''}" data-route-index="${r.idx}" data-route-layer="${r.li}" data-tone="${r.tone}"${r.door ? ' data-door="1"' : ''} aria-label="${esc(r.ariaLabel || `${r.name}（节点 ${r.idx + 1}）`)}" ${disabled ? 'disabled' : ''}>
++  options.innerHTML = routes.map(r => `<button type="button" class="route-option${r.selected ? ' selected' : ''}" data-route-index="${r.idx}" data-route-layer="${r.li}" data-tone="${r.tone}" data-direction="${r.direction}" data-cleared="${r.cleared ? 1 : 0}"${r.door ? ' data-door="1"' : ''} aria-label="${esc(r.ariaLabel || `${r.name}（节点 ${r.idx + 1}）`)}" ${disabled ? 'disabled' : ''}>
+@@
+-    <span class="route-arrow" aria-hidden="true">↗</span>
++    <span class="route-arrow" aria-hidden="true">${r.direction === 'return' ? '↶' : r.direction === 'deeper' ? '→' : '↗'}</span>

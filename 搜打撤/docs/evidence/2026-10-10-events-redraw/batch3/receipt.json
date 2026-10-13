@@ -1,0 +1,191 @@
+{
+  "method": "Built-in ImageGen; scoped scene WebP/thumbnail encoding",
+  "verification": "No tests/browser/build run",
+  "items": [
+    {
+      "card_id": "ev19-vital",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-71a648f5-9e45-4592-b60f-65e27f161835.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch3/event-ev19-vital-source.png",
+        "sha256": "1cda39b73a46a4b5c2fca00d34d8ffcd2d6173c718bfa1fa0ce77349d7395fc3"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch3/event-ev19-vital-full-before.webp",
+          "sha256": "aced4b51b4c70a98c2dba9cc11468e15ea2413e5815a8b026d299f3be7bf9d2f"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch3/event-ev19-vital-thumb-before.webp",
+          "sha256": "ff3becb9cf76c85e869c185b3856f984a20a448bb18c7e44db99ad8c85b10e22"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-ev19-vital.webp",
+          "ext": "webp",
+          "license": "项目自有（AI 生成）",
+          "bytes": 196426,
+          "sha256": "fbdc1bcb61869311e4335788f76b080f51d2c98a1f49fc9f97f917d767f69a71",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-ev19-vital.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 22072,
+          "sha256": "dfdd8a97a4aade1e56a0d150f5eda2f9dbfaddff957307b4b364ad931542daa3",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+        }
+      ]
+    },
+    {
+      "card_id": "ev19-pearlbox",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-df852328-cd5c-404f-b754-f84a7d3ff79c.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch3/event-ev19-pearlbox-source.png",
+        "sha256": "fc48dd5082a4f5a094bb0867928637127fa5ba1c71163b2a8078ce73b8791479"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch3/event-ev19-pearlbox-full-before.webp",
+          "sha256": "419661609f9a59eab56358f055c29b2ccaf8dbfc05305c7115064733e161bbc1"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch3/event-ev19-pearlbox-thumb-before.webp",
+          "sha256": "f51513b2ccd32a020601cefa054d0f4594e4753e7e1630938698cbd81c6cde03"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-ev19-pearlbox.webp",
+          "ext": "webp",
+          "license": "项目自有（AI 生成）",
+          "bytes": 258574,
+          "sha256": "9e8a641d84eac0d452413b75794b263f6c8f136510d342fcc478ad2e8603f937",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-ev19-pearlbox.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 27436,
+          "sha256": "9ae765e15000c664011ce2a5d7b8c0c3e90b6d311f228657787a613ad80e597c",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+        }
+      ]
+    },
+    {
+      "card_id": "ev19-fireballs",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-3dab3437-a22f-4084-86c3-c4b13d4a70db.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch3/event-ev19-fireballs-source.png",
+        "sha256": "0e417de4c2296b1a8f535d345bb4fd8e47c58a3d95b16f28539ed108e930d4c5"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch3/event-ev19-fireballs-full-before.webp",
+          "sha256": "b5a11d707675d2987eb9e4dd023ae6e59b6268fa851bbb14a8a0e9ae49f0fffe"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch3/event-ev19-fireballs-thumb-before.webp",
+          "sha256": "5a92c80b5cecdf1c03bcd84f736b962b53e585b097013c2efd58799bcccd927d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-ev19-fireballs.webp",
+          "ext": "webp",
+          "license": "项目自有（AI 生成）",
+          "bytes": 231198,
+          "sha256": "3994e66373d42bf13555b92a82bb82692e58100569da70d3bc69c8e8e36391f7",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-ev19-fireballs.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 25540,
+          "sha256": "f0ec35c7bbe1e395cfc26caa0890b1923d7d13dbdfc89deec83e7643eb1ac0ef",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+        }
+      ]
+    },
+    {
+      "card_id": "ev19-classchest",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-2b72c1c8-e362-48aa-897e-1727e3bb6179.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch3/event-ev19-classchest-source.png",
+        "sha256": "5d42cadd7414479d243c11b18eaa33007762b464511f84cffdacb1c2c9c72128"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch3/event-ev19-classchest-full-before.webp",
+          "sha256": "e62a03ae3b37ae3888b56795100fe5ac01a63e0fc8de85e1a141d4087850d4e4"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch3/event-ev19-classchest-thumb-before.webp",
+          "sha256": "f9896c8ff10a9f4b54c133922acd9f2efb44737bc7ed0a2b7ab25872bef585fc"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-ev19-classchest.webp",
+          "ext": "webp",
+          "license": "项目自有（AI 生成）",
+          "bytes": 257064,
+          "sha256": "cccd3da544d73d2a10744fb57330e13fd0770e300c292ab6d0308ed1302f995e",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-ev19-classchest.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 26682,
+          "sha256": "f323edcb1d42ff2297a1a2e322edb9e8c23b50387ab916d233de4ad4f8124f1a",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+        }
+      ]
+    },
+    {
+      "card_id": "ev19-recode",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-9b16b3d7-fb9f-4f87-b21c-821e79cce904.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch3/event-ev19-recode-source.png",
+        "sha256": "26cb1fc02174ab45d131da310368107670a2328b82e3027505e21686d21ba708"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch3/event-ev19-recode-full-before.webp",
+          "sha256": "503195fe8b12ef143e6309e2d57cec2d9fcc113dc5d214eef6368c5e715654a5"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch3/event-ev19-recode-thumb-before.webp",
+          "sha256": "7855f155cf08ae2084a4b16bd01a3860141d1555fe3150dbe00a896a687ebeda"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-ev19-recode.webp",
+          "ext": "webp",
+          "license": "项目自有（AI 生成）",
+          "bytes": 186546,
+          "sha256": "67858a535e18eef2470756487c38c86073f50ba802731803805b4caa4fd02cf5",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-ev19-recode.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 20966,
+          "sha256": "4d1924cf72ed69f1f80ea55dea005e5fadbeb8d776af29a228b1bc874ba39b01",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch3/receipt.json"
+        }
+      ]
+    }
+  ]
+}

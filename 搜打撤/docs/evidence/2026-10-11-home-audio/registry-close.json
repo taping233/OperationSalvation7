@@ -1,0 +1,8 @@
+{
+  "cells": [
+    "Friday（Codex 主页音频与恢复修正 WF-home-audio-1011）",
+    "game/src/audio/sound.js、sound.music.player.js；game/src/ui/home-menu-motion.js、page-loading.js、camp-entry.js仅共享时长；game/css/home-menu-motion.css、page-loading.css；tests/sound-music.test.js、title-wallpaper.test.js、home-menu-motion.test.js、page-loading.test.js；docs/audio-system.md、development.md仅照相馆段；docs/evidence/2026-10-11-home-audio/",
+    "10-11：标题悬停削高频/降增益；BGM提前加载与首次输入续播；壁纸恢复无透明度闪帧、左右280ms及组内错峰；照相馆复用成就动画和980ms清理；音频53/53、界面50/50、ESLint/docs/diff守卫及内置实页通过",
+    "完成未提交，编辑释放；本会话01a12b04；浏览器刷新仍限制无输入自动出声，未作主观听感评价；复用5200无自建服务，不build不提交；保留既有其他会话完成改动"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "date": "2026-10-10",
+  "tests": { "files": ["hand-cost-patterns", "battle-card-inspection", "contracts"], "passed": 23, "exitCode": 0 },
+  "cssParse": { "files": 6, "passed": true },
+  "diffCheck": { "passed": true },
+  "docsCheck": { "passed": true, "findings": [] },
+  "browser": { "platform": "Codex IAB", "viewportOverride": false, "realInputs": ["battle hand", "potion discover", "battle bag"], "constructed": ["shop structure"], "unverified": ["real shop purchase", "mystery reveal", "purchase fly animation"] },
+  "buildRun": false,
+  "committed": false
+}

@@ -1,0 +1,35 @@
+{
+  "currentMusic": "battle",
+  "tracks": [
+    {
+      "playing": false,
+      "scene": "title",
+      "source": "http://localhost:5200/assets/music-demo/01-title-frostglass.ogg",
+      "status": "按需加载",
+      "volume": "0"
+    },
+    {
+      "playing": false,
+      "scene": "board",
+      "source": "http://localhost:5200/assets/music-demo/02-explore-ashline.ogg",
+      "status": "按需加载",
+      "volume": "0"
+    },
+    {
+      "decoded": "true",
+      "playing": true,
+      "scene": "battle",
+      "source": "http://localhost:5200/assets/music-demo/03-battle-shadowtide-full-v2.ogg",
+      "status": "循环试听中",
+      "volume": "0.45"
+    },
+    {
+      "playing": false,
+      "scene": "shop",
+      "source": "http://localhost:5200/assets/music-demo/05-shop-lamplight-deal.ogg",
+      "status": "按需加载",
+      "volume": "0"
+    }
+  ],
+  "url": "http://localhost:5200/music-demo.html"
+}

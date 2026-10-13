@@ -1,0 +1,32 @@
+[
+  {
+    "bytes": 9809,
+    "path": "game/src/hub/hub.archive.js",
+    "sha256": "6AE64ED5B5458588E98487D54D089080DF17A7FFCE9DC25AD3B8530D9B40C97F"
+  },
+  {
+    "bytes": 18412,
+    "path": "game/src/hub/hub.archive-v3.js",
+    "sha256": "E84A18D3E6BC661B989AC9E624619084848125D75EB199DEFE578840C1A41543"
+  },
+  {
+    "bytes": 6448,
+    "path": "game/src/hub/hub.collection-v4.js",
+    "sha256": "7384DFA62B67EA5B6E11E2DC9701A5775C495A38715E7EDD3A039BECE8755DE1"
+  },
+  {
+    "bytes": 4009,
+    "path": "game/src/hub/hub.facilities.js",
+    "sha256": "19CD7245641B54771B4FA336B2CCD3E54DE4D420AB153FC3F61E01D7D88FC4F8"
+  },
+  {
+    "bytes": 30033,
+    "path": "game/css/base-archive-facilities-v12.css",
+    "sha256": "F34EAC101D055295FCA825B5633C11ECFCBF7B95DBDC2953715E9427C0A2AD4E"
+  },
+  {
+    "bytes": 2951,
+    "path": "game/css/base-collection-v4.css",
+    "sha256": "EF552A29A4F0E6AD4D866F9C98BBD69CDE166078338B9AD760E80022B17C755F"
+  }
+]

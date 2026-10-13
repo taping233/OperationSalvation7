@@ -1,0 +1,31 @@
+- main:
+  - text: 金币
+  - generic: "16"
+  - text: 攻击
+  - generic: "4"
+  - button "离开对局":
+  - button:
+  - button:
+  - generic: 当前生命
+  - generic: 28/35
+  - button "背包 12/16":
+    - generic: 背包
+    - generic: 12/16
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - button "关闭": ×
+    - text: 第4层 · 污染核心
+    - generic: 第 4 层
+    - heading "crystal 祭坛回赠 · 二选一" [level=2]:
+      - img "crystal"
+      - text: 祭坛回赠 · 二选一
+    - generic: 祭坛已苏醒——选择你要的奖励（只能选一次；离开后回到本格可再选）
+    - button "① 复原 3 张消耗卡 + 回复 10 血 从消耗口袋挑选卡牌复原回背包（现有 7 张可复原），并回复 10 点生命":
+      - generic: ① 复原 3 张消耗卡 + 回复 10 血
+      - generic: 从消耗口袋挑选卡牌复原回背包（现有 7 张可复原），并回复 10 点生命
+    - button "② 传说卡 + 装备卡 随机获取 1 张传说卡和 1 张装备卡":
+      - generic: ② 传说卡 + 装备卡
+      - generic: 随机获取 1 张传说卡和 1 张装备卡
+    - button "离开 · 稍后再选 祭坛保持苏醒——奖励保留，回到本格可再选（奖励只能领取一次）" [active]:
+      - generic: 离开 · 稍后再选
+      - generic: 祭坛保持苏醒——奖励保留，回到本格可再选（奖励只能领取一次）

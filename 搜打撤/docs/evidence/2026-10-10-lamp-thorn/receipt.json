@@ -1,0 +1,156 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-magic-lamp",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-d955c7a4-ea84-4be3-a607-3586cc2a66d7.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-lamp-thorn/cards-spell-tt3-magic-lamp-source.png",
+        "bytes": 1590083,
+        "sha256": "0078a1c1c2bd0804217bb29d1682e45c45faf9a263c0f21d11a2ef92b5b12dac"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-lamp-thorn/cards-spell-tt3-magic-lamp-full-before.webp",
+          "bytes": 53360,
+          "sha256": "6579cd339860ab774c251ea2cc971d7f6f7fb15953342a30f8d9d864be3422d2"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-lamp-thorn/cards-spell-tt3-magic-lamp-thumb-before.webp",
+          "bytes": 15034,
+          "sha256": "e6d01a8d0d6ac04fecff420d7853a7a05c53b3eda7cdb2a765ae2fe7940cb269"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-magic-lamp.webp",
+          "bytes": 73606,
+          "sha256": "bf99728ee0cd4cdadbccada7b373d4764dfedf66c9e95db9c652ec4edba6c13f",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-magic-lamp.webp",
+          "bytes": 11938,
+          "sha256": "6c1f7f15ea584cc24efbecf4b4011d26f3a67cc344b7c4094cd8266aeef15876",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "magic-lamp-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt3-magic-lamp.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 73606,
+            "sha256": "bf99728ee0cd4cdadbccada7b373d4764dfedf66c9e95db9c652ec4edba6c13f",
+            "source": "docs/evidence/2026-10-10-lamp-thorn/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-magic-lamp.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15034,
+            "sha256": "e6d01a8d0d6ac04fecff420d7853a7a05c53b3eda7cdb2a765ae2fe7940cb269",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-magic-lamp.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 11938,
+            "sha256": "6c1f7f15ea584cc24efbecf4b4011d26f3a67cc344b7c4094cd8266aeef15876",
+            "source": "docs/evidence/2026-10-10-lamp-thorn/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-thornfield",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-fb193baf-6c16-4dee-ae26-6abe7d1f0f9d.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-lamp-thorn/cards-spell-tt3-thornfield-source.png",
+        "bytes": 1777167,
+        "sha256": "ec07ec0e739ff1e6f2e6a211bd2227757384b0ba77af5416756010de5038e80e"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-lamp-thorn/cards-spell-tt3-thornfield-full-before.webp",
+          "bytes": 163864,
+          "sha256": "50c641334be528791f20eabae958300ee1f2f0b101776714097ac4cae29ec138"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-lamp-thorn/cards-spell-tt3-thornfield-thumb-before.webp",
+          "bytes": 22372,
+          "sha256": "c83b88b3b04d4933fcf20ac75e3f579409500ee21e4d3d4a0fd147372914185d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-thornfield.webp",
+          "bytes": 97948,
+          "sha256": "25eb7476af8625de9e0397e689720ed9b601fd04b26c08d4c54d521aaa9a8d76",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-thornfield.webp",
+          "bytes": 17976,
+          "sha256": "2da9f60cc46147eaa9c81a1f675d7f089f5289641f26fb74eec7b38eeab99ee7",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "thornfield-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt3-thornfield.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 97948,
+            "sha256": "25eb7476af8625de9e0397e689720ed9b601fd04b26c08d4c54d521aaa9a8d76",
+            "source": "docs/evidence/2026-10-10-lamp-thorn/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-thornfield.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 22372,
+            "sha256": "c83b88b3b04d4933fcf20ac75e3f579409500ee21e4d3d4a0fd147372914185d",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-thornfield.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17976,
+            "sha256": "2da9f60cc46147eaa9c81a1f675d7f089f5289641f26fb74eec7b38eeab99ee7",
+            "source": "docs/evidence/2026-10-10-lamp-thorn/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 906,
+  "manifest_count_after": 908
+}

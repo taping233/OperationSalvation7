@@ -1,0 +1,13 @@
+{
+  "id": "03",
+  "slug": "front-hair",
+  "version": 2,
+  "prompt": "Edit the separate silver-white FRONT BANGS overlay in image 1 to correctly fit the exact right-facing face in image 2. Image 1 is the ONLY edit target. Keep same canvas, outer hair silhouette, top hairline, silver-white colors, short near-side lock and loose painterly brush style. WIDEN THE TRANSPARENT FACE OPENING ON THE RIGHT/FAR-EYE SIDE: remove the thick inward-pointing far-side fringe clump that would cover the small far cyan eye. Make that far-side lock thin and keep it outside the eye/cheek edge, tucked behind the far temple. Shorten the central/far bangs so BOTH eyes and brows in image 2 will be fully visible when overlaid; still retain Wu's angular parted bangs on forehead and short straight side locks near jaw. Inside the full eye/face opening is truly transparent, absolutely NO face, eyes, eyebrows, skin or neck drawn into this hair-only sprite. No scalp fill covering the face, back cap, long ponytail, rose, ribbon or goggles. Match hair direction of image 3. One hair-only overlay, genuine alpha, no glow or background. Do not change face identity or return a full head. Preserve size and placement so the existing head registration remains usable.",
+  "refs": [
+    "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\characters\\wu-parts-v1\\part-03-front-hair-v1.png",
+    "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\characters\\wu-parts-v1\\part-02-head-neck-v1.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\wu-battle-base-frame000.png"
+  ],
+  "tool": "built-in imagegen",
+  "stage": "candidate"
+}

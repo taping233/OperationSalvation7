@@ -1,0 +1,121 @@
+{
+  "task": "WF-studio-experience-1010",
+  "status": "complete-uncommitted",
+  "recordedAt": "2026-10-10T04:08:56.623Z",
+  "files": [
+    {
+      "file": "game/src/hub/game.cardslib.page.js",
+      "sha256": "e8a82534f6221fff8d4d1040db314805e4dfc842ad4197159fed6d891b3a7ef0"
+    },
+    {
+      "file": "game/css/photo-studio-unified.css",
+      "sha256": "799ea9633d0904f2a569c455cf5d40ad0469afc1e6cbca908bff36307a892c66"
+    },
+    {
+      "file": "game/css/photo-studio-motion.css",
+      "sha256": "3a5240b2afcd786550edf2d2af9b4c348068e94aff433f4a1c10bf5b138bd0ef"
+    },
+    {
+      "file": "tests/boot.test.js",
+      "sha256": "44748167aaf21d52509f016171e1e2c8d1b64f3978c328ba6c1c537582cbc1ec"
+    }
+  ],
+  "initialFiles": [
+    {
+      "file": "game/src/hub/game.cardslib.page.js",
+      "backup": ".tmp/studio-experience-1010/game.cardslib.page.js",
+      "sha256": "b5a0284885d1e495644171249c4686f225fbb19f16992b1998b49861857aded0"
+    },
+    {
+      "file": "game/css/photo-studio-unified.css",
+      "backup": ".tmp/studio-experience-1010/photo-studio-unified.css",
+      "sha256": "5a48e3c36f425ccd0149424acf6af1793c35a971373dd38829e8febdc63457e3"
+    },
+    {
+      "file": "tests/boot.test.js",
+      "backup": ".tmp/studio-experience-1010/boot.test.js",
+      "sha256": "678e7418003e34735568233d028f57fe5c92c99eab37cdd2f98d23c4c17873da"
+    }
+  ],
+  "tests": {
+    "suite": {
+      "files": 6,
+      "passed": 73,
+      "failed": 0,
+      "targets": [
+        "boot",
+        "photo-studio-presentation",
+        "photo-zoom-lifecycle",
+        "card-photo-notes",
+        "contracts",
+        "architecture-boundaries"
+      ]
+    },
+    "afterArrivalCleanup": {
+      "files": 1,
+      "passed": 18,
+      "failed": 0,
+      "target": "boot"
+    },
+    "eslint": "passed",
+    "cssParse": "passed",
+    "docs": "passed",
+    "diff": "passed"
+  },
+  "browser": {
+    "collector": "Codex iab / cua / current-window",
+    "origin": "http://127.0.0.1:5200",
+    "viewport": {
+      "width": 1523,
+      "height": 956,
+      "dpr": 1.25
+    },
+    "consoleErrors": 0,
+    "realInput": [
+      "filter",
+      "wave",
+      "preview-open",
+      "note-focus-without-write",
+      "Escape-close",
+      "close-button",
+      "empty-search",
+      "reset",
+      "keyboard-cross-row-selection",
+      "scroll-down-up",
+      "close-reopen"
+    ],
+    "wave": {
+      "count": 12,
+      "delayMs": 35,
+      "cleared": true
+    },
+    "filterArrivalCleared": true,
+    "mounts": {
+      "total": 268,
+      "top": 20,
+      "twoScreensDown": 36,
+      "returned": 20
+    }
+  },
+  "unverified": [
+    "real-hover-specific-input",
+    "reduced-motion-browser-preference-toggle",
+    "frame-time-and-long-term-memory-comparison",
+    "other-window-sizes",
+    "full-suite",
+    "build"
+  ],
+  "ownership": "Pre-existing released edits preserved; own editing lock released; no new service or commit.",
+  "visualAcceptance": {
+    "status": "not-accepted",
+    "date": "2026-10-10",
+    "feedback": "没有感觉更好看了",
+    "followup": "design-principles-study.md：UI、排版与动效原则研究；本轮未继续修改游戏源码"
+  },
+  "reverted": {
+    "date": "2026-10-10",
+    "task": "WF-photo-revert-1010",
+    "directive": "恢复本轮前原版，仅接入认可的点击取片入场",
+    "evidence": "revert/README.md"
+  }
+}

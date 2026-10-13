@@ -1,0 +1,24 @@
+[
+  {
+    "source": "docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\reference-implementation\\map\\source\\event-record-fragments-v1.png",
+    "sourceSHA256": "207a2cf9e82597a05656470f758bf4ec532a70358ea44a1953e3088d4fb7be2a",
+    "runtime": "game\\assets\\scenes\\map-nodes\\event-record-fragments-1011.webp",
+    "runtimeSHA256": "d67a4310aaaa7a75b3c7c6c9b0ff88035b938e975992fd50577e8ed29caba76a",
+    "encodingRequested": [
+      512,
+      512
+    ],
+    "status": "not inspected or tested; acquisition/encoding record only"
+  },
+  {
+    "source": "docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\reference-implementation\\map\\source\\passage-transit-core-v1.png",
+    "sourceSHA256": "4cecb8bdbd2dbc8b0b5b7046499cc1c5fb0fabd17ce134918bd9d7e3ce705d6d",
+    "runtime": "game\\assets\\scenes\\map-nodes\\passage-transit-core-1011.webp",
+    "runtimeSHA256": "e9b7fec6ed2f86770449aa911433d77b9cc6150f64c4c60789c06b04be912550",
+    "encodingRequested": [
+      512,
+      512
+    ],
+    "status": "not inspected or tested; acquisition/encoding record only"
+  }
+]

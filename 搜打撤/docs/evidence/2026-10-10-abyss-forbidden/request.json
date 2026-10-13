@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "card_id": "tt8-abyss-sovereign",
+      "asset": "cards/hero-abysssovereign.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12204-0a82-72b2-9a07-d1b72c8d8b18/exec-2c55eaa1-687e-4a4b-933d-8e8ce23d8929.png",
+      "revision": "abyss-sovereign-rough-20261010",
+      "prompt": "Redraw the game card Abyss Sovereign as a square illustration. Reference 1 is old card composition: preserve the central small back-facing silver-haired pointed-ear man at the bottom with arms spread and broken luminous chains around wrists; towering dark purple ancient humanoid apparition above him occupies most of frame, tiny yellow eyes and a floating angular gold halo. Keep the overwhelming scale contrast and dark teal / violet division. Reference 2 is the foreground man's current identity: silver long hair tied low bun, long sidelocks, black high-collar robe with gold trim and purple lining, black gloves. Seen from behind; no need to add hat that obscures this original silhouette. The giant remains a shadow entity, not a duplicate portrait. Replace dense strands and tiny chain decorations with strong grouped shapes and a few readable broken links. Rough hand-painted anime color study, following style references 3-5 only for painting grammar: large connected opaque color masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Group hair into substantial locks and cloth into principal fold planes. Clear anime features and readable hands; secondary regions coarse and quiet. Matte muted colors with concentrated purple/gold accents. No fine strands, dense wrinkles, facet mosaics, glossy rendering or all-over texture filters. Abstract pure-color backdrop. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/hero-abysssovereign.webp",
+        "D:/素材/代号柒/搜打撤/docs/character-bible/ref-images/changwuyu.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    },
+    {
+      "card_id": "tt8-hero-warlock",
+      "asset": "cards/hero-forbidden.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12204-0a82-72b2-9a07-d1b72c8d8b18/exec-4b45979f-53a6-4ce4-9250-9141075d493c.png",
+      "revision": "forbidden-rough-20261010",
+      "prompt": "Redraw game card Forbidden Arts Unleashed, landscape 4:3 illustration. Input 1 is old card composition: waist-up blonde priest girl facing camera, one open hand foreshortened toward viewer at center, a large floating open forbidden grimoire on right with purple flames and a single eye symbol. Preserve this subject placement, hand gesture and book angle. Input 2 is current character Xingyue identity: pale blonde long hair gathered into a low ponytail with side braid, golden eyes, white priest dress, deep teal shoulder cape with restrained gold trim; white crescent hairpin clipped flat above bangs on viewer's right, tilted against hair. Calm but commanding anime face. Replace the old wrongly placed golden crescent with this white hairpin. Four broad violet flame tongues imply released curses, without readable runes or lettering. Inputs 3-5 are style only, do not copy their characters. Rough hand-painted anime color study, following style references 3-5 only for painting grammar: large connected opaque color masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Group hair into substantial locks and cloth into principal fold planes. Clear anime features and readable hands; secondary regions coarse and quiet. Matte muted colors with concentrated purple/gold accents. No fine strands, dense wrinkles, facet mosaics, glossy rendering or all-over texture filters. Abstract pure-color backdrop. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/hero-forbidden.webp",
+        "D:/素材/代号柒/搜打撤/docs/character-bible/ref-images/xingyue.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    }
+  ]
+}

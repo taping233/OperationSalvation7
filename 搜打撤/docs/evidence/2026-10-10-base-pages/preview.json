@@ -1,0 +1,16 @@
+{
+  "port": 5352,
+  "pid": 36496,
+  "cwd": "D:\\素材\\代号柒\\搜打撤",
+  "root": "D:\\素材\\代号柒\\搜打撤\\.tmp\\base-pages-1010\\site",
+  "sourceBaseline": "cdd5c1a836",
+  "baselineFiles": [
+    "src/cards/cards.data.js",
+    "src/cards/cards.catalog.js",
+    "data/cards-sync.json"
+  ],
+  "watching": false,
+  "hmr": false,
+  "stopped": true,
+  "stoppedAt": "2026-10-10T09:20:48.6013500Z"
+}

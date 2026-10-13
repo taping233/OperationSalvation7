@@ -1,0 +1,88 @@
+{
+  "bounds": [
+    {
+      "class": "studio-filterbar",
+      "height": 184.375,
+      "width": 1061.050048828125,
+      "withinWindow": true,
+      "x": 22.200000762939453,
+      "y": 80.11250305175781
+    },
+    {
+      "class": "studio-shelf-head",
+      "height": 37.275001525878906,
+      "width": 1061.050048828125,
+      "withinWindow": true,
+      "x": 22.200000762939453,
+      "y": 274
+    },
+    {
+      "class": "library-inspector",
+      "height": 856.8500366210938,
+      "width": 398.7124938964844,
+      "withinWindow": true,
+      "x": 1102.2874755859375,
+      "y": 80.11250305175781
+    }
+  ],
+  "images": [
+    {
+      "loaded": true,
+      "name": "禁咒I"
+    },
+    {
+      "loaded": true,
+      "name": "禁咒II"
+    },
+    {
+      "loaded": true,
+      "name": "禁咒III"
+    },
+    {
+      "loaded": true,
+      "name": "禁咒IV"
+    },
+    {
+      "loaded": true,
+      "name": "白梅落影·妄"
+    },
+    {
+      "loaded": true,
+      "name": "博览者的狂语"
+    },
+    {
+      "loaded": true,
+      "name": "充能火山"
+    },
+    {
+      "loaded": true,
+      "name": "花开两面"
+    },
+    {
+      "loaded": true,
+      "name": "禁术解放"
+    },
+    {
+      "loaded": true,
+      "name": "浪掷风吟"
+    },
+    {
+      "loaded": true,
+      "name": "青龙化身"
+    },
+    {
+      "loaded": true,
+      "name": "深渊主宰·妲莉薇特"
+    }
+  ],
+  "mounted": 20,
+  "scrollTop": 0,
+  "selected": "查看照片：禁咒I",
+  "selectionCount": 1,
+  "total": 268,
+  "viewport": {
+    "dpr": 1.25,
+    "height": 956,
+    "width": 1523
+  }
+}

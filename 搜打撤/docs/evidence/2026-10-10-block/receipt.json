@@ -1,0 +1,89 @@
+{
+  "method": "NovelAI 4.5 direct installation authorized by user after built-in redraw rejection; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt2-block",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\output\\block-20261010\\block.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-block/cards-martial-tt2-block-source.png",
+        "bytes": 1073027,
+        "sha256": "bd431d8505720d5880d71bae9496ecc20ecaea6e6b5a2a7a777165c6a072e536"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-block/cards-martial-tt2-block-full-before.webp",
+          "bytes": 163950,
+          "sha256": "03d6b296103cf27f5aaaa57ce80a1e7efd34ca7788b412bd354324b9100332a9"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-block/cards-martial-tt2-block-thumb-before.webp",
+          "bytes": 24758,
+          "sha256": "1d58d4cc2dc1ff5c3dc28cccbcad9d23df00e492dc6052d2b60fb32edfa0d2ea"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt2-block.webp",
+          "bytes": 66564,
+          "sha256": "244566c953a01f4cea9049f44ae5a20688cc18ef01217a6e70df4176db4ceeca",
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt2-block.webp",
+          "bytes": 13516,
+          "sha256": "a1a8292aa2ff757b2169533f2baf89ce13c5e4940c249fcd73d7b2487fa76381",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt2-block-creative-rough-20261005",
+      "revision_after": "block-nai45-direct-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt2-block.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 163950,
+            "sha256": "03d6b296103cf27f5aaaa57ce80a1e7efd34ca7788b412bd354324b9100332a9",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt2-block.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 66564,
+            "sha256": "244566c953a01f4cea9049f44ae5a20688cc18ef01217a6e70df4176db4ceeca",
+            "source": "docs/evidence/2026-10-10-block/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt2-block.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 24758,
+            "sha256": "1d58d4cc2dc1ff5c3dc28cccbcad9d23df00e492dc6052d2b60fb32edfa0d2ea",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt2-block.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 13516,
+            "sha256": "a1a8292aa2ff757b2169533f2baf89ce13c5e4940c249fcd73d7b2487fa76381",
+            "source": "docs/evidence/2026-10-10-block/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1071,
+  "manifest_count_after": 1071
+}

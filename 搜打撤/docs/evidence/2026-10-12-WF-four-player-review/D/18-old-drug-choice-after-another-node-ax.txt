@@ -1,0 +1,43 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5354/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/
+	1 container viewport
+		2 button 背包 15/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 15/16
+		5 container
+			6 text 冻土遗迹 第 3 层
+			7 container 事件与叙事
+				8 heading cards 避难市集药摊, Value: 2
+					9 image cards
+					10 text  避难市集药摊
+				11 container 事件叙述
+					12 text 污染区药师只能保住一瓶——从 3 瓶随机药水中选择 1 瓶。
+			13 container 事件选项
+				14 button 选择获得：复原药水
+					15 container
+						16 text 0
+						17 image 复原药水
+						18 text 复原药水 道具 · 稀有
+						19 container
+							20 text 稀有 稀有
+						21 text 只能在背包中使用；复原最多  2  张卡牌。
+				22 button 选择获得：精神药水
+					23 container
+						24 text 0
+						25 image 精神药水
+						26 text 精神药水 道具 · 稀有
+						27 container
+							28 text 稀有 稀有
+						42 image cards
+						43 text 抽 2 抽  2  张牌。
+				33 button 选择获得：火焰药水
+					34 container
+						35 text 0
+						36 image 火焰药水
+						37 text 火焰药水 道具 · 稀有
+						38 container
+							39 text 稀有 稀有
+						40 text 对全体敌人造成  2  点 法术伤害 。
+				41 text 点击一张卡牌选择获得
+
+The focused UI element is 14 button 选择获得：复原药水

@@ -1,0 +1,118 @@
+{
+  "source": "Codex in-app browser",
+  "origin": "http://127.0.0.1:5200",
+  "input": "real clicks, rarity choices and Escape; read-only DOM inspection; no viewport override or note edits",
+  "facts": [
+    {
+      "backgroundImage": "none",
+      "clip": "border-box",
+      "fill": "rgb(101, 72, 121)",
+      "images": [
+        {
+          "alt": "禁咒I",
+          "complete": true,
+          "src": "assets/thumbs/cards/curse-drain.webp?art=curse-rough-20261010&v=0.60.0",
+          "width": 448
+        },
+        {
+          "alt": "禁咒II",
+          "complete": true,
+          "src": "assets/thumbs/cards/curse-freeze.webp?art=curse-rough-20261010&v=0.60.0",
+          "width": 448
+        },
+        {
+          "alt": "禁咒III",
+          "complete": true,
+          "src": "assets/thumbs/cards/curse-venom.webp?art=curse-rough-20261010&v=0.60.0",
+          "width": 448
+        },
+        {
+          "alt": "禁咒IV",
+          "complete": true,
+          "src": "assets/thumbs/cards/curse-silence.webp?art=curse-rough-20261010&v=0.60.0",
+          "width": 448
+        }
+      ],
+      "selected": "tt8-curse1",
+      "step": "readable-prismatic",
+      "text": "棱彩"
+    },
+    {
+      "animation": "studio-panel-in-a",
+      "duration": "0.22s",
+      "motion": "a",
+      "opacity": "1",
+      "step": "preview-replay",
+      "title": "禁咒II"
+    },
+    {
+      "animation": "studio-panel-in-a",
+      "motion": "a",
+      "preview": "禁咒II",
+      "selected": [
+        "tt8-curse2"
+      ],
+      "step": "unique-selection-after-next"
+    },
+    {
+      "animation": "studio-panel-in-a",
+      "category": "\n    武术64\n    ",
+      "duration": "0.22s",
+      "motion": "a",
+      "mountedImages": 20,
+      "selectedCount": 1,
+      "step": "category-replay"
+    },
+    {
+      "category": "全部",
+      "duration": "0.22s",
+      "gridAnimation": "studio-panel-in-b",
+      "gridMotion": "b",
+      "label": {
+        "fill": "rgb(101, 72, 121)",
+        "image": "none",
+        "text": "棱彩"
+      },
+      "mountedImages": 20,
+      "selected": [],
+      "step": "final-all",
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      }
+    },
+    {
+      "image": "url(\"http://127.0.0.1:5200/assets/ui/photo-studio/mount-plain.svg\")",
+      "mount": "plain",
+      "rarity": "古朴",
+      "step": "plain-mount",
+      "width": "1.2px"
+    },
+    {
+      "image": "url(\"http://127.0.0.1:5200/assets/ui/photo-studio/frame-atelier-v1.png\")",
+      "mount": "legendary",
+      "rarity": "传说",
+      "step": "legendary-mount",
+      "width": "7.2px"
+    },
+    {
+      "exists": true,
+      "image": {
+        "src": "http://127.0.0.1:5200/assets/cards/curse-drain.webp?art=curse-rough-20261010&v=0.60.0",
+        "width": 1254
+      },
+      "name": "禁咒I",
+      "step": "new-card-zoom"
+    },
+    {
+      "focus": "tt8-curse1",
+      "galleryPresent": true,
+      "selected": [
+        "tt8-curse1"
+      ],
+      "step": "return-after-zoom",
+      "zoomPresent": false
+    }
+  ],
+  "errors": []
+}

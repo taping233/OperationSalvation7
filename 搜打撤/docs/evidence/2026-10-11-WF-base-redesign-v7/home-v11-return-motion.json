@@ -1,0 +1,43 @@
+{
+  "covered": false,
+  "items": [
+    {
+      "name": "队员",
+      "opacity": "0.995078",
+      "transform": "matrix(1, 0, 0, 1, 0, 0.118131)"
+    },
+    {
+      "name": "后勤",
+      "opacity": "0.986062",
+      "transform": "matrix(1, 0, 0, 1, 0, 0.334519)"
+    },
+    {
+      "name": "交易所",
+      "opacity": "0.967045",
+      "transform": "matrix(1, 0, 0, 1, 0, 0.790924)"
+    },
+    {
+      "name": "收藏室",
+      "opacity": "0.929683",
+      "transform": "matrix(1, 0, 0, 1, 0, 1.6876)"
+    },
+    {
+      "name": "建设",
+      "opacity": "0.929683",
+      "transform": "matrix(1, 0, 0, 1, 0, 1.6876)"
+    },
+    {
+      "name": "庭院",
+      "opacity": "0.929683",
+      "transform": "matrix(1, 0, 0, 1, 0, 1.6876)"
+    }
+  ],
+  "launch": {
+    "opacity": "0.995078",
+    "transform": "matrix(1, 0, 0, 1, 0.354392, 0)"
+  },
+  "viewport": [
+    1523,
+    956
+  ]
+}

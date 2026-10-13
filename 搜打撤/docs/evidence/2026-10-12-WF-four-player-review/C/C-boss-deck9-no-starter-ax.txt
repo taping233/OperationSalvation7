@@ -1,0 +1,145 @@
+- complementary:
+  - navigation "远征工具":
+    - img "常无欲 Q版小人"
+    - generic: 当前 · 首脑
+    - button "bag 背包 携带卡牌 12/16 B" [disabled]:
+      - img "bag"
+      - text: 背包
+      - generic: 携带卡牌
+      - strong: 12/16
+      - generic: B
+    - button "lock 安全格 保护物资 0/2" [disabled]:
+      - img "lock"
+      - text: 安全格
+      - generic: 保护物资
+      - strong: 0/2
+    - button "cards 消耗口袋 待复原卡牌 10" [disabled]:
+      - img "cards"
+      - text: 消耗口袋
+      - generic: 待复原卡牌
+      - strong: "10"
+    - button "map 定位 当前位置 F" [disabled]:
+      - img "map"
+      - text: 定位
+      - generic: 当前位置
+      - generic: F
+    - button "map 总览 已知区域 G" [disabled]:
+      - img "map"
+      - text: 总览
+      - generic: 已知区域
+      - generic: G
+- main:
+  - navigation "远征章节":
+    - generic: 污染核心
+    - generic: 第 4 层 / 4
+  - generic: "16"
+  - generic: "4"
+  - button "离开对局":
+  - button:
+  - button:
+  - generic: 当前生命
+  - generic: 35/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog "demon BOSS战 · 编组牌库":
+    - heading "demon BOSS战 · 编组牌库" [level=3]:
+      - img "demon"
+      - text: BOSS战 · 编组牌库
+    - generic: 第 1 回合 · 能量 0/0
+    - paragraph: 本局首脑：肃清总督（攻击 5 · 生命 50）——从背包选 15 张招式 / 装备 / 能力卡，与 0 张初始攻击组成牌库 · 开局抽 5 张 · 每回合开始抽 1 张 · 每回合固定 2 费
+    - paragraph:
+      - img "question"
+      - text: 肃清总督 词缀【
+      - img "arrow"
+      - text: 军威】每个回合结束时攻击力 +2
+    - paragraph:
+      - img "lock"
+      - text: 固定编入：初始攻击 ×0（初始攻击不足 5 张——部分进消耗口袋了） ·
+      - img "cross"
+      - text: 道具 / 资源 / 事件卡与初始攻击不可选入 ·
+      - img "bolt"
+      - text: 「对战开始时」装备编入即生效（卡面带角标）
+    - paragraph:
+      - img "cross"
+      - text: 背包可编卡牌不足 15 张（现有 9 张）——选完后按现有卡牌迎战首脑
+    - heading "可选卡牌 已选 9 张（至少 9）" [level=3]
+    - button "编入或移出 灵能召唤" [pressed]:
+      - generic: "1"
+      - img "灵能召唤"
+      - generic: 灵能召唤
+      - generic: 法术 · 稀有 稀有
+      - generic: 发现 1 张注能卡牌，并使该牌无需注能。
+      - text: 已编入
+    - button "编入或移出 龙焰射线" [pressed]:
+      - generic: "2"
+      - img "龙焰射线"
+      - generic: 龙焰射线
+      - generic: 法术 · 古朴 古朴
+      - img "crystal"
+      - text: 注能 1
+      - generic: 注能（1）：
+      - text: 造成 11 点法术伤害。
+      - text: 已编入
+    - button "编入或移出 邪能护体" [pressed]:
+      - generic: "2"
+      - img "邪能护体"
+      - generic: 邪能护体
+      - generic: 法术 · 史诗 史诗
+      - img "cards"
+      - text: 抽 3
+      - img "crystal"
+      - text: 注能 2
+      - generic: 注能（2）：
+      - text: 抽 3 张牌；本回合，你免疫所有伤害和诅咒效果。
+      - text: 已编入
+    - button "编入或移出 包扎" [pressed]:
+      - generic: "1"
+      - img "包扎"
+      - generic: 包扎
+      - generic: 武术 · 古朴 古朴
+      - img "heart"
+      - text: 回 3
+      - img "plate"
+      - text: 甲 3
+      - generic: 你回复 3 点生命，并获得 3 点护甲。
+      - text: 已编入
+    - button "编入或移出 霜月斩" [pressed]:
+      - generic: "2"
+      - img "霜月斩"
+      - generic: 霜月斩
+      - generic: 武术 · 史诗 史诗
+      - generic: 造成（你的攻击力 + 2）点攻击伤害；对目标附加冰冻与禁疗，持续 1 回合。
+      - text: 已编入
+    - button "编入或移出 突破进展" [pressed]:
+      - generic: "1"
+      - img "突破进展"
+      - generic: 突破进展
+      - generic: 法术 · 稀有 稀有
+      - generic: 随机获得 0 费、1 费和 2 费招式各 1 张。
+      - text: 已编入
+    - button "编入或移出 棘刺之地" [pressed]:
+      - generic: "2"
+      - img "棘刺之地"
+      - generic: 棘刺之地
+      - generic: 法术 · 稀有 稀有
+      - generic: 对全体敌人附加 2 层中毒，并立即触发每名敌人的 1 次毒伤。
+      - text: 已编入
+    - button "编入或移出 深海咒印" [pressed]:
+      - generic: "0"
+      - img "深海咒印"
+      - generic: 深海咒印
+      - generic: 装备 · 史诗 史诗
+      - generic: 你处于诅咒状态时，攻击力增加 2 点，法伤增加 2 点。
+      - text: 已编入
+    - button "编入或移出 孢子城墙" [active] [pressed]:
+      - generic: "1"
+      - img "孢子城墙"
+      - generic: 孢子城墙
+      - generic: 法术 · 古朴 古朴
+      - img "plate"
+      - text: 甲 6
+      - generic: 对 1 名敌人附加 2 层中毒；你获得 6 点护甲。
+      - text: 已编入
+    - button "swords 开始战斗（牌库 9 张）":
+      - img "swords"
+      - text: 开始战斗（牌库 9 张）
+    - button "↩ 放弃挑战"

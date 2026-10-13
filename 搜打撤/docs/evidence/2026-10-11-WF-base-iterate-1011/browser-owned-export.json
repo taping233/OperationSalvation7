@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 1,
+  "kind": "browser-snapshot",
+  "observedAt": "2026-10-11T03:45:32.345Z",
+  "scene": "owned-collection-room-v4",
+  "collector": {
+    "platform": "Codex",
+    "browser": "iab",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "收藏室",
+      "key": "heading",
+      "rect": {
+        "height": 38.0625,
+        "width": 98.0500030517578,
+        "x": 60.275001525878906,
+        "y": 84.64444732666016
+      },
+      "selector": ".av3-header h2",
+      "styles": {
+        "color": "rgb(37, 45, 54)",
+        "display": "block",
+        "font-size": "40px"
+      },
+      "tag": "H2",
+      "text": "收藏室"
+    },
+    {
+      "attributes": {},
+      "identity": "成就 ↗",
+      "key": "utility",
+      "rect": {
+        "height": 38.04999923706055,
+        "width": 51.88750076293945,
+        "x": 1137.0875244140625,
+        "y": 84.64444732666016
+      },
+      "selector": ".av3-utilities button",
+      "styles": {
+        "color": "rgb(113, 121, 128)",
+        "display": "block",
+        "font-size": "20px"
+      },
+      "tag": "BUTTON",
+      "text": "成就 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "收藏奖励 ↗",
+      "key": "utility",
+      "rect": {
+        "height": 38.04999923706055,
+        "width": 83.61250305175781,
+        "x": 1212.7625732421875,
+        "y": 84.64444732666016
+      },
+      "selector": ".av3-utilities button",
+      "styles": {
+        "color": "rgb(113, 121, 128)",
+        "display": "block",
+        "font-size": "20px"
+      },
+      "tag": "BUTTON",
+      "text": "收藏奖励 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "卡背 ↗",
+      "key": "utility",
+      "rect": {
+        "height": 38.04999923706055,
+        "width": 51.88750076293945,
+        "x": 1320.1624755859375,
+        "y": 84.64444732666016
+      },
+      "selector": ".av3-utilities button",
+      "styles": {
+        "color": "rgb(113, 121, 128)",
+        "display": "block",
+        "font-size": "20px"
+      },
+      "tag": "BUTTON",
+      "text": "卡背 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "故事 ↗",
+      "key": "utility",
+      "rect": {
+        "height": 38.04999923706055,
+        "width": 51.88750076293945,
+        "x": 1395.8375244140625,
+        "y": 84.64444732666016
+      },
+      "selector": ".av3-utilities button",
+      "styles": {
+        "color": "rgb(113, 121, 128)",
+        "display": "block",
+        "font-size": "20px"
+      },
+      "tag": "BUTTON",
+      "text": "故事 ↗"
+    },
+    {
+      "attributes": {},
+      "identity": "全部类型0 张已收藏←暂无卡牌→尚未收藏卡牌在仓库收藏卡牌后，会陈列在这里。前往仓库 →",
+      "key": "collection",
+      "rect": {
+        "height": 736.3250122070312,
+        "width": 1387.4500732421875,
+        "x": 60.275001525878906,
+        "y": 175.84445190429688
+      },
+      "selector": ".collection-cards-v4",
+      "styles": {
+        "color": "rgb(37, 45, 54)",
+        "display": "flex",
+        "font-size": "18px"
+      },
+      "tag": "DIV",
+      "text": "全部类型0 张已收藏←暂无卡牌→尚未收藏卡牌在仓库收藏卡牌后，会陈列在这里。前往仓库 →"
+    },
+    {
+      "attributes": {},
+      "identity": "尚未收藏卡牌在仓库收藏卡牌后，会陈列在这里。前往仓库 →",
+      "key": "empty",
+      "rect": {
+        "height": 255.3625030517578,
+        "width": 1387.4500732421875,
+        "x": 60.275001525878906,
+        "y": 175.84445190429688
+      },
+      "selector": ".collection-empty",
+      "styles": {
+        "color": "rgb(113, 121, 128)",
+        "display": "block",
+        "font-size": "18px"
+      },
+      "tag": "DIV",
+      "text": "尚未收藏卡牌在仓库收藏卡牌后，会陈列在这里。前往仓库 →"
+    }
+  ],
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 1523
+    }
+  },
+  "selectors": [
+    {
+      "key": "heading",
+      "selector": ".av3-header h2"
+    },
+    {
+      "key": "utility",
+      "selector": ".av3-utilities button"
+    },
+    {
+      "key": "collection",
+      "selector": ".collection-cards-v4"
+    },
+    {
+      "key": "empty",
+      "selector": ".collection-empty"
+    }
+  ],
+  "actions": [
+    {
+      "type": "real-input",
+      "detail": "收藏室进入奖励次级页、真实Esc返回、卡背预览及解锁目标进入选中成就、返回收藏室"
+    },
+    {
+      "type": "screenshot",
+      "detail": "真实档案01无已收藏卡牌，主页面空态及独立奖励页已保存"
+    }
+  ],
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "screenshots": [
+    "docs/evidence/2026-10-11-WF-base-iterate-1011/collection-room-final.png",
+    "docs/evidence/2026-10-11-WF-base-iterate-1011/collection-rewards-final.png"
+  ]
+}

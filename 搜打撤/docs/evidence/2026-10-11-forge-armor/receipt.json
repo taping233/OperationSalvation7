@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt2-turtlearmor",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a125fc-1da2-7300-83db-f2b39e275c76\\exec-2b224041-9d68-4736-9e4e-6924eafd8452.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-forge-armor/cards-martial-tt2-turtlearmor-source.png",
+        "bytes": 2191209,
+        "sha256": "ce081d7a020c532bac0cb5dad9322945496c7d2be5d8be522db70b86fbb19de3"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-forge-armor/cards-martial-tt2-turtlearmor-full-before.webp",
+          "bytes": 211502,
+          "sha256": "e534489c33dc9b3561cc16d3b22f2914c6021cc51f3181d658c9bc3f63c9bbe3"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-forge-armor/cards-martial-tt2-turtlearmor-thumb-before.webp",
+          "bytes": 32040,
+          "sha256": "b7288a6c00a71d36c5b198332ee88864dcaa46bfa006330160da4691c185bb61"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt2-turtlearmor.webp",
+          "bytes": 153796,
+          "sha256": "3ef1e20a0d798a09e872d80affdd1a5d77f767849e9c6cb42756b913f67ac6f9",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt2-turtlearmor.webp",
+          "bytes": 16514,
+          "sha256": "21a95d6801bcc19620b7f151cd14eb3329501e9b445e5f0f7d8d26f58d908bff",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt2-turtlearmor-creative-rough-20261005",
+      "revision_after": "forge-armor-contact-rough-20261011",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt2-turtlearmor.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 211502,
+            "sha256": "e534489c33dc9b3561cc16d3b22f2914c6021cc51f3181d658c9bc3f63c9bbe3",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt2-turtlearmor.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 153796,
+            "sha256": "3ef1e20a0d798a09e872d80affdd1a5d77f767849e9c6cb42756b913f67ac6f9",
+            "source": "docs/evidence/2026-10-11-forge-armor/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt2-turtlearmor.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 32040,
+            "sha256": "b7288a6c00a71d36c5b198332ee88864dcaa46bfa006330160da4691c185bb61",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt2-turtlearmor.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 16514,
+            "sha256": "21a95d6801bcc19620b7f151cd14eb3329501e9b445e5f0f7d8d26f58d908bff",
+            "source": "docs/evidence/2026-10-11-forge-armor/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1117,
+  "manifest_count_after": 1117
+}

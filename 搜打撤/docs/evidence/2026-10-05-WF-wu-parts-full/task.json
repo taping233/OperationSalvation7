@@ -13,8 +13,15 @@
     "当前窗口内置浏览器实检拼装外观、关节遮挡与三种动画小样",
     "不达标问题已修正并复核，保存最终验收证据"
   ],
-  "stage": "doing",
+  "stage": "partial",
   "checks": [],
-  "unverified": [],
-  "updatedAt": "2026-10-05T03:33:18.927Z"
+  "unverified": [
+    "10-13老板确认所有对话已结束；本轮释放执行状态，原未完成范围保留，后续须按当前证据重新核验"
+  ],
+  "updatedAt": "2026-10-13T15:39:49.301Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
 }

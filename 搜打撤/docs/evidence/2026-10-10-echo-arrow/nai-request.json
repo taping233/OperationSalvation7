@@ -1,0 +1,21 @@
+{
+  "card_id": "tt2-forestarrow",
+  "model": "nai-diffusion-4-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 120369031,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nno humans, arrow, arrowhead, sound waves, simple background\n\nOne slender silver arrow travels diagonally from lower left to upper right. A small pointed head, straight dark shaft and two grouped blue-gray feather vanes form one unmistakable arrow. Exactly two pale blue curved echo arcs expand behind its midpoint, one smaller and sharper, one larger and fainter. The arcs are broad interrupted painted crescents, never complete circles, symbols or extra arrows. They suggest a sound returning through quiet air. Keep the arrow silhouette clear and the two echo arcs subordinate. Solid muted deep slate-blue background, generous empty space, restrained ivory highlights and a small cool-blue accent. No target, landscape, hands, music notes, particles, explosion or decorative objects.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, hands, multiple arrows, bow, target, leaves, flowers, music notes, particles, ornate weapon, detailed scenery, border",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\echo-arrow-20261010\\echo-arrow.png",
+  "installed": false,
+  "design": "一支银箭掠过深灰蓝底，身后两道由实转淡的回声弧线；少元素、留白。"
+}

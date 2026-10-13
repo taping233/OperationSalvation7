@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "card_id": "tt8-hero-priest",
+      "asset": "cards/hero-sacredrain.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12470-95d7-75e0-9477-03361e04258c/exec-50ac7850-8f73-4905-a723-0dfc4c29f2f1.png",
+      "revision": "xingyue-wind-graphic-bg-20261010",
+      "prompt": "Edit ONLY THE BACKGROUND of input 1, the existing 浪掷风吟 game card illustration, into a simple deliberately composed graphic painted backdrop. Preserve the woman, her face and open singing mouth, closed eyes, pale gold hair and side braid, white crescent ornament, white priestess dress, dark teal cape, hand on chest, extended palm, pose, body proportions, crop, lighting on the character and the existing pale S-shaped wind ribbon as closely as possible. Do not redesign the subject or add props.\nInput 2 (天剑诛魔) is BACKGROUND-DESIGN REFERENCE ONLY: borrow its confidence of large contrasting fields and a single broad light shape framing the figure. Do not copy its blue-and-gold colors, sword, character, pose or literal vertical stripe.\n\nReplace the plain white background of input 1 with two principal painted background shapes:\n1. A quiet DEEP DESATURATED GRAY-TEAL field filling the canvas, with broad subtle handmade paint coverage rather than noisy texture. It is darker than the pale hair, skin, white dress and wind ribbon, but slightly separated in value and hue from the dark cape.\n2. ONE BROAD MUTED WARM IVORY-OCHRE diagonal plane behind the woman's head and upper body, slanting upward from lower left toward upper right with her reclining body axis. The light plane enters from the top edge behind her head and tapers downward behind the braid and torso; it is a background color field, NOT a light beam, halo, doorway or object. Keep its edge handmade, irregularly brushed but clearly designed. Do not outline it, decorate it or fill it with motifs.\nThe dark field remains clearly visible on the left and at the outer right edge, while the warm plane quietly frames the face. Balance its scale against the existing S-wind curve: the pale cool-sage wind sweeps through both background fields, reading as the secondary movement. Keep the hair silhouette and braid legible, face the focus and the extended palm readable. Avoid adding background wind lines that compete with the existing ribbon.\n\nContinue input 1's rough hand-painted anime medium. Large connected opaque matte background masses, a few wide directional brush swipes with broken handmade endings, calm interiors, muted gray colors and subtle warm/cool separation. Background simpler and coarser than the face, economical and flat enough for graphic clarity while retaining selective broad paint overlaps. No landscapes, architecture, stars, particles, symbols, extra ribbons, text, decorative patterns, glossy gradients, spotlight effects, canvas/grain filters, frame, watermark or UI. Keep all foreground content close to the target.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/hero-sacredrain.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/wu-heavensword.webp"
+      ]
+    }
+  ]
+}

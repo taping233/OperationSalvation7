@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "card_id": "tt3sp-dodge",
+      "asset": "cards/spell-tt3sp-dodge.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-b1863095-f5a3-407f-8b23-b41caf648cf8.png",
+      "revision": "dodge-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the dodge game-card edit target, retaining original SQUARE composition closely. A silver-gray star-shaped spiked dart head near center-left/lower-middle, with a long dark pointed taper extending diagonally toward upper RIGHT. Preserve the original orientation, star-shaped head silhouette, central position and long diagonal spike proportions. Pale offset translucent-looking gray afterimages of the spiked head lie just behind/below-left, with broad diagonal white-gray speed swipes toward upper right. Quiet nearly white cool gray backdrop and ample negative space at left and lower areas. Pure symbolic fast dodge/near-miss imagery, no characters, hands or new weapons. Make the main silver planes clearly readable using broad ivory-gray light faces and charcoal cool-gray shadow faces. Motion echoes are simplified low-contrast opaque gray silhouettes, no extra sharp focal objects; only a few wide directional speed marks, no dense fine line network. Images 2, 3, 4 are DRAWING STYLE references only; borrow broad opaque hand-painted construction, never subjects or costume motifs. Rough hand-painted anime color study with large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Clear grouped hard-edged light and shadow, matte muted colored grays with concentrated accents; secondary regions quiet. No glossy 3D, photoreal materials, uniform vector outlines, tiny facet mosaics, dense fine line networks or all-over grain/texture filters. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt3sp-dodge.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    },
+    {
+      "card_id": "tt3-chain-lightning",
+      "asset": "cards/spell-tt3-chain-lightning.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-4a302177-4905-42f2-9cd9-a8f47bf96e4f.png",
+      "revision": "chain-lightning-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the chain lightning game-card edit target, preserving original SQUARE composition closely. One bright pale cyan-white circular energy orb centered, about one quarter of picture width, with jagged white-cyan lightning passing vertically from the TOP edge into the orb, then continuing downward to a thin point near bottom. Main bolt bends left then back right above the orb; a sparse angular branching lightning corona wraps around the orb's sides. Preserve orb position and size, bolt direction, original zigzag trajectory, sparse branches and deep midnight blue-purple backdrop. Pure symbolic energy; no characters, hands, solid props or landscape. Orb remains an intact clean broad pale cyan mass, brightest center, framed by a few restrained blue-violet light planes. Paint main electrical zigzags as decisive broad opaque strokes and a handful of thinner branches; no spiderweb of many fine lines, no photoreal glow render. Deep background quiet with a few large muted navy/indigo masses, concentrated cyan accents. Images 2, 3, 4 are DRAWING STYLE references only; borrow broad opaque hand-painted construction, never subjects or costume motifs. Rough hand-painted anime color study with large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Clear grouped hard-edged light and shadow, matte muted colored grays with concentrated accents; secondary regions quiet. No glossy 3D, photoreal materials, uniform vector outlines, tiny facet mosaics, dense fine line networks or all-over grain/texture filters. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt3-chain-lightning.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    }
+  ]
+}

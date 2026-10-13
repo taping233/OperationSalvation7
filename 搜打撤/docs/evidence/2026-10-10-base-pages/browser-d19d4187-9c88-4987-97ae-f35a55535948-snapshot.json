@@ -1,0 +1,185 @@
+{
+  "actions": [
+    {
+      "detail": "隔离档案：搜索、选卡、放大、收藏保护与取消、确认卖出、购买木材、伙伴直达、外观预览/应用、整备返回/换人保留、成就分类与卡背预览。",
+      "type": "real-input"
+    },
+    {
+      "detail": "只读DOM样式。卡库三件套为HEAD，其他游戏模块为本轮工作树；无隐藏运行时或合成事件。",
+      "type": "static-inspection"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "id": "hubMain"
+      },
+      "identity": "{\"id\":\"hubMain\"}",
+      "key": "shell",
+      "rect": {
+        "height": 720,
+        "width": 1280,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#hubMain",
+      "styles": {
+        "background-color": "rgb(237, 241, 243)",
+        "border-radius": "0px",
+        "color": "rgb(37, 57, 69)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "18px",
+        "height": "1080px",
+        "line-height": "28.8px",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1920px"
+      },
+      "tag": "DIV",
+      "text": "基地\n          档案 / 01\n          \n             木材 1\n             口粮 0\n             钥匙 0\n             储备 1 币\n          \n        \n        \n          基地事务 / BASE出征EXPEDITION01仓库STORAGE02补给SUPPLIES03基地建设WOR"
+    },
+    {
+      "attributes": {},
+      "identity": "{}",
+      "key": "navigation",
+      "rect": {
+        "height": 672,
+        "width": 136.66250610351562,
+        "x": 0,
+        "y": 48
+      },
+      "selector": ".hub-tabs",
+      "styles": {
+        "background-color": "rgb(28, 42, 50)",
+        "border-radius": "0px",
+        "color": "rgb(37, 57, 69)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "18px",
+        "height": "1008px",
+        "line-height": "28.8px",
+        "opacity": "1",
+        "padding": "26px 14px 20px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "204.994px"
+      },
+      "tag": "NAV",
+      "text": "基地事务 / BASE出征EXPEDITION01仓库STORAGE02补给SUPPLIES03基地建设WORKSHOP04人物与伙伴PERSONNEL05档案ARCHIVES06\n          EXPEDITION BASE · VII"
+    },
+    {
+      "attributes": {
+        "aria-pressed": "true",
+        "data-id": "wolf"
+      },
+      "identity": "{\"data-id\":\"wolf\",\"aria-pressed\":\"true\"}",
+      "key": "selected-back",
+      "rect": {
+        "height": 191.2999725341797,
+        "width": 129.5500030517578,
+        "x": 319.6499938964844,
+        "y": 253.61668395996097
+      },
+      "selector": ".back-card.on",
+      "styles": {
+        "background-color": "rgb(222, 234, 221)",
+        "border-radius": "0px",
+        "color": "rgb(66, 93, 96)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "286.95px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "22px 17px",
+        "pointer-events": "auto",
+        "transform": "matrix(1, 0, 0, 1, 0, -2)",
+        "visibility": "visible",
+        "width": "194.325px"
+      },
+      "tag": "BUTTON",
+      "text": "猎手皮纸未解锁"
+    },
+    {
+      "attributes": {},
+      "identity": "{}",
+      "key": "preview",
+      "rect": {
+        "height": 395.9250183105469,
+        "width": 186.6625061035156,
+        "x": 1038.0125732421875,
+        "y": 254.9499969482422
+      },
+      "selector": ".archive-back-preview",
+      "styles": {
+        "background-color": "rgb(227, 237, 242)",
+        "border-radius": "0px",
+        "color": "rgb(52, 79, 84)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "18px",
+        "height": "593.887px",
+        "line-height": "28.8px",
+        "opacity": "1",
+        "padding": "24px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "279.994px"
+      },
+      "tag": "ASIDE",
+      "text": "猎手皮纸成就「猎手」尚未解锁"
+    }
+  ],
+  "observedAt": "2026-10-10T09:04:31.009Z",
+  "page": {
+    "origin": "http://127.0.0.1:5352",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "scene": "base-pages-archive-final",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-10-base-pages/warehouse.jpg",
+    "docs/evidence/2026-10-10-base-pages/personnel.jpg",
+    "docs/evidence/2026-10-10-base-pages/archive.jpg"
+  ],
+  "selectors": [
+    {
+      "key": "shell",
+      "selector": "#hubMain"
+    },
+    {
+      "key": "navigation",
+      "selector": ".hub-tabs"
+    },
+    {
+      "key": "selected-back",
+      "selector": ".back-card.on"
+    },
+    {
+      "key": "preview",
+      "selector": ".archive-back-preview"
+    }
+  ]
+}

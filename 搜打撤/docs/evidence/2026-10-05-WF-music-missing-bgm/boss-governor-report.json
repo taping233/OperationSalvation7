@@ -1,0 +1,503 @@
+{
+  "id": "boss-governor",
+  "title": "铁律封城",
+  "stem": "10-boss-governor-iron-edict",
+  "idea": "肃清总督的低铜管战歌；军令式圆号主题与弦乐反问，低铜管错开进入，压力来自句法和节奏。",
+  "key": "D minor",
+  "meter": [
+    4,
+    4
+  ],
+  "bpm_quarter": 120,
+  "bars": 32,
+  "total_beats": 128.0,
+  "seconds": 64.0,
+  "tracks": [
+    {
+      "name": "Horn edict",
+      "program": 60,
+      "bank": 0,
+      "hand": null,
+      "notes": 64,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/10-boss-governor-iron-edict-Horn-edict.wav",
+        "bytes": 24576088,
+        "sha256": "357949b36d73869fba0d4919ab7244ea828cdf13cc78f5a01a97b71b8e157841"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.97
+        ],
+        [
+          16.0,
+          0.97
+        ],
+        [
+          32.0,
+          1
+        ],
+        [
+          64.0,
+          1
+        ],
+        [
+          80.0,
+          1.04
+        ],
+        [
+          96.0,
+          1.04
+        ],
+        [
+          112.0,
+          0.94
+        ],
+        [
+          120.0,
+          0.94
+        ],
+        [
+          128.0,
+          0.97
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Trombone battlement",
+      "program": 57,
+      "bank": 0,
+      "hand": null,
+      "notes": 10,
+      "pan": 18,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/10-boss-governor-iron-edict-Trombone-battlement.wav",
+        "bytes": 24576088,
+        "sha256": "51c666f17095adee05e003f0e77f03048c4642cfa424c90748b8322124e14b9f"
+      },
+      "target_active_rms_dbfs": -34,
+      "continuous_gain_points": [
+        [
+          0,
+          0.35
+        ],
+        [
+          16.0,
+          0.35
+        ],
+        [
+          32.0,
+          0.8
+        ],
+        [
+          64.0,
+          0.8
+        ],
+        [
+          80.0,
+          0.92
+        ],
+        [
+          96.0,
+          0.92
+        ],
+        [
+          112.0,
+          0.48
+        ],
+        [
+          120.0,
+          0.48
+        ],
+        [
+          128.0,
+          0.35
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Tuba foundation",
+      "program": 58,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/10-boss-governor-iron-edict-Tuba-foundation.wav",
+        "bytes": 24576088,
+        "sha256": "97ab5702fb716321e15a4c5c2858598f5a4251e1c03a4ad66e15c48f8d0eecb3"
+      },
+      "target_active_rms_dbfs": -37,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          16.0,
+          0.83
+        ],
+        [
+          32.0,
+          0.92
+        ],
+        [
+          64.0,
+          0.92
+        ],
+        [
+          80.0,
+          0.98
+        ],
+        [
+          96.0,
+          0.98
+        ],
+        [
+          112.0,
+          0.85
+        ],
+        [
+          120.0,
+          0.85
+        ],
+        [
+          128.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Violin defiance",
+      "program": 40,
+      "bank": 0,
+      "hand": null,
+      "notes": 10,
+      "pan": -36,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/10-boss-governor-iron-edict-Violin-defiance.wav",
+        "bytes": 24576088,
+        "sha256": "7f28f7e7bd208606241e0ce517f206caa952b55da4d5950a6521a354156a1f4b"
+      },
+      "target_active_rms_dbfs": -33,
+      "continuous_gain_points": [
+        [
+          0,
+          0.35
+        ],
+        [
+          16.0,
+          0.35
+        ],
+        [
+          32.0,
+          0.8
+        ],
+        [
+          64.0,
+          0.8
+        ],
+        [
+          80.0,
+          0.92
+        ],
+        [
+          96.0,
+          0.92
+        ],
+        [
+          112.0,
+          0.48
+        ],
+        [
+          120.0,
+          0.48
+        ],
+        [
+          128.0,
+          0.35
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Pizzicato orders",
+      "program": 45,
+      "bank": 0,
+      "hand": null,
+      "notes": 48,
+      "pan": 32,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/10-boss-governor-iron-edict-Pizzicato-orders.wav",
+        "bytes": 24576088,
+        "sha256": "2dab708376c72bd0bb0652bdf32642259f01d5d0a9c9bed645c2b8a6303f1f6b"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.8
+        ],
+        [
+          16.0,
+          0.8
+        ],
+        [
+          32.0,
+          0.88
+        ],
+        [
+          64.0,
+          0.88
+        ],
+        [
+          80.0,
+          0.93
+        ],
+        [
+          96.0,
+          0.93
+        ],
+        [
+          112.0,
+          0.81
+        ],
+        [
+          120.0,
+          0.81
+        ],
+        [
+          128.0,
+          0.8
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Orchestral snare",
+      "program": 48,
+      "bank": 128,
+      "hand": null,
+      "notes": 32,
+      "pan": 7,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/10-boss-governor-iron-edict-Orchestral-snare.wav",
+        "bytes": 24576088,
+        "sha256": "30b5f352af75d68688a379ce87a96e57420524dbe857501c1146b1d9544bb432"
+      },
+      "target_active_rms_dbfs": -37,
+      "continuous_gain_points": [
+        [
+          0,
+          0.8
+        ],
+        [
+          16.0,
+          0.8
+        ],
+        [
+          32.0,
+          0.88
+        ],
+        [
+          64.0,
+          0.88
+        ],
+        [
+          80.0,
+          0.93
+        ],
+        [
+          96.0,
+          0.93
+        ],
+        [
+          112.0,
+          0.81
+        ],
+        [
+          120.0,
+          0.81
+        ],
+        [
+          128.0,
+          0.8
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Timpani gates",
+      "program": 47,
+      "bank": 0,
+      "hand": null,
+      "notes": 20,
+      "pan": -8,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/10-boss-governor-iron-edict-Timpani-gates.wav",
+        "bytes": 24576088,
+        "sha256": "e07b35e5babb70dfd61030d98abeb29e87de12e4f9ab5fc05eefc6b57a590cdb"
+      },
+      "target_active_rms_dbfs": -36,
+      "continuous_gain_points": [
+        [
+          0,
+          0.8
+        ],
+        [
+          16.0,
+          0.8
+        ],
+        [
+          32.0,
+          0.88
+        ],
+        [
+          64.0,
+          0.88
+        ],
+        [
+          80.0,
+          0.93
+        ],
+        [
+          96.0,
+          0.93
+        ],
+        [
+          112.0,
+          0.81
+        ],
+        [
+          120.0,
+          0.81
+        ],
+        [
+          128.0,
+          0.8
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/10-boss-governor-iron-edict-Steady-low-foundation.wav",
+        "bytes": 24576088,
+        "sha256": "061157c6f86a36f40421a7a99b4c6f268677d8da8f68ac512de16d31489bcb52"
+      },
+      "target_active_rms_dbfs": -33,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          16.0,
+          0.83
+        ],
+        [
+          32.0,
+          0.92
+        ],
+        [
+          64.0,
+          0.92
+        ],
+        [
+          80.0,
+          0.98
+        ],
+        [
+          96.0,
+          0.98
+        ],
+        [
+          112.0,
+          0.85
+        ],
+        [
+          120.0,
+          0.85
+        ],
+        [
+          128.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-6.77",
+    "input_lra": "1.20",
+    "input_thresh": "-28.50",
+    "output_i": "-22.93",
+    "output_tp": "-11.31",
+    "output_lra": "1.20",
+    "output_thresh": "-32.93",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.07"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.47667945022863173,
+      0.28676144231621087
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/10-boss-governor-iron-edict.mmp",
+      "bytes": 7639,
+      "sha256": "55c387bdb101ec50f701a4645a62bd5710585b458af244a51e727fc55feed788"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/10-boss-governor-iron-edict.wav",
+      "bytes": 18432044,
+      "sha256": "39dfaa98117ce14e5bf81c6081f7026b8f908d573897824aa533a32768c241e0"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/10-boss-governor-iron-edict.mp3",
+      "bytes": 2049860,
+      "sha256": "7de9ed966068e5ad768e72144a5efa875ee6f7b6b614882809504444929c7cc6"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/10-boss-governor-iron-edict.ogg",
+      "bytes": 983028,
+      "sha256": "8bca5d36f0e4d9e3b4309f13c536e95b37b5cb95849dfa194bc3f09dea672c81"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "opening"
+    },
+    {
+      "start_bar": 6,
+      "name": "first development"
+    },
+    {
+      "start_bar": 18,
+      "name": "contrast"
+    },
+    {
+      "start_bar": 26,
+      "name": "connected return"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed"
+}

@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "cmtn1gfhczzj",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-376244ac-1ebc-4d84-a7a7-be4c6146e789.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-doom/cards-spell-cmtn1gfhczzj-source.png",
+        "bytes": 1786244,
+        "sha256": "dced3a6d97b367501dfab8effd2126da3c900e1d02c0c08ea11d531b3fd8a0d9"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-doom/cards-spell-cmtn1gfhczzj-full-before.webp",
+          "bytes": 58084,
+          "sha256": "1e3e0e7b588315f666e5ade4910116c48e6a1e8a2325b623db252d14b240ebe8"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-doom/cards-spell-cmtn1gfhczzj-thumb-before.webp",
+          "bytes": 15462,
+          "sha256": "85cd5509aa0e4ccddb91ab84568bb96458e22bb57f6211a4bf9016f7b72d41b8"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-cmtn1gfhczzj.webp",
+          "bytes": 111690,
+          "sha256": "26c4af70afb2fe09ea60223a0542505fad0cd0ef3fbbf020a5a13574580831fa",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-cmtn1gfhczzj.webp",
+          "bytes": 15854,
+          "sha256": "c2440402a5ba89765e4fc04fcf791c999e978300ae33668dfce7a721b1fce55f",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "doom-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-cmtn1gfhczzj.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 111690,
+            "sha256": "26c4af70afb2fe09ea60223a0542505fad0cd0ef3fbbf020a5a13574580831fa",
+            "source": "docs/evidence/2026-10-10-doom/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-cmtn1gfhczzj.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15462,
+            "sha256": "85cd5509aa0e4ccddb91ab84568bb96458e22bb57f6211a4bf9016f7b72d41b8",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-cmtn1gfhczzj.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15854,
+            "sha256": "c2440402a5ba89765e4fc04fcf791c999e978300ae33668dfce7a721b1fce55f",
+            "source": "docs/evidence/2026-10-10-doom/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 842,
+  "manifest_count_after": 843
+}

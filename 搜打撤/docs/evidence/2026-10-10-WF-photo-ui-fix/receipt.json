@@ -1,0 +1,304 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt8-curse1",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1214b-551c-7a01-bdb3-b0649e4124ff\\exec-bb8c1f8f-aad5-4a1f-a7eb-3ac2576f6bd9.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-WF-photo-ui-fix/cards-curse-drain-source.png",
+        "bytes": 1968892,
+        "sha256": "c4c84f7f636a013df75eb30b305a9766b458a59b066b8f749d346fbfebb648a3"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-WF-photo-ui-fix/cards-curse-drain-full-before.webp",
+          "bytes": 83862,
+          "sha256": "53bef1f129ee7e7f4e4b3f8c3e8110c0dae242aa80fb898bc5aba3c251ff143c"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-WF-photo-ui-fix/cards-curse-drain-thumb-before.webp",
+          "bytes": 19946,
+          "sha256": "0b8395d86eeb92534fe2aab1c0bc01b71603bd93023b81a812bdf85bec70b3f8"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/curse-drain.webp",
+          "bytes": 131300,
+          "sha256": "104952fc8765ea334e3ba03c6b0dfc2f48bd341d024c3303f230280083d88b1e",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/curse-drain.webp",
+          "bytes": 17408,
+          "sha256": "bde557f9f1cb1c1b300e1c4895cb09cdf49734e1df9d3a833802a13e2feb1bb5",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "curse-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/curse-drain.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 131300,
+            "sha256": "104952fc8765ea334e3ba03c6b0dfc2f48bd341d024c3303f230280083d88b1e",
+            "source": "docs/evidence/2026-10-10-WF-photo-ui-fix/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/curse-drain.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 19946,
+            "sha256": "0b8395d86eeb92534fe2aab1c0bc01b71603bd93023b81a812bdf85bec70b3f8",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/curse-drain.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17408,
+            "sha256": "bde557f9f1cb1c1b300e1c4895cb09cdf49734e1df9d3a833802a13e2feb1bb5",
+            "source": "docs/evidence/2026-10-10-WF-photo-ui-fix/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt8-curse2",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1214b-551c-7a01-bdb3-b0649e4124ff\\exec-0c210130-48c7-41fd-86db-2b510d887d35.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-WF-photo-ui-fix/cards-curse-freeze-source.png",
+        "bytes": 1974003,
+        "sha256": "7df98b7a1e7a7bbda2b0dc883de2e770635ea846feba8c6d23a00f0894779880"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-WF-photo-ui-fix/cards-curse-freeze-full-before.webp",
+          "bytes": 91958,
+          "sha256": "d5e2b5342eb4973e6b57b8ef424c928e2ca8a9aebe46411c341e43e44970622b"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-WF-photo-ui-fix/cards-curse-freeze-thumb-before.webp",
+          "bytes": 22928,
+          "sha256": "cc44bc917bf737600c08bafc284af401b7e6b103f2424550b8ee43c2a9bdff6d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/curse-freeze.webp",
+          "bytes": 125346,
+          "sha256": "5d03e9c283f431653f41517d949d82fbfa0916ecfd831b720049843abe3bab5d",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/curse-freeze.webp",
+          "bytes": 17820,
+          "sha256": "8117a9a628235908f376d5a344803c991c6566df3707d6a33695fabff3f8110d",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "curse-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/curse-freeze.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 125346,
+            "sha256": "5d03e9c283f431653f41517d949d82fbfa0916ecfd831b720049843abe3bab5d",
+            "source": "docs/evidence/2026-10-10-WF-photo-ui-fix/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/curse-freeze.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 22928,
+            "sha256": "cc44bc917bf737600c08bafc284af401b7e6b103f2424550b8ee43c2a9bdff6d",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/curse-freeze.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17820,
+            "sha256": "8117a9a628235908f376d5a344803c991c6566df3707d6a33695fabff3f8110d",
+            "source": "docs/evidence/2026-10-10-WF-photo-ui-fix/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt8-curse3",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1214b-551c-7a01-bdb3-b0649e4124ff\\exec-6f9f51f8-490a-4d39-b126-a00be6ae8eb0.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-WF-photo-ui-fix/cards-curse-venom-source.png",
+        "bytes": 1865237,
+        "sha256": "73416a9bb1b74c2ae578ed3ecb70b612bef53be1c8e3613fb36792411fb60bb7"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-WF-photo-ui-fix/cards-curse-venom-full-before.webp",
+          "bytes": 76778,
+          "sha256": "139a8eec7b9f2b14ed4cf199f0ee35183cc1553f9e78244477a4e7a7d4033c06"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-WF-photo-ui-fix/cards-curse-venom-thumb-before.webp",
+          "bytes": 18816,
+          "sha256": "852b05c757b21b4866b593652e64d8d8044b578233b3c0baa1932a18b721f3c5"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/curse-venom.webp",
+          "bytes": 110154,
+          "sha256": "3e1167666f0c5bb333145bc91fb71a08ab22ea1aa2de2103198b3d84f9c30dc0",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/curse-venom.webp",
+          "bytes": 16224,
+          "sha256": "f4dcedd2c7f3ff529a0b8499acdd87b13c2ff1cb12f546b8e5b83688de49a2a0",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "curse-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/curse-venom.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 110154,
+            "sha256": "3e1167666f0c5bb333145bc91fb71a08ab22ea1aa2de2103198b3d84f9c30dc0",
+            "source": "docs/evidence/2026-10-10-WF-photo-ui-fix/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/curse-venom.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 18816,
+            "sha256": "852b05c757b21b4866b593652e64d8d8044b578233b3c0baa1932a18b721f3c5",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/curse-venom.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 16224,
+            "sha256": "f4dcedd2c7f3ff529a0b8499acdd87b13c2ff1cb12f546b8e5b83688de49a2a0",
+            "source": "docs/evidence/2026-10-10-WF-photo-ui-fix/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt8-curse4",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1214b-551c-7a01-bdb3-b0649e4124ff\\exec-b7e7ed2c-ade3-4ffc-a292-f0116e564077.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-WF-photo-ui-fix/cards-curse-silence-source.png",
+        "bytes": 1861927,
+        "sha256": "dbed12d8337429bb411157895fd8f44195f8135f925f3a49a48923d53110ba6a"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-WF-photo-ui-fix/cards-curse-silence-full-before.webp",
+          "bytes": 82858,
+          "sha256": "fad355b9941d49dec576407508e9d1f272bebe0d99868a390c309fe39338500c"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-WF-photo-ui-fix/cards-curse-silence-thumb-before.webp",
+          "bytes": 19716,
+          "sha256": "15e83d0b79677f0004901bdf80fe74f85f767cd4a22b5ff1ee9c656ff65364d5"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/curse-silence.webp",
+          "bytes": 107198,
+          "sha256": "466e95ee0eae3fd065ec47452fe9e509a34f9f849d8fd0d59d84d48165275f50",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/curse-silence.webp",
+          "bytes": 15458,
+          "sha256": "12ab7b29fbbe26cf25f46edf9a3e682b957349b468d7366198de921a65d4784e",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "curse-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/curse-silence.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 107198,
+            "sha256": "466e95ee0eae3fd065ec47452fe9e509a34f9f849d8fd0d59d84d48165275f50",
+            "source": "docs/evidence/2026-10-10-WF-photo-ui-fix/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/curse-silence.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 19716,
+            "sha256": "15e83d0b79677f0004901bdf80fe74f85f767cd4a22b5ff1ee9c656ff65364d5",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/curse-silence.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15458,
+            "sha256": "12ab7b29fbbe26cf25f46edf9a3e682b957349b468d7366198de921a65d4784e",
+            "source": "docs/evidence/2026-10-10-WF-photo-ui-fix/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 757,
+  "manifest_count_after": 761
+}

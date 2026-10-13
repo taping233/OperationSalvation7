@@ -1,0 +1,113 @@
+Browser tab: 2, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5354/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/
+	1 container
+		2 text 冬核深处 · 首脑遭遇
+		3 text 第 1 回合
+		4 text 你的行动
+		5 button 牌库：邪能护体×1，回音箭×2，厉兵秣马×1，毒药×1，连续射击×1，灵能召唤×1，影噬×1，后备能源×1，包扎×1（点击查看）
+			6 text 10
+			7 text 牌库
+		8 text 0 弃牌
+		9 button 墓地：（空）（被消耗的牌 · 不参与洗回 · 点击查看）
+			10 image skull
+			11 text 0
+			12 text 消耗
+		13 text 选择手牌，或结束回合
+		14 container btSelf
+			15 container
+				16 text 黑像
+				17 text 你
+				18 text 35/35
+				19 image swords
+				20 text  4
+		21 container
+			22 button 肃清总督的意图：攻击·回合末强化 · 5。点击查看完整说明
+				23 image arrow
+				24 text 5
+			25 image boss_general
+			26 text 肃清总督
+			27 image swords
+			28 text 5
+			29 image arrow
+			30 text  军威
+			31 container
+				32 text 50/50
+		33 container
+			34 text 当前能量
+			35 image bolt
+			36 text 2
+			37 text /2
+		38 container 职业技能与手牌分栏
+			39 button swords 猛击 2 能量 · 每回合一次
+				40 image swords
+				41 text 猛击
+				42 text 2 能量 · 每回合一次
+		43 container
+			44 checkbox Description: 毒药 · 0 费。费用 0 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+				45 container
+					46 text 0
+					47 image 毒药
+					48 text 毒药 法术 · 古朴
+					110 container
+						111 text 古朴 古朴
+					51 image cards
+					52 text 抽 1 对目标附加  1  层 中毒 ，并抽  1  张牌。
+				53 image swords
+			54 button 查看毒药完整规则
+			55 checkbox Description: 二刀流 · 1 费。费用 1 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）, Value: 0
+				56 container
+					57 text 1
+					58 image 二刀流
+					59 text 二刀流 武术 · 稀有
+					112 container
+						113 text 稀有 稀有
+					62 text 发现 1  张武术牌，并额外获得该牌的  1  张复制。
+				63 image heart
+			64 button 查看二刀流完整规则
+			65 checkbox Description: 坚盾 · 1 费。费用 1 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）, Value: 0
+				66 container
+					67 text 1
+					68 image 坚盾
+					69 text 坚盾 武术 · 黑像专属
+					114 container
+						115 text 职业 职业
+					72 image plate
+					73 text 甲 8 你获得  8  点 护甲 ；下 回合开始时 ，你失去  4  点 护甲 。
+				74 image heart
+			75 button 查看坚盾完整规则
+			76 checkbox Description: 正午决战 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+				77 container
+					78 text 1
+					79 image 正午决战
+					80 text 正午决战 武术 · 史诗
+					116 container
+						117 text 史诗 史诗
+					83 text 下 回合开始时 ，对目标连开  4  枪，每枪造成  2  点 固定伤害 。
+				84 image swords
+			85 button 查看正午决战完整规则
+			86 checkbox Description: 治愈 · 1 费。费用 1 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）, Value: 0
+				87 container
+					88 text 1
+					89 image 治愈
+					90 text 治愈 法术 · 古朴
+					118 container
+						119 text 古朴 古朴
+					93 image heart
+					94 text 回 5 你回复  5  点 生命 ，并 净化 自身。
+				95 image heart
+			96 button 查看治愈完整规则
+		97 container 战术操作
+			98 button bag 背包
+				99 image bag
+				100 text  背包
+			101 button runner 撤离（判负）
+				102 image runner
+				103 text  撤离（判负）
+			104 button gear 设置
+				105 image gear
+				106 text  设置
+			107 button skip 结束回合
+				108 image skip
+				109 text  结束回合
+
+The focused UI element is 5 button 牌库：邪能护体×1，回音箭×2，厉兵秣马×1，毒药×1，连续射击×1，灵能召唤×1，影噬×1，后备能源×1，包扎×1（点击查看）

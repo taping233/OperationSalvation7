@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "card_id": "tt2-comboarrow",
+      "asset": "cards/martial-tt2-comboarrow.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-ff9d3127-770e-42a7-83e4-bf6296a71ad1.png",
+      "revision": "comboarrow-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the combo arrows game-card edit target. Closely preserve its original SQUARE composition: one circular orange-ochre wooden target at lower center seen at a shallow angle, with a small rectangular support beneath it. Exactly FIVE thin reddish wood arrows stuck into separate closely grouped impact points near the center, their shafts fanning outward. Arrow 1 extends nearly horizontally toward lower LEFT edge, arrow 2 extends diagonally toward upper LEFT, arrow 3 extends vertically toward TOP center, arrow 4 extends diagonally toward upper RIGHT but ends around the middle-right upper quadrant, and arrow 5 extends farther outward toward the RIGHT edge and slightly up. Pale mint-gray feathered tails at the outer end of each arrow, arrowheads embedded and invisible in the wood. Match original positions, directions, lengths, target size and open pale warm-yellow background. No additional arrows, characters, bow, hands, scenery or new props. Images 2, 3, 4 are DRAWING STYLE references only, borrow broad opaque brush construction, never subjects or costumes. Rough hand-painted anime color study with large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Give the target volume with broad muted ochre light planes and warm umber shadow planes; suggest wood growth rings with a few broad curved strokes rather than dense linework. Keep all five shafts clearly separated and straight, feathers grouped in a few readable pale shapes with selective dark accents. Small economical impact marks indicate repeated hits. Matte muted colors with concentrated warm orange accents, clear hard-edged light and shadow. No uniformly thin vector outlining, photoreal wood texture, glossy 3D, dense feather hatching, tiny facet mosaics or all-over grain/texture filters. Quiet warm pale yellow abstract background. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt2-comboarrow.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    }
+  ]
+}

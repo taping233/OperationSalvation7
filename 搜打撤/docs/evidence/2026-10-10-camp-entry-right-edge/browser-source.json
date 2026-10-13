@@ -1,0 +1,80 @@
+{
+  "actions": [
+    {
+      "detail": "同一当前窗口真实点击返回选档、进入档位04；修改前后逐帧截图",
+      "type": "real-input"
+    },
+    {
+      "detail": "前before-00右上浅色楔形，后after-00/01无提前露白，after-09基地完整显示",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "id": "hubMain"
+      },
+      "identity": "{\"id\":\"hubMain\"}",
+      "key": "base",
+      "rect": {
+        "height": 956,
+        "width": 1523.2000732421875,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#hubMain.base-camp",
+      "styles": {
+        "background-color": "rgb(237, 241, 244)",
+        "border-radius": "0px",
+        "color": "rgb(34, 57, 70)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "18px",
+        "height": "1205.2px",
+        "line-height": "28.8px",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1920.25px"
+      },
+      "tag": "DIV",
+      "text": "基地\n          档案 / 04\n          \n             木材 0\n             口粮 0\n             钥匙 0\n             储备 0 币\n          \n        \n        \n          基地事务 / BASE出征EXPEDITION01仓库STORAGE02补给SUPPLIES03基地建设WOR"
+    }
+  ],
+  "observedAt": "2026-10-10T12:03:16.041Z",
+  "page": {
+    "origin": "http://localhost:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 1523
+    }
+  },
+  "scene": "存档04进入基地：右侧白边修复",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-10-camp-entry-right-edge/before-00.jpg",
+    "docs/evidence/2026-10-10-camp-entry-right-edge/after-00.jpg",
+    "docs/evidence/2026-10-10-camp-entry-right-edge/after-09.jpg"
+  ],
+  "selectors": [
+    {
+      "key": "base",
+      "selector": "#hubMain.base-camp"
+    }
+  ]
+}

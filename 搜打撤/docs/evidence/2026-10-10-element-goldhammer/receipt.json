@@ -1,0 +1,156 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt7-elementstorm",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-c4866b42-e900-43ed-bcf7-356df05c7a92.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-element-goldhammer/cards-spell-tt7-elementstorm-source.png",
+        "bytes": 1696573,
+        "sha256": "a9c14d1f49e6a9e96eb83974f285b906e6c9fbf5ec468ebb624b2c13ff9bf8f7"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-element-goldhammer/cards-spell-tt7-elementstorm-full-before.webp",
+          "bytes": 43974,
+          "sha256": "091a3d15bfa7049c08944a25a4a0f62b0693afa23ac14969ccc865abd8d4e9ab"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-element-goldhammer/cards-spell-tt7-elementstorm-thumb-before.webp",
+          "bytes": 13552,
+          "sha256": "e20e9173699cd3fa837b5fe7ee5d81cfd192c51ba01a63012b41d74ede39b1f3"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-elementstorm.webp",
+          "bytes": 97038,
+          "sha256": "8904c806f424ae23a833d6490b118674e01115391f0e5bc2f07c3fb5263ad1a1",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-elementstorm.webp",
+          "bytes": 15460,
+          "sha256": "c9cb9ed84ee242ec49a766c7436177c5864bbb2d02889da2c136cc3f184acae2",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "elementstorm-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt7-elementstorm.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 97038,
+            "sha256": "8904c806f424ae23a833d6490b118674e01115391f0e5bc2f07c3fb5263ad1a1",
+            "source": "docs/evidence/2026-10-10-element-goldhammer/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-elementstorm.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 13552,
+            "sha256": "e20e9173699cd3fa837b5fe7ee5d81cfd192c51ba01a63012b41d74ede39b1f3",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-elementstorm.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15460,
+            "sha256": "c9cb9ed84ee242ec49a766c7436177c5864bbb2d02889da2c136cc3f184acae2",
+            "source": "docs/evidence/2026-10-10-element-goldhammer/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "cmtn0xt0zr7",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-a1cba3f9-9da2-47c0-a630-0190caf5723d.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-element-goldhammer/cards-martial-cmtn0xt0zr7-source.png",
+        "bytes": 1606216,
+        "sha256": "df7b9d2dd4a43c281c923fd2534e99aa0b8600d0c596da833f6e7ccac33e092e"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-element-goldhammer/cards-martial-cmtn0xt0zr7-full-before.webp",
+          "bytes": 63502,
+          "sha256": "98b78e2ef72fcfd833b0da11252040c129f5931fb0cc518193a57405eb78729c"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-element-goldhammer/cards-martial-cmtn0xt0zr7-thumb-before.webp",
+          "bytes": 15106,
+          "sha256": "014befd07e8d9339397a2d34680811a4b6447786886c5ff9cf91ff771c7c9d0d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-cmtn0xt0zr7.webp",
+          "bytes": 98518,
+          "sha256": "4dd50b05321db4402cf3dac4a4afc064f249dc735d3be338dfd4c0168c852793",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-cmtn0xt0zr7.webp",
+          "bytes": 15176,
+          "sha256": "0e2ed4c5a9c70032f8d6b7b24bef6cb67604fa09e26ced7b0cb6a0851130438f",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "goldhammer-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-cmtn0xt0zr7.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 98518,
+            "sha256": "4dd50b05321db4402cf3dac4a4afc064f249dc735d3be338dfd4c0168c852793",
+            "source": "docs/evidence/2026-10-10-element-goldhammer/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-cmtn0xt0zr7.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15106,
+            "sha256": "014befd07e8d9339397a2d34680811a4b6447786886c5ff9cf91ff771c7c9d0d",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-cmtn0xt0zr7.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15176,
+            "sha256": "0e2ed4c5a9c70032f8d6b7b24bef6cb67604fa09e26ced7b0cb6a0851130438f",
+            "source": "docs/evidence/2026-10-10-element-goldhammer/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 839,
+  "manifest_count_after": 841
+}

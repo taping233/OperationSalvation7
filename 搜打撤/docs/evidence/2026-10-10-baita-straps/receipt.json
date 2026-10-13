@@ -1,0 +1,332 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-firm-barrier",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-5c9f2690-0521-47bd-b552-87e5c01847a4.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-baita-straps/cards-spell-tt3-firm-barrier-source.png",
+        "bytes": 1684532,
+        "sha256": "002f9c6ff8d1d90300816fcf029092b23d459ab1400b78422b72e020b1504872"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-baita-straps/cards-spell-tt3-firm-barrier-full-before.webp",
+          "bytes": 103912,
+          "sha256": "62b6903a1135e33d012ac30db6b3b58cbbb35a9019266582f20a4506c4c97103"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-baita-straps/cards-spell-tt3-firm-barrier-thumb-before.webp",
+          "bytes": 17426,
+          "sha256": "7b1e7b3c585d998ac980ad12a00bfc61d6221abccf7d1f83445aa0f7d013d4b8"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-firm-barrier.webp",
+          "bytes": 102294,
+          "sha256": "ae3cb69855afb01730f88ed82d09ca77ace0cc101e354a1b553cc8c5f52d9cc8",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-firm-barrier.webp",
+          "bytes": 17688,
+          "sha256": "c43ae18544bfcaefbaa0d63dae905e6f764347a1a645b1324f0d26739b466532",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt3-firm-barrier-original-rough-20261010",
+      "revision_after": "tt3-firm-barrier-two-straps-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt3-firm-barrier.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 103912,
+            "sha256": "62b6903a1135e33d012ac30db6b3b58cbbb35a9019266582f20a4506c4c97103",
+            "source": "docs/evidence/2026-10-10-barrier-fireball/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt3-firm-barrier.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 102294,
+            "sha256": "ae3cb69855afb01730f88ed82d09ca77ace0cc101e354a1b553cc8c5f52d9cc8",
+            "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-firm-barrier.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17426,
+            "sha256": "7b1e7b3c585d998ac980ad12a00bfc61d6221abccf7d1f83445aa0f7d013d4b8",
+            "source": "docs/evidence/2026-10-10-barrier-fireball/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-firm-barrier.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17688,
+            "sha256": "c43ae18544bfcaefbaa0d63dae905e6f764347a1a645b1324f0d26739b466532",
+            "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-energize",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-3cb114de-6e12-49aa-834d-ef45e72f4f30.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-baita-straps/cards-spell-tt7-energize-source.png",
+        "bytes": 1744784,
+        "sha256": "39e90982df574e09a587d90608501b22791460c3053b357f6a0b84568ee6a0ac"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-baita-straps/cards-spell-tt7-energize-full-before.webp",
+          "bytes": 129750,
+          "sha256": "8c42682984774901301fd6327be2626f0d59f4c4625cc8a9832d0bc8c7cd9734"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-baita-straps/cards-spell-tt7-energize-thumb-before.webp",
+          "bytes": 21430,
+          "sha256": "8675deec2cbddf97202f04f00d7168794af822963b88e8867dacd57fcf9e4195"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-energize.webp",
+          "bytes": 126042,
+          "sha256": "22a0d4a71d82b4ca132493a3d76d008ce4c31ba4d14b6b65e5eff676a996e5d7",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-energize.webp",
+          "bytes": 21528,
+          "sha256": "d1b3f4f7e46ae6e17921265ec87863d325616c6264c789df6f28aa3988974f1d",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "energize-original-rough-20261010",
+      "revision_after": "tt7-energize-two-straps-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-energize.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 129750,
+            "sha256": "8c42682984774901301fd6327be2626f0d59f4c4625cc8a9832d0bc8c7cd9734",
+            "source": "docs/evidence/2026-10-10-energize/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-energize.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 126042,
+            "sha256": "22a0d4a71d82b4ca132493a3d76d008ce4c31ba4d14b6b65e5eff676a996e5d7",
+            "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-energize.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 21430,
+            "sha256": "8675deec2cbddf97202f04f00d7168794af822963b88e8867dacd57fcf9e4195",
+            "source": "docs/evidence/2026-10-10-energize/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-energize.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 21528,
+            "sha256": "d1b3f4f7e46ae6e17921265ec87863d325616c6264c789df6f28aa3988974f1d",
+            "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "cmtn1p9vb5au",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-8edadd73-6c55-46de-a2dd-175fee6ee2de.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-baita-straps/cards-spell-cmtn1p9vb5au-source.png",
+        "bytes": 1792747,
+        "sha256": "3a0a598b74e732980475ed0c36bdf14ddd3662b8f40186adc808e65e31febe65"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-baita-straps/cards-spell-cmtn1p9vb5au-full-before.webp",
+          "bytes": 146902,
+          "sha256": "1b2ebb34859bb5625f5a3a766e986de93c63d5cfade7b4a82a50e9bc50df547f"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-baita-straps/cards-spell-cmtn1p9vb5au-thumb-before.webp",
+          "bytes": 25090,
+          "sha256": "8ef44ff115560a58f440a5babf6d31e1cb889fb584c06466b0abf08e31e0e558"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-cmtn1p9vb5au.webp",
+          "bytes": 139450,
+          "sha256": "52460c035f922f33b75ee61ddcbf10eac703b284c7efde411cfc3a851c5ebe70",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-cmtn1p9vb5au.webp",
+          "bytes": 24868,
+          "sha256": "f4d93b57683327a2d44e47242fd28645bb493a1b6bd775b04532672d6da79a9d",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "cmtn1p9vb5au-original-rough-20261010",
+      "revision_after": "cmtn1p9vb5au-two-straps-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-cmtn1p9vb5au.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 146902,
+            "sha256": "1b2ebb34859bb5625f5a3a766e986de93c63d5cfade7b4a82a50e9bc50df547f",
+            "source": "docs/evidence/2026-10-10-triple-change-glow/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-cmtn1p9vb5au.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 139450,
+            "sha256": "52460c035f922f33b75ee61ddcbf10eac703b284c7efde411cfc3a851c5ebe70",
+            "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-cmtn1p9vb5au.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 25090,
+            "sha256": "8ef44ff115560a58f440a5babf6d31e1cb889fb584c06466b0abf08e31e0e558",
+            "source": "docs/evidence/2026-10-10-triple-change-glow/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-cmtn1p9vb5au.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 24868,
+            "sha256": "f4d93b57683327a2d44e47242fd28645bb493a1b6bd775b04532672d6da79a9d",
+            "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-elementstorm",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-c39adf36-7586-4a5d-8846-2cd44a7e3729.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-baita-straps/cards-spell-tt7-elementstorm-source.png",
+        "bytes": 1601146,
+        "sha256": "8bb2e07d4d023069a47beaf7b7fe72ec3440feb8abc29a61edd1b615a76950d4"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-baita-straps/cards-spell-tt7-elementstorm-full-before.webp",
+          "bytes": 97038,
+          "sha256": "8904c806f424ae23a833d6490b118674e01115391f0e5bc2f07c3fb5263ad1a1"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-baita-straps/cards-spell-tt7-elementstorm-thumb-before.webp",
+          "bytes": 15460,
+          "sha256": "c9cb9ed84ee242ec49a766c7436177c5864bbb2d02889da2c136cc3f184acae2"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-elementstorm.webp",
+          "bytes": 90190,
+          "sha256": "1983e655465fec9cd4fb6679d2aebb6917aac6c0a97817ed410b408cd6de48ae",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-elementstorm.webp",
+          "bytes": 15500,
+          "sha256": "2f9aba20d150f32c482a5793feff657761e426909c1fa24e50d73baf4dfac527",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "elementstorm-original-rough-20261010",
+      "revision_after": "tt7-elementstorm-two-straps-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-elementstorm.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 97038,
+            "sha256": "8904c806f424ae23a833d6490b118674e01115391f0e5bc2f07c3fb5263ad1a1",
+            "source": "docs/evidence/2026-10-10-element-goldhammer/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-elementstorm.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 90190,
+            "sha256": "1983e655465fec9cd4fb6679d2aebb6917aac6c0a97817ed410b408cd6de48ae",
+            "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-elementstorm.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15460,
+            "sha256": "c9cb9ed84ee242ec49a766c7436177c5864bbb2d02889da2c136cc3f184acae2",
+            "source": "docs/evidence/2026-10-10-element-goldhammer/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-elementstorm.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15500,
+            "sha256": "2f9aba20d150f32c482a5793feff657761e426909c1fa24e50d73baf4dfac527",
+            "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 877,
+  "manifest_count_after": 877
+}

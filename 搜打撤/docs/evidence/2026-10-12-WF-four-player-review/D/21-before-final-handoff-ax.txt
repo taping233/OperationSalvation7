@@ -1,0 +1,53 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5354/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/
+	2 container app
+		3 container 远征工具
+			4 image 黑像 Q版小人
+			5 text 当前 · 空白节点
+			6 button bag 背包 携带卡牌 14/16 B
+				7 image bag
+				8 text 背包
+				9 text 携带卡牌
+				10 container
+					11 text 14 /16
+				12 text B
+			13 button lock 安全格 保护物资 1/2
+				14 image lock
+				15 text 安全格
+				16 text 保护物资
+				17 container
+					18 text 1 /2
+			19 button cards 消耗口袋 待复原卡牌 14
+				20 image cards
+				21 text 消耗口袋
+				22 text 待复原卡牌
+				23 text 14
+			24 button map 定位 当前位置 F
+				25 image map
+				26 text 定位
+				27 text 当前位置
+				28 text F
+			29 button map 总览 已知区域 G
+				30 image map
+				31 text 总览
+				32 text 已知区域
+				33 text G
+		34 container viewport
+			35 image game
+			36 container Description: 远征章节, ID: expeditionChapter
+				37 text 污染核心
+				38 container
+					39 text 第 4 层  / 4
+			40 container resHud
+				41 text 19
+				42 text 4
+			43 container topBtns
+				44 button Description: 离开对局, ID: btnHome
+				45 button btnHelp
+				46 button btnMute
+				47 container
+					48 text 当前生命
+					49 container hpText
+						50 text 13 /35
+
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/

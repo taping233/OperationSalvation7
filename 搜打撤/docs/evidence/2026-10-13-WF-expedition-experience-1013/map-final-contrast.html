@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>地图整改：真实参考与现行构造页</title>
+<style>body{margin:24px;background:#20242a;color:#edf0f4;font:16px/1.6 system-ui,sans-serif}h1{font-size:24px}p{max-width:1200px}.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:24px 0}figure{margin:0;background:#12161b;padding:12px}img{display:block;width:100%;height:auto}figcaption{padding-top:12px;color:#c9d3dd}a{color:#8ce6ed}</style>
+<h1>地图整改：真实参考与现行构造页</h1>
+<p>左侧保留方舟真实原图，右侧是本作现行源码在1920×1080 Codex内置浏览器的独立构造页截图。并排仅按等宽展示，未编辑参考图。构造页上方的小测试按钮、底栏图标替代物和五节点数据仅用于检查；不导入Game、不读写存档，不代表真实对局已完成验收。</p>
+<section class="pair"><figure><img src="reference-images/arknights-is3-map.png" alt="方舟IS3真实地图原图"><figcaption>真实IS3原图：小主体、开放承托、窄标签、白色可走线与青色当前路线；远端分支降权。</figcaption></figure><figure><img src="map-current-fixture-1920.png" alt="本作现行构造地图"><figcaption>现行本作构造页：保留旧手绘图源，普通节点无实心灰黑底板；短青标签、开放角线、原头像与位置指示；远端节点和路线降权。</figcaption></figure></section>
+<section class="pair"><figure><img src="reference-images/arknights-is6-node-detail.png" alt="方舟IS6节点详情真实原图"><figcaption>真实IS6原图：左侧地图连续，右侧身份、说明和主操作；地图节点有轻纹理承托。</figcaption></figure><figure><img src="map-detail-fixture-1920.png" alt="本作选中商店的构造页"><figcaption>现行本作选中商店：地图与详情复用同一旧手绘图源，选中路径青色，详情留在右侧；主操作未被路线或底栏遮挡。</figcaption></figure></section>
+<section class="pair"><figure><img src="map-route-fixture-1920.png" alt="本作已知空白路径预览"><figcaption>明确终点的路径预览：中间物资点已消耗，纯路径helper允许穿过；同一终点在物资未消耗时显示不可达并禁用进入。</figcaption></figure><figure><img src="map-midpoint-fixture-1920.png" alt="本作通行第二段中点的构造页"><figcaption>第二段中点的稳定构造帧：已走路线点亮，余段降亮，头像与共用曲线位置一致，移动中进入按钮与底栏工具禁用。此帧由构造控件设置，不证明真实存档或计数。</figcaption></figure></section>
+<p><a href="map-continuation.md">本轮实现、测试、指纹与未覆盖范围</a> · <a href="map-contrast.html">返工前旧图对照</a></p></html>

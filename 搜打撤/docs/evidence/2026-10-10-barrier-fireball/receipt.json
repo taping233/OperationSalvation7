@@ -1,0 +1,156 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-firm-barrier",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-2fcffa95-e0c1-460c-808e-42110fa47ca2.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-barrier-fireball/cards-spell-tt3-firm-barrier-source.png",
+        "bytes": 1722541,
+        "sha256": "66f9880aa5e4e55562cc3ed1ced2677722a4828c79b35ba395d7818683732c46"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-barrier-fireball/cards-spell-tt3-firm-barrier-full-before.webp",
+          "bytes": 62236,
+          "sha256": "cc9a4677d200f6db2fa2dcb70c2a72bdc592c45a73c7dbbf7d7f9ca00a925a3b"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-barrier-fireball/cards-spell-tt3-firm-barrier-thumb-before.webp",
+          "bytes": 15306,
+          "sha256": "c55cd22c0d2ebba76e3432972f00e18158741f09430e1a74dd984015263dcbcf"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-firm-barrier.webp",
+          "bytes": 103912,
+          "sha256": "62b6903a1135e33d012ac30db6b3b58cbbb35a9019266582f20a4506c4c97103",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-firm-barrier.webp",
+          "bytes": 17426,
+          "sha256": "7b1e7b3c585d998ac980ad12a00bfc61d6221abccf7d1f83445aa0f7d013d4b8",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt3-firm-barrier-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt3-firm-barrier.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 103912,
+            "sha256": "62b6903a1135e33d012ac30db6b3b58cbbb35a9019266582f20a4506c4c97103",
+            "source": "docs/evidence/2026-10-10-barrier-fireball/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-firm-barrier.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15306,
+            "sha256": "c55cd22c0d2ebba76e3432972f00e18158741f09430e1a74dd984015263dcbcf",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-firm-barrier.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17426,
+            "sha256": "7b1e7b3c585d998ac980ad12a00bfc61d6221abccf7d1f83445aa0f7d013d4b8",
+            "source": "docs/evidence/2026-10-10-barrier-fireball/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-fireball",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-97eca08d-57e1-448e-ab8b-3b0a332f523a.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-barrier-fireball/cards-expedition-starters-fireball-source.png",
+        "bytes": 1576552,
+        "sha256": "b7171f1b22fcfa87153f10e8471af389932e43fa9ff50bd010b2b861e5d5c4cd"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-barrier-fireball/cards-expedition-starters-fireball-full-before.webp",
+          "bytes": 66440,
+          "sha256": "7914dc16f67995fb0086d1fea184674c4332c418ceee9a4d50306a4cb7536e9a"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-barrier-fireball/cards-expedition-starters-fireball-thumb-before.webp",
+          "bytes": 16912,
+          "sha256": "427b00d66dcf5bd1f6eda43325a298e8632e550e8ee6314691966a370b9ec2df"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/expedition-starters/fireball.webp",
+          "bytes": 103648,
+          "sha256": "1ead802c2e92007f2ac98d16b76fc667ac4140a2b6a65b173c0454db39f30bb0",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/expedition-starters/fireball.webp",
+          "bytes": 16398,
+          "sha256": "8e64d6aa5d73167f052130b278ce60e54b6f55e682aaafd6e21937cfe8aab2d4",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt3-fireball-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/expedition-starters/fireball.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 103648,
+            "sha256": "1ead802c2e92007f2ac98d16b76fc667ac4140a2b6a65b173c0454db39f30bb0",
+            "source": "docs/evidence/2026-10-10-barrier-fireball/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/expedition-starters/fireball.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 16912,
+            "sha256": "427b00d66dcf5bd1f6eda43325a298e8632e550e8ee6314691966a370b9ec2df",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/expedition-starters/fireball.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 16398,
+            "sha256": "8e64d6aa5d73167f052130b278ce60e54b6f55e682aaafd6e21937cfe8aab2d4",
+            "source": "docs/evidence/2026-10-10-barrier-fireball/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 874,
+  "manifest_count_after": 876
+}

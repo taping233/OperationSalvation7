@@ -1,0 +1,25 @@
+{
+  "card_id": "tt3-holy-water",
+  "method": "Rebuild thumbnail from current full-size WebP with existing resize/tint recipe",
+  "source": {
+    "path": "game/assets/cards/spell-tt3-holy-water.webp",
+    "bytes": 69414,
+    "sha256": "44160bd1b65f2c72918c90fb8a2b5d5862cd8bd807252fa93f687f2434975353"
+  },
+  "backup": {
+    "path": ".tmp/imagegen/2026-10-10-heal-thumb/thumb-before.webp",
+    "bytes": 3402,
+    "sha256": "4f28e457f8cf580510f37156dbeb371ffc63a5c733e1d427d3959f0c7bba00b8"
+  },
+  "output": {
+    "path": "game/assets/thumbs/cards/spell-tt3-holy-water.webp",
+    "bytes": 16002,
+    "sha256": "8b0a38f8e356aa853f8cc49433f9c236f472cb4b467271993d2df7ea9887b10f",
+    "size": [
+      448,
+      340
+    ]
+  },
+  "revision": "holy-water-thumb-sync-20261010",
+  "verification": "Viewed current full/old thumb; no tests/browser/build"
+}

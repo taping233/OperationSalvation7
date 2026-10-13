@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "card_id": "tt2-venomstaff",
+      "asset": "cards/equip-tt2-venomstaff.webp",
+      "prompt": "Style-transfer. Redraw FIRST image 毒杖 preserving exact original SQUARE composition, front camera and object proportions. ONE very tall thin crooked dark wood staff stands VERTICALLY in exact center. Gnarled irregular dark wooden circular head near top encloses ONE vivid lime-green toxic orb; lower shaft twisted thin wood ends near bottom margin. Preserve head size, orb position, asymmetrical wood lip intruding over orb viewer right, and a few bright green viscous poison drips hanging below head with one falling droplet. Flat muted olive-green backdrop, broad empty space on both sides. Paint wood in broad dark gray-brown masses with sparse directional structure strokes, orb in several connected opaque green planes with a small cream highlight, slime shapes clear and economical. No character, hands, added props or composition changes. Images 2–4 are STYLE ONLY references for broad opaque brushwork and confident anime painting; don't copy their characters, clothing, poses or props. Rough hand-painted anime color study built from large connected opaque color masses, limited broad directional swipes and blunt dabs, decisive handmade edges and grouped hard shadows, expressive selective overlaps surrounded by quiet regions. Object surfaces rendered as principal broad planes with sparse necessary structural marks and a few opaque highlights. Matte muted colors with concentrated magical accents. No photoreal materials, glossy 3D, smooth airbrush, tiny facet mosaics, dense decorative engraving, all-over grain or texture filters. No text, frame, watermark or UI.",
+      "revision": "tt2-venomstaff-original-rough-20261010",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt2-venomstaff.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-79f60ba8-1fda-48bf-b9b2-94c1848fa6e4.png"
+    },
+    {
+      "card_id": "tt3eq-mistbox",
+      "asset": "cards/equip-tt3eq-mistbox.webp",
+      "prompt": "Style-transfer. Redraw FIRST image 迷之匣 preserving exact original SQUARE composition, close-up three-quarter overhead view, crop and object scale. A SINGLE dark reddish-brown ornate square box floats/rests on TWO cupped black-gloved hands across lower third, fingers support box from both sides. Box center-lower, two front side planes visible, top square rim tilted as original with central brilliant magenta-violet glowing opening. Preserve strong branching purple-white lightning rising from box upward toward TOP-RIGHT and smaller branches sideways, same major direction/path and negative space. Very dark navy/black purple backdrop. Simplify ornamental panels to a few broad readable carved motifs and sparse structure lines, remove lettering/writing on sides. Gloves remain black under purple light; fingers clearly readable. Paint box in large opaque dark/warm planes and lightning in a few decisive magenta/cream strokes, avoid dense fine electrical network or photoreal bloom. No face, extra hands or props. Images 2–4 are STYLE ONLY references for broad opaque brushwork and confident anime painting; don't copy their characters, clothing, poses or props. Rough hand-painted anime color study built from large connected opaque color masses, limited broad directional swipes and blunt dabs, decisive handmade edges and grouped hard shadows, expressive selective overlaps surrounded by quiet regions. Object surfaces rendered as principal broad planes with sparse necessary structural marks and a few opaque highlights. Matte muted colors with concentrated magical accents. No photoreal materials, glossy 3D, smooth airbrush, tiny facet mosaics, dense decorative engraving, all-over grain or texture filters. No text, frame, watermark or UI.",
+      "revision": "tt3eq-mistbox-original-rough-20261010",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt3eq-mistbox.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-ae3cb78f-a833-4dd1-9493-d4010429377b.png"
+    }
+  ]
+}

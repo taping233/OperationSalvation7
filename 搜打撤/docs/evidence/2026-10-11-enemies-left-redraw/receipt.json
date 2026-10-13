@@ -1,0 +1,1978 @@
+{
+  "method": "Built-in ImageGen; RGBA WebP encoding, existing 760h cut and 448w thumbnail sizes",
+  "request": "docs/evidence/2026-10-11-enemies-left-redraw/request.json",
+  "items": [
+    {
+      "id": "archer",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/sources/archer.png",
+        "bytes": 1784129,
+        "sha256": "b8f67fdb0688d2fdfc798e2cfb480a999436d59a6578e1ae138187aa4079670d"
+      },
+      "source_alpha": {
+        "size": [
+          1038,
+          1515
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "transparent_pixels": 641177,
+        "alpha_bbox": [
+          0,
+          0,
+          1038,
+          1515
+        ]
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/enemies/archer.webp",
+          "bytes": 148894,
+          "sha256": "23203b81f32499d5402e3c1f0b017e10c267de01889f90806ee4b5ecd21b38c2"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/cut/enemies/archer.webp",
+          "bytes": 55014,
+          "sha256": "4fee78543b513378160982e4560572dcd5c84ab6a670838c5be9286101355001"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/thumbs/portraits/enemies/archer.webp",
+          "bytes": 29062,
+          "sha256": "68662911cc3dd26f00fce4ed6c4dae1de24cab7ce84fefa77efcd52f09f053cf"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/archer.webp",
+          "bytes": 301536,
+          "sha256": "8ac95823ba07360aade16d773607083a95fd93c3876ea2d7ae221d2f84bcaa8f",
+          "size": [
+            1038,
+            1515
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 641177,
+          "alpha_bbox": [
+            0,
+            0,
+            1038,
+            1515
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/archer.webp",
+          "bytes": 100816,
+          "sha256": "9a304c31d798fa5c7290c7dd6be049465869d855898d8d8ab8d8b5e7f6359f02",
+          "size": [
+            521,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 161762,
+          "alpha_bbox": [
+            8,
+            0,
+            521,
+            760
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/archer.webp",
+          "bytes": 62128,
+          "sha256": "64503c1a85f2ef1a50617a74a96d86b89e6d8b8183e5bb02099f179bb40e5620",
+          "size": [
+            448,
+            654
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 119526,
+          "alpha_bbox": [
+            6,
+            0,
+            448,
+            654
+          ]
+        }
+      ]
+    },
+    {
+      "id": "infantry",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/sources/infantry.png",
+        "bytes": 1126158,
+        "sha256": "72a778c20c442b4731d6c65766be223ab5649a950db120d2af4b463bb32caf82"
+      },
+      "source_alpha": {
+        "size": [
+          1038,
+          1515
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "transparent_pixels": 1065841,
+        "alpha_bbox": [
+          0,
+          17,
+          991,
+          1501
+        ]
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/enemies/infantry.webp",
+          "bytes": 104730,
+          "sha256": "88720b1fb7b2326d83a4e786e66de823a5955d85e46d0afa5798b8e5e860f0b9"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/cut/enemies/infantry.webp",
+          "bytes": 50488,
+          "sha256": "7a6ec1565f24106bc8de6c4ed9c0585658ede539c3252c6f6600685e10deb105"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/thumbs/portraits/enemies/infantry.webp",
+          "bytes": 27738,
+          "sha256": "80a40c2f69e486c9df5b4c849b238c5e0101aaa5d51ce590289b25f75af0f84b"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/infantry.webp",
+          "bytes": 191646,
+          "sha256": "1db0b0715c6605581b1f6f040df035113b1da5f9c61e8f8b933855552ac43fd6",
+          "size": [
+            1038,
+            1515
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 1065841,
+          "alpha_bbox": [
+            0,
+            17,
+            991,
+            1501
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/infantry.webp",
+          "bytes": 65582,
+          "sha256": "5ffcce03937734b47c4e81d034f719b958413309178fc5281249eafd7b80c910",
+          "size": [
+            521,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 268329,
+          "alpha_bbox": [
+            13,
+            9,
+            471,
+            754
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/infantry.webp",
+          "bytes": 41324,
+          "sha256": "d40588aab30340b49f9228f3a30d08e7ffa419a2ccf4bc2abc63a9105fd2e56d",
+          "size": [
+            448,
+            654
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 198296,
+          "alpha_bbox": [
+            11,
+            7,
+            405,
+            649
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bandit",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/sources/bandit.png",
+        "bytes": 1249378,
+        "sha256": "452af7a317b8577dacf8b9803f9dd3e82597ae7f11b5fa92bd5c2dc9a4a02427"
+      },
+      "source_alpha": {
+        "size": [
+          1038,
+          1515
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "transparent_pixels": 993913,
+        "alpha_bbox": [
+          0,
+          31,
+          1038,
+          1503
+        ]
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/enemies/bandit.webp",
+          "bytes": 98826,
+          "sha256": "d057f2988c3c08b7632dfb44f1279354867de6b7b77b4d05eedc0f03da154678"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/cut/enemies/bandit.webp",
+          "bytes": 47274,
+          "sha256": "900479c4f403375c78643ceb30f6bd812f48723248830f81127348e96487bca9"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/thumbs/portraits/enemies/bandit.webp",
+          "bytes": 25672,
+          "sha256": "26a606e930bde321e542728c833c4102e480328e584435d375e75e63215c5b10"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/bandit.webp",
+          "bytes": 279740,
+          "sha256": "4676bb8bb067bfb85dda17f22577e30e41968488f54b723ec8823f8c42eca247",
+          "size": [
+            1038,
+            1515
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 993913,
+          "alpha_bbox": [
+            0,
+            31,
+            1038,
+            1503
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/bandit.webp",
+          "bytes": 94856,
+          "sha256": "deb0158fcd8239b068b9489a4d013655a0927db323ad2a7c15f0189fd95fad2a",
+          "size": [
+            521,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 250662,
+          "alpha_bbox": [
+            6,
+            42,
+            521,
+            752
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/bandit.webp",
+          "bytes": 60862,
+          "sha256": "0790006ebaee9c08130440d4f296466863874d33599481416452345136102840",
+          "size": [
+            448,
+            654
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 185412,
+          "alpha_bbox": [
+            5,
+            36,
+            448,
+            647
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cavalry",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/sources/cavalry.png",
+        "bytes": 1472312,
+        "sha256": "6eb2528e11115c82b793ec79c2231a38b4653e83c12d7b462bf0368bf092909d"
+      },
+      "source_alpha": {
+        "size": [
+          1039,
+          1514
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "transparent_pixels": 847042,
+        "alpha_bbox": [
+          19,
+          26,
+          1023,
+          1491
+        ]
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/enemies/cavalry.webp",
+          "bytes": 125186,
+          "sha256": "0111c81d4094c996634271218ecc6203a1a4a8ca3b9d8c36350c338ee67ee4e4"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/cut/enemies/cavalry.webp",
+          "bytes": 65114,
+          "sha256": "9220f73b8ff953b55a8b6f9de61467279ec2167d8cc198b6619451b2bb4622e2"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/thumbs/portraits/enemies/cavalry.webp",
+          "bytes": 36526,
+          "sha256": "c4fef9ea2fdc9cf5690e5fd3cb097ce2585f9c2ded3308d980378cad9e5b63e0"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/cavalry.webp",
+          "bytes": 250274,
+          "sha256": "16ece6b30893f8b593c328174af2460e7c6f6f921e0db84d68ac26a2c151e52b",
+          "size": [
+            1039,
+            1514
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 847042,
+          "alpha_bbox": [
+            19,
+            26,
+            1023,
+            1491
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/cavalry.webp",
+          "bytes": 90766,
+          "sha256": "0a35abe7ba09f47bdb2e4a460399537db5c05c6dbee165b80dd53c3e74c5ceef",
+          "size": [
+            522,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 213463,
+          "alpha_bbox": [
+            9,
+            13,
+            515,
+            748
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/cavalry.webp",
+          "bytes": 58158,
+          "sha256": "c5524fa3cacc2ef19f33de311ff82a7bb9b3abe717f8da700d03a5051d43300d",
+          "size": [
+            448,
+            653
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 157062,
+          "alpha_bbox": [
+            8,
+            11,
+            442,
+            643
+          ]
+        }
+      ]
+    },
+    {
+      "id": "orc_jav",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/sources/orc_jav.png",
+        "bytes": 1210957,
+        "sha256": "83d29e1efc2052bb57dd893c3dfbe8c3ac73f626f4f61388664481c4d2d06f52"
+      },
+      "source_alpha": {
+        "size": [
+          1038,
+          1516
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "transparent_pixels": 977075,
+        "alpha_bbox": [
+          0,
+          0,
+          1002,
+          1516
+        ]
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/enemies/orc_jav.webp",
+          "bytes": 124786,
+          "sha256": "44c1fb42189a9bc7fe43279f05de1e562b7f5ffe4d25e5d1931d610dd9996370"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/cut/enemies/orc_jav.webp",
+          "bytes": 57644,
+          "sha256": "83fa1e56fdf6839d70e49a3a6d6bdce89c6d742220a2d6390c5a441be3c026b5"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/thumbs/portraits/enemies/orc_jav.webp",
+          "bytes": 31186,
+          "sha256": "3c46deb4872ae67cfcd544562509f73a5e184329d051e9486cd8a43471452d14"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/orc_jav.webp",
+          "bytes": 215598,
+          "sha256": "3508166a8ee67438af764016babd690a30e5f9c8659330893a45c2e522dc4e5c",
+          "size": [
+            1038,
+            1516
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 977075,
+          "alpha_bbox": [
+            0,
+            0,
+            1002,
+            1516
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/orc_jav.webp",
+          "bytes": 75910,
+          "sha256": "be6246884342e1772eb1ec1706b133bb56a264ca05099178b9bd28b791036742",
+          "size": [
+            520,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 245152,
+          "alpha_bbox": [
+            46,
+            0,
+            502,
+            760
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/orc_jav.webp",
+          "bytes": 48288,
+          "sha256": "10cdb20e3df623df956837f0dcf87e767bbb2330d52cc330e7b010973274706a",
+          "size": [
+            448,
+            654
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 181462,
+          "alpha_bbox": [
+            40,
+            0,
+            433,
+            654
+          ]
+        }
+      ]
+    },
+    {
+      "id": "orc_axe",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/sources/orc_axe.png",
+        "bytes": 1895393,
+        "sha256": "343a4f8ca5676fe24ad38a5e33fb571f1c4a1a373c705b775eb5b3b4ddb0f9f0"
+      },
+      "source_alpha": {
+        "size": [
+          1038,
+          1515
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "transparent_pixels": 719567,
+        "alpha_bbox": [
+          0,
+          0,
+          1028,
+          1515
+        ]
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/enemies/orc_axe.webp",
+          "bytes": 159650,
+          "sha256": "327342a5aa9a89feeeb7b7170807d54c6bf6e3b42cf18c7abac9c2df31c8a2a9"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/cut/enemies/orc_axe.webp",
+          "bytes": 81992,
+          "sha256": "e3cefc2b463322eff4b8fc78db896cd8a77daea223e872cd2450e6eb3ceeae43"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/thumbs/portraits/enemies/orc_axe.webp",
+          "bytes": 46690,
+          "sha256": "102f33225c0014bb371a407df600b36a8b65ec7050443888ef5bb5b450294d79"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/orc_axe.webp",
+          "bytes": 412030,
+          "sha256": "45efb9493e2881a6f95d2bb62a27bef8cd8d6d2c7f5150f01255800be7235fcf",
+          "size": [
+            1038,
+            1515
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 719567,
+          "alpha_bbox": [
+            0,
+            0,
+            1028,
+            1515
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/orc_axe.webp",
+          "bytes": 138466,
+          "sha256": "f6ef8d0fd6288f2ba50cfcd72b648f95ac63e36c3e0f4484cc79585269b28f25",
+          "size": [
+            521,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 182205,
+          "alpha_bbox": [
+            6,
+            0,
+            516,
+            756
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/orc_axe.webp",
+          "bytes": 92652,
+          "sha256": "fa7b43df37bf4d0b301b8b884f3b5dc9f6d592286ae69ea6a81ec28f83955cde",
+          "size": [
+            448,
+            654
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 134759,
+          "alpha_bbox": [
+            5,
+            0,
+            444,
+            651
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wolf_rider",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/sources/wolf_rider.png",
+        "bytes": 1620573,
+        "sha256": "5a3f1e9232a4e1b12a728652a6ee8d720aecb2df45ccac1f071f5ab9a8bfb742"
+      },
+      "source_alpha": {
+        "size": [
+          1038,
+          1515
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "transparent_pixels": 755976,
+        "alpha_bbox": [
+          0,
+          0,
+          1038,
+          1515
+        ]
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/enemies/wolf_rider.webp",
+          "bytes": 88074,
+          "sha256": "3aeaac1f146f24e58a8758f73ba3bac4ce5570cccd7730f06fce6cd720afc01c"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/cut/enemies/wolf_rider.webp",
+          "bytes": 51156,
+          "sha256": "b1d852abb90b1829bace2725600fbb1ecec02bbd6f54325444ae014809797a5e"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/thumbs/portraits/enemies/wolf_rider.webp",
+          "bytes": 25232,
+          "sha256": "3dba3e59c523e1ffa4be8b1d3bee057dbffcac1373c4acd3beeaf195a676e8f4"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/wolf_rider.webp",
+          "bytes": 373616,
+          "sha256": "d6985aa524842090f7886937a9221e532b84e64074f27b7331d92584d3596d20",
+          "size": [
+            1038,
+            1515
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 755976,
+          "alpha_bbox": [
+            0,
+            0,
+            1038,
+            1515
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/wolf_rider.webp",
+          "bytes": 124404,
+          "sha256": "22923756c46db91dd4d67eb52edda673eb71352ddf364fd54fa06426018868fb",
+          "size": [
+            521,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 191888,
+          "alpha_bbox": [
+            6,
+            0,
+            521,
+            756
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/wolf_rider.webp",
+          "bytes": 81354,
+          "sha256": "2635d91650b32a24edd2fa3051a3b296f721baf7fed984d988056315894ba0cd",
+          "size": [
+            448,
+            654
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 142229,
+          "alpha_bbox": [
+            5,
+            0,
+            448,
+            648
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fire_el",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/sources/fire_el.png",
+        "bytes": 822233,
+        "sha256": "4b78889f72e3ad420ab7d3d44efcb22f6007bc6f8d2f5c18e4be802df3733a64"
+      },
+      "source_alpha": {
+        "size": [
+          1038,
+          1515
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "transparent_pixels": 1179257,
+        "alpha_bbox": [
+          27,
+          0,
+          1020,
+          1496
+        ]
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/enemies/fire_el.webp",
+          "bytes": 98710,
+          "sha256": "fb6a33547f62bfe1e6891ea2f6161ba05ee5b50b6a6cc07097825b15be4d655f"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/cut/enemies/fire_el.webp",
+          "bytes": 50744,
+          "sha256": "48febc5a013e9e51d54a5e131ec64ab702966d365e8150e6c5f9bc3da38bcab2"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/thumbs/portraits/enemies/fire_el.webp",
+          "bytes": 27024,
+          "sha256": "506ec85f22cc279b4ce266f78ee5dd5f734dc68be8fc9c58258e45381564179a"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/fire_el.webp",
+          "bytes": 252630,
+          "sha256": "06b834021596299dfc7bb962d8931586813388371f39b1d01ef90c9433eccb49",
+          "size": [
+            1038,
+            1515
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 1179257,
+          "alpha_bbox": [
+            27,
+            0,
+            1020,
+            1496
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/fire_el.webp",
+          "bytes": 86318,
+          "sha256": "b8679e9094d10604087a6e4a628cde2b86b8d94cf6a247b43b91c1008ecdd462",
+          "size": [
+            521,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 297895,
+          "alpha_bbox": [
+            17,
+            0,
+            500,
+            750
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/fire_el.webp",
+          "bytes": 58430,
+          "sha256": "5b96ec2874ca33e4ab51f320bc4564cf348dc9666c2a9bfa9380d16d7a39a492",
+          "size": [
+            448,
+            654
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 220512,
+          "alpha_bbox": [
+            14,
+            0,
+            430,
+            645
+          ]
+        }
+      ]
+    },
+    {
+      "id": "water_el",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/sources/water_el.png",
+        "bytes": 1224436,
+        "sha256": "f723ab5e9c27ca07c2865ed7ffcc369fdbdf3b0c2d552c25cb44156056409837"
+      },
+      "source_alpha": {
+        "size": [
+          1038,
+          1515
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "transparent_pixels": 1045705,
+        "alpha_bbox": [
+          35,
+          7,
+          1026,
+          1515
+        ]
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/enemies/water_el.webp",
+          "bytes": 134640,
+          "sha256": "7dbcb93cfa83f6799905dfe9be14a8dff4e9be91fc4d9aa8978c59d775dbc64f"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/cut/enemies/water_el.webp",
+          "bytes": 61476,
+          "sha256": "2a62d790c8c3d99b91054ddb73e6dd18c39892cc48bda34f05c7f40628787adb"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/thumbs/portraits/enemies/water_el.webp",
+          "bytes": 34384,
+          "sha256": "e307d762018e2b1a5ee0bbe32e8f8165ad0e7d8cec451f247a7c0e0b575d3445"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/water_el.webp",
+          "bytes": 316702,
+          "sha256": "07f78900a1f9838440a0d2265bb0ab40fb15e02086a75cb55c44480086dce0d3",
+          "size": [
+            1038,
+            1515
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 1045705,
+          "alpha_bbox": [
+            35,
+            7,
+            1026,
+            1515
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/water_el.webp",
+          "bytes": 107138,
+          "sha256": "043fb44d5bfbedcede755766b1c1b27e377eb46497ec3e41cce87bac313d060a",
+          "size": [
+            521,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 264165,
+          "alpha_bbox": [
+            20,
+            3,
+            515,
+            760
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/water_el.webp",
+          "bytes": 71330,
+          "sha256": "d7f93e258349267fd71f05d218bc86e6c892731ee109b40f4f0d048ddadec3c4",
+          "size": [
+            448,
+            654
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 195380,
+          "alpha_bbox": [
+            17,
+            2,
+            442,
+            654
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grass_el",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/sources/grass_el.png",
+        "bytes": 1131293,
+        "sha256": "500d3e89f7e279127402f336291f0a32cca743ecee44ad5be9c0458cae17d339"
+      },
+      "source_alpha": {
+        "size": [
+          1038,
+          1515
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "transparent_pixels": 1076435,
+        "alpha_bbox": [
+          33,
+          0,
+          1024,
+          1497
+        ]
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/enemies/grass_el.webp",
+          "bytes": 98318,
+          "sha256": "36413a970eab4e6c99f111605c703d44d3f50cc08188366155bddf7b4885a163"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/cut/enemies/grass_el.webp",
+          "bytes": 52528,
+          "sha256": "088c70068bd2e737ea11b9422e839e8501946c159c36b62298ca49e574088fbc"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/thumbs/portraits/enemies/grass_el.webp",
+          "bytes": 28180,
+          "sha256": "07a6d5534828a4ae2032e69423be69eb66e88704408c688f23d3493db58f8084"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/grass_el.webp",
+          "bytes": 240470,
+          "sha256": "ae06aa09c4713ae7521fc795e05e4995fde99ead52669fc63fa27a52aa7f62fe",
+          "size": [
+            1038,
+            1515
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 1076435,
+          "alpha_bbox": [
+            33,
+            0,
+            1024,
+            1497
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/grass_el.webp",
+          "bytes": 85770,
+          "sha256": "b63efb342c56b411ecd5f2376531ddf843cf5e457da15b5162b2bfe8a72f1d6c",
+          "size": [
+            521,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 270866,
+          "alpha_bbox": [
+            16,
+            0,
+            501,
+            751
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/grass_el.webp",
+          "bytes": 56214,
+          "sha256": "d36395bee205c3a2221304e2e6b1a3a11df71a67663ec38647ed1c6fbbfb26fe",
+          "size": [
+            448,
+            654
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 200016,
+          "alpha_bbox": [
+            14,
+            0,
+            431,
+            647
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dragon",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/sources/dragon.png",
+        "bytes": 1951663,
+        "sha256": "30c8e4d3f95a759a3fcdbf9e56861125c33890dffffdb670503252d9972d26eb"
+      },
+      "source_alpha": {
+        "size": [
+          1038,
+          1515
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "transparent_pixels": 718936,
+        "alpha_bbox": [
+          0,
+          12,
+          1037,
+          1515
+        ]
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/enemies/dragon.webp",
+          "bytes": 170212,
+          "sha256": "19d87d7f0f30d84a256689eeaa9bcb41c0455136cee8b5fc32834aa13fefded4"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/cut/enemies/dragon.webp",
+          "bytes": 96222,
+          "sha256": "a0678be9ca03c50cbe508f3071f5109795c431c44cb2f1cda8bc6664aca238d9"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/thumbs/portraits/enemies/dragon.webp",
+          "bytes": 50602,
+          "sha256": "4eca34ea42dd2f65fd24223b51aa226943e4de2e5d67355d54f06b5883d4cffd"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/dragon.webp",
+          "bytes": 426774,
+          "sha256": "b3a3e88525786ac6a08bd9a6ce407138158257b546b5f55a282a2de08a64a789",
+          "size": [
+            1038,
+            1515
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 718936,
+          "alpha_bbox": [
+            0,
+            12,
+            1037,
+            1515
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/dragon.webp",
+          "bytes": 142674,
+          "sha256": "d07d53519b6d8d69a8b7a9df0ffb7c14b1183b415ce5046517e3662cfb5320c5",
+          "size": [
+            521,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 181358,
+          "alpha_bbox": [
+            6,
+            5,
+            521,
+            749
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/dragon.webp",
+          "bytes": 95048,
+          "sha256": "84c66a2b80458365d4b490dd00d66d1981de2d4fcd09280e5b1a29083a6968b6",
+          "size": [
+            448,
+            654
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 133868,
+          "alpha_bbox": [
+            4,
+            4,
+            448,
+            645
+          ]
+        }
+      ]
+    },
+    {
+      "id": "esper_crow",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/sources/esper_crow.png",
+        "bytes": 968008,
+        "sha256": "7b4af17708df18059fe090fd19fd2559b55b280000b2ce7518604d41cc3f6856"
+      },
+      "source_alpha": {
+        "size": [
+          1038,
+          1515
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "transparent_pixels": 1074541,
+        "alpha_bbox": [
+          0,
+          0,
+          1038,
+          1515
+        ]
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/enemies/esper_crow.webp",
+          "bytes": 80336,
+          "sha256": "155432fa691fba1c0048e3ec70b2a1502bfae667dcc88248fccc45b6ee320353"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/cut/enemies/esper_crow.webp",
+          "bytes": 38572,
+          "sha256": "560fdf606b31d2d474378482f5aec1bc4fe4e030fe45e5eb6677a82d449d294f"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/thumbs/portraits/enemies/esper_crow.webp",
+          "bytes": 19940,
+          "sha256": "034f5d0f31f23e4b8ddf5d399c77fc88d4797e2cf802bce5a01fbf4d356aeba5"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/esper_crow.webp",
+          "bytes": 219696,
+          "sha256": "e9a5710997c26269591d3f04f78f9cdb29bde7e4f61dc0f1f0632c8fa3e872fa",
+          "size": [
+            1038,
+            1515
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 1074541,
+          "alpha_bbox": [
+            0,
+            0,
+            1038,
+            1515
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/esper_crow.webp",
+          "bytes": 74816,
+          "sha256": "bdabc54511877c1ca0d5a24b67149a2af7734155f2391133fdc91230c84eea14",
+          "size": [
+            521,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 271286,
+          "alpha_bbox": [
+            0,
+            0,
+            521,
+            760
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/esper_crow.webp",
+          "bytes": 49844,
+          "sha256": "948e4ad003717f5f82ed29a318a6802312657cc6cae34ae50aa7c5f1f7fbf32a",
+          "size": [
+            448,
+            654
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 200790,
+          "alpha_bbox": [
+            0,
+            0,
+            448,
+            654
+          ]
+        }
+      ]
+    },
+    {
+      "id": "esper_candle",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/sources/esper_candle.png",
+        "bytes": 1033472,
+        "sha256": "dfe74eeeaa6e2523563c8322cfc5fc036f2a02564c40dc8ebe773c7cdc0de3f6"
+      },
+      "source_alpha": {
+        "size": [
+          1038,
+          1515
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "transparent_pixels": 1062418,
+        "alpha_bbox": [
+          0,
+          1,
+          1037,
+          1501
+        ]
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/enemies/esper_candle.webp",
+          "bytes": 83766,
+          "sha256": "492a16992c5b87c712bfbf6340a7ef31bd9e9f287acf2ab05391a0a03760d8e4"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/cut/enemies/esper_candle.webp",
+          "bytes": 42554,
+          "sha256": "e2bb397868699fe2fcb9a23b97a22de0d4e82d4eac079f91fe92996f18ab2f08"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/thumbs/portraits/enemies/esper_candle.webp",
+          "bytes": 22498,
+          "sha256": "3de050f2a500f43a3a1c7c618b6b75425c82ee3d5096337851376ac98f3de3a0"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/esper_candle.webp",
+          "bytes": 239648,
+          "sha256": "105dc60ad932c4cf17be4895602450a34969b62a6f3c7d11e276b7bd125baf8a",
+          "size": [
+            1038,
+            1515
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 1062418,
+          "alpha_bbox": [
+            0,
+            1,
+            1037,
+            1501
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/esper_candle.webp",
+          "bytes": 81154,
+          "sha256": "3b1a3915edfd14b7c8d8b36878f9cc143c89ac57c8e04e716392185a1d01da4f",
+          "size": [
+            521,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 267733,
+          "alpha_bbox": [
+            17,
+            0,
+            518,
+            754
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/esper_candle.webp",
+          "bytes": 53864,
+          "sha256": "3304c8942bf1421c984cb518385237564211acad50631b86d5f96b151ea52cc0",
+          "size": [
+            448,
+            654
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 197831,
+          "alpha_bbox": [
+            15,
+            0,
+            445,
+            649
+          ]
+        }
+      ]
+    },
+    {
+      "id": "esper_silence",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/sources/esper_silence.png",
+        "bytes": 1273325,
+        "sha256": "b1ee40dcd7aa270a3124a718bcb74bea710a2a2205c03b9f65f377a6fc2505ea"
+      },
+      "source_alpha": {
+        "size": [
+          1038,
+          1515
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "transparent_pixels": 904970,
+        "alpha_bbox": [
+          0,
+          17,
+          1024,
+          1499
+        ]
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/enemies/esper_silence.webp",
+          "bytes": 95170,
+          "sha256": "2c168efe546acf3946737cc73b5014a2d7a3d43ab408a861aebea2be6bfb0d9d"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/cut/enemies/esper_silence.webp",
+          "bytes": 51466,
+          "sha256": "1832fd8e0c1ada002b2e46b1f511a5670fd589f12b5487c648c9dcb94e0ab384"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/thumbs/portraits/enemies/esper_silence.webp",
+          "bytes": 28620,
+          "sha256": "275814e2b84813ecea7ccebea1adc79831103d8befee5c6244ab8358de313d66"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/esper_silence.webp",
+          "bytes": 255356,
+          "sha256": "8d89ac8a5181581d50195bc3dbba6529f9a325e245dbc782b948c4f791153a9a",
+          "size": [
+            1038,
+            1515
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 904970,
+          "alpha_bbox": [
+            0,
+            17,
+            1024,
+            1499
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/esper_silence.webp",
+          "bytes": 91650,
+          "sha256": "42d37fc523b660dfa556d4be3964b31ed31aec62fa4e403d00d21e42b5326c58",
+          "size": [
+            521,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 228685,
+          "alpha_bbox": [
+            0,
+            8,
+            509,
+            752
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/esper_silence.webp",
+          "bytes": 60104,
+          "sha256": "a9844f38d5256ba33aa094940c8352ced371ce974657040447da4ed44653ee8f",
+          "size": [
+            448,
+            654
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 169098,
+          "alpha_bbox": [
+            0,
+            7,
+            438,
+            647
+          ]
+        }
+      ]
+    },
+    {
+      "id": "esper_echo",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/sources/esper_echo.png",
+        "bytes": 1306036,
+        "sha256": "20b1cf1d6bcc576e552b11e3a3a9a81b1ce1fc7a8a9b22c593b7dfc6c03b03a5"
+      },
+      "source_alpha": {
+        "size": [
+          1038,
+          1516
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "transparent_pixels": 910461,
+        "alpha_bbox": [
+          0,
+          0,
+          1024,
+          1516
+        ]
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/enemies/esper_echo.webp",
+          "bytes": 111004,
+          "sha256": "88908873a5cc42ebecce20ff472749fee9087c28e8ef5b327777a98b55ea034d"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/cut/enemies/esper_echo.webp",
+          "bytes": 54510,
+          "sha256": "2c93561b17b28bbda64fce36a95deca53f1fe7dd72a76d1f0c3846ac1ef583f1"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/thumbs/portraits/enemies/esper_echo.webp",
+          "bytes": 30546,
+          "sha256": "d3649e4384aefdc033649f06095eefe25bc37158594ac9e10f0075f7874380f6"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/esper_echo.webp",
+          "bytes": 264026,
+          "sha256": "5b6083ad507ca19069636cbf892347d9c402e20ec6906a467c91e34a1361bc5e",
+          "size": [
+            1038,
+            1516
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 910461,
+          "alpha_bbox": [
+            0,
+            0,
+            1024,
+            1516
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/esper_echo.webp",
+          "bytes": 90764,
+          "sha256": "4d31c46a5204234d314f55d1ce10b2e466ce8ede0c62946ad3bd31ba10a67b95",
+          "size": [
+            520,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 229566,
+          "alpha_bbox": [
+            0,
+            0,
+            508,
+            755
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/esper_echo.webp",
+          "bytes": 59720,
+          "sha256": "78efe2db63eb8ac9e58d8d57e574644fa4e97857c347f7df6b82f07f74defec5",
+          "size": [
+            448,
+            654
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 170121,
+          "alpha_bbox": [
+            0,
+            0,
+            437,
+            650
+          ]
+        }
+      ]
+    },
+    {
+      "id": "boss_general",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/sources/boss_general.png",
+        "bytes": 1405405,
+        "sha256": "ae40fc1240c154a617f93eacb12e542fdc9a438608d50d4cc870e1a80546912e"
+      },
+      "source_alpha": {
+        "size": [
+          1038,
+          1515
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "transparent_pixels": 835751,
+        "alpha_bbox": [
+          0,
+          12,
+          1032,
+          1515
+        ]
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/enemies/boss_general.webp",
+          "bytes": 132982,
+          "sha256": "9e3f2a32c2b0304ff1f75d056e85034a0b801b380ebc4acd1de6924e7ab5d79f"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/cut/enemies/boss_general.webp",
+          "bytes": 63070,
+          "sha256": "add8dac079be3826e86d4ab2efed4da4e0877fd92792a3386421866ce35d5246"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/thumbs/portraits/enemies/boss_general.webp",
+          "bytes": 35550,
+          "sha256": "00bc316134fdebf46a45ff9e31935e66fe378d7a01d8c7e26b82299d6c97e0b2"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/boss_general.webp",
+          "bytes": 272988,
+          "sha256": "1d1d54fc9d3f80b91c2248435530fbebdacec70d47300e7ea38770c4f532eb9b",
+          "size": [
+            1038,
+            1515
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 835751,
+          "alpha_bbox": [
+            0,
+            12,
+            1032,
+            1515
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/boss_general.webp",
+          "bytes": 95402,
+          "sha256": "4652ab04f8273d5e94e14a7f9183863be03de312eab9aec0513c110a22987988",
+          "size": [
+            521,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 210831,
+          "alpha_bbox": [
+            14,
+            5,
+            518,
+            753
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/boss_general.webp",
+          "bytes": 62388,
+          "sha256": "2710454822d2f640742b1fe2ed1c75939fbd88d976b51be320543a8f6f17a9c5",
+          "size": [
+            448,
+            654
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 155870,
+          "alpha_bbox": [
+            12,
+            4,
+            446,
+            648
+          ]
+        }
+      ]
+    },
+    {
+      "id": "boss_orc",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/sources/boss_orc.png",
+        "bytes": 1878472,
+        "sha256": "7c393427dcbe02cca05563d15c3662f3e6971831541b423a47c29c13ebd4b0d7"
+      },
+      "source_alpha": {
+        "size": [
+          1038,
+          1515
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "transparent_pixels": 643386,
+        "alpha_bbox": [
+          0,
+          8,
+          1035,
+          1515
+        ]
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/enemies/boss_orc.webp",
+          "bytes": 158082,
+          "sha256": "c6af4b13f273dc056f97d0740c7e50c1f5b81c3402616eeced459b44679f3b43"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/cut/enemies/boss_orc.webp",
+          "bytes": 81252,
+          "sha256": "54b809d4ab8d03645107908b6f0321f1a2a644947e584615a7661b6dcf109858"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/thumbs/portraits/enemies/boss_orc.webp",
+          "bytes": 47004,
+          "sha256": "46793e3631b1f2699e7ae2a75144e5760533997a1c7dd8ea5efe49ed8c1396ef"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/boss_orc.webp",
+          "bytes": 355060,
+          "sha256": "367b080c42b1e5bb242a18af3145b8205709e2c103e7023741e05e4dc03f192b",
+          "size": [
+            1038,
+            1515
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 643386,
+          "alpha_bbox": [
+            0,
+            8,
+            1035,
+            1515
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/boss_orc.webp",
+          "bytes": 119456,
+          "sha256": "92b78925c83ff0a589670aeb752234dac55c3f1be0c210d7efe39694e0b25689",
+          "size": [
+            521,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 162435,
+          "alpha_bbox": [
+            0,
+            3,
+            515,
+            756
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/boss_orc.webp",
+          "bytes": 77030,
+          "sha256": "8e9625a5e61127030d41683c7c607617df63fb85b00eaddf7586cafd92fbbd9d",
+          "size": [
+            448,
+            654
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 120014,
+          "alpha_bbox": [
+            0,
+            2,
+            442,
+            651
+          ]
+        }
+      ]
+    },
+    {
+      "id": "boss_elem",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/sources/boss_elem.png",
+        "bytes": 1506529,
+        "sha256": "12e6c40efcaf6ac79d957c4577ad54342a687d3505dcf8fb24cac15ae9c77468"
+      },
+      "source_alpha": {
+        "size": [
+          1038,
+          1515
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          255
+        ],
+        "transparent_pixels": 803644,
+        "alpha_bbox": [
+          0,
+          14,
+          1037,
+          1515
+        ]
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/enemies/boss_elem.webp",
+          "bytes": 126312,
+          "sha256": "244150a8d9d51cda5423db263eaade05a62eb98d4d7850e96f4a6d0b696134a1"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/portraits/cut/enemies/boss_elem.webp",
+          "bytes": 62516,
+          "sha256": "cd00b33f8bcc80aaff07f90e1fb029f77693d6725c00a8834e35c6f319f93fad"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-enemies-left-redraw/before/thumbs/portraits/enemies/boss_elem.webp",
+          "bytes": 33854,
+          "sha256": "c466b6a24b67b3759ace54c210e8eb3d19366a3c16de182e4a7986acf2aaa559"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/boss_elem.webp",
+          "bytes": 317052,
+          "sha256": "a9ff3cd7e4e97153b173707fa0070fb005ea4e3e1546f2259f76c3aebbe99248",
+          "size": [
+            1038,
+            1515
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 803644,
+          "alpha_bbox": [
+            0,
+            14,
+            1037,
+            1515
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/boss_elem.webp",
+          "bytes": 109976,
+          "sha256": "427d6f2a7ae14a7e1906286957c44530dd2302762692951a81056bc62b82d48f",
+          "size": [
+            521,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 203163,
+          "alpha_bbox": [
+            0,
+            6,
+            520,
+            752
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/boss_elem.webp",
+          "bytes": 72192,
+          "sha256": "8b4d6af58416ef4579259907bd035cd0503ceaccbe6a762f3f4e4f874c57c4ae",
+          "size": [
+            448,
+            654
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 150320,
+          "alpha_bbox": [
+            0,
+            5,
+            447,
+            648
+          ]
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "source_alpha_checked": 18,
+    "output_alpha_checked": 54,
+    "orientation": "All 18 tool outputs visually examined for viewer-left facing; bandit stance corrected after user feedback",
+    "not_run": [
+      "game tests",
+      "game browser",
+      "build",
+      "full repository audits"
+    ],
+    "asset_check": {
+      "checked_paths": 54,
+      "errors": 0,
+      "evidence": "docs/evidence/2026-10-11-enemies-left-redraw/asset-check.json"
+    }
+  },
+  "manifest_count": 1154,
+  "manifest_entries_added": [
+    "portraits/enemies/esper_crow.webp",
+    "portraits/cut/enemies/esper_crow.webp",
+    "portraits/enemies/esper_candle.webp",
+    "portraits/cut/enemies/esper_candle.webp",
+    "portraits/enemies/esper_silence.webp",
+    "portraits/cut/enemies/esper_silence.webp",
+    "portraits/enemies/esper_echo.webp",
+    "portraits/cut/enemies/esper_echo.webp"
+  ],
+  "status": "18 enemies integrated; all 54 outputs preserve true alpha"
+}

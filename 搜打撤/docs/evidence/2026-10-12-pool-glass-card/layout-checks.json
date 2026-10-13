@@ -1,0 +1,209 @@
+[
+  {
+    "scene": "无第2页",
+    "cards": [
+      {
+        "actual": 46,
+        "available": 91,
+        "desc": "万剑归宗：抽 5 张牌，并直接施放其中的所有武术牌。",
+        "name": "无量仙剑·云风",
+        "nameTopRatio": 0.5392672199141224,
+        "shrunk": null
+      },
+      {
+        "actual": 37,
+        "available": 73,
+        "desc": "万剑归宗：抽 5 张牌，并直接施放其中的所有武术牌。",
+        "name": "无量仙剑·云风",
+        "nameTopRatio": 0.5392231162151961,
+        "shrunk": null
+      },
+      {
+        "actual": 36,
+        "available": 73,
+        "desc": "断念：将「天启剑」与「诛魔剑」洗入你的牌库。",
+        "name": "天剑诛魔·云阳",
+        "nameTopRatio": 0.5392231162151961,
+        "shrunk": null
+      },
+      {
+        "actual": 71,
+        "available": 73,
+        "desc": "你抽到本牌时，对全体敌人造成等同于你的攻击力的攻击伤害。「天启剑」与「诛魔剑」的合成效果尚未定稿。",
+        "name": "诛魔剑",
+        "nameTopRatio": 0.5392231162151961,
+        "shrunk": null
+      },
+      {
+        "actual": 37,
+        "available": 73,
+        "desc": "你的攻击力增加 1 点，并获得 3 张「重斩」。",
+        "name": "天启诛魔剑",
+        "nameTopRatio": 0.5392231162151961,
+        "shrunk": null
+      },
+      {
+        "actual": 55,
+        "available": 73,
+        "desc": "你抽到本牌时，额外抽 1 张牌。「天启剑」与「诛魔剑」的合成效果尚未定稿。",
+        "name": "天启剑",
+        "nameTopRatio": 0.5392231162151961,
+        "shrunk": null
+      },
+      {
+        "actual": 55,
+        "available": 73,
+        "desc": "本牌在你的手牌中时，变为你上一张打出的武术牌的复制，且费用为 1 费。",
+        "name": "不变应万变-改",
+        "nameTopRatio": 0.5392231162151961,
+        "shrunk": null
+      },
+      {
+        "actual": 19,
+        "available": 73,
+        "desc": "发现 1 张装备牌。",
+        "name": "盗宝",
+        "nameTopRatio": 0.5392231785182173,
+        "shrunk": null
+      },
+      {
+        "actual": 38,
+        "available": 73,
+        "desc": "随机获得 3 张临时卡牌；下回合开始时，这 3 张牌被消耗。",
+        "name": "江湖救急-改",
+        "nameTopRatio": 0.5392231785182173,
+        "shrunk": null
+      }
+    ]
+  },
+  {
+    "scene": "白塔第1页",
+    "cards": [
+      {
+        "actual": 47,
+        "available": 91,
+        "desc": "使 1 名角色的冰冻延长 1 回合，并抽 1 张牌。",
+        "name": "坚冰结界",
+        "nameTopRatio": 0.5392672696636089,
+        "shrunk": null
+      },
+      {
+        "actual": 38,
+        "available": 73,
+        "desc": "使 1 名角色的冰冻延长 1 回合，并抽 1 张牌。",
+        "name": "坚冰结界",
+        "nameTopRatio": 0.5392231785182173,
+        "shrunk": null
+      },
+      {
+        "actual": 19,
+        "available": 73,
+        "desc": "造成 1 点法术伤害，并抽 1 张牌。",
+        "name": "奥术弹",
+        "nameTopRatio": 0.5392231785182173,
+        "shrunk": null
+      },
+      {
+        "actual": 19,
+        "available": 73,
+        "desc": "你获得 1 点能量。",
+        "name": "聚能",
+        "nameTopRatio": 0.5392231785182173,
+        "shrunk": null
+      },
+      {
+        "actual": 19,
+        "available": 73,
+        "desc": "对全体敌人附加冰冻，持续 1 回合。",
+        "name": "冰封千里",
+        "nameTopRatio": 0.5392231785182173,
+        "shrunk": null
+      },
+      {
+        "actual": 56,
+        "available": 73,
+        "desc": "本牌内置 1×3 格空间，可存放 3 张法术牌；打出本牌时，选择其中 1 张，直接施放。",
+        "name": "法师锦囊",
+        "nameTopRatio": 0.5392231785182173,
+        "shrunk": null
+      },
+      {
+        "actual": 38,
+        "available": 73,
+        "desc": "发现 1 张卡牌并直接施放；你获得其余 2 张候选卡牌。",
+        "name": "永恒绽放",
+        "nameTopRatio": 0.5392231785182173,
+        "shrunk": null
+      },
+      {
+        "actual": 56,
+        "available": 73,
+        "desc": "召唤 2 名「步兵」（攻击力 4 点，生命 4 点），为你抵挡伤害并自动战斗。",
+        "name": "征召",
+        "nameTopRatio": 0.5392231785182173,
+        "shrunk": null
+      }
+    ]
+  },
+  {
+    "scene": "白塔第2页",
+    "cards": [
+      {
+        "actual": 24,
+        "available": 91,
+        "desc": "你施放的下 1 张法术牌施放 2 次。",
+        "name": "元素风暴",
+        "nameTopRatio": 0.5392672199141224,
+        "shrunk": null
+      },
+      {
+        "actual": 19,
+        "available": 73,
+        "desc": "你施放的下 1 张法术牌施放 2 次。",
+        "name": "元素风暴",
+        "nameTopRatio": 0.5392231162151961,
+        "shrunk": null
+      },
+      {
+        "actual": 38,
+        "available": 73,
+        "desc": "万法乾坤：你的法伤增加 1 点；回合开始时，你发现 1 张卡牌。",
+        "name": "博览者的狂语",
+        "nameTopRatio": 0.5392231162151961,
+        "shrunk": null
+      },
+      {
+        "actual": 56,
+        "available": 73,
+        "desc": "元素潮汐：抉择，开启「末日浩劫之门」或「天国之门」；2 回合后，开启你未选择的另 1 扇门。",
+        "name": "花开两面",
+        "nameTopRatio": 0.5392231162151961,
+        "shrunk": null
+      },
+      {
+        "actual": 19,
+        "available": 73,
+        "desc": "本牌被消耗时，你抽 3 张牌。",
+        "name": "奥术残卷",
+        "nameTopRatio": 0.5392231162151961,
+        "shrunk": null
+      },
+      {
+        "actual": 19,
+        "available": 73,
+        "desc": "抽牌，直到你有 4 张手牌。",
+        "name": "法力补给",
+        "nameTopRatio": 0.5392231162151961,
+        "shrunk": null
+      },
+      {
+        "actual": 19,
+        "available": 73,
+        "desc": "发现 1 种形态，并直接施放。",
+        "name": "千变万化",
+        "nameTopRatio": 0.5392231162151961,
+        "shrunk": null
+      }
+    ]
+  }
+]

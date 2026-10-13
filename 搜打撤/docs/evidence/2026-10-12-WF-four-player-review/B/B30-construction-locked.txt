@@ -1,0 +1,72 @@
+- main:
+  - text: 金币 攻击 ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - button "返回交易所":
+    - heading "基地" [level=2]
+    - generic: 档案 / 02
+    - generic "基地物资":
+      - generic "木材 0":
+        - generic: "0"
+        - generic: 木材
+        - text: 木材
+      - generic "口粮 0":
+        - generic: "0"
+        - generic: 口粮
+        - text: 口粮
+      - generic "钥匙 0":
+        - generic: "0"
+        - generic: 钥匙
+        - text: 钥匙
+      - generic "储备币 2":
+        - generic: "2"
+        - generic: 储备币
+        - text: 储备币
+    - main:
+      - heading "建设" [level=2]
+      - generic: 设施扩建
+      - navigation "可扩建设施":
+        - button "出征背包 16 / 30 格":
+          - heading "出征背包" [level=3]
+          - generic: 16 / 30 格
+        - button "基地仓库 25 / 100 格" [active] [pressed]:
+          - heading "基地仓库" [level=3]
+          - generic: 25 / 100 格
+      - region "基地仓库":
+        - heading "基地仓库" [level=3]
+        - paragraph: 卡牌每张、符文每块各占一个仓库格。
+        - text: 等待材料
+      - complementary:
+        - text: 设施扩建
+        - heading "基地仓库" [level=3]
+        - generic: 当前容量
+        - generic: 25 格
+        - generic: →
+        - generic: 扩建后容量
+        - generic: 28 格
+        - heading "扩建材料" [level=4]
+        - term: 木材
+        - definition:
+          - text: 0 / 2
+          - generic: 持有 / 需要
+        - button "确认扩建" [disabled]:
+          - generic: 确认扩建
+          - generic: →
+        - status: 木材不足，还需 2
+        - button "交易所补充木材 →"
+    - navigation "基地房间":
+      - button "基地":
+        - generic: 基地
+      - button "配置":
+        - generic: 配置
+      - button "后勤":
+        - generic: 后勤
+      - button "交易所":
+        - generic: 交易所
+      - button "收藏室 4项奖励可领取":
+        - generic: 收藏室
+        - emphasis: "4"
+      - button "建设 当前房间" [pressed]:
+        - generic: 建设
+        - generic: 当前房间
+      - button "庭院":
+        - generic: 庭院

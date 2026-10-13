@@ -1,0 +1,94 @@
+{
+  "stage": "prompt-style-lab",
+  "status": "three-experiments-generated-E3-selected",
+  "userDirection": "先多次实验提示词，找到接近少前2原图画风的方式后再叠加营地；复杂度不再增加",
+  "reference": {
+    "path": "C:/Users/太平/Downloads/BG_None_PersonalLounge_01.png",
+    "source": "https://iopwiki.com/images/3/3d/BG_None_PersonalLounge_01.png",
+    "receipt": "reference-gfl2-original-receipt.json",
+    "size": [
+      2048,
+      1024
+    ]
+  },
+  "commonSubject": "Fixed test subject for a style experiment: an ORIGINAL small postmodern living/work expedition room, landscape 16:9, eye-level view, moderate wide angle. One large upholstered armchair in the near-left with a draped muted blue-grey jacket and one ochre cushion. One middle planning desk holding an unfolded map, an open record book, a compact dim communication terminal and a slender useful work lamp. One back-right sleeping bench with off-white pillow/linen and a muted terracotta blanket. One rear closed graphite-green utility cabinet with two matching equipment cases. A broad left window shows snow and a very faint far modern city. No extra props, plants, weapons, signs, text, emblems, UI or people. The same content is used across tests. Borrow the attached reference's comfortable material colours and neutral-warm daylight/grey-green shaded room relations, not its exact room or branding. Keep objects plausibly grounded and human scale.",
+  "variants": [
+    {
+      "key": "E1",
+      "name": "原图视觉特征直述",
+      "style": "Render this as a premium commercial anime-game environment concept illustration with credible rounded volume and selective fine detail. The attached image is the main visual target. Softly graded grey-green/grey-warm middle values; warm-white window light across adjacent furniture; softly coloured fill in shadow. Cloth has pressed seams, directional folds and delicate locally visible weave, metal has thin bevels, recessed connections and restrained reflected colour. A few drawing-like edge accents and mild painted tonal variation, more detail at the working papers and tactile surfaces, calmer distant walls. Warm daylight is the main light, lamp a local small accent; light rays and haze remain subtle. Preserve material richness, edge hierarchy and atmospheric depth. Avoid uniformly sharp photoreal micro-detail, flat polygonal cel shading, broad graphic face blocks, noisy full-surface texture and muddy yellow filter.",
+      "prompt": "Fixed test subject for a style experiment: an ORIGINAL small postmodern living/work expedition room, landscape 16:9, eye-level view, moderate wide angle. One large upholstered armchair in the near-left with a draped muted blue-grey jacket and one ochre cushion. One middle planning desk holding an unfolded map, an open record book, a compact dim communication terminal and a slender useful work lamp. One back-right sleeping bench with off-white pillow/linen and a muted terracotta blanket. One rear closed graphite-green utility cabinet with two matching equipment cases. A broad left window shows snow and a very faint far modern city. No extra props, plants, weapons, signs, text, emblems, UI or people. The same content is used across tests. Borrow the attached reference's comfortable material colours and neutral-warm daylight/grey-green shaded room relations, not its exact room or branding. Keep objects plausibly grounded and human scale.\n\nRender this as a premium commercial anime-game environment concept illustration with credible rounded volume and selective fine detail. The attached image is the main visual target. Softly graded grey-green/grey-warm middle values; warm-white window light across adjacent furniture; softly coloured fill in shadow. Cloth has pressed seams, directional folds and delicate locally visible weave, metal has thin bevels, recessed connections and restrained reflected colour. A few drawing-like edge accents and mild painted tonal variation, more detail at the working papers and tactile surfaces, calmer distant walls. Warm daylight is the main light, lamp a local small accent; light rays and haze remain subtle. Preserve material richness, edge hierarchy and atmospheric depth. Avoid uniformly sharp photoreal micro-detail, flat polygonal cel shading, broad graphic face blocks, noisy full-surface texture and muddy yellow filter.",
+      "receipt": {
+        "stage": "E1",
+        "operation": "same-size WebP encoding only",
+        "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128f5-bd4a-7891-91c7-ab5106c5d409\\exec-fb24adf6-7718-44da-ada2-82513fc19074.png",
+        "sourceBytes": 2373181,
+        "sourceSha256": "31d0a7c983954ad108deab3891ad3d0edc1428099052a7f95cbeec0ef629fa94",
+        "sourceExcludedFromGit": true,
+        "preview": "camp-redraw-e1.webp",
+        "previewBytes": 220208,
+        "previewSha256": "997e947c943d071a3da62c249323128fd1aac1804f9a370102b2dd70f57d6229",
+        "size": [
+          1672,
+          941
+        ],
+        "runtimeApplied": false
+      }
+    },
+    {
+      "key": "E2",
+      "name": "游戏背景块体打底与绘制细化",
+      "style": "Use the visual finish of a professionally authored 2.5D GAME BACKGROUND: coherent spatial blockout and physically plausible daylight underneath, carefully art-directed paint-over/refined material rendering above. Match the attached reference's production finish. Rounded tonal form, selective thin edge highlights, fine cloth folds/soft seams, subtle local material roughness and delicate low-contrast wear at touched edges. Preserve rich middle-value hues in shadow and neutral-warm daylight falling across panels/linen/table. Lightly painted reflected light and atmospheric integration connect objects. High detail belongs to the task surface and a few material transitions; distant room structures remain quietly grouped. It must feel like the reference game artwork, with nuanced semi-realistic volume and authored edges, neither an ultra-realistic interior photograph nor a flat toon/cel illustration. No thick brush texture, paper overlay or cinematic orange grade.",
+      "prompt": "Fixed test subject for a style experiment: an ORIGINAL small postmodern living/work expedition room, landscape 16:9, eye-level view, moderate wide angle. One large upholstered armchair in the near-left with a draped muted blue-grey jacket and one ochre cushion. One middle planning desk holding an unfolded map, an open record book, a compact dim communication terminal and a slender useful work lamp. One back-right sleeping bench with off-white pillow/linen and a muted terracotta blanket. One rear closed graphite-green utility cabinet with two matching equipment cases. A broad left window shows snow and a very faint far modern city. No extra props, plants, weapons, signs, text, emblems, UI or people. The same content is used across tests. Borrow the attached reference's comfortable material colours and neutral-warm daylight/grey-green shaded room relations, not its exact room or branding. Keep objects plausibly grounded and human scale.\n\nUse the visual finish of a professionally authored 2.5D GAME BACKGROUND: coherent spatial blockout and physically plausible daylight underneath, carefully art-directed paint-over/refined material rendering above. Match the attached reference's production finish. Rounded tonal form, selective thin edge highlights, fine cloth folds/soft seams, subtle local material roughness and delicate low-contrast wear at touched edges. Preserve rich middle-value hues in shadow and neutral-warm daylight falling across panels/linen/table. Lightly painted reflected light and atmospheric integration connect objects. High detail belongs to the task surface and a few material transitions; distant room structures remain quietly grouped. It must feel like the reference game artwork, with nuanced semi-realistic volume and authored edges, neither an ultra-realistic interior photograph nor a flat toon/cel illustration. No thick brush texture, paper overlay or cinematic orange grade.",
+      "receipt": {
+        "stage": "E2",
+        "operation": "same-size WebP encoding only",
+        "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128f5-bd4a-7891-91c7-ab5106c5d409\\exec-acb54701-6e7f-411f-ad03-d906f03d476c.png",
+        "sourceBytes": 2218358,
+        "sourceSha256": "a98f9902aa7da4a4f950afaf2ebb68e892ed609ccc0a77184804765d6b2f0082",
+        "sourceExcludedFromGit": true,
+        "preview": "camp-redraw-e2.webp",
+        "previewBytes": 173300,
+        "previewSha256": "f4fa1b7b4dce156d2fd7bf04300bc3afa906e1d4ff1f7d14252176d46eeafc87",
+        "size": [
+          1672,
+          941
+        ],
+        "runtimeApplied": false
+      }
+    },
+    {
+      "key": "E3",
+      "name": "严格视觉匹配且不贴泛化画风标签",
+      "style": "Use the attached image as a STRICT visual rendering reference. Match its actual amount and placement of surface detail, rounded cloth volume, thin metal bevels, edge contrast, gentle haze, shadow colour and rich middle-value colour transitions as closely as possible. Match its bright neutral-warm window, grey-green shaded interior, local cream highlights, subtle warm fabric accents, and gradual depth softening. Adapt this exact visual treatment to the fixed new room subject. Study the reference's cushion, white pillow, cabinet panels and daylight falloff directly. Do not invent another look, add a global filter, simplify all materials into flat faces or turn everything into crisply textured photography. Do not copy its room contents, writing, logos or ornamental marks. Texture remains locally selective and subordinate to shape, light and mood.",
+      "prompt": "Fixed test subject for a style experiment: an ORIGINAL small postmodern living/work expedition room, landscape 16:9, eye-level view, moderate wide angle. One large upholstered armchair in the near-left with a draped muted blue-grey jacket and one ochre cushion. One middle planning desk holding an unfolded map, an open record book, a compact dim communication terminal and a slender useful work lamp. One back-right sleeping bench with off-white pillow/linen and a muted terracotta blanket. One rear closed graphite-green utility cabinet with two matching equipment cases. A broad left window shows snow and a very faint far modern city. No extra props, plants, weapons, signs, text, emblems, UI or people. The same content is used across tests. Borrow the attached reference's comfortable material colours and neutral-warm daylight/grey-green shaded room relations, not its exact room or branding. Keep objects plausibly grounded and human scale.\n\nUse the attached image as a STRICT visual rendering reference. Match its actual amount and placement of surface detail, rounded cloth volume, thin metal bevels, edge contrast, gentle haze, shadow colour and rich middle-value colour transitions as closely as possible. Match its bright neutral-warm window, grey-green shaded interior, local cream highlights, subtle warm fabric accents, and gradual depth softening. Adapt this exact visual treatment to the fixed new room subject. Study the reference's cushion, white pillow, cabinet panels and daylight falloff directly. Do not invent another look, add a global filter, simplify all materials into flat faces or turn everything into crisply textured photography. Do not copy its room contents, writing, logos or ornamental marks. Texture remains locally selective and subordinate to shape, light and mood.",
+      "receipt": {
+        "stage": "E3",
+        "operation": "same-size WebP encoding only",
+        "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128f5-bd4a-7891-91c7-ab5106c5d409\\exec-e0449468-46c2-4c35-ab50-37a1950bddcd.png",
+        "sourceBytes": 2161068,
+        "sourceSha256": "570d80675ff77f4448742601d9efe47f422c1b82f0cb7b9d3e6de334941c1ea7",
+        "sourceExcludedFromGit": true,
+        "preview": "camp-redraw-e3.webp",
+        "previewBytes": 160258,
+        "previewSha256": "af8fe93dfa1a9670fcb77af2891d19aaae1ed9ac5f39fe2076b7c4a854575dc4",
+        "size": [
+          1672,
+          941
+        ],
+        "runtimeApplied": false
+      }
+    }
+  ],
+  "comparison": [
+    "材质由边缘/中间色/选择性细化成立，避免照片微表面与平涂切面两端",
+    "窗光连续组织材料色/明暗/空间，暖白主光和灰绿阴影保留丰富中间色"
+  ],
+  "limits": "未设置随机种子（工具无此参数），少量构图差异不可避免；以实际图像作定性判断，不按图片数量/提示词长度认定匹配",
+  "runtimeApplied": false,
+  "selection": {
+    "key": "E3",
+    "basis": "根会话与两个只读代理独立看图一致选择；灰绿中间色、暖白窗光/空气层及体积关系较近",
+    "limitations": "仅本批定性比较；E3仍偏暖，织纹和金属边缘显隐不够选择性；未证明稳定复现或与原图完全一致"
+  }
+}

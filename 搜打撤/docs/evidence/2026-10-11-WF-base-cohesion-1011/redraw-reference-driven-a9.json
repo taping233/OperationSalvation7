@@ -1,0 +1,31 @@
+{
+  "stage": "A9",
+  "status": "generated-self-review-needs-refinement",
+  "userDirection": "真实游戏室内规划与舒适合理配色；保留近景大椅子；百年后的冬季城外驻扎营地",
+  "references": [
+    {
+      "path": "C:/Users/太平/.codex/generated_images/01a128f5-bd4a-7891-91c7-ab5106c5d409/exec-4b2caccc-c5d3-4791-80bf-77ca531ce40c.png",
+      "use": "只取镜头纵深/近景椅子"
+    },
+    {
+      "path": "docs/evidence/2026-10-11-WF-base-cohesion-1011/reference-gfl2-personal.jpg",
+      "use": "真实游戏室内的使用关系和中性冷暖配色"
+    },
+    {
+      "path": "docs/evidence/2026-10-11-WF-base-cohesion-1011/reference-official-bg-02.jpg",
+      "use": "方舟官方背景的概括色面和选择性边缘"
+    }
+  ],
+  "prompt": "Redraw this as an ORIGINAL polished commercial anime RPG environment background. Use reference 1 ONLY for CAMERA DEPTH and the large close foreground chair on the left, whose armrest projects diagonally towards the lower centre. Do not inherit its medieval architecture, clutter, palette or rough rendering. Reference 2 shows the most important qualities to emulate: a believable lived-in room, furniture grouped by actual use, sophisticated comfortable neutral colours and local warm/cool illumination. Reference 3 shows painterly anime environment colour planes and selective edge definition. Ignore the black screenshot border and all logos or text in the references; do not copy either game's room, signs, ship structures or equipment inventory. Create a compact temporary expedition living/work camp just OUTSIDE a winter city, approximately 100 years in the future: contemporary postmodern modular shelter, insulated matte composite walls and restrained dark steel structure. It feels used and humane, functional rather than sterile. Landscape 16:9, eye-level seated camera with coherent modest wide-angle perspective, no fisheye. Keep the dramatic LARGE near-left chair silhouette and projecting armrest, with one casually draped plain field jacket. This chair occupies the foreground left quarter and softly frames the scene; do not turn it into a tiny chair next to a desk. Re-plan the interior, reducing scattered objects and assigning each object a purpose. Middle-left/centre is a substantial waist-height planning WORK DESK about 1.8 metres wide and 0.8 metres deep, with convincing legs and accessible knee space, a correctly sized working chair tucked partly under its far side. Its work surface is the clearest focal area: an unfolded street map beside an open document folio, a compact communication terminal with a simple dim screen, one warm-white adjustable work lamp, and a single pen; enough free tabletop to genuinely work. A discreet cable leads to one power socket beside the table, not hanging randomly. BACK-RIGHT WALL is a compact integrated practical storage/utility group: one low closed modular cabinet with TWO matching slate-grey equipment cases neatly secured in its lower bay, same dimensions, colour and latch design; above, a small clean drinking-water dispenser and a thermos with a cup on a single tray. No decorative shelf clutter. Along the RIGHT WALL, separated from the desk by a clearly passable aisle, is one simple fold-down single sleeping berth/bench with one folded blanket and pillow; keep its full human scale and grounded contact. Further along the right wall, safely apart from bedding and fabric, is a SMALL enclosed rectangular modern fireplace with a little contained amber fire and correctly routed flue. The work, storage and rest zones share one believable floor, stable scale, consistent perspective and contact shadows. Leave a usable walking route and chair-pull space. A restrained broad window at the rear gives soft winter daylight; snow is OUTSIDE only. The distant city is merely a few hazy pale blue-grey silhouettes with almost no windows or internal detail, low contrast and painterly atmospheric depth; neither a sharp detailed skyline nor photographic gaussian bokeh. Winter is expressed only outside and by the fireplace. Comfort comes from balanced colours: broad warm-neutral ivory/stone-grey wall planes, muted slate and soft blue-grey shadows, grey-teal storage, a charcoal-blue foreground chair that retains readable colour and reflected light, warm light-grey desk surface, pale mist-blue exterior, a tiny muted terracotta textile note, and restrained warm-white task lighting/amber fire. Preserve neutral whites and clean midtones; avoid bathing the entire image in blue, yellow, green or orange. Calm, clean, inviting tonal relationships like a well-art-directed commercial game interior. Hand-painted 2D anime environment finish with elegant selective linework, large organised matte colour planes, gentle light gradation, sparse expressive brush edges, focal detail only on the work area. Clear convincing perspective is more important than texture. Foreground edges a little softer, middle work surface readable, background quieter. No photographic materials, 3D render, granular weathering, oily brush noise, gritty floor patterns, heavy bloom, glossy sci-fi, cyberpunk neon, ornate antique furniture, flags, crests, runes, meaningless symbols, decorative cables, rows of screens, lots of tiny bolts, plants, random crates, weapons, snow indoors, people, writing, UI or logo. This is a near-future operational home used by people, not a furniture showroom, palace, warehouse or spaceship bridge.",
+  "runtimeApplied": false,
+  "receipt": {
+    "path": "C:/Users/太平/.codex/generated_images/01a128f5-bd4a-7891-91c7-ab5106c5d409/exec-c4e628a9-388e-484d-ace6-8f89bb4f9948.png",
+    "bytes": 1974628,
+    "sha256": "e8f235b85e681f8a24bdf3420249351dddf72d7b8db4255f88a9b4e96c433d30",
+    "excludedFromGit": true
+  },
+  "review": [
+    "工作/生活/储物分组与冷暖关系比A8更明确",
+    "城市和地面纹理偏清楚；火炉靠寝具过近；画法需进一步概括"
+  ]
+}

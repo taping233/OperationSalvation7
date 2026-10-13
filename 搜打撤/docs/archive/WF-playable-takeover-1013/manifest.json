@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "at": "2026-10-13T09:38:10.519Z",
+  "task": "WF-playable-takeover-1013",
+  "method": "copy-original-before-revision",
+  "items": [
+    {
+      "source": "docs/PARALLEL-REGISTRY.md",
+      "target": "docs/archive/WF-playable-takeover-1013/originals/docs/PARALLEL-REGISTRY.md",
+      "sha256": "95f2893201dcf4f2389e4a536dbd6c1fb0b5a16ef833a77fcabbd07debbe4e10",
+      "replacedBy": "docs/evidence/2026-10-13-WF-playable-complete-1013/README.md"
+    }
+  ],
+  "limits": [
+    "原文保持字节，内部相对链接仍以 source 原位置解释",
+    "本命令未修改源文件；替代状态由负责人核实并在现行入口注明"
+  ]
+}

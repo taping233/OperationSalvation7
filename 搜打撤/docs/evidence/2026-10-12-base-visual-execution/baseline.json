@@ -1,0 +1,92 @@
+{
+  "capturedAt": "2026-10-12T10:10:52.960Z",
+  "head": "cdd5c1a836",
+  "snapshotRoot": "node_modules/.cache/WF-base-visual-execution/before",
+  "files": [
+    {
+      "path": "game/css/base-framework-v7.css",
+      "sha256": "325b89884830c8719fef52d6316fc00d23c2d906e2e750a10021ac79085e5556",
+      "mtime": "2026-10-11T15:38:50.964Z"
+    },
+    {
+      "path": "game/css/base-personnel-v12.css",
+      "sha256": "bf6c52ffc1b84dfc2ccabc77c304d0684e820d89348eb25b76f5150e9e0f937c",
+      "mtime": "2026-10-12T09:38:56.894Z"
+    },
+    {
+      "path": "game/css/base-logistics-trade-v12.css",
+      "sha256": "d8aba901eff6f76036a4d85e73bcdd81825830777177890183c35fb6a54f54a5",
+      "mtime": "2026-10-12T09:41:23.821Z"
+    },
+    {
+      "path": "game/css/base-archive-facilities-v12.css",
+      "sha256": "6a5a77dc85bb502de5c80e0ec04be2aa388135bcfa6a0a15c01bb8cbee8c319c",
+      "mtime": "2026-10-12T09:42:59.615Z"
+    },
+    {
+      "path": "game/css/base-camp-roster.css",
+      "sha256": "e94fe022034143477aac3d968e1f148445b91783bb92d410276e2c9727a8d42a",
+      "mtime": "2026-10-09T17:05:07.527Z"
+    },
+    {
+      "path": "game/src/hub/hub.personnel.js",
+      "sha256": "31aa4d24044a96dbe85135dbe5cb40c1fa11ed9720ed214b188db429ba7eea5a",
+      "mtime": "2026-10-12T09:00:04.176Z"
+    },
+    {
+      "path": "game/src/hub/hub.trade-shop-v5.js",
+      "sha256": "3a45a59519cb4a52cc10dfa0c5ae9cc2edc38f7afc8275691e485758d65049a8",
+      "mtime": "2026-10-12T09:38:52.642Z"
+    },
+    {
+      "path": "game/src/hub/hub.facilities.js",
+      "sha256": "9445262e148e162f9b41199ffdce5aefdcf567b7d853fa509095652ea35fc107",
+      "mtime": "2026-10-11T14:10:11.981Z"
+    },
+    {
+      "path": "game/src/hub/hub.archive-v3.js",
+      "sha256": "032b2d4eb8d4b7c2cbe98d11ba43966a15995352713cc3797b1e3f647b44fed7",
+      "mtime": "2026-10-11T18:04:25.479Z"
+    },
+    {
+      "path": "game/src/hub/hub.courtyard-v3.js",
+      "sha256": "89178bea9b306188081161b30301524139d8a72e1c277744c6b365186cf37edd",
+      "mtime": "2026-10-11T14:31:12.045Z"
+    },
+    {
+      "path": "game/src/hub/courtyard.rain-tableau.js",
+      "sha256": "342019be513814b4c9ecac33e382ebb581e982fa9bde22c42a0cbb428c78fbb4",
+      "mtime": "2026-10-11T04:18:48.957Z"
+    },
+    {
+      "path": "tests/hub-trade-shop-v5.test.js",
+      "sha256": "0716be51dd72a76777395b56b2603657387d702dcf6f276c5731ef168062112b",
+      "mtime": "2026-10-11T05:56:14.664Z"
+    },
+    {
+      "path": "tests/hub-personnel-navigation.test.js",
+      "sha256": "c1c03e35170e98a30448c2742619df41c763dc328afe1a7ebd6b56423640fd35",
+      "mtime": "2026-10-11T04:27:06.081Z"
+    },
+    {
+      "path": "tests/hub-archive-v3.test.js",
+      "sha256": "1ff31ecbd395ade57ac9e3b8bb1a9c8b443214cc31e6d2b9514ae008275560be",
+      "mtime": "2026-10-11T18:02:47.076Z"
+    },
+    {
+      "path": "game/css/photo-studio-unified.css",
+      "sha256": "1e7812e8abb9a0302b7397295b5910b4dc15f55ddf610a3c8860e31bd9ed040d",
+      "mtime": "2026-10-11T14:13:52.784Z"
+    },
+    {
+      "path": "game/css/departure-selected.css",
+      "sha256": "c0d7575ed6169edad63e93c715f0bdb21363c386716cc1a9eb626bd9b9783636",
+      "mtime": "2026-10-11T17:36:11.700Z"
+    },
+    {
+      "path": "tests/courtyard-rain-tableau.test.js",
+      "sha256": "1da4e89c24e4e6b770cf4d4b8ebf3731f17029a7121cc6905844665b803ea5bd",
+      "mtime": "2026-10-11T04:19:41.273Z"
+    }
+  ]
+}

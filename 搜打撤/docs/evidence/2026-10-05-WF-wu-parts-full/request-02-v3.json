@@ -1,0 +1,12 @@
+{
+  "id": "02",
+  "slug": "head-neck",
+  "version": 3,
+  "prompt": "Draw ONLY Wu's head and short neck as a transparent 2D animation component, faithfully using the SAME beautiful face from reference 1 and the three-quarter facing-right viewing angle from reference 2. This is a fresh facial redraw. Keep a naturally slim small oval face, soft cheek contour, gentle SHORT rounded chin, cyan-blue almond eyes with restrained upward outer corners, simple light-gray brows and tiny unobtrusive nose. Eyes, nose and mouth are compactly spaced like reference 1. Mouth is SMALL and softly smiling, naturally closer to the chin, with only a tiny single fang; do not create a wide open toothy grin or a long empty chin below the mouth. Pretty, calm, confident anime heroine face, not chibi, doll face, swollen cheeks or pointed V jaw. Both eyes fully visible in three-quarter-right view. Use the hand-painted low-detail opaque block style of reference 1, clear economical eye lines, two or three subtle skin light/shadow masses, few highlights; no glossy 3D eyes/skin, no dense lashes. Complete bare scalp and ears with short neck ending in a clean overlapping cap for separate hair pieces. NO hair, bangs, ponytail, goggles, flower, ribbon, shoulders, chest, clothes or text. One head+neck on a square portrait canvas with transparent margins, no background, aura, shadow or painted checkerboard.",
+  "refs": [
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\reference.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\wu-battle-base-frame000.png"
+  ],
+  "tool": "built-in imagegen",
+  "stage": "candidate"
+}

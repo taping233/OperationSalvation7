@@ -1,0 +1,86 @@
+{
+  "tool": "built-in image_gen",
+  "encoding": "1280x720 WebP quality86 method6",
+  "assets": [
+    {
+      "scene": "camp",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a12546-19f2-73b2-a0a7-fbb705598f4f\\exec-4165a760-ffd1-4505-8a72-26fa5f51bc9c.png",
+      "localSource": "game/art-source/ui/cut-scenes-20261010/camp-v1.png",
+      "sourceSha256": "d16163b4daaca176f84823212b4eb02c0230942726592dd4ea572978946726e3",
+      "sourceDimensions": [
+        1672,
+        941
+      ],
+      "path": "scenes/transition-camp-v1.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 70900,
+      "sha256": "ac8b7c0d42be8ecbdfbb24d468fdd982d621beb0858120fead2bc092dc75befc",
+      "source": "docs/evidence/2026-10-10-cut-scenes/receipt.json"
+    },
+    {
+      "scene": "photo",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a12546-19f2-73b2-a0a7-fbb705598f4f\\exec-79851e45-e58c-4432-895e-fd502fcba89e.png",
+      "localSource": "game/art-source/ui/cut-scenes-20261010/photo-v1.png",
+      "sourceSha256": "e62fb005e623de56051241db8aafd598fb83421f330eccd243b661bb06030271",
+      "sourceDimensions": [
+        1672,
+        941
+      ],
+      "path": "scenes/transition-photo-v1.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 68910,
+      "sha256": "6f860d1b74e6b84b21dfa9d0f821fc783a4eece30e355fb147bb78387fd46b3a",
+      "source": "docs/evidence/2026-10-10-cut-scenes/receipt.json"
+    },
+    {
+      "scene": "field",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a12546-19f2-73b2-a0a7-fbb705598f4f\\exec-88c485de-7d1a-41e3-99ab-8df35b59dfdf.png",
+      "localSource": "game/art-source/ui/cut-scenes-20261010/field-v1.png",
+      "sourceSha256": "fa4ff024cda9cee1fd9a8bc26254ccfed00c8d33f487ce14c1ed055fbd4b7031",
+      "sourceDimensions": [
+        1672,
+        941
+      ],
+      "path": "scenes/transition-field-v1.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 96750,
+      "sha256": "e9e160cb52a546600a3aee0397f0a21d3453582d03372b0d2d16e7aca6f761c7",
+      "source": "docs/evidence/2026-10-10-cut-scenes/receipt.json"
+    },
+    {
+      "scene": "battle",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a12546-19f2-73b2-a0a7-fbb705598f4f\\exec-2e6854db-f104-432a-b623-d5037ff1bbc0.png",
+      "localSource": "game/art-source/ui/cut-scenes-20261010/battle-v1.png",
+      "sourceSha256": "f63f870b587297e90e54bc28e674d8fb7c3475c79f4dc885e20b9e59cd6f086f",
+      "sourceDimensions": [
+        1672,
+        941
+      ],
+      "path": "scenes/transition-battle-v1.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 91104,
+      "sha256": "cadaf40079d8ef0540e34e55f82aae642fc584c173d7e5fd9d17f7799ce2ad9f",
+      "source": "docs/evidence/2026-10-10-cut-scenes/receipt.json"
+    },
+    {
+      "scene": "boss",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a12546-19f2-73b2-a0a7-fbb705598f4f\\exec-f5a468ce-6605-44eb-9a53-241841967485.png",
+      "localSource": "game/art-source/ui/cut-scenes-20261010/boss-v1.png",
+      "sourceSha256": "4b7ea108b2bb79c4040c3958fe925f7f794de6103974fc70309ba8ffe903cf39",
+      "sourceDimensions": [
+        1672,
+        941
+      ],
+      "path": "scenes/transition-boss-v1.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 106012,
+      "sha256": "5c187ce7c0788245869e70de427426f727f6c5fe7507d92f3b453b6dbd5e513a",
+      "source": "docs/evidence/2026-10-10-cut-scenes/receipt.json"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "card_id": "tt3-life-arrow",
+  "model": "nai-diffusion-4-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 1171673691,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nno humans, bird, flying, spread wings, branch, sprout, leaves, simple background\n\nOne small turquoise-green bird leaps upward to the right from the broken end of a dry dark branch. Capture the instant after takeoff: its feet have just left the branch, one wing sweeps high and the nearer wing sweeps back, with a clear gap beneath its belly. The bird occupies the upper-right half, the single branch enters from lower-left and ends just below center. Exactly two fresh pale-green leaves unfold from a new sprout beside the broken branch tip, echoing the sweep of the bird wings. A narrow warm golden seam in the split wood suggests life returning. Use one continuous rising diagonal from branch through leaves toward bird, with a few quiet ivory and gray-green background planes. Keep bird, branch and two leaves separate and readable; no feather cloud or dense vegetation. The image suggests rebirth becoming forward flight, without a literal arrow, bow or target. Muted warm ivory background, deep gray-brown branch, concentrated teal bird and tender green leaves.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, hands, multiple birds, flock, arrow, bow, target, flowers, dense foliage, forest, scenery, particles, sparks, ornate bird, mechanical bird",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\life-arrow-20261010\\life-arrow.png",
+  "installed": false,
+  "design": "枯枝重新振翅：翠青小鸟从断枝跃起，两片嫩叶呼应翅膀，裂口一线暖金；起飞与萌芽组合表达生命向前。"
+}

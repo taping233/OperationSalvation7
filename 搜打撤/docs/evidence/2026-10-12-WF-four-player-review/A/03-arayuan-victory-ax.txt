@@ -1,0 +1,64 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5351/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5351/
+	1 container viewport
+		2 button 背包 6/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 6/16
+		5 container archive 搜刮！战斗胜利 · 军用保险柜 · 第 1 / 2, ID: overlay
+			6 container
+				7 button Description: 关闭, ID: ovCloseX
+				8 container
+					9 heading 战斗胜利, Value: 3
+						10 text 战斗胜利
+					11 text 军用保险柜 · 1/2
+					12 text 3 张待领
+					13 text 本次金币 待收取 +3 3  张卡牌
+					14 checkbox Description: 查看木材详情, Value: 0
+						15 container
+							16 text 0
+							17 image 木材
+							18 text 木材 资源 · 古朴
+							61 container
+								62 text 古朴 古朴
+							21 text 木材 × 1 。
+						22 text 估值
+						23 image coin
+						24 text 2
+						63 text 古朴
+					26 checkbox Description: 查看一把钥匙详情, Value: 0
+						27 container
+							28 text 0
+							29 image 一把钥匙
+							30 text 一把钥匙 资源 · 古朴
+							64 container
+								65 text 古朴 古朴
+							33 text 解锁大门。
+						34 text 估值
+						35 image coin
+						36 text 2
+						66 text 古朴
+					38 checkbox Description: 查看后备能源详情, Value: 0
+						39 container
+							40 text 6
+							41 image 后备能源
+							42 text 后备能源 法术 · 史诗
+							67 container
+								68 text 史诗 史诗
+							45 image cards
+							46 text 抽 2 抽  2  张牌，并回复你的全部 能量 ；你的 消耗 口袋中每有  1  张法术牌，本牌费用减少  1  点。
+						47 text 估值
+						48 image coin
+						49 text 2
+						69 text 史诗
+					51 text 本战击败  1  名敌人 · 剩余生命  17/35
+					52 button (collapsed) 本战背包卡结算 · 入口袋 9 张 · 消散 1 张 · 保留 7 张, Secondary Actions: Expand
+						53 text 本战背包卡结算 · 入口袋 9 张 · 消散 1 张 · 保留 7 张
+					54 container 所选卡牌详情
+						55 text 选择一张卡牌查看规则与去向
+					56 text 背包 6/16 格 · 已入背包 0 张
+					57 text 点击卡牌先查看，随后收下
+					58 container
+						59 button 3 张待领 · 离开
+						60 button 全部收下
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5351/

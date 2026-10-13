@@ -1,0 +1,987 @@
+diff --git a/game/src/ui/interface-motion.js b/game/src/ui/interface-motion.js
+index d0aba5bf..61d6f38c 100644
+--- a/game/src/ui/interface-motion.js
++++ b/game/src/ui/interface-motion.js
+@@ -74,8 +74,12 @@ function install(ui = window.SDT?.UI) {
+     if (pendingClose) {
+       clearTimeout(pendingClose.timer);
+       pendingClose = null;
+-      // Finish the old cleanup before installing a new page; no delayed close may erase it.
++      // hide 请求时已解绑旧页；保留调用方在 show 前登记的新页动作。
++      const acts = this._acts, input = this._inputHandler, hover = this._hoverHandler;
+       hideOverlay.call(this, { immediate: true });
++      this._acts = acts;
++      this._inputHandler = input;
++      this._hoverHandler = hover;
+     }
+     const body = document.getElementById('ovBody');
+     const isCamp = mode === 'page' && typeof html === 'string' && html.includes('base-camp');
+@@ -148,6 +152,10 @@ function install(ui = window.SDT?.UI) {
+       return hideOverlay.call(this, options);
+     }
+     overlay.dataset.uiInstantClose = '1';
++    // 逻辑关闭同步生效，140ms 只保留退出画面；旧按钮不能在淡出期间重领。
++    this._acts = {};
++    this._inputHandler = null;
++    this._hoverHandler = null;
+     const closing = { timer: null };
+     pendingClose = closing;
+     closing.timer = setTimeout(() => {
+diff --git a/game/src/ui/overlay.js b/game/src/ui/overlay.js
+index 3c53f8f1..0c8e4ef0 100644
+--- a/game/src/ui/overlay.js
++++ b/game/src/ui/overlay.js
+@@ -38,6 +38,9 @@ export const overlayMethods = {
+ 
+   endRoom() {
+     this._roomActive = false;
++    // 奖励页的聚焦可滚动 overflow:hidden 的游戏视口；回地图时恢复HUD原点。
++    const viewport = this.el.viewport || document.getElementById('viewport');
++    if (viewport) { viewport.scrollTop = 0; viewport.scrollLeft = 0; }
+     this.el.overlay.classList.remove('room-view');
+     const card = this.el.ovBody && this.el.ovBody.parentElement;
+     if (card) card.classList.remove('room');
+diff --git a/game/src/run/game.run.flow.js b/game/src/run/game.run.flow.js
+index baa9d9d6..6d23b882 100644
+--- a/game/src/run/game.run.flow.js
++++ b/game/src/run/game.run.flow.js
+@@ -507,6 +507,7 @@ function uniqueEventPicks(pool, count) {
+ }
+ 
+ function closeEventFlow() {
++  setBagReturnHook(null);
+   UI.hideOverlay();
+   game.state = 'idle';
+   saveGame();
+diff --git a/game/src/run/game.run.scenes.js b/game/src/run/game.run.scenes.js
+index 1bfea398..75fac9ac 100644
+--- a/game/src/run/game.run.scenes.js
++++ b/game/src/run/game.run.scenes.js
+@@ -362,7 +362,14 @@ export function openChestsOnCell(chests, text, opts) {
+     game.state = 'idle';
+     saveGame();
+     UI.refresh(game);
+-  }, opts);
++  }, { ...opts, onCell:true });
++}
++
++export function resumeChestsOnCell(saved) {
++  return SDT.Chests.restore(game, saved, () => {
++    if (saved.context.consumeNode) consumeCurrentCell();
++    game.state = 'idle'; saveGame(); UI.refresh(game);
++  });
+ }
+ 
+ // 即时效果（经场景演出后结算）；after = 效果完成后的续流回调
+@@ -376,7 +383,7 @@ export function grantEventCard(tpl, opts = {}) {
+   if (!canReceive) {
+     // 2026-09-09 老板 #12：收不下要当场给提示（音效+日志，口径同 addItem），不能只默默掉在原地
+     SDT.Sound.sfx('deny');
+-    UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格${tpl.type !== '资源' ? '，珍珠盒扩格只收资源卡' : ''}），【${esc(tpl.name)}】掉在了原地…`, 'warn');
++    UI.log(`[[icon:bag]] 背包放不下（${game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`}${tpl.type !== '资源' ? '；新普通牌需通用空格，同名未满仍可叠放' : ''}），【${esc(tpl.name)}】掉在了原地…`, 'warn');
+     return false;
+   }
+   game.ownedCards.push({ uid: newUid(), card: { ...tpl } });
+@@ -429,13 +436,20 @@ export function openPocketRestore(picks, done, opts = {}) {
+       foot: `<button class="ov-btn ok fire-done-btn" data-act="fireDone"><svg class="ic svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 继续旅程</button>`,
+     });
+   };
+-  const finish = () => { UI.hideOverlay(); if (done) done(); };
++  let finished = false;
++  const finish = () => {
++    if (finished) return;
++    finished = true;
++    setBagReturnHook(null);
++    UI.hideOverlay();
++    if (done) done();
++  };
+   UI.act('restoreOne', (d) => {
+     const p = game.usedPocket.find(x => x.card.name === d.name && FIRE_RESTORABLE(x.card));
+     if (!p || left <= 0) return;
+     // 2026-09-06 #18：背包满时不能复原
+-    if (usedSlots() >= bagCap()) { UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()}），无法复原`, 'warn'); SDT.Sound.sfx('deny'); return; }
+     const card = p.card;
++    if (!game.canReceiveCard(card)) { UI.log(`[[icon:bag]] 背包放不下（${game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`}），无法复原`, 'warn'); SDT.Sound.sfx('deny'); return; }
+     p.count--;
+     if (p.count <= 0) game.usedPocket.splice(game.usedPocket.indexOf(p), 1);
+     game.ownedCards.push({ uid: newUid(), card: { ...card } });
+diff --git a/game/src/battle/core/battle.enemy-phase.js b/game/src/battle/core/battle.enemy-phase.js
+index 29ee93a9..4b2d4f70 100644
+--- a/game/src/battle/core/battle.enemy-phase.js
++++ b/game/src/battle/core/battle.enemy-phase.js
+@@ -77,6 +77,7 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
+     const stillPlayerPhase = () => G?.battleActive && battleState.token === extraTurnToken && battleState.phase === BATTLE_PHASES.PLAYER;
+     set$extraTurn(false);
+     set$turn(turn + 1);
++    pdef.guard = false;   // 格挡只覆盖施放当回合，额外回合同样到期。
+     foes.forEach(foe => { if (!foe.dead) foe.intent = intentFor(foe, turn); });
+     set$energy(maxEnergy);
+     // 额外回合=新回合：打出计数清零（对齐 afterEnemies 新回合口径，追斩/连续射击按本回合计）；
+@@ -339,6 +340,7 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
+     fireTurnEndTriggers();
+     syncCurseCondEquips();   // 条件装备（深海印记类）随诅咒状态变化重新核算
+     set$turn(turn + 1);
++    pdef.guard = false;   // 敌方本回合所有伤害结算后，在新玩家回合清除。
+     foes.forEach(foe => { if (!foe.dead) foe.intent = intentFor(foe, turn); });
+     set$energy(maxEnergy);
+     set$playedMartialThisTurn(0);   // 追斩/连续射击：本回合打出计数随新回合清零
+diff --git a/game/src/battle/core/battle.resolution.js b/game/src/battle/core/battle.resolution.js
+index 52e61a23..5238f632 100644
+--- a/game/src/battle/core/battle.resolution.js
++++ b/game/src/battle/core/battle.resolution.js
+@@ -123,7 +123,7 @@ function createBattleResolution(ports) {
+   // 演出：windup → 结算 → hit，与 damage 段（castSegment）同一节奏。
+   function* resolveCurseOperation(card, operation, preferredTarget, boundTargets) {
+     const isStacking = kind => !!combat.CURSE_META[kind]?.stack;
+-    // 目标解析与 damage 段同口径：chosenEnemy 倒下顺延战场首位；randomEnemy 施放时掷一名存活敌人；
++    // chosenEnemy 绑定原选目标，倒下后跳过附加效果；randomEnemy 独立掷存活敌人；
+     // self 指玩家自身（getPlayerStatus，不在 foes 里，windup 由 staged-playback 按 foeIdx<0 跳过）；
+     // bindTarget:'prevDamage'（M2，血毒双镖式段绑定）→ 目标沿用同一 onPlay 内前一 damage 段实际命中者。
+     const pickTargets = () => {
+@@ -136,7 +136,7 @@ function createBattleResolution(ports) {
+         return (boundTargets || []).filter(foe => foe && !foe.dead);
+       }
+       if (operation.target === 'self') return [getPlayerStatus()].filter(Boolean);
+-      return [preferredTarget && !preferredTarget.dead ? preferredTarget : getAliveFoes()[0]].filter(Boolean);
++      return [preferredTarget ? (preferredTarget.dead ? null : preferredTarget) : getAliveFoes()[0]].filter(Boolean);
+     };
+     // 施加量：叠层型取 stacks（bleed/poison，具名施加时 schema 必填）；计时型取 duration（schema 必填）。
+     // randomKinds/source handMoves 不携带 stacks——抽中/扫描到的叠层型固定 1 层；计时型
+diff --git a/game/src/battle/effects/effect-steps.js b/game/src/battle/effects/effect-steps.js
+index 2eaa561f..a744252c 100644
+--- a/game/src/battle/effects/effect-steps.js
++++ b/game/src/battle/effects/effect-steps.js
+@@ -82,7 +82,7 @@ export function createEffectPipeline(deps) {
+       pdef: deps.getPlayerDefense(),
+       myClass: deps.getPlayerClass ? deps.getPlayerClass() : null,
+       durOv: (String(text || '').match(/持续\s*(\d+)\s*回合/) || [])[1],
+-      curseTarget: (target && !target.dead) ? target : deps.getAlive()[0] || null,
++      curseTarget: target ? (target.dead ? null : target) : deps.getAlive()[0] || null,
+     };
+     for (const step of steps) {
+       if (step.gate !== 'always' && ctx.did) continue;
+diff --git a/game/src/battle/effects/effect-steps.curse.js b/game/src/battle/effects/effect-steps.curse.js
+index 498c736a..3ce3c215 100644
+--- a/game/src/battle/effects/effect-steps.curse.js
++++ b/game/src/battle/effects/effect-steps.curse.js
+@@ -62,7 +62,7 @@ export function curseSteps(s) {
+         when: (ctx) => (typeof handCurseSpecs === 'function' && /附加手牌中的招式所具有的全部诅咒/.test(ctx.desc)) ? true : null,
+         run: (ctx) => {
+           const specs = handCurseSpecs();
+-          const ct = (ctx.target && !ctx.target.dead) ? ctx.target : (getAlive()[0] || null);
++          const ct = ctx.target ? (ctx.target.dead ? null : ctx.target) : (getAlive()[0] || null);
+           if (specs.length && ct) {
+             const names = specs.map(s => {
+               const meta = combat.CURSE_META[s.key];
+@@ -71,7 +71,7 @@ export function curseSteps(s) {
+             }).join('、');
+             log(`[[icon:skull]] <b>${esc(ctx.card.name)}</b>：附加手牌招式的诅咒 → <b>${esc(ct.name)}</b>：${names}`, 'sys');
+           } else {
+-            log(`[[icon:cross]] <b>${esc(ctx.card.name)}</b>：手牌中没有带诅咒的招式`, 'dim');
++            log(`[[icon:cross]] <b>${esc(ctx.card.name)}</b>：${ctx.target?.dead ? '原目标已倒下，后续诅咒跳过' : '手牌中没有带诅咒的招式'}`, 'dim');
+           }
+           ctx.did = true;
+         },
+diff --git a/game/src/battle/core/battle.lifecycle.js b/game/src/battle/core/battle.lifecycle.js
+index ce9d03bb..72617795 100644
+--- a/game/src/battle/core/battle.lifecycle.js
++++ b/game/src/battle/core/battle.lifecycle.js
+@@ -13,7 +13,7 @@ import { shuffleCards } from '../bag/battle.deck.js';
+ import { BATTLE_PHASES, createBattleState, transitionBattle } from '../runtime/battle.state.js';
+ import { getHostedExecutionCard } from '../effects/battle.hosted.js';
+ import {
+-  battleState, G, foes, opts, mode, drawPile, hand, played, consumed, maxEnergy, pstat,
++  battleState, G, foes, opts, mode, drawPile, hand, played, consumed, granted, maxEnergy, pstat,
+   busy, infusing, discovering, discoverQueue, choosing, selPool, sel, lastDeckSel,
+   selectingDeck, selDeckMax, freezeRuneOn, equipped, battleRestartCheckpoint,
+   restoringRestartCheckpoint, set$G, set$opts, set$foes,
+@@ -307,8 +307,7 @@ export function createBattleLifecycle({
+     set$selDeckMax(R().bossDeckSize + deckCapBonus());   // 混沌之眼「牌库上限+5」（编入后才计入）
+     // 2026-09-16 老板定版：骷髅王剑/混沌之眼等「对战开始时」装备计入 15 张套牌（不再独立勾选）
+     set$selPool(G.ownedCards.filter(o => !['道具', '资源', '事件', '生物'].includes(o.card.type) && !isStarterAttack(o.card)));
+-    const shas = G.ownedCards.filter(o => isStarterAttack(o.card));
+-    set$selShaN(Math.min(shas.length, R().starterSha));
++    set$selShaN(R().starterSha);
+     set$sel(new Set(lastDeckSel.filter(uid => selPool.some(entry => entry.uid === uid))));
+     const cap = Math.min(selDeckMax, selPool.length);
+     while (sel.size > cap) sel.delete(sel.values().next().value);
+@@ -338,6 +337,12 @@ export function createBattleLifecycle({
+     if (battleRestartCheckpoint) battleRestartCheckpoint.selectedDeck = [...sel];
+     set$selectingDeck(false);
+     clearBattlePiles();
++    // 首脑入口保证固定初始攻击数；缺少的只补进本场临时牌，不挤占背包或进入口袋。
++    while (!opts.nest && shas.length < R().starterSha) {
++      const uid = `boss-sha-${battleState.token}-${shas.length}`;
++      granted.push({ uid, card: { ...SDT.Cards.SHA } });
++      shas.push(uid);
++    }
+     set$drawPile(shuffle([...sel].concat(shas)));   // 骷髅王剑/混沌之眼等对战开始时装备已在 sel 内
+     set$hand([]);
+     resetBattleEntryState();
+diff --git a/game/src/cards/card-description-text.js b/game/src/cards/card-description-text.js
+index 47c63dbe..bef0b9d0 100644
+--- a/game/src/cards/card-description-text.js
++++ b/game/src/cards/card-description-text.js
+@@ -222,7 +222,7 @@ const descriptions = new Map([
+   ["tt12-chargeray", ["造成5点法伤，本牌在你手牌中时每注能过1张卡牌，伤害+2", "造成 5 点法术伤害；本牌在你的手牌中时，你每注能 1 张卡牌，本牌伤害增加 2 点。"]],
+   ["tt12-breakthrough", ["随机获取1张0费，一张1费，一张2费招式", "随机获得 0 费、1 费和 2 费招式各 1 张。"]],
+   ["tt12-raygun", ["主动技能：发现一张射线牌并直接释放", "主动技能：发现 1 张射线牌，并直接施放。"]],
+-  ["tt12-backupcell", ["抽2张牌并回复所有费用，消耗口袋中每有一张法术牌，本牌费用-1", "抽 2 张牌，并回复你的全部能量；你的消耗口袋中每有 1 张法术牌，本牌费用减少 1 点。"]],
++  ["tt12-backupcell", ["抽2张牌并回复所有费用，消耗口袋中每有一张法术牌，本牌费用-1", "抽 2 张牌，并回复你的全部能量；本场战斗消耗牌中每有 1 张法术牌，本牌费用减少 1 点（不计之前战斗的消耗口袋或普通弃牌；仅进入墓地的牌不计）。"]],
+   ["tt12-freezeray", ["造成4点法伤；若此前其未曾受到过伤害，对其附加冰冻", "造成 4 点法术伤害；若目标在受到本次伤害前未受伤，对目标附加冰冻。"]],
+ ]);
+ 
+diff --git a/game/src/run/chests.js b/game/src/run/chests.js
+index 48a18d26..3b518d98 100644
+--- a/game/src/run/chests.js
++++ b/game/src/run/chests.js
+@@ -4,6 +4,7 @@ import { Random } from '../core/random.js';
+ import { esc, escAttr } from '../core/shared.js';
+ import { descRich } from '../cards/cards.view.js';
+ import { turboMs, isTurbo } from '../core/turbo.js';
++import { serializeChestReward, restoreChestReward } from './chest-reward-save.js';
+ 
+   const SDT = window.SDT;
+   const UI = SDT.UI;
+@@ -13,6 +14,10 @@ import { turboMs, isTurbo } from '../core/turbo.js';
+   let cur = null;      // 当前宝箱 {kind, cards, coins}
+   let idx = 0;         // 已开到第几个
+   let onDone = null;   // 全部开完后的续流回调
++  let saveContext = null;
++  let saveBinding = null;
++  const bindSave = game => ({ seed:game.seed, layerIdx:game.layerIdx, trackPos:game.trackPos, runToken:game.discoveredPairs });
++  const persistReward = () => { if (saveContext?.onCell) G.persistSave?.(); };
+   let searchSeq = 0;   // 搜索演出代次：过期定时器不得再渲染（连开多箱/提前结束时防串台）
+   let searchTimer = null, openingTimer = null, openingPresentation = null;
+ 
+@@ -373,6 +378,8 @@ import { turboMs, isTurbo } from '../core/turbo.js';
+     cancelPresentation();
+     const K = Object.assign({ resourceOnly: false }, opts || {});
+     G = game;
++    saveContext = { onCell:!!K.onCell, consumeNode:!!K.consumeNode };
++    saveBinding = bindSave(game);
+     queue = chests.map((chest, i) => ({ ...chest, battleSummary: i === 0 ? K.battleSummary || null : null }));
+     idx = 0;
+     onDone = done || null;
+@@ -388,6 +395,8 @@ import { turboMs, isTurbo } from '../core/turbo.js';
+       G.state = 'idle';
+       cur = null;
+       queue = [];   // 开完即清：isOpen 用 queue.length 判终态，残留会恒 true 锁死背包
++      saveContext = null;
++      saveBinding = null;
+       const cb = onDone;
+       onDone = null;
+       if (cb) cb();
+@@ -402,6 +411,7 @@ import { turboMs, isTurbo } from '../core/turbo.js';
+     cur.isClass = !!queue[idx].isClass;
+     cur.battleSummary = queue[idx].battleSummary || null;
+     idx++;
++    persistReward();   // 在揭晓前冻结本箱内容与RNG；刷新不再重掷。
+     renderSearch();
+   }
+ 
+@@ -554,7 +564,7 @@ import { turboMs, isTurbo } from '../core/turbo.js';
+       ${cur.battleSummary ? `<p class="evt-sts-desc battle-loot-summary">本战击败 <b>${cur.battleSummary.defeated}</b> 名敌人 · 剩余生命 <b>${cur.battleSummary.hp}/${cur.battleSummary.maxHp}</b></p>` : ''}
+       ${outcomeHTML}
+       </div><aside class="reward-detail" aria-label="所选卡牌详情">${detailHTML}</aside></div>
+-      <footer class="loot-actions"><div class="reward-capacity">背包 ${G.usedSlots()}/${G.bagCap()} 格 · 已入背包 ${taken.size} 张</div><div class="loot-footer-note" role="status">${cur.notice ? esc(cur.notice) : finished ? '本次领取已结算' : isPick ? '选择 1 张带走；点击卡牌先查看，随后收下' : '点击卡牌先查看，随后收下'}</div>${summary}${leaveWarning}${ops}</footer>
++      <footer class="loot-actions"><div class="reward-capacity">背包 ${G.bagCapacityText?.() || `${G.usedSlots()}/${G.bagCap()} 格`} · 已入背包 ${taken.size} 张</div><div class="loot-footer-note" role="status">${cur.notice ? esc(cur.notice) : finished ? '本次领取已结算' : isPick ? '选择 1 张带走；点击卡牌先查看，随后收下' : '点击卡牌先查看，随后收下'}</div>${summary}${leaveWarning}${ops}</footer>
+       </section>`;
+     const currentBody = UI.el?.ovBody;
+     if (currentBody?.querySelector('.reward-v14')) {
+@@ -587,6 +597,7 @@ import { turboMs, isTurbo } from '../core/turbo.js';
+       if (!card || cur.selected !== i || cur.taken.has(i) || cur.lost.has(i)) return;
+       if (G.grantCard(card, { silent: true })) {   // grantEventCard：同名并入 / 容量判定都在里面（搜刮页自带揭晓，不再叠加获得演出）
+         cur.taken.add(i);
++        persistReward();
+         cur.notice = `「${card.name}」已入本次远征背包`;
+         render();
+       } else { cur.notice = `「${card.name}」当前放不下，整理背包后可重试`; render(); }
+@@ -662,6 +673,7 @@ import { turboMs, isTurbo } from '../core/turbo.js';
+     collectCoinsOnce();
+     if (!cur.cards.length && !cur.coins) UI.log('（空的——早被别的拾荒者搬空了……）', 'dim');
+     cur.notice = `已入背包 ${taken.size} 张${cur.lost.size ? `，放不下散落 ${cur.lost.size} 张` : ''}`;
++    persistReward();
+     render();
+   }
+ 
+@@ -669,6 +681,7 @@ import { turboMs, isTurbo } from '../core/turbo.js';
+     if (!cur || cur.coinsReceived) return;
+     if (cur.coins) G.gainCoins(cur.coins);
+     cur.coinsReceived = true;
++    persistReward();
+   }
+ 
+   // 挂起/恢复（2026-09-09 留言 #13）：搜刮界面允许打开背包——
+@@ -683,12 +696,26 @@ import { turboMs, isTurbo } from '../core/turbo.js';
+     cancelPresentation();
+     if (cur) render();
+   }
++  function serialize(game) {
++    if (G !== game || !saveBinding || saveBinding.seed !== game.seed || saveBinding.layerIdx !== game.layerIdx || saveBinding.trackPos !== game.trackPos
++      || saveBinding.runToken !== game.discoveredPairs) return null;
++    return serializeChestReward(game, queue, idx, cur, saveContext);
++  }
++  function restore(game, saved, done) {
++    const value = restoreChestReward(game, saved);
++    if (!value) return false;
++    cancelPresentation(); searchSeq++;
++    G = game; queue = value.queue; idx = value.index; cur = value.current;
++    saveContext = value.context; onDone = done; G.state = 'modal';
++    saveBinding = bindSave(game);
++    render(); persistReward(); return true;
++  }
+   const cancelOnModeChange = event => { if (event.detail !== 'chest') { cancelPresentation(); searchSeq++; } };
+   if (typeof document !== 'undefined') document.addEventListener('sdt-overlay-mode', cancelOnModeChange);
+   if (import.meta.hot) import.meta.hot.dispose(() => {
+     cancelPresentation();
+     if (typeof document !== 'undefined') document.removeEventListener('sdt-overlay-mode', cancelOnModeChange);
+   });
+-  sdtDefine('Chests', { rollDrops, dropText, open, rollContents, configureFrameArt, isOpen: () => !!(cur || queue.length), suspend, resume });
++  sdtDefine('Chests', { rollDrops, dropText, open, rollContents, configureFrameArt, isOpen: () => !!(cur || queue.length), suspend, resume, serialize, restore });
+ 
+ export { SDT };
+diff --git a/game/src/run/chest-reward-save.js b/game/src/run/chest-reward-save.js
+new file mode 100644
+--- /dev/null
++++ b/game/src/run/chest-reward-save.js
+@@ -0,0 +1,19 @@
++// 只保存局内宝箱奖励；页面的回调与动效不进入存档。
++export function serializeChestReward(game, queue, index, current, context) {
++  if (!context?.onCell || !current || !queue.length) return null;
++  return JSON.parse(JSON.stringify({ version:1, seed:game.seed, layerIdx:game.layerIdx, trackPos:game.trackPos,
++    queue, index, context, current:{ ...current, taken:[...(current.taken || [])], lost:[...(current.lost || [])] } }));
++}
++export function restoreChestReward(game, saved) {
++  if (!saved || saved.version !== 1 || saved.seed !== game.seed || saved.layerIdx !== game.layerIdx || saved.trackPos !== game.trackPos
++    || !saved.context?.onCell || !Array.isArray(saved.queue) || saved.queue.some(q => !q || !['small','medium','large','class','boss'].includes(q.kind))
++    || !Number.isInteger(saved.index) || saved.index < 1 || saved.index > saved.queue.length) return null;
++  const c = saved.current;
++  if (!c || !['small','medium','large','class','boss'].includes(c.kind) || !Array.isArray(c.cards) || c.cards.some(card => !card || typeof card.name !== 'string')
++    || !Number.isFinite(c.coins) || c.coins < 0 || typeof c.coinsReceived !== 'boolean') return null;
++  const validIndices = list => Array.isArray(list) && list.every(i => Number.isInteger(i) && i >= 0 && i < c.cards.length);
++  if (!validIndices(c.taken) || !validIndices(c.lost) || c.taken.some(i => c.lost.includes(i))) return null;
++  const copy = JSON.parse(JSON.stringify(saved));
++  copy.current.taken = new Set(copy.current.taken); copy.current.lost = new Set(copy.current.lost);
++  return copy;
++}
+diff --git a/game/src/hub/run-save-validation.js b/game/src/hub/run-save-validation.js
+index 5315cad1..c7427bc8 100644
+--- a/game/src/hub/run-save-validation.js
++++ b/game/src/hub/run-save-validation.js
+@@ -1,4 +1,5 @@
+ // 只校验恢复消费者的结构前提；不查卡库、不修剪资产、不改变标量默认。
++import { restoreChestReward } from '../run/chest-reward-save.js';
+ const record = value => value !== null && typeof value === 'object' &&
+   (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null);
+ const bad = path => ({ ok: false, code: 'INVALID_RUN_STRUCTURE', message: `对局存档字段 ${path} 结构无效`, preserveRun: true });
+@@ -32,6 +33,7 @@ function runFields(data, prefix = '', checkpoint = false) {
+   for (const key of ['visited', 'seen', 'shopStocks']) {
+     if (data[key] != null && !record(data[key])) return bad(prefix + key);
+   }
++  if (!checkpoint && data.chestReward != null && !restoreChestReward(data, data.chestReward)) return bad(prefix + 'chestReward');
+   for (const [key, stock] of Object.entries(data.shopStocks || {})) {
+     const issue = arrayField(stock, `${prefix}shopStocks.${key}`, shopItem);
+     if (issue) return issue;
+diff --git a/game/src/run/game.session.js b/game/src/run/game.session.js
+index 4f2eec3c..399f7d29 100644
+--- a/game/src/run/game.session.js
++++ b/game/src/run/game.session.js
+@@ -170,6 +170,7 @@ function createRunSavePayload() {
+     bossPlan: (game.bossPlan == null ? null : game.bossPlan),   // 本层首脑预案（进层 roll 一次存全层，2026-09-13 老板拍板）
+     altarItemSacrificed: !!game.altarItemSacrificed,   // 第四层祭坛道具献祭一次性锁（2026-09-19 老板定版）
+     shopStocks: game.shopStocks || {},   // 各商店货架（按格子/门持久，防关门重刷，2026-09-19 审计 D-1）
++    chestReward: SDT.Chests?.serialize?.(game) || null,
+     elapsed: game.elapsed,
+     slot: activeSlot, savedAt: Date.now(),
+     // 战斗中退出/关窗（beforeunload）：只写战斗入场检查点；读档从本场战斗开头重开
+@@ -389,6 +390,9 @@ function restoreGame(slot) {
+   SDT.Sound.music('board');
+   UI.log(`[[icon:download]] 已读取【档位 ${slot}】存档`, 'ok');
+   if (!game.myClass) runtime.openClassChoice();   // 上次存档时还没选职业：补上开局选择
++  else if (s.chestReward && runtime.resumeChestsOnCell?.(s.chestReward)) {
++    UI.log('[[icon:archive]] 已恢复揭晓的宝箱奖励，内容与已领取进度不变', 'ok');
++  }
+   else if (s.battle && SDT.Battle && typeof SDT.Battle.restore === 'function') {
+     if (SDT.Battle.restore(game, s.battle)) {
+       // 读档恢复的战斗没经过 resolveCell：本格按已触发处理，撤退/胜利后不重复触发
+diff --git a/game/src/run/game.session.kernel.js b/game/src/run/game.session.kernel.js
+index 3971716f..a7c2a9ce 100644
+--- a/game/src/run/game.session.kernel.js
++++ b/game/src/run/game.session.kernel.js
+@@ -25,6 +25,7 @@ export const runtime = {
+   showRunTransition: async () => {},
+   syncDevVisibility: () => {},
+   resumeExtraction: () => ({ ok: false, code: 'EXTRACTION_UNAVAILABLE', message: '撤离整理界面尚未就绪' }),
++  resumeChestsOnCell: /** @type {(saved: unknown) => boolean} */ (() => false),
+   log: () => {},
+ };
+ 
+diff --git a/game/src/run/game.run.js b/game/src/run/game.run.js
+index 41d009ab..6bd420d9 100644
+--- a/game/src/run/game.run.js
++++ b/game/src/run/game.run.js
+@@ -1,6 +1,6 @@
+ /* 局内流程薄装配壳：保持公共导出稳定，具体流程按依赖方向落在 scenes/altar/flow/dev。 */
+ import { game } from './game.session.js';
+-import { grantEventCard, openShop, showRunTransition } from './game.run.scenes.js';
++import { grantEventCard, openShop, showRunTransition, resumeChestsOnCell } from './game.run.scenes.js';
+ import { openClassChoice } from './game.run.altar.js';
+ import { moveTo, reenterCell } from './game.run.flow.js';
+ import {
+@@ -19,4 +19,4 @@ function devForceBattle(...args) { return devForceBattleImpl(...args); }
+ function devJumpNode(...args) { return devJumpNodeImpl(...args); }
+ function openDevConsole(...args) { return openDevConsoleImpl(...args); }
+ 
+-export { bindRunMixins, moveTo, reenterCell, openClassChoice, openShop, showRunTransition, devForceBattle, devJumpNode, openDevConsole };
++export { bindRunMixins, moveTo, reenterCell, openClassChoice, openShop, showRunTransition, resumeChestsOnCell, devForceBattle, devJumpNode, openDevConsole };
+diff --git a/game/src/game.boot.js b/game/src/game.boot.js
+index a079f19a..8984074a 100644
+--- a/game/src/game.boot.js
++++ b/game/src/game.boot.js
+@@ -4,7 +4,7 @@ const SDT = window.SDT;
+ import { TYPE_NAME } from './hub/game.notes.js';
+ import { MAP } from './run/game.session.js';
+ import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, game, hasRun, migrateOldSave, openLeaveMenu, openSettings, openTitleGuide, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './run/game.session.js';
+-import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openDevConsole, reenterCell, openClassChoice, openShop, showRunTransition } from './run/game.run.js';
++import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openDevConsole, reenterCell, openClassChoice, openShop, showRunTransition, resumeChestsOnCell } from './run/game.run.js';
+ import { PRELOAD_SCENES } from './run/game.run.data.js';
+ import { resumeExtraction } from './run/game.run.altar.js';
+ import { PERFORMANCE_BUDGETS, STARTUP_SCENE_KEYS } from './core/performance-budgets.js';
+@@ -28,7 +28,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，
+   configureGameRuntime({
+     ...createGameCanvas(document),
+     log: (message, kind) => UI.log(message, kind),
+-    openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition, syncDevVisibility, resumeExtraction,
++    openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition, syncDevVisibility, resumeExtraction, resumeChestsOnCell,
+   });
+   configureShopRuntime({ openBag: (onReturn) => {
+     setBagReturnHook(onReturn);
+diff --git a/game/src/run/game.session.bag.js b/game/src/run/game.session.bag.js
+index ea844c17..88a4e217 100644
+--- a/game/src/run/game.session.bag.js
++++ b/game/src/run/game.session.bag.js
+@@ -15,6 +15,10 @@ export const PEARL_BOX_ID = 'tt2-pearlbox';
+ const PEARL_BOX_SLOTS = 9;
+ const pearlBonus = () => (game.ownedCards || []).filter(o => o.card && o.card.id === PEARL_BOX_ID).length * PEARL_BOX_SLOTS;
+ export const bagCap = () => SDT.Base.bagCap() + pearlBonus();
++export function bagCapacityText() {
++  const base = SDT.Base.bagCap(), extra = pearlBonus(), used = usedSlots();
++  return extra ? `通用格 ${Math.min(used, base)}/${base} · 资源专用格 ${Math.max(0, used - base)}/${extra}` : `${used}/${base} 格`;
++}
+ // 背包能否再收一张卡：基础格内任意类型；珍珠盒扩出来的格子仅资源卡（卡面「容纳所有类型的资源卡牌」）
+ export const canAcceptCard = (card) => {
+   if (!card) return false;
+@@ -72,6 +76,7 @@ export function assertZones() {
+ }
+ 
+ game.bagCap = bagCap;
++game.bagCapacityText = bagCapacityText;
+ game.canAcceptCard = canAcceptCard;   // 珍珠盒扩格的资源限制（Q5）
+ game.stackCapOf = stackCapOf;
+ game.safeCap = safeCap;
+diff --git a/game/src/hub/game.bag.js b/game/src/hub/game.bag.js
+index 38374d20..0aee8ff0 100644
+--- a/game/src/hub/game.bag.js
++++ b/game/src/hub/game.bag.js
+@@ -667,7 +667,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
+       </header>
+       <div class="bag-layout">
+         <section class="bag-main" aria-label="随身背包">
+-          <h3 class="set-h">随身背包 <span class="set-tip">${usedSlots()}/${cap} 格</span>
++          <h3 class="set-h">随身背包 <span class="set-tip">${game.bagCapacityText?.() || `${usedSlots()}/${cap} 格`}</span>
+             <span class="bag-sort">
+               <button class="mini-btn" data-act="bagSortRarity" title="按稀有度从高到低排序（同稀有度按种类）">按稀有度</button>
+               <button class="mini-btn" data-act="bagSortType" title="按种类排序（同种类按稀有度）">按种类</button>
+diff --git a/game/src/audio/sound.music.player.js b/game/src/audio/sound.music.player.js
+index 01f1d353..79062925 100644
+--- a/game/src/audio/sound.music.player.js
++++ b/game/src/audio/sound.music.player.js
+@@ -38,25 +38,42 @@ export class SceneMusicPlayer {
+     if (!entry) {
+       entry = { scene, token: 0, timer: null, track: null, loading: false, starting: false };
+       this.entries.set(scene, entry);
+-      entry.track = this.createTrack(scene, {
++      entry.generation = 0;
++      const create = (html5 = false) => {
++        const generation = ++entry.generation;
++        const current = () => entry.generation === generation && this.entries.get(scene) === entry;
++        const callbacks = {
+         load: () => {
++          if (!current()) return;
+           entry.loading = false;
+-          if (this.entries.get(scene) !== entry) return;
+           if (this.desired === scene && this.enabled) this.activate(entry);
+           else this.release(entry);
+         },
+         error: (_, error) => {
++          if (!current()) return;
+           entry.loading = false;
++          // 解码失败只切换一次浏览器媒体通道；404/403等网络错误保留原错误处理。
++          if (!html5 && /decod/i.test(String(error)) && this.enabled && this.desired === scene) {
++            entry.track.unload();
++            entry.track = create(true);
++            entry.loading = true;
++            entry.track.load();
++            return;
++          }
+           this.onError(scene, error);
+           // Keep the previous valid track audible if the next file fails to load.
+           if (this.current !== entry) this.release(entry);
+         },
+-        play: () => { entry.starting = false; },
+-        playError: () => { entry.starting = false; },
++        play: () => { if (current()) entry.starting = false; },
++        playError: () => { if (current()) entry.starting = false; },
+         unlock: () => {
++          if (!current()) return;
+           if (!entry.track.playing() && !entry.starting) this.activate(entry);
+         },
+-      });
++        };
++        return html5 ? this.createTrack(scene, callbacks, { html5:true }) : this.createTrack(scene, callbacks);
++      };
++      entry.track = create();
+     }
+     if (entry.track.state() === 'unloaded') {
+       if (!entry.loading) { entry.loading = true; entry.track.load(); }
+diff --git a/game/src/audio/sound.js b/game/src/audio/sound.js
+index 4793a810..bdd1112a 100644
+--- a/game/src/audio/sound.js
++++ b/game/src/audio/sound.js
+@@ -427,8 +427,8 @@ import { SceneMusicPlayer } from './sound.music.player.js';
+   let sceneTone = null;
+   let battleBossId = '';
+   let userGestured = false;
+-  const musicPlayer = new SceneMusicPlayer((scene, callbacks) => new Howl({
+-    src: [MUSIC_TRACKS[scene]], format: ['opus'], loop: true, html5: false,
++  const musicPlayer = new SceneMusicPlayer((scene, callbacks, { html5 = false } = {}) => new Howl({
++    src: [MUSIC_TRACKS[scene]], format: ['opus'], loop: true, html5,
+     preload: false, volume: 0, onload: callbacks.load, onloaderror: callbacks.error,
+     onplay: callbacks.play, onplayerror: callbacks.playError, onunlock: callbacks.unlock,
+   }), { onError: (scene, error) => console.warn('[music] load failed', scene, error) });
+diff --git a/tests/four-player-event-regressions.test.js b/tests/four-player-event-regressions.test.js
+new file mode 100644
+--- /dev/null
++++ b/tests/four-player-event-regressions.test.js
+@@ -0,0 +1,122 @@
++// 四线试玩修复：复用 WORLD 组会话桩，使用真实UI壳、动效包装器和返回钩子。
++import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
++
++const H = globalThis.__worldRegress = { game: {}, saves: [], cards: [], uid: 0 };
++vi.mock('../game/src/run/game.session.js', () => ({
++  game: H.game, MAP: { rules: { fireHeal: 10, fireClassCardChance: 1 }, monsters: {}, altar: { bosses: [] } }, MODES: {},
++  bagCap: () => 9, usedSlots: () => 0, newUid: () => `u${++H.uid}`, pick: a => a[0],
++  saveGame: () => { H.saves.push(JSON.parse(JSON.stringify(H.game))); return true; },
++  scaledEnemy: a => a, getActiveSlot: () => null, curLayer: () => H.game.layerData[H.game.layerIdx],
++  cellCenter: () => ({}), markSeen() {}, modeCfg: () => ({}), gainCoins: n => H.game.coins += n,
++  weighted: a => a[0], enterLayer() {}, exitToTitle() {},
++}));
++vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { tick() {}, ding() {} }, _set_cardPageOpen() {}, cardHTML: c => `<span>${c.name}</span>` }));
++vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub() {} }));
++vi.mock('../game/src/battle/battle-loader.js', () => ({ startBattle() {}, ensureBattleReady: async () => {}, captureBattleContext: () => () => true }));
++vi.mock('../game/src/hub/extraction.commands.js', () => ({ createExtractionCommands: () => ({}), validatePendingExtraction: () => ({ ok: true }) }));
++vi.mock('../game/src/hub/recovery.commands.js', () => ({ commitBaseAndRun() {}, readSettlementReceipt() {}, recoverSlot() {} }));
++vi.mock('../game/src/home/story.commands.js', () => ({ storyCommands: {} }));
++vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative: async () => null, lastLampNarrative: async () => null }));
++
++let scenes, flow, UI, takeBagReturnHook, setBagReturnHook;
++beforeAll(async () => {
++  window.SDT = { Icons: { rich: x => x }, Sound: { sfx() {} }, Meta: { track() {}, addXpToProgress() {} }, Base: {},
++    Cards: { all: () => H.cards, isRandomObtainable: () => true, randomClassCard: () => H.cards[0], cardHTML: c => `<span>${c.name}</span>` } };
++  const { overlayMethods } = await import('../game/src/ui/overlay.js');
++  UI = window.SDT.UI = { ...overlayMethods, _acts: {}, _baseActs: {}, _roomActive: true, el: {},
++    act: (name, fn) => UI._acts[name] = fn, refresh() {}, log() {}, showCardReward() {}, _checkPageBg() {},
++  };
++  ({ takeBagReturnHook, setBagReturnHook } = await import('../game/src/hub/bag-return-hook.js'));
++  scenes = await import('../game/src/run/game.run.scenes.js');
++  flow = await import('../game/src/run/game.run.flow.js');
++});
++beforeEach(() => {
++  document.body.innerHTML = '<div id="overlay" hidden><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
++  UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
++  UI._acts = {}; UI._overlayInerted = []; UI._lastMode = null; UI._hideTimer = null; UI._roomActive = true; setBagReturnHook(null);
++  H.cards = [{ id: 'reward', name: '奖励牌', rarity: '职业', type: '武术' }]; H.saves = []; H.uid = 0;
++  Object.assign(H.game, { state: 'idle', layerIdx: 0, trackPos: 1, hp: 1, maxHp: 35, visited: {}, ownedCards: [], usedPocket: [], myClass: '武', runActive: true, coins: 9,
++    layerData: [{ logical: [{ def: { type: 'entrance' } }, { def: { type: 'fire' } }] }],
++    canReceiveCard: () => true, heal: n => H.game.hp = Math.min(H.game.maxHp, H.game.hp + n),
++  });
++});
++// 镜像 game.bag.js closeBackpack 的非宝箱分支：真实 hideOverlay + 真实返回钩子
++function closeCoveredBag() {
++  UI.hideOverlay(); const hook = takeBagReturnHook(); if (hook) hook(); else H.game.state = 'idle';
++}
++beforeEach(async () => {
++  vi.useFakeTimers();
++  vi.resetModules();
++  await import('../game/src/ui/interface-motion.js');
++});
++afterEach(() => { UI.hideOverlay({ immediate: true }); vi.clearAllTimers(); vi.useRealTimers(); });
++
++describe('四线试玩 P1 事件生命周期', () => {
++  it('G04 房间结算回地图重置视口滚动，不滚动其他阅读区', () => {
++    const viewport = document.createElement('div'); viewport.id = 'viewport';
++    document.body.append(viewport); viewport.append(UI.el.overlay);
++    const reading = document.createElement('section'); viewport.append(reading);
++    viewport.scrollTop=104; viewport.scrollLeft=16; reading.scrollTop=40;
++    UI.beginRoom(); UI.endRoom();
++    expect(viewport.scrollTop).toBe(0); expect(viewport.scrollLeft).toBe(0);expect(reading.scrollTop).toBe(40);
++  });
++  it('旧房间延迟关闭后先登记再渲染，新复原页卡片和继续动作可用', async () => {
++    const done = vi.fn();
++    H.game.usedPocket = [{ card: { id:'restore', name:'复原样本', type:'武术' }, count:2 }];
++    UI.showOverlay('旧页', '<main>旧页</main>', 'page');
++    UI.act('old', vi.fn());
++    UI.hideOverlay();
++    expect(UI._acts.old).toBeUndefined();
++    scenes.openPocketRestore(3, done);
++    expect(UI._acts.restoreOne).toBeTypeOf('function');
++    UI._acts.restoreOne({ name:'复原样本' });
++    expect(H.game.ownedCards).toHaveLength(1);
++    closeCoveredBag();
++    UI._acts.restoreOne({ name:'复原样本' });
++    expect(H.game.ownedCards).toHaveLength(2);
++    UI._acts.fireDone();
++    expect(done).toHaveBeenCalledTimes(1);
++    expect(takeBagReturnHook()).toBeNull();
++    await vi.advanceTimersByTimeAsync(200);
++    expect(UI.el.overlay.hidden).toBe(true);
++  });
++  it('延迟关闭切献祭预览，取消动作不会失联或被旧定时器清掉', async () => {
++    const cancel = vi.fn();
++    UI.showOverlay('旧页', '<main>旧页</main>', 'page'); UI.hideOverlay();
++    UI.act('sacCancel', cancel);
++    UI.showOverlay('献祭预览', '<button data-act="sacCancel">取消</button>', 'page');
++    await vi.advanceTimersByTimeAsync(200);
++    expect(UI.el.overlay.hidden).toBe(false);
++    UI._acts.sacCancel();
++    expect(cancel).toHaveBeenCalledTimes(1);
++  });
++  it('药摊领取前背包返回保留候选，领取后不重开或再次发奖', async () => {
++    H.cards = [{ id:'ev19-potions', name:'药摊', type:'事件' }, ...[1,2,3].map(n => ({ id:`p${n}`, name:`药水${n}`, type:'道具', rarity:'普通' }))];
++    H.game.layerData[0].logical[1].def.type = 'event';
++    const opening = flow.runEventDeck();
++    await vi.advanceTimersByTimeAsync(1000);
++    await opening;
++    UI._acts.evtChoice({ i:'0' });
++    const before = UI.el.ovBody.textContent;
++    closeCoveredBag();
++    expect(UI.el.ovBody.textContent).toBe(before);
++    UI._acts.eventCardPick({ i:'0' });
++    expect(H.game.ownedCards).toHaveLength(1);
++    expect(takeBagReturnHook()).toBeNull();
++    closeCoveredBag();
++    await vi.advanceTimersByTimeAsync(200);
++    expect(H.game.ownedCards).toHaveLength(1);
++    expect(H.game.state).toBe('idle');
++    expect(UI.el.ovBody.querySelector('[data-act="eventCardPick"]')).toBeNull();
++  });
++  it('G07 资源专用空格不允许复原新普通牌，同名叠放仍可复原', () => {
++    const card = { id:'restore-full', name:'容量样本', type:'武术' };
++    H.game.usedPocket = [{ card, count:1 }];
++    H.game.canReceiveCard = () => false;
++    scenes.openPocketRestore(1, () => {});
++    UI._acts.restoreOne({ name:card.name });
++    expect(H.game.usedPocket[0].count).toBe(1);expect(H.game.ownedCards).toHaveLength(0);
++    H.game.canReceiveCard = () => true;UI._acts.restoreOne({ name:card.name });
++    expect(H.game.ownedCards).toHaveLength(1);expect(H.game.usedPocket).toHaveLength(0);
++  });
++});
+diff --git a/tests/four-player-battle-regressions.test.js b/tests/four-player-battle-regressions.test.js
+new file mode 100644
+--- /dev/null
++++ b/tests/four-player-battle-regressions.test.js
+@@ -0,0 +1,47 @@
++import { describe, expect, it } from 'vitest';
++window.SDT = { Icons: { img: () => '', TYPE_ART: {} }, Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
++  MAP: { rules: { battleEnergy: 7, battleHandMax:99, bossDeckSize:1, starterSha:0, battleStartDraw:5, battleTurnDraw:1 }, items: { rations:{ name:'口粮' }, wood:{ name:'木材' } } } };
++await import('../game/src/cards/cards.js');
++const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
++const { set$extraTurn, applyRuneFlag } = await import('../game/src/battle/runtime/battle.runtime.effects.js');
++const Cards = window.SDT.Cards;
++Cards.ensureSha(); Cards.ensureStarters(); Cards.ensureTabletop(); Cards.ensureDmgTypes(); Cards.ensureEffectFields();
++const guard = Cards.all().find(c => c.id === 'tt2-block');
++function start() {
++  const game = { ownedCards:[{ uid:'guard', card:guard }], inventory:[], usedPocket:[], cardOrder:['guard'], hp:50, maxHp:50, atk:5, spellPower:0, coins:0,
++    myClass:'战士', state:'idle', battleActive:false, log() {}, heal() {}, onBattleEnd() {} };
++  BattleSession.start(game, [{ id:'target', name:'靶子', hp:100, atk:8 }], { isBoss:false, name:'回合到期验证' });
++  return game;
++}
++async function drain() {
++  for (let n = 0; n < 200; n++) {
++    await new Promise(r => setTimeout(r, 0));
++    const s = BattleSession.getSnapshot();
++    if (!s.busy && s.actionQueueLength === 0) {
++      await new Promise(r => setTimeout(r, 30));
++      const next = BattleSession.getSnapshot();
++      if (!next.busy && next.actionQueueLength === 0) return next;
++    }
++  }
++  throw new Error('回合未完成');
++}
++describe('四线试玩 G11 格挡到期', () => {
++  it('施放回合减伤到1，下一回合未格挡按8点正常受击', async () => {
++    const g = start();
++    BattleSession.commands.playCard('guard', 'self'); await drain();
++    expect(BattleSession.getSnapshot().pdef.guard).toBe(true);
++    BattleSession.commands.endTurn(); const s = await drain();
++    expect(g.hp).toBe(49); expect(s.pdef.guard).toBe(false); expect(s.turn).toBe(2);
++    BattleSession.commands.endTurn(); await drain(); expect(g.hp).toBe(41);
++  });
++  it('额外回合开始时格挡到期', async () => {
++    const g = start(); BattleSession.commands.playCard('guard', 'self'); await drain();
++    set$extraTurn(true); BattleSession.commands.endTurn(); const s = await drain();
++    expect(g.hp).toBe(50); expect(s.turn).toBe(2); expect(s.pdef.guard).toBe(false);
++  });
++  it('时光符文不把本回合格挡延到新回合', async () => {
++    start(); BattleSession.commands.playCard('guard', 'self'); await drain();
++    applyRuneFlag('time'); BattleSession.commands.endTurn(); const s = await drain();
++    expect(s.pdef.guard).toBe(false);
++  });
++});
+diff --git a/tests/four-player-semantics-regressions.test.js b/tests/four-player-semantics-regressions.test.js
+new file mode 100644
+--- /dev/null
++++ b/tests/four-player-semantics-regressions.test.js
+@@ -0,0 +1,64 @@
++import { describe, expect, it } from 'vitest';
++window.SDT = { Icons:{ img:()=>'', TYPE_ART:{} }, Sound:{music(){},sfx(){},setDucked(){},setBoss(){}},
++  MAP:{rules:{battleEnergy:9,battleHandMax:99,bossDeckSize:1,starterSha:5,battleStartDraw:99,battleTurnDraw:1},items:{rations:{name:'口粮'},wood:{name:'木材'}}} };
++await import('../game/src/cards/cards.js');
++const { BattleSession, findCard, effCostOf } = await import('../game/src/battle/core/battle.core.js');
++const { set$grave, set$consumed } = await import('../game/src/battle/runtime/battle.runtime.piles.js');
++const { displayCardDescription } = await import('../game/src/cards/card-description-text.js');
++const C = window.SDT.Cards;
++C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields();
++const byId = id => C.all().find(c=>c.id===id);
++const byName = name => C.all().find(c=>c.name===name);
++const gameFor = cards => ({ ownedCards:cards.map((card,i)=>({uid:'u'+i,card})),inventory:[],usedPocket:[],hp:50,maxHp:50,atk:7,spellPower:0,coins:0,state:'idle',battleActive:false,myClass:'战士',log(){},heal(){},onBattleEnd(){} });
++async function drain(){for(let n=0;n<200;n++){await new Promise(r=>setTimeout(r,0));const s=BattleSession.getSnapshot();if(!s.busy&&s.actionQueueLength===0){await new Promise(r=>setTimeout(r,30));const f=BattleSession.getSnapshot();if(!f.busy&&f.actionQueueLength===0)return f;}}throw Error('动作未收口');}
++describe('四线试玩 G05 原目标附加',()=>{
++  it.each(['诅咒之刃','霜月斩','冰刺'])('%s击杀后不把诅咒转给旁人',async name=>{
++    const g=gameFor([byName(name),byId('tt3-venom-arrow')]);
++    BattleSession.start(g,[{id:'kill',name:'原目标',hp:1,atk:4},{id:'other',name:'旁人',hp:30,atk:4}],{isBoss:false});
++    BattleSession.commands.playCard('u0',0);const s=await drain();
++    expect(s.foes[0].dead).toBe(true);expect(s.foes[1].atk).toBe(4);
++    for(const key of ['freeze','bleed','poison','healban','atkDown'])expect(s.foes[1].status[key]||0).toBe(0);
++  });
++  it('原目标存活时仍正常附加冰冻及禁疗',async()=>{
++    const g=gameFor([byName('霜月斩')]);BattleSession.start(g,[{id:'live',name:'原目标',hp:100,atk:4},{id:'other',name:'旁人',hp:100,atk:4}],{isBoss:false});
++    BattleSession.commands.playCard('u0',0);const s=await drain();
++    expect(s.foes[0].status.freeze).toBeGreaterThan(0);expect(s.foes[0].status.healban).toBeGreaterThan(0);expect(s.foes[1].status.freeze||0).toBe(0);
++  });
++});
++describe('四线试玩 G08 首脑固定补给',()=>{
++  it('龙巢牌盒入口保留自身牌库，不附加首脑补给',async()=>{
++    const g=gameFor([byId('tt3-longsword')]);
++    BattleSession.start(g,[{id:'nest',name:'龙巢',hp:100,atk:1}],{isBoss:true,nest:true});
++    const s=await drain();expect(s.hand).toHaveLength(1);expect(s.hand.map(uid=>findCard(uid).card).filter(c=>c.id===C.SHA.id)).toHaveLength(0);
++  });
++  it.each([0,2,5,7])('背包剩%s张初始攻击，首脑仍恰有5张且补给不入背包',async n=>{
++    const g=gameFor([byId('tt3-longsword'),...Array.from({length:n},()=>C.SHA)]);
++    BattleSession.start(g,[{id:'boss',name:'首脑',hp:100,atk:1}],{isBoss:true});
++    expect(BattleSession.getSnapshot().deckSelection.starterCount).toBe(5);
++    if (!BattleSession.getSnapshot().deckSelection.selected.includes('u0')) BattleSession.commands.selectDeckCard('u0');
++    BattleSession.commands.confirmDeck();const s=await drain();
++    expect(s.hand.map(uid=>findCard(uid).card).filter(c=>c.id===C.SHA.id)).toHaveLength(5);
++    expect(g.ownedCards).toHaveLength(n+1);expect(g.usedPocket).toHaveLength(0);
++  });
++});
++it('G06 长剑确认并释放气功波后目标提示已清除',async()=>{
++  const g=gameFor([byId('tt3-longsword'),byId('tt3-qi-wave')]);
++  BattleSession.start(g,[{id:'live',name:'靶子',hp:100,atk:1}],{isBoss:false});
++  BattleSession.commands.playCard('u0');expect(BattleSession.getSnapshot().pendingTarget?.card.name).toBe('长剑');
++  BattleSession.commands.playCard('u0','self');await drain();BattleSession.commands.playCard('u1',0);const s=await drain();
++  expect(s.pendingHint).toBe('');expect(s.pendingTarget).toBeNull();
++});
++it('G12 后备能源可读描述明确限定本场消耗',()=>{
++  const c=byId('tt12-backupcell');const text=displayCardDescription(c.desc,c.id);
++  expect(text).toContain('本场战斗');expect(text).toContain('不计之前战斗');
++});
++it('G12 之前口袋和单独墓地不降费；本场消耗法术降费，下一场清零',()=>{
++  const c=byId('tt12-backupcell'),spell=byId('tt3-ice-spike'),g=gameFor([c,spell]);
++  g.usedPocket=[{card:spell,count:17}];
++  const begin=()=>BattleSession.start(g,[{id:'fee',name:'费用靶子',hp:100,atk:1}],{isBoss:false});
++  begin();expect(effCostOf(c,'u0')).toBe(6);
++  // 受控牌区构造；真实注能链由tt12-structured-battle覆盖。
++  set$grave(['u1']);expect(effCostOf(c,'u0')).toBe(6);
++  set$consumed(['u1']);expect(effCostOf(c,'u0')).toBe(5);
++  begin();expect(effCostOf(c,'u0')).toBe(6);
++});
+diff --git a/tests/four-player-chest-reload.test.js b/tests/four-player-chest-reload.test.js
+new file mode 100644
+--- /dev/null
++++ b/tests/four-player-chest-reload.test.js
+@@ -0,0 +1,45 @@
++import { afterEach, describe, expect, it, vi } from 'vitest';
++import { serializeChestReward, restoreChestReward } from '../game/src/run/chest-reward-save.js';
++import { validateRunSave } from '../game/src/hub/run-save-validation.js';
++afterEach(()=>{vi.useRealTimers();delete window.SDT;document.body.innerHTML='';});
++describe('G03 揭晓宝箱持久化',()=>{
++  it('揭晓未领、部分领取、收金币的快照可复原，进度不重置',()=>{
++    const game={seed:17,layerIdx:1,trackPos:2};
++    const cur={kind:'small',cards:[{id:'a',name:'法力药水'},{id:'b',name:'法杖'}],coins:2,coinsReceived:false,taken:new Set(),lost:new Set()};
++    const pack=()=>serializeChestReward(game,[{kind:'small'}],1,cur,{onCell:true,consumeNode:true});
++    let saved=pack();expect(restoreChestReward(game,saved).current.cards).toEqual(cur.cards);
++    expect(validateRunSave({ ...game, chestReward:saved }).ok).toBe(true);
++    cur.taken.add(0);cur.coinsReceived=true;saved=pack();
++    const restored=restoreChestReward(game,saved);expect([...restored.current.taken]).toEqual([0]);expect(restored.current.coinsReceived).toBe(true);
++    expect(restoreChestReward({...game,trackPos:3},saved)).toBeNull();
++    saved.current.lost=[0];expect(restoreChestReward(game,saved)).toBeNull();
++    expect(validateRunSave({ ...game, chestReward:saved })).toMatchObject({ok:false,preserveRun:true});
++  });
++  it('恢复真实开箱控制器沿用已展示奖励，不重抽或重复领取',async()=>{
++    vi.resetModules();vi.useFakeTimers();
++    document.body.innerHTML='<div id="overlay"><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
++    const body=document.getElementById('ovBody'),overlay=document.getElementById('overlay'),acts={};
++    const original={id:'a',name:'原奖励',type:'法术',rarity:'古朴',cost:0,desc:'原奖励规则'};
++    const alternate={...original,id:'b',name:'重抽奖励'};
++    const draw=vi.fn(()=>original);
++    window.SDT={UI:{el:{overlay,ovBody:body,ovTitle:document.getElementById('ovTitle')},showOverlay(t,h){body.innerHTML=h;overlay.hidden=false;},hideOverlay(){overlay.hidden=true;},act(n,f){acts[n]=f;},refresh(){},log(){}},
++      MAP:{chestKinds:{small:{name:'小宝箱',cards:1,coins:[2,2]}}},Cards:{RARITIES:['古朴','稀有','史诗','传说'],all:()=>[original],randomDropCard:draw,pickOfRarity:()=>original,classPool:()=>[],rarityOf:c=>c.rarity,sellPrice:()=>1,cardHTML:c=>'<div>'+c.name+'</div>'},
++      Base:{data:{eggPity:0,eggBattles:0},save(){},petEggDropChance:()=>0,recordPetEggChestResult(){},bagCap:()=>16,isSha:()=>false},Sound:{sfx(){}},Icons:{rich:h=>h}};
++    await import('../game/src/run/chests.js');
++    const Chests=window.SDT.Chests;
++    const game={seed:17,layerIdx:0,trackPos:1,state:'idle',ownedCards:[],myClass:'',usedSlots:()=>0,bagCap:()=>16,canReceiveCard:()=>true,
++      grantCard:vi.fn(()=>true),gainCoins:vi.fn(),persistSave:vi.fn()};
++    Chests.open(game,[{kind:'small'}],()=>{},{onCell:true,consumeNode:true});
++    const saved=JSON.parse(JSON.stringify(Chests.serialize(game)));
++    expect(saved.current.cards[0].name).toBe('原奖励');expect(game.persistSave).toHaveBeenCalled();
++    draw.mockImplementation(()=>alternate);const calls=draw.mock.calls.length;
++    expect(Chests.restore(game,saved,()=>{})).toBe(true);expect(draw).toHaveBeenCalledTimes(calls);
++    expect(body.textContent).toContain('原奖励');expect(body.textContent).not.toContain('重抽奖励');
++    acts.chestSelect({i:0});acts.chestTake1({i:0});expect(game.grantCard).toHaveBeenCalledTimes(1);
++    const taken=JSON.parse(JSON.stringify(Chests.serialize(game)));
++    game.seed=18;expect(Chests.serialize(game)).toBeNull();game.seed=17;
++    game.discoveredPairs=new Set();expect(Chests.serialize(game)).toBeNull();game.discoveredPairs=undefined;
++    Chests.restore(game,taken,()=>{});acts.chestTake1({i:0});expect(game.grantCard).toHaveBeenCalledTimes(1);
++    acts.chestContinue();expect(game.gainCoins).toHaveBeenCalledTimes(1);expect(Chests.serialize(game)).toBeNull();
++  });
++});
+diff --git a/tests/four-player-capacity-text.test.js b/tests/four-player-capacity-text.test.js
+new file mode 100644
+--- /dev/null
++++ b/tests/four-player-capacity-text.test.js
+@@ -0,0 +1,46 @@
++import { readFileSync } from 'node:fs';
++import { beforeAll, beforeEach, afterEach, expect, it, vi } from 'vitest';
++
++let session, game, showBackpack, UI;
++const spell = { id: 'capacity-spell', name: '容量法术', type: '法术', rarity: '稀有' };
++const pearl = { id: 'tt2-pearlbox', name: '珍珠盒', type: '武术', rarity: '稀有' };
++
++beforeAll(async () => {
++  document.body.innerHTML = readFileSync('game/index.html', 'utf8');
++  window.SDT = { Icons: { img: () => '', rich: String, TYPE_ART: {} },
++    Sound: { music() {}, sfx: vi.fn(), setDucked() {} }, FX: { feedback() {} } };
++  await import('../game/src/cards/cards.js');
++  await import('../game/src/ui/ui.js');
++  await import('../game/src/hub/base.js');
++  session = await import('../game/src/run/game.session.js');
++  ({ showBackpack } = await import('../game/src/hub/game.bag.js'));
++  game = session.game;
++  UI = window.SDT.UI;
++  UI.init(); UI.log = vi.fn(); UI.refresh = () => {};
++  window.SDT.Cards.cardHTML = c => `<span>${c.name}</span>`;
++  window.SDT.Cards.cardBackHTML = () => '';
++  vi.spyOn(window.SDT.Base, 'bagCap').mockReturnValue(16);
++  window.SDT.Chests = { isOpen: () => false };
++  session._set_active_slot(null);
++});
++beforeEach(() => {
++  vi.clearAllMocks();
++  Object.assign(game, { runActive: true, state: 'idle', myClass: '法师', inventory: [],
++    usedPocket: [], cardOrder: [], pendingExtraction: null, extractionPending: null,
++    terminalPending: null, battleActive: false, nestActive: false, hp: 20, maxHp: 30,
++    elapsed: 0, elapsedSynced: 0 });
++});
++afterEach(() => UI.hideOverlay({ immediate: true }));
++
++it('G07 普通容量16和珍珠盒资源9分别显示，收卡叠放规则保持', () => {
++  game.ownedCards=[{uid:'pearl',card:pearl},{uid:'spell',card:spell}];
++  game.inventory=Array.from({length:14},(_,i)=>({name:'物资'+i,count:1}));
++  expect(game.bagCapacityText()).toBe('通用格 16/16 · 资源专用格 0/9');
++  expect(game.canReceiveCard({...spell,name:'新普通牌'})).toBe(false);
++  expect(game.canReceiveCard(spell)).toBe(true);
++  expect(game.canReceiveCard({id:'res',name:'新资源',type:'资源'})).toBe(true);
++  showBackpack(true);expect(UI.el.ovBody.textContent).toContain('通用格 16/16 · 资源专用格 0/9');
++  game.inventory.push({name:'资源格占用',count:1});
++  expect(game.bagCapacityText()).toBe('通用格 16/16 · 资源专用格 1/9');
++});
++
+diff --git a/tests/four-player-music-fallback.test.js b/tests/four-player-music-fallback.test.js
+new file mode 100644
+--- /dev/null
++++ b/tests/four-player-music-fallback.test.js
+@@ -0,0 +1,19 @@
++import { expect, it, vi } from 'vitest';
++import { SceneMusicPlayer } from '../game/src/audio/sound.music.player.js';
++it('G10 解码失败只回退一次，旧回调/取消不会启动已离场音乐',()=>{
++  const entries=[],onError=vi.fn();
++  const factory=vi.fn((scene,callbacks,opts)=>{
++    let state='unloaded';
++    const entry={scene,callbacks,opts},track={load:vi.fn(()=>{state='loading';}),unload:vi.fn(),pause:vi.fn(),mute:vi.fn(),fade:vi.fn(),play:vi.fn(),volume:()=>0,state:()=>state,playing:()=>false};
++    entry.track=track;entries.push(entry);return track;
++  });
++  const p=new SceneMusicPlayer(factory,{onError});
++  p.set('board',{enabled:true,volume:.1});
++  entries[0].callbacks.error(null,'Decoding audio data failed.');
++  expect(factory).toHaveBeenCalledTimes(2);expect(entries[1].opts).toEqual({html5:true});expect(entries[1].track.load).toHaveBeenCalledTimes(1);expect(onError).not.toHaveBeenCalled();
++  entries[0].callbacks.load();expect(entries[1].track.play).not.toHaveBeenCalled();
++  entries[1].callbacks.error(null,'Decoding audio data failed.');expect(factory).toHaveBeenCalledTimes(2);expect(onError).toHaveBeenCalledTimes(1);
++  p.set('board',{enabled:true,volume:.1});p.dispose();
++  entries.at(-1).callbacks.error(null,'Decoding audio data failed.');entries.at(-1).callbacks.load();
++  expect(factory).toHaveBeenCalledTimes(3);expect(entries.at(-1).track.play).not.toHaveBeenCalled();
++});
+diff --git a/tests/sound-music.test.js b/tests/sound-music.test.js
+index 3bfa0190..4ba6dbed 100644
+--- a/tests/sound-music.test.js
++++ b/tests/sound-music.test.js
+@@ -10,7 +10,7 @@ function harness() {
+     const track = {
+       load: vi.fn(() => { state = 'loading'; }),
+       ready() { state = 'loaded'; callbacks.load(); },
+-      fail() { callbacks.error(null, 'decode failure'); },
++      fail() { callbacks.error(null, 'network failure'); },
+       block() { playing = false; callbacks.playError(); },
+       unlock() { callbacks.unlock(); },
+       state: () => state,
+diff --git a/docs/rules.md b/docs/rules.md
+index 13b5ff3b..0e80d7e9 100644
+--- a/docs/rules.md
++++ b/docs/rules.md
+@@ -44,7 +44,7 @@
+ ## 3. 战斗
+ 
+ - 普通战斗直接使用随身可用卡，不建立循环牌库；抽牌效果改为获得临时初始攻击。
+-- BOSS 战从背包选择 15 张招式、装备或能力卡，并自动加入 5 张初始攻击；「对战开始时」装备计入选牌数。混沌之眼使可选牌上限增加 5 张。开局抽 5 张，之后每回合抽 1 张，手牌上限 8。
++- BOSS 战从背包选择 15 张招式、装备或能力卡，并自动加入 5 张初始攻击；不足部分补成本场临时牌，不占背包格、不进入消耗口袋。龙巢仍用自己的牌盒牌库。「对战开始时」装备计入选牌数。混沌之眼使可选牌上限增加 5 张。开局抽 5 张，之后每回合抽 1 张，手牌上限 8。
+ - BOSS 战没有普通道具栏、背包和撤离按钮，背包砸击仍可使用；装备的生效方式按对应卡牌规则处理。
+ - 两类战斗每回合基础能量均为 2。指向敌人的卡必须拖到敌人，治疗、净化、护盾等自身卡必须拖到玩家立绘；群体和无目标卡直接点击。
+ - 职业技能每回合只能成功使用一次；取消选敌不消耗次数，下一玩家回合重新可用。牧师使用圣疗后的惩戒须等下一回合才能使用。
+@@ -58,10 +58,15 @@
+ - “回合开始时”效果从下个回合开始结算；装备或“每回合开始时”效果可重复触发。
+ - “本局对战内”效果只持续到本场战斗结束；“被注能时”只在该牌作为注能材料被消耗时触发。
+ - 计时状态在完整回合结束时统一递减。注能材料不会执行自身通常效果。
++- 格挡只覆盖施放的本回合；进入下一玩家回合或额外回合时到期。牌面“对目标附加”的效果绑定原目标，原目标被前段伤害击杀后不转给其他敌人。
+ - BOSS 战打出的牌进入弃牌堆，牌库空时洗回；注能等消耗的牌进入墓地，不参与洗回。
+ 
+ ## 5. 卡牌、掉落与事件
+ 
++- 局内宝箱揭晓的内容、已领卡牌和金币状态随对局保存；刷新续档恢复同一份奖励，不重抽或重复领取。
++- 珍珠盒的资源专用格与通用格分开显示。新普通牌需要通用空格；同名未满的叠仍可并入，手动复原遵守同一收卡判定。
++- 后备能源只按本场战斗实际消耗的法术牌降费；之前战斗的消耗口袋和普通弃牌不计。墓地中未记作消耗的卡也不计。
++
+ - 背包丢弃不可撤销；事件卡只能在事件格触发，不能从背包使用。
+ - 职业卡不会进入普通随机池；能力卡及其衍生牌只从指定事件、祭坛或令牌途径获得。
+ - 「药水池」（发现/获取药水类效果的卡池）= 所有名字带「药水」的道具卡；法术「药水魔法」不在池内。
+diff --git a/docs/audio-system.md b/docs/audio-system.md
+index 5d637e61..8efbea77 100644
+--- a/docs/audio-system.md
++++ b/docs/audio-system.md
+@@ -15,3 +15,5 @@
+ 高频操作和装饰音按事件冷却；45ms 内超过四个声音时，后续低优先级操作声会被抑制，战斗结果和危险提示仍可播放。合成音与采样共享 SFX 总线和 Master 软限幅器（阈值 -6dB、比例 12:1）。采样峰值归一化至约 95%，各 cue 再按独立增益混合。
+ 
+ 音乐来源固定为这四首文件配乐，设置保留音乐开关和音量；旧存档中的冬境声景来源偏好不再启用。`setMusicSource` 兼容接口只选择当前文件配乐。冬境声景代码和历史音乐文件保留；音频入口不再导入或创建冬境声景，首脑战和压力接口也不启动旧合成层。
++
++文件在Web Audio通道解码失败时，播放器对同一加载请求只回退一次浏览器媒体通道；两次都失败才报告加载错误。HTTP等网络错误直接报告，不切通道。回退加载同样遵守静音、隐藏和场景切换的释放规则，旧加载回调不能启动已离场音轨。

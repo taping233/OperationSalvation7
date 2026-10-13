@@ -1,0 +1,162 @@
+{
+  "status": "five candidate keyframes; hinge continuity issue pending root comparison",
+  "records": [
+    {
+      "frame": 0,
+      "state": "closed",
+      "source": "docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\art-calibration\\modern-chest\\source\\modern-supply-frame-00.png",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a12a93-2933-7bc1-b347-7b666e9a2d7f\\exec-c4c0743c-f35d-4844-8409-fd4b1d03cefd.png",
+      "bytes": 926419,
+      "sha256": "6af2206e7f4b8025dea25da1ef8a0d942d070dacf2bfb6f5b1b81fad05f1c757",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaOver127BBox": [
+        91,
+        453,
+        1195,
+        1146
+      ]
+    },
+    {
+      "frame": 1,
+      "state": "unlocked",
+      "source": "docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\art-calibration\\modern-chest\\source\\modern-supply-frame-01.png",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a12a93-2933-7bc1-b347-7b666e9a2d7f\\exec-9cba9cc8-259b-4a1a-bef2-ff8272a76ad5.png",
+      "bytes": 849592,
+      "sha256": "5dc681dafa7b0237199c8e2288e120f089576c6d959cdce62a8578290d489f3b",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaOver127BBox": [
+        91,
+        452,
+        1196,
+        1148
+      ]
+    },
+    {
+      "frame": 2,
+      "state": "small-open",
+      "source": "docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\art-calibration\\modern-chest\\source\\modern-supply-frame-02.png",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a12a93-2933-7bc1-b347-7b666e9a2d7f\\exec-4c507fe7-b23d-4b94-a74d-6e44952a5166.png",
+      "bytes": 874227,
+      "sha256": "5b14085acb22c0c91be068f84e932fe3cb0a2a14a6d09f1c9ef64b3c90fc4d58",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaOver127BBox": [
+        89,
+        450,
+        1198,
+        1152
+      ]
+    },
+    {
+      "frame": 3,
+      "state": "half-open",
+      "source": "docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\art-calibration\\modern-chest\\source\\modern-supply-frame-03.png",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a12a93-2933-7bc1-b347-7b666e9a2d7f\\exec-c5bd3aab-7038-4348-88d4-6aa26d65e7cf.png",
+      "bytes": 1076294,
+      "sha256": "9fd881a2633b5a269edd52120e163b7ef343be4830c830436ab2a86363bff611",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaOver127BBox": [
+        89,
+        254,
+        1217,
+        1153
+      ]
+    },
+    {
+      "frame": 4,
+      "state": "fully-open",
+      "source": "docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\art-calibration\\modern-chest\\source\\modern-supply-frame-04.png",
+      "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a12a93-2933-7bc1-b347-7b666e9a2d7f\\exec-0b0f8d0b-f2c0-4cff-b138-7f63724f2d2f.png",
+      "bytes": 1305168,
+      "sha256": "f66edbaec95d9a7082abc60ec14fb840b5633cc03beaa668ad04444af5673870",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaOver127BBox": [
+        84,
+        80,
+        1232,
+        1165
+      ]
+    }
+  ],
+  "runtimeConnected": false,
+  "hingeRegistration": {
+    "method": "read-only nearest patch RGB MSE, step4px, not a calibrated rigid-body tracker",
+    "leftDeltas": [
+      [
+        0,
+        0
+      ],
+      [
+        4,
+        -4
+      ],
+      [
+        -4,
+        60
+      ],
+      [
+        16,
+        68
+      ]
+    ],
+    "rightDeltas": [
+      [
+        0,
+        0
+      ],
+      [
+        8,
+        4
+      ],
+      [
+        4,
+        84
+      ],
+      [
+        12,
+        92
+      ]
+    ],
+    "comparison": "each against frame00",
+    "limitation": "paint/perspective changes can affect matching; approximate +/-4px sampling plus structural uncertainty"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-12T20:29:54.846Z",
+  "status": "partial-waiting-coordination",
+  "sourceIntegrated": false,
+  "pending": "PENDING41",
+  "services": {
+    "port": 5371,
+    "pid": 8696,
+    "session": 13238,
+    "stopped": true,
+    "probe": "ECONNREFUSED",
+    "oldOwnSessionsStopped": [
+      42427,
+      53725
+    ],
+    "originalServices": "未操作"
+  },
+  "browser": {
+    "platform": "Codex IAB",
+    "origin": "http://127.0.0.1:5371",
+    "slot": "01独立新档",
+    "window": "1280x720自然窗口",
+    "closed": true,
+    "inputScope": "真实新档出征后构造条件；UI点击/横滚/真实刷新；音频首次故障构造、HTML5媒体真实加载播放（音量0）"
+  },
+  "candidateFiles": 34,
+  "unverified": [
+    "共享集成/占用协调",
+    "自然全通关/全部事件组合/完整拖拽键盘/其他尺寸/性能",
+    "音频听感",
+    "全量测试/build/CI"
+  ],
+  "git": "未stage/commit/push",
+  "sourceBaseline": "patch-manifest.json，应用前重核"
+}

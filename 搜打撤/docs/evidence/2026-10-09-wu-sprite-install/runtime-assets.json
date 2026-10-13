@@ -1,0 +1,566 @@
+{
+  "files": [
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/neutral.webp",
+      "bytes": 56796,
+      "sha256": "c737441cace84ad8c749b1d992df14b00cba5edef6957c535369b8eb8cd9f909",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-000.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-001.webp",
+      "bytes": 56400,
+      "sha256": "2b438fd2e9b280aea804fc7aa98ad4c53e0e16ff120f4d8c6675bfe0aa9484e1",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-001.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-002.webp",
+      "bytes": 56346,
+      "sha256": "a1f54cb629fb10d9087ec51c861ad3a21c1d817300323201f9d6175995f583cb",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-002.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-003.webp",
+      "bytes": 56250,
+      "sha256": "bc81b5f9acad2a740a4d15728fd2dc0932c289608e3b080582fa5c55a631e105",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-003.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-004.webp",
+      "bytes": 56166,
+      "sha256": "0cc3b3ea7c13cec8f24bd12c03f017fb3e6eff5223e4052b136f3b1020edf919",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-004.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-005.webp",
+      "bytes": 55920,
+      "sha256": "47814d16d075b496553c1bdd788b3c7e679015e6f0db40e46c551365e0bcaf6c",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-005.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-006.webp",
+      "bytes": 55934,
+      "sha256": "8da0831759013f9c8279bdd50f545e4d89e6ec259e5990138af3f1360009a10d",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-006.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-007.webp",
+      "bytes": 55972,
+      "sha256": "5bb09b65fc019ce08d8dc5dee08ed34bae71bb733dd79f650e442237994d424b",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-007.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-008.webp",
+      "bytes": 56024,
+      "sha256": "7ebc7e2d4054665c3a2134f545f21202bf2c5f46571a309c1aa73bdc84c16e6d",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-008.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-009.webp",
+      "bytes": 55928,
+      "sha256": "4f0404beb8ac73ee3c9b4da6be52876a73b8ae184e67de26a98af10cc8380bc9",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-009.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-010.webp",
+      "bytes": 56010,
+      "sha256": "2391a6d5b3dcc51467feb3f8d8aa4ac28f6b11570ec43bca9573d06b384af233",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-010.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-011.webp",
+      "bytes": 56314,
+      "sha256": "61d835c931770267e6760b1ee00429c2e3dd05b8a6f705ff3af1fb33cb957245",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-011.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-012.webp",
+      "bytes": 56240,
+      "sha256": "bfc56b509f4299524dc170b5de171ee6b34914344cd929e59ddc9d5ff62e1529",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-012.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-013.webp",
+      "bytes": 56540,
+      "sha256": "b4acd97ab07fbe89baa21d358eb0768aed224bf7c145a36787aed9d3532f75e3",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-013.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-014.webp",
+      "bytes": 56126,
+      "sha256": "6b8af76f9fa57170b1dd54ebd00923c30b4f81967c47ba6499ead2d42a7c194a",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-014.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-015.webp",
+      "bytes": 56024,
+      "sha256": "6b164dfb30be097df411cda9ab97a26a65a64b0d8459c5a75bf8ec19c3448545",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-015.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-016.webp",
+      "bytes": 55960,
+      "sha256": "ded362635d03c1f7643fcb82c2fb33a1c479dabc0cb3fb84e088768a23290ed7",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-016.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-017.webp",
+      "bytes": 56062,
+      "sha256": "8fbcef20d4f4457cff199012c51be43b49c001a63d01e1263a04c586fec12d9d",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-017.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-018.webp",
+      "bytes": 56284,
+      "sha256": "2d56f24147cdddf0b4a009cc2a0a3f4f8d99121becd1db7bda5a103084125437",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-018.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-019.webp",
+      "bytes": 56406,
+      "sha256": "e785c014bac1a1ed5a60e950300bd8f72666dcbf5946a3e0105a06e76dde4161",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-019.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-020.webp",
+      "bytes": 56350,
+      "sha256": "e43d89ff2cbe7c618f65cf5130a22b8397f22edc3d6e8534028d3d9a64caa3aa",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-020.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-021.webp",
+      "bytes": 56178,
+      "sha256": "bf8c6d664e255c7677a144d6eb0242fe0ed1398f7cc3e61a6e1c55d358c981d1",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-021.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-022.webp",
+      "bytes": 56216,
+      "sha256": "20d646023a1ae73a0a494ad865118e13ff385a3c22bc02b2350f4772c3054548",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-022.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-023.webp",
+      "bytes": 56120,
+      "sha256": "fdc8d3585041f5ecf91d666c695a4e17d92d50cf6ff19ae337367fb97448505a",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-023.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-024.webp",
+      "bytes": 56248,
+      "sha256": "7dc3e61718f34644fcff88359751fa8057bf5d4c814b4b46487df8e26ce1c775",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-024.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-025.webp",
+      "bytes": 56040,
+      "sha256": "15bda82fa27e07b901c474f0e9cb0504f12fd2cdd287838f39f14e2ca17f55e4",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-025.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-026.webp",
+      "bytes": 56386,
+      "sha256": "af17670f005e014d54cc827a25a0019eae4384b5718327f7e00652afc16ccfeb",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-026.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-027.webp",
+      "bytes": 56566,
+      "sha256": "28f4f07d5181c57f1ab2316dbfbd585126a2626f799661be05623ddd7f4e4e1b",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-027.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-028.webp",
+      "bytes": 56744,
+      "sha256": "db61b9c8e7d807d08c7c39d81f6505a22cec77b80f575db4124e14cc35660326",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-028.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-029.webp",
+      "bytes": 56242,
+      "sha256": "0e73e008a0338a881a360c1955f747f90c64efbb9986ae93a2aa04a6bc861eb3",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-029.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-030.webp",
+      "bytes": 56226,
+      "sha256": "0b8640523de6a7f58c9c38be5f2bb06b07b2ae926bde615046989e667234e13c",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-030.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-031.webp",
+      "bytes": 56102,
+      "sha256": "e9d49f6eac7eb965ef8b5d1fe35a267fa988be7c088ab9a7bab6c8062b6d0c3e",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-031.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-032.webp",
+      "bytes": 56246,
+      "sha256": "fb8ba4dd6ec0fcef62bdf4138e0daa55c7f9ea16690a72112c8b6807f13925b9",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-032.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-033.webp",
+      "bytes": 56266,
+      "sha256": "c4f1621dc8dc2433339a2242b9098eb327003bef38b6a9b51ea67e1ee0cb1899",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-033.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-034.webp",
+      "bytes": 56280,
+      "sha256": "b8dfac7cd3fb4dd512266bf0d27b0f1b5fe93d66f3473c8441dcc2c5047a5403",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-034.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-035.webp",
+      "bytes": 56138,
+      "sha256": "42b4e8496f27cc642537b7cf50255d67e9b118747a29f2272eeffed51b0dde79",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-035.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-036.webp",
+      "bytes": 56424,
+      "sha256": "2c4cece222bd83e8c3fb063cf1ece53d51eeb4681cdd562147664c846148f83d",
+      "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-036.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-037.webp",
+      "bytes": 64000,
+      "sha256": "0aaa1ece5961000d6e7fb7d3159a38957558b868fd4022583c3dd21e56d45dc4",
+      "source": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-01.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-038.webp",
+      "bytes": 80916,
+      "sha256": "6ee49336638ed0e64b4c640c2d6ea82d03b3290f6f3c8114632bfd3463522d31",
+      "source": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-02.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-039.webp",
+      "bytes": 65878,
+      "sha256": "e8e11eca0fe5360069e6a666d36071d65968bbf68753f24aa89d11130306658e",
+      "source": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-03.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-040.webp",
+      "bytes": 65042,
+      "sha256": "0a5c2475d418003102e87e51a9ad34477b9fe575ab9eab13ef480dc198fe3677",
+      "source": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-04.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-041.webp",
+      "bytes": 71282,
+      "sha256": "ec071e18fe1cf318047646d339114a9e987dc9aaa481d283d33580756ac06378",
+      "source": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-05.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-042.webp",
+      "bytes": 71444,
+      "sha256": "02dc9f07a5ced596bbefa8c44914b56aaec1a2ddcdf7119515e1230e3aad0abe",
+      "source": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-06.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-043.webp",
+      "bytes": 60298,
+      "sha256": "7550e53ec6b55a26b00f39d83c5a3b1434bd18437919bc8ab528cb95d3801ae5",
+      "source": "game/art-source/characters/wu-hurt-sprite-20261009/hurt-01.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-044.webp",
+      "bytes": 62568,
+      "sha256": "65e59b96d3f126f519c40b81fa7a64b4c63403e49d2db5fff9da29feba0ecc80",
+      "source": "game/art-source/characters/wu-hurt-sprite-20261009/hurt-02.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-045.webp",
+      "bytes": 53494,
+      "sha256": "a5f7ec2830e96fcff7020b9dfc9c4ac709984bc5374b5534495d1985b2a07552",
+      "source": "game/art-source/characters/wu-death-sprite-20261009/death-01.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-046.webp",
+      "bytes": 49858,
+      "sha256": "c19773dc63d6219dda1920b088dbcaa80fa4cd883fc189d2c743ced672a581b2",
+      "source": "game/art-source/characters/wu-death-sprite-20261009/death-02.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-047.webp",
+      "bytes": 50648,
+      "sha256": "7bc25c72041dcca49de96f718d1cca2dfb9c4eaf92ff3346f811a477b78f7183",
+      "source": "game/art-source/characters/wu-death-sprite-20261009/death-03.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-048.webp",
+      "bytes": 45862,
+      "sha256": "690c0406b04d028ee82e61e467a24cb611a7e4a80c369a37a3e2ac902c4069ba",
+      "source": "game/art-source/characters/wu-death-sprite-20261009/death-04.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-049.webp",
+      "bytes": 38236,
+      "sha256": "25bc6f05e4f15ba4006fcee1c31c86d3d3aa85a07711fcf8538bd2a82ba58407",
+      "source": "game/art-source/characters/wu-death-sprite-20261009/death-05.png"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/frame-050.webp",
+      "bytes": 38882,
+      "sha256": "5b49390b7326f55c2a53d2bb4e748e4210daecc0e3a1bfbaa274f0df498e6831",
+      "source": "game/art-source/characters/wu-death-sprite-20261009/death-06.png"
+    }
+  ],
+  "uniqueTextures": 51,
+  "decodedBytes": 35721216,
+  "catalog": {
+    "width": 512,
+    "height": 342,
+    "sequences": {
+      "idle": [
+        "sprite-v1/neutral",
+        "sprite-v1/frame-001",
+        "sprite-v1/frame-002",
+        "sprite-v1/frame-003",
+        "sprite-v1/frame-004",
+        "sprite-v1/frame-005",
+        "sprite-v1/frame-006",
+        "sprite-v1/frame-007",
+        "sprite-v1/frame-008",
+        "sprite-v1/frame-009",
+        "sprite-v1/frame-010",
+        "sprite-v1/frame-011",
+        "sprite-v1/frame-012",
+        "sprite-v1/frame-013",
+        "sprite-v1/frame-014",
+        "sprite-v1/frame-015",
+        "sprite-v1/frame-016",
+        "sprite-v1/frame-017",
+        "sprite-v1/frame-018",
+        "sprite-v1/frame-019",
+        "sprite-v1/frame-020",
+        "sprite-v1/frame-021",
+        "sprite-v1/frame-022",
+        "sprite-v1/frame-023",
+        "sprite-v1/frame-024",
+        "sprite-v1/frame-025",
+        "sprite-v1/frame-026",
+        "sprite-v1/frame-027",
+        "sprite-v1/frame-028",
+        "sprite-v1/frame-029",
+        "sprite-v1/frame-030",
+        "sprite-v1/frame-031",
+        "sprite-v1/frame-032",
+        "sprite-v1/frame-033",
+        "sprite-v1/frame-034",
+        "sprite-v1/frame-035",
+        "sprite-v1/frame-036",
+        "sprite-v1/frame-035",
+        "sprite-v1/frame-034",
+        "sprite-v1/frame-033",
+        "sprite-v1/frame-032",
+        "sprite-v1/frame-031",
+        "sprite-v1/frame-030",
+        "sprite-v1/frame-029",
+        "sprite-v1/frame-028",
+        "sprite-v1/frame-027",
+        "sprite-v1/frame-026",
+        "sprite-v1/frame-025",
+        "sprite-v1/frame-024",
+        "sprite-v1/frame-023",
+        "sprite-v1/frame-022",
+        "sprite-v1/frame-021",
+        "sprite-v1/frame-020",
+        "sprite-v1/frame-019",
+        "sprite-v1/frame-018",
+        "sprite-v1/frame-017",
+        "sprite-v1/frame-016",
+        "sprite-v1/frame-015",
+        "sprite-v1/frame-014",
+        "sprite-v1/frame-013",
+        "sprite-v1/frame-012",
+        "sprite-v1/frame-011",
+        "sprite-v1/frame-010",
+        "sprite-v1/frame-009",
+        "sprite-v1/frame-008",
+        "sprite-v1/frame-007",
+        "sprite-v1/frame-006",
+        "sprite-v1/frame-005",
+        "sprite-v1/frame-004",
+        "sprite-v1/frame-003",
+        "sprite-v1/frame-002",
+        "sprite-v1/frame-001"
+      ],
+      "atk": [
+        "sprite-v1/neutral",
+        "sprite-v1/frame-037",
+        "sprite-v1/frame-037",
+        "sprite-v1/frame-038",
+        "sprite-v1/frame-039",
+        "sprite-v1/frame-039",
+        "sprite-v1/frame-040",
+        "sprite-v1/frame-041",
+        "sprite-v1/frame-042",
+        "sprite-v1/neutral"
+      ],
+      "hurt": [
+        "sprite-v1/neutral",
+        "sprite-v1/frame-043",
+        "sprite-v1/frame-043",
+        "sprite-v1/frame-043",
+        "sprite-v1/frame-044",
+        "sprite-v1/frame-044",
+        "sprite-v1/frame-044",
+        "sprite-v1/neutral"
+      ],
+      "death": [
+        "sprite-v1/neutral",
+        "sprite-v1/frame-045",
+        "sprite-v1/frame-045",
+        "sprite-v1/frame-045",
+        "sprite-v1/frame-046",
+        "sprite-v1/frame-046",
+        "sprite-v1/frame-047",
+        "sprite-v1/frame-047",
+        "sprite-v1/frame-047",
+        "sprite-v1/frame-048",
+        "sprite-v1/frame-048",
+        "sprite-v1/frame-049",
+        "sprite-v1/frame-049",
+        "sprite-v1/frame-049",
+        "sprite-v1/frame-050",
+        "sprite-v1/frame-050",
+        "sprite-v1/frame-050",
+        "sprite-v1/frame-050",
+        "sprite-v1/frame-050",
+        "sprite-v1/frame-050",
+        "sprite-v1/frame-050"
+      ],
+      "cast": [
+        "sprite-v1/neutral"
+      ]
+    },
+    "timings": {
+      "idle": [
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42
+      ],
+      "atk": [
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42
+      ],
+      "hurt": [
+        41,
+        42,
+        42,
+        42,
+        41,
+        42,
+        42,
+        42
+      ],
+      "death": [
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42
+      ],
+      "cast": [
+        800
+      ]
+    },
+    "fixedGeometry": true,
+    "assetVersion": "sprite-v1"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-reshot",
+      "asset": "cards/martial-tt3-reshot.webp",
+      "revision": "reshot-original-rough-20261010",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt3-reshot.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "prompt": "Style-transfer. Redraw FIRST image 重斩 preserving exact original SQUARE composition, straight frontal view, sword placement and proportions. ONE extremely long thin magical sword stands VERTICALLY at exact center, sharp blade tip near upper margin, small pointed grip/pommel near lower margin. Preserve original star-shaped crossguard around lower quarter with long horizontal pointed arms and downward prongs. Blade is opaque bright white/lavender core, violet inner planes, cyan/turquoise edge planes; a few economical thin golden electric zigzags wind beside blade and grip. Preserve uniform burnt orange/ochre backdrop and generous empty space on both sides. Render sword with coherent broad opaque colored planes and a few directional irregular painted highlights, restrained glow, not photographic glass. No character, hand, extra weapon, new ornament or composition change. Images 2–4 are STYLE ONLY references for broad opaque brushwork and confident anime painting, don't copy their characters, clothes or poses. Rough hand-painted anime color study: large connected opaque color masses, limited broad directional swipes and blunt dabs, decisive handmade edges and grouped hard shadows, selective expressive coverage with quiet regions. Mostly matte muted backdrop and concentrated cyan/lavender-white focal colors. No glossy 3D, smooth airbrush, tiny facet mosaics, fine decorative engravings, all-over grain or texture filters. No text, frame, watermark or UI.",
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-bb501eac-f9e7-4edc-bb3d-14d8b9c8921b.png"
+    }
+  ]
+}

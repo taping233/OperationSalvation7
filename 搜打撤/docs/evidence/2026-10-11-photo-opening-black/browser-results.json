@@ -1,0 +1,39 @@
+{
+  "source": "Codex In-app Browser",
+  "url": "http://localhost:5200/",
+  "viewport": "1523x956",
+  "input": "主页照相馆按钮真实点击；临时逐帧观察未改变游戏状态",
+  "result": {
+    "frames": 165,
+    "prepare": {
+      "ms": 177,
+      "phase": "prepare",
+      "background": "rgba(0, 0, 0, 0)",
+      "cut": false,
+      "studio": false,
+      "overlayVisibility": "visible",
+      "overlayHidden": true
+    },
+    "prepareFrames": 10,
+    "opaquePreparation": [],
+    "cutDuringPreparation": [],
+    "reveal": {
+      "ms": 617,
+      "phase": "reveal",
+      "background": "rgba(0, 0, 0, 0)",
+      "cut": true,
+      "studio": true,
+      "overlayVisibility": "visible",
+      "overlayHidden": false
+    },
+    "last": {
+      "ms": 2206,
+      "phase": "none",
+      "background": null,
+      "cut": false,
+      "studio": true,
+      "overlayVisibility": "visible",
+      "overlayHidden": false
+    }
+  }
+}

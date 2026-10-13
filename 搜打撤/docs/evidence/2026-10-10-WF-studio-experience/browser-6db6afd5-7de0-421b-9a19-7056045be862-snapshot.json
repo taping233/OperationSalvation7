@@ -1,0 +1,182 @@
+{
+  "actions": [
+    {
+      "detail": "主线真实打开照相馆；点击禁咒I展开与收回；禁咒II展开中收回；重新打开禁咒I；回到图库",
+      "type": "real-input"
+    },
+    {
+      "detail": "原版主背景与控件标记恢复；420ms来源变换、缓动、背签340ms/100ms计算样式核对",
+      "type": "static-inspection"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"照相馆\\n        \\n        馆藏268张照片\\n        \\n      \\n      \\n        \\n          \\n            浏览馆藏找到 268 张重置筛选\\n            \\n    全部268\\n    \\n    武术64\\n    \\n    法术79\\n    \\n    生物25\\n    \\n    道具20\\n    \\n    装备34\\n    \\n\",\"class\":\"pg card-library-page photo-studio-v3 studio-index-layout studio-unified\"}",
+      "key": "gallery",
+      "rect": {
+        "height": 956,
+        "width": 1523.2000732421875,
+        "x": 0,
+        "y": 0
+      },
+      "selector": ".studio-unified",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 228, 225)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Noto Sans SC\", sans-serif",
+        "font-size": "16px",
+        "height": "1205.2px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1920.25px"
+      },
+      "tag": "DIV",
+      "text": "照相馆\n        \n        馆藏268张照片\n        \n      \n      \n        \n          \n            浏览馆藏找到 268 张重置筛选\n            \n    全部268\n    \n    武术64\n    \n    法术79\n    \n    生物25\n    \n    道具20\n    \n    装备34\n    \n"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"SECTION\",\"text\":\"浏览馆藏找到 268 张重置筛选\\n            \\n    全部268\\n    \\n    武术64\\n    \\n    法术79\\n    \\n    生物25\\n    \\n    道具20\\n    \\n    装备34\\n    \\n    事件19\\n    \\n    能力12\\n    \\n    资源15\\n    \\n            \\n              搜索照片\\n           \",\"class\":\"studio-filterbar\"}",
+      "key": "filter",
+      "rect": {
+        "height": 171.40000915527344,
+        "width": 1062.6375732421875,
+        "x": 22.200000762939453,
+        "y": 76.9375
+      },
+      "selector": ".studio-filterbar",
+      "styles": {
+        "background-color": "rgb(233, 232, 230)",
+        "border-radius": "0px",
+        "color": "rgb(45, 48, 52)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "216.079px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "17px 18px 18px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1339.64px"
+      },
+      "tag": "SECTION",
+      "text": "浏览馆藏找到 268 张重置筛选\n            \n    全部268\n    \n    武术64\n    \n    法术79\n    \n    生物25\n    \n    道具20\n    \n    装备34\n    \n    事件19\n    \n    能力12\n    \n    资源15\n    \n            \n              搜索照片\n           "
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"ASIDE\",\"text\":\"当前选片卡面 · 信息 · 背签\\n    \\n    \\n    禁咒I\\n  \\n    \\n    费用0法术棱彩\\n    \\n    抽到时施放：夺取 1 点攻击力。\\n    藏品编号 № 99\\n    \\n    ‹ 上一片1 / 268下一片 ›\\n    查看大图与背签\",\"class\":\"library-inspector\"}",
+      "key": "inspector",
+      "rect": {
+        "height": 863.2000122070312,
+        "width": 398.7124938964844,
+        "x": 1102.2874755859375,
+        "y": 76.9375
+      },
+      "selector": ".library-inspector",
+      "styles": {
+        "background-color": "rgb(233, 232, 230)",
+        "border-radius": "0px",
+        "color": "rgb(41, 44, 48)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "1088.21px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "18px 18px 20px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "502.645px"
+      },
+      "tag": "ASIDE",
+      "text": "当前选片卡面 · 信息 · 背签\n    \n    \n    禁咒I\n  \n    \n    费用0法术棱彩\n    \n    抽到时施放：夺取 1 点攻击力。\n    藏品编号 № 99\n    \n    ‹ 上一片1 / 268下一片 ›\n    查看大图与背签"
+    },
+    {
+      "attributes": {
+        "aria-current": "true",
+        "data-card": "tt8-curse1"
+      },
+      "identity": "{\"data-card\":\"tt8-curse1\",\"aria-current\":\"true\"}",
+      "key": "selected",
+      "rect": {
+        "height": 230.9875030517578,
+        "width": 245.2250061035156,
+        "x": 29.325000762939453,
+        "y": 287.1875
+      },
+      "selector": "#libGrid [aria-current=\"true\"]",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 228, 225)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "291.199px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "309.148px"
+      },
+      "tag": "BUTTON",
+      "text": "禁咒I法术"
+    }
+  ],
+  "observedAt": "2026-10-10T05:13:43.848Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 1523
+    }
+  },
+  "scene": "原版照相馆与取片动效",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-10-WF-studio-experience/revert/original-ui.png",
+    "docs/evidence/2026-10-10-WF-studio-experience/revert/photo-detail.png"
+  ],
+  "selectors": [
+    {
+      "key": "gallery",
+      "selector": ".studio-unified"
+    },
+    {
+      "key": "filter",
+      "selector": ".studio-filterbar"
+    },
+    {
+      "key": "inspector",
+      "selector": ".library-inspector"
+    },
+    {
+      "key": "selected",
+      "selector": "#libGrid [aria-current=\"true\"]"
+    }
+  ]
+}

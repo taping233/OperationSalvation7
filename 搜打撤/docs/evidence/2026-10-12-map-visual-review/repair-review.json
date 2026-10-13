@@ -1,0 +1,139 @@
+{
+  "date": "2026-10-12",
+  "result": "observed visual failures repaired and rechecked",
+  "viewport": {
+    "width": 1523,
+    "height": 956,
+    "dpr": 1.25
+  },
+  "browser": "Codex IAB current window",
+  "url": "http://localhost:5337/",
+  "sources": "IS7 node and map references; art-reference-collection source packs",
+  "evidence": {
+    "map": "16-map-palette-fixed.png",
+    "inventory": "02-bag-safe.png",
+    "battle": "06-battle-main.png",
+    "battleSettings": "08-settings-fixed.png",
+    "rewards": "11-rewards-fixed.png",
+    "shop": "12-shop-fixed.png",
+    "roster": "13-roster-fixed.png",
+    "departure": "18-departure-fixed.png",
+    "entry": "15-entry-fixed.png",
+    "event": "17-event-fixed.png"
+  },
+  "repairs": [
+    "Normalize visible node subject bounds; type-specific side halos and textured black disks; eager current portrait",
+    "Functional map toolbar with inventory section navigation",
+    "Inventory region hierarchy",
+    "Compact battle settings and formation/decision spacing",
+    "Shop per-rarity frame clearance and two-row price visibility",
+    "Reward per-rarity quality/value clearance",
+    "Roster card placement and selected avatar state",
+    "Departure clear selected card, full quantity row, vertical-only candidate scrolling"
+  ],
+  "input": "Actual UI clicks; own localhost slots 02/03/04; developer node controls for shop/reward/battle/event; no hidden-state browser injection",
+  "limits": [
+    "No automated tests or build requested",
+    "No exhaustive card, rarity, node, battle-decision or long-event branch coverage",
+    "Initial map only shows naturally known nodes; geometry and fog unchanged",
+    "Developer node scenes do not prove natural full-run progression"
+  ],
+  "runtime": {
+    "port": 5337,
+    "execSession": 67496,
+    "snapshot": ".tmp/selection-map-observe-1011/game",
+    "developerModeRestored": true
+  },
+  "screenshots": [
+    {
+      "path": "01-entry-map.png",
+      "bytes": 36123,
+      "sha256": "df917b79d0150c6cb8d7e4f165bbd984d134111d378099db1d3e1153a7f5021d"
+    },
+    {
+      "path": "02-bag-safe.png",
+      "bytes": 77723,
+      "sha256": "68b2a3f9fdc64e6d16a5f03163ebdbc118b6bddfb5abe55678122df440a21996"
+    },
+    {
+      "path": "03-toolbar-working.png",
+      "bytes": 35312,
+      "sha256": "bebf757a9791a01c0888ea9c3fc8c512e7583bd49735b87ed47e796f597c2df1"
+    },
+    {
+      "path": "04-map-repair-v2.png",
+      "bytes": 39249,
+      "sha256": "48fb0b8c15a739ee9d22f6b0bfd0456e1030a745212177d748a3af78784aa47a"
+    },
+    {
+      "path": "05-shop-review.png",
+      "bytes": 142598,
+      "sha256": "d00e695233b1e4b2f8452bab1cda18ac574e9b36e3f20bd57f804afd7d267c45"
+    },
+    {
+      "path": "06-battle-main.png",
+      "bytes": 155756,
+      "sha256": "0db05ea7fd627fbacc4d7c15686b73e69eb5bd7c3aa3f012c399e290ca750de7"
+    },
+    {
+      "path": "07-battle-settings-compact.png",
+      "bytes": 30404,
+      "sha256": "c32c8ec2aaf6ca379c3e1fa637ad0567110aefb62fc720345e4819f91ccf2294"
+    },
+    {
+      "path": "08-settings-fixed.png",
+      "bytes": 29365,
+      "sha256": "8291ff97d232b209e293735223cad44666311577883870a61c57e33c5679ae94"
+    },
+    {
+      "path": "09-shop-frame-spacing.png",
+      "bytes": 139224,
+      "sha256": "e8ba9e60300c411258a257fd55cafb312ebed92615a902e63ee852553208b536"
+    },
+    {
+      "path": "10-large-chest-reward.png",
+      "bytes": 72369,
+      "sha256": "ad999eb4c7b6dd36cb04d85ba4e803529286faf4d6489d610eaf1d4f0d76a934"
+    },
+    {
+      "path": "11-rewards-fixed.png",
+      "bytes": 68205,
+      "sha256": "df596e7567549c8c20ebec712c3938d4fee606c3946e236e55b957ff167a641c"
+    },
+    {
+      "path": "12-shop-fixed.png",
+      "bytes": 138288,
+      "sha256": "aa0cbc1e6daa4bd6a39af77d8795d82d6fecff328992da536be24bea548f39da"
+    },
+    {
+      "path": "13-roster-fixed.png",
+      "bytes": 84959,
+      "sha256": "5e6092a98396a7ecb99b48f02ea3de17319636720f9722001258bac04e2b674f"
+    },
+    {
+      "path": "14-departure-before.png",
+      "bytes": 119631,
+      "sha256": "427d4cba52c3f27304af013f8fe3bc1cbf57e8a242368fa744f2c9eef19abc86"
+    },
+    {
+      "path": "15-entry-fixed.png",
+      "bytes": 154333,
+      "sha256": "f74a851c77d58f14a4ae0ed4a8f3f0b64ad27a67ff3915aaf869f9e3d8a7217e"
+    },
+    {
+      "path": "16-map-palette-fixed.png",
+      "bytes": 38925,
+      "sha256": "e5791f26d711090486e9b5c498b293bfb7d140f46230846859c95786f61bf264"
+    },
+    {
+      "path": "17-event-fixed.png",
+      "bytes": 89864,
+      "sha256": "38be695fe250ab65cae8cb45d7e4c232a6954ffae4e5e726e0b8e0365214eee2"
+    },
+    {
+      "path": "18-departure-fixed.png",
+      "bytes": 120503,
+      "sha256": "03504d45851c983370e4cd7dc278276314f8cdd9978b016d9e738be6bb7e31f0"
+    }
+  ]
+}

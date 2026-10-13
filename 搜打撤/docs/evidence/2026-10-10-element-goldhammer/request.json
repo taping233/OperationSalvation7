@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "card_id": "tt7-elementstorm",
+      "asset": "cards/spell-tt7-elementstorm.webp",
+      "revision": "elementstorm-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw FIRST image 元素风暴 preserving original SQUARE composition, full-body floating pose, subject scale, camera and placements. Baita tilted slightly in midair, centered towards viewer right, deep brown very long curly hair flowing widely towards LEFT, GREEN eyes wide and open mouth with surprised excited expression, gold hoop earrings, white high-collar long-sleeved blouse, blue oval pendant in gold frame, deep green pinafore long dress with white hem ruffles and pale white-blue boots. Her raised hand at upper viewer right grasps/controls bright blue elemental ribbon, other hand curled near viewer left shoulder. Preserve original bent legs, lower boot points down, skirt swells towards right. Preserve long RED and BLUE/VIOLET elemental ribbons looping behind and around hair and body in their original angular curved paths. Dark muted navy/teal backdrop with subdued colored aura, simplify to broad abstract shapes. Ribbons are elemental symbols, no literal environment or extra props. Images 2–4 are STYLE ONLY references for broad opaque strokes, dark fabric masses and anime faces; don't copy identity, outfit or pose. STYLE: rough hand-painted anime illustration constructed with large connected opaque color masses, broad directional curved swipes and blunt dabs, decisive handmade edges and grouped hard shadows, expressive selective overlaps surrounded by quiet areas. Hair in coherent substantial locks, cloth in principal fold planes, no fine strands or dense wrinkles. Clear anime eyes and readable hands, economical face marks. Objects and metal rendered in a few broad matte colored planes with selective opaque bright accents. Mostly muted colors with concentrated saturated highlights. No glossy 3D, realistic polished metal, smooth airbrushed splash art, tiny facet mosaics, pervasive brush noise, grain or texture filters. Flat abstract backdrop; no text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-elementstorm.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-c4866b42-e900-43ed-bcf7-356df05c7a92.png"
+    },
+    {
+      "card_id": "cmtn0xt0zr7",
+      "asset": "cards/martial-cmtn0xt0zr7.webp",
+      "revision": "goldhammer-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw FIRST image 闪金之锤 preserving exact original SQUARE composition, straight front camera and object proportions. A SINGLE golden warhammer centered vertically, extremely long straight thin golden handle extending upright to small beveled cap near top margin, large horizontal symmetrical block-shaped golden hammerhead near bottom quarter. Preserve original broad beveled rectangular striking faces at both ends and small central square with X-shaped engraving, no added ornaments. Hammer rests/strikes at bottom central point with bold white-and-yellow angular impact burst spreading upward and to both sides, original burst scale and silhouette. Uniform muted mustard-gold backdrop. Render hammer as a few broad gold/ochre/cream opaque painted planes, selective white opaque accents and clean structural edges, avoiding slick photoreal metal reflections. No character, hand or extra objects. Images 2–4 are STYLE ONLY references for large opaque brush masses and confident simplified painting; do not copy their character identities, clothes or poses. STYLE: rough hand-painted anime illustration constructed with large connected opaque color masses, broad directional curved swipes and blunt dabs, decisive handmade edges and grouped hard shadows, expressive selective overlaps surrounded by quiet areas. Hair in coherent substantial locks, cloth in principal fold planes, no fine strands or dense wrinkles. Clear anime eyes and readable hands, economical face marks. Objects and metal rendered in a few broad matte colored planes with selective opaque bright accents. Mostly muted colors with concentrated saturated highlights. No glossy 3D, realistic polished metal, smooth airbrushed splash art, tiny facet mosaics, pervasive brush noise, grain or texture filters. Flat abstract backdrop; no text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-cmtn0xt0zr7.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-a1cba3f9-9da2-47c0-a630-0190caf5723d.png"
+    }
+  ]
+}

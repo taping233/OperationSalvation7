@@ -1,0 +1,147 @@
+{
+  "phantom": {
+    "file": "docs/evidence/2026-10-12-WF-roguelike-bgm-reference/01-phantom-battle1.m4a",
+    "sha256": "85c0e4a0cbba6d0a3d906efec2da51183f8718b933121550512ae3c7baa2dadc",
+    "windows": [
+      {
+        "offset_seconds": 0,
+        "seconds": 30.0,
+        "band_power_fraction": {
+          "20_150": 0.644368052482605,
+          "150_500": 0.20628660917282104,
+          "500_2000": 0.09454364329576492,
+          "2000_4000": 0.02321654185652733,
+          "4000_10000": 0.009034862741827965
+        },
+        "spectral_centroid_hz": 318.9512422833093,
+        "harmonic_energy_fraction": 0.7563893795013428,
+        "onset_peaks_per_second": 5.466666666666667,
+        "halfsecond_level_p90_p10_db": 3.2012456536293037,
+        "stereo_correlation": 0.394266064092671,
+        "crest_db": 15.463874340057373
+      },
+      {
+        "offset_seconds": 30,
+        "seconds": 30.0,
+        "band_power_fraction": {
+          "20_150": 0.5517002940177917,
+          "150_500": 0.22345760464668274,
+          "500_2000": 0.1816234290599823,
+          "2000_4000": 0.02641814947128296,
+          "4000_10000": 0.008775674737989902
+        },
+        "spectral_centroid_hz": 379.80733931126,
+        "harmonic_energy_fraction": 0.8016382455825806,
+        "onset_peaks_per_second": 5.0,
+        "halfsecond_level_p90_p10_db": 4.9398011565208435,
+        "stereo_correlation": 0.503836770735916,
+        "crest_db": 12.638740539550781
+      }
+    ]
+  },
+  "mizuki": {
+    "file": "docs/evidence/2026-10-12-WF-roguelike-bgm-reference/03-mizuki-battle1.m4a",
+    "sha256": "b3c67abd657f96f390593a748c32a43f7418c68aa10d0ab504e40b5164a46571",
+    "windows": [
+      {
+        "offset_seconds": 0,
+        "seconds": 30.0,
+        "band_power_fraction": {
+          "20_150": 0.4753282070159912,
+          "150_500": 0.25987428426742554,
+          "500_2000": 0.2507893443107605,
+          "2000_4000": 0.011174110695719719,
+          "4000_10000": 0.0019153757020831108
+        },
+        "spectral_centroid_hz": 384.4174936316972,
+        "harmonic_energy_fraction": 0.7620158791542053,
+        "onset_peaks_per_second": 4.566666666666666,
+        "halfsecond_level_p90_p10_db": 4.585231137275696,
+        "stereo_correlation": 0.10896093272042875,
+        "crest_db": 13.199142217636108
+      },
+      {
+        "offset_seconds": 30,
+        "seconds": 30.0,
+        "band_power_fraction": {
+          "20_150": 0.5726717114448547,
+          "150_500": 0.21615047752857208,
+          "500_2000": 0.19028118252754211,
+          "2000_4000": 0.016263414174318314,
+          "4000_10000": 0.0035050383303314447
+        },
+        "spectral_centroid_hz": 366.7596398033963,
+        "harmonic_energy_fraction": 0.7419486045837402,
+        "onset_peaks_per_second": 5.166666666666667,
+        "halfsecond_level_p90_p10_db": 3.060144221782684,
+        "stereo_correlation": 0.25532604678994036,
+        "crest_db": 11.605281829833984
+      }
+    ]
+  },
+  "v1": {
+    "file": "docs/evidence/2026-10-12-WF-battle-rewrite-demo/battle-shadowtide-30s.mp3",
+    "sha256": "32d1ad6c85d699e4787f38cb9c19080fb695d10cb9a69dbd0b0e70df94f4a956",
+    "windows": [
+      {
+        "offset_seconds": 0,
+        "seconds": 30.0,
+        "band_power_fraction": {
+          "20_150": 0.4601614773273468,
+          "150_500": 0.2535575032234192,
+          "500_2000": 0.1497420221567154,
+          "2000_4000": 0.12154089659452438,
+          "4000_10000": 0.014929670840501785
+        },
+        "spectral_centroid_hz": 679.5788021899349,
+        "harmonic_energy_fraction": 0.7533655166625977,
+        "onset_peaks_per_second": 5.666666666666667,
+        "halfsecond_level_p90_p10_db": 3.6230157256126403,
+        "stereo_correlation": 0.9854906460623378,
+        "crest_db": 16.347596645355225
+      }
+    ]
+  },
+  "v2": {
+    "file": "docs/evidence/2026-10-12-WF-battle-rewrite-v2/battle-shadowtide-v2-30s.mp3",
+    "sha256": "9ea02096bdf6ee096a17704d69bb424a2dedc1caf3af81ab3495f0fd73e1ec3e",
+    "windows": [
+      {
+        "offset_seconds": 0,
+        "seconds": 30.0,
+        "band_power_fraction": {
+          "20_150": 0.6211880445480347,
+          "150_500": 0.14801746606826782,
+          "500_2000": 0.18368278443813324,
+          "2000_4000": 0.04055410251021385,
+          "4000_10000": 0.006417602300643921
+        },
+        "spectral_centroid_hz": 420.8083571847356,
+        "harmonic_energy_fraction": 0.7836270928382874,
+        "onset_peaks_per_second": 5.133333333333334,
+        "halfsecond_level_p90_p10_db": 6.114188647270202,
+        "stereo_correlation": 0.6407280824919404,
+        "crest_db": 16.701542139053345
+      }
+    ]
+  },
+  "v1_score": {
+    "melody_note_count": 51,
+    "melody_range_semitones": 17,
+    "mean_melodic_leap_semitones": 2.44,
+    "leaps_over_fifth": 0,
+    "median_note_seconds": 0.25390625,
+    "notes_under_250ms": 25,
+    "sustained_melody_notes_over_500ms": 2
+  },
+  "v2_score": {
+    "melody_note_count": 40,
+    "melody_range_semitones": 13,
+    "mean_melodic_leap_semitones": 2.769230769230769,
+    "leaps_over_fifth": 0,
+    "median_note_seconds": 0.439453125,
+    "notes_under_250ms": 1,
+    "sustained_melody_notes_over_500ms": 8
+  },
+  "scope": "Identical 30s analysis windows, mono RMS normalized for spectral/envelope comparison; references also sampled at 30-60s. Not human listening, source separation or exact melody transcription."
+}

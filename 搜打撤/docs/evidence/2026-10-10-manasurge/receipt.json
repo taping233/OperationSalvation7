@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "cc-mana-surge",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-0e1a2164-57bf-43f9-a3b5-b5e8626e102a.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-manasurge/cards-spell-cc-mana-surge-source.png",
+        "bytes": 2010146,
+        "sha256": "d214c8b95703a7b56396f5a5f2165c8bc07202a4856d2de59640bf9730f88b3b"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-manasurge/cards-spell-cc-mana-surge-full-before.webp",
+          "bytes": 124692,
+          "sha256": "12c50b19d71921d91932ef7118118d29d58fc0eaed515c9f9787e75e6b40ea3f"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-manasurge/cards-spell-cc-mana-surge-thumb-before.webp",
+          "bytes": 23590,
+          "sha256": "c30e3102377facac7c09a6b84a6d4cb207812808eb7cababac1d25511776e3bc"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-cc-mana-surge.webp",
+          "bytes": 158470,
+          "sha256": "cf1d9279c4a3b7764947b93d9fb9a17b7e583230cf548bba625d5b7121c985de",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-cc-mana-surge.webp",
+          "bytes": 21506,
+          "sha256": "406acf5ddf91720709cbb4ecba1de31dacda8192caceae88ac0c3907d586f713",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "manasurge-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-cc-mana-surge.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 158470,
+            "sha256": "cf1d9279c4a3b7764947b93d9fb9a17b7e583230cf548bba625d5b7121c985de",
+            "source": "docs/evidence/2026-10-10-manasurge/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-cc-mana-surge.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 23590,
+            "sha256": "c30e3102377facac7c09a6b84a6d4cb207812808eb7cababac1d25511776e3bc",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-cc-mana-surge.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 21506,
+            "sha256": "406acf5ddf91720709cbb4ecba1de31dacda8192caceae88ac0c3907d586f713",
+            "source": "docs/evidence/2026-10-10-manasurge/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 877,
+  "manifest_count_after": 878
+}

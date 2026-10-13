@@ -1,0 +1,450 @@
+{
+  "id": "extraction",
+  "title": "渡口倒数",
+  "stem": "09-extraction-last-ferry",
+  "idea": "七八拍2+2+3的撤离脉冲；小提琴长主线、竖琴节拍与远圆号，推进明确但不骤然加响。",
+  "key": "D mixolydian",
+  "meter": [
+    7,
+    8
+  ],
+  "bpm_quarter": 108,
+  "bars": 32,
+  "total_beats": 112.0,
+  "seconds": 62.222229166666665,
+  "tracks": [
+    {
+      "name": "Violin signal",
+      "program": 40,
+      "bank": 0,
+      "hand": null,
+      "notes": 64,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/09-extraction-last-ferry-Violin-signal.wav",
+        "bytes": 23893424,
+        "sha256": "4c214c73c49293b84e6aa7c247e605d2dbe20bc58f9d6fa84613738482c81d9a"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.97
+        ],
+        [
+          7.0,
+          0.97
+        ],
+        [
+          21.0,
+          1
+        ],
+        [
+          42.0,
+          1
+        ],
+        [
+          56.0,
+          1.04
+        ],
+        [
+          77.0,
+          1.04
+        ],
+        [
+          91.0,
+          0.94
+        ],
+        [
+          105.0,
+          0.94
+        ],
+        [
+          112.0,
+          0.97
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Harp beacon steps",
+      "program": 46,
+      "bank": 0,
+      "hand": null,
+      "notes": 22,
+      "pan": -31,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/09-extraction-last-ferry-Harp-beacon-steps.wav",
+        "bytes": 23893424,
+        "sha256": "b9cfa08fa0d1a3430faa0b719e4fb9acae1ebdba4803a06f61111e933f192fbe"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          7.0,
+          0.68
+        ],
+        [
+          21.0,
+          0.72
+        ],
+        [
+          42.0,
+          0.72
+        ],
+        [
+          56.0,
+          0.84
+        ],
+        [
+          77.0,
+          0.84
+        ],
+        [
+          91.0,
+          0.58
+        ],
+        [
+          105.0,
+          0.58
+        ],
+        [
+          112.0,
+          0.68
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Horn safe passage",
+      "program": 60,
+      "bank": 0,
+      "hand": null,
+      "notes": 10,
+      "pan": 20,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/09-extraction-last-ferry-Horn-safe-passage.wav",
+        "bytes": 23893424,
+        "sha256": "3d74e51e6318446e6a8c05b7c88616c3c57020291ef59fd9c6d8f1effc86cf19"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.35
+        ],
+        [
+          7.0,
+          0.35
+        ],
+        [
+          21.0,
+          0.8
+        ],
+        [
+          42.0,
+          0.8
+        ],
+        [
+          56.0,
+          0.92
+        ],
+        [
+          77.0,
+          0.92
+        ],
+        [
+          91.0,
+          0.48
+        ],
+        [
+          105.0,
+          0.48
+        ],
+        [
+          112.0,
+          0.35
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Cello countdown",
+      "program": 42,
+      "bank": 0,
+      "hand": null,
+      "notes": 32,
+      "pan": 28,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/09-extraction-last-ferry-Cello-countdown.wav",
+        "bytes": 23893424,
+        "sha256": "93cc444a61e94b55b2e24c9051e1fa0f6263868d0c1f476890fb20368d0b5523"
+      },
+      "target_active_rms_dbfs": -34,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          7.0,
+          0.83
+        ],
+        [
+          21.0,
+          0.92
+        ],
+        [
+          42.0,
+          0.92
+        ],
+        [
+          56.0,
+          0.98
+        ],
+        [
+          77.0,
+          0.98
+        ],
+        [
+          91.0,
+          0.85
+        ],
+        [
+          105.0,
+          0.85
+        ],
+        [
+          112.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Long crossing strings",
+      "program": 49,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": -35,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/09-extraction-last-ferry-Long-crossing-strings.wav",
+        "bytes": 23893424,
+        "sha256": "41036769d1e5c346a6e577bf731f94543566484c795ff91dc3cce04eda6162b1"
+      },
+      "target_active_rms_dbfs": -34,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          7.0,
+          0.83
+        ],
+        [
+          21.0,
+          0.92
+        ],
+        [
+          42.0,
+          0.92
+        ],
+        [
+          56.0,
+          0.98
+        ],
+        [
+          77.0,
+          0.98
+        ],
+        [
+          91.0,
+          0.85
+        ],
+        [
+          105.0,
+          0.85
+        ],
+        [
+          112.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Timpani distant clock",
+      "program": 47,
+      "bank": 0,
+      "hand": null,
+      "notes": 21,
+      "pan": -6,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/09-extraction-last-ferry-Timpani-distant-clock.wav",
+        "bytes": 23893424,
+        "sha256": "b3bd9f5a6194ce8e232768324ab324f6610ca650c964a3fd29d556d75543c48e"
+      },
+      "target_active_rms_dbfs": -39,
+      "continuous_gain_points": [
+        [
+          0,
+          0.8
+        ],
+        [
+          7.0,
+          0.8
+        ],
+        [
+          21.0,
+          0.88
+        ],
+        [
+          42.0,
+          0.88
+        ],
+        [
+          56.0,
+          0.93
+        ],
+        [
+          77.0,
+          0.93
+        ],
+        [
+          91.0,
+          0.81
+        ],
+        [
+          105.0,
+          0.81
+        ],
+        [
+          112.0,
+          0.8
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/09-extraction-last-ferry-Steady-low-foundation.wav",
+        "bytes": 23893424,
+        "sha256": "950b2bf6ffb4c4a665cc6a58901c150d7f88b38181de970ab4eb087e1f008ff6"
+      },
+      "target_active_rms_dbfs": -33,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          7.0,
+          0.83
+        ],
+        [
+          21.0,
+          0.92
+        ],
+        [
+          42.0,
+          0.92
+        ],
+        [
+          56.0,
+          0.98
+        ],
+        [
+          77.0,
+          0.98
+        ],
+        [
+          91.0,
+          0.85
+        ],
+        [
+          105.0,
+          0.85
+        ],
+        [
+          112.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-8.12",
+    "input_lra": "1.40",
+    "input_thresh": "-28.50",
+    "output_i": "-23.01",
+    "output_tp": "-12.63",
+    "output_lra": "1.40",
+    "output_thresh": "-33.01",
+    "normalization_type": "dynamic",
+    "target_offset": "0.01"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.3493499177212355,
+      0.32629216188376586
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/09-extraction-last-ferry.mmp",
+      "bytes": 6758,
+      "sha256": "336fce0c352c6e309bd8d7905c438da2ded37803370e3ddc2c144a8fb9cb073e"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/09-extraction-last-ferry.wav",
+      "bytes": 17920046,
+      "sha256": "0c11934dfa3abc14af66d5e54f3e1c9b665ccd95f1a3f2aa5d2a773e451fa994"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/09-extraction-last-ferry.mp3",
+      "bytes": 1993028,
+      "sha256": "137fee9fc2bd7811041f01718fc1dff27f3d57316a99438cb651650edcd9bb6e"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/09-extraction-last-ferry.ogg",
+      "bytes": 1186398,
+      "sha256": "782516e45630614d1f9f2ef1683652860519f78fd646a0086c862d4e44555e2d"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "opening"
+    },
+    {
+      "start_bar": 4,
+      "name": "first development"
+    },
+    {
+      "start_bar": 14,
+      "name": "contrast"
+    },
+    {
+      "start_bar": 24,
+      "name": "connected return"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed"
+}

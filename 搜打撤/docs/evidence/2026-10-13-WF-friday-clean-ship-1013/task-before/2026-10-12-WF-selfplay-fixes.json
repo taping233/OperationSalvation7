@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-selfplay-fixes-1012",
+  "date": "2026-10-12",
+  "owner": "Friday",
+  "goal": "Autonomous actual gameplay in current-source Vite; fix observed bugs, unreasonable flows, visual/style defects with concrete game references",
+  "stage": "doing",
+  "paths": [
+    "docs/evidence/2026-10-12-WF-selfplay-fixes",
+    "docs/PARALLEL-REGISTRY.md"
+  ],
+  "doneWhen": [
+    "Natural new-run loop played through onboarding, nodes, battle and return/settlement; observed high-impact defects repaired and affected flow rechecked; boundaries recorded"
+  ],
+  "runtime": {
+    "url": "http://localhost:5339/",
+    "cwd": "D:\\素材\\代号柒\\搜打撤",
+    "pid": 12532,
+    "command": "npm run web -- --port 5339 --skip-compile",
+    "source": "current game/, no copied snapshot"
+  },
+  "constraints": [
+    "Protect all five existing localhost:5200 archive slots",
+    "Only current Codex IAB/current window",
+    "No build/full test/commit/push/delete",
+    "Existing gameplay mechanics and approved art preserved; fix observed behavior/presentation, no speculative rebalance",
+    "Do not overwrite other active owners; findings first, paths registered before scoped edits"
+  ],
+  "checks": [],
+  "unverified": [
+    "Gameplay not yet started"
+  ],
+  "findings": []
+}

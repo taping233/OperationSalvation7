@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-staff",
+      "asset": "cards/expedition-starters/staff.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-85ba7b20-66a7-479e-89a9-1eea3b3f470c.png",
+      "revision": "staff-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the actual current staff card edit target, preserving the original PORTRAIT composition closely: one long thin vertical silver-black magic staff centered, fully visible from top crystal to pointed bottom end, spanning nearly the whole height. At the upper part, two symmetrical inward-facing open curved silver prongs surround a floating cyan-blue elongated diamond crystal ABOVE the head; below them is a compact spiky silver filigree head with a small blue inset, leading into a decorated upper shaft, a long quiet black lower shaft and a silver pointed foot. Keep the original proportions, silhouette, centered placement and blue-gray backdrop. Images 2, 3, 4 are DRAWING STYLE references only, borrow their broad opaque hand-painted construction, never subjects or costume motifs. Rough hand-painted anime color study: large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Group silver ornaments into coherent broad planes while retaining the two curved prongs and main spikes. Economical hard-edged silver-gray highlights and cool charcoal shadows, blue crystal as the concentrated bright focal point. Long strokes explain shaft form, avoid fine engraving or densely traced filigree. Sparse symbolic specks around the crystal, quiet muted blue-gray abstract background. No character, hand or extra prop; no glossy 3D, photoreal metal, facet mosaics outside crystal, all-over grain/texture filters, text, frame, watermark or UI. Match original portrait aspect ratio.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/expedition-starters/staff.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    }
+  ]
+}

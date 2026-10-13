@@ -1,0 +1,37 @@
+[
+  {
+    "name": "volcano-small-differences",
+    "path": ".tmp/imagegen/ability-style-drafts-1010/volcano-small-differences.png",
+    "bytes": 2245159,
+    "sha256": "dd0054643036034e69d8ef0efde47fb50e9943b53df7e84043de595515c6d056",
+    "feedback": "未认可：三版差异过小"
+  },
+  {
+    "name": "wind-small-differences",
+    "path": ".tmp/imagegen/ability-style-drafts-1010/wind-small-differences.png",
+    "bytes": 2071602,
+    "sha256": "843b4200553dfa00a144fbde637b0c3d25748950bd16ff198baa7dd569e22ff3",
+    "feedback": "未认可：三版差异过小"
+  },
+  {
+    "name": "style-A",
+    "path": ".tmp/imagegen/ability-style-drafts-1010/style-A.png",
+    "bytes": 1573361,
+    "sha256": "ce5ec050d9d6cce545d0969c42c910cb18d5f38e3cd349e5ba150aebd188f0d1",
+    "feedback": "未认可：平涂画法偏离照相馆"
+  },
+  {
+    "name": "style-B",
+    "path": ".tmp/imagegen/ability-style-drafts-1010/style-B.png",
+    "bytes": 2683313,
+    "sha256": "93dc0067411c7827af12da3ad0075930db59728c9ea0e6d0cb060bbde5580a99",
+    "feedback": "未认可：油画肌理偏离照相馆"
+  },
+  {
+    "name": "style-C",
+    "path": ".tmp/imagegen/ability-style-drafts-1010/style-C.png",
+    "bytes": 2657328,
+    "sha256": "9568daf6e3e6825f6b52c37f34d24ad1fb41bfa94b9dccc4c02ea008cbd038d1",
+    "feedback": "未认可：粗线画法偏离照相馆"
+  }
+]

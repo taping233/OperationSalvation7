@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt7-arcanescroll",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-63c8ae43-bde7-4db8-b2b1-cba49c35a99e.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-arcanescroll/cards-equip-tt7-arcanescroll-source.png",
+        "bytes": 1651632,
+        "sha256": "aad7c5ce8fb290fab1ef3f601e39cb9abc64cc1e240356999f91161ffb3a312c"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-arcanescroll/cards-equip-tt7-arcanescroll-full-before.webp",
+          "bytes": 55660,
+          "sha256": "c0c13360988b38d03b785870a74e8bf14256431d978ce2aaf2b9af368e36d4d8"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-arcanescroll/cards-equip-tt7-arcanescroll-thumb-before.webp",
+          "bytes": 15424,
+          "sha256": "aa93c9afb1cfdb367de6765e048b7aca82bd4132383c53a3d5d060e6661ef54a"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt7-arcanescroll.webp",
+          "bytes": 85072,
+          "sha256": "b3708f83f6aa7e69c5e61e438666544df3c367cadd3f5ce40322d668ee8f8cb7",
+          "size": [
+            1108,
+            1420
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt7-arcanescroll.webp",
+          "bytes": 11656,
+          "sha256": "c14366802700684916a9f0d5b12bbfe1e0ac9d6014c2a936608f9be98c52a712",
+          "size": [
+            350,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "arcanescroll-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/equip-tt7-arcanescroll.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 85072,
+            "sha256": "b3708f83f6aa7e69c5e61e438666544df3c367cadd3f5ce40322d668ee8f8cb7",
+            "source": "docs/evidence/2026-10-10-arcanescroll/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/equip-tt7-arcanescroll.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15424,
+            "sha256": "aa93c9afb1cfdb367de6765e048b7aca82bd4132383c53a3d5d060e6661ef54a",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/equip-tt7-arcanescroll.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 11656,
+            "sha256": "c14366802700684916a9f0d5b12bbfe1e0ac9d6014c2a936608f9be98c52a712",
+            "source": "docs/evidence/2026-10-10-arcanescroll/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 885,
+  "manifest_count_after": 886
+}

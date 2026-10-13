@@ -1,0 +1,397 @@
+{
+  "id": "altar",
+  "title": "幽核回响",
+  "stem": "08-altar-hollow-core",
+  "idea": "污染核心的祭仪：巴松与管风琴，低部不间断，颤弦远置；以悬置和声营造危险，避免高音尖叫。",
+  "key": "F-sharp minor",
+  "meter": [
+    4,
+    4
+  ],
+  "bpm_quarter": 68,
+  "bars": 24,
+  "total_beats": 96.0,
+  "seconds": 84.705875,
+  "tracks": [
+    {
+      "name": "Bassoon ritual",
+      "program": 70,
+      "bank": 0,
+      "hand": null,
+      "notes": 48,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/08-altar-hollow-core-Bassoon-ritual.wav",
+        "bytes": 32527144,
+        "sha256": "7f2b2148831ff82ee4d8d1c1abe6245cc39781b7d68e2ff1b4e7ec7f80149543"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.97
+        ],
+        [
+          24.0,
+          0.97
+        ],
+        [
+          40.0,
+          1
+        ],
+        [
+          56.0,
+          1
+        ],
+        [
+          72.0,
+          1.04
+        ],
+        [
+          80.0,
+          1.04
+        ],
+        [
+          88.0,
+          0.94
+        ],
+        [
+          96.0,
+          0.94
+        ],
+        [
+          96.0,
+          0.97
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Organ carved stone",
+      "program": 19,
+      "bank": 0,
+      "hand": null,
+      "notes": 24,
+      "pan": -14,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/08-altar-hollow-core-Organ-carved-stone.wav",
+        "bytes": 32527144,
+        "sha256": "47447d73c85409158d0797a655e3e673a993ef9e4e65ea3c877bda79d6d8c820"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          24.0,
+          0.83
+        ],
+        [
+          40.0,
+          0.92
+        ],
+        [
+          56.0,
+          0.92
+        ],
+        [
+          72.0,
+          0.98
+        ],
+        [
+          80.0,
+          0.98
+        ],
+        [
+          88.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ],
+        [
+          96.0,
+          0.85
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Viola suspended",
+      "program": 41,
+      "bank": 0,
+      "hand": null,
+      "notes": 12,
+      "pan": 25,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/08-altar-hollow-core-Viola-suspended.wav",
+        "bytes": 32527144,
+        "sha256": "823deddee457788decf0811a27c41ed2cffe3049ff0e9e24ab9a4dfc1eabd6d0"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          24.0,
+          0.83
+        ],
+        [
+          40.0,
+          0.92
+        ],
+        [
+          56.0,
+          0.92
+        ],
+        [
+          72.0,
+          0.98
+        ],
+        [
+          80.0,
+          0.98
+        ],
+        [
+          88.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ],
+        [
+          96.0,
+          0.85
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Tremolo distant pulse",
+      "program": 44,
+      "bank": 0,
+      "hand": null,
+      "notes": 12,
+      "pan": -32,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/08-altar-hollow-core-Tremolo-distant-pulse.wav",
+        "bytes": 32527144,
+        "sha256": "01e9a6529cdccaf879fef375ffc629c31e15eb53a70d8c5db5d05142ae25cb93"
+      },
+      "target_active_rms_dbfs": -40,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          24.0,
+          0.83
+        ],
+        [
+          40.0,
+          0.92
+        ],
+        [
+          56.0,
+          0.92
+        ],
+        [
+          72.0,
+          0.98
+        ],
+        [
+          80.0,
+          0.98
+        ],
+        [
+          88.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ],
+        [
+          96.0,
+          0.85
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Celeste core light",
+      "program": 8,
+      "bank": 0,
+      "hand": null,
+      "notes": 14,
+      "pan": 32,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/08-altar-hollow-core-Celeste-core-light.wav",
+        "bytes": 32527144,
+        "sha256": "55eaba08e5ba99396bbbd8a3d92706ede567aa1812bd698b92803371dbf0d2fb"
+      },
+      "target_active_rms_dbfs": -43,
+      "continuous_gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          24.0,
+          0.68
+        ],
+        [
+          40.0,
+          0.72
+        ],
+        [
+          56.0,
+          0.72
+        ],
+        [
+          72.0,
+          0.84
+        ],
+        [
+          80.0,
+          0.84
+        ],
+        [
+          88.0,
+          0.58
+        ],
+        [
+          96.0,
+          0.58
+        ],
+        [
+          96.0,
+          0.68
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 12,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/08-altar-hollow-core-Steady-low-foundation.wav",
+        "bytes": 32527144,
+        "sha256": "fa2c9d7e1f86afe33e357e33879b88c4cbf350d2bf4febfd863bd4cd3b1a8afd"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          24.0,
+          0.83
+        ],
+        [
+          40.0,
+          0.92
+        ],
+        [
+          56.0,
+          0.92
+        ],
+        [
+          72.0,
+          0.98
+        ],
+        [
+          80.0,
+          0.98
+        ],
+        [
+          88.0,
+          0.85
+        ],
+        [
+          96.0,
+          0.83
+        ],
+        [
+          96.0,
+          0.85
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-9.44",
+    "input_lra": "2.20",
+    "input_thresh": "-28.50",
+    "output_i": "-22.99",
+    "output_tp": "-13.96",
+    "output_lra": "2.10",
+    "output_thresh": "-32.99",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.01"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.6830166130569572,
+      0.3960154920346362
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/08-altar-hollow-core.mmp",
+      "bytes": 5868,
+      "sha256": "a5a44e7e92f2393b12cf54550db4a00c10f4b4398fce0a9fbefdb5e26eeb0760"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/08-altar-hollow-core.wav",
+      "bytes": 24395336,
+      "sha256": "0e520f27006a6dac95f4538bc0090ca36d056f61c6ac3c5a0aa85f4b3fa96e4b"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/08-altar-hollow-core.mp3",
+      "bytes": 2712644,
+      "sha256": "1ff7c5fb401b8e53e5cd1c40109a4e76ad1387080125ceaf7976f6868575927c"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/08-altar-hollow-core.ogg",
+      "bytes": 1511783,
+      "sha256": "dc1d9f7f544f451cda46b4fd89bbd9ed6abc0ce6b1ad42ac27311c8e2da7a850"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "opening"
+    },
+    {
+      "start_bar": 8,
+      "name": "first development"
+    },
+    {
+      "start_bar": 16,
+      "name": "contrast"
+    },
+    {
+      "start_bar": 22,
+      "name": "connected return"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed"
+}

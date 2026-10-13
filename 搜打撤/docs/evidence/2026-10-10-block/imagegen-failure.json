@@ -1,0 +1,11 @@
+{
+  "card_id": "tt2-block",
+  "nai_generated": true,
+  "installed": false,
+  "attempts": [
+    { "stage": "output", "status": 400, "categories": ["violence", "self-harm"], "request_id": "6583e2ec-85fa-4d96-ac4a-acd6d04b1ab4" },
+    { "stage": "input", "status": 400, "categories": ["self-harm"], "request_id": "a38c910b-c327-4ca4-bcb2-7ca7a1ed3af4", "clarification": "明确为无伤护具格挡练习，仍拒绝" },
+    { "stage": "input", "status": 400, "categories": ["self-harm"], "request_id": "31f26a17-9f5c-4936-a746-694e9bc9aeeb", "clarification": "老板要求再试；明确仅完整金属护具接触，无裸露皮肤，仍拒绝" }
+  ],
+  "status": "内置画风重绘阻塞，停止重试；旧大小图未动"
+}

@@ -1,0 +1,12 @@
+{
+  "prompt": "Use case: style-transfer. Redraw the spore wall card illustration in image 1, keeping its original landscape composition and aspect ratio. Image 1 is the composition target; images 2,3,4 are painting-style references only, do not copy their characters or costumes. Preserve the low-angle view, the enormous pale mint mushroom column slightly right of center with its broad cap near the top, staggered smaller mushroom columns forming a wall to its left and right, tangled brown root-like bases along the bottom. Keep the tiny dark-clothed human in the lower center-left, leaning right with a raised hand, and the concentrated cloud of vivid green spores just above and around that gesture. Preserve relative sizes, overlapping silhouettes, camera position and the muted gray-purple solid backdrop with open space around the mushroom silhouette. Do not add architecture or extra characters. Repaint as a rough hand-painted anime color study: large connected opaque masses, a few wide directional swipes and blunt dabs, confident handmade edges and selective unfinished areas. Simplify mushroom gills into several broad directional marks and roots into major interlocking dark/light shapes. Clearly grouped cool mint illuminated faces and gray teal shadows, dark brown roots, green spores as the concentrated bright accent. Keep necessary volume without fine scratched line networks, dense surface texture, glossy rendering, airbrushed glow, facet mosaics or grain filters. Human remains small and economical as a scale cue. No text, frame, watermark or UI.",
+  "references": [
+    "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt12-sporewall.webp",
+    "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+    "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+    "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+  ],
+  "tool": "built-in image_gen",
+  "output": ".tmp/imagegen/sporewall-redraw-20261010/sporewall-redraw.png",
+  "status": "integrated"
+}

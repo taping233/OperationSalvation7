@@ -1,0 +1,30 @@
+{
+  "status": "request-dispatched-candidate-not-approved",
+  "channel": "built-in image_gen",
+  "transparent_background": false,
+  "prompt": "Edit Image 1, the NAI shop composition draft, into a single painted style calibration sample. Images 2–4 are actual game card illustrations and control only the painting language: 2 painterly anime figures, 3 broad opaque material planes and restrained red/cream/blue-gray harmony, 4 economical color masses and loose directional brush edges. Do not copy any reference character, outfit, pearl, ribbon or bag.\nKeep the original brown-haired merchant, plain dark knit cap, scarf, charcoal coat with small terracotta-red inner cloth, clear face, coherent hands resting on the counter, calm indoor supply stall and asymmetric merchant-left layout. Landscape 16:9.\nCorrect the counter so its right end stops before x28% of canvas. Merchant body, arms, hands, counter and small lamp stay entirely within left28%, never crossing into the product area.\nRepaint the clean outlined figure and smooth counter in the actual cards' opaque hand-painted block language: broad directionally meaningful brush masses, a few coherent light/shadow planes, selectively clear face/eyes/hands/contact points, simplified hat/scarf/coat/counter. Remove dense hatching, regular wood grain, uniform small triangles, vector outlines, smooth airbrush and glossy3D surfaces. Complete readable silhouettes, human uneven painted edges, no sketch holes.\nReplace the solid green right field with quiet but believable interior atmosphere: two or three broad muted-teal curtain and warm-gray wall masses, one restrained dark upper beam and a few large cloth folds. x32–97%, y16–82% stays low contrast and low detail for real card products rendered later by code. Continuous painterly atmosphere, not a blank solid-color UI panel. Top12% and bottom14% are calm, without important props or faces.\nColor groups: warm-gray counter, muted deep teal cloth/wall, charcoal coat, localized dull terracotta inner cloth, small ochre lamp highlight. Shadow retains color, light is sparse and purposeful. Merchant and future real cards are the focus.\nNo snow/ice, exterior street, ruins, castle, bright doorway/window, crates, shelf products, cards, price tags, text, symbols, logos, UI boxes/buttons, bloom/halo/particles or new story character. No low-polygon environment. One original painted calibration sample, not a finished game screenshot.",
+  "references": [
+    {
+      "path": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-calibration/shop/source/nai-shop-calibration-v1.png",
+      "role": "edit target: composition and original merchant"
+    },
+    {
+      "path": "game/assets/cards/martial-tt7-stealth.webp",
+      "role": "actual card: figure painting language only"
+    },
+    {
+      "path": "game/assets/cards/equip-tt2-pearlbox.webp",
+      "role": "actual card: broad material planes and restrained color groups only"
+    },
+    {
+      "path": "game/assets/cards/equip-tt3-crimson-pouch.webp",
+      "role": "actual card: economical color masses and painterly edges only"
+    }
+  ],
+  "corrections": [
+    "counter within left 28%",
+    "right field continuous painted interior with low detail",
+    "actual card brushwork replaces dense lines / smooth surfaces"
+  ],
+  "gameIntegration": false
+}

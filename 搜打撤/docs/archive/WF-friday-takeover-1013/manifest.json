@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "at": "2026-10-13T15:39:49.010Z",
+  "task": "WF-friday-takeover-1013",
+  "method": "copy-original-before-revision",
+  "items": [
+    {
+      "source": "docs/PARALLEL-REGISTRY.md",
+      "target": "docs/archive/WF-friday-takeover-1013/originals/docs/PARALLEL-REGISTRY.md",
+      "sha256": "8b55718f615b815c6be90f65a101394850efe7e093d29f5f3e6eead110059f7d",
+      "replacedBy": "docs/evidence/2026-10-13-WF-friday-clean-ship-1013/README.md"
+    },
+    {
+      "source": "docs/PENDING.md",
+      "target": "docs/archive/WF-friday-takeover-1013/originals/docs/PENDING.md",
+      "sha256": "c6b4594fed445712067eee67be04e4922c23aecd5032c9adeeadf322d54bd5c7",
+      "replacedBy": "docs/evidence/2026-10-13-WF-friday-clean-ship-1013/README.md"
+    }
+  ],
+  "limits": [
+    "原文保持字节，内部相对链接仍以 source 原位置解释",
+    "本命令未修改源文件；替代状态由负责人核实并在现行入口注明"
+  ]
+}

@@ -1,0 +1,36 @@
+[
+  {
+    "channel": "builtin image_gen",
+    "intent": "style-transfer",
+    "prompt": "Use case: stylized-concept / style-transfer.\nAsset: full-page winter future-city entry reward background, landscape 16:9, no UI.\nInput images: Image 1 is the NAI composition draft, EDIT TARGET. Image 2 (stealth card) and Image 3 (pearlbox card) are STYLE REFERENCES ONLY: use their economical opaque anime brush painting, large light/shadow blocks, readable silhouettes and broad uneven brush edges. Do not copy the woman, dress, sword, pearl, box, jewellery or their fantasy subject matter.\nPrimary request: transform image 1 into a finished uninhabited modern future city entrance in winter. Remove the unintended person entirely. REMOVE the uniform crosshatch/grid texture over the entire image; repaint surfaces as broad opaque blocks with varied directional brush edges like the actual project card references. Replace the oversimplified blank bunker with a coherent modern transit entry: modular slate composite frame at LEFT x0-30%, recessed dark glass passage and a restrained terracotta service panel; a low elevated transit span across the distant upper third and a few varied modern apartment silhouettes. The architecture is future civic infrastructure, not a castle, not a space station, not neon cyberpunk.\nComposition: keep the wide cleared grey-blue pedestrian approach in centre and lower centre calm for two large reward cards. Built structures concentrated at the sides and upper third, NOT a main doorway behind centre cards. Avoid dramatic perspective streaks and avoid props in x32-75% y30-84%. Some thin uneven snow patches on roof edges and side curbs, a few bare winter twigs confined to bottom right edge, distant winter haze. Main walked-on ground cleared, not a pure white snowfield. Cold overcast daylight, no sunbeam, no lens flare; restrained slate blue/neutral grey with one small muted terracotta accent. Build forms from two or three large opaque light and shadow planes. Deliberate large brush strokes, selective refined contact edges, complete readable silhouettes. No text, numbers, signage lettering, characters, symbols, card frames, interface, ancient columns, flags, wood doors, neon, PBR sheen, low-poly triangular facets, tiny even marks, granular grunge or bloom.",
+    "actualImageInputs": [
+      {
+        "path": "source/nai-modern-winter-entry.png",
+        "role": "edit-target"
+      },
+      {
+        "path": "game/assets/cards/martial-tt7-stealth.webp",
+        "role": "style-reference-only"
+      },
+      {
+        "path": "game/assets/cards/equip-tt2-pearlbox.webp",
+        "role": "style-reference-only"
+      }
+    ],
+    "output": "source/builtin-modern-winter-entry-v1.png",
+    "status": "candidate-not-approved"
+  },
+  {
+    "channel": "builtin image_gen",
+    "intent": "precise-object-edit",
+    "prompt": "Use case: precise-object-edit / lighting-weather. Image 1 is the EDIT TARGET, the newly painted winter modern city entry background. Change ONLY the cleared pedestrian ground material across centre/lower field: replace wet shiny glassy/icy reflections and many small mottled floor marks with a MATTE dry cleared composite-paving plane, painted with a few large calm grey-blue opaque colour masses and broad uneven directional strokes. No reflected building or reflected doorway, no puddles, no polished sheen. Keep a few simple coherent paving seams and soft large structural shadows only. Retain the thin street-edge snow. Keep all architecture, left recessed dark glazed entrance and terracotta panel, transit bridge, modern distant skyline, framing, cold cloudy daylight, bare branches, canvas dimensions, no person/no UI exactly as in the target. This is a single floor material correction, preserve the existing composition.",
+    "actualImageInputs": [
+      {
+        "path": "source/builtin-modern-winter-entry-v1.png",
+        "role": "edit-target"
+      }
+    ],
+    "output": "source/builtin-modern-winter-entry-v2.png",
+    "status": "candidate-not-approved"
+  }
+]

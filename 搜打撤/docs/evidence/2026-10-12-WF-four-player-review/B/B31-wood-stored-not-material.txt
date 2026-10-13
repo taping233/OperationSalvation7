@@ -1,0 +1,195 @@
+- main:
+  - text: 金币 攻击 ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - button "返回基地":
+    - heading "基地" [level=2]
+    - generic: 档案 / 02
+    - generic "基地物资":
+      - generic "木材 0":
+        - generic: "0"
+        - generic: 木材
+        - text: 木材
+      - generic "口粮 0":
+        - generic: "0"
+        - generic: 口粮
+        - text: 口粮
+      - generic "钥匙 0":
+        - generic: "0"
+        - generic: 钥匙
+        - text: 钥匙
+      - generic "储备币 2":
+        - generic: "2"
+        - generic: 储备币
+        - text: 储备币
+    - main:
+      - heading "后勤仓库" [level=2]
+      - button "待复原 11 ↗"
+      - button "交易所 ↗"
+      - generic: 14 / 25 格
+      - button "扩建 ↗"
+      - navigation "战利品用途":
+        - button "全部" [pressed]:
+          - generic: ▦
+          - generic: 全部
+        - button "战斗卡牌":
+          - generic: ✦
+          - generic: 战斗卡牌
+        - button "消耗物品":
+          - generic: ▣
+          - generic: 消耗物品
+        - button "归档培养":
+          - generic: ◈
+          - generic: 归档培养
+      - textbox "搜索仓库卡牌":
+        - /placeholder: 搜索卡牌
+      - combobox "筛选卡牌类型":
+        - option "全部类型" [selected]
+        - option "武术"
+        - option "资源"
+        - option "道具"
+        - option "法术"
+      - combobox "筛选卡牌品质":
+        - option "全部品质" [selected]
+        - option "古朴"
+        - option "稀有"
+        - option "传说"
+        - option "史诗"
+      - generic: 14 种
+      - region "战利品卡牌":
+        - generic "向下滚动浏览卡牌":
+          - button "选择割蚀，持有1张":
+            - generic: "1"
+            - img "割蚀"
+            - generic: 割蚀
+            - generic: 武术 · 古朴 古朴
+            - generic: 使 1 名敌人的攻击力降低 2 点，持续 3 回合；对该敌人附加 1 层流血。
+            - generic: 割蚀
+            - strong: ×1
+          - button "选择格挡，持有1张":
+            - generic: "1"
+            - img "格挡"
+            - generic: 格挡
+            - generic: 武术 · 古朴 古朴
+            - generic: 本回合，你受到的每段伤害降为 1 点。
+            - generic: 格挡
+            - strong: ×1
+          - button "选择口粮，持有1张":
+            - generic: "0"
+            - img "口粮"
+            - generic: 口粮
+            - generic: 资源 · 稀有 稀有
+            - generic: 升级宠物。
+            - generic: 口粮
+            - strong: ×1
+          - button "选择大量木材，持有1张" [active] [pressed]:
+            - generic: "0"
+            - img "大量木材"
+            - generic: 大量木材
+            - generic: 资源 · 稀有 稀有
+            - generic: 木材 ×2。
+            - generic: 大量木材
+            - strong: ×1
+          - button "选择宠物蛋，持有1张":
+            - generic: "0"
+            - img "宠物蛋"
+            - generic: 宠物蛋
+            - generic: 资源 · 传说 传说
+            - generic: 可以孵化宠物。
+            - generic: 宠物蛋
+            - strong: ×1
+          - button "选择霜月斩，持有1张":
+            - generic: "2"
+            - img "霜月斩"
+            - generic: 霜月斩
+            - generic: 武术 · 史诗 史诗
+            - generic: 造成（你的攻击力 + 2）点攻击伤害；对目标附加冰冻与禁疗，持续 1 回合。
+            - generic: 霜月斩
+            - strong: ×1
+          - button "选择连击箭，持有1张":
+            - generic: "1"
+            - img "连击箭"
+            - generic: 连击箭
+            - generic: 武术 · 古朴 古朴
+            - generic: 造成（你的攻击力 - 1）点攻击伤害；若你打出的上一张牌是武术牌，本牌变为 0 费。
+            - generic: 连击箭
+            - strong: ×1
+          - button "选择狂暴药水，持有1张":
+            - generic: "0"
+            - img "狂暴药水"
+            - generic: 狂暴药水
+            - generic: 道具 · 稀有 稀有
+            - generic: 你的攻击力增加 2 点，持续 1 回合。
+            - generic: 狂暴药水
+            - strong: ×1
+          - button "选择不稳定射线，持有1张":
+            - generic: "1"
+            - img "不稳定射线"
+            - generic: 不稳定射线
+            - generic: 法术 · 古朴 古朴
+            - generic: 造成 4-6 点法术伤害。
+            - generic: 不稳定射线
+            - strong: ×1
+          - button "选择净化箭，持有1张":
+            - generic: "1"
+            - img "净化箭"
+            - generic: 净化箭
+            - generic: 武术 · 古朴 古朴
+            - generic: 造成（你的攻击力 - 1）点攻击伤害；净化自身。
+            - generic: 净化箭
+            - strong: ×1
+          - button "选择后备能源，持有1张":
+            - generic: "6"
+            - img "后备能源"
+            - generic: 后备能源
+            - generic: 法术 · 史诗 史诗
+            - img "cards"
+            - text: 抽 2
+            - generic: 抽 2 张牌，并回复你的全部能量；你的消耗口袋中每有 1 张法术牌，本牌费用减少 1 点。
+            - generic: 后备能源
+            - strong: ×1
+          - button "选择破浪斩，持有1张":
+            - generic: "1"
+            - img "破浪斩"
+            - generic: 破浪斩
+            - generic: 武术 · 稀有 稀有
+            - generic: 造成（你的攻击力 + 3）点攻击伤害；你下回合无法抽牌。
+            - generic: 破浪斩
+            - strong: ×1
+          - button "选择铜币，持有1张":
+            - generic: "0"
+            - img "铜币"
+            - generic: 铜币
+            - generic: 资源 · 古朴 古朴
+            - generic: 可出售。
+            - generic: 铜币
+            - strong: ×1
+          - button "选择斩杀，持有1张":
+            - generic: "1"
+            - img "斩杀"
+            - generic: 斩杀
+            - generic: 武术 · 传说 传说
+            - generic: 对生命不超过 9 点的敌人造成 9 点真实伤害。
+            - generic: 斩杀
+            - strong: ×1
+      - complementary "当前浏览卡牌":
+        - generic: 当前浏览
+        - generic: 大量木材
+        - generic: 1 张
+        - button "查看详情 ↗"
+    - navigation "基地房间":
+      - button "基地":
+        - generic: 基地
+      - button "配置":
+        - generic: 配置
+      - button "后勤 当前房间" [pressed]:
+        - generic: 后勤
+        - generic: 当前房间
+      - button "交易所":
+        - generic: 交易所
+      - button "收藏室 4项奖励可领取":
+        - generic: 收藏室
+        - emphasis: "4"
+      - button "建设":
+        - generic: 建设
+      - button "庭院":
+        - generic: 庭院

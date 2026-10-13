@@ -1,0 +1,43 @@
+{
+  "wallpaperCheck": {
+    "ghostDisplay": "none",
+    "ghostRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "trackRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "trackTransform": "none",
+    "wallpaperOnly": true
+  },
+  "restoredCheck": {
+    "ghostDisplay": "block",
+    "ghostRect": {
+      "bottom": 720,
+      "height": 720,
+      "left": 0,
+      "right": 1280,
+      "top": 0,
+      "width": 1280,
+      "x": 0,
+      "y": 0
+    },
+    "trackTransform": "matrix(1, 0, 0, 1, -6.50904, 0)",
+    "wallpaperOnly": false
+  },
+  "browserErrors": []
+}

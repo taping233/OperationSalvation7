@@ -1,0 +1,325 @@
+{
+  "at": "2026-10-13T10:28:31.9699037+08:00",
+  "applyRoot": "D:\\素材\\代号柒",
+  "directory": "搜打撤",
+  "patches": {
+    "core": {
+      "file": "core-fixes.patch",
+      "sha256": "ee3a7bc55d08ecc1ad04547ee83b7b357c2c379c7744cb0f4c4256d62b3b97db"
+    },
+    "ui": {
+      "file": "ui-fixes.patch",
+      "sha256": "3d2b53b837ee22da4dfb751ae3da831328a460915aa7a0d2a4c0487c2ead71cb"
+    }
+  },
+  "before": [
+    {
+      "file": "game/src/ui/interface-motion.js",
+      "sha256": "f3bea2c4e07ebe751726484012eedc1871cc3d5224f7d3c49722d434f6cdd3ba"
+    },
+    {
+      "file": "game/src/ui/overlay.js",
+      "sha256": "3130656bad569867b589b9d7344f4b52d023b71e63f8f2dcda46184dcc5b148c"
+    },
+    {
+      "file": "game/src/run/game.run.flow.js",
+      "sha256": "e277d966b417fddbd6231ea6255582b79a2b5f953fdffa2ba1759ce102ea580a"
+    },
+    {
+      "file": "game/src/run/game.run.scenes.js",
+      "sha256": "31993dc9b3a1f23c12fdaf9fb74571f196161e8b7abd10c2cfd23be95673f693"
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "sha256": "54c21eced3bd5d85a4082700ab75e38394a1ae1a04cf23809747a4b0af0b513d"
+    },
+    {
+      "file": "game/src/battle/core/battle.resolution.js",
+      "sha256": "cea1e2076b1cdfde3f04a72b6c4d0b4f5a97289058557bf4b497f11b3aa54925"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.js",
+      "sha256": "842685028a84f07d8a8f3c4f161fd516a5f0f212b9c8794a052074a32de507f3"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.curse.js",
+      "sha256": "dd10ce940de63089488a36cf9ca8e182b8824319f550354726c72380fb9475fd"
+    },
+    {
+      "file": "game/src/battle/core/battle.lifecycle.js",
+      "sha256": "a73158f94beec07289001ccfed5e92f82ad53fe78bada057b075ace425eac62d"
+    },
+    {
+      "file": "game/src/battle/view/battle.overlays.js",
+      "sha256": "4a4e3fa6bee40a379e7f318572810f4daddb62fd0097f6531d99c2f7bd64f8d6"
+    },
+    {
+      "file": "game/src/cards/card-description-text.js",
+      "sha256": "895301aedaae5786f4b68bf976ca117fe2d77f913b0e6585c5e1dd4c2a131a68"
+    },
+    {
+      "file": "game/src/run/chests.js",
+      "sha256": "ed90520ef7260df670427e4c814d37440256a9cc45c854b3841cf37a10472d14"
+    },
+    {
+      "file": "game/src/run/chest-reward-save.js",
+      "sha256": null
+    },
+    {
+      "file": "game/src/hub/run-save-validation.js",
+      "sha256": "fd55bfffa0ea4c1b229a49bf9205522c82e5a4159fab8312d27ebc174daea4e9"
+    },
+    {
+      "file": "game/src/run/game.session.js",
+      "sha256": "317f2657d4872c8197bd7511ba32c21f6f56acce01ef937e6ece2e022d03253d"
+    },
+    {
+      "file": "game/src/run/game.session.kernel.js",
+      "sha256": "6a6c52571458c2f2ed93b07e80d0b18abb8aa798c461c23d5884898428ba34d7"
+    },
+    {
+      "file": "game/src/run/game.run.js",
+      "sha256": "07d973d47b0e89e5fcb406e8b38f0fc811a18b29c6e2c19b408adc8c653702f5"
+    },
+    {
+      "file": "game/src/game.boot.js",
+      "sha256": "685627602fdbdb91d07a38397b805213e985e145550f054d75c6567550376ace"
+    },
+    {
+      "file": "game/src/battle/view/battle.aim.js",
+      "sha256": "e08663cd831beb553e65a3c35e5e0b76a64b84ae1a234e80cecf67d4ab4ede8d"
+    },
+    {
+      "file": "game/src/battle/view/battle.view.js",
+      "sha256": "b39f157fa533923f23189f9163aa9a6ba326a95c16cc370102a8d714dda3f836"
+    },
+    {
+      "file": "game/src/run/game.session.bag.js",
+      "sha256": "655a936af21410617d6e7d7306cf283fda6119e9688c92f15c075530b5685b2b"
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "sha256": "740b2e435b0cda9f4726f75c7860efec1f276a58d77921f41a5b262f0909dd02"
+    },
+    {
+      "file": "game/src/audio/sound.music.player.js",
+      "sha256": "f1d6fde1af9f0e6ff1b55654227608bc391da5daaed7374296533118c21dcfd6"
+    },
+    {
+      "file": "game/src/audio/sound.js",
+      "sha256": "d6a46e579c78e1cdff2d69a059fa054b158ffd89797029b995d53324bbbba937"
+    },
+    {
+      "file": "game/css/battle-hand-overhaul.css",
+      "sha256": "5ef7023bbdaf3fdb51ace0e36e7b440ed69149d029c74069c8bfc2b4ed452776"
+    },
+    {
+      "file": "tests/four-player-event-regressions.test.js",
+      "sha256": null
+    },
+    {
+      "file": "tests/four-player-battle-regressions.test.js",
+      "sha256": null
+    },
+    {
+      "file": "tests/four-player-semantics-regressions.test.js",
+      "sha256": null
+    },
+    {
+      "file": "tests/four-player-chest-reload.test.js",
+      "sha256": null
+    },
+    {
+      "file": "tests/four-player-capacity-text.test.js",
+      "sha256": null
+    },
+    {
+      "file": "tests/four-player-music-fallback.test.js",
+      "sha256": null
+    },
+    {
+      "file": "tests/sound-music.test.js",
+      "sha256": "b19fb4b83318e413ca9489b2b253f7e63923a7954275523e2028ae2990443639"
+    },
+    {
+      "file": "docs/rules.md",
+      "sha256": "07eeed6e5ee78bbf15f07111a94fdc949c1bf107b2137268aef7a3050c73c6a7"
+    },
+    {
+      "file": "docs/audio-system.md",
+      "sha256": "6f8dd4b82e008f1aef03aa9da355dba30ada47c950a5b914172d06e1ff8791ae"
+    }
+  ],
+  "after": [
+    {
+      "file": "game/src/ui/interface-motion.js",
+      "sha256": "3a9f2366651b76663c4b7f11ae5bd36e4f3057a4cb99a25a611d80bb7edd84dd",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/ui/overlay.js",
+      "sha256": "456396579bdefe5b747d376620bcc619b067ef7942454a1de2afd18099105d5b",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/run/game.run.flow.js",
+      "sha256": "1a22103927f8cea47827cd36ec2e028cb11a66f1884fe073f40ab5c772bd257f",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/run/game.run.scenes.js",
+      "sha256": "5ea9c0f9692a5a9f9e31c18b56169de7ee509988d8950c8cd04e5b410955427f",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "sha256": "4b1251f5c77d916eb2a996af949a1b6a81bf6d6f53e7b978c38ff48956e79089",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/battle/core/battle.resolution.js",
+      "sha256": "1f28f83dcb5ad23d69bb87698dd019de2063d33cbbace600b068129706c4647e",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.js",
+      "sha256": "5faea255b404580bd8bd940c6e069869714a240849f2f124d3099d402dbcffee",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.curse.js",
+      "sha256": "9b1d82a85937b101eb4fea9f191a9062aea08504557da8c8bd3eb94a28eb496e",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/battle/core/battle.lifecycle.js",
+      "sha256": "935e417b9c66ac8814c635e7bcf62cb8e39dcd2f8589f8471a59c477c9bb57aa",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/battle/view/battle.overlays.js",
+      "sha256": "e8d7aff2fa8f17e577085a55a002d88be46792c04fe465e5da101b878bb27541",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/cards/card-description-text.js",
+      "sha256": "3665ed9943efa6b0769b39ac6978ae0621948f31b4167ddc5e52f98abab5e811",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/run/chests.js",
+      "sha256": "201995c50ffe7d9b3fffbb2fa571bc80e5088514ae0d15c33d073b907d0d839d",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/run/chest-reward-save.js",
+      "sha256": "e8e6fb2ff2c30d594c1722b92fc13bc32e35b70815ac6e399c634458380dc52e",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/hub/run-save-validation.js",
+      "sha256": "bd517e07bf0241f5a79f554a9548485931379df95f55b001893e1b7c0a82d216",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/run/game.session.js",
+      "sha256": "01d0052c371d1c0e444ae2f317ed647a759177fc1032578d6dd9d934e15ba996",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/run/game.session.kernel.js",
+      "sha256": "de6fdd38bce4b2580014a11fa363818c306194154f9ccdaf01b30defd961387d",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/run/game.run.js",
+      "sha256": "9c3857263040f2739f74b83df11f019ea84c0e119625d852bc7527fecc9eb305",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/game.boot.js",
+      "sha256": "b3ba8cac047e1bb5c3f7ac180bd220caf2c37d9197eff2c8f232d5734cbbdedf",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/battle/view/battle.aim.js",
+      "sha256": "e372a62f45a1a583b1f5dcede16310b857114b06b1d1f52cc10ee6ea994f0f66",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/battle/view/battle.view.js",
+      "sha256": "7b4f2f05e71b14758858759b34094b556405190683fd22c095639f2f11e2bac4",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/run/game.session.bag.js",
+      "sha256": "3e032a72224e267ca9c49809760efc37ca27b9a72d3b8a16905ffe8ceee98bce",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "sha256": "008603abf37db5c7f41ec4657d33478acd5e12cb5218cf7b8179455a5d80f6d3",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/audio/sound.music.player.js",
+      "sha256": "cf4674fe7cf8a8d5505adec1a77644cedd502a864a7c168d17ea853b76d6be86",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/src/audio/sound.js",
+      "sha256": "06ae472f37d25506075ae8c6a19ef33b3bfd274e687a7c24fb9ba9073834a1a2",
+      "candidateMatch": true
+    },
+    {
+      "file": "game/css/battle-hand-overhaul.css",
+      "sha256": "e70229a43c46dc31ae12e3875c373abc09050fa588cac4022e0fb053441b50c0",
+      "candidateMatch": true
+    },
+    {
+      "file": "tests/four-player-event-regressions.test.js",
+      "sha256": "59389fd050b8a925ccd7f11241123912f438d91c48069bd98448edc0fa2c08f0",
+      "candidateMatch": true
+    },
+    {
+      "file": "tests/four-player-battle-regressions.test.js",
+      "sha256": "2652cf1ab37a692b2dd6db2cf95ed75b4a973d46c756e41bc9e3dd58d00b02e5",
+      "candidateMatch": true
+    },
+    {
+      "file": "tests/four-player-semantics-regressions.test.js",
+      "sha256": "1b2d2315cf452c6e2e56bf1996e86f9dd7d857f60f7c980023b15deebaabe3d9",
+      "candidateMatch": true
+    },
+    {
+      "file": "tests/four-player-chest-reload.test.js",
+      "sha256": "6f2cb021fb0e9e7bb89fce646a1b128b43c53fbf78953e3b72dc482857252a8e",
+      "candidateMatch": true
+    },
+    {
+      "file": "tests/four-player-capacity-text.test.js",
+      "sha256": "8c3a037dcd5ca80dd0df319464780891645dea7270bdba0bb32b05ff517312b7",
+      "candidateMatch": true
+    },
+    {
+      "file": "tests/four-player-music-fallback.test.js",
+      "sha256": "7bad97bf8f24b2721e839fe3a61615274102e6d2c781eeaf4af62c7226f6244f",
+      "candidateMatch": true
+    },
+    {
+      "file": "tests/sound-music.test.js",
+      "sha256": "7bf6cfe6aa500b8f51f77e9165d9a41265e2e0b88449651ad85b794185627029",
+      "candidateMatch": true
+    },
+    {
+      "file": "docs/rules.md",
+      "sha256": "f20ada96edce933c6e7b0623cfa841f4973f3e4a7ebb77c94af4f5c395e440bc",
+      "candidateMatch": true
+    },
+    {
+      "file": "docs/audio-system.md",
+      "sha256": "635dc9274d0cc8e5fb84dfcde076086e83dc0008790f45cb980eed5c248d8634",
+      "candidateMatch": true
+    }
+  ]
+}

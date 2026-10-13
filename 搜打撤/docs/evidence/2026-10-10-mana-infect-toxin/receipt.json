@@ -1,0 +1,230 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "cmtna0nb1yxt",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-72a225af-73f1-406f-8aaf-69bb7e367ad3.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-mana-infect-toxin/cards-spell-cmtna0nb1yxt-source.png",
+        "bytes": 1737078,
+        "sha256": "60cbfd452b0e8e157fc7f02a62962ac325063e9f2330f58097adc842a35edae4"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-mana-infect-toxin/cards-spell-cmtna0nb1yxt-full-before.webp",
+          "bytes": 26954,
+          "sha256": "67465e8e22f4dbe4fe412ffa7e0de775fee3c754bc6a4bca84b57badb6d392d7"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-mana-infect-toxin/cards-spell-cmtna0nb1yxt-thumb-before.webp",
+          "bytes": 7018,
+          "sha256": "48715efe25c88782d23f556eecf2356045bc1f735ce685122f532df76f9e472c"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-cmtna0nb1yxt.webp",
+          "bytes": 74274,
+          "sha256": "550b3e163611503dac4ff79468e987199ec66337b444b4d54d6e8e08ba190a29",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-cmtna0nb1yxt.webp",
+          "bytes": 10082,
+          "sha256": "df5e35cc2a37ab5fcaa4acf3012251a4890c827f84aaf9aea541d9ede806979b",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "mana-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-cmtna0nb1yxt.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 74274,
+            "sha256": "550b3e163611503dac4ff79468e987199ec66337b444b4d54d6e8e08ba190a29",
+            "source": "docs/evidence/2026-10-10-mana-infect-toxin/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-cmtna0nb1yxt.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 7018,
+            "sha256": "48715efe25c88782d23f556eecf2356045bc1f735ce685122f532df76f9e472c",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-cmtna0nb1yxt.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 10082,
+            "sha256": "df5e35cc2a37ab5fcaa4acf3012251a4890c827f84aaf9aea541d9ede806979b",
+            "source": "docs/evidence/2026-10-10-mana-infect-toxin/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt12-infectray",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-a7b38aa1-a7bf-4114-8355-91cdb43a5ad2.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-mana-infect-toxin/cards-spell-tt12-infectray-source.png",
+        "bytes": 1537734,
+        "sha256": "dd0381a919f6b89aac85f73d03ce4f02fc7cb9a593f63ff5b2726b5d0cbb0b3b"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-mana-infect-toxin/cards-spell-tt12-infectray-full-before.webp",
+          "bytes": 33316,
+          "sha256": "b9b5c1f45f6d2aa3e327f3da3776ad6dc38dc748b302616fe0681b30cd964714"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-mana-infect-toxin/cards-spell-tt12-infectray-thumb-before.webp",
+          "bytes": 9350,
+          "sha256": "58e998b682f216f4e48194db6acc3d8788d96c136c271278d972e59cce72d3cd"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt12-infectray.webp",
+          "bytes": 61438,
+          "sha256": "6a7963bd92f111a6d4fce0b3621610b3164643029b667f4a48cb5148ac15b4ef",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt12-infectray.webp",
+          "bytes": 8790,
+          "sha256": "4482052792f0140b63eeb3a9f78f88e5f75d3d65e89fc6255924acd2cd7527c5",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "infect-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt12-infectray.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 61438,
+            "sha256": "6a7963bd92f111a6d4fce0b3621610b3164643029b667f4a48cb5148ac15b4ef",
+            "source": "docs/evidence/2026-10-10-mana-infect-toxin/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt12-infectray.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 9350,
+            "sha256": "58e998b682f216f4e48194db6acc3d8788d96c136c271278d972e59cce72d3cd",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt12-infectray.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 8790,
+            "sha256": "4482052792f0140b63eeb3a9f78f88e5f75d3d65e89fc6255924acd2cd7527c5",
+            "source": "docs/evidence/2026-10-10-mana-infect-toxin/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-toxin",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-88057844-ec89-43e7-81f4-74e692cbf9d0.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-mana-infect-toxin/cards-spell-tt3-toxin-source.png",
+        "bytes": 1543706,
+        "sha256": "88017cce22e844a24237d52b3007c01e0d00b872c2f0e8886d4f0973fe6526aa"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-mana-infect-toxin/cards-spell-tt3-toxin-full-before.webp",
+          "bytes": 19062,
+          "sha256": "8d14d59ec3d2cfe6aceda789d5334f70650e1dc94d997943f5c47cb8839e2784"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-mana-infect-toxin/cards-spell-tt3-toxin-thumb-before.webp",
+          "bytes": 5482,
+          "sha256": "9c352d02a7eb9fe7636ddb29e5608d58311377c44d05b10ff75409c86cb9abb4"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-toxin.webp",
+          "bytes": 39942,
+          "sha256": "8ad860d0429f19ff0c59a49d5b262f06ff43e9f90e916f917c3e769172904cd7",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-toxin.webp",
+          "bytes": 5652,
+          "sha256": "5e894eb06261785e3ba95e213ca4ea630f085d1800ca5799c2b8521e7f19a492",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "toxin-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt3-toxin.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 39942,
+            "sha256": "8ad860d0429f19ff0c59a49d5b262f06ff43e9f90e916f917c3e769172904cd7",
+            "source": "docs/evidence/2026-10-10-mana-infect-toxin/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-toxin.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 5482,
+            "sha256": "9c352d02a7eb9fe7636ddb29e5608d58311377c44d05b10ff75409c86cb9abb4",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-toxin.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 5652,
+            "sha256": "5e894eb06261785e3ba95e213ca4ea630f085d1800ca5799c2b8521e7f19a492",
+            "source": "docs/evidence/2026-10-10-mana-infect-toxin/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1062,
+  "manifest_count_after": 1065
+}

@@ -1,0 +1,34 @@
+{
+  "stage": "composition-candidates",
+  "installed": false,
+  "items": [
+    {
+      "card_id": "tt8-hero-descender",
+      "title": "充能火山",
+      "prompt": "Create a WIDE storyboard contact sheet of exactly THREE equal square rough composition thumbnails side by side, labeled only A, B, C in their top-left corners. This is preproduction for ability card 充能火山, not finished card art. Supplied image is character identity reference ONLY: Chang Wuyu, silver long hair, gold eyes, thin glasses, pointed ears, oversized black witch hat with violet underside, dark violet black coat and black gloves. Do NOT preserve the reference's generic held fireball pose. Each panel must show a distinct camera and action and a single dominant visual idea: accumulated pressure becoming eruption. No round floating fireball. A: dramatic low-angle tight crop, face in upper right partly shadowed by hat, both black-gloved palms at lower center force two charcoal-black slabs toward a narrow incandescent orange fissure; a sharp compressed wedge of magma-light leaks upward between the slabs, coat and hands visibly lit by it, figure leaning into resisting force. Powerful triangular silhouette, quiet charcoal violet negative space. B: side-profile medium shot on left, one hand feeding one dissolving dark spell-paper into a narrow vertical volcanic vent of magic at right; the vent suddenly erupts in one huge broad orange fan that dominates upper right; hair and coat pulled back by release. Readable transformation from consumed paper to eruption; abstract energy only, no literal landscape volcano. C: overhead diagonal view, upper body and hat small in upper left, a black-gloved hand guides several dark paper fragments spiraling into a broad funnel-shaped magma fissure in lower right; deepest center small pale hot point, surrounding large dark masses conceal stored energy, single eruptive orange stroke crosses frame. Rough hand-painted anime storyboard sketches, large flat opaque value masses and a few blunt directional strokes, only 3-5 major shapes per panel, muted charcoal/violet with one concentrated orange/ivory accent. Simplified readable hands and face, no tiny hair, elaborate clothing ornament, sparks confetti, texture filters or polished rendering. Three clearly different compositions, no UI or text besides A B C.",
+      "reference": "game/assets/cards/hero-volcano.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-95b9f779-cdc2-4a77-bebb-2e737530cd34.png",
+      "saved": ".tmp/imagegen/ability-storyboards-1010/volcano-board.png",
+      "options": {
+        "A": "压制裂隙：双手抵住黑色块面，热压从中央泄出",
+        "B": "消耗即喷发：侧面投下卡牌，引出巨大火焰喷流",
+        "C": "俯视汇聚：碎片卷入火焰漏斗，人物与能量形成对角线"
+      },
+      "recommended": "B"
+    },
+    {
+      "card_id": "tt8-hero-priest",
+      "title": "浪掷风吟",
+      "prompt": "Create a WIDE storyboard contact sheet of exactly THREE equal square rough composition thumbnails side by side, labeled only A B C at upper-left of each panel. Preproduction for ability card 浪掷风吟, not finished illustrations. Supplied image is Xingyue CHARACTER IDENTITY only: pale golden long hair with a low side braid, gold eyes, small white crescent hairclip, white priestess dress with dark teal cape and gold trim. Do NOT preserve generic reaching-hand wind pose. Show distinct visual moments where singing gathers wind, draws spell-like leaves and brings nourishing rain. No conventional swirling border ribbons, no lamp, no ornate realistic setting. A: intimate three-quarter profile close-up on right, eyes softly closed in song, one relaxed palm in foreground lower left; a single broad teal breath-wave curves from her mouth through several ivory paper-like spell leaves into a small pale rain shower collected above her palm. Face secondary to foreground hand and rain, quiet dark teal backdrop; hair swept in same causal flow, clear S-shaped composition. B: elevated diagonal medium view, head near upper left, cloak spread into a large bowl-like silhouette across lower right; a diagonal wind current gathers a few light spell leaves into cloak, where their light turns into pale rain that softly illuminates her chest and fingertips. Clearly gathering and replenishing, not attacking; dark cape against ivory air, face and hands remain small. C: centered frontal medium shot, chin tilted upward in sustained song, one hand at heart and another relaxed downward; a huge pale crescent-shaped opening overhead releases broad vertical rain strokes through a fan of spell leaves around her, while her cape folds form a grounded dark triangle below. Strong vertical blessing composition with quiet space, no side-reaching pose. Rough hand-painted anime storyboard sketches, large connected opaque value masses, few wide directional swipes, only 3-5 major shapes per panel. Restrained dark teal, gray ivory and muted gold accent, clearly separated subject/energy/background values. Economical face and hand marks, no fine hair strands, dense folds, glossy effects, confetti, microtexture or polished rendering. Three genuinely distinct cameras and silhouettes. No text or UI besides A B C.",
+      "reference": "game/assets/cards/hero-sacredrain.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-bbdb1335-3cee-4299-8707-c8f289c0b128.png",
+      "saved": ".tmp/imagegen/ability-storyboards-1010/wind-board.png",
+      "options": {
+        "A": "近景吟唱：风带卷起法术纸叶，甘霖落入掌心",
+        "B": "披风汇聚：展开披风承接纸叶与甘霖",
+        "C": "仰首降雨：月弧上方降下甘霖与法术纸叶"
+      },
+      "recommended": "A"
+    }
+  ]
+}

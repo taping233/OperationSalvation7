@@ -1,0 +1,27 @@
+{
+  "stage": "A11",
+  "status": "generated-compared-style-anchor-not-final",
+  "userDirection": "少前2个人空间作为主要画风/配色参考，画完比较差距",
+  "references": [
+    {
+      "path": "docs/evidence/2026-10-11-WF-base-cohesion-1011/reference-gfl2-personal.jpg",
+      "use": "主要画风、材质、冷暖灰色和局部照明参考"
+    },
+    {
+      "path": "C:/Users/太平/.codex/generated_images/01a128f5-bd4a-7891-91c7-ab5106c5d409/exec-9e52a1da-5695-4170-a28f-21c79aa6a8df.png",
+      "use": "仅取已成立的布局和近景椅子透视"
+    }
+  ],
+  "prompt": "Paint an original near-future anime game interior. IMAGE 1 (Girls' Frontline 2 personal room) is the PRIMARY ART-DIRECTION reference: learn its comfortable complex neutral colour harmony, credible matte metal and soft fabric, naturally localised lighting, quiet lived-in use, selective painterly edges and professionally painted game-background finish. Do not copy its exact room, signage, plants, gadgets, labels or furniture designs. IMAGE 2 is OUR LAYOUT reference only. Preserve our LARGE CLOSE LEFT FOREGROUND CHAIR and diagonal armrest, usable wide middle work desk with chair/knee clearance, practical rear storage, right-side sleeping bench and unobstructed centre aisle. Repaint the WHOLE image with the quality and colour relationships of image 1; do not keep image 2's uniform beige/yellow tint, slick CG floor or generic military-showroom surface treatment.\n\nThis is a modest inhabited expedition camp outside a winter city a century in the future. Refined civilian postmodern modular interior, not antique and not an army bunker: a small number of broad matte insulated panels with restrained softened/chamfered edges, calm integrated furniture, little visible structural hardware. The desk holds an open map and document folio, a compact communication terminal, a single useful lamp, and one used drinking mug at the working edge. Working chair casually offset as if someone recently got up. Near chair has one loose plain jacket, NO arm patch or coloured band. Rear utility cabinet stores two identical slate-grey equipment cases; compact drinking-water dispenser and thermos on top. One pillow and one lightly rumpled muted terracotta-grey blanket on the built-in single berth. Small enclosed rectangular fireplace near the front-right wall, separated from all bedding by a blank solid fireproof side panel and clear floor. Every object should feel human scale and functionally used; don't add a collection of decorative props.\n\nColour and light must come from image 1: warm-neutral stone and soft grey-green wall planes, gently varied grey-teal shadows, graphite-blue cloth, off-white work surface and tiny muted rust textile note. Cool grey-blue is mostly outdoors and in shaded planes. Subtle warm-white light at the map and tiny hearth orange, no yellow veil over the room. Soft OVERCAST window daylight with gentle bounced light, not dramatic golden shafts across the floor. Interior has richer middle values and distinct restrained material colour, natural dark-to-light transitions and soft reflected colour, no crushed black. The work map/lamp grouping is the clearest small focus; large near chair frames it with softer edges. The floor is matte, subdued and unreflective with very few broad joins, no rug or patterns. Use confidently painted 2D anime background shapes, fine selective line accents, soft painted gradients and small irregular edge variations; avoid uniformly outlined objects, photoreal skin-like texture, plastic smooth rendering, noise or detailed weathering. Fabric is softly drawn and metal has only selective narrow edge highlights.\n\nOutside the window: pale snow and a VERY faint distant modern city implied by three or four hazy low-contrast blue-grey building masses. Remove every mountain, individual tree, rock, road and city window. It is a quiet atmospheric colour patch, never a second detailed landscape or photographic blur. No indoor snow, flags, emblems, symbols, text, UI, people, neon, giant machinery, hanging cables or extra clutter. Keep the original large foreground chair perspective and present a full 16:9 scene. The result should feel like a comfortable real working/living place with sophisticated game-art painting, not a sterile architectural visualisation.",
+  "runtimeApplied": false,
+  "receipt": {
+    "path": "C:/Users/太平/.codex/generated_images/01a128f5-bd4a-7891-91c7-ab5106c5d409/exec-53b01706-8447-488c-969f-58d0bb3bff66.png",
+    "bytes": 1710838,
+    "sha256": "7db30ac4ed0590dfdd6f4d0f7bc8740ba3e83cc0ca466dd47b490c5d7393da17",
+    "excludedFromGit": true
+  },
+  "review": [
+    "城市和生活细节已修正，但局部重绘仍保留A10的CG边缘与灰褐色调",
+    "因此A12从少前2主要参考重新起稿"
+  ]
+}

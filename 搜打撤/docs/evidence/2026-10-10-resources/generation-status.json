@@ -1,0 +1,75 @@
+{
+  "method": "Built-in ImageGen, one call per resource; keys-bunch retried once after network error",
+  "completed": [
+    "key",
+    "key-one"
+  ],
+  "failed": [
+    {
+      "name": "keys-bunch",
+      "reason": "image generation failed: network error: error sending request",
+      "attempts": 2
+    },
+    {
+      "name": "wood",
+      "reason": "image generation failed: network error: error sending request",
+      "attempts": 1
+    },
+    {
+      "name": "wood-lots",
+      "reason": "image generation failed: network error: error sending request",
+      "attempts": 1
+    },
+    {
+      "name": "wood-bundle",
+      "reason": "image generation failed: network error: error sending request",
+      "attempts": 1
+    },
+    {
+      "name": "ration",
+      "reason": "image generation failed: network error: error sending request",
+      "attempts": 1
+    },
+    {
+      "name": "ration-double",
+      "reason": "image generation failed: network error: error sending request",
+      "attempts": 1
+    },
+    {
+      "name": "coin-copper",
+      "reason": "image generation failed: network error: error sending request",
+      "attempts": 1
+    },
+    {
+      "name": "coin-silver",
+      "reason": "image generation failed: network error: error sending request",
+      "attempts": 1
+    },
+    {
+      "name": "coin-gold",
+      "reason": "image generation failed: network error: error sending request",
+      "attempts": 1
+    },
+    {
+      "name": "diamond",
+      "reason": "image generation failed: network error: error sending request",
+      "attempts": 1
+    },
+    {
+      "name": "garnet-marble",
+      "reason": "image generation failed: network error: error sending request",
+      "attempts": 1
+    },
+    {
+      "name": "econpack",
+      "reason": "image generation failed: network error: error sending request",
+      "attempts": 1
+    },
+    {
+      "name": "pet-egg",
+      "reason": "image generation failed: network error: error sending request",
+      "attempts": 1
+    }
+  ],
+  "scope": "15 mapped resource-card artworks excluding retired starter-ration; old art retained for failed items"
+}

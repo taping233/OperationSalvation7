@@ -1,0 +1,66 @@
+[
+  {
+    "file": "game/src/battle/view/battle.aim.js",
+    "sha256": "283005db1e520241be15d620e9436a5be9e87191fc99c65b60b27c0d68f95aaf"
+  },
+  {
+    "file": "game/src/battle/view/battle.view.js",
+    "sha256": "3d5d327fbce3198c22bdae1041f46f69ca4ddcbafbb800644db5fec3665777f2"
+  },
+  {
+    "file": "game/src/battle/view/battle.layers.js",
+    "sha256": "89a02eaed6fb9ac0cad573353f805781b5909f5fe19813c8e6703f00dfbe519a"
+  },
+  {
+    "file": "game/src/battle/view/battle.overlays.js",
+    "sha256": "4981bb760b2abc3bea0ef0ccc8de1e3f90513e7110c1a63de80305af1d5f1160"
+  },
+  {
+    "file": "game/src/battle/view/battle.hand-inspector.js",
+    "sha256": "108934d67079eaa2ce6de2c576d1f443d8805bf9f4d66a56287077adb5f0dcaa"
+  },
+  {
+    "file": "game/src/battle/view/battle.presentation-ready.js",
+    "sha256": "1e7cc22e3d63b7a06632ff2ea977ff01859a0d19fd5bd7923d98a99a669060dd"
+  },
+  {
+    "file": "game/src/battle/view/battle.frames.js",
+    "sha256": "6f6ecaab6a727aa6eb97f24b70c98cda7c9b98105bf4380765cebc590e43c755"
+  },
+  {
+    "file": "game/css/expedition-battle.css",
+    "sha256": "e6dd70a91635607938cb0dcd36a483ccb65d2274c6ea7042593a71ea1f719928"
+  },
+  {
+    "file": "game/css/battle-hand-overhaul.css",
+    "sha256": "ce13e7a0a54baa2832db7b2134bd4e181917a03feea44aca9014d9421146c1a1"
+  },
+  {
+    "file": "tests/battle-entry-readiness.test.js",
+    "sha256": "4d9ce7bb08709a20c086164914a0b32e9f7290fe388b5b2db90ab639509c303f"
+  },
+  {
+    "file": "tests/battle-frames-lifecycle.test.js",
+    "sha256": "e1bd0fbf65172f3bbd45e06e1abab5e07e75f8b680d1bd1d3fdc66cb2144f325"
+  },
+  {
+    "file": "tests/battle-hand-inspector.test.js",
+    "sha256": "36f8dc9f5f8f984f1c297456919fabec8840f27fabe3fdcadfaac6ac52eab067"
+  },
+  {
+    "file": "tests/expedition-battle-presentation.test.js",
+    "sha256": "cfb6502390d7997e376f60b46fc7d2ac3fdfd70eebd7fca7c6817033263c9a41"
+  },
+  {
+    "file": "tests/boot.test.js",
+    "sha256": "66c02269ebea8b577d98a28ac4f8126e2b69fca926e9a72e9282ab5cad48d151"
+  },
+  {
+    "file": "tests/e2-view-hp.test.js",
+    "sha256": "b971670f226777abc8d77a90ea4a6360e768d4ff9da1833bcc1d3c2d8fd1a8bf"
+  },
+  {
+    "file": "tests/e7-rule-warning-view.test.js",
+    "sha256": "7d27e6a70daa772fc2bc54c19910477af5f7252cca6d2f5c10615cadbf2757a7"
+  }
+]

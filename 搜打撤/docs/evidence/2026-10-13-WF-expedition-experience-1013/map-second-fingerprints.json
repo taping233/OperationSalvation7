@@ -1,0 +1,38 @@
+[
+  {
+    "path": "game/src/core/camera.js",
+    "bytes": 7410,
+    "sha256": "D474D8E3FB77131742BC0A51B330C4129CF6499BD577361088202EB08AC09FEF",
+    "mtime": "2026-10-13T14:03:31.7338519+08:00"
+  },
+  {
+    "path": "game/src/core/renderer.js",
+    "bytes": 22668,
+    "sha256": "4DE58822FC37876136640D02F988F437F251E0B9C7CB350099AAC9A2BE1A5E2F",
+    "mtime": "2026-10-13T14:03:32.3607138+08:00"
+  },
+  {
+    "path": "tests/camera-interaction.test.js",
+    "bytes": 4614,
+    "sha256": "3265309FE82AEB29261C0CAF238FC7295BE54FC605683A830A481E4EA14EE295",
+    "mtime": "2026-10-13T14:06:08.3118551+08:00"
+  },
+  {
+    "path": "docs/evidence/2026-10-13-WF-expedition-experience-1013/map-second-start-1920.png",
+    "bytes": 117327,
+    "sha256": "1B66ED2F76AA9B3F446722231FFAC1553548DA139DB0DF512748A329BEB0E609",
+    "mtime": "2026-10-13T14:12:32.0808234+08:00"
+  },
+  {
+    "path": "docs/evidence/2026-10-13-WF-expedition-experience-1013/map-second-detail-1920.png",
+    "bytes": 123453,
+    "sha256": "CAA74A794779C2B755C5D4C759F590D4B0E9CE3DA080C311CF6BBD33F50870CE",
+    "mtime": "2026-10-13T14:12:23.4969909+08:00"
+  },
+  {
+    "path": "docs/evidence/2026-10-13-WF-expedition-experience-1013/map-second-route-1920.png",
+    "bytes": 123418,
+    "sha256": "08A675BB5DEAC0881006DE9B45D7FD9672BE4022B3D68ED498D927C1B7E377C7",
+    "mtime": "2026-10-13T14:12:01.8201479+08:00"
+  }
+]

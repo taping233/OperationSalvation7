@@ -1,0 +1,13 @@
+{
+  "approved_candidate": "E",
+  "name": "金库封印",
+  "user_instruction": "我喜欢第二个，照这个风格重置吧",
+  "scope": "整套七款卡背沿E风格重做并接入；富商直接使用获选样张",
+  "style_source": ".tmp/imagegen/cardbacks-gacha-approval-20261012/E-source.png",
+  "style_sha256": "cddea3b7a801a07fcc85a2fa65c548f5ed710487c8c591c64e467ae81be97fc7",
+  "upstream_request": "docs/evidence/2026-10-12-cardbacks-redraw/gacha-approval-request.json",
+  "upstream_nai_receipt": "docs/evidence/2026-10-12-cardbacks-redraw/nai-receipt.json",
+  "verification": "仅看生图返回画作；未测试、实页、build或提交",
+  "latest_user_instruction": "那你就全都自己做吧",
+  "latest_workflow": "按老板追加指示改用内置直接生图；E样张原链路为NAI底稿→内置，富商保留获选E，其余六款从E画风参考原创"
+}

@@ -1,0 +1,141 @@
+& { --camp-paper:#e7e9e3; --camp-sheet:#f6f5ee; --camp-ink:#25373c; --camp-sub:#62736f; --camp-line:#c7cec7; --camp-blue:#375e66; --camp-brass:#b79c67; }
+.hub-body { grid-template-columns:190px minmax(0,1fr); }
+.hub-tabs { padding:30px 14px; gap:14px; background:#1d2c32; }
+.hub-tab { min-height:84px; padding:16px 14px; gap:16px; border-radius:2px; }
+.hub-tab .tab-ico { width:30px; height:30px; flex:none; }
+.hub-tab .tab-ico .ic { width:26px; height:26px; }
+.hub-tab.on { background:#354c51; color:#fffdf3; box-shadow:inset 0 1px #74807940; }
+.hub-tab .tab-txt b { font-size:25px; letter-spacing:.04em; }
+.hub-tab .tab-txt small { font-size:12px; color:#acb7b3; letter-spacing:.12em; }
+.camp-navigation-indicator { position:absolute; left:7px; top:0; width:3px; background:#d5bd83; pointer-events:none; transition:transform .2s,height .2s; }
+.hub-page { padding:28px 34px 30px; background:var(--camp-paper); scrollbar-color:#a5b0a9 var(--camp-paper); }
+.camp-section-head { display:flex; flex-direction:row; flex-wrap:wrap; align-items:baseline; gap:8px 18px; margin-bottom:18px; padding-bottom:18px; border-bottom:1px solid var(--camp-line); }
+.camp-section-head h2 { order:0; font:700 38px/1.25 var(--font-ui); letter-spacing:.03em; }
+.camp-section-head small { order:1; color:var(--camp-sub); font:15px/1.5 var(--font-mono); letter-spacing:.12em; }
+.camp-page-stat { margin-left:auto; font:20px/1.5 var(--font-num); color:var(--camp-sub); }
+.mini-btn { width:auto; min-height:52px; padding:12px 18px; border:1px solid #b9c4bb; border-radius:2px; background:var(--camp-sheet); color:var(--camp-ink); font:600 22px/1.3 var(--font-ui); letter-spacing:0; box-shadow:none; transition:background .14s,border-color .14s,color .14s; }
+.mini-btn.ok { background:var(--camp-blue); border-color:var(--camp-blue); color:#fffdf4; }
+.mini-btn:hover:not(:disabled) { background:#e6eae1; border-color:var(--camp-blue); color:var(--camp-ink); }
+.mini-btn.ok:hover:not(:disabled) { background:#284a52; color:#fffdf4; }
+.mini-btn:disabled { opacity:1; color:#7d8982; background:#dce1da; border-color:#c9d0c9; cursor:not-allowed; }
+:is(button,input,select):focus-visible { outline:3px solid #b79c67; outline-offset:3px; }
+:is(.stash-sections,.collection-tabs,.logistics-sections,.person-sections) { display:flex; gap:0; margin:0 0 24px; border-bottom:1px solid var(--camp-line); }
+:is(.stash-section-tab,.collection-tabs button,.logistics-sections button,.person-sections .mini-btn) { flex:none; min-height:58px; padding:14px 24px; border:0; border-bottom:3px solid transparent; border-radius:0; background:transparent; color:var(--camp-sub); font:600 24px/1.3 var(--font-ui); box-shadow:none; cursor:pointer; }
+:is(.stash-section-tab.on,.collection-tabs button.on,.logistics-sections button.on,.person-sections .mini-btn.ok) { border-bottom-color:var(--camp-blue); background:#d5dfd7; color:var(--camp-ink); }
+:is(.stash-section-tab,.collection-tabs button,.logistics-sections button) small { font-size:18px; padding-left:8px; color:var(--camp-sub); }
+.warehouse-toolbar { display:flex; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:24px; }
+.warehouse-use-tabs { display:flex; gap:0; margin-right:auto; border:1px solid var(--camp-line); background:#edf0e9; }
+.warehouse-use-tabs button { padding:11px 16px; min-height:50px; border:0; background:transparent; color:var(--camp-sub); font:600 20px/1.3 var(--font-ui); cursor:pointer; }
+.warehouse-use-tabs button.on { background:var(--camp-blue); color:#fffdf4; }
+.warehouse-toolbar :is(input,select) { font:20px/1.4 var(--font-ui); color:var(--camp-ink); background:var(--camp-sheet); border:1px solid var(--camp-line); border-radius:2px; min-height:50px; padding:10px 12px; }
+.warehouse-search { display:flex; width:250px; max-width:250px; flex:none; }
+.warehouse-search input { width:100%; min-width:0; }
+.warehouse-toolbar > span { font-size:19px; color:var(--camp-sub); margin-left:0; }
+.warehouse-layout { display:grid; grid-template-columns:minmax(0,1fr) 430px; align-items:start; gap:28px; min-width:0; }
+.warehouse-v2 .stash-cardgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(174px,1fr)); gap:28px 18px; align-items:start; }
+.warehouse-v2 .stash-cell { position:relative; display:flex; flex-direction:column; align-items:center; width:100%; max-width:none; min-width:0; min-height:235px; aspect-ratio:auto; padding:14px 8px 12px; background:transparent; border:1px solid transparent; border-radius:2px; gap:12px; cursor:pointer; transition:background .15s,border-color .15s,transform .15s; }
+.warehouse-v2 .stash-cell:hover { background:#f6f5ee80; transform:translateY(-3px); }
+.warehouse-v2 .stash-cell.selected { border-color:#8eaaa0; box-shadow:inset 0 0 0 1px #ffffffa0; background:#f6f5ee; }
+.warehouse-item-art { display:block; position:relative; width:146px; height:146px; border:4px solid var(--item-rarity,#6c7974); border-radius:50%; padding:5px; background:#c5cec6; box-shadow:0 5px 0 #25373c10; overflow:hidden; box-sizing:border-box; }
+.warehouse-item-art :is(img,.art-card-image) { border-radius:50%; object-fit:cover; }
+.warehouse-v2 .stash-cell[data-rarity="稀有"] { --item-rarity:#4d8caa; }
+.warehouse-v2 .stash-cell[data-rarity="史诗"] { --item-rarity:#8b77a9; }
+.warehouse-v2 .stash-cell[data-rarity="传说"] { --item-rarity:#b89c5e; }
+.warehouse-v2 .stash-cell[data-rarity="职业"] { --item-rarity:#ae6660; }
+.warehouse-v2 .stash-cell[data-rarity="棱彩"] { --item-rarity:#6b9d92; }
+.stash-card-caption { display:flex; flex-direction:column; align-items:center; gap:6px; width:100%; text-align:center; }
+.stash-card-caption b { min-height:30px; font:600 22px/1.35 var(--font-ui); color:var(--camp-ink); overflow-wrap:anywhere; }
+.stash-card-caption small { font-size:17px; color:var(--camp-sub); }
+.warehouse-v2 .stack-count { position:absolute; top:133px; right:calc(50% - 70px); bottom:auto; left:auto; width:auto; height:auto; min-width:34px; padding:3px 7px; border-radius:1px; background:#25373ce8; color:#fffdf4; font:700 22px/1.2 var(--font-num); box-shadow:none; }
+.warehouse-v2 .cell-mark { position:absolute; top:12px; left:12px; right:auto; background:#f6f5ee; color:var(--camp-blue); }
+.warehouse-inspector { position:sticky; top:0; display:flex; flex-direction:column; padding:0; min-width:0; overflow:hidden; box-sizing:border-box; background:var(--camp-sheet); border:1px solid var(--camp-line); border-top:3px solid var(--camp-blue); }
+.warehouse-reading { flex:1; min-height:0; padding:28px; overflow:auto; scrollbar-width:thin; }
+.warehouse-detail-art { width:176px; height:251px; margin:0 auto 20px; }
+.warehouse-detail-art .hs-card { width:100%; height:100%; font-size:12px; }
+.warehouse-description { font-size:24px; line-height:1.65; color:var(--camp-ink); margin:16px 0; }
+.warehouse-facts { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:18px 0; padding:18px 0; border-top:1px solid var(--camp-line); border-bottom:1px solid var(--camp-line); }
+.warehouse-facts dt { font-size:19px; color:var(--camp-sub); }
+.warehouse-facts dd { font:700 28px/1.3 var(--font-num); margin:8px 0 0; color:var(--camp-ink); }
+.warehouse-actionbar { flex:none; padding:18px 24px; border-top:1px solid var(--camp-line); background:#e7ece4; }
+.warehouse-operation-note { margin:0 0 14px; font-size:20px; line-height:1.6; color:var(--camp-sub); }
+.warehouse-purpose { display:flex; align-items:center; gap:18px; padding:20px 24px; margin-bottom:20px; background:#d5dfd7; border-left:3px solid var(--camp-blue); }
+.warehouse-purpose > div { display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 20px; flex:1; }
+.warehouse-purpose small { flex-basis:100%; font-size:17px; color:var(--camp-sub); }
+.warehouse-purpose b { font-size:29px; }
+.warehouse-purpose span { font-size:20px; color:var(--camp-sub); }
+.warehouse-purpose .mini-btn { flex:none; }
+.material-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); gap:22px; }
+.material-inventory-item { display:flex; flex-direction:column; align-items:center; padding:18px 14px; gap:12px; background:transparent; border:1px solid transparent; color:var(--camp-ink); cursor:pointer; }
+.material-inventory-item.selected { border-color:#8eaaa0; background:var(--camp-sheet); }
+.material-inventory-item:hover { background:#f6f5ee80; }
+.material-item-art { display:grid; place-items:center; width:145px; height:145px; border-radius:50%; background:#d8ded5; border:3px solid #b6c3b7; }
+.material-item-art .supply-illustration { width:125px; height:125px; }
+.material-item-art .ic { width:66px; height:66px; }
+.material-inventory-item > b { font-size:23px; }
+.material-item-count { font:700 28px/1.3 var(--font-num); }
+.material-item-count small { font:18px/1.3 var(--font-ui); color:var(--camp-sub); }
+.material-detail-art { display:grid; place-items:center; height:190px; margin-bottom:18px; background:#e5e9e1; }
+.material-detail-art .supply-illustration { width:185px; height:185px; }
+.material-detail-art .ic { width:95px; height:95px; }
+.material-source h4 { margin:24px 0 12px; font-size:23px; }
+.material-source p { font-size:22px; line-height:1.6; color:var(--camp-sub); }
+.warehouse-grid-note { margin:32px 16px; font-size:20px; color:var(--camp-sub); }
+.person-stage { display:grid; grid-template-columns:120px minmax(0,1fr) 440px; gap:24px; min-height:610px; align-items:stretch; }
+.person-hero { margin:0; position:relative; overflow:hidden; min-height:610px; background:#d7ddd5; transform-origin:top left; }
+.person-hero > img { width:100%; height:100%; position:absolute; object-fit:contain; object-position:center; padding-bottom:90px; box-sizing:border-box; }
+.person-hero[data-skin="default"] { background:#e6e7df; }
+.person-hero figcaption { position:absolute; z-index:1; inset:auto 0 0; padding:24px 28px; color:#fffdf4; background:linear-gradient(transparent,#1d343be8); }
+.personnel-v2[data-section="pool"] .person-stage { grid-template-columns:120px minmax(0,1fr); }
+.personnel-v2[data-section="pool"] .person-hero { display:none; }
+.personnel-v2[data-section="pool"] .person-details { background:transparent; border:0; padding:0; }
+.person-groups .mini-btn { min-width:145px; }
+.person-face.on { background:#e4eade; border-color:var(--camp-blue); box-shadow:inset 3px 0 var(--camp-blue); }
+.person-details { background:var(--camp-sheet); border:1px solid var(--camp-line); }
+.person-details h4 { font-size:25px; margin:22px 0 10px; }
+.person-details p { font-size:23px; line-height:1.6; }
+.person-growth-actions { display:flex; flex-direction:column; gap:10px; margin-top:20px; }
+.person-growth-actions .mini-btn { width:100%; }
+.person-skin { border:2px solid transparent; background:#e6ebe2; }
+.person-skin.on { border-color:var(--camp-blue); background:#d7e2d7; }
+.pool-type-tabs .mini-btn { border-radius:0; border:0; border-bottom:3px solid transparent; background:transparent; color:var(--camp-sub); }
+.pool-type-tabs .mini-btn.ok { border-bottom-color:var(--camp-blue); background:#d5dfd7; color:var(--camp-ink); }
+.pool-workspace { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:24px; }
+.pool-reader { position:sticky; top:0; padding:24px; background:var(--camp-sheet); border-top:3px solid var(--camp-blue); min-width:0; overflow-wrap:anywhere; }
+.partner-display { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:28px; background:#d7e0d7; color:var(--camp-blue); }
+.partner-display > .companion-art { width:420px; max-width:85%; max-height:56%; object-fit:contain; margin:14px 0; }
+.partner-stage .person-face > .companion-art { width:75px; height:75px; object-fit:contain; }
+.partner-state { padding:8px 22px; background:#cbdacb; color:var(--camp-blue); font-size:21px; }
+.partner-state.carried { background:var(--camp-blue); color:#fffdf4; }
+.companion-hatch { display:grid; grid-template-columns:1fr 1fr auto; align-items:center; gap:24px; margin-bottom:24px; padding:25px; background:var(--camp-sheet); border:1px solid var(--camp-line); border-top:3px solid var(--camp-brass); }
+.camp-shop-intro { display:flex; align-items:center; flex-wrap:wrap; gap:20px 26px; padding:20px 24px; background:#d5dfd7; color:var(--camp-ink); border:0; }
+.shop-shelf { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:22px; }
+.camp-product { background:var(--camp-sheet); border:1px solid var(--camp-line); padding:20px; gap:16px; }
+.camp-product .shelf-visual { position:relative; height:265px; min-height:0; width:100%; padding:14px 14px 36px; display:flex; align-items:center; justify-content:center; background:#e3e8df; border:1px solid transparent; cursor:pointer; color:var(--camp-sub); }
+.camp-product .shelf-visual:hover { border-color:var(--camp-blue); background:#dce5d7; }
+.product-preview-label { position:absolute; bottom:10px; left:0; right:0; text-align:center; font:17px/1.4 var(--font-ui); color:var(--camp-sub); }
+.camp-product .shelf-info b { font-size:31px; }
+.camp-product .poor-why { color:#8b6245; }
+.facility-tile { position:relative; display:flex; flex-direction:column; align-items:start; gap:16px; min-height:325px; padding:28px; border:2px solid transparent; background:#d7e0d7; color:var(--camp-ink); text-align:left; overflow:hidden; cursor:pointer; }
+.facility-tile.on { background:#e9eee3; border-color:var(--camp-blue); }
+.facility-details { padding:28px; background:var(--camp-sheet); border-top:3px solid var(--camp-blue); }
+.facility-details .mini-btn { width:100%; }
+.archive-back-preview { padding:26px; background:var(--camp-sheet); border-top:3px solid var(--camp-blue); }
+.archive-backs-layout .back-card { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px 12px; background:#e0e6dc; border:2px solid transparent; }
+.archive-backs-layout .back-card.on { border-color:var(--camp-blue); background:#edf0e7; }
+.ach-row { display:grid; grid-template-columns:70px minmax(0,1fr) 130px 190px; align-items:center; padding:22px; gap:18px; border:1px solid var(--camp-line); background:#ecf0e7; box-shadow:none; }
+.ach-row.claimable { border-left:4px solid var(--camp-blue); background:#dde7d8; }
+.camp-depart-mission { grid-template-columns:minmax(0,.8fr) minmax(0,1fr); min-height:700px; background:var(--camp-sheet); }
+.camp-depart-art { background:#273f47 url('../assets/scenes/camp-transition-city-v1.webp') center/cover; }
+.camp-depart-figure { display:none; }
+.camp-depart-art figcaption { padding:28px; color:#fffdf4; background:linear-gradient(transparent,#172c36e8); }
+.camp-depart-art figcaption b { display:block; margin:8px 0; font:700 48px/1.3 var(--font-ui); }
+.camp-depart-art figcaption span { font-size:23px; line-height:1.6; }
+.camp-depart-dossier { padding:30px; gap:22px; }
+.mode-card { padding:23px; min-height:130px; background:#edf0e7; border-color:var(--camp-line); }
+.mode-card.on { background:#dde7d8; border-color:var(--camp-blue); box-shadow:inset 4px 0 var(--camp-blue); }
+.deploy-primary { font-size:25px; min-height:67px; border-radius:2px; background:#d6bd83; box-shadow:none; }
+.camp-todo { display:flex; flex-wrap:wrap; gap:12px; margin:20px 0; }
+.camp-todo .mini-btn { flex:1; min-width:220px; }
+@media (prefers-reduced-motion:reduce) {
+  .warehouse-v2 .stash-cell { transition:none; }
+}

@@ -1,0 +1,104 @@
+diff --git a/game/src/battle/view/battle.overlays.js b/game/src/battle/view/battle.overlays.js
+index 42f87aba..cf48fa03 100644
+--- a/game/src/battle/view/battle.overlays.js
++++ b/game/src/battle/view/battle.overlays.js
+@@ -99,7 +99,7 @@ function installPileInspection(stacks) {
+         开局抽 ${R().battleStartDraw} 张 · 每回合开始抽 ${R().battleTurnDraw} 张 · 每回合固定 ${R().battleEnergy} 费</p>
+       ${affix ? `<p class="ov-note">[[icon:question]] <b>${esc(boss.name)}</b> 词缀【${affix.icon} ${affix.name}】${esc(affix.desc)}</p>` : ''}
+       ${deckSelection.max > R().bossDeckSize ? '<p class="ov-note">[[icon:eye]] 混沌之眼：牌库上限 +5——编入后可在 15 张基础上多选，最多编 ' + deckSelection.max + ' 张</p>' : ''}
+-      <p class="ov-note">[[icon:lock]] 固定编入：初始攻击 ×${deckSelection.starterCount}${deckSelection.starterCount < R().starterSha ? `（初始攻击不足 ${R().starterSha} 张——部分进消耗口袋了）` : ''}
++      <p class="ov-note">[[icon:lock]] 固定编入：初始攻击 ×${deckSelection.starterCount}（不足部分由本场补给，不占背包格）
+         · [[icon:cross]] 道具 / 资源 / 事件卡与初始攻击不可选入 · [[icon:bolt]] 「对战开始时」装备编入即生效（卡面带角标）</p>
+       ${deckSelection.cards.length < deckSelection.need ? `<p class="ov-note">[[icon:cross]] 背包可编卡牌不足 <b>${deckSelection.need}</b> 张（现有 ${deckSelection.cards.length} 张）——选完后按现有卡牌迎战首脑</p>` : ''}
+       <h3 class="set-h">可选卡牌 <span class="bs-count">已选 ${selected.length} 张（至少 ${need}${deckSelection.max > deckSelection.need ? ' · 至多 ' + deckSelection.max : ''}）</span></h3>
+diff --git a/game/src/battle/view/battle.aim.js b/game/src/battle/view/battle.aim.js
+index 689ada72..d40bd013 100644
+--- a/game/src/battle/view/battle.aim.js
++++ b/game/src/battle/view/battle.aim.js
+@@ -4,6 +4,7 @@ const SDT = window.SDT;
+ const UI = window.SDT.UI;
+ import { scale as uiScale, viewport as uiViewport } from '../../ui/ui-scale.js';
+ import { esc } from '../../core/shared.js';
++import { displayCardDescription } from '../../cards/card-description-text.js';
+ import '../../../css/battle-hand-overhaul.css';
+ import { commands, getSnapshot, getBattleLiveness, effCostOf, findCard, infuseOf, targetSide, unplayableReason } from '../core/battle.core.js';
+   const play = commands.playCard;
+@@ -62,7 +63,7 @@ import { commands, getSnapshot, getBattleLiveness, effCostOf, findCard, infuseOf
+       <div class="bt-hand-detail-copy"><h2>${esc(card.name)}</h2><p class="bt-hand-detail-meta">${esc(card.type || '卡牌')} · 费用 ${effCostOf(card, uid)} 能量</p>
+       <h3>完整规则</h3><p class="bt-hand-detail-rules"></p></div></div>
+       <footer>仅查看规则；关闭后可继续选牌或拖拽。</footer></div>`;
+-    panel.querySelector('.bt-hand-detail-rules').textContent = card.desc || '暂无规则描述';
++    panel.querySelector('.bt-hand-detail-rules').textContent = displayCardDescription(card.desc || '暂无规则描述', card.id);
+     panel.addEventListener('pointerdown', event => event.stopPropagation());
+     panel.querySelector('.bt-hand-detail-close').addEventListener('click', closeHandCardDetails);
+     panel.querySelector('.bt-hand-detail-scrim').addEventListener('click', closeHandCardDetails);
+@@ -784,4 +785,4 @@ if (!document.getElementById('btMisTargetStyle')) {
+   document.head.insertAdjacentHTML('beforeend',
+     '<style id="btMisTargetStyle">@keyframes bt-mis-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}45%{transform:translateX(5px)}70%{transform:translateX(-3px)}88%{transform:translateX(2px)}}.bt-foe.mis-target{animation:bt-mis-shake .45s cubic-bezier(.36,.07,.19,.97) both;outline:2px solid #d05b4b;outline-offset:3px;border-radius:6px;filter:drop-shadow(0 0 8px rgba(208,91,75,.65))!important}</style>');
+ }
+-export { aim, aimPlayedAt, clickSelectedUid, selectCardByClick, clickSelectedTarget, setTargetable, showCardBlockReason, showHandCardDetails, closeHandCardDetails, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, cancelClickSelection, setClickSelectedUid };
++export { aim, aimPlayedAt, clickSelectedUid, updateClickSelectionUI, selectCardByClick, clickSelectedTarget, setTargetable, showCardBlockReason, showHandCardDetails, closeHandCardDetails, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, cancelClickSelection, setClickSelectedUid };
+diff --git a/game/src/battle/view/battle.view.js b/game/src/battle/view/battle.view.js
+index cd7ec4c5..d679d854 100644
+--- a/game/src/battle/view/battle.view.js
++++ b/game/src/battle/view/battle.view.js
+@@ -19,7 +19,7 @@ import { renderDeckSelection, renderGrave, renderBattleBag, renderDeckPileView,
+ import { mountHandLayer, updateHand, mountUnitLayer, updateUnits, HAND_PAGE_SIZE } from './battle.layers.js';
+ import { spawnFloats } from './battle.vfx.js';
+ import { captureBattleView, animateBattleTransition } from './battle.anim.view.js';
+-import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, setClickSelectedUid } from './battle.aim.js';
++import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, setClickSelectedUid, updateClickSelectionUI } from './battle.aim.js';
+ import { showThoughtBubble } from './battle.hover.js';
+ 
+ // Four separately painted winter-city layers share one canvas and transform.
+@@ -557,6 +557,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
+        </div>`, snapshot.battleToken);
+     const caption = UI.el.ovBody.querySelector('.sts-arena-caption span');
+     if (caption) caption.dataset.battleDetail = combatState.detail;
++    updateClickSelectionUI();   // 复用舞台也恢复已结束的点选提示；底层目标状态仍由战斗命令管理。
+     // 手牌分栏切换（2026-09-10 留言 #27）
+     UI.act('btHandPage', () => { handPage = (handPage + 1) % handPages; render(); });
+     // sts-note 底部说明行已删（留言 2026-09-06：把下面的文字都去掉）
+diff --git a/game/css/battle-hand-overhaul.css b/game/css/battle-hand-overhaul.css
+index 6939d8f4..9ecd98eb 100644
+--- a/game/css/battle-hand-overhaul.css
++++ b/game/css/battle-hand-overhaul.css
+@@ -133,3 +133,38 @@ body #overlay .battle-decision[data-decision-kind="bag"] .battle-bag-inspect:foc
+   body #overlay .battle-decision .battle-pile-layout { grid-template-columns:minmax(0,1fr); }
+   body #overlay .battle-decision .battle-decision-inspect { position:static; }
+ }
++
++/* G09：同栏仍最多9叠，改为可横向阅读的平排，保留详情与分页入口。 */
++body #overlay .battle-stage.sts.battle-sts .sts-hand {
++  display:flex!important;align-items:flex-end;gap:10px;
++  height:330px!important;padding:20px 8px 10px!important;box-sizing:border-box;
++  overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:thin;
++}
++body #overlay .battle-stage.sts.battle-sts .sts-hand .bt-slot {
++  position:relative!important;left:auto!important;bottom:auto!important;
++  transform:none!important;flex:0 0 190px;width:190px;height:284px;
++}
++body #overlay .battle-stage.sts.battle-sts .sts-hand .hsc-name { font-size:18px!important; }
++body #overlay .battle-stage.sts.battle-sts .sts-hand .hsc-desc { font-size:16px!important;line-height:1.4!important; }
++body #overlay .battle-stage.sts.battle-sts .sts-hand .bt-slot:is(:hover,:focus-within) .bt-card:not(.aim-lift) {
++  transform:scale(1.02);
++}
++body #overlay .battle-stage.sts.battle-sts .sts-topbar { font-size:18px!important; }
++body #overlay .battle-stage.sts.battle-sts .sts-arena-caption span { font-size:18px!important;line-height:1.4; }
++body #overlay .battle-stage.sts.battle-sts .sts-nameplate,
++body #overlay .battle-stage.sts.battle-sts .sts-stats { font-size:18px!important; }
++body #overlay .battle-stage.sts.battle-sts .sts-hp { height:24px; }
++body #overlay .battle-stage.sts.battle-sts .sts-hp span { font-size:20px!important; }
++body #overlay .battle-stage.sts.battle-sts .sts-atkbadge,
++body #overlay .battle-stage.sts.battle-sts .sts-intent { font-size:18px!important; }
++
++body #overlay .card.battle .battle-stage.sts.battle-sts .sts-hp {
++  height:24px!important;min-height:24px!important;max-height:24px!important;
++}
++body #overlay .card.battle .battle-stage.sts.battle-sts .sts-hp span {
++  font-size:20px!important;line-height:22px!important;height:22px!important;
++}
++body #overlay .card.battle .battle-stage.sts.battle-sts .sts-hand .bt-slot .bt-card .hs-card .hsc-desc {
++  font-size:16px!important;line-height:1.25!important;overflow:hidden!important;
++  display:-webkit-box!important;-webkit-line-clamp:2;-webkit-box-orient:vertical;
++}

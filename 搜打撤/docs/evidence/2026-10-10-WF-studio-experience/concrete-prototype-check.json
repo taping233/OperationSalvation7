@@ -1,0 +1,31 @@
+{
+  "task": "WF-studio-cases-1010",
+  "date": "2026-10-10",
+  "prototype": "C:/Users/太平/.codex/visualizations/2026/10/10/01a123ed-27f3-7511-b2c6-a2ce4f68b6e1/studio-concrete-proposal.html",
+  "sha256": "cdc6c0553b67c6a3ab1452dac7b95f4eb254e95fe47812afeb362bee0a735b37",
+  "bytes": 314082,
+  "sourceType": "inline local mockup, six existing project thumbnails",
+  "checks": {
+    "syntax": "passed",
+    "currentWindow": "Codex iab 1280x720, default window, no manual resize",
+    "realInput": [
+      "open photo",
+      "Escape return",
+      "search 白梅 gives 1",
+      "filter 法术 gives 4",
+      "clear conditions gives 6",
+      "variant switch",
+      "desk next gives 禁咒II 2/6"
+    ],
+    "layout": "wall big photo and notes within 800px stage; desk photo/notes within same stage",
+    "images": "desk images loaded",
+    "consoleErrors": 0
+  },
+  "unverified": [
+    "real hover dwell input",
+    "host Tweak controls",
+    "other viewport sizes",
+    "formal game integration",
+    "frame-time comparison"
+  ]
+}

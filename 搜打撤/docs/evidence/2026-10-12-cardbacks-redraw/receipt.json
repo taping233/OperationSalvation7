@@ -1,0 +1,75 @@
+{
+  "workflow": "NovelAI draft then built-in ImageGen repaint",
+  "verification": "Generated images viewed; no tests/browser/audit/build requested",
+  "manifest_count": 1159,
+  "items": [
+    {
+      "id": "classic",
+      "name": "行囊粗布",
+      "concept": "缝隙里的远行之门",
+      "path": "card-backs/classic.webp",
+      "bytes": 100936,
+      "sha256": "7db8f987b5b6acb984d97743750558f2e50939c6bbe00cf30ddbcd7396258952",
+      "generation_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-2ceac109-a1a5-4ae0-b61f-8b3c36a1a36e.png",
+      "generation_sha256": "d0a058676c2ab3f48e8a3b3934f62121bd8a0d02d4daa15e3843d35acfd136db",
+      "saved_source": ".tmp/imagegen/cardbacks-redraw-20261012/classic-source.png",
+      "backup": ".tmp/imagegen/cardbacks-redraw-20261012/classic-before.webp",
+      "backup_sha256": "1cae38184ac55ecaa815c869a77dbe1b9f8807027a15cf58a8bf28753d75fc46",
+      "size": [
+        512,
+        768
+      ]
+    },
+    {
+      "id": "wolf",
+      "name": "猎手皮纸",
+      "concept": "月亮与鹿角弓",
+      "path": "card-backs/wolf.webp",
+      "bytes": 100764,
+      "sha256": "d6ff5efda29bb3cb064e15e6b70edc8aa9f6f0d8d6ae01d247066fc3e28d6d72",
+      "generation_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-148427d9-861c-4fef-b345-723946661a66.png",
+      "generation_sha256": "9a6b047305509da04ffaa4b0c15cde00d17cf8fe2f9c483fac05dc670049a1a5",
+      "saved_source": ".tmp/imagegen/cardbacks-redraw-20261012/wolf-source.png",
+      "backup": ".tmp/imagegen/cardbacks-redraw-20261012/wolf-before.webp",
+      "backup_sha256": "b8975fccb1bc17d0411200d5ff8f659435a88b74b71fa721bdd44d8da07354f6",
+      "size": [
+        512,
+        768
+      ]
+    },
+    {
+      "id": "coin",
+      "name": "富商锦缎",
+      "concept": "锦鲤绕钱眼",
+      "path": "card-backs/coin.webp",
+      "bytes": 92692,
+      "sha256": "114e07dad494b2a8781827035af2b11a102eb6e0206d6afd91de3305c71fa0bc",
+      "generation_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-b8c3843b-b8a5-4db9-9c80-4a91491dbe6b.png",
+      "generation_sha256": "cfd34a4bbf04b1a4f525c082e33c70884c93a300193b1eff27850376f2651b50",
+      "saved_source": ".tmp/imagegen/cardbacks-redraw-20261012/coin-source.png",
+      "backup": ".tmp/imagegen/cardbacks-redraw-20261012/coin-before.webp",
+      "backup_sha256": "5b64537c00e07bd9d97c15991ec097c1b8cc0505034ea8eb75e281ed891a9ee4",
+      "size": [
+        512,
+        768
+      ]
+    },
+    {
+      "id": "vault",
+      "name": "仓廪木纹",
+      "concept": "年轮里长出麦穗",
+      "path": "card-backs/vault.webp",
+      "bytes": 72576,
+      "sha256": "a4d47128af46b360c4ba318194a51988d5405e26668ef29d15175d82f43c4d21",
+      "generation_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-b6a23c84-e55f-496f-bc1e-47bb23f24d70.png",
+      "generation_sha256": "b662126bc66d4e0da32b2ff58acd020e084c24c2138235f43d00cbf9ea968d7d",
+      "saved_source": ".tmp/imagegen/cardbacks-redraw-20261012/vault-source.png",
+      "backup": ".tmp/imagegen/cardbacks-redraw-20261012/vault-before.webp",
+      "backup_sha256": "68b7c26e4bb5f7ffec5d6784cc438b67fbf92cdf85d47217d89b395fd68ae3d1",
+      "size": [
+        512,
+        768
+      ]
+    }
+  ]
+}

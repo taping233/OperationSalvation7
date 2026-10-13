@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-magic-lamp",
+      "asset": "cards/spell-tt3-magic-lamp.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-d955c7a4-ea84-4be3-a607-3586cc2a66d7.png",
+      "revision": "magic-lamp-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the magic lamp card edit target, retaining original SQUARE composition closely: ornate golden oil lamp sits in lower third, long narrow spout extends LEFT, curved open handle RIGHT, conical lid and small finial at center, short broad pedestal beneath. Above the lid rises a large winding S-shaped symbolic magical smoke ribbon colored turquoise, magenta and violet, its lower end pointed above the finial and upper portion cropped by TOP frame. Keep original lamp size, silhouette, positions and smoke path, deep violet backdrop. Lamp ornament is simplified into a few coherent large motifs and broad gold/ochre planes with cool colored shadows and selective pale reflections; no densely fine engraved pattern. Smoke constructed from wide connected opaque curved strokes and grouped cyan-magenta planes, not dense traced contours; retain recognizable alternating color regions and directional flow. No genie, character, hands, flame or new props, background quiet. Images 2, 3, 4 are DRAWING STYLE references only, borrow broad opaque hand-painted construction, never their subjects or costume motifs. Rough hand-painted anime color study, large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Clear hard-edged grouped shadows, mostly matte muted colored grays with concentrated richer accents, quiet large areas. No photorealism, glossy 3D, uniformly thin vector outlines, tiny facet mosaics, dense fine line networks or all-over grain/texture filters. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt3-magic-lamp.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    },
+    {
+      "card_id": "tt3-thornfield",
+      "asset": "cards/spell-tt3-thornfield.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12465-378e-75f3-9cd2-adababe38fa3/exec-fb193baf-6c16-4dee-ae26-6abe7d1f0f9d.png",
+      "revision": "thornfield-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the thorn field card edit target, preserving original SQUARE composition closely: dense dark nearly black thorny vines fill lower half, looping and crisscrossing in broad arches with sharp triangular thorns. A clustered hanging green poisonous globule mass floats above at upper center-left, dripping several elongated trails downward toward the vines; smaller green globules hang at left, right and lower edges in their original positions. Deep forest-green quiet background. Keep original arrangement, largest poison cluster size and position, drip lengths and direction and main vine arches; no characters, terrain, hands or new props. Group largest poison cluster into a coherent broad lime/moss-green mass with selective readable rounded globules and a few muted pale green accents, avoiding glossy glass beads. Drips remain clear narrow streaks and a few drops, not dense tangled fine lines. Vines painted in strong connected charcoal-green curved masses with economical thorn silhouettes; secondary tangle coarse and quiet. Concentrated poison-green focal accents against muted dark background. Images 2, 3, 4 are DRAWING STYLE references only, borrow broad opaque hand-painted construction, never their subjects or costume motifs. Rough hand-painted anime color study, large connected opaque masses, a few wide directional swipes and blunt dabs, handmade edges and selective unfinished areas. Clear hard-edged grouped shadows, mostly matte muted colored grays with concentrated richer accents, quiet large areas. No photorealism, glossy 3D, uniformly thin vector outlines, tiny facet mosaics, dense fine line networks or all-over grain/texture filters. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt3-thornfield.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    }
+  ]
+}

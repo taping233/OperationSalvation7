@@ -1,0 +1,28 @@
+{
+  "status": "not-completed",
+  "selectedChannel": "built-in imagegen",
+  "userDecision": "继续使用内置生图通道",
+  "attempts": [
+    {
+      "attempt": 1,
+      "result": "network error: error sending request",
+      "output": null
+    },
+    {
+      "attempt": 2,
+      "correction": "no fireball, gesture only",
+      "result": "network error: error sending request",
+      "output": null
+    },
+    {
+      "attempt": 3,
+      "authorizedAfterUserChannelChoice": true,
+      "prompt": "Create a transparent full-body battle-ready CHANGWUYU sprite. Image 1 is exact CHARACTER IDENTITY; image 2 is STYLE ONLY, do not copy its female character or costume. Changwuyu is a slender MALE elf mage: silver-gray long hair in a LOW bun with simple straight sidelocks, yellow eyes, pointed ears, thin round glasses, BLACK bent-tip wide-brim witch hat with purple underside, BLACK high-collar ankle-length robe and cape with purple lining and minimal gold trim, black gloves and boots, LEFT chest white feather and blue sapphire gold brooch. NO STAFF, NO SWORD, NO FIREBALL, NO flame or magic glow. Keep a small solid black ink-cloud companion behind shoulder on screen-left. Body and gaze face SCREEN RIGHT, gentle three-quarter side view, right hand near glasses, left hand relaxed near waist, feet modestly apart and steady. Simplified painterly anime like image 2: broad angular opaque masses, hard-edged light/shadow, low detail, simple straight hair and 3-5 robe fold masses. Complete hat, body, boots and cloud in landscape 1536x1024 with 10% transparent margins. Genuine transparent RGBA background, no ground shadow, halo, text or watermark. One character, one consistent ready pose as the immutable animation baseline.",
+      "result": "network error: error sending request",
+      "output": null
+    }
+  ],
+  "producedAssets": 0,
+  "modifiedExistingAssets": false,
+  "neededToResume": "built-in generation succeeds for the unified baseline"
+}

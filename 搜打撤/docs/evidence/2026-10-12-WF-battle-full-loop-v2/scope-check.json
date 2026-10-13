@@ -1,0 +1,102 @@
+{
+  "allowed_changes": [
+    {
+      "track": "Synth bass pulse",
+      "bar": 38,
+      "change": "pre-return velocity ramp",
+      "velocity_add": 4
+    },
+    {
+      "track": "Synth bass pulse",
+      "bar": 39,
+      "change": "pre-return velocity ramp",
+      "velocity_add": 8
+    },
+    {
+      "track": "Synth bass pulse",
+      "bar": 39,
+      "change": "A2 pickup support"
+    },
+    {
+      "track": "Kick",
+      "bar": 38,
+      "change": "pre-return velocity ramp",
+      "velocity_add": 4
+    },
+    {
+      "track": "Kick",
+      "bar": 39,
+      "change": "pre-return velocity ramp",
+      "velocity_add": 8
+    },
+    {
+      "track": "Kick",
+      "bar": 39,
+      "change": "one kick pickup"
+    },
+    {
+      "track": "Snare and ghosts",
+      "bar": 38,
+      "change": "pre-return velocity ramp",
+      "velocity_add": 4
+    },
+    {
+      "track": "Snare and ghosts",
+      "bar": 39,
+      "change": "pre-return velocity ramp",
+      "velocity_add": 8
+    },
+    {
+      "track": "Hats",
+      "bar": 38,
+      "change": "pre-return velocity ramp",
+      "velocity_add": 4
+    },
+    {
+      "track": "Hats",
+      "bar": 39,
+      "change": "pre-return velocity ramp",
+      "velocity_add": 8
+    },
+    {
+      "track": "Hats",
+      "bar": 39,
+      "change": "one hat pickup"
+    },
+    {
+      "track": "Ensemble theme",
+      "bar": 22,
+      "change": "transition pitch contour"
+    },
+    {
+      "track": "Ensemble theme",
+      "bar": 23,
+      "change": "transition pitch contour"
+    },
+    {
+      "track": "Ensemble theme",
+      "bar": 38,
+      "change": "transition pitch contour"
+    },
+    {
+      "track": "Ensemble theme",
+      "bar": 38,
+      "change": "pre-return velocity ramp",
+      "velocity_add": 4
+    },
+    {
+      "track": "Ensemble theme",
+      "bar": 39,
+      "change": "transition pitch contour"
+    },
+    {
+      "track": "Ensemble theme",
+      "bar": 39,
+      "change": "pre-return velocity ramp",
+      "velocity_add": 8
+    }
+  ],
+  "unchanged_patterns_checked": 533,
+  "only_bars_22_23_38_39_changed": true,
+  "main_theme_bars_2_3_10_11_40_41_48_49_preserved": true
+}

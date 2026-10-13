@@ -1,0 +1,102 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5354/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/
+	1 container
+		2 image flask
+		3 text  道具
+		4 image flask
+		5 text 员工通行证C
+		6 text 冬境街区 · 遭遇
+		7 text 第 1 回合
+		8 text 选择目标
+		9 text 点击高亮目标 · Esc 取消
+		10 container btSelf
+			11 container
+				12 text 黑像
+				13 text 你
+				14 text 35/35
+				15 image swords
+				16 text  4
+		17 container
+			18 button 联邦射手，按 Enter 确认目标
+				19 button 联邦射手的意图：攻击 · 5。点击查看完整说明
+					20 image swords
+					21 text 5
+				22 image archer
+				23 container
+					24 text 联邦射手
+					25 image swords
+					26 text 5
+					27 text 3/3
+				99 text 可选目标
+			29 button 联邦射手，按 Enter 确认目标
+				30 button 联邦射手的意图：攻击 · 5。点击查看完整说明
+					31 image swords
+					32 text 5
+				33 image archer
+				34 container
+					35 text 联邦射手
+					36 image swords
+					37 text 5
+					38 text 3/3
+				100 text 可选目标
+		40 container
+			41 text 当前能量
+			42 image bolt
+			43 text 0
+			44 text /2
+		45 container 职业技能与手牌分栏
+			46 button (disabled) swords 猛击 2 能量 · 每回合一次
+				47 image swords
+				48 text 猛击 2 能量 · 每回合一次
+			49 button 还有另一栏手牌，当前第 2 栏，共 2 栏
+				50 image cards
+				51 text  第 2/2 栏
+		52 container
+			53 checkbox Description: 毒药 · 0 费。费用 0 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+				54 container
+					55 text 0
+					56 image 毒药
+					57 text 毒药 法术 · 古朴
+					101 container
+						102 text 古朴 古朴
+					60 image cards
+					61 text 抽 1 对目标附加  1  层 中毒 ，并抽  1  张牌。
+				62 image swords
+			63 button 查看毒药完整规则
+			64 checkbox (disabled) Description: 二刀流 · 1 费。费用 1 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）, Value: 0
+				65 container
+					66 text 1
+					67 image 二刀流
+					68 text 二刀流 武术 · 稀有
+					103 container
+						104 text 稀有 稀有
+					71 text 发现 1  张武术牌，并额外获得该牌的  1  张复制。
+				72 image heart
+				105 text 能量不足：需要 1，当前 0
+			74 button 查看二刀流完整规则
+			75 checkbox (disabled) Description: 连射 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+				76 container
+					77 text 1
+					78 image 连射
+					79 text 连射 武术 · 稀有
+					106 container
+						107 text 稀有 稀有
+					82 text 造成  2  点 固定伤害 ；本牌的 伤害 效果触发  3  次。
+				83 image swords
+				108 text 能量不足：需要 1，当前 0
+			85 button 查看连射完整规则
+		86 container 战术操作
+			87 button bag 背包
+				88 image bag
+				89 text  背包
+			90 button runner 撤离（判负）
+				91 image runner
+				92 text  撤离（判负）
+			93 button gear 设置
+				94 image gear
+				95 text  设置
+			96 button skip 结束回合
+				97 image skip
+				98 text  结束回合
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5354/

@@ -1,0 +1,20 @@
+{
+  "card_id": "tt7-stratagem",
+  "model": "nai-diffusion-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 437326112,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1girl, solo, slight smile, looking down, simple background, pouch, drawstring, magic, from side, upper body, sitting, leaning forward, holding, hands up\n\nCharacter 1 is seated and turning slightly toward the viewer, her face near the upper-left third in a three-quarter view with both green eyes readable. The camera is close to a small gold-trimmed dark-green spell sachet in the lower foreground, making the pouch opening and working hands prominent. Her near hand holds the pouch open. With two fingers of her other hand she picks one ivory-gold folded spell leaf out of its mouth. That selected leaf begins to unfold toward the right into a broad clean magical ribbon. Exactly two other folded spell leaves remain partly tucked at the opening, secondary to the one she selects. The pouch, nearer fingers and selected spell form a diagonal across the foreground; her clear face watches from above. Her long curls and shoulder line follow the small turning motion. Keep the supporting chair only partly visible and her torso continuous through the crop. The little pouch should feel like it stores concentrated knowledge rather than money. Use a few quiet abstract color planes that support the gold magical leaf and separate dark-green dress from dark-brown hair, without a literal room, shelving, scenery or decorative particles.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "girl, young adult woman, gentle composed anime face, emerald green eyes, very long dark brown wavy curly hair, swept bangs, two small gold hairclips keeping both eyes visible, white long-sleeved high-collar blouse with cuff buttons, dark forest-green suspender long dress with wide straps and simple gold buckles, white short socks, black shoes",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, boy, male, blonde hair, silver hair, straight hair, blue eyes, golden eyes, witch hat, staff, wand, cake, fork, food, coins, money bag, giant sack, giant book covering face, library room, bookshelves, duplicate person, white border, inset illustration, disembodied hand, contact sheet, character sheet",
+  "design": "白塔坐姿侧转，近手开锦囊，另一手拈出正在展开的一道光页，另两道留袋口。",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\baita-stratagem-20261010\\draft.png"
+}

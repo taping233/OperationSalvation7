@@ -1,0 +1,997 @@
+{
+  "files": [
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/neutral.webp",
+      "bytes": 89256,
+      "sha256": "0592cc85955465027ab45993f94c792a55b2642e727d0f50f230f2f24f3a931f",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-000.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-001.webp",
+      "bytes": 89098,
+      "sha256": "e65c4c1f94e612c6f09282e4706522628cb6889f37657c92545228cfb5b5c28c",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-002.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-002.webp",
+      "bytes": 88902,
+      "sha256": "5dd8df27ee65af8ea9b1fd85bb44c81a65cb57a6e5251fd7b9b1c1ac7c767574",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-003.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-003.webp",
+      "bytes": 88726,
+      "sha256": "5a3e02e894b90cd01a6dd32d934342c46fb3911e0bb38f7d193528c2743e2ef5",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-004.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-004.webp",
+      "bytes": 88314,
+      "sha256": "1c6a19a3f5267b5a3c6887278d873bebe3768ff7bc1e6dd92d8b9bf6d1a6e1d9",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-005.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-005.webp",
+      "bytes": 88044,
+      "sha256": "268b86f1f00393c3b9412340745efc2435d03540a2b58d284e59508207efc4eb",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-006.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-006.webp",
+      "bytes": 87926,
+      "sha256": "86a0d30fa09acc3cc336cdd9be237dded6a1f75f254f2ad8026bbe1246a49037",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-007.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-007.webp",
+      "bytes": 87818,
+      "sha256": "90389f18299652d916a719dfd44b0a98b5a4a230aeb56d3d9b64e7e7f72c4bc4",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-008.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-008.webp",
+      "bytes": 87896,
+      "sha256": "a5f91540b4f9e750a3128cfb9115a733790bc75859cb33de1c88bc6a4e2407db",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-009.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-009.webp",
+      "bytes": 88072,
+      "sha256": "638630424876ef5b6fd621ebae8590e10bb6f4538159c9f2d751a83ba79bac70",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-010.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-010.webp",
+      "bytes": 88244,
+      "sha256": "75b03c70b5fec456d6d505fc963322730debdb897c8084ff6932a465bfcb0456",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-011.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-011.webp",
+      "bytes": 88528,
+      "sha256": "c7f6fb50b2622534fb21d6797458d4e30520a5a9537a249285ff3d972e8f1d63",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-012.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-012.webp",
+      "bytes": 89054,
+      "sha256": "85e0b3c2aeb72f4e0512779814151c3653df2e7d8fa568b41b715d81db351303",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-013.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-013.webp",
+      "bytes": 88400,
+      "sha256": "605458715a2657858953802bed0bfb43a6ad5f9e95e091b7074054c7c6106005",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-014.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-014.webp",
+      "bytes": 87950,
+      "sha256": "afd20624a22f479b178a47aad80bf27e8e27369baa625d574c32b00b43191c3e",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-015.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-015.webp",
+      "bytes": 88000,
+      "sha256": "31035bf9caff2807d3bc62f99f5c072d08cd9a60768a9b4b52318ebbef1ea384",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-016.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-016.webp",
+      "bytes": 88038,
+      "sha256": "f2da1f138b2bc9f79b7707616fbe4a94c100fae50fbc9e93b5373afb118fbdd5",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-017.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-017.webp",
+      "bytes": 88102,
+      "sha256": "1ae3ff122a8ce0286c870f01f72915f7d761b8b69ed3f57f4eb48ce1a0ce4792",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-018.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-018.webp",
+      "bytes": 88612,
+      "sha256": "2acf58f88b238d03fd2072eaf384ee4257a048e4af33ec04c212fafcf82c1f85",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-019.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-019.webp",
+      "bytes": 88622,
+      "sha256": "8227551091edb722b17a638cd98cbb2f828234c0b15aa73274df72ae1dadf088",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-020.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-020.webp",
+      "bytes": 88314,
+      "sha256": "5735d9e3e6df43fedfe629fbedaa1cebce06eac614b1bef3eb43d3e2a0339907",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-021.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-021.webp",
+      "bytes": 88090,
+      "sha256": "61003a7b96d8a4441a7deb62f9e7fbacdb8959f8020804571194989aca7b1c74",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-022.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-022.webp",
+      "bytes": 88190,
+      "sha256": "ed094bc9d88be00f38d90d452968d7209122295a3c15491add1134f35b91a03d",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-023.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-023.webp",
+      "bytes": 88300,
+      "sha256": "0b8c13c6984220086395b477b62bb0b2daa3aac9496c30afeea8f8ee401e2743",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-024.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-024.webp",
+      "bytes": 88400,
+      "sha256": "92b5313aaf0f214d651d2a48f58fc9c34dfd3026cc9197760c06c29db828b539",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-025.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-025.webp",
+      "bytes": 88720,
+      "sha256": "40e3f8ea9a025dd92a90de857676524b1aa0d1ea5febf4bb280435cf328fddb2",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-026.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-026.webp",
+      "bytes": 89282,
+      "sha256": "b669bb89537b173a783930ed988d7847abed24ae39ce070d4311a0044efbda6a",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-027.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-027.webp",
+      "bytes": 88890,
+      "sha256": "2ae7c19594476bfacc2cb0ffd805fd57bbe58fef62446951e3d033105f9d2a29",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-028.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-028.webp",
+      "bytes": 88224,
+      "sha256": "d64f7a2b1d1f3cc166edc2671c9ff5d5a73322dedb1af101d772fa14863a16c6",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-029.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-029.webp",
+      "bytes": 88124,
+      "sha256": "8cbdd8350ef258e50a52cd1e50c31938bbebbfe7c0676c8f248050709e9830ca",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-030.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-030.webp",
+      "bytes": 88058,
+      "sha256": "9482f471cefa6ad10c8ff3eac96f87bbe77c49b58437868f1ded8645e55edcb2",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-031.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-031.webp",
+      "bytes": 87972,
+      "sha256": "46f6eaf155cb70691890e4d952538d6d895772f7395742bf6ade5bcc3542cbb0",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-032.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-032.webp",
+      "bytes": 88086,
+      "sha256": "0cfedc0eed51604b1d3b4977d834d07caa923167c0ba6747f5d7af705b176b5c",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-033.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-033.webp",
+      "bytes": 88120,
+      "sha256": "fb082e8a066ed5bd57bc5aeebb1aa9eab0151b7e9ee46627e7de0bffaa8c4ed7",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-034.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-034.webp",
+      "bytes": 88104,
+      "sha256": "4cbd9fa5b2d60fdb3af00d5aa69846daadc0229cd4235f9e76fa399acaee95e0",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-035.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-035.webp",
+      "bytes": 88116,
+      "sha256": "65707626855b53426156e2859f0a858704fa67102510449e695e4da5bdbc3910",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-036.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-036.webp",
+      "bytes": 86062,
+      "sha256": "e4ebddd67b6bbc72523aad469973d525f3688044e4e7e4716bbd9503ebfb2a31",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-001.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-037.webp",
+      "bytes": 80576,
+      "sha256": "3de52c1827be6d17874c5e1c83644cc75e3b4d75a8bff0293bc197e554d5e89d",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-002.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-038.webp",
+      "bytes": 92102,
+      "sha256": "f6938d439301d9b2e8fecbf33a6646cce38168a9c231ea7f93834ac1e45c2527",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-003.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-039.webp",
+      "bytes": 98882,
+      "sha256": "2289ed6bf95710e5afa95edf15d09ac06cf77901a82213983764f8a1ef1b026a",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-004.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-040.webp",
+      "bytes": 90004,
+      "sha256": "6f60ec67b0317ea85d1c8d6f515a0466d7623743ac11be24dccb2b512dbd1eea",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-005.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-041.webp",
+      "bytes": 80690,
+      "sha256": "65accd1869c520e82cc6ed94355c82f774e246b0d118378fef1ebd70585c4ce3",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-006.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-042.webp",
+      "bytes": 98112,
+      "sha256": "b0f1e58997a9b6e4477974e9eef73889b8b0916b7bfb5c3dea8e050af1e0c9ed",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/hurt-001.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-043.webp",
+      "bytes": 95006,
+      "sha256": "ed50bfdd8f71c879a44821b9a26757b25fe3e056f8914cb8ff05d75edbc7dd34",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/hurt-002.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-044.webp",
+      "bytes": 75362,
+      "sha256": "3bdb493ae118f0d0b51f3fb72a85f0c654fe887419d532c40ad99f100aceb7b7",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-001.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-045.webp",
+      "bytes": 72504,
+      "sha256": "e9c10c56e5ceb95e40bec34cddc85cddfa0fa8f75e187fd802180590cccc2cd9",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-002.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-046.webp",
+      "bytes": 74564,
+      "sha256": "5030cb862e937f4ed6d321a3273476ede07b05fe90050e2cfd72b3ddbb722a19",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-003.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-047.webp",
+      "bytes": 102762,
+      "sha256": "4b3c0f404b94f13e803676f99b718914235f94083ee8230efa16d9e7c7566a1d",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-004.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-048.webp",
+      "bytes": 101700,
+      "sha256": "2a0d0430e1678d2ceb589e54f14b91f3d133d97148e34119b7cb2eb3a29bb977",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-005.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/frame-049.webp",
+      "bytes": 99246,
+      "sha256": "8a059bfcd9f8589afa307a0ea9adf066c3882f427ca4cc76626fe39d23f7989f",
+      "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-006.png",
+      "license": "项目原创；内置imagegen生成，老板授权游戏使用"
+    }
+  ],
+  "catalog": {
+    "width": 512,
+    "height": 342,
+    "sequences": {
+      "idle": [
+        "sprite-v1/neutral",
+        "sprite-v1/neutral",
+        "sprite-v1/frame-001",
+        "sprite-v1/frame-002",
+        "sprite-v1/frame-003",
+        "sprite-v1/frame-004",
+        "sprite-v1/frame-005",
+        "sprite-v1/frame-006",
+        "sprite-v1/frame-007",
+        "sprite-v1/frame-008",
+        "sprite-v1/frame-009",
+        "sprite-v1/frame-010",
+        "sprite-v1/frame-011",
+        "sprite-v1/frame-012",
+        "sprite-v1/frame-013",
+        "sprite-v1/frame-014",
+        "sprite-v1/frame-015",
+        "sprite-v1/frame-016",
+        "sprite-v1/frame-017",
+        "sprite-v1/frame-018",
+        "sprite-v1/frame-019",
+        "sprite-v1/frame-020",
+        "sprite-v1/frame-021",
+        "sprite-v1/frame-022",
+        "sprite-v1/frame-023",
+        "sprite-v1/frame-024",
+        "sprite-v1/frame-025",
+        "sprite-v1/frame-026",
+        "sprite-v1/frame-027",
+        "sprite-v1/frame-028",
+        "sprite-v1/frame-029",
+        "sprite-v1/frame-030",
+        "sprite-v1/frame-031",
+        "sprite-v1/frame-032",
+        "sprite-v1/frame-033",
+        "sprite-v1/frame-034",
+        "sprite-v1/frame-035",
+        "sprite-v1/frame-034",
+        "sprite-v1/frame-033",
+        "sprite-v1/frame-032",
+        "sprite-v1/frame-031",
+        "sprite-v1/frame-030",
+        "sprite-v1/frame-029",
+        "sprite-v1/frame-028",
+        "sprite-v1/frame-027",
+        "sprite-v1/frame-026",
+        "sprite-v1/frame-025",
+        "sprite-v1/frame-024",
+        "sprite-v1/frame-023",
+        "sprite-v1/frame-022",
+        "sprite-v1/frame-021",
+        "sprite-v1/frame-020",
+        "sprite-v1/frame-019",
+        "sprite-v1/frame-018",
+        "sprite-v1/frame-017",
+        "sprite-v1/frame-016",
+        "sprite-v1/frame-015",
+        "sprite-v1/frame-014",
+        "sprite-v1/frame-013",
+        "sprite-v1/frame-012",
+        "sprite-v1/frame-011",
+        "sprite-v1/frame-010",
+        "sprite-v1/frame-009",
+        "sprite-v1/frame-008",
+        "sprite-v1/frame-007",
+        "sprite-v1/frame-006",
+        "sprite-v1/frame-005",
+        "sprite-v1/frame-004",
+        "sprite-v1/frame-003",
+        "sprite-v1/frame-002",
+        "sprite-v1/frame-001",
+        "sprite-v1/neutral"
+      ],
+      "atk": [
+        "sprite-v1/neutral",
+        "sprite-v1/frame-036",
+        "sprite-v1/frame-036",
+        "sprite-v1/frame-037",
+        "sprite-v1/frame-038",
+        "sprite-v1/frame-038",
+        "sprite-v1/frame-039",
+        "sprite-v1/frame-040",
+        "sprite-v1/frame-041",
+        "sprite-v1/neutral"
+      ],
+      "hurt": [
+        "sprite-v1/neutral",
+        "sprite-v1/frame-042",
+        "sprite-v1/frame-042",
+        "sprite-v1/frame-042",
+        "sprite-v1/frame-043",
+        "sprite-v1/frame-043",
+        "sprite-v1/frame-043",
+        "sprite-v1/neutral"
+      ],
+      "death": [
+        "sprite-v1/neutral",
+        "sprite-v1/frame-044",
+        "sprite-v1/frame-044",
+        "sprite-v1/frame-044",
+        "sprite-v1/frame-045",
+        "sprite-v1/frame-045",
+        "sprite-v1/frame-046",
+        "sprite-v1/frame-046",
+        "sprite-v1/frame-046",
+        "sprite-v1/frame-047",
+        "sprite-v1/frame-047",
+        "sprite-v1/frame-048",
+        "sprite-v1/frame-048",
+        "sprite-v1/frame-048",
+        "sprite-v1/frame-049",
+        "sprite-v1/frame-049",
+        "sprite-v1/frame-049",
+        "sprite-v1/frame-049",
+        "sprite-v1/frame-049",
+        "sprite-v1/frame-049",
+        "sprite-v1/frame-049"
+      ],
+      "cast": [
+        "sprite-v1/neutral",
+        "sprite-v1/frame-036",
+        "sprite-v1/frame-036",
+        "sprite-v1/frame-037",
+        "sprite-v1/frame-038",
+        "sprite-v1/frame-038",
+        "sprite-v1/frame-039",
+        "sprite-v1/frame-040",
+        "sprite-v1/frame-041",
+        "sprite-v1/neutral"
+      ]
+    },
+    "timings": {
+      "idle": [
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42
+      ],
+      "atk": [
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42
+      ],
+      "hurt": [
+        41,
+        42,
+        42,
+        42,
+        41,
+        42,
+        42,
+        42
+      ],
+      "death": [
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42
+      ],
+      "cast": [
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42,
+        41,
+        42,
+        42
+      ]
+    },
+    "fixedGeometry": true,
+    "assetVersion": "sprite-v1",
+    "facing": "right"
+  },
+  "checks": {
+    "passed": true,
+    "role": "xingyue",
+    "uniqueRuntimeTextures": 50,
+    "frameSize": [
+      768,
+      512
+    ],
+    "runtimeSize": [
+      512,
+      342
+    ],
+    "exactIdleAttackHurtEndpoints": true,
+    "fixedIdleLower147Rows": true,
+    "fixedCanvasAndGroupScale": true,
+    "deathHoldLast": true,
+    "durationMs": {
+      "idle": 3000,
+      "atk": 417,
+      "hurt": 334,
+      "death": 875
+    },
+    "bounds": {
+      "idle": [
+        [
+          127,
+          84,
+          580,
+          484
+        ],
+        [
+          127,
+          84,
+          580,
+          484
+        ],
+        [
+          127,
+          84,
+          580,
+          484
+        ],
+        [
+          127,
+          84,
+          580,
+          484
+        ],
+        [
+          127,
+          84,
+          580,
+          484
+        ],
+        [
+          127,
+          84,
+          580,
+          484
+        ],
+        [
+          127,
+          83,
+          580,
+          484
+        ],
+        [
+          127,
+          83,
+          580,
+          484
+        ],
+        [
+          127,
+          83,
+          580,
+          484
+        ],
+        [
+          127,
+          83,
+          580,
+          484
+        ],
+        [
+          127,
+          83,
+          580,
+          484
+        ],
+        [
+          127,
+          83,
+          580,
+          484
+        ],
+        [
+          127,
+          83,
+          580,
+          484
+        ],
+        [
+          127,
+          83,
+          580,
+          484
+        ],
+        [
+          127,
+          83,
+          580,
+          484
+        ],
+        [
+          127,
+          82,
+          580,
+          484
+        ],
+        [
+          127,
+          82,
+          580,
+          484
+        ],
+        [
+          127,
+          82,
+          580,
+          484
+        ],
+        [
+          127,
+          82,
+          580,
+          484
+        ],
+        [
+          127,
+          82,
+          580,
+          484
+        ],
+        [
+          127,
+          82,
+          580,
+          484
+        ],
+        [
+          127,
+          82,
+          580,
+          484
+        ],
+        [
+          127,
+          81,
+          580,
+          484
+        ],
+        [
+          127,
+          81,
+          580,
+          484
+        ],
+        [
+          127,
+          81,
+          580,
+          484
+        ],
+        [
+          127,
+          81,
+          580,
+          484
+        ],
+        [
+          127,
+          81,
+          580,
+          484
+        ],
+        [
+          127,
+          81,
+          580,
+          484
+        ],
+        [
+          127,
+          81,
+          580,
+          484
+        ],
+        [
+          127,
+          81,
+          580,
+          484
+        ],
+        [
+          127,
+          80,
+          580,
+          484
+        ],
+        [
+          127,
+          80,
+          580,
+          484
+        ],
+        [
+          127,
+          80,
+          580,
+          484
+        ],
+        [
+          127,
+          80,
+          580,
+          484
+        ],
+        [
+          127,
+          80,
+          580,
+          484
+        ],
+        [
+          127,
+          80,
+          580,
+          484
+        ],
+        [
+          127,
+          80,
+          580,
+          484
+        ]
+      ],
+      "atk": [
+        [
+          127,
+          84,
+          580,
+          484
+        ],
+        [
+          134,
+          84,
+          546,
+          484
+        ],
+        [
+          155,
+          84,
+          546,
+          484
+        ],
+        [
+          161,
+          85,
+          588,
+          484
+        ],
+        [
+          175,
+          102,
+          712,
+          484
+        ],
+        [
+          152,
+          89,
+          556,
+          484
+        ],
+        [
+          152,
+          85,
+          546,
+          484
+        ],
+        [
+          127,
+          84,
+          580,
+          484
+        ]
+      ],
+      "hurt": [
+        [
+          127,
+          84,
+          580,
+          484
+        ],
+        [
+          78,
+          112,
+          547,
+          484
+        ],
+        [
+          101,
+          84,
+          564,
+          484
+        ],
+        [
+          127,
+          84,
+          580,
+          484
+        ]
+      ],
+      "death": [
+        [
+          127,
+          84,
+          580,
+          484
+        ],
+        [
+          224,
+          84,
+          543,
+          484
+        ],
+        [
+          218,
+          142,
+          550,
+          484
+        ],
+        [
+          200,
+          275,
+          569,
+          484
+        ],
+        [
+          162,
+          312,
+          607,
+          484
+        ],
+        [
+          168,
+          370,
+          599,
+          484
+        ],
+        [
+          164,
+          387,
+          605,
+          484
+        ]
+      ]
+    },
+    "coverage": "静态导出检查；姿态与动作自然度另做当前窗口内置预览核验"
+  }
+}

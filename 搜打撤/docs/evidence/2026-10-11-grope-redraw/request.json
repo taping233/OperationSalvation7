@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-grope",
+      "asset": "cards/spell-tt3-grope.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a125fc-1da2-7300-83db-f2b39e275c76/exec-f3aad655-6e5e-4690-8708-80e36492bce7.png",
+      "revision": "grope-lantern-discovery-rough-20261011",
+      "prompt": "Use case: structural correction and style-transfer. One square card illustration for 摸索.\nImage 1 is a flawed NAI layout: preserve upper-left floating lantern, diagonal upper-left to lower-right discovery direction, indigo-gray dark backdrop. Correct books/extra rectangles and overly bright beam. Image 2 approved 寻宝 supplies STYLE ONLY for broad directional opaque paint and quiet cool-color masses. Image 3 铸甲 supplies STYLE ONLY for economical object construction, grouped shadows and concentrated small bright focal edges; no copied chest, hammer or armor.\nMake the lantern smaller, about a fifth of canvas width, floating at upper-left. One simple dark charcoal metal frame, two visible matte warm-ivory windows, modest quiet light. A single DIM muted amber broad brush swathe extends diagonally toward right-center; it is partial illumination, not a blazing solid white laser. At right-center, reveal EXACTLY TWO THIN BLANK playing-card rectangles: nearer warm ivory card tilted slightly left, second muted ochre card offset behind it to the right. Each is a SINGLE flat card with sharp corners, no pages, thick spine, book cover, inset border or symbols. Their lower HALF is hidden by overlapping broad dark gray-violet paint masses. Remove ALL extra blue rectangular objects from the draft, replacing them with irregular indistinct shadow masses. The edges of the two partially exposed cards must remain distinguishable. Their small lit upper corners form the main discovery point. Most of the image is still dim and uncertain, suggesting feeling one's way toward knowledge.\nPaint with matte opaque loaded flat-brush swipes, a few blunt charcoal/steel-gray dabs construct the lamp; no fine frame ornament. Warm windows have broad quiet faces rather than smooth glow spheres. Searching illumination uses long uneven muted ochre/gray-gold swipes with dark gaps and restrained soft edges, subordinated to the card corners. Cards are broad ivory and muted ochre paint planes with small angular violet shadows. Dark paint partly OVERLAPS card silhouettes, with selective handmade edges. Large connected indigo-gray/gray-violet masses form the whole background, slightly varied dark blue underpaint and broad direction marks, no room, ground or rocks. Keep quieter stretches between strokes; no all-over grit or tiny facet mosaics. A few hard light-dark edges at the uncovered card corners, only sparse structural lines elsewhere. No polished 3D, book stacks, pages, paper texture, fine hatching, uniform vector outlines, bright full-frame bloom, scattered particles. No humans, hands, faces, text, card symbols, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/.tmp/nai/output/grope-redraw-20261011/grope.png",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt3-treasure-hunt.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt2-turtlearmor.webp"
+      ]
+    }
+  ]
+}

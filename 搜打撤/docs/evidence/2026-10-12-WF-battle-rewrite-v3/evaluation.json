@@ -1,0 +1,208 @@
+{
+  "v2": {
+    "drum_notes": 124,
+    "drum_groove_consistency_16_steps": 0.85,
+    "melody_notes": 40,
+    "melody_range_semitones": 13,
+    "interval_at_most_two_semitones_ratio": 0.41025641025641024,
+    "mean_interval_semitones": 2.769230769230769,
+    "median_note_seconds": 0.439453125,
+    "notes_below_250ms": 1,
+    "theme_return_same_pitch_rhythm_duration_ratio": 0.5714285714285714,
+    "theme_return_first": [
+      [
+        1,
+        74,
+        3
+      ],
+      [
+        4,
+        77,
+        4
+      ],
+      [
+        8,
+        81,
+        7
+      ],
+      [
+        16,
+        79,
+        4
+      ],
+      [
+        20,
+        76,
+        3
+      ],
+      [
+        23,
+        77,
+        4
+      ],
+      [
+        27,
+        74,
+        4
+      ]
+    ],
+    "theme_return_second": [
+      [
+        1,
+        74,
+        3
+      ],
+      [
+        4,
+        77,
+        4
+      ],
+      [
+        8,
+        81,
+        7
+      ],
+      [
+        16,
+        79,
+        4
+      ],
+      [
+        20,
+        77,
+        3
+      ],
+      [
+        23,
+        74,
+        4
+      ],
+      [
+        27,
+        77,
+        4
+      ]
+    ]
+  },
+  "v3": {
+    "drum_notes": 124,
+    "drum_groove_consistency_16_steps": 0.85,
+    "melody_notes": 52,
+    "melody_range_semitones": 13,
+    "interval_at_most_two_semitones_ratio": 0.7058823529411765,
+    "mean_interval_semitones": 2.5098039215686274,
+    "median_note_seconds": 0.33203125,
+    "notes_below_250ms": 15,
+    "theme_return_same_pitch_rhythm_duration_ratio": 1.0,
+    "theme_return_first": [
+      [
+        1,
+        74,
+        2
+      ],
+      [
+        3,
+        76,
+        2
+      ],
+      [
+        5,
+        77,
+        4
+      ],
+      [
+        10,
+        81,
+        3
+      ],
+      [
+        13,
+        79,
+        2
+      ],
+      [
+        16,
+        77,
+        3
+      ],
+      [
+        19,
+        76,
+        3
+      ],
+      [
+        22,
+        74,
+        6
+      ],
+      [
+        29,
+        69,
+        2
+      ]
+    ],
+    "theme_return_second": [
+      [
+        1,
+        74,
+        2
+      ],
+      [
+        3,
+        76,
+        2
+      ],
+      [
+        5,
+        77,
+        4
+      ],
+      [
+        10,
+        81,
+        3
+      ],
+      [
+        13,
+        79,
+        2
+      ],
+      [
+        16,
+        77,
+        3
+      ],
+      [
+        19,
+        76,
+        3
+      ],
+      [
+        22,
+        74,
+        6
+      ],
+      [
+        29,
+        69,
+        2
+      ]
+    ]
+  },
+  "checks": {
+    "all_13_backing_tracks_unchanged": true,
+    "drum_notes_unchanged": true,
+    "drum_consistency_unchanged": true,
+    "exact_theme_return_at_16th_grid": true,
+    "all_output_fingerprints_match": true,
+    "exact_30s": true,
+    "finite": true,
+    "no_clipping": true,
+    "true_peak_below_minus_1": true,
+    "target_lufs": true,
+    "all_native_stems_non_silent": true
+  },
+  "method": "Groove: 1 - mean adjacent-bar onset-vector Hamming fraction, 16 cells/bar, core drum tracks. Theme-return match is a project-specific descriptive test, not a validated memorability score.",
+  "source": "https://muspy.readthedocs.io/en/latest/doc/metrics.html",
+  "listening": "No human listening; no claim of perceptual melody superiority."
+}

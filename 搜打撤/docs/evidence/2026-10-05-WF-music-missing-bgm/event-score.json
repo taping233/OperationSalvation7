@@ -1,0 +1,1282 @@
+{
+  "id": "event",
+  "stem": "07-event-letter-in-ashes",
+  "title": "余烬来信",
+  "bpm": 78,
+  "meter": [
+    4,
+    4
+  ],
+  "bars": 32,
+  "key": "A minor",
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "opening"
+    },
+    {
+      "start_bar": 6,
+      "name": "first development"
+    },
+    {
+      "start_bar": 18,
+      "name": "contrast"
+    },
+    {
+      "start_bar": 26,
+      "name": "connected return"
+    }
+  ],
+  "lead": [
+    68,
+    "Oboe storyteller"
+  ],
+  "piano": false,
+  "chords": [
+    [
+      45,
+      48,
+      52,
+      55
+    ],
+    [
+      53,
+      57,
+      60,
+      64
+    ],
+    [
+      48,
+      52,
+      55,
+      59
+    ],
+    [
+      52,
+      56,
+      59,
+      62
+    ]
+  ],
+  "phrases": [
+    [
+      69,
+      72,
+      71,
+      64
+    ],
+    [
+      72,
+      69,
+      65,
+      67
+    ],
+    [
+      67,
+      64,
+      62,
+      64
+    ],
+    [
+      68,
+      71,
+      69,
+      64
+    ]
+  ],
+  "rhythm": [
+    0,
+    2.5,
+    4.5,
+    6.5
+  ],
+  "voices": [
+    [
+      "Vibraphone ink",
+      11,
+      -38,
+      -22
+    ],
+    [
+      "Bassoon question",
+      70,
+      -36,
+      24
+    ],
+    [
+      "Muted paper strings",
+      49,
+      -34,
+      -31
+    ],
+    [
+      "Harp page turn",
+      46,
+      -42,
+      29
+    ]
+  ],
+  "idea": "奇遇和叙事选择的低密度问答；双簧管像说话，颤音琴只作标点，留出阅读空间。",
+  "beats_per_bar": 4.0,
+  "total_beats": 128.0,
+  "tracks": {
+    "Oboe storyteller": {
+      "program": 68,
+      "bank": 0,
+      "target_active_rms_dbfs": -25,
+      "pan": -17,
+      "mode": "lead",
+      "gain_points": [
+        [
+          0,
+          0.97
+        ],
+        [
+          16.0,
+          0.97
+        ],
+        [
+          32.0,
+          1
+        ],
+        [
+          64.0,
+          1
+        ],
+        [
+          80.0,
+          1.04
+        ],
+        [
+          96.0,
+          1.04
+        ],
+        [
+          112.0,
+          0.94
+        ],
+        [
+          120.0,
+          0.94
+        ],
+        [
+          128.0,
+          0.97
+        ]
+      ],
+      "notes": [
+        {
+          "beat": 0.0,
+          "midi": 69,
+          "length": 2.46,
+          "velocity": 57
+        },
+        {
+          "beat": 2.5,
+          "midi": 72,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 4.5,
+          "midi": 71,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 6.5,
+          "midi": 64,
+          "length": 1.46,
+          "velocity": 52
+        },
+        {
+          "beat": 8.0,
+          "midi": 72,
+          "length": 2.46,
+          "velocity": 57
+        },
+        {
+          "beat": 10.5,
+          "midi": 69,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 12.5,
+          "midi": 65,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 14.5,
+          "midi": 67,
+          "length": 1.46,
+          "velocity": 52
+        },
+        {
+          "beat": 16.0,
+          "midi": 67,
+          "length": 2.46,
+          "velocity": 57
+        },
+        {
+          "beat": 18.5,
+          "midi": 64,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 20.5,
+          "midi": 62,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 22.5,
+          "midi": 64,
+          "length": 1.46,
+          "velocity": 52
+        },
+        {
+          "beat": 24.0,
+          "midi": 68,
+          "length": 2.46,
+          "velocity": 57
+        },
+        {
+          "beat": 26.5,
+          "midi": 71,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 28.5,
+          "midi": 69,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 30.5,
+          "midi": 64,
+          "length": 1.46,
+          "velocity": 52
+        },
+        {
+          "beat": 32.0,
+          "midi": 69,
+          "length": 2.46,
+          "velocity": 57
+        },
+        {
+          "beat": 34.5,
+          "midi": 72,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 36.5,
+          "midi": 71,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 38.5,
+          "midi": 64,
+          "length": 1.46,
+          "velocity": 52
+        },
+        {
+          "beat": 40.0,
+          "midi": 72,
+          "length": 2.46,
+          "velocity": 57
+        },
+        {
+          "beat": 42.5,
+          "midi": 69,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 44.5,
+          "midi": 65,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 46.5,
+          "midi": 67,
+          "length": 1.46,
+          "velocity": 52
+        },
+        {
+          "beat": 48.0,
+          "midi": 67,
+          "length": 2.46,
+          "velocity": 57
+        },
+        {
+          "beat": 50.5,
+          "midi": 64,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 52.5,
+          "midi": 62,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 54.5,
+          "midi": 64,
+          "length": 1.46,
+          "velocity": 52
+        },
+        {
+          "beat": 56.0,
+          "midi": 68,
+          "length": 2.46,
+          "velocity": 57
+        },
+        {
+          "beat": 58.5,
+          "midi": 71,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 60.5,
+          "midi": 69,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 62.5,
+          "midi": 64,
+          "length": 1.46,
+          "velocity": 52
+        },
+        {
+          "beat": 64.0,
+          "midi": 69,
+          "length": 2.46,
+          "velocity": 57
+        },
+        {
+          "beat": 66.5,
+          "midi": 72,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 68.5,
+          "midi": 71,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 70.5,
+          "midi": 64,
+          "length": 1.46,
+          "velocity": 52
+        },
+        {
+          "beat": 72.0,
+          "midi": 72,
+          "length": 2.46,
+          "velocity": 57
+        },
+        {
+          "beat": 74.5,
+          "midi": 69,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 76.5,
+          "midi": 67,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 78.5,
+          "midi": 65,
+          "length": 1.46,
+          "velocity": 52
+        },
+        {
+          "beat": 80.0,
+          "midi": 67,
+          "length": 2.46,
+          "velocity": 57
+        },
+        {
+          "beat": 82.5,
+          "midi": 64,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 84.5,
+          "midi": 64,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 86.5,
+          "midi": 62,
+          "length": 1.46,
+          "velocity": 52
+        },
+        {
+          "beat": 88.0,
+          "midi": 68,
+          "length": 2.46,
+          "velocity": 57
+        },
+        {
+          "beat": 90.5,
+          "midi": 71,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 92.5,
+          "midi": 64,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 94.5,
+          "midi": 69,
+          "length": 1.46,
+          "velocity": 52
+        },
+        {
+          "beat": 96.0,
+          "midi": 69,
+          "length": 2.46,
+          "velocity": 57
+        },
+        {
+          "beat": 98.5,
+          "midi": 72,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 100.5,
+          "midi": 64,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 102.5,
+          "midi": 71,
+          "length": 1.46,
+          "velocity": 52
+        },
+        {
+          "beat": 104.0,
+          "midi": 72,
+          "length": 2.46,
+          "velocity": 57
+        },
+        {
+          "beat": 106.5,
+          "midi": 69,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 108.5,
+          "midi": 65,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 110.5,
+          "midi": 67,
+          "length": 1.46,
+          "velocity": 52
+        },
+        {
+          "beat": 112.0,
+          "midi": 67,
+          "length": 2.46,
+          "velocity": 57
+        },
+        {
+          "beat": 114.5,
+          "midi": 64,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 116.5,
+          "midi": 62,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 118.5,
+          "midi": 64,
+          "length": 1.46,
+          "velocity": 52
+        },
+        {
+          "beat": 120.0,
+          "midi": 68,
+          "length": 2.46,
+          "velocity": 57
+        },
+        {
+          "beat": 122.5,
+          "midi": 71,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 124.5,
+          "midi": 69,
+          "length": 1.96,
+          "velocity": 54
+        },
+        {
+          "beat": 126.5,
+          "midi": 64,
+          "length": 1.46,
+          "velocity": 52
+        }
+      ]
+    },
+    "Vibraphone ink": {
+      "program": 11,
+      "bank": 0,
+      "target_active_rms_dbfs": -38,
+      "pan": -22,
+      "mode": "detail",
+      "gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          16.0,
+          0.68
+        ],
+        [
+          32.0,
+          0.72
+        ],
+        [
+          64.0,
+          0.72
+        ],
+        [
+          80.0,
+          0.84
+        ],
+        [
+          96.0,
+          0.84
+        ],
+        [
+          112.0,
+          0.58
+        ],
+        [
+          120.0,
+          0.58
+        ],
+        [
+          128.0,
+          0.68
+        ]
+      ],
+      "notes": [
+        {
+          "beat": 1.84,
+          "midi": 60,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 5.52,
+          "midi": 64,
+          "length": 1.2,
+          "velocity": 30
+        },
+        {
+          "beat": 17.84,
+          "midi": 64,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 21.52,
+          "midi": 67,
+          "length": 1.2,
+          "velocity": 30
+        },
+        {
+          "beat": 33.84,
+          "midi": 60,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 37.52,
+          "midi": 64,
+          "length": 1.2,
+          "velocity": 30
+        },
+        {
+          "beat": 49.84,
+          "midi": 64,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 53.52,
+          "midi": 67,
+          "length": 1.2,
+          "velocity": 30
+        },
+        {
+          "beat": 65.84,
+          "midi": 60,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 69.52,
+          "midi": 64,
+          "length": 1.2,
+          "velocity": 30
+        },
+        {
+          "beat": 73.84,
+          "midi": 69,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 77.52,
+          "midi": 72,
+          "length": 1.2,
+          "velocity": 30
+        },
+        {
+          "beat": 81.84,
+          "midi": 64,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 85.52,
+          "midi": 67,
+          "length": 1.2,
+          "velocity": 30
+        },
+        {
+          "beat": 89.84,
+          "midi": 68,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 93.52,
+          "midi": 71,
+          "length": 1.2,
+          "velocity": 30
+        },
+        {
+          "beat": 97.84,
+          "midi": 60,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 101.52,
+          "midi": 64,
+          "length": 1.2,
+          "velocity": 30
+        },
+        {
+          "beat": 113.84,
+          "midi": 64,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 117.52,
+          "midi": 67,
+          "length": 1.2,
+          "velocity": 30
+        }
+      ]
+    },
+    "Bassoon question": {
+      "program": 70,
+      "bank": 0,
+      "target_active_rms_dbfs": -36,
+      "pan": 24,
+      "mode": "answer",
+      "gain_points": [
+        [
+          0,
+          0.35
+        ],
+        [
+          16.0,
+          0.35
+        ],
+        [
+          32.0,
+          0.8
+        ],
+        [
+          64.0,
+          0.8
+        ],
+        [
+          80.0,
+          0.92
+        ],
+        [
+          96.0,
+          0.92
+        ],
+        [
+          112.0,
+          0.48
+        ],
+        [
+          120.0,
+          0.48
+        ],
+        [
+          128.0,
+          0.35
+        ]
+      ],
+      "notes": [
+        {
+          "beat": 12.72,
+          "midi": 60,
+          "length": 2.8,
+          "velocity": 43
+        },
+        {
+          "beat": 28.72,
+          "midi": 59,
+          "length": 2.8,
+          "velocity": 43
+        },
+        {
+          "beat": 44.72,
+          "midi": 60,
+          "length": 2.8,
+          "velocity": 43
+        },
+        {
+          "beat": 60.72,
+          "midi": 59,
+          "length": 2.8,
+          "velocity": 43
+        },
+        {
+          "beat": 76.72,
+          "midi": 60,
+          "length": 2.8,
+          "velocity": 43
+        },
+        {
+          "beat": 84.72,
+          "midi": 55,
+          "length": 2.8,
+          "velocity": 43
+        },
+        {
+          "beat": 92.72,
+          "midi": 59,
+          "length": 2.8,
+          "velocity": 43
+        },
+        {
+          "beat": 100.72,
+          "midi": 52,
+          "length": 2.8,
+          "velocity": 43
+        },
+        {
+          "beat": 108.72,
+          "midi": 60,
+          "length": 2.8,
+          "velocity": 43
+        },
+        {
+          "beat": 124.72,
+          "midi": 59,
+          "length": 2.8,
+          "velocity": 43
+        }
+      ]
+    },
+    "Muted paper strings": {
+      "program": 49,
+      "bank": 0,
+      "target_active_rms_dbfs": -34,
+      "pan": -31,
+      "mode": "body",
+      "gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          16.0,
+          0.83
+        ],
+        [
+          32.0,
+          0.92
+        ],
+        [
+          64.0,
+          0.92
+        ],
+        [
+          80.0,
+          0.98
+        ],
+        [
+          96.0,
+          0.98
+        ],
+        [
+          112.0,
+          0.85
+        ],
+        [
+          120.0,
+          0.85
+        ],
+        [
+          128.0,
+          0.83
+        ]
+      ],
+      "notes": [
+        {
+          "beat": 0.0,
+          "midi": 48,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 8.0,
+          "midi": 57,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 16.0,
+          "midi": 52,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 24.0,
+          "midi": 56,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 32.0,
+          "midi": 48,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 40.0,
+          "midi": 57,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 48.0,
+          "midi": 52,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 56.0,
+          "midi": 56,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 64.0,
+          "midi": 48,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 72.0,
+          "midi": 57,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 80.0,
+          "midi": 52,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 88.0,
+          "midi": 56,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 96.0,
+          "midi": 48,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 104.0,
+          "midi": 57,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 112.0,
+          "midi": 52,
+          "length": 7.98,
+          "velocity": 43
+        },
+        {
+          "beat": 120.0,
+          "midi": 56,
+          "length": 7.975,
+          "velocity": 43
+        }
+      ]
+    },
+    "Harp page turn": {
+      "program": 46,
+      "bank": 0,
+      "target_active_rms_dbfs": -42,
+      "pan": 29,
+      "mode": "detail",
+      "gain_points": [
+        [
+          0,
+          0.68
+        ],
+        [
+          16.0,
+          0.68
+        ],
+        [
+          32.0,
+          0.72
+        ],
+        [
+          64.0,
+          0.72
+        ],
+        [
+          80.0,
+          0.84
+        ],
+        [
+          96.0,
+          0.84
+        ],
+        [
+          112.0,
+          0.58
+        ],
+        [
+          120.0,
+          0.58
+        ],
+        [
+          128.0,
+          0.68
+        ]
+      ],
+      "notes": [
+        {
+          "beat": 1.84,
+          "midi": 60,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 5.52,
+          "midi": 64,
+          "length": 1.2,
+          "velocity": 30
+        },
+        {
+          "beat": 17.84,
+          "midi": 64,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 21.52,
+          "midi": 67,
+          "length": 1.2,
+          "velocity": 30
+        },
+        {
+          "beat": 33.84,
+          "midi": 60,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 37.52,
+          "midi": 64,
+          "length": 1.2,
+          "velocity": 30
+        },
+        {
+          "beat": 49.84,
+          "midi": 64,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 53.52,
+          "midi": 67,
+          "length": 1.2,
+          "velocity": 30
+        },
+        {
+          "beat": 65.84,
+          "midi": 60,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 69.52,
+          "midi": 64,
+          "length": 1.2,
+          "velocity": 30
+        },
+        {
+          "beat": 73.84,
+          "midi": 69,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 77.52,
+          "midi": 72,
+          "length": 1.2,
+          "velocity": 30
+        },
+        {
+          "beat": 81.84,
+          "midi": 64,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 85.52,
+          "midi": 67,
+          "length": 1.2,
+          "velocity": 30
+        },
+        {
+          "beat": 89.84,
+          "midi": 68,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 93.52,
+          "midi": 71,
+          "length": 1.2,
+          "velocity": 30
+        },
+        {
+          "beat": 97.84,
+          "midi": 60,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 101.52,
+          "midi": 64,
+          "length": 1.2,
+          "velocity": 30
+        },
+        {
+          "beat": 113.84,
+          "midi": 64,
+          "length": 1.1,
+          "velocity": 34
+        },
+        {
+          "beat": 117.52,
+          "midi": 67,
+          "length": 1.2,
+          "velocity": 30
+        }
+      ]
+    },
+    "Steady low foundation": {
+      "program": 43,
+      "bank": 0,
+      "target_active_rms_dbfs": -35,
+      "pan": 0,
+      "mode": "body",
+      "gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          16.0,
+          0.83
+        ],
+        [
+          32.0,
+          0.92
+        ],
+        [
+          64.0,
+          0.92
+        ],
+        [
+          80.0,
+          0.98
+        ],
+        [
+          96.0,
+          0.98
+        ],
+        [
+          112.0,
+          0.85
+        ],
+        [
+          120.0,
+          0.85
+        ],
+        [
+          128.0,
+          0.83
+        ]
+      ],
+      "notes": [
+        {
+          "beat": 0.0,
+          "midi": 33,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 8.0,
+          "midi": 29,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 16.0,
+          "midi": 36,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 24.0,
+          "midi": 28,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 32.0,
+          "midi": 33,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 40.0,
+          "midi": 29,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 48.0,
+          "midi": 36,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 56.0,
+          "midi": 28,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 64.0,
+          "midi": 33,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 72.0,
+          "midi": 29,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 80.0,
+          "midi": 36,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 88.0,
+          "midi": 28,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 96.0,
+          "midi": 33,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 104.0,
+          "midi": 29,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 112.0,
+          "midi": 36,
+          "length": 7.975,
+          "velocity": 44
+        },
+        {
+          "beat": 120.0,
+          "midi": 28,
+          "length": 7.975,
+          "velocity": 44
+        }
+      ]
+    }
+  }
+}

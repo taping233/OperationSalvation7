@@ -1,0 +1,13 @@
+{
+  "id": "19",
+  "slug": "left-thigh",
+  "version": 2,
+  "prompt": "ONE isolated Wu animation limb segment on genuine transparent PNG. Hand-painted anime matching the confirmed combat reference, simple broad opaque cream/peach skin planes with restrained warm-neutral shadow, LOW detail, economical hard-edge brush marks. Anatomically graceful feminine leg with smooth natural silhouette, not bony, muscular, knotty or faceted skin sculpture. No photorealism, no wounds or gore. Neutral VERTICAL segment for a bone rig: same camera-side anatomy as reference but limb centerline nearly straight, with NO baked knee bend or kink. Both joining ends fully painted with softly rounded overlap caps, no dark cut lines or visible cut surfaces. Keep first/last 10% of each joining region a consistent light-peach tone for seamless overlap. No clothing, footwear, other limbs, labels, grid, background, shadow or aura. Only the requested segment. Part 19: ONLY the character-LEFT THIGH, rear-side counterpart to neutral right thigh in image 3. Match image 3's exact light-peach joint-cap tone, smooth taper and quiet two/three painted skin planes. Neutral nearly VERTICAL hip-to-knee segment with a smooth rounded wider hip cap and modest narrow rounded knee cap; no calf, foot or any baked knee bend. Slightly slimmer rear-side projection, not an extreme twisted silhouette. Upper thigh width around one third of length, knee width around one fifth. No knotted bone, projecting knee wedge or scattered angular facets. No dark horizontal line across either cap. One graceful anatomical upper-leg component only.",
+  "refs": [
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\wu-battle-base-frame000.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\reference.png",
+    "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\characters\\wu-parts-v1\\part-16-right-thigh-v2.png"
+  ],
+  "tool": "built-in imagegen",
+  "stage": "candidate"
+}

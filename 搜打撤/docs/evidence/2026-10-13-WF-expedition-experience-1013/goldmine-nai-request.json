@@ -1,0 +1,20 @@
+{
+  "scene": "goldmine",
+  "model": "nai-diffusion-4-5-full",
+  "recipeVersion": "1.3",
+  "width": 1344,
+  "height": 768,
+  "seed": 10131532,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nwide anime game event background, collapsed winter mine below a ruined city, buckling timber supports, deep black shaft, exposed metal ore glinting in the rock, one original bundled-up scout examining the ore with a small lantern\n\nOriginal story event illustration, no UI.\n\nLandscape 1344x768 illustration. Mine opening, scout and ore occupy the left half in one strong silhouette. The lower left has dark quiet space for story text. The right 40 percent is an unoccupied dim rock wall reserved for interactive choices. Do not place the scout or bright ore beneath that right-side area.\n\nCold blue-gray and charcoal with restrained amber lantern and metallic glints, broad opaque shadow planes, matte hand-painted anime brush strokes. No photorealistic rock texture, fine line noise, or smooth airbrush.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, photorealistic, realistic 3d, finely textured rocks, bright sky, text, lettering, interface, buttons, panels, logos, watermark, multiple people, centered subject",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\WF-expedition-event-1013\\goldmine-nai.png",
+  "status": "NAI draft; internal redraw required before installation"
+}

@@ -1,0 +1,60 @@
+{
+  "tool": "built-in image_gen",
+  "items": [
+    {
+      "id": "wu",
+      "asset": "portraits/avatars/wu.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a125ae-679a-7681-8849-23d7c86b7ed6/exec-81ea954f-6be6-4764-951a-cce64ba4b094.png",
+      "prompt": "Use case: style-transfer. Create one newly redrawn square 1024x1024 Q-version chibi game avatar, a large expressive head with a small shoulder/chest bust, centered and occupying 85% of the canvas; entire hairstyle and key head accessories contained within a small margin. Image 1 is the old avatar edit target, image 2 is the current full portrait and controls character identity and clothing, image 3 is ONLY the brushwork/style reference, do not copy its identity onto other characters. Newly draw all shapes rather than rescaling the old artwork. Rough hand-painted anime color study, large connected opaque color masses, few wide directional brushstrokes, hard edged light/shadow, handmade contour edges, economical face marks with clear eyes. Hair grouped into 4-6 large locks, low detail, matte muted colors and concentrated identity accents. No fine strand rendering, dense wrinkles, glossy 3D, all-over texture filter. No text, border or UI. Transparent background, clean isolated character silhouette. Wu: silver white STRAIGHT long high ponytail, black round goggles on forehead exposing cyan-blue eyes; black rose and cobalt ribbon anchored at ponytail root, cheeky small fang smile. Black-gray off-shoulder ruffled outfit with black straps as current portrait. Chest has no blue stars. Show just head and bust, NOT full body.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/avatars/wu.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ]
+    },
+    {
+      "id": "changwuyu",
+      "asset": "portraits/avatars/changwuyu.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a125ae-679a-7681-8849-23d7c86b7ed6/exec-fadcd0d3-f3d8-470f-910e-bd93848f1cd7.png",
+      "prompt": "Use case: style-transfer. Create one newly redrawn square 1024x1024 Q-version chibi game avatar, a large expressive head with a small shoulder/chest bust, centered and occupying 85% of the canvas; entire hairstyle and key head accessories contained within a small margin. Image 1 is the old avatar edit target, image 2 is the current full portrait and controls character identity and clothing, image 3 is ONLY the brushwork/style reference, do not copy its identity onto other characters. Newly draw all shapes rather than rescaling the old artwork. Rough hand-painted anime color study, large connected opaque color masses, few wide directional brushstrokes, hard edged light/shadow, handmade contour edges, economical face marks with clear eyes. Hair grouped into 4-6 large locks, low detail, matte muted colors and concentrated identity accents. No fine strand rendering, dense wrinkles, glossy 3D, all-over texture filter. No text, border or UI. Transparent background, clean isolated character silhouette. Changwuyu: preserve silver-gray hair tied in low bun, two straight long front locks, pointed elf ears, golden eyes and thin round glasses, confident subtle smile. Large crooked charcoal wizard hat with purple underside, black high collar with restrained gold edging, white feather blue gem brooch. Scale hat to fit comfortably, face still prominent. Head and bust.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/avatars/changwuyu.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/changwuyu.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ]
+    },
+    {
+      "id": "baita",
+      "asset": "portraits/avatars/baita.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a125ae-679a-7681-8849-23d7c86b7ed6/exec-2a6d0772-571c-4738-ac6f-5a0b98118843.png",
+      "prompt": "Use case: style-transfer. Create one newly redrawn square 1024x1024 Q-version chibi game avatar, a large expressive head with a small shoulder/chest bust, centered and occupying 85% of the canvas; entire hairstyle and key head accessories contained within a small margin. Image 1 is the old avatar edit target, image 2 is the current full portrait and controls character identity and clothing, image 3 is ONLY the brushwork/style reference, do not copy its identity onto other characters. Newly draw all shapes rather than rescaling the old artwork. Rough hand-painted anime color study, large connected opaque color masses, few wide directional brushstrokes, hard edged light/shadow, handmade contour edges, economical face marks with clear eyes. Hair grouped into 4-6 large locks, low detail, matte muted colors and concentrated identity accents. No fine strand rendering, dense wrinkles, glossy 3D, all-over texture filter. No text, border or UI. Transparent background, clean isolated character silhouette. Baita: long wavy charcoal brown hair, bright green eyes, single simple golden bar hair clip, soft thoughtful small smile. White high collar blouse, muted forest-green suspender dress as current portrait. Head and bust, no chair, books or food.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/avatars/baita.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ]
+    },
+    {
+      "id": "heixiang",
+      "asset": "portraits/avatars/heixiang.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a125ae-679a-7681-8849-23d7c86b7ed6/exec-91bb83d8-3d73-4188-9100-6cd89a8727bc.png",
+      "prompt": "Use case: style-transfer. Create one newly redrawn square 1024x1024 Q-version chibi game avatar, a large expressive head with a small shoulder/chest bust, centered and occupying 85% of the canvas; entire hairstyle and key head accessories contained within a small margin. Image 1 is the old avatar edit target, image 2 is the current full portrait and controls character identity and clothing, image 3 is ONLY the brushwork/style reference, do not copy its identity onto other characters. Newly draw all shapes rather than rescaling the old artwork. Rough hand-painted anime color study, large connected opaque color masses, few wide directional brushstrokes, hard edged light/shadow, handmade contour edges, economical face marks with clear eyes. Hair grouped into 4-6 large locks, low detail, matte muted colors and concentrated identity accents. No fine strand rendering, dense wrinkles, glossy 3D, all-over texture filter. No text, border or UI. Transparent background, clean isolated character silhouette. Heixiang: masculine warm tan skin, short swept/spiky dark charcoal hair with silver forelock, amber eyes, eyebrow notch and stitched scar down cheek on image-right, sly confident grin. Ochre scarf and black gray armored shoulder as current portrait. Head and bust, no weapons or tea.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/avatars/heixiang.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/heixiang.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ]
+    },
+    {
+      "id": "xingyue",
+      "asset": "portraits/avatars/xingyue.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a125ae-679a-7681-8849-23d7c86b7ed6/exec-d6c62c52-6555-46eb-89ee-30d7c48ce532.png",
+      "prompt": "Use case: style-transfer. Create one newly redrawn square 1024x1024 Q-version chibi game avatar, a large expressive head with a small shoulder/chest bust, centered and occupying 85% of the canvas; entire hairstyle and key head accessories contained within a small margin. Image 1 is the old avatar edit target, image 2 is the current full portrait and controls character identity and clothing, image 3 is ONLY the brushwork/style reference, do not copy its identity onto other characters. Newly draw all shapes rather than rescaling the old artwork. Rough hand-painted anime color study, large connected opaque color masses, few wide directional brushstrokes, hard edged light/shadow, handmade contour edges, economical face marks with clear eyes. Hair grouped into 4-6 large locks, low detail, matte muted colors and concentrated identity accents. No fine strand rendering, dense wrinkles, glossy 3D, all-over texture filter. No text, border or UI. Transparent background, clean isolated character silhouette. Xingyue: cream-blonde hair, blunt fringe, visible long side braid, silver crescent ornament on image-right, golden eyes, calm gentle expression. Dark teal cape with gold edging over white high-neck robe. Head and bust; do not include lantern or staff.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/avatars/xingyue.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/xingyue.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ]
+    }
+  ]
+}

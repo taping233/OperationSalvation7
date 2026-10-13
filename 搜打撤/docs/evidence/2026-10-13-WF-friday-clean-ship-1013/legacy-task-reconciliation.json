@@ -1,0 +1,26 @@
+[
+  {
+    "file": "docs/evidence/2026-10-02-DEBT-3/task.json",
+    "oldStage": "planned",
+    "stage": "partial",
+    "originalSha256": "852FCD7F7A2DA7E7AE70951EEB352D3E4C882112F900C9D052FD15D24C314DDC"
+  },
+  {
+    "file": "docs/evidence/2026-10-09-base-camp-redo/task.json",
+    "oldStage": "doing",
+    "stage": "partial",
+    "originalSha256": "874C5E517321A8FBC92FD16D59F0BADA5F7774D669982C1D4B2DA138E08CF283"
+  },
+  {
+    "file": "docs/evidence/2026-10-10-WF-base-ui-review-1010/task.json",
+    "oldStage": "planned",
+    "stage": "partial",
+    "originalSha256": "AEA1260FEA41C15A61C558896A31D790A8988D76B7A49D0130722728DD376CD3"
+  },
+  {
+    "file": "docs/evidence/2026-10-12-WF-selfplay-fixes/task.json",
+    "oldStage": "doing",
+    "stage": "partial",
+    "originalSha256": "05484C8CE24955C249B488C842874CE0A9BB9AA7383F957BAE5C8BE8CBD50A71"
+  }
+]

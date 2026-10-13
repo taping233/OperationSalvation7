@@ -1,0 +1,45 @@
+{
+  "source": "Codex IAB current window",
+  "input": "real preview buttons, title achievements button, return button and Escape",
+  "images": [
+    {
+      "scene": "camp",
+      "loaded": true,
+      "src": "http://localhost:5200/assets/scenes/transition-camp-v2.webp"
+    },
+    {
+      "scene": "photo",
+      "loaded": true,
+      "src": "http://localhost:5200/assets/scenes/transition-photo-v2.webp"
+    },
+    {
+      "scene": "field",
+      "loaded": true,
+      "src": "http://localhost:5200/assets/scenes/transition-field-v2.webp"
+    },
+    {
+      "scene": "battle",
+      "loaded": true,
+      "src": "http://localhost:5200/assets/scenes/transition-battle-v2.webp"
+    },
+    {
+      "scene": "boss",
+      "loaded": true,
+      "src": "http://localhost:5200/assets/scenes/transition-boss-v2.webp"
+    },
+    {
+      "scene": "achievement",
+      "loaded": true,
+      "src": "http://localhost:5200/assets/scenes/transition-achievement-v2.webp"
+    }
+  ],
+  "achievementEntry": {
+    "src": "transition-achievement-v2.webp",
+    "loaded": true,
+    "decorative": true
+  },
+  "cutAfterEntry": 0,
+  "cutAfterEscape": 0,
+  "overlayHidden": true,
+  "fullRunFlows": "not exercised"
+}

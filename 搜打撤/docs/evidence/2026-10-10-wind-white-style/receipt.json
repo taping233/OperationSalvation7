@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt8-hero-priest",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-aeae1cc3-b548-415f-ac92-4d81579c7157.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-wind-white-style/cards-hero-sacredrain-source.png",
+        "bytes": 1890399,
+        "sha256": "827d083ebc04a5a9af3d3f011b48545e44c63c3a5cf8c412151983baeab7adf7"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-wind-white-style/cards-hero-sacredrain-full-before.webp",
+          "bytes": 107732,
+          "sha256": "8615d30113830185129a928987f2f0324856d6765751840043a51483e439cd97"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-wind-white-style/cards-hero-sacredrain-thumb-before.webp",
+          "bytes": 19264,
+          "sha256": "1d720592a8624247ecf2fa34f37a81b4779daa2fb0386bc8a2e3d154c4c6995f"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/hero-sacredrain.webp",
+          "bytes": 156182,
+          "sha256": "a124bed03796a7297323138939b3a8cdabdc0a6b59b09d7ed14ffe7e67e0c4ab",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/hero-sacredrain.webp",
+          "bytes": 22246,
+          "sha256": "f4e8b348bf3421c7bd9153edd47b32f5840d5a4e109957afa1bae9e625d4d0ef",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "xingyue-wind-song-s-gesture-builtin-20261010",
+      "revision_after": "xingyue-wind-song-white-painted-refine-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/hero-sacredrain.webp",
+            "ext": "webp",
+            "bytes": 107732,
+            "sha256": "8615d30113830185129a928987f2f0324856d6765751840043a51483e439cd97",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-bound-wind-redesign/wind-final/receipt.json"
+          },
+          "after": {
+            "path": "cards/hero-sacredrain.webp",
+            "ext": "webp",
+            "bytes": 156182,
+            "sha256": "a124bed03796a7297323138939b3a8cdabdc0a6b59b09d7ed14ffe7e67e0c4ab",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-wind-white-style/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/hero-sacredrain.webp",
+            "ext": "webp",
+            "bytes": 19264,
+            "sha256": "1d720592a8624247ecf2fa34f37a81b4779daa2fb0386bc8a2e3d154c4c6995f",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-bound-wind-redesign/wind-final/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/hero-sacredrain.webp",
+            "ext": "webp",
+            "bytes": 22246,
+            "sha256": "f4e8b348bf3421c7bd9153edd47b32f5840d5a4e109957afa1bae9e625d4d0ef",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-wind-white-style/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 831,
+  "manifest_count_after": 831
+}

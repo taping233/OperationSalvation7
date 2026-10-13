@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>代号柒 · 全幅卡面轻装饰提案</title><link rel="stylesheet" href="./css/card-rarity-preview.css"><link rel="stylesheet" href="./css/rarity-design-lab.css"></head>
+<body>
+<header class="masthead"><a href="#"><span class="brand">柒</span> 代号柒 <span>/</span> CARD STUDY</a><span>轻装饰选稿 · 03</span></header>
+<main>
+<section class="intro"><div><p class="eyebrow">FULL ART / 保留现行卡面</p><h1>全幅不动，装饰随稀有度递进。</h1><p>五套候选，每套都有五档不同形态；原画、裁切和信息布局共用现行版式。</p></div><div class="scope-note">费用 · 宝石标签 · 卡名 · 效果<br><strong>沿用现行位置</strong></div></section>
+<section class="workspace" aria-label="轻装饰设计样本">
+<div class="toolbar"><div class="design-tabs" role="group" aria-label="装饰风格"><button data-design="orbit" aria-pressed="false">A 星轨</button><button data-design="ink" aria-pressed="false">B 银墨</button><button data-design="frost" aria-pressed="false">C 霜枝</button><button data-design="blade" aria-pressed="false">D 刀铭</button><button data-design="rose" aria-pressed="false">E 蔷薇</button></div><div class="view-controls"><button id="compare" aria-pressed="true">五版并排</button><button id="decoration" aria-pressed="true">装饰：开</button><button id="gray" aria-pressed="false">灰度</button><button id="compact" aria-pressed="false">手牌尺寸</button></div></div>
+<div class="exhibit-caption"><div><h2 id="scheme-title">同图同档 · 五种装饰</h2><p id="scheme-description">新增装饰集中在角部和边沿，原画仍占据完整卡面。</p></div><div class="selects"><label>原画 <select id="art"><option value="0">青龙化身</option><option value="1">恶魔之力</option><option value="2">霜月斩</option></select></label><label id="compare-label">档位 <select id="compare-tier"><option value="0">古朴</option><option value="1">稀有</option><option value="2">史诗</option><option value="3" selected>传说</option><option value="4">棱彩</option></select></label></div></div>
+<div id="cards" class="card-grid"></div><div class="exhibit-foot"><p id="sample-note" aria-live="polite"></p><span>关闭装饰，查看原版</span></div>
+</section>
+<section class="notes"><p><strong>怎么比较</strong> 默认查看一套方案的五档递进；切换标签可看其他候选，或用“五版并排”比较同一档位。点击卡面放大。</p><p>装饰采用窄幅笔痕、角部线纹和小型镶件；全幅画窗、费用与效果文案不随风格变化。</p></section>
+<details class="references"><summary>查看版式基准与参考</summary><div><a href="./card-design-options-v2.html">项目现行全幅卡面基准 ↗</a><a href="./card-design-references/">游戏原图参考板 ↗</a><p>沿用现行全幅布局；这轮只探索装饰，不采用此前的厚框、标题牌或分区版式。</p></div></details>
+<footer>独立设计提案 · 原画来自项目现有资产 · 同图多档仅作外观对照 · 尚未接入正式游戏</footer>
+</main>
+<dialog id="detail" aria-labelledby="detail-title"><div class="dialog-head"><h2 id="detail-title"></h2><button id="close" aria-label="关闭放大">关闭 ×</button></div><div id="detail-card"></div><p id="detail-note"></p></dialog>
+<script type="module" src="./src/rarity-design-lab.js"></script>
+</body></html>

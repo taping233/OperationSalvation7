@@ -1,0 +1,1071 @@
+{
+  "operation": "deterministic panel extraction and WebP encoding; no regeneration",
+  "columns": 6,
+  "rows": 5,
+  "cell_size": [
+    256,
+    368
+  ],
+  "sources": [
+    {
+      "id": "firstExtract",
+      "source": ".tmp/imagegen/achievement-five-styles/firstExtract.png",
+      "sha256": "0022ea668787d1d48eaa17c6f9af6ee165820bac66f570ae33487804d5660c77",
+      "cell": 0,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "extract3",
+      "source": ".tmp/imagegen/achievement-five-styles/extract3.png",
+      "sha256": "70d449c156cc82fb198bc388848f2f31ce714cda0408590077d5bd5f40a187b5",
+      "cell": 1,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "kill10",
+      "source": ".tmp/imagegen/achievement-five-styles/kill10.png",
+      "sha256": "dcef342f9bfd5854150f021afbee5c2b012120dfadcc15399ab5543b62d521aa",
+      "cell": 2,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "firstBoss",
+      "source": ".tmp/imagegen/achievement-five-styles/firstBoss.png",
+      "sha256": "2083cc26248205f8fcff5e361f410caa70940fc2f888fabb5bf7485c2453fb5e",
+      "cell": 3,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "allBoss",
+      "source": ".tmp/imagegen/achievement-five-styles/allBoss.png",
+      "sha256": "1197fb1c9ced205035091bd5052ec5e8db1da9ad1ff78f976203e435b540538e",
+      "cell": 4,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "rich30",
+      "source": ".tmp/imagegen/achievement-five-styles/rich30.png",
+      "sha256": "e988790058cb95484adb9f601146f96c4fc8874ffd487a594ddcf17e527a79be",
+      "cell": 5,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "stash20",
+      "source": ".tmp/imagegen/achievement-five-styles/stash20.png",
+      "sha256": "3224e54209ff3a9ed068de7f9b27798904ae6a6b07e9e83e49869336dfa1c3a8",
+      "cell": 6,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "bagMax",
+      "source": ".tmp/imagegen/achievement-five-styles/bagMax.png",
+      "sha256": "488e4b4f8038c8f5beb4b92c499bf70d1e095156ab52242b4a952e17347cf2d1",
+      "cell": 7,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "safeMax",
+      "source": ".tmp/imagegen/achievement-five-styles/safeMax.png",
+      "sha256": "a1d0da875beb9fa11d6dbbe9714f36e6f0eb5156d2d0bdcb708c8222303ea9ce",
+      "cell": 8,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "class3",
+      "source": ".tmp/imagegen/achievement-five-styles/class3.png",
+      "sha256": "622bbbee7c2eac30170eaaee6f059779dd8977a8a6684ff48443af6026384fd8",
+      "cell": 9,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "collectGold",
+      "source": ".tmp/imagegen/achievement-five-styles/collectGold.png",
+      "sha256": "ae9597f2cdfcdf9ac3c3dd162bea636ac19be4e2b07970e813e14c3f86932564",
+      "cell": 10,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "collectLegend",
+      "source": ".tmp/imagegen/achievement-five-styles/collectLegend.png",
+      "sha256": "446916ef8762dce094c88c0732954e04cadcb6536f067a7d005f3a5e361788d9",
+      "cell": 11,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "collect5",
+      "source": ".tmp/imagegen/achievement-five-styles/collect5.png",
+      "sha256": "95a23fd34faf35d291be15f02ce90bf12c615e6c35c3f12031325d8d4a22618e",
+      "cell": 12,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "petHatch1",
+      "source": ".tmp/imagegen/achievement-five-styles/petHatch1.png",
+      "sha256": "4e5ad5376cad15a5cbafb7cffb4839a0bc7e5c70cb0f59e73fb3a4b768f68f0e",
+      "cell": 13,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "petHatch3",
+      "source": ".tmp/imagegen/achievement-five-styles/petHatch3.png",
+      "sha256": "fc4dfd36ad134b3cc62d97e99017b75f4f8a81c2286f3afa055578484e07465e",
+      "cell": 14,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "petMax",
+      "source": ".tmp/imagegen/achievement-five-styles/petMax.png",
+      "sha256": "8a3977e9f0e4a87c7dcc08692956276bb9a53e2a0f87b5619ac2f9536d5b4dc1",
+      "cell": 15,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "petAll",
+      "source": ".tmp/imagegen/achievement-five-styles/petAll.png",
+      "sha256": "6e2b8b46948888d6ff7f3bb9d7423445a688e237e61c94ba7d8fcb40a66814c5",
+      "cell": 16,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "unlimitedEnergy",
+      "source": ".tmp/imagegen/achievement-five-styles/unlimitedEnergy.png",
+      "sha256": "3bb38b4a161e7bea1be8c4ff554f3439666c6a1eb258e418788d8a02cac3e40d",
+      "cell": 17,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "weaponMaster",
+      "source": ".tmp/imagegen/achievement-five-styles/weaponMaster.png",
+      "sha256": "5b303349054db513f11d5f0dee697185685f1d9ce6a8d42f9a13c2655c374b69",
+      "cell": 18,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "runeFan",
+      "source": ".tmp/imagegen/achievement-five-styles/runeFan.png",
+      "sha256": "a061d029aa0919911118e272536ec3ccb06e2143649374cec256bc7c75a67da2",
+      "cell": 19,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "savior",
+      "source": ".tmp/imagegen/achievement-five-styles/savior.png",
+      "sha256": "a5420f8b5cc07b7939e2994f9ecd76ad031cf7ff91cca1e31c59b2ad20177730",
+      "cell": 20,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "beautifulVase",
+      "source": ".tmp/imagegen/achievement-five-styles/beautifulVase.png",
+      "sha256": "6035ebda19464c4a11641b9589dfbe3f512d98784c7229177393ca4303bb0125",
+      "cell": 21,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "excuseMe",
+      "source": ".tmp/imagegen/achievement-five-styles/excuseMe.png",
+      "sha256": "87c611b85285c38c349e1f7eb74db663dcf4cc143720891960442e6a1f454814",
+      "cell": 22,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "labScore1",
+      "source": ".tmp/imagegen/achievement-five-styles/labScore1.png",
+      "sha256": "b8b2073b34a5ff427a93324c9e8554c99baca84e4b97f24d182ed90d240c36b6",
+      "cell": 23,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "labScore2",
+      "source": ".tmp/imagegen/achievement-five-styles/labScore2.png",
+      "sha256": "ffeaf80083e4e914725d2470f8def7d29a8fc5b615ec5f3afe711c144f961e3d",
+      "cell": 24,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    },
+    {
+      "id": "labScore3",
+      "source": ".tmp/imagegen/achievement-five-styles/labScore3.png",
+      "sha256": "117e14049be8be158948eb8fcc69634582987eb67467b3dec749ca53f859999c",
+      "cell": 25,
+      "crop_boxes": [
+        [
+          0,
+          0,
+          434,
+          620
+        ],
+        [
+          434,
+          0,
+          869,
+          620
+        ],
+        [
+          869,
+          0,
+          1303,
+          620
+        ],
+        [
+          1303,
+          0,
+          1738,
+          620
+        ],
+        [
+          1738,
+          0,
+          2172,
+          620
+        ]
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "path": "ui/achievement-styles/painted.webp",
+      "ext": "webp",
+      "bytes": 283822,
+      "sha256": "e221a064bf62bbc633e0d3dfaa621a89d92a9d3ad4316e9f51c70248cd337342",
+      "license": "项目自有（AI生成，使用老板确认的五风格样板）",
+      "source": "docs/evidence/2026-10-09-WF-ach-five-styles/integration-receipt.json",
+      "style": "painted",
+      "quality": 88,
+      "dimensions": [
+        1536,
+        1840
+      ]
+    },
+    {
+      "path": "ui/achievement-styles/gesture.webp",
+      "ext": "webp",
+      "bytes": 324690,
+      "sha256": "15df7c8274e3fcc921d8d4b47a3ab223cadf2923988baa0ebbe55b2f86b2121b",
+      "license": "项目自有（AI生成，使用老板确认的五风格样板）",
+      "source": "docs/evidence/2026-10-09-WF-ach-five-styles/integration-receipt.json",
+      "style": "gesture",
+      "quality": 88,
+      "dimensions": [
+        1536,
+        1840
+      ]
+    },
+    {
+      "path": "ui/achievement-styles/ink.webp",
+      "ext": "webp",
+      "bytes": 320886,
+      "sha256": "f0034e153a187e2097caecdfaee17728eea7b1a6c87a6c52cacd965d36c80d6e",
+      "license": "项目自有（AI生成，使用老板确认的五风格样板）",
+      "source": "docs/evidence/2026-10-09-WF-ach-five-styles/integration-receipt.json",
+      "style": "ink",
+      "quality": 88,
+      "dimensions": [
+        1536,
+        1840
+      ]
+    },
+    {
+      "path": "ui/achievement-styles/collage.webp",
+      "ext": "webp",
+      "bytes": 292976,
+      "sha256": "93ebea5371207eaf4cf31324e72c2de560be824335925df6a73ff8c7480206e1",
+      "license": "项目自有（AI生成，使用老板确认的五风格样板）",
+      "source": "docs/evidence/2026-10-09-WF-ach-five-styles/integration-receipt.json",
+      "style": "collage",
+      "quality": 88,
+      "dimensions": [
+        1536,
+        1840
+      ]
+    },
+    {
+      "path": "ui/achievement-styles/symbol.webp",
+      "ext": "webp",
+      "bytes": 180498,
+      "sha256": "decf51817df219f84f535a49c0e8e5be22c064c766d4a2dbe96109583dfc4936",
+      "license": "项目自有（AI生成，使用老板确认的五风格样板）",
+      "source": "docs/evidence/2026-10-09-WF-ach-five-styles/integration-receipt.json",
+      "style": "symbol",
+      "quality": 88,
+      "dimensions": [
+        1536,
+        1840
+      ]
+    }
+  ]
+}

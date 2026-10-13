@@ -1,0 +1,95 @@
+[
+  {
+    "key": "future-stage-composite",
+    "file": "handoff-art/source/future-stage-composite.png",
+    "original": "C:\\Users\\太平\\.codex\\generated_images\\01a12a56-fff8-7393-a312-6f8f01036d55\\exec-51ae9450-2494-4f39-a41c-826d285ef4e5.png",
+    "sha256": "f29d278fd3c117815a465b3ba8dd0c2725da93baa987626ddd54ac5a91cfbb0d",
+    "bytes": 1785056,
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGB",
+    "alpha": null,
+    "status": "summer-like future-city composition study; winter weather still required; not adopted"
+  },
+  {
+    "key": "future-far",
+    "file": "handoff-art/source/future-far.png",
+    "original": "C:\\Users\\太平\\.codex\\generated_images\\01a12a56-fff8-7393-a312-6f8f01036d55\\exec-9b5db149-51ce-421c-b9ed-bb052eeefc46.png",
+    "sha256": "6bc53c4327e2cdaed5cf3b8f7307b5279d4f07d7b880f230d72293802f0d51d9",
+    "bytes": 1718824,
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGB",
+    "alpha": null,
+    "status": "opaque far skyline; summer-like sky, needs winter correction; not adopted"
+  },
+  {
+    "key": "future-mid",
+    "file": "handoff-art/source/future-mid.png",
+    "original": "C:\\Users\\太平\\.codex\\generated_images\\01a12a56-fff8-7393-a312-6f8f01036d55\\exec-3dee411c-b3b8-4f56-a332-18eb4b1fa974.png",
+    "sha256": "f19dc30782973816103e552cd1f4a30acb29af1beab5f11ef500608a1a85aef1",
+    "bytes": 518505,
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      255
+    ],
+    "status": "transparent mid structures; greenery needs winter correction; not adopted"
+  },
+  {
+    "key": "future-ground",
+    "file": "handoff-art/source/future-ground.png",
+    "original": "C:\\Users\\太平\\.codex\\generated_images\\01a12a56-fff8-7393-a312-6f8f01036d55\\exec-b04b759f-ab07-4678-a18d-2b0ec5abcc5a.png",
+    "sha256": "d81fd3746a31937f8f606cfc0a70dff2ca547dd2b5128f09025efb8bf1790e70",
+    "bytes": 972465,
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      254
+    ],
+    "status": "transparent horizontal standing platform; same canvas; not adopted"
+  },
+  {
+    "key": "future-foreground",
+    "file": "handoff-art/source/future-foreground.png",
+    "original": "C:\\Users\\太平\\.codex\\generated_images\\01a12a56-fff8-7393-a312-6f8f01036d55\\exec-c746ae85-ff92-406a-885a-c987b7fcc164.png",
+    "sha256": "f996372fdf9e624318b24e7ba21fdc81c9ac2e1872c27d5b58c9b4fda01823ff",
+    "bytes": 177720,
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      255
+    ],
+    "status": "transparent corner covers; winter edge treatment pending; not adopted"
+  },
+  {
+    "key": "rejected-ancient-stage",
+    "file": "handoff-art/source/rejected-ancient-stage.png",
+    "original": "C:\\Users\\太平\\.codex\\generated_images\\01a12a56-fff8-7393-a312-6f8f01036d55\\exec-d4082972-5d8f-4cb7-ab97-b6bc3c8d22a8.png",
+    "sha256": "7e4b9b2ff2f34d8bbd9ba5d9259e008fc749f4fbdb34cb0f35bf83c8a38244fd",
+    "bytes": 1950798,
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGB",
+    "alpha": null,
+    "status": "rejected ancient stone/flags/dome direction; never integrate"
+  }
+]

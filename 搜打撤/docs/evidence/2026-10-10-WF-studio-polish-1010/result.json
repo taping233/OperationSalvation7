@@ -1,0 +1,87 @@
+{
+  "task": "WF-studio-polish-1010",
+  "status": "complete-uncommitted",
+  "round": "first-polish",
+  "files": [
+    {
+      "file": "game/css/photo-studio-unified.css",
+      "bytes": 31314,
+      "sha256": "a519af5ff4ce990861b0f0eb86b1898f1d5a29502c46b75c3e8298d8fa0678ad"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.page.js",
+      "bytes": 50202,
+      "sha256": "4e939594c999d1d5bfa6e81b586824e10f6daccf5e9e79b09ce3c8f65704db43"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.photo-props.js",
+      "bytes": 2430,
+      "sha256": "d7a4868cdbf5c0a38f948e33939bf9b0db5c01e39d7e23cf1d00d6df43686e78"
+    },
+    {
+      "file": "docs/evidence/2026-10-10-WF-studio-polish-1010/07-final-gallery.png",
+      "bytes": 107373,
+      "sha256": "e6a9b083c74601191c823fde7b196348e9194c9e1fe2fd6a9a0281ad7f1de74d"
+    },
+    {
+      "file": "docs/evidence/2026-10-10-WF-studio-polish-1010/04-photo-detail.png",
+      "bytes": 54388,
+      "sha256": "5b822145baa5101d903b92b67fe2057976aca3df7e9a8e58feb7ee8460d5c0f3"
+    },
+    {
+      "file": "docs/evidence/2026-10-10-WF-studio-polish-1010/05-long-copy.png",
+      "bytes": 63029,
+      "sha256": "2ec4886accea00f2b579ce4e223c8500265b8e0944235d8c6719e98d33176ba6"
+    },
+    {
+      "file": "docs/evidence/2026-10-10-WF-studio-polish-1010/06-proof-mount.png",
+      "bytes": 44990,
+      "sha256": "39ec3317001e455501c8941928bae55dc4d1d130785ed2242b6434b22ec797f1"
+    }
+  ],
+  "checks": {
+    "targeted": {
+      "files": 6,
+      "passed": 74
+    },
+    "finalBoot": {
+      "passed": 17
+    },
+    "cssParse": "passed",
+    "syntax": "passed",
+    "eslint": "passed",
+    "docs": "passed",
+    "diffWhitespace": "passed",
+    "browser": {
+      "origin": "http://127.0.0.1:5331",
+      "pathname": "/",
+      "viewport": {
+        "devicePixelRatio": 1.25,
+        "height": 720,
+        "width": 1280
+      }
+    },
+    "consoleErrors": 0
+  },
+  "service": {
+    "port": 5331,
+    "pid": 9708,
+    "stopped": true,
+    "main5200": "preserved"
+  },
+  "coverage": {
+    "focalPhotos": 9,
+    "remainingFocalPhotos": "沿用原居中，未逐张复核",
+    "multiSize": false,
+    "realHover": false,
+    "performanceBenchmark": false
+  },
+  "intermediateExcluded": [
+    "00-before.png",
+    "01-tones.png",
+    "02-title-selection.png",
+    "03-current.png",
+    "long-copy-export.json",
+    ".tmp/studio-polish-1010/"
+  ]
+}

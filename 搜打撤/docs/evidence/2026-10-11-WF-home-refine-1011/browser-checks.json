@@ -1,0 +1,76 @@
+{
+  "platform": "Codex",
+  "browser": "iab",
+  "surface": "current-window",
+  "viewport": {
+    "devicePixelRatio": 1.25,
+    "height": 720,
+    "width": 1280
+  },
+  "snowReady": {
+    "duration": "900ms",
+    "phase": "rest",
+    "wallpaper": "snow"
+  },
+  "ensembleReady": {
+    "opacity": "1",
+    "phase": "rest",
+    "wallpaper": "ensemble"
+  },
+  "material": [
+    {
+      "entryDelay": "90ms",
+      "glass": "blur(10px) saturate(0.8)",
+      "id": "mStart",
+      "shadow": "rgba(3, 8, 14, 0.7) 0px 10px 12px -7px, rgba(3, 8, 14, 0.55) 0px 4px 5px -3px"
+    },
+    {
+      "entryDelay": "180ms",
+      "glass": "blur(10px) saturate(0.8)",
+      "id": "mGuide",
+      "shadow": "rgba(3, 8, 14, 0.7) 0px 10px 12px -7px, rgba(3, 8, 14, 0.55) 0px 4px 5px -3px"
+    },
+    {
+      "entryDelay": "270ms",
+      "glass": "blur(10px) saturate(0.8)",
+      "id": "mAch",
+      "shadow": "rgba(3, 8, 14, 0.65) 0px 8px 12px -8px, rgba(3, 8, 14, 0.4) 0px 3px 5px -3px"
+    },
+    {
+      "entryDelay": "360ms",
+      "glass": "blur(10px) saturate(0.8)",
+      "id": "btnCardLib",
+      "shadow": "rgba(3, 8, 14, 0.65) 0px 8px 12px -8px, rgba(3, 8, 14, 0.4) 0px 3px 5px -3px"
+    },
+    {
+      "entryDelay": "450ms",
+      "glass": "blur(10px) saturate(0.8)",
+      "id": "mSettings",
+      "shadow": "rgba(3, 8, 14, 0.65) 0px 8px 12px -8px, rgba(3, 8, 14, 0.4) 0px 3px 5px -3px"
+    },
+    {
+      "entryDelay": "540ms",
+      "glass": "blur(10px) saturate(0.8)",
+      "id": "mCredits",
+      "shadow": "rgba(3, 8, 14, 0.65) 0px 8px 12px -8px, rgba(3, 8, 14, 0.4) 0px 3px 5px -3px"
+    },
+    {
+      "entryDelay": "630ms",
+      "glass": "blur(10px) saturate(0.8)",
+      "id": "btnTitleExit",
+      "shadow": "rgba(3, 8, 14, 0.65) 0px 8px 12px -8px, rgba(3, 8, 14, 0.4) 0px 3px 5px -3px"
+    }
+  ],
+  "realInputs": [
+    "设置点击与返回",
+    "Tab焦点移动",
+    "制作名单Enter进入与Escape退出",
+    "壁纸1→2→1"
+  ],
+  "consoleErrors": [],
+  "notMeasured": [
+    "FPS",
+    "真实鼠标悬停",
+    "系统减少动态偏好切换"
+  ]
+}

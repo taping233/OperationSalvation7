@@ -1,0 +1,276 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt8-curseimmune",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-f3b55190-75db-471a-869c-905dbd85acc0.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-eldritch-hands/cards-creature-tt8-curseimmune-source.png",
+        "bytes": 1164680,
+        "sha256": "5b78a494ced8638e860500bff343bcd9bde7c777abea852427c16cb2d364bb7e"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-eldritch-hands/cards-creature-tt8-curseimmune-full-before.webp",
+          "bytes": 136338,
+          "sha256": "24494c64f808940a980aea8decf87689c8db00fafd8c2e639fc08d3880096146"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-eldritch-hands/cards-creature-tt8-curseimmune-thumb-before.webp",
+          "bytes": 25728,
+          "sha256": "fb3b7df8998593fd95bea1ce544eddbc1ea37b57112de04d2d6a4f51a31fff8a"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/creature-tt8-curseimmune.webp",
+          "bytes": 169804,
+          "sha256": "f37143a6571f762a724893a101ecfd8d7773202d8246efca74c569a549f355c9",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_range": [
+            0,
+            255
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/creature-tt8-curseimmune.webp",
+          "bytes": 30496,
+          "sha256": "e5a35c1f756b62eb22c69d3f5c720efc7aba0598d0b0df2d6350f72de5a94ee3",
+          "size": [
+            448,
+            448
+          ],
+          "alpha_range": [
+            0,
+            255
+          ]
+        }
+      ],
+      "revision_before": "sealed-limb-1-transparent-20261004",
+      "revision_after": "eldritch-hand-1-transparent-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/creature-tt8-curseimmune.webp",
+            "ext": "webp",
+            "bytes": 136338,
+            "sha256": "24494c64f808940a980aea8decf87689c8db00fafd8c2e639fc08d3880096146",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/images.json"
+          },
+          "after": {
+            "path": "cards/creature-tt8-curseimmune.webp",
+            "ext": "webp",
+            "bytes": 169804,
+            "sha256": "f37143a6571f762a724893a101ecfd8d7773202d8246efca74c569a549f355c9",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-eldritch-hands/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/creature-tt8-curseimmune.webp",
+            "ext": "webp",
+            "bytes": 25728,
+            "sha256": "fb3b7df8998593fd95bea1ce544eddbc1ea37b57112de04d2d6a4f51a31fff8a",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/creature-tt8-curseimmune.webp",
+            "ext": "webp",
+            "bytes": 30496,
+            "sha256": "e5a35c1f756b62eb22c69d3f5c720efc7aba0598d0b0df2d6350f72de5a94ee3",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-eldritch-hands/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt8-energycap",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-008f9463-773f-4aca-87e8-79acc9caa049.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-eldritch-hands/cards-creature-tt8-energycap-source.png",
+        "bytes": 763318,
+        "sha256": "58931171d2d8c883fc03a6eb8a82b65e13c7430e762fbbc646e25ce5930d3032"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-eldritch-hands/cards-creature-tt8-energycap-full-before.webp",
+          "bytes": 150212,
+          "sha256": "bdd1f5d1f47605a05c961553c77aed1338336318902d8cddc235f084e4d6bf23"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-eldritch-hands/cards-creature-tt8-energycap-thumb-before.webp",
+          "bytes": 26990,
+          "sha256": "b1dc926d5fe84a83c252eb408ffe634d3551c96043fd4149d6295a7ab5b52a3f"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/creature-tt8-energycap.webp",
+          "bytes": 135398,
+          "sha256": "51e98be158308973d69876de2a18b1a2924af5d40414e0073aee593535ad9265",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_range": [
+            0,
+            255
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/creature-tt8-energycap.webp",
+          "bytes": 25100,
+          "sha256": "1881aec2fe8d727ab98259fd6f66187ee64122227a4084b43e30af5f2de925a2",
+          "size": [
+            448,
+            448
+          ],
+          "alpha_range": [
+            0,
+            255
+          ]
+        }
+      ],
+      "revision_before": "sealed-limb-2-transparent-20261004",
+      "revision_after": "eldritch-hand-2-transparent-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/creature-tt8-energycap.webp",
+            "ext": "webp",
+            "bytes": 150212,
+            "sha256": "bdd1f5d1f47605a05c961553c77aed1338336318902d8cddc235f084e4d6bf23",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/images.json"
+          },
+          "after": {
+            "path": "cards/creature-tt8-energycap.webp",
+            "ext": "webp",
+            "bytes": 135398,
+            "sha256": "51e98be158308973d69876de2a18b1a2924af5d40414e0073aee593535ad9265",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-eldritch-hands/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/creature-tt8-energycap.webp",
+            "ext": "webp",
+            "bytes": 26990,
+            "sha256": "b1dc926d5fe84a83c252eb408ffe634d3551c96043fd4149d6295a7ab5b52a3f",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-sealed-limbs-transparent/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/creature-tt8-energycap.webp",
+            "ext": "webp",
+            "bytes": 25100,
+            "sha256": "1881aec2fe8d727ab98259fd6f66187ee64122227a4084b43e30af5f2de925a2",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-eldritch-hands/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt8-healplus",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-f4942183-7d6b-42b7-bf88-9dfcbe682ab2.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-eldritch-hands/cards-creature-tt8-healplus-source.png",
+        "bytes": 1079588,
+        "sha256": "8f119f6d60046c12b964b520715fae0ae859e3ca72693f6ee6bc20eede85d856"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-eldritch-hands/cards-creature-tt8-healplus-full-before.webp",
+          "bytes": 70582,
+          "sha256": "a4ea003c2b20367d478fc6bb13dde4f73716e818900a8aa5bb595b396594abf5"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-eldritch-hands/cards-creature-tt8-healplus-thumb-before.webp",
+          "bytes": 10044,
+          "sha256": "51569b7851073c415b8a1bf68866fb2f09c19b69dc6cd10953fe530e35302035"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/creature-tt8-healplus.webp",
+          "bytes": 141088,
+          "sha256": "daac04c1f1c373f5b93ad339c5042032949168c6f93a43b9c7eeb290fd698266",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_range": [
+            0,
+            255
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/creature-tt8-healplus.webp",
+          "bytes": 22132,
+          "sha256": "1c5242be3e547dd3cd05a354c5dfdebc8fe1af26422c6064a461260afe99ab5b",
+          "size": [
+            448,
+            448
+          ],
+          "alpha_range": [
+            0,
+            255
+          ]
+        }
+      ],
+      "revision_before": "sealed-limb-4-hand-reuse-20261010",
+      "revision_after": "eldritch-hand-4-transparent-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/creature-tt8-healplus.webp",
+            "ext": "webp",
+            "bytes": 70582,
+            "sha256": "a4ea003c2b20367d478fc6bb13dde4f73716e818900a8aa5bb595b396594abf5",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-card-fixes/hands/receipt.json"
+          },
+          "after": {
+            "path": "cards/creature-tt8-healplus.webp",
+            "ext": "webp",
+            "bytes": 141088,
+            "sha256": "daac04c1f1c373f5b93ad339c5042032949168c6f93a43b9c7eeb290fd698266",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-eldritch-hands/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/creature-tt8-healplus.webp",
+            "ext": "webp",
+            "bytes": 10044,
+            "sha256": "51569b7851073c415b8a1bf68866fb2f09c19b69dc6cd10953fe530e35302035",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-card-fixes/hands/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/creature-tt8-healplus.webp",
+            "ext": "webp",
+            "bytes": 22132,
+            "sha256": "1c5242be3e547dd3cd05a354c5dfdebc8fe1af26422c6064a461260afe99ab5b",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-eldritch-hands/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 831,
+  "manifest_count_after": 831,
+  "alpha_preservation": "Original RGBA preserved; existing RGB thumbnail bake with alpha retained; decoded outputs checked."
+}

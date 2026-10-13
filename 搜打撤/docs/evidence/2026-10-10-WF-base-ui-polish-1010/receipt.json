@@ -1,0 +1,46 @@
+{
+  "browserUsed": false,
+  "recordedAtUtc": "2026-10-10T12:39:50.6063456Z",
+  "kind": "implementation-delivery",
+  "sources": [
+    {
+      "sha256": "a161c087431b82b47f944c23f6b0324da36799031c9f19586a452db7c604ea34",
+      "mtimeUtc": "2026-10-10T12:35:33.9320828Z",
+      "bytes": 19331,
+      "path": "game/src/hub/hub.personnel.js"
+    },
+    {
+      "sha256": "9c9371defebe42e03e02dae049c75715ca5ef3379f96febfc0aaec11576ab9f9",
+      "mtimeUtc": "2026-10-10T12:28:33.5822518Z",
+      "bytes": 17904,
+      "path": "game/src/hub/hub.warehouse.js"
+    },
+    {
+      "sha256": "3fb5680fffef999b851b434dd4cf9bfdd2102698dc58ea8f7c4bc80c9590016c",
+      "mtimeUtc": "2026-10-10T12:28:33.5606711Z",
+      "bytes": 13508,
+      "path": "game/src/hub/hub.presentation.js"
+    },
+    {
+      "sha256": "3b3cd45291dd8fabcf6a38ea73b4df2a55dbfaebd61903a4fee3402ccb250fde",
+      "mtimeUtc": "2026-10-10T12:31:09.4612740Z",
+      "bytes": 25022,
+      "path": "game/src/hub/game.hub.depart.js"
+    },
+    {
+      "sha256": "7f9061b62e196eaeca0a28ff2ec4bdbe7864d2a43371ac4d91b8996cabd2d5a4",
+      "mtimeUtc": "2026-10-10T12:31:07.8935443Z",
+      "bytes": 6558,
+      "path": "game/src/hub/departure.view-updates.js"
+    },
+    {
+      "sha256": "bb54c25fba6926b66bd3ae458f580ca9ced19f23daa4065416d406b0bfb181c0",
+      "mtimeUtc": "2026-10-10T12:39:49.1548964Z",
+      "bytes": 42586,
+      "path": "game/css/base-camp-rework.css"
+    }
+  ],
+  "testsRun": false,
+  "stage": "implementation-complete-user-review-pending",
+  "buildRun": false
+}

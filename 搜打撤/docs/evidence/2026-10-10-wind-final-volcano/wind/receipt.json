@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt8-hero-priest",
+      "generated_source": "C:\\Users\\太平\\AppData\\Local\\Temp\\codex-clipboard-dd34878d-b7fb-4b30-8d49-67a27999530b.png",
+      "raw": {
+        "path": ".tmp/imagegen/wind/cards-hero-sacredrain-source.png",
+        "bytes": 2431821,
+        "sha256": "312424b4c2b00ba579b52cb5fd1fee66a1e10c7a955f8b35d8615ed24b9cd32c"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/wind/cards-hero-sacredrain-full-before.webp",
+          "bytes": 249222,
+          "sha256": "acc2ad5a8d8218060ca9565918e1bd8a471fef1ddff76ce6d00719542865b29c"
+        },
+        {
+          "path": ".tmp/imagegen/wind/cards-hero-sacredrain-thumb-before.webp",
+          "bytes": 46198,
+          "sha256": "fc26684689aedb44e628702baa554ecb27645b325962901eef2270cd46dcdc24"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/hero-sacredrain.webp",
+          "bytes": 178242,
+          "sha256": "756b4eb02490c58611e9b2d508ff8a04ad8110c7772d4594f2f8ed694f847fbc",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/hero-sacredrain.webp",
+          "bytes": 26072,
+          "sha256": "08caebe7f728c2e56ed42ac22f1012d3483df259a3a4cd3ab29537a8bed9b087",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "xingyue-wind-song-abstract-20261004",
+      "revision_after": "xingyue-wind-song-selected-c-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/hero-sacredrain.webp",
+            "ext": "webp",
+            "bytes": 249222,
+            "sha256": "acc2ad5a8d8218060ca9565918e1bd8a471fef1ddff76ce6d00719542865b29c",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wind-song-abstract/images.json"
+          },
+          "after": {
+            "path": "cards/hero-sacredrain.webp",
+            "ext": "webp",
+            "bytes": 178242,
+            "sha256": "756b4eb02490c58611e9b2d508ff8a04ad8110c7772d4594f2f8ed694f847fbc",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-wind-final-volcano/wind/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/hero-sacredrain.webp",
+            "ext": "webp",
+            "bytes": 46198,
+            "sha256": "fc26684689aedb44e628702baa554ecb27645b325962901eef2270cd46dcdc24",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wind-song-abstract/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/hero-sacredrain.webp",
+            "ext": "webp",
+            "bytes": 26072,
+            "sha256": "08caebe7f728c2e56ed42ac22f1012d3483df259a3a4cd3ab29537a8bed9b087",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-wind-final-volcano/wind/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 757,
+  "manifest_count_after": 757
+}

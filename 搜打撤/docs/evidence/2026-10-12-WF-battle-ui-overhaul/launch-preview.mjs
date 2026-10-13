@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { spawn } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+const project=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../..');
+const runtime=path.join(project,'.tmp/WF-battle-ui-runtime');
+const log=path.join(runtime,'vite.log');
+const fd=fs.openSync(log,'a');
+const child=spawn(process.execPath,[path.join(runtime,'serve.mjs')],{cwd:runtime,detached:true,windowsHide:true,stdio:['ignore',fd,fd]});
+await new Promise((resolve,reject)=>{child.once('spawn',resolve);child.once('error',reject)});
+fs.closeSync(fd);child.unref();
+const record={pid:child.pid,cwd:runtime,url:'http://127.0.0.1:5346',createdAt:new Date().toISOString(),owner:'WF-battle-ui-overhaul',log};
+fs.writeFileSync(path.join(runtime,'service.json'),JSON.stringify(record,null,2));
+console.log(JSON.stringify(record));

@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-base-cohesion-1011",
+  "date": "2026-10-11",
+  "owner": "Friday（Codex 基地接管 01a12ab6）",
+  "goal": "独立基地卡牌买卖交易所，以实际游戏参考和设计原则重建基地作业空间，NAI生图加重绘主视觉并统一各子页美术与操作",
+  "paths": [
+    "game/src/hub/game.hub.js",
+    "game/src/hub/game.hub.pages.js",
+    "game/src/hub/hub.home-v3.js",
+    "game/src/hub/hub.warehouse.js",
+    "game/src/hub/hub.presentation.js",
+    "game/src/hub/hub.trade-shop-v5.js",
+    "game/css/base-cohesion-v5.css",
+    "game/css/base-home-v3.css",
+    "game/css/base-camp-rework.css",
+    "game/css/base-controls-v4.css",
+    "game/css/base-panel-layout.css",
+    "game/css/base-archive-v3.css",
+    "game/css/base-collection-v4.css",
+    "game/css/base-courtyard-v3.css",
+    "game/assets/scenes/base-operations-v5.webp",
+    "game/assets/asset-manifest.json",
+    "tests/hub-trade-shop-v5.test.js",
+    "tests/hub-flow-regression.test.js",
+    "tests/base-ui-sample.test.js",
+    "tests/hub-pages-rework.test.js",
+    "docs/development.md"
+  ],
+  "doneWhen": [
+    "交易所独立购入/出售工作区，复用现有保存和保护规则，仓库交易入口引导到交易所，父级返回完整",
+    "基地体现房间设施的作业空间，NAI草图与重绘有收据且实际接入，入口可读和可点",
+    "主界面与后勤、队员、收藏、交易所的色彩材质控件协调，有实际参考比较和多轮修正证据",
+    "定向交易/导航检查与Codex当前窗口真实输入/目检通过，未开始真实交易或改玩法存档，未build提交"
+  ],
+  "stage": "done",
+  "checks": [
+    {
+      "kind": "manual",
+      "result": "passed",
+      "description": "接管前历史证据，仅覆盖该旧版本：130项定向测试、目标ESLint；当前654×956真实购入/出售切换、单击确认与换牌解除、只读详情/返回及四商品和结算同屏已核对，未实卖"
+    },
+    {
+      "kind": "manual",
+      "result": "passed",
+      "description": "接管前历史证据，仅覆盖该旧版本：A12与少前2对照页当前Codex内置浏览器654×956自然窗口已目检；三图加载、无横向溢出；只验展示，不代表画风获认可或运行接入"
+    }
+  ],
+  "unverified": [
+    "A21已按老板确认接入，新增A框架、常驻导航与三版画板已实现；本轮按老板要求未检测/测试/实页验收，待用户看效果。",
+    "旧130项检查与旧截图不覆盖本次框架；原PNG外部保留，运行素材收据camp-runtime-receipt.json。",
+    "未build/提交/推送；照相馆、仓库特写footer与选人地图属地未修改；交付和后续切片见../2026-10-11-WF-base-framework-1011/README.md。"
+  ],
+  "updatedAt": "2026-10-11T11:43:48.8210959+00:00"
+}

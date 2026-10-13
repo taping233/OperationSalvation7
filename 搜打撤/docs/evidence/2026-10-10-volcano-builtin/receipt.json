@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt8-hero-descender",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-4a97c2d6-8792-4ea3-9111-37dd95f9993c.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-volcano-builtin/cards-hero-volcano-source.png",
+        "bytes": 2204315,
+        "sha256": "1619d6e14baed61e04c0ef3cbaae9625a6f174afebc05e437f577aab6a696713"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-volcano-builtin/cards-hero-volcano-full-before.webp",
+          "bytes": 172894,
+          "sha256": "aae97be6ef7b9dbda4f98be952bafe305ac0ac69e5073ed334fe0de0ba2016b9"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-volcano-builtin/cards-hero-volcano-thumb-before.webp",
+          "bytes": 27280,
+          "sha256": "c361bd17a14dc787c1bcacd2b450dfb015d12e0bb25b85ce66cb58d6cbaacfee"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/hero-volcano.webp",
+          "bytes": 213708,
+          "sha256": "c1c23ddbf6b33f215aaadd641e75d2aff0996f7bb7fabb84d89ee8fff50443bd",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/hero-volcano.webp",
+          "bytes": 27728,
+          "sha256": "055a34fb32cc9e9988034f285c2579c8dc32079f1c1745505bdc79e7f152e559",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "changwuyu-volcano-selected-c-male-20261010",
+      "revision_after": "changwuyu-volcano-fire-curtain-builtin-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/hero-volcano.webp",
+            "ext": "webp",
+            "bytes": 172894,
+            "sha256": "aae97be6ef7b9dbda4f98be952bafe305ac0ac69e5073ed334fe0de0ba2016b9",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-wind-final-volcano/fire-install/receipt.json"
+          },
+          "after": {
+            "path": "cards/hero-volcano.webp",
+            "ext": "webp",
+            "bytes": 213708,
+            "sha256": "c1c23ddbf6b33f215aaadd641e75d2aff0996f7bb7fabb84d89ee8fff50443bd",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-volcano-builtin/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/hero-volcano.webp",
+            "ext": "webp",
+            "bytes": 27280,
+            "sha256": "c361bd17a14dc787c1bcacd2b450dfb015d12e0bb25b85ce66cb58d6cbaacfee",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-wind-final-volcano/fire-install/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/hero-volcano.webp",
+            "ext": "webp",
+            "bytes": 27728,
+            "sha256": "055a34fb32cc9e9988034f285c2579c8dc32079f1c1745505bdc79e7f152e559",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-volcano-builtin/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 831,
+  "manifest_count_after": 831
+}

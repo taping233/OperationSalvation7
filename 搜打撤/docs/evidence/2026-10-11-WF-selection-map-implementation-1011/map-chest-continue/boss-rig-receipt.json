@@ -1,0 +1,658 @@
+{
+  "kind": "boss",
+  "fps": 24,
+  "frames": [
+    "/assets/scenes/chests/boss-rig-640-v1/frame-00.webp",
+    "/assets/scenes/chests/boss-rig-640-v1/frame-01.webp",
+    "/assets/scenes/chests/boss-rig-640-v1/frame-02.webp",
+    "/assets/scenes/chests/boss-rig-640-v1/frame-03.webp",
+    "/assets/scenes/chests/boss-rig-640-v1/frame-04.webp",
+    "/assets/scenes/chests/boss-rig-640-v1/frame-05.webp",
+    "/assets/scenes/chests/boss-rig-640-v1/frame-06.webp",
+    "/assets/scenes/chests/boss-rig-640-v1/frame-07.webp",
+    "/assets/scenes/chests/boss-rig-640-v1/frame-08.webp",
+    "/assets/scenes/chests/boss-rig-640-v1/frame-09.webp",
+    "/assets/scenes/chests/boss-rig-640-v1/frame-10.webp",
+    "/assets/scenes/chests/boss-rig-640-v1/frame-11.webp",
+    "/assets/scenes/chests/boss-rig-640-v1/frame-12.webp",
+    "/assets/scenes/chests/boss-rig-640-v1/frame-13.webp",
+    "/assets/scenes/chests/boss-rig-640-v1/frame-14.webp",
+    "/assets/scenes/chests/boss-rig-640-v1/frame-15.webp",
+    "/assets/scenes/chests/boss-rig-640-v1/frame-16.webp",
+    "/assets/scenes/chests/boss-rig-640-v1/frame-17.webp"
+  ],
+  "hingeSourcePixels": [
+    [
+      376,
+      444
+    ],
+    [
+      1132,
+      621
+    ]
+  ],
+  "bodyInvariant": "same RGBA body bytes composited each frame",
+  "framesReceipt": [
+    {
+      "frame": 0,
+      "angle": 0,
+      "hinge": [
+        [
+          376,
+          444
+        ],
+        [
+          1132,
+          621
+        ]
+      ],
+      "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+      "bytes": 751734,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 1,
+      "angle": 0,
+      "hinge": [
+        [
+          376,
+          444
+        ],
+        [
+          1132,
+          621
+        ]
+      ],
+      "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+      "bytes": 751734,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 2,
+      "angle": 0,
+      "hinge": [
+        [
+          376,
+          444
+        ],
+        [
+          1132,
+          621
+        ]
+      ],
+      "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+      "bytes": 751734,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 3,
+      "angle": 2,
+      "hinge": [
+        [
+          376,
+          444
+        ],
+        [
+          1132,
+          621
+        ]
+      ],
+      "sha256": "94774a45ac99c0720101d00499acec25f0b3587e89549f1e3dfcd057a0c5b0af",
+      "bytes": 750080,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 4,
+      "angle": 5,
+      "hinge": [
+        [
+          376,
+          444
+        ],
+        [
+          1132,
+          621
+        ]
+      ],
+      "sha256": "85c351a0ca47d24795e6d17de751b773c8f8146a2bb92e02fcd309364d5b4693",
+      "bytes": 748088,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 5,
+      "angle": 10,
+      "hinge": [
+        [
+          376,
+          444
+        ],
+        [
+          1132,
+          621
+        ]
+      ],
+      "sha256": "76247c76e962518439e3900a52afc673a8b9b521c01710e7609fca66439ad46c",
+      "bytes": 740294,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 6,
+      "angle": 17,
+      "hinge": [
+        [
+          376,
+          444
+        ],
+        [
+          1132,
+          621
+        ]
+      ],
+      "sha256": "afd33fb7c3d10c97e66680398ed571ebb9a087849e9c70a218994705594a3163",
+      "bytes": 721984,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 7,
+      "angle": 26,
+      "hinge": [
+        [
+          376,
+          444
+        ],
+        [
+          1132,
+          621
+        ]
+      ],
+      "sha256": "be7b2032aa42be8f8acde5665b7440c21aa22a760f67e09f12651de210e17caa",
+      "bytes": 704586,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 8,
+      "angle": 37,
+      "hinge": [
+        [
+          376,
+          444
+        ],
+        [
+          1132,
+          621
+        ]
+      ],
+      "sha256": "15e9ea046a13215383721aea6185e3cd12e0473ae6b4718a53f86fe7628b3d26",
+      "bytes": 672068,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 9,
+      "angle": 49,
+      "hinge": [
+        [
+          376,
+          444
+        ],
+        [
+          1132,
+          621
+        ]
+      ],
+      "sha256": "e387404cfc53c74d2f6dcbbbe4b5436bd586bd0ff169d18c4f0ecd699c1ad9f8",
+      "bytes": 732554,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 10,
+      "angle": 61,
+      "hinge": [
+        [
+          376,
+          444
+        ],
+        [
+          1132,
+          621
+        ]
+      ],
+      "sha256": "e11c191cff5816fcc6224e8bc38158a3fd19b1a9d9e86d7e92d5bc4714970603",
+      "bytes": 817668,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 11,
+      "angle": 72,
+      "hinge": [
+        [
+          376,
+          444
+        ],
+        [
+          1132,
+          621
+        ]
+      ],
+      "sha256": "502aa60a6c7254510df1fd487927a77b57a0d07ee5f8af6f97e4faf9a5877cf8",
+      "bytes": 869646,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 12,
+      "angle": 82,
+      "hinge": [
+        [
+          376,
+          444
+        ],
+        [
+          1132,
+          621
+        ]
+      ],
+      "sha256": "054ccc3177b0eea5a247906abca5078d18c919d5de3b3812fde84c28d4b178b2",
+      "bytes": 910658,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 13,
+      "angle": 90,
+      "hinge": [
+        [
+          376,
+          444
+        ],
+        [
+          1132,
+          621
+        ]
+      ],
+      "sha256": "d1844400e2857fa0cfa087c1c6a99ba798a5d119ec0708e4756632de14ef5f32",
+      "bytes": 940500,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 14,
+      "angle": 97,
+      "hinge": [
+        [
+          376,
+          444
+        ],
+        [
+          1132,
+          621
+        ]
+      ],
+      "sha256": "6339875d2d0a993127863536d71277b4a62d37a208335c7a5ece5805ffd08e6c",
+      "bytes": 954970,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 15,
+      "angle": 102,
+      "hinge": [
+        [
+          376,
+          444
+        ],
+        [
+          1132,
+          621
+        ]
+      ],
+      "sha256": "9913806c04a932529e2c2c92cd7e504d6cb360230a89683b411d81a6b5682f1e",
+      "bytes": 966790,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 16,
+      "angle": 105,
+      "hinge": [
+        [
+          376,
+          444
+        ],
+        [
+          1132,
+          621
+        ]
+      ],
+      "sha256": "2fe904b1edea85063ffba69c0a6ab252f636da57bc808b7fd46a9d58c27e009d",
+      "bytes": 972700,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "frame": 17,
+      "angle": 105,
+      "hinge": [
+        [
+          376,
+          444
+        ],
+        [
+          1132,
+          621
+        ]
+      ],
+      "sha256": "2fe904b1edea85063ffba69c0a6ab252f636da57bc808b7fd46a9d58c27e009d",
+      "bytes": 972700,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    }
+  ],
+  "sourceFrames": [
+    "/assets/scenes/chests/boss-rig-v1/frame-00.webp",
+    "/assets/scenes/chests/boss-rig-v1/frame-01.webp",
+    "/assets/scenes/chests/boss-rig-v1/frame-02.webp",
+    "/assets/scenes/chests/boss-rig-v1/frame-03.webp",
+    "/assets/scenes/chests/boss-rig-v1/frame-04.webp",
+    "/assets/scenes/chests/boss-rig-v1/frame-05.webp",
+    "/assets/scenes/chests/boss-rig-v1/frame-06.webp",
+    "/assets/scenes/chests/boss-rig-v1/frame-07.webp",
+    "/assets/scenes/chests/boss-rig-v1/frame-08.webp",
+    "/assets/scenes/chests/boss-rig-v1/frame-09.webp",
+    "/assets/scenes/chests/boss-rig-v1/frame-10.webp",
+    "/assets/scenes/chests/boss-rig-v1/frame-11.webp",
+    "/assets/scenes/chests/boss-rig-v1/frame-12.webp",
+    "/assets/scenes/chests/boss-rig-v1/frame-13.webp",
+    "/assets/scenes/chests/boss-rig-v1/frame-14.webp",
+    "/assets/scenes/chests/boss-rig-v1/frame-15.webp",
+    "/assets/scenes/chests/boss-rig-v1/frame-16.webp",
+    "/assets/scenes/chests/boss-rig-v1/frame-17.webp"
+  ],
+  "runtimeDimensions": [
+    640,
+    640
+  ],
+  "runtimeFps": 24,
+  "runtimeReceipt": [
+    {
+      "url": "/assets/scenes/chests/boss-rig-640-v1/frame-00.webp",
+      "bytes": 226926,
+      "sha256": "d930607d0f62b3e0939bb1ab9090a3be2f275cc485c62a7e50814fee5fd7e597",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/boss-rig-640-v1/frame-01.webp",
+      "bytes": 226926,
+      "sha256": "d930607d0f62b3e0939bb1ab9090a3be2f275cc485c62a7e50814fee5fd7e597",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/boss-rig-640-v1/frame-02.webp",
+      "bytes": 226926,
+      "sha256": "d930607d0f62b3e0939bb1ab9090a3be2f275cc485c62a7e50814fee5fd7e597",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/boss-rig-640-v1/frame-03.webp",
+      "bytes": 227264,
+      "sha256": "772e0c38457e907758f27d03838b66f1787b90faedfc17a79d8c83a159772174",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/boss-rig-640-v1/frame-04.webp",
+      "bytes": 228460,
+      "sha256": "f55c267b4d58d2f4b2d78460d9bc7d046f698cc834b32f987b7c23e198f590dd",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/boss-rig-640-v1/frame-05.webp",
+      "bytes": 226622,
+      "sha256": "5c1120385acea03e8b85d2a37a875c12b845d062ed201250ee9bd989e70908fc",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/boss-rig-640-v1/frame-06.webp",
+      "bytes": 221112,
+      "sha256": "70ae5bc80841ac98fad041f8ec6381c70a8fd77833f440e832c6e9b917eed054",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/boss-rig-640-v1/frame-07.webp",
+      "bytes": 218610,
+      "sha256": "c041066c7a4ddb307bd05eb7b3baa20c102c15f6612b13de90b516654c94139f",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/boss-rig-640-v1/frame-08.webp",
+      "bytes": 208360,
+      "sha256": "2c95f750714e24edcfe557038bbae8dc725968e723aadce9ba81126af6bb86e7",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/boss-rig-640-v1/frame-09.webp",
+      "bytes": 224066,
+      "sha256": "89550994e59b38f73be96b10db973561cd613e64e0dc3b2092778b0c53b4c603",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/boss-rig-640-v1/frame-10.webp",
+      "bytes": 243836,
+      "sha256": "b1b2833cb9f2c6729a4d884506992cb9e46dfcd2792d1a1fcdc7796247a3f787",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/boss-rig-640-v1/frame-11.webp",
+      "bytes": 257822,
+      "sha256": "476a87b339d5bb047e11853bc358db5bc813975e78f0cbe5fe60c3dc0fdc4fb1",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/boss-rig-640-v1/frame-12.webp",
+      "bytes": 268188,
+      "sha256": "cfbf335b116302c8c86d8f129f90e9faf102f0e9513e095fd111e4c533733c9b",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/boss-rig-640-v1/frame-13.webp",
+      "bytes": 274934,
+      "sha256": "b10eda2ed474a11b264857fc6f71d33d5caa8897d4db69e45049ee9e8e3c1a33",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/boss-rig-640-v1/frame-14.webp",
+      "bytes": 279864,
+      "sha256": "a54a05a57cd2918cd0511d31c49630cec27a39a3adaa0d7e46830212badcecd6",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/boss-rig-640-v1/frame-15.webp",
+      "bytes": 283340,
+      "sha256": "89c2c24733347423a5ed01efffa71d9899b07e9f241517bf19495ef4797e2ab4",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/boss-rig-640-v1/frame-16.webp",
+      "bytes": 284980,
+      "sha256": "eaa01505e2e9357123cc2329ec69445527aad67452a4d4409488ba3d48b46b80",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "url": "/assets/scenes/chests/boss-rig-640-v1/frame-17.webp",
+      "bytes": 284980,
+      "sha256": "eaa01505e2e9357123cc2329ec69445527aad67452a4d4409488ba3d48b46b80",
+      "dimensions": [
+        640,
+        640
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    }
+  ]
+}

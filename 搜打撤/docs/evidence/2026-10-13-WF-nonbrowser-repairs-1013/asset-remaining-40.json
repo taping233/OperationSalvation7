@@ -1,0 +1,368 @@
+{
+  "date": "2026-10-13",
+  "basis": "Current file and manifest SHA256 matched before/after SHA256 in the existing transparent thumbnail repair receipt; bytes measured from current file",
+  "receipt": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json",
+  "count": 40,
+  "assets": [
+    {
+      "path": "thumbs/cards/items/tt-jinchuangyao.webp",
+      "beforeBytes": 4854,
+      "beforeSHA256": "b4f0186ed223355a8de00668548a5ca26d3983f5ba0fe3b09b3d06ee43b35a36",
+      "afterBytes": 26854,
+      "afterSHA256": "f51ffdc4925bbb4cb7244df1582b9a2f569f475251870123c2ad0b0c32832a82",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt-medneedle.webp",
+      "beforeBytes": 4982,
+      "beforeSHA256": "f9b5fdc74bf358969fc5acd24f84ea757c97a09d2e98a71dcf95952c849a4e31",
+      "afterBytes": 28032,
+      "afterSHA256": "f6cc6a8b9c5911ca99546a6aa167dfef3eef8b73604c22a4a46a15cc21d14c35",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt-token-gold.webp",
+      "beforeBytes": 5614,
+      "beforeSHA256": "747c46f56446a0fe8a54b43cf5f5785c603b6a570ca108ca451bbb71836fc878",
+      "afterBytes": 41304,
+      "afterSHA256": "1e364a17b3ccee5e3714fbc05e3a8f19c3aa7805f7a7b5411f9ebc405654a562",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-blue-potion.webp",
+      "beforeBytes": 5902,
+      "beforeSHA256": "41bb85373f8d157f0c44daaa1293a5275a867d4e7a78e2af37bd0cd6fd1d5af5",
+      "afterBytes": 43650,
+      "afterSHA256": "c073621bb90718407445b24e63e575871fd86c5bcf14cc3cc1ec950162d820b4",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-demon-potion.webp",
+      "beforeBytes": 2308,
+      "beforeSHA256": "9d6a8a085eee8229e8e437f1b27448e5292fdbd4d38b3aa6a73811294f852bd6",
+      "afterBytes": 13188,
+      "afterSHA256": "003846dd85e829f2a8d14d84e867ef1ade1da7602b2888fdf0dcaf6b526a9bb0",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-houyi-potion.webp",
+      "beforeBytes": 7534,
+      "beforeSHA256": "92c66f27fb85a9b08421f0cd7a8f8ed9d7767e9b84b9a2a1db8f45cabf9391f6",
+      "afterBytes": 41254,
+      "afterSHA256": "bd6ef8a0a0975bc85e5f1d5cb4dfab34f7cd6a217ccf0468bc5a158c0fb4ee23",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-iceheart-potion.webp",
+      "beforeBytes": 7670,
+      "beforeSHA256": "511166b0396ca0b180c11bf7fb967dbf35548f19fe5e3ab111d94f239b844e4b",
+      "afterBytes": 38020,
+      "afterSHA256": "75d6786ea523ef97255903cecbf94d1f608fb80cf508c9655b7bc89a50e5a51e",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-mind-potion.webp",
+      "beforeBytes": 7202,
+      "beforeSHA256": "3c79344d782bead463b2f74d713cd7507b1b231587b738a5dfbe5a50bb342026",
+      "afterBytes": 50762,
+      "afterSHA256": "18b7e6b9f3c4cc82cb75ec76f6f692b26a553eb53826f85f1b96a3fa706a6ec1",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-mixed-potion.webp",
+      "beforeBytes": 2866,
+      "beforeSHA256": "e9a4042061ddacadd6748fc11723bd0ec8d4e785ff8eb146433cfbb7e195502c",
+      "afterBytes": 15680,
+      "afterSHA256": "fa2efa22dbbd7eca1f3228faa985ab123b9619fe3619b04893bb38be52bb2eaa",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-mystery-potion.webp",
+      "beforeBytes": 5676,
+      "beforeSHA256": "fb3c3139d8befed63ebddfd1a185f605b688a40b774fa44a1a63e5c5b65915ac",
+      "afterBytes": 39060,
+      "afterSHA256": "620cbc25ba62e3f3beaaed3c784539c81a9f544f10771f2997b13396dba4c203",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-python-potion.webp",
+      "beforeBytes": 5768,
+      "beforeSHA256": "643c2b74c5c495f5a1889dbb633c17553a77abefb1e47f03dbcb60f700701965",
+      "afterBytes": 32240,
+      "afterSHA256": "44f9944bfb03318e021dc61dcdd79b1699bfaf8ee2b170fad0438f4f4b9c2d96",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-savior-elixir.webp",
+      "beforeBytes": 7118,
+      "beforeSHA256": "54663a076931089c3ae28660ee838e5c6b729d702423415b4eb07c392d70842c",
+      "afterBytes": 42610,
+      "afterSHA256": "f1612ec76a2ed724ac7cd5c1bc02b13289063c73597b2681c80cf012a08e06f5",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3-turnabout-potion.webp",
+      "beforeBytes": 4402,
+      "beforeSHA256": "4458cbbdc9fd49625024ad231eed521f926820c8369b287bfeaf8b775d6c9b20",
+      "afterBytes": 24914,
+      "afterSHA256": "d12f49b3a48e6f0e0ede1117db7513d7ce45afee31a23fe62dd37bb65410c47d",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt3sp-doom.webp",
+      "beforeBytes": 4448,
+      "beforeSHA256": "aafc420c1291e8d3bf7bdf291a9c09aa7a10a1cc95a99d53b479f61e71d8b705",
+      "afterBytes": 32342,
+      "afterSHA256": "a3a11317897206647c19aae1655f02f5afdc424fdcb78260506691d22fdfaa68",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt4-shine-token.webp",
+      "beforeBytes": 5972,
+      "beforeSHA256": "45ad0ee7c685ecde21afe64e0b43a8d28242b366057cf8bf69a992848ab3201e",
+      "afterBytes": 49168,
+      "afterSHA256": "0ecd901c998a8ff547c3595f07638483412a042686e9ee4beb6a97a7acc15d98",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt4-smoke-bomb.webp",
+      "beforeBytes": 6238,
+      "beforeSHA256": "e385e7ee793d1d722fe9819c23c7262056262b1a7edce89589b285cd133cd6d2",
+      "afterBytes": 37318,
+      "afterSHA256": "ff9d08a2a5c10409d9c69e500d623e954104c210b26f45b689b834a1a9facaa7",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/items/tt4-woodify.webp",
+      "beforeBytes": 5774,
+      "beforeSHA256": "99d163e325c66b33b4f5d2ef355192d868889803e40ab32a64175fe702f6b99f",
+      "afterBytes": 35578,
+      "afterSHA256": "5f1d711b61ab717374d9c1d8ed82687964b512d1115798d3750d4aac70d2c253",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/resources/coin-copper.webp",
+      "beforeBytes": 13210,
+      "beforeSHA256": "d9260394681b2c72331df734a1eff2695260452ead687a55cd6db7df2da15066",
+      "afterBytes": 94710,
+      "afterSHA256": "6edf19c52defe9bd3fff5cd92594ce799f22e4580e7b10775480ba082dc3b78f",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/resources/coin-gold.webp",
+      "beforeBytes": 13092,
+      "beforeSHA256": "91b02d18653e9407ca10b7fde5027b3e9e67ef11d93fa62fbeba9a36502026bf",
+      "afterBytes": 98510,
+      "afterSHA256": "4d5a214f3af2216bec13859eac7490aaf899be4a7b7457e149302b9749892d25",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/resources/coin-silver.webp",
+      "beforeBytes": 8956,
+      "beforeSHA256": "999a03dcac05cc305486049de4abfafa153dc1a5c03ddcd785cbb1e8bc7d241a",
+      "afterBytes": 79218,
+      "afterSHA256": "886deaa9d32390053c8660f958165af248ff06600701244a7382d8bc78462292",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/resources/diamond.webp",
+      "beforeBytes": 7780,
+      "beforeSHA256": "1d634078e1bae1961e1dc96e85ba567ae87130de856379e527164335e4402963",
+      "afterBytes": 63180,
+      "afterSHA256": "358f18aec620a9abc4126b9573107bd691aaea45e51939df7f4edeec8e79a929",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/resources/econpack.webp",
+      "beforeBytes": 9760,
+      "beforeSHA256": "94c2eb30274ce3469deb4472e4825950f3e00494a4470c231392e6064b0323e0",
+      "afterBytes": 59554,
+      "afterSHA256": "03dbc0aedc0dd6e438c09ab7617119b19e8c7c5c601b1a16e4d50bec192ef7c6",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/resources/garnet-marble.webp",
+      "beforeBytes": 7628,
+      "beforeSHA256": "c6d3f5d1c43dc0b9e5f12cbda45a5aeb0a4b5edc8b0eb272e25d23100274085a",
+      "afterBytes": 65538,
+      "afterSHA256": "c2cf31d3e80d43b054b2795b174212fd6f0f56f5af4a8a0f0e84ed946204d0ba",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/resources/keys-bunch.webp",
+      "beforeBytes": 9248,
+      "beforeSHA256": "2d8b5eaaf2bdeb70454f5b946318ab2c93e02c6e8baecc2762ca5198faa5261a",
+      "afterBytes": 56400,
+      "afterSHA256": "5f0ab03637c486aa354a5869c97867a7b5f83a8cd19467fa199c71cc37dda8da",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/resources/pet-egg.webp",
+      "beforeBytes": 6158,
+      "beforeSHA256": "b4187f7113baec1b13a289f414823174f4bab473699cbf84a8d01d6c89f13063",
+      "afterBytes": 58880,
+      "afterSHA256": "abf40b69e3d28dfd23c33a5799ae57dc03c3044369740047e415f19c262b9977",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/resources/ration-double.webp",
+      "beforeBytes": 11052,
+      "beforeSHA256": "73ed80bc9fdeffb62192e6d8cec197e563b12eabea0118017d79c2ea25198c7f",
+      "afterBytes": 78872,
+      "afterSHA256": "73ff57bf29614241857da8368aae4f2ebc5ca9662fe88acee9581270b139524e",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/resources/ration-std.webp",
+      "beforeBytes": 11922,
+      "beforeSHA256": "261e9fa9d857fbd6f84f949f0301274913d3ebbff689f4166f1246a3508a15a2",
+      "afterBytes": 77976,
+      "afterSHA256": "25474f807a3e52b98fd2d434ed42ca962e34d8bc3943da93d1bede5d8871a404",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/resources/ration.webp",
+      "beforeBytes": 12772,
+      "beforeSHA256": "88b04b398b03f25170d4049702ea0860aff8a5721ff7ce1065c3c306697a4e43",
+      "afterBytes": 91972,
+      "afterSHA256": "4769b74c110b4711c8275c436a58f091aac8cb5831c8eede9bc42cdfac2baf02",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/resources/wood-bundle.webp",
+      "beforeBytes": 13268,
+      "beforeSHA256": "985ddd01cb80b6dda4108f0a9357c20cbfe9a501ee879cefd0ec739d4107d74a",
+      "afterBytes": 81762,
+      "afterSHA256": "c406c5f2fd2d9b24193801dfd23a79887f70fe601c7b1971c577e884ac739615",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/resources/wood-lots.webp",
+      "beforeBytes": 12140,
+      "beforeSHA256": "084e3dbb2442b0128147a63c3e624861c3fa0a76efef97106b5784bd3628db84",
+      "afterBytes": 97144,
+      "afterSHA256": "32f44c8842fc8549518412ae76eb51b490c0d33089080ae5c81daac82c59c749",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/cards/resources/wood.webp",
+      "beforeBytes": 8390,
+      "beforeSHA256": "01ef9706f112315b1b7e32902c801ad85226f08a3e75a289a3ae3fde4b5b4bde",
+      "afterBytes": 55326,
+      "afterSHA256": "e479cafc68ba6c7347275476587f1ed46bf6c678cd62b92bb7b23763e9350048",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-boss-anime-v1.webp",
+      "beforeBytes": 14882,
+      "beforeSHA256": "d8cfa319966b4e2fd40f9ed01635c41ef9ba66c42bd13bf50bd7aabd9438b727",
+      "afterBytes": 95232,
+      "afterSHA256": "01a5bd234abedfbd51a808f3fec8cada6438c082836bc609e1b978cfcdc6ff93",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-class-anime-v1.webp",
+      "beforeBytes": 8476,
+      "beforeSHA256": "7a2296825d5ba6cbb3d14afa31468464e644a0647bbdee5ed511d5d9eabeec52",
+      "afterBytes": 71490,
+      "afterSHA256": "98a3f652b066e9302c90b2fc2bee7223099aa1f678df1142af37e335f6c3db20",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-large-anime-v1.webp",
+      "beforeBytes": 15436,
+      "beforeSHA256": "48b5c7414776a7424ae86e53c71118a071ff2df6ba930e9f31e70f0d9a4c3b43",
+      "afterBytes": 109926,
+      "afterSHA256": "8b95f5487b4debcb401eac9fae70f61c3e56a2df544e1b9342bb03715bddec7e",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-medium-anime-v1.webp",
+      "beforeBytes": 11858,
+      "beforeSHA256": "702f21f4c4e382afd887d0d994616fdebfca6d533753a395eb8204a7426fb847",
+      "afterBytes": 97124,
+      "afterSHA256": "a45678714412c1d9f9c0fd1de1e72a598d668d021e4ee721630f3b3bde9588fa",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-small-anime-v1.webp",
+      "beforeBytes": 11580,
+      "beforeSHA256": "4a21b0ddd65979008d042e6d6b0038efed2d2e0fd7c13a4f8c5fd505146c6558",
+      "afterBytes": 91964,
+      "afterSHA256": "d5b626be16c70470cae23ddae54e0809df88a7f846d9958a4564b1e21b7dd664",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/scenes/winter-expedition/core.webp",
+      "beforeBytes": 5204,
+      "beforeSHA256": "e1b7eb2ae68ff4e05c5a585ceebc71c6b4f3bc472683ba37aa688264aaeb363c",
+      "afterBytes": 41236,
+      "afterSHA256": "7f42cfe9a4c14000226b58ed31a2fd1fb1616dfb167c7c99094744d1ddce406d",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/scenes/winter-expedition/greenhouse.webp",
+      "beforeBytes": 6568,
+      "beforeSHA256": "bd159c942e25e167d4dcd21815c33ca9cea5c28e98736a0ff738324609472c4d",
+      "afterBytes": 41798,
+      "afterSHA256": "5b377265df57d28eb8c9149c5ab923ec13c9a3fbbd2dd0f190fafb0a09ad762a",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/scenes/winter-expedition/outskirts.webp",
+      "beforeBytes": 6318,
+      "beforeSHA256": "31988e171b074ad98a597f13b3d6007d15edfccd7182a666c06cf6724f43cf16",
+      "afterBytes": 48478,
+      "afterSHA256": "4887309b3d2b1b1867a042ef7ccfc2d3787fbfd487b9f025f3ab4bdab083b9db",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    },
+    {
+      "path": "thumbs/scenes/winter-expedition/sanctuary.webp",
+      "beforeBytes": 5546,
+      "beforeSHA256": "57c262f64adf46c0c1bc4853f1c32f45fa2ad538ebb417bdbaad1f3298be1038",
+      "afterBytes": 42894,
+      "afterSHA256": "a31a17cdbd3f284f9e353226a34114a18d19f544c2d78e782243011f0b647ac6",
+      "priorSource": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json",
+      "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+    }
+  ]
+}

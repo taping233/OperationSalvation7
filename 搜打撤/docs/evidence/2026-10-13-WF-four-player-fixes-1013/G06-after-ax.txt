@@ -1,0 +1,22 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5371/four-player-qa.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 206-207, 211-236
++						211 container
++							212 text 初始 初始
++						213 container
++							214 text 古朴 古朴
++						215 container
++							216 text 史诗 史诗
++					217 text 能量不足：需要 2，当前 1
++						218 container
++							219 text 古朴 古朴
++						220 container
++							221 text 古朴 古朴
++						222 container
++							223 text 衍生 衍生
++						224 container
++							225 text 古朴 古朴
++						226 container
++							227 text 史诗 史诗
++					228 text 能量不足：需要 6，当前 1
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5371/four-player-qa.html

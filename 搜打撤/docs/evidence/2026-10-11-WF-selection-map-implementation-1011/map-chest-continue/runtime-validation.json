@@ -1,0 +1,47 @@
+[
+  {
+    "kind": "small",
+    "frames": 18,
+    "maxBytes": 248260,
+    "alpha": [
+      0,
+      255
+    ]
+  },
+  {
+    "kind": "medium",
+    "frames": 18,
+    "maxBytes": 277964,
+    "alpha": [
+      0,
+      255
+    ]
+  },
+  {
+    "kind": "large",
+    "frames": 18,
+    "maxBytes": 298396,
+    "alpha": [
+      0,
+      255
+    ]
+  },
+  {
+    "kind": "class",
+    "frames": 18,
+    "maxBytes": 261222,
+    "alpha": [
+      0,
+      255
+    ]
+  },
+  {
+    "kind": "boss",
+    "frames": 18,
+    "maxBytes": 284980,
+    "alpha": [
+      0,
+      255
+    ]
+  }
+]

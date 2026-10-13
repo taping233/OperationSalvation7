@@ -1,0 +1,147 @@
+{
+  "references": [
+    {
+      "file": "01-phantom-battle1.m4a",
+      "sha256": "85c0e4a0cbba6d0a3d906efec2da51183f8718b933121550512ae3c7baa2dadc",
+      "scope_seconds": 60.0,
+      "band_energy_fraction": {
+        "below_150hz": 0.5607972741127014,
+        "150_to_1500hz": 0.34923985600471497,
+        "above_4000hz": 0.00891870353370905
+      },
+      "tempo_candidates_bpm": [
+        109.96,
+        143.55,
+        172.27
+      ],
+      "interpretation": "Partial numerical observations, not exact beat/key transcription or listening claims."
+    },
+    {
+      "file": "03-mizuki-battle1.m4a",
+      "sha256": "b3c67abd657f96f390593a748c32a43f7418c68aa10d0ab504e40b5164a46571",
+      "scope_seconds": 60.0,
+      "band_energy_fraction": {
+        "below_150hz": 0.5261483788490295,
+        "150_to_1500hz": 0.4333152174949646,
+        "above_4000hz": 0.003186912043020129
+      },
+      "tempo_candidates_bpm": [
+        126.05,
+        156.61,
+        107.67
+      ],
+      "interpretation": "Partial numerical observations, not exact beat/key transcription or listening claims."
+    }
+  ],
+  "instrument_probes": [
+    {
+      "track": "Pizzicato engine",
+      "rms_first_second_dbfs": -51.31556619827421,
+      "audible_signal": true,
+      "wav_sha256": "4245dfa7392a59b21fbd4c756b74151bd855b7612f55a9fc87ff0f08386ceaf0",
+      "file": "instrument-probes/probe-00.wav",
+      "bytes": 1439882,
+      "method": "Native LMMS isolated instrument render from the delivered project"
+    },
+    {
+      "track": "Violin motif",
+      "rms_first_second_dbfs": -42.74552161697366,
+      "audible_signal": true,
+      "wav_sha256": "12555ae6a98e1be4747f3ca2259549d8be19ca0c87c43c50fae586226bd2f327",
+      "file": "instrument-probes/probe-01.wav",
+      "bytes": 1439882,
+      "method": "Native LMMS isolated instrument render from the delivered project"
+    },
+    {
+      "track": "Viola reply",
+      "rms_first_second_dbfs": -49.671826448575366,
+      "audible_signal": true,
+      "wav_sha256": "68606b645eed0beea147889b10d327d37dce6edf2bcb20b7a74bf697f1a5e41a",
+      "file": "instrument-probes/probe-02.wav",
+      "bytes": 1439882,
+      "method": "Native LMMS isolated instrument render from the delivered project"
+    },
+    {
+      "track": "Cello tension",
+      "rms_first_second_dbfs": -44.20641669555351,
+      "audible_signal": true,
+      "wav_sha256": "ef85c2a5c3402d7a78902e8d50156826b621f7c35fe5cb0ade40cbcb22812c72",
+      "file": "instrument-probes/probe-03.wav",
+      "bytes": 1439882,
+      "method": "Native LMMS isolated instrument render from the delivered project"
+    },
+    {
+      "track": "Tine piano",
+      "rms_first_second_dbfs": -49.19330487207172,
+      "audible_signal": true,
+      "wav_sha256": "23af66eb0166b43350dc78138c42f7de10643f39aff1f4c4e4747e5e49264cb9",
+      "file": "instrument-probes/probe-04.wav",
+      "bytes": 1439882,
+      "method": "Native LMMS isolated instrument render from the delivered project"
+    },
+    {
+      "track": "Muted brass answer",
+      "rms_first_second_dbfs": -59.01927745765535,
+      "audible_signal": true,
+      "wav_sha256": "8acd6633b668bac68c036cb835ee5bb789e547afd08c7cf9de8e3445a9299bd3",
+      "file": "instrument-probes/probe-05.wav",
+      "bytes": 1439882,
+      "method": "Native LMMS isolated instrument render from the delivered project"
+    },
+    {
+      "track": "Harp transition",
+      "rms_first_second_dbfs": -47.530501677172126,
+      "audible_signal": true,
+      "wav_sha256": "12f857a8ed1dc4305a7c5bac2eb3a3fae6d6ac1f94ea87ed8d6aad1d2a9bccaa",
+      "file": "instrument-probes/probe-06.wav",
+      "bytes": 1439882,
+      "method": "Native LMMS isolated instrument render from the delivered project"
+    },
+    {
+      "track": "Synth bass pulse",
+      "rms_first_second_dbfs": -42.94609604641097,
+      "audible_signal": true,
+      "wav_sha256": "646ad673c45744b06cee182180800942a9a3e6538717d7e759f3d2595b7b2b9b",
+      "file": "instrument-probes/probe-07.wav",
+      "bytes": 1439882,
+      "method": "Native LMMS isolated instrument render from the delivered project"
+    },
+    {
+      "track": "Dark glass",
+      "rms_first_second_dbfs": -52.13911145956988,
+      "audible_signal": true,
+      "wav_sha256": "1abc21d546d02d15c4886c47c5fc7ab4aedc1fad533b5a4400896c8cb34dfce7",
+      "file": "instrument-probes/probe-08.wav",
+      "bytes": 1439882,
+      "method": "Native LMMS isolated instrument render from the delivered project"
+    },
+    {
+      "track": "Air pad",
+      "rms_first_second_dbfs": -62.00349104189107,
+      "audible_signal": true,
+      "wav_sha256": "082cea498096aed49dc35dd0b1a448f955df1c64c0436062b30d3368d3ddf9dd",
+      "file": "instrument-probes/probe-09.wav",
+      "bytes": 1439882,
+      "method": "Native LMMS isolated instrument render from the delivered project"
+    },
+    {
+      "track": "Electronic broken beat",
+      "rms_first_second_dbfs": -48.44610176559195,
+      "audible_signal": true,
+      "wav_sha256": "aad1c76d1a3b8d5b1f9119e4ac31303907342cc407c7fb43403f7a696d653b2d",
+      "file": "instrument-probes/probe-10.wav",
+      "bytes": 1439882,
+      "method": "Native LMMS isolated instrument render from the delivered project"
+    },
+    {
+      "track": "Low percussion",
+      "rms_first_second_dbfs": -51.552915237391026,
+      "audible_signal": true,
+      "wav_sha256": "2ec5c78cf7e1d34f9432b53c7b8308ea5be43723c646e5e4725c53b0405ee968",
+      "file": "instrument-probes/probe-11.wav",
+      "bytes": 1439882,
+      "method": "Native LMMS isolated instrument render from the delivered project"
+    }
+  ],
+  "all_12_tracks_produced_signal": true
+}

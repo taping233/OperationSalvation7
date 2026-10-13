@@ -1,0 +1,50 @@
+{
+  "scope": "Current Vite main-map gameplay; new scene-specific candidate tracks only. No runtime integration.",
+  "inventoryFinding": "Three runtime file-BGM URLs exist; no missing referenced file was found. Dedicated scene tracks were missing, so eleven candidates were composed.",
+  "evidence": [
+    "game/src/audio/sound.js:8",
+    "game/src/audio/sound.js:14",
+    "game/src/audio/sound.js:424",
+    "game/src/hub/game.hub.js:70",
+    "game/src/battle/core/battle.lifecycle.js:219",
+    "game/data/scenes.json",
+    "docs/rules.md:23",
+    "docs/production/design/GDD.md:9"
+  ],
+  "existingCandidates": {
+    "title": "docs/evidence/2026-10-05-WF-music-piano-two-hands/01-title-frostglass-v10.mp3",
+    "explore": "docs/evidence/2026-10-05-WF-music-piano-two-hands/02-explore-ashline-v6.mp3",
+    "battle": "docs/evidence/2026-10-05-WF-music-piano-two-hands/03-battle-blackpulse-v6.mp3"
+  },
+  "nodeSceneAssignments": {
+    "battle": "existing:battle",
+    "shop": "shop",
+    "event": "event",
+    "fire": "fire",
+    "chest": "existing:explore",
+    "coin": "existing:explore",
+    "wood": "existing:explore",
+    "rations": "existing:explore",
+    "key": "existing:explore",
+    "door": "existing:explore",
+    "altar": "altar",
+    "exit": "extraction"
+  },
+  "otherAssignments": {
+    "基地、局外整备及基地附属收藏界面": "base",
+    "标题及标题附属设置界面": "existing:title",
+    "主地图与层间探索": "existing:explore",
+    "普通战斗": "existing:battle",
+    "肃清总督": "boss-governor",
+    "变异巢母": "boss-brood",
+    "异能领主": "boss-psionic",
+    "成功撤离、首脑胜利及通关结算": "success",
+    "死亡或放弃结算": "defeat"
+  },
+  "compositionGapsFilled": ["base", "shop", "fire", "event", "altar", "extraction", "boss-governor", "boss-brood", "boss-psionic", "success", "defeat"],
+  "excluded": [
+    "Short pickups, clicks and chest/door actions remain SFX with existing exploration BGM.",
+    "Research-laboratory second map is deferred in the current GDD; no future-map soundtrack invented.",
+    "No game audio routes, Howl instances, manifests, volume preferences or existing audio files modified."
+  ]
+}

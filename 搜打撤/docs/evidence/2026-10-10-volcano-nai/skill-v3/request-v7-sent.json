@@ -1,0 +1,21 @@
+{
+  "status": "老板授权重绘，采用推荐A撕卡分镜",
+  "model": "nai-diffusion-5-full",
+  "width": 1024,
+  "height": 1024,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "seed": 1543562841,
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1boy, solo, calm expression, slight smile, looking down, simple background, fire, molten lava, playing card, from above, close-up, leaning forward, hands up\n\nCharacter 1 is seen close above his hands, with his face at the upper left. He is tearing one black spell card diagonally between his hands; one hand draws backward while the other pulls toward the viewer. The torn card dominates the lower-right foreground. Its split opens into a slanted charcoal volcanic crater filled with molten orange lava. A broad fiery plume bursts through the fresh tear and follows the pulling direction. The surviving black paper edges curl away from the pressure. His eyes follow the tearing point, calmly controlling the release. The foreground hands overlap the chest, with the face clear beyond them. The background echoes the tension of the torn card: broad abstract pressure planes diverge from the ripping point and open into a calmer negative-space pocket around the face. Choose background hues and values to distinguish the dark figure, torn paper edges and incandescent lava. The eruption illuminates nearby planes while distant areas remain quiet. Carry these abstract painted planes to the canvas edges as one continuous illustration.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "boy, elegant mysterious young man, refined youthful male features, pale skin, silver-grey long hair with two side locks falling to the waist, low bun at the back, short messy bangs under the hat, black wide-brim witch hat with deep purple inner lining, neat slender hat tip gently curving and drooping to the right, round thin metal frame eyeglasses, golden yellow eyes behind the lenses, pointy elf ears, black high-collar long coat with thin gold piping only along the front edges and cuffs, small gold buttons, solid plain black fabric, large cloak with purple inner lining, white feather ornament with a gold-set sapphire brooch on the left chest, black leather gloves",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, female, child, old man, broad jaw, elongated chin, staff, wand, feathered hat, white background, white border, inset illustration, detached torso, disembodied hand, character sheet, contact sheet, magic circle, circular portal, realistic landscape",
+  "background": "由撕卡张力/火山积压/喷发设计抽象块面，颜色不预锁；撤去blue background排除",
+  "parent_plan": "storyboards-v7.json / A",
+  "installed": false
+}

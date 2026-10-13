@@ -1,0 +1,121 @@
+- complementary:
+  - navigation "远征工具":
+    - img "常无欲 Q版小人"
+    - generic: 当前 · 空白节点
+    - button "bag 背包 携带卡牌 4/16 B" [disabled]:
+      - img "bag"
+      - text: 背包
+      - generic: 携带卡牌
+      - strong: 4/16
+      - generic: B
+    - button "lock 安全格 保护物资 0/2" [disabled]:
+      - img "lock"
+      - text: 安全格
+      - generic: 保护物资
+      - strong: 0/2
+    - button "cards 消耗口袋 待复原卡牌 18" [disabled]:
+      - img "cards"
+      - text: 消耗口袋
+      - generic: 待复原卡牌
+      - strong: "18"
+    - button "map 定位 当前位置 F" [disabled]:
+      - img "map"
+      - text: 定位
+      - generic: 当前位置
+      - generic: F
+    - button "map 总览 已知区域 G" [disabled]:
+      - img "map"
+      - text: 总览
+      - generic: 已知区域
+      - generic: G
+- main:
+  - navigation "远征章节":
+    - generic: 污染核心
+    - generic: 第 4 层 / 4
+  - generic: "16"
+  - generic: "4"
+  - button "离开对局":
+  - button:
+  - button:
+  - generic: 当前生命
+  - generic: 8/35
+  - button "背包 4/16":
+    - generic: 背包
+    - generic: 4/16
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog "archive 搜刮！战斗胜利 · 首脑保险柜 · 第 1 / 1":
+    - button "关闭": ×
+    - heading "战斗胜利" [level=3]
+    - generic: 首脑保险柜
+    - generic: 6 张待领
+    - paragraph: 6 张卡牌
+    - button "查看违禁烟火详情":
+      - generic: "0"
+      - img "违禁烟火"
+      - generic: 违禁烟火
+      - generic: 法术 · 古朴 古朴
+      - generic: 对全体敌人造成 1 点固定伤害。
+      - text: 估值
+      - img "coin"
+      - text: "1"
+      - text: 古朴
+    - button "查看生命箭详情":
+      - generic: "1"
+      - img "生命箭"
+      - generic: 生命箭
+      - generic: 武术 · 古朴 古朴
+      - generic: 造成（你的攻击力 - 1）点攻击伤害；随机获得 1 张卡牌。
+      - text: 估值
+      - img "coin"
+      - text: "2"
+      - text: 古朴
+    - button "查看闪电链详情":
+      - generic: "1"
+      - img "闪电链"
+      - generic: 闪电链
+      - generic: 法术 · 古朴 古朴
+      - generic: 造成 3 点法术伤害；本牌的伤害效果触发 2 次。
+      - text: 估值
+      - img "coin"
+      - text: "2"
+      - text: 古朴
+    - button "查看双份口粮详情":
+      - generic: "0"
+      - img "双份口粮"
+      - generic: 双份口粮
+      - generic: 资源 · 史诗 史诗
+      - generic: 口粮 ×2。
+      - text: 估值
+      - img "coin"
+      - text: "6"
+      - text: 史诗
+    - button "查看镭射详情":
+      - generic: "1"
+      - img "镭射"
+      - generic: 镭射
+      - generic: 法术 · 古朴 古朴
+      - img "crystal"
+      - text: 注能 1
+      - generic: 造成 5 点法术伤害；注能（1）：本牌伤害增加 3 点。
+      - text: 估值
+      - img "coin"
+      - text: "2"
+      - text: 古朴
+    - button "查看铜币详情":
+      - generic: "0"
+      - img "铜币"
+      - generic: 铜币
+      - generic: 资源 · 古朴 古朴
+      - generic: 可出售。
+      - text: 估值
+      - img "coin"
+      - text: "3"
+      - text: 古朴
+    - paragraph: 本战击败 1 名敌人 · 剩余生命 8/35
+    - generic "本战背包卡结算 · 入口袋 8 张 · 消散 0 张 · 保留 6 张"
+    - complementary "所选卡牌详情":
+      - generic: 选择一张卡牌查看规则与去向
+    - generic: 背包 4/16 格 · 已入背包 0 张
+    - status: 点击卡牌先查看，随后收下
+    - button "6 张待领 · 离开"
+    - button "全部收下"

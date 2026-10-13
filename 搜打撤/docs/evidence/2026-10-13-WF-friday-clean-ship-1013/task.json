@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-friday-clean-ship-1013",
+  "date": "2026-10-13",
+  "owner": "Friday",
+  "goal": "接管已结束会话，完成台账；可恢复清理明确临时项，按验证结果分组提交并正常推送，保留未核验与独有内容",
+  "paths": [
+    "docs/evidence/2026-10-13-WF-friday-clean-ship-1013",
+    "docs/PARALLEL-REGISTRY.md",
+    "docs/PENDING.md"
+  ],
+  "doneWhen": [
+    "旧会话占用核对释放并留原文快照",
+    "清理项可恢复且有原路径和SHA256",
+    "完成候选按主题通过原门禁后提交，失败项明确保留",
+    "台账与交付摘要反映实际结果"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "原台账快照、5旧编辑占用/11旧任务记录/38归属迁移及六项可恢复清理已逐项核对",
+      "result": "passed"
+    },
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-10-13-WF-friday-clean-ship-1013/2026-10-13T15-45-29.459Z-7f7ad856-staged.json",
+      "result": "passed",
+      "sha256": "1f488eeba2a6e0cb6e44bee4a346d230296245148a2e204ea1951cc5acd305b9",
+      "verification": "recorded-result-only-not-current-freshness"
+    },
+    {
+      "kind": "manual",
+      "description": "7c1f0589正常hook严格复用完整index冻结收据；三文件已提交，index为空；秘密扫描0命中；docs守卫0 findings",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "浏览器初始化失败，游戏实页和自然通关未验",
+    "剩余混合游戏改动被273项未登记素材及庭院旧冻结失败阻断，保持未提交",
+    "完整旧历史/第三方公开许可未审查，不公开仓库",
+    "最终推送、CI与Library归档结果另做交付核验"
+  ],
+  "updatedAt": "2026-10-13T16:00:15.719Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

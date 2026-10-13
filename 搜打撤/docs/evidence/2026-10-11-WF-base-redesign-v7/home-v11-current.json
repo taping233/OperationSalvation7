@@ -1,0 +1,49 @@
+{
+  "verified": [
+    "正式基地首页稳定外观与关键图片加载",
+    "顶部档案/独立物资胶囊，右侧出征/難度，六个底部目的地可见",
+    "真实点击队员入口进入大页并真实返回基地",
+    "返回时遮罩false，底部入口opacity及纵向transform呈先后差异",
+    "Shift+Tab真实输入激活队员焦点，稳定青蓝底/石墨文字",
+    "本任务页面捕获console error为0"
+  ],
+  "pictures": [
+    {
+      "sha256": "1c435a7c5fe5a1a4e979c40a5b2f7d16c79f91df9c701dab99ff82b0e383ab42",
+      "path": "docs/evidence/2026-10-11-WF-base-redesign-v7/visual-check/base-home-v11-before.jpg",
+      "method": "本任务Codex内置浏览器自身Tab1截图，JPEG原始字节，未缩放/裁切",
+      "bytes": 123944
+    },
+    {
+      "sha256": "a40ce920ba3d887baef6565d1275bbd31aff0c075b3aacd6434d72c6ac931ce3",
+      "path": "docs/evidence/2026-10-11-WF-base-redesign-v7/visual-check/base-home-v11-final.jpg",
+      "method": "本任务Codex内置浏览器自身Tab1截图，JPEG原始字节，未缩放/裁切",
+      "bytes": 123123
+    },
+    {
+      "sha256": "0a196e805b1c8d7eb3319ddfca388b6bf626218ceeb89c5b6ee519bc5cbfe8d9",
+      "path": "docs/evidence/2026-10-11-WF-base-redesign-v7/visual-check/base-home-v11-focus.jpg",
+      "method": "本任务Codex内置浏览器自身Tab1截图，JPEG原始字节，未缩放/裁切",
+      "bytes": 123762
+    }
+  ],
+  "schemaVersion": 1,
+  "task": "WF-base-redesign-v7",
+  "slot": "01",
+  "viewport": {
+    "htmlZoom": 0.793229,
+    "height": 956,
+    "width": 1523
+  },
+  "platform": "Codex In-app Browser",
+  "thread": "01a12b26-919c-7300-aa9b-e2a97244fb78",
+  "url": "http://localhost:5200/",
+  "unverified": [
+    "老板对这版实现的美术认可",
+    "出征、交易、培养、领奖等存档行为未执行",
+    "其他房间本轮尚未逐页精修",
+    "未运行单元测试/全量测试/build/提交/推送",
+    "未覆盖其他尺寸或性能比较"
+  ],
+  "date": "2026-10-11"
+}

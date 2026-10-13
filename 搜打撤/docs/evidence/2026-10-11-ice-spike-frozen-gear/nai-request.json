@@ -1,0 +1,21 @@
+{
+  "card_id": "tt3-ice-spike",
+  "model": "nai-diffusion-4-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 1706391211,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nno humans, gear, icicle, frost, close-up, three-quarter view, dutch angle, solid background, hand-drawn linework, painterly\n\nA massive old bronze cogwheel is stopped by ONE jagged ice spike lodged tightly BETWEEN TWO TEETH on its near rim. The wheel occupies the right two thirds, its right side cropped by the frame, with a clear thick rim and large teeth in perspective. The ice spike enters diagonally from lower-left toward the tooth gap near center-right; its sharp point jams against the tooth. Frost spreads from this contact across three nearby bronze teeth, changing warm metal into pale blue ice. A short curved motion trace behind the unfrozen upper rim suggests rotation abruptly stopped. Background is one solid deep navy-blue color, no gradient or environment detail.\n\nClear tapered colored contour and structural lines describe the gear thickness, teeth and irregular ice edges. Broad matte umber and muted ochre shadows stay within metal forms; ice uses pale cyan, blue-gray and ivory major planes. Keep the brightest crisp edge where ice wedges against bronze; leave broad quieter stretches elsewhere. Use a few wide opaque strokes within enclosed shapes. Frost is a thin irregular connected crust, not scattered particles or tiny crystal facets.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, hands, face, multiple gears, extra ice spikes, clock face, letters, numbers, ornamental engraving, many rivets, snowflakes, floating shards, fine hatching, glossy 3d render, grain filter, gradient background, scenery",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\ice-spike-frozen-gear-20261011\\ice.png",
+  "installed": false,
+  "design": "冰刺楔入铜齿轮齿隙截停转动，寒霜从接触点蔓延；有实物作用关系，纯色深蓝背景。"
+}

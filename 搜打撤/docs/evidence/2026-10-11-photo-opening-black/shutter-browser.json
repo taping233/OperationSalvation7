@@ -1,0 +1,24 @@
+{
+  "source": "Codex In-app Browser",
+  "url": "http://localhost:5200/",
+  "viewport": "1523x956",
+  "input": "真实主页按钮点击",
+  "result": {
+    "frames": 95,
+    "maxFlashOpacity": 0,
+    "flashAnimations": [
+      "none"
+    ],
+    "cutObserved": true,
+    "studioVisible": true,
+    "loadingRemoved": true,
+    "last": {
+      "ms": 1604,
+      "flashOpacity": "0",
+      "flashAnimation": "none",
+      "flashBackground": "rgba(0, 0, 0, 0)",
+      "cut": false,
+      "studio": true
+    }
+  }
+}

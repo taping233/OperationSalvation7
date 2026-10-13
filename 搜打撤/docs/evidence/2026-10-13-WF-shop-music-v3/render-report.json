@@ -1,0 +1,50 @@
+{
+  "seconds": 60.0,
+  "bpm": 112,
+  "bars": 28,
+  "source_score": {
+    "path": "docs/evidence/2026-10-09-WF-shop-remake/score.json",
+    "bytes": 26650,
+    "sha256": "6caf1dfd4367da160a372f137b5670e15b8d613e068084d2ff7efb3fec77bec4"
+  },
+  "loudness_wav": {
+    "input_i": "-18.00",
+    "input_tp": "-4.43",
+    "input_lra": "2.90",
+    "input_thresh": "-28.05",
+    "output_i": "-18.47",
+    "output_tp": "-5.78",
+    "output_lra": "2.30",
+    "output_thresh": "-28.50",
+    "normalization_type": "dynamic",
+    "target_offset": "0.47"
+  },
+  "tracks": [
+    "piano-hook",
+    "clarinet-reply",
+    "jazz-guitar",
+    "upright-bass",
+    "vibraphone",
+    "brushes",
+    "rim",
+    "glass-accents"
+  ],
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-13-WF-shop-music-v3/05-shop-lamplight-deal-v3.wav",
+      "bytes": 17280044,
+      "sha256": "66e6b0495cd376882fc22f6629f55dff2f69a6bddccd6d2207b288a101c336a7"
+    },
+    {
+      "path": "docs/evidence/2026-10-13-WF-shop-music-v3/05-shop-lamplight-deal-v3.mp3",
+      "bytes": 1921580,
+      "sha256": "7a29464a1fd7c9bbefb1ac2bfa19510df2ba4e203fa8c7d305ea08c34e67a33e"
+    },
+    {
+      "path": "docs/evidence/2026-10-13-WF-shop-music-v3/05-shop-lamplight-deal-v3.ogg",
+      "bytes": 773257,
+      "sha256": "da97724e9a53a6f8b21b19d17e19349415ef9911ef6f59d7844afa4007d7d91f"
+    }
+  ],
+  "method": "Two continuous FluidSynth cycles; use second cycle. Circular room delays. No fade."
+}

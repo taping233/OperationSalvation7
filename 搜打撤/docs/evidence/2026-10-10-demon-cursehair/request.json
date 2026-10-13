@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "card_id": "cc-demon",
+      "asset": "cards/spell-cc-demon.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a12470-95d7-75e0-9477-03361e04258c/exec-b0773176-aca7-4048-82c9-15218a8df3dd.png",
+      "revision": "xingyue-demon-curse-hair-20261010",
+      "prompt": "Edit the HAIR PAINTING ONLY in image 1 to match the hair painting of the curse series in images 2 and 3.\nREFERENCE ROLES: Image 1 is the edit target; preserve its current half-body composition, face and violet eyes, head angle, expression, crescent ornament location, black priestess clothing, cape, two gloved hands, purple shadow claw and gray background. Images 2 (curse-drain) and 3 (curse-silence) are the SPECIFIC HAIR-PAINTING references. Match their actual paint grammar and hair colors, without copying their pose, face direction, red spell elements or backgrounds.\n\nThe target hair currently has soft rounded ribbon-like locks and a braid that looks smoothly sculpted. Rebuild it in the curse references' opaque, deliberate broad paint planes: cool pale ivory/light muted golden base, broad blue-gray shadow planes and occasional warm stone-gray underside planes. Use a small number of flatter elongated paint strokes with hard handmade turns and irregular broken ends, as in references 2 and 3. Highlights are contiguous pale planes selectively interrupted by the underlying gray paint, not glossy ribbons, smooth rounded gradients or numerous pale scratches. Quiet base-color areas remain large.\nPreserve the current hairstyle silhouette: rounded crown, dense straight fringe, two long straight cheek sidelocks and one low thick side braid at image-left. Paint the crown as a few coherent broad directional planes like reference 3; the fringe groups are substantial with a few selected dark boundary accents like reference 2. Sidelocks have broad quiet pale planes and occasional narrow but purposeful edge turns, not fine strand networks. Paint each braid segment as a large interlocking block with a clear muted gray underside and broad pale top plane, reflecting the braid in reference 3; simplify the taper into a few connected shapes. Keep selective angular handmade brush transitions, but do not fragment it into micro facets or mosaic.\nHair visible color should directly follow the references' pale ivory, muted blue-gray and warm-gray relationships. The target is not bright white plastic hair, yellow/gold hair, silver chrome or uniform gray. Reduce softness and overmodeling while retaining volume through a few broad plane changes. Faces and eyes stay the clearest selective detail; hair remains coarse and quiet. No all-over texture, fine hair strokes, scratch marks, dense chipped highlights, glossy 3D, airbrush or vector-flat fill. Keep all non-hair content close to image 1. No text, watermark, frame or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/spell-cc-demon.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/curse-drain.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/cards/curse-silence.webp"
+      ]
+    }
+  ]
+}

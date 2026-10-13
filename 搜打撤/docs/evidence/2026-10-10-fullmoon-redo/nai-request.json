@@ -1,0 +1,21 @@
+{
+  "card_id": "tt3-nature-form",
+  "model": "nai-diffusion-4-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 430632943,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1girl, solo, standing, upper body, three-quarter view, raised arm, open hands, moon, full moon, calm expression, closed mouth, simple background, gradient background\n\nThe character stands on the right side of a square frame, seen from head to hips in a gentle three-quarter turn toward the left. One large complete circular moon disk floats to her left at upper-chest height, separate from her body and never covering her face. Her farther arm rises with an open palm hovering just above the moon upper rim; her nearer hand turns palm upward immediately beneath the lower rim. The high and low palms gather soft moonlight into the complete disk, with hands naturally proportional to her face. The disk occupies about one third of the frame width and is a quiet cool pale ivory shape, with one faint broad gray plane, no craters, ornament or intense flare. Her face sits in the upper-right third, looking calmly toward the moon, both eyes and cheek silhouette clear. The low braid descends along the quiet right edge, and one broad cape fold sweeps backward, balancing the rounded moon. Her shoulders, bent elbows, torso and waist are connected and readable. The white long dress continues through the bottom crop. The entire background is a simple dark desaturated indigo-to-gray-violet color gradient, darker at upper-left and slightly lighter toward lower-right. Keep the background abstract, colored and quiet, never white. Moonlight gently reflects on the fingertips, pale hair, cheek and white sleeves. Only character, complete moon disk and color backdrop; no curtains, stars, buildings, landscape, particle clouds or extra props.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "girl, young adult priestess, delicate composed face, warm golden eyes, very pale low-saturation golden long hair, dense straight bangs, smooth rounded crown, two long straight cheek sidelocks, one thick long low side braid, white crescent moon hairpin above bangs on viewer-right, white high-collared priestess long dress, restrained gold collar and small four-point star clasp, deep forest-teal short cape with sparse gold edging, dark wrist guards leaving fingers exposed",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, white background, empty white backdrop, black priestess dress, purple cape, purple eyes, bright yellow hair, orange hair, fluffy hair, extra arms, extra hands, many moons, crescent moon disk, halo around head, curtains, stars, particles, landscape, staff, book, border",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\fullmoon-redo-20261010\\fullmoon.png",
+  "installed": false,
+  "design": "星月侧身双掌聚成左侧完整月轮；右上脸/左月/高低双手，深靛蓝到灰紫纯色渐变背景。"
+}

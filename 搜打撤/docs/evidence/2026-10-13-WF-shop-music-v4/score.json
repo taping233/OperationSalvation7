@@ -1,0 +1,2775 @@
+{
+  "title": "灯下交易 V4",
+  "bpm": 112,
+  "bars": 28,
+  "meter": "4/4",
+  "chords": [
+    "Cm6/9",
+    "Cm6/9",
+    "Abmaj9",
+    "G7sus",
+    "Cm6/9",
+    "Abmaj9",
+    "Fm9",
+    "G7sus",
+    "Ebmaj9",
+    "Bb6/9",
+    "Cm6/9",
+    "G7sus",
+    "Abmaj9",
+    "Fm9",
+    "Bb6/9",
+    "G7sus",
+    "Cm6/9",
+    "Abmaj9",
+    "Fm9",
+    "G7sus",
+    "Ebmaj9",
+    "Bb6/9",
+    "Abmaj9",
+    "G7sus",
+    "Cm6/9",
+    "Abmaj9",
+    "Fm9",
+    "G7sus"
+  ],
+  "events": [
+    {
+      "part": "piano-left",
+      "beat": 0.02,
+      "key": 48,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 0.04,
+      "key": 36,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-left",
+      "beat": 0.38,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 0.65,
+      "key": 70,
+      "length": 0.95,
+      "velocity": 62
+    },
+    {
+      "part": "strings",
+      "beat": 0.8,
+      "key": 69,
+      "length": 2.0,
+      "velocity": 34
+    },
+    {
+      "part": "piano-left",
+      "beat": 1.32,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "piano-right",
+      "beat": 1.84,
+      "key": 72,
+      "length": 1.15,
+      "velocity": 60
+    },
+    {
+      "part": "bass",
+      "beat": 2.03,
+      "key": 43,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-left",
+      "beat": 2.33,
+      "key": 57,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 3.13,
+      "key": 70,
+      "length": 0.73,
+      "velocity": 58
+    },
+    {
+      "part": "piano-left",
+      "beat": 3.34,
+      "key": 51,
+      "length": 0.72,
+      "velocity": 41
+    },
+    {
+      "part": "oboe",
+      "beat": 3.36,
+      "key": 58,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "piano-left",
+      "beat": 4.02,
+      "key": 48,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 4.04,
+      "key": 36,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 4.12,
+      "key": 67,
+      "length": 1.12,
+      "velocity": 66
+    },
+    {
+      "part": "piano-left",
+      "beat": 4.38,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "piano-left",
+      "beat": 5.32,
+      "key": 57,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 5.42,
+      "key": 63,
+      "length": 0.82,
+      "velocity": 64
+    },
+    {
+      "part": "strings",
+      "beat": 5.71,
+      "key": 63,
+      "length": 1.68,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 6.03,
+      "key": 43,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-left",
+      "beat": 6.33,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "piano-right",
+      "beat": 6.45,
+      "key": 67,
+      "length": 0.83,
+      "velocity": 62
+    },
+    {
+      "part": "piano-left",
+      "beat": 7.34,
+      "key": 48,
+      "length": 0.72,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 7.36,
+      "key": 68,
+      "length": 0.66,
+      "velocity": 60
+    },
+    {
+      "part": "oboe",
+      "beat": 7.36,
+      "key": 56,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "bass",
+      "beat": 7.44,
+      "key": 31,
+      "length": 0.51,
+      "velocity": 32
+    },
+    {
+      "part": "strings",
+      "beat": 7.46,
+      "key": 71,
+      "length": 0.65,
+      "velocity": 31
+    },
+    {
+      "part": "piano-left",
+      "beat": 8.02,
+      "key": 44,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 8.04,
+      "key": 32,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 8.08,
+      "key": 70,
+      "length": 0.79,
+      "velocity": 68
+    },
+    {
+      "part": "piano-left",
+      "beat": 8.38,
+      "key": 55,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 9.03,
+      "key": 72,
+      "length": 0.82,
+      "velocity": 66
+    },
+    {
+      "part": "piano-left",
+      "beat": 9.32,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "strings",
+      "beat": 9.71,
+      "key": 67,
+      "length": 1.68,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 10.03,
+      "key": 39,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 10.04,
+      "key": 75,
+      "length": 1.02,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 10.33,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 11.34,
+      "key": 72,
+      "length": 0.67,
+      "velocity": 62
+    },
+    {
+      "part": "piano-left",
+      "beat": 11.34,
+      "key": 51,
+      "length": 0.72,
+      "velocity": 37
+    },
+    {
+      "part": "oboe",
+      "beat": 11.36,
+      "key": 60,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "strings",
+      "beat": 11.46,
+      "key": 62,
+      "length": 0.65,
+      "velocity": 31
+    },
+    {
+      "part": "piano-left",
+      "beat": 12.02,
+      "key": 43,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 12.04,
+      "key": 31,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 12.1,
+      "key": 70,
+      "length": 1.08,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 12.38,
+      "key": 50,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "strings",
+      "beat": 12.8,
+      "key": 65,
+      "length": 2.0,
+      "velocity": 34
+    },
+    {
+      "part": "piano-left",
+      "beat": 13.32,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 13.45,
+      "key": 67,
+      "length": 0.71,
+      "velocity": 62
+    },
+    {
+      "part": "bass",
+      "beat": 14.03,
+      "key": 38,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-left",
+      "beat": 14.33,
+      "key": 50,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "piano-right",
+      "beat": 14.35,
+      "key": 65,
+      "length": 0.78,
+      "velocity": 60
+    },
+    {
+      "part": "piano-right",
+      "beat": 15.34,
+      "key": 67,
+      "length": 0.72,
+      "velocity": 58
+    },
+    {
+      "part": "piano-left",
+      "beat": 15.34,
+      "key": 53,
+      "length": 0.72,
+      "velocity": 39
+    },
+    {
+      "part": "oboe",
+      "beat": 15.36,
+      "key": 55,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "bass",
+      "beat": 15.44,
+      "key": 35,
+      "length": 0.51,
+      "velocity": 32
+    },
+    {
+      "part": "bell",
+      "beat": 15.65,
+      "key": 79,
+      "length": 0.4,
+      "velocity": 24
+    },
+    {
+      "part": "piano-left",
+      "beat": 16.02,
+      "key": 48,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 16.04,
+      "key": 36,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "oboe",
+      "beat": 16.12,
+      "key": 67,
+      "length": 0.82,
+      "velocity": 66
+    },
+    {
+      "part": "piano-left",
+      "beat": 16.38,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "strings",
+      "beat": 16.8,
+      "key": 60,
+      "length": 2.0,
+      "velocity": 34
+    },
+    {
+      "part": "oboe",
+      "beat": 17.13,
+      "key": 70,
+      "length": 0.85,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 17.32,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 18.03,
+      "key": 43,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "oboe",
+      "beat": 18.12,
+      "key": 72,
+      "length": 0.98,
+      "velocity": 62
+    },
+    {
+      "part": "piano-left",
+      "beat": 18.33,
+      "key": 57,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "piano-left",
+      "beat": 19.34,
+      "key": 51,
+      "length": 0.72,
+      "velocity": 41
+    },
+    {
+      "part": "oboe",
+      "beat": 19.38,
+      "key": 75,
+      "length": 0.74,
+      "velocity": 60
+    },
+    {
+      "part": "piano-left",
+      "beat": 20.02,
+      "key": 44,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 20.04,
+      "key": 32,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "oboe",
+      "beat": 20.1,
+      "key": 75,
+      "length": 1.01,
+      "velocity": 68
+    },
+    {
+      "part": "piano-left",
+      "beat": 20.38,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "piano-left",
+      "beat": 21.32,
+      "key": 55,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "oboe",
+      "beat": 21.33,
+      "key": 72,
+      "length": 0.74,
+      "velocity": 66
+    },
+    {
+      "part": "strings",
+      "beat": 21.71,
+      "key": 67,
+      "length": 1.68,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 22.03,
+      "key": 39,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "oboe",
+      "beat": 22.24,
+      "key": 70,
+      "length": 0.89,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 22.33,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "piano-left",
+      "beat": 23.34,
+      "key": 48,
+      "length": 0.72,
+      "velocity": 35
+    },
+    {
+      "part": "oboe",
+      "beat": 23.35,
+      "key": 67,
+      "length": 0.68,
+      "velocity": 62
+    },
+    {
+      "part": "bass",
+      "beat": 23.44,
+      "key": 28,
+      "length": 0.51,
+      "velocity": 32
+    },
+    {
+      "part": "strings",
+      "beat": 23.46,
+      "key": 62,
+      "length": 0.65,
+      "velocity": 31
+    },
+    {
+      "part": "piano-left",
+      "beat": 24.02,
+      "key": 41,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 24.04,
+      "key": 29,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "oboe",
+      "beat": 24.1,
+      "key": 68,
+      "length": 0.85,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 24.38,
+      "key": 56,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "oboe",
+      "beat": 25.17,
+      "key": 72,
+      "length": 0.91,
+      "velocity": 62
+    },
+    {
+      "part": "piano-left",
+      "beat": 25.32,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "strings",
+      "beat": 25.71,
+      "key": 60,
+      "length": 1.68,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 26.03,
+      "key": 36,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "oboe",
+      "beat": 26.28,
+      "key": 70,
+      "length": 0.83,
+      "velocity": 60
+    },
+    {
+      "part": "piano-left",
+      "beat": 26.33,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "piano-left",
+      "beat": 27.34,
+      "key": 51,
+      "length": 0.72,
+      "velocity": 37
+    },
+    {
+      "part": "oboe",
+      "beat": 27.35,
+      "key": 68,
+      "length": 0.7,
+      "velocity": 58
+    },
+    {
+      "part": "strings",
+      "beat": 27.46,
+      "key": 65,
+      "length": 0.65,
+      "velocity": 31
+    },
+    {
+      "part": "piano-left",
+      "beat": 28.02,
+      "key": 43,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 28.04,
+      "key": 31,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "oboe",
+      "beat": 28.1,
+      "key": 67,
+      "length": 1.07,
+      "velocity": 66
+    },
+    {
+      "part": "piano-left",
+      "beat": 28.38,
+      "key": 50,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "strings",
+      "beat": 28.8,
+      "key": 60,
+      "length": 2.0,
+      "velocity": 34
+    },
+    {
+      "part": "piano-left",
+      "beat": 29.32,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "oboe",
+      "beat": 29.45,
+      "key": 65,
+      "length": 0.72,
+      "velocity": 64
+    },
+    {
+      "part": "bass",
+      "beat": 30.03,
+      "key": 38,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-left",
+      "beat": 30.33,
+      "key": 50,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "oboe",
+      "beat": 30.35,
+      "key": 62,
+      "length": 0.78,
+      "velocity": 62
+    },
+    {
+      "part": "piano-left",
+      "beat": 31.34,
+      "key": 53,
+      "length": 0.72,
+      "velocity": 39
+    },
+    {
+      "part": "oboe",
+      "beat": 31.35,
+      "key": 67,
+      "length": 0.71,
+      "velocity": 60
+    },
+    {
+      "part": "bass",
+      "beat": 31.44,
+      "key": 38,
+      "length": 0.51,
+      "velocity": 32
+    },
+    {
+      "part": "bell",
+      "beat": 31.65,
+      "key": 79,
+      "length": 0.4,
+      "velocity": 24
+    },
+    {
+      "part": "piano-left",
+      "beat": 32.02,
+      "key": 51,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 32.04,
+      "key": 39,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 32.1,
+      "key": 70,
+      "length": 0.86,
+      "velocity": 68
+    },
+    {
+      "part": "piano-left",
+      "beat": 32.38,
+      "key": 50,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "strings",
+      "beat": 32.8,
+      "key": 65,
+      "length": 2.0,
+      "velocity": 34
+    },
+    {
+      "part": "piano-right",
+      "beat": 33.18,
+      "key": 72,
+      "length": 0.89,
+      "velocity": 66
+    },
+    {
+      "part": "piano-left",
+      "beat": 33.32,
+      "key": 53,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 34.03,
+      "key": 46,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 34.28,
+      "key": 75,
+      "length": 1.1,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 34.33,
+      "key": 55,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "piano-left",
+      "beat": 35.34,
+      "key": 53,
+      "length": 0.72,
+      "velocity": 41
+    },
+    {
+      "part": "oboe",
+      "beat": 35.36,
+      "key": 62,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 35.4,
+      "key": 74,
+      "length": 0.66,
+      "velocity": 62
+    },
+    {
+      "part": "piano-left",
+      "beat": 36.02,
+      "key": 46,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 36.04,
+      "key": 34,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 36.12,
+      "key": 72,
+      "length": 0.82,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 36.38,
+      "key": 53,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "piano-right",
+      "beat": 37.14,
+      "key": 70,
+      "length": 0.88,
+      "velocity": 62
+    },
+    {
+      "part": "piano-left",
+      "beat": 37.32,
+      "key": 55,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "strings",
+      "beat": 37.71,
+      "key": 60,
+      "length": 1.68,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 38.03,
+      "key": 41,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 38.22,
+      "key": 67,
+      "length": 0.92,
+      "velocity": 60
+    },
+    {
+      "part": "piano-left",
+      "beat": 38.33,
+      "key": 53,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "piano-left",
+      "beat": 39.34,
+      "key": 48,
+      "length": 0.72,
+      "velocity": 35
+    },
+    {
+      "part": "oboe",
+      "beat": 39.36,
+      "key": 58,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 39.37,
+      "key": 70,
+      "length": 0.68,
+      "velocity": 58
+    },
+    {
+      "part": "bass",
+      "beat": 39.44,
+      "key": 35,
+      "length": 0.51,
+      "velocity": 32
+    },
+    {
+      "part": "strings",
+      "beat": 39.46,
+      "key": 67,
+      "length": 0.65,
+      "velocity": 31
+    },
+    {
+      "part": "piano-left",
+      "beat": 40.02,
+      "key": 48,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 40.04,
+      "key": 36,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 40.08,
+      "key": 72,
+      "length": 0.85,
+      "velocity": 66
+    },
+    {
+      "part": "piano-left",
+      "beat": 40.38,
+      "key": 57,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 41.08,
+      "key": 75,
+      "length": 0.97,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 41.32,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "strings",
+      "beat": 41.71,
+      "key": 63,
+      "length": 1.68,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 42.03,
+      "key": 43,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 42.28,
+      "key": 72,
+      "length": 0.96,
+      "velocity": 62
+    },
+    {
+      "part": "piano-left",
+      "beat": 42.33,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "piano-left",
+      "beat": 43.34,
+      "key": 51,
+      "length": 0.72,
+      "velocity": 37
+    },
+    {
+      "part": "oboe",
+      "beat": 43.36,
+      "key": 58,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 43.42,
+      "key": 70,
+      "length": 0.62,
+      "velocity": 60
+    },
+    {
+      "part": "strings",
+      "beat": 43.46,
+      "key": 71,
+      "length": 0.65,
+      "velocity": 31
+    },
+    {
+      "part": "piano-left",
+      "beat": 44.02,
+      "key": 43,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 44.04,
+      "key": 31,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 44.08,
+      "key": 67,
+      "length": 1.12,
+      "velocity": 68
+    },
+    {
+      "part": "piano-left",
+      "beat": 44.38,
+      "key": 50,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "strings",
+      "beat": 44.8,
+      "key": 62,
+      "length": 2.0,
+      "velocity": 34
+    },
+    {
+      "part": "piano-left",
+      "beat": 45.32,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 45.47,
+      "key": 65,
+      "length": 0.78,
+      "velocity": 66
+    },
+    {
+      "part": "bass",
+      "beat": 46.03,
+      "key": 38,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-left",
+      "beat": 46.33,
+      "key": 50,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "piano-right",
+      "beat": 46.47,
+      "key": 62,
+      "length": 0.76,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 47.34,
+      "key": 53,
+      "length": 0.72,
+      "velocity": 39
+    },
+    {
+      "part": "oboe",
+      "beat": 47.36,
+      "key": 55,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 47.4,
+      "key": 67,
+      "length": 0.69,
+      "velocity": 62
+    },
+    {
+      "part": "bass",
+      "beat": 47.44,
+      "key": 31,
+      "length": 0.51,
+      "velocity": 32
+    },
+    {
+      "part": "bell",
+      "beat": 47.65,
+      "key": 79,
+      "length": 0.4,
+      "velocity": 24
+    },
+    {
+      "part": "piano-left",
+      "beat": 48.02,
+      "key": 44,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 48.04,
+      "key": 32,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 48.1,
+      "key": 68,
+      "length": 0.85,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 48.38,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "strings",
+      "beat": 48.8,
+      "key": 67,
+      "length": 2.0,
+      "velocity": 34
+    },
+    {
+      "part": "piano-right",
+      "beat": 49.12,
+      "key": 70,
+      "length": 0.82,
+      "velocity": 62
+    },
+    {
+      "part": "piano-left",
+      "beat": 49.32,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 50.03,
+      "key": 39,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 50.12,
+      "key": 72,
+      "length": 0.98,
+      "velocity": 60
+    },
+    {
+      "part": "piano-left",
+      "beat": 50.33,
+      "key": 55,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "piano-left",
+      "beat": 51.34,
+      "key": 51,
+      "length": 0.72,
+      "velocity": 41
+    },
+    {
+      "part": "oboe",
+      "beat": 51.36,
+      "key": 63,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 51.4,
+      "key": 75,
+      "length": 0.66,
+      "velocity": 58
+    },
+    {
+      "part": "piano-left",
+      "beat": 52.02,
+      "key": 41,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 52.04,
+      "key": 29,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 52.12,
+      "key": 72,
+      "length": 0.82,
+      "velocity": 66
+    },
+    {
+      "part": "piano-left",
+      "beat": 52.38,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "piano-right",
+      "beat": 53.12,
+      "key": 68,
+      "length": 0.89,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 53.32,
+      "key": 56,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "strings",
+      "beat": 53.71,
+      "key": 63,
+      "length": 1.68,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 54.03,
+      "key": 36,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 54.21,
+      "key": 65,
+      "length": 0.97,
+      "velocity": 62
+    },
+    {
+      "part": "piano-left",
+      "beat": 54.33,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "piano-left",
+      "beat": 55.34,
+      "key": 48,
+      "length": 0.72,
+      "velocity": 35
+    },
+    {
+      "part": "oboe",
+      "beat": 55.36,
+      "key": 56,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 55.42,
+      "key": 68,
+      "length": 0.66,
+      "velocity": 60
+    },
+    {
+      "part": "bass",
+      "beat": 55.44,
+      "key": 33,
+      "length": 0.51,
+      "velocity": 32
+    },
+    {
+      "part": "strings",
+      "beat": 55.46,
+      "key": 70,
+      "length": 0.65,
+      "velocity": 31
+    },
+    {
+      "part": "piano-left",
+      "beat": 56.02,
+      "key": 46,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 56.04,
+      "key": 34,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 56.12,
+      "key": 70,
+      "length": 0.87,
+      "velocity": 68
+    },
+    {
+      "part": "piano-left",
+      "beat": 56.38,
+      "key": 55,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 57.2,
+      "key": 72,
+      "length": 0.83,
+      "velocity": 66
+    },
+    {
+      "part": "piano-left",
+      "beat": 57.32,
+      "key": 53,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "strings",
+      "beat": 57.71,
+      "key": 67,
+      "length": 1.68,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 58.03,
+      "key": 41,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 58.22,
+      "key": 75,
+      "length": 0.98,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 58.33,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "piano-left",
+      "beat": 59.34,
+      "key": 53,
+      "length": 0.72,
+      "velocity": 37
+    },
+    {
+      "part": "oboe",
+      "beat": 59.36,
+      "key": 60,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 59.39,
+      "key": 72,
+      "length": 0.72,
+      "velocity": 62
+    },
+    {
+      "part": "strings",
+      "beat": 59.46,
+      "key": 62,
+      "length": 0.65,
+      "velocity": 31
+    },
+    {
+      "part": "piano-left",
+      "beat": 60.02,
+      "key": 43,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 60.04,
+      "key": 31,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 60.1,
+      "key": 70,
+      "length": 1.06,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 60.38,
+      "key": 50,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "strings",
+      "beat": 60.8,
+      "key": 65,
+      "length": 2.0,
+      "velocity": 34
+    },
+    {
+      "part": "piano-left",
+      "beat": 61.32,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 61.44,
+      "key": 67,
+      "length": 0.81,
+      "velocity": 62
+    },
+    {
+      "part": "bass",
+      "beat": 62.03,
+      "key": 38,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-left",
+      "beat": 62.33,
+      "key": 50,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "piano-right",
+      "beat": 62.42,
+      "key": 65,
+      "length": 0.83,
+      "velocity": 60
+    },
+    {
+      "part": "piano-left",
+      "beat": 63.34,
+      "key": 53,
+      "length": 0.72,
+      "velocity": 39
+    },
+    {
+      "part": "oboe",
+      "beat": 63.36,
+      "key": 55,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 63.42,
+      "key": 67,
+      "length": 0.67,
+      "velocity": 58
+    },
+    {
+      "part": "bass",
+      "beat": 63.44,
+      "key": 35,
+      "length": 0.51,
+      "velocity": 32
+    },
+    {
+      "part": "bell",
+      "beat": 63.65,
+      "key": 79,
+      "length": 0.4,
+      "velocity": 24
+    },
+    {
+      "part": "piano-left",
+      "beat": 64.02,
+      "key": 48,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 64.04,
+      "key": 36,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "oboe",
+      "beat": 64.12,
+      "key": 67,
+      "length": 0.83,
+      "velocity": 66
+    },
+    {
+      "part": "piano-left",
+      "beat": 64.38,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "strings",
+      "beat": 64.8,
+      "key": 60,
+      "length": 2.0,
+      "velocity": 34
+    },
+    {
+      "part": "oboe",
+      "beat": 65.14,
+      "key": 70,
+      "length": 0.81,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 65.32,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 66.03,
+      "key": 43,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "oboe",
+      "beat": 66.15,
+      "key": 72,
+      "length": 1.01,
+      "velocity": 62
+    },
+    {
+      "part": "piano-left",
+      "beat": 66.33,
+      "key": 57,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "piano-left",
+      "beat": 67.34,
+      "key": 51,
+      "length": 0.72,
+      "velocity": 41
+    },
+    {
+      "part": "oboe",
+      "beat": 67.38,
+      "key": 75,
+      "length": 0.68,
+      "velocity": 60
+    },
+    {
+      "part": "piano-left",
+      "beat": 68.02,
+      "key": 44,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 68.04,
+      "key": 32,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "oboe",
+      "beat": 68.09,
+      "key": 75,
+      "length": 0.93,
+      "velocity": 68
+    },
+    {
+      "part": "piano-left",
+      "beat": 68.38,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "oboe",
+      "beat": 69.21,
+      "key": 72,
+      "length": 0.81,
+      "velocity": 66
+    },
+    {
+      "part": "piano-left",
+      "beat": 69.32,
+      "key": 55,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "strings",
+      "beat": 69.71,
+      "key": 67,
+      "length": 1.68,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 70.03,
+      "key": 39,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "oboe",
+      "beat": 70.22,
+      "key": 70,
+      "length": 0.92,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 70.33,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "piano-left",
+      "beat": 71.34,
+      "key": 48,
+      "length": 0.72,
+      "velocity": 35
+    },
+    {
+      "part": "oboe",
+      "beat": 71.41,
+      "key": 67,
+      "length": 0.66,
+      "velocity": 62
+    },
+    {
+      "part": "bass",
+      "beat": 71.44,
+      "key": 28,
+      "length": 0.51,
+      "velocity": 32
+    },
+    {
+      "part": "strings",
+      "beat": 71.46,
+      "key": 62,
+      "length": 0.65,
+      "velocity": 31
+    },
+    {
+      "part": "piano-left",
+      "beat": 72.02,
+      "key": 41,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 72.04,
+      "key": 29,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "oboe",
+      "beat": 72.12,
+      "key": 68,
+      "length": 0.82,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 72.38,
+      "key": 56,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "oboe",
+      "beat": 73.16,
+      "key": 72,
+      "length": 0.82,
+      "velocity": 62
+    },
+    {
+      "part": "piano-left",
+      "beat": 73.32,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "strings",
+      "beat": 73.71,
+      "key": 60,
+      "length": 1.68,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 74.03,
+      "key": 36,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "oboe",
+      "beat": 74.17,
+      "key": 75,
+      "length": 0.99,
+      "velocity": 60
+    },
+    {
+      "part": "piano-left",
+      "beat": 74.33,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "piano-left",
+      "beat": 75.34,
+      "key": 51,
+      "length": 0.72,
+      "velocity": 37
+    },
+    {
+      "part": "oboe",
+      "beat": 75.39,
+      "key": 72,
+      "length": 0.67,
+      "velocity": 58
+    },
+    {
+      "part": "strings",
+      "beat": 75.46,
+      "key": 65,
+      "length": 0.65,
+      "velocity": 31
+    },
+    {
+      "part": "piano-left",
+      "beat": 76.02,
+      "key": 43,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 76.04,
+      "key": 31,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "oboe",
+      "beat": 76.1,
+      "key": 70,
+      "length": 1.11,
+      "velocity": 66
+    },
+    {
+      "part": "piano-left",
+      "beat": 76.38,
+      "key": 50,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "strings",
+      "beat": 76.8,
+      "key": 60,
+      "length": 2.0,
+      "velocity": 34
+    },
+    {
+      "part": "piano-left",
+      "beat": 77.32,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "oboe",
+      "beat": 77.46,
+      "key": 67,
+      "length": 0.8,
+      "velocity": 64
+    },
+    {
+      "part": "bass",
+      "beat": 78.03,
+      "key": 38,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-left",
+      "beat": 78.33,
+      "key": 50,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "oboe",
+      "beat": 78.45,
+      "key": 65,
+      "length": 0.83,
+      "velocity": 62
+    },
+    {
+      "part": "piano-left",
+      "beat": 79.34,
+      "key": 53,
+      "length": 0.72,
+      "velocity": 39
+    },
+    {
+      "part": "oboe",
+      "beat": 79.41,
+      "key": 67,
+      "length": 0.69,
+      "velocity": 60
+    },
+    {
+      "part": "bass",
+      "beat": 79.44,
+      "key": 38,
+      "length": 0.51,
+      "velocity": 32
+    },
+    {
+      "part": "bell",
+      "beat": 79.65,
+      "key": 82,
+      "length": 0.4,
+      "velocity": 24
+    },
+    {
+      "part": "piano-left",
+      "beat": 80.02,
+      "key": 51,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 80.04,
+      "key": 39,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 80.1,
+      "key": 70,
+      "length": 0.85,
+      "velocity": 68
+    },
+    {
+      "part": "piano-left",
+      "beat": 80.38,
+      "key": 50,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "strings",
+      "beat": 80.8,
+      "key": 65,
+      "length": 2.0,
+      "velocity": 34
+    },
+    {
+      "part": "piano-right",
+      "beat": 81.13,
+      "key": 72,
+      "length": 0.84,
+      "velocity": 66
+    },
+    {
+      "part": "piano-left",
+      "beat": 81.32,
+      "key": 53,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 82.03,
+      "key": 46,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 82.17,
+      "key": 75,
+      "length": 1.02,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 82.33,
+      "key": 55,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "piano-left",
+      "beat": 83.34,
+      "key": 53,
+      "length": 0.72,
+      "velocity": 41
+    },
+    {
+      "part": "oboe",
+      "beat": 83.36,
+      "key": 67,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 83.4,
+      "key": 79,
+      "length": 0.68,
+      "velocity": 62
+    },
+    {
+      "part": "piano-left",
+      "beat": 84.02,
+      "key": 46,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 84.04,
+      "key": 34,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 84.12,
+      "key": 77,
+      "length": 0.85,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 84.38,
+      "key": 53,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "piano-right",
+      "beat": 85.16,
+      "key": 75,
+      "length": 0.78,
+      "velocity": 62
+    },
+    {
+      "part": "piano-left",
+      "beat": 85.32,
+      "key": 55,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "strings",
+      "beat": 85.71,
+      "key": 60,
+      "length": 1.68,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 86.03,
+      "key": 41,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 86.14,
+      "key": 72,
+      "length": 0.95,
+      "velocity": 60
+    },
+    {
+      "part": "piano-left",
+      "beat": 86.33,
+      "key": 53,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "piano-left",
+      "beat": 87.34,
+      "key": 48,
+      "length": 0.72,
+      "velocity": 35
+    },
+    {
+      "part": "oboe",
+      "beat": 87.36,
+      "key": 58,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 87.4,
+      "key": 70,
+      "length": 0.69,
+      "velocity": 58
+    },
+    {
+      "part": "bass",
+      "beat": 87.44,
+      "key": 31,
+      "length": 0.51,
+      "velocity": 32
+    },
+    {
+      "part": "strings",
+      "beat": 87.46,
+      "key": 67,
+      "length": 0.65,
+      "velocity": 31
+    },
+    {
+      "part": "piano-left",
+      "beat": 88.02,
+      "key": 44,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 88.04,
+      "key": 32,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 88.11,
+      "key": 72,
+      "length": 0.84,
+      "velocity": 66
+    },
+    {
+      "part": "piano-left",
+      "beat": 88.38,
+      "key": 55,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 89.13,
+      "key": 75,
+      "length": 0.9,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 89.32,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "strings",
+      "beat": 89.71,
+      "key": 63,
+      "length": 1.68,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 90.03,
+      "key": 39,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 90.24,
+      "key": 72,
+      "length": 0.92,
+      "velocity": 62
+    },
+    {
+      "part": "piano-left",
+      "beat": 90.33,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "piano-left",
+      "beat": 91.34,
+      "key": 51,
+      "length": 0.72,
+      "velocity": 37
+    },
+    {
+      "part": "oboe",
+      "beat": 91.36,
+      "key": 58,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 91.4,
+      "key": 70,
+      "length": 0.67,
+      "velocity": 60
+    },
+    {
+      "part": "strings",
+      "beat": 91.46,
+      "key": 69,
+      "length": 0.65,
+      "velocity": 31
+    },
+    {
+      "part": "piano-left",
+      "beat": 92.02,
+      "key": 43,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 92.04,
+      "key": 31,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 92.1,
+      "key": 67,
+      "length": 1.05,
+      "velocity": 68
+    },
+    {
+      "part": "piano-left",
+      "beat": 92.38,
+      "key": 50,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "strings",
+      "beat": 92.8,
+      "key": 62,
+      "length": 2.0,
+      "velocity": 34
+    },
+    {
+      "part": "piano-left",
+      "beat": 93.32,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 93.43,
+      "key": 65,
+      "length": 0.75,
+      "velocity": 66
+    },
+    {
+      "part": "bass",
+      "beat": 94.03,
+      "key": 38,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-left",
+      "beat": 94.33,
+      "key": 50,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "piano-right",
+      "beat": 94.34,
+      "key": 62,
+      "length": 0.85,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 95.34,
+      "key": 53,
+      "length": 0.72,
+      "velocity": 39
+    },
+    {
+      "part": "oboe",
+      "beat": 95.36,
+      "key": 55,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 95.37,
+      "key": 67,
+      "length": 0.69,
+      "velocity": 62
+    },
+    {
+      "part": "bass",
+      "beat": 95.44,
+      "key": 35,
+      "length": 0.51,
+      "velocity": 32
+    },
+    {
+      "part": "bell",
+      "beat": 95.65,
+      "key": 82,
+      "length": 0.4,
+      "velocity": 24
+    },
+    {
+      "part": "piano-left",
+      "beat": 96.02,
+      "key": 48,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 96.04,
+      "key": 36,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 96.12,
+      "key": 67,
+      "length": 0.84,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 96.38,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "strings",
+      "beat": 96.8,
+      "key": 69,
+      "length": 2.0,
+      "velocity": 34
+    },
+    {
+      "part": "piano-right",
+      "beat": 97.14,
+      "key": 70,
+      "length": 0.85,
+      "velocity": 62
+    },
+    {
+      "part": "piano-left",
+      "beat": 97.32,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 98.03,
+      "key": 43,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 98.17,
+      "key": 72,
+      "length": 1.07,
+      "velocity": 60
+    },
+    {
+      "part": "piano-left",
+      "beat": 98.33,
+      "key": 57,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "piano-left",
+      "beat": 99.34,
+      "key": 51,
+      "length": 0.72,
+      "velocity": 41
+    },
+    {
+      "part": "oboe",
+      "beat": 99.36,
+      "key": 63,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 99.4,
+      "key": 75,
+      "length": 0.69,
+      "velocity": 58
+    },
+    {
+      "part": "piano-left",
+      "beat": 100.02,
+      "key": 44,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 100.04,
+      "key": 32,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 100.12,
+      "key": 75,
+      "length": 0.9,
+      "velocity": 66
+    },
+    {
+      "part": "piano-left",
+      "beat": 100.38,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "piano-right",
+      "beat": 101.21,
+      "key": 72,
+      "length": 0.78,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 101.32,
+      "key": 55,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "strings",
+      "beat": 101.71,
+      "key": 63,
+      "length": 1.68,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 102.03,
+      "key": 39,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 102.18,
+      "key": 70,
+      "length": 0.94,
+      "velocity": 62
+    },
+    {
+      "part": "piano-left",
+      "beat": 102.33,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "piano-left",
+      "beat": 103.34,
+      "key": 48,
+      "length": 0.72,
+      "velocity": 35
+    },
+    {
+      "part": "oboe",
+      "beat": 103.36,
+      "key": 56,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 103.39,
+      "key": 68,
+      "length": 0.69,
+      "velocity": 60
+    },
+    {
+      "part": "bass",
+      "beat": 103.44,
+      "key": 28,
+      "length": 0.51,
+      "velocity": 32
+    },
+    {
+      "part": "strings",
+      "beat": 103.46,
+      "key": 69,
+      "length": 0.65,
+      "velocity": 31
+    },
+    {
+      "part": "piano-left",
+      "beat": 104.02,
+      "key": 41,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 104.04,
+      "key": 29,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 104.12,
+      "key": 68,
+      "length": 0.86,
+      "velocity": 68
+    },
+    {
+      "part": "piano-left",
+      "beat": 104.38,
+      "key": 56,
+      "length": 0.88,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 105.17,
+      "key": 72,
+      "length": 0.81,
+      "velocity": 66
+    },
+    {
+      "part": "piano-left",
+      "beat": 105.32,
+      "key": 51,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "strings",
+      "beat": 105.71,
+      "key": 68,
+      "length": 1.68,
+      "velocity": 37
+    },
+    {
+      "part": "bass",
+      "beat": 106.03,
+      "key": 36,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-right",
+      "beat": 106.19,
+      "key": 70,
+      "length": 0.98,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 106.33,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "piano-left",
+      "beat": 107.34,
+      "key": 51,
+      "length": 0.72,
+      "velocity": 37
+    },
+    {
+      "part": "oboe",
+      "beat": 107.36,
+      "key": 53,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 107.43,
+      "key": 65,
+      "length": 0.66,
+      "velocity": 62
+    },
+    {
+      "part": "strings",
+      "beat": 107.46,
+      "key": 62,
+      "length": 0.65,
+      "velocity": 31
+    },
+    {
+      "part": "piano-left",
+      "beat": 108.02,
+      "key": 43,
+      "length": 1.66,
+      "velocity": 43
+    },
+    {
+      "part": "bass",
+      "beat": 108.04,
+      "key": 31,
+      "length": 1.7,
+      "velocity": 47
+    },
+    {
+      "part": "piano-right",
+      "beat": 108.11,
+      "key": 67,
+      "length": 1.07,
+      "velocity": 64
+    },
+    {
+      "part": "piano-left",
+      "beat": 108.38,
+      "key": 50,
+      "length": 0.88,
+      "velocity": 41
+    },
+    {
+      "part": "strings",
+      "beat": 108.8,
+      "key": 65,
+      "length": 2.0,
+      "velocity": 34
+    },
+    {
+      "part": "piano-left",
+      "beat": 109.32,
+      "key": 48,
+      "length": 0.88,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 109.43,
+      "key": 65,
+      "length": 0.8,
+      "velocity": 62
+    },
+    {
+      "part": "bass",
+      "beat": 110.03,
+      "key": 38,
+      "length": 1.45,
+      "velocity": 39
+    },
+    {
+      "part": "piano-left",
+      "beat": 110.33,
+      "key": 50,
+      "length": 0.88,
+      "velocity": 37
+    },
+    {
+      "part": "piano-right",
+      "beat": 110.42,
+      "key": 62,
+      "length": 0.81,
+      "velocity": 60
+    },
+    {
+      "part": "piano-left",
+      "beat": 111.34,
+      "key": 53,
+      "length": 0.72,
+      "velocity": 39
+    },
+    {
+      "part": "oboe",
+      "beat": 111.36,
+      "key": 55,
+      "length": 0.66,
+      "velocity": 35
+    },
+    {
+      "part": "piano-right",
+      "beat": 111.4,
+      "key": 67,
+      "length": 0.63,
+      "velocity": 58
+    },
+    {
+      "part": "bass",
+      "beat": 111.44,
+      "key": 35,
+      "length": 0.51,
+      "velocity": 32
+    },
+    {
+      "part": "bell",
+      "beat": 111.65,
+      "key": 82,
+      "length": 0.4,
+      "velocity": 24
+    },
+    {
+      "part": "piano-right",
+      "beat": 111.82,
+      "key": 67,
+      "length": 0.62,
+      "velocity": 64
+    }
+  ]
+}

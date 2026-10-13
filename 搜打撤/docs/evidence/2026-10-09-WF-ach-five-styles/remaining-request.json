@@ -1,0 +1,155 @@
+{
+  "tool": "built-in image_gen",
+  "format": "one achievement, five confirmed styles per sheet",
+  "excludedCompleted": [
+    "firstExtract",
+    "kill10",
+    "collectLegend"
+  ],
+  "references": [
+    "C:\\Users\\太平\\.codex\\generated_images\\01a1214b-551c-7a01-bdb3-b0649e4124ff\\exec-10ed71fb-dc02-4505-95f2-c97c373705c1.png",
+    "C:\\Users\\太平\\.codex\\generated_images\\01a1214b-551c-7a01-bdb3-b0649e4124ff\\exec-abcf3434-bbe7-4d6e-a346-a07f2a0fc595.png",
+    "C:\\Users\\太平\\.codex\\generated_images\\01a1214b-551c-7a01-bdb3-b0649e4124ff\\exec-f2d31795-edac-4f00-9835-a7eef0152d50.png"
+  ],
+  "commonPrompt": "Create ONE five-style comparison sheet for ONE new game achievement emblem. The three supplied sheets are AUTHORITATIVE confirmed drawing-style references; match their five corresponding panels exactly in abstraction, stroke scale, detail density and edge quality. Do not copy their wolf, doorway or book subjects. Landscape, FIVE equal panels in ONE horizontal row, plain pale warm-gray background, small numbers 01–05 below their matching panels, no other text. Only the thematic subject, no medal frame, ribbon, mounting plate, wreath or pedestal. Show the SAME integrated abstract subject in each of the FIVE distinct styles: 01 coarse matte anime card-art paint, large connected opaque ivory and blue-gray masses, very few wide blunt directional strokes, handmade edges, grouped hard shadows, quiet areas, a small restrained identity-color accent. NO generic glossy fantasy inventory-item rendering. 02 radically simplified three to five flowing charcoal/ivory/cobalt brush gestures, generous negative space, strongly abstract, only the essential identity shapes. 03 black sumi-e calligraphy, two to five broad gestural ink shapes, generous negative space, expressive dry-brush endings, tiny vermilion accent, no gray shaded realistic object. 04 five to seven broad overlapping torn-paper shapes in coral/ochre/cream/navy and restrained identity accent, matte flat layering, no painted shading. 05 clean solid midnight-blue negative-space sign with generous cutouts, ingenious minimal curved and angular shape balance, one tiny blue accent, no texture. Keep complete emblems INSIDE their cells with clear generous margin and consistent visual size. No glow, particles, microdetail, realistic materials, tiny fur, fine lines, smooth 3D or environmental scenes. Intended as theme-only achievement art; give the subject intentional rhythm and one unified visual idea. ",
+  "items": [
+    {
+      "id": "extract3",
+      "name": "老练搜刮者",
+      "condition": "累计撤离成功3次",
+      "concept": "Three overlapping salvage bags unified into ONE forward-sweeping abstract silhouette; their tied mouths create three deliberate upward notches. One short return/escape sweep beneath them. Do not draw a detailed backpack."
+    },
+    {
+      "id": "firstBoss",
+      "name": "破壁者",
+      "condition": "首次击败污染核心的变异首脑",
+      "concept": "One upright broken-wall silhouette, its central jagged negative-space crack forms a decisive blade-like opening. Two large fragments peel away as ONE strong gesture. No literal bricks, skull decorations or full boss scene."
+    },
+    {
+      "id": "allBoss",
+      "name": "净化征服者",
+      "condition": "击败全部3只变异首脑",
+      "concept": "Three broad crystalline shapes melt upward into ONE cleansing flame-shaped silhouette. Strong grouped shape, three clear cores, negative spaces between them. No glow, particles or detailed gem facets."
+    },
+    {
+      "id": "rich30",
+      "name": "小有积蓄",
+      "condition": "单局撤离携带至少30币",
+      "concept": "Three broad stacked coin ellipses curling into ONE compact growing mound, one simple coin edge makes the focal shape. No numerals, currency signs or ornate engraving. Different from the single rare collector coin."
+    },
+    {
+      "id": "stash20",
+      "name": "仓廪充实",
+      "condition": "累计运回20张卡牌入库",
+      "concept": "Three broad card-like leaves sliding into a compact open archive drawer, their overlapping edges form a full fan. Drawer and cards read as ONE integrated abstract storage silhouette. No tiny compartments."
+    },
+    {
+      "id": "bagMax",
+      "name": "能工巧匠",
+      "condition": "背包扩建满级30格",
+      "concept": "A bold expanding pack silhouette whose outer fold turns into a curved wrench-shaped strap. One deliberate open notch suggests the pack mouth; one strong tool gesture expresses craftsmanship. No stitching, buckles, small pockets."
+    },
+    {
+      "id": "safeMax",
+      "name": "最忠实的伙伴",
+      "condition": "宠物安全格升满6格",
+      "concept": "One simple animal paw cupped inside two curved protective hands/shelter strokes. Paw and shelter form ONE close embracing silhouette with meaningful open negative space. Warm trust, not a house, shield or heart-shaped outer medal."
+    },
+    {
+      "id": "class3",
+      "name": "崭露头角",
+      "condition": "任意职业熟练度达到3级",
+      "concept": "A three-point rising sprout/star breaking through ONE broad horizontal threshold stroke. The upward growth and three distinct points form one energetic compact emblem. No ranks, numerals or badge frame."
+    },
+    {
+      "id": "collectGold",
+      "name": "珍品收藏家",
+      "condition": "收藏桌游珍宝金币",
+      "concept": "ONE cherished round coin implied by two broad broken curved shapes, its central negative-space four-point glint forms the focal treasure mark. Minimal asymmetric design, no coin stacks, text or decorative border."
+    },
+    {
+      "id": "collect5",
+      "name": "博物学家",
+      "condition": "收藏5张不同卡牌",
+      "concept": "An open field album whose two broad leaves transform into an abstract butterfly silhouette. Five deliberate separated wing/page shapes express diverse collections. ONE integrated object, no tiny insects, text or page writing."
+    },
+    {
+      "id": "petHatch1",
+      "name": "驯养新手",
+      "condition": "首次孵化宠物",
+      "concept": "ONE cracked eggshell split into two large curved pieces, a small paw-shaped negative-space opening appearing between them. First emergence expressed as one compact unfolding gesture. No detailed baby animal."
+    },
+    {
+      "id": "petHatch3",
+      "name": "孵蛋专家",
+      "condition": "累计孵化3只宠物",
+      "concept": "THREE simple egg silhouettes leaning into a shallow curved nest stroke. The outer egg shapes and nest make one tightly balanced abstract cluster. No straw strands, spots or extra eggs."
+    },
+    {
+      "id": "petMax",
+      "name": "心有灵犀",
+      "condition": "任意宠物升到满级Lv5",
+      "concept": "ONE animal paw whose upper toe flows into a small rising star-like opening, two matching curved gestures connect paw and human fingertip. Abstract shared understanding, no heart/frame or full character."
+    },
+    {
+      "id": "petAll",
+      "name": "宠物满堂",
+      "condition": "集齐全部6只宠物",
+      "concept": "A compact cluster of SIX distinct simplified pet-face silhouettes, recognisable by broad different ear shapes only, alternating open negative spaces. Exactly six, at most one eye mark per head, no tiny fur, no scenery."
+    },
+    {
+      "id": "unlimitedEnergy",
+      "name": "无限能源",
+      "condition": "一回合打出至少10张招式",
+      "concept": "ONE bold angular lightning stroke loops back into itself as an unfinished infinity gesture, with a clear open center. The lightning and flowing loop are one integrated sign. No glowing orb or electricity particles."
+    },
+    {
+      "id": "weaponMaster",
+      "name": "武器大师",
+      "condition": "一场战斗穿戴至少5件装备",
+      "concept": "FIVE simplified equipment forms (sword blade, axe edge, bow arc, shield corner, helmet crest) cleverly interlock as ONE compact fan-shaped arsenal. Only five large shapes, no engraving, no circular mounting plate."
+    },
+    {
+      "id": "runeFan",
+      "name": "符文爱好者",
+      "condition": "仓库拥有5块不同属性符文",
+      "concept": "FIVE large irregular rune-stone shapes arranged as ONE loose spiralling cluster. Each stone has just one broad distinctive negative-space mark. Exactly five readable shapes, no glowing magic circle or tiny inscriptions."
+    },
+    {
+      "id": "savior",
+      "name": "拯救者",
+      "condition": "击败2位研究所最终BOSS",
+      "concept": "TWO broken lock-like silhouettes open apart, their inner empty space forms ONE upward rescuing hand/arrow. A single decisive lifting gesture joins them. No hospital cross, buildings or characters."
+    },
+    {
+      "id": "beautifulVase",
+      "name": "好美的花瓶！",
+      "condition": "仓库拥有双属性彩虹符文",
+      "concept": "An elegant asymmetric vase silhouette and ONE broad dual-color rune shape share an open central cutout. The vase lip unfolds into the rune's top, one continuous abstract construction. No flowers, rainbow sparkles or ornate ceramic patterns."
+    },
+    {
+      "id": "excuseMe",
+      "name": "借过",
+      "condition": "一回合击杀元素领主复活体",
+      "concept": "ONE sharp boot-like forward dash cuts cleanly through a broken elemental loop. Strong sideways motion and open sliced negative space. Boot and motion form a simple single sign, no detailed shoe, elemental particles or full leg."
+    },
+    {
+      "id": "labScore1",
+      "name": "实验数据·铜",
+      "condition": "研究所累计结算分数500",
+      "concept": "ONE broad triangular laboratory flask, one circular negative-space bubble within it, a short diagonal rising base stroke. Bronze/ochre focal accent in color styles, black/red for ink. No realistic glass, ticks or lettering."
+    },
+    {
+      "id": "labScore2",
+      "name": "实验数据·银",
+      "condition": "研究所累计结算分数1500",
+      "concept": "TWO intertwined broad curved strokes form a simple DNA double helix with just THREE substantial bridges, open center. Silver/ivory focal planes in color styles. Abstract clear scientific rhythm, no tiny ladder bars."
+    },
+    {
+      "id": "labScore3",
+      "name": "实验数据·金",
+      "condition": "研究所累计结算分数4000",
+      "concept": "ONE tall broad crystal/core embraced by THREE asymmetric orbital strokes that share generous negative space. Gold/ochre focal accent in color styles, black/red for ink. A confident advanced-research symbol, no sparkles or glowing atom ball."
+    }
+  ]
+}

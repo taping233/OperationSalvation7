@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-blooddrinker",
+      "asset": "cards/equip-tt3-blooddrinker.webp",
+      "prompt": "Style-transfer. Redraw FIRST image 饮血剑 preserving exact original LANDSCAPE 896:679 composition, close frontal side view and sword proportions. A SINGLE long CURVED blade extends from cropped UPPER LEFT tip down-right towards dark guard at center-right and wrapped grip cropped at far right. Upper blade dark maroon/black, broad lower cutting edge brilliant crimson-magenta, several viscous red drips hanging below blade and a few detached droplets, one especially long drip left of center. Preserve original angular dark teal guard and curved knuckle loop under black grip. Pale cream flat backdrop and same negative space. Blade/guard use broad matte opaque colored planes, red drips coherent economical shapes, simplify engraving. No hands, character, extra sword or blood splatter outside original arrangement. Images 2–4 are STYLE ONLY references for broad opaque brushwork, do not copy characters, clothing, poses or props. Rough hand-painted anime color study, large connected opaque color masses, limited broad directional swipes and blunt dabs, decisive handmade edges and grouped hard shadows, expressive selective overlaps amid quiet regions. Objects in major broad planes with sparse structural marks, economical opaque highlights. Matte muted colors with concentrated red focal accents. No glossy 3D, photoreal surfaces, smooth airbrush, tiny facet mosaics, dense engravings, all-over grain or texture filters. No text, frame, watermark or UI.",
+      "revision": "tt3-blooddrinker-original-rough-20261010",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt3-blooddrinker.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-0a0e2360-5cd1-42d6-b698-9c34b226aec1.png"
+    },
+    {
+      "card_id": "tt2-treasuremap",
+      "asset": "cards/equip-tt2-treasuremap.webp",
+      "prompt": "Style-transfer. Redraw FIRST image 寻宝图 preserving exact original SQUARE composition, three-quarter overhead view, crop and placements. One aged parchment SCROLL lies diagonally from lower LEFT to upper RIGHT, rolled cylinder at each short end, ragged corners and a simple bordered map inside. Preserve prominent RED wax seal in center slightly above middle, same seal size and location. Flat warm muted peach-ochre backdrop. Parchment broad tan/cream/ochre planes with a few wide strokes explaining curls and creases. Map should remain readable as sparse abstract coast shapes, paths and tiny treasure icons with NO writing; simplify dense fine linework to essential large map marks. Wax seal a few broad opaque red planes and minimal stamped relief. No hand, compass or added props. Images 2–4 are STYLE ONLY references for broad opaque brushwork, do not copy characters, clothing, poses or props. Rough hand-painted anime color study, large connected opaque color masses, limited broad directional swipes and blunt dabs, decisive handmade edges and grouped hard shadows, expressive selective overlaps amid quiet regions. Objects in major broad planes with sparse structural marks, economical opaque highlights. Matte muted colors with concentrated red focal accents. No glossy 3D, photoreal surfaces, smooth airbrush, tiny facet mosaics, dense engravings, all-over grain or texture filters. No text, frame, watermark or UI.",
+      "revision": "tt2-treasuremap-original-rough-20261010",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt2-treasuremap.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a123c5-d366-7b12-88a4-639eb109e025/exec-1bc18610-3f58-43b1-9f8a-06ba804c2295.png"
+    }
+  ]
+}

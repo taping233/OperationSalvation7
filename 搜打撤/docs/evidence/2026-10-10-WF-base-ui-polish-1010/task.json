@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-base-ui-polish-1010",
+  "date": "2026-10-10",
+  "owner": "Friday（Codex 基地二游迭代）",
+  "goal": "继续依据真实二游参考收拢基地对象浏览、详情反馈、类型分类和返回动画连续性；实施完成待老板验收",
+  "paths": [
+    "game/src/hub/hub.personnel.js",
+    "game/src/hub/hub.warehouse.js",
+    "game/src/hub/hub.presentation.js",
+    "game/src/hub/game.hub.depart.js",
+    "game/src/hub/departure.view-updates.js",
+    "game/css/base-camp-rework.css",
+    "docs/evidence/2026-10-10-WF-base-ui-polish-1010"
+  ],
+  "doneWhen": [
+    "类型标签/费用/键盘浏览与详情反馈接入，返回和连续切换改为明确的方向/当前可见起点",
+    "不改变玩法数值、存档及资源操作，按老板约定不测试并记录未验收状态"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "本轮类型/费用/键盘/阅读位置与计数反馈已接入，返回方向、当前可见起点和换图层更新完成；此项只记录实施，不是实际验收",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "六来源交付指纹及原字节基线、参考依据和未验收项已保存",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "按老板约定未运行测试/lint/类型/浏览器/多尺寸/build；实际布局、图片载入、连续切换、减少动态、焦点/滚动恢复、分类状态及性能待老板验收；未提交"
+  ],
+  "updatedAt": "2026-10-10T12:39:51.654Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

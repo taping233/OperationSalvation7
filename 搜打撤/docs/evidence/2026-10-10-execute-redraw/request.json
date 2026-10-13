@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "card_id": "tt3-execute",
+      "asset": "cards/martial-tt3-execute.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a125cc-1257-7b52-b519-742cc71dafda/exec-851137ad-54c4-4fe7-8426-3743a43ac05a.png",
+      "revision": "execute-original-rough-20261010",
+      "prompt": "Use case: style-transfer. Redraw image 1, the Execution card, keeping its EXACT square composition and original abstract subject. Image 2 is DRAWING STYLE reference only, do not copy its character, weapon, costume or pose. Preserve the near-black blue charcoal empty background, a thin red-white vertical slash precisely down the center crossing the full height, and a thin horizontal red-white slash through the exact center spanning the full width. At their crossing preserve the concentrated brilliant white explosive slash-burst, asymmetric long red-white pointed streaks especially extending upper-right and lower-left. Keep the burst near its original size with generous dark negative space around it. Consolidate the many little twigs and star-shaped sparks into a few strong intentional blade-like painted slashes, reduce decorative noise. Rough hand-painted anime color study: large connected opaque color masses, wide directional swipes and blunt dabs, handmade broken edges, selective unfinished brush coverage, hard-edged light and dark grouping, low detail density. White at the impact, concentrated crimson edges, a few muted red dark planes. Quiet matte background. Avoid glossy 3D, soft airbrush glow, all-over texture filters, tiny facet mosaics or dense scratches. No characters, objects, scenery, text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt3-execute.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+- main:
+  - text: 金币 攻击 ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - button "返回收藏室":
+    - heading "基地" [level=2]
+    - generic: 档案 / 02
+    - generic "基地物资":
+      - generic "木材 0":
+        - generic: "0"
+        - generic: 木材
+        - text: 木材
+      - generic "口粮 0":
+        - generic: "0"
+        - generic: 口粮
+        - text: 口粮
+      - generic "钥匙 0":
+        - generic: "0"
+        - generic: 钥匙
+        - text: 钥匙
+      - generic "储备币 2":
+        - generic: "2"
+        - generic: 储备币
+        - text: 储备币
+    - main:
+      - heading "收藏室" [level=2]
+      - generic: 卡背
+      - navigation "收藏室目录":
+        - button "01 已收藏":
+          - generic: "01"
+          - generic: 已收藏
+          - generic: ›
+        - button "02 奖励":
+          - generic: "02"
+          - generic: 奖励
+          - generic: ›
+        - button "03 成就目标":
+          - generic: "03"
+          - generic: 成就目标
+          - generic: ›
+        - button "04 收藏里程碑":
+          - generic: "04"
+          - generic: 收藏里程碑
+          - generic: ›
+        - button "05 卡背" [active] [pressed]:
+          - generic: "05"
+          - generic: 卡背
+          - generic: ›
+        - button "06 故事":
+          - generic: "06"
+          - generic: 故事
+          - generic: ›
+      - main:
+        - button "预览行囊粗布" [pressed]:
+          - generic: 行囊粗布
+          - generic: 使用中
+        - button "预览猎手皮纸":
+          - generic: 猎手皮纸
+          - generic: 未解锁
+        - button "预览富商锦缎":
+          - generic: 富商锦缎
+          - generic: 未解锁
+        - button "预览仓廪木纹":
+          - generic: 仓廪木纹
+          - generic: 未解锁
+        - button "预览弑神黑曜":
+          - generic: 弑神黑曜
+          - generic: 未解锁
+        - button "预览核心星轨":
+          - generic: 核心星轨
+          - generic: 未解锁
+        - button "预览忠犬爪印":
+          - generic: 忠犬爪印
+          - generic: 未解锁
+        - complementary:
+          - generic: 外观预览 · 使用中
+          - heading "行囊粗布" [level=3]
+          - paragraph: 默认卡背
+          - paragraph: 背包翻面与牌库堆正在使用此卡背。
+          - button "使用中" [disabled]
+    - navigation "基地房间":
+      - button "基地":
+        - generic: 基地
+      - button "配置":
+        - generic: 配置
+      - button "后勤":
+        - generic: 后勤
+      - button "交易所":
+        - generic: 交易所
+      - button "收藏室 当前房间 4项奖励可领取" [pressed]:
+        - generic: 收藏室
+        - generic: 当前房间
+        - emphasis: "4"
+      - button "建设":
+        - generic: 建设
+      - button "庭院":
+        - generic: 庭院

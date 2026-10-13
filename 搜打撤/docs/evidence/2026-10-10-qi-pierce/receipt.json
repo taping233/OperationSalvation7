@@ -1,0 +1,156 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-qi-wave",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-bbc75da0-5269-413c-9232-21f8dee112e0.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-qi-pierce/cards-martial-tt3-qi-wave-source.png",
+        "bytes": 1728349,
+        "sha256": "a6a8c99f6713eb60327ff063720478fdf48a5e8138e684b8e16b9a25c9ba5581"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-qi-pierce/cards-martial-tt3-qi-wave-full-before.webp",
+          "bytes": 80940,
+          "sha256": "8b6fee7a7a334b0e4201291713587f550ea4ebafb2b9e0f0d67a1df8b694dc0c"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-qi-pierce/cards-martial-tt3-qi-wave-thumb-before.webp",
+          "bytes": 13378,
+          "sha256": "72c7e9a1c8e2fa9272ae89de1c10aac36f7ce6a96b11b16fd2853ef1d0ebc550"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-qi-wave.webp",
+          "bytes": 78764,
+          "sha256": "35e0cabdddffdfd3d4dee82914c036e6defb387b51e64710305289b175f26ce2",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-qi-wave.webp",
+          "bytes": 12058,
+          "sha256": "a6b1c67ee2214b3154738d1847f392829822f23a673fc3a37ea1c1a33030524c",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "qi-wave-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt3-qi-wave.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 78764,
+            "sha256": "35e0cabdddffdfd3d4dee82914c036e6defb387b51e64710305289b175f26ce2",
+            "source": "docs/evidence/2026-10-10-qi-pierce/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt3-qi-wave.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 13378,
+            "sha256": "72c7e9a1c8e2fa9272ae89de1c10aac36f7ce6a96b11b16fd2853ef1d0ebc550",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt3-qi-wave.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 12058,
+            "sha256": "a6b1c67ee2214b3154738d1847f392829822f23a673fc3a37ea1c1a33030524c",
+            "source": "docs/evidence/2026-10-10-qi-pierce/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt2-piercearrow",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-c86b0551-e523-4bb2-8252-0d4c992d17ed.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-qi-pierce/cards-martial-tt2-piercearrow-source.png",
+        "bytes": 1779543,
+        "sha256": "84998454afe6e0bc20a07e3733b45c6361a046f48317a4fd0c4258135b0de03d"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-qi-pierce/cards-martial-tt2-piercearrow-full-before.webp",
+          "bytes": 65876,
+          "sha256": "3df8ff9d3561e73c7bfba0e43cd5a3cb8a49e9dcfcbad33b4728e32d9d922f5e"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-qi-pierce/cards-martial-tt2-piercearrow-thumb-before.webp",
+          "bytes": 13488,
+          "sha256": "6abcf4ec3967d98a374085f8f26ea17efbaa9cfd0ad9d0606f3c618f14af1885"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt2-piercearrow.webp",
+          "bytes": 88184,
+          "sha256": "6b30d5f55162c3df7b19663314751b838bebda4cd4c8608f358917d444a03d01",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt2-piercearrow.webp",
+          "bytes": 14352,
+          "sha256": "bbcba6c6dd7499f6b944ccdd301b8cfcbe7e446b5bbc7d0abc1923df3db478ef",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "piercearrow-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt2-piercearrow.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 88184,
+            "sha256": "6b30d5f55162c3df7b19663314751b838bebda4cd4c8608f358917d444a03d01",
+            "source": "docs/evidence/2026-10-10-qi-pierce/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt2-piercearrow.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 13488,
+            "sha256": "6abcf4ec3967d98a374085f8f26ea17efbaa9cfd0ad9d0606f3c618f14af1885",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt2-piercearrow.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 14352,
+            "sha256": "bbcba6c6dd7499f6b944ccdd301b8cfcbe7e446b5bbc7d0abc1923df3db478ef",
+            "source": "docs/evidence/2026-10-10-qi-pierce/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 894,
+  "manifest_count_after": 896
+}

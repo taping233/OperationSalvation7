@@ -1,0 +1,89 @@
+{
+  "workflow": "Built-in ImageGen directly, using user-approved E as the style/frame reference",
+  "approval": "approval.json",
+  "upstream_nai_failure": "../2026-10-12-cardbacks-redraw/nai-receipt.json",
+  "items": [
+    {
+      "id": "classic",
+      "name": "行囊粗布",
+      "concept": "远行之门与罗盘绳路",
+      "asset": "card-backs/classic.webp",
+      "imagegen_prompt": "Create ONE original fantasy collectible GAME CARD BACK, portrait 2:3, front-on and full-bleed. The supplied image is the USER-APPROVED STYLE AND FRAME reference for this complete seven-card set. Match its cool restrained 2D illustrated finish, layered matte slate surfaces, selective material detail, precise tapered drawing, antique gold edge highlights, muted red/teal accent hierarchy and premium dark fantasy mood. Match the enclosing frame's visual weight: substantial angular charcoal corner plates, small gold diamonds, continuous metallic side/top/bottom bands and a clear inset border. Keep ALL FOUR sides and FOUR CORNERS complete and clearly visible. The new card has its OWN central theme below; use the reference's finish and frame grammar, not its koi, coin-hole or brocade objects. Maintain a strong readable central silhouette, quieter decorative backdrop and ample inset space around the focal motif. This is a 2D illustrated asset, not a photo or 3D render. No text, letters, numbers, logos, UI, characters, tabletop, product mockup or outside margins. Theme: TRAVELLER'S CANVAS. Large folded ochre canvas panels open around a dark diamond-shaped portal in the center, like a travel charm made from an old pack. A small but crisp turquoise four-point compass-star gleams inside the opening. A thick muted-teal rope loops behind the portal and winds through the lower folds like a road. A dark vertical reinforcing strip echoes the reference's strong center axis. Give the canvas a believable restrained illustrated weave and a few substantial stitched seams, with subtle worn fabric planes rather than busy brush flakes. Slate/umber backdrop, muted honey canvas and concentrated turquoise. Sparse map-like route arcs on the quiet side panels; no writing. Use the same charcoal metallic enclosing frame, with muted brass corners and tiny rope-seam accents.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-gacha-approval-20261012\\E-source.png"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-befff8fd-78ff-41ee-858d-afc059a2637e.png",
+      "generation_method": "builtin-direct"
+    },
+    {
+      "id": "wolf",
+      "name": "猎手皮纸",
+      "concept": "鹿角弓与贯月赤箭",
+      "asset": "card-backs/wolf.webp",
+      "imagegen_prompt": "Create ONE original fantasy collectible GAME CARD BACK, portrait 2:3, front-on and full-bleed. The supplied image is the USER-APPROVED STYLE AND FRAME reference for this complete seven-card set. Match its cool restrained 2D illustrated finish, layered matte slate surfaces, selective material detail, precise tapered drawing, antique gold edge highlights, muted red/teal accent hierarchy and premium dark fantasy mood. Match the enclosing frame's visual weight: substantial angular charcoal corner plates, small gold diamonds, continuous metallic side/top/bottom bands and a clear inset border. Keep ALL FOUR sides and FOUR CORNERS complete and clearly visible. The new card has its OWN central theme below; use the reference's finish and frame grammar, not its koi, coin-hole or brocade objects. Maintain a strong readable central silhouette, quieter decorative backdrop and ample inset space around the focal motif. This is a 2D illustrated asset, not a photo or 3D render. No text, letters, numbers, logos, UI, characters, tabletop, product mockup or outside margins. Theme: HUNTER'S PARCHMENT. A broad ivory crescent moon sits between two elegantly branching antlers that form a hunting bow. One crimson arrow bisects the moon on a strong vertical axis. Torn parchment forms on either side create an eye-shaped hunter's negative space. The antlers are substantial illustrated bone/wood structures with restrained selective material shading, not twig networks. Moon and red arrow are the clearest focal shapes. Desaturated parchment, smoky steel-blue and burnt umber; small red accents echo the arrow. Behind the emblem faint hunting-track diagrams and folded leather layers remain quiet. Same charcoal-and-brass angular metallic frame, four bone-tipped corner insets, complete perimeter. No animal portrait, floating wolf logo or people.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-gacha-approval-20261012\\E-source.png"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-f8fd3478-d7ad-40e2-8126-1089f7454bcb.png",
+      "generation_method": "builtin-direct"
+    },
+    {
+      "id": "coin",
+      "name": "富商锦缎",
+      "concept": "锦鲤金库封印",
+      "asset": "card-backs/coin.webp",
+      "imagegen_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-gacha-approval-20261012\\E-source.png",
+      "approved_candidate": "E",
+      "upstream_prompt": "../2026-10-12-cardbacks-redraw/gacha-approval-request.json"
+    },
+    {
+      "id": "vault",
+      "name": "仓廪木纹",
+      "concept": "年轮麦穗与种子锁孔",
+      "asset": "card-backs/vault.webp",
+      "imagegen_prompt": "Create ONE original fantasy collectible GAME CARD BACK, portrait 2:3, front-on and full-bleed. The supplied image is the USER-APPROVED STYLE AND FRAME reference for this complete seven-card set. Match its cool restrained 2D illustrated finish, layered matte slate surfaces, selective material detail, precise tapered drawing, antique gold edge highlights, muted red/teal accent hierarchy and premium dark fantasy mood. Match the enclosing frame's visual weight: substantial angular charcoal corner plates, small gold diamonds, continuous metallic side/top/bottom bands and a clear inset border. Keep ALL FOUR sides and FOUR CORNERS complete and clearly visible. The new card has its OWN central theme below; use the reference's finish and frame grammar, not its koi, coin-hole or brocade objects. Maintain a strong readable central silhouette, quieter decorative backdrop and ample inset space around the focal motif. This is a 2D illustrated asset, not a photo or 3D render. No text, letters, numbers, logos, UI, characters, tabletop, product mockup or outside margins. Theme: GRANARY GROWTH RINGS. A monumental organic spiral of 4 or 5 thick walnut/honey wooden growth-ring bands wraps around a black seed-shaped keyhole slightly above center. Two elegant harvest-gold wheat heads sprout from those rings and sweep along the spiral. Deep muted malachite inlays curl through the wood like rivers. The motif suggests a self-replenishing magical granary; include two restrained dark iron braces behind the rings to connect the organic material with this set's industrial fantasy finish. Selective precise grain and wheat structure, readable principal planes and quiet background. Deep slate background, warm aged wood, subdued olive/malachite and gold. Same complete angular gunmetal/brass frame with warm wood inserts at the four corners. Avoid a generic literal plank door or bright neon strip.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-gacha-approval-20261012\\E-source.png"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-43653532-48cd-4e9d-9715-7168d97ae49c.png",
+      "generation_method": "builtin-direct"
+    },
+    {
+      "id": "boss",
+      "name": "弑神黑曜",
+      "concept": "断冠坠入黑曜裂隙",
+      "asset": "card-backs/boss.webp",
+      "imagegen_prompt": "Create ONE original fantasy collectible GAME CARD BACK, portrait 2:3, front-on and full-bleed. The supplied image is the USER-APPROVED STYLE AND FRAME reference for this complete seven-card set. Match its cool restrained 2D illustrated finish, layered matte slate surfaces, selective material detail, precise tapered drawing, antique gold edge highlights, muted red/teal accent hierarchy and premium dark fantasy mood. Match the enclosing frame's visual weight: substantial angular charcoal corner plates, small gold diamonds, continuous metallic side/top/bottom bands and a clear inset border. Keep ALL FOUR sides and FOUR CORNERS complete and clearly visible. The new card has its OWN central theme below; use the reference's finish and frame grammar, not its koi, coin-hole or brocade objects. Maintain a strong readable central silhouette, quieter decorative backdrop and ample inset space around the focal motif. This is a 2D illustrated asset, not a photo or 3D render. No text, letters, numbers, logos, UI, characters, tabletop, product mockup or outside margins. Theme: GODSLAYER OBSIDIAN. A broken ivory divine crown hovers above a tall black obsidian diamond-shaped void at center. A single thin but intense crimson fissure cuts through the diamond. Two enormous broken gold/bone halo arcs fall to either side like severed wings, with only a few large crown fragments suspended around the upper void. Monumental negative space, elegant ominous ceremonial emblem and clear old-god symbolism. Selectively illustrate obsidian facets, bone crown and restrained metal edge highlights, keeping the central void genuinely deep and quiet. Near-black slate/plum, chalk ivory, antique gold and one oxblood-red slash. Same enclosed angular charcoal metallic frame, tiny red corner gems and restrained gold dividing lines. No skull face, monster portrait, people or elaborate splash effects.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-gacha-approval-20261012\\E-source.png"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-5eb53ba1-c711-4f2f-a152-7ddd09beac93.png",
+      "generation_method": "builtin-direct"
+    },
+    {
+      "id": "altar",
+      "name": "核心星轨",
+      "concept": "折叠天体仪与蚀日晶核",
+      "asset": "card-backs/altar.webp",
+      "imagegen_prompt": "Create ONE original fantasy collectible GAME CARD BACK, portrait 2:3, front-on and full-bleed. The supplied image is the USER-APPROVED STYLE AND FRAME reference for this complete seven-card set. Match its cool restrained 2D illustrated finish, layered matte slate surfaces, selective material detail, precise tapered drawing, antique gold edge highlights, muted red/teal accent hierarchy and premium dark fantasy mood. Match the enclosing frame's visual weight: substantial angular charcoal corner plates, small gold diamonds, continuous metallic side/top/bottom bands and a clear inset border. Keep ALL FOUR sides and FOUR CORNERS complete and clearly visible. The new card has its OWN central theme below; use the reference's finish and frame grammar, not its koi, coin-hole or brocade objects. Maintain a strong readable central silhouette, quieter decorative backdrop and ample inset space around the focal motif. This is a 2D illustrated asset, not a photo or 3D render. No text, letters, numbers, logos, UI, characters, tabletop, product mockup or outside margins. Theme: CORE STAR ORBITS. A cyan crystalline core holds a black eclipsed sun in the middle of an impossible folded celestial instrument. Three broad antique-gold orbital bands cross clearly in front of and behind the core; their changing width and light explain the overlaps. The form feels like a sacred precision instrument without being a real mechanical blueprint. Four pale stars anchor the inner corners. Dark midnight-indigo panels have very faint star-map arcs and a few controlled silver marks. Selective illustrated crystal material, restrained cyan light concentrated at one core edge, precise matte gold bands and deep quiet shadows. Match the approved reference's muted material finish rather than intense neon glow. Same complete gunmetal/antique-gold frame, angular corner plates and small cool-blue insets. No words, numbers or UI dial labels.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-gacha-approval-20261012\\E-source.png"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-cdb9a1ed-fc5a-4fa5-892d-3075fcea4ef7.png",
+      "generation_method": "builtin-direct"
+    },
+    {
+      "id": "pet",
+      "name": "忠犬爪印",
+      "concept": "项圈守护的爪印星座",
+      "asset": "card-backs/pet.webp",
+      "imagegen_prompt": "Create ONE original fantasy collectible GAME CARD BACK, portrait 2:3, front-on and full-bleed. The supplied image is the USER-APPROVED STYLE AND FRAME reference for this complete seven-card set. Match its cool restrained 2D illustrated finish, layered matte slate surfaces, selective material detail, precise tapered drawing, antique gold edge highlights, muted red/teal accent hierarchy and premium dark fantasy mood. Match the enclosing frame's visual weight: substantial angular charcoal corner plates, small gold diamonds, continuous metallic side/top/bottom bands and a clear inset border. Keep ALL FOUR sides and FOUR CORNERS complete and clearly visible. The new card has its OWN central theme below; use the reference's finish and frame grammar, not its koi, coin-hole or brocade objects. Maintain a strong readable central silhouette, quieter decorative backdrop and ample inset space around the focal motif. This is a 2D illustrated asset, not a photo or 3D render. No text, letters, numbers, logos, UI, characters, tabletop, product mockup or outside margins. Theme: LOYAL DOG'S PAW. A clear warm-ivory paw constellation of FOUR toe islands and ONE larger lower pad is nested inside a broad dark-navy dog-collar loop. The collar twists into a protective heart-shaped inner silhouette, held by one illustrated brass buckle. Two tawny ear-like ribbon plates curl at the sides like guardians, without showing a literal dog's face. The emblem suggests loyalty, shelter and companionship. Matte moss-green and deep slate backdrop, muted leather tan, warm ivory, navy and selective brass. A few subtle track/star marks form quiet side ornament. Match the approved dark illustrated material finish, with controlled leather seams, smooth calm major planes and a concentrated warm paw focal point. Complete angular gunmetal/brass enclosing frame; four corner fastenings echo a protective collar. No cute mascot portrait, extra toe spots or scattered paw logos.",
+      "imagegen_references": [
+        "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\cardbacks-gacha-approval-20261012\\E-source.png"
+      ],
+      "imagegen_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12bac-092b-72a3-97d8-abca37335ee5\\exec-bc4b7a69-6aaf-45c9-90a1-4ded8da9335a.png",
+      "generation_method": "builtin-direct"
+    }
+  ],
+  "user_correction": "Seven card backs require clearly enclosing continuous borders and four distinct corners."
+}

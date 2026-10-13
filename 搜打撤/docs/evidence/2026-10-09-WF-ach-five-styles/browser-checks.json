@@ -1,0 +1,66 @@
+{
+  "source": "Codex in-app browser",
+  "origin": "http://127.0.0.1:5200",
+  "input": "real locator/native clicks and Escape; read-only DOM inspection; no viewport override",
+  "checks": [
+    {
+      "atlas": "http://127.0.0.1:5200/assets/ui/achievement-styles/collage.webp",
+      "clip": "url(#medal-crop-0-collage-tile)",
+      "style": "collage",
+      "styles": [
+        "collage"
+      ],
+      "tiles": 26,
+      "viewport": {
+        "height": 956,
+        "width": 606
+      }
+    },
+    {
+      "animationName": "ag-category-in-a",
+      "duration": "0.22s",
+      "motion": "a",
+      "step": "battle-category",
+      "style": "gesture",
+      "visible": 6
+    },
+    {
+      "animationName": "ag-category-in-a",
+      "category": "research",
+      "motion": "a",
+      "step": "successive-category-switches",
+      "style": "gesture",
+      "visible": 4
+    },
+    {
+      "animationName": "ag-category-in-a",
+      "duration": "0.22s",
+      "motion": "a",
+      "opacity": "0.996226",
+      "step": "category-transition",
+      "style": "symbol",
+      "transform": "matrix(1, 0, 0, 1, 0, 0.0402505)"
+    },
+    {
+      "atlas": "http://127.0.0.1:5200/assets/ui/achievement-styles/symbol.webp",
+      "clip": "url(#medal-crop-2-symbol-detail)",
+      "medal": "kill10",
+      "step": "detail",
+      "style": "symbol"
+    },
+    {
+      "count": 26,
+      "step": "reopen-grid",
+      "style": "painted",
+      "styles": [
+        "painted"
+      ],
+      "view": "grid",
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      }
+    }
+  ],
+  "errors": []
+}

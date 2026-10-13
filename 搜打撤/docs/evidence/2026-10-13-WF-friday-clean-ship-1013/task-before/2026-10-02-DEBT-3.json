@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "DEBT-3",
+  "date": "2026-10-02",
+  "owner": "Friday",
+  "goal": "battle.engine拆分:1408行83函数→核心+子模块,前置DEBT-1定性",
+  "paths": [
+    "game/src/battle/core/battle.engine.js"
+  ],
+  "doneWhen": [
+    "engine≤600行或合理子模块化",
+    "快照/回放/全量绿",
+    "无行为漂移证据"
+  ],
+  "stage": "planned",
+  "checks": [],
+  "unverified": [],
+  "updatedAt": "2026-10-01T16:07:50.323Z"
+}

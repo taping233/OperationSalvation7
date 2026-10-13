@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-skewer",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a125fc-1da2-7300-83db-f2b39e275c76\\exec-31b1ab4f-ac81-44ef-a0d6-8eac4fca0d1e.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-11-pierce-thorn-bell/cards-expedition-starters-pierce-source.png",
+        "bytes": 1998470,
+        "sha256": "bb89bbb372fc7e2020969ee6ad15a2eaf7f0c2e8be79a047b4388e7aae7f7ee8"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-11-pierce-thorn-bell/cards-expedition-starters-pierce-full-before.webp",
+          "bytes": 166662,
+          "sha256": "104e9fad97acea48a6a615a4a83152e99ec477d0a6007862d50eade74f99054f"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-11-pierce-thorn-bell/cards-expedition-starters-pierce-thumb-before.webp",
+          "bytes": 16402,
+          "sha256": "c70377c5403020044d77a08aa2ed2b797b6a4f238c9073df8ccc92b8fcab4578"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/expedition-starters/pierce.webp",
+          "bytes": 137136,
+          "sha256": "b9b5cb348978492675fef527ecff5f86a4a5aa3564967649855dd323b04f8fb4",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/expedition-starters/pierce.webp",
+          "bytes": 14522,
+          "sha256": "c54873724ba43d9a1fa6515ac7caaee578c190dfebde237e7863063d520a8615",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt3-skewer-creative-rough-20261005",
+      "revision_after": "pierce-thorn-bell-rough-20261011",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/expedition-starters/pierce.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 121476,
+            "sha256": "dc75312d62b6bee3c4618c3696ac72726fc2b51d57fba928a17c3808152a67b2",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/expedition-starters/pierce.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 137136,
+            "sha256": "b9b5cb348978492675fef527ecff5f86a4a5aa3564967649855dd323b04f8fb4",
+            "source": "docs/evidence/2026-10-11-pierce-thorn-bell/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/expedition-starters/pierce.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 20142,
+            "sha256": "dbadf3b72167b868ac0527a7826f6cbc80b26a0f40eda745817e45ec3b2b855f",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/expedition-starters/pierce.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 14522,
+            "sha256": "c54873724ba43d9a1fa6515ac7caaee578c190dfebde237e7863063d520a8615",
+            "source": "docs/evidence/2026-10-11-pierce-thorn-bell/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1120,
+  "manifest_count_after": 1120
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "path": "game/src/hub/game.cardslib.page.js",
+    "sha256": "1bc1dc9f9e5ee08f4f0d443431f466f5e5003f4b397ebb1178c41c37b6736876"
+  },
+  {
+    "path": "game/src/hub/photo-studio-controls.js",
+    "sha256": "53b931b622bc784f3ac7fdc18659f4e8a360c8afe365622d73a61491113c1f06"
+  },
+  {
+    "path": "game/src/ui/ui.js",
+    "sha256": "2583f960f0c1a8873e9179a7fdce11471f2876c8ec3aaabd26c91a8474f021b2"
+  },
+  {
+    "path": "game/css/photo-studio-unified.css",
+    "sha256": "b7575013708c43046d75109e06d2cb166d9484ad1669de12290b48ffa5bfb9a3"
+  },
+  {
+    "path": "game/css/photo-studio-cover.css",
+    "sha256": "a263c27a7c89e461b0b6fdcceb195890248b52a63d7d795cffff7aaa80f5331e"
+  },
+  {
+    "path": "game/css/expedition-library.css",
+    "sha256": "323a62b603c464f71d2dbe797c05cd2d0ec89727bb2c76f9bb18b537ddd8733b"
+  }
+]

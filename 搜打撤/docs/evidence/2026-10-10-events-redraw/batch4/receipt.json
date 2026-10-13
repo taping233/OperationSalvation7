@@ -1,0 +1,154 @@
+{
+  "method": "Built-in ImageGen; scoped scene WebP/thumbnail encoding",
+  "verification": "No tests/browser/build run",
+  "items": [
+    {
+      "card_id": "ev19-potions",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-6bc652fb-1640-41b6-8276-b7fe3ed87878.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch4/event-ev19-potions-source.png",
+        "sha256": "bded87f8f79b0ff0f8729e66ae616172cb9b40f35344bacc8f0d781f355c0a34"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch4/event-ev19-potions-full-before.webp",
+          "sha256": "d7bf23f677c2ba4d9de221fad53d4c45acbf6115d8a9e1d455aac3b4c8078b66"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch4/event-ev19-potions-thumb-before.webp",
+          "sha256": "dc668c1f4c5ac6df8fd583deb21e94d64d067157c61f432ff55c73f82fb75e8b"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-ev19-potions.webp",
+          "ext": "webp",
+          "license": "项目自有（AI 生成）",
+          "bytes": 210142,
+          "sha256": "dae236dec42588dd3683d0a917cc76e044d886253ff37490bd86bec523118f2c",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch4/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-ev19-potions.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 23960,
+          "sha256": "60d5640e81b707320c1a2386237d7835a1842fa7a0ae494eddf95b1733174463",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch4/receipt.json"
+        }
+      ]
+    },
+    {
+      "card_id": "ev19-arrows",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-abe3f14f-415a-4407-82ff-ca75b78d7db5.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch4/event-ev19-arrows-source.png",
+        "sha256": "b556d7c4d46d38c1eef7216b11fc1e669ae7993d4f947008dbafa8f207d58002"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch4/event-ev19-arrows-full-before.webp",
+          "sha256": "245ebe5e2614136bcae6a7ea4f65f50147a01811284e8d755cc030ff81ee8e20"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch4/event-ev19-arrows-thumb-before.webp",
+          "sha256": "3ff860d7f701353808eb2c6d37833e556fe22b015601235b802e36ff9d7d4187"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-ev19-arrows.webp",
+          "ext": "webp",
+          "license": "项目自有（AI 生成）",
+          "bytes": 198216,
+          "sha256": "914c8b626622dca32cdd4f13e91f3f031cbb2d17339959afe7a28ee86b2c7d28",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch4/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-ev19-arrows.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 21312,
+          "sha256": "34fd3169708695110489e5681714684061398fc0a934149b5298eb0a72028363",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch4/receipt.json"
+        }
+      ]
+    },
+    {
+      "card_id": "ev19-gamble",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-82a989c4-6bb5-4d0d-b070-a0f5b51eeb24.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch4/event-ev19-gamble-source.png",
+        "sha256": "4f7c9b8a464db73e0b91b3878d297d7098f450328afbfca2d3406b19b9d2dbe7"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch4/event-ev19-gamble-full-before.webp",
+          "sha256": "e10fbfc94380f7cf03365f791ed2ca329a47339bd19374175b4b8f8d3bb552df"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch4/event-ev19-gamble-thumb-before.webp",
+          "sha256": "b2f09b3779a20c113f60938e8260a6f01956216386a358e086c4c25fccfdb0ae"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-ev19-gamble.webp",
+          "ext": "webp",
+          "license": "项目自有（AI 生成）",
+          "bytes": 196252,
+          "sha256": "5b6eceee56ed9e726b6ae16a2801921350c774110671c00941e137d087b9283f",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch4/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-ev19-gamble.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 19910,
+          "sha256": "74d1c0669a9bcf2cf8739af87fbf57839e749accc27a58369943f17d3ed1d0d9",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch4/receipt.json"
+        }
+      ]
+    },
+    {
+      "card_id": "ev19-quartermaster",
+      "revision": "event-original-rough-20261010",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-b9e49116-5c4c-442c-8a0a-243a2b3ff44a.png",
+      "raw": {
+        "path": ".tmp/imagegen/events-redraw-1010/batch4/event-ev19-quartermaster-source.png",
+        "sha256": "3295c2c64f720ac1009e658698ed52376b9c69495fb7a6bd400ae10061f654b6"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch4/event-ev19-quartermaster-full-before.webp",
+          "sha256": "819ea30ae0c745873912e3d2127104f510b063e798381d6c806f4d4f7727fe13"
+        },
+        {
+          "path": ".tmp/imagegen/events-redraw-1010/batch4/event-ev19-quartermaster-thumb-before.webp",
+          "sha256": "4739bf877abcfc50aff25f69e453ed012202e680466262e64ddde0723975a597"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-ev19-quartermaster.webp",
+          "ext": "webp",
+          "license": "项目自有（AI 生成）",
+          "bytes": 235916,
+          "sha256": "c9bc1f839033a81c66afec43daa9bb05dda8c5ff6dcc0286e3a4c82d31f3a787",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch4/receipt.json"
+        },
+        {
+          "path": "thumbs/scenes/event-ev19-quartermaster.webp",
+          "ext": "webp",
+          "license": "项目自有（自制/AI 生成）",
+          "bytes": 25470,
+          "sha256": "f44ec2f5717918967bbda5f3f16180c1d5fb159ee5e42b3b514117900decc4ac",
+          "source": "docs/evidence/2026-10-10-events-redraw/batch4/receipt.json"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+[
+  {
+    "scene": "camp",
+    "model": "nai-diffusion-4-5-full",
+    "width": 1344,
+    "height": 768,
+    "seed": 101026800,
+    "parameters": {
+      "steps": 28,
+      "scale": 6.5,
+      "cfg_rescale": 0.0,
+      "sampler": "k_euler_ancestral",
+      "noise_schedule": "karras",
+      "variety_plus": true
+    },
+    "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nScenery only, no humans. Snowy night refuge entrance, one sturdy closed wooden gate in a dark fortified city wall, large snowy angular rooftop silhouette behind, one small muted amber gate light. No banners or decorative flags. Safe quiet refuge.\n\nA dedicated silhouette-style environmental image for this game interface only.\n\nWide landscape background for a short game interface transition. Main silhouette and light focus on the right half at middle height. The left half is quiet almost-black negative space for later overlay text. Only three large overlapping depth layers. Very simple readable shapes, low detail density, broad angular opaque planes and hard-edged light and shadow. No people, lettering or interface graphics.\n\nCharcoal, desaturated deep blue-gray, muted teal and sparse cream accents. Dark low-key lighting. No photorealistic texture, glossy 3D surfaces, airbrush gradients or dense tiny ornaments.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+    "negativePrompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, human, person, people, girl, boy, character, face, body, portrait, statue, creature, monster, letters, logo, ui, panels, grid, dense detail, highly detailed, busy composition, photorealistic, 3d render, lens flare, neon",
+    "output": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\ui\\cut-scenes-20261010\\camp-nai-v2.png"
+  },
+  {
+    "scene": "photo",
+    "model": "nai-diffusion-4-5-full",
+    "width": 1344,
+    "height": 768,
+    "seed": 101026801,
+    "parameters": {
+      "steps": 28,
+      "scale": 6.5,
+      "cfg_rescale": 0.0,
+      "sampler": "k_euler_ancestral",
+      "noise_schedule": "karras",
+      "variety_plus": true
+    },
+    "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nScenery only, no humans. An antique bellows camera on a wooden photography table, unmistakable large round lens, two small blank mounted photographs leaning behind the camera, dark curtain backdrop. One restrained warm light along the lens and tabletop. The camera is the main silhouette, no large lamp.\n\nA dedicated silhouette-style environmental image for this game interface only.\n\nWide landscape background for a short game interface transition. Main silhouette and light focus on the right half at middle height. The left half is quiet almost-black negative space for later overlay text. Only three large overlapping depth layers. Very simple readable shapes, low detail density, broad angular opaque planes and hard-edged light and shadow. No people, lettering or interface graphics.\n\nCharcoal, desaturated deep blue-gray, muted teal and sparse cream accents. Dark low-key lighting. No photorealistic texture, glossy 3D surfaces, airbrush gradients or dense tiny ornaments.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+    "negativePrompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, human, person, people, girl, boy, character, face, body, portrait, statue, creature, monster, letters, logo, ui, panels, grid, dense detail, highly detailed, busy composition, photorealistic, 3d render, lens flare, neon",
+    "output": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\ui\\cut-scenes-20261010\\photo-nai-v2.png"
+  },
+  {
+    "scene": "field",
+    "model": "nai-diffusion-4-5-full",
+    "width": 1344,
+    "height": 768,
+    "seed": 101026802,
+    "parameters": {
+      "steps": 28,
+      "scale": 6.5,
+      "cfg_rescale": 0.0,
+      "sampler": "k_euler_ancestral",
+      "noise_schedule": "karras",
+      "variety_plus": true
+    },
+    "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nScenery only, no humans. Snowbound expedition route beyond the city, rugged path zigzagging toward a distant mountain pass, one simple wooden direction post without letters, broad snow ridges and dark rocky silhouettes. A subdued cool gray horizon, strong depth and readable route.\n\nA dedicated silhouette-style environmental image for this game interface only.\n\nWide landscape background for a short game interface transition. Main silhouette and light focus on the right half at middle height. The left half is quiet almost-black negative space for later overlay text. Only three large overlapping depth layers. Very simple readable shapes, low detail density, broad angular opaque planes and hard-edged light and shadow. No people, lettering or interface graphics.\n\nCharcoal, desaturated deep blue-gray, muted teal and sparse cream accents. Dark low-key lighting. No photorealistic texture, glossy 3D surfaces, airbrush gradients or dense tiny ornaments.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+    "negativePrompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, human, person, people, girl, boy, character, face, body, portrait, statue, creature, monster, letters, logo, ui, panels, grid, dense detail, highly detailed, busy composition, photorealistic, 3d render, lens flare, neon",
+    "output": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\ui\\cut-scenes-20261010\\field-nai-v2.png"
+  },
+  {
+    "scene": "battle",
+    "model": "nai-diffusion-4-5-full",
+    "width": 1344,
+    "height": 768,
+    "seed": 101026803,
+    "parameters": {
+      "steps": 28,
+      "scale": 6.5,
+      "cfg_rescale": 0.0,
+      "sampler": "k_euler_ancestral",
+      "noise_schedule": "karras",
+      "variety_plus": true
+    },
+    "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nScenery only, no humans. Deserted broken city alley, huge dark ruined building walls with sharp slanted shadows, one snapped iron barricade and two rubble blocks. Narrow muted rusty red light in depth suggesting danger. Tense deserted battlefield, no shops or crowds.\n\nA dedicated silhouette-style environmental image for this game interface only.\n\nWide landscape background for a short game interface transition. Main silhouette and light focus on the right half at middle height. The left half is quiet almost-black negative space for later overlay text. Only three large overlapping depth layers. Very simple readable shapes, low detail density, broad angular opaque planes and hard-edged light and shadow. No people, lettering or interface graphics.\n\nCharcoal, desaturated deep blue-gray, muted teal and sparse cream accents. Dark low-key lighting. No photorealistic texture, glossy 3D surfaces, airbrush gradients or dense tiny ornaments.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+    "negativePrompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, human, person, people, girl, boy, character, face, body, portrait, statue, creature, monster, letters, logo, ui, panels, grid, dense detail, highly detailed, busy composition, photorealistic, 3d render, lens flare, neon",
+    "output": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\ui\\cut-scenes-20261010\\battle-nai-v2.png"
+  },
+  {
+    "scene": "achievement",
+    "model": "nai-diffusion-4-5-full",
+    "width": 1344,
+    "height": 768,
+    "seed": 101026804,
+    "parameters": {
+      "steps": 28,
+      "scale": 6.5,
+      "cfg_rescale": 0.0,
+      "sampler": "k_euler_ancestral",
+      "noise_schedule": "karras",
+      "variety_plus": true
+    },
+    "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nScenery only, no humans. A quiet dim hall of achievement medals and honor archives, one large antique brass laurel wreath surrounding a simple blank shield emblem displayed upright in a dark wooden cabinet, a few neatly aligned smaller medal silhouettes and two closed archive volumes below. Main wreath and shield on the right-middle, restrained warm gold highlight and soft cool charcoal surroundings. Clear symbolic honor cabinet, no writing, no specific achievement symbols, no trophy cup, no character.\n\nA dedicated silhouette-style environmental image for this game interface only.\n\nWide landscape background for a short game interface transition. Main silhouette and light focus on the right half at middle height. The left half is quiet almost-black negative space for later overlay text. Only three large overlapping depth layers. Very simple readable shapes, low detail density, broad angular opaque planes and hard-edged light and shadow. No people, lettering or interface graphics.\n\nCharcoal, desaturated deep blue-gray, muted teal and sparse cream accents. Dark low-key lighting. No photorealistic texture, glossy 3D surfaces, airbrush gradients or dense tiny ornaments.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+    "negativePrompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, human, person, people, girl, boy, character, face, body, portrait, statue, creature, monster, letters, logo, ui, panels, grid, dense detail, highly detailed, busy composition, photorealistic, 3d render, lens flare, neon",
+    "output": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\ui\\cut-scenes-20261010\\achievement-nai-v2.png"
+  },
+  {
+    "scene": "boss",
+    "model": "nai-diffusion-4-5-full",
+    "width": 1344,
+    "height": 768,
+    "seed": 101026805,
+    "parameters": {
+      "steps": 28,
+      "scale": 6.5,
+      "cfg_rescale": 0.0,
+      "sampler": "k_euler_ancestral",
+      "noise_schedule": "karras",
+      "variety_plus": true
+    },
+    "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nScenery only, no humans. Deserted ruined greenhouse arena, tall arching steel frames and shattered glass roof, large circular stone fighting platform, gigantic dark doorway behind. One narrow cold turquoise shaft of light across the platform. Monumental oppressive scale, no creatures or characters.\n\nA dedicated silhouette-style environmental image for this game interface only.\n\nWide landscape background for a short game interface transition. Main silhouette and light focus on the right half at middle height. The left half is quiet almost-black negative space for later overlay text. Only three large overlapping depth layers. Very simple readable shapes, low detail density, broad angular opaque planes and hard-edged light and shadow. No people, lettering or interface graphics.\n\nCharcoal, desaturated deep blue-gray, muted teal and sparse cream accents. Dark low-key lighting. No photorealistic texture, glossy 3D surfaces, airbrush gradients or dense tiny ornaments.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+    "negativePrompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, human, person, people, girl, boy, character, face, body, portrait, statue, creature, monster, letters, logo, ui, panels, grid, dense detail, highly detailed, busy composition, photorealistic, 3d render, lens flare, neon",
+    "output": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\ui\\cut-scenes-20261010\\boss-nai-v2.png"
+  }
+]

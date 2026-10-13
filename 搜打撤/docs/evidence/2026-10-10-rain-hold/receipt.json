@@ -1,0 +1,156 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-arrow-rain",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-2f2251fa-a52a-4ff8-88cf-01b962181d80.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-rain-hold/cards-martial-tt3-arrow-rain-source.png",
+        "bytes": 1844698,
+        "sha256": "8d3a2e14d732cb06a29077164c2c7286984f2c83405667f542205a7c66d1a858"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-rain-hold/cards-martial-tt3-arrow-rain-full-before.webp",
+          "bytes": 93334,
+          "sha256": "e58adf9ca36014205b59e8c1ff4cdacbdfb042615195b080d83f2fbc5e9737a6"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-rain-hold/cards-martial-tt3-arrow-rain-thumb-before.webp",
+          "bytes": 15852,
+          "sha256": "7a9204b0d866afb55fc6482b1044ada669bca50cfda69b809ad4cb10cb926a53"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-arrow-rain.webp",
+          "bytes": 113044,
+          "sha256": "e481a8359d6350b5dc02602c1d0be49b09d2414d89acf3f7cb3414a0c5f8ae4b",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-arrow-rain.webp",
+          "bytes": 17378,
+          "sha256": "0565d5e823c30c6b8ff0a67c82266a4f608f18119173a9f701e3b2890db106a6",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "arrow-rain-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt3-arrow-rain.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 113044,
+            "sha256": "e481a8359d6350b5dc02602c1d0be49b09d2414d89acf3f7cb3414a0c5f8ae4b",
+            "source": "docs/evidence/2026-10-10-rain-hold/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt3-arrow-rain.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15852,
+            "sha256": "7a9204b0d866afb55fc6482b1044ada669bca50cfda69b809ad4cb10cb926a53",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt3-arrow-rain.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17378,
+            "sha256": "0565d5e823c30c6b8ff0a67c82266a4f608f18119173a9f701e3b2890db106a6",
+            "source": "docs/evidence/2026-10-10-rain-hold/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-hold-fast",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-6d6c288a-2957-4565-9c99-7f20da9cc0d3.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-rain-hold/cards-martial-tt3-hold-fast-source.png",
+        "bytes": 1620266,
+        "sha256": "bc47515c2a83e596e5e38bbb113d2ab4d4c9753e2fc016cb76c99777acfb3e48"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-rain-hold/cards-martial-tt3-hold-fast-full-before.webp",
+          "bytes": 75766,
+          "sha256": "d9363bec54386c33b6a124956036e5386b82b34d11b24a5c0a2fdf4da47653eb"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-rain-hold/cards-martial-tt3-hold-fast-thumb-before.webp",
+          "bytes": 9500,
+          "sha256": "7fb6d88f53d8b64beec3e86155adb0310aa19a674a9059f1af2ab42cb6709203"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt3-hold-fast.webp",
+          "bytes": 63498,
+          "sha256": "b180edef48dde5a4648a8db9d4f10c450acc27b8f75134adabf528061b5b923f",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt3-hold-fast.webp",
+          "bytes": 9414,
+          "sha256": "d2f234a25e3d356848fb0df804bad59862bd3544419cdca7c01109d880f1cc2b",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "hold-fast-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt3-hold-fast.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 63498,
+            "sha256": "b180edef48dde5a4648a8db9d4f10c450acc27b8f75134adabf528061b5b923f",
+            "source": "docs/evidence/2026-10-10-rain-hold/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt3-hold-fast.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 9500,
+            "sha256": "7fb6d88f53d8b64beec3e86155adb0310aa19a674a9059f1af2ab42cb6709203",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt3-hold-fast.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 9414,
+            "sha256": "d2f234a25e3d356848fb0df804bad59862bd3544419cdca7c01109d880f1cc2b",
+            "source": "docs/evidence/2026-10-10-rain-hold/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 899,
+  "manifest_count_after": 901
+}

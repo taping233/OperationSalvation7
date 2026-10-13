@@ -1,0 +1,13 @@
+{
+  "id": "02",
+  "slug": "head-neck",
+  "version": 2,
+  "prompt": "Create a replacement Wu HEAD+NECK animation sprite. Image 1 is the AUTHORITATIVE beautiful facial identity and painterly style, image 2 supplies the three-quarter facing-screen-right combat angle, image 3 supplies only canvas placement/neck attachment scale (do not inherit its facial rendering). Repaint the facial features to faithfully match image 1: naturally proportioned small oval face, soft cheeks, gentle rounded chin, clear cyan-blue almond eyes with slightly lifted outer corners, restrained gray brows, a tiny unobtrusive nose, and a subtle confident playful smile with ONE tiny fang. Both eyes must be visible, far eye foreshortened naturally. Elegant natural anime proportions, not baby/chibi/doll-like, no exaggerated giant round irises, sharp V chin, stretched broad cheeks, glossy eyelashes, excessive highlights or grin full of teeth. Use economical opaque brush-painted cream/peach skin and a few cool-neutral hard shadow planes, low detail density, not smooth shiny 3D skin. Head and gaze face RIGHT at same angle as image 2. Complete bald scalp, ears and short neck for separate hair overlays: no hair, goggles, flower, ribbon, shoulders, torso, clothing, labels or background. Clean filled neck overlap at base. Genuine transparent PNG, no aura or shadow. Preserve image 3's 1278x1230 canvas and overall head/neck scale and placement for registration, but make the face accurately follow image 1. One head+neck only.",
+  "refs": [
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\reference.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-wu\\assets\\wu-battle-base-frame000.png",
+    "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\characters\\wu-parts-v1\\part-02-head-neck-v1.png"
+  ],
+  "tool": "built-in imagegen",
+  "stage": "candidate"
+}

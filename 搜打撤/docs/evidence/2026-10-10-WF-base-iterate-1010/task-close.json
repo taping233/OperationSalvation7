@@ -1,0 +1,21 @@
+{
+  "doneWhenConfirmed": true,
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "result": "passed",
+      "description": "115项独立定向用例通过；目标lint、32项语法/CSS解析、保护footer原字节SHA一致，报告见本目录验证记录"
+    },
+    {
+      "kind": "manual",
+      "result": "passed",
+      "description": "Codex内置浏览器当前1280x720窗口逐页比较并修订；主页/双排/详情/归档/商店/扩建/外观/庭院/临时整备真实输入覆盖见README与16张final截图；实际资产动作未执行"
+    }
+  ],
+  "unverified": [
+    "最终审美是否符合老板预期仍待实看，当前交付不代表老板认可最终成品",
+    "未进行其他尺寸、真实购买卖出复原成长领奖、非空见闻、完整本地门/build/提交/推送",
+    "扩大定向检查发现另会话照相馆两条结构断言失败，未动其范围，原失败报告保留"
+  ]
+}

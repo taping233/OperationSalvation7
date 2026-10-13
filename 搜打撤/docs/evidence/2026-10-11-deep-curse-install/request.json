@@ -1,0 +1,16 @@
+{
+  "authorization": "2026-10-11 老板：深海咒印接入",
+  "items": [
+    {
+      "card_id": "tt3-deep-diary",
+      "asset": "cards/equip-tt3-deep-diary.webp",
+      "source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\deep-curse-redraw-20261010\\deep-curse.png",
+      "revision": "deep-curse-original-rough-20261011",
+      "prompt": "Use case: style-transfer. Redraw the supplied Deep Sea Curse Sigil equipment card illustration. Input image is the object and composition reference. Preserve the square framing and elevated three-quarter view of one open black ancient spellbook in the central lower-middle, its spine running diagonally from upper-left toward lower-right, left page spreading left, right page standing higher to the upper-right, heavy dark page edges below. A broad dark desaturated blue puddle surrounds the underside, with several thick liquid drips dropping into empty space below. Background remains a quiet near-black navy field with generous negative space; no scenery or characters. Rebuild the book into a few clear large slate-teal and near-black page planes, grouped hard-edged shadows, enough restrained cool light to read the raised right page and layered book thickness. Replace the original dense fine glowing scribbles with a limited set of bold turquoise curse-mark clusters, angular and curved abstract marks with quiet gaps, following each page's perspective; these are ominous nonlinguistic sigils, not legible writing. Keep these cyan-green marks as the focal accent, without diffuse neon bloom. Make the puddle and dripping dark liquid readable in several wide opaque blue shapes with economical edges. Rough hand-painted anime color study, large connected opaque masses, wide directional swipes and blunt dabs, matte muted colors and decisive handmade edges; selective structural details, substantial quiet regions. No scratch networks, dense tiny symbols, glossy 3D, airbrushed rendering, facet mosaics or all-over grain filters. No text, UI, frame or watermark.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt3-deep-diary.webp"
+      ],
+      "origin_request": "docs/evidence/2026-10-10-deep-curse-redraw/request.json"
+    }
+  ]
+}

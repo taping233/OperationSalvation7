@@ -1,0 +1,98 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt8-nofocus",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a121b9-fd6d-72f3-b531-cf6d6a4bb583\\exec-3cdf5994-82da-421e-a55b-64bc4aa0a2c8.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-eldritch-hand3-resume/cards-creature-tt8-nofocus-source.png",
+        "bytes": 1012606,
+        "sha256": "a5490f706a400fcc803a055c2e1452ff57f60fb74e96768dee1920c3a2f7c5c4"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-eldritch-hand3-resume/cards-creature-tt8-nofocus-full-before.webp",
+          "bytes": 133996,
+          "sha256": "58e9db4c7650039ac2501eecd651c3e557d255a90035487f031e03ebff985144"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-eldritch-hand3-resume/cards-creature-tt8-nofocus-thumb-before.webp",
+          "bytes": 25764,
+          "sha256": "d35bb1037a980c189a5a9bf9f51586c5d0bab171f9ace5a01062fe535018ef17"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/creature-tt8-nofocus.webp",
+          "bytes": 166676,
+          "sha256": "56fb15663b298b558f5d9939ca6592e9177f89abd04f92ee629885c40454d7e5",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_range": [
+            0,
+            255
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/creature-tt8-nofocus.webp",
+          "bytes": 30336,
+          "sha256": "40586f025a3f75beaae809dc88d067517620d37c87dafa21dab750e712fe61d1",
+          "size": [
+            448,
+            448
+          ],
+          "alpha_range": [
+            0,
+            255
+          ]
+        }
+      ],
+      "revision_before": "sealed-limb-3-old-art-alpha-restored-20261010",
+      "revision_after": "eldritch-hand-3-hooked-transparent-20261010",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/creature-tt8-nofocus.webp",
+            "ext": "webp",
+            "bytes": 133996,
+            "sha256": "58e9db4c7650039ac2501eecd651c3e557d255a90035487f031e03ebff985144",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-eldritch-hands/old3-alpha-receipt.json"
+          },
+          "after": {
+            "path": "cards/creature-tt8-nofocus.webp",
+            "ext": "webp",
+            "bytes": 166676,
+            "sha256": "56fb15663b298b558f5d9939ca6592e9177f89abd04f92ee629885c40454d7e5",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-eldritch-hand3-resume/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/creature-tt8-nofocus.webp",
+            "ext": "webp",
+            "bytes": 25764,
+            "sha256": "d35bb1037a980c189a5a9bf9f51586c5d0bab171f9ace5a01062fe535018ef17",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-eldritch-hands/old3-alpha-receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/creature-tt8-nofocus.webp",
+            "ext": "webp",
+            "bytes": 30336,
+            "sha256": "40586f025a3f75beaae809dc88d067517620d37c87dafa21dab750e712fe61d1",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-eldritch-hand3-resume/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 831,
+  "manifest_count_after": 831,
+  "alpha_preservation": "Original RGBA preserved; existing RGB thumbnail bake with alpha retained; decoded outputs checked."
+}

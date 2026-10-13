@@ -1,0 +1,41 @@
+{
+  "gridScrollbar": "linear-gradient(rgba(178, 186, 150, 0.5), rgba(112, 126, 100, 0.314))",
+  "headerLeft": 0,
+  "headerWidth": 1280,
+  "tokens": [
+    {
+      "color": "rgb(74, 89, 128)",
+      "kind": "d-kw",
+      "text": "寂灭苍穹："
+    },
+    {
+      "color": "rgb(45, 101, 97)",
+      "kind": "d-term",
+      "text": "法伤"
+    },
+    {
+      "color": "rgb(147, 69, 41)",
+      "kind": "d-num",
+      "text": "+1"
+    },
+    {
+      "color": "rgb(45, 101, 97)",
+      "kind": "d-term",
+      "text": "消耗"
+    },
+    {
+      "color": "rgb(147, 69, 41)",
+      "kind": "d-num",
+      "text": "1"
+    },
+    {
+      "color": "rgb(147, 69, 41)",
+      "kind": "d-num",
+      "text": "1"
+    }
+  ],
+  "viewport": [
+    1280,
+    720
+  ]
+}

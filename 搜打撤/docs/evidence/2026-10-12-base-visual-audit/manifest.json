@@ -1,0 +1,441 @@
+{
+  "createdAt": "2026-10-12T10:02:50.795Z",
+  "capture": "Codex IAB cua bound getScreenshot, except initial 00-title-menu",
+  "sourceRoot": "D:/素材/代号柒/搜打撤",
+  "files": [
+    {
+      "path": "00-title-menu.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 121508,
+      "height": 720,
+      "width": 1280,
+      "sha256": "71ff6275f1aba22f1a6632ecc45ef536498f0f4e0a5b5cb4de755c7dcf95f4d3",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "01-home.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 80375,
+      "height": 720,
+      "width": 1280,
+      "sha256": "90a1e3ca8b498fc270d50877c4acbf05826576ef87e596aa379d9cddaf0dbf7a",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "02-personnel-profile.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 94722,
+      "height": 720,
+      "width": 1280,
+      "sha256": "5c21a9d41fee9d3bcb5bbbd06211beab728f6ff4bb23da458ae40921310d7185",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "03-personnel-moves.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 105285,
+      "height": 720,
+      "width": 1280,
+      "sha256": "5f5504664aa6864e977f1909d4c0d0beab77f69e174a6996ecd0d7d8553777a7",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "04-moves-page2.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 114320,
+      "height": 720,
+      "width": 1280,
+      "sha256": "909fc9a26eaa5a5e0ac8c055ea43b79ee4b2475346a6c317dea42d0ed202564b",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "05-appearance.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 101692,
+      "height": 720,
+      "width": 1280,
+      "sha256": "9a69f1eafa9236499623acc1422405a8724b003a6428db3d1cf9f103c03174cc",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "06-companions.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 64240,
+      "height": 720,
+      "width": 1280,
+      "sha256": "8f341af2c0724424013155b28eee9a79681b0a44c2b0324fe32a906fda651aa3",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "07-logistics-cards.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 114559,
+      "height": 720,
+      "width": 1280,
+      "sha256": "eede4b571d79d6230a36d15e64dea4958ec1de39d0ef7cdf7203e3376832062f",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "08-trade-buy.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 91922,
+      "height": 720,
+      "width": 1280,
+      "sha256": "ad47427cfc9347e77c632d23499df7042ae33522a482e06f7f0573290cd9a483",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "09-trade-sell.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 98639,
+      "height": 720,
+      "width": 1280,
+      "sha256": "ef2d4938a6c1e2c5befb0475a34d596d65fda3317518ce5d4a9a2115756a6a64",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "10-warehouse-detail.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 41838,
+      "height": 720,
+      "width": 1280,
+      "sha256": "926e0e528f07b228b296ed72a546baa72ba0ee5a6912dfbcabd77a1cad45265c",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "11-logistics-items.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 73544,
+      "height": 720,
+      "width": 1280,
+      "sha256": "d713addb39fab6d834b136b54f98f9309b1d9cb4d2d331ef6d76f042d1bf6a18",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "12-facilities.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 58855,
+      "height": 720,
+      "width": 1280,
+      "sha256": "e53385c29323287e8926aaf383bd1484e8929d65ae575c5960b6c0e1899ec20a",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "13-facilities-warehouse.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 60789,
+      "height": 720,
+      "width": 1280,
+      "sha256": "51136c29ab3acd174bfee76586e861abb784de4650ab709945ff3a92fd783462",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "14-collection-cards.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 51811,
+      "height": 720,
+      "width": 1280,
+      "sha256": "267d91cf66f7f1c5385591f66ada9874c2c1a3909942543420a66a399a36f252",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "15-collection-rewards.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 50698,
+      "height": 720,
+      "width": 1280,
+      "sha256": "152206319821ea4ad72a25c96d8a948ecb923585fa435ebbba096bd22f9dc04b",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "16-achievements.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 67544,
+      "height": 720,
+      "width": 1280,
+      "sha256": "e983adc97b255f6549abedee55298fd50e35f58d28ab1b1e02549623c115a6dd",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "17-milestones.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 67884,
+      "height": 720,
+      "width": 1280,
+      "sha256": "d6c3d463f568b1a7b56ac9776c29e07d54b0edc5610ae3faa9fc3f98d301757f",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "18-cardbacks.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 76954,
+      "height": 720,
+      "width": 1280,
+      "sha256": "686ad0ead49a2e661446c42498afbc95f277bbbe2bc6d5746f78e15d74460019",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "19-stories.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 68965,
+      "height": 720,
+      "width": 1280,
+      "sha256": "edc604e7b3e250c86a9b3e4c45e17b17a135e8989b68b0b3e9916f26ca1ba28d",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "20-courtyard-koi.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 108241,
+      "height": 720,
+      "width": 1280,
+      "sha256": "f0ea3d74280fccd0ea23d20f94eb1cdc5dfa5295ea82953bbc245e15d70b038a",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "21-koi-feed.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 109576,
+      "height": 720,
+      "width": 1280,
+      "sha256": "f5b8a235c67377e39bb4b7b01210dede6eef1a91fdef0f76628bd6c326d01303",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "22-courtyard-rain.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 56443,
+      "height": 720,
+      "width": 1280,
+      "sha256": "e34cd8cf55e927461e6bd5a25bf8d3a63822dc5d80cfcada276446c8354cd902",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "23-preparation-transition.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 59656,
+      "height": 720,
+      "width": 1280,
+      "sha256": "aa7376352908842a167324b7cf28c0695625b3f00741cd4422710bd7f61950dd",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "24-preparation-character.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 90353,
+      "height": 720,
+      "width": 1280,
+      "sha256": "ee0d08df68d6a5badd18b30df1f2223930f8903d0440945b581f4c9f62a73897",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "25-preparation-cards.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 86220,
+      "height": 720,
+      "width": 1280,
+      "sha256": "b08c2f3cb25ebc54814d1bfe01c830f26a27d763e6eca65e59bbcb056de613a3",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "26-live-page-reset.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 121226,
+      "height": 720,
+      "width": 1280,
+      "sha256": "2e5f0d7246cc80b82d333910dda7527a3f6966d896221ddfc994eed893952313",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "27-personnel-heixiang.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 69538,
+      "height": 720,
+      "width": 1280,
+      "sha256": "2bdcec7267b8b2c86a0e2fd5bffb73319c39be3b0dbbd99901eff7546e36ba1c",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "28-personnel-xingyue.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 69523,
+      "height": 720,
+      "width": 1280,
+      "sha256": "da985040b70dbb78cb7ef807e303135e7508176e619653664ad19ba0fcbea61f",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "29-personnel-baita.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 72628,
+      "height": 720,
+      "width": 1280,
+      "sha256": "45b7aad183027b39ab69a70b0b7d86ccecadc6615d66eb9e7070667dd583ea58",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "30-personnel-changwuyu.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 70010,
+      "height": 720,
+      "width": 1280,
+      "sha256": "c7797247e0a950c8b76e32bece6c12db55070e65f99ada7366fe45579850feff",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "31-profile-scrolled.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 70343,
+      "height": 720,
+      "width": 1280,
+      "sha256": "3c1b7b53b81173807f55b490576ed10d7b4154f7109fda0353f75a2a32b4173c",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "32-companion-locked.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 66271,
+      "height": 720,
+      "width": 1280,
+      "sha256": "57caf384a1ae438d69a1aa2b7e714ccae3a5092b87aca8f09c1b48830e1c4178",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "33-companion-hatch-empty.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 46114,
+      "height": 720,
+      "width": 1280,
+      "sha256": "3001b0cffbcbfc687a089aa7efae4f57a293c9f8cd916ae8b92b575502bdd156",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "34-collection-empty-confirm.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 51783,
+      "height": 720,
+      "width": 1280,
+      "sha256": "99ac330f9d7a2f77b1c223575b588f85ee3d1a079ffa92bab442af6984210639",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "35-photo-studio.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 105799,
+      "height": 720,
+      "width": 1280,
+      "sha256": "189c46cd1c6b116fc682536f91db9829ca2fe4ce1f47552d11fb255d3c7ee0ba",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "36-photo-enlarged.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 70466,
+      "height": 720,
+      "width": 1280,
+      "sha256": "e01fc1351b113e24c3413dc36a86463945c03933f65bf4aac05cb485bba63a5d",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "37-photo-martial.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 105476,
+      "height": 720,
+      "width": 1280,
+      "sha256": "c50d29fb12a02219c0bc66dbd6c9eb484612752236a147a418f02ff914d6800e",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "38-slot-selection-transition.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 76241,
+      "height": 720,
+      "width": 1280,
+      "sha256": "55182fc1942fc3f93ac1c954af34502ffc1dca0d8716f34135e90392113558b9",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "39-growth-source-empty.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 78605,
+      "height": 720,
+      "width": 1280,
+      "sha256": "fd5ee43f88bfcdbc0e791d1850ebcd0c538dbc09cf45a612e19603e7ab88fcbf",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "40-cardback-locked.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 77458,
+      "height": 720,
+      "width": 1280,
+      "sha256": "19f130c675c44552585a17972c78d2b5d362fa346cf51195ea2ab408e51f0493",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    },
+    {
+      "path": "41-cardback-goal.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 68378,
+      "height": 720,
+      "width": 1280,
+      "sha256": "b29811fd2bec3dda3c7309670d9d201726a1f12a2001ba4b9c239a8a8240622a",
+      "acquisition": "本会话Codex内置浏览器原生窗口截图；不入Git"
+    }
+  ],
+  "sources": [
+    {
+      "path": "game/src/hub/game.hub.pages.js",
+      "bytes": 14676,
+      "mtime": "2026-10-12T09:40:09.405Z",
+      "sha256": "89aa939c63a10acd9699f48961dbb460c2ae5bd37962c6f7696e84f7dd2b0dbf"
+    },
+    {
+      "path": "game/src/hub/hub.trade-shop-v5.js",
+      "bytes": 15591,
+      "mtime": "2026-10-12T09:38:52.642Z",
+      "sha256": "3a45a59519cb4a52cc10dfa0c5ae9cc2edc38f7afc8275691e485758d65049a8"
+    },
+    {
+      "path": "game/src/hub/hub.personnel.js",
+      "bytes": 21346,
+      "mtime": "2026-10-12T09:00:04.176Z",
+      "sha256": "31aa4d24044a96dbe85135dbe5cb40c1fa11ed9720ed214b188db429ba7eea5a"
+    },
+    {
+      "path": "game/src/hub/hub.presentation.js",
+      "bytes": 21310,
+      "mtime": "2026-10-12T09:53:02.362Z",
+      "sha256": "639beae07686251eb9990cbc563105442c5cf48c6ba3b46adf9ea615f39927d8"
+    },
+    {
+      "path": "game/src/ui/navigation-motion.js",
+      "bytes": 1213,
+      "mtime": "2026-10-12T09:30:14.754Z",
+      "sha256": "a5ae395a1df3cf43b5510ca5bccc1cbe6d5c54fb4dc703c865e83f41d2378e0d"
+    },
+    {
+      "path": "game/src/ui/ui-scale.js",
+      "bytes": 2982,
+      "mtime": "2026-10-11T14:11:56.123Z",
+      "sha256": "d9f6f5872e0065b4af9875a3f786796adf2d2ad6615871434129aa7607113235"
+    },
+    {
+      "path": "game/src/ui/camp-entry.js",
+      "bytes": 7523,
+      "mtime": "2026-10-11T13:04:32.474Z",
+      "sha256": "b33a309035eedba80102a5e3e9ef7705f79240f30c5f792f5e8ddc0c4fe85ce0"
+    },
+    {
+      "path": "game/css/base-personnel-v12.css",
+      "bytes": 22784,
+      "mtime": "2026-10-12T09:38:56.894Z",
+      "sha256": "bf6c52ffc1b84dfc2ccabc77c304d0684e820d89348eb25b76f5150e9e0f937c"
+    },
+    {
+      "path": "game/css/base-archive-facilities-v12.css",
+      "bytes": 24990,
+      "mtime": "2026-10-12T09:42:59.615Z",
+      "sha256": "6a5a77dc85bb502de5c80e0ec04be2aa388135bcfa6a0a15c01bb8cbee8c319c"
+    }
+  ]
+}

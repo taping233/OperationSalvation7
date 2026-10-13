@@ -1,0 +1,150 @@
+[
+  {
+    "id": "B-N01",
+    "label": "STS2目标选择与完整操作台",
+    "target": [
+      "能量",
+      "手牌",
+      "结束回合",
+      "目标选择"
+    ],
+    "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-reference-collection/battle/originals/sts2-hud38.png",
+    "sourceURL": "https://interfaceingame.com/wp-content/uploads/slay-the-spire-2/SlayTheSpire2_38.png",
+    "sourcePage": "https://interfaceingame.com/screenshots/slaythespire2_38/",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 458543,
+    "SHA": "f7057a16a3a8630755f556b0f28bc53a45fb69bc8e3ba8d5f6574e06a00e528c",
+    "provenance": "截图馆实际游戏状态截图；下载其Download原字节，未resize/裁切/重绘；2026-10-11获取，v0.98.2，画内2026-03-15，不声称最新版；逐张view_image观察",
+    "observation": "左下绿能量3/3、底部五张扇形卡、右下独立End Turn，红箭头与黄色四角共同指向右敌人，血条贴敌脚。HUD占边缘，场景中央保留动作空间；能量/意图以平面剪影和数值辨识。截图没有本项目职业技能按钮。",
+    "newOrReused": "new"
+  },
+  {
+    "id": "B-N02",
+    "label": "STS2当前牌库与词条提示",
+    "target": [
+      "牌库",
+      "消耗牌展示"
+    ],
+    "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-reference-collection/battle/originals/sts2-cards.png",
+    "sourceURL": "https://interfaceingame.com/wp-content/uploads/slay-the-spire-2/slay-the-spire-2-cards.png",
+    "sourcePage": "https://interfaceingame.com/screenshots/slay-the-spire-2-cards/",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 235291,
+    "SHA": "de00958ddf40731983f0949dd54ebbdf025ecdd54b189d2ad6334a14231e6af6",
+    "provenance": "截图馆实际游戏状态截图；下载其Download原字节，未resize/裁切/重绘；2026-10-11获取，v0.98.2，画内2026-03-14，不声称最新版；逐张view_image观察",
+    "observation": "当前牌组五列完整卡面，画面边缘截断下一行说明滚动延续；右长滚动条、左返回、左下View Upgrades分属不同职责。悬起Defend与邻近Block说明区建立局部细节层。未出现消耗牌标题，不能当消耗牌实际状态。",
+    "newOrReused": "new"
+  },
+  {
+    "id": "B-N03",
+    "label": "STS2卡牌图鉴筛选",
+    "target": [
+      "编组",
+      "长卡列表筛选"
+    ],
+    "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-reference-collection/battle/originals/sts2-cards29.png",
+    "sourceURL": "https://interfaceingame.com/wp-content/uploads/slay-the-spire-2/SlayTheSpire2_29.png",
+    "sourcePage": "https://interfaceingame.com/screenshots/slaythespire2_29/",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 316735,
+    "SHA": "a115919642e765bdb0395147c5d7fc1288fa7fd1f4c746adb78e8703e2891824",
+    "provenance": "截图馆实际游戏状态截图；下载其Download原字节，未resize/裁切/重绘；2026-10-11获取，v0.98.2，画内2026-03-14，不声称最新版；逐张view_image观察",
+    "observation": "左固定侧栏含Search、职业图标、Card Type、Rarity、Cost、A-Z；右五列卡组与长滚动条。卡牌标题/费用/类型/正文在框内统一，未知卡保留同形占位；该图是图鉴，未显示选中计数与编组确认，不能当编组实图。",
+    "newOrReused": "new"
+  },
+  {
+    "id": "B-N04",
+    "label": "STS2悬起手牌与指向",
+    "target": [
+      "手牌抬起",
+      "目标选择",
+      "能量"
+    ],
+    "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-reference-collection/battle/originals/sts2-hud36.png",
+    "sourceURL": "https://interfaceingame.com/wp-content/uploads/slay-the-spire-2/SlayTheSpire2_36.png",
+    "sourcePage": "https://interfaceingame.com/screenshots/slaythespire2_36/",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 444526,
+    "SHA": "440ee35f29a41e5f0d6381ebdad7095bff9303947cc7a84950c85c32cf71dc81",
+    "provenance": "截图馆实际游戏状态截图；下载其Download原字节，未resize/裁切/重绘；2026-10-11获取，v0.98.2，画内2026-03-15，不声称最新版；逐张view_image观察",
+    "observation": "中间Strike抬起变大并显示正文，红折节箭头从卡上通向右敌人；余卡仍留底部，两侧能量2/3及End Turn各独立。画面将卡焦点/目标四角/箭头分三种形态，图本身不证明输入方式或移动时序。",
+    "newOrReused": "new"
+  },
+  {
+    "id": "B-N05",
+    "label": "STS1战斗中三择一",
+    "target": [
+      "发现",
+      "抉择"
+    ],
+    "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-reference-collection/battle/originals/sts1-choose-card2.png",
+    "sourceURL": "https://interfaceingame.com/wp-content/uploads/slay-the-spire/slay-the-spire-choose-a-card-2.png",
+    "sourcePage": "https://interfaceingame.com/screenshots/slay-the-spire-choose-a-card-2/",
+    "width": 3840,
+    "height": 2160,
+    "bytes": 758537,
+    "SHA": "a97d39f08d81e81ba1f1517cf23823d544129820717dd14e9bb09b4ce44af87c",
+    "provenance": "截图馆实际游戏状态截图；下载其Download原字节，未resize/裁切/重绘；2026-10-11获取，V2.0，画内01-21-2020，不声称最新版；逐张view_image观察",
+    "observation": "战场压暗但仍可辨，中央三张完整卡、上方Choose a Card卷轴标题、下方居中Skip；中卡悬起放大，词条提示就近浮出。是三择一卡面状态，不是支付/注能。可借小候选居中层级，不照搬古卷轴题材。",
+    "newOrReused": "new"
+  },
+  {
+    "id": "B-N06",
+    "label": "STS1战斗中从牌堆选一张",
+    "target": [
+      "选牌",
+      "付款候选层级",
+      "牌堆选择"
+    ],
+    "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-reference-collection/battle/originals/sts1-choose-card-grid.png",
+    "sourceURL": "https://interfaceingame.com/wp-content/uploads/slay-the-spire/slay-the-spire-choose-a-card.png",
+    "sourcePage": "https://interfaceingame.com/screenshots/slay-the-spire-choose-a-card/",
+    "width": 3840,
+    "height": 2160,
+    "bytes": 1298400,
+    "SHA": "d9c7d749473fcbd8868d35d028f656cf02d1150a0a53a02953bcd641734d7bdb",
+    "provenance": "截图馆实际游戏状态截图；下载其Download原字节，未resize/裁切/重绘；2026-10-11获取，V2.0，画内01-21-2020，不声称最新版；逐张view_image观察",
+    "observation": "多行五列卡面覆盖压暗战场，底部明确Choose a Card to Put on Top of Your Draw Pile；左眼形按钮与中央候选分离，当前Defend+悬起大于其他卡且有词条说明。该图是置牌库顶选择，不是付款或消耗，选中/确认行为未由静图证实。",
+    "newOrReused": "new"
+  },
+  {
+    "id": "B-R01",
+    "label": "STS2官方战斗原图",
+    "target": [
+      "主战斗操作台",
+      "卡面框与费用章"
+    ],
+    "originalPath": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-research-reset/references/sts2-official-battle-1.png",
+    "sourceURL": "https://www.megacrit.com/images/steam_screenshot1_new.png",
+    "sourcePage": "https://www.megacrit.com/press-kits/slay-the-spire-2/",
+    "width": 2560,
+    "height": 1440,
+    "bytes": 3093707,
+    "SHA": "4ad5f844c542c1b7cf49300082e3dea7d07bec85d6467087c6bcd1c8fecd7dca",
+    "provenance": "Mega Crit官方原PNG；版本未标，复用旧下载并本轮view_image重看",
+    "observation": "本轮重看：左能量2/3、中央悬起Rip and Tear、右End Turn各成组；银蓝框、顶端费用章和正文底区分层。人物与敌共横向地面，状态贴单位；只能研究显示合成，不是独立可复用UI纹理。",
+    "newOrReused": "reused"
+  },
+  {
+    "id": "B-R02",
+    "label": "1999 CBT二游底部技能卡操作",
+    "target": [
+      "技能与手牌分工",
+      "地面与单位状态"
+    ],
+    "originalPath": "docs/evidence/2026-10-11-selection-map-plan/references/R99-real-battle.webp",
+    "sourceURL": "https://assets.st-note.com/img/1697017306239-fdN55DDh4H.png?width=1200",
+    "sourcePage": "https://note.com/motidori_46/n/nb1f75d8efeac",
+    "width": 1200,
+    "height": 750,
+    "bytes": 145438,
+    "SHA": "e11f1e57772fe9e07120a922252e73b5206d0c6b6b4fdf696d25235e52396e88",
+    "provenance": "2023-10原作者CBT记录；复用R99原字节，本轮view_image重看，页面不是现行正式版；源URL含width=1200，为网页提供的1200px衍生图，服务器响应WebP，不是未缩放拍摄源",
+    "observation": "本轮重看：敌左我右、生命/状态贴头部，操作卡集中下缘右半；不同卡轮廓、星数和少量颜色区分技能身份。底部卡不使用长正文，不能直接套入本项目完整卡；该图没有本项目职业技能按钮或结束回合。",
+    "newOrReused": "reused"
+  }
+]

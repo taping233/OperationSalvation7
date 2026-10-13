@@ -1,0 +1,397 @@
+{
+  "id": "shop",
+  "title": "铜灯市集",
+  "stem": "05-shop-copper-lanterns",
+  "idea": "五拍按3+2走的拾荒商队；单簧管俏皮但不碎，羽管键琴与拨弦形成步伐，末段换成轻轻讨价还价的回答。",
+  "key": "C dorian",
+  "meter": [
+    5,
+    4
+  ],
+  "bpm_quarter": 100,
+  "bars": 32,
+  "total_beats": 160.0,
+  "seconds": 96.0,
+  "tracks": [
+    {
+      "name": "Clarinet merchant",
+      "program": 71,
+      "bank": 0,
+      "hand": null,
+      "notes": 64,
+      "pan": -17,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/05-shop-copper-lanterns-Clarinet-merchant.wav",
+        "bytes": 36864088,
+        "sha256": "91f02851123029deae26160f2bfe4f227e869fe890e4d83987bcfd056f72a97f"
+      },
+      "target_active_rms_dbfs": -25,
+      "continuous_gain_points": [
+        [
+          0,
+          0.97
+        ],
+        [
+          20.0,
+          0.97
+        ],
+        [
+          40.0,
+          1
+        ],
+        [
+          60.0,
+          1
+        ],
+        [
+          80.0,
+          1.04
+        ],
+        [
+          110.0,
+          1.04
+        ],
+        [
+          130.0,
+          0.94
+        ],
+        [
+          150.0,
+          0.94
+        ],
+        [
+          160.0,
+          0.97
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Harpsichord bargaining",
+      "program": 6,
+      "bank": 0,
+      "hand": null,
+      "notes": 80,
+      "pan": -24,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/05-shop-copper-lanterns-Harpsichord-bargaining.wav",
+        "bytes": 36864088,
+        "sha256": "8da93ccd7bff1271723741a9717e89dcbd5ef6d65b5034d67529cb379351901d"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.8
+        ],
+        [
+          20.0,
+          0.8
+        ],
+        [
+          40.0,
+          0.88
+        ],
+        [
+          60.0,
+          0.88
+        ],
+        [
+          80.0,
+          0.93
+        ],
+        [
+          110.0,
+          0.93
+        ],
+        [
+          130.0,
+          0.81
+        ],
+        [
+          150.0,
+          0.81
+        ],
+        [
+          160.0,
+          0.8
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Pizzicato footsteps",
+      "program": 45,
+      "bank": 0,
+      "hand": null,
+      "notes": 80,
+      "pan": 31,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/05-shop-copper-lanterns-Pizzicato-footsteps.wav",
+        "bytes": 36864088,
+        "sha256": "3cb678d484ed0f6a25d34f0ec0eac047e5fa4c841ccd062ae825efd53c542e0e"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.8
+        ],
+        [
+          20.0,
+          0.8
+        ],
+        [
+          40.0,
+          0.88
+        ],
+        [
+          60.0,
+          0.88
+        ],
+        [
+          80.0,
+          0.93
+        ],
+        [
+          110.0,
+          0.93
+        ],
+        [
+          130.0,
+          0.81
+        ],
+        [
+          150.0,
+          0.81
+        ],
+        [
+          160.0,
+          0.8
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Bassoon grin",
+      "program": 70,
+      "bank": 0,
+      "hand": null,
+      "notes": 10,
+      "pan": 18,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/05-shop-copper-lanterns-Bassoon-grin.wav",
+        "bytes": 36864088,
+        "sha256": "a527cc9d7296f485a91f3fe28a463f2bd8a50ccb771f024bb30eaab17b4775ea"
+      },
+      "target_active_rms_dbfs": -37,
+      "continuous_gain_points": [
+        [
+          0,
+          0.35
+        ],
+        [
+          20.0,
+          0.35
+        ],
+        [
+          40.0,
+          0.8
+        ],
+        [
+          60.0,
+          0.8
+        ],
+        [
+          80.0,
+          0.92
+        ],
+        [
+          110.0,
+          0.92
+        ],
+        [
+          130.0,
+          0.48
+        ],
+        [
+          150.0,
+          0.48
+        ],
+        [
+          160.0,
+          0.35
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Viola canvas",
+      "program": 41,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": -35,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/05-shop-copper-lanterns-Viola-canvas.wav",
+        "bytes": 36864088,
+        "sha256": "827fa7892deda6046f3483f9a0b0e4e1babed7ed2b675f5977e22fdce0ad4af9"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          20.0,
+          0.83
+        ],
+        [
+          40.0,
+          0.92
+        ],
+        [
+          60.0,
+          0.92
+        ],
+        [
+          80.0,
+          0.98
+        ],
+        [
+          110.0,
+          0.98
+        ],
+        [
+          130.0,
+          0.85
+        ],
+        [
+          150.0,
+          0.85
+        ],
+        [
+          160.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    },
+    {
+      "name": "Steady low foundation",
+      "program": 43,
+      "bank": 0,
+      "hand": null,
+      "notes": 16,
+      "pan": 0,
+      "frozen_stem": {
+        "path": ".tmp/music-workstation/missing-bgm/05-shop-copper-lanterns-Steady-low-foundation.wav",
+        "bytes": 36864088,
+        "sha256": "1ca16a635c74620de384f685d24b207bb7bb48bc3ca5ca6b05c3e05cb2780f4f"
+      },
+      "target_active_rms_dbfs": -35,
+      "continuous_gain_points": [
+        [
+          0,
+          0.83
+        ],
+        [
+          20.0,
+          0.83
+        ],
+        [
+          40.0,
+          0.92
+        ],
+        [
+          60.0,
+          0.92
+        ],
+        [
+          80.0,
+          0.98
+        ],
+        [
+          110.0,
+          0.98
+        ],
+        [
+          130.0,
+          0.85
+        ],
+        [
+          150.0,
+          0.85
+        ],
+        [
+          160.0,
+          0.83
+        ]
+      ],
+      "cc64_used": false
+    }
+  ],
+  "loudness": {
+    "input_i": "-18.50",
+    "input_tp": "-7.42",
+    "input_lra": "1.70",
+    "input_thresh": "-28.50",
+    "output_i": "-23.07",
+    "output_tp": "-12.04",
+    "output_lra": "1.60",
+    "output_thresh": "-33.07",
+    "normalization_type": "dynamic",
+    "target_offset": "0.07"
+  },
+  "slow_balance": {
+    "slow_balance_gain_db_range": [
+      -0.4069244687654828,
+      0.4319173513952729
+    ],
+    "time_scale_seconds": 1.5,
+    "maximum_allowed_db": 2.5
+  },
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/05-shop-copper-lanterns.mmp",
+      "bytes": 5889,
+      "sha256": "ee220031bb4a7ab4a43747731ed13d9fbe8c5d28a7c4e4a2b7579198f35ec756"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/05-shop-copper-lanterns.wav",
+      "bytes": 27648044,
+      "sha256": "d74ea861bda9931f0a434022909dd0114536db49ed8634ecc5de3d78a1bcebe6"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/05-shop-copper-lanterns.mp3",
+      "bytes": 3073604,
+      "sha256": "5ee7d6a713447a84b5d2d4edfe03a1f837b113ed4676afbdd538eee323bfb7e1"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/05-shop-copper-lanterns.ogg",
+      "bytes": 1767163,
+      "sha256": "80812f2b5a34a452ce057663c4d56a0be89ab7e9c81c1c4671637642422587ef"
+    }
+  ],
+  "sections": [
+    {
+      "start_bar": 0,
+      "name": "opening"
+    },
+    {
+      "start_bar": 6,
+      "name": "first development"
+    },
+    {
+      "start_bar": 14,
+      "name": "contrast"
+    },
+    {
+      "start_bar": 24,
+      "name": "connected return"
+    }
+  ],
+  "native_project": "frozen pre-master stems, not separately native-rendered",
+  "human_listening": "not claimed"
+}

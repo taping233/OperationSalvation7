@@ -1,0 +1,39 @@
+{
+  "tool": "built-in image_gen",
+  "status": "integrated",
+  "items": [
+    {
+      "name": "wolf-bow",
+      "prompt": "Use case: style-transfer. Redraw image 1, Tianlang longbow game equipment card. Image 1 defines the object and original landscape composition; images 2-4 define brushwork only, do not copy their people or clothes. Preserve the unusual horizontal blue-silver bow spanning almost the full image width, its slightly curved symmetrical limbs with dark blue pointed tips, central sculpted wolf-head grip, thin cyan horizontal bowstring above the limbs, and long narrow vertical central ornament with a wolf-head motif at the upper and lower end. Keep this object orientation and silhouette, no arrows or humans. Make the bow's construction and wolf-shaped central detail readable through a few bold planes rather than pale fine linework. Use cool gray silver and dark slate-blue masses with restrained cyan accents; backdrop a simple pale muted ice-blue field. Rough hand-painted anime illustration, large connected opaque color masses, a few broad directional swipes and blunt dabs, decisive handmade edges and selective unfinished marks. Group light and shadow clearly, matte muted colors with concentrated accents. Readable main structure, economical secondary marks, quiet areas. No fine etched decoration, dense folds, facet mosaics, glossy 3D, airbrush finish, all-over grain or texture filters. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt3-wolf-bow.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "output": ".tmp/imagegen/equip-redraw-20261010/wolf-bow.png"
+    },
+    {
+      "name": "holy-staff",
+      "prompt": "Use case: style-transfer. Redraw image 1, Holy Staff game equipment card. Image 1 is the composition and object target; images 2-4 are painting grammar references only, no copying people. Preserve the square canvas and full-length upright centered staff: long slender pale icy-white shaft, small gold end fittings, large gold sun-disc head in the upper part with a circular halo ring and long pointed cardinal rays plus shorter diagonal rays. Keep the head-to-shaft ratio and ample space on both sides, no person or extra objects. Build a readable sacred sun emblem using broad warm ochre shadows, pale gold light planes and sparse decisive structural edges. Shaft uses a few pale blue-gray planes and restrained warm fittings. Repaint the flat original with strong grouped shadows and handmade broad opaque strokes. Background a quiet flat muted warm cream field; no dense background brush texture. Rough hand-painted anime illustration, large connected opaque color masses, a few broad directional swipes and blunt dabs, decisive handmade edges and selective unfinished marks. Group light and shadow clearly, matte muted colors with concentrated accents. Readable main structure, economical secondary marks, quiet areas. No fine etched decoration, dense folds, facet mosaics, glossy 3D, airbrush finish, all-over grain or texture filters. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt3-holy-staff.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "output": ".tmp/imagegen/equip-redraw-20261010/holy-staff.png"
+    },
+    {
+      "name": "crimson-pouch",
+      "prompt": "Use case: style-transfer. Redraw image 1, Crimson Silk Pouch equipment game card. Image 1 defines the subject and square composition; images 2-4 are brushwork references only, not their characters or clothing. Preserve the centered hanging crimson silk pouch, black thin suspension cords entering from the top, flared irregular open mouth in the upper-middle, narrow cinched neck with dark braided drawstring, rounded broad pouch body below and two thin dangling cord ends below its base. Keep the original scale and placement against a plain deep muted burgundy field, no characters, text or extra props. Focus on a tangible cloth volume made of a handful of large curved opaque crimson planes, darker wine-red grouped side shadows, a few broad directional folds from the cinch. The open mouth has a restrained pale coral-pink inner light painted as a broad simple color mass, not a glossy bloom. Preserve the black cord contrast. A few economical edge and seam accents only. Background remains flat and quiet. Rough hand-painted anime illustration, large connected opaque color masses, a few broad directional swipes and blunt dabs, decisive handmade edges and selective unfinished marks. Group light and shadow clearly, matte muted colors with concentrated accents. Readable main structure, economical secondary marks, quiet areas. No fine etched decoration, dense folds, facet mosaics, glossy 3D, airbrush finish, all-over grain or texture filters. No text, frame, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt3-crimson-pouch.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ],
+      "output": ".tmp/imagegen/equip-redraw-20261010/crimson-pouch.png"
+    }
+  ]
+}

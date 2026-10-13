@@ -1,0 +1,41 @@
+{
+  "status": "single combined candidate pending direction review; not runtime",
+  "tool": "builtin imagegen",
+  "model": "not returned",
+  "seed": "not returned",
+  "generatedPath": "C:\\Users\\太平\\.codex\\generated_images\\01a12a93-2933-7bc1-b347-7b666e9a2d7f\\exec-c13eb91c-9596-4658-83d1-342e8da0483f.png",
+  "source": "docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\art-calibration\\chest\\source\\builtin-sts2-nai-card-combo-v1.png",
+  "bytes": 1370964,
+  "sha256": "a8178d3e026d0b05137e6dbb1ce3144aa640177cc18b168b1e36b9199376cda9",
+  "size": [
+    1254,
+    1254
+  ],
+  "mode": "RGBA",
+  "alphaExtrema": [
+    0,
+    255
+  ],
+  "inputImages": [
+    {
+      "role": "edit target",
+      "path": "docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\art-calibration\\chest\\source\\nai-sts2-cyan-chest-v1.png",
+      "sha256": "8b83b86de82aede7dc182d51f9377689c3b6970aaab7449e9a6bb287629bee37"
+    },
+    {
+      "role": "structure only",
+      "path": "docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\art-research-reset\\references\\sts2-chest.png",
+      "sha256": "7832e9d4e179adab3edb827048cd5e7f8a05cfccbf91424d75f09d1d06dad53c"
+    },
+    {
+      "role": "paint style only",
+      "path": "game\\assets\\cards\\equip-tt2-pearlbox.webp",
+      "sha256": "2dd1921d7eda3f260ec74be23decc0a70cb6925812fd4e16d1ba0e1e7305e65b"
+    },
+    {
+      "role": "paint style only",
+      "path": "game\\assets\\cards\\equip-tt3-crimson-pouch.webp",
+      "sha256": "25ec4354678c02e55b720c0ee168b3a3490a6df83e274dbd6810f8f3ec042a78"
+    }
+  ]
+}

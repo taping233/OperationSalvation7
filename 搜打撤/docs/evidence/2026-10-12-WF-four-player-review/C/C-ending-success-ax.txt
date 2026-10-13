@@ -1,0 +1,48 @@
+- main:
+  - text: 金币
+  - generic: "16"
+  - text: 攻击
+  - generic: "4"
+  - button "离开对局":
+  - button:
+  - button:
+  - generic: 当前生命
+  - generic: 8/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - text: 第4层 · 污染核心
+    - generic: 第 4 层
+    - heading "trophy 首脑突破 · 满载而归" [level=2]:
+      - img "trophy"
+      - text: 首脑突破 · 满载而归
+    - generic: 击破第四层首脑，从终局撤离点凯旋 · 用时 35:13 · 行动 40 次 · 抵达 第 4 层 · 剩余生命 8/35 · 本局携带 16 币（留在局中）
+    - paragraph:
+      - img "sparkles"
+      - text: 本局真实入库 13 张 · 口袋带回 7 张 ·
+      - img "wood"
+      - text: 木材 ×0 ·
+      - img "bread"
+      - text: 口粮 ×0 ·
+      - img "medal"
+      - text: 首探经验 +94
+    - paragraph:
+      - img "cross"
+      - text: 散失：未入库 0 张 · 口袋散失 11 张
+    - paragraph:
+      - img "home"
+      - text: 已运回基地：
+      - img "wood"
+      - text: 木材 ×0 ·
+      - img "bread"
+      - text: 口粮 ×0 ·
+      - img "archive"
+      - text: 仓库总持有 18/25 张（含往局） ·
+      - img "sparkles"
+      - text: 图鉴 0
+    - paragraph: 下次出发时可以从仓库选择卡牌携带；储备币 0 币留在基地（不进局，用于孵蛋与基地建设）。
+    - button "home 回基地":
+      - img "home"
+      - text: 回基地
+    - button "runner 再出发":
+      - img "runner"
+      - text: 再出发

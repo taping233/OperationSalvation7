@@ -1,0 +1,107 @@
+[
+  {
+    "path": "appearance-after.jpg",
+    "bytes": 90353,
+    "sha256": "8d85db80e59d1ad731aa387e6435c97ecaef254f46553fe5b3fa35a342ba88c6"
+  },
+  {
+    "path": "appearance-before.jpg",
+    "bytes": 118468,
+    "sha256": "6df14fcd7a7a76a12f2f201c3d164c8651c0f1f559829d23b0a301643e3af31c"
+  },
+  {
+    "path": "appearance-observation.json",
+    "bytes": 497,
+    "sha256": "60e7dcd3bf453864ccaacc6027a13587cb5771c0db48c8b34afb89df410c8298"
+  },
+  {
+    "path": "archive-story.jpg",
+    "bytes": 76054,
+    "sha256": "aa060c9f0ee18413bfdc26bc9819bfcc093de74c1489b88d37fb12587f048068"
+  },
+  {
+    "path": "companions.jpg",
+    "bytes": 97922,
+    "sha256": "636f4ba9b930421d2f8419ede5f6e2d162b87e80779956ff04ab64318a143011"
+  },
+  {
+    "path": "docs-check.json",
+    "bytes": 1988,
+    "sha256": "4f5ce7cf231cd32ef9e8704a881139f37d45bdc14eae1ac608aa89fe9bbc942d"
+  },
+  {
+    "path": "person-pool.jpg",
+    "bytes": 140736,
+    "sha256": "1e88d724a537fd9352dd2ab50fcbec71875652f26565d38603b441371112043b"
+  },
+  {
+    "path": "README.md",
+    "bytes": 12602,
+    "sha256": "1c8c49bfc8dfa33d0c1da4c66b0f183d802d2fd3986235a2f2d099d5528552ac"
+  },
+  {
+    "path": "shop.jpg",
+    "bytes": 90254,
+    "sha256": "fd43a75d386019a02147bda2cab547f516e95eec3d34dbf262e31cd7e09bfffa"
+  },
+  {
+    "path": "task.json",
+    "bytes": 1726,
+    "sha256": "aea1260fea41c15a61c558896a31d790a8988d76b7a49d0130722728dd376cd3"
+  },
+  {
+    "path": "warehouse.jpg",
+    "bytes": 119434,
+    "sha256": "392614919ada8a15be4aca06f451a141f1fea406f3905830e65730fc9cc06e05"
+  },
+  {
+    "path": "before/game__css__base-camp-rework.css",
+    "bytes": 42801,
+    "sha256": "268538bb49fef0f95efdcdaf0b2aa267f914080fab743cc968e9a4e957204900"
+  },
+  {
+    "path": "before/game__src__hub__game.hub.depart.js",
+    "bytes": 25022,
+    "sha256": "3b3cd45291dd8fabcf6a38ea73b4df2a55dbfaebd61903a4fee3402ccb250fde"
+  },
+  {
+    "path": "before/game__src__hub__game.hub.js",
+    "bytes": 21417,
+    "sha256": "b4ce1ffa8bbeb15f742f7e11b8461f738fc087886eb048f0bd4c9afcbff9b608"
+  },
+  {
+    "path": "before/game__src__hub__game.hub.pages.js",
+    "bytes": 35121,
+    "sha256": "3a34ff389c04bc9fa76c6934e5838ddc0540191976e5dd3073407659d2b35689"
+  },
+  {
+    "path": "before/game__src__hub__hub.archive.js",
+    "bytes": 9746,
+    "sha256": "925bdb4f56b12ae976f643758121af1ede64b4047952ae7abb242f555e0ba2bb"
+  },
+  {
+    "path": "before/game__src__hub__hub.facilities.js",
+    "bytes": 3543,
+    "sha256": "c0466b32d552b5fbcd3f5bf8dae7c51cce6daa3c6291d14bd777e1c2d5f37e2e"
+  },
+  {
+    "path": "before/game__src__hub__hub.personnel.js",
+    "bytes": 19146,
+    "sha256": "fea0e862ca069b58813381833801e94c6ca51350124dba384c2a98139562c332"
+  },
+  {
+    "path": "before/game__src__hub__hub.presentation.js",
+    "bytes": 14471,
+    "sha256": "4024ec053fe65b5d05f481d458dbc81ccd936da7f12788683cce5eca9bfa7ab4"
+  },
+  {
+    "path": "before/game__src__hub__hub.visuals.js",
+    "bytes": 4917,
+    "sha256": "65efbf4e36d1d0da036dfe3639f0af1c7a7e90d69e6f5f5e135d164ae0316c01"
+  },
+  {
+    "path": "before/game__src__hub__hub.warehouse.js",
+    "bytes": 18047,
+    "sha256": "2deca931a0c1087d56d96a73c986c506b2043e5758760f203b4ce5071145eccf"
+  }
+]

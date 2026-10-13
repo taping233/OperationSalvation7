@@ -1,0 +1,59 @@
+{
+  "native_engine": "LMMS 1.2.2 / sf2player / FluidSynth",
+  "bpm": 128,
+  "bars": 16,
+  "seconds_pcm": 30.0,
+  "gain_db": 18.97,
+  "mp3_measurement": {
+    "input_i": -19.5,
+    "input_tp": -5.3,
+    "input_lra": 2.5,
+    "input_thresh": -29.53
+  },
+  "checks": {
+    "exact_30s_wav": true,
+    "finite_pcm": true,
+    "no_pcm_clipping": true,
+    "mp3_true_peak_below_minus_1": true,
+    "lufs_internal_target": true,
+    "no_unplanned_internal_silence": true,
+    "native_process_exited": true
+  },
+  "section_rms_dbfs": [
+    -22.203000152734575,
+    -21.908015830007372,
+    -21.72260751931301,
+    -22.861429794805225,
+    -22.049694351477967,
+    -21.04230850218687
+  ],
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-demo/battle-shadowtide-30s.mmp",
+      "bytes": 45713,
+      "sha256": "cfd262949b3c03ae3cfe578cb6e1caff5a507a9c2fe533f1898cec895de2966b"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-demo/battle-shadowtide-30s.wav",
+      "bytes": 8640044,
+      "sha256": "502558d62c685be479b121d90d4598089df5fc37a4f03f0b3057ed189e891fe5"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-demo/battle-shadowtide-30s.mp3",
+      "bytes": 961604,
+      "sha256": "32d1ad6c85d699e4787f38cb9c19080fb695d10cb9a69dbd0b0e70df94f4a956"
+    },
+    {
+      "path": "docs/evidence/2026-10-12-WF-battle-rewrite-demo/battle-shadowtide-30s-native.wav",
+      "bytes": 12240010,
+      "sha256": "6d6e0413d951b04df63c58e4e18c1d36e15afd0e7c0ba2d7400df1de86ee0ef7"
+    },
+    {
+      "path": ".tmp/music-workstation/GeneralUser-GS.sf2",
+      "bytes": 32319396,
+      "sha256": "9575028c7a1f589f5770fccc8cff2734566af40cd26ed836944e9a5152688cfe"
+    }
+  ],
+  "reference_recordings_used_as_samples": false,
+  "aesthetic_acceptance": "Pending user listening"
+}

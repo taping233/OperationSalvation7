@@ -1,0 +1,21 @@
+{
+  "card_id": "tt2-swiftarrow",
+  "model": "nai-diffusion-4-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 832284083,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nno humans, arrow, arrowhead, feathers, motion lines, simple background\n\nOne slender silver arrow flies diagonally from lower left to upper right across quiet warm-gray space. Its small clean pointed steel head is near the upper-right third, connected to a straight thin dark shaft and a pair of pale blue feather vanes near the lower-left third. The arrow silhouette is elegant, light and narrow, with generous empty space above and below. The rear feather edges dissolve into exactly two broad tapering cyan-blue paint swipes trailing toward the lower-left edge, suggesting speed and air. The swipes stay behind the arrow and do not obscure its silhouette. Only the arrowhead has a crisp pale highlight; the shaft and grouped feathers use a few quiet planes. A solid desaturated warm-gray background supports the silver and blue accent. No target, impact, extra arrows, bow, people or scenery.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, hands, bow, quiver, multiple arrows, spear, oversized arrowhead, thick shaft, ornate weapon, sparks, particles, target, explosion, complex background, border",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\swiftarrow-20261010\\swiftarrow.png",
+  "installed": false,
+  "design": "一支细银箭斜掠暖灰底，箭羽化为两笔青蓝风痕；用轻快轮廓与留白表达迅疾。"
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-wu-continuous-attack-v2-1010",
+  "date": "2026-10-10",
+  "owner": "Friday",
+  "goal": "承接无攻击动画，增加身体发力并导出连续帧",
+  "paths": [
+    "game/art-source/characters/wu-slim-sprites-20261010/continuous-attack-v2",
+    "docs/evidence/2026-10-10-wu-continuous-attack-v2"
+  ],
+  "doneWhen": [
+    "36帧攻击与两倍待机首尾相接，固定剑长和脚底",
+    "当前内置浏览器逐帧和正常速度目检，记录证据与限制"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "当前Codex内置浏览器逐帧与正常速度循环目检，按钮滑杆真实输入，控制台无error/warn",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "241点几何检查、36攻击帧及72待机配套像素检查、首尾脚底和命中停顿一致",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "rig/preview语法及docs检查通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "独立预览未接入正式战斗；受击死亡尚未按本版方案重做；老板尚未确认新版观感"
+  ],
+  "updatedAt": "2026-10-10T05:23:14.771Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

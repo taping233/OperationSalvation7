@@ -1,0 +1,66 @@
+{
+  "testsRun": false,
+  "references": "../2026-10-10-WF-base-design-audit-1010/audit.json",
+  "buildRun": false,
+  "newServices": false,
+  "stage": "implementation-complete-user-review-pending",
+  "kind": "implementation-delivery",
+  "browserUsed": false,
+  "sources": [
+    {
+      "mtimeUtc": "2026-10-10T11:18:41.8865711Z",
+      "sha256": "fbcbc222c670b32e8bb8dba210c51c71eb4298d91e94590b51efef22f02d75cc",
+      "bytes": 17412,
+      "path": "game/src/hub/hub.personnel.js"
+    },
+    {
+      "mtimeUtc": "2026-10-10T11:26:11.4938186Z",
+      "sha256": "0f07fdc82f8fab43768a52d46ff82dda20bef28a593e31e8e4ff715d99f42a9d",
+      "bytes": 17098,
+      "path": "game/src/hub/hub.warehouse.js"
+    },
+    {
+      "mtimeUtc": "2026-10-10T11:04:50.1129610Z",
+      "sha256": "96efeda10144a9a62bd720db0537e9a77ba71251bbec296099e5b1b1ac70d4c4",
+      "bytes": 3759,
+      "path": "game/src/hub/hub.facilities.js"
+    },
+    {
+      "mtimeUtc": "2026-10-10T10:54:11.1498027Z",
+      "sha256": "7ef5a2d129da6af18efe88c60c6fa5ff430e7997180bb2a93c2852536764b0e0",
+      "bytes": 9772,
+      "path": "game/src/hub/hub.archive.js"
+    },
+    {
+      "mtimeUtc": "2026-10-10T10:55:37.4102481Z",
+      "sha256": "24aaa824269883acf0bb8b2cee3bd280228869e51bbb95de8740d42e1266dc59",
+      "bytes": 7987,
+      "path": "game/src/hub/hub.presentation.js"
+    },
+    {
+      "mtimeUtc": "2026-10-10T10:48:13.5557632Z",
+      "sha256": "65efbf4e36d1d0da036dfe3639f0af1c7a7e90d69e6f5f5e135d164ae0316c01",
+      "bytes": 4917,
+      "path": "game/src/hub/hub.visuals.js"
+    },
+    {
+      "mtimeUtc": "2026-10-10T11:26:12.4811094Z",
+      "sha256": "9554374a7778dbfd9d2c0c961cc24a6f341eaef1a9e6c3dd09d0c448b1a89426",
+      "bytes": 35237,
+      "path": "game/src/hub/game.hub.pages.js"
+    },
+    {
+      "mtimeUtc": "2026-10-10T11:14:17.2512096Z",
+      "sha256": "2a5296e035f4268ab9539dd190eb0150900e64c70b6986c20ad91570f3ef6f77",
+      "bytes": 25188,
+      "path": "game/src/hub/game.hub.depart.js"
+    },
+    {
+      "mtimeUtc": "2026-10-10T11:26:12.6186989Z",
+      "sha256": "816e640376bb39376b4e53b94b21320ae9e6fda0ddc7230b577ce8252463570e",
+      "bytes": 41207,
+      "path": "game/css/base-camp-rework.css"
+    }
+  ],
+  "recordedAtUtc": "2026-10-10T11:28:24.3662403Z"
+}

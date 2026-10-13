@@ -1,0 +1,156 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3sp-dodge",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-b1863095-f5a3-407f-8b23-b41caf648cf8.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-dodge-chain/cards-spell-tt3sp-dodge-source.png",
+        "bytes": 1708267,
+        "sha256": "62145913ca50166ba2df5f1628bbfc0509c8b16aa536c20414ffa9ec8aafa542"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-dodge-chain/cards-spell-tt3sp-dodge-full-before.webp",
+          "bytes": 17332,
+          "sha256": "92348e8dec2b6b0a20ddd56ffc599d69474a828f657659864f6ebc19ac738c35"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-dodge-chain/cards-spell-tt3sp-dodge-thumb-before.webp",
+          "bytes": 4498,
+          "sha256": "ce79c51fbfbedf922ae4e83790c246876f2bb708b8b8c7316acc0f7a6ed20436"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3sp-dodge.webp",
+          "bytes": 58472,
+          "sha256": "691af66492d2c72ca6a412e86df26dfabebc0ac1faeba69aabfd9690b51975e5",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3sp-dodge.webp",
+          "bytes": 7592,
+          "sha256": "b07602059d7265fd4d48ecf131743015f4e2b177b247d67578e060ef0daa3326",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "dodge-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt3sp-dodge.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 58472,
+            "sha256": "691af66492d2c72ca6a412e86df26dfabebc0ac1faeba69aabfd9690b51975e5",
+            "source": "docs/evidence/2026-10-10-dodge-chain/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3sp-dodge.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 4498,
+            "sha256": "ce79c51fbfbedf922ae4e83790c246876f2bb708b8b8c7316acc0f7a6ed20436",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3sp-dodge.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 7592,
+            "sha256": "b07602059d7265fd4d48ecf131743015f4e2b177b247d67578e060ef0daa3326",
+            "source": "docs/evidence/2026-10-10-dodge-chain/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-chain-lightning",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a12465-378e-75f3-9cd2-adababe38fa3\\exec-4a302177-4905-42f2-9cd9-a8f47bf96e4f.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-dodge-chain/cards-spell-tt3-chain-lightning-source.png",
+        "bytes": 1713282,
+        "sha256": "c56b2eaad9e96be08cd2df053669cb5ed174eac650bd3c59bb77a03b900f5b0a"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-dodge-chain/cards-spell-tt3-chain-lightning-full-before.webp",
+          "bytes": 27876,
+          "sha256": "58cf31130d8ead51603e2e8dbe59f8b24a45982475f19b4a79c12be9acc25314"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-dodge-chain/cards-spell-tt3-chain-lightning-thumb-before.webp",
+          "bytes": 8252,
+          "sha256": "050d2f46d466148e793ef38aa6604ef066aaef82cc7c828f6ca38f4d4258b7a5"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-chain-lightning.webp",
+          "bytes": 87282,
+          "sha256": "75c317948b1f667e7319e70ea1171f44b41d184885dc0b518338ed9df6ab1850",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-chain-lightning.webp",
+          "bytes": 11438,
+          "sha256": "eaf4a4318dbfac7ec95766cac1c273d9d99b8f6ea99c754b09e933ed04724602",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "chain-lightning-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt3-chain-lightning.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 87282,
+            "sha256": "75c317948b1f667e7319e70ea1171f44b41d184885dc0b518338ed9df6ab1850",
+            "source": "docs/evidence/2026-10-10-dodge-chain/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-chain-lightning.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 8252,
+            "sha256": "050d2f46d466148e793ef38aa6604ef066aaef82cc7c828f6ca38f4d4258b7a5",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-chain-lightning.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 11438,
+            "sha256": "eaf4a4318dbfac7ec95766cac1c273d9d99b8f6ea99c754b09e933ed04724602",
+            "source": "docs/evidence/2026-10-10-dodge-chain/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 904,
+  "manifest_count_after": 906
+}

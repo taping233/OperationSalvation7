@@ -1,0 +1,21 @@
+{
+  "card_id": "tt3-fly-arrowhawk",
+  "model": "nai-diffusion-4-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 1865969119,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1other, solo, hand focus, two-handed grip, sword, close-up, from below, foreshortening, dutch angle, cropped arms, painterly, broad brush strokes\n\nOnly two gripping hands and short sleeve ends enter from the upper-left; the entire body stays outside the frame. Both hands grasp ONE short dark hilt; ONE broad steel blade sweeps diagonally downward toward the lower-right edge. The grip occupies one sixth of the frame; the blade is the dominant connected shape. One short pale tapering slash mark follows the blade near its tip. No target or other prop. Background is quiet muted blue-gray with a restrained dark burgundy transition in the upper-left.\n\nEconomical hand-painted anime drawing. Sparse firm contour accents explain fingers, hilt and blade edges. Inside these shapes, broad matte steel-gray, charcoal and muted skin planes form grouped light and shadow. A few loaded wide strokes turn the blade and sleeves; surfaces stay calm. Keep grip anatomy clear without glove seams, finger wrinkles or decorative detailing. No finely polished surfaces or scattered texture.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "other, anonymous martial artist, dark gray plain sleeves, plain black gloves",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, head, face, torso, legs, boots, full body, named character, extra swords, extra hands, wrist bandages, ornate guard, etched blade, glove seams, tiny wrinkles, fine ink linework, dense hatching, vector art, glossy 3d render, grain filter, sparks, target, scenery",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\flying-cleave-simple-20261011\\cleave.png",
+  "installed": false,
+  "design": "仅双手局部与一道下劈刀锋；删躯干腿靴细饰，少量结构线、形体内宽笔明暗，安静蓝灰酒红背景。"
+}

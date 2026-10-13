@@ -1,0 +1,44 @@
+{
+  "authorization": "2026-10-11 老板：都接入；范围为本会话花鸩、诅咒之刃、充能射线三张候选",
+  "items": [
+    {
+      "card_id": "tt3sp-flowerzhen",
+      "asset": "cards/spell-tt3sp-flowerzhen.webp",
+      "source": "D:/素材/代号柒/搜打撤/.tmp/imagegen/2026-10-11-flowerzhen/flowerzhen-redraw.png",
+      "revision": "flowerzhen-original-rough-20261011",
+      "prompt": "Use case: style-transfer. Redraw the square game-card illustration 花鸩. Image 1 is the EDIT TARGET and the authority for subject, composition and palette. Images 2–4 are ONLY brushwork references; borrow their broad opaque hand-painted anime painting grammar, never their people, costumes, props or text.\n\nPreserve image 1's simple front-view composition: one floating dark violet poisonous flower slightly above the center, occupying about half the image width; thick layered curled and pointed petals opening upward and outward, charcoal-plum shadows, blue-violet turning planes. Its small luminous magenta opening faces the viewer. From that opening one very narrow vivid purple stream of viscous poison hangs straight down through the lower half, ending in a large suspended teardrop near the bottom and one tiny detached droplet below. Keep the bloom-to-drip proportions, silhouette, empty space and upright direction. No stem, leaves, vase, bird, character, ground or scenery.\n\nRepaint with fewer, larger connected color masses and a few broad curved opaque strokes that follow each substantial petal. Hard handmade shadow edges, selective broken stroke endings, quiet matte petal surfaces, just enough structure around the opening and overlapping petals. The darkest outer petals form one clear silhouette; concentrate the strongest purple accents at the opening and poison. Avoid thin etched petal veins, tiny facet mosaics, glossy 3D or smooth airbrush rendering, excessive bloom and uniform grain or canvas filters.\n\nBackground remains a quiet opaque burgundy/crimson field darkening into plum below, summarized in a few very broad painted masses. No decorative objects or particles. Square 1:1, full image, no text, border, frame, watermark or UI.",
+      "references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt3sp-flowerzhen.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+      ]
+    },
+    {
+      "card_id": "cc-cursed-blade",
+      "asset": "cards/martial-cc-cursed-blade.webp",
+      "source": "D:/素材/代号柒/搜打撤/.tmp/imagegen/2026-10-11-cursed-blade/cursed-blade-redraw.png",
+      "revision": "cursed-blade-original-rough-20261011",
+      "prompt": "Use case: style-transfer. Redraw the game-card illustration 诅咒之刃 in a rough hand-painted anime block-brush style. Image 1 is the EDIT TARGET: retain its central upright sword, camera, scale, cropped grip, broken hanging chains, violet curse and blade-point contact. Images 2–4 are ONLY references for broad opaque painting; do not reproduce their characters, costumes, objects or lettering.\n\nKeep a landscape 4:3 composition. A massive charcoal-black double-edged sword stands vertically in the middle, its grip continuing beyond the top edge. A blunt pointed crossguard spans the upper fifth. Two short lengths of heavy broken chain hang from its ends, with just a few loose broken links. The blade extends nearly the full image height, ending at the cracked contact point near the bottom center. Build the blade from two or three long connected near-black and blue-gray planes; a narrow violet luminous line and a few simple star-shaped curse marks run down the central groove. One or two broad dark-purple ribbon-like curse curls rise behind the blade. Reduce the intricate hilt engraving to a few large hooked shapes, and reduce chain links to readable chunky silhouettes.\n\nThe brightest small purple accent is the blade point entering the ground. Several broad dark fissures radiate from that one point across a few cold gray-violet ground planes; use a handful of decisive directional strokes, not a network of detailed rubble. Simplify the background into quiet overlapping ink-blue and muted teal vertical painted masses with one broad violet area immediately behind the sword. These are abstract color planes, not a detailed architectural scene. No characters or new props.\n\nRough hand-painted anime color study. Large connected opaque masses, a few wide directional swipes and blunt dabs, handmade hard edges and selectively unfinished areas. Keep broad quiet matte surfaces, economical shape-defining marks, clearly grouped light and shadow. Concentrate violet color at the groove and contact; background lower in contrast. No tiny facet mosaic, fine metal engraving, polished 3D, airbrush gloss, dense debris, uniform texture filter, full-screen particles or excessive glow. No text, frame, border, watermark or UI.",
+      "references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\martial-cc-cursed-blade.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+      ]
+    },
+    {
+      "card_id": "tt12-chargeray",
+      "asset": "cards/spell-tt12-chargeray.webp",
+      "source": "D:/素材/代号柒/搜打撤/.tmp/imagegen/2026-10-11-chargeray/chargeray-redraw.png",
+      "revision": "chargeray-original-rough-20261011",
+      "prompt": "Use case: style-transfer. Redraw the game-card illustration 充能射线 as a rough hand-painted anime color study. Image 1 is the EDIT TARGET, authoritative for the composition, cropped hand, dark sleeve with gold cuff, three orange-gold charging rings, horizontal ray and pale gray backdrop. Images 2–4 are ONLY references for broad opaque anime brushwork; do not introduce their people, faces, hats, costumes, props or text.\n\nKeep landscape 4:3. A single forearm enters from the left at mid-height, dark charcoal-blue loose sleeve and one broad muted gold cuff, open pale hand reaching toward the right. Most of the arm and body remain cropped beyond the left edge; do not reveal a face or full person. The ray begins near the palm at about half the image height and travels straight horizontally to the right, continuing beyond the right edge. Keep the ray slender and extremely straight: one bright cream-white core with restrained warm golden edges. Exactly three upright elliptical orange-gold rings surround the ray at spaced positions in the left and central half. Each ring is perpendicular to the beam and painted as a few thick curved strokes, with a brighter near edge and a muted orange far edge. Preserve the original ring spacing, ray direction, hand placement and large quiet upper and lower negative spaces.\n\nConstruct sleeve and cuff in a small number of connected opaque dark and gray-blue planes, broad directional swipes and blunt accents. Readable anime hand with economical fingers and a few warm-gray shadow shapes. Simplify cuff decoration into broad broken gold shapes. Rings and beam have handmade painted edges and concentrated light; do not use fine particles or smooth digital neon halos to express energy. Keep the light pale cool-gray background almost uniform, with only a few large faint paint passes, no physical environment or props.\n\nLarge connected matte color masses, hard handmade shadow boundaries and selectively unfinished brush endings, calm secondary surfaces, few wide strokes that explain form. No fine cloth wrinkles, dense metallic engraving, tiny facet mosaics, glossy 3D, airbrushed finish, grain/canvas filter, sparks, extra rings or scattered particles. No text, frame, border, watermark or UI.",
+      "references": [
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\spell-tt12-chargeray.webp",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+        "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+      ]
+    }
+  ]
+}

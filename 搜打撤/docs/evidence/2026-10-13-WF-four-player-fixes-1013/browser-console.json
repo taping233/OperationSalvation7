@@ -1,0 +1,176 @@
+[
+  {
+    "level": "warn",
+    "message": "[music] load failed title Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:32:55.035Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed title Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:33:01.339Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed title Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:33:01.490Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed board Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:36:56.362Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed board Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:36:57.895Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed board Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:37:17.101Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed board Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:37:27.336Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed title Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:37:29.553Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed title Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:37:46.809Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed title Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:37:46.848Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed board Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:38:27.406Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed board Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:39:09.702Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed board Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:39:13.890Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed board Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:39:23.586Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed board Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:39:29.376Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed board Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:39:37.215Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed board Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:39:37.564Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed board Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:39:45.048Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed board Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:39:45.187Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed board Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:39:50.300Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed battle Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:39:50.301Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[battle:scenery] painted layer unavailable EncodingError: The source image cannot be decoded.",
+    "timestamp": "2026-10-12T18:39:50.755Z",
+    "url": "http://127.0.0.1:5371/src/battle/view/battle.view.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed battle Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:39:59.654Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed battle Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:40:03.508Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed battle Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:40:07.769Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed title Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:41:10.096Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed title Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:41:34.558Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed title Failed loading audio file with status: 403.",
+    "timestamp": "2026-10-12T18:41:50.918Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  },
+  {
+    "level": "warn",
+    "message": "[music] load failed board Decoding audio data failed.",
+    "timestamp": "2026-10-12T18:43:19.219Z",
+    "url": "http://127.0.0.1:5371/src/audio/sound.js"
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "sourcePath": "docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\reference-implementation\\map\\source\\rest-heat-cell-v1.png",
+    "sourceSHA256": "1d91417eea484184c64be846f78cb262ca3062c7e374777bfbfa04d038675f40",
+    "runtimePath": "game\\assets\\scenes\\map-nodes\\rest-heat-cell-1011.webp",
+    "runtimeSHA256": "ea177d2c97939cd941582214c1a39e2380f353c3da8fa84505ea0fafd1c760e0",
+    "status": "acquisition/encoding receipt only; not game-tested; no alpha/format/syntax acceptance"
+  },
+  {
+    "sourcePath": "docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\reference-implementation\\map\\source\\battle-security-shard-v1.png",
+    "sourceSHA256": "6605a8fb4d0a1e6432e1c67e9787adf6f35c7db83fa68bef7842e7219015f235",
+    "runtimePath": "game\\assets\\scenes\\map-nodes\\battle-security-shard-1011.webp",
+    "runtimeSHA256": "0ae9a6bed89201af11fe22c9ee807dbddd03c3e86a01f7206e5e3ff447d12610",
+    "status": "acquisition/encoding receipt only; not game-tested; no alpha/format/syntax acceptance"
+  },
+  {
+    "sourcePath": "docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\reference-implementation\\map\\source\\shop-exchange-token-v1.png",
+    "sourceSHA256": "d819e2b3c6a361197289c249b64a7a6f28b2d7409f3599e749fbbd5baf5408ee",
+    "runtimePath": "game\\assets\\scenes\\map-nodes\\shop-exchange-token-1011.webp",
+    "runtimeSHA256": "a954e5228f9570c49de9eaf95b851dffd4665f83be328b85ccb6713091638f91",
+    "status": "acquisition/encoding receipt only; not game-tested; no alpha/format/syntax acceptance"
+  },
+  {
+    "sourcePath": "docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\reference-implementation\\map\\source\\event-record-fragments-v1.png",
+    "sourceSHA256": "207a2cf9e82597a05656470f758bf4ec532a70358ea44a1953e3088d4fb7be2a",
+    "runtimePath": "game\\assets\\scenes\\map-nodes\\event-record-fragments-1011.webp",
+    "runtimeSHA256": "d67a4310aaaa7a75b3c7c6c9b0ff88035b938e975992fd50577e8ed29caba76a",
+    "status": "acquisition/encoding receipt only; not game-tested; no alpha/format/syntax acceptance"
+  },
+  {
+    "sourcePath": "docs\\evidence\\2026-10-11-WF-selection-map-implementation-1011\\reference-implementation\\map\\source\\passage-transit-core-v1.png",
+    "sourceSHA256": "4cecb8bdbd2dbc8b0b5b7046499cc1c5fb0fabd17ce134918bd9d7e3ce705d6d",
+    "runtimePath": "game\\assets\\scenes\\map-nodes\\passage-transit-core-1011.webp",
+    "runtimeSHA256": "e9b7fec6ed2f86770449aa911433d77b9cc6150f64c4c60789c06b04be912550",
+    "status": "acquisition/encoding receipt only; not game-tested; no alpha/format/syntax acceptance"
+  }
+]

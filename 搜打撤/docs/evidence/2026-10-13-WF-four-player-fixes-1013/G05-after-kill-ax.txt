@@ -1,0 +1,34 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5371/four-player-qa.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 15, 95-113, 128-129, 132, 147-160
++			134 text 冬境街区 · 遭遇
++			135 text 第 1 回合
++			136 text 你的行动
++			137 text 能量已耗尽
++			138 container
++				139 button 旁人的意图：攻击 · 4。点击查看完整说明
++					140 image swords
++					141 text 4
++				142 image slime
++				143 text 旁人
++				144 image swords
++				145 text 4
++				146 container
++					147 text 30/30
++						148 container
++							149 text 史诗 史诗
++					150 text 能量不足：需要 2，当前 0
++			151 container 战术操作
++				152 button bag 背包
++					153 image bag
++					154 text  背包
++				155 button runner 撤离（判负）
++					156 image runner
++					157 text  撤离（判负）
++				158 button gear 设置
++					159 image gear
++					160 text  设置
++				161 button skip 结束回合
++					162 image skip
++					163 text  结束回合
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5371/four-player-qa.html

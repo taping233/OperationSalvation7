@@ -1,0 +1,21 @@
+{
+  "card_id": "tt3-skewer",
+  "model": "nai-diffusion-4-5-full",
+  "width": 1024,
+  "height": 1024,
+  "seed": 477313027,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nno humans, spear, metal plate, close-up, foreshortening, dutch angle, 1.4::gouache painting, thick opaque brush strokes, painterly edges::\n\nA single broad steel spearhead has just punched THROUGH one dark curved armor plate. The torn exit sits just right of center; the spearhead projects toward the lower-left foreground with its tip near the lower-left edge. Its narrower neck passes back through the dark opening and is hidden behind the plate. No handle is visible. The plate fills the upper-right and extends beyond top and right edges; three broad bent metal lips curl outward around the hole. Sharp pale steel at the exit contrasts with the dark inner opening. Background is quiet blue-gray with a muted gray-ochre diagonal brush mass.\n\nBroad loaded flat-brush swipes run along the spearhead; one wide ivory-gray highlight follows its ridge. The plate uses charcoal-blue curved strokes and a broad cool shadow; blunt steel-gray dabs explain the bent lips. Keep the strongest small light-dark edges at the exit, not across the full plate. Let underpainting show at uneven stroke endings; preserve grouped volume with a few broad midtone turns. No fine engravings, scattered debris or glossy reflections.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "character_prompt": "",
+  "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, hands, faces, blood, flesh, extra weapons, complete spear shaft, multiple shields, floating shards, ornate metalwork, fine scratches, thin ink outlines, vector art, tiny facets, glossy 3d render, noise filter, many sparks, scenery",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\output\\pierce-redraw-20261011\\pierce.png",
+  "installed": false,
+  "design": "单枪穿单甲出口特写，枪尖向左下前景，甲面右上出框，出口翻边与暗破口集中最强对比。"
+}

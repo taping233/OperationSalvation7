@@ -1,0 +1,156 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt3-blooddrinker",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-0a0e2360-5cd1-42d6-b698-9c34b226aec1.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-blood-map/cards-equip-tt3-blooddrinker-source.png",
+        "bytes": 1492518,
+        "sha256": "b1f9b6a8a174b81fc81a7c092fb8304c084b0b9cec913b78bea1f421dbf0b123"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-blood-map/cards-equip-tt3-blooddrinker-full-before.webp",
+          "bytes": 31734,
+          "sha256": "cd60db6930ca4b73487e3db5e90f1be1fcd7ba0770d846f2ded6915b3242b963"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-blood-map/cards-equip-tt3-blooddrinker-thumb-before.webp",
+          "bytes": 8456,
+          "sha256": "8e6d25b7290fba194b666da8296d612275615b12ff6893839d0b1deef26b25d0"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt3-blooddrinker.webp",
+          "bytes": 58146,
+          "sha256": "f9e0a1d48c1eea1c40dbfa10fec8d3ffab8522d4e8a0b8aa27162aa82055c126",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt3-blooddrinker.webp",
+          "bytes": 8334,
+          "sha256": "8875ed3d5f7433e8ae2bb8d0e2fd0e8d88b1db2b752dd844a9deb67df402e776",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt3-blooddrinker-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/equip-tt3-blooddrinker.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 58146,
+            "sha256": "f9e0a1d48c1eea1c40dbfa10fec8d3ffab8522d4e8a0b8aa27162aa82055c126",
+            "source": "docs/evidence/2026-10-10-blood-map/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/equip-tt3-blooddrinker.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 8456,
+            "sha256": "8e6d25b7290fba194b666da8296d612275615b12ff6893839d0b1deef26b25d0",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/equip-tt3-blooddrinker.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 8334,
+            "sha256": "8875ed3d5f7433e8ae2bb8d0e2fd0e8d88b1db2b752dd844a9deb67df402e776",
+            "source": "docs/evidence/2026-10-10-blood-map/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt2-treasuremap",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a123c5-d366-7b12-88a4-639eb109e025\\exec-1bc18610-3f58-43b1-9f8a-06ba804c2295.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-10-blood-map/cards-equip-tt2-treasuremap-source.png",
+        "bytes": 1678116,
+        "sha256": "0e2ba8fc769b41a810fd8dba8591dfdd3e054443ae9b7273beaa057db166f168"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-10-blood-map/cards-equip-tt2-treasuremap-full-before.webp",
+          "bytes": 43406,
+          "sha256": "f2c217b15a3e12c6a295b42280afae6d4bfd16bd3f2db6cd07243bbe5ca5b681"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-10-blood-map/cards-equip-tt2-treasuremap-thumb-before.webp",
+          "bytes": 10948,
+          "sha256": "ab50bf948be03ba66c781244834aeac819236e43b920ca9c2f1399532f61dcc1"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt2-treasuremap.webp",
+          "bytes": 76436,
+          "sha256": "dfdd771cc30db90ab7e4ed29ab0d77a902d416f5ab3086ac59d39887fd066175",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt2-treasuremap.webp",
+          "bytes": 12318,
+          "sha256": "c45a7c4f84ac24d6f74f56dd594a86dac602ea9f04227f24c51a8e0c36845779",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "tt2-treasuremap-original-rough-20261010",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/equip-tt2-treasuremap.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 76436,
+            "sha256": "dfdd771cc30db90ab7e4ed29ab0d77a902d416f5ab3086ac59d39887fd066175",
+            "source": "docs/evidence/2026-10-10-blood-map/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/equip-tt2-treasuremap.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 10948,
+            "sha256": "ab50bf948be03ba66c781244834aeac819236e43b920ca9c2f1399532f61dcc1",
+            "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+          },
+          "after": {
+            "path": "thumbs/cards/equip-tt2-treasuremap.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 12318,
+            "sha256": "c45a7c4f84ac24d6f74f56dd594a86dac602ea9f04227f24c51a8e0c36845779",
+            "source": "docs/evidence/2026-10-10-blood-map/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 881,
+  "manifest_count_after": 883
+}

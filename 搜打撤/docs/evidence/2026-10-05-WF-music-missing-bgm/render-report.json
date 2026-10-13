@@ -1,0 +1,4959 @@
+{
+  "source_inputs_unchanged": [
+    {
+      "path": "game/src/audio/sound.js",
+      "bytes": 33193,
+      "sha256": "aa5a8ea8908738c8bc2d0f605861b06eae3522dab8988b2fd483a92fa0352d97"
+    },
+    {
+      "path": "game/src/audio/sound.scape.js",
+      "bytes": 6119,
+      "sha256": "d6aa9b4d4b11568743422bd1f8244bec874a0a0039807b30e651dfc0c2e54dc8"
+    },
+    {
+      "path": "game/data/scenes.json",
+      "bytes": 11008,
+      "sha256": "db4b986d110bae604a1ffefb99365040a0393c356b2dd7d4baf5ccac4db3bcf6"
+    },
+    {
+      "path": "docs/rules.md",
+      "bytes": 7958,
+      "sha256": "f38a14fd2f9ba3beff92518c1125402ba2f1d1548768ed43b5a22206f2066f9a"
+    },
+    {
+      "path": ".tmp/music-workstation/GeneralUser-GS.sf2",
+      "bytes": 32319396,
+      "sha256": "9575028c7a1f589f5770fccc8cff2734566af40cd26ed836944e9a5152688cfe"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-piano-two-hands/01-title-frostglass-v10.wav",
+      "bytes": 26331470,
+      "sha256": "07d8c38088de5b2a8a172c9048d60c4e6dfc4a94a65c617dfd98bbfdc3c118d9"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-piano-two-hands/02-explore-ashline-v6.wav",
+      "bytes": 29622902,
+      "sha256": "459abc9546dc5146c618cefc7cbaa35cef37121dfddbb6045f4965674455d986"
+    },
+    {
+      "path": "docs/evidence/2026-10-05-WF-music-piano-two-hands/03-battle-blackpulse-v6.wav",
+      "bytes": 26756174,
+      "sha256": "6880372f3b438d9dffd28218ed4e5078ef7008c5ea2b869a35cb81aa441984b0"
+    }
+  ],
+  "cues": [
+    {
+      "id": "base",
+      "title": "晨霜归所",
+      "stem": "04-base-morning-haven",
+      "idea": "安稳的三拍驻地小圆舞曲；钢琴双手主导，单簧管只在句尾接话，B段把旋律交给弦乐色彩。",
+      "key": "F major",
+      "meter": [
+        3,
+        4
+      ],
+      "bpm_quarter": 84,
+      "bars": 32,
+      "total_beats": 96.0,
+      "seconds": 68.5714375,
+      "tracks": [
+        {
+          "name": "Piano right hand",
+          "program": 0,
+          "bank": 0,
+          "hand": "right",
+          "notes": 64,
+          "pan": 7,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/04-base-morning-haven-Piano-right-hand.wav",
+            "bytes": 26331520,
+            "sha256": "c5059d3aee1a3cdac063f2ddd3186054aa5325f636f8c3c7643e037e73eae8e1"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.97
+            ],
+            [
+              18.0,
+              0.97
+            ],
+            [
+              30.0,
+              1
+            ],
+            [
+              54.0,
+              1
+            ],
+            [
+              66.0,
+              1.04
+            ],
+            [
+              78.0,
+              1.04
+            ],
+            [
+              90.0,
+              0.94
+            ],
+            [
+              90.0,
+              0.94
+            ],
+            [
+              96.0,
+              0.97
+            ]
+          ],
+          "cc64_used": true
+        },
+        {
+          "name": "Piano left hand",
+          "program": 0,
+          "bank": 0,
+          "hand": "left",
+          "notes": 96,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/04-base-morning-haven-Piano-left-hand.wav",
+            "bytes": 26331520,
+            "sha256": "2d28ecf637ae3a14f8d5f51c86ba54f124dc049183031b174e8f553ebd38d8f5"
+          },
+          "target_active_rms_dbfs": -28.5,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              18.0,
+              0.83
+            ],
+            [
+              30.0,
+              0.92
+            ],
+            [
+              54.0,
+              0.92
+            ],
+            [
+              66.0,
+              0.98
+            ],
+            [
+              78.0,
+              0.98
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ]
+          ],
+          "cc64_used": true
+        },
+        {
+          "name": "Clarinet window",
+          "program": 71,
+          "bank": 0,
+          "hand": null,
+          "notes": 10,
+          "pan": 23,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/04-base-morning-haven-Clarinet-window.wav",
+            "bytes": 26331520,
+            "sha256": "74e8504bf07fc522d2975cdcee787f975f55743603a33e96fb016e3c47b90ff5"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.35
+            ],
+            [
+              18.0,
+              0.35
+            ],
+            [
+              30.0,
+              0.8
+            ],
+            [
+              54.0,
+              0.8
+            ],
+            [
+              66.0,
+              0.92
+            ],
+            [
+              78.0,
+              0.92
+            ],
+            [
+              90.0,
+              0.48
+            ],
+            [
+              90.0,
+              0.48
+            ],
+            [
+              96.0,
+              0.35
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Cello hearth",
+          "program": 42,
+          "bank": 0,
+          "hand": null,
+          "notes": 32,
+          "pan": 30,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/04-base-morning-haven-Cello-hearth.wav",
+            "bytes": 26331520,
+            "sha256": "bb42262ab99f59c5b425abe4e078c8cb3addb57e7f0a4f2bce9513845243f6d6"
+          },
+          "target_active_rms_dbfs": -36,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              18.0,
+              0.83
+            ],
+            [
+              30.0,
+              0.92
+            ],
+            [
+              54.0,
+              0.92
+            ],
+            [
+              66.0,
+              0.98
+            ],
+            [
+              78.0,
+              0.98
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Warm bowed room",
+          "program": 49,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": -29,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/04-base-morning-haven-Warm-bowed-room.wav",
+            "bytes": 26331520,
+            "sha256": "5181455a2d15098e317c8ce3b4a2a089032831bbd01b39fd7c2af3326c9ab68b"
+          },
+          "target_active_rms_dbfs": -34,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              18.0,
+              0.83
+            ],
+            [
+              30.0,
+              0.92
+            ],
+            [
+              54.0,
+              0.92
+            ],
+            [
+              66.0,
+              0.98
+            ],
+            [
+              78.0,
+              0.98
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Harp morning",
+          "program": 46,
+          "bank": 0,
+          "hand": null,
+          "notes": 20,
+          "pan": -30,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/04-base-morning-haven-Harp-morning.wav",
+            "bytes": 26331520,
+            "sha256": "a79b35ff8a3225c73806de332e67830d6d73c92af3a4375aa3a628a8e84a3e34"
+          },
+          "target_active_rms_dbfs": -41,
+          "continuous_gain_points": [
+            [
+              0,
+              0.68
+            ],
+            [
+              18.0,
+              0.68
+            ],
+            [
+              30.0,
+              0.72
+            ],
+            [
+              54.0,
+              0.72
+            ],
+            [
+              66.0,
+              0.84
+            ],
+            [
+              78.0,
+              0.84
+            ],
+            [
+              90.0,
+              0.58
+            ],
+            [
+              90.0,
+              0.58
+            ],
+            [
+              96.0,
+              0.68
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/04-base-morning-haven-Steady-low-foundation.wav",
+            "bytes": 26331520,
+            "sha256": "91ac451d5cea9f3895b302fda94ccb8f7dfde0e6feaf6981ffe4e297b603a69f"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              18.0,
+              0.83
+            ],
+            [
+              30.0,
+              0.92
+            ],
+            [
+              54.0,
+              0.92
+            ],
+            [
+              66.0,
+              0.98
+            ],
+            [
+              78.0,
+              0.98
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.49",
+        "input_tp": "-6.56",
+        "input_lra": "1.60",
+        "input_thresh": "-28.49",
+        "output_i": "-22.89",
+        "output_tp": "-11.09",
+        "output_lra": "1.50",
+        "output_thresh": "-32.89",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.11"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.2641170545432695,
+          0.7407976998845969
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/04-base-morning-haven.mmp",
+          "bytes": 6705,
+          "sha256": "bdbdc948b0af4c52bcd9285937d4a88c70db7abd09b6f06d7803c274330b3be2"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/04-base-morning-haven.wav",
+          "bytes": 19748618,
+          "sha256": "5b83d0eed9e8a42b44b4a11ec6757be9c613a245ac72d06a5ff72d3cc188a8c8"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/04-base-morning-haven.mp3",
+          "bytes": 2196548,
+          "sha256": "a747f8b808e3203a6cd941af49ec5bb770f45c44b153b93b6d56606429582b6e"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/04-base-morning-haven.ogg",
+          "bytes": 1089372,
+          "sha256": "9264f07f975fa2ccb83e2ae5bc483280d67c13874db6db4cee742172ac868c3a"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/04-base-morning-haven-piano.mid",
+          "bytes": 2062,
+          "sha256": "dcaca8b978b715b9ecdbc5345749719d91727caf67d83ae727c96c885d8ebf33"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "opening"
+        },
+        {
+          "start_bar": 8,
+          "name": "first development"
+        },
+        {
+          "start_bar": 20,
+          "name": "contrast"
+        },
+        {
+          "start_bar": 28,
+          "name": "connected return"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed"
+    },
+    {
+      "id": "shop",
+      "title": "铜灯市集",
+      "stem": "05-shop-copper-lanterns",
+      "idea": "五拍按3+2走的拾荒商队；单簧管俏皮但不碎，羽管键琴与拨弦形成步伐，末段换成轻轻讨价还价的回答。",
+      "key": "C dorian",
+      "meter": [
+        5,
+        4
+      ],
+      "bpm_quarter": 100,
+      "bars": 32,
+      "total_beats": 160.0,
+      "seconds": 96.0,
+      "tracks": [
+        {
+          "name": "Clarinet merchant",
+          "program": 71,
+          "bank": 0,
+          "hand": null,
+          "notes": 64,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/05-shop-copper-lanterns-Clarinet-merchant.wav",
+            "bytes": 36864088,
+            "sha256": "91f02851123029deae26160f2bfe4f227e869fe890e4d83987bcfd056f72a97f"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.97
+            ],
+            [
+              20.0,
+              0.97
+            ],
+            [
+              40.0,
+              1
+            ],
+            [
+              60.0,
+              1
+            ],
+            [
+              80.0,
+              1.04
+            ],
+            [
+              110.0,
+              1.04
+            ],
+            [
+              130.0,
+              0.94
+            ],
+            [
+              150.0,
+              0.94
+            ],
+            [
+              160.0,
+              0.97
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Harpsichord bargaining",
+          "program": 6,
+          "bank": 0,
+          "hand": null,
+          "notes": 80,
+          "pan": -24,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/05-shop-copper-lanterns-Harpsichord-bargaining.wav",
+            "bytes": 36864088,
+            "sha256": "8da93ccd7bff1271723741a9717e89dcbd5ef6d65b5034d67529cb379351901d"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.8
+            ],
+            [
+              20.0,
+              0.8
+            ],
+            [
+              40.0,
+              0.88
+            ],
+            [
+              60.0,
+              0.88
+            ],
+            [
+              80.0,
+              0.93
+            ],
+            [
+              110.0,
+              0.93
+            ],
+            [
+              130.0,
+              0.81
+            ],
+            [
+              150.0,
+              0.81
+            ],
+            [
+              160.0,
+              0.8
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Pizzicato footsteps",
+          "program": 45,
+          "bank": 0,
+          "hand": null,
+          "notes": 80,
+          "pan": 31,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/05-shop-copper-lanterns-Pizzicato-footsteps.wav",
+            "bytes": 36864088,
+            "sha256": "3cb678d484ed0f6a25d34f0ec0eac047e5fa4c841ccd062ae825efd53c542e0e"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.8
+            ],
+            [
+              20.0,
+              0.8
+            ],
+            [
+              40.0,
+              0.88
+            ],
+            [
+              60.0,
+              0.88
+            ],
+            [
+              80.0,
+              0.93
+            ],
+            [
+              110.0,
+              0.93
+            ],
+            [
+              130.0,
+              0.81
+            ],
+            [
+              150.0,
+              0.81
+            ],
+            [
+              160.0,
+              0.8
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Bassoon grin",
+          "program": 70,
+          "bank": 0,
+          "hand": null,
+          "notes": 10,
+          "pan": 18,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/05-shop-copper-lanterns-Bassoon-grin.wav",
+            "bytes": 36864088,
+            "sha256": "a527cc9d7296f485a91f3fe28a463f2bd8a50ccb771f024bb30eaab17b4775ea"
+          },
+          "target_active_rms_dbfs": -37,
+          "continuous_gain_points": [
+            [
+              0,
+              0.35
+            ],
+            [
+              20.0,
+              0.35
+            ],
+            [
+              40.0,
+              0.8
+            ],
+            [
+              60.0,
+              0.8
+            ],
+            [
+              80.0,
+              0.92
+            ],
+            [
+              110.0,
+              0.92
+            ],
+            [
+              130.0,
+              0.48
+            ],
+            [
+              150.0,
+              0.48
+            ],
+            [
+              160.0,
+              0.35
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Viola canvas",
+          "program": 41,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": -35,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/05-shop-copper-lanterns-Viola-canvas.wav",
+            "bytes": 36864088,
+            "sha256": "827fa7892deda6046f3483f9a0b0e4e1babed7ed2b675f5977e22fdce0ad4af9"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              20.0,
+              0.83
+            ],
+            [
+              40.0,
+              0.92
+            ],
+            [
+              60.0,
+              0.92
+            ],
+            [
+              80.0,
+              0.98
+            ],
+            [
+              110.0,
+              0.98
+            ],
+            [
+              130.0,
+              0.85
+            ],
+            [
+              150.0,
+              0.85
+            ],
+            [
+              160.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/05-shop-copper-lanterns-Steady-low-foundation.wav",
+            "bytes": 36864088,
+            "sha256": "1ca16a635c74620de384f685d24b207bb7bb48bc3ca5ca6b05c3e05cb2780f4f"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              20.0,
+              0.83
+            ],
+            [
+              40.0,
+              0.92
+            ],
+            [
+              60.0,
+              0.92
+            ],
+            [
+              80.0,
+              0.98
+            ],
+            [
+              110.0,
+              0.98
+            ],
+            [
+              130.0,
+              0.85
+            ],
+            [
+              150.0,
+              0.85
+            ],
+            [
+              160.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-7.42",
+        "input_lra": "1.70",
+        "input_thresh": "-28.50",
+        "output_i": "-23.07",
+        "output_tp": "-12.04",
+        "output_lra": "1.60",
+        "output_thresh": "-33.07",
+        "normalization_type": "dynamic",
+        "target_offset": "0.07"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.4069244687654828,
+          0.4319173513952729
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/05-shop-copper-lanterns.mmp",
+          "bytes": 5889,
+          "sha256": "ee220031bb4a7ab4a43747731ed13d9fbe8c5d28a7c4e4a2b7579198f35ec756"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/05-shop-copper-lanterns.wav",
+          "bytes": 27648044,
+          "sha256": "d74ea861bda9931f0a434022909dd0114536db49ed8634ecc5de3d78a1bcebe6"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/05-shop-copper-lanterns.mp3",
+          "bytes": 3073604,
+          "sha256": "5ee7d6a713447a84b5d2d4edfe03a1f837b113ed4676afbdd538eee323bfb7e1"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/05-shop-copper-lanterns.ogg",
+          "bytes": 1767163,
+          "sha256": "80812f2b5a34a452ce057663c4d56a0be89ab7e9c81c1c4671637642422587ef"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "opening"
+        },
+        {
+          "start_bar": 6,
+          "name": "first development"
+        },
+        {
+          "start_bar": 14,
+          "name": "contrast"
+        },
+        {
+          "start_bar": 24,
+          "name": "connected return"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed"
+    },
+    {
+      "id": "fire",
+      "title": "炉边长夜",
+      "stem": "06-fire-embers-and-snow",
+      "idea": "六八拍摇摆的营火；长笛、尼龙弦与双手钢琴，极轻火星般竖琴，没有行军鼓点。",
+      "key": "G major",
+      "meter": [
+        6,
+        8
+      ],
+      "bpm_quarter": 72,
+      "bars": 32,
+      "total_beats": 96.0,
+      "seconds": 80.0,
+      "tracks": [
+        {
+          "name": "Flute warm breath",
+          "program": 73,
+          "bank": 0,
+          "hand": null,
+          "notes": 64,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/06-fire-embers-and-snow-Flute-warm-breath.wav",
+            "bytes": 30720088,
+            "sha256": "167ad519c8ddd84dcef4b292acc687a02cd018ee6f65d7811bde5d8ae92403f1"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.97
+            ],
+            [
+              30.0,
+              0.97
+            ],
+            [
+              42.0,
+              1
+            ],
+            [
+              54.0,
+              1
+            ],
+            [
+              66.0,
+              1.04
+            ],
+            [
+              78.0,
+              1.04
+            ],
+            [
+              90.0,
+              0.94
+            ],
+            [
+              90.0,
+              0.94
+            ],
+            [
+              96.0,
+              0.97
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Piano right hand",
+          "program": 0,
+          "bank": 0,
+          "hand": "right",
+          "notes": 32,
+          "pan": 8,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/06-fire-embers-and-snow-Piano-right-hand.wav",
+            "bytes": 30720088,
+            "sha256": "16c82ac594978858e1cd2876d5e5444def9a148e8f27c9a16cd92af606ded375"
+          },
+          "target_active_rms_dbfs": -32,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              30.0,
+              0.83
+            ],
+            [
+              42.0,
+              0.92
+            ],
+            [
+              54.0,
+              0.92
+            ],
+            [
+              66.0,
+              0.98
+            ],
+            [
+              78.0,
+              0.98
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ]
+          ],
+          "cc64_used": true
+        },
+        {
+          "name": "Piano left hand",
+          "program": 0,
+          "bank": 0,
+          "hand": "left",
+          "notes": 96,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/06-fire-embers-and-snow-Piano-left-hand.wav",
+            "bytes": 30720088,
+            "sha256": "c08c1b39c8a05e91e2bdda264f4fef9d26c2b5fd5bd3f719e00a4480ac7163b3"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              30.0,
+              0.83
+            ],
+            [
+              42.0,
+              0.92
+            ],
+            [
+              54.0,
+              0.92
+            ],
+            [
+              66.0,
+              0.98
+            ],
+            [
+              78.0,
+              0.98
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ]
+          ],
+          "cc64_used": true
+        },
+        {
+          "name": "Nylon beside flame",
+          "program": 24,
+          "bank": 0,
+          "hand": null,
+          "notes": 64,
+          "pan": -28,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/06-fire-embers-and-snow-Nylon-beside-flame.wav",
+            "bytes": 30720088,
+            "sha256": "292187173dfe8df1cc94bc6edcea1c412ebe526532a922b61c9bda8762ac7ef1"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              30.0,
+              0.83
+            ],
+            [
+              42.0,
+              0.92
+            ],
+            [
+              54.0,
+              0.92
+            ],
+            [
+              66.0,
+              0.98
+            ],
+            [
+              78.0,
+              0.98
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Viola blanket",
+          "program": 41,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 28,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/06-fire-embers-and-snow-Viola-blanket.wav",
+            "bytes": 30720088,
+            "sha256": "b7fc81c3dd7c557a255ab79e793bdd95505e119b4d31354ea5e7ddb67e8d118d"
+          },
+          "target_active_rms_dbfs": -36,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              30.0,
+              0.83
+            ],
+            [
+              42.0,
+              0.92
+            ],
+            [
+              54.0,
+              0.92
+            ],
+            [
+              66.0,
+              0.98
+            ],
+            [
+              78.0,
+              0.98
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Cello slow breath",
+          "program": 42,
+          "bank": 0,
+          "hand": null,
+          "notes": 32,
+          "pan": 17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/06-fire-embers-and-snow-Cello-slow-breath.wav",
+            "bytes": 30720088,
+            "sha256": "d19e3da0b9205aa3a537b27057809f439847b5825720e0f5cc22122304ff53e3"
+          },
+          "target_active_rms_dbfs": -37,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              30.0,
+              0.83
+            ],
+            [
+              42.0,
+              0.92
+            ],
+            [
+              54.0,
+              0.92
+            ],
+            [
+              66.0,
+              0.98
+            ],
+            [
+              78.0,
+              0.98
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Harp spark",
+          "program": 46,
+          "bank": 0,
+          "hand": null,
+          "notes": 20,
+          "pan": -20,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/06-fire-embers-and-snow-Harp-spark.wav",
+            "bytes": 30720088,
+            "sha256": "df1361613236da279cf63f402e682cc6077598636babf2f264da84b39a965608"
+          },
+          "target_active_rms_dbfs": -42,
+          "continuous_gain_points": [
+            [
+              0,
+              0.68
+            ],
+            [
+              30.0,
+              0.68
+            ],
+            [
+              42.0,
+              0.72
+            ],
+            [
+              54.0,
+              0.72
+            ],
+            [
+              66.0,
+              0.84
+            ],
+            [
+              78.0,
+              0.84
+            ],
+            [
+              90.0,
+              0.58
+            ],
+            [
+              90.0,
+              0.58
+            ],
+            [
+              96.0,
+              0.68
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/06-fire-embers-and-snow-Steady-low-foundation.wav",
+            "bytes": 30720088,
+            "sha256": "e56f678df84f303f5db89938f3ab5c18956138be1fdc8a2d3b89c0f220b0c8ae"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              30.0,
+              0.83
+            ],
+            [
+              42.0,
+              0.92
+            ],
+            [
+              54.0,
+              0.92
+            ],
+            [
+              66.0,
+              0.98
+            ],
+            [
+              78.0,
+              0.98
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-7.33",
+        "input_lra": "2.00",
+        "input_thresh": "-28.50",
+        "output_i": "-22.92",
+        "output_tp": "-11.82",
+        "output_lra": "1.90",
+        "output_thresh": "-32.92",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.08"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.40458255798625176,
+          0.3371358424557188
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/06-fire-embers-and-snow.mmp",
+          "bytes": 7591,
+          "sha256": "43f4a6e160e1f4542837b4a97a2d977298cddc3d94a24d3f0cf164586014ee79"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/06-fire-embers-and-snow.wav",
+          "bytes": 23040044,
+          "sha256": "1b30d7df4017c37f8ea261f449481296a74cfa93bcde94ffd9c7325748e887c9"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/06-fire-embers-and-snow.mp3",
+          "bytes": 2562116,
+          "sha256": "ca5b14e276dde3b2bea7ed57715a303d4132d4603d53e8c72c562367c99c360f"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/06-fire-embers-and-snow.ogg",
+          "bytes": 1254860,
+          "sha256": "f25691b346e1fc7bc00d91650dd123fa5c0d7cb030ea63c996b6fdabba208839"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/06-fire-embers-and-snow-piano.mid",
+          "bytes": 1822,
+          "sha256": "a6bc46cd8468e7c001fac06591109a24f59a8050ad97083717ef212c8789197e"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "opening"
+        },
+        {
+          "start_bar": 12,
+          "name": "first development"
+        },
+        {
+          "start_bar": 20,
+          "name": "contrast"
+        },
+        {
+          "start_bar": 28,
+          "name": "connected return"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed"
+    },
+    {
+      "id": "event",
+      "title": "余烬来信",
+      "stem": "07-event-letter-in-ashes",
+      "idea": "奇遇和叙事选择的低密度问答；双簧管像说话，颤音琴只作标点，留出阅读空间。",
+      "key": "A minor",
+      "meter": [
+        4,
+        4
+      ],
+      "bpm_quarter": 78,
+      "bars": 32,
+      "total_beats": 128.0,
+      "seconds": 98.46154166666666,
+      "tracks": [
+        {
+          "name": "Oboe storyteller",
+          "program": 68,
+          "bank": 0,
+          "hand": null,
+          "notes": 64,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/07-event-letter-in-ashes-Oboe-storyteller.wav",
+            "bytes": 37809320,
+            "sha256": "69230a8357ce56e62e8f55be964b97d8423bd690b23d3abd58e1f312db42a14b"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.97
+            ],
+            [
+              16.0,
+              0.97
+            ],
+            [
+              32.0,
+              1
+            ],
+            [
+              64.0,
+              1
+            ],
+            [
+              80.0,
+              1.04
+            ],
+            [
+              96.0,
+              1.04
+            ],
+            [
+              112.0,
+              0.94
+            ],
+            [
+              120.0,
+              0.94
+            ],
+            [
+              128.0,
+              0.97
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Vibraphone ink",
+          "program": 11,
+          "bank": 0,
+          "hand": null,
+          "notes": 20,
+          "pan": -22,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/07-event-letter-in-ashes-Vibraphone-ink.wav",
+            "bytes": 37809320,
+            "sha256": "cc48ccd3bdfde076516a990ab51af97e72d18649a90b665b9706f69f5edf1241"
+          },
+          "target_active_rms_dbfs": -38,
+          "continuous_gain_points": [
+            [
+              0,
+              0.68
+            ],
+            [
+              16.0,
+              0.68
+            ],
+            [
+              32.0,
+              0.72
+            ],
+            [
+              64.0,
+              0.72
+            ],
+            [
+              80.0,
+              0.84
+            ],
+            [
+              96.0,
+              0.84
+            ],
+            [
+              112.0,
+              0.58
+            ],
+            [
+              120.0,
+              0.58
+            ],
+            [
+              128.0,
+              0.68
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Bassoon question",
+          "program": 70,
+          "bank": 0,
+          "hand": null,
+          "notes": 10,
+          "pan": 24,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/07-event-letter-in-ashes-Bassoon-question.wav",
+            "bytes": 37809320,
+            "sha256": "d05e24cfd391c8446acd6e241048c1109c42f67fd15a8812f9d7f4b416d77496"
+          },
+          "target_active_rms_dbfs": -36,
+          "continuous_gain_points": [
+            [
+              0,
+              0.35
+            ],
+            [
+              16.0,
+              0.35
+            ],
+            [
+              32.0,
+              0.8
+            ],
+            [
+              64.0,
+              0.8
+            ],
+            [
+              80.0,
+              0.92
+            ],
+            [
+              96.0,
+              0.92
+            ],
+            [
+              112.0,
+              0.48
+            ],
+            [
+              120.0,
+              0.48
+            ],
+            [
+              128.0,
+              0.35
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Muted paper strings",
+          "program": 49,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": -31,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/07-event-letter-in-ashes-Muted-paper-strings.wav",
+            "bytes": 37809320,
+            "sha256": "6b40ef45a0e74cb4eb3483e44b8eb691556b9c60ee36f4535f38de466754cea1"
+          },
+          "target_active_rms_dbfs": -34,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              16.0,
+              0.83
+            ],
+            [
+              32.0,
+              0.92
+            ],
+            [
+              64.0,
+              0.92
+            ],
+            [
+              80.0,
+              0.98
+            ],
+            [
+              96.0,
+              0.98
+            ],
+            [
+              112.0,
+              0.85
+            ],
+            [
+              120.0,
+              0.85
+            ],
+            [
+              128.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Harp page turn",
+          "program": 46,
+          "bank": 0,
+          "hand": null,
+          "notes": 20,
+          "pan": 29,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/07-event-letter-in-ashes-Harp-page-turn.wav",
+            "bytes": 37809320,
+            "sha256": "8b959abf73e3d1103b0d88d6d0a839343ed9de2159e9205f43aac1a4c48b1fb8"
+          },
+          "target_active_rms_dbfs": -42,
+          "continuous_gain_points": [
+            [
+              0,
+              0.68
+            ],
+            [
+              16.0,
+              0.68
+            ],
+            [
+              32.0,
+              0.72
+            ],
+            [
+              64.0,
+              0.72
+            ],
+            [
+              80.0,
+              0.84
+            ],
+            [
+              96.0,
+              0.84
+            ],
+            [
+              112.0,
+              0.58
+            ],
+            [
+              120.0,
+              0.58
+            ],
+            [
+              128.0,
+              0.68
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/07-event-letter-in-ashes-Steady-low-foundation.wav",
+            "bytes": 37809320,
+            "sha256": "cf4da6d9e467b0b698d37d99d18e2c2f4c46e34c029ad0de46b56b77058ee80b"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              16.0,
+              0.83
+            ],
+            [
+              32.0,
+              0.92
+            ],
+            [
+              64.0,
+              0.92
+            ],
+            [
+              80.0,
+              0.98
+            ],
+            [
+              96.0,
+              0.98
+            ],
+            [
+              112.0,
+              0.85
+            ],
+            [
+              120.0,
+              0.85
+            ],
+            [
+              128.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-8.87",
+        "input_lra": "1.90",
+        "input_thresh": "-28.50",
+        "output_i": "-23.09",
+        "output_tp": "-13.46",
+        "output_lra": "1.90",
+        "output_thresh": "-33.09",
+        "normalization_type": "dynamic",
+        "target_offset": "0.09"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.3053162177334819,
+          0.4591218111987464
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/07-event-letter-in-ashes.mmp",
+          "bytes": 5858,
+          "sha256": "4cd2730abccd93759f7be30f0212d8debae61d010cdc8f79e861888323a3dfbd"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/07-event-letter-in-ashes.wav",
+          "bytes": 28356968,
+          "sha256": "6f45239ae20dd902f583fa92a6f8a1a81e0e418f7b6a1ded3a01217216c571e4"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/07-event-letter-in-ashes.mp3",
+          "bytes": 3152708,
+          "sha256": "ddcc7095d85c03cb536f321314df7367f0b5229f59ed1168fe16da185dd027c0"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/07-event-letter-in-ashes.ogg",
+          "bytes": 1724045,
+          "sha256": "8e22971cc09475e2f819fa8387d42e4e49043690cb11e0943a36024fcebb008c"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "opening"
+        },
+        {
+          "start_bar": 6,
+          "name": "first development"
+        },
+        {
+          "start_bar": 18,
+          "name": "contrast"
+        },
+        {
+          "start_bar": 26,
+          "name": "connected return"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed"
+    },
+    {
+      "id": "altar",
+      "title": "幽核回响",
+      "stem": "08-altar-hollow-core",
+      "idea": "污染核心的祭仪：巴松与管风琴，低部不间断，颤弦远置；以悬置和声营造危险，避免高音尖叫。",
+      "key": "F-sharp minor",
+      "meter": [
+        4,
+        4
+      ],
+      "bpm_quarter": 68,
+      "bars": 24,
+      "total_beats": 96.0,
+      "seconds": 84.705875,
+      "tracks": [
+        {
+          "name": "Bassoon ritual",
+          "program": 70,
+          "bank": 0,
+          "hand": null,
+          "notes": 48,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/08-altar-hollow-core-Bassoon-ritual.wav",
+            "bytes": 32527144,
+            "sha256": "7f2b2148831ff82ee4d8d1c1abe6245cc39781b7d68e2ff1b4e7ec7f80149543"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.97
+            ],
+            [
+              24.0,
+              0.97
+            ],
+            [
+              40.0,
+              1
+            ],
+            [
+              56.0,
+              1
+            ],
+            [
+              72.0,
+              1.04
+            ],
+            [
+              80.0,
+              1.04
+            ],
+            [
+              88.0,
+              0.94
+            ],
+            [
+              96.0,
+              0.94
+            ],
+            [
+              96.0,
+              0.97
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Organ carved stone",
+          "program": 19,
+          "bank": 0,
+          "hand": null,
+          "notes": 24,
+          "pan": -14,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/08-altar-hollow-core-Organ-carved-stone.wav",
+            "bytes": 32527144,
+            "sha256": "47447d73c85409158d0797a655e3e673a993ef9e4e65ea3c877bda79d6d8c820"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              24.0,
+              0.83
+            ],
+            [
+              40.0,
+              0.92
+            ],
+            [
+              56.0,
+              0.92
+            ],
+            [
+              72.0,
+              0.98
+            ],
+            [
+              80.0,
+              0.98
+            ],
+            [
+              88.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ],
+            [
+              96.0,
+              0.85
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Viola suspended",
+          "program": 41,
+          "bank": 0,
+          "hand": null,
+          "notes": 12,
+          "pan": 25,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/08-altar-hollow-core-Viola-suspended.wav",
+            "bytes": 32527144,
+            "sha256": "823deddee457788decf0811a27c41ed2cffe3049ff0e9e24ab9a4dfc1eabd6d0"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              24.0,
+              0.83
+            ],
+            [
+              40.0,
+              0.92
+            ],
+            [
+              56.0,
+              0.92
+            ],
+            [
+              72.0,
+              0.98
+            ],
+            [
+              80.0,
+              0.98
+            ],
+            [
+              88.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ],
+            [
+              96.0,
+              0.85
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Tremolo distant pulse",
+          "program": 44,
+          "bank": 0,
+          "hand": null,
+          "notes": 12,
+          "pan": -32,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/08-altar-hollow-core-Tremolo-distant-pulse.wav",
+            "bytes": 32527144,
+            "sha256": "01e9a6529cdccaf879fef375ffc629c31e15eb53a70d8c5db5d05142ae25cb93"
+          },
+          "target_active_rms_dbfs": -40,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              24.0,
+              0.83
+            ],
+            [
+              40.0,
+              0.92
+            ],
+            [
+              56.0,
+              0.92
+            ],
+            [
+              72.0,
+              0.98
+            ],
+            [
+              80.0,
+              0.98
+            ],
+            [
+              88.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ],
+            [
+              96.0,
+              0.85
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Celeste core light",
+          "program": 8,
+          "bank": 0,
+          "hand": null,
+          "notes": 14,
+          "pan": 32,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/08-altar-hollow-core-Celeste-core-light.wav",
+            "bytes": 32527144,
+            "sha256": "55eaba08e5ba99396bbbd8a3d92706ede567aa1812bd698b92803371dbf0d2fb"
+          },
+          "target_active_rms_dbfs": -43,
+          "continuous_gain_points": [
+            [
+              0,
+              0.68
+            ],
+            [
+              24.0,
+              0.68
+            ],
+            [
+              40.0,
+              0.72
+            ],
+            [
+              56.0,
+              0.72
+            ],
+            [
+              72.0,
+              0.84
+            ],
+            [
+              80.0,
+              0.84
+            ],
+            [
+              88.0,
+              0.58
+            ],
+            [
+              96.0,
+              0.58
+            ],
+            [
+              96.0,
+              0.68
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 12,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/08-altar-hollow-core-Steady-low-foundation.wav",
+            "bytes": 32527144,
+            "sha256": "fa2c9d7e1f86afe33e357e33879b88c4cbf350d2bf4febfd863bd4cd3b1a8afd"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              24.0,
+              0.83
+            ],
+            [
+              40.0,
+              0.92
+            ],
+            [
+              56.0,
+              0.92
+            ],
+            [
+              72.0,
+              0.98
+            ],
+            [
+              80.0,
+              0.98
+            ],
+            [
+              88.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ],
+            [
+              96.0,
+              0.85
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-9.44",
+        "input_lra": "2.20",
+        "input_thresh": "-28.50",
+        "output_i": "-22.99",
+        "output_tp": "-13.96",
+        "output_lra": "2.10",
+        "output_thresh": "-32.99",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.01"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.6830166130569572,
+          0.3960154920346362
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/08-altar-hollow-core.mmp",
+          "bytes": 5868,
+          "sha256": "a5a44e7e92f2393b12cf54550db4a00c10f4b4398fce0a9fbefdb5e26eeb0760"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/08-altar-hollow-core.wav",
+          "bytes": 24395336,
+          "sha256": "0e520f27006a6dac95f4538bc0090ca36d056f61c6ac3c5a0aa85f4b3fa96e4b"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/08-altar-hollow-core.mp3",
+          "bytes": 2712644,
+          "sha256": "1ff7c5fb401b8e53e5cd1c40109a4e76ad1387080125ceaf7976f6868575927c"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/08-altar-hollow-core.ogg",
+          "bytes": 1511783,
+          "sha256": "dc1d9f7f544f451cda46b4fd89bbd9ed6abc0ce6b1ad42ac27311c8e2da7a850"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "opening"
+        },
+        {
+          "start_bar": 8,
+          "name": "first development"
+        },
+        {
+          "start_bar": 16,
+          "name": "contrast"
+        },
+        {
+          "start_bar": 22,
+          "name": "connected return"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed"
+    },
+    {
+      "id": "extraction",
+      "title": "渡口倒数",
+      "stem": "09-extraction-last-ferry",
+      "idea": "七八拍2+2+3的撤离脉冲；小提琴长主线、竖琴节拍与远圆号，推进明确但不骤然加响。",
+      "key": "D mixolydian",
+      "meter": [
+        7,
+        8
+      ],
+      "bpm_quarter": 108,
+      "bars": 32,
+      "total_beats": 112.0,
+      "seconds": 62.222229166666665,
+      "tracks": [
+        {
+          "name": "Violin signal",
+          "program": 40,
+          "bank": 0,
+          "hand": null,
+          "notes": 64,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/09-extraction-last-ferry-Violin-signal.wav",
+            "bytes": 23893424,
+            "sha256": "4c214c73c49293b84e6aa7c247e605d2dbe20bc58f9d6fa84613738482c81d9a"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.97
+            ],
+            [
+              7.0,
+              0.97
+            ],
+            [
+              21.0,
+              1
+            ],
+            [
+              42.0,
+              1
+            ],
+            [
+              56.0,
+              1.04
+            ],
+            [
+              77.0,
+              1.04
+            ],
+            [
+              91.0,
+              0.94
+            ],
+            [
+              105.0,
+              0.94
+            ],
+            [
+              112.0,
+              0.97
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Harp beacon steps",
+          "program": 46,
+          "bank": 0,
+          "hand": null,
+          "notes": 22,
+          "pan": -31,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/09-extraction-last-ferry-Harp-beacon-steps.wav",
+            "bytes": 23893424,
+            "sha256": "b9cfa08fa0d1a3430faa0b719e4fb9acae1ebdba4803a06f61111e933f192fbe"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.68
+            ],
+            [
+              7.0,
+              0.68
+            ],
+            [
+              21.0,
+              0.72
+            ],
+            [
+              42.0,
+              0.72
+            ],
+            [
+              56.0,
+              0.84
+            ],
+            [
+              77.0,
+              0.84
+            ],
+            [
+              91.0,
+              0.58
+            ],
+            [
+              105.0,
+              0.58
+            ],
+            [
+              112.0,
+              0.68
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Horn safe passage",
+          "program": 60,
+          "bank": 0,
+          "hand": null,
+          "notes": 10,
+          "pan": 20,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/09-extraction-last-ferry-Horn-safe-passage.wav",
+            "bytes": 23893424,
+            "sha256": "3d74e51e6318446e6a8c05b7c88616c3c57020291ef59fd9c6d8f1effc86cf19"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.35
+            ],
+            [
+              7.0,
+              0.35
+            ],
+            [
+              21.0,
+              0.8
+            ],
+            [
+              42.0,
+              0.8
+            ],
+            [
+              56.0,
+              0.92
+            ],
+            [
+              77.0,
+              0.92
+            ],
+            [
+              91.0,
+              0.48
+            ],
+            [
+              105.0,
+              0.48
+            ],
+            [
+              112.0,
+              0.35
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Cello countdown",
+          "program": 42,
+          "bank": 0,
+          "hand": null,
+          "notes": 32,
+          "pan": 28,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/09-extraction-last-ferry-Cello-countdown.wav",
+            "bytes": 23893424,
+            "sha256": "93cc444a61e94b55b2e24c9051e1fa0f6263868d0c1f476890fb20368d0b5523"
+          },
+          "target_active_rms_dbfs": -34,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              7.0,
+              0.83
+            ],
+            [
+              21.0,
+              0.92
+            ],
+            [
+              42.0,
+              0.92
+            ],
+            [
+              56.0,
+              0.98
+            ],
+            [
+              77.0,
+              0.98
+            ],
+            [
+              91.0,
+              0.85
+            ],
+            [
+              105.0,
+              0.85
+            ],
+            [
+              112.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Long crossing strings",
+          "program": 49,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": -35,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/09-extraction-last-ferry-Long-crossing-strings.wav",
+            "bytes": 23893424,
+            "sha256": "41036769d1e5c346a6e577bf731f94543566484c795ff91dc3cce04eda6162b1"
+          },
+          "target_active_rms_dbfs": -34,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              7.0,
+              0.83
+            ],
+            [
+              21.0,
+              0.92
+            ],
+            [
+              42.0,
+              0.92
+            ],
+            [
+              56.0,
+              0.98
+            ],
+            [
+              77.0,
+              0.98
+            ],
+            [
+              91.0,
+              0.85
+            ],
+            [
+              105.0,
+              0.85
+            ],
+            [
+              112.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Timpani distant clock",
+          "program": 47,
+          "bank": 0,
+          "hand": null,
+          "notes": 21,
+          "pan": -6,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/09-extraction-last-ferry-Timpani-distant-clock.wav",
+            "bytes": 23893424,
+            "sha256": "b3bd9f5a6194ce8e232768324ab324f6610ca650c964a3fd29d556d75543c48e"
+          },
+          "target_active_rms_dbfs": -39,
+          "continuous_gain_points": [
+            [
+              0,
+              0.8
+            ],
+            [
+              7.0,
+              0.8
+            ],
+            [
+              21.0,
+              0.88
+            ],
+            [
+              42.0,
+              0.88
+            ],
+            [
+              56.0,
+              0.93
+            ],
+            [
+              77.0,
+              0.93
+            ],
+            [
+              91.0,
+              0.81
+            ],
+            [
+              105.0,
+              0.81
+            ],
+            [
+              112.0,
+              0.8
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/09-extraction-last-ferry-Steady-low-foundation.wav",
+            "bytes": 23893424,
+            "sha256": "950b2bf6ffb4c4a665cc6a58901c150d7f88b38181de970ab4eb087e1f008ff6"
+          },
+          "target_active_rms_dbfs": -33,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              7.0,
+              0.83
+            ],
+            [
+              21.0,
+              0.92
+            ],
+            [
+              42.0,
+              0.92
+            ],
+            [
+              56.0,
+              0.98
+            ],
+            [
+              77.0,
+              0.98
+            ],
+            [
+              91.0,
+              0.85
+            ],
+            [
+              105.0,
+              0.85
+            ],
+            [
+              112.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-8.12",
+        "input_lra": "1.40",
+        "input_thresh": "-28.50",
+        "output_i": "-23.01",
+        "output_tp": "-12.63",
+        "output_lra": "1.40",
+        "output_thresh": "-33.01",
+        "normalization_type": "dynamic",
+        "target_offset": "0.01"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.3493499177212355,
+          0.32629216188376586
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/09-extraction-last-ferry.mmp",
+          "bytes": 6758,
+          "sha256": "336fce0c352c6e309bd8d7905c438da2ded37803370e3ddc2c144a8fb9cb073e"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/09-extraction-last-ferry.wav",
+          "bytes": 17920046,
+          "sha256": "0c11934dfa3abc14af66d5e54f3e1c9b665ccd95f1a3f2aa5d2a773e451fa994"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/09-extraction-last-ferry.mp3",
+          "bytes": 1993028,
+          "sha256": "137fee9fc2bd7811041f01718fc1dff27f3d57316a99438cb651650edcd9bb6e"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/09-extraction-last-ferry.ogg",
+          "bytes": 1186398,
+          "sha256": "782516e45630614d1f9f2ef1683652860519f78fd646a0086c862d4e44555e2d"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "opening"
+        },
+        {
+          "start_bar": 4,
+          "name": "first development"
+        },
+        {
+          "start_bar": 14,
+          "name": "contrast"
+        },
+        {
+          "start_bar": 24,
+          "name": "connected return"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed"
+    },
+    {
+      "id": "boss-governor",
+      "title": "铁律封城",
+      "stem": "10-boss-governor-iron-edict",
+      "idea": "肃清总督的低铜管战歌；军令式圆号主题与弦乐反问，低铜管错开进入，压力来自句法和节奏。",
+      "key": "D minor",
+      "meter": [
+        4,
+        4
+      ],
+      "bpm_quarter": 120,
+      "bars": 32,
+      "total_beats": 128.0,
+      "seconds": 64.0,
+      "tracks": [
+        {
+          "name": "Horn edict",
+          "program": 60,
+          "bank": 0,
+          "hand": null,
+          "notes": 64,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/10-boss-governor-iron-edict-Horn-edict.wav",
+            "bytes": 24576088,
+            "sha256": "357949b36d73869fba0d4919ab7244ea828cdf13cc78f5a01a97b71b8e157841"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.97
+            ],
+            [
+              16.0,
+              0.97
+            ],
+            [
+              32.0,
+              1
+            ],
+            [
+              64.0,
+              1
+            ],
+            [
+              80.0,
+              1.04
+            ],
+            [
+              96.0,
+              1.04
+            ],
+            [
+              112.0,
+              0.94
+            ],
+            [
+              120.0,
+              0.94
+            ],
+            [
+              128.0,
+              0.97
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Trombone battlement",
+          "program": 57,
+          "bank": 0,
+          "hand": null,
+          "notes": 10,
+          "pan": 18,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/10-boss-governor-iron-edict-Trombone-battlement.wav",
+            "bytes": 24576088,
+            "sha256": "51c666f17095adee05e003f0e77f03048c4642cfa424c90748b8322124e14b9f"
+          },
+          "target_active_rms_dbfs": -34,
+          "continuous_gain_points": [
+            [
+              0,
+              0.35
+            ],
+            [
+              16.0,
+              0.35
+            ],
+            [
+              32.0,
+              0.8
+            ],
+            [
+              64.0,
+              0.8
+            ],
+            [
+              80.0,
+              0.92
+            ],
+            [
+              96.0,
+              0.92
+            ],
+            [
+              112.0,
+              0.48
+            ],
+            [
+              120.0,
+              0.48
+            ],
+            [
+              128.0,
+              0.35
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Tuba foundation",
+          "program": 58,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/10-boss-governor-iron-edict-Tuba-foundation.wav",
+            "bytes": 24576088,
+            "sha256": "97ab5702fb716321e15a4c5c2858598f5a4251e1c03a4ad66e15c48f8d0eecb3"
+          },
+          "target_active_rms_dbfs": -37,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              16.0,
+              0.83
+            ],
+            [
+              32.0,
+              0.92
+            ],
+            [
+              64.0,
+              0.92
+            ],
+            [
+              80.0,
+              0.98
+            ],
+            [
+              96.0,
+              0.98
+            ],
+            [
+              112.0,
+              0.85
+            ],
+            [
+              120.0,
+              0.85
+            ],
+            [
+              128.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Violin defiance",
+          "program": 40,
+          "bank": 0,
+          "hand": null,
+          "notes": 10,
+          "pan": -36,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/10-boss-governor-iron-edict-Violin-defiance.wav",
+            "bytes": 24576088,
+            "sha256": "7f28f7e7bd208606241e0ce517f206caa952b55da4d5950a6521a354156a1f4b"
+          },
+          "target_active_rms_dbfs": -33,
+          "continuous_gain_points": [
+            [
+              0,
+              0.35
+            ],
+            [
+              16.0,
+              0.35
+            ],
+            [
+              32.0,
+              0.8
+            ],
+            [
+              64.0,
+              0.8
+            ],
+            [
+              80.0,
+              0.92
+            ],
+            [
+              96.0,
+              0.92
+            ],
+            [
+              112.0,
+              0.48
+            ],
+            [
+              120.0,
+              0.48
+            ],
+            [
+              128.0,
+              0.35
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Pizzicato orders",
+          "program": 45,
+          "bank": 0,
+          "hand": null,
+          "notes": 48,
+          "pan": 32,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/10-boss-governor-iron-edict-Pizzicato-orders.wav",
+            "bytes": 24576088,
+            "sha256": "2dab708376c72bd0bb0652bdf32642259f01d5d0a9c9bed645c2b8a6303f1f6b"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.8
+            ],
+            [
+              16.0,
+              0.8
+            ],
+            [
+              32.0,
+              0.88
+            ],
+            [
+              64.0,
+              0.88
+            ],
+            [
+              80.0,
+              0.93
+            ],
+            [
+              96.0,
+              0.93
+            ],
+            [
+              112.0,
+              0.81
+            ],
+            [
+              120.0,
+              0.81
+            ],
+            [
+              128.0,
+              0.8
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Orchestral snare",
+          "program": 48,
+          "bank": 128,
+          "hand": null,
+          "notes": 32,
+          "pan": 7,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/10-boss-governor-iron-edict-Orchestral-snare.wav",
+            "bytes": 24576088,
+            "sha256": "30b5f352af75d68688a379ce87a96e57420524dbe857501c1146b1d9544bb432"
+          },
+          "target_active_rms_dbfs": -37,
+          "continuous_gain_points": [
+            [
+              0,
+              0.8
+            ],
+            [
+              16.0,
+              0.8
+            ],
+            [
+              32.0,
+              0.88
+            ],
+            [
+              64.0,
+              0.88
+            ],
+            [
+              80.0,
+              0.93
+            ],
+            [
+              96.0,
+              0.93
+            ],
+            [
+              112.0,
+              0.81
+            ],
+            [
+              120.0,
+              0.81
+            ],
+            [
+              128.0,
+              0.8
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Timpani gates",
+          "program": 47,
+          "bank": 0,
+          "hand": null,
+          "notes": 20,
+          "pan": -8,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/10-boss-governor-iron-edict-Timpani-gates.wav",
+            "bytes": 24576088,
+            "sha256": "e07b35e5babb70dfd61030d98abeb29e87de12e4f9ab5fc05eefc6b57a590cdb"
+          },
+          "target_active_rms_dbfs": -36,
+          "continuous_gain_points": [
+            [
+              0,
+              0.8
+            ],
+            [
+              16.0,
+              0.8
+            ],
+            [
+              32.0,
+              0.88
+            ],
+            [
+              64.0,
+              0.88
+            ],
+            [
+              80.0,
+              0.93
+            ],
+            [
+              96.0,
+              0.93
+            ],
+            [
+              112.0,
+              0.81
+            ],
+            [
+              120.0,
+              0.81
+            ],
+            [
+              128.0,
+              0.8
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/10-boss-governor-iron-edict-Steady-low-foundation.wav",
+            "bytes": 24576088,
+            "sha256": "061157c6f86a36f40421a7a99b4c6f268677d8da8f68ac512de16d31489bcb52"
+          },
+          "target_active_rms_dbfs": -33,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              16.0,
+              0.83
+            ],
+            [
+              32.0,
+              0.92
+            ],
+            [
+              64.0,
+              0.92
+            ],
+            [
+              80.0,
+              0.98
+            ],
+            [
+              96.0,
+              0.98
+            ],
+            [
+              112.0,
+              0.85
+            ],
+            [
+              120.0,
+              0.85
+            ],
+            [
+              128.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-6.77",
+        "input_lra": "1.20",
+        "input_thresh": "-28.50",
+        "output_i": "-22.93",
+        "output_tp": "-11.31",
+        "output_lra": "1.20",
+        "output_thresh": "-32.93",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.07"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.47667945022863173,
+          0.28676144231621087
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/10-boss-governor-iron-edict.mmp",
+          "bytes": 7639,
+          "sha256": "55c387bdb101ec50f701a4645a62bd5710585b458af244a51e727fc55feed788"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/10-boss-governor-iron-edict.wav",
+          "bytes": 18432044,
+          "sha256": "39dfaa98117ce14e5bf81c6081f7026b8f908d573897824aa533a32768c241e0"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/10-boss-governor-iron-edict.mp3",
+          "bytes": 2049860,
+          "sha256": "7de9ed966068e5ad768e72144a5efa875ee6f7b6b614882809504444929c7cc6"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/10-boss-governor-iron-edict.ogg",
+          "bytes": 983028,
+          "sha256": "8bca5d36f0e4d9e3b4309f13c536e95b37b5cb95849dfa194bc3f09dea672c81"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "opening"
+        },
+        {
+          "start_bar": 6,
+          "name": "first development"
+        },
+        {
+          "start_bar": 18,
+          "name": "contrast"
+        },
+        {
+          "start_bar": 26,
+          "name": "connected return"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed"
+    },
+    {
+      "id": "boss-brood",
+      "title": "腐巢微光",
+      "stem": "11-boss-brood-pale-nest",
+      "idea": "变异巢母的六八拍隐伏；低单簧管、巴松、木质马林巴与颤弦，像缓慢呼吸的巢，而非军鼓战争。",
+      "key": "B minor",
+      "meter": [
+        6,
+        8
+      ],
+      "bpm_quarter": 90,
+      "bars": 32,
+      "total_beats": 96.0,
+      "seconds": 64.0,
+      "tracks": [
+        {
+          "name": "Clarinet lurking",
+          "program": 71,
+          "bank": 0,
+          "hand": null,
+          "notes": 64,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/11-boss-brood-pale-nest-Clarinet-lurking.wav",
+            "bytes": 24576088,
+            "sha256": "3155f9b775086ede136379363cec279ef475cf1f70116513b52144654486eee1"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.97
+            ],
+            [
+              24.0,
+              0.97
+            ],
+            [
+              36.0,
+              1
+            ],
+            [
+              48.0,
+              1
+            ],
+            [
+              60.0,
+              1.04
+            ],
+            [
+              78.0,
+              1.04
+            ],
+            [
+              90.0,
+              0.94
+            ],
+            [
+              90.0,
+              0.94
+            ],
+            [
+              96.0,
+              0.97
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Tremolo nest walls",
+          "program": 44,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": -31,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/11-boss-brood-pale-nest-Tremolo-nest-walls.wav",
+            "bytes": 24576088,
+            "sha256": "a2196e14e98290a2930cc79b0c5aca9eeafe8f1675622e59e2727d2b058f03a0"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              24.0,
+              0.83
+            ],
+            [
+              36.0,
+              0.92
+            ],
+            [
+              48.0,
+              0.92
+            ],
+            [
+              60.0,
+              0.98
+            ],
+            [
+              78.0,
+              0.98
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Bassoon roots",
+          "program": 70,
+          "bank": 0,
+          "hand": null,
+          "notes": 10,
+          "pan": 22,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/11-boss-brood-pale-nest-Bassoon-roots.wav",
+            "bytes": 24576088,
+            "sha256": "cc63c0e28c56d6eb1a0b5c258b59e26392a664039c7c31fe1693663f2016658a"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.35
+            ],
+            [
+              24.0,
+              0.35
+            ],
+            [
+              36.0,
+              0.8
+            ],
+            [
+              48.0,
+              0.8
+            ],
+            [
+              60.0,
+              0.92
+            ],
+            [
+              78.0,
+              0.92
+            ],
+            [
+              90.0,
+              0.48
+            ],
+            [
+              90.0,
+              0.48
+            ],
+            [
+              96.0,
+              0.35
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Cello crawling answer",
+          "program": 42,
+          "bank": 0,
+          "hand": null,
+          "notes": 32,
+          "pan": 32,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/11-boss-brood-pale-nest-Cello-crawling-answer.wav",
+            "bytes": 24576088,
+            "sha256": "bbe1051228d9aedf9247fa8b9e787bb98cd522e0cccbb3cf3f79ed58480f99ae"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              24.0,
+              0.83
+            ],
+            [
+              36.0,
+              0.92
+            ],
+            [
+              48.0,
+              0.92
+            ],
+            [
+              60.0,
+              0.98
+            ],
+            [
+              78.0,
+              0.98
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Marimba hollow bones",
+          "program": 12,
+          "bank": 0,
+          "hand": null,
+          "notes": 64,
+          "pan": -24,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/11-boss-brood-pale-nest-Marimba-hollow-bones.wav",
+            "bytes": 24576088,
+            "sha256": "96da2a4330073b8006e3e9795429c74fe679ac0f1d4b5c254e50277e5d29b404"
+          },
+          "target_active_rms_dbfs": -38,
+          "continuous_gain_points": [
+            [
+              0,
+              0.68
+            ],
+            [
+              24.0,
+              0.68
+            ],
+            [
+              36.0,
+              0.72
+            ],
+            [
+              48.0,
+              0.72
+            ],
+            [
+              60.0,
+              0.84
+            ],
+            [
+              78.0,
+              0.84
+            ],
+            [
+              90.0,
+              0.58
+            ],
+            [
+              90.0,
+              0.58
+            ],
+            [
+              96.0,
+              0.68
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Viola spores",
+          "program": 41,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/11-boss-brood-pale-nest-Viola-spores.wav",
+            "bytes": 24576088,
+            "sha256": "5f0341161b96192fbd524eb60b103fdd536564fdf80b3d880ac1ccd0c9624e75"
+          },
+          "target_active_rms_dbfs": -38,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              24.0,
+              0.83
+            ],
+            [
+              36.0,
+              0.92
+            ],
+            [
+              48.0,
+              0.92
+            ],
+            [
+              60.0,
+              0.98
+            ],
+            [
+              78.0,
+              0.98
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/11-boss-brood-pale-nest-Steady-low-foundation.wav",
+            "bytes": 24576088,
+            "sha256": "1c5551e444c39b4aaf6e209643888260643bea58a9cf160113e91be7e7d272e4"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              24.0,
+              0.83
+            ],
+            [
+              36.0,
+              0.92
+            ],
+            [
+              48.0,
+              0.92
+            ],
+            [
+              60.0,
+              0.98
+            ],
+            [
+              78.0,
+              0.98
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-8.48",
+        "input_lra": "1.10",
+        "input_thresh": "-28.50",
+        "output_i": "-22.93",
+        "output_tp": "-12.96",
+        "output_lra": "1.20",
+        "output_thresh": "-32.93",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.07"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.3784899048619827,
+          0.372891554346108
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/11-boss-brood-pale-nest.mmp",
+          "bytes": 6757,
+          "sha256": "412f75d84c09947bed554a42e1301b0f7654555da024c5886cdfa63f894ebc59"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/11-boss-brood-pale-nest.wav",
+          "bytes": 18432044,
+          "sha256": "ab06223976b949c171b0bd8ee2b32fc9476c71e4e04d3e170f516f9d3e7809b3"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/11-boss-brood-pale-nest.mp3",
+          "bytes": 2049860,
+          "sha256": "84a577a69b1561a3e10a4d14339eb4c29c41797748f6c6534fa30da9b7ad911d"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/11-boss-brood-pale-nest.ogg",
+          "bytes": 1061633,
+          "sha256": "3edcda5d7d524f4e8bd864612eb316f69ae5a78cfa0b40e8face0dbd0d0ead75"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "opening"
+        },
+        {
+          "start_bar": 10,
+          "name": "first development"
+        },
+        {
+          "start_bar": 18,
+          "name": "contrast"
+        },
+        {
+          "start_bar": 28,
+          "name": "connected return"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed"
+    },
+    {
+      "id": "boss-psionic",
+      "title": "折镜之主",
+      "stem": "12-boss-psionic-broken-mirrors",
+      "idea": "异能领主的镜厅三拍：颤音琴与钟琴交错，管风琴守住低部；同句不同方向的回答形成折射感。",
+      "key": "E-flat minor",
+      "meter": [
+        3,
+        4
+      ],
+      "bpm_quarter": 96,
+      "bars": 32,
+      "total_beats": 96.0,
+      "seconds": 60.0,
+      "tracks": [
+        {
+          "name": "Vibraphone mirror",
+          "program": 11,
+          "bank": 0,
+          "hand": null,
+          "notes": 64,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/12-boss-psionic-broken-mirrors-Vibraphone-mirror.wav",
+            "bytes": 23040088,
+            "sha256": "7d2e14e6981686d3431f1fe69d46122612359ff203fb2969237bcf559a415957"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.97
+            ],
+            [
+              18.0,
+              0.97
+            ],
+            [
+              30.0,
+              1
+            ],
+            [
+              36.0,
+              1
+            ],
+            [
+              48.0,
+              1.04
+            ],
+            [
+              66.0,
+              1.04
+            ],
+            [
+              78.0,
+              0.94
+            ],
+            [
+              90.0,
+              0.94
+            ],
+            [
+              96.0,
+              0.97
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Celeste reflection",
+          "program": 8,
+          "bank": 0,
+          "hand": null,
+          "notes": 22,
+          "pan": 31,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/12-boss-psionic-broken-mirrors-Celeste-reflection.wav",
+            "bytes": 23040088,
+            "sha256": "70e0075d33056056284c98446077b0c5927e8e05675c7fd6c89f2e10d6a7264c"
+          },
+          "target_active_rms_dbfs": -38,
+          "continuous_gain_points": [
+            [
+              0,
+              0.68
+            ],
+            [
+              18.0,
+              0.68
+            ],
+            [
+              30.0,
+              0.72
+            ],
+            [
+              36.0,
+              0.72
+            ],
+            [
+              48.0,
+              0.84
+            ],
+            [
+              66.0,
+              0.84
+            ],
+            [
+              78.0,
+              0.58
+            ],
+            [
+              90.0,
+              0.58
+            ],
+            [
+              96.0,
+              0.68
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Organ shadow",
+          "program": 19,
+          "bank": 0,
+          "hand": null,
+          "notes": 32,
+          "pan": -22,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/12-boss-psionic-broken-mirrors-Organ-shadow.wav",
+            "bytes": 23040088,
+            "sha256": "e346c0bc005d59396c94a29e1ddc95009576643f6fd6ad0d85615106896a3253"
+          },
+          "target_active_rms_dbfs": -36,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              18.0,
+              0.83
+            ],
+            [
+              30.0,
+              0.92
+            ],
+            [
+              36.0,
+              0.92
+            ],
+            [
+              48.0,
+              0.98
+            ],
+            [
+              66.0,
+              0.98
+            ],
+            [
+              78.0,
+              0.85
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Violin narrow light",
+          "program": 40,
+          "bank": 0,
+          "hand": null,
+          "notes": 10,
+          "pan": 25,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/12-boss-psionic-broken-mirrors-Violin-narrow-light.wav",
+            "bytes": 23040088,
+            "sha256": "ecf7f2de2ca45fcc9064c5cd66c2e61207c218d605dbb954692b3042eb97799b"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.35
+            ],
+            [
+              18.0,
+              0.35
+            ],
+            [
+              30.0,
+              0.8
+            ],
+            [
+              36.0,
+              0.8
+            ],
+            [
+              48.0,
+              0.92
+            ],
+            [
+              66.0,
+              0.92
+            ],
+            [
+              78.0,
+              0.48
+            ],
+            [
+              90.0,
+              0.48
+            ],
+            [
+              96.0,
+              0.35
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Viola dark glass",
+          "program": 41,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": -34,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/12-boss-psionic-broken-mirrors-Viola-dark-glass.wav",
+            "bytes": 23040088,
+            "sha256": "f0a7da10b61be67a122f8308578423b66e35c2e729eda0dbad7205570eb4a069"
+          },
+          "target_active_rms_dbfs": -36,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              18.0,
+              0.83
+            ],
+            [
+              30.0,
+              0.92
+            ],
+            [
+              36.0,
+              0.92
+            ],
+            [
+              48.0,
+              0.98
+            ],
+            [
+              66.0,
+              0.98
+            ],
+            [
+              78.0,
+              0.85
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Harp fractured image",
+          "program": 46,
+          "bank": 0,
+          "hand": null,
+          "notes": 22,
+          "pan": 18,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/12-boss-psionic-broken-mirrors-Harp-fractured-image.wav",
+            "bytes": 23040088,
+            "sha256": "0f0377815f061310a8e7b06003335da73bf3817f9104029ff35159f1bb40d704"
+          },
+          "target_active_rms_dbfs": -42,
+          "continuous_gain_points": [
+            [
+              0,
+              0.68
+            ],
+            [
+              18.0,
+              0.68
+            ],
+            [
+              30.0,
+              0.72
+            ],
+            [
+              36.0,
+              0.72
+            ],
+            [
+              48.0,
+              0.84
+            ],
+            [
+              66.0,
+              0.84
+            ],
+            [
+              78.0,
+              0.58
+            ],
+            [
+              90.0,
+              0.58
+            ],
+            [
+              96.0,
+              0.68
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/12-boss-psionic-broken-mirrors-Steady-low-foundation.wav",
+            "bytes": 23040088,
+            "sha256": "5a462dabe18a9386285279460f94332064c81a5ad327d446d0eac0e2cc234c25"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              18.0,
+              0.83
+            ],
+            [
+              30.0,
+              0.92
+            ],
+            [
+              36.0,
+              0.92
+            ],
+            [
+              48.0,
+              0.98
+            ],
+            [
+              66.0,
+              0.98
+            ],
+            [
+              78.0,
+              0.85
+            ],
+            [
+              90.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-7.67",
+        "input_lra": "1.10",
+        "input_thresh": "-28.50",
+        "output_i": "-22.95",
+        "output_tp": "-12.16",
+        "output_lra": "1.00",
+        "output_thresh": "-32.95",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.05"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.46934565143506635,
+          0.23190025518966234
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/12-boss-psionic-broken-mirrors.mmp",
+          "bytes": 6807,
+          "sha256": "579f5fdab039c88734a897f78f62d66bbb2b939013926fde2d2f5729c5d8ca0d"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/12-boss-psionic-broken-mirrors.wav",
+          "bytes": 17280044,
+          "sha256": "d1995cfc49f4fa70e94d2a7fa4d90dcb108edca5f316ae74e82618aefbb37a93"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/12-boss-psionic-broken-mirrors.mp3",
+          "bytes": 1921604,
+          "sha256": "646cb96381c9e5483a89043d9cae07700d3eb9144156f4c9d1fe7725208c3dab"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/12-boss-psionic-broken-mirrors.ogg",
+          "bytes": 1025835,
+          "sha256": "f71bda17dd4267b0c5192f868401ba57c986acf79a0522c8610d722ea3f5477a"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "opening"
+        },
+        {
+          "start_bar": 8,
+          "name": "first development"
+        },
+        {
+          "start_bar": 14,
+          "name": "contrast"
+        },
+        {
+          "start_bar": 24,
+          "name": "connected return"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed"
+    },
+    {
+      "id": "success",
+      "title": "归航余晖",
+      "stem": "13-success-homeward-glow",
+      "idea": "成功撤离、首脑胜利与通关结算：柔圆号和温暖大调，不做刺耳连续胜利号角，末句自然回落。",
+      "key": "A major",
+      "meter": [
+        3,
+        4
+      ],
+      "bpm_quarter": 92,
+      "bars": 24,
+      "total_beats": 72.0,
+      "seconds": 46.956520833333336,
+      "tracks": [
+        {
+          "name": "Horn homeward",
+          "program": 60,
+          "bank": 0,
+          "hand": null,
+          "notes": 48,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/13-success-homeward-glow-Horn-homeward.wav",
+            "bytes": 18031392,
+            "sha256": "d21af0d7220ccfdff1f77e869e0f6de968ac691f0bd053a976cbb81cab03b2ff"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.97
+            ],
+            [
+              6.0,
+              0.97
+            ],
+            [
+              18.0,
+              1
+            ],
+            [
+              30.0,
+              1
+            ],
+            [
+              42.0,
+              1.04
+            ],
+            [
+              54.0,
+              1.04
+            ],
+            [
+              66.0,
+              0.94
+            ],
+            [
+              66.0,
+              0.94
+            ],
+            [
+              72.0,
+              0.97
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Violin horizon gold",
+          "program": 40,
+          "bank": 0,
+          "hand": null,
+          "notes": 8,
+          "pan": -31,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/13-success-homeward-glow-Violin-horizon-gold.wav",
+            "bytes": 18031392,
+            "sha256": "5c86872f054e65fc4dc208b35e9a38b0b3124b74412fa645b8f1cf10f82df7b7"
+          },
+          "target_active_rms_dbfs": -33,
+          "continuous_gain_points": [
+            [
+              0,
+              0.35
+            ],
+            [
+              6.0,
+              0.35
+            ],
+            [
+              18.0,
+              0.8
+            ],
+            [
+              30.0,
+              0.8
+            ],
+            [
+              42.0,
+              0.92
+            ],
+            [
+              54.0,
+              0.92
+            ],
+            [
+              66.0,
+              0.48
+            ],
+            [
+              66.0,
+              0.48
+            ],
+            [
+              72.0,
+              0.35
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Cello return",
+          "program": 42,
+          "bank": 0,
+          "hand": null,
+          "notes": 24,
+          "pan": 29,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/13-success-homeward-glow-Cello-return.wav",
+            "bytes": 18031392,
+            "sha256": "560aebee80979ddb2997d99edf3b2f583d4ec34596b56d0171a6bc3e539cede0"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              6.0,
+              0.83
+            ],
+            [
+              18.0,
+              0.92
+            ],
+            [
+              30.0,
+              0.92
+            ],
+            [
+              42.0,
+              0.98
+            ],
+            [
+              54.0,
+              0.98
+            ],
+            [
+              66.0,
+              0.85
+            ],
+            [
+              66.0,
+              0.85
+            ],
+            [
+              72.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Harp carried treasures",
+          "program": 46,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": -24,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/13-success-homeward-glow-Harp-carried-treasures.wav",
+            "bytes": 18031392,
+            "sha256": "fb50fb9cfe5da1f15c020a33db197924ce3348f101c488a768b3c57e62e91bd0"
+          },
+          "target_active_rms_dbfs": -37,
+          "continuous_gain_points": [
+            [
+              0,
+              0.68
+            ],
+            [
+              6.0,
+              0.68
+            ],
+            [
+              18.0,
+              0.72
+            ],
+            [
+              30.0,
+              0.72
+            ],
+            [
+              42.0,
+              0.84
+            ],
+            [
+              54.0,
+              0.84
+            ],
+            [
+              66.0,
+              0.58
+            ],
+            [
+              66.0,
+              0.58
+            ],
+            [
+              72.0,
+              0.68
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Trumpet final sunlight",
+          "program": 56,
+          "bank": 0,
+          "hand": null,
+          "notes": 8,
+          "pan": 20,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/13-success-homeward-glow-Trumpet-final-sunlight.wav",
+            "bytes": 18031392,
+            "sha256": "025e5c53cf5b31a15344170d7e0b2a4e2633373fef739a587355e92820509c56"
+          },
+          "target_active_rms_dbfs": -40,
+          "continuous_gain_points": [
+            [
+              0,
+              0.35
+            ],
+            [
+              6.0,
+              0.35
+            ],
+            [
+              18.0,
+              0.8
+            ],
+            [
+              30.0,
+              0.8
+            ],
+            [
+              42.0,
+              0.92
+            ],
+            [
+              54.0,
+              0.92
+            ],
+            [
+              66.0,
+              0.48
+            ],
+            [
+              66.0,
+              0.48
+            ],
+            [
+              72.0,
+              0.35
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Celeste quiet reward",
+          "program": 8,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": 31,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/13-success-homeward-glow-Celeste-quiet-reward.wav",
+            "bytes": 18031392,
+            "sha256": "47ca527e4c2d61d85dcbab4b927beecd367f1b4e02e90e57767a754c82a54c0a"
+          },
+          "target_active_rms_dbfs": -43,
+          "continuous_gain_points": [
+            [
+              0,
+              0.68
+            ],
+            [
+              6.0,
+              0.68
+            ],
+            [
+              18.0,
+              0.72
+            ],
+            [
+              30.0,
+              0.72
+            ],
+            [
+              42.0,
+              0.84
+            ],
+            [
+              54.0,
+              0.84
+            ],
+            [
+              66.0,
+              0.58
+            ],
+            [
+              66.0,
+              0.58
+            ],
+            [
+              72.0,
+              0.68
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 12,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/13-success-homeward-glow-Steady-low-foundation.wav",
+            "bytes": 18031392,
+            "sha256": "187dd89b62f4802ce4637ce98728f18312b2e2aa6d6e54090c65dab19fc9ab14"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              6.0,
+              0.83
+            ],
+            [
+              18.0,
+              0.92
+            ],
+            [
+              30.0,
+              0.92
+            ],
+            [
+              42.0,
+              0.98
+            ],
+            [
+              54.0,
+              0.98
+            ],
+            [
+              66.0,
+              0.85
+            ],
+            [
+              66.0,
+              0.85
+            ],
+            [
+              72.0,
+              0.83
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-7.51",
+        "input_lra": "2.10",
+        "input_thresh": "-28.50",
+        "output_i": "-22.82",
+        "output_tp": "-12.07",
+        "output_lra": "1.70",
+        "output_thresh": "-32.82",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.18"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.4185934660649234,
+          0.6430757541768783
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/13-success-homeward-glow.mmp",
+          "bytes": 6777,
+          "sha256": "cb895da3fee447102a2e6780bd658885971e33710d3486b333247e2e94578b74"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/13-success-homeward-glow.wav",
+          "bytes": 13523522,
+          "sha256": "33a0d6c1c6edfb344dcd9c652f58a02a41b139741b02d9774f6130a54192fd05"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/13-success-homeward-glow.mp3",
+          "bytes": 1504580,
+          "sha256": "fa6fffb6eda32f1875bd7a79638f395c72af9c4ed1cc82e9481e4dcbeda5c61b"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/13-success-homeward-glow.ogg",
+          "bytes": 750763,
+          "sha256": "7e0b04bf99a58a576a15f89989d2792a57c43f1f7dc76b7c2ca5d917b9fd981d"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "opening"
+        },
+        {
+          "start_bar": 4,
+          "name": "first development"
+        },
+        {
+          "start_bar": 12,
+          "name": "contrast"
+        },
+        {
+          "start_bar": 20,
+          "name": "connected return"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed"
+    },
+    {
+      "id": "defeat",
+      "title": "未熄之灯",
+      "stem": "14-defeat-unextinguished-lamp",
+      "idea": "死亡或放弃结算的温柔收束；大提琴、双手钢琴与双簧管，保留重新出发的微光。",
+      "key": "G minor",
+      "meter": [
+        4,
+        4
+      ],
+      "bpm_quarter": 72,
+      "bars": 24,
+      "total_beats": 96.0,
+      "seconds": 80.0,
+      "tracks": [
+        {
+          "name": "Cello last ember",
+          "program": 42,
+          "bank": 0,
+          "hand": null,
+          "notes": 48,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/14-defeat-unextinguished-lamp-Cello-last-ember.wav",
+            "bytes": 30720088,
+            "sha256": "841698d2764d65f41eeca59cce34c028835718921510be0bcaae2e1b1bde4c22"
+          },
+          "target_active_rms_dbfs": -25,
+          "continuous_gain_points": [
+            [
+              0,
+              0.97
+            ],
+            [
+              24.0,
+              0.97
+            ],
+            [
+              40.0,
+              1
+            ],
+            [
+              48.0,
+              1
+            ],
+            [
+              64.0,
+              1.04
+            ],
+            [
+              80.0,
+              1.04
+            ],
+            [
+              88.0,
+              0.94
+            ],
+            [
+              96.0,
+              0.94
+            ],
+            [
+              96.0,
+              0.97
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Piano right hand",
+          "program": 0,
+          "bank": 0,
+          "hand": "right",
+          "notes": 24,
+          "pan": 8,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/14-defeat-unextinguished-lamp-Piano-right-hand.wav",
+            "bytes": 30720088,
+            "sha256": "8d0094bfbf6820ec491d40ec23378ad9560fe59b64854d4d92d65d83cfa5f7ec"
+          },
+          "target_active_rms_dbfs": -32,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              24.0,
+              0.83
+            ],
+            [
+              40.0,
+              0.92
+            ],
+            [
+              48.0,
+              0.92
+            ],
+            [
+              64.0,
+              0.98
+            ],
+            [
+              80.0,
+              0.98
+            ],
+            [
+              88.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ],
+            [
+              96.0,
+              0.85
+            ]
+          ],
+          "cc64_used": true
+        },
+        {
+          "name": "Piano left hand",
+          "program": 0,
+          "bank": 0,
+          "hand": "left",
+          "notes": 72,
+          "pan": -17,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/14-defeat-unextinguished-lamp-Piano-left-hand.wav",
+            "bytes": 30720088,
+            "sha256": "a716849d93e6daf362847148776757b66b645f874ba40aa88b6c0c560f002715"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              24.0,
+              0.83
+            ],
+            [
+              40.0,
+              0.92
+            ],
+            [
+              48.0,
+              0.92
+            ],
+            [
+              64.0,
+              0.98
+            ],
+            [
+              80.0,
+              0.98
+            ],
+            [
+              88.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ],
+            [
+              96.0,
+              0.85
+            ]
+          ],
+          "cc64_used": true
+        },
+        {
+          "name": "Oboe remembered road",
+          "program": 68,
+          "bank": 0,
+          "hand": null,
+          "notes": 8,
+          "pan": 18,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/14-defeat-unextinguished-lamp-Oboe-remembered-road.wav",
+            "bytes": 30720088,
+            "sha256": "5d72578ad238372fc1bbc1bca5e7b3260ff74084811fe3785879a113f5a75440"
+          },
+          "target_active_rms_dbfs": -36,
+          "continuous_gain_points": [
+            [
+              0,
+              0.35
+            ],
+            [
+              24.0,
+              0.35
+            ],
+            [
+              40.0,
+              0.8
+            ],
+            [
+              48.0,
+              0.8
+            ],
+            [
+              64.0,
+              0.92
+            ],
+            [
+              80.0,
+              0.92
+            ],
+            [
+              88.0,
+              0.48
+            ],
+            [
+              96.0,
+              0.35
+            ],
+            [
+              96.0,
+              0.48
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Slow strings shelter",
+          "program": 49,
+          "bank": 0,
+          "hand": null,
+          "notes": 12,
+          "pan": -31,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/14-defeat-unextinguished-lamp-Slow-strings-shelter.wav",
+            "bytes": 30720088,
+            "sha256": "e3e5a287e8769995fc2fe5a126629378e952af56efe6f3874a5463b70cff965f"
+          },
+          "target_active_rms_dbfs": -34,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              24.0,
+              0.83
+            ],
+            [
+              40.0,
+              0.92
+            ],
+            [
+              48.0,
+              0.92
+            ],
+            [
+              64.0,
+              0.98
+            ],
+            [
+              80.0,
+              0.98
+            ],
+            [
+              88.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ],
+            [
+              96.0,
+              0.85
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Harp small hope",
+          "program": 46,
+          "bank": 0,
+          "hand": null,
+          "notes": 16,
+          "pan": -24,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/14-defeat-unextinguished-lamp-Harp-small-hope.wav",
+            "bytes": 30720088,
+            "sha256": "d746d0a3f93bb5db5f04689fb2d9b5a1dac3a2358f024ba2e28dd700b53722b8"
+          },
+          "target_active_rms_dbfs": -43,
+          "continuous_gain_points": [
+            [
+              0,
+              0.68
+            ],
+            [
+              24.0,
+              0.68
+            ],
+            [
+              40.0,
+              0.72
+            ],
+            [
+              48.0,
+              0.72
+            ],
+            [
+              64.0,
+              0.84
+            ],
+            [
+              80.0,
+              0.84
+            ],
+            [
+              88.0,
+              0.58
+            ],
+            [
+              96.0,
+              0.58
+            ],
+            [
+              96.0,
+              0.68
+            ]
+          ],
+          "cc64_used": false
+        },
+        {
+          "name": "Steady low foundation",
+          "program": 43,
+          "bank": 0,
+          "hand": null,
+          "notes": 12,
+          "pan": 0,
+          "frozen_stem": {
+            "path": ".tmp/music-workstation/missing-bgm/14-defeat-unextinguished-lamp-Steady-low-foundation.wav",
+            "bytes": 30720088,
+            "sha256": "73396173ec21f607eb0569909a6d3ed3b54ce71cf2c94c2089ff6e2e23577b35"
+          },
+          "target_active_rms_dbfs": -35,
+          "continuous_gain_points": [
+            [
+              0,
+              0.83
+            ],
+            [
+              24.0,
+              0.83
+            ],
+            [
+              40.0,
+              0.92
+            ],
+            [
+              48.0,
+              0.92
+            ],
+            [
+              64.0,
+              0.98
+            ],
+            [
+              80.0,
+              0.98
+            ],
+            [
+              88.0,
+              0.85
+            ],
+            [
+              96.0,
+              0.83
+            ],
+            [
+              96.0,
+              0.85
+            ]
+          ],
+          "cc64_used": false
+        }
+      ],
+      "loudness": {
+        "input_i": "-18.50",
+        "input_tp": "-5.93",
+        "input_lra": "1.90",
+        "input_thresh": "-28.50",
+        "output_i": "-22.82",
+        "output_tp": "-10.38",
+        "output_lra": "1.80",
+        "output_thresh": "-32.82",
+        "normalization_type": "dynamic",
+        "target_offset": "-0.18"
+      },
+      "slow_balance": {
+        "slow_balance_gain_db_range": [
+          -0.4660813482361644,
+          0.6575693815674288
+        ],
+        "time_scale_seconds": 1.5,
+        "maximum_allowed_db": 2.5
+      },
+      "files": [
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/14-defeat-unextinguished-lamp.mmp",
+          "bytes": 6782,
+          "sha256": "ba7c235fd9f17833c213acd45a95fa1e4299182da913c559fd4873a0e8a9a550"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/14-defeat-unextinguished-lamp.wav",
+          "bytes": 23040044,
+          "sha256": "d15ae428a7ace4014f55a7f40eac067efc0c035e9c2d305d072adaa83733abcf"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/14-defeat-unextinguished-lamp.mp3",
+          "bytes": 2562116,
+          "sha256": "da3f879228e4823c739b923212c72708a76d3bcb6424955b1de2a9a4468819eb"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/14-defeat-unextinguished-lamp.ogg",
+          "bytes": 1524338,
+          "sha256": "9860308cea18aad3984e41356db83439d647bf3fc0fb08140080077cf3a4af0f"
+        },
+        {
+          "path": "docs/evidence/2026-10-05-WF-music-missing-bgm/14-defeat-unextinguished-lamp-piano.mid",
+          "bytes": 1394,
+          "sha256": "094794f24f6b605546b99212f0368c3f50931dabf5cb3b6c6b8fa774ddb5128e"
+        }
+      ],
+      "sections": [
+        {
+          "start_bar": 0,
+          "name": "opening"
+        },
+        {
+          "start_bar": 8,
+          "name": "first development"
+        },
+        {
+          "start_bar": 14,
+          "name": "contrast"
+        },
+        {
+          "start_bar": 22,
+          "name": "connected return"
+        }
+      ],
+      "native_project": "frozen pre-master stems, not separately native-rendered",
+      "human_listening": "not claimed"
+    }
+  ],
+  "scope": "11 scene-specific candidates; all existing game and audio untouched"
+}

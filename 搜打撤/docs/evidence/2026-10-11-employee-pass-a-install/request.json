@@ -1,0 +1,17 @@
+{
+  "authorization": "2026-10-11 老板：接入",
+  "card_id": "cmtmvq6ss84l",
+  "asset": "cards/items/cmtmvq6ss84l.webp",
+  "source": "D:/素材/代号柒/搜打撤/.tmp/imagegen/2026-10-11-employee-pass-a/employee-pass-a-redraw.png",
+  "source_sha256": "a0bb24c5f8bc66b6ee94106504fa9e9c5c5bf4879b7333a52c9e8ed9fdaf7888",
+  "revision": "employee-pass-a-premium-no-letter-transparent-20261011",
+  "transparent_background": true,
+  "prompt": "Use case: style-transfer. Redesign and redraw the employee access credential in image 1 as a refined premium game-item illustration with a genuinely transparent background. Image 1 supplies ONLY the badge's basic identity, rectangular shape, diagonal placement and top metal clip. Completely redesign its front and materials. Images 2–4 supply ONLY broad opaque hand-painted anime brushwork; do not copy their characters, costumes, objects or text.\n\nA single complete slim rectangular access badge, rounded beveled corners, leaning about 20 degrees so its top is to the right of its bottom. Show a slight three-quarter view to reveal its thin layered metal edge. Center it with generous transparent margins, occupy about 75 percent of the square canvas height including the top clip. A compact brushed titanium clip fits neatly into one recessed top slot; precise understated hardware, no lanyard. Replace the bulky pale plastic-looking border with a narrow champagne-gold metal rim around a charcoal titanium backing. The inset front is deep muted blue-green enamel with large calm dark teal planes and one restrained broad desaturated reflection. A small elegant abstract geometric seal, consisting of an angular hollow diamond with two offset short inlaid bars, sits in the upper third; it is a geometric symbol, not a letter. Leave most of the face quiet. In the lower third, add one small recessed metal contact chip and two short aligned inset strokes. Palette: smoky charcoal, deep petrol teal, muted champagne gold, cool platinum highlights. The impression of quality comes from deliberate proportions, coherent materials, fine narrow metal edging and restrained ornament.\n\nRough hand-painted anime color study with large connected opaque color masses, a few wide directional swipes and blunt dabs, clean handmade edges and hard-edged broad shadow planes. Preserve the principal turns of the frame, clip and bevel with selective bright opaque strokes; quiet matte front surface, a few structural marks, no dense engraving or all-over texture. It should be beautifully designed and materially refined while remaining visibly economical hand-painting, not a photoreal product render or glossy 3D.\n\nABSOLUTELY NO LETTERS OR NUMBERS anywhere, especially no capital A, no classification mark, no words, serial code, barcode or QR code. No large circular letter panel. All area outside the badge and clip is actual transparent alpha: remove the old cream brush patch entirely, no painted backing shape, ground shadow, halo, glow, backdrop or drawn checkerboard. No extra objects, text, border, watermark or UI. One isolated object, square canvas.",
+  "references": [
+    "D:\\素材\\代号柒\\搜打撤\\game\\assets\\cards\\items\\cmtmvq6ss84l.webp",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+  ],
+  "origin_request": "docs/evidence/2026-10-11-employee-pass-a/request.json"
+}

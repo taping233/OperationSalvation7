@@ -1,0 +1,33 @@
+{
+  "items": [
+    {
+      "id": "heixiang",
+      "path": "portraits/avatars/heixiang.webp",
+      "bytes": 111060,
+      "sha256": "557a9d4ffe504b1fff00b81f72e7f41583a9918d0cac8396b4294771380fc169",
+      "oldSha256": "7e1129f35a7b82192518210a3e9ee8178895c70da1fea6a0b52c848fe0127fac",
+      "source": ".tmp/imagegen/chibi-head-scale-20261010/heixiang-source.png",
+      "sourceSha256": "9fb1dece3b921daeb5bcc8912a50f2bd83372bf7c19ca3bf74528e8c4afa7dcb",
+      "size": [
+        1024,
+        1024
+      ],
+      "transparent": true
+    },
+    {
+      "id": "changwuyu",
+      "path": "portraits/avatars/changwuyu.webp",
+      "bytes": 206734,
+      "sha256": "d28ee58cdc8ee899cc3369d603b0df4aec9a87e9b19cfbcac7a2673dc0bb9670",
+      "oldSha256": "ea6b1263d2e6118b3a048135ef6c9b8fdea77b2d53210c3ef7dbc25c8a6cb370",
+      "source": ".tmp/imagegen/chibi-head-scale-20261010/changwuyu-source.png",
+      "sourceSha256": "44e3c7774d2544e711a630551cedd164812a9f0e04381290bc97557a696772b6",
+      "size": [
+        1024,
+        1024
+      ],
+      "transparent": true
+    }
+  ],
+  "verification": "Tool returned images visually compared; no tests or browser acceptance"
+}

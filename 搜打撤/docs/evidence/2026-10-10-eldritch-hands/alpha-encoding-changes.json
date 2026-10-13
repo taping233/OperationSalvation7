@@ -1,0 +1,74 @@
+[
+  {
+    "before": {
+      "path": "cards/creature-tt8-curseimmune.webp",
+      "bytes": 89428,
+      "sha256": "a3b450f781baf558d4d3bc3256d490b8c42f364bb9c2c645ee1f5af1c5de3b6f"
+    },
+    "after": {
+      "path": "cards/creature-tt8-curseimmune.webp",
+      "bytes": 169804,
+      "sha256": "f37143a6571f762a724893a101ecfd8d7773202d8246efca74c569a549f355c9"
+    }
+  },
+  {
+    "before": {
+      "path": "thumbs/cards/creature-tt8-curseimmune.webp",
+      "bytes": 12578,
+      "sha256": "62236dbdb11f2778d4fb3ee4b4711b2dad8ef906c4f0a0a326bb573114550e0f"
+    },
+    "after": {
+      "path": "thumbs/cards/creature-tt8-curseimmune.webp",
+      "bytes": 30496,
+      "sha256": "e5a35c1f756b62eb22c69d3f5c720efc7aba0598d0b0df2d6350f72de5a94ee3"
+    }
+  },
+  {
+    "before": {
+      "path": "cards/creature-tt8-energycap.webp",
+      "bytes": 70646,
+      "sha256": "d4c9f6cdfd8c9c83c0efd40dcb9d47c826cd524d2ab9472a01ebd2db5cd04fdf"
+    },
+    "after": {
+      "path": "cards/creature-tt8-energycap.webp",
+      "bytes": 135398,
+      "sha256": "51e98be158308973d69876de2a18b1a2924af5d40414e0073aee593535ad9265"
+    }
+  },
+  {
+    "before": {
+      "path": "thumbs/cards/creature-tt8-energycap.webp",
+      "bytes": 10322,
+      "sha256": "2e1461010c9dbad45f077514acd13009e2d3ee3447f987a2f9f1282a40493596"
+    },
+    "after": {
+      "path": "thumbs/cards/creature-tt8-energycap.webp",
+      "bytes": 25100,
+      "sha256": "1881aec2fe8d727ab98259fd6f66187ee64122227a4084b43e30af5f2de925a2"
+    }
+  },
+  {
+    "before": {
+      "path": "cards/creature-tt8-healplus.webp",
+      "bytes": 71014,
+      "sha256": "05bb3446f61d82df9e00c22776cb1ad2574f514e6e0bcd309ba35d5fb17e0f8c"
+    },
+    "after": {
+      "path": "cards/creature-tt8-healplus.webp",
+      "bytes": 141088,
+      "sha256": "daac04c1f1c373f5b93ad339c5042032949168c6f93a43b9c7eeb290fd698266"
+    }
+  },
+  {
+    "before": {
+      "path": "thumbs/cards/creature-tt8-healplus.webp",
+      "bytes": 8990,
+      "sha256": "b3376b94a27b01466dee7adcb88b70a30251e0083434d621fad1b611f973c80c"
+    },
+    "after": {
+      "path": "thumbs/cards/creature-tt8-healplus.webp",
+      "bytes": 22132,
+      "sha256": "1c5242be3e547dd3cd05a354c5dfdebc8fe1af26422c6064a461260afe99ab5b"
+    }
+  }
+]

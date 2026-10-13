@@ -1,0 +1,16 @@
+{
+  "card_id": "tt3sp-flowerzhen",
+  "card_name": "花鸩",
+  "tool": "built-in image_gen",
+  "status": "candidate-delivered",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a128ee-d0f5-74e2-a11c-dcfeff29f424\\exec-37d1b094-0bfa-4396-b14c-7f69e1c4c304.png",
+  "output": ".tmp/imagegen/2026-10-11-flowerzhen/flowerzhen-redraw.png",
+  "sha256": "f6fe077994a310bb3449a8a14a8d7bcc3d068f81252a76e8e6f167aa42ee77df",
+  "bytes": 1618185,
+  "acquisition": "Copied from built-in ImageGen output",
+  "visual_review": "已查看工具返回画作：深紫毒花、花心紫液、下垂长滴与酒红背景保留；宽笔块面重绘",
+  "runtime_installed": false,
+  "tests_run": false,
+  "build_run": false,
+  "committed": false
+}

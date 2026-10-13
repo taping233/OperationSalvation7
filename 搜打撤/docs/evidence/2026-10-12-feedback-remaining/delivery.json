@@ -1,0 +1,316 @@
+{
+  "date": "2026-10-12",
+  "owner": "Friday / Codex / 01a13031",
+  "stage": "complete-uncommitted",
+  "feedbackCount": 27,
+  "additionalRequests": "roster redesign, four-column departure, pool top clearance, pond rain toggle/play, gentler trade switching, empty consumed nodes, muted testing memory",
+  "validation": {
+    "files": 18,
+    "passed": 142,
+    "failed": 0,
+    "docsCheck": "passed",
+    "assetScope": "three repaired sticker SVGs passed; whole-tree gate has out-of-scope errors",
+    "fullTests": false,
+    "build": false,
+    "commit": false,
+    "remoteCI": false
+  },
+  "sourceSnapshot": [
+    {
+      "path": "game/index.html",
+      "sha256": "4e8364ef2229989ceab0b7458ab8f472f666516ec4e880cd74a5983424b3fb07",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/css/feedback-oct12.css",
+      "sha256": "a57cb849808c068663c489f86a92644b767ed2c5cfdd8c0f2e31cf5e5426be32",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/css/roster-departure-v2.css",
+      "sha256": "3bf733c529d4fe4a180dc4b8616985a04aaf8f265f1ceb2d7d9bd127bec00216",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/hub/departure.drag.js",
+      "sha256": "41a84862c72f1217152eab4701d3e6b485c12e7e3491da03d04b1269f191dc63",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/hub/game.hub.depart.js",
+      "sha256": "499e1ab2ab3a4ed41620da497a32a4db390777d0794b94c10077628ce973d37b",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/hub/departure.view-updates.js",
+      "sha256": "541bfacc840369606b88346981196ec7eca6de95d20b0ea681349f100add8f26",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/hub/hub.personnel.js",
+      "sha256": "685f690c7aa8ae3df549c63b5d1ba3fb854b3273861609234502a09a36d16b20",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/hub/hub.presentation.js",
+      "sha256": "887f8254c9411c34a56e6fb2843031bf7ee3832eaf4f71fa98ddb06f18aefc7c",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/hub/hub.trade-shop-v5.js",
+      "sha256": "3445aeeb5124e3e167c008824e43dc9fcfd1b5d1a4a12b8a3cc35296d6c2ce24",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/hub/hub.courtyard-v3.js",
+      "sha256": "611035224eec90663aa7be51273243ecba4b1a9d635501907589523923b9a471",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/hub/courtyard-vendor/KoiPond.js",
+      "sha256": "81fe5657d5431e70e360f6bec63ba5027e4c317979fe4696b39c5adc016187f6",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/css/base-courtyard-v3.css",
+      "sha256": "4f96f9d002e2179ee488cc74b26b1d1a22a27debe9f477cbd373559f382b107d",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/ui/card-browser.js",
+      "sha256": "ab63bcefb02f55585715044cfabf37ea86fe9f79ea9e8f2773b6e776f66665d9",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/ui/node-scene-view.js",
+      "sha256": "10c56a4383216a27de4b183f90472a644db64a8ba9c2c85a9355964cb9f9e679",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/run/game.run.altar.js",
+      "sha256": "7b8d7dd0e2019a1ffd7f5e8933e4b3ac6625f8930ecd3ddcc83b659c53d058b6",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/run/map-generator.js",
+      "sha256": "41315bf016634efc081e22739b638ada1b1c35b8589dc7d06a1dbea8cb873b41",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/run/expedition.view.js",
+      "sha256": "db16ff39dc3063204669fb37f8bfac9bcbafec47998eff04742f9728ce08cf48",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/game.boot.js",
+      "sha256": "685627602fdbdb91d07a38397b805213e985e145550f054d75c6567550376ace",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/core/map-node-state.js",
+      "sha256": "e7227c53ebe593a1c41464718b2b44185762cbb63749d688ae54aae2b1566599",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/core/renderer.js",
+      "sha256": "46e091a7ab83e7e0edb68fc9e9215b7ce3f9865108e5c436e9b7b9fa1c44dcc2",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/core/renderer.icons.js",
+      "sha256": "d07938a2701004c80616bafda2db13c2d3f075ca85380d2ea5061666682afa07",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/core/node-info.js",
+      "sha256": "b126b008a220df45dde773ebab7437908cc5bd7f1cecf31804793589939c36eb",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/battle/view/battle.aim.js",
+      "sha256": "e08663cd831beb553e65a3c35e5e0b76a64b84ae1a234e80cecf67d4ab4ede8d",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "sha256": "b39f157fa533923f23189f9163aa9a6ba326a95c16cc370102a8d714dda3f836",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/battle/view/battle.feedback.js",
+      "sha256": "81057fdaa8daf3b8e8256a4e1880d8435954881fc049028931a466ad2416225b",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/src/battle/bag/battle.bag.js",
+      "sha256": "a434675035a7086ff65d89735b6ec7f31ae2093fdc77c631a20b4e06a0d5182e",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/css/expedition-rewards.css",
+      "sha256": "27ea1a6018fc384a69838ebef34714e460630a30d284f3837bedebb8e40ff3a7",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/assets/asset-manifest.json",
+      "sha256": "9c74041a838112aabc2366ad4b2f22beb0d9ab8b8e15c49bb55af412c9a16215",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/assets/battle/fx-sticker-boom.svg",
+      "sha256": "eca66c857d088328ab69985fd060bd7efb925e54a60585ad60dabdcd76b6bcd0",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/assets/battle/fx-sticker-hurt.svg",
+      "sha256": "95bbd27bc13f4ce352c711bd46c12f556578576f36c149a5acd42f8abaf6c082",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "game/assets/battle/fx-sticker-heal.svg",
+      "sha256": "6d4e97b16b47846f3adfe56ef5b6243507903955053a5c245dd37e22599334b3",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    },
+    {
+      "path": "docs/rules.md",
+      "sha256": "07eeed6e5ee78bbf15f07111a94fdc949c1bf107b2137268aef7a3050c73c6a7",
+      "note": "current whole-file fingerprint includes preserved prior work; not a change-ownership claim"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/battle-skill-layout.png",
+      "bytes": 112710,
+      "sha256": "43a4b68a78e8ce8975369f35092dd74cf4c9098169187aa104b0bf81b75cbe18",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": true
+    },
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/battle-skill-used.png",
+      "bytes": 183278,
+      "sha256": "aab6c2aca478011a7a0019b5d6c3a78cd2ceab380c0723f429daf7bbae7e635b",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": true
+    },
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/classselect-shared-entry.png",
+      "bytes": 35415,
+      "sha256": "c7fcbb7e3aa8eaad8ed05de958e8c41363590349a44c421f719d674f436da1a7",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": false
+    },
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/classselect-v2.png",
+      "bytes": 90564,
+      "sha256": "163cc5ee32a127a72abd3f954e30e1c0545efb54addaebbdafb20a4ba53420e5",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": true
+    },
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/classselect.png",
+      "bytes": 84414,
+      "sha256": "c7086b6c9c0267f6c3847bcead446ff1c028b4dd1d5710c64646a5c784b04410",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": true
+    },
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/courtyard.png",
+      "bytes": 132290,
+      "sha256": "96162aa7896509ffc3d09c4270168dde427d9af43325666dff202f0ca55fa40a",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": true
+    },
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/departure-four-columns.png",
+      "bytes": 154330,
+      "sha256": "73602c61bb89cbde5b9dac64f80fff979c93d6b343bbc4117cc2051f13704ae6",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": true
+    },
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/entry-no-resource-summary.png",
+      "bytes": 140511,
+      "sha256": "a904a09d88d9a71e619dc758198bb7543eb3cc6ddf4f91b81d827a003f59f4b8",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": true
+    },
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/map-empty-node-preview.png",
+      "bytes": 55778,
+      "sha256": "633da6bb9c34fdb88361bbb219f44d137fb3a8e3244060ab37b13a6217fed262",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": true
+    },
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/map-empty-node.png",
+      "bytes": 47386,
+      "sha256": "2f3338f219536ff37cf55a4ac6569c888c0df3da4da234742fee2c3413ba0d65",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": true
+    },
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/map-node-preview.png",
+      "bytes": 76183,
+      "sha256": "5c8dcee0b73e141b5092a5a6be378cc20dbdb5d47ab506321087fcb21d9cc723",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": true
+    },
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/personnel-pool-final.png",
+      "bytes": 89561,
+      "sha256": "9431955d03e850328f484699e31c1736d5624f463a70b6fac7d5c097d6cd171c",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": true
+    },
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/personnel-pool.png",
+      "bytes": 150313,
+      "sha256": "fbb3fa9ef71a558bcdeefc1dfb56979f3382bee972597e6d03e3a9835610e3cc",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": true
+    },
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/personnel-portrait.png",
+      "bytes": 116462,
+      "sha256": "19c40239b4ae2026d213ae6a3a48ddf59a086642c30c11b173a927a12d4cc404",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": true
+    },
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/pond-rain-off.png",
+      "bytes": 158544,
+      "sha256": "0edc803a10bb5f7417884673a2517163f9e4df6c2ffbcc4834ca72128d28ad94",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": true
+    },
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/pond-rain-on.png",
+      "bytes": 134980,
+      "sha256": "8b158279a567025aa683bc9ad9d9786fd1d1997c5bee8bb2adf9d7a40740c900",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": true
+    },
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/reward-card-proportions.png",
+      "bytes": 52153,
+      "sha256": "d36f96c63bf7ce60a4ffe0751234f46583b3e1638cad9964354d4a8aabe90afe",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": true
+    },
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/shop-selection.png",
+      "bytes": 151465,
+      "sha256": "eb4855e05a9a0b837f5f9006519a21f7e525a0fa808acd7c1b4c55667886c7c7",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": true
+    },
+    {
+      "path": "docs/evidence/2026-10-12-feedback-remaining/trade-switch-final.png",
+      "bytes": 105925,
+      "sha256": "b20ed81522f907282bcd4181aa1372f86ef0c4e4d78c299e1fcfe97a94a071cf",
+      "source": "Codex In-app Browser screenshot; input scope in README",
+      "validAcceptance": true
+    }
+  ],
+  "limits": "README distinguishes native input, automatic Agent driver, constructed in-memory fixtures, and unverified whole-tree checks"
+}
