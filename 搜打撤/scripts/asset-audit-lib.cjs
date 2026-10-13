@@ -3,7 +3,7 @@ const { existsSync, readFileSync, readdirSync, lstatSync } = require('node:fs');
 const path = require('node:path');
 
 const hash = value => createHash('sha256').update(value).digest('hex');
-const isDocument = value => /\.(md|txt)$/i.test(value) || value.endsWith('.gitkeep') || value === 'asset-manifest.json';
+const isDocument = value => /\.(md|txt)$/i.test(value) || value.endsWith('.gitkeep') || path.posix.basename(value) === '.gitignore' || value === 'asset-manifest.json';
 
 // #35 行尾归一（2026-10-03 老板拍板方案 1）：文本类资产（svg/json）按 LF 归一后计 bytes/sha256，
 // Windows 检出（CRLF）、Linux 检出与 git 对象（LF）三方一致；登记与审计同走本口径。

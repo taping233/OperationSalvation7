@@ -33,6 +33,17 @@ describe('incremental asset registration gate', () => {
     expect(auditAssets({ root }).errors.map(item => item.path)).toEqual(['new.png']);
   });
 
+  it('ignores nested Git control files while checking adjacent assets', () => {
+    const { root } = fixture([], {});
+    const dir = path.join(root, 'game/assets/scenes');
+    mkdirSync(dir);
+    writeFileSync(path.join(dir, '.gitignore'), 'far.webp\n');
+    writeFileSync(path.join(dir, 'new.webp'), 'new');
+    expect(inspectAssets(root).issues.map(item => [item.code, item.path])).toEqual([['unlisted', 'scenes/new.webp']]);
+    expect(selectedAssetPaths(['game/assets/scenes/.gitignore'])).toEqual([]);
+    expect(auditAssets({ root }).errors.map(item => item.path)).toEqual(['scenes/new.webp']);
+  });
+
   it('does not grandfather selected debt, including repository paths and directories', () => {
     const { root } = fixture([], { 'nested/old.png': 'old' });
     for (const selected of ['搜打撤/game/assets/nested/old.png', 'game\\assets\\nested\\old.png', 'game/assets/nested']) {
