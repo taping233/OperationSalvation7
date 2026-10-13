@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "at": "2026-10-10T06:12:58.820Z",
+  "task": "WF-ledger-completed-1010",
+  "method": "copy-original-before-revision",
+  "items": [
+    {
+      "source": "docs/PARALLEL-REGISTRY.md",
+      "target": "docs/archive/WF-ledger-completed-1010/originals/docs/PARALLEL-REGISTRY.md",
+      "sha256": "aaffa56a3fa75c99974f1f29245514e2c17b09c33b23ea9f5dde46cecdf756d2",
+      "replacedBy": "docs/PARALLEL-REGISTRY.md"
+    }
+  ],
+  "limits": [
+    "原文保持字节，内部相对链接仍以 source 原位置解释",
+    "本命令未修改源文件；替代状态由负责人核实并在现行入口注明"
+  ]
+}
