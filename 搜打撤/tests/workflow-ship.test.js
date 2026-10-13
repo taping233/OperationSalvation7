@@ -134,6 +134,30 @@ describe('ship 收官落库一条龙', () => {
     expect(status.some((l) => l.includes('registry.js') || l.includes('x.test.js') || l.includes('README.md'))).toBe(false);
   });
 
+  it('超长路径清单与中文、空格、通配符字面路径仍按代码和文档两笔提交', () => {
+    seedChanges();
+    const project = path.join(fixtureRoot, '搜打撤');
+    const special = 'game/src/core/中文 空格 [1] #.js';
+    writeFileSync(path.join(project, special), 'export const special = true;\n');
+    for (let index = 0; index < 400; index += 1) {
+      const name = `long-${String(index).padStart(4, '0')}-${'a'.repeat(80)}.js`;
+      writeFileSync(path.join(project, 'game/src/core', name), `export const value = ${index};\n`);
+    }
+    const plan = planShip(project);
+    expect(plan.commits).toHaveLength(2);
+    expect(plan.commits[0].paths.join(' ').length).toBeGreaterThan(32_767);
+    expect(plan.commits[0].paths).toContain('搜打撤/' + special);
+    const result = applyShip(project, plan, { expectedSha256: plan.planSha256 });
+    expect(result).toMatchObject({ ok: true, status: 'completed' });
+    const codePaths = git(['diff-tree', '--no-commit-id', '--name-only', '-r', '-z', 'HEAD~1']).split('\0');
+    const docPaths = git(['diff-tree', '--no-commit-id', '--name-only', '-r', '-z', 'HEAD']).split('\0');
+    expect(codePaths).toContain('搜打撤/' + special);
+    expect(codePaths).not.toContain('搜打撤/docs/STATUS.md');
+    expect(docPaths).toContain('搜打撤/docs/STATUS.md');
+    expect(docPaths).not.toContain('搜打撤/' + special);
+    expect(git(['status', '--porcelain', '--untracked-files=all'])).not.toContain('long-');
+  }, 60_000);
+
   it('计划外已暂存内容阻断，不能随默认打包混入', () => {
     seedChanges(); git(['add', '搜打撤/未知文件.map']);
     const plan = planShip(path.join(fixtureRoot, '搜打撤'));
@@ -208,6 +232,23 @@ describe('ship 收官落库一条龙', () => {
     expect(plan.inProgressPaths).toEqual(expect.arrayContaining(['搜打撤/scripts/x.mjs', '搜打撤/game/src/core/registry.js']));
     expect(plan.commits.flatMap(c => c.paths)).toContain('搜打撤/docs/README.md');
     expect(plan.commits.flatMap(c => c.paths)).not.toContain('搜打撤/scripts/x.mjs');
+  });
+
+  it('表头前的活跃登记保护源码与证据目录，不混入完成提交', () => {
+    seedChanges();
+    const project = path.join(fixtureRoot, '搜打撤');
+    const evidence = path.join(project, 'docs/evidence/active');
+    mkdirSync(evidence, { recursive: true });
+    writeFileSync(path.join(evidence, 'screen.jpg'), 'in progress');
+    writeFileSync(path.join(project, 'docs/PARALLEL-REGISTRY.md'),
+      '# Registry\n## 活跃登记\n'
+      + '| Friday（WF-live） | game/src/core/registry.js；docs/evidence/active/ | 进行中 | 10-13 | 编辑中 |\n'
+      + '| owner | paths | goal | date | state |\n|---|---|---|---|---|\n');
+    const plan = planShip(project);
+    expect(plan.inProgressPaths).toEqual(expect.arrayContaining([
+      '搜打撤/game/src/core/registry.js', '搜打撤/docs/evidence/active/screen.jpg',
+    ]));
+    expect(plan.commits.flatMap(commit => commit.paths)).not.toContain('搜打撤/docs/evidence/active/screen.jpg');
   });
 
   it('待决未跟踪目录、证据二进制与大件不默认落库', () => {

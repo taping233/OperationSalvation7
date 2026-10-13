@@ -108,6 +108,10 @@ function governanceState(root) {
 
 function sourceState(repoRoot, paths) { return paths.map(file => fileState(repoRoot, file)); }
 function stagedPaths(repoRoot) { return git(repoRoot, ['diff', '--cached', '--name-only', '--no-renames', '-z']).split('\0').filter(Boolean); }
+function pathspecInput(paths) {
+  // NUL-delimited stdin avoids Windows command-line limits and preserves each reviewed path literally.
+  return Buffer.from(paths.map(file => ':(literal)' + file).join('\0') + '\0', 'utf8');
+}
 
 /** Defaults to all eligible completed changes; excluded/in-flight content remains visible in the plan. */
 export function planShip(projectRoot, { message, paths, receipt } = {}) {
@@ -254,7 +258,7 @@ export function applyShip(projectRoot, plan, { expectedSha256, receipt = plan?.r
     if (extras.length) reject('SHIP_FOREIGN_STAGED', '本笔提交前 index 出现计划外内容，保留现场：' + extras.join('、'));
     const unaffected = indexOutside(repoRoot, commit.paths);
     reasonCode = 'SHIP_STAGE_FAILED';
-    git(repoRoot, ['add', '--', ...commit.paths]);
+    git(repoRoot, ['add', '--pathspec-from-file=-', '--pathspec-file-nul'], { input: pathspecInput(commit.paths) });
     if (indexOutside(repoRoot, commit.paths) !== unaffected) reject('SHIP_STAGE_CONCURRENT', '暂存期间其他 index 内容变化，未提交；保留现场');
     if (stagedPaths(repoRoot).some(file => !paths.includes(file))) reject('SHIP_STAGE_CONCURRENT', '暂存期间 index 出现计划外内容，未提交；保留现场');
     const env = { ...process.env };
@@ -264,7 +268,8 @@ export function applyShip(projectRoot, plan, { expectedSha256, receipt = plan?.r
     if (JSON.stringify(sourceState(repoRoot, commit.paths)) !== JSON.stringify(expectedSources)) reject('SHIP_SOURCE_CHANGED', '暂存后待提交文件发生变化，未提交；保留现场');
     // --only commits this reviewed group; already-staged later groups remain in the caller's index.
     reasonCode = 'SHIP_COMMIT_FAILED';
-    const out = git(repoRoot, ['commit', '--only', '-m', commit.message, '--', ...commit.paths], { env });
+    const out = git(repoRoot, ['commit', '--only', '-m', commit.message, '--pathspec-from-file=-', '--pathspec-file-nul'],
+      { env, input: pathspecInput(commit.paths) });
     const reportedCommit = [...out.matchAll(/^\[[^\]\r\n]*\s([a-f0-9]{7,64})\]/gm)].at(-1)?.[1] ?? null;
     const result = { scope: commit.scope, commit: reportedCommit, files: commit.paths.length, commitOutput: out.trim().split('\n').slice(-2).join(' | ') };
     results.push(result);

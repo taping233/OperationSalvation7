@@ -31,6 +31,18 @@ afterEach(() => {
 });
 
 describe('台账写入边界', () => {
+  it('表头前的并发登记也算活账，更新时保留其位置和其他行', () => {
+    const root = fixture(), file = path.join(root, 'docs/PARALLEL-REGISTRY.md');
+    const before = readFileSync(file, 'utf8');
+    writeFileSync(file, before.replace('## 活跃登记\r\n',
+      '## 活跃登记\r\n| Carol（测试 WF-early） | docs/evidence/active/ | 在途 | 10-13 | 编辑中 |\r\n'));
+    expect(readLedger(root, 'registry').rows.map(row => row.key)).toEqual(['WF-early', 'WF-one', 'WF-two']);
+    const plan = planLedger(root, { kind: 'registry', action: 'update', key: 'WF-early', owner: 'Carol',
+      cells: ['Carol（测试 WF-early）', 'docs/evidence/active/', '继续', '10-13', '编辑中'] });
+    applyLedger(root, plan, plan.expectedSha256);
+    expect(readFileSync(file, 'utf8')).toContain('WF-early） | docs/evidence/active/ | 继续');
+    expect(readLedger(root, 'registry').rows.map(row => row.key)).toEqual(['WF-early', 'WF-one', 'WF-two']);
+  });
   it('预览不写，应用只改自有行，并保留中文/其他会话与 CRLF', () => {
     const root = fixture();
     const file = path.join(root, 'docs/PARALLEL-REGISTRY.md');

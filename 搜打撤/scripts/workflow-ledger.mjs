@@ -14,17 +14,22 @@ export function table(markdown, heading) {
   if (start < 0) throw new Error('找不到台账章节：' + heading);
   let end = lines.findIndex((line, index) => index > start && line.startsWith('## '));
   if (end < 0) end = lines.length;
-  const rows = [];
+  const rows = [], headerRows = new Set();
   let insertion = -1;
   for (let index = start + 1; index < end; index++) {
     const line = lines[index];
     if (!line.trim().startsWith('|')) continue;
     const cells = line.trim().slice(1, -1).split('|').map(cell => cell.trim());
-    if (cells.every(cell => /^[-:\s]+$/.test(cell))) { insertion = index + 1; continue; }
-    if (insertion >= 0) rows.push({ index, cells, line });
+    if (cells.every(cell => /^[-:\s]+$/.test(cell))) {
+      // 并发登记可能落在表头前；记录那些行，同时只排除真正的表头。
+      if (rows.length) headerRows.add(rows.at(-1).index);
+      insertion = index + 1;
+      continue;
+    }
+    rows.push({ index, cells, line });
   }
   if (insertion < 0) throw new Error('台账缺少表头分隔行：' + heading);
-  return { lines, rows, insertion };
+  return { lines, rows: rows.filter(row => !headerRows.has(row.index)), insertion };
 }
 
 function identifier(cells, kind) {
