@@ -8,9 +8,9 @@ import { esc } from '../core/shared.js';
 /** window.SDT 门面的 cinematics 消费切面：仅声明本文件触达的成员（整体形状由 main.js 装配保证）。
  * @typedef {object} SdtCinematicsSurface
  * @property {{pop: (el: HTMLElement) => void, reduceMotion: () => boolean}} [Motion]
- * @property {{cardHTML: (card: *, cls?: string) => string}} Cards
+ * @property {{cardHTML: (card: *, cls?: string) => string, rarityOf?: (card: *) => string}} Cards
  * @property {{sfx: (name: string) => void}} Sound
- * @property {{runActive: boolean}} [game]
+ * @property {{runActive: boolean, battleActive?: boolean}} [game]
  */
 const SDT = /** @type {SdtCinematicsSurface} */ (/** @type {any} */ (window).SDT);
 
@@ -78,14 +78,19 @@ export const cinematicsMethods = {
         return;
       }
       const legendary = next.card.rarity === '传说';
+      const combat = !!SDT.game?.battleActive && !!document.querySelector('#overlay .battle-stage, #overlay .battle-decision');
+      const rarity = SDT.Cards.rarityOf?.(next.card) || next.card.rarity;
       const el = document.createElement('div');
       el.id = 'cardGet';
+      el.dataset.combat = combat ? 'true' : 'false';
+      el.dataset.rarity = rarity || '';
+      if (combat) { el.setAttribute('role', 'status'); el.setAttribute('aria-label', `获得${rarity || ''}卡牌：${next.card.name}`); }
       el.innerHTML = `<div class="lg-beam${legendary ? '' : ' lg-beam-plain'}" aria-hidden="true"></div>
-        <span class="lg-kicker">${legendary ? 'LEGENDARY · 传说' : 'REWARD · 获得卡牌'}</span>
+        <span class="lg-kicker">${combat ? `${esc(rarity || '')}获得` : legendary ? 'LEGENDARY · 传说' : 'REWARD · 获得卡牌'}</span>
         <div class="lg-card">${SDT.Cards.cardHTML(next.card, 'lg')}</div>
-        <b class="lg-name">${next.card.name}</b>
+        ${combat ? '' : `<b class="lg-name">${next.card.name}</b>`}
         ${next.reason ? `<span class="lg-reason">${esc(next.reason)}</span>` : ''}
-        <span class="lg-hint">点击任意处继续</span>`;
+        <span class="lg-hint">${combat ? '点击收起' : '点击任意处继续'}</span>`;
       let closed = false;
       const close = () => {
         if (closed || !el.isConnected) return;

@@ -123,7 +123,7 @@ function createBattleResolution(ports) {
   // 演出：windup → 结算 → hit，与 damage 段（castSegment）同一节奏。
   function* resolveCurseOperation(card, operation, preferredTarget, boundTargets) {
     const isStacking = kind => !!combat.CURSE_META[kind]?.stack;
-    // 目标解析与 damage 段同口径：chosenEnemy 倒下顺延战场首位；randomEnemy 施放时掷一名存活敌人；
+    // chosenEnemy 绑定原选目标，倒下后跳过附加效果；randomEnemy 独立掷存活敌人；
     // self 指玩家自身（getPlayerStatus，不在 foes 里，windup 由 staged-playback 按 foeIdx<0 跳过）；
     // bindTarget:'prevDamage'（M2，血毒双镖式段绑定）→ 目标沿用同一 onPlay 内前一 damage 段实际命中者。
     const pickTargets = () => {
@@ -136,7 +136,7 @@ function createBattleResolution(ports) {
         return (boundTargets || []).filter(foe => foe && !foe.dead);
       }
       if (operation.target === 'self') return [getPlayerStatus()].filter(Boolean);
-      return [preferredTarget && !preferredTarget.dead ? preferredTarget : getAliveFoes()[0]].filter(Boolean);
+      return [preferredTarget ? (preferredTarget.dead ? null : preferredTarget) : getAliveFoes()[0]].filter(Boolean);
     };
     // 施加量：叠层型取 stacks（bleed/poison，具名施加时 schema 必填）；计时型取 duration（schema 必填）。
     // randomKinds/source handMoves 不携带 stacks——抽中/扫描到的叠层型固定 1 层；计时型

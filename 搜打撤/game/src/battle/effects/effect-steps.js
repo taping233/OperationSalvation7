@@ -82,7 +82,7 @@ export function createEffectPipeline(deps) {
       pdef: deps.getPlayerDefense(),
       myClass: deps.getPlayerClass ? deps.getPlayerClass() : null,
       durOv: (String(text || '').match(/持续\s*(\d+)\s*回合/) || [])[1],
-      curseTarget: (target && !target.dead) ? target : deps.getAlive()[0] || null,
+      curseTarget: target ? (target.dead ? null : target) : deps.getAlive()[0] || null,
     };
     for (const step of steps) {
       if (step.gate !== 'always' && ctx.did) continue;

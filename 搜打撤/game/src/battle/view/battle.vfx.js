@@ -18,10 +18,6 @@ const shakeAnimations = new WeakMap();
  * 舞台级 Accent 缺位=「击败最后一个敌人」与普通重击同观感（透镜 #68 时刻）。
  * 双门：设置页屏幕震动开关（sdt-reduce-shake，勾选='1'=关）+reduceMotion；
  * WAAPI transform/filter 合成器通道，一次性 220/210ms 不与卡体 fx-victory 叠。 */
-if (!document.getElementById('stsFloatTierStyle')) {
-  document.head.insertAdjacentHTML('beforeend',
-    '<style id="stsFloatTierStyle">.sts-float.fx-finisher{font-size:38px;color:#ffd75e;text-shadow:0 0 10px rgba(255,180,60,.85),0 2px 4px rgba(0,0,0,.9)}.sts-float.critical{font-size:36px;color:#ff8a5e}.sts-float.heal{color:#61d69b}</style>');
-}
 function stageKillBeat() {
   if (storeGet('sdt-reduce-shake') === '1') return;
   if (SDT.Motion?.reduceMotion?.()) return;
@@ -30,10 +26,10 @@ function stageKillBeat() {
   const kf = [];
   for (let i = 0; i <= 8; i++) {
     const decay = 1 - i / 8;
-    kf.push({ transform: `translate(${(Math.sin(i * 2.7) * 8 * decay).toFixed(1)}px, ${(Math.cos(i * 3.3) * 5 * decay).toFixed(1)}px)` });
+    kf.push({ transform: `translate(${(Math.sin(i * 2.7) * 3 * decay).toFixed(1)}px, ${(Math.cos(i * 3.3) * 2 * decay).toFixed(1)}px)` });
   }
   stage.animate(kf, { duration: 230, easing: 'linear' });
-  stage.animate([{ filter: 'brightness(1)' }, { filter: 'brightness(1.18)' }, { filter: 'brightness(1)' }], { duration: 210, easing: 'ease-out' });
+  stage.animate([{ filter: 'brightness(1)' }, { filter: 'brightness(1.07)' }, { filter: 'brightness(1)' }], { duration: 210, easing: 'ease-out' });
 }
   // ---------- 战斗特效（v0.32.2）：伤害/受击飘字 + 受击抖动 + 红闪 ----------
   // 飘字挂在 #overlay 层而不是 ovBody——ovBody 每次渲染整块重建，飘字动画会被腰斩
@@ -212,23 +208,17 @@ function stageKillBeat() {
   }
   // NDamageNumVfx：伤害数字抛体——随机初速上抛 + 重力下坠 + 后半程淡出（WAAPI 预采样）。
   // 随机全部走种子随机服务（random.test 禁 Math.random），'fx' 流不进对局存档口径
-  // W5-04（2026-09-27 R2）：生命期 1.0-1.18s → 1.3-1.5s（评审实锤 <1s 读取不足）。
+  // 数字保持在对象附近；连续命中由落点槽错位，动画只提示从受击点上浮。
   function physicsFloat(span, opts = {}) {
-    const vx = Random.random('fx') * 180 - 90;
-    const vy = -(500 + Random.random('fx') * 160);
-    const g = 960;
-    const baseDur = (opts.longLife ? 1350 : 1000) + Random.random('fx') * 150;
+    const vx = Random.random('fx') * 12 - 6;
+    const baseDur = opts.longLife ? 1150 : 850;
     const dur = demoMs(baseDur);
-    const N = 20, kf = [];
-    for (let i = 0; i <= N; i++) {
-      const u = i / N, t = (u * baseDur) / 1000;
-      kf.push({
-        transform: `translate(-50%,-50%) translate(${(vx * t).toFixed(1)}px,${(vy * t + 0.5 * g * t * t).toFixed(1)}px)`,
-        opacity: u < 0.45 ? 1 : Math.max(0, 1 - (u - 0.45) / 0.55),
-        offset: u,
-      });
-    }
-    span.animate(kf, { duration: dur, easing: 'linear', fill: 'forwards' });
+    span.animate([
+      { transform: 'translate(-50%,-50%) translate(0,6px) scale(.92)', opacity: 0 },
+      { transform: 'translate(-50%,-50%) translate(0,0) scale(1)', opacity: 1, offset: .14 },
+      { transform: `translate(-50%,-50%) translate(${vx.toFixed(1)}px,-28px)`, opacity: 1, offset: .62 },
+      { transform: `translate(-50%,-50%) translate(${vx.toFixed(1)}px,-44px)`, opacity: 0 },
+    ], { duration: dur, easing: 'ease-out', fill: 'forwards' });
   }
   async function globalHitStop(ms, signal) {
     if (!(ms > 0) || SDT.Motion?.reduceMotion() || signal?.aborted) return;
@@ -332,17 +322,14 @@ function stageKillBeat() {
           stsShake(figEl, heavy ? 1.55 : 1, 0, feedbackShakeDuration(damageBeatCounts.get(String(f.unit)) || 1));
         }
       }
-      if (!reduced && !stk) {
+      if (!reduced && damage) {
         const preset = SPARK_PRESETS[f.tintKey];
-        spawnSparks(ov, figEl, preset ? { ...preset } : {
-          color: f.warm ? '#61d69b' : ((isSelf || allyI != null) ? '#ff6659' : '#ffb34d'),
-          count: f.warm ? 8 : (heavy ? 18 : 12),
+        spawnSparks(ov, figEl, preset ? { ...preset, count: Math.ceil(preset.count / 2) } : {
+          color: (isSelf || allyI != null) ? '#ff6659' : '#ffb34d',
+          count: heavy ? 9 : 5,
         });
       }
-      if (isSelf && damage && !reduced) hurtFlash(ov);
-      // 2026-09-13 老板：治疗闪绿光；自己攻击或造成伤害时轻微抖屏（受击红闪已有）
-      if (isSelf && f.warm && !reduced) healFlash(ov);
-      if (damage && !isSelf && allyI == null && !reduced) screenShake(body);
+      if (damage && !isSelf && allyI == null && heavy && !reduced) screenShake(body);
       // 掉血血条槽体红闪（样式 winter.css .hp-dropping；320ms 错峰配 300ms 清除避免竞态）
       if (damage && !reduced) {
         const unitEl = figEl.closest('.sts-unit');
@@ -365,7 +352,7 @@ function stageKillBeat() {
       if (impactCls && !reduced) {
         const imp = document.createElement('div');
         imp.className = 'sts-impact ' + impactCls;
-        const sz = heavy ? 210 : 150, half = sz / 2;
+        const sz = heavy ? 170 : 118, half = sz / 2;
         imp.style.width = imp.style.height = sz + 'px';
         imp.style.margin = `${-half}px 0 0 ${-half}px`;
         imp.style.left = (r.left - ovR.left + r.width / 2) + 'px';
@@ -382,6 +369,8 @@ function stageKillBeat() {
       }
       const span = document.createElement('span');
       span.className = 'sts-float ' + feedbackClass(f);
+      if (reduced) span.classList.add('is-reduced');
+      span.dataset.feedbackUnit = String(f.unit);
       // SVG 贴纸（P2，替代 emoji）：cls 带 sticker-* 时渲染对应手绘贴纸图
       const sticker = (String(f.cls || '').match(/sticker-(\w+)/) || [])[1];
       if (sticker) {
@@ -395,14 +384,21 @@ function stageKillBeat() {
         }
         span.appendChild(document.createTextNode(f.text));
       }
-      // STS2：伤害数字落点随机抖动（±10, ±5），与同伴不重影
-      span.style.left = (r.left - ovR.left + r.width / 2 + (Random.random('fx') * 20 - 10)) + 'px';
-      span.style.top = (r.top - ovR.top + r.height * (stk ? 0.02 : 0.32) + (Random.random('fx') * 10 - 5)) + 'px';
+      // 活跃文字占用四个相邻槽位；多段结算仍沿原队列，不以动画结束阻塞规则。
+      const used = new Set(Array.from(ov.querySelectorAll('.sts-float[data-feedback-unit]'))
+        .filter(el => el.dataset.feedbackUnit === String(f.unit)).map(el => Number(el.dataset.feedbackLane)));
+      const lane = [0, 1, 2, 3].find(index => !used.has(index)) ?? 0;
+      const [dx, dy] = [[-38, 0], [38, 0], [-20, -32], [20, -32]][lane];
+      span.dataset.feedbackLane = String(lane);
+      const x = r.left - ovR.left + r.width / 2 + dx;
+      const y = r.top - ovR.top + r.height * (stk ? 0.12 : 0.34) + dy;
+      span.style.left = Math.max(54, Math.min(ovR.width - 54, x)) + 'px';
+      span.style.top = Math.max(35, Math.min(ovR.height - 35, y)) + 'px';
       ov.appendChild(span);
       if (damage && !reduced && span.animate) {
         span.classList.add('phys');   // 抑制 CSS 上飘动画，走抛体
         physicsFloat(span, { longLife: finisher || amt >= 10 });   // W5-04：终结/重击跳字加长寿命
-        schedulePresentation(() => span.remove(), 1500);   // clock 已内置 demoMs，外层再换算会把 2× 档清理时长压到 1/4
+        schedulePresentation(() => span.remove(), finisher || amt >= 10 ? 1200 : 900);
       } else {
         span.addEventListener('animationend', () => span.remove(), { once: true });
         schedulePresentationMs(() => span.remove(), 1400);   // CSS 动画不按倍速缩短，兜底也保持原时长
@@ -430,24 +426,6 @@ function stageKillBeat() {
         await fire(signal);
       }, gap);
     });
-  }
-  // 全屏受击红闪（径向暗角，600ms 淡出）
-  function hurtFlash(ov) {
-    if (ov.querySelector('.sts-hurtflash')) return;   // 连续受击不叠层
-    const div = document.createElement('div');
-    div.className = 'sts-hurtflash';
-    ov.appendChild(div);
-    div.addEventListener('animationend', () => div.remove(), { once: true });
-    schedulePresentationMs(() => div.remove(), 1000);   // CSS 动画保持原时长
-  }
-  // 全屏治疗绿闪（2026-09-13 老板：回复血量时闪绿光）——口径同 hurtFlash
-  function healFlash(ov) {
-    if (ov.querySelector('.sts-healflash')) return;   // 连续治疗不叠层
-    const div = document.createElement('div');
-    div.className = 'sts-healflash';
-    ov.appendChild(div);
-    div.addEventListener('animationend', () => div.remove(), { once: true });
-    schedulePresentationMs(() => div.remove(), 1000);   // CSS 动画保持原时长
   }
   // 轻微抖屏（2026-09-13 老板：自己攻击或造成伤害时）——战斗内容层小幅位移 240ms，抖动中不叠层
   function screenShake(body) {

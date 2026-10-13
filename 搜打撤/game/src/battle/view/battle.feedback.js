@@ -59,7 +59,7 @@ function feedbackTier(feedback = {}) {
 }
 
 function feedbackClass(feedback = {}) {
-  if (feedback.warm) return 'heal';
+  if (feedback.warm) return [feedback.cls, 'heal'].filter(Boolean).join(' ');
   const base = feedback.cls || (feedback.unit === 'self' ? 'hurt' : 'dmg');
   // 保留旧调用方只传 unit 时的精确返回值；带有事件元数据时才追加分级样式。
   if (!feedback.cls && !feedback.critical) return base;

@@ -25,3 +25,23 @@ body.reduce-motion #overlay .card.page :is(.cls2-page, .cls-pool-page) * {
   #overlay .card.page :is(.cls2-page, .cls-pool-page),
   #overlay .card.page :is(.cls2-page, .cls-pool-page) * { animation: none; transition: none; }
 }
+
+/* R01/R02/R10 + L1/L2: identity and mechanism first; growth remains available. */
+#overlay .cls2-page .cls2-mechanism { margin: 18px 0 10px; padding: 14px 16px; border-left: 3px solid #b19b61; background: #e2e5e6; color: #26323a; }
+#overlay .cls2-page .cls2-mechanism > b { font-size: 22px; }
+#overlay .cls2-page .cls2-mechanism p { margin: 5px 0 10px; font-size: 17px; }
+#overlay .cls2-page .cls2-example { width: 100%; padding: 9px 12px; text-align: left; color: #26323a; background: #f4f3ef; border: 1px solid #869296; font-size: 17px; }
+#overlay .cls2-page .cls2-example small { display: block; margin-top: 5px; font-size: 15px; line-height: 1.5; }
+#overlay .cls2-page .cls2-growth summary { cursor: pointer; padding: 8px 0; color: #485159; font-size: 16px; }
+#overlay .cls2-page .cls2-growth .cls2-level { margin-top: 4px; }
+/* Five existing compositions keep their own silhouette and bottom anchor, including Baita's seated pose. */
+#overlay .cls2-page .cls2-fullart[data-character="wu"] { --roster-anchor: 52%; }
+#overlay .cls2-page .cls2-fullart[data-character="changwuyu"] { --roster-anchor: 50%; }
+#overlay .cls2-page .cls2-fullart[data-character="baita"] { --roster-anchor: 50%; }
+#overlay .cls2-page .cls2-fullart[data-character="heixiang"] { --roster-anchor: 54%; }
+#overlay .cls2-page .cls2-fullart[data-character="xingyue"] { --roster-anchor: 51%; }
+#overlay .card.page .pg.cls2-page .cls2-fullart[data-character] img.art-figure { object-position: var(--roster-anchor) bottom; }
+
+#overlay .cls2-page .cls2-example:focus-visible { outline: 3px solid #426d7b; outline-offset: 3px; }
+#overlay .cls2-page .cls2-example:hover { background: #e6ecec; border-color: #426d7b; }
+#overlay .cls2-page .cls2-supply-rules p { margin: 6px 0 10px; color: #35414a; font-size: 16px; line-height: 1.55; }

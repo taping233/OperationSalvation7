@@ -1,4 +1,5 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({ createBattleEntryGate: () => ({ begin() {}, wait() {}, cancel() {}, dispose() {}, pending: () => false }), waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }) }));
 
 const overlay = document.createElement('div');
 overlay.id = 'overlay';

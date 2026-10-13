@@ -6,6 +6,7 @@ import { runEventDeck } from './game.run.flow.js';
 import { captureBattleContext, startBattle } from '../battle/battle-loader.js';
 import { agentTabHTML, bindAgentTab, keysTabHTML, bindKeysTab } from '../agent/agent.console.js';
 import { dataPanelHTML, bindDataActions } from '../agent/agent.data.js';
+import { cardPageOpen, setCardPageOpen } from '../hub/game.cardslib.common.js';
 
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -89,7 +90,65 @@ function saveGameDev() {
   else saveGame();
 }
 
+let activeConsole = null;
 function openDevConsole() {
+  const overlay = UI.el.overlay, body = UI.el.ovBody;
+  if (activeConsole?.isCurrent()) { activeConsole.close(); return; }
+  activeConsole?.dispose();
+  const visible = !overlay.hidden && !overlay.classList.contains('closing') && !overlay.dataset.uiClosing;
+  const origin = {
+    visible, state:game.state, battleActive:game.battleActive, cardPageOpen,
+    html:visible ? body.innerHTML : '', nodes:visible ? [...body.childNodes] : [],
+    title:UI.el.ovTitle?.innerHTML || '', mode:UI._lastMode,
+    acts:{ ...UI._acts }, input:UI._inputHandler, hover:UI._hoverHandler,
+    roomActive:UI._roomActive, bagClose:UI._bagCloseHook,
+    returnFocus:UI._overlayReturnFocus, focus:document.activeElement,
+  };
+  setCardPageOpen(false);
+  let rendered = false;
+  const session = {
+    isCurrent:() => activeConsole === session && !overlay.hidden && !!body.querySelector('#devConsole'),
+    dispose() {
+      observer.disconnect();
+      overlay.removeEventListener('click', backdropClose, true);
+      if (activeConsole === session) activeConsole = null;
+    },
+    close() {
+      if (!session.isCurrent()) return false;
+      session.dispose();
+      setCardPageOpen(origin.cardPageOpen);
+      UI._acts = {}; UI._inputHandler = null; UI._hoverHandler = null;
+      // The battle model is live; redraw it instead of restoring stale unit DOM.
+      if (origin.battleActive && game.battleActive && SDT.Battle?.commands?.refreshView) {
+        SDT.Battle.commands.refreshView();
+      } else if (origin.visible) {
+        UI._roomActive = origin.roomActive;
+        UI.showOverlay(origin.title, origin.html, origin.mode);
+        // Reuse real nodes so direct listeners, selected controls and reward closures survive.
+        body.replaceChildren(...origin.nodes);
+        UI._acts = origin.acts; UI._inputHandler = origin.input; UI._hoverHandler = origin.hover;
+        UI._bagCloseHook = origin.bagClose; UI._overlayReturnFocus = origin.returnFocus;
+        if (origin.state !== 'moving') game.state = origin.state;
+        if (origin.focus?.isConnected) origin.focus.focus?.({ preventScroll:true });
+        body.firstElementChild?.dispatchEvent(new CustomEvent('sdt-dev-console-return'));
+      } else {
+        UI.hideOverlay();
+        if (game.state === 'modal') game.state = origin.state === 'modal' ? 'idle' : origin.state;
+      }
+      UI.refresh(game);
+      return true;
+    },
+  };
+  const backdropClose = event => {
+    if (event.target !== overlay || !session.isCurrent()) return;
+    event.preventDefault(); event.stopImmediatePropagation(); session.close();
+  };
+  const observer = new MutationObserver(() => {
+    if (rendered && activeConsole === session && !body.querySelector('#devConsole')) session.dispose();
+  });
+  activeConsole = session;
+  overlay.addEventListener('click', backdropClose, true);
+  observer.observe(body, { childList:true });
   // 控制台升级为全局开发枢纽（四页签：调试/Agent/数据/快捷键）；
   // 「调试」页签的写操作仍只在对局/战斗中生效（各动作自带守卫）。
   let tab = 'debug';
@@ -148,10 +207,10 @@ function openDevConsole() {
     if (tab === 'debug') {
       // 2026-10-03 老板（SYS-11）：控制台资源/发卡改写入干预履历（dev-console）；战斗调试
       // devcB 不在此记——SDT.Battle.commands.dev 漏斗自报（debug-command），避免双计。
-      UI.act('devcCoin', data => { if (notInRun()) return; const n = +data.n || 50; game.coins += n; SDT.Agent?.recorder?.noteIntervention?.('dev-console', `加币:${n}`); UI.log(`[[icon:coin]] 开发者：+${n} 币（现有 ${game.coins}）`, 'coin'); saveGameDev(); render(); });
-      UI.act('devcHeal', data => { if (notInRun()) return; const n = +data.n || 10; game.hp = n >= 999 ? game.maxHp : Math.min(game.maxHp, game.hp + n); SDT.Agent?.recorder?.noteIntervention?.('dev-console', n >= 999 ? '回满血' : `回血:${n}`); UI.log(`[[icon:heart]] 开发者：生命 ${game.hp}/${game.maxHp}`, 'ok'); saveGameDev(); render(); });
-      UI.act('devcCard', data => { if (notInRun()) return; const card = hitCards()[+data.i]; if (card && game.grantCard) { SDT.Agent?.recorder?.noteIntervention?.('dev-console', `发卡:${card.name}`); game.grantCard(card); } render(); });
-      UI.act('devcB', data => { if (!devBattle()) return; SDT.Battle.commands.dev(data.k, data.n); setTimeout(render, 80); });
+      UI.act('devcCoin', data => { if (!session.isCurrent() || notInRun()) return; const n = +data.n || 50; game.coins += n; SDT.Agent?.recorder?.noteIntervention?.('dev-console', `加币:${n}`); UI.log(`[[icon:coin]] 开发者：+${n} 币（现有 ${game.coins}）`, 'coin'); saveGameDev(); render(); });
+      UI.act('devcHeal', data => { if (!session.isCurrent() || notInRun()) return; const n = +data.n || 10; game.hp = n >= 999 ? game.maxHp : Math.min(game.maxHp, game.hp + n); SDT.Agent?.recorder?.noteIntervention?.('dev-console', n >= 999 ? '回满血' : `回血:${n}`); UI.log(`[[icon:heart]] 开发者：生命 ${game.hp}/${game.maxHp}`, 'ok'); saveGameDev(); render(); });
+      UI.act('devcCard', data => { if (!session.isCurrent() || notInRun()) return; const card = hitCards()[+data.i]; if (card && game.grantCard) { SDT.Agent?.recorder?.noteIntervention?.('dev-console', `发卡:${card.name}`); game.grantCard(card); } render(); });
+      UI.act('devcB', data => { if (!session.isCurrent() || !devBattle()) return; SDT.Battle.commands.dev(data.k, data.n); setTimeout(() => { if (session.isCurrent()) render(); }, 80); });
     } else if (tab === 'agent') {
       bindAgentTab(render);
     } else if (tab === 'data') {
@@ -168,23 +227,24 @@ function openDevConsole() {
     renderHits();
   };
   const render = () => {
+    if (activeConsole !== session || (rendered && !session.isCurrent())) return;
+    UI._acts = {};
     UI.showOverlay('[[icon:tools]] 开发者控制台', `
+      <section id="devConsole" data-dev-console>
       <div class="devc-topbar">
         <span class="devc-badge">开发工具 · 操作可能影响存档</span>
         <span class="devc-badge sub">Ctrl+L 开关</span>
       </div>
       ${tabsHTML()}
       ${bodyOf()}
-      <div class="ov-btns"><button class="ov-btn ok" data-act="devcClose">关闭（Esc / Ctrl+L）</button></div>`, 'discover');
+      <div class="ov-btns"><button class="ov-btn ok" data-act="devcClose">关闭（Esc / Ctrl+L）</button></div></section>`, 'discover');
+    rendered = true;
     UI._inputHandler = tab === 'debug' ? inputHandler : null;
+    UI._hoverHandler = null;
+    UI.act('devcClose', session.close);
     UI.act('devcTab', d => { if (TABS.some(t => t.id === d.tab)) { tab = d.tab; render(); } });
     bindTab();
   };
-  UI.act('devcClose', () => {
-    // 战斗本身也承载在 overlay 中；关闭调试面板时必须重绘战斗，不能按普通弹窗隐藏。
-    if (game.battleActive && SDT.Battle?.commands?.refreshView) SDT.Battle.commands.refreshView();
-    else { UI.hideOverlay(); UI.refresh(game); }
-  });
   render();
 }
 

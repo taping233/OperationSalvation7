@@ -1,4 +1,6 @@
 // 只校验恢复消费者的结构前提；不查卡库、不修剪资产、不改变标量默认。
+import { restoreChestReward } from '../run/chest-reward-save.js';
+import { validEntrySupply, validNodeRewards } from '../run/node-reward-state.js';
 const record = value => value !== null && typeof value === 'object' &&
   (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null);
 const bad = path => ({ ok: false, code: 'INVALID_RUN_STRUCTURE', message: `对局存档字段 ${path} 结构无效`, preserveRun: true });
@@ -32,6 +34,9 @@ function runFields(data, prefix = '', checkpoint = false) {
   for (const key of ['visited', 'seen', 'shopStocks']) {
     if (data[key] != null && !record(data[key])) return bad(prefix + key);
   }
+  if (!checkpoint && data.chestReward != null && !restoreChestReward(data, data.chestReward)) return bad(prefix + 'chestReward');
+  if (!checkpoint && data.entrySupply != null && !validEntrySupply(data.entrySupply)) return bad(prefix + 'entrySupply');
+  if (!checkpoint && data.nodeRewards != null && !validNodeRewards(data.nodeRewards)) return bad(prefix + 'nodeRewards');
   for (const [key, stock] of Object.entries(data.shopStocks || {})) {
     const issue = arrayField(stock, `${prefix}shopStocks.${key}`, shopItem);
     if (issue) return issue;

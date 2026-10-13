@@ -32,24 +32,45 @@
 #overlay .result-line { padding:12px; border:1px solid rgba(194,199,202,.12); background:rgba(17,18,20,.55); }
 #overlay .result-pg .dep-foot { position:sticky; bottom:0; padding-top:12px; background:linear-gradient(180deg,transparent,#1b1d1f 35%); }
 #overlay .result-pg #btnDeploy { background:#ead282; color:#17181a; border-color:#ead282; }
-@media (max-width:760px) { #overlay .node-panel .pg-head, #overlay .node-main, #overlay .node-foot { padding-left:16px; padding-right:16px; } #overlay .result-summary { margin-left:16px; margin-right:16px; } #overlay .result-columns { margin-left:16px; margin-right:16px; } }
+/* Extraction is a decision desk: cards first, storage actions alongside. */
+body #overlay .card.page .result-pg { box-sizing:border-box; display:flex; flex-direction:column; gap:24px; padding:30px 58px 40px; overflow:auto; background:linear-gradient(135deg,#152126,#101719 75%); }
+body #overlay .result-pg .hub-head { flex:none; width:100%; margin:0; padding:0 0 20px; background:none; border-bottom:1px solid #a6c7c13d; }
+body #overlay .result-pg .hub-head h2 { font:650 30px/1.4 var(--font-ui); letter-spacing:.03em; }
+body #overlay .result-pg .hub-head .hub-res { gap:18px; }
+body #overlay .result-pg .res-chip { font:500 17px/1.4 var(--font-ui); padding:10px 14px; background:#1c303566; }
+body #overlay .result-pg .result-summary { flex:none; box-sizing:border-box; width:100%; max-width:1380px; margin:0 auto; padding:18px 24px; background:#24363880; border-left-color:#98d2c8; }
+body #overlay .result-pg .result-summary b { font-size:24px; }
+body #overlay .result-pg .result-summary span:last-child { font-size:17px; line-height:1.6; }
+body #overlay .result-pg .result-kicker { font:500 14px/1.4 var(--font-ui); letter-spacing:.08em; color:#9acfc6; }
+body #overlay .result-pg .result-columns { flex:0 0 auto; display:grid; grid-template-columns:minmax(0,1.5fr) minmax(340px,1fr); align-items:start; width:100%; max-width:1380px; margin:0 auto; padding:0; gap:28px; }
+body #overlay .result-pg .hub-card { min-height:0; height:auto; padding:24px; background:#20303580; border:1px solid #9fbdb726; }
+body #overlay .result-pg .hub-card h3 { font:600 21px/1.4 var(--font-ui); color:#d5e7e0; margin:0 0 20px; }
+body #overlay .result-pg .hub-card-tip { font-size:15px; }
+body #overlay .result-pg .ext-cards { display:flex; flex-wrap:wrap; gap:26px; padding:14px 4px 24px; }
+body #overlay .result-pg .ext-card { flex:0 0 224px; width:224px; box-sizing:border-box; padding:12px; background:none; border:1px solid #9dbeb633; border-radius:0; }
+body:has(#viewport) #overlay .result-pg .ext-cards .hs-card { width:200px; height:auto; aspect-ratio:272/406; font-size:12px; }
+body #overlay .result-pg .pk-row { padding:16px 0; font-size:17px; line-height:1.6; gap:16px; }
+body #overlay .result-pg .dep-foot { position:static; display:flex; flex-direction:column; align-items:stretch; gap:14px; margin-top:14px!important; padding:0; background:none; }
+body #overlay .result-pg :is(.ov-btn,#btnDeploy) { width:100%; margin:0!important; min-height:54px; font:600 18px/1.4 var(--font-ui); }
+body #overlay .result-pg [data-act="exSmart"] { background:#2b4448; color:#dce9e3; border-color:#98b9b54d; }
+body #overlay .result-pg[data-unclaimed-cards]:not([data-unclaimed-cards="0"]) #btnDeploy[data-act="exFinish"] { background:#382f2d; color:#e8bdab; border:1px solid #b48a7359; }
 
 #overlay .node-pg[data-asset-key] { background-size:cover; background-repeat:no-repeat; background-position:35% center; }
 #overlay .node-pg::before { background:linear-gradient(90deg,#12131520 10%,#12131545 48%,#12131580 75%),linear-gradient(0deg,#121315ae,transparent 75%); }
 /* 2026-09-15 老板令：右侧选择面板统一为半透明遮罩，透出事件背景（此前 #111214ec 近乎不透明盖死背景图） */
-#overlay .node-panel { width: min(560px,46%); padding:clamp(24px,7vh,64px) clamp(20px,3vw,46px) 28px; border:0; border-left:1px solid #bdc0c222; background:#1112148c; gap:20px; }
+#overlay .node-panel { width: min(560px,46%); padding:clamp(24px,calc(var(--game-layout-height, 100vh) * 0.07),64px) clamp(20px,calc(var(--game-layout-width, 100vw) * 0.03),46px) 28px; border:0; border-left:1px solid #bdc0c222; background:#1112148c; gap:20px; }
 .node-kicker { color:#ead282; font:9px 'Cascadia Code',monospace; letter-spacing:2px; display:flex; justify-content:space-between; }
 #overlay .card.page .node-pg:not(.shop-pg) .pg-head { align-items:flex-start; text-align:left; gap:20px; }
 #overlay .card.page .node-pg:not(.shop-pg) .pg-head h2 { font:32px/1.4 'SimSun',serif; letter-spacing:4px; text-shadow:none; }
 #overlay .card.page .node-pg:not(.shop-pg) .pg-head .sub { color:#bfc2c5; font-size:13px; letter-spacing:.5px; text-shadow:none; }
-#overlay .node-main { padding:12px 0; justify-content:center; }
+#overlay .node-main { padding:12px 0; justify-content:flex-start; justify-content:safe center; }
 #overlay .node-pg .evt-opt { width:100%; min-height:72px; padding:16px 20px; align-items:flex-start; text-align:left; border-radius:0; border:1px solid #989da044; background:#1f2123b0; box-shadow:none; }
 #overlay .node-pg .evt-opt b { color:#e9eaeb; text-shadow:none; font-size:16px; }
 #overlay .node-pg .evt-opt span { color:#b3b8bb; text-shadow:none; font-size:12px; }
 #overlay .node-pg .evt-opt:hover { background:#2d3134; border-color:#ead282; }
 #overlay .node-pg .evt-opt:disabled { opacity:.4; }
 #overlay .node-foot { padding:14px 0 0; }
-#overlay .card.chest { width:min(1000px,92vw); max-height:min(90vh,100%); padding:24px 32px; border:1px solid #a4a5a652; background:radial-gradient(ellipse at 50% 20%,#2d3134,#17191b 75%); box-shadow:0 32px 100px #0009; }
+#overlay .card.chest { width:min(1000px,calc(var(--game-layout-width, 100vw) * 0.92)); max-height:min(calc(var(--game-layout-height, 100vh) * 0.9),100%); padding:24px 32px; border:1px solid #a4a5a652; background:radial-gradient(ellipse at 50% 20%,#2d3134,#17191b 75%); box-shadow:0 32px 100px #0009; }
 #overlay .card.chest > h2 { font-size:13px; letter-spacing:2px; border-bottom:1px solid #e3cd8335; padding-bottom:16px; }
 .loot-manifest { display:flex; justify-content:space-between; align-items:center; gap:20px; margin:18px 0 10px; }
 .loot-manifest > div:first-child { display:grid; gap:8px; }
@@ -65,51 +86,98 @@
 #overlay .card.chest .chest-ops { display:grid; grid-template-columns:1fr 1.5fr; gap:12px; padding-top:12px; border-top:1px solid rgba(227,205,131,.35); }
 #overlay .card.chest .chest-ops .ov-btn { min-height:44px; font-size:12px; }
 /* 短视口战后开箱：压缩装饰和间距，把战绩、奖励卡与领取按钮收进首屏。 */
-@media (max-height:760px) and (min-width:761px) {
-  #overlay .card.chest {
-    box-sizing:border-box;
-    max-height:calc(100vh - 20px)!important;
-    max-height:calc(100dvh - 20px)!important;
-    overflow-y:auto!important;
-    padding:10px 24px 12px!important;
-  }
-  #overlay .card.chest > h2 { margin:0 0 4px; padding:2px 4px 6px; font-size:17px; }
-  #overlay .card.chest .loot-manifest { margin:4px 0; gap:12px; }
-  #overlay .card.chest .loot-manifest > div:first-child { gap:2px; }
-  #overlay .card.chest .loot-manifest span { font-size:9px; }
-  #overlay .card.chest .loot-manifest > div:first-child > b { font-size:20px; line-height:1.2; }
-  #overlay .card.chest .loot-capacity { gap:2px; }
-  #overlay .card.chest .loot-capacity small { font-size:11px; }
-  #overlay .card.chest .loot-capacity b { font-size:20px; }
-  #overlay .card.chest .evt-sts-desc { margin:4px 0; padding:2px 6px; font-size:13px; line-height:1.35; }
-  #overlay .card.chest .battle-loot-summary {
-    padding:7px 12px;
-    border:1px solid rgba(234,210,130,.5);
-    border-radius:0;
-    background:linear-gradient(100deg,rgba(105,84,34,.6),rgba(34,36,39,.72));
-    color:#dedcd6;
-    font-size:15px;
-    font-weight:700;
-  }
-  #overlay .card.chest .chest-reveal { height:52px; margin:0; overflow:hidden; }
-  #overlay .card.chest .chest-reveal .chest-prop { width:auto; height:52px; animation:none; }
-  #overlay .card.chest .chest-reveal::before { display:none; }
-  #overlay .card.chest .bt-hand { min-height:0!important; gap:12px!important; padding:4px 0 2px!important; }
-  #overlay .card.chest .bt-hand .hs-card { height:12.5em!important; font-size:15px!important; }
-  #overlay .card.chest .bt-hand[data-n="5"] .hs-card { font-size:14px!important; }
-  #overlay .card.chest .bt-hand[data-n="6"] .hs-card,
-  #overlay .card.chest .bt-hand:not([data-n]) .hs-card { font-size:13px!important; }
-  #overlay .card.chest .loot-footer-note { margin:4px 0; font-size:12px; }
-  #overlay .card.chest .chest-ops { gap:10px; margin-top:8px; padding-top:8px; }
-  #overlay .card.chest .chest-ops .ov-btn { min-height:44px; padding:8px 12px; font-size:12px; letter-spacing:1px; }
+
+/* F11: only the reward contents scroll; collection actions stay in the window. */
+#overlay .card.chest:has(.loot-actions) {
+  display:flex;
+  flex-direction:column;
+  max-height:calc(var(--game-layout-height, 100vh) - 64px);
+  overflow:hidden!important; /* overrides the older short-window whole-card scrolling */
 }
-@media(max-width:760px) {
-  #overlay .node-panel { width:62%; padding:24px 20px; }
-  #overlay .card.chest { padding:18px; }
-  .loot-manifest > div:first-child > b { font-size:20px; }
+#overlay .card.chest:has(.loot-actions) > h2 { flex:0 0 auto; }
+#overlay .card.chest:has(.loot-actions) #ovBody { display:flex; flex-direction:column; min-height:0; overflow:hidden; }
+#overlay .card.chest .loot-scroll { min-height:0; overflow:auto; overscroll-behavior:contain; }
+#overlay .card.chest .loot-actions { flex:0 0 auto; padding-top:12px; border-top:1px solid #bdc0c233; background:#111214; }
+#overlay .card.chest:has(.loot-actions) .loot-actions .chest-ops { margin:8px 0 0; animation:none; }
+#overlay .card.chest .loot-scroll .battle-banner { height:90px; width:100%; object-fit:cover; }
+#overlay .card.chest .loot-scroll .chest-reveal { display:none; }
+#overlay .card.chest .loot-outcome { padding:10px 12px; margin:8px 0; background:#1b1e20; border-left:2px solid #a9b9c0; color:#dbe1e4; font-size:16px; line-height:1.5; }
+#overlay .card.chest .loot-outcome summary { cursor:pointer; min-height:24px; }
+#overlay .card.chest .loot-outcome p { margin:6px 0; }
+
+/* Arknights reference: independent vertical rewards, then one clear exit. */
+body #overlay .card.chest:has(.reward-replica),
+body #overlay .card.page:has(.entry-reward-scene.reward-replica) {
+  width:min(1740px,calc(var(--game-layout-width,100vw) * .94)); height:min(930px,calc(var(--game-layout-height,100vh) * .90));
+  max-width:none; max-height:calc(var(--game-layout-height,100vh) * .90); min-height:0; padding:0!important;
+  border:0!important; border-radius:0; background:transparent!important; box-shadow:none!important; clip-path:none; backdrop-filter:none;
 }
-@media(max-width:560px) {
-  #overlay .node-panel { width:100%; background:#111214bf; padding:30px 22px; }
-  #overlay .node-pg .evt-opt { min-height:60px; }
-  .loot-manifest > div:first-child > b { font-size:17px; }
+body #overlay .card:has(.reward-replica)::before, body #overlay .card:has(.reward-replica)::after,
+body #overlay .card:has(.reward-replica) > h2 { display:none; }
+/* A small haul keeps its reading, claims and exit in one compact field. */
+body #overlay .card:is(.page,.chest):has(.reward-replica[data-reward-count="1"]) { width:min(1100px,calc(var(--game-layout-width,100vw) * .94)); }
+body #overlay .card:is(.page,.chest):has(.reward-replica[data-reward-count="2"]) { width:min(1260px,calc(var(--game-layout-width,100vw) * .94)); }
+body #overlay .card:has(.reward-replica) #ovBody { display:flex; width:100%; height:100%; min-height:0; overflow:hidden; }
+body #overlay .card:has(.reward-replica) .reward-replica,
+body #overlay .card.page .pg.entry-reward-scene.reward-replica {
+  position:relative; display:flex; flex-direction:column; align-items:stretch; box-sizing:border-box;
+  width:100%; height:100%; max-width:none; max-height:none; min-height:0; padding:28px 34px 20px; overflow:hidden;
+  color:#edf2f0; background:linear-gradient(90deg,#11191ce6,#101719b8 75%,#10171966); text-align:left;
+}
+body #overlay .card:has(.reward-replica) .reward-replica .reward-head { flex:none; display:flex; align-items:center; justify-content:space-between; gap:28px; padding:0 20px 16px; border:0; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-source { display:block; margin:0 0 7px; padding:0; border:0; background:none; color:#aebbbd; font-size:16px; font-weight:400; letter-spacing:.08em; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-head h3 { margin:0; color:#f3f6f3; font:650 38px/1.3 var(--font-ui); letter-spacing:.06em; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-rule { margin:10px 0 0; color:#c2cfce; font-size:20px; line-height:1.5; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-coins { display:grid; gap:7px; min-width:130px; text-align:right; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-coins b { color:#ecdfb1; font-size:30px; font-weight:600; font-variant-numeric:tabular-nums; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-coins span { color:#aebbbd; font-size:16px; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-main { flex:1 1 auto; min-height:0; display:grid; grid-template-columns:minmax(0,1fr) 248px; gap:34px; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-stage { display:flex; flex-direction:column; justify-content:flex-start; min-width:0; min-height:0; padding:0 10px; overflow:auto; overscroll-behavior:contain; scrollbar-gutter:stable; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-objects { display:flex; flex:none; flex-wrap:nowrap; align-items:stretch; justify-content:center; justify-content:safe center; gap:34px; width:100%; height:auto; min-height:0; max-height:none; margin-block:auto; padding:18px 0; border:0; background:none; overflow:visible; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-unit { display:flex; flex:0 0 278px; flex-direction:column; align-items:stretch; gap:18px; width:278px; padding:0 18px 10px; box-sizing:border-box; border:0; background:none; }
+body #overlay .card:has(.reward-replica) .reward-replica[data-reward-count="1"] .reward-unit { flex-basis:322px; width:322px; }
+body #overlay .card:has(.reward-replica) .reward-replica[data-reward-count="2"] .reward-unit { flex-basis:302px; width:302px; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-card { display:block; flex:none; width:100%; margin:30px 0 34px; padding:0; border:0; border-radius:0; background:none; color:inherit; font:inherit; cursor:zoom-in; overflow:visible; transform:none; box-shadow:none; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-unit:is([data-reward-rarity="传说"],[data-reward-rarity="棱彩"]) .reward-card { margin-top:46px; margin-bottom:42px; }
+body:has(#viewport) #overlay .reward-replica .reward-card .hs-card { width:100%; max-width:none; min-height:0; height:auto; aspect-ratio:272/406; font-size:16px; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-card:hover { transform:translateY(-5px); }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-claim { flex:none; width:100%; min-height:58px; margin-top:auto; padding:10px 18px; border:1px solid #65bcb25c; border-radius:0; background:#197b76; color:#f1f6f0; font:600 25px/1.35 var(--font-ui); cursor:pointer; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-claim:hover:not(:disabled) { background:#248f87; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-claim.needs-room { background:#3b4547; border-color:#a4b2b55c; color:#dde4e2; font-size:20px; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-claim:disabled { opacity:.45; cursor:default; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-unit-state { display:grid; place-items:center; min-height:58px; margin-top:auto; color:#aac5bc; font-size:21px; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-unit.got .reward-card { opacity:.36; filter:saturate(.4); }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-unit.dropped .reward-card { opacity:.23; filter:grayscale(.8); }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-unit.dropped .reward-unit-state { color:#8c979a; }
+body #overlay .card:has(.reward-replica) .reward-replica .loot-actions { display:flex; flex-direction:column; justify-content:center; align-items:stretch; gap:28px; min-height:0; padding:20px 12px 20px 32px; border:0; border-left:1px solid #b8c8c63d; background:none; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-exit { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; width:100%; min-height:220px; padding:18px 0; border:0; border-radius:0; background:none; color:#f0f4f1; font:600 25px/1.4 var(--font-ui); cursor:pointer; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-exit-icon { display:grid; place-items:center; width:126px; height:126px; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-exit-icon .ic { width:112px; height:112px; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-exit:hover { color:#93d2c7; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-secondary { width:100%; min-height:50px; padding:12px; border:1px solid #acbdb94d; border-radius:0; background:#283537b8; color:#cfdbd8; font:500 19px/1.4 var(--font-ui); cursor:pointer; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-secondary:hover { background:#354748; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-secondary.danger { color:#e6b8a7; border-color:#c79b8855; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-leave-confirm { display:grid; gap:14px; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-leave-confirm p { color:#e5d6ca; font-size:21px; line-height:1.6; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-foot { flex:none; display:flex; align-items:center; flex-wrap:wrap; gap:14px 26px; min-height:44px; margin-top:12px; padding:16px 20px 0; border-top:1px solid #a9bcb92b; color:#aebfbb; font-size:17px; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-bag { padding:6px 0; border:0; background:none; color:#c5d4d0; font:500 17px/1.4 var(--font-ui); cursor:pointer; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-bag:hover { color:#f0f4f1; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-notice, body #overlay .card:has(.reward-replica) .reward-replica .reward-final { margin-left:auto; color:#aac7bb; font-size:17px; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-notice + .reward-final { margin-left:0; }
+body #overlay .card:has(.reward-replica) .reward-replica .loot-outcome { flex:none; margin:8px 20px; padding:0; border:0; background:none; color:#99aba9; font-size:15px; line-height:1.5; }
+body #overlay .card:has(.reward-replica) .reward-replica .loot-outcome summary { cursor:pointer; }
+body #overlay .card:has(.reward-replica) .reward-replica .chest-warn { flex:none; max-width:960px; margin:6px 20px; padding:12px 16px; border:0; border-left:2px solid #c79b88; background:#382f2988; color:#e0bfa9; font-size:17px; line-height:1.6; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-empty { padding:60px; color:#aebfbb; font-size:24px; }
+body #overlay .card:has(.reward-replica) .reward-replica :is(button,[tabindex]):focus-visible { outline:2px solid #99d5c9; outline-offset:5px; }
+body:has(#overlay:not([hidden]) .reward-replica) #bagBtnFloat { display:none; }
+body #cardZoom.expedition-card-zoom:not(.cz-photo) .cz-foot:has([data-act^="chest"]) { width:min(400px,calc(var(--game-layout-width,100vw) * .8)); margin:0; padding:0; border:0; background:none; box-shadow:none; }
+body #cardZoom.expedition-card-zoom:not(.cz-photo) .cz-foot [data-act^="chest"] { width:100%; min-height:58px; margin:0; padding:10px 18px; border:1px solid #65bcb25c; border-radius:0; background:#197b76; color:#f1f6f0; font:600 25px/1.35 var(--font-ui); letter-spacing:0; clip-path:none; cursor:pointer; }
+body #cardZoom.expedition-card-zoom:not(.cz-photo) .cz-foot [data-act^="chest"]:hover { background:#248f87; }
+body #cardZoom.expedition-card-zoom:not(.cz-photo) .cz-foot [data-act^="chest"]:focus-visible { outline:2px solid #99d5c9; outline-offset:4px; }
+body #overlay .pick-search .ps-tip { display:block; margin-top:12px; color:#d4e3e8; font-size:19px; }
+#overlay .pick-search .chest-prop[data-chest-animated="true"], #overlay .pick-search .chest-prop.chest-opening { animation:none; transform:none; }
+@keyframes rewardUnitEnter { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+@media (prefers-reduced-motion:no-preference) {
+  body:not(.reduce-motion) #overlay .reward-replica:not(.no-anim) .reward-unit { animation:rewardUnitEnter .24s ease-out both; }
+  body:not(.reduce-motion) #overlay .reward-replica .reward-card { transition:transform .16s ease,opacity .16s ease; }
 }

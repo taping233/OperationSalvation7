@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="wrap-svg ornament-v7" viewBox="-11 -25 299 448" style="--tone:#364451;--shine:#c4d0d9;--metal:#69757c;--inlay:url(#wrap-rose-0-8-inlay)"><style>.v7-dark{fill:#111b26;stroke:#101922;stroke-width:1.5;stroke-linejoin:bevel}
+.v7-metal{fill:var(--metal);stroke:#d9e0dc;stroke-width:.65;stroke-opacity:.65;stroke-linejoin:bevel}
+.v7-bezel{fill:#25313a;stroke:var(--metal);stroke-width:1.2;stroke-linejoin:bevel}
+.v7-inlay{fill:var(--inlay);stroke:var(--shine);stroke-width:.55;stroke-linejoin:bevel}
+.v7-glint{fill:#f1f2e6;opacity:.8}
+.v7-shadow{fill:#192534;opacity:.7}
+.v7-line{fill:none;stroke:var(--shine);stroke-width:1.1;stroke-opacity:.78;stroke-linejoin:bevel}
+.v7-rail{fill:none;stroke:var(--metal);stroke-width:1.6;stroke-opacity:.85;stroke-linecap:square}
+.v7-cut{fill:none;stroke:#182433;stroke-width:1.1;stroke-linecap:square}
+.wrap-svg{display:block;width:100%;height:100%;overflow:visible}
+.wrap-plate{fill:var(--plate);stroke:#172431;stroke-width:1.2;stroke-linejoin:bevel}
+.wrap-side{fill:#17202c;stroke:#101926;stroke-width:.8;stroke-linejoin:bevel}
+.wrap-lit{fill:var(--shine);opacity:.7}
+.wrap-mid{fill:var(--metal);stroke:#e0e5db;stroke-width:.65;stroke-opacity:.65}
+.wrap-shade{fill:#202d3b;opacity:.73}
+.wrap-bottom{fill:var(--metal);stroke:#1c2936;stroke-width:1;opacity:.85}
+.wrap-inner{fill:none;stroke:var(--shine);stroke-width:1.15;stroke-opacity:.8;stroke-linejoin:bevel}
+.wrap-engrave{fill:none;stroke:#152536;stroke-width:1.7;stroke-opacity:.85;stroke-linejoin:bevel}
+.wrap-edge{fill:none;stroke:#edeedd;stroke-width:.8;stroke-opacity:.68;stroke-linejoin:bevel}
+.wrap-cut{fill:none;stroke:#172536;stroke-width:1.4;stroke-linecap:square;opacity:.72}
+.wrap-hatch{fill:none;stroke:var(--shine);stroke-width:1;stroke-opacity:.62;stroke-linecap:square}
+.wrap-crystal{stroke:#edf0e1;stroke-width:.6;stroke-linejoin:bevel}
+.wrap-crystal.mint{fill:#a7d7cd}
+.wrap-crystal.lilac{fill:#cbb8dc}
+.wrap-crystal.amber{fill:#e4cba3}</style><defs><linearGradient id="wrap-rose-0-8-plate" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c4d0d9"/><stop offset=".24" stop-color="#69757c"/><stop offset=".24" stop-color="#69757c"/><stop offset=".72" stop-color="#394754"/><stop offset="1" stop-color="#69757c"/></linearGradient><linearGradient id="wrap-rose-0-8-inlay" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c4d0d9"/><stop offset=".4" stop-color="#364451"/><stop offset=".4" stop-color="#364451"/><stop offset="1" stop-color="#253444"/></linearGradient></defs><g style="--plate:url(#wrap-rose-0-8-plate)"><path class="wrap-side" d="M281 0 286 6V411L277 421H4L0 415H272L281 406Z"/><path class="wrap-plate" fill-rule="evenodd" d="M0 -9H272L281 0V406L272 415H0L-9 406V0Z M5 3H267L269 5V401L267 403H5L3 401V5Z"/><path class="wrap-lit" d="M0 -9H272L277 -3 266 5H6L-3 -3Z"/><path class="wrap-mid" d="M-9 0 -3 -3 5 7V399L-3 410 -9 406Z"/><path class="wrap-shade" d="M281 0 267 7V399L276 410 281 406Z"/><path class="wrap-bottom" d="M0 415H272L276 409 266 400H6L-4 409Z"/><path class="wrap-inner" d="M6 2H266L270 6V400L266 404H6L2 400V6Z"/><g transform="translate(0 0) rotate(0)"><path class="v7-dark" d="M-9 -1 -1 -9H24L15 -4H3L-4 3V23L-9 31Z"/><path class="v7-metal" d="M-8 0 0 -8H22L13 -3H4L-3 4V21L-8 28Z"/><path class="v7-glint" d="M0 -8H22L14 -5H2Z"/></g><g transform="translate(272 0) rotate(90)"><path class="v7-dark" d="M-9 -1 -1 -9H24L15 -4H3L-4 3V23L-9 31Z"/><path class="v7-metal" d="M-8 0 0 -8H22L13 -3H4L-3 4V21L-8 28Z"/><path class="v7-glint" d="M0 -8H22L14 -5H2Z"/></g><g transform="translate(272 406) rotate(180)"><path class="v7-dark" d="M-9 -1 -1 -9H24L15 -4H3L-4 3V23L-9 31Z"/><path class="v7-metal" d="M-8 0 0 -8H22L13 -3H4L-3 4V21L-8 28Z"/><path class="v7-glint" d="M0 -8H22L14 -5H2Z"/></g><g transform="translate(0 406) rotate(270)"><path class="v7-dark" d="M-9 -1 -1 -9H24L15 -4H3L-4 3V23L-9 31Z"/><path class="v7-metal" d="M-8 0 0 -8H22L13 -3H4L-3 4V21L-8 28Z"/><path class="v7-glint" d="M0 -8H22L14 -5H2Z"/></g></g></svg>

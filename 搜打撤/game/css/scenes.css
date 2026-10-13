@@ -45,21 +45,21 @@
   .flow-transition::after { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
     background: radial-gradient(ellipse at 50% 48%, rgba(12,12,12,.2), rgba(7,7,7,.82) 78%); }
   .flow-transition > * { z-index: 2; }
-  .flow-scan { position: absolute; z-index: 1; width: min(780px, 82vw); height: 1px;
+  .flow-scan { position: absolute; z-index: 1; width: min(780px, calc(var(--game-layout-width, 100vw) * 0.82)); height: 1px;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,.9), transparent);
     box-shadow: 0 0 22px rgba(255,255,255,.35); animation: flowScan .72s cubic-bezier(.22,.7,.28,1) both; }
   .flow-eyebrow { margin: 0 0 14px; color: rgba(235,235,235,.68); font: 600 11px/1.2 var(--font-ui);
     letter-spacing: .42em; animation: flowTextIn .4s .15s ease backwards; }
-  .flow-title { margin: 0; color: #f4f4f4; font-size: clamp(38px, 6vw, 76px); letter-spacing: .2em;
+  .flow-title { margin: 0; color: #f4f4f4; font-size: clamp(38px, calc(var(--game-layout-width, 100vw) * 0.06), 76px); letter-spacing: .2em;
     text-indent: .2em; text-shadow: 0 3px 22px #000000, 0 0 32px rgba(255,255,255,.16);
     animation: flowTitleIn .55s .08s cubic-bezier(.16,.8,.24,1) backwards; }
   .flow-detail { margin: 17px 0 0; color: #c6c6c6; font-size: 13px; letter-spacing: .18em;
     animation: flowTextIn .42s .28s ease backwards; }
-  .flow-line { width: min(420px, 62vw); height: 2px; margin-top: 24px; overflow: hidden; background: rgba(255,255,255,.1); }
+  .flow-line { width: min(420px, calc(var(--game-layout-width, 100vw) * 0.62)); height: 2px; margin-top: 24px; overflow: hidden; background: rgba(255,255,255,.1); }
   .flow-line i { display: block; width: 100%; height: 100%; background: #e3e3e3;
     transform-origin: left; animation: flowLine 1s .18s cubic-bezier(.22,.7,.28,1) both; }
   .flow-hint { position: absolute; bottom: 22px; margin: 0; color: rgba(220,220,220,.4); font-size: 10px; letter-spacing: .22em; }
-  @keyframes flowScan { from { opacity: 0; transform: translateY(-34vh) scaleX(.25); } 45% { opacity: 1; } to { opacity: 0; transform: translateY(34vh) scaleX(1); } }
+  @keyframes flowScan { from { opacity: 0; transform: translateY(calc(var(--game-layout-height, 100vh) * -0.34)) scaleX(.25); } 45% { opacity: 1; } to { opacity: 0; transform: translateY(calc(var(--game-layout-height, 100vh) * 0.34)) scaleX(1); } }
   @keyframes flowTitleIn { from { opacity: 0; transform: scale(1.14); filter: blur(7px); } }
   @keyframes flowTextIn { from { opacity: 0; transform: translateY(8px); } }
   @keyframes flowLine { from { transform: scaleX(0); } }
@@ -74,58 +74,24 @@
   .sc-exit   { --sc-ring: #898989; --sc-core: #292929; --sc-glow: rgba(176,176,176,.30); }
   .sc-pick   { --sc-ring: #656565; --sc-core: #232323; --sc-glow: rgba(171,171,171,.24); }
 
-  /* ============ v0.21 卡背图案（cards.js cardBackHTML 输出） ============ */
+  /* 卡背绘图由现有 hb-* 编号选择，收藏解锁和各场景尺寸沿用原机制。 */
   .hs-back { position: absolute; inset: 0; border-radius:0; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     box-shadow: inset 0 0 0 1px rgba(237,237,237,.14), inset 0 0 12px rgba(0,0,0,.35), 0 2px 6px rgba(0,0,0,.45); }
-  .hs-back::before { content: ''; position: absolute; inset: 3px; border: 1px solid rgba(237,237,237,.28);
+  .hs-back::before { content: none; position: absolute; inset: 3px; border: 1px solid rgba(237,237,237,.28);
     border-radius:0; pointer-events: none; z-index: 2; }
-  .hs-back .hsb-emblem { position: relative; z-index: 3; font-family: var(--serif); font-weight: 800;
+  .hs-back .hsb-emblem { display: none; position: relative; z-index: 3; font-family: var(--serif); font-weight: 800;
     line-height: 1; opacity: .95; text-shadow: 0 1px 3px rgba(0,0,0,.85); }
-  .hs-back .hsb-shine { position: absolute; inset: 0; z-index: 4; pointer-events: none;
+  .hs-back .hsb-shine { display: none; position: absolute; inset: 0; z-index: 4; pointer-events: none;
     background: linear-gradient(115deg, transparent 32%, rgba(244,244,244,.15) 46%, transparent 60%); }
-  /* 默认卡背「行囊粗布」：旧布纹 + 「7」徽记 */
-  .hb-classic { background:
-    repeating-linear-gradient(45deg, rgba(0,0,0,.16) 0 2px, transparent 2px 6px),
-    repeating-linear-gradient(-45deg, rgba(237,237,237,.05) 0 2px, transparent 2px 6px),
-    linear-gradient(160deg, #5e5e5e, #2b2b2b 78%); }
-  .hb-classic .hsb-emblem { color: #dadada; }
-  /* 猎手皮纸（成就·猎手）：深绿皮革纹 + 交叉剑 */
-  .hb-wolf { background:
-    radial-gradient(circle at 28% 24%, rgba(255,255,255,.07), transparent 46%),
-    repeating-linear-gradient(0deg, rgba(0,0,0,.18) 0 3px, transparent 3px 8px),
-    linear-gradient(160deg, #474747, #202020 78%); }
-  .hb-wolf .hsb-emblem { color: #d4d4d4; }
-  /* 富商锦缎（成就·小有积蓄）：金缎纹 + 币徽 */
-  .hb-coin { background:
-    repeating-linear-gradient(90deg, rgba(0,0,0,.14) 0 4px, transparent 4px 9px),
-    radial-gradient(circle at 50% 40%, rgba(230,230,230,.28), transparent 56%),
-    linear-gradient(160deg, #6c6c6c, #313131 80%); }
-  .hb-coin .hsb-emblem { color: #e9e9e9; }
-  /* 仓廪卡背（成就·仓廪充实）：仓储网格 + 箱徽 */
-  .hb-vault { background:
-    repeating-linear-gradient(90deg, rgba(0,0,0,.24) 0 2px, transparent 2px 15px),
-    repeating-linear-gradient(0deg, rgba(237,237,237,.05) 0 1px, transparent 1px 7px),
-    linear-gradient(160deg, #4e4e4e, #1f1f1f 82%); }
-  .hb-vault .hsb-emblem { color: #d9d9d9; }
-  /* 弑神黑曜（成就·弑神者）：黑曜石红光 + 骷髅 */
-  .hb-boss { background:
-    radial-gradient(ellipse at 50% 34%, rgba(113,113,113,.32), transparent 60%),
-    conic-gradient(from 210deg at 50% 42%, #101010, #1e1e1e, #101010); }
-  .hb-boss .hsb-emblem { color: #c9c9c9; }
-  /* 祭坛星轨（成就·祭坛征服者）：奥术星轨 + 水晶球 */
-  .hb-altar { background:
-    radial-gradient(circle at 50% 40%, rgba(136,136,136,.38), transparent 56%),
-    repeating-conic-gradient(from 0deg at 50% 45%, rgba(255,255,255,.05) 0 12deg, transparent 12deg 24deg),
-    linear-gradient(165deg, #252525, #0f0f0f 82%); }
-  .hb-altar .hsb-emblem { color: #c9c9c9; }
-  /* 忠犬爪印（成就·最忠实的伙伴）：暖棕绒毯 + 爪印 */
-  .hb-pet { background:
-    radial-gradient(circle at 32% 28%, rgba(255,255,255,.09), transparent 42%),
-    radial-gradient(circle at 70% 64%, rgba(255,255,255,.07), transparent 42%),
-    repeating-linear-gradient(-30deg, rgba(0,0,0,.10) 0 3px, transparent 3px 9px),
-    linear-gradient(160deg, #616161, #272727 80%); }
-  .hb-pet .hsb-emblem { color: #dfdfdf; }
+  /* 七款完整手绘卡背；图片包含主题纹章与边框。 */
+  .hs-back.hb-classic { background: url("../assets/card-backs/classic.webp?v=cardbacks-border-20261012") center / 100% 100% no-repeat; }
+  .hs-back.hb-wolf { background: url("../assets/card-backs/wolf.webp?v=cardbacks-border-20261012") center / 100% 100% no-repeat; }
+  .hs-back.hb-coin { background: url("../assets/card-backs/coin.webp?v=cardbacks-border-20261012") center / 100% 100% no-repeat; }
+  .hs-back.hb-vault { background: url("../assets/card-backs/vault.webp?v=cardbacks-border-20261012") center / 100% 100% no-repeat; }
+  .hs-back.hb-boss { background: url("../assets/card-backs/boss.webp?v=cardbacks-border-20261012") center / 100% 100% no-repeat; }
+  .hs-back.hb-altar { background: url("../assets/card-backs/altar.webp?v=cardbacks-border-20261012") center / 100% 100% no-repeat; }
+  .hs-back.hb-pet { background: url("../assets/card-backs/pet.webp?v=cardbacks-border-20261012") center / 100% 100% no-repeat; }
 
   /* ============ 背包卡牌 3D：翻面（双击看卡背）+ 拖拽 ============ */
   .bag-slot.flip3d { perspective: 640px; user-select: none; touch-action: none; }
@@ -232,22 +198,20 @@
   @keyframes legendGlow { from { opacity: .88; } to { opacity: 1; } }
   /* 宝箱卡描述与币值角标（2026-09-25 审计 P0-1）：desc 限高防溢出卡底；
      币值角标收进卡内（cards.css 负偏移挂在卡外，压住描述末行） */
-  #overlay .card.chest .hs-card .hsc-desc { max-height: 6.5em; overflow: hidden; }
-  #overlay .card.chest .hs-card .hsc-val { right: .2em; bottom: .2em; }
   /* 开出行提示图标与数字间距（2026-09-25 审计 P1-4）：币图标贴数字被读成「0 1 币」 */
   #overlay .card.chest .evt-sts-desc .ic { margin-right: 4px; }
 
   /* ============ v0.25 事件卡揭晓（杀戮尖塔式：标题 + 叙事 + 左立绘 + 右选项条） ============ */
   .evt-sts { gap: 0; }
-  .evt-sts-title { position: relative; margin: 0 0 10px; font-size: clamp(24px, 3vw, 34px);
+  .evt-sts-title { position: relative; margin: 0 0 10px; font-size: clamp(24px, calc(var(--game-layout-width, 100vw) * 0.03), 34px);
     letter-spacing: 6px; color: #e2e2e2; font-family: var(--serif);
     text-shadow: 0 0 24px var(--sc-glow, rgba(171,171,171,.4)), 0 2px 3px rgba(0,0,0,.7); }
   .evt-sts-title .ic { width: 26px; height: 26px; vertical-align: -0.22em; }
   .evt-sts-desc { position: relative; margin: 0 auto 26px; max-width: 720px; padding: 0 20px;
     font-size: 13px; line-height: 1.6; color: #c9c9c9; text-align: center; }
   .evt-sts-main { position: relative; flex: 1; min-height: 0; width: min(1100px, 100%);
-    display: flex; gap: clamp(20px, 4vw, 56px); align-items: center; justify-content: center;
-    padding: 0 clamp(20px, 4vw, 48px); }
+    display: flex; gap: clamp(20px, calc(var(--game-layout-width, 100vw) * 0.04), 56px); align-items: center; justify-content: center;
+    padding: 0 clamp(20px, calc(var(--game-layout-width, 100vw) * 0.04), 48px); }
   .evt-sts-art { flex: 0 1 380px; min-width: 0; max-width: 380px; aspect-ratio: 1 / 1.08;
     border-radius:0; overflow: hidden; border: 1px solid rgba(171,171,171,.35);
     box-shadow: 0 14px 44px rgba(0,0,0,.6), 0 0 40px var(--sc-glow, rgba(171,171,171,.2)),
@@ -283,11 +247,6 @@
     box-shadow: none; }
   .evt-opt:disabled b { color: #9a9a9a; }
   /* 窄窗口：立绘收进上方，选项条保持整宽 */
-  @media (max-width: 900px) {
-    .evt-sts-main { flex-direction: column; gap: 18px; overflow-y: auto; }
-    .evt-sts-art { flex-basis: auto; width: min(260px, 60vw); }
-    .evt-sts-opts { flex-basis: auto; width: 100%; }
-  }
   /* 选项条带立绘变体（BOSS 选择等） */
   .evt-opt.withart { flex-direction: row; align-items: center; gap: 14px; }
   .evt-opt-art { width: 52px; min-width: 52px; height: 52px; border-radius:0; overflow: hidden;
@@ -318,7 +277,7 @@
   .node-pg > * { z-index: 1; }
   /* 右栏：无底板，标题/描述居中在上，选项条居中排布（模仿杀戮尖塔事件页） */
   .node-panel { position: absolute; top: 0; right: 0; bottom: 0; width: min(560px, 46%); /* 宽度对齐真源 expedition-rewards.css（560px/46%） */
-    display: flex; flex-direction: column; gap: 18px; padding: 8vh 44px 30px 8px;
+    display: flex; flex-direction: column; gap: 18px; padding: calc(var(--game-layout-height, 100vh) * 0.08) 44px 30px 8px;
     background: none; border: 0; box-shadow: none; }
   /* 2026-09-15 老板令：事件页排版统一为左对齐体系（与 expedition-rewards 生效值一致，本段为同源基准） */
   #overlay .card.page .node-pg:not(.shop-pg) .pg-head,
@@ -331,6 +290,9 @@
     letter-spacing: .5px; text-shadow: none; }
   .node-main { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column;
     justify-content: center; gap: 16px; padding: 12px 0; text-align: left; }
+  .node-pg.sc-safe .blank-safe-gain { align-items: flex-start; gap: 16px; padding: 24px 28px; }
+  .node-pg.sc-safe .blank-safe-gain .gain-big { font-size: 32px; }
+  .node-pg.sc-safe .blank-safe-gain .ov-note { margin: 0; color: #e2e7e8; font-size: 17px; line-height: 1.7; }
   /* 拾取页大字收益 */
   .node-pg .gain-big { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: 3px;
     color: #fcebb1; text-shadow: 0 2px 12px rgba(0,0,0,.95), 0 0 30px rgba(0,0,0,.55);
@@ -359,7 +321,7 @@
      搜索态=大图居中轻晃（被翻检的手感，替换旧提灯图标替身）；
      揭晓态=缩到卡牌上方，出场爆闪一次 + 盖缝金光呼吸（::before 径向光斑）。
      动画只走 transform/opacity 合成器通道（性能三铁律） */
-  .chest-prop { display:block; width:clamp(240px,32vw,360px); height:auto; pointer-events:none;
+  .chest-prop { display:block; width:clamp(240px,calc(var(--game-layout-width, 100vw) * 0.32),360px); height:auto; pointer-events:none;
     user-select:none; filter:drop-shadow(0 14px 22px rgba(0,0,0,.6)); }
   .pick-search .chest-prop { animation: chestRummage 1.5s ease-in-out infinite; }
   @keyframes chestRummage {
@@ -371,7 +333,7 @@
     86% { transform: rotate(0deg) translateY(0); }
   }
   .chest-reveal { position:relative; isolation:isolate; display:flex; justify-content:center; margin:2px 0 0; }
-  .chest-reveal .chest-prop { width:clamp(170px,20vw,230px);
+  .chest-reveal .chest-prop { width:clamp(170px,calc(var(--game-layout-width, 100vw) * 0.2),230px);
     animation: chestOpenPop .62s cubic-bezier(.2,1.4,.4,1) backwards; }
   .chest-reveal::before { content:''; position:absolute; left:50%; bottom:6%; transform:translateX(-50%);
     width:72%; height:58%; border-radius:50%; pointer-events:none; z-index:-1;
@@ -416,7 +378,7 @@
   .node-pg .fire-restore-hand .ov-empty { margin: 0; }
   /* 商店（2026-09-09 对齐参考图：墨绿货摊纸板 + 卡下价签 + 左缘离开绶带 + 右下卖牌处金币） */
   .shop-pg { display: flex; flex-direction: column; justify-content: center; gap: 14px;
-    padding: 18px clamp(20px, 4vw, 64px); overflow: auto; }
+    padding: 18px clamp(20px, calc(var(--game-layout-width, 100vw) * 0.04), 64px); overflow: auto; }
   .shop-pg::before { background: rgba(9,9,9,.5); }
   .shop-board { position: relative; margin: 0 auto; padding: 26px 34px 30px;
     border-radius: 30px 22px 34px 24px;
@@ -470,18 +432,13 @@
   .shop-back .ic { width: 20px; height: 20px; transform: scaleX(-1); }
   .shop-back:hover { filter: brightness(1.12); transform: translateY(-50%) translateX(3px); }
   /* 卖牌处收购台（二级界面）：整板收购，可卖的亮着、其余置灰 */
-  .sell-board { min-width: min(880px, 88vw); max-width: 94vw; }
+  .sell-board { min-width: min(880px, calc(var(--game-layout-width, 100vw) * 0.88)); max-width: calc(var(--game-layout-width, 100vw) * 0.94); }
   .sell-tip { margin: 0 4px 14px; font-size: 12.5px; letter-spacing: 1px;
     color: rgba(238,239,240,.85); text-shadow: 0 1px 6px rgba(0,0,0,.5); }
   .sell-board .shop-sell { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
-    gap: 16px 10px; max-height: min(58vh, 600px); overflow-y: auto; padding: 6px; }
+    gap: 16px 10px; max-height: min(calc(var(--game-layout-height, 100vh) * 0.58), 600px); overflow-y: auto; padding: 6px; }
   .sell-item.no .hs-card { filter: grayscale(.75) brightness(.72); }
   .sell-no { font-size: 11px; letter-spacing: 1px; color: #e8b1a6; }
-
-  @media (max-width: 900px) {
-    .node-panel { width: 100%; padding: 8vh 24px 24px; }
-    .node-pg::before { background: rgba(9,9,9,.55); }
-  }
 
   /* ============ v0.25 宝藏大门（出发页） ============ */
   .gate-strip { display: flex; gap: 14px; align-items: center; margin-top: 16px; cursor: pointer;
@@ -588,13 +545,16 @@
   #overlay .scene[data-asset-key="scene-event-demondeal"] { background-image:url('../assets/scenes/event-tt6-demondeal.webp'); }
   #overlay .scene[data-asset-key="scene-event-bandits"] { background-image:url('../assets/scenes/event-bandits-anime-v2.webp'); }
   #overlay .scene[data-asset-key="scene-event-mystery"] { background-image:url('../assets/scenes/event-tt6-mystery.webp'); }
-  #overlay .scene[data-asset-key="scene-event-goldmine"] { background-image:url('../assets/scenes/event-tt6-goldmine.webp'); }
+  #overlay .scene[data-asset-key="scene-event-goldmine"] { background-image:url('../assets/scenes/event-tt6-goldmine-1013-v2.webp'); }
   #overlay .scene[data-asset-key="scene-event-goldhammer"] { background-image:url('../assets/scenes/event-tt6-goldhammer.webp'); }
   #overlay .scene[data-asset-key="scene-event-relief"] { background-image:url('../assets/scenes/event-tt6-relief.webp'); }
   #overlay .scene[data-asset-key="scene-event-airdrop"] { background-image:url('../assets/scenes/event-tt6-airdrop.webp'); }
   #overlay .scene[data-asset-key="scene-event-chestdraw"] { background-image:url('../assets/scenes/event-tt6-chestdraw.webp'); }
   #overlay .scene[data-asset-key="scene-event-systemsupply"] { background-image:url('../assets/scenes/event-tt6-systemsupply.webp'); }
 
+  #overlay .node-pg[data-asset-key="scene-battle-bg"] { background-image:url('../assets/scenes/battle-normal-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-safe-bg"] { background-image:url('../assets/scenes/winter-expedition/outskirts.webp'); }
+  #overlay .node-pg[data-asset-key="scene-chest-bg"] { background-image:url('../assets/scenes/scene-chest-anime-v2.webp'); }
   #overlay .node-pg[data-asset-key="scene-door-bg"] { background-image:url('../assets/scenes/scene-door-anime-v2.webp'); }
   #overlay .node-pg[data-asset-key="scene-altar-bg"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
   #overlay .node-pg[data-asset-key="scene-fire-bg"] { background-image:url('../assets/scenes/scene-fire-anime-v2.webp'); }
@@ -609,7 +569,7 @@
   #overlay .node-pg[data-asset-key="scene-event-demondeal"] { background-image:url('../assets/scenes/event-tt6-demondeal.webp'); }
   #overlay .node-pg[data-asset-key="scene-event-bandits"] { background-image:url('../assets/scenes/event-bandits-anime-v2.webp'); }
   #overlay .node-pg[data-asset-key="scene-event-mystery"] { background-image:url('../assets/scenes/event-tt6-mystery.webp'); }
-  #overlay .node-pg[data-asset-key="scene-event-goldmine"] { background-image:url('../assets/scenes/event-tt6-goldmine.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-goldmine"] { background-image:url('../assets/scenes/event-tt6-goldmine-1013-v2.webp'); }
   #overlay .node-pg[data-asset-key="scene-event-goldhammer"] { background-image:url('../assets/scenes/event-tt6-goldhammer.webp'); }
   #overlay .node-pg[data-asset-key="scene-event-relief"] { background-image:url('../assets/scenes/event-tt6-relief.webp'); }
   #overlay .node-pg[data-asset-key="scene-event-airdrop"] { background-image:url('../assets/scenes/event-tt6-airdrop.webp'); }
@@ -622,7 +582,7 @@
   #overlay .scene[data-asset-key="scene-event-custom-b"], #overlay .node-pg[data-asset-key="scene-event-custom-b"] { background-image:url('../assets/scenes/event-tt6-airdrop.webp'); }
   #overlay .scene[data-asset-key="scene-event-custom-c"], #overlay .node-pg[data-asset-key="scene-event-custom-c"] { background-image:url('../assets/scenes/event-tt6-relief.webp'); }
   /* R6 环境故事复用无人雪街氛围图；这是场景背景，不是专属剧情插画。 */
-  #overlay .scene[data-asset-key="story-last-lamp"], #overlay .node-pg[data-asset-key="story-last-lamp"] { background-image:url('../assets/scenes/winter-expedition/outskirts.webp'); }
+  #overlay .scene[data-asset-key="story-last-lamp"], #overlay .node-pg[data-asset-key="story-last-lamp"] { background-image:url('../assets/scenes/event-last-lamp-1013-v1.webp'); }
 
   .battle-stage { background-size:cover; background-position:center; }
   /* 战斗底图一键换血（迭代评审 09-20 美术岗 E-P1）：写实 street-amber 退役，四条统一挂
@@ -646,7 +606,7 @@
   #overlay :is(.scene,.node-pg)[data-asset-key="scene-event-gamble"] { background-image:url('../assets/scenes/event-ev19-gamble.webp'); }
   #overlay :is(.scene,.node-pg)[data-asset-key="scene-event-quartermaster"] { background-image:url('../assets/scenes/event-ev19-quartermaster.webp'); }
 
-  .event-choice-hand { align-items:stretch; max-height:50vh; overflow:auto; padding:8px 4px 14px; }
+  .event-choice-hand { align-items:stretch; max-height:calc(var(--game-layout-height, 100vh) * 0.5); overflow:auto; padding:8px 4px 14px; }
   button.event-choice-card { appearance:none; -webkit-appearance:none; padding:0; border:0; background:transparent; color:inherit; cursor:pointer; position:relative; }
   button.event-choice-card:hover,
   button.event-choice-card:focus-visible { transform:translateY(-5px); filter:brightness(1.08); outline:2px solid rgba(126,212,255,.88); outline-offset:3px; }

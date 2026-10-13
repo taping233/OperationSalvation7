@@ -3,10 +3,10 @@
  * ui-scale.js —— 全局 UI 等比缩放（2026-09-19）
  *
  * 以 1920×1080 为设计基准，按视口宽高比例的较小值统一缩放全部元素。
- * zoom 挂 <html>：一次生效全部 DOM——flex 布局照常铺满窗口、文字按缩放后尺寸
- * 重排渲染不糊、浏览器自动换算事件坐标；media query 仍按真实视口判定不受影响。
+ * 固定 1920×1080 横屏布局，zoom 挂 <html> 统一缩放，窗口多余区域留边。
+ * 页面不按窗口宽高重排；文字、按钮、地图和弹层共用同一缩放系数。
  *
- * 不设小窗缩放下限，也不单独放大文字或按钮；额外宽高由现有布局展开。
+ * 不设小窗缩放下限，也不单独放大文字或按钮；不提供竖屏布局。
  *
  * 两套坐标口径（zoom≠1 时差 zoom 倍，混用必错位）：
  *   视口坐标 = e.clientX/Y、getBoundingClientRect()（显示位置）
@@ -34,6 +34,9 @@ function scaleForViewport(width, height) {
 /** 把当前视口的统一缩放写入 <html>，无返回值。 */
 function apply() {
   z = scaleForViewport(window.innerWidth, window.innerHeight);
+  document.documentElement.dataset.gameLayout = 'landscape';
+  document.documentElement.style.setProperty('--game-layout-width', `${BASE_W}px`);
+  document.documentElement.style.setProperty('--game-layout-height', `${BASE_H}px`);
   document.documentElement.style.zoom = z === 1 ? '' : String(z);
 }
 apply();
@@ -52,5 +55,8 @@ function rect(el) {
 /** @returns {number} 当前全局缩放系数 */
 function scale() { return z; }
 
-SDT.UiScale = { rect, scale, apply, scaleForViewport };
-export { rect, scale, apply, scaleForViewport, BASE_W, BASE_H };
+/** @returns {{width: number, height: number}} 游戏横屏画面的显示尺寸（CSS 像素），不含留边。 */
+function viewport() { return { width: BASE_W * z, height: BASE_H * z }; }
+
+SDT.UiScale = { rect, scale, viewport, apply, scaleForViewport };
+export { rect, scale, viewport, apply, scaleForViewport, BASE_W, BASE_H };

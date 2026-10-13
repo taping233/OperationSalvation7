@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 336 486" preserveAspectRatio="none">
+<defs><linearGradient id="steel" x2="1" y2="1"><stop stop-color="#667482"/><stop offset=".2" stop-color="#303945"/><stop offset=".6" stop-color="#141b25"/><stop offset="1" stop-color="#45505e"/></linearGradient></defs>
+<!-- Aperture: x32 y40 width272 height406. All decoration belongs to the exterior rails. -->
+<path fill="#080d14" d="M23 23H317L335 42V464L315 484H23L4 465V42Z M39 42H297L302 47V439L297 444H39L34 439V47Z" fill-rule="evenodd"/>
+<path fill="url(#steel)" stroke="#526273" stroke-width="1.5" fill-rule="evenodd" d="M18 18H312L330 36V459L312 477H18L0 459V36Z M39 40H297L304 47V439L297 446H39L32 439V47Z"/>
+<path fill="#7b8896" d="M18 18H312L323 30H21L11 40V450L0 459V36Z"/>
+<path fill="#303b49" d="M21 30H311L306 35H35L27 43V440L19 450V38Z"/>
+<path fill="#0b121c" d="M330 36V459L312 477H18L10 466H307L319 453V39Z"/>
+<path fill="#566170" d="M32 439 39 446H297L309 458H23L16 451Z"/>
+<path fill="none" stroke="#93a3b2" stroke-width="1.1" d="M40 39H296L305 48V438L296 447H40L31 438V48Z"/>
+<!-- Four faceted protective joints. -->
+<path fill="#202936" stroke="#617080" d="M0 36 18 18H64L51 29H22L12 40V76L0 88Z M266 18H312L330 36V85L318 73V41L308 29H279Z M330 409V459L312 477H268L280 465H307L318 453V422Z M0 409 12 422V453L23 465H56L68 477H18L0 459Z"/>
+<path fill="#8895a1" d="M18 18H64L53 24H22L5 41 0 36Z M266 18H312L323 30 308 24H276Z M318 443V454L307 465H280L275 470H310L324 456Z"/>
+<!-- Blue satin is folded along the rim, with two narrow tails outside the aperture. -->
+<path fill="#13344f" stroke="#090f1a" stroke-width="1.4" d="M172 26 214 12 291 29 321 60 309 99 326 130 309 171 307 150 298 162 310 127 297 100 309 62 286 42 211 27Z"/>
+<path fill="#347baf" d="M180 23 214 13 290 30 315 59 305 98 319 129 311 151 313 129 299 101 308 62 285 40 214 23Z"/>
+<path fill="#6fb1d2" d="M201 18 214 13 278 27 281 33 214 20Z M307 55 315 59 305 98 301 98Z M315 126 319 129 311 151Z"/>
+<path fill="#0b243c" d="M290 30 312 57 309 65 284 41Z M308 99 322 127 315 130 303 108Z"/>
+<path fill="#285c87" d="M153 31 120 22 102 35 124 39 147 50Z"/>
+<path fill="#609abc" d="M120 22 102 35 124 32 153 31Z"/>
+<!-- One black rose, sculpted from broad petal planes. -->
+<path fill="#141e27" stroke="#627181" d="M141 31 124 45 145 45 157 38Z M186 32 205 45 187 45 177 38Z"/>
+<g transform="rotate(0 168 27)"><path d="M168 29 150 25 146 14 158 6 176 11 182 23 173 32Z" fill="#10151e" stroke="#475463" stroke-width=".8"/><path d="M148 15 158 8 174 12 166 17 156 19Z" fill="#435267"/><path d="M156 20 166 17 176 22 171 30 168 27Z" fill="#080f18"/></g><g transform="rotate(51.4286 168 27)"><path d="M168 29 150 25 146 14 158 6 176 11 182 23 173 32Z" fill="#1b2431" stroke="#475463" stroke-width=".8"/><path d="M148 15 158 8 174 12 166 17 156 19Z" fill="#435267"/><path d="M156 20 166 17 176 22 171 30 168 27Z" fill="#080f18"/></g><g transform="rotate(102.8572 168 27)"><path d="M168 29 150 25 146 14 158 6 176 11 182 23 173 32Z" fill="#273443" stroke="#475463" stroke-width=".8"/><path d="M148 15 158 8 174 12 166 17 156 19Z" fill="#435267"/><path d="M156 20 166 17 176 22 171 30 168 27Z" fill="#080f18"/></g><g transform="rotate(154.2858 168 27)"><path d="M168 29 150 25 146 14 158 6 176 11 182 23 173 32Z" fill="#10151e" stroke="#475463" stroke-width=".8"/><path d="M148 15 158 8 174 12 166 17 156 19Z" fill="#435267"/><path d="M156 20 166 17 176 22 171 30 168 27Z" fill="#080f18"/></g><g transform="rotate(205.7144 168 27)"><path d="M168 29 150 25 146 14 158 6 176 11 182 23 173 32Z" fill="#1b2431" stroke="#475463" stroke-width=".8"/><path d="M148 15 158 8 174 12 166 17 156 19Z" fill="#435267"/><path d="M156 20 166 17 176 22 171 30 168 27Z" fill="#080f18"/></g><g transform="rotate(257.14300000000003 168 27)"><path d="M168 29 150 25 146 14 158 6 176 11 182 23 173 32Z" fill="#273443" stroke="#475463" stroke-width=".8"/><path d="M148 15 158 8 174 12 166 17 156 19Z" fill="#435267"/><path d="M156 20 166 17 176 22 171 30 168 27Z" fill="#080f18"/></g><g transform="rotate(308.5716 168 27)"><path d="M168 29 150 25 146 14 158 6 176 11 182 23 173 32Z" fill="#10151e" stroke="#475463" stroke-width=".8"/><path d="M148 15 158 8 174 12 166 17 156 19Z" fill="#435267"/><path d="M156 20 166 17 176 22 171 30 168 27Z" fill="#080f18"/></g>
+<path fill="#111823" stroke="#65768a" stroke-width=".9" d="M165 18 177 22 179 31 169 39 158 31 158 23Z"/>
+<path fill="#3b4b60" d="M165 19 174 23 167 27 159 24Z"/><path fill="#070d16" d="M167 25 174 26 173 32 166 34 163 29Z"/>
+<!-- Restrained blade cuts and a blue star identify the lower rail. -->
+<path fill="#182634" d="M10 177 23 164 22 200 10 211Z M313 265 324 251V285L313 298Z"/>
+<path fill="#5284a7" d="M11 178 20 169V175L11 186Z M314 267 322 257V263L314 273Z"/>
+<path fill="none" stroke="#677a8b" stroke-width="1" d="M8 285 22 273M8 293 22 281M315 210 324 201M315 218 324 209"/>
+<path fill="#121d2b" stroke="#617a8a" d="M142 456 168 451 194 456 186 471H150Z"/>
+<path fill="#77b1cd" d="M168 454 171 459 177 461 171 463 168 469 165 463 159 461 165 459Z"/>
+<path fill="#23597e" d="M168 461 177 461 171 463 168 469Z"/>
+</svg>

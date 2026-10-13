@@ -4,7 +4,7 @@
 
 ## 身份与参考使用
 
-既有运行参考为 `game/assets/portraits/full/baita.webp`，本页图片为同图副本。下面保留该版本的身份观察与历史配方；当前画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)，新图姿态和道具按任务指定参考核对。
+运行立绘已换为 10-13 竖版 `game/assets/portraits/full/baita.webp`，本页图片为同图副本，保留坐姿、腿上古书、蛋糕、浮书与椅下法阵。下面的 09-19 配方作为历史版本保留；当前画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)。
 
 ## 当前角色数据（core/characters.js）
 

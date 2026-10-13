@@ -2,9 +2,9 @@
 
 ![常无欲·定稿立绘](ref-images/changwuyu.webp)
 
-## 现行权威（2026-10-03）
+## 现行权威（2026-10-13）
 
-既有运行外观参考为 `game/assets/portraits/full/changwuyu.webp`，本页 ref-images 为同图副本。身份要素按指定参考核对，当前画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)，接入要求见[视觉规范](../production/art/VISUAL-BIBLE.md)。
+运行立绘已换为 10-13 竖版 `game/assets/portraits/full/changwuyu.webp`，本页 ref-images 为同图副本。身份要素按指定参考核对，当前画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)，接入要求见[视觉规范](../production/art/VISUAL-BIBLE.md)。
 
 - 男性、银灰长发低发髻、垂肩鬓发、黄瞳、尖耳、细圆框眼镜、黑弯尖宽檐魔女帽。
 - 黑高领长袍、紫内衬、金滚边、黑手套黑靴、左胸白羽与蓝宝石金扣胸针。

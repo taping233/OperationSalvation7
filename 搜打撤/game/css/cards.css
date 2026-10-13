@@ -1,101 +1,14 @@
-/* 职责拆分自 base.css；保持原始级联顺序。 */
-/* ============ 战术卡面（em 布局，改 font-size 即整体缩放） ============
-   * 石墨框、位图插画窗与高对比信息栏。 */
-  .hs-card { --gem: #c2c2c2; position: relative; width: 10em; height: 14em; font-size: 14px;
-    display: flex; flex-direction: column; padding: .42em; border-radius: .9em;
-    box-sizing: border-box; border: 2px solid var(--gem);
-    background: linear-gradient(165deg, var(--fc1, #5c5c5c), var(--fc2, #1d1d1d) 72%);
-    box-shadow: 0 .3em 1em rgba(0,0,0,.55), inset 0 0 0 1px rgba(237,237,237,.14), inset 0 0 2em rgba(0,0,0,.22);
-    user-select: none; }
-  .hs-card.sm { font-size: 12px; }
-  .hs-card.lg  { font-size: 24px; }
-  .hs-card.xl  { font-size: 30px; }
-  /* 类型边框色：武术/法术/道具/装备/事件/能力卡/资源 */
-  /* 类型边框色：武术/法术/生物/道具/装备/事件/能力卡/资源
-     （2026-09-04 定版：新增「生物」敌人图鉴类型，插入索引 2，其后类型顺移一位） */
-  .tp0 { --fc1: #5b5b5b; --fc2: #232323; --art1: #404040; }
-  .tp1 { --fc1: #5f5f5f; --fc2: #292929; --art1: #474747; }
-  .tp2 { --fc1: #6b6b6b; --fc2: #292929; --art1: #4b4b4b; }
-  .tp3 { --fc1: #6b6b6b; --fc2: #292929; --art1: #4b4b4b; }
-  .tp4 { --fc1: #6f6f6f; --fc2: #292929; --art1: #4d4d4d; }
-  .tp5 { --fc1: #5a5a5a; --fc2: #222222; --art1: #3e3e3e; }
-  .tp6 { --fc1: #8b8b8b; --fc2: #363636; --art1: #676767; }
-  .tp7 { --fc1: #747474; --fc2: #2c2c2c; --art1: #535353; }
-  /* 稀有度宝石色：初始/古朴/稀有/史诗/传说/衍生/职业/棱彩
-     （2026-09-04/09-05 定版增补：职业 = 黑棱形（职业专属卡稀有度，不进随机池）；
-       棱彩 = 能力卡及其衍生牌专属，卡面叠加 rv-prism 流转棱彩边框）
-     2026-09-08 老板定版改色：衍生 原金色与传说太相似 → 青绿松石；
-     棱彩 原淡蓝与稀有太相似 → 桃红（宝石色，棱彩光带不变）。
-     2026-09-08 二次定版：棱彩代表色 = 彩色——宝石走彩虹渐变，--gem 仅留单色兜底。
-     2026-09-09 三次定版：彩色换老板指定全息幻彩色板（白心 + 粉/奶油黄/薄荷/淡蓝/薰衣草环绕），
-     --gem 兜底锚色取幻彩中调薰衣草。 */
-  .rv0 { --gem: #9aa0a6; } .rv1 { --gem: #808488; } .rv2 { --gem: #81909b; }
-  .rv3 { --gem: #9b7fb8; } .rv4 { --gem: #e3b82b; } .rv5 { --gem: #697984; }
-  .rv5 { box-shadow: 0 .3em 1em rgba(0,0,0,.55), inset 0 0 0 2px rgba(131,145,155,.55); }
-  .rv6 { --gem: #0a0b0b; } .rv7 { --gem: #cdd1d5; }
-
-  /* 能力卡：渐变棱彩（2026-09-04 定版）——棱彩光带沿卡边自动小幅流转；
-     传说英雄为金光变体 rv-gold（金卡闪金光）。
-     2026-09-07 性能重做（老板实测牌库 10fps）：旧实现 ::after 动 background-position，
-     是逐帧重绘属性——每张棱彩卡每帧重画整层渐变 mask，一页 20 张时直接拖垮帧率。
-     改为遮罩环内放一张 4 倍宽渐变层（.rv-beam::before）做 transform 位移，
-     走合成器线程零重绘；观感（渐变配色 / 7s 流速 / 金色 3.2s）与旧版一致。 */
-  .hs-card.rv-prism { --gem: #b36bff; }
-  /* 棱彩代表色 = 全息幻彩（2026-09-09 老板指定参考图）：白心 + 环绕粉彩光谱，辉光白光。 */
-  .hs-card.rv7 .hsc-gem, .hs-card.rv-prism .hsc-gem {
-    background:
-      radial-gradient(circle at 50% 42%, #ffffff 0 20%, rgba(255,255,255,0) 62%),
-      conic-gradient(from 210deg, #ffd6ec, #e6e3db, #dbdee1, #dde1e5, #e5e8ea, #f5c9ec, #ffd6ec);
-    box-shadow: 0 0 .5em rgba(255,255,255,.65); }
-  .hs-card .rv-beam { position: absolute; inset: 0; z-index: 4; border-radius: inherit;
-    padding: 2px; pointer-events: none;
-    -webkit-mask: linear-gradient(#ffffff 0 0) content-box, linear-gradient(#ffffff 0 0);
-    mask: linear-gradient(#ffffff 0 0) content-box, linear-gradient(#ffffff 0 0);
-    -webkit-mask-composite: xor; mask-composite: exclude; }
-  .hs-card .rv-beam::before { content: ''; position: absolute; top: 0; left: 0;
-    width: 400%; height: 400%;
-    background: linear-gradient(115deg, #ff6b6b, #ffd23d, #6bceff, #6bceff, #b36bff, #ff6b6b);
-    animation: heroPrism 7s ease-in-out infinite; }
-  /* background-position 0%→100%（bg-size 400%）等效于图片左移 3 倍卡宽 = 自身宽度 75% */
-  @keyframes heroPrism {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(-75%); }
-  }
-  .hs-card.rv-gold .rv-beam::before {
-    background: linear-gradient(115deg, #8a6a1f, #ffc300, #ffedb0, #fdc200, #8a6a1f);
-    animation: heroGold 3.2s ease-in-out infinite; }
-  @keyframes heroGold {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(-75%); }
-  }
-
-  .hsc-cost { position: absolute; z-index: 3; top: -.48em; left: -.48em; width: 2.18em; height: 2.18em;
-    display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1em; color: #ffffff;
-    border-radius: 50%; border: 2px solid rgba(255,255,255,.68);
-    background: linear-gradient(180deg, #909090, #505050 55%, #333333);
-    text-shadow: 0 1px 2px rgba(9,9,9,.85);
-    filter: drop-shadow(0 2px 3px rgba(0,0,0,.5)) drop-shadow(0 0 .35em rgba(144,144,144,.4)); }
-  /* 卡面插画窗（2026-09-08 压缩高度：给效果描述腾出 ≥3 行空间） */
-  .hsc-art { height: 4.15em; margin: .18em .12em 0; border-radius: .55em; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    background:
-      radial-gradient(ellipse at 50% 30%, rgba(237,237,237,.14), transparent 65%),
-      radial-gradient(ellipse at 50% 40%, var(--art1, #3e3e3e), #0c0c0c 88%);
-    border: 1px solid rgba(237,237,237,.16);
-    box-shadow: inset 0 0 1.2em rgba(0,0,0,.65), inset 0 -1.2em 1.4em rgba(0,0,0,.35); }
-  .hsc-art .ic { width: 2.6em; height: 2.6em; vertical-align: 0;
-    filter: drop-shadow(0 .12em .1em rgba(0,0,0,.55)); }
-  /* 卡牌家族位图（art.js cardIcon） */
-  .hsc-art .art-card-image { width: 100%; height: 100%; object-fit: cover;
-    filter: drop-shadow(0 .14em .12em rgba(0,0,0,.55)) drop-shadow(0 0 .5em rgba(237,237,237,.10)); }
-  .hsc-name { margin: .28em .12em 0; padding: .2em .35em; border-radius: .3em; flex-shrink: 0;
-    text-align: center; font-size: .92em; font-weight: 700; color: #dadada;
-    background: linear-gradient(180deg, #222222, #111111);
-    border-top: 1px solid rgba(161,161,161,.45); border-bottom: 1px solid rgba(161,161,161,.45);
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .hsc-type { margin: .2em 0 0; text-align: center; font-size: .66em; flex-shrink: 0;
-    color: #b9b9b9; letter-spacing: .1em; white-space: nowrap; overflow: hidden; }
-  /* 抽卡 / 注能词条角标（类型行下方小药丸，仅词条 >0 时渲染） */
+/* 页面结构和尺寸；卡面外观只由 card-layout-selected.css 维护。 */
+.hs-card { position:relative; width:10em; font-size:14px; box-sizing:border-box; user-select:none; }
+.hs-card.sm { font-size:12px; }
+.hs-card.lg { font-size:24px; }
+.hs-card.xl { font-size:30px; }
+.hsc-cost { display:flex; align-items:center; justify-content:center; font-weight:800; }
+.hsc-art { display:flex; align-items:center; justify-content:center; }
+.hsc-art .ic { width:2.6em; height:2.6em; vertical-align:0; }
+.hsc-name { text-align:center; font-weight:700; }
+.hsc-type { text-align:center; }
+/* 抽牌、注能、回复、护甲仍保留交互提示与语义色。 */
   .hsc-kw { display: flex; gap: .25em; justify-content: center; margin: .1em 0 0; flex-shrink: 0; }
   .hsc-kw span { display: inline-flex; align-items: center; gap: .2em; padding: .05em .42em;
     border-radius: .9em; font-size: .58em; line-height: 1.45; letter-spacing: .05em; white-space: nowrap;
@@ -106,54 +19,15 @@
   /* 注能变体（注能前后效果不同）：水蓝高亮提醒 */
   .hsc-kw .kw-infuse.alt { color: #ced3d9; border-color: rgba(96,179,220,.85);
     box-shadow: 0 0 .5em rgba(96,179,220,.35); }
-  .hsc-gem { display: block; margin: .14em auto 0; width: .8em; height: .8em; flex-shrink: 0;
-    transform: rotate(45deg); background: var(--gem); border: 1px solid rgba(255,255,255,.55);
-    box-shadow: 0 0 .5em var(--gem); }
-  /* 效果描述：高对比终端信息条（2026-09-08：未放大时保证完整显示 ≥3 行描述——
-     顶部对齐 + 收紧字号行距，长描述不被裁成两行） */
-  .hsc-desc { flex: 1; min-height: 0; margin: .22em .12em .08em; padding: .3em .38em; border-radius: .45em;
-    display: flex; align-items: flex-start; justify-content: center; text-align: center;
-    background: linear-gradient(180deg, #dcdcdc, #c9c9c9);
-    color: #2e2e2e; border: 1px solid #9c9c9c;
-    box-shadow: inset 0 1px 3px rgba(63,63,63,.25);
-    font-size: .78em; line-height: 1.3; overflow: hidden; }
-  .hsc-desc:empty::before { content: '效果描述（可选）'; color: #848484; }
-  /* 长描述降级字号：≥22 字再收一档、≥32 字两档，防 sm 卡面底部裁字（2026-09-19 走查 B5；
-     lg/xl 特写卡由 card-v3.css 的 id 级选择器接管，不受这两档影响） */
-  .hsc-desc.long { font-size: .7em; line-height: 1.26; }
-  .hsc-desc.long.xlong { font-size: .64em; }
-  /* 伤害词条：左下角红色宝石 */
-  .hsc-dmg { position: absolute; z-index: 3; bottom: -.5em; left: -.55em; width: 2.3em; height: 2.6em;
-    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-    padding-bottom: .28em; color: #ffffff;
-    background: linear-gradient(180deg, #999999, #535353 55%, #2b2b2b);
-    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
-    filter: drop-shadow(0 2px 3px rgba(0,0,0,.5)) drop-shadow(0 0 .35em rgba(113,113,113,.45)); }
-  .hsc-dmg .ic { width: .62em; height: .62em; margin-bottom: .06em; vertical-align: 0; }
-  .hsc-dmg i { font-style: normal; font-size: .58em; line-height: 1; opacity: .92;
-    text-shadow: 0 1px 2px rgba(16,16,16,.9); }
-  .hsc-dmg b { font-size: .95em; line-height: 1.05; text-shadow: 0 1px 2px rgba(16,16,16,.9); }
-  /* 法伤加成同步（2026-09-09 需求）：随加成同步增加的伤害数字比常规显示稍大 */
-  .hsc-dmg.dmg-up b { font-size: 1.16em; }
-  .hsc-dmg.ghost { opacity: .32; filter: none; }
-  .dmg-num { color: #999999; font-weight: 700; }
-  /* 币值词条：右下角金色硬币（桌游道具卡的 [[icon:coin]] 数值） */
-  .hsc-val { position: absolute; z-index: 3; bottom: -.48em; right: -.48em; width: 2.18em; height: 2.18em;
-    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-    padding-bottom: .18em; color: #ffffff; cursor: help; border-radius: 50%; border: 2px solid rgba(255,235,169,.78);
-    background: linear-gradient(180deg, #d5d5d5, #a2a2a2 55%, #616161);
-    filter: drop-shadow(0 2px 3px rgba(0,0,0,.5)) drop-shadow(0 0 .35em rgba(196,196,196,.45)); }
-  .hsc-val .ic { width: .62em; height: .62em; margin-bottom: .06em; vertical-align: 0; }
-  .hsc-val i { font-style: normal; font-size: .58em; line-height: 1; opacity: .92;
-    text-shadow: 0 1px 2px rgba(47,47,47,.9); }
-  .hsc-val b { font-size: .95em; line-height: 1.05; text-shadow: 0 1px 2px rgba(47,47,47,.9); }
+
+.dmg-num { color:#999; font-weight:700; }
   .sellable-tgl { display: inline-flex; align-items: center; gap: .35em; font-size: .9em;
     color: #d5d5d5; cursor: pointer; user-select: none; }
   .sellable-tgl input { accent-color: #f1c947; cursor: pointer; }
 
   /* ============ 卡牌大页面（收藏 / 制作坊） ============ */
   /* 宽版弹窗限高内部滚动：内容超高（如商店含出售区）时不再被居中裁掉顶部 */
-  #overlay .card.wide { width: min(680px, 94%); text-align: left; max-height: 94vh; overflow-y: auto; }
+  #overlay .card.wide { width: min(680px, 94%); text-align: left; max-height: calc(var(--game-layout-height, 100vh) * 0.94); overflow-y: auto; }
   #overlay .card.page { width: min(1220px, 96%); height: min(880px, 94%); padding: 0;
     text-align: left; overflow: hidden; display: flex; background-color: #121212; }
   #overlay .card.page h2 { display: none; }
@@ -178,14 +52,9 @@
   .pg-head .sub { color: #8b8b8b; font-size: 12px; white-space: nowrap; overflow: hidden;
     text-overflow: ellipsis; }
   .pg-spacer { flex: 1; }
-  .clib-search { width: 210px; background: #121212; border: 1px solid #424242; border-radius:0;
-    padding: 7px 14px; color: #dadada; font-size: 12.5px; outline: none; }
-  .clib-search:focus { border-color: #a1a1a1; box-shadow: 0 0 0 2px rgba(161,161,161,.18); }
   .pg-select { background: #121212; border: 1px solid #424242; border-radius:0; color: #d5d5d5;
     padding: 7px 8px; font-size: 12.5px; outline: none; cursor: pointer; }
   .pg-select:focus { border-color: #a1a1a1; }
-  .clib-count { color: #8b8b8b; font-size: 12.5px; white-space: nowrap; }
-  .clib-count b { color: #dadada; font-size: 14px; }
 
   /* 黄铜按钮 */
   .hs-btn { padding: 8px 15px; font-size: 12.5px; font-weight: 600; border-radius:0; cursor: pointer;
@@ -206,8 +75,6 @@
     box-shadow: 0 0 10px rgba(113,113,113,.5); }
 
   /* 收藏页：类型页签 + 预览 + 卡格 */
-  .clib-tabs { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 20px; flex-shrink: 0;
-    border-bottom: 1px solid #2a2a2a; }
   .type-tab { padding: 5px 12px; font-size: 12px; border-radius:0; cursor: pointer;
     border: 1px solid #424242; background: #1f1f1f; color: #999999; transition: all .13s; }
   .type-tab:hover { color: #dadada; border-color: #595959; }
@@ -216,38 +83,11 @@
   .type-tab i { font-style: normal; margin-right: 3px; }
   .type-tab .ic { width: 13px; height: 13px; vertical-align: -0.16em; }
   .type-tab em { font-style: normal; font-size: 10px; color: inherit; opacity: .62; margin-left: 4px; }
-  .clib-main { flex: 1; display: flex; min-height: 0; }
-  .lib-grid { flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
-    gap: 16px 10px; padding: 16px 18px 20px; overflow-y: auto; align-content: start; }
-  .lib-grid .hs-card { font-size: 11px; }
-  .lib-item { display: flex; flex-direction: column; align-items: center; gap: 7px; }
-  .lib-item.saved .lib-cardwrap { animation: savedGlow 1.1s ease 2; }
   @keyframes savedGlow { 50% { filter: drop-shadow(0 0 20px #c4c4c4); transform: scale(1.1); } }
-  .lib-cardwrap { position: relative; cursor: pointer; border-radius: .9em;
+  .lib-cardwrap:where(:not(.studio-photo)) { position: relative; cursor: pointer; border-radius: .9em;
     transition: transform .16s ease, filter .16s ease; }
-  .lib-cardwrap:hover { transform: scale(1.17) rotate(-1.2deg); z-index: 6;
+  .lib-cardwrap:where(:not(.studio-photo)):hover { transform: scale(1.17) rotate(-1.2deg); z-index: 6;
     filter: drop-shadow(0 0 15px var(--gem, #a1a1a1)); }
-  /* 牌库页去动画（2026-09-08 老板拍板：牌库内动画全去，滑动/悬停流畅优先）。
-     实测 hover 缩放 + drop-shadow 滤镜重绘是 5fps 元凶；流光/入场过渡一并停用。
-     cardlib-open 由 renderCardLibrary/closeLibPage 挂卸。
-     2026-09-13 留言（多加一些动画和彩蛋）：禁令保留（它是滑动流畅的护栏），
-     卡面 hover 抬升只留 transform（合成器线程），drop-shadow 滤镜重绘继续拦；
-     库内新增动画一律在 expedition-library.css 里按更高优先级豁免单开。 */
-  /* 09-25 收窄：原 #overlay * 全局禁令会连同 #overlay 内的战斗 DOM 一起静默禁动效
-     （cardlib-open 类残留时战斗全部动画/过渡失效）；卡牌库与照相馆共用了同一页根
-     （.pg.card-library-page.photo-studio-v3），收窄到页根内即覆盖两者，禁令语义不变 */
-  body.cardlib-open #overlay .card-library-page *,
-  body.cardlib-open #overlay .card-library-page *::before,
-  body.cardlib-open #overlay .card-library-page *::after { animation: none !important; transition: none !important; }
-  body.cardlib-open #overlay .lib-cardwrap { transition: transform .16s ease !important; }
-  body.cardlib-open #overlay .lib-cardwrap:hover { filter: none; }
-  body.cardlib-open #overlay .rv-beam { display: none; }
-  /* 豁免：卡牌库整页卡片的打开缩放入场（2026-09-12 留言）不受上面的动画禁令影响 */
-  @keyframes libCardIn { from { opacity: 0; transform: scale(.86) translateY(14px); } }
-  body.cardlib-open #overlay .card.page:has(.card-library-page) { animation: libCardIn .32s cubic-bezier(.22,1.2,.36,1) !important; }
-  .lib-item { min-width: 0; }
-  .clib-empty { grid-column: 1 / -1; text-align: center; color: #8b8b8b; padding: 70px 0 60px; }
-  .clib-empty-icon .ic { width: 52px; height: 52px; opacity: .4; margin-bottom: 12px; }
 
   /* 制作坊：左舞台（3D 转卡）+ 右表单 */
   .cdes-main { flex: 1; display: flex; min-height: 0; }
@@ -333,7 +173,7 @@
   .mini-btn.ok:hover:not(:disabled) { filter: brightness(1.3); }
 
   /* 商店出售区：只有带「可出售」备注的持有卡牌 */
-  .shop-sell { display: flex; flex-wrap: wrap; gap: 10px; max-height: 30vh; overflow-y: auto;
+  .shop-sell { display: flex; flex-wrap: wrap; gap: 10px; max-height: calc(var(--game-layout-height, 100vh) * 0.3); overflow-y: auto;
     padding: 2px 2px 4px; }
   .shop-sell-empty { color: #797979; font-size: 12px; padding: 8px 2px; }
 
@@ -344,7 +184,3 @@
   .set-h .ic { width: 13px; height: 13px; vertical-align: -0.16em; }
 
 /* 窄档：制作坊表单列 min-width:400px 无收窄档，改为上下堆叠 */
-@media(max-width:760px){
-  .cdes-main { flex-direction:column; }
-  .cdes-form { min-width:0; border-left:0; border-top:1px solid #2a2a2a; }
-}

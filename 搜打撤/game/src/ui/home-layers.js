@@ -23,7 +23,7 @@ if (title && inner && title.classList.contains('home-composed')) {
     + '<stop offset="1" stop-color="#080a0e" stop-opacity="0"/></linearGradient></defs>'
     + '<polygon points="24,0 100,0 100,100 0,100" fill="url(#hlSlashFill)"/>'
     + '<line class="hs-edge" pathLength="1" x1="24" y1="0" x2="0" y2="100" stroke="#ffffff" stroke-opacity=".34" stroke-width="1" vector-effect="non-scaling-stroke"/>'
-    + '<line class="hs-accent" pathLength="1" x1="24" y1="0" x2="19" y2="21" stroke="#ffd23c" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>';
+    + '<line class="hs-accent" x1="24" y1="0" x2="18.96" y2="21" stroke="#ffd23c" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>';
   title.insertBefore(slash, inner);
   title.insertBefore(make('div', 'home-beams'), inner);
 

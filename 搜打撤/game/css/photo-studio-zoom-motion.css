@@ -1,0 +1,27 @@
+/* Approved sample entrance, scoped to gallery photographs. The gallery chrome stays original. */
+body.cardlib-open #cardZoom.cz-photo.cz-photo-atelier:not(.cz-photo-closing) .cz-photo-paper {
+  transition:transform var(--cz-photo-motion-ms,420ms) cubic-bezier(.22,1,.36,1),
+    opacity var(--cz-photo-motion-ms,420ms) ease!important;
+}
+body.cardlib-open #cardZoom.cz-photo.cz-photo-atelier.cz-photo-entering .cz-photo-paper {
+  opacity:.75;
+}
+body.cardlib-open #cardZoom.cz-photo.cz-photo-atelier:not(.cz-photo-closing) .cz-photo-info {
+  transition:opacity 340ms ease var(--cz-photo-info-delay,100ms),
+    transform 340ms cubic-bezier(.22,1,.36,1) var(--cz-photo-info-delay,100ms)!important;
+}
+body.cardlib-open #cardZoom.cz-photo.cz-photo-atelier.cz-photo-entering .cz-photo-info {
+  transform:translateX(26px);
+}
+body.cardlib-open #cardZoom.cz-photo.cz-photo-atelier:not(.cz-photo-closing) .cz-backdrop {
+  animation:studio-photo-shade-in 240ms ease both!important;
+}
+@keyframes studio-photo-shade-in { from { opacity:0; } to { opacity:1; } }
+body.cardlib-open #cardZoom.cz-photo.cz-photo-atelier.cz-photo-reduced :is(.cz-photo-paper,.cz-photo-info) {
+  transition:none!important;
+}
+body.cardlib-open #cardZoom.cz-photo.cz-photo-atelier.cz-photo-reduced .cz-backdrop { animation:none!important; }
+@media(prefers-reduced-motion:reduce) {
+  body.cardlib-open #cardZoom.cz-photo.cz-photo-atelier :is(.cz-photo-paper,.cz-photo-info) { transition:none!important; }
+  body.cardlib-open #cardZoom.cz-photo.cz-photo-atelier .cz-backdrop { animation:none!important; }
+}

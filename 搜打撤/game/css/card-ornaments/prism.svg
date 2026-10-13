@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="ornament" viewBox="0 0 272 406" color="#f9e4f3" style="--tone:#c2b5eb;--shine:#f9e4f3;opacity:1;--paint-fill:url(#pigment-safe-ink-4-4)" aria-hidden="true"><style>.line{fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:round;stroke-linejoin:round}
+.bold{stroke-width:1.5}
+.faint{opacity:.35}
+.accent{fill:var(--tone);stroke:var(--shine);stroke-width:.5}
+.ink{fill:#d7e1e5;opacity:.65}
+.dark{fill:#162532;opacity:.8}
+.fill{fill:currentColor}
+.line{stroke-width:1.35}
+.bold{stroke-width:2}
+.dark{opacity:.96}
+.accent{stroke-width:.7}
+.ink{opacity:.9}
+.accent{fill:var(--paint-fill,var(--tone));stroke-opacity:.55}
+.facet-shadow{fill:#142538;opacity:.4}
+.facet-light{fill:#f1f0df;opacity:.38}
+.brush-cut{fill:#16283b;opacity:.62}
+.engrave{fill:none;stroke:#172638;stroke-width:.85;stroke-linecap:square;opacity:.55}
+.dark{fill:#172633;opacity:.88}
+.ink{fill:#e8ecdf;opacity:.82}
+.top-ornament{opacity:.9}
+.top-ornament .line{stroke-width:1.15}
+.top-ornament .engrave{stroke-width:.7}</style><defs><linearGradient id="pigment-safe-ink-4-4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f9e4f3"/><stop offset=".2" stop-color="#f9e4f3"/><stop offset=".2" stop-color="#c2b5eb"/><stop offset=".65" stop-color="#c2b5eb"/><stop offset=".65" stop-color="#465165"/><stop offset="1" stop-color="#465165"/></linearGradient><clipPath id="round-safe-ink-4-4"><rect x="0" y="0" width="272" height="406" rx="9"/></clipPath><clipPath id="safe-ink-4-4"><rect x="210" y="52" width="62" height="151"/><rect x="0" y="60" width="20" height="112"/><rect x="0" y="342" width="8" height="64"/><rect x="264" y="342" width="8" height="64"/><rect x="62" y="0" width="106" height="32"/></clipPath></defs><g clip-path="url(#round-safe-ink-4-4)"><g clip-path="url(#safe-ink-4-4)"><path class="dark" d="m276 50-47 17-14 62 39 39 26-57Z"/><path fill="#b7d6d7" d="m276 51-44 16 13 34 31-13-24-13Z"/><path fill="#d9c4e3" d="m233 77-20 42 27 38-7-50 20-17Z"/><path fill="#efdbbd" d="m273 114-26 29 18 43 12-27-18-14Z"/><path class="ink" d="m231 83-12 32 11-12Z"/><path class="facet-shadow" d="M276 51 245 101 252 75Z M233 77 213 119 233 107 240 157 238 119Z M273 114 247 143 259 145 265 186 263 148Z"/><path class="facet-light" d="M276 51 232 67 252 75Z M233 77 219 109 234 98Z M273 114 250 141 258 138Z"/><path class="engrave" d="M262 67 253 81M229 100 227 118M264 150 269 159"/><path class="dark" d="m3 74 15 -4 -4 46 -11 5Z"/><path class="accent" d="m2 73 15 -4 -5 9 2 30 -12 10 2 -8Z"/><path class="facet-shadow" d="m10.25 75 5.25 -2 -3 38 -4.5 5Z"/><path class="ink" d="m4 75 9 -3 -3 4 -6 3Z"/><path class="brush-cut" d="m4 96.92 6 -4 -2 4 -5.25 3Z"/><path class="engrave" d="m8.3 84 2 14.72m-1 5 1 5"/><path class="dark" d="m1 349 18 -4 -4 65 -14 5Z"/><path class="accent" d="m0 348 18 -4 -5 9 2 49 -15 10 2 -8Z"/><path class="facet-shadow" d="m9.9 350 6.3 -2 -3 57 -5.3999999999999995 5Z"/><path class="ink" d="m2 350 12 -3 -3 4 -9 3Z"/><path class="brush-cut" d="m2 381.8 7.2 -4 -2 4 -6.3 3Z"/><path class="engrave" d="m7.56 359 2 20.8m-1 5 1 5"/><path class="dark" d="m275 366 -17 -4 4 51 13 5Z"/><path class="accent" d="m274 365 -17 -4 5 9 -2 35 14 10 -2 -8Z"/><path class="facet-shadow" d="m264.65 367 -5.949999999999999 -2 3 43 5.1 5Z"/><path class="ink" d="m272 367 -11 -3 3 4 8 3Z"/><path class="brush-cut" d="m272 391.52 -6.800000000000001 -4 2 4 5.949999999999999 3Z"/><path class="engrave" d="m266.86 376 -2 16.32m1 5 -1 5"/><path class="facet-light" d="M3 363 13 373 7 382Z M7 383 17 388 10 400Z"/><g class="top-ornament"><path class="dark" d="M66 2 95 6 116 2 139 6 167 2 145 17 123 31 108 15 86 17Z"/><path fill="#b7d6d7" d="M68 2 106 8 91 15 81 9Z"/><path fill="#d9c4e3" d="M96 5 116 2 139 6 122 28 112 10Z"/><path fill="#efdbbd" d="M130 10 165 2 147 16Z"/><path class="facet-shadow" d="M116 2 122 28 127 10Z"/><path class="ink" d="M101 6 116 2 123 4 111 7Z"/></g></g></g></svg>

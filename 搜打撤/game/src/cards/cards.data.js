@@ -70,7 +70,7 @@ export const dataSlice = {
       { id: 'tt2-shoot',       name: '射击',     cost: 0, rarity: '初始', type: '武术', dmg: 2, dmgType: 'fixed', desc: '造成 2 点伤害。' }, // 设计者定版：2 点固定伤害
       { id: 'tt2-turtlearmor', name: '龟寿甲',   cost: 2, rarity: '古朴', type: '武术', desc: '弃 1 张装备牌，+8 甲。' },
       { id: 'tt2-bloodblade',  name: '血刃',     cost: 2, rarity: '古朴', type: '武术', dmg: 1, dmgType: 'attack', desc: '攻⁺1，附加吸血。' },
-      { id: 'tt2-forestarrow', name: '绿化箭',   cost: 2, rarity: '古朴', type: '武术', dmg: 1, dmgType: 'attack', desc: '攻⁺1，+3 甲。' },
+      { id: 'tt2-forestarrow', name: '回音箭',   cost: 2, rarity: '古朴', type: '武术', dmg: 1, dmgType: 'attack', desc: '攻⁺1，+3 甲。' },
     ],
 
     // 桌游手绘卡 · 第三批（2026-09-01 全套照片提取；另一会话录入 93 张在先，
@@ -390,7 +390,7 @@ export const dataSlice = {
       { id: 'tt2-shoot', name: '射击', cost: 0, rarity: '古朴', type: '武术', desc: '造成 2 点伤害。', dmg: 2, dmgType: 'fixed', value: 2 },
       { id: 'tt2-turtlearmor', name: '铸甲', cost: 1, rarity: '稀有', type: '武术', desc: '消耗1 张装备牌，+10甲。', dmg: 0, armor: 10, value: 3 },
       { id: 'tt2-bloodblade', name: '嗜血刃', cost: 2, rarity: '史诗', type: '武术', desc: '攻（+2），回复等量生命。', dmg: 2, dmgType: 'attack', value: 4 },
-      { id: 'tt2-forestarrow', name: '绿化箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），+3 甲。', dmg: -1, dmgType: 'attack', armor: 3, value: 2 },
+      "tt2-forestarrow",
       { id: 'tt3-blood-arrow', name: '血箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），附加流血。', dmg: -1, dmgType: 'attack', value: 2 },
       { id: 'tt3-fatal-pierce', name: '致命穿刺', cost: 1, rarity: '古朴', type: '武术', desc: '攻（+1）；若对方处于流血状态，伤害 +2 并附加破甲，持续 1 回合。', dmg: 1, dmgType: 'attack', value: 2 },
       { id: 'tt3-fly-arrowhawk', name: '飞身劈', cost: 2, rarity: '稀有', type: '武术', desc: '攻（+3），触发的流血伤害翻倍。', dmg: 3, dmgType: 'attack', value: 3 },

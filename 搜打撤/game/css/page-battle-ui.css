@@ -44,7 +44,7 @@ body #overlay .battle-stage.sts .sts-me,
 body #overlay .battle-stage.sts .sts-foes,
 body #overlay .battle-stage.sts .sts-allies { bottom: 24px !important; }
 #overlay .battle-stage.sts .sts-foes { left: 44%; right: 4%; gap: 18px; }
-#overlay .battle-stage.sts .sts-foe { width: clamp(124px, 14vw, 176px); min-width: 0; }
+#overlay .battle-stage.sts .sts-foe { width: clamp(124px, calc(var(--game-layout-width, 100vw) * 0.14), 176px); min-width: 0; }
 #overlay .battle-stage.sts .sts-arena::before,
 #overlay .battle-stage.sts .sts-arena::after { top: 18px; bottom: auto; }
 #overlay .battle-stage.sts .sts-encounter { font-size: 14px; }
@@ -69,11 +69,6 @@ body #overlay .battle-stage.sts .sts-nameplate {
 #overlay .battle-stage.sts .sts-hand { background: none; box-shadow: none; }
 #overlay .battle-stage.sts .sts-hand .bt-card.click-selected::after {
   font-size: 13px; padding: 5px 0;
-}
-@media (max-width: 900px) {
-  #overlay .battle-stage.sts .sts-tactics { grid-column: 1 / -1; min-width: 0; }
-  #overlay .battle-stage.sts .sts-foes { left: 40%; gap: 10px; }
-  #overlay .battle-stage.sts .sts-foe { width: clamp(100px, 16vw, 140px); }
 }
 
 /* ═════════ W1 顶栏信息条 .sts-topbar：老板定版「回合条融入背景」透明态不覆盖；

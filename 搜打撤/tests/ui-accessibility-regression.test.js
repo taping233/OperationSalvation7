@@ -15,12 +15,6 @@ describe('核心卡牌交互的键盘与读屏契约', () => {
     expect(cards).toMatch(/const editorTools = game\.devMode/);
   });
 
-  it('宝箱中可拾取的卡牌使用原生按钮', () => {
-    const chests = source('run/chests.js');
-    expect(chests).toContain("const tag = act ? 'button' : 'div'");
-    expect(chests).toContain('type="button" aria-label=');
-  });
-
   it('战斗手牌提供 button 语义和 Enter/Space 操作', () => {
     // 2026-09-22 battle.view 拆片：断言串随片走，壳+六片拼接后仍断言「战斗源码含 X」
     const battle = ['battle/view/battle.view.js', 'battle/view/battle.overlays.js', 'battle/view/battle.layers.js', 'battle/view/battle.vfx.js',

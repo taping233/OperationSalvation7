@@ -16,15 +16,16 @@ import { setBagReturnHook } from '../hub/bag-return-hook.js';
 import { startBattle } from '../battle/battle-loader.js';
 import { isTurbo } from '../core/turbo.js';
 import { renderScheduler } from '../core/render-scheduler.js';
-import { buildEncounter, cancelLegacyChainMove, consumeCell, consumeCurrentCell, enterNode, finishInstant, grantEventCard, nodeShell, openBattleCell, openBlankSafePage, openChestsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene } from './game.run.scenes.js';
-import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergencyModal } from './game.run.altar.js';
+import { findMapTravelPath, mapTravelPoint, setMapTravelPresentation } from './map-travel-path.js';
+import { buildEncounter, cancelLegacyChainMove, consumeCell, consumeCurrentCell, enterNode, finishInstant, grantEventCard, nodeOpt, nodeShell, openBattleCell, openBlankSafePage, openChestsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene } from './game.run.scenes.js';
+import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergencyModal, openEntrySupply } from './game.run.altar.js';
+import { claimResourceReward, entrySupplyAt, nodeActionBinding, resourceRewardAt } from './node-reward-state.js';
+import { rewardExitHTML, rewardSceneHTML } from '../ui/reward-scene-view.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 
-// 直接选择相邻节点，不再掷骰或消耗行动力。
-// 移动是一个原子事务：开始时只进入 moving，稳定节点/回合/事件结算均在
-// 动画完成后一次性提交。这样刷新或退出不会把角色保存在线段中间。
+// 一次路线持有移动锁；逐格动画抵达后才提交稳定位置、回合与存档，终点结算原内容。
 let moveSeq = 0;
 let activeMove = null;
 const MOVE_DURATION = 220;
@@ -33,10 +34,21 @@ const moveUsesReducedMotion = () => {
   catch { return false; }
 };
 export function moveTo(toLi, toIdx) {
+  if (activeMove && game.state !== 'moving') activeMove.cancel?.();
   if (game.state !== 'idle' || activeMove) return false;
+  const path = findMapTravelPath(game, { li: toLi, idx: toIdx });
+  if (!path?.length) return false;
+  game.geometryVersion = game.geometryVersion || `${String(game.mapSeed)}:${game.layoutVersion || 0}`;
+  const map = game.layerData, geometry = game.geometryVersion, runActive = game.runActive;
+  const route = [{ li: game.layerIdx, idx: game.trackPos }, ...path].map(n => ({ ...n, ...cellCenter(n.li, n.idx) }));
+  if (route.some(n => !Number.isFinite(n.x) || !Number.isFinite(n.y))) return false;
+  const seq = ++moveSeq;
+  activeMove = { seq };
+  const presentation = { path: route, segmentIndex: 1, progress: 0, phase: 'moving' };
+  setMapTravelPresentation(game, presentation);
+  const step = (segmentIndex) => {
   const current = curLayer()?.logical[game.trackPos];
-  const allowed = current?.next || [];
-  if (!allowed.some(([li, idx]) => li === toLi && idx === toIdx)) return false;
+  const { li: toLi, idx: toIdx } = path[segmentIndex];
   const fromLi = game.layerIdx, fromIdx = game.trackPos;
   const from = cellCenter(fromLi, fromIdx);
   const to = cellCenter(toLi, toIdx);
@@ -44,18 +56,31 @@ export function moveTo(toLi, toIdx) {
   // 玩家确认路线时才预取目标房间；移动动画提供约 220ms 的网络/解码窗口。
   preloadCellScene(game.layerData?.[toLi], toIdx);
 
-  const seq = ++moveSeq;
   const startedAt = typeof performance !== 'undefined' && performance.now ? performance.now() : Date.now();
   let done = false;
   let watchdog = null;
   const frame = typeof requestAnimationFrame === 'function'
     ? requestAnimationFrame
     : (cb) => setTimeout(() => cb(Date.now()), 16);
-  const finish = () => {
-    if (done || !activeMove || activeMove.seq !== seq) return;
+  const isCurrent = () => {
+    if (done || !activeMove || activeMove.seq !== seq) return false;
+    if (game.state === 'moving' && game.layerData === map && game.geometryVersion === geometry &&
+        game.runActive === runActive && game.layerIdx === fromLi && game.trackPos === fromIdx) return true;
     done = true;
     if (watchdog != null) clearTimeout(watchdog);
     activeMove = null;
+    setMapTravelPresentation(game, null);
+    if (game.layerData === map && game.layerIdx === fromLi && game.trackPos === fromIdx) game.pos = { ...from };
+    game.moveTarget = null;
+    if (game.state === 'moving') game.state = 'idle';
+    UI.refresh(game);
+    renderScheduler.invalidate();
+    return false;
+  };
+  const finish = () => {
+    if (!isCurrent()) return;
+    done = true;
+    if (watchdog != null) clearTimeout(watchdog);
     game.pos = { ...to };
     game.layerIdx = toLi;
     game.trackPos = toIdx;
@@ -73,20 +98,45 @@ export function moveTo(toLi, toIdx) {
     game.activeLayerBounds = game.layerBounds?.[toLi] || null;
     game.geometryVersion = game.geometryVersion || `${String(game.mapSeed)}:${game.layoutVersion || 0}`;
     SDT.Meta.track('action');
+    if (segmentIndex + 1 < path.length) {
+      // Save only the arrived node; the active transaction still rejects reentrant input.
+      game.state = 'idle';
+      saveGame();
+      game.state = 'moving';
+      step(segmentIndex + 1);
+      return;
+    }
+    activeMove = null;
+    presentation.progress = 1;
+    presentation.phase = 'arrived';
+    if (moveUsesReducedMotion() || isTurbo()) setMapTravelPresentation(game, null);
+    else setTimeout(() => {
+      if (moveSeq === seq) {
+        setMapTravelPresentation(game, null);
+        UI.refresh(game);
+        renderScheduler.invalidate();
+      }
+    }, 280);
+    if (path.length > 1) UI.log(`[[icon:exit]] 已沿路线抵达，共经过 ${path.length} 格`, 'dim');
     resolveCell();
   };
   const tick = (now) => {
-    if (done || !activeMove || activeMove.seq !== seq) return;
-    const t = Math.max(0, Math.min(1, ((now || Date.now()) - startedAt) / MOVE_DURATION));
+    if (!isCurrent()) return;
+    const duration = path.length > 1 ? 150 : MOVE_DURATION;
+    const t = Math.max(0, Math.min(1, ((now || Date.now()) - startedAt) / duration));
     const eased = 1 - Math.pow(1 - t, 3);
-    game.pos = { x: from.x + (to.x - from.x) * eased, y: from.y + (to.y - from.y) * eased };
+    game.pos = mapTravelPoint(from, to, eased);
     game.moveTarget.progress = t;
+    presentation.progress = eased;
+    renderScheduler.invalidate();
     if (t >= 1) finish();
     else frame(tick);
   };
-  activeMove = { seq, from: { li: fromLi, idx: fromIdx }, to: { li: toLi, idx: toIdx }, startedAt };
+  activeMove = { seq, from: { li: fromLi, idx: fromIdx }, to: { li: toLi, idx: toIdx }, startedAt, cancel: isCurrent };
   game.moveTarget = { li: toLi, idx: toIdx, seq, progress: 0, moving: true };
   game.state = 'moving';
+  presentation.segmentIndex = segmentIndex + 1;
+  presentation.progress = 0;
   UI.refresh(game);
   renderScheduler.invalidate();
   game.pos = { ...from };
@@ -94,6 +144,8 @@ export function moveTo(toLi, toIdx) {
   watchdog = setTimeout(finish, MOVE_DURATION + 700);
   if (moveUsesReducedMotion() || isTurbo()) finish();
   else frame(tick);
+  };
+  step(0);
   return true;
 }
 
@@ -119,9 +171,15 @@ function resolveCell() {
   game.visited = game.visited || {};
   const vKey = game.layerIdx + ',' + idx;
   const consumed = !!game.visited[vKey];
+  // The actual entry cell owns its pending supply; old saves have no synthetic reward.
+  const supply = entrySupplyAt(game);
+  if (supply && supply.taken.length < supply.cardIds.length) { UI.beginRoom(); openEntrySupply(); return; }
+  if (def?.type === 'fire' && game.nodeRewards?.[vKey]?.type === 'fire' && !game.nodeRewards[vKey].continued) {
+    UI.beginRoom(); openFireRest(() => finishInstant()); return;
+  }
   if (consumed && !door && def && (def.type === 'battle' || def.type === 'shop' || INSTANT_TYPES.includes(def.type))) {
     UI.log('[[icon:exit]] 该节点已完成结算，现已变为普通节点', 'dim');
-    finishInstant();
+    UI.beginRoom(); openSafeNode();
     return;
   }
   // 首脑格：编组/战斗前不锁定——放弃编组可再来；击败首脑由战斗收尾写 visited（bag.js）。
@@ -129,17 +187,19 @@ function resolveCell() {
   //（离开未击败的首脑格也会被 moveTo 写 visited，不能据此锁格）。
   if (def && def.type === 'boss' && game.bossKilled) {
     UI.log('[[icon:skull]] 首脑已被击破，巢穴已经空了', 'dim');
-    finishInstant();
+    UI.beginRoom(); openSafeNode();
     return;
   }
 
   // 杀戮尖塔式房间切换：从落脚开始到本格全部结算完成，地图始终由全屏房间页取代。
   UI.beginRoom();
+  game.state = 'modal';
 
-  // 1) 战斗格：先给出短暂接敌过场，再进入遭遇战。
+  // 1) 战斗格：独立接敌页确认后直接进入战场，不重复播放接敌幕。
   if (def && def.type === 'battle') {
-    const encounter = buildEncounter(game.layerIdx);
-    enterNode('battle', () => openBattleCell(def, encounter));
+    openNodeDecision({ tone:'battle', title:'接敌', sub:'前方传来敌人的动静。准备好随身卡牌，再决定是否交战。',
+      act:'nodeBattleEnter', label:'进入战斗', detail:'确认后进入本层遭遇战',
+      run:() => { const encounter = buildEncounter(game.layerIdx); openBattleCell(def, encounter); } });
     return;
   }
 
@@ -161,18 +221,14 @@ function resolveCell() {
 
   // 3) 节点类：门 / 祭坛 / 首脑 / 紧急撤离 / 商店统一经过短过场。
   if (door) { enterNode('door', () => openDoorModal(door, def)); return; }
-  if (def && def.type === 'door') { finishInstant(); return; }
+  if (def && def.type === 'door') { openSafeNode(); return; }
   if (def && def.type === 'altar') { enterNode('altar', openAltarRitual); return; }
-  if (def && def.type === 'boss') { enterNode('boss', openBossGate); return; }
+  if (def && def.type === 'boss') { openBossGate(); return; }
   if (def && (def.type === 'emergencyExit' || def.type === 'extraction')) { enterNode('emergencyExit', openEmergencyModal); return; }
   if (def && def.type === 'shop') { enterNode('shop', () => openShop('cell:' + game.layerIdx + ',' + game.trackPos)); return; }
 
   // 4) 空白安全格（无任何事件）：给完整提示页（2026-09-06 留言）
-  if (!def) { openBlankSafePage(); return; }
-
-  game.state = 'idle';
-  saveGame();
-  UI.refresh(game);
+  openSafeNode();
 }
 
 // 物资格（2026-09-16 Item 17 定版）：按爆率（与商店/宝箱同源权重）刷新 2 张随机资源卡，二选一带走
@@ -187,27 +243,56 @@ function openResourcePick(done) {
     for (const c of avail) { roll -= (weights[c.rarity] || 2); if (roll <= 0) return c; }
     return avail[avail.length - 1] || null;
   };
-  const first = pickOne(null);
-  const second = first ? pickOne(new Set([first.name])) : null;
-  const cards = [first, second].filter(Boolean);
-  if (!cards.length) { done(false); return; }
-  game.state = 'modal';
-  nodeShell({
-    tone: 'event', asset: 'scene-event-airdrop', icon: '[[icon:gem]]', title: '物资投放点',
-    sub: '信标亮起，封存物资正在展开——选择 1 张资源卡带走。',
-    body: `<div class="bt-hand event-choice-hand">${cards.map((c, i) => `
-      <button type="button" class="bt-card event-choice-card" data-act="resPick${i}" aria-label="带走 ${escAttr(c.name)}">
-        ${SDT.Cards.cardHTML(c, 'sm')}
-      </button>`).join('')}</div><p class="loot-footer-note">领取后，本物资点会变为普通节点。</p>`,
-    foot: '<button class="ov-btn" data-act="resSkip">暂不领取，离开投放点</button>',
+  const record = resourceRewardAt(game, () => {
+    const first = pickOne(null);
+    return [first, first ? pickOne(new Set([first.name])) : null];
   });
-  cards.forEach((c, i) => UI.act('resPick' + i, () => {
-    if (!grantEventCard(c)) return;
+  const cards = (record?.cardIds || []).map(id => SDT.Cards.all().find(card => card.id === id));
+  if (!cards.length) { done(false); return; }
+  if (record.taken !== null) { done(true); return; }
+  game.state = 'modal';
+  saveGame();
+  let active;
+  const take = i => {
+    if (!active() || !claimResourceReward(record, i, id => grantEventCard(SDT.Cards.all().find(card => card.id === id), { silent:true }))) return;
+    document.getElementById('cardZoom')?._closeCardZoom?.(true);
+    setBagReturnHook(null);
     UI.hideOverlay();
-    UI.log(`[[icon:gem]] 物资格：带走了【<b>${esc(c.name)}</b>】`, 'loot');
+    UI.log(`[[icon:gem]] 物资格：带走了【<b>${esc(cards[i].name)}</b>】`, 'loot');
     done(true);
-  }));
-  UI.act('resSkip', () => { UI.hideOverlay(); done(false); });
+  };
+  UI.showOverlay('', rewardSceneHTML({ className:'reward-v14 resource-reward-scene', title:'物资投放点', source:'资源补给', count:cards.length,
+    cards:cards.map((card, i) => card ? `<article class="reward-unit"><button class="reward-card" data-act="resRead" data-i="${i}" aria-label="放大查看${escAttr(card.name)}">${SDT.Cards.cardHTML(card)}</button><button class="reward-claim" data-act="resTake" data-i="${i}">收下</button></article>` : '<p>该物资暂不可用</p>').join(''),
+    actions:rewardExitHTML('resSkip'), footer:'<button class="reward-bag" data-act="resBag">整理背包</button><span class="reward-notice">两张资源卡中选择一张，未领取时保留在此处</span>',
+  }), 'page');
+  active = nodeActionBinding(game, UI, 'resSkip');
+  setBagReturnHook(() => openResourcePick(done));
+  UI.act('resRead', data => {
+    const i = Number(data.i), card = cards[i];
+    if (!active() || !card) return;
+    UI.showCardZoom(card, { hideNote:true, presentation:'expedition', footer:`<button class="ov-btn ok" data-act="resTake" data-i="${i}">收下</button>` });
+  });
+  UI.act('resTake', data => take(Number(data.i)));
+  UI.act('resBag', () => { if (active()) document.getElementById('bagBtnFloat')?.click(); });
+  UI.act('resSkip', () => { if (!active()) return; setBagReturnHook(null); UI.hideOverlay(); done(false); });
+}
+
+function openNodeDecision(spec) {
+  game.state = 'modal';
+  nodeShell({ tone:spec.tone, title:spec.title, sub:spec.sub,
+    body:nodeOpt(spec.act, spec.label, spec.detail), foot:'<button class="ov-btn" data-act="nodeDecisionLeave">返回地图</button>' });
+  const active = nodeActionBinding(game, UI, spec.act);
+  let decided = false;
+  setBagReturnHook(() => openNodeDecision(spec));
+  UI.act('nodeDecisionLeave', () => { if (!active() || decided) return; decided = true; setBagReturnHook(null); UI.hideOverlay(); finishInstant(); });
+  UI.act(spec.act, () => { if (!active() || decided) return; decided = true; setBagReturnHook(null); UI.hideOverlay(); spec.run(); });
+}
+
+function openSafeNode() {
+  openBlankSafePage();
+  const active = nodeActionBinding(game, UI, 'blankSafeDone');
+  setBagReturnHook(openSafeNode);
+  UI.act('blankSafeDone', () => { if (!active()) return; setBagReturnHook(null); UI.hideOverlay(); finishInstant(); });
 }
 
 // 空白安全节点提示页：明确告诉玩家这格无事发生（背景图后续再补）
@@ -231,7 +316,9 @@ function runInstant(def, after) {
       });
     } break;
     // 物资格（露天宝箱格，2026-09-09 玩法定版）：70% 小宝箱（随机 1 张）/ 30% 中宝箱（3 选 1）
-    case 'chest': openChestsOnCell([Random.random('loot') < 0.7 ? { kind: 'small' } : { kind: 'medium' }], null, { resourceOnly: true, consumeNode: true }); break;
+    case 'chest': openNodeDecision({ tone:'pickup', title:'封存物资', sub:'一只封好的物资箱留在风雪中。你可以搜索物资，或先返回地图。',
+      act:'nodeChestSearch', label:'搜索物资', detail:'打开物资箱并查看可领取的卡牌',
+      run:() => openChestsOnCell([Random.random('loot') < 0.7 ? { kind:'small' } : { kind:'medium' }], null, { resourceOnly:true, consumeNode:true }) }); break;
     // 物资格（2026-09-16 Item 17 定版）：按爆率刷新 2 张随机资源卡，二选一带走
     case 'resource': openResourcePick(done); break;
     case 'rations': {
@@ -252,7 +339,7 @@ function runInstant(def, after) {
       });
     } break;
     case 'fire':
-      openFireRest();   // 火堆：回 10 血 + 消耗口袋复原 2 张 + 30% 额外职业卡
+      openFireRest(done);   // 数值沿用原火堆规则，确认休整才执行。
       break;
     case 'event': {
       // 事件页开着时不得回 idle：同步 done() 会把 modal 覆盖成 idle，玩家此时可移动、
@@ -268,6 +355,7 @@ function runInstant(def, after) {
 // 事件卡池 = 卡牌库中类型「事件」的卡；卡牌库无事件卡时退回旧随机事件表。
 // 导出供开发者节点测试面板（game.run.js devJumpNode）直接进事件页，玩法口径与事件格一致。
 export async function runEventDeck() {
+  if (!await enterNode('event', () => true)) return;
   if (await tryLastLampEvent()) return;
   const deck = SDT.Cards.all().filter(c => c.type === '事件');
   if (!deck.length) {
@@ -317,7 +405,7 @@ function renderLastLampResult(record, text, binding, saveError = '') {
     sub: esc(text || lastLampResultText(record.segmentId, record.choiceId)),
     body: `${record.mementoId ? `<p><b>${record.mementoId === 'last_lamp_open_beacon' ? '北门远灯记录' : '遮光近照记录'}</b>已写入基地的见闻纪念。故事记录不提供地图或战力效果。</p>` : '<p>本段见闻已永久记录；下一次探索可继续这条线索。</p>'}
       ${saveError ? `<p class="warn">${esc(saveError)}</p>` : ''}
-      <button class="evt-opt ok" data-act="lastLampFinish"><b>${saveError ? '重试保存节点' : '记下并离开'}</b><span>故事记录已经保存，不会重复推进</span></button>`,
+      <button class="evt-opt ok" data-act="lastLampFinish"><b>${saveError ? '重试保存节点' : '记下并离开'}</b></button>`,
   });
   setBagReturnHook(() => { if (currentLastLampPage(binding).ok) renderLastLampResult(record, text, binding, saveError); });
   UI.act('lastLampFinish', () => {
@@ -506,6 +594,7 @@ function uniqueEventPicks(pool, count) {
 }
 
 function closeEventFlow() {
+  setBagReturnHook(null);
   UI.hideOverlay();
   game.state = 'idle';
   saveGame();

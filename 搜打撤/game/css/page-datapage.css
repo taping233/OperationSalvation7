@@ -12,7 +12,7 @@
 #overlay .pg.data-tuned .data-pg-head h2 {
   display: block; position: relative; margin: 0;
   padding-left: 14px;
-  font-size: clamp(17px, 1.7vw, 21px); letter-spacing: 6px; color: #f4f4f4;
+  font-size: clamp(17px, calc(var(--game-layout-width, 100vw) * 0.017), 21px); letter-spacing: 6px; color: #f4f4f4;
   text-shadow: 0 0 16px rgba(16,18,19,.8), 0 0 3px rgba(230,203,118,.28);
 }
 #overlay .pg.data-tuned .data-pg-head h2::before {
@@ -66,15 +66,15 @@
   grid-column: 1; grid-row: 1; align-self: start; justify-self: start;
   position: sticky; top: 25px; left: auto; z-index: 5; margin-top: 25px;
   width: 104px; height: 46px; display: flex; align-items: center; justify-content: center; gap: 9px;
-  background: #2a2d30; border: 0; color: #f1f0ee; box-shadow: 3px 3px 0 #a3a5a7;
-  clip-path: polygon(9px 0, 100% 0, calc(100% - 9px) 100%, 0 100%);
+  background: transparent; border: 0; color: var(--data-ink); box-shadow: none;
+  clip-path: none;
 }
 #overlay .pg.data-tuned .ak-back-tl::after {
   content: '返回'; display: block; position: static; inset: auto;
   width: auto; height: auto; border: 0; border-radius: 0; font: 600 14px/1.3 var(--font-ui);
 }
 #overlay .pg.data-tuned .ak-back-tl svg { width: 21px; height: 21px; }
-#overlay .pg.data-tuned .ak-back-tl:hover { background: #3c4045; color: #f1f0ee; box-shadow: 3px 3px 0 #a3a5a7; }
+#overlay .pg.data-tuned .ak-back-tl:hover { background: transparent; color: var(--data-muted); box-shadow: none; }
 #overlay .pg.data-tuned .doom-stats { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
 #overlay .pg.data-tuned .doom-stat {
   position: relative; padding: 16px 15px 17px; text-align: left;
@@ -158,12 +158,3 @@
 #overlay .pg.data-tuned::-webkit-scrollbar { width: 7px; }
 #overlay .pg.data-tuned::-webkit-scrollbar-track { background: #e2e2e3; }
 #overlay .pg.data-tuned::-webkit-scrollbar-thumb { background: #959799; border-radius: 0; }
-@media (max-width: 1050px) {
-  #overlay .pg.data-tuned .doom-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  #overlay .pg.data-tuned .dt-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  #overlay .pg.data-tuned .dt-grid .hub-card:nth-child(2) { grid-column: auto; }
-}
-@media (max-width: 760px) {
-  #overlay .pg.data-tuned .dt-grid { grid-template-columns: minmax(0, 1fr); }
-  #overlay .pg.data-tuned .dt-grid .hub-card { grid-column: auto; }
-}

@@ -1,5 +1,6 @@
 // Shared, presentation-only labels for map nodes and expedition routes.
 export const NODE_INFO = {
+  blank: ['空白节点', '内容已消耗 · 仍可通行', 'map', 'quiet'],
   battle: ['遭遇战', '准备迎敌 · 胜利后搜刮', 'swords', 'danger'],
   boss: ['首脑', '终局挑战 · 检查随身卡牌', 'skull', 'danger'],
   chest: ['物资点', '搜寻卡牌与补给', 'gem', 'gold'],

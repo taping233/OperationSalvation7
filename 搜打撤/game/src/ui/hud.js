@@ -3,7 +3,7 @@
  * （09-25 自 ui.js 拆出，方法包由 ui.js 组装）。
  * 方法均以 UI.method() 形式调用，内部一律走 this 访问壳上的 el 与各 _last* 缓存。
  */
-import { storeSet } from '../core/storage.js';
+import { storeGet } from '../core/storage.js';
 import { renderExpeditionPanel } from '../run/expedition.view.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 /** window.SDT 门面的 hud 消费切面：仅声明本文件触达的成员（整体形状由 main.js 装配保证）。
@@ -145,10 +145,9 @@ export const hudMethods = {
     const hh = String(t.getHours()).padStart(2, '0'), mm = String(t.getMinutes()).padStart(2, '0'), ss = String(t.getSeconds()).padStart(2, '0');
     div.title = `${hh}:${mm}:${ss}`;   // 时间戳收进悬浮提示，减少视觉拥挤
     div.innerHTML = SDT.Icons.rich(msg);
-    // U10（2026-09-19 走查）：空面板只占位不干活——首条日志进来时自动展开
+    // 首条日志遵循玩家显式开关；没有偏好时收起历史，不抢地图焦点。
     if (this.el.logPanel && this.el.log.children.length === 0) {
-      this.el.logPanel.classList.remove('collapsed');
-      storeSet('sdt-log-collapsed', '0');
+      this.el.logPanel.classList.toggle('collapsed', storeGet('sdt-log-collapsed') !== '0');
     }
     this.el.log.prepend(div);
     while (this.el.log.children.length > 60) /** @type {ChildNode} */ (this.el.log.lastChild).remove();
@@ -158,10 +157,9 @@ export const hudMethods = {
   clearLog() {
     if (!this.el.log) return;
     this.el.log.innerHTML = '';
-    // U10：清空后回折叠态（U10 空态收起，避免开局左下大块空面板）
+    // 清空内容也沿用显式开关，不覆盖持久偏好。
     if (this.el.logPanel) {
-      this.el.logPanel.classList.add('collapsed');
-      storeSet('sdt-log-collapsed', '1');
+      this.el.logPanel.classList.toggle('collapsed', storeGet('sdt-log-collapsed') !== '0');
     }
   },
 
@@ -175,7 +173,7 @@ export const hudMethods = {
   },
 
   /** @this {HudThis} */
-  hideTooltip() { this.el.tooltip.hidden = true; },
+  hideTooltip() { if (this.el.tooltip) this.el.tooltip.hidden = true; },
 };
 
 /* W1-02（2026-09-27 R2）：全局浮动背包键反 inert 守卫。

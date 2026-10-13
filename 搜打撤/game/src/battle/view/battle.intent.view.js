@@ -4,7 +4,11 @@ function intentViewModel(intent) {
   if (!intent) return null;
   const intents = Array.isArray(intent) ? intent : [intent];
   return intents.filter(Boolean).map((item) => {
-    const damage = Number.isFinite(Number(item.damage)) && Number(item.damage) > 0 ? Number(item.damage) : null;
+    // 0 攻击力仍是攻击预告；蓄力、防御等非伤害意图不显示误导性的 0 伤。
+    const numericDamage = item.damage == null || item.damage === '' ? NaN : Number(item.damage);
+    const hasAttackLabel = /攻击|双击/.test(String(item.label || ''));
+    const damage = Number.isFinite(numericDamage) && (numericDamage > 0 || (numericDamage === 0 && hasAttackLabel))
+      ? numericDamage : null;
     const hits = Number.isFinite(Number(item.hits)) && Number(item.hits) > 1 ? Math.floor(Number(item.hits)) : 1;
     return {
       icon: String(item.icon || ''),
@@ -20,9 +24,10 @@ function intentViewModel(intent) {
 }
 
 function intentSummary(intent) {
-  return intentViewModel(intent).map(item => {
-    if (item.damage == null) return item.label;
-    return `${item.label} · ${item.damage}${item.hits > 1 ? ` ×${item.hits}（共${item.totalDamage}）` : ''}`;
+  return (intentViewModel(intent) || []).map(item => {
+    const damage = item.damage == null ? '' : ` · ${item.damage}${item.hits > 1 ? ` ×${item.hits}（共${item.totalDamage}）` : ''}`;
+    const bleed = item.bleedBonus ? ` · 流血 ${item.bleedBonus} 层` : '';
+    return `${item.label}${damage}${bleed}`;
   }).join(' / ');
 }
 

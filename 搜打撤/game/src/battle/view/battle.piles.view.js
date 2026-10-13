@@ -3,7 +3,8 @@
 function renderPileBadge({ className = '', dataAct = '', title = '', count = 0, cardBackHTML = '', suffix = '', cap = '' }, escAttr) {
   const safeTitle = typeof escAttr === 'function' ? escAttr(title) : title;
   // 09-25 二波美术：数值后补小字归属标签（牌库/弃牌/消耗），让三徽章不再靠猜
-  return `<span${dataAct ? ` data-act="${dataAct}"` : ''} class="bt-pile${className ? ` ${className}` : ''}" title="${safeTitle}"><span class="bt-pilecard">${cardBackHTML}</span>${suffix}<b>${count}</b>${cap ? `<i class="bt-pile-cap">${cap}</i>` : ''}</span>`;
+  const tag = dataAct ? 'button' : 'span';
+  return `<${tag}${dataAct ? ` type="button" data-act="${dataAct}" aria-label="${safeTitle}"` : ''} class="bt-pile${className ? ` ${className}` : ''}" title="${safeTitle}"><span class="bt-pilecard">${cardBackHTML}</span>${suffix}<b>${count}</b>${cap ? `<i class="bt-pile-cap">${cap}</i>` : ''}</${tag}>`;
 }
 
 function renderCombatPiles({ mode, drawCount, discardCount, graveCount, pileTip, cardBackHTML, escAttr }) {

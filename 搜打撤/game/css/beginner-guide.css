@@ -29,19 +29,7 @@
   margin: 0; color: #26292c; font: 700 34px/1.3 var(--font-ui);
   letter-spacing: .12em; text-shadow: none;
 }
-.beginner-guide .bg-header-note { margin: 0; color: var(--bg-muted); font-size: 13px; letter-spacing: .06em; }
-#overlay .beginner-guide .bg-back {
-  position: absolute; top: 25px; left: 29px; width: 104px; height: 46px;
-  display: flex; align-items: center; justify-content: center; gap: 9px;
-  background: #2a2d30; border: 0; color: #f1f0ee; box-shadow: 3px 3px 0 #a3a5a7;
-  clip-path: polygon(9px 0, 100% 0, calc(100% - 9px) 100%, 0 100%);
-}
-#overlay .beginner-guide .bg-back::after {
-  content: '返回'; display: block; position: static; inset: auto; border: 0;
-  border-radius: 0; width: auto; height: auto; font: 600 14px/1.3 var(--font-ui);
-}
-#overlay .beginner-guide .bg-back svg { width: 21px; height: 21px; }
-#overlay .beginner-guide .bg-back:hover { background: #3c4045; color: #f4f2ef; box-shadow: 3px 3px 0 #a3a5a7; }
+#overlay:has(.beginner-guide) #ovCloseX { display: none !important; }
 .beginner-guide .bg-layout {
   width: 100%; flex: 1; min-height: 0; margin: 0; padding: 24px 30px;
   display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 28px;
@@ -104,21 +92,4 @@
 .beginner-guide .bg-page-status small { grid-column: 1 / -1; margin-top: 5px; color: #75797c; font: 11px/1.3 var(--font-ui); }
 .beginner-guide :is(button, kbd):focus-visible { outline: 2px solid #848a8e; outline-offset: 3px; }
 .beginner-guide .bg-empty { margin: auto; color: var(--bg-muted); }
-@media (max-width: 1000px) {
-  .beginner-guide .bg-layout { grid-template-columns: 170px minmax(0, 1fr); gap: 20px; padding: 20px; }
-  .beginner-guide .bg-nav { padding-right: 12px; }
-  .beginner-guide .bg-nav-title { font-size: 14px; }
-  .beginner-guide .bg-content { gap: 16px; }
-  .beginner-guide .bg-step { padding: 10px; }
-}
-@media (max-width: 760px) {
-  .beginner-guide .bg-header-note { display: none; }
-  .beginner-guide .bg-layout { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); padding: 16px; gap: 15px; }
-  .beginner-guide .bg-nav { flex-direction: row; overflow-x: auto; padding: 0 0 5px; border: 0; }
-  .beginner-guide .bg-nav::before { display: none; }
-  .beginner-guide .bg-nav-item { flex: none; width: auto; min-height: 42px; }
-  .beginner-guide .bg-content { grid-template-columns: 1fr; overflow-y: auto; }
-  .beginner-guide .bg-illustration { min-height: 190px; }
-  .beginner-guide .bg-copy { overflow: visible; }
-}
 @media (prefers-reduced-motion: reduce) { .beginner-guide * { transition: none; } }

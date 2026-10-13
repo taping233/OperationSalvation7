@@ -2,8 +2,12 @@ import SDT from '../../core/sdt-facade.js';
 import { assetUrl } from '../../core/asset-url.js';
 import { on as busOn } from '../../core/event-bus.js';
 import { rect as uiRect, scale as uiScale } from '../../ui/ui-scale.js';
-import { demoMs } from '../runtime/battle.pace.js';
+import { demoMs, getPace } from '../runtime/battle.pace.js';
 import { Random } from '../../core/random.js';
+import { WU_FRAME_SEQUENCES, WU_FRAME_SIZE, wuTimeline } from './battle.frame-catalog.js';
+import { CHANGWUYU_FRAME_SEQUENCES, CHANGWUYU_FRAME_SIZE, changwuyuTimeline } from './battle.frame-catalog-changwuyu.js';
+import { THREE_ROLE_FRAME_SEQUENCES, THREE_ROLE_FRAME_SIZE, threeRoleTimeline } from './battle.frame-catalog-three-role.js';
+import { registerDefeatPresenter } from '../core/battle.presentation.js';
 
 // ---------- 战斗单位序列帧播放器（批次D：Pixi 材质层） ----------
 // 定调（老板 2026-09-12）：动画路线 = Pixi 材质层 + 序列帧，跳过 Spine；敌人本轮不上序列帧；
@@ -11,9 +15,7 @@ import { Random } from '../../core/random.js';
 // 不再假设固定 6 帧）。程序化位移（受击抖动 fx-hit-self / 回合沉浮）留在 DOM
 // 常驻节点上走合成器，本模块只负责「立绘内容」的帧切换——每 tick 读 figure 的
 // getBoundingClientRect（含 transform）跟随，抖动/沉浮时序列帧内容跟着 DOM 一起动。
-// 帧资产：assets/portraits/frames/<角色>/<动作>.webp（基准帧）+ <动作>-1..N.webp
-// （GPT 追加帧；idle 另有 idle-breathe）。按显式动作清单加载，实际成功几帧播几帧，
-// SEQ_MS[动作] 总时长均分到各帧——帧数变化不用改代码。
+// 五位角色：sprite-v1 去重帧库，采用原稿时间步和固定画布/脚底；死亡末帧保持到结算切页。
 // 角色无帧集 / 纹理未就绪 / 加载失败：不隐藏原 img，静态立绘兜底。
 // 省电策略（三铁律：不出画面不渲染）：静止期 renderer 停止，低频轮询 rect；rect 变化或
 // 切帧才拉起渲染。document.hidden 时整体暂停。
@@ -21,31 +23,16 @@ import { Random } from '../../core/random.js';
 
 // 保留重复字节的帧槽与原有顺序；清单只避免请求未交付文件，不改变动作节奏。
 const FRAME_SEQUENCES = {
-  wu: {
-    idle: ['idle', 'idle-1', 'idle-breathe'],
-    'atk-wind': ['atk-wind', 'atk-wind-1', 'atk-wind-2'],
-    'atk-hit': ['atk-hit', 'atk-hit-1'],
-    hurt: ['hurt', 'hurt-1'], cast: ['cast', 'cast-1'],
-  },
-  changwuyu: {
-    idle: ['idle', 'idle-1', 'idle-breathe'],
-    'atk-wind': ['atk-wind', 'atk-wind-1'],
-    'atk-hit': ['atk-hit', 'atk-hit-1'],
-    hurt: ['hurt', 'hurt-1'], cast: ['cast', 'cast-1', 'cast-2'],
-  },
-  baita: {
-    idle: ['idle', 'idle-1', 'idle-breathe'],
-    'atk-wind': ['atk-wind', 'atk-wind-1'],
-    'atk-hit': ['atk-hit', 'atk-hit-1'],
-    hurt: ['hurt', 'hurt-1'], cast: ['cast', 'cast-1', 'cast-2', 'cast-3', 'cast-4', 'cast-5'],
-  },
+  wu: WU_FRAME_SEQUENCES,
+  changwuyu: CHANGWUYU_FRAME_SEQUENCES,
+  ...THREE_ROLE_FRAME_SEQUENCES,
 };
 const HAS_FRAMES = new Set(Object.keys(FRAME_SEQUENCES));
+const fixedFrameRole = role => role === 'wu' || role === 'changwuyu' || Object.hasOwn(THREE_ROLE_FRAME_SEQUENCES, role);
 const FRAME_H = 760, FRAME_W = 512;        // 烘焙画布尺寸
 const GEO_TUNE = 1.02;                     // 人物等高对齐静态立绘的视觉微调（沿用旧画布口径）
 // 帧节奏：每动作总时长（ms），均分到实际存在的帧上——攻击快、施法舒展、呼吸慢循环
 const SEQ_MS = { idle: 2900, 'atk-wind': 320, 'atk-hit': 280, hurt: 420, cast: 800 };
-const ACTIONS = Object.keys(SEQ_MS);
 const LOAD_BATCH = 3;                      // 限制同时解码的纹理数，仍按候选顺序登记帧
 const POLL_MS = 200;                       // 静止期 rect 轮询间隔
 // 播放语义：atk = 起手连命中；cast / hurt 单段；idle 常驻循环
@@ -56,7 +43,7 @@ const ACT_SEQS = {
 };
 
 let appPromise = null;      // { app, host }
-let texSets = new Map();    // role -> Promise<{ set, seqs }> | null
+let texSets = new Map();    // role -> { ready, complete, cancelled, set, seqs, urls, boxes }
 let sprite = null;
 let emptyTexture = null;
 let cur = null;             // { role, fig, img, set, seqs, play, fi, tNext, lastRect }
@@ -71,16 +58,17 @@ function releaseTextureSets() {
   if (releasePromise) return releasePromise;
   const entries = [...texSets];
   texSets.clear();
+  for (const [, record] of entries) record.cancelled = true;
   if (!entries.length) return Promise.resolve();
 
   const pending = (async () => {
     const { Assets, Texture } = await import('pixi.js');
     // 宿主先隐藏，再清掉 sprite 的 GPU 引用并卸载 URL；新 attach 等释放完成。
     if (sprite) sprite.texture = Texture.EMPTY;
-    await Promise.all(entries.map(async ([, assetPromise]) => {
+    await Promise.all(entries.map(async ([, record]) => {
       try {
-        const loaded = await assetPromise;
-        for (const url of loaded?.urls || []) {
+        await record.complete;
+        for (const url of record.urls) {
           try { await Assets.unload(url); } catch { /* Pixi may already have evicted it. */ }
         }
       } catch { /* Failed probes have nothing to release. */ }
@@ -94,13 +82,13 @@ function releaseTextureSets() {
 
 async function evictOtherTextureSets(keepRole, Assets, Texture) {
   const evictions = [];
-  for (const [role, pending] of texSets) {
-    if (role === keepRole || cur?.role === role) continue;
+  for (const [role, record] of texSets) {
+    if (role === keepRole) continue;
     texSets.delete(role);
-    evictions.push(Promise.resolve(pending).then(async loaded => {
-      if (!loaded) return;
-      if (sprite && (!cur || cur.role !== role)) sprite.texture = Texture.EMPTY;
-      for (const url of loaded.urls || []) {
+    record.cancelled = true;
+    if (sprite && cur?.role === role) sprite.texture = Texture.EMPTY;
+    evictions.push(record.complete.then(async () => {
+      for (const url of record.urls) {
         try { await Assets.unload(url); } catch { /* 已被 Pixi 回收则忽略 */ }
       }
     }).catch(() => {}));
@@ -110,12 +98,8 @@ async function evictOtherTextureSets(keepRole, Assets, Texture) {
 
 // 保留原装载优先级：动作依 ACTIONS 排列，idle-breathe 最后加载。
 function candidateNames(role) {
-  const names = [];
-  for (const a of ACTIONS) {
-    names.push(...FRAME_SEQUENCES[role][a].filter(name => name !== 'idle-breathe'));
-  }
-  names.push('idle-breathe');
-  return names;
+  const names = Object.values(FRAME_SEQUENCES[role]).flat();
+  return [...new Set([...names.filter(name => name !== 'idle-breathe'), ...names.filter(name => name === 'idle-breathe')])];
 }
 
 function reduceMotion() {
@@ -215,19 +199,29 @@ function ensureApp() {
 }
 
 function loadSet(role) {
-  if (texSets.has(role)) return texSets.get(role);
+  if (texSets.has(role)) return texSets.get(role).ready;
   const perfProbeStarted = import.meta.env.DEV && new URLSearchParams(location.search).has('perfProbe')
     ? performance.now() : 0;
-  const p = (async () => {
+  let resolveReady;
+  const record = { set: new Map(), boxes: new Map(), seqs: new Map(), urls: [], cancelled: false,
+    ready: new Promise(resolve => { resolveReady = resolve; }), complete: null };
+  // 新角色在同步段取消旧任务，避免初始化期间两个角色互等卸载。
+  for (const [otherRole, other] of texSets) if (otherRole !== role) other.cancelled = true;
+  texSets.set(role, record);
+  const refreshSequences = () => {
+    for (const [action, names] of Object.entries(FRAME_SEQUENCES[role])) {
+      const frames = names.filter(name => record.set.has(name));
+      if (frames.length) record.seqs.set(action, frames);
+    }
+  };
+  record.complete = (async () => {
     const rt = await ensureApp();
-    if (!rt) return null;
+    if (!rt || record.cancelled) return;
     const { Assets, Texture } = await import('pixi.js');
-    // 序列帧纹理是 GPU/解码内存的大头（当前三套合计约 57.9MiB）。只保留最近
+    // 序列帧纹理是 GPU/解码内存的大头。只保留最近
     // 使用角色；切换角色时卸载旧套，避免长局把所有角色纹理永久累积。
     await evictOtherTextureSets(role, Assets, Texture);
-    const set = new Map();
-    const boxes = new Map();
-    const urls = [];
+    if (record.cancelled) return;
     const loadCandidate = async name => {
       const url = assetUrl(`assets/portraits/frames/${role}/${name}.webp`);
       // 包围盒测量走独立 fetch（与 Assets.load 同 URL 命中缓存）：不依赖 Pixi 纹理内部
@@ -242,42 +236,42 @@ function loadSet(role) {
       })().catch(() => null);
       try {
         const tex = await Assets.load(url);
+        record.urls.push(url); // 取消期间完成的请求也必须纳入卸载。
         return { name, url, tex, box: await boxP };
       } catch { return null; } // 探测：没这帧就跳过
     };
-    const candidates = candidateNames(role);
-    for (let i = 0; i < candidates.length; i += LOAD_BATCH) {
+    const add = entry => {
+      if (!entry || record.cancelled) return;
+      record.set.set(entry.name, entry.tex);
+      record.boxes.set(entry.name, entry.box);
+    };
+    // 首个可用 idle 就是入场所需帧；剩余纹理不阻塞 attach 的首画面提交。
+    const triedIdle = new Set();
+    for (const name of FRAME_SEQUENCES[role].idle) {
+      if (record.cancelled) return;
+      if (triedIdle.has(name)) continue;
+      triedIdle.add(name);
+      add(await loadCandidate(name));
+      if (record.set.size) break;
+    }
+    if (record.cancelled || !record.set.size) return;
+    refreshSequences();
+    resolveReady(record);
+    const candidates = candidateNames(role).filter(name => !triedIdle.has(name));
+    for (let i = 0; i < candidates.length && !record.cancelled; i += LOAD_BATCH) {
       const batch = await Promise.all(candidates.slice(i, i + LOAD_BATCH).map(loadCandidate));
-      for (const entry of batch) {
-        if (!entry) continue;
-        set.set(entry.name, entry.tex);
-        boxes.set(entry.name, entry.box);
-        urls.push(entry.url);
-      }
+      batch.forEach(add);
+      if (!record.cancelled) refreshSequences();
     }
-    // 每动作的实际帧序列 = 候选名里加载成功的按序集合
-    const seqs = new Map();
-    for (const a of ACTIONS) {
-      const frames = FRAME_SEQUENCES[role][a].filter(n => set.has(n));
-      if (frames.length) seqs.set(a, frames);
-    }
-    if (!seqs.get('idle')) {
-      await Promise.all(urls.map(async url => {
-        try { await Assets.unload(url); } catch { /* Pixi may already have evicted it. */ }
-      }));
-      return null;
-    }
-    return { set, seqs, urls, boxes };
-  })().catch(() => null);
-  if (perfProbeStarted) p.then(result => {
+  })().catch(() => {}).finally(() => resolveReady(null));
+  if (perfProbeStarted) record.ready.then(result => {
     const ended = performance.now();
     try { performance.measure('sdt:battle-frames-' + role, { start: perfProbeStarted, end: ended }); }
     catch { /* 老浏览器不支持 start/end 对象时只输出控制台测量。 */ }
     console.info('[vite-perf-frames]', JSON.stringify({ role, durationMs: +(ended - perfProbeStarted).toFixed(1),
       frames: result?.set.size || 0, ready: !!result }));
   });
-  texSets.set(role, p);
-  return p;
+  return record.ready;
 }
 
 function isLiveBattleFigure(body, fig) {
@@ -319,16 +313,20 @@ function layout(preRead) {
   // 人物等高锚定：「人物实际显示高」= 静态立绘显示高 × 立绘人物占比 × GEO_TUNE，
   // 帧间恒定；当前帧画布按人物包围盒反向放大（h = baseCharH × 760/人物高），
   // 人物脚底贴 img 底边（帧内脚底不在画布底时锚点相应上移）。
-  cur.baseCharH = r.height * cur.portraitFill * GEO_TUNE;
+  cur.baseCharH = r.height * cur.portraitFill * (fixedFrameRole(cur.role) ? 1 : GEO_TUNE);
   cur.imgBottom = r.top - cur.ovTop + r.height;
   cur.centerX = r.left - cur.ovLeft + r.width / 2;
   const box = cur.curBox;
-  if (!box || box.y1 <= box.y0) return;   // 无帧盒：保持上次几何（异常兜底）
-  const h = cur.baseCharH * (FRAME_H / (box.y1 - box.y0));
+  const size = cur.role === 'wu' ? WU_FRAME_SIZE : cur.role === 'changwuyu' ? CHANGWUYU_FRAME_SIZE
+    : Object.hasOwn(THREE_ROLE_FRAME_SEQUENCES, cur.role) ? THREE_ROLE_FRAME_SIZE : { width: FRAME_W, height: FRAME_H };
+  // 包围盒探测失败仍以实际帧画布绘制，不能把首帧承诺兑现成空人物。
+  const bounds = box && box.y1 > box.y0 ? box : { y0: 0, y1: size.height };
+  if (fixedFrameRole(cur.role)) cur.imgBottom = r.top - cur.ovTop + r.height * bounds.y1 / size.height;
+  const h = cur.baseCharH * (size.height / (bounds.y1 - bounds.y0));
   sprite.height = h;
-  sprite.width = h * (FRAME_W / FRAME_H);
+  sprite.width = h * (size.width / size.height);
   sprite.x = cur.centerX;
-  sprite.y = cur.imgBottom + (FRAME_H - box.y1) / FRAME_H * h;
+  sprite.y = cur.imgBottom + (size.height - bounds.y1) / size.height * h;
   cur.lastRect = [r.left, r.top, r.width, r.height];
 }
 
@@ -337,7 +335,10 @@ function applyFrame(name) {
   const used = cur.set.has(name) ? name : cur.fallback;          // 缺帧兜底：待机基准帧
   const tex = cur.set.get(used);
   if (!tex) return;
-  cur.curBox = (cur.boxes && cur.boxes.get(used)) || null;       // 盒跟实际贴的纹理走
+  // 已统一画布和脚底的角色始终用待机包围盒，避免倒地后被放大。
+  cur.curBox = (cur.boxes && cur.boxes.get(fixedFrameRole(cur.role) ? cur.fallback : used)) || null;
+  const host = document.getElementById('unitFrames');
+  if (host) host.dataset.frame = used;
   setTexture(tex);
   layout();
   wakeRenderer();
@@ -346,6 +347,14 @@ function applyFrame(name) {
 // 把一个触发动作展开成帧时间轴：{ list, dur, loop }（帧数按实际资产，总时长均分）
 function buildTimeline(trigger) {
   if (!cur) return null;
+  if (fixedFrameRole(cur.role)) {
+    const timeline = cur.role === 'wu' ? wuTimeline(trigger, getPace()) : cur.role === 'changwuyu'
+      ? changwuyuTimeline(trigger, getPace()) : threeRoleTimeline(cur.role, trigger, getPace());
+    if (!timeline) return null;
+    const available = timeline.list.map((name, index) => ({ name, ms: timeline.dur[index] }))
+      .filter(frame => cur.set.has(frame.name));
+    return available.length ? { ...timeline, list: available.map(frame => frame.name), dur: available.map(frame => frame.ms) } : null;
+  }
   const seqNames = trigger === 'idle' ? ['idle'] : ACT_SEQS[trigger] || [trigger];
   const list = [], dur = [];
   for (const a of seqNames) {
@@ -360,6 +369,9 @@ function playSeq(trigger, phase = 0) {
   const tl = buildTimeline(trigger);
   if (!tl || !cur) return false;
   cur.play = tl;
+  cur.action = trigger;
+  const host = document.getElementById('unitFrames');
+  if (host) { host.dataset.action = trigger; host.dataset.role = cur.role; }
   cur.fi = tl.loop ? Math.min(tl.list.length - 1, Math.floor(Math.max(0, phase) * tl.list.length)) : 0;
   applyFrame(tl.list[cur.fi]);
   cur.tNext = performance.now() + tl.dur[cur.fi];
@@ -371,9 +383,17 @@ function advance(now) {
   const tl = cur && cur.play;
   if (!tl || pausedAt) return;
   if (now < cur.tNext) return;
+  while (now >= cur.tNext) {
   cur.fi++;
   if (cur.fi >= tl.list.length) {
-    if (tl.loop) { cur.fi = 0; }               // 待机循环
+    if (tl.loop) { playSeq('idle'); return; }  // 下一个循环采用后台新补齐的待机帧。
+    else if (tl.hold) {
+      cur.fi = tl.list.length - 1;
+      cur.play = null;
+      cur.deathResolve?.();
+      cur.deathResolve = null;
+      return;
+    }
     else if (cur.resumeAfter) {
       const resume = cur.resumeAfter;
       cur.resumeAfter = null;
@@ -382,10 +402,11 @@ function advance(now) {
       applyFrame(cur.play.list[cur.fi]);
       cur.tNext = now + cur.play.dur[cur.fi];
       return;
-    } else { playSeq('idle', Random.random('fx')); return; } // 单次动作播完 → 随机相位待机循环
+    } else { playSeq('idle', fixedFrameRole(cur.role) ? 0 : Random.random('fx')); return; }
   }
   applyFrame(tl.list[cur.fi]);
-  cur.tNext = Math.max(cur.tNext, now) + tl.dur[cur.fi];
+  cur.tNext += tl.dur[cur.fi];
+  }
 }
 
 function tickLoop() {
@@ -435,38 +456,67 @@ function startLoop() {
 // ---------- 对外接口 ----------
 
 // 战斗渲染后调用：接管 #btSelf 的立绘为序列帧（无帧集/降动效时自动跳过）
-async function attach(body) {
+let pendingAttach = null;
+const imageOwners = new WeakMap();
+function figureRole(img) {
+  const key = /^battle-([a-z]+)$/.exec(String(img?.getAttribute('data-asset-key') || ''));
+  const source = /portraits\/battle\/([a-z]+?)\.webp/.exec(String(img?.getAttribute('src') || ''));
+  return key ? key[1] : source && source[1];
+}
+function attach(body) {
+  const fig = body?.querySelector('#btSelf .sts-figure');
+  const img = fig?.querySelector('img');
+  const role = figureRole(img);
+  if (pendingAttach?.body === body && pendingAttach.fig === fig && pendingAttach.img === img && pendingAttach.role === role) return pendingAttach.promise;
+  const request = { body, fig, img, role, promise: null };
+  pendingAttach = request;
+  request.promise = attachCurrent(body).finally(() => { if (pendingAttach === request) pendingAttach = null; });
+  return request.promise;
+}
+async function attachCurrent(body) {
   const token = ++lifecycle;
   wanted = true;
-  if (reduceMotion()) return;
   const fig = body && body.querySelector('#btSelf .sts-figure');
   const img = fig && fig.querySelector('img');
   if (!fig || !img) { hide(); return; }
-  const key = /^battle-([a-z]+)$/.exec(String(img.getAttribute('data-asset-key') || ''));
-  const m = /portraits\/battle\/([a-z]+?)\.webp/.exec(String(img.getAttribute('src') || ''));
-  const role = key ? key[1] : m && m[1];
+  const role = figureRole(img);
   if (!role || !HAS_FRAMES.has(role)) { hide(); return; }
+  if (fixedFrameRole(role)) {
+    // 统一静态兜底与序列帧，并保留原玩家槽位的立绘高度。
+    fig.style.aspectRatio = '512 / 760';
+    img.setAttribute('data-asset-key', `battle-${role}`);
+    img.style.position = 'absolute'; img.style.height = '100%'; img.style.width = 'auto';
+    img.style.left = '50%'; img.style.translate = '-50% 0';
+    const source = assetUrl(`assets/portraits/frames/${role}/sprite-v1/neutral.webp`);
+    if (img.getAttribute('src') !== source) img.setAttribute('src', source);
+  }
+  if (reduceMotion()) { hide(); return; }
   // 确认有帧集后立刻藏静态 img：纹理异步装载期间静态立绘会露一脸、就绪后跳切序列帧
   // （老板 09-20 实机反馈首次进场「闪一下」）。visibility 只藏内容不塌布局，
   // 装载失败/战斗已结束的原路恢复显示，静态立绘兜底不受影响。
   img.style.visibility = 'hidden';
+  imageOwners.set(img, token);
+  const restoreStatic = () => { if (imageOwners.get(img) === token) { img.style.visibility = ''; imageOwners.delete(img); } };
   armBattleEndHide();
   if (releasePromise) await releasePromise;
-  if (token !== lifecycle) { img.style.visibility = ''; return; }
+  if (token !== lifecycle) { restoreStatic(); return; }
   const rt = await ensureApp();
-  if (!rt || token !== lifecycle) { img.style.visibility = ''; return; }
+  if (!rt || token !== lifecycle) { restoreStatic(); return false; }
   const set = await loadSet(role);
   // 资源探测是异步的：战斗可能已结束并切到搜刮/奖励页，旧 fig 即使仍有引用也不能复活帧层。
-  if (!set || token !== lifecycle || !isLiveBattleFigure(body, fig)) { img.style.visibility = ''; return; }
+  if (!set || token !== lifecycle || !isLiveBattleFigure(body, fig)) { restoreStatic(); return false; }
   const fill = await portraitFillOf(role, img);
   // 量立绘占比也是异步的，fig 可能在等待期间随战斗结束被移除，复活前再查一次。
-  if (token !== lifecycle || !isLiveBattleFigure(body, fig)) { img.style.visibility = ''; return; }
+  if (token !== lifecycle || !isLiveBattleFigure(body, fig)) { restoreStatic(); return; }
   if (cur && cur.role === role) {
     // 同战斗内重渲染：只换 DOM 引用（ovBody 重建后 fig/img 是新节点），不重置播放状态，
     // 否则出牌结算的多次 render 会把正在播的攻击/受击动作打断
     cur.fig = fig; cur.img = img;
+    cur.portraitFill = fill; cur.lastRect = null;
     img.style.visibility = 'hidden';
-    return;
+    layout();
+    rt.app.renderer.render(rt.app.stage);
+    return true;
   }
   const ov = document.getElementById('overlay');
   const ovR = ov ? uiRect(ov) : { left: 0, top: 0 };   // 布局口径：layout() 里 sprite 换算用
@@ -479,23 +529,55 @@ async function attach(body) {
   };
   img.style.visibility = 'hidden';   // 保布局，内容由 sprite 呈现
   hostVisible(true);
+  rt.app.ticker.maxFPS = fixedFrameRole(role) ? 60 : 30;
   startLoop();
-  playSeq('idle', Random.random('fx'));
+  playSeq('idle', fixedFrameRole(role) ? 0 : Random.random('fx'));
+  rt.app.renderer.render(rt.app.stage);   // 就绪 Promise 兑现前真正提交角色首帧。
   wakeRenderer(600);
+  return true;
 }
 
 // 动作触发：'atk' 攻击（起手连命中）/ 'cast' 施法 / 'hurt' 受击
 function play(name) {
-  if (!cur || !cur.set || document.hidden) return;
-  if (!ACT_SEQS[name]) return;
+  if (!cur || !cur.set || cur.dying || document.hidden) return false;
+  if (!ACT_SEQS[name]) return false;
+  if (fixedFrameRole(cur.role)) {
+    cur.resumeAfter = null;
+    const played = playSeq(name);
+    if (played) wakeRenderer(900);
+    return played;
+  }
   if (name !== 'idle') {
     if (cur.play?.loop) cur.resumeAfter = { play: cur.play, fi: cur.fi };
   } else {
     cur.resumeAfter = null;
   }
-  playSeq(name);
+  const played = playSeq(name);
   wakeRenderer(900);
+  return played;
 }
+
+function presentDeath(player) {
+  if (!cur || !fixedFrameRole(cur.role) || document.hidden || reduceMotion()) return null;
+  if (cur.dying) return cur.deathPromise;
+  const timeline = buildTimeline('death');
+  if (!timeline) return null;
+  cur.dying = true; cur.resumeAfter = null;
+  const health = cur.fig.closest('#btSelf')?.querySelector('.bt-hpwrap');
+  if (health) {
+    const label = health.querySelector('span');
+    const maxHp = player?.maxHp ?? label?.textContent.split('/')[1];
+    if (label && maxHp != null) label.textContent = `0/${maxHp}`;
+    health.querySelectorAll(':scope > div').forEach(bar => { bar.style.width = '0%'; });
+  }
+  cur.deathPromise = new Promise(resolve => { cur.deathResolve = resolve; });
+  cur.deathStage = cur.fig.closest('.battle-stage');
+  if (cur.deathStage) { cur.oldInert = cur.deathStage.inert; cur.deathStage.inert = true; }
+  playSeq('death');
+  wakeRenderer(1200);
+  return cur.deathPromise;
+}
+registerDefeatPresenter(presentDeath);
 
 function setPaused(paused) {
   if (paused) {
@@ -512,7 +594,11 @@ function setPaused(paused) {
 function hide() {
   setPaused(false);
   lifecycle++;
+  if (pendingAttach?.img) { pendingAttach.img.style.visibility = ''; imageOwners.delete(pendingAttach.img); }
+  pendingAttach = null;
   wanted = false;
+  if (cur?.deathStage) cur.deathStage.inert = cur.oldInert;
+  cur?.deathResolve?.();
   if (cur && cur.img) cur.img.style.visibility = '';
   cur = null;
   if (sprite && emptyTexture) sprite.texture = emptyTexture;
@@ -525,7 +611,7 @@ function hide() {
   // 轮询 interval 只在战斗立绘在场时有意义：hide 后不清理会全程空转（每 200ms
   // 一次 rect 读取直到进程结束）。
   if (pollTimer) { clearInterval(pollTimer); pollTimer = 0; }
-  void releaseTextureSets();
+  return releaseTextureSets();
 }
 
 function cacheStats() {
@@ -552,4 +638,4 @@ function armBattleEndHide() {
 // 奖励/搜刮/背包/卡牌库等任何其他模式渲染时一律卸下，新增界面默认不在白名单。
 document.addEventListener('sdt-overlay-mode', (e) => { if (e.detail !== 'battle') hide(); });
 
-export { attach, play, hide, isLiveBattleFigure, cacheStats, setPaused };
+export { attach, play, hide, isLiveBattleFigure, cacheStats, setPaused, presentDeath };

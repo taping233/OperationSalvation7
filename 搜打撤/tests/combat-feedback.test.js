@@ -11,7 +11,8 @@ describe('战斗反馈节奏', () => {
     expect(feedbackTier({ unit: 0, text: '-3', cls: 'dmg' })).toBe('impact');
     expect(feedbackTier({ unit: 0, text: '-12', cls: 'dmg' })).toBe('finisher');
     expect(feedbackClass({ unit: 0, text: '-12', cls: 'dmg', critical: true })).toContain('fx-finisher');
-    expect(feedbackClass({ unit: 'self', text: '💚', cls: 'stk', warm: true })).toBe('heal');
+    expect(feedbackClass({ unit: 'self', text: '💚', cls: 'stk', warm: true })).toBe('stk heal');
+    expect(feedbackClass({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true })).toBe('stk sticker-heal heal');
   });
 
   it('连续多段反馈按单位错峰，特殊键名也不会污染计数器', () => {

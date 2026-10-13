@@ -34,21 +34,7 @@ body.interface-motion #overlay[data-ui-motion="page"][data-ui-motion] {
     --pt-in: .34s cubic-bezier(.22, 1, .36, 1) backwards;
   }
 
-  /* 成就总览：页头 → 左侧档案栏 → 右侧奖章陈列 */
-  body.interface-motion:not(.reduce-motion)
-    #overlay[data-ui-motion="page"][data-ui-enter]:not([hidden]) .achievement-gallery > .ag-header {
-    animation: ptBlockIn var(--pt-in);
-  }
-  body.interface-motion:not(.reduce-motion)
-    #overlay[data-ui-motion="page"][data-ui-enter]:not([hidden]) .achievement-gallery .ag-body > .ag-summary {
-    animation: ptBlockIn var(--pt-in);
-    animation-delay: .07s;
-  }
-  body.interface-motion:not(.reduce-motion)
-    #overlay[data-ui-motion="page"][data-ui-enter]:not([hidden]) .achievement-gallery .ag-body > .ag-content {
-    animation: ptBlockIn var(--pt-in);
-    animation-delay: .13s;
-  }
+  /* 成就页由 surface-motion 与 achievement-motion 编排，避免整栏重复入场。 */
 
   /* 生存指南：页头 → 章节导航 → 正文页（翻页 outerHTML 重建时同款级联重播） */
   body.interface-motion:not(.reduce-motion)
@@ -67,20 +53,6 @@ body.interface-motion #overlay[data-ui-motion="page"][data-ui-motion] {
   }
 
   /* 照相馆：退出锚/页头 → 馆藏目录 → 右侧选片检查台 */
-  body.interface-motion:not(.reduce-motion)
-    #overlay[data-ui-motion="page"][data-ui-enter]:not([hidden]) .card-library-page > :is(.ak-tl, .library-head) {
-    animation: ptBlockIn var(--pt-in);
-  }
-  body.interface-motion:not(.reduce-motion)
-    #overlay[data-ui-motion="page"][data-ui-enter]:not([hidden]) .card-library-page > .clib-main {
-    animation: ptBlockIn var(--pt-in);
-    animation-delay: .07s;
-  }
-  body.interface-motion:not(.reduce-motion)
-    #overlay[data-ui-motion="page"][data-ui-enter]:not([hidden]) .card-library-page > .library-inspector {
-    animation: ptBlockIn var(--pt-in);
-    animation-delay: .13s;
-  }
 
   /* 制作名单（独立 dialog）：返回钮 → 标题 → 名单 → 来源附注 */
   body.interface-motion:not(.reduce-motion)

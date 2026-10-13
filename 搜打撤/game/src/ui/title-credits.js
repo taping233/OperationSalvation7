@@ -1,10 +1,14 @@
 import './home-fx.js';
 import { enterHomeDialog, leaveHomeDialog } from './home-menu-motion.js';
 import './home-layers.js';
+import '../../css/title-credits.css';
+import { linkedBackHTML } from './home-linked-interactions.js';
 
 // Keep native dialog focus and return semantics while matching the home page choreography.
 const creditsButton = document.getElementById('mCredits');
 const creditsDialog = document.getElementById('homeCredits');
+const creditsBack = creditsDialog?.querySelector('.home-credits-back');
+if (creditsBack) creditsBack.outerHTML = linkedBackHTML('', '返回主页', 'home-credits-back', 'submit');
 
 creditsButton?.addEventListener('click', () => {
   if (creditsDialog && !creditsDialog.open) {

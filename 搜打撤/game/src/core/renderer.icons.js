@@ -11,7 +11,6 @@
  * ============================================================ */
 
 const TAU = Math.PI * 2;
-const NO_DASH = [];   // 还原实线（空点划常量，复用避免逐帧分配）
 
 // 战术地图线性符号：小尺寸下保持清晰，不加载位图也不依赖圆形底板。
 function drawTacticalIcon(ctx, type, cx, cy, u, color) {
@@ -33,14 +32,10 @@ function drawTacticalIcon(ctx, type, cx, cy, u, color) {
       ctx.beginPath(); ctx.arc(cx,cy,7*u,0,TAU); ctx.stroke(); ctx.beginPath(); ctx.moveTo(cx,cy-4*u); ctx.lineTo(cx,cy+4*u); ctx.moveTo(cx-3*u,cy+1*u); ctx.lineTo(cx+3*u,cy+1*u); ctx.stroke(); break;
     case 'boss':
       ctx.beginPath(); ctx.moveTo(cx,cy-s); ctx.lineTo(cx+s,cy); ctx.lineTo(cx,cy+s); ctx.lineTo(cx-s,cy); ctx.closePath(); ctx.stroke(); ctx.fillRect(cx-1.3*u,cy-1.3*u,2.6*u,2.6*u); break;
-    case 'blank': { // 已消耗的空节点（2026-09-13 老板留言）：虚线空环 + 中心空点，读作「格子还在、内容已取走」
-      ctx.save();
+    case 'blank': { // 内容已消耗：空心圆与短横，保留可通行地点。
       ctx.lineWidth = Math.max(1.2, 1.5 * u);
-      ctx.setLineDash([2.4 * u, 2.6 * u]);
       ctx.beginPath(); ctx.arc(cx, cy, s, 0, TAU); ctx.stroke();
-      ctx.setLineDash(NO_DASH);
-      ctx.beginPath(); ctx.arc(cx, cy, 1.7 * u, 0, TAU); ctx.stroke();
-      ctx.restore();
+      ctx.beginPath(); ctx.moveTo(cx - 3 * u, cy); ctx.lineTo(cx + 3 * u, cy); ctx.stroke();
       break;
     }
     default:

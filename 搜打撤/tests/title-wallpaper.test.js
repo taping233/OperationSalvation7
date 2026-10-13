@@ -2,6 +2,8 @@
 import { readFileSync } from 'node:fs';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+vi.mock('../game/src/ui/interface-motion.js', () => ({ interfaceReducedMotion: () => false }));
+
 const html = readFileSync('game/index.html', 'utf8');
 const boot = () => import('../game/src/ui/title-wallpaper.js');
 const button = () => document.getElementById('btnTitleWallpaper');
@@ -48,6 +50,33 @@ describe('home wallpaper preference', () => {
     expect(selection()).toBe('snow');
     expect(button().textContent).toContain('1/2');
     expect(localStorage.getItem('game-save-fixture')).toBe('untouched');
+  });
+
+  it('keeps the wallpaper ready and completes restoration after all staggered controls', async () => {
+    vi.useFakeTimers();
+    try {
+      await boot();
+      const title = document.getElementById('title');
+      const view = document.getElementById('btnTitleWallpaperView');
+      view.click(); view.click();
+      expect(title.dataset.homeSceneReady).toBe('1');
+      expect(title.dataset.homeReveal).toBeDefined();
+      const delay = id => parseInt(document.getElementById(id).style.getPropertyValue('--home-enter-delay'));
+      expect(delay('mStart')).toBeLessThan(delay('mGuide'));
+      expect(delay('mGuide')).toBeLessThan(delay('mAch'));
+      expect(delay('mAch')).toBeLessThan(delay('btnCardLib'));
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(title.dataset.homePhase).toBe('in');
+      await vi.advanceTimersByTimeAsync(500);
+      expect(title.dataset.homePhase).toBe('rest');
+      expect(title.dataset.homeReveal).toBeUndefined();
+      view.click(); view.click();
+      await vi.advanceTimersByTimeAsync(200);
+      view.click(); // 立即再隐藏，不允许旧恢复计时器把它重新切回入场。
+      await vi.runAllTimersAsync();
+      expect(title.classList.contains('wallpaper-only')).toBe(true);
+      expect(title.dataset.homePhase).toBe('rest');
+    } finally { vi.useRealTimers(); }
   });
 
   it('restores the second wallpaper on a new page load', async () => {

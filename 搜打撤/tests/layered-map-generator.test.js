@@ -4,6 +4,19 @@ import { generateLayeredMap, validateGeneratedMap } from '../game/src/run/map-ge
 import { checkConnectivity } from '../game/src/run/map-graph.js';
 
 describe('四层种子化地图生成器', () => {
+  it('新局首层所有路径都不能在首战前抵达火堆（200种子）', () => {
+    for (let seed = 0; seed < 200; seed++) {
+      const first = generateLayeredMap(`first-fire-${seed}`).layers[0];
+      const visited = new Set([first.entry]), queue = [first.entry];
+      while (queue.length) {
+        for (const [li, idx] of first.nodes[queue.shift()].next) {
+          if (li !== 0 || visited.has(idx) || first.nodes[idx].type === 'battle') continue;
+          expect(first.nodes[idx].type, `seed=${seed}, idx=${idx}`).not.toBe('fire');
+          visited.add(idx); queue.push(idx);
+        }
+      }
+    }
+  });
   it('同 seed 生成完全一致的拓扑与坐标', () => {
     expect(generateLayeredMap('forest-42')).toEqual(generateLayeredMap('forest-42'));
   });

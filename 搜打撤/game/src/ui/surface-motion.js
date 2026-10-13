@@ -1,6 +1,9 @@
 // All navigation surfaces share this choreography. Tune timing and keyframes here.
 // Gameplay, focus restoration and actual hiding stay with their existing owners.
-export const surfaceTiming = { enter: 500, stagger: 35, exit: 180, fastEnter: 180, fastExit: 110 };
+import { pageMotionProfile, pageMotionBlocks } from './page-motion-profiles.js';
+import { motionTiming, motionEasing } from './motion-presets.js';
+import { navigationTiming } from './navigation-motion.js';
+export const surfaceTiming = { enter: motionTiming.pageEnter, stagger: motionTiming.stagger, exit: motionTiming.exit, fastEnter: motionTiming.fastEnter, fastExit: motionTiming.fastExit };
 
 function reduced() {
   return document.body.classList.contains('reduce-motion')
@@ -19,16 +22,42 @@ function blocks(root) {
   return regions.slice(0, 8);
 }
 
-export function enterSurface(root, { restart = true, fast = false } = {}) {
+export function enterSurface(root, { restart = true, fast = false, contentOnly = false, navigation = null } = {}) {
   if (!root) return;
   root.dataset.surfaceMotion = fast ? 'fast' : 'page';
   const phase = root.dataset.surfacePhase;
   const next = restart || !phase || phase === 'out' ? (phase === 'a' ? 'b' : 'a') : phase;
-  const regions = blocks(root);
+  const profile = root.id === 'overlay' && (!fast || (!restart && root.dataset.surfaceLayout))
+    ? pageMotionProfile(root.querySelector('#ovBody')) : null;
+  if (profile) root.dataset.surfaceLayout = profile.key;
+  else delete root.dataset.surfaceLayout;
+  if (profile?.expedition) root.dataset.surfaceContext = 'expedition';
+  else delete root.dataset.surfaceContext;
+  const choreography = profile ? pageMotionBlocks(profile, contentOnly) : [];
+  const regions = profile ? choreography.map(region => region.el) : blocks(root);
+  if (profile) {
+    profile.page.querySelectorAll('.page-in').forEach(el => el.classList.remove('page-in'));
+    // 只让选中的信息区展开，祖先布局容器不叠加旧的大幅滑入。
+    for (const el of regions) {
+      for (let frame = el.parentElement; frame && profile.page.contains(frame); frame = frame.parentElement) {
+        frame.dataset.surfaceFrame = '1';
+      }
+    }
+  }
   regions.forEach((el, index) => {
     el.dataset.surfaceBlock = '1';
     el.style.setProperty('--surface-delay', `${fast ? 0 : Math.min(index * surfaceTiming.stagger, 105)}ms`);
-    el.style.setProperty('--surface-x', `${index % 2 ? 32 : -32}px`);
+    el.style.setProperty('--surface-x', `${index % 2 ? 10 : -10}px`);
+    if (profile) {
+      const region = choreography[index];
+      el.dataset.surfaceRole = region.role;
+      if (profile.key === 'base-content') {
+        el.style.setProperty('--base-region-x', `${navigation?.x ?? 28}px`);
+      }
+      el.style.setProperty('--surface-delay', `${Math.min(region.delay, profile.staggerMax ?? navigationTiming.staggerMax)}ms`);
+      el.style.setProperty('--surface-region-in', `${navigation?.duration ?? profile.duration ?? navigationTiming.enter}ms`);
+      el.style.setProperty('--surface-region-rise', `${profile.rise ?? 12}px`);
+    }
     // Home keeps its picked-control priority and the distance-based delays.
     if (root.id === 'title' && el.classList.contains('home-plate')) {
       el.style.setProperty('--surface-delay', el.style.getPropertyValue('--hd') || '0ms');
@@ -55,7 +84,7 @@ style.dataset.surfaceMotion = '1';
 style.textContent = `
 body [data-surface-motion] {
   --surface-in: ${surfaceTiming.enter}ms; --surface-out: ${surfaceTiming.exit}ms;
-  --surface-ease: cubic-bezier(.22,1,.36,1);
+  --surface-ease: ${motionEasing.enter};
 }
 body [data-surface-motion="fast"] {
   --surface-in: ${surfaceTiming.fastEnter}ms; --surface-out: ${surfaceTiming.fastExit}ms;
@@ -67,7 +96,7 @@ body #overlay#overlay#overlay[data-surface-motion][data-surface-phase="b"] {
   animation-name: surfaceVeilInB !important;
 }
 body #overlay#overlay#overlay[data-surface-motion][data-surface-phase="out"] {
-  animation: surfaceVeilOut var(--surface-out) cubic-bezier(.5,0,.8,.4) both !important;
+  animation: surfaceVeilOut var(--surface-out) ${motionEasing.exit} both !important;
   pointer-events: none;
 }
 body #overlay#overlay#overlay[data-surface-motion] .hub-page.page-in {
@@ -84,7 +113,7 @@ body #overlay#overlay#overlay[data-surface-motion][data-surface-phase="b"][data-
 body #overlay#overlay#overlay[data-surface-motion][data-surface-phase="out"][data-surface-phase] > .card,
 body #homeCredits[data-surface-motion][data-surface-motion][data-surface-phase="out"][data-surface-phase],
 body :is(#exitScr, #sugLayer, [data-surface-motion]):not(#title):not(#overlay)[data-surface-motion][data-surface-phase="out"] {
-  animation: surfacePanelOut var(--surface-out) cubic-bezier(.5,0,.8,.4) both !important;
+  animation: surfacePanelOut var(--surface-out) ${motionEasing.exit} both !important;
 }
 /* Nested regions share home-style slides; both panel and veil use the same timing. */
 body :is(#title,#overlay,#homeCredits,#exitScr,#sugLayer,[data-surface-motion])[data-surface-motion][data-surface-motion][data-surface-phase][data-surface-phase] [data-surface-block][data-surface-block] {
@@ -94,26 +123,26 @@ body :is(#title,#overlay,#homeCredits,#exitScr,#sugLayer,[data-surface-motion])[
   animation-name: surfaceBlockInB !important;
 }
 body :is(#title,#overlay,#homeCredits,#exitScr,#sugLayer,[data-surface-motion])[data-surface-motion][data-surface-motion][data-surface-phase="out"][data-surface-phase] [data-surface-block][data-surface-block] {
-  animation: surfaceBlockOut var(--surface-out) cubic-bezier(.5,0,.8,.4) both !important;
+  animation: surfaceBlockOut var(--surface-out) ${motionEasing.exit} both !important;
 }
 body #title.home-composed[data-surface-motion][data-surface-motion][data-surface-phase="out"][data-surface-phase][data-home-pick] .is-picked[data-surface-block][data-surface-block] {
-  animation: surfacePickedOut .44s var(--surface-ease) both !important;
+  animation: surfacePickedOut var(--surface-out) var(--surface-ease) both !important;
 }
 body #title.home-composed[data-surface-motion][data-surface-motion][data-surface-phase="out"][data-surface-phase][data-home-pick] [data-surface-block][data-surface-block] {
-  animation-duration: .3s !important; animation-delay: var(--surface-delay,0ms) !important;
+  animation-duration: var(--motion-exit,180ms) !important; animation-delay: var(--surface-delay,0ms) !important;
 }
 body #title.home-composed[data-surface-motion][data-surface-motion][data-surface-phase="out"][data-surface-phase][data-home-pick] .is-picked[data-surface-block][data-surface-block] {
-  animation-duration: .44s !important; animation-delay: 0ms !important;
+  animation-duration: var(--motion-exit,180ms) !important; animation-delay: 0ms !important;
 }
-@keyframes surfacePanelIn { from { opacity: 0; transform: translateX(-24px) scale(.985); } to { opacity: 1; transform: none; } }
-@keyframes surfacePanelInB { from { opacity: 0; transform: translateX(-24px) scale(.985); } to { opacity: 1; transform: none; } }
-@keyframes surfacePanelOut { to { opacity: 0; transform: translateX(20px) scale(.985); } }
+@keyframes surfacePanelIn { from { opacity: 0; transform: translateY(10px) scale(.992); } to { opacity: 1; transform: none; } }
+@keyframes surfacePanelInB { from { opacity: 0; transform: translateY(10px) scale(.992); } to { opacity: 1; transform: none; } }
+@keyframes surfacePanelOut { to { opacity: 0; transform: translateY(6px) scale(.992); } }
 @keyframes surfaceVeilIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes surfaceVeilInB { from { opacity: 0; } to { opacity: 1; } }
 @keyframes surfaceVeilOut { to { opacity: 0; } }
-@keyframes surfaceBlockIn { from { opacity: 0; transform: translateX(var(--surface-x,-32px)); } to { opacity: 1; transform: none; } }
-@keyframes surfaceBlockInB { from { opacity: 0; transform: translateX(var(--surface-x,-32px)); } to { opacity: 1; transform: none; } }
-@keyframes surfaceBlockOut { to { opacity: 0; transform: translateX(var(--surface-x,-32px)) scale(.97); } }
+@keyframes surfaceBlockIn { from { opacity: 0; transform: translateX(var(--surface-x,-10px)); } to { opacity: 1; transform: none; } }
+@keyframes surfaceBlockInB { from { opacity: 0; transform: translateX(var(--surface-x,-10px)); } to { opacity: 1; transform: none; } }
+@keyframes surfaceBlockOut { to { opacity: 0; transform: translateX(var(--surface-x,-10px)) scale(.97); } }
 @keyframes surfacePickedOut { 0% { opacity: 1; transform: none; } 28% { opacity: 1; transform: scale(1.035); } 100% { opacity: 0; transform: scale(1.12); } }
 body #title.home-composed[data-surface-motion][data-surface-motion][data-surface-phase]:not([data-surface-phase="out"]) .home-plate[data-surface-block][data-surface-block] {
   animation-name: surfaceHomeIn !important;
@@ -123,6 +152,47 @@ body #title.home-composed[data-surface-motion][data-surface-motion][data-surface
   animation: surfacePickedIn .42s var(--surface-ease) both !important;
 }
 @keyframes surfacePickedIn { from { opacity: 0; transform: scale(1.07); } to { opacity: 1; transform: none; } }
+/* 已规划页面：外壳稳定承接，只展开具体信息区；标记保留到下一页，防旧动画回播。 */
+body #overlay#overlay#overlay#overlay[data-surface-layout]:not([data-surface-phase="out"]),
+body #overlay#overlay#overlay#overlay[data-surface-layout]:not([data-surface-phase="out"]) > .card {
+  animation: none !important; opacity: 1; transform: none;
+}
+body #overlay#overlay#overlay#overlay[data-surface-layout] [data-surface-frame] { animation: none !important; }
+body #overlay#overlay#overlay#overlay[data-surface-layout] [data-surface-role] {
+  --page-x: 0px; --page-y: var(--surface-region-rise,12px); --page-scale: 1;
+  animation: surfacePageIn var(--surface-region-in,${motionTiming.regionEnter}ms) ${motionEasing.enter} var(--surface-delay,0ms) backwards !important;
+}
+body #overlay#overlay#overlay#overlay[data-surface-layout] [data-surface-role="heading"] { --page-y: -8px; }
+body #overlay#overlay#overlay#overlay[data-surface-layout] [data-surface-role="nav"] { --page-x: -12px; --page-y: 0px; }
+body #overlay#overlay#overlay#overlay[data-surface-layout] [data-surface-role="portrait"] { --page-x: -24px; --page-y: 0px; --page-scale: 1.025; }
+body #overlay#overlay#overlay#overlay[data-surface-layout] [data-surface-role="actions"] { --page-y: 8px; }
+body #overlay#overlay#overlay#overlay[data-surface-layout][data-surface-phase="b"] [data-surface-role] { animation-name: surfacePageInB !important; }
+/* 远征页只让信息区短距离展开；背景和货架不重复闪回，主动作最迟48ms开始。 */
+body #overlay#overlay#overlay#overlay[data-surface-context="expedition"] [data-surface-role] {
+  --page-x: 8px; --page-y: 0px; --page-scale: 1;
+}
+body #overlay#overlay#overlay#overlay[data-surface-context="expedition"] .evt-opt {
+  animation: none !important;
+}
+/* 玻璃父层只动画 transform，opacity 两端均为 1 也不纳入动画。 */
+body #overlay#overlay#overlay#overlay[data-surface-layout="base-content"] [data-surface-role] {
+  --page-x: var(--base-region-x,28px); --page-y: 0px; --page-scale: 1;
+  animation-name: surfaceGlassIn !important;
+}
+body #overlay#overlay#overlay#overlay[data-surface-layout="base-content"][data-surface-phase="b"] [data-surface-role] { animation-name: surfaceGlassInB !important; }
+@keyframes surfaceGlassIn { from { transform: translateX(var(--page-x)); } to { transform: none; } }
+@keyframes surfaceGlassInB { from { transform: translateX(var(--page-x)); } to { transform: none; } }
+body #overlay#overlay#overlay#overlay[data-surface-layout][data-surface-phase="out"] {
+  animation: surfaceVeilOut var(--page-out,.18s) ease-out both !important;
+}
+body #overlay#overlay#overlay#overlay[data-surface-layout][data-ui-instant-close] { --page-out: 140ms; }
+body #overlay#overlay#overlay#overlay[data-surface-layout][data-surface-phase="out"] > .card { animation: none !important; }
+body #overlay#overlay#overlay#overlay[data-surface-layout][data-surface-phase="out"] [data-surface-role] {
+  animation: surfacePageOut var(--page-out,140ms) ease-out both !important;
+}
+@keyframes surfacePageIn { from { opacity: 0; transform: translate(var(--page-x),var(--page-y)) scale(var(--page-scale)); } to { opacity: 1; transform: none; } }
+@keyframes surfacePageInB { from { opacity: 0; transform: translate(var(--page-x),var(--page-y)) scale(var(--page-scale)); } to { opacity: 1; transform: none; } }
+@keyframes surfacePageOut { to { opacity: 0; transform: translateY(-6px); } }
 `.replaceAll('body ', 'body:not(.reduce-motion) ');
 style.textContent = `@media (prefers-reduced-motion: no-preference) { ${style.textContent} }`;
 document.head.appendChild(style);

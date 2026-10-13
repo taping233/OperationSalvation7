@@ -4,6 +4,7 @@ const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc } from '../../core/shared.js';
 import { escAttr } from '../../core/shared.js';
+import { displayCardDescription } from '../../cards/card-description-text.js';
 import { commands, getSnapshot, AFFIX_META, R, findCard } from '../core/battle.core.js';
   const closeBagCmd = commands.closeBag;
   const useItemCmd = commands.useItem;
@@ -16,6 +17,66 @@ const cardIdentityKey = card => card && card.id
   ? `id:${card.id}`
   : `legacy:${card?.name || ''}|${card?.type || ''}|${card?.desc || ''}`;
 const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!card.id && card.name === '初始攻击'));
+function showBattleDecision(title, body, mode, snapshot = getSnapshot()) {
+  const previous = UI.el?.ovBody?.querySelector('.battle-decision');
+  const localRefresh = previous?._decisionTitle === title && previous._battleToken === snapshot.battleToken;
+  const scrollTop = localRefresh ? previous.querySelector('.battle-decision-content')?.scrollTop || 0 : 0;
+  const focused = localRefresh && previous.contains(document.activeElement) ? document.activeElement.dataset : null;
+  const content = document.createElement('div');
+  content.innerHTML = body;
+  const footer = content.querySelector('.ov-btns:not(.choice-list)') || content.querySelector('.ov-note:has([data-act="btPickHandSkip"])');
+  const actions = footer?.outerHTML || '';
+  footer?.remove();
+  const kind = content.querySelector('[data-act="btDiscover"]') ? 'discover' : content.querySelector('[data-act="btPickHand"]') ? 'hand-select' : content.querySelector('.choice-list') ? 'choice' : content.querySelector('[data-act="bossGo"]') ? 'formation' : content.querySelector('.battle-pile-card, .bt-gy-list') ? 'pile' : content.querySelector('.battle-bag-section') ? 'bag' : content.querySelector('.bt-settings') ? 'settings' : 'other';
+  const summary = content.querySelector(':scope > .ov-stats');
+  const summaryHTML = summary?.outerHTML || '';
+  summary?.remove();
+  const compact = content.querySelector('.bt-settings') || (content.querySelector('.battle-bag-section') && !content.querySelector('.battle-bag-slot'));
+  const phaseLabel = kind === 'formation' ? '开战前准备' : `${snapshot.turn ? `第 ${snapshot.turn} 回合 · ` : ''}能量 ${snapshot.energy ?? R().battleEnergy}/${snapshot.maxEnergy ?? R().battleEnergy}`;
+  UI.showOverlay(title, `<section class="battle-decision${compact ? ' battle-decision-compact' : ''}" data-decision-kind="${kind}" data-boss="${snapshot.opts?.isBoss ? '1' : '0'}"><header class="battle-decision-head"><h3>${title}</h3><span>${phaseLabel}</span></header>${summaryHTML ? `<div class="battle-decision-summary">${summaryHTML}</div>` : ''}<div class="battle-decision-content">${content.innerHTML}</div>${actions ? `<footer class="battle-decision-actions">${actions}</footer>` : ''}</section>`, mode);
+  const next = UI.el?.ovBody?.querySelector('.battle-decision');
+  if (next) { next._battleToken = snapshot.battleToken; next._decisionTitle = title; }
+  if (next && localRefresh) {
+    next.querySelector('.battle-decision-content').scrollTop = scrollTop;
+    if (focused) {
+      const buttons = [...next.querySelectorAll('button[data-act]')];
+      (buttons.find(button => button.dataset.act === focused.act && button.dataset.uid === focused.uid && button.dataset.i === focused.i) || buttons[0])?.focus({ preventScroll:true });
+    }
+  }
+}
+function pileCardsHTML(stacks) {
+  if (!stacks.length) return '<p class="ov-empty">这里暂时没有卡牌。</p>';
+  return stacks.map((stack, i) => `
+    <button type="button" class="bt-gy-row battle-pile-card${i === 0 ? ' is-inspected' : ''}"
+      data-act="btInspectPile" data-i="${i}" aria-pressed="${i === 0}"
+      aria-label="查看 ${escAttr(stack.card.name)} 的完整规则，${stack.count} 张">
+      ${SDT.Cards.cardHTML(stack.card, 'sm')}${stack.count > 1 ? `<span class="bt-count">×${stack.count}</span>` : ''}
+    </button>`).join('');
+}
+function pileDetailHTML(stack) {
+  if (!stack) return '';
+  return `<aside class="battle-decision-inspect" aria-live="polite">
+    <span class="battle-decision-inspect-kicker">卡牌规则</span>
+    <h4>${esc(stack.card.name)}</h4>
+    <p class="battle-decision-inspect-meta">${esc(stack.card.type || '卡牌')} · ${stack.card.cost ?? 0} 费 · ${stack.count} 张</p>
+    <p class="battle-decision-inspect-rules">${esc(displayCardDescription(stack.card.desc || '暂无规则描述', stack.card.id))}</p>
+  </aside>`;
+}
+function installPileInspection(stacks) {
+  UI.act('btInspectPile', data => {
+    const index = +data.i;
+    const stack = stacks[index];
+    const root = UI.el?.ovBody?.querySelector('.battle-decision[data-decision-kind="pile"]');
+    if (!stack || !root) return;
+    root.querySelectorAll('.battle-pile-card').forEach(button => {
+      const selected = +button.dataset.i === index;
+      button.classList.toggle('is-inspected', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+    const detail = root.querySelector('.battle-decision-inspect');
+    if (detail) detail.outerHTML = pileDetailHTML(stack);
+  });
+}
   function renderDeckSelection(snapshot) {
     const { deckSelection } = snapshot;
     const selected = deckSelection.selected;
@@ -26,29 +87,27 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
           // 「对战开始时」装备已并入套牌池（2026-09-16 定版）：编入即生效，挂角标提示
           const startEquip = isStartEquip(entry.card);
           return `
-          <div class="bt-card${selected.includes(entry.uid) ? ' sel' : ''}" data-act="bossSel" data-uid="${entry.uid}" title="点击 编入/移出 牌库${startEquip ? '——「对战开始时」装备：编入即在本场开战自动生效' : ''}">
+          <button type="button" class="bt-card${selected.includes(entry.uid) ? ' sel' : ''}" data-act="bossSel" data-uid="${entry.uid}" aria-label="编入或移出 ${escAttr(entry.card.name)}" aria-pressed="${selected.includes(entry.uid)}" title="点击 编入/移出 牌库${startEquip ? '——「对战开始时」装备：编入即在本场开战自动生效' : ''}">
             ${SDT.Cards.cardHTML(entry.card, 'sm')}
             ${startEquip ? '<span class="bt-count">[[icon:bolt]] 开战被动 · 编入即生效</span>' : ''}
-          </div>`;
+          </button>`;
         }).join('')
       : '<p class="ov-empty">背包里没有可编入的非道具卡牌……</p>';
     const boss = deckSelection.boss;
     const affix = boss && boss.affix ? AFFIX_META[boss.affix] : null;
     const ready = selected.length >= need;
-    UI.showOverlay('[[icon:demon]] BOSS战 · 编组牌库', `
-      <p class="ov-stats">本局首脑：<b>${esc(boss && boss.name || '???')}</b>（${boss ? `${boss.atk}-${boss.maxHp || boss.hp}` : '?-?'}）——从背包选 <b>${deckSelection.need}</b> 张<b>招式 / 装备 / 能力卡</b>，与 <b>${deckSelection.starterCount}</b> 张初始攻击组成牌库 ·
-        开局抽 ${R().battleStartDraw} 张 · 每回合开始抽 ${R().battleTurnDraw} 张 · 每回合固定 ${R().battleEnergy} 费</p>
-      ${affix ? `<p class="ov-note">[[icon:question]] <b>${esc(boss.name)}</b> 词缀【${affix.icon} ${affix.name}】${esc(affix.desc)}</p>` : ''}
-      ${deckSelection.max > R().bossDeckSize ? '<p class="ov-note">[[icon:eye]] 混沌之眼：牌库上限 +5——编入后可在 15 张基础上多选，最多编 ' + deckSelection.max + ' 张</p>' : ''}
-      <p class="ov-note">[[icon:lock]] 固定编入：初始攻击 ×${deckSelection.starterCount}${deckSelection.starterCount < R().starterSha ? `（初始攻击不足 ${R().starterSha} 张——部分进消耗口袋了）` : ''}
-        · [[icon:cross]] 道具 / 资源 / 事件卡与初始攻击不可选入 · [[icon:bolt]] 「对战开始时」装备编入即生效（卡面带角标）</p>
-      ${deckSelection.cards.length < deckSelection.need ? `<p class="ov-note">[[icon:cross]] 背包可编卡牌不足 <b>${deckSelection.need}</b> 张（现有 ${deckSelection.cards.length} 张）——选完后按现有卡牌迎战首脑</p>` : ''}
-      <h3 class="set-h">可选卡牌 <span class="bs-count">已选 ${selected.length} 张（至少 ${need}${deckSelection.max > deckSelection.need ? ' · 至多 ' + deckSelection.max : ''}）</span></h3>
+    showBattleDecision('[[icon:demon]] BOSS战 · 编组牌库', `
+      <div class="ov-stats boss-formation-summary"><div><span class="boss-formation-kicker">本局首脑</span><b>${esc(boss && boss.name || '???')}</b><span>${boss ? `攻击 ${boss.atk} · 生命 ${boss.maxHp || boss.hp}` : '属性未知'}</span></div><div class="boss-formation-progress"><strong>${selected.length}<small> / ${need}</small></strong><span>已编入${deckSelection.max > deckSelection.need ? ` · 上限 ${deckSelection.max}` : ''}</span></div></div>
+      ${affix ? `<p class="boss-formation-affix"><b>${affix.icon} ${esc(affix.name)}</b><span>${esc(affix.desc)}</span></p>` : ''}
+      <p class="boss-formation-instruction">选择招式、装备或能力卡。初始攻击 ×${deckSelection.starterCount} 已固定编入。</p>
+      ${deckSelection.cards.length < deckSelection.need ? `<p class="ov-note">携带 ${deckSelection.cards.length} 张可编卡牌，全部选入后即可迎战。</p>` : ''}
+      <details class="boss-formation-rules"><summary>查看编组与抽牌规则</summary><p>开局抽 ${R().battleStartDraw} 张 · 每回合抽 ${R().battleTurnDraw} 张 · 每回合 ${R().battleEnergy} 能量。</p><p>道具、资源、事件与初始攻击不可选入。固定初始攻击不足部分由本场补给，不占背包格。「对战开始时」装备编入即生效。</p>${deckSelection.max > R().bossDeckSize ? `<p>混沌之眼：可编牌库上限增加 5，最多选择 ${deckSelection.max} 张。</p>` : ''}</details>
+      <h3 class="set-h">携带卡牌 <span class="bs-count">点击编入 / 再点移出</span></h3>
       <div class="bt-hand">${cardsHTML}</div>
       <div class="ov-btns">
         <button class="ov-btn ok" data-act="bossGo" ${ready ? '' : 'disabled'}>${ready ? `[[icon:swords]] 开始战斗（牌库 ${selected.length + deckSelection.starterCount} 张）` : `还需选择 ${need - selected.length} 张…`}</button>
         <button class="ov-btn" data-act="bossCancel">↩ 放弃挑战</button>
-      </div>`, true);
+      </div>`, true, snapshot);
     UI.act('bossSel', data => selectDeckCard(data.uid));
     UI.act('bossGo', confirmDeck);
     UI.act('bossCancel', cancelDeck);
@@ -68,17 +127,15 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       if (!byName.has(key)) byName.set(key, { card: entry.card, count: 0 });
       byName.get(key).count++;
     });
-    const listHTML = [...byName.values()].map(stack => `
-      <div class="bt-gy-row" title="${escAttr(stack.card.desc || '')}">
-        <span>[[icon:cards]] <b>${esc(stack.card.name)}</b>${stack.count > 1 ? ` ×${stack.count}` : ''}</span>
-        <span class="bt-gy-meta">${esc(stack.card.type)} · ${stack.card.cost}费 · ${esc(stack.card.rarity || '')}</span>
-      </div>`).join('');
-    UI.showOverlay(`${snapshot.opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${snapshot.turn} 回合 · [[icon:skull]] 墓地`, `
+    const stacks = [...byName.values()];
+    const listHTML = pileCardsHTML(stacks);
+    showBattleDecision(`${snapshot.opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · [[icon:skull]] 消耗牌`, `
       <p class="ov-stats">被消耗的牌共 <b>${cards.length}</b> 张 —— ${statLine}</p>
-      <div class="bt-gy-list">${listHTML}</div>
-      <p class="ov-note">墓地中的牌<b>不会在牌库空后洗回</b>；打出的牌进弃牌堆（会洗回循环）。战胜 BOSS 后可在「整理背包」环节把这些牌放回背包或丢弃。</p>
-      <div class="ov-btns"><button class="ov-btn ok" data-act="btGraveBack">↩ 返回战斗</button></div>`, true);
+      <div class="battle-pile-layout"><div class="bt-gy-list">${listHTML}</div>${pileDetailHTML(stacks[0])}</div>
+      <p class="ov-note">被消耗的牌<b>不会在牌库空后洗回</b>；打出的牌进弃牌堆并参与洗回。战后按实际卡牌规则入口袋或消散。</p>
+      <div class="ov-btns"><button class="ov-btn ok" data-act="btGraveBack">↩ 返回战斗</button></div>`, true, snapshot);
     UI.act('btGraveBack', closeGrave);
+    installPileInspection(stacks);
     UI.refresh(SDT.game);
   }
 
@@ -99,17 +156,15 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       if (!byName.has(key)) byName.set(key, { card: entry.card, count: 0 });
       byName.get(key).count++;
     });
-    const listHTML = [...byName.values()].map(stack => `
-      <div class="bt-gy-row" title="${escAttr(stack.card.desc || '')}">
-        <span>[[icon:cards]] <b>${esc(stack.card.name)}</b>${stack.count > 1 ? ` ×${stack.count}` : ''}</span>
-        <span class="bt-gy-meta">${esc(stack.card.type)} · ${stack.card.cost}费 · ${esc(stack.card.rarity || '')}</span>
-      </div>`).join('');
-    UI.showOverlay(`${snapshot.opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${snapshot.turn} 回合 · [[icon:cards]] 牌库`, `
+    const stacks = [...byName.values()];
+    const listHTML = pileCardsHTML(stacks);
+    showBattleDecision(`${snapshot.opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · [[icon:cards]] 牌库`, `
       <p class="ov-stats">牌库剩余 <b>${cards.length}</b> 张 —— ${statLine}</p>
-      <div class="bt-gy-list">${listHTML}</div>
+      <div class="battle-pile-layout"><div class="bt-gy-list">${listHTML}</div>${pileDetailHTML(stacks[0])}</div>
       <p class="ov-note">查看牌库不消耗任何资源；牌库空后会<b>洗回弃牌堆</b>循环（墓地不会洗回）。</p>
-      <div class="ov-btns"><button class="ov-btn ok" data-act="btDeckBack">↩ 返回战斗</button></div>`, true);
+      <div class="ov-btns"><button class="ov-btn ok" data-act="btDeckBack">↩ 返回战斗</button></div>`, true, snapshot);
     UI.act('btDeckBack', closeDeckView);
+    installPileInspection(stacks);
     UI.refresh(SDT.game);
   }
 
@@ -125,12 +180,12 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
     });
     const stacks = [...byName.values()];
     const cardsHTML = stacks.length
-      ? stacks.map(st => `
-          <div class="bt-card bag-slot filled battle-bag-slot" data-act="btUseItem" data-uid="${st.uids[0]}"
+      ? stacks.map((st, i) => `<div class="battle-bag-entry">
+          <button type="button" class="bt-card bag-slot filled battle-bag-slot" data-act="btUseItem" data-uid="${st.uids[0]}" aria-label="使用 ${escAttr(st.card.name)}"
             title="${escAttr(st.card.desc || st.card.name)}——点击使用">
             ${SDT.Cards.cardHTML(st.card, 'sm')}
             ${st.uids.length > 1 ? `<span class="bt-count" title="同名道具 ${st.uids.length} 件">×${st.uids.length}</span>` : ''}
-          </div>`).join('')
+          </button><button type="button" class="battle-bag-inspect" data-act="btInspectBag" data-i="${i}">查看规则</button></div>`).join('')
       : '<p class="ov-empty">背包里没有道具卡……（道具卡可从宝箱 / 商店获得）</p>';
     // —— 安全格转移（同名堆叠整组存入；容量在基地用口粮升级）——
     const cap = (SDT.game.safeCap && SDT.game.safeCap()) || 0;
@@ -145,24 +200,32 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
     const safeStacks = [...bySafe.values()];
     const room = Math.max(0, cap - used);
     const safeHTML = safeStacks.length
-      ? safeStacks.map(st => {
+      ? safeStacks.map((st, i) => {
           const fits = st.uids.length <= room;
-          return `<div class="bt-card bag-slot filled battle-bag-slot${fits ? '' : ' off'}" data-act="btSafeMove" data-card-key="${escAttr(st.key)}"
+          return `<div class="battle-bag-entry"><button type="button" class="bt-card bag-slot filled battle-bag-slot${fits ? '' : ' off'}" data-act="btSafeMove" data-card-key="${escAttr(st.key)}" aria-label="存入安全格 ${escAttr(st.card.name)}，${st.uids.length} 张${fits ? '' : '，空位不足'}"
             title="${escAttr(`将「${st.card.name}」×${st.uids.length} 整组存入安全格（撤离失败时安全运回）${fits ? '' : '——安全格空位不足'}`)}">
             ${SDT.Cards.cardHTML(st.card, 'sm')}
             ${st.uids.length > 1 ? `<span class="bt-count">×${st.uids.length}</span>` : ''}
             <span class="bt-count" style="top:auto;bottom:3px">[[icon:lock]] 存入</span>
-          </div>`;
+          </button><button type="button" class="battle-bag-inspect" data-act="btInspectBag" data-i="${stacks.length + i}">查看规则</button></div>`;
         }).join('')
       : '<p class="ov-empty">背包里没有可存入的卡牌。</p>';
-    UI.showOverlay(`${snapshot.opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${snapshot.turn} 回合 · [[icon:bag]] 战斗背包`, `
-      <p class="ov-stats">点击道具卡直接使用——回复类 / 能源结晶 / 神秘药水 / 口粮木材战斗内生效，其余道具战后回地图再使</p>
+    const inspectCards = [...stacks, ...safeStacks];
+    showBattleDecision(`${snapshot.opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · [[icon:bag]] 战斗背包`, `
+      ${inspectCards.length ? `<p class="ov-note">查看规则只展开详情；使用或存入需点击卡牌。</p>${pileDetailHTML({ card:inspectCards[0].card, count:inspectCards[0].uids.length })}` : ''}
+      <section class="battle-bag-section"><h4>使用道具</h4><p class="ov-stats">点击使用；无法在战斗中使用的道具需回地图使用。</p>
       <div class="bag-grid battle-bag-grid">${cardsHTML}</div>
-      <p class="ov-stats">[[icon:lock]] 安全格 <b>${used}/${cap}</b>（空位 ${room}）——点击卡牌把整组存入，撤离失败时只有安全格里的卡牌会抢运回基地</p>
-      <div class="bag-grid battle-bag-grid">${safeHTML}</div>
-      <div class="ov-btns"><button class="ov-btn ok" data-act="btBagBack">↩ 返回战斗（B）</button></div>`, true);
+      </section><section class="battle-bag-section"><h4>保护卡牌 <span>安全格 ${used}/${cap} · 空位 ${room}</span></h4>
+      <p class="ov-stats">点击把整组存入安全格；撤离失败时，安全格里的卡牌抢运回基地。</p>
+      <div class="bag-grid battle-bag-grid">${safeHTML}</div></section>
+      <div class="ov-btns"><button class="ov-btn ok" data-act="btBagBack">↩ 返回战斗（B）</button></div>`, true, snapshot);
     (() => { const card = document.querySelector('#overlay .card'); if (card) card.classList.add('battle-bag'); })();
     UI.act('btUseItem', (d) => useItemCmd(d.uid));
+    UI.act('btInspectBag', data => {
+      const stack = inspectCards[+data.i];
+      const detail = UI.el?.ovBody?.querySelector('.battle-decision[data-decision-kind="bag"] .battle-decision-inspect');
+      if (stack && detail) detail.outerHTML = pileDetailHTML({ card:stack.card, count:stack.uids.length });
+    });
     UI.act('btSafeMove', (d) => {
       const g = SDT.game;
       const group = (g.ownedCards || []).filter(o => o.card && !o.safe && cardIdentityKey(o.card) === d.cardKey);
@@ -179,4 +242,4 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
     UI.refresh(SDT.game);
   }
 
-export { renderDeckSelection, renderGrave, renderBattleBag, renderDeckPileView };
+export { renderDeckSelection, renderGrave, renderBattleBag, renderDeckPileView, showBattleDecision };

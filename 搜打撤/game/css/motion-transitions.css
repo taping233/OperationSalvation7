@@ -155,7 +155,7 @@
 #t1Gate { position: fixed; inset: 0; z-index: 880; pointer-events: none;
   display: none; overflow: hidden; visibility: hidden; }
 #t1Gate.on { display: block; visibility: visible; }
-#t1Gate .t1-arm { position: absolute; left: -25vmax; right: -25vmax; top: -30%; bottom: -30%;
+#t1Gate .t1-arm { position: absolute; left: calc(var(--game-layout-width, max(100vw, 100vh)) * -0.25); right: calc(var(--game-layout-width, max(100vw, 100vh)) * -0.25); top: -30%; bottom: -30%;
   background: var(--hazard);
   box-shadow: inset 0 0 0 2px rgba(230,203,118,.25), 0 0 44px rgba(8,9,9,.6);
   transform: rotate(-8deg) scale(1.12) translateX(-135%); }
@@ -216,8 +216,8 @@
 .comm-progress .comm-seg.lit { background: linear-gradient(180deg, var(--gold-main), var(--gold-dim));
   border-color: rgba(230,203,118,.5); }
 /* demo 演示面板：URL ?commDemo=1 挂载，右下角，不遮主 HUD 与 overlay 焦点链 */
-#commDemoPanel { position: fixed; right: 18px; bottom: 18px; z-index: 480; width: min(430px, 92vw);
-  max-height: min(56vh, 430px); display: flex; flex-direction: column; gap: 8px;
+#commDemoPanel { position: fixed; right: 18px; bottom: 18px; z-index: 480; width: min(430px, calc(var(--game-layout-width, 100vw) * 0.92));
+  max-height: min(calc(var(--game-layout-height, 100vh) * 0.56), 430px); display: flex; flex-direction: column; gap: 8px;
   padding: 12px 14px; overflow: hidden;
   background: linear-gradient(180deg, rgba(20,21,23,.94), rgba(12,13,14,.96));
   border: 1px solid rgba(230,203,118,.3); border-radius:0;

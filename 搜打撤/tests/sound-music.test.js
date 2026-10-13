@@ -10,12 +10,14 @@ function harness() {
     const track = {
       load: vi.fn(() => { state = 'loading'; }),
       ready() { state = 'loaded'; callbacks.load(); },
-      fail() { callbacks.error(null, 'decode failure'); },
+      fail() { callbacks.error(null, 'network failure'); },
+      block() { playing = false; callbacks.playError(); },
+      unlock() { callbacks.unlock(); },
       state: () => state,
       playing: () => playing,
       volume(value) { if (value !== undefined) gain = value; return gain; },
       mute: vi.fn(value => { muted = value; }),
-      play: vi.fn(() => { playing = true; }),
+      play: vi.fn(() => { playing = true; callbacks.play(); }),
       pause: vi.fn(() => { playing = false; }),
       unload: vi.fn(() => { state = 'unloaded'; }),
       fade: vi.fn(),
@@ -85,16 +87,25 @@ describe('scene BGM crossfades', () => {
     expect(player.snapshot().current).toBe('base');
   });
 
-  it('pauses immediately when muted/hidden and fades back in without a second decode', () => {
-    const { set, tracks } = harness();
+  it('unloads immediately when muted/hidden, then reloads without replaying stale callbacks', () => {
+    const { set, tracks, player } = harness();
     set('event'); tracks.get('event').ready(); tracks.get('event').volume(0.12);
+    const previous = tracks.get('event');
     set('event', { enabled: false, immediate: true });
-    expect(tracks.get('event').muted()).toBe(true);
-    expect(tracks.get('event').playing()).toBe(false);
-    expect(tracks.get('event').unload).not.toHaveBeenCalled();
+    expect(previous.muted()).toBe(true);
+    expect(previous.playing()).toBe(false);
+    expect(previous.unload).toHaveBeenCalledOnce();
+    expect(player.snapshot().tracks).toHaveLength(0);
+    previous.unlock();
     set('event');
-    expect(tracks.get('event').load).toHaveBeenCalledTimes(1);
-    expect(tracks.get('event').fade).toHaveBeenLastCalledWith(0, 0.12, 650);
+    const resumed = tracks.get('event');
+    expect(resumed).not.toBe(previous);
+    expect(resumed.load).toHaveBeenCalledOnce();
+    previous.ready(); previous.unlock();
+    expect(previous.play).toHaveBeenCalledTimes(1);
+    expect(resumed.play).not.toHaveBeenCalled();
+    resumed.ready();
+    expect(resumed.fade).toHaveBeenLastCalledWith(0, 0.12, 650);
   });
 
   it('retains a valid old track if the next asset fails and never starts it on a late muted load', () => {
@@ -115,6 +126,29 @@ describe('scene BGM crossfades', () => {
     expect(tracks.get('battle').fade).toHaveBeenCalledTimes(1);
     set('battle', { volume: 0.054 });
     expect(tracks.get('battle').fade).toHaveBeenLastCalledWith(0.12, 0.054, 100);
+  });
+
+  it('retries a blocked title track on unlock without reloading or overlapping requests', () => {
+    const { set, tracks } = harness();
+    set('title'); tracks.get('title').ready();
+    const track = tracks.get('title');
+    track.block();
+    track.play.mockImplementation(() => {}); // 音频恢复尚未完成。
+    track.unlock(); set('title'); set('title');
+    expect(track.play).toHaveBeenCalledTimes(2);
+    expect(track.load).toHaveBeenCalledTimes(1);
+  });
+
+  it('retries stopped same-scene playback but ignores unlock after muting or leaving', () => {
+    const { set, tracks } = harness();
+    set('title'); tracks.get('title').ready();
+    const title = tracks.get('title');
+    title.block(); set('title');
+    expect(title.play).toHaveBeenCalledTimes(2);
+    title.block(); set('title', { enabled: false, immediate: true }); title.unlock();
+    expect(title.play).toHaveBeenCalledTimes(2);
+    set('board'); tracks.get('board').ready(); title.unlock();
+    expect(title.play).toHaveBeenCalledTimes(2);
   });
 });
 

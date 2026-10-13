@@ -1,5 +1,109 @@
 /* EXP @import url('./slots-cover.css'); */
 
+/* 选档留白：五卡略放宽，卡间、信息区与操作区各留独立间隔。 */
+/* 档案卡金属边沿：斜向亮暗外框、内圈刻线与短角饰，最近游玩用暖金。 */
+#overlay .slot-page .slot-card {
+  --slot-rim-light: #b5bec1;
+  --slot-rim-mid: #626f76;
+  --slot-rim-dark: #293238;
+  --slot-corner: #c0b28b;
+  border: 2px solid var(--slot-rim-mid);
+  border-image: linear-gradient(145deg, var(--slot-rim-light), var(--slot-rim-mid) 24%, var(--slot-rim-dark) 52%, var(--slot-rim-mid) 80%, var(--slot-rim-light)) 1;
+  box-shadow: 0 0 0 1px #10181c, 0 12px 28px #070b0e80,
+    inset 0 0 0 1px #d2d8d224, inset 0 0 0 5px #131b2059;
+}
+#overlay .slot-page .slot-card::after {
+  content: ''; position: absolute; inset: 7px; z-index: 3; pointer-events: none;
+  border: 1px solid #a4b2b329;
+  background:
+    linear-gradient(var(--slot-corner), var(--slot-corner)) left top / 23px 2px no-repeat,
+    linear-gradient(var(--slot-corner), var(--slot-corner)) left top / 2px 23px no-repeat,
+    linear-gradient(var(--slot-corner), var(--slot-corner)) right top / 13px 1px no-repeat,
+    linear-gradient(var(--slot-corner), var(--slot-corner)) right top / 1px 13px no-repeat,
+    linear-gradient(var(--slot-corner), var(--slot-corner)) right bottom / 23px 2px no-repeat,
+    linear-gradient(var(--slot-corner), var(--slot-corner)) right bottom / 2px 23px no-repeat,
+    linear-gradient(var(--slot-corner), var(--slot-corner)) left bottom / 13px 1px no-repeat,
+    linear-gradient(var(--slot-corner), var(--slot-corner)) left bottom / 1px 13px no-repeat;
+  opacity: .72;
+}
+#overlay .slot-page .slot-card.slot-recent {
+  --slot-rim-light: #efe0b1; --slot-rim-mid: #b69b60; --slot-rim-dark: #514a37;
+  --slot-corner: #eed59b;
+}
+#overlay .slot-page .slot-card:is(:hover, :focus-within) {
+  --slot-rim-light: #e1e6e4;
+  box-shadow: 0 0 0 1px #10181c, 0 16px 32px #070b0e99,
+    inset 0 0 0 1px #d2d8d245, inset 0 0 0 5px #131b2059;
+}
+#overlay .slot-page .slot-card.slot-recent:is(:hover, :focus-within) { --slot-rim-light: #fff0c5; }
+#overlay .card .pg.slot-page .slot-deck {
+  gap: clamp(24px, calc(var(--game-layout-width, 100vw) * 0.024), 44px);
+  padding-inline: clamp(24px, calc(var(--game-layout-width, 100vw) * 0.03), 56px);
+}
+#overlay .slot-page .slot-card {
+  flex-basis: 264px;
+  max-width: 280px;
+  padding: clamp(24px, calc(var(--game-layout-height, 100vh) * 0.036000000000000004), 38px) 22px 24px;
+}
+#overlay .slot-page .slot-card-name { margin-top: 18px; }
+#overlay .slot-page .slot-card-status { margin-top: 14px; }
+#overlay .slot-page .slot-card-rule { margin-block: 16px; }
+#overlay .slot-page .slot-card-desc { line-height: 1.8; }
+#overlay .slot-page .slot-card-desc .si-line { margin-bottom: 16px; }
+#overlay .slot-page .slot-card-desc .si-progress { margin-bottom: 16px; padding-block: 10px; }
+#overlay .slot-page .slot-card-cta { margin-top: 20px; }
+#overlay .slot-page .slot-card-ops { margin-top: 14px; gap: 12px; }
+
+/* 选档背景：两层雪粒持续飘落；装饰层不接收输入，关闭页面后随 DOM 释放。 */
+.slot-page .slot-bg::before,
+.slot-page .slot-bg::after {
+  content: '';
+  position: absolute;
+  inset: -360px -60px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 24px 38px, #e5edf0b3 0 1px, transparent 2px),
+    radial-gradient(circle at 168px 142px, #d5e1e780 0 1.5px, transparent 3px),
+    radial-gradient(circle at 78px 278px, #f1eee480 0 1px, transparent 2px);
+  background-size: 260px 360px;
+  opacity: .48;
+  animation: slotSnowFar 18s linear infinite;
+}
+.slot-page .slot-bg::after {
+  background-size: 390px 360px;
+  opacity: .38;
+  filter: blur(.6px);
+  animation: slotSnowNear 12s linear -6s infinite;
+}
+@keyframes slotSnowFar {
+  from { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(16px, 180px, 0); }
+  to { transform: translate3d(0, 360px, 0); }
+}
+@keyframes slotSnowNear {
+  from { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-26px, 180px, 0); }
+  to { transform: translate3d(0, 360px, 0); }
+}
+.slot-page::before {
+  animation: slotArchiveLight 14s ease-in-out infinite alternate;
+}
+@keyframes slotArchiveLight {
+  from { transform: translate3d(-4%, -2%, 0) scale(1); opacity: .45; }
+  to { transform: translate3d(5%, 3%, 0) scale(1.08); opacity: .85; }
+}
+body.reduce-motion .slot-page .slot-bg::before,
+body.reduce-motion .slot-page .slot-bg::after,
+body.reduce-motion .slot-page::before {
+  animation: none !important;
+  opacity: .22;
+}
+@media (prefers-reduced-motion: reduce) {
+  .slot-page .slot-bg::before,
+  .slot-page .slot-bg::after,
+  .slot-page::before { animation: none !important; opacity: .22; }
+}
+
 /* ═══════════════════════════════════════════════════════════════════
    选档页美术升级（2026-09-24）——对标标题页 title-p0.css「09-24 美术升级」定稿语言
    手法：① 冷青统一调色（背景分级/暗角/视线归属）② var(--gold-main) 暖金装饰线与端点光点
@@ -81,13 +185,13 @@
 .slot-page .slot-deck::before,
 .slot-page .slot-deck::after {
   content: ''; position: absolute; z-index: 3; pointer-events: none;
-  bottom: clamp(14px, 3vh, 30px);
+  bottom: clamp(14px, calc(var(--game-layout-height, 100vh) * 0.03), 30px);
   width: 54px; height: 20px;
   opacity: .6;
   animation: slotGemBreath 6s ease-in-out infinite alternate;
 }
 .slot-page .slot-deck::before {
-  left: clamp(22px, 3vw, 56px);
+  left: clamp(22px, calc(var(--game-layout-width, 100vw) * 0.03), 56px);
   background:
     radial-gradient(2.6px 2.6px at 1px calc(100% - 1px), var(--gold-bright) 40%, transparent 75%),
     linear-gradient(90deg, #e6cb76b3, transparent) left bottom / 100% 1px no-repeat,
@@ -95,7 +199,7 @@
   filter: drop-shadow(0 0 4px #e6cb7638);
 }
 .slot-page .slot-deck::after {
-  right: clamp(22px, 3vw, 56px);
+  right: clamp(22px, calc(var(--game-layout-width, 100vw) * 0.03), 56px);
   transform: scaleX(-1);
   background:
     radial-gradient(2.6px 2.6px at 1px calc(100% - 1px), var(--gold-bright) 40%, transparent 75%),
@@ -166,11 +270,6 @@
 
 /* ── 兼容性收口 ── */
 /* 矮窗口（winter.css max-height:600 收紧了卡内边距）：角饰线同步收紧避免压到卡片 */
-@media (max-height: 600px) {
-  .slot-page .slot-deck::before, .slot-page .slot-deck::after {
-    bottom: 6px; width: 38px; height: 13px; opacity: .4;
-  }
-}
 
 /* ═══════════════════════════════════════════════════════════════════
    交互细节轮（2026-09-24 第二批）——按压/焦点/统一节奏/出入场/悬停补全/光标

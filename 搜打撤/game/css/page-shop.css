@@ -259,17 +259,6 @@
   filter: brightness(1.25) drop-shadow(0 0 4px rgba(230,203,118,.35));
 }
 
-/* W6c 货架空艺术窗兜底：12% 透明度居中占位底纹（纯 CSS 渐变、不引新图片；
-   叠在位图上时仅为极淡十字底纹，不抢画面） */
-#overlay .shop-pg .shop-slot .hs-card .hsc-art { position: relative; }
-#overlay .shop-pg .shop-slot .hs-card .hsc-art::after {
-  content: ''; position: absolute; inset: 0; border-radius: inherit;
-  pointer-events: none; opacity: .12;
-  background:
-    linear-gradient(45deg, transparent 47.5%, var(--gold-main) 47.5%, var(--gold-main) 52.5%, transparent 52.5%),
-    linear-gradient(-45deg, transparent 47.5%, var(--gold-main) 47.5%, var(--gold-main) 52.5%, transparent 52.5%),
-    radial-gradient(circle at 50% 50%, transparent 38%, var(--gold-main) 41%, var(--gold-main) 52%, transparent 56%);
-}
 
 /* W6d 页头「背包」钮：亮白实底夹在统计章间语义混乱 → 深底 + 下缘金线
    （var(--gold-main)），并与右侧统计章拉开 12px；:not(:hover) 让 expedition-shop
@@ -283,8 +272,6 @@
   box-shadow: 0 2px 8px rgba(7,7,8,.4);
 }
 
-/* W6e 币值圆牌（.hsc-val 右下角悬出 -.48em）压描述末行 → 描述区右侧让位 */
-#overlay .shop-pg .hs-card .hsc-desc { padding-right: 16px; }
 
 /* ═════════ W7 第二波补件（2026-09-25 A 组·审查计划项3）═════════ */
 

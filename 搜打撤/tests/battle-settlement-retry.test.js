@@ -31,9 +31,10 @@ vi.mock('../game/src/run/game.run.js', () => ({ showRunTransition: (...args) => 
 vi.mock('../game/src/hub/game.bag.bridge.js', () => ({ bagSlots: { closeBackpack: vi.fn(), pocketAdd: vi.fn() } }));
 vi.mock('../game/src/core/event-bus.js', () => ({ on: vi.fn() }));
 vi.mock('../game/src/core/random.js', () => ({ Random: { random: (...args) => state.random(...args) } }));
-vi.mock('../game/src/core/shared.js', () => ({ clone: value => (value == null ? value : JSON.parse(JSON.stringify(value))), esc: String }));
+vi.mock('../game/src/core/shared.js', () => ({ clone: value => (value == null ? value : JSON.parse(JSON.stringify(value))), esc: String, escAttr:String }));
 
 beforeEach(() => {
+  vi.clearAllMocks();
   vi.resetModules();
   state.actions = {};
   state.chestDone = null;
@@ -71,6 +72,8 @@ beforeEach(() => {
     }),
   };
   window.SDT = {
+    // 胜利展示留在当前战场；失败、重试和并发通知仍经过同一受控反馈 Promise。
+    Battle: { presentVictory: (...args) => state.transition(...args) },
     UI: {
       hideOverlay: vi.fn(), showOverlay: vi.fn(), refresh: vi.fn(), log: vi.fn(),
       act: (name, fn) => { state.actions[name] = fn; },
@@ -124,6 +127,78 @@ async function mountRealRetryOverlay() {
   return { UI, retry() { UI.el.ovBody.querySelector('[data-act="battleSettleRetry"]').click(); return clicked; } };
 }
 
+describe('真实战斗奖励刷新续流', () => {
+  it.each([false, true])('未领/部分/全领未继续刷新后，胜利事务只完成一次（boss=%s）', async isBoss => {
+    document.body.innerHTML = '<div id="overlay"><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
+    const UI = window.SDT.UI;
+    UI.el = { overlay:document.getElementById('overlay'), ovBody:document.getElementById('ovBody'), ovTitle:document.getElementById('ovTitle') };
+    UI.showOverlay = (_title, html) => { UI.el.ovBody.innerHTML = html; };
+    const cards = [0, 1].map(i => ({ id:`battle-loot-${i}`, name:`战利品${i}`, type:'法术', rarity:'古朴', cost:0, desc:'战斗中获得的奖励' }));
+    const draw = vi.fn().mockImplementationOnce(() => cards[0]).mockImplementation(() => cards[1]);
+    Object.assign(window.SDT, { MAP:{ chestKinds:{ small:{ name:'小宝箱', cards:2, coins:[1,1] } } }, Sound:{ sfx() {} }, Icons:{ rich:html => html } });
+    Object.assign(window.SDT.Cards, { RARITIES:['古朴','稀有','史诗','传说'], randomDropCard:draw,
+      pickOfRarity:() => cards[0], classPool:() => [], rarityOf:c => c.rarity, sellPrice:() => 1, cardHTML:c => `<div>${c.name}</div>` });
+    Object.assign(window.SDT.Base, { petEggDropChance:() => 0, recordPetEggChestResult:vi.fn(), bagCap:() => 16 });
+    await import('../game/src/run/chests.js');
+    const Chests = window.SDT.Chests;
+    vi.spyOn(Chests, 'rollDrops').mockReturnValue([{ kind:'small' }]);
+    let disk = null;
+    Object.assign(state.game, { coins:0, usedSlots:() => state.game.ownedCards.length, bagCap:() => 16, canReceiveCard:() => true,
+      grantCard:vi.fn(card => { state.game.ownedCards.push({ uid:`reward-${state.game.ownedCards.length}`, card }); return true; }),
+      gainCoins:vi.fn(amount => { state.game.coins += amount; }),
+      persistSave:vi.fn(() => { disk = JSON.parse(JSON.stringify({ ownedCards:state.game.ownedCards, coins:state.game.coins, chestReward:Chests.serialize(state.game) })); return true; }),
+    });
+    state.payloadFactory = vi.fn(() => ({ ownedCards:state.game.ownedCards, coins:state.game.coins,
+      chestReward:Chests.serialize(state.game), elapsed:state.game.elapsed, visited:{ ...state.game.visited } }));
+    const module = await import('../game/src/hub/game.bag.settle.js');
+    module.bindBagMixins();
+    state.game.ownedCards.push({ uid:'used-card', card:{ id:'used', name:'打出的卡', rarity:'古朴' } });
+    const { bagSlots } = await import('../game/src/hub/game.bag.bridge.js');
+    const movedBefore = bagSlots.pocketAdd.mock.calls.length;
+    await state.game.onBattleEnd({ isBoss, foeNames:['首战敌人'], encounterId:'first-fight' }, ['used-card'], true, []);
+    expect(disk.chestReward.context.battleSettlement.opts.isBoss).toBe(isBoss);
+    expect(disk.chestReward.current.cards).toEqual(cards);
+    const drawCount = draw.mock.calls.length;
+    const reload = () => {
+      state.game.ownedCards = JSON.parse(JSON.stringify(disk.ownedCards));
+      state.game.coins = disk.coins;
+      state.game.discoveredPairs = new Set();
+      module.bindBagMixins();
+      expect(module.resumeBattleRewards(disk.chestReward)).toBe(true);
+      expect(draw).toHaveBeenCalledTimes(drawCount);
+    };
+    reload();
+    state.actions.chestSelect({ i:0 }); state.actions.chestTake1({ i:0 });
+    expect(disk.chestReward.current.taken).toEqual([0]);
+    reload();
+    state.actions.chestTake1({ i:0 });
+    expect(state.game.grantCard).toHaveBeenCalledTimes(1);
+    state.actions.chestSelect({ i:1 }); state.actions.chestTake1({ i:1 });
+    expect(disk.chestReward.current.taken).toEqual([0,1]);
+    reload();
+    if (isBoss) state.commitResponses.push({ ok:false, code:'WRITE_FAILED', message:'restored reward retry' });
+    state.actions.chestContinue();
+    await vi.waitFor(() => expect(state.commands.commitAttempt).toHaveBeenCalledTimes(1));
+    if (isBoss) {
+      await vi.waitFor(() => expect(state.actions.battleSettleRetry).toBeTypeOf('function'));
+      await state.actions.battleSettleRetry();
+      expect(state.commands.createAttempt).toHaveBeenCalledTimes(1);
+    }
+    expect(state.game.coins).toBe(1);
+    expect(state.game.gainCoins).toHaveBeenCalledTimes(1);
+    expect(state.game.grantCard).toHaveBeenCalledTimes(isBoss ? 3 : 2);
+    expect(bagSlots.pocketAdd.mock.calls.length - movedBefore).toBe(1);
+    expect(state.commands.createAttempt.mock.calls[0][0].victoryProgress).toMatchObject({ foeNames:['首战敌人'], isBoss, classId:'wu', xpMultiplier:1 });
+    expect(state.commands.createAttempt.mock.calls[0][0].afterRun.chestReward).toBeNull();
+    expect(window.SDT.Base.data.eggBattles).toBe(1);
+    expect(state.game.visited['0,1']).toBe(1);
+    expect(state.transition).toHaveBeenCalledTimes(1);
+    state.actions.chestContinue();
+    expect(state.commands.commitAttempt).toHaveBeenCalledTimes(isBoss ? 2 : 1);
+    expect(state.game.coins).toBe(1);
+  });
+});
+
 describe('战后结算事务接线与失败重试', () => {
   it('巨兽额外传说奖励使用规则概率且只消费原有loot骰', async () => {
     const { RULE_CONFIG } = await import('../game/src/core/rule-config.js');
@@ -162,6 +237,30 @@ describe('战后结算事务接线与失败重试', () => {
     expect(window.SDT.Chests.open).toHaveBeenCalledTimes(1);
     await state.chestDone();
     expect(state.commands.commitAttempt).toHaveBeenCalledTimes(1);
+  });
+
+  it('展示结算按真实移动采样，失败重试不重复，展示字段不进入持久attempt', async () => {
+    const onBattleEnd = await bind();
+    const { bagSlots } = await import('../game/src/hub/game.bag.bridge.js');
+    const pocketCallsBefore = bagSlots.pocketAdd.mock.calls.length;
+    state.game.ownedCards.push(
+      { uid:'spent', card:{ id:'normal', name:'普通消耗牌', rarity:'古朴' } },
+      { uid:'gone', card:{ id:'class', name:'职业消散牌', rarity:'职业' } },
+      { uid:'kept', card:{ id:'keep', name:'未用保留牌', rarity:'稀有' } },
+    );
+    state.transition.mockRejectedValueOnce(new Error('transition failed'));
+    const opts = { isBoss:false, foeNames:['敌人'], encounterId:'entry:enemy' };
+    expect(await onBattleEnd(opts, ['spent','gone'], true, ['spent'])).toBe(false);
+    await state.actions.battleSettleRetry();
+    const summary = window.SDT.Chests.open.mock.calls[0][3].battleSummary;
+    expect(summary.cardOutcome).toEqual({ pocket:['普通消耗牌'], gone:['职业消散牌'], retained:['未用保留牌'] });
+    expect(bagSlots.pocketAdd.mock.calls.length - pocketCallsBefore).toBe(1);
+    await onBattleEnd(opts, ['spent','gone'], true, ['spent']);
+    expect(window.SDT.Chests.open).toHaveBeenCalledTimes(1);
+    await state.chestDone();
+    expect(state.commands.createAttempt.mock.calls[0][0]).not.toHaveProperty('cardOutcome');
+    expect(state.commands.createAttempt.mock.calls[0][0].afterRun).not.toHaveProperty('cardOutcome');
+    expect(state.game).not.toHaveProperty('cardOutcome');
   });
 
   it('重复通知与事务失败重试复用固定attempt，不重复发奖励、重开宝箱或增计数', async () => {

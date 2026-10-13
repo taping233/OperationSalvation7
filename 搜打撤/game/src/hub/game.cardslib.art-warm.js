@@ -69,13 +69,18 @@ function observeLibImage(session, image) {
   session.observer.observe(image);
 }
 
-function scanLibArtRoot(session, root) {
+function scanLibArtRoot(session, root, nearViewport = false) {
   if (!root || (root !== session.grid && !session.grid.contains(root))) return;
   const selector = '.studio-photo-art img[data-lib-src], .studio-photo-art img[src]';
   const images = [];
   if (root.matches?.(selector)) images.push(root);
   images.push(...root.querySelectorAll(selector));
-  for (const image of images) observeLibImage(session, image);
+  for (const image of images) {
+    if (nearViewport) {
+      session.observer?.unobserve(image);
+      enqueueLibImage(session, image, imageSource(image), session.grid);
+    } else observeLibImage(session, image);
+  }
 }
 
 function ensureLibArtSession(grid) {
@@ -106,7 +111,7 @@ export function warmLibArt(options = {}) {
   const session = ensureLibArtSession(grid);
   const roots = Array.isArray(options.roots) ? options.roots : null;
   if (roots) {
-    for (const root of roots) scanLibArtRoot(session, root);
+    for (const root of roots) scanLibArtRoot(session, root, options.nearViewport === true);
   } else {
     scanLibArtRoot(session, grid);
   }

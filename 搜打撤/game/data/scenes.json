@@ -282,6 +282,9 @@
     ]
   },
   "nodeBg": {
+    "safe": "scene-safe-bg",
+    "battle": "scene-battle-bg",
+    "pickup": "scene-chest-bg",
     "door": "scene-door-bg",
     "altar": "scene-altar-bg",
     "fire": "scene-fire-bg",

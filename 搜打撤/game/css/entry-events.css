@@ -1,0 +1,110 @@
+/* Scene pages share one reading hierarchy: illustration and story, then decisions. */
+#overlay .card.page .pg.node-pg.event-scene { --node-ink:#eff3ee; --node-muted:#bccdcc; --node-accent:#9bd5ce; color:var(--node-ink); background-color:#10191d; }
+#overlay .card.page .pg.node-pg.event-scene::before { background:linear-gradient(90deg,#08131b0d 24%,#08131b38 53%,#08131be0 100%),linear-gradient(0deg,#08131ba8,transparent 48%); }
+#overlay .card.page .pg.node-pg.event-scene > .node-panel {
+  position:absolute; inset:0; width:auto; max-width:none; min-height:0; box-sizing:border-box;
+  display:grid; grid-template-columns:minmax(0,58fr) minmax(0,42fr);
+  grid-template-rows:auto minmax(0,1fr); gap:36px 62px; padding:30px 58px 42px;
+  background:transparent; border:0; border-radius:0; clip-path:none; box-shadow:none; backdrop-filter:none;
+}
+#overlay .card.page .pg.node-pg.event-scene .event-context { grid-column:1/-1; min-width:0; }
+#overlay .card.page .pg.node-pg.event-scene .node-kicker { display:inline-flex; align-items:center; gap:18px; padding:8px 14px; border:0; background:#07121880; color:#ccd6d6; font:500 16px/1.4 var(--font-ui); letter-spacing:.06em; }
+#overlay .card.page .pg.node-pg.event-scene .node-kicker > span { color:#c4c8c9; font-size:15px; letter-spacing:0; }
+#overlay .card.page .pg.node-pg.event-scene .event-story { grid-column:1; grid-row:2; align-self:end; min-height:0; max-height:70%; display:flex; flex-direction:column; max-width:760px; padding:24px 46px 22px 0; border:0; background:linear-gradient(90deg,#0a19209c,transparent); }
+#overlay .card.page .pg.node-pg.event-scene .event-story > .pg-head { flex:none; display:block; margin:0; padding:0 0 15px; border:0; text-align:left; animation:none; }
+#overlay .card.page .pg.node-pg.event-scene .event-story > .pg-head h2 { display:flex; align-items:center; gap:20px; margin:0; padding:0; border:0; background:none; color:var(--node-accent); font:650 30px/1.35 var(--font-ui); letter-spacing:.04em; text-shadow:0 2px 12px #08131b; }
+#overlay .card.page .pg.node-pg.event-scene .event-story > .pg-head h2::after { content:''; width:92px; height:1px; background:var(--node-accent); opacity:.55; }
+#overlay .card.page .pg.node-pg.event-scene .event-story > .pg-head h2 > .ic { display:none; }
+#overlay .card.page .pg.node-pg.event-scene .event-narrative { flex:1 1 auto; min-height:0; max-height:none; overflow:auto; overscroll-behavior:contain; scrollbar-gutter:stable; margin:0; padding:0; border:0; background:none; color:#e0e6e3; font:400 21px/1.72 var(--font-ui); text-align:left; text-shadow:0 1px 8px #071218; }
+#overlay .card.page .pg.node-pg.event-scene .event-narrative p { margin:0 0 14px; }
+#overlay .card.page .pg.node-pg.event-scene .event-narrative p:last-child { margin-bottom:0; }
+#overlay .card.page .pg.node-pg.event-scene .event-decisions { grid-column:2; grid-row:2; min-width:0; min-height:0; display:flex; flex-direction:column; justify-content:center; gap:24px; padding:20px 0 0; }
+#overlay .card.page .pg.node-pg.event-scene .event-decisions > .node-main { display:flex; flex:0 1 auto; justify-content:flex-start; min-width:0; min-height:0; padding:4px 4px 4px 0; overflow:auto; overscroll-behavior:contain; scrollbar-gutter:stable; }
+#overlay .card.page .pg.node-pg.event-scene .node-summary { width:100%; max-width:none; margin:0; display:flex; flex-direction:column; gap:22px; }
+#overlay .card.page .pg.node-pg.event-scene .pickup-result .gain-big { margin:0 0 12px; padding:18px 0; color:var(--node-accent); font:600 38px/1.4 var(--font-ui); text-align:left; letter-spacing:.02em; }
+#overlay .card.page .event-scene .fire-result-cards { display:flex; flex-wrap:wrap; justify-content:flex-start; gap:22px; padding:18px 10px 24px; }
+#overlay .card.page .event-scene .fire-result-cards .event-choice-card { flex:none; padding:0; border:0; background:none; cursor:zoom-in; }
+body:has(#viewport) #overlay .event-scene .fire-result-cards .hs-card { width:200px; height:auto; aspect-ratio:272/406; font-size:12px; }
+#overlay .card.page .event-scene .extraction-outcome { display:grid; gap:18px; }
+#overlay .card.page .event-scene .extraction-outcome :is(.result-line,.ov-note) { margin:0; padding:0; border:0; background:none; color:#cfdfdb; font:400 19px/1.7 var(--font-ui); text-align:left; }
+#overlay .card.page .event-scene .extraction-outcome .result-line { padding-bottom:18px; border-bottom:1px solid #8eaaa13b; }
+#overlay .card.page .event-scene:has(.extraction-outcome) .node-foot { display:flex; gap:16px; }
+#overlay .card.page .event-scene:has(.extraction-outcome) .node-foot .ov-btn { flex:1; margin:0; }
+#overlay .card.page .pg.node-pg.event-scene .evt-opt {
+  position:relative; flex:none; box-sizing:border-box; display:flex; flex-direction:column; align-items:flex-start;
+  width:100%; min-height:82px; margin:0; padding:0; gap:0; text-align:left;
+  border:0; border-bottom:1px solid #86b7b23b; border-radius:0;
+  background:linear-gradient(90deg,#102932dc,#10293248); box-shadow:none; color:var(--node-ink); animation:none;
+  transition:transform .12s ease,background-color .16s ease,border-color .16s ease;
+}
+#overlay .card.page .pg.node-pg.event-scene .evt-opt > b { box-sizing:border-box; width:100%; display:block; padding:15px 58px 12px 24px; color:var(--node-ink); background:linear-gradient(90deg,#73bdba20,transparent); font:600 23px/1.4 var(--font-ui); letter-spacing:0; text-shadow:none; }
+#overlay .card.page .pg.node-pg.event-scene .evt-opt > b:only-child { padding-bottom:16px; }
+#overlay .card.page .pg.node-pg.event-scene .evt-opt > span { box-sizing:border-box; width:100%; display:block; margin:0; padding:12px 28px 18px 24px; color:var(--node-muted); background:none; font:400 18px/1.55 var(--font-ui); text-shadow:none; }
+#overlay .card.page .pg.node-pg.event-scene .evt-opt::before { content:none; }
+#overlay .card.page .pg.node-pg.event-scene .evt-opt::after { content:'→'; position:absolute; inset:16px 17px auto auto; width:auto; height:auto; transform:none; background:none; opacity:1; color:#bec5c7; font:400 23px/1.4 var(--font-ui); }
+#overlay .card.page .pg.node-pg.event-scene .evt-opt:hover:not(:disabled) { transform:none; background:#24434ce8; border-color:#a5d6ce; box-shadow:none; }
+#overlay .card.page .pg.node-pg.event-scene .evt-opt:active:not(:disabled) { transform:translateY(2px) scale(.99); background:#393e40; }
+#overlay .card.page .pg.node-pg.event-scene .evt-opt:focus-visible { outline:2px solid var(--node-accent); outline-offset:3px; }
+#overlay .card.page .pg.node-pg.event-scene .evt-opt.danger { border-bottom-color:#c6927b99; }
+#overlay .card.page .pg.node-pg.event-scene .evt-opt:disabled { opacity:1; background:#1a1d1f; border-color:#535a5e; cursor:default; }
+#overlay .card.page .pg.node-pg.event-scene .evt-opt:disabled > :is(b,span) { color:#a0a8ac; }
+#overlay .card.page .pg.node-pg.event-scene .evt-opt:disabled::after { content:'不可选'; top:19px; color:#a1a9ad; font-size:14px; }
+#overlay .card.page .pg.node-pg.event-scene .evt-opt.is-selected { border-color:var(--node-accent); background:#25444de8; box-shadow:inset 3px 0 var(--node-accent); }
+#overlay .card.page .pg.node-pg.event-scene .evt-opt.is-selected::after { content:'已选'; top:19px; color:var(--node-accent); font-size:14px; font-weight:600; }
+/* Integrated Strategies event pages: illustration/story on the left, ink-like choices on the right. */
+#overlay .card.page .pg.node-pg.sc-event > .node-panel { grid-template-columns:minmax(0,62fr) minmax(0,38fr); gap:28px 50px; }
+#overlay .card.page .pg.node-pg.sc-event .event-story { max-height:56%; padding:25px 60px 20px 0; background:linear-gradient(90deg,#07131bd9 0%,#07131b91 68%,transparent); }
+#overlay .card.page .pg.node-pg.sc-event .event-decisions { padding-top:0; }
+#overlay .card.page .pg.node-pg.sc-event .node-summary { gap:26px; }
+#overlay .card.page .pg.node-pg.sc-event .evt-opt { min-height:90px; isolation:isolate; overflow:hidden; border:0; background:transparent; }
+#overlay .card.page .pg.node-pg.sc-event .evt-opt::before { content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:linear-gradient(90deg,#11394d 0%,#0b2538ee 54%,#071521a8 82%,#07152100 100%);
+  clip-path:polygon(0 10%,8% 5%,20% 8%,36% 2%,57% 6%,76% 3%,100% 12%,96% 23%,100% 82%,78% 90%,58% 86%,34% 96%,13% 89%,0 93%);
+  box-shadow:inset 0 2px #63a9cb55,inset 0 -2px #1a659055; }
+#overlay .card.page .pg.node-pg.sc-event .evt-opt > b { background:transparent; padding-top:14px; padding-bottom:7px; }
+#overlay .card.page .pg.node-pg.sc-event .evt-opt > span { padding-top:6px; padding-bottom:18px; }
+#overlay .card.page .pg.node-pg.sc-event .evt-opt > :is(b,span) { position:relative; z-index:1; }
+#overlay .card.page .pg.node-pg.sc-event .evt-opt::after { z-index:2; }
+#overlay .card.page .pg.node-pg.sc-event .evt-opt:hover:not(:disabled),
+#overlay .card.page .pg.node-pg.sc-event .evt-opt.is-selected { background:transparent; border:0; box-shadow:none; }
+#overlay .card.page .pg.node-pg.sc-event .evt-opt:hover:not(:disabled)::before,
+#overlay .card.page .pg.node-pg.sc-event .evt-opt.is-selected::before { background:linear-gradient(90deg,#1b5b71 0%,#113d51ed 55%,#07152100 100%); }
+#overlay .card.page .pg.node-pg.sc-event .evt-opt:disabled { background:transparent; border:0; }
+#overlay .card.page .pg.node-pg.sc-event .evt-opt:disabled::before { filter:grayscale(1); opacity:.48; }
+#overlay .card.page .pg.node-pg.sc-event .event-decisions:has(.evt-opt:only-child),
+#overlay .card.page .pg.node-pg.sc-event[data-event-choice-count="1"] .event-decisions { justify-content:center; }
+#overlay .card.page .pg.node-pg.event-scene .event-decisions:has(.evt-opt:only-child),
+#overlay .card.page .pg.node-pg.event-scene[data-event-choice-count="1"] .event-decisions { justify-content:flex-end; }
+#overlay .card.page .pg.node-pg.event-scene .event-decisions > .node-foot { flex:none; display:block; min-height:0; margin:0; padding:0; border:0; }
+#overlay .card.page .pg.node-pg.event-scene .node-foot .ov-btn { min-height:54px; font:600 20px/1.4 var(--font-ui); }
+/* Choice consequences stay in their row. Confirm without duplicating the whole option. */
+#overlay .card.page .pg.node-pg.event-scene .event-choice-state { display:flex; gap:14px; width:100%; min-height:52px; box-sizing:border-box; padding:0; background:none; border:0; visibility:hidden; }
+#overlay .card.page .pg.node-pg.event-scene:has(.evt-opt.is-selected) .event-choice-state { visibility:visible; }
+#overlay .card.page .pg.node-pg.event-scene .event-choice-announcement { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+#overlay .card.page .pg.node-pg.event-scene .event-choice-clear { flex:1; min-height:52px; padding:10px 18px; background:none; border:0; color:#bbc9cc; font:500 17px/1.35 var(--font-ui); cursor:pointer; }
+#overlay .card.page .pg.node-pg.event-scene .event-choice-confirm { flex:1.8; width:auto; min-width:0; max-width:none; min-height:52px; margin:0; padding:10px 18px; border:0; background:var(--node-accent); color:#10282a; font:650 19px/1.35 var(--font-ui); }
+#overlay .card.page .pg.node-pg.event-scene .event-choice-state button:disabled { opacity:.48; cursor:default; filter:none; }
+#overlay .card.page .pg.node-pg.event-scene .event-choice-state button:focus-visible { outline:2px solid var(--node-accent); outline-offset:3px; }
+/* Entry uses the same scene frame; its cards are revealed on the next page. */
+#overlay .card.page .event-scene[data-asset-key="story-last-lamp"] { background-size:cover; background-position:center; }
+#overlay .card.page .node-pg.entry-scene { background-image:url('../assets/scenes/entry/modern-winter-entry-1011-v2.webp'); }
+body:has(#overlay :is(.entry-scene,.entry-reward-scene)) #bagBtnFloat { display:none; }
+#overlay .card.page .entry-scene .event-eyebrow { margin:0 0 12px; color:#b9c2c4; font:500 15px/1.4 var(--font-ui); letter-spacing:.12em; }
+#overlay .card.page .entry-scene .entry-character-line { color:#bbc4c7; font-size:18px; }
+#overlay .card.page .entry-scene .entry-save-warning { margin:0; color:#e9b99f; font:400 18px/1.5 var(--font-ui); }
+#overlay .card.page .pg.entry-reward-scene { position:relative; box-sizing:border-box; display:flex; flex-direction:column; align-items:center; width:100%; height:100%; max-width:none; max-height:none; min-height:0; padding:32px 58px; overflow:hidden; color:#edf0ef; background:linear-gradient(#17191be8,#17191bd9),url('../assets/scenes/entry/modern-winter-entry-1011-v2.webp') center/cover; }
+#overlay .card.page .entry-reward-head { flex:none; text-align:center; }
+#overlay .card.page .entry-reward-head > span { color:#c1c8c9; font:500 16px/1.4 var(--font-ui); letter-spacing:.1em; }
+#overlay .card.page .entry-reward-head h2 { display:block; margin:10px 0; padding:0; color:#f0f1ee; font:650 36px/1.4 var(--font-ui); border:0; background:none; }
+#overlay .card.page .entry-reward-head p { margin:0; color:#bbc4c7; font:400 19px/1.5 var(--font-ui); }
+#overlay .card.page .entry-reward-scene .entry-cards { flex:1 1 auto; min-height:0; width:100%; box-sizing:border-box; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:48px; padding:32px 30px; overflow:auto; overscroll-behavior:contain; }
+#overlay .card.page .entry-card-preview { flex:none; margin:0; padding:0; border:0; background:none; color:inherit; cursor:zoom-in; }
+#overlay .card.page .entry-card-preview .hs-card { font-size:30px; }
+#overlay .card.page .entry-card-preview:focus-visible { outline:2px solid #e0c98c; outline-offset:12px; }
+#overlay .card.page .entry-reward-foot { flex:none; width:100%; padding-top:18px; border-top:1px solid #b3bbbd33; text-align:center; }
+#overlay .card.page .entry-reward-foot p { margin:0 0 14px; color:#bbc4c7; font:400 18px/1.5 var(--font-ui); }
+#overlay .card.page .entry-reward-foot .entry-save-warning { color:#e9b99f; }
+#overlay .card.page .entry-reward-foot .ov-btn { width:360px; min-height:56px; color:#1c2124; border:1px solid #e0c98c; background:#e0c98c; font:650 21px/1.4 var(--font-ui); }
+#overlay .card.page .entry-reward-foot .ov-btn:hover { background:#efdcaa; }
+body.reduce-motion #overlay .card.page .node-pg.event-scene * { animation:none; transition:none; }
+@media (prefers-reduced-motion:reduce) { #overlay .card.page .node-pg.event-scene * { animation:none; transition:none; } }

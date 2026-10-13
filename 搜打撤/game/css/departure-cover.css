@@ -113,15 +113,10 @@
 #overlay .card.page #depMain.departure-cover .dep-card .hs-card { font-size: calc(var(--dep-pool-card-w) / 10); }
 #overlay .card.page #depMain.departure-cover :is(.dep-card, .dep-no-results, .ov-empty)[hidden] { display: none; }
 #overlay .card.page #depMain.departure-cover .dep-no-results { grid-column: 1 / -1; width: 100%; margin: 0; padding: 35px 10px; text-align: center; color: #555b61; font: 500 14px/1.6 var(--font-ui); }
-/* card-v3 globally uses height:auto!important. Bound only staging thumbnails;
-   long descriptions use the remaining space and stay fully readable in zoom. */
+/* 整备宿主限定缩略尺寸；卡面布局与文字使用共用样式。 */
 #overlay .card.page #depMain.departure-cover :is(.dep-card-face, .bag-cell) > .hs-card {
   width: 100%; height: 100% !important; min-height: 0; max-height: 100%; box-sizing: border-box;
 }
-#overlay .card.page #depMain.departure-cover .hs-card .hsc-art { flex: 0 0 auto; }
-#overlay .card.page #depMain.departure-cover .hs-card .hsc-name { flex: 0 0 2em; height: 2em; max-height: 2em; overflow: hidden; }
-#overlay .card.page #depMain.departure-cover .hs-card .hsc-desc { flex: 1 1 0; min-height: 0; overflow: hidden; }
-#overlay .card.page #depMain.departure-cover .hs-card :is(.hsc-val, .hsc-dmg) { display: none; }
 #overlay .card.page #depMain.departure-cover .dep-card.picked { filter: none; }
 #overlay .card.page #depMain.departure-cover .dep-card.picked::after { content: none; }
 #overlay .card.page #depMain.departure-cover .dep-card.picked .dep-card-face::after {
@@ -201,3 +196,9 @@
   #overlay .card.page #depMain.departure-cover .hub-head { padding-right: 18px; }
   #overlay .card.page #depMain.departure-cover .hub-res { gap: 5px; }
 }
+
+/* F04/F14 · R07/G1/G2: known loadout and costs before confirming departure. */
+#overlay #depMain .dep-summary { flex: none; margin: 0 0 10px; padding: 10px 12px; background: #e4e8e9; border-left: 3px solid #426d7b; color: #26343c; font-size: 16px; line-height: 1.55; }
+#overlay #depMain .dep-rules { flex: none; padding: 8px 18px; color: #35414a; background: #edf0ef; font-size: 16px; line-height: 1.5; }
+#overlay #depMain .dep-rules summary { cursor: pointer; min-height: 28px; }
+#overlay #depMain .dep-rules p { margin: 6px 0; }

@@ -35,6 +35,48 @@ function openPhoto(extra = {}) {
 }
 
 describe('照片弹层收回生命周期', () => {
+  it('文字引用入口没有缩略图时，已加载的实际图片决定比例', () => {
+    SDT.Art.cardIcon = () => '<img src="/wide-photo.png" alt="照片测试">';
+    const zoom = openPhoto({ from: undefined });
+    const image = zoom.querySelector('.cz-photo-image img');
+    Object.defineProperties(image, { naturalWidth: { value: 1441 }, naturalHeight: { value: 1092 } });
+    image.dispatchEvent(new Event('load'));
+    expect(+zoom.style.getPropertyValue('--cz-photo-ratio')).toBeCloseTo(1441 / 1092);
+  });
+  it('图片加载时兼容竖图，已关闭的弹层不会再更新比例', () => {
+    const zoom = openPhoto({ from: undefined });
+    const image = zoom.querySelector('.cz-photo-image img');
+    Object.defineProperties(image, { naturalWidth: { value: 800 }, naturalHeight: { value: 1200 } });
+    image.dispatchEvent(new Event('load'));
+    expect(+zoom.style.getPropertyValue('--cz-photo-ratio')).toBeCloseTo(2 / 3);
+    zoom._closeCardZoom(true);
+    zoom.style.setProperty('--cz-photo-ratio', '1');
+    image.dispatchEvent(new Event('load'));
+    expect(zoom.style.getPropertyValue('--cz-photo-ratio')).toBe('1');
+  });
+  it('照相馆样板取片入场持续420ms，背签延后出现，收回仍沿原时序', () => {
+    const zoom = openPhoto({ photoMotion: 'atelier' });
+    expect(zoom.classList.contains('cz-photo-atelier')).toBe(true);
+    expect(zoom.style.getPropertyValue('--cz-photo-motion-ms')).toBe('420ms');
+    expect(zoom.style.getPropertyValue('--cz-photo-info-delay')).toBe('100ms');
+    vi.advanceTimersByTime(300);
+    expect(zoom.classList.contains('cz-photo-flipping')).toBe(true);
+    vi.advanceTimersByTime(140);
+    expect(zoom.classList.contains('cz-photo-flipping')).toBe(false);
+    zoom.querySelector('.cz-close').click();
+    expect(zoom.style.getPropertyValue('--cz-photo-motion-ms')).toBe('120ms');
+    vi.advanceTimersByTime(179);
+    expect(zoom.isConnected).toBe(true);
+    vi.advanceTimersByTime(1);
+    expect(zoom.isConnected).toBe(false);
+    expect(UI.el.overlay.inert).toBe(false);
+  });
+  it('未选择照相馆预设时保留原照片入场', () => {
+    const zoom = openPhoto();
+    expect(zoom.classList.contains('cz-photo-atelier')).toBe(false);
+    expect(zoom.style.getPropertyValue('--cz-photo-motion-ms')).toBe('140ms');
+    expect(zoom.style.getPropertyValue('--cz-photo-info-delay')).toBe('0ms');
+  });
   it('中途收回仍以自然布局为基准，动画结束才解锁背景并归还焦点', () => {
     const zoom = openPhoto();
     expect(zoom.style.getPropertyValue('--cz-photo-from-transform')).toContain('scale(0.25)');

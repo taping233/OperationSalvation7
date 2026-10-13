@@ -83,15 +83,15 @@
 
   /* 仓库 / 升级 / 职业 / 成就共用 */
   .hub-two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
-  .stash-grid { display: flex; flex-direction: column; gap: 5px; max-height: 34vh; overflow-y: auto; }
-  .stash-list { display: flex; flex-direction: column; gap: 5px; max-height: 38vh; overflow-y: auto; }
+  .stash-grid { display: flex; flex-direction: column; gap: 5px; max-height: calc(var(--game-layout-height, 100vh) * 0.34); overflow-y: auto; }
+  .stash-list { display: flex; flex-direction: column; gap: 5px; max-height: calc(var(--game-layout-height, 100vh) * 0.38); overflow-y: auto; }
   /* 可点击的仓库物品行（卖出 / 收藏） */
   .stash-row:focus-visible, .dep-card[role="button"]:focus-visible, .bag-cell[role="button"]:focus-visible {
     outline: 1px solid #e6cb76cc; outline-offset: 2px;
   }
   /* 出征整备 / 撤离整理页 */
   .dep-body { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; align-items: start; }
-  .dep-list { display: flex; flex-direction: column; gap: 5px; max-height: 52vh; overflow-y: auto; }
+  .dep-list { display: flex; flex-direction: column; gap: 5px; max-height: calc(var(--game-layout-height, 100vh) * 0.52); overflow-y: auto; }
   .dep-row.locked { opacity: .6; }
   .dep-row { display: flex; justify-content: space-between; align-items: center; }
   .dep-n { min-width: 26px; text-align: center; font-size: 14px; color: #797979; }
@@ -271,7 +271,7 @@
    深底盘面与暗卡同调，右上随说明行排版——蛋在 flex 行内撑高行盒，不与下方行叠压 */
 .pet-sec-head { display: flex; align-items: flex-start; gap: 16px; }
 .pet-sec-head .ov-note { flex: 1; min-width: 0; }
-.pet-sec .pet-egg-art { flex: 0 0 auto; width: clamp(84px, 9vw, 120px); aspect-ratio: 1; object-fit: cover;
+.pet-sec .pet-egg-art { flex: 0 0 auto; width: clamp(84px, calc(var(--game-layout-width, 100vw) * 0.09), 120px); aspect-ratio: 1; object-fit: cover;
   border-radius: var(--radius-panel); border: 1px solid rgba(235,204,104,.35);
   box-shadow: 0 6px 18px rgba(0,0,0,.45); pointer-events: none; }
 /* W2-03（0926）：仓库页经济总览行——三条经济线「币从哪来到哪去」一行可读 */

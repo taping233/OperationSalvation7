@@ -1,0 +1,26 @@
+/* 节点确认与内容展开分开：短切幕只保留一次目的地名称。 */
+#overlay .card.scene:has(.expedition-cut) { width:100%; height:100%; max-width:none; max-height:none; padding:0; border:0; border-radius:0; background:#171c20; box-shadow:none; }
+#overlay .card.scene:has(.expedition-cut) > #ovTitle,
+#overlay .card.scene:has(.expedition-cut)::before,
+#overlay .card.scene:has(.expedition-cut)::after { display:none; }
+#overlay .card.scene:has(.expedition-cut) #ovBody { width:100%; height:100%; }
+#overlay .scene.flow-transition.expedition-cut { display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:24px; width:100%; height:100%; margin:0; padding:8% 12%; background:#171c20; animation:none; overflow:hidden; }
+#overlay .expedition-cut::before,#overlay .expedition-cut::after { display:none; }
+#overlay .expedition-cut h2 { margin:0; font:600 44px/1.2 var(--font-ui); color:#f1f2ed; letter-spacing:.08em; animation:expeditionCutTitle .2s ease-out both; }
+.expedition-cut-rule { width:110px; height:4px; background:#9acbc5; transform-origin:left; animation:expeditionCutRule .2s ease-out both; }
+@keyframes expeditionCutTitle { from { opacity:0; transform:translateX(14px); } to { opacity:1; transform:none; } }
+@keyframes expeditionCutRule { from { transform:scaleX(.1); } to { transform:scaleX(1); } }
+body.reduce-motion .expedition-cut * { animation:none!important; }
+@media (prefers-reduced-motion:reduce) { .expedition-cut * { animation:none!important; } }
+
+.departure-handoff { position:fixed; inset:0; z-index:1500; display:grid; place-items:center; background:#10171b; pointer-events:auto; animation:departureCover .15s ease-out both; }
+.departure-handoff i { width:96px; height:3px; background:#b2d8d1; transform-origin:left; animation:expeditionCutRule .16s ease-out both; }
+.departure-handoff.leaving { animation:none; opacity:0; transition:opacity .14s ease-out; }
+@keyframes departureCover { from { opacity:0; } to { opacity:1; } }
+body.reduce-motion .departure-handoff,body.reduce-motion .departure-handoff i { animation:none; transition:none; }
+@media (prefers-reduced-motion:reduce) { .departure-handoff,.departure-handoff i { animation:none; transition:none; } }
+
+#overlay :is(.event-scene .evt-opt,.event-choice-confirm,.event-choice-clear,.reward-claim,.shop-detail-buy) { transition:transform .12s ease,background-color .16s ease,border-color .16s ease; }
+#overlay :is(.event-scene .evt-opt,.event-choice-confirm,.event-choice-clear,.reward-claim,.shop-detail-buy):active:not(:disabled) { transform:translateY(2px) scale(.985); }
+body.reduce-motion #overlay :is(.evt-opt,.event-choice-confirm,.event-choice-clear,.reward-claim,.shop-detail-buy) { transition:none; }
+@media (prefers-reduced-motion:reduce) { #overlay :is(.evt-opt,.event-choice-confirm,.event-choice-clear,.reward-claim,.shop-detail-buy) { transition:none; } }

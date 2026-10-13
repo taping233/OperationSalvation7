@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><title>地图视觉独立构造检查 · 不读写存档</title></head>
+<body><div id="app"><aside id="sidebar"></aside><main id="viewport"><canvas id="game"></canvas><nav id="expeditionChapter"></nav><div id="resHud"><span class="chip-mini">金币 <b>12</b></span><span class="chip-mini">攻击 <b>4</b></span></div><div id="topBtns"><button id="fixtureSelect">选择商店</button><button id="fixtureLow">低生命遭遇战</button><button id="fixtureLocked">不可达节点</button><button id="fixtureRoute">空白路线终点</button><button id="fixtureTravel">通行演示</button><button id="fixtureMid">通行中段截帧</button></div><div id="heroAva" hidden></div></main><div id="overlay" hidden></div></div>
+<script type="module">
+// Fixture imports the current authored source through Vite's file route, bypassing
+// the main chat's frozen runtime. It neither imports Game nor uses storage/audio.
+const root='/@fs/D:/素材/代号柒/搜打撤/';
+const response=await fetch(root+'game/index.html');
+const template=await response.text();
+for(const match of template.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)){
+  const link=document.createElement('link');link.rel='stylesheet';link.href=root+'game/'+match[1];document.head.append(link);
+}
+await import(root+'game/src/ui/ui-scale.js');
+const {default:SDT}=await import(root+'game/src/core/sdt-facade.js');
+SDT.MAP={cols:40,rows:30,tile:48};
+await import(root+'game/src/core/camera.js');
+await import(root+'game/src/core/renderer.js');
+const {renderExpeditionPanel,setExpeditionPreview}=await import(root+'game/src/run/expedition.view.js');
+const {findMapTravelPath,setMapTravelPresentation,mapTravelPoint}=await import(root+'game/src/run/map-travel-path.js');
+const portrait=document.createElement('img');portrait.src=root+'game/assets/portraits/avatars/wu.webp';document.getElementById('heroAva').append(portrait);
+const points=[{x:240,y:280},{x:500,y:280},{x:760,y:280},{x:500,y:540},{x:240,y:540}];
+const logical=[{def:{type:'entrance'},next:[[0,1]]},{def:{type:'battle'},next:[[0,0],[0,2],[0,3]]},{def:{type:'shop'},next:[[0,1]]},{def:{type:'chest'},next:[[0,1],[0,4]]},{def:{type:'battle'},next:[[0,3]]}];
+const cam=new SDT.Camera(SDT.MAP,1920,968);
+const game={runActive:true,state:'idle',map:{...SDT.MAP,boardId:'fixture',rules:{bagSize:16}},layerIdx:0,trackPos:1,layerData:[{name:'外圈荒地',logical,doors:[]}],nodePos:[points],nodes:points.map((p,idx)=>({...p,li:0,idx,def:logical[idx].def})),cam,seen:Object.fromEntries(points.map((_,i)=>['0,'+i,1])),visited:{'0,4':1},pos:points[1],toggles:{index:false},time:100,hp:35,maxHp:35,inventory:Array.from({length:8},()=>({})),usedPocket:[],usedSlots:()=>8,bagCap:()=>16,safeUsed:()=>0,safeCap:()=>2};
+const svg=()=>'<svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="7" width="16" height="14"/><path d="M8 7V3h8v4M4 12h16"/></svg>';
+const canvas=document.getElementById('game');canvas.width=1920;canvas.height=968;
+canvas.style.width='1920px';canvas.style.height='968px';
+const ctx=canvas.getContext('2d');
+function draw(){SDT.Renderer.draw(ctx,game);}
+SDT.RenderScheduler.setWake(draw);
+function select(idx){setExpeditionPreview(game,idx==null?null:game.nodes[idx]);renderExpeditionPanel(null,game,svg);draw();}
+let demoToken=0;
+function reset(){demoToken++;setMapTravelPresentation(game,null);game.state='idle';game.hp=35;game.trackPos=1;game.pos=points[1];game.visited={'0,4':1};setExpeditionPreview(game,null);cam.setDetailInset(0);cam.frameExploration(game);}
+document.getElementById('fixtureSelect').onclick=()=>{reset();select(2);};
+document.getElementById('fixtureLow').onclick=()=>{reset();game.hp=5;game.trackPos=0;game.pos=points[0];cam.frameExploration(game);select(1);};
+document.getElementById('fixtureLocked').onclick=()=>{reset();select(4);};
+document.getElementById('fixtureRoute').onclick=()=>{reset();game.visited['0,3']=1;select(4);};
+// Rendering-only demonstration: no Game import, rewards, storage, audio or real move transaction.
+document.getElementById('fixtureTravel').onclick=()=>{
+  reset();game.visited['0,3']=1;select(4);
+  const token=demoToken,path=[game.nodes[1],...findMapTravelPath(game,game.nodes[4]).map(n=>game.nodes[n.idx])];
+  const presentation={path,segmentIndex:1,progress:0,phase:'moving'};game.state='moving';setMapTravelPresentation(game,presentation);
+  renderExpeditionPanel(null,game,svg);draw();
+  let started=performance.now();
+  function tick(now){
+    if(token!==demoToken)return;
+    const t=Math.min(1,(now-started)/650),i=presentation.segmentIndex;
+    presentation.progress=1-(1-t)**3;game.pos=mapTravelPoint(path[i-1],path[i],presentation.progress);
+    if(t===1){game.trackPos=path[i].idx;if(i<path.length-1){presentation.segmentIndex++;presentation.progress=0;started=now;}else{presentation.phase='arrived';game.state='idle';}}
+    renderExpeditionPanel(null,game,svg);draw();if(presentation.phase==='moving')requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+};
+document.getElementById('fixtureMid').onclick=()=>{
+  reset();game.visited['0,3']=1;select(4);
+  const path=[game.nodes[1],game.nodes[3],game.nodes[4]];
+  game.state='moving';game.trackPos=3;game.pos=mapTravelPoint(path[1],path[2],.5);
+  setMapTravelPresentation(game,{path,segmentIndex:2,progress:.5,phase:'moving'});
+  renderExpeditionPanel(null,game,svg);draw();
+};
+document.getElementById('sidebar').onclick=e=>{if(e.target.closest('[data-route-close]'))select(null);};
+cam.frameExploration(game);renderExpeditionPanel(null,game,svg);draw();
+document.fonts.ready.then(draw);
+</script></body></html>

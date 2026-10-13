@@ -2,7 +2,9 @@ import { sdtDefine } from '../core/sdt-facade.js';
 
 import { Random } from '../core/random.js';
 import { esc, escAttr } from '../core/shared.js';
-import { turboMs } from '../core/turbo.js';
+import { rewardSceneHTML, rewardExitHTML } from '../ui/reward-scene-view.js';
+import { turboMs, isTurbo } from '../core/turbo.js';
+import { serializeChestReward, restoreChestReward } from './chest-reward-save.js';
 
   const SDT = window.SDT;
   const UI = SDT.UI;
@@ -12,7 +14,169 @@ import { turboMs } from '../core/turbo.js';
   let cur = null;      // 当前宝箱 {kind, cards, coins}
   let idx = 0;         // 已开到第几个
   let onDone = null;   // 全部开完后的续流回调
+  let saveContext = null;
+  let saveBinding = null;
+  let rewardZoom = null;
+  const closeRewardZoom = () => { rewardZoom?._closeCardZoom?.(true); rewardZoom = null; };
+  const bindSave = game => ({ seed:game.seed, layerIdx:game.layerIdx, trackPos:game.trackPos, runToken:game.discoveredPairs });
+  const persistReward = () => { if (saveContext?.onCell || saveContext?.battleSettlement) G.persistSave?.(); };
   let searchSeq = 0;   // 搜索演出代次：过期定时器不得再渲染（连开多箱/提前结束时防串台）
+  let searchTimer = null, openingTimer = null, openingPresentation = null;
+
+  const CHEST_FRAME_SETS = Object.fromEntries(['small', 'medium', 'large', 'class', 'boss'].map(kind => [kind, { frames: [], fps: 8 }]));
+  // Current candidate families: only the displayed family is decoded.
+  CHEST_FRAME_SETS.small = { fps:24, frames:[
+    new URL('../../assets/scenes/chests/small-rig-640-v1/frame-00.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/small-rig-640-v1/frame-01.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/small-rig-640-v1/frame-02.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/small-rig-640-v1/frame-03.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/small-rig-640-v1/frame-04.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/small-rig-640-v1/frame-05.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/small-rig-640-v1/frame-06.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/small-rig-640-v1/frame-07.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/small-rig-640-v1/frame-08.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/small-rig-640-v1/frame-09.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/small-rig-640-v1/frame-10.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/small-rig-640-v1/frame-11.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/small-rig-640-v1/frame-12.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/small-rig-640-v1/frame-13.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/small-rig-640-v1/frame-14.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/small-rig-640-v1/frame-15.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/small-rig-640-v1/frame-16.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/small-rig-640-v1/frame-17.webp', import.meta.url).href,
+  ] };
+  CHEST_FRAME_SETS.medium = { fps:24, frames:[
+    new URL('../../assets/scenes/chests/medium-rig-640-v1/frame-00.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/medium-rig-640-v1/frame-01.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/medium-rig-640-v1/frame-02.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/medium-rig-640-v1/frame-03.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/medium-rig-640-v1/frame-04.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/medium-rig-640-v1/frame-05.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/medium-rig-640-v1/frame-06.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/medium-rig-640-v1/frame-07.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/medium-rig-640-v1/frame-08.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/medium-rig-640-v1/frame-09.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/medium-rig-640-v1/frame-10.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/medium-rig-640-v1/frame-11.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/medium-rig-640-v1/frame-12.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/medium-rig-640-v1/frame-13.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/medium-rig-640-v1/frame-14.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/medium-rig-640-v1/frame-15.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/medium-rig-640-v1/frame-16.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/medium-rig-640-v1/frame-17.webp', import.meta.url).href,
+  ] };
+  CHEST_FRAME_SETS.large = { fps:24, frames:[
+    new URL('../../assets/scenes/chests/large-rig-640-v1/frame-00.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/large-rig-640-v1/frame-01.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/large-rig-640-v1/frame-02.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/large-rig-640-v1/frame-03.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/large-rig-640-v1/frame-04.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/large-rig-640-v1/frame-05.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/large-rig-640-v1/frame-06.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/large-rig-640-v1/frame-07.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/large-rig-640-v1/frame-08.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/large-rig-640-v1/frame-09.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/large-rig-640-v1/frame-10.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/large-rig-640-v1/frame-11.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/large-rig-640-v1/frame-12.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/large-rig-640-v1/frame-13.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/large-rig-640-v1/frame-14.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/large-rig-640-v1/frame-15.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/large-rig-640-v1/frame-16.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/large-rig-640-v1/frame-17.webp', import.meta.url).href,
+  ] };
+  CHEST_FRAME_SETS.class = { fps:24, frames:[
+    new URL('../../assets/scenes/chests/class-rig-640-v1/frame-00.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/class-rig-640-v1/frame-01.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/class-rig-640-v1/frame-02.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/class-rig-640-v1/frame-03.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/class-rig-640-v1/frame-04.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/class-rig-640-v1/frame-05.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/class-rig-640-v1/frame-06.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/class-rig-640-v1/frame-07.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/class-rig-640-v1/frame-08.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/class-rig-640-v1/frame-09.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/class-rig-640-v1/frame-10.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/class-rig-640-v1/frame-11.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/class-rig-640-v1/frame-12.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/class-rig-640-v1/frame-13.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/class-rig-640-v1/frame-14.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/class-rig-640-v1/frame-15.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/class-rig-640-v1/frame-16.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/class-rig-640-v1/frame-17.webp', import.meta.url).href,
+  ] };
+  CHEST_FRAME_SETS.boss = { fps:24, frames:[
+    new URL('../../assets/scenes/chests/boss-rig-640-v1/frame-00.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/boss-rig-640-v1/frame-01.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/boss-rig-640-v1/frame-02.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/boss-rig-640-v1/frame-03.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/boss-rig-640-v1/frame-04.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/boss-rig-640-v1/frame-05.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/boss-rig-640-v1/frame-06.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/boss-rig-640-v1/frame-07.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/boss-rig-640-v1/frame-08.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/boss-rig-640-v1/frame-09.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/boss-rig-640-v1/frame-10.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/boss-rig-640-v1/frame-11.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/boss-rig-640-v1/frame-12.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/boss-rig-640-v1/frame-13.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/boss-rig-640-v1/frame-14.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/boss-rig-640-v1/frame-15.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/boss-rig-640-v1/frame-16.webp', import.meta.url).href,
+    new URL('../../assets/scenes/chests/boss-rig-640-v1/frame-17.webp', import.meta.url).href,
+  ] };
+  function configureFrameArt(sets) {
+    for (const kind of Object.keys(CHEST_FRAME_SETS)) {
+      const set = sets?.[kind];
+      if (!set || !Array.isArray(set.frames) || !set.frames.every(frame => typeof frame === 'string' && frame)) continue;
+      CHEST_FRAME_SETS[kind] = { frames: set.frames.slice(), fps: Math.min(60, Math.max(1, Number(set.fps) || 8)) };
+    }
+  }
+  const frameArtOf = box => CHEST_FRAME_SETS[box.isClass ? 'class' : box.kind] || CHEST_FRAME_SETS.medium;
+  function cancelPresentation() {
+    if (searchTimer != null) clearTimeout(searchTimer);
+    if (openingTimer != null) clearTimeout(openingTimer);
+    searchTimer = null; openingTimer = null; openingPresentation = null;
+  }
+  function isCurrentPresentation(context) {
+    return typeof document !== 'undefined' && context === openingPresentation && context.sequence === searchSeq
+      && context.box === cur && context.game === G && context.seed === G?.seed
+      && !context.revealed && !UI.el?.overlay?.hidden;
+  }
+  function revealOnce(context) {
+    if (!isCurrentPresentation(context)) return;
+    context.revealed = true;
+    if (searchTimer != null) clearTimeout(searchTimer);
+    if (openingTimer != null) clearTimeout(openingTimer);
+    searchTimer = null; openingTimer = null;
+    render(); scheduleRevealSfx();
+  }
+  function beginOpening(context, skip = false) {
+    if (!isCurrentPresentation(context)) return;
+    if (searchTimer != null) clearTimeout(searchTimer);
+    searchTimer = null;
+    if (openingTimer != null) clearTimeout(openingTimer);
+    openingTimer = null;
+    const image = UI.el.ovBody.querySelector('.ps-chest');
+    const reduced = SDT.Motion?.reduceMotion?.() || window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+    if (skip || reduced || isTurbo() || context.frames.length < 2) {
+      if (image && context.frames.length) image.src = context.frames.at(-1);
+      revealOnce(context); return;
+    }
+    if (!context.framesReady) { context.pendingOpen = true; return; }
+    const tip = UI.el.ovBody.querySelector('.ps-tip');
+    if (tip) tip.textContent = '正在开启物资匣…（点击跳过）';
+    image?.classList.add('chest-opening');
+    let frame = 1;
+    const step = () => {
+      if (!isCurrentPresentation(context)) return;
+      if (frame >= context.frames.length) { revealOnce(context); return; }
+      if (image) { image.src = context.frames[frame]; image.dataset.chestFrame = String(frame); }
+      frame++;
+      openingTimer = setTimeout(step, turboMs(1000 / context.fps));
+    };
+    step();
+  }
 
   const KINDS = () => SDT.MAP.chestKinds;
   const rndInt = (a, b) => a + Math.floor(Random.random('loot') * (b - a + 1));
@@ -26,13 +190,9 @@ import { turboMs } from '../core/turbo.js';
     large: new URL('../../assets/scenes/scene-chest-large-anime-v1.webp', import.meta.url).href,
     boss: new URL('../../assets/scenes/scene-chest-boss-anime-v1.webp', import.meta.url).href,
   };
-  const chestArtOf = (cur) => cur.isClass
+  const chestArtOf = (cur) => frameArtOf(cur).frames[0] || (cur.isClass
     ? new URL('../../assets/scenes/scene-chest-class-anime-v1.webp', import.meta.url).href
-    : (CHEST_ART[cur.kind] || CHEST_ART.medium);
-
-  // 战斗胜利车队横幅（LEG-6b，2026-09-26 W1 批件）：只挂在带 battleSummary 的战斗胜利
-  // 搜刮页顶部作正脸结算演出；普通宝箱/事件搜刮不挂。素材只读引用，不改结算语义。
-  const BATTLE_WIN_BANNER = new URL('../../assets/scenes/ui-loop-0925/rewards-convoy-success.webp', import.meta.url).href;
+    : (CHEST_ART[cur.kind] || CHEST_ART.medium));
 
   // W2-05（2026-09-27 R2）：档位色带钩子——弹层 .card.chest 挂 tier-{kind} 类，
   // 视觉（标题底边线/描边/标题字色）在 css/expedition-rewards.css 按 小=古朴灰/
@@ -41,6 +201,7 @@ import { turboMs } from '../core/turbo.js';
   function markChestTier(cur) {
     const card = document.querySelector('#overlay .card.chest');
     if (!card) return;
+    if (!cur?.battleSummary || !UI.el?.ovBody?.querySelector('.reward-head')) card.classList.remove('fx-victory');
     card.classList.remove('tier-small', 'tier-medium', 'tier-large');   // 弹层卡节点跨次复用，先清旧档位再挂（实测会累积）
     if (!cur || !TIER_KINDS.has(cur.kind) || cur.isClass) return;
     card.classList.add('tier-' + cur.kind);
@@ -216,8 +377,12 @@ import { turboMs } from '../core/turbo.js';
 
   // ---------- 开箱 UI（逐个弹窗，全部开完调 onDone） ----------
   function open(game, chests, done, opts) {
+    cancelPresentation();
     const K = Object.assign({ resourceOnly: false }, opts || {});
     G = game;
+    saveContext = { onCell:!!K.onCell, consumeNode:!!K.consumeNode,
+      ...(K.battleSettlement ? { battleSettlement:K.battleSettlement } : {}) };
+    saveBinding = bindSave(game);
     queue = chests.map((chest, i) => ({ ...chest, battleSummary: i === 0 ? K.battleSummary || null : null }));
     idx = 0;
     onDone = done || null;
@@ -226,21 +391,31 @@ import { turboMs } from '../core/turbo.js';
   }
 
   function next() {
+    closeRewardZoom();
+    cancelPresentation();
     if (idx >= queue.length) {
       searchSeq++;              // 作废未播完的搜索演出，避免收尾后又被旧定时器拉回浮层
       UI.hideOverlay();
       G.state = 'idle';
       cur = null;
       queue = [];   // 开完即清：isOpen 用 queue.length 判终态，残留会恒 true 锁死背包
+      saveContext = null;
+      saveBinding = null;
       const cb = onDone;
       onDone = null;
       if (cb) cb();
       return;
     }
     cur = rollContents(queue[idx].kind, queue[idx].isClass);
+    cur.selected = null;
+    cur.lost = new Set();
+    cur.coinsReceived = false;
+    cur.leaveConfirm = false;
+    cur.notice = '';
     cur.isClass = !!queue[idx].isClass;
     cur.battleSummary = queue[idx].battleSummary || null;
     idx++;
+    persistReward();   // 在揭晓前冻结本箱内容与RNG；刷新不再重掷。
     renderSearch();
   }
 
@@ -250,14 +425,28 @@ import { turboMs } from '../core/turbo.js';
   // 旧提灯图标（没图时代的替身）退役；进度条/提示文字保留
   const SEARCH_MS = 780;
   function renderSearch() {
+    cancelPresentation();
     const K = KINDS()[cur.kind];
     const tok = ++searchSeq;
+    const frames = frameArtOf(cur);
+    const context = openingPresentation = { sequence: tok, box: cur, game: G, seed: G.seed, revealed: false, frames: frames.frames.slice(), fps: frames.fps };
+    context.framesReady = true;
+    if (context.frames.length && typeof Image !== 'undefined' && typeof Image.prototype.decode === 'function') {
+      context.framesReady = false;
+      const images = context.frames.map(src => { const image = new Image(); image.src = src; return image; });
+      Promise.all(images.map(image => image.decode())).then(() => {
+        if (!isCurrentPresentation(context)) return;
+        context.framesReady = true;
+        if (context.pendingOpen) beginOpening(context);
+      }).catch(() => {
+        if (isCurrentPresentation(context)) revealOnce(context);
+      });
+    }
     globalThis.__probe?.('rs', `tok=${tok} t=${Date.now()} kind=${cur.kind}`);
-    UI.showOverlay(`[[icon:archive]] 搜刮！${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, `
-      <p class="evt-sts-desc">${cur.isClass ? '黑色职业宝箱：只掉落<b>职业卡牌</b>' : '你俯身翻检箱子——灰尘、锈迹，还有别的东西。'}</p>
+    UI.showOverlay(`[[icon:archive]] 搜寻物资 · ${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, `
+      <p class="evt-sts-desc">${cur.isClass ? '职业补给：本职业专属卡牌' : '正在解锁封存物资。'}</p>
       <button type="button" class="pick-search" data-eps-search data-act="chestReveal" title="点击立即揭晓" style="appearance:none;border:0;background:transparent;color:inherit;font:inherit;width:100%;cursor:pointer">
-        <img class="chest-prop ps-chest" src="${chestArtOf(cur)}" alt="" draggable="false">
-        <span class="ps-ground"><i></i></span>
+        <img class="chest-prop ps-chest" data-chest-animated="${context.frames.length > 1}" data-chest-frame="0" src="${chestArtOf(cur)}" alt="" draggable="false">
         <span class="ps-tip">正在搜索物资…（点击立即揭晓）</span>
       </button>`, 'chest');
     markChestTier(cur);
@@ -270,60 +459,38 @@ import { turboMs } from '../core/turbo.js';
     const delay = turboMs(SEARCH_MS);
     // 体验线切片5（2026-09-28，评估#8）：搜索阶段点击立即揭晓——连开多箱的节奏死点消除；
     // searchSeq 代次保护防串台，揭晓后浮层重绘、监听随之失效
-    UI.act('chestReveal', () => {
-      if (tok !== searchSeq || !cur) return;
-      render();
-      scheduleRevealSfx();
-    });
-    setTimeout(() => {
+    UI.act('chestReveal', () => beginOpening(context, true));
+    searchTimer = setTimeout(() => {
       globalThis.__probe?.('rv', `tok=${tok} seq=${searchSeq} cur=${!!cur} t=${Date.now()} delay=${delay}`);
-      if (tok !== searchSeq || !cur) return;   // 已开下一个/已收尾 → 不再揭晓
-      render();
-      scheduleRevealSfx();
+      beginOpening(context);
     }, delay);
   }
   // ---------- 开箱浮层：悬在当前画面上的紧凑面板（杀戮尖塔「搜刮!」式） ----------
   // 不再整屏接管：模态卡片直接浮在棋盘/结算画面上，逐卡揭晓后收下继续。
-  const riOf = (card) => Math.max(0, SDT.Cards.RARITIES.indexOf(card.rarity));
+  const rewardRarity = (card) => SDT.Cards.rarityOf?.(card) || card.rarity;
 
   function render() {
     const K = KINDS()[cur.kind];
     const isPick = !!K.pickFrom;   // 中宝箱：3 选 1
     const taken = cur.taken || (cur.taken = new Set());
+    const lost = cur.lost || (cur.lost = new Set());
+    const selected = Number.isInteger(cur.selected) ? cur.selected : null;
     const cardsHTML = cur.cards.map((card, i) => {
-      const got = taken.has(i);
-      const act = isPick ? `data-act="chestPick" data-i="${i}" title="点击收下这张"`
-        : got ? '' : `data-act="chestTake1" data-i="${i}" title="点击拾取进背包"`;
-      const tag = act ? 'button' : 'div';
-      const buttonAttrs = act ? ` type="button" aria-label="${escAttr(`${got ? '已收取' : '收取卡牌'}：${card.name || '未命名卡牌'}`)}"` : '';
-      // 体验线切片4（2026-09-28，源自 PoE loot filter 多通道编码模式）：
-      // 收购价币标按 S/A/B/C 档着色——不读文字扫一眼即知档次（色档规则信息编码=体验线，色值美术线可调）
-      const sp = SDT.Cards.sellPrice(card);
-      const tier = sp >= 6 ? 'S' : sp >= 3 ? 'A' : sp >= 2 ? 'B' : 'C';
-      return `<${tag}${buttonAttrs} class="bt-card chest-fly rl-${riOf(card)}${cur.isClass ? ' cls-chest' : ''}${got ? ' got' : ''}" style="animation-delay:${(cur.battleSummary ? 480 : 0) + i * 160}ms"
-        ${act}>
-        ${SDT.Cards.cardHTML(card)}<span class="eps-card-val eps-val-${tier}" title="商店收购价 · 档位 ${tier}">[[icon:coin]]${sp}</span>${got ? '<span class="chest-got-mark">已收</span>' : ''}
-      </${tag}>`;
+      const got = taken.has(i), dropped = lost.has(i);
+      const fits = G.canReceiveCard ? G.canReceiveCard(card) : true;
+      const action = got || dropped
+        ? `<span class="reward-unit-state">${got ? '已入背包' : '已散落'}</span>`
+        : `<button type="button" class="reward-claim${fits ? '' : ' needs-room'}" data-act="${fits ? isPick ? 'chestPick' : 'chestTake1' : 'chestOpenBag'}" data-i="${i}"${cur.leaveConfirm ? ' disabled' : ''}>${fits ? '收下' : '整理背包'}</button>`;
+      return `<article class="reward-unit${got ? ' got' : dropped ? ' dropped' : ''}" data-reward-rarity="${escAttr(rewardRarity(card))}">
+        <button type="button" class="reward-card" data-act="chestSelect" data-i="${i}" aria-label="放大查看${escAttr(card.name || '卡牌')}" title="放大查看">${SDT.Cards.cardHTML(card)}</button>${action}</article>`;
     }).join('');
-    // 体验线切片2（2026-09-28）：搜刮时刻点亮弹药经济——卡牌的消耗命运在拾取时可见
-    // （ fate 行挂在两个分支共用的尾部，中宝箱 3 选 1 同样显示；
-    //   职业宝箱的卡打出后直接消散、不进消耗口袋（开局教学第二格口径），命运文案分支）
-    const fateLine = cur.isClass
-      ? ` · <span class="eps-fate">职业卡打出即消散（不进消耗口袋）</span>`
-      : ` · <span class="eps-fate">打出即散失 · 撤离每张 [[icon:pocket]] 1/3 带回</span>`;
-    const lootLine = (isPick
-      ? `从随机 <b>${cur.cards.length}</b> 张卡牌中选择 <b>1</b> 张 · 另含 [[icon:coin]] <b>${cur.coins}</b> 币`
-      : `开出 <b>${cur.cards.length}</b> 张卡牌${cur.coins ? ` · [[icon:coin]] <b>${cur.coins}</b> 币` : ''}` +
-        (cur.tokenHit ? ' · <b class="gold">[[icon:sparkles]] 员工通行证B！</b>' : '') +
-        (cur.eggHit ? ' · <b class="gold">[[icon:paw]] 宠物蛋！</b>' : '')) +
-      fateLine;
     // 容量预检（2026-09-09 老板定向）：全部收下放不下时先提示清理背包——
     // 同名并入不占格；逐张模拟占格（基础格任意卡 / 珍珠盒扩格仅资源卡），算出放不下的张数
-    const rest = cur.cards.filter((c, i) => !taken.has(i));
+    const rest = cur.cards.filter((c, i) => !taken.has(i) && !lost.has(i));
     let cant = 0, canTake = 0;
     // 三选一（2026-09-19 审计 P2-8）：满包时逐张预检——全部收不下则给警示与「只收金币离开」，
     // 点选被拒时留在面板（旧实现照常 next()，选中的卡被静默吞掉）
-    const pickNoFit = isPick && !rest.some(c => (G.canReceiveCard ? G.canReceiveCard(c) : true));
+    const pickNoFit = isPick && rest.length > 0 && !rest.some(c => (G.canReceiveCard ? G.canReceiveCard(c) : true));
     if (!isPick) {
       const baseCap = SDT.Base.bagCap(), totalCap = G.bagCap();
       let simUsed = G.usedSlots();
@@ -340,75 +507,134 @@ import { turboMs } from '../core/turbo.js';
       .map(o => ({ name: o.card.name, price: SDT.Cards.sellPrice(o.card) }))
       .sort((a, b) => a.price - b.price)[0];
     const cheapHint = cheapestOwned
-      ? ` 背包最低价：「${esc(cheapestOwned.name)}」[[icon:coin]]<b>${cheapestOwned.price}</b> 币——新卡值不止这个价就值得让路`
+      ? ` 背包内最低估值：「${esc(cheapestOwned.name)}」${cheapestOwned.price} 币。`
       : '';
     const warnLine = pickNoFit
-      ? `<p class="chest-warn">[[icon:bag]] 背包已满（${G.usedSlots()}/${G.bagCap()} 格）——选中的卡收不下：按 B 打开背包腾出格子再选，或只收${cur.coins ? `${cur.coins} 币` : '卡牌散落'}离开</p>`
+      ? `<p class="chest-warn">[[icon:bag]] 背包 ${G.usedSlots()}/${G.bagCap()} 格：当前候选都放不下。整理背包后可返回同一选择。</p>`
       : cant > 0
-      ? `<p class="chest-warn">[[icon:bag]] 背包已满（${G.usedSlots()}/${G.bagCap()} 格，珍珠盒扩格只收资源卡）——只能再收 <b>${canTake}</b> 张：可单点卡牌拾取，或按 B 打开背包把卡牌拖入安全格/存入珍珠盒腾出格子，或全部收下（放不下的 <b>${cant}</b> 张将散落）。${cheapHint}</p>`
+      ? `<p class="chest-warn">[[icon:bag]] 背包 ${G.usedSlots()}/${G.bagCap()} 格：按当前卡牌顺序预计可收 ${canTake} 张、${cant} 张放不下；批量领取时实际结果按逐张容量判定，放不下的会散落。${cheapHint}</p>`
       : '';
-    // W1-05（2026-09-27 R2，主代理定向解冻）：三选一补跳过出口——此前唯一离开
-    // 方式=必须点选一张（强迫获取，评审 D3 实测弹层下连点路线卡零反馈）。
-    // chestSkip 处理器本就无条件注册（币照收、卡散落、next()）；按钮文案含「离开」
-    // 命中 overlay 取消语义探测（_findCancelBtn），右上 × 随之自动亮出＝R1 W1-03
-    // 定版「弹层=.ov-x ×」出口制式（Esc/遮罩点击同路）。满包警示行不变。
-    const ops = isPick
-      ? `<div class="scene-ops chest-ops"><button class="ov-btn" data-act="chestSkip">${cur.coins ? '只收金币并离开' : '放弃卡牌并离开'}</button></div>`
-      // 2026-09-06 留言：全部收下移到右边，左侧加跳过（散落不要了）
-      // 2026-09-09 老板定向：满包预检提示 + 单卡拾取（放不下的卡强收时散落，不再静默）
-      : `<div class="scene-ops chest-ops"><button class="ov-btn" data-act="chestSkip">${cur.coins ? '只收金币并离开' : '放弃卡牌并离开'}</button><button class="ov-btn ok${cant > 0 ? ' warn' : ''}" data-act="chestTake">[[icon:archive]] 全部收下${cant > 0 ? `（${cant} 张放不下）` : cur.coins ? `（含 ${cur.coins} 币）` : ''}</button></div>`;
-    UI.showOverlay(`[[icon:archive]] 搜刮！${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, `
-      ${cur.battleSummary ? `<img class="battle-banner" src="${BATTLE_WIN_BANNER}" alt="" draggable="false">` : ''}
-      <div class="loot-manifest"><div><span>FIELD SUPPLY / ${String(idx).padStart(2, '0')}</span><b>${isPick ? '选一件，继续前行。' : '发现补给，整理收获。'}</b></div><div class="loot-capacity"><small>背包占用</small><b>${G.usedSlots()} <em>/ ${G.bagCap()}</em></b></div></div>
-      ${cur.isClass ? '<p class="evt-sts-desc cls-chest-note">黑色职业宝箱：只掉落<b>职业卡牌</b></p>' : ''}
-      <p class="evt-sts-desc">${lootLine}</p>
-      ${cur.battleSummary ? `<p class="evt-sts-desc battle-loot-summary">本战击败 <b>${cur.battleSummary.defeated}</b> 名敌人 · 剩余生命 <b>${cur.battleSummary.hp}/${cur.battleSummary.maxHp}</b></p>` : ''}
-      ${warnLine}
-      <div class="chest-reveal"><img class="chest-prop opened" src="${chestArtOf(cur)}" alt="" draggable="false"></div>
-      ${cur.cards.length ? `<div class="bt-hand${taken.size ? ' no-anim' : ''}" data-n="${cur.cards.length}">${cardsHTML}</div>` : '<p class="ov-empty">（卡牌库是空的，什么也没开出）</p>'}
-      <div class="loot-footer-note">${isPick ? '点击一张收下 · 未收取的卡牌将散落' : '点击卡牌收下它，未收取的将在离开时散落'}</div>${ops}`, 'chest');
+    const finished = rest.length === 0;
+    const ops = cur.leaveConfirm
+      ? `<div class="reward-leave-confirm"><p>放弃剩余 ${rest.length} 张卡牌？</p><button type="button" class="reward-secondary" data-act="chestStay">继续领取</button><button type="button" class="reward-secondary danger" data-act="chestLeave">确认放弃</button></div>`
+      : rewardExitHTML(finished ? 'chestContinue' : 'chestSkip', finished ? '继续探索' : '离开');
+    const bulk = !finished && !isPick && !cur.leaveConfirm && rest.length > 1
+      ? `<button type="button" class="reward-secondary${cant ? ' danger' : ''}" data-act="chestTake">全部收下${cant ? ` · ${cant} 张可能散落` : ''}</button>` : '';
+    const outcome = cur.battleSummary?.cardOutcome;
+    const details = outcome ? `<details class="loot-outcome"><summary>本战卡牌去向</summary>${[['进入消耗口袋',outcome.pocket],['直接消散',outcome.gone],['仍在背包',outcome.retained]].map(([label,names]) => `<p><b>${label}</b>：${names.length ? names.map(esc).join('、') : '无'}</p>`).join('')}</details>` : '';
+    const coins = cur.coins ? `<div class="reward-coins"><b>[[icon:coin]] +${cur.coins}</b><span>${cur.coinsReceived ? '已获得' : '离开时获得'}</span></div>` : '';
+    const footer = `<span class="reward-capacity">[[icon:bag]] ${G.bagCapacityText?.() || `${G.usedSlots()}/${G.bagCap()} 格`}</span><button type="button" class="reward-bag" data-act="chestOpenBag">整理背包</button>${cur.notice && !finished ? `<span class="reward-notice" role="status">${esc(cur.notice)}</span>` : ''}${finished ? `<span class="reward-final" role="status">${taken.size} 张已入背包${lost.size ? ` · ${lost.size} 张已散落` : ''}</span>` : ''}`;
+    const body = rewardSceneHTML({
+      title:cur.battleSummary ? '战斗胜利' : isPick ? '选择收获' : '搜刮完成',
+      source:`${cur.isClass ? '职业补给' : K.name}${queue.length > 1 ? ` · ${idx}/${queue.length}` : ''}`,
+      rule:finished ? '' : isPick ? '任选 1 张，其他卡牌留在原地' : cur.cards.length > 1 ? '奖励可分别领取' : '',
+      cards:cardsHTML || '<p class="reward-empty">这里没有卡牌</p>',
+      actions:`${ops}${bulk}`, coins, footer, warning:warnLine, details, count:cur.cards.length,
+      className:`reward-v14${taken.size || lost.size ? ' no-anim' : ''}`,
+    });
+    const currentBody = UI.el?.ovBody;
+    if (currentBody?.querySelector('.reward-v14')) {
+      const scrollTop = currentBody.querySelector('.loot-scroll')?.scrollTop || 0;
+      const hadFocus = currentBody.contains(document.activeElement);
+      currentBody.innerHTML = SDT.Icons.rich(body);
+      const scroll = currentBody.querySelector('.loot-scroll');
+      if (scroll) scroll.scrollTop = scrollTop;
+      if (hadFocus) currentBody.querySelector(`[data-act="chestSelect"][data-i="${selected ?? 0}"]`)?.focus({ preventScroll:true });
+    } else {
+      UI.showOverlay(`[[icon:archive]] ${cur.battleSummary ? '搜刮！战斗胜利 · ' : '收获 · '}${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, body, 'chest');
+    }
     markChestTier(cur);
-    UI.act('chestTake', takeAll);
+    const renderedBox = cur;
+    const isLiveReward = () => cur === renderedBox && !!UI.el?.ovBody?.querySelector('.reward-head') && !UI.el?.overlay?.hidden;
+    UI.act('chestTake', () => { if (isLiveReward() && !isPick && !cur.leaveConfirm) takeAll(); });
+    UI.act('chestSelect', (d) => {
+      if (!isLiveReward()) return;
+      const i = Number(d.i);
+      if (!Number.isInteger(i) || !cur.cards[i]) return;
+      cur.selected = i;
+      cur.leaveConfirm = false;
+      cur.notice = '';
+      const card = cur.cards[i];
+      const available = !cur.taken.has(i) && !cur.lost.has(i);
+      const fits = G.canReceiveCard ? G.canReceiveCard(card) : true;
+      const source = UI.el.ovBody.querySelector(`[data-act="chestSelect"][data-i="${i}"]`);
+      UI.showCardZoom?.(card, { from:source, returnFocus:source, hideNote:true, presentation:'expedition',
+        footer:available ? `<button class="ov-btn ok" data-act="${fits ? isPick ? 'chestPick' : 'chestTake1' : 'chestOpenBag'}" data-i="${i}">${fits ? '收下' : '整理背包'}</button>` : '' });
+      rewardZoom = document.getElementById('cardZoom');
+    });
     UI.act('chestTake1', (d) => {
-      const card = cur.cards[+d.i];
-      if (!card || cur.taken.has(+d.i)) return;
+      if (!isLiveReward() || isPick || cur.leaveConfirm) return;
+      const i = Number(d.i);
+      const card = cur.cards[i];
+      if (!card || cur.taken.has(i) || cur.lost.has(i)) return;
+      closeRewardZoom();
+      cur.selected = i;
       if (G.grantCard(card, { silent: true })) {   // grantEventCard：同名并入 / 容量判定都在里面（搜刮页自带揭晓，不再叠加获得演出）
-        cur.taken.add(+d.i);
+        cur.taken.add(i);
+        persistReward();
+        cur.notice = `「${card.name}」已入本次远征背包`;
         render();
-      }
-      // 收不下（背包满）时 grantCard 内部已 warn 日志，卡保持可点不动
+      } else { cur.notice = `「${card.name}」当前放不下，整理背包后可重试`; render(); }
     });
     UI.act('chestSkip', () => {
-      if (cur.coins) G.gainCoins(cur.coins);   // 币是无主物，跳过也收；卡牌散落
-      UI.log('（你留下开出的卡牌，转身走了……）', 'dim');
-      next();
+      if (!isLiveReward()) return;
+      if (cur.cards.some((_, i) => !cur.taken.has(i) && !cur.lost.has(i))) {
+        cur.leaveConfirm = true;
+        cur.notice = '';
+        render();
+      } else { collectCoinsOnce(); next(); }
     });
+    UI.act('chestStay', () => { if (isLiveReward()) { cur.leaveConfirm = false; render(); } });
+    UI.act('chestLeave', () => {
+      if (!isLiveReward() || !cur.leaveConfirm) return;
+      cur.cards.forEach((_, i) => { if (!cur.taken.has(i)) cur.lost.add(i); });
+      collectCoinsOnce();
+      UI.log('（未收取的卡牌留在原地）', 'dim');
+      cur.leaveConfirm = false;
+      cur.notice = '剩余卡牌已散落';
+      render();
+    });
+    UI.act('chestContinue', () => {
+      if (!isLiveReward() || cur.cards.some((_, i) => !cur.taken.has(i) && !cur.lost.has(i))) return;
+      collectCoinsOnce(); next();
+    });
+    UI.act('chestOpenBag', () => { if (isLiveReward()) { closeRewardZoom(); document.getElementById('bagBtnFloat')?.click(); } });
     UI.act('chestPick', (d) => {
-      const card = cur.cards[+d.i];
-      if (!card) return;
+      if (!isLiveReward() || !isPick || cur.leaveConfirm) return;
+      const i = Number(d.i);
+      const card = cur.cards[i];
+      if (!card || cur.taken.has(i) || cur.lost.has(i)) return;
+      closeRewardZoom();
+      cur.selected = i;
       // 放不下时留在面板（grantCard 内部已播报「背包已满」）：玩家可腾格重选或走「只收金币离开」，
       // 不得照常 next()——否则三选一被静默吞卡（2026-09-19 审计 P2-8）
-      if (!G.grantCard(card, { silent: true })) return;
-      if (cur.coins) G.gainCoins(cur.coins);
-      next();
+      if (!G.grantCard(card, { silent: true })) { cur.notice = `「${card.name}」当前放不下，整理背包后可重试`; render(); return; }
+      cur.taken.add(i);
+      cur.cards.forEach((_, other) => { if (other !== i) cur.lost.add(other); });
+      collectCoinsOnce();
+      cur.notice = `「${card.name}」已入本次远征背包`;
+      render();
     });
     UI.refresh(G);
   }
 
   // 逐卡揭晓音效：史诗叮鸣、传说号角；揭晓卡带过冲 pop（game-feel）
   function scheduleRevealSfx() {
+    const sequence = searchSeq;
+    const revealed = cur;
     (cur.cards || []).forEach((c, i) => {
       setTimeout(() => {
         // 测试环境拆除后定时器仍触发（逐卡揭晓音效定时器无清理通道）：document 已删时安全短路；浏览器内不可达，行为逐字不变。
-        if (typeof document === "undefined") return;
-        const hand = document.querySelector('.bt-hand');
+        if (typeof document === "undefined" || sequence !== searchSeq || cur !== revealed || cur.taken?.has(i)) return;
+        const hand = UI.el?.ovBody?.querySelector('.loot-scroll .reward-objects');
         if (!hand) return;
         SDT.Sound.sfx('reveal');
-        if (c.rarity === '传说') SDT.Sound.sfx('legend');
-        else if (c.rarity === '史诗') SDT.Sound.sfx('ding');
+        const rarity = rewardRarity(c);
+        if (rarity === '传说' || rarity === '棱彩') SDT.Sound.sfx('legend');
+        else if (rarity === '史诗') SDT.Sound.sfx('ding');
         const cards = hand.children;
         const el = cards[i] || cards[cards.length - 1];
-        if (el && SDT.Motion) SDT.Motion.pop(el);
+        if (el && SDT.Motion && !['史诗', '传说', '棱彩'].includes(rarity)) SDT.Motion.pop(el);
       }, 140 + i * 170);
     });
   }
@@ -416,24 +642,58 @@ import { turboMs } from '../core/turbo.js';
   function takeAll() {
     const taken = cur.taken;
     cur.cards.forEach((card, i) => {
-      if (taken && taken.has(i)) return;   // 已单卡拾取过的不重复入包
-      G.grantCard(card, { silent: true });   // 搜刮页自带揭晓，不叠加获得演出
+      if (taken.has(i) || cur.lost.has(i)) return;
+      if (G.grantCard(card, { silent: true })) taken.add(i);
+      else cur.lost.add(i);   // 原批量规则：放不下的卡散落；结果留在原位供核对
     });
-    if (cur.coins) G.gainCoins(cur.coins);
+    collectCoinsOnce();
     if (!cur.cards.length && !cur.coins) UI.log('（空的——早被别的拾荒者搬空了……）', 'dim');
-    next();
+    cur.notice = `已入背包 ${taken.size} 张${cur.lost.size ? `，放不下散落 ${cur.lost.size} 张` : ''}`;
+    persistReward();
+    render();
+  }
+
+  function collectCoinsOnce() {
+    if (!cur || cur.coinsReceived) return;
+    if (cur.coins) G.gainCoins(cur.coins);
+    cur.coinsReceived = true;
+    persistReward();
   }
 
   // 挂起/恢复（2026-09-09 留言 #13）：搜刮界面允许打开背包——
   // suspend 作废未播完的搜索演出计时器（防止中途 render 抢走背包浮层），
   // 背包关闭后 resume 重新渲染当前搜刮面板继续开箱
   function suspend() {
+    closeRewardZoom();
+    cancelPresentation();
     searchSeq++;
     return !!(cur || queue.length);
   }
   function resume() {
+    cancelPresentation();
     if (cur) render();
   }
-  sdtDefine('Chests', { rollDrops, dropText, open, rollContents, isOpen: () => !!(cur || queue.length), suspend, resume });
+  function serialize(game) {
+    if (G !== game || !saveBinding || saveBinding.seed !== game.seed || saveBinding.layerIdx !== game.layerIdx || saveBinding.trackPos !== game.trackPos
+      || saveBinding.runToken !== game.discoveredPairs) return null;
+    return serializeChestReward(game, queue, idx, cur, saveContext);
+  }
+  function restore(game, saved, done) {
+    const value = restoreChestReward(game, saved);
+    if (!value) return false;
+    closeRewardZoom();
+    cancelPresentation(); searchSeq++;
+    G = game; queue = value.queue; idx = value.index; cur = value.current;
+    saveContext = value.context; onDone = done; G.state = 'modal';
+    saveBinding = bindSave(game);
+    render(); persistReward(); return true;
+  }
+  const cancelOnModeChange = event => { if (event.detail !== 'chest') { cancelPresentation(); searchSeq++; } };
+  if (typeof document !== 'undefined') document.addEventListener('sdt-overlay-mode', cancelOnModeChange);
+  if (import.meta.hot) import.meta.hot.dispose(() => {
+    cancelPresentation();
+    if (typeof document !== 'undefined') document.removeEventListener('sdt-overlay-mode', cancelOnModeChange);
+  });
+  sdtDefine('Chests', { rollDrops, dropText, open, rollContents, configureFrameArt, isOpen: () => !!(cur || queue.length), suspend, resume, serialize, restore });
 
 export { SDT };

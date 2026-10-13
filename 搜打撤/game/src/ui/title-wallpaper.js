@@ -1,4 +1,5 @@
 import { storeGet, storeSet } from '../core/storage.js';
+import { hideHomeForWallpaper, restoreHomeFromWallpaper } from './home-menu-motion.js';
 
 const preferenceKey = 'sdt-title-wallpaper';
 const wallpapers = ['snow', 'ensemble'];
@@ -13,6 +14,8 @@ if (title && viewButton) {
     viewButton.setAttribute('aria-pressed', String(viewing));
     viewButton.querySelector('span').textContent = viewing ? '恢复界面' : '只看壁纸';
     viewButton.title = viewing ? '恢复主页界面' : '隐藏界面，只看壁纸';
+    if (viewing) hideHomeForWallpaper();
+    else restoreHomeFromWallpaper();
   });
 }
 

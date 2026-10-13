@@ -15,6 +15,10 @@ export const PEARL_BOX_ID = 'tt2-pearlbox';
 const PEARL_BOX_SLOTS = 9;
 const pearlBonus = () => (game.ownedCards || []).filter(o => o.card && o.card.id === PEARL_BOX_ID).length * PEARL_BOX_SLOTS;
 export const bagCap = () => SDT.Base.bagCap() + pearlBonus();
+export function bagCapacityText() {
+  const base = SDT.Base.bagCap(), extra = pearlBonus(), used = usedSlots();
+  return extra ? `通用格 ${Math.min(used, base)}/${base} · 资源专用格 ${Math.max(0, used - base)}/${extra}` : `${used}/${base} 格`;
+}
 // 背包能否再收一张卡：基础格内任意类型；珍珠盒扩出来的格子仅资源卡（卡面「容纳所有类型的资源卡牌」）
 export const canAcceptCard = (card) => {
   if (!card) return false;
@@ -72,6 +76,7 @@ export function assertZones() {
 }
 
 game.bagCap = bagCap;
+game.bagCapacityText = bagCapacityText;
 game.canAcceptCard = canAcceptCard;   // 珍珠盒扩格的资源限制（Q5）
 game.stackCapOf = stackCapOf;
 game.safeCap = safeCap;

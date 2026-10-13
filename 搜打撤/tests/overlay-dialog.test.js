@@ -93,6 +93,25 @@ describe('overlay dialog accessibility contract', () => {
     expect(document.activeElement).toBe(opener);
   });
 
+  it('收回大卡后的按键重复不会触发底层奖励离开', async () => {
+    window.SDT.Cards = { all: () => [], cardHTML: () => '<article class="hs-card"><div class="hsc-desc"></div></article>' };
+    UI.showOverlay('奖励', '<button data-act="inspect">查看卡牌</button><button data-act="leave">离开</button>', 'chest');
+    let left = 0;
+    UI.act('leave', () => { left++; });
+    await waitFrame();
+    const source = document.querySelector('[data-act="inspect"]');
+    source.focus();
+    UI.showCardZoom({ id:'card', name:'测试卡', desc:'完整规则' }, { hideNote:true, presentation:'expedition' });
+    const zoom = document.getElementById('cardZoom');
+    expect(zoom.querySelector('.cz-note')).toBeNull();
+    zoom.querySelector('.cz-close').dispatchEvent(new KeyboardEvent('keydown', { key:'Escape', bubbles:true, cancelable:true }));
+    // 原生输入把焦点还给来源后，可能继续发送同一次长按的 repeat。
+    source.dispatchEvent(new KeyboardEvent('keydown', { key:'Escape', repeat:true, bubbles:true, cancelable:true }));
+    expect(left).toBe(0);
+    expect(UI.el.overlay.hidden).toBe(false);
+    zoom._closeCardZoom(true);
+  });
+
   it('closes immediately when reduced motion is enabled', () => {
     UI.showOverlay('成就总览', '<div class="achievement-gallery">奖章</div>', 'page');
     document.body.classList.add('reduce-motion');

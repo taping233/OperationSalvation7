@@ -69,8 +69,8 @@ async function sweep(max = 120) {
   for (let i = 0; i < max; i++) {
     await tick(30);
     if (game.state === 'idle') return;
-    for (const act of ['flowContinue', 'chestTake', 'chestPick', 'chestSkip', 'pickupGo', 'closeShop',
-      'blankSafeDone', 'evtNext', 'evtChoice', 'resPick0', 'resSkip', 'fireDone', 'stayHere', 'goDoor']) {
+    for (const act of ['flowContinue', 'chestContinue', 'chestTake', 'chestTake1', 'chestPick', 'chestSkip', 'chestLeave', 'pickupGo', 'closeShop',
+      'blankSafeDone', 'evtNext', 'evtChoice', 'resTake', 'resSkip', 'nodeChestSearch', 'fireRestGo', 'fireDone', 'stayHere', 'goDoor']) {
       if (clickAct(act)) break;
     }
   }
@@ -156,7 +156,8 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
       expect(reenterCell()).toBe(true);
       await sweep();
       expect(lootCount(), `${kind} 格完成后站在原地也不得重刷`).toBe(settledLoot);
-      expect(document.body.textContent).toContain('已完成结算');
+      // 完成提示可能写入默认收起的日志；直接核对旧节点不会再给可领取输入。
+      expect(document.querySelector('[data-act="chestSelect"], [data-act="chestTake"], [data-act="pickupGo"]')).toBeNull();
     } else {
       expect(game.visited[vKey]).toBeFalsy(); // 关闭商店尚未离开，仍可重逛
       expect(reenterCell()).toBe(true);
@@ -177,7 +178,7 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
     expect(game.state).toBe('idle');
     expect(game.trackPos).toBe(cellIdx);
     if (kind !== 'shop') expect(lootCount(), `${kind} 格返回后不得再入账`).toBe(loot2);
-    expect(document.body.textContent).toContain('已完成结算');
+    expect(document.querySelector('[data-act="chestSelect"], [data-act="chestTake"], [data-act="pickupGo"]')).toBeNull();
   });
 
   it('物资格有独立场景层；暂不领取可重进，领取后立即变普通', async () => {
@@ -193,14 +194,19 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
 
     expect(reenterCell()).toBe(true);
     await tick(30);
-    expect(document.querySelector('.node-pg[data-asset-key="scene-event-airdrop"]')).toBeTruthy();
+    expect(document.querySelector('.resource-reward-scene')).toBeTruthy();
+    const fixedCards = [...game.nodeRewards[key].cardIds];
     expect(clickAct('resSkip')).toBe(true);
     await tick(30);
     expect(game.visited[key]).toBeFalsy();
 
     expect(reenterCell()).toBe(true);
     await tick(30);
-    expect(clickAct('resPick0')).toBe(true);
+    expect(game.nodeRewards[key].cardIds).toEqual(fixedCards);
+    const beforeRead = game.ownedCards.length;
+    expect(clickAct('resRead')).toBe(true);
+    expect(game.ownedCards.length).toBe(beforeRead);
+    expect(clickAct('resTake')).toBe(true);
     await sweep();
     expect(game.visited[key]).toBe(1);
   });

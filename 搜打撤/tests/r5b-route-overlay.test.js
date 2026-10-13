@@ -34,6 +34,7 @@ describe('R5-b deterministic route overlay',()=>{
         expect(types(a.value.layerData).sort()).toEqual(types(base).sort());
       }
     }
-    expect({applied,fallback}).toEqual({applied:63,fallback:37});
+    // 首层火堆必须在首战后：r5-check-90 因首层质量门重试整图，第二层改为安全降级。
+    expect({applied,fallback}).toEqual({applied:62,fallback:38});
   });
 });

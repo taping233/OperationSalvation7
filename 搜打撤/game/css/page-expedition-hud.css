@@ -12,6 +12,104 @@
    ═══════════════════════════════════════════════════════════════════ */
 
 /* ── T0 统一节奏变量：fast=色彩/光晕/小位移，lift=回弹过冲（快按慢弹），press=按下快进 ── */
+/* 探索信息层：目标有独立阅读行，路线名称与已知结果分级。 */
+body #sidebar #routePanel { display:grid; grid-template-rows:auto minmax(60px,1fr) auto; align-content:start; justify-content:stretch; gap:6px; padding:8px 12px; box-sizing:border-box; }
+body #sidebar #routePanel .route-heading { display:flex; flex-direction:column; align-items:flex-start; gap:4px; min-height:48px; margin:0; }
+body #sidebar .route-title { font-size:16px; letter-spacing:.08em; color:#f1e2bc; text-shadow:none; }
+body #sidebar .route-objective { font-size:15px; line-height:1.45; color:#d1dade; letter-spacing:0; white-space:normal; overflow:visible; text-overflow:clip; max-width:none; }
+body #sidebar #routePanel .route-options { min-height:60px; margin:0; padding:4px 2px; align-items:stretch; }
+body #sidebar #routePanel { grid-column:3; grid-row:1 / span 2; }
+
+/* 地图系统第一轮：连续行动台。空间在主图，身份与当前行动在同一稳定底栏。 */
+body:not(.lobby):not(.scene-battle-3d) #sidebar {
+  height:188px; min-height:188px; grid-template-columns:116px 138px minmax(0,1fr);
+  grid-template-rows:minmax(0,1fr); gap:20px; padding:16px 24px;
+  border-top:1px solid #869ba5; background:#14242dea;
+  box-shadow:0 -8px 24px #0a172144;
+}
+body:not(.lobby):not(.scene-battle-3d) #sidebar::before { content:none; }
+body #sidebar .panel { background:none; box-shadow:none; border:0; min-width:0; padding:0; }
+body #sidebar .panel::before { content:none; }
+body #sidebar #charPanel { align-items:center; justify-content:center; min-width:0; }
+body #sidebar #charPanel .hero-ava { position:relative; left:auto; bottom:auto; width:96px; min-width:96px; height:120px; border:1px solid #92a8b2; box-shadow:none; }
+body #sidebar #charPanel .hero-ava::after { content:none; }
+body #sidebar #statsPanel { min-width:0; justify-content:center; padding:0 16px 0 0; border-right:1px solid #768c963d; }
+body #sidebar #miniMap { display:none; }
+body #sidebar #statsPanel .stat-duo { flex-direction:column; align-items:flex-start; gap:10px; }
+body #sidebar #statsPanel .stat-duo label { font-size:14px; letter-spacing:.04em; color:#c6d2d8; }
+body #sidebar #statsPanel .stat-duo b { font-size:22px; }
+body #sidebar #devPanel { display:none; }
+body #sidebar #routePanel { grid-column:3; grid-row:1; padding:0; background:none; box-shadow:none; }
+body #sidebar #routePanel .route-heading { border:0; padding:0; }
+body #sidebar #routePanel .route-title::before { content:none; }
+body #sidebar #routePanel .route-option { background:#243942; border:1px solid #7c929a; box-shadow:none; min-height:64px; padding:10px 14px; }
+body #sidebar #routePanel .route-option::after { content:none; }
+body #sidebar #routePanel .route-option.selected { background:#394e54; border-color:#ead39b; box-shadow:inset 3px 0 #ead39b; }
+body #sidebar #routePanel .route-help { border:0; padding:0; font-size:12px; }
+body:not(.scene-battle-3d) #bagBtnFloat { bottom:calc(188px + 12px)!important; }
+
+/* IS7第二轮修正版：地图中央 / 节点决策右侧 / 底部薄工具带。 */
+body:not(.lobby):not(.scene-battle-3d) #sidebar { height:116px; min-height:116px; grid-template-columns:90px 138px minmax(0,1fr); padding:12px 24px; gap:18px; }
+body #sidebar #charPanel .hero-ava { width:64px; min-width:64px; height:80px; }
+body #sidebar #routePanel { position:absolute; right:24px; bottom:calc(100% + 20px); width:340px; height:430px; padding:20px; background:#152831f5; border:1px solid #869da5; grid-template-rows:auto minmax(0,1fr) auto; gap:16px; box-shadow:0 12px 24px #0613193d; }
+body #sidebar #routePanel .route-heading { gap:10px; }
+body #sidebar #routePanel .route-title { font-size:20px; }
+body #sidebar #routePanel .route-objective { line-height:1.6; }
+body #sidebar #routePanel .route-options { flex-direction:column; overflow-y:auto; overflow-x:hidden; mask-image:none; -webkit-mask-image:none; align-items:stretch; min-height:0; }
+body #sidebar #routePanel .route-option { flex:0 0 auto; min-height:80px; min-width:0; }
+body #sidebar #routePanel .route-option[data-direction="return"] { border-style:dashed; }
+body #sidebar #routePanel .route-option[data-direction="deeper"] { box-shadow:inset 3px 0 #e6cb76; }
+body #sidebar #routePanel .route-arrow::before { display:block; margin-bottom:6px; font-size:12px; }
+body #sidebar #routePanel .route-option[data-direction="return"] .route-arrow::before { content:'回程'; }
+body #sidebar #routePanel .route-option[data-direction="deeper"] .route-arrow::before { content:'深入'; }
+body #sidebar #routePanel .route-help { flex-direction:column; gap:6px; font-size:13px; line-height:1.5; }
+body #sidebar .expedition-nav-summary { display:flex; flex-direction:column; justify-content:center; gap:6px; padding-right:230px; color:#d6e2e5; }
+body #sidebar .expedition-nav-summary b { font-size:16px; }
+body #sidebar .expedition-nav-summary span { font-size:14px; }
+body #sidebar .expedition-nav-summary small { font-size:12px; color:#adbec5; }
+body:not(.lobby):not(.scene-battle-3d) #bagBtnFloat { right:24px!important; bottom:24px!important; }
+body #sidebar #logPanel { position:absolute; right:104px; left:auto; bottom:24px; width:330px; }
+body #sidebar #logPanel.collapsed { width:130px; min-width:130px; }
+body #sidebar #logPanel:not(.collapsed) { bottom:24px; z-index:10; }
+body #sidebar .route-objective[data-tone="danger"] { color:#ffb3a4; }
+body #sidebar .route-copy b { font-size:16px; }
+body #sidebar .route-copy small { font-size:14px; line-height:1.4; color:#c0cbd0; }
+body #sidebar .route-option[data-direction="return"] { border-style:dashed; }
+body #sidebar .route-option[data-direction="deeper"] { box-shadow:inset 3px 0 0 #e6cb76; }
+body #sidebar .route-option[data-cleared="1"] .route-icon { opacity:.65; }
+/* Removed map panels stay absent; compact navigation owns location/help only. */
+body #sidebar #routePanel, body #sidebar #logPanel { display:none!important; }
+body:not(.lobby):not(.scene-battle-3d) #sidebar { background:#090d10f2; border-top-color:#8aa0a22b; box-shadow:none; }
+body #sidebar .expedition-nav-summary { gap:5px; padding-right:110px; }
+body #sidebar #statsPanel { border-right-color:#7b91982b; }
+/* Map tools are actions, not repeated character/location summaries. */
+body:not(.lobby):not(.scene-battle-3d) #sidebar { height:94px; min-height:94px; grid-template-columns:minmax(0,1fr); padding:10px 28px; gap:0; }
+body #sidebar :is(#charPanel,#statsPanel) { display:none; }
+body #sidebar .expedition-nav-summary { padding:0; min-width:0; display:block; }
+body #sidebar .expedition-toolbar { display:flex; align-items:center; gap:18px; height:100%; }
+body #sidebar .expedition-toolbar button { display:flex; align-items:center; gap:12px; min-width:156px; min-height:66px; padding:8px 18px; border:1px solid #617d844d; background:#14242c; color:#e2ecec; text-align:left; cursor:pointer; }
+body #sidebar .expedition-toolbar button > .ic { width:30px; height:30px; }
+body #sidebar .expedition-toolbar button > span { display:flex; flex-direction:column; gap:4px; font:600 20px/1.3 var(--font-ui); }
+body #sidebar .expedition-toolbar button small { color:#9eb5bf; font:400 16px/1.3 var(--font-ui); }
+body #sidebar .expedition-toolbar button:hover { border-color:#bdcfce; background:#203740; }
+body #sidebar .expedition-toolbar button:focus-visible { outline:2px solid #e4d3a1; outline-offset:3px; }
+body #sidebar .expedition-toolbar button:disabled { opacity:.5; cursor:default; }
+body #sidebar .expedition-toolbar-space { flex:1; }
+body #sidebar .expedition-toolbar .map-view-tool { min-width:130px; background:transparent; border-color:#617d842b; }
+body:not(.lobby):not(.scene-battle-3d):not(:has(#overlay:not([hidden]))) #bagBtnFloat { display:none; }
+body #resHud .res-gold::before { content:'金币'; font-size:14px; color:#e3d6b3; }
+body #resHud .res-atk::before { content:'攻击'; font-size:14px; color:#f0c0b4; }
+body #resHud .chip-mini { gap:8px; padding-left:10px; min-width:120px; }
+.expedition-feedback { position:absolute; z-index:8; left:50%; bottom:224px; transform:translateX(-50%); width:min(560px,80%); padding:16px 20px; color:#e6edef; background:rgba(19,32,40,.97); border:1px solid #7b999f; box-shadow:0 10px 28px #09131b66; }
+.expedition-feedback header { display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.expedition-feedback header b { font-size:18px; }
+.expedition-feedback p { margin:10px 0; font-size:16px; line-height:1.5; }
+.expedition-feedback small { color:#c4d0d4; font-size:14px; }
+.expedition-feedback button { min-width:32px; min-height:32px; border:1px solid #95b0b5; background:#263f49; color:#edf5f5; cursor:pointer; }
+.expedition-feedback-cards { display:flex; justify-content:center; gap:16px; margin:16px 0; }
+.expedition-feedback-cards .hs-card { width:154px; height:216px; font-size:15.4px; flex:none; pointer-events:none; }
+.expedition-feedback .expedition-feedback-continue { display:block; margin-left:auto; padding:8px 20px; font-size:16px; }
+.expedition-feedback-entry { bottom:224px; }
 #sidebar, #topBtns, #resHud, #logPanel, #bagBtnFloat {
   --exh-fast: .18s cubic-bezier(.33, 1, .68, 1);
   --exh-lift: .32s cubic-bezier(.3, 1.4, .45, 1);
@@ -144,7 +242,6 @@
   transition: color var(--exh-fast), border-color var(--exh-fast), background var(--exh-fast),
     box-shadow var(--exh-fast), transform var(--exh-fast);
 }
-#topBtns #btnHome:hover,
 #topBtns #btnHelp:hover,
 #topBtns #btnMute:hover {
   color: #f4f4f4 !important;
@@ -272,3 +369,149 @@ body:not(.lobby):not(.scene-battle-3d) #topBtns #btnLocate { display: none !impo
    button:not(:disabled) 白名单已给出互动光标），无新增非按钮可点元素。
    禁用路线卡保持系统默认，压掉自定义互动光标误导。 ═════════ */
 #sidebar .route-option:disabled { cursor: default; }
+
+/* IS7 source layout: edge-aligned top groups, central current-region title,
+   continuous bottom inventory strip. No route details or action-log panel. */
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns {
+  top:16px; left:68px; gap:14px; align-items:center; height:62px;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns button {
+  width:50px; height:50px; min-width:50px; padding:0; border:0;
+  border-radius:0; clip-path:none; box-shadow:none; color:#e5e6e5;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns #btnHome {
+  order:0; background:#632d32!important; border:0!important; color:#fff!important;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns #btnHelp,
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns #btnMute {
+  order:2; background:#20222580!important; border:0!important;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud {
+  order:1; min-width:184px; height:54px; margin-left:6px; padding:0;
+  background:#15171acc; border:0; clip-path:none; box-shadow:none; gap:0;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud .hp-hud-icon { display:none; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud .hp-hud-body { width:100%; padding:0; position:relative; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud .hp-hud-label {
+  display:block; height:19px; padding:0 9px!important; margin:0;
+  background:#356c84b0!important; color:#e8edf0; font:400 13px/19px var(--font-ui); letter-spacing:1px;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud #hpText {
+  display:block; padding:0 10px; margin:0; text-shadow:none; color:#f0f0ef; font:600 29px/33px var(--font-num); letter-spacing:1px;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud #hpText .hp-rest { color:#989fa3; font-size:20px; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpBarWrap { display:none; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud {
+  top:22px; right:72px; gap:30px; align-items:center;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud .chip-mini {
+  min-width:120px; height:44px; padding:0 12px 0 0; border:0; gap:10px;
+  background:#16171999; box-shadow:none; clip-path:none;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud .chip-mini::before { display:none; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud .res-ic {
+  width:40px; height:40px; padding:5px; background:none; filter:none;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud .chip-mini b {
+  font:500 31px/1 var(--font-num); text-shadow:none;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar {
+  height:108px; min-height:108px; padding:0 70px; gap:0;
+  display:block; background:#292b2ddc; border:0; border-top:1px solid #a1a1a166; box-shadow:none;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-nav-summary { height:100%; padding:0; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar { gap:0; height:100%; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar button {
+  align-self:stretch; min-height:0; min-width:210px; padding:12px 24px; gap:16px;
+  background:none; border:0; border-right:1px solid #d6d6d623; box-shadow:none; clip-path:none; color:#e8e8e6;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar button > .ic {
+  width:42px; height:42px; opacity:.82; filter:grayscale(1);
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar button > span {
+  font:400 21px/1.3 var(--font-ui); gap:5px;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar button small {
+  font:400 13px/1.25 var(--font-ui); color:#adb0b3;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar strong {
+  font:500 32px/1 var(--font-num); margin-left:14px; color:#fff; white-space:nowrap;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar strong small { font-size:21px; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar kbd {
+  font:400 13px/1 var(--font-num); color:#b0b2b5; background:none; border:0; border-radius:0; padding:0; box-shadow:none; align-self:flex-end; margin-bottom:4px;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar button:hover {
+  background:#ffffff0b; color:#fff;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar .map-view-tool {
+  min-width:172px; padding-left:20px; padding-right:20px;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar .map-view-tool > .ic { width:30px; height:30px; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar button:last-child { border-right:0; }
+
+/* Map replica: one persistent tool strip and one selected-location side panel. */
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] {
+  height:112px; min-height:112px; padding:0 36px; display:block;
+  background:#171c20f2; border:0; border-top:1px solid #d4dddf38; box-shadow:none;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-nav-summary { height:100%; padding:0; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar {
+  display:grid; grid-template-columns:repeat(3,minmax(200px,260px)) minmax(40px,1fr) repeat(2,150px);
+  gap:0; align-items:stretch; height:100%;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar button {
+  display:flex; align-items:center; min-width:0; min-height:0; padding:0 20px; gap:12px;
+  border:0; border-right:1px solid #d4dddf26; background:transparent; box-shadow:none;
+  border-radius:0; color:#e8edec; clip-path:none; text-align:left; cursor:pointer;
+  transition:background 160ms ease-out,color 160ms ease-out;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar button > .ic { width:38px; height:38px; flex:none; filter:grayscale(1); }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar button > span { font:500 24px/1.3 var(--font-ui); white-space:nowrap; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar strong { font:500 32px/1 var(--font-num); margin-left:auto; color:#fff; white-space:nowrap; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar strong small { font:400 21px/1 var(--font-num); color:#a7b3b6; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar kbd { font:400 13px/1 var(--font-num); color:#8b989d; align-self:flex-end; margin:0 0 22px; padding:0; background:none; border:0; box-shadow:none; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar .map-view-tool { gap:10px; padding:0 16px; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar .map-view-tool > .ic { width:30px; height:30px; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar .map-view-tool > span { font-size:22px; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar button:last-child { border:0; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar button:hover:not(:disabled) { background:#e3f0ee12; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar button:disabled { opacity:.42; cursor:default; background:transparent; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar button:focus-visible { outline:2px solid #69d4d5; outline-offset:-4px; }
+
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview {
+  position:absolute; z-index:7; right:36px; left:auto; bottom:auto;
+  top:calc(152px - (var(--game-layout-height,1080px) - 112px));
+  transform:none; width:530px; min-height:300px; max-height:720px; box-sizing:border-box;
+  display:flex; flex-direction:column; align-items:stretch; gap:0; padding:0;
+  color:#ecf1ef; border:0; border-radius:0; background:linear-gradient(90deg,#081118d9,#08111870); box-shadow:none; backdrop-filter:none;
+  animation:map-detail-enter 180ms ease-out;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview[hidden] { display:none; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-heading { display:flex; align-items:center; position:relative; min-height:100px; padding:14px 48px 14px 22px; gap:20px; background:linear-gradient(90deg,#03090cea,#03090c80); border-left:2px solid #78bbb8; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-icon { display:grid; place-items:center; width:66px; height:66px; flex:0 0 66px; border:0; border-radius:50%; background:radial-gradient(circle,#0b202be6 45%,#07111999 70%,transparent 72%); color:#fff; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-icon > .ic { width:58px; height:58px; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-copy { display:flex; flex-direction:column; gap:9px; min-width:0; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-copy b { font:600 34px/1.25 var(--font-ui); color:#f4f5f3; overflow-wrap:anywhere; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-status { font:500 17px/1.2 var(--font-ui); color:#75d9d9; letter-spacing:.08em; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-content { flex:1; display:flex; flex-direction:column; gap:24px; padding:26px 28px 32px; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-hint { margin:0; color:#d1dcdd; font:400 23px/1.65 var(--font-ui); }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-condition { margin:0; font:400 20px/1.6 var(--font-ui); color:#a5b5b9; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-risk { margin:auto 0 0; padding:14px 16px; background:#8d292944; border-left:3px solid #e46d61; color:#ffc3b6; font:400 20px/1.5 var(--font-ui); }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview button { border:0; border-radius:0; box-shadow:none; cursor:pointer; clip-path:none; min-height:0; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview .expedition-preview-close { position:absolute; right:14px; top:14px; width:34px; height:34px; padding:0; font:400 30px/1 var(--font-ui); background:none; color:#a3b1b4; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview .expedition-preview-enter { display:flex; align-items:center; justify-content:space-between; width:100%; min-height:72px; padding:16px 28px; background:linear-gradient(90deg,#c7d8d0,#ecf1e8); color:#142226; font:600 26px/1.25 var(--font-ui); }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview .expedition-preview-enter:hover:not(:disabled) { background:#bfece9; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview button:focus-visible { outline:2px solid #6ed6d6; outline-offset:-4px; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview .expedition-preview-enter:disabled { opacity:1; background:#303b40; color:#8e9ea3; cursor:default; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview[data-node-tone="danger"] .expedition-preview-heading { border-left-color:#e76053; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview[data-node-state="unreachable"] .expedition-preview-heading { border-left-color:#6f8087; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview[data-node-state="unreachable"] .expedition-preview-status { color:#9baab1; }
+body:has(#overlay:not([hidden])) #sidebar[data-expedition-layout="map"] .expedition-map-preview { visibility:hidden; pointer-events:none; }
+@keyframes map-detail-enter { from { opacity:0; transform:translateX(14px); } to { opacity:1; transform:translateX(0); } }
+body.reduce-motion:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview { animation:none; }
+body.reduce-motion:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] button { transition:none; }
+@media (prefers-reduced-motion:reduce) {
+  body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview { animation:none; }
+  body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] button { transition:none; }
+}

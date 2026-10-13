@@ -20,6 +20,9 @@ if (!window.HTMLCanvasElement.prototype.getContext || true) {
   });
   window.HTMLCanvasElement.prototype.getContext = function () { return noopCtx(); };
 }
+globalThis.Path2D ||= class FakePath2D {
+  constructor() { return new Proxy(this, { get: (target, key) => target[key] ?? (() => {}) }); }
+};
 window.Audio = class FakeAudio {
   constructor() { this.loop = false; this.volume = 1; this.preload = ''; }
   play() { return Promise.resolve(); }

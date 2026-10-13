@@ -1,0 +1,47 @@
+@import url('./navigation-feedback.css');
+/* 退出键几何与基础外观来源：选档、基地、地图均使用 archive-back；触碰反馈沿 navigation-feedback。 */
+:is(#overlay#overlay#overlay, #topBtns#topBtns#topBtns, #homeCredits#homeCredits#homeCredits) .archive-back {
+  position: absolute;
+  left: 18px;
+  top: 16px;
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 58px;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  clip-path: none;
+  color: var(--archive-back-color, #ebebeb);
+  transform: scale(1);
+  transform-origin: left top;
+  cursor: pointer;
+  transition: color .18s, filter .18s, transform .12s;
+}
+#overlay#overlay #hubMain.pg.hub.base-camp { position: relative; }
+#overlay#overlay #hubMain.pg.hub.base-camp .hub-back { }
+#overlay#overlay #hubMain.pg.hub.base-camp .hub-head {
+  padding-left: 102px;
+}
+:is(#overlay#overlay#overlay, #topBtns#topBtns#topBtns, #homeCredits#homeCredits#homeCredits) .archive-back svg { display: block; width: 24px; height: 24px; }
+:is(#overlay#overlay#overlay, #topBtns#topBtns#topBtns, #homeCredits#homeCredits#homeCredits) .archive-back::after { content: none; }
+:is(#overlay#overlay#overlay, #topBtns#topBtns#topBtns, #homeCredits#homeCredits#homeCredits) .archive-back:hover {
+  transform: scale(1);
+}
+:is(#overlay#overlay#overlay, #topBtns#topBtns#topBtns, #homeCredits#homeCredits#homeCredits) .archive-back:active {
+  transform: scale(.94);
+}
+:is(#overlay#overlay#overlay, #topBtns#topBtns#topBtns, #homeCredits#homeCredits#homeCredits) .archive-back:focus-visible {
+  outline: 1px solid #e6cb76cc;
+  outline-offset: 2px;
+}
+/* 地图沿工具栏布局，位置由整组承接，退出动作仍打开原离开对局菜单。 */
+#topBtns#topBtns { left: 18px; top: 16px; align-items: center; }
+#topBtns#topBtns#topBtns .archive-back { position: static; flex: none; }

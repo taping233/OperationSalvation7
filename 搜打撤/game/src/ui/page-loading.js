@@ -1,4 +1,5 @@
 import { reduceMotion } from '../core/motion.js';
+import { createCityCut, cityCutDuration } from './camp-entry.js';
 import '../../css/page-loading.css';
 
 let pending = null;
@@ -22,16 +23,28 @@ function nextFrame(signal) {
 }
 
 /** Show the shared page cover before preparing an expensive destination. */
-export function runPageLoading({ title, detail, open, signal }) {
+export function runPageLoading({ title, detail, open, signal, presentation, onRevealStart }) {
   if (signal?.aborted) return Promise.resolve(false);
   if (pending) return pending.promise;
   const cover = document.createElement('section');
   cover.className = 'page-loading';
   cover.setAttribute('role', 'status');
   cover.setAttribute('aria-live', 'polite');
-  cover.innerHTML = '<div class="page-loading-copy"><small>WINTER ARCHIVE</small><h2></h2><p></p><div class="page-loading-track" aria-hidden="true"><i></i><i></i><i></i></div></div>';
-  cover.querySelector('h2').textContent = title;
-  cover.querySelector('p').textContent = detail;
+  const cityPresentation = presentation === 'city-cut';
+  const cityCut = cityPresentation && !reduceMotion();
+  let cut = null;
+  if (cityPresentation) {
+    cover.classList.add('page-loading--city');
+    cover.dataset.loadingDetail = detail;
+    cover.setAttribute('aria-label', `${title}：${detail}`);
+    if (cityCut) cut = createCityCut({ archive: '馆藏档案', title,
+      subtitle: 'PHOTO STUDIO / 冬日影像档案', edition: 'WINTER RECORDS / VII',
+      destination: 'PHOTO STUDIO', watermark: 'PHOTO', scene: 'photo' });
+  } else {
+    cover.innerHTML = '<div class="page-loading-copy"><small>WINTER ARCHIVE</small><h2></h2><p></p><div class="page-loading-track" aria-hidden="true"><i></i><i></i><i></i></div></div>';
+    cover.querySelector('h2').textContent = title;
+    cover.querySelector('p').textContent = detail;
+  }
   document.body.appendChild(cover);
   const busyHost = document.getElementById('viewport');
   const previousBusy = busyHost?.getAttribute('aria-busy');
@@ -82,8 +95,16 @@ export function runPageLoading({ title, detail, open, signal }) {
         }));
       }
       if (!reduceMotion()) {
+        // 准备期间保留来源画面；就绪后才挂上切幕，避免暂停首帧先遮成黑屏。
+        if (cut && result !== false) cover.append(cut);
+        // Initialize the destination while it is still covered. Starting it after
+        // cleanup would hide an already visible page again and look like a refresh.
+        if (result !== false && !signal?.aborted) onRevealStart?.();
         cover.classList.add('leaving');
-        await new Promise(resolve => setTimeout(resolve, 180));
+        await Promise.race([new Promise(resolve => setTimeout(resolve, cityCut ? cityCutDuration : 180)), cancelled]);
+      } else if (result !== false && !signal?.aborted) {
+        onRevealStart?.();
+        if (cityPresentation) cover.classList.add('leaving');
       }
       return result;
     } finally {

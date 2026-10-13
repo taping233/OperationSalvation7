@@ -248,6 +248,15 @@ function makeLayer(li, target, width, random) {
     ensure('event', FLOOR.event);
     ensure('battle', FLOOR.battle);
   }
+  // 首层七格先经过一场战斗，再接触首个火堆；保持各类数量不变。
+  if (li === 0) {
+    const firstNodes = nodes[entry].next.map(([, idx]) => nodes[idx]);
+    for (const first of firstNodes) {
+      if (first.type === 'battle') continue;
+      const battle = nodes.find(n => n.type === 'battle' && !firstNodes.includes(n));
+      if (battle) [first.type, battle.type] = [battle.type, first.type];
+    }
+  }
   nodes.forEach((n) => { if (!n.name) n.name = `${li + 1}层·${NAME_BY_TYPE[n.type] || '据点'}`; });
   return { nodes, entry, exit, altarEntrances, gridBounds: { minX: 0, maxX: width - 1, minRow: ROW_MIN, maxRow: ROW_MAX } };
 }
@@ -264,6 +273,17 @@ function quality(layers) {
     const seen = new Set([layer.entry]); const queue = [layer.entry]; while (queue.length) { const idx = queue.shift();
       for (const [toLi, toIdx] of layer.nodes[idx].next) if (toLi === li && !seen.has(toIdx)) { seen.add(toIdx); queue.push(toIdx); } }
     if (seen.size !== layer.nodes.length) issues.push(`层 ${li + 1} 存在孤岛`);
+    if (li === 0) {
+      const beforeBattle = new Set([layer.entry]), pending = [layer.entry];
+      while (pending.length) {
+        const idx = pending.shift();
+        for (const [toLi, toIdx] of layer.nodes[idx].next) {
+          if (toLi !== li || beforeBattle.has(toIdx) || layer.nodes[toIdx]?.type === 'battle') continue;
+          beforeBattle.add(toIdx); pending.push(toIdx);
+        }
+      }
+      if ([...beforeBattle].some(idx => layer.nodes[idx].type === 'fire')) issues.push('首层火堆先于首战可达');
+    }
     // L1 七格（2026-09-13 老板）：流程短，图小天然分叉/回环少——豁免「分叉不足/没有回环」两项结构检查
     if (layer.nodes.filter(n => n.next.filter(([toLi]) => toLi === li).length >= 3).length < (li === 0 ? 0 : 2)) issues.push(`层 ${li + 1} 分叉不足`);
     if (li !== 0 && edges / 2 - layer.nodes.length + 1 < 1) issues.push(`层 ${li + 1} 没有回环`);

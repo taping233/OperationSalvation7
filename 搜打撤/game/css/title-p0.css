@@ -8,6 +8,9 @@
   background: linear-gradient(180deg, #989a9c 0%, #7a7e81 24%, #1b1d1f 100%);
 }
 #title.home-composed[data-home-wallpaper="ensemble"] { background: #141617; }
+#title.home-composed .home-scene {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none; isolation: isolate;
+}
 #title.home-composed .title-wallpaper-extension {
   position: absolute; inset: -4%; z-index: 0; pointer-events: none;
   background: url('../assets/reconstruction/wallpaper-wu-1004.webp?v=snow-expanded-1009') center / cover no-repeat;
@@ -19,8 +22,8 @@
 }
 #title.home-composed .title-bg {
   /* Center the snow portrait between the menus; the blurred layer fills its left edge. */
-  inset: 0;
-  background: url('../assets/reconstruction/wallpaper-wu-1004.webp?v=snow-expanded-1009') calc(37.5% + 12.5vw) 56px / cover no-repeat;
+  inset: 0; z-index: 1;
+  background: url('../assets/reconstruction/wallpaper-wu-1004.webp?v=snow-expanded-1009') calc(37.5% + calc(var(--game-layout-width, 100vw) * 0.125)) 56px / cover no-repeat;
   mask-image: linear-gradient(180deg, transparent 56px, #000000 76px);
   filter: none; transform: none; opacity: 1;
   transition: opacity .5s ease-in-out;
@@ -52,24 +55,20 @@
   background: linear-gradient(180deg, #e2e3e41c, #1c1e208f 35%, #1416177d);
 }
 #title.home-composed .home-edge-band-top {
-  --band-bleed: calc(1.2vw + 4px);
+  --band-bleed: calc(calc(var(--game-layout-width, 100vw) * 0.012) + 4px);
   top: calc(0px - var(--band-bleed)); height: calc(44px + var(--band-bleed));
   transform: rotate(-.65deg); transform-origin: center top;
 }
 #title.home-composed .home-band-track {
-  position: absolute; z-index: 1; top: 10px; left: 0; width: 200%;
+  position: absolute; z-index: 1; top: 10px; left: 0; width: auto;
   display: flex; align-items: center; gap: 0;
-  color: #e5e6e7cc; font: 650 12px/1.2 var(--font-ui); letter-spacing: .14em;
-  white-space: nowrap; animation: homeBandScroll 64s linear infinite;
+  white-space: nowrap;
 }
-#title.home-composed .home-band-lane { flex: 0 0 50%; display: flex; justify-content: space-around; align-items: center; gap: 20px; }
+#title.home-composed .home-band-lane { flex: none; display: flex; justify-content: space-around; align-items: center; gap: 20px; }
 #title.home-composed .home-band-track b { margin: 0 10px; color: #ebd280ab; font-weight: 400; }
 #title.home-composed .home-edge-band-top .home-band-track { top: calc(10px + var(--band-bleed)); }
-@keyframes homeBandScroll { to { transform: translateX(-50%); } }
-body.page-covered #title.home-composed .home-band-track,
-#title.home-composed[hidden] .home-band-track { animation-play-state: paused; }
 #title.home-composed .home-brand {
-  position: absolute; left: 3%; top: 11%; width: 32%;
+  position: relative; left: auto; top: auto; width: 100%;
   margin: 0; padding: 12px 16px; background: none;
   border: 0; box-shadow: none; clip-path: none;
   animation: homeCoverIn .45s ease-out both;
@@ -82,13 +81,17 @@ body.page-covered #title.home-composed .home-band-track,
     drop-shadow(0 2px 2px #12141580);
 }
 #title.home-composed .home-primary {
-  position: absolute; left: var(--home-edge); top: 45%; width: 28%;
+  position: relative; left: auto; top: auto; width: 100%;
   display: grid; gap: 24px;
 }
 #title.home-composed .home-secondary {
-  position: absolute; right: var(--home-edge); top: 34%; width: 23%;
+  position: relative; right: auto; top: auto; width: 100%;
   display: grid; gap: 17px;
 }
+#title.home-composed .home-command,
+#title.home-composed .home-support { position: absolute; isolation: isolate; }
+#title.home-composed .home-command { left: var(--home-edge); top: 12%; width: 29%; padding: 24px; }
+#title.home-composed .home-support { right: var(--home-edge); top: 30%; width: 25.5%; padding: 22px; }
 #title.home-composed .home-secondary .home-button-copy { margin-left: auto; text-align: right; }
 #title.home-composed .home-secondary .home-plate { height: 78px; }
 #title.home-composed .home-plate {
@@ -204,14 +207,14 @@ body.page-covered #title.home-composed .home-band-track,
   width: auto; padding: 0 12px; font: 500 13px/1.3 var(--font-ui);
 }
 #title.home-composed .home-wallpaper-view:focus-visible { outline: 2px solid var(--home-gold); outline-offset: 3px; }
-/* 「只看壁纸」显隐：选项盘与横带淡出+轻微回落，恢复时立即显形再淡入（visibility 延迟到淡出结束）。 */
+/* 只看壁纸时淡出菜单；恢复的左右入场由 home-menu-motion 接管。 */
 #title.home-composed .title-inner,
 #title.home-composed .home-edge-band {
   transition: opacity .34s cubic-bezier(.22,1,.36,1), transform .34s cubic-bezier(.22,1,.36,1), visibility 0s linear 0s;
 }
 #title.home-composed::after { transition: opacity .4s ease-in-out; }
 #title.home-composed.wallpaper-only .title-inner {
-  opacity: 0; transform: translateY(10px) scale(.988);
+  opacity: 0; transform: none;
   visibility: hidden; pointer-events: none;
   transition: opacity .26s ease-in, transform .26s ease-in, visibility 0s linear .26s;
 }
@@ -220,9 +223,8 @@ body.page-covered #title.home-composed .home-band-track,
   transition: opacity .26s ease-in, visibility 0s linear .26s;
 }
 #title.home-composed.wallpaper-only::after { opacity: 0; }
-#title.home-composed.wallpaper-only .home-slash { visibility: hidden; }
 #title.home-composed .home-credits-dialog {
-  position: fixed; inset: 0; width: min(620px, 78vw); max-height: 80vh; margin: auto;
+  position: fixed; inset: 0; width: min(620px, calc(var(--game-layout-width, 100vw) * 0.78)); max-height: calc(var(--game-layout-height, 100vh) * 0.8); margin: auto;
   padding: 65px 48px 45px; border: 2px solid #26292c; border-radius: 0;
   background: #ebeced; color: #26292c; box-shadow: 9px 9px 0 #0e0f1080;
   font-family: var(--font-ui);
@@ -242,10 +244,6 @@ body.page-covered #title.home-composed .home-band-track,
 #title.home-composed .home-makers-list dt { color: #555b61; font: 500 16px/1.5 var(--font-ui); }
 #title.home-composed .home-makers-list dd { margin: 0; font: 600 30px/1.4 var(--font-ui);
   text-shadow: 0 3px 6px #0e0f1066; }
-#title.home-composed .home-credits-sources { margin: 25px 0 0; }
-#title.home-composed .home-credits-sources div { display: grid; grid-template-columns: 85px 1fr; gap: 20px; margin-top: 12px; font-size: 13px; line-height: 1.7; }
-#title.home-composed .home-credits-sources dt { color: #555b61; }
-#title.home-composed .home-credits-sources dd { margin: 0; }
 #title.home-composed .home-snow { z-index: -1; opacity: .32; }
 #title.home-composed #warmupTip {
   left: 50%; right: auto; top: auto; bottom: 8%; transform: translateX(-50%);
@@ -256,24 +254,6 @@ body.page-covered #title.home-composed .home-band-track,
 #title.home-composed #warmupTip .warmup-reason { font-size: 10px; }
 @keyframes homeCoverIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 /* Existing compact-window support; verification stays at the current window. */
-@media (max-width: 1050px) {
-  #title.home-composed { --home-edge: 4%; }
-  #title.home-composed .home-primary { width: 29%; }
-  #title.home-composed .home-secondary { width: 26%; }
-  #title.home-composed .home-start .home-button-cn { font-size: 28px; }
-  #title.home-composed .home-plate { padding-left: 23px; padding-right: 27px; gap: 12px; }
-  #title.home-composed .home-button-cn { font-size: 22px; }
-  #title.home-composed .home-line-icon { width: 27px; height: 27px; flex-basis: 27px; }
-}
-@media (max-height: 680px) {
-  #title.home-composed .home-brand { top: 10%; }
-  #title.home-composed .home-primary { top: 43%; gap: 16px; }
-  #title.home-composed .home-start { height: 110px; }
-  #title.home-composed .home-guide { height: 80px; }
-  #title.home-composed .home-secondary { top: 32%; gap: 13px; }
-  #title.home-composed .home-secondary .home-plate { height: 72px; }
-  #title.home-composed .home-footer { bottom: 7%; }
-}
 body.reduce-motion #title.home-composed *,
 body.reduce-motion #title.home-composed *::before,
 body.reduce-motion #title.home-composed *::after { animation: none; transition: none; }
@@ -295,9 +275,9 @@ body.reduce-motion #title.home-composed *::after { animation: none; transition: 
 #title.home-composed .home-secondary .home-plate::before { inset: 0; background: rgba(255,255,255,.14); filter: none; }
 #title.home-composed .home-plate::before { filter: none; }
 #title.home-composed .home-plate:hover::before { filter: none; background: var(--ak-blue); }
-#title.home-composed .home-plate::after { background: linear-gradient(90deg, var(--plate-accent) 0 4px, transparent 4px), var(--ak-tex-hatch), var(--plate-fill);
+#title.home-composed .home-plate::after { background: linear-gradient(90deg, var(--plate-accent) 0 4px, transparent 4px), var(--plate-fill);
   transition: background .18s var(--ease-pop); }
-#title.home-composed .home-secondary .home-plate::after { background: linear-gradient(90deg, transparent calc(100% - 4px), var(--plate-accent) calc(100% - 4px)), var(--ak-tex-hatch), var(--plate-fill); }
+#title.home-composed .home-secondary .home-plate::after { background: linear-gradient(90deg, transparent calc(100% - 4px), var(--plate-accent) calc(100% - 4px)), var(--plate-fill); }
 #title.home-composed .home-plate:hover { transform: translateX(10px); }
 #title.home-composed .home-secondary .home-plate:hover { transform: translateX(-10px); }
 #title.home-composed .home-plate:hover::after { filter: none;
@@ -316,7 +296,7 @@ body.reduce-motion #title.home-composed *::after { animation: none; transition: 
 #title.home-composed .home-start { --plate-fill: linear-gradient(105deg, #d9ae1c, var(--ak-yellow) 70%); --plate-accent: #14120a; color: #14120a; }
 #title.home-composed .home-start::before { background: #fff6c2 !important; }
 #title.home-composed .home-start:hover::before { background: #fff !important; }
-#title.home-composed .home-start::after { background: linear-gradient(105deg, #e0b414, var(--ak-yellow) 70%), var(--ak-tex-hatch) !important; }
+#title.home-composed .home-start::after { background: linear-gradient(105deg, #e0b414, var(--ak-yellow) 70%) !important; }
 #title.home-composed .home-start:hover::after { background: linear-gradient(105deg, #ffe375, #fff2b0 70%) !important; }
 #title.home-composed .home-start .home-line-icon, #title.home-composed .home-start .home-arrow { color: #14120a; }
 #title.home-composed .home-start .home-button-cn { font-size: 36px; letter-spacing: .3em; text-shadow: none; }
@@ -337,7 +317,7 @@ body.reduce-motion #title.home-composed *::after { animation: none; transition: 
 #title.home-composed .home-credits-back { color: var(--ak-blue-hi); letter-spacing: .2em; }
 #title.home-composed .home-credits-dialog h2 { font-weight: 800; letter-spacing: .3em; border-left: 5px solid var(--ak-blue); padding-left: 14px; }
 #title.home-composed .home-makers-list { border-bottom: 2px solid var(--ak-yellow); }
-#title.home-composed .home-makers-list dt, #title.home-composed .home-credits-sources dt { color: var(--ak-sub); letter-spacing: .12em; }
+#title.home-composed .home-makers-list dt { color: var(--ak-sub); letter-spacing: .12em; }
 #title.home-composed .home-makers-list dd { text-shadow: none; font-family: var(--font-ui); letter-spacing: .1em; }
 #title.home-composed #warmupTip { background: rgba(10,12,14,.92); border: 1px solid var(--ak-line-hi); border-left: 3px solid var(--ak-yellow); }
 @keyframes homeCoverIn { from { opacity: 0; transform: translateX(-26px); clip-path: inset(0 100% 0 0); } to { opacity: 1; transform: none; clip-path: inset(0); } }

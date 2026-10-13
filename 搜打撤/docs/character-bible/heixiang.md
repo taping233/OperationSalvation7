@@ -4,7 +4,7 @@
 
 ## 身份与参考使用
 
-既有运行参考为 `game/assets/portraits/full/heixiang.webp`，本页图片为同图副本。身份要素按指定版本核对；当前画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)。下方 09-12 与 09-19 描述保留版本差异，不同时套用两种画风或发色。
+运行立绘已换为 10-13 竖版 `game/assets/portraits/full/heixiang.webp`，本页图片为同图副本。身份要素按指定版本核对；当前画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)。下方 09-12 与 09-19 描述保留版本差异，不同时套用两种画风或发色。
 
 ## 当前角色数据（core/characters.js）
 

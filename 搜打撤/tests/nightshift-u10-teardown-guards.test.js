@@ -65,7 +65,9 @@ describe('U10 H2 chests 逐卡揭晓音效守卫', () => {
     chestFacade.Chests.open(game, [{ kind: 'small' }]);
     ovBody.querySelector('[data-eps-search]').click();        // 立即揭晓 → scheduleRevealSfx 挂 140ms 定时器（无句柄）
     ovBody.querySelector('[data-act="chestTake1"]').click();
-    ovBody.querySelector('[data-act="chestTake"]').click();   // 正常收箱 → cur 失活，open 时的 delay 回调空转
+    ovBody.querySelector('[data-act="chestContinue"]').click(); // 单卡已领完，继续探索使 cur 失活
+    expect(chestFacade.Chests.isOpen()).toBe(false);
+    expect(vi.getTimerCount()).toBeGreaterThan(0);             // 揭晓音效定时器仍待触发
     vi.stubGlobal('document', undefined);
     expect(() => vi.advanceTimersByTime(2000)).not.toThrow();
   });
@@ -108,6 +110,33 @@ describe('U10 H4 cinematics 发卡队列续棒守卫', () => {
     document.getElementById('cardGet').click();      // 收下第一张 → close() → setTimeout(showNext, 100)
     vi.stubGlobal('document', undefined);
     expect(() => vi.advanceTimersByTime(100)).not.toThrow();
+  });
+
+  it('战斗获得按显示时上下文分层，后续队列回到地图不会沿用战斗样式', async () => {
+    vi.resetModules(); vi.useFakeTimers();
+    window.SDT = {
+      game: { runActive:true, battleActive:true },
+      Sound: { sfx:vi.fn() },
+      Cards: { rarityOf:() => '棱彩', cardHTML:card => `<div class="hs-card rv-prism">${card.name}</div>` },
+    };
+    document.body.innerHTML = '<div id="overlay"><div class="battle-stage"></div></div>';
+    const { cinematicsMethods } = await import('../game/src/ui/cinematics.js');
+    const card = { name:'能力样本', rarity:'稀有' };
+    cinematicsMethods.showCardReward(card, '实际来源');
+    cinematicsMethods.showCardReward(card);
+    const first = document.getElementById('cardGet');
+    expect(first.dataset.combat).toBe('true');
+    expect(first.dataset.rarity).toBe('棱彩');
+    expect(first.querySelector('.lg-kicker').textContent).toBe('棱彩获得');
+    expect(first.querySelector('.lg-name')).toBeNull();
+    first.click();
+    window.SDT.game.battleActive = false;
+    document.querySelector('.battle-stage').remove();
+    vi.advanceTimersByTime(100);
+    const queued = [...document.querySelectorAll('#cardGet')].at(-1);
+    expect(queued.dataset.combat).toBe('false');
+    expect(queued.querySelector('.lg-name').textContent).toBe('能力样本');
+    expect(queued.querySelector('.lg-hint').textContent).toBe('点击任意处继续');
   });
 });
 

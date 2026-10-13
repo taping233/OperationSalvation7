@@ -1,4 +1,17 @@
 /* 冬境战斗舞台：只负责层级、可读性和反馈，不接触战斗规则。 */
+/* 正式场景由本场分层资源接管，加载中仅保留中性底，不借用地图外圈背景。 */
+body #overlay .battle-stage.sts[data-boss="0"] {
+  background:#26343b;
+}
+body #overlay .battle-stage.sts[data-boss="0"] .battle-stage-shade {
+  background: linear-gradient(180deg,rgba(13,23,30,.12),transparent 40%,rgba(29,44,53,.10) 66%,rgba(18,30,38,.48));
+}
+body #overlay .battle-stage.sts[data-boss="0"] .sts-foes::before {
+  background: radial-gradient(ellipse 68% 28% at 50% 92%,rgba(13,24,31,.40),transparent 100%);
+}
+body #overlay .battle-stage.sts[data-boss="0"] .sts-unit .sts-figure img {
+  filter: drop-shadow(0 10px 5px rgba(10,20,27,.52));
+}
 #overlay .card.battle > h2 { position:relative; z-index:20; min-height:34px; color:#e8e7e4; background:rgba(11,11,12,.86); border-color:rgba(209,211,213,.2); }
 #overlay .battle-stage.sts {
   isolation:isolate; color:#e8e7e5; background-color:#1a160c;
@@ -29,8 +42,8 @@
 #overlay .battle-stage.sts > .bt-potions { position:absolute; z-index:7; pointer-events:none; }
 #overlay .battle-stage.sts > .bt-potions .bt-potion { pointer-events:auto; }
 
-#overlay .battle-stage.sts .sts-topbar { flex:0 0 auto; min-height:48px; display:flex; align-items:center; gap:12px; padding:7px clamp(12px,2vw,28px); background:rgba(11,12,13,.76); border-bottom:1px solid rgba(212,214,216,.18); box-shadow:0 4px 18px rgba(0,0,0,.24); }
-.sts-encounter { display:flex; align-items:baseline; gap:9px; min-width:clamp(180px,25vw,310px); letter-spacing:.5px; }
+#overlay .battle-stage.sts .sts-topbar { flex:0 0 auto; min-height:48px; display:flex; align-items:center; gap:12px; padding:7px clamp(12px,calc(var(--game-layout-width, 100vw) * 0.02),28px); background:rgba(11,12,13,.76); border-bottom:1px solid rgba(212,214,216,.18); box-shadow:0 4px 18px rgba(0,0,0,.24); }
+.sts-encounter { display:flex; align-items:baseline; gap:9px; min-width:clamp(180px,calc(var(--game-layout-width, 100vw) * 0.25),310px); letter-spacing:.5px; }
 .sts-encounter-kicker { color:#c8cacb; font-size:10px; letter-spacing:2px; text-transform:uppercase; }
 .sts-encounter b { color:#ebe9e3; font-size:14px; }
 .sts-encounter > span:last-child { color:#ddd6c2; font-size:12px; }
@@ -44,12 +57,12 @@
 #overlay .battle-stage.sts .sts-hud-r [data-act="btEnd"] { border-color:rgba(240,210,113,.72); color:#ffeaa4; box-shadow:0 0 12px rgba(240,210,113,.12); }
 #overlay .battle-stage.sts .sts-hud-r [data-act="btFlee"] { color:#d7958c; border-color:rgba(190,105,99,.34); font-size:10px; }
 
-.sts-arena { min-height:clamp(270px,45vh,610px); }
-.sts-arena-caption { position:absolute; top:clamp(12px,2vh,24px); left:50%; transform:translateX(-50%); z-index:4; display:flex; align-items:center; gap:10px; max-width:min(90%,620px); padding:7px 14px; border:1px solid rgba(211,212,213,.22); border-radius:999px; background:rgba(11,12,13,.64); box-shadow:0 5px 18px rgba(0,0,0,.18); pointer-events:none; }
+.sts-arena { min-height:clamp(270px,calc(var(--game-layout-height, 100vh) * 0.45),610px); }
+.sts-arena-caption { position:absolute; top:clamp(12px,calc(var(--game-layout-height, 100vh) * 0.02),24px); left:50%; transform:translateX(-50%); z-index:4; display:flex; align-items:center; gap:10px; max-width:min(90%,620px); padding:7px 14px; border:1px solid rgba(211,212,213,.22); border-radius:999px; background:rgba(11,12,13,.64); box-shadow:0 5px 18px rgba(0,0,0,.18); pointer-events:none; }
 .sts-arena-caption b { color:#fae7a9; font-size:12px; white-space:nowrap; }
 .sts-arena-caption span { color:#bfc1c2; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-#overlay .battle-stage.sts .sts-me, #overlay .battle-stage.sts .sts-foes, #overlay .battle-stage.sts .sts-allies { bottom:clamp(5%,3vh,9%); }
-#overlay .battle-stage.sts .sts-foes { gap:clamp(10px,1.4vw,24px); }
+#overlay .battle-stage.sts .sts-me, #overlay .battle-stage.sts .sts-foes, #overlay .battle-stage.sts .sts-allies { bottom:clamp(5%,calc(var(--game-layout-height, 100vh) * 0.03),9%); }
+#overlay .battle-stage.sts .sts-foes { gap:clamp(10px,calc(var(--game-layout-width, 100vw) * 0.013999999999999999),24px); }
 #overlay .battle-stage.sts .sts-foe:not(.dead) .sts-nameplate { border-color:rgba(218,167,151,.42); background:linear-gradient(180deg,rgba(30,16,21,.7),rgba(9,10,10,.9)); }
 /* 09-25：意图胶囊改锚名牌上缘（bottom 64px ≈ 名牌高约 50px + winter 悬挂 6px + 8px 间距）——
    原顶:-42px 挂在含整幅立绘的槽位顶，立绘不可见时胶囊悬空在半空 */
@@ -58,44 +71,20 @@
 #overlay .battle-stage.sts .sts-hp i { background:linear-gradient(90deg,#d26c68,#fedb68); }
 
 /* 2026-09-13 留言：HUD 渐变底前半全透明（85% 舞台高度≈自身 50% 处才渐深），去掉原 69% 处 border-top 细线 */
-#overlay .battle-stage.sts .sts-hud { min-height:clamp(174px,24vh,230px); padding:6px clamp(10px,2vw,28px) 10px; gap:clamp(8px,1.3vw,18px); background:linear-gradient(180deg,rgba(7,7,8,0),rgba(7,7,8,0) 50%,rgba(6,7,7,.6) 74%,rgba(5,6,6,.94)); }
+#overlay .battle-stage.sts .sts-hud { min-height:clamp(174px,calc(var(--game-layout-height, 100vh) * 0.24),230px); padding:6px clamp(10px,calc(var(--game-layout-width, 100vw) * 0.02),28px) 10px; gap:clamp(8px,calc(var(--game-layout-width, 100vw) * 0.013000000000000001),18px); background:linear-gradient(180deg,rgba(7,7,8,0),rgba(7,7,8,0) 50%,rgba(6,7,7,.6) 74%,rgba(5,6,6,.94)); }
 #overlay .battle-stage.sts .sts-hand { min-height:180px; padding-top:28px; }
-#overlay .battle-stage.sts .sts-energy-wrap { margin-left:0; margin-right:clamp(4px,1vw,16px); }
+#overlay .battle-stage.sts .sts-energy-wrap { margin-left:0; margin-right:clamp(4px,calc(var(--game-layout-width, 100vw) * 0.01),16px); }
 #overlay .battle-stage.sts .sts-energy { border-color:rgba(225,204,134,.68); box-shadow:0 0 24px rgba(208,178,78,.3),inset 0 -8px 14px rgba(0,0,0,.75); }
 #overlay .battle-stage.sts .bt-hand-page { border-color:rgba(201,203,205,.45); background:rgba(21,22,24,.9); }
-
-@media (max-width:900px) {
-  #overlay .battle-stage.sts .sts-topbar { flex-wrap:wrap; padding:6px 10px; }
-  .sts-encounter { min-width:100%; order:0; }
-  #overlay .battle-stage.sts .sts-hud-l { margin-left:0; }
-  #overlay .battle-stage.sts .sts-hud-r { margin-left:auto; }
-  .sts-arena-caption { top:10px; }
-}
-@media (max-height:760px) {
-  /* 矮窗档去掉 min-width 闸：档内 min-height 值均被下方 !important 契约压制，
-     实际延伸到窄窗的只有 topbar padding-block:4px（良性收紧） */
-  #overlay .battle-stage.sts .sts-topbar { min-height:42px; padding-block:4px; }
-  .sts-arena { min-height:clamp(220px,40vh,430px); }
-  #overlay .battle-stage.sts .sts-hud { min-height:155px; }
-  #overlay .battle-stage.sts .sts-hand { min-height:155px; }
-}
 @media (prefers-reduced-motion:reduce) {
   #overlay .battle-stage.sts *, #overlay .battle-stage.sts *::before, #overlay .battle-stage.sts *::after { animation-duration:.001ms!important; animation-iteration-count:1!important; transition-duration:.001ms!important; }
-}
-@media (max-width:560px) {
-  .sts-encounter-kicker, .sts-encounter > span:last-child { display:none; }
-  .sts-arena-caption { max-width:94%; }
-  .sts-arena-caption span { max-width:44vw; }
-  #overlay .battle-stage.sts .sts-hud-r .ov-btn { padding-inline:6px; }
-  #overlay .battle-stage.sts .sts-hud-r [data-act="btFlee"] { width:28px; overflow:hidden; text-indent:-999px; position:relative; }
-  #overlay .battle-stage.sts .sts-hud-r [data-act="btFlee"]::after { content:'×'; position:absolute; inset:0; text-indent:0; display:grid; place-items:center; }
 }
 
 /* winter.css contains legacy calibration rules with !important. These are the
    final battle-stage contract and intentionally win because this sheet is last. */
 #overlay .battle-stage.sts { position:relative!important; display:flex!important; flex-direction:column!important; min-height:0!important; height:100%!important; }
 #overlay .battle-stage.sts .sts-arena { flex:1 1 auto!important; min-height:180px!important; height:auto!important; overflow:visible!important; }
-#overlay .battle-stage.sts .sts-unit { bottom:clamp(3%,2.5vh,6%)!important; }
+#overlay .battle-stage.sts .sts-unit { bottom:clamp(3%,calc(var(--game-layout-height, 100vh) * 0.025),6%)!important; }
 #overlay .battle-stage.sts .sts-me { bottom:24px!important; }
 #overlay .battle-stage.sts .sts-foes { bottom:24px!important; }
 #overlay .battle-stage.sts .sts-allies { bottom:24px!important; }
@@ -104,30 +93,13 @@
 #overlay .battle-stage.sts .sts-hand { display:block!important; flex:1 1 auto!important; width:100%!important; max-width:none!important; min-width:0!important; min-height:224px!important; height:224px!important; overflow:visible!important; }
 #overlay .battle-stage.sts .sts-hand .bt-slot { bottom:18px!important; }
 #overlay .battle-stage.sts .sts-hand .bt-slot .bt-card { min-width:0; }
-@media (max-height:760px) and (min-width:901px) {
-  #overlay .battle-stage.sts .sts-hand { min-height:224px!important; height:224px!important; padding-top:12px!important; }
-  #overlay .battle-stage.sts .sts-hand .bt-slot { bottom:10px!important; width:10em; font-size:15px; }
-  #overlay .battle-stage.sts .sts-hand[data-readable="true"] .bt-card.compact .hsc-desc { display:block; font-size:11px; line-height:1.25; }
-  #overlay .battle-stage.sts .sts-hand[data-readable="true"] .bt-card.compact .hsc-desc > span:not(.bt-rulehint) { -webkit-line-clamp:3; }
-  #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card:not(.off):not(.aim-lift) { transform:translateY(-8px) scale(1.02); }
-  /* 目标选择时把选中牌收进左侧手牌区，避免盖住敌人血条；transform 不触发布局重排。 */
-}
-@media (max-width:900px) {
-  /* The tactics row contributes its real height instead of overflowing a fixed HUD. */
-  #overlay .battle-stage.sts .sts-hud { row-gap:8px; }
-  #overlay .battle-stage.sts .sts-hand { min-height:196px!important; height:196px!important; }
-}
-@media (max-width:560px) {
-  #overlay .battle-stage.sts .sts-hand { min-height:175px!important; height:175px!important; }
-  #overlay .battle-stage.sts .sts-hand .bt-slot { bottom:18px!important; }
-}
 
 /* 主舞台布局：顶栏信息、中央对峙、底部战术台三段职责明确。 */
 #overlay .battle-stage.sts .sts-topbar { min-height:54px; }
 #overlay .battle-stage.sts .sts-topbar .sts-hud-r:empty { display:none; }
-#overlay .battle-stage.sts .sts-arena { min-height:clamp(250px,calc(100vh - 355px),600px); overflow:hidden; }
-#overlay .battle-stage.sts .sts-arena::before { content:'我方'; position:absolute; left:clamp(4%,6vw,7%); bottom:calc(clamp(5%,3vh,9%) + 188px); color:rgba(208,210,211,.85); text-shadow:0 1px 2px rgba(0,0,0,.8); font-size:10px; letter-spacing:2px; }
-#overlay .battle-stage.sts .sts-arena::after { content:'敌方意图'; position:absolute; right:clamp(5%,7vw,9%); bottom:calc(clamp(5%,3vh,9%) + 188px); padding:4px 12px; border:1px solid rgba(245,212,103,.3); border-radius:999px; background:rgba(14,15,16,.62); color:rgba(242,217,134,.92); text-shadow:none; font-size:10px; letter-spacing:2px; }
+#overlay .battle-stage.sts .sts-arena { min-height:clamp(250px,calc(var(--game-layout-height, 100vh) - 355px),600px); overflow:hidden; }
+#overlay .battle-stage.sts .sts-arena::before { content:'我方'; position:absolute; left:clamp(4%,calc(var(--game-layout-width, 100vw) * 0.06),7%); bottom:calc(clamp(5%,calc(var(--game-layout-height, 100vh) * 0.03),9%) + 188px); color:rgba(208,210,211,.85); text-shadow:0 1px 2px rgba(0,0,0,.8); font-size:10px; letter-spacing:2px; }
+#overlay .battle-stage.sts .sts-arena::after { content:'敌方意图'; position:absolute; right:clamp(5%,calc(var(--game-layout-width, 100vw) * 0.07),9%); bottom:calc(clamp(5%,calc(var(--game-layout-height, 100vh) * 0.03),9%) + 188px); padding:4px 12px; border:1px solid rgba(245,212,103,.3); border-radius:999px; background:rgba(14,15,16,.62); color:rgba(242,217,134,.92); text-shadow:none; font-size:10px; letter-spacing:2px; }
 #overlay .battle-stage.sts .sts-arena-caption { top:18px; }
 #overlay .battle-stage.sts .sts-me .sts-figure img, #overlay .battle-stage.sts .sts-foe .sts-figure img, #overlay .battle-stage.sts .sts-ally .sts-figure img { background:transparent!important; mix-blend-mode:normal; }
 /* 09-25 二波 C 组：双方立绘接地影——drop-shadow 沿立绘 alpha 轮廓落到底面 */
@@ -135,8 +107,8 @@
 #overlay .battle-stage.sts .sts-figure { background:transparent!important; }
 /* 09-25 二波 C 组：手牌区深色渐变托盘 + 顶部金线（inset hairline），托出"战术台"层次 */
 #overlay .battle-stage.sts .sts-hand { background:linear-gradient(180deg,rgba(10,11,11,0),rgba(10,11,11,.36) 26%,rgba(9,9,10,.78) 100%); box-shadow:inset 0 1px 0 rgba(230,203,118,.42); }
-#overlay .battle-stage.sts .sts-me, #overlay .battle-stage.sts .sts-foes, #overlay .battle-stage.sts .sts-allies { bottom:clamp(5%,3vh,9%); }
-#overlay .battle-stage.sts .sts-hud { display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:end; min-height:clamp(168px,23vh,220px); }
+#overlay .battle-stage.sts .sts-me, #overlay .battle-stage.sts .sts-foes, #overlay .battle-stage.sts .sts-allies { bottom:clamp(5%,calc(var(--game-layout-height, 100vh) * 0.03),9%); }
+#overlay .battle-stage.sts .sts-hud { display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:end; min-height:clamp(168px,calc(var(--game-layout-height, 100vh) * 0.23),220px); }
 #overlay .battle-stage.sts .sts-energy-wrap { grid-column:1; grid-row:1; }
 #overlay .battle-stage.sts .sts-hand { grid-column:2; grid-row:1; min-width:0; width:auto; }
 /* 09-25：本钮已与砸击按钮同收 .sts-hand-tools（battle.css，flex 横排）——原同格钉位
@@ -146,29 +118,8 @@
 .sts-tactics-secondary .ov-btn { padding:5px 7px!important; font-size:10px!important; }
 #overlay .battle-stage.sts .sts-end-turn { width:100%; min-height:42px; border-color:rgba(245,214,114,.85); color:#e4e1d8; background:linear-gradient(135deg,rgba(103,83,37,.94),rgba(51,44,26,.96)); font-size:14px; letter-spacing:1px; box-shadow:0 5px 16px rgba(0,0,0,.28); }
 #overlay .battle-stage.sts .sts-end-turn:disabled { opacity:.5; }
-@media (max-width:900px) {
-  #overlay .battle-stage.sts .sts-hud { grid-template-columns:auto minmax(0,1fr); }
-  .sts-tactics { grid-column:1 / -1; grid-row:2; flex-direction:row; align-items:center; padding:0; min-width:0; }
-  .sts-tactics-secondary { justify-content:flex-start; }
-  #overlay .battle-stage.sts .sts-end-turn { width:auto; margin-left:auto; padding-inline:20px; }
-}
-@media (max-width:560px) {
-  #overlay .battle-stage.sts .sts-hud { grid-template-columns:58px minmax(0,1fr); padding-inline:6px; }
-  #overlay .battle-stage.sts .sts-energy { width:56px; height:56px; }
-  #overlay .battle-stage.sts .sts-energy b { font-size:22px; }
-  #overlay .battle-stage.sts .sts-energy .ic { display:none; }
-  #overlay .battle-stage.sts .sts-hand { min-height:142px; }
-  .sts-tactics { gap:5px; }
-  .sts-tactics-secondary .ov-btn { padding:5px!important; font-size:10px!important; }
-  #overlay .battle-stage.sts .sts-end-turn { min-height:36px; padding-inline:10px; font-size:12px; }
-}
 
 #overlay .sts-hand .bt-card.click-selected { outline:2px solid #fbdd7d; outline-offset:3px; box-shadow:0 0 20px #f6d66d55; }
-@media (max-height:760px) and (min-width:901px) {
-  #overlay .battle-stage.sts .sts-hand .bt-slot:has(.bt-card.click-selected) { z-index:40!important; }
-  #overlay .battle-stage.sts .sts-hand .bt-card.click-selected { transform:translateY(-8px) scale(1.02); z-index:30; }
-  body #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card.click-selected:not(.off):not(.aim-lift) { transform:translateY(-8px) scale(1.02)!important; }
-}
 #overlay .sts-hand .bt-card.click-selected::after { content:'选择目标 · Esc 取消'; position:absolute; bottom:4px; left:4px; right:4px; padding:4px 0; color:#1d1f21; background:#ead282; font-size:10px; text-align:center; pointer-events:none; }
 
 /* 战斗全屏边界：不继承通用弹窗的居中/动画位移，顶部牌堆和底部战术台始终留在视口内。 */
@@ -176,7 +127,7 @@
 #overlay.room-view .card.battle { position:fixed; inset:0; width:auto; height:auto; min-width:0; min-height:0; transform:none!important; }
 #overlay.room-view .card.battle #ovBody { width:100%; height:100%; min-width:0; min-height:0; overflow:hidden; }
 #overlay.room-view .card.battle #ovBody > .battle-stage.sts { width:100%!important; max-width:none; height:100%!important; min-height:0!important; overflow:hidden; }
-#overlay .battle-stage.sts .sts-topbar { top:max(0px,env(safe-area-inset-top))!important; padding-left:max(clamp(12px,2vw,28px),env(safe-area-inset-left)); padding-right:max(clamp(12px,2vw,28px),env(safe-area-inset-right)); }
+#overlay .battle-stage.sts .sts-topbar { top:max(0px,env(safe-area-inset-top))!important; padding-left:max(clamp(12px,calc(var(--game-layout-width, 100vw) * 0.02),28px),env(safe-area-inset-left)); padding-right:max(clamp(12px,calc(var(--game-layout-width, 100vw) * 0.02),28px),env(safe-area-inset-right)); }
 
 /* 选目标时建立明确的“合法目标/其他单位”层级，避免与单位常驻蓝光混淆。 */
 #overlay .battle-stage:has(.can-target) .sts-unit:not(.can-target) { opacity:.38; filter:grayscale(.6) saturate(.55); }
@@ -187,3 +138,309 @@
 #overlay .battle-stage.sts[data-boss="0"] .sts-foe.can-target .sts-figure {
   filter:drop-shadow(0 0 6px rgba(231,229,221,.82)) drop-shadow(0 0 14px rgba(249,205,61,.5));
 }
+
+/* Battle sample: battlefield above, actual energy/card/turn decisions below. */
+#overlay .battle-stage.sts.battle-redesign .sts-arena { flex:1; min-height:0!important; }
+#overlay .battle-stage.sts.battle-redesign .sts-topbar { background:#10212acc; border-bottom:1px solid #acc1cb33; box-shadow:none; min-height:60px; }
+#overlay .battle-stage.sts.battle-redesign .sts-encounter { gap:12px; min-width:0; }
+#overlay .battle-stage.sts.battle-redesign .sts-encounter b { font-size:20px; }
+#overlay .battle-stage.sts.battle-redesign .sts-encounter-kicker { font-size:16px; color:#b9cbd4; }
+#overlay .battle-stage.sts.battle-redesign .sts-encounter > span:last-child { font-size:17px; }
+#overlay .battle-stage.sts.battle-redesign .sts-xp-chip { display:none; }
+#overlay .battle-stage.sts.battle-redesign .sts-arena::before, #overlay .battle-stage.sts.battle-redesign .sts-arena::after { display:none; }
+#overlay .battle-stage.sts.battle-redesign .sts-arena-caption { top:18px; background:#10212aaa; border:0; border-radius:0; box-shadow:none; max-width:78%; }
+#overlay .battle-stage.sts.battle-redesign .sts-arena-caption b { font-size:18px; }
+#overlay .battle-stage.sts.battle-redesign .sts-arena-caption span { font-size:16px; }
+#overlay .battle-stage.sts.battle-redesign .sts-hud { flex:0 0 auto; display:grid; grid-template-columns:125px 165px minmax(0,1fr) 200px; align-items:center; gap:16px; min-height:0; padding:18px 28px 20px; background:linear-gradient(180deg,#10212a99,#0e1820f5); border-top:1px solid #acc1cb44; box-shadow:none; }
+#overlay .battle-stage.sts.battle-redesign .sts-energy-wrap { display:grid; gap:8px; margin:0; justify-items:center; }
+#overlay .battle-stage.sts.battle-redesign .battle-energy-label { font-size:17px; color:#b9cbd4; }
+#overlay .battle-stage.sts.battle-redesign .sts-energy { width:110px; height:70px; border-radius:0; border:0; border-bottom:2px solid #8fc5d3; background:#173441dd; box-shadow:none; }
+#overlay .battle-stage.sts.battle-redesign .sts-energy::before { display:none; }
+#overlay .battle-stage.sts.battle-redesign .sts-energy b { font-size:40px; color:#e4f2f3; }
+#overlay .battle-stage.sts.battle-redesign .sts-energy span { font-size:20px; color:#a6c7d3; }
+#overlay .battle-stage.sts.battle-redesign .sts-hand-tools { display:flex; flex-direction:column; gap:12px; justify-content:center; min-width:0; }
+#overlay .battle-stage.sts.battle-redesign .bt-slam-btn { width:100%; min-height:68px; padding:12px; border:1px solid #a4c5d966; border-radius:0; color:#e4edf0; background:#153040de; font-size:19px; }
+#overlay .battle-stage.sts.battle-redesign .battle-skill-cost { display:block; margin-top:6px; color:#b9cbd4; font-size:16px; }
+#overlay .battle-stage.sts.battle-redesign .sts-hand { height:220px!important; min-height:220px!important; background:none; box-shadow:none; padding:0; overflow:visible; }
+#overlay .battle-stage.sts.battle-redesign .sts-hand .bt-slot { bottom:10px!important; }
+#overlay .battle-stage.sts.battle-redesign .sts-tactics { display:flex; flex-direction:column; gap:16px; min-width:0; padding:0; }
+#overlay .battle-stage.sts.battle-redesign .sts-tactics-secondary { display:flex; flex-wrap:wrap; gap:6px; }
+#overlay .battle-stage.sts.battle-redesign .sts-tactics-secondary .ov-btn { font-size:15px; min-height:34px; margin:0!important; background:#14242dbb; }
+#overlay .battle-stage.sts.battle-redesign .sts-end-turn { min-height:62px; width:100%; font-size:22px; border-radius:0; background:#e0c986; color:#14212a; border-color:#e0c986; box-shadow:none; }
+#overlay .battle-stage.sts.battle-redesign .bt-infuse { flex:0 0 auto; margin:0; padding:12px 28px; font-size:17px; background:#173341e8; border:0; border-top:1px solid #b1cbd344; color:#e4edf0; }
+#overlay .battle-stage.sts.battle-redesign .bt-infuse .mini-btn { font-size:16px; min-height:38px; }
+#overlay .card:has(.battle-decision) { display:flex; flex-direction:column; width:min(1320px,calc(var(--game-layout-width, 100vw) * 0.94)); max-height:calc(var(--game-layout-height, 100vh) * 0.9); padding:0!important; overflow:hidden!important; background:#12212af5!important; border:1px solid #acc1cb55!important; border-radius:0; }
+#overlay .card:has(.battle-decision) > h2 { display:none; }
+#overlay .card:has(.battle-decision) #ovBody { display:flex; flex:1; min-height:0; overflow:hidden; }
+#overlay .battle-decision { display:flex; flex-direction:column; width:100%; min-height:0; max-height:calc(var(--game-layout-height, 100vh) * 0.9); }
+#overlay .battle-decision-head { flex:0 0 auto; display:flex; justify-content:space-between; align-items:center; gap:24px; padding:24px 30px; background:#19323c; border-bottom:1px solid #acc1cb33; }
+#overlay .battle-decision-head h3 { margin:0; font-size:28px; color:#e4edf0; }
+#overlay .battle-decision-head > span { font-size:18px; color:#b9cbd4; white-space:nowrap; }
+#overlay .battle-decision-content { min-height:0; overflow:auto; overscroll-behavior:contain; padding:20px 30px; }
+#overlay .battle-decision-content .ov-stats, #overlay .battle-decision-content .ov-note { font-size:18px; line-height:1.6; color:#c4d3da; }
+#overlay .battle-decision-content .bt-hand { padding:24px 12px; min-height:0; gap:22px; align-items:flex-start; }
+#overlay .battle-decision-content button.bt-card { appearance:none; background:transparent; border:0; padding:0; color:inherit; cursor:pointer; }
+#overlay .battle-decision-content .choice-list { display:grid; gap:14px; }
+#overlay .battle-decision-content .choice-opt { text-align:left; font-size:20px; padding:16px 22px; background:#1b3441; border:1px solid #acc1cb44; min-height:58px; }
+#overlay .battle-decision-actions { flex:0 0 auto; padding:18px 30px; background:#0e1820; border-top:1px solid #acc1cb33; }
+#overlay .battle-decision-actions .ov-btns { margin:0; }
+#overlay .battle-decision-actions .ov-btn { min-height:48px; font-size:19px; }
+#overlay .battle-decision-actions .ov-btn.ok { background:#e0c986; color:#14212a; border-color:#e0c986; }
+#overlay .battle-decision-content .battle-decision-source { color:#b9cbd4; font-size:17px; margin:0 0 8px; }
+#overlay .battle-decision-content .bt-gy-list { display:flex; flex-wrap:wrap; gap:22px; max-height:none; border:0; padding:12px 0; }
+#overlay .battle-decision-content .battle-pile-card { position:relative; display:block; padding:0; background:none; border:0; }
+#overlay .battle-decision-content .battle-bag-section + .battle-bag-section { margin-top:28px; border-top:1px solid #acc1cb33; padding-top:20px; }
+#overlay .battle-decision-content .battle-bag-section h4 { margin:0; color:#e4edf0; font-size:22px; }
+#overlay .battle-decision-content .battle-bag-section h4 span { margin-left:16px; font-size:17px; font-weight:400; color:#b9cbd4; }
+#overlay .battle-stage.sts.has-painted-scenery { background-image:none!important; background-color:#26343b; }
+#overlay .battle-stage.sts.has-painted-scenery .sts-arena { overflow:hidden; }
+#overlay .battle-scene-world { position:absolute; z-index:0; pointer-events:none; }
+#overlay .battle-scene-world .battle-scene-layer { position:absolute; inset:0; width:100%; height:100%; object-fit:fill; pointer-events:none; }
+#overlay > .battle-scene-foreground { position:absolute; z-index:7; pointer-events:none; mask-size:100% 100%; mask-repeat:no-repeat; object-fit:fill; }
+
+/* Battle-only temporary gain: retain the shared queue and show the object beside the arena. */
+#cardGet[data-combat="true"] { inset:76px 24px auto auto; width:290px; min-height:0; height:auto; padding:18px 20px; gap:12px; background:#122631f2; border:1px solid #a8c2cc66; box-shadow:0 14px 38px #0007; border-radius:0; }
+#cardGet[data-combat="true"] .lg-beam, #cardGet[data-combat="true"] .lg-name { display:none; }
+#cardGet[data-combat="true"] .lg-kicker { font-size:16px; letter-spacing:.1em; text-shadow:none; color:#d8e4e8; }
+#cardGet[data-combat="true"] .lg-card .hs-card { width:160px; }
+#cardGet[data-combat="true"] .lg-reason { font-size:16px; color:#c2d3db; line-height:1.5; }
+#cardGet[data-combat="true"] .lg-hint { font-size:15px; color:#b0c7d3; }
+#cardGet[data-combat="true"]:has(.rv-prism) { border-color:#c5dcdb; background:linear-gradient(135deg,#1d364af2,#33314cf2); }
+
+/* 三组操作台的显式格位：旧手牌/技能的第二列钉位不可沿用。 */
+body #overlay .battle-stage.sts.battle-redesign .sts-hud {
+  grid-template-columns:210px minmax(0,1fr) 210px;
+  grid-template-rows:86px 118px;
+  column-gap:22px; row-gap:8px; padding:10px 26px 12px;
+}
+body #overlay .battle-stage.sts.battle-redesign .sts-energy-wrap {
+  grid-column:1; grid-row:1; align-self:center; justify-self:stretch;
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+}
+body #overlay .battle-stage.sts.battle-redesign .battle-energy-label { font-size:16px; }
+body #overlay .battle-stage.sts.battle-redesign .sts-energy { width:100px; height:68px; flex:0 0 100px; }
+body #overlay .battle-stage.sts.battle-redesign .sts-hand-tools {
+  grid-column:1; grid-row:2; justify-self:stretch; align-self:start;
+  width:100%; margin:0; padding:0; gap:8px; pointer-events:auto;
+}
+body #overlay .battle-stage.sts.battle-redesign .bt-slam-btn { min-height:70px; font-size:18px; }
+body #overlay .battle-stage.sts.battle-redesign .sts-hand {
+  grid-column:2; grid-row:1 / 3; align-self:end; justify-self:stretch;
+  width:100%!important; max-width:none!important; margin:0!important;
+  height:212px!important; min-height:212px!important; padding:0;
+}
+body #overlay .battle-stage.sts.battle-redesign .sts-tactics {
+  grid-column:3; grid-row:1 / 3; align-self:center; justify-self:stretch;
+  width:100%; min-width:0; padding:0; gap:14px; pointer-events:auto;
+}
+body #overlay .battle-stage.sts.battle-redesign .sts-tactics-secondary {
+  display:grid; grid-template-columns:1fr 1fr; gap:8px;
+}
+body #overlay .battle-stage.sts.battle-redesign .sts-tactics-secondary [data-act="btFlee"] { grid-column:1 / -1; grid-row:2; }
+body #overlay .battle-stage.sts.battle-redesign .sts-end-turn { min-height:64px; }
+body #overlay .battle-stage.sts.battle-redesign .sts-hand .bt-slot { bottom:8px!important; }
+body #overlay .battle-decision-content .bt-settings { display:grid; gap:20px; padding:10px 0; font-size:20px; }
+body #overlay .battle-decision-content .bt-settings .chk { display:flex; align-items:center; gap:14px; }
+body #overlay .battle-decision-content .bt-settings input { width:22px; height:22px; accent-color:#e0c986; }
+body #overlay .battle-decision-content .bt-hand { display:flex; flex-wrap:wrap; justify-content:center; }
+body #overlay .battle-decision-content .bt-card:focus-visible,
+body #overlay .battle-decision-content .battle-pile-card:focus-visible { outline:3px solid #e0c986; outline-offset:5px; }
+
+/* 战斗已有战术台背包入口，地图浮钮不得盖住结束回合或附加面板。 */
+body:has(#overlay:not([hidden]) :is(.battle-stage.sts, .battle-decision)) #bagBtnFloat { display:none!important; }
+
+/* 仅景层本身按arena裁边；角色、目标与意图仍可越出arena。 */
+body #overlay .battle-stage.sts.battle-redesign > .sts-topbar { position:relative; z-index:9; }
+body #overlay .battle-stage.sts.battle-redesign.has-painted-scenery .sts-arena { overflow:visible!important; }
+
+/* 设置与空战斗背包是短面板；有卡列表仍使用原滚动/固定footer。 */
+body #overlay .card:has(.battle-decision-compact) { width:min(900px,calc(var(--game-layout-width, 100vw) * .82)); height:auto; }
+body #overlay .battle-decision-compact { flex:0 1 auto; }
+body #overlay .battle-decision-compact .battle-decision-content { flex:0 1 auto; padding:30px 38px; }
+body #overlay .battle-decision-compact .bt-settings { justify-content:center; }
+body #overlay .battle-decision-compact .battle-decision-actions .ov-btns { display:flex; justify-content:center; }
+body #overlay .battle-decision-compact .battle-decision-actions .ov-btn { flex:0 0 auto; width:auto; min-width:220px; }
+
+/* 参考STS2边缘分组：数字与技能费用分工，保留已成立三列几何。 */
+body #overlay .battle-stage.sts.battle-redesign .sts-energy { border:1px solid #9acbd166; border-bottom:3px solid #a5d8d8; background:linear-gradient(145deg,#234851e8,#132f39ee); }
+body #overlay .battle-stage.sts.battle-redesign .sts-energy b { font-variant-numeric:tabular-nums; line-height:1; }
+body #overlay .battle-stage.sts.battle-redesign .bt-slam-btn { text-align:left; border-left:3px solid #a5d8d8; }
+body #overlay .battle-stage.sts.battle-redesign .battle-skill-cost { width:max-content; padding:3px 7px; background:#0a1b2399; color:#d4e7eb; font-size:15px; }
+body #overlay .battle-stage.sts.battle-redesign .bt-slam-btn.active { border-color:#e9d394; background:#36515b; box-shadow:inset 0 0 0 1px #e9d394; }
+body #overlay .battle-stage.sts.battle-redesign .sts-end-turn { border:1px solid #f1dfa7; border-bottom:4px solid #ac955e; }
+body #overlay .battle-stage.sts.battle-redesign .sts-end-turn:focus-visible { outline:3px solid #f1dfa7; outline-offset:4px; }
+body #overlay .battle-stage.sts.battle-redesign .bt-pile { background:#14262ee0; border:1px solid #a8bcc744; border-radius:3px; box-shadow:none; }
+body #overlay .battle-stage.sts.battle-redesign .bt-pile-cap { color:#c9d9de; font-size:13px; }
+body #overlay .battle-stage.sts.battle-redesign .bt-pile b { font-variant-numeric:tabular-nums; }
+/* STS1候选/背景退让与STS2牌库网格：本项目支付/注能/编组原创适配。 */
+body #overlay .battle-decision-summary { flex:0 0 auto; padding:14px 30px; background:#213b46; border-bottom:1px solid #a8bdc333; }
+body #overlay .battle-decision-summary .ov-stats { margin:0; font-size:19px; line-height:1.55; color:#d1e1e5; }
+body #overlay .battle-decision-summary .ov-stats b { color:#f0da9c; }
+body #overlay .battle-decision-content { background:linear-gradient(180deg,#11232b,#101c24); }
+body #overlay .battle-decision[data-decision-kind="discover"] .bt-hand { display:flex; justify-content:center; align-items:center; gap:32px; padding:26px 16px 34px; }
+body #overlay .battle-decision[data-decision-kind="discover"] .bt-card .hs-card { width:220px; }
+body #overlay .battle-decision[data-decision-kind="discover"] .bt-card { position:relative; padding:10px; border-bottom:2px solid #b5ccd24d; }
+body #overlay .battle-decision-content button.bt-card:hover { outline:2px solid #e4d49c; outline-offset:5px; filter:brightness(1.06); }
+body #overlay .battle-decision-content :is(.bt-hand,.bt-gy-list,.battle-bag-grid) { gap:24px; }
+body #overlay .battle-decision[data-decision-kind="formation"] .bt-hand,
+body #overlay .battle-decision[data-decision-kind="hand-select"] .bt-hand,
+body #overlay .battle-decision[data-decision-kind="pile"] .bt-gy-list { display:grid; grid-template-columns:repeat(auto-fit,190px); justify-content:center; align-items:start; padding:20px 0; }
+body #overlay .battle-decision:is([data-decision-kind="formation"],[data-decision-kind="hand-select"],[data-decision-kind="pile"]) .hs-card { width:190px; }
+body #overlay .battle-decision[data-decision-kind="formation"] .bt-card.sel { outline:3px solid #e4d49c; outline-offset:5px; background:#d6c58c10; box-shadow:none; }
+body #overlay .battle-decision[data-decision-kind="formation"] .bt-card.sel::after { content:'已编入'; position:absolute; bottom:5px; left:12px; right:12px; padding:5px; background:#e4d49c; color:#172831; font-size:15px; font-weight:700; }
+body #overlay .battle-decision[data-decision-kind="choice"] .choice-list { grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:20px; padding:20px 0; }
+body #overlay .battle-decision[data-decision-kind="choice"] .choice-opt { min-height:120px; border-left:3px solid #d6c58c; line-height:1.6; }
+body #overlay .battle-decision-actions .ov-btns { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:14px; }
+body #overlay .battle-decision-actions .ov-btn { flex:0 1 auto; min-width:190px; }
+body #overlay .battle-decision-actions .ov-btn.ok { order:2; }
+body #overlay .battle-decision-content .bt-count { background:#14252ee8; color:#d9e6e8; border:1px solid #a4bbc555; }
+body #overlay .battle-decision[data-decision-kind="bag"] .battle-bag-grid { display:flex; flex-wrap:wrap; align-items:flex-start; padding:18px 0; }
+body #overlay .battle-decision[data-decision-kind="bag"] .battle-bag-slot .hs-card { width:185px; }
+body #overlay .battle-stage.sts.battle-redesign .bt-infuse { display:flex; flex-wrap:wrap; align-items:center; gap:10px; border-left:4px solid #e4d49c; }
+body #overlay .battle-stage.sts.battle-redesign .bt-infuse b { color:#f0da9c; }
+body #overlay .battle-stage.sts.battle-redesign .bt-infuse .mini-btn.ok { background:#e4d49c; color:#162731; }
+#cardGet[data-combat="true"] .lg-card { padding:9px; background:#0b1b2366; }
+#cardGet[data-combat="true"][data-rarity="传说"] { border-left:3px solid #e4c778; }
+#cardGet[data-combat="true"][data-rarity="棱彩"] { border-left:3px solid #c8e8e7; }
+
+body #overlay .battle-decision[data-decision-kind="discover"] .bt-card { width:240px; flex:0 0 240px; box-sizing:border-box; }
+body #overlay .battle-decision:is([data-decision-kind="formation"],[data-decision-kind="hand-select"],[data-decision-kind="pile"]) :is(.bt-card,.battle-pile-card) { position:relative; width:190px; min-width:0; }
+
+/* 附加壳只有候选内容滚动，解除legacy discover内卡阵高度上限。 */
+body #overlay .card:has(.battle-decision) .battle-decision-content .bt-hand { max-height:none; overflow:visible; }
+/* 编组状态放在卡面之外，保留整张卡的正文可读区。 */
+body #overlay .battle-decision[data-decision-kind="formation"] .bt-card { padding-bottom:34px; box-sizing:content-box; overflow:visible; }
+body #overlay .battle-decision[data-decision-kind="formation"] .bt-card.sel::after { left:0; right:0; bottom:0; padding:5px 0; }
+
+/* true模式沿room产生满页卡：短战斗设置专门解除room外壳尺寸，不触其他决策。 */
+body #overlay.room-view:has(.battle-decision-compact[data-decision-kind="settings"]) { align-items:center; justify-content:center; padding:36px; }
+body #overlay.room-view .card.room:has(.battle-decision-compact[data-decision-kind="settings"]) {
+  position:relative; inset:auto; width:min(800px,calc(var(--game-layout-width,100vw) - 96px));
+  height:auto; min-height:0; max-height:calc(var(--game-layout-height,100vh) - 72px);
+  flex:0 1 auto; align-self:center; justify-content:flex-start; margin:auto; padding:0!important;
+}
+body #overlay.room-view .card.room:has(.battle-decision-compact[data-decision-kind="settings"]) #ovBody {
+  width:100%; height:auto; min-height:0; max-width:none; margin:0; flex:0 1 auto;
+}
+body #overlay .battle-decision-compact[data-decision-kind="settings"] { width:100%; height:auto; min-height:0; }
+body #overlay .battle-decision-compact[data-decision-kind="settings"] .battle-decision-content { padding:24px 36px; }
+body #overlay .battle-decision-compact[data-decision-kind="settings"] .bt-settings { width:100%; grid-template-columns:minmax(0,1fr); justify-content:stretch; gap:0; padding:0; }
+body #overlay .battle-decision-compact[data-decision-kind="settings"] .chk { min-height:58px; width:100%; padding:8px 0; border-bottom:1px solid #b7cbd32b; font-size:20px; line-height:1.5; box-sizing:border-box; }
+body #overlay .battle-decision-compact[data-decision-kind="settings"] .bt-settings .ov-note { margin:16px 0 0; font-size:16px; line-height:1.6; }
+
+/* 战斗重建：StS2战场几何 + 方舟边缘信息层级；1920×1080统一逻辑画布。 */
+body #overlay .battle-stage.sts.battle-sts {
+  --battle-hand-height:300px;
+  display:block!important;position:relative;isolation:isolate;overflow:clip!important;
+  color:#edf2f2;background:#26343b;background-image:none!important;
+}
+body #overlay .battle-stage.sts.battle-sts .battle-stage-shade {
+  background:linear-gradient(180deg,#07131a55,transparent 38%,#07131a22 68%,#06101799);
+}
+body #overlay .battle-stage.sts.battle-sts > .sts-topbar {
+  position:absolute;inset:0 0 auto;z-index:10;height:72px;min-height:0;
+  display:flex;align-items:center;gap:24px;padding:0 40px;
+  background:linear-gradient(180deg,#0d202be8,#0d202b8c)!important;
+  border:0!important;border-bottom:1px solid #bddde12e!important;box-shadow:none!important;
+}
+body #overlay .battle-stage.sts.battle-sts .sts-encounter { display:flex;align-items:center;gap:18px;max-width:none;min-width:0; }
+body #overlay .battle-stage.sts.battle-sts .sts-encounter-kicker { padding-right:24px;border-right:1px solid #bddde144;color:#a5bec9;font-size:18px;letter-spacing:.08em; }
+body #overlay .battle-stage.sts.battle-sts .sts-encounter b { color:#f4f5ee;font-size:26px;font-weight:750;white-space:nowrap; }
+body #overlay .battle-stage.sts.battle-sts .sts-encounter > span:last-child { color:#d6e4e7;font-size:20px;white-space:nowrap; }
+body #overlay .battle-stage.sts.battle-sts .sts-phase-dot { width:8px;height:8px;box-shadow:none; }
+body #overlay .battle-stage.sts.battle-sts .sts-xp-chip { display:none; }
+body #overlay .battle-stage.sts.battle-sts .sts-options { position:relative;margin-left:auto;order:0; }
+body #overlay .battle-stage.sts.battle-sts .sts-options summary { display:flex;align-items:center;gap:10px;list-style:none;padding:12px 18px;border:1px solid #bedae244;background:#0b1d2780;color:#deebee;font-size:19px;cursor:pointer; }
+body #overlay .battle-stage.sts.battle-sts .sts-options summary::-webkit-details-marker { display:none; }
+body #overlay .battle-stage.sts.battle-sts .sts-options-menu { position:absolute;right:0;top:calc(100% + 12px);bottom:auto;width:260px;display:grid;gap:8px;padding:12px;background:#102631f5;border:1px solid #9ebdc65c;box-shadow:0 12px 32px #0008; }
+body #overlay .battle-stage.sts.battle-sts .sts-options-menu .ov-btn { width:100%;min-height:48px;margin:0;padding:10px 14px;font-size:19px;text-align:left; }
+body #overlay .battle-stage.sts.battle-sts .sts-options-menu [data-act='btFlee'] { color:#e5b3aa; }
+body #overlay .battle-stage.sts.battle-sts > .bt-potions { position:absolute;z-index:9;top:92px;left:40px;max-width:30%;transform:none;justify-content:flex-start; }
+body #overlay .battle-stage.sts.battle-sts .bt-potion { min-height:44px;font-size:18px;background:#102731d9;border:1px solid #92b1bb66; }
+body #overlay .battle-stage.sts.battle-sts .sts-arena,
+body #overlay .battle-stage.sts.battle-sts.has-painted-scenery .sts-arena { position:absolute;inset:72px 0 0;min-height:0!important;height:auto!important;overflow:visible!important; }
+body #overlay .battle-stage.sts.battle-sts .sts-arena::before,
+body #overlay .battle-stage.sts.battle-sts .sts-arena::after { display:none; }
+body #overlay .battle-stage.sts.battle-sts .sts-arena-caption { display:flex!important;position:absolute;top:20px;left:50%;transform:translateX(-50%);z-index:5;width:max-content;max-width:58%;padding:10px 20px;border:0;border-radius:0;background:#102630b8;box-shadow:none; }
+body #overlay .battle-stage.sts.battle-sts .sts-arena-caption span { color:#d7e5e8;font-size:20px;line-height:1.45;white-space:normal;overflow:visible;text-align:center; }
+/* 名牌底线位于735附近，手牌身份区从832开始；同一脚线挂敌我单位。 */
+body #overlay .battle-stage.sts.battle-sts .sts-me,
+body #overlay .battle-stage.sts.battle-sts .sts-foes,
+body #overlay .battle-stage.sts.battle-sts .sts-allies { bottom:calc(var(--battle-hand-height) + 45px)!important; }
+body #overlay .battle-stage.sts.battle-sts .sts-me { position:absolute;left:10%!important;width:320px!important;max-width:none; }
+body #overlay .battle-stage.sts.battle-sts .sts-allies { position:absolute;left:29%;right:54%;display:flex;align-items:end;gap:12px; }
+body #overlay .battle-stage.sts.battle-sts .sts-allies .sts-ally { flex:1 1 0;width:auto;min-width:0; }
+body #overlay .battle-stage.sts.battle-sts .sts-foes { left:48%;right:6%;display:grid;grid-template-columns:repeat(var(--battle-foe-count,1),minmax(0,1fr));align-items:end;gap:24px;padding:0; }
+body #overlay .battle-stage.sts.battle-sts .sts-foes::before { display:none; }
+body #overlay .battle-stage.sts.battle-sts .sts-foe,
+body #overlay .battle-stage.sts.battle-sts .sts-foe.is-boss { position:relative;display:flex;flex-direction:column;align-items:center;justify-content:end;width:auto;max-width:none;min-width:0;padding:0;background:none;text-align:center; }
+body #overlay .battle-stage.sts.battle-sts .sts-figure { display:flex;align-items:end;justify-content:center;min-width:0; }
+body #overlay .battle-stage.sts.battle-sts .sts-me .sts-figure { height:390px;width:100%; }
+body #overlay .battle-stage.sts.battle-sts .sts-foe .sts-figure { height:330px;width:100%; }
+body #overlay .battle-stage.sts.battle-sts .sts-foe.is-boss .sts-figure { height:390px; }
+body #overlay .battle-stage.sts.battle-sts .sts-ally .sts-figure { height:155px;width:100%; }
+body #overlay .battle-stage.sts.battle-sts .sts-figure img { width:auto;max-width:100%;height:auto;max-height:100%;object-fit:contain; }
+body #overlay .battle-stage.sts.battle-sts .sts-nameplate,
+body #overlay .battle-stage.sts.battle-sts .sts-foe:not(.dead) .sts-nameplate,
+body #overlay .battle-stage.sts.battle-sts[data-boss='1'] .sts-arena .sts-foe .sts-nameplate { box-sizing:border-box;width:100%;min-width:0;max-width:300px;position:relative!important;inset:auto!important;margin:12px auto 0;padding:0;border:0!important;border-radius:0;background:none!important;box-shadow:none;text-align:center;text-shadow:0 2px 4px #000; }
+body #overlay .battle-stage.sts.battle-sts .sts-headrow { display:flex;align-items:center;justify-content:center;gap:8px;min-width:0; }
+body #overlay .battle-stage.sts.battle-sts .sts-headrow b { max-width:100%;font-size:22px;color:#f4f5ee;white-space:normal;line-height:1.35;text-align:center; }
+body #overlay .battle-stage.sts.battle-sts .sts-atkbadge { font-size:18px; }
+body #overlay .battle-stage.sts.battle-sts .sts-hp { height:24px!important;min-height:24px!important;max-height:24px!important;margin:6px 0 0;border:1px solid #d5e2e06e;background:#091923d9;border-radius:2px; }
+body #overlay .battle-stage.sts.battle-sts .sts-hp span { font-size:20px!important;line-height:22px!important;height:22px!important;text-shadow:0 1px 3px #000;font-variant-numeric:tabular-nums; }
+body #overlay .battle-stage.sts.battle-sts .sts-me .sts-nameplate .sts-hp i.sts-hp-main { background:linear-gradient(90deg,#3689a5,#9fdfde)!important; }
+body #overlay .battle-stage.sts.battle-sts .sts-foe .sts-nameplate .sts-hp i.sts-hp-main { background:linear-gradient(90deg,#ab5655,#e9917d)!important; }
+body #overlay .battle-stage.sts.battle-sts .sts-nameplate .sts-hp i.sts-hp-ghost { background:#e2c58c!important; }
+body #overlay .battle-stage.sts.battle-sts .sts-stats { display:inline-block;margin-top:6px;padding:4px 10px;font-size:18px;line-height:1.4;background:#102631ba;border:0; }
+body #overlay .battle-stage.sts.battle-sts .sts-chips { display:flex;justify-content:center;flex-wrap:wrap;gap:4px 6px;margin-top:6px;font-size:17px;line-height:1.4; }
+body #overlay .battle-stage.sts.battle-sts .sts-equips { justify-content:center;gap:6px;margin-top:6px; }
+body #overlay .battle-stage.sts.battle-sts .sts-equip { padding:4px 8px;font-size:16px;background:#102630cc; }
+/* 意图挂在角色头上，结果反馈仍贴着受击对象。 */
+body #overlay .battle-stage.sts.battle-sts .sts-intent { position:relative;inset:auto;transform:none;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px;width:max-content;max-width:100%;min-width:0;margin:0 auto 18px;padding:0;background:none;border:0;box-shadow:none;color:#f5e4b7;text-align:center;white-space:nowrap; }
+body #overlay .battle-stage.sts.battle-sts .sts-intent[style*='display: none'] { display:none; }
+body #overlay .battle-stage.sts.battle-sts .bt-intent-part { display:inline-flex;align-items:center;justify-content:center;gap:6px;max-width:100%;min-height:34px;padding:6px 12px;background:#102630e8;border:1px solid #d4bc8277;border-radius:2px;font-size:20px;font-weight:700;line-height:1.3; }
+body #overlay .battle-stage.sts.battle-sts .bt-intent-part + .bt-intent-part { margin:0;padding:6px 12px;border-top:1px solid #d4bc8277; }
+body #overlay .battle-stage.sts.battle-sts .bt-intent-part .ic { width:24px;height:24px; }
+body #overlay .battle-stage.sts.battle-sts .bt-intent-short { max-width:12ch;overflow:hidden;text-overflow:ellipsis; }
+body #overlay .battle-stage.sts.battle-sts .bt-intent-detail { display:none;position:absolute;left:50%;bottom:calc(100% + 10px);transform:translateX(-50%);width:max-content;max-width:350px;padding:14px 18px;white-space:normal;text-align:left;line-height:1.5;font-size:19px;font-weight:500;color:#eaf1ec;background:#102630f5;border:1px solid #abc9cc80;box-shadow:0 10px 22px #0008;z-index:18; }
+body #overlay .battle-stage.sts.battle-sts .sts-intent:is(:hover,:focus-visible,.is-open) .bt-intent-detail { display:block; }
+body #overlay .battle-stage.sts.battle-sts .sts-intent:focus-visible { outline:2px solid #dfcb94;outline-offset:4px; }
+body #overlay .battle-stage.sts.battle-sts:has(.can-target) .sts-unit:not(.can-target) { opacity:.64;filter:saturate(.7); }
+body #overlay .battle-stage.sts.battle-sts .sts-unit.can-target { opacity:1;outline:0;border:0;background:none;box-shadow:none; }
+body #overlay .battle-stage.sts.battle-sts .sts-unit.can-target::after { content:'可选目标';position:absolute;left:50%;top:-50px;transform:translateX(-50%);padding:5px 12px;border:1px solid #dbc69188;border-radius:2px;background:#102630ed;color:#f3dda8;font-size:18px;font-weight:700;pointer-events:none; }
+body #overlay .battle-stage.sts.battle-sts .sts-unit.can-target .sts-figure { filter:drop-shadow(0 0 10px #e3cf9880); }
+body #overlay .battle-stage.sts.battle-sts .sts-unit.drag-over::after { content:'释放使用';background:#d9c78f;color:#14272f;border-color:#f7e8b9; }
+body #overlay .battle-stage.sts.battle-sts .sts-unit.drag-over .sts-figure { filter:drop-shadow(0 0 8px #f7e8b9) drop-shadow(0 0 22px #d3bf8599); }
+body #overlay .battle-stage.sts.battle-sts .sts-unit.drag-over .sts-figure img { transform:none; }
+/* 两侧工具独立锚定；中央手牌不参与工具布局。 */
+body #overlay .battle-stage.sts.battle-sts .sts-hud { position:absolute;inset:auto 0 0;z-index:7;display:block;height:var(--battle-hand-height)!important;min-height:0!important;padding:0;border:0;background:linear-gradient(180deg,transparent,#07141d44);box-shadow:none;pointer-events:none; }
+body #overlay .battle-stage.sts.battle-sts .sts-hud > * { pointer-events:auto; }
+body #overlay .battle-stage.sts.battle-sts .sts-energy-wrap { position:absolute;left:44px;bottom:140px;z-index:10;display:flex;flex-direction:column;align-items:center;gap:8px;margin:0; }
+body #overlay .battle-stage.sts.battle-sts .battle-energy-label { color:#bcd7df;font-size:19px;font-weight:700;letter-spacing:.08em; }
+body #overlay .battle-stage.sts.battle-sts .sts-energy { display:flex;align-items:center;justify-content:center;gap:4px;width:116px;height:104px;flex:0 0 auto;padding:0;border:0;border-radius:0;clip-path:polygon(18% 0,82% 0,100% 20%,100% 80%,82% 100%,18% 100%,0 80%,0 20%);background:linear-gradient(145deg,#5c9bac,#214858);box-shadow:inset 0 0 0 4px #b2dee055; }
+body #overlay .battle-stage.sts.battle-sts .sts-energy::before { display:none; }
+body #overlay .battle-stage.sts.battle-sts .sts-energy > .ic { display:none; }
+body #overlay .battle-stage.sts.battle-sts .sts-energy b { font-size:48px;color:#f4f8ef;font-variant-numeric:tabular-nums; }
+body #overlay .battle-stage.sts.battle-sts .sts-energy span { color:#c4dce3;font-size:24px; }
+body #overlay .battle-stage.sts.battle-sts .sts-hand-tools { position:absolute;left:28px;bottom:30px;z-index:10;display:flex;flex-direction:column;align-items:start;gap:8px;width:196px;margin:0;padding:0; }
+body #overlay .battle-stage.sts.battle-sts .bt-slam-btn { width:100%;min-height:76px;padding:12px 14px;border:1px solid #aed5dd55;border-left:3px solid #a3d9dc;border-radius:0;background:linear-gradient(135deg,#264551dd,#102630dd);color:#e5f1ef;box-shadow:0 6px 18px #0005;font-size:20px;text-align:left;letter-spacing:0; }
+body #overlay .battle-stage.sts.battle-sts .bt-slam-btn.active { border-color:#dfcb94;background:#314e56; }
+body #overlay .battle-stage.sts.battle-sts .battle-skill-cost { display:block;margin-top:7px;color:#aecad3;font-size:16px; }
+body #overlay .battle-stage.sts.battle-sts .bt-hand-page { min-height:38px;padding:8px 12px;border:1px solid #92b4bd77;border-radius:0;background:#163340eb;font-size:18px;box-shadow:none;animation:none; }
+body #overlay .battle-stage.sts.battle-sts .bt-hand-page::after { display:none; }
+body #overlay .battle-stage.sts.battle-sts .sts-hand { position:absolute;left:13%;right:13%;bottom:0;z-index:8;width:74%!important;max-width:none!important;min-width:0!important;min-height:0!important;margin:0!important;background:none;box-shadow:none; }
+body #overlay .battle-stage.sts.battle-sts .sts-tactics { position:absolute;right:30px;bottom:92px;z-index:10;display:flex;flex-direction:column;align-items:stretch;gap:14px;width:200px;min-width:0;margin:0;padding:0; }
+body #overlay .battle-stage.sts.battle-sts .sts-end-turn { order:0;width:100%;min-height:74px;padding:14px 18px;border:1px solid #eddba7;border-bottom:4px solid #9f8857;border-radius:2px;background:linear-gradient(135deg,#e4d6ab,#baa374);color:#132732;box-shadow:0 8px 22px #0006;font-size:24px;font-weight:800; }
+body #overlay .battle-stage.sts.battle-sts .sts-end-turn:hover:not(:disabled) { background:linear-gradient(135deg,#f5e8bd,#d1b98a); }
+body #overlay .battle-stage.sts.battle-sts .sts-end-turn:disabled { opacity:.5; }
+body #overlay .battle-stage.sts.battle-sts .sts-tactics-secondary { order:1;display:flex;justify-content:flex-end; }
+body #overlay .battle-stage.sts.battle-sts .sts-tactics-secondary .ov-btn { width:100%;min-height:46px;margin:0!important;padding:8px 12px!important;border:1px solid #bad7df44;border-radius:0;background:#102630ce;color:#cfe0e6;font-size:19px!important;box-shadow:none; }
+body #overlay .battle-stage.sts.battle-sts .sts-hud-l { position:absolute;left:182px;bottom:158px;display:flex;min-width:0;margin:0; }
+body #overlay .battle-stage.sts.battle-sts .sts-hud-r { position:absolute;right:30px;bottom:20px;display:flex;align-items:end;gap:12px;min-width:0; }
+body #overlay .battle-stage.sts.battle-sts .bt-pile { min-width:64px;min-height:56px;padding:5px 8px;background:#102630b3;border:1px solid #bdd8db33;box-shadow:none; }
+body #overlay .battle-stage.sts.battle-sts .bt-pile b { font-size:23px;color:#eef4ed; }
+body #overlay .battle-stage.sts.battle-sts .bt-pile-cap { font-size:16px;color:#b6d0d9; }
+body #overlay .battle-stage.sts.battle-sts > .bt-infuse { position:absolute;z-index:12;left:27%;right:27%;bottom:calc(var(--battle-hand-height) + 14px);margin:0;padding:14px 20px;border:1px solid #b7d2d95c;border-left:3px solid #dfcb94;border-radius:0;background:#102630f5;color:#eaf1eb;font-size:20px;line-height:1.5; }
+body #overlay .battle-stage.sts.battle-sts > .bt-infuse .mini-btn { min-height:42px;font-size:19px; }
+body #overlay .battle-stage.sts.battle-sts .sts-end-turn:focus-visible,
+body #overlay .battle-stage.sts.battle-sts .sts-options summary:focus-visible { outline:3px solid #bde3e9;outline-offset:4px; }

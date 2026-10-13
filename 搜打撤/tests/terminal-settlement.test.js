@@ -27,6 +27,7 @@ describe('终局入口幂等', () => {
     const SDT = {
       Base: { depositCards }, Sound: { sfx: vi.fn(), music: vi.fn() },
       Icons: { img: () => '' },
+      Cards: { cardHTML: () => '<div class="hs-card">安全卡</div>' },
     };
     const controller = createGameMenuController({
       SDT, UI, game, runtime: { resize: vi.fn(), openBaseHub: vi.fn() },
@@ -39,8 +40,9 @@ describe('终局入口幂等', () => {
 
     controller.openLeaveMenu();
     actions.get('leaveAbandon')(); // 首次点击：进入二次确认
-    await actions.get('leaveAbandon')(); // 确认：实际结算
-    actions.get('leaveAbandon')(); // 同一旧回调迟到重放
+    const confirmAbandon = actions.get('leaveAbandonConfirm');
+    await confirmAbandon(); // 独立确认动作：实际结算
+    confirmAbandon(); // 同一旧回调迟到重放
 
     expect(game.runActive).toBe(false);
     expect(depositCards).toHaveBeenCalledOnce();

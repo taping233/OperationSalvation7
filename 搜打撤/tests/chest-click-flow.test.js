@@ -9,7 +9,8 @@ describe('宝箱点击链路', () => {
     document.body.innerHTML = '';
   });
 
-  it('搜索中点击宝箱立即揭晓，点击卡牌经 data-act 入包并结束宝箱', async () => {
+  it.each([true, false])('放大阅读可安全关闭，从独立或特写按钮领取后原位保留（特写领取=%s）', async zoomClaim => {
+    vi.resetModules();
     vi.useFakeTimers();
     const acts = {};
     const ovBody = document.createElement('div');
@@ -47,6 +48,16 @@ describe('宝箱点击链路', () => {
       act: (name, fn) => { acts[name] = fn; },
       refresh: vi.fn(),
       log: vi.fn(),
+      showCardZoom:vi.fn((selectedCard, options) => {
+        const zoom = document.createElement('div'); zoom.id = 'cardZoom';
+        zoom._closeCardZoom = vi.fn(() => zoom.remove());
+        zoom.innerHTML = `<p>${selectedCard.desc}</p>${options.footer}`;
+        zoom.addEventListener('click', event => {
+          const button = event.target.closest('[data-act]');
+          if (button) acts[button.dataset.act]?.(button.dataset);
+        });
+        document.body.appendChild(zoom);
+      }),
     };
     window.SDT = {
       UI,
@@ -75,11 +86,29 @@ describe('宝箱点击链路', () => {
     chestFacade.Chests.open(game, [{ kind: 'small' }]);
     expect(ovBody.querySelector('[data-eps-search]')).not.toBeNull();
     ovBody.querySelector('[data-eps-search]').click();
-    expect(ovBody.querySelector('[data-act="chestTake1"]')).not.toBeNull();
-
-    ovBody.querySelector('[data-act="chestTake1"]').click();
+    expect(ovBody.querySelector('[data-act="chestSelect"]')).not.toBeNull();
+    ovBody.querySelector('[data-act="chestSelect"]').click();
+    expect(ownedCards).toHaveLength(0);   // 查看不领取
+    expect(UI.showCardZoom).toHaveBeenCalledWith(card, expect.objectContaining({ from:expect.any(HTMLElement), hideNote:true, presentation:'expedition', footer:expect.stringContaining('chestTake1') }));
+    expect(ovBody.querySelector('.reward-detail')).toBeNull();
+    expect(document.querySelector('#cardZoom').textContent).toContain(card.desc);
+    document.getElementById('cardZoom')._closeCardZoom(true);
+    expect(ownedCards).toHaveLength(0);
+    expect(game.state).toBe('modal');
+    ovBody.querySelector('[data-act="chestSelect"]').click();
+    const close = document.getElementById('cardZoom')._closeCardZoom;
+    if (zoomClaim) document.querySelector('#cardZoom [data-act="chestTake1"]').click();
+    else {
+      close(true);
+      ovBody.querySelector('[data-act="chestTake1"]').click();
+    }
+    expect(close).toHaveBeenCalledWith(true);
+    expect(document.getElementById('cardZoom')).toBeNull();
     expect(ownedCards).toHaveLength(1);
-    ovBody.querySelector('[data-act="chestTake"]').click();
+    expect(ovBody.querySelector('.reward-unit.got .reward-card')).not.toBeNull();
+    expect(ovBody.querySelector('[data-act="chestTake1"]')).toBeNull();
+    expect(ovBody.querySelector('.reward-final').textContent).toContain('1 张已入背包');
+    ovBody.querySelector('[data-act="chestContinue"]').click();
     expect(game.state).toBe('idle');
     expect(overlay.hidden).toBe(true);
     expect(window.SDT.Base.recordPetEggChestResult).toHaveBeenCalledTimes(1);

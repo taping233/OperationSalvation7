@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, copyFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, copyFileSync } from 'node:fs';
 import os from 'node:os';
 import { pathToFileURL } from 'node:url';
 import path from 'node:path';
@@ -154,17 +154,6 @@ describe('分层验收选择', () => {
     expect(result.status).toBe(0);
     expect(JSON.parse(result.stdout)).toMatchObject({ mode: 'skip', tests: [] });
     expect(result.stdout).not.toContain('PASS');
-  });
-
-  // 隔离快照内非 staged 的 skip 门仍会跑素材审计/文档守卫，而快照字节与检出态不同必误报；staged 门内跳过，工作树门与 CI 覆盖。
-  it.skipIf(Boolean(process.env.SDT_STAGED_SNAPSHOT))('skip 提交运行时跑文档一致性守卫，规划模式不跑', () => {
-    const planned = spawnSync(process.execPath, ['scripts/acceptance-gate.mjs', '--paths', 'docs/README.md', '--plan'], { cwd: process.cwd(), encoding: 'utf8' });
-    expect(planned.status).toBe(0);
-    expect(planned.stdout).not.toContain('文档一致性守卫');
-    const run = spawnSync(process.execPath, ['scripts/acceptance-gate.mjs', '--paths', 'docs/README.md', '--run'], { cwd: process.cwd(), encoding: 'utf8' });
-    expect(run.status).toBe(0);
-    expect(run.stdout).toContain('文档一致性守卫');
-    expect(run.stdout).not.toContain('PASS');
   });
 
   it('Windows 绝对路径仍映射到项目内测试', () => {
@@ -340,6 +329,31 @@ describe('planner 显式 root 与查询故障隔离', () => {
       if (!relative.startsWith('sdt-gate-root-') || relative.includes(path.sep)) throw new Error('拒绝清理非自有 fixture');
       rmSync(root, { recursive: true, force: true });
     }
+  });
+  it('skip 运行先审计素材再跑文档守卫，规划模式不执行检查', () => {
+    const root = createRoot();
+    for (const name of ['acceptance-gate.mjs', 'gate-plan.mjs', 'registry-paths.mjs']) {
+      put(root, 'scripts/' + name, readFileSync(path.resolve('scripts', name), 'utf8'));
+    }
+    put(root, 'scripts/architecture-graph.mjs', 'export const analyzeModule = () => ({ imports: [] });');
+    put(root, 'scripts/asset-audit.cjs', "require('node:fs').appendFileSync('calls.jsonl', JSON.stringify(process.argv.slice(1))+'\\n');");
+    put(root, 'scripts/workflow.mjs', "import {appendFileSync} from 'node:fs'; appendFileSync('calls.jsonl', JSON.stringify(process.argv.slice(1))+'\\n');");
+    put(root, 'docs/README.md', '# fixture\n');
+    put(root, 'package.json', '{"type":"module"}');
+    const env = { ...process.env }; delete env.GATE_RECEIPT;
+    const gate = path.join(root, 'scripts/acceptance-gate.mjs');
+    const planned = spawnSync(process.execPath, [gate, '--paths', 'docs/README.md', '--plan'], { cwd: root, encoding: 'utf8', env });
+    expect(planned.status).toBe(0);
+    expect(planned.stdout).not.toContain('文档一致性守卫');
+    expect(existsSync(path.join(root, 'calls.jsonl'))).toBe(false);
+    const run = spawnSync(process.execPath, [gate, '--paths', 'docs/README.md', '--run'], { cwd: root, encoding: 'utf8', env });
+    expect(run.status, run.stderr).toBe(0);
+    expect(run.stdout).toContain('文档一致性守卫');
+    expect(run.stdout).not.toContain('PASS');
+    const calls = readFileSync(path.join(root, 'calls.jsonl'), 'utf8').trim().split('\n').map(JSON.parse);
+    expect(calls.map(args => path.basename(args[0]))).toEqual(['asset-audit.cjs', 'workflow.mjs']);
+    expect(calls[0].slice(1)).toEqual(['--check', '--paths-json', '["docs/README.md"]']);
+    expect(calls[1].slice(1)).toEqual(['docs']);
   });
   it('显式full不依赖某路径映射；fixture完整执行包含编译、静态步骤和无定向参数的套件', () => {
     const root = createRoot();

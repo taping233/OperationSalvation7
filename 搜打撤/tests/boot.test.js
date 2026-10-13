@@ -3,6 +3,7 @@
  *（症状：标题页漏出局内下方控制栏 / 开始游戏·设置按钮无响应）。
  * jsdom 无 canvas/Audio/WebAudio，这里 stub 掉渲染与音频，只验启动接线。 */
 import { describe, it, expect, vi } from 'vitest';
+vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({ createBattleEntryGate: () => ({ begin() {}, wait() {}, cancel() {}, dispose() {}, pending: () => false }), waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }) }));
 
 // 单跑约 5s：全量并行负载下会越过 vitest 默认 5s 超时形成负载 flake，给足裕量。
 // 60s（2026-10-03 第三次复发）：测试库增长使全量时长 117.6s（10-02 receipt）→134s，全库挤压下
@@ -88,6 +89,39 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(title.hidden).toBe(false);
   });
 
+  it('真实启动接线的 Ctrl+L 在四个控制台页签均可关闭，长按与输入法组合不重复切换', async () => {
+    const { game } = await import('../game/src/run/game.session.js');
+    const UI = window.SDT.UI;
+    const previousState = game.state;
+    const sourceAction = vi.fn();
+    game.state = 'modal';
+    UI.showOverlay('来源节点', '<section id="consoleSource"><button data-act="sourceAction">继续</button></section>', 'page');
+    UI.act('sourceAction', sourceAction);
+    const source = document.getElementById('consoleSource');
+    const toggle = (options = {}) => window.dispatchEvent(new KeyboardEvent('keydown', { key:'l', ctrlKey:true, bubbles:true, cancelable:true, ...options }));
+    for (const tab of ['debug', 'agent', 'data', 'keys']) {
+      toggle();
+      document.querySelector(`[data-act="devcTab"][data-tab="${tab}"]`).click();
+      expect(document.querySelector('#devConsole')).not.toBeNull();
+      toggle({ repeat:true }); toggle({ isComposing:true }); toggle({ keyCode:229 });
+      expect(document.querySelector('#devConsole')).not.toBeNull();
+      if (tab === 'debug') {
+        const input = document.getElementById('devcSearch');
+        const key = new KeyboardEvent('keydown', { key:'L', ctrlKey:true, bubbles:true, cancelable:true });
+        input.dispatchEvent(key);
+        expect(key.defaultPrevented).toBe(true);
+      } else toggle({ key:'L' });
+      expect(document.querySelector('#devConsole')).toBeNull();
+      expect(document.getElementById('consoleSource')).toBe(source);
+      expect(game.state).toBe('modal');
+    }
+    source.querySelector('button').click();
+    expect(sourceAction).toHaveBeenCalledOnce();
+    UI.hideOverlay();
+    await waitFor(() => document.getElementById('overlay').hidden);
+    game.state = previousState;
+  });
+
   it('照相馆动态载入可被快捷切页或真实 Escape 取消并恢复来源页状态', async () => {
     const cardsLib = await import('../game/src/hub/game.cardslib.js');
     const { game } = await import('../game/src/run/game.session.js');
@@ -113,10 +147,12 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(game.state).toBe('modal');
     await new Promise(r => setTimeout(r, 30));
     expect(document.querySelector('.card-library-page')).toBeNull();
-    document.querySelector('#hubMain [data-act="closeBase"]')?.click();
-    await waitFor(() => document.querySelector('.slot-page'));
-    document.querySelector('.slot-page [data-act="slotBack"]')?.click();
-    await waitFor(() => game.state === 'title');
+    document.querySelector('#hubMain [data-act="hubHome"]').click();
+    expect(document.querySelector('#hubMain [data-act="closeBase"]')).not.toBeNull();
+    document.querySelector('#hubMain [data-act="closeBase"]').click();
+    expect(await waitFor(() => document.querySelector('.slot-page'))).toBeTruthy();
+    document.querySelector('.slot-page [data-act="slotBack"]').click();
+    expect(await waitFor(() => game.state === 'title')).toBe(true);
     await waitFor(() => document.getElementById('overlay').hidden);
 
     document.getElementById('btnCardLib').click();
@@ -174,6 +210,13 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     const page = document.querySelector('.card-library-page');
     expect(page).not.toBeNull();
     expect(document.getElementById('libResultCount')).not.toBeNull();
+    // The first window can mount after selection caching; moving on must clear its marker.
+    const firstSelected = document.querySelector('#libGrid .lib-cardwrap[aria-current="true"]').dataset.card;
+    HTMLElement.prototype.scrollIntoView ||= () => {}; // Navigation scrolls the destination tile's outer shell; jsdom has no scrolling API.
+    document.querySelector('#libPreview [data-act="libNext"]').click();
+    const selectedCards = [...document.querySelectorAll('#libGrid .lib-cardwrap[aria-current="true"]')];
+    expect(selectedCards).toHaveLength(1);
+    expect(selectedCards[0].dataset.card).not.toBe(firstSelected);
     const search = document.getElementById('cardSearch');
     search.value = '不存在的卡牌';
     search.dispatchEvent(new Event('input', { bubbles: true }));
@@ -182,7 +225,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(document.querySelector('#libPreview .studio-preview-empty')).not.toBeNull();
     document.querySelector('[data-act="libClearFilter"]').click();
     expect(document.querySelector('.lib-grid')).not.toBeNull();
-    expect(document.querySelector('#libPreview .studio-preview-frame')).not.toBeNull();
+    expect(document.querySelector('#libPreview .studio-preview-copy')).not.toBeNull();
     const sort = document.getElementById('libSort');
     // 选中一张换序后会移动位置的卡，确保筛选台在 ID 不变时仍重算序号和导航状态。
     const cards = window.SDT.Cards.all();
@@ -371,6 +414,56 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     game.state = 'title';
   });
 
+  it('地图首次点击只预览，再次点击同节点才开始移动', async () => {
+    const session = await import('../game/src/run/game.session.js');
+    const { getExpeditionPreview } = await import('../game/src/run/expedition.view.js');
+    const game = session.game;
+    const wasRunActive = game.runActive;
+    session.buildDerived('map-two-click-seed');
+    const start = game.layerData[0].entrances[0];
+    game.layerIdx = 0; game.trackPos = start; game.pos = session.cellCenter(0, start);
+    game.state = 'idle'; game.moveTarget = null; game.runActive = true;
+    session.enterLayer(0, start);
+    const [, next] = game.layerData[0].logical[start].next.find(([li]) => li === 0);
+    game.visited ||= {};
+    const wasVisited = game.visited['0,' + next];
+    game.visited['0,' + next] = 1;
+    const node = session.cellCenter(0, next);
+    const rect = vi.spyOn(session.canvas, 'getBoundingClientRect').mockReturnValue({ left: 0, top: 0, right: 3000, bottom: 3000, width: 3000, height: 3000 });
+    const originalRaf = globalThis.requestAnimationFrame;
+    const callbacks = [];
+    globalThis.requestAnimationFrame = callback => { callbacks.push(callback); return callbacks.length; };
+    localStorage.removeItem('sdt-reduce-motion');
+    const clickNode = () => {
+      const point = session.cam.worldToScreen(node.x, node.y);
+      for (const type of ['pointerdown', 'pointerup']) {
+        const event = new MouseEvent(type, { clientX: point.x, clientY: point.y, button: 0, bubbles: true, cancelable: true });
+        Object.defineProperty(event, 'pointerId', { value: 1 });
+        session.canvas.dispatchEvent(event);
+      }
+    };
+    try {
+      clickNode();
+      expect(game.state).toBe('idle');
+      expect(game.trackPos).toBe(start);
+      expect(getExpeditionPreview(game)).toMatchObject({ li: 0, idx: next });
+      expect(game.moveTarget).toMatchObject({ li: 0, idx: next });
+      expect(document.querySelector('.expedition-map-preview').hidden).toBe(false);
+      clickNode();
+      expect(game.state).toBe('moving');
+      expect(getExpeditionPreview(game)).toBeNull();
+    } finally {
+      if (game.state === 'moving') callbacks.at(-1)?.(performance.now() + 400);
+      rect.mockRestore();
+      globalThis.requestAnimationFrame = originalRaf;
+      game.moveTarget = null;
+      if (wasVisited === undefined) delete game.visited['0,' + next];
+      else game.visited['0,' + next] = wasVisited;
+      game.runActive = wasRunActive;
+      game.state = 'title';
+    }
+  });
+
   it('非 reduced-motion 的 fake rAF 移动最终只提交一次', async () => {
     const session = await import('../game/src/run/game.session.js');
     const run = await import('../game/src/run/game.run.js');
@@ -390,7 +483,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     try {
       expect(run.moveTo(edge[0], edge[1])).toBe(true);
       expect(game.state).toBe('moving');
-      const tick = callbacks.shift();
+      const tick = callbacks.at(-1);
       expect(typeof tick).toBe('function');
       const now = (typeof performance !== 'undefined' && performance.now ? performance.now() : Date.now()) + 400;
       tick(now);
@@ -458,7 +551,8 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     game.state = 'title';
   });
 
-  it('战斗指向卡支持点击选中、Esc取消与目标结算', { timeout: 15_000 }, async () => {
+  it('战斗指向卡先放大，确认使用后支持Esc取消与目标结算', { timeout: 15_000 }, async () => {
+    await (await import('../game/src/battle/battle-loader.js')).ensureBattleReady();
     const C = window.SDT.Cards;
     const sha = C.all().find(c => c.id === 'starter-attack');
     const game = {
@@ -479,9 +573,12 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(card).not.toBeNull(); expect(enemy).not.toBeNull();
     const hotkey = new KeyboardEvent('keydown', { key: card.dataset.handIndex, bubbles: true, cancelable: true });
     document.dispatchEvent(hotkey);
-    expect(card.classList.contains('click-selected')).toBe(true);
+    expect(document.querySelector('.bt-hand-detail')).not.toBeNull();
+    expect(card.classList.contains('click-selected')).toBe(false);
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
     card.click();
+    expect(document.querySelector('.bt-hand-detail')).not.toBeNull();
+    document.querySelector('.bt-hand-detail-use').click();
     expect(card.classList.contains('click-selected')).toBe(true);
     expect(card.getAttribute('aria-pressed')).toBe('true');
     const esc = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true });
@@ -490,6 +587,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(card.classList.contains('click-selected')).toBe(false);
     expect(card.getAttribute('aria-pressed')).toBe('false');
     card.click();
+    document.querySelector('.bt-hand-detail-use').click();
     const before = window.SDT.Battle.getSnapshot().foes[0].hp;
     enemy.click();
     await new Promise(resolve => setTimeout(resolve, 40));
@@ -501,7 +599,8 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     game.state = 'title';
   });
 
-  it('唯一敌人时指向卡点击直接打出（STS2 TryWebClickPlay 口径）', async () => {
+  it('唯一敌人时也先看大卡，使用和目标确认前不打出', async () => {
+    await (await import('../game/src/battle/battle-loader.js')).ensureBattleReady();
     const C = window.SDT.Cards;
     const sha = C.all().find(c => c.id === 'starter-attack');
     const game = {
@@ -519,8 +618,13 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     const card = document.querySelector('.sts-hand .bt-card.need-target');
     expect(card).not.toBeNull();
     card.click();
-    // 单敌：不进入选中态，直接结算伤害
+    // 单敌也遵循老板的新交互：点击只读，使用后再确认目标。
     expect(card.classList.contains('click-selected')).toBe(false);
+    expect(document.querySelector('.bt-hand-detail')).not.toBeNull();
+    expect(window.SDT.Battle.getSnapshot().foes[0].hp).toBe(40);
+    document.querySelector('.bt-hand-detail-use').click();
+    expect(window.SDT.Battle.getSnapshot().foes[0].hp).toBe(40);
+    document.querySelector('.sts-foe[data-eidx="0"]').click();
     await waitFor(() => window.SDT.Battle.getSnapshot().foes[0].hp < 40, 3000);
     expect(window.SDT.Battle.getSnapshot().foes[0].hp).toBeLessThan(40);
     if (game.battleActive) window.SDT.Battle.commands.flee();

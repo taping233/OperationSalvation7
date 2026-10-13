@@ -92,4 +92,42 @@ describe('shared page loading cover', () => {
     expect(open).toHaveBeenCalledOnce();
     expect(document.querySelector('.page-loading')).toBeNull();
   });
+
+  it('keeps preparation free of a cut, then reveals once and allows immediate cancellation', async () => {
+    const controller = new AbortController();
+    let mount;
+    const reveal = vi.fn(() => expect(document.querySelector('.page-loading').classList.contains('leaving')).toBe(false));
+    const pending = runPageLoading({ title: '照相馆', detail: '正在整理馆藏', presentation: 'city-cut',
+      signal: controller.signal, onRevealStart: reveal, open: () => new Promise(resolve => { mount = resolve; }) });
+    await vi.advanceTimersByTimeAsync(500);
+    expect(reveal).not.toHaveBeenCalled();
+    expect(document.querySelector('.page-loading--city')).not.toBeNull();
+    expect(document.querySelector('.page-loading-copy')).toBeNull();
+    expect(document.querySelector('.camp-entry-cut')).toBeNull();
+    mount('ready');
+    await vi.advanceTimersByTimeAsync(20);
+    expect(reveal).toHaveBeenCalledOnce();
+    expect(document.querySelector('.camp-entry-cut')).not.toBeNull();
+    expect(document.querySelector('.page-loading').classList.contains('leaving')).toBe(true);
+    await vi.advanceTimersByTimeAsync(800);
+    expect(document.querySelector('.page-loading')).not.toBeNull();
+    controller.abort();
+    await expect(pending).resolves.toBe('ready');
+    expect(document.querySelector('.page-loading')).toBeNull();
+    expect(document.getElementById('viewport').hasAttribute('aria-busy')).toBe(false);
+  });
+
+  it('uses the transparent city preparation route when reduced motion disables its cut', async () => {
+    reduceMotion.mockReturnValue(true);
+    const reveal = vi.fn();
+    const pending = runPageLoading({ title: '照相馆', detail: '正在整理馆藏', presentation: 'city-cut',
+      onRevealStart: reveal, open: () => 'ready' });
+    expect(document.querySelector('.page-loading--city')).not.toBeNull();
+    expect(document.querySelector('.page-loading-copy')).toBeNull();
+    expect(document.querySelector('.camp-entry-cut')).toBeNull();
+    await vi.runAllTimersAsync();
+    await expect(pending).resolves.toBe('ready');
+    expect(reveal).toHaveBeenCalledOnce();
+    expect(document.querySelector('.page-loading')).toBeNull();
+  });
 });

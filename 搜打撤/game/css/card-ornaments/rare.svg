@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="ornament" viewBox="0 0 272 406" color="#c0e7ff" style="--tone:#509ccb;--shine:#c0e7ff;opacity:0.8;--paint-fill:url(#pigment-safe-ink-1-1)" aria-hidden="true"><style>.line{fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:round;stroke-linejoin:round}
+.bold{stroke-width:1.5}
+.faint{opacity:.35}
+.accent{fill:var(--tone);stroke:var(--shine);stroke-width:.5}
+.ink{fill:#d7e1e5;opacity:.65}
+.dark{fill:#162532;opacity:.8}
+.fill{fill:currentColor}
+.line{stroke-width:1.35}
+.bold{stroke-width:2}
+.dark{opacity:.96}
+.accent{stroke-width:.7}
+.ink{opacity:.9}
+.accent{fill:var(--paint-fill,var(--tone));stroke-opacity:.55}
+.facet-shadow{fill:#142538;opacity:.4}
+.facet-light{fill:#f1f0df;opacity:.38}
+.brush-cut{fill:#16283b;opacity:.62}
+.engrave{fill:none;stroke:#172638;stroke-width:.85;stroke-linecap:square;opacity:.55}
+.dark{fill:#172633;opacity:.88}
+.ink{fill:#e8ecdf;opacity:.82}
+.top-ornament{opacity:.9}
+.top-ornament .line{stroke-width:1.15}
+.top-ornament .engrave{stroke-width:.7}</style><defs><linearGradient id="pigment-safe-ink-1-1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c0e7ff"/><stop offset=".2" stop-color="#c0e7ff"/><stop offset=".2" stop-color="#509ccb"/><stop offset=".65" stop-color="#509ccb"/><stop offset=".65" stop-color="#465165"/><stop offset="1" stop-color="#465165"/></linearGradient><clipPath id="round-safe-ink-1-1"><rect x="0" y="0" width="272" height="406" rx="9"/></clipPath><clipPath id="safe-ink-1-1"><rect x="210" y="52" width="62" height="151"/><rect x="0" y="60" width="20" height="112"/><rect x="0" y="342" width="8" height="64"/><rect x="264" y="342" width="8" height="64"/><rect x="62" y="0" width="106" height="32"/></clipPath></defs><g clip-path="url(#round-safe-ink-1-1)"><g clip-path="url(#safe-ink-1-1)"><path class="dark" d="m273 57 -22 -4 4 70 18 5Z"/><path class="accent" d="m272 56 -22 -4 5 9 -2 54 19 10 -2 -8Z"/><path class="facet-shadow" d="m259.9 58 -7.699999999999999 -2 3 62 6.6 5Z"/><path class="ink" d="m270 58 -16 -3 3 4 13 3Z"/><path class="brush-cut" d="m270 92.4 -8.8 -4 2 4 7.699999999999999 3Z"/><path class="engrave" d="m262.76 67 -2 22.400000000000002m1 5 -1 5"/><g class="top-ornament"><path class="accent" d="M94 3 138 2 130 9 96 11Z"/><path class="ink" d="M96 3 132 3 126 5 99 6Z"/></g></g></g></svg>

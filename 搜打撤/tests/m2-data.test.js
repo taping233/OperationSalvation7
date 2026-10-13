@@ -158,6 +158,9 @@ const canonicalById = new Map([...CARDS_SYNC, ...TABLETOP7, ...TABLETOP10, ...TA
 const ALL_IDS = [...canonicalById.keys()];
 const freshCards = () => ALL_IDS.map(id => ({ ...canonicalById.get(id) }));
 
+// v37 同步源已直接带上回音箭的 M2 规则；其余定版卡仍由本批保守回填。
+const syncedEchoArrow = canonicalById.get('tt2-forestarrow');
+
 function makeStorage(initial = {}) {
   const map = new Map(Object.entries(initial));
   return {
@@ -190,6 +193,11 @@ function makeHarness(cards) {
 }
 
 describe('M2 数据迁移批 D3：每张迁的卡', () => {
+  it('已同步回音箭的名称与规则和 M2 定版完全一致', () => {
+    expect(syncedEchoArrow.name).toBe('回音箭');
+    expect(syncedEchoArrow.rules).toEqual(EXPECTED_RULES['tt2-forestarrow']);
+  });
+
   for (const id of ALL_IDS) {
     describe(id, () => {
       it('validateCardRules 通过且 inspectCardRuleCapability supported（回填后的 rules 形状）', () => {
@@ -201,14 +209,15 @@ describe('M2 数据迁移批 D3：每张迁的卡', () => {
         expect(capability.kind).toBe('supported');
       });
 
-      it('回填函数对 canonical 卡生效：rules 逐键一致、卡面不动、落库复读一致、marker 盖章', () => {
+      it('回填或保留 canonical 规则：rules 逐键一致、卡面不动、落库复读一致、marker 盖章', () => {
         const harness = makeHarness(freshCards());
         ensureM2OnplayRules(harness);
         const card = harness.cards().find(entry => entry.id === id);
         expect(card.rules, `${id} 应被回填结构化 rules`).toEqual(EXPECTED_RULES[id]);
         // 除 rules 外卡面一字未动
         const face = Object.fromEntries(Object.entries(card).filter(([key]) => key !== 'rules'));
-        expect(face).toEqual(canonicalById.get(id));
+        const canonicalFace = Object.fromEntries(Object.entries(canonicalById.get(id)).filter(([key]) => key !== 'rules'));
+        expect(face).toEqual(canonicalFace);
         // 成功后复读确认：storage 串与库内容一致；全批一次保存、单枚 marker
         expect(harness.storage.getItem(KEY)).toBe(JSON.stringify(harness.cards()));
         expect(harness.storage.getItem(MARKER)).toBe('1');
@@ -254,10 +263,11 @@ describe('M2 数据迁移批 D3：批次级保守语义', () => {
 
   it('缺 canonical 定版表：整体保守退出，不标记', () => {
     const harness = makeHarness(freshCards());
+    const originalCards = structuredClone(harness.cards());
     delete harness.library.TABLETOP12;
     ensureM2OnplayRules(harness);
     expect(harness.storage.getItem(MARKER)).toBe(null);
-    expect(harness.cards().some(card => card.rules)).toBe(false);
+    expect(harness.cards()).toEqual(originalCards);
   });
 
   it('saveAll 返回 false：不标记', () => {

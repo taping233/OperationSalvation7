@@ -56,4 +56,26 @@ describe('settings page layout and controls', () => {
     expect(UI.el.overlay.hidden).toBe(true);
     expect(game.state).toBe('title');
   });
+
+  it('switches categories by click and keyboard without losing preference state', () => {
+    const { UI } = openSettings();
+    const root = UI.el.ovBody;
+    const tabs = root.querySelectorAll('[role="tab"]');
+    expect(tabs).toHaveLength(5);
+    expect(root.querySelector('#settings-panel-general').hidden).toBe(false);
+    expect(root.querySelector('#settings-panel-data').hidden).toBe(true);
+    tabs[2].click();
+    expect(tabs[2].getAttribute('aria-selected')).toBe('true');
+    expect(root.querySelector('#settings-panel-audio').hidden).toBe(false);
+    const music = root.querySelector('#setMusic');
+    music.checked = false;
+    tabs[2].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+    expect(root.querySelector('#settings-panel-audio').hidden).toBe(true);
+    expect(root.querySelector('#settings-panel-data').hidden).toBe(false);
+    expect(document.activeElement).toBe(tabs[3]);
+    expect(root.querySelector('#settings-panel-data [data-act="wipeSave"]')).not.toBeNull();
+    tabs[2].click();
+    expect(root.querySelector('#setMusic')).toBe(music);
+    expect(music.checked).toBe(false);
+  });
 });

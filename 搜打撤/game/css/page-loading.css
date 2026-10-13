@@ -6,7 +6,7 @@
 .page-loading::before {
   content: ''; position: absolute; inset: 22px; border: 1px solid #c2c5c722;
 }
-.page-loading-copy { width: min(380px, 75vw); text-align: center; }
+.page-loading-copy { width: min(380px, calc(var(--game-layout-width, 100vw) * 0.75)); text-align: center; }
 .page-loading-copy small { color: #b7bcbf; font: 10px/1.6 Consolas, monospace; letter-spacing: .3em; }
 .page-loading-copy h2 { margin: 22px 0 14px; font: 500 30px/1.4 var(--font-ui); letter-spacing: .2em; }
 .page-loading-copy p { margin: 0; color: #c2c5c8; font: 14px/1.8 var(--font-ui); }
@@ -17,6 +17,16 @@
 .page-loading.leaving { animation: pageLoadOut .18s var(--ease-fly) both; pointer-events: none; }
 @keyframes pageLoadPulse { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
 @keyframes pageLoadOut { to { opacity: 0; } }
+/* 照相馆准备期间保留来源画面，就绪后才播放成就同款切幕。 */
+.page-loading.page-loading--city { background: transparent; overflow: hidden; }
+.page-loading.page-loading--city::before { content: none; }
+body:has(.page-loading--city:not(.leaving)) #overlay:has(.studio-unified) { visibility: hidden; }
+.page-loading--city::after {
+  content: attr(data-loading-detail); position: absolute; top: 72%;
+  color: #c2c5c8; font: 14px/1.8 var(--font-ui); letter-spacing: .1em;
+}
+.page-loading.page-loading--city.leaving { background: transparent; animation: none; }
+.page-loading--city.leaving::after { content: none; }
 .reduce-motion .page-loading *, .reduce-motion .page-loading.leaving { animation: none; }
 @media (prefers-reduced-motion: reduce) {
   .page-loading *, .page-loading.leaving { animation: none; }

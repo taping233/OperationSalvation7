@@ -1,0 +1,82 @@
+/* V7 home: stable room art, individual destination reveals after the cover ends.
+   Repeated overlay ID matches the shared surface-motion owner, whose base-content
+   profile otherwise moves the entire room. Glass regions retain opaque entry. */
+body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .base-home-v7,
+body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .hub-page:has(> .base-home-v7),
+body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .base-room-art,
+body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .base-room-art img,
+body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .base-room-art::before,
+body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .base-room-art::after {
+  animation: none !important;
+}
+
+#overlay#overlay #hubMain.base-frame-v7 .base-room-art,
+#overlay#overlay #hubMain.base-frame-v7 .base-room-art img {
+  transition: none;
+}
+
+#overlay#overlay #hubMain.base-frame-v7 .base-home-v7[data-base-motion-pending="1"] :is(
+  .base-home-title, .base-home-launch, .base-home-menu > button,
+  .base-home-mode, .base-home-services > button
+) {
+  opacity: 0;
+}
+
+#overlay#overlay #hubMain.base-frame-v7:has(.base-home-v7[data-base-motion-pending="1"]) .base-navigation-v7 > button { opacity:0; }
+
+#overlay#overlay #hubMain.base-frame-v7 .base-home-v7 :is(
+  .base-home-menu button, .base-home-utility button, .base-home-launch button
+) {
+  transition-property: transform, color, background-color, border-color;
+  transition-duration: var(--motion-fast-exit, 110ms);
+  transition-timing-function: var(--motion-ease-enter);
+}
+
+#overlay#overlay #hubMain.base-frame-v7 .base-home-menu button:hover:not(:disabled) {
+  transform: translateX(-3px);
+}
+
+#overlay#overlay #hubMain.base-frame-v7 .base-home-v7 :is(
+  .base-home-utility button, .base-home-launch button
+):hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+#overlay#overlay #hubMain.base-frame-v7 .base-home-v7 :is(
+  .base-home-menu button, .base-home-utility button, .base-home-launch button
+):active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+body.reduce-motion #overlay#overlay #hubMain.base-frame-v7 .base-home-v7 :is(
+  .base-home-menu button, .base-home-utility button, .base-home-launch button
+) {
+  transition: none;
+  transform: none;
+}
+
+body.reduce-motion #overlay#overlay #hubMain.base-frame-v7 .base-home-v7[data-base-motion-pending="1"] :is(
+  .base-home-title, .base-home-launch, .base-home-menu > button,
+  .base-home-mode, .base-home-services > button
+) {
+  opacity: 1;
+}
+
+body.reduce-motion #overlay#overlay #hubMain.base-frame-v7:has(.base-home-v7[data-base-motion-pending="1"]) .base-navigation-v7 > button { opacity:1; }
+
+@media (prefers-reduced-motion: reduce) {
+  #overlay#overlay #hubMain.base-frame-v7:has(.base-home-v7[data-base-motion-pending="1"]) .base-navigation-v7 > button { opacity:1; }
+  #overlay#overlay #hubMain.base-frame-v7 .base-home-v7[data-base-motion-pending="1"] :is(
+    .base-home-title, .base-home-launch, .base-home-menu > button,
+    .base-home-mode, .base-home-services > button
+  ) {
+    opacity: 1;
+  }
+  #overlay#overlay #hubMain.base-frame-v7 .base-home-v7 :is(
+    .base-home-menu button, .base-home-utility button, .base-home-launch button
+  ) {
+    transition: none;
+    transform: none;
+  }
+}
+

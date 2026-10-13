@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 336 486" preserveAspectRatio="none">
+<defs><linearGradient id="steel" x2="1" y2="1"><stop stop-color="#667482"/><stop offset=".2" stop-color="#303945"/><stop offset=".6" stop-color="#141b25"/><stop offset="1" stop-color="#45505e"/></linearGradient></defs>
+<!-- Aperture: x32 y40 width272 height406. All decoration belongs to the exterior rails. -->
+<path fill="#080d14" d="M23 23H317L335 42V464L315 484H23L4 465V42Z M39 42H297L302 47V439L297 444H39L34 439V47Z" fill-rule="evenodd"/>
+<path fill="url(#steel)" stroke="#526273" stroke-width="1.5" fill-rule="evenodd" d="M18 18H312L330 36V459L312 477H18L0 459V36Z M39 40H297L304 47V439L297 446H39L32 439V47Z"/>
+<path fill="#7b8896" d="M18 18H312L323 30H21L11 40V450L0 459V36Z"/>
+<path fill="#303b49" d="M21 30H311L306 35H35L27 43V440L19 450V38Z"/>
+<path fill="#0b121c" d="M330 36V459L312 477H18L10 466H307L319 453V39Z"/>
+<path fill="#566170" d="M32 439 39 446H297L309 458H23L16 451Z"/>
+<path fill="none" stroke="#93a3b2" stroke-width="1.1" d="M40 39H296L305 48V438L296 447H40L31 438V48Z"/>
+<!-- Four faceted protective joints. -->
+<path fill="#202936" stroke="#617080" d="M0 36 18 18H64L51 29H22L12 40V76L0 88Z M266 18H312L330 36V85L318 73V41L308 29H279Z M330 409V459L312 477H268L280 465H307L318 453V422Z M0 409 12 422V453L23 465H56L68 477H18L0 459Z"/>
+<path fill="#8895a1" d="M18 18H64L53 24H22L5 41 0 36Z M266 18H312L323 30 308 24H276Z M318 443V454L307 465H280L275 470H310L324 456Z"/>
+<path fill="#b8d9d3" stroke="#ecf2de" d="M178 4C151 0 142 26 157 42 164 49 180 46 190 36 169 43 157 18 178 4Z"/><path fill="#668f8e" d="M178 4C158 8 151 26 163 39 173 46 184 40 190 36 169 43 157 18 178 4Z"/><path fill="#d5e9d5" d="M186 9 189 15 195 17 189 20 186 26 183 20 177 17 183 15Z"/><path fill="none" stroke="#65888a" stroke-width="2" d="M18 76 14 130 20 185M318 255 323 309 317 364"/><path fill="#71938b" d="M17 105 7 87 8 112 16 123Z M16 137 26 117 26 145 18 153Z M320 285 309 267 312 296 321 303Z M321 321 330 300 329 328 320 338Z"/><path fill="#acd7cd" d="M17 196 20 202 26 204 20 207 17 213 14 207 8 204 14 202Z"/><path fill="#acd7cd" d="M319 225 322 231 328 233 322 236 319 242 316 236 310 233 316 231Z"/><path fill="#172330" stroke="#637582" d="M142 456 168 451 194 456 186 471H150Z"/><path fill="#c9e8d9" d="M168 455 172 461 168 467 164 461Z"/>
+</svg>

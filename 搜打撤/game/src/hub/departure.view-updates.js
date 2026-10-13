@@ -1,4 +1,5 @@
 // Keep the staging page and its card nodes mounted during local selection changes.
+import { bindCardNavigation, pulseNumber } from './hub.presentation.js';
 export function bindDepartureFilters(root, stash, { filters = {}, rarities = [], types = [], rarityOf = card => card.rarity, onFiltersChange = () => {} } = {}) {
   const pool = root?.querySelector('#depPool');
   const selects = {
@@ -7,6 +8,8 @@ export function bindDepartureFilters(root, stash, { filters = {}, rarities = [],
     cost: root?.querySelector('#depFilterCost'),
   };
   if (!pool || Object.values(selects).some(select => !select)) return;
+  bindCardNavigation(pool, '.dep-card', { activate: false });
+  bindCardNavigation(root.querySelector('#depBag'), '.bag-cell[tabindex]', { activate: false });
   const byName = new Map(stash.map(stack => [stack.card.name, stack.card]));
   const entries = [...pool.querySelectorAll('.dep-card')].map(node => {
     const card = byName.get(node.dataset.name) || {};
@@ -84,7 +87,7 @@ function reconcileBag(bag, html, rich) {
   while (bag.children.length > next.length) bag.lastElementChild.remove();
 }
 
-export function updateDepartureView(root, { stash, picks, bagHtml, slots, capacity, capacityHtml, hint, petId, rich }) {
+export function updateDepartureView(root, { stash, picks, bagHtml, slots, capacity, capacityHtml, hint, petId, rich, summaryHtml }) {
   const byName = new Map(stash.map(stack => [stack.card.name, stack]));
   for (const card of root.querySelectorAll('#depPool .dep-card')) {
     const name = card.dataset.name;
@@ -98,11 +101,13 @@ export function updateDepartureView(root, { stash, picks, bagHtml, slots, capaci
     card.setAttribute('aria-label', `带入${name}，还可带 ${remaining} 张`);
     card.title = `${name} · 点击或拖到右侧背包带入（还可带 ${remaining}）`;
     const owned = card.querySelector('.dep-own');
-    if (owned) owned.textContent = String(remaining);
+    if (owned) { const changed = owned.textContent !== String(remaining); owned.textContent = String(remaining); if (changed) pulseNumber(owned); }
     const pickedCount = card.querySelector('.dep-picked-count');
     if (pickedCount) {
+      const changed = pickedCount.textContent !== String(selected);
       pickedCount.textContent = String(selected);
       pickedCount.title = `已选带入 ${selected} 张`;
+      if (changed) pulseNumber(pickedCount);
     }
   }
   const bag = root.querySelector('#depBag');
@@ -112,9 +117,13 @@ export function updateDepartureView(root, { stash, picks, bagHtml, slots, capaci
   }
   const count = root.querySelector('[data-dep-slots]');
   if (count) {
+    const changed = count.textContent !== `${slots}/${capacity}`;
     count.textContent = `${slots}/${capacity}`;
     count.classList.toggle('fulled', slots >= capacity);
+    if (changed) pulseNumber(count);
   }
+  const summary = root.querySelector('#depSummary');
+  if (summary && summaryHtml !== undefined) summary.innerHTML = rich(summaryHtml);
   const footer = root.querySelector('#depCapacity');
   if (footer) footer.innerHTML = rich(capacityHtml);
   const status = root.querySelector('#depStatus');

@@ -1,9 +1,11 @@
-/* 由 battle.view.js 拆出（2026-09-22 六文件重构批5）：指向施法状态机（参考 STS2 NMouseCardPlay：拎起 / 停靠 / 箭头 / 点击确认）。
- * 逐字搬迁；本片不 import 壳（壳→片单向）；viewApi 反取已改 battle.core 具名直引。 */
+/* 指向施法：按真实 STS2 NMouseCardPlay / NHandCardHolder 接入中心跟随、出牌线与取消线。
+ * 点击先阅读，拖拽释放到合法目标可直接提交；本片经 battle.core 执行命令。 */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
-import { scale as uiScale } from '../../ui/ui-scale.js';
+import { scale as uiScale, viewport as uiViewport } from '../../ui/ui-scale.js';
 import { esc } from '../../core/shared.js';
+import { openHandInspector, closeHandInspector } from './battle.hand-inspector.js';
+import '../../../css/battle-hand-overhaul.css';
 import { commands, getSnapshot, getBattleLiveness, effCostOf, findCard, infuseOf, targetSide, unplayableReason } from '../core/battle.core.js';
   const play = commands.playCard;
   const bagSlam = commands.bagSlam;             // 需求 #9：背包砸击
@@ -31,25 +33,28 @@ import { commands, getSnapshot, getBattleLiveness, effCostOf, findCard, infuseOf
     if (reason) showThoughtBubble(reason);
     return !!reason;
   }
+  const closeHandCardDetails = closeHandInspector;
+  // 单击只阅读；确认使用才进入原有注能/选目标/出牌命令。
+  function showHandCardDetails(uid) {
+    if (aim) cancelAim();
+    cancelClickSelection();
+    return openHandInspector(uid, (cardUid, kind) => {
+      if (kind === 'infusion') commands.selectInfusion(cardUid);
+      else selectCardByClick(cardUid, true, { autoSingleTarget: false });
+    });
+  }
 import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble } from './battle.hover.js';
 import { createTargetSession } from '../core/battle.target-session.js';
 import { BATTLE_PHASES } from '../runtime/battle.state.js';
   // ---------- 指向施法 ----------
-  // 对敌卡全程跟手，仅靠近存活敌人时停靠并出现箭头；拖离目标恢复跟手，空处松手回手牌。
-  // 自指向卡与无目标卡仍沿用出牌线；右键/Esc 取消。
+  // NMouseCardPlay：中心跟手，跨出牌线后指向卡停靠；松手只提交合法目标。
   const AIM_COLOR = { enemy: '#e0523c', self: '#4ecf8e', any: '#d9c07a' };
-  const ENEMY_AIM_ENTER_PX = 72;
-  const ENEMY_AIM_EXIT_PX = 108; // 稍宽的退出范围，避免箭头在边缘抖动
-  function playZoneY(grabY, side) {
-    if (side === 'self') {
-      // 自指向卡沿用上次扩大的拖动范围。
-      return Math.min(window.innerHeight * 0.6, grabY - 180);
-    }
-    const line = window.innerHeight * 0.75;
-    // 无需选目标的卡沿用原出牌线与抓取点校正，避免改变其拖放落牌距离。
+  const PICKUP_DISTANCE = 6; // CSS 像素：浏览器点击容差；源码鼠标按下即 BeginDrag。
+  function playZoneY(grabY) {
+    const line = uiViewport().height * 0.75;
     return grabY > line ? Math.max(line, grabY - 100) : Math.min(line, grabY - 50);
   }
-  function cancelZoneY() { return window.innerHeight * 0.95; }
+  function cancelZoneY() { return uiViewport().height * 0.95; }
   let aim = null;            // {uid, card, side, el, ax, ay, sx, sy, moved, hover}
   let aimPlayedAt = 0;       // 拖动松手被处理的时间戳（抑制随后误触发的 click 锁定）
   let clickSelectedUid = null; // 点击选中的指向卡；拖拽路径仍由 aim 独立处理
@@ -133,35 +138,10 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
   // 指针处的有效目标（enemy 卡找活着的敌人 / self 卡找自己的立绘）
   // side 显式传入：endAim 时全局 aim 已清空，不能再依赖它
   // 指向期间沿用当前快照；若战场重绘，resumeAimAfterRender 会换成新快照。
-  function aimHoverAt(x, y, session) { return session?.hitAt(x, y) || null; }
-  function enemyNearAt(x, y, a, radius) {
-    if (!a.stage || !a.targetSession?.isCurrent()) return null;
-    let nearest = null;
-    let nearestDistance = radius;
-    // 敌矩形会话缓存（F9）：布局只在战场重绘时变化（resumeAimAfterRender 失效）；
-    // 拖拽帧内 idle 演出走 transform 不动布局，无需逐帧 getBoundingClientRect
-    if (!a.foeRects) {
-      a.foeRects = [];
-      for (const el of a.stage.querySelectorAll('.bt-foe[data-eidx]')) {
-        const idx = +el.dataset.eidx;
-        if (!a.snap.foes[idx] || a.snap.foes[idx].dead || el.classList.contains('dead')) continue;
-        const figure = el.querySelector('.sts-figure');
-        if (!figure) continue;
-        const rect = figure.getBoundingClientRect();
-        if (!rect.width || !rect.height) continue;
-        a.foeRects.push({ idx, el, left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom });
-      }
-    }
-    for (const foe of a.foeRects) {
-      const dx = Math.max(foe.left - x, 0, x - foe.right);
-      const dy = Math.max(foe.top - y, 0, y - foe.bottom);
-      const distance = Math.hypot(dx, dy);
-      if (distance < nearestDistance) {
-        nearestDistance = distance;
-        nearest = { kind: 'enemy', idx: foe.idx, el: foe.el };
-      }
-    }
-    return nearest;
+  function aimHoverAt(x, y, session) {
+    const hit = session?.hitAt(x, y) || null;
+    if (hit?.kind === 'any' && document.elementFromPoint(x, y)?.closest('.sts-hand, .bt-slot, .bt-card, [data-act]')) return null;
+    return hit;
   }
   function makeAimTargetSession(a) {
     return createTargetSession({
@@ -212,10 +192,11 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
   function resumeAimAfterRender(snapshot) {
     const a = aim;
     if (!a) return;
+    if (!a.el.isConnected || !a.stage?.isConnected || !a.targetSession?.isCurrent()) { cancelAim(); return; }
     const stage = UI.el.ovBody?.querySelector('.battle-stage');
     const entry = findCard(a.uid);
     if (!stage || !a.el.isConnected || !stage.contains(a.el) || a.el.dataset.uid !== a.uid || !entry) { cancelAim(); return; }
-    a.el.classList.add('aim-lift'); // updateHand 会重写 className
+    if (a.moved) a.el.classList.add('aim-lift'); // updateHand 会重写 className
     const baseRect = aimBaseRect(a.el);
     if (a.slotLayout !== aimSlotLayout(a.el)
       || (a.baseRect && ['left', 'top', 'width', 'height'].some(key => Math.abs(baseRect[key] - a.baseRect[key]) > 6))) {
@@ -228,7 +209,6 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     a.snap = snapshot;
     a.card = entry.card;
     a.stage = stage;
-    a.foeRects = null;   // 战场重绘后布局可能位移，敌矩形缓存失效（F9）
     a.vr = UI.el.overlay.getBoundingClientRect();
     a.playBlockedReason = cardPlayBlockedReason(a.uid, a.card, snapshot);
     if (a.reasonShown) {
@@ -265,6 +245,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     document.querySelectorAll('.sts-hand .bt-card.click-selected').forEach(el => {
       el.classList.remove('click-selected');
       el.setAttribute('aria-pressed', 'false');
+      el.dataset.handState = el.dataset.blockReason ? 'blocked' : 'ready';
     });
     updateClickSelectionUI();
     syncClickTargetPreviews();
@@ -292,6 +273,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       document.querySelectorAll('.sts-hand .bt-card.click-selected').forEach(el => {
         el.classList.remove('click-selected');
         el.setAttribute('aria-pressed', 'false');
+        el.dataset.handState = el.dataset.blockReason ? 'blocked' : 'ready';
       });
       updateClickSelectionUI();
     }
@@ -318,12 +300,20 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     const cap = document.querySelector('.sts-arena-caption span');
     if (!cap) return;
     const entry = clickSelectedUid == null ? null : findCard(clickSelectedUid);
-    if (!entry) { cap.textContent = cap.dataset.battleDetail || ''; return; }
-    // U8：选中提示条带目标图标（敌人=红剑 / 自己=绿心），与单位区高亮框同色系
-    const target = targetSide(entry.card) === 'self' ? '[[icon:heart]] 自己（绿框立绘）' : '[[icon:swords]] 敌人（红框）';
-    cap.innerHTML = SDT.Icons.rich(`已选【${esc(entry.card.name)}】——点击 ${target} 确认，或用方向键切换目标、Enter 确认，Esc 取消`);
+    if (!entry) {
+      cap.textContent = cap.dataset.battleDetail || '';
+      cap.removeAttribute('aria-label');
+      cap.removeAttribute('title');
+      return;
+    }
+    const selfTarget = targetSide(entry.card) === 'self';
+    const target = selfTarget ? '[[icon:heart]] 自己' : '[[icon:swords]] 高亮敌人';
+    cap.innerHTML = SDT.Icons.rich(`【${esc(entry.card.name)}】· 选择${target} · Esc 取消`);
+    const help = `已选${entry.card.name}，点击${selfTarget ? '自己' : '高亮敌人'}确认；方向键切换目标，Enter 确认，Esc 取消`;
+    cap.setAttribute('aria-label', help);
+    cap.title = help;
   }
-  function selectCardByClick(uid, focusTarget = false) {
+  function selectCardByClick(uid, focusTarget = false, { autoSingleTarget = true } = {}) {
     const snap = getSnapshot();
     if (clickSelectedUid != null && !clickTargetSession?.isCurrent()) cancelClickSelection();
     if (!snap || snap.busy || snap.infusing || snap.discovering || snap.choosing) return;
@@ -337,7 +327,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     if (!side) { play(uid); return; }
     // STS2 TryWebClickPlay：指向敌人的卡在唯一敌人时免选目标，直接打出
     //（尸体占位不算活敌——目标下标取 aliveIdx 而非字面量 0）
-    if (side === 'enemy') {
+    if (side === 'enemy' && autoSingleTarget) {
       const aliveIdx = snap.foes.findIndex(f => !f.dead);
       if (aliveIdx >= 0 && snap.foes.filter(f => !f.dead).length === 1) { play(uid, aliveIdx); return; }
     }
@@ -359,11 +349,13 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     document.querySelectorAll('.sts-hand .bt-card.click-selected').forEach(el => {
       el.classList.remove('click-selected');
       el.setAttribute('aria-pressed', 'false');
+      el.dataset.handState = el.dataset.blockReason ? 'blocked' : 'ready';
     });
     const el = [...document.querySelectorAll('.sts-hand .bt-card')].find(x => x.dataset.uid === uid);
     if (el) {
       el.classList.add('click-selected');
       el.setAttribute('aria-pressed', 'true');
+      el.dataset.handState = 'selected';
       if (focusTarget) flashCardPickup(el);
     }
     // 指针拿起时 startAim 已播放一次；键盘选牌没有 pointerdown，在此补上反馈。
@@ -415,6 +407,8 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
   // 数字键选牌 / Esc 取消已随 handLayer 依赖迁往 battle.layers.js（2026-09-22 批5 解 aim↔layers 环）
 
   function startAim(e, el, kind) {
+    if (e.button !== 0 || e.isPrimary === false || e.isComposing) return;
+    if (document.querySelector('#overlay .bt-hand-detail')) return;
     const snap = getSnapshot();
     const { busy, infusing, discovering, choosing } = snap;
     if (busy || infusing || discovering || choosing || aim) return;
@@ -429,6 +423,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     const entry = isSlam ? { card: { name: skill.name, desc: skill.aimDesc,
       dmg: skill.kind === 'attack' ? (snap.player?.atk || 0) : (skill.dmg || 0) } } : findCard(uid);
     if (!entry) return;
+    cancelClickSelection();
     const side = (kind === 'potion' || isSlam) ? 'enemy' : (targetSide(entry.card) || 'any');   // null = 无目标招式：拖到中间空地即可
     const playBlockedReason = !isSlam && kind !== 'potion' ? cardPlayBlockedReason(uid, entry.card, snap) : '';
     const isCard = kind !== 'potion' && !isSlam;
@@ -441,25 +436,20 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       ax: r.left + r.width / 2 - vr.left, ay: r.top - vr.top + 6,
       sx: e.clientX, sy: e.clientY, moved: false, hover: null,
       snap, vr,   // pointermove 复用；战场重绘后会更新为新快照和 rect
-      // 对敌卡靠近敌人进 target；自指向卡/无目标卡过出牌线进 target/multi。
-      // clickTarget 兼容原有点击确认流程；对敌拖拽不会进入该状态。
+      // 指向卡过出牌线进 target；无目标卡过线进 multi。
       follow: isCard, mode: 'drag',
       restCenter: { cx: r.left + r.width / 2, cy: r.top + r.height / 2, h: r.height },
       stage: el.closest('.battle-stage'),
-      playY: isCard && side !== 'enemy' ? playZoneY(e.clientY, side) : -1,
-      hasLeftCancel: false,   // STS2 _hasLeftCardCancelZoneOnce
+      playY: isCard ? playZoneY(e.clientY) : -1,
+      hasLeftCancel: false, hasEnteredPlay: false,
       dock: null, dockAnchor: null,
-      cur: { x: 0, y: 0 }, vel: { x: 0, y: 0 }, tgt: { x: 0, y: 0 }, lastT: performance.now(), raf: 0,
+      cur: { x: 0, y: 0 }, tgt: { x: 0, y: 0 }, lastT: performance.now(), raf: 0,
+      reducedMotion: !!SDT.Motion?.reduceMotion?.(),
     };
     aim.targetSession = makeAimTargetSession(aim);
-    el.classList.add('aim-lift');
     if (isCard) {
       aim.baseRect = aimBaseRect(el);
       aim.slotLayout = aimSlotLayout(el);
-    }
-    if (isCard) {
-      flashCardPickup(el);
-      SDT.Sound.sfx('cardSelect');
     }
     // 手牌节点随 ovBody 重绘短暂脱离文档；捕获放在常驻 overlay 上，拖动才不会被打断。
     aim.captureHost = isCard ? UI.el.overlay : el;
@@ -471,14 +461,20 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     window.addEventListener('pointercancel', onAimPointerCancel, true);
     window.addEventListener('pointerdown', aimRightCancel, true);
     document.addEventListener('contextmenu', aimCtxSuppress, true);
+    window.addEventListener('blur', cancelAim);
+    window.addEventListener('resize', cancelAim);
+    document.addEventListener('visibilitychange', onAimVisibilityChange);
+    document.addEventListener('compositionstart', cancelAim, true);
+    document.addEventListener('keydown', onAimKeydown, true);
+    aim.captureHost?.addEventListener('lostpointercapture', onAimPointerCancel);
     if (isCard) aim.raf = requestAnimationFrame(aimFollowStep);
   }
   // STS2 CenterCard：指向卡进瞄准态=停靠视口底部中央（09-25 起不缩放），箭头自卡画向指针
   function enterDock(a) {
-    const dockCx = window.innerWidth / 2;
+    const dockCx = uiViewport().width / 2;
     // 09-25 老板：拖出不许变短——停靠态与自由拖同尺寸（scale 1.07），dock 中心按同尺寸
     // 反推让卡底仍贴屏幕底缘（原按 0.75 缩后高度算，卡不缩后底边会伸出屏幕）
-    const dockCy = window.innerHeight - (a.restCenter.h * 1.07) / 2;
+    const dockCy = uiViewport().height - (a.restCenter.h * 1.07) / 2;
     const zD = uiScale();   // dock 喂 transform（布局值），dockAnchor 留视口口径喂箭头
     a.dock = { x: (dockCx - a.restCenter.cx) / zD, y: (dockCy - a.restCenter.cy) / zD };
     a.dockAnchor = { x: dockCx - a.vr.left, y: dockCy - a.vr.top };
@@ -491,19 +487,15 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     cancelAim();
   }
   function aimCtxSuppress(e) { if (aim) e.preventDefault(); }
-  // 临界阻尼弹簧：位置和速度连续，拖动时有重量感，切换到停靠位时也保留惯性。
-  // rAF 与 pointermove 共用时钟，避免高回报率鼠标每次事件都额外推进一帧。
+  // NHandCardHolder.AnimPosition delta * 7；指数形式保持不同帧率下相同跟随速度。
   function applyAimTransform(dt) {
-    if (!aim || !aim.follow) return;
+    if (!aim || !aim.follow || !aim.moved) return;
     const docked = aim.mode === 'target' || aim.mode === 'clickTarget';
     const tgt = docked ? aim.dock : aim.tgt;
-    const omega = docked ? 16 : 11; // 停靠稍快；自由拖动约 0.4 秒稳定到指针附近
-    const decay = Math.exp(-omega * dt);
+    const alpha = aim.reducedMotion ? 1 : 1 - Math.exp(-7 * dt);
     for (const axis of ['x', 'y']) {
-      const offset = aim.cur[axis] - tgt[axis];
-      const spring = (aim.vel[axis] + omega * offset) * dt;
-      aim.cur[axis] = tgt[axis] + (offset + spring) * decay;
-      aim.vel[axis] = (aim.vel[axis] - omega * spring) * decay;
+      aim.cur[axis] += (tgt[axis] - aim.cur[axis]) * alpha;
+      if (Math.abs(tgt[axis] - aim.cur[axis]) < 0.5) aim.cur[axis] = tgt[axis];
     }
     // 09-25 老板：拖出不许变短——停靠态保持与自由拖同尺寸（原 0.75 缩放移除）
     aim.el.style.transform = `translate(${aim.cur.x.toFixed(1)}px,${aim.cur.y.toFixed(1)}px) scale(1.07)`;
@@ -531,57 +523,52 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     if (!aim || e.pointerId !== aim.pointerId) return;
     aim.lastX = e.clientX;
     aim.lastY = e.clientY;
-    if (!aim.moved && Math.hypot(e.clientX - aim.sx, e.clientY - aim.sy) < 6) return;
-    aim.moved = true;
+    if (!aim.moved && Math.hypot(e.clientX - aim.sx, e.clientY - aim.sy) < PICKUP_DISTANCE) return;
+    if (!aim.moved) {
+      aim.moved = true;
+      aim.el.classList.add('aim-lift');
+      if (aim.follow) {
+        if (!aim.reducedMotion) flashCardPickup(aim.el);
+        SDT.Sound.sfx('cardSelect');
+      }
+    }
     if (!aimMoveFrame) aimMoveFrame = requestAnimationFrame(aimPointerFrame);
   }
   function aimPointerFrame() {
     aimMoveFrame = 0;
     const a = aim;
     if (!a) return;
+    if (!a.el.isConnected || !a.stage?.isConnected || !a.targetSession?.isCurrent()) { cancelAim(); return; }
     const eX = a.lastX, eY = a.lastY;
     const vr = a.vr;   // 重绘后由 resumeAimAfterRender 更新；帧内复用以免频繁读布局
     if (eY <= cancelZoneY()) a.hasLeftCancel = true;   // STS2 _hasLeftCardCancelZoneOnce
     // 指针视口位移 → 卡牌 transform（布局值）：过 UiScale 换算，zoom≠1 才能跟手
     const zNow = uiScale();
-    a.tgt.x = (eX - a.sx) / zNow;
-    a.tgt.y = (eY - a.sy) / zNow;
+    a.tgt.x = (eX - a.restCenter.cx) / zNow;
+    a.tgt.y = (eY - a.restCenter.cy) / zNow;
 
-    let nearEnemy = null;
     if (a.follow) {
-      if (a.side === 'enemy') {
-        nearEnemy = enemyNearAt(eX, eY, a,
-          a.mode === 'target' ? ENEMY_AIM_EXIT_PX : ENEMY_AIM_ENTER_PX);
-        if (a.mode === 'drag' && nearEnemy) {
+      if (a.side === 'enemy' || a.side === 'self') {
+        if (a.mode === 'drag' && eY < a.playY) {
           a.mode = 'target';
+          a.hasEnteredPlay = true;
           enterDock(a);
-        } else if (a.mode === 'target' && !nearEnemy) {
-          a.mode = 'drag';
-          a.dock = null;
-          a.dockAnchor = null;
-          aimArrowRemove();
         }
       } else if (a.mode === 'drag' && eY < a.playY) {
-        if (a.side === 'self') {
-          a.mode = 'target';
-          enterDock(a);
-        } else {
-          a.mode = 'multi';   // 未指向卡：战场亮环示意可落牌
-          if (a.stage) a.stage.classList.add('drop-any');
-        }
+        a.mode = 'multi';   // 未指向卡：战场亮环示意可落牌
+        a.hasEnteredPlay = true;
+        if (a.stage) a.stage.classList.add('drop-any');
       } else if (a.mode === 'multi' && eY >= a.playY) {
         a.mode = 'drag';
         if (a.stage) a.stage.classList.remove('drop-any');
       }
       // 底部取消区：瞄准/指示态拖入即取消（STS2 exitEarly = IsCardInCancelZone）
-      if (a.side !== 'enemy' && a.mode !== 'drag' && a.hasLeftCancel && eY > cancelZoneY()) { cancelAim(); return; }
+      if (a.hasEnteredPlay && a.hasLeftCancel && eY > cancelZoneY()) { cancelAim(); return; }
     }
 
     // 悬停检测：瞄准态（含药水全程）高亮目标；drag 态 STS2 无悬停反馈
     const targeting = !a.follow || a.mode === 'target' || a.mode === 'clickTarget';
-    const hit = a.follow && a.side === 'enemy'
-      ? (a.mode === 'target' ? nearEnemy : null)
-      : (targeting ? aimHoverAt(eX, eY, a.targetSession) : null);
+    const hit = targeting ? aimHoverAt(eX, eY, a.targetSession) : null;
     if (a.playBlockedReason && a.mode !== 'drag' && !a.reasonShown) {
       showThoughtBubble(a.playBlockedReason, true);
       a.reasonShown = true;
@@ -591,15 +578,11 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     // 箭头：药水自拎起位画向指针；指向卡瞄准态自停靠位画向指针（STS2 NTargetingArrow）
     if (!a.follow || a.mode === 'target' || a.mode === 'clickTarget') {
       const from = a.follow ? a.dockAnchor : { x: a.ax, y: a.ay };
-      let tx = eX - vr.left, ty = eY - vr.top;
-      if (hit) {
-        const hr = (hit.kind === 'enemy' ? hit.el.querySelector('.sts-figure') : hit.el).getBoundingClientRect();
-        tx = hr.left + hr.width / 2 - vr.left;
-        ty = hr.top + hr.height / 2 - vr.top;
-      }
+      const tx = eX - vr.left, ty = eY - vr.top; // NTargetingArrow mouse 模式始终追鼠标。
       aimArrowUpdate(from.x, from.y, tx, ty, AIM_COLOR[hit ? hit.kind : a.side], vr);
     }
-    advanceAimFollow(performance.now()); // rAF 挂起兜底；真实耗时只计算一次
+    if (a.reducedMotion) applyAimTransform(0);
+    else advanceAimFollow(performance.now()); // rAF 挂起兜底；真实耗时只计算一次
   }
   // 拆监听+恢复卡牌+清箭头/指示（打出与取消共用）
   function finishAim(a) {
@@ -609,9 +592,15 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     window.removeEventListener('pointercancel', onAimPointerCancel, true);
     window.removeEventListener('pointerdown', aimRightCancel, true);
     document.removeEventListener('contextmenu', aimCtxSuppress, true);
+    window.removeEventListener('blur', cancelAim);
+    window.removeEventListener('resize', cancelAim);
+    document.removeEventListener('visibilitychange', onAimVisibilityChange);
+    document.removeEventListener('compositionstart', cancelAim, true);
+    document.removeEventListener('keydown', onAimKeydown, true);
+    a.captureHost?.removeEventListener('lostpointercapture', onAimPointerCancel);
     stopAimFollow(a);
     aimCleanup(a);
-    if (a.follow && a.captureHost?.hasPointerCapture?.(a.pointerId)) {
+    if (a.captureHost?.hasPointerCapture?.(a.pointerId)) {
       try { a.captureHost.releasePointerCapture(a.pointerId); } catch { /* 捕获已由浏览器释放 */ }
     }
     // 先移除 aim-lift，再清掉位移：手牌原有弹簧 transition 负责飞回原位。
@@ -621,6 +610,13 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
   function endAim(e) {
     const a = aim;
     if (!a || e.pointerId !== a.pointerId) return;
+    // 最后一次 move 与 up 可在同一显示帧，松手判定必须用最终坐标。
+    moveAim(e);
+    if (a.moved) {
+      if (aimMoveFrame) { cancelAnimationFrame(aimMoveFrame); aimMoveFrame = 0; }
+      aimPointerFrame();
+      if (aim !== a) return;
+    }
     aim = null;
     const wasMoved = a.moved;
     a.moved = false;
@@ -642,18 +638,17 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       return;
     }
 
-    // overlay 捕获了卡牌的 pointerup，轻点时主动走选牌流程；合成 click 由时间戳吞掉。
+    // overlay 捕获 pointerup，轻点只打开详情；真正拖动仍沿原目标释放规则。
     if (!wasMoved) {
       finishAim(a);
       aimPlayedAt = Date.now();
-      selectCardByClick(a.uid);
+      showHandCardDetails(a.uid);
       return;
     }
 
     // 对敌卡只有在敌人附近松手才打出；其余位置回手牌，不保留点击确认态。
     if (a.side === 'enemy') {
-      const hit = wasMoved
-        ? enemyNearAt(e.clientX, e.clientY, a, a.mode === 'target' ? ENEMY_AIM_EXIT_PX : ENEMY_AIM_ENTER_PX) : null;
+      const hit = wasMoved && !inCancel && !a.playBlockedReason ? aimHoverAt(e.clientX, e.clientY, a.targetSession) : null;
       const selected = hit && a.targetSession.select(hit);
       finishAim(a);
       if (selected) { play(a.uid, hit.idx); return; }
@@ -661,49 +656,12 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       return;
     }
 
-    // 自指向卡与无目标卡沿用原松手语义。
-    if (a.mode === 'target') {
-      const hit = wasMoved ? aimHoverAt(e.clientX, e.clientY, a.targetSession) : null;
-      if (hit && a.targetSession.select(hit)) {   // 松手在目标上=打出
-        finishAim(a);
-        aimPlayedAt = Date.now();
-        play(a.uid, hit.kind === 'enemy' ? hit.idx : 'self');
-        return;
-      }
-      if (hit) { finishAim(a); cancelPendingTarget(); return; }
-      if (inCancel) { finishAim(a); cancelPendingTarget(); return; }
-      // 2026-09-15 老板定向：无歧义目标（self 卡 / 唯一活敌）拖到空白处松手=直接打出；
-      // 多活敌仍转「点击确认」（STS2 ReleaseMouseToTarget→ClickMouseToTarget），避免打错目标
-      if (a.side === 'self') {
-        if (!a.targetSession.selectDirect('self')) { finishAim(a); cancelPendingTarget(); return; }
-        finishAim(a);
-        aimPlayedAt = Date.now();
-        play(a.uid, 'self');
-        return;
-      }
-      // 多活敌：松手无目标=箭头保持，转「点击确认」
-      a.mode = 'clickTarget';
-      a.targetSession.setHover(null);
-      aim = a;
-      return;
-    }
-    if (a.mode === 'clickTarget') {
-      // 确认点击：点到目标=打出，点空=取消回手（STS2 FinishTargeting(null)→TryPlayCard(null)）
-      const hit = aimHoverAt(e.clientX, e.clientY, a.targetSession);
-      const selected = hit && a.targetSession.select(hit);
-      if (!selected) a.targetSession.cancel();
-      finishAim(a);
-      if (selected) { aimPlayedAt = Date.now(); play(a.uid, hit.kind === 'enemy' ? hit.idx : 'self'); return; }
-      cancelPendingTarget();
-      return;
-    }
+    // 自指向卡必须落在自身；无目标卡必须跨线并落在战场，HUD/手牌不是落点。
+    const canRelease = !inCancel && !a.playBlockedReason && (a.mode === 'target' || a.mode === 'multi');
+    const hit = canRelease ? aimHoverAt(e.clientX, e.clientY, a.targetSession) : null;
+    const selected = hit && a.targetSession.select(hit);
     finishAim(a);
-    if (a.mode === 'multi') {   // 未指向卡指示态：松手即打出；底部取消区=取消
-      if (inCancel) { cancelPendingTarget(); return; }
-      aimPlayedAt = Date.now();
-      play(a.uid);
-      return;
-    }
+    if (selected) { play(a.uid, a.side === 'self' ? 'self' : undefined); return; }
     // drag（未过线松手）：卡回手牌。cancelInteraction 幂等（批次C）：
     // 无进行中交互（普通卡拖空）时是 no-op，落回动画保持完整。
     // 轻点已在上方 pointerup 分支主动走选牌流程。
@@ -718,6 +676,13 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     clearThoughtBubble();
   }
   function onAimPointerCancel(e) { if (aim && e.pointerId === aim.pointerId) cancelAim(); }
+  function onAimVisibilityChange() { if (document.hidden) cancelAim(); }
+  function onAimKeydown(e) {
+    if (!aim || e.isComposing || e.keyCode === 229 || !['Escape', 'Tab'].includes(e.key)) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    cancelAim();
+  }
 
 function setClickSelectedUid(v) {
   // 仅作清除口（壳 render 在阶段切换时调用）；直接赋非 null 不会建 clickTargetSession，
@@ -732,4 +697,4 @@ if (!document.getElementById('btMisTargetStyle')) {
   document.head.insertAdjacentHTML('beforeend',
     '<style id="btMisTargetStyle">@keyframes bt-mis-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}45%{transform:translateX(5px)}70%{transform:translateX(-3px)}88%{transform:translateX(2px)}}.bt-foe.mis-target{animation:bt-mis-shake .45s cubic-bezier(.36,.07,.19,.97) both;outline:2px solid #d05b4b;outline-offset:3px;border-radius:6px;filter:drop-shadow(0 0 8px rgba(208,91,75,.65))!important}</style>');
 }
-export { aim, aimPlayedAt, clickSelectedUid, selectCardByClick, clickSelectedTarget, setTargetable, showCardBlockReason, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, cancelClickSelection, setClickSelectedUid };
+export { aim, aimPlayedAt, clickSelectedUid, updateClickSelectionUI, selectCardByClick, clickSelectedTarget, setTargetable, showCardBlockReason, showHandCardDetails, closeHandCardDetails, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, cancelClickSelection, setClickSelectedUid };

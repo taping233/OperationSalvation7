@@ -7,14 +7,17 @@ body.cardlib-open [data-photo-mount] {
   --mount-metal:#af9e68;
   --mount-paper:#deddda;
   --mount-depth:4px;
+  --mount-overlay-art:var(--mount-art);
+  --mount-corner-art:none;
+  --mount-corner-scale:2.2;
 }
-body.cardlib-open [data-photo-mount="proof"] { --mount-art:url('../assets/ui/photo-studio/mount-proof.svg'); --mount-stroke:3px; --mount-paper:#dbdad8; --mount-metal:#96978c; --mount-depth:2px; }
-body.cardlib-open [data-photo-mount="rare"] { --mount-art:url('../assets/ui/photo-studio/mount-rare.svg'); --mount-stroke:7px; --mount-metal:#a3aaae; --mount-paper:#e1e0de; --mount-depth:5px; }
-body.cardlib-open [data-photo-mount="epic"] { --mount-art:url('../assets/ui/photo-studio/mount-epic.svg'); --mount-stroke:14px; --mount-metal:#b6a6c3; --mount-paper:#e7e0c8; --mount-depth:7px; }
+body.cardlib-open [data-photo-mount="proof"] { --mount-art:url('../assets/ui/photo-studio/mount-proof.svg'); --mount-stroke:3px; --mount-paper:#dbdad8; --mount-metal:#96978c; --mount-depth:2px; --mount-thumbnail-art:url('../assets/ui/photo-studio/mount-thumbnail-proof.svg'); }
+body.cardlib-open [data-photo-mount="rare"] { --mount-art:url('../assets/ui/photo-studio/mount-rare.svg'); --mount-stroke:7px; --mount-metal:#6f9fc6; --mount-paper:#e1e0de; --mount-depth:5px; --mount-overlay-art:url('../assets/ui/photo-studio/rails-rare.svg'); --mount-corner-art:url('../assets/ui/photo-studio/corner-rare.svg'); --mount-corner-scale:3; --mount-thumbnail-art:url('../assets/ui/photo-studio/mount-thumbnail-rare.svg'); }
+body.cardlib-open [data-photo-mount="epic"] { --mount-art:url('../assets/ui/photo-studio/mount-epic.svg'); --mount-stroke:14px; --mount-metal:#b6a6c3; --mount-paper:#e7e0c8; --mount-depth:7px; --mount-overlay-art:url('../assets/ui/photo-studio/rails-epic.svg'); --mount-corner-art:url('../assets/ui/photo-studio/corner-epic.svg'); --mount-thumbnail-art:url('../assets/ui/photo-studio/mount-thumbnail-epic.svg'); }
 body.cardlib-open [data-photo-mount="legendary"] { --mount-art:url('../assets/ui/photo-studio/frame-atelier-v1.png'); --mount-slice:170; --mount-stroke:17px; --mount-metal:#edce68; --mount-paper:#f1e3b5; --mount-depth:9px; }
-body.cardlib-open [data-photo-mount="prismatic"] { --mount-art:url('../assets/ui/photo-studio/mount-prismatic.svg'); --mount-stroke:16px; --mount-metal:#c9cacc; --mount-paper:#e3e3e2; --mount-depth:8px; }
-body.cardlib-open [data-photo-mount="class"] { --mount-art:url('../assets/ui/photo-studio/mount-class.svg'); --mount-stroke:7px; --mount-metal:#ba7770; --mount-paper:#e8e0c2; --mount-depth:5px; }
-body.cardlib-open [data-photo-mount="derived"] { --mount-art:url('../assets/ui/photo-studio/mount-derived.svg'); --mount-stroke:5px; --mount-metal:#80868b; --mount-paper:#d9dadb; --mount-depth:3px; }
+body.cardlib-open [data-photo-mount="prismatic"] { --mount-art:url('../assets/ui/photo-studio/mount-prismatic.svg'); --mount-stroke:16px; --mount-metal:#c9cacc; --mount-paper:#e3e3e2; --mount-depth:8px; --mount-overlay-art:url('../assets/ui/photo-studio/rails-prismatic.svg'); --mount-corner-art:url('../assets/ui/photo-studio/corner-prismatic.svg'); --mount-thumbnail-art:url('../assets/ui/photo-studio/mount-thumbnail-prismatic.svg'); }
+body.cardlib-open [data-photo-mount="class"] { --mount-art:url('../assets/ui/photo-studio/mount-class.svg'); --mount-stroke:7px; --mount-metal:#ba7770; --mount-paper:#e8e0c2; --mount-depth:5px; --mount-overlay-art:url('../assets/ui/photo-studio/rails-class.svg'); --mount-corner-art:url('../assets/ui/photo-studio/corner-class.svg'); --mount-corner-scale:3; --mount-thumbnail-art:url('../assets/ui/photo-studio/mount-thumbnail-class.svg'); }
+body.cardlib-open [data-photo-mount="derived"] { --mount-art:url('../assets/ui/photo-studio/mount-derived.svg'); --mount-stroke:5px; --mount-metal:#80868b; --mount-paper:#d9dadb; --mount-depth:3px; --mount-thumbnail-art:url('../assets/ui/photo-studio/mount-thumbnail-derived.svg'); }
 
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper[data-photo-mount],
 body.cardlib-open #cardZoom.cz-photo .cz-photo-paper[data-photo-mount] {
@@ -27,38 +30,14 @@ body.cardlib-open #cardZoom.cz-photo .cz-photo-paper[data-photo-mount] {
   --paper-shadow:inset 0 1px 0 #f2f0ec99,0 2px 0 #c3b78f,1px var(--mount-depth) 0 #665e4d,2px var(--paper-lift) var(--paper-blur) #0009;
   position:relative;
   box-sizing:border-box;
-  border:var(--mount-border) solid transparent;
-  border-image:var(--mount-art) var(--mount-slice) stretch;
   padding:calc(var(--mount-space) - var(--mount-border));
   border-radius:0;
   outline:none;
   background:linear-gradient(135deg,#f2f1ec30,transparent 58%),linear-gradient(color-mix(in srgb,var(--mount-paper) 88%,transparent),color-mix(in srgb,var(--mount-paper) 88%,transparent)),url('../assets/ui/photo-studio/paper-grain.png') center/180px,var(--mount-paper);
   box-shadow:var(--paper-shadow);
 }
-body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper[data-photo-mount] {
-  --mount-scale:1.8;
-  --clip-scale:1.3;
-  --mount-space:max(24px,calc(var(--mount-stroke) * 1.8 + 4px));
-  --paper-lift:18px;
-  --paper-blur:24px;
-}
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper[data-photo-mount]::before { display:none!important; }
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper[data-photo-mount]::after { opacity:.06; }
-body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap[aria-current="true"] .studio-photo-paper[data-photo-mount] {
-  border-color:transparent!important;
-  outline:2px solid #e6cb76; /* 09-25 验收反馈：选中相框青绿描边统一金线语言 */
-  outline-offset:4px!important;
-  box-shadow:var(--paper-shadow)!important;
-}
-body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper[data-photo-mount] .studio-photo-caption {
-  display:grid;
-  grid-template-columns:minmax(0,1fr);
-  justify-content:center;
-  align-items:baseline;
-  gap:5px 6px;
-  padding:9px 0 3px;
-}
-body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper[data-photo-mount] .studio-photo-caption b { grid-column:1/-1; }
 /* Same photo clip shape, with a rarity-specific metal finish. */
 body.cardlib-open #overlay .photo-studio-v3 [data-photo-mount]>.studio-mount-mark,
 body.cardlib-open #cardZoom.cz-photo [data-photo-mount]>.studio-mount-mark {
@@ -66,14 +45,14 @@ body.cardlib-open #cardZoom.cz-photo [data-photo-mount]>.studio-mount-mark {
   z-index:5;
   display:block;
   left:50%;
-  top:calc(-1 * var(--mount-border) - 7px);
+  top:calc(-4px * var(--clip-scale));
   width:calc(34px * var(--clip-scale));
   height:calc(13px * var(--clip-scale));
   transform:translateX(-50%) rotate(-2deg);
   border:1px solid color-mix(in srgb,var(--mount-metal),#242018 60%);
   border-radius:0;
-  background:linear-gradient(180deg,color-mix(in srgb,var(--mount-metal),#f0eee9 55%) 0%,var(--mount-metal) 22%,color-mix(in srgb,var(--mount-metal),white 25%) 30%,var(--mount-metal) 72%,color-mix(in srgb,var(--mount-metal),#24221c 50%) 76%,var(--mount-metal) 94%);
-  box-shadow:0 3px 3px #0008,inset 1px 0 #fceaae82,inset -1px 0 #493d2180;
+  background:linear-gradient(175deg,#fff4db88 0 7%,transparent 8% 69%,#51637133 70%),linear-gradient(105deg,color-mix(in srgb,var(--mount-metal),#f2e6c6 24%),var(--mount-metal) 40%,color-mix(in srgb,var(--mount-metal),#253039 40%));
+  box-shadow:0 1px 1px #000b,1px 2px 2px #0006,inset 1px 0 #fceaae82,inset -1px 0 #493d2180;
   pointer-events:none;
 }
 body.cardlib-open .studio-mount-mark::before {
@@ -86,7 +65,7 @@ body.cardlib-open .studio-mount-mark::before {
   border:2px solid var(--mount-metal);
   border-bottom:0;
   border-radius:0 0 0;
-  box-shadow:inset 0 1px #514832,0 -1px #ebd898;
+  box-shadow:inset 0 1px color-mix(in srgb,var(--mount-metal),#24221c 60%),0 -1px color-mix(in srgb,var(--mount-metal),white 45%);
 }
 body.cardlib-open .studio-mount-mark::after {
   content:'';
@@ -94,25 +73,18 @@ body.cardlib-open .studio-mount-mark::after {
   inset:3px 4px 4px;
   border-left:2px solid color-mix(in srgb,var(--mount-metal),#24221c 40%);
   border-right:2px solid color-mix(in srgb,var(--mount-metal),#24221c 40%);
-  box-shadow:1px 0 #f0d889,-1px 0 #f0d889;
+  box-shadow:1px 0 color-mix(in srgb,var(--mount-metal),white 35%),-1px 0 color-mix(in srgb,var(--mount-metal),white 35%);
 }
 body.cardlib-open #overlay .photo-studio-v3 [data-photo-mount="prismatic"]>.studio-mount-mark,
 body.cardlib-open #cardZoom.cz-photo [data-photo-mount="prismatic"]>.studio-mount-mark {
   background:linear-gradient(180deg,#f4f2ee70,transparent 42%,#25282b70 76%,#f2f0ec30),linear-gradient(100deg,#c0c6ca,#b3b9be 28%,#babcbe 54%,#deca89 77%,#d8afbd);
 }
 body.cardlib-open #cardZoom.cz-photo .cz-photo-paper[data-photo-mount] {
-  --mount-scale:3;
+  --mount-scale:2.5;
   --clip-scale:1.65;
-  --mount-space:max(39px,calc(var(--mount-stroke) * 3 + 5px));
-  width:min(100%,calc((100vh - 190px) * var(--cz-photo-ratio,1) + 2 * var(--mount-space)));
+  --mount-space:max(33px,calc(var(--mount-stroke) * 2.5 + 5px));
+  width:min(100%,calc((var(--game-layout-height, 100vh) - 190px) * var(--cz-photo-ratio,1) + 2 * var(--mount-space)));
   --paper-lift:24px;
   --paper-blur:40px;
 }
-@media(max-width:760px) {
-  body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper[data-photo-mount] { --mount-space:max(12px,calc(var(--mount-stroke) * .9 + 3px)); --mount-scale:.9; }
-  body.cardlib-open #cardZoom.cz-photo .cz-photo-paper[data-photo-mount] {
-    --mount-scale:2;
-    --mount-space:max(27px,calc(var(--mount-stroke) * 2 + 4px));
-    width:min(100%,calc(52vh * var(--cz-photo-ratio,1) + 2 * var(--mount-space)));
-  }
-}
+body.cardlib-open [data-photo-mount="plain"] { --mount-overlay-art:url('../assets/ui/photo-studio/rails-plain.svg'); --mount-corner-art:url('../assets/ui/photo-studio/corner-plain.svg'); --mount-corner-scale:3; --mount-thumbnail-art:url('../assets/ui/photo-studio/mount-thumbnail-plain.svg'); }

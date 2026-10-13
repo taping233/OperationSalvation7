@@ -7,12 +7,13 @@ import { Random } from '../../core/random.js';
 import * as Combat from './combat.js';
 import { COMBAT_HOOKS } from './combat.js';
 import { emit as busEmit } from '../../core/event-bus.js';
+import { presentBattleDefeat } from './battle.presentation.js';
 import { clearFeedback } from '../view/battle.feedback.js';
 import { shuffleCards } from '../bag/battle.deck.js';
 import { BATTLE_PHASES, createBattleState, transitionBattle } from '../runtime/battle.state.js';
 import { getHostedExecutionCard } from '../effects/battle.hosted.js';
 import {
-  battleState, G, foes, opts, mode, drawPile, hand, played, consumed, maxEnergy, pstat,
+  battleState, G, foes, opts, mode, drawPile, hand, played, consumed, granted, maxEnergy, pstat,
   busy, infusing, discovering, discoverQueue, choosing, selPool, sel, lastDeckSel,
   selectingDeck, selDeckMax, freezeRuneOn, equipped, battleRestartCheckpoint,
   restoringRestartCheckpoint, set$G, set$opts, set$foes,
@@ -152,9 +153,17 @@ export function createBattleLifecycle({
     SDT.Sound.music('board');   // 战斗结束切回行军氛围
     // 战斗结束广播（2026-09-11 批次 5）：订阅方各自响应（背包结算/基地/统计），
     // 战斗核心不再直接依赖 game.onBattleEnd 的实现；无人订阅时回退旧回调（审计 harness 兼容）
-    if (!busEmit('battle:end', opts, playedCopy, win, consumedCopy) && typeof G.onBattleEnd === 'function') {
-      G.onBattleEnd(opts, playedCopy, win, consumedCopy);
-    }
+    const endedGame = G, endedOpts = opts;
+    const notifyEnd = () => {
+      if (G !== endedGame || opts !== endedOpts || endedGame.battleActive) return;
+      if (!busEmit('battle:end', endedOpts, playedCopy, win, consumedCopy) && typeof endedGame.onBattleEnd === 'function') {
+        endedGame.onBattleEnd(endedOpts, playedCopy, win, consumedCopy);
+      }
+    };
+    // 逻辑死亡和中止仍立即完成；仅在实页有倒地演出时推迟结算页通知。
+    const presentation = win === false ? presentBattleDefeat({ hp: endedGame.hp, maxHp: endedGame.maxHp }) : null;
+    if (presentation) presentation.then(notifyEnd, notifyEnd);
+    else notifyEnd();
     // 跑局统计（不可订阅 battle:end——会吞 onBattleEnd 回退）；ctx=死因解剖流水：
     // 打的谁/层×节点/战后血量/回合（09-26：死亡局胜率 0.56 vs 撤离局 0.78，要定位到具体战斗）
     // ①战斗内观测（09-26 批准）：round=战斗轮数；mode 三态展开 w 二值（win/lose/flee——
@@ -298,8 +307,7 @@ export function createBattleLifecycle({
     set$selDeckMax(R().bossDeckSize + deckCapBonus());   // 混沌之眼「牌库上限+5」（编入后才计入）
     // 2026-09-16 老板定版：骷髅王剑/混沌之眼等「对战开始时」装备计入 15 张套牌（不再独立勾选）
     set$selPool(G.ownedCards.filter(o => !['道具', '资源', '事件', '生物'].includes(o.card.type) && !isStarterAttack(o.card)));
-    const shas = G.ownedCards.filter(o => isStarterAttack(o.card));
-    set$selShaN(Math.min(shas.length, R().starterSha));
+    set$selShaN(R().starterSha);
     set$sel(new Set(lastDeckSel.filter(uid => selPool.some(entry => entry.uid === uid))));
     const cap = Math.min(selDeckMax, selPool.length);
     while (sel.size > cap) sel.delete(sel.values().next().value);
@@ -329,6 +337,12 @@ export function createBattleLifecycle({
     if (battleRestartCheckpoint) battleRestartCheckpoint.selectedDeck = [...sel];
     set$selectingDeck(false);
     clearBattlePiles();
+    // 首脑入口保证固定初始攻击数；缺少的只补进本场临时牌，不挤占背包或进入口袋。
+    while (!opts.nest && shas.length < R().starterSha) {
+      const uid = `boss-sha-${battleState.token}-${shas.length}`;
+      granted.push({ uid, card: { ...SDT.Cards.SHA } });
+      shas.push(uid);
+    }
     set$drawPile(shuffle([...sel].concat(shas)));   // 骷髅王剑/混沌之眼等对战开始时装备已在 sel 内
     set$hand([]);
     resetBattleEntryState();

@@ -1,12 +1,18 @@
-import { appendLocalFeedback, downloadFeedbackRecord, downloadFeedbackRecords, readLocalFeedback, removeLocalFeedback } from './feedback.local.js';
+import { appendLocalFeedback, completeLocalFeedback, downloadFeedbackRecord, downloadFeedbackRecords, readLocalFeedback, removeLocalFeedback } from './feedback.local.js';
 import { captureBattleContext, invalidateBattleContext } from '../battle/battle-loader.js';
 import { runTerminalSettlement } from './terminal-settlement.js';
 import { storeGet, storeSet } from '../core/storage.js';
 import { achievementGalleryHTML, bindAchievementGallery } from './achievement-gallery.js';
-import { beginnerGuideHTML, beginnerGuidePageCount } from './beginner-guide.js';
+import { beginnerGuideHTML, beginnerGuidePageCount, updateBeginnerGuide } from './beginner-guide.js';
 import { SLOT_EMBLEMS } from './slot-emblems.js';
+import { initSettingsNavigation } from './settings-navigation.js';
+import { enterAchievementCut } from './camp-entry.js';
+import { reduceMotion } from '../core/motion.js';
 import '../../css/title-achievements.css';
 import '../../css/beginner-guide.css';
+import '../../css/archive-back.css';
+import '../../css/leave-run.css';
+import { linkedBackHTML } from './home-linked-interactions.js';
 /* 标题、选档、离开与设置页面流程。只通过注入端口调用会话能力。 */
 function createGameMenuController(deps) {
   const {
@@ -199,7 +205,7 @@ function createGameMenuController(deps) {
     const base = latest?.base || null, run = latest?.run || null;
     const latestTotal = Math.max(base?.stats?.playSeconds || 0, run?.elapsed || 0);
     set('akSlotNo', latest ? `0${latest.slot}` : '--');
-    set('akPlaytime', latest ? (latestTotal > 0 ? `游玩 ${fmtPlayTime(latestTotal)}` : '新档案 · 尚无对局') : '尚无档案，等待远征');
+    set('akPlaytime', latest ? (latestTotal > 0 ? `游玩 ${fmtPlayTime(latestTotal)}` : '新档案 · 尚无对局') : '尚无档案');
     const tag = document.getElementById('akLastTag');
     if (tag) {
       if (run?.savedAt) {
@@ -273,7 +279,7 @@ function createGameMenuController(deps) {
 
   // ---------- 留言库：设置页入口，查看历史留言与完成状态，未完成的可删除 ----------
   // 桌面版经 Electron IPC 读写 output/suggestions.json；浏览器版走 feedback.local.js 封装。
-  // done 标记由 Friday 落地每批留言后在 json 里补写；未完成条目显示删除键（两步确认）。
+  // 浏览器留言可标记完成并保留原文；未完成条目显示删除键（两步确认）。
   async function loadSuggestions() {
     if (window.sdtDesktop?.readSuggestions) {
       try {
@@ -320,6 +326,7 @@ function createGameMenuController(deps) {
       ${e?.expected ? `<div class="sugin-detail"><b>期望结果</b>${esc(e.expected)}</div>` : ''}
       ${e?.actual ? `<div class="sugin-detail"><b>实际结果</b>${esc(e.actual)}</div>` : ''}
       ${where ? `<div class="sugin-where">${esc(where)}</div>` : ''}
+      ${done || window.sdtDesktop?.readSuggestions ? '' : `<button class="mini-btn sugin-complete" data-act="sugDone" data-ts="${esc(e?.ts || '')}">标记完成</button>`}
     </div>`;
   }
 
@@ -331,7 +338,7 @@ function createGameMenuController(deps) {
       exportAll.disabled = !Array.isArray(sugCache) || !sugCache.length;
       exportAll.textContent = '全部导出';
     }
-    if (!Array.isArray(sugCache)) { box.innerHTML = `<p class="ov-empty danger">${esc(sugCache?.message || '留言信箱读取失败，原数据已保留')}</p>`; return; }
+    if (!Array.isArray(sugCache)) { box.innerHTML = `<p class="ov-empty danger">${esc(sugCache?.message || '留言信箱读取失败，原数据已保留')}</p><button class="mini-btn" data-act="sugRetry">重新读取</button>`; return; }
     const list = sugCache.map((entry, index) => ({ entry, index })).reverse();
     const entries = list.map(x => x.entry);
     const pend = list.filter((x) => !x.entry?.done);
@@ -360,14 +367,7 @@ function createGameMenuController(deps) {
     UI.showOverlay('', `
       <div class="pg settings-page sugin-page">
         <!-- 09-23 留言：右下 BACK 取消，退出键改左上角，与主页退出键（ak-sq ak-exit）同款同位 -->
-        <button class="ak-sq ak-exit sugin-exit" data-act="sugBack" title="${fromTitle ? '返回（Esc）' : '返回设置（Esc）'}" aria-label="${fromTitle ? '返回' : '返回设置'}">
-          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-            <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
-                  fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-            <path d="M4 12h10M4 12l4-4M4 12l4 4"
-                  fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
+        ${linkedBackHTML('sugBack', fromTitle ? '返回' : '返回设置', 'sugin-exit')}
         <header class="pg-head"><h2>[[icon:book]] 留言信箱</h2><span class="pg-spacer"></span><button class="mini-btn" data-act="sugExportAll" title="导出全部待处理和已完成留言到一个 JSON 文件" disabled>全部导出</button></header>
         <div class="settings" id="sugBox"><p class="ov-empty">读取中…</p></div>
       </div>`, 'page');
@@ -386,6 +386,27 @@ function createGameMenuController(deps) {
       const btn = document.querySelector('[data-act="sugExportAll"]');
       const result = downloadFeedbackRecords(sugCache);
       if (btn) btn.textContent = result.ok ? `已导出 ${sugCache.length} 条` : '导出失败，请重试';
+    });
+    UI.act('sugRetry', () => {
+      const box = document.getElementById('sugBox');
+      if (!box) return;
+      box.innerHTML = '<p class="ov-empty">读取中…</p>';
+      loadSuggestions().then(list => {
+        if (document.getElementById('sugBox') !== box) return;
+        sugCache = list;
+        renderSugBox();
+      });
+    });
+    UI.act('sugDone', d => {
+      if (window.sdtDesktop?.readSuggestions || !d?.ts) return;
+      const result = completeLocalFeedback(d.ts);
+      if (!result.ok) {
+        const button = [...document.querySelectorAll('.sugin-complete')].find(el => el.dataset.ts === d.ts);
+        if (button) button.textContent = result.message;
+        return;
+      }
+      sugCache = result.value;
+      renderSugBox();
     });
     UI.act('sugDel', async (d) => {
       const ts = d?.ts;
@@ -408,7 +429,12 @@ function createGameMenuController(deps) {
         setTimeout(() => { if (btn.isConnected) btn.textContent = '删除'; }, 1500);
       }
     });
-    loadSuggestions().then((list) => { sugCache = list; renderSugBox(); });
+    const inboxBody = document.getElementById('sugBox');
+    loadSuggestions().then(list => {
+      if (document.getElementById('sugBox') !== inboxBody) return;
+      sugCache = list;
+      renderSugBox();
+    });
   }
 
   // 远征手册：只描述当前 Vite 版真实输入与流程
@@ -424,13 +450,14 @@ function createGameMenuController(deps) {
       const activeAction = active?.dataset?.act;
       const activePageIndex = active?.dataset?.pageIndex;
       const root = UI.el.ovBody.querySelector('.beginner-guide');
-      if (root) root.outerHTML = beginnerGuideHTML(currentPage);
+      if (root) updateBeginnerGuide(root, currentPage);
       else UI.showOverlay('远征新手指南', beginnerGuideHTML(currentPage), 'page');
       if (activeAction && activeAction !== 'guideBack') {
         const selector = activeAction === 'guidePage' && /^\d+$/.test(activePageIndex || '')
           ? `[data-act="guidePage"][data-page-index="${activePageIndex}"]`
           : `[data-act="${activeAction}"]`;
-        UI.el.ovBody.querySelector(selector)?.focus({ preventScroll: true });
+        const nextFocus = UI.el.ovBody.querySelector(selector);
+        (nextFocus?.disabled ? UI.el.ovBody.querySelector('.bg-nav-item[aria-current="step"]') : nextFocus)?.focus({ preventScroll: true });
       }
     };
     UI.showOverlay('远征新手指南', beginnerGuideHTML(currentPage), 'page');
@@ -463,9 +490,12 @@ function createGameMenuController(deps) {
       isUnlocked: (achievement, snapshot) => SDT.Meta.isUnlocked(achievement, snapshot),
       backs: SDT.Cards.CARD_BACKS || [], cards: SDT.Cards.all(),
     }), 'page');
-    const gallery = bindAchievementGallery(UI.el.ovBody.querySelector('.achievement-gallery'));
+    const page = UI.el.ovBody.querySelector('.achievement-gallery');
+    const gallery = bindAchievementGallery(page);
+    const clearCut = enterAchievementCut(page, reduceMotion());
     UI.act('achBack', () => {
       if (gallery.closeDetail()) return;
+      clearCut();
       UI.hideOverlay(); game.state = 'title';
     });
   }
@@ -586,11 +616,8 @@ function createGameMenuController(deps) {
           <i class="bokeh"></i><i class="bokeh"></i><i class="bokeh"></i><i class="bokeh"></i>
           ${SLOT_BG_SILHOUETTES}
         </div>
-        <!-- 返回键在左上角（2026-09-19 老板指定；09-10 曾因矮窗口裁切沉到左下角——
-             选档卡片改全屏后卡片顶=视口顶、页头 clamp 留白带兜底，裁切前提已不存在）。
-             2026-09-25 老板：返回键统一 = 主页左上退出键（ak-sq ak-exit）同款同位，
-             原 58px 透明变体（.pg-back）退役 -->
-        <button class="ak-sq ak-exit ak-back-tl" data-act="slotBack" aria-label="返回主菜单" title="返回主菜单（Esc）"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M4 12h10M4 12l4-4M4 12l4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <!-- 选档、基地、地图退出键统一沿 archive-back.css。 -->
+        <button class="archive-back" data-act="slotBack" aria-label="返回主菜单" title="返回主菜单（Esc）"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M4 12h10M4 12l4-4M4 12l4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <header class="slot-page-head">
           <span class="section-kicker">SELECT ARCHIVE</span>
           <span class="slot-page-en">选择存档</span>
@@ -607,9 +634,10 @@ function createGameMenuController(deps) {
       if (errEl) { errEl.hidden = false; errEl.textContent = msg; }
     }
     // 进入档位：加载该档基地并执行后续（续打 / 进基地）
-    const launch = (slot, fn) => {
+    const launch = (slot, fn, keepPicker = false) => {
       invalidateBattleContext(game);
-      UI.hideOverlay();
+      // 基地直接承接选档画面，由视觉层保留退场副本；续局仍沿既有关闭流程。
+      if (!keepPicker) UI.hideOverlay();
       hideTitle();
       UI.clearLog();
       setActiveSlot(slot);
@@ -646,7 +674,7 @@ function createGameMenuController(deps) {
       restoreError(message);
       return false;
     };
-    UI.act('newSlot', (d) => { if (!enteringSlot) launch(+d.slot, () => { SDT.Base.reset(+d.slot); runtime.openBaseHub('deploy'); }); });
+    UI.act('newSlot', (d) => { if (!enteringSlot) launch(+d.slot, () => { SDT.Base.reset(+d.slot); runtime.openBaseHub('deploy'); }, true); });
     UI.act('enterSlot', async (d) => {
       if (enteringSlot) return false;
       const slot = +d.slot;
@@ -694,6 +722,7 @@ function createGameMenuController(deps) {
               eyebrow: 'EXPEDITION RESUMED', title: '继续对局',
               detail: '欢迎回到战场',
               duration: 900,
+              presentation: 'city-cut',
             });
             if (await transition === false || !transition.isCurrent() || !currentContext()) return false;
             // 存档可能包含战斗快照；必须先加载战斗域，loadGame 才能同步 restore。
@@ -706,27 +735,19 @@ function createGameMenuController(deps) {
             }
             return completed();
           }
-          transition = runtime.showRunTransition({
-            tone: 'door', asset: 'scene-door-bg',
-            presentation: 'base-arrival',
-            eyebrow: '抵达', title: '远征基地',
-            detail: '整备物资，准备下一次远征',
-            duration: 900,
-          });
-          if (await transition === false || !transition.isCurrent() || !currentContext()) return false;
           if (runtime.openBaseHub('deploy') === false) return false;
           return completed();
         } catch {
           if (!currentContext() || (transition && !transition.isCurrent())) return false;
           return returnToPicker('进入档位失败，请刷新页面后重试；原档已保留');
         } finally { enteringSlot = false; }
-      });
+      }, !hasSavedRun);
     });
     UI.act('overwriteSlot', (d) => {
       if (enteringSlot) return;
       if (!armConfirm(`[data-act="overwriteSlot"][data-slot="${d.slot}"]`, '确认重开？', '覆盖重开')) return;
       clearSlot(+d.slot);
-      launch(+d.slot, () => { SDT.Base.reset(+d.slot); runtime.openBaseHub('deploy'); });
+      launch(+d.slot, () => { SDT.Base.reset(+d.slot); runtime.openBaseHub('deploy'); }, true);
     });
     UI.act('delSlot', (d) => {
       if (enteringSlot) return;
@@ -754,28 +775,86 @@ function createGameMenuController(deps) {
   // ---------- 离开对局 / 放弃对局（v0.21 设计者规则） ----------
   // 放弃对局：带入本局的卡牌【全部】丢失；对局中获得的卡牌只有安全格里的
   // 会被宠物运回基地；物资/金币/消耗口袋全部散失。
+  let leaveView = null;
+  function leavePanel(title, step, content, initialFocus) {
+    const view = { step, busy:false };
+    leaveView = view;
+    UI.showOverlay(title, `<section class="leave-run-panel glass-panel" data-leave-step="${step}">${content}</section>`, 'glass', { initialFocus, motionKey: `leave/${step}` });
+    return view;
+  }
+  function leaveViewCurrent(view) {
+    return leaveView === view && !view.busy && !!document.querySelector(`[data-leave-step="${view.step}"]`);
+  }
+  function setLeaveBusy(view, busy) {
+    view.busy = busy;
+    const panel = document.querySelector('.leave-run-panel');
+    panel?.setAttribute('aria-busy', String(busy));
+    panel?.querySelectorAll('button').forEach(button => { button.disabled = busy; });
+  }
   function openLeaveMenu() {
     game.state = 'modal';
-    UI.showOverlay('[[icon:door]] 离开对局？', `
-      <p class="ov-note">当前对局进度已自动保存——下次「开始游戏」进入 <b>${getActiveSlot() ? `档位 0${getActiveSlot()}` : '当前档位'}</b> 会直接继续这场对局。</p>
-      <p class="ov-note" style="color:#f0b9ae">[[icon:question]] 若选择<b>放弃对局</b>：带入本局的卡牌<b>全部丢失</b>；
-        对局中获得的卡牌只有存入<b>安全格</b>的会被宠物运回基地；物资与金币全部散失。</p>
-      <div class="ov-btns">
-        <button class="ov-btn ok" data-act="leaveSave">[[icon:save]] 保存并回主菜单</button>
-        <button class="ov-btn danger" data-act="leaveAbandon">[[icon:flag]] 放弃对局</button>
-        <button class="ov-btn" data-act="leaveCancel">↩ 继续对局</button>
-      </div>`, undefined, { initialFocus: '[data-act="leaveCancel"]' });
-    UI.act('leaveSave', () => { UI.hideOverlay(); game.state = 'idle'; saveGame(); showTitle(); });
-    UI.act('leaveCancel', () => { UI.hideOverlay(); game.state = 'idle'; UI.refresh(game); });
-    UI.act('leaveAbandon', () => {
-      const btn = document.querySelector('#ovBody [data-act="leaveAbandon"]');
-      if (btn && !btn.dataset.confirm) {
-        btn.dataset.confirm = '1'; btn.textContent = '确认放弃？（卡牌将全部丢失）'; btn.classList.add('arm');
-        setTimeout(() => {
-          if (btn.isConnected) { delete btn.dataset.confirm; btn.innerHTML = `${SDT.Icons.img('flag')} 放弃对局`; btn.classList.remove('arm'); }
-        }, 2600);
-        return;
+    const slot = getActiveSlot();
+    const place = game.layerData?.[game.layerIdx]?.name || '本次远征';
+    const view = leavePanel('离开对局', 'choice', `
+      <div class="leave-run-context"><span>${slot ? `档位 ${String(slot).padStart(2, '0')}` : '临时对局'}</span><span>${esc(place)}</span></div>
+      <p class="leave-run-description">${slot ? '保存这次远征，返回主菜单。下次进入此档位时，可从当前进度继续。' : '当前对局未关联档位，无法保存。你仍可继续游玩。'}</p>
+      <p class="leave-run-status" role="status" aria-live="polite" hidden></p>
+      <div class="leave-run-actions">
+        <button type="button" class="leave-run-continue" data-act="leaveCancel" aria-label="返回对局，继续游玩">继续游玩</button>
+        <button type="button" class="leave-run-save" data-act="leaveSave"${slot ? '' : ' disabled'}>[[icon:save]] 保存并退出</button>
+      </div>
+      <div class="leave-run-secondary"><button type="button" data-act="leaveAbandon">放弃本次对局 <span aria-hidden="true">→</span></button></div>`, '[data-act="leaveCancel"]');
+    UI.act('leaveSave', async () => {
+      if (!leaveViewCurrent(view) || !getActiveSlot()) return false;
+      setLeaveBusy(view, true);
+      const button = document.querySelector('[data-act="leaveSave"]');
+      if (button) button.textContent = '正在保存…';
+      game.state = 'idle';
+      let saved = false;
+      try { saved = await saveGame(); }
+      catch (error) { console.error('[leave-run] 保存退出失败', error); }
+      if (leaveView !== view) return false;
+      if (saved !== true) {
+        game.state = 'modal';
+        setLeaveBusy(view, false);
+        if (button) button.textContent = '重试保存并退出';
+        const status = document.querySelector('.leave-run-status');
+        if (status) { status.hidden = false; status.textContent = '本次进度未能保存。当前对局仍在，可重试或继续游玩。'; }
+        return false;
       }
+      leaveView = null;
+      UI.hideOverlay();
+      showTitle();
+      return true;
+    });
+    UI.act('leaveCancel', () => {
+      if (!leaveViewCurrent(view)) return;
+      leaveView = null; UI.hideOverlay(); game.state = 'idle'; UI.refresh(game);
+    });
+    UI.act('leaveAbandon', () => {
+      if (leaveViewCurrent(view)) openAbandonConfirmation();
+    });
+  }
+
+  function openAbandonConfirmation() {
+    const safeCount = game.ownedCards.filter(card => card.safe && !card.brought).length;
+    const view = leavePanel('确认放弃本次对局？', 'abandon', `
+      <p class="leave-run-warning">放弃后，本次远征将结束。</p>
+      <dl class="leave-run-consequences">
+        <div><dt>将失去</dt><dd>带入的全部卡牌、未存入安全格的本局所得，以及金币、物资和消耗口袋。</dd></div>
+        <div><dt>可带回</dt><dd>本局获得并已存入安全格的卡牌${safeCount ? `（${safeCount} 张）` : '（当前没有）'}。</dd></div>
+      </dl>
+      <div class="leave-run-actions">
+        <button type="button" class="leave-run-continue" data-act="leaveReviewBack">返回</button>
+        <button type="button" class="leave-run-danger" data-act="leaveAbandonConfirm">确认放弃</button>
+      </div>`, '[data-act="leaveReviewBack"]');
+    UI.act('leaveReviewBack', () => { if (leaveViewCurrent(view)) openLeaveMenu(); });
+    UI.act('leaveAbandonConfirm', () => {
+      if (!leaveViewCurrent(view)) return false;
+      setLeaveBusy(view, true);
+      leaveView = null;
+      const button = document.querySelector('[data-act="leaveAbandonConfirm"]');
+      if (button) button.textContent = '正在结算…';
       return abandonRun();
     });
   }
@@ -815,15 +894,15 @@ function createGameMenuController(deps) {
         ? `<div class="doom-loot"><p class="doom-loot-h">[[icon:lock]] 宠物从安全格抢运回 <b>${kept.length}</b> 张对局中获得的卡牌</p><div class="doom-cards">${keptList.slice(0, 6).map((s, i) =>
             `<span class="doom-card" style="--i:${i}">${SDT.Cards.cardHTML(s.card, 'sm')}</span>`).join('')}${keptList.length > 6 ? `<span class="doom-more">还有 ${keptList.slice(6).reduce((n, s) => n + s.count, 0)} 张</span>` : ''}</div></div>`
         : '<p class="ov-note">安全格里没有对局中获得的卡牌——本次放弃没有带回任何卡牌。</p>';
-      UI.showOverlay('[[icon:flag]] 已放弃对局', `
+      UI.showOverlay('已放弃对局', `<section class="leave-run-panel glass-panel" data-leave-step="complete">
         <p class="ov-stats">带入本局的 <b>${token.broughtN}</b> 张卡牌全部丢失；对局中获得的卡牌除安全格保护的外也全部失去；
           物资与 <b class="gold">${game.coins} 币</b>一并散失。</p>
         ${token.ephemeral ? '<p class="ov-note">开发测试档未选择存档槽；基地奖励仅暂存于内存。</p>' : ''}
         ${keptHTML}
-        <div class="ov-btns">
-          <button class="ov-btn" data-act="goBase">[[icon:home]] 回基地</button>
-          <button class="ov-btn ok" data-act="toTitle">[[icon:archive]] 回主菜单</button>
-        </div>`);
+        <div class="leave-run-actions">
+          <button type="button" class="leave-run-continue" data-act="goBase">回基地</button>
+          <button type="button" class="leave-run-save" data-act="toTitle">回主菜单</button>
+        </div></section>`, 'glass', { initialFocus:'[data-act="goBase"]' });
       UI.act('goBase', () => { UI.hideOverlay(); runtime.openBaseHub('deploy'); });
       UI.act('toTitle', () => { UI.hideOverlay(); showTitle(); });
       UI.refresh(game);
@@ -910,15 +989,8 @@ function createGameMenuController(deps) {
       <div class="pg settings-page">
         <!-- 2026-09-07 留言：右上叉号去掉。2026-09-25 老板：返回键统一 = 主页左上退出键
              （ak-sq ak-exit）同款同位，底部大返回钮取消，Esc 仍可关 -->
-        <button class="ak-sq ak-exit ak-back-tl" data-act="closeSettings" title="返回（Esc）" aria-label="返回">
-          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-            <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
-                  fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-            <path d="M4 12h10M4 12l4-4M4 12l4 4"
-                  fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        <header class="pg-head"><h2><img class="settings-gear-r2" src="assets/ui/icons/settings-gear-r2.webp" width="28" height="28" alt="" aria-hidden="true"> 设置</h2><span class="pg-spacer"></span></header>
+        ${linkedBackHTML('closeSettings', '返回', 'ak-back-tl')}
+        <header class="pg-head"><h2>设置</h2><span class="pg-spacer"></span></header>
         <div class="settings settings-layout">
         <section class="settings-group settings-general">
         <h3 class="set-h">[[icon:gear]] 通用 <span class="set-en">GENERAL</span></h3>
@@ -938,12 +1010,13 @@ function createGameMenuController(deps) {
         <label class="chk vol"><span>音乐音量 <span class="set-en">MUSIC VOL</span></span><input type="range" id="setMusicVol" min="0" max="100" value="${Math.round(SDT.Sound.musicVolume * 100)}"><b id="setMusicVolVal">${Math.round(SDT.Sound.musicVolume * 100)}</b></label>
         <label class="chk"><input type="checkbox" id="setSfx" ${SDT.Sound.sfxMuted ? '' : 'checked'}> 音效 <span class="set-en">SOUND FX</span></label>
         <label class="chk vol"><span>音效音量 <span class="set-en">SFX VOL</span></span><input type="range" id="setSfxVol" min="0" max="100" value="${Math.round(SDT.Sound.sfxVolume * 100)}"><b id="setSfxVolVal">${Math.round(SDT.Sound.sfxVolume * 100)}</b></label>
-        <p class="hint">侧边栏的 [[icon:gear]] 按钮为全局静音；这里可分别开关音乐与音效、拖动滑条调音量（自动保存）。</p>
+        <p class="hint">音乐与音效可分别调节，修改自动保存。侧边栏按钮控制全局静音。</p>
         </section>
         <section class="settings-group settings-credits">
         <h3 class="set-h">[[icon:trophy]] 致谢 <span class="set-en">CREDITS</span></h3>
-        <p class="hint">图标：game-icons.net · Lorc、Delapouite、Carl Olsen、Caro Asercion（CC-BY 3.0）。战斗音效：rubberduck、Tinysized、Kenney 等创作者的 CC0 音效。</p>
-        <p><a class="ov-btn" href="./assets/sfx/battle/SOURCES.md" target="_blank" rel="noopener">查看音效来源</a></p>
+        <p class="hint"><strong>图标</strong><span>game-icons.net · Lorc、Delapouite、Carl Olsen、Caro Asercion<br><span class="license">CC-BY 3.0</span></span></p>
+        <p class="hint"><strong>战斗音效</strong><span>rubberduck、Tinysized、Kenney 等创作者<br><span class="license">CC0</span></span></p>
+        <p><a class="ov-btn" href="./assets/sfx/battle/SOURCES.md" target="_blank" rel="noopener">查看音效来源 <span class="settings-external" aria-hidden="true">↗</span></a></p>
         </section>
         <section class="settings-group settings-records">
         <h3 class="set-h">[[icon:book]] 留言信箱 <span class="set-en">SUGGESTION BOX</span></h3>
@@ -962,10 +1035,11 @@ function createGameMenuController(deps) {
         <div class="btn-row danger-row">
           <button class="mini-btn danger danger-max" data-act="wipeSave">清空全部存档</button>
         </div>
-        <p class="hint">危险区操作均不可撤销：按钮需点击两次确认（首次点击变为「确认清空？」）。「清空全部存档」会删除全部五个档位的档案。</p>
+        <p class="hint">清空操作需点击两次确认，完成后无法恢复。<br>「清空全部存档」会删除五个档位的全部档案。</p>
         </section>
         </div><!-- /.settings -->
       </div><!-- /.pg -->`, 'page');
+    initSettingsNavigation(UI.el.ovBody.querySelector('.settings-page'));
     const sync = () => {
       if (UI.el.tglIndex) UI.el.tglIndex.checked = game.toggles.index;
       runtime.syncDevVisibility();

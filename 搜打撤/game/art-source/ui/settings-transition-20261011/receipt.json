@@ -1,0 +1,25 @@
+{
+  "acquisition": "NovelAI draft -> built-in imagegen redraw -> sharp WebP encoding; originals retained",
+  "generatedSource": "C:/Users/太平/.codex/generated_images/01a12a83-ee5f-73b0-bbce-a25457648258/exec-2346f370-64b6-417c-bb65-f02fd28265c1.png",
+  "styleReference": {
+    "path": "game/assets/portraits/full/wu.webp",
+    "bytes": 150636,
+    "sha256": "71948f3902351f877de9a8375af33358dc44975ce2965f57d5b4c2d123cf43dc"
+  },
+  "novelai": {
+    "path": "game/art-source/ui/settings-transition-20261011/settings-nai-v1.png",
+    "bytes": 1276547,
+    "sha256": "946fd845d2c539f8584b720e64ee87724860f98f959255f892b5ccbc0eeca8dd"
+  },
+  "imagegen": {
+    "path": "game/art-source/ui/settings-transition-20261011/settings-imagegen-v1.png",
+    "bytes": 1954107,
+    "sha256": "2a9fb56e3be5ce63d3110902dfd84306b777d626539400b24e99afd9f68de605"
+  },
+  "runtime": {
+    "path": "game/assets/ui/settings-shutter-1011.webp",
+    "bytes": 66834,
+    "sha256": "4cd4af3ba76982907cf69ba09d116eb4e2df4418fb29336371a374dfe5121b05"
+  },
+  "largeBinaryPolicy": "PNG originals over 1MB stay local; paths, SHA256 and acquisition recorded here"
+}

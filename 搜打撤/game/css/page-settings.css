@@ -80,7 +80,7 @@
 #overlay .pg.settings-page .pg-head h2 {
   display: block; position: relative; margin: 0;
   padding-left: 14px;
-  font-size: clamp(17px, 1.7vw, 21px); letter-spacing: 6px; color: #f4f4f4;
+  font-size: clamp(17px, calc(var(--game-layout-width, 100vw) * 0.017), 21px); letter-spacing: 6px; color: #f4f4f4;
   text-shadow: 0 0 16px rgba(16,18,19,.8), 0 0 3px rgba(230,203,118,.28);
 }
 #overlay .pg.settings-page .pg-head h2::before {
@@ -292,25 +292,6 @@
   box-shadow: 0 0 14px rgba(190,84,62,.4);
 }
 
-/* S6c 返回主按钮：暖金渐变收口（hub deploy-primary 语言） */
-#overlay .pg.settings-page .ov-btn.ok {
-  border-color: var(--gold-main);
-  background: linear-gradient(135deg, #e9d07d, #bc9e3d);
-  color: #212326;
-  min-width: 220px; letter-spacing: 6px;
-  box-shadow: inset 0 1px 0 rgba(226,222,213,.45), 0 6px 18px rgba(0,0,0,.28);
-  transition: filter var(--set-fast), transform var(--set-fast), box-shadow var(--set-fast);
-}
-#overlay .pg.settings-page .ov-btn.ok:hover {
-  filter: brightness(1.08); transform: translateY(-1px);
-  box-shadow: inset 0 1px 0 rgba(235,233,227,.5), 0 10px 22px rgba(0,0,0,.32),
-    0 0 18px rgba(230,203,118,.28);
-}
-#overlay .pg.settings-page .ov-btn.ok:active {
-  transform: translateY(1px) scale(.97); filter: brightness(1.14);
-  transition-duration: .08s;
-}
-
 /* S6d 右上全局关闭钮：冷青幽灵语言 + hover 金边（hub W2e 同款） */
 #overlay .card.page:has(.pg.settings-page) .ov-x {
   color: #c0c4c7; border-color: rgba(170,174,177,.35); background: rgba(14,15,16,.55);
@@ -325,7 +306,7 @@
 
 /* S6f 返回键统一（2026-09-25 老板）：设置页返回 = 主页左上退出键同款同位，
    定位/底色/内框在 winter.css #12 .ak-back-tl；这里只做页头让位与暖金 hover 收口
-   （留言库 S6e 同款语言）。底部大返回钮已随统一取消，S6c 样式留存不再命中。 */
+   （留言库 S6e 同款语言）。底部大返回钮已取消。 */
 #overlay .pg.settings-page .pg-head { padding-left: 98px; min-height: 88px; }
 #overlay .pg.settings-page .ak-back-tl,
 #overlay .pg.settings-page .ak-back-tl:hover,
@@ -345,15 +326,16 @@
   box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(230,203,118,.35);
 }
 
-/* S6e 留言库返回键：绿系 hover retint 到暖金族 + 按压回弹 */
+/* 留言库返回键只保留图标，常态与悬停均不绘制底板或内框。 */
 #overlay .sugin-page .sugin-exit {
-  transition: color var(--set-fast), border-color var(--set-fast), background var(--set-fast),
-    box-shadow var(--set-fast), transform var(--set-fast);
+  background: transparent; border: 0; box-shadow: none;
+  transition-property: color !important;
 }
-#overlay .sugin-page .sugin-exit:hover {
-  border-color: rgba(230,203,118,.6);
-  color: #f8e5a8;
-  box-shadow: 0 0 10px rgba(230,203,118,.16);
+#overlay .sugin-page .sugin-exit::after { content: none; }
+#overlay#overlay#overlay .sugin-page .sugin-exit:is(:hover, :focus-visible):not(:disabled):not([aria-disabled="true"]) {
+  background: transparent !important; border-color: transparent !important;
+  color: #f8e5a8 !important;
+  box-shadow: none !important;
 }
 #overlay .sugin-page .sugin-exit:active { transform: scale(.92); transition-duration: .08s; }
 
@@ -381,9 +363,9 @@
   box-shadow: 0 6px 16px rgba(7,7,8,.32);
 }
 .pg.sugin-page .sugin-row:hover::before { opacity: .72; }
-.pg.sugin-page .sugin-row.done { opacity: .55; }
+.pg.sugin-page .sugin-row.done { opacity: 1; }
 .pg.sugin-page .sugin-row.done::before { opacity: .1; }
-.pg.sugin-page .sugin-row.done:hover { opacity: .78; }
+.pg.sugin-page .sugin-row.done:hover { opacity: 1; }
 
 /* S7b 行内元信息行：底部分隔 + 层级（时间弱、页名亮、标记金） */
 .pg.sugin-page .sugin-top {
@@ -396,8 +378,11 @@
 .pg.sugin-page .sugin-page-name { color: #e7e8e9; letter-spacing: 1.5px; }
 
 /* S7c 正文与档案框：正文提亮、复现步骤等收进金边档案框 */
-.pg.sugin-page .sugin-text { margin-top: 8px; font-size: 14px; line-height: 1.75; color: #ececec; }
+.pg.sugin-page .sugin-text { margin-top: 8px; font-size: 17px; line-height: 1.75; color: #ececec; }
+.pg.sugin-page .sugin-row.done .sugin-text { color: #d7dde0; }
+#overlay:has(.sugin-page) #ovCloseX { display: none !important; }
 .pg.sugin-page .sugin-where { color: #8b9093; }
+.pg.sugin-page .sugin-complete { display: block; width: auto; margin: 12px 0 0; padding: 6px 12px; color: #e6cb76; }
 .pg.sugin-page .sugin-detail {
   margin: 8px 0 0; padding: 6px 10px;
   background: rgba(14,15,16,.45);
@@ -451,7 +436,6 @@
 .pg.settings-page .settings-group .set-h { margin: 12px 0 12px; }
 .pg.settings-page .settings-group .chk { margin-bottom: 7px; }
 .pg.settings-page .settings-group .hint { margin: 12px 2px 2px; }
-.pg.settings-page .settings-credits .ov-btn { display: inline-flex; margin-top: 2px; }
 .pg.settings-page .settings-records .set-h:not(:first-child) { margin-top: 23px; }
 .pg.settings-page .settings-danger {
   grid-area: danger;
@@ -462,10 +446,6 @@
   box-shadow: inset 0 1px rgba(255,215,205,.04), 0 8px 20px rgba(14,5,7,.2);
 }
 .pg.settings-page .settings-danger .hint { color: #d1a39a; }
-@media (max-width: 900px) {
-  .pg.settings-page .settings-layout { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'general' 'display' 'audio' 'records' 'credits' 'danger'; gap: 12px; }
-  .pg.settings-page .settings-danger { grid-column: auto; }
-}
 
 /* ═════════ S8 焦点态：键盘导航金线焦点环（hub T2 语言） ═════════ */
 

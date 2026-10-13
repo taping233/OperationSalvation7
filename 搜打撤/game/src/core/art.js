@@ -204,8 +204,8 @@ const FIGURE_FULL_ART = Object.freeze({
 // 皮肤立绘（2026-09-19 老板令）：角色 id → 备选皮肤立绘。
 const SKIN_FULL_ART = Object.freeze({
   wu: Object.freeze([
-    { id: 'casual', name: '春日·机车', file: 'portraits/full/wu-casual.webp' },
-    { id: 'spring', name: '新春·旗袍', file: 'portraits/full/wu-spring.webp' },
+    { id: 'casual', name: '春日·机车', file: 'portraits/full/wu-casual-v14.webp' },
+    { id: 'spring', name: '新春·旗袍', file: 'portraits/full/wu-spring-v15.webp' },
     { id: 'beach', name: '盛夏·水枪', file: 'portraits/full/wu-beach.webp' },
   ]),
 });

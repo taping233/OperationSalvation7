@@ -1,7 +1,9 @@
 import { esc } from '../core/shared.js';
 import { reduceMotion } from '../core/motion.js';
-import { descRich } from '../cards/cards.view.js';
+import { createCardDescriptionRenderer } from '../cards/card-description-links.js';
+import { DRAW_EXPLANATION, hasDrawExplanation } from '../cards/card-draw-explanation.js';
 import { photoMountFor } from '../hub/photo-studio-presentation.js';
+import { termKeyFor } from './term-tips.js';
 import { overlayMethods } from './overlay.js';
 import { cinematicsMethods } from './cinematics.js';
 import { hudMethods } from './hud.js';
@@ -77,6 +79,12 @@ import { hudMethods } from './hud.js';
         if (e.key === 'Escape') {
           // 输入法组合中（keyCode 229）：Esc 是取消拼音组合，不是关面板
           if (e.isComposing || e.keyCode === 229) return;
+          const zoom = document.getElementById('cardZoom');
+          // 特写收回时会把焦点还给来源卡；同一次按键的重复消息仍属于特写。
+          if (zoom || e.repeat) {
+            if (!e.repeat) zoom?._closeCardZoom?.();
+            e.preventDefault(); e.stopImmediatePropagation(); return;
+          }
           if (this.closeTopOverlayByEsc()) {
             e.preventDefault();
             e.stopPropagation();
@@ -107,6 +115,8 @@ import { hudMethods } from './hud.js';
     // （本方法被 tests/premium-ui-pages.test.js 源码断言钉死在本文件，不得外移）
     showCardZoom(card, opts = {}) {
       if (!card) return;
+      const descriptionRenderer = opts.descriptionRenderer || createCardDescriptionRenderer(SDT.Cards?.all?.() || []);
+      const referenceTrail = opts.referenceTrail || [];
       const old = document.getElementById('cardZoom');
       if (old) {
         if (typeof old._closeCardZoom === 'function') old._closeCardZoom(true);
@@ -122,7 +132,7 @@ import { hudMethods } from './hud.js';
       const note = (opts.note != null ? opts.note : (card.note || '')) || '';
       const noteLabel = opts.noteLabel || '备注';
       const notePlaceholder = opts.notePlaceholder || '点击这里写备注……';
-      const noteHTML = opts.noteEditable ? `
+      const noteHTML = opts.hideNote ? '' : opts.noteEditable ? `
         <label class="cz-note${note ? ' has' : ''} editable">
           <span class="cz-note-tag">[[icon:pen]] ${esc(noteLabel)}</span>
           <textarea class="cz-note-input" maxlength="240" rows="3" placeholder="${esc(notePlaceholder)}" aria-label="${esc(noteLabel)}">${esc(note)}</textarea>
@@ -133,7 +143,9 @@ import { hudMethods } from './hud.js';
           <p class="cz-note-text">${note ? esc(note) : '暂无备注'}</p>
         </div>`;
       const photoMode = opts.presentation === 'photo';
-      const photoEnterMs = 140;
+      // The gallery opts into the approved take-photo entrance; other zooms keep their timing.
+      const photoAtelierMotion = photoMode && opts.photoMotion === 'atelier';
+      const photoEnterMs = photoAtelierMotion ? 420 : 140;
       const photoCloseMs = 120;
       const photoArt = photoMode && SDT.Art?.cardIcon ? SDT.Art.cardIcon(card, { low: true }) : '';
       let photoFullSrc = '';
@@ -154,10 +166,10 @@ import { hudMethods } from './hud.js';
         card.type && ['类型', card.type === '能力卡' ? '能力' : card.type],
         photoRarity && ['稀有度', photoRarity],
         card.cost != null && ['费用', card.cost],
-        creatureStats ? ['攻击', creatureStats[1]] : (showPhotoDamage && [card.type === '生物' || card.dmgType === 'attack' ? '攻击' : '伤害', card.dmg]),
+        creatureStats ? ['攻击', creatureStats[1]] : (showPhotoDamage && [`${SDT.Cards.DMG_TYPE_META?.[card.dmgType]?.name || ''}伤害`, card.dmg]),
         creatureStats ? ['生命', creatureStats[2]] : (card.hp != null && ['生命', card.hp]),
       ].filter(Boolean) : [];
-      const photoDetails = photoStats.map(([label, value]) => `<div class="cz-photo-detail"><span>${esc(label)}</span><b${label === '稀有度' ? ` data-studio-rarity="${esc(photoRarity)}"` : ''}>${esc(value)}</b></div>`).join('');
+      const photoDetails = photoStats.map(([label, value]) => `<div class="cz-photo-detail"><span${termKeyFor(label) ? ` data-term="${termKeyFor(label)}"` : ''}>${esc(label)}</span><b${label === '稀有度' ? ` data-studio-rarity="${esc(photoRarity)}"` : ''}>${esc(value)}</b></div>`).join('');
       const photoIndex = photoMode && opts.photoNumber != null
         ? `<div class="cz-photo-index">藏品编号 № ${esc(opts.photoNumber)}</div>`
         : '';
@@ -165,24 +177,29 @@ import { hudMethods } from './hud.js';
         <div class="cz-photo-main"><div class="cz-photo-paper" data-photo-mount="${photoMount.kind}">
           <span class="studio-mount-mark" aria-hidden="true"></span>
           <div class="cz-photo-image">${photoArt}</div>
+          <span class="studio-photo-ornament" aria-hidden="true"><i class="studio-photo-corner corner-tl"></i><i class="studio-photo-corner corner-tr"></i><i class="studio-photo-corner corner-br"></i><i class="studio-photo-corner corner-bl"></i></span>
           <div class="cz-photo-caption">${esc(card.name || '未命名卡牌')}</div>
         </div></div>
         <aside class="cz-photo-info" aria-label="照片背签与卡牌信息">
-          <h2 class="cz-photo-title"><span data-studio-rarity="${esc(photoRarity)}">${esc(card.name || '未命名卡牌')}</span></h2>
+          <h2 class="cz-photo-title"><span>${esc(card.name || '未命名卡牌')}</span></h2>
           ${photoIndex}
           <div class="cz-photo-details">${photoDetails}</div>
-          ${card.desc ? `<div class="cz-photo-rules">${descRich(card.desc)}</div>` : ''}
+          ${card.desc ? `<div class="cz-photo-rules">${descriptionRenderer.render(card.desc, card.id, opts.descriptionQuery || '')}</div>` : ''}
+          ${hasDrawExplanation(card, SDT.Cards.deriveDraw?.(card)) ? `<p class="studio-draw-explanation">${esc(DRAW_EXPLANATION)}</p>` : ''}
           ${noteHTML}
         </aside>
       </div>` : '';
       const el = document.createElement('div');
       el.id = 'cardZoom';
+      if (opts.presentation === 'expedition') el.classList.add('expedition-card-zoom');
+      if (opts.presentation === 'inventory') el.classList.add('inventory-zoom');
       // 全屏特写期间暂停战斗层常驻动画（09-30 性能审计 F6，铁律①「不出画面即暂停」；
       // page-covered 机制只覆盖 #title，特写挂在 body 之外）：关闭时在 close() 入口摘除
       document.body.classList.add('zoom-open');
       const reducedMotion = photoMode && reduceMotion();   // 权威口径：媒体查询+设置开关（core/motion.js，带缓存）
       if (photoMode) {
         el.classList.add('cz-photo');
+        if (photoAtelierMotion) el.classList.add('cz-photo-atelier');
         // Reserve the same artwork ratio before the full-resolution image decodes.
         // Thumbnail and original share composition; this avoids a frame jump on first open.
         const sourceImage = opts.from?.querySelector?.('img');
@@ -191,19 +208,38 @@ import { hudMethods } from './hud.js';
         if (!reducedMotion) el.classList.add('cz-photo-entering');
         el.style.setProperty('--cz-photo-enter-ms', `${photoEnterMs}ms`);
         el.style.setProperty('--cz-photo-close-ms', `${photoCloseMs}ms`);
-        el.style.setProperty('--cz-photo-info-delay', '0ms');
+        el.style.setProperty('--cz-photo-info-delay', photoAtelierMotion ? '100ms' : '0ms');
         el.style.setProperty('--cz-photo-motion-ms', `${photoEnterMs}ms`);
       }
       el.setAttribute('role', 'dialog');
       el.setAttribute('aria-modal', 'true');
-      el.setAttribute('aria-label', `${card.name || '卡牌'}大图与${noteLabel}`);
+      el.setAttribute('aria-label', `${card.name || '卡牌'}大图${opts.hideNote ? '' : `与${noteLabel}`}`);
       el.tabIndex = -1;
       el.innerHTML = `<div class="cz-backdrop" aria-hidden="true"></div>
         <span class="cz-flash" aria-hidden="true"></span>
         <button type="button" class="cz-close" aria-label="${photoMode ? '收回照片' : '关闭卡牌大图'}">[[icon:cross]]</button>
         ${photoMode ? photoHTML : `<div class="cz-card">${SDT.Cards.cardHTML(card, 'lg')}</div>${noteHTML}`}
         ${opts.footer ? `<div class="cz-foot">${opts.footer}</div>` : ''}
-        <span class="cz-hint">${photoMode ? '点击照片外或按 Esc 收回 · 背签可编辑' : 'Esc 或点击背景收回'}</span>`;
+        <span class="cz-hint">${photoMode ? (opts.noteEditable ? '点击照片外或按 Esc 收回 · 背签可编辑' : '点击照片外或按 Esc 收回') : 'Esc 或点击背景收回'}</span>`;
+      if (photoMode) {
+        // Keep the dismissal control beside the back-sign, within the same photo group.
+        el.querySelector('.cz-photo-info').prepend(el.querySelector('.cz-close'));
+      }
+      if (!photoMode && card.desc) {
+        const description = el.querySelector('.cz-card .hsc-desc');
+        if (description) description.innerHTML = '<span>' + descriptionRenderer.render(card.desc, card.id, opts.descriptionQuery || '') + '</span>';
+      }
+      if (referenceTrail.length) {
+        const back = document.createElement('button'); back.type = 'button';
+        back.className = 'cz-reference-back'; back.textContent = '‹ 返回上一张';
+        back.setAttribute('aria-label', '返回上一张卡牌');
+        back.addEventListener('click', event => {
+          event.preventDefault(); event.stopPropagation();
+          const parent = referenceTrail[referenceTrail.length - 1];
+          this.showCardZoom(parent.card, { ...parent.options, referenceTrail: referenceTrail.slice(0, -1), returnFocus: previousFocus });
+        });
+        el.appendChild(back);
+      }
       let closed = false;
       let removed = false;
       let noteSaveTimer = null;
@@ -256,7 +292,7 @@ import { hudMethods } from './hud.js';
       const close = (immediate = false) => {
         document.body.classList.remove('zoom-open');   // 战斗层动画恢复（见上方 zoom-open 挂载处）
         if (closed) {
-          if (photoMode && immediate && !removed) {
+          if (immediate && !removed) {
             clearTimeout(enterTimer);
             clearTimeout(photoSourceTimer);
             clearTimeout(closeTimer);
@@ -341,6 +377,23 @@ import { hudMethods } from './hud.js';
       // footer 按钮（如「移出背包」）在本层直接分发。
       el.addEventListener('click', (e) => {
         if (closed) return;
+        const reference = e.target.closest('[data-card-reference]');
+        if (reference) {
+          e.preventDefault(); e.stopPropagation();
+          if (closed) return;
+          const target = descriptionRenderer.getCard(reference.dataset.cardReference);
+          if (!target) return;
+          const parentOptions = { ...opts };
+          delete parentOptions.referenceTrail;
+          const targetOptions = opts.createReferenceOptions?.(target) || {};
+          this.showCardZoom(target, {
+            presentation: opts.presentation, photoMotion: opts.photoMotion, ...targetOptions,
+            descriptionRenderer, createReferenceOptions: opts.createReferenceOptions,
+            referenceTrail: [...referenceTrail, { card, options: parentOptions }].slice(-16),
+            returnFocus: previousFocus,
+          });
+          return;
+        }
         if (e.target.closest('.cz-close')) { close(); return; }
         const btn = e.target.closest('.cz-foot [data-act]');
         if (btn) {
@@ -354,7 +407,7 @@ import { hudMethods } from './hud.js';
           if (!e.target.closest('.cz-photo-paper,.cz-note,button,input,textarea,select,a,[data-term]')) close();
           return;
         }
-        if (e.target.closest('.cz-note')) return;
+        if (e.target.closest('.cz-note, .inventory-zoom-info')) return;
         close();
       });
       el.addEventListener('keydown', (e) => {
@@ -378,6 +431,16 @@ import { hudMethods } from './hud.js';
         else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       }, true);
       document.body.appendChild(el);
+      if (photoMode) {
+        const image = el.querySelector('.cz-photo-image img');
+        const syncImageRatio = () => {
+          if (el.isConnected && !closed && image?.naturalHeight > 0) {
+            el.style.setProperty('--cz-photo-ratio', String(image.naturalWidth / image.naturalHeight));
+          }
+        };
+        image?.addEventListener('load', syncImageRatio);
+        syncImageRatio();
+      }
       if (photoFullSrc) {
         photoSourceTimer = setTimeout(() => {
           const visibleImage = el.querySelector('.cz-photo-image img');
@@ -389,7 +452,10 @@ import { hudMethods } from './hud.js';
             ? fullImage.decode().catch(() => null)
             : new Promise(resolve => { fullImage.onload = resolve; fullImage.onerror = resolve; });
           ready.then(() => {
-            if (el.isConnected && !closed && fullImage.naturalWidth) visibleImage.src = fullImage.src;
+            if (el.isConnected && !closed && fullImage.naturalHeight > 0) {
+              el.style.setProperty('--cz-photo-ratio', String(fullImage.naturalWidth / fullImage.naturalHeight));
+              visibleImage.src = fullImage.src;
+            }
           });
         }, reducedMotion ? 0 : photoEnterMs);
       }

@@ -25,6 +25,8 @@ export const runtime = {
   showRunTransition: async () => {},
   syncDevVisibility: () => {},
   resumeExtraction: () => ({ ok: false, code: 'EXTRACTION_UNAVAILABLE', message: '撤离整理界面尚未就绪' }),
+  resumeChestsOnCell: /** @type {(saved: unknown) => boolean} */ (() => false),
+  resumeBattleRewards: /** @type {(saved: unknown) => boolean} */ (() => false),
   log: () => {},
 };
 
@@ -44,6 +46,8 @@ export function requestClassChoice(options) {
 // ---------- 会话单例状态 ----------
 const store = new GameStore(MAP);
 export const game = store.state;
+game.entrySupply = null;
+game.nodeRewards = {};
 game.getSnapshot = () => store.getSnapshot();
 
 // ---------- 工具 ----------

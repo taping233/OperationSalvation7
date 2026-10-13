@@ -4,6 +4,13 @@ import { interfaceReducedMotion } from './interface-motion.js';
 const title = document.getElementById('title');
 const inner = title?.querySelector('.title-inner');
 const brand = title?.querySelector('.home-brand');
+const credits = document.getElementById('homeCredits');
+
+function sceneInteractive() {
+  return !title.hidden && !document.hidden && !credits?.open
+    && !title.classList.contains('wallpaper-only') && title.dataset.homePhase !== 'out'
+    && !document.body.classList.contains('page-covered');
+}
 
 const SPARKS = [
   // x%, y%, delay, size
@@ -25,17 +32,20 @@ function bindSpotlight() {
   let y = 0;
   const apply = () => {
     frame = 0;
-    if (title.hidden || document.hidden || interfaceReducedMotion() || document.body.classList.contains('page-covered')) return;
+    if (!sceneInteractive() || interfaceReducedMotion()) return;
     const area = title.getBoundingClientRect();
+    if (!area.width || !area.height) return;
     title.style.setProperty('--px', ((x - area.left) / area.width * 2 - 1).toFixed(3));
     title.style.setProperty('--py', ((y - area.top) / area.height * 2 - 1).toFixed(3));
     if (!plate) return;
     const box = plate.getBoundingClientRect();
-    plate.style.setProperty('--mx', `${Math.round(x - box.left)}px`);
-    plate.style.setProperty('--my', `${Math.round(y - box.top)}px`);
+    const sx = box.width ? plate.clientWidth / box.width : 1;
+    const sy = box.height ? plate.clientHeight / box.height : 1;
+    plate.style.setProperty('--mx', `${Math.round((x - box.left) * sx)}px`);
+    plate.style.setProperty('--my', `${Math.round((y - box.top) * sy)}px`);
   };
   title.addEventListener('pointermove', event => {
-    if (interfaceReducedMotion() || document.body.classList.contains('page-covered')) return;
+    if (!sceneInteractive() || interfaceReducedMotion()) return;
     plate = event.target.closest?.('.home-plate');
     x = event.clientX;
     y = event.clientY;
@@ -50,6 +60,49 @@ function bindSpotlight() {
   });
 }
 
+function bindSceneAttention() {
+  const zoneOf = node => node?.closest?.('.home-primary') ? 'primary'
+    : node?.closest?.('.home-collection') ? 'collection'
+      : node?.closest?.('.home-system') ? 'system' : null;
+  let pointerZone = null;
+  const sync = () => {
+    if (!sceneInteractive()) {
+      pointerZone = null;
+      delete title.dataset.homeAttention;
+      title.style.setProperty('--px', '0');
+      title.style.setProperty('--py', '0');
+      return;
+    }
+    const zone = pointerZone || zoneOf(document.activeElement);
+    if (zone) title.dataset.homeAttention = zone;
+    else delete title.dataset.homeAttention;
+  };
+  title.addEventListener('pointerover', event => { pointerZone = zoneOf(event.target); sync(); });
+  title.addEventListener('pointerleave', () => { pointerZone = null; sync(); });
+  title.addEventListener('focusin', sync);
+  title.addEventListener('focusout', () => queueMicrotask(sync));
+  document.addEventListener('visibilitychange', sync);
+  window.addEventListener('blur', () => { pointerZone = null; delete title.dataset.homeAttention; });
+  new MutationObserver(sync).observe(title, { attributes: true, attributeFilter: ['class', 'hidden', 'data-home-phase'] });
+  new MutationObserver(sync).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  if (credits) new MutationObserver(sync).observe(credits, { attributes: true, attributeFilter: ['open'] });
+  sync();
+}
+
+function mountSceneDepth() {
+  title.insertBefore(make('div', 'home-depth'), inner);
+  title.insertBefore(make('div', 'home-scene-light'), inner);
+  const snow = make('div', 'home-near-snow');
+  [[12, 7, 13, -3], [28, 9, 16, -10], [43, 6, 14, -7], [69, 8, 18, -14], [83, 10, 15, -5], [93, 6, 19, -17]]
+    .forEach(([left, size, duration, delay]) => snow.appendChild(make('i', '', {
+      '--x': `${left}%`, '--size': `${size}px`, '--duration': `${duration}s`, '--delay': `${delay}s`,
+    })));
+  title.insertBefore(snow, inner);
+  const sizeTravel = () => title.style.setProperty('--home-travel', `${(title.clientHeight || window.innerHeight) + 80}px`);
+  sizeTravel();
+  if (typeof ResizeObserver === 'function') new ResizeObserver(sizeTravel).observe(title);
+}
+
 const PICKS = new Set(['mStart', 'mGuide', 'mAch', 'btnCardLib', 'mSettings', 'mInbox', 'mCredits', 'btnTitleExit']);
 
 function center(el) {
@@ -59,8 +112,10 @@ function center(el) {
 
 function ripple(button, event) {
   const box = button.getBoundingClientRect();
-  const x = event.detail ? event.clientX - box.left : box.width / 2;
-  const y = event.detail ? event.clientY - box.top : box.height / 2;
+  const sx = box.width ? button.clientWidth / box.width : 1;
+  const sy = box.height ? button.clientHeight / box.height : 1;
+  const x = event.detail ? (event.clientX - box.left) * sx : button.clientWidth / 2;
+  const y = event.detail ? (event.clientY - box.top) * sy : button.clientHeight / 2;
   const wave = make('i', 'home-ripple', { '--rx': `${Math.round(x)}px`, '--ry': `${Math.round(y)}px` });
   button.appendChild(wave);
   wave.addEventListener('animationend', () => wave.remove());
@@ -109,11 +164,16 @@ if (title && inner && title.classList.contains('home-composed')) {
   link.dataset.homeFx = '1';
   document.head.appendChild(link);
 
+  for (const plate of title.querySelectorAll('.home-plate')) {
+    plate.appendChild(make('i', 'home-hover-glow'));
+  }
+
   if (brand) {
     for (const [x, y, delay, size] of SPARKS) {
       brand.appendChild(make('i', 'home-spark', { '--x': `${x}%`, '--y': `${y}%`, '--t': `${delay}s`, '--s': size }));
     }
   }
+  mountSceneDepth();
   title.insertBefore(make('div', 'home-mist'), inner);
   title.insertBefore(make('div', 'home-grain'), inner);
   title.insertBefore(make('div', 'home-flash'), inner);
@@ -133,6 +193,7 @@ if (title && inner && title.classList.contains('home-composed')) {
   setInterval(tick, 1000);
 
   bindSpotlight();
+  bindSceneAttention();
   bindPick();
   bindWarmupHint();
 }

@@ -48,6 +48,7 @@ async function setup({ moduleGate = Promise.resolve() } = {}) {
         state.mounts += 1;
         state.game.state = 'modal';
       },
+      preparePhotoStudioEntry: async () => {},
       openCardDesigner: () => {},
     };
   });

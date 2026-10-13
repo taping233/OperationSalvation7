@@ -8,7 +8,7 @@
  * 发现 = 三选一置入手牌；消耗 = 墓地不洗回；主动技能 = 装备穿戴后角色信息区按钮发动（每场一次）；
  * 狂乱 = battle.core AFFIX 表。 */
 import SDT from '../core/sdt-facade.js';
-import { scale } from './ui-scale.js';
+import { BASE_W, BASE_H, scale } from './ui-scale.js';
 
 /** 词条讲解条目（TERM_TIPS 值形状；icon 仅部分词条有，缺省 = 纯文字无图标）。
  * @typedef {{name: string, icon?: string, text: string}} TermMeta
@@ -16,6 +16,12 @@ import { scale } from './ui-scale.js';
 
 /** @type {Record<string, TermMeta>} */
 const TERM_TIPS = {
+  // —— 伤害类型（combat.js dealDamage）——
+  attackDamage: { name: '攻击伤害', text: '按卡牌数值加你的攻击力结算；目标每有 1 层流血，额外增加 1 点伤害。可被闪避、格挡、减伤、护盾和护甲抵挡。' },
+  spellDamage:  { name: '法术伤害', text: '按卡牌数值加你的法伤加成结算，不受攻击力或流血加成。不能被闪避，但可被格挡、减伤、护盾和护甲抵挡。' },
+  fixedDamage:  { name: '固定伤害', text: '按标注数值结算，不受攻击力、法伤或流血加成，也不能被闪避。卡牌造成的固定伤害仍会被格挡、减伤、护盾和护甲抵挡；中毒与灼烧的状态伤害直接扣除生命。' },
+  trueDamage:   { name: '真实伤害', text: '按标注数值结算，不受攻击力、法伤或流血加成。无视格挡、减伤、护盾和护甲，也不能被闪避；免疫伤害仍能阻挡。' },
+  spellPower:   { name: '法伤', text: '法术伤害的额外加成：每增加 1 点法伤，法术伤害增加 1 点。不影响攻击、固定或真实伤害；卡牌另有倍率说明时按该牌效果计算。' },
   // —— 诅咒（combat.js CURSE_META，key 对齐状态字段）——
   bleed:   { name: '流血', icon: 'blood',   text: '每层使受到的攻击伤害 +1。层数无上限、不会自然衰减。' },
   poison:  { name: '中毒', icon: 'skull',   text: '每层在回合结束时受到 1 点固定伤害。层数无上限、不会自然衰减。' },
@@ -39,7 +45,7 @@ const TERM_TIPS = {
   purify:     { name: '净化',     text: '清除身上所有诅咒，层数与剩余回合全部归零。' },
   infuse:     { name: '注能',     text: '打出前可点卡面「注能」角标，牺牲若干张手牌强化本牌效果；牺牲品进入墓地、不计入「打出」。不注能则按弱效果直接打出。' },
   charge:     { name: '充能',     text: '「回合开始时，本牌伤害 +N」——该牌每回合开始永久成长，整场对战按牌累计（如充能火山）。' },
-  discover:   { name: '发现',     text: '展示若干张随机牌（可限定卡池），选择其中一张置入手牌。' },
+  discover:   { name: '发现',     text: '从三张随机卡牌（可限定卡池）中选择一张并获取。' },
   moves:      { name: '招式',     text: '武术与法术的统称：「所有招式」类效果对两种牌同时生效。' },
   exhaust:    { name: '消耗',     text: '此牌打出后进入墓地，不再参与洗回；部分卡牌需要「消耗」其他手牌作为发动代价。' },
   equipSkill: { name: '主动技能', text: '装备打出即穿戴；技能在角色信息区以按钮发动，每场战斗限一次。' },
@@ -50,12 +56,14 @@ const TERM_TIPS = {
   aegis:      { name: '元素庇幕', icon: 'crystal', text: '该敌人偶数回合减免所有伤害；「破甲」可克制。' },
 };
 
-// 卡面描述文本词 → 词条 key（仅收有讲解内容的词；伤害/生命/回合等常识词保持纯高亮不弹框）
+// 卡面描述文本词 → 词条 key；具体伤害类型有讲解，生命/回合等常识词保持纯高亮。
 /** @type {Record<string, string>} */
 const TERM_ALIAS = {
+  '攻击伤害': 'attackDamage', '法术伤害': 'spellDamage', '固定伤害': 'fixedDamage', '真实伤害': 'trueDamage', '法伤': 'spellPower',
   '冰冻': 'freeze', '冻结': 'freeze', '中毒': 'poison', '燃烧': 'burn', '灼烧': 'burn',
-  '流血': 'bleed', '沉默': 'silence', '诅咒': 'curse', '净化': 'purify', '充能': 'charge',
+  '流血': 'bleed', '沉默': 'silence', '禁疗': 'healban', '诅咒': 'curse', '净化': 'purify', '充能': 'charge',
   '招式': 'moves',
+  '潜行': 'stealth',
   '注能': 'infuse', '发现': 'discover', '消耗': 'exhaust', '限定': 'equipSkill', '主动技能': 'equipSkill',
 };
 
@@ -104,7 +112,7 @@ function show(el) {
   // 定位：ui-scale zoom 挂 html，视觉 px ÷ scale = CSS 布局 px（fixed 定位走布局坐标）
   const sc = scale() || 1;
   const r = el.getBoundingClientRect();
-  const vw = window.innerWidth / sc, vh = window.innerHeight / sc;
+  const vw = BASE_W, vh = BASE_H;
   const x = r.left / sc, y = r.top / sc, w = r.width / sc, h = r.height / sc;
   const tw = tip.offsetWidth, th = tip.offsetHeight;
   const left = Math.min(Math.max(x + w / 2 - tw / 2, 8), Math.max(8, vw - tw - 8));
@@ -148,6 +156,9 @@ function initTermTips() {
   }, true);
   // 滚动即收（capture 覆盖内部滚动容器）
   window.addEventListener('scroll', hide, true);
+  document.addEventListener('sdt-overlay-mode', hide);
+  document.addEventListener('sdt-overlay-close', hide);
+  window.addEventListener('blur', hide);
 }
 
 // main.js 为 ESM defer 链，模块执行时 DOM 已解析，直接挂

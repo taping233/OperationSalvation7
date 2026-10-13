@@ -30,15 +30,16 @@
 #overlay .pg.settings-page.sugin-page .sugin-exit {
   position: absolute; top: 25px; left: 29px; width: 104px; height: 46px;
   display: flex; align-items: center; justify-content: center; gap: 9px;
-  background: #2a2d30; border: 0; color: #f1f0ee; box-shadow: 3px 3px 0 #a3a5a7;
-  clip-path: polygon(9px 0, 100% 0, calc(100% - 9px) 100%, 0 100%);
+  background: transparent; border: 0; color: #2a2d30; box-shadow: none;
+  clip-path: none;
 }
 #overlay .pg.settings-page.sugin-page .sugin-exit::after {
   content: '返回'; display: block; position: static; inset: auto;
   border: 0; border-radius: 0; width: auto; height: auto; font: 600 14px/1.3 var(--font-ui);
 }
 #overlay .pg.settings-page.sugin-page .sugin-exit svg { width: 21px; height: 21px; }
-#overlay .pg.settings-page.sugin-page .sugin-exit:hover { background: #3c4045; color: #f1f0ee; box-shadow: 3px 3px 0 #a3a5a7; transform: none; }
+/* 此页返回键不绘制底板，覆盖通用导航悬停填色。 */
+#overlay#overlay#overlay .pg.settings-page.sugin-page .sugin-exit:is(:hover, :focus-visible) { background: transparent !important; color: #50544f !important; box-shadow: none !important; transform: none; }
 #overlay .card.page .pg.settings-page.sugin-page .settings {
   width: 100%; max-width: none; margin: 0; padding: 22px 30px 28px;
   flex: 1; min-height: 0; overflow-y: auto; scrollbar-color: #959799 #e2e2e3;

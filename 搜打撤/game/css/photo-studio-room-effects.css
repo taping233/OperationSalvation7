@@ -1,0 +1,80 @@
+/* Darkroom scenery: decoration stays behind photographs and reading controls. */
+body.cardlib-open #overlay .studio-archive .studio-room-scene {
+  position:absolute; inset:0; z-index:1; overflow:hidden; pointer-events:none;
+  contain:layout paint;
+}
+.studio-room-scene .room-gantry {
+  position:absolute; left:5%; right:4%; top:4%; height:16px; opacity:.38;
+  border-top:1px solid #c4b28b66; border-bottom:1px solid #0009;
+  background:repeating-linear-gradient(90deg,transparent 0 94px,#c4b28b6b 95px 97px,transparent 98px 190px);
+  box-shadow:0 8px 16px #0006;
+}
+.studio-room-scene .room-gantry::before {
+  content:''; position:absolute; left:18%; top:-6px; width:54px; height:18px;
+  border:1px solid #c4b28b69; border-radius:2px; transform:rotate(-14deg);
+  background:linear-gradient(#455047,#1a221d 65%,#f0d19b66); box-shadow:0 3px 14px #f2d29b33;
+}
+.studio-room-scene .room-beam {
+  position:absolute; left:20%; top:4%; width:52%; height:92%; transform-origin:7% 0;
+  background:conic-gradient(from 155deg at 7% 0,transparent 0deg,#f4d9a40d 4deg,#f4d9a42e 13deg,#f4d9a414 27deg,transparent 34deg);
+  mask-image:linear-gradient(#000,#0009 55%,transparent 95%);
+  animation:studio-room-beam 19s ease-in-out infinite alternate;
+}
+.studio-room-scene .room-beam.second {
+  left:55%; top:4%; width:30%; height:94%; opacity:.4; transform:rotate(12deg);
+  background:conic-gradient(from 157deg at 7% 0,transparent 0deg,#c9e4e607 5deg,#c9e4e61f 16deg,#c9e4e607 29deg,transparent 36deg);
+  animation-duration:27s; animation-delay:-11s;
+}
+.studio-room-scene .room-film {
+  position:absolute; right:2%; top:22%; width:4%; height:61%; transform:rotate(9deg);
+  padding:12px 13px; box-sizing:border-box; opacity:.2; border:1px solid #bfaa775e;
+  background:repeating-linear-gradient(180deg,#c4b28b73 0 5px,transparent 5px 18px) left 3px top/5px 100% repeat-y,
+    repeating-linear-gradient(180deg,#c4b28b73 0 5px,transparent 5px 18px) right 3px top/5px 100% repeat-y,#101b17aa;
+  box-shadow:8px 14px 22px #0005;
+}
+.studio-room-scene .room-film i {
+  display:block; height:29%; margin-bottom:14%; border:1px solid #b9aa8459;
+  background:linear-gradient(145deg,#81917a1a,transparent 64%),radial-gradient(ellipse at 36% 60%,#b7a57b28,transparent 58%);
+}
+.studio-room-scene .room-film::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(155deg,transparent 15%,#d8c0932e 35%,transparent 53%);
+  animation:studio-room-film 23s ease-in-out infinite alternate;
+}
+.studio-room-scene .room-floor {
+  position:absolute; left:-10%; right:-10%; bottom:-20%; height:35%; opacity:.14;
+  border-top:1px solid #e6d7ab88; transform:perspective(330px) rotateX(42deg);
+  background:repeating-linear-gradient(90deg,transparent 0 190px,#a6a28d40 191px 192px),
+    repeating-linear-gradient(180deg,transparent 0 74px,#a6a28d30 75px 76px);
+}
+.studio-room-scene .room-dust {
+  position:absolute; left:var(--dust-x); top:var(--dust-y); width:3px; height:3px;
+  border-radius:50%; background:#f3e1b4; opacity:0; box-shadow:0 0 5px #efd2a277;
+  animation:studio-room-dust var(--dust-duration) ease-in-out var(--dust-delay) infinite;
+}
+body.cardlib-open #overlay .studio-archive .studio-catalog::after {
+  content:''; position:absolute; inset:64px -16px -8px -12px; z-index:0; pointer-events:none;
+  background:linear-gradient(117deg,transparent 0 28%,#e4c88c0d 38%,#e4c88c19 39%,transparent 47%);
+  opacity:.55;
+}
+/* Photographs float in the room; no solid backboard or enclosing border. */
+body.cardlib-open #overlay .studio-archive #libGrid,
+body.cardlib-open #overlay .studio-archive .library-inspector { position:relative; z-index:2; }
+@keyframes studio-room-beam { from { transform:rotate(-5deg); opacity:.55; } to { transform:rotate(2deg); opacity:.95; } }
+@keyframes studio-room-film { from { opacity:.3; transform:translateY(-15%); } to { opacity:.9; transform:translateY(18%); } }
+@keyframes studio-room-dust {
+  0%,100% { opacity:0; transform:translate(0,20px); }
+  30% { opacity:.38; }
+  70% { opacity:.2; }
+  95% { opacity:0; transform:translate(22px,-65px); }
+}
+body.zoom-open .studio-room-scene { opacity:0; }
+body.zoom-open .studio-room-scene *,
+body.zoom-open .studio-room-scene *::after { animation-play-state:paused!important; }
+body.reduce-motion .studio-room-scene *,
+body.reduce-motion .studio-room-scene *::after { animation:none!important; }
+body.reduce-motion .studio-room-scene .room-dust { display:none; }
+@media(prefers-reduced-motion:reduce) {
+  .studio-room-scene *, .studio-room-scene *::after { animation:none!important; }
+  .studio-room-scene .room-dust { display:none; }
+}

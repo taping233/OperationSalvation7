@@ -1,7 +1,9 @@
 /* impact-query（npm run impact）测试：属地撞线解析、反向闭包、命令生成三块核心口径。
  * 端到端用真实仓库文件断言（agent.scenes.js ← agent.js 引用是稳定事实）。 */
 import { describe, expect, it } from 'vitest';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join, resolve, sep } from 'node:path';
 import {
   extractRegistryTokens, formatImpact, impactQuery, normalizePath,
   parseActiveRegistry, pathOverlaps, registryHits, reverseClosure,
@@ -129,10 +131,38 @@ describe('端到端（真实仓库）', () => {
       for (const test of report.plan.tests) expect(existsSync(test)).toBe(true);
     }
   }, 20_000);
-  it('属地撞线路径真实可见：code-map 目录命中在途会话', () => {
-    const report = impactQuery(['code-map/data.js']);
-    expect(report.registry.hits.length).toBeGreaterThanOrEqual(0); // 不依赖台账瞬时状态，仅冒烟
-    expect(report.registry.activeRowCount).toBeGreaterThanOrEqual(1);
+  it('从台账文件读取空占用、编辑撞线和完成未提交归属', () => {
+    const root = mkdtempSync(join(tmpdir(), 'sdt-impact-registry-'));
+    if (!resolve(root).startsWith(resolve(tmpdir()) + sep)) throw new Error('temporary fixture escaped temp directory');
+    try {
+      mkdirSync(join(root, 'docs'));
+      mkdirSync(join(root, 'code-map'));
+      mkdirSync(join(root, 'game/src'), { recursive: true });
+      mkdirSync(join(root, 'game/data'));
+      mkdirSync(join(root, 'game/tools'));
+      mkdirSync(join(root, 'scripts'));
+      mkdirSync(join(root, 'tests'));
+      writeFileSync(join(root, 'code-map/data.js'), 'export const data = [];\n');
+      const header = '## 活跃登记\n| 会话 | 属地 | 事项 | 日期 | 状态 |\n|---|---|---|---|---|\n';
+      const registry = join(root, 'docs/PARALLEL-REGISTRY.md');
+      writeFileSync(registry, header + '\n## 无主物品\n');
+      const empty = impactQuery(['code-map/data.js'], { root });
+      expect(empty.registry).toMatchObject({ activeRowCount: 0, editingRowCount: 0, hits: [] });
+
+      const occupied = '| Friday（code-map） | `code-map/` | 校验 | 10-01 | 编辑中 |\n';
+      writeFileSync(registry, header + occupied + '\n## 无主物品\n');
+      const editing = impactQuery(['code-map/data.js'], { root });
+      expect(editing.registry).toMatchObject({ activeRowCount: 1, editingRowCount: 1 });
+      expect(editing.registry.hits).toHaveLength(1);
+      expect(editing.registry.hits[0]).toMatchObject({ matched: ['code-map'], action: 'coordinate-editing' });
+
+      writeFileSync(registry, header + occupied.replace('编辑中', '完成未提交') + '\n## 无主物品\n');
+      const completed = impactQuery(['code-map/data.js'], { root });
+      expect(completed.registry).toMatchObject({ activeRowCount: 1, editingRowCount: 0 });
+      expect(completed.registry.hits[0]).toMatchObject({ matched: ['code-map'], action: 'retain-ownership' });
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
   });
   it('文本渲染含四节且不炸', () => {
     const text = formatImpact(impactQuery(['game/src/agent/agent.state.js']));

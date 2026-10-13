@@ -145,9 +145,8 @@ describe('余烬爆裂 + 腐化之种', () => {
 
     await playOwned(g, arrow, 0);
     expect(snap().foes[0].dead).toBe(true);
-    // 「附加 1 层中毒」子句在目标死亡后回落到下一个存活敌人（既有引擎规则）＝1 层，
-    // 但不应出现「腐化之种」的层数转移日志
-    expect(snap().foes[1].status.poison || 0).toBe(1);
+    // 原目标已被前段伤害击杀，后续附加中毒跳过；旁人不得承接，也不触发腐化之种转移。
+    expect(snap().foes[1].status.poison || 0).toBe(0);
     expect(g.logs.some(l => l.includes('中毒转移给'))).toBe(false);
   });
 });

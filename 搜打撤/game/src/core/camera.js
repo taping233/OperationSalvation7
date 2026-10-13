@@ -11,6 +11,7 @@ import { ease } from './motion-primitives.js';
     this.cy = map.rows * map.tile / 2;
     this.zoom = 1;
     this.frameMode = 'routes';
+    this.detailInset = 0;
   }
 
   Camera.prototype.resize = function (w, h) {
@@ -43,7 +44,7 @@ import { ease } from './motion-primitives.js';
     this._stopGlide();
     this.frameMode = 'manual';
     const before = this.screenToWorld(sx, sy);
-    this.zoom = Math.min(2.5, Math.max(0.4, this.zoom * factor));
+    this.zoom = Math.min(2.45, Math.max(0.4, this.zoom * factor));
     const after = this.screenToWorld(sx, sy);
     this.cx += before.x - after.x;
     this.cy += before.y - after.y;
@@ -80,7 +81,7 @@ import { ease } from './motion-primitives.js';
     const to = {
       cx: Number.isFinite(tx) ? tx : from.cx,
       cy: Number.isFinite(ty) ? ty : from.cy,
-      zoom: Number.isFinite(zoom) ? Math.min(2.5, Math.max(0.4, zoom)) : from.zoom,
+      zoom: Number.isFinite(zoom) ? Math.min(3.4, Math.max(0.4, zoom)) : from.zoom,
     };
     if (!(dur > 0) || typeof requestAnimationFrame !== 'function' || SDT.Motion?.reduceMotion?.()) {
       this.zoom = to.zoom; this.focus(to.cx, to.cy);
@@ -109,7 +110,7 @@ import { ease } from './motion-primitives.js';
     const pad = Math.max(0, padding);
     const w = Math.max(1, bounds.maxX - bounds.minX + pad * 2);
     const h = Math.max(1, bounds.maxY - bounds.minY + pad * 2);
-    this.zoom = Math.min(2.5, Math.max(0.4, Math.min(this.viewW / w, this.viewH / h)));
+    this.zoom = Math.min(2.45, Math.max(0.4, Math.min(this.viewW / w, this.viewH / h)));
     this.focus((bounds.minX + bounds.maxX) / 2, (bounds.minY + bounds.maxY) / 2);
     return true;
   };
@@ -126,6 +127,18 @@ import { ease } from './motion-primitives.js';
     return this.fitBounds({ minX, minY, maxX, maxY }, padding);
   };
 
+  // Reserve a side panel without changing world coordinates, hit testing or legal nodes.
+  Camera.prototype.setDetailInset = function (width) {
+    const next = Math.min(this.viewW * .38, Math.max(0, Number(width) || 0));
+    const old = this.detailInset || 0;
+    if (next === old) return;
+    this._stopGlide();
+    this.cx += (next - old) / (2 * this.zoom);
+    this.detailInset = next;
+    this.clamp();
+    renderScheduler.invalidate();
+  };
+
   Camera.prototype.frameExploration = function (game, overview = false, opts = null) {
     const li = game?.layerIdx;
     const points = game?.nodePos?.[li];
@@ -139,10 +152,11 @@ import { ease } from './motion-primitives.js';
     const minX = Math.min(...visible.map(p => p.x)), maxX = Math.max(...visible.map(p => p.x));
     const minY = Math.min(...visible.map(p => p.y)), maxY = Math.max(...visible.map(p => p.y));
     // The camera frames the decision in front of the player, without revealing fogged nodes.
-    const zoom = Math.min(1.55, Math.max(.4, Math.min(
-      this.viewW / (maxX - minX + 360),
-      Math.max(180, this.viewH - 130) / (maxY - minY + 230))));
-    const cx = (minX + maxX) / 2;
+    const availableW = this.viewW - (this.detailInset || 0);
+    const zoom = Math.min(3.4, Math.max(.4, Math.min(
+      availableW * .72 / (maxX - minX + 80),
+      Math.max(180, this.viewH - 70) * .84 / (maxY - minY + 50))));
+    const cx = (minX + maxX) / 2 + (this.detailInset || 0) / (2 * zoom);
     const cy = (minY + maxY) / 2 - 30 / zoom;
     // 默认保持同步落定（camera-interaction 测试断言终态）；flow.js 到达取景显式传 glide
     if (opts?.glide) this.glideTo(cx, cy, { zoom, dur: opts.dur });

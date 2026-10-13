@@ -92,9 +92,9 @@ describe('E6 battle-entry rule capability', () => {
     expect(results.filter(entry => !entry.result.ok)).toEqual([]);
     expect({ total: cards.length, structured: results.filter(entry => entry.result.kind === 'supported').length,
       legacy: results.filter(entry => entry.result.kind === 'legacy').length }).toEqual({ total: 268, structured: 217, legacy: 51 });
-    expect(Cards.CARDS_SYNC).toHaveLength(56);
+    expect(Cards.CARDS_SYNC).toHaveLength(57);
     expect(Cards.CARDS_SYNC.every(card => inspectCardRuleCapability(card).kind ===
-      (card.id === 'cmtn125e1nk0' ? 'supported' : 'legacy'))).toBe(true);
+      (['cmtn125e1nk0', 'tt2-forestarrow'].includes(card.id) ? 'supported' : 'legacy'))).toBe(true);
     const count = values => Object.fromEntries([...new Set(values)].sort().map(value => [value, values.filter(entry => entry === value).length]));
     console.info('E6 production catalogue support census', JSON.stringify({
       domains: count(cards.flatMap(card => Object.keys(card.rules || {}).filter(key => key !== 'version'))),

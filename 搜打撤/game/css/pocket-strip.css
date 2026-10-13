@@ -97,10 +97,6 @@
   100% { transform: translateY(0); filter: brightness(1); }
 }
 
-@media (max-width: 1100px) {
-  .eps-hint { display: none; }
-}
-
 /* ── 减少动态效果：脉冲改静止，信息不丢 ── */
 @media (prefers-reduced-motion: reduce) {
   .eps-cell.eps-pop { animation: none; }

@@ -96,4 +96,28 @@ describe('INFRA-02 控制台快捷键页签跳转不再关掉目标页', () => {
     expect(document.querySelector('.devc-tabs'), 'jump 失败应重绘留在控制台').not.toBeNull();
     expect(UI().el.overlay.hidden).toBe(false);
   });
+
+  it('真实 Ctrl+L 在四个页签均恢复来源，按住重复消息不反复开关', () => {
+    if (document.getElementById('devConsole')) UI()._acts.devcClose();
+    const game = window.SDT.game;
+    game.state = 'modal';
+    UI().showOverlay('来源节点', '<section id="consoleOrigin"><button data-act="originContinue">继续节点</button></section>', 'page');
+    const source = document.getElementById('consoleOrigin');
+    let continued = 0;
+    UI().act('originContinue', () => { continued += 1; });
+    const toggle = repeat => window.dispatchEvent(new KeyboardEvent('keydown', { key:'l', ctrlKey:true, repeat, bubbles:true, cancelable:true }));
+    for (const tab of ['debug', 'agent', 'data', 'keys']) {
+      toggle(false);
+      expect(document.getElementById('devConsole')).not.toBeNull();
+      document.querySelector(`[data-act="devcTab"][data-tab="${tab}"]`).click();
+      toggle(true);
+      expect(document.getElementById('devConsole')).not.toBeNull();
+      toggle(false);
+      expect(document.getElementById('devConsole')).toBeNull();
+      expect(document.getElementById('consoleOrigin')).toBe(source);
+      expect(game.state).toBe('modal');
+    }
+    source.querySelector('button').click();
+    expect(continued).toBe(1);
+  });
 });

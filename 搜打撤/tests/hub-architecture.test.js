@@ -5,6 +5,7 @@
  *   game.hub.depart.js  —— 出发页与出征整备（hubDeployHTML / openDepartPrep / deployPick 态）
  *   game.hub.pages.js   —— 六页签 HTML 与 openStashItem/openRawItem 抽屉
  *   game.hub.bridge.js  —— 中立桥：slots.renderHub 注册点 + homeRequestId（bag-return-hook 先例）
+ *   game.hub.home-scene.js —— Home 场景读取、命令分派与异步生命周期
  * 锁定四件事：
  *   1. 壳不再定义被拆走的入口，行数不回涨成 God file；
  *   2. 对外导出面（五件套）不变；
@@ -17,13 +18,14 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const source = (file) => readFileSync(resolve(process.cwd(), `game/src/${file}`), 'utf8');
-const importedModules = (code) => [...code.matchAll(/^import\s+(?:\{[^}]*\}\s+from\s+)?'\.\/([\w.]+)\.js';/gm)].map((m) => m[1]);
+const importedModules = (code) => [...code.matchAll(/^import\s+(?:\{[^}]*\}\s+from\s+)?'\.\/([\w.-]+)\.js';/gm)].map((m) => m[1]);
 
 const SHELL = source('hub/game.hub.js');
 const DEPART = source('hub/game.hub.depart.js');
 const PAGES = source('hub/game.hub.pages.js');
 const PREPARATION = source('hub/game.hub.preparation.js');
 const BRIDGE = source('hub/game.hub.bridge.js');
+const HOME_SCENE = source('hub/game.hub.home-scene.js');
 
 describe('基地模块分层（批3 拆分）', () => {
   it('壳只做装配：被拆走的入口不在 game.hub.js 定义，行数不上浮', () => {
@@ -49,9 +51,11 @@ describe('基地模块分层（批3 拆分）', () => {
     expect(importedModules(DEPART)).not.toContain('game.hub');
     expect(importedModules(PAGES)).not.toContain('game.hub');
     expect(importedModules(BRIDGE)).not.toContain('game.hub');
+    expect(importedModules(HOME_SCENE)).not.toContain('game.hub');
     for (const mod of ['game.hub.depart', 'game.hub.pages', 'game.hub.bridge']) {
       expect(importedModules(SHELL), `壳应装配 ${mod}`).toContain(mod);
     }
+    expect(importedModules(SHELL)).toContain('game.hub.home-scene');
   });
 
   it('重绘回环只经桥：切片用 hubBridge 别名（防局部 slots 遮蔽），壳完成 slots 注册', () => {

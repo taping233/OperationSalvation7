@@ -290,7 +290,7 @@
     text-overflow: ellipsis; }
   .bag-slot.filled span { color: var(--gold); font-size: 10px; }
   .bag-slot.filled .tier { position: absolute; top: 2px; left: 2px; transform: scale(0.85); }
-  #overlay .card.bag-modal { width: min(1040px, 96%); max-height: 94vh; overflow-y: auto; text-align: left; }
+  #overlay .card.bag-modal { width: min(1040px, 96%); max-height: calc(var(--game-layout-height, 100vh) * 0.94); overflow-y: auto; text-align: left; }
   #overlay .card.bag-modal > h2 { text-align: center; }
 
   /* 背包全屏页（bagpage 模式）：独占整个画面，右上角大号关闭 ✕ */
@@ -303,12 +303,12 @@
       linear-gradient(180deg, #1d1d1d, #0c0c0c 78%); }
   #overlay .card.bag-page > h2 { display: none; }
   #overlay .card.bag-page #ovBody { flex: 1; min-height: 0; overflow-y: auto; }
-  .bag-view { max-width: 1440px; margin: 0 auto; padding: clamp(18px, 3.4vh, 34px) clamp(20px, 4vw, 56px) 28px; }
+  .bag-view { max-width: 1440px; margin: 0 auto; padding: clamp(18px, calc(var(--game-layout-height, 100vh) * 0.034), 34px) clamp(20px, calc(var(--game-layout-width, 100vw) * 0.04), 56px) 28px; }
   .bag-head { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 18px;
     padding: 2px 0 14px; margin-bottom: 6px;
     background: linear-gradient(180deg, rgba(28,28,28,.96) 72%, transparent); }
   .bag-head-info { flex: 1; min-width: 0; }
-  .bag-head-info h2 { font-size: clamp(20px, 2.6vw, 30px); letter-spacing: 4px; }
+  .bag-head-info h2 { font-size: clamp(20px, calc(var(--game-layout-width, 100vw) * 0.026000000000000002), 30px); letter-spacing: 4px; }
   .bag-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
   .bag-close { flex: 0 0 auto; width: 52px; height: 52px; border-radius: var(--radius-panel); cursor: pointer;
     display: flex; align-items: center; justify-content: center; color: #fff;
@@ -322,15 +322,14 @@
   .bag-side-card { background: rgba(255,255,255,.028); border: 1px solid rgba(171,171,171,.16);
     border-radius: var(--radius-panel); padding: 12px 14px; }
   .bag-side-card .hint { margin: 0 0 8px; }
-  .bag-side-card .pk-list { max-height: 26vh; overflow-y: auto; }
+  .bag-side-card .pk-list { max-height: calc(var(--game-layout-height, 100vh) * 0.26); overflow-y: auto; }
   /* 安全格移到右栏消耗口袋下方（2026-09-16 留言），网格按右栏宽度收窄 */
   .bag-side-card .bag-grid.safe-grid { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
-  @media (max-width: 1080px) { .bag-layout { grid-template-columns: 1fr; } .bag-side { position: static; } }
   .bag-view .bag-grid { grid-template-columns: repeat(auto-fill, minmax(92px, 116px)); gap: 10px;
     overflow: visible; max-height: none; align-items: start; }
   .bag-view .bag-slot { min-width: 0; aspect-ratio: 10 / 14; border-radius: var(--radius-panel); padding: 2px; }
   .bag-view .bag-slot:not(.card-slot):not(.safe-slot) { aspect-ratio: 10 / 14; }
-  .bag-view .bag-slot .hs-card { width: 10em; height: 14em; font-size: clamp(8.5px, .8vw, 10.5px);
+  .bag-view .bag-slot .hs-card { width: 10em; height: 14em; font-size: clamp(8.5px, calc(var(--game-layout-width, 100vw) * 0.008), 10.5px);
     max-width: 100%; max-height: 100%; box-shadow: 0 2px 5px rgba(0,0,0,.5); }
   .bag-view .bag-slot .flip-face { display: flex; align-items: center; justify-content: center; }
   .bag-view .bag-slot .stack-count { position: absolute; right: 2px; bottom: 2px; z-index: 5;
@@ -396,7 +395,7 @@
   #title .ak-pillrow { position: absolute; top: 20px; left: 162px; display: flex; gap: 14px; align-items: center; z-index: 5; }
   #title .ak-pillrow .ak-quickref { position: static; left: auto; top: auto; height: 58px; }
   /* W1-11：右键留言一次性提示——独立 body 层（不触 overlay 的 sameNode 不变量） */
-  .rmb-hint-toast { position: fixed; left: 50%; bottom: 6vh; transform: translateX(-50%); z-index: 60;
+  .rmb-hint-toast { position: fixed; left: 50%; bottom: calc(var(--game-layout-height, 100vh) * 0.06); transform: translateX(-50%); z-index: 60;
     padding: 10px 24px; border: none; border-left: 4px solid var(--ak-yellow); border-radius: 0;
     background: rgba(10, 12, 14, .94); color: var(--ak-white); clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%); font-size: 13px; letter-spacing: 1px;
     box-shadow: 0 8px 26px rgba(0, 0, 0, .45); pointer-events: none; opacity: 1; transition: opacity .6s; }

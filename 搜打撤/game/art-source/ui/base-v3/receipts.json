@@ -1,0 +1,407 @@
+{
+  "channel": "built-in image_gen",
+  "reference": "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png",
+  "jobs": [
+    {
+      "id": "warehouse",
+      "prompt": "Use case: stylized-concept. Asset type: painterly anime game UI icon, one separate icon. Use the attached woman ONLY as a brushwork/style reference; do not depict people or copy her identity, blue eyes, clothing, hair, roses, goggles or sword. Broad opaque angular color blocks, hard-edged cool charcoal gray shadow planes, visibly simplified hand-painted edges, restrained warm ochre-gold accents and cream highlights. Extremely low detail density with clear recognizable silhouette at 48px, no text, logo, border, badge backing, background, glow, fine patterns, photoreal textures, perfect vector curves or glossy 3D. Single isolated object centred, 10 percent transparent margin. Actual transparent alpha background. Subject: one sturdy dark wooden storage card case with lid slightly open, a neat bundle of large blank cream game cards standing inside. Simple iron corner brackets, one warm gold clasp. A broad readable box silhouette, 3/4 view. No labels or decorative symbols.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "transparent_background": true,
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-a0c0bb7b-7f9c-4a89-8f2e-254c2267bbb4.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-warehouse.png",
+      "outputPath": "game\\assets\\icons\\base-v3\\warehouse.webp",
+      "sha256": "d76393d53def511a2f584e527c5dbde3a821a7f7435e301e9771ecf25c536a03",
+      "rawBytes": 1464507,
+      "outputBytes": 36182,
+      "width": 480,
+      "height": 480,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visualReview": "passed"
+    },
+    {
+      "id": "expedition",
+      "prompt": "Use case: stylized-concept. Asset type: painterly anime game UI icon, one separate icon. Use the attached woman ONLY as a brushwork/style reference; do not depict people or copy her identity, blue eyes, clothing, hair, roses, goggles or sword. Broad opaque angular color blocks, hard-edged cool charcoal gray shadow planes, visibly simplified hand-painted edges, restrained warm ochre-gold accents and cream highlights. Extremely low detail density with clear recognizable silhouette at 48px, no text, logo, border, badge backing, background, glow, fine patterns, photoreal textures, perfect vector curves or glossy 3D. Single isolated object centred, 10 percent transparent margin. Actual transparent alpha background. Subject: one short weathered expedition pennant on a stout spear-like pole, dark gray pennant with one broad warm gold horizontal band, behind a simple iron straight blade in a compact crossed composition. Shapes broad and strong, no text or insignia.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "transparent_background": true,
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-2fb74d99-9b3d-4650-b31d-0d2583282cea.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-expedition.png",
+      "outputPath": "game\\assets\\icons\\base-v3\\expedition.webp",
+      "sha256": "d111d53cb0607810fc84b10e3c8e20204807be743b1a4bac92d8b2e03d80f46a",
+      "rawBytes": 899227,
+      "outputBytes": 36948,
+      "width": 474,
+      "height": 480,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visualReview": "passed"
+    },
+    {
+      "id": "companion-dog",
+      "prompt": "Use case: precise-object-edit. This attached dog illustration is the edit target. Change ONLY both bright blue iris colors to warm medium chestnut BROWN; retain their anime eye shape and expressive highlights. Remove ALL visible white canine teeth/fangs from its cheerful open mouth, giving it a natural dog smile with the same pink tongue. Preserve the accepted gray-and-white floppy-eared puppy design, seated full-body pose, raised front paw, curled bushy tail, warm gold collar, painterly anime low-detail block brushwork, every body proportion, transparent background and composition. No new accessories, no blue or cyan eye areas, no fangs. Output actual transparent alpha.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/generated_images/01a1262b-3e67-7cc1-b01a-b2d682ca5e07/exec-cb193611-a2cd-4503-af9f-df4b035ec457.png"
+      ],
+      "transparent_background": true,
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-f3f197a0-c2c4-479a-a326-6e3e97c6bf7a.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-companion-dog.png",
+      "outputPath": "game\\assets\\icons\\base-v3\\companion-dog.webp",
+      "sha256": "f614f45cfa8f7d40fc057ebd2c50650fb332ea43f8d03c663ba7197a88f30722",
+      "rawBytes": 1268246,
+      "outputBytes": 70366,
+      "width": 720,
+      "height": 720,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visualReview": "passed"
+    },
+    {
+      "id": "wood",
+      "prompt": "Use case: stylized-concept. One individual painterly anime game resource UI icon, actual transparent alpha background. Input image 1 (wood card chest) establishes this icon family's economy of shapes and cold charcoal gray shadows with warm muted gold/ochre and cream highlights. Input image 2 (woman) is ONLY a brushwork reference, never depict her or her identity. Broad opaque angular color masses, a few hard-edged shadow planes, loose human-painted edges and visible simplified broad brush marks. Extremely low detail density, instantly readable silhouette at 40px. Single centred object filling roughly 80 percent canvas, generous transparent edge margin. No text, logo, decorative border, badge backing, glowing effects, patterns, photoreal texture, perfect vector curves or glossy 3D. Subject: a compact bundle of three broad split timber blocks secured by one dark cloth strap. Warm muted ochre cut ends, cold dark brown side planes, a few broad cream paint marks. Clear timber silhouette, no tiny woodgrain.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/generated_images/01a12694-5880-7772-b8e4-e82839182e5c/exec-a0c0bb7b-7f9c-4a89-8f2e-254c2267bbb4.png",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "transparent_background": true,
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-4cc8d2de-455b-4e18-9989-fef751f4b5c7.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-wood.png",
+      "outputPath": "game\\assets\\icons\\base-v3\\wood.webp",
+      "sha256": "da20d995b4933ddddcff737d3791d61caf6fda65b97c06257e68bc8e7f66f56b",
+      "rawBytes": 1327102,
+      "outputBytes": 33590,
+      "width": 480,
+      "height": 480,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visualReview": "passed"
+    },
+    {
+      "id": "rations",
+      "prompt": "Use case: stylized-concept. One individual painterly anime game resource UI icon, actual transparent alpha background. Input image 1 (wood card chest) establishes this icon family's economy of shapes and cold charcoal gray shadows with warm muted gold/ochre and cream highlights. Input image 2 (woman) is ONLY a brushwork reference, never depict her or her identity. Broad opaque angular color masses, a few hard-edged shadow planes, loose human-painted edges and visible simplified broad brush marks. Extremely low detail density, instantly readable silhouette at 40px. Single centred object filling roughly 80 percent canvas, generous transparent edge margin. No text, logo, decorative border, badge backing, glowing effects, patterns, photoreal texture, perfect vector curves or glossy 3D. Subject: a single sturdy cream canvas ration sack tied at neck with a broad charcoal cord, a few broad ochre grain heads tucked at the tied opening. Keep sack bulky simple and readable, no stitched letters or symbols.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/generated_images/01a12694-5880-7772-b8e4-e82839182e5c/exec-a0c0bb7b-7f9c-4a89-8f2e-254c2267bbb4.png",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "transparent_background": true,
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-440ac401-b988-4803-b2fb-c30368f7869c.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-rations.png",
+      "outputPath": "game\\assets\\icons\\base-v3\\rations.webp",
+      "sha256": "4b456f180552238eb09e41a09cc8af44c119ef784963062173441b90c18608dc",
+      "rawBytes": 1722711,
+      "outputBytes": 51092,
+      "width": 480,
+      "height": 480,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visualReview": "passed"
+    },
+    {
+      "id": "key",
+      "prompt": "Use case: stylized-concept. One individual painterly anime game resource UI icon, actual transparent alpha background. Input image 1 (wood card chest) establishes this icon family's economy of shapes and cold charcoal gray shadows with warm muted gold/ochre and cream highlights. Input image 2 (woman) is ONLY a brushwork reference, never depict her or her identity. Broad opaque angular color masses, a few hard-edged shadow planes, loose human-painted edges and visible simplified broad brush marks. Extremely low detail density, instantly readable silhouette at 40px. Single centred object filling roughly 80 percent canvas, generous transparent edge margin. No text, logo, decorative border, badge backing, glowing effects, patterns, photoreal texture, perfect vector curves or glossy 3D. Subject: a single simple old iron key on a diagonal, one large round bow, thick dark shaft with two broad key teeth, muted warm gold bow highlight. Recognizable key silhouette and only a few big facets. No decorative engravings.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/generated_images/01a12694-5880-7772-b8e4-e82839182e5c/exec-a0c0bb7b-7f9c-4a89-8f2e-254c2267bbb4.png",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "transparent_background": true,
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-c3378288-f66a-4503-a1f2-590c7cd9012e.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-key.png",
+      "outputPath": "game\\assets\\icons\\base-v3\\key.webp",
+      "sha256": "608f9b446f3813c9ce1e53ef248d1ebf295c472399ebc144ba7f93a2ac8bac77",
+      "rawBytes": 738906,
+      "outputBytes": 25462,
+      "width": 480,
+      "height": 480,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visualReview": "passed"
+    },
+    {
+      "id": "coin",
+      "prompt": "Use case: stylized-concept. One individual painterly anime game resource UI icon, actual transparent alpha background. Input image 1 (wood card chest) establishes this icon family's economy of shapes and cold charcoal gray shadows with warm muted gold/ochre and cream highlights. Input image 2 (woman) is ONLY a brushwork reference, never depict her or her identity. Broad opaque angular color masses, a few hard-edged shadow planes, loose human-painted edges and visible simplified broad brush marks. Extremely low detail density, instantly readable silhouette at 40px. Single centred object filling roughly 80 percent canvas, generous transparent edge margin. No text, logo, decorative border, badge backing, glowing effects, patterns, photoreal texture, perfect vector curves or glossy 3D. Subject: two broad warm muted gold reserve coins overlapping slightly, front coin has one plain square centre hole. Thick charcoal side plane and two cream highlight patches. No words, numbers, stamped image, ornate trim or detailed metal reflections.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/generated_images/01a12694-5880-7772-b8e4-e82839182e5c/exec-a0c0bb7b-7f9c-4a89-8f2e-254c2267bbb4.png",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "transparent_background": true,
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-1201f542-8212-4f2f-8ba2-f993ec85300f.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-coin.png",
+      "outputPath": "game\\assets\\icons\\base-v3\\coin.webp",
+      "sha256": "66c94e1f9185e20e816cefa7ff4b0479dfa8a99032d423f404712fd71cda0c2d",
+      "rawBytes": 1383768,
+      "outputBytes": 32950,
+      "width": 480,
+      "height": 480,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visualReview": "passed"
+    },
+    {
+      "id": "base-home-v1",
+      "prompt": "Use case: stylized-concept. Asset type: widescreen 16:9 anime game base homepage environment, no UI and no people. The attached woman reference is ONLY for economical opaque painterly brushwork, never her identity or outfit. A spacious quiet expeditioners' winter refuge interior, a warm lit reading/rest hall, one generous tall window at the right showing a cold gray snow night and vague distant trees. A glowing warm table lamp creates the clear main focus around centre-right on a simple wood reading desk with two large books, a plain teacup and an easy chair with a loosely folded blanket; one low dark wooden storage cupboard is enough. Strong coherent architecture, broad wall and floor planes, high ceiling, comfortably lived-in rather than ornate luxury. Calm LEFT half and lower-left are mostly open shadowed wall/floor space for interface entrances to be overlaid later; keep visual focus to right. Wide room shown from human eye-level, believable geometry and deliberate negative space. Hand-painted anime background, low detail density, large opaque angular color blocks, hard-edged light and shadows, visible simplified loose brushwork. Cold charcoal gray and muted ink-blue shadows, restrained warm golden lamp pool and creamy highlights; clear readable midtones. Absolutely no characters, animals, text, letters, logos, borders, interface, machinery or extra narrative props. No photoreal textures, heavy airbrush blur, glossy 3D, thin detailed lineart, decorative clutter or crowded shelves.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "transparent_background": false,
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-10dc1600-180f-445c-8efa-29ae49ddae12.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-base-home-v1.png",
+      "outputPath": "game\\assets\\icons\\base-v3\\base-home-v1.webp",
+      "sha256": "80b67680bfd6bc59652caa5a813f2660f6412ae9bac6bf22bf1ee4192c9c3278",
+      "rawBytes": 1892186,
+      "outputBytes": 130752,
+      "width": 1672,
+      "height": 941,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "visualReview": "passed"
+    },
+    {
+      "id": "personnel",
+      "prompt": "Use case: stylized-concept. One individual painterly anime game navigation/resource UI icon, actual transparent alpha background. Reference image 1 (card chest) is ONLY for this icon family's style: broad opaque angular paint shapes, hard-edged cool charcoal gray shadow planes, restrained muted warm gold/ochre and cream highlights, loose hand-painted edges, low detail density. Reference image 2 (woman) is only for brushwork; never copy her identity or appearance. Single strong isolated silhouette in 3/4 view, about 80 percent of canvas, generous clear margin, readable at 48px. No text, letters, logos, border, badge backing unrelated to object, background, glowing effects, dense patterns, photographic texture, glossy 3D or mechanical vector outlines. Subject: one dark gray personnel ID folio with two stacked cream document corners, a large plain silver head-and-shoulders bust medallion inset into its front, and one simple warm gold clip. Generic neutral silver silhouette without face or hairstyle, no blue details. Only a few broad folds.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/generated_images/01a12694-5880-7772-b8e4-e82839182e5c/exec-a0c0bb7b-7f9c-4a89-8f2e-254c2267bbb4.png",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "transparent_background": true,
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-a0a05627-bbbf-4277-b1b6-4efb3c9e12ac.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-personnel.png",
+      "outputPath": "game\\assets\\icons\\base-v3\\personnel.webp",
+      "sha256": "13a6143eab849296adb444d3ca691b73383e0aaac742fdcfa25064d424450368",
+      "rawBytes": 1526833,
+      "outputBytes": 33640,
+      "width": 480,
+      "height": 480,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visualReview": "passed"
+    },
+    {
+      "id": "shop",
+      "prompt": "Use case: stylized-concept. One individual painterly anime game navigation/resource UI icon, actual transparent alpha background. Reference image 1 (card chest) is ONLY for this icon family's style: broad opaque angular paint shapes, hard-edged cool charcoal gray shadow planes, restrained muted warm gold/ochre and cream highlights, loose hand-painted edges, low detail density. Reference image 2 (woman) is only for brushwork; never copy her identity or appearance. Single strong isolated silhouette in 3/4 view, about 80 percent of canvas, generous clear margin, readable at 48px. No text, letters, logos, border, badge backing unrelated to object, background, glowing effects, dense patterns, photographic texture, glossy 3D or mechanical vector outlines. Subject: one compact charcoal brown leather supply purse with drawstring neck tilted slightly, three large warm muted gold coins at its base, one cream fold highlight. Different from cream canvas rations sack, broad dark pouch and gold coins provide recognizable shop silhouette.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/generated_images/01a12694-5880-7772-b8e4-e82839182e5c/exec-a0c0bb7b-7f9c-4a89-8f2e-254c2267bbb4.png",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "transparent_background": true,
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-b3c2d4c4-12ed-46b5-859c-0b063b0901fb.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-shop.png",
+      "outputPath": "game\\assets\\icons\\base-v3\\shop.webp",
+      "sha256": "8760b8838ae82a546752ae3ab84260fecd128f69175d417f14e575786a438272",
+      "rawBytes": 1448699,
+      "outputBytes": 36562,
+      "width": 480,
+      "height": 480,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visualReview": "passed"
+    },
+    {
+      "id": "archive",
+      "prompt": "Use case: stylized-concept. One individual painterly anime game navigation/resource UI icon, actual transparent alpha background. Reference image 1 (card chest) is ONLY for this icon family's style: broad opaque angular paint shapes, hard-edged cool charcoal gray shadow planes, restrained muted warm gold/ochre and cream highlights, loose hand-painted edges, low detail density. Reference image 2 (woman) is only for brushwork; never copy her identity or appearance. Single strong isolated silhouette in 3/4 view, about 80 percent of canvas, generous clear margin, readable at 48px. No text, letters, logos, border, badge backing unrelated to object, background, glowing effects, dense patterns, photographic texture, glossy 3D or mechanical vector outlines. Subject: a single thick open archive ledger with dark charcoal gray hard cover, broad cream pages, and one simple muted warm gold ribbon bookmark. Blank pages, no handwriting, no small page lines or printed patterns. Strong book silhouette.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/generated_images/01a12694-5880-7772-b8e4-e82839182e5c/exec-a0c0bb7b-7f9c-4a89-8f2e-254c2267bbb4.png",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "transparent_background": true,
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-a44108e7-9180-42d6-adc1-435c62cf1a67.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-archive.png",
+      "outputPath": "game\\assets\\icons\\base-v3\\archive.webp",
+      "sha256": "09b7f2aa44af69e148a77f92aeae7dd5e70a2a17a949c80b8c760f1093e1a014",
+      "rawBytes": 1293257,
+      "outputBytes": 32222,
+      "width": 480,
+      "height": 480,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visualReview": "passed"
+    },
+    {
+      "id": "rune",
+      "prompt": "Use case: stylized-concept. One individual painterly anime game navigation/resource UI icon, actual transparent alpha background. Reference image 1 (card chest) is ONLY for this icon family's style: broad opaque angular paint shapes, hard-edged cool charcoal gray shadow planes, restrained muted warm gold/ochre and cream highlights, loose hand-painted edges, low detail density. Reference image 2 (woman) is only for brushwork; never copy her identity or appearance. Single strong isolated silhouette in 3/4 view, about 80 percent of canvas, generous clear margin, readable at 48px. No text, letters, logos, border, badge backing unrelated to object, background, glowing effects, dense patterns, photographic texture, glossy 3D or mechanical vector outlines. Subject: one chunky smoky charcoal gray crystal with broad angular facets, a muted warm gold crack/inlay cutting across its centre and two cream edge highlights. A single crystal point, no complex runes, no words, no glowing halo or particles.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/generated_images/01a12694-5880-7772-b8e4-e82839182e5c/exec-a0c0bb7b-7f9c-4a89-8f2e-254c2267bbb4.png",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "transparent_background": true,
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-4375fc09-8355-4d03-83d7-ec3368962d6c.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-rune.png",
+      "outputPath": "game\\assets\\icons\\base-v3\\rune.webp",
+      "sha256": "1c0761ea060496f6038811756ead66100f788b8550bdef3f987829cf9c8de777",
+      "rawBytes": 1137146,
+      "outputBytes": 25160,
+      "width": 480,
+      "height": 480,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visualReview": "passed"
+    },
+    {
+      "id": "companion-cat",
+      "prompt": "Use case: stylized-concept. Asset type: full-body anime game companion illustration on actual transparent alpha background, NOT a UI icon or flat emblem. Reference image 1 is the accepted gray/white puppy only for art style, expressive economical anime face and hard-edged brushwork, not for species, markings, pose or accessories. Reference image 2 (woman) is only a retained style reference: loose opaque broad angular paint masses, clear hard-edged gray shadow planes, low detail density and sparse purposeful highlights. NEVER copy woman's blue eyes, fangs, human hairstyle, roses, ribbon, goggles, outfit, sword or other identity. Natural recognizable animal/mechanical anatomy, complete uncropped full body and clear readable silhouette, lively restrained anime expression, slightly stylized proportions, cool gray shadows, localized subject-appropriate colors. No characters other than specified companion, no circle frame, decorative glyphs, words, logos, flat vector outline, photographic fur/feathers, glossy 3D, haze or intense light halo. Generous transparent margin around complete subject. Subject: 招财猫, a lively cream-and-warm-ginger domestic cat with dark warm AMBER eyes, compact fluffy body, sitting in 3/4 view and raising its right front paw in a welcoming beckoning pose; the other front paw rests naturally. A simple muted vermilion cord collar holds one small warm gold coin with a plain centre hole. Tail curls beside its body. Normal closed cat smile, no visible teeth/fangs. Feline face and rounded triangular ears, paws anatomically feline. Fur summarized into 5-7 broad color masses, not detailed wisps.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/generated_images/01a12694-5880-7772-b8e4-e82839182e5c/exec-f3f197a0-c2c4-479a-a326-6e3e97c6bf7a.png",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "transparent_background": true,
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-5d4dd3b4-655d-4710-ba7c-c31072790268.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-companion-cat.png",
+      "outputPath": "game\\assets\\icons\\base-v3\\companion-cat.webp",
+      "sha256": "c68e4771d507c596696ac7bcf2f0476f4da4d9ac4e7c279ea67fa22fe92fa961",
+      "rawBytes": 1414632,
+      "outputBytes": 78568,
+      "width": 658,
+      "height": 720,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visualReview": "passed"
+    },
+    {
+      "id": "companion-falcon",
+      "prompt": "Use case: stylized-concept. Asset type: full-body anime game companion illustration on actual transparent alpha background, NOT a UI icon or flat emblem. Reference image 1 is the accepted gray/white puppy only for art style, expressive economical anime face and hard-edged brushwork, not for species, markings, pose or accessories. Reference image 2 (woman) is only a retained style reference: loose opaque broad angular paint masses, clear hard-edged gray shadow planes, low detail density and sparse purposeful highlights. NEVER copy woman's blue eyes, fangs, human hairstyle, roses, ribbon, goggles, outfit, sword or other identity. Natural recognizable animal/mechanical anatomy, complete uncropped full body and clear readable silhouette, lively restrained anime expression, slightly stylized proportions, cool gray shadows, localized subject-appropriate colors. No characters other than specified companion, no circle frame, decorative glyphs, words, logos, flat vector outline, photographic fur/feathers, glossy 3D, haze or intense light halo. Generous transparent margin around complete subject. Subject: 猎鹰宝宝, a young falcon with broad dark brown back/wing feather masses, cream chest and face planes, warm BROWN eyes, ochre hooked beak and two sturdy taloned feet. A jaunty hopping/perching full-body pose on no prop, one wing slightly open with 4 broad grouped feather shapes, compact folded other wing and coherent short striped tail. Cute earnest anime animal expression while remaining clearly a falcon, no clothing, no collars, no teeth. Complete bird anatomy with only economical feather group shapes.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/generated_images/01a12694-5880-7772-b8e4-e82839182e5c/exec-f3f197a0-c2c4-479a-a326-6e3e97c6bf7a.png",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "transparent_background": true,
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-c6310cc4-17dd-41b9-91dd-46a66a399527.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-companion-falcon.png",
+      "outputPath": "game\\assets\\icons\\base-v3\\companion-falcon.webp",
+      "sha256": "45c3d5b14dc0b98710f202cc89ca8a332f7578e676f166958d402216957c0c42",
+      "rawBytes": 1322756,
+      "outputBytes": 74142,
+      "width": 650,
+      "height": 720,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visualReview": "passed"
+    },
+    {
+      "id": "companion-robot",
+      "prompt": "Use case: stylized-concept. Asset type: full-body anime game companion illustration on actual transparent alpha background, NOT a UI icon or flat emblem. Reference image 1 is the accepted gray/white puppy only for art style, expressive economical anime face and hard-edged brushwork, not for species, markings, pose or accessories. Reference image 2 (woman) is only a retained style reference: loose opaque broad angular paint masses, clear hard-edged gray shadow planes, low detail density and sparse purposeful highlights. NEVER copy woman's blue eyes, fangs, human hairstyle, roses, ribbon, goggles, outfit, sword or other identity. Natural recognizable animal/mechanical anatomy, complete uncropped full body and clear readable silhouette, lively restrained anime expression, slightly stylized proportions, cool gray shadows, localized subject-appropriate colors. No characters other than specified companion, no circle frame, decorative glyphs, words, logos, flat vector outline, photographic fur/feathers, glossy 3D, haze or intense light halo. Generous transparent margin around complete subject. Subject: 变形机器人, a compact friendly mechanical companion with a charcoal gray rounded rectangular head and pale gray panelled body, warm muted ochre hinge accents and a tiny plain antenna on top. One dark visor panel shows two simple AMBER eye shapes, no blue lights. Complete full body with two articulated arms and two short sturdy legs with broad feet. One hand raised in a friendly greeting, other held naturally at side, standing in a slight 3/4 lean. Recognizable simple transformable toy-mecha construction with only a few broad seams and coherent connected joints, not a real industrial robot, no weapon, no logos, no written displays, no shiny chrome. Opaque painterly gray planes and warm small accents.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/generated_images/01a12694-5880-7772-b8e4-e82839182e5c/exec-f3f197a0-c2c4-479a-a326-6e3e97c6bf7a.png",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "transparent_background": true,
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-ce4615ac-e450-489e-93d3-86f71afc6600.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-companion-robot.png",
+      "outputPath": "game\\assets\\icons\\base-v3\\companion-robot.webp",
+      "sha256": "4268387b89cb3b56ee007e7378360b9723de6d62471e8845dc3b41e0b5640908",
+      "rawBytes": 1205730,
+      "outputBytes": 71922,
+      "width": 600,
+      "height": 720,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visualReview": "passed"
+    },
+    {
+      "id": "rejected-companion-fire-v1",
+      "prompt": "Use case: stylized-concept. Asset type: full-body anime game companion illustration on actual transparent alpha background, NOT a UI icon or flat emblem. Reference image 1 is the accepted gray/white puppy only for art style, expressive economical anime face and hard-edged brushwork, not for species, markings, pose or accessories. Reference image 2 (woman) is only a retained style reference: loose opaque broad angular paint masses, clear hard-edged gray shadow planes, low detail density and sparse purposeful highlights. NEVER copy woman's blue eyes, fangs, human hairstyle, roses, ribbon, goggles, outfit, sword or other identity. Natural recognizable animal/mechanical anatomy, complete uncropped full body and clear readable silhouette, lively restrained anime expression, slightly stylized proportions, cool gray shadows, localized subject-appropriate colors. No characters other than specified companion, no circle frame, decorative glyphs, words, logos, flat vector outline, photographic fur/feathers, glossy 3D, haze or intense light halo. Generous transparent margin around complete subject. Subject: 火焰精灵, a small living flame creature with an expressive cute anime face and two small flame-arm shapes, complete tapered floating flame body ending in one compact flame tip. Its whole silhouette is an asymmetrical fire droplet with 4-5 broad outward flame tongues, not an animal or human. Broad warm burnt-orange outer planes, muted scarlet shadow planes, pale cream-yellow inner face/body shapes, two dark warm BROWN eyes and a small happy closed curved mouth. One flame arm reaches outward playfully. Actual opaque painted shapes with crisp edges, no aura, no glowing halo, no surrounding floating particles or transparent flame haze. Use the references only for brushwork economy, never dog fur or woman's face/clothes.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/generated_images/01a12694-5880-7772-b8e4-e82839182e5c/exec-f3f197a0-c2c4-479a-a326-6e3e97c6bf7a.png",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "transparent_background": true,
+      "status": "rejected",
+      "reason": "Diffuse orange glow and opaque background violate transparent hard-edge constraint.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-6f392af8-8314-4fa0-b96c-011b0abeaa7b.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-rejected-companion-fire-v1.png",
+      "sha256": "38d567cb7e525b90b5132afbcadf774f65274cff1feb757e795b7d94a5fbfaa7",
+      "rawBytes": 1710670,
+      "visualReview": "rejected"
+    },
+    {
+      "id": "companion-penguin",
+      "prompt": "Use case: stylized-concept. Asset type: full-body anime game companion illustration on actual transparent alpha background, NOT a UI icon or flat emblem. Reference image 1 is the accepted gray/white puppy only for art style, expressive economical anime face and hard-edged brushwork, not for species, markings, pose or accessories. Reference image 2 (woman) is only a retained style reference: loose opaque broad angular paint masses, clear hard-edged gray shadow planes, low detail density and sparse purposeful highlights. NEVER copy woman's blue eyes, fangs, human hairstyle, roses, ribbon, goggles, outfit, sword or other identity. Natural recognizable animal/mechanical anatomy, complete uncropped full body and clear readable silhouette, lively restrained anime expression, slightly stylized proportions, cool gray shadows, localized subject-appropriate colors. No characters other than specified companion, no circle frame, decorative glyphs, words, logos, flat vector outline, photographic fur/feathers, glossy 3D, haze or intense light halo. Generous transparent margin around complete subject. Subject: 小企鹅咕嘎, a young round black-and-cream-white penguin with natural dark BROWN eyes, short ochre beak and two ochre webbed feet. Complete full body, waddling in a gentle 3/4 step, one rounded flipper raised in greeting and other by side, a single broad muted mustard scarf loosely wrapped around its neck with two short ends. Cream belly has three broad cool gray shadow planes; black back/flippers described with only a few charcoal facets. Cute earnest anime bird expression, no teeth/fangs, no ears, no blue eyes, no head accessories. Preserve actual penguin anatomy and clearly separate both feet, no props or ground disc.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/generated_images/01a12694-5880-7772-b8e4-e82839182e5c/exec-f3f197a0-c2c4-479a-a326-6e3e97c6bf7a.png",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "transparent_background": true,
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-f5223139-526e-4dda-a0ea-b724ef0a74fc.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-companion-penguin.png",
+      "outputPath": "game\\assets\\icons\\base-v3\\companion-penguin.webp",
+      "sha256": "5f741623eefdf88932aa07b4e5cca8dd8009d75aef47c8586b3d199890e0926d",
+      "rawBytes": 1221312,
+      "outputBytes": 50694,
+      "width": 600,
+      "height": 720,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visualReview": "passed"
+    },
+    {
+      "id": "rejected-companion-fire-v2",
+      "prompt": "Use case: background-extraction / precise-object-edit. The attached image is the edit target, a painterly anime flame spirit. Remove the entire black/red background AND ALL diffuse orange/red glow outside the solid flame creature. Output a genuinely transparent alpha background, no aura and no translucent flame haze around edges. Preserve the solid orange/red/cream hard-edged painted body silhouette and expressive chestnut brown anime eyes and happy mouth. Maintain large opaque brushwork planes and anatomy with two little flame arms and one tapered body tip. Reframe the complete figure to fit inside the canvas with at least 8 percent transparent margin on all sides; the highest flame tip must be fully inside canvas. Do not crop any flame tip. Do not add anything or repaint into glossy 3D. Only opaque hard-edged flame shapes constitute the creature. Nothing else may exist outside its silhouette.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/generated_images/01a12694-5880-7772-b8e4-e82839182e5c/exec-6f392af8-8314-4fa0-b96c-011b0abeaa7b.png"
+      ],
+      "transparent_background": true,
+      "status": "rejected",
+      "reason": "Background edit retained diffuse aura.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-3b810da0-1594-4452-98df-5598cadcb861.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-rejected-companion-fire-v2.png",
+      "sha256": "1a0e88fc7e26f83a480db1e8c29fc5a1972d51e5f271f992c93374560e1083d9",
+      "rawBytes": 1685262,
+      "visualReview": "rejected"
+    },
+    {
+      "id": "companion-fire",
+      "prompt": "Use case: stylized-concept. Generate a new full-body painterly anime flame companion. ACTUAL TRANSPARENT ALPHA BACKGROUND. A small compact adorable flame spirit, represented by a SOLID OPAQUE matte PAINTED silhouette with three large pointed flame lobes forming its head/body and two short solid flame-arm lobes; a single short taper at bottom. The whole complete creature is centred and fully inside a square canvas with 15 percent empty transparent margin. Cream-yellow central face, muted ochre/gold light planes and burnt-orange hard-edged shadow planes. A few strong broad angular color masses only. Two small warm dark-brown anime eyes with restrained single white highlights, a tiny curved smile, independent nonhuman elemental identity. No fur, no animal ears, no hair, no human accessories or costume. Input image 1 (puppy) is ONLY a style reference for economical matte anime painting and expressive face, never species or design. Input image 2 (woman) is ONLY for opaque brushwork and low detail density, never her blue eyes, fangs, clothing, hair or accessories. Preserve broad hard-edged opaque brush shapes and loose painted edges. The complete outline is sharply bounded; there is absolutely NO glow, aura, halo, gradient, haze, smoke, particles, emissive lighting, semitransparent fire, solid background or ground anywhere. No circles or frames. No photographic flame, glossy 3D, pixel art or vector outline. A calm painted game creature, designed for compositing directly on any dark or light UI background.",
+      "referenced_image_paths": [
+        "C:/Users/太平/.codex/generated_images/01a12694-5880-7772-b8e4-e82839182e5c/exec-f3f197a0-c2c4-479a-a326-6e3e97c6bf7a.png",
+        "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+      ],
+      "transparent_background": true,
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a12694-5880-7772-b8e4-e82839182e5c\\exec-d7d8d962-fc05-43db-bef9-bfca77bc61a2.png",
+      "rawPath": "game\\art-source\\ui\\base-v3\\raw-companion-fire.png",
+      "outputPath": "game\\assets\\icons\\base-v3\\companion-fire.webp",
+      "sha256": "90c2386ab7620b4e57268e775664ccab45d26abe2a914ada6b35eba8c2a7aac6",
+      "rawBytes": 973115,
+      "outputBytes": 61600,
+      "width": 720,
+      "height": 720,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visualReview": "passed"
+    }
+  ]
+}

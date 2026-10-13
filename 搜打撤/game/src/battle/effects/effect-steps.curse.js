@@ -62,7 +62,7 @@ export function curseSteps(s) {
         when: (ctx) => (typeof handCurseSpecs === 'function' && /附加手牌中的招式所具有的全部诅咒/.test(ctx.desc)) ? true : null,
         run: (ctx) => {
           const specs = handCurseSpecs();
-          const ct = (ctx.target && !ctx.target.dead) ? ctx.target : (getAlive()[0] || null);
+          const ct = ctx.target ? (ctx.target.dead ? null : ctx.target) : (getAlive()[0] || null);
           if (specs.length && ct) {
             const names = specs.map(s => {
               const meta = combat.CURSE_META[s.key];
@@ -71,7 +71,7 @@ export function curseSteps(s) {
             }).join('、');
             log(`[[icon:skull]] <b>${esc(ctx.card.name)}</b>：附加手牌招式的诅咒 → <b>${esc(ct.name)}</b>：${names}`, 'sys');
           } else {
-            log(`[[icon:cross]] <b>${esc(ctx.card.name)}</b>：手牌中没有带诅咒的招式`, 'dim');
+            log(`[[icon:cross]] <b>${esc(ctx.card.name)}</b>：${ctx.target?.dead ? '原目标已倒下，后续诅咒跳过' : '手牌中没有带诅咒的招式'}`, 'dim');
           }
           ctx.did = true;
         },

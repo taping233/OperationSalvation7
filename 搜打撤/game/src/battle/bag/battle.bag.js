@@ -283,7 +283,11 @@ export function createBattleBag({
   // 牧师翻面态按战斗实例令牌键控（lifecycle 每场 createBattleState 递增 token）：
   // 新一场自动复位；本局翻一次后固定；读档从本场开头重开 = 新 token，同样复位。
   let slamFlipToken = 0;
-  function slamSkill() { return slamSkillFor(G ? G.myClass : null, slamFlipToken === battleState.token); }
+  let slamUsedToken = -1, slamUsedTurn = -1;
+  function slamSkill() {
+    return { ...slamSkillFor(G ? G.myClass : null, slamFlipToken === battleState.token),
+      used: slamUsedToken === battleState.token && slamUsedTurn === getTurn() };
+  }
   // 伤害类型按 kind 走现有结算链（Combat.dealDamage）：刺客=固定伤；战士=攻击（同初始攻击结算链，
   // 吃攻/攻升/流血）；降临者火球与牧师翻面=法伤（同深渊降焰 consumeFireballSteps 口径，吃法伤加成）
   const SLAM_DAMAGE_TYPE = {
@@ -296,6 +300,7 @@ export function createBattleBag({
     if (busy || infusing || discovering || choosing || handSelecting || viewingGrave || selectingDeck) return;
     if (interactionOf('slam')) { cancelSlam(); return; }
     const skill = slamSkill();
+    if (skill.used) { G.log('本回合技能已使用', 'warn'); return; }
     if (energy < skill.cost) { G.log(`[[icon:bolt]] 能量不足：${esc(skill.name)}需要 ${skill.cost} 点能量`, 'warn'); return; }
     if (!skill.needsTarget) { resolveSlamSkill(null); return; }   // 无目标技能（法师搜刮/牧师圣疗）点击即结算
     if (!alive().length) { G.log(`[[icon:cross]] 场上没有敌人可以使用${esc(skill.name)}`, 'warn'); return; }
@@ -369,6 +374,7 @@ export function createBattleBag({
   function resolveSlamSkill(side) {
     if (busy) return;
     const skill = slamSkill();
+    if (skill.used) { requestBattleRender(); return; }
     if (energy < skill.cost) { G.log(`[[icon:bolt]] 能量不足：${esc(skill.name)}需要 ${skill.cost} 点能量`, 'warn'); requestBattleRender(); return; }
     const t = skill.needsTarget ? (side != null ? foes[+side] : null) : null;
     if (skill.needsTarget && (!t || t.dead)) {
@@ -379,8 +385,14 @@ export function createBattleBag({
     clearTargetSession();
     queueBattleAction(async signal => {
       throwIfActionCancelled(signal);
-      if (skill.kind === 'heal') { resolveSlamHeal(skill); requestBattleRender(); return; }
-      if (skill.kind === 'acquire') { resolveSlamAcquire(skill); requestBattleRender(); return; }
+      if (slamUsedToken === battleState.token && slamUsedTurn === getTurn()) return;
+      if (skill.kind === 'heal' || skill.kind === 'acquire') {
+        if (energy < skill.cost) { requestBattleRender(); return; }
+        slamUsedToken = battleState.token; slamUsedTurn = getTurn();
+        if (skill.kind === 'heal') resolveSlamHeal(skill);
+        else resolveSlamAcquire(skill);
+        requestBattleRender(); return;
+      }
       const aliveBefore = alive().length;   // 击杀奖励总账（技能击杀也计饮血剑，对齐 resolveDart）
       const struck = await runStagedSteps(singleTargetHitSteps(t, () => {
         if (energy < skill.cost) {
@@ -388,6 +400,8 @@ export function createBattleBag({
           return false;
         }
         set$energy(energy - skill.cost);
+        // 点选取消、目标失效或前摇取消不占次数；实际扣费才算本回合使用。
+        slamUsedToken = battleState.token; slamUsedTurn = getTurn();
         SDT.Sound.sfx('strike');
         const hpBefore = t.hp;
         const shieldBefore = t.defense?.shield || 0;

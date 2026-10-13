@@ -15,13 +15,13 @@
 | 角色 | id | 职业 | 立绘 | 人设状态 |
 |---|---|---|---|---|
 | [无](wu.md) | wu | 侠客 | [ref-images/wu.webp](ref-images/wu.webp) | 外观锚点与选人立绘已更新（2026-10-09 老板确认）；性格背景待老板提供 |
-| [常无欲](changwuyu.md) | changwuyu | 降临者 | [ref-images/changwuyu.webp](ref-images/changwuyu.webp) | 角色参考见本页现行段；卡面工作状态查对应任务，性格背景待老板提供 |
-| [白塔](baita.md) | baita | 法师 | [ref-images/baita.webp](ref-images/baita.webp) | **外观锚点已定稿并入库**（09-19 painterly 全身立绘，老板授权 Friday 定锚点）；性格背景待老板提供 |
-| [黑像](heixiang.md) | heixiang | 战士 | [ref-images/heixiang.webp](ref-images/heixiang.webp) | **外观锚点已定稿并入库**（09-12 白底喝咖啡赛璐璐大图验收）；性格背景待老板提供 |
-| [星月](xingyue.md) | xingyue | 牧师 | [ref-images/xingyue.webp](ref-images/xingyue.webp) | **外观锚点已定稿并入库**（09-12 赛璐璐大图验收）；性格背景待老板提供 |
+| [常无欲](changwuyu.md) | changwuyu | 降临者 | [ref-images/changwuyu.webp](ref-images/changwuyu.webp) | 10-13 竖版立绘已替换；卡面工作状态查对应任务，性格背景待老板提供 |
+| [白塔](baita.md) | baita | 法师 | [ref-images/baita.webp](ref-images/baita.webp) | 10-13 竖版立绘已替换，坐姿与身份锚点保留；性格背景待老板提供 |
+| [黑像](heixiang.md) | heixiang | 战士 | [ref-images/heixiang.webp](ref-images/heixiang.webp) | 10-13 竖版立绘已替换，喝咖啡与背剑锚点保留；性格背景待老板提供 |
+| [星月](xingyue.md) | xingyue | 牧师 | [ref-images/xingyue.webp](ref-images/xingyue.webp) | 10-13 竖版立绘已替换，胸前祝祷手指单独修订；性格背景待老板提供 |
 
 ## 参考图说明
 
-`ref-images/` 是五张运行立绘的参考副本。10-09 本轮核对，它们与 `game/assets/portraits/full/` 对应文件逐字节相同，证据见[本轮记录](../evidence/2026-10-09-WF-doc-system-art-cards-1009/README.md)。后续替换时核对实际引用和副本状态，不把这一时点结论永久当作同步保证。
+`ref-images/` 是五张运行立绘的参考副本。四位同伴在 10-13 替换时同步复制并逐字节核对，见[重绘记录](../evidence/2026-10-13-roster-redraw/README.md)；无的 10-09 核对见[原记录](../evidence/2026-10-09-WF-doc-system-art-cards-1009/README.md)。后续替换仍须重新核对，不把这一时点结论永久当作同步保证。
 
 无的立绘与参考副本于2026-10-09同步替换；当前锚点见[无](wu.md)，替换与验收见[本轮记录](../evidence/2026-10-09-wu-roster-portrait/README.md)。

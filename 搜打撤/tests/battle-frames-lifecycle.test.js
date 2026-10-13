@@ -1,4 +1,4 @@
-import { describe, expect, it, beforeEach, vi } from 'vitest';
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 
 const pixi = vi.hoisted(() => {
   const unloaded = [];
@@ -11,8 +11,8 @@ const pixi = vi.hoisted(() => {
     constructor() {
       this.view = document.createElement('canvas');
       this.stage = { addChild() {} };
-      this.ticker = { maxFPS: 0, stop() {}, start() {}, add() {} };
-      this.renderer = { render() {} };
+      this.ticker = { maxFPS: 0, stop() {}, start() {}, add(fn) { pixi.tick = fn; } };
+      this.renderer = { render() { pixi.rendered += 1; } };
     }
     stop() {}
     start() {}
@@ -28,7 +28,8 @@ const pixi = vi.hoisted(() => {
   }
   return { unloaded, loaded, sprites, idleTexture, extraTexture, emptyTexture, Application, Sprite,
     unloadGate: null, finishUnload: null, loadGate: null, finishLoad: null,
-    idleEnabled: true, loadDelayMs: 0, inFlight: 0, maxInFlight: 0 };
+    idleEnabled: true, idlePaths: new Set(), rendered: 0, loadDelayMs: 0, inFlight: 0, maxInFlight: 0, tick: null,
+    blocked: null, missing: new Set() };
 });
 
 vi.mock('pixi.js', () => ({
@@ -42,8 +43,14 @@ vi.mock('pixi.js', () => ({
       pixi.maxInFlight = Math.max(pixi.maxInFlight, pixi.inFlight);
       try {
         if (pixi.loadGate) await pixi.loadGate;
+        if (pixi.blocked) await pixi.blocked(url);
         if (pixi.loadDelayMs) await new Promise(resolve => setTimeout(resolve, pixi.loadDelayMs));
-        if (url.includes('/idle.webp') && pixi.idleEnabled) return pixi.idleTexture;
+        if ([...pixi.missing].some(path => url.includes(path))) throw new Error('missing specific frame');
+        if ([...pixi.idlePaths].some(path => url.includes(path))) {
+          if (pixi.idleEnabled) return pixi.idleTexture;
+          throw new Error('missing test idle frame');
+        }
+        if (url.includes('/sprite-v1/') && !url.includes('/neutral.webp')) return { id: url };
         if (url.includes('/atk-wind.webp')) return pixi.extraTexture;
         throw new Error('missing test frame');
       } finally { pixi.inFlight -= 1; }
@@ -55,7 +62,24 @@ vi.mock('pixi.js', () => ({
   },
 }));
 
-import { attach, cacheStats, isLiveBattleFigure, hide } from '../game/src/battle/view/battle.frames.js';
+import { attach, cacheStats, isLiveBattleFigure, hide, play, presentDeath } from '../game/src/battle/view/battle.frames.js';
+import { WU_FRAME_SEQUENCES, wuTimeline } from '../game/src/battle/view/battle.frame-catalog.js';
+import { CHANGWUYU_FRAME_SEQUENCES, changwuyuTimeline } from '../game/src/battle/view/battle.frame-catalog-changwuyu.js';
+import { THREE_ROLE_FRAME_SEQUENCES, threeRoleTimeline } from '../game/src/battle/view/battle.frame-catalog-three-role.js';
+
+const runtimeSequences = { wu: WU_FRAME_SEQUENCES, changwuyu: CHANGWUYU_FRAME_SEQUENCES, ...THREE_ROLE_FRAME_SEQUENCES };
+// 测试资产桩跟随已交付目录；常无语已使用 f000 等帧名，不能再假定 neutral/frame-001。
+for (const [role, sequence] of Object.entries(runtimeSequences)) {
+  for (const name of sequence.idle) pixi.idlePaths.add(`/${role}/${name}.webp`);
+}
+const timelineFor = (role, action) => role === 'wu' ? wuTimeline(action) : role === 'changwuyu' ? changwuyuTimeline(action) : threeRoleTimeline(role, action);
+const changwuyuIdlePath = `/changwuyu/${CHANGWUYU_FRAME_SEQUENCES.idle[0]}.webp`;
+const changwuyuActionPath = `/changwuyu/${CHANGWUYU_FRAME_SEQUENCES.atk.find(name => !CHANGWUYU_FRAME_SEQUENCES.idle.includes(name))}.webp`;
+const deliveredNames = role => [...new Set(Object.values(runtimeSequences[role]).flat())];
+const finishFrames = async role => {
+  await vi.waitFor(() => expect(pixi.loaded.filter(url => url.includes(`/frames/${role}/`))).toHaveLength(deliveredNames(role).length));
+  await vi.waitFor(() => expect(pixi.inFlight).toBe(0));
+};
 
 describe('battle frame lifecycle', () => {
   beforeEach(() => {
@@ -69,20 +93,23 @@ describe('battle frame lifecycle', () => {
     pixi.loadDelayMs = 0;
     pixi.inFlight = 0;
     pixi.maxInFlight = 0;
+    pixi.rendered = 0;
+    pixi.blocked = null;
+    pixi.missing.clear();
     document.body.innerHTML = '<div id="overlay"><div id="ovBody"><div class="battle-stage sts"><div id="btSelf"><div class="sts-figure"><img /></div></div></div></div><div id="unitFrames"></div></div>';
     document.querySelector('#btSelf img').setAttribute('src', '/assets/portraits/battle/changwuyu.webp');
   });
+  afterEach(async () => { pixi.finishLoad?.(); pixi.finishUnload?.(); await hide(); vi.restoreAllMocks(); });
 
-  it.each([
-    ['wu', ['idle', 'idle-1', 'atk-wind', 'atk-wind-1', 'atk-wind-2', 'atk-hit', 'atk-hit-1', 'hurt', 'hurt-1', 'cast', 'cast-1', 'idle-breathe']],
-    ['changwuyu', ['idle', 'idle-1', 'atk-wind', 'atk-wind-1', 'atk-hit', 'atk-hit-1', 'hurt', 'hurt-1', 'cast', 'cast-1', 'cast-2', 'idle-breathe']],
-    ['baita', ['idle', 'idle-1', 'atk-wind', 'atk-wind-1', 'atk-hit', 'atk-hit-1', 'hurt', 'hurt-1', 'cast', 'cast-1', 'cast-2', 'cast-3', 'cast-4', 'cast-5', 'idle-breathe']],
-  ])('requests only the delivered %s frame URLs, in declared loading order', async (role, names) => {
+  it.each(Object.entries(runtimeSequences).map(([role, sequence]) =>
+    [role, [...new Set(Object.values(sequence).flat())].map(name => name.split('/').at(-1))],
+  ))('requests only the delivered %s frame URLs, in declared loading order', async (role, names) => {
     hide();
     const img = document.querySelector('#btSelf img');
     img.setAttribute('data-asset-key', `battle-${role}`);
     img.setAttribute('src', '/assets/new-version/portrait.webp');
     await attach(document.getElementById('ovBody'));
+    await finishFrames(role);
     expect(pixi.loaded.map(url => new URL(url, 'http://localhost').pathname.split('/').at(-1))).toEqual(names.map(name => `${name}.webp`));
     expect(pixi.loaded.every(url => url.includes(`/frames/${role}/`))).toBe(true);
     expect(pixi.sprites.at(-1).texture).toBe(pixi.idleTexture);
@@ -92,10 +119,48 @@ describe('battle frame lifecycle', () => {
   it('keeps characters without delivered frames visible, even with an old supported URL', async () => {
     hide();
     const img = document.querySelector('#btSelf img');
-    img.setAttribute('data-asset-key', 'battle-heixiang');
+    img.setAttribute('data-asset-key', 'battle-unsupported');
     await attach(document.getElementById('ovBody'));
     expect(img.style.visibility).toBe('');
     expect(pixi.loaded).toEqual([]);
+  });
+
+  it.each(Object.keys(runtimeSequences))('holds %s fallen after death and ignores later hurt/attack interruptions', async role => {
+    hide();
+    const clock = vi.spyOn(performance, 'now').mockReturnValue(1000);
+    const img = document.querySelector('#btSelf img');
+    img.setAttribute('data-asset-key', `battle-${role}`);
+    await attach(document.getElementById('ovBody'));
+    await Promise.resolve();
+    await finishFrames(role);
+    const done = presentDeath();
+    expect(done).toBeInstanceOf(Promise);
+    expect(document.querySelector('.battle-stage').inert).toBe(true);
+    expect(play('hurt')).toBe(false);
+    expect(play('atk')).toBe(false);
+    clock.mockReturnValue(1000 + timelineFor(role, 'death').dur.reduce((sum, duration) => sum + duration, 0) + 1);
+    pixi.tick();
+    await done;
+    expect(pixi.sprites.at(-1).texture.id).toContain(runtimeSequences[role].death.at(-1));
+    const last = pixi.sprites.at(-1).texture;
+    clock.mockReturnValue(10000); pixi.tick();
+    expect(pixi.sprites.at(-1).texture).toBe(last);
+    hide();
+    expect(document.querySelector('.battle-stage').inert).toBeFalsy();
+    clock.mockRestore();
+  });
+
+  it.each(Object.keys(runtimeSequences))('returns %s to the shared initial idle texture after an attack', async role => {
+    hide();
+    const clock = vi.spyOn(performance, 'now').mockReturnValue(1000);
+    document.querySelector('#btSelf img').setAttribute('data-asset-key', `battle-${role}`);
+    await attach(document.getElementById('ovBody'));
+    await Promise.resolve();
+    await finishFrames(role);
+    expect(play('atk')).toBe(true);
+    clock.mockReturnValue(1000 + timelineFor(role, 'atk').dur.reduce((sum, duration) => sum + duration, 0) + 1); pixi.tick();
+    expect(pixi.sprites.at(-1).texture).toBe(pixi.idleTexture);
+    hide(); clock.mockRestore();
   });
 
   it('restores the portrait when a pending attach loses its battle DOM', async () => {
@@ -104,7 +169,7 @@ describe('battle frame lifecycle', () => {
     const img = body.querySelector('#btSelf img');
     pixi.loadGate = new Promise(resolve => { pixi.finishLoad = resolve; });
     const pending = attach(body);
-    await vi.waitFor(() => expect(pixi.inFlight).toBe(3));
+    await vi.waitFor(() => expect(pixi.inFlight).toBe(1));
     body.replaceWith(document.createElement('div'));
     pixi.finishLoad();
     pixi.loadGate = null;
@@ -133,7 +198,7 @@ describe('battle frame lifecycle', () => {
 
     pixi.unloadGate = new Promise(resolve => { pixi.finishUnload = resolve; });
     hide();
-    await vi.waitFor(() => expect(pixi.unloaded).toContainEqual(expect.stringContaining('/changwuyu/idle.webp')));
+    await vi.waitFor(() => expect(pixi.unloaded).toContainEqual(expect.stringContaining(changwuyuIdlePath)));
     expect(cacheStats()).toEqual({ roles: 0, roleNames: [] });
     expect(document.querySelector('#btSelf img').style.visibility).toBe('');
     expect(document.getElementById('unitFrames').hidden).toBe(true);
@@ -149,7 +214,7 @@ describe('battle frame lifecycle', () => {
     hide();
   });
 
-  it('unloads partial loads when idle is missing and clears a sprite even after the cache is empty', async () => {
+  it('probes only idle when none is usable and clears a sprite even after the cache is empty', async () => {
     const body = document.getElementById('ovBody');
     const sprite = pixi.sprites.at(-1);
     expect(cacheStats()).toEqual({ roles: 0, roleNames: [] });
@@ -158,9 +223,9 @@ describe('battle frame lifecycle', () => {
     expect(sprite.texture).toBe(pixi.emptyTexture);
 
     pixi.idleEnabled = false;
-    await attach(body);
+    expect(await attach(body)).toBe(false);
     expect(cacheStats().roleNames).toContain('changwuyu');
-    expect(pixi.unloaded).toContainEqual(expect.stringContaining('/changwuyu/atk-wind.webp'));
+    expect(pixi.loaded).not.toContainEqual(expect.stringContaining(changwuyuActionPath));
 
     // Ensure hide clears the sprite reference in addition to releasing the failed set.
     sprite.texture = pixi.extraTexture;
@@ -174,10 +239,112 @@ describe('battle frame lifecycle', () => {
     pixi.loadDelayMs = 1;
     const body = document.getElementById('ovBody');
     await attach(body);
+    await finishFrames('changwuyu');
     expect(pixi.maxInFlight).toBeGreaterThan(1);
     expect(pixi.maxInFlight).toBeLessThanOrEqual(3);
     expect(pixi.sprites.at(-1).texture).toBe(pixi.idleTexture);
     hide();
+  });
+
+  it('commits a drawable first idle before background frames finish, and can play a partial action', async () => {
+    await hide();
+    let finishBackground;
+    const background = new Promise(resolve => { finishBackground = resolve; });
+    pixi.blocked = url => url.includes(changwuyuIdlePath) ? Promise.resolve() : background;
+    const body = document.getElementById('ovBody');
+    body.querySelector('.sts-figure').getBoundingClientRect = () => ({ left: 100, top: 100, width: 240, height: 180 });
+    try {
+      expect(await attach(body)).toBe(true);
+      await vi.waitFor(() => expect(pixi.inFlight).toBe(3));
+      expect(pixi.loaded.length).toBeLessThan(deliveredNames('changwuyu').length);
+      expect(pixi.sprites.at(-1).texture).toBe(pixi.idleTexture);
+      expect(pixi.sprites.at(-1).width).toBeGreaterThan(0);
+      expect(pixi.sprites.at(-1).height).toBeGreaterThan(0);
+      expect(pixi.rendered).toBeGreaterThan(0);
+      expect(play('atk')).toBe(true);
+    } finally { finishBackground(); pixi.blocked = null; }
+    await finishFrames('changwuyu');
+    const clock = vi.spyOn(performance, 'now').mockReturnValue(10000);
+    pixi.tick();
+    expect(play('atk')).toBe(true);
+    // 补齐后使用原始动作时间步，第二帧已经是非 idle 的攻击帧。
+    const timeline = timelineFor('changwuyu', 'atk');
+    clock.mockReturnValue(10000 + timeline.dur[0] + 1); pixi.tick();
+    expect(pixi.sprites.at(-1).texture.id).toContain(timeline.list[1]);
+  });
+
+  it('uses the next delivered idle when the first is missing instead of rejecting the whole role', async () => {
+    await hide();
+    pixi.missing.add(changwuyuIdlePath);
+    expect(await attach(document.getElementById('ovBody'))).toBe(true);
+    expect(pixi.loaded[0]).toContain(changwuyuIdlePath);
+    expect(document.getElementById('unitFrames').dataset.frame).toBe(CHANGWUYU_FRAME_SEQUENCES.idle[1]);
+    await finishFrames('changwuyu');
+    expect(play('atk')).toBe(true);
+  });
+
+  it('keeps partial idle and action sequences usable after a missing noncritical frame', async () => {
+    await hide();
+    pixi.missing.add(`/changwuyu/${CHANGWUYU_FRAME_SEQUENCES.idle[1]}.webp`);
+    pixi.missing.add(changwuyuActionPath);
+    expect(await attach(document.getElementById('ovBody'))).toBe(true);
+    await finishFrames('changwuyu');
+    expect(play('atk')).toBe(true);
+    expect(document.querySelector('#btSelf img').style.visibility).toBe('hidden');
+  });
+
+  it('cancels old background batches and unloads them before a different role takes over', async () => {
+    await hide();
+    let finishBackground;
+    const background = new Promise(resolve => { finishBackground = resolve; });
+    pixi.blocked = url => url.includes('/changwuyu/') && !url.includes(changwuyuIdlePath) ? background : Promise.resolve();
+    const body = document.getElementById('ovBody');
+    try {
+      await attach(body);
+      await vi.waitFor(() => expect(pixi.inFlight).toBe(3));
+      const oldLoads = pixi.loaded.filter(url => url.includes('/changwuyu/'));
+      body.querySelector('img').setAttribute('data-asset-key', 'battle-xingyue');
+      const replacement = attach(body);
+      await Promise.resolve();
+      expect(pixi.loaded.some(url => url.includes('/xingyue/'))).toBe(false);
+      finishBackground(); pixi.blocked = null;
+      expect(await replacement).toBe(true);
+      expect(pixi.loaded.filter(url => url.includes('/changwuyu/'))).toEqual(oldLoads);
+      expect(pixi.unloaded).toEqual(expect.arrayContaining(oldLoads));
+      expect(document.getElementById('unitFrames').dataset.role).toBe('xingyue');
+      expect(cacheStats().roleNames).toEqual(['xingyue']);
+      await finishFrames('xingyue');
+    } finally { finishBackground(); pixi.blocked = null; }
+  });
+
+  it('does not reuse a pending attachment when the same image slot changes role', async () => {
+    await hide();
+    pixi.loadGate = new Promise(resolve => { pixi.finishLoad = resolve; });
+    const body = document.getElementById('ovBody');
+    const first = attach(body);
+    await vi.waitFor(() => expect(pixi.inFlight).toBe(1));
+    body.querySelector('img').setAttribute('data-asset-key', 'battle-baita');
+    const replacement = attach(body);
+    expect(replacement).not.toBe(first);
+    pixi.finishLoad(); pixi.loadGate = null;
+    expect(await first).toBe(false);
+    expect(await replacement).toBe(true);
+    expect(document.getElementById('unitFrames').dataset.role).toBe('baita');
+    expect(document.querySelector('#btSelf img').style.visibility).toBe('hidden');
+    expect(pixi.unloaded).toContainEqual(expect.stringContaining(changwuyuIdlePath));
+    await finishFrames('baita');
+  });
+
+  it('skips all texture work with reduced motion while leaving the static figure visible', async () => {
+    await hide();
+    const facade = (await import('../game/src/core/sdt-facade.js')).default;
+    const previous = facade.Motion;
+    facade.Motion = { reduceMotion: () => true };
+    try {
+      await attach(document.getElementById('ovBody'));
+      expect(pixi.loaded).toEqual([]);
+      expect(document.querySelector('#btSelf img').style.visibility).toBe('');
+    } finally { facade.Motion = previous; }
   });
 
   it('waits for pending frame batches to unload before a new attach', async () => {
@@ -185,7 +352,7 @@ describe('battle frame lifecycle', () => {
     const body = document.getElementById('ovBody');
     pixi.loadGate = new Promise(resolve => { pixi.finishLoad = resolve; });
     const firstAttach = attach(body);
-    await vi.waitFor(() => expect(pixi.inFlight).toBe(3));
+    await vi.waitFor(() => expect(pixi.inFlight).toBe(1));
     hide();
     const secondAttach = attach(body);
     const loadsWhileBlocked = pixi.loaded.length;
@@ -195,7 +362,7 @@ describe('battle frame lifecycle', () => {
     pixi.loadGate = null;
     await firstAttach;
     await secondAttach;
-    expect(pixi.unloaded).toContainEqual(expect.stringContaining('/changwuyu/idle.webp'));
+    expect(pixi.unloaded).toContainEqual(expect.stringContaining(changwuyuIdlePath));
     expect(pixi.sprites.at(-1).texture).toBe(pixi.idleTexture);
     hide();
   });
@@ -218,6 +385,21 @@ describe('battle frame lifecycle', () => {
     // 藏了静态图就必须有序列帧顶上，两头都断防止「闪」与「人物消失」两个方向的回归。
     // （不断 #unitFrames.hidden：beforeEach 重建 body 后模块持有的 host 是旧节点，断言会失真）
     expect(img.style.visibility).toBe('hidden');
+    expect(pixi.sprites.at(-1).texture).toBe(pixi.idleTexture);
+    expect(pixi.rendered).toBeGreaterThan(0);
+    hide();
+  });
+
+  it('shares one pending attachment across repeated renders of the same live figure', async () => {
+    hide();
+    const body = document.getElementById('ovBody');
+    pixi.loadGate = new Promise(resolve => { pixi.finishLoad = resolve; });
+    const first = attach(body), repeat = attach(body);
+    expect(repeat).toBe(first);
+    await vi.waitFor(() => expect(pixi.inFlight).toBe(1));
+    pixi.finishLoad(); pixi.loadGate = null;
+    await first;
+    expect(pixi.rendered).toBeGreaterThan(0);
     expect(pixi.sprites.at(-1).texture).toBe(pixi.idleTexture);
     hide();
   });

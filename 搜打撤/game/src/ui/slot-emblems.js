@@ -1,42 +1,10 @@
-// Original vector artwork: a common cut-corner seal, five distinct archive motifs.
-// The canvas outside the seal is transparent. No external assets are required.
-function seal(motif) {
-  return `<svg class="ic slot-ico" viewBox="0 0 144 144" aria-hidden="true">
-    <path d="M36 8h72l28 28v72l-28 28H36L8 108V36Z" fill="#1b3442" stroke="#d8bd84" stroke-width="3" stroke-linejoin="round"/>
-    <path d="M38 17h68l21 21v68l-21 21H38l-21-21V38Z" fill="none" stroke="#819c9d" stroke-width="1.5"/>
-    <g stroke-linecap="round" stroke-linejoin="round">${motif}</g>
-    <path d="m72 118 4 4-4 4-4-4Z" fill="#d8bd84"/>
-  </svg>`;
-}
-
+// Weather emblems: sunny, partly cloudy, rain, thunder, snow.
+// C design: broad ivory/gold motifs and an open gold corner frame on deep blue.
+// Transparent outside the seal; inline SVG requires no external assets.
 export const SLOT_EMBLEMS = Object.freeze([
-  // Crossed blades: broad ivory cutting faces and warm brass guards.
-  seal(`<path d="m33 29 11 4 49 49-11 11-49-49Z" fill="#f0eee2"/>
-    <path d="m111 29-11 4-49 49 11 11 49-49Z" fill="#f0eee2"/>
-    <path d="m41 39 45 45M103 39 58 84" fill="none" stroke="#83a3a8" stroke-width="3"/>
-    <path d="m46 87 17 17M98 87l-17 17M57 98l-10 10M87 98l10 10" fill="none" stroke="#d8bd84" stroke-width="5"/>
-    <path d="m72 59 13 13-13 13-13-13Z" fill="#1b3442" stroke="#d8bd84" stroke-width="3"/>`),
-  // Witch's hat: bent crown, layered brim and a floating star.
-  seal(`<path d="M41 85C50 63 54 44 73 29l22 9-17 5 23 42Z" fill="#f0eee2"/>
-    <path d="m52 69 40-6 7 15-53 9Z" fill="#d8bd84"/>
-    <path d="M31 85c24-10 57-10 83 0l-5 10c-27 9-50 9-74 0Z" fill="#f0eee2" stroke="#1b3442" stroke-width="3"/>
-    <path d="m105 37 4 10 10 4-10 4-4 10-4-10-10-4 10-4Z" fill="#d8bd84"/>
-    <path d="m61 74 12-2 3 10-13 2Z" fill="#1b3442"/>`),
-  // Tower: crenellations, an arched gate and a small pennant.
-  seal(`<path d="M42 39h12v10h11V39h14v10h11V39h12v23h-7v45H49V62h-7Z" fill="#f0eee2"/>
-    <path d="M45 62h54M48 108h50" fill="none" stroke="#d8bd84" stroke-width="5"/>
-    <path d="M65 108V94a7 9 0 0 1 14 0v14ZM57 73h7v10h-7ZM82 73h7v10h-7Z" fill="#1b3442"/>
-    <path d="M91 37V23" stroke="#d8bd84" stroke-width="3"/>
-    <path d="m92 23 20 6-20 6Z" fill="#d8bd84"/>`),
-  // Greatsword and coffee: a strong central blade with a smaller companion motif.
-  seal(`<path d="m72 24 14 20v42H58V44Z" fill="#f0eee2"/>
-    <path d="M72 39v44" stroke="#83a3a8" stroke-width="3"/>
-    <path d="M49 86h46v10H49ZM66 96h12v15H66Z" fill="#d8bd84"/>
-    <path d="M93 93h18v10a9 9 0 0 1-18 0Z" fill="#f0eee2"/>
-    <path d="M111 95h3a5 5 0 0 1 0 10h-3M99 87l-2-5M105 87l2-5" fill="none" stroke="#d8bd84" stroke-width="3"/>`),
-  // Moon and lantern: broad crescent, four-point star and a hanging light.
-  seal(`<path d="M84 28a40 40 0 1 0 25 58 32 32 0 1 1-25-58Z" fill="#d8bd84"/>
-    <path d="m101 34 5 12 12 5-12 5-5 12-5-12-12-5 12-5Z" fill="#f0eee2"/>
-    <path d="M61 77v11M53 88h16l5 8-8 14H56l-8-14Z" fill="none" stroke="#f0eee2" stroke-width="3"/>
-    <path d="m61 92 5 6-5 7-5-7Z" fill="#f0eee2"/>`),
+  `<svg class="ic slot-ico" aria-hidden="true" viewBox="0 0 144 144"><g stroke-linecap="round" stroke-linejoin="round"><path d="M29 18h86l14 14v77l-25 22H40l-25-22V32Z" fill="#1b3442"/><path d="M29 18h24M91 18h24l14 14M129 91v18l-25 22M40 131l-25-22V91" fill="none" stroke="#d8bd84" stroke-width="3"/><g transform="translate(-6 -7) scale(1.08)"><circle cx="72" cy="66" r="22" fill="#d8bd84"/><circle cx="72" cy="66" r="15" fill="#f0eee2"/><path d="M72 29v9M72 94v10M35 66h9M100 66h9M46 40l7 7M91 85l7 7M46 92l7-7M91 47l7-7" stroke="#d8bd84" stroke-width="5" fill="none"/></g><path d="m72 118 4 4-4 4-4-4Z" fill="#d8bd84"/></g></svg>`,
+  `<svg class="ic slot-ico" aria-hidden="true" viewBox="0 0 144 144"><g stroke-linecap="round" stroke-linejoin="round"><path d="M29 18h86l14 14v77l-25 22H40l-25-22V32Z" fill="#1b3442"/><path d="M29 18h24M91 18h24l14 14M129 91v18l-25 22M40 131l-25-22V91" fill="none" stroke="#d8bd84" stroke-width="3"/><g transform="translate(-6 -7) scale(1.08)"><circle cx="89" cy="49" r="18" fill="#d8bd84"/><path d="M40 87a16 16 0 0 1-1-32 25 25 0 0 1 46-7 20 20 0 1 1 19 39Z" fill="#f0eee2"/><path d="M43 77h58" stroke="#83a3a8" stroke-width="3"/></g><path d="m72 118 4 4-4 4-4-4Z" fill="#d8bd84"/></g></svg>`,
+  `<svg class="ic slot-ico" aria-hidden="true" viewBox="0 0 144 144"><g stroke-linecap="round" stroke-linejoin="round"><path d="M29 18h86l14 14v77l-25 22H40l-25-22V32Z" fill="#1b3442"/><path d="M29 18h24M91 18h24l14 14M129 91v18l-25 22M40 131l-25-22V91" fill="none" stroke="#d8bd84" stroke-width="3"/><g transform="translate(-6 -7) scale(1.08)"><path d="M38 73a15 15 0 0 1 2-30 24 24 0 0 1 45-5 20 20 0 1 1 19 35Z" fill="#f0eee2"/><path d="m47 85-7 14m30-14-7 14m30-14-7 14" stroke="#d8bd84" stroke-width="6"/></g><path d="m72 118 4 4-4 4-4-4Z" fill="#d8bd84"/></g></svg>`,
+  `<svg class="ic slot-ico" aria-hidden="true" viewBox="0 0 144 144"><g stroke-linecap="round" stroke-linejoin="round"><path d="M29 18h86l14 14v77l-25 22H40l-25-22V32Z" fill="#1b3442"/><path d="M29 18h24M91 18h24l14 14M129 91v18l-25 22M40 131l-25-22V91" fill="none" stroke="#d8bd84" stroke-width="3"/><g transform="translate(-6 -7) scale(1.08)"><path d="M37 70a15 15 0 0 1 3-30 24 24 0 0 1 44-4 21 21 0 1 1 21 34Z" fill="#f0eee2"/><path d="m72 66-17 24h17l-7 22 30-34H78l9-12Z" fill="#d8bd84" stroke="#1b3442" stroke-width="2"/></g><path d="m72 118 4 4-4 4-4-4Z" fill="#d8bd84"/></g></svg>`,
+  `<svg class="ic slot-ico" aria-hidden="true" viewBox="0 0 144 144"><g stroke-linecap="round" stroke-linejoin="round"><path d="M29 18h86l14 14v77l-25 22H40l-25-22V32Z" fill="#1b3442"/><path d="M29 18h24M91 18h24l14 14M129 91v18l-25 22M40 131l-25-22V91" fill="none" stroke="#d8bd84" stroke-width="3"/><g transform="translate(-6 -7) scale(1.08)"><path d="M72 29v72M41 47l62 36M41 83l62-36M62 37l10 9 10-9M62 93l10-9 10 9M42 58l12-5-1-13M91 89l-1-13 12-5M42 72l12 5-1 13M91 41l-1 13 12 5" stroke="#f0eee2" stroke-width="5" fill="none"/><path d="m72 56 10 10-10 10-10-10Z" fill="#d8bd84"/></g><path d="m72 118 4 4-4 4-4-4Z" fill="#d8bd84"/></g></svg>`,
 ]);

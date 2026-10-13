@@ -32,15 +32,16 @@ vi.mock('../game/src/run/game.session.js', () => ({
   newUid: (() => { let n = 0; return () => 'uid-' + (n++); })(),
   saveGame: (...args) => { st.saves.push(args); },
   scaledEnemy: x => x,
+  pick: xs => xs[0],
   usedSlots: () => st.game.ownedCards.length,
 }));
 vi.mock('../game/src/core/characters.js', () => ({ CHARACTERS: [], characterFor: () => null, characterName: () => '' }));
 vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub: vi.fn() }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { tick: vi.fn(), ding: vi.fn() }, _set_cardPageOpen: vi.fn(), cardHTML: c => c.name }));
-vi.mock('../game/src/battle/battle-loader.js', () => ({ captureBattleContext: vi.fn(), ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
+vi.mock('../game/src/battle/battle-loader.js', () => ({ captureBattleContext: () => () => true, ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
 vi.mock('../game/src/run/game.run.data.js', () => ({
   IMMEDIATE_SCENES: {}, NODE_BG: { fire: 'scene-fire-bg', altar: 'scene-altar-bg', event: 'scene-event' },
-  PICKUP_BG: {}, PRELOAD_SCENES: [], SCENES: {},
+  PICKUP_BG: {}, PRELOAD_SCENES: [], SCENES: { coin:{ icon:'', title:'硬币', lines:['风雪里的零钱'] } },
 }));
 vi.mock('../game/src/run/game.nest.js', () => ({ unlockNest: vi.fn() }));
 vi.mock('../game/src/hub/game.storage.js', () => ({ RunStorage: {} }));
@@ -55,7 +56,7 @@ function makeGame() {
     // 祭坛/火堆运行期标记：原地 assign 复用同一 game 对象时必须显式复位，
     // 否则上一用例的激活/上锁状态会泄漏到下一用例
     altarActivated: undefined, altarItemSacrificed: undefined, altarRewardPending: undefined,
-    bossKilled: false, _fireRestKey: undefined,
+    bossKilled: false, _fireRestKey: undefined, nodeRewards: {},
     heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); },
     bagCap: () => st.bagCapN,
     usedSlots: () => this.ownedCards.length,
@@ -79,11 +80,12 @@ beforeEach(async () => {
   st.bagCapN = 10;
   acts = {};
   UI = {
+    el: { ovBody:document.getElementById('body') },
     showOverlay: (_t, html) => { document.getElementById('body').innerHTML = html; },
     hideOverlay: () => { document.getElementById('body').innerHTML = ''; },
     act: (name, fn) => { acts[name] = fn; },
     refresh: vi.fn(), log: vi.fn(), registerHelp: vi.fn(), helpBtn: () => '',
-    showCardReward: vi.fn(),
+    showCardReward: vi.fn(), showCardZoom:vi.fn(),
   };
   window.SDT = {
     UI,
@@ -291,7 +293,7 @@ it('复原页：满包拒绝——口袋不动、卡不进包、可继续点收�
 
 /* ---------- 火堆自动复原（2026-10-02 玩法批改后行为，只验证不动） ---------- */
 
-it('火堆：回血+随机发现两张自动复原+消耗本格+落盘；空口袋给提示', async () => {
+it('火堆：确认才回血复原，结算落盘且重入不重复；继续才回图', async () => {
   const game = st.game;
   game.usedPocket.push(
     { card: { id: 'a', name: '消耗甲', type: '法术' }, count: 1 },
@@ -299,13 +301,24 @@ it('火堆：回血+随机发现两张自动复原+消耗本格+落盘；空口�
   );
   const { openFireRest } = await importAltar();
   openFireRest();
+  expect(game.hp).toBe(20);
+  expect(game.visited['0,0']).toBeUndefined();
+  const rest = acts.fireRestGo;
+  rest(); rest();
   expect(game.hp).toBe(30);   // heal 10 封顶
   expect(game.ownedCards.map(o => o.card.name)).toEqual(['消耗甲']);   // 只有可复原的那张
   expect(game.usedPocket).toHaveLength(1);   // 装备堆仍在
   expect(game.visited['0,0']).toBe(1);   // consumeCurrentCell 消耗本格
-  expect(game.state).toBe('idle');
+  expect(game.state).toBe('modal');
   expect(st.saves.length).toBeGreaterThan(0);
-  expect(UI.log.mock.calls.some(c => String(c[0]).includes('已复原回背包'))).toBe(true);
+  expect(UI.log.mock.calls.some(c => String(c[0]).includes('复原 1 张'))).toBe(true);
+  const result = JSON.parse(JSON.stringify(game.nodeRewards));
+  openFireRest();
+  expect(game.nodeRewards).toEqual(result);
+  expect(game.hp).toBe(30);
+  expect(game.ownedCards).toHaveLength(1);
+  acts.fireDone();
+  expect(game.state).toBe('idle');
 });
 
 it('火堆：满包时不扣口袋（先检后扣），deny 播报后照常收格', async () => {
@@ -314,6 +327,7 @@ it('火堆：满包时不扣口袋（先检后扣），deny 播报后照常收�
   game.usedPocket.push({ card: { id: 'a', name: '消耗甲', type: '法术' }, count: 1 });
   const { openFireRest } = await importAltar();
   openFireRest();
+  acts.fireRestGo();
   expect(game.usedPocket[0].count).toBe(1);   // 口袋未扣
   expect(game.ownedCards).toHaveLength(0);
   expect(window.SDT.Sound.sfx).toHaveBeenCalledWith('deny');
@@ -344,11 +358,80 @@ it('A3文案：满包火堆准确报告容量，不能谎报没有可复原牌',
   st.game.usedPocket.push({ card: { id: 'a', name: '消耗甲', type: '法术' }, count: 1 });
   const { openFireRest } = await importAltar();
   openFireRest();
+  acts.fireRestGo();
   const messages = UI.log.mock.calls.map(c => String(c[0])).join('\n');
   expect(messages).toContain('背包已满');
   expect(messages).not.toContain('没有可复原的卡牌');
   expect(st.game.usedPocket[0].count).toBe(1);
   expect(st.game.ownedCards).toHaveLength(0);
   expect(st.game.visited['0,0']).toBe(1);
+  expect(st.game.state).toBe('modal');
+  acts.fireDone();
   expect(st.game.state).toBe('idle');
+});
+
+it('拾取页背包返回重注册仍只结算一次，旧回调不能领取或关闭新结果页', async () => {
+  const { openPickupPage } = await importScenes();
+  const { takeBagReturnHook } = await import('../game/src/hub/bag-return-hook.js');
+  const receive = vi.fn(() => UI.showOverlay('', '<p id="next-page">下一个节点</p>'));
+  openPickupPage('coin', '+1', receive, true);
+  const old = acts.pickupGo;
+  takeBagReturnHook()();
+  old();
+  expect(receive).not.toHaveBeenCalled();
+  const current = acts.pickupGo;
+  current(); current();
+  expect(receive).toHaveBeenCalledTimes(1);
+  expect(document.getElementById('next-page')).not.toBeNull();
+});
+
+it('火堆取消休整保留收益，再进入必须重新确认', async () => {
+  const { openFireRest } = await importAltar();
+  const done = vi.fn(() => { st.game.state = 'idle'; });
+  openFireRest(done);
+  const oldRest = acts.fireRestGo;
+  acts.fireLeave();
+  expect(st.game.hp).toBe(20);
+  expect(st.game.nodeRewards).toEqual({});
+  expect(done).toHaveBeenCalledWith(false);
+  openFireRest(done);
+  oldRest();
+  expect(st.game.hp).toBe(20);
+  acts.fireRestGo();
+  expect(st.game.hp).toBe(30);
+});
+
+it('入城补给先阅读再逐张领取，刷新不重领，满包补给保留在实际入口', async () => {
+  const game = st.game;
+  game.entrySupply = { version:1, layerIdx:0, trackPos:0, cardIds:['lg1','eq1'], taken:[] };
+  const { openEntrySupply } = await importAltar();
+  expect(openEntrySupply()).toBe(true);
+  expect(game.ownedCards).toHaveLength(0);
+  const reveal = acts.clsEntryReveal;
+  reveal(); reveal();
+  expect(game.ownedCards).toHaveLength(0);
+  acts.clsEntryCard({ i:0 });
+  expect(UI.showCardZoom.mock.lastCall[1].footer).toContain('entrySupplyTake');
+  st.bagCapN = 0;
+  acts.entrySupplyTake({ i:0 });
+  expect(game.entrySupply.taken).toEqual([]);
+  st.bagCapN = 1;
+  acts.entrySupplyTake({ i:0 });
+  expect(game.entrySupply.taken).toEqual([0]);
+  expect(game.ownedCards[0].brought).toBe(1);
+  expect(game.classCard.id).toBe('lg1');
+  const oldTake = acts.entrySupplyTake;
+  game.entrySupply = JSON.parse(JSON.stringify(game.entrySupply));
+  openEntrySupply();
+  oldTake({ i:1 });
+  expect(game.ownedCards).toHaveLength(1);
+  acts.entrySupplyTake({ i:0 });
+  expect(game.ownedCards).toHaveLength(1);
+  acts.entrySupplyTake({ i:1 });
+  expect(game.entrySupply.taken).toEqual([0]);
+  st.bagCapN = 2;
+  acts.entrySupplyTake({ i:1 });
+  expect(game.entrySupply.taken).toEqual([0,1]);
+  expect(game.visited['0,0']).toBe(1);
+  expect(game.ownedCards).toHaveLength(2);
 });

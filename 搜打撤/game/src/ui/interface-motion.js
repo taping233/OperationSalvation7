@@ -1,4 +1,9 @@
 // Shared visual choreography around the existing UI API. No route or save handler is replaced.
+import { enterSurface, leaveSurface, clearSurface } from './surface-motion.js';
+import { captureArchiveExit, enterCamp, clearCampEntry } from './camp-entry.js';
+import { pageMotionProfile } from './page-motion-profiles.js';
+import { enterArchive, clearArchiveMotion } from './archive-motion.js';
+import { navigationState, navigationChange } from './navigation-motion.js';
 const installed = new WeakSet();
 const overlay = document.getElementById('overlay');
 let pendingClose = null;
@@ -69,15 +74,29 @@ function install(ui = window.SDT?.UI) {
     if (pendingClose) {
       clearTimeout(pendingClose.timer);
       pendingClose = null;
-      // Finish the old cleanup before installing a new page; no delayed close may erase it.
+      // hide 请求时已解绑旧页；保留调用方在 show 前登记的新页动作。
+      const acts = this._acts, input = this._inputHandler, hover = this._hoverHandler;
       hideOverlay.call(this, { immediate: true });
+      this._acts = acts;
+      this._inputHandler = input;
+      this._hoverHandler = hover;
     }
     const body = document.getElementById('ovBody');
+    const isCamp = mode === 'page' && typeof html === 'string' && html.includes('base-camp');
+    const initialCamp = isCamp && !body?.querySelector('#hubMain');
+    const archiveExit = initialCamp && !interfaceReducedMotion() ? captureArchiveExit(body) : null;
+    clearCampEntry();
+    clearArchiveMotion(overlay);
     const wasOpen = !overlay.hidden;
+    const oldProfile = pageMotionProfile(body)?.key;
     const oldTab = tabKey(body);
+    const oldNavigation = navigationState(body?.querySelector('#hubMain'));
     const refreshHub = wasOpen && mode === 'page' && !!body?.querySelector('#hubMain')
       && typeof html === 'string' && html.includes('id="hubMain"');
-    const restart = !wasOpen || this._lastMode !== mode || (mode === 'page' && !refreshHub);
+    const motionKeyChanged = options?.motionKey && options.motionKey !== this._motionKey;
+    this._motionKey = options?.motionKey || null;
+    const restart = !wasOpen || this._lastMode !== mode || motionKeyChanged || (mode === 'page' && !refreshHub);
+    overlay.style.removeProperty('--page-out');
     markEntry(kindFor(this, mode, null), restart);
     withinShow = true;
     let result;
@@ -85,12 +104,40 @@ function install(ui = window.SDT?.UI) {
     finally { withinShow = false; }
     const currentBody = document.getElementById('ovBody');
     overlay.dataset.uiMotion = kindFor(this, mode, currentBody);
-    if (refreshHub && oldTab !== tabKey(currentBody)) markEntry(overlay.dataset.uiMotion, true);
+    const tabChanged = refreshHub && oldTab !== tabKey(currentBody);
+    if (refreshHub || initialCamp) {
+      // 基地外壳始终保持不透明；首次进入由专用编排展开内容，
+      // 基地内刷新也不为重建的 header/body 重挂通用入场块。
+      delete overlay.dataset.uiEnter;
+      clearSurface(overlay);
+      delete overlay.dataset.surfaceMotion;
+      if (tabChanged || refreshHub && navigationChange(oldNavigation, navigationState(currentBody?.querySelector('#hubMain'))).changed) {
+        enterSurface(overlay, { restart: true, navigation: navigationChange(oldNavigation, navigationState(currentBody?.querySelector('#hubMain'))) });
+      }
+      if (initialCamp) {
+        delete overlay.dataset.surfaceLayout;
+        enterCamp(overlay, archiveExit, interfaceReducedMotion());
+      }
+    } else if (currentBody?.querySelector('.city-run-transition, .expedition-cut') ||
+        (currentBody?.querySelector('.studio-unified') && document.querySelector('.page-loading'))) {
+      // 挂载时不提前播放；照相馆在揭幕开始时接共用区域滑入，结束后不重播。
+      delete overlay.dataset.uiEnter;
+      clearSurface(overlay);
+      delete overlay.dataset.surfaceMotion;
+      delete overlay.dataset.surfaceLayout;
+    } else {
+      const samePage = wasOpen && mode === 'page' && oldProfile
+        && oldProfile === pageMotionProfile(currentBody)?.key;
+      if (samePage) delete overlay.dataset.uiEnter;
+      enterSurface(overlay, { restart, fast: overlay.dataset.uiMotion === 'fast', contentOnly: !!samePage });
+    }
     cancelLegacyCardTween();
+    enterArchive(overlay, currentBody, interfaceReducedMotion());
     return result;
   };
 
   ui.hideOverlay = function (options) {
+    clearCampEntry();
     if (pendingClose) {
       if (!options?.immediate) return;
       clearTimeout(pendingClose.timer);
@@ -101,29 +148,42 @@ function install(ui = window.SDT?.UI) {
     const card = document.getElementById('ovBody')?.parentElement;
     const nativeFastClose = !!card?.querySelector('.bt-settings, .bt-gy-list, .glass-panel');
     const instantRoom = overlay.classList.contains('room-view') && !nativeFastClose;
+    const exitDuration = overlay.dataset.surfaceContext === 'expedition' ? 220 : 140;
+    overlay.style.setProperty('--page-out', `${exitDuration}ms`);
+    enterSurface(overlay, { restart: false, fast: instantRoom || nativeFastClose || overlay.dataset.uiMotion === 'fast' });
+    leaveSurface(overlay);
     // Explicit synchronous cleanup and reduced-motion paths retain their original semantics.
     if (options?.immediate || interfaceReducedMotion() || this._hideTimer || !instantRoom) {
       return hideOverlay.call(this, options);
     }
     overlay.dataset.uiInstantClose = '1';
+    // 逻辑关闭同步生效，140ms 只保留退出画面；旧按钮不能在淡出期间重领。
+    this._acts = {};
+    this._inputHandler = null;
+    this._hoverHandler = null;
     const closing = { timer: null };
     pendingClose = closing;
     closing.timer = setTimeout(() => {
       if (pendingClose !== closing) return;
       pendingClose = null;
       hideOverlay.call(this, { ...options, immediate: true });
-    }, 140);
+    }, exitDuration);
   };
 
   if (showScreen) ui.showScreen = function (element) {
     if (element && (element.hidden || element._scrHiding)) {
       screenFlip = !screenFlip;
       element.dataset.uiMotionScreen = screenFlip ? 'a' : 'b';
+      if (element.id !== 'title') enterSurface(element);
     }
     return showScreen.call(this, element);
   };
   if (hideScreen) ui.hideScreen = function (element, after) {
-    if (element && !element.hidden) element.dataset.uiMotionScreen = 'close';
+    if (element && !element.hidden) {
+      element.dataset.uiMotionScreen = 'close';
+      enterSurface(element, { restart: false });
+      leaveSurface(element);
+    }
     return hideScreen.call(this, element, after);
   };
   return true;
@@ -143,6 +203,8 @@ if (overlay) {
       overlay.classList.remove('gate-live', 'gate-squeeze');
     }
     if (overlay.hidden) {
+      clearArchiveMotion(overlay);
+      clearSurface(overlay);
       delete overlay.dataset.uiClosing;
       delete overlay.dataset.uiInstantClose;
     }
@@ -160,6 +222,7 @@ if (overlay) {
     const body = document.getElementById('ovBody');
     const restart = overlay.hidden || ui._lastMode !== event.detail || event.detail === 'page';
     markEntry(kindFor(ui, event.detail, body), restart);
+    enterSurface(overlay, { restart, fast: overlay.dataset.uiMotion === 'fast' });
     cancelLegacyCardTween();
   });
 }

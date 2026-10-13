@@ -24,19 +24,24 @@ beforeEach(() => {
   window.SDT = { Base: state.base, UI: {} };
 });
 
-async function render() {
+async function render(facility = 'stash') {
+  const { selectFacility } = await import('../game/src/hub/hub.facilities.js');
+  selectFacility(facility);
   const { hubUpgradeHTML } = await import('../game/src/hub/game.hub.pages.js');
   const root = document.createElement('div');
   root.innerHTML = hubUpgradeHTML();
   return root;
 }
 
-it('零资源明确说明三个禁用原因，渲染不扣资源', async () => {
+it('选中设施明确说明缺口，费用仅在确认区展示，渲染不扣资源', async () => {
   const before = JSON.stringify(state.base.data);
   const root = await render();
-  expect(root.textContent.match(/木材不足，还需 2/g)).toHaveLength(2);
-  expect(root.textContent).toContain('口粮不足，还需 2');
-  for (const act of ['upBag', 'upStash', 'upPet']) expect(root.querySelector(`[data-act=${act}]`).disabled).toBe(true);
+  expect(root.textContent).toContain('木材不足，还需 2');
+  expect(root.querySelector('[data-act=upStash]').disabled).toBe(true);
+  expect((await render('bag')).querySelector('[data-act=upBag]').disabled).toBe(true);
+  expect(root.querySelector('.camp-upgrade-reserve')).toBeNull();
+  expect(root.querySelectorAll('.camp-costs')).toHaveLength(1);
+  expect(root.querySelector('[data-act=upPet]')).toBeNull();
   expect(JSON.stringify(state.base.data)).toBe(before);
 });
 
@@ -48,8 +53,10 @@ it('阈值前不列符文，阈值按实际配置列成本、数量和不足', a
   state.base.data.runes = ['a', 'b'];
   const before = JSON.stringify(state.base.data);
   const root = await render();
-  expect(root.querySelector('[data-act=upStash]').textContent).toContain('符文 ×3');
-  expect(root.textContent).toContain('本次需符文 3 个 · 当前 2 个');
+  expect(root.querySelector('[data-act=upStash]').textContent).toContain('确认扩建');
+  const runeRow = [...root.querySelectorAll('.camp-costs > div')].find(row => row.querySelector('dt')?.textContent === '符文');
+  expect(runeRow.querySelector('dd').textContent).toContain('2 / 3');
+  expect(runeRow.classList.contains('missing')).toBe(true);
   expect(root.textContent).toContain('符文不足，还需 1');
   expect(root.querySelector('[data-act=upStash]').disabled).toBe(true);
   expect(JSON.stringify(state.base.data)).toBe(before);
@@ -69,7 +76,8 @@ it('阈值资源够则保留可用动作，单纯渲染不消耗符文或木材'
 it('满级原因优先于资源不足', async () => {
   state.base.bagN = 30; state.base.stashN = 100; state.base.level = 5;
   const root = await render();
-  expect(root.textContent.match(/已达上限/g)).toHaveLength(2);
-  expect(root.querySelector('[data-act=upPet]').title).toBe('已满级');
+  expect(root.textContent).toContain('已达上限');
+  expect(root.querySelector('[data-act=upStash]').disabled).toBe(true);
+  expect((await render('bag')).querySelector('[data-act=upBag]').disabled).toBe(true);
   expect(root.textContent).not.toContain('不足');
 });

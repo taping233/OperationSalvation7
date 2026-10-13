@@ -1,3 +1,14 @@
 @import url('./title-p0.css');
 
 /* 全部 UI 由 ui-scale.js 统一等比缩放，不额外放大小窗文字或按钮。 */
+html[data-game-layout="landscape"] {
+  position: fixed;
+  inset: 0 auto auto 0;
+  width: var(--game-layout-width);
+  height: var(--game-layout-height);
+  margin: 0;
+  overflow: clip;
+  background: #070809;
+  /* 固定定位弹层也使用横屏画面的边界。 */
+  transform: translateZ(0);
+}

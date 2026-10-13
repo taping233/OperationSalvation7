@@ -1,0 +1,27 @@
+/* 导航触碰反馈唯一来源，沿用成就陈列室返回键的石墨变色。
+   只改变反馈，不统一页面定位/尺寸，不覆盖危险操作和主行动按钮。 */
+:root {
+  --nav-touch-bg: #50544f;
+  --nav-touch-text: #ffffff;
+  --nav-touch-time: .16s;
+}
+:is(#overlay#overlay#overlay, #topBtns#topBtns#topBtns, #cardZoom#cardZoom#cardZoom, #homeCredits#homeCredits#homeCredits)
+:is(.archive-back, .ak-back-tl, .ag-back, .bg-back, .cls2-back, .dep-back, .hub-back, .pg-back, .sugin-exit, .studio-exit, .home-credits-back, .ag-detail-close, .cz-close, .ov-x, .pg-close, #btnHelp, #btnMute):not(:disabled):not([aria-disabled="true"]) {
+  transition-property: background-color, color, border-color !important;
+  transition-duration: var(--nav-touch-time) !important;
+  transition-timing-function: ease-out !important;
+}
+:is(#overlay#overlay#overlay, #topBtns#topBtns#topBtns, #cardZoom#cardZoom#cardZoom, #homeCredits#homeCredits#homeCredits)
+:is(.archive-back, .ak-back-tl, .ag-back, .bg-back, .cls2-back, .dep-back, .hub-back, .pg-back, .sugin-exit, .studio-exit, .home-credits-back, .ag-detail-close, .cz-close, .ov-x, .pg-close, #btnHelp, #btnMute):not(:disabled):not([aria-disabled="true"]):is(:hover, :focus-visible) {
+  background: var(--nav-touch-bg) !important;
+  color: var(--nav-touch-text) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+body.reduce-motion :is(#overlay, #topBtns, #cardZoom, #homeCredits)
+:is(.archive-back, .ak-back-tl, .ag-back, .bg-back, .cls2-back, .dep-back, .hub-back, .pg-back, .sugin-exit, .studio-exit, .home-credits-back, .ag-detail-close, .cz-close, .ov-x, .pg-close, #btnHelp, #btnMute) { transition-duration: 0s !important; }
+@media (prefers-reduced-motion: reduce) {
+  :is(#overlay, #topBtns, #cardZoom, #homeCredits)
+  :is(.archive-back, .ak-back-tl, .ag-back, .bg-back, .cls2-back, .dep-back, .hub-back, .pg-back, .sugin-exit, .studio-exit, .home-credits-back, .ag-detail-close, .cz-close, .ov-x, .pg-close, #btnHelp, #btnMute) { transition-duration: 0s !important; }
+}

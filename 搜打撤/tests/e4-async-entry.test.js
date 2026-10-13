@@ -1,4 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+// This suite stubs rendering ports; the motion installer must not replace its spies.
+vi.mock('../game/src/ui/interface-motion.js', () => ({ interfaceReducedMotion: () => true }));
 
 const deferred = () => {
   let resolve, reject;
@@ -31,7 +33,7 @@ beforeEach(async () => {
     Art: { classArt: () => '', classFullArt: () => '', listSkins: () => [] },
     Meta: { ACHIEVEMENTS: [], isUnlocked: () => false, classLv: () => 1, classXP: () => 0,
       xpForNext: () => 10, perkText: () => '', addXpToProgress() {} },
-    Cards: { classPool: () => [card], randomClassCard: () => card, cardHTML: () => 'test card',
+    Cards: { all: () => [card], classPool: () => [card], randomClassCard: () => card, cardHTML: () => 'test card',
       applyAbilityRename: () => false, applyDuplicateRenames: () => false },
     Base: { slot: 1, peek: () => ({}), use(n) { this.slot = n; }, issue: () => null,
       data: { stash: [], pocket: [] }, save() {}, applyStoredCardRenames: () => false } };
@@ -99,6 +101,7 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
 
   it('resumes a slot only after real transition and loader completion', async () => {
     menu.startNewGame(); const request = handlers.enterSlot({ slot: 1 });
+    expect(document.querySelector('.city-run-transition')).not.toBeNull();
     handlers.flowContinue(); await entered.promise;
     expect(loadGame).not.toHaveBeenCalled(); gate.resolve(); await request;
     expect(loadGame).toHaveBeenCalledExactlyOnceWith(1);
@@ -179,12 +182,22 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
     if (replacement) UI.showOverlay.mockClear();
     await Promise.resolve();
     if (change === 'normal') {
-      expect(UI.showOverlay).toHaveBeenCalledOnce();
-      handlers.clsGrantGo(); expect(saveGame).toHaveBeenCalledOnce();
+      // 选角先冻结待领补给，过场结束只回地图；实际入口格负责显示领取页。
+      expect(UI.showOverlay).not.toHaveBeenCalled();
+      expect(game.entrySupply).toMatchObject({ version:1, layerIdx:0, trackPos:2, cardIds:['test'], taken:[] });
+      expect(game.ownedCards).toHaveLength(1);
+      expect(saveGame).toHaveBeenCalledTimes(2);
+      const { openEntrySupply } = await import('../game/src/run/game.run.altar.js');
+      expect(openEntrySupply()).toBe(true);
+      expect(document.querySelector('[data-act="clsEntryReveal"]')).not.toBeNull();
+      handlers.clsEntryReveal();
+      expect(document.querySelector('.entry-reward-scene')).not.toBeNull();
+      handlers.clsEntryContinue(); expect(game.state).toBe('idle');
       saveGame.mockClear(); game.discoveredPairs = new Set(); game.state = 'modal';
-      handlers.clsGrantGo(); expect(saveGame).not.toHaveBeenCalled(); expect(game.state).toBe('modal');
+      handlers.clsEntryContinue(); expect(saveGame).not.toHaveBeenCalled(); expect(game.state).toBe('modal');
     } else {
-      expect(UI.showOverlay).not.toHaveBeenCalled(); expect(saveGame).not.toHaveBeenCalled();
+      expect(UI.showOverlay).not.toHaveBeenCalled();
+      expect(saveGame).toHaveBeenCalledOnce(); // 过场前冻结待领补给；过期回调不再保存。
     }
     if (replacement) { handlers.flowContinue(); expect(await replacement).toBe(true); }
   });

@@ -1,12 +1,15 @@
-import { sdtDefine } from '../core/sdt-facade.js';
+import SDT, { sdtDefine } from '../core/sdt-facade.js';
 import { Howl, Howler } from 'howler';
 import { assetUrl } from '../core/asset-url.js';
 import { Random } from '../core/random.js';
 import { shouldPlaySfx } from './sound.policy.js';
-import { WinterSoundscape } from './sound.scape.js';
 import { MUSIC_TRACKS, overlayMusicScene, resolveMusicScene } from './sound.music.catalog.js';
 import { SceneMusicPlayer } from './sound.music.player.js';
-  let ctx = null, master = null, masterComp = null, sfxGain = null, clickGain = null, clickComp = null, scape = null;
+  // 同一页面重复初始化时，先释放旧实例，避免旧曲和监听继续运行。
+  SDT.Sound?.dispose?.();
+  const soundEvents = new AbortController();
+  let disposed = false;
+  let ctx = null, master = null, masterComp = null, sfxGain = null, clickGain = null, clickComp = null;
   // 三级开关：muted 全局静音（侧边栏 [[icon:gear]]）· musicOff 只关音乐 · sfxOff 只关音效（设置页）
   let muted = false, musicOff = false, sfxOff = false;
   // 音量 0~1，随 localStorage 持久化；音乐基准 0.45，音效基准 2.5
@@ -16,7 +19,7 @@ import { SceneMusicPlayer } from './sound.music.player.js';
   const dbGain = k => Number(k) <= 0 ? 0 : Math.pow(10, ((Math.min(1, Number(k)) - 1) * 30) / 20);
   // 战斗 ducking：战斗期间 BGM 侧链压低（audio-design），结束恢复
   let ducked = false;
-  let battleBoss = false, battlePressure = 0;
+  let battleBoss = false;
   try {
     muted = localStorage.getItem('sdt-muted') === '1';
     musicOff = localStorage.getItem('sdt-music-off') === '1';
@@ -27,6 +30,7 @@ import { SceneMusicPlayer } from './sound.music.player.js';
   } catch { /* localStorage 不可用/写入失败（隐私模式等）：音频设置回落默认值，可安全忽略 */ }
 
   function ensure() {
+    if (disposed) return false;
     if (ctx) { if (ctx.state === 'suspended') ctx.resume().catch(() => {}); return true; }
     try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch { return false; }
     master = ctx.createGain(); master.gain.value = muted ? 0 : 1;
@@ -41,9 +45,6 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     clickComp = ctx.createDynamicsCompressor();
     clickComp.threshold.value = -14; clickComp.ratio.value = 4;
     clickGain.connect(clickComp); clickComp.connect(sfxGain);
-    scape = new WinterSoundscape(ctx, master);
-    if (battleBoss) scape.setBoss(true);
-    else if (battlePressure > 0) scape.setPressure(battlePressure);
     loadClicks();
     loadHovers();
     loadSwitches();
@@ -57,6 +58,7 @@ import { SceneMusicPlayer } from './sound.music.player.js';
   let activeDecodes = 0;
   const MAX_CONCURRENT_DECODES = 2;
   function pumpDecodeQueue() {
+    if (disposed) return;
     while (activeDecodes < MAX_CONCURRENT_DECODES && decodeQueue.length) {
       const job = decodeQueue.shift();
       activeDecodes++;
@@ -145,14 +147,26 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     }
   }
   function playHover() {
+    const soft = musicMode === 'title';
     if (hoverBuffers && hoverBuffers.length) {
       const src = ctx.createBufferSource();
       src.buffer = hoverBuffers[Math.floor(Random.random('audio') * hoverBuffers.length)];
-      const g = ctx.createGain(); g.gain.value = 0.12; // 归一化后很响，压低成轻提示
-      src.connect(g); g.connect(sfxGain);
+      const g = ctx.createGain(); g.gain.value = soft ? 0.055 : 0.12;
+      let filter = null;
+      if (soft) {
+        // 标题菜单只留柔和触感，压掉 rollover 采样的尖锐高频。
+        src.playbackRate.value = 0.82;
+        filter = ctx.createBiquadFilter(); filter.type = 'lowpass';
+        filter.frequency.value = 1200; filter.Q.value = 0.5;
+        src.connect(filter); filter.connect(g);
+      } else src.connect(g);
+      g.connect(sfxGain);
+      src.onended = () => { src.disconnect(); if (filter) filter.disconnect(); g.disconnect(); };
       src.start();
     } else {
-      tone({ f: 1500, type: 'sine', dur: .04, vol: .05 });
+      tone(soft
+        ? { f: 520, f2: 430, type: 'sine', dur: .07, vol: .018, attack: .012 }
+        : { f: 1500, type: 'sine', dur: .04, vol: .05 });
     }
   }
   function playSwitch() {
@@ -413,23 +427,19 @@ import { SceneMusicPlayer } from './sound.music.player.js';
   let sceneTone = null;
   let battleBossId = '';
   let userGestured = false;
-  const musicPlayer = new SceneMusicPlayer((scene, callbacks) => new Howl({
-    src: [MUSIC_TRACKS[scene]], format: ['opus'], loop: true, html5: false,
+  const musicPlayer = new SceneMusicPlayer((scene, callbacks, { html5 = false } = {}) => new Howl({
+    src: [MUSIC_TRACKS[scene]], format: ['opus'], loop: true, html5,
     preload: false, volume: 0, onload: callbacks.load, onloaderror: callbacks.error,
+    onplay: callbacks.play, onplayerror: callbacks.playError, onunlock: callbacks.unlock,
   }), { onError: (scene, error) => console.warn('[music] load failed', scene, error) });
   function currentMusicScene() { return resolveMusicScene(musicMode, sceneTone, battleBoss ? battleBossId : ''); }
   function syncBgm() {
+    if (disposed) return;
     const visible = typeof document === 'undefined' || !document.hidden;
-    const on = !!(musicMode && !muted && !musicOff && userGestured && visible);
-    if (scape) {
-      scape.setVolume(BASE_MUSIC * dbGain(musicVol) * 0.32 * (ducked ? 0.45 : 1));
-      scape.setMode(on && musicSource === 'scape' ? (['title', 'base'].includes(musicMode) ? 'title' : musicMode === 'battle' ? 'battle' : 'board') : null);
-      // The shared battle track owns the texture; no synthetic layer over file music.
-      scape.setBoss(musicSource === 'scape' && battleBoss);
-      scape.setMuted(!on || musicSource === 'original');
-    }
+    // 先尝试自动播放；浏览器若挂起音频，由 Howler 等待首次真实输入解锁。
+    const on = !!(musicMode && !muted && !musicOff && visible);
     musicPlayer.set(currentMusicScene(), {
-      enabled: on && musicSource === 'original',
+      enabled: on,
       volume: BASE_MUSIC * dbGain(musicVol) * (ducked ? 0.45 : 1),
       immediate: muted || musicOff || !visible,
     });
@@ -444,10 +454,6 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     sceneTone = null;
     if (mode === musicMode) { syncBgm(); return; }
     const nextMode = mode || null;
-    if (musicMode === 'battle' && nextMode !== 'battle') {
-      battlePressure = 0;
-      if (scape && !battleBoss) scape.setPressure(0);
-    }
     musicMode = nextMode;
     syncBgm();
   }
@@ -478,16 +484,14 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     ducked = v;
     syncBgm();
   }
-  // BOSS 紧张垫开关（音频 P2#12）：声景 battle 层旁路+tension 抬升，与正曲叠加出首脑战压迫感
+  // 保留战斗调用接口；首脑战也只使用当前文件配乐。
   function setBoss(on, id = '') {
     battleBoss = !!on;
     battleBossId = battleBoss ? id : '';
     syncBgm();
   }
-  function setBattlePressure(value) {
-    battlePressure = Math.max(0, Math.min(1, Number(value) || 0));
-    if (scape) scape.setPressure(value);
-  }
+  // 旧合成声景已退役，压力接口保留供现有战斗调用。
+  function setBattlePressure() {}
   // 只关音效（设置页）
   function setSfxMuted(m) {
     sfxOff = !!m;
@@ -504,31 +508,27 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     try { localStorage.setItem('sdt-sfx-vol', String(sfxVol)); } catch { /* localStorage 不可用/写入失败（隐私模式等）：音频设置回落默认值，可安全忽略 */ }
     if (sfxGain) sfxGain.gain.value = BASE_SFX * dbGain(sfxVol);
   }
-  // 自动播放策略：首次交互后恢复上下文；若此前已选定 BGM 则立即开声
+  // 首次输入恢复被浏览器挂起的上下文，并重试未能开始的当前 BGM。
   function kick() {
     if (!ensure()) return;
     // 已解锁且 BGM 正常播放、WebAudio 也未挂起时，后续每次按键/点击直接跳过——
     // 否则每个输入都重走 syncBgm（Howler mute/volume 写入），还会打断进行中的音量淡入淡出。
     // ctx 挂起（浏览器音频策略）时不得早退，否则跳过 resume 会让音效一直哑着。
-    // 声景由持续 WebAudio 节点驱动，没有 Howl 的 playing() 状态可供判断；
-    // 只要上下文仍在运行，后续 pointer 不必重复 sync，避免反复重排淡入曲线。
-    const audioAlreadyRunning = musicSource === 'scape'
-      ? !!scape
-      : musicPlayer.playing();
+    const audioAlreadyRunning = musicPlayer.playing();
     if (userGestured && musicMode && audioAlreadyRunning
       && (!Howler.ctx || Howler.ctx.state === 'running')) return;
     userGestured = true;
-    if (Howler.ctx && Howler.ctx.state === 'suspended') Howler.ctx.resume().catch(() => {});
+    if (Howler.ctx && Howler.ctx.state === 'suspended') Howler.ctx.resume().then(syncBgm).catch(() => {});
     syncBgm();
   }
-  document.addEventListener('pointerdown', kick);
-  document.addEventListener('keydown', kick);
-  document.addEventListener('visibilitychange', syncBgm);
+  document.addEventListener('pointerdown', kick, { capture: true, signal: soundEvents.signal });
+  document.addEventListener('keydown', kick, { capture: true, signal: soundEvents.signal });
+  document.addEventListener('visibilitychange', syncBgm, { signal: soundEvents.signal });
 
   // 全局事件委托：任何 <button> 被点击都播放点击音（替代各处手动绑定，避免重复）
   document.addEventListener('pointerdown', (e) => {
     if (e.target && e.target.closest && e.target.closest('button')) sfx('click');
-  });
+  }, { signal: soundEvents.signal });
   // 全局事件委托：菜单按钮掠过播放悬停音（pointerover 会因子元素冒泡重复触发，去重）
   let lastHoverBtn = null;
   document.addEventListener('pointerover', (e) => {
@@ -537,17 +537,28 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     if (!btn || btn === lastHoverBtn || btn.disabled) return;
     lastHoverBtn = btn;
     sfx('hover');
-  });
+  }, { signal: soundEvents.signal });
   document.addEventListener('pointerout', (e) => {
     if (lastHoverBtn && e.target && e.target.closest && e.target.closest('button') === lastHoverBtn) lastHoverBtn = null;
-  });
+  }, { signal: soundEvents.signal });
   // 全局事件委托：复选框/开关切换播放开关音
   document.addEventListener('change', (e) => {
     if (e.target && e.target.type === 'checkbox') sfx('switch');
-  });
+  }, { signal: soundEvents.signal });
+
+  function dispose() {
+    if (disposed) return;
+    disposed = true;
+    soundEvents.abort();
+    musicPlayer.dispose();
+    decodeQueue.length = 0;
+    if (master) master.gain.value = 0;
+    if (ctx && ctx.state !== 'closed') ctx.close().catch(() => {});
+  }
+  if (import.meta.hot) import.meta.hot.dispose(dispose);
 
   sdtDefine('Sound', {
-    sfx, music, scene, setMuted, setMusicMuted, setMusicSource, setSfxMuted, setMusicVolume, setSfxVolume, setDucked, setBoss, setBattlePressure, ensure,
+    sfx, music, scene, setMuted, setMusicMuted, setMusicSource, setSfxMuted, setMusicVolume, setSfxVolume, setDucked, setBoss, setBattlePressure, ensure, dispose,
     get muted() { return muted; },
     get musicMuted() { return musicOff; },
     get sfxMuted() { return sfxOff; },

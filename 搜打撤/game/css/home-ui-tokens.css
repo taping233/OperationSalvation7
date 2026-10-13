@@ -1,0 +1,16 @@
+/* 首页、设置、制作名单共用的材质与字级；不同层级保留各自的景深。 */
+:root {
+  --home-ui-feedback: 180ms;
+  --home-ui-ease: cubic-bezier(.22,1,.36,1);
+  --home-ui-region: 640ms;
+  --home-ui-change: 280ms;
+  --home-ui-title: 40px;
+  --home-ui-label: 24px;
+  --home-ui-copy: 22px;
+  --home-ui-sub: 16px;
+  --home-ui-edge: #d5e1ed26;
+  --home-ui-highlight: #e8f3ff38;
+  --home-ui-shadow: inset 0 1px 0 var(--home-ui-highlight), inset 0 -1px 0 #03080e66, 0 3px 8px #02050933, 0 22px 52px #02050970;
+  --home-ui-cold: 139,182,207;
+  --home-ui-gold: 204,181,139;
+}

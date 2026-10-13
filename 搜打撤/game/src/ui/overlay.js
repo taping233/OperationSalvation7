@@ -38,14 +38,22 @@ export const overlayMethods = {
 
   endRoom() {
     this._roomActive = false;
+    // 奖励页的聚焦可滚动 overflow:hidden 的游戏视口；回地图时恢复HUD原点。
+    const viewport = this.el.viewport || document.getElementById('viewport');
+    if (viewport) { viewport.scrollTop = 0; viewport.scrollLeft = 0; }
     this.el.overlay.classList.remove('room-view');
     const card = this.el.ovBody && this.el.ovBody.parentElement;
     if (card) card.classList.remove('room');
   },
 
   showOverlay(title, bodyHtml, mode, options = {}) {
+    const revision = this._overlayRevision = (this._overlayRevision || 0) + 1;
+    this._cancelPageBg?.();
+    this.hideTooltip?.();
+    document.getElementById('cardZoom')?._closeCardZoom?.(true);
     // 失败/清空类标题用红色语义
     if (this._hideTimer) { clearTimeout(this._hideTimer); this._hideTimer = null; }
+    this._finishHide = null;
     const wasOpen = !this.el.overlay.hidden;
     const refreshHub = wasOpen && mode === 'page' &&
       !!this.el.ovBody.querySelector('#hubMain') && bodyHtml.includes('id="hubMain"');
@@ -61,6 +69,7 @@ export const overlayMethods = {
     this.el.ovTitle.innerHTML = SDT.Icons.rich(title);
     // 2026-09-06 #17：战利品结算页 = 战斗胜利动画（1.4s 强调入场）
     const victoryCard = this.el.ovBody.parentElement;
+    victoryCard?.classList.remove('fx-victory');
     if (victoryCard && /搜刮！/.test(title)) { victoryCard.classList.remove('fx-victory'); void victoryCard.offsetWidth; victoryCard.classList.add('fx-victory'); }
     this.el.ovBody.innerHTML = SDT.Icons.rich(bodyHtml);
     // 广播当前弹层模式：战斗序列帧层据此做白名单（只有 battle 模式可见，2026-09-13 留言）
@@ -110,7 +119,7 @@ export const overlayMethods = {
     // 右上角 × 显隐：只有能被取消类入口安全关闭的浮层才显示（必选流程/战斗页自动隐藏）。
     // 卡牌库整页头部自带关闭钮（photo-studio v3 的 pg-close），全局 × 与它并排重复
     // （2026-09-20 老板：卡牌库有两个退出键）——该页隐藏全局 ×，Esc 仍走页内钮关闭
-    if (this.el.ovCloseX) this.el.ovCloseX.hidden = !this._canCancelOverlay() || !!this.el.ovBody.querySelector('.card-library-page');
+    if (this.el.ovCloseX) this.el.ovCloseX.hidden = !this._canCancelOverlay() || !!this.el.ovBody.querySelector('.card-library-page, .shop-market, .shop-exchange, .reward-replica, .event-scene');
     this._isolateOverlayBackground();
     // 全屏覆盖型页面（卡牌库/整备整页/战斗房间/宝箱）：被盖住的主页动画一律暂停
     // （2026-09-07 老板：动画不出现在画面中就暂停，回到页面再恢复）。
@@ -141,7 +150,7 @@ export const overlayMethods = {
       // 焦点导航（game-ui-ux）：显式首焦点优先；否则优先安全的取消/返回
       // 语义，避免确认页默认把不可逆动作放在 Enter 的第一击上。
       requestAnimationFrame(() => {
-        if (this.el.overlay.hidden) return;
+        if (this.el.overlay.hidden || this._overlayRevision !== revision) return;
         const target = this._resolveOverlayInitialFocus(options.initialFocus);
         if (target) target.focus({ preventScroll: true });
         else this.el.overlay.focus({ preventScroll: true });
@@ -158,6 +167,7 @@ export const overlayMethods = {
   // U1：整页背景就绪检测。_bgReady 缓存已确认加载过的 URL，重复打开零开销。
   _bgReady: null,
   _checkPageBg() {
+    this._cancelPageBg?.();
     const host = this.el.ovBody.querySelector('[data-asset-key]');
     if (!host) return;
     const m = /url\("?([^")]+)"?\)/.exec(getComputedStyle(host).backgroundImage || '');
@@ -166,20 +176,34 @@ export const overlayMethods = {
     if (this._bgReady && this._bgReady.has(url)) return;
     if (!this._bgReady) this._bgReady = new Set();
     const probe = new Image();
-    const done = () => {
-      this._bgReady.add(url);
-      // 页面可能在加载期间被换掉：只摘当前在台面上的 loading 类
-      if (!this.el.overlay.hidden && this.el.ovBody.contains(host)) host.classList.remove('bg-loading');
+    let active = true;
+    let timeout;
+    const cancel = () => {
+      active = false;
+      clearTimeout(timeout);
+      probe.onload = null;
+      probe.onerror = null;
+      host.classList.remove('bg-loading');
+      host.removeAttribute('aria-busy');
+      if (this._cancelPageBg === cancel) this._cancelPageBg = null;
     };
-    probe.onload = done;
-    // 404/离线时 onload 永不触发：onerror 摘除「正在进入…」提示，失败 URL 不进
-    // _bgReady——资产热修后下次打开仍会重新探测（2026-09-28 代码线修复）
-    probe.onerror = () => {
-      if (!this.el.overlay.hidden && this.el.ovBody.contains(host)) host.classList.remove('bg-loading');
+    const finish = success => {
+      if (!active) return;
+      if (success) this._bgReady.add(url);
+      cancel();
     };
-    if (probe.complete && probe.naturalWidth > 0) { done(); return; }
+    probe.onload = () => {
+      if (typeof probe.decode === 'function') probe.decode().then(() => finish(true), () => finish(false));
+      else finish(true);
+    };
+    // 错误和超时不缓存为成功；离场后迟到的加载不会更改下一页。
+    probe.onerror = () => finish(false);
+    this._cancelPageBg = cancel;
     host.classList.add('bg-loading');
+    host.setAttribute('aria-busy', 'true');
+    timeout = setTimeout(() => finish(false), 8000);
     probe.src = url;
+    if (probe.complete && probe.naturalWidth > 0) probe.onload();
   },
 
   // 背包关闭回调（game.bag bindBagMixins 晚绑定注册，避免 ui→bag 静态成环）：
@@ -187,6 +211,11 @@ export const overlayMethods = {
   _bagCloseHook: null,
 
   hideOverlay(opts) {
+    this._overlayRevision = (this._overlayRevision || 0) + 1;
+    this._cancelPageBg?.();
+    this.hideTooltip?.();
+    document.getElementById('cardZoom')?._closeCardZoom?.(true);
+    document.dispatchEvent(new CustomEvent('sdt-overlay-close'));
     const immediate = !!(opts && opts.immediate);
     // 已关闭且无挂起收尾：短路（迭代评审 09-20 客户端岗）——迟到的 transition/chest 收尾
     // 不再空跑 finish、重放 close 音
@@ -229,11 +258,13 @@ export const overlayMethods = {
       card.classList.remove('scene');
       card.classList.remove('swap');
       card.classList.remove('room');
+      card.classList.remove('chest', 'discover', 'fx-victory', 'hub-refresh');
       this.el.overlay.classList.remove('closing');
       this.el.overlay.classList.remove('opaque');
       this.el.overlay.classList.remove('bag-full');
       this.el.overlay.classList.remove('fx-doom');
       this.el.overlay.classList.remove('fx-glass');
+      this.el.overlay.classList.remove('pick-veil', 'room-view');
       this.el.overlay.hidden = true;
       this._restoreOverlayBackground();
       // 隐藏不等于释放：卡牌库一次可生成 5k+ DOM 节点与数百张 <img>。关闭后若仍留在

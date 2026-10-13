@@ -1,56 +1,31 @@
 
-import { circle, font, hash2, rrect } from './renderer.primitives.js';
-import { drawTacticalIcon } from './renderer.icons.js';
+import { font, hash2 } from './renderer.primitives.js';
 import { revealProgress } from './map-reveals.js';
 import { ease } from './motion-primitives.js';
 import { renderScheduler } from './render-scheduler.js';
 import { NODE_INFO } from './node-info.js';
+import { isConsumedMapNode } from './map-node-state.js';
+import { createMapCityAtmosphere } from './map-city-atmosphere.js';
+import { drawMapNodeBadge, drawMapTraveller, mapViewportScale } from './map-node-art.js';
+import { getExpeditionPreview, findMapTravelPath, getMapTravelPresentation, mapTravelCurve, mapTravelPoint } from '../run/expedition.view.js';
 const SDT = window.SDT;
-  const TAU = Math.PI * 2;
-  const T0 = SDT.MAP.tile;   // 缩放基准单位（特效 / 棋子尺寸用）
 
   const NODE_R = 22;         // 普通战术结点半径（世界像素）
   const BOSS_R = 24;         // BOSS 结点半径
   const ALTAR_R = 24;        // 祭坛结点半径
   const LINK_GAP = 24;       // 连线两端距结点边缘的留白
-  // 走过即空的节点（2026-09-13 老板留言：走过的格子一律换空白节点图标）。
-  // 通路与地标是例外，永远保留原图标：层间闸门 / 紧急撤离 / 终局撤离 / 入口。
-  const PERSISTENT_TYPES = new Set(['door', 'emergencyExit', 'extraction', 'entrance']);
 
-  const COLORS = {
-    bgTop: '#405b66',
-    bgBottom: '#193341',
-    mixTo: '#0a1014',                     // 非当前环结点压暗的目标色
-    ringLink: 'rgba(200,218,213,0.85)',  // 普通已知路线退后，可达路线单独强调
-  };
 
-  // 逐帧零分配：setLineDash 只拷贝值不持有数组引用，复用同一缓冲即可
-  const DASH2 = [0, 0];                  // 两段式点划（虚线流光全用这种）
-  const NO_DASH = [];                    // 还原实线（空点划，常量复用）
-  function setDash(c, seg1, seg2) { DASH2[0] = seg1; DASH2[1] = seg2; c.setLineDash(DASH2); }
-
-  // 局内壁纸：L1/L2 共用静态图版（塔卫二废墟植物走廊）；L3/L4/L5 用分层专属壁纸
-  // （2026-09-09 老板提供，浅色/高饱和图配更深遮罩保证结点可读）。全部首启即预载。
-  const LAYER_BACKDROPS = {
-    0: { src: new URL('../../assets/scenes/winter-expedition/outskirts.webp', import.meta.url).href, veil: .32 },
-    1: { src: new URL('../../assets/scenes/winter-expedition/greenhouse.webp', import.meta.url).href, veil: .42 },
-    2: { src: new URL('../../assets/scenes/winter-expedition/sanctuary.webp', import.meta.url).href, veil: .42 },
-    3: { src: new URL('../../assets/scenes/winter-expedition/core.webp', import.meta.url).href, veil: .4 },
-  };
-  const layerBackdrops = {};
-  for (const [li, conf] of Object.entries(LAYER_BACKDROPS)) {
-    // 首启即预载（老板定向）：进层时图已解码完毕，切换壁纸无空窗
-    const img = layerBackdrops[li] = new Image();
-    img.decoding = 'async';
-    img.onload = () => { backdropCanvas = null; SDT.RenderScheduler?.invalidate(); };
-    img.src = conf.src;
-  }
-  function backdropFor(li) {
-    const conf = LAYER_BACKDROPS[li];
-    if (!conf) return { img: layerBackdrops[0], veil: .32 };
-    return { img: layerBackdrops[li], veil: conf.veil };
-  }
+  const mapAtmosphere = new Image();
+  mapAtmosphere.decoding='async';
+  mapAtmosphere.onload=()=>{backdropCanvas=null;SDT.RenderScheduler?.invalidate();};
+  mapAtmosphere.src=new URL('../../assets/scenes/map-nodes/map-atmosphere-is7-1012.webp',import.meta.url).href;
+  function backdropFor(){return {img:mapAtmosphere};}
   let backdropCanvas = null;               // 壁纸合成层（尺寸/层或就绪状态变化时重建）
+  const drawMapCityAtmosphere = createMapCityAtmosphere(() => {
+    backdropCanvas = null;
+    renderScheduler.invalidate();
+  });
   const backdropKey = { w: 0, h: 0, ready: false, li: -1 };
   // 换层溶解状态：snap=旧层烘焙画布引用（重建不销毁旧对象，直接留用），t0=起播时刻
   const backdropFade = { snap: null, t0: 0 };
@@ -74,17 +49,8 @@ const SDT = window.SDT;
   // drawImage 按目标尺寸拉伸铺满；停止 ~150ms 后置空强制重烘焙一次。
   // 壁纸 onload 置空 backdropCanvas 的强制重建路径不受影响
   let backdropResizeTimer = null;
-  function drawCover(ctx, image, w, h) {
-    const iw = image.naturalWidth || image.width;
-    const ih = image.naturalHeight || image.height;
-    if (!iw || !ih) return;
-    const scale = Math.max(w / iw, h / ih);
-    const dw = iw * scale, dh = ih * scale;
-    ctx.drawImage(image, (w - dw) * 0.5, (h - dh) * 0.5, dw, dh);
-  }
-
   function ensureBackdrop(cam, li) {
-    const { img, veil } = backdropFor(li);
+    const { img } = backdropFor(li);
     const ready = img.complete && img.naturalWidth > 0;
     const sizeChanged = backdropCanvas && (backdropKey.w !== cam.viewW || backdropKey.h !== cam.viewH);
     if (sizeChanged && backdropKey.li === li && backdropKey.ready === ready) {
@@ -109,34 +75,22 @@ const SDT = window.SDT;
     // alpha:false：不透明烘焙层走更省显存带宽的合成路径，也规避透明纹理混合异常
     const b = c.getContext('2d', { alpha: false });
     b.scale(c.width / cam.viewW, c.height / cam.viewH);
-    // 壁纸未就绪时回退纯色；就绪后整层铺底，bg 渐变按层强度遮罩保证结点可读
-    b.fillStyle = '#0B0E12';
+    // Structural backdrop and independent winter light layers; retain cache/transition lifecycle.
+    b.fillStyle = '#06080a';
     b.fillRect(0, 0, cam.viewW, cam.viewH);
-    if (ready) drawCover(b, img, cam.viewW, cam.viewH);
-    b.globalAlpha = veil;
-    const bg = b.createLinearGradient(0, 0, 0, cam.viewH);
-    bg.addColorStop(0, COLORS.bgTop);
-    bg.addColorStop(1, COLORS.bgBottom);
-    b.fillStyle = bg;
-    b.fillRect(0, 0, cam.viewW, cam.viewH);
-    // 以下两层原在 draw() 里每帧重建渐变并全屏填充（2026-09-13 性能巡检）：
-    // 它们只随视口尺寸变化，与壁纸层一起烘焙进本缓存画布，视觉逐像素一致。
-    b.globalAlpha = 1;
-    // 暗色纱层：保留地图、节点和 HUD 的对比度，不遮掉壁纸主体
-    const shade = b.createLinearGradient(0, 0, 0, cam.viewH);
-    shade.addColorStop(0, 'rgba(222,234,229,0.08)');
-    shade.addColorStop(0.55, 'rgba(12,34,45,0.08)');
-    shade.addColorStop(1, 'rgba(6,22,31,0.24)');
-    b.fillStyle = shade;
-    b.fillRect(0, 0, cam.viewW, cam.viewH);
-    // 中央光晕：给壁纸中心一点冷色透气感
-    const halo = b.createRadialGradient(cam.viewW * 0.5, cam.viewH * 0.46, 0,
-      cam.viewW * 0.5, cam.viewH * 0.46, Math.max(cam.viewW, cam.viewH) * 0.72);
-    halo.addColorStop(0, 'rgba(83,126,137,0.08)');
-    halo.addColorStop(0.62, 'rgba(36,64,74,0.03)');
-    halo.addColorStop(1, 'rgba(0,0,0,0)');
-    b.fillStyle = halo;
-    b.fillRect(0, 0, cam.viewW, cam.viewH);
+    if(ready){
+      const scale=Math.max(cam.viewW/img.naturalWidth,cam.viewH/img.naturalHeight);
+      const dw=img.naturalWidth*scale,dh=img.naturalHeight*scale;
+      b.filter='grayscale(.9) brightness(.34) contrast(1.14)';
+      b.drawImage(img,(cam.viewW-dw)/2,(cam.viewH-dh)/2,dw,dh);b.filter='none';
+    }
+    drawMapCityAtmosphere(b, cam.viewW, cam.viewH);
+    b.fillStyle='rgba(1,10,17,.25)';b.fillRect(0,0,cam.viewW,cam.viewH);
+    const cold=b.createRadialGradient(cam.viewW*.22,cam.viewH*.20,0,cam.viewW*.22,cam.viewH*.20,cam.viewW*.62);
+    cold.addColorStop(0,'rgba(34,71,97,.20)');cold.addColorStop(1,'rgba(9,20,30,0)');
+    b.fillStyle=cold;b.fillRect(0,0,cam.viewW,cam.viewH);
+    // Quiet winter scenery supports the routes; no separate beams or node-coloured particles.
+    b.globalAlpha=1;
     backdropCanvas = c;
     return c;
   }
@@ -144,8 +98,7 @@ const SDT = window.SDT;
   // 暗角渐变按视口尺寸缓存（原每帧 createRadialGradient，对象只随尺寸变化）
   let vignetteKey = '';
   let vignetteGrad = null;
-  // 节点标签宽度缓存（measureText 结果，字体固定时只取决于文本内容）
-  const labelWidthCache = new Map();
+  const mapRoadCache = new WeakMap();
 
 
   const isCurrentNode = (game, n) => n.li === game.layerIdx && n.idx === game.trackPos;
@@ -266,142 +219,140 @@ const SDT = window.SDT;
     return geo;
   }
 
-  // 当前节点使用透明双轮廓，背景场景透过图标可见。
-  function drawCurrentNodeFrame(ctx, game) {
-    const g = nodeGeo(game);
-    const n = g.nodes.find(node => isCurrentNode(game, node));
-    if (!n) return;
-    ctx.save();
-    ctx.shadowBlur = 0;
-    ctx.strokeStyle = '#e1c18a';
-    ctx.lineWidth = 1 / game.cam.zoom;
-    ctx.translate(n.x, n.y); ctx.rotate(Math.PI / 4);
-    ctx.strokeRect(-n.r * .93, -n.r * .93, n.r * 1.86, n.r * 1.86);
-    ctx.restore();
+  function selectedMapPath(game){
+    const travel=getMapTravelPresentation(game);
+    if(travel?.path?.length)return travel.path;
+    const target=getExpeditionPreview(game)||game.moveTarget;
+    if(!target)return [];
+    const route=findMapTravelPath(game,target);
+    return route?.length?[{li:game.layerIdx,idx:game.trackPos},...route]:[];
   }
+  const mapKey=n=>`${n.li},${n.idx}`;
+  const mapEdgeKey=(a,b)=>[mapKey(a),mapKey(b)].sort().join('|');
 
-  // ---------- 图标层（圆形位图结点：呼吸缩放；当前环明亮，可走相邻环高亮，走过的中亮，其余隐藏/虚化） ----------
-  // 节点配色表提升到模块级：原来在循环体内每节点每帧重建 14 键对象（纯常数）
-  const NODE_TYPE_COLORS = { battle:'#e2a095', coin:'#e2c28b', wood:'#e2c28b', rations:'#e2c28b', chest:'#e2c28b', key:'#e2c28b', fire:'#8fc8b7', emergencyExit:'#8fc8b7', extraction:'#8fc8b7', event:'#a0cfda', shop:'#a0cfda', altar:'#c2b0df', boss:'#e2a095', entrance:'#8fc8b7' };
-  function drawIcons(ctx, game) {
-    const z = game.cam.zoom, g = nodeGeo(game);
-    const reduced = SDT.Motion ? SDT.Motion.reduceMotion() : false;
-    for (const n of g.nodes) {
-      const current = isCurrentNode(game, n);
-      const legal = g.legalKeys.has(`${n.li},${n.idx}`);
-      const walked = !!game.visited?.[`${n.li},${n.idx}`];
-      const pulse = current && !reduced ? 1 + Math.sin((game.time || 0) * 3.4) * .06 : 1;
-      // 迷雾揭示 popIn（2026-09-27 动效补全）：新揭开节点按 spring 进度放大+淡入
-      const rv = !reduced ? revealProgress(`${n.li},${n.idx}`, game.time || 0) : 1;
-      const rvS = rv < 1 ? 0.55 + 0.45 * rv : 1;
-      const rvA = rv < 1 ? Math.min(1, rv * 1.4) : 1;
-      const s = pulse * rvS;
-      ctx.save();
-      ctx.globalAlpha = (current || legal ? 1 : .52) * rvA;
-      // W1-10（2026-09-27 R2）：层间闸门金色化——门是层内唯一主线目标，此前与普通
-      // 节点同色（NEW M-1 并入 W1-10）。金色 = 全站「目标/通道」语义色。
-      const isDoor = game.doorKeys ? game.doorKeys.has(`${n.li},${n.idx}`) : false;
-      const color = current ? '#f3dfad' : isDoor ? (legal ? '#edcb8d' : '#c8ac74') : NODE_TYPE_COLORS[n.def.type] || '#a0cfda';
-      // 消耗过的节点（2026-09-13 留言）：踩过一次的格子内容已取走，图标换成空白节点图标
-      const spent = walked && !current && !PERSISTENT_TYPES.has(n.def.type) && !isDoor;
-      ctx.translate(n.x, n.y); ctx.rotate(Math.PI / 4); ctx.scale(s, s);
-      ctx.shadowBlur = 0;
-      ctx.strokeStyle = current ? '#f3dfad' : isDoor ? '#e2c88f' : legal ? color : '#93afb8'; ctx.lineWidth = (current ? 2.2 : isDoor && legal ? 2 : legal ? 1.7 : 1) / z;
-      ctx.strokeRect(-n.r * .78, -n.r * .78, n.r * 1.56, n.r * 1.56);
-      ctx.rotate(-Math.PI / 4); ctx.scale(1 / s, 1 / s); ctx.translate(-n.x, -n.y);
-      drawTacticalIcon(ctx, spent ? 'blank' : n.def.type, n.x, n.y, Math.max(.8, n.r / 12), spent ? '#93afb8' : color);
-      if (walked && !current) {
-        ctx.fillStyle = '#76aa97';
-        circle(ctx, n.x + n.r * .75, n.y - n.r * .75, 5 / z); ctx.fill();
-      }
-      const noteKey = game.map?.boardId + '|' + n.li + ',' + n.idx;
-      if (game.noteMap?.has(noteKey)) {
-        ctx.fillStyle = '#f0a832';
-        ctx.shadowColor = 'rgba(240,168,50,0.6)';
-        ctx.shadowBlur = 4 / z;
-        circle(ctx, n.x + n.r * .78, n.y - n.r * .82, 3.2 / z); ctx.fill();
-        ctx.shadowBlur = 0;
-      }
+  // Artwork and type names remain small relative to the complete viewport.
+  function drawIcons(ctx,game){
+    const z=game.cam.zoom,g=nodeGeo(game),unit=mapViewportScale(game.cam.viewW);
+    const travel=getMapTravelPresentation(game);
+    const preview=travel?.path?.at(-1)||getExpeditionPreview(game)||game.moveTarget;
+    const path=selectedMapPath(game),onPath=new Set(path.map(mapKey));
+    const reduced=SDT.Motion?.reduceMotion?.()||false;
+    for(const n of g.nodes){
+      const key=mapKey(n),current=isCurrentNode(game,n),legal=g.legalKeys.has(key);
+      const selected=preview?.li===n.li&&preview?.idx===n.idx;
+      const routed=onPath.has(key),primary=current||selected||legal||routed;
+      const screen=game.cam.worldToScreen(n.x,n.y);
+      if(!primary&&(screen.y<58*unit||screen.y>game.cam.viewH-105*unit))continue;
+      const door=game.doorKeys?.has(key)||game.layerData[n.li]?.doors?.some(d=>d.at===n.idx);
+      const supply=game.entrySupply;
+      const entryPending=supply?.layerIdx===n.li&&supply.trackPos===n.idx&&(supply.taken?.length||0)<(supply.cardIds?.length||0);
+      const type=entryPending?'event':isConsumedMapNode(game,n)?'blank':door?'door':n.def.type;
+      const name=entryPending?'入城补给':NODE_INFO[type]?.[0]||'未知地点';
+      const state=current?'current':selected?'selected':routed?'route':legal?'legal':game.visited?.[key]?'visited':'known';
+      const rv=reduced?1:revealProgress(key,game.time||0);
+      const detailScale=primary?Math.min(1,Math.max(.65,z)):Math.min(1,Math.max(.25,z*.65));
+      const scale=unit*detailScale*(rv<1?.75+.25*rv:1)/z;
+      ctx.save();ctx.translate(n.x,n.y);ctx.scale(scale,scale);ctx.globalAlpha=rv<1?Math.min(1,rv*1.4):1;
+      drawMapNodeBadge(ctx,type,name,state,{
+        hovered:game.hover?.li===n.li&&game.hover?.idx===n.idx,
+        note:game.noteMap?.has(`${game.map?.boardId}|${key}`),
+        showLabel:current||selected||(type!=='blank'&&!routed&&(legal?z>=.65:z>=.85)),
+      });
       ctx.restore();
     }
   }
 
-  // Labels stay a readable screen size at any zoom. Only known, nearby nodes are named.
-  function drawNodeLabels(ctx, game) {
-    const g = nodeGeo(game), z = game.cam.zoom;
-    const occupied = [];
-    const ordered = [...g.nodes].sort((a, b) =>
-      Number(isCurrentNode(game, b)) * 2 + Number(g.legalKeys.has(`${b.li},${b.idx}`)) -
-      Number(isCurrentNode(game, a)) * 2 - Number(g.legalKeys.has(`${a.li},${a.idx}`)));
-    ctx.save(); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    // 字体固定 14px：宽度只取决于文本，按标签串缓存测量结果。
-    ctx.font = `600 14px "HarmonyOS Sans SC","HarmonyOS Sans","Noto Sans SC Sub",sans-serif`;
-    for (const n of ordered) {
-      const current = isCurrentNode(game, n), legal = g.legalKeys.has(`${n.li},${n.idx}`);
-      if (!current && !legal && z < .65) continue;
-      const p = game.cam.worldToScreen(n.x, n.y);
-      if (p.x < 20 || p.x > game.cam.viewW - 20 || p.y < 60 || p.y > game.cam.viewH - 55) continue;
-      const door = game.doorKeys ? game.doorKeys.has(`${n.li},${n.idx}`) : !!game.layerData[n.li]?.doors?.some(d => d.at === n.idx);
-      const name = NODE_INFO[door ? 'door' : n.def.type]?.[0] || '安全节点';
-      const label = `${current ? '当前位置 · ' : ''}${name}`;
-      let w = labelWidthCache.get(label);
-      if (w === undefined) { w = ctx.measureText(label).width + 24; labelWidthCache.set(label, w); }
-      const x = p.x - w / 2, y = p.y + n.r * z + 14;
-      if (occupied.some(r => x < r.x + r.w && x + w > r.x && y < r.y + 42 && y + 42 > r.y)) continue;
-      occupied.push({x,y,w});
-      ctx.fillStyle = current ? '#e1c18a' : '#edf0e8f5';
-      rrect(ctx, x, y, w, 29, 1); ctx.fill();
-      ctx.strokeStyle = current ? '#1b3442' : door ? '#b7985f' : legal ? '#8faaa9' : '#82999f';
-      ctx.lineWidth = 1; ctx.stroke();
-      ctx.fillStyle = '#1b3442'; ctx.fillText(label, p.x, y + 14.5);
-    }
-    ctx.restore();
+  const lerpPoint=(a,b,t)=>({x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t});
+  function splitMapCurve(c,t){
+    const a=lerpPoint(c.from,c.c1,t),b=lerpPoint(c.c1,c.c2,t),d=lerpPoint(c.c2,c.to,t);
+    const e=lerpPoint(a,b,t),f=lerpPoint(b,d,t),p=lerpPoint(e,f,t);
+    return [{from:c.from,c1:a,c2:e,to:p},{from:p,c1:f,c2:d,to:c.to}];
+  }
+  function mapCurveSection(c,start,end){
+    const left=splitMapCurve(c,end)[0];
+    return start>0?splitMapCurve(left,start/end)[1]:left;
+  }
+  function mapCurvePath(c){
+    const p=new Path2D();p.moveTo(c.from.x,c.from.y);p.bezierCurveTo(c.c1.x,c.c1.y,c.c2.x,c.c2.y,c.to.x,c.to.y);return p;
+  }
+  function clippedMapRoad(from,to,game,unit){
+    const z=game.cam.zoom,len=Math.hypot(to.x-from.x,to.y-from.y);
+    if(len<1)return null;
+    const selected=getExpeditionPreview(game)||game.moveTarget;
+    const pad=n=>{
+      const marked=isCurrentNode(game,n)||(selected?.li===n.li&&selected?.idx===n.idx);
+      const supply=game.entrySupply;
+      const pending=supply?.layerIdx===n.li&&supply.trackPos===n.idx&&(supply.taken?.length||0)<(supply.cardIds?.length||0);
+      if(!pending&&(n.def?.type==='blank'||isConsumedMapNode(game,n)))return {x:24*unit/z,top:24*unit/z,bottom:(marked?52:24)*unit/z};
+      return {x:(marked?54:34)*unit/z,top:(marked?51:34)*unit/z,bottom:74*unit/z};
+    };
+    const outside=(p,n,box)=>Math.abs(p.x-n.x)>Math.min(box.x,len*.32)||p.y-n.y < -Math.min(box.top,len*.32)||p.y-n.y > Math.min(box.bottom,len*.32);
+    const exit=(origin,target)=>{
+      let low=0,high=.49;const box=pad(origin);
+      for(let i=0;i<12;i++){const mid=(low+high)/2;if(outside(mapTravelPoint(origin,target,mid),origin,box))high=mid;else low=mid;}
+      return high;
+    };
+    const start=exit(from,to),end=1-exit(to,from);
+    const curve=mapTravelCurve(from,to),section=mapCurveSection(curve,start,end);
+    return {curve,start,end,section,path:mapCurvePath(section)};
   }
 
-  // ---------- 手绘连线（环内线按层合并批描：实描+点划叠加；门/祭坛线流光虚线逐帧） ----------
-  function drawLinks(ctx, game) {
-    const g = nodeGeo(game);
-    const z = game.cam.zoom, curLi = game.layerIdx;
-    ctx.save();
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = COLORS.ringLink;
-    for (let li = 0; li < g.linksByLayer.length; li++) {
-      const path = g.linksByLayer[li];
-      ctx.globalAlpha = li === curLi ? 0.35 : 0.10;
-      ctx.lineWidth = 1.8 / z;
-      ctx.stroke(path);
-      ctx.globalAlpha = li === curLi ? 0.08 : 0.03;
-      ctx.lineWidth = 2.8 / z;
-      setDash(ctx, 1.5 / z, 9 / z);
-      ctx.stroke(path);
-      ctx.setLineDash(NO_DASH);
+  function drawLinks(ctx,game){
+    const g=nodeGeo(game),z=game.cam.zoom,unit=mapViewportScale(game.cam.viewW),curLi=game.layerIdx;
+    const preview=getExpeditionPreview(game)||game.moveTarget;
+    const selectedKey=preview?mapKey(preview):'';
+    const contentKey=`${Object.keys(game.visited||{}).length}:${game.entrySupply?.taken?.length||0}`;
+    let cached=mapRoadCache.get(g);
+    if(!cached||cached.zoom!==z||cached.viewW!==game.cam.viewW||cached.selectedKey!==selectedKey||cached.contentKey!==contentKey){
+      const roads=[],known=new Map(g.nodes.map(n=>[mapKey(n),n])),done=new Set();
+      for(const n of g.nodes){
+        if(n.li!==curLi)continue;
+        for(const [li,idx] of game.layerData[n.li]?.logical[n.idx]?.next||[]){
+          const q=known.get(`${li},${idx}`);if(!q||li!==curLi)continue;
+          const edgeKey=mapEdgeKey(n,q);if(done.has(edgeKey))continue;done.add(edgeKey);
+          const road=clippedMapRoad(n,q,game,unit);if(!road)continue;
+          const fromKey=mapKey(n),toKey=mapKey(q),currentKey=`${game.layerIdx},${game.trackPos}`;
+          const legal=(fromKey===currentKey&&g.legalKeys.has(toKey))||(toKey===currentKey&&g.legalKeys.has(fromKey));
+          roads.push({...road,edgeKey,fromKey,toKey,legal});
+        }
+      }
+      cached={zoom:z,viewW:game.cam.viewW,selectedKey,contentKey,roads};mapRoadCache.set(g,cached);
     }
-    // 当前节点可走道路：深蓝衬线、暖金主线和浅色芯线，避免发光覆盖场景。
-    if (g.legalLinks) {
-      const pulse = 1;
-      ctx.globalAlpha = 0.7 * pulse;
-      ctx.strokeStyle = '#193341';
-      ctx.lineWidth = 6 / z;
-      ctx.shadowBlur = 0;
-      ctx.stroke(g.legalLinks);
-      ctx.shadowBlur = 0;
-      ctx.globalAlpha = 0.92 * pulse;
-      ctx.strokeStyle = '#d1ac6c';
-      ctx.lineWidth = 2.4 / z;
-      ctx.stroke(g.legalLinks);
-      ctx.globalAlpha = 1;
-      ctx.strokeStyle = 'rgba(255,241,214,0.8)';
-      ctx.lineWidth = .8 / z;
-      ctx.stroke(g.legalLinks);
+    const path=selectedMapPath(game),planned=new Map();
+    for(let i=1;i<path.length;i++)planned.set(mapEdgeKey(path[i-1],path[i]),mapKey(path[i-1]));
+    const travel=getMapTravelPresentation(game),moving=travel?.phase==='moving';
+    ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
+    for(const road of cached.roads){
+      const chosen=planned.has(road.edgeKey),color=chosen?'#79c9c4':road.legal?'#c7d1ca':'#738180';
+      ctx.globalAlpha=chosen?(moving?.18:.40):road.legal?.30:.17;
+      ctx.strokeStyle='#526361';ctx.lineWidth=6*unit/z;ctx.stroke(road.path);
+      ctx.globalAlpha=chosen?(moving?.24:.82):road.legal?.67:.28;
+      ctx.strokeStyle=color;ctx.lineWidth=(chosen||road.legal?1.8:1)*unit/z;ctx.stroke(road.path);
+      if(chosen||road.legal){
+        const forward=chosen?planned.get(road.edgeKey)===road.fromKey:road.fromKey===`${game.layerIdx},${game.trackPos}`;
+        const c=road.section,tip=forward?c.to:c.from,control=forward?c.c2:c.c1;
+        ctx.save();ctx.translate(tip.x,tip.y);ctx.rotate(Math.atan2(tip.y-control.y,tip.x-control.x));ctx.scale(unit/z,unit/z);
+        ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(-12,-3.5);ctx.lineTo(-9,0);ctx.lineTo(-12,3.5);ctx.closePath();ctx.fill();ctx.restore();
+      }
     }
-    // 跨层通过 door modal 处理；当前层画面不连接到隐藏层坐标，避免贯穿地图的斜线。
-    // 祭坛引导线：紫色流光
-    if (g.altarLinks.length) {
-      ctx.strokeStyle = 'rgba(154,124,200,0.85)'; ctx.fillStyle = 'rgba(154,124,200,0.85)';
-      ctx.globalAlpha = curLi === 2 ? 0.85 : 0.2;
-      for (const l of g.altarLinks) { ctx.stroke(l.path); ctx.fill(l.arrow); }
+    if(travel?.path?.length){
+      for(let i=1;i<travel.path.length;i++){
+        if(i>travel.segmentIndex)break;
+        const a=travel.path[i-1],b=travel.path[i];if(a.li!==curLi||b.li!==curLi)continue;
+        const road=cached.roads.find(r=>r.edgeKey===mapEdgeKey(a,b));if(!road)continue;
+        const progress=i<travel.segmentIndex?1:Math.max(0,Math.min(1,travel.progress));
+        const forward=mapKey(a)===road.fromKey;
+        const start=forward?road.start:Math.max(road.start,1-progress),end=forward?Math.min(road.end,progress):road.end;
+        if(end<=start)continue;
+        ctx.globalAlpha=.88;ctx.strokeStyle='#9bdad0';ctx.lineWidth=2.2*unit/z;
+        ctx.stroke(mapCurvePath(mapCurveSection(road.curve,start,end)));
+      }
     }
-    ctx.setLineDash(NO_DASH);
+    // Preserve the original altar guidance; it never creates a legal route.
+    if(g.altarLinks.length){
+      ctx.strokeStyle='rgba(154,124,200,.8)';ctx.fillStyle='rgba(154,124,200,.8)';ctx.globalAlpha=curLi===2?.75:.16;
+      ctx.lineWidth=2*unit/z;for(const l of g.altarLinks){ctx.stroke(l.path);ctx.fill(l.arrow);}
+    }
     ctx.restore();
   }
 
@@ -421,132 +372,19 @@ const SDT = window.SDT;
     ctx.globalAlpha = 1;
   }
 
-  // ---------- 入口脉冲圈（底光已烘焙，此处只画脉冲环） ----------
-  function drawEntrancePulse(ctx, game) {
-    const cam = game.cam;
-    // 只画当前层的入口（2026-09-10 留言 #21：固定取第 1 层会在其他层画出幽灵脉冲环）
-    const l1 = game.layerData[game.layerIdx] || game.layerData[0];
-    const layerPos = game.nodePos[game.layerIdx] || game.nodePos[0];
-    // 入口环复活为真呼吸（2026-09-27 动效补全；原 pulse 恒 0.5 只剩静态圆）：
-    // 半径随 game.time 正弦起伏；空闲地图零绘制时冻结相位（口径同 drawIcons 当前节点脉冲）
-    const reduced = SDT.Motion ? SDT.Motion.reduceMotion() : false;
-    const pulse = reduced ? 0.5 : 0.5 + Math.sin((game.time || 0) * 2.6) * 0.34;
-    ctx.save();
-    ctx.strokeStyle = 'rgba(90,162,134,0.85)';
-    ctx.lineWidth = 2 / cam.zoom;
-    for (const idx of l1.entrances) {
-      ctx.globalAlpha = (idx === game.trackPos ? 1 : 0.16) * (0.55 + 0.45 * pulse);
-      const p = layerPos[idx];
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, NODE_R + 4 + pulse * 5, 0, TAU);
-      ctx.stroke();
-    }
-    ctx.restore();
-  }
-
-
-  // ---------- 当前环名胶囊标签 ----------
-  // 已移除：环层名改为 DOM 固定横幅（#layerBanner），始终以固定大小显示在视口顶部居中。
-
-  function drawHover(ctx, game) {
-    if (!game.hover) return;
-    const n = game.hover;
-    const r = nodeRadius(n);
-    ctx.save();
-    circle(ctx, n.x, n.y, r + 4);
-    ctx.fillStyle = 'rgba(240,210,140,0.10)';
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(240,210,140,0.7)';
-    ctx.lineWidth = 1.5 / game.cam.zoom;
-    ctx.shadowBlur = 0;
-    ctx.stroke();
-    ctx.restore();
-  }
-
-  // 选中态箭头（2026-09-09 试玩反馈）：悬停/锁定的可达节点上方画一个上下浮动的
-// 金色下行箭头——「下一个就走这里」。方向感比亮环更直白（老板定向补指示）。
-  function reachableSet(game) {
-    const logical = game.layerData[game.layerIdx] && game.layerData[game.layerIdx].logical[game.trackPos];
-    return new Set((logical && logical.next || []).map(([li, idx]) => li + ',' + idx));
-  }
-  function drawNodeArrow(ctx, game, p) {
-    const z = game.cam.zoom;
-    // 复活注释承诺的「上下浮动」（2026-09-27 动效补全；原 bounce 恒 0 箭头钉死）：
-    // 0→6 屏幕像素往复，除以 zoom 折算成世界位移保持屏占比一致；减动效停浮
-    const reduced = SDT.Motion ? SDT.Motion.reduceMotion() : false;
-    const bounce = reduced ? 0 : (Math.sin((game.time || 0) * 4.4) * .5 + .5) * 6 / z;
-    const y = p.y - nodeRadius(p) - 14 - bounce;
-    ctx.save();
-    ctx.translate(p.x, y);
-    ctx.scale(1 / z, 1 / z);
-    ctx.fillStyle = 'rgba(245,197,66,0.95)';
-    ctx.shadowColor = 'rgba(216,180,106,0.7)';
-    ctx.shadowBlur = 6;
-    ctx.beginPath();
-    ctx.moveTo(-9, -10);
-    ctx.lineTo(9, -10);
-    ctx.lineTo(0, 2);
-    ctx.closePath();
-    ctx.fill();
-    ctx.fillRect(-2.5, -20, 5, 11);
-    ctx.restore();
-  }
-  function drawTargetArrow(ctx, game) {
-    if (game.state !== 'idle') return;
-    const key = reachableSet(game);
-    const targets = [];
-    if (game.hover) {
-      const n = game.hover;
-      if (key.has(n.li + ',' + n.idx)) targets.push(n);
-    }
-    if (game.moveTarget && game.nodePos[game.moveTarget.li]) {
-      const p = game.nodePos[game.moveTarget.li][game.moveTarget.idx];
-      if (p && !targets.some(n => n.li === game.moveTarget.li && n.idx === game.moveTarget.idx)) {
-        targets.push({ li: game.moveTarget.li, idx: game.moveTarget.idx, x: p.x, y: p.y });
-      }
-    }
-    for (const t of targets) drawNodeArrow(ctx, game, t);
-  }
-
-  // 移动目标结点：金色四角括号
-  function drawMoveTarget(ctx, game) {
-    if (game.moveTarget == null || game.state !== 'moving') return;
-    const p = game.nodePos[game.moveTarget.li][game.moveTarget.idx];
-    if (!p) return;
-    const s = T0 * 0.38, L = T0 * 0.16, x = p.x, y = p.y;
-    ctx.save();
-    ctx.strokeStyle = 'rgba(245,197,66,0.9)';
-    ctx.lineWidth = 2 / game.cam.zoom;
-    ctx.lineCap = 'round';
-    ctx.beginPath();
-    ctx.moveTo(x - s + L, y - s); ctx.lineTo(x - s, y - s); ctx.lineTo(x - s, y - s + L);
-    ctx.moveTo(x + s - L, y - s); ctx.lineTo(x + s, y - s); ctx.lineTo(x + s, y - s + L);
-    ctx.moveTo(x - s + L, y + s); ctx.lineTo(x - s, y + s); ctx.lineTo(x - s, y + s - L);
-    ctx.moveTo(x + s - L, y + s); ctx.lineTo(x + s, y + s); ctx.lineTo(x + s, y + s - L);
-    ctx.stroke();
-    ctx.restore();
-  }
-
-  function drawPlayer(ctx, game) {
-    const z = game.cam.zoom;
-    const p = game.pos;
-    ctx.save();
-    ctx.strokeStyle = '#eee0bb'; ctx.lineWidth = 2 / z;
-    const r = NODE_R + 12 / z;
-    // Four compass marks identify the current position without masking its encounter icon.
-    for (let i = 0; i < 4; i++) {
-      const a = i * Math.PI / 2;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, r, a - .14, a + .14); ctx.stroke();
-    }
-    ctx.restore();
+  // The confirmed old portrait and pointer identify the real position at rest and in motion.
+  function drawPlayer(ctx,game){
+    const n=nodeGeo(game).nodes.find(n=>isCurrentNode(game,n));
+    const p=game.pos||(n&&{x:n.x,y:n.y});if(!p)return;
+    const z=game.cam.zoom,unit=mapViewportScale(game.cam.viewW),travel=getMapTravelPresentation(game);
+    drawMapTraveller(ctx,p.x+44*unit/z,p.y-38*unit/z,z,
+      {x:p.x+28*unit/z,y:p.y+4*unit/z},unit,travel?.phase==='arrived');
   }
 
   function draw(ctx, game) {
     if (!game.nodes || !game.nodes.length) return;   // 结点布局未构建前不绘制
     const cam = game.cam;
-    // 局内按层使用壁纸（L1/L2 废墟 / L3 红骑士 / L4 白机械 / L5 黑机械）；缓存按视口+层重建，
-    // 暗色纱层与中央光晕已一并烘焙进该缓存画布（省每帧 2 次渐变构建+全屏填充）。
+    // The environment remains readable beneath routes and is cached by viewport/layer.
     ctx.drawImage(ensureBackdrop(cam, game.layerIdx), 0, 0, cam.viewW, cam.viewH);
     // 换层溶解：旧层壁纸叠在新层上淡出（snap 画布同视口尺寸，直接铺）
     if (backdropFade.snap) {
@@ -564,19 +402,13 @@ const SDT = window.SDT;
     ctx.scale(cam.zoom, cam.zoom);
     ctx.translate(-cam.cx, -cam.cy);
 
-    drawCurrentNodeFrame(ctx, game);
     drawLinks(ctx, game);
     drawIcons(ctx, game);
-    drawIndexes(ctx, game);
-    drawEntrancePulse(ctx, game);
-    drawMoveTarget(ctx, game);
-    drawHover(ctx, game);
-    drawTargetArrow(ctx, game);
     drawPlayer(ctx, game);
+    drawIndexes(ctx, game);
 
     ctx.restore();
 
-    drawNodeLabels(ctx, game);
 
     // 暗角：渐变对象按视口尺寸缓存（视觉不变，省每帧渐变构建）
     const vk = cam.viewW + 'x' + cam.viewH;

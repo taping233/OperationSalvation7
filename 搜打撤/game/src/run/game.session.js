@@ -170,6 +170,9 @@ function createRunSavePayload() {
     bossPlan: (game.bossPlan == null ? null : game.bossPlan),   // 本层首脑预案（进层 roll 一次存全层，2026-09-13 老板拍板）
     altarItemSacrificed: !!game.altarItemSacrificed,   // 第四层祭坛道具献祭一次性锁（2026-09-19 老板定版）
     shopStocks: game.shopStocks || {},   // 各商店货架（按格子/门持久，防关门重刷，2026-09-19 审计 D-1）
+    chestReward: SDT.Chests?.serialize?.(game) || null,
+    entrySupply: game.entrySupply || null,
+    nodeRewards: game.nodeRewards || {},
     elapsed: game.elapsed,
     slot: activeSlot, savedAt: Date.now(),
     // 战斗中退出/关窗（beforeunload）：只写战斗入场检查点；读档从本场战斗开头重开
@@ -190,6 +193,8 @@ function createRunSavePayload() {
 function saveGame() {
   // 整理期间只有两键结算命令能推进存档，常规自动保存不得覆盖待入库状态。
   if (game.pendingExtraction || game.extractionPending || game.terminalPending || blocksSaveForPendingBattleSettlement()) return false;
+  // 战败倒地演出可延后 battle:end/doDeath；此时 battleActive 已清零，不能把致死血量写回进行中对局。
+  if (game.runActive && !game.battleActive && game.hp <= 0) return false;
   // v0.21：只有真正开局后（runActive）才写对局存档；在基地/标题界面不产生对局文件
   // 只保存稳定节点；动画中可能仍停在线段中间，退出/刷新后必须回到上一个落点。
   if ((!game.runActive && !game.nestActive) || game.state === 'title' || game.state === 'done' || game.state === 'boot' || game.state === 'moving') return;
@@ -344,6 +349,8 @@ function restoreGame(slot) {
   game.altarRewardPending = !!s.altarRewardPending;   // 祭坛奖励待领取（旧档无字段 → false）
   game.bossPlan = (s.bossPlan == null ? null : +s.bossPlan);   // 本层首脑预案（旧档无字段 → null，进 boss 格时现 roll）
   game.pendingEventLoot = null;
+  game.entrySupply = s.entrySupply || null;
+  game.nodeRewards = s.nodeRewards || {};
   game.discoveredPairs = new Set(s.discovered || []);
   game.elapsed = s.elapsed || 0;
   game.altarItemSacrificed = !!s.altarItemSacrificed;   // 祭坛道具献祭一次性锁（旧档无字段 → false）
@@ -385,10 +392,20 @@ function restoreGame(slot) {
   game.nestActive = false;
   const safeLayer = s.layerIdx;
   const safeIdx = s.trackPos;
-  enterLayer(safeLayer, safeIdx, { preserveBossPlan: true });
+  // Reattach a pending reward before allowing enterLayer to write a run snapshot.
+  enterLayer(safeLayer, safeIdx, { preserveBossPlan:true, deferSave:!!s.chestReward });
   SDT.Sound.music('board');
   UI.log(`[[icon:download]] 已读取【档位 ${slot}】存档`, 'ok');
   if (!game.myClass) runtime.openClassChoice();   // 上次存档时还没选职业：补上开局选择
+  else if (s.chestReward) {
+    const resume = s.chestReward.context?.battleSettlement ? runtime.resumeBattleRewards : runtime.resumeChestsOnCell;
+    if (!resume?.(s.chestReward)) {
+      game.state = 'modal';
+      UI.log('[[icon:cross]] 待领奖励恢复未完成，原档已保留，请重新进入此档位', 'warn');
+      return { ok:false, code:'REWARD_RESTORE_FAILED', preserveRun:true };
+    }
+    UI.log('[[icon:archive]] 已恢复揭晓的宝箱奖励，内容与已领取进度不变', 'ok');
+  }
   else if (s.battle && SDT.Battle && typeof SDT.Battle.restore === 'function') {
     if (SDT.Battle.restore(game, s.battle)) {
       // 读档恢复的战斗没经过 resolveCell：本格按已触发处理，撤退/胜利后不重复触发
@@ -465,6 +482,8 @@ function newRun(mode, picks, options = {}) {
   game.fragments = 0;   // 员工通行证A碎片（Q6 隐藏计数器）
   game.altarItemSacrificed = false;   // 祭坛道具献祭一次性锁（每局重置）
   game.pendingEventLoot = null;
+  game.entrySupply = null;
+  game.nodeRewards = {};
   game.myClass = null;
   game.characterId = null;
   game.classCard = null;
@@ -550,7 +569,7 @@ function enterLayer(li, atIdx, opts = null) {
   const eIdx = f.entrances.indexOf(atIdx);
   const eName = eIdx >= 0 ? f.entranceNames[eIdx] : `#${atIdx} 格`;
   UI.log(`—— 置身 <b>${f.name}</b>（${eName}）——`, 'sys');
-  saveGame();
+  if (!opts?.deferSave) saveGame();
   UI.refresh(game);
 }
 

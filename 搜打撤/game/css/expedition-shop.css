@@ -1,239 +1,129 @@
-/* 战术补给站：在 winter/scenes 之后加载，局部覆盖旧浅纸商店 */
+/* Reference: Arknights travelling merchant, with Slay the Spire's direct card shelves. */
 #overlay .shop-pg.sc-shop {
-  --shop-ink: #ebecec;
-  --shop-muted: #9ca0a3;
-  --shop-gold: #ead282;
-  --shop-line: rgba(234,210,130,.24);
-  color: var(--shop-ink) !important;
-  /* 2026-09-13 老板给图：补给站室内照铺满整页背景，上面压一层深色遮罩保住卡面与文字可读性 */
-  background-color: #0d0e0f !important;
-  background-image:
-    linear-gradient(180deg, rgba(11,12,13,.58) 0%, rgba(9,9,10,.82) 100%),
-    url('../assets/scenes/winter-expedition/supply-room.webp') !important;
-  background-position: center, center !important;
-  background-size: 100% 100%, cover !important;
-  background-repeat: no-repeat, no-repeat !important;
-  border: 1px solid var(--shop-line) !important;
-  box-shadow: 0 28px 90px rgba(0,0,0,.55), inset 0 1px rgba(255,255,255,.04) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  /* scenes.css 的 justify-content:center 在内容高于视口时会把顶部推入不可回滚区
-     （页头整条被吃掉）。safe center = 装得下居中、装不下退回顶端，滚动即可看全。 */
-  justify-content: flex-start !important;
-  justify-content: safe center !important;
-  padding: 8px clamp(20px, 4vw, 64px) !important;
-  gap: 8px !important;
-  min-height: min(760px, calc(100vh - 40px));
-  overflow: auto !important;
+  --shop-ink:#f0f1ee; --shop-muted:#b5bec1; --shop-gold:#e0c98c; --shop-line:#a6afb13d;
+  box-sizing:border-box; display:flex; flex-direction:column; justify-content:flex-start;
+  height:100%; min-height:0; padding:28px 42px 24px; gap:24px; overflow:hidden;
+  color:var(--shop-ink); border:0; box-shadow:none; background-color:#181c1f;
+  /* Asset hydration must retain the approved merchant illustration. */
+  background-image:linear-gradient(90deg,#10121300 20%,#09151b35 32%,#09151b88 100%),url('../assets/scenes/shop/shop-cardstyle-approved-1011.webp')!important;
+  background-position:center; background-size:cover; background-repeat:no-repeat;
 }
-#overlay .shop-pg .pg-head {
-  align-items: flex-start !important;
-  gap: 28px !important;
-  padding: 10px 32px 10px !important;
-  border-bottom: 1px solid var(--shop-line) !important;
-}
-#overlay .shop-heading { flex: 1; min-width: 0; }
-#overlay .shop-kicker {
-  display: block; color: var(--shop-gold); font: 700 10px/1.2 "Cascadia Code",monospace;
-  letter-spacing: .18em; opacity: .82; margin-bottom: 8px;
-}
-#overlay .shop-heading h2 { margin: 0 !important; color: #f4f4f5 !important; letter-spacing: .03em; }
-/* cards.css 的 #overlay .card.page h2{display:none}（本意是藏卡片自带标题）连货板标题一起吃掉，
-   scenes.css 只给 :not(.shop-pg) 的节点页恢复显示 —— 补给站/收购台的 h2 因此一直是隐形的，
-   页头只剩英文 kicker。这里按同族选择器补回。 */
-#overlay .card.page .shop-pg .pg-head h2 { display: block; }
-#overlay .shop-heading p { margin: 8px 0 0; color: var(--shop-muted); font-size: 13px; }
-#overlay .shop-resources { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
-/* 全屏页盖住了顶栏的背包按钮，商店里没有入口——页头补一个明确的「背包」钮 */
-#overlay .shop-bag-btn {
-  align-self: flex-start; flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
-  padding: 10px 16px; border: 1px solid rgba(234,210,130,.5) !important; background: rgba(21,23,24,.85) !important;
-  color: #e8e7e4 !important; font: 700 13px var(--font-ui); letter-spacing: .06em; cursor: pointer;
-}
-#overlay .shop-bag-btn .ic { width: 16px; height: 16px; }
-#overlay .shop-bag-btn:hover { border-color: var(--shop-gold) !important; background: rgba(30,33,35,.9) !important; }
-#overlay .shop-resource {
-  min-width: 92px; padding: 9px 12px; border: 1px solid rgba(193,198,201,.18);
-  background: rgba(21,23,24,.78); display: grid; grid-template-columns: 1fr auto; column-gap: 9px;
-}
-#overlay .shop-resource small { grid-column: 1/-1; color: var(--shop-muted); font-size: 10px; }
-#overlay .shop-resource b { color: #f5f6f6; font: 700 19px/1.15 "Cascadia Code",monospace; }
-#overlay .shop-resource em { color: var(--shop-gold); font-style: normal; align-self: end; font-size: 11px; }
-#overlay .shop-resource.coin b { color: var(--shop-gold); }
-#overlay .shop-toolbar {
-  display:flex; justify-content:space-between; align-items:center; gap:18px; padding: 5px 32px 4px;
-}
-#overlay .shop-toolbar b { display:block; font-size: 15px; color:#f3f3f4; }
-#overlay .shop-toolbar span:not(.shop-live) { color:var(--shop-muted); font-size:12px; }
-#overlay .shop-live { color:var(--shop-gold); font-size:12px; text-align:right; }
-/* scenes.css 的 margin:0 auto 让货板按内容宽度居中，左边线与页头错开 265px：
-   清零边距 → 货板撑满页宽，与页头左右两端对齐，列宽也随之跟着窗口走 */
-#overlay .shop-board { margin: 0 !important; padding: 10px 32px 8px !important; background: transparent !important; flex:1; }
-/* 十个格子（九个货位 + 卖牌处）排 5×2：五列等宽，不再出现两种卡宽/空格子。
-   scenes.css 六栏时代给 .shop-sellpost 钉了 grid-column:6，会凭空生成 4/5/6 三条隐式列，
-   货板因此裂成「3 窄 + 3 宽」并把卖牌处挤到单独一行——此处按当前列数改回自然流。 */
-#overlay .shop-board-grid {
-  display:grid !important; grid-template-columns: repeat(5,minmax(0,1fr)) !important; gap: 10px !important;
-  /* scenes.css 的 align-items:start 让同排货位各按内容自撑高度，价签跟着参差（实测同排高低差 20px）：
-     改成 stretch 让整排等高，价签再靠 .shop-price 的 margin-top:auto 统一贴底 */
-  align-items: stretch !important;
-}
-#overlay .shop-slot {
-  min-height: 0; padding: 8px 8px 7px; background: rgba(23,25,26,.86) !important;
-  border:1px solid rgba(171,177,182,.16) !important; display:flex; flex-direction:column;
-  justify-content:space-between; align-items:stretch; transition: border-color .18s, transform .18s;
-}
-#overlay .shop-slot:has(.shop-price:not(:disabled)):hover { border-color:var(--shop-gold) !important; transform:translateY(-2px); }
-#overlay .shop-slot .bt-card, #overlay .shop-slot .card { min-height: 0; }
-/* 卡宽上限压到 176：五列铺满后卡面仍随列宽长高，两行会顶破全屏高度（老板 2560×1440@150%
-   → CSS 视口 1707×960，原样溢出 28px）。此处与 winter.css 同选择器，靠加载顺序覆盖其 190。 */
-/* 货板撑满页宽后列宽变宽，卡面放宽到 winter.css 的原值 190，货位不再显得空 */
-#overlay .sc-shop .shop-slot .hs-card { width:100%; max-width: 190px; }
-/* winter.css 用 (1,2,0) 选择器把货位压成 justify-content:flex-start：同排等高后价签要贴底对齐 */
-#overlay .sc-shop .shop-slot { justify-content: flex-start !important; }
-/* U7（2026-09-19 走查）：价签从「货位底部独立条」改为「卡面右上角浮动角标」——
-   与「点击货位直接购买」引导合一，扫一眼即得价格；买不起 data-short 时红化。
-   选择器带 .sc-shop 提升特异性，压过 winter.css 同名 static 规则（本文件后加载）。 */
-#overlay .shop-slot { position: relative; }
-#overlay .sc-shop .shop-price {
-  position: absolute !important; top: -8px; right: 6px; z-index: 3; width: auto !important; min-height: 0;
-  padding: 3px 9px; font-size: 12.5px; line-height: 1.35; text-align: center; white-space: nowrap;
-  border: 1px solid rgba(234,210,130,.62) !important;
-  background: linear-gradient(180deg, rgba(38,41,44,.97), rgba(22,24,25,.97)) !important;
-  color: var(--shop-gold) !important; font-weight: 700; border-radius: 999px;
-  box-shadow: 0 2px 8px rgba(8,9,9,.55);
-}
-#overlay .sc-shop .shop-price em { display: block; font-style: normal; font-size: 10px; font-weight: 500;
-  color: #aaafb2; letter-spacing: 1px; }
-#overlay .sc-shop .shop-price.short { color: #ff9d8a !important; border-color: rgba(255,122,96,.55) !important;
-  background: linear-gradient(180deg, rgba(64,26,22,.97), rgba(38,14,12,.97)) !important; }
-#overlay .sc-shop .shop-price.short .ic { filter: grayscale(.4); }
-#overlay .sc-shop .shop-slot.buy[data-short] .hs-card, #overlay .sc-shop .shop-slot.buy[data-short] .shop-card-mystery {
-  opacity: .6; filter: saturate(.6); }
-#overlay .shop-slotnote { color:var(--shop-muted); font-size:11px; margin-top:4px; text-align:center; }
-/* 空格子（神秘货箱/已售出）原来吃 cards.css 写死的 140×196，比真卡（190 宽）小一圈一小截；
-   改成与卡面同宽、同量级高度；顺带把 12px 小字提到 6:1 以上对比度 */
-#overlay .shop-empty {
-  width:100% !important; max-width:190px; height:auto !important; min-height:212px; flex:0 0 auto !important;
-  display:grid; place-items:center; color:#9ea2a5; border:1px dashed rgba(157,161,164,.28);
-}
-/* 已售出/补满原来压到 62% 透明，叠上文字色只剩约 2.7:1（低于小字 4.5:1 底线），根本看不清 */
-#overlay .shop-slot.sold { opacity:.82; filter:saturate(.72); }
-#overlay .shop-slot.sold .shop-empty { color:#b2b6b8 !important; }
-/* 买不起时整板灰（winter.css 的 55% 透明 + 去饱和）：与「已售出」几乎同观感，收轻一档 */
-#overlay .sc-shop .shop-slot.buy[data-short] { opacity:.82; filter:saturate(.72); }
-#overlay .shop-sellpost {
-  grid-column: auto !important; margin-top: 0 !important; min-height:0;
-  border:0 !important; background:linear-gradient(160deg,rgba(46,46,46,.9),rgba(20,22,23,.95)) !important;
-  color:#ecebe9 !important; display:grid; place-content:center; gap:8px; text-align:center; cursor:pointer;
-}
-/* 卖牌处的黄色边框：scenes.css 给 .sellpost-coin 钉了一圈 3px 深金描边（实测 2.67px solid #8f6b17）。
-   老板两轮点名的「线条边框 / 黄色边框」就是这圈线——之前只去了按钮本体的 border，圆盘这圈一直在。 */
-#overlay .sellpost-coin { font-size:28px; color:var(--shop-gold); border: 0 !important; }
-#overlay .sellpost-name { font-weight:700; font-size:18px; }
-#overlay .sellpost-hint { color:#aeb0b2; font-size:12px; }
-#overlay .shop-back {
-  position:sticky; bottom:0; align-self:flex-start; margin:0 32px 8px; z-index:2;
-  border:1px solid rgba(234,210,130,.42) !important; background:#1b1d1f !important; color:#e8e7e4 !important;
-}
-#overlay .shop-sell-empty { color:var(--shop-muted) !important; }
-/* 收购台无可卖卡时货板跟着 flex:1 撑满整屏，空框一大块；改成随内容收高 */
-#overlay .sell-board { flex: 0 0 auto !important; }
-#overlay .shop-sell { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
-#overlay .shop-sell .sell-item { background:rgba(23,25,26,.86) !important; border:1px solid rgba(171,177,182,.16); padding:12px; }
-@media (max-width: 1180px) {
-  #overlay .shop-board-grid { grid-template-columns:repeat(4,minmax(0,1fr)) !important; }
-}
-@media (max-width: 900px) {
-  #overlay .shop-pg .pg-head { flex-direction:column; padding:18px 20px 14px !important; }
-  #overlay .shop-resources { justify-content:flex-start; }
-  #overlay .shop-toolbar, #overlay .shop-board { padding-left:20px !important; padding-right:20px !important; }
-  #overlay .shop-board-grid { grid-template-columns:repeat(3,minmax(0,1fr)) !important; }
-  #overlay .shop-sell { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
-  #overlay .shop-back { margin-left:20px; }
-}
-@media (max-width: 620px) {
-  #overlay .shop-board-grid, #overlay .shop-sell { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
-  #overlay .shop-toolbar { align-items:flex-start; flex-direction:column; }
-  #overlay .shop-live { text-align:left; }
-}
-/* 矮窗口（Windows 显示缩放 125%/150% 会把全屏 CSS 视口压到 768~900 高）：
-   货板两行必须一起收，否则第二行和「离开补给站」掉到折线以下。 */
-@media (max-height: 900px) {
-  #overlay .sc-shop .shop-slot .hs-card { max-width: 148px; }
-  #overlay .shop-pg .pg-head { padding: 8px 32px 8px !important; }
-  #overlay .shop-toolbar { padding: 4px 32px 4px; }
-  #overlay .shop-toolbar span:not(.shop-live) { display: none; }
-}
-@media (max-height: 780px) {
-  #overlay .sc-shop .shop-slot .hs-card { max-width: 128px; }
-  #overlay .shop-pg.sc-shop { gap: 6px !important; }
-  #overlay .shop-board { padding: 6px 32px 6px !important; }
-  #overlay .shop-toolbar { padding: 2px 32px 2px; }
-  #overlay .shop-toolbar b { font-size: 13px; }
-}
-
-/* 问号卡面（2026-09-13 留言：随机卡牌做问号卡面）——卡形占位，购买后亮出真卡 */
-#overlay .shop-card-mystery {
-  width:100% !important; max-width:190px; height:auto !important; min-height:212px; flex:0 0 auto !important;
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
-  border-radius:0; border:1.5px solid rgba(156,146,113,.5);
-  background:linear-gradient(160deg,#282829,#131516 78%);
-  color:#d6cdb1; font-size:36px; font-family:var(--cal, serif); text-shadow:0 1px 4px rgba(0,0,0,.8);
-}
-#overlay .shop-card-mystery .ic { width:26px; height:26px; opacity:.8; }
-#overlay .shop-card-mystery span { font-size:13px; color:#9ea2a5; letter-spacing:2px; }
-
-/* 收购入口：从“黄色圆盘”改为商队功能牌，层级与商品货位一致。 */
-#overlay .shop-sellpost { position:relative; align-content:center; justify-items:start; min-height:220px; padding:20px !important; overflow:hidden; border:1px solid rgba(231,203,111,.34) !important; background:
-  linear-gradient(145deg,rgba(41,44,47,.93),rgba(20,21,23,.98)) !important; text-align:left; }
-#overlay .shop-sellpost::before { content:''; position:absolute; inset:10px; border:1px solid rgba(234,213,146,.12); pointer-events:none; }
-#overlay .shop-sellpost:hover { border-color:var(--shop-gold) !important; transform:translateY(-2px); box-shadow:0 12px 28px rgba(7,7,8,.45); }
-#overlay .sellpost-index { position:absolute; top:18px; right:18px; color:#e4ce84; font:700 9px "Cascadia Code",monospace; letter-spacing:.18em; }
-#overlay .shop-sellpost .sellpost-coin { width:42px; height:42px; display:grid; place-items:center; margin-bottom:12px; border:1px solid rgba(234,210,130,.4) !important; border-radius:0; background:rgba(16,17,18,.52); }
-#overlay .shop-sellpost .sellpost-coin .ic { width:21px; height:21px; }
-#overlay .sellpost-copy { display:grid; gap:4px; }
-#overlay .sellpost-name { color:#e9e8e5; font:400 22px var(--serif); letter-spacing:4px; }
-#overlay .sellpost-hint { color:#b4b6b7; font-size:11px; line-height:1.45; }
-#overlay .sellpost-enter { margin-top:18px; color:#ead282; font:700 11px "Cascadia Code",monospace; letter-spacing:1px; }
-
-/* 收购台：左侧账本解释规则，右侧才是可交易的卡，减少误触和信息噪音。 */
-#overlay .sell-board { width:100%; }
-#overlay .sell-desk { display:grid; grid-template-columns:minmax(230px,290px) minmax(0,1fr); gap:14px; align-items:start; }
-#overlay .sell-ledger { position:sticky; top:0; padding:22px; border:1px solid rgba(233,207,120,.3); background:linear-gradient(165deg,rgba(32,34,36,.96),rgba(17,18,19,.98)); box-shadow:0 15px 28px rgba(0,0,0,.2); }
-#overlay .sell-ledger-kicker { color:var(--shop-gold); font:700 9px "Cascadia Code",monospace; letter-spacing:.2em; }
-#overlay .sell-ledger h3 { margin:8px 0 18px; color:#e8e6e3; font:400 23px var(--serif); letter-spacing:4px; }
-#overlay .sell-ledger-total { display:grid; grid-template-columns:1fr auto; align-items:end; padding:14px 0 15px; border-top:1px solid rgba(211,212,213,.14); border-bottom:1px solid rgba(211,212,213,.14); }
-#overlay .sell-ledger-total small { grid-column:1/-1; margin-bottom:4px; color:#9ca0a3; font-size:10px; letter-spacing:1px; }
-#overlay .sell-ledger-total b { color:#f3d983; font:700 34px/1 "Cascadia Code",monospace; }
-#overlay .sell-ledger-total span { color:#e0c980; font-size:12px; }
-#overlay .sell-ledger dl { margin:14px 0; }
-#overlay .sell-ledger dl > div { display:flex; justify-content:space-between; gap:12px; padding:7px 0; border-bottom:1px dashed rgba(188,191,193,.12); }
-#overlay .sell-ledger dt { color:#9a9ea0; font-size:11px; }
-#overlay .sell-ledger dd { margin:0; color:#e8e8e8; font:700 11px "Cascadia Code",monospace; }
-#overlay .sell-ledger-rule { padding-top:12px; }
-#overlay .sell-ledger-rule b { color:#ede1bb; font-size:12px; }
-#overlay .sell-ledger-rule p { margin:7px 0 0; color:#a6a9ac; font-size:11px; line-height:1.7; }
-#overlay .sell-catalog { min-width:0; padding:16px; border:1px solid rgba(178,183,187,.17); background:rgba(12,13,14,.58); }
-#overlay .sell-catalog-head { display:flex; align-items:end; justify-content:space-between; gap:12px; margin-bottom:12px; padding:0 2px 11px; border-bottom:1px solid rgba(188,192,195,.14); }
-#overlay .sell-catalog-head span { color:#94999c; font:700 9px "Cascadia Code",monospace; letter-spacing:.18em; }
-#overlay .sell-catalog-head h3 { margin:4px 0 0; color:#ebebeb; font-size:16px; letter-spacing:2px; }
-#overlay .sell-catalog-head > b { color:#e8d184; font:700 13px "Cascadia Code",monospace; }
-#overlay .sell-catalog .shop-sell { grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
-#overlay .sell-catalog .sell-item { position:relative; display:grid; justify-items:center; gap:9px; padding:12px !important; border:1px solid rgba(172,178,182,.18); background:linear-gradient(165deg,rgba(27,29,31,.9),rgba(17,18,19,.94)) !important; }
-#overlay .sell-item-offer { width:100%; display:flex; align-items:center; justify-content:space-between; gap:8px; padding-top:8px; border-top:1px solid rgba(188,192,195,.14); }
-#overlay .sell-item-offer span { color:#9a9ea0; font-size:10px; }
-#overlay .sell-item-offer b { color:#f0d57a; font:700 12px "Cascadia Code",monospace; }
-#overlay .sell-catalog .sell-item .mini-btn { width:100%; min-height:40px; border-radius:0; }
-#overlay .sell-catalog .shop-sell-empty { min-height:190px; display:grid; place-items:center; margin:0; padding:24px; border:1px dashed rgba(182,186,189,.2); text-align:center; line-height:1.7; }
-
-@media (max-width:1040px) {
-  #overlay .sell-catalog .shop-sell { grid-template-columns:repeat(2,minmax(0,1fr)); }
-}
-@media (max-width:760px) {
-  #overlay .sell-desk { grid-template-columns:1fr; }
-  #overlay .sell-ledger { position:static; }
-}
-@media (max-width:520px) {
-  #overlay .sell-catalog .shop-sell { grid-template-columns:1fr; }
-}
+#overlay .shop-pg.sc-shop::before { background:none; }
+#overlay .card.page .shop-pg.sc-shop .pg-head { flex:none; display:flex; align-items:center; justify-content:space-between; margin:0; padding:0 0 12px; gap:24px; border:0; background:none; box-shadow:none; animation:none; }
+#overlay .card.page .shop-pg.sc-shop .shop-heading { flex:1; min-width:0; }
+#overlay .card.page .shop-pg.sc-shop .shop-heading h2 { display:block; margin:0; padding:0; border:0; color:var(--shop-ink); font:650 34px/1.3 var(--font-ui); letter-spacing:.03em; text-shadow:none; }
+#overlay .shop-pg.sc-shop .shop-heading p { margin:7px 0 0; color:#c3cacb; font-size:16px; }
+#overlay .shop-pg.sc-shop .shop-kicker { display:block; margin-bottom:7px; color:#b4bec1; font:500 13px/1.4 var(--font-ui); letter-spacing:.12em; }
+#overlay .shop-pg.sc-shop .shop-resources { display:flex; align-items:center; gap:22px; padding:8px 0; background:none; }
+#overlay .shop-pg.sc-shop .shop-resource { display:grid; grid-template-columns:auto auto auto; align-items:baseline; gap:7px; min-width:80px; padding:0; border:0; background:none; }
+#overlay .shop-pg.sc-shop .shop-resource:first-child { border-left:0; }
+#overlay .shop-pg.sc-shop .shop-resource small { color:var(--shop-muted); font-size:15px; }
+#overlay .shop-pg.sc-shop .shop-resource b { color:var(--shop-ink); font:650 27px/1.2 var(--font-ui); font-variant-numeric:tabular-nums; }
+#overlay .shop-pg.sc-shop .shop-resource.coin b { color:var(--shop-gold); }
+#overlay .shop-pg.sc-shop .shop-resource em { align-self:end; color:var(--shop-muted); font-size:13px; font-style:normal; }
+#overlay .shop-pg.shop-market .shop-layout { position:relative; flex:1; min-height:0; display:grid; grid-template-columns:minmax(230px,26fr) minmax(0,74fr); gap:40px; }
+#overlay .shop-pg.sc-shop .shop-board { position:relative; min-width:0; max-width:none; margin:0; padding:0; background:none; border:0; box-shadow:none; clip-path:none; }
+#overlay .shop-pg.shop-market .shop-board { grid-column:2; grid-row:1; min-height:0; overflow:auto; overscroll-behavior:contain; padding:4px 6px 10px; }
+#overlay .shop-pg.shop-market .shop-board-grid { display:grid; height:100%; min-height:580px; grid-template-columns:repeat(5,minmax(0,1fr)); grid-template-rows:repeat(2,minmax(0,1fr)); gap:22px 18px; align-items:stretch; }
+/* These two properties override the fixed legacy winter sleeve, at its source boundary. */
+#overlay .shop-pg.shop-market .shop-slot { position:relative; display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start; gap:0; min-width:0; min-height:0; padding:0; background:#12212666!important; border:0!important; border-radius:0; box-shadow:none; cursor:default; transition:background-color .16s; }
+#overlay .shop-pg.shop-market .shop-slot:is(:hover,:active) { transform:none; translate:none; box-shadow:none; }
+#overlay .shop-pg.shop-market .shop-slot.selected { background:#56867d42!important; box-shadow:inset 0 -2px #a5d6cc; }
+#overlay .shop-pg.shop-market .shop-slot.sold { opacity:1; filter:none; }
+#overlay .shop-pg.shop-market .shop-preview { appearance:none; display:flex; flex-direction:column; align-items:center; width:100%; height:100%; min-height:0; gap:0; padding:0; border:0; border-radius:0; background:none; color:var(--shop-ink); font:inherit; cursor:pointer; }
+#overlay .shop-pg.shop-market .shop-preview:hover { background:#9bd7ca12; }
+#overlay .shop-pg.shop-market .shop-item-art { display:grid; place-items:center; container-type:size; flex:1; min-height:0; width:100%; padding:0; }
+#overlay .shop-pg.shop-market .shop-item-title { box-sizing:border-box; display:block; width:100%; min-height:29px; padding:0 12px 5px; color:var(--shop-ink); background:none; font-size:17px; font-weight:500; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+body:has(#viewport) #overlay .shop-pg.shop-market .shop-preview .hs-card { flex:none; width:min(174px,calc((100cqh - 46px) * 272 / 406)); max-width:78%; min-height:0; margin:0; font-size:13px; pointer-events:none; }
+#overlay .shop-pg.shop-market .shop-preview .hs-card:is(.rv4,.rv7,.rv-prism) { margin:0; }
+#overlay .shop-pg.shop-market .shop-offer { display:flex; align-items:center; justify-content:space-between; box-sizing:border-box; width:100%; min-height:43px; margin:0; padding:6px 12px 12px; gap:6px; background:none; border:0; }
+#overlay .shop-pg.shop-market .shop-owned { color:#a8bbbf; font-size:12px; line-height:1.4; text-align:left; }
+#overlay .shop-pg.shop-market .shop-v14-price { margin-left:auto; color:#aaddcf; font-size:24px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; }
+#overlay .shop-pg.shop-market .shop-v14-price .ic { width:18px; height:18px; }
+#overlay .shop-pg.shop-market .shop-slot.unaffordable .shop-v14-price { color:#dc9d8e; }
+#overlay .shop-pg.shop-market .shop-slot.sold .shop-item-art { opacity:.38; filter:grayscale(.75); }
+#overlay .shop-pg.shop-market .shop-slot.sold .shop-v14-price { color:#a4b8ad; font-size:16px; }
+#overlay .shop-pg.shop-market .shop-slot.sold .shop-item-title { color:#c1c8c9; }
+#overlay .shop-pg.sc-shop .shop-card-mystery { box-sizing:border-box; display:flex; flex:none; flex-direction:column; align-items:center; justify-content:center; gap:10px; width:min(174px,calc((100cqh - 46px) * 272 / 406)); max-width:78%; aspect-ratio:272/406; min-height:0; height:auto; margin:0; border:1px solid #94b9b55c; border-radius:0; background:#13232be8; color:#c9e0da; font:400 42px/1 var(--font-ui); text-shadow:none; }
+#overlay .shop-pg.sc-shop .shop-card-mystery .ic { width:24px; height:24px; color:var(--shop-muted); }
+#overlay .shop-pg.sc-shop .shop-card-mystery span { color:var(--shop-muted); font-size:14px; }
+#overlay .shop-pg.shop-market .shop-empty { box-sizing:border-box; display:grid; place-content:center; width:100%; height:100%; min-height:0; padding:18px; border:0; color:var(--shop-muted); font-size:16px; text-align:center; }
+#overlay .shop-pg.shop-market .shop-detail { position:absolute; z-index:6; inset:-18px -6px; width:auto; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; min-width:0; min-height:0; padding:24px; overflow:hidden; border:0; background:#050b10d6; box-shadow:none; }
+#overlay .shop-pg.shop-market .shop-detail[hidden] { display:none; }
+#overlay .shop-pg.shop-market .shop-detail[data-shop-motion="in"] { animation:shop-detail-in var(--motion-region-enter,280ms) var(--motion-ease-enter,cubic-bezier(.22,1,.36,1)) both; }
+#overlay .shop-pg.shop-market .shop-detail[data-shop-motion="out"] { animation:shop-detail-out var(--motion-exit,180ms) var(--motion-ease-exit,cubic-bezier(.4,0,.7,1)) both; pointer-events:none; }
+#overlay .shop-pg.shop-market .shop-detail[data-shop-motion="in"] :is(.shop-detail-scroll,.shop-detail-actions) { animation:shop-detail-card-in var(--motion-region-enter,280ms) var(--motion-ease-enter,cubic-bezier(.22,1,.36,1)) both; }
+#overlay .shop-pg.shop-market .shop-detail[data-shop-motion="out"] :is(.shop-detail-scroll,.shop-detail-actions) { animation:shop-detail-card-out var(--motion-exit,180ms) var(--motion-ease-exit,cubic-bezier(.4,0,.7,1)) both; }
+@keyframes shop-detail-in { from { opacity:0; } to { opacity:1; } }
+@keyframes shop-detail-out { from { opacity:1; } to { opacity:0; } }
+@keyframes shop-detail-card-in { from { transform:translateY(18px) scale(.94); } to { transform:translateY(0) scale(1); } }
+@keyframes shop-detail-card-out { from { transform:translateY(0) scale(1); } to { transform:translateY(12px) scale(.94); } }
+#overlay .shop-pg.shop-market .shop-detail-dismiss { position:absolute; inset:0; padding:0; border:0; background:none; cursor:zoom-out; }
+#overlay .shop-pg.shop-market .shop-detail-close { position:absolute; z-index:2; top:14px; right:18px; width:44px; height:44px; padding:0; border:1px solid #c8d6d344; border-radius:50%; background:#0b171be6; color:#d5dfdc; font:400 30px/1 var(--font-ui); cursor:pointer; }
+#overlay .shop-pg.shop-market .shop-detail-scroll { position:relative; display:flex; flex:0 1 auto; flex-direction:column; align-items:center; gap:16px; width:min(620px,88%); min-height:0; padding:22px 28px 14px; overflow:auto; overscroll-behavior:contain; }
+#overlay .shop-pg.shop-market .shop-detail-art { display:grid; place-items:center; flex:none; min-width:0; padding:10px 12px; }
+body:has(#viewport) #overlay .shop-pg.shop-market .shop-detail-art .hs-card { width:350px; max-width:none; min-height:0; font-size:23px; }
+#overlay .shop-pg.shop-market .shop-detail-art .shop-card-mystery { width:350px; max-width:none; margin:0; }
+#overlay .shop-pg.shop-market .shop-detail-art .shop-card-mystery small { font-size:18px; color:#a9c8c6; }
+#overlay .shop-pg.shop-market .shop-detail-rules { align-self:stretch; padding:12px 20px; border:0; background:#16282bcc; }
+#overlay .shop-pg.shop-market .shop-detail-rules summary { color:#b9d3d1; font-size:17px; cursor:pointer; }
+#overlay .shop-pg.shop-market .shop-detail-rules p { margin:14px 0 0; color:#d1dfde; font-size:19px; line-height:1.65; white-space:pre-line; }
+#overlay .shop-pg.shop-market .shop-detail-actions { position:relative; flex:none; display:grid; gap:9px; width:350px; padding:0; border:0; background:none; }
+#overlay .shop-pg.shop-market .shop-detail-facts { display:grid; gap:7px; color:#b9c3c6; font-size:15px; line-height:1.45; }
+#overlay .shop-pg.shop-market .shop-detail-facts strong { font-weight:500; }
+#overlay .shop-pg.shop-market .shop-detail-facts :is(.tone-ready,.tone-complete) { color:#b4d0bd; }
+#overlay .shop-pg.shop-market .shop-detail-facts .tone-limited { color:#e0aa98; }
+#overlay .shop-pg.shop-market :is(.shop-detail-buy,.shop-detail-done) { width:100%; min-height:54px; padding:12px; border:0; border-radius:0; background:#a3d4c8; color:#13282b; font:650 20px/1.4 var(--font-ui); cursor:pointer; }
+#overlay .shop-pg.shop-market .shop-detail-buy.short:disabled { border-color:#b19a8055; background:#3a3330; color:#ddb5a5; opacity:1; cursor:not-allowed; }
+#overlay .shop-pg.shop-market .shop-detail-bag { width:100%; min-height:46px; border:1px solid #a6afb155; border-radius:0; background:#30383b; color:#e1e6e6; font:500 17px/1.4 var(--font-ui); cursor:pointer; }
+#overlay .shop-pg.shop-market .shop-merchant { grid-column:1; grid-row:1; display:flex; flex-direction:column; justify-content:flex-end; min-width:0; min-height:0; padding:0 20px 0 0; gap:26px; }
+#overlay .shop-pg.shop-market .shop-merchant-caption { padding:18px 6px; border:0; background:linear-gradient(90deg,#07151aac,transparent); }
+#overlay .shop-pg.shop-market .shop-merchant-caption > span { color:#c4e0d5; font-size:23px; font-weight:600; }
+#overlay .shop-pg.shop-market .shop-merchant-caption p { margin:10px 0 0; color:#e0e6e0; font-size:21px; line-height:1.65; }
+#overlay .shop-pg.shop-market .shop-services { display:grid; gap:10px; }
+#overlay .shop-pg.shop-market .shop-sellpost { position:relative; grid-column:auto; justify-self:stretch; align-self:stretch; display:flex; flex-direction:row; align-items:center; justify-content:space-between; gap:12px; min-width:0; min-height:68px; margin:0; padding:12px 4px; border:0; border-top:1px solid #b6cfca66; border-radius:0; background:#16282b5e; color:var(--shop-ink); text-align:left; box-shadow:none; cursor:pointer; }
+#overlay .shop-pg.shop-market .sellpost-copy { display:grid; gap:6px; }
+#overlay .shop-pg.shop-market .sellpost-name { color:var(--shop-ink); font:600 21px/1.3 var(--font-ui); letter-spacing:0; text-shadow:none; }
+#overlay .shop-pg.shop-market .sellpost-hint { color:var(--shop-muted); font:400 14px/1.4 var(--font-ui); text-shadow:none; }
+#overlay .shop-pg.shop-market .sellpost-enter { color:#cbd2d3; font-size:15px; white-space:nowrap; }
+#overlay .shop-pg.sc-shop .shop-bag-btn { display:inline-flex; align-items:center; justify-content:flex-start; gap:10px; min-height:48px; padding:11px 4px; border:0; border-radius:0; background:#16282b5e; color:var(--shop-ink); font:500 18px/1.4 var(--font-ui); cursor:pointer; }
+#overlay .shop-pg.sc-shop .shop-bag-btn .ic { width:18px; height:18px; }
+#overlay .shop-pg.shop-market .shop-market-footer { flex:none; display:flex; align-items:center; gap:24px; min-height:56px; padding:0; border:0; }
+#overlay .shop-pg.sc-shop .shop-back { position:static; display:flex; align-items:center; justify-content:center; gap:14px; flex:none; align-self:flex-end; min-width:208px; min-height:64px; margin:0 0 0 auto; padding:12px 28px; border:0; border-radius:0; background:#c7d2cde8; color:#163034; font:600 23px/1.4 var(--font-ui); letter-spacing:0; transform:none; box-shadow:none; clip-path:none; }
+#overlay .shop-pg.shop-market .shop-market-footer .shop-back { order:2; }
+#overlay .shop-pg.shop-market .shop-live { order:1; max-width:70%; color:#afc0c1; font-size:16px; line-height:1.5; text-align:left; }
+#overlay .shop-pg.shop-market .shop-live:empty { display:none; }
+#overlay .shop-pg.sc-shop :is(.shop-back,.shop-sellpost,.shop-bag-btn):hover { transform:none; filter:none; background:#394347; }
+#overlay .shop-pg.sc-shop :is(button,[tabindex]):focus-visible { outline:2px solid var(--shop-gold); outline-offset:3px; }
+body:has(#overlay:not([hidden]) .shop-pg) #bagBtnFloat { display:none; }
+/* The acquisition desk keeps its ledger, with the same resource and action hierarchy. */
+#overlay .shop-pg.shop-exchange .sell-board { flex:1; min-height:0; overflow:auto; overscroll-behavior:contain; }
+#overlay .shop-pg.shop-exchange .sell-desk { display:grid; grid-template-columns:minmax(240px,28fr) minmax(0,72fr); gap:24px; align-items:start; }
+#overlay .shop-pg.shop-exchange .sell-ledger { position:sticky; top:0; padding:24px; border:0; background:#1a2023f0; }
+#overlay .shop-pg.shop-exchange .sell-ledger-kicker { color:var(--shop-muted); font-size:13px; letter-spacing:.08em; }
+#overlay .shop-pg.shop-exchange .sell-ledger h3 { margin:10px 0 24px; color:var(--shop-ink); font:600 25px/1.4 var(--font-ui); }
+#overlay .shop-pg.shop-exchange .sell-ledger-total { display:grid; grid-template-columns:1fr auto; align-items:end; gap:7px; padding:16px 0; border-block:1px solid var(--shop-line); }
+#overlay .shop-pg.shop-exchange .sell-ledger-total small { grid-column:1/-1; color:var(--shop-muted); font-size:15px; }
+#overlay .shop-pg.shop-exchange .sell-ledger-total b { color:var(--shop-gold); font-size:36px; font-variant-numeric:tabular-nums; }
+#overlay .shop-pg.shop-exchange .sell-ledger-total > span { color:var(--shop-muted); font-size:15px; }
+#overlay .shop-pg.shop-exchange .sell-ledger dl { display:grid; gap:14px; margin:24px 0; }
+#overlay .shop-pg.shop-exchange .sell-ledger dl > div { display:flex; justify-content:space-between; gap:12px; font-size:15px; }
+#overlay .shop-pg.shop-exchange .sell-ledger dt { color:var(--shop-muted); }
+#overlay .shop-pg.shop-exchange .sell-ledger dd { margin:0; color:var(--shop-ink); }
+#overlay .shop-pg.shop-exchange .sell-ledger-rule { padding-top:18px; border-top:1px solid var(--shop-line); }
+#overlay .shop-pg.shop-exchange .sell-ledger-rule b { color:var(--shop-ink); font-size:17px; }
+#overlay .shop-pg.shop-exchange .sell-ledger-rule p { margin:10px 0 0; color:var(--shop-muted); font-size:15px; line-height:1.75; }
+#overlay .shop-pg.shop-exchange .sell-catalog { min-width:0; padding:24px; background:#1a2023e8; }
+#overlay .shop-pg.shop-exchange .sell-catalog-head { display:flex; align-items:end; justify-content:space-between; gap:18px; padding-bottom:18px; border-bottom:1px solid var(--shop-line); }
+#overlay .shop-pg.shop-exchange .sell-catalog-head span { color:var(--shop-muted); font-size:13px; letter-spacing:.08em; }
+#overlay .shop-pg.shop-exchange .sell-catalog-head h3 { margin:5px 0 0; color:var(--shop-ink); font-size:25px; }
+#overlay .shop-pg.shop-exchange .sell-catalog-head > b { color:var(--shop-gold); font-size:18px; }
+#overlay .shop-pg.shop-exchange .shop-sell { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; max-height:none; overflow:visible; padding:18px 0 0; }
+#overlay .shop-pg.shop-exchange .sell-item { display:flex; flex-direction:column; align-items:center; gap:16px; min-width:0; padding:26px 16px 16px; border:0; background:#252d30cc; }
+#overlay .shop-pg.shop-exchange .sell-item-offer { display:flex; justify-content:space-between; align-items:baseline; gap:8px; width:100%; margin-top:auto; padding-top:14px; border-top:1px solid var(--shop-line); }
+#overlay .shop-pg.shop-exchange .sell-item-offer span { color:var(--shop-muted); font-size:14px; }
+#overlay .shop-pg.shop-exchange .sell-item-offer b { color:var(--shop-gold); font-size:22px; }
+#overlay .shop-pg.shop-exchange .sell-item .mini-btn { width:100%; min-height:48px; border:1px solid var(--shop-gold); border-radius:0; background:var(--shop-gold); color:#1c2124; font:600 17px/1.4 var(--font-ui); }
+#overlay .shop-pg.shop-exchange .shop-sell-empty { min-height:190px; display:grid; place-items:center; margin:0; padding:24px; color:var(--shop-muted); font-size:17px; text-align:center; line-height:1.7; }
+body.reduce-motion #overlay .shop-pg.sc-shop * { animation:none; transition:none; }
+@media (prefers-reduced-motion:reduce) { #overlay .shop-pg.sc-shop * { animation:none; transition:none; } }

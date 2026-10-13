@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { apply, BASE_H, BASE_W, rect, scale, scaleForViewport } from '../game/src/ui/ui-scale.js';
+import { apply, BASE_H, BASE_W, rect, scale, scaleForViewport, viewport } from '../game/src/ui/ui-scale.js';
 
 const initialWidth = window.innerWidth, initialHeight = window.innerHeight;
 afterEach(() => {
@@ -24,7 +24,7 @@ describe('全局 UI 缩放策略', () => {
     expect(scaleForViewport(BASE_W, BASE_H)).toBe(1);
   });
 
-  it('大于基准时仍按原策略放大，额外宽高由布局展开', () => {
+  it('大于基准时等比放大，超宽窗口保留横屏画面之外的留边', () => {
     expect(scaleForViewport(2560, 1440)).toBeCloseTo(4 / 3);
     expect(scaleForViewport(3440, 1080)).toBe(1);
   });
@@ -40,6 +40,11 @@ describe('全局 UI 缩放策略', () => {
     apply();
     expect(scale()).toBeCloseTo(1158 / 1920);
     expect(Number(document.documentElement.style.zoom)).toBeCloseTo(scale());
+    expect(document.documentElement.dataset.gameLayout).toBe('landscape');
+    expect(document.documentElement.style.getPropertyValue('--game-layout-width')).toBe('1920px');
+    expect(document.documentElement.style.getPropertyValue('--game-layout-height')).toBe('1080px');
+    expect(viewport().width / viewport().height).toBeCloseTo(16 / 9);
+    expect(viewport().height).toBeCloseTo(651.375);
     expect(document.documentElement.hasAttribute('data-ui-scale-floor')).toBe(false);
 
     Object.defineProperty(window, 'innerWidth', { configurable: true, value: BASE_W });

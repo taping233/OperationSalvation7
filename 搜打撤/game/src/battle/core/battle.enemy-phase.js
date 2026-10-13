@@ -77,6 +77,7 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
     const stillPlayerPhase = () => G?.battleActive && battleState.token === extraTurnToken && battleState.phase === BATTLE_PHASES.PLAYER;
     set$extraTurn(false);
     set$turn(turn + 1);
+    pdef.guard = false;   // 格挡只覆盖施放当回合，额外回合同样到期。
     foes.forEach(foe => { if (!foe.dead) foe.intent = intentFor(foe, turn); });
     set$energy(maxEnergy);
     // 额外回合=新回合：打出计数清零（对齐 afterEnemies 新回合口径，追斩/连续射击按本回合计）；
@@ -339,6 +340,7 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
     fireTurnEndTriggers();
     syncCurseCondEquips();   // 条件装备（深海印记类）随诅咒状态变化重新核算
     set$turn(turn + 1);
+    pdef.guard = false;   // 敌方本回合所有伤害结算后，在新玩家回合清除。
     foes.forEach(foe => { if (!foe.dead) foe.intent = intentFor(foe, turn); });
     set$energy(maxEnergy);
     set$playedMartialThisTurn(0);   // 追斩/连续射击：本回合打出计数随新回合清零

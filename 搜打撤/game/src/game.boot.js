@@ -4,12 +4,12 @@ const SDT = window.SDT;
 import { TYPE_NAME } from './hub/game.notes.js';
 import { MAP } from './run/game.session.js';
 import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, game, hasRun, migrateOldSave, openLeaveMenu, openSettings, openTitleGuide, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './run/game.session.js';
-import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openDevConsole, reenterCell, openClassChoice, openShop, showRunTransition } from './run/game.run.js';
+import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openDevConsole, reenterCell, openClassChoice, openShop, showRunTransition, resumeChestsOnCell } from './run/game.run.js';
 import { PRELOAD_SCENES } from './run/game.run.data.js';
 import { resumeExtraction } from './run/game.run.altar.js';
 import { PERFORMANCE_BUDGETS, STARTUP_SCENE_KEYS } from './core/performance-budgets.js';
 import { openBaseHub } from './hub/game.hub.js';
-import { bindBagMixins, showBackpack, setBagReturnHook } from './hub/game.bag.js';
+import { bindBagMixins, resumeBattleRewards, showBackpack, showBackpackSection, setBagReturnHook } from './hub/game.bag.js';
 import { configureShopRuntime } from './run/game.run.shop.js';
 import { bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay, syncDevVisibility } from './hub/game.notes.js';
 import { cardPageOpen, cardPageLoading, closeCardPageTop, openCardDesigner, openCardLibrary } from './hub/game.cardslib.js';
@@ -17,6 +17,9 @@ import { renderScheduler } from './core/render-scheduler.js';
 import { nodeHitRadius } from './core/camera.js';
 import { storeGet, storeSet } from './core/storage.js';
 import { renderMiniMap } from './run/game.session.js';
+import { getExpeditionPreview, setExpeditionPreview } from './run/expedition.view.js';
+import { isConsumedMapNode } from './core/map-node-state.js';
+import { findMapTravelPath } from './run/map-travel-path.js';
 import './agent/agent.js';   // SDT.Agent 接口链（observe/act/step）：随启动挂载，供外部决策端驱动
 import './ui/quick-nav.js';  // 全页面快捷进入键（Alt+数字系，非法状态拒绝并提示）
 import { startPocketStrip } from './experience/pocket-strip.js';   // 体验线「随身口袋」状态条（2026-09-28 代码线接线）
@@ -26,7 +29,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
   configureGameRuntime({
     ...createGameCanvas(document),
     log: (message, kind) => UI.log(message, kind),
-    openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition, syncDevVisibility, resumeExtraction,
+    openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition, syncDevVisibility, resumeExtraction, resumeChestsOnCell, resumeBattleRewards,
   });
   configureShopRuntime({ openBag: (onReturn) => {
     setBagReturnHook(onReturn);
@@ -97,12 +100,10 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
           }
           if (n) {
             // 2026-09-19 留言 #24：点击脚下所在格 = 反复重开本格内容（离开前不锁格）
-            if (n.li === game.layerIdx && n.idx === game.trackPos) {
-              reenterCell();
-            }
-            else if (isReachable(n)) {
-              canvas.style.cursor = 'wait';
-              moveTo(n.li, n.idx);
+            if ((n.li === game.layerIdx && n.idx === game.trackPos) || isReachable(n)) {
+              const preview = getExpeditionPreview(game);
+              if (preview?.li === n.li && preview?.idx === n.idx) confirmTarget();
+              else showTarget(n);
             }
             else if (game.devMode) openCellEditor(n.li, n.idx);
             else showInvalidNode(e, n);
@@ -140,18 +141,12 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
 
     // 键盘走动作映射层（src/input.js）：玩法读动作，键位是数据（可改键/可接手柄）
     window.addEventListener('keydown', (e) => {
+      if (e.defaultPrevented || (e.key === 'Escape' && e.repeat)) return;
       // #22 开发者控制台：战斗/对局中 Ctrl+L 开关（不走动作映射，避免与改键层耦合）
       if (e.ctrlKey && !e.altKey && !e.metaKey && (e.key === 'l' || e.key === 'L')) {
-        const ov = UI.el.overlay;
-        const consoleOpen = !ov.hidden && ov.querySelector?.('#devcSearch');
-        if (consoleOpen) {
-          if (game.battleActive && SDT.Battle.commands?.refreshView) SDT.Battle.commands.refreshView();
-          else UI.hideOverlay();
-          e.preventDefault();
-          return;
-        }
-        openDevConsole();
+        // The console owns its source-page checkpoint and all four tabs share one toggle.
         e.preventDefault();
+        if (!e.repeat && !e.isComposing && e.keyCode !== 229) openDevConsole();
         return;
       }
       if (e.key === 'Escape' && cardPageLoading) {
@@ -200,11 +195,21 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     // 底栏背包按钮已删（2026-09-19）：入口收敛到全局浮动背包键与 B 快捷键
     // #27 全局浮动背包键：对局中任何界面同位置开背包（战斗中 showBackpack 自动转战斗背包）
     document.getElementById('bagBtnFloat')?.addEventListener('click', () => showBackpack());
-    document.getElementById('routePanel')?.addEventListener('click', e => {
-      const button = e.target.closest('button[data-route-index]');
+    document.getElementById('sidebar')?.addEventListener('click', e => {
+      const routeButton = e.target.closest('.expedition-map-preview button');
+      if (routeButton) {
+        if (routeButton.disabled || game.state !== 'idle') return;
+        if (routeButton.dataset.routeClose) { clearTarget(); return; }
+        if (routeButton.dataset.routeEnter) { confirmTarget(); return; }
+      }
+      const button = e.target.closest('button[data-expedition-tool]');
       if (!button || button.disabled || game.state !== 'idle') return;
-      clearTarget();
-      moveTo(Number(button.dataset.routeLayer), Number(button.dataset.routeIndex));
+      const tool = button.dataset.expeditionTool;
+      if (['bag', 'safe', 'pocket'].includes(tool)) showBackpackSection(tool);
+      else if (tool === 'focus' || tool === 'overview') {
+        cam.frameExploration(game, tool === 'overview');
+        renderScheduler.invalidate();
+      }
     });
     // The sidebar is hidden during character selection; draw once it has a real size.
     if (typeof ResizeObserver !== 'undefined') {
@@ -216,7 +221,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     const logPanel = document.getElementById('logPanel');
     const logToggle = document.getElementById('logToggle');
     if (logPanel && logToggle) {
-      if (storeGet('sdt-log-collapsed') === '1') logPanel.classList.add('collapsed');
+      logPanel.classList.toggle('collapsed', storeGet('sdt-log-collapsed') !== '0');
       logToggle.addEventListener('click', () => {
         const collapsed = logPanel.classList.toggle('collapsed');
         storeSet('sdt-log-collapsed', collapsed ? '1' : '0');
@@ -298,7 +303,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
   }
 
   function isReachable(n) {
-    return reachableNodes().some(q => q.li === n.li && q.idx === n.idx);
+    return !!findMapTravelPath(game, n)?.length;
   }
 
   function pickNode(wx, wy, preferReachable = false) {
@@ -320,7 +325,9 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
   }
 
   function clearTarget() {
+    if (game.state === 'moving') return;
     game.moveTarget = null;
+    setExpeditionPreview(game, null);
     if (game.hover && !isReachable(game.hover)) game.hover = null;
     UI.hideTooltip();
     UI.refresh(game);
@@ -329,12 +336,11 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
 
   function showTarget(n) {
     if (!n) return;
-    game.moveTarget = { li: n.li, idx: n.idx };
+    setExpeditionPreview(game, n);
+    game.moveTarget = isReachable(n) ? { li: n.li, idx: n.idx } : null;
     game.hover = n;
     UI.refresh(game);
-    const r = canvas.getBoundingClientRect();
-    const p = cam.worldToScreen ? cam.worldToScreen(n.x, n.y) : { x: r.width / 2, y: r.height / 2 };
-    UI.showTooltip(p.x, p.y, `${hoverInfo(n)[0]} · 可前往`, ['按 X 确认，Space/Enter 选择下一个，Z 返回上一个']);
+    UI.hideTooltip();
     renderScheduler.invalidate();
   }
 
@@ -342,7 +348,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     if (game.state !== 'idle') return false;
     const options = reachableNodes();
     if (!options.length) { UI.log('当前节点没有可前往的相邻节点', 'warn'); return false; }
-    if (options.length === 1) { clearTarget(); return moveTo(options[0].li, options[0].idx); }
+    if (options.length === 1) { showTarget(options[0]); return true; }
     const key = game.moveTarget && `${game.moveTarget.li},${game.moveTarget.idx}`;
     const at = Math.max(0, options.findIndex(n => `${n.li},${n.idx}` === key));
     showTarget(options[(at + step + options.length) % options.length]);
@@ -350,16 +356,27 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
   }
 
   function confirmTarget() {
+    if (game.state !== 'idle') return false;
+    const preview = getExpeditionPreview(game);
+    if (preview?.li === game.layerIdx && preview?.idx === game.trackPos) {
+      clearTarget();
+      return reenterCell();
+    }
     const target = game.moveTarget;
+    if (preview && !target) return false;
     if (!target) return chooseNextTarget(1);
     clearTarget();
     return moveTo(target.li, target.idx);
   }
 
   function showInvalidNode(e, n) {
+    setExpeditionPreview(game, n);
+    game.moveTarget = null;
+    UI.refresh(game);
+    renderScheduler.invalidate();
     const r = canvas.getBoundingClientRect();
-    UI.showTooltip(e.clientX - r.left, e.clientY - r.top, `${hoverInfo(n)[0]} · 暂不可达`, ['只能前往当前节点相邻的下一节点']);
-    UI.log('该节点不是当前节点的相邻路径，无法直接跳转', 'warn');
+    UI.showTooltip(e.clientX - r.left, e.clientY - r.top, `${hoverInfo(n)[0]} · 暂不可达`, ['路线中间须为已知的空白或已完成节点']);
+    UI.log('该节点没有可连续通行的已知路线', 'warn');
   }
 
   function updateHover(e) {
@@ -396,7 +413,8 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
       if (eIdx >= 0) lines.push(`[[icon:door]] 出生入口：${loc.layer.entranceNames[eIdx]}`);
       if (door) lines.push(`[[icon:door]] 环间门${door.reverse ? '（返回）' : ''}${door.exit ? ' / 撤离出口' : ''} ⇄ ${game.layerData[door.toLayer]?.name || '下一层'}`);
       if (altarE) lines.push('[[icon:crystal]] 污染核心入口');
-      if (def && def.type !== 'entrance') lines.push(`事件：${TYPE_NAME[def.type] || def.type}${def.n ? `（+${def.n}币）` : ''}`);
+      if (isConsumedMapNode(game, node)) lines.push('空白节点 · 内容已消耗，仍可通行');
+      else if (def && def.type !== 'entrance') lines.push(`事件：${TYPE_NAME[def.type] || def.type}${def.n ? `（+${def.n}币）` : ''}`);
       else if (eIdx < 0 && !door && !altarE) lines.push('普通格');
     } else {
       title = node.def.name || '中央区';

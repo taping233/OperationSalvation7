@@ -6,6 +6,7 @@ import {
 } from './game.cardslib.common.js';
 import { game } from '../run/game.session.js';
 import { runPageLoading } from '../ui/page-loading.js';
+import { enterSurface } from '../ui/surface-motion.js';
 
 let pageModulePromise = null;
 let pageRequest = 0;
@@ -78,7 +79,14 @@ function enterPage(method, args) {
   const loading = runPageLoading({
     title: method === 'openCardDesigner' ? '制作坊' : '照相馆',
     detail: method === 'openCardDesigner' ? '正在准备编辑工作台' : '正在整理收藏档案',
+    presentation: method === 'openCardDesigner' ? undefined : 'city-cut',
     signal: controller.signal,
+    onRevealStart: method === 'openCardLibrary' ? () => {
+      const currentOverlay = document.getElementById('overlay');
+      if (!controller.signal.aborted && currentOverlay?.querySelector('.studio-unified')) {
+        enterSurface(currentOverlay, { restart: true });
+      }
+    } : undefined,
     open: async () => {
       const page = await loadPageModule();
       const pending = pendingPageEntry;
@@ -95,6 +103,9 @@ function enterPage(method, args) {
         entry.ready = true;
         pendingPageEntry = null;
         cardPageLoading = false;
+      }
+      if (method === 'openCardLibrary' && !controller.signal.aborted) {
+        await page.preparePhotoStudioEntry(controller.signal);
       }
       return result;
     },

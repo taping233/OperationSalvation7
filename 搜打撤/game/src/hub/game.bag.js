@@ -13,6 +13,11 @@ import { bagDrag, resetBagDrag } from './game.bag.drag.js';
 import { useStructuredBagRule } from './game.bag.rules.js';
 bagSlots.showBackpack = showBackpack;
 bagSlots.closeBackpack = closeBackpack;
+let requestedBagSection = null;
+function showBackpackSection(section) {
+  requestedBagSection = ['safe', 'pocket'].includes(section) ? section : 'main';
+  showBackpack();
+}
 bagSlots.moveStackOrder = moveStackOrder;
 bagSlots.moveStackSafe = moveStackSafe;
 bagSlots.showDiscardConfirm = showDiscardConfirm;
@@ -591,13 +596,12 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
            </div>`;
       } else if (i - supplies.length < stacks.length) {
         const st = stacks[i - supplies.length];
-        const isSha = st.card.id === SDT.Cards.SHA.id;
         cells += `<div class="bag-slot filled card-slot flip3d" data-stack="${escAttr(st.card.name)}"
               title="${escAttr(st.card.name)} ×${st.count} · 点击查看详情 · 按住拖动整理">
              <div class="flip-inner">
                <div class="flip-face flip-front" data-act="inspectStack" data-name="${escAttr(st.card.name)}" data-safe="0">
                  ${SDT.Cards.cardHTML(st.card, '', { hideCost: true })}
-                 <span class="stack-count">×${st.count}${isSha ? ' · [[icon:pen]]' : ''}</span>
+                 <span class="stack-count">×${st.count}</span>
                </div>
                <div class="flip-face flip-back">${SDT.Cards.cardBackHTML()}</div>
              </div>
@@ -618,7 +622,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
           <div class="flip-inner">
             <div class="flip-face flip-front" data-act="inspectStack" data-name="${escAttr(st.card.name)}" data-safe="1">
               ${SDT.Cards.cardHTML(st.card, '', { hideCost: true })}
-              <span class="stack-count">×${st.count} · [[icon:lock]]</span>
+              <span class="stack-count">×${st.count}</span>
             </div>
             <div class="flip-face flip-back">${SDT.Cards.cardBackHTML()}</div>
           </div>
@@ -632,9 +636,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
           <div class="pk-card" title="${escAttr(p.card.name)}${p.count > 1 ? ` ×${p.count}` : ''} · ${p.card.cost}费 · 本局无法使用（火堆可复原；撤离每张仅 1/3 概率带回基地）">
             ${SDT.Cards.cardHTML(p.card, 'sm')}
             ${p.count > 1 ? `<span class="bt-count">×${p.count}</span>` : ''}
-            <span class="pk-tag">无法使用</span>
           </div>`).join('')
-      : '<p class="ov-empty" style="margin:2px 0 0">（空——对小怪使用过的卡牌会进入这里）</p>';
+      : '<p class="ov-empty" style="margin:2px 0 0">暂无消耗卡牌</p>';
     // 说明文字统一收进 ? 帮助弹层
     UI.registerHelp('bag', {
       title: '背包说明',
@@ -645,15 +648,13 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
         <p class="help-item"><b>丢弃</b>把卡牌拖到背包页面外的空地可申请丢弃 1 张——丢弃的牌无法取回，请谨慎操作。</p>`,
       back: () => showBackpack(true),
     });
-    UI.showOverlay('[[icon:bag]] 背包', `<div class="bag-view">
+    UI.showOverlay('[[icon:bag]] 背包', `<div class="bag-view bag-reference">
       <header class="bag-head">
         <div class="bag-head-info">
-          <h2>[[icon:bag]] 背包 ${UI.helpBtn('bag')}</h2>
+          <h2>背包 ${UI.helpBtn('bag')}</h2>
           <div class="bag-chips">
-            <span class="fc-chip">格数 <b>${usedSlots()}/${cap}</b></span>
-            <span class="fc-chip">总值 <b>${total.toLocaleString()}</b></span>
-            <span class="fc-chip">[[icon:lock]] 安全格 <b>${safeStacks.length}/${sCap}</b></span>
-            <span class="fc-chip">[[icon:pocket]] 消耗口袋 <b>${pkN}</b> 张</span>
+            <span class="fc-chip">金币 <b>${game.coins}</b></span>
+            <span class="fc-chip">物资估值 <b>${total.toLocaleString()}</b></span>
             ${(game.fragments || 0) > 0 ? `<span class="fc-chip" title="集齐 2 枚，可随员工通行证A合成员工通行证A">[[icon:gem]] 员工通行证A碎片 <b>${game.fragments}/2</b></span>` : ''}
           </div>
         </div>
@@ -661,29 +662,43 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
           <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
             <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
           </svg>
+          <span>返回</span>
         </button>
       </header>
       <div class="bag-layout">
-        <div class="bag-main">
-          <h3 class="set-h">[[icon:bag]] 背包格
+        <section class="bag-main" aria-label="随身背包">
+          <h3 class="set-h">随身背包 <span class="set-tip">${game.bagCapacityText?.() || `${usedSlots()}/${cap} 格`}</span>
             <span class="bag-sort">
               <button class="mini-btn" data-act="bagSortRarity" title="按稀有度从高到低排序（同稀有度按种类）">按稀有度</button>
               <button class="mini-btn" data-act="bagSortType" title="按种类排序（同种类按稀有度）">按种类</button>
             </span>
           </h3>
+          <p class="bag-region-note">点击卡面查看详情 · 按住拖动整理</p>
           <div class="bag-grid">${cells}</div>
-        </div>
+        </section>
         <aside class="bag-side">
-          <div class="bag-side-card">
-            <h3 class="set-h">[[icon:pocket]] 消耗口袋 <span class="set-tip">${pkN} 张</span></h3>
-            <div class="pk-list pk-cards">${pocketHTML}</div>
-          </div>
-          <div class="bag-side-card">
-            <h3 class="set-h">[[icon:lock]] 安全格</h3>
+          <section class="bag-side-card bag-safe-region" aria-label="安全格">
+            <h3 class="set-h">安全格 <span class="set-tip">${safeStacks.length}/${sCap} 格</span></h3>
+            <p class="bag-region-note">撤离失败时运回基地 · 拖入存放，拖回取出</p>
             <div class="bag-grid safe-grid">${safeCells}</div>
-          </div>
+          </section>
+          <section class="bag-side-card bag-pocket-region" aria-label="消耗口袋">
+            <h3 class="set-h">消耗口袋 <span class="set-tip">${pkN} 张 · 暂不可用</span></h3>
+            <p class="bag-region-note">已用过的卡牌 · 在火堆或用道具复原</p>
+            <div class="pk-list pk-cards">${pocketHTML}</div>
+          </section>
         </aside>
       </div></div>`, 'bagpage');
+    if (requestedBagSection) {
+      const selector = requestedBagSection === 'safe' ? '.bag-safe-region' : requestedBagSection === 'pocket' ? '.bag-pocket-region' : '.bag-main';
+      const region = UI.el.overlay.querySelector(selector);
+      if (region) {
+        region.classList.add('bag-region-selected');
+        region.setAttribute('tabindex', '-1');
+        region.focus({ preventScroll:true });
+      }
+      requestedBagSection = null;
+    }
     // 2026-09-12 留言 #27：看卡不方便 → 点击直接放大卡面特写（替代原文字详情页）。
     // 2026-09-15 修复：#27 改版把带「使用这张道具」按钮的 showBagCardDetail 整个挂空了，
     // 背包里的道具（回血药等）从此没有任何使用入口——在特写 footer 把「使用」补回来
@@ -741,5 +756,5 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
 
 
 function setBagReturnHook(fn) { _setBagReturnHook(fn); }   // 中立模块再导出（boot 商店运行时注入用）
-export { showBackpack, setBagReturnHook };
-export { bindBagMixins } from './game.bag.settle.js';   // boot 消费，转出面不变
+export { showBackpack, showBackpackSection, setBagReturnHook };
+export { bindBagMixins, resumeBattleRewards } from './game.bag.settle.js';

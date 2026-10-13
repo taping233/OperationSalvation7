@@ -13,6 +13,9 @@ import { Random } from '../core/random.js';
 import { on as busOn } from '../core/event-bus.js';
 import { showRunTransition } from '../run/game.run.js';
 import { bagSlots } from './game.bag.bridge.js';
+import { validBattleRewardContinuation } from '../run/chest-reward-save.js';
+let restoreBattleReward = null;
+export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || false;
   // ---------- 战后结算（battle.js 回调） ----------
   // win = true 胜利 / false 战败 / null 撤退。
   // 小怪战：使用过的卡进消耗口袋；BOSS 战：卡牌完好保留；
@@ -91,7 +94,9 @@ import { bagSlots } from './game.bag.bridge.js';
       game.state = 'idle';
     }
     if (settlement.phase === 'new') {
-    UI.hideOverlay();
+    // Display-only receipt lives in the WeakMap; it is never part of a run save or attempt.
+    settlement.cardOutcome = { pocket: [], gone: [], retained: [] };
+    if (win !== true) UI.hideOverlay();   // 胜利保留战场短反馈，随后直接进入领奖。
     // Item 16（2026-09-16 老板定版）：局内满足条件的牌 100% 进入消耗口袋（招式和装备）——
     // 「1/3 保留」改到离开对局（撤离结算）时统一结算，见 game.run.altar doExtract。
     // 衍生卡（如 闪金之锤）不能进消耗口袋（2026-09-15 留言）；职业卡与初始攻击仍直接消散。
@@ -103,9 +108,10 @@ import { bagSlots } from './game.bag.bridge.js';
         if (i < 0) return;   // 战斗内临时卡（初始攻击/发现/随机卡）战后消散，自动跳过
         const card = game.ownedCards[i].card;
         game.ownedCards.splice(i, 1);
-        if (card.rarity === '职业' || SDT.Base.isSha(card)) { gone++; return; }
-        if (card.rarity === '衍生') { gone++; return; }
+        if (card.rarity === '职业' || SDT.Base.isSha(card)) { gone++; settlement.cardOutcome.gone.push(card.name); return; }
+        if (card.rarity === '衍生') { gone++; settlement.cardOutcome.gone.push(card.name); return; }
         moved.push(card);
+        settlement.cardOutcome.pocket.push(card.name);
       });
       moved.forEach(card => bagSlots.pocketAdd(card));
       if ((moved.length || gone) && why) {
@@ -122,6 +128,7 @@ import { bagSlots } from './game.bag.bridge.js';
     if (consumedUids && consumedUids.length) {
       toPocket(consumedUids, '注能消耗的卡牌');
     }
+    settlement.cardOutcome.retained = game.ownedCards.map(owned => owned.card.name);
     settlement.phase = 'pocket';
     }
     // 「卡牌是消耗品」一次性教学（2026-09-19 关卡审查）：
@@ -292,15 +299,8 @@ import { bagSlots } from './game.bag.bridge.js';
       return;
     }
     if (settlement.phase === 'pocket') {
-      const shown = await showRunTransition({
-        tone: opts.isBoss ? 'altar' : 'battle',
-        asset: 'scene-battle-bg',
-        eyebrow: opts.isBoss ? 'TARGET ELIMINATED' : 'AREA SECURED',
-        title: opts.isBoss ? '首脑已击破' : '战斗胜利',
-        detail: opts.isBoss ? '污染反应正在消退 · 准备整理战利品' : '威胁解除 · 正在回收战利品',
-        duration: opts.isBoss ? 1350 : 1050,
-      });
-      // M1（U10 2026-09-29）：同撤退路径——非当前过场后静默终止，原实现会继续 UI.log 摸 document。
+      const shown = await SDT.Battle?.presentVictory?.(opts, sameRun);
+      // 画面已易主时停止旧续流；无视图端口的逻辑环境不增加等待。
       if (shown === false) return false;
     }
     if (!sameRun()) return false;
@@ -356,7 +356,13 @@ import { bagSlots } from './game.bag.bridge.js';
     if (all.length) {
       UI.log(`[[icon:archive]] 战利品掉落：${SDT.Chests.dropText(all)}`, 'loot');
       SDT.Chests.open(game, all, afterRewards, {
-        battleSummary: { defeated: (opts.foeNames || []).length, hp: game.hp, maxHp: game.maxHp },
+        battleSettlement: {
+          version:1, slotId:settlement.slotId, runId:settlement.runId, node:settlement.node,
+          opts:{ isBoss:!!opts.isBoss, foeNames:(opts.foeNames?.length ? opts.foeNames : [opts.name || '敌人']).slice(),
+            ...(opts.name ? { name:opts.name } : {}), ...(opts.encounterId ? { encounterId:opts.encounterId } : {}) },
+          victoryProgress:settlement.victoryProgress || null, progressRecorded:!!settlement.progressRecorded,
+        },
+        battleSummary: { defeated: (opts.foeNames || []).length, hp: game.hp, maxHp: game.maxHp, cardOutcome: settlement.cardOutcome },
       });
       if (settlement.phase === 'rewardsReady') settlement.phase = 'chests';
       return;
@@ -369,6 +375,28 @@ import { bagSlots } from './game.bag.bridge.js';
   // 战斗结束改经总线广播订阅（批次 5）；G.onBattleEnd 保留为无订阅方时的回退路径
   busOn('battle:end', onBattleEnd);
   game.onBattleEnd = onBattleEnd;
+  restoreBattleReward = saved => {
+    const continuation = saved?.context?.battleSettlement;
+    if (!validBattleRewardContinuation(continuation, game) || continuation.slotId !== getActiveSlot()) return false;
+    if (continuation.slotId) {
+      const identity = RunStorage.readIdentity(continuation.slotId);
+      if (!identity.ok || identity.value.runId !== continuation.runId) return false;
+    }
+    const opts = { ...continuation.opts };
+    const settlement = { phase:'chests', promise:null, commitPromise:null,
+      slotId:continuation.slotId, runId:continuation.runId, node:{ ...continuation.node },
+      ownerSeed:game.seed, runToken:game.discoveredPairs, receiptChecked:true,
+      attempt:null, rewardsApplied:false, victoryProgress:continuation.victoryProgress,
+      progressRecorded:continuation.progressRecorded };
+    settlements.set(opts, settlement);
+    return SDT.Chests.restore(game, saved, () => {
+      // The saved bag already contains card consumption and any claimed rewards.
+      // Re-enter only the existing idempotent Base+Run victory transaction.
+      if (settlement.phase === 'done') return true;
+      settlement.phase = 'saving';
+      return onBattleEnd(opts, [], true, []);
+    });
+  };
   }
 
 

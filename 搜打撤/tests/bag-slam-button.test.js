@@ -17,6 +17,8 @@ window.SDT.MAP = {
 };
 await import('../game/src/cards/cards.js');
 const { BattleSession, commands, viewApi } = await import('../game/src/battle/core/battle.core.js');
+const { enqueueFeedback } = await import('../game/src/battle/view/battle.feedback.js');
+const { set$energy } = await import('../game/src/battle/runtime/battle.runtime.session.js');
 
 const C = window.SDT.Cards;
 
@@ -71,6 +73,77 @@ function handCardNames(s) {
 }
 
 describe('背包砸击按钮形态', () => {
+  it('前摇中能量不足取消时不扣费、不占次数，补能后可再次使用', async () => {
+    const g = makeGame([], '侠客');
+    BattleSession.start(g, [foeOf('取消靶')], { isBoss: false, name: '前摇取消测试' });
+    await drain();
+    let release;
+    const heldFeedback = new Promise(resolve => { release = resolve; });
+    enqueueFeedback(() => heldFeedback);
+    await tick();
+    commands.bagSlam();
+    commands.resolveSlam(0);
+    await tick();
+    expect(snap().busy).toBe(true);
+    set$energy(0);
+    release();
+    await drain();
+    expect(commands.slamSkill().used).toBe(false);
+    expect(snap().foes[0].hp).toBe(99999);
+    expect(snap().energy).toBe(0);
+    set$energy(snap().maxEnergy);
+    commands.bagSlam();
+    commands.resolveSlam(0);
+    await drain();
+    expect(commands.slamSkill().used).toBe(true);
+    expect(snap().foes[0].hp).toBe(99997);
+    commands.flee();
+    await drain(100);
+  });
+
+  it('取消与无效目标不占次数，成功使用后同回合禁止重复，下回合及新战斗复位', async () => {
+    const g = makeGame([], '侠客');
+    BattleSession.start(g, [foeOf('次数靶')], { isBoss: false, name: '次数测试' });
+    await drain();
+    const initialEnergy = snap().energy;
+    commands.bagSlam();
+    commands.bagSlam();
+    expect(commands.slamSkill().used).toBe(false);
+    commands.bagSlam();
+    commands.resolveSlam(99);
+    expect(commands.slamSkill().used).toBe(false);
+    expect(snap().energy).toBe(initialEnergy);
+    commands.resolveSlam(0);
+    await drain();
+    expect(commands.slamSkill().used).toBe(true);
+    const usedHp = snap().foes[0].hp;
+    commands.bagSlam();
+    commands.resolveSlam(0);
+    await drain();
+    expect(snap().foes[0].hp).toBe(usedHp);
+    expect(snap().energy).toBe(initialEnergy - 1);
+    commands.endTurn();
+    await drain();
+    expect(commands.slamSkill().used).toBe(false);
+    commands.bagSlam();
+    commands.resolveSlam(0);
+    await drain();
+    expect(snap().foes[0].hp).toBe(usedHp - 2);
+    expect(commands.slamSkill().used).toBe(true);
+    commands.flee();
+    await drain(100);
+    BattleSession.start(g, [foeOf('新战斗靶')], { isBoss: false, name: '次数复位测试' });
+    await drain();
+    expect(commands.slamSkill().used).toBe(false);
+    commands.bagSlam();
+    commands.resolveSlam(0);
+    await drain();
+    expect(commands.slamSkill().used).toBe(true);
+    expect(snap().foes[0].hp).toBe(99997);
+    commands.flee();
+    await drain(100);
+  });
+
   it('开局手牌不再有「背包砸击」令牌，手牌=随身战斗卡', async () => {
     const sha = C.all().find(c => c.id === 'starter-attack');
     const g = makeGame([sha]);
@@ -201,12 +274,20 @@ describe('背包砸击按钮形态', () => {
     expect(snap().energy).toBe(e0 - 1);
     expect(g.logs.some(l => l.includes('圣疗') && l.includes('翻面') && l.includes('惩戒'))).toBe(true);
 
-    commands.bagSlam();   // 翻面后：惩戒=点选敌人
+    commands.bagSlam();
+    expect(snap().slamPending).toBe(false);
+    expect(snap().energy).toBe(e0 - 1);
+    expect(commands.slamSkill().used).toBe(true);
+    commands.endTurn();
+    await drain();
+    const nextEnergy = snap().energy;
+    expect(commands.slamSkill().used).toBe(false);
+    commands.bagSlam();   // 下一回合翻面后：惩戒=点选敌人
     expect(snap().slamPending).toBe(true);
     commands.resolveSlam(0);
     await drain();
     expect(snap().foes[0].hp).toBe(99999 - 5);   // 3 + 法伤加成 2
-    expect(snap().energy).toBe(e0 - 2);   // 两段各 1 费
+    expect(snap().energy).toBe(nextEnergy - 1);   // 下一回合惩戒消耗 1 费
     BattleSession.commands.flee();
     await drain(100);
   });

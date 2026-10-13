@@ -6,7 +6,7 @@
 <link rel="icon" type="image/png" href="assets/brand-mark-codename7.png" />
 <!-- 首屏关键资源提前预载：标题壁纸与字标是首屏核心视觉；
      其余资源（BGM/立绘/卡面）保持按需加载，避免挤占启动带宽 -->
-<link rel="preload" as="image" href="assets/reconstruction/wallpaper-wu-1004.webp?v=snow-clean-1009" />
+<link rel="preload" as="image" href="assets/reconstruction/wallpaper-wu-1004.webp?v=snow-expanded-1009" />
 <link rel="preload" as="image" href="assets/title-wordmark.png" />
 <link rel="preload" as="font" type="font/ttf" href="assets/fonts/HarmonyOS_Sans_SC_Regular.ttf" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/cascadia-code-400.woff2" crossorigin />
@@ -29,35 +29,31 @@
 <link rel="stylesheet" href="css/expedition-rewards.css" />
 <link rel="stylesheet" href="css/expedition-battle.css" />
 <link rel="stylesheet" href="css/expedition-library.css" />
-<link rel="stylesheet" href="css/photo-studio-mounts.css" />
-<link rel="stylesheet" href="css/photo-studio-craft.css" />
 <link rel="stylesheet" href="css/card-v3.css" />
 <link rel="stylesheet" href="css/expedition-roster.css" />
 <link rel="stylesheet" href="css/expedition-shop.css" />
 <link rel="stylesheet" href="css/ui-scale.css" />
 <!-- 09-24 美术排版流水线：各界面增量层（子代理产出，主代理统一挂载；须在 ui-scale.css 之后） -->
 <link rel="stylesheet" href="css/page-slot-select.css" />
-<link rel="stylesheet" href="css/page-hub.css" />
-<link rel="stylesheet" href="css/page-deploy.css" />
-<link rel="stylesheet" href="css/page-classes.css" />
-<link rel="stylesheet" href="css/page-stash.css" />
-<link rel="stylesheet" href="css/page-shop.css" />
-<link rel="stylesheet" href="css/page-upgrade.css" />
     <link rel="stylesheet" href="css/page-settings.css" />
     <link rel="stylesheet" href="css/page-datapage.css" />
-<link rel="stylesheet" href="css/page-cardslib.css" />
 <link rel="stylesheet" href="css/page-ach.css" />
 <link rel="stylesheet" href="css/page-cardforge.css" />
 <link rel="stylesheet" href="css/page-expedition-hud.css" />
+<link rel="stylesheet" href="css/feedback-oct12.css" />
+<link rel="stylesheet" href="css/roster-departure-v2.css" />
 <link rel="stylesheet" href="css/pocket-strip.css" />
 <link rel="stylesheet" href="css/experience-loot.css" />
 <link rel="stylesheet" href="css/page-events.css" />
 <link rel="stylesheet" href="css/page-rewards-bag-help.css" />
 <link rel="stylesheet" href="css/page-battle-ui.css" />
 <link rel="stylesheet" href="css/character-idle.css" />
-<link rel="stylesheet" href="css/cover-remaining.css" />
+<!-- EXP: <link rel="stylesheet" href="css/cover-remaining.css" /> -->
 <link rel="stylesheet" href="css/page-transitions.css" />
 <link rel="stylesheet" href="css/ak-skin.css" />
+<link rel="stylesheet" href="css/base-camp.css" />
+<link rel="stylesheet" href="css/base-camp-compact.css" />
+<link rel="stylesheet" href="css/card-layout-selected.css" />
 </head>
 <body>
 <div id="app">
@@ -73,11 +69,6 @@
       </div>
     </section>
 
-    <section class="panel" id="routePanel">
-      <div class="route-heading"><div class="route-title">下一步</div><span class="route-objective"></span></div>
-      <div class="route-options" role="group" aria-label="可前往的相邻节点"></div>
-      <div class="route-help">点击路线或地图亮环前进 <span>Space 选择 · X 确认 · B 背包</span></div>
-    </section>
     <section class="panel" id="devPanel" hidden>
       <div id="devTools" class="dev-tools" hidden>
         <div class="dev-battle-row">
@@ -99,31 +90,11 @@
     <!-- 09-24 留言 #8：「已知区域 G」按键移除（G 键镜头总览保留，见 input.js camOverview） -->
     <div id="resHud">
       <span class="chip-mini res-gold" title="持有金币" data-tip="持有金币">
-        <svg class="res-ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-          <rect x="2" y="2" width="20" height="20" rx="3" fill="url(#resGoldGrad)"/>
-          <circle cx="12" cy="12" r="7.2" fill="none" stroke="#5c3d00" stroke-width="1.4"/>
-          <circle cx="12" cy="12" r="4.6" fill="none" stroke="#5c3d00" stroke-width="1" opacity=".7"/>
-          <path d="M12 8.2l1.1 2.4 2.6.3-1.9 1.8.5 2.6-2.3-1.3-2.3 1.3.5-2.6-1.9-1.8 2.6-.3z"
-                fill="#5c3d00" stroke="none"/>
-          <path d="M4 4h16" stroke="#ffe9a8" stroke-width="1" opacity=".5"/>
-          <defs>
-            <linearGradient id="resGoldGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#f4c95c"/>
-              <stop offset=".5" stop-color="#e0a52e"/>
-              <stop offset="1" stop-color="#b97b14"/>
-            </linearGradient>
-          </defs>
-        </svg>
+        <svg class="res-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 20 6v12l-8 4-8-4V6Z" fill="#bb8a3d" stroke="#f4d58a" stroke-width="1.4"/><path d="m12 5 5 2.5v9L12 19l-5-2.5v-9Z" fill="#e6bd64"/><path d="M14.5 8.5h-4a2 2 0 0 0 0 4h3a2 2 0 0 1 0 4h-4M12 7v11" fill="none" stroke="#614725" stroke-width="1.6" stroke-linecap="round"/></svg>
         <b id="charCoins">0</b>
       </span>
       <span class="chip-mini res-atk" title="攻击力" data-tip="攻击力">
-        <svg class="res-ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-          <path d="M6.2 11.2V8.8a1.5 1.5 0 0 1 3 0v2.2" fill="none" stroke="#ff6b5e" stroke-width="1.8" stroke-linecap="round"/>
-          <path d="M9.2 11V8a1.5 1.5 0 0 1 3 0v3.2" fill="none" stroke="#ff6b5e" stroke-width="1.8" stroke-linecap="round"/>
-          <path d="M12.2 11.2V8.6a1.5 1.5 0 0 1 3 0v3.6" fill="none" stroke="#ff6b5e" stroke-width="1.8" stroke-linecap="round"/>
-          <path d="M15.2 12.4v-1a1.5 1.5 0 0 1 3 0v4a5.4 5.4 0 0 1-5.4 5.4h-1.2a5.4 5.4 0 0 1-5.4-5.4v-5.2"
-                fill="none" stroke="#ff6b5e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <svg class="res-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 2 7 0-1 7-10 10-6-6Z" fill="#cedde5" stroke="#517b90" stroke-width="1.3"/><path d="M19 5 8 16" stroke="#fff" stroke-width="1.4"/><path d="m4 11 9 9M8 17l-5 5M2 20l2 2" fill="none" stroke="#b99b66" stroke-width="2.8" stroke-linecap="round"/></svg>
         <b id="charAtk">4</b>
       </span>
     </div>
@@ -136,8 +107,8 @@
                 stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
         </svg>
       </button>
-      <button id="btnHome" class="exit-btn" title="离开对局（可保存或放弃） / 回主菜单">
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+      <button id="btnHome" class="archive-back" title="离开对局（可保存或放弃） / 回主菜单" aria-label="离开对局">
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
           <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
                 fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
           <path d="M4 12h10M4 12l4-4M4 12l4 4"
@@ -184,19 +155,21 @@
       <b id="bagCountFloat">0/16</b>
     </button>
     <div id="title" class="home-composed">
-      <div class="title-wallpaper-extension" aria-hidden="true"></div>
-      <div class="title-bg" aria-hidden="true"></div>
-      <div class="title-bg title-bg-alternate" aria-hidden="true"></div>
+      <div class="home-scene" aria-hidden="true">
+        <div class="title-wallpaper-extension"></div>
+        <div class="title-bg"></div>
+        <div class="title-bg title-bg-alternate"></div>
+      </div>
       <button type="button" class="home-tool home-wallpaper-view" id="btnTitleWallpaperView" aria-pressed="false" title="隐藏界面，只看壁纸">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>只看壁纸</span>
       </button>
       <div class="home-edge-band home-edge-band-top" aria-hidden="true">
         <div class="home-band-track">
-          <span class="home-band-lane"><span>冬日猜想 <b>/</b> CODE NAME 7</span><span>冬日猜想 <b>/</b> CODE NAME 7</span><span>冬日猜想 <b>/</b> CODE NAME 7</span></span>
-          <span class="home-band-lane"><span>冬日猜想 <b>/</b> CODE NAME 7</span><span>冬日猜想 <b>/</b> CODE NAME 7</span><span>冬日猜想 <b>/</b> CODE NAME 7</span></span>
+          <span class="home-band-lane"><span>冬日猜想 <b>/</b> CODE NAME 7</span></span>
         </div>
       </div>
       <div class="title-inner">
+        <section class="home-command" aria-label="主菜单">
         <header class="home-brand">
           <h1 class="home-wordmark"><img src="assets/title-wordmark.png" alt="升格会的冬日猜想" draggable="false"></h1>
         </header>
@@ -211,7 +184,9 @@
             <span class="home-button-copy"><span class="home-button-cn">生存指南</span></span>
           </button>
         </nav>
-        <nav class="home-secondary" aria-label="收藏与系统">
+        </section>
+        <aside class="home-support" aria-label="收藏与系统">
+        <nav class="home-secondary home-collection" aria-label="收藏">
           <button class="home-plate home-ach" id="mAch" title="成就总览">
             <svg class="home-line-icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="12" r="7"/><path d="m16 8 1.2 2.5 2.8.4-2 1.9.5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-1.9 2.8-.4zM11 18l-2 10 7-4 7 4-2-10"/></svg>
             <span class="home-button-copy"><span class="home-button-cn">成就总览</span></span>
@@ -220,6 +195,8 @@
             <svg class="home-line-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 10h6l2-4h8l2 4h6v17H4z"/><circle cx="16" cy="18" r="5"/><path d="M24 13h1"/></svg>
             <span class="home-button-copy"><span class="home-button-cn">照相馆</span></span>
           </button>
+        </nav>
+        <nav class="home-secondary home-system" aria-label="系统工具">
           <button class="home-plate home-settings" id="mSettings" title="设置">
             <svg class="home-line-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 8h20M6 16h20M6 24h20M12 4v8M22 12v8M11 20v8"/></svg>
             <span class="home-button-copy"><span class="home-button-cn">设置</span></span>
@@ -233,6 +210,7 @@
             <span class="home-button-copy"><span class="home-button-cn">退出游戏</span></span>
           </button>
         </nav>
+        </aside>
         <footer class="home-footer">
           <div class="home-tools">
             <button class="home-tool" id="btnTitleMute" title="音效 / 背景乐开关" aria-label="音效 / 背景乐开关">
@@ -248,18 +226,23 @@
           </div>
         </footer>
         <dialog class="home-credits-dialog" id="homeCredits" aria-labelledby="homeCreditsTitle">
-          <form method="dialog"><button class="home-credits-back" aria-label="返回主页">← 返回</button></form>
-          <h2 id="homeCreditsTitle">制作名单</h2>
+          <form method="dialog"><button class="home-credits-back" aria-label="返回主页"><span aria-hidden="true">←</span> 返回主页</button></form>
+          <header class="credits-heading"><small>CREDITS</small><h2 id="homeCreditsTitle">制作名单</h2></header>
+          <h3 class="credits-section-title">制作团队</h3>
           <dl class="home-makers-list">
-            <div><dt>制作人、程序员</dt><dd>太平</dd></div>
+            <div><dt>制作人 程序 测试 美术 动画</dt><dd>太平</dd></div>
             <div><dt>游戏设计师</dt><dd>创</dd></div>
+          </dl>
+          <h3 class="credits-section-title">特别鸣谢</h3>
+          <dl class="home-makers-list credits-thanks">
             <div><dt>精神支柱</dt><dd>Tang</dd></div>
           </dl>
-          <dl class="home-credits-sources">
-            <div><dt>字体</dt><dd>HarmonyOS Sans</dd></div>
-            <div><dt>部分图标</dt><dd>game-icons.net · CC-BY 3.0</dd></div>
-            <div><dt>音效</dt><dd>rubberduck · Tinysized · Kenney 等 · CC0</dd></div>
-          </dl>
+          <section class="credits-models" aria-labelledby="creditsModelsTitle">
+          <h3 class="credits-section-title" id="creditsModelsTitle">额外感谢 <span class="credits-model-label">大模型</span></h3>
+          <ul class="credits-extra-thanks" aria-label="额外感谢的大模型">
+            <li>Gpt</li><li>Glm</li><li>Mimo</li><li>Claude</li><li>Deepseek</li>
+          </ul>
+          </section>
         </dialog>
         <div class="title-snow home-snow" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
         <div id="warmupTip" hidden aria-live="polite">
@@ -304,13 +287,9 @@
         </div>
       </div>
     </div>
-    <div class="log-panel" id="logPanel" aria-label="行动记录">
-      <button class="log-toggle" id="logToggle" title="收起 / 展开行动记录">行动记录</button>
-      <div id="log"></div>
-    </div>
     <div id="exitScr" hidden>
       <div class="title-inner">
-        <p class="exit-msg">信号已断开。愿风雪之后，仍有重逢。</p>
+        <p class="exit-msg">信号已断开。</p>
         <button class="menu-btn" id="mBack">重 新 进 入</button>
       </div>
     </div>

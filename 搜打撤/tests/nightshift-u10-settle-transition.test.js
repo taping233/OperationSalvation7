@@ -91,11 +91,13 @@ describe('U10 M1 settle 过场非当前后续流静默终止', () => {
     expect(state.saveGame).toHaveBeenCalled();
   });
 
-  it('胜利过场 resolve(false) 后：不打「战斗胜利」日志（同构收口）', async () => {
+  it('原战场胜利反馈 resolve(false) 后：不打胜利日志、不续结算', async () => {
     state.transition = vi.fn(async () => false);
+    window.SDT.Battle = { presentVictory: vi.fn(async () => false) };
     const onBattleEnd = await bind();
     await onBattleEnd({ isBoss: false, foeNames: [] }, [], true, []);
-    expect(state.transition).toHaveBeenCalledTimes(1);
+    expect(state.transition).not.toHaveBeenCalled();
+    expect(window.SDT.Battle.presentVictory).toHaveBeenCalledTimes(1);
     expect(window.SDT.UI.log).not.toHaveBeenCalled();
     expect(state.saveGame).not.toHaveBeenCalled();
   });

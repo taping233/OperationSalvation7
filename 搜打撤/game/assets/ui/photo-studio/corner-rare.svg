@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+<defs>
+    <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff" /><stop offset=".38" stop-color="#dbe3e8" /><stop offset=".72" stop-color="#9caab1" /><stop offset="1" stop-color="#f4f7f8" /></linearGradient>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#aeb9bd" /><stop offset=".2" stop-color="#7c898f" /><stop offset=".58" stop-color="#536168" /><stop offset="1" stop-color="#89979c" /></linearGradient>
+    <g id="plate">
+      <path d="M2 2H46V8H10V46H2Z" fill="url(#silver)" stroke="#64727a" stroke-width="1.5" />
+      <path d="M5 5H41L41 11H13V41H5Z" fill="none" stroke="#fff" stroke-width="1.1" stroke-opacity=".62" />
+      <path d="M4 4L39 4L4 39Z" fill="#c7d1d6" stroke="#718087" stroke-width="1" />
+      <path d="M8 8L31 8L8 31Z" fill="none" stroke="#f8fbfc" stroke-width="1.1" stroke-opacity=".62" />
+      <circle cx="8" cy="8" r="2.2" fill="#f8fbfc" stroke="#75838a" stroke-width="1" />
+      <path d="M14 14L32 14" stroke="#fff" stroke-width="1.1" stroke-opacity=".62" />
+    </g>
+  </defs>
+<use href="#plate" />
+</svg>

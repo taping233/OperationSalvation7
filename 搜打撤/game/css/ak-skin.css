@@ -57,21 +57,12 @@ h1, h2, h3 { font-family: var(--font-ui); }
 .ov-btn.ok, .hs-btn.ok, .menu-btn.primary { background: var(--ak-yellow); color: #14120a; border-color: var(--ak-yellow); }
 .ov-btn.ok:hover:not(:disabled), .hs-btn.ok:hover:not(:disabled), .menu-btn.primary:hover:not(:disabled) { background: #fff3b0; color: #14120a; }
 .ov-btn:disabled, .hs-btn:disabled, .menu-btn:disabled { opacity: .38; background: repeating-linear-gradient(135deg, #202326 0 6px, #1a1c1f 6px 12px); color: var(--ak-dim); }
-
-/* ---------- 卡牌：直角石墨卡面、稀有度色条、类型细标 ---------- */
-.hs-card { border-radius: 0; border-width: 1px; border-color: var(--ak-line-hi);
-  background: var(--ak-tex-hatch), linear-gradient(165deg, var(--fc1, #4a4f55), var(--fc2, #17191c) 74%);
-  box-shadow: 0 .35em 1.1em rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.08), inset 0 -.38em 0 var(--gem);
-  transition: transform .18s var(--ease-pop), box-shadow .18s; }
-.hs-card::before { content: ''; position: absolute; inset: 0; z-index: 6; pointer-events: none;
-  background: var(--ak-frame) no-repeat center / 100% 100%; opacity: .5; mix-blend-mode: screen; }
 .tp0 { --fc1: #4b4f55; --fc2: #15171a; } .tp1 { --fc1: #594b4a; --fc2: #1a1415; }
 .tp2 { --fc1: #4a5a50; --fc2: #121816; } .tp3 { --fc1: #4a5663; --fc2: #121519; }
 .tp4 { --fc1: #5b5a47; --fc2: #19180f; } .tp5 { --fc1: #54485f; --fc2: #16111a; }
 .tp6 { --fc1: #5a5f66; --fc2: #1a1c1f; } .tp7 { --fc1: #4a5a5e; --fc2: #121719; }
 .rv0 { --gem: #8c949a; } .rv1 { --gem: #6fd08a; } .rv2 { --gem: #4fb4ff; } .rv3 { --gem: #b48cff; }
-.rv4 { --gem: #ffc933; } .rv5 { --gem: #38d2c0; } .rv6 { --gem: #f5f6f3; } .rv7 { --gem: #ffb7e0; }
-.rv5 { box-shadow: 0 .35em 1.1em rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.08), inset 0 -.38em 0 var(--gem); }
+.rv4 { --gem: #ffc933; } .rv6 { --gem: #f5f6f3; } .rv7 { --gem: #ffb7e0; }
 
 /* ---------- 通用动效：界面级入场统一为「扫入」 ---------- */
 .ak-enter { animation: akScanIn .38s var(--ease-entrance) both; }
@@ -199,8 +190,6 @@ body #overlay .battle-stage.sts .sts-topbar::after { content: ''; position: abso
 #overlay .cls2-strip > *, .cls2-face { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 26px), calc(100% - 14px) 100%, 0 100%); position: relative; overflow: hidden; }
 #overlay .cls2-strip > *::after { content: ''; position: absolute; left: -4%; right: -4%; bottom: 0; height: 34%; background: linear-gradient(0deg, #0a0b0c 62%, transparent); transform: skewY(-6deg); transform-origin: 100% 100%; pointer-events: none; }
 #overlay .cls2-strip > *.on, #overlay .cls2-strip > *.active, #overlay .cls2-strip > *[aria-selected="true"] { box-shadow: 0 0 0 2px var(--ak-yellow); transform: translateY(-6px); }
-.hs-card::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 34%; z-index: 0; pointer-events: none;
-  background: linear-gradient(0deg, rgba(0,0,0,.7), transparent); clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 100%); }
 
 /* —— 叙事选项条（参考「以开端铸造钥匙」：暗色横条，淡出左缘，右侧骰面） —— */
 #overlay .evt-opt { clip-path: none; border: 0; border-top: 1px solid var(--ak-line-hi); border-left: 0;

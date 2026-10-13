@@ -17,6 +17,11 @@ import { captureBattleContext, startBattle } from '../battle/battle-loader.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
 import { selectEncounterSpec } from './encounter-selector.js';
 import { turboMs } from '../core/turbo.js';
+import { reduceMotion } from '../core/motion.js';
+import { createCityCut } from '../ui/camp-entry.js';
+import { eventSceneHTML } from '../ui/node-scene-view.js';
+import '../../css/entry-events.css';
+import '../../css/expedition-transitions.css';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -79,22 +84,82 @@ function preloadSceneList(urls) {
 export function preloadAllNodeShellBgs() {
   preloadSceneList(Array.from(IMMEDIATE_SCENES, key => PRELOAD_SCENES[key]).filter(Boolean));
 }
-// ---------- 全屏节点页外壳：杀戮尖塔式——整屏场景背景图，标题与选项虚化在右侧毛玻璃面板 ----------
+// 事件选中是阅读状态；真正结算仍交给原有 data-act 回调。
+let eventChoiceSelection = null;
+function wireEventChoiceSelection(root, key) {
+  const options = [...root.querySelectorAll('.node-summary > .evt-opt[data-act]')];
+  if (options.length < 2) { eventChoiceSelection = null; return; }
+  const confirm = root.querySelector('.event-choice-confirm');
+  const clear = root.querySelector('.event-choice-clear');
+  const name = root.querySelector('[data-event-choice-name]');
+  const detail = root.querySelector('[data-event-choice-detail]');
+  if (!confirm || !clear || !name || !detail) return;
+  let selected = eventChoiceSelection?.key === key ? eventChoiceSelection.index : -1;
+  let executing = false;
+  let forwarding = false;
+  const sync = () => {
+    const option = options[selected];
+    options.forEach((item, index) => {
+      item.classList.toggle('is-selected', index === selected);
+      item.setAttribute('aria-pressed', String(index === selected));
+    });
+    name.textContent = option?.querySelector('b')?.textContent || '先选择一个选项';
+    detail.textContent = option?.querySelector('span')?.textContent || (option ? '结果未知，确认后执行。' : '点击选项查看已知结果，再确认执行。');
+    confirm.disabled = !option || executing;
+    clear.disabled = !option || executing;
+    confirm.textContent = option ? '确认选择' : '选择后确认';
+  };
+  const choose = index => {
+    if (executing || options[index]?.disabled) return;
+    selected = index;
+    eventChoiceSelection = { key, index };
+    sync();
+  };
+  root.querySelector('.node-summary').addEventListener('click', event => {
+    const option = event.target.closest('.evt-opt[data-act]');
+    if (!option || forwarding) return;
+    event.preventDefault();
+    event.stopPropagation();
+    choose(options.indexOf(option));
+  });
+  clear.addEventListener('click', () => {
+    if (executing) return;
+    selected = -1;
+    eventChoiceSelection = null;
+    sync();
+    options[0]?.focus({ preventScroll:true });
+  });
+  confirm.addEventListener('click', () => {
+    const option = options[selected];
+    if (!option || executing || option.disabled) return;
+    executing = true;
+    eventChoiceSelection = null;
+    sync();
+    forwarding = true;
+    try { option.click(); } finally { forwarding = false; }
+  });
+  root._clearEventChoice = () => { selected = -1; eventChoiceSelection = null; sync(); };
+  if (selected < 0 || options[selected]?.disabled) selected = -1;
+  sync();
+}
+document.addEventListener('keydown', event => {
+  if (event.key !== 'Escape' || event.isComposing || event.keyCode === 229) return;
+  const root = UI.el?.ovBody?.querySelector('.event-scene[data-event-choice-count]');
+  if (!root?.querySelector('.evt-opt.is-selected')) return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  root._clearEventChoice?.();
+}, true);
+// 节点共享场景／叙事与决策两区；只有事件启用原有选择确认机制。
 // o = { tone: 场景分色(sc-*), icon, title, sub, body, foot, asset: 背景图 asset-key（缺省按 tone 映射） }
 export function nodeShell(o) {
   const bg = o.asset || NODE_BG[o.tone] || '';
-  UI.showOverlay('', `
-    <div class="pg node-pg sc-${o.tone}"${o.music ? ` data-music-scene="${escAttr(o.music)}"` : ''}${bg ? ` data-asset-key="${escAttr(bg)}"` : ''}>
-      <div class="node-panel">
-        <div class="node-kicker">FIELD ENCOUNTER <span>${String(game.layerIdx + 1).padStart(2, '0')} / 04</span></div>
-        <header class="pg-head">
-          <h2>${o.icon} ${o.title}</h2>
-          ${o.sub ? `<span class="sub">${o.sub}</span>` : ''}
-        </header>
-        <div class="node-main"><div class="node-summary">${o.body}</div></div>
-        ${o.foot ? `<footer class="node-foot">${o.foot}</footer>` : ''}
-      </div>
-    </div>`, 'page');
+  UI.showOverlay('', eventSceneHTML({ ...o, asset: bg, region: game.layerData?.[game.layerIdx]?.name, layer: game.layerIdx }), 'page');
+  if (o.tone === 'event') {
+    const key = `${game.mapSeed}|${game.turn}|${game.layerIdx},${game.trackPos}|${o.title}|${bg}|${o.sub || ''}`;
+    const root = UI.el?.ovBody?.querySelector('.event-scene');
+    if (root) wireEventChoiceSelection(root, key);
+  }
 }
 // 杀戮尖塔式选项条：主标题 + 后果说明（复用事件页 .evt-opt 样式）
 export function nodeOpt(act, label, detail, tone = '', extra = '') {
@@ -108,7 +173,7 @@ export function consumeCell(layerIdx = game.layerIdx, trackPos = game.trackPos) 
 
 export function consumeCurrentCell() { consumeCell(); }
 
-// 节点与战斗结算之间的短过场：复用现有场景美术，不引入额外资源或阻塞式页面。
+// 节点短过场沿原定时与跳过生命周期；斜切画面按地图、遭遇战或首脑选择。
 let transitionRequest = 0;
 export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', eyebrow = 'AREA ENTERED', title, detail = '', duration = 900, presentation = '' }) {
   // 结束时必须恢复状态：战斗/节点流程下游会自行改状态，但「继续对局」路径
@@ -117,21 +182,43 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
   const currentContext = captureBattleContext(game);
   const request = ++transitionRequest;
   const isCurrent = () => currentContext() && request === transitionRequest;
+  const cityCut = presentation === 'city-cut' && !reduceMotion();
   game.state = 'modal';
   const transition = new Promise(resolve => {
     let done = false;
     let timer = null;
+    let surface = null;
     const finish = () => {
       if (done) return;
       done = true;
       if (timer) clearTimeout(timer);
       if (!isCurrent()) { resolve(false); return; }
+      // 过场只拥有自己挂载的画面；迟到回调不能关掉已打开的背包或新页面。
+      if (surface && (!surface.isConnected || !UI.el.ovBody.contains(surface))) { resolve(false); return; }
       UI.hideOverlay();
       // 战斗 modal 态（Battle.restore 置位）不得降级为 idle，否则战斗界面丢失且移动锁死
       game.state = (prevState === 'modal' && !game.battleActive) ? 'idle' : prevState;
       resolve(true);
     };
-    UI.showOverlay('', `
+    if (cityCut) {
+      const battleEntry = tone === 'battle';
+      const cut = createCityCut({
+        archive: battleEntry ? '接敌档案' : '远征档案',
+        title: title || (battleEntry ? '进入战斗' : '进入地图'),
+        subtitle: detail || (battleEntry ? 'BATTLE / 准备接敌' : 'EXPEDITION / 开始探索'),
+        edition: `${eyebrow} / VII`, destination: battleEntry ? 'BATTLE' : 'EXPEDITION',
+        watermark: battleEntry ? 'BATTLE' : 'FIELD',
+        scene: battleEntry ? (eyebrow === 'BOSS CONTACT' ? 'boss' : 'battle') : 'field',
+      });
+      UI.showOverlay('', `<div class="scene flow-transition city-run-transition sc-${escAttr(tone)}"
+        data-presentation="city-cut" data-act="flowContinue" role="group"
+        aria-label="${escAttr(`${title || '进入区域'}。${detail}。点击跳过`)}"
+        style="--city-run-duration:${turboMs(duration)}ms">
+        ${cut.outerHTML}<p class="city-run-hint">点击跳过</p>
+      </div>`, 'scene');
+    } else if (presentation === 'node-cut') {
+      UI.showOverlay('', `<div class="scene flow-transition expedition-cut" data-act="flowContinue" role="status" aria-label="${escAttr(title || '进入节点')}"><div class="expedition-cut-rule" aria-hidden="true"></div><h2>${esc(title || '进入节点')}</h2></div>`, 'scene');
+    } else UI.showOverlay('', `
       <div class="scene flow-transition sc-${escAttr(tone)}" data-asset-key="${escAttr(asset)}" data-presentation="${escAttr(presentation)}" data-act="flowContinue">
         ${presentation === 'base-arrival' ? '<div class="hub-arrival-card">' : ''}
         <div class="flow-scan" aria-hidden="true"></div>
@@ -143,7 +230,8 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
         <p class="flow-hint">点击跳过</p>
       </div>`, 'scene');
     UI.act('flowContinue', finish);
-    timer = setTimeout(finish, turboMs(duration));
+    surface = UI.el.ovBody?.querySelector('.flow-transition');
+    timer = setTimeout(finish, reduceMotion() ? 0 : turboMs(duration));
     UI.refresh(game);
   });
   // resolve 与消费者的 then/await 之间仍可能启动新过场；保留该次只读核验。
@@ -152,13 +240,17 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
 
 export function enterNode(kind, done) {
   const transitions = {
-    battle: { tone: 'battle', asset: 'scene-battle-bg', eyebrow: 'HOSTILE CONTACT', title: '遭遇敌袭', detail: '武器解锁 · 准备接敌' },
+    battle: { tone: 'battle', asset: 'scene-battle-bg', eyebrow: 'HOSTILE CONTACT', title: '遭遇敌袭', detail: '武器解锁 · 准备接敌', presentation: 'city-cut' },
+    boss: { tone: 'battle', asset: 'scene-battle-bg', eyebrow: 'BOSS CONTACT', title: '首脑接敌', detail: '高危目标 · 准备战斗', presentation: 'city-cut' },
     door: { tone: 'door', asset: 'scene-door-bg', eyebrow: 'GATE SIGNAL', title: '抵达大门', detail: '环层通路正在响应' },
     altar: { tone: 'altar', asset: 'scene-altar-bg', eyebrow: 'CONTAMINATION DETECTED', title: '污染核心', detail: '高危生命信号逼近' },
     emergencyExit: { tone: 'exit', asset: 'scene-extract-bg', eyebrow: 'EXTRACTION POINT', title: '紧急撤离点', detail: '撤离信标已经接通' },
     shop: { tone: 'shop', asset: 'scene-shop-bg', eyebrow: 'CARAVAN SIGNAL', title: '拾荒商队', detail: '交易频道已经开放' },
+    event: { tone: 'event', asset: 'scene-event-custom-a', eyebrow: 'UNKNOWN ENCOUNTER', title: '偶遇见闻', detail: '风雪中的故事正在展开' },
   };
-  const transition = showRunTransition(transitions[kind] || { title: '进入节点' });
+  const spec = transitions[kind] || { title: '进入节点' };
+  const combat = kind === 'battle' || kind === 'boss';
+  const transition = showRunTransition(combat ? spec : { ...spec, presentation: 'node-cut', duration: 240 });
   return transition.then(current => current && transition.isCurrent() ? done() : false);
 }
 
@@ -176,12 +268,16 @@ export function finishInstant() {
 // 搜索物资（2026-09-09 老板 #3）：收获不再直接蹦出来——先演一段搜索（提灯扫过 + 进度条填充），
 // 约 0.95s 后揭晓收获大字与「继续」按钮，给拾取一个过程感
 const PICKUP_SEARCH_MS = 950;
-export function openPickupPage(kind, gain, onDone, skipSearch = false) {
+export function openPickupPage(kind, gain, onDone, skipSearch = false, transaction = null) {
   const f = SCENES[kind];
+  const txn = transaction || { received:false, page:0, current:captureBattleContext(game) };
+  if (txn.received || !txn.current()) return;
+  const page = ++txn.page;
+  game.state = 'modal';
   // 来源页恢复（迭代评审 09-20 C-P1）：背包盖开再关后重放本页——搜索动画与揭晓重来，
   // 但 onDone 只会经 pickupGo 触发一次，奖励不再因关背包被吞（此前发奖仅 pickupGo 一个入口）
   // 体验线切片5（2026-09-28，评估#9）：重入场景跳过搜索重放——核对背包再回来不该重等 0.95s
-  setBagReturnHook(() => openPickupPage(kind, gain, onDone, true));
+  setBagReturnHook(() => openPickupPage(kind, gain, onDone, true, txn));
   nodeShell({ tone: 'pickup', asset: PICKUP_BG[kind], icon: f.icon, title: f.title,
     sub: pick(f.lines),
     body: `<div class="pick-search">
@@ -193,14 +289,21 @@ export function openPickupPage(kind, gain, onDone, skipSearch = false) {
   const main = UI.el.ovBody.querySelector('.node-main');
   const reveal = () => {
     if (!main || !main.isConnected) return;   // 页面已被换掉/关掉就不再揭晓
-    main.innerHTML = `<p class="gain-big">${gain}</p>
-      <button class="evt-opt ok" data-act="pickupGo"><b>获取并离开</b></button>`;
+    main.innerHTML = `<div class="node-summary pickup-result"><p class="gain-big">${gain}</p>
+      <button class="evt-opt ok" data-act="pickupGo"><b>获取并离开</b></button></div>`;
     if (!skipSearch) SDT.Sound.sfx('searchReveal');
     const go = main.querySelector('[data-act="pickupGo"]');
     if (go) go.focus({ preventScroll: true });
     // 注册随揭晓走：closeBackpack 会清空动作表，背包返回的重入路径（skipSearch）此前
     // 提前 return 不注册，恢复页有按钮无处理器、奖励永远领不出（09-30 深审 WORLD-001）
-    UI.act('pickupGo', () => { setBagReturnHook(null); UI.hideOverlay(); onDone(); });
+    UI.act('pickupGo', () => {
+      if (txn.received || txn.page !== page || !txn.current() || game.state !== 'modal' ||
+          !main.isConnected || UI.el.ovBody.querySelector('.node-main') !== main) return;
+      txn.received = true;
+      setBagReturnHook(null);
+      onDone();
+      if (main.isConnected && UI.el.ovBody.querySelector('.node-main') === main) UI.hideOverlay();
+    });
   };
   if (skipSearch) { reveal(); return; }
   setTimeout(reveal, turboMs(PICKUP_SEARCH_MS));
@@ -236,10 +339,10 @@ export function openBlankSafePage() {
   game.state = 'modal';
   nodeShell({
     tone: 'safe', icon: '[[icon:check]]', title: '安全地带',
-    sub: '空白的安全节点',
+    sub: '风雪暂歇，前方仍有路可走。',
     body: `<div class="blank-safe-gain">
       <p class="gain-big">无事发生</p>
-      <p class="ov-note">四周静悄悄的——这里没有埋伏，也没有拾获。整理一下背包，准备继续深入。</p>
+      <p class="ov-note">没有埋伏或拾获，可整理背包后继续前行。</p>
     </div>`,
     foot: `<button class="ov-btn ok fire-done-btn" data-act="blankSafeDone"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 继续旅程</button>`,
   });
@@ -263,7 +366,14 @@ export function openChestsOnCell(chests, text, opts) {
     game.state = 'idle';
     saveGame();
     UI.refresh(game);
-  }, opts);
+  }, { ...opts, onCell:true });
+}
+
+export function resumeChestsOnCell(saved) {
+  return SDT.Chests.restore(game, saved, () => {
+    if (saved.context.consumeNode) consumeCurrentCell();
+    game.state = 'idle'; saveGame(); UI.refresh(game);
+  });
 }
 
 // 即时效果（经场景演出后结算）；after = 效果完成后的续流回调
@@ -277,7 +387,7 @@ export function grantEventCard(tpl, opts = {}) {
   if (!canReceive) {
     // 2026-09-09 老板 #12：收不下要当场给提示（音效+日志，口径同 addItem），不能只默默掉在原地
     SDT.Sound.sfx('deny');
-    UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格${tpl.type !== '资源' ? '，珍珠盒扩格只收资源卡' : ''}），【${esc(tpl.name)}】掉在了原地…`, 'warn');
+    UI.log(`[[icon:bag]] 背包放不下（${game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`}${tpl.type !== '资源' ? '；新普通牌需通用空格，同名未满仍可叠放' : ''}），【${esc(tpl.name)}】掉在了原地…`, 'warn');
     return false;
   }
   game.ownedCards.push({ uid: newUid(), card: { ...tpl } });
@@ -330,13 +440,20 @@ export function openPocketRestore(picks, done, opts = {}) {
       foot: `<button class="ov-btn ok fire-done-btn" data-act="fireDone"><svg class="ic svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 继续旅程</button>`,
     });
   };
-  const finish = () => { UI.hideOverlay(); if (done) done(); };
+  let finished = false;
+  const finish = () => {
+    if (finished) return;
+    finished = true;
+    setBagReturnHook(null);
+    UI.hideOverlay();
+    if (done) done();
+  };
   UI.act('restoreOne', (d) => {
     const p = game.usedPocket.find(x => x.card.name === d.name && FIRE_RESTORABLE(x.card));
     if (!p || left <= 0) return;
     // 2026-09-06 #18：背包满时不能复原
-    if (usedSlots() >= bagCap()) { UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()}），无法复原`, 'warn'); SDT.Sound.sfx('deny'); return; }
     const card = p.card;
+    if (!game.canReceiveCard(card)) { UI.log(`[[icon:bag]] 背包放不下（${game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`}），无法复原`, 'warn'); SDT.Sound.sfx('deny'); return; }
     p.count--;
     if (p.count <= 0) game.usedPocket.splice(game.usedPocket.indexOf(p), 1);
     game.ownedCards.push({ uid: newUid(), card: { ...card } });

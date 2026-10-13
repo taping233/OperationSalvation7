@@ -121,7 +121,7 @@ function drainDecide() {
     // until 的「连续两次干净」永远数不满；noop 等待步让 until 继续数
     if (!obs.ui?.open) return { type: 'sys', name: 'noop' };
     const acts = obs.actions || [];
-    for (const name of ['evtNext', 'pickupGo', 'fireDone', 'closeShop', 'chestSkip', 'helpBack', 'lastLampFinish']) {
+    for (const name of ['evtNext', 'pickupGo', 'fireDone', 'closeShop', 'chestReveal', 'chestContinue', 'chestSkip', 'chestLeave', 'helpBack', 'lastLampFinish']) {
       const a = acts.find(x => x.type === 'ui' && x.name === name);
       if (a) return a;
     }
@@ -135,22 +135,23 @@ function drainDecide() {
 async function runDevKind(kind, { check, options, seen, finishOk, awaitReady, prepare }) {
   // 前置清场：上一场景可能把弹层/战斗留在半截（战后搜刮页、首胜教学页等）。
   // 教学页在结算异步链尾、上个场景完全收口之后才弹，waitSettle 在「弹层关着」
-  // 时就放行挡不住它——用墙钟稳定窗：连续 350ms 干净才算清完，窗口内冒出
-  // 弹层/战斗就重置计时并进 drain（jsdom 实测残留“卡牌是消耗品”页）。
+  // 时就放行挡不住它——用墙钟稳定窗：连续 1500ms 干净才算清完，窗口内冒出
+  // 弹层/战斗就重置计时并进 drain（战利品页可晚于战斗离场才出现）。
   {
     const t0 = nowMs();
     let lastClean = -1;
-    while (nowMs() - t0 < 1200) {
-      const dirty = !!observe().ui?.open || game.battleActive;
+    while (nowMs() - t0 < 7000) {
+      const dirty = !!observe().ui?.open || game.battleActive || game.terminalPending
+        || game.state === 'battleSettlement' || !!window.SDT?.Chests?.isOpen?.();
       if (!dirty) {
         if (lastClean < 0) lastClean = nowMs();
-        else if (nowMs() - lastClean >= 350) break;
+        else if (nowMs() - lastClean >= 1500) break;
       } else {
         lastClean = -1;
         let cleanStreak = 0;
         await autoRun({
           decide: drainDecide(),
-          maxSteps: 80, runTimeoutMs: 45000, driver: 'scene:drain',
+          maxSteps: 80, spinLimit: 40, runTimeoutMs: 45000, driver: 'scene:drain',
           until: (r) => {
             cleanStreak = (!r.obs.ui?.open && !r.obs.battle) ? cleanStreak + 1 : 0;
             return cleanStreak >= 2;

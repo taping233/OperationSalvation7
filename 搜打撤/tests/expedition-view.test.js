@@ -1,5 +1,5 @@
 import { describe, expect, it, beforeEach } from 'vitest';
-import { expeditionObjective, expeditionRoutes, renderExpeditionPanel } from '../game/src/run/expedition.view.js';
+import { expeditionObjective, expeditionRoutes, getExpeditionPreview, renderExpeditionPanel, setExpeditionPreview } from '../game/src/run/expedition.view.js';
 
 const layer = {
   logical: [
@@ -13,6 +13,7 @@ const layer = {
 const makeGame = (extra = {}) => ({
   runActive: true, state: 'idle', layerIdx: 0, trackPos: 0,
   layerData: [layer], visited: {}, hp: 30, maxHp: 30, bossKilled: false,
+  nodes: layer.logical.map((cell, idx) => ({ li: 0, idx, def: cell.def })),
   ...extra,
 });
 
@@ -80,52 +81,148 @@ describe('expedition view route projection', () => {
 });
 
 describe('expedition view DOM rendering', () => {
-  let panel;
   beforeEach(() => {
-    document.body.innerHTML = '<section id="routePanel"><div class="route-title"></div><p class="route-objective"></p><div class="route-options"></div></section>';
-    panel = document.getElementById('routePanel');
+    document.body.innerHTML = '<aside id="sidebar"></aside><nav id="expeditionChapter"></nav>';
   });
 
-  it('对局非 idle 时禁用路线按钮，并保留相邻路线列表', () => {
-    renderExpeditionPanel(panel, makeGame({ state: 'moving' }), icon => icon);
-    expect(panel.querySelectorAll('button.route-option')).toHaveLength(2);
-    expect([...panel.querySelectorAll('button')].every(button => button.disabled)).toBe(true);
-    expect(panel.querySelector('.route-title').textContent).toBe('行动进行中');
+  it('默认只保留工具带，不创建路线目录或显示空预览', () => {
+    renderExpeditionPanel(null, makeGame(), icon => icon);
+    expect(document.getElementById('routePanel')).toBeNull();
+    expect(document.querySelectorAll('.route-option')).toHaveLength(0);
+    expect(document.querySelector('.expedition-map-preview').hidden).toBe(true);
+    expect([...document.querySelectorAll('[data-expedition-tool]')].map(el=>el.dataset.expeditionTool)).toEqual(['bag','safe','pocket','focus','overview']);
+    expect(document.querySelector('.expedition-chibi')).toBeNull();
   });
 
-  it('状态未变化时稳定复用 DOM，状态变化时恢复原路线焦点', () => {
+  it('选中相邻节点时只显示该节点身份、可达状态与明确进入动作', () => {
     const g = makeGame();
-    renderExpeditionPanel(panel, g, icon => icon);
-    const first = panel.querySelector('[data-route-index="1"]');
-    first.focus();
-    const before = panel.querySelector('.route-options');
-    renderExpeditionPanel(panel, g, icon => icon);
-    expect(panel.querySelector('.route-options')).toBe(before);
-    const changed = makeGame({ moveTarget: { li: 0, idx: 2 } });
-    renderExpeditionPanel(panel, changed, icon => icon);
-    expect(document.activeElement?.dataset.routeIndex).toBe('1');
+    setExpeditionPreview(g, g.nodes[1]);
+    renderExpeditionPanel(null, g, icon => icon);
+    const strip = document.querySelector('.expedition-map-preview');
+    expect(strip.hidden).toBe(false);
+    expect(strip.querySelector('b').textContent).toBe('遭遇战');
+    expect(strip.textContent).toContain('可以前往');
+    expect(strip.querySelector('[data-route-enter]').disabled).toBe(false);
+    expect(strip.querySelectorAll('button')).toHaveLength(2);
+    expect(document.getElementById('routePanel')).toBeNull();
   });
 
-  it('同名路线按钮的 aria-label 与 data-route-index 一一对应', () => {
-    const g = makeGame({
-      layerData: [{ logical: [
-        { def: { type: 'entrance' }, next: [[0, 1], [0, 2]] },
-        { def: { type: 'battle' }, next: [] },
-        { def: { type: 'battle' }, next: [] },
-      ], doors: [] }],
-    });
-    renderExpeditionPanel(panel, g, icon => icon);
-    const buttons = [...panel.querySelectorAll('.route-option')];
-    expect(buttons.map(b => b.dataset.routeIndex)).toEqual(['1', '2']);
-    expect(buttons.map(b => b.getAttribute('aria-label'))).toEqual([
-      '遭遇战 · 路线1（节点 2）', '遭遇战 · 路线2（节点 3）',
-    ]);
+  it('已消耗的相邻节点与脚下节点统一显示空白图标，仍可进入', () => {
+    const g = makeGame({ visited: { '0,1': 1 } });
+    setExpeditionPreview(g, g.nodes[1]);
+    renderExpeditionPanel(null, g, icon => icon);
+    let strip = document.querySelector('.expedition-map-preview');
+    expect(strip.querySelector('b').textContent).toBe('空白节点');
+    expect(strip.querySelector('.empty-node-icon')).not.toBeNull();
+    expect(strip.textContent).toContain('内容已消耗');
+    expect(strip.querySelector('[data-route-enter]').disabled).toBe(false);
+    g.trackPos = 1;
+    setExpeditionPreview(g, g.nodes[1]);
+    renderExpeditionPanel(null, g, icon => icon);
+    strip = document.querySelector('.expedition-map-preview');
+    expect(strip.querySelector('b').textContent).toBe('空白节点');
+    expect(strip.querySelector('.empty-node-icon')).not.toBeNull();
+    expect(strip.querySelector('[data-route-enter]').disabled).toBe(false);
+    expect(document.querySelector('.expedition-toolbar-location')).toBeNull();
+    expect(strip.querySelectorAll('.empty-node-icon')).toHaveLength(1);
   });
 
-  it('转义快照可变的层名和路线文本',()=>{
-    document.body.insertAdjacentHTML('beforeend','<div id="expeditionChapter"></div>');
-    const g=makeGame({layerData:[{...layer,name:'<img src=x onerror=alert(1)>'}]});
-    renderExpeditionPanel(panel,g,()=>'<i></i>');
+  it('行动中保留单节点信息，但进入动作不可用', () => {
+    const g = makeGame({ state: 'moving' });
+    setExpeditionPreview(g, g.nodes[1]);
+    renderExpeditionPanel(null, g, icon => icon);
+    const strip = document.querySelector('.expedition-map-preview');
+    expect(strip.textContent).toContain('遭遇战');
+    expect(strip.querySelector('[data-route-enter]').disabled).toBe(true);
+    expect(document.querySelectorAll('.route-option')).toHaveLength(0);
+  });
+
+  it('已知但不相邻节点可读类别和受限状态，不能从预览进入', () => {
+    const g = makeGame({ nodes: [...makeGame().nodes, { li: 0, idx: 3, def: { type: 'shop' } }] });
+    setExpeditionPreview(g, g.nodes[3]);
+    renderExpeditionPanel(null, g, icon => icon);
+    const strip = document.querySelector('.expedition-map-preview');
+    expect(strip.textContent).toContain('商店');
+    expect(strip.textContent).toContain('暂不可前往');
+    expect(strip.querySelector('[data-route-enter]').disabled).toBe(true);
+  });
+
+  it('低生命战斗预览给出风险提示，恢复后更新且不改变游戏状态', () => {
+    const g=makeGame({hp:5});
+    setExpeditionPreview(g,g.nodes[1]);
+    const before=JSON.stringify(g);
+    renderExpeditionPanel(null,g,icon=>icon);
+    const strip=document.querySelector('.expedition-map-preview');
+    expect(strip.dataset.nodeTone).toBe('danger');
+    expect(strip.querySelector('.expedition-preview-risk').textContent).toContain('生命偏低');
+    expect(JSON.stringify(g)).toBe(before);
+    g.hp=g.maxHp;
+    renderExpeditionPanel(null,g,icon=>icon);
+    expect(strip.querySelector('.expedition-preview-risk')).toBeNull();
+  });
+
+  it('闸门覆盖底层战斗类型时，预览使用通道身份而非危险标记', () => {
+    const g=makeGame({hp:5,layerData:[{...layer,doors:[{at:1,reverse:false}]}]});
+    setExpeditionPreview(g,g.nodes[1]);
+    renderExpeditionPanel(null,g,icon=>icon);
+    const strip=document.querySelector('.expedition-map-preview');
+    expect(strip.querySelector('b').textContent).toBe('层间闸门');
+    expect(strip.dataset.nodeTone).toBe('neutral');
+    expect(strip.querySelector('.expedition-preview-risk')).toBeNull();
+  });
+
+  it('预览绑定当前位置，换节点后旧选择失效', () => {
+    const g = makeGame();
+    setExpeditionPreview(g, g.nodes[1]);
+    renderExpeditionPanel(null, g, icon => icon);
+    g.trackPos = 1;
+    g.moveTarget = null;
+    renderExpeditionPanel(null, g, icon => icon);
+    expect(getExpeditionPreview(g)).toBeNull();
+    expect(document.querySelector('.expedition-map-preview').hidden).toBe(true);
+  });
+
+  it('相同状态保留预览节点，已探索与门身份变化后更新单节点内容', () => {
+    const g = makeGame({ layerData: [{ ...layer, doors: [] }] });
+    g.moveTarget = { li: 0, idx: 1 };
+    renderExpeditionPanel(null, g, icon => icon);
+    const strip = document.querySelector('.expedition-map-preview');
+    const enter = strip.querySelector('[data-route-enter]');
+    renderExpeditionPanel(null, g, icon => icon);
+    expect(strip.querySelector('[data-route-enter]')).toBe(enter);
+    g.visited['0,1'] = 1;
+    renderExpeditionPanel(null, g, icon => icon);
+    expect(strip.textContent).toContain('已探索');
+    g.layerData[0].doors = [{ at: 1, reverse: false }];
+    renderExpeditionPanel(null, g, icon => icon);
+    expect(strip.textContent).toContain('层间闸门');
+    expect(strip.querySelector('[data-route-enter]').disabled).toBe(false);
+  });
+
+  it('工具带复用日志DOM，位置摘要不写入game状态且不重复创建', () => {
+    document.body.insertAdjacentHTML('beforeend', '<section id="logPanel"><button>日志</button></section><button id="bagBtnFloat">背包</button>');
+    const log = document.getElementById('logPanel');
+    const bag = document.getElementById('bagBtnFloat');
+    const g = makeGame();
+    const before = JSON.stringify(g);
+    renderExpeditionPanel(null, g, icon => icon);
+    renderExpeditionPanel(null, g, icon => icon);
+    expect(document.querySelectorAll('.expedition-nav-summary')).toHaveLength(1);
+    expect(document.querySelectorAll('.expedition-map-preview')).toHaveLength(1);
+    expect(document.querySelector('.expedition-toolbar-location')).toBeNull();
+    expect(document.querySelector('.expedition-nav-summary').textContent).toContain('背包');
+    expect(log.parentElement.id).toBe('sidebar');
+    expect(bag.parentElement).toBe(document.body);
+    expect(JSON.stringify(g)).toBe(before);
+  });
+
+  it('当前位置预览有查看本地内容入口，且转义可变层名', () => {
+    const g = makeGame({ layerData: [{ ...layer, name: '<img src=x onerror=alert(1)>' }] });
+    setExpeditionPreview(g, g.nodes[0]);
+    renderExpeditionPanel(null, g, () => '<i></i>');
+    const strip = document.querySelector('.expedition-map-preview');
+    expect(strip.textContent).toContain('当前位置');
+    expect(strip.querySelector('[data-route-enter]').textContent).toContain('查看本地内容');
     expect(document.querySelector('#expeditionChapter img')).toBeNull();
     expect(document.getElementById('expeditionChapter').textContent).toContain('<img');
   });

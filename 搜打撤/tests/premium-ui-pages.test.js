@@ -4,26 +4,29 @@ import { readFileSync } from 'node:fs';
 const src = (path) => readFileSync(path, 'utf8');
 
 describe('基地人物与收藏页的信息架构', () => {
-  // 2026-09-22 hub 拆分：断言串分布在壳与两个切片，三文件拼接后仍断言「基地源码含 X」
-  const hub = ['hub/game.hub.js', 'hub/game.hub.depart.js', 'hub/game.hub.pages.js']
-    .map((f) => src(`game/src/${f}`)).join('\n');
-  const css = src('game/css/expedition-hub.css');
+  // 基地采用独立子页；页面职责由真实目标模块维护，旧侧栏/旧解释文案不作为契约。
+  const hub = src('game/src/hub/game.hub.js');
+  const pages = src('game/src/hub/game.hub.pages.js');
+  const personnel = src('game/src/hub/hub.personnel.js');
+  const archive = src('game/src/hub/hub.archive-v3.js');
 
-  it('人物页使用切换栏+大立绘+档案详情布局（10-05 hub-personnel 批口径，取代旧档案墙）', () => {
-    expect(hub).toContain('class="person-tabs"');
-    expect(hub).toContain('aria-label="人物档案切换"');
-    expect(hub).toContain('class="person-portrait"');
-    expect(hub).toContain('class="person-details"');
-    expect(hub).toContain('class="person-stats"');
-    expect(src('game/css/hub-personnel-cover.css')).toContain('.person-layout');
+  it('人物管理归属独立页，人物展示与招式沿用对应模块和共同卡牌翻阅', () => {
+    expect(hub).toContain('data-page="${hubTab}"');
+    expect(hub).toContain("UI.act('hubHome'");
+    expect(pages).toContain('return personnelHTML(view)');
+    expect(personnel).toContain('aria-label="人物切换"');
+    expect(personnel).toContain('class="pv12-agent-art"');
+    expect(personnel).toContain('class="pv12-agent-data"');
+    expect(personnel).toContain('cardBrowserHTML(');
   });
 
-  it('收藏页以白名单二级标签切换单一内容区', () => {
-    expect(hub).toContain("let hubCollectionView = 'backs'");
-    expect(hub).toContain("['backs', 'achievements', 'classes'].includes(d.view)");
-    expect(hub).toContain('aria-label="收藏分类"');
-    expect(hub).toContain('aria-pressed=');
-    expect(css).toContain('.collection-tabs');
+  it('收藏主页面只展示收藏，其他内容经次级入口沿父导航打开', () => {
+    expect(pages).toContain('return archiveV3HTML(');
+    expect(hub).toContain("['cards', 'rewards', 'backs', 'achievements', 'classes', 'stories'].includes(d.view)");
+    expect(archive).toContain('aria-label="收藏室目录"');
+    expect(archive).toContain('data-act="hubCollectionView"');
+    expect(archive).toContain('data-archive-view="${currentView}"');
+    expect(archive).toContain('collectionCardsHTML(base, cards)');
   });
 });
 
@@ -49,8 +52,8 @@ describe('角色卡池与收购台交互契约', () => {
 describe('照相馆陈列交互', () => {
   const library = src('game/src/hub/game.cardslib.page.js');
   const index = src('game/index.html');
-  const css = src('game/css/expedition-library.css');
-  const craftCss = src('game/css/photo-studio-craft.css');
+  const css = src('game/css/photo-studio-unified.css');
+  const mounts = src('game/css/photo-studio-mounts.css');
   const ui = src('game/src/ui/ui.js');
 
   it('标题入口与页面名称统一为照相馆（10-04 主页构图批口径：home-plate 按钮）', () => {
@@ -60,21 +63,23 @@ describe('照相馆陈列交互', () => {
   });
 
   it('门头突出馆名与馆藏数，照片分类、搜索及结果计数清晰分层（studio-unified 批口径）', () => {
-    expect(library).toContain('<div class="lib-head-title" aria-label="照相馆">');
-    expect(library).toContain('<span class="lib-head-name"><b>照相馆</b></span>');
+    expect(library).toContain('<h2>照相馆</h2>');
     expect(library).toContain('aria-label="馆藏 ${libCards.length} 张照片"');
-    expect(library).toContain('aria-label="卡牌类型筛选"');
-    expect(library).toContain('<span>浏览馆藏</span>');
-    expect(library).toContain('找到 <b id="libResultCount">');
+    expect(library).toContain('馆藏 <b>${libCards.length}</b> 张照片');
+    expect(library).toContain('role="tablist" aria-label="照片分类"');
+    expect(library).toContain('aria-label="照片搜索与筛选"');
+    expect(library).toContain('id="libResultCount"');
+    expect(library).toContain("linkedBackHTML('closeCardPage', '关闭照相馆'");
     expect(library).toContain('placeholder="名称、效果或关键词"');
-    expect(craftCss).toContain('照相馆顶部索引重排');
-    expect(craftCss).toContain('.lib-head-seal { display:none!important; }');
+    expect(library).toContain("import '../../css/photo-studio-unified.css'");
+    expect(library).not.toContain('photo-studio-archive.css');
+    expect(index).not.toContain('css/page-cardslib.css');
+    expect(index).not.toContain('css/photo-studio-craft.css');
   });
 
   it('影廊版照片结构：黄铜挂件保留，卡牌语言与微倾已删（09-23 拍板）', () => {
     expect(library).toContain('function photoTileHTML');
     expect(library).toContain('photo-studio-v3');
-    expect(css).toContain('照相馆 4.0：深夜影廊');
     expect(css).toContain('grid-template-columns:repeat(4,minmax(0,1fr))');
     // 照片墙上一张照片=画+名字：费用铜币/类型小字/稀有度馆印/瓦片编号不上墙
     expect(library).not.toContain('class="studio-photo-cost"');
@@ -88,18 +93,15 @@ describe('照相馆陈列交互', () => {
     expect(library).not.toContain('--photo-tilt:');
     expect(library).not.toContain('--photo-lean-x:');
     expect(css).not.toContain('perspective:760px');
-    // 保留：纸厚阴影+黄铜相片夹
-    expect(css).toContain('.studio-photo-paper::before');
-    expect(css).toContain('--studio-wall:#170f0d');
-    expect(css).toContain('linear-gradient(145deg,var(--studio-paper-light),var(--studio-paper))');
-    expect(css).toContain('assets/ui/photo-studio/frame-atelier-v1.png');
-    expect(css).toContain('assets/ui/photo-studio/leather-archive-v1.png');
-    // 影廊生图资产挂载：墙纸/台面/空态/背签（牌匾 sign.webp 09-23 拍板移除=彩带）
-    expect(css).toContain('assets/ui/photo-studio/wall.webp');
-    expect(css).not.toContain('assets/ui/photo-studio/sign.webp');
-    expect(css).toContain('assets/ui/photo-studio/desk.webp');
-    expect(css).toContain('assets/ui/photo-studio/empty.webp');
-    expect(css).toContain('assets/ui/photo-studio/back.webp');
+    // 装裱素材与夹子归 mounts，图库布局归 unified；旧房间主题不能重新接入。
+    expect(mounts).toContain('.studio-mount-mark');
+    expect(mounts).toContain('frame-atelier-v1.png');
+    expect(css).toContain('paper-grain.png');
+    expect(css).toContain('transition-photo-v2.webp');
+    expect(css).not.toContain('leather-archive-v1.png');
+    for (const path of ['expedition-library.css']) {
+      expect(src(`game/css/${path}`)).not.toMatch(/#overlay[^{}]*\.(?:photo-studio-v3|studio-index-layout|studio-unified|studio-archive|lib-grid)\b/);
+    }
   });
 
   it('筛选横置、桌面保留选片台，并将编辑工具隔离到编辑模式', () => {

@@ -1,9 +1,9 @@
 // Static URLs let Vite include the shipped audio files in its asset graph.
 export const MUSIC_TRACKS = Object.freeze({
-  title: new URL('../../assets/music-demo/01-title-frostglass.ogg', import.meta.url).href,
+  title: new URL('../../assets/music-demo/01-title-frostglass-v12.ogg', import.meta.url).href,
   board: new URL('../../assets/music-demo/02-explore-ashline.ogg', import.meta.url).href,
-  battle: new URL('../../assets/music-demo/03-battle-coldfront.ogg', import.meta.url).href,
-  shop: new URL('../../assets/music-demo/05-shop-lamplight-deal.ogg', import.meta.url).href,
+  battle: new URL('../../assets/music-demo/03-battle-shadowtide-full-v2.ogg', import.meta.url).href,
+  shop: new URL('../../assets/music-demo/05-shop-lamplight-deal-v3.ogg', import.meta.url).href,
 });
 
 const SCENE_TRACKS = Object.freeze({ title: 'title', base: 'title', success: 'title', defeat: 'title', shop: 'shop' });

@@ -353,18 +353,16 @@
 #overlay #hubMain.hub-ach .back-card:active:not(.locked) { transform: translateY(0) scale(.98); transition-duration: .08s; }
 
 /* 卡背本体优先：宽窗四枚一排，第二排自然居中，不改变解锁与装备语义。 */
-@media (min-width: 1101px) {
-  #overlay #hubMain.hub-ach .collection-panel .back-grid {
+#overlay #hubMain.hub-ach .collection-panel .back-grid {
     width: 100%; max-width: 1000px; margin-inline: auto;
     justify-content: center; gap: 18px;
   }
-  #overlay #hubMain.hub-ach .collection-panel .back-card {
+#overlay #hubMain.hub-ach .collection-panel .back-card {
     flex: 0 0 220px; width: 220px; min-height: 260px; padding: 16px 14px; gap: 9px;
   }
-  #overlay #hubMain.hub-ach .collection-panel .back-thumb { width: 100px; height: 140px; }
-  #overlay #hubMain.hub-ach .collection-panel .back-card b { font-size: 15.5px; }
-  #overlay #hubMain.hub-ach .collection-panel .back-card .dim { font-size: 12px; line-height: 1.45; }
-}
+#overlay #hubMain.hub-ach .collection-panel .back-thumb { width: 100px; height: 140px; }
+#overlay #hubMain.hub-ach .collection-panel .back-card b { font-size: 15.5px; }
+#overlay #hubMain.hub-ach .collection-panel .back-card .dim { font-size: 12px; line-height: 1.45; }
 
 /* ═════════ T2 焦点态：键盘导航金线焦点环（与 page-hub.css T2 同语言，
    双保险写死在本作用域内） ═════════ */

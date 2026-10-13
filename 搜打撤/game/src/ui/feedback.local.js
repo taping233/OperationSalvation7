@@ -81,6 +81,18 @@ function appendLocalFeedback(entry, storage) {
   catch { return fail('WRITE_FAILED', '本地写入失败，请保留内容后重试'); }
 }
 
+/** @param {string} ts @param {(Storage|null|undefined)} [storage] @returns {(FeedbackReadResult|FeedbackFailure)} */
+function completeLocalFeedback(ts, storage) {
+  const read = readLocalFeedback(storage);
+  if (!read.ok) return read;
+  if (!read.value.some(entry => entry?.ts === ts)) return fail('NOT_FOUND', '留言已改变，请重新打开信箱');
+  const port = storageOrFailure(storage); if (!port.ok) return port;
+  const value = read.value.map(entry => entry?.ts === ts ? { ...entry, done: true } : entry);
+  const raw = JSON.stringify(value);
+  try { port.value.setItem(FEEDBACK_KEY, raw); return { ok: true, value, raw }; }
+  catch { return fail('WRITE_FAILED', '完成状态保存失败，请重试'); }
+}
+
 // 删除指定 ts 的留言后整串覆写（存储收口批 2026-09-25：removeSuggestion
 // 浏览器回退从 game.menu.js 内联直读写收口到本封装）。键名、读写时机与
 // 解析降级和原内联实现逐点等价：键缺失按 '[]' 处理（仍会写入 '[]'）、
@@ -162,4 +174,4 @@ function downloadFeedbackJSON(data, name, ports) {
   finally { if (href && revoke) setTimeout(() => /** @type {((url: string) => void)} */ (revoke)(/** @type {string} */ (href)), 0); }
 }
 
-export { appendLocalFeedback, downloadFeedbackRecord, downloadFeedbackRecords, feedbackExportRecord, readLocalFeedback, removeLocalFeedback };
+export { appendLocalFeedback, completeLocalFeedback, downloadFeedbackRecord, downloadFeedbackRecords, feedbackExportRecord, readLocalFeedback, removeLocalFeedback };

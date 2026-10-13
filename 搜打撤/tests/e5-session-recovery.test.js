@@ -80,6 +80,37 @@ beforeEach(() => {
 afterEach(() => vi.restoreAllMocks());
 
 describe('E5 real session recovery and persistence results', () => {
+  it.each([-4, 0])('defeat presentation gap cannot persist lethal HP (%i) before terminal settlement starts', hp => {
+    ordinary({ hp: 12 });
+    expect(session.loadGame(1).ok).toBe(true);
+    const stable = localStorage.getItem(RunStorage.key(1));
+    Object.assign(session.game, { hp, battleActive: false, terminalPending: null, state: 'idle' });
+    expect(session.saveGame()).toBe(false);
+    expect(localStorage.getItem(RunStorage.key(1))).toBe(stable);
+    session.game.hp = 12;
+    expect(session.saveGame()).toBe(true);
+  });
+
+  it.each([true, false])('battle reward reload uses its victory continuation before any run rewrite (resumed=%s)', resumed => {
+    const battleSettlement = { version:1, slotId:1, runId:'reward-run', node:{ layerIdx:0, trackPos:0, isBoss:false },
+      opts:{ isBoss:false, foeNames:['敌人'] }, progressRecorded:false,
+      victoryProgress:{ foeNames:['敌人'], isBoss:false, classId:'warrior', xpMultiplier:1 } };
+    const chestReward = { version:1, seed:'e5-session', layerIdx:0, trackPos:0, index:1, queue:[{kind:'small'}],
+      context:{ battleSettlement }, current:{ kind:'small', cards:[{ id:'reward', name:'原奖励' }], coins:1, coinsReceived:false, taken:[], lost:[] } };
+    const raw = ordinary({ chestReward, _r2:{ runId:'reward-run', revision:2 } });
+    const resumeBattleRewards = vi.fn(() => resumed), resumeChestsOnCell = vi.fn(() => true);
+    session.configureGameRuntime({ resumeBattleRewards, resumeChestsOnCell });
+    const writes = trackRunWrites();
+    const result = session.loadGame(1);
+    expect(result.ok).toBe(resumed);
+    if (!resumed) expect(result).toMatchObject({ code:'REWARD_RESTORE_FAILED', preserveRun:true });
+    expect(resumeBattleRewards).toHaveBeenCalledWith(chestReward);
+    expect(resumeChestsOnCell).not.toHaveBeenCalled();
+    expect(window.SDT.Battle.restore).not.toHaveBeenCalled();
+    expect(writes).not.toHaveBeenCalled();
+    expect(localStorage.getItem(RunStorage.key(1))).toBe(raw);
+  });
+
   it('rejected prev fallback cannot authorize the old runtime to overwrite a replacement run', () => {
     writeRun({ _r2: { runId: 'old-run', revision: 3 } });
     expect(session.loadGame(1).ok).toBe(true);

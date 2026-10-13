@@ -6,7 +6,11 @@
  * FLOW（game.run.flow.js）依赖本文件。
  * ============================================================ */
 import { CHARACTERS, characterFor, characterName } from '../core/characters.js';
+import { installExpeditionFeedback } from '../ui/expedition-feedback.js';
 import { createCharacterViewMotion } from '../ui/character-view-motion.js';
+import { rewardSceneHTML, rewardExitHTML } from '../ui/reward-scene-view.js';
+import { claimEntrySupply, createEntrySupply, entrySupplyAt, nodeActionBinding } from './node-reward-state.js';
+import { setBagReturnHook } from '../hub/bag-return-hook.js';
 import { esc, escAttr } from '../core/shared.js';
 import { MAP, MODES, bagCap, curLayer, enterLayer, exitToTitle, game, getActiveSlot, newUid, saveGame, scaledEnemy, usedSlots } from './game.session.js';
 import { buildExtractionReceipt, createExtractionCommands, validatePendingExtraction } from '../hub/extraction.commands.js';
@@ -29,6 +33,10 @@ import { commitBaseAndRun, readSettlementReceipt, recoverSlot } from '../hub/rec
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
+installExpeditionFeedback({
+  isCurrentCell: key => game.runActive && key === `${game.layerIdx},${game.trackPos}`,
+  cardHTML: card => SDT.Cards.cardHTML(card),
+});
 const extractionCommands = createExtractionCommands({
   getActiveSlot, runStore: RunStorage, baseApi: SDT.Base,
   recovery: { commitBaseAndRun, readSettlementReceipt, recoverSlot }, game,
@@ -43,59 +51,124 @@ const extractionCommands = createExtractionCommands({
   xpMultiplier: () => MODES[game.mode]?.xpMul || 1,
 });
 
-export function openFireRest() {
-  SDT.Sound.scene?.('fire', 'scene-fire-bg');
-  // 复原/发卡只在同一节点的首次进入结算（09-30 深审 WORLD-002）：任何仍可达的重入路径
-  // （未写 visited 就再触发本节点）不得重复回复生命/掷职业卡/重复复原
+export function openFireRest(after = finishInstant) {
   const cellKey = `${game.layerIdx},${game.trackPos}`;
-  if (game._fireRestKey !== cellKey) {
-    game._fireRestKey = cellKey;
+  game.nodeRewards ||= {};
+  game.state = 'modal';
+  const leave = () => { setBagReturnHook(null); UI.hideOverlay(); after(false); };
+  const result = () => {
+    const record = game.nodeRewards[cellKey];
+    const restored = record.restoredIds.map(id => SDT.Cards.all().find(card => card.id === id)).filter(Boolean);
+    const bonus = record.bonusReceived && SDT.Cards.all().find(card => card.id === record.classCardId);
+    nodeShell({ tone:'fire', asset:'scene-fire-bg', icon:'[[icon:fire]]', title:'休整完毕',
+      sub:`生命回复 ${record.hpGain} 点 · ${record.hpAfter}/${game.maxHp}。${restored.length ? `已复原 ${restored.length} 张卡牌。` : '本次没有复原卡牌。'}${bonus ? `余烬中找到「${esc(bonus.name)}」。` : ''}`,
+      body:`${restored.length || bonus ? `<div class="fire-result-cards">${[...restored, ...(bonus ? [bonus] : [])].map((card, i) => `<button type="button" class="event-choice-card" data-act="fireResultCard" data-i="${i}" aria-label="放大查看${escAttr(card.name)}">${SDT.Cards.cardHTML(card,'sm')}</button>`).join('')}</div>` : ''}${nodeOpt('fireDone','继续探索','本处休整已经完成')}`,
+    });
+    const active = nodeActionBinding(game, UI, 'fireDone');
+    UI.act('fireDone', () => { if (!active()) return; record.continued = true; setBagReturnHook(null); UI.hideOverlay(); after(true); });
+    UI.act('fireResultCard', data => {
+      if (!active()) return;
+      const card = [...restored, ...(bonus ? [bonus] : [])][Number(data.i)];
+      if (card) UI.showCardZoom(card, { hideNote:true, presentation:'expedition' });
+    });
+  };
+  setBagReturnHook(() => openFireRest(after));
+  if (game.nodeRewards[cellKey]?.type === 'fire') { result(); return; }
+  nodeShell({ tone:'fire', asset:'scene-fire-bg', icon:'[[icon:fire]]', title:'营火休整',
+    sub:'风雪被隔在火光之外。你可以在这里整顿状态，再继续前行。',
+    body:nodeOpt('fireRestGo','休整',`回复 ${MAP.rules.fireHeal} 点生命，随机复原至多 2 张可复原卡牌；${Math.round(MAP.rules.fireClassCardChance * 100)}% 概率获得本职业卡。`),
+    foot:'<button class="ov-btn" data-act="fireLeave">离开火堆</button>',
+  });
+  const active = nodeActionBinding(game, UI, 'fireRestGo');
+  let resolving = false;
+  UI.act('fireLeave', () => { if (active() && !resolving) leave(); });
+  UI.act('fireRestGo', () => {
+    if (!active() || resolving || game.nodeRewards[cellKey]?.type === 'fire') return;
+    resolving = true;
+    const hpBefore = game.hp;
     game.heal(MAP.rules.fireHeal);
-    UI.log(`[[icon:fire]] <b>进入火堆</b>：自动回复 <b>${MAP.rules.fireHeal}</b> 点生命`, 'ok');
-    // 2026-09-06 留言：火堆界面的音效删掉（原 levelup 提示音）
-    // 2026-09-20 老板：火堆只发本职业卡（randomClassCard 须传 game.myClass，不传会全职业混抽）；
-    //   获得演出带原因文字（营火余烬翻出），不再只靠侧边日志
+    const hpGain = Math.max(0, game.hp - hpBefore);
+    let classCardId = null, bonusReceived = false;
     if (Random.random('card') < MAP.rules.fireClassCardChance) {
-      const campCard = SDT.Cards.randomClassCard(game.myClass);
-      if (campCard) {
-        UI.log('[[icon:wood]] 营火余烬里翻出了一张先行者掉落的本职业卡！', 'loot');
-        grantEventCard(campCard, { reason: '营火余烬里翻出的先行者遗落卡 · 本职业限定' });
-      }
+      const card = SDT.Cards.randomClassCard(game.myClass);
+      if (card) { classCardId = card.id; bonusReceived = !!grantEventCard(card, { silent:true }); }
     }
-    // 2026-10-02 老板：火堆不再开全列表选牌页——从消耗口袋可复原池随机发现两张并自动复原
-    //（过滤口径沿用 FIRE_RESTORABLE；池不足两张全复原，空池给提示；背包满不复原，同复原页口径）
-    const found = [];
+    const restoredIds = [];
     for (let i = 0; i < 2; i++) {
-      const pool = game.usedPocket.filter(p => FIRE_RESTORABLE(p.card));
+      const pool = game.usedPocket.filter(item => FIRE_RESTORABLE(item.card));
       if (!pool.length) break;
-      if (usedSlots() >= bagCap()) { SDT.Sound.sfx('deny'); UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()}），无法复原`, 'warn'); break; }
-      const p = pool[Math.floor(Random.random('pocket') * pool.length)];
-      p.count--;
-      if (p.count <= 0) game.usedPocket.splice(game.usedPocket.indexOf(p), 1);
-      game.ownedCards.push({ uid: newUid(), card: { ...p.card } });
-      found.push(p.card);
+      if (usedSlots() >= bagCap()) { SDT.Sound.sfx('deny'); UI.log('[[icon:bag]] 背包已满，可复原卡牌保留在消耗口袋', 'warn'); break; }
+      const item = pool[Math.floor(Random.random('pocket') * pool.length)];
+      item.count--;
+      if (item.count <= 0) game.usedPocket.splice(game.usedPocket.indexOf(item), 1);
+      game.ownedCards.push({ uid:newUid(), card:{ ...item.card } });
+      restoredIds.push(item.card.id);
     }
-    if (found.length) {
-      UI.log(`[[icon:wood]] 火堆余烬里翻出了 ${found.map(c => `【<b>${esc(c.name)}</b>】`).join('、')}，已复原回背包`, 'loot');
-      for (const c of found) UI.showCardReward(c, '火堆余烬里翻出的消耗卡 · 自动复原');
-    } else if (!game.usedPocket.some(p => FIRE_RESTORABLE(p.card))) {
-      const blockedN = game.usedPocket.length;
-      UI.log(`[[icon:fire]] 火堆静悄悄——消耗口袋里没有可复原的卡牌${blockedN ? `（另有 ${blockedN} 张道具/装备不可在此复原）` : ''}`, 'dim');
-    }
-  }
-  game._fireRestKey = null;
-  consumeCurrentCell();
-  game.state = 'idle';
-  saveGame();
-  UI.refresh(game);
+    game.nodeRewards[cellKey] = { version:1, type:'fire', hpBefore, hpAfter:game.hp, hpGain, restoredIds, classCardId, bonusReceived };
+    consumeCurrentCell();
+    saveGame();
+    UI.log(`[[icon:fire]] 营火休整：回复 ${hpGain} 点生命，复原 ${restoredIds.length} 张卡牌`, 'ok');
+    UI.refresh(game);
+    result();
+  });
 }
 
+export function openEntrySupply() {
+  const supply = entrySupplyAt(game);
+  if (!supply) return false;
+  game.state = 'modal';
+  let saveFailed = saveGame() === false;
+  const cards = () => supply.cardIds.map(id => SDT.Cards.all().find(card => card.id === id));
+  const isCurrent = () => entrySupplyAt(game) === supply;
+  const finish = () => { setBagReturnHook(null); UI.hideOverlay(); finishInstant(); };
+  const showResult = () => {
+    UI.showOverlay('', rewardSceneHTML({ className:'pg entry-reward-scene', title:'随行补给', source:characterName(game.myClass), count:supply.cardIds.length,
+      cards:cards().map((card, i) => card ? `<article class="reward-unit${supply.taken.includes(i) ? ' got' : ''}"><button class="reward-card" data-act="clsEntryCard" data-i="${i}" aria-label="放大查看${escAttr(card.name)}">${SDT.Cards.cardHTML(card)}</button>${supply.taken.includes(i) ? '<span class="reward-unit-state">已入背包</span>' : `<button class="reward-claim" data-act="entrySupplyTake" data-i="${i}">收下</button>`}</article>` : '<p class="reward-empty">该职业补给暂不可用</p>').join(''),
+      actions:rewardExitHTML('clsEntryContinue'),
+      footer:`<button class="reward-bag" data-act="entrySupplyBag">整理背包</button>${saveFailed ? '<p class="entry-save-warning" role="status">当前进度未保存，请查看存档错误提示。</p>' : ''}${supply.taken.length < supply.cardIds.length ? '<span class="reward-notice">未领取的补给保留在此入口</span>' : ''}`,
+    }), 'page');
+    const active = nodeActionBinding(game, UI, 'clsEntryContinue');
+    UI.act('clsEntryContinue', () => { if (isCurrent() && active()) finish(); });
+    UI.act('clsEntryCard', data => {
+      if (!isCurrent() || !active()) return;
+      const index = Number(data.i), card = cards()[index];
+      if (card) UI.showCardZoom(card, { hideNote:true, presentation:'expedition',
+        footer:supply.taken.includes(index) ? '' : `<button class="ov-btn ok" data-act="entrySupplyTake" data-i="${index}">收下</button>` });
+    });
+    UI.act('entrySupplyTake', data => { if (isCurrent() && active()) take(Number(data.i)); });
+    UI.act('entrySupplyBag', () => { if (isCurrent() && active()) document.getElementById('bagBtnFloat')?.click(); });
+  };
+  const take = (index = null) => {
+    if (!Number.isInteger(index)) return;
+    const received = claimEntrySupply(game, { findCard:id => SDT.Cards.all().find(card => card.id === id),
+      canReceive:card => game.canReceiveCard ? game.canReceiveCard(card) : usedSlots() < bagCap(), newUid, index });
+    if (!received.length) { UI.log('[[icon:bag]] 当前补给未领取，请整理背包后再试', 'warn'); return; }
+    document.getElementById('cardZoom')?._closeCardZoom?.(true);
+    if (supply.taken.length === supply.cardIds.length) consumeCurrentCell();
+    saveFailed = saveGame() === false;
+    UI.refresh(game);
+    showResult();
+  };
+  setBagReturnHook(() => { if (isCurrent()) openEntrySupply(); });
+  if (supply.taken.length) { showResult(); return true; }
+  nodeShell({ tone:'entry', asset:'scene-door-bg', icon:'', title:'入城补给',
+    sub:'随行的职业补给已留在城门旁。收下所需的卡牌，再踏入风雪。',
+    body:nodeOpt('clsEntryReveal','查看职业补给',`可领取最多 ${supply.cardIds.length} 张${esc(characterName(game.myClass))}的职业卡，放不下的保留在入口。`),
+    foot:`<button class="ov-btn" data-act="entrySupplyLeave">返回地图</button>${saveFailed ? '<p class="entry-save-warning">当前进度未保存，请查看存档错误提示。</p>' : ''}`,
+  });
+  const active = nodeActionBinding(game, UI, 'clsEntryReveal');
+  UI.act('clsEntryReveal', () => { if (isCurrent() && active()) showResult(); });
+  UI.act('entrySupplyLeave', () => { if (isCurrent() && active()) finish(); });
+  return true;
+}
 // 消耗口袋复原选牌（picks = 最多复原张数；done = 结束回调）
 // 2026-09-09 老板实测：原文字行在整屏场景壳上看不清、也不显示卡面——改为真卡面网格，点卡即复原
 // 需求 #12：消耗的装备不能在火堆复原（与道具一样）——列表里直接滤掉，不可选
 export function openClassChoice(options = {}) {
   const characterMotion = createCharacterViewMotion();
   const onCancel = typeof options.onCancel === 'function' ? options.onCancel : null;
+  const onSelect = typeof options.onSelect === 'function' ? options.onSelect : null;
+  const confirmLabel = onSelect ? '下一步：选择卡牌' : '出发';
   const beforeConfirm = typeof options.beforeConfirm === 'function' ? options.beforeConfirm : null;
   preloadAllNodeShellBgs();   // 只补首轮高频节点；其余场景在确认路线时按目标格预取
   // 玩家停留选角页时后台准备战斗域；不占标题首屏预算，又能让首场遭遇直接进入。
@@ -109,14 +182,16 @@ export function openClassChoice(options = {}) {
   game.state = 'modal';
   // 只把合法的已有角色作为初始选择；没有旧选择时同步选中第一名角色，
   // 避免舞台已经显示角色但提交值仍为空（预览与实际状态分离的误导）。
-  const previous = characterFor(game.characterId || game.myClass);
+  const previous = characterFor(options.initialCharacter || game.characterId || game.myClass);
   let sel = previous && picks.includes(previous.rulesetId) ? previous.rulesetId : picks[0];
+  let confirmationStarted = false;
+  let entryPresented = false;
   let view = 'select'; // 'select' 主选角页 | 'pool' 二级卡池页
   const poolCount = cl => SDT.Cards.classPool(cl).length;
   // 主选角页（2026-09-06 留言重做，排版参考杀戮尖塔 2 选人界面）：
   // 选中角色大幅立绘居右撑满，左侧信息面板（名字/职业/熟练度），
   // 底部全角色头像条，左下角红色返回键、右下角大确认键；卡池收进二级页
-  const render = () => {
+  const render = (local = false, direction = 1) => {
     if (view === 'pool') return renderPool();
     const displaySel = sel || picks[0];
     const story = characterFor(displaySel);
@@ -126,22 +201,30 @@ export function openClassChoice(options = {}) {
     const maxed = !!displaySel && lv >= SDT.Meta.LEVEL_MAX;
     const need = maxed ? 0 : (lv ? SDT.Meta.xpForNext(lv) : 0);
     const clsPct = maxed ? 100 : need ? Math.min(100, Math.round(xp / need * 100)) : 0;
+    const mechanisms = {
+      wu: ['物理进攻', '潜行 · 流血 · 连击'],
+      changwuyu: ['法术压制', '火球 · 诅咒'],
+      baita: ['奥术施法', '发现法术 · 召唤'],
+      heixiang: ['正面防线', '护甲 · 流血'],
+      xingyue: ['治疗护持', '治疗 · 圣盾 · 圣光'],
+    };
+    const mechanism = mechanisms[story?.id];
     const roster = picks.map(cl => ({ cl, c: characterFor(cl) }));
-    UI.showOverlay('', `
-      <div class="pg cls2-page">
+    const content = `
+      <div class="pg cls2-page roster-reference" data-base-departure="${!!onCancel}">
+        ${onSelect ? '<nav class="camp-steps" aria-label="出征步骤"><button data-act="cls2Quit">01 模式</button><b aria-current="step">02 人物</b><button data-act="pickClass">03 整备</button></nav>' : ''}
         <div class="cls2-stage">
-          ${displaySel ? `<div class="cls2-fullart">${SDT.Art.classFullArt(displaySel)}</div>` : ''}
+          ${displaySel ? `<div class="cls2-fullart" data-character="${escAttr(story?.id || '')}" data-skin="${escAttr(SDT.Art.getSkin?.(displaySel) || 'default')}"><div class="roster-art-surface">${SDT.Art.classFullArt(displaySel)}</div></div>` : ''}
           <aside class="cls2-panel" style="--cls-color:${story ? story.color : '#69aec2'}" data-wm="${escAttr(story ? story.id : '')}">
             ${story ? `
-              <div class="cls2-eyebrow">WINTER EXPEDITION · CLASS SELECT</div>
               <div class="cls2-nameline">
                 <h2 class="cls2-name">${esc(story.name)}</h2>
               </div>
               <div class="cls2-chips">
-                <span class="cls2-chip cls2-chip-role">${esc(story.rulesetId)}</span>
-                <span class="cls2-chip${sel ? ' cls2-chip-live' : ''}">${sel ? '本局人物' : '预览'}</span>
+                ${sel ? '<span class="cls2-chip cls2-chip-live">当前选择</span>' : ''}
               </div>
-              <div class="cls2-level">
+              <section class="cls2-mechanism"><b>${esc(mechanism?.[0] || story.rulesetId)}</b><p>${esc(mechanism?.[1] || '查看完整人物卡池')}</p></section>
+              <details class="cls2-growth"><summary>熟练成长 · Lv.${lv}</summary><div class="cls2-level">
                 <div class="cls2-level-num"><i>LV</i>${lv}</div>
                 <div class="cls2-level-meta">
                   <div class="cls2-xpbar"><span style="width:${clsPct}%"></span></div>
@@ -149,35 +232,42 @@ export function openClassChoice(options = {}) {
                   <div class="cls2-perk">[[icon:medal]] 出征加成 ${esc(SDT.Meta.perkText(lv))}</div>
                 </div>
               </div>
-              <div class="cls2-palette" title="人物配色">
-                <i style="background:${story.hair}"></i><i style="background:${story.skin}"></i><i style="background:${story.outfit}"></i><i style="background:${story.color}"></i>
-              </div>
-              <dl class="cls2-stats">
-                <div><dt>专属卡池</dt><dd>${poolCount(displaySel)}<i>张</i></dd></div>
-                <div><dt>熟练加成</dt><dd>+${lv - 1}<i>生命</i></dd></div>
-              </dl>
-              <p class="cls2-story">${esc(CLASS_STORY[characterFor(displaySel)?.id] || '确认后以此人物进入远征，熟练度加成与职业卡将在确认时生效。')}</p>
+              </details>${!onSelect ? `<details class="cls2-growth cls2-supply-rules"${SDT.Base?.data?.ammoTaught ? '' : ' open'}><summary>卡牌消耗规则 · 随时重看</summary><p>普通卡打出后进入消耗口袋；初始攻击、职业卡与衍生卡打出后直接消散。道具与装备不能在火堆复原。撤离时消耗口袋每张仅 1/3 概率带回。</p></details>` : ''}
+              ${!mechanism ? `<p class="cls2-story">${esc(CLASS_STORY[story.id] || '确认后以此人物进入远征，熟练度加成与职业卡将在确认时生效。')}</p>` : ''}
               ${(SDT.Art.listSkins ? SDT.Art.listSkins(displaySel) : []).length ? `
                 <div class="cls2-skins-wrap">
                   <div class="cls2-sub">皮肤 <i>SKINS</i></div>
                   <div class="cls2-skins">
-                    <button class="cls2-skin-btn${SDT.Art.getSkin(displaySel) === 'default' ? ' sel' : ''}" data-act="clsSkin" data-cls="${escAttr(displaySel)}" data-skin="default">标准</button>
-                    ${SDT.Art.listSkins(displaySel).map(s => `
-                      <button class="cls2-skin-btn${SDT.Art.getSkin(displaySel) === s.id ? ' sel' : ''}" data-act="clsSkin" data-cls="${escAttr(displaySel)}" data-skin="${escAttr(s.id)}" title="${escAttr(s.name)}">${esc(s.name)}</button>`).join('')}
+                    ${[{ id:'default', name:'标准' }, ...SDT.Art.listSkins(displaySel)].map(s => `
+                      <button class="cls2-skin-btn${SDT.Art.getSkin(displaySel) === s.id ? ' sel' : ''}" data-act="clsSkin" data-cls="${escAttr(displaySel)}" data-skin="${escAttr(s.id)}" aria-pressed="${SDT.Art.getSkin(displaySel) === s.id}" title="${escAttr(s.name)}"><span class="cls2-skin-preview"><img src="${escAttr(SDT.Art.skinUrl(displaySel, s.id))}" alt="" loading="lazy" decoding="async"></span><span class="cls2-skin-label">${esc(s.name)}</span></button>`).join('')}
                   </div>
                 </div>` : ''}
-              <button class="ov-btn cls2-pool-btn" data-act="clsPool" ${sel ? '' : 'disabled'}>[[icon:cards]] 查看角色卡池（${poolCount(displaySel)} 张）</button>`
+              <button class="ov-btn cls2-pool-btn" data-act="clsPool" ${sel ? '' : 'disabled'}>[[icon:cards]] 完整人物卡池（${poolCount(displaySel)} 张）</button>`
             : '<p class="cls2-hint">[[icon:medal]]<br>从下方选择一名角色</p>'}
           </aside>
         </div>
         <div class="cls2-strip">${roster.map(({ cl, c }) => `
           <button class="cls2-face${cl === sel ? ' sel' : ''}" data-act="selClass" data-cls="${escAttr(cl)}" title="${escAttr(c.name)}" aria-pressed="${cl === sel ? 'true' : 'false'}">
-            ${SDT.Art.classArt(cl, true)}<b>${esc(c.name)}</b>
+            ${SDT.Art.classAvatarArt ? SDT.Art.classAvatarArt(cl) : SDT.Art.classArt(cl, true)}<b>${esc(c.name)}</b>
           </button>`).join('')}</div>
-        <button class="cls2-back" data-act="cls2Quit" title="${onCancel ? '返回出发整备' : '返回标题界面'}"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 5.5 4 12l6.5 6.5M4.6 12H20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <button class="cls2-confirm" data-act="pickClass" ${sel ? '' : 'disabled'} title="${sel ? '出发' : '请先选择角色'}" aria-label="${sel ? '出发' : '请先选择角色'}"><span>${sel ? '出发' : '选择角色后出发'}</span><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      </div>`, 'page');
-    characterMotion.enter();
+        <button class="archive-back" data-act="cls2Quit" title="${onSelect ? '返回基地' : onCancel ? '返回出发整备' : '返回标题界面'}" aria-label="${onSelect ? '返回基地' : onCancel ? '返回出发整备' : '返回标题界面'}"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M4 12h10M4 12l4-4M4 12l4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="cls2-confirm" data-act="pickClass" ${sel ? '' : 'disabled'} title="${sel ? confirmLabel : '请先选择角色'}" aria-label="${sel ? confirmLabel : '请先选择角色'}"><span>${sel ? confirmLabel : '选择角色后出发'}</span><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>`;
+    const mounted = local && document.querySelector('#overlay .cls2-page');
+    if (mounted) {
+      const template = document.createElement('template');
+      template.innerHTML = SDT.Icons?.rich ? SDT.Icons.rich(content) : content;
+      for (const selector of ['.cls2-fullart', '.cls2-panel', '.cls2-strip']) {
+        const current = mounted.querySelector(selector);
+        const next = template.content.querySelector(selector);
+        if (current && next) current.replaceWith(next);
+      }
+      characterMotion.portrait(mounted.querySelector('.cls2-fullart'), direction);
+      characterMotion.preview(mounted.querySelector('.cls2-panel'));
+    } else {
+      UI.showOverlay('', content, 'page');
+      characterMotion.enter();
+    }
   };
   // 二级页：角色卡冬日档案索引，保留实际卡面、左侧详情预览、分页与点击放大。
   let poolPage = 0;
@@ -210,14 +300,22 @@ export function openClassChoice(options = {}) {
       <span class="pool-pageinfo">第 <b class="pool-page-now">${poolPage + 1}</b> / ${totalPages} 页 · 匹配 ${pool.length} 张</span>
       <button class="hs-btn sm" data-act="poolNext"${poolPage >= totalPages - 1 || totalPages <= 1 ? ' disabled' : ''}>下一页 ›</button>`;
   };
+  // 描述默认同字号；实际超出固定描述区时才逐步缩字，不省略牌效。
+  const fitPoolDescriptions = () => requestAnimationFrame(() => {
+    document.querySelectorAll('.cls-pool-page .hsc-desc, body:has(.cls-pool-page) #cardZoom:not(.cz-photo) .hsc-desc').forEach(desc => {
+      const text = desc.querySelector('span');
+      if (!text || !desc.clientHeight) return;
+      desc.style.removeProperty('--pool-desc-size');
+      let size = parseFloat(getComputedStyle(desc).fontSize);
+      while (text.scrollHeight > desc.clientHeight && size > 4) {
+        size = Math.max(4, size - .25);
+        desc.style.setProperty('--pool-desc-size', `${size}px`);
+      }
+    });
+  });
   const poolPreviewHTML = (c) => {
     if (!c) return '<div class="pv-empty">[[icon:cards]]</div><p class="pv-hint">选择右侧卡牌<br>这里会显示档案预览</p>';
-    const dmgRow = SDT.Cards.DMG_TYPES.includes(c.type) ? `<div class="pv-row"><span>伤害词条</span><b class="dmg-num">${c.dmg || 0}</b></div>` : '';
-    return `${SDT.Cards.cardHTML(c, 'lg')}<div class="pv-meta">
-      <div class="pv-row"><span>类型</span><b>${esc(c.type)}</b></div>
-      <div class="pv-row"><span>稀有度</span><b>${esc(SDT.Cards.rarityOf(c))}</b></div>
-      ${dmgRow}
-    </div><p class="pv-hint">点击卡面可放大查看</p>`;
+    return SDT.Cards.cardHTML(c, 'lg');
   };
   const poolGridHTML = () => {
     const pool = filteredPool();
@@ -272,7 +370,7 @@ export function openClassChoice(options = {}) {
     const pool = SDT.Cards.classPool(sel);
     const story = characterFor(sel);
     UI.showOverlay('', `
-      <div class="pg cls-pool-page" style="--cls-color:${story ? story.color : '#69aec2'}">
+      <div class="pg cls-pool-page" data-base-departure="${!!onCancel}" style="--cls-color:${story ? story.color : '#69aec2'}">
         <header class="pg-head">
           <button class="pool-back" data-act="clsBack" aria-label="返回选人"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 5.5 4 12l6.5 6.5M4.6 12H20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>返回</span></button>
           <div class="pool-archive-title"><h2>角色卡池</h2></div>
@@ -284,7 +382,6 @@ export function openClassChoice(options = {}) {
               <b class="pv-name">卡牌详情</b>
             </div>
             <div class="pv-body" id="poolPreview" aria-live="polite">${poolPreviewHTML(pool[0])}</div>
-            <p class="pv-rule">[[icon:medal]] 确认选择「${esc(characterName(sel))}」后，将从 ${pool.length} 张人物卡中随机获得 1 张角色卡，并与 5 张「初始攻击」一起带入背包。</p>
           </aside>
           <section class="pool-catalog" aria-label="角色卡档案">
             <div class="pool-catalog-head"><div><span class="pool-catalog-kicker">COLLECTION INDEX</span><b>分类索引</b></div><div class="pool-result-summary">当前档案 <strong id="poolResultCount">${pool.length}</strong> 张</div></div>
@@ -294,7 +391,7 @@ export function openClassChoice(options = {}) {
         </div>
         <footer class="cls-foot cls-foot-pool">
           <div class="pool-pager" id="poolPager">${poolPagerHTML()}</div>
-          <button class="ov-btn ok" data-act="pickClass">出发</button>
+          <button class="ov-btn ok" data-act="pickClass">${confirmLabel}</button>
         </footer>
       </div>`, 'page');
     characterMotion.enter();
@@ -311,11 +408,13 @@ export function openClassChoice(options = {}) {
     el.classList.add('selected');
     pv.innerHTML = poolPreviewHTML(c);
     pv.dataset.cardIndex = String(i);
+    fitPoolDescriptions();
     characterMotion.preview(pv);
     if (SDT.Art && SDT.Art.decodeIn) SDT.Art.decodeIn(pv);   // 侧栏 lg 大图变体显式解码，防 IAB 合成黑窗（网格小卡已解码不代表大尺寸变体可用，2026-09-20 走查实锤）
     if (tick) Sfx.tick();
   };
   const bindPoolFocusPreview = () => {
+    fitPoolDescriptions();
     const grid = document.getElementById('poolGrid');
     if (!grid || grid.dataset.previewBound) return;
     grid.dataset.previewBound = '1';
@@ -340,7 +439,10 @@ export function openClassChoice(options = {}) {
   UI.act('poolZoom', (d) => {
     const list = sel ? SDT.Cards.classPool(sel) : [];
     const c = list[Number(d.i)];
-    if (c) UI.showCardZoom(c);
+    if (c) {
+      UI.showCardZoom(c);
+      fitPoolDescriptions();
+    }
   });
   UI.act('poolPrev', () => { if (poolPage > 0) { poolPage--; renderPoolGrid(); } });
   UI.act('poolNext', () => {
@@ -355,12 +457,11 @@ export function openClassChoice(options = {}) {
     renderPoolGrid();
   });
   UI.act('selClass', (d) => {
-    if (d.cls === sel) return;
-    characterMotion.page(() => {
-      sel = d.cls;
-      SDT.Sound.sfx('characterSelect');
-      render();
-    });
+    if (d.cls === sel || !picks.includes(d.cls) || confirmationStarted || characterMotion.busy) return;
+    const direction = picks.indexOf(d.cls) >= picks.indexOf(sel) ? 1 : -1;
+    sel = d.cls;
+    SDT.Sound.sfx('characterSelect');
+    render(true, direction);
   });
   UI.act('clsPool', () => {
     if (!sel) return;
@@ -378,30 +479,32 @@ export function openClassChoice(options = {}) {
     });
   });
   UI.act('clsSkin', (d) => {   // 皮肤切换（2026-09-19）：只换选人页大立绘，会话内记忆不入存档
+    if (SDT.Art.getSkin(d.cls) === d.skin) return;
     SDT.Art.setSkin(d.cls, d.skin);
     const url = SDT.Art.skinUrl(d.cls, d.skin);
     document.querySelectorAll('.cls2-fullart img.art-figure, .cls2-fullart img.art-figure-back')
       .forEach(im => {
         im.src = url;
         im.classList.remove('skin-swap');
-        void im.offsetWidth;   // 强制重排：连续切换也能重放过渡
-        im.classList.add('skin-swap');
-        // 注意：动画结束后保留 skin-swap 类——若摘除会回落到 cls2ArtIn 入场动画造成二次闪烁
       });
+    const portrait = document.querySelector('#overlay .cls2-fullart');
+    if (portrait) portrait.dataset.skin = d.skin;
+    characterMotion.portrait(portrait);
     document.querySelectorAll(`.cls2-skin-btn[data-cls="${d.cls}"]`)
-      .forEach(b => b.classList.toggle('sel', b.dataset.skin === d.skin));
+      .forEach(b => { const active = b.dataset.skin === d.skin; b.classList.toggle('sel', active); b.setAttribute('aria-pressed', String(active)); });
     Sfx.tick();
   });
-  UI.act('cls2Quit', () => {   // 出发整备进来的选角页回整备；独立进入时仍回标题
+  UI.act('cls2Quit', () => {   // 基地选角按入口回流；独立进入时回标题
     if (onCancel) { onCancel(); return; }
     // 迭代评审 09-20 客户端岗：setTimeout(240) 时序补丁退役——exitToTitle 现在自带
     // immediate 同步关层，淡出窗口竞态在 ui.js 层根治
     exitToTitle();
   });
-  UI.act('pickClass', () => {
-    if (!sel || characterMotion.busy) return;
-    const cl = sel;
+  const confirmClass = cl => {
+    if (confirmationStarted) return;
     if (beforeConfirm && beforeConfirm() === false) return;
+    confirmationStarted = true;
+    if (!SDT.Base?.data?.ammoTaught) SDT.Base?.markAmmoTaught?.();
     game.myClass = cl;
     game.characterId = characterFor(cl).id;
     game.classCard = null;
@@ -418,15 +521,8 @@ export function openClassChoice(options = {}) {
       game.maxHp += bonus; game.hp += bonus;
       UI.log(`[[icon:medal]] ${esc(characterName(cl))} 熟练度 <b>Lv.${lv}</b>：生命上限 +${bonus}（${game.maxHp}）`, 'ok');
     }
-    if (card) {
-      game.classCard = { ...card };
-      game.ownedCards.push({ uid: newUid(), card: game.classCard, brought: 1 });
-      UI.log(`[[icon:archive]] 获得角色卡【<b>${esc(card.name)}</b>】（${esc(characterName(cl))}）`, 'loot');
-      if (card2 && card2.id !== card.id) {
-        game.ownedCards.push({ uid: newUid(), card: { ...card2 }, brought: 1 });
-        UI.log(`[[icon:archive]] 获得角色卡【<b>${esc(card2.name)}</b>】（${esc(characterName(cl))}）·第 2 张职业卡已入包`, 'loot');
-      }
-    }
+    game.entrySupply = createEntrySupply(game, [card, card2]);
+    saveGame();   // Freeze the pending cards before the departure transition.
     // 2026-09-07 留言：选人进局要有过渡动画——复用节点过场（大门场景 + 角色名揭晓）；
     // 启程文案按人物区分（对应各自 tag 的语气）
     const START_LINES = {
@@ -437,32 +533,27 @@ export function openClassChoice(options = {}) {
       xingyue: '灯已点亮，照归途',
     };
     const startLine = START_LINES[characterFor(cl).id] || '整备完毕，探索开始';
-    // 2026-09-19 留言 #16：开局发放的两张职业卡改走专门「启程 event」页——不再只靠
-    // 日志静默入包，先展示卡面（获取并离开），再接启程过渡动画
-    const grantedCards = [card, ...(card2 && card2.id !== card.id ? [card2] : [])].filter(Boolean);
     const currentContext = captureBattleContext(game, getActiveSlot);
     const transition = showRunTransition({
       tone: 'door', asset: 'scene-door-bg', eyebrow: 'EXPEDITION START',
       title: characterName(cl), detail: startLine, duration: 1600,
+      presentation: 'city-cut',
     });
     transition.then(completed => {
-      if (completed === false || !transition.isCurrent() || !currentContext()) return;
-      game.state = 'modal';
-      nodeShell({
-        tone: 'event', icon: '[[icon:medal]]', title: `${characterName(cl)} · 启程补给`,
-        sub: `从${esc(characterName(cl))}的专属卡池抽得了 <b>${grantedCards.length}</b> 张职业卡——与 5 张【初始攻击】一起放入背包`,
-        body: `<div class="bt-hand cls-grant-hand">${grantedCards.map(c => SDT.Cards.cardHTML(c)).join('')}</div>
-          <p class="ov-note">职业卡带出对局后留在仓库（不占消耗口袋）；本局内打出后与其他卡同规则结算。</p>`,
-        foot: `<button class="ov-btn ok cls-grant-go" data-act="clsGrantGo"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 获取并离开</button>`,
-      });
-      UI.act('clsGrantGo', () => {
-        if (!transition.isCurrent() || !currentContext()) return;
-        UI.hideOverlay();
-        game.state = 'idle';
-        saveGame();
-        UI.refresh(game);
-      });
+      if (entryPresented || completed === false || !transition.isCurrent() || !currentContext()) return;
+      entryPresented = true;
+      UI.hideOverlay();
+      game.state = 'idle';
+      saveGame();
+      UI.refresh(game);
+
     });
+  };
+  UI.act('pickClass', () => {
+    if (!sel || characterMotion.busy) return;
+    const cl = sel;
+    if (onSelect) { onSelect(cl, () => confirmClass(cl)); return; }
+    confirmClass(cl);
   });
   render();
 }
@@ -474,10 +565,10 @@ export function openDoorModal(door, cellDef) {
   // 2026-09-09 需求 #13：只能在第三层（紧急撤离点）与第四层（终局撤离点）撤离——
   // 环间门不再提供撤离选项，只能向深处走
   nodeShell({
-    tone: 'door', icon: '[[icon:door]]', title: '环间门',
-    sub: `这道隔离闸门连通 <b>${target.name}</b>——闸门只向深处放行，不能停留`,
+    tone: 'door', icon: '[[icon:door]]', title: '层间闸门',
+    sub: door.reverse ? '这条通路返回已探索的区域。' : '穿过闸门后将离开当前区域，继续深入城市。',
     body:
-      nodeOpt('goDoor', `${door.reverse ? '返回' : '进入'}${target.name}`, '穿过闸门，前往另一环', 'ok') +
+      nodeOpt('goDoor', `${door.reverse ? '返回' : '进入'}${target.name}`, '', 'ok') +
       (cellDef && cellDef.type === 'shop' ? nodeOpt('doorShop', '逛商队', '闸门旁的拾荒商队还在营业') : ''),
   });
   UI.act('goDoor', () => {
@@ -822,15 +913,24 @@ export function resumeExtraction(pending) {
 
 export async function doExtract() {
   if (!game.runActive || game.pendingExtraction || extractionStarting) return false;
+  const startedFromSlot = getActiveSlot();
+  const continuing = game.extractionPending && typeof game.extractionPending === 'object';
   // 撤离前先落盘（09-27 撤离保存失败修复）：saveGame 只在部分节点结算时触发——
   // 低血速通路线（跳宝箱、直奔撤离点）可全程零存档，begin 的 readCurrent 读到
   // 不存在的 RUN_KEY 报「版本或结构无效」→ extractRetry 重试页每按一次都重复失败，
-  // 玩家被锁死在撤离页（agent 实测 V 底 8 局死锁）。撤离前写一次当前局面即消除
-  saveGame();
+  // 玩家被锁死在撤离页。首次预存失败不能拿旧快照与当前内存混合提交；
+  // 已有 token 表示此前预存成功，事务重试须沿用它（此时 saveGame 会拒写）。
+  if (!continuing) {
+    const saved = saveGame();
+    if (startedFromSlot && saved !== true) {
+      UI.log('[[icon:cross]] 撤离前进度未保存，整理尚未开始；请检查存档错误并重试', 'warn');
+      showExtractionRetry(false);
+      return false;
+    }
+  }
   extractionStarting = true;
-  const startedFromSlot = getActiveSlot();
   const initialIdentity = startedFromSlot ? RunStorage.readIdentity(startedFromSlot) : null;
-  const pendingToken = game.extractionPending && typeof game.extractionPending === 'object'
+  const pendingToken = continuing
     ? game.extractionPending : { slotId: startedFromSlot, runId: initialIdentity?.ok ? initialIdentity.value.runId : null };
   game.extractionPending = pendingToken;
   game.state = 'modal';
@@ -873,10 +973,12 @@ export async function doExtract() {
   }
 }
 
-function showExtractionRetry() {
+function showExtractionRetry(checkpointSaved = true) {
   game.state = 'modal';
-  // SYS-10 同款兜底说明（A5-EXRETRY-01）：doExtract 撤离前已 saveGame 落盘，退出重进安全
-  UI.showOverlay('', '<div class="pg hub"><h2>撤离结算待恢复</h2><p>撤离已成功，整理快照尚未确认写入。请重试保存后继续。</p><p class="ov-note">[[icon:info]] 撤离前的局面已保存——若反复失败，可以退出游戏重新进入，会回到撤离前的位置，不会重复扣卡。</p><button class="ov-btn ok" data-act="extractRetry">重试撤离整理</button></div>', 'page');
+  const message = checkpointSaved
+    ? '<p>撤离已成功，整理快照尚未确认写入。请重试保存后继续。</p><p class="ov-note">[[icon:info]] 撤离前的局面已保存——若反复失败，可以退出游戏重新进入，会回到撤离前的位置，不会重复扣卡。</p>'
+    : '<p>撤离前的进度未保存，整理尚未开始。请检查存储空间或档位冲突后重试。</p><p class="ov-note">[[icon:info]] 此时退出会回到上一次成功保存的位置。</p>';
+  UI.showOverlay('', `<div class="pg hub"><h2>撤离结算待恢复</h2>${message}<button class="ov-btn ok" data-act="extractRetry">重试撤离整理</button></div>`, 'page');
   UI.act('extractRetry', () => { UI.hideOverlay(); doExtract(); });
 }
 
@@ -937,18 +1039,17 @@ function renderExtractStash() {
     back: () => renderExtractStash(),
   });
   UI.showOverlay('', `
-    <div class="pg hub result-pg" id="exMain">
+    <div class="pg hub result-pg" id="exMain" data-unclaimed-cards="${totalLeft}">
       <header class="hub-head">
         <h2>[[icon:exit]] 撤离成功 · 整理入库</h2>
         ${UI.helpBtn('extract')}
-        <span class="sub">把背包中的物品放回仓库——未入库的卡牌将在撤离中丢失</span>
         <span class="pg-spacer"></span>
         <span class="hub-res">
           <span class="res-chip">[[icon:archive]] 仓库容量 <b class="${room <= 0 ? 'fulled' : ''}">${B.stashUsed()}/${B.stashCap()}</b> 张</span>
           <span class="res-chip">[[icon:coin]] 随身币不带回（<b>${game.coins}</b> 币留在局中）</span>
         </span>
       </header>
-      <div class="result-summary"><span class="result-kicker">EXTRACTION REPORT</span><b>战利品已回收，正在等待你的入库决定</b><span>容量 ${B.stashUsed()}/${B.stashCap()} · 未入库卡牌会在完成整理时丢失</span></div>
+      <div class="result-summary"><span class="result-kicker">撤离回收</span><b>${totalLeft ? `还有 ${totalLeft} 张卡牌等待入库` : '卡牌整理完毕'}</b><span>${totalLeft ? '点击卡面逐项入库，或使用右侧整理操作。完成整理时，未入库卡牌将丢失。' : '确认完成整理，查看本次远征结算。'}</span></div>
       <div class="dep-body result-columns">
         <section class="hub-card">
           <h3>[[icon:bag]] 背包卡牌 <span class="hub-card-tip">点击卡面放入仓库</span></h3>
@@ -963,7 +1064,7 @@ function renderExtractStash() {
           ${extractLeft.length ? `<button class="ov-btn ok" data-act="exAll" ${room > 0 && totalLeft <= room ? '' : 'disabled'}
             style="width:100%">[[icon:archive]] 全部入库（${Math.min(totalLeft, room)}/${totalLeft} 张可入）</button>` : ''}
           <div class="dep-foot" style="margin-top:10px">
-            <button class="ov-btn ok" data-act="exSmart" style="width:100%;margin-top:8px">[[icon:sparkles]] 智能整理（优先价值最高 · 上限仓库空格）</button>
+            ${extractLeft.length ? '<button class="ov-btn ok" data-act="exSmart" style="width:100%;margin-top:8px">[[icon:sparkles]] 智能整理（优先价值最高 · 上限仓库空格）</button>' : ''}
             <button id="btnDeploy" data-act="exFinish">[[icon:check]] 完成整理${extractLeft.length ? `（${totalLeft} 张将丢失）` : ''}</button>
           </div>
         </section>
@@ -1056,11 +1157,11 @@ function showExtractDone(receipt) {
     sub: `${wasClear ? '击破第四层首脑，从终局撤离点凯旋' : '见好就收，带着战利品安全返回基地'} ·
       用时 <b>${timeStr}</b> · 行动 <b>${r.actions ?? 0}</b> 次 · 抵达 <b>第 ${r.layersReached ?? '-'} 层</b> · 剩余生命 <b style="color:#7fdd9c">${game.hp}/${game.maxHp}</b> ·
       本局携带 <b class="gold">${r.runCoins ?? game.coins ?? 0} 币</b>（留在局中）`,
-    body: `
+    body: `<div class="extraction-outcome">
       ${gainRow}${lossRow}
-      <p class="result-line"><span class="ov-note">[[icon:home]] 已运回基地：[[icon:wood]] 木材 ×${net.wood ?? 0} · [[icon:bread]] 口粮 ×${net.rations ?? 0} · [[icon:archive]] 仓库总持有 <b>${B.stashUsed()}/${B.stashCap()}</b> 张（含往局） ·
+      <p class="result-line"><span class="ov-note">[[icon:archive]] 仓库总持有 <b>${B.stashUsed()}/${B.stashCap()}</b> 张（含往局） ·
         [[icon:sparkles]] 图鉴 <b>${Object.keys(B.data.collection).length}</b></span></p>
-      <p class="ov-note">下次出发时可以从仓库选择卡牌携带；储备币 <b>${B.data.coins}</b> 币留在基地（不进局，用于孵蛋与基地建设）。</p>`,
+      <p class="ov-note">下次出发时可以从仓库选择卡牌携带；储备币 <b>${B.data.coins}</b> 币留在基地（不进局，用于孵蛋与基地建设）。</p></div>`,
     foot: `
       <button class="ov-btn" data-act="goBase">[[icon:home]] 回基地</button>
       <button class="ov-btn ok" data-act="again">[[icon:runner]] 再出发</button>`,

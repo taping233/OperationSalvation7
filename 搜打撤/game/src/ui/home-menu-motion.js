@@ -1,4 +1,6 @@
 import { interfaceReducedMotion } from './interface-motion.js';
+import { motionTiming, motionEasing } from './motion-presets.js';
+import '../../css/home-ui-tokens.css';
 
 // Home-menu choreography accompanies the shared interface transitions.
 const title = document.getElementById('title');
@@ -6,12 +8,24 @@ const overlay = document.getElementById('overlay');
 const credits = document.getElementById('homeCredits');
 const routes = new Set(['mStart', 'mGuide', 'mAch', 'btnCardLib', 'mSettings', 'mInbox']);
 const homePages = '.slot-page, .beginner-guide, .achievement-gallery, .card-library-page, .settings-page';
+// Only hover/leave feedback is slower; menu actions retain their original dispatch timing.
+const homeEntryDuration = 900;
+const homeEntryDelays = new Map([
+  ['mStart', 160], ['mGuide', 300], ['mAch', 440], ['btnCardLib', 550],
+  ['mSettings', 650], ['mCredits', 740], ['btnTitleExit', 830],
+]);
+const homeRestoreDelays = new Map([
+  ['mStart', 170], ['mGuide', 270], ['mAch', 430], ['btnCardLib', 510],
+  ['mSettings', 590], ['mCredits', 670], ['btnTitleExit', 750],
+]);
 let route = null;
 let routeVersion = 0;
 let settleTimer;
 let returnToken = 0;
 let exitBusy = false;
 let replayExit = false;
+let homeHasEntered = false;
+let revealVersion = false;
 
 export function homeReducedMotion() {
   return interfaceReducedMotion();
@@ -20,7 +34,48 @@ export function homeReducedMotion() {
 function leavingHome() {
   clearTimeout(settleTimer);
   returnToken += 1;
-  if (title) title.dataset.homePhase = 'out';
+  if (title) {
+    delete title.dataset.homeReveal;
+    title.dataset.homePhase = 'out';
+  }
+}
+
+export function restoreHomeFromWallpaper() {
+  if (!title || title.hidden || title._scrHiding) return;
+  clearTimeout(settleTimer);
+  const token = ++returnToken;
+  homeHasEntered = true;
+  revealVersion = !revealVersion;
+  title.querySelector('.is-picked')?.classList.remove('is-picked');
+  delete title.dataset.homePick;
+  title.style.setProperty('--home-console-duration', '640ms');
+  title.style.setProperty('--home-console-delay', '280ms');
+  let finishAt = 920;
+  title.querySelectorAll('.home-brand, .home-plate, .home-footer, .home-readout').forEach(region => {
+    const delay = region.classList.contains('home-brand') ? 80
+      : region.classList.contains('home-footer') ? 880
+        : region.classList.contains('home-readout') ? 820 : homeRestoreDelays.get(region.id) ?? 590;
+    region.style.setProperty('--home-enter-duration', '440ms');
+    region.style.setProperty('--home-enter-delay', `${delay}ms`);
+    finishAt = Math.max(finishAt, delay + 440);
+  });
+  title.dataset.homeReveal = revealVersion ? 'a' : 'b';
+  title.dataset.homePhase = 'in';
+  settleTimer = setTimeout(() => {
+    if (token !== returnToken) return;
+    title.dataset.homePhase = 'rest';
+    delete title.dataset.homeReveal;
+  }, homeReducedMotion() ? 0 : finishAt + 40);
+}
+
+export function hideHomeForWallpaper() {
+  if (!title) return;
+  clearTimeout(settleTimer);
+  returnToken += 1;
+  // 恢复的是操作界面，壁纸不再重播首次打开时的透明度淡入。
+  title.dataset.homeSceneReady = '1';
+  delete title.dataset.homeReveal;
+  title.dataset.homePhase = 'rest';
 }
 
 export function returnHome() {
@@ -28,10 +83,29 @@ export function returnHome() {
     || title.dataset.homePhase === 'in' || title.dataset.homePhase === 'rest') return;
   clearTimeout(settleTimer);
   const token = ++returnToken;
+  const firstEntry = !homeHasEntered;
+  homeHasEntered = true;
+  const entryDuration = firstEntry ? homeEntryDuration : 640;
+  title.style.setProperty('--surface-in', `${entryDuration}ms`);
+  title.style.setProperty('--home-console-duration', firstEntry ? '850ms' : '500ms');
+  title.style.setProperty('--home-console-delay', firstEntry ? '220ms' : '240ms');
+  let finishAt = entryDuration;
+  title.querySelectorAll('.home-brand, .home-plate, .home-footer, .home-readout').forEach(region => {
+    const plate = region.classList.contains('home-plate');
+    const duration = region.classList.contains('home-brand') ? (firstEntry ? 1100 : 640) : plate ? entryDuration : (firstEntry ? 700 : 500);
+    const entryDelay = region.classList.contains('home-brand') ? 0
+      : plate ? (region.classList.contains('is-picked') ? 0 : homeEntryDelays.get(region.id) ?? 650)
+        : region.classList.contains('home-footer') ? 760 : 480;
+    const delay = firstEntry ? entryDelay : Math.round(entryDelay * .65);
+    region.style.setProperty('--home-enter-duration', `${duration}ms`);
+    region.style.setProperty('--home-enter-delay', `${delay}ms`);
+    if (plate) region.style.setProperty('--hd', `${delay}ms`);
+    finishAt = Math.max(finishAt, delay + duration);
+  });
   title.dataset.homePhase = 'in';
   settleTimer = setTimeout(() => {
     if (token === returnToken && title.dataset.homePhase === 'in') title.dataset.homePhase = 'rest';
-  }, homeReducedMotion() ? 0 : 520);
+  }, homeReducedMotion() ? 0 : finishAt + 20);
 }
 
 function clearRoute() {
@@ -54,8 +128,15 @@ function tapFeedback(button) {
   if (homeReducedMotion()) return;
   button.querySelector('svg')?.animate?.(
     [{ opacity: 1, transform: 'scale(1)' }, { opacity: .75, transform: 'scale(1.1)' }, { opacity: 1, transform: 'scale(1)' }],
-    { duration: 180, easing: 'cubic-bezier(.22,1,.36,1)' },
+    { duration: motionTiming.feedback, easing: motionEasing.enter },
   );
+}
+
+function watchNavigation() {
+  const requested = ++routeVersion;
+  setTimeout(() => {
+    if (routeVersion === requested && overlay.hidden && !credits?.open) { clearRoute(); returnHome(); }
+  }, 1800);
 }
 
 function animateExit(event, button) {
@@ -70,7 +151,7 @@ function animateExit(event, button) {
     try { button.click(); } finally { replayExit = false; exitBusy = false; }
     // Browsers can refuse window.close(); keep their homepage usable in that case.
     setTimeout(() => { if (overlay?.hidden && !credits?.open) returnHome(); }, 250);
-  }, 220);
+  }, motionTiming.exit + motionTiming.staggerMax + 20);
 }
 
 export function enterHomeDialog(dialog) {
@@ -93,10 +174,10 @@ export function leaveHomeDialog(dialog, finish) {
     finish();
   };
   const onEnd = event => {
-    if (event.target === dialog && event.animationName === 'hmDialogOut') settle();
+    if (event.target === dialog && event.animationName === 'creditsFrameOut') settle();
   };
   dialog.addEventListener('animationend', onEnd);
-  timer = setTimeout(settle, 210);
+  timer = setTimeout(settle, motionTiming.exit + 30);
 }
 
 if (title && overlay) {
@@ -120,11 +201,7 @@ if (title && overlay) {
       route = button.id;
       leavingHome();
       enterPage();
-      // A route that fails before it opens must not leave invisible, inert menu items.
-      const requested = ++routeVersion;
-      setTimeout(() => {
-        if (routeVersion === requested && overlay.hidden && !credits?.open) { clearRoute(); returnHome(); }
-      }, 1800);
+      watchNavigation();
     }
     tapFeedback(button);
   }, true);
