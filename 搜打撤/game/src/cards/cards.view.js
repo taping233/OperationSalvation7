@@ -9,22 +9,23 @@ import SDT from '../core/sdt-facade.js';
 import { characterName } from '../core/characters.js';
 import { termKeyFor } from '../ui/term-tips.js';
 import { esc, escAttr } from '../core/shared.js';
+import { displayCardDescription } from './card-description-text.js';
 
 // 描述富文本（v3 定调）：数字 Georgia 加大·金、术语冰蓝、句首「XX：」式关键字金。
 // 顺序固定：先转义 → 关键字 → 术语 → 数字（正则均不含数字，不会互相污染标签）。
 // 时点短语整体标蓝（2026-09-16 留言）：「对战开始时/回合开始时/回合结束时」必须排在
 // 「回合」等单词前面，交替分支按序尝试，长词才会整体命中而不是只染前两个字。
 // （09-23 自 buildCardHTML 体内上移模块顶层并导出——选片台描述复用，卡面行为不变。）
-const DESC_TERMS = ['对战开始时', '回合开始时', '回合结束时', '冰冻', '冻结', '中毒', '燃烧', '灼烧', '流血', '护甲', '法伤', '招式', '生命', '伤害', '诅咒', '净化', '沉默', '充能', '注能', '发现', '限定', '主动技能', '消耗', '装备', '牌库', '回合', '弃牌', '抽牌', '能量'];
+const DESC_TERMS = ['对战开始时', '回合开始时', '回合结束时', '攻击伤害', '法术伤害', '固定伤害', '真实伤害', '冰冻', '冻结', '中毒', '燃烧', '灼烧', '流血', '护甲', '法伤', '招式', '潜行', '生命', '伤害', '诅咒', '净化', '沉默', '禁疗', '充能', '注能', '发现', '限定', '主动技能', '消耗', '装备', '牌库', '回合', '弃牌', '抽牌', '能量'];
 // 术语 alternation 正则（2026-10-02 审计 A 档上提模块级）：descRich 原每次调用重建 30 词
 // RegExp（卡牌库页首渲数百卡各一次）；词表是模块常量不会变，/g 标志 lastIndex 由
 // replace 自管（每次 replace 从 0 扫描），提升零行为差。
 const DESC_TERM_RE = new RegExp('(' + DESC_TERMS.join('|') + ')', 'g');
-export function descRich(desc) {
-  let s = esc(desc);
+export function descRich(desc, cardId) {
+  let s = esc(displayCardDescription(desc, cardId));
   s = s.replace(/^([^<>：\n]{1,10})：/, '<b class="d-kw">$1：</b>');
   // 09-20 老板：特殊词条触摸讲解——命中词带 data-term（term-tips.js 全局委托弹自绘讲解框），
-  // 伤害/生命/回合等常识词无讲解条目，保持纯高亮不弹框
+  // 具体伤害类型与法伤有讲解；生命/回合等常识词保持纯高亮。
   s = s.replace(DESC_TERM_RE, (w) => {
     const key = termKeyFor(w);
     return key ? `<i class="d-term" data-term="${key}">${w}</i>` : `<i class="d-term">${w}</i>`;
@@ -72,6 +73,7 @@ export function cardHTML(c, cls, opts) {
 }
 
 function buildCardHTML(c, cls, opts) {
+  const description = displayCardDescription(c.desc, c.id);
   // 2026-09-28 代码线：体内同名局部 esc/escAttr（3 字符/缺单引号）已删，统一走顶层 core/shared 满配版
   const hideCost = !!(opts && opts.hideCost) && SDT.Cards.NO_COST_TYPES.includes(c.type);
   const costBase = (opts && opts.costOverride && opts.costOverride.base != null) ? +opts.costOverride.base : (c.cost || 0);
@@ -106,8 +108,8 @@ function buildCardHTML(c, cls, opts) {
 const CF_SLUGS = { '战士': 'cf0', '侠客': 'cf1', '法师': 'cf2', '牧师': 'cf3', '降临者': 'cf4' };
 // 长描述按长度降级字号（B5）：≥22 字收一档、≥32 字两档，防 sm 卡面底部裁字；
 // lg/xl 特写卡由 card-v3.css 的 id 级选择器接管，不受这两档影响
-function descLenCls(c) {
-  const n = (c && c.desc || '').length;
+function descLenCls(description) {
+  const n = description.length;
   return n >= 32 ? ' long xlong' : n >= 22 ? ' long' : '';
 }
 // 效果词条角标（类型行下方的小药丸；数据字段见文件头 draw / infuse / heal / armor）
@@ -128,7 +130,7 @@ const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
   // opts.low：低倍率场景（卡牌库网格/悬停预览）取 448 宽缩略图，见 art.js cardIcon。
   const artHTML = (window.SDT.Art && window.SDT.Art.cardIcon && window.SDT.Art.cardIcon(c, opts)) ||
     SDT.Icons.img(SDT.Icons.TYPE_ART[c.type] || 'question');
-  const ruleLength = String(c.desc || '').length;
+  const ruleLength = description.length;
   const ruleDensity = ruleLength > 90 ? 'very-dense' : ruleLength > 55 ? 'dense' : ruleLength > 30 ? 'long' : 'normal';
   return `<div class="hs-card tp${ti} ${rvCls}${CF_SLUGS[c.cls] ? ' ' + CF_SLUGS[c.cls] : ''}${cls ? ' ' + cls : ''}" data-rule-density="${ruleDensity}">
     ${isPrism ? '<i class="rv-beam" aria-hidden="true"></i>' : ''}
@@ -140,10 +142,10 @@ const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
     <div class="hsc-type">${c.type === '能力卡' ? '<span data-term="ability">能力卡</span>' : esc(c.type || '?')} · ${esc(ro === '职业' ? ((c.cls ? characterName(c.cls) : '人物') + '专属') : ro)}</div>
     ${kwHTML}
     <i class="hsc-gem"></i>
-    <div class="hsc-desc${descLenCls(c)}">${c.desc ? `<span>${descRich(c.desc)}</span>` : ''}</div>
+    <div class="hsc-desc${descLenCls(description)}">${description ? `<span>${descRich(description)}</span>` : ''}</div>
     ${showDmg ? `<div class="hsc-dmg${dmgUp ? ' dmg-up' : ''}" title="${escAttr(dmgUp
       ? `${mark.tip}（含法伤加成 +${dmgOverride.bonus}）`
-      : (c.dmgType === 'spell' ? `${mark.tip} · 受法伤加成` : mark.tip))}">${mark.icon}<b>${mark.text}</b>${c.dmgType === 'spell' ? '<i>法伤</i>' : ''}</div>` : ''}
+      : (c.dmgType === 'spell' ? `${mark.tip} · 受法伤加成` : mark.tip))}">${mark.icon}<b>${mark.text}</b>${c.dmgType === 'spell' ? '<i data-term="spellPower">法伤</i>' : ''}</div>` : ''}
     ${ghostDmg ? `<div class="hsc-dmg ghost">${SDT.Icons.img('swords')}<b>0</b></div>` : ''}
     ${showVal ? `<div class="hsc-val" title="币值 ${val}${SDT.Cards.isSellable(c) ? ' · 可出售' : ' · 不可出售'}"><i>[[icon:coin]]</i><b>${val}</b></div>` : ''}
   </div>`;
