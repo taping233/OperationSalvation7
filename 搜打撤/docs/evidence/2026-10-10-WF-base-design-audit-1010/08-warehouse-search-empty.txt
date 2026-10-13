@@ -1,0 +1,86 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5200/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5200/
+	15 container hubMain
+		16 container
+			17 button 返回选档
+			18 heading 基地, Value: 2
+				19 text 基地
+			20 text 档案 / 01
+			21 image wood
+			22 text 木材 0
+			23 image bread
+			24 text 口粮 0
+			25 image key
+			26 text 钥匙 0
+			27 image coin
+			28 text 储备 0 币
+		29 container 基地分区
+			30 text 基地事务 / BASE
+			31 checkbox flag 出征 EXPEDITION, Value: 0
+				32 image flag
+				33 text 出征
+				34 text EXPEDITION
+			35 checkbox archive 仓库 STORAGE, Value: 1
+				36 image archive
+				37 text 仓库
+				38 text STORAGE
+			39 checkbox coin 补给 SUPPLIES, Value: 0
+				40 image coin
+				41 text 补给
+				42 text SUPPLIES
+			43 checkbox tools 基地建设 WORKSHOP, Value: 0
+				44 image tools
+				45 text 基地建设
+				46 text WORKSHOP
+			47 checkbox medal 人物与伙伴 PERSONNEL, Value: 0
+				48 image medal
+				49 text 人物与伙伴
+				50 text PERSONNEL
+			51 checkbox trophy 档案 ARCHIVES, Value: 0
+				52 image trophy
+				53 text 档案
+				54 text ARCHIVES
+			55 text EXPEDITION BASE · VII
+		56 container
+			57 text STORAGE / 战利品
+			58 heading 仓库, Value: 2
+				59 text 仓库
+			60 text 浏览、收藏与归档，为下一次远征做好准备。
+			61 container 仓库分区
+				62 checkbox 卡牌仓库 5/25, Value: 1
+					63 text 卡牌仓库
+					64 text 5/25
+				65 checkbox 待复原卡牌 0, Value: 0
+					66 text 待复原卡牌
+					67 text 0
+			68 text 搜索
+			69 text field (settable) Description: 搜索仓库卡牌, Value: 不存在的审核项
+			70 pop up button (collapsed, settable) Description: 筛选卡牌类型, Value: 全部类型, Secondary Actions: Expand
+				71 menu
+					72 (selected) 全部类型
+					73 武术
+					74 法术
+			75 pop up button (collapsed, settable) Description: 筛选卡牌品质, Value: 全部品质, Secondary Actions: Expand
+				76 menu
+					77 (selected) 全部品质
+					78 古朴
+					79 稀有
+			136 text 0 种卡牌
+			81 button 查看木材
+				82 image wood
+				83 text 0
+			84 button 查看口粮
+				85 image bread
+				86 text 0
+			87 container 卡牌陈列
+				137 heading 没有匹配的卡牌, Value: 3
+					138 text 没有匹配的卡牌
+				139 text 成功撤离后存入战利品，也可以购买基础补给。
+				140 button 清除筛选
+			135 container 选中卡牌详情
+				141 image archive
+				142 heading 选择一张卡牌, Value: 3
+					143 text 选择一张卡牌
+				144 text 在左侧浏览，在这里查看和管理。
+
+The focused UI element is 69 text field (settable) Description: 搜索仓库卡牌, Value: 不存在的审核项

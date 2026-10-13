@@ -1,0 +1,245 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5200/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5200/
+	15 container hubMain
+		16 container
+			17 button 返回选档
+			18 heading 基地, Value: 2
+				19 text 基地
+			95 text 档案 / 01
+			96 image wood
+			97 text 木材 0
+			98 image bread
+			99 text 口粮 0
+			100 image key
+			101 text 钥匙 0
+			102 image coin
+			103 text 储备 0 币
+		29 container 基地分区
+			30 text 基地事务 / BASE
+			31 checkbox flag 出征 EXPEDITION, Value: 0
+				32 image flag
+				33 text 出征
+				34 text EXPEDITION
+			35 checkbox archive 仓库 STORAGE, Value: 0
+				36 image archive
+				37 text 仓库
+				38 text STORAGE
+			39 checkbox coin 补给 SUPPLIES, Value: 0
+				40 image coin
+				41 text 补给
+				42 text SUPPLIES
+			43 checkbox tools 基地建设 WORKSHOP, Value: 0
+				44 image tools
+				45 text 基地建设
+				46 text WORKSHOP
+			47 checkbox medal 人物与伙伴 PERSONNEL, Value: 1
+				48 image medal
+				49 text 人物与伙伴
+				50 text PERSONNEL
+			51 checkbox trophy 档案 ARCHIVES, Value: 0
+				52 image trophy
+				53 text 档案
+				54 text ARCHIVES
+			55 text EXPEDITION BASE · VII
+		56 container
+			66 text PERSONNEL / 远征者
+			67 heading 人物与伙伴, Value: 2
+				68 text 人物与伙伴
+			69 container 远征者分类
+				104 checkbox 人物档案, Value: 1
+				105 checkbox 远征伙伴, Value: 0
+			72 container 人物内容
+				106 checkbox 档案, Value: 0
+				107 checkbox 卡池, Value: 1
+				108 checkbox 外观, Value: 0
+				109 checkbox 收藏奖励, Value: 0
+			77 container 人物档案切换
+				78 checkbox Description: 查看无的档案, Value: 1
+					79 text 无
+					80 text 侠客
+				81 checkbox Description: 查看黑像的档案, Value: 0
+					82 text 黑像
+					83 text 战士
+				84 checkbox Description: 查看星月的档案, Value: 0
+					85 text 星月
+					86 text 牧师
+				87 checkbox Description: 查看白塔的档案, Value: 0
+					88 text 白塔
+					89 text 法师
+				90 checkbox Description: 查看常无欲的档案, Value: 0
+					91 text 常无欲
+					92 text 降临者
+			93 image 无立绘
+			94 container
+				110 text 侠客
+				111 heading 无, Value: 3
+					112 text 无
+			113 container
+				114 text 侠客 / PERSONNEL
+				115 heading 无, Value: 3
+					116 text 无
+			117 heading 专属卡池 · 17 张, Value: 4
+				118 text 专属卡池 · 17 张
+			119 button 查看飞刃偷袭
+				120 container
+					121 text 0
+					122 image 飞刃偷袭
+					123 text 飞刃偷袭 武术 · 无专属
+					124 container
+						125 text 职业 职业
+					126 image cards
+					127 text 抽 1 攻（ -3 ），附加 流血 ，抽  1  张牌。
+				128 text 未归档
+			129 button 查看金蝉脱壳
+				130 container
+					131 text 0
+					132 image 金蝉脱壳
+					133 text 金蝉脱壳 武术 · 无专属
+					134 container
+						135 text 职业 职业
+					136 image cards
+					137 text 抽 3 消耗 所有手牌，抽  3  张。
+				138 text 未归档
+			139 button 查看偷袭
+				140 container
+					141 text 0
+					142 image 偷袭
+					143 text 偷袭 武术 · 无专属
+					144 container
+						145 text 职业 职业
+					146 text 攻（ -1 ）。
+				147 text 未归档
+			148 button 查看鬼魅之刃
+				149 container
+					150 text 1
+					151 image 鬼魅之刃
+					152 text 鬼魅之刃 武术 · 无专属
+					153 container
+						154 text 职业 职业
+					155 image cards
+					156 text 抽 2 攻（ +1 ），破除隐身时 伤害 +2 ，并抽  2  张牌。
+				157 text 未归档
+			158 button 查看快意恩仇
+				159 container
+					160 text 1
+					161 image 快意恩仇
+					162 text 快意恩仇 武术 · 无专属
+					163 container
+						164 text 职业 职业
+					165 text 消耗 2  张初始攻击，攻击  3  次。
+				166 text 未归档
+			167 button 查看流星箭雨
+				168 container
+					169 text 1
+					170 image 流星箭雨
+					171 text 流星箭雨 武术 · 无专属
+					172 container
+						173 text 职业 职业
+					174 text 攻（ -1 ）；触发  2  次。
+				175 text 未归档
+			176 button 查看潜匿
+				177 container
+					178 text 1
+					179 image 潜匿
+					180 text 潜匿 武术 · 无专属
+					181 container
+						182 text 职业 职业
+					183 image cards
+					184 text 抽 1 进入 潜行 状态  1 回合 ，抽 1 张牌。
+				185 text 未归档
+			186 button 查看剑仙形态
+				187 container
+					188 text 2
+					189 image 剑仙形态
+					190 text 剑仙形态 武术 · 无专属
+					191 container
+						192 text 职业 职业
+					193 image cards
+					194 text 抽 1 本局对战中， 回合开始时 额外抽  1  张牌。
+				195 text 未归档
+			196 button 查看白梅落影·妄
+				197 container
+					198 text 2
+					199 image 白梅落影·妄
+					200 text 白梅落影·妄  · 棱彩
+					201 container
+						202 text 棱彩 棱彩
+					203 text 遁入虚空： 净化 自身， 潜行 2 回合 ；破隐一击 伤害 翻倍。
+				204 text 未归档
+			205 button 查看无量仙剑·云风
+				206 container
+					207 text 2
+					208 image 无量仙剑·云风
+					209 text 无量仙剑·云风  · 棱彩
+					210 container
+						211 text 棱彩 棱彩
+					212 image cards
+					213 text 抽 5 万剑归宗： 抽  5  张牌，直接释放其中武术。
+				214 text 未归档
+			215 button 查看天剑诛魔·云阳
+				216 container
+					217 text 2
+					218 image 天剑诛魔·云阳
+					219 text 天剑诛魔·云阳  · 棱彩
+					220 container
+						221 text 棱彩 棱彩
+					222 text 断念： 将天启剑与诛魔剑洗入 牌库 。
+				223 text 未归档
+			224 button 查看诛魔剑
+				225 container
+					226 text 0
+					227 image 诛魔剑
+					228 text 诛魔剑 装备 · 棱彩
+					229 container
+						230 text 棱彩 棱彩
+					231 text 抽到该牌时攻击全体敌人；···以天启诛魔剑覆盖你的所有武器。
+				232 text 未归档
+			233 button 查看天启诛魔剑
+				234 container
+					235 text 0
+					236 image 天启诛魔剑
+					237 text 天启诛魔剑 装备 · 棱彩
+					238 container
+						239 text 棱彩 棱彩
+					240 text 获得  1  点攻击力，获得 3 张重斩。
+				241 text 未归档
+			242 button 查看天启剑
+				243 container
+					244 text 0
+					245 image 天启剑
+					246 text 天启剑 装备 · 棱彩
+					247 container
+						248 text 棱彩 棱彩
+					249 image cards
+					250 text 抽 1 抽到该牌时额外抽  1  张牌；在你抽到天启剑与诛魔剑后……
+				251 text 未归档
+			252 button 查看不变应万变-改
+				253 container
+					254 text 1
+					255 image 不变应万变-改
+					256 text 不变应万变-改 武术 · 无专属
+					257 container
+						258 text 职业 职业
+					259 text 在手牌中时，本牌变为打出的上一张武术牌的 1 费复制。
+				260 text 未归档
+			261 button 查看盗宝
+				262 container
+					263 text 1
+					264 image 盗宝
+					265 text 盗宝 武术 · 无专属
+					266 container
+						267 text 职业 职业
+					268 text 发现 一张 装备 卡
+				269 text 未归档
+			270 button 查看江湖救急-改
+				271 container
+					272 text 0
+					273 image 江湖救急-改
+					274 text 江湖救急-改 武术 · 无专属
+					275 container
+						276 text 职业 职业
+					277 text 随机获得 3 张临时卡牌， 回合开始时 将其 消耗 。
+				278 text 未归档
+			279 button 前往仓库归档培养
+
+The focused UI element is 107 checkbox 卡池, Value: 1

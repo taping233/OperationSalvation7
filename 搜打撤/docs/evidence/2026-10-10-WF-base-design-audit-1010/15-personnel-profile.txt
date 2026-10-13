@@ -1,0 +1,98 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5200/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5200/
+	15 container hubMain
+		16 container
+			17 button 返回选档
+			18 heading 基地, Value: 2
+				19 text 基地
+			57 text 档案 / 01
+			58 image wood
+			59 text 木材 0
+			60 image bread
+			61 text 口粮 0
+			62 image key
+			63 text 钥匙 0
+			64 image coin
+			65 text 储备 0 币
+		29 container 基地分区
+			30 text 基地事务 / BASE
+			31 checkbox flag 出征 EXPEDITION, Value: 0
+				32 image flag
+				33 text 出征
+				34 text EXPEDITION
+			35 checkbox archive 仓库 STORAGE, Value: 0
+				36 image archive
+				37 text 仓库
+				38 text STORAGE
+			39 checkbox coin 补给 SUPPLIES, Value: 0
+				40 image coin
+				41 text 补给
+				42 text SUPPLIES
+			43 checkbox tools 基地建设 WORKSHOP, Value: 0
+				44 image tools
+				45 text 基地建设
+				46 text WORKSHOP
+			47 checkbox medal 人物与伙伴 PERSONNEL, Value: 1
+				48 image medal
+				49 text 人物与伙伴
+				50 text PERSONNEL
+			51 checkbox trophy 档案 ARCHIVES, Value: 0
+				52 image trophy
+				53 text 档案
+				54 text ARCHIVES
+			55 text EXPEDITION BASE · VII
+		56 container
+			66 text PERSONNEL / 远征者
+			67 heading 人物与伙伴, Value: 2
+				68 text 人物与伙伴
+			69 container 远征者分类
+				70 checkbox 人物档案, Value: 1
+				71 checkbox 远征伙伴, Value: 0
+			72 container 人物内容
+				73 checkbox 档案, Value: 1
+				74 checkbox 卡池, Value: 0
+				75 checkbox 外观, Value: 0
+				76 checkbox 收藏奖励, Value: 0
+			77 container 人物档案切换
+				78 checkbox Description: 查看无的档案, Value: 1
+					79 text 无
+					80 text 侠客
+				81 checkbox Description: 查看黑像的档案, Value: 0
+					82 text 黑像
+					83 text 战士
+				84 checkbox Description: 查看星月的档案, Value: 0
+					85 text 星月
+					86 text 牧师
+				87 checkbox Description: 查看白塔的档案, Value: 0
+					88 text 白塔
+					89 text 法师
+				90 checkbox Description: 查看常无欲的档案, Value: 0
+					91 text 常无欲
+					92 text 降临者
+			93 image 无立绘
+			94 container
+				95 text 侠客
+				96 heading 无, Value: 3
+					97 text 无
+			98 container
+				99 text 侠客 / PERSONNEL
+				100 heading 无, Value: 3
+					101 text 无
+			102 definition list
+				103 container 熟练度
+					104 text 熟练度
+				105 text Lv.1
+				106 container 专属卡池
+					107 text 专属卡池
+				108 text 17 张
+			109 container
+				110 heading 出征加成, Value: 4
+					111 text 出征加成
+				112 text 生命上限 +0
+			113 container
+				114 heading 培养进度, Value: 4
+					115 text 培养进度
+				116 text 经验 0 / 50 归档职业卡与能力卡，消耗卡牌并获得人物经验。
+				117 button 查看专属卡池
+
+The focused UI element is 70 checkbox 人物档案, Value: 1

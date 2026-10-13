@@ -1,0 +1,18 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5200/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5200/
+	1 container Description: 箭雨大图与备注, ID: cardZoom
+		2 button 关闭卡牌大图
+			3 image cross
+		4 container
+			5 text 1
+			6 image 箭雨
+			7 text 箭雨 武术 · 古朴
+			8 container
+				9 text 古朴 古朴
+			10 text 攻（ -1 ），目标为敌方全体。
+		11 image pen
+		12 text 备注
+		13 text 暂无备注
+		14 text Esc 或点击背景收回
+
+The focused UI element is 2 button 关闭卡牌大图

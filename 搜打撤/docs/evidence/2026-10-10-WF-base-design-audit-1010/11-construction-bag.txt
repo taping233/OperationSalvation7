@@ -1,0 +1,91 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5200/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5200/
+	15 container hubMain
+		16 container
+			17 button 返回选档
+			18 heading 基地, Value: 2
+				19 text 基地
+			57 text 档案 / 01
+			58 image wood
+			59 text 木材 0
+			60 image bread
+			61 text 口粮 0
+			62 image key
+			63 text 钥匙 0
+			64 image coin
+			65 text 储备 0 币
+		29 container 基地分区
+			30 text 基地事务 / BASE
+			31 checkbox flag 出征 EXPEDITION, Value: 0
+				32 image flag
+				33 text 出征
+				34 text EXPEDITION
+			35 checkbox archive 仓库 STORAGE, Value: 0
+				36 image archive
+				37 text 仓库
+				38 text STORAGE
+			39 checkbox coin 补给 SUPPLIES, Value: 0
+				40 image coin
+				41 text 补给
+				42 text SUPPLIES
+			43 checkbox tools 基地建设 WORKSHOP, Value: 1
+				44 image tools
+				45 text 基地建设
+				46 text WORKSHOP
+			47 checkbox medal 人物与伙伴 PERSONNEL, Value: 0
+				48 image medal
+				49 text 人物与伙伴
+				50 text PERSONNEL
+			51 checkbox trophy 档案 ARCHIVES, Value: 0
+				52 image trophy
+				53 text 档案
+				54 text ARCHIVES
+			55 text EXPEDITION BASE · VII
+		56 container
+			66 text DEVELOPMENT / 扩建
+			67 heading 基地建设, Value: 2
+				68 text 基地建设
+			69 text 选择一处设施，查看这次扩建带来的变化。
+			70 text 建设储备
+			71 image wood
+			72 text  木材  0
+			73 image crystal
+			74 text  符文  0
+			75 container 可扩建设施
+				76 checkbox bag FIELD STORAGE 出征背包 16 / 30 格 正在查看, Value: 1
+					77 image bag
+					78 text FIELD STORAGE
+					79 heading 出征背包, Value: 3
+						80 text 出征背包
+					81 container
+						82 text 16  / 30 格
+					83 text 正在查看
+				84 checkbox archive BASE STORAGE 基地仓库 25 / 100 张 查看扩建, Value: 0
+					85 image archive
+					86 text BASE STORAGE
+					87 heading 基地仓库, Value: 3
+						88 text 基地仓库
+					89 container
+						90 text 25  / 100 张
+					91 text 查看扩建
+				92 text 伙伴的安全格由独立培养决定。
+				93 button paw 前往伙伴培养
+					94 image paw
+					95 text 前往伙伴培养
+			96 text EXPANSION / BAG
+			97 heading 出征背包, Value: 3
+				98 text 出征背包
+			99 text 增加本次出征可携带的卡牌种类。
+			100 text 本次扩建
+			101 container
+				102 text 16  →  17  格
+			103 definition list
+				104 container 木材成本
+					105 text 木材成本
+				106 text 2 个
+			107 button (disabled) wood ×2 确认扩建
+				108 image wood
+				109 text ×2 确认扩建
+			110 text 木材不足，还需 2
+
+The focused UI element is 43 checkbox tools 基地建设 WORKSHOP, Value: 1

@@ -1,0 +1,51 @@
+{
+  "recordedAtUtc": "2026-10-10T09:43:02.1933237Z",
+  "purpose": "audit source reads only; not a synchronized screenshot build fingerprint",
+  "files": [
+    {
+      "mtimeUtc": "2026-10-10T08:37:13.6266772Z",
+      "sha256": "e8616d5ee70f71be67063a09e1fd13d8aa4817c94b82a191ba2677db4f95a08e",
+      "path": "game/src/hub/game.hub.js"
+    },
+    {
+      "mtimeUtc": "2026-10-10T08:37:15.3715337Z",
+      "sha256": "6b2ba9198e65b61a7058268f668a76c105974ae708cc6744343f07f06975028b",
+      "path": "game/src/hub/game.hub.pages.js"
+    },
+    {
+      "mtimeUtc": "2026-10-10T08:34:39.2905561Z",
+      "sha256": "504f491ea31017591010d690d8e1e1519f495fea5e95182db1d77c02ae47a82b",
+      "path": "game/src/hub/game.hub.depart.js"
+    },
+    {
+      "mtimeUtc": "2026-10-10T08:34:39.2905561Z",
+      "sha256": "b2990e85179569119ab661e58b7e410f8b365d38e23923412d3d07382368960d",
+      "path": "game/src/hub/hub.presentation.js"
+    },
+    {
+      "mtimeUtc": "2026-10-10T08:44:01.7152625Z",
+      "sha256": "3774c45709335a454626394563c86b768327c4ebb8df11591acc119595e8c418",
+      "path": "game/src/hub/hub.warehouse.js"
+    },
+    {
+      "mtimeUtc": "2026-10-10T08:34:41.0004465Z",
+      "sha256": "c55ca59bab69e9310d948a6c62e07cca2c496dfc2621809814db3de2f269868c",
+      "path": "game/src/hub/hub.personnel.js"
+    },
+    {
+      "mtimeUtc": "2026-10-10T07:48:40.6735618Z",
+      "sha256": "88a19757aa78425ca53c968c2432efa749e13ccb3141af534c7fe5ff2c22bc48",
+      "path": "game/src/hub/hub.facilities.js"
+    },
+    {
+      "mtimeUtc": "2026-10-10T08:44:01.7152625Z",
+      "sha256": "a6bfeb5f71208c45977330ccfcb553ed87f9b643951c56c3afd0d5ec6190ae61",
+      "path": "game/src/hub/hub.archive.js"
+    },
+    {
+      "mtimeUtc": "2026-10-10T09:11:31.3167602Z",
+      "sha256": "e05597139222977f7c8063de23a82f72a117e4b7b1d3860bd134e321ae7a06c4",
+      "path": "game/css/base-camp-rework.css"
+    }
+  ]
+}

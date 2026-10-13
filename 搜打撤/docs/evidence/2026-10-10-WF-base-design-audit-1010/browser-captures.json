@@ -1,0 +1,415 @@
+{
+  "gameTab": "1",
+  "referenceTab": "3",
+  "viewport": "1280x720 no override",
+  "records": [
+    {
+      "name": "01-departure-mode",
+      "time": "2026-10-10T09:30:09.595Z",
+      "source": "Codex IAB current window",
+      "stateFile": "01-departure-mode.txt",
+      "image": "01-departure-mode.jpg",
+      "width": 1280,
+      "height": 720,
+      "stateNote": "AX text is a diff snapshot; screenshot is the primary full visual record."
+    },
+    {
+      "name": "02-departure-character",
+      "time": "2026-10-10T09:30:55.890Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "02-departure-character.txt",
+      "image": "02-departure-character.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "03-departure-prep",
+      "time": "2026-10-10T09:31:22.835Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "03-departure-prep.txt",
+      "image": "03-departure-prep.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "04-departure-draft",
+      "time": "2026-10-10T09:31:30.597Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "04-departure-draft.txt",
+      "image": "04-departure-draft.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "05-warehouse",
+      "time": "2026-10-10T09:31:53.047Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "05-warehouse.txt",
+      "image": "05-warehouse.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "06-warehouse-zoom",
+      "time": "2026-10-10T09:32:05.329Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "06-warehouse-zoom.txt",
+      "image": "06-warehouse-zoom.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "07-warehouse-confirm",
+      "time": "2026-10-10T09:32:13.964Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "07-warehouse-confirm.txt",
+      "image": "07-warehouse-confirm.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "08-warehouse-search-empty",
+      "time": "2026-10-10T09:32:22.028Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "08-warehouse-search-empty.txt",
+      "image": "08-warehouse-search-empty.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "09-warehouse-pocket-empty",
+      "time": "2026-10-10T09:32:43.497Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "09-warehouse-pocket-empty.txt",
+      "image": "09-warehouse-pocket-empty.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "10-supply",
+      "time": "2026-10-10T09:32:49.540Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "10-supply.txt",
+      "image": "10-supply.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "11-construction-bag",
+      "time": "2026-10-10T09:33:14.125Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "11-construction-bag.txt",
+      "image": "11-construction-bag.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "12-construction-stash",
+      "time": "2026-10-10T09:33:25.033Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "12-construction-stash.txt",
+      "image": "12-construction-stash.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "13-partner-owned",
+      "time": "2026-10-10T09:33:43.511Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "13-partner-owned.txt",
+      "image": "13-partner-owned.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "14-partner-locked",
+      "time": "2026-10-10T09:34:01.863Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "14-partner-locked.txt",
+      "image": "14-partner-locked.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "15-personnel-profile",
+      "time": "2026-10-10T09:34:10.297Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "15-personnel-profile.txt",
+      "image": "15-personnel-profile.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "16-personnel-cardpool",
+      "time": "2026-10-10T09:34:18.475Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "16-personnel-cardpool.txt",
+      "image": "16-personnel-cardpool.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "17-personnel-card-zoom",
+      "time": "2026-10-10T09:34:26.623Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "17-personnel-card-zoom.txt",
+      "image": "17-personnel-card-zoom.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "18-personnel-costume",
+      "time": "2026-10-10T09:34:41.967Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "18-personnel-costume.txt",
+      "image": "18-personnel-costume.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "19-personnel-costume-preview",
+      "time": "2026-10-10T09:34:53.543Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "19-personnel-costume-preview.txt",
+      "image": "19-personnel-costume-preview.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "20-personnel-rewards",
+      "time": "2026-10-10T09:35:03.101Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "20-personnel-rewards.txt",
+      "image": "20-personnel-rewards.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "21-archive-achievements",
+      "time": "2026-10-10T09:35:30.309Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "21-archive-achievements.txt",
+      "image": "21-archive-achievements.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "22-archive-status-empty",
+      "time": "2026-10-10T09:39:28.837Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "22-archive-status-empty.txt",
+      "image": "22-archive-status-empty.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "23-archive-cardbacks",
+      "time": "2026-10-10T09:40:17.555Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "23-archive-cardbacks.txt",
+      "image": "23-archive-cardbacks.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "24-archive-cardback-locked",
+      "time": "2026-10-10T09:40:27.664Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "24-archive-cardback-locked.txt",
+      "image": "24-archive-cardback-locked.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "25-archive-stories-empty",
+      "time": "2026-10-10T09:40:54.922Z",
+      "source": "Codex IAB current 1280x720 window",
+      "stateFile": "25-archive-stories-empty.txt",
+      "image": "25-archive-stories-empty.jpg",
+      "width": 1280,
+      "height": 720
+    }
+  ],
+  "refRecords": [
+    {
+      "name": "r01-1999-player-profile",
+      "url": "https://files.lemooui.com/picturedata/20220831/1661939001630f2d3f5a7fb.png",
+      "time": "2026-10-10T09:31:22.720Z",
+      "file": "r01-1999-player-profile.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "r02-1999-attributes",
+      "url": "https://files.lemooui.com/picturedata/20220831/1661939001630f2d3954a4a.png",
+      "time": "2026-10-10T09:31:23.898Z",
+      "file": "r02-1999-attributes.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "r03-hsr-inventory",
+      "url": "https://appdata.hungryapp.co.kr/data_file/data_img_m/202510/29/Wh30WAYIWApSDAVUDlIBWQZTWlVVXgZRXQBWWQdUUVZUCVE.jpg",
+      "time": "2026-10-10T09:31:45.750Z",
+      "file": "r03-hsr-inventory.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "r04-1999-shop",
+      "url": "https://files.lemooui.com/picturedata/20220831/1661939316630f2e7489b59.png",
+      "time": "2026-10-10T09:31:54.403Z",
+      "file": "r04-1999-shop.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "r05-arknights-facility",
+      "url": "https://syimg.3dmgame.com/uploadimg/upload/image/20190605/20190605103826_12292.jpg",
+      "time": "2026-10-10T09:32:07.201Z",
+      "file": "r05-arknights-facility.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "r06-1999-costume",
+      "url": "https://files.lemooui.com/picturedata/20220831/1661939001630f2d41133fe.png",
+      "time": "2026-10-10T09:32:15.314Z",
+      "file": "r06-1999-costume.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "r07-1999-roster",
+      "url": "https://files.lemooui.com/picturedata/20220831/1661939001630f2d392fd4c.png",
+      "time": "2026-10-10T09:32:34.429Z",
+      "file": "r07-1999-roster.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "r08-1999-level-up",
+      "url": "https://files.lemooui.com/picturedata/20220831/1661938931630f2cf35b1cb.png",
+      "time": "2026-10-10T09:32:44.353Z",
+      "file": "r08-1999-level-up.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "r09-hsr-character",
+      "url": "https://img1.gamersky.com/image2023/04/20230424_msl_535_22/1283.jpg",
+      "time": "2026-10-10T09:32:50.568Z",
+      "file": "r09-hsr-character.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "r10-hsr-traces",
+      "url": "https://img1.gamersky.com/image2023/04/20230424_msl_535_22/1668.jpg",
+      "time": "2026-10-10T09:33:14.911Z",
+      "file": "r10-hsr-traces.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "r11-zzz-roster-video",
+      "url": "https://www.bilibili.com/video/BV1Wp421X79C/",
+      "time": "2026-10-10T09:33:43.574Z",
+      "file": "r11-zzz-roster-video.jpg",
+      "width": 1265,
+      "height": 712
+    },
+    {
+      "name": "r12-zzz-character-video",
+      "url": "https://www.bilibili.com/video/BV1Wp421X79C/",
+      "time": "2026-10-10T09:34:02.343Z",
+      "file": "r12-zzz-character-video.jpg",
+      "width": 1265,
+      "height": 712
+    },
+    {
+      "name": "r13-zzz-character-video",
+      "url": "https://www.bilibili.com/video/BV1Wp421X79C/",
+      "time": "2026-10-10T09:34:10.959Z",
+      "file": "r13-zzz-character-video.jpg",
+      "width": 1265,
+      "height": 712
+    },
+    {
+      "name": "r14-zzz-detail-video",
+      "url": "https://www.bilibili.com/video/BV1Wp421X79C/",
+      "time": "2026-10-10T09:34:18.862Z",
+      "file": "r14-zzz-detail-video.jpg",
+      "width": 1265,
+      "height": 712
+    },
+    {
+      "name": "r15-zzz-character-video",
+      "url": "https://www.bilibili.com/video/BV1Wp421X79C/",
+      "time": "2026-10-10T09:34:34.856Z",
+      "file": "r15-zzz-character-video.jpg",
+      "width": 1265,
+      "height": 712
+    },
+    {
+      "name": "r16-zzz-list-video",
+      "url": "https://www.bilibili.com/video/BV18E421K7d5/",
+      "time": "2026-10-10T09:34:53.425Z",
+      "file": "r16-zzz-list-video.jpg",
+      "width": 1265,
+      "height": 712
+    },
+    {
+      "name": "r18-genshin-achievements",
+      "url": "https://img1.gamersky.com/image2024/06/20240611_cej_668_5/11213.jpg",
+      "time": "2026-10-10T09:40:55.741Z",
+      "file": "r18-genshin-achievements.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "r17-1999-story-catalog",
+      "url": "https://syimg.3dmgame.com/uploadimg/xiaz/2024/0809/1723193471519.jpg",
+      "time": "2026-10-10T09:41:03.860Z",
+      "file": "r17-1999-story-catalog.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "r19-hsr-departure",
+      "url": "https://media.9game.cn/gamebase/ieu-gdc-pre-process/images/20230523/11/11/6f9146879598989a18f29297f77c584a.jpg",
+      "time": "2026-10-10T09:41:23.167Z",
+      "file": "r19-hsr-departure.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "r20-zzz-list-start",
+      "url": "https://www.bilibili.com/video/BV18E421K7d5/",
+      "time": "2026-10-10T09:43:57.060Z",
+      "file": "r20-zzz-list-start.jpg",
+      "width": 1508,
+      "height": 946
+    }
+  ],
+  "scope": "read-only design audit",
+  "actionsNotPerformed": [
+    "purchase",
+    "sale confirmation",
+    "collect",
+    "apply skin",
+    "train",
+    "hatch",
+    "restore",
+    "upgrade",
+    "start run"
+  ],
+  "incidents": [
+    "unexpected return to title during source read; cause not established",
+    "3DM article connection reset; failed tab metadata rejected data error URL",
+    "second unexpected return to title after all required pages captured; no game action to repair or test"
+  ],
+  "formatNote": "Screenshot bytes are JPEG; initial .png suffixes were corrected without re-encoding.",
+  "animationObservation": "No game page animation certified as empirically passed; only transition/static frames and read-only code reviewed. ZZZ character video sampled at 16.4/34.1/42.7/50.6s, login paused at 60.5s. List clip inspected at ~1.07s and end; no precise animation timing.",
+  "auditCompletedAtUtc": "2026-10-10T09:56:46.838Z"
+}

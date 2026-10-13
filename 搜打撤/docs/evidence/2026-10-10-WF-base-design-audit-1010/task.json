@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-base-design-audit-1010",
+  "date": "2026-10-10",
+  "owner": "Friday（Codex 独立基地设计审核）",
+  "goal": "覆盖基地所有一级二级页面，与重新打开的真实二游参考逐页比较并评分；仅设计审核",
+  "paths": [
+    "docs/evidence/2026-10-10-WF-base-design-audit-1010"
+  ],
+  "doneWhen": [
+    "覆盖全部页面及关键状态，区分实看与证据缺口",
+    "报告包含逐页差异、影响、改法、优先级与六维评分，汇总修正顺序"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "完成23个基地审核切片的设计对照与六维评分，重新打开12项实际参考；报告图片引用完整",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "只写独立审核目录与自有登记；游戏源码、资源、数值和旧任务未改；未跑测试或资源操作",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "全部动画分为设计暂评，未做连续轨迹/精确时序实测；ZZZ录屏60秒后登录阻断",
+    "非空/资源充足/满仓/升级成功/归档培养/奖励领取/故事后期/条件出征入口未安全访问，报告逐页标明C推断与缺口",
+    "共享开发页面两次自行回主菜单，原因未定；本轮截图不声明来自冻结构建；未提交"
+  ],
+  "updatedAt": "2026-10-10T09:57:32.036Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

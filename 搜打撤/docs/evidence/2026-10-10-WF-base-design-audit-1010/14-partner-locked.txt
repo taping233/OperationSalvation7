@@ -1,0 +1,107 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5200/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5200/
+	15 container hubMain
+		16 container
+			17 button 返回选档
+			18 heading 基地, Value: 2
+				19 text 基地
+			57 text 档案 / 01
+			58 image wood
+			59 text 木材 0
+			60 image bread
+			61 text 口粮 0
+			62 image key
+			63 text 钥匙 0
+			64 image coin
+			65 text 储备 0 币
+		29 container 基地分区
+			30 text 基地事务 / BASE
+			31 checkbox flag 出征 EXPEDITION, Value: 0
+				32 image flag
+				33 text 出征
+				34 text EXPEDITION
+			35 checkbox archive 仓库 STORAGE, Value: 0
+				36 image archive
+				37 text 仓库
+				38 text STORAGE
+			39 checkbox coin 补给 SUPPLIES, Value: 0
+				40 image coin
+				41 text 补给
+				42 text SUPPLIES
+			43 checkbox tools 基地建设 WORKSHOP, Value: 0
+				44 image tools
+				45 text 基地建设
+				46 text WORKSHOP
+			47 checkbox medal 人物与伙伴 PERSONNEL, Value: 1
+				48 image medal
+				49 text 人物与伙伴
+				50 text PERSONNEL
+			51 checkbox trophy 档案 ARCHIVES, Value: 0
+				52 image trophy
+				53 text 档案
+				54 text ARCHIVES
+			55 text EXPEDITION BASE · VII
+		56 container
+			66 text PERSONNEL / 远征者
+			67 heading 人物与伙伴, Value: 2
+				68 text 人物与伙伴
+			69 container 远征者分类
+				70 checkbox 人物档案, Value: 0
+				71 checkbox 远征伙伴, Value: 1
+			72 container 伙伴档案切换
+				73 checkbox Description: 查看汪汪狗, Value: 0
+					74 image paw
+					75 text 汪汪狗
+					76 text Lv.1
+				77 checkbox Description: 查看猎鹰宝宝, Value: 1
+					78 image runner
+					79 text 猎鹰宝宝
+					80 text 未相遇
+				81 checkbox Description: 查看招财猫, Value: 0
+					82 image coin
+					83 text 招财猫
+					84 text 未相遇
+				85 checkbox Description: 查看变形机器人, Value: 0
+					86 image tools
+					87 text 变形机器人
+					88 text 未相遇
+				89 checkbox Description: 查看火焰精灵, Value: 0
+					90 image fire
+					91 text 火焰精灵
+					92 text 未相遇
+				93 checkbox Description: 查看小企鹅咕嘎, Value: 0
+					94 image crystal
+					95 text 小企鹅咕嘎
+					96 text 未相遇
+			97 image runner
+			98 text EXPEDITION COMPANION
+			99 heading 猎鹰宝宝, Value: 3
+				100 text 猎鹰宝宝
+			101 text 获得的宝箱为职业宝箱的概率提高至 35% 等待相遇
+			102 text 随行伙伴 / 1·6
+			103 heading 猎鹰宝宝, Value: 3
+				104 text 猎鹰宝宝
+			105 definition list
+				106 container 等级
+					107 text 等级
+				108 text 未拥有
+				109 container 携带时安全格
+					110 text 携带时安全格
+				111 text 2 格
+			112 button (disabled) 携带出征
+			113 container
+				114 heading 伙伴培养, Value: 4
+					115 text 伙伴培养
+				116 text Lv.1 → 2 · 安全格 2 → 3
+				117 button (disabled) bread 2 口粮 · 培养
+					118 image bread
+					119 text 2 口粮 · 培养
+				120 text 相遇后可以培养。
+			121 container
+				122 heading 孵化新伙伴, Value: 4
+					123 text 孵化新伙伴
+				124 text 消耗 1 枚蛋与 50 储备币，随机获得尚未拥有的伙伴。
+				125 button (disabled) 孵化伙伴
+				126 text 宠物蛋可从远征宝箱获得。
+
+The focused UI element is 77 checkbox Description: 查看猎鹰宝宝, Value: 1

@@ -1,0 +1,149 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5200/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5200/
+	1 container hubMain
+		2 container
+			3 button 返回选档
+			4 heading 基地, Value: 2
+				5 text 基地
+			43 text 档案 / 01
+			44 image wood
+			45 text 木材 0
+			46 image bread
+			47 text 口粮 0
+			48 image key
+			49 text 钥匙 0
+			50 image coin
+			51 text 储备 0 币
+		15 container 基地分区
+			16 text 基地事务 / BASE
+			17 checkbox flag 出征 EXPEDITION, Value: 0
+				18 image flag
+				19 text 出征
+				20 text EXPEDITION
+			21 checkbox archive 仓库 STORAGE, Value: 1
+				22 image archive
+				23 text 仓库
+				24 text STORAGE
+			25 checkbox coin 补给 SUPPLIES, Value: 0
+				26 image coin
+				27 text 补给
+				28 text SUPPLIES
+			29 checkbox tools 基地建设 WORKSHOP, Value: 0
+				30 image tools
+				31 text 基地建设
+				32 text WORKSHOP
+			33 checkbox medal 人物与伙伴 PERSONNEL, Value: 0
+				34 image medal
+				35 text 人物与伙伴
+				36 text PERSONNEL
+			37 checkbox trophy 档案 ARCHIVES, Value: 0
+				38 image trophy
+				39 text 档案
+				40 text ARCHIVES
+			41 text EXPEDITION BASE · VII
+		42 container
+			52 text STORAGE / 战利品
+			53 heading 仓库, Value: 2
+				54 text 仓库
+			55 text 浏览、收藏与归档，为下一次远征做好准备。
+			56 container 仓库分区
+				57 checkbox 卡牌仓库 5/25, Value: 1
+					58 text 卡牌仓库
+					59 text 5/25
+				60 checkbox 待复原卡牌 0, Value: 0
+					61 text 待复原卡牌
+					62 text 0
+			63 text 搜索
+			64 text field (settable) 搜索仓库卡牌
+			65 pop up button (collapsed, settable) Description: 筛选卡牌类型, Value: 全部类型, Secondary Actions: Expand
+				66 menu
+					67 (selected) 全部类型
+					68 武术
+					69 法术
+			70 pop up button (collapsed, settable) Description: 筛选卡牌品质, Value: 全部品质, Secondary Actions: Expand
+				71 menu
+					72 (selected) 全部品质
+					73 古朴
+					74 稀有
+			75 text 5 种卡牌
+			76 button 查看木材
+				77 image wood
+				78 text 0
+			79 button 查看口粮
+				80 image bread
+				81 text 0
+			82 container 卡牌陈列
+				83 checkbox Description: 选择箭雨, Value: 1
+					84 container
+						85 text 1
+						86 image 箭雨
+						87 text 箭雨 武术 · 古朴
+						88 container
+							89 text 古朴 古朴
+						90 text 攻（ -1 ），目标为敌方全体。
+					91 text ×1
+				92 checkbox Description: 选择迅疾箭, Value: 0
+					93 container
+						94 text 1
+						95 image 迅疾箭
+						96 text 迅疾箭 武术 · 古朴
+						97 container
+							98 text 古朴 古朴
+						99 image cards
+						100 text 抽 1 攻（ -1 ），抽  1  张牌。
+					101 text ×1
+				102 checkbox Description: 选择连击箭, Value: 0
+					103 container
+						104 text 1
+						105 image 连击箭
+						106 text 连击箭 武术 · 古朴
+						107 container
+							108 text 古朴 古朴
+						109 text 攻（ -1 ）；如果你打出的上一张牌是武术牌，本牌变为 0 费。
+					110 text ×1
+				111 checkbox Description: 选择屏障修复, Value: 0
+					112 container
+						113 text 1
+						114 image 屏障修复
+						115 text 屏障修复 法术 · 古朴
+						116 container
+							117 text 古朴 古朴
+						118 image plate
+						119 text 甲 6 获得 6 点 护甲 ，如果你此时没有 护甲 ，该牌变为 0 费
+					120 text ×1
+				121 checkbox Description: 选择影噬, Value: 0
+					122 container
+						123 text 1
+						124 image 影噬
+						125 text 影噬 武术 · 稀有
+						126 container
+							127 text 稀有 稀有
+						128 text 本 回合 偷取  1  名敌人的攻击力至 1 点。
+					129 text ×1
+			130 container 选中卡牌详情
+				131 container
+					132 text 1
+					133 image 箭雨
+					134 text 箭雨 武术 · 古朴
+					135 container
+						136 text 古朴 古朴
+					137 text 攻（ -1 ），目标为敌方全体。
+				138 container
+					139 text 武术 / 古朴
+					140 heading 箭雨, Value: 3
+						141 text 箭雨
+				142 text 攻（-1），目标为敌方全体。
+				143 definition list
+					144 container 持有
+						145 text 持有
+					146 text 1 张
+					147 container 收购价
+						148 text 收购价
+					149 text 2 币 / 张
+				150 button 放大查看
+				151 text 加入收藏会保留卡牌，并保护它不被卖出。
+				152 container
+					153 button 加入收藏
+					154 button 卖出 1 张
+
+The focused UI element is 21 checkbox archive 仓库 STORAGE, Value: 1

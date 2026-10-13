@@ -1,0 +1,103 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5200/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5200/
+	15 container hubMain
+		16 container
+			17 button 返回选档
+			18 heading 基地, Value: 2
+				19 text 基地
+			57 text 档案 / 01
+			58 image wood
+			59 text 木材 0
+			60 image bread
+			61 text 口粮 0
+			62 image key
+			63 text 钥匙 0
+			64 image coin
+			65 text 储备 0 币
+		29 container 基地分区
+			30 text 基地事务 / BASE
+			31 checkbox flag 出征 EXPEDITION, Value: 0
+				32 image flag
+				33 text 出征
+				34 text EXPEDITION
+			35 checkbox archive 仓库 STORAGE, Value: 0
+				36 image archive
+				37 text 仓库
+				38 text STORAGE
+			39 checkbox coin 补给 SUPPLIES, Value: 1
+				40 image coin
+				41 text 补给
+				42 text SUPPLIES
+			43 checkbox tools 基地建设 WORKSHOP, Value: 0
+				44 image tools
+				45 text 基地建设
+				46 text WORKSHOP
+			47 checkbox medal 人物与伙伴 PERSONNEL, Value: 0
+				48 image medal
+				49 text 人物与伙伴
+				50 text PERSONNEL
+			51 checkbox trophy 档案 ARCHIVES, Value: 0
+				52 image trophy
+				53 text 档案
+				54 text ARCHIVES
+			55 text EXPEDITION BASE · VII
+		56 container
+			66 text 03 / SUPPLY
+			67 heading 补给商店, Value: 2
+				68 text 补给商店
+			69 text 准备下一趟远征，从一份可靠的补给开始。
+			70 image coin
+			71 text 0
+			72 text 储备币
+			73 text 卡牌买入仓库，在出发整备时携带；木材与口粮直接计入基地物资。
+			74 text 仓库可用  20  格
+			75 button archive 管理仓库
+				76 image archive
+				77 text 管理仓库
+			78 container 基地补给商品
+				79 container
+					80 text 1
+					81 image 穿刺
+					82 text 穿刺
+					83 container
+						84 text 武术 · 古朴 古朴 古朴
+					85 container
+						86 text 攻（ +2 ），附加破甲，持续  1 回合 。
+					87 text 武术 穿刺 攻（+2），附加破甲，持续 1 回合。
+					88 image coin
+					89 text  储备币不足
+					90 button (disabled) 购买穿刺，6储备币
+						91 image coin
+						92 text 6 购买
+				93 container
+					94 text 0
+					95 image 法杖
+					96 text 法杖
+					97 container
+						98 text 装备 · 古朴 古朴 古朴
+					99 container
+						100 text 法伤 +1 。
+					101 text 装备 法杖 法伤 +1。
+					102 image coin
+					103 text  储备币不足
+					104 button (disabled) 购买法杖，6储备币
+						105 image coin
+						106 text 6 购买
+				107 container
+					108 image bread
+					109 text 基地物资 口粮 基地物资 +1 · 升级宠物
+					110 image coin
+					111 text  储备币不足
+					112 button (disabled) 购买口粮，4储备币
+						113 image coin
+						114 text 4 购买
+				115 container
+					116 image wood
+					117 text 基地物资 木材 基地物资 +1 · 扩建背包与仓库
+					118 image coin
+					119 text  储备币不足
+					120 button (disabled) 购买木材，4储备币
+						121 image coin
+						122 text 4 购买
+
+The focused UI element is 39 checkbox coin 补给 SUPPLIES, Value: 1

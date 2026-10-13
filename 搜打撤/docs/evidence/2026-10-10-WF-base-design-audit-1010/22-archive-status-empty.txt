@@ -1,0 +1,78 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5200/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5200/
+	2 container hubMain
+		3 container
+			4 button 返回选档
+			5 heading 基地, Value: 2
+				6 text 基地
+			43 text 档案 / 01
+			44 image wood
+			45 text 木材 0
+			46 image bread
+			47 text 口粮 0
+			48 image key
+			49 text 钥匙 0
+			50 image coin
+			51 text 储备 0 币
+		16 container 基地分区
+			17 text 基地事务 / BASE
+			18 checkbox flag 出征 EXPEDITION, Value: 0
+				19 image flag
+				20 text 出征
+				21 text EXPEDITION
+			22 checkbox archive 仓库 STORAGE, Value: 0
+				23 image archive
+				24 text 仓库
+				25 text STORAGE
+			26 checkbox coin 补给 SUPPLIES, Value: 0
+				27 image coin
+				28 text 补给
+				29 text SUPPLIES
+			30 checkbox tools 基地建设 WORKSHOP, Value: 0
+				31 image tools
+				32 text 基地建设
+				33 text WORKSHOP
+			34 checkbox medal 人物与伙伴 PERSONNEL, Value: 0
+				35 image medal
+				36 text 人物与伙伴
+				37 text PERSONNEL
+			38 checkbox trophy 档案 ARCHIVES, Value: 1
+				39 image trophy
+				40 text 档案
+				41 text ARCHIVES
+			42 text EXPEDITION BASE · VII
+		52 container
+			53 text 06 / ARCHIVE
+			54 heading 档案室, Value: 2
+				55 text 档案室
+			56 text 卡背  1/7 · 成就  0/26 · 人物收藏  0/68
+			57 container 收藏分类
+				58 checkbox cards 卡背图鉴, Value: 0
+					59 image cards
+					60 text 卡背图鉴
+				61 checkbox trophy 成就记录, Value: 1
+					62 image trophy
+					63 text 成就记录
+				64 checkbox notes 见闻纪念, Value: 0
+					65 image notes
+					66 text 见闻纪念
+			67 heading trophy 成就记录 0 / 26 已解锁, Value: 3
+				68 image trophy
+				69 text  成就记录 
+				70 text 0 / 26 已解锁
+			71 container 成就状态
+				72 checkbox 全部 26, Value: 0
+					73 text 全部
+					74 text 26
+				75 checkbox 可领取 0, Value: 1
+					76 text 可领取
+					77 text 0
+				78 checkbox 进行中 26, Value: 0
+					79 text 进行中
+					80 text 26
+				81 checkbox 已完成 0, Value: 0
+					82 text 已完成
+					83 text 0
+			84 text 当前分类暂无成就记录。
+
+The focused UI element is 75 checkbox 可领取 0, Value: 1

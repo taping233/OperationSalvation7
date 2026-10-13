@@ -1,0 +1,422 @@
+{
+  "kind": "artifact-reference-and-completeness-review",
+  "testsRun": false,
+  "pages": 23,
+  "references": 12,
+  "gameDimensions": [
+    "1280x720"
+  ],
+  "lastReferenceDimensions": "1508x946",
+  "sourceImages": 45,
+  "allLinkedImagesExist": true,
+  "allPagesHaveSixScores": true,
+  "sourceReadFingerprintsAreFrozenBuild": false,
+  "implementationAuthorized": false,
+  "images": [
+    {
+      "file": "01-departure-mode.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 66168,
+      "sha256": "1e0f43ef8c9a8393682ffc55fff5bdcebc82685a08185f961d483279087ca1a6",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "02-departure-character.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 70860,
+      "sha256": "5f75b7245238a3b6ccd563ced487ae92aed89b984575ba6d88d55c87687ef165",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "03-departure-prep.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 77386,
+      "sha256": "2e395f0c8e12d7f4b0a60998c6a56f2730d4c8da735766256237ed446d53d822",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "04-departure-draft.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 69350,
+      "sha256": "dddd2abe9d8e5f920fd1f912e44fe8d16d7899d9beb7b453769608ba4236e200",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "05-warehouse.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 78027,
+      "sha256": "4e7d0dd7cccaaccacc14b2d04b0ad289bcb88b937f11c3e344f85ea3e5f0b276",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "06-warehouse-zoom.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 28226,
+      "sha256": "f7ea3fcbeb222c63790d885fb69789c57d39096764c6fde4406e725f1c2dd727",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "07-warehouse-confirm.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 78601,
+      "sha256": "98b1c00782f90b3085ec50b5653533624a4942c4f50d0ed256dedc216dc8c80b",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "08-warehouse-search-empty.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 37282,
+      "sha256": "2c22ca4c5389a52a51b19b462dc71f93c9bcec7afaf033a84cdbcda650dc8e2f",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "09-warehouse-pocket-empty.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 39554,
+      "sha256": "790036d58e92c4f319eec07e4731c46cfabb7f5e8c7f93cea54a2bf34c8536ea",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "10-supply.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 55805,
+      "sha256": "cbbbbfbd26aa044b49bddb746b4f82f17d010724a47c349b524c24c6fafc5d74",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "11-construction-bag.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 47101,
+      "sha256": "2a25292c3de0cd881a6d2ba65aabcd32e608f666036e3144b9ff471fe821296b",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "12-construction-stash.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 47598,
+      "sha256": "fdbf8bba3204a708df53714479cc47116a1d07fc4aa85f99c21c913f2484b38c",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "13-partner-owned.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 52381,
+      "sha256": "3938ba8d8abb4ac1da383a66bd65b33c3e29e57aeda920965b56a25f2a072f14",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "14-partner-locked.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 53398,
+      "sha256": "841b713fc2296f9739b604618b5b4401db3ce47eb58c05ce2e42f25754d086a0",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "15-personnel-profile.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 80674,
+      "sha256": "31e018795674b6ab002fce035fd79038bd09ded3ee4daf76905ddcc9cfc45f8c",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "16-personnel-cardpool.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 89001,
+      "sha256": "fd3fefd08eaaeab9f8ab572b534954c318bf81500c03cf185d8cedb6707d657b",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "17-personnel-card-zoom.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 29363,
+      "sha256": "25abb1a39242ca5ebffb4889848d81a0baf10f72f5ae13604dee1cf9d655f965",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "18-personnel-costume.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 87970,
+      "sha256": "3658e53adfc8194dc3de099d2785c0e0cb50079502792ccb7f0dbfb274ef7c18",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "19-personnel-costume-preview.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 69032,
+      "sha256": "603677892160da77d9e2f61789b1796859f14578d3aa381b28c9019f981312b7",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "20-personnel-rewards.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 62870,
+      "sha256": "27fd998dea9ee41cd45f6a4df5c875ea895776dd65d26b5666c620db9c45d4c5",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "21-archive-achievements.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 61881,
+      "sha256": "23c06eead52dbd2e5d52cd7d5322cc0437552fbd8c0a846ac926d643a14e7ae1",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "22-archive-status-empty.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 34510,
+      "sha256": "792889a0d936a4b2fbb0ad642f99fbcb7bb1446e2ce417a3650f752e643999ad",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "23-archive-cardbacks.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 72877,
+      "sha256": "388c2f2f477624fe7507f1c4cbd586af618c481776b81b3437161e93c55a7b11",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "24-archive-cardback-locked.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 73285,
+      "sha256": "23a57c705e65039cc31075544470feb684b580bd5fe3f43b8a44194998e2a769",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "25-archive-stories-empty.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 34237,
+      "sha256": "f497406899dd8e2080599c0c992faf0116f09f7bf16e0c1ff64a97c4e00ea5e3",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r01-1999-player-profile.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 89077,
+      "sha256": "61bdd820c1e6e8aa84b9eff2f8a5bbcb3eae635101d1b3f03e4ebb060e4f73ad",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r02-1999-attributes.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 121924,
+      "sha256": "f9d12878203c4b5724222b066c697a33778a5c5fd4c7c8cb23292cef661b0c2d",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r03-hsr-inventory.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 107401,
+      "sha256": "c699a83766dfb6d28fcd11294eeb1e5bbe64e18c7832425589ebcd51bb307177",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r04-1999-shop.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 97046,
+      "sha256": "f3e3fe6a19c259c8f49e18c5f57b9d8b46bb2ef6aedfc8383f09930afd720db0",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r05-arknights-facility.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 96874,
+      "sha256": "9609764cc5931424ae924aa8bb7a50a19af2264990a8a7a2cc11ee1cb8ab7f78",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r06-1999-costume.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 73631,
+      "sha256": "2cf795d7cdefb04bd101e47b755128ecd26ef9911535f2947c8f575ddd720f1f",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r07-1999-roster.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 87185,
+      "sha256": "2d5d693cee71035774d6e25cb0f9fbd2ae0ba568db1a5c443c55507faee2cc6f",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r08-1999-level-up.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 37003,
+      "sha256": "c0dd3367dad12b9502701c3c68433442e2004087dce3bf900559fd520ed9d0af",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r09-hsr-character.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 30845,
+      "sha256": "8a23cd9389dd02ed36c8bb1d80f5189396d5735d9390b5958c723db16cf949ff",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r10-hsr-traces.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 24509,
+      "sha256": "3088a081579b162575ac819a3ba8d47acf2f9a8f7b3f312769eb6b4db45b2697",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r11-zzz-roster-video.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 105392,
+      "sha256": "1e4718f51d4c9e9625baed25c798561dca8b05adf9c00dea920186cc727b5f7f",
+      "width": 1265,
+      "height": 712,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r12-zzz-character-video.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 113995,
+      "sha256": "490e05054bb03744082c24342e3d383152a6e25ae923a22c11ad95f4ce885390",
+      "width": 1265,
+      "height": 712,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r13-zzz-character-video.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 103358,
+      "sha256": "7823a53d05be29f2fc8129e57e35afbb05f21a35f60a271bcf032d1ad5484826",
+      "width": 1265,
+      "height": 712,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r14-zzz-detail-video.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 102574,
+      "sha256": "1578a82c577134a01a676af3cd74894d059665884d7a2d77df5d2ffb98de85d0",
+      "width": 1265,
+      "height": 712,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r15-zzz-character-video.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 81943,
+      "sha256": "57630d0cb703bfef7e0a2ac92a2b7327ac5609a14a40aa66c7c70fe9343e27d1",
+      "width": 1265,
+      "height": 712,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r16-zzz-list-video.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 124798,
+      "sha256": "5b169a6ce65f7bc04d91ee27319c254f2048578f0f10cd6a188f16906c20e0d8",
+      "width": 1265,
+      "height": 712,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r17-1999-story-catalog.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 31079,
+      "sha256": "4f0f6a753ca8a87c865bd0e64ba1d8e5152525f1125e864ebe8f46297691b8b9",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r18-genshin-achievements.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 75225,
+      "sha256": "5780fa00f2d1bb6f0e07834c37163ab987f2c2a498014323ffb86d23e50d0e6e",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r19-hsr-departure.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 88605,
+      "sha256": "7983f5fabf34a49a577e04a4077dff9ee1ee85d3080ad4dacc8c1ca611bca8ff",
+      "width": 1280,
+      "height": 720,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    },
+    {
+      "file": "r20-zzz-list-start.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 118287,
+      "sha256": "694111370ed612c484da5d421d3498bc3cc85f2469c7206e8586f4bdb3a11dad",
+      "width": 1508,
+      "height": 946,
+      "captureMethod": "Codex IAB screenshot; original bytes retained"
+    }
+  ]
+}

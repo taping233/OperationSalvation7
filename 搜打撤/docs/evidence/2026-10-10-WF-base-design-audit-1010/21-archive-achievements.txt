@@ -1,0 +1,271 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5200/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5200/
+	1 container hubMain
+		2 container
+			3 button 返回选档
+			4 heading 基地, Value: 2
+				5 text 基地
+			43 text 档案 / 01
+			44 image wood
+			45 text 木材 0
+			46 image bread
+			47 text 口粮 0
+			48 image key
+			49 text 钥匙 0
+			50 image coin
+			51 text 储备 0 币
+		15 container 基地分区
+			16 text 基地事务 / BASE
+			17 checkbox flag 出征 EXPEDITION, Value: 0
+				18 image flag
+				19 text 出征
+				20 text EXPEDITION
+			21 checkbox archive 仓库 STORAGE, Value: 0
+				22 image archive
+				23 text 仓库
+				24 text STORAGE
+			25 checkbox coin 补给 SUPPLIES, Value: 0
+				26 image coin
+				27 text 补给
+				28 text SUPPLIES
+			29 checkbox tools 基地建设 WORKSHOP, Value: 0
+				30 image tools
+				31 text 基地建设
+				32 text WORKSHOP
+			33 checkbox medal 人物与伙伴 PERSONNEL, Value: 0
+				34 image medal
+				35 text 人物与伙伴
+				36 text PERSONNEL
+			37 checkbox trophy 档案 ARCHIVES, Value: 1
+				38 image trophy
+				39 text 档案
+				40 text ARCHIVES
+			41 text EXPEDITION BASE · VII
+		42 container
+			52 text 06 / ARCHIVE
+			53 heading 档案室, Value: 2
+				54 text 档案室
+			55 text 卡背  1/7 · 成就  0/26 · 人物收藏  0/68
+			56 container 收藏分类
+				57 checkbox cards 卡背图鉴, Value: 0
+					58 image cards
+					59 text 卡背图鉴
+				60 checkbox trophy 成就记录, Value: 1
+					61 image trophy
+					62 text 成就记录
+				63 checkbox notes 见闻纪念, Value: 0
+					64 image notes
+					65 text 见闻纪念
+			66 heading trophy 成就记录 0 / 26 已解锁, Value: 3
+				67 image trophy
+				68 text  成就记录 
+				69 text 0 / 26 已解锁
+			70 container 成就状态
+				71 checkbox 全部 26, Value: 1
+					72 text 全部
+					73 text 26
+				74 checkbox 可领取 0, Value: 0
+					75 text 可领取
+					76 text 0
+				77 checkbox 进行中 26, Value: 0
+					78 text 进行中
+					79 text 26
+				80 checkbox 已完成 0, Value: 0
+					81 text 已完成
+					82 text 0
+			83 container
+				84 image exit
+				85 text 初出茅庐 首次撤离成功
+				86 image wood
+				87 text  ×2
+				88 image lock
+				89 text  待完成
+			90 container
+				91 image bag
+				92 text 老练搜刮者 累计撤离成功 3 次
+				93 image bread
+				94 text  ×2
+				95 image lock
+				96 text  待完成
+			97 container
+				98 image swords
+				99 text 猎手 累计击败 10 个敌人
+				100 image wood
+				101 text  ×2 
+				102 image cards
+				103 text  猎手皮纸
+				104 image lock
+				105 text  待完成
+			106 container
+				107 image skull
+				108 text 破壁者 首次击败污染核心的变异首脑
+				109 image wood
+				110 text  ×3 
+				111 image cards
+				112 text  弑神黑曜
+				113 image lock
+				114 text  待完成
+			115 container
+				116 image crystal
+				117 text 净化征服者 击败全部 3 只变异首脑
+				118 image bread
+				119 text  ×3 
+				120 image cards
+				121 text  核心星轨
+				122 image lock
+				123 text  待完成
+			124 container
+				125 image coin
+				126 text 小有积蓄 单局撤离时携带 ≥ 30 币
+				127 image bread
+				128 text  ×2 
+				129 image cards
+				130 text  富商锦缎
+				131 image lock
+				132 text  待完成
+			133 container
+				134 image archive
+				135 text 仓廪充实 累计运回 20 张卡牌入库
+				136 image bread
+				137 text  ×2 
+				138 image cards
+				139 text  仓廪木纹
+				140 image lock
+				141 text  待完成
+			142 container
+				143 image bag
+				144 text 能工巧匠 背包扩建至满级（30 格）
+				145 image bread
+				146 text  ×3
+				147 image lock
+				148 text  待完成
+			149 container
+				150 image paw
+				151 text 最忠实的伙伴 宠物安全格升满（6 格）
+				152 image wood
+				153 text  ×3 
+				154 image cards
+				155 text  忠犬爪印
+				156 image lock
+				157 text  待完成
+			158 container
+				159 image medal
+				160 text 崭露头角 任意职业熟练度达到 3 级
+				161 image wood
+				162 text  ×2
+				163 image lock
+				164 text  待完成
+			165 container
+				166 image coin
+				167 text 珍品收藏家 收藏桌游珍宝「金币」
+				168 image wood
+				169 text  ×2
+				170 image lock
+				171 text  待完成
+			172 container
+				173 image medal
+				174 text 传说典藏 收藏任意一张传说卡牌
+				175 image bread
+				176 text  ×2
+				177 image lock
+				178 text  待完成
+			179 container
+				180 image home
+				181 text 博物学家 收藏 5 张不同的卡牌
+				182 image bread
+				183 text  ×3
+				184 image lock
+				185 text  待完成
+			186 container
+				187 image paw
+				188 text 驯养新手 首次孵化出一只宠物
+				189 image bread
+				190 text  ×2
+				191 image lock
+				192 text  待完成
+			193 container
+				194 image crystal
+				195 text 孵蛋专家 累计孵化 3 只宠物
+				196 image wood
+				197 text  ×2
+				198 image lock
+				199 text  待完成
+			200 container
+				201 image medal
+				202 text 心有灵犀 任意宠物升到满级（Lv.5）
+				203 image wood
+				204 text  ×3
+				205 image lock
+				206 text  待完成
+			207 container
+				208 image home
+				209 text 宠物满堂 集齐全部 6 只宠物
+				210 image bread
+				211 text  ×4
+				212 image lock
+				213 text  待完成
+			214 container
+				215 image bolt
+				216 text 无限能源 在一回合内打出 10 张及以上的招式（0 费连招流可达成）
+				217 image bread
+				218 text  ×2
+				219 image lock
+				220 text  待完成
+			221 container
+				222 image swords
+				223 text 武器大师 在一场战斗中穿戴 5 件装备及以上
+				224 image wood
+				225 text  ×2
+				226 image lock
+				227 text  待完成
+			228 container
+				229 image gem
+				230 text 符文爱好者 仓库拥有 5 块不同属性的符文
+				231 image key
+				232 text  ×2
+				233 image lock
+				234 text  待完成
+			235 container
+				236 image exit
+				237 text 拯救者 击败 2 位研究所最终 BOSS
+				238 image bread
+				239 text  ×4
+				240 image lock
+				241 text  待完成
+			242 container
+				243 image sparkles
+				244 text 好美的花瓶！ 仓库拥有 1 块双属性的彩虹符文
+				245 image key
+				246 text  ×3
+				247 image lock
+				248 text  待完成
+			249 container
+				250 image runner
+				251 text 借过 一回合内击杀完全形态·元素领主的复活体
+				252 image wood
+				253 text  ×3
+				254 image lock
+				255 text  待完成
+			256 container
+				257 image gem
+				258 text 实验数据·铜 研究所累计结算分数达 500
+				259 image key
+				260 text  ×3
+				261 image lock
+				262 text  待完成
+			263 container
+				264 image gem
+				265 text 实验数据·银 研究所累计结算分数达 1500
+				266 image cards
+				267 text  雷殛
+				268 image lock
+				269 text  待完成
+			270 container
+				271 image crystal
+				272 text 实验数据·金 研究所累计结算分数达 4000
+				273 image cards
+				274 text  骷髅王剑
+				275 image lock
+				276 text  待完成
+
+The focused UI element is 37 checkbox trophy 档案 ARCHIVES, Value: 1

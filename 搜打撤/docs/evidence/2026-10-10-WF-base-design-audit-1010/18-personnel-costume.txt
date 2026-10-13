@@ -1,0 +1,101 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5200/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5200/
+	1 container hubMain
+		2 container
+			3 button 返回选档
+			4 heading 基地, Value: 2
+				5 text 基地
+			72 text 档案 / 01
+			73 image wood
+			74 text 木材 0
+			75 image bread
+			76 text 口粮 0
+			77 image key
+			78 text 钥匙 0
+			79 image coin
+			80 text 储备 0 币
+		15 container 基地分区
+			16 text 基地事务 / BASE
+			17 checkbox flag 出征 EXPEDITION, Value: 0
+				18 image flag
+				19 text 出征
+				20 text EXPEDITION
+			21 checkbox archive 仓库 STORAGE, Value: 0
+				22 image archive
+				23 text 仓库
+				24 text STORAGE
+			25 checkbox coin 补给 SUPPLIES, Value: 0
+				26 image coin
+				27 text 补给
+				28 text SUPPLIES
+			29 checkbox tools 基地建设 WORKSHOP, Value: 0
+				30 image tools
+				31 text 基地建设
+				32 text WORKSHOP
+			33 checkbox medal 人物与伙伴 PERSONNEL, Value: 1
+				34 image medal
+				35 text 人物与伙伴
+				36 text PERSONNEL
+			37 checkbox trophy 档案 ARCHIVES, Value: 0
+				38 image trophy
+				39 text 档案
+				40 text ARCHIVES
+			41 text EXPEDITION BASE · VII
+		42 container
+			43 text PERSONNEL / 远征者
+			44 heading 人物与伙伴, Value: 2
+				45 text 人物与伙伴
+			46 container 远征者分类
+				81 checkbox 人物档案, Value: 1
+				82 checkbox 远征伙伴, Value: 0
+			49 container 人物内容
+				83 checkbox 档案, Value: 0
+				84 checkbox 卡池, Value: 0
+				85 checkbox 外观, Value: 1
+				86 checkbox 收藏奖励, Value: 0
+			54 container 人物档案切换
+				55 checkbox Description: 查看无的档案, Value: 1
+					56 text 无
+					57 text 侠客
+				58 checkbox Description: 查看黑像的档案, Value: 0
+					59 text 黑像
+					60 text 战士
+				61 checkbox Description: 查看星月的档案, Value: 0
+					62 text 星月
+					63 text 牧师
+				64 checkbox Description: 查看白塔的档案, Value: 0
+					65 text 白塔
+					66 text 法师
+				67 checkbox Description: 查看常无欲的档案, Value: 0
+					68 text 常无欲
+					69 text 降临者
+			70 image 无立绘
+			71 container
+				87 text 侠客
+				88 heading 无, Value: 3
+					89 text 无
+			90 container
+				91 text 侠客 / PERSONNEL
+				92 heading 无, Value: 3
+					93 text 无
+			94 heading 外观预览, Value: 4
+				95 text 外观预览
+			96 checkbox 默认外观 默认 可预览, Value: 0
+				97 image 默认外观
+				98 text 默认
+				99 text 可预览
+			100 checkbox 春日·机车 春日·机车 已装备, Value: 1
+				101 image 春日·机车
+				102 text 春日·机车
+				103 text 已装备
+			104 checkbox 新春·旗袍 新春·旗袍 可预览, Value: 0
+				105 image 新春·旗袍
+				106 text 新春·旗袍
+				107 text 可预览
+			108 checkbox 盛夏·水枪 盛夏·水枪 可预览, Value: 0
+				109 image 盛夏·水枪
+				110 text 盛夏·水枪
+				111 text 可预览
+			112 button (disabled) 当前外观已装备
+
+The focused UI element is 85 checkbox 外观, Value: 1

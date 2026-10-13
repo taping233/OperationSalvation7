@@ -1,0 +1,72 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5200/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5200/
+	1 container hubMain
+		2 container
+			3 button 返回选档
+			4 heading 基地, Value: 2
+				5 text 基地
+			6 text 档案 / 01
+			7 image wood
+			8 text 木材 0
+			9 image bread
+			10 text 口粮 0
+			11 image key
+			12 text 钥匙 0
+			13 image coin
+			14 text 储备 0 币
+		15 container 基地分区
+			16 text 基地事务 / BASE
+			17 checkbox flag 出征 EXPEDITION, Value: 1
+				18 image flag
+				19 text 出征
+				20 text EXPEDITION
+			21 checkbox archive 仓库 STORAGE, Value: 0
+				22 image archive
+				23 text 仓库
+				24 text STORAGE
+			25 checkbox coin 补给 SUPPLIES, Value: 0
+				26 image coin
+				27 text 补给
+				28 text SUPPLIES
+			29 checkbox tools 基地建设 WORKSHOP, Value: 0
+				30 image tools
+				31 text 基地建设
+				32 text WORKSHOP
+			33 checkbox medal 人物与伙伴 PERSONNEL, Value: 0
+				34 image medal
+				35 text 人物与伙伴
+				36 text PERSONNEL
+			37 checkbox trophy 档案 ARCHIVES, Value: 0
+				38 image trophy
+				39 text 档案
+				40 text ARCHIVES
+			41 text EXPEDITION BASE · VII
+		42 container
+			43 container
+				69 text VII
+				45 text WINTER EXPEDITION
+				46 text 下一次远征，从这里开始。
+				47 text 模式选择 → 人物选择 → 卡牌整备
+			48 text FIELD DOSSIER / 行动档案 01—03 本次行动
+			49 text 标准搜打撤
+			50 text 规则无修正
+			51 container
+				52 text 01 / 选择行动模式
+				53 checkbox map 标准搜打撤 完整四层节点图：探索、搜刮与战斗，第四层经祭坛决战首脑后终局撤离。, Value: 1
+					54 image map
+					55 text 标准搜打撤
+					56 text 完整四层节点图：探索、搜刮与战斗，第四层经祭坛决战首脑后终局撤离。
+				57 checkbox fire 精英突袭 敌人与 BOSS 属性 ×1.5，战斗掉落金币 ×1.5，人物经验 +50%，高稀有度卡牌爆率 +20%。高风险高回报。, Value: 0
+					58 image fire
+					59 text 精英突袭
+					60 text 敌人与 BOSS 属性 ×1.5，战斗掉落金币 ×1.5，人物经验 +50%，高稀有度卡牌爆率 +20%。高风险高回报。
+			61 image bag
+			62 text  背包  16 格
+			63 image paw
+			64 text  安全格  2 格
+			65 button 03 继续整备, ID: btnDeploy
+				66 text 03
+				67 text 继续整备
+			68 text 整备草稿：无 · 已选择 0 张卡牌 · 可以返回修改
+
+The focused UI element is 65 button 03 继续整备, ID: btnDeploy

@@ -1,0 +1,140 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5200/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5200/
+	1 container hubMain
+		2 container
+			3 button 返回选档
+			4 heading 基地, Value: 2
+				5 text 基地
+			43 text 档案 / 01
+			44 image wood
+			45 text 木材 0
+			46 image bread
+			47 text 口粮 0
+			48 image key
+			49 text 钥匙 0
+			50 image coin
+			51 text 储备 0 币
+		15 container 基地分区
+			16 text 基地事务 / BASE
+			17 checkbox flag 出征 EXPEDITION, Value: 0
+				18 image flag
+				19 text 出征
+				20 text EXPEDITION
+			21 checkbox archive 仓库 STORAGE, Value: 0
+				22 image archive
+				23 text 仓库
+				24 text STORAGE
+			25 checkbox coin 补给 SUPPLIES, Value: 0
+				26 image coin
+				27 text 补给
+				28 text SUPPLIES
+			29 checkbox tools 基地建设 WORKSHOP, Value: 0
+				30 image tools
+				31 text 基地建设
+				32 text WORKSHOP
+			33 checkbox medal 人物与伙伴 PERSONNEL, Value: 1
+				34 image medal
+				35 text 人物与伙伴
+				36 text PERSONNEL
+			37 checkbox trophy 档案 ARCHIVES, Value: 0
+				38 image trophy
+				39 text 档案
+				40 text ARCHIVES
+			41 text EXPEDITION BASE · VII
+		42 container
+			52 text PERSONNEL / 远征者
+			53 heading 人物与伙伴, Value: 2
+				54 text 人物与伙伴
+			55 container 远征者分类
+				56 checkbox 人物档案, Value: 1
+				57 checkbox 远征伙伴, Value: 0
+			58 container 人物内容
+				59 checkbox 档案, Value: 0
+				60 checkbox 卡池, Value: 0
+				61 checkbox 外观, Value: 0
+				62 checkbox 收藏奖励, Value: 1
+			63 container
+				64 heading 人物收藏, Value: 3
+					65 text 人物收藏
+				66 text 已归档  0  / 68 张
+				67 button archive 前往仓库收藏
+					68 image archive
+					69 text 前往仓库收藏
+			70 container
+				71 text 收藏会消耗卡牌并转为人物经验：职业卡  +10 ，能力卡  +50 。重复收藏仍获得经验，首次收藏推进图鉴与阶段奖励。
+			72 text 收藏 5 张
+			73 image wood
+			74 text  木材 ×3 0 / 5
+			75 text 收藏 15 张
+			76 image bread
+			77 text  口粮 ×5 0 / 15
+			78 text 收藏 30 张
+			79 image key
+			80 text  钥匙 ×10 0 / 30
+			81 text 收藏 45 张
+			82 image medal
+			83 text  传说卡 ×2 0 / 45
+			84 text 收藏 68 张
+			85 image crystal
+			86 text  宠物蛋 ×1 0 / 68
+			87 container
+				88 button (expanded) 无侠客 查看收藏 0 / 14 张, Secondary Actions: Collapse
+					89 text 无
+					90 text 侠客
+					91 text 查看收藏
+					92 container
+						93 text 0  / 14 张
+				94 image lock
+				95 text 飞刃偷袭 职业卡
+				96 image lock
+				97 text 金蝉脱壳 职业卡
+				98 image lock
+				99 text 偷袭 职业卡
+				100 image lock
+				101 text 鬼魅之刃 职业卡
+				102 image lock
+				103 text 快意恩仇 职业卡
+				104 image lock
+				105 text 流星箭雨 职业卡
+				106 image lock
+				107 text 潜匿 职业卡
+				108 image lock
+				109 text 剑仙形态 职业卡
+				110 image lock
+				111 text 白梅落影·妄 能力卡
+				112 image lock
+				113 text 无量仙剑·云风 能力卡
+				114 image lock
+				115 text 天剑诛魔·云阳 能力卡
+				116 image lock
+				117 text 不变应万变-改 职业卡
+				118 image lock
+				119 text 盗宝 职业卡
+				120 image lock
+				121 text 江湖救急-改 职业卡
+			122 button (collapsed) 黑像战士 查看收藏 0 / 12 张, Secondary Actions: Expand
+				123 text 黑像
+				124 text 战士
+				125 text 查看收藏
+				126 container
+					127 text 0  / 12 张
+			128 button (collapsed) 星月牧师 查看收藏 0 / 14 张, Secondary Actions: Expand
+				129 text 星月
+				130 text 牧师
+				131 text 查看收藏
+				132 container
+					133 text 0  / 14 张
+			134 button (collapsed) 白塔法师 查看收藏 0 / 13 张, Secondary Actions: Expand
+				135 text 白塔
+				136 text 法师
+				137 text 查看收藏
+				138 container
+					139 text 0  / 13 张
+			140 button (collapsed) 常无欲降临者 查看收藏 0 / 15 张, Secondary Actions: Expand
+				141 text 常无欲
+				142 text 降临者
+				143 text 查看收藏
+				144 container
+					145 text 0  / 15 张
+
+The focused UI element is 62 checkbox 收藏奖励, Value: 1

@@ -1,0 +1,19 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5200/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5200/
+	1 container Description: 飞刃偷袭大图与备注, ID: cardZoom
+		2 button 关闭卡牌大图
+			3 image cross
+		4 container
+			5 text 0
+			6 image 飞刃偷袭
+			7 text 飞刃偷袭 武术 · 无专属
+			8 container
+				9 text 职业 职业
+			10 image cards
+			11 text 抽 1 攻（ -3 ），附加 流血 ，抽  1  张牌。
+		12 image pen
+		13 text 备注
+		14 text 暂无备注
+		15 text Esc 或点击背景收回
+
+The focused UI element is 2 button 关闭卡牌大图

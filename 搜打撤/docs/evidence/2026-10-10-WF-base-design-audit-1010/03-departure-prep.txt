@@ -1,0 +1,144 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5200/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5200/
+	1 container depMain
+		2 button 返回人物选择
+		3 container
+			4 text EXPEDITION / 03
+			5 heading 出征整备, Value: 2
+				6 text 出征整备
+			7 container 出征步骤
+				8 button 01 模式
+				9 button 02 人物
+				10 text 03 整备
+			11 image bag
+			12 text  背包  1/16  格
+		13 container
+			14 text DEPARTURE CHECKLIST
+			15 heading 本次人物：无, Value: 3
+				16 text 本次人物：无
+			17 text 选择本局携带的卡牌，整备完成后出发。
+			18 button 更换人物
+		19 container
+			20 heading 01 选择卡牌 点击或拖拽带入, Value: 3
+				21 text 01  选择卡牌  点击或拖拽带入
+			22 text 稀有度
+			23 pop up button (collapsed, settable) Description: 按稀有度筛选仓库卡牌, Value: 不限稀有度, ID: depFilterRarity, Secondary Actions: Expand
+				24 menu
+					25 (selected) 不限稀有度
+					26 初始
+					27 古朴
+					28 稀有
+					29 史诗
+					30 传说
+					31 衍生
+					32 职业
+					33 棱彩
+			34 text 类型
+			35 pop up button (collapsed, settable) Description: 按类型筛选仓库卡牌, Value: 不限类型, ID: depFilterType, Secondary Actions: Expand
+				36 menu
+					37 (selected) 不限类型
+					38 武术
+					39 法术
+					40 生物
+					41 道具
+					42 装备
+					43 事件
+					44 能力卡
+					45 资源
+			46 text 费用
+			47 pop up button (collapsed, settable) Description: 按费用筛选仓库卡牌, Value: 不限费用, ID: depFilterCost, Secondary Actions: Expand
+				48 menu
+					49 (selected) 不限费用
+					50 1费
+			51 text 显示 5/5
+			52 button (disabled) Description: 重置仓库筛选, ID: depFilterReset
+			53 container depPool
+				54 checkbox Description: 带入箭雨，还可带 1 张, Value: 0
+					55 container
+						56 text 1
+						57 image 箭雨
+						58 text 箭雨 武术 · 古朴
+						59 container
+							60 text 古朴 古朴
+						61 text 攻（ -1 ），目标为敌方全体。
+					62 text 剩余 
+					63 text 1
+					64 text 已带 
+					65 text 0
+				66 checkbox Description: 带入迅疾箭，还可带 1 张, Value: 0
+					67 container
+						68 text 1
+						69 image 迅疾箭
+						70 text 迅疾箭 武术 · 古朴
+						71 container
+							72 text 古朴 古朴
+						73 image cards
+						74 text 抽 1 攻（ -1 ），抽  1  张牌。
+					75 text 剩余 
+					76 text 1
+					77 text 已带 
+					78 text 0
+				79 checkbox Description: 带入连击箭，还可带 1 张, Value: 0
+					80 container
+						81 text 1
+						82 image 连击箭
+						83 text 连击箭 武术 · 古朴
+						84 container
+							85 text 古朴 古朴
+						86 text 攻（ -1 ）；如果你打出的上一张牌是武术牌，本牌变为 0 费。
+					87 text 剩余 
+					88 text 1
+					89 text 已带 
+					90 text 0
+				91 checkbox Description: 带入屏障修复，还可带 1 张, Value: 0
+					92 container
+						93 text 1
+						94 image 屏障修复
+						95 text 屏障修复 法术 · 古朴
+						96 container
+							97 text 古朴 古朴
+						98 image plate
+						99 text 甲 6 获得 6 点 护甲 ，如果你此时没有 护甲 ，该牌变为 0 费
+					100 text 剩余 
+					101 text 1
+					102 text 已带 
+					103 text 0
+				104 checkbox Description: 带入影噬，还可带 1 张, Value: 0
+					105 container
+						106 text 1
+						107 image 影噬
+						108 text 影噬 武术 · 稀有
+						109 container
+							110 text 稀有 稀有
+						111 text 本 回合 偷取  1  名敌人的攻击力至 1 点。
+					112 text 剩余 
+					113 text 1
+					114 text 已带 
+					115 text 0
+		116 container
+			117 heading 02 本次背包, Value: 3
+				118 text 02  本次背包
+			119 button 初始攻击 ×5，固定携带，点击查看详情
+				120 container
+					121 text 1
+					122 image 初始攻击
+					123 text 初始攻击 武术 · 初始
+					124 container
+						125 text 初始 初始
+					126 text 攻（ +0 ）： 造成等同于攻击力的 伤害 。
+				127 text ×5
+			128 image paw
+			129 text  随行宠物
+			130 button paw 汪汪狗 Lv.1
+				131 image paw
+				132 text 汪汪狗
+				133 text Lv.1
+			134 text 初始攻击固定携带；点击卡牌查看，拖回仓库移出。
+		135 container
+			136 container depCapacity
+				137 image bag
+				138 text  已装  1/16  格 · 余 15 格
+			139 text 03 / 整备完成后出发
+			140 button 出发, ID: btnDeploy
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5200/

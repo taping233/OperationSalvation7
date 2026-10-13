@@ -1,0 +1,90 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5200/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5200/
+	1 container hubMain
+		2 container
+			3 button 返回选档
+			4 heading 基地, Value: 2
+				5 text 基地
+			6 text 档案 / 01
+			7 image wood
+			8 text 木材 0
+			9 image bread
+			10 text 口粮 0
+			11 image key
+			12 text 钥匙 0
+			13 image coin
+			14 text 储备 0 币
+		15 container 基地分区
+			16 text 基地事务 / BASE
+			17 checkbox flag 出征 EXPEDITION, Value: 0
+				18 image flag
+				19 text 出征
+				20 text EXPEDITION
+			21 checkbox archive 仓库 STORAGE, Value: 0
+				22 image archive
+				23 text 仓库
+				24 text STORAGE
+			25 checkbox coin 补给 SUPPLIES, Value: 0
+				26 image coin
+				27 text 补给
+				28 text SUPPLIES
+			29 checkbox tools 基地建设 WORKSHOP, Value: 0
+				30 image tools
+				31 text 基地建设
+				32 text WORKSHOP
+			33 checkbox medal 人物与伙伴 PERSONNEL, Value: 0
+				34 image medal
+				35 text 人物与伙伴
+				36 text PERSONNEL
+			37 checkbox trophy 档案 ARCHIVES, Value: 1
+				38 image trophy
+				39 text 档案
+				40 text ARCHIVES
+			41 text EXPEDITION BASE · VII
+		42 container
+			43 text 06 / ARCHIVE
+			44 heading 档案室, Value: 2
+				45 text 档案室
+			46 text 卡背  1/7 · 成就  0/26 · 人物收藏  0/68
+			47 container 收藏分类
+				48 checkbox cards 卡背图鉴, Value: 1
+					49 image cards
+					50 text 卡背图鉴
+				51 checkbox trophy 成就记录, Value: 0
+					52 image trophy
+					53 text 成就记录
+				54 checkbox notes 见闻纪念, Value: 0
+					55 image notes
+					56 text 见闻纪念
+			57 heading cards 卡背图鉴 1 / 7 已解锁, Value: 3
+				58 image cards
+				59 text  卡背图鉴 
+				60 text 1 / 7 已解锁
+			61 checkbox Description: 预览行囊粗布, Value: 1
+				62 text 行囊粗布
+				63 text 使用中
+			64 checkbox Description: 预览猎手皮纸, Value: 0
+				65 text 猎手皮纸
+				66 text 未解锁
+			67 checkbox Description: 预览富商锦缎, Value: 0
+				68 text 富商锦缎
+				69 text 未解锁
+			70 checkbox Description: 预览仓廪木纹, Value: 0
+				71 text 仓廪木纹
+				72 text 未解锁
+			73 checkbox Description: 预览弑神黑曜, Value: 0
+				74 text 弑神黑曜
+				75 text 未解锁
+			76 checkbox Description: 预览核心星轨, Value: 0
+				77 text 核心星轨
+				78 text 未解锁
+			79 checkbox Description: 预览忠犬爪印, Value: 0
+				80 text 忠犬爪印
+				81 text 未解锁
+			82 container
+				83 heading 行囊粗布, Value: 3
+					84 text 行囊粗布
+				85 text 默认卡背
+				86 button (disabled) 当前卡背
+
+The focused UI element is 48 checkbox cards 卡背图鉴, Value: 1
