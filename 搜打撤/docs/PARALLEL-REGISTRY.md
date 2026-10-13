@@ -213,6 +213,7 @@
 
 | 会话 / 任务 | 查阅线索 | 来源 | 状态说明 |
 |---|---|---|---|
+| Friday（Codex 运行包收拢与云端交付 WF-friday-runtime-ship-1013） | docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/；本表自有行；Git index与正常推送/Library归档；游戏源码编辑释放 | 工程阶段完成；e82895d5收拢1347文件，full350文件2929过16跳；补179项确证登记，保留97来源/候选；正常推送与精确Library归档随后由同一会话平台结果证明 | 10-14 编辑释放，原稿/候选保留；实页未运行，不公开仓库、不强推、不绕过hooks |
 | Friday（Codex 全面接管与清理提交 WF-friday-clean-ship-1013） | docs/evidence/2026-10-13-WF-friday-clean-ship-1013/；当前 Git index；docs/PARALLEL-REGISTRY.md与docs/PENDING.md仅核实记录 | 接管与可恢复清理已完成；7c1f0589审计器三文件已提交、quick15过1跳；剩余游戏改动未提交；台账/证据本批落库，推送与归档由最终交付核验 | 10-13 编辑释放；原完成未提交归属保留，浏览器初始化阻塞，不公开仓库、不绕过hooks |
 | Friday（Codex 绝区零基地参考板 WF-zzz-base-reference-1012 / 01a12fb5） | docs/evidence/2026-10-12-zzz-base-reference/；本表自有行；127.0.0.1:5319只读参考板服务，PID32380，exec68491，cwd同参考目录 | 老板要求图文详解绝区零可借鉴的美术/UI/交互，主要用于基地改造；只制作参考资料和演示，不改游戏；原归属状态：完成未提交、编辑释放；21主题/14实图/123细节/约1.26万汉字/2演示；SHA与本地链接、语法、docs守卫通过；Codex当前窗口1606×956真实点击验证事件/领奖成功失败/确认与Esc/原图放大；证据README与browser/static-verification；5319保留供老板阅读，只读白名单非游戏服务；无游戏修改/build/提交 | 10-13 编辑释放；完成未提交归属保留，是否已落库须按实际Git路径核对；本次仅整理已结束会话登记 |
 | Friday（Codex 整备规则文字删除 WF-departure-rules-remove-1012 / 01a12f90） | game/src/hub/game.hub.depart.js仅规则说明块；tests/departure-browse-state.test.js仅对应断言；docs/evidence/2026-10-12-departure-rules-remove/；本表自有行 | 老板要求删除整备的规则文字；原归属状态：完成未提交、编辑释放；规则说明已移除，3文件42项测试通过；Codex内置当前窗口真实点击到达整备，说明节点不存在，console error为空；证据2026-10-12-departure-rules-remove；复用5200/PID36028，非本会话服务；无新服务/build/提交 | 10-13 编辑释放；完成未提交归属保留，是否已落库须按实际Git路径核对；本次仅整理已结束会话登记 |

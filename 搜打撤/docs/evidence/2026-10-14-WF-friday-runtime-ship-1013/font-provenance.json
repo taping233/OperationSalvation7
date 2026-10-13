@@ -1,0 +1,50 @@
+[
+  {
+    "path": "fonts/oxanium-latin-500-normal.woff2",
+    "package": "@fontsource/oxanium",
+    "version": "5.3.0",
+    "source": "https://registry.npmjs.org/@fontsource/oxanium/-/oxanium-5.3.0.tgz",
+    "fileInPackage": "package/files/oxanium-latin-500-normal.woff2",
+    "license": "OFL-1.1",
+    "bytes": 9040,
+    "sha256": "8ad0e754c0e87a6f134d1e172377408bcbda29727a2bfe56e2f3fa976af1dc35",
+    "downloadSha256": "8ad0e754c0e87a6f134d1e172377408bcbda29727a2bfe56e2f3fa976af1dc35",
+    "exactMatch": true
+  },
+  {
+    "path": "fonts/oxanium-latin-700-normal.woff2",
+    "package": "@fontsource/oxanium",
+    "version": "5.3.0",
+    "source": "https://registry.npmjs.org/@fontsource/oxanium/-/oxanium-5.3.0.tgz",
+    "fileInPackage": "package/files/oxanium-latin-700-normal.woff2",
+    "license": "OFL-1.1",
+    "bytes": 8776,
+    "sha256": "19ac72d5a8b3b31316133df3dc8e5b47f93dfc4b85245b776dd6d70fc4b3504c",
+    "downloadSha256": "19ac72d5a8b3b31316133df3dc8e5b47f93dfc4b85245b776dd6d70fc4b3504c",
+    "exactMatch": true
+  },
+  {
+    "path": "fonts/rajdhani-latin-600-normal.woff2",
+    "package": "@fontsource/rajdhani",
+    "version": "5.3.0",
+    "source": "https://registry.npmjs.org/@fontsource/rajdhani/-/rajdhani-5.3.0.tgz",
+    "fileInPackage": "package/files/rajdhani-latin-600-normal.woff2",
+    "license": "OFL-1.1",
+    "bytes": 15732,
+    "sha256": "433a7007e4747a02a790167a6efa2625855f013970ba49b9b739a5d3db8b2601",
+    "downloadSha256": "433a7007e4747a02a790167a6efa2625855f013970ba49b9b739a5d3db8b2601",
+    "exactMatch": true
+  },
+  {
+    "path": "fonts/rajdhani-latin-700-normal.woff2",
+    "package": "@fontsource/rajdhani",
+    "version": "5.3.0",
+    "source": "https://registry.npmjs.org/@fontsource/rajdhani/-/rajdhani-5.3.0.tgz",
+    "fileInPackage": "package/files/rajdhani-latin-700-normal.woff2",
+    "license": "OFL-1.1",
+    "bytes": 15688,
+    "sha256": "5b7e4a6f97163c2636724d4de90304fc895653dcfe64c67a7a22f26331ca5c5f",
+    "downloadSha256": "5b7e4a6f97163c2636724d4de90304fc895653dcfe64c67a7a22f26331ca5c5f",
+    "exactMatch": true
+  }
+]

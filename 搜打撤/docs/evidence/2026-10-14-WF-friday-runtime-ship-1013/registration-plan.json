@@ -1,0 +1,2903 @@
+{
+  "beforeSha256": "0cfc36017ec6a0c3056a858cf6fbc6b3db607c066b30eeaca36a14c4c9d4e1ab",
+  "added": [
+    {
+      "path": "fonts/oxanium-latin-500-normal.woff2",
+      "ext": "woff2",
+      "bytes": 9040,
+      "sha256": "8ad0e754c0e87a6f134d1e172377408bcbda29727a2bfe56e2f3fa976af1dc35",
+      "license": "SIL Open Font License 1.1",
+      "source": "https://registry.npmjs.org/@fontsource/oxanium/-/oxanium-5.3.0.tgz#package/files/oxanium-latin-500-normal.woff2",
+      "provenance": {
+        "kind": "exact-upstream-package-match",
+        "package": "@fontsource/oxanium",
+        "version": "5.3.0",
+        "sha256": "8ad0e754c0e87a6f134d1e172377408bcbda29727a2bfe56e2f3fa976af1dc35",
+        "licenseFile": "game/assets/fonts/LICENSE-Oxanium-OFL.txt"
+      }
+    },
+    {
+      "path": "fonts/oxanium-latin-700-normal.woff2",
+      "ext": "woff2",
+      "bytes": 8776,
+      "sha256": "19ac72d5a8b3b31316133df3dc8e5b47f93dfc4b85245b776dd6d70fc4b3504c",
+      "license": "SIL Open Font License 1.1",
+      "source": "https://registry.npmjs.org/@fontsource/oxanium/-/oxanium-5.3.0.tgz#package/files/oxanium-latin-700-normal.woff2",
+      "provenance": {
+        "kind": "exact-upstream-package-match",
+        "package": "@fontsource/oxanium",
+        "version": "5.3.0",
+        "sha256": "19ac72d5a8b3b31316133df3dc8e5b47f93dfc4b85245b776dd6d70fc4b3504c",
+        "licenseFile": "game/assets/fonts/LICENSE-Oxanium-OFL.txt"
+      }
+    },
+    {
+      "path": "fonts/rajdhani-latin-600-normal.woff2",
+      "ext": "woff2",
+      "bytes": 15732,
+      "sha256": "433a7007e4747a02a790167a6efa2625855f013970ba49b9b739a5d3db8b2601",
+      "license": "SIL Open Font License 1.1",
+      "source": "https://registry.npmjs.org/@fontsource/rajdhani/-/rajdhani-5.3.0.tgz#package/files/rajdhani-latin-600-normal.woff2",
+      "provenance": {
+        "kind": "exact-upstream-package-match",
+        "package": "@fontsource/rajdhani",
+        "version": "5.3.0",
+        "sha256": "433a7007e4747a02a790167a6efa2625855f013970ba49b9b739a5d3db8b2601",
+        "licenseFile": "game/assets/fonts/LICENSE-Rajdhani-OFL.txt"
+      }
+    },
+    {
+      "path": "fonts/rajdhani-latin-700-normal.woff2",
+      "ext": "woff2",
+      "bytes": 15688,
+      "sha256": "5b7e4a6f97163c2636724d4de90304fc895653dcfe64c67a7a22f26331ca5c5f",
+      "license": "SIL Open Font License 1.1",
+      "source": "https://registry.npmjs.org/@fontsource/rajdhani/-/rajdhani-5.3.0.tgz#package/files/rajdhani-latin-700-normal.woff2",
+      "provenance": {
+        "kind": "exact-upstream-package-match",
+        "package": "@fontsource/rajdhani",
+        "version": "5.3.0",
+        "sha256": "5b7e4a6f97163c2636724d4de90304fc895653dcfe64c67a7a22f26331ca5c5f",
+        "licenseFile": "game/assets/fonts/LICENSE-Rajdhani-OFL.txt"
+      }
+    },
+    {
+      "path": "icons/base-v3/archive.webp",
+      "ext": "webp",
+      "bytes": 32222,
+      "sha256": "57f55bece66ea9f15d582e9d88087c6a2cac32980418119d748b37d7b99e1602",
+      "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
+      "source": "game/art-source/ui/base-v3/receipts.json",
+      "provenance": {
+        "kind": "generated-source-and-conversion-record",
+        "sourceSha256": "09b7f2aa44af69e148a77f92aeae7dd5e70a2a17a949c80b8c760f1093e1a014",
+        "rawPath": "game/art-source/ui/base-v3/raw-archive.png",
+        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "outputBytesMatch": true
+      }
+    },
+    {
+      "path": "icons/base-v3/base-home-v1.webp",
+      "ext": "webp",
+      "bytes": 130752,
+      "sha256": "c9f8990c9d9595a65397044303ee135e847e692852ff9003e0c048ccdbbb67de",
+      "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
+      "source": "game/art-source/ui/base-v3/receipts.json",
+      "provenance": {
+        "kind": "generated-source-and-conversion-record",
+        "sourceSha256": "80b67680bfd6bc59652caa5a813f2660f6412ae9bac6bf22bf1ee4192c9c3278",
+        "rawPath": "game/art-source/ui/base-v3/raw-base-home-v1.png",
+        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "outputBytesMatch": true
+      }
+    },
+    {
+      "path": "icons/base-v3/coin.webp",
+      "ext": "webp",
+      "bytes": 32950,
+      "sha256": "52bb9a3313ef4b9f9e1fa2b44a0459f2eac9e01fe1e6d33606415579b4457878",
+      "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
+      "source": "game/art-source/ui/base-v3/receipts.json",
+      "provenance": {
+        "kind": "generated-source-and-conversion-record",
+        "sourceSha256": "66c94e1f9185e20e816cefa7ff4b0479dfa8a99032d423f404712fd71cda0c2d",
+        "rawPath": "game/art-source/ui/base-v3/raw-coin.png",
+        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "outputBytesMatch": true
+      }
+    },
+    {
+      "path": "icons/base-v3/companion-cat.webp",
+      "ext": "webp",
+      "bytes": 78568,
+      "sha256": "64410d0ee83f6444b7f475743bb08497b6a9e57bbee0d4186def2210e7a7561b",
+      "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
+      "source": "game/art-source/ui/base-v3/receipts.json",
+      "provenance": {
+        "kind": "generated-source-and-conversion-record",
+        "sourceSha256": "c68e4771d507c596696ac7bcf2f0476f4da4d9ac4e7c279ea67fa22fe92fa961",
+        "rawPath": "game/art-source/ui/base-v3/raw-companion-cat.png",
+        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "outputBytesMatch": true
+      }
+    },
+    {
+      "path": "icons/base-v3/companion-dog.webp",
+      "ext": "webp",
+      "bytes": 70366,
+      "sha256": "a0a40b306c8e4d538d57d64d16ec957b4543426d3c561ce511c0a8cfbd68e822",
+      "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
+      "source": "game/art-source/ui/base-v3/receipts.json",
+      "provenance": {
+        "kind": "generated-source-and-conversion-record",
+        "sourceSha256": "f614f45cfa8f7d40fc057ebd2c50650fb332ea43f8d03c663ba7197a88f30722",
+        "rawPath": "game/art-source/ui/base-v3/raw-companion-dog.png",
+        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "outputBytesMatch": true
+      }
+    },
+    {
+      "path": "icons/base-v3/companion-falcon.webp",
+      "ext": "webp",
+      "bytes": 74142,
+      "sha256": "c224d17431197646d3abb507fec005b8ec36fdb5d58397bd95582c0172f902d9",
+      "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
+      "source": "game/art-source/ui/base-v3/receipts.json",
+      "provenance": {
+        "kind": "generated-source-and-conversion-record",
+        "sourceSha256": "45c3d5b14dc0b98710f202cc89ca8a332f7578e676f166958d402216957c0c42",
+        "rawPath": "game/art-source/ui/base-v3/raw-companion-falcon.png",
+        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "outputBytesMatch": true
+      }
+    },
+    {
+      "path": "icons/base-v3/companion-fire.webp",
+      "ext": "webp",
+      "bytes": 61600,
+      "sha256": "bec3406ad90669cc04d7a0f2a6df7055dbc23cdbeee61e0ca2099299383e0958",
+      "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
+      "source": "game/art-source/ui/base-v3/receipts.json",
+      "provenance": {
+        "kind": "generated-source-and-conversion-record",
+        "sourceSha256": "90c2386ab7620b4e57268e775664ccab45d26abe2a914ada6b35eba8c2a7aac6",
+        "rawPath": "game/art-source/ui/base-v3/raw-companion-fire.png",
+        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "outputBytesMatch": true
+      }
+    },
+    {
+      "path": "icons/base-v3/companion-penguin.webp",
+      "ext": "webp",
+      "bytes": 50694,
+      "sha256": "024ab0d4065cd6b6c9bf4071419818262b1e5aeb03b36a464d8f05ca1e159471",
+      "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
+      "source": "game/art-source/ui/base-v3/receipts.json",
+      "provenance": {
+        "kind": "generated-source-and-conversion-record",
+        "sourceSha256": "5f741623eefdf88932aa07b4e5cca8dd8009d75aef47c8586b3d199890e0926d",
+        "rawPath": "game/art-source/ui/base-v3/raw-companion-penguin.png",
+        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "outputBytesMatch": true
+      }
+    },
+    {
+      "path": "icons/base-v3/companion-robot.webp",
+      "ext": "webp",
+      "bytes": 71922,
+      "sha256": "a2912112bb127770005327f6ef0a3be9df3d9b70d33c3b778eb2314a7714c279",
+      "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
+      "source": "game/art-source/ui/base-v3/receipts.json",
+      "provenance": {
+        "kind": "generated-source-and-conversion-record",
+        "sourceSha256": "4268387b89cb3b56ee007e7378360b9723de6d62471e8845dc3b41e0b5640908",
+        "rawPath": "game/art-source/ui/base-v3/raw-companion-robot.png",
+        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "outputBytesMatch": true
+      }
+    },
+    {
+      "path": "icons/base-v3/expedition.webp",
+      "ext": "webp",
+      "bytes": 36948,
+      "sha256": "83cbb7bea592cd6a326d9211e18708732360ba702f1675e003b9d5dfdb625bae",
+      "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
+      "source": "game/art-source/ui/base-v3/receipts.json",
+      "provenance": {
+        "kind": "generated-source-and-conversion-record",
+        "sourceSha256": "d111d53cb0607810fc84b10e3c8e20204807be743b1a4bac92d8b2e03d80f46a",
+        "rawPath": "game/art-source/ui/base-v3/raw-expedition.png",
+        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "outputBytesMatch": true
+      }
+    },
+    {
+      "path": "icons/base-v3/key.webp",
+      "ext": "webp",
+      "bytes": 25462,
+      "sha256": "8f6e8bee8dbc20df8c15771a76a69dd753fa32cbac430a781417d59bab6874ab",
+      "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
+      "source": "game/art-source/ui/base-v3/receipts.json",
+      "provenance": {
+        "kind": "generated-source-and-conversion-record",
+        "sourceSha256": "608f9b446f3813c9ce1e53ef248d1ebf295c472399ebc144ba7f93a2ac8bac77",
+        "rawPath": "game/art-source/ui/base-v3/raw-key.png",
+        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "outputBytesMatch": true
+      }
+    },
+    {
+      "path": "icons/base-v3/personnel.webp",
+      "ext": "webp",
+      "bytes": 33640,
+      "sha256": "ee9060f383e6da59e8c4ec8198cff82619b1f1ac526d23b1ccba7012d5fdbe09",
+      "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
+      "source": "game/art-source/ui/base-v3/receipts.json",
+      "provenance": {
+        "kind": "generated-source-and-conversion-record",
+        "sourceSha256": "13a6143eab849296adb444d3ca691b73383e0aaac742fdcfa25064d424450368",
+        "rawPath": "game/art-source/ui/base-v3/raw-personnel.png",
+        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "outputBytesMatch": true
+      }
+    },
+    {
+      "path": "icons/base-v3/rations.webp",
+      "ext": "webp",
+      "bytes": 51092,
+      "sha256": "f49edeac3c434185f3717a0801c693a7d3b3be5facdffd1d3f7caa2f94cc359a",
+      "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
+      "source": "game/art-source/ui/base-v3/receipts.json",
+      "provenance": {
+        "kind": "generated-source-and-conversion-record",
+        "sourceSha256": "4b456f180552238eb09e41a09cc8af44c119ef784963062173441b90c18608dc",
+        "rawPath": "game/art-source/ui/base-v3/raw-rations.png",
+        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "outputBytesMatch": true
+      }
+    },
+    {
+      "path": "icons/base-v3/rune.webp",
+      "ext": "webp",
+      "bytes": 25160,
+      "sha256": "32e33bc86d2a12c917b8d388d03b6e5e305ef8e81e13efdeebc5b1d04f16f258",
+      "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
+      "source": "game/art-source/ui/base-v3/receipts.json",
+      "provenance": {
+        "kind": "generated-source-and-conversion-record",
+        "sourceSha256": "1c0761ea060496f6038811756ead66100f788b8550bdef3f987829cf9c8de777",
+        "rawPath": "game/art-source/ui/base-v3/raw-rune.png",
+        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "outputBytesMatch": true
+      }
+    },
+    {
+      "path": "icons/base-v3/shop.webp",
+      "ext": "webp",
+      "bytes": 36562,
+      "sha256": "0c5689b180b96edf82aa83a8e6a640f491b4186c150d12ed358a4cb77c20e974",
+      "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
+      "source": "game/art-source/ui/base-v3/receipts.json",
+      "provenance": {
+        "kind": "generated-source-and-conversion-record",
+        "sourceSha256": "8760b8838ae82a546752ae3ab84260fecd128f69175d417f14e575786a438272",
+        "rawPath": "game/art-source/ui/base-v3/raw-shop.png",
+        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "outputBytesMatch": true
+      }
+    },
+    {
+      "path": "icons/base-v3/warehouse.webp",
+      "ext": "webp",
+      "bytes": 36182,
+      "sha256": "120679cacd0144d6a412cb334c05616d4e5e2b76d9725053db27ffd69500a28a",
+      "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
+      "source": "game/art-source/ui/base-v3/receipts.json",
+      "provenance": {
+        "kind": "generated-source-and-conversion-record",
+        "sourceSha256": "d76393d53def511a2f584e527c5dbde3a821a7f7435e301e9771ecf25c536a03",
+        "rawPath": "game/art-source/ui/base-v3/raw-warehouse.png",
+        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "outputBytesMatch": true
+      }
+    },
+    {
+      "path": "icons/base-v3/wood.webp",
+      "ext": "webp",
+      "bytes": 33590,
+      "sha256": "2fa0713a2ec58c500a72d3b0c5caa977752df93cbf2e8ea4c3f5cb0809ea7b57",
+      "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
+      "source": "game/art-source/ui/base-v3/receipts.json",
+      "provenance": {
+        "kind": "generated-source-and-conversion-record",
+        "sourceSha256": "da20d995b4933ddddcff737d3791d61caf6fda65b97c06257e68bc8e7f66f56b",
+        "rawPath": "game/art-source/ui/base-v3/raw-wood.png",
+        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "outputBytesMatch": true
+      }
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1/animations.json",
+      "ext": "json",
+      "bytes": 5388,
+      "sha256": "f1cdc039221e3ec608b3bc8a3255f86e516a63fd77d0650b78e5c8be0c41656b",
+      "license": "项目自有（已登记人物帧的动画序列元数据）",
+      "source": "docs/evidence/2026-10-09-changwuyu-sprites/receipt.json",
+      "provenance": {
+        "kind": "animation-sequence-metadata",
+        "runtimeCatalog": "game/src/battle/view/battle.frame-catalog.js"
+      }
+    },
+    {
+      "path": "portraits/frames/wu/sprite-v1/animations.json",
+      "ext": "json",
+      "bytes": 4686,
+      "sha256": "322055d9c310af548716f4be77005540c29658032ecb38f3fd697b389a1423a8",
+      "license": "项目自有（已登记人物帧的动画序列元数据）",
+      "source": "docs/evidence/2026-10-09-wu-sprite-install/runtime-assets.json",
+      "provenance": {
+        "kind": "animation-sequence-metadata",
+        "runtimeCatalog": "game/src/battle/view/battle.frame-catalog.js"
+      }
+    },
+    {
+      "path": "scenes/base-home-v4.webp",
+      "ext": "webp",
+      "bytes": 103974,
+      "sha256": "b17f006c93bb135daf146dd81eecf0fba936867dfa473c0f47ac6bc9f305818f",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "game/art-source/scenes/base-home-v4-20261011/receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "b17f006c93bb135daf146dd81eecf0fba936867dfa473c0f47ac6bc9f305818f",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/battle/winter-street-1011-v2.webp",
+      "ext": "webp",
+      "bytes": 213906,
+      "sha256": "49df9916f15b71439edb975ea83d944df8265b64545e67d57615f4b9f315f10a",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/generated-art/assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "49df9916f15b71439edb975ea83d944df8265b64545e67d57615f4b9f315f10a",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/battle/winter-transit-1011/far.webp",
+      "ext": "webp",
+      "bytes": 1259138,
+      "sha256": "3677892095e1d1e3cf428bfe6c4da8fdcebd9a1154bebe7eb519b3ea4ee5eda4",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/winter-layer-continue/assets-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "3677892095e1d1e3cf428bfe6c4da8fdcebd9a1154bebe7eb519b3ea4ee5eda4",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/battle/winter-transit-1011/foreground.webp",
+      "ext": "webp",
+      "bytes": 89726,
+      "sha256": "ee3b723bc76c755dec08786c146cf1073e1f18457185c4505277c647cd068ef0",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/winter-layer-continue/assets-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "ee3b723bc76c755dec08786c146cf1073e1f18457185c4505277c647cd068ef0",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/battle/winter-transit-1011/ground.webp",
+      "ext": "webp",
+      "bytes": 647394,
+      "sha256": "c93ee6ae1353b77721004920adc2236ecf42815baaab75a55c6da8933c31c755",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/winter-layer-continue/assets-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "c93ee6ae1353b77721004920adc2236ecf42815baaab75a55c6da8933c31c755",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/battle/winter-transit-1011/mid.webp",
+      "ext": "webp",
+      "bytes": 361598,
+      "sha256": "511b6ec6075f114cefc723b4f6a9908bafac976e8c19892d409e53c2b05c172b",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/winter-layer-continue/assets-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "511b6ec6075f114cefc723b4f6a9908bafac976e8c19892d409e53c2b05c172b",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/camp-transition-city-v1.webp",
+      "ext": "webp",
+      "bytes": 42692,
+      "sha256": "da4904fb29c62a72dd43220b5f6bf8fd57eb33e7a5beae3effcaed2fdc736a5d",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "game/art-source/ui/camp-transition-20261010/source-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "da4904fb29c62a72dd43220b5f6bf8fd57eb33e7a5beae3effcaed2fdc736a5d",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-00.webp",
+      "ext": "webp",
+      "bytes": 226926,
+      "sha256": "d930607d0f62b3e0939bb1ab9090a3be2f275cc485c62a7e50814fee5fd7e597",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "d930607d0f62b3e0939bb1ab9090a3be2f275cc485c62a7e50814fee5fd7e597",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-01.webp",
+      "ext": "webp",
+      "bytes": 226926,
+      "sha256": "d930607d0f62b3e0939bb1ab9090a3be2f275cc485c62a7e50814fee5fd7e597",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "d930607d0f62b3e0939bb1ab9090a3be2f275cc485c62a7e50814fee5fd7e597",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-02.webp",
+      "ext": "webp",
+      "bytes": 226926,
+      "sha256": "d930607d0f62b3e0939bb1ab9090a3be2f275cc485c62a7e50814fee5fd7e597",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "d930607d0f62b3e0939bb1ab9090a3be2f275cc485c62a7e50814fee5fd7e597",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-03.webp",
+      "ext": "webp",
+      "bytes": 227264,
+      "sha256": "772e0c38457e907758f27d03838b66f1787b90faedfc17a79d8c83a159772174",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "772e0c38457e907758f27d03838b66f1787b90faedfc17a79d8c83a159772174",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-04.webp",
+      "ext": "webp",
+      "bytes": 228460,
+      "sha256": "f55c267b4d58d2f4b2d78460d9bc7d046f698cc834b32f987b7c23e198f590dd",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "f55c267b4d58d2f4b2d78460d9bc7d046f698cc834b32f987b7c23e198f590dd",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-05.webp",
+      "ext": "webp",
+      "bytes": 226622,
+      "sha256": "5c1120385acea03e8b85d2a37a875c12b845d062ed201250ee9bd989e70908fc",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "5c1120385acea03e8b85d2a37a875c12b845d062ed201250ee9bd989e70908fc",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-06.webp",
+      "ext": "webp",
+      "bytes": 221112,
+      "sha256": "70ae5bc80841ac98fad041f8ec6381c70a8fd77833f440e832c6e9b917eed054",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "70ae5bc80841ac98fad041f8ec6381c70a8fd77833f440e832c6e9b917eed054",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-07.webp",
+      "ext": "webp",
+      "bytes": 218610,
+      "sha256": "c041066c7a4ddb307bd05eb7b3baa20c102c15f6612b13de90b516654c94139f",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "c041066c7a4ddb307bd05eb7b3baa20c102c15f6612b13de90b516654c94139f",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-08.webp",
+      "ext": "webp",
+      "bytes": 208360,
+      "sha256": "2c95f750714e24edcfe557038bbae8dc725968e723aadce9ba81126af6bb86e7",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "2c95f750714e24edcfe557038bbae8dc725968e723aadce9ba81126af6bb86e7",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-09.webp",
+      "ext": "webp",
+      "bytes": 224066,
+      "sha256": "89550994e59b38f73be96b10db973561cd613e64e0dc3b2092778b0c53b4c603",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "89550994e59b38f73be96b10db973561cd613e64e0dc3b2092778b0c53b4c603",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-10.webp",
+      "ext": "webp",
+      "bytes": 243836,
+      "sha256": "b1b2833cb9f2c6729a4d884506992cb9e46dfcd2792d1a1fcdc7796247a3f787",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "b1b2833cb9f2c6729a4d884506992cb9e46dfcd2792d1a1fcdc7796247a3f787",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-11.webp",
+      "ext": "webp",
+      "bytes": 257822,
+      "sha256": "476a87b339d5bb047e11853bc358db5bc813975e78f0cbe5fe60c3dc0fdc4fb1",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "476a87b339d5bb047e11853bc358db5bc813975e78f0cbe5fe60c3dc0fdc4fb1",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-12.webp",
+      "ext": "webp",
+      "bytes": 268188,
+      "sha256": "cfbf335b116302c8c86d8f129f90e9faf102f0e9513e095fd111e4c533733c9b",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "cfbf335b116302c8c86d8f129f90e9faf102f0e9513e095fd111e4c533733c9b",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-13.webp",
+      "ext": "webp",
+      "bytes": 274934,
+      "sha256": "b10eda2ed474a11b264857fc6f71d33d5caa8897d4db69e45049ee9e8e3c1a33",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "b10eda2ed474a11b264857fc6f71d33d5caa8897d4db69e45049ee9e8e3c1a33",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-14.webp",
+      "ext": "webp",
+      "bytes": 279864,
+      "sha256": "a54a05a57cd2918cd0511d31c49630cec27a39a3adaa0d7e46830212badcecd6",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "a54a05a57cd2918cd0511d31c49630cec27a39a3adaa0d7e46830212badcecd6",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-15.webp",
+      "ext": "webp",
+      "bytes": 283340,
+      "sha256": "89c2c24733347423a5ed01efffa71d9899b07e9f241517bf19495ef4797e2ab4",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "89c2c24733347423a5ed01efffa71d9899b07e9f241517bf19495ef4797e2ab4",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-16.webp",
+      "ext": "webp",
+      "bytes": 284980,
+      "sha256": "eaa01505e2e9357123cc2329ec69445527aad67452a4d4409488ba3d48b46b80",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "eaa01505e2e9357123cc2329ec69445527aad67452a4d4409488ba3d48b46b80",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-17.webp",
+      "ext": "webp",
+      "bytes": 284980,
+      "sha256": "eaa01505e2e9357123cc2329ec69445527aad67452a4d4409488ba3d48b46b80",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "eaa01505e2e9357123cc2329ec69445527aad67452a4d4409488ba3d48b46b80",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-00.webp",
+      "ext": "webp",
+      "bytes": 186658,
+      "sha256": "6aab169c293fbb0632a18a53dc5d6d8411717fdcfa50a011a62ef27bfdc55ce3",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "6aab169c293fbb0632a18a53dc5d6d8411717fdcfa50a011a62ef27bfdc55ce3",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-01.webp",
+      "ext": "webp",
+      "bytes": 186658,
+      "sha256": "6aab169c293fbb0632a18a53dc5d6d8411717fdcfa50a011a62ef27bfdc55ce3",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "6aab169c293fbb0632a18a53dc5d6d8411717fdcfa50a011a62ef27bfdc55ce3",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-02.webp",
+      "ext": "webp",
+      "bytes": 186658,
+      "sha256": "6aab169c293fbb0632a18a53dc5d6d8411717fdcfa50a011a62ef27bfdc55ce3",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "6aab169c293fbb0632a18a53dc5d6d8411717fdcfa50a011a62ef27bfdc55ce3",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-03.webp",
+      "ext": "webp",
+      "bytes": 187202,
+      "sha256": "bc8a95009b59e47cd1e3ae17ec9fd60bb1bbcbdcb34b687491ffbb60cba1dca6",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "bc8a95009b59e47cd1e3ae17ec9fd60bb1bbcbdcb34b687491ffbb60cba1dca6",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-04.webp",
+      "ext": "webp",
+      "bytes": 185880,
+      "sha256": "11017a589985ea73ba8dde67a2b27f4581bea9bf9082937349a7a4caf6dc9ec7",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "11017a589985ea73ba8dde67a2b27f4581bea9bf9082937349a7a4caf6dc9ec7",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-05.webp",
+      "ext": "webp",
+      "bytes": 184568,
+      "sha256": "3f1ac120dd64edcf20d6172b54880279e0aa07068d1f8ba12f77d5365eb9b2cf",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "3f1ac120dd64edcf20d6172b54880279e0aa07068d1f8ba12f77d5365eb9b2cf",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-06.webp",
+      "ext": "webp",
+      "bytes": 181588,
+      "sha256": "cd34fd791d6843c5016e1acf976f183dee4f0b1861492a30c75066a8f7cb9c45",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "cd34fd791d6843c5016e1acf976f183dee4f0b1861492a30c75066a8f7cb9c45",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-07.webp",
+      "ext": "webp",
+      "bytes": 177448,
+      "sha256": "cfee76eab6eee4cead7213f44cc4ac3bdd64a3387490999cea6298423e061e9a",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "cfee76eab6eee4cead7213f44cc4ac3bdd64a3387490999cea6298423e061e9a",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-08.webp",
+      "ext": "webp",
+      "bytes": 188688,
+      "sha256": "3453aefa02b4727113907fa85e84f354525559657b8f25c48e2c2592b9f7c2f7",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "3453aefa02b4727113907fa85e84f354525559657b8f25c48e2c2592b9f7c2f7",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-09.webp",
+      "ext": "webp",
+      "bytes": 208722,
+      "sha256": "7720f004f9fdf0425dbb647e96d8ae1930421722b7a353e2bb773724d1ecf56b",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "7720f004f9fdf0425dbb647e96d8ae1930421722b7a353e2bb773724d1ecf56b",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-10.webp",
+      "ext": "webp",
+      "bytes": 226422,
+      "sha256": "b19b09f77d0e0062fae77ea0215e66b4c67266d2c4699326e0d6228cb9201bee",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "b19b09f77d0e0062fae77ea0215e66b4c67266d2c4699326e0d6228cb9201bee",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-11.webp",
+      "ext": "webp",
+      "bytes": 239398,
+      "sha256": "980be1d5cdd0473ec71f27467bf3493ba63ab84d9389b625e4fdb2f9d9002bcc",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "980be1d5cdd0473ec71f27467bf3493ba63ab84d9389b625e4fdb2f9d9002bcc",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-12.webp",
+      "ext": "webp",
+      "bytes": 247988,
+      "sha256": "f0b1f0a821d63db7e897616f2a103b6ba9ae8136950bec7cef8c8db334e19065",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "f0b1f0a821d63db7e897616f2a103b6ba9ae8136950bec7cef8c8db334e19065",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-13.webp",
+      "ext": "webp",
+      "bytes": 251882,
+      "sha256": "e034c127a103c7664ab7e0c786f6070dc98a22d90d1b106db7e747a2401c8068",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "e034c127a103c7664ab7e0c786f6070dc98a22d90d1b106db7e747a2401c8068",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-14.webp",
+      "ext": "webp",
+      "bytes": 257424,
+      "sha256": "e35572d3c5dff445c201e7502132f2a91ccfa953a8f60d48ecbc4c63de3a16ff",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "e35572d3c5dff445c201e7502132f2a91ccfa953a8f60d48ecbc4c63de3a16ff",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-15.webp",
+      "ext": "webp",
+      "bytes": 260064,
+      "sha256": "3712e351418dcf3e9ef2b49489b396ec5d9642a6dc370364a3b21ad67d322337",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "3712e351418dcf3e9ef2b49489b396ec5d9642a6dc370364a3b21ad67d322337",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-16.webp",
+      "ext": "webp",
+      "bytes": 261222,
+      "sha256": "51b1f8d01a7a382c24903e42353224a447d6a38b2d3685bda06062bb8cdc64a4",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "51b1f8d01a7a382c24903e42353224a447d6a38b2d3685bda06062bb8cdc64a4",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-17.webp",
+      "ext": "webp",
+      "bytes": 261222,
+      "sha256": "51b1f8d01a7a382c24903e42353224a447d6a38b2d3685bda06062bb8cdc64a4",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "51b1f8d01a7a382c24903e42353224a447d6a38b2d3685bda06062bb8cdc64a4",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-00.webp",
+      "ext": "webp",
+      "bytes": 224682,
+      "sha256": "7e85b0102b2fc2c576d7cd764e8d26a16f68e2b70dcb12faf954232280fae2ed",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "7e85b0102b2fc2c576d7cd764e8d26a16f68e2b70dcb12faf954232280fae2ed",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-01.webp",
+      "ext": "webp",
+      "bytes": 224682,
+      "sha256": "7e85b0102b2fc2c576d7cd764e8d26a16f68e2b70dcb12faf954232280fae2ed",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "7e85b0102b2fc2c576d7cd764e8d26a16f68e2b70dcb12faf954232280fae2ed",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-02.webp",
+      "ext": "webp",
+      "bytes": 224682,
+      "sha256": "7e85b0102b2fc2c576d7cd764e8d26a16f68e2b70dcb12faf954232280fae2ed",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "7e85b0102b2fc2c576d7cd764e8d26a16f68e2b70dcb12faf954232280fae2ed",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-03.webp",
+      "ext": "webp",
+      "bytes": 225630,
+      "sha256": "0214745cbc97eb02478e057b6f4273b70a96bac28761b8a5c0cb20b95ae0fcdf",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "0214745cbc97eb02478e057b6f4273b70a96bac28761b8a5c0cb20b95ae0fcdf",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-04.webp",
+      "ext": "webp",
+      "bytes": 226818,
+      "sha256": "8d7bf08802cc79aff26862f9c8c4c40609b4df3fc8975b9b31afb45933869589",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "8d7bf08802cc79aff26862f9c8c4c40609b4df3fc8975b9b31afb45933869589",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-05.webp",
+      "ext": "webp",
+      "bytes": 225804,
+      "sha256": "0d6a2c5113b1adde19db15b2abf47b84e1053d251e3a15929330e8109d2ff90b",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "0d6a2c5113b1adde19db15b2abf47b84e1053d251e3a15929330e8109d2ff90b",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-06.webp",
+      "ext": "webp",
+      "bytes": 223952,
+      "sha256": "d75301ba39147003df49001c72902a1037fde55887ba71c115c69be98f1e03c8",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "d75301ba39147003df49001c72902a1037fde55887ba71c115c69be98f1e03c8",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-07.webp",
+      "ext": "webp",
+      "bytes": 220500,
+      "sha256": "f49c466b0bee679783b5a5431cc1a585c257dfe9ca0b2fb89f345f37235dba56",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "f49c466b0bee679783b5a5431cc1a585c257dfe9ca0b2fb89f345f37235dba56",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-08.webp",
+      "ext": "webp",
+      "bytes": 216390,
+      "sha256": "ffa0533e42e4d9e45b0d770dfb91fd28cb498a2cfde9858fe8e245baa2425c64",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "ffa0533e42e4d9e45b0d770dfb91fd28cb498a2cfde9858fe8e245baa2425c64",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-09.webp",
+      "ext": "webp",
+      "bytes": 234128,
+      "sha256": "ef0de3981afd42fed84b6109abcd3027f3d38a539bd879cfc31f5610e87a9c50",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "ef0de3981afd42fed84b6109abcd3027f3d38a539bd879cfc31f5610e87a9c50",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-10.webp",
+      "ext": "webp",
+      "bytes": 253966,
+      "sha256": "543d1bf35851cc0de7095c5780c85073ab57ff1cd1b75163260d71a14d220d3b",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "543d1bf35851cc0de7095c5780c85073ab57ff1cd1b75163260d71a14d220d3b",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-11.webp",
+      "ext": "webp",
+      "bytes": 269236,
+      "sha256": "ee2095c0608e782cbee5d375b0fd5ec1ddaa193129a16cb75f96b1e67f2ac715",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "ee2095c0608e782cbee5d375b0fd5ec1ddaa193129a16cb75f96b1e67f2ac715",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-12.webp",
+      "ext": "webp",
+      "bytes": 279460,
+      "sha256": "0cdcec16ad27541ac11f3d9b52520537a54201ce0e6f116732f55d53357cc0f4",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "0cdcec16ad27541ac11f3d9b52520537a54201ce0e6f116732f55d53357cc0f4",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-13.webp",
+      "ext": "webp",
+      "bytes": 285092,
+      "sha256": "261472baf2568a8d786a88bb3ee86e41e3f1af2123dba34b7067b0aeb5fdfa72",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "261472baf2568a8d786a88bb3ee86e41e3f1af2123dba34b7067b0aeb5fdfa72",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-14.webp",
+      "ext": "webp",
+      "bytes": 292330,
+      "sha256": "dd633a76f394c0f2437dc13c9d5e7464b62c9cc6205d748205d4fa65c11b5159",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "dd633a76f394c0f2437dc13c9d5e7464b62c9cc6205d748205d4fa65c11b5159",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-15.webp",
+      "ext": "webp",
+      "bytes": 295830,
+      "sha256": "4ac1f51d22901bc67420dd01203d8b2a7163a712e619bdce308be076b4293362",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "4ac1f51d22901bc67420dd01203d8b2a7163a712e619bdce308be076b4293362",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-16.webp",
+      "ext": "webp",
+      "bytes": 298396,
+      "sha256": "ecc5b2a6c872f58b73dd2ade8953f73bc5be36e3809d40fe9858f916ffb062ac",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "ecc5b2a6c872f58b73dd2ade8953f73bc5be36e3809d40fe9858f916ffb062ac",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-17.webp",
+      "ext": "webp",
+      "bytes": 298396,
+      "sha256": "ecc5b2a6c872f58b73dd2ade8953f73bc5be36e3809d40fe9858f916ffb062ac",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "ecc5b2a6c872f58b73dd2ade8953f73bc5be36e3809d40fe9858f916ffb062ac",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-00.webp",
+      "ext": "webp",
+      "bytes": 191356,
+      "sha256": "8b8e8fd18cf9165acedeca46fe968720bb94048f8e16a3007051314763adff72",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "8b8e8fd18cf9165acedeca46fe968720bb94048f8e16a3007051314763adff72",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-01.webp",
+      "ext": "webp",
+      "bytes": 191356,
+      "sha256": "8b8e8fd18cf9165acedeca46fe968720bb94048f8e16a3007051314763adff72",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "8b8e8fd18cf9165acedeca46fe968720bb94048f8e16a3007051314763adff72",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-02.webp",
+      "ext": "webp",
+      "bytes": 191356,
+      "sha256": "8b8e8fd18cf9165acedeca46fe968720bb94048f8e16a3007051314763adff72",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "8b8e8fd18cf9165acedeca46fe968720bb94048f8e16a3007051314763adff72",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-03.webp",
+      "ext": "webp",
+      "bytes": 192418,
+      "sha256": "73a89c7209796383e4dab46ee193cc2d4db153c4364e5670b13750f7dc6e38d1",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "73a89c7209796383e4dab46ee193cc2d4db153c4364e5670b13750f7dc6e38d1",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-04.webp",
+      "ext": "webp",
+      "bytes": 192152,
+      "sha256": "35a2c92d7545be1f3f6361e9d3db9722b66025d132893b5efdd4d4e9eb5045d8",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "35a2c92d7545be1f3f6361e9d3db9722b66025d132893b5efdd4d4e9eb5045d8",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-05.webp",
+      "ext": "webp",
+      "bytes": 191562,
+      "sha256": "5c8c64f6111fbac9a32d1e374c4b5970670db942d153955acf16fea973867266",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "5c8c64f6111fbac9a32d1e374c4b5970670db942d153955acf16fea973867266",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-06.webp",
+      "ext": "webp",
+      "bytes": 186902,
+      "sha256": "af3f91b70314b59e80596f435e0a951b39417004d89aef35e414aaf65f693217",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "af3f91b70314b59e80596f435e0a951b39417004d89aef35e414aaf65f693217",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-07.webp",
+      "ext": "webp",
+      "bytes": 179380,
+      "sha256": "dae0dbc3f38968942581dfbe8858a8b133b4dedc74c014ba14184aa2b3acc2e6",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "dae0dbc3f38968942581dfbe8858a8b133b4dedc74c014ba14184aa2b3acc2e6",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-08.webp",
+      "ext": "webp",
+      "bytes": 193256,
+      "sha256": "534574ba7f807bbbf593e0bbf26dadaed8d55edb6db9db9beb3e14b27fe295e2",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "534574ba7f807bbbf593e0bbf26dadaed8d55edb6db9db9beb3e14b27fe295e2",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-09.webp",
+      "ext": "webp",
+      "bytes": 215096,
+      "sha256": "4f461fe71726fa7af02ec1adcb819af128897f6728d5875b6989cdd2247b31d6",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "4f461fe71726fa7af02ec1adcb819af128897f6728d5875b6989cdd2247b31d6",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-10.webp",
+      "ext": "webp",
+      "bytes": 235546,
+      "sha256": "445748a80a200de35e6b9f879ae92935f732995b029794f35abb81f0c52ffd27",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "445748a80a200de35e6b9f879ae92935f732995b029794f35abb81f0c52ffd27",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-11.webp",
+      "ext": "webp",
+      "bytes": 250360,
+      "sha256": "23338436564b9a4fffa6dc15d729d391e937c8f2f82ad83633767a13531a6b0e",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "23338436564b9a4fffa6dc15d729d391e937c8f2f82ad83633767a13531a6b0e",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-12.webp",
+      "ext": "webp",
+      "bytes": 260920,
+      "sha256": "e298010d110a256d9c82138a37295a250328e53744dba22f89f9deacc04990aa",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "e298010d110a256d9c82138a37295a250328e53744dba22f89f9deacc04990aa",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-13.webp",
+      "ext": "webp",
+      "bytes": 266132,
+      "sha256": "1f4ca606cd80a9e19dbc73e565d9999cbf40cd8269cc4f97de98c80117b6ceed",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "1f4ca606cd80a9e19dbc73e565d9999cbf40cd8269cc4f97de98c80117b6ceed",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-14.webp",
+      "ext": "webp",
+      "bytes": 272194,
+      "sha256": "e8094f34ce84d35ad17d2f2bf2d39bfba224c604a26726c2252529d0f528a1b1",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "e8094f34ce84d35ad17d2f2bf2d39bfba224c604a26726c2252529d0f528a1b1",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-15.webp",
+      "ext": "webp",
+      "bytes": 276092,
+      "sha256": "e6e82e54452e29fee86e341084a00bdeac8b046a2a0281eac524f01de2f2ddf9",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "e6e82e54452e29fee86e341084a00bdeac8b046a2a0281eac524f01de2f2ddf9",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-16.webp",
+      "ext": "webp",
+      "bytes": 277964,
+      "sha256": "cc001beadc53d5447f0e14e9b89fe8b67e04051376e1dd4a6c8d423396554bef",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "cc001beadc53d5447f0e14e9b89fe8b67e04051376e1dd4a6c8d423396554bef",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-17.webp",
+      "ext": "webp",
+      "bytes": 277964,
+      "sha256": "cc001beadc53d5447f0e14e9b89fe8b67e04051376e1dd4a6c8d423396554bef",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "cc001beadc53d5447f0e14e9b89fe8b67e04051376e1dd4a6c8d423396554bef",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-00.webp",
+      "ext": "webp",
+      "bytes": 143532,
+      "sha256": "57834aeb382d8383c15a09a5cd696077b03ea66e3a68d1ad43e97b30deaca57c",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "57834aeb382d8383c15a09a5cd696077b03ea66e3a68d1ad43e97b30deaca57c",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-01.webp",
+      "ext": "webp",
+      "bytes": 143532,
+      "sha256": "57834aeb382d8383c15a09a5cd696077b03ea66e3a68d1ad43e97b30deaca57c",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "57834aeb382d8383c15a09a5cd696077b03ea66e3a68d1ad43e97b30deaca57c",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-02.webp",
+      "ext": "webp",
+      "bytes": 143532,
+      "sha256": "57834aeb382d8383c15a09a5cd696077b03ea66e3a68d1ad43e97b30deaca57c",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "57834aeb382d8383c15a09a5cd696077b03ea66e3a68d1ad43e97b30deaca57c",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-03.webp",
+      "ext": "webp",
+      "bytes": 145560,
+      "sha256": "81f26ad3ec0f03dfde11137a8383b97138d6977037e29c4ad537366301c621e8",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "81f26ad3ec0f03dfde11137a8383b97138d6977037e29c4ad537366301c621e8",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-04.webp",
+      "ext": "webp",
+      "bytes": 148288,
+      "sha256": "8c6fc066c1c1a9266fbd9fc1baedd754425c10dfc740a70b575d1f386909f657",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "8c6fc066c1c1a9266fbd9fc1baedd754425c10dfc740a70b575d1f386909f657",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-05.webp",
+      "ext": "webp",
+      "bytes": 148314,
+      "sha256": "86c318440ee598ca88e96cdc51f0d2b19b235d4d5d85ef8000202808481cd8c3",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "86c318440ee598ca88e96cdc51f0d2b19b235d4d5d85ef8000202808481cd8c3",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-06.webp",
+      "ext": "webp",
+      "bytes": 146944,
+      "sha256": "1ddb3d999536e662875248753cf4569153eefadc39bb6b5323bdcebc42069b3e",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "1ddb3d999536e662875248753cf4569153eefadc39bb6b5323bdcebc42069b3e",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-07.webp",
+      "ext": "webp",
+      "bytes": 140484,
+      "sha256": "0ef56140d1c4c7a303416c79901416f4b8eb35a132ac067dc75b4b4f5e141bbc",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "0ef56140d1c4c7a303416c79901416f4b8eb35a132ac067dc75b4b4f5e141bbc",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-08.webp",
+      "ext": "webp",
+      "bytes": 155110,
+      "sha256": "2d548a4591864545a87d06a13a6d307755e62151329252b5143145de993ff263",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "2d548a4591864545a87d06a13a6d307755e62151329252b5143145de993ff263",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-09.webp",
+      "ext": "webp",
+      "bytes": 179648,
+      "sha256": "7d7665b911647fd1cc7d8e13fd03cb214ac14e34b6b5f19a489c5e9453fdd55f",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "7d7665b911647fd1cc7d8e13fd03cb214ac14e34b6b5f19a489c5e9453fdd55f",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-10.webp",
+      "ext": "webp",
+      "bytes": 202252,
+      "sha256": "b98f3c651c0969f96160292a0fbdbd7c2d6111f872bdd22764bae36606f47828",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "b98f3c651c0969f96160292a0fbdbd7c2d6111f872bdd22764bae36606f47828",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-11.webp",
+      "ext": "webp",
+      "bytes": 219170,
+      "sha256": "0d31040a973999910e8360b54626405db3926d01f53240a4d63d58e02aa02251",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "0d31040a973999910e8360b54626405db3926d01f53240a4d63d58e02aa02251",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-12.webp",
+      "ext": "webp",
+      "bytes": 230116,
+      "sha256": "7638db0bdcf797276095a5ee31dd18c610499ccc30202ef8784d69254eda092f",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "7638db0bdcf797276095a5ee31dd18c610499ccc30202ef8784d69254eda092f",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-13.webp",
+      "ext": "webp",
+      "bytes": 235438,
+      "sha256": "52e90c7b950f8a7d11e74d7612ae7df5bd403326ec917212e216ea39f9174a93",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "52e90c7b950f8a7d11e74d7612ae7df5bd403326ec917212e216ea39f9174a93",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-14.webp",
+      "ext": "webp",
+      "bytes": 242876,
+      "sha256": "f5db37cd34a38cecfc8485a489f0efe2a88b90e02b2025d550610ab453ef35db",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "f5db37cd34a38cecfc8485a489f0efe2a88b90e02b2025d550610ab453ef35db",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-15.webp",
+      "ext": "webp",
+      "bytes": 246530,
+      "sha256": "93d0019234fdf206cd1bd978c4012bfc60e15473aef2768ecbf5da48731c778a",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "93d0019234fdf206cd1bd978c4012bfc60e15473aef2768ecbf5da48731c778a",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-16.webp",
+      "ext": "webp",
+      "bytes": 248260,
+      "sha256": "8ff0d1656c438489ae9776e7645aa1564165e7ba3d8b700eebff12fc10635044",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "8ff0d1656c438489ae9776e7645aa1564165e7ba3d8b700eebff12fc10635044",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-17.webp",
+      "ext": "webp",
+      "bytes": 248260,
+      "sha256": "8ff0d1656c438489ae9776e7645aa1564165e7ba3d8b700eebff12fc10635044",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "8ff0d1656c438489ae9776e7645aa1564165e7ba3d8b700eebff12fc10635044",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/entry/modern-winter-entry-1011-v2.webp",
+      "ext": "webp",
+      "bytes": 233244,
+      "sha256": "7066dd7f26e4006ec8005f5b927f62c237439edcfe94cee694acd27890075331",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/roster-entry-continue/runtime-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "7066dd7f26e4006ec8005f5b927f62c237439edcfe94cee694acd27890075331",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/battle-security-shard-1011.webp",
+      "ext": "webp",
+      "bytes": 68314,
+      "sha256": "0ae9a6bed89201af11fe22c9ee807dbddd03c3e86a01f7206e5e3ff447d12610",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/reference-implementation/map/assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "0ae9a6bed89201af11fe22c9ee807dbddd03c3e86a01f7206e5e3ff447d12610",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/battle-security-shard-style-1012-v2.webp",
+      "ext": "webp",
+      "bytes": 142158,
+      "sha256": "4e5f5202e99415f199fa32f76933238bc16970580b349abc7f0898ea8b39e113",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-12-map-visual-review/repair-map/assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "4e5f5202e99415f199fa32f76933238bc16970580b349abc7f0898ea8b39e113",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/battle-symbol-foreground-1012-v5.webp",
+      "ext": "webp",
+      "bytes": 125126,
+      "sha256": "9241f51308b4dc172921cc37f56303d9361a17c520d55d33e7761ff029bb5f19",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-12-map-visual-review/direct-is7-rebuild/foreground-assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "9241f51308b4dc172921cc37f56303d9361a17c520d55d33e7761ff029bb5f19",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/event-record-fragments-1011.webp",
+      "ext": "webp",
+      "bytes": 98378,
+      "sha256": "d67a4310aaaa7a75b3c7c6c9b0ff88035b938e975992fd50577e8ed29caba76a",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/reference-implementation/map/final-source-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "d67a4310aaaa7a75b3c7c6c9b0ff88035b938e975992fd50577e8ed29caba76a",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/event-record-fragments-style-1012-v2.webp",
+      "ext": "webp",
+      "bytes": 149144,
+      "sha256": "5c7d930ed799aedd5be81f3801666ee516d7d71defccbe651f1cbc1974945084",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-12-map-visual-review/repair-map/assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "5c7d930ed799aedd5be81f3801666ee516d7d71defccbe651f1cbc1974945084",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/event-symbol-foreground-1012-v5.webp",
+      "ext": "webp",
+      "bytes": 105828,
+      "sha256": "6df8d522aab6d7f5edddd98cb66a10d5e7c4cbfdeecd042997d87fa7854b0999",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-12-map-visual-review/direct-is7-rebuild/foreground-assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "6df8d522aab6d7f5edddd98cb66a10d5e7c4cbfdeecd042997d87fa7854b0999",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/fire-symbol-foreground-1012-v5.webp",
+      "ext": "webp",
+      "bytes": 75156,
+      "sha256": "e145548da1a0ee66277e112f0ccd76aeeef8ad2ed3df26e335c42cc0184a316e",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-12-map-visual-review/direct-is7-rebuild/foreground-assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "e145548da1a0ee66277e112f0ccd76aeeef8ad2ed3df26e335c42cc0184a316e",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/map-atmosphere-is7-1012.webp",
+      "ext": "webp",
+      "bytes": 148558,
+      "sha256": "db2c4768a388e612ed7ce9da11657b6fc81d0698268afc13713287b76894babe",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-12-map-visual-review/source-layout-repair.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "db2c4768a388e612ed7ce9da11657b6fc81d0698268afc13713287b76894babe",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/passage-symbol-foreground-1012-v5.webp",
+      "ext": "webp",
+      "bytes": 93940,
+      "sha256": "d34a0b8ab3105d97f9428707d33a0ea60812325bbbc50a9d4c1f6c1aceb400f8",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-12-map-visual-review/direct-is7-rebuild/foreground-assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "d34a0b8ab3105d97f9428707d33a0ea60812325bbbc50a9d4c1f6c1aceb400f8",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/passage-transit-core-1011.webp",
+      "ext": "webp",
+      "bytes": 98528,
+      "sha256": "e9b7fec6ed2f86770449aa911433d77b9cc6150f64c4c60789c06b04be912550",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/reference-implementation/map/final-source-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "e9b7fec6ed2f86770449aa911433d77b9cc6150f64c4c60789c06b04be912550",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/passage-transit-core-palette-1012-v3.webp",
+      "ext": "webp",
+      "bytes": 146620,
+      "sha256": "f6b480a10da5624168e62af688172c47b832dfb0deb5c588df91343e976c15bf",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-12-map-visual-review/repair-map/palette-assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "f6b480a10da5624168e62af688172c47b832dfb0deb5c588df91343e976c15bf",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/passage-transit-core-style-1012-v2.webp",
+      "ext": "webp",
+      "bytes": 149218,
+      "sha256": "12dab51ed6fb5bee8ceb055f4f84c6bd16bfd55ea2ba128e6789552608468053",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-12-map-visual-review/repair-map/assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "12dab51ed6fb5bee8ceb055f4f84c6bd16bfd55ea2ba128e6789552608468053",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/rest-heat-cell-1011.webp",
+      "ext": "webp",
+      "bytes": 80176,
+      "sha256": "ea177d2c97939cd941582214c1a39e2380f353c3da8fa84505ea0fafd1c760e0",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/reference-implementation/map/assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "ea177d2c97939cd941582214c1a39e2380f353c3da8fa84505ea0fafd1c760e0",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/rest-heat-cell-style-1012-v2.webp",
+      "ext": "webp",
+      "bytes": 179626,
+      "sha256": "99a2179f3a5ffabba9ad035a32db294a6631342d4718d7c3bc012d3abf9b1dd9",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-12-map-visual-review/repair-map/assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "99a2179f3a5ffabba9ad035a32db294a6631342d4718d7c3bc012d3abf9b1dd9",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/shop-exchange-token-1011.webp",
+      "ext": "webp",
+      "bytes": 114100,
+      "sha256": "a954e5228f9570c49de9eaf95b851dffd4665f83be328b85ccb6713091638f91",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/reference-implementation/map/source-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "a954e5228f9570c49de9eaf95b851dffd4665f83be328b85ccb6713091638f91",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/shop-exchange-token-palette-1012-v3.webp",
+      "ext": "webp",
+      "bytes": 171656,
+      "sha256": "3e7a6a6f77a10ba3a2eeba29a1ace0ab9a7415362575d973c4e3b49e140d79f7",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-12-map-visual-review/repair-map/palette-assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "3e7a6a6f77a10ba3a2eeba29a1ace0ab9a7415362575d973c4e3b49e140d79f7",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/shop-exchange-token-style-1012-v2.webp",
+      "ext": "webp",
+      "bytes": 177964,
+      "sha256": "a2bc2a953c7d435c0c50c98775893f78c686048b2eeddb0022c69951280d334d",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-12-map-visual-review/repair-map/assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "a2bc2a953c7d435c0c50c98775893f78c686048b2eeddb0022c69951280d334d",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/shop-symbol-foreground-1012-v5.webp",
+      "ext": "webp",
+      "bytes": 97304,
+      "sha256": "4fb22693b2c332bac0b3b5e775d4492382696558426f27ae1932bd853d5e3224",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-12-map-visual-review/direct-is7-rebuild/foreground-assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "4fb22693b2c332bac0b3b5e775d4492382696558426f27ae1932bd853d5e3224",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/map-nodes/supply-symbol-foreground-1012-v5.webp",
+      "ext": "webp",
+      "bytes": 72068,
+      "sha256": "78264daa8743dbbd26efcc4f48b6df223106d8bde8d9f292eb490a43af5b145f",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-12-map-visual-review/direct-is7-rebuild/foreground-assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "78264daa8743dbbd26efcc4f48b6df223106d8bde8d9f292eb490a43af5b145f",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/rewards/chest-small-1011-v2.webp",
+      "ext": "webp",
+      "bytes": 526708,
+      "sha256": "ed43f22a4fbb9af6977e22bf17e7b642ee928174839918164d4eed93467e3f8a",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/generated-art/assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "ed43f22a4fbb9af6977e22bf17e7b642ee928174839918164d4eed93467e3f8a",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/rewards/chest-small-cardstyle-1011-v1.webp",
+      "ext": "webp",
+      "bytes": 815604,
+      "sha256": "ce11a73fa18d93700c93b4ef8fb518e1925be3af4261b142eafded0cba89042a",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-research-reset/chest-cardstyle/receipt-small.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "ce11a73fa18d93700c93b4ef8fb518e1925be3af4261b142eafded0cba89042a",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/shop/shop-cardstyle-approved-1011.webp",
+      "ext": "webp",
+      "bytes": 1181460,
+      "sha256": "d150710921cd395438f44d98798312e71c9e10f15df887d528909c83e4f335d2",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-calibration/shop/runtime-receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "d150710921cd395438f44d98798312e71c9e10f15df887d528909c83e4f335d2",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "ui/ak/barcode.svg",
+      "ext": "svg",
+      "bytes": 1009,
+      "sha256": "bd0192e21069cfb43a5358308ae40dc2697e22dd1511e863526ed432a1dd3852",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "git:a5c997ab:搜打撤/game/assets/ui/ak/barcode.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/ak/chevrons.svg",
+      "ext": "svg",
+      "bytes": 184,
+      "sha256": "4b583114c9ed6506fd119b10c522059cb68280f4e1151bd7d3ea5335f1dc4b30",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "git:a5c997ab:搜打撤/game/assets/ui/ak/chevrons.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/ak/corner.svg",
+      "ext": "svg",
+      "bytes": 158,
+      "sha256": "1edf68d91b3d361faadda27153e3447adff74595e2e3bacd7ad0dca49783784b",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "git:a5c997ab:搜打撤/game/assets/ui/ak/corner.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/ak/dot-matrix.svg",
+      "ext": "svg",
+      "bytes": 150,
+      "sha256": "f62f219ee94636a754a520f21828319683df6910b9737eb3a020218acd96e163",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "git:a5c997ab:搜打撤/game/assets/ui/ak/dot-matrix.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/ak/frame-cut.svg",
+      "ext": "svg",
+      "bytes": 212,
+      "sha256": "63200ae1de074795e58cd85886f3a2bea213bd8d7794ee97f5d17a2f7e1702dd",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "git:a5c997ab:搜打撤/game/assets/ui/ak/frame-cut.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/ak/grid-fine.svg",
+      "ext": "svg",
+      "bytes": 250,
+      "sha256": "0cfda39ca707fe1b3ab0dab9a6212865d20f7884eb81d4b56db9e6a49aa8f31b",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "git:a5c997ab:搜打撤/game/assets/ui/ak/grid-fine.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/ak/hatch.svg",
+      "ext": "svg",
+      "bytes": 191,
+      "sha256": "dc918f0b93e0c5cedfd7510542ecdeb652f7f82d41cb3b56a4e2e48c71625344",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "git:a5c997ab:搜打撤/game/assets/ui/ak/hatch.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/ak/hazard.svg",
+      "ext": "svg",
+      "bytes": 199,
+      "sha256": "18f095750570d2b90da1c7c3b44cbe0b773a32bb083eb4b37c65f5b43c939b66",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "git:a5c997ab:搜打撤/game/assets/ui/ak/hazard.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/ak/hex-tile.svg",
+      "ext": "svg",
+      "bytes": 232,
+      "sha256": "8561ea75dc0aecb5025830a5af96db6f0e02506b8a24f272fe52ebf62e1b25d3",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "git:a5c997ab:搜打撤/game/assets/ui/ak/hex-tile.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/ak/noise.svg",
+      "ext": "svg",
+      "bytes": 305,
+      "sha256": "84630c29220a4abcea297520c44e4bd4f8f04c12144d67dc94e68ab73d411723",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "git:a5c997ab:搜打撤/game/assets/ui/ak/noise.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/ak/rhodes-mark.svg",
+      "ext": "svg",
+      "bytes": 390,
+      "sha256": "96c3b0fe03a12670b3d82982eee7bf76de02278acf53fb958d459c4f5bb56260",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "git:a5c997ab:搜打撤/game/assets/ui/ak/rhodes-mark.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/ak/scanline.svg",
+      "ext": "svg",
+      "bytes": 151,
+      "sha256": "c99cc0cc4047905787768c6668c1612f6f44707e0d7767f4a2b6a4b140ec24fb",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "git:a5c997ab:搜打撤/game/assets/ui/ak/scanline.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/corner-class.svg",
+      "ext": "svg",
+      "bytes": 765,
+      "sha256": "39d952d628811d8e000edc8abea682c49816d40bffb4e7c1680491a5981199e5",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/corner-class.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/corner-epic.svg",
+      "ext": "svg",
+      "bytes": 1971,
+      "sha256": "26f79d6a97759334af86b12caf3333dc3242351d22dd7151d852b3a2bb1337fc",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/corner-epic.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/corner-plain.svg",
+      "ext": "svg",
+      "bytes": 1037,
+      "sha256": "d0a14bf88ea311b6d09fb67e5efeae95f36fcf767dbf003b635fe5acf7d63ab2",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/corner-plain.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/corner-prismatic.svg",
+      "ext": "svg",
+      "bytes": 1579,
+      "sha256": "73275c7363ad4be8fc62d4d1f1644fbc5c4397280600fdc15860c5590f7235e9",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/corner-prismatic.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/corner-rare.svg",
+      "ext": "svg",
+      "bytes": 1154,
+      "sha256": "1c5381dd479bef4939ca84c5e0b254058b613aea1d159459ced1997546ede561",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/corner-rare.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/mount-epic.svg",
+      "ext": "svg",
+      "bytes": 2738,
+      "sha256": "c07edf71311e123177a47e10c17e0deae715914630b101373c58bc3c2b54b923",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/mount-epic.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/mount-prismatic.svg",
+      "ext": "svg",
+      "bytes": 2320,
+      "sha256": "02d914e9bb9d350ba0385dfc479b24dce208729c711517aec4325ee864edff93",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/mount-prismatic.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/mount-rare.svg",
+      "ext": "svg",
+      "bytes": 1969,
+      "sha256": "8f47159f09b00f3464f8957698f38744c296462e89d149d05857986b1e935693",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/mount-rare.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/mount-thumbnail-class.svg",
+      "ext": "svg",
+      "bytes": 1308,
+      "sha256": "0a35c73f271bb01665cb746f602c27009342caa34c0f188b5d6104c504d96812",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/mount-thumbnail-class.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/mount-thumbnail-derived.svg",
+      "ext": "svg",
+      "bytes": 845,
+      "sha256": "c0aa100a78215d8442afcab8cada3dd2ad424a5bd88802526bbe60573428e8b3",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/mount-thumbnail-derived.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/mount-thumbnail-epic.svg",
+      "ext": "svg",
+      "bytes": 2446,
+      "sha256": "22d1a0e90403d74aa29d073fce6a62270c580cbecb20a33450209d89c2f52dbc",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/mount-thumbnail-epic.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/mount-thumbnail-plain.svg",
+      "ext": "svg",
+      "bytes": 1537,
+      "sha256": "9679d9d7816dd48f4fbdddee069bea3fde40458d564b87c5eabce76885a11f3a",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/mount-thumbnail-plain.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/mount-thumbnail-prismatic.svg",
+      "ext": "svg",
+      "bytes": 2150,
+      "sha256": "da03d83d42ccff3733052e44ae0c44ab0170e6f79b3ce4be6825969f79b5f8a3",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/mount-thumbnail-prismatic.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/mount-thumbnail-proof.svg",
+      "ext": "svg",
+      "bytes": 758,
+      "sha256": "dfd073c85db01b9922b63c6148efbb19607dfd37c2faafaf7d48805a78a328ab",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/mount-thumbnail-proof.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/mount-thumbnail-rare.svg",
+      "ext": "svg",
+      "bytes": 1631,
+      "sha256": "9e5ece890e07fbc5ce200f935a470d4b09633d5a0329a5a6c5abbee352df59fa",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/mount-thumbnail-rare.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/rails-class.svg",
+      "ext": "svg",
+      "bytes": 1343,
+      "sha256": "564ea50a026ad51f63c72f3b1e992ac922d89ba76735f39329be99d307f20f3b",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/rails-class.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/rails-epic.svg",
+      "ext": "svg",
+      "bytes": 2509,
+      "sha256": "e0a550a23b0fd791f4ccf547cbc3139ed50b73346961841be0fdb8bcda32e4f8",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/rails-epic.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/rails-plain.svg",
+      "ext": "svg",
+      "bytes": 1691,
+      "sha256": "f7e1c5458cb28c263302327e0db81169f2927d83c20f84c7b1d18b9c522f9394",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/rails-plain.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/rails-prismatic.svg",
+      "ext": "svg",
+      "bytes": 2076,
+      "sha256": "f53680bd2569ea6edf40bf2442179f93f5411ec01935c84a8ad3e3ce2ab910db",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/rails-prismatic.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/rails-rare.svg",
+      "ext": "svg",
+      "bytes": 1768,
+      "sha256": "1f4cc9b0a08e0e6805dcd7143c9f79667b9267b46616dc1f0c38ee2121443054",
+      "license": "项目MIT代码型SVG（几何形状、渐变与滤镜；非第三方图片提取）",
+      "source": "game/assets/ui/photo-studio/rails-rare.svg",
+      "provenance": {
+        "kind": "inline-geometric-svg-source",
+        "externalRaster": false,
+        "externalScript": false,
+        "publicationScope": "随项目私有运行包；不据文件名宣称第三方商标授权"
+      }
+    },
+    {
+      "path": "ui/settings-shutter-1011.webp",
+      "ext": "webp",
+      "bytes": 66834,
+      "sha256": "4cd4af3ba76982907cf69ba09d116eb4e2df4418fb29336371a374dfe5121b05",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "game/art-source/ui/settings-transition-20261011/receipt.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "4cd4af3ba76982907cf69ba09d116eb4e2df4418fb29336371a374dfe5121b05",
+        "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "vendor/base-courtyard/KoiPond.js",
+      "ext": "js",
+      "bytes": 12823,
+      "sha256": "30a4777c346c6b10e4a4800e5f7f88e84a096e0f1ecfdef86c4e0126ce275963",
+      "license": "MIT（第三方渲染源码审核副本，非运行时入口）",
+      "source": "game/assets/vendor/base-courtyard/SOURCE.md",
+      "provenance": {
+        "kind": "fixed-upstream-commit-and-bundled-license",
+        "licenseFile": "game/assets/vendor/base-courtyard/koi-LICENSE.txt"
+      }
+    },
+    {
+      "path": "vendor/base-courtyard/RainRenderer.js",
+      "ext": "js",
+      "bytes": 14949,
+      "sha256": "0cd254b6c2b538d062625d8474db4ac49b679507801453fd49ea7e384ec46acd",
+      "license": "MIT（第三方渲染源码审核副本，非运行时入口）",
+      "source": "game/assets/vendor/base-courtyard/SOURCE.md",
+      "provenance": {
+        "kind": "fixed-upstream-commit-and-bundled-license",
+        "licenseFile": "game/assets/vendor/base-courtyard/rain-LICENSE.txt"
+      }
+    },
+    {
+      "path": "vendor/base-courtyard/RainSimulation.js",
+      "ext": "js",
+      "bytes": 17184,
+      "sha256": "c7dfbf5bc6e2cc1de96078909eff39d1198310b68c878e2a7b02be66f55437f5",
+      "license": "MIT（第三方渲染源码审核副本，非运行时入口）",
+      "source": "game/assets/vendor/base-courtyard/SOURCE.md",
+      "provenance": {
+        "kind": "fixed-upstream-commit-and-bundled-license",
+        "licenseFile": "game/assets/vendor/base-courtyard/rain-LICENSE.txt"
+      }
+    }
+  ],
+  "excludedLocal": [
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-00.webp",
+      "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-01.webp",
+      "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-02.webp",
+      "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-03.webp",
+      "sha256": "94774a45ac99c0720101d00499acec25f0b3587e89549f1e3dfcd057a0c5b0af",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-04.webp",
+      "sha256": "85c351a0ca47d24795e6d17de751b773c8f8146a2bb92e02fcd309364d5b4693",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-05.webp",
+      "sha256": "76247c76e962518439e3900a52afc673a8b9b521c01710e7609fca66439ad46c",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-06.webp",
+      "sha256": "afd33fb7c3d10c97e66680398ed571ebb9a087849e9c70a218994705594a3163",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-07.webp",
+      "sha256": "be7b2032aa42be8f8acde5665b7440c21aa22a760f67e09f12651de210e17caa",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-08.webp",
+      "sha256": "15e9ea046a13215383721aea6185e3cd12e0473ae6b4718a53f86fe7628b3d26",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-09.webp",
+      "sha256": "e387404cfc53c74d2f6dcbbbe4b5436bd586bd0ff169d18c4f0ecd699c1ad9f8",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-10.webp",
+      "sha256": "e11c191cff5816fcc6224e8bc38158a3fd19b1a9d9e86d7e92d5bc4714970603",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-11.webp",
+      "sha256": "502aa60a6c7254510df1fd487927a77b57a0d07ee5f8af6f97e4faf9a5877cf8",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-12.webp",
+      "sha256": "054ccc3177b0eea5a247906abca5078d18c919d5de3b3812fde84c28d4b178b2",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-13.webp",
+      "sha256": "d1844400e2857fa0cfa087c1c6a99ba798a5d119ec0708e4756632de14ef5f32",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-14.webp",
+      "sha256": "6339875d2d0a993127863536d71277b4a62d37a208335c7a5ece5805ffd08e6c",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-15.webp",
+      "sha256": "9913806c04a932529e2c2c92cd7e504d6cb360230a89683b411d81a6b5682f1e",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-16.webp",
+      "sha256": "2fe904b1edea85063ffba69c0a6ab252f636da57bc808b7fd46a9d58c27e009d",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-17.webp",
+      "sha256": "2fe904b1edea85063ffba69c0a6ab252f636da57bc808b7fd46a9d58c27e009d",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-00.webp",
+      "sha256": "01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-01.webp",
+      "sha256": "01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-02.webp",
+      "sha256": "01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-03.webp",
+      "sha256": "b99a25df8026fddb7b356301d3bfccb5328e2761c6ad304fc708b8ab9d6fcdc4",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-04.webp",
+      "sha256": "68f6a8547a27509136da6e5cee62470524c578b6b74716a5207fdfd1410846df",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-05.webp",
+      "sha256": "c3450e00acfbcfc34f137c85117c76abff205c7a791bba8bd0c565cdaefdbd13",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-06.webp",
+      "sha256": "70611229c98bb520cdb777ab2dc2e1de9a5a23d3198cdded5878c9be671bd81a",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-07.webp",
+      "sha256": "fc1b858328fcf566b29fa2f1c28013436961068dfdbd13f531b80add2360915f",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-08.webp",
+      "sha256": "f6abb429ba3f0e8ffa3a4defe27b6b2920cd4f7aa0a4076182a11232bcfb6ff0",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-09.webp",
+      "sha256": "bf5d11e7295b1c218d57311c38c888e1f4162196f0a6e8db82f67facf4b29d9c",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-10.webp",
+      "sha256": "fe08a53bba55e94a2a5472f4f52cac03020bcef46031cfe048e5fe6929ace088",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-11.webp",
+      "sha256": "c17cb89ecc7ba187a397f69e03f996eb70426cf9c1c37d1f0968717c82f7eb15",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-12.webp",
+      "sha256": "58a49b9d1f7a06f4ca3d48781ee4a552c269c59c9c1888939c9fa1ee509d6cdb",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-13.webp",
+      "sha256": "e2f3752f9c6f34d2815e6fdcf6f1afc0fc2cb8ae4238fbecdd5bd40e258df8b8",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-14.webp",
+      "sha256": "d5a969be35552c4422491864128b3843ce92e1db73ea76aa22c4fb04c5070fab",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-15.webp",
+      "sha256": "93de68584716f24b2ccfaf2b59a67a10ec5bce2a19bc4b1262f24bf231dc0c94",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-16.webp",
+      "sha256": "cc91c7e7361146ac33af952f07f2f1f0c90244b38643f45974d2582a684c46e8",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-17.webp",
+      "sha256": "cc91c7e7361146ac33af952f07f2f1f0c90244b38643f45974d2582a684c46e8",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-00.webp",
+      "sha256": "302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-01.webp",
+      "sha256": "302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-02.webp",
+      "sha256": "302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-03.webp",
+      "sha256": "acdbc06634b9960c6ab3a80c5957b1c8e6eec715bfad6b129febeb9176b337fa",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-04.webp",
+      "sha256": "62fe905a6a76d74e0516ac57d20c297c05a8b6b1c36709049de22a4a1c5187a4",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-05.webp",
+      "sha256": "d19e76451620ece3aacfde2ca6910b2b1448bb93497cd9fc813872f238d66ff0",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-06.webp",
+      "sha256": "6891c14ff4fbae815c5aff5f8e889bed20f04579362c0a7dd01f7c8f3b38c41b",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-07.webp",
+      "sha256": "fe300781aaa662d0429735d0aa6aef50a574cd20cf3a2f52fa8cec582683f380",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-08.webp",
+      "sha256": "f311793b0381ebd8c44366252f01f24f0cc3dd90fb1c3ade9f2e3e3e094a11c3",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-09.webp",
+      "sha256": "a59a77a69518637de8f7286896d6635fcff64fb52b73642c1920e8d8930ebbff",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-10.webp",
+      "sha256": "c7e9efec08a649571fe480f1dd75d7be86b4ab8bcec15bc9de87e42d84ccf603",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-11.webp",
+      "sha256": "defb9bf1a7fd881335c2adbe3e0ab4e0bd5c196a8c4dae3e1dd75a0f17d75976",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-12.webp",
+      "sha256": "2960725c4a976b74afad8e13c4ff6743ff6c535eaf757a3440c84d34c23a8f12",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-13.webp",
+      "sha256": "6fb5df55d0e1fe6458b354293f2544890413a0075e6f46397fc64536d967bbea",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-14.webp",
+      "sha256": "c53d350b83cf17394a76f4c1bf6b478dcee0915d5dd2db46f405aea00dbb94ac",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-15.webp",
+      "sha256": "081f52a3965dbc551a3d14a03e9403d374077fde0e54d1b4e8c12c6d7a851b05",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-16.webp",
+      "sha256": "2b99084e67d8a733029ff476f796ebc89d67a86a9fb5ad2568e1822a88cfe65f",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-17.webp",
+      "sha256": "2b99084e67d8a733029ff476f796ebc89d67a86a9fb5ad2568e1822a88cfe65f",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-00.webp",
+      "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-01.webp",
+      "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-02.webp",
+      "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-03.webp",
+      "sha256": "e12a3dd6a4e6843a9fbb416c2c34067b160483603927946a4dea023a56b1550b",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-04.webp",
+      "sha256": "06412732701b7784a440b907dabefbadf1896088ea05b7d7d95d0546254fe41b",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-05.webp",
+      "sha256": "1b4c69216e9567b1f990e7a1589746934f68113ccf7cf020f25adab0b26dbc03",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-06.webp",
+      "sha256": "be1e03f49b3777ba6a8113c42da4578d5e89bbafa6ee505c77769dfed6417e06",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-07.webp",
+      "sha256": "bc270061bc8cec9379688793e3d110f1fc3a62cce16cd3b017329ab0fd105e34",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-08.webp",
+      "sha256": "47158af5913abfa92a500669d11bc39a9ee10648d14f7a11208f0e894e6e92ea",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-09.webp",
+      "sha256": "d2d9a3542caa8a0a45860c189fc27285920e18f60eb4a2010366c9fc35c1ae37",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-10.webp",
+      "sha256": "9776c1b80b0c937bb5299695e8e1d1aed837c8514be08009154f9bbe557af8fd",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-11.webp",
+      "sha256": "c150a3ac827c42507b18d8debed5c85ec024b58c485e5adf354ed5e020f3c798",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-12.webp",
+      "sha256": "360774e5d972dd5f007f1f91a61633cb34c2d85cfebffc9c59dffedff9c7cac1",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-13.webp",
+      "sha256": "ae338a4aac3d89a5dd7c6ef14067ddf7d67ea19ed6ace7a06358346beda3d353",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-14.webp",
+      "sha256": "13192f1d4fdb8794abfeb97907e2a80c5a01fbd5dde609aea1cbdd80325cb5b3",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-15.webp",
+      "sha256": "dd1d299273c6a1cf64360818588eab531ba28bcdb51bf0618672653e2f2a2061",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-16.webp",
+      "sha256": "8db593ca1e301e321eb8150ac8353e3c6283c426ea6e4b3f8a1ab4dfafddba73",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-17.webp",
+      "sha256": "8db593ca1e301e321eb8150ac8353e3c6283c426ea6e4b3f8a1ab4dfafddba73",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-00.webp",
+      "sha256": "d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-01.webp",
+      "sha256": "d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-02.webp",
+      "sha256": "d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-03.webp",
+      "sha256": "5fe2dfa385585d5faa2b7801f0f1d28c8510533bd96126b82dff3fd32dce68af",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-04.webp",
+      "sha256": "b51ff0795fa7aac4420d4904a511e0829e32140d1a6a212f20a3834bc04d1ea1",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-05.webp",
+      "sha256": "21d3558c2acd849175cda86447944e4c8d6361b4744d6d8b977aedfc55d71a8a",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-06.webp",
+      "sha256": "875c073a6873a8a53c88c589638c78d1b16af8b311d63e5aa7ae1211b2b62fe0",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-07.webp",
+      "sha256": "19c120f9864e0bc545aedcb9064f7c58d239a5f1f815ead347369526d44ca5de",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-08.webp",
+      "sha256": "5de58f883a4433fde77cb26eef5069dcd4f6115c707e0ea67017a8319be3f9af",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-09.webp",
+      "sha256": "4483917748d8001e87b2455157ac47ec49d300107ce0bfba47817c14fb90aa5f",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-10.webp",
+      "sha256": "7c3682abdd6c04374a08dc69c9366766e1195b6bbacc94e7c5923fef549e2f39",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-11.webp",
+      "sha256": "4960e6105e5148ed97250bffe233db1e50eff9a844eb1e0e6e128913fe9ebb37",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-12.webp",
+      "sha256": "0316963668739a206eb24312c0cbeee0b5ac4cf62d6c5a85f16353189458ec09",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-13.webp",
+      "sha256": "d31fc632f3ac86869ccc424e736adeac78022991b0e38f58f26b9e629b96a5b4",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-14.webp",
+      "sha256": "1d44b980a0895e079995015da9007f180eefde61a65b84faa1ab5ac6fe0918f6",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-15.webp",
+      "sha256": "3053276a6984192f45d2a3f6ab7b25dc7e8f8c7b307bb486f410315a76460424",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-16.webp",
+      "sha256": "d3caa80535fb08b3e3faa3df4d92eb3452e7b17e9866728db2a13253cc17b7aa",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-17.webp",
+      "sha256": "d3caa80535fb08b3e3faa3df4d92eb3452e7b17e9866728db2a13253cc17b7aa",
+      "reason": "1254像素来源帧，当前chests.js引用640运行帧，留本地来源原路径"
+    },
+    {
+      "path": "scenes/entry/threshold-cardstyle-1011-v1.webp",
+      "sha256": "e1c7bb54e0c62b43cf37051b29ec0600eef3fd54810af82fbf71701683b5418a",
+      "reason": "当前入口闭包无引用且没有匹配运行回执，作为旧候选保留"
+    },
+    {
+      "path": "scenes/entry/winter-arrival-1011-v1.webp",
+      "sha256": "1d44a932b6f6f78a11cf72d59eb3d20f9a6c1fbe1445000c56e4a438e7e5a894",
+      "reason": "当前入口闭包无引用且没有匹配运行回执，作为旧候选保留"
+    },
+    {
+      "path": "scenes/entry/winter-arrival-1011-v2.webp",
+      "sha256": "68540f6eec3ba0278fbe9b7e1214ce33790ea077ee9f56598c11edd6f02deb7b",
+      "reason": "当前入口闭包无引用且没有匹配运行回执，作为旧候选保留"
+    },
+    {
+      "path": "scenes/shop/winter-caravan-1011-v1.webp",
+      "sha256": "fd8dc0f12b32f296b586abdd57ea14f89bd34101b28973a6bcc57eee464691d5",
+      "reason": "当前入口闭包无引用且没有匹配运行回执，作为旧候选保留"
+    }
+  ],
+  "removedUnapprovedRegistrations": [
+    {
+      "path": "portraits/full/wu-casual-v12.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 182972,
+      "sha256": "25f2326bed57889df6978decf34c8646bb39e8642e57f9a188757a3752f81b41",
+      "source": "docs/evidence/2026-10-12-WF-base-skins/request.json"
+    },
+    {
+      "path": "portraits/full/wu-spring-v12.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 200240,
+      "sha256": "fd40ff0eedc3124badce493f5fef6534a5435f6e082677e66c2c5fe4f2daf907",
+      "source": "docs/evidence/2026-10-12-WF-base-skins/request.json"
+    },
+    {
+      "path": "portraits/full/wu-beach-v12.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 202332,
+      "sha256": "b44bbc2dcaff81b5ff0941d31594bf6431b95b1ac96bcf0d919148915a54ed39",
+      "source": "docs/evidence/2026-10-12-WF-base-skins/request.json"
+    }
+  ],
+  "limits": [
+    "94个来源帧/旧候选保留在原路径且不进入本次index；未修改历史债基线",
+    "登记只核对当前文件身份、來源、格式与指纹，不代替浏览器或整体美术验收"
+  ]
+}

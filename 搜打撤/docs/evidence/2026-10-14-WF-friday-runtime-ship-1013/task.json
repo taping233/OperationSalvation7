@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-friday-runtime-ship-1013",
+  "date": "2026-10-14",
+  "owner": "Friday",
+  "goal": "收拢当前有效游戏运行包并修复素材登记/冻结范围；本任务记录工程阶段，正常推送与Library交付由同一会话后续平台结果证明",
+  "paths": [
+    "docs/evidence/2026-10-14-WF-friday-runtime-ship-1013",
+    "docs/PARALLEL-REGISTRY.md"
+  ],
+  "doneWhen": [
+    "剩余路径完成分类且保留原稿/候选理由",
+    "当前有效实现和资源通过原完整冻结门并本地提交",
+    "原工程编辑占用释放、检查及未核验范围如实留档"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/2026-10-13T16-53-28.761Z-08fb9eb3-staged.json",
+      "result": "passed",
+      "sha256": "9346d00b35134a2dbef52072aefd2ec32d4b6bbc0c9d7abdde3870c6a5e93e6f",
+      "verification": "recorded-result-only-not-current-freshness"
+    },
+    {
+      "kind": "manual",
+      "description": "e82895d5正常hook复核full收据，1347文件已提交；庭院23项和工具44项通过；179项登记均有来源证明；保留97来源/候选，不公开仓库",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "官方浏览器初始化失败，本地实页/自然通关未运行",
+    "本地生产构建未运行；后续远端CI另核验",
+    "本任务为工程阶段记录，推送与Library交付由同会话随后执行并以最终平台结果为准"
+  ],
+  "updatedAt": "2026-10-13T17:15:49.289Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

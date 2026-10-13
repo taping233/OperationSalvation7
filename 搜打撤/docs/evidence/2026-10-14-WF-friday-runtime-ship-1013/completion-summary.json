@@ -1,0 +1,25 @@
+{
+  "runtimeCommit": "e82895d5ecc4420ffbf64878d9eb6b850ae926db",
+  "frozenReport": "docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/2026-10-13T16-53-28.761Z-08fb9eb3-staged.json",
+  "reportBytes": 3628907,
+  "reportSha256": "9346D00B35134A2DBEF52072AEFD2EC32D4B6BBC0C9D7ABDDE3870C6A5E93E6F",
+  "log": "docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/2026-10-13T16-53-28.761Z-08fb9eb3-staged.log",
+  "logBytes": 149546,
+  "logSha256": "95973F79FE4D5656EBC4404678E6E4444A2341F00FBDC29F497DD6C07DC07D99",
+  "checks": [
+    "fixture static pass",
+    "fixture static pass",
+    "fixture static pass",
+    "fixture static pass",
+    " Test Files  350 passed (350)",
+    "      Tests  2929 passed | 16 skipped (2945)",
+    "   Duration  260.86s (transform 2.96s, setup 0ms, collect 40.41s, tests 215.10s, environment 184.75s, prepare 30.86s)",
+    "[gate] PASS：full 验收完成"
+  ],
+  "outcome": "passed",
+  "files": 1347,
+  "remainingAssetErrors": 97,
+  "notInCommit": "90高分辨率宝箱来源帧、4旧场景候选、3未采用皮肤",
+  "browser": "官方工具初始化失败，未运行实页；自然通关由云端后续验收",
+  "shipping": "正常推送与Library结果由同会话最终交付说明及平台返回为准"
+}
