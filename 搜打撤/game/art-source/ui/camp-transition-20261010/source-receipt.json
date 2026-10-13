@@ -1,0 +1,33 @@
+{
+  "pipeline": [
+    "NovelAI nai-diffusion-4-5-full",
+    "built-in ImageGen"
+  ],
+  "acquisition": "NovelAI通过tools/nai_gen.py生成底稿；内置ImageGen基于底稿与画风参考重绘；Pillow仅用于格式转换和缩放。",
+  "generatedOriginal": "C:\\Users\\太平\\.codex\\generated_images\\01a1247d-b5f4-7061-95cb-0899b22e6d48\\exec-f6fb5d1a-9a12-4b38-81dc-9316f66eceb9.png",
+  "files": [
+    {
+      "path": "game/art-source/ui/camp-transition-20261010/novelai-scene-v1.png",
+      "bytes": 1203500,
+      "sha256": "5b147729fa4b13ccc643877a7c6f39ea9fa88bb858f10cf63af67d878bb5ad76"
+    },
+    {
+      "path": "game/art-source/ui/camp-transition-20261010/imagegen-scene-v1.png",
+      "bytes": 1657423,
+      "sha256": "bae66316283f77164c59f7a43af1f7cf305d699ed17d4c5052e27ff1868ecce8"
+    },
+    {
+      "path": "game/assets/scenes/camp-transition-city-v1.webp",
+      "bytes": 42692,
+      "sha256": "da4904fb29c62a72dd43220b5f6bf8fd57eb33e7a5beae3effcaed2fdc736a5d"
+    }
+  ],
+  "rawPngPolicy": "大于1MB原图留在本地，不进入git；同目录.gitignore排除PNG。",
+  "runtime": {
+    "width": 1536,
+    "height": 864,
+    "format": "WEBP",
+    "quality": 88
+  },
+  "content": "通用雪夜建筑轮廓、无人物、无文字、左侧留白、墨蓝灰与暗金窗灯"
+}

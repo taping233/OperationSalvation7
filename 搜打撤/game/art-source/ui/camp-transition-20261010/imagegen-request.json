@@ -1,0 +1,13 @@
+{
+  "engine": "built-in ImageGen",
+  "prompt": "Create one reusable landscape illustration asset for a dark game UI transition, 16:9 wide. Image 1 is the NovelAI composition draft to redesign; image 2 is ONLY a brushwork/style reference, ignore and DO NOT reproduce its human subject, face, clothes, weapon, flowers or any character. Primary subject: an uninhabited snowbound city / expedition-base skyline, broad industrial architecture silhouettes grouped in the RIGHT HALF, with the entire LEFT 45% quiet dark navy negative space for separately rendered UI text. Use 3 large overlapping layers: near almost-black angular roof plane, midground chunky charcoal-blue buildings and one modest distant watchtower, far desaturated deep-teal city masses. Snow shown with a few broad cold-gray strokes on rooftops and 5-8 restrained drifting snow marks, no blizzard. Exactly a few small muted amber windows, no glowing halos. Repaint the NovelAI draft with fewer buildings and fewer thin lines, stronger architectural silhouettes and broad opaque hand-painted anime concept-art blocks; clear hard-edged shadow planes, visible economical wide brushwork like image 2; low detail, slightly rough paint edges, NOT photographic or smooth 3D. Keep the whole sky much darker than the NovelAI draft: ink navy #10191f, midnight blue-gray #1b2d37, deep desaturated teal #23454d, occasional slate-gray roof highlights; avoid any white/bright sky or sun or moon. Perspective and skyline rise diagonally towards the right with strong but generic shapes, no identifiable city landmarks, no symbols identifying a particular character or location. The skyline is the sole focal motif. Full rectangular opaque painted background, no actual UI, no lettering, no numbers, no logos, no watermark, no border, NO PEOPLE OR HUMAN SILHOUETTES, no animals, no statues, no weapons, no character portraits. Original game environment motif, not a recreation of any existing game's image.",
+  "references": [
+    "game/art-source/ui/camp-transition-20261010/novelai-scene-v1.png",
+    "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+  ],
+  "referenceRoles": [
+    "构图底稿",
+    "仅画风，禁用人物身份"
+  ],
+  "transparentBackground": false
+}
