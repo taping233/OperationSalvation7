@@ -1,4 +1,5 @@
 import { displayCardDescription } from '../../cards/card-description-text.js';
+import { descRich } from '../../cards/cards.view.js';
 import { effCostOf, findCard, getSnapshot, infuseOf, targetSide, unplayableReason } from '../core/battle.core.js';
 
 let active = null;
@@ -82,10 +83,10 @@ export function openHandInspector(uid, onUse) {
   panel.innerHTML = `<div class="bt-hand-detail-scrim"></div><div class="bt-hand-detail-surface">
     <header><button type="button" class="bt-hand-detail-close" aria-label="关闭详情，返回手牌">返回手牌 · Esc</button></header>
     <div class="bt-hand-detail-body"><div class="bt-hand-detail-art">${SDT.Cards.cardHTML(card, 'lg', { costOverride: { v: effCostOf(card, uid), base: card._baseCost ?? card.cost } })}</div>
-    ${description.length > 70 ? '<details class="bt-hand-detail-copy" open><summary>完整规则</summary><p class="bt-hand-detail-rules"></p></details>' : ''}</div>
+    ${description.length > 70 ? '<details class="bt-hand-detail-copy" open><summary>完整规则</summary><p class="bt-hand-detail-rules card-rules-copy"></p></details>' : ''}</div>
     <footer><p class="bt-hand-detail-action-note" role="status"></p><button type="button" class="bt-hand-detail-use">使用这张牌</button></footer></div>`;
   const fullRules = panel.querySelector('.bt-hand-detail-rules');
-  if (fullRules) fullRules.textContent = description;
+  if (fullRules) fullRules.innerHTML = descRich(description, card.id);
   active = { uid, token: snapshot.battleToken, stage, panel, wasInert: !!stage.inert, focus: document.activeElement };
   stage.inert = true;
   panel.addEventListener('pointerdown', event => event.stopPropagation());

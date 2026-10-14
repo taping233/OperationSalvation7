@@ -16,6 +16,7 @@ window.SDT.MAP = {
 };
 await import('../game/src/cards/cards.js');
 const { BattleSession, viewApi } = await import('../game/src/battle/core/battle.core.js');
+const { Random } = await import('../game/src/core/random.js');
 
 const C = window.SDT.Cards;
 
@@ -263,17 +264,25 @@ describe('英雄卡实打 · 牧师', () => {
   });
 
   it('浪掷风吟：置入随机卡牌直至手牌6张，每置入1张法术回复3血', async () => {
-    const g = await startBoss([hero('tt8-hero-priest')], { hp: 100 });
-    mark(g);
-    BattleSession.commands.playCard(uidOf(g, hero('tt8-hero-priest')), 'self');
-    const s = await drain();
-    expect(s.hand.length, `手牌应补到 6 张：${s.hand.length}`).toBe(6);
-    await waitLog(() => /置入 \d+ 张随机卡牌/.test(slice(g)));
-    expect(/置入 \d+ 张随机卡牌/.test(slice(g)), slice(g)).toBe(true);
-    const insertedSpells = s.hand.filter(uid => viewApi.findCard(uid)?.card?.type === '法术').length;
-    expect(g.hp, '每张置入法术回复 3；没有置入法术时不回血').toBe(100 + insertedSpells * 3);
-    BattleSession.commands.flee();
-    await drain(20);
+    const randomState = Random.snapshot();
+    Random.reseed(0);   // 固定直接置入的池样本，避免阿猫 onAcquire 子赠卡混入原断言。
+    try {
+      const g = await startBoss([hero('tt8-hero-priest')], { hp: 100 });
+      mark(g);
+      BattleSession.commands.playCard(uidOf(g, hero('tt8-hero-priest')), 'self');
+      const s = await drain();
+      expect(s.hand.length, `手牌应补到 6 张：${s.hand.length}`).toBe(6);
+      await waitLog(() => /置入 \d+ 张随机卡牌/.test(slice(g)));
+      expect(/置入 \d+ 张随机卡牌/.test(slice(g)), slice(g)).toBe(true);
+      const insertedSpells = s.hand.filter(uid => viewApi.findCard(uid)?.card?.type === '法术').length;
+      expect(insertedSpells, '固定种子应确实直接置入法术，不能以未回血放过').toBeGreaterThan(0);
+      expect(g.hp, '固定种子0直接置入3张法术，应回复9血').toBe(109);
+      expect(g.hp, '每张置入法术回复 3；没有置入法术时不回血').toBe(100 + insertedSpells * 3);
+      BattleSession.commands.flee();
+      await drain(20);
+    } finally {
+      Random.restore(randomState);
+    }
   });
 });
 

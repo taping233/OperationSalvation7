@@ -643,11 +643,11 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       // 穿过的门断 γ（09-26 门对跳修复）：门自身 seen 低分仍会被门对面未访格的
       // 高分通过 γ·max 拉成全场最高——穿过过的门不再吃前瞻加成，只值自身分
       if (strategic && doorUsed.has(`${a.li}:${a.idx}`)) return self;
-      // 低血门断 γ（09-27 R18）：hp ≤ gate.doorNoLookHp 时所有门不吃前瞻——
+      // 低血门断 γ（09-27 R18）：hp ≤ geo.doorNoLookHp 时所有门不吃前瞻——
       // doorLow -150 被门对面未访格拉分抵消=残血深进 L4 全灭 22/22 的真机制；
       // 断 γ 后门回归真实风险分，低血策略转向火堆/紧急撤离（本层或已过层）。
       // 门格识别用 label 的（door）类型后缀（label 文本如「通往第2层（door）」不含门字）
-      if (strategic && /（door）/.test(a.label || '') && hpRatio <= W.gate.doorNoLookHp) return self;
+      if (strategic && /（door）/.test(a.label || '') && hpRatio <= W.geo.doorNoLookHp) return self;
       // 邻居视角：stallForLook=false → 邻居一律按常态打分（不继承本地滞环解锁）
       const at = { curIdx: a.idx, curLi: a.li, prevNode: ctx ? ctx.curIdx : curIdx, stallForLook: false };
       let best = -Infinity;

@@ -15,6 +15,7 @@ import { Random } from '../core/random.js';
 import { createShopController } from './game.run.shop.js';
 import { captureBattleContext, startBattle } from '../battle/battle-loader.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
+import { nodeActionBinding } from './node-reward-state.js';
 import { selectEncounterSpec } from './encounter-selector.js';
 import { turboMs } from '../core/turbo.js';
 import { reduceMotion } from '../core/motion.js';
@@ -416,14 +417,17 @@ export function grantEventCard(tpl, opts = {}) {
 export const FIRE_RESTORABLE = (card) => card.type !== '道具' && card.type !== '装备';
 // opts = { title, icon, tone, sub }：2026-09-19 留言 #21——复原页不再一律伪装成
 // 「营火休整」（修鞋铺等事件里复原时跳成火堆页观感）；不传 opts 保持火堆口径
-export function openPocketRestore(picks, done, opts = {}) {
+export function openPocketRestore(picks, done, opts = {}, transaction = null) {
+  const txn = transaction || { left: picks, finished: false, current: captureBattleContext(game) };
+  if (txn.finished || !txn.current()) return;
   game.state = 'modal';
-  let left = picks;
   // 背包返回恢复本页并保留剩余复原次数（09-30 深审 WORLD-002）：关闭背包不再兜底回
   // idle 导致节点未消耗、火堆奖励可被反复重领
-  setBagReturnHook(() => openPocketRestore(left, done, opts));
+  setBagReturnHook(() => openPocketRestore(picks, done, opts, txn));
   const restorable = () => game.usedPocket.filter(p => FIRE_RESTORABLE(p.card));
   const render = () => {
+    if (txn.finished || !txn.current()) return;
+    const left = txn.left;
     const list = restorable();
     const blockedN = game.usedPocket.length - list.length;
     const cardsHTML = list.length
@@ -443,30 +447,34 @@ export function openPocketRestore(picks, done, opts = {}) {
       body: `<div class="bt-hand fire-restore-hand">${cardsHTML}</div>`,
       foot: `<button class="ov-btn ok fire-done-btn" data-act="fireDone"><svg class="ic svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 继续旅程</button>`,
     });
+    const active = nodeActionBinding(game, UI, 'fireDone');
+    const surface = UI.el?.ovBody?.firstElementChild;
+    const live = () => active() && txn.current() && !txn.finished &&
+      (!surface || UI.el?.ovBody?.firstElementChild === surface);
+    const finish = () => {
+      if (!live()) return;
+      txn.finished = true;
+      setBagReturnHook(null);
+      UI.hideOverlay();
+      if (done) done();
+    };
+    UI.act('restoreOne', (d) => {
+      if (!live()) return;
+      const p = game.usedPocket.find(x => x.card.name === d.name && FIRE_RESTORABLE(x.card));
+      if (!p || txn.left <= 0) return;
+      // 2026-09-06 #18：背包满时不能复原
+      const card = p.card;
+      if (!game.canReceiveCard(card)) { UI.log(`[[icon:bag]] 背包放不下（${game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`}），无法复原`, 'warn'); SDT.Sound.sfx('deny'); return; }
+      p.count--;
+      if (p.count <= 0) game.usedPocket.splice(game.usedPocket.indexOf(p), 1);
+      game.ownedCards.push({ uid: newUid(), card: { ...card } });
+      txn.left--;
+      SDT.Sound.sfx('cardRestore');
+      UI.log(`[[icon:sparkles]] 【<b>${esc(card.name)}</b>】已复原，回到背包`, 'ok');
+      if (txn.left <= 0) finish(); else render();
+    });
+    UI.act('fireDone', finish);
   };
-  let finished = false;
-  const finish = () => {
-    if (finished) return;
-    finished = true;
-    setBagReturnHook(null);
-    UI.hideOverlay();
-    if (done) done();
-  };
-  UI.act('restoreOne', (d) => {
-    const p = game.usedPocket.find(x => x.card.name === d.name && FIRE_RESTORABLE(x.card));
-    if (!p || left <= 0) return;
-    // 2026-09-06 #18：背包满时不能复原
-    const card = p.card;
-    if (!game.canReceiveCard(card)) { UI.log(`[[icon:bag]] 背包放不下（${game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`}），无法复原`, 'warn'); SDT.Sound.sfx('deny'); return; }
-    p.count--;
-    if (p.count <= 0) game.usedPocket.splice(game.usedPocket.indexOf(p), 1);
-    game.ownedCards.push({ uid: newUid(), card: { ...card } });
-    left--;
-    SDT.Sound.sfx('cardRestore');
-    UI.log(`[[icon:sparkles]] 【<b>${esc(card.name)}</b>】已复原，回到背包`, 'ok');
-    if (left <= 0) finish(); else render();
-  });
-  UI.act('fireDone', finish);
   render();
 }
 

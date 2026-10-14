@@ -1,4 +1,4 @@
-// 每场只揭示一次；等待真正的解码/首帧结果，超时只开放明确的简化显示选择。
+// 每个挂载的舞台等待真正的解码/首帧结果；简化显示选择按场次保留。
 export function waitForBattleImages(root) {
   const cleanups = [];
   const promises = [...root.querySelectorAll('.sts-figure img[src], .sts-hand .hsc-art img[src]')].map(image => new Promise(resolve => {
@@ -63,12 +63,15 @@ export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
     if (!active) return;
     const record = active; active = null; dispose(record);
     record.stage.removeAttribute('data-battle-entry');
+    record.resolveReady(false);
   };
   function begin(stage, token, overlay) {
     if (active?.stage === stage && active.token === token) return;
     cancel();
-    // 选择面板返回会重建舞台；同一场已揭示的结果按 token 保留，新战斗仍需重新就绪。
-    if (completed?.token === token) {
+    // 同场返回会重建场景与角色帧，旧舞台的 ready 不代表新资源已可见。
+    // 明确选择的简化显示按场次保留；已就绪的同一舞台才无需再次等待。
+    if (completed?.token === token && (completed.state === 'degraded' || completed.stage === stage)) {
+      completed = { ...completed, stage, overlay };
       stage.dataset.battleEntry = completed.state;
       if (completed.state === 'degraded') simplified(stage);
       return;
@@ -78,7 +81,9 @@ export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
     const curtain = document.createElement('div');
     curtain.className = 'battle-entry-curtain';
     curtain.innerHTML = '<div class="battle-entry-copy" role="status"><span>接敌准备</span><h2>正在进入战场</h2><p>正在准备场景与参战单位…</p><button type="button" hidden>以简化画面继续</button></div>';
-    const record = { stage, token, overlay, curtain, wasInert: !!stage.inert, started: false };
+    let resolveReady;
+    const ready = new Promise(resolve => { resolveReady = resolve; });
+    const record = { stage, token, overlay, curtain, wasInert: !!stage.inert, started: false, ready, resolveReady };
     active = record;
     stage.inert = true; stage.dataset.battleEntry = 'loading'; stage.setAttribute('aria-busy', 'true');
     overlay.appendChild(curtain);
@@ -93,8 +98,9 @@ export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
   function finish(record, state) {
     if (!current(record)) return;
     active = null; dispose(record); record.stage.dataset.battleEntry = state;
-    completed = { token: record.token, state };
+    completed = { token: record.token, state, stage: record.stage, overlay: record.overlay };
     if (state === 'degraded') simplified(record.stage);
+    record.resolveReady(true);
   }
   function failed(record, reason) {
     if (!current(record)) return;
@@ -120,7 +126,13 @@ export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
     event.stopImmediatePropagation();
     if (event.key === 'Tab') { event.preventDefault(); active.curtain.querySelector('button:not([hidden])')?.focus(); }
   }
+  function ready(stage, token) {
+    if (active?.stage === stage && active.token === token) return current(active) ? active.ready : Promise.resolve(false);
+    return Promise.resolve(!!(completed?.token === token && stage?._battleToken === token
+      && stage.isConnected && !completed.overlay.hidden && completed.overlay.contains(stage)
+      && completed.stage === stage));
+  }
   document.addEventListener('keydown', blockKeys, true);
-  return { begin, wait, cancel, pending: stage => active?.stage === stage && !active.started,
+  return { begin, wait, cancel, ready, pending: stage => active?.stage === stage && !active.started,
     dispose() { cancel(); completed = null; document.removeEventListener('keydown', blockKeys, true); } };
 }

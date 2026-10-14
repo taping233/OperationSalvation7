@@ -135,7 +135,7 @@ describe('基地整备功能端口', () => {
     const h = createHarness();
     h.feature.open();
     await h.view.lastIntent({ type: 'preset-apply', payload: { presetId: 'preset-1' } });
-    expect(h.navigation.applyPicks).toHaveBeenCalledWith({ 北境短刀: 1 });
+    expect(h.navigation.applyPicks).toHaveBeenCalledWith({ 'card:card-a': 1 });
     expect(h.navigation.openDeparture).toHaveBeenCalledTimes(1);
     expect(h.view.controller.dispose).toHaveBeenCalledTimes(1);
   });

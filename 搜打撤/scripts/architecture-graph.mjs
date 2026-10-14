@@ -51,6 +51,8 @@ const PROTECTED_TARGETS = new Set([...RUNTIME_SURFACE, 'core/sdt-facade.js', SES
 // 照相馆页面是大块首屏外模块，只允许轻门面动态加载；防止新增静态边把页面拉回首屏。
 const LAZY_PAGE_ENTRIES = new Map([
   ['hub/game.cardslib.page.js', 'hub/game.cardslib.js'],
+  ['hub/game.hub.runtime.js', 'hub/game.hub.js'],
+  ['run/game.run.class-choice.page.js', 'run/game.run.class-choice.js'],
 ]);
 
 // 防再发自检：返回在真实源码树中零命中的判据键；非空即守卫腐化，守卫测试必须红。

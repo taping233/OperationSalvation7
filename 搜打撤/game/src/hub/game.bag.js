@@ -11,6 +11,18 @@ import { _set_cardPageOpen } from './game.cardslib.js';
 import { bagSlots } from './game.bag.bridge.js';
 import { bagDrag, resetBagDrag } from './game.bag.drag.js';
 import { useStructuredBagRule } from './game.bag.rules.js';
+import { captureBattleContext } from '../battle/battle-loader.js';
+function captureBagView(rootFor = null) {
+  const sameRun = captureBattleContext(game), cards = game.ownedCards, body = UI.el.ovBody;
+  const root = body?.firstElementChild, zoom = document.getElementById('cardZoom');
+  return () => sameRun() && game.ownedCards === cards && game.runActive && game.state === 'modal'
+    && !UI.el.overlay.hidden && !UI.el.overlay.classList?.contains('closing')
+    && (!body || (UI.el.ovBody === body && body.firstElementChild === (rootFor ? rootFor() : root)))
+    && (rootFor || document.getElementById('cardZoom') === zoom);
+}
+function bagAct(name, handler, current = captureBagView()) {
+  UI.act(name, data => { if (current()) return handler(data); });
+}
 bagSlots.showBackpack = showBackpack;
 bagSlots.closeBackpack = closeBackpack;
 let requestedBagSection = null;
@@ -241,6 +253,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
 
   function closeBackpack() {
     backpackOpen = false;
+    resetBagDrag();
     UI.hideOverlay();
     // 从搜刮界面打开的背包：关闭后回到当前搜刮面板继续开箱（2026-09-09 留言 #13）
     if (bagOverChest) {
@@ -289,8 +302,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
           <button class="ov-btn" data-act="cancelDragDiscard">取消，放回背包</button>
         </div>
       </div>`, 'glass', { initialFocus: '[data-act="cancelDragDiscard"]' });
-    UI.act('confirmDragDiscard', () => { discardOwnedCard(name, fromSafe); showBackpack(true); });
-    UI.act('cancelDragDiscard', () => showBackpack(true));
+    bagAct('confirmDragDiscard', () => { discardOwnedCard(name, fromSafe); showBackpack(true); });
+    bagAct('cancelDragDiscard', () => showBackpack(true));
   }
 
   // eslint-disable-next-line no-unused-vars -- 局部豁免：被 game/selftest.js:87 源码正则 /function showBagCardDetail/ 锚定，删除会挂红自检；#27 改版后入口已由 inspectStack 承担，函数历史保留
@@ -319,8 +332,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     });
     // 特写挂在 body（overlay 之外）：动作执行前先模拟点背景收回，回到背包页
     const closeZoom = () => document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
-    UI.act('useDetailCard', () => { closeZoom(); useOwnedCard(o.uid); });
-    UI.act('craftColorToken', () => {
+    bagAct('useDetailCard', () => { closeZoom(); useOwnedCard(o.uid); });
+    bagAct('craftColorToken', () => {
       closeZoom();
       // 2026-09-06 #10：3 张员工通行证B合成 1 张员工通行证A
       const golds = game.ownedCards.filter(x => x.card.id === 'tt-token-gold').slice(0, 3);
@@ -333,7 +346,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       saveGame();
       showBackpack(true);
     });
-    UI.act('craftColorTokenByFragments', () => {
+    bagAct('craftColorTokenByFragments', () => {
       closeZoom();
       // 2026-09-09 Q6 老板定向：隐藏计数器碎片——集齐 2 枚碎片 + 员工通行证A → 合成员工通行证A
       if ((game.fragments || 0) < 2) { UI.log('员工通行证A碎片不足 2 枚，无法合成', 'warn'); return; }
@@ -345,17 +358,18 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       saveGame();
       showBackpack(true);
     });
-    UI.act('detailFromSafe', () => { closeZoom(); moveStackSafe(name, false); });
-    UI.act('detailToSafe', () => { closeZoom(); moveStackSafe(name, true); });
-    UI.act('detailDiscard', () => { closeZoom(); showDiscardConfirm(name, fromSafe); });
-    UI.act('pearlStore', () => { closeZoom(); openPearlStore(); });
-    UI.act('pouchStore', () => { closeZoom(); openPouchStore(); });
+    bagAct('detailFromSafe', () => { closeZoom(); moveStackSafe(name, false); });
+    bagAct('detailToSafe', () => { closeZoom(); moveStackSafe(name, true); });
+    bagAct('detailDiscard', () => { closeZoom(); showDiscardConfirm(name, fromSafe); });
+    bagAct('pearlStore', () => { closeZoom(); openPearlStore(); });
+    bagAct('pouchStore', () => { closeZoom(); openPouchStore(); });
   }
 
   // —— 法师锦囊 · 存放法术牌（2026-09-16 留言 #4 定版）——
   // 点背包里的锦囊 → 存入/取出法术牌：上限 3 张，战斗中打出锦囊时从里面选 1 张直接释放
   function openPouchStore() {
     game.state = 'modal';
+    let root; const current = captureBagView(() => root);
     const POUCH_ID = 'tt7-stratagem';
     // 口径与 storedStacks 一致：只按 pouchOf 判定。stored 是与珍珠盒共用的
     // 「不入背包格」标记，若在这里再查 !x.stored，锦囊计数恒为 0、3 张上限永久失效
@@ -390,8 +404,9 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
         <h3 class="set-h">背包里的法术卡（点击整叠存入）</h3>
         <div class="bt-hand">${bagHTML}</div>
         <div class="ov-btns"><button class="ov-btn ok" data-act="pouchBack">[[icon:arrow]] 收好锦囊</button></div>`);
+      root = UI.el.ovBody?.firstElementChild;
     };
-    UI.act('pouchPut', (d) => {
+    bagAct('pouchPut', (d) => {
       const stack = bagSpellStacks().find(st => st.card.name === d.name);
       if (!stack) return;
       // 整叠存入也受 3 张上限：已有数量 + 本次堆数超过即拒收（此前只查已有 ≥3，
@@ -405,8 +420,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       UI.log(`[[icon:cards]] 【<b>${esc(stack.card.name)}</b>】存入法师锦囊`, 'ok');
       saveGame();
       render();
-    });
-    UI.act('pouchTake', (d) => {
+    }, current);
+    bagAct('pouchTake', (d) => {
       const stack = storedStacks().find(st => st.card.name === d.name);
       if (!stack) return;
       const cap = game.stackCapOf(stack.card);
@@ -423,8 +438,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       UI.log(`[[icon:cards]] 【<b>${esc(stack.card.name)}</b>】已从锦囊取出`, 'ok');
       saveGame();
       render();
-    });
-    UI.act('pouchBack', () => { UI.hideOverlay(); showBackpack(true); });
+    }, current);
+    bagAct('pouchBack', () => { UI.hideOverlay(); showBackpack(true); }, current);
     render();
   }
 
@@ -433,6 +448,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
   // 排除 o.stored），盒子容量 = 个数 × 3×3 = 9 张；盒子放进安全格时盒中卡牌同样受宠物保护。
   function openPearlStore() {
     game.state = 'modal';
+    let root; const current = captureBagView(() => root);
     const PEARL_ID = 'tt2-pearlbox';
     const boxes = game.ownedCards.filter(x => x.card && x.card.id === PEARL_ID).length;
     const cap = boxes * 9;
@@ -468,8 +484,9 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
         <h3 class="set-h">背包里的资源卡（点击整叠存入）</h3>
         <div class="bt-hand">${bagHTML}</div>
         <div class="ov-btns"><button class="ov-btn ok" data-act="pearlBack">[[icon:arrow]] 收好珍珠盒</button></div>`);
+      root = UI.el.ovBody?.firstElementChild;
     };
-    UI.act('pearlPut', (d) => {
+    bagAct('pearlPut', (d) => {
       const stack = bagResStacks().find(st => st.card.name === d.name);
       if (!stack) return;
       if (storedN() + stack.count > cap) {
@@ -482,8 +499,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       SDT.Sound.sfx('gain');
       saveGame();
       render();
-    });
-    UI.act('pearlTake', (d) => {
+    }, current);
+    bagAct('pearlTake', (d) => {
       const stack = storedStacks().find(st => st.card.name === d.name);
       if (!stack) return;
       // 取出按「格数增量」检查：整叠 9 张按 3 张/格需 3 格，只查 1 个空格会越界
@@ -501,8 +518,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       UI.log(`[[icon:bag]] 【<b>${esc(stack.card.name)}</b>】×${stack.count} 从珍珠盒取出，回到背包`, 'ok');
       saveGame();
       render();
-    });
-    UI.act('pearlBack', () => { UI.hideOverlay(); showBackpack(true); });
+    }, current);
+    bagAct('pearlBack', () => { UI.hideOverlay(); showBackpack(true); }, current);
     render();
   }
 
@@ -572,11 +589,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       return;
     }
     // 拖拽进行中重开背包：清理浮影等残留状态
-    if (bagDrag) {
-      if (bagDrag.ghost) bagDrag.ghost.remove();
-      if (bagDrag.cell) bagDrag.cell.classList.remove('dragging');
-      resetBagDrag();
-    }
+    if (bagDrag) resetBagDrag();
     game.state = 'modal';
     backpackOpen = true;
     _set_cardPageOpen(false);
@@ -639,6 +652,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
           </div>`).join('')
       : '<p class="ov-empty" style="margin:2px 0 0">暂无消耗卡牌</p>';
     // 说明文字统一收进 ? 帮助弹层
+    const helpCurrent = captureBattleContext(game), helpCards = game.ownedCards;
     UI.registerHelp('bag', {
       title: '背包说明',
       html: `
@@ -646,7 +660,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
         <p class="help-item"><b>安全格</b>由宠物阿七看守：撤离失败或放弃对局时，只有安全格里的卡牌会被抢运回基地，其余全部丢失。容量在基地「升级」页用口粮升级。</p>
         <p class="help-item"><b>消耗口袋</b>对小怪用过的卡、注能消耗的卡会进到这里：本局无法再用，容量无限。撤离时每张仅 1/3 概率带回基地口袋（用钥匙复原）；局内火堆每次休整可复原 2 张；道具「能源结晶」可就地复原 3 张。</p>
         <p class="help-item"><b>丢弃</b>把卡牌拖到背包页面外的空地可申请丢弃 1 张——丢弃的牌无法取回，请谨慎操作。</p>`,
-      back: () => showBackpack(true),
+      back: () => { if (helpCurrent() && game.ownedCards === helpCards && UI.el.ovBody?.querySelector('.help-body')) showBackpack(true); },
     });
     UI.showOverlay('[[icon:bag]] 背包', `<div class="bag-view bag-reference">
       <header class="bag-head">
@@ -702,7 +716,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     // 2026-09-12 留言 #27：看卡不方便 → 点击直接放大卡面特写（替代原文字详情页）。
     // 2026-09-15 修复：#27 改版把带「使用这张道具」按钮的 showBagCardDetail 整个挂空了，
     // 背包里的道具（回血药等）从此没有任何使用入口——在特写 footer 把「使用」补回来
-    UI.act('inspectStack', (d) => {
+    bagAct('inspectStack', (d) => {
       const st = cardStacks(d.safe === '1').find(s => s.card.name === d.name);
       if (!st) return;
       const usable = d.safe !== '1' && st.card.type === '道具';
@@ -724,28 +738,28 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
           <p class="ov-note">${d.safe === '1' ? '[[icon:lock]] 安全格 · 可拖回背包或点击「移回背包」' : '按住拖动整理顺序 · 双击翻看卡背 · 可点击「移入安全格」'}</p>`,
       });
       if (d.safe === '1') {
-        UI.act('zoomMoveToBag', () => {
+        bagAct('zoomMoveToBag', () => {
           document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
           moveStackSafe(st.card.name, false);
         });
       } else if (!isShaStack) {
-        UI.act('zoomMoveToSafe', () => {
+        bagAct('zoomMoveToSafe', () => {
           document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
           moveStackSafe(st.card.name, true);
         });
       }
       // 特写收起助手：与 showBagCardDetail 里的同名助手同体（动作前先模拟点背景收回特写）
       const closeCardZoom = () => document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
-      if (isPearl) UI.act('pearlStoreZoom', () => { closeCardZoom(); openPearlStore(); });
-      if (isPouch) UI.act('pouchStoreZoom', () => { closeCardZoom(); openPouchStore(); });
-      if (usable) UI.act('useDetailCard', () => {
+      if (isPearl) bagAct('pearlStoreZoom', () => { closeCardZoom(); openPearlStore(); });
+      if (isPouch) bagAct('pouchStoreZoom', () => { closeCardZoom(); openPouchStore(); });
+      if (usable) bagAct('useDetailCard', () => {
         document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
         useOwnedCard(st.uids[0]);
       });
     });
-    UI.act('bagSortRarity', () => sortBagBy('rarity'));
-    UI.act('bagSortType', () => sortBagBy('type'));
-    UI.act('closeBag', closeBackpack);
+    bagAct('bagSortRarity', () => sortBagBy('rarity'));
+    bagAct('bagSortType', () => sortBagBy('type'));
+    bagAct('closeBag', closeBackpack);
     bagSlots.bindBagDrag();   // v0.21：3D 拖拽排序 / 双击翻卡背
   }
 

@@ -60,3 +60,48 @@ it.each(['deck', 'bag'])('keeps the canonical full rule when inspecting the %s s
   expect(rules).toContain('不计之前战斗');
   expect(rules).toContain('仅进入墓地的牌不计');
 });
+
+it('stores only the visible carried group when stored cards share the same id', () => {
+  const original = game.ownedCards[1].card;
+  const carried = [{ uid: 'carried-one', card: original }, { uid: 'carried-two', card: original }];
+  const stored = { uid: 'stored-hidden', card: original, stored: true, safe: false };
+  game.ownedCards = [...carried, stored]; game.safeCap = () => 2;
+  renderBattleBag(BattleSession.getSnapshot());
+  const button = UI.el.ovBody.querySelector('[data-act="btSafeMove"]');
+  expect(button.textContent).toContain('×2'); expect(button.classList.contains('off')).toBe(false);
+  actions.get('btSafeMove')(button.dataset);
+  expect(carried.every(entry => entry.safe)).toBe(true); expect(stored.safe).toBe(false);
+});
+
+it('keeps all cards unchanged when the carried group does not fit in the safe capacity', () => {
+  const original = game.ownedCards[1].card;
+  const carried = [{ uid: 'large-one', card: original }, { uid: 'large-two', card: original }];
+  const stored = { uid: 'stored-hidden', card: original, stored: true, safe: false };
+  game.ownedCards = [...carried, stored]; game.safeCap = () => 1;
+  renderBattleBag(BattleSession.getSnapshot());
+  const button = UI.el.ovBody.querySelector('[data-act="btSafeMove"]');
+  expect(button.classList.contains('off')).toBe(true); actions.get('btSafeMove')(button.dataset);
+  expect(carried.some(entry => entry.safe)).toBe(false); expect(stored.safe).toBe(false);
+});
+
+it('does not expose a purely stored group or mutate it through a stale safe-move action', () => {
+  const original = game.ownedCards[1].card;
+  const stored = { uid: 'stored-only', card: original, stored: true, safe: false };
+  game.ownedCards = [stored]; renderBattleBag(BattleSession.getSnapshot());
+  expect(UI.el.ovBody.querySelector('[data-act="btSafeMove"]')).toBeNull();
+  actions.get('btSafeMove')({ cardKey: `id:${original.id}` });
+  expect(stored.safe).toBe(false);
+});
+
+it('transfers the complete carried group while preserving existing safe and stored entries', () => {
+  const original = game.ownedCards[1].card;
+  const carried = [{ uid: 'legal-one', card: original }, { uid: 'legal-two', card: original }];
+  const safe = { uid: 'already-safe', card: original, safe: true };
+  const stored = { uid: 'stored-hidden', card: original, stored: true, safe: false };
+  game.ownedCards = [...carried, safe, stored]; game.safeCap = () => 3;
+  game.safeUsed = () => game.ownedCards.filter(entry => entry.safe).length;
+  renderBattleBag(BattleSession.getSnapshot());
+  actions.get('btSafeMove')(UI.el.ovBody.querySelector('[data-act="btSafeMove"]').dataset);
+  expect(carried.every(entry => entry.safe)).toBe(true); expect(safe.safe).toBe(true); expect(stored.safe).toBe(false);
+  expect(game.safeUsed()).toBe(3); expect(UI.el.ovBody.querySelector('[data-act="btSafeMove"]')).toBeNull();
+});

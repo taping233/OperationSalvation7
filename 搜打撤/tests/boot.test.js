@@ -3,7 +3,7 @@
  *（症状：标题页漏出局内下方控制栏 / 开始游戏·设置按钮无响应）。
  * jsdom 无 canvas/Audio/WebAudio，这里 stub 掉渲染与音频，只验启动接线。 */
 import { describe, it, expect, vi } from 'vitest';
-vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({ createBattleEntryGate: () => ({ begin() {}, wait() {}, cancel() {}, dispose() {}, pending: () => false }), waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }) }));
+vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({ createBattleEntryGate: () => ({ begin() {}, wait() {}, cancel() {}, dispose() {}, pending: () => false, ready: () => true }), waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }) }));
 
 // 单跑约 5s：全量并行负载下会越过 vitest 默认 5s 超时形成负载 flake，给足裕量。
 // 60s（2026-10-03 第三次复发）：测试库增长使全量时长 117.6s（10-02 receipt）→134s，全库挤压下
@@ -99,8 +99,10 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     UI.act('sourceAction', sourceAction);
     const source = document.getElementById('consoleSource');
     const toggle = (options = {}) => window.dispatchEvent(new KeyboardEvent('keydown', { key:'l', ctrlKey:true, bubbles:true, cancelable:true, ...options }));
-    for (const tab of ['debug', 'agent', 'data', 'keys']) {
+    for (const [index, tab] of ['debug', 'agent', 'data', 'keys'].entries()) {
       toggle();
+      // 只有首次冷入口等待真实控件；缓存命中仍沿用后续即时业务断言。
+      if (index === 0) await vi.waitFor(() => expect(document.querySelector('#devConsole [data-act="devcTab"]')).not.toBeNull());
       document.querySelector(`[data-act="devcTab"][data-tab="${tab}"]`).click();
       expect(document.querySelector('#devConsole')).not.toBeNull();
       toggle({ repeat:true }); toggle({ isComposing:true }); toggle({ keyCode:229 });
@@ -122,12 +124,33 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     game.state = previousState;
   });
 
+  it('基地首次打开的真实 Escape 接线只取消待开请求，不重置已保存档案', async () => {
+    const hub = await import('../game/src/hub/game.hub.js');
+    const { game } = await import('../game/src/run/game.session.js');
+    document.getElementById('mStart').click();
+    await waitFor(() => document.querySelector('.slot-page'));
+    document.querySelector('[data-act="newSlot"][data-slot="5"]').click();
+    const savedBase = window.SDT.Base.peek(5);
+    expect(hub.baseHubLoading).toBe(true);
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
+    expect(hub.baseHubLoading).toBe(false);
+    expect(await waitFor(() => document.querySelector('.slot-page') && document.getElementById('slotRestoreError')?.textContent.includes('基地尚未打开'))).toBe(true);
+    expect(document.getElementById('hubMain')).toBeNull();
+    expect(window.SDT.Base.peek(5)).toEqual(savedBase);
+    expect(document.querySelector('.page-loading')).toBeNull();
+    document.querySelector('[data-act="slotBack"]').click();
+    await waitFor(() => game.state === 'title');
+    await waitFor(() => document.getElementById('overlay').hidden);
+  });
+
   it('照相馆动态载入可被快捷切页或真实 Escape 取消并恢复来源页状态', async () => {
     const cardsLib = await import('../game/src/hub/game.cardslib.js');
     const { game } = await import('../game/src/run/game.session.js');
     expect(document.getElementById('overlay').hidden).toBe(true);
 
     window.dispatchEvent(new KeyboardEvent('keydown', { key: '1', altKey: true, bubbles: true }));
+    await waitFor(() => document.querySelector('.slot-page'));
+    document.querySelector('[data-act="enterSlot"][data-slot="5"]').click();
     await waitFor(() => document.getElementById('hubMain'));
     expect(game.state).toBe('modal');
     window.dispatchEvent(new KeyboardEvent('keydown', { key: '7', altKey: true, bubbles: true }));
@@ -136,6 +159,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(cardsLib.cardPageLoading).toBe(false);
     expect(cardsLib.cardPageOpen).toBe(true);
     expect(document.getElementById('hubMain')).not.toBeNull();
+    await waitFor(() => document.querySelector('#hubMain[data-page="stash"]'));
 
     window.dispatchEvent(new KeyboardEvent('keydown', { key: '7', altKey: true, bubbles: true }));
     expect(cardsLib.cardPageLoading).toBe(true);

@@ -39,7 +39,7 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     masterComp.threshold.value = -6; masterComp.knee.value = 8;
     masterComp.ratio.value = 12; masterComp.attack.value = 0.003; masterComp.release.value = 0.18;
     master.connect(masterComp); masterComp.connect(ctx.destination);
-    sfxGain = ctx.createGain(); sfxGain.gain.value = BASE_SFX * dbGain(sfxVol); sfxGain.connect(master);
+    sfxGain = ctx.createGain(); sfxGain.gain.value = sfxOff ? 0 : BASE_SFX * dbGain(sfxVol); sfxGain.connect(master);
     // 点击音专用链路：增益拉响度，压缩器压掉归一化后的尖峰，避免破音
     clickGain = ctx.createGain(); clickGain.gain.value = 1.8;
     clickComp = ctx.createDynamicsCompressor();
@@ -62,18 +62,30 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     while (activeDecodes < MAX_CONCURRENT_DECODES && decodeQueue.length) {
       const job = decodeQueue.shift();
       activeDecodes++;
-      fetch(job.url)
-        .then(r => { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); })
-        .then(ab => ctx.decodeAudioData(ab))
-        .then(normalizeBuffer)
+      const audioContext = ctx;
+      fetch(job.url, { signal: soundEvents.signal })
+        .then(r => {
+          if (disposed) throw new Error('Sound disposed');
+          if (!r.ok) throw new Error(r.status);
+          return r.arrayBuffer();
+        })
+        .then(ab => {
+          if (disposed || audioContext.state === 'closed') throw new Error('Sound disposed');
+          return audioContext.decodeAudioData(ab);
+        })
+        .then(buf => {
+          if (disposed) throw new Error('Sound disposed');
+          return normalizeBuffer(buf);
+        })
         .then(job.resolve, job.reject)
         .finally(() => {
           activeDecodes--;
-          setTimeout(pumpDecodeQueue, 0);
+          if (!disposed) pumpDecodeQueue();
         });
     }
   }
   function decodeQueued(url) {
+    if (disposed) return Promise.reject(new Error('Sound disposed'));
     return new Promise((resolve, reject) => {
       decodeQueue.push({ url, resolve, reject });
       pumpDecodeQueue();
@@ -87,8 +99,9 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     if (switchBuffers) return;
     switchBuffers = [];
     Promise.all(SWITCH_URLS.map(u =>
-      decodeQueued(u)
+      decodeQueued(u).catch(() => null)
     )).then(bufs => {
+      if (disposed) return;
       const ok = bufs.filter(Boolean);
       if (ok.length) switchBuffers = ok;
     }).catch(() => { /* 保留空数组，回退合成音 */ });
@@ -101,8 +114,9 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     if (hoverBuffers) return;
     hoverBuffers = [];
     Promise.all(HOVER_URLS.map(u =>
-      decodeQueued(u)
+      decodeQueued(u).catch(() => null)
     )).then(bufs => {
+      if (disposed) return;
       const ok = bufs.filter(Boolean);
       if (ok.length) hoverBuffers = ok;
     }).catch(() => { /* 保留空数组，回退合成音 */ });
@@ -115,8 +129,9 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     if (clickBuffers) return;
     clickBuffers = []; // 占位：解码完成前先回退合成音
     Promise.all(CLICK_URLS.map(u =>
-      decodeQueued(u)
+      decodeQueued(u).catch(() => null)
     )).then(bufs => {
+      if (disposed) return;
       const ok = bufs.filter(Boolean);
       if (ok.length) clickBuffers = ok;
     }).catch(() => { /* 保留空数组，回退合成音 */ });
@@ -230,8 +245,9 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     battleBuffers = {};
     const jobs = Object.entries(BATTLE_URLS).map(([key, urls]) =>
       Promise.all(urls.map(u =>
-        decodeQueued(u)
+        decodeQueued(u).catch(() => null)
       )).then(bufs => {
+        if (disposed) return;
         const ok = bufs.filter(Boolean);
         if (ok.length) battleBuffers[key] = ok;
       }).catch(() => { /* 该键缺位，回退合成音 */ })
@@ -348,7 +364,7 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     if (jsfxBuffers) return;
     jsfxBuffers = {};
     Promise.all(Object.entries(JSFX_URLS).map(([key, url]) =>
-      decodeQueued(url).then(buf => { jsfxBuffers[key] = normalizeBuffer(buf); }).catch(() => {})
+      decodeQueued(url).then(buf => { if (!disposed) jsfxBuffers[key] = buf; }).catch(() => {})
     )).catch(() => { /* 缺位时该键无声，不回退合成音（语义不同） */ });
   }
   function playJsfx(name) {
@@ -495,6 +511,7 @@ import { SceneMusicPlayer } from './sound.music.player.js';
   // 只关音效（设置页）
   function setSfxMuted(m) {
     sfxOff = !!m;
+    if (sfxGain) sfxGain.gain.value = sfxOff ? 0 : BASE_SFX * dbGain(sfxVol);
     try { localStorage.setItem('sdt-sfx-off', sfxOff ? '1' : '0'); } catch { /* localStorage 不可用/写入失败（隐私模式等）：音频设置回落默认值，可安全忽略 */ }
   }
   // 音量（0~1，设置页滑条）：即时生效并持久化
@@ -506,7 +523,7 @@ import { SceneMusicPlayer } from './sound.music.player.js';
   function setSfxVolume(v) {
     sfxVol = Math.min(1, Math.max(0, +v || 0));
     try { localStorage.setItem('sdt-sfx-vol', String(sfxVol)); } catch { /* localStorage 不可用/写入失败（隐私模式等）：音频设置回落默认值，可安全忽略 */ }
-    if (sfxGain) sfxGain.gain.value = BASE_SFX * dbGain(sfxVol);
+    if (sfxGain) sfxGain.gain.value = sfxOff ? 0 : BASE_SFX * dbGain(sfxVol);
   }
   // 首次输入恢复被浏览器挂起的上下文，并重试未能开始的当前 BGM。
   function kick() {
@@ -551,9 +568,13 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     disposed = true;
     soundEvents.abort();
     musicPlayer.dispose();
-    decodeQueue.length = 0;
+    // 取消网络请求并结算尚未开始的任务；已开始的解码不能取消，但其迟到结果不再处理。
+    for (const job of decodeQueue.splice(0)) job.reject(new Error('Sound disposed'));
+    clickBuffers = hoverBuffers = switchBuffers = battleBuffers = jsfxBuffers = null;
+    lastSfxAt.clear(); lastHoverBtn = null;
     if (master) master.gain.value = 0;
     if (ctx && ctx.state !== 'closed') ctx.close().catch(() => {});
+    ctx = master = masterComp = sfxGain = clickGain = clickComp = null;
   }
   if (import.meta.hot) import.meta.hot.dispose(dispose);
 

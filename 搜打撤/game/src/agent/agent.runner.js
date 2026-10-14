@@ -259,6 +259,11 @@ async function waitSettle({ quietMs = 0, pollMs = 0, timeoutMs = 0, allowEmpty =
 // 「等动作面推进」是防重复点击的关键：hideOverlay 是 210ms 淡出、转场页有数百 ms 生命期，
 // 这些窗口里旧按钮仍在面上，不等变化就会被驱动反复点同一钮。
 async function step(decide, options = {}) {
+  const decisionRun = runAbort;
+  const decisionCancelled = () => decisionRun !== runAbort || decisionRun?.signal.aborted === true;
+  const cancelled = () => ({ obs: observe(), action: null,
+    res: { ok: false, code: 'RUN_CANCELLED', message: '自动驱动已停止，未执行旧决策' },
+    done: true, stopReason: 'cancelled' });
   // 分相计时探针（--profile 开）：settle/decide/act/交棒四段耗时入 globalThis.__stepProf，
   // 均耗时优化先量再改
   const prof = globalThis.__stepProf;
@@ -270,17 +275,20 @@ async function step(decide, options = {}) {
     ? { ok: true, stalled: false, obs: options.carryObs || null }
     : await waitSettle(options);
   const obs = first.obs || observe();
+  if (decisionCancelled()) return cancelled();
   const context = commandContext();
   const contextChanged = () => ({ obs: observe(), action: null, res: { ok: false, code: 'CONTEXT_CHANGED',
     message: '决策期间对局归属已改变，未执行旧动作' }, done: false, stopReason: 'context-changed' });
   const t1 = prof ? nowMs() : 0;
   let decision;
   try {
-    decision = await decide(obs, { signal: runAbort?.signal });
+    decision = await decide(obs, { signal: decisionRun?.signal });
   } catch (error) {
+    if (decisionCancelled()) return cancelled();
     if (!sameContext(context)) return contextChanged();
     return { obs, action: null, res: null, error: String(error?.message || error), done: true };
   }
+  if (decisionCancelled()) return cancelled();
   if (!sameContext(context)) return contextChanged();
   if (decision == null) return { obs, action: null, res: null, done: true };
   const t2 = prof ? nowMs() : 0;

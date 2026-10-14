@@ -19,7 +19,7 @@ import SDT, { sdtDefine } from '../core/sdt-facade.js';
 import { RunStorage } from '../hub/game.storage.js';
 import { commitBaseAndRun, readSettlementReceipt, recoverSlot } from '../hub/recovery.commands.js';
 import { createNestSettlementCommands } from '../hub/nest-settlement.commands.js';
-import { startBattle } from '../battle/battle-loader.js';
+import { captureBattleContext, startBattle } from '../battle/battle-loader.js';
 import { rollRune, rollAttribute } from '../battle/runes.js';
 import { on as busOn } from '../core/event-bus.js';
 import { playLabEnding } from './lab.ending.js';
@@ -33,6 +33,17 @@ const nestSettlementCommands = createNestSettlementCommands({
 });
 let nestExtractInFlight = null;
 let pendingNestExtract = null;
+let nestPageRequest = 0;
+const nestBattleBindings = new WeakMap();
+const settledNestBattles = new WeakSet();
+
+function nestPageBinding() {
+  const request = ++nestPageRequest;
+  const current = captureBattleContext(game, getActiveSlot);
+  const surface = UI.el?.ovBody?.firstElementChild;
+  return () => request === nestPageRequest && current() && game.state === 'modal' &&
+    !UI.el?.overlay?.hidden && (!surface || UI.el?.ovBody?.firstElementChild === surface);
+}
 
 /* —— 直线 12 格（Item 17 同款定版思路：格子序列即地图）—— */
 const NEST_MAP = [
@@ -116,7 +127,9 @@ export function openNestPrep() {
         <button class="ov-btn ok" data-act="labOpen">用钥匙开门（-${need}）</button>
         <button class="ov-btn" data-act="labBack">暂不进入</button>
       </div>`, true);
+    const active = nestPageBinding();
     UI.act('labOpen', () => {
+      if (!active()) return;
       const result = Bn.unlockNestGate();
       if (!result.ok) {
         if (result.code === 'INSUFFICIENT_KEYS') {
@@ -133,7 +146,7 @@ export function openNestPrep() {
       setTimeout(() => { if (SDT.Sound) SDT.Sound.sfx('legend'); }, 350);
       enterNestPrep();
     });
-    UI.act('labBack', () => { game.state = 'idle'; exitToTitle(); });
+    UI.act('labBack', () => { if (!active()) return; game.state = 'idle'; exitToTitle(); });
     return;
   }
   enterNestPrep();
@@ -165,20 +178,23 @@ function enterNestPrep() {
         <button class="ov-btn ok" data-act="nestGo" ${picks.size !== 10 ? 'disabled' : ''}>深入研究所（${picks.size}/10）</button>
         <button class="ov-btn" data-act="nestBack">返回基地</button>
       </div>`, true);
+    const active = nestPageBinding();
     eligible().forEach((s2, i) => UI.act('nestPick' + i, () => {
+      if (!active()) return;
       if (picks.has(i)) picks.delete(i);
       else if (picks.size < 10) picks.add(i);
       render();
     }));
     (Bn.data.runes || []).slice(0, 9).forEach((r2, i) => UI.act('nestRune' + i, () => {
+      if (!active()) return;
       game.nestEquipped = game.nestEquipped || [];
       const at = game.nestEquipped.indexOf(r2);
       if (at >= 0) game.nestEquipped.splice(at, 1);
       else if (game.nestEquipped.length < 3) game.nestEquipped.push(r2);
       render();
     }));
-    UI.act('nestBack', () => { game.state = 'idle'; exitToTitle(); });   // 09-20：去手工 hideOverlay——exitToTitle 自带 immediate 同步关层
-    UI.act('nestGo', () => startNestRun(eligible().filter((s2, i) => picks.has(i)).map(s2 => s2.card)));
+    UI.act('nestBack', () => { if (!active()) return; game.state = 'idle'; exitToTitle(); });   // 09-20：去手工 hideOverlay——exitToTitle 自带 immediate 同步关层
+    UI.act('nestGo', () => { if (active() && picks.size === 10) startNestRun(eligible().filter((s2, i) => picks.has(i)).map(s2 => s2.card)); });
   };
   game.nestEquipped = [];
   render();
@@ -242,34 +258,42 @@ export function renderNestMap() {
     ${(game.nestTargetedBox || 0) > 0 ? `<div class="ov-btns"><span class="dim">定向大符文箱 ×${game.nestTargetedBox}——选择属性，立得 3 块该属性随机符文：</span>
       ${['水','火','草','光','暗'].map(at => `<button class="mini-btn ok" data-act="nestBox${at}">${at}</button>`).join('')}</div>` : ''}
     <p class="ov-note">点击高亮的<b>下一格</b>推进 · 每次对战后回满血 · 牌盒即牌库（开局 5 张，每回合 2 费抽 1 张）</p>`, true);
-  NEST_MAP.forEach((cell, i) => UI.act('nestCell' + i, () => enterNestCell(cell)));
+  const active = nestPageBinding();
+  NEST_MAP.forEach((cell, i) => UI.act('nestCell' + i, () => { if (active() && !game.battleActive && i === game.nestPos + 1) return enterNestCell(cell); }));
+  const runePicks = game.pendingRunePick;
   (game.pendingRunePick || []).forEach((r2, i) => UI.act('nestPickRune' + i, () => {
+    if (!active() || game.pendingRunePick !== runePicks) return;
     const cap = 10 + (SDT.Base.data.nestBagUp || 0);
     if (game.nestRunes.length >= cap) { UI.log('[[icon:gem]] 符文背包已满（' + cap + ' 块）', 'warn'); return; }
     game.nestRunes.push(r2);
     game.pendingRunePick = null;
     UI.log(`[[icon:gem]] 带走了【${esc(r2.name)}】（${r2.attrs.join('')}·${r2.rarity}）`, 'loot');
+    saveGame();
     renderNestMap();
   }));
   ['水','火','草','光','暗'].forEach(at => UI.act('nestBox' + at, () => {
+    if (!active() || !(game.nestTargetedBox > 0)) return;
+    const cap = 10 + (SDT.Base.data.nestBagUp || 0);
+    let received = 0;
     for (let k = 0; k < 3; k++) {
       const dual = Random.random('nest') < 0.007;
       const r = rollRune(() => Random.random('nest'), { forceAttrs: dual ? [at, rollAttribute(() => Random.random('nest'), [at])] : [at] });
-      game.nestRunes.push(r);
+      if (game.nestRunes.length < cap) { game.nestRunes.push(r); received++; }
     }
     game.nestTargetedBox--;
-    UI.log(`[[icon:gem]] 定向大符文箱：获得 3 块【${at}】属性符文`, 'loot');
+    UI.log(`[[icon:gem]] 定向大符文箱：获得 ${received} 块【${at}】属性符文${received < 3 ? `，背包已满散失 ${3 - received} 块` : ''}`, 'loot');
+    saveGame();
     renderNestMap();
   }));
 }
 
 function enterNestCell(cell) {
   if (cell.type === 'start') { renderNestMap(); return; }
-  if (cell.type === 'battle') return startNestBattle(NEST_BATTLES[cell.battle]);
+  if (cell.type === 'battle') return startNestBattle(NEST_BATTLES[cell.battle], cell);
   if (cell.type === 'shop') return openNestShop(() => advance());
   if (cell.type === 'runeCircle') return openRuneCircle(() => advance());
   if (cell.type === 'altar') return openNestAltar(() => advance());
-  if (cell.type === 'boss') return startNestBattle(game.nestBoss);
+  if (cell.type === 'boss') return startNestBattle(game.nestBoss, cell);
   if (cell.type === 'extract') return doNestExtract();
   advance();
 }
@@ -285,9 +309,11 @@ export function bindBattleStart(fn) { battleStartFn = fn; }
 
 const cell = () => NEST_MAP[game.nestPos] || NEST_MAP[0];   // 当前格（此前调用未定义的 cell() 会让每场龙巢战斗静默崩溃——2026-09-18 第1局实测）
 
-function startNestBattle(def) {
+function startNestBattle(def, battleCell = cell()) {
   if (!game.nestBoss) pickNestBoss();
-  const isBossCell = cell().type === 'boss';
+  const isBossCell = battleCell.type === 'boss';
+  const current = captureBattleContext(game, getActiveSlot);
+  nestPageRequest++;
   const savedOwned = game.ownedCards.slice();
   const savedRules = { e: MAP.rules.battleEnergy, s: MAP.rules.battleStartDraw, t: MAP.rules.battleTurnDraw };
   MAP.rules.battleEnergy = 2; MAP.rules.battleStartDraw = 5; MAP.rules.battleTurnDraw = 1;
@@ -297,16 +323,44 @@ function startNestBattle(def) {
     ...d, hp: d.hearts ? d.hearts : d.hp, maxHp: d.hearts ? d.hearts : d.hp,
   }));
   UI.hideOverlay();
-  nestBattleCtx = { savedOwned, savedRules, def, isBossCell };
-  if (!battleStartFn) { UI.log('[[icon:cross]] 战斗模块未就绪', 'warn'); return; }
-  return battleStartFn(game, foeDefs, { isBoss: true, name: bossDef.name, nest: { runes: (game.nestEquipped || []).slice() } });
+  const options = { isBoss: true, name: bossDef.name, nest: { runes: (game.nestEquipped || []).slice() } };
+  nestBattleBindings.set(options.nest, current);
+  const context = nestBattleCtx = { savedOwned, savedRules, def, isBossCell, battleCell, nestOptions: options.nest };
+  const failedStart = error => {
+    if (nestBattleCtx !== context || !current()) return false;
+    nestBattleCtx = null;
+    game.ownedCards = savedOwned;
+    MAP.rules.battleEnergy = savedRules.e;
+    MAP.rules.battleStartDraw = savedRules.s;
+    MAP.rules.battleTurnDraw = savedRules.t;
+    if (error) console.error('[nest] 战斗入口未完成', error);
+    UI.log('[[icon:cross]] 战斗未能开始，原进度已保留，请重新点击下一格', 'warn');
+    renderNestMap();
+    return false;
+  };
+  if (!battleStartFn) return failedStart();
+  try {
+    const started = battleStartFn(game, foeDefs, options);
+    return started?.then ? started.then(result => result === false ? failedStart() : result, failedStart)
+      : started === false ? failedStart() : started;
+  } catch (error) { return failedStart(error); }
+}
+
+function restoredNestBattleCell(opts) {
+  const next = NEST_MAP[game.nestPos + 1];
+  const name = next?.type === 'boss' ? game.nestBoss?.name || game.nestBossName : NEST_BATTLES[next?.battle]?.name;
+  // nestPos 仍为最后完成的位置；正常地图从下一格开战，读档以已有敌人名定位。
+  return name && opts.name === name ? next : cell();
 }
 
 // 龙巢战斗结算（总线订阅；一图战后流程在 bag 侧对龙巢战斗让位）。
 // 胜利：回满血 → 发奖励 → 推进并回龙巢地图；失败/撤退：回满血留在原格可再次挑战。
 function nestBattleEnd(opts, played, win) {
-  if (!game.nestActive) return;
-  const ctx = nestBattleCtx;
+  if (!game.nestActive || !opts?.nest || settledNestBattles.has(opts)) return;
+  const current = nestBattleBindings.get(opts.nest);
+  if (current && !current()) return;
+  settledNestBattles.add(opts);
+  const ctx = nestBattleCtx?.nestOptions === opts.nest ? nestBattleCtx : null;
   nestBattleCtx = null;
   if (ctx) {
     game.ownedCards = ctx.savedOwned;
@@ -322,8 +376,8 @@ function nestBattleEnd(opts, played, win) {
   }
   game.hp = game.maxHp;   // 每次对战后回满血（胜利与重试同口径）
   if (win === true) {
-    // 战场格 = 当前停留格（advance 才会前移），ctx 缺失时同样成立
-    const battleCell = cell();
+    // 入口保留真实目标格；读档丢失内存上下文时以存量战斗选项恢复目标。
+    const battleCell = ctx?.battleCell || restoredNestBattleCell(opts);
     game.nestKills = (game.nestKills || 0) + (opts.foeNames || []).length;   // battle:end 的 foeNames 即本场被歼名单（含 BOSS 增援）
     if (battleCell.type === 'boss') { game.nestBossDown = true; nestBossRewards(); }
     else if (battleCell.type === 'battle') grantNestRewards((NEST_BATTLES[battleCell.battle] || {}).reward);
@@ -397,7 +451,11 @@ function openRuneCircle(done) {
       <button class="ov-btn ghost" data-act="rcBox">献祭整个牌盒 · 紧急撤离</button>
       <button class="ov-btn" data-act="rcBack">离开法阵</button>
     </div>`, true);
+  const active = nestPageBinding();
   runes.forEach((r, i) => UI.act('rc' + i, () => {
+    if (!active()) return;
+    const cap = 10 + (SDT.Base.data.nestBagUp || 0);
+    if (game.nestRunes.length >= cap) { UI.log('[[icon:gem]] 符文背包已满（' + cap + ' 块）', 'warn'); return; }
     const sac = game.cardBox.filter(c => !SDT.Base.isSha(c)).slice(0, 3);
     if (sac.length < 3) { UI.log('[[icon:cross]] 牌盒中可献祭的卡牌不足 3 张（初始攻击不能献祭）', 'warn'); return; }
     game.cardBox = game.cardBox.filter(c => !sac.includes(c));
@@ -406,11 +464,12 @@ function openRuneCircle(done) {
     done();
   }));
   UI.act('rcBox', () => {
+    if (!active()) return;
     game.cardBox = game.cardBox.filter(c => SDT.Base.isSha(c));
     UI.log('[[icon:exit]] 你献祭了整个牌盒——紧急撤出研究所', 'sys');
     doNestExtract();
   });
-  UI.act('rcBack', () => done());
+  UI.act('rcBack', () => { if (active()) done(); });
 }
 
 /* —— 龙巢祭坛：1 英雄卡 + 1 职业卡；或 3 次改变符文属性 —— */
@@ -424,7 +483,9 @@ function openNestAltar(done) {
         <button class="ov-btn" data-act="naReroll" ${rerolls <= 0 || !game.nestRunes.length ? 'disabled' : ''}>改变一块符文的属性（-1 次）</button>
         <button class="ov-btn" data-act="naBack">离开祭坛</button>
       </div>`, true);
+    const active = nestPageBinding();
     UI.act('naHero', () => {
+      if (!active()) return;
       const hero = SDT.Cards.all().find(c => c.hero);
       const cls = SDT.Cards.all().filter(c => c.rarity === '职业' && !c.hero);
       if (hero) game.cardBox.push({ ...hero });
@@ -433,6 +494,7 @@ function openNestAltar(done) {
       done();
     });
     UI.act('naReroll', () => {
+      if (!active() || rerolls <= 0) return;
       const r = game.nestRunes[ri(game.nestRunes.length)];
       if (!r) return;
       const old = r.attrs.join('');
@@ -442,7 +504,7 @@ function openNestAltar(done) {
       UI.log(`[[icon:sparkles]] 【${esc(r.name)}】属性 ${old} → ${r.attrs.join('')}`, 'loot');
       render();
     });
-    UI.act('naBack', () => done());
+    UI.act('naBack', () => { if (active()) done(); });
   };
   render();
 }
@@ -467,8 +529,11 @@ function openNestShop(done) {
       <h3 class="set-h">符文（古朴 4 / 稀有 5 / 史诗 6 · 双属性翻倍）</h3>
       <div class="ov-btns">${runeSlots.map((s2, i) => !s2.sold && s2.rune ? `<button class="ov-btn ${s2.rune.rarity === '史诗' ? 'ok' : ''}" data-act="nsR${i}">${esc(s2.rune.name)}（${s2.rune.attrs.join('')}）${s2.price} 币</button>` : '<span class="dim">已售</span>').join(' ')}</div>
       <div class="ov-btns"><button class="ov-btn ok" data-act="nsBack">离开商店</button></div>`, true);
+    const active = nestPageBinding();
     const buy = (slot, act) => {
-      if (!slot || slot.sold) return;
+      if (!active() || !slot || slot.sold) return;
+      const cap = 10 + (SDT.Base.data.nestBagUp || 0);
+      if (act === 'rune' && game.nestRunes.length >= cap) { UI.log('[[icon:gem]] 符文背包已满（' + cap + ' 块）', 'warn'); return; }
       if (game.coins < slot.price) { UI.log('[[icon:coin]] 币不够', 'warn'); return; }
       game.coins -= slot.price;
       slot.sold = true;
@@ -479,7 +544,7 @@ function openNestShop(done) {
     cardSlots.forEach((s2, i) => UI.act('nsC' + i, () => buy(s2, 'card')));
     classSlots.forEach((s2, i) => UI.act('nsK' + i, () => buy(s2, 'class')));
     runeSlots.forEach((s2, i) => UI.act('nsR' + i, () => buy(s2, 'rune')));
-    UI.act('nsBack', () => done());
+    UI.act('nsBack', () => { if (active()) done(); });
   };
   render();
 }

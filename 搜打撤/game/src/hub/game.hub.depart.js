@@ -16,6 +16,7 @@ import { baseHomeV3HTML } from './hub.home-v3.js';
 import { enterDepartureCut, startDepartureHandoff } from '../ui/departure-transition.js';
 import '../../css/departure-selected.css';
 import { bindDepartureDrag } from './departure.drag.js';
+import { departureStackKey, findDepartureStack } from './base-departure.commands.js';
 import '../../css/roster-reference.css';
   // 基地首页：房间入口、行动难度与出征整备。
   function hubDeployHTML() {
@@ -32,26 +33,40 @@ import '../../css/roster-reference.css';
   let deployPick = null;    // 卡名 => 携带张数（出发准备页的暂存选择）
   // ESM 导入绑定不可赋值：壳侧重置改经 setter（2026-09-22 拆分理顺点）
   let deployPickFresh = false;   // 整备入口刚注入过预设选择（随后打开整备页时保留）
-  function setDeployPick(v) { deployPick = v; deployPickFresh = true; deploymentSlot = SDT.Base.slot; deployCharacter = null; deployStart = null; }
+  function setDeployPick(v) {
+    departureGeneration++;
+    deployPick = v == null ? null : Object.fromEntries(Object.entries(v).map(([key, count]) => {
+      const stack = findDepartureStack(SDT.Base.data.stash, key);
+      return [stack ? departureStackKey(stack) : key, count];
+    }));
+    deployPickFresh = true; deploymentSlot = SDT.Base.slot; deployCharacter = null; deployStart = null;
+  }
   let deployCharacter = null;
   let deployStart = null;
   let deploymentSlot = null;
   let deploySubmitting = false;
   let deployHint = '';      // 页内提示（容量不足等）
   let deployFilters = { rarity: '', type: '', cost: '' }; // 筛选只属于本次整备，不写存档。
+  let departureGeneration = 0;
+  let departureEntry = null;
   let deployJustOpened = false;   // 出发准备页刚打开（只播一次入场动画）
 
   function openDepartPrep({ chooseAgain = false } = {}) {
+    if (departureEntry?.slot === SDT.Base.slot && departureEntry.current() && !departureEntry.picked) return departureEntry.promise;
+    if (!chooseAgain && deploymentSlot === SDT.Base.slot && deployCharacter && deployStart && deployPick) {
+      deploySubmitting = false;
+      deployJustOpened = true; renderDepartPrep();
+      enterDepartureCut(document.getElementById('depMain'));
+      return;
+    }
+    const generation = ++departureGeneration;
+    const slot = SDT.Base.slot;
+    const current = () => departureGeneration === generation && SDT.Base.slot === slot && deploymentSlot === slot;
     if (deploymentSlot !== SDT.Base.slot) {
       deploymentSlot = SDT.Base.slot;
       deployPick = null; deployCharacter = null; deployStart = null; deployPickFresh = false;
     }
     deploySubmitting = false;
-    if (!chooseAgain && deployCharacter && deployStart && deployPick) {
-      deployJustOpened = true; renderDepartPrep();
-      enterDepartureCut(document.getElementById('depMain'));
-      return;
-    }
     game.state = 'modal';
     deployHint = '';
     if (deployPickFresh || !deployPick) deployFilters = { rarity: '', type: '', cost: '' };
@@ -61,17 +76,29 @@ import '../../css/roster-reference.css';
     deployPickFresh = false;
     deployJustOpened = true;   // 页面初次打开时播放入场动画
     // 2026-09-07 留言：仓库卡牌不再自动塞进背包——全部留在左侧，由玩家自己拖
-    requestClassChoice({
+    let entry;
+    const choice = requestClassChoice({
+      isCurrent: current,
+      isConfirmationCurrent: () => current() && !!document.getElementById('depMain') && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing'),
       initialCharacter: deployCharacter,
-      onCancel: () => { hubBridge.renderHub(); },
+      onCancel: () => { if (current()) hubBridge.renderHub(); },
       onSelect: (cl, start) => {
+        if (!current()) return;
+        if (entry) entry.picked = true;
         deployCharacter = cl;
         deployStart = start;
         renderDepartPrep();
         enterDepartureCut(document.getElementById('depMain'));
       },
       beforeConfirm: () => {
-        if (!deployStart) return false;
+        const stage = document.getElementById('depMain');
+        if (!current() || !deployStart || !stage || UI.el.overlay.hidden || UI.el.overlay.classList.contains('closing')) return false;
+        if (Object.entries(deployPick || {}).some(([key, count]) => count > 0 && (!findDepartureStack(SDT.Base.data.stash, key) || findDepartureStack(SDT.Base.data.stash, key).count < count))) {
+          deploySubmitting = false;
+          deployHint = '[[icon:cross]] 仓库库存或卡堆身份已变化，请重新检查携带选择后出发。';
+          deployJustOpened = true; renderDepartPrep();
+          return false;
+        }
         const mode = SDT.Base.data.selMode;
         const picks = { ...(deployPick || {}) };
         const started = newRun(mode, picks, { skipClassChoice: true });
@@ -91,7 +118,14 @@ import '../../css/roster-reference.css';
         return true;
       },
     });
-    enterDepartureCut(document.querySelector('#overlay .cls2-page'));
+    entry = { slot, current, picked:false, promise: null };
+    departureEntry = entry;
+    entry.promise = Promise.resolve(choice).then(opened => {
+      if (opened === false || !current()) return false;
+      enterDepartureCut(document.querySelector('#overlay .cls2-page'));
+      return true;
+    }).finally(() => { if (departureEntry === entry) departureEntry = null; });
+    return entry.promise;
   }
 
   function deployPickRowsHTML() {
@@ -103,10 +137,11 @@ import '../../css/roster-reference.css';
     // 卡面上的「仓 ×N」实时显示剩余可带数量，拖一张少一张。
     // 需求 #6：职业卡带出后无法带入——不显示在可带列表里
     return B.data.stash.filter(s => s.card.rarity !== '职业').map(s => {
-      const n = deployPick[s.card.name] || 0;
+      const key = departureStackKey(s);
+      const n = deployPick[key] || 0;
       const left = Math.max(0, s.count - n);
       return `<div class="dep-card${n > 0 ? ' picked' : ''}${left <= 0 ? ' drained' : ''}" draggable="true" role="button" tabindex="0" aria-pressed="${n > 0 ? 'true' : 'false'}"
-          data-act="pickAdd" data-name="${escAttr(s.card.name)}"
+          data-act="pickAdd" data-name="${escAttr(s.card.name)}" data-stack-key="${escAttr(key)}"
           aria-label="带入${escAttr(s.card.name)}，还可带 ${left} 张"
           title="${escAttr(s.card.name)} · 点击或拖到右侧背包带入（还可带 ${left}）">
         <div class="dep-card-face">${SDT.Cards.cardHTML(s.card, 'sm')}</div>
@@ -128,8 +163,8 @@ import '../../css/roster-reference.css';
     const bagCells = Array.from({ length: Math.max(preview.capacity, preview.cells.length) }, (_, i) => {
       const cell = preview.cells[i];
       if (!cell) return '<div class="bag-cell empty" aria-hidden="true"></div>';
-      const { card, count, fixed } = cell;
-      return `<div class="bag-cell ${fixed ? 'fixed' : 'filled'}" ${fixed ? '' : 'draggable="true"'} role="button" tabindex="0" data-act="bagZoom" data-name="${escAttr(card.name)}"
+      const { card, count, fixed, stackKey } = cell;
+      return `<div class="bag-cell ${fixed ? 'fixed' : 'filled'}" ${fixed ? '' : 'draggable="true"'} role="button" tabindex="0" data-act="bagZoom" data-name="${escAttr(card.name)}"${stackKey ? ` data-stack-key="${escAttr(stackKey)}"` : ''}
         aria-label="${escAttr(card.name)} ×${count}，${fixed ? '含固定初始牌' : '点击查看，拖回仓库移除'}" title="${escAttr(card.name)} ×${count}">
         ${SDT.Cards.cardHTML(card, 'sm')}<b class="dep-n on">×${count}</b></div>`;
     }).join('');
@@ -198,49 +233,60 @@ import '../../css/roster-reference.css';
           <button id="btnDeploy" data-act="confirmDeploy">出发 <span aria-hidden="true">→</span></button>
         </footer>
       </div>`, 'page');
-    bindDepartureFilters(document.getElementById('depMain'), B.data.stash, {
+    const stage = document.getElementById('depMain'), slot = B.slot, generation = departureGeneration;
+    const current = () => generation === departureGeneration && SDT.Base.slot === slot && stage?.isConnected
+      && document.getElementById('depMain') === stage && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
+    const act = (name, handler) => UI.act(name, data => { if (current()) return handler(data); });
+    bindDepartureFilters(stage, B.data.stash, {
       filters: deployFilters, rarities: SDT.Cards.RARITIES, types: SDT.Cards.TYPES,
       rarityOf: card => SDT.Cards.rarityOf(card),
-      onFiltersChange: filters => { deployFilters = filters; },
+      onFiltersChange: filters => { if (current()) deployFilters = filters; },
     });
-    const addPick = (name) => {
+    const addPick = (key) => {
+      if (!current()) return;
       const B2 = SDT.Base;
-      const stack = B2.data.stash.find(x => x.card.name === name);
+      const stack = findDepartureStack(B2.data.stash, key);
       if (!stack) return;
+      key = departureStackKey(stack);
+      const name = stack.card.name;
       if (stack.card.rarity === '职业') {
         deployHint = '[[icon:cross]] 职业卡不能带入对局——可在仓库归档培养或出售。';
         renderDepartPrep();
         return;
       }
-      const cur = deployPick[name] || 0;
+      const cur = deployPick[key] || 0;
       if (cur >= stack.count) return;
       // 同名每格叠放上限（初始攻击/火球 5，其余 3，见 game.session stackCapOf；局内第 cap+1 张起另占一格）——
       // 整备来源上按此封顶（2026-09-19 审计）；预设路径的超限多占格已改由 previewDeployment 分段计入（A3-PREP-02）
       const stackCap = game.stackCapOf ? game.stackCapOf(stack.card) : 3;
-      if (cur >= stackCap) {
+      const sameNameCount = Object.entries(deployPick).reduce((sum, [pickedKey, count]) => sum + (findDepartureStack(B2.data.stash, pickedKey)?.card.name === name ? count : 0), 0);
+      if (sameNameCount >= stackCap) {
         deployHint = `[[icon:cross]] 整备同名卡牌最多携带 ${stackCap} 张（每格叠放上限，局内超出会另占一格，这里不提供）——想多带就分摊到不同卡牌上。`;
         renderDepartPrep();
         return;
       }
-      if (cur === 0 && deploySlotsUsed() >= B2.bagCap()) {
+      if (sameNameCount === 0 && deploySlotsUsed() >= B2.bagCap()) {
         deployHint = `[[icon:bag]] 背包格数已满（${B2.bagCap()} 格）——先移出其他卡牌，或回基地用木材扩建背包。`;
         renderDepartPrep();
         return;
       }
       deployHint = '';
-      deployPick[name] = cur + 1;
+      deployPick[key] = cur + 1;
       renderDepartPrep();
     };
-    const subPick = (name) => {
-      const cur = deployPick[name] || 0;
+    const subPick = (key) => {
+      if (!current()) return;
+      const stack = findDepartureStack(SDT.Base.data.stash, key);
+      key = stack ? departureStackKey(stack) : key;
+      const cur = deployPick[key] || 0;
       if (cur <= 0) return;
-      deployPick[name] = cur - 1;
+      deployPick[key] = cur - 1;
       deployHint = '';
       renderDepartPrep();
     };
-    UI.act('pickAdd', (d) => addPick(d.name));
+    act('pickAdd', (d) => addPick(d.stackKey || d.name));
     // 需求 #4：出发时携带的宠物（即时保存，出发后生效）
-    UI.act('depPet', (d) => {
+    act('depPet', (d) => {
       if (!SDT.Base.setPet(d.id)) return;
       Sfx.tick();
       const pet = SDT.Base.petById(d.id);
@@ -248,13 +294,13 @@ import '../../css/roster-reference.css';
       renderDepartPrep();
     });
     // 放大层只展示卡面；额外携带卡拖回左侧移除。
-    UI.act('bagZoom', (d) => {
+    act('bagZoom', (d) => {
       const preview = departurePreview();
       const isSha = preview.starter.name === d.name;
-      const extra = deployPick[d.name] || 0;
+      const extra = deployPick[d.stackKey || d.name] || 0;
       const n = (isSha ? preview.starterCount : 0) + extra;
       if (n <= 0) return;
-      const stack = isSha ? { card: preview.starter } : B.data.stash.find(s => s.card.name === d.name);
+      const stack = isSha ? { card: preview.starter } : findDepartureStack(B.data.stash, d.stackKey || d.name);
       if (!stack) return;
       UI.showCardZoom(stack.card, {
         // 初始攻击固定携带：详情只读，不给「移出背包」按钮（2026-09-07 留言：初始攻击也要能点击详情）
@@ -299,7 +345,7 @@ import '../../css/roster-reference.css';
       [pool, bag].forEach(el => el.addEventListener('dragstart', (e) => {
         const card = e.target.closest && e.target.closest('[data-name][draggable]');
         if (!card) return;
-        e.dataTransfer.setData('text/plain', card.dataset.name);
+        e.dataTransfer.setData('text/plain', card.dataset.stackKey || card.dataset.name);
         e.dataTransfer.effectAllowed = 'copyMove';
       }));
       // 09-25 二波美术：拖动卡池卡牌时，空背包格挂金框呼吸提示（.dep-target-hint），
@@ -325,7 +371,7 @@ import '../../css/roster-reference.css';
         if (name) subPick(name);
       });
     }
-    UI.act('confirmDeploy', () => {
+    act('confirmDeploy', () => {
       if (deploySubmitting || !deployStart) return;
       deploySubmitting = true;
       const button = document.querySelector('#depMain [data-act="confirmDeploy"]');
@@ -333,11 +379,10 @@ import '../../css/roster-reference.css';
       SDT.Sound.sfx('prepReady');
       if (!deployStart) return;
       const startChoice = deployStart;
-      const stage = document.getElementById('depMain');
-      startDepartureHandoff(startChoice, stage);
+      startDepartureHandoff(() => current() ? startChoice() : false, stage);
     });
-    UI.act('depBack', () => { openDepartPrep({ chooseAgain: true }); });
-    UI.act('depMode', () => { hubBridge.renderHub(); });
+    act('depBack', () => { openDepartPrep({ chooseAgain: true }); });
+    act('depMode', () => { hubBridge.renderHub(); });
     deployJustOpened = false;   // 首帧渲染完成，后续页内操作不再播动画
   }
 

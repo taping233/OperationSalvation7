@@ -5,10 +5,11 @@ import { TYPE_NAME } from './hub/game.notes.js';
 import { MAP } from './run/game.session.js';
 import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, game, hasRun, migrateOldSave, openLeaveMenu, openSettings, openTitleGuide, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './run/game.session.js';
 import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openDevConsole, reenterCell, openClassChoice, openShop, showRunTransition, resumeChestsOnCell } from './run/game.run.js';
+import { devToolsLoading, cancelPendingDevTools } from './run/game.run.dev-loader.js';
 import { PRELOAD_SCENES } from './run/game.run.data.js';
 import { resumeExtraction } from './run/game.run.altar.js';
 import { PERFORMANCE_BUDGETS, STARTUP_SCENE_KEYS } from './core/performance-budgets.js';
-import { openBaseHub } from './hub/game.hub.js';
+import { openBaseHub, baseHubLoading } from './hub/game.hub.js';
 import { bindBagMixins, resumeBattleRewards, showBackpack, showBackpackSection, setBagReturnHook } from './hub/game.bag.js';
 import { configureShopRuntime } from './run/game.run.shop.js';
 import { bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay, syncDevVisibility } from './hub/game.notes.js';
@@ -84,8 +85,33 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
       scheduleHover(e);
     });
 
+    const releasePointer = () => {
+      const ownedPointer = pointerId;
+      const wasDragging = dragging;
+      // 先解除归属，主动释放产生的 lostpointercapture 不能再结束后继输入。
+      pointerId = null;
+      downPos = lastPos = downWorld = null;
+      dragging = false;
+      game.camDragging = false;
+      if (ownedPointer != null && canvas.hasPointerCapture?.(ownedPointer) !== false) {
+        try { canvas.releasePointerCapture?.(ownedPointer); } catch { /* 指针可能已被浏览器取消 */ }
+      }
+      return wasDragging;
+    };
+    const cancelPointer = (id = pointerId) => {
+      if (pointerId == null || id !== pointerId) return;
+      releasePointer();
+      pendingHover = null;
+      if (hoverFrame) cancelAnimationFrame(hoverFrame);
+      hoverFrame = 0;
+      if (game.hover) renderScheduler.invalidate();
+      game.hover = null;
+      canvas.style.cursor = 'grab';
+      UI.hideTooltip();
+    };
     const endPointer = (e, cancelled = false) => {
       if (e.pointerId !== pointerId) return;
+      if (cancelled) { cancelPointer(e.pointerId); return; }
       if (downPos && !dragging && !cancelled && e.button === 0 && game.state === 'idle') {
         const r = canvas.getBoundingClientRect();
         const inside = e.clientX >= r.left && e.clientX <= r.right &&
@@ -110,15 +136,12 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
           }
         }
       }
-      downPos = null;
-      downWorld = null;
-      game.camDragging = false;
-      canvas.releasePointerCapture?.(pointerId);
-      pointerId = null;
-      if (dragging) scheduleHover(e);
+      if (releasePointer()) scheduleHover(e);
     };
     canvas.addEventListener('pointerup', endPointer);
     canvas.addEventListener('pointercancel', (e) => endPointer(e, true));
+    canvas.addEventListener('lostpointercapture', (e) => cancelPointer(e.pointerId));
+    window.addEventListener('blur', () => cancelPointer());
 
     canvas.addEventListener('contextmenu', (e) => e.preventDefault());
     canvas.addEventListener('pointerleave', () => {
@@ -149,7 +172,14 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
         if (!e.repeat && !e.isComposing && e.keyCode !== 229) openDevConsole();
         return;
       }
-      if (e.key === 'Escape' && cardPageLoading) {
+      if (e.key === 'Escape' && devToolsLoading) {
+        if (e.isComposing || e.keyCode === 229) return;
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        cancelPendingDevTools();
+        return;
+      }
+      if (e.key === 'Escape' && (cardPageLoading || baseHubLoading)) {
         // 输入法组合中（keyCode 229）：Esc 是取消拼音组合，不是关浮层
         if (e.isComposing || e.keyCode === 229) return;
         e.preventDefault();
@@ -550,8 +580,8 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     if (cam && cam.viewW === cw && cam.viewH === ch &&
         canvas.width === Math.round(cw * dprNow) && canvas.height === Math.round(ch * dprNow)) return;
     _set_dpr(dprNow);
-    canvas.width = cw * dpr;
-    canvas.height = ch * dpr;
+    canvas.width = Math.round(cw * dpr);
+    canvas.height = Math.round(ch * dpr);
     // 后备存储是物理像素，而 Renderer.draw 全程用 CSS 坐标；不缩放的话
     // dpr>1 的屏幕（如 150% 缩放的 Edge）只画到左上 1/dpr 区域，其余是未初始化显存（绿噪点）。
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);

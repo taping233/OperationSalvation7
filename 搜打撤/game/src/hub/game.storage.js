@@ -34,6 +34,7 @@ const MIGRATIONS = {
 };
 // 读档异常原因存于 reader（index -> 'corrupt' | 'tooNew' | 'readFailed'），供 UI 查询展示
 const writeIssues = new Map();
+const loadIssueMessages = new Map();
 // readIdentity 的原串→结果 memo（审计 B-1）：同 raw 直出，省重复 JSON.parse。
 const identityMemo = new Map();
 
@@ -77,16 +78,24 @@ function readRaw(index, raw) {
 // 正常读档路径（主键有效）在首个 return 即出，不触碰 prev、零额外开销；
 // 事务待恢复（txPending）时不插手，回退只发生在普通读档失败场景（恢复流程见 recovery.commands.js）。
 function readRun(index, raw) {
+  loadIssueMessages.delete(index);
   const run = reader.parse(index, raw);
   if (run) return { run, raw };   // 命中/成功：issue 由 parse 清除，行为与基线逐字一致
   if (raw == null) return { run: null, raw };
   if (txPending(index)) return { run: null, raw };
   const issueBefore = reader.issue(index);
   if (issueBefore === 'tooNew') return { run: null, raw };
+  // 无法保留主档坏原串时不自愈覆盖；prev 仍保留，恢复存储后可重试。
+  if (issueBefore === 'corrupt' && !reader.didBackUpCorrupt(index, raw)) {
+    const message = '损坏原串未能备份，原档和已有备份未被覆盖；请检查存储状态后重试进入';
+    loadIssueMessages.set(index, message);
+    console.warn(`[save] 档位 ${index} ${message}，本次未自愈覆盖主档`);
+    return { run: null, raw };
+  }
   let prevRaw;
   try { prevRaw = localStorage.getItem(PREV_KEY(index)); } catch { return { run: null, raw }; }
   if (prevRaw == null || prevRaw === raw) return { run: null, raw };
-  const prevRun = reader.parse(index, prevRaw);
+  const prevRun = reader.parse(index, prevRaw, { backupCorrupt: false });
   if (!prevRun) {
     // prev 也无效：清 prev 校验残留，还原主键失败口径（corrupt/tooNew 不被 prev 污染），维持既有失败路径
     reader.invalidate(index);
@@ -94,7 +103,11 @@ function readRun(index, raw) {
     return { run: null, raw };
   }
   try { localStorage.setItem(RUN_KEY(index), prevRaw); }
-  catch { reader.invalidate(index); return { run: null, raw }; }   // 自愈写失败（配额等）：不假称已回退
+  catch {
+    reader.invalidate(index);
+    if (issueBefore) reader.markIssue(index, issueBefore);
+    return { run: null, raw };
+  }   // 自愈写失败（配额等）：不假称已回退，仍报告主档异常
   // 自愈只修复持久原串；读者/预检不授予旧运行态写权，完整装载由 acceptLoad 采纳。
   console.warn(`[save] 档位 ${index} 主档读取失败，已回退到上一版存档（坏档原串保留于 corrupt 键）`);
   return { run: reader.parse(index, prevRaw), raw: prevRaw };
@@ -108,12 +121,14 @@ const RunStorage = Object.freeze({
     try { return !!localStorage.getItem(RUN_KEY(index)); } catch { return false; }
   },
   read(index) {
+    loadIssueMessages.delete(index);
     let raw;   // 不做冗余初始化：try 内必赋值，catch 直接 return（下方 == null 判断兼容 undefined）
     try { raw = localStorage.getItem(RUN_KEY(index)); } catch { return null; }
     return readRaw(index, raw);
   },
   // 菜单/装载共用预检读取；只记录候选原串，不授予旧运行态覆盖权限。
   readForPreflight(index) {
+    loadIssueMessages.delete(index);
     let raw;
     try { raw = localStorage.getItem(RUN_KEY(index)); }
     catch { reader.markIssue(index, 'readFailed'); return null; }
@@ -142,6 +157,7 @@ const RunStorage = Object.freeze({
     writeIssues.delete(index);
     return run;
   },
+  loadIssueMessage(index) { return loadIssueMessages.get(index) || null; },
   lastWriteIssue(index) { return writeIssues.get(index) || null; },
   // 坏档处理：原串备份到 corrupt 键后返回 null（原键不动，由玩家决定是否覆盖重开）
   _corrupt(index, raw) { return reader.markCorrupt(index, raw); },

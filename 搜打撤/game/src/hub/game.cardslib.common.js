@@ -1,3 +1,4 @@
+import { cancelPendingPageEntries } from '../ui/page-entry-cancellation.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 
@@ -18,7 +19,7 @@ export function configurePendingCardPageEntry(cancel) { cancelPendingPageEntry =
 // 放本层避免 page→facade 静态回边（facade 已动态加载 page，回引即循环依赖，contracts 契约红）。
 export function cancelPendingCardPageEntry() { return cancelPendingPageEntry?.() ?? false; }
 export function closeCardPageTop() {
-  if (cancelPendingPageEntry?.()) return;
+  if (cancelPendingPageEntries() || cancelPendingPageEntry?.()) return;
   if (document.getElementById('cdesStage')) closeDesignerPage?.();
   else if (document.getElementById('depMain')) { navigation.resetDeployPick(); navigation.renderHub(); }
   else if (document.getElementById('hubMain')) navigation.closeBase();

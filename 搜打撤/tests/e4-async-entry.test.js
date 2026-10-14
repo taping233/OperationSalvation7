@@ -171,7 +171,7 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
 
   it.each(['normal', 'new-run', 'title', 'resolved-then-new-run', 'resolved-then-transition'])('guards class grant transition (%s)', async change => {
     SDT.Battle = battle;
-    const { openClassChoice } = await import('../game/src/run/game.run.altar.js');
+    const { openClassChoice } = await import('../game/src/run/game.run.class-choice.page.js');
     openClassChoice(); handlers.pickClass(); const finish = handlers.flowContinue;
     if (change === 'new-run') game.discoveredPairs = new Set();
     if (change === 'title') menu.showTitle();
@@ -200,5 +200,63 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
       expect(saveGame).toHaveBeenCalledOnce(); // 过场前冻结待领补给；过期回调不再保存。
     }
     if (replacement) { handlers.flowContinue(); expect(await replacement).toBe(true); }
+  });
+});
+
+
+describe('选档消费 pending 选角就绪', () => {
+  it('选角真实就绪前保持enterSlot锁且不写已进入成功日志', async () => {
+    const choice = deferred();
+    loadGame.mockReturnValue({ ok:true, classChoiceEntry:choice.promise });
+    menu.startNewGame(); const opening = handlers.enterSlot({ slot:1 });
+    await vi.runAllTimersAsync(); gate.resolve(); await vi.dynamicImportSettled(); await vi.runAllTimersAsync();
+    expect(loadGame).toHaveBeenCalledOnce();
+    expect(UI.log.mock.calls.flat().join(' ')).not.toContain('已进入');
+    await expect(handlers.enterSlot({ slot:1 })).resolves.toBe(false);
+    expect(loadGame).toHaveBeenCalledOnce();
+    choice.resolve(true); await opening;
+    expect(UI.log.mock.calls.flat().join(' ')).toContain('已进入');
+  });
+  it.each(['failed', 'title', 'settings', 'new-run'])('未就绪结果按来源处理（%s）', async change => {
+    const choice = deferred();
+    loadGame.mockReturnValue({ ok:true, classChoiceEntry:choice.promise });
+    menu.startNewGame(); const opening = handlers.enterSlot({ slot:1 });
+    await vi.runAllTimersAsync(); gate.resolve(); await vi.dynamicImportSettled(); await vi.runAllTimersAsync();
+    expect(loadGame).toHaveBeenCalledOnce();
+    if (change === 'title') menu.showTitle();
+    if (change === 'settings') { document.getElementById('ovBody').innerHTML = '<section id="newSettings">设置</section>'; game.state = 'modal'; }
+    if (change === 'new-run') game.discoveredPairs = new Set();
+    choice.resolve(false); expect(await opening).toBe(false);
+    expect(UI.log.mock.calls.flat().join(' ')).not.toContain('已进入');
+    if (change === 'failed') {
+      expect(document.querySelector('.slot-page')).not.toBeNull();
+      expect(document.getElementById('slotRestoreError').textContent).toContain('对局进度已保留');
+    } else if (change === 'settings') expect(document.getElementById('newSettings')).not.toBeNull();
+  });
+});
+
+
+describe('迟到选角操作失效', () => {
+  it.each(['title', 'new-run', 'replaced-page'])('旧pickClass不能修改新页面或新局（%s）', async change => {
+    const { openClassChoice } = await import('../game/src/run/game.run.class-choice.page.js');
+    openClassChoice(); const oldPick = handlers.pickClass;
+    const random = vi.spyOn(SDT.Cards, 'randomClassCard');
+    if (change === 'title') menu.showTitle();
+    if (change === 'new-run') game.discoveredPairs = new Set();
+    if (change === 'replaced-page') document.getElementById('ovBody').innerHTML = '<section>新的页面</section>';
+    UI.hideOverlay.mockClear(); oldPick();
+    expect(random).not.toHaveBeenCalled(); expect(game.entrySupply).toBeUndefined();
+    expect(UI.hideOverlay).not.toHaveBeenCalled();
+  });
+  it.each(['slot', 'new-run', 'confirmation-owner'])('整备保存前废弃旧人物confirm闭包（%s）', async change => {
+    const { openClassChoice } = await import('../game/src/run/game.run.class-choice.page.js');
+    let valid = true; const onSelect = vi.fn(), beforeConfirm = vi.fn(() => true);
+    openClassChoice({ onSelect, beforeConfirm, isConfirmationCurrent:() => valid });
+    handlers.pickClass(); const confirm = onSelect.mock.lastCall[1];
+    if (change === 'slot') slot = 2;
+    if (change === 'new-run') game.discoveredPairs = new Set();
+    if (change === 'confirmation-owner') valid = false;
+    confirm(); expect(beforeConfirm).not.toHaveBeenCalled(); expect(saveGame).not.toHaveBeenCalled();
+    expect(game.entrySupply).toBeUndefined();
   });
 });

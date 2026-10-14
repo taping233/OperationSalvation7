@@ -91,28 +91,41 @@ function scanHandMoveCurses(deps) {
  * enemy-phase 既有 _stealRestore 归还管线负责敌方侧还原）。
  */
 export function resolveStealAtk(card, operation, preferredTarget, deps) {
-  const t = preferredTarget && !preferredTarget.dead ? preferredTarget : deps.getAliveFoes()[0];
-  if (!t || t.dead) return false;
-  const duration = Number.isInteger(operation.duration) ? operation.duration : 1;
-  const before = t.atk || 0;
-  let stolen;
-  if (operation.capTo !== undefined) {
-    stolen = Math.max(0, before - operation.capTo);
-    t.atk = Math.max(operation.capTo, 0);
+  let targets;
+  if (operation.target === 'allEnemies' || operation.target === 'randomEnemy') {
+    const alive = deps.getAliveFoes().filter(foe => foe && !foe.dead);
+    if (!alive.length) return false;
+    if (operation.target === 'randomEnemy') {
+      if (typeof deps.random !== 'function') throw new Error('resolveStealAtk: deps.random 未注入');
+      targets = [alive[Math.floor(deps.random() * alive.length)]];
+    } else targets = alive;
   } else {
-    stolen = Math.min(operation.amount, before);
-    t.atk = before - stolen;
+    const target = preferredTarget && !preferredTarget.dead ? preferredTarget : deps.getAliveFoes()[0];
+    targets = target && !target.dead ? [target] : [];
   }
-  if (stolen <= 0) {
-    deps.log(`[[icon:arrow]] <b>${deps.esc(card.name)}</b>：${deps.esc(t.name)} 没有可偷取的攻击力`, 'dim');
-    return true;
+  if (!targets.length) return false;
+  const duration = Number.isInteger(operation.duration) ? operation.duration : 1;
+  for (const t of targets) {
+    const before = t.atk || 0;
+    let stolen;
+    if (operation.capTo !== undefined) {
+      stolen = Math.max(0, before - operation.capTo);
+      t.atk = before - stolen;   // 偷取只会降低攻击，已经低于阈值时不能反向抬高。
+    } else {
+      stolen = Math.min(operation.amount, before);
+      t.atk = before - stolen;
+    }
+    if (stolen <= 0) {
+      deps.log(`[[icon:arrow]] <b>${deps.esc(card.name)}</b>：${deps.esc(t.name)} 没有可偷取的攻击力`, 'dim');
+      continue;
+    }
+    t._stealRestore = (t._stealRestore || 0) + stolen;
+    // 归还门在 enemy-phase 回合末管线（turn > _stealRestoreTurn）——duration=1（影噬「本回合偷取」缺省）
+    // 须当回合末归还，故 -2；旧文本路径 ctx.turn 恒 undefined、经 || 0 恰好同为当回合末归还
+    t._stealRestoreTurn = deps.getTurn() + duration - 2;
+    deps.combat.addBlessing(deps.getPlayerStatus(), 'atkUp', stolen, duration);
+    deps.log(`[[icon:arrow]] <b>${deps.esc(card.name)}</b>：偷取 <b>${deps.esc(t.name)}</b> ${stolen} 点攻击力（${duration} 回合后归还）`, 'sys');
   }
-  t._stealRestore = (t._stealRestore || 0) + stolen;
-  // 归还门在 enemy-phase 回合末管线（turn > _stealRestoreTurn）——duration=1（影噬「本回合偷取」缺省）
-  // 须当回合末归还，故 -2；旧文本路径 ctx.turn 恒 undefined、经 || 0 恰好同为当回合末归还
-  t._stealRestoreTurn = deps.getTurn() + duration - 2;
-  deps.combat.addBlessing(deps.getPlayerStatus(), 'atkUp', stolen, duration);
-  deps.log(`[[icon:arrow]] <b>${deps.esc(card.name)}</b>：偷取 <b>${deps.esc(t.name)}</b> ${stolen} 点攻击力（${duration} 回合后归还）`, 'sys');
   return true;
 }
 

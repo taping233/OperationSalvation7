@@ -7,7 +7,7 @@
  * 保守口径：
  *   - 只刷 FACE_REFRESH_BY_ID 显式点名的 id + 字段，其余任何字段（含玩家在制作坊的改动）不碰；
  *   - 字段值动态取自 canonical 定版表（零重复副本）；
- *   - 缺表/缺卡/隐私模式静默跳过；saveAll 失败重放一次（seedBatch 同款）；
+ *   - 缺表/缺卡/隐私模式静默跳过；saveAll 失败保留存储现场，下次启动重试；
  *   - rules 一概不动——结构化 op 用 amountField 等引用卡面时，卡面刷新即生效。
  *
  * 新增一行注册表 = 一次定版修订要刷新旧档卡面；删除行 = 不再刷新。 */
@@ -49,6 +49,8 @@ export function ensureCanonicalFaceRefresh(deps = {}) {
         }
       }
     }
-    if (dirty && !library.saveAll(cards)) library.saveAll(cards);   // 失败重放一次（seedBatch 同款）
+    // A rejected full-catalog save may have invalidated a stale cache. Reusing
+    // this array would bypass the next save's snapshot check and erase new data.
+    if (dirty) library.saveAll(cards);
   } catch { /* 隐私模式等场景静默跳过 */ }
 }

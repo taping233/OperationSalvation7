@@ -119,7 +119,7 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'bu
     }
 
     // 减伤（祝福）：每次受到的伤害 -N；真实伤害无视（同格挡/护盾/护甲）
-    if ((target.status.reduce || 0) > 0 && type !== TYPES.TRUE && dmg > 0) {
+    if ((target.status.reduce || 0) > 0 && type !== TYPES.TRUE && !broken && dmg > 0) {
       const cut = Math.min(target.status.reduce, dmg);
       dmg -= cut;
       r.reduced = cut;

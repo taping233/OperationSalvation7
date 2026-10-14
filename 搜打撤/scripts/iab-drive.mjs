@@ -81,7 +81,7 @@ export async function getTab(browser, tabId) {
 
 /** evaluate 执行表达式并 JSON.parse（页面内 stringify → 只回原始值口径）。 */
 export async function evalRaw(tab, expression, timeoutMs = 45000) {
-  const wrapped = `(async () => JSON.stringify((async () => (${expression}))()))()`;
+  const wrapped = `(async () => JSON.stringify(await (async () => (${expression}))()))()`;
   const r = await tab.playwright.evaluate(wrapped);
   return JSON.parse(r);
 }
@@ -170,8 +170,13 @@ export async function runScene(tab, scene, options = {}) {
   const boot = await evalRaw(tab,
     `window.SDT.Agent.scenes.start(${JSON.stringify(scene)}, ${JSON.stringify({ turbo: !!options.turbo })})`);
   if (!boot.ok) return { ok: false, pass: false, ...boot };
-  const pollMs = options.pollMs ?? 2000;
-  const deadline = Date.now() + (options.timeoutMsMs ?? 600000);
+  const requestedPoll = options.pollMs ?? 2000;
+  const pollMs = Number.isFinite(requestedPoll) && requestedPoll > 0 ? requestedPoll : 2000;
+  const requestedTimeout = options.timeoutMs ?? options.timeoutMsMs ?? 600000;
+  const timeoutMs = Number.isFinite(requestedTimeout) && requestedTimeout > 0 ? requestedTimeout : 600000;
+  const deadline = Date.now() + timeoutMs;
+  const timedOut = () => ({ ok: false, pass: false, code: 'POLL_TIMEOUT',
+    message: '轮询超时（场景可能仍在跑，可用 scenes.status 续查）' });
   let ghost = 0;
   for (;;) {
     await tab.playwright.waitForTimeout(pollMs);
@@ -186,11 +191,10 @@ export async function runScene(tab, scene, options = {}) {
         return { ok: false, pass: false, code: 'PAGE_RELOADED',
           message: '页面自刷杀掉了在跑场景；重新 openGame 后用 turbo 重跑' };
       }
+      if (Date.now() >= deadline) return timedOut();
       continue;
     }
     if (status.done) return status.report;
-    if (Date.now() > deadline) {
-      return { ok: false, pass: false, code: 'POLL_TIMEOUT', message: `轮询超时（场景可能仍在跑，可用 scenes.status 续查）` };
-    }
+    if (Date.now() >= deadline) return timedOut();
   }
 }

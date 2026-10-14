@@ -1,4 +1,5 @@
 import { esc, escAttr } from '../core/shared.js';
+import { stackKeyOf } from './collection.commands.js';
 import { characterFor } from '../core/characters.js';
 import '../../css/card-browser.css';
 import { bindCardNavigation } from './hub.presentation.js';
@@ -6,8 +7,9 @@ import { decorateInventoryZoom } from '../ui/inventory-zoom.js';
 import { warehouseCategoriesV7HTML } from './hub.warehouse-categories-v7.js';
 import { animateBaseRefresh } from './base-motion-v4.js';
 
-const state = { slot: null, query: '', type: '', rarity: '', character: '', group: '', name: '', scrollTop:0 };
-export function clearWarehouseFilters() { Object.assign(state, { query: '', type: '', rarity: '', character: '', group: '', name: '', scrollTop:0 }); }
+const state = { slot: null, query: '', type: '', rarity: '', character: '', group: '', key: '', scrollTop:0 };
+export function clearWarehouseFilters() { Object.assign(state, { query: '', type: '', rarity: '', character: '', group: '', key: '', scrollTop:0 }); }
+const inventoryKeyOf = stack => stackKeyOf(stack) || stack.card.name;
 const growth = card => !!card.cls && (card.rarity === '职业' || card.type === '能力卡');
 const supply = card => card.id === window.SDT.Base.PET_EGG_ID || card.id === 'tt-econpack' || !!window.SDT.Base.materialInfo?.(card);
 function matches(card) {
@@ -25,11 +27,11 @@ export function warehouseSectionsHTML(base, view = 'cards') {
   return pocket ? `<button type="button" class="base-link warehouse-pocket-entry" data-act="hubStashView" data-view="pocket">待复原 <b>${pocket}</b> ↗</button>` : '';
 }
 function itemsHTML(base, cards, pocket) {
-  return (pocket ? base.data.pocket : base.data.stash).map(stack => `<button type="button" class="stash-cell${stack.card.name === state.name ? ' selected' : ''}" data-browser-key="${escAttr(stack.card.name)}" data-name="${escAttr(stack.card.name)}" data-browse-filtered="${pocket ? false : !matches(stack.card)}" aria-pressed="${stack.card.name === state.name}" aria-label="选择${escAttr(stack.card.name)}，${pocket ? '待复原' : '持有'}${stack.count}张"><span class="warehouse-card-art">${cards.cardHTML(stack.card, 'sm')}</span><span class="stash-card-caption"><b>${esc(stack.card.name)}</b><strong class="stack-count">×${stack.count}</strong></span>${base.isCollected?.(stack.card) ? '<span class="warehouse-protected">收藏</span>' : ''}</button>`).join('');
+  return (pocket ? base.data.pocket : base.data.stash).map(stack => `<button type="button" class="stash-cell${inventoryKeyOf(stack) === state.key ? ' selected' : ''}" data-browser-key="${escAttr(inventoryKeyOf(stack))}" data-stack-key="${escAttr(inventoryKeyOf(stack))}" data-name="${escAttr(stack.card.name)}" data-browse-filtered="${pocket ? false : !matches(stack.card)}" aria-pressed="${inventoryKeyOf(stack) === state.key}" aria-label="选择${escAttr(stack.card.name)}，${pocket ? '待复原' : '持有'}${stack.count}张"><span class="warehouse-card-art">${cards.cardHTML(stack.card, 'sm')}</span><span class="stash-card-caption"><b>${esc(stack.card.name)}</b><strong class="stack-count">×${stack.count}</strong></span>${base.isCollected?.(stack.card) ? '<span class="warehouse-protected">收藏</span>' : ''}</button>`).join('');
 }
 function warehouseSelectionHTML(rows) {
-  const stack = rows.find(item => item.card.name === state.name);
-  return stack ? `<div><small>当前浏览</small><b>${esc(stack.card.name)}</b><span>${stack.count} 张${window.SDT.Base.isCollected?.(stack.card) ? ' · 收藏保护' : ''}</span></div><button type="button" class="mini-btn" data-act="warehousePick" data-name="${escAttr(stack.card.name)}">查看详情 ↗</button>` : '<p>选择卡牌后查看详情</p>';
+  const stack = rows.find(item => inventoryKeyOf(item) === state.key);
+  return stack ? `<div><small>当前浏览</small><b>${esc(stack.card.name)}</b><span>${stack.count} 张${window.SDT.Base.isCollected?.(stack.card) ? ' · 收藏保护' : ''}</span></div><button type="button" class="mini-btn" data-act="warehousePick" data-stack-key="${escAttr(inventoryKeyOf(stack))}" data-name="${escAttr(stack.card.name)}">查看详情 ↗</button>` : '<p>选择卡牌后查看详情</p>';
 }
 function refreshWarehouseBrowser(browser, reset = false) {
   const track = browser.querySelector('.card-browser-track');
@@ -57,7 +59,7 @@ export function warehouseHTML(view = 'cards') {
   synchronize(base);
   const pocket = view === 'pocket';
   const rows = pocket ? base.data.pocket : base.data.stash.filter(stack => matches(stack.card));
-  state.name = rows.find(item => item.card.name === state.name)?.card.name || rows[0]?.card.name || '';
+  state.key = inventoryKeyOf(rows.find(item => inventoryKeyOf(item) === state.key) || rows[0] || { card: { name: '' } });
   const person = characterFor(state.character);
   const options = (field, label) => `<option value="">${label}</option>` + [...new Set(base.data.stash.map(stack => stack.card[field]))].filter(Boolean).map(value => `<option value="${escAttr(value)}"${state[field] === value ? ' selected' : ''}>${esc(value)}</option>`).join('');
   return `<div class="warehouse-v3 warehouse-v2" data-pocket="${pocket}"><header class="camp-section-head"><h2>${pocket ? '待复原' : '后勤仓库'}</h2><div class="warehouse-header-actions">${warehouseSectionsHTML(base, view)}${pocket ? '' : '<button type="button" class="base-link" data-act="rawItem" data-kind="wood">木材 ↗</button><button type="button" class="base-link" data-act="rawItem" data-kind="rations">口粮 ↗</button><button class="base-link" data-act="hubTab" data-tab="shop">交易所 ↗</button>'}<div class="warehouse-capacity"><span class="camp-page-stat">${base.stashUsed()} / ${base.stashCap()} 格</span><button class="base-link" data-act="hubTab" data-tab="upgrade" data-facility="stash">扩建 ↗</button></div></div></header>
@@ -69,17 +71,20 @@ export function pocketWarehouseHTML() { return warehouseHTML('pocket'); }
 export function bindWarehouse({ ui, base, sound, openCard }) {
   const root = document.querySelector('.warehouse-v3');
   if (!root) return;
+  const slotId = base.slot;
+  const currentWarehouse = () => window.SDT.Base === base && base.slot === slotId && root.isConnected && document.querySelector('.warehouse-v3') === root;
   const pocket = root.dataset.pocket === 'true';
   const browser = root.querySelector('[data-card-browser]');
   const update = (reset = false) => {
+    if (!currentWarehouse()) return;
     synchronize(base);
     const rows = pocket ? base.data.pocket : base.data.stash.filter(stack => matches(stack.card));
-    state.name = rows.find(item => item.card.name === state.name)?.card.name || rows[0]?.card.name || '';
+    state.key = inventoryKeyOf(rows.find(item => inventoryKeyOf(item) === state.key) || rows[0] || { card: { name: '' } });
     for (const button of browser.querySelectorAll('[data-browser-key]')) {
-      const stack = (pocket ? base.data.pocket : base.data.stash).find(item => item.card.name === button.dataset.name);
+      const stack = (pocket ? base.data.pocket : base.data.stash).find(item => inventoryKeyOf(item) === button.dataset.stackKey);
       button.dataset.browseFiltered = String(!stack || !pocket && !matches(stack.card));
-      button.classList.toggle('selected', button.dataset.name === state.name);
-      button.setAttribute('aria-pressed', String(button.dataset.name === state.name));
+      button.classList.toggle('selected', button.dataset.stackKey === state.key);
+      button.setAttribute('aria-pressed', String(button.dataset.stackKey === state.key));
     }
     refreshWarehouseBrowser(browser, reset);
     if (reset) animateBaseRefresh(browser.querySelector('.card-browser-track'));
@@ -95,28 +100,30 @@ export function bindWarehouse({ ui, base, sound, openCard }) {
     const purpose = root.querySelector('.warehouse-purpose');
     if (purpose) purpose.hidden = !state.character;
   };
-  const open = (name, from) => {
+  const open = (key, from) => {
+    if (!currentWarehouse()) return;
     const list = pocket ? base.data.pocket : base.data.stash;
-    const index = list.findIndex(stack => stack.card.name === name);
-    if (index < 0) return;
-    state.name = name; update(); sound.tick();
+    const candidates = list.filter(stack => inventoryKeyOf(stack) === key);
+    if (candidates.length !== 1) return;
+    const stack = candidates[0], index = list.indexOf(stack), name = stack.card.name;
+    state.key = key; update(); sound.tick();
     if (!pocket && openCard) { openCard(index, { from }); return; }
-    const stack = list[index];
     const keys = base.data.keys || 0, cost = pocket ? base.pocketKeyCost(stack) : 0;
-    const missing = pocket && (keys < cost || base.stashRoom() < 1);
-    const footer = pocket ? `<div class="pocket-zoom-actions"><span>待复原 ${stack.count} 张</span><button class="mini-btn ok" data-act="restoreCard" data-name="${escAttr(name)}" data-i="${index}"${missing ? ' disabled' : ''}>复原 1 张 · ${cost} 钥匙</button>${missing ? `<p>${keys < cost ? `还需 ${cost - keys} 把钥匙` : '仓库已满'}</p>` : ''}</div>` : '';
+    const count = stack.count || 1;
+    const missing = pocket && (keys < cost || base.stashRoom() < count);
+    const footer = pocket ? `<div class="pocket-zoom-actions"><span>待复原 ${stack.count} 张</span><button class="mini-btn ok" data-act="restoreCard" data-stack-key="${escAttr(stackKeyOf(stack))}" data-count="${count}" data-name="${escAttr(name)}" data-i="${index}"${missing ? ' disabled' : ''}>复原 ${count} 张 · ${cost} 钥匙</button>${missing ? `<p>${keys < cost ? `还需 ${cost - keys} 把钥匙` : `仓库空位不足，还需 ${count - base.stashRoom()} 格`}</p>` : ''}</div>` : '';
     ui.showCardZoom(stack.card, { presentation:'inventory', from, footer }); decorateInventoryZoom(stack.card);
   };
   browser.addEventListener('click', event => {
     const item = event.target.closest('[data-browser-key]');
     if (item && browser.contains(item) && !item.hidden) open(item.dataset.browserKey, item);
   });
-  browser.querySelector('.card-browser-track').addEventListener('scroll', event => { state.scrollTop = event.target.scrollTop; }, { passive:true });
-  browser.addEventListener('load', () => refreshWarehouseBrowser(browser), true);
+  browser.querySelector('.card-browser-track').addEventListener('scroll', event => { if (currentWarehouse()) state.scrollTop = event.target.scrollTop; }, { passive:true });
+  browser.addEventListener('load', () => { if (currentWarehouse()) refreshWarehouseBrowser(browser); }, true);
   refreshWarehouseBrowser(browser);
   bindCardNavigation(browser.querySelector('.card-browser-track'), '[data-browser-key]', { activate: false });
-  for (const input of root.querySelectorAll('[data-warehouse-filter]')) input.addEventListener(input.tagName === 'SELECT' ? 'change' : 'input', () => { state[input.dataset.warehouseFilter] = input.value; update(true); });
-  ui.act('warehouseGroup', data => { if (!['', 'battle', 'supplies', 'growth'].includes(data.group)) return; state.group = data.group; if (data.group !== 'growth') state.character = ''; update(true); sound.tick(); });
-  ui.act('warehouseReset', () => { const character = state.character; clearWarehouseFilters(); if (character) { state.character = character; state.group = 'growth'; } for (const input of root.querySelectorAll('[data-warehouse-filter]')) input.value = ''; update(true); });
-  ui.act('warehousePick', data => open(data.name, [...browser.querySelectorAll('[data-name]')].find(button => button.dataset.name === data.name)));
+  for (const input of root.querySelectorAll('[data-warehouse-filter]')) input.addEventListener(input.tagName === 'SELECT' ? 'change' : 'input', () => { if (!currentWarehouse()) return; state[input.dataset.warehouseFilter] = input.value; update(true); });
+  ui.act('warehouseGroup', data => { if (!currentWarehouse()) return; if (!['', 'battle', 'supplies', 'growth'].includes(data.group)) return; state.group = data.group; if (data.group !== 'growth') state.character = ''; update(true); sound.tick(); });
+  ui.act('warehouseReset', () => { if (!currentWarehouse()) return; const character = state.character; clearWarehouseFilters(); if (character) { state.character = character; state.group = 'growth'; } for (const input of root.querySelectorAll('[data-warehouse-filter]')) input.value = ''; update(true); });
+  ui.act('warehousePick', data => open(data.stackKey || data.name, [...browser.querySelectorAll('[data-stack-key]')].find(button => button.dataset.stackKey === (data.stackKey || data.name))));
 }

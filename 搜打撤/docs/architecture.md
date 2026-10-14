@@ -34,7 +34,8 @@
 - `game.cardslib.js`：卡牌库轻门面；首次进入照相馆或制作坊时动态加载 `game.cardslib.page.js`。页面及其制作坊、照片道具、性能探针、图片预热和共享模块保持在门面之后，避免静态依赖回到首屏；制作坊写开关保持关闭。`ui/ui.js` 组合 `overlay.js`、`cinematics.js`、`hud.js`。
 - `game.hub.preparation.js`：基地整备控制器，通过数据、视图、导航和错误处理端口装配 `preparation.commands.js` / `preparation.view.js`；不读取 `SDT`、`UI`、`document` 或 `window`。页面 dispose 会阻止过期异步返回继续更新 UI。
 - `game.run.data.js`：场景、事件与职业叙事授权数据；`game.run.shop.js`：商店进货、购买和出售；`game.run.js`：移动、格子、事件、祭坛与撤离流程。
-- `game.hub.js` 装配出征整备、页签与中立桥；`game.bag.js` 装配拖拽、战后结算与背包中立桥。对应切片以 `game.hub.*.js`、`game.bag.*.js` 命名；切片通过桥互调，contracts 检查循环依赖。
+- `game.hub.js` 是基地轻门面，选档后首次进入才动态加载 `game.hub.runtime.js`；后者装配出征整备、页签与中立桥；`game.bag.js` 装配拖拽、战后结算与背包中立桥。基地与照相馆的待开页请求通过 `ui/page-entry-cancellation.js` 互斥，返回标题、选档或更新导航会取消旧请求；加载失败可重试，档案状态不复制。基地样式仍静态加载。对应切片以 `game.hub.*.js`、`game.bag.*.js` 命名；切片通过桥互调，contracts 检查循环依赖。
+- `run/game.run.altar.js` 保留祭坛、火堆、撤离恢复的同步入口，并把 `openClassChoice()` 转交给选角轻门面 `run/game.run.class-choice.js`；人物与卡池页面 `game.run.class-choice.page.js` 及人物翻页动效仅在实际请求选角时动态装载，无标题/基地 idle 预取。入口 Promise 在页面就绪后完成；出征切幕等待该结果。`loadGame()` 仍同步返回恢复/持久化结果，未选角存档另附 `classChoiceEntry` 供选档 await，Promise 不写入游戏或存档状态。选角下载与其他待开页互斥；取消、换档/换局和来源宿主变化废弃旧结果，失败保留 pending run 与可重试入口。
 - 基地 `home.scene.js` 与 Pixi 在首次打开基地场景时动态加载；请求序号和挂载节点检查阻止已关闭页面的加载结果继续挂载。稳定卡牌数据打为 `game-card-catalog` 缓存分块，仍是同步启动依赖，计入首屏脚本预算。预算值由 `scripts/perf-budget.cjs` 维护，实际产物大小与构建状态见对应任务证据。
 - `cards.js`（壳）+ `cards.data.js` / `cards.rules.js` / `cards.sync.js` / `cards.consts.js`：卡池数据、推导与经济规则、迁移播种、共享常量；`window.SDT.Cards` 键面与数据字节不变。
 - `cards.sync.js` 的 TT10/TT11 历史批次重播优先使用 `cards-sync.json` 同 id 定版字段，并服从其退役清单；定版未提供的仓库元数据仍保留。迁移标记存在时不覆盖玩家后续编辑。

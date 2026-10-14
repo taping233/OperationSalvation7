@@ -107,6 +107,17 @@ function isRelevant(p) {
   return isGateRelevantPath(p);
 }
 
+// Hook 的 repo-local Git 环境只属于门进程；Vitest 的临时仓库必须选择自己的索引/对象目录。
+// 保留门进程原环境，提交前后的 stagedChanges 继续核对真实 commit index。
+export function vitestEnvironment(env = process.env) {
+  const childEnv = { ...env };
+  const localGitVars = execFileSync('git', ['rev-parse', '--local-env-vars'],
+    { cwd: REPO_ROOT, encoding: 'utf8' }).trim().split('\n');
+  for (const key of localGitVars) delete childEnv[key];
+  delete childEnv.GATE_MANIFEST_OK;
+  return childEnv;
+}
+
 function runNode(args, label, opts = {}) {
   process.stdout.write('[gate] ' + label + '\n');
   const result = spawnSync(process.execPath, args, { cwd: PROJECT_ROOT, stdio: 'inherit', env: opts.env });
@@ -176,7 +187,7 @@ async function main() {
       if (!test.startsWith('tests/') || !test.endsWith('.test.js')
         || !existsSync(path.join(PROJECT_ROOT, test))) throw new Error('无效测试文件：' + test);
     }
-    runNode(['node_modules/vitest/vitest.mjs', 'run', ...tests, '--reporter=dot'], '指定 Vitest');
+    runNode(['node_modules/vitest/vitest.mjs', 'run', ...tests, '--reporter=dot'], '指定 Vitest', { env: vitestEnvironment() });
     return;
   }
   const pathIndex = args.indexOf('--paths');
@@ -228,7 +239,7 @@ async function main() {
   if (plan.mode === 'full' || plan.tests.length) {
     // 逃生口只在门进程内生效：Vitest 夹具会经 {...process.env} 继承它，导致混树/无主拒绝
     // 测试被无声放行（10-03 实测泄漏事故）——只对子进程剔除，门进程保留给两次 stagedChanges 复核。
-    const { GATE_MANIFEST_OK: _gateManifestOk, ...childEnv } = process.env;
+    const childEnv = vitestEnvironment();
     runNode(testArgs, plan.mode === 'quick' ? '定向 Vitest（完整测试留给 CI/阶段收尾）' : '全量 Vitest', { env: childEnv });
   }
   if (staged) stagedChanges();

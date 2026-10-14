@@ -1,7 +1,7 @@
 /* INFRA-02 回归：开发者控制台「快捷键」页签点「进入」后，jump 成功开出的目标页
  * 必须存活（_acts 不被 hideOverlay 清掉、overlay 不被隐藏），控制台页被目标页顶替。
  * 走真实链路：openDevConsole → devcTab 切快捷键页签 → 真实 DOM click「进入」按钮。 */
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 
 // ---- 环境补桩（与 boot.test.js 同款，必须在动态 import main.js 之前就位） ----
 // 故意恒真：jsdom 无 canvas，无论原生 getContext 是否存在都强制换成本桩（lint 静音，不改逻辑）
@@ -97,7 +97,7 @@ describe('INFRA-02 控制台快捷键页签跳转不再关掉目标页', () => {
     expect(UI().el.overlay.hidden).toBe(false);
   });
 
-  it('真实 Ctrl+L 在四个页签均恢复来源，按住重复消息不反复开关', () => {
+  it('真实 Ctrl+L 在四个页签均恢复来源，按住重复消息不反复开关', async () => {
     if (document.getElementById('devConsole')) UI()._acts.devcClose();
     const game = window.SDT.game;
     game.state = 'modal';
@@ -106,8 +106,10 @@ describe('INFRA-02 控制台快捷键页签跳转不再关掉目标页', () => {
     let continued = 0;
     UI().act('originContinue', () => { continued += 1; });
     const toggle = repeat => window.dispatchEvent(new KeyboardEvent('keydown', { key:'l', ctrlKey:true, repeat, bubbles:true, cancelable:true }));
-    for (const tab of ['debug', 'agent', 'data', 'keys']) {
+    for (const [index, tab] of ['debug', 'agent', 'data', 'keys'].entries()) {
       toggle(false);
+      // 首次键盘入口按需装载；后续 warm toggle 保留即时 DOM 与原业务断言。
+      if (index === 0) await vi.waitFor(() => expect(document.getElementById('devConsole')).not.toBeNull());
       expect(document.getElementById('devConsole')).not.toBeNull();
       document.querySelector(`[data-act="devcTab"][data-tab="${tab}"]`).click();
       toggle(true);

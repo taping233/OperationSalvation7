@@ -1,7 +1,7 @@
 /* G-2（2026-09-29 夜班）：sellCard 引擎侧复检 owned.stored——珍珠盒存放卡的销售拦截
  * 原先只在收购台渲染过滤（sellableOwned 滤 !stored），直调 UI.act('sellCard', {uid}) 可绕过。
  * 修复：game.run.shop.js sellCard 在 isSellable 之后补 stored 早退。 */
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 
 window.SDT = window.SDT || {};
 window.SDT.Icons = window.SDT.Icons || { img: () => '' };
@@ -36,7 +36,7 @@ function makeShop() {
   const UI = {
     act(name, fn) { acts[name] = fn; },
     log(message) { logs.push(String(message)); },
-    refresh() {}, showOverlay() {}, hideOverlay() {},
+    refresh() {}, showOverlay(_title, html) { document.body.innerHTML = html; }, hideOverlay() {},
     registerHelp() {}, helpBtn: () => '',
   };
   const shop = createShopController({
@@ -45,9 +45,12 @@ function makeShop() {
     saveGame() {}, setCardPageOpen() {}, usedSlots: () => 0,
   });
   shop.openShop('');   // 空 key 直调路径：渲染主商店并注册 UI.act（sellCard 在此登记）
+  acts.openSell();
   expect(typeof acts.sellCard).toBe('function');
   return { game, acts, logs };
 }
+
+afterEach(() => { document.body.replaceChildren(); });
 
 describe('sellCard 引擎侧 stored 拦截（G-2）', () => {
   it('珍珠盒存放卡直调卖不出：卡还在、金币不变', () => {

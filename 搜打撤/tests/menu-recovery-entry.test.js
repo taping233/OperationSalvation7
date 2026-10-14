@@ -73,12 +73,12 @@ describe('选档恢复门禁', () => {
     expect(h.openBaseHub).not.toHaveBeenCalled();
   });
 
-  it.each(['newSlot', 'overwriteSlot'])('%s 初始化写入失败保留选档页和输入归属，重试成功才进入基地', action => {
+  it.each(['newSlot', 'overwriteSlot'])('%s 初始化写入失败保留选档页和输入归属，重试成功才进入基地', async action => {
     const h = setup();
     h.base.reset.mockReturnValueOnce(false).mockReturnValue(true);
     const picker = document.querySelector('.slot-page');
     if (action === 'overwriteSlot') h.handlers[action]({ slot: 1 }); // 首次只确认
-    expect(h.handlers[action]({ slot: 1 })).toBe(false);
+    expect(await h.handlers[action]({ slot: 1 })).toBe(false);
     expect(h.openBaseHub).not.toHaveBeenCalled();
     expect(h.setActiveSlot).not.toHaveBeenCalled();
     expect(h.UI.hideScreen).not.toHaveBeenCalled();
@@ -86,10 +86,60 @@ describe('选档恢复门禁', () => {
     expect(picker.isConnected).toBe(true);
     expect(document.getElementById('slotRestoreError').textContent).toContain('初始化未保存');
     expect(h.UI.log.mock.calls.some(([text]) => text.includes('已进入'))).toBe(false);
-    h.handlers[action]({ slot: 1 });
+    await h.handlers[action]({ slot: 1 });
     expect(h.base.reset).toHaveBeenCalledTimes(2);
     expect(h.openBaseHub).toHaveBeenCalledOnce();
     expect(h.setActiveSlot).toHaveBeenCalledWith(1);
     expect(h.UI.log.mock.calls.filter(([text]) => text.includes('已进入'))).toHaveLength(1);
+  });
+});
+
+
+describe('基地异步入口的选档锁和结果', () => {
+  it.each(['newSlot', 'enterSlot', 'overwriteSlot'])('%s 等待基地时禁止重复初始化、覆盖、删除或进入', async action => {
+    const h = setup();
+    let finish;
+    h.openBaseHub.mockImplementation(() => new Promise(resolve => { finish = resolve; }));
+    if (action === 'overwriteSlot') h.handlers[action]({ slot: 1 });
+    const entry = h.handlers[action]({ slot: 1 });
+    await h.handlers.newSlot({ slot: 1 });
+    await h.handlers.enterSlot({ slot: 1 });
+    h.handlers.overwriteSlot({ slot: 1 }); h.handlers.delSlot({ slot: 1 });
+    expect(h.openBaseHub).toHaveBeenCalledOnce();
+    expect(h.base.reset).toHaveBeenCalledTimes(action === 'enterSlot' ? 0 : 1);
+    expect(h.clearSlot).toHaveBeenCalledTimes(action === 'overwriteSlot' ? 1 : 0);
+    expect(h.UI.log.mock.calls.some(([text]) => text.includes('已进入'))).toBe(false);
+    finish(true); await entry;
+    expect(h.UI.log.mock.calls.filter(([text]) => text.includes('已进入'))).toHaveLength(1);
+  });
+
+  it.each(['newSlot', 'enterSlot'])('%s 消费异步 false，保留档案、恢复选档和可重试状态', async action => {
+    const h = setup();
+    h.openBaseHub.mockResolvedValueOnce(false).mockResolvedValue(true);
+    expect(await h.handlers[action]({ slot: 1 })).toBe(false);
+    expect(document.querySelector('.slot-page')).not.toBeNull();
+    expect(document.getElementById('slotRestoreError').textContent).toContain('档案已保留');
+    expect(h.clearSlot).not.toHaveBeenCalled();
+    expect(h.UI.log.mock.calls.some(([text]) => text.includes('已进入'))).toBe(false);
+    await h.handlers.enterSlot({ slot: 1 });
+    expect(h.openBaseHub).toHaveBeenCalledTimes(2);
+  });
+
+  it.each(['false', 'rejection'])('旧等待 %s 不能把新设置页面拉回选档', async outcome => {
+    const h = setup(); let finish;
+    h.openBaseHub.mockImplementation(() => new Promise((resolve, reject) => { finish = outcome === 'false' ? () => resolve(false) : () => reject(new Error('late failure')); }));
+    const entry = h.handlers.enterSlot({ slot: 1 });
+    document.getElementById('ovBody').innerHTML = '<section class="settings-page">设置</section>';
+    finish(); expect(await entry).toBe(false);
+    expect(document.querySelector('.settings-page')).not.toBeNull();
+    expect(document.querySelector('.slot-page')).toBeNull();
+  });
+
+  it('异步 rejection 被消费并释放锁，原档保留后可重试', async () => {
+    const h = setup(); h.openBaseHub.mockRejectedValueOnce(new Error('offline')).mockResolvedValue(true);
+    expect(await h.handlers.enterSlot({ slot: 1 })).toBe(false);
+    expect(h.clearSlot).not.toHaveBeenCalled();
+    await h.handlers.enterSlot({ slot: 1 });
+    expect(h.openBaseHub).toHaveBeenCalledTimes(2);
   });
 });

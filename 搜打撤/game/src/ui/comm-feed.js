@@ -92,31 +92,46 @@ export function mountCommDemo() {
   document.body.appendChild(panel);
   const feed = panel.querySelector('.comm-feed');
   let step = 0;
+  let timer = null;
+  let typingTimer = null;
+  let closed = false;
+  const onMode = e => {
+    if (!closed && panel.isConnected) panel.style.display = e.detail === 'battle' ? 'none' : '';
+  };
+  // 面板滚动跟随最新消息；关闭时解绑，不让旧面板留在订阅链上。
+  const observer = new MutationObserver(() => {
+    if (!closed) feed.scrollTop = feed.scrollHeight;
+  });
+  observer.observe(feed, { childList: true });
   const close = () => {
+    if (closed) return;
+    closed = true;
     clearInterval(timer);
+    clearTimeout(typingTimer);
+    document.removeEventListener('sdt-overlay-mode', onMode);
+    observer.disconnect();
     panel.remove();
   };
   panel.querySelector('.comm-demo-close').addEventListener('click', close);
   // 战斗中自动隐藏：demo 是开发演示件，其打字指示循环动画不得出现在战斗画面
   //（战斗域「零常驻循环动画」红线）；离开战斗自动恢复
-  document.addEventListener('sdt-overlay-mode', (e) => {
-    if (panel.isConnected) panel.style.display = e.detail === 'battle' ? 'none' : '';
-  });
+  document.addEventListener('sdt-overlay-mode', onMode);
   const advance = () => {
+    if (closed || !panel.isConnected) { close(); return; }
     setTyping(feed, false);
     appendCommRow(feed, DEMO_MSGS[step]);
     setProgress(panel, step + 1);
     step += 1;
     if (step >= DEMO_MSGS.length) { clearInterval(timer); return; }
     // 打字指示在两条消息之间出现（最后一条之后不再显示）
-    setTimeout(() => { if (panel.isConnected) setTyping(feed, true); }, 900);
+    typingTimer = setTimeout(() => {
+      typingTimer = null;
+      if (!closed && panel.isConnected) setTyping(feed, true);
+    }, 900);
   };
   appendCommRow(feed, DEMO_MSGS[0]);
   setProgress(panel, 1);
   step = 1;
   setTyping(feed, true);
-  const timer = setInterval(advance, 1800);
-  // 面板滚动跟随最新消息
-  new MutationObserver(() => { feed.scrollTop = feed.scrollHeight; })
-    .observe(feed, { childList: true });
+  timer = setInterval(advance, 1800);
 }

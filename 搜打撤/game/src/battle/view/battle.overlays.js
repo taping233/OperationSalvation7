@@ -228,7 +228,7 @@ function installPileInspection(stacks) {
     });
     UI.act('btSafeMove', (d) => {
       const g = SDT.game;
-      const group = (g.ownedCards || []).filter(o => o.card && !o.safe && cardIdentityKey(o.card) === d.cardKey);
+      const group = (g.ownedCards || []).filter(o => o.card && !o.safe && !o.stored && cardIdentityKey(o.card) === d.cardKey);
       if (!group.length) return;
       const name = group[0].card.name;
       const free = Math.max(0, ((g.safeCap && g.safeCap()) || 0) - ((g.safeUsed && g.safeUsed()) || 0));

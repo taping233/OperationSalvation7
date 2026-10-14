@@ -742,7 +742,8 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     const simplifiedEntry = entryStage?.dataset.battleEntry === 'degraded';
     // 本场已选择简化显示时，选择面板返回也保留该结果，不重新创建失败的 GPU 画面。
     const framesReady = simplifiedEntry ? true : attachUnitFrames(body);   // 首次揭示等待实际帧首画面。
-    const paintedReady = simplifiedEntry ? true : syncBattleScenery(entryStage, snapshot.battleToken);
+    // 静态冬城图层独立于 GPU 单位帧；简化显示仍保留它，面板返回时按场次重建。
+    const paintedReady = syncBattleScenery(entryStage, snapshot.battleToken);
     mountHandLayer(body, tip, snapshot.battleToken);
     showBattleStartEquipFlash(snapshot.equipped, snapshot.battleToken);
     const handAnim = updateHand(snapshot, prevView, pageGroups, animEvents, { spellBonus, mode, discoverSrcRect });
@@ -751,7 +752,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       const images = waitForBattleImages(entryStage);
       battleEntry.wait(entryStage, snapshot.battleToken, [paintedReady, framesReady, images.promise], {
         cancelImages: images.cancel,
-        onFallback: () => { hideUnitFrames(); clearBattleScenery(); },
+        onFallback: () => { hideUnitFrames(); },
       });
     }
     syncHandInspector(snapshot);
@@ -786,6 +787,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     }
     spawnFloats(body, anim.flightMs ? Math.min(340, anim.flightMs * 0.8) : 0);
     UI.refresh(SDT.game);
+    return battleEntry.ready(entryStage, snapshot.battleToken);
   }
 
 

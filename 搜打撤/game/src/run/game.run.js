@@ -7,14 +7,14 @@ import {
   devForceBattle as devForceBattleImpl,
   devJumpNode as devJumpNodeImpl,
   openDevConsole as openDevConsoleImpl,
-} from './game.run.dev.js';
+} from './game.run.dev-loader.js';
 
 // 循环导入下模块体可能早于 game.session 完成，延迟到 boot 统一绑定兼容挂载面。
 function bindRunMixins() {
   game.grantCard = grantEventCard;
 }
 
-// 保留历史公共函数名；实现留在 dev 模块，装配壳不再承担控制台与测试节点逻辑。
+// 保留历史公共函数名；首次请求才装载开发实现，Agent 同步门面不受影响。
 function devForceBattle(...args) { return devForceBattleImpl(...args); }
 function devJumpNode(...args) { return devJumpNodeImpl(...args); }
 function openDevConsole(...args) { return openDevConsoleImpl(...args); }

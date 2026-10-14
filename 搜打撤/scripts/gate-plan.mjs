@@ -42,7 +42,10 @@ export const WORKFLOW_TESTS = new Map([
   ['scripts/generate-compendium.mjs', ['tests/compendium.test.js']],
   ['scripts/asset-audit.cjs', ['tests/asset-audit.test.js']],
   ['scripts/asset-audit-lib.cjs', ['tests/asset-audit.test.js']],
-  ['scripts/runtime-asset-aliases.mjs', ['tests/runtime-asset-aliases.test.js']],
+  ['scripts/runtime-asset-aliases.mjs', ['tests/runtime-asset-aliases.test.js', 'tests/rations-thumbnail-alias.test.js']],
+  ['scripts/runtime-asset-publication.mjs', ['tests/runtime-asset-publication.test.js', 'tests/rations-thumbnail-alias.test.js']],
+  ['scripts/runtime-asset-redundancy.mjs', ['tests/runtime-asset-redundancy.test.js', 'tests/runtime-asset-redundancy-plugin.test.js']],
+  ['scripts/runtime-asset-redundancy-review.mjs', ['tests/runtime-asset-redundancy.test.js', 'tests/runtime-asset-redundancy-plugin.test.js']],
   ['scripts/css-asset-minification.mjs', ['tests/css-asset-minification.test.js']],
   ['scripts/sync-cards-from-live.mjs', ['tests/sync-cards-from-live.test.js', 'tests/schema-op-coverage.test.js', 'tests/contracts.test.js']],
 ]);

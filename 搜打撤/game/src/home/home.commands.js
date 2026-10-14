@@ -30,6 +30,7 @@ function cellsFor(placement, spec) {
 
 export function getHome(baseSnapshot, furnitureCatalog = FURNITURE_CATALOG) {
   const home = normalizeHome(baseSnapshot);
+  for (const spec of furnitureCatalog) if (Object.hasOwn(home.owned, spec.id)) home.owned[spec.id] = ownedIds(home.owned, spec.id);
   return freezeDeep({
     coins: Number(baseSnapshot?.coins) || 0,
     owned: home.owned,
@@ -41,6 +42,7 @@ export function getHome(baseSnapshot, furnitureCatalog = FURNITURE_CATALOG) {
 }
 
 export function validateLayout({ placements, roomSpec = ROOM_SPEC, ownedFurniture, furnitureCatalog = FURNITURE_CATALOG }) {
+  if (!Array.isArray(placements)) return freezeDeep({ valid: false, violations: [{ instanceId: null, code: 'INVALID_ARGUMENT', cells: [] }] });
   const violations = [];
   const occupied = new Map();
   const list = Array.isArray(placements) ? placements : [];

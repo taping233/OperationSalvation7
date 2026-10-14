@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
-const ports = vi.hoisted(() => ({ choice: vi.fn(), start: vi.fn(), hub: vi.fn(), handoff: vi.fn() }));
+const ports = vi.hoisted(() => ({ choice: vi.fn(), start: vi.fn(), hub: vi.fn(), handoff: vi.fn(), cut:vi.fn() }));
 vi.mock('../game/src/run/game.session.js', () => ({
   MAP: { rules: { starterSha: 5 } }, MODES: { standard: { id: 'standard', name: '标准', ckpt: '无修正', desc: '探索' } },
   game: { stackCapOf: () => 3 }, newRun: ports.start, requestClassChoice: ports.choice,
@@ -7,10 +7,10 @@ vi.mock('../game/src/run/game.session.js', () => ({
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: {}, _set_cardPageOpen: vi.fn() }));
 vi.mock('../game/src/hub/game.hub.bridge.js', () => ({ slots: { renderHub: ports.hub } }));
 vi.mock('../game/src/hub/departure.view-updates.js', () => ({ bindDepartureFilters: vi.fn(), updateDepartureView: vi.fn() }));
-vi.mock('../game/src/ui/departure-transition.js', () => ({ enterDepartureCut: vi.fn(), startDepartureHandoff: ports.handoff }));
+vi.mock('../game/src/ui/departure-transition.js', () => ({ enterDepartureCut: ports.cut, startDepartureHandoff: ports.handoff }));
 let actions, base, departure;
 beforeEach(async () => {
-  vi.resetModules(); ports.choice.mockReset(); ports.start.mockReset(); ports.hub.mockClear(); ports.handoff.mockReset();
+  vi.resetModules(); ports.choice.mockReset(); ports.start.mockReset(); ports.hub.mockClear(); ports.handoff.mockReset(); ports.cut.mockReset();
   actions = {};
   base = { slot: 1, data: { selMode: 'standard', pocket: [], stash: [{ card: { name: '甲', rarity: '古朴' }, count: 2 }] },
     PETS: [], bagCap: () => 16, carriedPet: () => null, ownedPets: () => [] };
@@ -87,4 +87,32 @@ it('火焰精灵整备显示实际火球且详情可到达', () => {
   expect(document.querySelector('#depSummary').textContent).toContain('火球 ×5');
   actions.bagZoom({ name: '火球' });
   expect(window.SDT.UI.showCardZoom.mock.lastCall[0]).toBe(fireball);
+});
+
+
+it('人物切幕等待实际DOM就绪，同入口重复请求共用Promise，换档旧结果不切幕', async () => {
+  let finishOld, finishNext;
+  const old = new Promise(resolve => { finishOld = resolve; });
+  const next = new Promise(resolve => { finishNext = resolve; });
+  ports.choice.mockReturnValueOnce(old).mockReturnValueOnce(next);
+  const first = departure.openDepartPrep();
+  expect(departure.openDepartPrep()).toBe(first); expect(ports.choice).toHaveBeenCalledOnce();
+  expect(ports.cut).not.toHaveBeenCalled();
+  base.slot = 2; const second = departure.openDepartPrep();
+  finishOld(true); expect(await first).toBe(false); expect(ports.cut).not.toHaveBeenCalled();
+  const cls = document.createElement('section'); cls.className = 'cls2-page';
+  window.SDT.UI.el.overlay.id = 'overlay'; window.SDT.UI.el.overlay.replaceChildren(cls);
+  finishNext(true); expect(await second).toBe(true); expect(ports.cut).toHaveBeenCalledOnce();
+  expect(ports.cut).toHaveBeenCalledWith(cls);
+});
+it('人物入口失败可从原入口重试，换档后旧onSelect/beforeConfirm不会扣新档卡', async () => {
+  ports.choice.mockReturnValueOnce(Promise.resolve(false));
+  expect(await departure.openDepartPrep()).toBe(false);
+  ports.choice.mockReturnValueOnce(Promise.resolve(true));
+  expect(await departure.openDepartPrep()).toBe(true);
+  expect(ports.choice).toHaveBeenCalledTimes(2);
+  const old = ports.choice.mock.lastCall[0];
+  base.slot = 2; await departure.openDepartPrep();
+  old.onSelect('侠客', vi.fn()); expect(old.beforeConfirm()).toBe(false);
+  expect(ports.start).not.toHaveBeenCalled(); expect(departure.deployPick).toEqual({});
 });

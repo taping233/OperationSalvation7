@@ -1,9 +1,24 @@
 // @ts-check
 /** @typedef {{ id?: string, name: string, rarity?: string, type?: string, [key: string]: unknown }} DepartureCard */
-/** @typedef {{ card: DepartureCard, count: number }} DepartureStack */
+/** @typedef {{ card: DepartureCard, count: number, stackKey?: string, variantKey?: string }} DepartureStack */
 /** @typedef {{ stash?: DepartureStack[], pocket?: DepartureStack[], [key: string]: unknown }} DepartureState */
 /** @typedef {{ ok: true, cards: Array<{ card: DepartureCard, count: number }>, rejectedClassNames: string[], pocketCleared: boolean, dispersedPocketCount: number } | { ok: false, why: 'save' }} DepartureResult */
 /** @typedef {{ read(): DepartureState, mutate<T>(prepare: (draft: DepartureState) => T, failure: DepartureResult): T | DepartureResult }} DeparturePorts */
+
+// Same stable identity as collection.stackKeyOf, without importing its Base command cycle.
+// Name-only callers retain the historical first-match contract; new pages pass full keys.
+/** @param {DepartureStack} stack @returns {string} */
+export function departureStackKey(stack) {
+  return stack && (stack.stackKey || (stack.card?.id
+    ? `card:${stack.card.id}${stack.variantKey || stack.card.variantKey ? `:${stack.variantKey || stack.card.variantKey}` : ''}`
+    : stack.card?.name || ''));
+}
+/** @param {DepartureStack[]} stash @param {string} key @returns {DepartureStack | null} */
+export function findDepartureStack(stash, key) {
+  const matching = stash.filter(stack => departureStackKey(stack) === key);
+  if (matching.length) return matching.length === 1 || matching.every(stack => !stack.stackKey && !stack.card?.id) ? matching[0] : null;
+  return stash.find(stack => stack?.card?.name === key) || null;
+}
 
 /** @param {DeparturePorts} ports */
 export function createBaseDepartureCommands({ read, mutate }) {
@@ -13,7 +28,7 @@ export function createBaseDepartureCommands({ read, mutate }) {
     const stash = Array.isArray(state.stash) ? state.stash : [];
     const pocket = Array.isArray(state.pocket) ? state.pocket : [];
     const requested = picks && typeof picks === 'object' && !Array.isArray(picks) ? picks : {};
-    /** @type {Array<{ name: string, count: number }>} */
+    /** @type {Array<{ key: string, count: number }>} */
     const plan = [];
     /** @type {string[]} */
     const rejectedClassNames = [];
@@ -21,15 +36,15 @@ export function createBaseDepartureCommands({ read, mutate }) {
     for (const name of Object.keys(requested)) {
       const quantity = Math.max(0, Math.floor(Number(requested[name]) || 0));
       if (quantity <= 0) continue;
-      const stack = stash.find(item => item?.card?.name === name);
+      const stack = findDepartureStack(stash, name);
       if (!stack) continue;
       if (stack.card.rarity === '职业') {
-        rejectedClassNames.push(name);
+        rejectedClassNames.push(stack.card.name);
         continue;
       }
       const count = Math.min(quantity, stack.count || 0);
       if (count <= 0) continue;
-      plan.push({ name, count });
+      plan.push({ key: departureStackKey(stack), count });
     }
 
     const dispersedPocketCount = pocket.length
@@ -44,8 +59,10 @@ export function createBaseDepartureCommands({ read, mutate }) {
     return mutate(draft => {
       const draftStash = Array.isArray(draft.stash) ? draft.stash : [];
       const cards = [];
-      for (const { name, count } of plan) {
-        const index = draftStash.findIndex(item => item?.card?.name === name);
+      for (const { key, count } of plan) {
+        const selected = findDepartureStack(draftStash, key);
+        if (!selected) continue;
+        const index = draftStash.indexOf(selected);
         if (index < 0) continue;
         const stack = draftStash[index];
         const actual = Math.min(count, stack.count || 0);

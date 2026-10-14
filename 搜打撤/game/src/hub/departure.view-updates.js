@@ -1,5 +1,6 @@
 // Keep the staging page and its card nodes mounted during local selection changes.
 import { bindCardNavigation, pulseNumber } from './hub.presentation.js';
+import { departureStackKey } from './base-departure.commands.js';
 export function bindDepartureFilters(root, stash, { filters = {}, rarities = [], types = [], rarityOf = card => card.rarity, onFiltersChange = () => {} } = {}) {
   const pool = root?.querySelector('#depPool');
   const selects = {
@@ -10,9 +11,9 @@ export function bindDepartureFilters(root, stash, { filters = {}, rarities = [],
   if (!pool || Object.values(selects).some(select => !select)) return;
   bindCardNavigation(pool, '.dep-card', { activate: false });
   bindCardNavigation(root.querySelector('#depBag'), '.bag-cell[tabindex]', { activate: false });
-  const byName = new Map(stash.map(stack => [stack.card.name, stack.card]));
+  const byName = new Map(stash.map(stack => [departureStackKey(stack), stack.card]));
   const entries = [...pool.querySelectorAll('.dep-card')].map(node => {
-    const card = byName.get(node.dataset.name) || {};
+    const card = byName.get(node.dataset.stackKey || node.dataset.name) || {};
     return { node, rarity: rarityOf(card) || '', type: card.type || '', cost: card.cost == null ? 'none' : String(card.cost) };
   });
   const fillOptions = (select, values, label, format = value => value) => {
@@ -62,12 +63,16 @@ function reconcileBag(bag, html, rich) {
   const named = new Map();
   const empty = [];
   for (const cell of bag.children) {
-    if (cell.dataset.name) named.set(cell.dataset.name, cell);
+    if (cell.dataset.name) {
+      const key = cell.dataset.stackKey || cell.dataset.name;
+      if (!named.has(key)) named.set(key, []);
+      named.get(key).push(cell);
+    }
     else empty.push(cell);
   }
   const next = [];
   for (const wanted of template.content.children) {
-    const cell = wanted.dataset.name ? named.get(wanted.dataset.name) : empty.shift();
+    const cell = wanted.dataset.name ? named.get(wanted.dataset.stackKey || wanted.dataset.name)?.shift() : empty.shift();
     const node = cell || wanted;
     if (cell) {
       for (const key of ['class', 'aria-label', 'title', 'draggable']) {
@@ -88,12 +93,13 @@ function reconcileBag(bag, html, rich) {
 }
 
 export function updateDepartureView(root, { stash, picks, bagHtml, slots, capacity, capacityHtml, hint, petId, rich, summaryHtml }) {
-  const byName = new Map(stash.map(stack => [stack.card.name, stack]));
+  const byName = new Map(stash.map(stack => [departureStackKey(stack), stack]));
   for (const card of root.querySelectorAll('#depPool .dep-card')) {
     const name = card.dataset.name;
-    const stack = byName.get(name);
+    const key = card.dataset.stackKey || name;
+    const stack = byName.get(key);
     if (!stack) continue;
-    const selected = picks[name] || 0;
+    const selected = picks[key] || 0;
     const remaining = Math.max(0, stack.count - selected);
     card.classList.toggle('picked', selected > 0);
     card.classList.toggle('drained', remaining <= 0);

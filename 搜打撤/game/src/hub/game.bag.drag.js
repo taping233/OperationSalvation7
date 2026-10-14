@@ -7,6 +7,7 @@ const UI = window.SDT.UI;
 import { esc } from '../core/shared.js';
 import { cardStacks, game, saveGame } from '../run/game.session.js';
 import { bagSlots } from './game.bag.bridge.js';
+import { captureBattleContext } from '../battle/battle-loader.js';
   // ---------- 背包拖拽（v0.21）：3D 立体手感 · 堆排序 · 拖入/拖出安全格 ----------
   export let bagDrag = null;   // {name, fromSafe, cell, ghost, card3d, sx, sy, lx, ly, vx, vy, moved}
   let bagTiltBound = false;   // 悬停倾斜是 document 级委托，只绑一次（避免重复打开背包时叠加监听）
@@ -16,6 +17,10 @@ import { bagSlots } from './game.bag.bridge.js';
     const bagGrid = body.querySelector('.bag-grid:not(.safe-grid)');
     const safeGrid = body.querySelector('.safe-grid');
     if (!bagGrid) return;
+    const sameRun = captureBattleContext(game), cards = game.ownedCards;
+    const current = () => sameRun() && game.ownedCards === cards && bagGrid.isConnected
+      && body === UI.el.ovBody && body.querySelector('.bag-grid:not(.safe-grid)') === bagGrid
+      && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
 
     // 悬停 3D 倾斜：卡牌跟随指针微微转动（立体感）
     if (!bagTiltBound) {
@@ -48,7 +53,7 @@ import { bagSlots } from './game.bag.bridge.js';
     // 双击翻面：正面 ⇄ 当前装备的卡背
     const onDbl = (e) => {
       const cell = e.target.closest('.card-slot, .safe-slot');
-      if (!cell || e.target.closest('button')) return;
+      if (!current() || !cell || e.target.closest('button')) return;
       cell.classList.toggle('flipped');
       const inner = cell.querySelector('.flip-inner');
       if (inner) inner.style.transform = cell.classList.contains('flipped') ? 'rotateY(180deg)' : '';
@@ -58,20 +63,22 @@ import { bagSlots } from './game.bag.bridge.js';
     if (safeGrid) safeGrid.addEventListener('dblclick', onDbl);
     // 按住拖动（pointer 事件，鼠标/触屏通用）
     const onDown = (e, fromSafe) => {
-      if (e.button !== 0 || bagDrag) return;
+      if (!current() || e.button !== 0 || bagDrag) return;
       if (e.target.closest('button')) return;   // 格内按钮优先
       const cell = e.target.closest(fromSafe ? '.safe-slot' : '.card-slot');
       if (!cell || !cell.dataset.stack) return;
       e.preventDefault();
       bagDrag = {
-        name: cell.dataset.stack, fromSafe, cell,
+        name: cell.dataset.stack, fromSafe, cell, pointerId: e.pointerId, current,
         sx: e.clientX, sy: e.clientY, lx: e.clientX, ly: e.clientY,
         vx: 0, vy: 0, moved: false, ghost: null, card3d: null,
       };
       cell.classList.add('dragging');
       SDT.Sound.sfx('pick');
       window.addEventListener('pointermove', onBagDragMove);
-      window.addEventListener('pointerup', onBagDragUp, { once: true });
+      window.addEventListener('pointerup', onBagDragUp);
+      window.addEventListener('pointercancel', onBagDragCancel);
+      window.addEventListener('blur', resetBagDrag);
     };
     bagGrid.addEventListener('pointerdown', (e) => onDown(e, false));
     if (safeGrid) safeGrid.addEventListener('pointerdown', (e) => onDown(e, true));
@@ -114,7 +121,8 @@ import { bagSlots } from './game.bag.bridge.js';
   let bagDragFrame = 0;
   let bagDragPoint = null;
   function onBagDragMove(e) {
-    if (!bagDrag) return;
+    if (!bagDrag || e.pointerId !== bagDrag.pointerId) return;
+    if (!bagDrag.current()) { resetBagDrag(); return; }
     bagDragPoint = { x: e.clientX, y: e.clientY };
     if (bagDragFrame) return;
     bagDragFrame = requestAnimationFrame(bagDragFrameStep);
@@ -122,6 +130,7 @@ import { bagSlots } from './game.bag.bridge.js';
   function bagDragFrameStep() {
     bagDragFrame = 0;
     if (!bagDrag || !bagDragPoint) return;
+    if (!bagDrag.current()) { resetBagDrag(); return; }
     const x = bagDragPoint.x, y = bagDragPoint.y;
     bagDragPoint = null;
     const dx = x - bagDrag.lx, dy = y - bagDrag.ly;
@@ -147,17 +156,10 @@ import { bagSlots } from './game.bag.bridge.js';
   }
 
   function onBagDragUp(e) {
-    window.removeEventListener('pointermove', onBagDragMove);
-    if (bagDragFrame) { cancelAnimationFrame(bagDragFrame); bagDragFrame = 0; }
-    bagDragPoint = null;
-    clearBagDropMark();
-    // 兜底清一次（战斗悬停等也用 drop-here 类；一次性查询开销可忽略）
-    document.querySelectorAll('#ovBody .drop-here').forEach(el => el.classList.remove('drop-here'));
+    if (!bagDrag || e.pointerId !== bagDrag.pointerId) return;
     const d = bagDrag;
-    bagDrag = null;
-    if (!d) return;
-    d.cell.classList.remove('dragging');
-    if (d.ghost) d.ghost.remove();
+    resetBagDrag();
+    if (!d.current()) return;
     if (!d.moved) return;   // 原地按住未拖动 = 无操作
     SDT.Sound.sfx('drop');
     const t = bagDropTarget(e.clientX, e.clientY, d.cell);
@@ -205,5 +207,11 @@ import { bagSlots } from './game.bag.bridge.js';
   }
 
 
-export function resetBagDrag() { bagDrag = null; }   // 壳侧 showBackpack 刷新时清拖拽（ESM 导入绑定不可赋值，2026-09-22 理顺点）
+function onBagDragCancel(event) { if (event.pointerId === bagDrag?.pointerId) resetBagDrag(); }
+export function resetBagDrag() {
+  window.removeEventListener('pointermove', onBagDragMove); window.removeEventListener('pointerup', onBagDragUp);
+  window.removeEventListener('pointercancel', onBagDragCancel); window.removeEventListener('blur', resetBagDrag);
+  if (bagDragFrame) cancelAnimationFrame(bagDragFrame); bagDragFrame = 0; bagDragPoint = null;
+  clearBagDropMark(); bagDrag?.cell.classList.remove('dragging'); bagDrag?.ghost?.remove(); bagDrag = null;
+}
 bagSlots.bindBagDrag = bindBagDrag;   // 反向注册：壳 showBackpack 渲染后经桥挂拖拽（唯一消费链，2026-10-02 审计 A 档摘除无效 export）

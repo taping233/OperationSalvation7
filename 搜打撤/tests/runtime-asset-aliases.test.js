@@ -41,6 +41,26 @@ describe('byte-identical chest output aliases', () => {
     expect(collectVerifiedRuntimeAssetAliases(root).has(spriteAlias)).toBe(false);
   });
 
+  it('verifies rations original and thumbnail pairs independently, retaining missing or redrawn canonical/source files', () => {
+    const root = mkdtempSync(path.join(os.tmpdir(), 'sdt-rations-alias-'));
+    fixtures.push(root);
+    for (const prefix of ['cards', 'thumbs/cards']) {
+      mkdirSync(path.join(root, prefix, 'expedition-starters'), { recursive: true });
+      mkdirSync(path.join(root, prefix, 'resources'), { recursive: true });
+      writeFileSync(path.join(root, prefix, 'expedition-starters/rations.webp'), prefix);
+      writeFileSync(path.join(root, prefix, 'resources/ration.webp'), prefix);
+    }
+    const original = 'cards/expedition-starters/rations.webp';
+    const thumbnail = 'thumbs/cards/expedition-starters/rations.webp';
+    expect(collectVerifiedRuntimeAssetAliases(root).get(original)).toBe('cards/resources/ration.webp');
+    expect(collectVerifiedRuntimeAssetAliases(root).get(thumbnail)).toBe('thumbs/cards/resources/ration.webp');
+    writeFileSync(path.join(root, original), 'redrawn original');
+    expect(collectVerifiedRuntimeAssetAliases(root).has(original)).toBe(false);
+    expect(collectVerifiedRuntimeAssetAliases(root).has(thumbnail)).toBe(true);
+    rmSync(path.join(root, 'thumbs/cards/resources/ration.webp'));
+    expect(collectVerifiedRuntimeAssetAliases(root).has(thumbnail)).toBe(false);
+  });
+
   it('all currently omitted frames have equal canonical bytes and static timeline references', () => {
     const source = readFileSync(path.join(gameRoot, 'src/run/chests.js'), 'utf8');
     const aliases = collectVerifiedChestFrameAliases(assetsRoot);

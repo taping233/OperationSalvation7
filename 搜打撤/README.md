@@ -57,3 +57,5 @@ npm run build
 - [已完成版本记录](docs/changelog.md)
 
 美术方向与资产清单从文档导航进入；旧状态、交接和版本依据从[历史索引](docs/archive/README.md)进入。
+
+生产资源复制、预取清单与等字节别名的保留/回退规则见 [performance](docs/performance.md#生产资源发布规则)。

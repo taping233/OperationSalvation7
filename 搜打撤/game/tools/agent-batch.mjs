@@ -3,7 +3,7 @@
  *
  * 用法（vite-node 负责 src 内的 JSON import 转换）：
  *   npx vite-node game/tools/agent-batch.mjs --runs 100 --policy greedy --out output/agent/
- * 可选：--policy greedy|random|llm   --max-steps 2000   --driver <标签>   --timeout 180
+ * 可选：--policy greedy|random|strategic|llm   --max-steps 2000   --driver <标签>   --timeout 180
  *
  * 引导复用 tests/boot.test.js 手法：canvas/Audio/WebAudio 补桩 + index.html
  * 真实页面结构 + main.js 全量启动；游戏逻辑与浏览器同源，只是不渲染。
@@ -49,8 +49,8 @@ async function installSeedService() {
   });
 }
 const POLICY = argOf('policy', 'greedy');
-if (!['greedy', 'random', 'llm'].includes(POLICY)) {
-  console.error(`[agent-batch] 未知策略：${POLICY}（可用：greedy、random、llm）`);
+if (!['greedy', 'random', 'strategic', 'llm'].includes(POLICY)) {
+  console.error(`[agent-batch] 未知策略：${POLICY}（可用：greedy、random、strategic、llm）`);
   process.exit(2);
 }
 const OUT_DIR = resolve(process.cwd(), argOf('out', 'output/agent/'));
@@ -411,7 +411,8 @@ let lastStepAt = 0;
 // 主循环与哨兵共用同一份局体，避免两份代码漂移
 const runOne = async (i) => {
   pendingSeed = SEED_BASE === null ? null : ((SEED_BASE + i) >>> 0);
-  const before = Agent.recorder.listRuns().length;
+  // recorder 保留最近 200 局；满环后长度不再增长，用记录身份识别本局终局。
+  const before = new Set(Agent.recorder.listRuns().map(record => record.id));
   // 战斗计数+流水清零（弃局兜底路径不经 recordRun，不清会串局）
   Agent.recorder.resetRunCounters?.();
   const startedAt = Date.now();
@@ -484,7 +485,7 @@ const runOne = async (i) => {
     }
   }
   const after = Agent.recorder.listRuns();
-  const fresh = after.slice(before);
+  const fresh = after.filter(record => !before.has(record.id));
   const record = fresh[fresh.length - 1] || {
     id: `run-timeout-${Date.now().toString(36)}`, ts: Date.now(), driver: DRIVER,
     // seed 必须回填（09-26 配对检验）：无终局记录的弃局走这条兜底，

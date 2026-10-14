@@ -14,7 +14,7 @@ body:has(#viewport) #cardZoom.inventory-zoom .inventory-zoom-info header small {
 body:has(#viewport) #cardZoom.inventory-zoom .inventory-zoom-info h2 { display:block; margin:0; padding:0; border:0; font:700 34px/1.4 var(--font-ui); color:#edf3f4; overflow-wrap:anywhere; }
 body:has(#viewport) #cardZoom.inventory-zoom .inventory-zoom-effect { padding:26px 0 32px; min-height:0; overflow:auto; scrollbar-width:thin; scrollbar-color:#65818b transparent; }
 body:has(#viewport) #cardZoom.inventory-zoom .inventory-zoom-effect h3 { margin:0 0 14px; font:500 13px/1.5 var(--font-ui); letter-spacing:2px; color:#91a6b0; }
-body:has(#viewport) #cardZoom.inventory-zoom .inventory-zoom-rules { font:19px/1.9 var(--font-ui); color:#d4dee3; overflow-wrap:anywhere; }
+body:has(#viewport) #cardZoom.inventory-zoom .inventory-zoom-rules { font:400 var(--card-copy-size)/var(--card-copy-leading) var(--font-ui); color:var(--card-copy-ink); overflow-wrap:anywhere; }
 body:has(#viewport) #cardZoom.inventory-zoom .cz-foot { position:relative; z-index:auto; flex-shrink:0; margin:auto 0 0; width:100%; max-width:none; padding:24px 0 0; box-sizing:border-box; background:none; border:0; border-top:1px solid #b4d3df26; border-radius:0; animation:none; color:#edf3f4; text-align:left; }
 body:has(#viewport) #cardZoom.inventory-zoom .camp-card-actions { align-items:stretch; padding:0; gap:14px; background:none; border:0; color:inherit; }
 body:has(#viewport) #cardZoom.inventory-zoom .camp-card-actions .inspect-meta { width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:0; border:0; }

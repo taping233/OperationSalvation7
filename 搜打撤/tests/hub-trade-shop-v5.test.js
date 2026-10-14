@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { departureStackKey } from '../game/src/hub/base-departure.commands.js';
 import { bindTradeShopV5, createTradeShopState, tradeShopV5HTML } from '../game/src/hub/hub.trade-shop-v5.js';
 
 const cheap = { id: 'cheap', name: '普通卡', type: '武术', rarity: '古朴', value: 2, desc: '造成伤害。' };
@@ -31,8 +32,8 @@ beforeEach(() => {
       else { const stack = base.data.stash.find(item => item.card.id === input.card.id); if (stack) stack.count++; else base.data.stash.push({ card: input.card, count: 1 }); }
       return { ok: true };
     }),
-    sellStashCards: vi.fn((name, count) => {
-      const stack = base.data.stash.find(item => item.card.name === name);
+    sellStashCards: vi.fn((name, count, key) => {
+      const stack = base.data.stash.find(item => item.card.name === name && (key === undefined || departureStackKey(item) === key));
       if (!stack || protectedIds.has(stack.card.id)) return { ok: false, why: 'collected' };
       const coins = stack.card.value * count;
       stack.count -= count; base.data.stash = base.data.stash.filter(item => item.count > 0); base.data.coins += coins;
@@ -123,10 +124,10 @@ describe('独立交易所的现行经济与同页交易台', () => {
     vi.advanceTimersByTime(2600);
     expect(button('tradeShopSellOne').dataset.confirming).toBeUndefined();
     click('tradeShopSellOne'); expect(base.sellStashCards).not.toHaveBeenCalled();
-    click('tradeShopSellOne'); expect(base.sellStashCards).toHaveBeenCalledExactlyOnceWith('珍贵卡', 1);
+    click('tradeShopSellOne'); expect(base.sellStashCards).toHaveBeenCalledExactlyOnceWith('珍贵卡', 1, 'card:rare');
     selectStack('普通卡'); click('tradeShopSellAll');
     expect(base.sellStashCards).toHaveBeenCalledTimes(1);
-    click('tradeShopSellAll'); expect(base.sellStashCards).toHaveBeenLastCalledWith('普通卡', 3);
+    click('tradeShopSellAll'); expect(base.sellStashCards).toHaveBeenLastCalledWith('普通卡', 3, 'card:cheap');
   });
 
   it('更换卡堆与工作区解除旧确认，选卡不放大且不会卖错卡', () => {
@@ -164,11 +165,13 @@ describe('独立交易所的现行经济与同页交易台', () => {
   it('按稳定身份重读库存，数组换序可出售但同名异卡不误卖', () => {
     sellMode(); selectStack('珍贵卡'); click('tradeShopSellOne');
     base.data.stash.reverse(); click('tradeShopSellOne');
-    expect(base.sellStashCards).toHaveBeenCalledExactlyOnceWith('珍贵卡', 1);
+    expect(base.sellStashCards).toHaveBeenCalledExactlyOnceWith('珍贵卡', 1, 'card:rare');
     selectStack('普通卡'); base.data.stash.unshift({ card: { ...cheap, id: 'other' }, count: 1 });
     ui._acts.tradeShopSellOne();
-    expect(base.sellStashCards).toHaveBeenCalledTimes(1);
-    expect(notice).toHaveBeenLastCalledWith('卡牌身份已变化，请重新载入', 'warn');
+    expect(base.sellStashCards).toHaveBeenCalledTimes(2);
+    expect(base.sellStashCards).toHaveBeenLastCalledWith('普通卡', 1, 'card:cheap');
+    expect(stashCount('cheap')).toBe(2);
+    expect(stashCount('other')).toBe(1);
   });
 
   it('购买或出售保存失败时保留完整状态并明确提示', () => {

@@ -31,8 +31,8 @@ afterEach(() => {
   vi.doUnmock(homePath);
 });
 
-it('标题启动静态图不解析庭院控制器/引擎及 Home 视觉包', () => {
-  const pending = [path.resolve('game/src/main.js')];
+function staticModules(entry) {
+  const pending = [path.resolve('game/src', entry)];
   const seen = new Set();
   while (pending.length) {
     const file = pending.pop();
@@ -45,10 +45,21 @@ it('标题启动静态图不解析庭院控制器/引擎及 Home 视觉包', () 
       if (relative?.startsWith('.')) pending.push(path.resolve(path.dirname(file), relative));
     }
   }
+  return seen;
+}
+
+it('标题只解析基地轻门面，庭院HTML随基地页面装载且庭院引擎继续独立延迟', () => {
+  const seen = staticModules('main.js');
+  expect(seen.has(path.resolve('game/src/hub/game.hub.js'))).toBe(true);
   for (const file of [
+    'hub/game.hub.runtime.js', 'hub/hub.courtyard-v3.js',
     'hub/hub.courtyard-runtime.js', 'hub/courtyard.rain-tableau.js', 'hub/courtyard-vendor/KoiPond.js', 'home/home.visuals.js',
   ]) expect(seen.has(path.resolve('game/src', file)), file).toBe(false);
-  expect(seen.has(path.resolve('game/src/hub/hub.courtyard-v3.js'))).toBe(true);
+  const inHub = staticModules('hub/game.hub.runtime.js');
+  expect(inHub.has(path.resolve('game/src/hub/hub.courtyard-v3.js'))).toBe(true);
+  for (const file of ['hub/hub.courtyard-runtime.js', 'hub/courtyard.rain-tableau.js', 'hub/courtyard-vendor/KoiPond.js', 'home/home.visuals.js']) {
+    expect(inHub.has(path.resolve('game/src', file)), file).toBe(false);
+  }
 });
 
 describe('庭院首次装载生命周期', () => {

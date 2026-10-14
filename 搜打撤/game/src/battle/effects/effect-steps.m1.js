@@ -13,8 +13,8 @@
  * 牌区运行态按属地直读 battle.runtime.piles（battle.exec-play.js 同一导入
  * 先例——本文件不在架构守卫的纯模块清单内，与 exec-play 同属结算侧）。
  * ============================================================ */
-import { hand, discard, consumed, grave, set$hand } from '../runtime/battle.runtime.piles.js';
-import { mode } from '../runtime/battle.runtime.session.js';
+import { hand, drawPile, discard, consumed, grave, set$hand } from '../runtime/battle.runtime.piles.js';
+import { mode, G, foes } from '../runtime/battle.runtime.session.js';
 import { cardAnims } from '../runtime/battle.runtime.presentation.js';
 
 /**
@@ -53,13 +53,33 @@ export function resolveCleanseOperation(card, operation, deps) {
 export function resolveDrawUntilHandN(card, operation, deps) {
   const target = operation.untilHandN;
   const name = `<b>${deps.esc(card.name)}</b>`;
-  const spellsBefore = typeof deps.countDrawnSpells === 'function' ? deps.countDrawnSpells() : 0;
+  let spellsGained = 0;
   if (mode === 'boss') {
-    let drawn = 0;
+    let drawn = 0, withoutHandProgress = 0;
+    let traversableUids = new Set([...drawPile, ...discard]);
+    const activeGame = G?.battleActive ? G : null;
+    const battleEnded = () => activeGame &&
+      (G !== activeGame || !activeGame.battleActive || !foes.some(foe => !foe.dead));
     while (hand.length < target) {
+      if (battleEnded()) break;
+      const handBefore = hand.length;
       const got = deps.drawCards(1);
       if (!got) break;   // 牌库已空（或手牌达到上限），截停防死循环
       drawn += got;
+      // drawCards(1) 每次替换 lastDrawnUids；逐次累计本次入手法术，不读前次抽牌记录。
+      if (typeof deps.countDrawnSpells === 'function') spellsGained += deps.countDrawnSpells();
+      if (battleEnded()) break;
+      if (hand.length > handBefore) {
+        withoutHandProgress = 0;
+        traversableUids = new Set([...drawPile, ...discard]);
+      }
+      else {
+        withoutHandProgress += got;
+        // 完整遍历本轮可洗回牌堆仍无入手进度时停止，避免只有自动牌时无限洗回。
+        // 新 UID 扩大遍历范围；消耗/移出不会缩短已开始的遍历，普通入手后重新计数。
+        for (const uid of [...drawPile, ...discard]) traversableUids.add(uid);
+        if (withoutHandProgress >= traversableUids.size) break;
+      }
     }
     deps.log(drawn > 0
       ? `[[icon:cards]] ${name}：抽了 ${drawn} 张牌（直到手牌有 ${target} 张，当前 ${hand.length} 张）`
@@ -69,7 +89,7 @@ export function resolveDrawUntilHandN(card, operation, deps) {
     if (short > 0) deps.grantSha(short);
     deps.log(`[[icon:cards]] ${name}：普通战斗无牌库，获得 ${short} 张【初始攻击】（补齐到 ${target} 张手牌）`, 'sys');
   }
-  return typeof deps.countDrawnSpells === 'function' ? deps.countDrawnSpells() - spellsBefore : 0;
+  return spellsGained;
 }
 
 /**

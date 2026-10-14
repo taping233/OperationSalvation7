@@ -24,8 +24,19 @@ function createShopController({
   setCardPageOpen,
   usedSlots,
 }) {
+  let shopSession = null;
+  let pageVersion = 0;
+  let bagReturn = null;
   let inspectionClose = null;
   let inspectionMotion = null;
+  const currentSession = session => session && session === shopSession && game.state === 'modal'
+    && game.shopStock === session.stock && game.ownedCards === session.ownedCards
+    && game.seed === session.seed && SDT.Base?.slot === session.slot;
+  function cancelInspectionMotion() {
+    if (inspectionClose) clearTimeout(inspectionClose.timer);
+    inspectionClose = null;
+    watchInspectionMotion(null);
+  }
   function watchInspectionMotion(detail, handler = null) {
     if (inspectionMotion) inspectionMotion.detail.removeEventListener('animationend', inspectionMotion.handler);
     inspectionMotion = handler ? { detail, handler } : null;
@@ -108,6 +119,8 @@ function createShopController({
     } else {
       game.shopStock = generateShopStock();
     }
+    shopSession = { stock: game.shopStock, ownedCards: game.ownedCards, seed: game.seed, slot: SDT.Base?.slot };
+    bagReturn = null;
     shopNotice = '';
     selectedShopIndex = null;
     shopOnClose = onClose || null;
@@ -183,9 +196,9 @@ function createShopController({
   // 从屏幕矩形 flyEl 出发弧线飞向背包钮；返回飞行时长（ms）。node 已定位到视口坐标。
   function flyRectToBag(a, node) {
     const bag = document.querySelector('.shop-pg .shop-bag-btn');
-    if (!bag || !a.width || !a.height) return 0;
+    if (!bag || !a.width || !a.height) { node.remove(); return 0; }
     const b = bag.getBoundingClientRect();
-    if (!b.width) return 0;
+    if (!b.width) { node.remove(); return 0; }
     const dx = (b.left + b.width / 2) - (a.left + a.width / 2);
     const dy = (b.top + b.height / 2) - (a.top + a.height / 2);
     const N = 14, DUR = 560, kf = [];
@@ -198,10 +211,12 @@ function createShopController({
         offset: u,
       });
     }
-    node.animate(kf, { duration: DUR, easing: 'linear', fill: 'forwards' }).onfinish = () => {
-      node.remove();
-      bagPop(bag);   // 背包钮弹性接收：scale = 1 + decayOsc（一次过冲回稳）
-    };
+    try {
+      node.animate(kf, { duration: DUR, easing: 'linear', fill: 'forwards' }).onfinish = () => {
+        node.remove();
+        if (bag.isConnected) bagPop(bag);
+      };
+    } catch { node.remove(); return 0; }
     setTimeout(() => node.remove(), DUR + 200);   // 兜底清理
     return DUR;
   }
@@ -220,21 +235,30 @@ function createShopController({
   // 神秘货箱 reveal-first（2026-09-27 二轮动效）：？牌先塌缩→原位亮出真卡面（停一拍）→再飞背包。
   // 结算照旧同步完成，只有货位重绘被推迟到演出收尾（done 回调）；任何失败都立刻 done 兜底。
   function revealMysteryThenFly(slotEl, card, done) {
-    let finished = false;
-    const finish = () => { if (!finished) { finished = true; done(); } };
+    let finished = false, flip = null, reveal = null;
+    const session = shopSession, sourceRoot = slotEl?.closest('.shop-pg');
+    const live = () => currentSession(session) && sourceRoot?.isConnected;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      flip?.remove(); reveal?.remove();
+      done();
+    };
     try {
       const tile = slotEl?.querySelector('.shop-card-mystery');
       if (!tile || typeof tile.animate !== 'function' || SDT.Motion?.reduceMotion?.()) { finish(); return; }
       const a = tile.getBoundingClientRect();
       if (!a.width) { finish(); return; }
       // 1) ？牌原地塌缩（scaleX→0，240ms）
-      const flip = tile.cloneNode(true);
+      flip = tile.cloneNode(true);
       flip.style.cssText = `position:fixed;left:${a.left}px;top:${a.top}px;width:${a.width}px;height:${a.height}px;margin:0;z-index:9999;pointer-events:none;`;
       document.body.appendChild(flip);
       flip.animate([{ transform: 'scaleX(1)' }, { transform: 'scaleX(0)' }], { duration: 240, easing: 'ease-in', fill: 'forwards' }).onfinish = () => {
+        if (finished) return;
+        if (!live()) { finish(); return; }
         flip.remove();
         // 2) 真卡面从塌缩点弹出（132×180 sm 卡，同战斗 surge-fly 制式）
-        const reveal = document.createElement('div');
+        reveal = document.createElement('div');
         reveal.style.cssText = `position:fixed;left:${a.left + a.width / 2 - 66}px;top:${a.top + a.height / 2 - 90}px;width:132px;height:180px;margin:0;z-index:9999;pointer-events:none;`;
         reveal.innerHTML = SDT.Cards.cardHTML ? SDT.Cards.cardHTML(card, 'sm') : esc(card.name || '');
         document.body.appendChild(reveal);
@@ -244,6 +268,8 @@ function createShopController({
         ], { duration: 320, easing: 'cubic-bezier(.2,.9,.35,1.18)', fill: 'forwards' });
         // 3) 停一拍让人看清开出了什么，再飞背包；结束后才放行货位重绘
         setTimeout(() => {
+          if (finished) return;
+          if (!live()) { finish(); return; }
           const rect = reveal.getBoundingClientRect();
           const dur = flyRectToBag(rect, reveal);
           setTimeout(finish, dur + 60);
@@ -260,15 +286,19 @@ function createShopController({
   }
 
   function renderShop() {
+    if (!currentSession(shopSession)) return;
+    cancelInspectionMotion();
+    const version = ++pageVersion, session = shopSession;
+    bagReturn = null;
     shopPage = 'main';
     const slots = game.shopStock.map(slotHTML).join('');
-    const sellableCount = game.ownedCards.filter(owned => SDT.Cards.isSellable(owned.card)).length;
+    const sellableCount = game.ownedCards.filter(owned => SDT.Cards.isSellable(owned.card) && !owned.stored).length;
     UI.registerHelp('shop', {
       title: '商店说明',
       html: `
         <p class="help-item"><b>进货</b>商队每次靠站随机卸货：6 张随机卡 + 能量饮料（2 币，回 6 血） + 初始攻击补充（1 币/张，每站最多 5 张）+ 1 个「神秘货箱」栏位（3 币，买到随机卡牌）。</p>
         <p class="help-item"><b>收购台</b>补给站的收购台可挑卡卖掉。默认卡牌不可出售；只有带「可出售」备注的卡才能卖，收购价 = 卡面币值。</p>`,
-      back: renderShop,
+      back: () => { if (version === pageVersion && currentSession(session) && document.querySelector('.help-body')) renderShop(); },
     });
     UI.showOverlay('', `
       <div class="pg shop-pg shop-market shop-v14 shop-replica node-pg sc-shop" data-asset-key="scene-shop-bg">
@@ -296,8 +326,8 @@ function createShopController({
         </div>
         <footer class="shop-market-footer"><span class="shop-live" id="shopLive" aria-live="polite">${shopNotice}</span><button class="shop-back" data-act="closeShop">[[icon:arrow]] 离开补给站</button></footer>
       </div>`, 'page');
-    registerShopActs();
     const shopRoot = document.querySelector('.shop-replica');
+    registerShopActs(shopRoot);
     shopRoot?.addEventListener('sdt-dev-console-return', () => {
       const grid = shopRoot.querySelector('.shop-board-grid');
       if (grid) {
@@ -317,6 +347,10 @@ function createShopController({
 
   // 卖牌处二级界面：收购台（2026-09-10 留言 #23：只列出可以卖的牌，不再把不可卖的也铺出来置灰）
   function renderSellPage() {
+    if (!currentSession(shopSession)) return;
+    cancelInspectionMotion();
+    const version = ++pageVersion, session = shopSession;
+    bagReturn = null;
     shopPage = 'sell';
     const sellableOwned = game.ownedCards.filter(owned => SDT.Cards.isSellable(owned.card) && !owned.stored);   // 珍珠盒中存放的资源卡不在此列出（2026-09-10 #29）
     const total = sellableOwned.length;
@@ -334,7 +368,7 @@ function createShopController({
     UI.registerHelp('shopSell', {
       title: '卖牌处说明',
       html: `<p class="help-item"><b>收购规则</b>这里只显示可以卖的牌；默认卡牌不可出售，只有带「可出售」备注的卡（货币/宝石类等）才能卖给商店，收购价 = 卡面币值。</p>`,
-      back: renderSellPage,
+      back: () => { if (version === pageVersion && currentSession(session) && document.querySelector('.help-body')) renderSellPage(); },
     });
     UI.showOverlay('', `
       <div class="pg shop-pg shop-exchange node-pg sc-shop" data-asset-key="scene-shop-bg">
@@ -360,7 +394,7 @@ function createShopController({
         </div>
         <button class="shop-back" data-act="backShop">[[icon:arrow]] 返回商店</button>
       </div>`, 'page');
-    registerShopActs();
+    registerShopActs(document.querySelector('.shop-exchange'));
     UI.refresh(game);
   }
 
@@ -436,9 +470,13 @@ function createShopController({
       slot.querySelector('.shop-preview')?.setAttribute('aria-pressed', 'false');
     });
   }
-  function registerShopActs() {
-    UI.act('shopCloseInspect', closeShopInspection);
-    UI.act('shopInspect', data => {
+  function registerShopActs(root) {
+    const version = pageVersion, session = shopSession;
+    // 页面重绘、离店、换店或换档后，旧动作不能按新货架索引继续成交。
+    const live = () => root?.isConnected && version === pageVersion && currentSession(session);
+    const register = (name, handler) => UI.act(name, data => { if (live()) handler(data || {}); });
+    register('shopCloseInspect', closeShopInspection);
+    register('shopInspect', data => {
       const i = Number(data.i);
       if (!game.shopStock[i] || game.shopStock[i].empty) return;
       if (inspectionClose) { clearTimeout(inspectionClose.timer); inspectionClose = null; }
@@ -465,13 +503,22 @@ function createShopController({
         detail.querySelector('.shop-detail-close')?.focus({ preventScroll:true });
       }
     });
-    UI.act('shopOpenBag', () => {
+    register('shopOpenBag', () => {
       // 关闭背包后回到商店当前页（主商店/收购台），不再踢回地图
-      openBackpack(() => { game.state = 'modal'; (shopPage === 'sell' ? renderSellPage : renderShop)(); });
+      const returnPage = shopPage;
+      const onReturn = () => {
+        if (bagReturn !== onReturn || version !== pageVersion || !currentSession(session)) return;
+        // 普通背包关闭时仍留有退出中的 .bag-view；减少动态时弹层已同步清空。
+        if (!document.querySelector('.bag-view') && !UI.el?.overlay?.hidden) return;
+        bagReturn = null;
+        (returnPage === 'sell' ? renderSellPage : renderShop)();
+      };
+      bagReturn = onReturn;
+      openBackpack(onReturn);
       // 战斗背包接口 SDT.Battle.commands.openBag 只在战斗内可用，非战斗态直接调会抛
       // TypeError（实测：reading 'isBoss'）；showBackpack 是它的通用外壳，战斗中会自己转过去。
     });
-    UI.act('buyCard', data => {
+    register('buyCard', data => {
       const slot = game.shopStock[+data.i];
       if (!slot || slot.sold || slot.empty) return;
       if (game.coins < slot.price) {
@@ -498,7 +545,7 @@ function createShopController({
       playBuyCarry(document.querySelectorAll('.shop-board-grid .shop-slot')[+data.i], slot, () => {});
       refreshShopSlot(+data.i);   // 真实购入状态与余额先落位，飞行动画只解释去向
     });
-    UI.act('buySha', data => {
+    register('buySha', data => {
       const slot = game.shopStock[+data.i];
       if (!slot || slot.shaReplenish == null || slot.shaReplenish <= 0) return;
       if (game.coins < slot.price) {
@@ -527,7 +574,7 @@ function createShopController({
       playBuyCarry(document.querySelectorAll('.shop-board-grid .shop-slot')[+data.i], slot, () => {});
       refreshShopSlot(+data.i);
     });
-    UI.act('sellCard', data => {
+    register('sellCard', data => {
       const index = game.ownedCards.findIndex(owned => owned.uid === data.uid);
       if (index < 0) return;
       const owned = game.ownedCards[index];
@@ -545,9 +592,13 @@ function createShopController({
       saveGame();
       renderSellPage();
     });
-    UI.act('openSell', renderSellPage);
-    UI.act('backShop', renderShop);
-    UI.act('closeShop', () => {
+    register('openSell', renderSellPage);
+    register('backShop', renderShop);
+    register('closeShop', () => {
+      shopSession = null;
+      bagReturn = null;
+      pageVersion++;
+      cancelInspectionMotion();
       UI.hideOverlay();
       game.state = 'idle';
       const cb = shopOnClose; shopOnClose = null;

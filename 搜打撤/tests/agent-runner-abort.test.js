@@ -32,6 +32,8 @@ afterEach(() => vi.restoreAllMocks());
 describe('agent.runner stopRun → decide signal 贯通', () => {
   it('stopRun 中止本局 signal，autoRun 以 cancelled 收口', async () => {
     let captured = null;
+    const command = vi.fn();
+    window.SDT.UI._acts.testCommand = command;
     const hangingDecide = (innerObs, extras) => new Promise((resolve) => {
       captured = extras?.signal || null;
       captured?.addEventListener('abort', () => resolve({ type: 'ui', name: 'testCommand' }), { once: true });
@@ -43,6 +45,30 @@ describe('agent.runner stopRun → decide signal 贯通', () => {
     const trace = await running;
     expect(captured.aborted).toBe(true);
     expect(trace.stopReason).toBe('cancelled');
+    expect(command).not.toHaveBeenCalled();
+  });
+
+  it('停止后迟到决策不执行；收口前拒绝新局，收口后新局独立执行', async () => {
+    let release;
+    const oldCommand = vi.fn();
+    const newCommand = vi.fn();
+    document.getElementById('ovBody').innerHTML += '<button data-act="nextCommand">Next</button>';
+    window.SDT.UI._acts = { testCommand: oldCommand, nextCommand: newCommand };
+    const first = autoRun({ decide: () => new Promise(resolve => { release = resolve; }),
+      maxSteps: 1, ...options });
+    await vi.waitFor(() => expect(release).toBeTypeOf('function'));
+    stopRun();
+    const blocked = await autoRun({ decide: () => ({ type: 'ui', name: 'nextCommand' }),
+      maxSteps: 1, ...options });
+    expect(blocked.stopReason).toBe('already-running');
+    release({ type: 'ui', name: 'testCommand' });
+    expect((await first).stopReason).toBe('cancelled');
+    expect(oldCommand).not.toHaveBeenCalled();
+    const next = await autoRun({ decide: () => ({ type: 'ui', name: 'nextCommand' }),
+      maxSteps: 1, ...options });
+    expect(next.stopReason).toBe('max-steps');
+    expect(newCommand).toHaveBeenCalledTimes(1);
+    expect(oldCommand).not.toHaveBeenCalled();
   });
 
   it('上一局的 stopRun 不影响新一局的 signal（控制器随局重建）', async () => {

@@ -239,13 +239,20 @@ function syncPlayTime() {
   recordBaseSaveForLoad('play_time_sync', result.persisted);
 }
 
-// 删除某档位：对局进度 + 基地一起清空（该档位回到未创建状态）
+// 删除仍是分离存储的顺序操作；明确报告部分完成，不回填或宣称跨键原子性。
 function clearSlot(i) {
-  RunStorage.remove(i);
-  SDT.Base.wipe(i);
+  if (!RunStorage.remove(i)) return { ok: false, slot: i, code: 'RUN_DELETE_FAILED',
+    message: '对局删除未完整完成，基地数据未删除；请检查存储状态后重试' };
+  if (!SDT.Base.wipe(i)) return { ok: false, slot: i, code: 'BASE_DELETE_FAILED',
+    message: '对局已删除，基地数据未能删除；请检查存储状态后重试' };
+  return { ok: true, slot: i };
 }
 function clearSave() { if (activeSlot) RunStorage.remove(activeSlot); }
-function clearAllSlots() { for (let i = 1; i <= SLOT_COUNT; i++) clearSlot(i); }
+function clearAllSlots() {
+  const results = [];
+  for (let i = 1; i <= SLOT_COUNT; i++) results.push(clearSlot(i));
+  return { ok: results.every(result => result.ok), results };
+}
 
 function preflightRunMap(slot) {
   const identity = RunStorage.readIdentity(slot);
@@ -253,7 +260,7 @@ function preflightRunMap(slot) {
   const s = RunStorage.readForPreflight(slot);
   if (!s) {
     const issue = RunStorage.issue(slot);
-    return { ok:false, code:issue==='tooNew'?'RUN_TOO_NEW':issue==='readFailed'?'STORAGE_READ_FAILED':'RUN_UNREADABLE', message:'对局存档无法读取', preserveRun:true };
+    return { ok:false, code:issue==='tooNew'?'RUN_TOO_NEW':issue==='readFailed'?'STORAGE_READ_FAILED':'RUN_UNREADABLE', message:RunStorage.loadIssueMessage(slot) || '对局存档无法读取', preserveRun:true };
   }
   const structure = validateRunSave(s);
   if (!structure.ok) return structure;
@@ -288,7 +295,7 @@ function loadGame(slot) {
 function restoreGame(slot) {
   const preflight=preflightRunMap(slot);
   if(!preflight.ok) {
-    if (preflight.code === 'RUN_UNREADABLE') UI.log('[[icon:cross]] 对局存档无法读取，原档已保留', 'warn');
+    if (preflight.code === 'RUN_UNREADABLE') UI.log(`[[icon:cross]] ${preflight.message}，原档已保留`, 'warn');
     else if (preflight.code === 'RUN_TOO_NEW') UI.log('[[icon:cross]] 对局存档来自更新版本的游戏，无法读取', 'warn');
     else UI.log(`[[icon:cross]] ${preflight.message}，原档已保留`, 'warn');
     return preflight;
@@ -396,7 +403,7 @@ function restoreGame(slot) {
   enterLayer(safeLayer, safeIdx, { preserveBossPlan:true, deferSave:!!s.chestReward });
   SDT.Sound.music('board');
   UI.log(`[[icon:download]] 已读取【档位 ${slot}】存档`, 'ok');
-  if (!game.myClass) runtime.openClassChoice();   // 上次存档时还没选职业：补上开局选择
+  if (!game.myClass) return { ok:true, value:true, classChoiceEntry:runtime.openClassChoice({ recoveringRun:true }) };   // 同步恢复结果附带选角就绪，不把 Promise 写入 game/存档
   else if (s.chestReward) {
     const resume = s.chestReward.context?.battleSettlement ? runtime.resumeBattleRewards : runtime.resumeChestsOnCell;
     if (!resume?.(s.chestReward)) {
@@ -540,7 +547,7 @@ function newRun(mode, picks, options = {}) {
   const l1 = game.layerData[0];
   const startIdx = l1.entrances[Math.floor(Random.random('gameplay') * l1.entrances.length)] || 0;
   enterLayer(0, startIdx);
-  if (!options.skipClassChoice) runtime.openClassChoice();   // 从全部职业中选择 + 1 张随机职业卡（与 5 张初始攻击一起）
+  if (!options.skipClassChoice) return runtime.openClassChoice();   // 从全部职业中选择 + 1 张随机职业卡（与 5 张初始攻击一起）
 }
 
 // ---------- 进层 ----------

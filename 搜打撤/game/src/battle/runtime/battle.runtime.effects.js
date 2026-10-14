@@ -100,6 +100,7 @@ export function applyRuneFlag(kind) {
   if (kind === 'shield') armorMul = 2;
   if (kind === 'swift') swiftRune = true;
   if (kind === 'fireball') fireballRuneOn = true;
+  if (kind === 'frozen') freezeRuneOn = true;
   if (kind === 'spacetime') timeSpaceRune = true;
 }
 

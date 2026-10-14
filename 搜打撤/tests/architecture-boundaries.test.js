@@ -145,6 +145,27 @@ describe('AST 架构检查的识别与负面场景', () => {
     );
   });
 
+  it.each([
+    ['hub/game.hub.js', "import './game.hub.runtime.js';"],
+    ['hub/game.hub.js', "export { open } from './game.hub.runtime.js';"],
+    ['game.boot.js', "import('./hub/game.hub.runtime.js');"],
+  ])('基地实现只允许基地门面动态加载（%s）', (source, statement) => {
+    const graph = graphOf({
+      [source]: statement,
+      'hub/game.hub.runtime.js': 'export const open = true;',
+    });
+    expect(architectureViolations(graph)).toContain(
+      `${source}:1: hub/game.hub.runtime.js 只能由 hub/game.hub.js 动态加载`,
+    );
+  });
+
+  it('基地轻门面的动态入口合法', () => {
+    expect(architectureViolations(graphOf({
+      'hub/game.hub.js': "import('./game.hub.runtime.js');",
+      'hub/game.hub.runtime.js': 'export const open = true;',
+    }))).toEqual([]);
+  });
+
   it('照相馆轻门面的动态入口合法', () => {
     const graph = graphOf({
       'hub/game.cardslib.js': "import('./game.cardslib.page.js');",
@@ -174,6 +195,8 @@ describe('当前源码的架构边界', () => {
     renamed.delete('hub/game.cardslib.page.js');
     expect(deadGuardKeys(renamed)).toContain('hub/game.cardslib.page.js');
     renamed.set('hub/game.cardslib.page.js', sources.get('hub/game.cardslib.page.js'));
+    renamed.delete('hub/game.hub.runtime.js');
+    expect(deadGuardKeys(renamed)).toContain('hub/game.hub.runtime.js');
     renamed.delete('hub/game.cardslib.js');
     expect(deadGuardKeys(renamed)).toContain('hub/game.cardslib.js');
   });

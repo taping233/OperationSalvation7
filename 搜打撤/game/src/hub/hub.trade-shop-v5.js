@@ -1,9 +1,10 @@
 import { esc, escAttr } from '../core/shared.js';
 import { resourceValueHTML } from './hub.materials.js';
+import { departureStackKey } from './base-departure.commands.js';
 
 const MATERIAL_CARD_IDS = { wood: 'tt-wood', rations: 'tt-rations' };
 const GOOD_KEY = good => String(good.material || good.id || '');
-const STACK_KEY = stack => JSON.stringify([stack.card.id || '', stack.card.name || '']);
+const STACK_KEY = departureStackKey;
 const quantity = stack => Math.max(0, Number(stack?.count) || 0);
 const protectedStack = (base, stack) => !!base.isCollected?.(stack.card);
 const sellableStack = (base, stack) => quantity(stack) > 0 && stack.card.id !== base.PET_EGG_ID
@@ -94,7 +95,10 @@ export function bindTradeShopV5({ root, ui, base, cards, goods, state, render, n
   const slot = base.slot;
   let active = true, confirmation = null, timer = null, busy = false;
   const live = () => active && root.isConnected && base.slot === slot;
-  const currentStack = () => base.data.stash.find(stack => STACK_KEY(stack) === state.sellKey);
+  const currentStack = () => {
+    const matches = base.data.stash.filter(stack => STACK_KEY(stack) === state.sellKey);
+    return matches.length === 1 ? matches[0] : null;
+  };
   const selectedGood = () => goods.find(good => GOOD_KEY(good) === state.goodKey);
   const disarm = () => {
     clearTimeout(timer); timer = null;
@@ -107,7 +111,7 @@ export function bindTradeShopV5({ root, ui, base, cards, goods, state, render, n
   };
   const redraw = () => { disarm(); render(); };
   const failure = (result, fallback) => {
-    const reasons = { poor: '储备币不足', full: '仓库已满', collected: '收藏卡牌受保护', material: '材料不可出售', empty: '该卡牌已不在仓库', save: '基地存档未保存，请重新载入后重试' };
+    const reasons = { poor: '储备币不足', full: '仓库已满', collected: '收藏卡牌受保护', material: '材料不可出售', empty: '该卡牌已不在仓库', identity: '卡牌身份已变化，请重新选择', save: '基地存档未保存，请重新载入后重试' };
     notice(result?.msg || reasons[result?.why] || fallback, 'warn');
     redraw();
   };
@@ -147,7 +151,6 @@ export function bindTradeShopV5({ root, ui, base, cards, goods, state, render, n
     if (state.mode !== 'sell') return;
     const stack = currentStack();
     if (!stack || !sellableStack(base, stack)) { failure(null, '该卡牌不可出售'); return; }
-    if (base.data.stash.find(item => item.card.name === stack.card.name) !== stack) { failure(null, '卡牌身份已变化，请重新载入'); return; }
     if (protectedStack(base, stack)) { failure({ why: 'collected' }); return; }
     const price = salePrice(cards, stack.card), count = quantity(stack), qty = all ? count : 1;
     const signature = JSON.stringify([state.sellKey, count, price, base.slot]);
@@ -165,7 +168,7 @@ export function bindTradeShopV5({ root, ui, base, cards, goods, state, render, n
       timer = setTimeout(disarm, 2600); return;
     }
     disarm(); busy = true;
-    const result = base.sellStashCards(stack.card.name, qty);
+    const result = base.sellStashCards(stack.card.name, qty, state.sellKey);
     busy = false;
     if (!result.ok) { failure(result, '出售未完成'); return; }
     sound.ding?.(); notice(`出售${stack.card.name} ×${result.qty ?? qty} · 储备 +${result.coins ?? price * qty} 币`);

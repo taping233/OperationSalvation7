@@ -175,7 +175,7 @@ function createCollectionCommands(deps = {}) {
     if (!prior.ok) return prior;
     if (prior.value) {
       const result = unwrapCommit(prior);
-      if (result.ok) io.applySkin(character.id, input.skinId);
+      if (result.ok && globalThis.window?.SDT?.Base?.slot === context.slotId) io.applySkin(character.id, input.skinId);
       return result;
     }
     const read = io.readBase(context.slotId);
@@ -210,7 +210,7 @@ function createCollectionCommands(deps = {}) {
       events: [{ type: 'appearance.changed', payload: { characterId: character.id, skinId: input.skinId, assetFallback } }],
     });
     const result = unwrapCommit(committed);
-    if (result.ok) io.applySkin(character.id, input.skinId);
+    if (result.ok && globalThis.window?.SDT?.Base?.slot === context.slotId) io.applySkin(character.id, input.skinId);
     return result;
   }
 

@@ -14,7 +14,7 @@
  *   STALL         训练进程在、但产物目录 stall 秒无任何文件活动
  *   EVAL-OVERRUN  某个 eval-* 目录超 eval-max 秒仍未出 summary.json
  *                 （防"慢死螺旋"：单局 30s 超时连环触发、活动仍在但永不结束）
- *   VANISHED      训练进程消失却没有 best-weights.json（异常退出）
+ *   VANISHED      训练进程消失但没有本监督窗口新写且有效的最终权重/历史产物
  *   MAX-TIME      超过总时长 max
  *
  * 进程匹配锚点 = 产物目录名（--key），且 cmdline 必须同时命中
@@ -75,11 +75,15 @@ function psProcs() {
   // cmdline 带着 '--pattern agent-evolve.mjs' 字样会自匹配；枚举用的 powershell 进程
   // 被 Name=node.exe 条件天然排除。
   const script = [
-    '$ErrorActionPreference="SilentlyContinue"',
+    '$ErrorActionPreference="Stop"',
     `Get-CimInstance Win32_Process | Where-Object { $_.Name -eq 'node.exe' -and $_.CommandLine -and ($_.CommandLine -like '*${PATTERN}*' -or $_.CommandLine -like '*agent-batch.mjs*') -and $_.CommandLine -like '*${KEY}*' -and $_.CommandLine -notlike '*agent-supervise.mjs*' -and $_.ProcessId -ne ${process.pid} } | ForEach-Object { [PSCustomObject]@{ pid=$_.ProcessId; cmd=$_.CommandLine.Substring(0,[Math]::Min(200,$_.CommandLine.Length)) } } | ConvertTo-Json -Compress`,
   ].join('\n');
   try {
     const res = spawnSync('powershell', ['-NoProfile', '-NonInteractive', '-Command', script], { encoding: 'utf8', timeout: 20000 });
+    if (res.error) throw res.error;
+    if (res.status !== 0 || res.signal) {
+      throw new Error(`PowerShell 查询失败（status=${res.status} signal=${res.signal || 'none'}）`);
+    }
     const out = (res.stdout || '').trim();
     if (!out) return [];
     const j = JSON.parse(out);
@@ -88,6 +92,30 @@ function psProcs() {
     console.error(`[supervise] 进程枚举失败(下次重试): ${e.message}`);
     return null;   // null = 查询失败，不当成"没进程"
   }
+}
+
+// evolve only writes these two files after its generation loop. Without a run ID,
+// this proves fresh final artifacts in this supervision window, not their producer.
+// Equal/older timestamps are inconclusive and are rejected conservatively.
+function freshFinalArtifacts(now) {
+  try {
+    const weightsPath = join(DIR, 'best-weights.json');
+    const historyPath = join(DIR, 'history.json');
+    for (const file of [weightsPath, historyPath]) {
+      const stamp = statSync(file).mtimeMs;
+      if (!Number.isFinite(stamp) || stamp <= start || stamp > now) return false;
+    }
+    const weights = JSON.parse(readFileSync(weightsPath, 'utf8'));
+    const validWeights = value => value !== null && typeof value === 'object' && !Array.isArray(value)
+      && Object.values(value).every(leaf => typeof leaf === 'number' ? Number.isFinite(leaf) : validWeights(leaf));
+    if (!validWeights(weights)) return false; // An empty diff is a valid unchanged baseline.
+    const history = JSON.parse(readFileSync(historyPath, 'utf8'));
+    return Array.isArray(history) && history.length > 0 && history.every(entry =>
+      Number.isInteger(entry?.gen) && entry.gen > 0 && Number.isFinite(entry.sigma)
+      && typeof entry.cluster === 'string' && Array.isArray(entry.results) && entry.results.length > 0
+      && entry.results.every(result => typeof result?.tag === 'string' && Number.isFinite(result.fitness)
+        && Number.isFinite(result.extract) && Number.isFinite(result.abandon) && typeof result.hard === 'boolean'));
+  } catch { return false; }
 }
 
 function tailFile(p, n = 30) {
@@ -141,7 +169,7 @@ function fail(reason, detail) {
       // taskkill /T 杀整棵进程树（vite-node→batch 子进程链一锅端）：
       // Stop-Process 单杀父进程，子 batch 会成孤儿继续跑——等于没杀干净
       const r = spawnSync('taskkill', ['/PID', String(p.pid), '/T', '/F'], { encoding: 'utf8', timeout: 15000 });
-      if (!r.error) killed++;
+      if (!r.error && r.status === 0 && !r.signal) killed++;
     }
   }
   console.error(`[supervise] 已杀进程 ${killed}/${procs ? procs.length : '?'}；归因报告: ${reportPath}`);
@@ -181,11 +209,11 @@ while (true) {
     if (now - lastAct > STALL) fail('STALL', `训练进程在，但产物目录已 ${Math.round((now - lastAct) / 1000)}s 无文件活动（事件循环卡死/批跑挂起嫌疑）`);
   } else if (now - start < GRACE) {
     // 启动宽限期内没进程 = 尚未起来，继续等
-  } else if (existsSync(join(DIR, 'best-weights.json'))) {
-    console.log(`[supervise] ✓ 训练进程已退出且产物完整（best-weights.json 在），监督结束`);
+  } else if (freshFinalArtifacts(now)) {
+    console.log(`[supervise] ✓ 匹配进程已退出，本监督窗口新写的权重/历史产物有效；未证明同次训练归属，监督结束`);
     process.exit(0);
   } else {
-    fail('VANISHED', '训练进程消失但没有 best-weights.json（异常退出/被杀）');
+    fail('VANISHED', '训练进程消失但最终权重/历史产物缺失、无效或不属于本监督时间窗口（异常退出/被杀/旧产物）');
   }
   await sleep(INTERVAL);
 }

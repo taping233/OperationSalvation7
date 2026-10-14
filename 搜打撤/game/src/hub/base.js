@@ -8,7 +8,7 @@ import { createVersionedSlotReader } from './versioned-slot-reader.js';
 import { commitBaseMutation } from './base-mutation.js';
 import { createBaseEconomy } from './base-economy.js';
 import { createBaseProgressionCommands } from './base-progression.commands.js';
-import { createBaseDepartureCommands } from './base-departure.commands.js';
+import { createBaseDepartureCommands, departureStackKey } from './base-departure.commands.js';
 import { createBasePetEggCommands } from './base-pet-egg.commands.js';
 import { createBaseElapsedCommands } from './base-elapsed.commands.js';
 import { createBaseMetaCommands } from './base-meta.commands.js';
@@ -64,7 +64,7 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
   // 重解析，绕过 write 直写 localStorage（旧代码/另一标签页）也不会读到脏缓存。
   // 2026-09-28 代码线收敛：管线骨架（缓存/版本门/迁移/坏档备份）上移到
   // versioned-slot-reader.js，这里只注入基地档历史语义（宽松版本解析、放行数组顶层、
-  // 直返引用供 adopt 就地规范化）；issue 标记随之改按 run 侧语义在可读路径清除，
+  // 克隆出口后由 adopt 规范化）；issue 标记随之改按 run 侧语义在可读路径清除，
   // 修复「坏档被外部修复后 issue 粘滞、阻塞 save」的旧缺陷。
   // 标签页所见的基地原始串。普通 save 以原始串做乐观并发检查，
   // 避免旧内存状态把另一标签页已保存的进度覆盖。
@@ -79,6 +79,8 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
     corruptKeyFor: CORRUPT_KEY,
     versionOf: (d) => +d.version || 0,
     rejectArrays: false,
+    // 持久快照仅归缓存所有；预览、装载及命令读取各取得独立副本。
+    toPublic: structuredClone,
   });
 
   function readSlot(i) {
@@ -152,7 +154,7 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
       data = candidate;
       data.version = BASE_VERSION;
       data._m01 = next._m01;
-      reader.poke(slot, raw, next);
+      reader.poke(slot, raw, JSON.parse(raw));
       reader.clearIssue(slot);
       saveWarned = false;
       try { localStorage.removeItem(CORRUPT_KEY(slot)); } catch { /* 无关紧要 */ }
@@ -326,7 +328,7 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
     const raw = JSON.stringify(normalized);
     localStorage.setItem(SLOT_KEY(i), raw);
     writeBaseline.set(i, raw);
-    reader.poke(i, raw, normalized);
+    reader.poke(i, raw, JSON.parse(raw));
     reader.clearIssue(i);
     try { localStorage.removeItem(CORRUPT_KEY(i)); } catch { /* 无关紧要 */ }
     if (slot === i) data = normalized;
@@ -338,7 +340,7 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
     if (found) writeBaseline.set(i, found.raw);
     else writeBaseline.delete(i);
     if (found?.value && slot === i) data = adopt(found.value);
-    return found?.value ? adopt(found.value) : null;
+    return found?.value ? adopt(structuredClone(found.value)) : null;
   }
 
   // 删除某档位的基地数据
@@ -598,8 +600,13 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
 
   // 卖出仓库中某卡牌堆的 n 张（[[icon:sparkles]]收藏中的堆受保护，需先取消收藏；
   // 材料卡不可卖出换币）。返回 { ok, msg, coins } 或 { ok:false, why }
-  function sellStashCards(name, n) {
-    const i = data.stash.findIndex(x => x.card.name === name);
+  function sellStashCards(name, n, stackKey) {
+    // Existing name-only callers retain their legacy behavior. New UI passes a full identity.
+    const matching = stackKey === undefined ? [] : data.stash
+      .map((stack, index) => ({ stack, index }))
+      .filter(({ stack }) => departureStackKey(stack) === stackKey && stack.card.name === name);
+    if (stackKey !== undefined && matching.length !== 1) return { ok: false, why: 'identity' };
+    const i = stackKey === undefined ? data.stash.findIndex(x => x.card.name === name) : matching[0].index;
     if (i < 0) return { ok: false, why: 'empty' };
     const stack = data.stash[i];
     if (data.collection[stack.card.id]) return { ok: false, why: 'collected' };

@@ -1,7 +1,8 @@
 /* 基地模块的架构守护（2026-09-22 六文件重构批3）
  *
  * game.hub.js 曾是 1265 行混装（页签壳 + 出征整备流 + 六页签 HTML + 物资抽屉），现拆为：
- *   game.hub.js         —— 壳：装配、事件分派、出发与整备编排、closeBase
+ *   game.hub.js         —— 轻门面：按需载入、失效请求与公开五件套
+ *   game.hub.runtime.js —— 壳实现：装配、事件分派、出发与整备编排、closeBase
  *   game.hub.depart.js  —— 出发页与出征整备（hubDeployHTML / openDepartPrep / deployPick 态）
  *   game.hub.pages.js   —— 六页签 HTML 与 openStashItem/openRawItem 抽屉
  *   game.hub.bridge.js  —— 中立桥：slots.renderHub 注册点 + homeRequestId（bag-return-hook 先例）
@@ -20,10 +21,12 @@ import { resolve } from 'node:path';
 const source = (file) => readFileSync(resolve(process.cwd(), `game/src/${file}`), 'utf8');
 const importedModules = (code) => [...code.matchAll(/^import\s+(?:\{[^}]*\}\s+from\s+)?'\.\/([\w.-]+)\.js';/gm)].map((m) => m[1]);
 
-const SHELL = source('hub/game.hub.js');
+const FACADE = source('hub/game.hub.js');
+const SHELL = source('hub/game.hub.runtime.js');
 const DEPART = source('hub/game.hub.depart.js');
 const PAGES = source('hub/game.hub.pages.js');
 const PREPARATION = source('hub/game.hub.preparation.js');
+const PREPARATION_PORTS = source('hub/game.hub.preparation-ports.js');
 const BRIDGE = source('hub/game.hub.bridge.js');
 const HOME_SCENE = source('hub/game.hub.home-scene.js');
 
@@ -40,7 +43,7 @@ describe('基地模块分层（批3 拆分）', () => {
   });
 
   it('对外导出面不变：五件套仍从 game.hub.js 出（deployPick 经转出）', () => {
-    const exported = [...SHELL.matchAll(/^export \{([^}]*)\};/gm)]
+    const exported = [...FACADE.matchAll(/^export \{([^}]*)\};/gm)]
       .flatMap((m) => m[1].split(',')).map((s) => s.trim()).filter(Boolean);
     for (const name of ['closeBase', 'deployPick', 'openBaseHub', 'renderHub', 'renderHomeScene']) {
       expect(exported, `${name} 应仍在 game.hub.js 导出`).toContain(name);
@@ -75,6 +78,8 @@ describe('基地模块分层（批3 拆分）', () => {
     expect(DEPART).toContain('let deployPick = null;');
     expect(DEPART).toContain('function setDeployPick(');
     expect(SHELL).not.toContain('let deployPick');
+    expect(FACADE).not.toContain('let deployPick');
+    expect(FACADE).toContain("import { deployPick } from './game.hub.depart.js'");
     expect(SHELL).toContain('applyPicks: setDeployPick');
     expect(PREPARATION).toContain('navigation.applyPicks(picks)');
     expect(PAGES).toContain('function hubAchHTML(hubCollectionView)');
@@ -82,7 +87,17 @@ describe('基地模块分层（批3 拆分）', () => {
   });
 
   it('整备控制器收口命令与视图集成，基地壳只保留窄导航/数据端口', () => {
-    expect(SHELL).toContain("import { createHubPreparationFeature } from './game.hub.preparation.js'");
+    expect(SHELL).toContain("import { createHubPreparationAdapter } from './game.hub.preparation-ports.js'");
+    expect(importedModules(SHELL)).not.toContain('game.hub.preparation');
+    expect(importedModules(PREPARATION_PORTS)).toContain('game.hub.preparation');
+    for (const module of ['game.hub', 'game.hub.runtime']) {
+      expect(importedModules(PREPARATION_PORTS)).not.toContain(module);
+      expect(importedModules(PREPARATION)).not.toContain(module);
+    }
+    expect(SHELL).toContain('applyPicks: setDeployPick');
+    expect(SHELL).toContain('openDeparture: () => { disposeHome(); openDepartPrep(); }');
+    expect(PREPARATION_PORTS).toContain('slotId: () => SDT.Base.slot');
+    expect(PREPARATION_PORTS).toContain('navigation: { returnToBase, applyPicks, openDeparture }');
     expect(SHELL).not.toContain("from './preparation.commands.js'");
     expect(SHELL).not.toContain("from './preparation.view.js'");
     expect(PREPARATION).toContain('function createHubPreparationFeature({ data, view, navigation, reportError, formatError, requestId })');

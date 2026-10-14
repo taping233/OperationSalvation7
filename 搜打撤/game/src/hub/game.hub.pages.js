@@ -44,28 +44,37 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
   // 仓库看卡·操作台（2026-10-06 二次改版，老板反馈「不要回到旧弹窗、要看得清」）：
   // 点卡直接开大卡特写，卖出 / 收藏 / 使用 / 孵化全部在特写页脚完成——卡始终是
   // 大图，没有第二层小卡弹窗。不可回退操作（高价/最后一张/整堆/收藏用掉）改按钮
-  // 就地二次确认（变红 2.6s 内再点才执行），不再跳确认页。动作前按卡名重读仓库
-  // 按卡名重读堆；收藏后就地刷新页脚，出售统一由交易所负责。
+  // 就地二次确认（变红 2.6s 内再点才执行），不再跳确认页。动作前按稳定库存引用重读仓库
+  // 按稳定库存引用重读堆；收藏后就地刷新页脚，出售统一由交易所负责。
   function openStashCardView(i, { from } = {}) {
     const B = SDT.Base;
     const s = B.data.stash[i];
     if (!s) { hubBridge.renderHub(); return; }
     const card = s.card;
+    const slotId = B.slot, stackKey = stackKeyOf(s);
+    const host = document.getElementById('hubMain');
+    const viewKey = host?.querySelector('.hub-page')?.dataset.view;
+    let zoom;
+    const currentDetail = () => SDT.Base === B && B.slot === slotId && !!zoom &&
+      document.getElementById('cardZoom') === zoom && !zoom.classList.contains('cz-out') &&
+      (!host || document.getElementById('hubMain') === host && host.querySelector('.hub-page')?.dataset.view === viewKey);
+    const detailAct = (name, action) => UI.act(name, (...args) => {
+      if (!currentDetail()) return;
+      return action(...args);
+    });
     const mat = B.materialInfo ? B.materialInfo(card) : null;
     const isEgg = card.id === B.PET_EGG_ID;
     const isPack = card.id === 'tt-econpack';
     const special = isSpecialCollect(card);
 
 
-    // 动作前按卡名重读堆（索引可能因增删移位）；堆没了返回 null（收回特写回仓库）
+    // 索引/卡名都可能重用；同 ID 的不同 variant 也必须指向原来预览的唯一堆。
     const freshStack = () => {
-      const idx = B.data.stash.findIndex(x => x.card.name === card.name);
-      return idx >= 0 ? B.data.stash[idx] : null;
+      const matches = B.data.stash.filter(stack => stackKeyOf(stack) === stackKey && stack.card.id === card.id);
+      return matches.length === 1 ? matches[0] : null;
     };
     const closeZoom = () => {
-      const z = document.getElementById('cardZoom');
-      const bd = z ? z.querySelector('.cz-backdrop') : null;
-      if (bd) bd.click();
+      if (currentDetail()) zoom.querySelector('.cz-backdrop')?.click();
     };
 
     // 页脚 HTML 函数化：动作后重算数量/价格/按钮态，就地替换（特写不重建）
@@ -87,31 +96,44 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       return `<div class="camp-detail camp-card-actions"><div class="inspect-meta"><span class="inspect-count">持有 <b>${n}</b> 张</span><span class="inspect-collection-state">${marked ? '已收藏' : '仓库卡牌'}</span></div><p class="inspect-collection-hint">${hint}</p>${btns.length ? `<div class="ov-btns">${btns.join('')}</div>` : ''}</div>`;
     };
     const refreshZoom = () => {
-      const zoom = document.getElementById('cardZoom');
-      if (!zoom) return;
+      if (!currentDetail()) return;
       if (!freshStack()) { closeZoom(); return; }
       const foot = zoom.querySelector('.cz-foot');
       if (foot) foot.innerHTML = footerHTML();
     };
 
     // 就地二次确认：首点变红「确认？」，2.6s 内再点才执行（页脚刷新会自然解除）
+    let armSequence = 0;
     const armOrRun = (act, run) => {
-      const btn = document.querySelector(`#cardZoom .cz-foot [data-act="${act}"]`);
-      if (!btn) return;
-      if (btn.dataset.arm === '1') { run(); return; }
+      if (!currentDetail()) return;
+      let btn = zoom.querySelector(`.cz-foot [data-act="${act}"]`);
+      const cur = freshStack();
+      if (!btn || btn.disabled || !cur) return;
+      const signature = `${stackKey}:${cur.count}`;
+      if (btn.dataset.arm === '1' && btn.dataset.armSignature === signature) { run(); return; }
+      if (btn.dataset.arm === '1') {
+        UI.log('库存数量已变化，请重新确认', 'warn');
+        refreshZoom();
+        btn = zoom.querySelector(`.cz-foot [data-act="${act}"]`);
+        if (!btn) return;
+      }
+      const armToken = String(++armSequence);
       btn.dataset.arm = '1';
-      btn.dataset.armLabel = btn.textContent;
+      btn.dataset.armToken = armToken;
+      btn.dataset.armSignature = signature;
+      if (!btn.dataset.armLabel) btn.dataset.armLabel = btn.textContent;
       btn.textContent = '确认？';
       btn.classList.add('danger');
       setTimeout(() => {
-        if (!btn.isConnected || btn.dataset.arm !== '1') return;
+        if (!currentDetail() || !btn.isConnected || btn.dataset.arm !== '1' || btn.dataset.armToken !== armToken) return;
         delete btn.dataset.arm;
+        delete btn.dataset.armSignature;
         btn.textContent = btn.dataset.armLabel;
         btn.classList.remove('danger');
       }, 2600);
     };
     // —— 收藏（普通卡只记录不消耗；职业卡/能力卡收藏即用掉，2026-09-16 Item 15 定版）——
-    UI.act('stashCollectToggle', () => {
+    detailAct('stashCollectToggle', () => {
       const cur = freshStack();
       if (!cur) { closeZoom(); return; }
       const now = B.collectToggle(card);
@@ -130,10 +152,9 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
     });
     let converting = false;
     const convertStash = async (n, logText) => {
-      if (converting) return;
+      if (!currentDetail() || converting) return;
       const cur = freshStack();
       if (!cur) { closeZoom(); return; }
-      const slotId = B.slot, zoom = document.getElementById('cardZoom');
       const first = !B.isCollected(card);
       const read = readBase(slotId);
       if (!read.ok) { UI.log(homeErrorMessage(read), 'warn'); return; }
@@ -143,18 +164,18 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       try { result = await convertCollection({ slotId, requestId: homeRequestId('stash-collect'), expectedRevision: read.revision }, { stackKey: stackKeyOf(cur), count: n }); }
       catch { result = { ok:false, message:'归档未保存，请重试' }; }
       finally { converting = false; }
-      if (B.slot !== slotId || document.getElementById('cardZoom') !== zoom) return;
+      if (!currentDetail()) return;
       if (!result.ok) { UI.log(result.message || '收藏失败，卡牌未消耗', 'warn'); refreshZoom(); return; }
       Sfx.ding();
       UI.log(logText(first), 'loot');
       hubBridge.renderHub();
       refreshZoom();
     };
-    UI.act('stashCollectOne', () => {
+    detailAct('stashCollectOne', () => {
       armOrRun('stashCollectOne', () => convertStash(1, first =>
         `[[icon:medal]] 已收藏【<b>${esc(card.name)}</b>】并转化为人物经验（卡牌用掉，不再占格${first ? '，收藏进度 +1' : ''}）`));
     });
-    UI.act('stashCollectAll', () => {
+    detailAct('stashCollectAll', () => {
       armOrRun('stashCollectAll', () => {
         const cur = freshStack();
         const n = cur ? cur.count : 0;
@@ -166,21 +187,25 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
     const useMat = (all) => {
       const cur = freshStack();
       if (!cur) { closeZoom(); return; }
+      // 旧材料命令以名字定位，名字重叠时不能让另一个堆承担消费。
+      if (B.data.stash.filter(stack => stack.card.name === card.name).length !== 1) {
+        UI.log('库存引用不唯一，请刷新仓库', 'warn'); return;
+      }
       const r = B.useStashMaterial(card.name, all);
       if (r.ok) { Sfx.ding(); UI.log(r.msg, 'loot'); }
       else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');
       hubBridge.renderHub();
       refreshZoom();
     };
-    UI.act('stashUseMat', () => {
+    detailAct('stashUseMat', () => {
       const cur = freshStack();
       if (cur && cur.count === 1) { armOrRun('stashUseMat', () => useMat(false)); return; }
       useMat(false);
     });
-    UI.act('stashUseMatAll', () => { armOrRun('stashUseMatAll', () => useMat(true)); });
+    detailAct('stashUseMatAll', () => { armOrRun('stashUseMatAll', () => useMat(true)); });
 
     // —— 宠物蛋孵化（消耗 1 蛋 + 50 币，随机未拥有宠物）——
-    UI.act('stashHatch', () => {
+    detailAct('stashHatch', () => {
       const cur = freshStack();
       if (!cur) { closeZoom(); return; }
       const r = B.hatchPet();
@@ -215,13 +240,14 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       hubBridge.renderHub();
       refreshZoom();
     };
-    UI.act('stashOpenPack', () => {
+    detailAct('stashOpenPack', () => {
       const cur = freshStack();
       if (cur && cur.count === 1) { armOrRun('stashOpenPack', openPack); return; }
       openPack();
     });
 
     UI.showCardZoom(card, { presentation:'inventory', footer: footerHTML(), from, returnFocus:from });
+    zoom = document.getElementById('cardZoom');
     decorateInventoryZoom(card);
   }
   // 基地物资（木材/口粮）：材料不可卖出换币（2026-09-08 定版）——只作展示说明

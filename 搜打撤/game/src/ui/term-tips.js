@@ -82,6 +82,8 @@ function termMeta(key) { return TERM_TIPS[key] || null; }
 let tipEl = null;
 /** @type {Element|null} */
 let curEl = null;
+/** @type {number|null} */
+let pressedPointer = null;
 
 /** 惰性创建全局讲解浮框（单例，挂在 document.body）。
  * @returns {HTMLDivElement}
@@ -123,7 +125,7 @@ function show(el) {
 }
 
 /** 收起浮框并清除当前词条引用。@returns {void} */
-function hide() { curEl = null; if (tipEl) tipEl.hidden = true; }
+function hide() { pressedPointer = null; curEl = null; if (tipEl) tipEl.hidden = true; }
 
 /** 自事件目标向上找最近的带 data-term 的词条元素。
  * @param {EventTarget|null} t
@@ -138,16 +140,18 @@ function initTermTips() {
     const t = closestTerm(e.target);
     if (t) show(t); else hide();
   });
-  // 触屏：按下即显，松手收起（药水提示栏同口径，once 防残留）
+  // 触屏：按下即显，松手收起；释放监听只挂一次，导航/失焦清除按压归属。
   document.addEventListener('pointerdown', (e) => {
     const t = closestTerm(e.target);
     if (!t) return;
     if (e.button !== 0 && e.pointerType === 'mouse') return;
     show(t);
-    const end = () => hide();
-    document.addEventListener('pointerup', end, { once: true });
-    document.addEventListener('pointercancel', end, { once: true });
+    pressedPointer = e.pointerId;
   });
+  /** @param {PointerEvent} e */
+  const end = e => { if (pressedPointer !== null && e.pointerId === pressedPointer) hide(); };
+  document.addEventListener('pointerup', end);
+  document.addEventListener('pointercancel', end);
   // 点在词条上只讲解：捕获层拦掉 click，不触发卡面特写/出牌/按钮
   document.addEventListener('click', (e) => {
     if (!closestTerm(e.target)) return;

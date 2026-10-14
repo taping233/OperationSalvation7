@@ -13,7 +13,7 @@ import { makeLastLampEventInstanceId } from '../home/story.last-lamp.js';
 import { RunStorage } from '../hub/game.storage.js';
 import { storyCommands } from '../home/story.commands.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
-import { startBattle } from '../battle/battle-loader.js';
+import { captureBattleContext, startBattle } from '../battle/battle-loader.js';
 import { isTurbo } from '../core/turbo.js';
 import { renderScheduler } from '../core/render-scheduler.js';
 import { findMapTravelPath, mapTravelPoint, setMapTravelPresentation } from './map-travel-path.js';
@@ -354,9 +354,26 @@ function runInstant(def, after) {
 // ---------- 事件卡（第六批桌游事件：只能经事件格触发，背包记录触发历史） ----------
 // 事件卡池 = 卡牌库中类型「事件」的卡；卡牌库无事件卡时退回旧随机事件表。
 // 导出供开发者节点测试面板（game.run.js devJumpNode）直接进事件页，玩法口径与事件格一致。
+let eventRequest = 0;
+function captureEventContext() {
+  const request = eventRequest;
+  const current = captureBattleContext(game, getActiveSlot);
+  return () => request === eventRequest && current() && game.state !== 'title';
+}
+
+function eventPageBinding(act, current) {
+  const active = nodeActionBinding(game, UI, act);
+  const surface = UI.el?.ovBody?.firstElementChild;
+  return () => current() && active() && (!surface || UI.el?.ovBody?.firstElementChild === surface);
+}
+
 export async function runEventDeck() {
+  eventRequest++;
+  const current = captureEventContext();
   if (!await enterNode('event', () => true)) return;
+  if (!current()) return;
   if (await tryLastLampEvent()) return;
+  if (!current()) return;
   const deck = SDT.Cards.all().filter(c => c.type === '事件');
   if (!deck.length) {
     const ev = weighted(MAP.randomEvents);
@@ -369,7 +386,7 @@ export async function runEventDeck() {
     finishInstant();
     return;
   }
-  return triggerEventCard(pick(deck));
+  return triggerEventCard(pick(deck), current);
 }
 
 function currentLastLampIdentity(slotId, runId) {
@@ -511,7 +528,7 @@ async function tryLastLampEvent() {
 
 // 把库里的卡发给玩家（同名堆未满并入现有格；堆满或新卡需要空格——叠放上限见 game.session #7；
 // 珍珠盒扩出来的格子只收资源卡——canAcceptCard 统一判定，Q5 老板定向）
-async function triggerEventCard(card) {
+async function triggerEventCard(card, current) {
   game.eventLog = game.eventLog || [];
   game.eventLog.push({ name: card.name, desc: card.desc || '', turn: game.turn });
   // 封顶：eventLog 随对局只增不减，而每次落盘都会全量 JSON.stringify——
@@ -522,10 +539,15 @@ async function triggerEventCard(card) {
   game.state = 'modal';
   _set_cardPageOpen(false);
   SDT.Sound.sfx('scene');
+  const loadingBody = UI.el?.ovBody;
+  const loadingSurface = loadingBody?.firstElementChild;
   // ink 运行时异常兜底（迭代评审 09-20 C-P2）：此前 await 抛错会永久卡 modal（事件页永不渲染、仅按 B 可解）
   let narrative = null;
   try { narrative = await eventNarrative(card.id); }
   catch (e) { console.error('[event] ink 叙事运行异常，回落默认结算：', e); }
+  // 转场退出可以自然清空旧画面；另一个页面或探索已接管时不投影迟到叙事。
+  if (!current() || game.state !== 'modal' || (loadingBody && (UI.el?.ovBody !== loadingBody ||
+      (loadingBody.firstElementChild && loadingBody.firstElementChild !== loadingSurface)))) return;
   const choices = eventChoiceSpec(card, narrative);
   // 2026-09-10 留言 #18：没有专属图的事件此前全部回落到祭坛图（等于所有事件共用 1 张背景）。
   // 改为从 3 张事件场景图中随机轮换（scene-event-custom-a/b/c，见 css/scenes.css）。
@@ -545,15 +567,17 @@ async function triggerEventCard(card) {
   // 每次渲染都重新登记钩子（被消费后再次开背包仍有保护），结算时显式清空
   let evtSettled = false;   // 防连点：事件选项二次触发会重复发奖（2026-09-13 实测连点3次入包2张）
   const renderEventPage = () => {
-    if (evtSettled) return;
+    if (evtSettled || !current()) return;
+    game.state = 'modal';
     setBagReturnHook(renderEventPage);
     nodeShell({
       tone: 'event', asset: sceneMeta[2], icon: '[[icon:dice]]', title: card.name,
       sub: esc((narrative && narrative.intro) || card.desc || '神秘事件发生了……'),
       body: optHTML,
     });
+    const active = eventPageBinding(choices ? 'evtChoice' : 'evtNext', current);
     UI.act('evtChoice', (d) => {
-      if (!choices || evtSettled) return;
+      if (!choices || evtSettled || !active()) return;
       const choice = choices[+d.i];
       if (!choice) return;
       evtSettled = true;
@@ -564,7 +588,7 @@ async function triggerEventCard(card) {
       if (game.state !== 'modal') finishInstant();   // 选项未自开新页时兜底收尾（幂等）
     });
     UI.act('evtNext', () => {
-      if (choices || evtSettled) return;
+      if (choices || evtSettled || !active()) return;
       evtSettled = true;
       setBagReturnHook(null);
       UI.hideOverlay();
@@ -613,7 +637,9 @@ function spendEventCoins(amount, reason) {
   return true;
 }
 
-function openEventCardChoice(args) {
+function openEventCardChoice(args, transaction = null) {
+  const txn = transaction || { picked: false, current: captureEventContext() };
+  if (txn.picked || !txn.current()) return;
   const { title, sub, cards, action = '选择获得', onPick, asset = 'scene-event-custom-a' } = args;
   game.state = 'modal';
   const list = (cards || []).filter(Boolean);
@@ -624,7 +650,7 @@ function openEventCardChoice(args) {
   }
   // 背包返回恢复本页（09-30 深审 WORLD-003）：二级选卡页此前无返回钩子，装备征用令等
   // 已扣款页关一次背包就丢失候选与奖励（节点已消耗、重进不来）。重开不重扣、不重消耗。
-  setBagReturnHook(() => openEventCardChoice(args));
+  setBagReturnHook(() => openEventCardChoice(args, txn));
   nodeShell({
     tone: 'event', asset, icon: '[[icon:cards]]', title,
     sub,
@@ -634,12 +660,12 @@ function openEventCardChoice(args) {
       </button>`).join('')}</div>
       <p class="loot-footer-note">点击一张卡牌${action}</p>`,
   });
-  let picked = false;
+  const active = eventPageBinding('eventCardPick', txn.current);
   UI.act('eventCardPick', (d) => {
-    if (picked) return;
+    if (txn.picked || !active()) return;
     const card = list[+d.i];
     if (!card || (onPick ? onPick(card) === false : !grantEventCard(card))) return;
-    picked = true;
+    txn.picked = true;
     closeEventFlow();
   });
   UI.refresh(game);
@@ -665,7 +691,12 @@ function openEventRecode() {
     return;
   }
   const selected = new Set();
+  const current = captureEventContext();
+  let settled = false;
   const render = () => {
+    if (settled || !current()) return;
+    game.state = 'modal';
+    setBagReturnHook(render);
     nodeShell({
       tone: 'event', asset: 'scene-event-recode', icon: '[[icon:recycle]]', title: '故障重编',
       sub: `选择 <b>${need}</b> 张招式或装备卡，将其随机变为同稀有度、同类型的卡牌（${selected.size}/${need}）`,
@@ -676,16 +707,19 @@ function openEventRecode() {
         </button>`).join('')}</div>
         <div class="scene-ops"><button class="ov-btn" data-act="eventRecodeLeave">放弃转换</button><button class="ov-btn ok" data-act="eventRecodeGo" ${selected.size !== need ? 'disabled' : ''}>启动重编</button></div>`,
     });
+    const active = eventPageBinding('eventRecodePick', current);
     UI.act('eventRecodePick', (d) => {
+      if (settled || !active()) return;
       const entry = eligible[+d.i];
       if (!entry) return;
       if (selected.has(entry.uid)) selected.delete(entry.uid);
       else if (selected.size < need) selected.add(entry.uid);
       render();
     });
-    UI.act('eventRecodeLeave', closeEventFlow);
+    UI.act('eventRecodeLeave', () => { if (!settled && active()) { settled = true; closeEventFlow(); } });
     UI.act('eventRecodeGo', () => {
-      if (selected.size !== need) return;
+      if (settled || !active() || selected.size !== need) return;
+      settled = true;
       for (const uid of selected) {
         const entry = game.ownedCards.find(o => o.uid === uid);
         if (!entry) continue;
@@ -729,16 +763,21 @@ function openEventGamble() {
   const prizes = [...equip, ...moves];
   let attempts = 0;
   let settled = false;
+  const current = captureEventContext();
   const render = (lastMiss = false) => {
+    if (settled || !current()) return;
+    game.state = 'modal';
+    setBagReturnHook(() => render(lastMiss));
     nodeShell({
       tone: 'event', asset: 'scene-event-gamble', icon: '[[icon:dice]]', title: '地下商场黑市',
       sub: `每次投入 <b>3 币</b>，有 <b>50%</b> 概率拿走全部三张卡；第 <b>5</b> 次必定成功。已尝试 ${attempts}/5 次。${lastMiss ? '<br><b class="danger">指示灯变红，这次什么也没拿到。</b>' : ''}`,
       body: `<div class="bt-hand event-choice-hand">${prizes.map(c => `<div class="bt-card">${SDT.Cards.cardHTML(c, 'sm')}</div>`).join('')}</div>
         <div class="scene-ops"><button class="ov-btn" data-act="eventGambleLeave">放弃并离开</button><button class="ov-btn ok" data-act="eventGambleTry" ${(game.coins || 0) < 3 || !prizes.length ? 'disabled' : ''}>[[icon:coin]] 投入 3 币${attempts === 4 ? '（本次保底）' : ''}</button></div>`,
     });
-    UI.act('eventGambleLeave', () => { if (!settled) { settled = true; closeEventFlow(); } });
+    const active = eventPageBinding('eventGambleTry', current);
+    UI.act('eventGambleLeave', () => { if (!settled && active()) { settled = true; closeEventFlow(); } });
     UI.act('eventGambleTry', () => {
-      if (settled || !spendEventCoins(3, '黑市抽签')) return;
+      if (settled || !active() || !spendEventCoins(3, '黑市抽签')) return;
       attempts++;
       const hit = attempts >= 5 || Random.random('event') < 0.5;
       if (!hit) { SDT.Sound.sfx('blackMarketLose'); render(true); return; }
@@ -938,6 +977,7 @@ function applyEventEffect(card) {
     default:
       UI.log('（该事件的效果将在后续版本实装）', 'dim');
   }
+  game.state = 'idle';
   saveGame();
 }
 

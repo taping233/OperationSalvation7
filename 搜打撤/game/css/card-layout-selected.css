@@ -1,5 +1,25 @@
 @import url('./card-frames/rose/frames.css');
 @import url('./card-frames/career/frames.css');
+:root {
+  --card-copy-size: 24px;
+  --card-copy-leading: 1.55;
+  --card-copy-ink: #e8edef;
+  --card-copy-term: #c5e3ed;
+  --card-copy-keyword: #eee4ce;
+}
+/* 独立全文阅读复用同一字级；卡内正文继续随卡宽缩放。 */
+body:has(#viewport) .card-rules-copy {
+  font: 400 var(--card-copy-size) / var(--card-copy-leading) var(--font-ui);
+  color: var(--card-copy-ink); text-align: left; white-space: pre-wrap;
+  overflow-wrap: anywhere; user-select: text;
+}
+body:has(#viewport) .card-rules-copy :is(.d-num, .d-term, .d-kw) {
+  font-family: inherit; font-size: 1em; font-style: normal; user-select: text;
+}
+body:has(#viewport) .card-rules-copy .d-num { color: inherit; font-weight: 700; font-variant-numeric: tabular-nums; }
+body:has(#viewport) .card-rules-copy .d-term { color: var(--card-copy-term); font-weight: 400; }
+body:has(#viewport) .card-rules-copy .d-term[data-term] { font-weight: 600; }
+body:has(#viewport) .card-rules-copy .d-kw { color: var(--card-copy-keyword); font-weight: 700; }
 /* 老板选定的第八稿蔷薇外扩包框；全幅卡面、悬停、放大与飞行克隆共用同一外观。 */
 body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card {
   --tier: #929b9f; --tier-light: #e3e9eb; --tier-label: '初始';
@@ -114,9 +134,11 @@ body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-
 body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc > span {
   display: block !important; -webkit-line-clamp: unset !important; overflow: visible !important;
 }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc .d-num { color: #f1f3f4 !important; font-size: 1.05em !important; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc .d-kw { color: #eee4ce !important; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc .d-term { color: #c5e3ed !important; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc :is(.d-num, .d-term, .d-kw) { font-family: inherit; font-size: 1em !important; font-style: normal; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc .d-num { color: #f1f3f4 !important; font-weight: 700; font-variant-numeric: tabular-nums; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc .d-kw { color: var(--card-copy-keyword) !important; font-weight: 700; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc .d-term { color: var(--card-copy-term) !important; font-weight: 400; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc .d-term[data-term] { font-weight: 600; }
 body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-kw {
   position: relative; grid-row: 4; z-index: 3 !important;
   margin: 0 .4em .35em !important; justify-content: center; flex-wrap: wrap;

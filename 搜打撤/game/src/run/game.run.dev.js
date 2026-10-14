@@ -91,12 +91,13 @@ function saveGameDev() {
 }
 
 let activeConsole = null;
-function openDevConsole() {
+function openDevConsole(originCheckpoint) {
   const overlay = UI.el.overlay, body = UI.el.ovBody;
   if (activeConsole?.isCurrent()) { activeConsole.close(); return; }
   activeConsole?.dispose();
   const visible = !overlay.hidden && !overlay.classList.contains('closing') && !overlay.dataset.uiClosing;
-  const origin = {
+  // 冷入口在请求开始时已记录来源；直接场景调用仍同步捕获自己的来源。
+  const origin = originCheckpoint || {
     visible, state:game.state, battleActive:game.battleActive, cardPageOpen,
     html:visible ? body.innerHTML : '', nodes:visible ? [...body.childNodes] : [],
     title:UI.el.ovTitle?.innerHTML || '', mode:UI._lastMode,

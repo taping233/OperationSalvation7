@@ -51,7 +51,7 @@ async function loadHub() {
     Art: { hydrateSelectedSkins: vi.fn(), classArt: vi.fn() }, Meta: { checkUnlocks: vi.fn(), pendingAch: () => [], pendingColl: () => [] },
     Icons: { img: () => '' },
   };
-  state.hub ||= await import('../game/src/hub/game.hub.js');
+  state.hub ||= await import('../game/src/hub/game.hub.runtime.js');
   return state.hub;
 }
 

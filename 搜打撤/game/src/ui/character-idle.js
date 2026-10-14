@@ -51,6 +51,7 @@ if (typeof document !== 'undefined' && typeof document.addEventListener === 'fun
     if (host) mountCharacterIdle(host);
     else unmountCharacterIdle();
   });
+  document.addEventListener('sdt-overlay-close', unmountCharacterIdle);
 }
 
 export { IDLE_SPECS, idleSpecFor, mountCharacterIdle, unmountCharacterIdle, idleMountState };

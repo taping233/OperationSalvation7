@@ -124,15 +124,17 @@ function keysTabHTML() {
 
 function bindKeysTab(render) {
   const UI = window.SDT.UI;
-  UI.act('devcGoto', (d) => {
+  UI.act('devcGoto', async (d) => {
+    const source = document.getElementById('devConsole');
     // jump 成功时 page.enter 已在控制台同层开出目标页（控制台页被顶替=已关闭）；
     // 此时再 hideOverlay 会把新页的动作表一并清掉（INFRA-02），跳转失败才重绘本页。
-    if (jump(d.page)) {
+    if (await jump(d.page)) {
       const page = listPages().find(p => p.id === d.page);
       UI.log(`[[icon:tools]] 快捷进入【${page?.name || d.page}】成功（去向已打开，与 Alt+${page?.key || '?'} 同入口）`, 'sys');
       return;
     }
-    render();
+    if (source?.isConnected && document.getElementById('devConsole') === source) render();
+    return false;
   });
 }
 

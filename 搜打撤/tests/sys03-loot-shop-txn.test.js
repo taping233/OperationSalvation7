@@ -421,7 +421,7 @@ function makeShop({ coins = 100, canReceiveCard, stock } = {}) {
     saveGame() {}, setCardPageOpen() {}, usedSlots: () => ownedCards.length,
   });
   controller.openShop('sys03');   // 具名 key：复用预置货架，不重掷
-  return { game, acts, logs, ownedCards, overlayHidden, UI, get overlayHTML() { return overlayHTML; } };
+  return { game, acts, logs, ownedCards, overlayHidden, UI, controller, get overlayHTML() { return overlayHTML; } };
 }
 
 describe('SYS-03 商店买卖事务序（game.run.shop.js）', () => {
@@ -612,7 +612,7 @@ describe('SYS-03 商店买卖事务序（game.run.shop.js）', () => {
   it('取消不扣币：buySha 拒绝与离开商店都不产生扣费；卖出即时成交卡减币加', async () => {
     window.SDT = { Cards: { isSellable: c => !!c.sellable, sellPrice: c => c.value || 0 }, Sound: { sfx() {} }, Icons: { rich: x => x } };
     shopMod = await import('../game/src/run/game.run.shop.js');
-    const { game, acts, ownedCards, overlayHidden } = makeShop({
+    const { game, acts, ownedCards, overlayHidden, controller } = makeShop({
       stock: [{ card: { id: 'sha', name: '初始攻击', rarity: '初始', type: '武术' }, price: 1, sold: false, shaReplenish: 5 }],
     });
     game.canReceiveCard = () => false;   // 满包：补充被拒
@@ -630,6 +630,8 @@ describe('SYS-03 商店买卖事务序（game.run.shop.js）', () => {
 
     // 卖出：uid 即时成交；已成交的 uid 再点（幽灵点击）无二次入账
     ownedCards.push({ uid: 'coin-1', card: { id: 'c1', name: '铜币', type: '资源', value: 3, sellable: true } });
+    controller.openShop('sys03');
+    acts.openSell();
     acts.sellCard({ uid: 'coin-1' });
     expect(game.coins).toBe(102);
     expect(ownedCards.some(o => o.uid === 'coin-1')).toBe(false);

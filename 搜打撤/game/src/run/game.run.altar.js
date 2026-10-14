@@ -5,29 +5,21 @@
  * 由 game.run.js 拆出。层位中间（L1）：依赖 game.run.scenes.js，反向不被其依赖；
  * FLOW（game.run.flow.js）依赖本文件。
  * ============================================================ */
-import { CHARACTERS, characterFor, characterName } from '../core/characters.js';
+import { characterFor, characterName } from '../core/characters.js';
 import { installExpeditionFeedback } from '../ui/expedition-feedback.js';
-import { createCharacterViewMotion } from '../ui/character-view-motion.js';
+import { openClassChoice as requestClassChoicePage } from './game.run.class-choice.js';
 import { rewardSceneHTML, rewardExitHTML } from '../ui/reward-scene-view.js';
-import { claimEntrySupply, createEntrySupply, entrySupplyAt, nodeActionBinding } from './node-reward-state.js';
+import { claimEntrySupply, entrySupplyAt, nodeActionBinding } from './node-reward-state.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
 import { esc, escAttr } from '../core/shared.js';
-import { MAP, MODES, bagCap, curLayer, enterLayer, exitToTitle, game, getActiveSlot, newUid, saveGame, scaledEnemy, usedSlots } from './game.session.js';
+import { MAP, MODES, bagCap, curLayer, enterLayer, game, getActiveSlot, newUid, saveGame, scaledEnemy, usedSlots } from './game.session.js';
 import { buildExtractionReceipt, createExtractionCommands, validatePendingExtraction } from '../hub/extraction.commands.js';
 import { openBaseHub } from '../hub/game.hub.js';
 
-// 选人页机制简介（2026-09-12 留言：按各职业卡池真实机制写，键 = characters.js 的 id）
-const CLASS_STORY = {
-  wu: '擅长物理攻击，可以潜行，精通流血与连击。',
-  changwuyu: '以法术伤害为核心，精通用火球与诅咒压制敌人。',
-  baita: '精通奥术法术，擅长发现新法术与召唤帮手。',
-  heixiang: '正面硬扛的战士，擅长叠护甲与施加流血。',
-  xingyue: '擅长治疗与圣盾，用圣光法术守护自己。',
-};
 import { Sfx, _set_cardPageOpen } from '../hub/game.cardslib.js';
 import { Random, SeededRandomService } from '../core/random.js';
-import { captureBattleContext, ensureBattleReady, startBattle } from '../battle/battle-loader.js';
-import { FIRE_RESTORABLE, consumeCurrentCell, finishInstant, grantEventCard, nodeOpt, nodeShell, openPocketRestore, openShop, preloadAllNodeShellBgs, showRunTransition } from './game.run.scenes.js';
+import { startBattle } from '../battle/battle-loader.js';
+import { FIRE_RESTORABLE, consumeCurrentCell, finishInstant, grantEventCard, nodeOpt, nodeShell, openPocketRestore, openShop } from './game.run.scenes.js';
 import { RunStorage } from '../hub/game.storage.js';
 import { commitBaseAndRun, readSettlementReceipt, recoverSlot } from '../hub/recovery.commands.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
@@ -50,6 +42,14 @@ const extractionCommands = createExtractionCommands({
   addXpToProgress: SDT.Meta.addXpToProgress,
   xpMultiplier: () => MODES[game.mode]?.xpMul || 1,
 });
+
+function altarPageBinding(act) {
+  const active = nodeActionBinding(game, UI, act);
+  const slotId = getActiveSlot();
+  const surface = UI.el?.ovBody?.firstElementChild;
+  return () => active() && getActiveSlot() === slotId && !UI.el?.overlay?.hidden &&
+    (!surface || UI.el?.ovBody?.firstElementChild === surface);
+}
 
 export function openFireRest(after = finishInstant) {
   const cellKey = `${game.layerIdx},${game.trackPos}`;
@@ -164,399 +164,7 @@ export function openEntrySupply() {
 // 消耗口袋复原选牌（picks = 最多复原张数；done = 结束回调）
 // 2026-09-09 老板实测：原文字行在整屏场景壳上看不清、也不显示卡面——改为真卡面网格，点卡即复原
 // 需求 #12：消耗的装备不能在火堆复原（与道具一样）——列表里直接滤掉，不可选
-export function openClassChoice(options = {}) {
-  const characterMotion = createCharacterViewMotion();
-  const onCancel = typeof options.onCancel === 'function' ? options.onCancel : null;
-  const onSelect = typeof options.onSelect === 'function' ? options.onSelect : null;
-  const confirmLabel = onSelect ? '下一步：选择卡牌' : '出发';
-  const beforeConfirm = typeof options.beforeConfirm === 'function' ? options.beforeConfirm : null;
-  preloadAllNodeShellBgs();   // 只补首轮高频节点；其余场景在确认路线时按目标格预取
-  // 玩家停留选角页时后台准备战斗域；不占标题首屏预算，又能让首场遭遇直接进入。
-  const warmBattleRuntime = () => ensureBattleReady().catch(error => console.warn('[battle-loader] 选角页后台预取失败', error));
-  if (globalThis.scheduler?.postTask) globalThis.scheduler.postTask(warmBattleRuntime, { priority: 'background' }).catch(() => {});
-  else if (typeof requestIdleCallback === 'function') requestIdleCallback(warmBattleRuntime, { timeout: 3000 });
-  else setTimeout(warmBattleRuntime, 500);
-  if (SDT.Art && SDT.Art.warmClassRoster) SDT.Art.warmClassRoster();   // 头像条/大立绘五张 4K 图预热，防露底色（2026-09-19 走查 B8）
-  const picks = CHARACTERS.map(c => c.rulesetId).filter(cl => SDT.Cards.classPool(cl).length);
-  if (!picks.length) return;
-  game.state = 'modal';
-  // 只把合法的已有角色作为初始选择；没有旧选择时同步选中第一名角色，
-  // 避免舞台已经显示角色但提交值仍为空（预览与实际状态分离的误导）。
-  const previous = characterFor(options.initialCharacter || game.characterId || game.myClass);
-  let sel = previous && picks.includes(previous.rulesetId) ? previous.rulesetId : picks[0];
-  let confirmationStarted = false;
-  let entryPresented = false;
-  let view = 'select'; // 'select' 主选角页 | 'pool' 二级卡池页
-  const poolCount = cl => SDT.Cards.classPool(cl).length;
-  // 主选角页（2026-09-06 留言重做，排版参考杀戮尖塔 2 选人界面）：
-  // 选中角色大幅立绘居右撑满，左侧信息面板（名字/职业/熟练度），
-  // 底部全角色头像条，左下角红色返回键、右下角大确认键；卡池收进二级页
-  const render = (local = false, direction = 1) => {
-    if (view === 'pool') return renderPool();
-    const displaySel = sel || picks[0];
-    const story = characterFor(displaySel);
-    const lv = displaySel ? SDT.Meta.classLv(displaySel) : 0;
-    // 熟练度进度（真实存档数据）：xp / 升级所需，满级显示 MAX
-    const xp = displaySel ? SDT.Meta.classXP(displaySel) : 0;
-    const maxed = !!displaySel && lv >= SDT.Meta.LEVEL_MAX;
-    const need = maxed ? 0 : (lv ? SDT.Meta.xpForNext(lv) : 0);
-    const clsPct = maxed ? 100 : need ? Math.min(100, Math.round(xp / need * 100)) : 0;
-    const mechanisms = {
-      wu: ['物理进攻', '潜行 · 流血 · 连击'],
-      changwuyu: ['法术压制', '火球 · 诅咒'],
-      baita: ['奥术施法', '发现法术 · 召唤'],
-      heixiang: ['正面防线', '护甲 · 流血'],
-      xingyue: ['治疗护持', '治疗 · 圣盾 · 圣光'],
-    };
-    const mechanism = mechanisms[story?.id];
-    const roster = picks.map(cl => ({ cl, c: characterFor(cl) }));
-    const content = `
-      <div class="pg cls2-page roster-reference" data-base-departure="${!!onCancel}">
-        ${onSelect ? '<nav class="camp-steps" aria-label="出征步骤"><button data-act="cls2Quit">01 模式</button><b aria-current="step">02 人物</b><button data-act="pickClass">03 整备</button></nav>' : ''}
-        <div class="cls2-stage">
-          ${displaySel ? `<div class="cls2-fullart" data-character="${escAttr(story?.id || '')}" data-skin="${escAttr(SDT.Art.getSkin?.(displaySel) || 'default')}"><div class="roster-art-surface">${SDT.Art.classFullArt(displaySel)}</div></div>` : ''}
-          <aside class="cls2-panel" style="--cls-color:${story ? story.color : '#69aec2'}" data-wm="${escAttr(story ? story.id : '')}">
-            ${story ? `
-              <div class="cls2-nameline">
-                <h2 class="cls2-name">${esc(story.name)}</h2>
-              </div>
-              <div class="cls2-chips">
-                ${sel ? '<span class="cls2-chip cls2-chip-live">当前选择</span>' : ''}
-              </div>
-              <section class="cls2-mechanism"><b>${esc(mechanism?.[0] || story.rulesetId)}</b><p>${esc(mechanism?.[1] || '查看完整人物卡池')}</p></section>
-              <details class="cls2-growth"><summary>熟练成长 · Lv.${lv}</summary><div class="cls2-level">
-                <div class="cls2-level-num"><i>LV</i>${lv}</div>
-                <div class="cls2-level-meta">
-                  <div class="cls2-xpbar"><span style="width:${clsPct}%"></span></div>
-                  <div class="cls2-xptext">${maxed ? '熟练度已满级 MAX' : `${xp} / ${need} XP`}</div>
-                  <div class="cls2-perk">[[icon:medal]] 出征加成 ${esc(SDT.Meta.perkText(lv))}</div>
-                </div>
-              </div>
-              </details>${!onSelect ? `<details class="cls2-growth cls2-supply-rules"${SDT.Base?.data?.ammoTaught ? '' : ' open'}><summary>卡牌消耗规则 · 随时重看</summary><p>普通卡打出后进入消耗口袋；初始攻击、职业卡与衍生卡打出后直接消散。道具与装备不能在火堆复原。撤离时消耗口袋每张仅 1/3 概率带回。</p></details>` : ''}
-              ${!mechanism ? `<p class="cls2-story">${esc(CLASS_STORY[story.id] || '确认后以此人物进入远征，熟练度加成与职业卡将在确认时生效。')}</p>` : ''}
-              ${(SDT.Art.listSkins ? SDT.Art.listSkins(displaySel) : []).length ? `
-                <div class="cls2-skins-wrap">
-                  <div class="cls2-sub">皮肤 <i>SKINS</i></div>
-                  <div class="cls2-skins">
-                    ${[{ id:'default', name:'标准' }, ...SDT.Art.listSkins(displaySel)].map(s => `
-                      <button class="cls2-skin-btn${SDT.Art.getSkin(displaySel) === s.id ? ' sel' : ''}" data-act="clsSkin" data-cls="${escAttr(displaySel)}" data-skin="${escAttr(s.id)}" aria-pressed="${SDT.Art.getSkin(displaySel) === s.id}" title="${escAttr(s.name)}"><span class="cls2-skin-preview"><img src="${escAttr(SDT.Art.skinUrl(displaySel, s.id))}" alt="" loading="lazy" decoding="async"></span><span class="cls2-skin-label">${esc(s.name)}</span></button>`).join('')}
-                  </div>
-                </div>` : ''}
-              <button class="ov-btn cls2-pool-btn" data-act="clsPool" ${sel ? '' : 'disabled'}>[[icon:cards]] 完整人物卡池（${poolCount(displaySel)} 张）</button>`
-            : '<p class="cls2-hint">[[icon:medal]]<br>从下方选择一名角色</p>'}
-          </aside>
-        </div>
-        <div class="cls2-strip">${roster.map(({ cl, c }) => `
-          <button class="cls2-face${cl === sel ? ' sel' : ''}" data-act="selClass" data-cls="${escAttr(cl)}" title="${escAttr(c.name)}" aria-pressed="${cl === sel ? 'true' : 'false'}">
-            ${SDT.Art.classAvatarArt ? SDT.Art.classAvatarArt(cl) : SDT.Art.classArt(cl, true)}<b>${esc(c.name)}</b>
-          </button>`).join('')}</div>
-        <button class="archive-back" data-act="cls2Quit" title="${onSelect ? '返回基地' : onCancel ? '返回出发整备' : '返回标题界面'}" aria-label="${onSelect ? '返回基地' : onCancel ? '返回出发整备' : '返回标题界面'}"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M4 12h10M4 12l4-4M4 12l4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <button class="cls2-confirm" data-act="pickClass" ${sel ? '' : 'disabled'} title="${sel ? confirmLabel : '请先选择角色'}" aria-label="${sel ? confirmLabel : '请先选择角色'}"><span>${sel ? confirmLabel : '选择角色后出发'}</span><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      </div>`;
-    const mounted = local && document.querySelector('#overlay .cls2-page');
-    if (mounted) {
-      const template = document.createElement('template');
-      template.innerHTML = SDT.Icons?.rich ? SDT.Icons.rich(content) : content;
-      for (const selector of ['.cls2-fullart', '.cls2-panel', '.cls2-strip']) {
-        const current = mounted.querySelector(selector);
-        const next = template.content.querySelector(selector);
-        if (current && next) current.replaceWith(next);
-      }
-      characterMotion.portrait(mounted.querySelector('.cls2-fullart'), direction);
-      characterMotion.preview(mounted.querySelector('.cls2-panel'));
-    } else {
-      UI.showOverlay('', content, 'page');
-      characterMotion.enter();
-    }
-  };
-  // 二级页：角色卡冬日档案索引，保留实际卡面、左侧详情预览、分页与点击放大。
-  let poolPage = 0;
-  let poolFilter = 'all';
-  const POOL_PAGE_MAX = 10;
-  // 尾页均衡（2026-09-20 P0）：固定 10 会切出 10+4/10+7 的孤页——size = ceil(总数 / ceil(总数/10))，
-  // 14 张→7+7、17 张→9+8，两页行数接近满格
-  const poolPageSize = (pool) => {
-    const total = pool.length;
-    const totalPages = Math.max(1, Math.ceil(total / POOL_PAGE_MAX));
-    return Math.max(1, Math.ceil(total / totalPages));
-  };
-  // 分页条（2026-09-12 留言 #9/#10：原挂网格末尾会溢出浅色区压进深色底，且被页脚盖住点不了；
-  // 现由页脚承载，与「返回选角/确认」同排，renderPoolGrid 翻页时同步刷新）
-  const filteredPool = (pool = SDT.Cards.classPool(sel)) => pool
-    .map((card, index) => ({ card, index }))
-    .filter(({ card }) => poolFilter === 'all' || (card.type || '未分类') === poolFilter);
-  const poolFilterHTML = (pool = SDT.Cards.classPool(sel)) => {
-    const types = [...new Set(pool.map(card => card.type || '未分类'))];
-    const items = [{ key: 'all', label: '全部档案', count: pool.length }, ...types.map(type => ({
-      key: type, label: type, count: pool.filter(card => (card.type || '未分类') === type).length,
-    }))];
-    return items.map(({ key, label, count }) => `<button class="pool-filter${poolFilter === key ? ' active' : ''}" data-act="poolFilter" data-filter="${escAttr(key)}" aria-pressed="${poolFilter === key ? 'true' : 'false'}"><span>${esc(label)}</span><b>${count}</b></button>`).join('');
-  };
-  const poolPagerHTML = () => {
-    const pool = filteredPool();
-    const totalPages = Math.max(1, Math.ceil(pool.length / poolPageSize(pool)));
-    return `
-      <button class="hs-btn sm" data-act="poolPrev"${poolPage <= 0 || totalPages <= 1 ? ' disabled' : ''}>‹ 上一页</button>
-      <span class="pool-pageinfo">第 <b class="pool-page-now">${poolPage + 1}</b> / ${totalPages} 页 · 匹配 ${pool.length} 张</span>
-      <button class="hs-btn sm" data-act="poolNext"${poolPage >= totalPages - 1 || totalPages <= 1 ? ' disabled' : ''}>下一页 ›</button>`;
-  };
-  // 描述默认同字号；实际超出固定描述区时才逐步缩字，不省略牌效。
-  const fitPoolDescriptions = () => requestAnimationFrame(() => {
-    document.querySelectorAll('.cls-pool-page .hsc-desc, body:has(.cls-pool-page) #cardZoom:not(.cz-photo) .hsc-desc').forEach(desc => {
-      const text = desc.querySelector('span');
-      if (!text || !desc.clientHeight) return;
-      desc.style.removeProperty('--pool-desc-size');
-      let size = parseFloat(getComputedStyle(desc).fontSize);
-      while (text.scrollHeight > desc.clientHeight && size > 4) {
-        size = Math.max(4, size - .25);
-        desc.style.setProperty('--pool-desc-size', `${size}px`);
-      }
-    });
-  });
-  const poolPreviewHTML = (c) => {
-    if (!c) return '<div class="pv-empty">[[icon:cards]]</div><p class="pv-hint">选择右侧卡牌<br>这里会显示档案预览</p>';
-    return SDT.Cards.cardHTML(c, 'lg');
-  };
-  const poolGridHTML = () => {
-    const pool = filteredPool();
-    const size = poolPageSize(pool);
-    const totalPages = Math.max(1, Math.ceil(pool.length / size));
-    if (poolPage >= totalPages) poolPage = totalPages - 1;
-    const cards = pool.slice(poolPage * size, (poolPage + 1) * size);
-    if (!cards.length) return '<div class="pool-grid pool-grid-empty" id="poolGrid"><p>当前档案暂无卡牌</p></div>';
-    return `<div class="pool-grid" id="poolGrid">${cards.map(({ card: c, index }, i) => {
-      const ro = SDT.Cards.rarityOf(c);   // 衍生牌全量扫卡库，单卡只调一次
-      return `<div class="pool-cell"><span class="pool-rarity-tag${ro === '棱彩' ? ' prism' : ''}">${esc(ro)}</span><button class="lib-cardwrap pool-card-button${i === 0 ? ' selected' : ''}" data-act="poolZoom" data-i="${index}" title="点击放大查看" aria-label="查看 ${escAttr(c.name)} 详情">${SDT.Cards.cardHTML(c)}</button></div>`;
-    }).join('')}</div>`;
-  };
-  // 预解码下一页插画（翻页零解码等待，同卡牌库 warmNextLibPage）
-  const warmNextPoolPage = () => {
-    const warm = window.SDT?.Art?.warm;
-    if (!warm) return;
-    const pool = filteredPool().map(({ card }) => card);
-    const size = poolPageSize(pool);
-    const urls = [];
-    for (const c of pool.slice((poolPage + 1) * size, (poolPage + 2) * size)) {
-      const m = /src="([^"]+)"/.exec((window.SDT.Art.cardIcon && SDT.Art.cardIcon(c)) || '');
-      if (m) urls.push(m[1]);
-    }
-    warm(urls);
-  };
-  // 翻页/重进只重绘卡格区与页脚分页状态（整页 showOverlay 会重置预览栏）
-  const renderPoolGrid = () => {
-    const grid = document.getElementById('poolGrid');
-    if (grid) grid.outerHTML = poolGridHTML();
-    const filters = document.getElementById('poolFilters');
-    if (filters) filters.innerHTML = poolFilterHTML();
-    const pagerEl = document.getElementById('poolPager');
-    if (pagerEl) pagerEl.innerHTML = poolPagerHTML();
-    const pool = filteredPool();
-    const first = pool[poolPage * poolPageSize(pool)];
-    const preview = document.getElementById('poolPreview');
-    if (first && preview) {
-      preview.innerHTML = poolPreviewHTML(first.card);
-      preview.dataset.cardIndex = String(first.index);
-      characterMotion.preview(preview);
-    }
-    const count = document.getElementById('poolResultCount');
-    if (count) count.textContent = String(pool.length);
-    bindPoolFocusPreview();
-    warmNextPoolPage();
-    if (SDT.Art && SDT.Art.decodeIn) SDT.Art.decodeIn(document.querySelector('.cls-pool-page'));   // 翻页新卡显式解码，防合成黑窗
-  };
-  const renderPool = () => {
-    poolPage = 0;
-    poolFilter = 'all';
-    const pool = SDT.Cards.classPool(sel);
-    const story = characterFor(sel);
-    UI.showOverlay('', `
-      <div class="pg cls-pool-page" data-base-departure="${!!onCancel}" style="--cls-color:${story ? story.color : '#69aec2'}">
-        <header class="pg-head">
-          <button class="pool-back" data-act="clsBack" aria-label="返回选人"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 5.5 4 12l6.5 6.5M4.6 12H20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>返回</span></button>
-          <div class="pool-archive-title"><h2>角色卡池</h2></div>
-          <div class="pool-head-stats"><span class="pool-head-caption">${esc(characterName(sel))}</span><span class="pool-head-badge"><b>${pool.length}</b><small>张</small></span></div>
-        </header>
-        <div class="pool-main">
-          <aside class="pool-side">
-            <div class="pv-head">
-              <b class="pv-name">卡牌详情</b>
-            </div>
-            <div class="pv-body" id="poolPreview" aria-live="polite">${poolPreviewHTML(pool[0])}</div>
-          </aside>
-          <section class="pool-catalog" aria-label="角色卡档案">
-            <div class="pool-catalog-head"><div><span class="pool-catalog-kicker">COLLECTION INDEX</span><b>分类索引</b></div><div class="pool-result-summary">当前档案 <strong id="poolResultCount">${pool.length}</strong> 张</div></div>
-            <nav class="pool-filters" id="poolFilters" aria-label="按卡牌类型筛选">${poolFilterHTML(pool)}</nav>
-            ${poolGridHTML()}
-          </section>
-        </div>
-        <footer class="cls-foot cls-foot-pool">
-          <div class="pool-pager" id="poolPager">${poolPagerHTML()}</div>
-          <button class="ov-btn ok" data-act="pickClass">${confirmLabel}</button>
-        </footer>
-      </div>`, 'page');
-    characterMotion.enter();
-    bindPoolFocusPreview();
-    warmNextPoolPage();
-    if (SDT.Art && SDT.Art.decodeIn) SDT.Art.decodeIn(document.querySelector('.cls-pool-page'));   // 首屏卡面显式解码，防 IAB 合成黑窗（同战斗手牌修法）
-  };
-  const showPoolPreview = (el, tick = false) => {
-    const i = Number(el?.dataset?.i);
-    const c = (SDT.Cards.classPool(sel) || [])[i];
-    const pv = document.getElementById('poolPreview');
-    if (!c || !pv) return;
-    document.querySelectorAll('#poolGrid .pool-card-button.selected').forEach(node => node.classList.remove('selected'));
-    el.classList.add('selected');
-    pv.innerHTML = poolPreviewHTML(c);
-    pv.dataset.cardIndex = String(i);
-    fitPoolDescriptions();
-    characterMotion.preview(pv);
-    if (SDT.Art && SDT.Art.decodeIn) SDT.Art.decodeIn(pv);   // 侧栏 lg 大图变体显式解码，防 IAB 合成黑窗（网格小卡已解码不代表大尺寸变体可用，2026-09-20 走查实锤）
-    if (tick) Sfx.tick();
-  };
-  const bindPoolFocusPreview = () => {
-    fitPoolDescriptions();
-    const grid = document.getElementById('poolGrid');
-    if (!grid || grid.dataset.previewBound) return;
-    grid.dataset.previewBound = '1';
-    grid.addEventListener('focusin', (e) => {
-      const card = e.target.closest && e.target.closest('[data-act="poolZoom"]');
-      if (card) showPoolPreview(card);
-    });
-  };
-  // 悬停大图预览（炉石式，同卡牌库）：mouseover 因子元素冒泡重复触发，90ms 去抖
-  let poolPreviewTimer = null;
-  UI._hoverHandler = (e) => {
-    const w = e.target.closest ? e.target.closest('#poolGrid [data-act="poolZoom"]') : null;
-    if (!w) return;   // 移出卡面：保留当前预览不动
-    const i = Number(w.dataset.i);
-    if (poolPreviewTimer) clearTimeout(poolPreviewTimer);
-    poolPreviewTimer = setTimeout(() => {
-      poolPreviewTimer = null;
-      const c = (SDT.Cards.classPool(sel) || [])[i];
-      if (c) showPoolPreview(w, true);
-    }, 90);
-  };
-  UI.act('poolZoom', (d) => {
-    const list = sel ? SDT.Cards.classPool(sel) : [];
-    const c = list[Number(d.i)];
-    if (c) {
-      UI.showCardZoom(c);
-      fitPoolDescriptions();
-    }
-  });
-  UI.act('poolPrev', () => { if (poolPage > 0) { poolPage--; renderPoolGrid(); } });
-  UI.act('poolNext', () => {
-    const filtered = filteredPool();
-    const totalPages = Math.ceil(filtered.length / poolPageSize(filtered));
-    if (poolPage < totalPages - 1) { poolPage++; renderPoolGrid(); }
-  });
-  UI.act('poolFilter', (d) => {
-    if (d.filter === poolFilter) return;
-    poolFilter = d.filter || 'all';
-    poolPage = 0;
-    renderPoolGrid();
-  });
-  UI.act('selClass', (d) => {
-    if (d.cls === sel || !picks.includes(d.cls) || confirmationStarted || characterMotion.busy) return;
-    const direction = picks.indexOf(d.cls) >= picks.indexOf(sel) ? 1 : -1;
-    sel = d.cls;
-    SDT.Sound.sfx('characterSelect');
-    render(true, direction);
-  });
-  UI.act('clsPool', () => {
-    if (!sel) return;
-    characterMotion.page(() => {
-      view = 'pool';
-      Sfx.tick();
-      render();
-    });
-  });
-  UI.act('clsBack', () => {
-    characterMotion.page(() => {
-      view = 'select';
-      Sfx.tick();
-      render();
-    });
-  });
-  UI.act('clsSkin', (d) => {   // 皮肤切换（2026-09-19）：只换选人页大立绘，会话内记忆不入存档
-    if (SDT.Art.getSkin(d.cls) === d.skin) return;
-    SDT.Art.setSkin(d.cls, d.skin);
-    const url = SDT.Art.skinUrl(d.cls, d.skin);
-    document.querySelectorAll('.cls2-fullart img.art-figure, .cls2-fullart img.art-figure-back')
-      .forEach(im => {
-        im.src = url;
-        im.classList.remove('skin-swap');
-      });
-    const portrait = document.querySelector('#overlay .cls2-fullart');
-    if (portrait) portrait.dataset.skin = d.skin;
-    characterMotion.portrait(portrait);
-    document.querySelectorAll(`.cls2-skin-btn[data-cls="${d.cls}"]`)
-      .forEach(b => { const active = b.dataset.skin === d.skin; b.classList.toggle('sel', active); b.setAttribute('aria-pressed', String(active)); });
-    Sfx.tick();
-  });
-  UI.act('cls2Quit', () => {   // 基地选角按入口回流；独立进入时回标题
-    if (onCancel) { onCancel(); return; }
-    // 迭代评审 09-20 客户端岗：setTimeout(240) 时序补丁退役——exitToTitle 现在自带
-    // immediate 同步关层，淡出窗口竞态在 ui.js 层根治
-    exitToTitle();
-  });
-  const confirmClass = cl => {
-    if (confirmationStarted) return;
-    if (beforeConfirm && beforeConfirm() === false) return;
-    confirmationStarted = true;
-    if (!SDT.Base?.data?.ammoTaught) SDT.Base?.markAmmoTaught?.();
-    game.myClass = cl;
-    game.characterId = characterFor(cl).id;
-    game.classCard = null;
-    const card = SDT.Cards.randomClassCard(cl);
-    // 2026-09-06：开局获得 2 张本职业卡牌（原 1 张），尽量不重复
-    let card2 = SDT.Cards.randomClassCard(cl);
-    for (let i = 0; i < 8 && card2 && card && card2.id === card.id; i++) card2 = SDT.Cards.randomClassCard(cl);
-    UI.hideOverlay();
-    UI.log(`[[icon:medal]] 本局角色：<b>${esc(characterName(cl))}</b>`, 'ok');
-    // 熟练度加成：每级（Lv.1 起）生命上限 +1（2026-09-09 需求 #5），立即生效
-    const lv = SDT.Meta.classLv(cl);
-    if (lv > 1) {
-      const bonus = (lv - 1) * 1;
-      game.maxHp += bonus; game.hp += bonus;
-      UI.log(`[[icon:medal]] ${esc(characterName(cl))} 熟练度 <b>Lv.${lv}</b>：生命上限 +${bonus}（${game.maxHp}）`, 'ok');
-    }
-    game.entrySupply = createEntrySupply(game, [card, card2]);
-    saveGame();   // Freeze the pending cards before the departure transition.
-    // 2026-09-07 留言：选人进局要有过渡动画——复用节点过场（大门场景 + 角色名揭晓）；
-    // 启程文案按人物区分（对应各自 tag 的语气）
-    const START_LINES = {
-      wu: '刀锋出鞘，踏雪先行',
-      changwuyu: '契约既成，答案待启',
-      baita: '口袋里的星图，亮了',
-      heixiang: '最后一道防线，就位',
-      xingyue: '灯已点亮，照归途',
-    };
-    const startLine = START_LINES[characterFor(cl).id] || '整备完毕，探索开始';
-    const currentContext = captureBattleContext(game, getActiveSlot);
-    const transition = showRunTransition({
-      tone: 'door', asset: 'scene-door-bg', eyebrow: 'EXPEDITION START',
-      title: characterName(cl), detail: startLine, duration: 1600,
-      presentation: 'city-cut',
-    });
-    transition.then(completed => {
-      if (entryPresented || completed === false || !transition.isCurrent() || !currentContext()) return;
-      entryPresented = true;
-      UI.hideOverlay();
-      game.state = 'idle';
-      saveGame();
-      UI.refresh(game);
-
-    });
-  };
-  UI.act('pickClass', () => {
-    if (!sel || characterMotion.busy) return;
-    const cl = sel;
-    if (onSelect) { onSelect(cl, () => confirmClass(cl)); return; }
-    confirmClass(cl);
-  });
-  render();
-}
+export function openClassChoice(options = {}) { return requestClassChoicePage(options); }
 
 export function openDoorModal(door, cellDef) {
   game.state = 'modal';
@@ -571,14 +179,18 @@ export function openDoorModal(door, cellDef) {
       nodeOpt('goDoor', `${door.reverse ? '返回' : '进入'}${target.name}`, '', 'ok') +
       (cellDef && cellDef.type === 'shop' ? nodeOpt('doorShop', '逛商队', '闸门旁的拾荒商队还在营业') : ''),
   });
+  const active = altarPageBinding('goDoor');
+  let entering = false;
   UI.act('goDoor', () => {
+    if (!active() || entering) return;
+    entering = true;
     UI.hideOverlay();
     UI.log(`穿过隔离闸门 → <b>${target.name}</b>`, 'sys');
     // 穿门换层走镜头补间（2026-09-27 二轮动效）：壁纸交叉溶解 + 相机滑入新环，不再硬切
     enterLayer(door.toLayer, door.arriveAt, { glideCam: true });
     SDT.Sound.sfx('layerEnter');
   });
-  UI.act('doorShop', () => openShop('door:' + door.pair));
+  UI.act('doorShop', () => { if (active() && !entering) openShop('door:' + door.pair); });
   UI.refresh(game);
 }
 
@@ -620,9 +232,11 @@ export function openAltarRitual(def) {
     game.visited = game.visited || {};
     game.visited[game.layerIdx + ',' + game.trackPos] = 1;   // 激活成功才消耗本格
   };
+  const active = altarPageBinding('altarOn3');
   // 献祭道具复原（2026-09-10 需求）：1 张道具卡 → 从消耗口袋复原 2 张；
   // 每座祭坛限一次（2026-09-19 老板定版：真加一次性锁，标记随存档持久化）
   UI.act('altarItemRestore', () => {
+    if (!active() || game.altarActivated) return;
     if (game.altarItemSacrificed) { UI.log('[[icon:crystal]] 这座祭坛的道具献祭已经受理过了', 'warn'); return; }
     if (!game.ownedCards.some(o => o.card.type === '道具')) { UI.log('[[icon:bag]] 背包里没有道具卡可供献祭', 'warn'); return; }
     const restorableN = game.usedPocket.filter(p => FIRE_RESTORABLE(p.card)).length;
@@ -639,15 +253,18 @@ export function openAltarRitual(def) {
     }, () => openAltarRitual(def), '道具');
   });
   UI.act('altarOn3', () => {
+    if (!active() || game.altarActivated) return;
     if (game.ownedCards.length < 3) { UI.log('[[icon:bag]] 背包卡牌不足 3 张，无法激活祭坛', 'warn'); return; }
     openBagSacrifice(3, (chosen) => {
       markActivated();
+      game.altarRewardPending = true;
       UI.log(`[[icon:crystal]] 献上 ${chosen.map(o => `【${esc(o.card.name)}】`).join('')}——<b>祭坛苏醒了</b>，请选择一项奖励`, 'loot');
       saveGame();
       openAltarReward();
     }, () => openAltarRitual(def));
   });
   UI.act('altarFragHero', () => {
+    if (!active() || game.altarActivated || (game.fragments || 0) < 2) return;
     // 2026-09-10 留言 #30：职业缺失/英雄池为空时此前只写一条侧边日志就 return——
     // 玩家点了按钮界面毫无变化，看起来像「碎片无法激活」。改为弹窗明示，碎片原样保留。
     const pool = game.myClass ? SDT.Cards.classPool(game.myClass).filter(c => c.type === '能力卡') : [];
@@ -657,7 +274,8 @@ export function openAltarRitual(def) {
         sub: `${game.myClass ? '【' + esc(game.myClass) + '】职业目前没有可兑换的能力卡' : '还没有选定职业'}——员工通行证A碎片已原样保留（现有 ${(game.fragments || 0)} 枚）`,
         body: nodeOpt('altarFragBack', '返回祭坛', '换个方式激活，或留着碎片以后再兑'),
       });
-      UI.act('altarFragBack', () => openAltarRitual(def));
+      const backActive = altarPageBinding('altarFragBack');
+      UI.act('altarFragBack', () => { if (backActive()) openAltarRitual(def); });
       UI.refresh(game);
       return;
     }
@@ -670,7 +288,7 @@ export function openAltarRitual(def) {
     saveGame();
     finishInstant();
   });
-  UI.act('altarLeave', () => { UI.hideOverlay(); game.state = 'idle'; saveGame(); UI.refresh(game); });
+  UI.act('altarLeave', () => { if (!active()) return; UI.hideOverlay(); game.state = 'idle'; saveGame(); UI.refresh(game); });
   UI.refresh(game);
 }
 
@@ -694,7 +312,9 @@ function openAltarReward() {
       nodeOpt('altarRewardLoot', '② 传说卡 + 装备卡', '随机获取 1 张传说卡和 1 张装备卡') +
       nodeOpt('altarRewardLeave', '离开 · 稍后再选', '祭坛保持苏醒——奖励保留，回到本格可再选（奖励只能领取一次）'),
   });
+  const active = altarPageBinding('altarRewardLeave');
   UI.act('altarRewardRestore', async () => {
+    if (!active() || !game.altarRewardPending || !restorableN) return;
     game.altarRewardPending = false;   // 领取即消耗：奖励只能选一次
     const before = game.hp;
     game.heal(10);
@@ -705,6 +325,7 @@ function openAltarReward() {
     });
   });
   UI.act('altarRewardLoot', () => {
+    if (!active() || !game.altarRewardPending) return;
     game.altarRewardPending = false;   // 领取即消耗：奖励只能选一次
     const legend = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
     const equips = SDT.Cards.all().filter(c => c.type === '装备' && SDT.Cards.isRandomObtainable(c));
@@ -718,7 +339,7 @@ function openAltarReward() {
     saveGame();
     finishInstant();
   });
-  UI.act('altarRewardLeave', () => { UI.hideOverlay(); finishInstant(); });
+  UI.act('altarRewardLeave', () => { if (!active()) return; UI.hideOverlay(); finishInstant(); });
   UI.refresh(game);
 }
 
@@ -731,7 +352,9 @@ export function openBossGate() {
       sub: '三位首脑被污染祭坛的辐射护盾庇护——先激活祭坛（弃 3 张卡牌），再来挑战',
       body: nodeOpt('bossBounce', '离开', '首脑格不消耗——先去激活祭坛，随时回来挑战', 'ok'),
     });
+    const active = altarPageBinding('bossBounce');
     UI.act('bossBounce', () => {
+      if (!active()) return;
       UI.hideOverlay();
       // 首脑格未激活祭坛时不置 visited（见 resolveCell 的 ritualPending），原地离开即可；
       // 此前按「数组下标-1」回退，2000 种子里 28.2% 的落点与首脑格不相邻（等于穿墙传送）
@@ -759,13 +382,17 @@ export function openBossGate() {
       nodeOpt('fightBoss', '编组牌库，迎战首脑', '从背包选 15 张招式/装备/能力卡，附加 5 张初始攻击（混沌之眼可多带 5 张）', 'ok') +
       nodeOpt('bossLeave', '暂不挑战', '留在当前格子（本格不消耗，可再来）'),
   });
+  const active = altarPageBinding('fightBoss');
+  let starting = false;
   UI.act('fightBoss', async () => {
+    if (!active() || starting) return;
+    starting = true;
     UI.hideOverlay();
     const bossFoe = scaledEnemy(b);
     bossFoe.boss = true;   // 首脑死亡立即结束战斗（2026-09-16 留言 #25）
     await startBattle(game, bossFoe, { isBoss: true, name: b.name });
   });
-  UI.act('bossLeave', () => { UI.hideOverlay(); game.state = 'idle'; saveGame(); UI.refresh(game); });
+  UI.act('bossLeave', () => { if (!active() || starting) return; UI.hideOverlay(); game.state = 'idle'; saveGame(); UI.refresh(game); });
   UI.refresh(game);
 }
 
@@ -776,7 +403,15 @@ function openBagSacrifice(n, done, onCancel, filterType) {
   const sel = new Set();
   const back = onCancel || (() => openAltarRitual(curLayer()?.logical?.[game.trackPos]?.def));
   const eligible = filterType ? game.ownedCards.filter(o => o.card.type === filterType) : game.ownedCards;
+  const slotId = getActiveSlot(), seed = game.seed, runToken = game.discoveredPairs, map = game.layerData;
+  const layerIdx = game.layerIdx, trackPos = game.trackPos;
+  const current = () => getActiveSlot() === slotId && game.seed === seed && game.discoveredPairs === runToken &&
+    game.layerData === map && game.layerIdx === layerIdx && game.trackPos === trackPos;
+  let finished = false;
   const render = () => {
+    if (finished || !current()) return;
+    game.state = 'modal';
+    setBagReturnHook(render);
     // 2026-09-10 留言 #31/#32：原文字行看不清也看不到卡面——改为真卡面网格（口径同火堆复原），
     // 点卡选中/取消，选中卡挂黄铜图钉角标
     const rows = eligible.map(o => `
@@ -792,22 +427,31 @@ function openBagSacrifice(n, done, onCancel, filterType) {
         <button class="ov-btn ok" data-act="sacConfirm" ${sel.size !== n ? 'disabled' : ''}>[[icon:crystal]] 确认献祭</button>
         <button class="ov-btn" data-act="sacCancel">[[icon:exit]] 取消</button>
       </div>`, 'discover');
+    const active = altarPageBinding('sacConfirm');
+    UI.act('sacPick', (d) => {
+      if (finished || !active()) return;
+      const o = eligible.find(x => x.uid === d.uid);
+      if (!o) return;
+      if (sel.has(o.uid)) sel.delete(o.uid);
+      else if (sel.size < n) sel.add(o.uid);
+      Sfx.tick();
+      render();
+    });
+    UI.act('sacCancel', () => {
+      if (finished || !active()) return;
+      finished = true; setBagReturnHook(null); UI.hideOverlay(); back();
+    });
+    UI.act('sacConfirm', () => {
+      if (finished || !active()) return;
+      const chosen = eligible.filter(o => sel.has(o.uid) && game.ownedCards.includes(o));
+      if (chosen.length !== n) return;
+      finished = true;
+      setBagReturnHook(null);
+      game.ownedCards = game.ownedCards.filter(o => !sel.has(o.uid));
+      UI.hideOverlay();
+      done(chosen);
+    });
   };
-  UI.act('sacPick', (d) => {
-    const o = eligible.find(x => x.uid === d.uid);
-    if (!o) return;
-    if (sel.has(o.uid)) sel.delete(o.uid);
-    else if (sel.size < n) sel.add(o.uid);
-    Sfx.tick();
-    render();
-  });
-  UI.act('sacCancel', () => { UI.hideOverlay(); back(); });
-  UI.act('sacConfirm', () => {
-    const chosen = eligible.filter(o => sel.has(o.uid));
-    game.ownedCards = game.ownedCards.filter(o => !sel.has(o.uid));
-    UI.hideOverlay();
-    done(chosen);
-  });
   render();
 }
 
@@ -835,7 +479,8 @@ export function openEmergencyModal() {
         sub: '撤离信标没有响应——只有第三层的紧急撤离点仍在工作',
         body: nodeOpt('stayHere', '继续深入', '留在地图上，继续选择相邻节点'),
       });
-      UI.act('stayHere', () => { UI.hideOverlay(); game.state = 'idle'; UI.refresh(game); });
+      const active = altarPageBinding('stayHere');
+      UI.act('stayHere', () => { if (!active()) return; UI.hideOverlay(); game.state = 'idle'; UI.refresh(game); });
       UI.refresh(game);
       return;
     }
@@ -850,7 +495,9 @@ export function openEmergencyModal() {
           : `卡牌不足（现有 ${payment.available}/3）——至少需要 3 张卡牌`, payment.canPay ? 'ok' : '', payment.canPay ? '' : 'disabled title="至少需要 3 张卡牌"') +
         nodeOpt('stayHere', '继续深入', '留在地图上，继续选择相邻节点'),
     });
+    const active = altarPageBinding('stayHere');
     UI.act('payExit', () => {
+      if (!active()) return;
       if (!emergencyExitPaymentState(game.ownedCards.length).canPay) {
         UI.log('[[icon:cross]] 背包卡牌不足 3 张，无法支付紧急撤离的代价', 'warn');
         SDT.Sound.sfx('error');
@@ -862,7 +509,7 @@ export function openEmergencyModal() {
         doExtract();
       }, () => openEmergencyModal());
     });
-    UI.act('stayHere', () => { UI.hideOverlay(); game.state = 'idle'; UI.refresh(game); });
+    UI.act('stayHere', () => { if (!active()) return; UI.hideOverlay(); game.state = 'idle'; UI.refresh(game); });
     UI.refresh(game);
     return;
   }
@@ -883,13 +530,15 @@ export function openEmergencyModal() {
       body: nodeOpt('stayHere', '继续深入', '留在地图上，继续选择相邻节点'),
     });
   }
+  const active = altarPageBinding('stayHere');
   UI.act('payExit', () => {
+    if (!active() || !game.bossKilled) return;
     SDT.Sound.sfx('extractionConfirm');
     UI.log('启动撤离信标，准备返回基地', 'sys');
     UI.hideOverlay();
     doExtract();
   });
-  UI.act('stayHere', () => { UI.hideOverlay(); game.state = 'idle'; UI.refresh(game); });
+  UI.act('stayHere', () => { if (!active()) return; UI.hideOverlay(); game.state = 'idle'; UI.refresh(game); });
   UI.refresh(game);
 }
 
@@ -979,7 +628,8 @@ function showExtractionRetry(checkpointSaved = true) {
     ? '<p>撤离已成功，整理快照尚未确认写入。请重试保存后继续。</p><p class="ov-note">[[icon:info]] 撤离前的局面已保存——若反复失败，可以退出游戏重新进入，会回到撤离前的位置，不会重复扣卡。</p>'
     : '<p>撤离前的进度未保存，整理尚未开始。请检查存储空间或档位冲突后重试。</p><p class="ov-note">[[icon:info]] 此时退出会回到上一次成功保存的位置。</p>';
   UI.showOverlay('', `<div class="pg hub"><h2>撤离结算待恢复</h2>${message}<button class="ov-btn ok" data-act="extractRetry">重试撤离整理</button></div>`, 'page');
-  UI.act('extractRetry', () => { UI.hideOverlay(); doExtract(); });
+  const active = altarPageBinding('extractRetry');
+  UI.act('extractRetry', () => { if (!active()) return; UI.hideOverlay(); return doExtract(); });
 }
 
 function renderExtractStash() {
@@ -1071,6 +721,7 @@ function renderExtractStash() {
       </div>
     </div>`, 'page');
   UI.act('exStash', async (d) => {
+    if (!stillThisView()) return;
     const s = extractLeft[+d.i];
     if (!s) return;
     const r = B.stashRoom();
@@ -1086,6 +737,7 @@ function renderExtractStash() {
     renderExtractStash();
   });
   UI.act('exAll', async () => {
+    if (!stillThisView()) return;
     const selections = extractLeft.map(s => ({ name: s.card.name, count: s.count }));
     const saved = await extractionCommands.updateCards(selections, viewRunId, viewSlot);
     if (!stillThisView()) return;
@@ -1096,6 +748,7 @@ function renderExtractStash() {
   });
   // 智能整理（2026-09-16 留言 #27）：一键入库，数量在仓库空格内、优先价值最高的卡牌
   UI.act('exSmart', async () => {
+    if (!stillThisView()) return;
     let room = B.stashRoom();
     const ordered = extractLeft.slice().sort((a, b) => SDT.Cards.sellPrice(b.card) - SDT.Cards.sellPrice(a.card));
     const selections = [];
@@ -1113,6 +766,7 @@ function renderExtractStash() {
     renderExtractStash();
   });
   UI.act('exFinish', async () => {
+    if (!stillThisView()) return;
     // 2026-10-03 老板（SYS-02）：结算页改读「真实回执」——finish 返回值/事务收据 output 里的
     // 回执是唯一事实源；兜底只在无回执（旧路径/异常态）时用同一构造器从现场重算，不从 UI 反推。
     const pendingAtFinish = game.pendingExtraction;
@@ -1166,7 +820,7 @@ function showExtractDone(receipt) {
       <button class="ov-btn" data-act="goBase">[[icon:home]] 回基地</button>
       <button class="ov-btn ok" data-act="again">[[icon:runner]] 再出发</button>`,
   });
-  UI.act('goBase', () => { UI.hideOverlay(); openBaseHub('deploy'); });
-  UI.act('again', () => { UI.hideOverlay(); openBaseHub('deploy'); });
+  UI.act('goBase', () => openBaseHub('deploy'));
+  UI.act('again', () => openBaseHub('deploy'));
   UI.refresh(game);
 }

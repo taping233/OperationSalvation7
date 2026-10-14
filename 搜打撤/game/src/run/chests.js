@@ -18,8 +18,11 @@ import { serializeChestReward, restoreChestReward } from './chest-reward-save.js
   let saveBinding = null;
   let rewardZoom = null;
   const closeRewardZoom = () => { rewardZoom?._closeCardZoom?.(true); rewardZoom = null; };
-  const bindSave = game => ({ seed:game.seed, layerIdx:game.layerIdx, trackPos:game.trackPos, runToken:game.discoveredPairs });
-  const persistReward = () => { if (saveContext?.onCell || saveContext?.battleSettlement) G.persistSave?.(); };
+  const bindSave = game => ({ seed:game.seed, layerIdx:game.layerIdx, trackPos:game.trackPos, runToken:game.discoveredPairs, slotId:SDT.Base?.slot });
+  const isCurrentRewardRun = () => !!G && !!saveBinding && saveBinding.seed === G.seed &&
+    saveBinding.layerIdx === G.layerIdx && saveBinding.trackPos === G.trackPos &&
+    saveBinding.runToken === G.discoveredPairs && saveBinding.slotId === SDT.Base?.slot;
+  const persistReward = () => { if (isCurrentRewardRun() && (saveContext?.onCell || saveContext?.battleSettlement)) G.persistSave?.(); };
   let searchSeq = 0;   // 搜索演出代次：过期定时器不得再渲染（连开多箱/提前结束时防串台）
   let searchTimer = null, openingTimer = null, openingPresentation = null;
 
@@ -141,7 +144,8 @@ import { serializeChestReward, restoreChestReward } from './chest-reward-save.js
   function isCurrentPresentation(context) {
     return typeof document !== 'undefined' && context === openingPresentation && context.sequence === searchSeq
       && context.box === cur && context.game === G && context.seed === G?.seed
-      && !context.revealed && !UI.el?.overlay?.hidden;
+      && isCurrentRewardRun() && !context.revealed && !UI.el?.overlay?.hidden
+      && (!context.surface || UI.el?.ovBody?.querySelector('[data-eps-search]') === context.surface);
   }
   function revealOnce(context) {
     if (!isCurrentPresentation(context)) return;
@@ -449,6 +453,7 @@ import { serializeChestReward, restoreChestReward } from './chest-reward-save.js
         <img class="chest-prop ps-chest" data-chest-animated="${context.frames.length > 1}" data-chest-frame="0" src="${chestArtOf(cur)}" alt="" draggable="false">
         <span class="ps-tip">正在搜索物资…（点击立即揭晓）</span>
       </button>`, 'chest');
+    context.surface = UI.el?.ovBody?.querySelector('[data-eps-search]');
     markChestTier(cur);
     // W6-01 事实更正（2026-09-27 R2）：battle.lifecycle.js:135 的三元式
     // sfx(win===true?'victory':…) 本就在战斗结束播放胜利音——评审 rg 审计按字面
@@ -545,7 +550,9 @@ import { serializeChestReward, restoreChestReward } from './chest-reward-save.js
     }
     markChestTier(cur);
     const renderedBox = cur;
-    const isLiveReward = () => cur === renderedBox && !!UI.el?.ovBody?.querySelector('.reward-head') && !UI.el?.overlay?.hidden;
+    const surface = UI.el?.ovBody?.querySelector('.reward-v14');
+    const isLiveReward = () => isCurrentRewardRun() && cur === renderedBox && G.state === 'modal' &&
+      !!surface && UI.el?.ovBody?.querySelector('.reward-v14') === surface && !UI.el?.overlay?.hidden;
     UI.act('chestTake', () => { if (isLiveReward() && !isPick && !cur.leaveConfirm) takeAll(); });
     UI.act('chestSelect', (d) => {
       if (!isLiveReward()) return;
@@ -625,7 +632,7 @@ import { serializeChestReward, restoreChestReward } from './chest-reward-save.js
     (cur.cards || []).forEach((c, i) => {
       setTimeout(() => {
         // 测试环境拆除后定时器仍触发（逐卡揭晓音效定时器无清理通道）：document 已删时安全短路；浏览器内不可达，行为逐字不变。
-        if (typeof document === "undefined" || sequence !== searchSeq || cur !== revealed || cur.taken?.has(i)) return;
+        if (typeof document === "undefined" || !isCurrentRewardRun() || sequence !== searchSeq || cur !== revealed || cur.taken?.has(i)) return;
         const hand = UI.el?.ovBody?.querySelector('.loot-scroll .reward-objects');
         if (!hand) return;
         SDT.Sound.sfx('reveal');
@@ -667,15 +674,14 @@ import { serializeChestReward, restoreChestReward } from './chest-reward-save.js
     closeRewardZoom();
     cancelPresentation();
     searchSeq++;
-    return !!(cur || queue.length);
+    return isCurrentRewardRun() && !!(cur || queue.length);
   }
   function resume() {
     cancelPresentation();
-    if (cur) render();
+    if (isCurrentRewardRun() && cur) render();
   }
   function serialize(game) {
-    if (G !== game || !saveBinding || saveBinding.seed !== game.seed || saveBinding.layerIdx !== game.layerIdx || saveBinding.trackPos !== game.trackPos
-      || saveBinding.runToken !== game.discoveredPairs) return null;
+    if (G !== game || !isCurrentRewardRun()) return null;
     return serializeChestReward(game, queue, idx, cur, saveContext);
   }
   function restore(game, saved, done) {
@@ -694,6 +700,6 @@ import { serializeChestReward, restoreChestReward } from './chest-reward-save.js
     cancelPresentation();
     if (typeof document !== 'undefined') document.removeEventListener('sdt-overlay-mode', cancelOnModeChange);
   });
-  sdtDefine('Chests', { rollDrops, dropText, open, rollContents, configureFrameArt, isOpen: () => !!(cur || queue.length), suspend, resume, serialize, restore });
+  sdtDefine('Chests', { rollDrops, dropText, open, rollContents, configureFrameArt, isOpen: () => isCurrentRewardRun() && !!(cur || queue.length), suspend, resume, serialize, restore });
 
 export { SDT };

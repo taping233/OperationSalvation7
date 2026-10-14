@@ -15,6 +15,12 @@ const canonicalTabletopSnapshot = (snapshot) => {
   const current = cardsSyncById.get(snapshot.id);
   return current ? { ...snapshot, ...current } : snapshot;
 };
+// A marker acknowledges the stored result, including a valid no-change result.
+// A rejected or externally replaced snapshot must remain retryable.
+function markCardMigration(markerKey, cards) {
+  if (localStorage.getItem(KEY) !== JSON.stringify(cards)) return;
+  localStorage.setItem(markerKey, '1');
+}
 function backfillStructuredRuleDefinitions({ markerKey, ids, definitions, domains, extraFieldsById = {}, canonicalFieldsById = {} }) {
   try {
     if (definitions.size !== ids.length) {
@@ -274,7 +280,7 @@ export const syncSlice = {
         if (localStorage.getItem(markerKey)) return;
         // 批内内存合并、整批一次落盘（2026-09-28 审计B#6）：原实现每卡一次
         // 「全库序列化+setItem」，首批数百卡=数百次全库写，首启秒级卡顿。
-        const cards = SDT.Cards.all();
+        const cards = SDT.Cards.all().slice();
         let changed = false;
         list.forEach(c => {
           if (replacePrefix && String(c.id || '').startsWith(replacePrefix) &&
@@ -289,7 +295,10 @@ export const syncSlice = {
             changed = true;
           }
         });
-        if (changed && !SDT.Cards.saveAll(cards)) SDT.Cards.saveAll(cards);   // 与 upsert 同款失败重放一次
+        // A rejected save can mean another page replaced the full catalog.
+        // Keep that snapshot intact and retry this batch on a later invocation.
+        if (changed && !SDT.Cards.saveAll(cards)) return;
+        if (localStorage.getItem(KEY) !== JSON.stringify(cards)) return;
         localStorage.setItem(markerKey, '1');
       } catch { /* 隐私模式等场景静默跳过 */ }
     },
@@ -373,8 +382,8 @@ export const syncSlice = {
         cards.forEach(c => {
           if (c.id === 'tt7-burnharvest' && c.infuse) { delete c.infuse; }
         });
-        SDT.Cards.saveAll(cards);
-        localStorage.setItem('sdt-mig-burnharvest', '1');
+        if (!SDT.Cards.saveAll(cards)) return;
+        markCardMigration('sdt-mig-burnharvest', cards);
       } catch { /* 静默跳过 */ }
     },
 
@@ -417,8 +426,8 @@ export const syncSlice = {
           const i = cards.findIndex(c => c.id === d.id);
           if (i >= 0) cards[i] = { ...d }; else cards.push({ ...d });
         });
-        SDT.Cards.saveAll(cards);
-        localStorage.setItem(TT10_KEY, '1');
+        if (!SDT.Cards.saveAll(cards)) return;
+        markCardMigration(TT10_KEY, cards);
       } catch { /* 隐私模式等场景静默跳过 */ }
     },
     // TT10 基地材料规则回填：按稳定 id 从 TABLETOP10 定义取 rules，只补旧档规则字段。
@@ -540,8 +549,8 @@ export const syncSlice = {
           const i = cards.findIndex(c => c.id === d.id);
           if (i >= 0) cards[i] = { ...d }; else cards.push({ ...d });
         });
-        SDT.Cards.saveAll(cards);
-        localStorage.setItem(TT11_KEY, '1');
+        if (!SDT.Cards.saveAll(cards)) return;
+        markCardMigration(TT11_KEY, cards);
       } catch { /* 隐私模式等场景静默跳过 */ }
     },
 
@@ -561,8 +570,8 @@ export const syncSlice = {
           const i = cards.findIndex(c => c.id === d.id);
           if (i >= 0) cards[i] = { ...d }; else cards.push({ ...d });
         });
-        SDT.Cards.saveAll(cards);
-        localStorage.setItem(seedKey, '1');
+        if (!SDT.Cards.saveAll(cards)) return;
+        markCardMigration(seedKey, cards);
       } catch { /* 隐私模式等场景静默跳过 */ }
     },
     ensureEvents0919() {
@@ -574,8 +583,8 @@ export const syncSlice = {
           if (i >= 0) cards[i] = { ...cards[i], ...d };
           else cards.push({ ...d });
         });
-        SDT.Cards.saveAll(cards);
-        localStorage.setItem(EVENTS_0919_KEY, '1');
+        if (!SDT.Cards.saveAll(cards)) return;
+        markCardMigration(EVENTS_0919_KEY, cards);
       } catch { /* 隐私模式等场景静默跳过 */ }
     },
     // TT12 出牌前规则字段回填：只补指定定版 id 的 rules，保留旧档自定义文案与其他字段。
@@ -644,11 +653,11 @@ export const syncSlice = {
         let dirty = false;
         for (let i = cards.length - 1; i >= 0; i--) {
           if (cards[i].id === 'builtin-jinchuangyao') { cards.splice(i, 1); dirty = true; continue; }
-          const name = names[cards[i].id];
+          const name = Object.hasOwn(names, cards[i].id) ? names[cards[i].id] : undefined;
           if (name && cards[i].name !== name) { cards[i].name = name; dirty = true; }
         }
-        if (dirty) SDT.Cards.saveAll(cards);
-        localStorage.setItem(ITEM_RENAME_KEY, '1');
+        if (dirty && !SDT.Cards.saveAll(cards)) return;
+        markCardMigration(ITEM_RENAME_KEY, cards);
       } catch { /* 隐私模式等场景静默跳过 */ }
     },
 
@@ -668,8 +677,8 @@ export const syncSlice = {
           if (!defs.some(d => d.id === c.id)) return;
           if (c.rarity !== '职业') { c.rarity = '职业'; dirty = true; }
         });
-        if (dirty) SDT.Cards.saveAll(cards);
-        localStorage.setItem(TT7_KEY_V2, '1');
+        if (dirty && !SDT.Cards.saveAll(cards)) return;
+        markCardMigration(TT7_KEY_V2, cards);
       } catch { /* 隐私模式等场景静默跳过 */ }
     },
 
@@ -747,17 +756,17 @@ export const syncSlice = {
         let dirty = false;
         // ① 按 id 改归属 / 更名 / 统一职业卡形态
         cards.forEach(c => {
-          const cls = CC_REASSIGN[c.id];
+          const cls = Object.hasOwn(CC_REASSIGN, c.id) ? CC_REASSIGN[c.id] : undefined;
           if (cls) {
             if (c.cls !== cls) { c.cls = cls; dirty = true; }
             if (c.rarity !== '职业') { c.rarity = '职业'; dirty = true; }
             if (!c.unrandom) { c.unrandom = true; dirty = true; }
           }
-          const heroCls = CC_HERO_REASSIGN[c.id];
+          const heroCls = Object.hasOwn(CC_HERO_REASSIGN, c.id) ? CC_HERO_REASSIGN[c.id] : undefined;
           if (heroCls && c.cls !== heroCls) { c.cls = heroCls; dirty = true; }
-          const name = CC_RENAME[c.id];
+          const name = Object.hasOwn(CC_RENAME, c.id) ? CC_RENAME[c.id] : undefined;
           if (name && c.name !== name) { c.name = name; dirty = true; }
-          const desc = CC_DESC[c.id];
+          const desc = Object.hasOwn(CC_DESC, c.id) ? CC_DESC[c.id] : undefined;
           if (desc && c.desc !== desc) { c.desc = desc; dirty = true; }
           if (heroCls && !c.hero) { c.hero = true; dirty = true; }
         });
@@ -793,8 +802,8 @@ export const syncSlice = {
           if (CC_RETIRE.includes(c.id) && c.cls) { delete c.cls; dirty = true; }
           if (c.cls && !CC_CLASSES.includes(c.cls)) { delete c.cls; dirty = true; }
         });
-        if (dirty) SDT.Cards.saveAll(cards);
-        localStorage.setItem(CC_KEY, '1');
+        if (dirty && !SDT.Cards.saveAll(cards)) return;
+        markCardMigration(CC_KEY, cards);
       } catch { /* 隐私模式等场景静默跳过 */ }
     },
 
@@ -850,7 +859,7 @@ export const syncSlice = {
       const names = { 'tt7-imitate': '不变应万变-改', 'cmtn1wnhhym': '江湖救急-改' };
       let dirty = false;
       (Array.isArray(cards) ? cards : []).forEach(card => {
-        const name = card && names[card.id];
+        const name = card && Object.hasOwn(names, card.id) ? names[card.id] : undefined;
         if (name && card.name !== name) { card.name = name; dirty = true; }
       });
       return dirty;

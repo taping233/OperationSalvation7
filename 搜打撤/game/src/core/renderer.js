@@ -16,50 +16,68 @@ const SDT = window.SDT;
   const LINK_GAP = 24;       // 连线两端距结点边缘的留白
 
 
+  let rendererDisposed = false;
   const mapAtmosphere = new Image();
   mapAtmosphere.decoding='async';
-  mapAtmosphere.onload=()=>{backdropCanvas=null;SDT.RenderScheduler?.invalidate();};
+  mapAtmosphere.onload=()=>{if(rendererDisposed)return;backdropCanvas=null;SDT.RenderScheduler?.invalidate();};
   mapAtmosphere.src=new URL('../../assets/scenes/map-nodes/map-atmosphere-is7-1012.webp',import.meta.url).href;
   function backdropFor(){return {img:mapAtmosphere};}
   let backdropCanvas = null;               // 壁纸合成层（尺寸/层或就绪状态变化时重建）
   const drawMapCityAtmosphere = createMapCityAtmosphere(() => {
+    if (rendererDisposed) return;
     backdropCanvas = null;
     renderScheduler.invalidate();
   });
-  const backdropKey = { w: 0, h: 0, ready: false, li: -1 };
+  const backdropKey = { w: 0, h: 0, dpr: 0, ready: false, li: -1 };
   // 换层溶解状态：snap=旧层烘焙画布引用（重建不销毁旧对象，直接留用），t0=起播时刻
   const backdropFade = { snap: null, t0: 0 };
   const BACKDROP_FADE_MS = 480;
-  let backdropFadeDriving = false;
+  let backdropFadeDriving = false, backdropFadeFrame = 0;
   function driveBackdropFade() {
-    if (backdropFadeDriving || typeof requestAnimationFrame !== 'function') return;
+    if (rendererDisposed || backdropFadeDriving || typeof requestAnimationFrame !== 'function') return;
     backdropFadeDriving = true;
     const tick = (now) => {
+      backdropFadeFrame = 0;
+      if (rendererDisposed) return;
       if (backdropFade.snap && now - backdropFade.t0 < BACKDROP_FADE_MS + 60) {
         renderScheduler.invalidate();
-        requestAnimationFrame(tick);
+        backdropFadeFrame = requestAnimationFrame(tick);
       } else {
         backdropFadeDriving = false;
       }
     };
-    requestAnimationFrame(tick);
+    backdropFadeFrame = requestAnimationFrame(tick);
   }
   // 拖拽窗口防抖（迭代评审 09-20 D-P2）：拖拽时视口尺寸逐帧变化，原逻辑每帧全屏重烘焙
   // 底图（5 渐变+3 填充，10ms 级长帧连发）。尺寸连续变化期间直接复用旧底，由绘制端
   // drawImage 按目标尺寸拉伸铺满；停止 ~150ms 后置空强制重烘焙一次。
   // 壁纸 onload 置空 backdropCanvas 的强制重建路径不受影响
-  let backdropResizeTimer = null;
+  let backdropResizeTimer = null, backdropResizeKey = null;
+  function clearBackdropResize() {
+    clearTimeout(backdropResizeTimer);
+    backdropResizeTimer = null;
+    backdropResizeKey = null;
+  }
   function ensureBackdrop(cam, li) {
     const { img } = backdropFor(li);
     const ready = img.complete && img.naturalWidth > 0;
+    const dpr = window.devicePixelRatio || 1;
     const sizeChanged = backdropCanvas && (backdropKey.w !== cam.viewW || backdropKey.h !== cam.viewH);
-    if (sizeChanged && backdropKey.li === li && backdropKey.ready === ready) {
-      clearTimeout(backdropResizeTimer);
-      backdropResizeTimer = setTimeout(() => { backdropCanvas = null; SDT.RenderScheduler?.invalidate(); }, 150);
+    if (sizeChanged && backdropKey.li === li && backdropKey.ready === ready && backdropKey.dpr === dpr) {
+      const resizeKey = `${cam.viewW}x${cam.viewH}`;
+      // Only new target dimensions restart debounce; ongoing draws must not postpone it.
+      if (backdropResizeKey !== resizeKey) {
+        clearBackdropResize();
+        backdropResizeKey = resizeKey;
+        backdropResizeTimer = setTimeout(() => {
+          clearBackdropResize(); backdropCanvas = null; SDT.RenderScheduler?.invalidate();
+        }, 150);
+      }
       return backdropCanvas;
     }
+    clearBackdropResize();
     if (backdropCanvas && backdropKey.w === cam.viewW && backdropKey.h === cam.viewH &&
-        backdropKey.ready === ready && backdropKey.li === li) return backdropCanvas;
+        backdropKey.ready === ready && backdropKey.li === li && backdropKey.dpr === dpr) return backdropCanvas;
     // 换层交叉溶解（2026-09-27 二轮动效）：层变化重建前把旧壁纸快照留下，draw 里叠画淡出——
     // 原为逐层硬切（全游戏最大的场景切换零过渡）。减动效直接切。
     if (backdropCanvas && backdropKey.ready && backdropKey.li !== li &&
@@ -68,10 +86,10 @@ const SDT = window.SDT;
       backdropFade.t0 = performance.now();
       driveBackdropFade();
     }
-    backdropKey.w = cam.viewW; backdropKey.h = cam.viewH; backdropKey.ready = ready; backdropKey.li = li;
+    backdropKey.w = cam.viewW; backdropKey.h = cam.viewH; backdropKey.ready = ready; backdropKey.li = li; backdropKey.dpr = dpr;
     const c = document.createElement('canvas');
-    c.width = Math.max(1, Math.round(cam.viewW * (window.devicePixelRatio || 1)));
-    c.height = Math.max(1, Math.round(cam.viewH * (window.devicePixelRatio || 1)));
+    c.width = Math.max(1, Math.round(cam.viewW * dpr));
+    c.height = Math.max(1, Math.round(cam.viewH * dpr));
     // alpha:false：不透明烘焙层走更省显存带宽的合成路径，也规避透明纹理混合异常
     const b = c.getContext('2d', { alpha: false });
     b.scale(c.width / cam.viewW, c.height / cam.viewH);
@@ -382,7 +400,7 @@ const SDT = window.SDT;
   }
 
   function draw(ctx, game) {
-    if (!game.nodes || !game.nodes.length) return;   // 结点布局未构建前不绘制
+    if (rendererDisposed || !game.nodes || !game.nodes.length) return;   // 结点布局未构建前不绘制
     const cam = game.cam;
     // The environment remains readable beneath routes and is cached by viewport/layer.
     ctx.drawImage(ensureBackdrop(cam, game.layerIdx), 0, 0, cam.viewW, cam.viewH);
@@ -424,4 +442,15 @@ const SDT = window.SDT;
 
   }
 
-  SDT.Renderer = { draw };
+  function dispose() {
+    rendererDisposed = true;
+    clearBackdropResize();
+    if (backdropFadeFrame && typeof cancelAnimationFrame === 'function') cancelAnimationFrame(backdropFadeFrame);
+    backdropFadeFrame = 0; backdropFadeDriving = false;
+    backdropCanvas = null; backdropFade.snap = null;
+    geo = null; vignetteGrad = null;
+    mapAtmosphere.onload = null;
+  }
+
+  SDT.Renderer = { draw, dispose };
+  if (import.meta.hot) import.meta.hot.dispose(dispose);

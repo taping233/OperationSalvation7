@@ -8,7 +8,11 @@
 
 短音效优先使用 `assets/sfx/battle` 采样池，缺少素材或解码未完成时使用 WebAudio 合成音。新战斗 cue：`cardSelect`、`discard`、`burn`、`kill`、`danger`、`energyUp`、`energyDown`、`shieldUp`、`shieldBreak`、`phase`、`rarePlay`、`curseEnd`。其中 `phase` 支持 `{ side: 'foe'|'self' }`；选牌、弃牌、护盾增加和击杀使用新增 CC0 采样，其余使用短合成音。护盾增加采样以较低增益播放，截短至 420ms 并淡出；护盾增加 cue 有 220ms 冷却。
 
-音频入口重复初始化时先销毁旧 `SDT.Sound`；Vite 热更新释放当前播放器、淡出定时器和音效 AudioContext，并移除该实例的输入及可见性监听。曲目映射保持初版标题曲。此生命周期修订尚未做运行验证。
+开发试听页 `game/sfx-audition.html` 与备选音效源码继续保留；生产包只在运行模块实际引用时复制 `sfx/alternatives`、`sfx/winter-v5`、`sfx/winter-v6-ten`。当前音频入口不引用这些试听库，发布时不携带它们，实际使用的菜单、战斗和 jsfxr 采样仍复制。
+
+音频入口重复初始化时先销毁旧 `SDT.Sound`；Vite 热更新释放当前播放器、淡出定时器、音效缓存和 AudioContext，并移除该实例的输入及可见性监听。短音效共享两路加载/解码队列，销毁实例会取消在途 fetch 并拒绝尚未开始的任务；已进入原生解码的请求不能取消，其迟到结果不会再归一化或写入缓存。单个采样失败不丢弃同组成功采样，全部失败才沿用该 cue 的原回退。
+
+音效开关立即控制 SFX 总线，已排程声音也受静音控制；关闭期间调滑条只更新保存音量，重开时恢复该音量。音乐播放请求实际开始时复核最新滑条和 ducking 目标；相同起止增益直接设置音量，避免 Howler 的零差淡变定时器常驻。
 
 主页菜单悬停采样使用较低增益、0.82 倍速与 1200Hz 低通；素材未就绪时使用 520→430Hz 的柔和短音。
 

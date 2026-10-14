@@ -434,7 +434,7 @@ async function sceneFullrun(ctx) {
   check('测试局就绪', started);
   if (!started) return { final: finalSnapshot() };
   await waitSettle({ timeoutMs: 15000 });
-  const runsBefore = recorder.listRuns().length;
+  const runsBefore = new Set(recorder.listRuns().map(run => run.id));
   const trace = await autoRun({
     decide: strategicPolicy({ resetSlots: true }),
     maxSteps: options.maxSteps ?? 3000,
@@ -446,8 +446,10 @@ async function sceneFullrun(ctx) {
   check('自然收口（撤离或死亡）', LEGAL.includes(trace.stopReason),
     `stopReason=${trace.stopReason}`);
   check('无单步异常', !trace.some(t => t.phase === 'error'), `steps=${trace.length}`);
-  check('跑局记录落盘', recorder.listRuns().length > runsBefore,
-    `${runsBefore} → ${recorder.listRuns().length}`);
+  const runsAfter = recorder.listRuns();
+  const freshRuns = runsAfter.filter(run => !runsBefore.has(run.id));
+  check('跑局记录落盘', freshRuns.length > 0,
+    `新增 ${freshRuns.length} 条；缓存 ${runsBefore.size} → ${runsAfter.length}`);
   return { stopReason: trace.stopReason, steps: trace.length, final: finalSnapshot() };
 }
 

@@ -1,0 +1,175 @@
+// @vitest-environment jsdom
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+const ports = vi.hoisted(() => ({ read: vi.fn(), select: vi.fn() }));
+let harness;
+beforeEach(() => { ports.read.mockReset(); ports.select.mockReset(); ports.read.mockReturnValue({ ok:true, revision:1 }); });
+afterEach(() => { harness?.runtime.closeBase(); harness = null; vi.restoreAllMocks(); document.body.replaceChildren(); });
+async function createBrowsingHarness() {
+  vi.resetModules();
+  let activeSlot = 1;
+  const stored = new Map();
+  const freshData = () => ({ appearance: {}, wood: 1, rations: 0, coins: 100, keys: 0, stash: [], pocket: [] });
+  const host = document.createElement('div'); host.id = 'overlay';
+  document.body.replaceChildren(host);
+  const ui = {
+    el: { overlay: host }, _acts: {},
+    showOverlay(_title, html) { host.innerHTML = html; this._acts = {}; },
+    hideOverlay() { document.getElementById('cardZoom')?._closeCardZoom?.(true); host.innerHTML = ''; },
+    log: vi.fn(), act(name, handler) { this._acts[name] = handler; },
+    showCardZoom: vi.fn((card, options = {}) => {
+      document.getElementById('cardZoom')?._closeCardZoom?.(true);
+      const from = options.returnFocus || document.activeElement;
+      const zoom = document.createElement('section'); zoom.id = 'cardZoom';
+      zoom.innerHTML = `<div class="cz-backdrop"></div><button class="cz-close" type="button">关闭</button><div class="cz-card">${card.name}</div><div class="cz-foot">${options.footer || ''}</div>`;
+      zoom._closeCardZoom = () => { zoom.remove(); if (from?.isConnected) from.focus({ preventScroll: true }); };
+      zoom.addEventListener('click', event => {
+        if (event.target.closest('.cz-close,.cz-backdrop')) { zoom._closeCardZoom(); return; }
+        const button = event.target.closest('.cz-foot [data-act]');
+        if (button && !button.disabled) ui._acts[button.dataset.act]?.({ ...button.dataset });
+      });
+      document.body.append(zoom);
+    }),
+  };
+  host.addEventListener('click', event => {
+    const button = event.target.closest('[data-act]');
+    if (button && !button.disabled) ui._acts[button.dataset.act]?.({ ...button.dataset });
+  });
+  const base = {
+    get slot() { return activeSlot; }, data: freshData(), PETS: [],
+    keyCount: () => 0, pocketKeyCost: stack => stack.count || 1, stashUsed: () => 0, stashCap: () => 25, stashRoom: () => 25,
+    ownedPets: () => [], bagCap:() => 16, canUpgradeBag:() => false, canUpgradeStash:() => false,
+    restore: vi.fn(() => true), upgradeBag: vi.fn(() => true), upgradeStash: vi.fn(() => true),
+    purchase: vi.fn(({ price, material }) => {
+      if (!material || base.data.coins < price) return { ok: false, why: 'poor' };
+      base.data.coins -= price;
+      base.data[material]++;
+      return { ok: true };
+    }),
+  };
+  window.SDT = {
+    UI: ui, Base: base,
+    Cards: { all: () => [{ id: 'tt-wood', name: '木材', type: '材料卡', rarity: '古朴', desc: '用于扩建' }, { id: 'tt-rations', name: '口粮', type: '材料卡', rarity: '古朴', desc: '用于伙伴培养' }], cardHTML: card => `<span>${card.name}</span>` },
+    Sound: { music: vi.fn(), sfx: vi.fn() },
+    Art: { hydrateSelectedSkins: vi.fn() },
+    Meta: { checkUnlocks: vi.fn(), pendingAch: () => [], pendingColl: () => [] },
+    Icons: { img: () => '' },
+  };
+  vi.doMock('../game/src/run/game.session.js', () => ({
+    MAP: { rules: { bagMax:30, stashMax:100, bagUpgradeWood:2, stashUpgradeWood:2, stashUpgradeSlots:3 }, items: { wood: { name: '木材' }, rations: { name: '口粮' } } },
+    game: { state: '' }, getActiveSlot: () => activeSlot,
+    startNewGame: vi.fn(), setLobby: vi.fn(),
+  }));
+  vi.doMock('../game/src/hub/game.cardslib.js', () => ({
+    Sfx: { ding: vi.fn(), tick: vi.fn() }, configureCardNavigation: vi.fn(), _set_cardPageOpen: vi.fn(),
+  }));
+  vi.doMock('../game/src/hub/base.commands.js', () => ({ readBase: ports.read, readBaseReceipt: vi.fn(), commitBase: vi.fn() }));
+  vi.doMock('../game/src/hub/collection.commands.js', () => ({
+    convertCollection: vi.fn(), getCharacter: vi.fn(), getCollection: vi.fn(), selectSkin: ports.select, stackKeyOf: stack => `card:${stack.card.id}${stack.card.variantKey ? ':' + stack.card.variantKey : ''}`,
+  }));
+  vi.doMock('../game/src/home/home.commands.js', () => ({ createHomeCommands: () => ({}) }));
+  vi.doMock('../game/src/home/home.presenter.js', () => ({ presentHome: value => value, homeErrorMessage: value => value.message }));
+  vi.doMock('../game/src/home/home.visuals.js', () => ({ getM04VisualPack: () => ({}) }));
+  vi.doMock('../game/src/home/story.last-lamp.js', () => ({ validateLastLampState: vi.fn() }));
+  vi.doMock('../game/src/hub/game.hub.preparation.js', () => ({
+    createHubPreparationFeature: () => ({ open: vi.fn(), dispose: vi.fn(), returnToBase: vi.fn() }),
+  }));
+  vi.doMock('../game/src/hub/game.hub.depart.js', async () => {
+    const { baseHomeV3HTML } = await import('../game/src/hub/hub.home-v3.js');
+    return {
+      hubDeployHTML: () => baseHomeV3HTML({ base, meta: window.SDT.Meta, modes: { standard: { id: 'standard' }, elite: { id: 'elite', enemyMul: 1.5, coinMul: 1.5, xpMul: 1.5 } }, mode: 'standard', prepared: false, character: { id: 'wu', name: '无' }, picks: 0 }),
+      openDepartPrep: vi.fn(), deployPick: {}, setDeployPick: vi.fn(),
+    };
+  });
+  const runtime = await import('../game/src/hub/game.hub.runtime.js');
+  const click = selector => {
+    const button = host.querySelector(selector) || document.querySelector(`#cardZoom ${selector}`);
+    expect(button, `缺少可点击入口 ${selector}`).not.toBeNull();
+    button.focus();
+    button.click();
+  };
+  const scroll = value => {
+    const page = host.querySelector('.hub-page');
+    page.scrollTop = value;
+    page.dispatchEvent(new Event('scroll'));
+  };
+  return {
+    runtime, base, ui, host, click, scroll,
+    page: () => host.querySelector('.hub-page'),
+    useSlot(next) {
+      stored.set(activeSlot, base.data);
+      activeSlot = next;
+      base.data = stored.get(next) || freshData();
+    },
+  };
+}
+
+
+describe('基地恢复、扩建与外观旧动作', () => {
+  const pocketCard = { id:'audit-pocket', name:'待复原测试', type:'法术', rarity:'古朴' };
+  it.each(['restoreCard', 'upBag', 'upStash'])('换档之后旧%s不能调用新档业务命令', async action => {
+    harness = await createBrowsingHarness(); harness.base.data.pocket = [{ card:pocketCard, count:2 }];
+    harness.runtime.openBaseHub('stash'); const previous = harness.ui._acts[action];
+    harness.useSlot(2); harness.base.data.pocket = [{ card:pocketCard, count:2 }];
+    previous({ name:pocketCard.name });
+    expect(harness.base.restore).not.toHaveBeenCalled(); expect(harness.base.upgradeBag).not.toHaveBeenCalled(); expect(harness.base.upgradeStash).not.toHaveBeenCalled();
+  });
+  it('关基地后旧扩建回调不能再调用命令或重开基地', async () => {
+    harness = await createBrowsingHarness(); harness.runtime.openBaseHub('stash'); const previous = harness.ui._acts.upStash;
+    harness.runtime.closeBase(); previous(); expect(harness.base.upgradeStash).not.toHaveBeenCalled(); expect(harness.host.querySelector('#hubMain')).toBeNull();
+  });
+  it('合法复原仍调用真实当前索引；后续旧回调不能重复提交同名新堆', async () => {
+    harness = await createBrowsingHarness(); harness.base.pocketKeyCost = stack => stack.count;
+    harness.base.data.pocket = [{ card:pocketCard, count:2 }]; harness.runtime.openBaseHub('stash');
+    const previous = harness.ui._acts.restoreCard; previous({ name:pocketCard.name });
+    expect(harness.base.restore).toHaveBeenCalledExactlyOnceWith(0);
+    previous({ name:pocketCard.name }); expect(harness.base.restore).toHaveBeenCalledTimes(1);
+  });
+  it.each(['slot', 'room', 'closed'])('外观保存晚到%s之后不能播报旧选择或重绘', async kind => {
+    harness = await createBrowsingHarness(); let finish;
+    ports.select.mockImplementation(() => new Promise(resolve => { finish=resolve; }));
+    harness.runtime.openBaseHub('stash'); const pending=harness.ui._acts.selectCharacterSkin({ character:'wu', skin:'casual' });
+    if (kind==='slot') harness.useSlot(2);
+    if (kind==='room') harness.runtime.openBaseHub('upgrade');
+    if (kind==='closed') harness.runtime.closeBase();
+    harness.ui.log.mockClear(); finish({ ok:true, value:{ assetFallback:false } }); await pending;
+    expect(harness.ui.log).not.toHaveBeenCalled(); if(kind==='closed') expect(harness.host.querySelector('#hubMain')).toBeNull();
+  });
+  it('合法当前外观保存仍播报结果', async () => {
+    harness = await createBrowsingHarness(); ports.select.mockResolvedValue({ ok:true, value:{ assetFallback:false } });
+    harness.runtime.openBaseHub('stash'); await harness.ui._acts.selectCharacterSkin({ character:'wu', skin:'casual' });
+    expect(harness.ui.log).toHaveBeenCalledWith('人物皮肤已保存。', 'ok');
+  });
+});
+
+
+it('复原稳定引用在索引移动之后只提交预览的ID和variant堆', async () => {
+  harness=await createBrowsingHarness(); harness.base.pocketKeyCost=stack=>stack.count;
+  const first={card:{id:'same-id',variantKey:'first',name:'同名'},count:9};
+  const second={card:{id:'same-id',variantKey:'second',name:'同名'},count:2};
+  harness.base.data.pocket=[first,second]; harness.runtime.openBaseHub('stash');
+  harness.ui._acts.restoreCard({stackKey:'card:same-id:second',count:'2',name:'同名',i:'0'});
+  expect(harness.base.restore).toHaveBeenCalledExactlyOnceWith(1);
+});
+it('预览以后数量改变不会按更新整堆意外扣钥匙', async () => {
+  harness=await createBrowsingHarness(); harness.base.data.pocket=[{card:{id:'card',name:'复原'},count:3}]; harness.runtime.openBaseHub('stash');
+  harness.ui._acts.restoreCard({stackKey:'card:card',count:'2',name:'复原',i:'0'});
+  expect(harness.base.restore).not.toHaveBeenCalled(); expect(harness.ui.log).toHaveBeenCalledWith('口袋数量已变化，请重新打开详情','warn');
+});
+it('同页重绘后最新扩建handler仍能正常提交，旧handler已失效', async () => {
+  harness=await createBrowsingHarness(); harness.runtime.openBaseHub('stash'); const previous=harness.ui._acts.upStash;
+  previous(); expect(harness.base.upgradeStash).toHaveBeenCalledTimes(1); previous(); expect(harness.base.upgradeStash).toHaveBeenCalledTimes(1);
+  harness.ui._acts.upStash(); expect(harness.base.upgradeStash).toHaveBeenCalledTimes(2);
+});
+it('合法外观保存抛错给失败反馈并允许重新提交', async () => {
+  harness=await createBrowsingHarness(); harness.runtime.openBaseHub('stash'); ports.select.mockRejectedValueOnce(new Error('disk'));
+  await harness.ui._acts.selectCharacterSkin({character:'wu',skin:'casual'});
+  expect(harness.ui.log).toHaveBeenCalledWith('皮肤选择未保存，请重试','warn');
+  ports.select.mockResolvedValue({ok:true,value:{assetFallback:false}});
+  await harness.ui._acts.selectCharacterSkin({character:'wu',skin:'casual'}); expect(ports.select).toHaveBeenCalledTimes(2);
+});
+
+it('当前返回基地动作仍到出发主页；换档后的旧返回不抢新页', async () => {
+  harness=await createBrowsingHarness(); harness.runtime.openBaseHub('stash'); const previous=harness.ui._acts.hubHome;
+  const root=harness.host.querySelector('#hubMain'); harness.useSlot(2); previous(); expect(harness.host.querySelector('#hubMain')).toBe(root);
+  harness.runtime.openBaseHub('stash'); harness.ui._acts.hubHome(); expect(harness.host.querySelector('#hubMain').dataset.page).toBe('deploy');
+});

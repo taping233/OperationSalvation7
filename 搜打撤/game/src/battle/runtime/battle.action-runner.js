@@ -10,12 +10,14 @@ export function createBattleActionRunner({
   getActiveActionSignal, setActiveActionSignal,
   getLastPersistAt, setLastPersistAt,
   render, actionCancellationError, throwIfActionCancelled,
+  preparePresentation,
   onIdle = () => {},
 }) {
   return function queueBattleAction(execute, label = '战斗动作') {
     const battleToken = getBattleState().token;
     const generation = session.generation;
     const queue = session.actionQueue;
+    let presentationDeparted = false;
     setBattleState(transitionBattle(getBattleState(), BATTLE_PHASES.RESOLVING));
     setBusy(true);
     render();
@@ -26,7 +28,24 @@ export function createBattleActionRunner({
       }
       throwIfActionCancelled(signal);
       setActiveActionSignal(signal);
-      try { return await execute(signal); }
+      try {
+        // 选牌面板返回必须先挂载真正就绪的舞台，再执行费用、随机和逐段反馈。
+        // 无视觉层的规则测试仍保留同步开跑；取消不等待未完成的资源请求。
+        const prepared = preparePresentation?.(signal);
+        const ready = prepared && typeof prepared.then === 'function' ? await new Promise((resolve, reject) => {
+          const cancel = () => { signal.removeEventListener('abort', cancel); reject(actionCancellationError(signal)); };
+          signal.addEventListener('abort', cancel, { once: true });
+          if (signal.aborted) { cancel(); return; }
+          Promise.resolve(prepared).then(value => { signal.removeEventListener('abort', cancel); resolve(value); },
+            error => { signal.removeEventListener('abort', cancel); reject(error); });
+        }) : prepared;
+        throwIfActionCancelled(signal);
+        presentationDeparted = ready === false;
+        if (presentationDeparted || session.generation !== generation || getBattleState().token !== battleToken || !getGame()?.battleActive) {
+          throw actionCancellationError(signal);
+        }
+        return await execute(signal);
+      }
       finally { if (getActiveActionSignal() === signal) setActiveActionSignal(null); }
     })
       .catch(error => {
@@ -56,7 +75,7 @@ export function createBattleActionRunner({
             }
           }
         }
-        render();
+        if (!presentationDeparted) render();
       });
   };
 }

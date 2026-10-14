@@ -41,7 +41,9 @@ describe('选角确认的出征整备守卫', () => {
 
     const ui = {
       act(name, handler) { handlers[name] = handler; },
-      showOverlay: vi.fn(), hideOverlay,
+      showOverlay: vi.fn((_title, html) => {
+        document.body.innerHTML = `<div id="overlay"><div id="ovBody">${html}</div></div>`;
+      }), hideOverlay,
       showCardZoom: vi.fn(),
       log: vi.fn(), refresh: vi.fn(),
     };
@@ -60,7 +62,7 @@ describe('选角确认的出征整备守卫', () => {
       },
     };
     vi.stubGlobal('requestIdleCallback', vi.fn());
-    const { openClassChoice } = await import('../game/src/run/game.run.altar.js');
+    const { openClassChoice } = await import('../game/src/run/game.run.class-choice.page.js');
 
     const onSelect = vi.fn();
     openClassChoice({ beforeConfirm, onCancel: vi.fn(), ...(deferred ? { onSelect } : {}) });
@@ -79,10 +81,7 @@ describe('选角确认的出征整备守卫', () => {
     expect(hideOverlay).not.toHaveBeenCalled();
     expect(game).toMatchObject({ state: 'modal', characterId: null, myClass: null, classCard: null, ownedCards: [] });
     if (!deferred) {
-      const overlay = document.createElement('div');
-      overlay.id = 'overlay';
-      overlay.innerHTML = ui.showOverlay.mock.calls[0][1];
-      document.body.replaceChildren(overlay);
+      const overlay = document.getElementById('overlay');
       const mounted = overlay.querySelector('.cls2-page');
       handlers.selClass({ cls: '法师' });
       handlers.selClass({ cls: '战士' });

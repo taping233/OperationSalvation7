@@ -77,6 +77,21 @@ const libMotion = createPhotoStudioMotion();
 let libRenderedFilter = null;
 let libSearchComposing = false;
 let libHoverBlockedUntil = 0;
+let libPageSession = null;
+
+function isCurrentLibPage(session = libPageSession) {
+  const current = !!session && libPageSession === session && session.root.isConnected &&
+    document.querySelector('.card-library-page') === session.root && SDT.Base?.slot === session.slot;
+  if (!current && session && libPageSession === session) releaseLibPageResources(true);
+  return current;
+}
+
+function libAct(name, callback) {
+  const session = libPageSession;
+  const action = (...args) => { if (isCurrentLibPage(session)) return callback(...args); };
+  session.actions.set(name, action);
+  UI.act(name, action);
+}
 
 function matchesLibFilters(card, includeTab, q) {
   return (!includeTab || libFilter.tab === '全部' || card.type === libFilter.tab) &&
@@ -170,6 +185,7 @@ function libFiltered() {
 
 // 连续照片墙以照片 ID 定位；分类与筛选上下文独立保存浏览锚点。
 let libSearchTimer = null;
+let libHoloTimer = null;
 // 窗口化瓦片（09-29 二期·真实滚动口径归因）：占位壳常驻全量（滚动高度一次到位、
 // 滚动条不跳），视口附近的壳由 IntersectionObserver 注入卡面、离窗卸载回收——
 // DOM 与合成层数量有界（视口±2 屏，约几十张），不再随滚动/馆藏线性增长。
@@ -591,22 +607,27 @@ function bindLibGridNavigation() {
   // 网格级事件委托（focusin / 方向键），dataset.bound 保证整页生命周期只绑一次。
   if (grid.dataset.bound === '1') return;
   grid.dataset.bound = '1';
+  const session = libPageSession;
   // 拆帧兜底（10-04）：rAF 补壳链未跟上时（页面冻结恢复期/极端时序），拖到距当前
   // 底部 600px 内强制补齐，避免滚动条越拖越短的落空感；队列空时零成本短路。
   grid.addEventListener('scroll', () => {
+    if (!isCurrentLibPage(session)) return;
     libHoverBlockedUntil = Date.now() + 140;
     clearTimeout(libPreviewTimer);
     libPreviewTimer = null;
     if (_libShellQueue.length && grid.scrollTop + grid.clientHeight > grid.scrollHeight - 600) flushLibShellsNow();
   }, { passive: true });
   grid.addEventListener('focusin', (e) => {
+    if (!isCurrentLibPage(session)) return;
     const card = e.target.closest && e.target.closest('.lib-cardwrap[data-card]');
     if (card) setLibSelection(card.dataset.card);
   });
   grid.addEventListener('pointermove', e => {
+    if (!isCurrentLibPage(session)) return;
     if ((e.movementX || e.movementY) && Date.now() >= libHoverBlockedUntil) UI._hoverHandler?.(e);
   });
   grid.addEventListener('keydown', (e) => {
+    if (!isCurrentLibPage(session)) return;
     if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) return;
     const current = e.target.closest && e.target.closest('.lib-cardwrap[data-card]');
     const item = current?.closest('.lib-item');
@@ -623,14 +644,14 @@ function bindLibGridNavigation() {
         reason: 'step', direction: Math.sign(delta), axis: e.key === 'ArrowUp' || e.key === 'ArrowDown' ? 'y' : 'x',
       });
       const targetWrap = ensureLibTileMounted(all[targetIndex].id);
-      requestAnimationFrame(() => targetWrap?.focus());
+      requestAnimationFrame(() => { if (isCurrentLibPage(session)) targetWrap?.focus(); });
     }
   });
 }
 
 // 筛选后只重绘卡格区（整页 showOverlay 会重置搜索焦点、重挂全部事件）
 function renderLibGrid({ reason = 'filter', direction = 0, reset = false } = {}) {
-  if (!cardPageOpen) return;
+  if (!cardPageOpen || !isCurrentLibPage()) return;
   rememberLibBrowse();
   clearTimeout(libSearchTimer);
   libSearchTimer = null;
@@ -662,6 +683,9 @@ function renderLibGrid({ reason = 'filter', direction = 0, reset = false } = {})
   }
   const grid = document.getElementById('libGrid');
   if (grid) {
+    clearTimeout(libHoloTimer);
+    libHoloTimer = null;
+    grid.classList.remove('lib-holo');
     grid.classList.toggle('is-empty', !filtered.length);
     resetLibArtWarmup();
     // （函数首行已 stopLibTileObserver，此处无重建语句，重复调用必为空操作——2026-10-02 审计 A 档删）
@@ -715,22 +739,12 @@ function libHoloEgg() {
   if (!grid || grid.classList.contains('lib-holo')) return;
   grid.classList.add('lib-holo');
   SDT.Sound.sfx('reveal');
-  setTimeout(() => grid.classList.remove('lib-holo'), 2300);
+  libHoloTimer = setTimeout(() => { libHoloTimer = null; grid.classList.remove('lib-holo'); }, 2300);
 }
 
 function renderCardLibrary() {
-  libFilterKeyController?.abort();
+  releaseLibPageResources();
   libFilterKeyController = new AbortController();
-  rememberLibBrowse();
-  libMotion.cancelAll();
-  clearTimeout(libSearchTimer);
-  libSearchTimer = null;
-  libSearchComposing = false;
-  releaseLibTabMarker?.();
-  releaseLibTabMarker = null;
-  if (libPreviewTimer) clearTimeout(libPreviewTimer);
-  libPreviewTimer = null;
-  invalidateLibShellWork();
   const photoOpenStarted = photoFpsEnabled ? performance.now() : 0;
   setCardPageOpen(true);
   // 页面级作用域；馆内动效由 photo-studio-navigation.js 编排，不逐项驱动整库。
@@ -740,7 +754,12 @@ function renderCardLibrary() {
   // this page refresh. Designer saves/imports reopen through this function.
   libCatalog = SDT.Cards.all().slice();
   refreshLibRenderContext(libCatalog);
-  libCards = libCatalog.filter(c => c.id !== 'tt-token-color');
+  const seenIds = new Set();
+  libCards = libCatalog.filter(c => {
+    if (c.id === 'tt-token-color' || seenIds.has(c.id)) return false;
+    seenIds.add(c.id);
+    return true;
+  });
   _libSearchText = new WeakMap(libCards.map(c => [c, `${c.name || ''}\n${c.desc || ''}\n${displayCardDescription(c.desc, c.id)}`.toLowerCase()]));
   libCardById = new Map(libCards.map(card => [card.id, card]));
   libDescriptionRenderer = createCardDescriptionRenderer(libCatalog);
@@ -787,6 +806,13 @@ function renderCardLibrary() {
         <aside class="library-inspector" aria-label="选中卡牌详情"><div class="library-preview${selectedPreview ? ' has-preview' : ''}" id="libPreview" aria-live="polite">${libPreviewHTML(selectedPreview)}</div></aside>
       </div>
     </div>`, 'page');
+  const page = document.querySelector('.card-library-page');
+  const session = libPageSession = { root: page, slot: SDT.Base?.slot, actions: new Map() };
+  const signal = libFilterKeyController.signal;
+  document.addEventListener('sdt-overlay-mode', () => {
+    if (!page.isConnected || document.querySelector('.card-library-page') !== page) releaseLibPageResources(true);
+  }, { signal });
+  document.addEventListener('sdt-overlay-close', () => releaseLibPageResources(true), { signal });
   lastSavedId = null;
   bindPhotoStudioControls(document.querySelector('.studio-unified'));
   releaseLibTabMarker = bindPhotoStudioTabMarker(document.querySelector('.studio-unified .clib-tabs'));
@@ -804,29 +830,29 @@ function renderCardLibrary() {
   // 注意：lastPreviewId 在下方悬停处理段声明（函数内 let），此处不可提前赋值——
   // 昨晚"悬停去重"改动曾在此赋值触发 TDZ ReferenceError，导致后续全部 UI.act
   // 注册被跳过，卡牌库整页按钮（含右上关闭钮）无响应（老板留言：退出点不动）。
-  UI.act('closeCardPage', closeLibPage);
-  UI.act('newCard', () => { if (CARD_DESIGNER_WRITES_ENABLED) openCardDesigner(null); });
+  libAct('closeCardPage', closeLibPage);
+  libAct('newCard', () => { if (CARD_DESIGNER_WRITES_ENABLED) openCardDesigner(null); });
   // 切页签/清筛选只重绘卡格区：整页 renderCardLibrary() 会重建 245 张卡面的 HTML
   // （实测主线程阻塞 ~100ms）并重挂全部事件，而这两处改动只影响卡格与页签高亮
-  UI.act('libTab', (d) => {
+  libAct('libTab', (d) => {
     if (libFilter.tab === d.t) return;
     const categories = ['全部', ...TYPES];
     const direction = Math.sign(categories.indexOf(d.t) - categories.indexOf(libFilter.tab));
     libFilter.tab = d.t;
     renderLibGrid({ reason: 'tab', direction });
   });
-  UI.act('libClearFilter', () => {
+  libAct('libClearFilter', () => {
     libFilter = { tab: '全部', rar: '全部', cls: '全部', q: '', sort: 'rarity' };
     renderLibGrid({ reset: true });
   });
-  UI.act('libRemoveFilter', (d) => {
+  libAct('libRemoveFilter', (d) => {
     if (d.filter === 'tab') libFilter.tab = '全部';
     else if (d.filter === 'rar') libFilter.rar = '全部';
     else if (d.filter === 'cls') libFilter.cls = '全部';
     else if (d.filter === 'q') libFilter.q = '';
     renderLibGrid();
   });
-  UI.act('libEditMode', () => { libEditMode = !libEditMode; renderCardLibrary(); });
+  libAct('libEditMode', () => { libEditMode = !libEditMode; renderCardLibrary(); });
   // 选片台翻看（09-23：上一片/下一片，在当前筛选集内走，带音效）
   const navStep = (delta) => {
     libHoveredId = null;
@@ -841,22 +867,22 @@ function renderCardLibrary() {
     locateLibPhoto(list[j].id);
     setLibSelection(list[j].id, true, false, { reason: 'step', direction: delta });
   };
-  UI.act('libPrev', () => navStep(-1));
-  UI.act('libNext', () => navStep(1));
-  UI.act('libLocate', () => {
+  libAct('libPrev', () => navStep(-1));
+  libAct('libNext', () => navStep(1));
+  libAct('libLocate', () => {
     libHoveredId = null; clearTimeout(libPreviewTimer); libPreviewTimer = null;
     if (libSelectedId) locateLibPhoto(libSelectedId);
   });
-  UI.act('libCardReference', (data, trigger) => {
+  libAct('libCardReference', (data, trigger) => {
     const referenced = libDescriptionRenderer.getCard(data.cardReference);
     if (referenced) UI.showCardZoom(referenced, { ...libReferenceOptions(referenced), returnFocus: trigger });
   });
-  UI.act('editCard', (d) => {
+  libAct('editCard', (d) => {
     if (!CARD_DESIGNER_WRITES_ENABLED) return;
     const card = SDT.Cards.all().find(c => c.id === (d.card || d.id));
     if (card) openCardDesigner(card);
   });
-  UI.act('libInspect', (d, trigger) => {
+  libAct('libInspect', (d, trigger) => {
     const card = libCards.find(c => c.id === d.card);
     // 快门声+白闪是照相馆的「取照片」仪式（sfx('shutter')，静音/音效开关由 Sound 统一把关）
     SDT.Sound.sfx('shutter');
@@ -900,7 +926,7 @@ function renderCardLibrary() {
       });
     }
   });
-  UI.act('delCard', (d) => {
+  libAct('delCard', (d) => {
     if (!CARD_DESIGNER_WRITES_ENABLED) return;
     const btn = [...document.querySelectorAll('.card-library-page [data-act="delCard"][data-id]')].find(el => el.dataset.id === d.id);
     if (btn && !btn.dataset.confirm) {
@@ -916,11 +942,11 @@ function renderCardLibrary() {
     UI.log(`[[icon:trash]] 已删除卡牌【<b>${esc(card ? card.name : '')}</b>】`, 'warn');
     renderCardLibrary();
   });
-  UI.act('exportCards', () => showCardsExportOverlay());
-  UI.act('importCards', () => { if (CARD_DESIGNER_WRITES_ENABLED) showCardsImportOverlay(); });
+  libAct('exportCards', () => showCardsExportOverlay());
+  libAct('importCards', () => { if (CARD_DESIGNER_WRITES_ENABLED) showCardsImportOverlay(); });
   // 备注同步闭环（2026-09-20 老板定版）：导出 底稿+手写 合并的完整 card-notes.json，
   // 老板整文件回填 data/ 提交即完成"改的东西进数据库"
-  UI.act('exportNotes', () => {
+  libAct('exportNotes', () => {
     const blob = new Blob([exportNotes()], { type: 'application/json' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -930,7 +956,8 @@ function renderCardLibrary() {
     UI.log('[[icon:download]] 备注已导出为 card-notes.json，回填 data/ 即同步进数据库', 'ok');
   });
   // 搜索 / 稀有度筛选：只重绘卡格，保持输入焦点
-  UI._inputHandler = (e) => {
+  UI._inputHandler = session.inputHandler = (e) => {
+    if (!isCurrentLibPage(session)) return;
     let prism = false;   // 彩蛋 2 的触发条件：筛到「棱彩」
     if (e.target.id === 'cardSearch') {
       libFilter.q = e.target.value;
@@ -952,7 +979,8 @@ function renderCardLibrary() {
   // 再加 90ms 去抖——只有停留的卡才真正重建，滚动风暴中预览零重建。
   libHoveredId = null;
   bindLibGridNavigation();
-  UI._hoverHandler = (e) => {
+  UI._hoverHandler = session.hoverHandler = (e) => {
+    if (!isCurrentLibPage(session)) return;
     if (Date.now() < libHoverBlockedUntil) return;
     const w = e.target.closest ? e.target.closest('[data-card]') : null;
     const id = w ? w.dataset.card : null;
@@ -963,18 +991,20 @@ function renderCardLibrary() {
     if (!id) return;   // 移出卡面：保留当前预览不动
     libPreviewTimer = setTimeout(() => {
       libPreviewTimer = null;
+      if (!isCurrentLibPage(session)) return;
       const card = libCardById.get(id);
       if (card) setLibSelection(card.id, true);
     }, 90);
   };
-  const page = document.querySelector('.card-library-page');
   const search = document.getElementById('cardSearch');
   search?.addEventListener('compositionstart', () => {
+    if (!isCurrentLibPage(session)) return;
     libSearchComposing = true;
     clearTimeout(libSearchTimer);
     libSearchTimer = null;
   });
   search?.addEventListener('compositionend', () => {
+    if (!isCurrentLibPage(session)) return;
     libSearchComposing = false;
     libFilter.q = search.value;
     clearTimeout(libSearchTimer);
@@ -982,6 +1012,7 @@ function renderCardLibrary() {
   });
   // Run before the host overlay's capture handler: Escape dismisses the innermost choice.
   document.addEventListener('keydown', e => {
+    if (!isCurrentLibPage(session)) return;
     if (e.key !== 'Escape' || e.isComposing || e.keyCode === 229 || document.getElementById('cardZoom')) return;
     const choice = page?.querySelector('.studio-choice[open]');
     if (!choice) return;
@@ -992,6 +1023,7 @@ function renderCardLibrary() {
     }
   }, { capture: true, signal: libFilterKeyController.signal });
   if (page) page.addEventListener('keydown', (e) => {
+    if (!isCurrentLibPage(session)) return;
     if (e.isComposing) { e.stopPropagation(); return; }
     if (e.key !== '/' || e.ctrlKey || e.metaKey || /INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
     e.preventDefault(); document.getElementById('cardSearch')?.focus();
@@ -1044,19 +1076,30 @@ export async function preparePhotoStudioEntry(signal) {
   }
 }
 
-function closeLibPage() {
+// Replacing the host overlay also retires this page, without changing its successor's state.
+function releaseLibPageResources(removePageClass = false) {
+  rememberLibBrowse();
+  const session = libPageSession;
+  libPageSession = null;
+  if (session) {
+    if (UI._inputHandler === session.inputHandler) UI._inputHandler = null;
+    if (UI._hoverHandler === session.hoverHandler) UI._hoverHandler = null;
+    for (const [name, action] of session.actions) {
+      if (UI._acts?.[name] === action) delete UI._acts[name];
+    }
+    session.actions.clear();
+  }
   libFilterKeyController?.abort();
   libFilterKeyController = null;
-  rememberLibBrowse();
   libMotion.cancelAll();
   libSearchComposing = false;
-  cancelPendingCardPageEntry();
+  clearTimeout(libHoloTimer);
+  libHoloTimer = null;
   closePhotoStudioControls();
   releaseLibTabMarker?.();
   releaseLibTabMarker = null;
   if (libPreviewTimer) clearTimeout(libPreviewTimer);
   libPreviewTimer = null;
-  setCardPageOpen(false);
   clearPhotoFpsSettledTimer();
   stopPhotoFpsProbe();
   clearTimeout(libSearchTimer);
@@ -1080,12 +1123,24 @@ function closeLibPage() {
   libShellNodeById.clear();
   libFilteredPositionById.clear();
   _prevSelectedWrap = null;
+  libRenderedFilter = null;
+  if (removePageClass) document.body.classList.remove('cardlib-open');
+}
+
+function closeLibPage() {
+  if (!isCurrentLibPage()) return;
+  releaseLibPageResources();
+  cancelPendingCardPageEntry();
+  setCardPageOpen(false);
   UI.hideOverlay();
   // 摘 cardlib-open 必须等淡出（210ms）结束：提前摘会让 #overlay * 的禁动画规则
   // 集体解除、未关闭的几百张卡同时重播入场动画（09-23 留言「退出照相馆莫名闪烁」根因）；
-  // 期间若重新打开照相馆（cardPageOpen 翻真）则跳过，避免摘掉新会话的类
-  // 测试环境拆除后定时器仍触发（240ms 淡出摘类定时器无清理通道）：document 已删时安全短路；浏览器内不可达，行为逐字不变。
-  setTimeout(() => { if (typeof document === "undefined") return; if (!cardPageOpen) document.body.classList.remove('cardlib-open'); }, 240);
+  // 期间若重新打开照相馆则跳过；基地也共用 cardPageOpen，必须按真实页面根判断。
+  // 测试宿主拆除后定时器仍可能触发，document 已删时安全短路。
+  setTimeout(() => {
+    if (typeof document === 'undefined') return;
+    if (!document.querySelector('.card-library-page') && !document.getElementById('cdesStage')) document.body.classList.remove('cardlib-open');
+  }, 240);
   game.state = cardPagePrevState || 'idle';   // 从标题界面打开则回到标题，其余维持原 'idle' 行为
   cardPagePrevState = null;
   UI.refresh(game);

@@ -7,7 +7,7 @@
 import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, it } from 'vitest';
 
-const hub = readFileSync('game/src/hub/game.hub.js', 'utf8');
+const hub = readFileSync('game/src/hub/game.hub.runtime.js', 'utf8');
 const menu = readFileSync('game/src/ui/game.menu.js', 'utf8');
 const altar = readFileSync('game/src/run/game.run.altar.js', 'utf8');
 

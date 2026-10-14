@@ -187,6 +187,9 @@ export function inspectCardRuleCapability(card) {
       if (target !== undefined && (!isOperationTarget(target) || !OPERATION_TARGETS[op].includes(target))) {
         reject(`${operationPath}.target`, `Unsupported ${op} target '${String(target)}'`);
       }
+      if (op === 'damage' && field(field(operation, 'hits'), 'perFoe') !== undefined) {
+        reject(`${operationPath}.hits.perFoe`, "Unsupported damage parameter 'hits.perFoe'");
+      }
       if (op === 'acquire') {
         const filter = field(operation, 'filter');
         for (const key of isObject(filter) ? Object.keys(filter) : []) {

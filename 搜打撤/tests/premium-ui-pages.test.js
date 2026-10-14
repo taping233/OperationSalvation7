@@ -5,14 +5,18 @@ const src = (path) => readFileSync(path, 'utf8');
 
 describe('基地人物与收藏页的信息架构', () => {
   // 基地采用独立子页；页面职责由真实目标模块维护，旧侧栏/旧解释文案不作为契约。
-  const hub = src('game/src/hub/game.hub.js');
+  const hub = src('game/src/hub/game.hub.runtime.js');
   const pages = src('game/src/hub/game.hub.pages.js');
   const personnel = src('game/src/hub/hub.personnel.js');
   const archive = src('game/src/hub/hub.archive-v3.js');
 
   it('人物管理归属独立页，人物展示与招式沿用对应模块和共同卡牌翻阅', () => {
     expect(hub).toContain('data-page="${hubTab}"');
-    expect(hub).toContain("UI.act('hubHome'");
+    expect(hub).toContain("hubAct('hubHome', () => { hubTab = 'deploy'; renderHub(); });");
+    expect(hub).toContain(`const hubAct = (name, action) => UI.act(name, (...args) => {
+      if (!currentHub()) return;
+      return action(...args);
+    });`);
     expect(pages).toContain('return personnelHTML(view)');
     expect(personnel).toContain('aria-label="人物切换"');
     expect(personnel).toContain('class="pv12-agent-art"');
@@ -31,7 +35,7 @@ describe('基地人物与收藏页的信息架构', () => {
 });
 
 describe('角色卡池与收购台交互契约', () => {
-  const altar = src('game/src/run/game.run.altar.js');
+  const altar = src('game/src/run/game.run.class-choice.page.js');
   const shop = src('game/src/run/game.run.shop.js');
 
   it('角色卡池默认提供预览，并用原生按钮支持键盘焦点', () => {

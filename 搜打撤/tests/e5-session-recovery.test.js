@@ -396,3 +396,37 @@ describe('E5 real menu with real session entry', () => {
     expect(localStorage.getItem(RunStorage.key(1))).toBe(raw);
   });
 });
+
+
+describe('未选角 pending run 的同步恢复契约', () => {
+  it('loadGame同步返回恢复与持久化结果，Promise仅在返回对象并保留原run', async () => {
+    ordinary({ myClass:null, characterId:null });
+    let resolve;
+    const pending = new Promise(done => { resolve = done; });
+    const choice = vi.fn(() => pending);
+    session.configureGameRuntime({ openClassChoice:choice });
+    const loaded = session.loadGame(1);
+    expect(loaded).not.toBeInstanceOf(Promise);
+    expect(loaded.ok).toBe(true);
+    expect(loaded.classChoiceEntry).toBe(pending);
+    expect(choice).toHaveBeenCalledWith({ recoveringRun:true });
+    expect(session.game.classChoiceEntry).toBeUndefined();
+    expect(JSON.parse(localStorage.getItem(RunStorage.key(1))).classChoiceEntry).toBeUndefined();
+    expect(session.game.runActive).toBe(true); expect(session.game.myClass).toBeNull();
+    resolve(false); await expect(loaded.classChoiceEntry).resolves.toBe(false);
+    expect(RunStorage.has(1)).toBe(true);
+  });
+  it('newRun只返回首次选角就绪，失败不重复扣出征卡或重建pending run', async () => {
+    const stack = { card:{ id:'pending-departure', name:'随行卡', rarity:'古朴' }, count:2 };
+    Base.data.stash = [stack];
+    const pending = Promise.resolve(false);
+    const choice = vi.fn(() => pending);
+    session.configureGameRuntime({ openClassChoice:choice });
+    const opening = session.newRun('standard', { 随行卡:1 });
+    expect(opening).toBe(pending); await expect(opening).resolves.toBe(false);
+    expect(choice).toHaveBeenCalledOnce(); expect(Base.data.stash[0].count).toBe(1);
+    expect(session.game.runActive).toBe(true); expect(session.game.myClass).toBeNull();
+    const saved = JSON.parse(localStorage.getItem(RunStorage.key(1)));
+    expect(saved.myClass).toBeNull(); expect(saved.classChoiceEntry).toBeUndefined();
+  });
+});

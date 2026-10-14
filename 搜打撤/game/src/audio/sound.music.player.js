@@ -64,7 +64,14 @@ export class SceneMusicPlayer {
           // Keep the previous valid track audible if the next file fails to load.
           if (this.current !== entry) this.release(entry);
         },
-        play: () => { if (current()) entry.starting = false; },
+        play: () => {
+          if (!current()) return;
+          entry.starting = false;
+          // 解锁/媒体播放 Promise 可能晚于滑条和 ducking 更新，开始时采用最新目标。
+          if (this.current === entry && this.enabled && this.desired === scene && entry.targetVolume !== this.volume) {
+            this.applyVolume(entry, this.volume, 100);
+          }
+        },
         playError: () => { if (current()) entry.starting = false; },
         unlock: () => {
           if (!current()) return;
@@ -80,7 +87,7 @@ export class SceneMusicPlayer {
     } else if (entry.track.state() === 'loaded' && (changed || this.current !== entry || (!entry.track.playing() && !entry.starting))) {
       this.activate(entry);
     } else if (gainChanged && this.current === entry && entry.track.playing()) {
-      entry.track.fade(entry.track.volume(), volume, 100);
+      this.applyVolume(entry, volume, 100);
     }
   }
 
@@ -91,8 +98,17 @@ export class SceneMusicPlayer {
     this.current = entry;
     const track = entry.track;
     track.mute(false);
+    entry.targetVolume = this.volume;
     if (!track.playing()) { track.volume(0); entry.starting = true; track.play(); }
-    track.fade(track.volume(), this.volume, this.fadeInMs);
+    this.applyVolume(entry, this.volume, this.fadeInMs);
+  }
+
+  applyVolume(entry, volume, duration) {
+    entry.targetVolume = volume;
+    const from = entry.track.volume();
+    // Howler 的零差 fade 不会结束 interval；直接写音量也能取消先前的淡变。
+    if (from === volume) entry.track.volume(volume);
+    else entry.track.fade(from, volume, duration);
   }
 
   cancel(entry) {
@@ -110,7 +126,7 @@ export class SceneMusicPlayer {
     if (entry.timer !== null) return;
     const token = ++entry.token;
     track.mute(false);
-    track.fade(track.volume(), 0, this.fadeOutMs);
+    this.applyVolume(entry, 0, this.fadeOutMs);
     entry.timer = setTimeout(() => {
       entry.timer = null;
       if (entry.token !== token || (this.enabled && this.desired === entry.scene)) return;

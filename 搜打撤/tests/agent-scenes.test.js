@@ -2,7 +2,17 @@
  * 回归目标：SDT.Agent.scenes 装配与 battle/shop 场景的断言链在 jsdom 全量
  * 启动环境下自然收口（pass），防止场景与命令面/动作面漂移脱节。
  * 环境补桩与 tests/boot.test.js 同款：无 canvas/Audio 渲染，逻辑同源。 */
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
+
+// jsdom 不加载/解码美术；保持异步 ready 契约，避免规则动作等待永不触发的图片事件。
+// 真实资源屏障与动作等待分别由 battle-entry-readiness / battle-action-runner-readiness 覆盖。
+vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({
+  createBattleEntryGate: () => ({
+    begin() {}, wait() {}, cancel() {}, dispose() {}, pending: () => false,
+    ready: () => Promise.resolve(true),
+  }),
+  waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }),
+}));
 
 // 故意恒真：jsdom 无 canvas，无论原生 getContext 是否存在都强制换成本桩（lint 静音，不改逻辑）
 // eslint-disable-next-line no-constant-condition

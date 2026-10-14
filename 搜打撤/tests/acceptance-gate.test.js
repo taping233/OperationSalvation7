@@ -4,7 +4,7 @@ import os from 'node:os';
 import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 import { afterAll, describe, expect, it, vi } from 'vitest';
-import { DIRTY_SCAN_ROOTS, packageJsonScriptsOnlyDiff, parseStagedStatus, planForPaths } from '../scripts/acceptance-gate.mjs';
+import { DIRTY_SCAN_ROOTS, packageJsonScriptsOnlyDiff, parseStagedStatus, planForPaths, vitestEnvironment } from '../scripts/acceptance-gate.mjs';
 import { planForPaths as selectPlan, reverseImports } from '../scripts/gate-plan.mjs';
 
 // tsc 子进程类契约测试固有慢：默认 5s 在全量并行负载下必超时（与 boot.test 同族）
@@ -190,7 +190,7 @@ describe('分层验收选择', () => {
 
 describe('混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全）', () => {
   const { execFileSync } = require('node:child_process');
-  const { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } = require('node:fs');
+  const { chmodSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } = require('node:fs');
   const os = require('node:os');
   function mixedFixture({ dirty = true, runnable = false } = {}) {
     const repo = mkdtempSync(path.join(os.tmpdir(), 'sdt-gate-mixed-'));
@@ -259,6 +259,67 @@ describe('混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全�
     expect(calls.some(c => c[0].includes('asset-audit'))).toBe(false);
     expect(calls[5].slice(1)).toEqual(['run', '--reporter=dot', '--silent']);
     expect(result.stdout).toContain('PASS：full');
+  });
+  it('Vitest环境复制清除Git local-env-vars，保留全局与非Git配置且不修改原对象', () => {
+    const names = execFileSync('git', ['rev-parse', '--local-env-vars'], { encoding: 'utf8' }).trim().split('\n');
+    const input = Object.freeze({ ...Object.fromEntries(names.map(key => [key, 'parent-' + key])),
+      GATE_MANIFEST_OK: '1', PATH: process.env.PATH, SDT_GIT_ENV_PROBE: 'keep', GIT_OPTIONAL_LOCKS: '0' });
+    const original = { ...input };
+    const child = vitestEnvironment(input);
+    expect(child).not.toBe(input);
+    for (const key of names) expect(child).not.toHaveProperty(key);
+    expect(child).not.toHaveProperty('GATE_MANIFEST_OK');
+    expect(child).toMatchObject({ PATH: process.env.PATH, SDT_GIT_ENV_PROBE: 'keep', GIT_OPTIONAL_LOCKS: '0' });
+    expect(input).toEqual(original);
+  });
+  function installGitProbeVitest(root) {
+    writeFileSync(path.join(root, 'node_modules/vitest/vitest.mjs'), `
+import {execFileSync} from 'node:child_process';
+import {appendFileSync,existsSync,mkdirSync,writeFileSync} from 'node:fs';
+import path from 'node:path';
+const names=execFileSync('git',['rev-parse','--local-env-vars'],{encoding:'utf8'}).trim().split('\\n');
+writeFileSync('vitest-environment.json',JSON.stringify(Object.fromEntries([...names,'GATE_MANIFEST_OK','SDT_GIT_ENV_PROBE','PATH'].filter(k=>k in process.env).map(k=>[k,process.env[k]]))));
+const foreign=path.resolve('..','foreign-vitest');mkdirSync(foreign);writeFileSync(path.join(foreign,'value.txt'),'foreign fixture');
+execFileSync('git',['init','-q'],{cwd:foreign});execFileSync('git',['add','value.txt'],{cwd:foreign});
+if(!existsSync(path.join(foreign,'.git/index')))throw new Error('foreign Git fixture inherited the hook index');
+appendFileSync('calls.jsonl',JSON.stringify(process.argv.slice(1))+'\\n');
+`);
+  }
+  it('正常commit --only hook保留门索引，只隔离full Vitest的foreign Git夹具环境', () => {
+    const { repo, root, gitAt } = mixedFixture({ dirty: false, runnable: true }); cleanups.push(repo);
+    installGitProbeVitest(root);
+    const recorder = path.join(repo, '.git/record-hook-env.mjs');
+    writeFileSync(recorder, `import {writeFileSync} from 'node:fs';writeFileSync(${JSON.stringify(path.join(root, 'hook-environment.json'))},JSON.stringify({GIT_INDEX_FILE:process.env.GIT_INDEX_FILE,GIT_CONFIG_PARAMETERS:process.env.GIT_CONFIG_PARAMETERS,PATH:process.env.PATH}));`);
+    const hook = path.join(repo, '.git/hooks/pre-commit');
+    writeFileSync(hook, `#!/bin/sh\n${JSON.stringify(process.execPath)} ${JSON.stringify(recorder)} || exit $?\nexec ${JSON.stringify(process.execPath)} ${JSON.stringify(path.join(root, 'scripts/acceptance-gate.mjs'))} --staged --force-full --run\n`);
+    chmodSync(hook, 0o755);
+    const result = spawnSync('git', ['-c', 'user.name=F', '-c', 'user.email=f@x.invalid', 'commit', '--only', '-m', 'fixture normal hook', '搜打撤/scripts/mine.mjs'],
+      { cwd: repo, encoding: 'utf8', env: { ...process.env, SDT_GIT_ENV_PROBE: 'preserved-full' } });
+    expect(result.status, result.stderr + result.stdout).toBe(0);
+    expect(result.stdout + result.stderr).toContain('PASS：full');
+    const hookEnv = JSON.parse(readFileSync(path.join(root, 'hook-environment.json'), 'utf8'));
+    expect(hookEnv.GIT_INDEX_FILE).toBeTruthy();
+    const child = JSON.parse(readFileSync(path.join(root, 'vitest-environment.json'), 'utf8'));
+    expect(child).toMatchObject({ SDT_GIT_ENV_PROBE: 'preserved-full', PATH: hookEnv.PATH });
+    expect(Object.keys(child).filter(k => k.startsWith('GIT_') || k === 'GATE_MANIFEST_OK')).toEqual([]);
+    expect(gitAt('diff', '--cached', '--name-only').trim()).toBe('');
+  });
+  it('target Vitest同样隔离repo-local Git环境，保留其他变量且不改调用环境', () => {
+    const { repo, root, gitAt } = mixedFixture({ dirty: false, runnable: true }); cleanups.push(repo);
+    installGitProbeVitest(root);
+    writeFileSync(path.join(root, 'tests/selected.test.js'), '// selected fixture');
+    const indexBefore = gitAt('ls-files', '--stage');
+    const env = { ...process.env, GIT_INDEX_FILE: path.join(repo, '.git/index'), GIT_DIR: path.join(repo, '.git'), GIT_WORK_TREE: repo,
+      GATE_MANIFEST_OK: '1', SDT_GIT_ENV_PROBE: 'preserved-target' };
+    const original = { ...env };
+    const result = spawnSync(process.execPath, [path.join(root, 'scripts/acceptance-gate.mjs'), '--target-tests', 'tests/selected.test.js'],
+      { cwd: root, encoding: 'utf8', env });
+    expect(result.status, result.stderr + result.stdout).toBe(0);
+    const child = JSON.parse(readFileSync(path.join(root, 'vitest-environment.json'), 'utf8'));
+    expect(child).toMatchObject({ SDT_GIT_ENV_PROBE: 'preserved-target', PATH: process.env.PATH });
+    expect(Object.keys(child).filter(k => k.startsWith('GIT_') || k === 'GATE_MANIFEST_OK')).toEqual([]);
+    expect(env).toEqual(original);
+    expect(gitAt('ls-files', '--stage')).toBe(indexBefore);
   });
   it('强制full拒绝以quick冻结证据代替', () => {
     const result = spawnSync(process.execPath, ['scripts/acceptance-gate.mjs', '--staged', '--force-full', '--reuse', 'quick.json', '--run'], { cwd: process.cwd(), encoding: 'utf8' });

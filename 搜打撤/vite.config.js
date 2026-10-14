@@ -5,15 +5,25 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { collectVerifiedRuntimeAssetAliases } from './scripts/runtime-asset-aliases.mjs';
 import { minifyStandaloneCssAssets } from './scripts/css-asset-minification.mjs';
+import {
+  collectUnreferencedDevelopmentSfxPrefixes, fontLicenseFileNames,
+  shouldPublishRuntimeAsset, includeRuntimeThumbnailMetadata,
+} from './scripts/runtime-asset-publication.mjs';
+import {
+  assertExcludedRuntimeAssetReferences, assertRuntimeExclusionPlanUnchanged,
+  collectReviewedRuntimeAssetExclusions,
+} from './scripts/runtime-asset-redundancy.mjs';
 
 // 逐文件读写拷贝：copyFileSync 在 Windows 下对只读源文件会 EPERM，read+write 则正常
-function copyDir(src, dest, relativePrefix = '') {
+function copyDir(src, dest, relativePrefix = '', excludedPrefixes = new Set()) {
+  if (!shouldPublishRuntimeAsset(relativePrefix, excludedPrefixes, reviewedRuntimeAssetExclusions)) return;
   mkdirSync(dest, { recursive: true });
   for (const e of readdirSync(src, { withFileTypes: true })) {
     const s = path.join(src, e.name), d = path.join(dest, e.name);
     const relativeAsset = relativePrefix ? `${relativePrefix}/${e.name}` : e.name;
-    if (e.isDirectory()) copyDir(s, d, relativeAsset);
+    if (e.isDirectory()) copyDir(s, d, relativeAsset, excludedPrefixes);
     else {
+      if (!shouldPublishRuntimeAsset(relativeAsset, excludedPrefixes, reviewedRuntimeAssetExclusions)) continue;
       if (getAliasedDuplicateAssets().has(relativeAsset)) continue;
       // 只读残留会令 writeFileSync EPERM，且 rmSync 对只读文件静默失败，先清属性再删
       try { chmodSync(d, 0o666); } catch { /* 不存在则忽略 */ }
@@ -31,14 +41,13 @@ function clearGeneratedDir(dir) {
   }
   if (!existsSync(dir)) return;
   // node 的 rmSync 在部分环境下会静默失败（不删除也不报错），旧哈希产物因此逐次堆积；
-  // 改用系统原生命令删除，删除后必须校验目录确实消失，失败则大声警告并给出手动命令
+  // 改用系统原生命令删除，删除后必须校验目录确实消失；失败时停止，避免混叠旧产物。
   const nativeRemove = process.platform === 'win32'
     ? `rd /s /q "${dir}"`
     : `rm -rf "${dir}"`;
   try { execSync(nativeRemove, { stdio: 'ignore' }); } catch { /* 由下方 existsSync 兜底校验 */ }
   if (existsSync(dir)) {
-    console.warn('[assets] WARNING: 旧产物目录删除失败，本次构建将与旧产物混叠！');
-    console.warn(`[assets] 请先手动执行删除再构建: ${nativeRemove}`);
+    throw new Error(`旧产物目录清理失败，构建已停止：${dir}`);
   } else {
     console.log(`[assets] cleared generated directory: ${dir}`);
   }
@@ -59,6 +68,7 @@ const IMAGE_EXT_RE = /\.(webp|png|jpe?g|gif|svg)$/i;
 const ITEM_ART_ALIAS = Object.freeze({ id: 'tt-token-color', target: 'cmtmvq6ss84l' });
 let aliasedDuplicateAssets = null;
 let verifiedRuntimeAssetAliases = null;
+let reviewedRuntimeAssetExclusions = new Set();
 
 function getVerifiedRuntimeAssetAliases() {
   if (!verifiedRuntimeAssetAliases) verifiedRuntimeAssetAliases = collectVerifiedRuntimeAssetAliases(ASSETS_ROOT);
@@ -101,7 +111,7 @@ function collectImageFiles(dir, prefix = '') {
 function writeArtManifest() {
   const omittedAliases = getAliasedDuplicateAssets();
   const files = ART_MANIFEST_DIRS.flatMap(dir => collectImageFiles(path.join(GAME_ROOT, 'assets', dir), dir))
-    .filter(file => !omittedAliases.has(file));
+    .filter(file => !omittedAliases.has(file) && !reviewedRuntimeAssetExclusions.has(file));
   const target = path.join(GAME_ROOT, 'src', 'generated', 'art-manifest.js');
   writeFileSync(
     target,
@@ -118,7 +128,7 @@ function writeArtManifest() {
 function writeThumbManifest() {
   const omittedAliases = getAliasedDuplicateAssets();
   const files = collectImageFiles(path.join(GAME_ROOT, 'assets', 'thumbs'))
-    .filter(file => !omittedAliases.has(`thumbs/${file}`)).sort();
+    .filter(file => includeRuntimeThumbnailMetadata(file, omittedAliases, getVerifiedRuntimeAssetAliases())).sort();
   const target = path.join(GAME_ROOT, 'src', 'generated', 'thumb-manifest.js');
   writeFileSync(
     target,
@@ -164,6 +174,7 @@ function copyStatic() {
     config(_config, { command }) {
       verifiedRuntimeAssetAliases = null;
       aliasedDuplicateAssets = null;
+      reviewedRuntimeAssetExclusions = new Set();
       return {
         define: {
           __RUNTIME_ASSET_ALIASES__: JSON.stringify(command === 'build'
@@ -177,6 +188,10 @@ function copyStatic() {
       // rather than inheriting an alias decision from the previous build.
       verifiedRuntimeAssetAliases = null;
       aliasedDuplicateAssets = null;
+      const publication = collectReviewedRuntimeAssetExclusions(ROOT);
+      reviewedRuntimeAssetExclusions = publication.excludedAssets;
+      for (const warning of publication.warnings) console.warn(`[assets] ${warning}`);
+      console.log(`[assets] reviewed unused production images omitted: ${reviewedRuntimeAssetExclusions.size}`);
       clearGeneratedDir(OUT_DIR);
       console.log(`[assets] cleared generated directory: ${OUT_DIR}`);
       // 模块解析前重写清单，保证本次构建的新增/删除图片立即生效
@@ -185,10 +200,25 @@ function copyStatic() {
     },
     closeBundle() {
       const srcAssets = path.join(GAME_ROOT, 'assets');
+      const runtimeModules = typeof this?.getModuleIds === 'function'
+        ? [...this.getModuleIds()].map(id => this.getModuleInfo(id)).filter(Boolean)
+        : null;
+      assertRuntimeExclusionPlanUnchanged(reviewedRuntimeAssetExclusions,
+        collectReviewedRuntimeAssetExclusions(ROOT).excludedAssets);
+      assertExcludedRuntimeAssetReferences(runtimeModules, reviewedRuntimeAssetExclusions);
+      const excludedPrefixes = collectUnreferencedDevelopmentSfxPrefixes(runtimeModules, srcAssets);
       for (const relativeDir of RUNTIME_ASSET_DIRS) {
         const source = path.join(srcAssets, relativeDir);
-        if (existsSync(source)) copyDir(source, path.join(OUT_DIR, 'assets', relativeDir), relativeDir.split(path.sep).join('/'));
+        if (existsSync(source)) copyDir(source, path.join(OUT_DIR, 'assets', relativeDir), relativeDir.split(path.sep).join('/'), excludedPrefixes);
       }
+      if (excludedPrefixes.size) console.log(`[assets] omitted unused development SFX libraries: ${[...excludedPrefixes].join(', ')}`);
+      const fontLicenses = fontLicenseFileNames(srcAssets);
+      if (fontLicenses.length) {
+        const target = path.join(OUT_DIR, 'assets', 'fonts');
+        mkdirSync(target, { recursive: true });
+        for (const name of fontLicenses) writeFileSync(path.join(target, name), readFileSync(path.join(srcAssets, 'fonts', name)));
+      }
+      console.log(`[assets] font license documents copied verbatim: ${fontLicenses.length}`);
       writeFileSync(path.join(OUT_DIR, 'version.json'), readFileSync(path.join(GAME_ROOT, 'version.json')));
       patchAssetVersions();
       // 哨兵：正常构建产出 1 个入口 + 1 个异步 index chunk（共 2 个）；更多说明旧产物未清掉
@@ -274,6 +304,8 @@ export default defineConfig({
           // 卡牌定义与目录解析是稳定内容数据层：独立缓存，但仍是静态启动依赖，
           // perf-budget 的首屏总量会继续完整计入该 chunk。
           if (/\/game\/src\/(?:cards\/cards\.(?:data|catalog|consts)|core\/data-loader)\.js$/.test(normalized)) return 'game-card-catalog';
+          // Canvas 兼容只在 WebGL 不可用时加载；不可并回普通 renderer 预载块。
+          if (/\/node_modules\/(?:pixi\.js-legacy\/|@pixi\/canvas-)/.test(normalized)) return 'vendor-render-canvas';
           if (/[\\/]node_modules[\\/](pixi\.js|@pixi)[\\/]/.test(id)) return 'vendor-render';
           if (/[\\/]node_modules[\\/]inkjs[\\/]/.test(id)) return 'vendor-narrative';
           if (/[\\/]node_modules[\\/](howler|motion)[\\/]/.test(id)) return 'vendor-runtime';

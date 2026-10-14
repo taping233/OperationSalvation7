@@ -8,6 +8,7 @@ import { WU_FRAME_SEQUENCES, WU_FRAME_SIZE, wuTimeline } from './battle.frame-ca
 import { CHANGWUYU_FRAME_SEQUENCES, CHANGWUYU_FRAME_SIZE, changwuyuTimeline } from './battle.frame-catalog-changwuyu.js';
 import { THREE_ROLE_FRAME_SEQUENCES, THREE_ROLE_FRAME_SIZE, threeRoleTimeline } from './battle.frame-catalog-three-role.js';
 import { registerDefeatPresenter } from '../core/battle.presentation.js';
+import { loadFrameRenderer } from './battle.frame-renderer.js';
 
 // ---------- 战斗单位序列帧播放器（批次D：Pixi 材质层） ----------
 // 定调（老板 2026-09-12）：动画路线 = Pixi 材质层 + 序列帧，跳过 Spine；敌人本轮不上序列帧；
@@ -54,11 +55,17 @@ let renderHoldT = 0;
 let lifecycle = 0;
 let releasePromise = null;
 
+function cancelTextureRecord(record) {
+  if (record.cancelled) return;
+  record.cancelled = true;
+  record.controller.abort();
+}
+
 function releaseTextureSets() {
   if (releasePromise) return releasePromise;
   const entries = [...texSets];
   texSets.clear();
-  for (const [, record] of entries) record.cancelled = true;
+  for (const [, record] of entries) cancelTextureRecord(record);
   if (!entries.length) return Promise.resolve();
 
   const pending = (async () => {
@@ -85,7 +92,7 @@ async function evictOtherTextureSets(keepRole, Assets, Texture) {
   for (const [role, record] of texSets) {
     if (role === keepRole) continue;
     texSets.delete(role);
-    record.cancelled = true;
+    cancelTextureRecord(record);
     if (sprite && cur?.role === role) sprite.texture = Texture.EMPTY;
     evictions.push(record.complete.then(async () => {
       for (const url of record.urls) {
@@ -155,10 +162,11 @@ async function portraitFillOf(role, img) {
 
 function ensureApp() {
   if (appPromise) return appPromise;
+  let host, app, resizeObserver, createdSprite;
   appPromise = (async () => {
-    const { Application, Sprite, Texture } = await import('pixi.js');
+    const { Application, Sprite, Texture, RENDERER_TYPE } = await loadFrameRenderer();
     const ov = document.getElementById('overlay');
-    const host = document.createElement('div');
+    host = document.createElement('div');
     host.id = 'unitFrames';
     host.hidden = true;
     host.setAttribute('aria-hidden', 'true');
@@ -166,7 +174,7 @@ function ensureApp() {
     // z-index 6：盖过单位区(2)/手牌常态，低于 hover 卡(9+)/aimArrow(60)/红闪(70)/飘字(80)
     host.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:6;';
     if (ov) ov.appendChild(host);
-    const app = new Application({
+    app = new Application({
       // antialias 关闭：帧图是预烘 webp 纹理，纹理采样自带双线性过滤，MSAA 对
       // 纹理四边形毫无收益，只烧全屏 MSAA 带宽。
       resizeTo: ov || window, backgroundAlpha: 0, antialias: false,
@@ -176,8 +184,10 @@ function ensureApp() {
       autoDensity: true,
       autoStart: false, powerPreference: 'low-power',
     });
+    host.dataset.renderer = app.renderer.type === RENDERER_TYPE.CANVAS ? 'canvas' : 'webgl';
     host.appendChild(app.view);
-    sprite = new Sprite();
+    createdSprite = new Sprite();
+    sprite = createdSprite;
     emptyTexture = Texture.EMPTY;
     sprite.anchor.set(0.5, 1);   // 底部中心锚点：脚底对齐
     app.stage.addChild(sprite);
@@ -187,10 +197,16 @@ function ensureApp() {
     // 画布尺寸变化会清空 WebGL 后备缓冲：置脏补一帧，否则脏标记跳帧会在
     // resize 后留一帧空画布。
     if (typeof ResizeObserver !== 'undefined') {
-      new ResizeObserver(() => { if (cur) cur.dirty = true; }).observe(app.view);
+      resizeObserver = new ResizeObserver(() => { if (cur) cur.dirty = true; });
+      resizeObserver.observe(app.view);
     }
     return { app, host };
   })().catch(error => {
+    // 初始化失败只清理这次创建的资源；重试不能留下重复宿主或旧观察器。
+    resizeObserver?.disconnect();
+    try { app?.destroy(true, { children: true }); } catch { /* 部分初始化的应用可能无法销毁 */ }
+    host?.remove();
+    if (sprite === createdSprite) { sprite = null; emptyTexture = null; }
     console.warn('[SDT.BattleFrames] PixiJS init failed:', error);
     appPromise = null;
     return null;
@@ -198,15 +214,16 @@ function ensureApp() {
   return appPromise;
 }
 
-function loadSet(role) {
+function loadSet(role, battleToken) {
   if (texSets.has(role)) return texSets.get(role).ready;
   const perfProbeStarted = import.meta.env.DEV && new URLSearchParams(location.search).has('perfProbe')
     ? performance.now() : 0;
   let resolveReady;
   const record = { set: new Map(), boxes: new Map(), seqs: new Map(), urls: [], cancelled: false,
+    battleToken, controller: new AbortController(),
     ready: new Promise(resolve => { resolveReady = resolve; }), complete: null };
   // 新角色在同步段取消旧任务，避免初始化期间两个角色互等卸载。
-  for (const [otherRole, other] of texSets) if (otherRole !== role) other.cancelled = true;
+  for (const [otherRole, other] of texSets) if (otherRole !== role) cancelTextureRecord(other);
   texSets.set(role, record);
   const refreshSequences = () => {
     for (const [action, names] of Object.entries(FRAME_SEQUENCES[role])) {
@@ -227,13 +244,21 @@ function loadSet(role) {
       // 包围盒测量走独立 fetch（与 Assets.load 同 URL 命中缓存）：不依赖 Pixi 纹理内部
       // 结构拿位图，v8 的 source.resource 在部分环境下不可用，拿不到会让全部 box 为空、
       // sprite 退化到画布原点（人物消失）。
-      const boxP = (async () => {
-        const resp = await fetch(url);
+      const boxProbe = (async () => {
+        const resp = await fetch(url, { signal: record.controller.signal });
         const bmp = await createImageBitmap(await resp.blob());
-        const box = measureAlphaBox(bmp, bmp.width, bmp.height);
-        bmp.close();
-        return box;
+        try { return record.cancelled ? null : measureAlphaBox(bmp, bmp.width, bmp.height); }
+        finally { bmp.close(); }
       })().catch(() => null);
+      // fetch 可取消，位图解码本身不可取消；停止等待但仍接住迟到位图并释放它。
+      const boxP = new Promise(resolve => {
+        const signal = record.controller.signal;
+        const finish = box => { signal.removeEventListener('abort', cancel); resolve(box); };
+        const cancel = () => finish(null);
+        if (signal.aborted) { resolve(null); return; }
+        signal.addEventListener('abort', cancel, { once: true });
+        boxProbe.then(finish);
+      });
       try {
         const tex = await Assets.load(url);
         record.urls.push(url); // 取消期间完成的请求也必须纳入卸载。
@@ -276,19 +301,23 @@ function loadSet(role) {
 
 function isLiveBattleFigure(body, fig) {
   const currentBody = document.getElementById('ovBody');
-  return !!(body && fig && wanted && fig.isConnected && body === currentBody && body.contains(fig) && fig.closest('.battle-stage.sts'));
+  const overlay = document.getElementById('overlay');
+  return !!(body && fig && wanted && overlay && !overlay.hidden && overlay.contains(body)
+    && fig.isConnected && body === currentBody && body.contains(fig) && fig.closest('.battle-stage.sts'));
 }
 
 function hostVisible(v) {
   if (!appPromise) return;
-  appPromise.then(rt => { if (rt) rt.host.hidden = !v; });
+  const token = lifecycle;
+  appPromise.then(rt => { if (rt && token === lifecycle) rt.host.hidden = !v; });
 }
 
 // —— 渲染开关：静止期停 renderer，仅低频轮询 ——
 function wakeRenderer(holdMs = 350) {
   if (!appPromise) return;
+  const token = lifecycle;
   appPromise.then(rt => {
-    if (!rt) return;
+    if (!rt || !wanted || token !== lifecycle) return;
     const { app } = rt;
     app.start();
     clearTimeout(renderHoldT);
@@ -431,7 +460,7 @@ function startLoop() {
     app.ticker.add(() => {
       tickLoop();
       // 脏标记跳帧：纹理与 rect 都没变的 tick 直接跳过 renderer.render，
-      // 上一帧内容继续显示（WebGL 画布不清屏就保持）；maxFPS=30 已封顶频率。
+      // 上一帧内容继续显示（两种 canvas 后端均保留已绘画面）；帧率按角色封顶。
       if (cur && cur.dirty && cur.fig && cur.fig.isConnected) {
         cur.dirty = false;
         app.renderer.render(app.stage);
@@ -467,8 +496,9 @@ function attach(body) {
   const fig = body?.querySelector('#btSelf .sts-figure');
   const img = fig?.querySelector('img');
   const role = figureRole(img);
-  if (pendingAttach?.body === body && pendingAttach.fig === fig && pendingAttach.img === img && pendingAttach.role === role) return pendingAttach.promise;
-  const request = { body, fig, img, role, promise: null };
+  const battleToken = fig?.closest('.battle-stage')?._battleToken;
+  if (pendingAttach?.battleToken === battleToken && pendingAttach?.body === body && pendingAttach.fig === fig && pendingAttach.img === img && pendingAttach.role === role) return pendingAttach.promise;
+  const request = { body, fig, img, role, battleToken, promise: null };
   pendingAttach = request;
   request.promise = attachCurrent(body).finally(() => { if (pendingAttach === request) pendingAttach = null; });
   return request.promise;
@@ -480,6 +510,11 @@ async function attachCurrent(body) {
   const img = fig && fig.querySelector('img');
   if (!fig || !img) { hide(); return; }
   const role = figureRole(img);
+  const stage = fig.closest('.battle-stage');
+  const battleToken = stage?._battleToken;
+  const isCurrentFigure = () => stage?._battleToken === battleToken && isLiveBattleFigure(body, fig);
+  if (cur && (cur.role !== role || cur.battleToken !== battleToken)) clearCurrentFigure();
+  if (texSets.has(role) && texSets.get(role).battleToken !== battleToken) releaseTextureSets();
   if (!role || !HAS_FRAMES.has(role)) { hide(); return; }
   if (fixedFrameRole(role)) {
     // 统一静态兜底与序列帧，并保留原玩家槽位的立绘高度。
@@ -502,12 +537,12 @@ async function attachCurrent(body) {
   if (token !== lifecycle) { restoreStatic(); return; }
   const rt = await ensureApp();
   if (!rt || token !== lifecycle) { restoreStatic(); return false; }
-  const set = await loadSet(role);
+  const set = await loadSet(role, battleToken);
   // 资源探测是异步的：战斗可能已结束并切到搜刮/奖励页，旧 fig 即使仍有引用也不能复活帧层。
-  if (!set || token !== lifecycle || !isLiveBattleFigure(body, fig)) { restoreStatic(); return false; }
+  if (!set || token !== lifecycle || !isCurrentFigure()) { restoreStatic(); return false; }
   const fill = await portraitFillOf(role, img);
   // 量立绘占比也是异步的，fig 可能在等待期间随战斗结束被移除，复活前再查一次。
-  if (token !== lifecycle || !isLiveBattleFigure(body, fig)) { restoreStatic(); return; }
+  if (token !== lifecycle || !isCurrentFigure()) { restoreStatic(); return; }
   if (cur && cur.role === role) {
     // 同战斗内重渲染：只换 DOM 引用（ovBody 重建后 fig/img 是新节点），不重置播放状态，
     // 否则出牌结算的多次 render 会把正在播的攻击/受击动作打断
@@ -521,7 +556,7 @@ async function attachCurrent(body) {
   const ov = document.getElementById('overlay');
   const ovR = ov ? uiRect(ov) : { left: 0, top: 0 };   // 布局口径：layout() 里 sprite 换算用
   cur = {
-    role, fig, img, set: set.set, seqs: set.seqs, boxes: set.boxes,
+    role, battleToken, fig, img, set: set.set, seqs: set.seqs, boxes: set.boxes,
     portraitFill: fill, curBox: null, baseCharH: 0, imgBottom: 0, centerX: 0,
     play: null, fi: 0, tNext: 0, resumeAfter: null,
     fallback: set.seqs.get('idle')[0], lastRect: null, ovLeft: ovR.left, ovTop: ovR.top,
@@ -590,6 +625,17 @@ function setPaused(paused) {
   if (cur && Number.isFinite(cur.tNext)) cur.tNext += elapsed;
 }
 
+// 仅同一场次复用动作；换场不能继承倒地锁或旧结算等待。
+function clearCurrentFigure() {
+  const host = document.getElementById('unitFrames');
+  if (host) host.hidden = true;
+  if (cur?.deathStage && cur.deathStage._battleToken === cur.battleToken) cur.deathStage.inert = cur.oldInert;
+  cur?.deathResolve?.();
+  if (cur?.img) cur.img.style.visibility = '';
+  cur = null;
+  if (sprite && emptyTexture) sprite.texture = emptyTexture;
+}
+
 // 战斗收尾/弹层挂起：卸下 sprite，恢复静态 img
 function hide() {
   setPaused(false);
@@ -597,11 +643,8 @@ function hide() {
   if (pendingAttach?.img) { pendingAttach.img.style.visibility = ''; imageOwners.delete(pendingAttach.img); }
   pendingAttach = null;
   wanted = false;
-  if (cur?.deathStage) cur.deathStage.inert = cur.oldInert;
-  cur?.deathResolve?.();
-  if (cur && cur.img) cur.img.style.visibility = '';
-  cur = null;
-  if (sprite && emptyTexture) sprite.texture = emptyTexture;
+  clearCurrentFigure();
+  clearTimeout(renderHoldT); renderHoldT = 0;
   // 先同步收起 overlay 直下的宿主，避免战斗结束后搜刮/奖励弹层出现一帧残留立绘；
   // 后续 attach 仍会复用同一宿主并重新显示，不影响返回战斗。
   const host = document.getElementById('unitFrames');
@@ -637,5 +680,6 @@ function armBattleEndHide() {
 // 2026-09-13 留言（白名单）：人物序列帧只允许出现在 battle 模式的弹层里——
 // 奖励/搜刮/背包/卡牌库等任何其他模式渲染时一律卸下，新增界面默认不在白名单。
 document.addEventListener('sdt-overlay-mode', (e) => { if (e.detail !== 'battle') hide(); });
+document.addEventListener('sdt-overlay-close', hide);
 
 export { attach, play, hide, isLiveBattleFigure, cacheStats, setPaused, presentDeath };

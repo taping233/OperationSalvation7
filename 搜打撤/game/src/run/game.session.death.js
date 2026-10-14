@@ -177,8 +177,8 @@ export function createDeathSettlement({
             : (token.hadCards ? '<p class="ov-note">安全格里没有卡牌——把卡存进背包安全格（基地用口粮升级），倒下时才抢得回来。</p>' : '')}
           <div class="doom-btns"><button class="ov-btn" data-act="goBase">[[icon:home]] 回基地</button><button class="ov-btn ok" data-act="again">[[icon:skull]] 再出发</button></div>
         </div>`, 'doom');
-      UI.act('goBase', () => { UI.hideOverlay(); runtime.openBaseHub('deploy'); });
-      UI.act('again', () => { UI.hideOverlay(); runtime.openBaseHub('deploy'); });
+      UI.act('goBase', () => runtime.openBaseHub('deploy'));
+      UI.act('again', () => runtime.openBaseHub('deploy'));
       UI.refresh(game);
       return true;
     };

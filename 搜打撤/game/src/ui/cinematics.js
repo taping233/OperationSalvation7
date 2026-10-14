@@ -10,9 +10,29 @@ import { esc } from '../core/shared.js';
  * @property {{pop: (el: HTMLElement) => void, reduceMotion: () => boolean}} [Motion]
  * @property {{cardHTML: (card: *, cls?: string) => string, rarityOf?: (card: *) => string}} Cards
  * @property {{sfx: (name: string) => void}} Sound
- * @property {{runActive: boolean, battleActive?: boolean}} [game]
+ * @property {{runActive: boolean, battleActive?: boolean, discoveredPairs?: Set<unknown>}} [game]
+ * @property {{slot?: number|string}} [Base]
  */
 const SDT = /** @type {SdtCinematicsSurface} */ (/** @type {any} */ (window).SDT);
+
+/** @type {WeakMap<HTMLElement, ReturnType<typeof setTimeout>>} */
+const screenHideTimers = new WeakMap();
+/** @param {HTMLElement} el */
+function cancelScreenHide(el) {
+  const timer = screenHideTimers.get(el);
+  if (timer !== undefined) clearTimeout(timer);
+  screenHideTimers.delete(el);
+}
+
+/** @typedef {{runActive: boolean, slot: number|string|undefined, runToken: Set<unknown>|undefined}} RewardContext */
+/** @returns {RewardContext} */
+function rewardContext() {
+  return { runActive: !!SDT.game?.runActive, slot: SDT.Base?.slot, runToken: SDT.game?.discoveredPairs };
+}
+/** @param {RewardContext} a @param {RewardContext} b */
+function sameRewardContext(a, b) {
+  return a.runActive === b.runActive && a.slot === b.slot && a.runToken === b.runToken;
+}
 
 export const cinematicsMethods = {
   // 数值变化时弹跳一下（retrigger 动画）
@@ -50,7 +70,7 @@ export const cinematicsMethods = {
   // 与传说特写同壳（#cardGet 复用 #legendGet 的样式与动画），传说卡保留金色光柱与
   // legend 音效，其余卡为中性演出 + gain 音效。多张连发走队列逐张播放。
   // reason：可选的获得原因文字（2026-09-20 老板——发牌点要说明为什么给这张牌）
-  /** @type {Array<{card: *, reason: (string|undefined), context: {runActive: boolean}}>} */
+  /** @type {Array<{card: *, reason: (string|undefined), context: RewardContext}>} */
   _cardGetQueue: [],
   _cardGetShowing: false,
   /** @param {*} card @param {string} [reason] */
@@ -58,8 +78,8 @@ export const cinematicsMethods = {
     if (!card) return;
     // 对局归属快照（2026-09-28 代码线）：演出队列自驱与场景解耦，多张连发时玩家
     // 中途「回主菜单/回基地」会让剩余卡盖在新界面上并吞掉首次点击。入队记快照，
-    // 出队校验，已换局则整队作废。
-    const context = { runActive: !!(SDT.game && SDT.game.runActive) };
+    // 出队按档位和内存对局身份校验；newRun/loadGame 都重建 discoveredPairs。
+    const context = rewardContext();
     this._cardGetQueue.push({ card, reason, context });
     if (this._cardGetShowing) return;
     this._cardGetShowing = true;
@@ -68,11 +88,11 @@ export const cinematicsMethods = {
       if (typeof document === "undefined") return;
       const next = this._cardGetQueue.shift();
       if (!next) { this._cardGetShowing = false; return; }
-      if ((!!(SDT.game && SDT.game.runActive)) !== next.context.runActive) {
+      const current = rewardContext();
+      if (!sameRewardContext(current, next.context)) {
         // 逐条校验（复核建议）：只丢与旧局绑定的条目；队列里若还有归属当前局的
         // 合法卡（后续 showCardReward 追加），继续播放而不是整队丢弃
-        const current = !!(SDT.game && SDT.game.runActive);
-        this._cardGetQueue = this._cardGetQueue.filter(e => e.context.runActive === current);
+        this._cardGetQueue = this._cardGetQueue.filter(e => sameRewardContext(e.context, current));
         if (this._cardGetQueue.length) { showNext(); return; }
         this._cardGetShowing = false;
         return;
@@ -113,6 +133,7 @@ export const cinematicsMethods = {
   /** @param {(HTMLElement & {_scrToken?: number, _scrHiding?: boolean}|null)} el */
   showScreen(el) {
     if (!el) return;
+    cancelScreenHide(el);
     el._scrToken = (el._scrToken || 0) + 1;   // 作废进行中的隐藏计时
     el._scrHiding = false;
     el.classList.remove('scr-out');
@@ -136,13 +157,14 @@ export const cinematicsMethods = {
     }
     el.classList.add('scr-out');
     el.style.pointerEvents = 'none';   // 淡出窗口内拦截点击，防连点重入
-    setTimeout(() => {
+    screenHideTimers.set(el, setTimeout(() => {
+      if (el._scrToken !== token) return;   // 期间被 showScreen 重新拉起，不能清除新退场锁
+      screenHideTimers.delete(el);
       el.style.pointerEvents = '';
       el._scrHiding = false;
-      if (el._scrToken !== token) return;   // 期间被 showScreen 重新拉起
       el.classList.remove('scr-out');
       el.hidden = true;
       if (after) after();
-    }, 240);
+    }, 240));
   },
 };

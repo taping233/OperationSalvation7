@@ -76,6 +76,21 @@ describe('卡牌展示文案与结算文本隔离', () => {
     expect(holder.querySelector('.hs-card').dataset.ruleDensity).toBe('dense');
     expect(holder.querySelector('.hsc-desc').classList.contains('xlong')).toBe(true);
   });
+
+  it.each([
+    "选择 '火球' 并抽 1 张牌。",
+    '<img src="x" data-x=\'2\'> & 抽 1 张牌。',
+    "字面 &#39; 与 ' 不得混淆；造成 4-6 点法术伤害。",
+    "注能（2）：获得 '火球'。",
+    '造成 -1、+2、⁺3、⁻4、2.5、4-6 点伤害。',
+    '<b>甲 +9</b>，造成 4 点法术伤害。',
+  ])('自定义规则富文本逐字保留转义文本：%s', raw => {
+    const holder = document.createElement('div');
+    holder.innerHTML = descRich(raw, 'custom-rules-copy');
+    expect(holder.textContent).toBe(raw);
+    expect(holder.querySelector('img, script, iframe')).toBeNull();
+    expect([...holder.querySelectorAll('.d-num')].some(node => node.textContent === '39')).toBe(raw.includes('&#39;'));
+  });
 });
 
 describe('照相馆引用与搜索文案', () => {
@@ -104,5 +119,16 @@ describe('照相馆引用与搜索文案', () => {
     expect(holder.querySelector('img')).toBeNull();
     expect(holder.textContent).toBe(raw);
     expect(holder.querySelector('[data-card-reference="tt3-fireball"]')?.textContent).toBe('火球');
+  });
+
+  it('引用链接与搜索强调不改变单引号或产生实体伪数值', () => {
+    const renderer = createCardDescriptionRenderer(cards);
+    const raw = "选择 '火球'，并抽 1 张牌。";
+    const holder = document.createElement('div');
+    holder.innerHTML = renderer.render(raw, 'custom-rules-copy', '火球');
+    expect(holder.textContent).toBe(raw);
+    expect(holder.querySelector('[data-card-reference="tt3-fireball"]')?.textContent).toBe('火球');
+    expect(holder.querySelector('.studio-search-hit')?.textContent).toBe('火球');
+    expect([...holder.querySelectorAll('.d-num')].map(node => node.textContent)).toEqual(['1']);
   });
 });

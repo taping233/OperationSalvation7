@@ -6,8 +6,9 @@ import { Random } from '../../core/random.js';
 import * as Combat from '../core/combat.js';
 import { itemTargetSideFor } from '../effects/battle.target-rules.js';
 import { getHostedExecutionCard } from '../effects/battle.hosted.js';
-import { G, foes, mode, energy, busy, infusing, discovering, choosing, handSelecting, viewingGrave, selectingDeck, viewingBag, pstat, floats, consumed, hand, cardAnims, delayed, set$energy, set$viewingBag, battleState } from '../runtime/battle.runtime.js';
+import { G, foes, mode, energy, busy, infusing, discovering, choosing, handSelecting, viewingGrave, selectingDeck, viewingBag, pstat, floats, consumed, grave, hand, cardAnims, delayed, set$energy, set$viewingBag, battleState } from '../runtime/battle.runtime.js';
 import { slamSkillFor, SLAM_SKILL_PRIEST_FLIPPED } from './battle.slam-skill.js';
+import { removeUid } from './battle.piles.js';
 
 export function createBattleBag({
   requestBattleRender, clearTargetSession, cancelInteraction, beginSpecialTargeting, interactionOf,
@@ -22,6 +23,7 @@ export function createBattleBag({
     let cnt = 0;
     while (cnt < n && consumed.length) {
       const uid = consumed.pop();
+      removeUid(grave, uid);
       hand.push(uid);
       const o = findCard(uid);
       cardAnims.push({ kind: 'draw', uid, name: o ? o.card.name : '' });
@@ -403,20 +405,11 @@ export function createBattleBag({
         // 点选取消、目标失效或前摇取消不占次数；实际扣费才算本回合使用。
         slamUsedToken = battleState.token; slamUsedTurn = getTurn();
         SDT.Sound.sfx('strike');
-        const hpBefore = t.hp;
-        const shieldBefore = t.defense?.shield || 0;
-        // 结算源对齐现有链：战士攻击带攻升（status.atkUp，同打一张初始攻击）；
-        // 火球/牧师翻面带法强与 spellUp（同 battle.engine consumeFireballSteps 深渊降焰口径）
-        const source = skill.kind === 'attack' ? { atk: G.atk, status: pstat.status }
-          : (skill.kind === 'fireball' || skill.kind === 'spell') ? { atk: G.atk, spellPower: G.spellPower || 0, status: pstat.status }
-          : { atk: G.atk };
+        // 技能伤害与卡牌共用命中门：庇护、元素庇幕与心模式不能被技能绕过。
+        // hitFoe 已负责伤害浮字及伤害后的潜行破除，本处只保留技能日志和击杀奖励。
         const type = (SLAM_DAMAGE_TYPE[skill.kind] || SLAM_DAMAGE_TYPE.fixed)();
-        const r = Combat.dealDamage(source, t, skill.dmg || 0, type);
-        const shieldBreak = shieldBefore > 0 && !(t.defense?.shield || 0);
-        if (r.dealt > 0 || shieldBreak) floats.push({ unit: foes.indexOf(t),
-          text: r.dealt > 0 ? '-' + r.dealt : '护盾破碎', cls: r.dealt > 0 ? 'dmg' : 'block',
-          shieldBreak, hpBefore, hpAfter: t.hp, maxHp: t.maxHp });
-        G.log(`[[icon:${skill.icon}]] <b>${esc(skill.name)}</b>${skill.kind === 'fireball' ? '施放 1 次火球 → ' : ' → '}${esc(t.name)}：造成 <b>${r.dealt}</b> 点${Combat.TYPE_NAME[type]}（-${skill.cost} 能量）`, 'sys');
+        const dealt = hitFoe(t, { name: skill.name, desc: '' }, skill.dmg || 0, type, '');
+        G.log(`[[icon:${skill.icon}]] <b>${esc(skill.name)}</b>${skill.kind === 'fireball' ? '施放 1 次火球 → ' : ' → '}${esc(t.name)}：造成 <b>${dealt}</b> 点${Combat.TYPE_NAME[type]}（-${skill.cost} 能量）`, 'sys');
         sweepDead();
         // 击杀数必须在 sweepDead 之后取（dealDamage 只扣血不标倒下）：此前先取后清，
         // 砸击击杀的饮血剑计数恒为 0（09-30 深审 BC-10 复验时发现的次生顺序 bug）

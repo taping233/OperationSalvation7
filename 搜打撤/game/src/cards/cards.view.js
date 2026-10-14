@@ -11,27 +11,33 @@ import { termKeyFor } from '../ui/term-tips.js';
 import { esc, escAttr } from '../core/shared.js';
 import { displayCardDescription } from './card-description-text.js';
 
-// 描述富文本（v3 定调）：数字 Georgia 加大·金、术语冰蓝、句首「XX：」式关键字金。
-// 顺序固定：先转义 → 关键字 → 术语 → 数字（正则均不含数字，不会互相污染标签）。
+// 描述富文本：对原文识别数字、术语与句首关键字，再逐段转义。
+// 不对生成的 HTML 二次替换，避免把 &#39; 等转义实体拆成数值标签。
 // 时点短语整体标蓝（2026-09-16 留言）：「对战开始时/回合开始时/回合结束时」必须排在
 // 「回合」等单词前面，交替分支按序尝试，长词才会整体命中而不是只染前两个字。
 // （09-23 自 buildCardHTML 体内上移模块顶层并导出——选片台描述复用，卡面行为不变。）
 const DESC_TERMS = ['对战开始时', '回合开始时', '回合结束时', '攻击伤害', '法术伤害', '固定伤害', '真实伤害', '冰冻', '冻结', '中毒', '燃烧', '灼烧', '流血', '护甲', '法伤', '招式', '潜行', '生命', '伤害', '诅咒', '净化', '沉默', '禁疗', '充能', '注能', '发现', '限定', '主动技能', '消耗', '装备', '牌库', '回合', '弃牌', '抽牌', '能量'];
-// 术语 alternation 正则（2026-10-02 审计 A 档上提模块级）：descRich 原每次调用重建 30 词
-// RegExp（卡牌库页首渲数百卡各一次）；词表是模块常量不会变，/g 标志 lastIndex 由
-// replace 自管（每次 replace 从 0 扫描），提升零行为差。
-const DESC_TERM_RE = new RegExp('(' + DESC_TERMS.join('|') + ')', 'g');
+// 词表与数值规则只编译一次；matchAll 复制正则状态，反复渲染不共享游标。
+const DESC_TOKEN_RE = new RegExp('(' + DESC_TERMS.join('|') + ')|([⁺⁻+-]?[0-9]+(?:\\.[0-9]+)?)', 'g');
+function richDescriptionFragment(text) {
+  let html = '', offset = 0;
+  for (const match of text.matchAll(DESC_TOKEN_RE)) {
+    html += esc(text.slice(offset, match.index));
+    if (match[1]) {
+      // 具体伤害类型与机制词保留全局委托讲解；常识词保持纯高亮。
+      const word = match[1], key = termKeyFor(word);
+      html += key ? `<i class="d-term" data-term="${key}">${esc(word)}</i>` : `<i class="d-term">${esc(word)}</i>`;
+    } else html += `<b class="d-num">${esc(match[2])}</b>`;
+    offset = match.index + match[0].length;
+  }
+  return html + esc(text.slice(offset));
+}
 export function descRich(desc, cardId) {
-  let s = esc(displayCardDescription(desc, cardId));
-  s = s.replace(/^([^<>：\n]{1,10})：/, '<b class="d-kw">$1：</b>');
-  // 09-20 老板：特殊词条触摸讲解——命中词带 data-term（term-tips.js 全局委托弹自绘讲解框），
-  // 具体伤害类型与法伤有讲解；生命/回合等常识词保持纯高亮。
-  s = s.replace(DESC_TERM_RE, (w) => {
-    const key = termKeyFor(w);
-    return key ? `<i class="d-term" data-term="${key}">${w}</i>` : `<i class="d-term">${w}</i>`;
-  });
-  s = s.replace(/([⁺⁻+-]?[0-9]+(?:\.[0-9]+)?)/g, '<b class="d-num">$1</b>');
-  return s;
+  const text = displayCardDescription(desc, cardId);
+  const keyword = text.match(/^([^<>：\n]{1,10})：/);
+  return keyword
+    ? `<b class="d-kw">${richDescriptionFragment(keyword[0])}</b>${richDescriptionFragment(text.slice(keyword[0].length))}`
+    : richDescriptionFragment(text);
 }
 
 // 卡背渲染：backId 缺省 = 当前存档装备的卡背（未选档时回退默认）。

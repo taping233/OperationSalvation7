@@ -147,15 +147,17 @@ export const overlayMethods = {
     // 只在弹窗真正打开/切换模式时播开窗音效——战斗内反复 render 不刷音效
     if (!wasOpen || prevMode !== mode) {
       if (!soundScene) SDT.Sound.sfx('open');
-      // 焦点导航（game-ui-ux）：显式首焦点优先；否则优先安全的取消/返回
-      // 语义，避免确认页默认把不可逆动作放在 Enter 的第一击上。
-      requestAnimationFrame(() => {
-        if (this.el.overlay.hidden || this._overlayRevision !== revision) return;
-        const target = this._resolveOverlayInitialFocus(options.initialFocus);
-        if (target) target.focus({ preventScroll: true });
-        else this.el.overlay.focus({ preventScroll: true });
-      });
     }
+    // 同模式换页也会替换聚焦节点；在新页内已有主动焦点时保留它，
+    // 显式首焦点仍优先，关闭或较新页面则取消本次延后聚焦。
+    requestAnimationFrame(() => {
+      if (this.el.overlay.hidden || this._overlayRevision !== revision) return;
+      const explicitFocus = options.initialFocus || this.el.ovBody.querySelector('[data-initial-focus]');
+      if (!explicitFocus && this.el.overlay.contains(document.activeElement)) return;
+      const target = this._resolveOverlayInitialFocus(options.initialFocus);
+      if (target) target.focus({ preventScroll: true });
+      else this.el.overlay.focus({ preventScroll: true });
+    });
     // U1（2026-09-19 交互走查）：整页节点/场景壳的背景大图首次打开才发请求，
     // 解码期间页面近乎纯黑、无任何反馈。这里读出 data-asset-key 元素的背景 URL，
     // 未就绪时挂 bg-loading 类（CSS 显示「正在进入…」微提示），图片到齐后自动摘除。

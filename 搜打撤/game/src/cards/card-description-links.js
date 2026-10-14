@@ -42,7 +42,9 @@ export function createCardDescriptionRenderer(cards = []) {
   const byId = new Map(), byName = new Map();
   for (const card of cards) {
     if (!card?.id || !card.name) continue;
-    byId.set(String(card.id), card);
+    const id = String(card.id);
+    if (byId.has(id)) continue;
+    byId.set(id, card);
     const name = String(card.name);
     const entries = byName.get(name) || [];
     if (!entries.some(entry => entry.id === card.id)) entries.push(card);

@@ -6,6 +6,7 @@ import {
 } from './game.cardslib.common.js';
 import { game } from '../run/game.session.js';
 import { runPageLoading } from '../ui/page-loading.js';
+import { beginPageEntryCancellation, releasePageEntryCancellation } from '../ui/page-entry-cancellation.js';
 import { enterSurface } from '../ui/surface-motion.js';
 
 let pageModulePromise = null;
@@ -18,6 +19,7 @@ export let cardPageLoading = false;
 function cancelPendingPageEntry() {
   const entry = pendingPageEntry || activePageEntry;
   if (!entry) return false;
+  releasePageEntryCancellation('cardslib', cancelPendingPageEntry);
   if (pendingPageEntry === entry) {
     pendingPageEntry = null;
     pageRequest += 1;
@@ -57,6 +59,7 @@ function enterPage(method, args) {
   const request = ++pageRequest;
   const originState = game.state;
   if (originState !== 'idle' && originState !== 'modal' && originState !== 'title') return Promise.resolve(false);
+  beginPageEntryCancellation('cardslib', cancelPendingPageEntry);
   const overlay = document.getElementById('overlay');
   const originBody = document.getElementById('ovBody');
   const wasCardPageOpen = pendingPageEntry?.wasCardPageOpen ?? cardPageOpen;
@@ -112,6 +115,7 @@ function enterPage(method, args) {
   });
   const operation = loading.catch((error) => {
     if (request === pageRequest) {
+      releasePageEntryCancellation('cardslib', cancelPendingPageEntry);
       const pending = pendingPageEntry;
       pendingPageEntry = null;
       activePageEntry = null;
@@ -129,7 +133,10 @@ function enterPage(method, args) {
     }
     return false;
   }).finally(() => {
-      if (activePageEntry === entry) activePageEntry = null;
+    if (activePageEntry === entry) {
+      releasePageEntryCancellation('cardslib', cancelPendingPageEntry);
+      activePageEntry = null;
+    }
     if (pendingPageEntry === entry) {
       pendingPageEntry = null;
       cardPageLoading = false;
@@ -151,6 +158,7 @@ function closeCardPageTop() {
 
 const _set_cardPageOpen = (value) => {
   pageRequest += 1;
+  releasePageEntryCancellation('cardslib', cancelPendingPageEntry);
   activePageEntry?.controller.abort();
   activePageEntry = null;
   pageEntryPromise = null;

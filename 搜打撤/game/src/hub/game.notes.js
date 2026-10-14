@@ -5,29 +5,29 @@ import { esc } from '../core/shared.js';
 import { MAP } from '../run/game.session.js';
 import { game } from '../run/game.session.js';
   function rebuildNotes() {
-    // 兼容旧版楼层键名（F1 → B1）
-    const data = SDT.Notes.all();
-    Object.keys(data).forEach(k => {
-      if (k.startsWith('F1|')) { data['B1|' + k.slice(3)] = data[k]; delete data[k]; }
-    });
-    // 旧格子坐标键 "x,y" 一次性迁移为结点键 "li,idx"（结点地图改造后坐标语义变化）
-    if (!localStorage.getItem('sdt-notes-node-migrated')) {
+    const result = SDT.Notes.migrateLegacyCoordinates((data, legacy) => {
+      // 兼容旧版楼层键名（F1 → B1）
       Object.keys(data).forEach(k => {
-        const bar = k.indexOf('|');
-        const coord = k.slice(bar + 1), comma = coord.indexOf(',');
-        if (comma < 0) return;
-        const gx = +coord.slice(0, comma), gy = +coord.slice(comma + 1);
-        if (!Number.isFinite(gx) || !Number.isFinite(gy)) return;
-        const loc = legacyGridToNode(gx, gy);
-        if (loc) data[k.slice(0, bar + 1) + loc.li + ',' + loc.idx] = data[k];
-        delete data[k];   // 匹配成功则换键；匹配失败的悬空旧键随迁移一并清理
+        if (k.startsWith('F1|')) { data['B1|' + k.slice(3)] = data[k]; delete data[k]; }
       });
-      // 迁移标记/回写失败不炸调用链：标记失败=下次重复迁移（幂等）；回写失败=内存态照常
-      try { localStorage.setItem('sdt-notes-node-migrated', '1'); } catch { /* 存储不可用 */ }
-    }
-    try { if (Object.keys(data).length) localStorage.setItem('sdt-cell-notes-v1', JSON.stringify(data)); }
-    catch { /* 配额满：写盘失败不抛，noteMap 照常更新 */ }
-    game.noteMap = new Map(Object.entries(data));
+      // 一次性解释旧格子坐标；独立目标避免 A→B、B→C 时覆盖尚未迁移的源值。
+      if (!legacy) return data;
+      const migrated = Object.create(null);
+      for (const [key, value] of Object.entries(data)) {
+        const bar = key.indexOf('|');
+        const coord = key.slice(bar + 1), comma = coord.indexOf(',');
+        if (comma < 0) { migrated[key] = value; continue; }
+        const gx = +coord.slice(0, comma), gy = +coord.slice(comma + 1);
+        if (!Number.isFinite(gx) || !Number.isFinite(gy)) { migrated[key] = value; continue; }
+        const loc = legacyGridToNode(gx, gy);
+        // 真正同目标冲突仍按原 entries 顺序保留后项；悬空旧键仍按既有规则清理。
+        if (loc) migrated[key.slice(0, bar + 1) + loc.li + ',' + loc.idx] = value;
+      }
+      return migrated;
+    });
+    game.noteMap = new Map(Object.entries(result.data));
+    if (!result.ok) UI.log('备注迁移失败：' + result.message, 'warn');
+    return result.ok;
   }
 
   // 旧 8×8 网格坐标 → 结点 (li, idx)（备注迁移 / 旧版导入 JSON 兼容用）
@@ -71,6 +71,7 @@ import { game } from '../run/game.session.js';
         <button class="ov-btn" data-act="closeNote">取消</button>
       </div>`);
     UI.act('saveNote', () => {
+      if (!rebuildNotes()) return;
       const ta = document.getElementById('ovNote');
       const saved = SDT.Notes.set(MAP.boardId, li, idx, ta ? ta.value : '');
       if (saved === false) {
@@ -78,14 +79,15 @@ import { game } from '../run/game.session.js';
         UI.log('备注保存失败（存储空间可能已满），内容仍留在输入框', 'warn');
         return;
       }
-      rebuildNotes();
+      if (!rebuildNotes()) return;
       UI.hideOverlay(); game.state = 'idle';
       UI.log('已保存结点备注', 'ok');
     });
     UI.act('clearNote', () => {
+      if (!rebuildNotes()) return;
       const cleared = SDT.Notes.set(MAP.boardId, li, idx, '');
       if (cleared === false) { UI.log('清空失败（存储不可写）', 'warn'); return; }
-      rebuildNotes();
+      if (!rebuildNotes()) return;
       UI.hideOverlay(); game.state = 'idle';
       UI.log('已清空结点备注', 'dim');
     });
@@ -148,6 +150,7 @@ import { game } from '../run/game.session.js';
         <button class="ov-btn" data-act="closeTools">取消</button>
       </div>`);
     UI.act('doImport', () => {
+      if (!rebuildNotes()) return;
       const ta = document.getElementById('ovImport');
       try {
         const parsed = JSON.parse(ta.value);
@@ -172,7 +175,7 @@ import { game } from '../run/game.session.js';
             trySet(bid, a, b, String(v));
           }
         }
-        rebuildNotes();
+        if (!rebuildNotes()) return;
         UI.hideOverlay(); game.state = 'idle';
         if (failed) UI.log(`结点备注导入完成，但 ${failed} 条写入失败（存储空间可能已满）`, 'warn');
         else UI.log('结点备注导入完成', 'ok');
@@ -192,8 +195,9 @@ import { game } from '../run/game.session.js';
         <button class="ov-btn" data-act="closeTools">取消</button>
       </div>`, undefined, { initialFocus: '[data-act="closeTools"]' });
     UI.act('doClear', () => {
-      SDT.Notes.clearAll();
-      rebuildNotes();
+      if (!rebuildNotes()) return;
+      if (SDT.Notes.clearAll() === false) { UI.log('备注清空失败，原内容已保留', 'warn'); return; }
+      if (!rebuildNotes()) return;
       UI.hideOverlay(); game.state = 'idle';
       UI.log('已清空全部格子备注', 'warn');
     });

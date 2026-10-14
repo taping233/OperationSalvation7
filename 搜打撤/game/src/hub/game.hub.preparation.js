@@ -1,5 +1,6 @@
 import { createPreparationCommands, getPreparation, previewDeployment } from './preparation.commands.js';
 import { buildPreparationViewModel, mountPreparationView } from './preparation.view.js';
+import { departureStackKey } from './base-departure.commands.js';
 
 /**
  * 基地整备功能控制器。它只接收会话数据、页面宿主和导航能力；不读取 SDT、UI、document 或 window。
@@ -16,14 +17,16 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
   let controller = null;
   let root = null;
   let generation = 0;
+  let activeSlot = null;
 
-  const isCurrent = token => generation === token && root?.isConnected !== false;
+  const isCurrent = token => generation === token && root && root.isConnected !== false && data.slotId() === activeSlot;
 
   function dispose() {
     generation++;
     controller?.dispose();
     controller = null;
     root = null;
+    activeSlot = null;
   }
 
   function makeModel(snapshot, preparation, error = '', busy = false) {
@@ -41,7 +44,7 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
   }
 
   function open() {
-    if (controller && root?.isConnected !== false) return true;
+    if (controller && isCurrent(generation)) return true;
     dispose();
 
     const slotId = data.slotId();
@@ -59,6 +62,7 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
 
     const token = ++generation;
     root = panelRoot;
+    activeSlot = slotId;
     // A3-PREP-04（2026-10-03）：整备页 busy 态——异步 intent 执行期间以 busy:true 重绘
     // （视图 paint 据 current.busy 置 root[aria-busy]），命令 settle 后回 false，异常经
     // finally 同样复位，aria-busy 不卡 true。busy 翻转的推帧复用 lastSnapshot/lastError
@@ -69,7 +73,7 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
     let lastSnapshot = current.value;
     const repaint = (error = '') => {
       if (!isCurrent(token)) return null;
-      const fresh = data.readBase(data.slotId());
+      const fresh = data.readBase(slotId);
       if (!fresh.ok) {
         if (isCurrent(token)) reportError(formatError(fresh));
         return fresh;
@@ -92,7 +96,7 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
       model: makeModel(current.value, getPreparation(current.value)),
       onIntent: async ({ type, payload = {} }) => {
         if (!isCurrent(token)) return;
-        const slot = data.slotId();
+        const slot = slotId;
         const fresh = data.readBase(slot);
         if (!fresh.ok) { reportError(formatError(fresh)); return; }
         // A3-PREP-04：同步卫语句过后才进 busy；setBusy 在 try 内首行——update 在 busy:true 帧
@@ -130,8 +134,10 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
             if (!preview.canStart) { repaint('库存或资格已变化，预设无法应用。'); return; }
             const picks = {};
             for (const item of preview.resolvedPicks.filter(item => item.status === 'ready' && item.appliedCount === item.requestedCount)) {
-              const stack = fresh.value.stash.find(entry => entry.card?.id === item.card.cardId);
-              if (stack) picks[stack.card.name] = item.appliedCount;
+              const candidates = fresh.value.stash.filter(entry => entry.card?.id === item.card.cardId && (!item.card.variantKey || (entry.variantKey || entry.card.variantKey) === item.card.variantKey));
+              if (candidates.length !== 1) { repaint('库存堆身份已变化，预设无法应用。'); return; }
+              const stack = candidates[0];
+              picks[departureStackKey(stack)] = item.appliedCount;
             }
             if (!isCurrent(token)) return;
             navigation.applyPicks(picks);
@@ -154,7 +160,7 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
   }
 
   function returnToBase() {
-    if (!controller) return false;
+    if (!controller || !isCurrent(generation)) return false;
     dispose();
     navigation.returnToBase();
     return true;

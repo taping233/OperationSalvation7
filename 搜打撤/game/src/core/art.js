@@ -67,12 +67,14 @@ import { PERFORMANCE_BUDGETS } from './performance-budgets.js';
   // （naturalWidth×naturalHeight×4）双保险封顶，超预算从最旧开始淘汰。
   const WARM_POOL_BYTES = PERFORMANCE_BUDGETS.retainedImageBytesMax;
   let warmPoolBytes = 0;
-  function releaseWarmedHead() {
-    const im = warmPool.shift();
-    if (!im) return;
+  function releaseWarmed(im) {
+    const at = warmPool.indexOf(im);
+    if (at < 0) return;
+    warmPool.splice(at, 1);
     im.__released = true;
     warmPoolBytes -= im.__bytes || 0;
   }
+  function releaseWarmedHead() { releaseWarmed(warmPool[0]); }
   function retainWarmed(im) {
     warmPool.push(im);
     if (warmPool.length > WARM_POOL_CAP) releaseWarmedHead();
@@ -98,11 +100,10 @@ import { PERFORMANCE_BUDGETS } from './performance-budgets.js';
       // 资产缺失场景下预热池容量被无声侵占（字节尚未记账，无需扣减）
       im.onerror = () => {
         warmedUrls.delete(u);
-        const at = warmPool.indexOf(im);
-        if (at >= 0) { warmPool.splice(at, 1); im.__released = true; }
+        releaseWarmed(im);
       };
-      im.src = u;
       if (retain) retainWarmed(im);
+      im.src = u;
     }
   }
   // 卡面缩略图（assets/thumbs/**，离线烘焙见 game/tools/bake-card-thumbs.cjs）：
@@ -181,10 +182,12 @@ import { PERFORMANCE_BUDGETS } from './performance-budgets.js';
       // 敌人预解码也必须进入统一 LRU/字节预算；旧实现用独立 Map 永久钉住约 28.5MiB，
       // 导致 retainedImageBytesMax 并不是实际图片常驻上限。
       retainWarmed(im);
-      im.src = url;
+      const failed = () => { warmedUrls.delete(url); releaseWarmed(im); };
+      im.onerror = failed;
       const ready = typeof im.decode === 'function'
-        ? im.decode().catch(() => {})
-        : new Promise(resolve => { im.onload = im.onerror = resolve; });
+        ? Promise.resolve().then(() => im.decode()).catch(failed)
+        : new Promise(resolve => { im.onload = resolve; im.onerror = () => { failed(); resolve(); }; });
+      im.src = url;
       ready.finally(() => schedule(next));
     };
     schedule(next);
@@ -419,12 +422,14 @@ function characterArt(value, full=false, useDefault=false) {
             warmedUrls.add(u);
             const im = new Image();
             im.decoding = 'async';
+            let settled = false;
+            const finish = () => { if (!settled) { settled = true; one(); } };
             im.onload = () => {
               let decoded;
               try { decoded = im.decode?.(); } catch { /* decode 不可用：Promise.resolve(undefined) 兜底 */ }
-              Promise.resolve(decoded).catch(() => {}).then(one);
+              Promise.resolve(decoded).catch(() => {}).then(finish);
             };
-            im.onerror = one;
+            im.onerror = () => { warmedUrls.delete(u); releaseWarmed(im); finish(); };
             retainWarmed(im);
             im.src = u;
           }

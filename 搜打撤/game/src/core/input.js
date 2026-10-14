@@ -4,7 +4,7 @@ import { sdtDefine } from './sdt-facade.js';
  *
  * 玩法代码只问「actionFor(e) 是哪个动作」，键位是数据：
  * 改键 / 手柄接入 / 提示文案都以这里为唯一挂点。
- * 键位覆写存 localStorage 'sdt-keybinds'（action → key 名，小写）。
+ * 键位覆写存 localStorage 'sdt-keybinds'（action → 小写 key 数组；兼容旧字符串）。
  * ============================================================ */
 
 
@@ -30,7 +30,16 @@ function loadBindings() {
   try {
     const saved = JSON.parse(localStorage.getItem('sdt-keybinds') || '{}');
     Object.entries(saved).forEach(([action, key]) => {
-      if (merged[action] && key) merged[action] = [String(key).toLowerCase()];
+      if (!Object.hasOwn(merged, action)) return;
+      const keys = Array.isArray(key)
+        ? key.every(k => typeof k === 'string' && k) ? [...new Set(key.map(k => k.toLowerCase()))] : null
+        : typeof key === 'string' && key ? [key.toLowerCase()] : null;
+      if (!keys) return;
+      // Saved overrides take precedence over defaults, including old saves that omitted an unbound action.
+      Object.keys(merged).forEach(other => {
+        if (other !== action) merged[other] = merged[other].filter(k => !keys.includes(k));
+      });
+      merged[action] = keys;
     });
   } catch { /* 覆写损坏则用默认键位 */ }
   return merged;
@@ -47,7 +56,7 @@ function actionFor(event) {
 
 // 改键（持久化）；conflict 检测：返回被挤掉的动作名或 null
 function rebind(action, key) {
-  if (!bindings[action] || !key) return null;
+  if (!Object.hasOwn(bindings, action) || !key) return null;
   const k = String(key).toLowerCase();
   let conflict = null;
   Object.entries(bindings).forEach(([a, keys]) => {
@@ -55,7 +64,7 @@ function rebind(action, key) {
   });
   bindings[action] = [k];
   try { localStorage.setItem('sdt-keybinds', JSON.stringify(
-    Object.fromEntries(Object.entries(bindings).map(([a, ks]) => [a, ks[0]]))
+    bindings
   )); } catch { /* 存储不可用 */ }
   return conflict;
 }

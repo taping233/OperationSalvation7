@@ -81,10 +81,11 @@ function warnCardRuleRejection(message) {
    无 rAF 环境（裸 node 冒烟等）退回同步渲染，保持旧行为。 */
 let renderFrameQueued = false;
 const flushBattleRender = () => {
+    if (!renderFrameQueued) return;      // 动作准备已同步呈现时，旧 rAF 不再重放或复活离开的舞台。
     renderFrameQueued = false;           // 先清排队标志：渲染过程中的新请求可另排下一帧，不丢更新
     if (!G || !G.battleActive) return;   // 排队期间战斗已收尾：残留重绘一律丢弃（口径同请求时守卫）
     try {
-      renderBattle(getSnapshot());
+      return renderBattle(getSnapshot());
     } catch (e) {
       // 渲染失败不得打断战斗逻辑（否则出牌动作入队前就中断，busy 永久卡死——2026-09-18 实测）
       console.error('[battle] 渲染异常已兜底：', e);
@@ -1027,6 +1028,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     getLastPersistAt: () => lastPersistAt,
     setLastPersistAt: set$lastPersistAt,
     render: requestBattleRender,
+    preparePresentation: () => { renderFrameQueued = false; return renderBattle(getSnapshot()); },
     actionCancellationError,
     throwIfActionCancelled,
     onIdle: () => {

@@ -24,7 +24,7 @@ vi.mock('../game/src/run/game.run.scenes.js', () => ({
 }));
 vi.mock('../game/src/run/game.run.altar.js', () => ({ openDoorModal() {}, openFireRest() {}, openAltarRitual() {}, openBossGate() {}, openEmergencyModal() {} }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: {}, _set_cardPageOpen() {}, cardHTML: () => '' }));
-vi.mock('../game/src/battle/battle-loader.js', () => ({ startBattle: async () => {} }));
+vi.mock('../game/src/battle/battle-loader.js', async importOriginal => ({ ...await importOriginal(), startBattle: async () => {} }));
 vi.mock('../game/src/core/render-scheduler.js', () => ({ renderScheduler: { invalidate() {} } }));
 vi.mock('../game/src/audio/sound.js', () => ({ tone: () => '' }));
 vi.mock('../game/src/core/random.js', () => ({ Random: { random: () => 0 } }));

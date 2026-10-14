@@ -175,6 +175,9 @@ function evaluate(weights, tag) {
     '--weights', wFile, '--out', dir,
   ], { encoding: 'utf8', cwd: process.cwd(), timeout: BUDGET_MS(), maxBuffer: 64 * 1024 * 1024 });
   if (res.error) abortEval(tag, res.error.code === 'ETIMEDOUT' ? '批跑超墙钟（挂死/慢死螺旋）' : '批跑 spawn 失败', t0, res);
+  if (res.status !== 0 || res.signal) {
+    abortEval(tag, `批跑异常退出（status=${res.status} signal=${res.signal || 'none'}）`, t0, res);
+  }
   const summaryPath = resolve(dir, 'summary.json');
   if (!existsSync(summaryPath)) abortEval(tag, '批跑结束但没写出 summary.json', t0, res, `产物目录: ${dir}`);
   let s;

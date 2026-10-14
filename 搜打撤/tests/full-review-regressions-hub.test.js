@@ -47,7 +47,7 @@ it('ROOT-01 预设应用：整备页保留刚注入的预设选择（不再清�
   });
   feature.open();
   await intent({ type: 'preset-apply', payload: { presetId: 'preset-1' } });
-  expect(departure.deployPick).toEqual({ [card.name]: 2 });   // 此前被 openDepartPrep 清成 {}
+  expect(departure.deployPick).toEqual({ 'card:test-card': 2 });   // 此前被 openDepartPrep 清成 {}
 });
 
 it('ROOT-02 同名整堆入安全格：按格数增量拒收（9 张 > 2 格容量）', () => {

@@ -1,3 +1,4 @@
+import { cancelPendingPageEntries } from './page-entry-cancellation.js';
 import { appendLocalFeedback, completeLocalFeedback, downloadFeedbackRecord, downloadFeedbackRecords, readLocalFeedback, removeLocalFeedback } from './feedback.local.js';
 import { captureBattleContext, invalidateBattleContext } from '../battle/battle-loader.js';
 import { runTerminalSettlement } from './terminal-settlement.js';
@@ -34,6 +35,7 @@ function createGameMenuController(deps) {
   }
 
   function showTitle() {
+    cancelPendingPageEntries();
     invalidateBattleContext(game);
     game.state = 'title';
     game.path = null;
@@ -240,6 +242,15 @@ function createGameMenuController(deps) {
     const layer = document.getElementById('sugLayer');
     if (!layer || !layer.hidden) return;   // 已打开则忽略
     const prevState = game.state;
+    const sourceOverlay = UI.el?.overlay, sourceBody = UI.el?.ovBody;
+    const sourceRoot = sourceBody?.firstElementChild, sourceHidden = sourceOverlay?.hidden;
+    const sourceRevision = UI._overlayRevision;
+    const sourceContext = captureBattleContext(game, getActiveSlot);
+    const sourceCurrent = () => sourceContext() && game.state === 'modal' &&
+      sourceOverlay?.isConnected && sourceBody?.isConnected &&
+      UI.el?.overlay === sourceOverlay && UI.el?.ovBody === sourceBody &&
+      sourceBody.firstElementChild === sourceRoot && sourceOverlay.hidden === sourceHidden &&
+      UI._overlayRevision === sourceRevision;
     game.state = 'modal';                  // 暂停对局输入，返回时恢复
     document.getElementById('sugHead').innerHTML = SDT.Icons.rich('[[icon:book]] 记录试玩反馈');
     document.getElementById('sugWhere').innerHTML = target
@@ -251,7 +262,13 @@ function createGameMenuController(deps) {
     layer.hidden = false;
     const token = Symbol('suggestion'); layer._openToken = token;
     const saveBtn = document.getElementById('sugSaveBtn'); saveBtn.disabled = false;
-    const close = () => { if (layer._openToken !== token) return; layer._openToken = null; UI.hideScreen(layer, () => { if (layer._openToken === null) game.state = prevState; }); };
+    const close = () => {
+      if (layer._openToken !== token) return;
+      // 逻辑返回不等视觉淡出；较新页面或换局已经接管时只收起本留言层。
+      if (sourceCurrent()) game.state = prevState;
+      layer._openToken = null;
+      UI.hideScreen(layer);
+    };
     document.getElementById('sugCancelBtn').onclick = close;
     let busy = false;
     saveBtn.onclick = async () => {
@@ -563,6 +580,7 @@ function createGameMenuController(deps) {
   // 选档页：参照明日方舟「选择分队」的横排暗色卡片（居中发光图标 + 档名 + 分隔线 + 描述）。
   // 空档 = 压暗的箱柜图标，点击开新档；有档 = 发亮的存档图标，点击直接进入。
   function openSlotPicker() {
+    cancelPendingPageEntries();
     game.state = 'modal';
     const cards = [];
     const slotErrors = [];
@@ -634,7 +652,7 @@ function createGameMenuController(deps) {
       if (errEl) { errEl.hidden = false; errEl.textContent = msg; }
     }
     // 进入档位：加载该档基地并执行后续（续打 / 进基地）
-    const launch = (slot, fn, keepPicker = false) => {
+    const launch = async (slot, fn, keepPicker = false) => {
       invalidateBattleContext(game);
       // 基地直接承接选档画面，由视觉层保留退场副本；续局仍沿既有关闭流程。
       if (!keepPicker) UI.hideOverlay();
@@ -648,7 +666,8 @@ function createGameMenuController(deps) {
       const bi = SDT.Base.issue(slot);
       if (bi === 'corrupt') UI.log('[[icon:cross]] 该档位基地数据损坏（原数据已备份），本次以空档案启动', 'warn');
       else if (bi === 'tooNew') UI.log('[[icon:cross]] 该档位基地数据来自更新版本的游戏，已以空档案启动', 'warn');
-      const result = fn();
+      const result = await fn();
+      if (result === false) return false;
       UI.log(`[[icon:archive]] 已进入 <b>档位 ${slot}</b>（基地与进度独立保存到该档位）`, 'sys');
       return result;
     };
@@ -674,94 +693,135 @@ function createGameMenuController(deps) {
       restoreError(message);
       return false;
     };
-    const resetAndLaunch = slot => {
-      // 初始化必须先确认落盘，失败时选档页、标题和活动档位保持原状以便重试。
-      SDT.Base.use(slot);
-      if (SDT.Base.reset(slot) === false) {
-        restoreError('档位初始化未保存，请检查存储空间或档位变化后重试；尚未进入基地');
-        return false;
-      }
-      return launch(slot, () => runtime.openBaseHub('deploy'), true);
-    };
-    UI.act('newSlot', (d) => { if (!enteringSlot) return resetAndLaunch(+d.slot); });
-    UI.act('enterSlot', async (d) => {
+    const resetAndLaunch = async slot => {
       if (enteringSlot) return false;
-      const slot = +d.slot;
-      const pickerContext = captureBattleContext(game, getActiveSlot);
-      if (recoverSlotIfPending) {
-        const picker = document.getElementById('slotRestoreError');
-        enteringSlot = true;
-        try {
-          const recovered = await recoverSlotIfPending(slot);
-          if (!pickerContext() || (picker && !picker.isConnected)) return false;
-          if (!recovered.ok) {
-            restoreError(`${recovered.message || '存档恢复尚未完成'}；原档与恢复记录已保留，请重试进入该档位`);
-            return false;
-          }
-        } catch {
-          if (pickerContext() && (!picker || picker.isConnected)) restoreError('存档恢复失败；原档与恢复记录已保留，请重试进入该档位');
-          return false;
-        } finally { enteringSlot = false; }
-      }
-      const hasSavedRun = RunStorage.has(slot);
-      if (hasSavedRun) {
-        const checked = preflightRunMap(slot);
-        if (!checked.ok) {
-          const message=`${checked.message || '路线存档无法安全恢复'}，原档已保留；请稍后用兼容版本重试，或显式覆盖档位`;
-          restoreError(message);
+      enteringSlot = true;
+      const picker = document.querySelector('.slot-page');
+      let currentContext;
+      try {
+        // 初始化先确认落盘；等待页面期间连点不能再次重置档案。
+        SDT.Base.use(slot);
+        if (SDT.Base.reset(slot) === false) {
+          restoreError('档位初始化未保存，请检查存储空间或档位变化后重试；尚未进入基地');
           return false;
         }
-      }
+        return await launch(slot, async () => {
+          currentContext = captureBattleContext(game, getActiveSlot);
+          const opened = await runtime.openBaseHub('deploy');
+          if (opened === false && currentContext() && picker?.isConnected) {
+            return returnToPicker('基地尚未打开，可重新进入；档案已保留');
+          }
+          return opened;
+        }, true);
+      } catch {
+        if (currentContext?.() && picker?.isConnected) return returnToPicker('进入基地失败，请重试；档案已保留');
+        return false;
+      } finally { enteringSlot = false; }
+    };
+    UI.act('newSlot', (d) => resetAndLaunch(+d.slot));
+    UI.act('enterSlot', async (d) => {
+      if (enteringSlot) return false;
       enteringSlot = true;
-      return launch(slot, async () => {
-        // launch 已切到目标档位；之后合法的 modal/idle 切换不更换归属。
-        const currentContext = captureBattleContext(game, getActiveSlot);
-        // 仅供 Agent 对本次 enterSlot 的合法换局做核验；不代表已持久化。
-        const completed = () => ({ ok: true, commandContext: {
-          slot: getActiveSlot(), runToken: game.discoveredPairs, nestToken: game.nestRunes,
-          runActive: game.runActive, nestActive: game.nestActive,
-        } });
-        let transition;
-        try {
-          // 上一局未结束直接回局内；有档但恢复失败则保留原档回标题。
-          if (hasSavedRun) {
-            // 先播转场再读档，避免转场结束改写 Battle.restore 的 modal 状态。
-            transition = runtime.showRunTransition({
-              tone: 'door', asset: 'scene-door-bg',
-              eyebrow: 'EXPEDITION RESUMED', title: '继续对局',
-              detail: '欢迎回到战场',
-              duration: 900,
-              presentation: 'city-cut',
-            });
-            if (await transition === false || !transition.isCurrent() || !currentContext()) return false;
-            // 存档可能包含战斗快照；必须先加载战斗域，loadGame 才能同步 restore。
-            await ensureBattleReady();
-            if (!transition.isCurrent() || !currentContext()) return false;
-            const loaded = loadGame(slot);
-            if (!loaded.ok) {
-              RunStorage.issue(slot);
-              return returnToPicker(`${loaded.message || '对局存档读取失败'}；原档已保留，请重试进入该档位`);
+      try {
+        const slot = +d.slot;
+        const pickerPage = document.querySelector('.slot-page');
+        const pickerContext = captureBattleContext(game, getActiveSlot);
+        if (recoverSlotIfPending) {
+          const picker = document.getElementById('slotRestoreError');
+          try {
+            const recovered = await recoverSlotIfPending(slot);
+            if (!pickerContext() || (picker && !picker.isConnected)) return false;
+            if (!recovered.ok) {
+              restoreError(`${recovered.message || '存档恢复尚未完成'}；原档与恢复记录已保留，请重试进入该档位`);
+              return false;
+            }
+          } catch {
+            if (pickerContext() && (!picker || picker.isConnected)) restoreError('存档恢复失败；原档与恢复记录已保留，请重试进入该档位');
+            return false;
+          }
+        }
+        const hasSavedRun = RunStorage.has(slot);
+        if (hasSavedRun) {
+          const checked = preflightRunMap(slot);
+          if (!checked.ok) {
+            const message=`${checked.message || '路线存档无法安全恢复'}，原档已保留；请稍后用兼容版本重试，或显式覆盖档位`;
+            restoreError(message);
+            return false;
+          }
+        }
+        return await launch(slot, async () => {
+          // launch 已切到目标档位；之后合法的 modal/idle 切换不更换归属。
+          const currentContext = captureBattleContext(game, getActiveSlot);
+          // 仅供 Agent 对本次 enterSlot 的合法换局做核验；不代表已持久化。
+          const completed = () => ({ ok: true, commandContext: {
+            slot: getActiveSlot(), runToken: game.discoveredPairs, nestToken: game.nestRunes,
+            runActive: game.runActive, nestActive: game.nestActive,
+          } });
+          let transition;
+          try {
+            // 上一局未结束直接回局内；有档但恢复失败则保留原档回标题。
+            if (hasSavedRun) {
+              // 先播转场再读档，避免转场结束改写 Battle.restore 的 modal 状态。
+              transition = runtime.showRunTransition({
+                tone: 'door', asset: 'scene-door-bg',
+                eyebrow: 'EXPEDITION RESUMED', title: '继续对局',
+                detail: '欢迎回到战场',
+                duration: 900,
+                presentation: 'city-cut',
+              });
+              if (await transition === false || !transition.isCurrent() || !currentContext()) return false;
+              // 存档可能包含战斗快照；必须先加载战斗域，loadGame 才能同步 restore。
+              await ensureBattleReady();
+              if (!transition.isCurrent() || !currentContext()) return false;
+              const loaded = loadGame(slot);
+              if (!loaded.ok) {
+                RunStorage.issue(slot);
+                return returnToPicker(`${loaded.message || '对局存档读取失败'}；原档已保留，请重试进入该档位`);
+              }
+              if (loaded.classChoiceEntry) {
+                const resumedContext = captureBattleContext(game, getActiveSlot);
+                const sourceBody = document.getElementById('ovBody');
+                const sourceRoot = sourceBody?.firstElementChild;
+                const sourceHidden = UI.el.overlay.hidden;
+                if (await loaded.classChoiceEntry === false) {
+                  if (resumedContext() && document.getElementById('ovBody') === sourceBody &&
+                    sourceBody?.firstElementChild === sourceRoot && UI.el.overlay.hidden === sourceHidden) return returnToPicker('人物选择尚未打开，可重试进入；对局进度已保留');
+                  return false;
+                }
+                if (!resumedContext()) return false;
+              }
+              return completed();
+            }
+            if (await runtime.openBaseHub('deploy') === false) {
+              if (currentContext() && pickerPage?.isConnected) return returnToPicker('基地尚未打开，可重新进入；档案已保留');
+              return false;
             }
             return completed();
+          } catch {
+            if (!currentContext() || (transition && !transition.isCurrent()) || (!hasSavedRun && !pickerPage?.isConnected)) return false;
+            return returnToPicker('进入档位失败，请刷新页面后重试；原档已保留');
           }
-          if (runtime.openBaseHub('deploy') === false) return false;
-          return completed();
-        } catch {
-          if (!currentContext() || (transition && !transition.isCurrent())) return false;
-          return returnToPicker('进入档位失败，请刷新页面后重试；原档已保留');
-        } finally { enteringSlot = false; }
-      }, !hasSavedRun);
+        }, !hasSavedRun);
+      } finally { enteringSlot = false; }
     });
     UI.act('overwriteSlot', (d) => {
       if (enteringSlot) return;
       if (!armConfirm(`[data-act="overwriteSlot"][data-slot="${d.slot}"]`, '确认重开？', '覆盖重开')) return;
-      clearSlot(+d.slot);
+      const cleared = clearSlot(+d.slot);
+      if (cleared === false || cleared?.ok === false) {
+        restoreError(`档位 ${d.slot} ${cleared?.message || '删除未完成，请重试'}；尚未重开`);
+        return false;
+      }
       return resetAndLaunch(+d.slot);
     });
     UI.act('delSlot', (d) => {
       if (enteringSlot) return;
       if (!armConfirm(`[data-act="delSlot"][data-slot="${d.slot}"]`, '确认删除？', '删除')) return;
-      clearSlot(+d.slot);
+      const cleared = clearSlot(+d.slot);
+      if (cleared === false || cleared?.ok === false) {
+        restoreError(`档位 ${d.slot} ${cleared?.message || '删除未完成，请重试'}`);
+        return false;
+      }
       UI.log(`[[icon:trash]] 已删除【档位 ${d.slot}】的存档（含基地数据）`, 'warn');
       openSlotPicker();   // 重绘档位列表
     });
@@ -912,7 +972,7 @@ function createGameMenuController(deps) {
           <button type="button" class="leave-run-continue" data-act="goBase">回基地</button>
           <button type="button" class="leave-run-save" data-act="toTitle">回主菜单</button>
         </div></section>`, 'glass', { initialFocus:'[data-act="goBase"]' });
-      UI.act('goBase', () => { UI.hideOverlay(); runtime.openBaseHub('deploy'); });
+      UI.act('goBase', () => runtime.openBaseHub('deploy'));
       UI.act('toTitle', () => { UI.hideOverlay(); showTitle(); });
       UI.refresh(game);
       return true;
@@ -992,6 +1052,7 @@ function createGameMenuController(deps) {
 
   // ---------- 设置（标题界面调用） ----------
   function openSettings() {
+    cancelPendingPageEntries();
     const prev = game.state;
     game.state = 'modal';
     UI.showOverlay('', `
@@ -1066,7 +1127,11 @@ function createGameMenuController(deps) {
     };
     UI.act('wipeNotes', () => {
       if (!armDanger('wipeNotes', '确认清空？')) return;
-      SDT.Notes.clearAll(); runtime.rebuildNotes(); UI.log('已清空全部格子备注', 'warn');
+      if (SDT.Notes.clearAll() === false) {
+        UI.log('备注清空失败，原内容已保留；请先恢复未完成迁移或检查存储访问后重试', 'warn');
+        return false;
+      }
+      runtime.rebuildNotes(); UI.log('已清空全部格子备注', 'warn');
     });
     UI.act('wipeCards', () => {
       if (!armDanger('wipeCards', '确认清空？')) return;
@@ -1074,7 +1139,14 @@ function createGameMenuController(deps) {
     });
     UI.act('wipeSave', () => {
       if (!armDanger('wipeSave', '确认清空全部？')) return;
-      clearAllSlots(); UI.log('已清空全部五个档位的存档', 'warn');
+      const cleared = clearAllSlots();
+      if (cleared === false || cleared?.ok === false) {
+        const failed = cleared?.results?.filter(result => !result.ok) || [];
+        const message = failed.map(result => `档位 ${result.slot} ${result.message}`).join('；');
+        UI.log(`[[icon:cross]] ${message || '部分档位删除未完成，请重试'}，尚未清空全部存档`, 'warn');
+        return false;
+      }
+      UI.log('已清空全部五个档位的存档', 'warn');
     });
     // 设置页入口固定为「返回设置」语义：UI 点击委托会把按钮 dataset 对象当作首参传入，
     // 直接挂函数引用时 fromTitle=!!dataset 恒为真，返回键误回标题页（09-30 深审 WORLD-004）

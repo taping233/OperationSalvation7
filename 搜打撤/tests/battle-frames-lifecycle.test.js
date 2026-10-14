@@ -12,7 +12,7 @@ const pixi = vi.hoisted(() => {
       this.view = document.createElement('canvas');
       this.stage = { addChild() {} };
       this.ticker = { maxFPS: 0, stop() {}, start() {}, add(fn) { pixi.tick = fn; } };
-      this.renderer = { render() { pixi.rendered += 1; } };
+      this.renderer = { type: 1, render() { pixi.rendered += 1; } };
     }
     stop() {}
     start() {}
@@ -33,6 +33,8 @@ const pixi = vi.hoisted(() => {
 });
 
 vi.mock('pixi.js', () => ({
+  utils: { isWebGLSupported: () => true },
+  RENDERER_TYPE: { WEBGL: 1, CANVAS: 2 },
   Application: pixi.Application,
   Sprite: pixi.Sprite,
   Texture: { EMPTY: pixi.emptyTexture },

@@ -35,7 +35,8 @@ const top = execFileSync('git', ['rev-parse', '--show-toplevel'], {
 const gitDir = resolve(top, execFileSync('git', ['rev-parse', '--absolute-git-dir'], {
   cwd: here, encoding: 'utf8',
 }).trim());
-const commonDir = resolve(top, execFileSync('git', ['rev-parse', '--git-common-dir'], {
+// common-dir 默认相对 Git 命令 cwd；直接请求绝对路径，避免误按仓库根解析。
+const commonDir = resolve(execFileSync('git', ['rev-parse', '--path-format=absolute', '--git-common-dir'], {
   cwd: here, encoding: 'utf8',
 }).trim());
 if (gitDir !== commonDir) {
@@ -48,15 +49,15 @@ if (!hooksPathValue.replace(/\\/g, '/').startsWith(top.replace(/\\/g, '/'))) {
   process.exit(1);
 }
 
-execFileSync('git', ['config', 'core.hooksPath', hooksPathValue], { stdio: 'inherit' });
+execFileSync('git', ['config', '--local', 'core.hooksPath', hooksPathValue], { cwd: here, stdio: 'inherit' });
 try {
   chmodSync(hookFile, 0o755);
 } catch {
   /* Windows 上无可执行位，忽略 */
 }
 
-const readBack = execFileSync('git', ['config', '--get', 'core.hooksPath'], {
-  encoding: 'utf8',
+const readBack = execFileSync('git', ['config', '--local', '--get', 'core.hooksPath'], {
+  cwd: here, encoding: 'utf8',
 }).trim();
 console.log(`[gate] core.hooksPath -> ${readBack}`);
 console.log('[gate] commit gate installed: pre-commit selects quick or full checks by staged paths.');

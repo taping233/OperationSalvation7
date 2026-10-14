@@ -11,7 +11,7 @@
  */
 import notesData from '../../data/card-notes.json';
 
-const BASE_NOTES = Object.freeze(notesData.notes || {});
+const BASE_NOTES = Object.freeze(Object.assign(Object.create(null), notesData.notes || {}));
 const PHOTO_NOTE_KEY = 'sdt-card-photo-notes-v1';
 export const PHOTO_NOTE_PLACEHOLDER = '写下这条卡的备注……';
 // 未确认落盘的编辑留在本次会话，空字符串表示待保存的清空操作。
@@ -32,7 +32,7 @@ function readSavedNotes() {
 }
 
 function applyPendingNotes(notes) {
-  const next = { ...notes };
+  const next = Object.assign(Object.create(null), notes);
   for (const [id, note] of pendingNotes) {
     if (note) next[id] = note;
     else delete next[id];

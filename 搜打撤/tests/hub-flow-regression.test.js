@@ -3,9 +3,9 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 
 // 2026-09-22 hub 拆分：断言串分布在壳与两个切片，三文件拼接后仍断言「基地源码含 X」
-const hub = ['hub/game.hub.js', 'hub/game.hub.depart.js', 'hub/game.hub.pages.js']
+const hub = ['hub/game.hub.runtime.js', 'hub/game.hub.depart.js', 'hub/game.hub.pages.js']
   .map((f) => readFileSync(`game/src/${f}`, 'utf8')).join('\n');
-const altar = readFileSync('game/src/run/game.run.altar.js', 'utf8');
+const altar = readFileSync('game/src/run/game.run.class-choice.page.js', 'utf8');
 const session = readFileSync('game/src/run/game.session.js', 'utf8');
 
 describe('基地出发与选角回流回归', () => {
@@ -18,7 +18,7 @@ describe('基地出发与选角回流回归', () => {
     expect(hub).toContain('deployStart = start;');
     expect(hub).toContain('openDepartPrep');
     expect(hub).toContain('newRun(mode, picks, { skipClassChoice: true })');
-    expect(session).toContain('if (!options.skipClassChoice) runtime.openClassChoice()');
+    expect(session).toContain('if (!options.skipClassChoice) return runtime.openClassChoice()');
   });
 
   it('出征整备写盘失败会留在整备页并停止出发', () => {
@@ -135,7 +135,7 @@ async function createBrowsingHarness() {
       openDepartPrep: vi.fn(), deployPick: {}, setDeployPick: vi.fn(),
     };
   });
-  const runtime = await import('../game/src/hub/game.hub.js');
+  const runtime = await import('../game/src/hub/game.hub.runtime.js');
   const click = selector => {
     const button = host.querySelector(selector) || document.querySelector(`#cardZoom ${selector}`);
     expect(button, `缺少可点击入口 ${selector}`).not.toBeNull();

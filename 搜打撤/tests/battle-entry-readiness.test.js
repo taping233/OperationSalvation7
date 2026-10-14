@@ -71,21 +71,63 @@ it('keeps the simplified-display notice when a routine render replaces encounter
   expect(note.nextElementSibling).toBe(stage.querySelector('.sts-options'));
 });
 
-it.each(['ready', 'degraded'])('does not repeat %s entry when returning from a choice to the same battle token', async state => {
-  gate.begin(stage, 1, overlay); gate.wait(stage, 1, [Promise.resolve(state === 'ready')]); await flush();
-  if (state === 'degraded') overlay.querySelector('.battle-entry-curtain button').click();
+it('preserves the explicit simplified choice when returning to a new stage with the same battle token', async () => {
+  gate.begin(stage, 1, overlay); gate.wait(stage, 1, [Promise.resolve(false)]); await flush();
+  overlay.querySelector('.battle-entry-curtain button').click();
   gate.cancel(); stage.remove();
   stage = document.createElement('div'); stage.className = 'battle-stage'; stage._battleToken = 1;
   stage.innerHTML = '<div class="sts-topbar"><div class="sts-encounter">第 2 回合</div><details class="sts-options"></details></div>';
   overlay.appendChild(stage); gate.begin(stage, 1, overlay);
-  expect(stage.dataset.battleEntry).toBe(state); expect(stage.inert).not.toBe(true);
+  expect(stage.dataset.battleEntry).toBe('degraded'); expect(stage.inert).not.toBe(true);
   expect(gate.pending(stage)).toBe(false); expect(overlay.querySelector('.battle-entry-curtain')).toBeNull();
-  expect(stage.querySelectorAll('.battle-entry-note')).toHaveLength(state === 'degraded' ? 1 : 0);
-  gate.begin(stage, 1, overlay); expect(stage.querySelectorAll('.battle-entry-note')).toHaveLength(state === 'degraded' ? 1 : 0);
+  expect(stage.querySelectorAll('.battle-entry-note')).toHaveLength(1);
+  gate.begin(stage, 1, overlay); expect(stage.querySelectorAll('.battle-entry-note')).toHaveLength(1);
   stage._battleToken = 2; gate.begin(stage, 2, overlay);
   expect(stage.dataset.battleEntry).toBe('loading'); expect(stage.inert).toBe(true);
   expect(stage.querySelector('.battle-entry-note')).toBeNull();
   expect(overlay.querySelector('.battle-entry-curtain')).not.toBeNull();
+});
+
+it('waits for the new stage resources when returning from payment to an already ready battle token', async () => {
+  gate.begin(stage, 1, overlay); gate.wait(stage, 1, [Promise.resolve(true)]); await flush();
+  const previous = stage;
+  gate.cancel(); previous.remove();
+  stage = document.createElement('div'); stage.className = 'battle-stage sts'; stage._battleToken = 1;
+  stage.innerHTML = '<div class="sts-encounter"></div><div class="battle-scene-world" hidden></div>';
+  overlay.appendChild(stage);
+  const scenery = deferred(), actor = deferred(), images = deferred();
+  gate.begin(stage, 1, overlay);
+  expect(gate.pending(stage)).toBe(true);
+  gate.wait(stage, 1, [scenery.promise, actor.promise, images.promise]);
+  const curtain = overlay.querySelector('.battle-entry-curtain');
+  expect(curtain).not.toBeNull(); expect(stage.inert).toBe(true);
+  expect(stage.dataset.battleEntry).toBe('loading');
+  expect(stage.querySelector('.battle-scene-world').hidden).toBe(true);
+  scenery.resolve(true); images.resolve(true); await flush();
+  expect(stage.dataset.battleEntry).toBe('loading'); expect(curtain.isConnected).toBe(true);
+  actor.resolve(true); await flush();
+  expect(stage.dataset.battleEntry).toBe('ready'); expect(stage.inert).toBe(false);
+  expect(overlay.querySelector('.battle-entry-curtain')).toBeNull(); expect(vi.getTimerCount()).toBe(0);
+  gate.begin(stage, 1, overlay);
+  expect(gate.pending(stage)).toBe(false); expect(overlay.querySelector('.battle-entry-curtain')).toBeNull();
+});
+
+it.each(['failure', 'timeout'])('keeps a same-token replacement covered after its own resource %s', async outcome => {
+  gate.begin(stage, 1, overlay); gate.wait(stage, 1, [Promise.resolve(true)]); await flush();
+  const previous = stage;
+  gate.cancel(); previous.remove();
+  stage = document.createElement('div'); stage.className = 'battle-stage sts'; stage._battleToken = 1;
+  stage.innerHTML = '<div class="sts-encounter"></div>'; overlay.appendChild(stage);
+  const resource = deferred(), fallback = vi.fn();
+  gate.begin(stage, 1, overlay); gate.wait(stage, 1, [resource.promise], { onFallback: fallback });
+  if (outcome === 'failure') { resource.resolve(false); await flush(); }
+  else await vi.advanceTimersByTimeAsync(8000);
+  expect(stage.dataset.battleEntry).toBe('waiting'); expect(stage.inert).toBe(true);
+  expect(overlay.textContent).toContain(outcome === 'failure' ? '加载失败' : '仍未完成');
+  const button = overlay.querySelector('.battle-entry-curtain button');
+  expect(button.hidden).toBe(false); button.click();
+  expect(fallback).toHaveBeenCalledTimes(1); expect(stage.dataset.battleEntry).toBe('degraded');
+  expect(stage.inert).toBe(false);
 });
 
 it.each(['loading', 'waiting'])('restarts an unfinished %s gate after departure and ignores the old completion', async state => {
@@ -197,6 +239,30 @@ it('waits for image decode and accepts a cutout error that switches to the origi
   loaded = true; image.dispatchEvent(new Event('load')); await flush(); expect(result).toBeUndefined();
   decode.resolve(); await flush(); expect(result).toBe(true);
   expect(image.dataset.battleAsset).toBe('ready'); expect(image.loading).toBe('eager');
+});
+
+it('resolves a disconnected active stage as cancelled rather than holding readiness forever', async () => {
+  const resource = deferred(), cancelImages = vi.fn();
+  gate.begin(stage, 1, overlay); gate.wait(stage, 1, [resource.promise], { cancelImages });
+  const pending = gate.ready(stage, 1);
+  stage.remove();
+  expect(await gate.ready(stage, 1)).toBe(false);
+  expect(await pending).toBe(false); expect(cancelImages).toHaveBeenCalledTimes(1);
+  resource.resolve(true); await flush();
+  expect(await gate.ready(stage, 1)).toBe(false); expect(overlay.querySelector('.battle-entry-curtain')).toBeNull();
+});
+
+it('retains readiness for an explicit degraded choice only in its current stage and overlay', async () => {
+  gate.begin(stage, 1, overlay); gate.wait(stage, 1, [Promise.resolve(false)]); await flush();
+  const pending = gate.ready(stage, 1);
+  overlay.querySelector('.battle-entry-curtain button').click(); expect(await pending).toBe(true);
+  const previous = stage, newOverlay = document.createElement('div'); document.body.appendChild(newOverlay);
+  stage = document.createElement('div'); stage._battleToken = 1;
+  stage.innerHTML = '<div class="sts-encounter"></div>'; newOverlay.appendChild(stage);
+  gate.begin(stage, 1, newOverlay);
+  expect(stage.dataset.battleEntry).toBe('degraded'); expect(await gate.ready(stage, 1)).toBe(true);
+  expect(await gate.ready(previous, 1)).toBe(false); expect(await gate.ready(stage, 2)).toBe(false);
+  newOverlay.hidden = true; expect(await gate.ready(stage, 1)).toBe(false);
 });
 
 it('treats a broken critical image as failure instead of a ready asset', async () => {

@@ -136,7 +136,7 @@ import { cardRuleHint } from './battle.preview.js';
   let unitBattleToken = null;
 
   function handSlotKey(g) {
-    return (g.self ? 'self|' : '') + g.card.name + '|' + (g.card.desc || '');
+    return (g.self ? 'self|' : '') + g.key;
   }
   function setSlotVars(slot, L) {
     slot.style.setProperty('--fx', L.x + 'px');
@@ -324,7 +324,7 @@ import { cardRuleHint } from './battle.preview.js';
         const inspect = document.createElement('button');
         inspect.type = 'button';
         inspect.className = 'bt-hand-inspect';
-        inspect.textContent = '放大';
+        inspect.textContent = '完整规则';
         inspect.setAttribute('aria-label', `查看${g.card.name}完整规则`);
         inspect.addEventListener('click', event => {
           event.preventDefault(); event.stopPropagation();
@@ -542,7 +542,7 @@ import { cardRuleHint } from './battle.preview.js';
   function setSection(el, sig, key, html) {
     if (sig[key] === html) return;
     sig[key] = html;
-    el.innerHTML = html;
+    el.innerHTML = SDT.Icons.rich(html);
   }
   // 血条局部更新：主条快速过渡；幽灵条走自身延迟过渡形成掉血拖尾（STS2 NHealthBar 口径）。
   // 首次填充禁用两条的过渡，避免从空/满状态滑到位
@@ -588,7 +588,7 @@ import { cardRuleHint } from './battle.preview.js';
     const spTag = spShow > 0
       ? ` · [[icon:crystal]] 法伤 ${spShow}${spBuff ? `<span title="含法术强化 +${spBuff}">（含+${spBuff}）</span>` : ''}` : '';
     setSection(selfParts.stats, sig, 'stats',
-      `[[icon:swords]] ${atkShow}${atkTag}${spTag}${pdef.shield ? ' · [[icon:shield]] 盾 ' + pdef.shield : ''}${pdef.armor ? ' · [[icon:plate]] 甲 ' + pdef.armor : ''}${pdef.guard ? ' · 格挡中' : ''}`);
+      `[[icon:swords]] 攻 ${atkShow}${atkTag}${spTag}${pdef.shield ? ' · [[icon:shield]] 盾 ' + pdef.shield : ''}${pdef.armor ? ' · [[icon:plate]] 甲 ' + pdef.armor : ''}${pdef.guard ? ' · 格挡中' : ''}`);
     setSection(selfParts.chips, sig, 'chips', curseChips(pstat.status));
     // 状态挂件（P2）：玩家自己被冰冻/灼烧时同样点亮常驻状态光
     selfUnit.classList.toggle('fx-frozen', (pstat.status.freeze || 0) > 0);
@@ -643,7 +643,7 @@ import { cardRuleHint } from './battle.preview.js';
         setSection(rec.parts.stats, rec.sig, 'stats', '');
       } else {
         setUnitHP(rec.parts, rec.sig, a.hp, a.maxHp, !rec.sig.init);
-        setSection(rec.parts.stats, rec.sig, 'stats', `[[icon:swords]] ${a.atk}`);
+        setSection(rec.parts.stats, rec.sig, 'stats', `[[icon:swords]] 攻 ${a.atk}`);
       }
       setSection(rec.parts.chips, rec.sig, 'chips', '');
       rec.sig.init = true;
@@ -749,7 +749,12 @@ import { cardRuleHint } from './battle.preview.js';
       if (!f.dead && intents.length) {
         const intentDetail = intents.map(intent => `${intent.label}${intent.damage == null ? '' : ` · ${intent.damage}${intent.hits > 1 ? ` ×${intent.hits}（共${intent.totalDamage}）` : ''}`}${intent.bleedBonus ? ` · 流血 ${intent.bleedBonus} 层` : ''}`).join('；');
         setSection(parts.intent, sig, 'intent',
-          intents.map(intent => `<span class="bt-intent-part" data-intent-kind="${escAttr(intent.kind)}">${intent.icon}<span class="bt-intent-short">${intent.damage == null ? esc(intent.label) : `${intent.damage}${intent.hits > 1 ? `×${intent.hits}` : ''}`}</span></span>`).join('') +
+          intents.map(intent => {
+            // 短标签保留动作语义；复合效果、流血加成和总伤仍在原完整说明中。
+            const action = intent.kind === 'frozen' ? '冰冻中' : intent.label.split(/[·并]/)[0];
+            const short = `${action}${intent.damage == null ? '' : ` ${intent.damage}${intent.hits > 1 ? `×${intent.hits}` : ''}`}`;
+            return `<span class="bt-intent-part" data-intent-kind="${escAttr(intent.kind)}">${intent.icon}<span class="bt-intent-short">${esc(short)}</span></span>`;
+          }).join('') +
           `<span class="bt-intent-detail">${esc(intentDetail)}</span>`);
         parts.intent.setAttribute('aria-label', `${f.name}的意图：${intentDetail}。点击查看完整说明`);
         parts.intent.style.display = '';
@@ -762,7 +767,7 @@ import { cardRuleHint } from './battle.preview.js';
       // stats 行仅剩免伤提示（庇幕高亮本就有 aegis 类）；玩家名牌三行维持——equips 是老板定版技能按钮
       setSection(parts.head, sig, 'head',
         `<b title="${escAttr(f.name)}">${esc(f.name)}</b>${f.dead ? ' <span class="bt-deadmark">[[icon:cross]]</span>' : ''}` +
-        `<span class="sts-atkbadge"${f.affix === 'frenzy' ? ' data-term="frenzy"' : ''}>[[icon:swords]] ${f.atk}${f.affix === 'frenzy' ? '×2' : ''}</span>` +
+        `<span class="sts-atkbadge"${f.affix === 'frenzy' ? ' data-term="frenzy"' : ''}>[[icon:swords]] 攻 ${f.atk}${f.affix === 'frenzy' ? '×2' : ''}</span>` +
         (aff ? `<span class="bt-affix" data-term="${f.affix}">${aff.icon} ${aff.name}</span>` : ''));
       setUnitHP(parts, sig, f.hp, f.maxHp, reattached || !sig.init);
       setSection(parts.stats, sig, 'stats', immune ? '[[icon:crystal]] 庇幕免伤中' : '');

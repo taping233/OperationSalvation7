@@ -24,7 +24,7 @@ export function bindDepartureDrag(pool, bag, { add, remove }) {
     const destination = a.from === pool ? bag : pool;
     const r = destination.getBoundingClientRect();
     if (event.clientX >= r.left && event.clientX <= r.right && event.clientY >= r.top && event.clientY <= r.bottom) {
-      (a.from === pool ? add : remove)(a.source.dataset.name);
+      (a.from === pool ? add : remove)(a.source.dataset.stackKey || a.source.dataset.name);
     }
   };
   for (const host of [pool, bag]) {

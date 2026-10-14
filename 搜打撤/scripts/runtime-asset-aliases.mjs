@@ -24,18 +24,21 @@ export function collectVerifiedChestFrameAliases(assetsRoot) {
   return aliases;
 }
 
-// Both sprite consumers call assetUrl(): the dynamic animation frame URL and
-// the neutral fallback. Vite-static portrait references use the same target.
+// Both sprite consumers call assetUrl(). Rations also have separate original
+// and thumbnail byte pairs; neither pair aliases when redrawn or missing.
 export function collectVerifiedRuntimeAssetAliases(assetsRoot) {
   const aliases = collectVerifiedChestFrameAliases(assetsRoot);
-  const canonical = 'portraits/battle/changwuyu.webp';
-  const canonicalPath = path.join(assetsRoot, ...canonical.split('/'));
-  if (!existsSync(canonicalPath)) return aliases;
-  const canonicalBytes = readFileSync(canonicalPath);
-  for (const frame of ['f000', 'neutral']) {
-    const relative = `portraits/frames/changwuyu/sprite-v1/${frame}.webp`;
+  const candidates = [
+    ['portraits/frames/changwuyu/sprite-v1/f000.webp', 'portraits/battle/changwuyu.webp'],
+    ['portraits/frames/changwuyu/sprite-v1/neutral.webp', 'portraits/battle/changwuyu.webp'],
+    ['cards/expedition-starters/rations.webp', 'cards/resources/ration.webp'],
+    ['thumbs/cards/expedition-starters/rations.webp', 'thumbs/cards/resources/ration.webp'],
+  ];
+  for (const [relative, canonical] of candidates) {
     const sourcePath = path.join(assetsRoot, ...relative.split('/'));
-    if (existsSync(sourcePath) && readFileSync(sourcePath).equals(canonicalBytes)) aliases.set(relative, canonical);
+    const canonicalPath = path.join(assetsRoot, ...canonical.split('/'));
+    if (existsSync(sourcePath) && existsSync(canonicalPath)
+      && readFileSync(sourcePath).equals(readFileSync(canonicalPath))) aliases.set(relative, canonical);
   }
   return aliases;
 }

@@ -6,6 +6,7 @@
  * 「快捷键」页签（agent.console）读取展示，也可在此调整映射。
  * 输入焦点在文本框时自动让路（与 game.boot 的键位守卫同口径）。
  * ============================================================ */
+import { cancelPendingPageEntries } from './page-entry-cancellation.js';
 import { game, openSettings, openSuggestionInbox, openDataPageUi } from '../run/game.session.js';
 import { openBaseHub } from '../hub/game.hub.js';
 import { openCardLibrary, cancelPendingCardPageOpen } from '../hub/game.cardslib.js';
@@ -41,7 +42,7 @@ function listPages() {
   return PAGES.map(p => ({ ...p, ok: !!p.can() }));
 }
 
-function jump(id) {
+async function jump(id) {
   const page = PAGES.find(p => p.id === id);
   if (!page) return false;
   if (!page.can()) {
@@ -49,9 +50,9 @@ function jump(id) {
     return false;
   }
   if (page.id !== 'cardslib') cancelPendingCardPageOpen();
+  if (page.id !== 'cardslib' && !HUB_TABS.some(tab => tab.id === page.id)) cancelPendingPageEntries();
   try {
-    page.enter();
-    return true;
+    return await page.enter() !== false;
   } catch (error) {
     UI()?.log(`[[icon:cross]] 快捷进入【${page.name}】失败：${String(error?.message || error)}`, 'warn');
     return false;
