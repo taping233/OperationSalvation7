@@ -7,7 +7,7 @@ vi.mock('../game/src/run/game.session.js',()=>({MAP:{...map,rollCount:([a])=>a},
 vi.mock('../game/src/core/shared.js',()=>({ clone: value => (value == null ? value : JSON.parse(JSON.stringify(value))), esc:String,escAttr:String}));
 vi.mock('../game/src/audio/sound.js',()=>({tone(){}}));
 vi.mock('../game/src/hub/game.cardslib.js',()=>({Sfx:{tick(){}},_set_cardPageOpen(){},cardHTML(){return'';}}));
-vi.mock('../game/src/run/game.run.data.js',()=>({IMMEDIATE_SCENES:new Set(),NODE_BG:{},PICKUP_BG:{},PRELOAD_SCENES:{},SCENES:{},SCENE_META:{}}));
+vi.mock('../game/src/run/game.run.data.js',()=>({IMMEDIATE_SCENES:new Set(),NODE_BG:{},PICKUP_BG:{},PRELOAD_SCENES:{},WINTER_BATTLE_LAYERS:['far.webp','mid.webp','ground.webp','foreground.webp'],SCENES:{},SCENE_META:{}}));
 vi.mock('../game/src/core/random.js',()=>({Random:{random:()=>values.shift()??0}}));
 vi.mock('../game/src/run/game.run.shop.js',()=>({createShopController:()=>({openShop(){}})}));
 vi.mock('../game/src/battle/battle-loader.js',()=>({startBattle:async(_game,foes,opts)=>{started={foes,opts};return true;}}));
@@ -15,6 +15,14 @@ vi.mock('../game/src/hub/bag-return-hook.js',()=>({setBagReturnHook(){}}));
 const scenes=await import('../game/src/run/game.run.scenes.js');
 
 describe('R7-a real scenes encounter-to-opts chain',()=>{
+  it('prefetches all winter layers before a battle node is entered',()=>{
+    const images=[];
+    vi.stubGlobal('Image',class {set src(value){images.push(value);} decode(){return Promise.resolve();}});
+    try {
+      scenes.preloadCellScene({logical:[{def:{type:'battle'}}]},0);
+      expect(images).toEqual(['far.webp','mid.webp','ground.webp','foreground.webp']);
+    } finally {vi.unstubAllGlobals();}
+  });
   it('builds L2 mixed group and forwards identity into battle opts',async()=>{
     values=[.99]; const list=scenes.buildEncounter(1);
     expect(list.map(x=>x.id)).toEqual(['archer','cavalry']); expect(list.encounterId).toBe('l2-archer-cavalry');

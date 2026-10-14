@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-retired-art-1014",
+  "date": "2026-10-14",
+  "owner": "Friday",
+  "goal": "复用冬城四层迁移预战入口，退役批准旧图并提供Git恢复字节，正常验证提交推送",
+  "paths": [
+    "game/assets",
+    "game/css/scenes.css",
+    "game/src/run",
+    "game/src/generated",
+    "tests/r7a-scenes-integration.test.js",
+    "docs/archive/retired-art-2026-10-14",
+    "docs/evidence/2026-10-14-WF-retired-art-1014",
+    "docs/PARALLEL-REGISTRY.md"
+  ],
+  "doneWhen": [
+    "批准旧图退出运行引用和清单，未跟踪旧稿先归档核对字节",
+    "相关检查和正常提交门通过，实页不可用时明确阻塞"
+  ],
+  "stage": "doing",
+  "checks": [],
+  "unverified": [],
+  "updatedAt": "2026-10-14T06:34:56.074Z"
+}

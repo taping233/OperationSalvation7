@@ -1,0 +1,69 @@
+{
+  "base": "367db7c1a7dd149c7e8088bd4ae4e2d9e7debd12",
+  "assets": [
+    {
+      "path": "scenes/battle-normal-anime-v2.webp",
+      "bytes": 101204,
+      "sha256": "9e144c259d2a2a63f46c1d8df9e8eaacf1c877bbe4dbf61d2880083e377dfc17",
+      "restore": "git show 367db7c1:搜打撤/game/assets/scenes/battle-normal-anime-v2.webp"
+    },
+    {
+      "path": "portraits/full/wu-casual.webp",
+      "bytes": 245208,
+      "sha256": "64bfac2fd0ab52acdeff070896302c90daeb5004aeea5ac95a507f2521d1ff2f",
+      "restore": "git show 367db7c1:搜打撤/game/assets/portraits/full/wu-casual.webp"
+    },
+    {
+      "path": "portraits/full/wu-spring.webp",
+      "bytes": 211130,
+      "sha256": "8fdc09a11809deea0cfa762e33bc038eb19e991d4d4fa863c4ca001923274714",
+      "restore": "git show 367db7c1:搜打撤/game/assets/portraits/full/wu-spring.webp"
+    },
+    {
+      "path": "scenes/ui-loop-0925/expedition-map-bg.webp",
+      "bytes": 156788,
+      "sha256": "6ddc22815315cf58b7667fbf7fb13198403ddf8e5d19754ae2434c93bce21d94",
+      "restore": "git show 367db7c1:搜打撤/game/assets/scenes/ui-loop-0925/expedition-map-bg.webp"
+    },
+    {
+      "path": "thumbs/scenes/battle-normal-anime-v2.webp",
+      "bytes": 12560,
+      "sha256": "eeb4a2b041ab7e57a515bbbb9b36b46895fee7e4b51bbaa4ce9be3cd29756cce",
+      "restore": "git show 367db7c1:搜打撤/game/assets/thumbs/scenes/battle-normal-anime-v2.webp"
+    },
+    {
+      "path": "portraits/full/wu-casual-v12.webp",
+      "bytes": 182972,
+      "sha256": "25f2326bed57889df6978decf34c8646bb39e8642e57f9a188757a3752f81b41",
+      "restore": "docs/archive/retired-art-2026-10-14/wu-casual-v12.webp"
+    },
+    {
+      "path": "portraits/full/wu-spring-v12.webp",
+      "bytes": 200240,
+      "sha256": "fd40ff0eedc3124badce493f5fef6534a5435f6e082677e66c2c5fe4f2daf907",
+      "restore": "docs/archive/retired-art-2026-10-14/wu-spring-v12.webp"
+    },
+    {
+      "path": "portraits/full/wu-beach-v12.webp",
+      "bytes": 202332,
+      "sha256": "b44bbc2dcaff81b5ff0941d31594bf6431b95b1ac96bcf0d919148915a54ed39",
+      "restore": "docs/archive/retired-art-2026-10-14/wu-beach-v12.webp"
+    },
+    {
+      "path": "scenes/shop/winter-caravan-1011-v1.webp",
+      "bytes": 100932,
+      "sha256": "fd8dc0f12b32f296b586abdd57ea14f89bd34101b28973a6bcc57eee464691d5",
+      "restore": "docs/archive/retired-art-2026-10-14/winter-caravan-1011-v1.webp"
+    }
+  ],
+  "browser": {
+    "status": "blocked",
+    "reason": "本轮工具清单没有内置浏览器/node_repl/cua调用；未改用外部浏览器"
+  },
+  "replacementEvidence": {
+    "skins": "game/src/core/art.js SKIN_FULL_ART: casual-v14/spring-v15/beach",
+    "map": "game/src/core/renderer.js mapAtmosphere 与 map-city-atmosphere.js 独立合成",
+    "shop": "game/css/expedition-shop.css approved background !important；不修改",
+    "battle": "game/src/battle/view/battle.view.js BATTLE_SCENERY 冬城四层；旧缩略图仅对应旧背景且Git可恢复"
+  }
+}

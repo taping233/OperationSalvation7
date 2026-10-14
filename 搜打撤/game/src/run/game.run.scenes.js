@@ -10,7 +10,7 @@
 import { esc, escAttr } from '../core/shared.js';
 import { MAP, bagCap, game, newUid, pick, saveGame, scaledEnemy, usedSlots } from './game.session.js';
 import { _set_cardPageOpen, cardHTML } from '../hub/game.cardslib.js';
-import { IMMEDIATE_SCENES, NODE_BG, PICKUP_BG, PRELOAD_SCENES, SCENES } from './game.run.data.js';
+import { IMMEDIATE_SCENES, NODE_BG, PICKUP_BG, PRELOAD_SCENES, SCENES, WINTER_BATTLE_LAYERS } from './game.run.data.js';
 import { Random } from '../core/random.js';
 import { createShopController } from './game.run.shop.js';
 import { captureBattleContext, startBattle } from '../battle/battle-loader.js';
@@ -66,7 +66,11 @@ export function preloadCellScene(layer, idx) {
   const altar = (layer.altarEntrances || []).some(a => a.at === idx);
   const immediate = IMMEDIATE_SCENES.has(cellType);
   const type = immediate ? cellType : door ? 'door' : altar ? 'altar' : cellType;
-  preloadScene(PRELOAD_SCENES[type]);
+  if (['battle', 'boss', 'bossGeneral', 'bossOrc', 'bossElement'].includes(type)) {
+    preloadSceneList(WINTER_BATTLE_LAYERS);
+  } else {
+    preloadScene(PRELOAD_SCENES[type]);
+  }
 }
 // 兼容旧调用：只预载最常见的即时节点，不再一次吞入全部事件背景。
 // 其他房间由 preloadCellScene 在路线确认时按目标格预取。

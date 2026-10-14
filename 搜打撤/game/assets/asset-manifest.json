@@ -1,7 +1,7 @@
 {
   "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 1354,
+  "count": 1352,
   "assets": [
     {
       "path": "battle/fx-sticker-boom.svg",
@@ -5426,12 +5426,6 @@
       "source": "docs/evidence/2026-10-11-WF-base-cohesion-1011/camp-runtime-receipt.json"
     },
     {
-      "path": "scenes/battle-normal-anime-v2.webp",
-      "ext": "webp",
-      "bytes": 101204,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
       "path": "scenes/battle/winter-street-1011-v2.webp",
       "ext": "webp",
       "bytes": 213906,
@@ -9989,14 +9983,6 @@
       "bytes": 81354,
       "sha256": "2635d91650b32a24edd2fa3051a3b296f721baf7fed984d988056315894ba0cd",
       "source": "docs/evidence/2026-10-11-enemies-left-redraw/receipt.json"
-    },
-    {
-      "path": "thumbs/scenes/battle-normal-anime-v2.webp",
-      "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 12560,
-      "sha256": "eeb4a2b041ab7e57a515bbbb9b36b46895fee7e4b51bbaa4ce9be3cd29756cce",
-      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
     },
     {
       "path": "thumbs/scenes/battle-street-amber-anime-v1.webp",

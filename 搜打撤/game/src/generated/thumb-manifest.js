@@ -294,7 +294,6 @@ export default [
   "portraits/enemies/water_el.webp",
   "portraits/enemies/wolf_rider.webp",
   "scenes/battle-city-night-anime-v1.webp",
-  "scenes/battle-normal-anime-v2.webp",
   "scenes/battle-street-amber-anime-v1.webp",
   "scenes/battle-street-day-anime-v1.webp",
   "scenes/endfield-ruins.jpg",
