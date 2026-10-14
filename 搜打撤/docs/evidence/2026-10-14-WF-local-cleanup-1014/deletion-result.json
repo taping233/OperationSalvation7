@@ -1,0 +1,114 @@
+{
+  "finishedUtc": "2026-10-14T06:50:57.7478857Z",
+  "deletedCount": 1764,
+  "deletedBytes": 11026918252,
+  "batches": [
+    {
+      "batch": "historical_evidence_media",
+      "count": 1431,
+      "bytes": 1788303474,
+      "trackedCount": 1221
+    },
+    {
+      "batch": "music_old_wav_renders",
+      "count": 327,
+      "bytes": 9020506824,
+      "trackedCount": 0
+    },
+    {
+      "batch": "old_tools_unrecoverable",
+      "count": 6,
+      "bytes": 218107954,
+      "trackedCount": 0
+    }
+  ],
+  "failures": [],
+  "protectedBefore": [
+    {
+      "path": "搜打撤/tools/NAI-PROMPTS.md",
+      "bytes": 4547,
+      "ticks": 639275013602541538
+    },
+    {
+      "path": "搜打撤/tools/nai_gen.py",
+      "bytes": 10592,
+      "ticks": 639275012457862596
+    },
+    {
+      "path": "搜打撤/tools/tests/test_nai_guard.py",
+      "bytes": 20950,
+      "ticks": 639275012460244369
+    },
+    {
+      "path": ".codex/config.toml",
+      "bytes": 383,
+      "ticks": 639275006599097281
+    },
+    {
+      "path": "搜打撤/game/assets/music-demo/01-title-frostglass-v12.ogg",
+      "bytes": 915133,
+      "ticks": 639274717675235978
+    },
+    {
+      "path": "搜打撤/game/assets/music-demo/02-explore-ashline.ogg",
+      "bytes": 838678,
+      "ticks": 639268056624318967
+    },
+    {
+      "path": "搜打撤/game/assets/music-demo/03-battle-shadowtide-full-v2.ogg",
+      "bytes": 2738407,
+      "ticks": 639274118327329264
+    },
+    {
+      "path": "搜打撤/game/assets/music-demo/05-shop-lamplight-deal-v3.ogg",
+      "bytes": 773257,
+      "ticks": 639274737449620277
+    }
+  ],
+  "protectedAfter": [
+    {
+      "path": "搜打撤/tools/NAI-PROMPTS.md",
+      "bytes": 4547,
+      "ticks": 639275013602541538
+    },
+    {
+      "path": "搜打撤/tools/nai_gen.py",
+      "bytes": 10592,
+      "ticks": 639275012457862596
+    },
+    {
+      "path": "搜打撤/tools/tests/test_nai_guard.py",
+      "bytes": 20950,
+      "ticks": 639275012460244369
+    },
+    {
+      "path": ".codex/config.toml",
+      "bytes": 383,
+      "ticks": 639275006599097281
+    },
+    {
+      "path": "搜打撤/game/assets/music-demo/01-title-frostglass-v12.ogg",
+      "bytes": 915133,
+      "ticks": 639274717675235978
+    },
+    {
+      "path": "搜打撤/game/assets/music-demo/02-explore-ashline.ogg",
+      "bytes": 838678,
+      "ticks": 639268056624318967
+    },
+    {
+      "path": "搜打撤/game/assets/music-demo/03-battle-shadowtide-full-v2.ogg",
+      "bytes": 2738407,
+      "ticks": 639274118327329264
+    },
+    {
+      "path": "搜打撤/game/assets/music-demo/05-shop-lamplight-deal-v3.ogg",
+      "bytes": 773257,
+      "ticks": 639274737449620277
+    }
+  ],
+  "protectedUnchanged": true,
+  "retainedInputsCount": 74,
+  "journal": "C:\\Users\\太平\\AppData\\Local\\Temp\\codename7-readonly-audit-20261014\\confirmed-large-batch-deletion-journal.ndjson",
+  "indexTouched": false
+}

@@ -36,6 +36,8 @@
 
 ## 近期已释放
 
+| Friday（Codex 本地获批大批清理 WF-local-cleanup-1014） | 固定清单内历史媒体 1,221 个 Git 跟踪删除；docs/evidence/2026-09-30-sfx-full-v5/试听索引.md；docs/evidence/2026-10-14-WF-local-cleanup-1014/；本表本行 | 老板确认固定 1,764 文件永久清理；逐件删除成功，失效试听链接已改历史文字，文档守卫通过；NAI 四处修改不混入 | 2026-10-14 | 编辑释放；本批提交获批，提交/推送结果按本轮Git记录核对；无游戏源码、构建或浏览器占用 |
+
 | Friday 云端审查 WF-friday-cloud-review-1014 | 云端独立导出工作区；game/src、game/css、scripts、tests、vite/package与归档原件；证据 docs/evidence/2026-10-14-WF-friday-cloud-review-1014/ | 存档/撤离/战斗/备注与开档安全修复、神灯护甲、降级遮罩、Vite补丁、真实懒加载/等字节去重/CSS压缩及CI可移植性 | 2026-10-14 | 完成未提交、编辑释放；362文件3141测试通过2跳过，生产编译成功，四项预算仍失败；真实浏览器边界见证据；自有5336/PID99与5337/PID156已核对目录和命令后停止且端口关闭，工作区保留交接；待真实上游接入与正常提交 |
 
 | Friday（Codex NAI 项目网络永久授权 WF-nai-network-open-1013） | 根 .codex/config.toml 仅追加工作区网络键；tools/nai_gen.py 仅传输实现；tools/tests/test_nai_guard.py 仅传输契约；docs/evidence/2026-10-13-wu-nai45-prompt-compare/；tools/NAI-PROMPTS.md；docs/PENDING.md #42；Codex 项目记忆本事项；本表自有行 | 老板明确授权代号柒项目访问任意公网域名；修复新沙箱默认 NAI 生图链路 | 10-13 | 完成未提交、编辑释放；项目 TOML 原字节前缀与新增键验证通过、时间戳备份；新沙箱默认 generate_image 4.5 HTTP200/832×1216/SHA 已验；定向19项18通过1平台跳过、py_compile/diff/docs通过；#42 已决；不改画风默认/运行素材，无服务/build/提交 |
