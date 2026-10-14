@@ -1,0 +1,34 @@
+{
+  "sourceCommit": "367db7c1a7dd149c7e8088bd4ae4e2d9e7debd12",
+  "remoteMasterVerified": true,
+  "originalMasterFastForwarded": true,
+  "protectedFilesUnchanged": 4,
+  "stagedFilesScanned": 100,
+  "secretFindings": 0,
+  "tests": {
+    "filesPassed": 362,
+    "passed": 3127,
+    "skipped": 16,
+    "unhandledErrors": 0
+  },
+  "controlledRetry": {
+    "VITEST_MAX_FORKS": "4",
+    "VITEST_MIN_FORKS": "1",
+    "sourceOrAssertionsChanged": false,
+    "cause": "默认并发下IPC汇报超时；四fork受控重试通过。根因仍为并发压力假设，不声称已唯一定位"
+  },
+  "receipt": {
+    "path": "docs/evidence/2026-10-14-WF-cloud-review-integration-1014/2026-10-14T06-16-45.531Z-4d415bc7-staged.json",
+    "bytes": 3351549,
+    "sha256": "ad6db0f4787d9525e3887f33e5405851673fe36b291a86ff88e23cf48e219f7b",
+    "retrieval": "原始文件保留在隔离集成工作树相同相对路径；大于1MB的收据不入Git"
+  },
+  "log": {
+    "path": "docs/evidence/2026-10-14-WF-cloud-review-integration-1014/2026-10-14T06-16-45.531Z-4d415bc7-staged.log",
+    "bytes": 18500,
+    "sha256": "16fc32b69db0ad52ea64e664c6dea833555d670c36206a60cc9ea30313d2b100",
+    "retrieval": "原始文件保留在隔离集成工作树相同相对路径；大于1MB的收据不入Git"
+  },
+  "buildBudgetFailures": 4,
+  "browserVerified": false
+}

@@ -24,8 +24,21 @@
     "锁定依赖与真实暂存隔离质量门通过，预算失败和实页边界如实记录",
     "正常提交推送核对远端，原master安全快进且既有文件保持"
   ],
-  "stage": "doing",
-  "checks": [],
-  "unverified": [],
-  "updatedAt": "2026-10-14T05:27:28.725Z"
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "362文件3127测试通过16跳过，正常hook核验冻结收据；367db7c1已推送且原master安全快进，NAI四项哈希一致",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "包体预算四项仍失败；本轮未验证游戏实页；远端CI由父线程监控"
+  ],
+  "updatedAt": "2026-10-14T06:29:16.726Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
 }
