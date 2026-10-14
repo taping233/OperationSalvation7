@@ -20,7 +20,6 @@
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
-| Friday（旧图退役 WF-retired-art-1014） | 隔离集成工作树 game/assets、game/css/scenes.css、game/src/run、generated；旧稿归档及自有证据 | 批准旧图引用迁移、字节归档、退役与正常提交推送；商店现用画风不改 | 2026-10-14 | 编辑中 |
 
 ## 无主物品（只记录勿动，等认领/处置）
 
@@ -216,6 +215,7 @@
 
 | 会话 / 任务 | 查阅线索 | 来源 | 状态说明 |
 |---|---|---|---|
+| Friday（旧图退役 WF-retired-art-1014） | game/assets与预战入口；docs/archive/retired-art-2026-10-14/；docs/evidence/2026-10-14-WF-retired-art-1014/ | 1da9f7db正常门禁提交推送并原master快进；旧图及缩略图退出运行目录，四稿先Git归档后移除；362文件3128通过16跳过；四项预算失败与实页阻塞见completion.json | 2026-10-14 已结束，实页未核验 |
 | Friday（真实上游接入 WF-cloud-review-integration-1014） | 隔离集成工作树及 docs/evidence/2026-10-14-WF-cloud-review-integration-1014/ | 主补丁367db7c1正常门禁提交推送；原master已安全快进，四项保护文件一致；预算失败及实页边界见completion.json | 2026-10-14 已结束 |
 | Friday（运行场景分发 WF-friday-runtime-assets-1014） | 2026-10-14 | game/assets/scenes/battle/winter-transit-1011/、game/assets/scenes/shop/、docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/ | 补图已提交推送 e2e42ec3，原字节/来源保持；quick通过、秘密0命中。工程记录完成，本轮随后按最终SHA归档并上传Library |
 | Friday（Codex 运行包收拢与云端交付 WF-friday-runtime-ship-1013） | docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/；本表自有行；Git index与正常推送/Library归档；游戏源码编辑释放 | 工程阶段完成；e82895d5收拢1347文件，full350文件2929过16跳；补179项确证登记，保留97来源/候选；正常推送与精确Library归档随后由同一会话平台结果证明 | 10-14 编辑释放，原稿/候选保留；实页未运行，不公开仓库、不强推、不绕过hooks |

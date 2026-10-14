@@ -1,0 +1,53 @@
+{
+  "retirementCommit": "1da9f7db4e0cd523cf5d8794853aad442e42690b",
+  "remoteVerified": true,
+  "originalMasterFastForwarded": true,
+  "originalOldFilesRemoved": 9,
+  "ofWhichArchivedPreviouslyUntracked": 4,
+  "protectedFilesUnchanged": 4,
+  "otherUntrackedChanges": 0,
+  "sourceReferencesMissing": 0,
+  "checkedSceneUrls": 88,
+  "retiredAssetsInProductionBuild": 0,
+  "tests": {
+    "filesPassed": 362,
+    "passed": 3128,
+    "skipped": 16,
+    "unhandledErrors": 0,
+    "targetFilesPassed": 4,
+    "targetTestsPassed": 17
+  },
+  "assetCheck": {
+    "errors": 0,
+    "historicalWarnings": 618
+  },
+  "build": {
+    "compiled": true,
+    "exitCode": 1,
+    "budgetFailures": [
+      "[perf-budget] FAIL: 鏋勫缓浣撶Н 157.30 MiB > 112.00 MiB",
+      "[perf-budget] FAIL: 鍏ュ彛 JS gzip 361.8 KiB > 270.0 KiB",
+      "[perf-budget] FAIL: 棣栧睆 JS gzip 407.3 KiB > 310.0 KiB",
+      "[perf-budget] FAIL: CSS gzip 207.9 KiB > 136.0 KiB"
+    ],
+    "sandboxAttempt": "最终默认权限构建mkdir EPERM；相同最终源码以与此前成功构建相同权限重试编译通过"
+  },
+  "receipt": {
+    "path": "docs/evidence/2026-10-14-WF-retired-art-1014/2026-10-14T06-39-13.455Z-a0f6c6b6-staged.json",
+    "bytes": 3335970,
+    "sha256": "8a8f7a1cc9dd72fed129a96cee533d3309a62a00122244bfc6a38741d3ec6fd2",
+    "retrieval": "隔离集成工作树相同相对路径；大于1MB的原收据留本地不入Git"
+  },
+  "log": {
+    "path": "docs/evidence/2026-10-14-WF-retired-art-1014/2026-10-14T06-39-13.455Z-a0f6c6b6-staged.log",
+    "bytes": 13532,
+    "sha256": "38554e900464e98b157d85186c23eb0086ea2b3916080379ba4e4886cfc7fc81",
+    "retrieval": "隔离集成工作树相同相对路径；大于1MB的原收据留本地不入Git"
+  },
+  "browserVerified": false,
+  "browserBlocker": "当前平台内置浏览器/node_repl/cua工具不可调用；实页缺图和最终像素尚未验收",
+  "secretScan": {
+    "stagedPaths": 22,
+    "findings": 0
+  }
+}
