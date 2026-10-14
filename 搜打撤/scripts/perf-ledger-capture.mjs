@@ -27,6 +27,7 @@ import { spawn, execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { createConnection, createServer } from 'node:net';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 // ---------- CLI ----------
@@ -84,30 +85,60 @@ async function ensureServer() {
 
 // ---------- Edge + CDP ----------
 let edgeProc = null;
-function ensureCdpPortFree() {
+async function ensureCdpPortFree() {
   // INFRA-06：不再自动杀任何进程（旧实现按端口 netstat 挑 PID 直接 taskkill /T /F，
   // 会误杀其他会话/无主进程整棵树）。端口被占=现场归人工：报错退出，只允许
   // cleanup() 收拾本脚本自己 spawn 的 edgeProc/serverProc。
-  let out = '';
-  try { out = execFileSync('netstat', ['-ano'], { encoding: 'utf8', timeout: 30000 }); }
-  catch (e) { log('netstat 不可用（跳过端口预检，CDP 连不上会自然失败）:', String(e.message).slice(0, 120)); return; }
-  for (const line of out.split('\n')) {
-    if (line.includes(`:${CDP_PORT} `) && /LISTENING/i.test(line)) {
-      const pid = Number(line.trim().split(/\s+/).pop()) || null;
-      throw new Error(`CDP 端口 ${CDP_PORT} 已被${pid ? ` pid=${pid} 的进程` : '其他进程'}占用。`
-        + `本脚本不自动杀进程，请人工核对归属后处置（如 netstat -ano | findstr ":${CDP_PORT}"），`
-        + `确认无主或属旧自动化残留再自行清理，然后重跑。`);
-    }
+  if (!Number.isInteger(CDP_PORT) || CDP_PORT < 1 || CDP_PORT > 65535) {
+    throw new Error(`CDP 端口 ${CDP_PORT} 无效：必须是 1–65535 的整数。`);
+  }
+  const occupied = () => new Error(`CDP 端口 ${CDP_PORT} 已被其他进程占用。`
+    + '本脚本不自动杀进程，请人工核对监听器归属后处置，然后重跑。');
+  // CDP 客户端实际使用 IPv4。先连接数字 loopback，避免绑定探针覆盖既有通配监听。
+  // 只有明确拒绝连接才继续绑定验证；超时和访问错误不作为空闲证据。
+  await new Promise((resolve, reject) => {
+    const probe = createConnection({ host: '127.0.0.1', port: CDP_PORT });
+    probe.once('connect', () => { probe.destroy(); reject(occupied()); });
+    probe.once('error', error => {
+      probe.destroy();
+      if (error.code === 'ECONNREFUSED') resolve();
+      else reject(new Error(`CDP 端口 ${CDP_PORT} 连接预检失败（${error.code || error.message}）。`));
+    });
+    probe.setTimeout(1500, () => {
+      probe.destroy();
+      reject(new Error(`CDP 端口 ${CDP_PORT} 连接预检超时，不能确认空闲。`));
+    });
+  });
+  // Windows 允许在已有通配监听器旁绑定具体地址，loopback 单独探测会漏报。
+  // 同时探测通配与 loopback，仅关闭本脚本创建的 socket，不依赖平台命令。
+  // IPv6 未启用时只略过该地址；其余预检错误一律阻断，不能静默跳过保护。
+  for (const host of ['0.0.0.0', '127.0.0.1', '::', '::1']) {
+    const ipv6 = host.includes(':');
+    await new Promise((resolve, reject) => {
+      const probe = createServer();
+      probe.once('error', error => {
+        if (ipv6 && ['EADDRNOTAVAIL', 'EAFNOSUPPORT', 'EPROTONOSUPPORT'].includes(error.code)) {
+          resolve();
+        } else if (error.code === 'EADDRINUSE') {
+          reject(occupied());
+        } else {
+          reject(new Error(`CDP 端口 ${CDP_PORT} 预检失败（${error.code || error.message}）。`));
+        }
+      });
+      probe.listen({ port: CDP_PORT, host, exclusive: true, ipv6Only: ipv6 }, () => {
+        probe.close(error => error ? reject(error) : resolve());
+      });
+    });
   }
 }
 function killEdgeTree() {
   if (!edgeProc?.pid) return;
   try { execFileSync('taskkill', ['/pid', String(edgeProc.pid), '/T', '/F'], { stdio: 'ignore', timeout: 30000 }); } catch {}
 }
-function startEdge(url) {
+async function startEdge(url) {
+  await ensureCdpPortFree();
   const edge = EDGE_CANDIDATES.find(p => fs.existsSync(p));
   if (!edge) throw new Error('找不到 Edge（msedge.exe）');
-  ensureCdpPortFree();
   const flags = [
     ...(argFlag('headed') ? [] : ['--headless=new']),
     `--remote-debugging-port=${CDP_PORT}`,
@@ -674,7 +705,7 @@ async function main() {
   await ensureServer();
 
   const cdp = new Cdp();
-  startEdge('about:blank');
+  await startEdge('about:blank');
   await cdp.connect();
   await cdp.send('Runtime.enable');
   await cdp.send('Page.enable');

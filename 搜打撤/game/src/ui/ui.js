@@ -133,10 +133,10 @@ import { hudMethods } from './hud.js';
       const noteLabel = opts.noteLabel || '备注';
       const notePlaceholder = opts.notePlaceholder || '点击这里写备注……';
       const noteHTML = opts.hideNote ? '' : opts.noteEditable ? `
-        <label class="cz-note${note ? ' has' : ''} editable">
+        <label class="cz-note${note && !opts.notePending ? ' has' : ''} editable">
           <span class="cz-note-tag">[[icon:pen]] ${esc(noteLabel)}</span>
           <textarea class="cz-note-input" maxlength="240" rows="3" placeholder="${esc(notePlaceholder)}" aria-label="${esc(noteLabel)}">${esc(note)}</textarea>
-          <span class="cz-note-status" aria-live="polite">${note ? '已存档' : '尚未撰写'}</span>
+          <span class="cz-note-status" aria-live="polite">${opts.notePending ? '未存档，已暂存本次会话' : note ? '已存档' : '尚未撰写'}</span>
         </label>` : `
         <div class="cz-note${note ? ' has' : ''}">
           <span class="cz-note-tag">[[icon:pen]] ${esc(noteLabel)}</span>
@@ -277,9 +277,14 @@ import { hudMethods } from './hud.js';
       const saveNote = () => {
         if (!noteInput || typeof opts.onNoteSave !== 'function') return;
         const saved = opts.onNoteSave(noteInput.value);
-        if (noteStatus) noteStatus.textContent = saved ? '已存档' : '尚未撰写';
+        const result = saved && typeof saved === 'object' ? saved : null;
+        const persisted = result ? result.ok === true && result.persisted === true : !!saved;
+        if (noteStatus) noteStatus.textContent = result && !persisted
+          ? '未存档，已暂存本次会话'
+          : persisted ? (noteInput.value.trim() ? '已存档' : '尚未撰写')
+            : noteInput.value.trim() ? '保存失败，请重试' : '尚未撰写';
         // 存档章跟随真实内容（批次四：写空=章摘下，写了=章盖上）
-        el.querySelector('.cz-note')?.classList.toggle('has', !!(saved && noteInput.value.trim()));
+        el.querySelector('.cz-note')?.classList.toggle('has', !!(persisted && noteInput.value.trim()));
       };
       if (noteInput) {
         noteInput.addEventListener('input', () => {

@@ -37,7 +37,21 @@ export function waitForBattleImages(root) {
 }
 
 export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
-  let active = null;
+  let active = null, completed = null;
+  const simplified = stage => {
+    // 顶栏常驻，遭遇信息会随回合替换；提示跟随本场次，不能被该局部更新吞掉。
+    const host = stage.querySelector('.sts-topbar') || stage.querySelector('.sts-encounter');
+    if (host && !stage.querySelector('.battle-entry-note')) {
+      const note = document.createElement('span'); note.className = 'battle-entry-note'; note.textContent = '部分美术未就绪 · 简化显示';
+      note.setAttribute('role', 'status'); host.insertBefore(note, host.querySelector(':scope > .sts-options'));
+    }
+    stage.querySelectorAll('.sts-figure img').forEach(image => {
+      if (image.complete && image.naturalWidth) return;
+      image.hidden = true;
+      const figure = image.closest('.sts-figure'); figure.dataset.fallbackLabel = image.alt || '立绘暂不可用';
+      figure.classList.add('battle-figure-fallback');
+    });
+  };
   const current = record => active === record && record.stage.isConnected && record.overlay.contains(record.stage)
     && !record.overlay.hidden && record.stage._battleToken === record.token;
   const dispose = record => {
@@ -53,7 +67,14 @@ export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
   function begin(stage, token, overlay) {
     if (active?.stage === stage && active.token === token) return;
     cancel();
-    if (stage.dataset.battleEntry === 'ready' || stage.dataset.battleEntry === 'degraded') return;
+    // 选择面板返回会重建舞台；同一场已揭示的结果按 token 保留，新战斗仍需重新就绪。
+    if (completed?.token === token) {
+      stage.dataset.battleEntry = completed.state;
+      if (completed.state === 'degraded') simplified(stage);
+      return;
+    }
+    completed = null;
+    stage.querySelectorAll('.battle-entry-note').forEach(note => note.remove());
     const curtain = document.createElement('div');
     curtain.className = 'battle-entry-curtain';
     curtain.innerHTML = '<div class="battle-entry-copy" role="status"><span>接敌准备</span><h2>正在进入战场</h2><p>正在准备场景与参战单位…</p><button type="button" hidden>以简化画面继续</button></div>';
@@ -72,16 +93,8 @@ export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
   function finish(record, state) {
     if (!current(record)) return;
     active = null; dispose(record); record.stage.dataset.battleEntry = state;
-    if (state === 'degraded') {
-      const note = document.createElement('span'); note.className = 'battle-entry-note'; note.textContent = '部分美术未就绪 · 简化显示';
-      note.setAttribute('role', 'status'); record.stage.querySelector('.sts-encounter')?.appendChild(note);
-      record.stage.querySelectorAll('.sts-figure img').forEach(image => {
-        if (image.complete && image.naturalWidth) return;
-        image.hidden = true;
-        const figure = image.closest('.sts-figure'); figure.dataset.fallbackLabel = image.alt || '立绘暂不可用';
-        figure.classList.add('battle-figure-fallback');
-      });
-    }
+    completed = { token: record.token, state };
+    if (state === 'degraded') simplified(record.stage);
   }
   function failed(record, reason) {
     if (!current(record)) return;
@@ -109,5 +122,5 @@ export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
   }
   document.addEventListener('keydown', blockKeys, true);
   return { begin, wait, cancel, pending: stage => active?.stage === stage && !active.started,
-    dispose() { cancel(); document.removeEventListener('keydown', blockKeys, true); } };
+    dispose() { cancel(); completed = null; document.removeEventListener('keydown', blockKeys, true); } };
 }

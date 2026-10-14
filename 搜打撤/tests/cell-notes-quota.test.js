@@ -31,6 +31,37 @@ describe('core/notes 存储失败契约', () => {
     expect(backing.has(KEY)).toBe(false);
   });
 
+  it.each(['[]', '"text"', '7', 'true', 'null', '{bad', ''])('损坏备注原串 %s 不被编辑或清空单条覆盖', raw => {
+    const write = vi.fn();
+    vi.stubGlobal('localStorage', {
+      getItem: () => raw,
+      setItem: write,
+      removeItem: () => {},
+    });
+    expect(set('B1', 0, 0, '保留输入')).toBe(false);
+    expect(set('B1', 0, 0, '')).toBe(false);
+    expect(write).not.toHaveBeenCalled();
+    expect(window.SDT.Notes.all()).toEqual({});
+    expect(window.SDT.Notes.get('B1', 0, 0)).toBe('');
+  });
+
+  it('读取失败不被当成缺档写回，恢复后保留其他备注再保存', () => {
+    const backing = new Map([[KEY, '{"B1|0,1":"原备注"}']]);
+    let failed = true;
+    const write = vi.fn((key, value) => backing.set(key, value));
+    vi.stubGlobal('localStorage', {
+      getItem: key => { if (failed) throw new Error('read unavailable'); return backing.get(key) ?? null; },
+      setItem: write,
+      removeItem: key => backing.delete(key),
+    });
+    expect(set('B1', 0, 0, '保留输入')).toBe(false);
+    expect(write).not.toHaveBeenCalled();
+    expect(backing.get(KEY)).toBe('{"B1|0,1":"原备注"}');
+    failed = false;
+    expect(set('B1', 0, 0, '保留输入')).toEqual({ 'B1|0,0': '保留输入', 'B1|0,1': '原备注' });
+    expect(JSON.parse(backing.get(KEY))).toEqual({ 'B1|0,0': '保留输入', 'B1|0,1': '原备注' });
+  });
+
   it('clearAll 在存储不可用时静默容忍', () => {
     vi.stubGlobal('localStorage', {
       getItem: () => null,

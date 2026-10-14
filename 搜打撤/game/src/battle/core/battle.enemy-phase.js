@@ -8,7 +8,7 @@ import * as Combat from './combat.js';
 import { waitForFeedback, waitMs } from '../view/battle.feedback.js';
 import { demoMs } from '../runtime/battle.pace.js';
 import { battleState, G, foes, mode, drawPile, hand, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, handSelecting, choosing, interaction, noDrawNext, floats, cardAnims, playedMovesThisTurn, allies, extraTurn, timeRune, holyRune, fireballRuneOn, swiftRune, timeSpaceRune, timeSpaceUsed, set$noDrawNext, set$energy, set$extraTurn, set$interaction, set$turn, set$busy, set$timeSpaceUsed, set$playedMartialThisTurn, set$playedMovesThisTurn, set$lastPersistAt, clearTargetHint, transitionTo, cancelTargetingState } from '../runtime/battle.runtime.js';
-import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, effCostOf, finish, fireTurnEndTriggers, fireConsumeTriggers } from './battle.engine.js';
+import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, effCostOf, finish, fireTurnEndTriggers, fireConsumeTriggers, deferEndTurn, hasPendingEndTurn } from './battle.engine.js';
 import { restoreAtkDown } from '../effects/effect-steps.m2.js';
 
   // 敌方步进演出节拍在 vitest 环境归零（比照 battle.engine.js 的 SURGE_WAVE_MS 先例）：
@@ -20,7 +20,7 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
   // ---------- 回合结束 ----------
   function endTurn() {
     if (SDT.Meta && SDT.Meta.track) SDT.Meta.track('turnMoves', { n: playedMovesThisTurn });
-    if (busy || infusing || discovering || choosing) return;
+    if (busy || infusing || discovering || choosing || handSelecting || hasPendingEndTurn()) return;
     if (battleState.phase === BATTLE_PHASES.VICTORY || battleState.phase === BATTLE_PHASES.DEFEAT) return;   // 终局后点击无效（2026-09-16 实测 defeat 后连点报错）
     if (interaction && interaction.kind !== 'card') set$interaction(null);   // 结束回合取消药水点选/砸击（卡牌指向在转入敌方阶段时清）
     // 批次C：指向性卡牌的 targeting 阶段若还挂着（直接释放未选目标 / 拖到死目标），
@@ -42,20 +42,21 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
       const o = findCard(u0);
       if (o && !unplayableReason(o.card) && effCostOf(o.card, u0) <= energy) {
         G.log('[[icon:bolt]] <b>极速符文</b>：回合结束，打出最左侧的手牌', 'sys');
-        // 打出完成后必须续接回合结束流程：此前直接 return，action-runner 收口把
-        // 阶段还原 player，敌方阶段/毒伤/敌方攻击全被跳过（09-30 深审 BC-01）
+        // 打出及其后续选牌/抉择/发现完成后才移交敌方阶段；不能在首张牌收尾时跨过弹层。
         const endTurnToken = battleState.token;
-        queueCardExecution(u0, o.card, [], alive()[0] || null, false, false, [], () => {
+        const queued = queueCardExecution(u0, o.card, [], alive()[0] || null, false, false, [], () => deferEndTurn(() => {
           if (!G?.battleActive || battleState.token !== endTurnToken ||
               battleState.phase === BATTLE_PHASES.VICTORY || battleState.phase === BATTLE_PHASES.DEFEAT) return;
           transitionTo(BATTLE_PHASES.ENEMY);
+          set$busy(true);
           clearTargetHint();
           const enemyToken = battleState.token;
           const stillEnemyPhase = () => G?.battleActive && battleState.token === enemyToken && battleState.phase === BATTLE_PHASES.ENEMY;
           void resolvePlayerEndTurn(enemyToken, stillEnemyPhase).catch(error => recoverAutoPhaseError(error, enemyToken, BATTLE_PHASES.ENEMY));
-        });
+        }));
         requestBattleRender();
-        return;
+        // 出牌预检拒绝且没有支付弹层时，照常结束回合，不留下 busy 锁。
+        if (queued !== false || handSelecting) return;
       }
     }
     transitionTo(BATTLE_PHASES.ENEMY);

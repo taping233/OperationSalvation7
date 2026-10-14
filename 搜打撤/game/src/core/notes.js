@@ -1,17 +1,25 @@
 import { sdtDefine } from './sdt-facade.js';
   const KEY = 'sdt-cell-notes-v1';
 
-  function all() {
-    try { return JSON.parse(localStorage.getItem(KEY)) || {}; }
-    catch { return {}; }
+  function readAll() {
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (raw == null) return {};
+      const data = JSON.parse(raw);
+      return data && typeof data === 'object' && !Array.isArray(data) ? data : null;
+    } catch { return null; }
   }
+
+  // 展示保留空对象降级口径；编辑必须区分缺档与损坏/读取失败。
+  function all() { return readAll() || {}; }
 
   function get(floorId, x, y) {
     return all()[floorId + '|' + x + ',' + y] || '';
   }
 
   function set(floorId, x, y, text) {
-    const data = all();
+    const data = readAll();
+    if (!data) return false; // 原串无法安全读取时不覆盖，也不把编辑误报为成功。
     const k = floorId + '|' + x + ',' + y;
     if (text && String(text).trim()) data[k] = String(text).trim();
     else delete data[k];

@@ -1,0 +1,75 @@
+{
+  "task": "WF-friday-cloud-review-1014",
+  "scope": "Standalone CSS asset comment/whitespace minification; no stylesheet source edits",
+  "builtIndexAudit": {
+    "file": "desktop-app/game/assets/index-DhkP1rEz.css",
+    "bytes": 1032069,
+    "gzipBytes": 182587,
+    "styleRules": 7499,
+    "exactDuplicateRuleGroups": 2,
+    "exactDuplicateRawBytes": 216,
+    "exactDuplicateGzipSavingsBytes": 3,
+    "identicalDeclarationGzipSavingsBytes": 538,
+    "largestEmbeddedAssetUrlCharacters": 232,
+    "identicalAtRuleDuplicates": 0
+  },
+  "standaloneSourceExperiment": {
+    "method": "Direct in-memory plugin invocation, not an integrated build",
+    "assets": [
+      {
+        "sourcePath": "game/css/home-polish.css",
+        "sourceSha256": "5822b83402a41b3999a971092638a8c33493f609a2b0835a29d664a3766232d5",
+        "beforeBytes": 32507,
+        "afterBytes": 27451,
+        "beforeGzipBytes": 7723,
+        "afterGzipBytes": 5758
+      },
+      {
+        "sourcePath": "game/css/motion-transitions.css",
+        "sourceSha256": "7d121c987b4790355168f0c4357884aa92a358faae00e6b4c63549d8db4eb345",
+        "beforeBytes": 16711,
+        "afterBytes": 6985,
+        "beforeGzipBytes": 6801,
+        "afterGzipBytes": 2002
+      },
+      {
+        "sourcePath": "game/css/home-menu-motion.css",
+        "sourceSha256": "eb4d1d680084d761a5c8ad7a2db6dc8ebdbf4551572bfcf7d1655276ef4d61e2",
+        "beforeBytes": 6563,
+        "afterBytes": 5346,
+        "beforeGzipBytes": 1547,
+        "afterGzipBytes": 973
+      },
+      {
+        "sourcePath": "game/css/home-layers.css",
+        "sourceSha256": "ac5d871a838c2d6b46d71c676b220e9e2122aee5a59408b5d90d4db045e4f478",
+        "beforeBytes": 8465,
+        "afterBytes": 7062,
+        "beforeGzipBytes": 2268,
+        "afterGzipBytes": 1771
+      },
+      {
+        "sourcePath": "game/css/interface-motion.css",
+        "sourceSha256": "cff609aba78aa050d20049d6d8bfabfcff3998ce02c3346c24b5e5538f5e8343",
+        "beforeBytes": 6965,
+        "afterBytes": 6152,
+        "beforeGzipBytes": 1268,
+        "afterGzipBytes": 978
+      }
+    ],
+    "gzipSavingsBytes": 8125
+  },
+  "verification": {
+    "tests": "tests/css-asset-minification.test.js: 7 tests passed",
+    "lint": "owned helper and test passed",
+    "syntax": "node --check helper passed",
+    "fullSuite": "not run by this worker",
+    "build": "not run by this worker"
+  },
+  "limitations": [
+    "Aggregate CSS gzip budget still exceeds 136 KiB; no threshold changes",
+    "Sourcemap/hidden-map builds and individually map-associated CSS are deliberately skipped",
+    "Unmarked license/copyright comments leave the entire asset unchanged",
+    "Root coordinates integrated build and runtime/browser verification"
+  ]
+}

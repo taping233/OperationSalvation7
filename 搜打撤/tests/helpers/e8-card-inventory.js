@@ -1,5 +1,6 @@
 import { validateCardRules } from '../../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../../game/src/cards/card-rules.capability.js';
+import { isApprovedLampArmorRemoval } from './card-catalog-approved-revisions.js';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 const stable = value => Array.isArray(value) ? value.map(stable) : value && typeof value === 'object'
@@ -150,8 +151,10 @@ export function compareMigrationInventories(before, after, approvedIds, expected
     // 期望规则表优先；值为 null 表示该卡 rules 内容由其批次测试守护，这里只锁「仅新增 rules 字段」。
     const expected = expectedRulesById ? (id in expectedRulesById ? expectedRulesById[id] : expectedRules) : expectedRules;
     const expectedFace = expectedFaceById[id] || {};
-    const expectedFields = ['rules', ...Object.keys(expectedFace)].sort();
+    const lampRemoval = id === 'tt3-magic-lamp';
+    const expectedFields = ['rules', ...Object.keys(expectedFace), ...(lampRemoval ? ['armor'] : [])].sort();
     if (oldCard.rules !== undefined || !equal(fields, expectedFields)
+      || (lampRemoval && !isApprovedLampArmorRemoval(oldCard, nextCard))
       || Object.entries(expectedFace).some(([key, value]) => !equal(nextCard[key], value))
       || (expected !== null && !equal(nextCard.rules, expected))) {
       throw new Error(`migration: ${id} changed beyond approved rules addition`);

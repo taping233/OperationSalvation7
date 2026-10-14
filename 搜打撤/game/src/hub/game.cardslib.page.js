@@ -37,7 +37,7 @@ import { DRAW_EXPLANATION, hasDrawExplanation } from '../cards/card-draw-explana
 import { createCardRenderContext } from '../cards/card-render-context.js';
 import { game } from '../run/game.session.js';
 import { characterName } from '../core/characters.js';
-import { PHOTO_NOTE_PLACEHOLDER, photoNoteFor, savePhotoNote, exportNotes } from '../cards/card-photo-notes.js';
+import { PHOTO_NOTE_PLACEHOLDER, photoNoteFor, photoNotePending, savePhotoNoteResult, exportNotes } from '../cards/card-photo-notes.js';
 import { photoMountFor } from './photo-studio-presentation.js';
 import { CARD_DESIGNER_WRITES_ENABLED, Sfx, cardPageOpen, setCardPageOpen, configureCardPageClosers, cancelPendingCardPageEntry } from './game.cardslib.common.js';
 import {
@@ -881,11 +881,12 @@ function renderCardLibrary() {
         createReferenceOptions: libReferenceOptions,
         photoNumber: photoNo(card.id),
         note: photoNoteFor(card),
+        notePending: photoNotePending(card),
         noteLabel: '备注',
         noteEditable: true,
         notePlaceholder: PHOTO_NOTE_PLACEHOLDER,
         onNoteSave: value => {
-          const saved = savePhotoNote(card, value);
+          const saved = savePhotoNoteResult(card, value);
           if (libSelectedId === card.id) {
             const preview = document.getElementById('libPreview');
             const oldNote = preview?.querySelector('.pv-note');

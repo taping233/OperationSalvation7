@@ -1,4 +1,6 @@
 // 在内存投影已批准的卡面修订；历史 E8 before 文件保持原字节。
+import frozenInventory from '../../docs/evidence/e8-card-migration-2026-09-27/catalog-before.json';
+
 export const RETIRED_1010 = new Set(['tt-medneedle', 'tt-token-color', 'tt3-deep-seal', 'tt3eq-boiler']);
 const revisions = {
   'cc-demon': { dmg: 7, desc: '7′，损失 2 点生命。' },
@@ -10,6 +12,18 @@ const revisions = {
 };
 const sorted = value => Array.isArray(value) ? value.map(sorted) : value && typeof value === 'object'
   ? Object.fromEntries(Object.keys(value).sort().map(k => [k, sorted(value[k])])) : value;
+const lampBefore = frozenInventory.production.cards.find(row => row.id === 'tt3-magic-lamp').card;
+const lampFace = { ...lampBefore };
+delete lampFace.armor;
+const lampAfter = { ...lampFace, rules: { version: 1, battle: { hosted: ['three-choice-lamp'] } } };
+
+// 仅放行已冻结的生产神灯 armor:5 → 字段不存在，其他卡面字节语义与 M11 声明必须一致。
+export function isApprovedLampArmorRemoval(previous, current) {
+  return previous?.armor === 5 && current != null && !Object.hasOwn(current, 'armor')
+    && JSON.stringify(sorted(previous)) === JSON.stringify(sorted(lampBefore))
+    && JSON.stringify(sorted(current)) === JSON.stringify(sorted(lampAfter));
+}
+
 export function approvedRevisionBaseline(original) {
   const baseline = structuredClone(original);
   const revise = row => {

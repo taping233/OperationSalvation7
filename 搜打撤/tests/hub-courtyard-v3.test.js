@@ -23,14 +23,15 @@ beforeEach(() => {
   vi.stubGlobal('AudioContext', vi.fn());
 });
 afterEach(() => { dispose?.(); dispose = null; document.body.replaceChildren(); document.body.classList.remove('reduce-motion'); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
-const mount = view => {
+const mount = async view => {
   document.body.innerHTML = courtyardV3HTML(view);
   dispose = mountCourtyardV3(document.body, view);
+  await vi.dynamicImportSettled();
   return document.querySelector('[data-courtyard]');
 };
 describe('庭院独立页生命周期', () => {
-  it('默认只启动一个本地动画，声音关闭；暂停和恢复对应取消与启动', () => {
-    const root = mount('koi');
+  it('默认只启动一个本地动画，声音关闭；暂停和恢复对应取消与启动', async () => {
+    const root = await mount('koi');
     expect(frames.size).toBe(1);
     expect(window.AudioContext).not.toHaveBeenCalled();
     expect(root.querySelector('[data-courtyard-control="sound"]').getAttribute('aria-pressed')).toBe('false');
@@ -40,9 +41,9 @@ describe('庭院独立页生命周期', () => {
     root.querySelector('[data-courtyard-control="feed"]').click();
     expect(pond.tap).toHaveBeenCalledWith(450, 250);
   });
-  it('减少动效不持续调度，仍显示静态雨景；离开释放画布和监听', () => {
+  it('减少动效不持续调度，仍显示静态雨景；离开释放画布和监听', async () => {
     media.matches = true;
-    const root = mount('rain');
+    const root = await mount('rain');
     expect(frames.size).toBe(0);
     expect(rain.render).toHaveBeenCalledWith(0, false);
     expect(root.classList.contains('is-still')).toBe(true);
@@ -52,8 +53,8 @@ describe('庭院独立页生命周期', () => {
     expect(root.querySelector('.courtyard-v3-canvas').width).toBe(1);
     expect(rain.dispose).toHaveBeenCalledTimes(1);
   });
-  it('隐藏页停止调度；恢复后继续；销毁后操作不再唤起动画或投喂', () => {
-    const root = mount('koi');
+  it('隐藏页停止调度；恢复后继续；销毁后操作不再唤起动画或投喂', async () => {
+    const root = await mount('koi');
     hidden.mockReturnValue(true); document.dispatchEvent(new Event('visibilitychange'));
     expect(frames.size).toBe(0);
     hidden.mockReturnValue(false); document.dispatchEvent(new Event('visibilitychange'));
@@ -66,7 +67,7 @@ describe('庭院独立页生命周期', () => {
     document.dispatchEvent(new Event('visibilitychange'));
     expect(raf.mock.calls.length).toBe(calls); expect(pond.tap).not.toHaveBeenCalled();
   });
-  it('声音只由手动打开；暂停挂起，离开停止音源并关闭上下文', () => {
+  it('声音只由手动打开；暂停挂起，离开停止音源并关闭上下文', async () => {
     const source = { connect: vi.fn(), start: vi.fn(), stop: vi.fn(), disconnect: vi.fn() };
     const filter = { type: '', frequency: { value: 0 }, connect: vi.fn() };
     const gain = { gain: { value: 0 }, connect: vi.fn() };
@@ -76,7 +77,7 @@ describe('庭院独立页生命周期', () => {
       resume: vi.fn(() => Promise.resolve()), suspend: vi.fn(() => Promise.resolve()), close: vi.fn(() => Promise.resolve()),
     };
     vi.stubGlobal('AudioContext', vi.fn(function() { return audio; }));
-    const root = mount('koi');
+    const root = await mount('koi');
     expect(window.AudioContext).not.toHaveBeenCalled();
     root.querySelector('[data-courtyard-control="sound"]').click();
     expect(source.start).toHaveBeenCalledTimes(1); expect(audio.resume).toHaveBeenCalled();
@@ -90,8 +91,8 @@ describe('庭院独立页生命周期', () => {
     expect(root.querySelector('[data-courtyard-control="sound"]').getAttribute('aria-pressed')).toBe('false');
     dispose(); expect(audio.close).toHaveBeenCalledTimes(1);
   });
-  it('雨势与三配色沿同一引擎，静态情况下交互仍可产生反馈', () => {
-    const root = mount('rain');
+  it('雨势与三配色沿同一引擎，静态情况下交互仍可产生反馈', async () => {
+    const root = await mount('rain');
     root.querySelector('[data-courtyard-control="interact"]').click();
     expect(rain.setIntensity).toHaveBeenCalledWith(80);
     root.querySelector('[data-palette="moss"]').click();
@@ -101,8 +102,8 @@ describe('庭院独立页生命周期', () => {
     expect(rain.tap).toHaveBeenCalledWith(450, 250);
     expect(root.querySelector('.courtyard-v3-status').textContent).toBe('已投喂 · 雨圈散开');
   });
-  it('关闭雨隐藏雨层并停止雨交互，保留单循环、投喂和指针交互；再次打开恢复雨', () => {
-    const root = mount('rain');
+  it('关闭雨隐藏雨层并停止雨交互，保留单循环、投喂和指针交互；再次打开恢复雨', async () => {
+    const root = await mount('rain');
     const toggle = root.querySelector('[data-courtyard-control="rain"]');
     toggle.click();
     expect(root.querySelector('.courtyard-v3-rain-layer').hidden).toBe(true);
@@ -125,7 +126,7 @@ describe('庭院独立页生命周期', () => {
   });
   it('应用内减少动效设置在开启时静态，运行中切换立即停止并可恢复', async () => {
     document.body.classList.add('reduce-motion');
-    const root = mount('koi');
+    const root = await mount('koi');
     expect(frames.size).toBe(0); expect(root.classList.contains('is-still')).toBe(true);
     expect(root.querySelector('[data-courtyard-control="pause"]').disabled).toBe(true);
     document.body.classList.remove('reduce-motion'); await Promise.resolve();

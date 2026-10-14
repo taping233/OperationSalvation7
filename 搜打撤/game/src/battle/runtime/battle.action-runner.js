@@ -10,6 +10,7 @@ export function createBattleActionRunner({
   getActiveActionSignal, setActiveActionSignal,
   getLastPersistAt, setLastPersistAt,
   render, actionCancellationError, throwIfActionCancelled,
+  onIdle = () => {},
 }) {
   return function queueBattleAction(execute, label = '战斗动作') {
     const battleToken = getBattleState().token;
@@ -35,6 +36,7 @@ export function createBattleActionRunner({
         if (session.generation !== generation) return;
         await queue.idle();
         if (session.generation !== generation || getBattleState().token !== battleToken) return;
+        if (queue.length === 0 && !queue.running) onIdle();
         if (queue.length === 0 && !queue.running && getBattleState().phase === BATTLE_PHASES.RESOLVING) {
           setBattleState(transitionBattle(getBattleState(), BATTLE_PHASES.PLAYER));
           setBusy(false);

@@ -250,7 +250,6 @@ function assertValidCardRules(cards) {
       SDT.Cards.ensureShieldToArmor(); // 护盾→护甲术语迁移（含老存档，2026-09-04 定版）
       SDT.Cards.ensureShaToStarterAttack(); // 「杀」→「初始攻击」术语迁移（含老存档，2026-09-09 定版）
       SDT.Cards.ensureCardFixes();    // 设计者定版数据修正（爆燃火球删注能，2026-09-05）
-      SDT.Cards.ensureChoiceFixes();  // 抉择卡数据修正（神灯删 armor 字段，2026-09-08）
       SDT.Cards.ensureClassConsolidation(); // 职业整合：11 职业 → 5 职业，逐卡改归属（2026-09-05 定版）
       SDT.Cards.ensureDmgValues();    // 伤害数值回填（描述 N′ → dmg 字段，2026-09-04 新增）
       SDT.Cards.ensureHeroFields();   // 修复早期制作坊保存丢失的 cls/hero（专属立绘依赖）
@@ -263,6 +262,7 @@ function assertValidCardRules(cards) {
       SDT.Cards.ensureDuplicateRenames(); // 同名不同 ID/效果版本统一在后者追加「-改」（含旧卡库）
       SDT.Cards.ensureEvents0919();    // 0919 都市污染事件池：放在实机同步之后，以本轮定稿名与效果为准
       SDT.Cards.seedBatch(SDT.Cards.TABLETOP12, TT12_KEY, 'tt12'); // 第十二批：射线/研发系列新卡 17 张（2026-09-23）；新 KEY 老档补播，放最后以本批定稿为准
+      SDT.Cards.ensureChoiceFixes();  // 定版同步后幂等移除神灯分支误回填的 armor:5
       SDT.Cards.ensureTT12PreplayRules(); // 从定版定义补齐 TT12 的出牌前规则与即时效果规则
       SDT.Cards.ensureTT10BaseMaterialRules(); // 从 TT10 定版定义补齐两张材料卡规则
       SDT.Cards.ensureTT1BaseMaterialRules(); // 从第一批定版定义补齐六张基地材料卡规则

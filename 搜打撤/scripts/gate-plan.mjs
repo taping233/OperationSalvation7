@@ -42,6 +42,8 @@ export const WORKFLOW_TESTS = new Map([
   ['scripts/generate-compendium.mjs', ['tests/compendium.test.js']],
   ['scripts/asset-audit.cjs', ['tests/asset-audit.test.js']],
   ['scripts/asset-audit-lib.cjs', ['tests/asset-audit.test.js']],
+  ['scripts/runtime-asset-aliases.mjs', ['tests/runtime-asset-aliases.test.js']],
+  ['scripts/css-asset-minification.mjs', ['tests/css-asset-minification.test.js']],
   ['scripts/sync-cards-from-live.mjs', ['tests/sync-cards-from-live.test.js', 'tests/schema-op-coverage.test.js', 'tests/contracts.test.js']],
 ]);
 // R2（2026-10-01 拍板）：明确不配专属映射的脚本——回退脚本契约测试+引用搜索+哨兵，不再全量。

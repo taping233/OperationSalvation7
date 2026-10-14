@@ -11,6 +11,12 @@ function fixture() {
   temporaryRoots.push(home);
   return home;
 }
+// Each test repository owns its identity, even when the system temp directory is inside another repository.
+function repositoryFixture(home, ...segments) {
+  const repo = path.join(home, ...segments);
+  mkdirSync(path.join(repo, '.git'), { recursive: true });
+  return repo;
+}
 function put(file, text) {
   mkdirSync(path.dirname(file), { recursive: true });
   writeFileSync(file, text);
@@ -29,7 +35,7 @@ afterEach(() => {
 describe('只读动态记忆入口', () => {
   it('ZCode索引主题经junction越过项目库仍拒读，both不能报告完整检索', () => {
     const home = fixture();
-    const repo = path.join(home, 'repo');
+    const repo = repositoryFixture(home, 'repo');
     const memory = project(home, 'current', `cwd=${repo}\n[workflow](escape/private.md)`);
     const outside = path.join(home, 'outside-library');
     put(path.join(outside, 'private.md'), 'workflow 不允许读入的外库正文');
@@ -42,7 +48,7 @@ describe('只读动态记忆入口', () => {
   });
   it('ZCode从唯一项目索引与TOPICS读取命中主题，不扫未索引正文或递归引用', () => {
     const home = fixture();
-    const repo = path.join(home, 'repo');
+    const repo = repositoryFixture(home, 'repo');
     const memory = project(home, 'project-current', `cwd=${repo}\n[主题](TOPICS.md)`);
     const base = path.dirname(memory);
     put(path.join(base, 'TOPICS.md'), '- [workflow task](task.md)\n- [other](other.md)');
@@ -58,7 +64,7 @@ describe('只读动态记忆入口', () => {
   });
   it('both合计限量且保留两端来源；默认Codex能力保持兼容', () => {
     const home = fixture();
-    const repo = path.join(home, 'repo');
+    const repo = repositoryFixture(home, 'repo');
     put(path.join(home, '.codex/memories/memory_summary.md'), `cwd=${repo}`);
     put(path.join(home, '.codex/memories/MEMORY.md'), `# workflow\ncwd=${repo}\nworkflow task Codex经验`);
     const memory = project(home, 'project-current', `cwd=${repo}\n[workflow task](task.md)`);
@@ -72,7 +78,7 @@ describe('只读动态记忆入口', () => {
   });
   it('ZCode多库歧义不猜选，旧迁移库不作兜底，both显式标部分缺失', () => {
     const home = fixture();
-    const repo = path.join(home, 'repo');
+    const repo = repositoryFixture(home, 'repo');
     project(home, 'one', `cwd=${repo}\n[workflow](task.md)`);
     project(home, 'two', `cwd=${repo}\n[workflow](task.md)`);
     put(path.join(home, '.zcode/memories/MEMORY.md'), 'workflow 历史迁移不自动读取');
@@ -82,7 +88,7 @@ describe('只读动态记忆入口', () => {
   });
   it('ZCode越界索引链接不读取，缺失主题与正文截断显式记录', () => {
     const home = fixture();
-    const repo = path.join(home, 'repo');
+    const repo = repositoryFixture(home, 'repo');
     const memory = project(home, 'current', `cwd=${repo}\n[workflow private](../../outside.md)\n[workflow missing](missing.md)`);
     const result = searchMemory(repo, { home, query: 'workflow', source: 'zcode' });
     expect(result).toMatchObject({ status: 'incomplete', matches: [] });
@@ -106,7 +112,7 @@ describe('只读动态记忆入口', () => {
   });
   it('显式query按仓库与全部关键词过滤，带来源行号且不执行引用内容', () => {
     const home = fixture();
-    const repo = path.join(home, 'repo');
+    const repo = repositoryFixture(home, 'repo');
     put(path.join(home, '.codex/memories/memory_summary.md'), `项目 ${repo}`);
     const source = put(path.join(home, '.codex/memories/MEMORY.md'),
       `# Task Group: workflow\ncwd=${repo}\n\n## Knowledge\nworkflow task 小修免登记历史建议\n[topic](secret.md)\n\n# Task Group: neighbour\ncwd=${repo}2\nworkflow task 不相关\n\n# Task Group: one-term\ncwd=${repo}\nworkflow only\n`);
@@ -125,7 +131,7 @@ describe('只读动态记忆入口', () => {
   });
   it('索引无当前仓库时不从正文猜测身份；query和limit失败必须显式返回', () => {
     const home = fixture();
-    const repo = path.join(home, 'repo');
+    const repo = repositoryFixture(home, 'repo');
     put(path.join(home, '.codex/memories/memory_summary.md'), '# unrelated');
     put(path.join(home, '.codex/memories/MEMORY.md'), `# secret\ncwd=${repo}\nworkflow`);
     expect(searchMemory(repo, { home, query: 'workflow' }).status).toBe('project-not-indexed');
@@ -135,7 +141,7 @@ describe('只读动态记忆入口', () => {
   });
   it('匹配数与输出有界，正文截断导致缺失命中时不宣称全库无结果', () => {
     const home = fixture();
-    const repo = path.join(home, 'repo');
+    const repo = repositoryFixture(home, 'repo');
     put(path.join(home, '.codex/memories/memory_summary.md'), `cwd=${repo}`);
     const source = put(path.join(home, '.codex/memories/MEMORY.md'), Array.from({ length: 5 }, (_, i) =>
       `# topic${i}\ncwd=${repo}\nworkflow ${'x'.repeat(1800)}`).join('\n'));
@@ -149,7 +155,7 @@ describe('只读动态记忆入口', () => {
   });
   it('真实知识优先于历史索引和关键词堆砌，query不只返回战报入口', () => {
     const home = fixture();
-    const repo = path.join(home, 'repo');
+    const repo = repositoryFixture(home, 'repo');
     put(path.join(home, '.codex/memories/memory_summary.md'), `cwd=${repo}`);
     put(path.join(home, '.codex/memories/MEMORY.md'), `# Task Group: workflow\ncwd=${repo}\n` +
       '## Task 1: history\n### keywords\nworkflow task\n' + 'rollout_metadata\n'.repeat(30) +
@@ -159,14 +165,14 @@ describe('只读动态记忆入口', () => {
   });
   it('索引截断不能误报项目不存在，也不能越过索引直接读正文', () => {
     const home = fixture();
-    const repo = path.join(home, 'repo');
+    const repo = repositoryFixture(home, 'repo');
     put(path.join(home, '.codex/memories/memory_summary.md'), 'x'.repeat(17000) + ` cwd=${repo}`);
     put(path.join(home, '.codex/memories/MEMORY.md'), `# secret\ncwd=${repo}\nworkflow`);
     expect(searchMemory(repo, { home, query: 'workflow' })).toMatchObject({ status: 'incomplete', truncated: true, matches: [] });
   });
   it('换机从 USERPROFILE 发现，不依赖固定用户与 project 哈希', () => {
     const home = fixture();
-    const repo = path.join(home, '新的中文用户', '代号柒');
+    const repo = repositoryFixture(home, '新的中文用户', '代号柒');
     const summary = put(path.join(home, '.codex/memories/memory_summary.md'), `项目 ${repo}`);
     put(path.join(home, '.codex/memories/MEMORY.md'), '不应该返回的历史正文');
     const memory = project(home, 'project-new-hash', `项目路径：\`${repo}\``);
@@ -195,7 +201,7 @@ describe('只读动态记忆入口', () => {
   });
   it('两个精确匹配不猜测最新 hash，不自动选中', () => {
     const home = fixture();
-    const repo = path.join(home, 'repo');
+    const repo = repositoryFixture(home, 'repo');
     project(home, 'project-old', `cwd=${repo}`);
     project(home, 'project-new', `cwd=${repo}`);
     const result = discoverMemory(repo, { home });
@@ -206,7 +212,7 @@ describe('只读动态记忆入口', () => {
   });
   it('无精确匹配返回候选原因，旧迁移库不能误判成当前库', () => {
     const home = fixture();
-    const repo = path.join(home, '代号柒');
+    const repo = repositoryFixture(home, '代号柒');
     project(home, 'project-other', `cwd=${repo}2`);
     put(path.join(home, '.zcode/memories/MEMORY.md'), `cwd=${repo}`);
     const result = discoverMemory(repo, { home });
@@ -217,17 +223,29 @@ describe('只读动态记忆入口', () => {
   });
   it('项目 JSON 仅识别白名单完整路径字段，名称不能冒充项目身份', () => {
     const home = fixture();
-    const repo = path.join(home, 'repo');
+    const repo = repositoryFixture(home, 'repo');
     const memory = project(home, 'arbitrary-name', '# 无路径索引');
     put(path.join(path.dirname(path.dirname(memory)), 'metadata.json'), JSON.stringify({ name: repo, cwd: repo }));
     const result = discoverMemory(repo, { home });
     expect(result.zcode.status).toBe('matched');
     expect(result.zcode.matched[0].evidence).toEqual([expect.objectContaining({ type: 'metadata-repository-path', key: 'cwd' })]);
   });
+  it('父目录也有仓库标记时仍选自身仓库，不混入邻居项目', () => {
+    const home = fixture();
+    mkdirSync(path.join(home, '.git'), { recursive: true });
+    const repo = repositoryFixture(home, 'repo');
+    const memory = project(home, 'project-current', '# 无路径索引');
+    put(path.join(path.dirname(path.dirname(memory)), 'metadata.json'), JSON.stringify({ cwd: repo }));
+    project(home, 'project-neighbour', `cwd=${repo}2`);
+    const result = discoverMemory(repo, { home });
+    expect(result.repositoryRoot).toBe(repo);
+    expect(result.zcode.status).toBe('matched');
+    expect(result.zcode.matched.map(candidate => candidate.memoryPath)).toEqual([memory]);
+    expect(result.zcode.candidates.find(candidate => candidate.directory === 'project-neighbour').matched).toBe(false);
+  });
   it('从游戏子目录向上找仓库，索引只读16KB且不读取引用正文', () => {
     const home = fixture();
-    const repo = path.join(home, 'repo');
-    mkdirSync(path.join(repo, '.git'), { recursive: true });
+    const repo = repositoryFixture(home, 'repo');
     mkdirSync(path.join(repo, '搜打撤'), { recursive: true });
     const memory = project(home, 'project-bounded', '# 索引\n[topic](topic.md)\n' + 'x'.repeat(17000) + ` cwd=${repo}`);
     put(path.join(path.dirname(memory), 'topic.md'), `cwd=${repo}\n正文秘密`);
@@ -240,7 +258,7 @@ describe('只读动态记忆入口', () => {
   });
   it('存在不可读项目索引时不能宣称其他唯一命中已唯一确认', () => {
     const home = fixture();
-    const repo = path.join(home, 'repo');
+    const repo = repositoryFixture(home, 'repo');
     project(home, 'project-good', `cwd=${repo}`);
     mkdirSync(path.join(home, '.zcode/cli/memories/projects/project-bad/memory/MEMORY.md'), { recursive: true });
     const result = discoverMemory(repo, { home });
@@ -250,7 +268,7 @@ describe('只读动态记忆入口', () => {
   });
   it('超过目录上限时不把已见的唯一命中当作唯一库', () => {
     const home = fixture();
-    const repo = path.join(home, 'repo');
+    const repo = repositoryFixture(home, 'repo');
     for (let index = 0; index < 101; index++) project(home, `project-${String(index).padStart(3, '0')}`, index === 0 ? `cwd=${repo}` : '# 索引');
     const result = discoverMemory(repo, { home });
     expect(result.zcode.status).toBe('review-required');

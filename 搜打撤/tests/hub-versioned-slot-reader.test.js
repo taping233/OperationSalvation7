@@ -118,7 +118,7 @@ describe('versioned-slot-reader 版本化读取管线', () => {
     expect(out[0]).toBe('a');
   });
 
-  it('宽松 versionOf（+version||0）不因版本形状判坏', () => {
+  it('宽松 versionOf 保留非数值版本按旧档迁移的兼容行为', () => {
     const r = makeReader({ versionOf: (d) => +d.version || 0 });
     expect(r.parse(1, JSON.stringify({ version: 'abc' }))).toEqual({ version: 2, added: 1 });
   });
@@ -141,5 +141,35 @@ describe('versioned-slot-reader 版本化读取管线', () => {
     expect(r.parse(1, '{"v":1}')).toEqual({ written: true });
     r.invalidate(1);
     expect(r.parse(1, '{"v":1}')).toEqual({ v: 1, added: 1, version: 2 });
+  });
+});
+
+
+describe('宽松版本转换后的迁移安全边界', () => {
+  beforeEach(() => localStorage.clear());
+
+  it.each([-1, -1e308, '-Infinity', 'Infinity', 1.5, '1.5'])('拒绝非法迁移起点 %s 并保留原档', (version) => {
+    const migrate = vi.fn((data) => data);
+    const r = makeReader({ versionOf: (data) => +data.version || 0, migrations: { 1: migrate } });
+    const raw = JSON.stringify({ version, hp: 7 });
+    localStorage.setItem('test-slot', raw);
+    expect(r.parse(1, raw)).toBeNull();
+    expect(r.issue(1)).toBe('corrupt');
+    expect(migrate).not.toHaveBeenCalled();
+    expect(localStorage.getItem('test-slot')).toBe(raw);
+    expect(localStorage.getItem('test-corrupt-1')).toBe(raw);
+  });
+
+  it.each([{}, { version: 'abc' }, { version: '1' }])('保留合法历史输入的逐版迁移 %j', (data) => {
+    const r = makeReader({ versionOf: (entry) => +entry.version || 0 });
+    expect(r.parse(1, JSON.stringify(data))).toEqual({ version: 2, added: 1 });
+    expect(r.issue(1)).toBeNull();
+  });
+
+  it('合法过新整数仍只标记 tooNew，不做坏档备份', () => {
+    const r = makeReader({ versionOf: (data) => +data.version || 0 });
+    expect(r.parse(1, JSON.stringify({ version: '3' }))).toBeNull();
+    expect(r.issue(1)).toBe('tooNew');
+    expect(localStorage.getItem('test-corrupt-1')).toBeNull();
   });
 });

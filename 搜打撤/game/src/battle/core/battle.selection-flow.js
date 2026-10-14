@@ -10,7 +10,7 @@ import { createBattleDiscoverFlow } from '../effects/battle.discover-flow.js';
 /** @typedef {{ all: () => SelectionCard[], isRandomObtainable: (card: SelectionCard) => boolean, sellPrice: (card: SelectionCard) => number }} SelectionCardsPort */
 
 /**
- * @param {{ cards: SelectionCardsPort, deny: () => void, random01: () => number, throwIfActionCancelled: (signal: AbortSignal | undefined) => void, session: { handSelectQueue: unknown[], choiceQueue: unknown[] }, [key: string]: unknown }} ports
+ * @param {{ cards: SelectionCardsPort, deny: () => void, random01: () => number, throwIfActionCancelled: (signal: AbortSignal | undefined) => void, session: { handSelectQueue: unknown[], choiceQueue: unknown[], resumeTurnEnd?: () => boolean }, [key: string]: unknown }} ports
  */
 export function createBattleSelectionFlow({
   cards, deny, random01, throwIfActionCancelled,
@@ -63,8 +63,23 @@ export function createBattleSelectionFlow({
     output: { log: (message, kind) => G.log(message, kind) },
   });
   const randomDiscoverCard = (...args) => discoverFlow.randomDiscoverCard(...args);
-  const processDiscoverQueue = () => discoverFlow.processDiscoverQueue();
-  const pickDiscover = index => discoverFlow.pickDiscover(index);
+  const processDiscoverQueue = () => {
+    // 空池或不支持的发现任务会自行跳过；继续排队任务，不能留下无人处理的回合续接。
+    do { discoverFlow.processDiscoverQueue(); }
+    while (!discovering && discoverQueue.length);
+  };
+  const pickDiscover = index => {
+    discoverFlow.pickDiscover(index);
+    settleSelections();
+  };
+
+  function settleSelections() {
+    if (!G?.battleActive) return;
+    processHandSelect();
+    processChoice();
+    processDiscoverQueue();
+    session.resumeTurnEnd?.();
+  }
 
   // —— 手牌选卡（2026-09-06 #24/#25）：「选择 N 张手牌中的 X 施放/消耗」通用执行 ——
   function processHandSelect() {
@@ -89,7 +104,7 @@ export function createBattleSelectionFlow({
     if (handSelecting.mandatory) { deny(); return; }
     set$handSelecting(null);
     G.log('[[icon:cards]] 跳过手牌选择，该效果未结算', 'warn');
-    processHandSelect();
+    settleSelections();
     requestBattleRender();
   }
   function finishHandSelectionEffect(card, text, target) {
@@ -105,11 +120,11 @@ export function createBattleSelectionFlow({
       return;
     }
     if (!alive().length) { finish(true); return; }
-    processHandSelect();
+    settleSelections();
     requestBattleRender();
   }
   function pickHandSelect(uid) {
-    if (!handSelecting) return;
+    if (!G?.battleActive || !handSelecting) return;
     const entry = findCard(uid);
     if (!entry) return;
     if (handSelecting.act === 'payment') {
@@ -147,15 +162,18 @@ export function createBattleSelectionFlow({
       set$handSelecting(null);
       if (!valid) {
         G.log(`[[icon:cross]] 【${esc(card?.name || '卡牌')}】手牌支付未凑齐，未消耗手牌或能量`, 'warn');
+        settleSelections();
         requestBattleRender();
         return;
       }
-      queueCardExecution(cardUid, card, fuelUids || [], target || null, !!freeCost, true, payment, onResolved);
+      if (queueCardExecution(cardUid, card, fuelUids || [], target || null, !!freeCost, true, payment, onResolved) === false) settleSelections();
       return;
     }
+    // 所有效果选牌都只接受当前手牌中的合格候选；旧按钮不能重复消耗已移出的 UID。
+    if (!hand.includes(uid) || !matchesHandSelectKey(entry.card, handSelecting.type)) return;
     if (handSelecting.act === 'play') {
       set$handSelecting(null);
-      queueCardExecution(uid, entry.card, [], alive()[0] || null, true);   // 选卡施放：不扣费
+      if (queueCardExecution(uid, entry.card, [], alive()[0] || null, true) === false) settleSelections();   // 选卡施放：不扣费
       return;
     }
     if (handSelecting.act === 'copy') {
@@ -174,7 +192,7 @@ export function createBattleSelectionFlow({
       zeroFeeUntil.set(uid, turn + 1);
       G.log(`[[icon:bolt]] 【${esc(entry.card.name)}】下回合打出时变为 <b>0</b> 费`, 'sys');
       set$handSelecting(null);
-      processHandSelect();
+      settleSelections();
       requestBattleRender();
       return;
     }
@@ -182,13 +200,14 @@ export function createBattleSelectionFlow({
     consumed.push(uid);
     cardAnims.push({ kind: 'burn', uid, name: entry.card.name });
     G.log(`[[icon:flask]] 消耗了手牌中的【<b>${esc(entry.card.name)}</b>】`, 'sys');
+    const job = handSelecting;
+    job.n -= 1;
+    // 先完成当前选牌，再触发它产生的新选牌，避免旧收尾清掉新弹层。
+    if (job.n <= 0) set$handSelecting(null);
     // Q2 老板定向：手选消耗也算「消耗该牌时」触发
     fireConsumeTriggers(entry.card, null);
     if (!G?.battleActive) return;
-    handSelecting.n -= 1;
-    if (handSelecting.n > 0) { requestBattleRender(); return; }
-    const job = handSelecting;
-    set$handSelecting(null);
+    if (job.n > 0) { requestBattleRender(); return; }
     if (typeof job.onDone === 'function') job.onDone();
     if (!G?.battleActive) return;
     finishHandSelectionEffect(job.srcCard || entry.card, job.thenText, job.target || null);
@@ -201,7 +220,8 @@ export function createBattleSelectionFlow({
     requestBattleRender();
   }
   function pickChoice(i) {
-    if (!choosing) return;
+    if (!G?.battleActive || !choosing || !Number.isInteger(+i) ||
+        +i < 0 || +i >= choosing.options.length) return;
     const job = choosing;
     set$choosing(null);
     const text = job.options[+i] || '';
@@ -247,8 +267,7 @@ export function createBattleSelectionFlow({
       }
       sweepDead();
       if (!alive().length) { finish(true); return; }
-      processChoice();
-      processDiscoverQueue();
+      settleSelections();
       requestBattleRender();
     }
   }

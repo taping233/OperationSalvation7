@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
 import before from '../docs/evidence/e8-card-migration-2026-09-27/catalog-before.json';
-import { approvedRevisionBaseline, RETIRED_1010 } from './helpers/card-catalog-approved-revisions.js';
+import { approvedRevisionBaseline, isApprovedLampArmorRemoval, RETIRED_1010 } from './helpers/card-catalog-approved-revisions.js';
 
 const text = readFileSync('docs/M-BATCH-MATRIX.md', 'utf8');
 const targetIds = [...text.matchAll(/^\| ([a-z][\w-]+) \|/gm)].map(match => match[1]).filter(id => id !== 'id');
@@ -49,10 +49,12 @@ describe('M batch production boot', () => {
       const current = first.find(card => card.id === previous.id);
       const fields = Object.keys({ ...previous, ...current }).filter(key =>
         JSON.stringify(previous[key]) !== JSON.stringify(current[key]));
+      if (previous.id === 'tt3-magic-lamp') expect(isApprovedLampArmorRemoval(previous, current)).toBe(true);
       const allowed = previous.id === 'tt3-noon-duel' ? ['rules', 'dmg', 'dmgType']
         : previous.id === 'tt3-petal' ? ['rules', 'desc', 'heal']
         // 2026-10-02 老板拍板：自然形态→满月形态，转牧师职业卡（id 不变）。
-        : previous.id === 'tt3-nature-form' ? ['rules', 'name', 'rarity', 'cls', 'unrandom'] : ['rules'];
+        : previous.id === 'tt3-nature-form' ? ['rules', 'name', 'rarity', 'cls', 'unrandom']
+        : previous.id === 'tt3-magic-lamp' ? ['rules', 'armor'] : ['rules'];
       expect(fields.filter(key => !allowed.includes(key)), previous.id).toEqual([]);
       if (excludedIds.includes(previous.id)) expect(current).toEqual(previous);
     }

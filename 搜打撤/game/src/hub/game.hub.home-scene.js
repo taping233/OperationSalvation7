@@ -3,7 +3,6 @@ import { readBase, readBaseReceipt, commitBase } from './base.commands.js';
 import { getCollection } from './collection.commands.js';
 import { createHomeCommands } from '../home/home.commands.js';
 import { presentHome, homeErrorMessage } from '../home/home.presenter.js';
-import { getM04VisualPack } from '../home/home.visuals.js';
 import { homeRequestId } from './game.hub.bridge.js';
 
 /** Own the optional Home scene and invalidate its async work when the hub changes. */
@@ -37,9 +36,10 @@ export function createHubHomeScene({ UI, disposePreparation, renderHub, closeBas
       if (next.ok && homeController) homeController.update(next.value);
       return next;
     };
-    const visualPack = getM04VisualPack();
-    import('../home/home.scene.js').then(({ mountHome }) => {
+    Promise.all([import('../home/home.scene.js'), import('../home/home.visuals.js')])
+      .then(([{ mountHome }, { getM04VisualPack }]) => {
       if (request !== homeSceneRequest || !host.isConnected) return;
+      const visualPack = getM04VisualPack();
       homeController = mountHome({
       host, view: read.value, assets: {
         ...visualPack,

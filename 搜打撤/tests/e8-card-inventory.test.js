@@ -193,6 +193,30 @@ describe('E8 isolated production inventory', () => {
       .toThrow('CARDS_SYNC card fields changed');
   });
 
+  it('神灯只批准已知生产副本的 armor:5 删除及精确 M11 声明', () => {
+    for (const change of [
+      card => { card.armor = 0; }, card => { card.armor = 5; }, card => { card.armor = 7; },
+      card => { card.armor = undefined; }, card => { card.desc += '自定义'; },
+      card => { card.cost++; }, card => { card.rules.battle.hosted = ['other-choice']; },
+    ]) {
+      const changed = clone(inventory);
+      change(changed.production.cards.find(row => row.id === 'tt3-magic-lamp').card);
+      expect(() => compareMigrationInventories(currentBaseline, changed, APPROVED_IDS,
+        HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID))
+        .toThrow('tt3-magic-lamp changed beyond approved rules addition');
+    }
+    for (const change of [
+      card => { card.armor = 7; }, card => { card.armor = '5'; },
+      card => { card.desc = '获得 5 点护甲。'; }, card => { card.name = '自定义神灯'; },
+    ]) {
+      const changedBefore = clone(currentBaseline);
+      change(changedBefore.production.cards.find(row => row.id === 'tt3-magic-lamp').card);
+      expect(() => compareMigrationInventories(changedBefore, inventory, APPROVED_IDS,
+        HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID))
+        .toThrow('tt3-magic-lamp changed beyond approved rules addition');
+    }
+  });
+
   it('accepts only an explicit after generation selector; before evidence is frozen', () => {
     expect(['', 'after']).toContain(process.env.SDT_E8_WRITE_INVENTORY || '');
   });

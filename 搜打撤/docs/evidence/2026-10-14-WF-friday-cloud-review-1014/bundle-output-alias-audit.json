@@ -1,0 +1,129 @@
+{
+  "basis": "Read-only inspection and isolated evaluation of the actual compiled assetUrl + dictionary; no browser claim",
+  "entry": "index-Cg2chXaT.js",
+  "entrySha256": "fcb06e56d507a1b73cabf6a5086463814e87c0318badf9c0c285b7c820cc39ec",
+  "dictionaryAliasKeys": 17,
+  "liveStaticAliasReferences": [],
+  "resolutions": [
+    {
+      "requested": "assets/scenes/chests/small-rig-640-v1/frame-01.webp",
+      "resolved": "assets/scenes/chests/small-rig-640-v1/frame-00.webp?v=0.60.0",
+      "correctTarget": true,
+      "targetExists": true,
+      "aliasOmitted": true
+    },
+    {
+      "requested": "assets/scenes/chests/small-rig-640-v1/frame-02.webp",
+      "resolved": "assets/scenes/chests/small-rig-640-v1/frame-00.webp?v=0.60.0",
+      "correctTarget": true,
+      "targetExists": true,
+      "aliasOmitted": true
+    },
+    {
+      "requested": "assets/scenes/chests/small-rig-640-v1/frame-17.webp",
+      "resolved": "assets/scenes/chests/small-rig-640-v1/frame-16.webp?v=0.60.0",
+      "correctTarget": true,
+      "targetExists": true,
+      "aliasOmitted": true
+    },
+    {
+      "requested": "assets/scenes/chests/medium-rig-640-v1/frame-01.webp",
+      "resolved": "assets/scenes/chests/medium-rig-640-v1/frame-00.webp?v=0.60.0",
+      "correctTarget": true,
+      "targetExists": true,
+      "aliasOmitted": true
+    },
+    {
+      "requested": "assets/scenes/chests/medium-rig-640-v1/frame-02.webp",
+      "resolved": "assets/scenes/chests/medium-rig-640-v1/frame-00.webp?v=0.60.0",
+      "correctTarget": true,
+      "targetExists": true,
+      "aliasOmitted": true
+    },
+    {
+      "requested": "assets/scenes/chests/medium-rig-640-v1/frame-17.webp",
+      "resolved": "assets/scenes/chests/medium-rig-640-v1/frame-16.webp?v=0.60.0",
+      "correctTarget": true,
+      "targetExists": true,
+      "aliasOmitted": true
+    },
+    {
+      "requested": "assets/scenes/chests/large-rig-640-v1/frame-01.webp",
+      "resolved": "assets/scenes/chests/large-rig-640-v1/frame-00.webp?v=0.60.0",
+      "correctTarget": true,
+      "targetExists": true,
+      "aliasOmitted": true
+    },
+    {
+      "requested": "assets/scenes/chests/large-rig-640-v1/frame-02.webp",
+      "resolved": "assets/scenes/chests/large-rig-640-v1/frame-00.webp?v=0.60.0",
+      "correctTarget": true,
+      "targetExists": true,
+      "aliasOmitted": true
+    },
+    {
+      "requested": "assets/scenes/chests/large-rig-640-v1/frame-17.webp",
+      "resolved": "assets/scenes/chests/large-rig-640-v1/frame-16.webp?v=0.60.0",
+      "correctTarget": true,
+      "targetExists": true,
+      "aliasOmitted": true
+    },
+    {
+      "requested": "assets/scenes/chests/class-rig-640-v1/frame-01.webp",
+      "resolved": "assets/scenes/chests/class-rig-640-v1/frame-00.webp?v=0.60.0",
+      "correctTarget": true,
+      "targetExists": true,
+      "aliasOmitted": true
+    },
+    {
+      "requested": "assets/scenes/chests/class-rig-640-v1/frame-02.webp",
+      "resolved": "assets/scenes/chests/class-rig-640-v1/frame-00.webp?v=0.60.0",
+      "correctTarget": true,
+      "targetExists": true,
+      "aliasOmitted": true
+    },
+    {
+      "requested": "assets/scenes/chests/class-rig-640-v1/frame-17.webp",
+      "resolved": "assets/scenes/chests/class-rig-640-v1/frame-16.webp?v=0.60.0",
+      "correctTarget": true,
+      "targetExists": true,
+      "aliasOmitted": true
+    },
+    {
+      "requested": "assets/scenes/chests/boss-rig-640-v1/frame-01.webp",
+      "resolved": "assets/scenes/chests/boss-rig-640-v1/frame-00.webp?v=0.60.0",
+      "correctTarget": true,
+      "targetExists": true,
+      "aliasOmitted": true
+    },
+    {
+      "requested": "assets/scenes/chests/boss-rig-640-v1/frame-02.webp",
+      "resolved": "assets/scenes/chests/boss-rig-640-v1/frame-00.webp?v=0.60.0",
+      "correctTarget": true,
+      "targetExists": true,
+      "aliasOmitted": true
+    },
+    {
+      "requested": "assets/scenes/chests/boss-rig-640-v1/frame-17.webp",
+      "resolved": "assets/scenes/chests/boss-rig-640-v1/frame-16.webp?v=0.60.0",
+      "correctTarget": true,
+      "targetExists": true,
+      "aliasOmitted": true
+    },
+    {
+      "requested": "assets/portraits/frames/changwuyu/sprite-v1/f000.webp",
+      "resolved": "assets/portraits/battle/changwuyu.webp?v=0.60.0",
+      "correctTarget": true,
+      "targetExists": true,
+      "aliasOmitted": true
+    },
+    {
+      "requested": "assets/portraits/frames/changwuyu/sprite-v1/neutral.webp",
+      "resolved": "assets/portraits/battle/changwuyu.webp?v=0.60.0",
+      "correctTarget": true,
+      "targetExists": true,
+      "aliasOmitted": true
+    }
+  ],
+  "pass": true
+}

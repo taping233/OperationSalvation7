@@ -8,10 +8,28 @@ export function createBattleExecutionSession() {
   const choiceQueue = [];
   let stagedResolutionDepth = 0;
   let generation = 0;
+  let turnEndContinuation = null;
+
+  // 回合结束属于整条出牌链：等待动作及其交互全部收口，且只续接一次。
+  function deferTurnEnd(resume, isReady) {
+    if (turnEndContinuation) return false;
+    turnEndContinuation = { generation, resume, isReady };
+    return true;
+  }
+
+  function resumeTurnEnd() {
+    const pending = turnEndContinuation;
+    if (!pending || pending.generation !== generation || actionQueue.running ||
+        actionQueue.length || stagedResolutionDepth || !pending.isReady()) return false;
+    turnEndContinuation = null;   // 先移交所有权，重入/重复点击不能再次续接。
+    pending.resume();
+    return true;
+  }
 
   function reset(reason = 'battle replaced') {
     // 先使旧演出的收尾失效，再取消动作，避免跨战斗的 finally 清理新状态。
     generation++;
+    turnEndContinuation = null;
     actionQueue.clear(reason);
     stagedDeathFx.clear();
     handSelectQueue.length = 0;
@@ -27,6 +45,9 @@ export function createBattleExecutionSession() {
     get stagedResolutionDepth() { return stagedResolutionDepth; },
     set stagedResolutionDepth(value) { stagedResolutionDepth = value; },
     get generation() { return generation; },
+    get turnEndPending() { return !!turnEndContinuation; },
+    deferTurnEnd,
+    resumeTurnEnd,
     reset,
     abort: (reason = 'battle ended') => reset(reason),
   };

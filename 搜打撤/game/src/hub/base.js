@@ -47,7 +47,7 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
   const ownedPets = () => Object.keys(data.pets || {});
   // 当前携带的宠物（出发后各效果按此生效）；没有宠物时返回 null
   const carriedPet = () => petById(data.petSel) || null;
-  // 读档异常（档位 -> 'corrupt' | 'tooNew'）由 reader 统一维护，供 UI 查询
+  // 读档异常（档位 -> 'corrupt' | 'tooNew' | 'readFailed'）由 reader 统一维护，供 UI 查询
   const rules = () => window.SDT.MAP.rules;
   // 基地成长接音（迭代评审 09-20）：升级成功=levelup；base.js 无 UI/Sound 静态导入，
   // 循 window.SDT 晚读惯例（同 :41 MAP），失败分支不播 deny（调用层 UI 已有 deny 职责）
@@ -81,11 +81,13 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
     rejectArrays: false,
   });
 
-  function parseRaw(i) {
-    let raw;   // 不做冗余初始化：try 内必赋值，catch 直接 return（下方 == null 判断兼容 undefined）
-    try { raw = localStorage.getItem(SLOT_KEY(i)); } catch { return null; }
-    return reader.parse(i, raw);
+  function readSlot(i) {
+    let raw;
+    try { raw = localStorage.getItem(SLOT_KEY(i)); }
+    catch { reader.markIssue(i, 'readFailed'); return null; }
+    return { raw, value: reader.parse(i, raw) };
   }
+  function parseRaw(i) { return readSlot(i)?.value || null; }
   function issue(i) { return reader.issue(i); }
 
   // 启动迁移：旧全局基地 → 每一个已有对局存档的档位（都没有则给档位 1）
@@ -106,10 +108,11 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
   // 进入档位：加载该档独立的基地数据（没有则用初始值 = 新档案）
   function use(s) {
     slot = s;
-    try { writeBaseline.set(s, localStorage.getItem(SLOT_KEY(s))); }
-    catch { writeBaseline.set(s, null); }
-    const raw = parseRaw(s);
-    data = raw ? adopt(raw) : def();
+    const found = readSlot(s);
+    // 装载与写基线使用同一次读取；读取失败不能获得空档的写权限。
+    if (found) writeBaseline.set(s, found.raw);
+    else writeBaseline.delete(s);
+    data = found?.value ? adopt(found.value) : def();
     ensureStarterPet();
     return data;
   }
@@ -129,6 +132,8 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
     if (txPending(slot)) return false;
     // 损坏档／未来版本只允许显式 reset 覆盖，普通旧流程不得把兜底默认值写回原键。
     if (issue(slot)) return false;
+    // 失败装载后的 peek/命令预读可清除 issue，但没有采纳运行态，仍不能保存兜底值。
+    if (!writeBaseline.has(slot)) return false;
     try {
       const currentRaw = localStorage.getItem(SLOT_KEY(slot));
       if (writeBaseline.has(slot) && currentRaw !== writeBaseline.get(slot)) {
@@ -256,6 +261,7 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
         try { if (window.SDT && window.SDT.UI) window.SDT.UI.log('[[icon:cross]] 档位已在其他标签页创建，请返回选档重新进入', 'warn'); } catch { /* 门面未就绪 */ }
         return false;
       }
+      writeBaseline.set(s, currentRaw);
     } catch { return false; }
     slot = s;
     reader.clearIssue(s); // reset 是玩家明确的新开档动作，允许覆盖先前不可读档。
@@ -302,13 +308,10 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
 
   // 只读概览：读取某档位的基地数据但不切换当前档位（选档界面展示用）
   function peek(i) {
-    try {
-      const raw = localStorage.getItem(SLOT_KEY(i));
-      if (raw === null) emptySlotObservation.set(i, null);
-      else emptySlotObservation.delete(i);
-    } catch { emptySlotObservation.delete(i); }
-    const raw = parseRaw(i);
-    return raw ? adopt(raw) : null;
+    const found = readSlot(i);
+    if (found && found.raw === null) emptySlotObservation.set(i, null);
+    else emptySlotObservation.delete(i);
+    return found?.value ? adopt(found.value) : null;
   }
 
   // M01 命令门面的内部窄接口。领域/UI 不应直接调用；单键写成功后才替换当前内存。
@@ -331,10 +334,11 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
   }
   function _refreshExternal(i) {
     reader.invalidate(i);
-    const raw = parseRaw(i);
-    try { writeBaseline.set(i, localStorage.getItem(SLOT_KEY(i))); } catch { writeBaseline.delete(i); }
-    if (raw && slot === i) data = adopt(raw);
-    return raw ? adopt(raw) : null;
+    const found = readSlot(i);
+    if (found) writeBaseline.set(i, found.raw);
+    else writeBaseline.delete(i);
+    if (found?.value && slot === i) data = adopt(found.value);
+    return found?.value ? adopt(found.value) : null;
   }
 
   // 删除某档位的基地数据

@@ -1,16 +1,125 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
+import { readFileSync } from 'node:fs';
 import { createBattleEntryGate, waitForBattleImages } from '../game/src/battle/view/battle.presentation-ready.js';
 
-let gate, overlay, stage;
+let gate, overlay, stage, style;
+const battleCss = readFileSync('game/css/battle.css', 'utf8');
 const deferred = () => { let resolve; const promise = new Promise(done => { resolve = done; }); return { promise, resolve }; };
 const flush = async () => { for (let i = 0; i < 5; i++) await Promise.resolve(); };
 beforeEach(() => {
   vi.useFakeTimers();
-  document.body.innerHTML = '<div id="overlay"><div class="battle-stage"><div class="sts-encounter"></div></div></div>';
+  document.body.innerHTML = '<div id="overlay"><div class="battle-stage sts"><div class="sts-encounter"></div></div></div>';
   overlay = document.getElementById('overlay'); stage = overlay.firstElementChild; stage._battleToken = 1;
   gate = createBattleEntryGate({ timeoutMs: 8000 });
 });
-afterEach(() => { gate.dispose(); vi.useRealTimers(); });
+afterEach(() => { gate.dispose(); style?.remove(); style = null; vi.useRealTimers(); });
+
+it('covers the entire overlay with a readable loading panel and a visible fallback action only after failure', async () => {
+  style = document.createElement('style'); style.textContent = battleCss; document.head.appendChild(style);
+  gate.begin(stage, 1, overlay);
+  const curtain = overlay.querySelector('.battle-entry-curtain');
+  const copy = curtain.querySelector('.battle-entry-copy'), button = copy.querySelector('button');
+  const curtainStyle = getComputedStyle(curtain), copyStyle = getComputedStyle(copy);
+  expect(curtain.parentElement).toBe(overlay);
+  expect(curtainStyle.position).toBe('absolute'); expect(curtainStyle.inset).toBe('0');
+  expect(curtainStyle.display).toBe('grid'); expect(curtainStyle.placeItems).toBe('center');
+  expect(Number(curtainStyle.zIndex)).toBeGreaterThan(900);
+  expect(curtainStyle.pointerEvents).toBe('auto');
+  expect(curtainStyle.backgroundColor).toBe('rgb(12, 13, 15)');
+  expect(copyStyle.color).toBe('rgb(245, 246, 243)');
+  expect(copyStyle.backgroundColor).toBe('rgb(29, 32, 35)');
+  expect(getComputedStyle(button).display).toBe('none');
+  gate.wait(stage, 1, [Promise.resolve(false)]); await flush();
+  expect(button.hidden).toBe(false); expect(getComputedStyle(button).display).toBe('inline-flex');
+  expect(getComputedStyle(button).color).toBe('rgb(12, 13, 15)');
+  expect(getComputedStyle(button).backgroundColor).toBe('rgb(242, 199, 92)');
+  expect(getComputedStyle(button).minHeight).toBe('48px');
+  expect(battleCss).toContain('.battle-entry-copy button:focus-visible');
+});
+
+it('keeps keyboard focus on the available fallback without swallowing native Enter or Space activation', async () => {
+  const gameplayKey = vi.fn(); document.addEventListener('keydown', gameplayKey);
+  try {
+    gate.begin(stage, 1, overlay); gate.wait(stage, 1, [Promise.resolve(false)]); await flush();
+    const button = overlay.querySelector('.battle-entry-curtain button');
+    for (const shiftKey of [false, true]) {
+      const tab = new KeyboardEvent('keydown', { key: 'Tab', shiftKey, bubbles: true, cancelable: true });
+      document.dispatchEvent(tab);
+      expect(tab.defaultPrevented).toBe(true); expect(document.activeElement).toBe(button);
+    }
+    for (const key of ['Enter', ' ']) {
+      const activation = new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true });
+      button.dispatchEvent(activation); expect(activation.defaultPrevented).toBe(false);
+    }
+    expect(gameplayKey).not.toHaveBeenCalled();
+    button.click();
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    expect(gameplayKey).toHaveBeenCalledTimes(1); expect(stage.inert).toBe(false);
+  } finally { document.removeEventListener('keydown', gameplayKey); }
+});
+
+it('keeps the simplified-display notice when a routine render replaces encounter information', async () => {
+  stage.innerHTML = '<div class="sts-topbar"><div class="sts-encounter">第 1 回合</div><details class="sts-options"></details></div>';
+  gate.begin(stage, 1, overlay); gate.wait(stage, 1, [Promise.resolve(false)]); await flush();
+  overlay.querySelector('.battle-entry-curtain button').click();
+  const note = stage.querySelector('.battle-entry-note');
+  expect(note?.getAttribute('role')).toBe('status');
+  const next = document.createElement('div'); next.className = 'sts-encounter'; next.textContent = '第 2 回合';
+  stage.querySelector('.sts-encounter').replaceWith(next);
+  expect(stage.querySelector('.battle-entry-note')).toBe(note);
+  expect(note.isConnected).toBe(true); expect(note.textContent).toContain('简化显示');
+  expect(note.nextElementSibling).toBe(stage.querySelector('.sts-options'));
+});
+
+it.each(['ready', 'degraded'])('does not repeat %s entry when returning from a choice to the same battle token', async state => {
+  gate.begin(stage, 1, overlay); gate.wait(stage, 1, [Promise.resolve(state === 'ready')]); await flush();
+  if (state === 'degraded') overlay.querySelector('.battle-entry-curtain button').click();
+  gate.cancel(); stage.remove();
+  stage = document.createElement('div'); stage.className = 'battle-stage'; stage._battleToken = 1;
+  stage.innerHTML = '<div class="sts-topbar"><div class="sts-encounter">第 2 回合</div><details class="sts-options"></details></div>';
+  overlay.appendChild(stage); gate.begin(stage, 1, overlay);
+  expect(stage.dataset.battleEntry).toBe(state); expect(stage.inert).not.toBe(true);
+  expect(gate.pending(stage)).toBe(false); expect(overlay.querySelector('.battle-entry-curtain')).toBeNull();
+  expect(stage.querySelectorAll('.battle-entry-note')).toHaveLength(state === 'degraded' ? 1 : 0);
+  gate.begin(stage, 1, overlay); expect(stage.querySelectorAll('.battle-entry-note')).toHaveLength(state === 'degraded' ? 1 : 0);
+  stage._battleToken = 2; gate.begin(stage, 2, overlay);
+  expect(stage.dataset.battleEntry).toBe('loading'); expect(stage.inert).toBe(true);
+  expect(stage.querySelector('.battle-entry-note')).toBeNull();
+  expect(overlay.querySelector('.battle-entry-curtain')).not.toBeNull();
+});
+
+it.each(['loading', 'waiting'])('restarts an unfinished %s gate after departure and ignores the old completion', async state => {
+  const old = deferred(), next = deferred(), fallback = vi.fn();
+  gate.begin(stage, 1, overlay); gate.wait(stage, 1, [old.promise], { onFallback: fallback });
+  if (state === 'waiting') await vi.advanceTimersByTimeAsync(8000);
+  const oldButton = overlay.querySelector('.battle-entry-curtain button');
+  gate.cancel(); stage.remove();
+  stage = document.createElement('div'); stage._battleToken = 1; overlay.appendChild(stage);
+  gate.begin(stage, 1, overlay); gate.wait(stage, 1, [next.promise]);
+  oldButton.click(); old.resolve(true); await flush();
+  expect(fallback).not.toHaveBeenCalled(); expect(stage.dataset.battleEntry).toBe('loading');
+  expect(stage.inert).toBe(true); expect(overlay.querySelector('.battle-entry-curtain')).not.toBeNull();
+  next.resolve(true); await flush(); expect(stage.dataset.battleEntry).toBe('ready');
+});
+
+it('does not share completed entry state with a new gate after disposal', async () => {
+  gate.begin(stage, 1, overlay); gate.wait(stage, 1, [Promise.resolve(true)]); await flush();
+  gate.dispose(); gate = createBattleEntryGate(); gate.begin(stage, 1, overlay);
+  expect(stage.dataset.battleEntry).toBe('loading'); expect(stage.inert).toBe(true);
+  expect(overlay.querySelector('.battle-entry-curtain')).not.toBeNull();
+});
+
+it('reapplies simplified portrait placeholders after a restored stage mounts its units', async () => {
+  gate.begin(stage, 1, overlay); gate.wait(stage, 1, [Promise.resolve(false)]); await flush();
+  overlay.querySelector('.battle-entry-curtain button').click();
+  const figure = document.createElement('div'); figure.className = 'sts-figure';
+  figure.innerHTML = '<img src="/missing.webp" alt="失联角色">'; stage.appendChild(figure);
+  gate.begin(stage, 1, overlay);
+  expect(figure.querySelector('img').hidden).toBe(true);
+  expect(figure.classList.contains('battle-figure-fallback')).toBe(true);
+  expect(figure.dataset.fallbackLabel).toBe('失联角色');
+  expect(stage.querySelectorAll('.battle-entry-note')).toHaveLength(1);
+});
 
 it('keeps the first frame covered until scenery, rendered actor and visible images are all ready', async () => {
   const scenery = deferred(), actor = deferred(), images = deferred();

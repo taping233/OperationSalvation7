@@ -6,7 +6,7 @@
  * 管线骨架只有这一份；域间**有意的语义差异**以参数注入保留，本次收敛不改变
  * 任一侧的读取行为（除已知的 base 侧粘滞 issue 缺陷按 run 侧语义修复，见下）：
  *   - versionOf：run 侧 E5 严格口径（非负整数，否则坏档）；base 侧历史宽松口径
- *     （+version||0，永不因版本形状判坏）。
+ *     （+version||0，非数值沿用旧档；转换后仍须为非负整数）。
  *   - rejectArrays：run 侧拒数组顶层；base 侧历史放行。
  *   - postMigrate / toPublic：run 侧 migrateRunCharacter + publicRun 克隆出口；
  *     base 侧直返（调用方 adopt 再加工，缓存对象允许被就地规范化）。
@@ -19,7 +19,7 @@ export function createVersionedSlotReader({
   maxVersion,         // 当前 schema 版本（BASE_VERSION / SAVE_VERSION）
   migrations,         // { [fromVersion]: (data) => data } 纯函数迁移表
   corruptKeyFor,      // (index) => 坏档备份键
-  versionOf,          // (data) => 整数版本；返回 NaN 视为版本形状损坏
+  versionOf,          // (data) => 非负有限整数版本；其他结果视为版本形状损坏
   rejectArrays,       // 顶层是否拒绝数组
   postMigrate = null, // 迁移后的域内兜底（run: migrateRunCharacter；base 无）
   toPublic = null,    // 出口变换（run: publicRun 克隆；base 直返同一引用）
@@ -65,7 +65,7 @@ export function createVersionedSlotReader({
     catch { return markCorrupt(index, raw); }
     if (!data || typeof data !== 'object' || (rejectArrays && Array.isArray(data))) return markCorrupt(index, raw);
     const v = versionOf(data);
-    if (Number.isNaN(v)) return markCorrupt(index, raw);
+    if (!Number.isInteger(v) || v < 0) return markCorrupt(index, raw);
     if (v > maxVersion) {
       issues[index] = 'tooNew';
       console.warn(`${logTag} 档位 ${index} 存档版本(${v})新于当前游戏(${maxVersion})，拒绝读取`);
@@ -73,7 +73,7 @@ export function createVersionedSlotReader({
     }
     let mv = v;
     while (mv < maxVersion) {
-      // 缺函数只可能发生在 mv=0（v0 老档盖章步）或负 v（base 宽松口径）：1..maxVersion-1
+      // 缺函数只可能发生在 mv=0（v0 老档盖章步）：1..maxVersion-1
       // 的键位完整性已由上方装载校验兜死，此处不会静默跳级。
       const m = migrations[mv];
       if (m) data = m(data);

@@ -3,6 +3,8 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, rmSync
 import { execSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { collectVerifiedRuntimeAssetAliases } from './scripts/runtime-asset-aliases.mjs';
+import { minifyStandaloneCssAssets } from './scripts/css-asset-minification.mjs';
 
 // 逐文件读写拷贝：copyFileSync 在 Windows 下对只读源文件会 EPERM，read+write 则正常
 function copyDir(src, dest, relativePrefix = '') {
@@ -56,12 +58,18 @@ const ART_MANIFEST_DIRS = RUNTIME_ASSET_DIRS.filter(dir => dir !== 'sfx' && dir 
 const IMAGE_EXT_RE = /\.(webp|png|jpe?g|gif|svg)$/i;
 const ITEM_ART_ALIAS = Object.freeze({ id: 'tt-token-color', target: 'cmtmvq6ss84l' });
 let aliasedDuplicateAssets = null;
+let verifiedRuntimeAssetAliases = null;
 
-// 仅当权威 itemArt 仍指向等字节别名时，从发布清单与副本中省略旧键文件。
+function getVerifiedRuntimeAssetAliases() {
+  if (!verifiedRuntimeAssetAliases) verifiedRuntimeAssetAliases = collectVerifiedRuntimeAssetAliases(ASSETS_ROOT);
+  return verifiedRuntimeAssetAliases;
+}
+
+// 已核验的宝箱/立绘帧及权威 itemArt 等字节别名，从发布清单与副本中省略旧键文件。
 // 若映射被恢复为独立素材，或两份源文件发生分歧，则自动保留两份。
 function getAliasedDuplicateAssets() {
   if (aliasedDuplicateAssets) return aliasedDuplicateAssets;
-  aliasedDuplicateAssets = new Set();
+  aliasedDuplicateAssets = new Set(getVerifiedRuntimeAssetAliases().keys());
   const mapping = JSON.parse(readFileSync(path.join(GAME_ROOT, 'data', 'art-mapping.json'), 'utf8'));
   if (mapping.itemArt?.[ITEM_ART_ALIAS.id] !== ITEM_ART_ALIAS.target) return aliasedDuplicateAssets;
   for (const prefix of ['cards/items', 'thumbs/cards/items']) {
@@ -142,7 +150,7 @@ function assetFileName(assetInfo) {
     const absolute = path.isAbsolute(original) ? original : path.resolve(GAME_ROOT, original);
     const relative = path.relative(ASSETS_ROOT, absolute).split(path.sep).join('/');
     if (relative.startsWith('../') || path.isAbsolute(relative)) continue;
-    if (RUNTIME_ASSET_PREFIXES.some(prefix => relative.startsWith(prefix))) return `assets/${relative}`;
+    if (RUNTIME_ASSET_PREFIXES.some(prefix => relative.startsWith(prefix))) return `assets/${getVerifiedRuntimeAssetAliases().get(relative) || relative}`;
   }
   return 'assets/[name]-[hash][extname]';
 }
@@ -153,7 +161,22 @@ function copyStatic() {
   return {
     name: 'copy-static',
     apply: 'build',
+    config(_config, { command }) {
+      verifiedRuntimeAssetAliases = null;
+      aliasedDuplicateAssets = null;
+      return {
+        define: {
+          __RUNTIME_ASSET_ALIASES__: JSON.stringify(command === 'build'
+            ? Object.fromEntries([...getVerifiedRuntimeAssetAliases()].map(([alias, canonical]) => [`assets/${alias}`, `assets/${canonical}`]))
+            : {}),
+        },
+      };
+    },
     buildStart() {
+      // Config instances can be reused: changed source frames must be rechecked,
+      // rather than inheriting an alias decision from the previous build.
+      verifiedRuntimeAssetAliases = null;
+      aliasedDuplicateAssets = null;
       clearGeneratedDir(OUT_DIR);
       console.log(`[assets] cleared generated directory: ${OUT_DIR}`);
       // 模块解析前重写清单，保证本次构建的新增/删除图片立即生效
@@ -258,5 +281,5 @@ export default defineConfig({
       },
     },
   },
-  plugins: [copyStatic()],
+  plugins: [copyStatic(), minifyStandaloneCssAssets()],
 });

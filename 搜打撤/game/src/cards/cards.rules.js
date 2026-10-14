@@ -129,8 +129,11 @@ export const rulesSlice = {
     // 护甲词条推导：「获得 N 点护甲」「+N 甲」→ N
     deriveArmor(card) {
       if (+(card.armor || 0) > 0) return +card.armor;
-      const m = String(card.desc || '').match(/获得\s*(\d+)\s*点?\s*护甲/) ||
-                String(card.desc || '').match(/\+\s*(\d+)\s*甲/);
+      const desc = String(card.desc || '');
+      // 分支文本由选项结算，不能回填为出牌即获得的护甲；制作坊显式字段仍优先。
+      if (/抉择[:：]/.test(desc)) return 0;
+      const m = desc.match(/获得\s*(\d+)\s*点?\s*护甲/) ||
+                desc.match(/\+\s*(\d+)\s*甲/);
       return m ? +m[1] : 0;
     },
 

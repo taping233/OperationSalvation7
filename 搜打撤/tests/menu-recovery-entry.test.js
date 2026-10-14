@@ -3,28 +3,30 @@ import { createGameMenuController } from '../game/src/ui/game.menu.js';
 
 function setup(recoverSlotIfPending) {
   const handlers = {};
-  const base = { peek: () => ({}), use: vi.fn(), save: vi.fn(), data: { stash: [], pocket: [] }, issue: () => null, reset: vi.fn(), applyStoredCardRenames: vi.fn(() => false) };
+  const base = { peek: () => ({}), use: vi.fn(), save: vi.fn(), data: { stash: [], pocket: [] }, issue: () => null, reset: vi.fn(() => true), applyStoredCardRenames: vi.fn(() => false) };
   const openBaseHub = vi.fn();
   const runStore = { has: vi.fn(() => false), issue: () => null };
   const preflightRunMap = vi.fn(() => ({ ok: true }));
   const clearSlot = vi.fn();
   const UI = {
-    showOverlay(_title, html) { document.body.innerHTML = html; },
+    showOverlay(_title, html) { document.body.innerHTML = `<div id="ovBody">${html}</div>`; },
     hideOverlay() { document.body.innerHTML = ''; },
     registerHelp() {}, helpBtn() { return ''; }, act(name, fn) { handlers[name] = fn; },
-    log: vi.fn(), clearLog() {}, hideScreen() {}, showScreen() {}, refresh() {},
+    log: vi.fn(), clearLog() {}, hideScreen: vi.fn(), showScreen() {}, refresh() {},
   };
+  const setActiveSlot = vi.fn();
+  const game = { state: 'title' };
   const controller = createGameMenuController({
     SDT: { Base: base, Cards: { applyAbilityRename: () => false, applyDuplicateRenames: () => false }, Sound: { music() {} },
       Meta: { ACHIEVEMENTS: [], isUnlocked: () => false }, Icons: { img: () => '' } },
-    UI, game: { state: 'title' }, runtime: { resize() {}, openBaseHub, showRunTransition: () => Object.assign(Promise.resolve(true), { isCurrent: () => true }) },
+    UI, game, runtime: { resize() {}, openBaseHub, showRunTransition: () => Object.assign(Promise.resolve(true), { isCurrent: () => true }) },
     SLOT_COUNT: 1, esc: String, readSlot: () => null, loadGame: vi.fn(), clearSlot,
     saveGame() {}, syncPlayTime() {}, clearSave() {}, clearAllSlots() {},
-    getActiveSlot: () => null, setActiveSlot: vi.fn(), preflightRunMap, hasRun: () => false,
+    getActiveSlot: () => null, setActiveSlot, preflightRunMap, hasRun: () => false,
     RunStorage: runStore, recoverSlotIfPending,
   });
   controller.startNewGame();
-  return { handlers, base, openBaseHub, runStore, preflightRunMap, clearSlot, UI };
+  return { handlers, base, openBaseHub, runStore, preflightRunMap, clearSlot, UI, setActiveSlot, game };
 }
 
 describe('选档恢复门禁', () => {
@@ -69,5 +71,25 @@ describe('选档恢复门禁', () => {
     await entry;
     expect(h.base.use).not.toHaveBeenCalled();
     expect(h.openBaseHub).not.toHaveBeenCalled();
+  });
+
+  it.each(['newSlot', 'overwriteSlot'])('%s 初始化写入失败保留选档页和输入归属，重试成功才进入基地', action => {
+    const h = setup();
+    h.base.reset.mockReturnValueOnce(false).mockReturnValue(true);
+    const picker = document.querySelector('.slot-page');
+    if (action === 'overwriteSlot') h.handlers[action]({ slot: 1 }); // 首次只确认
+    expect(h.handlers[action]({ slot: 1 })).toBe(false);
+    expect(h.openBaseHub).not.toHaveBeenCalled();
+    expect(h.setActiveSlot).not.toHaveBeenCalled();
+    expect(h.UI.hideScreen).not.toHaveBeenCalled();
+    expect(h.game.state).toBe('modal');
+    expect(picker.isConnected).toBe(true);
+    expect(document.getElementById('slotRestoreError').textContent).toContain('初始化未保存');
+    expect(h.UI.log.mock.calls.some(([text]) => text.includes('已进入'))).toBe(false);
+    h.handlers[action]({ slot: 1 });
+    expect(h.base.reset).toHaveBeenCalledTimes(2);
+    expect(h.openBaseHub).toHaveBeenCalledOnce();
+    expect(h.setActiveSlot).toHaveBeenCalledWith(1);
+    expect(h.UI.log.mock.calls.filter(([text]) => text.includes('已进入'))).toHaveLength(1);
   });
 });

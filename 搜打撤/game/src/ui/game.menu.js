@@ -674,7 +674,16 @@ function createGameMenuController(deps) {
       restoreError(message);
       return false;
     };
-    UI.act('newSlot', (d) => { if (!enteringSlot) launch(+d.slot, () => { SDT.Base.reset(+d.slot); runtime.openBaseHub('deploy'); }, true); });
+    const resetAndLaunch = slot => {
+      // 初始化必须先确认落盘，失败时选档页、标题和活动档位保持原状以便重试。
+      SDT.Base.use(slot);
+      if (SDT.Base.reset(slot) === false) {
+        restoreError('档位初始化未保存，请检查存储空间或档位变化后重试；尚未进入基地');
+        return false;
+      }
+      return launch(slot, () => runtime.openBaseHub('deploy'), true);
+    };
+    UI.act('newSlot', (d) => { if (!enteringSlot) return resetAndLaunch(+d.slot); });
     UI.act('enterSlot', async (d) => {
       if (enteringSlot) return false;
       const slot = +d.slot;
@@ -747,7 +756,7 @@ function createGameMenuController(deps) {
       if (enteringSlot) return;
       if (!armConfirm(`[data-act="overwriteSlot"][data-slot="${d.slot}"]`, '确认重开？', '覆盖重开')) return;
       clearSlot(+d.slot);
-      launch(+d.slot, () => { SDT.Base.reset(+d.slot); runtime.openBaseHub('deploy'); }, true);
+      return resetAndLaunch(+d.slot);
     });
     UI.act('delSlot', (d) => {
       if (enteringSlot) return;

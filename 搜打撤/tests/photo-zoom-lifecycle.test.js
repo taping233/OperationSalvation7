@@ -106,6 +106,32 @@ describe('照片弹层收回生命周期', () => {
     vi.advanceTimersByTime(400);
     expect(document.querySelector('#cardZoom')).toBeNull();
   });
+  it('备注保存失败显示暂存状态，重试成功才显示已存档', () => {
+    const save = vi.fn(() => ({ ok: false, persisted: false, note: '暂存编辑', code: 'WRITE_FAILED' }));
+    const zoom = openPhoto({ noteEditable: true, onNoteSave: save });
+    const note = zoom.querySelector('textarea');
+    note.value = '暂存编辑';
+    note.dispatchEvent(new Event('input', { bubbles: true }));
+    vi.advanceTimersByTime(240);
+    expect(zoom.querySelector('.cz-note-status').textContent).toBe('未存档，已暂存本次会话');
+    expect(zoom.querySelector('.cz-note').classList.contains('has')).toBe(false);
+    expect(note.value).toBe('暂存编辑');
+    save.mockImplementation(() => ({ ok: true, persisted: true, note: '暂存编辑' }));
+    note.dispatchEvent(new Event('blur'));
+    expect(zoom.querySelector('.cz-note-status').textContent).toBe('已存档');
+    expect(zoom.querySelector('.cz-note').classList.contains('has')).toBe(true);
+  });
+  it('重开未落盘备注与未落盘清空时不盖已存档章', () => {
+    const save = () => ({ ok: false, persisted: false, note: '', code: 'WRITE_FAILED' });
+    const zoom = openPhoto({ noteEditable: true, note: '暂存编辑', notePending: true, onNoteSave: save });
+    expect(zoom.querySelector('.cz-note-status').textContent).toBe('未存档，已暂存本次会话');
+    expect(zoom.querySelector('.cz-note').classList.contains('has')).toBe(false);
+    const note = zoom.querySelector('textarea');
+    note.value = '';
+    note.dispatchEvent(new Event('blur'));
+    expect(zoom.querySelector('.cz-note-status').textContent).toBe('未存档，已暂存本次会话');
+    expect(zoom.querySelector('.cz-note').classList.contains('has')).toBe(false);
+  });
   it('收回中重新打开会取消旧弹层，默认卡牌展示不受影响', () => {
     const old = openPhoto();
     old.querySelector('.cz-close').click();

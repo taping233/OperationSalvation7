@@ -1,0 +1,30 @@
+[
+  {
+    "file": "game/src/hub/game.hub.home-scene.js",
+    "sha256": "59c2148600083bd505f71f0ad2200387b4865fc79bf4958ab9d05cc6833a8506"
+  },
+  {
+    "file": "game/src/hub/hub.courtyard-v3.js",
+    "sha256": "0ed780a3d447e04a25cd60e00f3b1304a718cc3219de555cc86121f859037024"
+  },
+  {
+    "file": "game/src/hub/hub.courtyard-runtime.js",
+    "sha256": "9e44dcfb1db0ea1f682917f68b8ae67c4fed5497a9d7dca544fa8e09910bbb6a"
+  },
+  {
+    "file": "tests/optional-scene-lazy-boundary.test.js",
+    "sha256": "ace19fbbb5ed13dc3834b80073c7ecbba67c6fa05fbb75a3d4921011de30d7ad"
+  },
+  {
+    "file": "tests/hub-courtyard-v3.test.js",
+    "sha256": "939c8c0715c2a4ffc8ce30b14ccc602bcabdd9a63c0edb6c6e6362d6c52edd31"
+  },
+  {
+    "file": "vite.config.js",
+    "sha256": "dbecabc1027202a5cafed396151df41a8aa56bd5a93d10ba617a3e7668749a44"
+  },
+  {
+    "file": "scripts/gate-plan.mjs",
+    "sha256": "a456cb9f048ceb45b341e2b844d4ec525e5383d5116d69b594ab801ba49405e5"
+  }
+]

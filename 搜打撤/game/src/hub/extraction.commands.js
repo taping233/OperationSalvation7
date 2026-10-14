@@ -7,6 +7,18 @@ function validStack(stack) {
     typeof stack.card.name === 'string' && Number.isInteger(stack.count) && stack.count > 0;
 }
 
+function validateSelections(selections) {
+  if (!Array.isArray(selections)) return fail('INVALID_ARGUMENT', '入库选择必须是卡牌数量列表');
+  for (const selection of selections) {
+    if (!selection || typeof selection !== 'object' || Array.isArray(selection) ||
+        typeof selection.name !== 'string' || !selection.name.trim() ||
+        !Number.isSafeInteger(selection.count) || selection.count <= 0) {
+      return fail('INVALID_ARGUMENT', '入库选择须包含卡牌名称和正整数数量');
+    }
+  }
+  return { ok: true };
+}
+
 export function validatePendingExtraction(pending) {
   if (!pending || typeof pending !== 'object' || Array.isArray(pending)) return fail('INVALID_EXTRACTION', '撤离整理记录结构无效');
   if (pending.version !== 1 || typeof pending.runId !== 'string' || !pending.runId.trim() || pending.phase !== 'organizing') {
@@ -193,12 +205,16 @@ export function createExtractionCommands({
     const base = baseApi._readForCommit(attempt.slotId);
     if (!identity.ok || identity.value.runId !== attempt.runId || !base) return fail('STALE_RUN', '对局身份已变化，撤离整理请求已取消');
     if (identity.value.revision !== attempt.context.expectedRunRevision || base._m01.revision !== attempt.context.expectedBaseRevision) {
-      return fail('STALE_REVISION', '存档修订已变化，撤离整理可重新载入后重试', true);
+      return fail('STALE_REVISION', '存档修订已变化，请重试以重新读取当前整理快照', true);
     }
-    return recovery.commitBaseAndRun(attempt.context, {
+    const committed = await recovery.commitBaseAndRun(attempt.context, {
       command: attempt.command, payload: attempt.payload, runId: attempt.runId,
       afterBase: attempt.afterBase, afterRun: attempt.afterRun, output: attempt.output,
     });
+    // 原子提交锁内再次校验修订，也可能在此拒绝尚未写日志的请求。
+    return !committed.ok && committed.code === 'STALE_REVISION'
+      ? { ...committed, retryable: true, message: '存档修订已变化，请重试以重新读取当前整理快照' }
+      : committed;
   };
   const applyAttempt = attempt => {
     const pendingRunId = game.pendingExtraction?.runId;
@@ -257,7 +273,12 @@ export function createExtractionCommands({
     }
     const attempt = beginAttempt;
     const receipt = await commitAttempt(attempt);
-    if (!receipt.ok) return { ...receipt, runId: attempt.runId };
+    if (!receipt.ok) {
+      // STALE_REVISION 只在日志写入前拒绝；下一次重读后可重新准备。
+      // 已开始写入或结果不明的失败仍保留令牌，继续恢复同一事务。
+      if (receipt.code === 'STALE_REVISION' && beginAttempt === attempt) beginAttempt = null;
+      return { ...receipt, runId: attempt.runId };
+    }
     applyAttempt(attempt);
     beginAttempt = null;
     return { ok: true, value: attempt.pending };
@@ -267,11 +288,13 @@ export function createExtractionCommands({
     const pending = current.pending;
     const next = clone(pending);
     const afterBase = clone(current.base);
-    let room = Math.max(0, baseApi.stashCap() - (afterBase.stash || []).reduce((n, stack) => n + (stack.count || 1), 0));
+    // 符文与卡牌共占仓容；用本次提交快照计数，不能依赖整理页的旧内存余量。
+    const used = (afterBase.runes || []).length + (afterBase.stash || []).reduce((n, stack) => n + (stack.count || 1), 0);
+    let room = Math.max(0, baseApi.stashCap() - used);
     let count = 0;
-    for (const selection of selections || []) {
+    for (const selection of selections) {
       const stack = next.remainingCards.find(item => item.card.name === selection.name);
-      const take = Math.min(stack?.count || 0, Math.max(0, Number(selection.count) || 0), room);
+      const take = Math.min(stack?.count || 0, selection.count, room);
       if (!stack || take <= 0) continue;
       stackInto(afterBase.stash, { card: stack.card, count: take });
       stack.count -= take;
@@ -290,6 +313,10 @@ export function createExtractionCommands({
   }
 
   async function updateCards(selections, expectedRunId = game.pendingExtraction?.runId, expectedSlotId = getActiveSlot()) {
+    const checkedSelections = validateSelections(selections);
+    if (!checkedSelections.ok) return checkedSelections;
+    // 在异步读档前冻结本次有效输入；后续调用方修改原数组不能污染待提交快照。
+    selections = selections.map(selection => ({ name: selection.name, count: selection.count }));
     const slotId = getActiveSlot();
     if (!slotId) {
       if (expectedSlotId !== null) return fail('STALE_SLOT', '档位已切换，撤离整理请求已取消');
@@ -315,12 +342,14 @@ export function createExtractionCommands({
       attempt = prepared.attempt;
       inFlight.set(key, attempt);
     }
+    if (attempt.command !== 'extractStash') return fail('REQUEST_PENDING', '完成整理正在等待重试，请点击「完成整理」继续恢复', true);
     const receipt = await commitAttempt(attempt);
-    // 失败时保留 inFlight（2026-09-28 复核审计C1后确认为设计契约）：attempt 是
-    // 中断事务的恢复令牌——after-base/after-run 注入失败后，重试复用同一 attempt
-    // 经 recovery 日志续放，receipt 重放保证不重复入库（见 extraction-recovery
-    // 「receipt重放不重复卡牌」用例）。若删条目重建，会把已部分应用的事务再算一遍。
-    if (!receipt.ok) return receipt;
+    // 日志前的修订拒绝可丢弃；after-base/after-run 等中断或未确认结果必须
+    // 保留同一令牌，经恢复日志和 receipt 重放保证卡牌只入库一次。
+    if (!receipt.ok) {
+      if (receipt.code === 'STALE_REVISION' && inFlight.get(key) === attempt) inFlight.delete(key);
+      return receipt;
+    }
     applyAttempt(attempt);
     inFlight.delete(key);
     return { ok: true, value: attempt.nextPending, count: attempt.count, replayed: !!receipt.replayed };
@@ -354,7 +383,10 @@ export function createExtractionCommands({
     }
     if (attempt.command !== 'extractFinish') return fail('REQUEST_PENDING', '上一项整理正在重试，请稍后再操作', true);
     const receipt = await commitAttempt(attempt);
-    if (!receipt.ok) return receipt;   // 同 updateCards：保留 attempt 供日志续放
+    if (!receipt.ok) {
+      if (receipt.code === 'STALE_REVISION' && inFlight.get(key) === attempt) inFlight.delete(key);
+      return receipt;   // 其余失败与 updateCards 一样保留恢复令牌
+    }
     applyAttempt(attempt);
     inFlight.delete(key);
     return { ok: true, value: receipt.value, replayed: !!receipt.replayed };

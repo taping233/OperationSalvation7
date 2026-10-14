@@ -1,7 +1,7 @@
 /* workflow-ship 收官落库一条龙契约（2026-10-02）：分组/排除/无主阻断/FULL 预估/apply 全链。 */
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { chmodSync, mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
@@ -54,6 +54,16 @@ function seedChanges() {
   writeFileSync(path.join(project, '未知文件.map'), 'x');                                    // unknown
   writeFileSync(path.join(project, '.sfx-work/tmp2.bin'), 'x');                              // excluded
   writeFileSync(path.join(project, '__try_probe.json'), '{}');                               // excluded（try 配置模式）
+}
+
+function writeFixtureHook(name, content) {
+  const hook = path.join(fixtureRoot, '.git/hooks', name);
+  writeFileSync(hook, content, { flag: 'wx' });
+  if (process.platform !== 'win32') {
+    // 只改本测试刚创建的 hook；Git 在 POSIX 上会忽略没有执行位的夹具。
+    chmodSync(hook, 0o755);
+    expect(statSync(hook).mode & 0o111, 'fixture hook 必须可执行').toBe(0o111);
+  }
 }
 
 function receiptFixture(project, patch = {}) {
@@ -192,7 +202,7 @@ describe('ship 收官落库一条龙', () => {
   }, 20_000);
   it('第二组hook失败返回完成commit与剩余stage，重试只给只读下一步', () => {
     seedChanges(); const project = path.join(fixtureRoot, '搜打撤'), plan = planShip(project);
-    writeFileSync(path.join(fixtureRoot, '.git/hooks/pre-commit'), '#!/bin/sh\nif git diff --cached --name-only | grep -q "docs/STATUS.md"; then exit 9; fi\n');
+    writeFixtureHook('pre-commit', '#!/bin/sh\nif git diff --cached --name-only | grep -q "docs/STATUS.md"; then exit 9; fi\n');
     git(['config', 'core.hooksPath', '.git/hooks']);
     let failure; try { applyShip(project, plan, { expectedSha256: plan.planSha256 }); } catch (error) { failure = error; }
     expect(failure.details).toMatchObject({ currentScope: 'docs', reasonCode: 'SHIP_COMMIT_FAILED',
@@ -277,8 +287,7 @@ describe('ship 收官落库一条龙', () => {
 
   it('门禁失败保留已暂存现场，不回滚或继续第二组', () => {
     seedChanges();
-    const hooks = path.join(fixtureRoot, '.git/hooks');
-    writeFileSync(path.join(hooks, 'pre-commit'), '#!/bin/sh\nexit 1\n');
+    writeFixtureHook('pre-commit', '#!/bin/sh\nexit 1\n');
     git(['config', 'core.hooksPath', '.git/hooks']);
     const project = path.join(fixtureRoot, '搜打撤'), plan = planShip(project);
     const head = git(['rev-parse', 'HEAD']);
@@ -305,7 +314,7 @@ describe('ship 收官落库一条龙', () => {
   it('首笔 hook 改写后续同路径 index blob 时不覆盖并发内容', () => {
     seedChanges();
     const concurrent = git(['hash-object', '-w', '--stdin'], { input: '# concurrent\n' }).trim();
-    writeFileSync(path.join(fixtureRoot, '.git/hooks/post-commit'),
+    writeFixtureHook('post-commit',
       '#!/bin/sh\ngit update-index --cacheinfo 100644,' + concurrent + ',搜打撤/docs/STATUS.md\n');
     git(['config', 'core.hooksPath', '.git/hooks']);
     const project = path.join(fixtureRoot, '搜打撤'), plan = planShip(project);

@@ -1,8 +1,3 @@
-import { assetUrl } from '../core/asset-url.js';
-import { Random } from '../core/random.js';
-import { createRainTableau } from './courtyard.rain-tableau.js';
-import { createKoiPond } from './courtyard-vendor/KoiPond.js';
-
 export function courtyardV3HTML() {
   const rain = true;
   return `<section class="courtyard-v3 courtyard-zzz" data-courtyard="${rain ? 'rain' : 'koi'}">
@@ -20,207 +15,72 @@ export function courtyardV3HTML() {
     </aside></div></section>`;
 }
 
-// 生命周期由基地独立页负责；返回的清理函数可重复调用。
+// The page shell and cleanup contract are synchronous; canvas engines are
+// loaded only when this feature is mounted. A pending page cannot revive after
+// its owner disposes it or replaces its host.
+let runtimePromise = null;
+let runtimeModule = null;
+
+function loadRuntime() {
+  if (!runtimePromise) {
+    const loading = import('./hub.courtyard-runtime.js').then(module => {
+      runtimeModule = module;
+      return module;
+    });
+    const retryable = loading.catch(error => {
+      if (runtimePromise === retryable) runtimePromise = null;
+      throw error;
+    });
+    runtimePromise = retryable;
+  }
+  return runtimePromise;
+}
+
 export function mountCourtyardV3(root) {
-  const host = root.matches?.('[data-courtyard]') ? root : root.querySelector('[data-courtyard]');
+  const host = root?.matches?.('[data-courtyard]') ? root : root?.querySelector('[data-courtyard]');
   if (!host) return () => {};
-  let rain = true;
-  const canvas = host.querySelector('.courtyard-v3-canvas');
-  const backdrop = host.querySelector('.courtyard-v3-backdrop');
-  const rainCanvas = host.querySelector('.courtyard-v3-rain-layer');
-  const scene = host.querySelector('.courtyard-v3-scene');
+  if (runtimeModule) return runtimeModule.mountCourtyardV3(root);
+
   const status = host.querySelector('.courtyard-v3-status');
-  const controls = host.querySelector('.courtyard-v3-controls');
-  const pauseButton = controls.querySelector('[data-courtyard-control="pause"]');
-  const soundButton = controls.querySelector('[data-courtyard-control="sound"]');
-  const rainButton = controls.querySelector('[data-courtyard-control="rain"]');
-  const media = window.matchMedia?.('(prefers-reduced-motion: reduce)');
-  const reducedMotion = () => !!media?.matches || document.body.classList.contains('reduce-motion');
-  if (!canvas.getContext('2d')) {
-    status.textContent = '当前浏览器无法显示庭院';
-    controls.querySelectorAll('button').forEach(button => { button.disabled = true; });
-    return () => {};
-  }
-  const settings = { intensity:40 };
-  let disposed = false, paused = false, frame = 0, previous = 0, image = null, feedbackTimer = 0;
-  let soundEnabled = false, audio = null, noise = null;
-  let engine = null, koi = null;
-  const running = () => !disposed && !paused && !document.hidden && !reducedMotion();
-  const draw = (dt = 0, animate = false) => {
-    if (!engine || disposed) return;
-    koi?.render(dt, animate);
-    if (rain) engine.render(dt, animate);
+  const canvas = host.querySelector('.courtyard-v3-canvas');
+  const buttons = [...host.querySelectorAll('button')].map(button => [button, button.disabled]);
+  const previousBusy = host.getAttribute('aria-busy');
+  const previousDisabled = canvas?.getAttribute('aria-disabled');
+  const previousStatus = status?.textContent || '';
+  const loadingMessage = '正在准备庭院';
+  if (status) status.textContent = loadingMessage;
+  host.setAttribute('aria-busy', 'true');
+  canvas?.setAttribute('aria-disabled', 'true');
+  for (const [button] of buttons) button.disabled = true;
+  let disposed = false;
+  let release = null;
+  let loadingReleased = false;
+  const releaseLoading = () => {
+    if (loadingReleased) return;
+    loadingReleased = true;
+    if (previousBusy === null) host.removeAttribute('aria-busy');
+    else host.setAttribute('aria-busy', previousBusy);
+    if (previousDisabled === null) canvas?.removeAttribute('aria-disabled');
+    else if (previousDisabled !== undefined) canvas?.setAttribute('aria-disabled', previousDisabled);
+    for (const [button, disabled] of buttons) button.disabled = disabled;
+    if (status?.textContent === loadingMessage) status.textContent = previousStatus;
   };
-  const drawBackdrop = () => {
-    if (disposed || !backdrop) return;
-    const context = backdrop.getContext('2d');
-    context.fillStyle = '#547980'; context.fillRect(0, 0, backdrop.width, backdrop.height);
-    if (image?.complete && image.naturalWidth) {
-      const scale = Math.max(backdrop.width / image.naturalWidth, backdrop.height / image.naturalHeight);
-      const width = image.naturalWidth * scale, height = image.naturalHeight * scale;
-      context.drawImage(image, (backdrop.width - width) / 2, (backdrop.height - height) / 2, width, height);
-      host.classList.add('scene-ready');
-    }
-  };
-  const resize = () => {
-    if (disposed) return;
-    const bounds = scene.getBoundingClientRect();
-    // 受控像素预算；仅绘制当前窗口，不启动隐藏副场景。
-    const scale = Math.min(1.25, window.devicePixelRatio || 1, 1500 / Math.max(1, bounds.width));
-    const width = Math.max(1, Math.round(bounds.width * scale));
-    const height = Math.max(1, Math.round(bounds.height * scale));
-    if (canvas.width === width && canvas.height === height) return;
-    canvas.width = width; canvas.height = height;
-    rainCanvas.width = width; rainCanvas.height = height;
-    backdrop.width = width; backdrop.height = height; drawBackdrop();
-    engine?.resize(width, height);
-    koi?.resize(width, height);
-    draw();
-  };
-  resize();
-  engine = createRainTableau(rainCanvas, { sceneBackdrop:true });
-  koi = createKoiPond(canvas, { onProgress: ({ found, total, eaten }) => {
-    controls.querySelector('[data-pond-found]').textContent = found === total ? `已找到全部 ${total} 条锦鲤` : `发现锦鲤 ${found} / ${total}`;
-    controls.querySelector('[data-pond-eaten]').textContent = `吃食 ${eaten} 次`;
-  } });
-  engine.resize(canvas.width, canvas.height);
-  {
-    image = new Image();
-    image.onload = () => { if (!disposed) { drawBackdrop(); draw(); } };
-    image.src = assetUrl('assets/scenes/courtyard-pond-v4.webp');
-    drawBackdrop();
-  }
-  draw();
-  const stopSound = () => {
-    try { noise?.stop(); } catch { /* 尚未启动的音源也须继续释放上下文。 */ }
-    noise?.disconnect(); noise = null;
-    const oldAudio = audio; audio = null;
-    oldAudio?.close().catch(() => {});
-    soundEnabled = false; soundButton.textContent = '声音：关'; soundButton.setAttribute('aria-pressed', 'false');
-  };
-  const soundState = () => {
-    if (!audio) return;
-    const operation = document.hidden || paused ? audio.suspend() : audio.resume();
-    operation.catch(() => {});
-  };
-  const toggleSound = () => {
-    if (!rain) return;
-    if (audio) { stopSound(); return; }
-    const Audio = window.AudioContext || window.webkitAudioContext;
-    if (!Audio) { soundButton.textContent = '声音不可用'; soundButton.disabled = true; return; }
-    try {
-      audio = new Audio();
-      const buffer = audio.createBuffer(1, audio.sampleRate * 2, audio.sampleRate);
-      const samples = buffer.getChannelData(0);
-      let smooth = 0;
-      for (let i = 0; i < samples.length; i++) { smooth = .97 * smooth + .03 * (Random.random('audio') * 2 - 1); samples[i] = rain ? smooth * 4 : smooth * 2.5; }
-      noise = audio.createBufferSource(); noise.buffer = buffer; noise.loop = true;
-      const filter = audio.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.value = rain ? 1600 : 500;
-      const gain = audio.createGain(); gain.gain.value = .06;
-      noise.connect(filter); filter.connect(gain); gain.connect(audio.destination); noise.start();
-      soundEnabled = true; soundButton.textContent = '声音：开'; soundButton.setAttribute('aria-pressed', 'true');
-      status.textContent = '';
-      soundState();
-    } catch { stopSound(); status.textContent = '声音暂不可用'; }
-  };
-  const loop = time => {
-    frame = 0;
-    if (!host.isConnected) { dispose(); return; }
-    if (!running()) return;
-    if (!previous || time - previous >= 32) {
-      draw(previous ? Math.min(.05, (time - previous) / 1000) : 1 / 30, true);
-      previous = time;
-    }
-    frame = requestAnimationFrame(loop);
-  };
-  const sync = () => {
-    if (disposed) return;
-    if (frame) cancelAnimationFrame(frame);
-    frame = 0; previous = 0;
-    const reduced = reducedMotion();
-    host.classList.toggle('is-still', reduced || paused);
-    pauseButton.textContent = reduced ? '静态' : paused ? '继续' : '暂停';
-    pauseButton.disabled = reduced; pauseButton.setAttribute('aria-pressed', String(paused));
-    if (running()) frame = requestAnimationFrame(loop);
-    else draw();
-    if (soundEnabled) soundState();
-  };
-  const interact = (x, y) => {
-    if (disposed) return;
-    const accepted = rain ? engine.tap(x, y) : true;
-    koi.tap(x, y);
-    koi.pointer(x, y);
-    status.textContent = accepted === false ? '轻点水面投喂' : rain ? '已投喂 · 雨圈散开' : '已投喂 · 等锦鲤来吃';
-    clearTimeout(feedbackTimer); feedbackTimer = setTimeout(() => { if (!disposed) status.textContent = ''; }, 1400);
-    draw();
-  };
-  const pointer = event => {
-    const bounds = canvas.getBoundingClientRect();
-    interact((event.clientX - bounds.left) / Math.max(1, bounds.width) * canvas.width,
-      (event.clientY - bounds.top) / Math.max(1, bounds.height) * canvas.height);
-  };
-  const hover = event => {
-    const bounds = canvas.getBoundingClientRect();
-    koi.pointer((event.clientX - bounds.left) / Math.max(1, bounds.width) * canvas.width,
-      (event.clientY - bounds.top) / Math.max(1, bounds.height) * canvas.height);
-    if (!running()) draw();
-  };
-  const leave = () => koi.pointer(null, null);
-  const key = event => {
-    if (!['Enter', ' '].includes(event.key)) return;
-    event.preventDefault(); interact(canvas.width / 2, canvas.height / 2);
-  };
-  const control = event => {
-    const action = event.target.closest('[data-courtyard-control]')?.dataset.courtyardControl;
-    if (action === 'rain') {
-      rain = !rain; rainCanvas.hidden = !rain;
-      rainButton.textContent = rain ? '关闭雨' : '开启雨'; rainButton.setAttribute('aria-pressed', String(rain));
-      host.dataset.courtyard = rain ? 'rain' : 'koi';
-      soundButton.disabled = !rain;
-      controls.querySelector('[data-courtyard-control="interact"]').disabled = !rain;
-      controls.querySelectorAll('[data-palette]').forEach(button => { button.disabled = !rain; });
-      if (!rain) stopSound();
-      status.textContent = rain ? '雨落池塘' : '雨已停 · 仍可投喂和寻找锦鲤';
-      draw();
-    }
-    if (action === 'sound') void toggleSound();
-    if (action === 'feed') interact(canvas.width / 2, canvas.height / 2);
-    if (action === 'pause') { paused = !paused; sync(); }
-    if (action === 'palette' && rain) { const palette = event.target.closest('button').dataset.palette; engine.setPalette(palette); controls.querySelectorAll('[data-palette]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.palette === palette))); draw(); }
-    if (action === 'interact') {
-      if (rain) {
-        settings.intensity = settings.intensity === 40 ? 80 : 40;
-        event.target.closest('button').textContent = settings.intensity === 40 ? '雨势：细雨' : '雨势：大雨';
-        engine.setIntensity(settings.intensity); draw();
-      } else interact(canvas.width / 2, canvas.height / 2);
-    }
-  };
-  const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(resize) : null;
-  const motionObserver = typeof MutationObserver !== 'undefined' ? new MutationObserver(sync) : null;
-  observer?.observe(scene);
-  motionObserver?.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-  if (!observer) window.addEventListener('resize', resize);
-  canvas.addEventListener('pointerdown', pointer); canvas.addEventListener('keydown', key);
-  canvas.addEventListener('pointermove', hover); canvas.addEventListener('pointerleave', leave);
-  controls.addEventListener('click', control); document.addEventListener('visibilitychange', sync);
-  media?.addEventListener?.('change', sync);
-  function dispose() {
+  loadRuntime().then(module => {
+    releaseLoading();
+    if (disposed || !host.isConnected) return;
+    release = module.mountCourtyardV3(root);
+  }).catch(error => {
+    releaseLoading();
+    if (disposed || !host.isConnected) return;
+    if (status) status.textContent = '庭院加载失败，请离开后重新进入';
+    for (const [button] of buttons) button.disabled = true;
+    console.warn('[courtyard] 庭院模块加载失败，可重新进入重试', error);
+  });
+  return () => {
     if (disposed) return;
     disposed = true;
-    clearTimeout(feedbackTimer);
-    if (frame) cancelAnimationFrame(frame); frame = 0;
-    observer?.disconnect(); motionObserver?.disconnect(); window.removeEventListener('resize', resize);
-    canvas.removeEventListener('pointerdown', pointer); canvas.removeEventListener('keydown', key);
-    canvas.removeEventListener('pointermove', hover); canvas.removeEventListener('pointerleave', leave);
-    controls.removeEventListener('click', control); document.removeEventListener('visibilitychange', sync);
-    media?.removeEventListener?.('change', sync);
-    if (image) { image.onload = null; image = null; }
-    stopSound();
-    engine.dispose();
-    koi.dispose(); rainCanvas.width = rainCanvas.height = 1;
-    canvas.width = canvas.height = 1;
-    if (backdrop) backdrop.width = backdrop.height = 1;
-  }
-  sync();
-  return dispose;
+    releaseLoading();
+    release?.();
+    release = null;
+  };
 }

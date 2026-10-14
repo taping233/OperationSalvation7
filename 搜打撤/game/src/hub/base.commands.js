@@ -16,6 +16,7 @@ function readBase(slotId) {
   const state = base._readForCommit(slotId);
   if (!state) {
     const issue = base.issue(slotId);
+    if (issue === 'readFailed') return fail('SAVE_FAILED', '基地存档读取失败，请重试', true, { issue });
     return fail(issue === 'tooNew' ? 'INVALID_STATE' : 'SAVE_FAILED',
       issue === 'tooNew' ? '基地存档来自更新版本，当前版本拒绝读取' : '基地存档损坏，已保留原数据', false,
       { issue });
@@ -37,6 +38,7 @@ function readBaseReceipt(context, identity) {
   const current = Base()._readForCommit(context.slotId);
   if (!current) {
     const issue = Base().issue(context.slotId);
+    if (issue === 'readFailed') return fail('SAVE_FAILED', '基地存档读取失败，请重试', true, { issue });
     return fail('INVALID_STATE', issue === 'tooNew' ? '基地存档来自更新版本，拒绝读取' : '基地存档损坏，拒绝读取', false, { issue });
   }
   let fingerprint;
@@ -63,6 +65,7 @@ async function commitBase(context, preparedChange) {
   const current = base._readForCommit(context.slotId);
   if (!current) {
     const issue = base.issue(context.slotId);
+    if (issue === 'readFailed') return fail('SAVE_FAILED', '基地存档读取失败，请重试', true, { issue });
     return fail('INVALID_STATE', issue === 'tooNew' ? '基地存档来自更新版本，拒绝覆盖' : '基地存档损坏，拒绝覆盖', false, { issue });
   }
   const command = preparedChange.command.trim();

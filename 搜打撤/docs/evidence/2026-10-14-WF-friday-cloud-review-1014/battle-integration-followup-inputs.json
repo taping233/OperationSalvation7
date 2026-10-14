@@ -1,0 +1,62 @@
+{
+  "scope": "Focused battle integration follow-up after the independent choice-armor fix",
+  "note": "Current hashes for this five-file test run. Earlier battle-inputs.json and battle-focused.log describe the earlier battle-only patch before integrated card-armor normalization.",
+  "testLog": "battle-integration-followup.log",
+  "testFiles": 5,
+  "testsPassed": 41,
+  "lintLog": "battle-integration-followup-lint.log",
+  "files": [
+    {
+      "path": "tests/battle-engine-facade.test.js",
+      "sha256": "78baf7a2063fbcb1ba24c1fafabdd662a741d694b3aa9ea1565f46022937e44b"
+    },
+    {
+      "path": "tests/battle-end-turn-selection.test.js",
+      "sha256": "a0304a4b08f93d03fc038c276e24ecb3ab6cdafbd868c1af5ab3ebf1ca1a8c5c"
+    },
+    {
+      "path": "tests/battle-execution-continuation.test.js",
+      "sha256": "704e5a990b536b08a97f33c761a0f65f304a2aaea7b35bcb84b8cf84358aed6f"
+    },
+    {
+      "path": "tests/battle-selection-consumer.test.js",
+      "sha256": "8e9df60df628532bdcf0d1ea5e0c3fa0f0ef8e8f44fab233ca4b6fc7394952f4"
+    },
+    {
+      "path": "tests/cards-choice-armor-guard.test.js",
+      "sha256": "889d24ebb74fed1a369902e81c2f79340d779fccff14377453fecbe8abed837e"
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-phase.js",
+      "sha256": "bf85bda96c38ca3be5ef009e9f300a31a30efb349a7d24c16ff7095269145c43"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.js",
+      "sha256": "381f0136d1287178e0d6cb87ab64969b0678846b02416ff2e6657b09768d514a"
+    },
+    {
+      "path": "game/src/battle/core/battle.selection-flow.js",
+      "sha256": "411b64accec2a176c434516214cb25c73d7af423ff79acb5919d507a38084e58"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.action-runner.js",
+      "sha256": "a7b177c173b61bc78da8b03ab22b2ffa3851867c6ba1187d2b89d26f3198b982"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.execution-session.js",
+      "sha256": "64df4e49b54f49b477ab9232fe9c78802185d8cdbb4f501227170653b8b620e5"
+    },
+    {
+      "path": "game/src/cards/cards.js",
+      "sha256": "54579fd87f722419c930501fbb91940df269d797fd67b14cc37669b27e81be78"
+    },
+    {
+      "path": "game/src/cards/cards.sync.js",
+      "sha256": "6faae9f7c6a35daf86fb232d81040517974e6dbaadcb6e47f50520ac7ca2e540"
+    },
+    {
+      "path": "game/src/cards/cards.rules.js",
+      "sha256": "bfbbbbc6037f6a2bb78016c71614cfc98218eac21a0be77ddd0ab96e6297bf76"
+    }
+  ]
+}

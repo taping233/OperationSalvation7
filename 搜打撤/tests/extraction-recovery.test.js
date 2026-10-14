@@ -12,7 +12,7 @@ await import('../game/src/hub/base.js');
 await import('../game/src/hub/meta.js');
 const { RunStorage } = await import('../game/src/hub/game.storage.js');
 const { createRecoveryCommands } = await import('../game/src/hub/recovery.commands.js');
-const { createExtractionCommands } = await import('../game/src/hub/extraction.commands.js');
+const { createExtractionCommands, validatePendingExtraction } = await import('../game/src/hub/extraction.commands.js');
 const Base = window.SDT.Base;
 
 const lockManager = { request: (_name, _options, callback) => callback() };
@@ -20,10 +20,11 @@ const card = { id: 'extract-recovery-card', name: '撤离测试卡', type: '法�
 
 async function harness(slot = 2, failpoint = null) {
   localStorage.clear();
+  RunStorage.remove(slot); // clear the module's optimistic write baseline between repeated-slot fixtures
   Base.use(slot);
   Base.reset(slot);
-  RunStorage.write(slot, { seed: 'extract-test', rngState: { seed: 'extract-test', streams: { pocket: 0 } },
-    hp: 20, maxHp: 30, inventory: [], ownedCards: [], myClass: 'wu' });
+  expect(RunStorage.write(slot, { seed: 'extract-test', rngState: { seed: 'extract-test', streams: { pocket: 0 } },
+    hp: 20, maxHp: 30, inventory: [], ownedCards: [], myClass: 'wu' })).toBe(true);
   const game = {
     pendingExtraction: null, runActive: true, extractionPending: false, mode: 'normal',
     usedPocket: [{ card: { id: 'pocket-test', name: '口袋测试卡', rarity: '稀有' }, count: 2 }],
@@ -32,10 +33,21 @@ async function harness(slot = 2, failpoint = null) {
   };
   let activeSlot = slot;
   let pendingFailure = failpoint;
+  let revisionRace = null;
   const recovery = createRecoveryCommands({ storage: localStorage, lockManager, baseApi: Base, runStore: RunStorage,
     failpoint: phase => { if (pendingFailure === phase) { pendingFailure = null; throw new Error('simulated interruption'); } } });
+  const runRace = boundary => {
+    if (revisionRace?.boundary !== boundary || --revisionRace.remaining > 0) return;
+    const callback = revisionRace.callback;
+    revisionRace = null;
+    callback();
+  };
+  const recoveryPort = { ...recovery,
+    recoverSlot: async slotId => { const result = await recovery.recoverSlot(slotId); runRace('recovery'); return result; },
+    commitBaseAndRun: (...args) => { runRace('commit'); return recovery.commitBaseAndRun(...args); },
+  };
   const deps = {
-    getActiveSlot: () => activeSlot, runStore: RunStorage, baseApi: Base, recovery, game,
+    getActiveSlot: () => activeSlot, runStore: RunStorage, baseApi: Base, recovery: recoveryPort, game,
     random: () => 0.1, makePocketStream: state => {
       let offset = Number(state?.streams?.pocket) || 0;
       return { random: () => (offset++ % 2) ? 0.9 : 0.1,
@@ -44,12 +56,190 @@ async function harness(slot = 2, failpoint = null) {
     addXpToProgress: (progress, amount) => ({ after: { lv: progress.lv, xp: progress.xp + amount } }), xpMultiplier: () => 1,
   };
   return { slot, game, recovery, commands: createExtractionCommands(deps), newCommands: () => createExtractionCommands(deps),
-    setActiveSlot: value => { activeSlot = value; }, failNextAt: phase => { pendingFailure = phase; } };
+    setActiveSlot: value => { activeSlot = value; }, failNextAt: phase => { pendingFailure = phase; },
+    beforeNextCommit: (callback, boundary = 'recovery') => { revisionRace = { callback, boundary, remaining: boundary === 'recovery' ? 2 : 1 }; } };
 }
 
 beforeEach(() => localStorage.clear());
 
 describe('撤离整理 paired recovery', () => {
+  it.each(['begin', 'stash', 'finish'].flatMap(command =>
+    ['after-journal', 'after-base', 'after-run', 'before-cleanup'].map(phase => [command, phase])))(
+    '%s 在 %s 中断后保留日志恢复令牌，同一实例重试只结算一次', async (command, phase) => {
+      const h = await harness(2);
+      if (command !== 'begin') expect((await h.commands.begin()).ok).toBe(true);
+      const runId = h.game.pendingExtraction?.runId;
+      const invoke = () => command === 'begin' ? h.commands.begin()
+        : command === 'stash' ? h.commands.updateCards([{ name: card.name, count: 1 }], runId, 2)
+          : h.commands.finish(runId, 2);
+      h.failNextAt(phase);
+      expect(await invoke()).toMatchObject({ ok: false, code: 'SAVE_FAILED_PENDING_RECOVERY' });
+      expect(localStorage.getItem('sdt-tx-v1-slot2')).not.toBeNull();
+      expect((await invoke()).ok).toBe(true);
+      expect(localStorage.getItem('sdt-tx-v1-slot2')).toBeNull();
+      expect(Base.data.wood).toBe(3);
+      expect(Base.data.rations).toBe(2);
+      expect(Base.data.characters.wu.xp).toBe(26);
+      expect(Base.data.stats.extracts).toBe(1);
+      expect(Base.data.pocket.find(stack => stack.card.id === 'pocket-test').count).toBe(1);
+      if (command === 'stash') expect(Base.data.stash.find(stack => stack.card.id === card.id).count).toBe(1);
+      if (command === 'finish') expect(RunStorage.read(2)).toBeNull();
+    });
+
+  it.each(['after-base', 'after-run'])('完成整理在 %s 中断后，入库不能续放完成令牌，原完成按钮仍可恢复', async phase => {
+    const h = await harness(2);
+    const started = await h.commands.begin();
+    const runId = started.value.runId;
+    h.failNextAt(phase);
+    expect(await h.commands.finish(runId, 2)).toMatchObject({ ok: false, code: 'SAVE_FAILED_PENDING_RECOVERY' });
+    const baseRaw = localStorage.getItem(Base.SLOT_KEY(2));
+    const runRaw = localStorage.getItem(RunStorage.key(2));
+    const journalRaw = localStorage.getItem('sdt-tx-v1-slot2');
+
+    expect(await h.commands.updateCards([{ name: card.name, count: 1 }], runId, 2))
+      .toMatchObject({ ok: false, code: 'REQUEST_PENDING', retryable: true });
+    expect(localStorage.getItem(Base.SLOT_KEY(2))).toBe(baseRaw);
+    expect(localStorage.getItem(RunStorage.key(2))).toBe(runRaw);
+    expect(localStorage.getItem('sdt-tx-v1-slot2')).toBe(journalRaw);
+    expect(h.game.pendingExtraction.runId).toBe(runId);
+
+    const finished = await h.commands.finish(runId, 2);
+    expect(finished).toMatchObject({ ok: true, replayed: true });
+    expect(finished.value.output.receipt.losses.lostCount).toBe(2);
+    expect(h.game.pendingExtraction).toBeNull();
+    expect(RunStorage.read(2)).toBeNull();
+  });
+
+  it('入库中断后完成整理仍被阻止，重试入库只提交原选择一次', async () => {
+    const h = await harness(2);
+    const started = await h.commands.begin();
+    const runId = started.value.runId;
+    h.failNextAt('after-base');
+    expect(await h.commands.updateCards([{ name: card.name, count: 1 }], runId, 2))
+      .toMatchObject({ ok: false, code: 'SAVE_FAILED_PENDING_RECOVERY' });
+    expect(await h.commands.finish(runId, 2)).toMatchObject({ ok: false, code: 'REQUEST_PENDING' });
+    expect(await h.commands.updateCards([{ name: card.name, count: 1 }], runId, 2))
+      .toMatchObject({ ok: true, count: 1, replayed: true });
+    expect(Base.data.stash.find(stack => stack.card.id === card.id).count).toBe(1);
+    expect((await h.commands.finish(runId, 2)).ok).toBe(true);
+  });
+
+  it.each(['begin', 'stash', 'finish'].flatMap(command => ['recovery', 'commit'].map(boundary => [command, boundary])))(
+    '%s 的日志前修订冲突（%s 边界）可用同一实例重新准备，不覆盖并发存档', async (command, boundary) => {
+    const h = await harness(2);
+    if (command !== 'begin') expect((await h.commands.begin()).ok).toBe(true);
+    const runId = h.game.pendingExtraction?.runId;
+    const invoke = () => command === 'begin' ? h.commands.begin()
+      : command === 'stash' ? h.commands.updateCards([{ name: card.name, count: 1 }], runId, 2)
+        : h.commands.finish(runId, 2);
+    const beforeRun = localStorage.getItem(RunStorage.key(2));
+    let advancedBase;
+    h.beforeNextCommit(() => {
+      Base.data.coins += 7;
+      expect(Base.save()).toBe(true);
+      advancedBase = localStorage.getItem(Base.SLOT_KEY(2));
+    }, boundary);
+
+    expect(await invoke()).toMatchObject({ ok: false, code: 'STALE_REVISION', retryable: true });
+    expect(localStorage.getItem('sdt-tx-v1-slot2')).toBeNull();
+    expect(localStorage.getItem(Base.SLOT_KEY(2))).toBe(advancedBase);
+    expect(localStorage.getItem(RunStorage.key(2))).toBe(beforeRun);
+    expect((await invoke()).ok).toBe(true);
+    expect(Base.data.coins).toBe(7);
+    expect(Base.data.wood).toBe(3);
+    expect(Base.data.stats.extracts).toBe(1);
+    if (command === 'stash') {
+      expect(Base.data.stash.find(stack => stack.card.id === card.id).count).toBe(1);
+      expect((await h.commands.finish(runId, 2)).ok).toBe(true);
+    }
+    if (command === 'finish') expect(RunStorage.read(2)).toBeNull();
+  });
+
+  const invalidSelections = [
+    ['小数 0.5', [{ name: card.name, count: 0.5 }]], ['小数 1.5', [{ name: card.name, count: 1.5 }]],
+    ['NaN', [{ name: card.name, count: NaN }]], ['Infinity', [{ name: card.name, count: Infinity }]],
+    ['负数', [{ name: card.name, count: -1 }]], ['零', [{ name: card.name, count: 0 }]],
+    ['数字字符串', [{ name: card.name, count: '1' }]], ['布尔计数', [{ name: card.name, count: true }]],
+    ['超出安全整数', [{ name: card.name, count: Number.MAX_SAFE_INTEGER + 1 }]],
+    ['缺少计数', [{ name: card.name }]], ['缺少名称', [{ count: 1 }]], ['空名称', [{ name: '', count: 1 }]],
+    ['null 项', [null]], ['数组项', [[card.name, 1]]], ['非数组', { name: card.name, count: 1 }],
+    ['null 容器', null], ['缺少容器', undefined],
+    ['字符串容器', card.name], ['稀疏数组', Array(1)],
+    ['空白名称', [{ name: '  ', count: 1 }]], ['对象计数', [{ name: card.name, count: {} }]],
+    ['混合有效无效项', [{ name: card.name, count: 1 }, { name: card.name, count: 0.5 }]],
+  ];
+  it.each(invalidSelections.flatMap(([label, selection]) => [false, true].map(ephemeral => [label, ephemeral, selection])))(
+    '拒绝 %s（内存局=%s），基地/对局/修订/日志与整理快照均不变', async (_label, ephemeral, selection) => {
+    const h = await harness(2);
+    if (ephemeral) h.setActiveSlot(null);
+    const started = await h.commands.begin();
+    h.game.pendingExtraction = started.value;
+    const beforeStorage = Object.fromEntries(Object.keys(localStorage).map(key => [key, localStorage.getItem(key)]));
+    const beforeBase = structuredClone(Base.data);
+    const beforePending = structuredClone(h.game.pendingExtraction);
+    expect(await h.commands.updateCards(selection, started.value.runId, ephemeral ? null : 2))
+      .toMatchObject({ ok: false, code: 'INVALID_ARGUMENT' });
+    expect(Object.fromEntries(Object.keys(localStorage).map(key => [key, localStorage.getItem(key)]))).toEqual(beforeStorage);
+    expect(Base.data).toEqual(beforeBase);
+    expect(h.game.pendingExtraction).toEqual(beforePending);
+  });
+
+  it('重复整数选择按剩余张数和仓容收敛，接受的整理快照保持有效', async () => {
+    const h = await harness(2);
+    Base.data.stash = [{ card: { name: '已有卡' }, count: 19 }];
+    expect(Base.save()).toBe(true);
+    const started = await h.commands.begin();
+    const saved = await h.commands.updateCards([{ name: card.name, count: 1 }, { name: card.name, count: 2 }], started.value.runId, 2);
+    expect(saved).toMatchObject({ ok: true, count: 1 });
+    expect(saved.value.remainingCards[0].count).toBe(1);
+    expect(validatePendingExtraction(saved.value)).toEqual({ ok: true });
+    const baseRaw = localStorage.getItem(Base.SLOT_KEY(2));
+    const runRaw = localStorage.getItem(RunStorage.key(2));
+    expect(await h.commands.updateCards([], started.value.runId, 2)).toMatchObject({ ok: true, unchanged: true });
+    expect(localStorage.getItem(Base.SLOT_KEY(2))).toBe(baseRaw);
+    expect(localStorage.getItem(RunStorage.key(2))).toBe(runRaw);
+  });
+
+  it.each([18, 19].flatMap(stashed => [false, true].map(ephemeral => [stashed, ephemeral])))(
+    '符文与卡牌共占仓容（已有卡=%s，内存局=%s），命令自身限制入库量', async (stashed, ephemeral) => {
+      const h = await harness(2);
+      Base.data.stash = [{ card: { name: '已有卡' }, count: stashed }];
+      Base.data.runes = [{ name: '占位符文' }];
+      expect(Base.save()).toBe(true);
+      if (ephemeral) h.setActiveSlot(null);
+      const started = await h.commands.begin();
+      h.game.pendingExtraction = started.value;
+      const beforeBase = localStorage.getItem(Base.SLOT_KEY(2));
+      const beforeRun = localStorage.getItem(RunStorage.key(2));
+      const saved = await h.commands.updateCards([{ name: card.name, count: 2 }], started.value.runId, ephemeral ? null : 2);
+      expect(saved.ok).toBe(true);
+      expect(saved.count || 0).toBe(19 - stashed);
+      expect(saved.value.remainingCards[0].count).toBe(stashed - 17);
+      expect(validatePendingExtraction(saved.value)).toEqual({ ok: true });
+      expect(Base.stashUsed()).toBe(20);
+      if (stashed === 19 || ephemeral) {
+        expect(localStorage.getItem(Base.SLOT_KEY(2))).toBe(beforeBase);
+        expect(localStorage.getItem(RunStorage.key(2))).toBe(beforeRun);
+      }
+    });
+
+  it('基地内存仓容过期时，以当前提交快照的符文数量限制直接入库请求', async () => {
+    const h = await harness(2);
+    Base.data.stash = [{ card: { name: '已有卡' }, count: 18 }];
+    expect(Base.save()).toBe(true);
+    const started = await h.commands.begin();
+    const externalBase = JSON.parse(localStorage.getItem(Base.SLOT_KEY(2)));
+    externalBase.runes = [{ name: '另一标签页新符文' }];
+    externalBase._m01.revision++;
+    localStorage.setItem(Base.SLOT_KEY(2), JSON.stringify(externalBase));
+    expect(Base.stashRoom()).toBe(2); // 整理页仍看见旧内存；持久态实际只有一格
+    const saved = await h.commands.updateCards([{ name: card.name, count: 2 }], started.value.runId, 2);
+    expect(saved).toMatchObject({ ok: true, count: 1 });
+    expect(Base.stashUsed()).toBe(20);
+    expect(saved.value.remainingCards[0].count).toBe(1);
+    expect(Base.data.runes).toEqual(externalBase.runes);
+  });
+
   it('begin中断后重试沿用冻结口袋结果和资源，不重复奖励', async () => {
     const h = await harness(2, 'after-base');
     h.game.elapsed = 30;

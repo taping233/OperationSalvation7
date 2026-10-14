@@ -378,17 +378,28 @@ export const syncSlice = {
       } catch { /* 静默跳过 */ }
     },
 
-    // 抉择卡数据修正（一次性，2026-09-08）：神灯的护甲只属于抉择 3°——
-    // 结构化 armor 字段会让任何抉择分支都白送 5 甲，删除字段改由选项文本结算
+    // 神灯定版护甲只属于抉择 3°。旧词条回填曾在迁移后重新写入 armor:5，
+    // 因此旧 marker 不再跳过幂等修正；仅修已知定版/历史卡面，保留制作坊自定义效果。
     ensureChoiceFixes() {
       try {
-        if (localStorage.getItem('sdt-mig-choice')) return;
         const cards = SDT.Cards.all();
-        cards.forEach(c => {
-          if (c.id === 'tt3-magic-lamp' && c.armor) { delete c.armor; }
+        if (!cards.some(card => card.id === 'tt3-magic-lamp')) return;
+        const normalizedDesc = card => String(card.desc || '').replace(/\s/g, '');
+        const knownDescriptions = new Set([
+          ...SDT.Cards.TABLETOP3, ...SDT.Cards.TABLETOP10, ...DATA.cardsSync.cards,
+        ].filter(card => card.id === 'tt3-magic-lamp').map(normalizedDesc));
+        let dirty = false;
+        const nextCards = cards.map(card => {
+          if (card.id !== 'tt3-magic-lamp' || +card.armor !== 5
+            || !knownDescriptions.has(normalizedDesc(card))
+            || card.rules?.triggers || card.rules?.equip || card.rules?.bag) return card;
+          const next = { ...card };
+          delete next.armor;
+          dirty = true;
+          return next;
         });
-        SDT.Cards.saveAll(cards);
-        localStorage.setItem('sdt-mig-choice', '1');
+        if (dirty && !SDT.Cards.saveAll(nextCards)) return;
+        if (!localStorage.getItem('sdt-mig-choice')) localStorage.setItem('sdt-mig-choice', '1');
       } catch { /* 静默跳过 */ }
     },
 

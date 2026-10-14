@@ -1,0 +1,18 @@
+{
+  "services": [
+    {
+      "pid": 99,
+      "port": 5336,
+      "status": "SIGTERM sent after exact cwd/port/vite check",
+      "cwd": "/workspace/shared/OperationSalvation7-preview-db831272/搜打撤",
+      "port_closed": true
+    },
+    {
+      "pid": 156,
+      "port": 5337,
+      "status": "SIGTERM sent after exact cwd/port/vite check",
+      "cwd": "/workspace/shared/OperationSalvation7-db831272/搜打撤",
+      "port_closed": true
+    }
+  ]
+}

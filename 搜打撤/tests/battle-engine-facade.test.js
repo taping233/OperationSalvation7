@@ -3,7 +3,8 @@
  * battle.engine.js 是战斗域唯一公共门面：run/ui 经 battle-loader 间接消费，
  * 域内模块与测试直接按名导入。本守卫把「具名导出集合」钉死——瘦身/重构过程中
  * 增删任何一个导出名都会红灯，逼着改动者显式更新基线并核对消费方。
- * 基线取自治理批次 3 开工前（HEAD 工作区）的导出面快照。
+ * 基线取自治理批次 3 开工前（HEAD 工作区）的导出面快照；回合结束续接增加
+ * deferEndTurn / hasPendingEndTurn，供 battle.enemy-phase 按名消费。
  */
 import { describe, expect, it } from 'vitest';
 import * as Engine from '../game/src/battle/core/battle.engine.js';
@@ -23,6 +24,7 @@ const BASELINE_EXPORTS = [
   'skipHandSelect', 'pickHandSelect', 'useItem', 'bagSlam', 'resolveDart',
   'resolveSlam', 'slamSkill', 'addPlayerCurse', 'usePotion', 'openBag', 'closeBag', 'pickChoice',
   'pickDiscover', 'playerTakeHit', 'frenzyCurse', 'elCurse',
+  'deferEndTurn', 'hasPendingEndTurn',
 ];
 
 describe('battle.engine 导出面守卫', () => {
@@ -30,7 +32,7 @@ describe('battle.engine 导出面守卫', () => {
     expect(Object.keys(Engine).sort()).toEqual([...BASELINE_EXPORTS].sort());
   });
 
-  it('基线数量 = 66', () => {
-    expect(BASELINE_EXPORTS.length).toBe(66);
+  it('基线数量 = 68', () => {
+    expect(BASELINE_EXPORTS.length).toBe(68);
   });
 });

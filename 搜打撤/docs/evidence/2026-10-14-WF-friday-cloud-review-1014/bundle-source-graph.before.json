@@ -1,0 +1,4081 @@
+{
+  "basis": "Acorn read-only source import graph; no build. Bare package closures omitted.",
+  "eager": [
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/main.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/game.boot.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.browser.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/experience/pocket-strip.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/encounter-meta.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/pocket-strip.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/quick-nav.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/surface-motion.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/navigation-motion.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/motion-presets.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/page-motion-profiles.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/page-loading.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/page-loading.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/camp-entry.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/camp-entry.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/motion.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/combat-feedback.css",
+    "motion/mini",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.board.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/map-reveals.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/motion-primitives.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/render-scheduler.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.kernel.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random-core.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.store.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/mapData.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/data/map.json",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/rules.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/rule-config.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.map.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/route-overlay.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/map-generator.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/layeredMap.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/map-graph.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.bag.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.modes.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.death.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/extraction.commands.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/commands.shared.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/terminal-settlement.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/map-snapshot.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/battle-loader.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/diagnostics.local.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.data.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.stats.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.recorder.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/game.menu.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/home-linked-interactions.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/home-linked-interactions.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/leave-run.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/archive-back.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/beginner-guide.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/title-achievements.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/settings-navigation.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/settings-transition.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/interface-motion.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/archive-motion.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/archive-motion.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/home-ui-tokens.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/settings-navigation.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/slot-emblems.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/beginner-guide.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/beginner-guide-diagrams.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/data/beginner-guide.json",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/achievement-gallery.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/achievement-motion.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/ui-scale.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/achievement-medals.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/storage.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/feedback.local.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/terminal.commands.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/meta.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/meta-progression.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/data-loader.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/data/cards-sync.json",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/data/scenes.json",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/data/art-mapping.json",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/data/achievements.json",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/data/pets.json",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/recovery.commands.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/recoverable-pair.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.storage.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/versioned-slot-reader.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-meta.commands.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-elapsed.commands.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-pet-egg.commands.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-departure.commands.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-progression.commands.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-economy.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-mutation.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-state.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/run-save-validation.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/node-reward-state.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/chest-reward-save.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.common.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.hub.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.hub.pages.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.hub.bridge.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/home.presenter.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/home.commands.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base.commands.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/home.catalog.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/collection.commands.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/art.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/performance-budgets.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/generated/thumb-manifest.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/generated/art-manifest.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/asset-url.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-archive-v3.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-shop-v3.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/inventory-zoom.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/inventory-zoom.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.view.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-description-text.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/term-tips.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.archive-v3.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.collection-v4.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-collection-v4.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.presentation.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/card-browser.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/card-browser.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-motion-v4.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-controls-v4.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/story.last-lamp.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.archive.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/narrative.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.reward-feedback.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-reward-feedback.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.shop-v3.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.facilities.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.visuals.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.personnel.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.warehouse.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.warehouse-categories-v7.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.hub.depart.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/roster-reference.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/departure.drag.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/departure-selected.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/departure-transition.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/expedition-transitions.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.home-v3.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-home-v7.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.home-icons-v10.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/departure.summary.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/departure.view-updates.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.trade-shop-v5.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.materials.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-page-motion-v7.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-page-motion-v7.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.navigation-v7.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-archive-facilities-v12.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-logistics-trade-v12.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-personnel-v12.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-rooms-v7.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-framework-v7.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-cohesion-v5.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-panel-layout.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-courtyard-v3.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.courtyard-v3.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/courtyard-vendor/KoiPond.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/courtyard.rain-tableau.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-camp-rework.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/preparation.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.hub.preparation.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/preparation.view.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/preparation.sources.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/preparation.commands.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.hub.home-scene.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/home.visuals.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.scenes.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.dev.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.console.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.flow.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/reward-scene-view.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.altar.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.scenes.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/entry-events.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/node-scene-view.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/turbo.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/encounter-selector.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/bag-return-hook.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.shop.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.data.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/character-view-motion.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/expedition-feedback.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/map-travel-path.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/map-node-state.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/story.commands.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.policy.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/bag/battle.slam-skill.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.weights.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.runner.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.state.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.protocol.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.surface.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.llm.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/expedition.view.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/map-node-art.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/renderer.icons.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/node-info.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/camera.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.notes.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.bag.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.bag.settle.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.bag.bridge.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/event-bus.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/battle-settlement.commands.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/battle-victory-progress.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.bag.rules.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.bag.drag.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.nest.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/lab.ending.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runes.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/nest-settlement.commands.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/ui.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/hud.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/cinematics.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/overlay.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/motion-transitions.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/transitions-director.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/comm-feed.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/photo-studio-presentation.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-draw-explanation.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-description-links.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/card-description-links.css",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/chests.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/character-idle.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/renderer.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/map-city-atmosphere.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/renderer.primitives.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/renderer.fx.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/combat.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-rules.schema.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m11.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.backfiller.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-rules.capability.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.consts.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m10.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m9.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.face-refresh.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m8.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m7.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m6.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m5.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m4.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m3.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m2.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m1.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.data.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.catalog.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.rules.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-rarity.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/notes.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/input.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/audio/sound.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/audio/sound.music.player.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/audio/sound.music.catalog.js",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/audio/sound.policy.js",
+    "howler",
+    "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/icons-bitmap.js"
+  ],
+  "nodes": [
+    {
+      "file": "game/src/main.js",
+      "bytes": 2062,
+      "gzip": 1039,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/ui-scale.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/rules.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/mapData.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/art.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/icons-bitmap.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/audio/sound.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/camera.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/motion.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/input.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/event-bus.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/notes.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/combat.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/meta.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/render-scheduler.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/renderer.fx.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/renderer.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/ui.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/term-tips.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/character-idle.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/battle-loader.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/chests.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.storage.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.store.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.nest.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.hub.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.bag.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.notes.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/game.boot.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/game.boot.js",
+      "bytes": 40724,
+      "gzip": 15794,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.notes.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.data.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.altar.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/performance-budgets.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.hub.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.bag.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.shop.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.notes.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/render-scheduler.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/camera.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/storage.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/expedition.view.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/map-node-state.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/map-travel-path.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/quick-nav.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/experience/pocket-strip.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.browser.js"
+      ],
+      "dynamics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/perf-probe.local.js"
+      ]
+    },
+    {
+      "file": "game/src/core/perf-probe.local.js",
+      "bytes": 16605,
+      "gzip": 5356,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/game.session.browser.js",
+      "bytes": 540,
+      "gzip": 463,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/experience/pocket-strip.js",
+      "bytes": 3619,
+      "gzip": 2000,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/pocket-strip.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/encounter-meta.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/encounter-meta.js",
+      "bytes": 1964,
+      "gzip": 1071,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/pocket-strip.css",
+      "bytes": 4591,
+      "gzip": 2602,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/quick-nav.js",
+      "bytes": 3494,
+      "gzip": 1714,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.hub.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.js",
+      "bytes": 6063,
+      "gzip": 1893,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.common.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/page-loading.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/surface-motion.js"
+      ],
+      "dynamics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.page.js"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.cardslib.page.js",
+      "bytes": 63846,
+      "gzip": 21716,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/home-linked-interactions.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-description-links.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-description-text.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/term-tips.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-draw-explanation.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-render-context.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-photo-notes.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/photo-studio-presentation.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.common.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.photo-fps.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.art-warm.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.photo-props.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.designer.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/photo-studio-controls.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/photo-studio-tabs.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/photo-studio-navigation.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/photo-studio-mounts.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/photo-studio-unified.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/photo-studio-room-effects.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/photo-studio-zoom-motion.css"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/photo-studio-zoom-motion.css",
+      "bytes": 1565,
+      "gzip": 449,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/photo-studio-room-effects.css",
+      "bytes": 4601,
+      "gzip": 1480,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/photo-studio-unified.css",
+      "bytes": 66072,
+      "gzip": 12359,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/photo-studio-mounts.css",
+      "bytes": 6761,
+      "gzip": 1660,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/photo-studio-navigation.js",
+      "bytes": 5848,
+      "gzip": 2074,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/home-linked-interactions.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/motion-presets.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/motion-presets.js",
+      "bytes": 1254,
+      "gzip": 729,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/home-linked-interactions.js",
+      "bytes": 2496,
+      "gzip": 1174,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/home-linked-interactions.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/motion-presets.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/shared.js",
+      "bytes": 2064,
+      "gzip": 1296,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/home-linked-interactions.css",
+      "bytes": 6400,
+      "gzip": 2021,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/photo-studio-tabs.js",
+      "bytes": 2046,
+      "gzip": 844,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/photo-studio-controls.js",
+      "bytes": 7676,
+      "gzip": 2532,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/motion-presets.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/ui-scale.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/ui-scale.js",
+      "bytes": 2982,
+      "gzip": 1540,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/sdt-facade.js",
+      "bytes": 1092,
+      "gzip": 672,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.designer.js",
+      "bytes": 22625,
+      "gzip": 7371,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/mech-sentences.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.common.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.common.js",
+      "bytes": 2576,
+      "gzip": 1463,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/mech-sentences.js",
+      "bytes": 4921,
+      "gzip": 1757,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/game.session.js",
+      "bytes": 32794,
+      "gzip": 12449,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.storage.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/run-save-validation.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/recovery.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/extraction.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/terminal.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/game.menu.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.data.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/battle-loader.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/map-generator.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/map-snapshot.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.kernel.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.modes.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.bag.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.map.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.board.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.death.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.kernel.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.modes.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.bag.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.map.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.board.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/game.session.board.js",
+      "bytes": 5355,
+      "gzip": 2577,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.kernel.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/map-reveals.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/map-reveals.js",
+      "bytes": 1844,
+      "gzip": 1108,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/render-scheduler.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/motion-primitives.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/motion-primitives.js",
+      "bytes": 3287,
+      "gzip": 1971,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/render-scheduler.js",
+      "bytes": 2586,
+      "gzip": 1314,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/game.session.kernel.js",
+      "bytes": 3647,
+      "gzip": 1936,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/mapData.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.store.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/random.js",
+      "bytes": 2298,
+      "gzip": 1062,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random-core.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/random-core.js",
+      "bytes": 1529,
+      "gzip": 944,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.store.js",
+      "bytes": 2847,
+      "gzip": 1211,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/mapData.js",
+      "bytes": 1626,
+      "gzip": 1078,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/rules.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/data/map.json"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/data/map.json",
+      "bytes": 9780,
+      "gzip": 2482,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/rules.js",
+      "bytes": 1323,
+      "gzip": 640,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/rule-config.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/rule-config.js",
+      "bytes": 5452,
+      "gzip": 1662,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/game.session.map.js",
+      "bytes": 5157,
+      "gzip": 2320,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/map-graph.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/layeredMap.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/map-generator.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/route-overlay.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.kernel.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/route-overlay.js",
+      "bytes": 7879,
+      "gzip": 3115,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/map-generator.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/map-generator.js",
+      "bytes": 23965,
+      "gzip": 9260,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random-core.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/layeredMap.js",
+      "bytes": 1550,
+      "gzip": 983,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/map-generator.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/map-graph.js",
+      "bytes": 3766,
+      "gzip": 1792,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/game.session.bag.js",
+      "bytes": 6468,
+      "gzip": 3182,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.kernel.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.modes.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/game.session.modes.js",
+      "bytes": 1591,
+      "gzip": 1029,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.kernel.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/game.session.death.js",
+      "bytes": 13145,
+      "gzip": 5747,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/terminal-settlement.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/extraction.commands.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/extraction.commands.js",
+      "bytes": 23259,
+      "gzip": 6872,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/commands.shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/rule-config.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/commands.shared.js",
+      "bytes": 2782,
+      "gzip": 1525,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/characters.js",
+      "bytes": 2968,
+      "gzip": 1362,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/terminal-settlement.js",
+      "bytes": 5211,
+      "gzip": 2516,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/map-snapshot.js",
+      "bytes": 14814,
+      "gzip": 4923,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/layeredMap.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/battle-loader.js",
+      "bytes": 4074,
+      "gzip": 1807,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/diagnostics.local.js"
+      ],
+      "dynamics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.view.js"
+      ]
+    },
+    {
+      "file": "game/src/battle/view/battle.view.js",
+      "bytes": 54654,
+      "gzip": 19528,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/ui-scale.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/storage.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/event-bus.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.hand.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.pace.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.clock.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.piles.view.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.frames.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.hand-selection.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.core.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.overlays.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.layers.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.vfx.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.anim.view.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.aim.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.hand-inspector.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.presentation-ready.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.victory.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.hover.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.hover.js",
+      "bytes": 5280,
+      "gzip": 2334,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.preview.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.core.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/core/battle.core.js",
+      "bytes": 21764,
+      "gzip": 9800,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/bag/battle.deck.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/combat.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.state.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/combat.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.engine.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.hand-selection.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.enemy-phase.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "bytes": 26390,
+      "gzip": 8820,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.state.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/combat.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.feedback.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.pace.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.engine.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/effect-steps.m2.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m2.js",
+      "bytes": 18292,
+      "gzip": 6807,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.piles.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.session.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.session.js",
+      "bytes": 4687,
+      "gzip": 1966,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.state.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/combat.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/core/combat.js",
+      "bytes": 24739,
+      "gzip": 7857,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.state.js",
+      "bytes": 2408,
+      "gzip": 1145,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.piles.js",
+      "bytes": 2152,
+      "gzip": 864,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.js",
+      "bytes": 81387,
+      "gzip": 28555,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.discover-state.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.effects.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/bag/battle.deck.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/bag/battle.piles.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.target-rules.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.rule-guard.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.execution-session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.action-runner.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.staged-playback.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.state.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/combat.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/event-bus.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.card-cost.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.card-inspection.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.enemy-intent.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.snapshot.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.resolution.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.foe-lifecycle.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.draw.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.feedback.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.selection-flow.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.hand-selection.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/bag/battle.equipment.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/bag/battle.bag.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.hosted.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.lifecycle.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.exec-play.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.triggers.m2.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/battle.triggers.m2.js",
+      "bytes": 6934,
+      "gzip": 3140,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.piles.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/core/battle.exec-play.js",
+      "bytes": 19212,
+      "gzip": 7311,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/bag/battle.piles.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.target-rules.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.staged-playback.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.rule-guard.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.hand-selection.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.js",
+      "bytes": 514,
+      "gzip": 341,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.piles.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.interaction.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.effects.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.presentation.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.presentation.js",
+      "bytes": 1130,
+      "gzip": 551,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.effects.js",
+      "bytes": 5802,
+      "gzip": 2019,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.interaction.js",
+      "bytes": 2464,
+      "gzip": 871,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/core/battle.hand-selection.js",
+      "bytes": 2712,
+      "gzip": 1079,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/battle.rule-guard.js",
+      "bytes": 1636,
+      "gzip": 763,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-rules.capability.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/card-rules.capability.js",
+      "bytes": 11998,
+      "gzip": 3887,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-rules.schema.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/card-rules.schema.js",
+      "bytes": 69570,
+      "gzip": 17147,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.staged-playback.js",
+      "bytes": 3941,
+      "gzip": 1265,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.feedback.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.pace.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.pace.js",
+      "bytes": 1154,
+      "gzip": 832,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.feedback.js",
+      "bytes": 3914,
+      "gzip": 1712,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.pace.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.clock.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.clock.js",
+      "bytes": 3698,
+      "gzip": 1257,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.pace.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/turbo.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.frames.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.frames.js",
+      "bytes": 29698,
+      "gzip": 11948,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/asset-url.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/event-bus.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/ui-scale.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.pace.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.frame-catalog.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.frame-catalog-changwuyu.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.frame-catalog-three-role.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.presentation.js"
+      ],
+      "dynamics": [
+        "pixi.js",
+        "pixi.js",
+        "pixi.js"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.presentation.js",
+      "bytes": 293,
+      "gzip": 180,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-catalog-three-role.js",
+      "bytes": 865,
+      "gzip": 415,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/assets/portraits/frames/baita/sprite-v1/animations.json",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/animations.json",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/animations.json"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/assets/portraits/frames/xingyue/sprite-v1/animations.json",
+      "bytes": 5052,
+      "gzip": 482,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/assets/portraits/frames/heixiang/sprite-v1/animations.json",
+      "bytes": 4704,
+      "gzip": 473,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/assets/portraits/frames/baita/sprite-v1/animations.json",
+      "bytes": 5052,
+      "gzip": 482,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-catalog-changwuyu.js",
+      "bytes": 557,
+      "gzip": 321,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/animations.json"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/assets/portraits/frames/changwuyu/sprite-v1/animations.json",
+      "bytes": 5388,
+      "gzip": 672,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-catalog.js",
+      "bytes": 487,
+      "gzip": 306,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/assets/portraits/frames/wu/sprite-v1/animations.json"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/assets/portraits/frames/wu/sprite-v1/animations.json",
+      "bytes": 4686,
+      "gzip": 465,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/event-bus.js",
+      "bytes": 2627,
+      "gzip": 1429,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/diagnostics.local.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/diagnostics.local.js",
+      "bytes": 7556,
+      "gzip": 2723,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/asset-url.js",
+      "bytes": 715,
+      "gzip": 493,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/turbo.js",
+      "bytes": 1354,
+      "gzip": 877,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/battle.target-rules.js",
+      "bytes": 7688,
+      "gzip": 3460,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/hand-cost-patterns.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/hand-cost-patterns.js",
+      "bytes": 1331,
+      "gzip": 897,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/bag/battle.piles.js",
+      "bytes": 832,
+      "gzip": 485,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/core/battle.lifecycle.js",
+      "bytes": 20498,
+      "gzip": 8119,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/combat.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/combat.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/event-bus.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.presentation.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.feedback.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/bag/battle.deck.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.state.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.hosted.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/battle.hosted.js",
+      "bytes": 1559,
+      "gzip": 699,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/data-loader.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.data.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-rules.schema.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/hosted-catalog-index.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/hosted-catalog-index.js",
+      "bytes": 409,
+      "gzip": 251,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.data.js",
+      "bytes": 97211,
+      "gzip": 25068,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.catalog.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.catalog.js",
+      "bytes": 1750,
+      "gzip": 637,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/data-loader.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/data-loader.js",
+      "bytes": 1804,
+      "gzip": 1017,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/data/pets.json",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/data/achievements.json",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/data/art-mapping.json",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/data/scenes.json",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/data/map.json",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/data/cards-sync.json"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/data/cards-sync.json",
+      "bytes": 24941,
+      "gzip": 6916,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/data/scenes.json",
+      "bytes": 11102,
+      "gzip": 4174,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/data/art-mapping.json",
+      "bytes": 21127,
+      "gzip": 4694,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/data/achievements.json",
+      "bytes": 5840,
+      "gzip": 1532,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/data/pets.json",
+      "bytes": 1089,
+      "gzip": 593,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/bag/battle.deck.js",
+      "bytes": 506,
+      "gzip": 291,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/bag/battle.bag.js",
+      "bytes": 28264,
+      "gzip": 9233,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/combat.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.target-rules.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.hosted.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/bag/battle.slam-skill.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/bag/battle.slam-skill.js",
+      "bytes": 2373,
+      "gzip": 1227,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/bag/battle.equipment.js",
+      "bytes": 12629,
+      "gzip": 4696,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/combat.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.effects.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.hosted.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/battle.effects.js",
+      "bytes": 2811,
+      "gzip": 1405,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/effect-steps.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.js",
+      "bytes": 5520,
+      "gzip": 2678,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/effect-verbs.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/hand-cost-patterns.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/effect-steps.ctx.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/effect-steps.gates.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/effect-steps.curse.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/effect-steps.damage.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/effect-steps.recovery.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/effect-steps.kills.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/effect-steps.deck.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/effect-steps.rules.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/effect-steps.audit.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/effect-steps.tail.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.tail.js",
+      "bytes": 2144,
+      "gzip": 1058,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.audit.js",
+      "bytes": 8335,
+      "gzip": 3072,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.rules.js",
+      "bytes": 4950,
+      "gzip": 2040,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.deck.js",
+      "bytes": 6435,
+      "gzip": 2459,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.kills.js",
+      "bytes": 19855,
+      "gzip": 6305,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.recovery.js",
+      "bytes": 9570,
+      "gzip": 3634,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.damage.js",
+      "bytes": 19084,
+      "gzip": 6001,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.attack-cues.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.attack-cues.js",
+      "bytes": 1805,
+      "gzip": 862,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.curse.js",
+      "bytes": 13843,
+      "gzip": 3966,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.gates.js",
+      "bytes": 5719,
+      "gzip": 2256,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.ctx.js",
+      "bytes": 6532,
+      "gzip": 3227,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/effect-verbs.js",
+      "bytes": 21447,
+      "gzip": 7600,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/core/battle.selection-flow.js",
+      "bytes": 13378,
+      "gzip": 4836,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.effects.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.hand-selection.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.discover-flow.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/battle.discover-flow.js",
+      "bytes": 13237,
+      "gzip": 4290,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.discover-candidates.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.discover-state.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/battle.discover-state.js",
+      "bytes": 4370,
+      "gzip": 1347,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/battle.discover-candidates.js",
+      "bytes": 2102,
+      "gzip": 876,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/core/battle.draw.js",
+      "bytes": 9115,
+      "gzip": 3895,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/bag/battle.deck.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.effects.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/core/battle.foe-lifecycle.js",
+      "bytes": 4712,
+      "gzip": 2306,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.staged-playback.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.presentation.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.effects.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/combat.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/core/battle.resolution.js",
+      "bytes": 81214,
+      "gzip": 26796,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.attack-cues.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/effect-steps.ctx.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/effect-steps.m1.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/effect-steps.m2.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.rule-guard.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.hosted.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m1.js",
+      "bytes": 5877,
+      "gzip": 2621,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.piles.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.runtime.presentation.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.snapshot.js",
+      "bytes": 8989,
+      "gzip": 2453,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-intent.js",
+      "bytes": 1816,
+      "gzip": 923,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/battle.card-inspection.js",
+      "bytes": 5586,
+      "gzip": 2340,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/effects/battle.card-cost.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/effects/battle.card-cost.js",
+      "bytes": 3450,
+      "gzip": 1237,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.action-runner.js",
+      "bytes": 2770,
+      "gzip": 1217,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.state.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.execution-session.js",
+      "bytes": 1866,
+      "gzip": 845,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.actions.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/core/battle.actions.js",
+      "bytes": 2446,
+      "gzip": 1034,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.preview.js",
+      "bytes": 11949,
+      "gzip": 4176,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/combat.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.victory.js",
+      "bytes": 2679,
+      "gzip": 1222,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.presentation-ready.js",
+      "bytes": 6004,
+      "gzip": 2289,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.hand-inspector.js",
+      "bytes": 7564,
+      "gzip": 2660,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-description-text.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.core.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/card-description-text.js",
+      "bytes": 35091,
+      "gzip": 9725,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.aim.js",
+      "bytes": 36068,
+      "gzip": 12607,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/ui-scale.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.hand-inspector.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/battle-hand-overhaul.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.core.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.hover.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.target-session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.state.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/core/battle.target-session.js",
+      "bytes": 2647,
+      "gzip": 903,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/battle-hand-overhaul.css",
+      "bytes": 16043,
+      "gzip": 4102,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.anim.view.js",
+      "bytes": 16938,
+      "gzip": 6511,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/ui-scale.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.frames.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.clock.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.vfx.js",
+      "bytes": 25697,
+      "gzip": 9933,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/ui-scale.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.pace.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.clock.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.feedback.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.frames.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/asset-url.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/storage.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.core.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/storage.js",
+      "bytes": 1025,
+      "gzip": 640,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.layers.js",
+      "bytes": 48846,
+      "gzip": 17743,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/ui-scale.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/asset-url.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.hand.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.hand-layout.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.enemy-intent.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.intent.view.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/storage.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.core.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.anim.view.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runtime/battle.clock.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.aim.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.hover.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/view/battle.preview.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.intent.view.js",
+      "bytes": 1684,
+      "gzip": 863,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.hand-layout.js",
+      "bytes": 1466,
+      "gzip": 849,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/core/battle.hand.js",
+      "bytes": 3626,
+      "gzip": 1987,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.overlays.js",
+      "bytes": 18449,
+      "gzip": 6208,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-description-text.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.core.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/view/battle.piles.view.js",
+      "bytes": 3229,
+      "gzip": 1452,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/agent/agent.data.js",
+      "bytes": 7929,
+      "gzip": 3565,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.recorder.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.stats.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/agent/agent.stats.js",
+      "bytes": 4173,
+      "gzip": 1904,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/agent/agent.recorder.js",
+      "bytes": 15614,
+      "gzip": 6863,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/game.menu.js",
+      "bytes": 65921,
+      "gzip": 22547,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/feedback.local.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/battle-loader.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/terminal-settlement.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/storage.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/achievement-gallery.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/beginner-guide.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/slot-emblems.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/settings-navigation.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/camp-entry.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/motion.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/title-achievements.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/beginner-guide.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/archive-back.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/leave-run.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/home-linked-interactions.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/leave-run.css",
+      "bytes": 5387,
+      "gzip": 1602,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/archive-back.css",
+      "bytes": 1990,
+      "gzip": 793,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/beginner-guide.css",
+      "bytes": 7520,
+      "gzip": 2130,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/title-achievements.css",
+      "bytes": 19267,
+      "gzip": 4804,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/motion.js",
+      "bytes": 2548,
+      "gzip": 1191,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "motion/mini",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/combat-feedback.css"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/combat-feedback.css",
+      "bytes": 1358,
+      "gzip": 721,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/camp-entry.js",
+      "bytes": 7523,
+      "gzip": 2881,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/camp-entry.css"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/camp-entry.css",
+      "bytes": 15318,
+      "gzip": 3861,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/settings-navigation.js",
+      "bytes": 4815,
+      "gzip": 1986,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/settings-navigation.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/home-ui-tokens.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/surface-motion.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/settings-transition.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/settings-transition.js",
+      "bytes": 1407,
+      "gzip": 834,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/camp-entry.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/interface-motion.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/interface-motion.js",
+      "bytes": 10215,
+      "gzip": 3430,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/surface-motion.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/camp-entry.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/page-motion-profiles.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/archive-motion.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/navigation-motion.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/navigation-motion.js",
+      "bytes": 1213,
+      "gzip": 600,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/archive-motion.js",
+      "bytes": 1709,
+      "gzip": 910,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/archive-motion.css"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/archive-motion.css",
+      "bytes": 5692,
+      "gzip": 1515,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/page-motion-profiles.js",
+      "bytes": 5631,
+      "gzip": 1868,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/motion-presets.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/navigation-motion.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/surface-motion.js",
+      "bytes": 14956,
+      "gzip": 3750,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/page-motion-profiles.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/motion-presets.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/navigation-motion.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/home-ui-tokens.css",
+      "bytes": 590,
+      "gzip": 383,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/settings-navigation.css",
+      "bytes": 16404,
+      "gzip": 3945,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/slot-emblems.js",
+      "bytes": 3313,
+      "gzip": 842,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/beginner-guide.js",
+      "bytes": 5344,
+      "gzip": 1990,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/data/beginner-guide.json",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/beginner-guide-diagrams.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/home-linked-interactions.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/motion-presets.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/beginner-guide-diagrams.js",
+      "bytes": 3989,
+      "gzip": 2280,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/data/beginner-guide.json",
+      "bytes": 6537,
+      "gzip": 2721,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/achievement-gallery.js",
+      "bytes": 13394,
+      "gzip": 4516,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/achievement-medals.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/achievement-motion.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/home-linked-interactions.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/achievement-motion.js",
+      "bytes": 9713,
+      "gzip": 2917,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/ui-scale.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/home-linked-interactions.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/motion-presets.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/achievement-medals.js",
+      "bytes": 2447,
+      "gzip": 1104,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/feedback.local.js",
+      "bytes": 10300,
+      "gzip": 3738,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/diagnostics.local.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/terminal.commands.js",
+      "bytes": 7366,
+      "gzip": 2521,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/meta.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/commands.shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/meta.js",
+      "bytes": 17323,
+      "gzip": 6746,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/data-loader.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/meta-progression.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/meta-progression.js",
+      "bytes": 1870,
+      "gzip": 722,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/recovery.commands.js",
+      "bytes": 12035,
+      "gzip": 3300,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.storage.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/recoverable-pair.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/commands.shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/recoverable-pair.js",
+      "bytes": 8591,
+      "gzip": 2393,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/commands.shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.storage.js",
+      "bytes": 14329,
+      "gzip": 5992,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/versioned-slot-reader.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/versioned-slot-reader.js",
+      "bytes": 5622,
+      "gzip": 2833,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "bytes": 32759,
+      "gzip": 11949,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-state.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/data-loader.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.storage.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/versioned-slot-reader.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-mutation.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-economy.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-progression.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-departure.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-pet-egg.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-elapsed.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-meta.commands.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/base-meta.commands.js",
+      "bytes": 6780,
+      "gzip": 2607,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/meta-progression.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/base-elapsed.commands.js",
+      "bytes": 2044,
+      "gzip": 648,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/base-pet-egg.commands.js",
+      "bytes": 2407,
+      "gzip": 1188,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/rule-config.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/base-departure.commands.js",
+      "bytes": 2934,
+      "gzip": 999,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/base-progression.commands.js",
+      "bytes": 2327,
+      "gzip": 822,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/base-economy.js",
+      "bytes": 4555,
+      "gzip": 1503,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/base-mutation.js",
+      "bytes": 1915,
+      "gzip": 1034,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/base-state.js",
+      "bytes": 6805,
+      "gzip": 3227,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/run-save-validation.js",
+      "bytes": 4750,
+      "gzip": 1700,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/chest-reward-save.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/node-reward-state.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/node-reward-state.js",
+      "bytes": 3726,
+      "gzip": 1346,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/chest-reward-save.js",
+      "bytes": 2963,
+      "gzip": 1080,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.photo-props.js",
+      "bytes": 3241,
+      "gzip": 1855,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.art-warm.js",
+      "bytes": 4755,
+      "gzip": 1683,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.photo-fps.js",
+      "bytes": 3938,
+      "gzip": 1662,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/photo-studio-presentation.js",
+      "bytes": 770,
+      "gzip": 405,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/card-photo-notes.js",
+      "bytes": 2198,
+      "gzip": 1208,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/data/card-notes.json"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/data/card-notes.json",
+      "bytes": 375,
+      "gzip": 336,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/card-render-context.js",
+      "bytes": 857,
+      "gzip": 416,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-rarity.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/card-rarity.js",
+      "bytes": 1220,
+      "gzip": 532,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/card-draw-explanation.js",
+      "bytes": 444,
+      "gzip": 406,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/term-tips.js",
+      "bytes": 11259,
+      "gzip": 4994,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/ui-scale.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/card-description-links.js",
+      "bytes": 4483,
+      "gzip": 1926,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.view.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-description-text.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/term-tips.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/card-description-links.css"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/card-description-links.css",
+      "bytes": 1441,
+      "gzip": 621,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.view.js",
+      "bytes": 11017,
+      "gzip": 5498,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/term-tips.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-description-text.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/page-loading.js",
+      "bytes": 5001,
+      "gzip": 2056,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/motion.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/camp-entry.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/page-loading.css"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/page-loading.css",
+      "bytes": 2130,
+      "gzip": 952,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.hub.js",
+      "bytes": 24475,
+      "gzip": 7883,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/home-linked-interactions.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/collection.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/home.presenter.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.hub.home-scene.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.hub.preparation.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/preparation.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-camp-rework.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.presentation.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.warehouse.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.materials.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.archive-v3.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.courtyard-v3.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/inventory-zoom.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-courtyard-v3.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-panel-layout.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-cohesion-v5.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-framework-v7.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-rooms-v7.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-personnel-v12.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-logistics-trade-v12.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-archive-facilities-v12.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.navigation-v7.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-page-motion-v7.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.trade-shop-v5.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.personnel.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-motion-v4.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.facilities.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.archive.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.hub.bridge.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.hub.depart.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.hub.pages.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.hub.pages.js",
+      "bytes": 14535,
+      "gzip": 5806,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.warehouse.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.personnel.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.facilities.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.shop-v3.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.archive-v3.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/inventory-zoom.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-shop-v3.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-archive-v3.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/collection.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/home.presenter.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.hub.bridge.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.hub.bridge.js",
+      "bytes": 602,
+      "gzip": 505,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/home/home.presenter.js",
+      "bytes": 1577,
+      "gzip": 893,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/collection.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/home.commands.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/home/home.commands.js",
+      "bytes": 10564,
+      "gzip": 3420,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/home.catalog.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/commands.shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/base.commands.js",
+      "bytes": 6224,
+      "gzip": 2189,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/commands.shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/home/home.catalog.js",
+      "bytes": 2536,
+      "gzip": 815,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/collection.commands.js",
+      "bytes": 11044,
+      "gzip": 3452,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/data-loader.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/meta.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/art.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/commands.shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/art.js",
+      "bytes": 32895,
+      "gzip": 12444,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/asset-url.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/data-loader.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/generated/art-manifest.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/generated/thumb-manifest.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/performance-budgets.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/performance-budgets.js",
+      "bytes": 1652,
+      "gzip": 1095,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/generated/thumb-manifest.js",
+      "bytes": 12808,
+      "gzip": 2776,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/generated/art-manifest.js",
+      "bytes": 17533,
+      "gzip": 3524,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/base-archive-v3.css",
+      "bytes": 17304,
+      "gzip": 2850,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/base-shop-v3.css",
+      "bytes": 6789,
+      "gzip": 1812,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/inventory-zoom.js",
+      "bytes": 1416,
+      "gzip": 747,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.view.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/inventory-zoom.css"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/inventory-zoom.css",
+      "bytes": 4866,
+      "gzip": 1406,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/hub.archive-v3.js",
+      "bytes": 17929,
+      "gzip": 5369,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.reward-feedback.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/achievement-medals.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.archive.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/story.last-lamp.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.collection-v4.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/hub.collection-v4.js",
+      "bytes": 6442,
+      "gzip": 2341,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-motion-v4.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/card-browser.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.presentation.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/inventory-zoom.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-collection-v4.css"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/base-collection-v4.css",
+      "bytes": 3303,
+      "gzip": 1035,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/hub.presentation.js",
+      "bytes": 21774,
+      "gzip": 5795,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/home-linked-interactions.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/motion-presets.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/page-motion-profiles.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-motion-v4.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/card-browser.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/navigation-motion.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/card-browser.js",
+      "bytes": 4026,
+      "gzip": 1567,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/card-browser.css"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/card-browser.css",
+      "bytes": 1107,
+      "gzip": 483,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/base-motion-v4.js",
+      "bytes": 1958,
+      "gzip": 975,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-controls-v4.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/home-linked-interactions.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/motion-presets.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/navigation-motion.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/base-controls-v4.css",
+      "bytes": 6232,
+      "gzip": 1577,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/home/story.last-lamp.js",
+      "bytes": 6481,
+      "gzip": 2172,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/hub.archive.js",
+      "bytes": 9809,
+      "gzip": 4010,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/narrative.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/story.last-lamp.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/home/narrative.js",
+      "bytes": 2775,
+      "gzip": 1122,
+      "statics": [],
+      "dynamics": [
+        "inkjs",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/generated/narrative-events.js",
+        "inkjs",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/generated/narrative-events.js"
+      ]
+    },
+    {
+      "file": "game/src/generated/narrative-events.js",
+      "bytes": 7405,
+      "gzip": 3539,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/hub.reward-feedback.js",
+      "bytes": 8586,
+      "gzip": 3445,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-reward-feedback.css"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/base-reward-feedback.css",
+      "bytes": 1538,
+      "gzip": 546,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/hub.shop-v3.js",
+      "bytes": 3661,
+      "gzip": 1536,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/hub.facilities.js",
+      "bytes": 4320,
+      "gzip": 1839,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.visuals.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/home-linked-interactions.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/hub.visuals.js",
+      "bytes": 5811,
+      "gzip": 2291,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/asset-url.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/hub.personnel.js",
+      "bytes": 21610,
+      "gzip": 6899,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/home-linked-interactions.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/collection.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.visuals.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.presentation.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/card-browser.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/inventory-zoom.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-motion-v4.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/hub.warehouse.js",
+      "bytes": 12560,
+      "gzip": 4152,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/card-browser.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.presentation.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/inventory-zoom.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.warehouse-categories-v7.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base-motion-v4.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/hub.warehouse-categories-v7.js",
+      "bytes": 543,
+      "gzip": 403,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.hub.depart.js",
+      "bytes": 20813,
+      "gzip": 7840,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.hub.bridge.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/departure.view-updates.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/departure.summary.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.home-v3.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/departure-transition.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/departure-selected.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/departure.drag.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/roster-reference.css"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/roster-reference.css",
+      "bytes": 3861,
+      "gzip": 1145,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/departure.drag.js",
+      "bytes": 3399,
+      "gzip": 1194,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/ui-scale.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/departure-selected.css",
+      "bytes": 9193,
+      "gzip": 2699,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/departure-transition.js",
+      "bytes": 2624,
+      "gzip": 1329,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/camp-entry.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/motion-presets.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/expedition-transitions.css"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/expedition-transitions.css",
+      "bytes": 2899,
+      "gzip": 995,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/hub.home-v3.js",
+      "bytes": 4365,
+      "gzip": 1755,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.home-icons-v10.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-home-v7.css"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/base-home-v7.css",
+      "bytes": 8003,
+      "gzip": 1837,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/hub.home-icons-v10.js",
+      "bytes": 1082,
+      "gzip": 678,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/departure.summary.js",
+      "bytes": 1477,
+      "gzip": 687,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/departure.view-updates.js",
+      "bytes": 6707,
+      "gzip": 2366,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.presentation.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/hub.trade-shop-v5.js",
+      "bytes": 15036,
+      "gzip": 4737,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.materials.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/hub.materials.js",
+      "bytes": 941,
+      "gzip": 504,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.visuals.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/base-page-motion-v7.js",
+      "bytes": 7980,
+      "gzip": 2828,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/base-page-motion-v7.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/home-linked-interactions.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/motion-presets.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/navigation-motion.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/base-page-motion-v7.css",
+      "bytes": 3295,
+      "gzip": 675,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/hub.navigation-v7.js",
+      "bytes": 1093,
+      "gzip": 707,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/hub.home-icons-v10.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/base-archive-facilities-v12.css",
+      "bytes": 29868,
+      "gzip": 4294,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/base-logistics-trade-v12.css",
+      "bytes": 15325,
+      "gzip": 3418,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/base-personnel-v12.css",
+      "bytes": 27559,
+      "gzip": 4515,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/base-rooms-v7.css",
+      "bytes": 33811,
+      "gzip": 5725,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/base-framework-v7.css",
+      "bytes": 8030,
+      "gzip": 2216,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/base-cohesion-v5.css",
+      "bytes": 16541,
+      "gzip": 3275,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/base-panel-layout.css",
+      "bytes": 73,
+      "gzip": 96,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/base-courtyard-v3.css",
+      "bytes": 6794,
+      "gzip": 1609,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/hub.courtyard-v3.js",
+      "bytes": 13066,
+      "gzip": 4178,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/asset-url.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/courtyard.rain-tableau.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/courtyard-vendor/KoiPond.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/KoiPond.js",
+      "bytes": 11387,
+      "gzip": 3657,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/courtyard.rain-tableau.js",
+      "bytes": 10795,
+      "gzip": 3681,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "bytes": 39130,
+      "gzip": 6417,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/preparation.css",
+      "bytes": 6956,
+      "gzip": 2722,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.hub.preparation.js",
+      "bytes": 6792,
+      "gzip": 2501,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/preparation.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/preparation.view.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/preparation.view.js",
+      "bytes": 8300,
+      "gzip": 3204,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/preparation.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/preparation.sources.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/preparation.sources.js",
+      "bytes": 2697,
+      "gzip": 1287,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/preparation.commands.js",
+      "bytes": 9680,
+      "gzip": 3506,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/commands.shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.hub.home-scene.js",
+      "bytes": 3832,
+      "gzip": 1456,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/collection.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/home.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/home.presenter.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/home.visuals.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.hub.bridge.js"
+      ],
+      "dynamics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/home.scene.js"
+      ]
+    },
+    {
+      "file": "game/src/home/home.scene.js",
+      "bytes": 22027,
+      "gzip": 7265,
+      "statics": [
+        "pixi.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/home.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/home-scene.css"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/home-scene.css",
+      "bytes": 6190,
+      "gzip": 1966,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/home/home.visuals.js",
+      "bytes": 8795,
+      "gzip": 2584,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/home.catalog.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/agent/agent.js",
+      "bytes": 2903,
+      "gzip": 1274,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.state.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.runner.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.protocol.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/turbo.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.policy.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.llm.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.recorder.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.stats.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.scenes.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.data.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/agent/agent.scenes.js",
+      "bytes": 26723,
+      "gzip": 9964,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.state.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.runner.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.policy.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/turbo.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.dev.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.recorder.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/game.run.dev.js",
+      "bytes": 14665,
+      "gzip": 5669,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.scenes.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.altar.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.flow.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/battle-loader.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.console.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.data.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.common.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/agent/agent.console.js",
+      "bytes": 7894,
+      "gzip": 3479,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/quick-nav.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/game.run.flow.js",
+      "bytes": 51290,
+      "gzip": 18017,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.data.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/narrative.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/story.last-lamp.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.storage.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/story.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/bag-return-hook.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/battle-loader.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/turbo.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/render-scheduler.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/map-travel-path.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.scenes.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.altar.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/node-reward-state.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/reward-scene-view.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/reward-scene-view.js",
+      "bytes": 1206,
+      "gzip": 622,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/game.run.altar.js",
+      "bytes": 74201,
+      "gzip": 25322,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/expedition-feedback.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/character-view-motion.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/reward-scene-view.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/node-reward-state.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/bag-return-hook.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/extraction.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.hub.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/battle-loader.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.scenes.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.storage.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/recovery.commands.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/game.run.scenes.js",
+      "bytes": 25677,
+      "gzip": 10802,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.data.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.shop.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/battle-loader.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/bag-return-hook.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/encounter-selector.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/turbo.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/motion.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/camp-entry.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/node-scene-view.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/entry-events.css",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/css/expedition-transitions.css"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/css/entry-events.css",
+      "bytes": 14392,
+      "gzip": 3354,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/node-scene-view.js",
+      "bytes": 3137,
+      "gzip": 1415,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/encounter-selector.js",
+      "bytes": 3591,
+      "gzip": 1392,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/bag-return-hook.js",
+      "bytes": 762,
+      "gzip": 587,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/game.run.shop.js",
+      "bytes": 32616,
+      "gzip": 11197,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.view.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/motion-primitives.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/game.run.data.js",
+      "bytes": 3265,
+      "gzip": 1301,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/data-loader.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/performance-budgets.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/character-view-motion.js",
+      "bytes": 3690,
+      "gzip": 1365,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/motion-presets.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/home-linked-interactions.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/expedition-feedback.js",
+      "bytes": 2014,
+      "gzip": 976,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/map-travel-path.js",
+      "bytes": 3327,
+      "gzip": 1348,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/map-node-state.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/map-node-state.js",
+      "bytes": 599,
+      "gzip": 372,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/home/story.commands.js",
+      "bytes": 1437,
+      "gzip": 537,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/base.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/home/story.last-lamp.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/agent/agent.policy.js",
+      "bytes": 55564,
+      "gzip": 21496,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.weights.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/bag/battle.slam-skill.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/agent/agent.weights.js",
+      "bytes": 6702,
+      "gzip": 3539,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/agent/agent.runner.js",
+      "bytes": 32077,
+      "gzip": 12838,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.protocol.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.surface.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.state.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/turbo.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.recorder.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.flow.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/agent/agent.state.js",
+      "bytes": 18833,
+      "gzip": 7507,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.surface.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.protocol.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.recorder.js"
+      ],
+      "dynamics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/core/battle.core.js"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.protocol.js",
+      "bytes": 5175,
+      "gzip": 2278,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/agent/agent.surface.js",
+      "bytes": 5908,
+      "gzip": 2914,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/agent/agent.llm.js",
+      "bytes": 8313,
+      "gzip": 4033,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.protocol.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/agent/agent.policy.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/expedition.view.js",
+      "bytes": 13855,
+      "gzip": 5641,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/node-info.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/map-node-state.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/map-node-art.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/map-travel-path.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/map-travel-path.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/map-node-art.js",
+      "bytes": 10314,
+      "gzip": 3648,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/renderer.icons.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/renderer.icons.js",
+      "bytes": 2933,
+      "gzip": 1214,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/node-info.js",
+      "bytes": 1350,
+      "gzip": 867,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/camera.js",
+      "bytes": 7236,
+      "gzip": 2845,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/render-scheduler.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/motion-primitives.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.notes.js",
+      "bytes": 11094,
+      "gzip": 4377,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "bytes": 44397,
+      "gzip": 13399,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/bag-return-hook.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.cardslib.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.bag.bridge.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.bag.drag.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.bag.rules.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.bag.settle.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.bag.settle.js",
+      "bytes": 23472,
+      "gzip": 8315,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/rule-config.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.storage.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/battle-settlement.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/recovery.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/event-bus.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.bag.bridge.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/chest-reward-save.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.bag.bridge.js",
+      "bytes": 514,
+      "gzip": 442,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/game.run.js",
+      "bytes": 1189,
+      "gzip": 632,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.scenes.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.altar.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.flow.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.run.dev.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/battle-settlement.commands.js",
+      "bytes": 16283,
+      "gzip": 3395,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/commands.shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/battle-victory-progress.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/battle-victory-progress.js",
+      "bytes": 2960,
+      "gzip": 1096,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/characters.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/meta-progression.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.bag.rules.js",
+      "bytes": 3302,
+      "gzip": 1466,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/game.bag.drag.js",
+      "bytes": 10323,
+      "gzip": 4122,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.bag.bridge.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/game.nest.js",
+      "bytes": 35359,
+      "gzip": 11934,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/game.session.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/ui.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/game.storage.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/recovery.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/nest-settlement.commands.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/battle-loader.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/battle/runes.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/event-bus.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/lab.ending.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/lab.ending.js",
+      "bytes": 3976,
+      "gzip": 2078,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/asset-url.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/turbo.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/battle/runes.js",
+      "bytes": 6627,
+      "gzip": 2832,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/hub/nest-settlement.commands.js",
+      "bytes": 9761,
+      "gzip": 2685,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/commands.shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/ui.js",
+      "bytes": 30747,
+      "gzip": 10209,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/motion.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-description-links.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-draw-explanation.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/hub/photo-studio-presentation.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/term-tips.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/overlay.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/cinematics.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/hud.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/hud.js",
+      "bytes": 11524,
+      "gzip": 5308,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/storage.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/expedition.view.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/cinematics.js",
+      "bytes": 7630,
+      "gzip": 3471,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/overlay.js",
+      "bytes": 23857,
+      "gzip": 9748,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/motion-transitions.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/motion-transitions.js",
+      "bytes": 1083,
+      "gzip": 815,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/transitions-director.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/transitions-director.js",
+      "bytes": 5666,
+      "gzip": 2962,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/motion.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/comm-feed.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/comm-feed.js",
+      "bytes": 6536,
+      "gzip": 3342,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/motion.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/run/chests.js",
+      "bytes": 42320,
+      "gzip": 13418,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/ui/reward-scene-view.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/turbo.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/chest-reward-save.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/ui/character-idle.js",
+      "bytes": 2404,
+      "gzip": 1258,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/renderer.js",
+      "bytes": 22524,
+      "gzip": 8563,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/renderer.primitives.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/map-reveals.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/motion-primitives.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/render-scheduler.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/node-info.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/map-node-state.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/map-city-atmosphere.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/map-node-art.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/run/expedition.view.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/map-city-atmosphere.js",
+      "bytes": 1206,
+      "gzip": 723,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/renderer.primitives.js",
+      "bytes": 1563,
+      "gzip": 630,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/renderer.fx.js",
+      "bytes": 1523,
+      "gzip": 976,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.js",
+      "bytes": 19355,
+      "gzip": 8329,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.view.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/data-loader.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.consts.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.rules.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.data.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m1.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m2.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m3.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m4.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m5.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m6.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m7.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m8.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.face-refresh.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m9.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m10.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.m11.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-rules.schema.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m11.js",
+      "bytes": 2157,
+      "gzip": 1301,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.backfiller.js",
+      "bytes": 8270,
+      "gzip": 3365,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.consts.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-rules.schema.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-rules.capability.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.consts.js",
+      "bytes": 6057,
+      "gzip": 3065,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m10.js",
+      "bytes": 1605,
+      "gzip": 984,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m9.js",
+      "bytes": 3104,
+      "gzip": 1732,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.face-refresh.js",
+      "bytes": 2740,
+      "gzip": 1515,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m8.js",
+      "bytes": 3389,
+      "gzip": 1404,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m7.js",
+      "bytes": 4007,
+      "gzip": 1771,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m6.js",
+      "bytes": 6079,
+      "gzip": 2923,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m5.js",
+      "bytes": 8936,
+      "gzip": 3948,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m4.js",
+      "bytes": 5057,
+      "gzip": 2844,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m3.js",
+      "bytes": 12115,
+      "gzip": 5223,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m2.js",
+      "bytes": 8367,
+      "gzip": 3715,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m1.js",
+      "bytes": 4083,
+      "gzip": 2117,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.js",
+      "bytes": 54883,
+      "gzip": 16831,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.consts.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/data-loader.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-rules.schema.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/cards/cards.rules.js",
+      "bytes": 17463,
+      "gzip": 7345,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/cards.consts.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/data-loader.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/cards/card-rarity.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/notes.js",
+      "bytes": 990,
+      "gzip": 637,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/input.js",
+      "bytes": 2486,
+      "gzip": 1238,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/audio/sound.js",
+      "bytes": 31315,
+      "gzip": 10371,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "howler",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/asset-url.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/random.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/audio/sound.policy.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/audio/sound.music.catalog.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/audio/sound.music.player.js"
+      ],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/audio/sound.music.player.js",
+      "bytes": 5493,
+      "gzip": 1684,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/audio/sound.music.catalog.js",
+      "bytes": 1250,
+      "gzip": 574,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/audio/sound.policy.js",
+      "bytes": 2487,
+      "gzip": 1322,
+      "statics": [],
+      "dynamics": []
+    },
+    {
+      "file": "game/src/core/icons-bitmap.js",
+      "bytes": 8795,
+      "gzip": 4235,
+      "statics": [
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/sdt-facade.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/asset-url.js",
+        "/workspace/shared/OperationSalvation7-db831272/搜打撤/game/src/core/shared.js"
+      ],
+      "dynamics": []
+    }
+  ]
+}

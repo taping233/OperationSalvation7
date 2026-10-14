@@ -1,0 +1,93 @@
+{
+  "platform": "win32",
+  "node": "v24.13.0",
+  "records": [
+    {
+      "host": "127.0.0.1",
+      "port": 57740,
+      "httpDefaultBefore": {
+        "status": 200
+      },
+      "httpNoAgentBefore": {
+        "status": 200
+      },
+      "tcp": {
+        "result": "connected"
+      },
+      "bindings": [
+        {
+          "host": "127.0.0.1",
+          "result": "EADDRINUSE"
+        },
+        {
+          "host": "::1",
+          "result": "bind-succeeded"
+        }
+      ],
+      "httpDefaultAfter": {
+        "status": 200
+      },
+      "httpNoAgentAfter": {
+        "status": 200
+      }
+    },
+    {
+      "host": "0.0.0.0",
+      "port": 57745,
+      "httpDefaultBefore": {
+        "status": 200
+      },
+      "httpNoAgentBefore": {
+        "status": 200
+      },
+      "tcp": {
+        "result": "connected"
+      },
+      "bindings": [
+        {
+          "host": "127.0.0.1",
+          "result": "bind-succeeded"
+        },
+        {
+          "host": "::1",
+          "result": "bind-succeeded"
+        }
+      ],
+      "httpDefaultAfter": {
+        "status": 200
+      },
+      "httpNoAgentAfter": {
+        "status": 200
+      }
+    },
+    {
+      "host": "::1",
+      "port": 57750,
+      "httpDefaultBefore": {
+        "error": "EACCES"
+      },
+      "httpNoAgentBefore": {
+        "error": "EACCES"
+      },
+      "tcp": {
+        "result": "EACCES"
+      },
+      "bindings": [
+        {
+          "host": "127.0.0.1",
+          "result": "bind-succeeded"
+        },
+        {
+          "host": "::1",
+          "result": "EADDRINUSE"
+        }
+      ],
+      "httpDefaultAfter": {
+        "error": "EACCES"
+      },
+      "httpNoAgentAfter": {
+        "error": "EACCES"
+      }
+    }
+  ]
+}

@@ -65,7 +65,7 @@ beforeEach(async () => {
     exitToTitle: vi.fn(), newUid: vi.fn(), saveGame: UIState.saveGame, scaledEnemy: vi.fn(), syncPlayTime: vi.fn(),
   }));
   vi.doMock('../game/src/core/characters.js', () => ({ CHARACTERS: [], characterFor: () => ({ id: 'wu' }), characterName: () => '侠客', migrateRunCharacter: value => value }));
-  vi.doMock('../game/src/core/shared.js', () => ({ esc: String, escAttr: String }));
+  vi.doMock('../game/src/core/shared.js', () => ({ clone: value => structuredClone(value), esc: String, escAttr: String }));
   vi.doMock('../game/src/audio/sound.js', () => ({ tone: vi.fn() }));
   vi.doMock('../game/src/hub/game.hub.js', () => ({ openBaseHub: vi.fn() }));
   vi.doMock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { ding: vi.fn() }, _set_cardPageOpen: vi.fn(), cardHTML: c => c.name }));
@@ -86,6 +86,34 @@ beforeEach(async () => {
     readSettlementReceipt: (...args) => recovery.readSettlementReceipt(...args),
     recoverSlot: (...args) => recovery.recoverSlot(...args),
   }));
+});
+
+it.each(['exStash', 'exAll', 'exSmart'])('完成事务中断后点击 %s 保留可重试整理页，完成重试可进入结算', async action => {
+  UIState.failAfterBase = false;
+  const { doExtract } = await import('../game/src/run/game.run.altar.js');
+  const { RunStorage } = await import('../game/src/hub/game.storage.js');
+  const Base = window.SDT.Base;
+  const beforeStash = structuredClone(Base.data.stash);
+  expect(await doExtract()).toBe(true);
+  const runId = UIState.game.pendingExtraction.runId;
+  UIState.failAfterBase = true;
+  await UIState.acts.exFinish();
+  expect(document.querySelector('#exMain')).not.toBeNull();
+  expect(localStorage.getItem('sdt-tx-v1-slot2')).not.toBeNull();
+
+  await UIState.acts[action]({ i: 0 });
+  expect(UIState.game.pendingExtraction?.runId).toBe(runId);
+  expect(document.querySelector('[data-act="exFinish"]')).not.toBeNull();
+  expect(window.SDT.UI.log).toHaveBeenLastCalledWith(expect.stringContaining('完成整理'), 'warn');
+
+  await UIState.acts.exFinish();
+  expect(document.querySelector('[data-act="goBase"]')).not.toBeNull();
+  expect(document.querySelector('#exMain')).toBeNull();
+  expect(UIState.game.pendingExtraction).toBeNull();
+  expect(RunStorage.read(2)).toBeNull();
+  expect(Base.data.stash).toEqual(beforeStash);
+  expect(Base.data.wood).toBe(2);
+  expect(Base.data.stats.extracts).toBe(1);
 });
 
 it('doExtract 首次事务中断留在可重试状态，重试恢复后进入整理且资源只入库一次', async () => {

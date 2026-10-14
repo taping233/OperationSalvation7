@@ -738,12 +738,15 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     const unitMounts = mountUnitLayer(body, snapshot.battleToken);
     if (unitMounts) updateUnits(unitMounts, snapshot, { isBoss: opts.isBoss, pendingTarget, pendingItem, slamPending, dartPending });
     if (SDT.Art.cutoutFigures) SDT.Art.cutoutFigures(body);
-    const framesReady = attachUnitFrames(body);   // 首次揭示同时等待实际帧首画面；静态兜底由图片就绪检查承担。
-    const paintedReady = syncBattleScenery(body.querySelector('.battle-stage.sts'), snapshot.battleToken);
+    const entryStage = body.querySelector('.battle-stage.sts');
+    const simplifiedEntry = entryStage?.dataset.battleEntry === 'degraded';
+    // 本场已选择简化显示时，选择面板返回也保留该结果，不重新创建失败的 GPU 画面。
+    const framesReady = simplifiedEntry ? true : attachUnitFrames(body);   // 首次揭示等待实际帧首画面。
+    const paintedReady = simplifiedEntry ? true : syncBattleScenery(entryStage, snapshot.battleToken);
     mountHandLayer(body, tip, snapshot.battleToken);
     showBattleStartEquipFlash(snapshot.equipped, snapshot.battleToken);
     const handAnim = updateHand(snapshot, prevView, pageGroups, animEvents, { spellBonus, mode, discoverSrcRect });
-    const entryStage = body.querySelector('.battle-stage.sts');
+    if (simplifiedEntry) battleEntry.begin(entryStage, snapshot.battleToken, UI.el.overlay);
     if (battleEntry.pending(entryStage)) {
       const images = waitForBattleImages(entryStage);
       battleEntry.wait(entryStage, snapshot.battleToken, [paintedReady, framesReady, images.promise], {

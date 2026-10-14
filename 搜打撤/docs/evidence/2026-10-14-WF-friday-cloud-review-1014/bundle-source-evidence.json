@@ -1,0 +1,114 @@
+{
+  "basis": "Read-only source evidence, no production build or budget-pass claim",
+  "sourceDuplicateBytesBefore": 4479088,
+  "verifiedAliasCount": 17,
+  "verifiedOutputOnlyBytesSaved": 3751742,
+  "sourceDuplicateResidualProjection": 727346,
+  "sceneEagerSourceBefore": 26723,
+  "sceneEagerSourceAfter": 4381,
+  "sceneEagerSourceBytesMoved": 22342,
+  "aliases": [
+    {
+      "alias": "scenes/chests/small-rig-640-v1/frame-01.webp",
+      "canonical": "scenes/chests/small-rig-640-v1/frame-00.webp",
+      "bytes": 143532,
+      "sha256": "57834aeb382d8383c15a09a5cd696077b03ea66e3a68d1ad43e97b30deaca57c"
+    },
+    {
+      "alias": "scenes/chests/small-rig-640-v1/frame-02.webp",
+      "canonical": "scenes/chests/small-rig-640-v1/frame-00.webp",
+      "bytes": 143532,
+      "sha256": "57834aeb382d8383c15a09a5cd696077b03ea66e3a68d1ad43e97b30deaca57c"
+    },
+    {
+      "alias": "scenes/chests/small-rig-640-v1/frame-17.webp",
+      "canonical": "scenes/chests/small-rig-640-v1/frame-16.webp",
+      "bytes": 248260,
+      "sha256": "8ff0d1656c438489ae9776e7645aa1564165e7ba3d8b700eebff12fc10635044"
+    },
+    {
+      "alias": "scenes/chests/medium-rig-640-v1/frame-01.webp",
+      "canonical": "scenes/chests/medium-rig-640-v1/frame-00.webp",
+      "bytes": 191356,
+      "sha256": "8b8e8fd18cf9165acedeca46fe968720bb94048f8e16a3007051314763adff72"
+    },
+    {
+      "alias": "scenes/chests/medium-rig-640-v1/frame-02.webp",
+      "canonical": "scenes/chests/medium-rig-640-v1/frame-00.webp",
+      "bytes": 191356,
+      "sha256": "8b8e8fd18cf9165acedeca46fe968720bb94048f8e16a3007051314763adff72"
+    },
+    {
+      "alias": "scenes/chests/medium-rig-640-v1/frame-17.webp",
+      "canonical": "scenes/chests/medium-rig-640-v1/frame-16.webp",
+      "bytes": 277964,
+      "sha256": "cc001beadc53d5447f0e14e9b89fe8b67e04051376e1dd4a6c8d423396554bef"
+    },
+    {
+      "alias": "scenes/chests/large-rig-640-v1/frame-01.webp",
+      "canonical": "scenes/chests/large-rig-640-v1/frame-00.webp",
+      "bytes": 224682,
+      "sha256": "7e85b0102b2fc2c576d7cd764e8d26a16f68e2b70dcb12faf954232280fae2ed"
+    },
+    {
+      "alias": "scenes/chests/large-rig-640-v1/frame-02.webp",
+      "canonical": "scenes/chests/large-rig-640-v1/frame-00.webp",
+      "bytes": 224682,
+      "sha256": "7e85b0102b2fc2c576d7cd764e8d26a16f68e2b70dcb12faf954232280fae2ed"
+    },
+    {
+      "alias": "scenes/chests/large-rig-640-v1/frame-17.webp",
+      "canonical": "scenes/chests/large-rig-640-v1/frame-16.webp",
+      "bytes": 298396,
+      "sha256": "ecc5b2a6c872f58b73dd2ade8953f73bc5be36e3809d40fe9858f916ffb062ac"
+    },
+    {
+      "alias": "scenes/chests/class-rig-640-v1/frame-01.webp",
+      "canonical": "scenes/chests/class-rig-640-v1/frame-00.webp",
+      "bytes": 186658,
+      "sha256": "6aab169c293fbb0632a18a53dc5d6d8411717fdcfa50a011a62ef27bfdc55ce3"
+    },
+    {
+      "alias": "scenes/chests/class-rig-640-v1/frame-02.webp",
+      "canonical": "scenes/chests/class-rig-640-v1/frame-00.webp",
+      "bytes": 186658,
+      "sha256": "6aab169c293fbb0632a18a53dc5d6d8411717fdcfa50a011a62ef27bfdc55ce3"
+    },
+    {
+      "alias": "scenes/chests/class-rig-640-v1/frame-17.webp",
+      "canonical": "scenes/chests/class-rig-640-v1/frame-16.webp",
+      "bytes": 261222,
+      "sha256": "51b1f8d01a7a382c24903e42353224a447d6a38b2d3685bda06062bb8cdc64a4"
+    },
+    {
+      "alias": "scenes/chests/boss-rig-640-v1/frame-01.webp",
+      "canonical": "scenes/chests/boss-rig-640-v1/frame-00.webp",
+      "bytes": 226926,
+      "sha256": "d930607d0f62b3e0939bb1ab9090a3be2f275cc485c62a7e50814fee5fd7e597"
+    },
+    {
+      "alias": "scenes/chests/boss-rig-640-v1/frame-02.webp",
+      "canonical": "scenes/chests/boss-rig-640-v1/frame-00.webp",
+      "bytes": 226926,
+      "sha256": "d930607d0f62b3e0939bb1ab9090a3be2f275cc485c62a7e50814fee5fd7e597"
+    },
+    {
+      "alias": "scenes/chests/boss-rig-640-v1/frame-17.webp",
+      "canonical": "scenes/chests/boss-rig-640-v1/frame-16.webp",
+      "bytes": 284980,
+      "sha256": "eaa01505e2e9357123cc2329ec69445527aad67452a4d4409488ba3d48b46b80"
+    },
+    {
+      "alias": "portraits/frames/changwuyu/sprite-v1/f000.webp",
+      "canonical": "portraits/battle/changwuyu.webp",
+      "bytes": 217306,
+      "sha256": "f7df78ee7bc717f0bcb42a7b1e22334043360e8624801845adf7d04a5acc234e"
+    },
+    {
+      "alias": "portraits/frames/changwuyu/sprite-v1/neutral.webp",
+      "canonical": "portraits/battle/changwuyu.webp",
+      "bytes": 217306,
+      "sha256": "f7df78ee7bc717f0bcb42a7b1e22334043360e8624801845adf7d04a5acc234e"
+    }
+  ]
+}

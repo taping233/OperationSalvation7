@@ -1,0 +1,18 @@
+{
+  "applyCheck": "passed in clean true-history worktree",
+  "vite": "6.4.4",
+  "upstreamBase": "db831272780b8d0c792e93b9661404b5ee68e5ab",
+  "install": "npm ci --registry=https://registry.npmjs.org --no-audit --fund=false",
+  "patchPaths": 93,
+  "protectedOriginalFiles": 4,
+  "untrackedOriginalFiles": 1774,
+  "patchBytes": 601638,
+  "hookGitMode": "100755",
+  "patchSha256": "d2f4dc9af96cbfc6a6f6670b7cc1a15b2854c23eb07ee6a3ca2d272f420cfed4",
+  "transferCommit": "8f39d1622ab5ffa213f803e5823f2a4eaa946e4d",
+  "originalArchives": {
+    "makerSha256": "39d23cbc584ee93b039fb0caf7cecf0cd93b50eb875e63bb900e227e47935006",
+    "agentsSha256": "64de3328036ec86faca20cbc7eeb9ac63d120dc6dc9de44c9467f20db8fb0ed1"
+  },
+  "node": "v24.13.0"
+}

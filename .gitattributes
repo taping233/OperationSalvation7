@@ -22,3 +22,6 @@
 *.exe -text
 *.dll -text
 *.asar -text
+
+# 历史原件按原始字节保存；归档清单校验不得受行尾归一影响
+搜打撤/docs/archive/workflow-completion-2026-09-30/originals/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

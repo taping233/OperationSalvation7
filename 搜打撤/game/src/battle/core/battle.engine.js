@@ -60,6 +60,15 @@ import { createTriggerRunner } from '../effects/battle.triggers.m2.js';
 /* —— 自 battle.core 壳迁入的共享引擎件（原 head/tail，按原文件顺序）—— */
 const executionSession = createBattleExecutionSession();
 const { actionQueue, stagedDeathFx, handSelectQueue, choiceQueue } = executionSession;
+function hasPendingEndTurn() { return executionSession.turnEndPending; }
+function deferEndTurn(resume) {
+  const token = battleState.token;
+  executionSession.deferTurnEnd(resume, () => G?.battleActive && battleState.token === token &&
+    (battleState.phase === BATTLE_PHASES.PLAYER || battleState.phase === BATTLE_PHASES.RESOLVING) &&
+    !infusing && !handSelecting && !choosing && !discovering && !interaction &&
+    !handSelectQueue.length && !choiceQueue.length && !discoverQueue.length);
+  executionSession.resumeTurnEnd();
+}
 function warnCardRuleRejection(message) {
   const battleToken = battleState.token;
   G.log(message, 'warn');
@@ -326,6 +335,7 @@ function clearTargetSession(preserveCardUid = null) {
   }
 function cancelInteraction() {
     if (!clearTargetSession()) return;
+    executionSession.resumeTurnEnd();
     requestBattleRender();
   }
 function beginSpecialTargeting(kind, uid = null, card = null, extra = null) {
@@ -355,21 +365,21 @@ function equipSkillText(card) { return equipment.equipSkillText(card); }
   function registerEquip(uid, card) { return equipment.registerEquip(uid, getHostedExecutionCard(card)); }
 function equipCap() { return equipment.equipCap(); }
 function syncCurseCondEquips() { return equipment.syncCurseCondEquips(); }
-function useEquipSkill(uid) { return equipment.useEquipSkill(uid); }
+function useEquipSkill(uid) { if (!hasPendingEndTurn()) return equipment.useEquipSkill(uid); }
 function battleBagItems() { return bag.battleBagItems(); }
 function restoreConsumed(n) { return bag.restoreConsumed(n); }
 function itemUsability(card) { return bag.itemUsability(card); }
-function useItem(uid, side) { return bag.useItem(uid, side); }
-function bagSlam() { return bag.bagSlam(); }
+function useItem(uid, side) { if (!hasPendingEndTurn()) return bag.useItem(uid, side); }
+function bagSlam() { if (!hasPendingEndTurn()) return bag.bagSlam(); }
 function beginDartStrike(extra) { return bag.beginDartStrike(extra); }
 function resolveDart(side) { return bag.resolveDart(side); }
 function resolveSlam(side) { return bag.resolveSlam(side); }
 function slamSkill() { return bag.slamSkill(); }   // 2026-10-02 老板：砸击换五职业分化技能，视图读当前口径
-function usePotion(uid) { return bag.usePotion(uid); }
+function usePotion(uid) { if (!hasPendingEndTurn()) return bag.usePotion(uid); }
 function openBag() { return bag.openBag(); }
 function closeBag() { return bag.closeBag(); }
 
-export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, infuseOf, effCostOf, swapCardCosts, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, snapshotSignature, getBattleLiveness, processDelayed, accrueGrowth, resolveCard, resolveCardWithFeedback, syncCurseCondEquips, useEquipSkill, applyKillRewards, start, fireTurnEndTriggers, addTempCard, fireConsumeTriggers, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, queueCardExecution, aegisBlocked, foeIdx, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, slamSkill, addPlayerCurse, usePotion, openBag, closeBag, pickChoice, pickDiscover, playerTakeHit, frenzyCurse, elCurse };
+export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, infuseOf, effCostOf, swapCardCosts, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, snapshotSignature, getBattleLiveness, processDelayed, accrueGrowth, resolveCard, resolveCardWithFeedback, syncCurseCondEquips, useEquipSkill, applyKillRewards, start, fireTurnEndTriggers, addTempCard, fireConsumeTriggers, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, queueCardExecution, aegisBlocked, foeIdx, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, slamSkill, addPlayerCurse, usePotion, openBag, closeBag, pickChoice, pickDiscover, playerTakeHit, frenzyCurse, elCurse, deferEndTurn, hasPendingEndTurn };
 
 /* —— 六段正文（原行 606-2479，逐字）—— */
   // ---------- 生效时刻 / 持续时间 / 生效条件（设计者 2026-09-02 定版） ----------
@@ -890,6 +900,8 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     // 迟到/非法 uid 必须在任何交互状态变更前拒绝；否则会顺带取消当前药水点选。
     if (!hand.includes(uid)) return;
     if (busy || infusing || discovering || choosing || handSelecting || viewingGrave || viewingDeck) return;
+    // 回合结束链等待目标时只接受它自己的目标提交，不能开始新的玩家动作。
+    if (hasPendingEndTurn() && interactionOf('card')?.uid !== uid) return;
     // 玩家命令只能提交当前手牌。内部直接释放继续直接走 queueCardExecution，
     // 保留牌与弃牌洗回重抽后 uid 会重新位于 hand，因此仍可再次合法使用。
     const entry = findCard(uid);
@@ -966,7 +978,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   function cancelInfuse() { set$infusing(null); requestBattleRender(); }
   // 需求 #15：注能入口——卡面上的「注能」角标触发（打出本体不再强制注能）
   function beginInfuse(uid) {
-    if (busy || infusing || discovering || choosing || handSelecting || viewingGrave || viewingDeck) return;
+    if (busy || infusing || discovering || choosing || handSelecting || viewingGrave || viewingDeck || hasPendingEndTurn()) return;
     if (!hand.includes(uid)) return;
     const entry = findCard(uid);
     if (!entry) return;
@@ -1017,6 +1029,13 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     render: requestBattleRender,
     actionCancellationError,
     throwIfActionCancelled,
+    onIdle: () => {
+      if (!G?.battleActive) return;
+      processHandSelect();
+      processChoice();
+      processDiscoverQueue();
+      executionSession.resumeTurnEnd();
+    },
   });
   const equipment = createBattleEquipment({
     requestBattleRender, clearTargetSession, queueBattleAction, runStagedSteps,

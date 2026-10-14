@@ -1,0 +1,27 @@
+[
+  {
+    "name": "full-quality-03.log",
+    "bytes": 200121,
+    "sha256": "9785bc2594a635099b646af6a99afc8f5a46165c48fc27b0238749fe49c64fc4"
+  },
+  {
+    "name": "full-quality-04.log",
+    "bytes": 200827,
+    "sha256": "c32c02e01ef40ec189e024a5229ed9158fe627226f0ede95dce0211447e5319c"
+  },
+  {
+    "name": "docs-check-final.log",
+    "bytes": 2843,
+    "sha256": "4c152e862218542afb1964b4b16a85333a11a7fc506dea1f90efc3d9833b988d"
+  },
+  {
+    "name": "preview-service-closure.json",
+    "bytes": 457,
+    "sha256": "fe4dd378fa81f9d653e5b4aaa20da7b036fd3d906b7aad37fd5bfb467141e636"
+  },
+  {
+    "name": "patch-secret-preflight.json",
+    "bytes": 191,
+    "sha256": "2dcb975caaa3de1d73220e3542ebd946020c235cf53740617c90adad6cf0219d"
+  }
+]

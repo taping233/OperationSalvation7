@@ -14,6 +14,8 @@ import notesData from '../../data/card-notes.json';
 const BASE_NOTES = Object.freeze(notesData.notes || {});
 const PHOTO_NOTE_KEY = 'sdt-card-photo-notes-v1';
 export const PHOTO_NOTE_PLACEHOLDER = '写下这条卡的备注……';
+// 未确认落盘的编辑留在本次会话，空字符串表示待保存的清空操作。
+const pendingNotes = new Map();
 
 function noteId(card) {
   return String(card?.id || card?.name || '').trim();
@@ -22,33 +24,58 @@ function noteId(card) {
 function readSavedNotes() {
   try {
     const parsed = JSON.parse(localStorage.getItem(PHOTO_NOTE_KEY) || '{}');
-    return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return { ok: false, code: 'INVALID_STORAGE', notes: {} };
+    return { ok: true, notes: parsed };
   } catch {
-    return {};
+    return { ok: false, code: 'READ_FAILED', notes: {} };
   }
 }
 
-export function savePhotoNote(card, value) {
+function applyPendingNotes(notes) {
+  const next = { ...notes };
+  for (const [id, note] of pendingNotes) {
+    if (note) next[id] = note;
+    else delete next[id];
+  }
+  return next;
+}
+
+export function photoNotePending(card) {
+  return pendingNotes.has(noteId(card));
+}
+
+export function savePhotoNoteResult(card, value) {
   const id = noteId(card);
   const note = String(value || '').trim().slice(0, 240);
-  if (!id) return note;
-  const notes = readSavedNotes();
-  if (note) notes[id] = note;
-  else delete notes[id]; // 清空 = 回落底稿；无底稿时返回空
-  try { localStorage.setItem(PHOTO_NOTE_KEY, JSON.stringify(notes)); } catch { /* 隐私模式等写入失败：备注仅本次会话生效 */ }
-  return note;
+  if (!id) return { ok: false, persisted: false, note, code: 'INVALID_CARD' };
+  pendingNotes.set(id, note);
+  const read = readSavedNotes();
+  // 读取失败或原串损坏时保留原档，不把尚未读取的其他备注覆盖掉。
+  if (!read.ok) return { ok: false, persisted: false, note, code: read.code };
+  try {
+    localStorage.setItem(PHOTO_NOTE_KEY, JSON.stringify(applyPendingNotes(read.notes)));
+  } catch {
+    return { ok: false, persisted: false, note, code: 'WRITE_FAILED' };
+  }
+  pendingNotes.clear();
+  return { ok: true, persisted: true, note };
+}
+
+// 旧调用方的字符串返回口径保留；需要展示落盘状态的 UI 使用结果接口。
+export function savePhotoNote(card, value) {
+  return savePhotoNoteResult(card, value).note;
 }
 
 export function photoNoteFor(card) {
   const id = noteId(card);
   if (!id) return '';
-  const own = String(readSavedNotes()[id] || '').trim();
+  const own = String(applyPendingNotes(readSavedNotes().notes)[id] || '').trim();
   if (own) return own;
   return String(BASE_NOTES[id] || '').trim();
 }
 
 /* 「导出备注」：已有底稿+手写合并成 card-notes.json 内容，整文件回填即同步进数据库 */
 export function exportNotes() {
-  const merged = { ...BASE_NOTES, ...readSavedNotes() };
+  const merged = { ...BASE_NOTES, ...applyPendingNotes(readSavedNotes().notes) };
   return JSON.stringify({ version: notesData.version || 1, _comment: notesData._comment || '', notes: merged }, null, 2);
 }

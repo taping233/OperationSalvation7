@@ -1,0 +1,12 @@
+{
+  "compiled": true,
+  "status": "compiled-budget-failed",
+  "environment": "Windows Node24.13.0 Vite6.4.4；真实上游隔离工作树",
+  "exitCode": 1,
+  "budgetFailures": [
+    "[perf-budget] FAIL: 构建体积 157.99 MiB > 112.00 MiB",
+    "[perf-budget] FAIL: 入口 JS gzip 361.8 KiB > 270.0 KiB",
+    "[perf-budget] FAIL: 首屏 JS gzip 407.2 KiB > 310.0 KiB",
+    "[perf-budget] FAIL: CSS gzip 207.9 KiB > 136.0 KiB"
+  ]
+}

@@ -22,7 +22,8 @@ function queryFixture() {
   }
   // An unrelated backend can be absent or mid-edit without preventing help/read-only task queries.
   writeFileSync(path.join(scripts, 'workflow-gate-receipt.mjs'), 'export const = ;');
-  const run = args => spawnSync(process.execPath, [path.join(scripts, 'workflow.mjs'), ...args],
+  // 宿主代理的 Node 启动提示不是 CLI 输出；仅抑制已知代码，保留其余 stderr 与预载环境。
+  const run = args => spawnSync(process.execPath, ['--disable-warning=UNDICI-EHPA', path.join(scripts, 'workflow.mjs'), ...args],
     { cwd: scratch, encoding: 'utf8', timeout: 10000 });
   run.root = scratch;
   return run;
