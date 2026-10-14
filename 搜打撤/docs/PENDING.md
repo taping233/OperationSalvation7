@@ -11,6 +11,8 @@
 
 | # | 事项 | 提出 | 来源 | 备注 |
 |---|---|---|---|---|
+| 43 | 研究所牌盒满容量玩法需确定：现行说明为容量 30（混沌之眼为 35）且满时一换一，领取/商店等实现尚未提供完整换牌流程；确认换牌交互与取消时奖励/付款保留方式后实施 | 10-14 | WF-cloud-deep-review-1014；game/src/run/game.nest.js 牌盒说明与写入路径 | 本轮仅修复已明确的符文容量扣牌/扣币前预检；未以直接丢弃奖励代替换牌。普通 bug 修复与联合验收继续，不受本条阻塞 |
+| 44 | 地图设施不相邻与战斗聚集约束是否升级为硬约束：现生成器在无候选时存在软回退，修正规则会改变同种子的布局；需确定新地图生成版本及旧 v3/v9 存档重建兼容策略 | 10-14 | WF-cloud-deep-review-1014；地图 1000 种子审查与 game/src/core 地图生成链 | 本轮已修复地图图连接缺陷；未擅改随机流或旧版本地图重建规则。需先确定兼容策略再实施布局语义变更 |
 | 40 | 「天启剑」与「诛魔剑」的后半效果：集齐两剑后发生什么，以及「以天启诛魔剑覆盖所有武器」如何结算，需定义牌区、数量与替换时点；原规格明确为设计留白 | 10-11 | docs/cards/M-BATCH-HOSTED-DESIGN-2026-09-27.md §2.13/2.14/五；docs/evidence/2026-10-11-card-description-unification/README.md | WF-card-copy-1011 已完成文字整理；展示明确“合成效果尚未定稿”，保留原结算。本条仅为玩法定义，不阻塞文案收官 |
 | 38 | 方舟衍生残留资产处置拍板：主链路音效已于 10-04 全量换开源（battle 核心 27 件重做，见来源证据），但休眠方舟素材仍在库（不接入任何运行链路）：①game/assets/sfx/alternatives/arknights{,-adjusted,-expansion,-runtime}/ 共 188 ogg（sound.bank.js 试听页仍指向 runtime 库，主链路不加载）；②docs/evidence/2026-09-30-sfx-alternatives/A-arknights/originals/ 方舟原音频 wav 与 A/A2 processed-wav。删（git rm，历史重写另牵动 #32 同批）或留（仅存档不发布）请拍板 | 10-04 | docs/evidence/2026-10-04-sfx-opensource/README.md 待拍板节 | 删除需按规另列清单审批；发布/商用前必须清 |
 | 2 | 战斗右键弹反馈浮层做否（历史挂账功能） | 09-25 | 记忆 soudache-continuous-refactor-2026-09-25 | |

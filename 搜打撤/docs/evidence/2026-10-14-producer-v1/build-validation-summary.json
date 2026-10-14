@@ -1,0 +1,157 @@
+{
+  "at": "2026-10-14T13:09:09.735879+00:00",
+  "status": "build and resource binding finished; real QA pending",
+  "scope": "second authorized V1 normal build after original actual hover failure; no standalone full/stage/commit",
+  "firstOutputPreservationReceipt": "/workspace/scratch/b7a53a06c872/producer-v1-20261014/first-build-output-preservation.json",
+  "firstOutputPath": "/workspace/scratch/b7a53a06c872/producer-v1-20261014/first-build-output",
+  "projectRoot": "/workspace/scratch/b7a53a06c872/cloud-git-review-20261014/搜打撤",
+  "productPath": "/workspace/scratch/b7a53a06c872/cloud-git-review-20261014/搜打撤/desktop-app/game",
+  "productionInputManifest": "/workspace/scratch/b7a53a06c872/producer-v1-20261014/integrated-validation-hover-fix/production-input-binding.json",
+  "productionInputDigest": "92f38e26075a5fac75bcdd567b948dece634266c5c97bf7534101a68f3f39242",
+  "productionInputCount": 2788,
+  "buildFullInputDigest": "e79dcec850c407d4026236aa2245f2c4e99f619f32a2e5ae84383643566c8b2c",
+  "outputDigest": "e77ae2eba6d83e40280a079a807a29466a666e4238cb4229128e3b25b94c17ef",
+  "outputFileCount": 1402,
+  "outputBytes": 150582875,
+  "buildStatus": {
+    "state": "finished",
+    "start": "2026-10-14T13:05:35.653834+00:00",
+    "end": "2026-10-14T13:05:50.591445+00:00",
+    "buildExitCode": 1,
+    "businessInputStable": true,
+    "dependenciesStable": true,
+    "headStable": true,
+    "logicalIndexStable": true,
+    "fullRan": false,
+    "stageOrCommitRan": false
+  },
+  "scopePreflight": {
+    "changed": [
+      "game/css/battle-hand-overhaul.css",
+      "game/css/expedition-battle.css"
+    ],
+    "expectedCss": {
+      "game/css/expedition-battle.css": "53139eeb0f1b88c8003def81998fbb1b771224384fc3b6002f623aad74e1cfd7",
+      "game/css/battle-hand-overhaul.css": "d9e13e0b4983ba70e685b0881e691267203a7f987a56eb53a0ed1b966c63d5e7"
+    },
+    "unexpected": [],
+    "passed": true
+  },
+  "budget": [
+    {
+      "metric": "startup",
+      "actual": 6,
+      "budget": 40,
+      "passes": true,
+      "delta": -34
+    },
+    {
+      "metric": "packageBytes",
+      "actual": 150582875,
+      "budget": 117440512,
+      "passes": false,
+      "delta": 33142363
+    },
+    {
+      "metric": "duplicateBytes",
+      "actual": 16540,
+      "budget": 925696,
+      "passes": true,
+      "delta": -909156
+    },
+    {
+      "metric": "entryGzipBytes",
+      "actual": 322007,
+      "budget": 276480,
+      "passes": false,
+      "delta": 45527
+    },
+    {
+      "metric": "initialGzipBytes",
+      "actual": 368528,
+      "budget": 317440,
+      "passes": false,
+      "delta": 51088
+    },
+    {
+      "metric": "battleGzipBytes",
+      "actual": 44312,
+      "budget": 106496,
+      "passes": true,
+      "delta": -62184
+    },
+    {
+      "metric": "narrativeGzipBytes",
+      "actual": 31699,
+      "budget": 51200,
+      "passes": true,
+      "delta": -19501
+    },
+    {
+      "metric": "cssGzipBytes",
+      "actual": 213451,
+      "budget": 139264,
+      "passes": false,
+      "delta": 74187
+    }
+  ],
+  "budgetDeltaPreviousActualV1": [
+    {
+      "metric": "startup",
+      "previous": 6,
+      "current": 6,
+      "delta": 0
+    },
+    {
+      "metric": "packageBytes",
+      "previous": 150582853,
+      "current": 150582875,
+      "delta": 22
+    },
+    {
+      "metric": "duplicateBytes",
+      "previous": 16540,
+      "current": 16540,
+      "delta": 0
+    },
+    {
+      "metric": "entryGzipBytes",
+      "previous": 322003,
+      "current": 322007,
+      "delta": 4
+    },
+    {
+      "metric": "initialGzipBytes",
+      "previous": 368524,
+      "current": 368528,
+      "delta": 4
+    },
+    {
+      "metric": "battleGzipBytes",
+      "previous": 44310,
+      "current": 44312,
+      "delta": 2
+    },
+    {
+      "metric": "narrativeGzipBytes",
+      "previous": 31699,
+      "current": 31699,
+      "delta": 0
+    },
+    {
+      "metric": "cssGzipBytes",
+      "previous": 213449,
+      "current": 213451,
+      "delta": 2
+    }
+  ],
+  "resourceVerificationPassed": true,
+  "emittedChunkCount": 17,
+  "emittedImportReferenceCount": 57,
+  "productionInputFinalRecheckPassed": true,
+  "pending": [
+    "root-authorized current built-in-browser production QA",
+    "final root all-path/index/ownership/secret preflight",
+    "explicit single normal git commit authorization invoking official full hook"
+  ]
+}

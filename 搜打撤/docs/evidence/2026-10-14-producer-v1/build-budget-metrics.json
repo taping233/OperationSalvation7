@@ -1,0 +1,304 @@
+{
+  "at": "2026-10-14T13:06:45.726Z",
+  "root": "/workspace/scratch/b7a53a06c872/cloud-git-review-20261014/搜打撤/desktop-app/game",
+  "source": "same read-only algorithm as scripts/perf-budget.cjs; original command exits remain authoritative",
+  "metrics": {
+    "startup": 6,
+    "packageBytes": 150582875,
+    "duplicateBytes": 16540,
+    "entryGzipBytes": 322007,
+    "initialGzipBytes": 368528,
+    "battleGzipBytes": 44312,
+    "narrativeGzipBytes": 31699,
+    "cssGzipBytes": 213451
+  },
+  "comparisons": [
+    {
+      "metric": "startup",
+      "actual": 6,
+      "budget": 40,
+      "passes": true,
+      "delta": -34
+    },
+    {
+      "metric": "packageBytes",
+      "actual": 150582875,
+      "budget": 117440512,
+      "passes": false,
+      "delta": 33142363
+    },
+    {
+      "metric": "duplicateBytes",
+      "actual": 16540,
+      "budget": 925696,
+      "passes": true,
+      "delta": -909156
+    },
+    {
+      "metric": "entryGzipBytes",
+      "actual": 322007,
+      "budget": 276480,
+      "passes": false,
+      "delta": 45527
+    },
+    {
+      "metric": "initialGzipBytes",
+      "actual": 368528,
+      "budget": 317440,
+      "passes": false,
+      "delta": 51088
+    },
+    {
+      "metric": "battleGzipBytes",
+      "actual": 44312,
+      "budget": 106496,
+      "passes": true,
+      "delta": -62184
+    },
+    {
+      "metric": "narrativeGzipBytes",
+      "actual": 31699,
+      "budget": 51200,
+      "passes": true,
+      "delta": -19501
+    },
+    {
+      "metric": "cssGzipBytes",
+      "actual": 213451,
+      "budget": 139264,
+      "passes": false,
+      "delta": 74187
+    }
+  ],
+  "initialFiles": [
+    "assets/js/index-DRaLQ17w.js",
+    "assets/js/game-card-catalog-BHL1GjvS.js",
+    "assets/js/vendor-runtime-DkOp-1lm.js"
+  ],
+  "cssFiles": [
+    {
+      "path": "assets/battle-C5AVH-5G.css",
+      "gzipBytes": 3568
+    },
+    {
+      "path": "assets/game.cardslib-BPQbYwAs.css",
+      "gzipBytes": 13386
+    },
+    {
+      "path": "assets/home-djRd51SW.css",
+      "gzipBytes": 1973
+    },
+    {
+      "path": "assets/home-layers-CGeD3b0U.css",
+      "gzipBytes": 1771
+    },
+    {
+      "path": "assets/home-menu-motion-ChDSp1Xr.css",
+      "gzipBytes": 973
+    },
+    {
+      "path": "assets/home-polish-C3b4s5TW.css",
+      "gzipBytes": 5758
+    },
+    {
+      "path": "assets/index-Bg5Q7frw.css",
+      "gzipBytes": 183042
+    },
+    {
+      "path": "assets/interface-motion-pl09iDD4.css",
+      "gzipBytes": 978
+    },
+    {
+      "path": "assets/motion-transitions-BdxbKqrz.css",
+      "gzipBytes": 2002
+    }
+  ],
+  "jsFiles": [
+    {
+      "path": "assets/js/agent.scenes.runtime-F8ur55Pk.js",
+      "bytes": 10644,
+      "gzipBytes": 4681
+    },
+    {
+      "path": "assets/js/battle.core-BAE0zqDU.js",
+      "bytes": 286890,
+      "gzipBytes": 96176
+    },
+    {
+      "path": "assets/js/battle.view-CF4DqUuG.js",
+      "bytes": 123407,
+      "gzipBytes": 44312
+    },
+    {
+      "path": "assets/js/game-card-catalog-BHL1GjvS.js",
+      "bytes": 123085,
+      "gzipBytes": 33421
+    },
+    {
+      "path": "assets/js/game.cardslib.page-C_Hs9Oiw.js",
+      "bytes": 50348,
+      "gzipBytes": 18231
+    },
+    {
+      "path": "assets/js/game.hub.runtime-CANGPIgC.js",
+      "bytes": 136886,
+      "gzipBytes": 47740
+    },
+    {
+      "path": "assets/js/game.run.class-choice.page-CvIALw4e.js",
+      "bytes": 17985,
+      "gzipBytes": 7462
+    },
+    {
+      "path": "assets/js/game.run.dev-Dmc4qB50.js",
+      "bytes": 16001,
+      "gzipBytes": 6713
+    },
+    {
+      "path": "assets/js/home.scene-D0z0S4lj.js",
+      "bytes": 14565,
+      "gzipBytes": 6128
+    },
+    {
+      "path": "assets/js/home.visuals-ONAg6dRT.js",
+      "bytes": 6263,
+      "gzipBytes": 2404
+    },
+    {
+      "path": "assets/js/hub.courtyard-runtime-BmR8Yhfz.js",
+      "bytes": 17797,
+      "gzipBytes": 7657
+    },
+    {
+      "path": "assets/js/index-DRaLQ17w.js",
+      "bytes": 966786,
+      "gzipBytes": 322007
+    },
+    {
+      "path": "assets/js/narrative-events-C2FxCESg.js",
+      "bytes": 7229,
+      "gzipBytes": 3481
+    },
+    {
+      "path": "assets/js/vendor-narrative-BRMhodx6.js",
+      "bytes": 127951,
+      "gzipBytes": 31699
+    },
+    {
+      "path": "assets/js/vendor-render-Db_6dXB4.js",
+      "bytes": 498639,
+      "gzipBytes": 151308
+    },
+    {
+      "path": "assets/js/vendor-render-canvas-CmZ-Lk-i.js",
+      "bytes": 41575,
+      "gzipBytes": 13405
+    },
+    {
+      "path": "assets/js/vendor-runtime-DkOp-1lm.js",
+      "bytes": 45159,
+      "gzipBytes": 13100
+    }
+  ],
+  "duplicates": [
+    {
+      "bytes": 1,
+      "paths": [
+        "assets/cards/.gitkeep",
+        "assets/portraits/enemies/.gitkeep"
+      ]
+    },
+    {
+      "bytes": 5052,
+      "paths": [
+        "assets/portraits/frames/baita/sprite-v1/animations.json",
+        "assets/portraits/frames/xingyue/sprite-v1/animations.json"
+      ]
+    },
+    {
+      "bytes": 508,
+      "paths": [
+        "assets/ui/icons/archive.png",
+        "assets/ui/icons/folder.png",
+        "assets/ui/icons/trash.png"
+      ]
+    },
+    {
+      "bytes": 430,
+      "paths": [
+        "assets/ui/icons/arrow.png",
+        "assets/ui/icons/exit.png",
+        "assets/ui/icons/upload.png"
+      ]
+    },
+    {
+      "bytes": 526,
+      "paths": [
+        "assets/ui/icons/bag.png",
+        "assets/ui/icons/pocket.png",
+        "assets/ui/icons/pouch.png"
+      ]
+    },
+    {
+      "bytes": 523,
+      "paths": [
+        "assets/ui/icons/book.png",
+        "assets/ui/icons/cards.png",
+        "assets/ui/icons/notes.png",
+        "assets/ui/icons/save.png",
+        "assets/ui/icons/scroll.png"
+      ]
+    },
+    {
+      "bytes": 678,
+      "paths": [
+        "assets/ui/icons/broom.png",
+        "assets/ui/icons/pen.png",
+        "assets/ui/icons/tools.png"
+      ]
+    },
+    {
+      "bytes": 1029,
+      "paths": [
+        "assets/ui/icons/crystal.png",
+        "assets/ui/icons/gem.png"
+      ]
+    },
+    {
+      "bytes": 538,
+      "paths": [
+        "assets/ui/icons/door.png",
+        "assets/ui/icons/home.png"
+      ]
+    },
+    {
+      "bytes": 802,
+      "paths": [
+        "assets/ui/icons/helmet.png",
+        "assets/ui/icons/plate.png",
+        "assets/ui/icons/shield.png"
+      ]
+    },
+    {
+      "bytes": 768,
+      "paths": [
+        "assets/ui/icons/hourglass.png",
+        "assets/ui/icons/mouse.png"
+      ]
+    },
+    {
+      "bytes": 664,
+      "paths": [
+        "assets/ui/icons/lantern.png",
+        "assets/ui/icons/sparkles.png"
+      ]
+    },
+    {
+      "bytes": 508,
+      "paths": [
+        "assets/ui/icons/play.png",
+        "assets/ui/icons/skip.png"
+      ]
+    }
+  ]
+}

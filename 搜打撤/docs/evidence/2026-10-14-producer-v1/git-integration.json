@@ -1,0 +1,33 @@
+{
+  "root": "/workspace/scratch/b7a53a06c872/cloud-git-review-20261014",
+  "project": "/workspace/scratch/b7a53a06c872/cloud-git-review-20261014/搜打撤",
+  "branch": "friday/cloud-quality-20261014",
+  "head": "bf6129520b55e28698c749ce7dbc6d327b85866a",
+  "head_tree": "977b69c8236e19ec5d4baabd6b5b26debc33d33a",
+  "index_tree": "977b69c8236e19ec5d4baabd6b5b26debc33d33a",
+  "modified": 119,
+  "new": 72,
+  "total_delta_paths": 191,
+  "deletions": 0,
+  "staged_paths": 0,
+  "missing_exported_baseline_paths_preserved": 4953,
+  "source_and_target_delta_oids_verified": true,
+  "old_source_unchanged": true,
+  "logical_bytes_including_dependencies": 1979171409,
+  "handoff": "exit 0",
+  "doctor": {
+    "ok": true,
+    "blocked": 0,
+    "warnings": [
+      "unconfigured submission hook; not enabled"
+    ]
+  },
+  "workflow_cli_targeted": {
+    "file": "tests/workflow-cli-integration.test.js",
+    "passed": 13,
+    "failed": 0
+  },
+  "full_or_build_run": false,
+  "commit_or_push_performed": false,
+  "remote": "local verified bare only; authentication not configured"
+}

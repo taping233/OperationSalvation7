@@ -1,0 +1,21 @@
+{
+  "change": "Only add ready: () => true to existing presentation-ready test doubles; real deferred/abort behavior covered separately by entry-view/readiness/action-runner tests",
+  "red": {
+    "files_failed": 2,
+    "files_passed": 1,
+    "tests_failed": 7,
+    "tests_passed": 24
+  },
+  "green": {
+    "files_passed": 3,
+    "tests_passed": 31
+  },
+  "eslint_exit": 0,
+  "diff_check_exit": 0,
+  "files": {
+    "tests/e2-view-hp.test.js": "c6892529724943984db8dd85cc548f8ea4c5a3c8e488ee31853bf817f35d3a03",
+    "tests/boot.test.js": "9cfe99eb865037f9c611ba2047bd1dcdceb7fa038d41164f3f6031af565187c8",
+    "tests/e7-rule-warning-view.test.js": "1dd76636ca613a84456041a51252b1e3b177eefa91d63dcb05f86d5f062b0bfa"
+  },
+  "production_source_changed": false
+}

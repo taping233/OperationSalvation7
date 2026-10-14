@@ -1,0 +1,28 @@
+{
+  "scope": "commit-blocking tooling and jsdom fixtures only",
+  "firstFull": {
+    "suites": 426,
+    "tests": 3894,
+    "pass": 3862,
+    "fail": 30,
+    "skip": 2
+  },
+  "changes": [
+    "scripts/acceptance-gate.mjs",
+    "tests/acceptance-gate.test.js",
+    "tests/agent-scenes.test.js"
+  ],
+  "targeted": {
+    "git": {
+      "suites": 7,
+      "pass": 194
+    },
+    "scenesAndRealReadiness": {
+      "suites": 5,
+      "pass": 48
+    }
+  },
+  "productionGameplayOrArtChanges": false,
+  "fullRetry": "pending normal commit hook",
+  "knownBuildBudgets": "four over limits; unchanged"
+}

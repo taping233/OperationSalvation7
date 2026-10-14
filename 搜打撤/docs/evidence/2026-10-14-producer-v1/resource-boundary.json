@@ -1,0 +1,24 @@
+{
+  "scope": "Resource review + already frozen layers + same 50 historically reviewed resource inputs; not a global V1 source freeze",
+  "modifiedRepositoryFiles": [
+    "scripts/runtime-asset-redundancy-review.mjs"
+  ],
+  "reviewSha256": "d3e38f930a7175c998d1884dcd7b1df99dec8b7b82b66a599103bea1144d3e6f",
+  "layersSha256": "7c80a9a6e6f3e046071050aed64c28b90273768b519f47749a0727f9022df7b7",
+  "inputCount": 50,
+  "inputDigest": "ac37d87b8bba14f7cda14202bd89ec04436a22661b780c1350301fe2ffd801f7",
+  "parentApproval": "Root explicitly approved exactly one battle.layers.js opaque fingerprint replacement after reporting old/new SHA and AST comparison",
+  "tests": {
+    "files": 6,
+    "passed": 41,
+    "exitCode": 0
+  },
+  "reviewLintExitCode": 0,
+  "writerFreezePending": [
+    "battle CSS",
+    "battle.presentation-ready.js",
+    "battle.view.js",
+    "battle.engine.js",
+    "battle.action-runner.js"
+  ]
+}
