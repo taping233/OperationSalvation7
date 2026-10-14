@@ -8,6 +8,8 @@
 
 ## 活跃登记
 
+| Friday（Codex 私有 Actions Git 交接 WF-cloud-git-handoff-1014） | 独立 Temp 工作树 `C:/Users/太平/AppData/Local/Temp/codename7-readonly-audit-20261014/github-actions-handoff-worktree`；临时分支 `handoff-git-bf612952-1014`；`.github/workflows/private-shallow-git-handoff.yml`；本表本行 | 老板授权一次私有 Actions 导出；固定源提交 bf612952、校验真实浅 Git、32 个不超过 24 MiB 的分片和顺序清单，私有 artifact 留存 1 天；不触碰原 master、NAI、凭证或浏览器 | 2026-10-14 | 待正常提交/推送及 Actions 结果；无服务/端口，工作树与临时分支暂保留 |
+
 
 
 

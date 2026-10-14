@@ -1,0 +1,354 @@
+name: Private shallow Git handoff
+
+on:
+  push:
+    branches:
+      - handoff-git-bf612952-1014
+    paths:
+      - .github/workflows/private-shallow-git-handoff.yml
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out fixed source commit
+        uses: actions/checkout@v4
+        with:
+          ref: bf6129520b55e28698c749ce7dbc6d327b85866a
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Export and verify shallow Git repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          source_sha=bf6129520b55e28698c749ce7dbc6d327b85866a
+          tree_sha=977b69c8236e19ec5d4baabd6b5b26debc33d33a
+          bare="$RUNNER_TEMP/private-handoff.git"
+          output="$GITHUB_WORKSPACE/handoff-export"
+          test "$(git rev-parse HEAD)" = "$source_sha"
+          test "$(git rev-parse 'HEAD^{tree}')" = "$tree_sha"
+          git branch -f handoff-source "$source_sha"
+          git clone --no-local --bare --depth 1 --single-branch --no-tags --branch handoff-source "$GITHUB_WORKSPACE" "$bare"
+          test "$(git --git-dir="$bare" rev-parse HEAD)" = "$source_sha"
+          test "$(git --git-dir="$bare" rev-parse 'HEAD^{tree}')" = "$tree_sha"
+          test "$(git --git-dir="$bare" rev-list --count HEAD)" = 1
+          test "$(cat "$bare/shallow")" = "$source_sha"
+          test ! -e "$bare/objects/info/alternates"
+          test -z "$(find "$bare/objects/pack" -type f -name '*.promisor' -print -quit)"
+          test -z "$(find "$bare/objects" -type f ! -path "$bare/objects/pack/*" -print -quit)"
+          test -z "$(find "$bare/objects/pack" -type f ! -name '*.pack' ! -name '*.idx' ! -name '*.rev' -print -quit)"
+          printf '[core]\n\trepositoryformatversion = 0\n\tfilemode = true\n\tbare = true\n' > "$bare/config"
+          test "$(git config --file "$bare/config" --name-only --list | sort | tr '\n' ' ')" = 'core.bare core.filemode core.repositoryformatversion '
+          git --git-dir="$bare" fsck --full --no-reflogs
+          mkdir -p "$output"
+          entries=(HEAD config shallow refs objects/pack)
+          if test -f "$bare/packed-refs"; then entries+=(packed-refs); fi
+          tar -C "$bare" -cf "$output/git-bf612952.tar" "${entries[@]}"
+          python3 - "$output" "$source_sha" "$tree_sha" <<'PY'
+          import hashlib, json, math, pathlib, sys
+          output = pathlib.Path(sys.argv[1])
+          head, tree = sys.argv[2:]
+          archive = output / 'git-bf612952.tar'
+          total = archive.stat().st_size
+          count = 32
+          part_size = math.ceil(total / count)
+          assert 0 < part_size <= 24 * 1024 * 1024, 'archive exceeds 32 x 24 MiB limit'
+          whole = hashlib.sha256()
+          parts = []
+          with archive.open('rb') as source:
+              for order in range(count):
+                  path = output / f'git-bf612952.tar.part{order:02d}'
+                  digest = hashlib.sha256()
+                  remaining = min(part_size, total - source.tell())
+                  assert remaining > 0
+                  with path.open('wb') as target:
+                      while remaining:
+                          data = source.read(min(1024 * 1024, remaining))
+                          assert data
+                          target.write(data)
+                          digest.update(data)
+                          whole.update(data)
+                          remaining -= len(data)
+                  parts.append({'order': order, 'file_name': path.name,
+                                'size_bytes': path.stat().st_size,
+                                'sha256': digest.hexdigest()})
+              assert not source.read(1)
+          manifest = {'format': 'ordered-byte-parts-v1', 'source_head': head,
+                      'source_tree': tree, 'shallow_head': head,
+                      'archive_file_name': archive.name,
+                      'archive_size_bytes': total, 'archive_sha256': whole.hexdigest(),
+                      'parts': parts}
+          (output / 'git-bf612952-manifest.json').write_text(
+              json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
+          print(json.dumps({'head': head, 'tree': tree, 'archive_bytes': total,
+                            'archive_sha256': whole.hexdigest(), 'part_count': count}))
+          PY
+      - name: Upload part 00
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part00
+          path: handoff-export/git-bf612952.tar.part00
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 01
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part01
+          path: handoff-export/git-bf612952.tar.part01
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 02
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part02
+          path: handoff-export/git-bf612952.tar.part02
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 03
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part03
+          path: handoff-export/git-bf612952.tar.part03
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 04
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part04
+          path: handoff-export/git-bf612952.tar.part04
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 05
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part05
+          path: handoff-export/git-bf612952.tar.part05
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 06
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part06
+          path: handoff-export/git-bf612952.tar.part06
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 07
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part07
+          path: handoff-export/git-bf612952.tar.part07
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 08
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part08
+          path: handoff-export/git-bf612952.tar.part08
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 09
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part09
+          path: handoff-export/git-bf612952.tar.part09
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 10
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part10
+          path: handoff-export/git-bf612952.tar.part10
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 11
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part11
+          path: handoff-export/git-bf612952.tar.part11
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 12
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part12
+          path: handoff-export/git-bf612952.tar.part12
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 13
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part13
+          path: handoff-export/git-bf612952.tar.part13
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 14
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part14
+          path: handoff-export/git-bf612952.tar.part14
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 15
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part15
+          path: handoff-export/git-bf612952.tar.part15
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 16
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part16
+          path: handoff-export/git-bf612952.tar.part16
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 17
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part17
+          path: handoff-export/git-bf612952.tar.part17
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 18
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part18
+          path: handoff-export/git-bf612952.tar.part18
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 19
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part19
+          path: handoff-export/git-bf612952.tar.part19
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 20
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part20
+          path: handoff-export/git-bf612952.tar.part20
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 21
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part21
+          path: handoff-export/git-bf612952.tar.part21
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 22
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part22
+          path: handoff-export/git-bf612952.tar.part22
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 23
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part23
+          path: handoff-export/git-bf612952.tar.part23
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 24
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part24
+          path: handoff-export/git-bf612952.tar.part24
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 25
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part25
+          path: handoff-export/git-bf612952.tar.part25
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 26
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part26
+          path: handoff-export/git-bf612952.tar.part26
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 27
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part27
+          path: handoff-export/git-bf612952.tar.part27
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 28
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part28
+          path: handoff-export/git-bf612952.tar.part28
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 29
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part29
+          path: handoff-export/git-bf612952.tar.part29
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 30
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part30
+          path: handoff-export/git-bf612952.tar.part30
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 31
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-part31
+          path: handoff-export/git-bf612952.tar.part31
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-bf612952-manifest
+          path: handoff-export/git-bf612952-manifest.json
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
