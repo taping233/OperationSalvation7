@@ -16,14 +16,6 @@ export function partnerPortrait(id) {
   if (['dog', 'falcon', 'cat', 'robot', 'fire', 'penguin'].includes(id)) return `<img class="companion-art companion-${id}" src="${assetUrl(`assets/icons/base-v3/companion-${id}.webp`)}" alt="" aria-hidden="true">`;
   return `<svg class="companion-art companion-${id in portraits ? id : 'dog'}" viewBox="0 0 240 240" aria-hidden="true" fill="none" stroke="var(--pet-dark)" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"><circle cx="120" cy="120" r="111" stroke="currentColor" stroke-opacity=".18" stroke-width="2"/><path d="M10 120h17m186 0h17M120 10v17m0 186v17" stroke="currentColor" stroke-opacity=".3" stroke-width="2"/>${portraits[id] || portraits.dog}</svg>`;
 }
-export function materialIllustration(kind) {
-  const card = window.SDT.Cards?.all?.().find(item => item.id === (kind === 'wood' ? 'tt-wood' : 'tt-rations'));
-  if (card && window.SDT.Art?.cardIcon) return `<span class="supply-card-art">${window.SDT.Art.cardIcon(card, { low: true })}</span>`;
-  const body = kind === 'wood'
-    ? '<path d="m37 81 65-26 104 30-63 30Z" fill="#bba778"/><path d="M37 81v78l106 36v-80Z" fill="#7b6950"/><path d="M143 115v80l63-31V85Z" fill="#a38a62"/><path d="m62 90 66 22m-66-1 66 22m-66-1 66 22m-66-1 66 22m37-61 21-11m-21 32 21-11m-21 32 21-11"/><path d="m67 68 103 32v81m-33-119-60 26v83" stroke="#314753" stroke-width="10"/>'
-    : '<path d="M75 58h92l-9 32 24 47 5 53H52l5-53 26-47Z" fill="#cfb779"/><path d="M77 89h83l-5 76H85Z" fill="#e8dfc0"/><path d="M68 53h107v19H68Z" fill="#526874"/><path d="m83 128 21-19 31 14 18-17m-34-15v71m-18-30 18 12 20-14"/><path d="M70 191h99" stroke="#314753" stroke-width="10"/>';
-  return `<svg class="supply-illustration" viewBox="0 0 240 240" aria-hidden="true" fill="none" stroke="#526874" stroke-width="3" stroke-linejoin="round"><path d="M24 204h192M34 215h172" stroke-opacity=".2"/>${body}</svg>`;
-}
 export function facilityIllustration(id) {
   const art = id === 'bag' ? '<rect x="77" y="58" width="91" height="143" rx="16"/><path d="M92 56V39q29-20 59 0v17m-75 73H55v64h24m89-64h22v64h-22"/><rect x="92" y="127" width="61" height="51" rx="5"/><path d="M103 95h40m-51 20h61"/>' : '<path d="M39 61h161v136H39Zm0 45h161M39 151h161M61 61v136m116-136v136"/><path d="M76 70h42v28H76Zm58 0h26v28h-26M76 117h84v27H76Zm0 45h28v26H76Zm41 0h43v26h-43"/>';
   return `<svg class="facility-art" viewBox="0 0 240 240" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"><path d="M20 213h200" stroke-opacity=".25"/>${art}</svg>`;

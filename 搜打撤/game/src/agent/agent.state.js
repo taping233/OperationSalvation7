@@ -9,6 +9,7 @@
  * 输出 JSON 可直接喂 LLM / 外部脚本；每条动作带稳定 id（见 agent.protocol）。
  * ============================================================ */
 import { game, curLayer, bagCap, usedSlots } from '../run/game.session.js';
+import { entrySupplyGate } from '../run/node-reward-state.js';
 import { collectUiActions, collectActionKeys, overlayBody, overlayVisible } from './agent.surface.js';
 import { actionId } from './agent.protocol.js';
 import { getBattleCount } from './agent.recorder.js';
@@ -209,7 +210,9 @@ function mapActions() {
   const layer = curLayer();
   const current = layer?.logical?.[game.trackPos];
   const acts = [];
-  for (const [li, idx] of current?.next || []) {
+  // 入城闸门：未进入过入城补给格时不给出 move 动作（给了也会被 moveTo 拒绝），
+  // 观测面只留 reenter——策略的空移回退会选中它，重开即开补给页、闸门解除。
+  if (!entrySupplyGate(game)) for (const [li, idx] of current?.next || []) {
     const cell = game.layerData?.[li]?.logical?.[idx];
     const def = cell?.def;
     // next=该候选自身的邻居（09-26 架构升级② 2步前瞻）：observe 侧一次展开，

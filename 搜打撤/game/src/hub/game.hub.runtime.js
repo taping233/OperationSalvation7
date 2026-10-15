@@ -223,7 +223,7 @@ preparationFeature = createHubPreparationAdapter({
       if (d.section && next === 'classes') setPersonnelSection(d.section);
       if (d.facility && next === 'upgrade') selectFacility(d.facility);
       hubNotice = '';
-      if (next !== hubTab) SDT.Sound.sfx('switch');   // W6-03：页签切换挂既有 switch 音（hub 最高频操作的静区补声）
+      if (next !== hubTab) SDT.Sound.sfx('navigate');
       hubTab = next;
       renderHub();
     });
@@ -231,7 +231,7 @@ preparationFeature = createHubPreparationAdapter({
       if (d.view === 'pets') { hubTab = 'classes'; setPersonnelGroup('pets'); renderHub(); return; }
       if (!['cards', 'pocket'].includes(d.view) || d.view === hubStashView) return;
       hubStashView = d.view;
-      SDT.Sound.sfx('switch');
+      SDT.Sound.sfx('navigate');
       renderHub();
     });
     hubAct('hubHome', () => { hubTab = 'deploy'; renderHub(); });
@@ -245,22 +245,22 @@ preparationFeature = createHubPreparationAdapter({
     hubAct('hubCollectionView', (d) => {
       if (!['cards', 'rewards', 'backs', 'achievements', 'classes', 'stories'].includes(d.view)) return;
       if (d.view === hubCollectionView) return;
-      SDT.Sound.sfx('switch');
+      SDT.Sound.sfx('navigate');
       if (d.view === 'achievements') achievementReturn = hubCollectionView === 'backs' ? 'backs' : 'rewards';
       hubCollectionView = d.view;
       renderHub();
     });
-    hubAct('warehouseMain', () => { hubStashView = 'cards'; SDT.Sound.sfx('switch'); renderHub(); });
-    hubAct('logisticsParent', () => { hubTab = hubTab === 'shop' ? shopParent : facilityParent; SDT.Sound.sfx('switch'); renderHub(); });
+    hubAct('warehouseMain', () => { hubStashView = 'cards'; SDT.Sound.sfx('navigate'); renderHub(); });
+    hubAct('logisticsParent', () => { hubTab = hubTab === 'shop' ? shopParent : facilityParent; SDT.Sound.sfx('navigate'); renderHub(); });
     hubAct('stashOrigin', () => { hubTab = 'classes'; setPersonnelGroup('people'); setPersonnelSection('profile'); renderHub(); });
     hubAct('rewardMain', () => { hubCollectionView = 'rewards'; renderHub(); });
     hubAct('archiveParent', () => { hubCollectionView = achievementReturn; renderHub(); });
-    hubAct('archiveMain', () => { hubCollectionView = 'cards'; SDT.Sound.sfx('switch'); renderHub(); });
+    hubAct('archiveMain', () => { hubCollectionView = 'cards'; SDT.Sound.sfx('navigate'); renderHub(); });
     hubAct('hubPersonView', (d) => {
       const character = characterFor(d.character);
       if (!character || character.id === hubPersonView) return;
       hubPersonView = character.id;
-      SDT.Sound.sfx('switch');
+      SDT.Sound.sfx('navigate');
       renderHub();
     });
     hubAct('openPreparation', () => openPreparationPanel());
@@ -385,7 +385,7 @@ preparationFeature = createHubPreparationAdapter({
     hubAct('campFacility', d => { selectFacility(d.id); renderHub(); });
     bindWarehouse({ ui: hubUI, base: B, cards: SDT.Cards, meta: M, sound: Sfx, refresh: renderHub, notify: notice, openCard:openStashCardView });
     bindPersonnel({ ui: hubUI, sound: Sfx, refresh: renderHub });
-    bindArchive(hubUI, renderHub, { openAchievements:() => { achievementReturn = hubCollectionView === 'backs' ? 'backs' : 'rewards'; hubCollectionView = 'achievements'; renderHub(); } });
+    bindArchive(hubUI, { openAchievements:() => { achievementReturn = hubCollectionView === 'backs' ? 'backs' : 'rewards'; hubCollectionView = 'achievements'; renderHub(); } });
     bindArchiveV3({ ui:hubUI, base:B, meta:M, cards:SDT.Cards, refresh:renderHub });
     bindBaseMotion(document.getElementById('hubMain'));
     if (hubTab === 'shop') disposeTrade = bindTradeShopV5({ root:page.querySelector('.trade-v5'), ui:hubUI, base:B, cards:SDT.Cards, goods:HUB_SHOP_GOODS, state:tradeState, render:renderHub, notice, sound:Sfx,

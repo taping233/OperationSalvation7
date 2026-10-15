@@ -30,7 +30,7 @@ const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), 
 /** 路径归一：与 acceptance-gate toProjectPath 同口径（反斜杠/搜打撤前缀/绝对路径）。 */
 export function normalizePath(value, root = PROJECT_ROOT) { return toProjectPath(value, root).replace(/\/+$/, ''); }
 
-export function scanLooseEdges(root = PROJECT_ROOT) {
+function scanLooseEdges(root = PROJECT_ROOT) {
   const edges = new Map(); // target -> Set(importer)
   const roots = ['scripts', 'game/tools'];
   const visit = dir => {

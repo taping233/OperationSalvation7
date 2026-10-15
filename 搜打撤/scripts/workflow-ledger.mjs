@@ -3,7 +3,7 @@ import { closeSync, existsSync, openSync, readFileSync, renameSync, unlinkSync, 
 import path from 'node:path';
 
 export const hash = value => createHash('sha256').update(value).digest('hex');
-export const LEDGERS = {
+const LEDGERS = {
   registry: { file: 'docs/PARALLEL-REGISTRY.md', active: '活跃登记', closed: '近期已释放', columns: 5, closedColumns: 4 },
   pending: { file: 'docs/PENDING.md', active: '活账', closed: '已决记录', columns: 5, closedColumns: 5 },
 };

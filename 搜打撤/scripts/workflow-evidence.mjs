@@ -7,8 +7,8 @@ import { currentDocuments, filesUnder, git } from './workflow-status.mjs';
 import { dependencyScope, inputInventory } from './workflow-dependencies.mjs';
 import { toProjectPath } from './gate-plan.mjs';
 
-export const WATCHED = ['game/src', 'game/data', 'game/css', 'game/tools', 'tests', 'scripts', 'narrative'];
-export const STATE_FILES = ['docs/PARALLEL-REGISTRY.md', 'docs/PENDING.md', 'docs/STATUS.md'];
+const WATCHED = ['game/src', 'game/data', 'game/css', 'game/tools', 'tests', 'scripts', 'narrative'];
+const STATE_FILES = ['docs/PARALLEL-REGISTRY.md', 'docs/PENDING.md', 'docs/STATUS.md'];
 
 function groupForFile(file) {
   const normalized = file.replaceAll('\\', '/');

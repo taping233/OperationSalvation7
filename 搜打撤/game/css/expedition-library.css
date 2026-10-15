@@ -82,12 +82,7 @@ body.cardlib-open #cardZoom .cz-backdrop {
     radial-gradient(120% 78% at 50% 114%, rgba(90,28,36,.38), transparent 62%),
     rgba(16,8,6,.84);
 }
-body.cardlib-open #cardZoom .cz-card .hs-card {
-  box-shadow:
-    0 26px 84px rgba(0,0,0,.72),
-    0 0 72px rgba(225,198,109,.30),
-    0 0 0 1px rgba(225,198,109,.28)!important;
-}
+body.cardlib-open #cardZoom:not(.cz-photo) .cz-backdrop { background:#1008062e; backdrop-filter:blur(18px); }
 body.cardlib-open #cardZoom .cz-close {
   border-color:rgba(225,198,109,.45);
   color:var(--studio-gold-soft,#f4e2a8);

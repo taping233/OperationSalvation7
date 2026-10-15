@@ -1,4 +1,4 @@
-import { describe, expect, it, beforeEach } from 'vitest';
+import { describe, expect, it, beforeEach, vi } from 'vitest';
 
 window.SDT = {
   Icons: { rich: value => value },
@@ -32,6 +32,21 @@ describe('overlay dialog accessibility contract', () => {
     UI._overlayReturnFocus = null;
     UI._overlayInerted = [];
     UI.init();
+  });
+
+  it('照相馆卡牌IMG跳过背景样式读取，房间背景仍保留加载检测', () => {
+    const style = vi.spyOn(globalThis, 'getComputedStyle').mockReturnValue({ backgroundImage: 'url("/room.webp")' });
+    try {
+      UI.el.ovBody.innerHTML = '<div class="photo-studio-v3"><img data-asset-key="card-art"></div>';
+      UI._checkPageBg();
+      expect(style).not.toHaveBeenCalled();
+      UI.el.ovBody.innerHTML = '<div class="node-pg" data-asset-key="room-art"></div>';
+      UI._checkPageBg();
+      expect(style).toHaveBeenCalledOnce();
+      expect(UI.el.ovBody.firstElementChild.classList.contains('bg-loading')).toBe(true);
+      UI._cancelPageBg();
+      expect(UI.el.ovBody.firstElementChild.classList.contains('bg-loading')).toBe(false);
+    } finally { UI._cancelPageBg?.(); style.mockRestore(); }
   });
 
   it('sets dialog semantics, isolates the background, traps Tab, and restores the opener', async () => {

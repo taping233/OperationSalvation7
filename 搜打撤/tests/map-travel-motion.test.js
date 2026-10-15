@@ -24,7 +24,7 @@ vi.mock('../game/src/battle/battle-loader.js', () => ({ startBattle: vi.fn() }))
 vi.mock('../game/src/core/turbo.js', () => ({ isTurbo: () => false }));
 vi.mock('../game/src/core/render-scheduler.js', () => ({ renderScheduler: { invalidate: vi.fn() } }));
 vi.mock('../game/src/run/game.run.altar.js', () => ({ openDoorModal: vi.fn(), openFireRest: vi.fn(), openAltarRitual: vi.fn(), openBossGate: vi.fn(), openEmergencyModal: vi.fn() }));
-window.SDT = { UI: { refresh: vi.fn(), log: vi.fn(), beginRoom: vi.fn(), act: vi.fn() }, Meta: { track: vi.fn() } };
+window.SDT = { UI: { refresh: vi.fn(), log: vi.fn(), beginRoom: vi.fn(), act: vi.fn(), hideOverlay: vi.fn() }, Meta: { track: vi.fn() } };
 const { moveTo } = await import('../game/src/run/game.run.flow.js');
 const { getMapTravelPresentation, mapTravelPoint } = await import('../game/src/run/map-travel-path.js');
 let callbacks;
@@ -60,76 +60,79 @@ describe('continuous travel commits stable nodes', () => {
     arrive();
     expect(g).toMatchObject({ layerIdx: 1, trackPos: 1, turn: 2, pos: { x: 120, y: 120 } });
   });
-  it('animates each segment, counts each arrival, rejects reentry and resolves only at destination', () => {
+  it('shares one route clock: commits passed stable nodes, rejects reentry and resolves the destination', () => {
     const g = harness.game;
+    const t0 = performance.now();
     expect(moveTo(0, 2)).toBe(true);
     expect(moveTo(0, 2)).toBe(false);
     expect(g.trackPos).toBe(0);
     expect(getMapTravelPresentation(g)).toMatchObject({ segmentIndex: 1, progress: 0, phase: 'moving' });
-    const old = callbacks.at(-1);
-    arrive();
-    expect(g).toMatchObject({ trackPos: 1, turn: 2, state: 'moving', pos: { x: 120, y: 0 } });
+    callbacks.at(-1)(t0 + 375);   // 时钟推进 75%：首格已提交为稳定节点，末格仍在途
+    expect(g).toMatchObject({ trackPos: 1, turn: 2, state: 'moving' });
     expect(harness.save).toHaveBeenCalledTimes(1);
     expect(g.explored).toEqual({ '0,1': 1 });
-    old(performance.now() + 1000);
-    expect(g.turn).toBe(2);
     expect(getMapTravelPresentation(g).segmentIndex).toBe(2);
-    arrive();
-    expect(g).toMatchObject({ trackPos: 2, turn: 3, state: 'modal', pos: { x: 240, y: 0 } });
-    expect(harness.safePage).toHaveBeenCalledTimes(1);
+    callbacks.at(-1)(t0 + 600);   // 时钟走满：全部节点提交，进入抵达反馈
+    expect(g).toMatchObject({ trackPos: 2, turn: 3, state: 'moving' });
     expect(g.explored).toEqual({ '0,1': 1, '0,2': 1 });
-    expect(getMapTravelPresentation(g).phase).toBe('arrived');
+    expect(getMapTravelPresentation(g)).toMatchObject({ phase: 'arrived', segmentIndex: 2 });
+    callbacks.at(-1)(performance.now() + 1000);   // 抵达反馈完成：已结算目的格直接收尾回地图
+    expect(g).toMatchObject({ trackPos: 2, turn: 3, state: 'idle', pos: { x: 240, y: 0 } });
+    expect(harness.safePage).not.toHaveBeenCalled();
+    expect(getMapTravelPresentation(g)).toBeNull();
   });
-  it('leaving midway keeps the last arrived node and old callbacks cannot resolve', () => {
+  it('leaving midway keeps the last committed node and old callbacks cannot resolve', () => {
     const g = harness.game;
-    moveTo(0, 2); arrive();
+    const t0 = performance.now();
+    moveTo(0, 2);
+    callbacks.at(-1)(t0 + 375);
     const stale = callbacks.at(-1);
-    stale(performance.now() + 40);
     g.state = 'title'; g.runActive = false;
-    stale(performance.now() + 1000);
+    stale(t0 + 1000);
     expect(g).toMatchObject({ trackPos: 1, turn: 2, state: 'title', pos: { x: 120, y: 0 } });
     expect(getMapTravelPresentation(g)).toBeNull();
-    stale(performance.now() + 2000);
+    stale(t0 + 2000);
     expect(g.turn).toBe(2);
   });
   it('reduced motion still commits every traversed cell synchronously', () => {
     localStorage.setItem('sdt-reduce-motion', '1');
     expect(moveTo(0, 2)).toBe(true);
-    expect(harness.game).toMatchObject({ trackPos: 2, turn: 3, state: 'modal' });
+    expect(harness.game).toMatchObject({ trackPos: 2, turn: 3, state: 'idle' });
     expect(harness.game.explored).toEqual({ '0,1': 1, '0,2': 1 });
+    expect(harness.safePage).not.toHaveBeenCalled();
     expect(getMapTravelPresentation(harness.game)).toBeNull();
   });
   it('geometry invalidation releases the movement lock without committing an obsolete destination', () => {
     const g = harness.game;
-    moveTo(0, 2); arrive();
+    const t0 = performance.now();
+    moveTo(0, 2);
+    callbacks.at(-1)(t0 + 375);
     const stale = callbacks.at(-1);
     g.geometryVersion = 'replacement';
-    stale(performance.now() + 1000);
+    stale(t0 + 1000);
     expect(g).toMatchObject({ trackPos: 1, turn: 2, state: 'idle', pos: { x: 120, y: 0 } });
     expect(getMapTravelPresentation(g)).toBeNull();
     expect(harness.safePage).not.toHaveBeenCalled();
     expect(moveTo(0, 2)).toBe(true);
-    arrive();
+    callbacks.at(-1)(performance.now() + 10000);
     expect(g.trackPos).toBe(2);
   });
-  it('the background watchdog saves each arrived node and resolves only the final page', () => {
+  it('the background watchdog commits each stable node and settles the destination without rAF', () => {
     vi.useFakeTimers();
     vi.stubGlobal('requestAnimationFrame', cb => { callbacks.push(cb); return callbacks.length; });
     const g = harness.game, saved = [];
     harness.save.mockImplementation(() => saved.push({ state:g.state, trackPos:g.trackPos, turn:g.turn, pos:{...g.pos}, visited:{...g.visited} }));
     expect(moveTo(0, 2)).toBe(true);
-    vi.advanceTimersByTime(920);
-    expect(saved).toEqual([{ state:'idle', trackPos:1, turn:2, pos:{x:120,y:0}, visited:{'0,2':1} }]);
+    vi.advanceTimersByTime(600);   // 后台页 rAF 暂停：移动锁保持，尚无提交
+    expect(saved).toEqual([]);
     expect(g.state).toBe('moving');
     expect(harness.safePage).not.toHaveBeenCalled();
-    vi.advanceTimersByTime(920);
-    expect(g).toMatchObject({ state:'modal', trackPos:2, turn:3 });
-    expect(harness.safePage).toHaveBeenCalledTimes(1);
-    expect(getMapTravelPresentation(g).phase).toBe('arrived');
-    const refreshed = window.SDT.UI.refresh.mock.calls.length;
-    vi.advanceTimersByTime(280);
+    vi.advanceTimersByTime(700);   // 看门狗兜底：提交稳定节点并结算目的格
+    expect(saved).toEqual([{ state:'idle', trackPos:1, turn:2, pos:{x:120,y:0}, visited:{'0,2':1} }]);
+    expect(g).toMatchObject({ state:'idle', trackPos:2, turn:3 });
+    expect(harness.safePage).not.toHaveBeenCalled();
     expect(getMapTravelPresentation(g)).toBeNull();
-    expect(window.SDT.UI.refresh.mock.calls.length).toBeGreaterThan(refreshed);
+    expect(window.SDT.UI.refresh.mock.calls.length).toBeGreaterThan(0);
     harness.save.mockReset();
   });
 });

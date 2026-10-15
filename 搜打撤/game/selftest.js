@@ -25,7 +25,7 @@ const GAME_PARTS = ['run/game.session.js', 'ui/game.menu.js', 'run/game.run.data
   'battle/effects/effect-steps.ctx.js', 'battle/effects/effect-steps.gates.js', 'battle/effects/effect-steps.curse.js', 'battle/effects/effect-steps.damage.js', 'battle/effects/effect-steps.recovery.js', 'battle/effects/effect-steps.kills.js', 'battle/effects/effect-steps.deck.js', 'battle/effects/effect-steps.rules.js', 'battle/effects/effect-steps.audit.js', 'battle/effects/effect-steps.tail.js',
   'cards/cards.consts.js', 'cards/cards.rules.js', 'cards/cards.data.js', 'cards/cards.sync.js',
   'hub/game.hub.js', 'hub/game.hub.depart.js', 'hub/game.hub.pages.js', 'hub/game.hub.bridge.js',
-  'hub/game.bag.js', 'hub/game.bag.drag.js', 'hub/game.bag.settle.js', 'hub/game.bag.bridge.js',
+  'hub/game.bag.js', 'hub/game.bag.drag.js', 'hub/game.bag.settle.js', 'hub/game.bag.bridge.js', 'hub/game.bag.view2.js',
   'hub/game.notes.js', 'hub/game.cardslib.js', 'game.boot.js'];
 const BATTLE_PARTS = ['battle/core/battle.core.js', 'battle/runtime/battle.runtime.js', 'battle/core/battle.engine.js', 'battle/core/battle.enemy-phase.js',
   'battle/view/battle.view.js', 'battle/view/battle.overlays.js', 'battle/view/battle.layers.js',

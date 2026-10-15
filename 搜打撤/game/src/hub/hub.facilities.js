@@ -4,9 +4,6 @@ import { facilityIllustration } from './hub.visuals.js';
 import { linkedCostsHTML } from '../ui/home-linked-interactions.js';
 
 let selected = 'bag';
-export function logisticsTabsHTML(active) {
-  return `<nav class="logistics-sections" aria-label="后勤分类">${[['shop', '补给'], ['upgrade', '扩建']].map(([id, name]) => `<button class="${active === id ? 'on' : ''}" data-act="hubTab" data-tab="${id}" aria-pressed="${active === id}">${name}</button>`).join('')}</nav>`;
-}
 export function selectFacility(id) { if (id === 'bag' || id === 'stash') selected = id; }
 export function facilitiesHTML() {
   const base = window.SDT.Base, rules = MAP.rules;

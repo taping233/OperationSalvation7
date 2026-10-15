@@ -67,35 +67,39 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
       "game/src/battle/view/battle.frame-catalog-three-role.js": "bc574a322120f650d20de25ec7649a7fa3643202c9cb97e04ef8f35fee60eb98"
     },
     "map": {
-      "game/src/core/map-node-art.js": "1381ccace3f48515c5d5cf04ce9ce51c5801a8abd3d5d1a76904e4935b0b9bdd",
-      "game/src/core/renderer.js": "79838f491b7c87d9528cd5e2c833d9c25767077a178d0c1000f1ac61f59eb10c",
-      "game/src/core/map-city-atmosphere.js": "08b08176aa089cb68dace1429b6df51514b7e6199fa927c41fe12cbcf849c547",
+      "game/src/core/map-node-art.js": "95f5a2a4371acb7ebf1b8bb36288b1456129056b59985d1be9e42fbdbc850c63",
+      "game/src/core/renderer.js": "8f7ed333fec94237ffdd8188f724717912ca7e0a94c06ce9b4f7ac551d4f8511",
+      "game/src/core/map-city-atmosphere.js": "70c7ce669d14bb5c55261a17c412b843a8616e9732b544bb03c18376cbf3a5fb",
       "game/src/core/art.js": "f9cc8b3fe06f1bd7feb6d9eec712e7f13fced688113aaae6e5201043eaa79964",
       "game/src/core/data-loader.js": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be"
     },
     "transitions": {
-      "game/src/ui/camp-entry.js": "b33a309035eedba80102a5e3e9ef7705f79240f30c5f792f5e8ddc0c4fe85ce0",
+      "game/src/ui/camp-entry.js": "104ad905fee3feed9279f3f86ce56550a0d306ab80ce110faab66a899ed40fde",
       "game/src/core/art.js": "f9cc8b3fe06f1bd7feb6d9eec712e7f13fced688113aaae6e5201043eaa79964",
       "game/src/core/data-loader.js": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be"
     }
   },
   opaqueConsumers: {
+    "game/src/hub/game.bag.view2.js": "67ee01779031d5230a345427e39ddffd49e87731a00d33a768ac95e249bfd9a5",
+    "game/card-design-options-v2.html": "cead324bf47437043376cfb40dcc7cec7c9fde1e0bda644a4da356e240a5f9ee",
     "game/src/audio/sfx-audition.js": "e2a5dbbfc72747a51f1023a70bccd4f8ed33785126e0433a2ab2473881bdebdc",
     "game/src/audio/sound.bank.js": "81b9bdf76f7440c6adccdc757b10a1240201830d76f8b4dea695dc9812b0fdf4",
-    "game/src/audio/sound.js": "3873daf7aad310fd8b82ad6a1271ad1f28a9e2ded33b7f34d92fa7eeb49adf1f",
+    "game/src/audio/sound.js": "f5053d38817ddaee067ff0c42e5677694641340fd210722c189a4ecdbee2a4a7",
     "game/src/battle/view/battle.frames.js": "3749586baaf1cbb45f00af3eccbd14e2963a0b98ac483c69b10a6c7b557eb904",
-    "game/src/battle/view/battle.layers.js": "7c80a9a6e6f3e046071050aed64c28b90273768b519f47749a0727f9022df7b7",
+    "game/src/battle/view/battle.layers.js": "0accccaccbb0fe852ebba12692c7f5eba96bbb29746015d409435090c6f5548f",
     "game/src/battle/view/battle.vfx.js": "a439f13c5433f7dfc936a9e7a8c4bfe56350f745e17a69e2661b783d4d667e28",
+    "game/src/cards/card-frame-presentation.js": "79ef8241faad2ed89bb1c19b6866f0e352ddd43e9498d1e0842e436335099d9a",
     "game/src/core/art.js": "f9cc8b3fe06f1bd7feb6d9eec712e7f13fced688113aaae6e5201043eaa79964",
-    "game/src/core/icons-bitmap.js": "af20452d69ef4fc0048c1518606e7ff94df19fe6315a6f771b63a7a8f7ef0571",
+    "game/src/core/icons-bitmap.js": "c043e3e20da6a564c0006c1a8fa8c60322492d09c5716ff52b7f1d230cafd408",
     "game/src/home/home.scene.js": "abbbd5aaabc4afae047302bc2e7bd62858fbc7a6386b1505e60b46dcbe957604",
-    "game/src/hub/hub.presentation.js": "887f8254c9411c34a56e6fb2843031bf7ee3832eaf4f71fa98ddb06f18aefc7c",
-    "game/src/hub/hub.visuals.js": "860a1e9ddbc7cc60bcd55542bfec20ea4ea8d8665c7393363409b74fedea314d",
+    "game/src/hub/base-chibi-v2.skin.js": "53a4a3e47e3b01b53d134776a0ee62335f5253e714edc5e775ca16c733906f86",
+    "game/src/hub/hub.presentation.js": "364bbc0b5dfe309ca947d3fd2d3369a9038826a5caf0586af121e4618dece461",
+    "game/src/hub/hub.visuals.js": "1284b86e61536fb11e6440995a3094711510d2228e6ca4c90705421f783b0e78",
     "game/src/rarity-design-lab.js": "7371593bf0382256a8abc15b1470ff81da9f0a01e835fd5329ece73c16cde775",
     "game/src/run/lab.ending.js": "4ebedd8dd70253956410986e19b45d61a3b993514fb5a1dbc4fab1bc01d91b6c",
     "game/src/ui/base-preview-rooms-v7.js": "c68c228942c7aaa41d1d52343c8f34346f4b424327c14619c2e5c5943a4e9fb8",
-    "game/src/ui/game.menu.js": "82dda77c7a40305130c2cc3f7ded34f2faf38d67703326e88a9a32c5361b5aa1",
-    "game/src/ui/ui.js": "bfe2f452fba54816b686e6a90ff87c071d277ddb8606c3dda455cc3053b9c998",
+    "game/src/ui/game.menu.js": "2fd52c620d412462dea4ba35553152f7c06f5017887fe29dd53ce6eebb85b83b",
+    "game/src/ui/ui.js": "e40a8eac1adb5e3a834a417c174a5d2513eadab5d55bf0b07804bd1e87b3d6a1",
     "game/src/wu-career-frame-preview.js": "2715b703789fef835432d3eb7cbffdedc249f8355a22714e6faff8ef49cfee38"
   },
 });

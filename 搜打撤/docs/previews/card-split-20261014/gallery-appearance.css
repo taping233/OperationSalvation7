@@ -1,0 +1,70 @@
+.gallery [data-rarity="初始"] .name { color: #d8dfe1; }
+.gallery [data-rarity="古朴"] .name { color: #e9e8e1; }
+.gallery [data-rarity="稀有"] .name { color: #9ed5f5; }
+.gallery [data-rarity="史诗"] .name { color: #ddbcf5; }
+.gallery [data-rarity="衍生"] .name { color: #b5d9d4; }
+.gallery [data-rarity="职业"] .name { color: #dce6ed; }
+.gallery [data-rarity="传说"] .name {
+  color: transparent;
+  background: linear-gradient(105deg, #cd9a4a, #ffe8b1 38%, #f5d992 60%, #d8ac5d);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+.gallery [data-rarity="棱彩"] .name {
+  color: transparent;
+  background: linear-gradient(105deg, #f4b9df, #fff0c5 25%, #baf4e0 45%, #bcd6ff 68%, #e7c8ff 85%, #ffe7f8);
+  background-size: 180% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: prism-title 7s ease-in-out infinite alternate;
+}
+.gallery [data-rarity="棱彩"] .frame {
+  filter: drop-shadow(0 0 5px #a9dfff99) drop-shadow(0 0 10px #c1a8ed66);
+}
+.gallery .prism-halo {
+  position: absolute;
+  inset: -30px;
+  border-radius: 8px;
+  padding: 3px;
+  background: conic-gradient(from 20deg, #f6b8dc, #efd99e, #9de7c9, #9ccaf3, #c1a5f1, #f6b8dc);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  opacity: .78;
+  filter: blur(3px);
+  animation: prism-halo 6s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 4;
+}
+.gallery .prism-sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+.gallery .prism-sheen:before {
+  content: '';
+  position: absolute;
+  top: -15%;
+  left: -110%;
+  width: 70%;
+  height: 130%;
+  background: linear-gradient(90deg, transparent, #edc3f22e 30%, #e8f7f837 50%, #bbdafa25 70%, transparent);
+  transform: skewX(-22deg);
+  animation: prism-sheen 7s ease-in-out infinite;
+}
+.gallery .copy { z-index: 3; }
+@keyframes prism-title { to { background-position: 100% 50%; } }
+@keyframes prism-halo { to { filter: blur(4px) hue-rotate(45deg); opacity: .5; } }
+@keyframes prism-sheen { 55%, 100% { left: 155%; } }
+@media (prefers-reduced-motion: reduce) {
+  .gallery [data-rarity="棱彩"] .name,
+  .gallery .prism-halo,
+  .gallery .prism-sheen:before { animation: none; }
+  .gallery .prism-sheen:before { left: 20%; opacity: .45; }
+}
+.gallery .card { height: 364px; }
+.gallery .caption { margin-top: 52px; }

@@ -169,10 +169,11 @@ export function animateBaseModeChangeV12(root, previousMode) {
     { transform:shift(previousMode), backgroundColor:color(previousMode) },
     { transform:shift(mode), backgroundColor:color(mode) },
   ]);
+  // 图标静止色恒为金（base-home-v7.css #e2c891），动画若带颜色终点会在 fill 释放时弹回闪色，故只留缩放脉冲。
   play(home.querySelector('#btnDeploy > .base-home-icon'), [
-    { transform:'scale(.82)', color:color(previousMode) },
-    { transform:'scale(1.08)', color:color(mode), offset:.65 },
-    { transform:'none', color:color(mode) },
+    { transform:'scale(.82)' },
+    { transform:'scale(1.08)', offset:.65 },
+    { transform:'none' },
   ]);
   animateRegion(state, home.querySelector('.base-home-mode p'), { y:8 });
 }

@@ -59,7 +59,7 @@ export function parseStagedStatus(fields) {
   return entries;
 }
 
-export function formatDirtyReport(groups) {
+function formatDirtyReport(groups) {
   const labels = [
     ['unstaged', '未暂存改动'],
     ['untracked', '未跟踪新文件'],

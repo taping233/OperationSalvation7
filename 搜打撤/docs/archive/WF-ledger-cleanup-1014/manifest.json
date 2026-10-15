@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "at": "2026-10-14T07:47:26.011436+00:00",
+  "task": "WF-ledger-cleanup-1014",
+  "method": "copy-original-before-revision",
+  "items": [
+    {
+      "source": "docs/PENDING.md",
+      "target": "docs/archive/WF-ledger-cleanup-1014/originals/docs/PENDING.md",
+      "sha256": "744b8d7490398d7a9f05ebf3bd05457efd5f078ba7bf4bf756eb7a7e6ad7ac6d",
+      "replacedBy": "docs/PENDING.md"
+    },
+    {
+      "source": "docs/PARALLEL-REGISTRY.md",
+      "target": "docs/archive/WF-ledger-cleanup-1014/originals/docs/PARALLEL-REGISTRY.md",
+      "sha256": "a534022767fb2dae606d05f932a59c42858036fd8d19df3ac8f62eb35e7944a4",
+      "replacedBy": "docs/PARALLEL-REGISTRY.md"
+    },
+    {
+      "source": "docs/roadmap.md",
+      "target": "docs/archive/WF-ledger-cleanup-1014/originals/docs/roadmap.md",
+      "sha256": "9f47ee5dbbdd4c89e9299b85232eaf98d61c4bab26fff4162353a8d2ed48e639",
+      "replacedBy": "docs/roadmap.md"
+    },
+    {
+      "source": "docs/STATUS.md",
+      "target": "docs/archive/WF-ledger-cleanup-1014/originals/docs/STATUS.md",
+      "sha256": "f88f82cc59915f9cbb6ea57b375680602a927c7064e6bb39dee5bc523ded1ea4",
+      "replacedBy": "docs/STATUS.md"
+    },
+    {
+      "source": "docs/evidence/2026-10-14-WF-retired-art-1014/task.json",
+      "target": "docs/archive/WF-ledger-cleanup-1014/originals/docs/evidence/2026-10-14-WF-retired-art-1014/task.json",
+      "sha256": "dbaa47ac90ea2b80049f5a00da8cab5f5c136d431efc77a34e38fc21db520ff2",
+      "replacedBy": "docs/evidence/2026-10-14-WF-retired-art-1014/task.json"
+    },
+    {
+      "source": "docs/evidence/2026-10-14-WF-cloud-review-integration-1014/task.json",
+      "target": "docs/archive/WF-ledger-cleanup-1014/originals/docs/evidence/2026-10-14-WF-cloud-review-integration-1014/task.json",
+      "sha256": "d1610d196ff7c594ace5ab85c0e8fb3fb8194c5a2248fb9447d529cd7e1ab0d2",
+      "replacedBy": "docs/evidence/2026-10-14-WF-cloud-review-integration-1014/task.json"
+    },
+    {
+      "source": "docs/evidence/2026-10-14-WF-friday-cloud-review-1014/task.json",
+      "target": "docs/archive/WF-ledger-cleanup-1014/originals/docs/evidence/2026-10-14-WF-friday-cloud-review-1014/task.json",
+      "sha256": "8e76b51e6a1532edc67b1713abb1363a180395598aa5d80a4e2cdda15db2f435",
+      "replacedBy": "docs/evidence/2026-10-14-WF-friday-cloud-review-1014/task.json"
+    },
+    {
+      "source": "docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/task.json",
+      "target": "docs/archive/WF-ledger-cleanup-1014/originals/docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/task.json",
+      "sha256": "4b2fb19c3dd8ea9953002a885bb13ef5d804a01b939ff6d0ac7d484d0fe64b9b",
+      "replacedBy": "docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/task.json"
+    },
+    {
+      "source": "docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/task.json",
+      "target": "docs/archive/WF-ledger-cleanup-1014/originals/docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/task.json",
+      "sha256": "54d9d9c9aef85ceed27ec4a532eef3aff15223dd38a3b4002deb444837d8301d",
+      "replacedBy": "docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/task.json"
+    },
+    {
+      "source": "docs/evidence/2026-10-13-WF-friday-clean-ship-1013/task.json",
+      "target": "docs/archive/WF-ledger-cleanup-1014/originals/docs/evidence/2026-10-13-WF-friday-clean-ship-1013/task.json",
+      "sha256": "396ea08af5b3dc9db784c6d716f7a05bb459a1705140629a9e0f5a89b80d88a8",
+      "replacedBy": "docs/evidence/2026-10-13-WF-friday-clean-ship-1013/task.json"
+    },
+    {
+      "source": "docs/evidence/2026-10-13-WF-ship-pathspec-1013/task.json",
+      "target": "docs/archive/WF-ledger-cleanup-1014/originals/docs/evidence/2026-10-13-WF-ship-pathspec-1013/task.json",
+      "sha256": "9e786c27e18b73ac6ba89c57366487131736b9e656a1bcb13b0dfc08ef037139",
+      "replacedBy": "docs/evidence/2026-10-13-WF-ship-pathspec-1013/task.json"
+    }
+  ],
+  "limits": [
+    "原文保持字节，内部相对链接仍以 source 原位置解释",
+    "台账整理不构成资源删除、提交、推送或验收授权"
+  ]
+}

@@ -2,7 +2,7 @@
 body #overlay#overlay#overlay #hubMain .base-navigation-v7 .hub-tab.on .base-home-icon { color:#43b9ff; fill:currentColor; }
 .courtyard-v3-rain-layer { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
 .departure-drag-card { position:fixed; z-index:10000; pointer-events:none; opacity:1; filter:drop-shadow(0 10px 12px #122b4466); }
-.departure-drag-card .hs-card { width:100%; height:auto; aspect-ratio:5/7; }
+.departure-drag-card .hs-card { width:100%; }
 .departure-drag-card .dep-quantity { display:flex; justify-content:space-between; color:#203945; background:#f6f8f9; }
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar { padding-left:24px; padding-right:24px; }
 #depMain .dep-drag-source { visibility:hidden; }
@@ -13,9 +13,11 @@ body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .personnel-v12[data
   & .pv12-agent-strip { grid-column:2; }
   & .pv12-sections { grid-column:2; }
   & .card-browser-track { align-content:center; align-items:start; overflow:visible; gap:28px; padding:32px 12px 16px; container-type:size; }
-  & .person-pool-card { padding:0; gap:8px; }
+  & .person-pool-card { padding:0; gap:8px; max-width:285px; }
   & .person-pool-card > span:last-child { top:0; margin-top:26px; }
-  & .pool-card-art { width:min(100%,calc((100cqh - 100px) * .63)); }
+  /* 2026-10-15 老板指令：招式卡放大——.78 档且框比随 272/406 自适应（原 height 钉 224px 会随宽变形），字号同步 15px */
+  & .pool-card-art { width:min(100%,calc((100cqh - 100px) * .78)); height:auto; aspect-ratio:272/406; }
+  & .person-pool-card .hs-card { font-size:15px; }
   & .card-browser-footer { margin:0; }
 }
 body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .personnel-v12 .pv12-agent-image-stage { background:#e0e5e4; margin:12px; border:1px solid #ffffff80; border-radius:12px; box-shadow:0 12px 30px #101d2440; }
@@ -37,7 +39,7 @@ body #overlay#overlay#overlay #depMain.departure-cover:not(.departure-glass) {
   & #depBag::after { content:none; }
   & :is(#depPool .dep-card,#depBag .bag-cell) { width:100%; height:auto; min-width:0; min-height:0; }
   & #depPool .dep-card-face { flex:none; height:auto; width:100%; }
-  & :is(#depPool .dep-card-face .hs-card,#depBag .bag-cell > .hs-card) { width:88%!important; max-width:88%!important; min-width:0!important; margin:0 auto; height:auto!important; min-height:0!important; box-sizing:border-box; aspect-ratio:272/406!important; font-size:12px; }
+  & :is(#depPool .dep-card-face .hs-card,#depBag .bag-cell > .hs-card) { width:100%!important; max-width:100%!important; min-width:0!important; margin:0 auto; box-sizing:border-box; font-size:12px; }
   & .dep-quantity { display:flex; justify-content:space-between; margin-top:20px; font-size:13px; color:#526772; gap:4px; }
   & .dep-quantity b { font:700 18px/1.2 var(--font-num); }
   & .dep-own { color:#246783; }
@@ -57,6 +59,5 @@ body #overlay#overlay#overlay [data-act="btSlam"] .battle-skill-cost { grid-colu
 body #overlay#overlay#overlay [data-act="btSlam"] > .ic { width:36px; height:36px; }
 body #overlay#overlay#overlay [data-act="btSlam"] > .battle-skill-icon { width:36px; height:36px; flex:none; }
 body #overlay#overlay#overlay [data-act="btSlam"]:disabled { opacity:.5; }
-body #overlay#overlay#overlay .reward-card .hs-card { height:auto!important; min-height:0!important; aspect-ratio:272/406!important; }
 body #overlay#overlay#overlay .sts-float.sticker { z-index:120; overflow:visible; }
 body #overlay#overlay#overlay .sts-float.sticker img { display:block; width:46px; height:46px; max-width:none; }

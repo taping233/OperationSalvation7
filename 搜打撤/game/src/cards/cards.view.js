@@ -6,10 +6,10 @@
  * cards.js 在 SDT.Cards 上保留同名转发属性，既有调用方不受影响。
  * ============================================================ */
 import SDT from '../core/sdt-facade.js';
-import { characterName } from '../core/characters.js';
 import { termKeyFor } from '../ui/term-tips.js';
 import { esc, escAttr } from '../core/shared.js';
 import { displayCardDescription } from './card-description-text.js';
+import { cardFramePresentation } from './card-frame-presentation.js';
 
 // 描述富文本：对原文识别数字、术语与句首关键字，再逐段转义。
 // 不对生成的 HTML 二次替换，避免把 &#39; 等转义实体拆成数值标签。
@@ -81,7 +81,7 @@ export function cardHTML(c, cls, opts) {
 function buildCardHTML(c, cls, opts) {
   const description = displayCardDescription(c.desc, c.id);
   // 2026-09-28 代码线：体内同名局部 esc/escAttr（3 字符/缺单引号）已删，统一走顶层 core/shared 满配版
-  const hideCost = !!(opts && opts.hideCost) && SDT.Cards.NO_COST_TYPES.includes(c.type);
+  const hideCost = c.type === '资源' || (!!(opts && opts.hideCost) && SDT.Cards.NO_COST_TYPES.includes(c.type));
   const costBase = (opts && opts.costOverride && opts.costOverride.base != null) ? +opts.costOverride.base : (c.cost || 0);
   const costMod = (opts && opts.costOverride && +opts.costOverride.v !== costBase)
     ? { v: +opts.costOverride.v, base: costBase, down: +opts.costOverride.v < costBase } : null;
@@ -113,12 +113,12 @@ function buildCardHTML(c, cls, opts) {
 // 无职业卡不带 cf-* 落到默认青灰；颜色变量见 winter.css 末尾 v3 卡框块。
 const CF_SLUGS = { '战士': 'cf0', '侠客': 'cf1', '法师': 'cf2', '牧师': 'cf3', '降临者': 'cf4' };
 // 长描述按长度降级字号（B5）：≥22 字收一档、≥32 字两档，防 sm 卡面底部裁字；
-// lg/xl 特写卡由 card-v3.css 的 id 级选择器接管，不受这两档影响
+// 正文始终保留全文；共用样式按密度缩放并在阅读区内滚动。
 function descLenCls(description) {
   const n = description.length;
   return n >= 32 ? ' long xlong' : n >= 22 ? ' long' : '';
 }
-// 效果词条角标（类型行下方的小药丸；数据字段见文件头 draw / infuse / heal / armor）
+// 无正文时的效果提示；有正文的卡面避免重复展示相同词条。
 const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
   const healN = +(c.heal || 0), armN = +(c.armor || 0);
   const kwArr = [];
@@ -138,17 +138,24 @@ const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
     SDT.Icons.img(SDT.Icons.TYPE_ART[c.type] || 'question');
   const ruleLength = description.length;
   const ruleDensity = ruleLength > 90 ? 'very-dense' : ruleLength > 55 ? 'dense' : ruleLength > 30 ? 'long' : 'normal';
-  return `<div class="hs-card tp${ti} ${rvCls}${CF_SLUGS[c.cls] ? ' ' + CF_SLUGS[c.cls] : ''}${cls ? ' ' + cls : ''}" data-rule-density="${ruleDensity}">
+  const frame = cardFramePresentation(ro, c.cls);
+  const costHTML = hideCost ? '' : costMod
+    ? `<div class="hsc-cost cost-mod ${costMod.down ? 'mod-down' : 'mod-up'}" title="费用变化：按 ${costMod.v} 费打出（原 ${costMod.base} 费）">${costMod.v}</div>`
+    : (c.cost != null ? `<div class="hsc-cost">${c.cost}</div>` : '');
+  return `<div class="hs-card tp${ti} ${rvCls}${CF_SLUGS[c.cls] ? ' ' + CF_SLUGS[c.cls] : ''}${cls ? ' ' + cls : ''}" data-card-layout="split" data-card-id="${escAttr(c.id || '')}" data-rarity="${escAttr(ro)}" data-frame="${frame.key}" data-has-description="${!!description}" data-rule-density="${ruleDensity}">
+    ${isPrism ? '<i class="hsc-prism-halo" aria-hidden="true"></i>' : ''}
+    ${ro === '传说' ? '<i class="hsc-gold-halo" aria-hidden="true"></i>' : ''}
+    ${costHTML ? `<div class="hsc-cost-layer" style="${frame.style}">${costHTML}</div>` : ''}
+    <div class="hsc-face" style="${frame.style}">
     ${isPrism ? '<i class="rv-beam" aria-hidden="true"></i>' : ''}
-    ${hideCost ? '' : costMod
-      ? `<div class="hsc-cost cost-mod ${costMod.down ? 'mod-down' : 'mod-up'}" title="费用变化：按 ${costMod.v} 费打出（原 ${costMod.base} 费）">${costMod.v}</div>`
-      : (c.cost != null ? `<div class="hsc-cost">${c.cost}</div>` : '')}
+    ${ro === '传说' ? '<i class="hsc-gold-beam" aria-hidden="true"></i>' : ''}
     <div class="hsc-art">${artHTML}</div>
+    <div class="hsc-type"><span class="hsc-type-label"><span class="hsc-type-primary">${c.type === '能力卡' ? '<span data-term="ability">能力卡</span>' : esc(c.type || '?')}</span><span class="hsc-type-secondary">${esc(c.cls || ro)}</span></span></div>
+    <div class="hsc-copy">
     <div class="hsc-name"><span>${esc(c.name || '未命名卡牌')}</span></div>
-    <div class="hsc-type">${c.type === '能力卡' ? '<span data-term="ability">能力卡</span>' : esc(c.type || '?')} · ${esc(ro === '职业' ? ((c.cls ? characterName(c.cls) : '人物') + '专属') : ro)}</div>
-    ${kwHTML}
-    <i class="hsc-gem"></i>
-    <div class="hsc-desc${descLenCls(description)}">${description ? `<span>${descRich(description)}</span>` : ''}</div>
+    <div class="hsc-desc${descLenCls(description)}"${ruleDensity === 'dense' || ruleDensity === 'very-dense' ? ' tabindex="0" aria-label="完整卡牌规则，可滚动阅读"' : ''}>${description ? `<span>${descRich(description)}</span>` : ''}</div>
+    ${kwHTML}</div></div>
+    <img class="hsc-frame" src="${escAttr(frame.src)}" width="${frame.width}" height="${frame.height}" alt="" aria-hidden="true" decoding="async"${opts?.defer ? ' loading="lazy"' : ''}>
     ${showDmg ? `<div class="hsc-dmg${dmgUp ? ' dmg-up' : ''}" title="${escAttr(dmgUp
       ? `${mark.tip}（含法伤加成 +${dmgOverride.bonus}）`
       : (c.dmgType === 'spell' ? `${mark.tip} · 受法伤加成` : mark.tip))}">${mark.icon}<b>${mark.text}</b>${c.dmgType === 'spell' ? '<i data-term="spellPower">法伤</i>' : ''}</div>` : ''}

@@ -142,6 +142,8 @@ describe('基地口袋复原数量与整堆命令一致', () => {
     document.querySelector('.hub-page').innerHTML = feature.warehouseHTML('pocket');
     feature.bindWarehouse({ ui, base, sound: { tick: vi.fn() } });
     document.querySelector('[data-browser-key]').click();
+    // 点卡仅选中浏览（2026-10-15 新契约）；特写页脚经「查看详情」打开
+    ui._acts.warehousePick(document.querySelector('[data-act="warehousePick"]').dataset);
     return button('restoreCard');
   }
   it('按钮明确整堆2张/2钥匙，而不是承诺仅复原1张', async () => {
@@ -169,6 +171,8 @@ it.each([[false, 'variant'], [true, 'variant'], [false, 'id'], [true, 'id']])('�
   feature.bindWarehouse({ui,base,sound:{tick:vi.fn()},openCard:pages.openStashCardView});
   document.querySelectorAll('.stash-cell')[1].click();
   const selected=document.querySelector('.warehouse-selection-v12'); expect(selected.textContent).toContain('2 张');
+  // 点卡仅选中浏览（2026-10-15 新契约）；预览该堆走「查看详情」入口
+  ui._acts.warehousePick(document.querySelector('[data-act="warehousePick"]').dataset);
   if(pocket) expect(button('restoreCard').dataset.stackKey).toBe(identity === 'variant' ? 'card:growth:second' : 'card:second');
   else expect(document.querySelector('.inspect-count').textContent).toContain('2');
 });

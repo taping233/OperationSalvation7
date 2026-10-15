@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>卡牌参考板 · 深色文字底与费用设计</title>
+<style>
+@font-face{font-family:Harmony;src:url('/assets/fonts/HarmonyOS_Sans_SC_Regular.ttf')}
+@font-face{font-family:Harmony;src:url('/assets/fonts/HarmonyOS_Sans_SC_Bold.ttf');font-weight:700}
+@font-face{font-family:Oxanium;src:url('/assets/fonts/oxanium-latin-700-normal.woff2');font-weight:700}
+@font-face{font-family:Rajdhani;src:url('/assets/fonts/rajdhani-latin-700-normal.woff2');font-weight:700}
+*{box-sizing:border-box}body{margin:0;background:#14191f;color:#edeae3;font-family:Harmony,'Microsoft YaHei',sans-serif}button{font:inherit;cursor:pointer}
+.board{max-width:1150px;margin:auto;padding:30px 46px 26px}header{display:flex;align-items:end;justify-content:space-between;gap:28px;border-bottom:1px solid #39404a;padding-bottom:20px}.eyebrow{color:#9eafb9;letter-spacing:3px;font-size:11px}h1{font-size:29px;font-weight:400;margin:8px 0}header p{font-size:13px;color:#b7b9bb;margin:0}nav{display:flex;gap:6px;flex-shrink:0}button{color:#aeb9c4;background:transparent;border:1px solid #48525d;border-radius:5px;padding:9px 13px;font-size:12px}button[aria-pressed=true]{color:#19212a;background:#d4c6a6;border-color:#d4c6a6}
+.showcase{display:flex;justify-content:center;gap:86px;padding:57px 22px 38px}.sample{width:232px;flex-shrink:0}.card{position:relative;width:232px;height:346px;background:#202833;border-radius:6px;isolation:isolate;box-shadow:0 20px 25px #0007}.frame{position:absolute;inset:-9.852217% -11.764706%;width:123.529412%;height:119.704434%;pointer-events:none;z-index:5;filter:drop-shadow(1px 3px 2px #0008)}
+.token .frame{inset:-6.16% -5.88% -4.19% -4.04%;width:109.92%;height:110.35%}.art{height:53%;overflow:hidden;border-radius:5px 5px 0 0;background:#242a35}.art img{width:100%;height:100%;object-fit:cover;display:block}.cicada .art img{object-position:48% 38%}.iron .art img{object-position:center 35%}.copy{position:relative;height:47%;background:linear-gradient(110deg,#e4ddca,#f0e9d8 50%,#d3c8ad);color:#282d31;padding:17px 18px 13px;border-top:3px solid #68717d}.copy:after{content:'';position:absolute;inset:5px;border:1px solid #7b726c36;pointer-events:none}.name{font-size:21px;font-weight:600;text-align:center;margin:0 0 4px;letter-spacing:2px}.type{text-align:center;font-size:10px;color:#6c655c;letter-spacing:3px}.rules{font-size:15px;line-height:1.65;text-align:center;margin:13px 0 0;position:relative;z-index:1}.rules b{font-weight:700;color:#734b2d}.iron .rules{font-size:13px;line-height:1.65;margin-top:10px}.cost{position:absolute;top:0;left:-10px;width:40px;height:43px;z-index:7;display:grid;place-items:center;font-family:Georgia,serif;font-size:26px;color:#e8f4fa;background:linear-gradient(135deg,#8399a6,#294251 60%,#162b39);border:2px solid #bccbd0;border-radius:8px;transform:rotate(-5deg);box-shadow:0 3px 4px #0009}.caption{text-align:center;margin:37px 0 0;color:#d2d0c9;font-size:13px}.caption small{display:block;font-size:11px;color:#8c9ba8;margin-top:7px}
+.notes{display:grid;grid-template-columns:repeat(3,1fr);gap:35px;border-top:1px solid #39404a;padding-top:19px}.notes h2{font-size:13px;font-weight:400;color:#dccdaa;margin:0 0 7px}.notes p{font-size:12px;line-height:1.75;color:#aeb7bf;margin:0}footer{display:flex;justify-content:space-between;margin-top:23px;color:#778894;font-size:10px;letter-spacing:1px}
+.dark .copy{background:linear-gradient(120deg,#26323c,#1c252e);color:#e7e4d9}.dark .copy:after{border-color:#b6ac9427}.dark .type{color:#a8b3bc}.dark .rules b{color:#e5c790}
+.cost{top:-4px;left:-10px;width:46px;height:51px;padding-bottom:3px;border:0;border-radius:0;transform:none;box-shadow:none;background:none;color:#f1eee1;font-family:Oxanium,sans-serif;font-weight:700;font-size:31px;line-height:1;font-variant-numeric:lining-nums tabular-nums;isolation:isolate;text-shadow:0 2px 1px #0b1115}
+.card .cost{top:-12px;left:-18px}
+.card .type{position:absolute;top:53%;left:2px;right:2px;transform:translateY(-50%);z-index:6;height:25px;display:flex;align-items:center;justify-content:center;gap:0;background:none;color:#d2dadd;font-size:11px;letter-spacing:1px;line-height:1}
+.card .type:before,.card .type:after{content:'';height:1px;flex:1;background:linear-gradient(90deg,#58697620,#81939e88)}
+.card .type:after{transform:scaleX(-1)}
+.type-label{position:relative;isolation:isolate;min-width:116px;height:25px;padding:0 14px;display:flex;align-items:center;justify-content:center;gap:9px;background:#667782;clip-path:polygon(8px 0,calc(100% - 8px) 0,100% 50%,calc(100% - 8px) 100%,8px 100%,0 50%)}
+.type-label:before{content:'';position:absolute;inset:1px;z-index:-1;background:#26323c;clip-path:polygon(7px 0,calc(100% - 7px) 0,100% 50%,calc(100% - 7px) 100%,7px 100%,0 50%)}
+.type-primary{color:#e0e5e5;font-size:12px;letter-spacing:2px}.type-secondary{color:#aebbc3;font-size:11px;letter-spacing:1px}.type-secondary:before{content:'·';padding-right:8px;color:#798b97}
+.card .copy{padding-top:24px;border-top:0}
+.dark .card .copy{background:linear-gradient(#26323c,#1d2730 48%,#1c252e)}
+.card .copy:after{border:0;border-bottom:1px solid #b6ac941c;inset:0 9px 8px}
+.card .name{font-weight:700;letter-spacing:1.5px;margin-bottom:0;color:#eee9db}
+.card .rules{margin-top:17px;color:#d2d9da}.card.iron .rules{margin-top:14px}
+.cost:before,.cost:after{content:'';position:absolute;z-index:-1;pointer-events:none}.cost:before{inset:0;background:#a5b7bc;clip-path:polygon(15% 0,85% 0,100% 13%,100% 75%,50% 100%,0 75%,0 13%)}.cost:after{inset:2px 2px 3px;background:linear-gradient(135deg,#354852,#1b2b35 65%);clip-path:polygon(15% 0,85% 0,100% 13%,100% 75%,50% 100%,0 75%,0 13%)}
+[data-cost=b] .card .cost,.cost-demo[data-option=b] .cost{font-family:Rajdhani,sans-serif;font-size:36px;padding-bottom:5px;width:39px;height:56px}
+[data-cost=b] .card .cost:before,.cost-demo[data-option=b] .cost:before{background:#93a5ad;clip-path:polygon(0 0,100% 0,100% 100%,50% 86%,0 100%)}
+[data-cost=b] .card .cost:after,.cost-demo[data-option=b] .cost:after{background:linear-gradient(100deg,#303d48,#1c2630);clip-path:polygon(0 0,100% 0,100% 100%,50% 86%,0 100%)}
+[data-cost=c] .card .cost,.cost-demo[data-option=c] .cost{width:47px;height:47px;padding-bottom:1px}
+[data-cost=c] .card .cost:before,.cost-demo[data-option=c] .cost:before{border-radius:50%;clip-path:none;background:#a5b7bc}
+[data-cost=c] .card .cost:after,.cost-demo[data-option=c] .cost:after{border-radius:50%;clip-path:none;inset:2px;background:linear-gradient(135deg,#354852,#1b2b35 65%)}
+.cost-demo{border:0;border-radius:0;border-top:2px solid transparent;text-align:left;padding:14px 0 0;display:block;width:100%}.cost-demo[aria-pressed=true]{background:none;color:inherit;border-color:#d4c6a6}.cost-demo:focus-visible{outline:2px solid #d4c6a6;outline-offset:5px}.cost-demo h2{color:#c8c8c4}.cost-demo[aria-pressed=true] h2{color:#dccdaa}.cost-values{display:flex;align-items:center;gap:15px;height:65px;padding-left:3px;margin:5px 0}.cost-values .cost{position:relative;left:auto;top:auto;flex-shrink:0;display:grid;place-items:center}.cost-values .cost:last-child{font-size:25px}.cost-demo[data-option=b] .cost-values .cost:last-child{font-size:29px}.notes{padding-top:0;gap:36px}footer{margin-top:18px}header nav{gap:5px}header button{padding:9px 11px}
+@media(max-width:1000px){.board{padding:25px 32px}.showcase{gap:54px}.sample{width:208px}.card{width:208px;height:310px}.name{font-size:19px}.rules{font-size:14px;margin-top:10px}.iron .rules{font-size:12px}.copy{padding:13px 13px}.caption{margin-top:32px}}@media(max-width:760px){header{align-items:start;flex-direction:column}.showcase{flex-wrap:wrap;gap:55px}.notes{grid-template-columns:1fr;gap:14px}}
+</style>
+<main class="board dark" id="board" data-cost="a">
+<header><div><div class="eyebrow">代号柒 / CARD STUDY 03</div><h1>深色卡牌 · 窄铭牌过渡</h1><p>类型收进中央铭牌 · 细线连接两侧边框 · 下方保留卡名与牌效</p></div><nav aria-label="费用方案"><button aria-pressed="true" data-option="a">A · 切角徽</button><button aria-pressed="false" data-option="b">B · 垂签</button><button aria-pressed="false" data-option="c">C · 圆章</button></nav></header>
+<section class="showcase" aria-label="三张卡牌样板">
+<article class="sample"><div class="card cicada"><div class="art"><img src="/assets/cards/martial-tt7-goldencicada.webp" alt="金蝉脱壳现有卡面：无与草替身"></div><div class="type"><span class="type-label"><span class="type-primary">武术</span><span class="type-secondary">侠客</span></span></div><div class="copy"><h2 class="name">金蝉脱壳</h2><p class="rules">消耗你的所有手牌，<br>并抽 <b>3</b> 张牌。</p></div><img class="frame" src="/css/card-frames/career/wu.svg" alt="无的现有职业外框"><span class="cost" aria-label="费用0">0</span></div><p class="caption">金蝉脱壳 / 零费<small>现有无职业框</small></p></article>
+<article class="sample"><div class="card iron"><div class="art"><img src="/assets/cards/martial-tt7-ironphalanx.webp" alt="铁甲阵现有卡面"></div><div class="type"><span class="type-label"><span class="type-primary">武术</span><span class="type-secondary">战士</span></span></div><div class="copy"><h2 class="name">铁甲阵</h2><p class="rules">你获得 <b>10</b> 点护甲；<br>将 <b>5</b> 张随机卡牌洗入你的牌库，<br>并使这些牌的费用均减少 <b>1</b> 点。</p></div><img class="frame" src="/css/card-frames/career/heixiang.svg" alt="黑像的现有职业外框"><span class="cost" aria-label="费用2">2</span></div><p class="caption">长文本 / 职业牌<small>复用黑像职业外框，检查多行容纳</small></p></article>
+<article class="sample"><div class="card token"><div class="art"><img src="/assets/cards/expedition-starters/fireball.webp" alt="火球现有卡面"></div><div class="type"><span class="type-label"><span class="type-primary">法术</span><span class="type-secondary">衍生</span></span></div><div class="copy"><h2 class="name">火球</h2><p class="rules">造成 <b>4</b> 点伤害（4′）。</p></div><img class="frame" src="/css/card-frames/rose/token.svg" alt="现有衍生牌蔷薇外框"><span class="cost" aria-label="费用2">2</span></div><p class="caption">极短文本 / 衍生牌<small>复用蔷薇外框，统一分区与留白</small></p></article>
+</section>
+<section class="notes" aria-label="费用栏与字体对比">
+<button class="cost-demo" data-option="a" aria-pressed="true"><h2>A / 切角徽 · Oxanium Bold</h2><div class="cost-values" aria-label="费用0、1、2、10"><span class="cost">0</span><span class="cost">1</span><span class="cost">2</span><span class="cost">10</span></div><p>推荐。收窄切角轮廓，方正数字，搭配现有框体。</p></button>
+<button class="cost-demo" data-option="b" aria-pressed="false"><h2>B / 垂签 · Rajdhani Bold</h2><div class="cost-values" aria-label="费用0、1、2、10"><span class="cost">0</span><span class="cost">1</span><span class="cost">2</span><span class="cost">10</span></div><p>更轻、更窄，数字修长，保留签条的纵向感。</p></button>
+<button class="cost-demo" data-option="c" aria-pressed="false"><h2>C / 圆章 · Oxanium Bold</h2><div class="cost-values" aria-label="费用0、1、2、10"><span class="cost">0</span><span class="cost">1</span><span class="cost">2</span><span class="cost">10</span></div><p>圆形轮廓，数字更集中，装饰保持简单。</p></button>
+</section>
+<footer><span>候选参考板 · 尚未接入游戏</span><span>2026.10.14 / FRIDAY</span></footer>
+</main>
+<script>
+document.querySelectorAll('button[data-option]').forEach(button=>button.addEventListener('click',()=>{document.getElementById('board').dataset.cost=button.dataset.option;document.querySelectorAll('button[data-option]').forEach(item=>item.setAttribute('aria-pressed',String(item.dataset.option===button.dataset.option)));}));
+</script>
+</html>

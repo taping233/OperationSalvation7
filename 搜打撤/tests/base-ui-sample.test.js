@@ -131,6 +131,10 @@ describe('base page and inventory return contracts', () => {
     const focus = new Map(); bindHubBrowse(document.getElementById('hubMain'), new Map(), focus);
     const query = document.querySelector('[data-warehouse-filter="query"]'); query.value = '乙'; query.dispatchEvent(new Event('input'));
     const source = document.querySelector('[data-name="乙"]'); source.focus(); source.click();
+    // 点卡仅选中浏览（2026-10-15 新契约）；特写经「查看详情」（warehousePick）以真实库存索引委派
+    expect(document.getElementById('cardZoom')).toBeNull();
+    expect(openCard).not.toHaveBeenCalled();
+    ui._acts.warehousePick(document.querySelector('[data-act="warehousePick"]').dataset);
     expect(openCard).toHaveBeenCalledWith(1, { from: source });
     expect(document.getElementById('cardZoom')._returnSource).toBe(source);
     expect(focus.get('stash/cards')?.browserKey).toBe('乙');

@@ -160,10 +160,24 @@ document.addEventListener('keydown', event => {
 export function nodeShell(o) {
   const bg = o.asset || NODE_BG[o.tone] || '';
   UI.showOverlay('', eventSceneHTML({ ...o, asset: bg, region: game.layerData?.[game.layerIdx]?.name, layer: game.layerIdx }), 'page');
-  if (o.tone === 'event') {
+  // 事件体系页（事件/入城/火堆/物资点）：左上退出键（IS7 事件整页语言，样式复用地图
+  // #topBtns 按钮族）——事件未消耗可原节点重进；入城页与「返回地图」同义（打开过即
+  // 解锁移动闸门，剩余卡保留在入口）；金币/攻击由 #resHud 经 CSS 提层常驻，不经页面重画。
+  if (['event', 'entry', 'fire', 'pickup'].includes(o.tone)) {
     const key = `${game.mapSeed}|${game.turn}|${game.layerIdx},${game.trackPos}|${o.title}|${bg}|${o.sub || ''}`;
-    const root = UI.el?.ovBody?.querySelector('.event-scene');
-    if (root) wireEventChoiceSelection(root, key);
+    if (o.tone === 'event') {
+      const root = UI.el?.ovBody?.querySelector('.event-scene');
+      if (root) wireEventChoiceSelection(root, key);
+    }
+    UI.act('eventExit', () => {
+      if (game.state !== 'modal') return;
+      const page = UI.el?.ovBody?.querySelector('.event-scene');
+      if (!page) return;
+      page._clearEventChoice?.();
+      setBagReturnHook(null);
+      UI.hideOverlay();
+      finishInstant();
+    });
   }
 }
 // 杀戮尖塔式选项条：主标题 + 后果说明（复用事件页 .evt-opt 样式）
@@ -180,7 +194,7 @@ export function consumeCurrentCell() { consumeCell(); }
 
 // 节点短过场沿原定时与跳过生命周期；斜切画面按地图、遭遇战或首脑选择。
 let transitionRequest = 0;
-export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', eyebrow = 'AREA ENTERED', title, detail = '', duration = 900, presentation = '' }) {
+export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', eyebrow = 'AREA ENTERED', title, detail = '', duration = 900, presentation = '', holdVisual = false }) {
   // 结束时必须恢复状态：战斗/节点流程下游会自行改状态，但「继续对局」路径
   // 过渡后无人收拾，曾导致 game.state 卡死在 modal、侧栏按钮永久禁用
   const prevState = game.state;
@@ -188,6 +202,7 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
   const request = ++transitionRequest;
   const isCurrent = () => currentContext() && request === transitionRequest;
   const cityCut = presentation === 'city-cut' && !reduceMotion();
+  let heldSurface = null;
   game.state = 'modal';
   const transition = new Promise(resolve => {
     let done = false;
@@ -200,7 +215,7 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
       if (!isCurrent()) { resolve(false); return; }
       // 过场只拥有自己挂载的画面；迟到回调不能关掉已打开的背包或新页面。
       if (surface && (!surface.isConnected || !UI.el.ovBody.contains(surface))) { resolve(false); return; }
-      UI.hideOverlay();
+      if (!holdVisual) UI.hideOverlay();
       // 战斗 modal 态（Battle.restore 置位）不得降级为 idle，否则战斗界面丢失且移动锁死
       game.state = (prevState === 'modal' && !game.battleActive) ? 'idle' : prevState;
       resolve(true);
@@ -215,7 +230,7 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
         watermark: battleEntry ? 'BATTLE' : 'FIELD',
         scene: battleEntry ? (eyebrow === 'BOSS CONTACT' ? 'boss' : 'battle') : 'field',
       });
-      UI.showOverlay('', `<div class="scene flow-transition city-run-transition sc-${escAttr(tone)}"
+      UI.showOverlay('', `<div class="scene flow-transition city-run-transition${holdVisual ? ' resume-hold' : ''} sc-${escAttr(tone)}"
         data-presentation="city-cut" data-act="flowContinue" role="group"
         aria-label="${escAttr(`${title || '进入区域'}。${detail}。点击跳过`)}"
         style="--city-run-duration:${turboMs(duration)}ms">
@@ -236,11 +251,23 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
       </div>`, 'scene');
     UI.act('flowContinue', finish);
     surface = UI.el.ovBody?.querySelector('.flow-transition');
+    heldSurface = surface;
     timer = setTimeout(finish, reduceMotion() ? 0 : turboMs(duration));
     UI.refresh(game);
   });
   // resolve 与消费者的 then/await 之间仍可能启动新过场；保留该次只读核验。
-  return Object.assign(transition, { isCurrent });
+  const ownsSurface = () => request === transitionRequest && heldSurface?.isConnected
+    && UI.el.ovBody.contains(heldSurface);
+  const release = async ({ immediate = false } = {}) => {
+    if (!holdVisual || !ownsSurface()) return;
+    if (!immediate && cityCut && !reduceMotion()) {
+      heldSurface.classList.add('resume-reveal');
+      await new Promise(resolve => setTimeout(resolve, 220));
+    }
+    // 恢复战斗/奖励/选角可能已经换页，只收起本次续局自己的过场。
+    if (ownsSurface()) UI.hideOverlay({ immediate: true });
+  };
+  return Object.assign(transition, { isCurrent, release });
 }
 
 export function enterNode(kind, done) {

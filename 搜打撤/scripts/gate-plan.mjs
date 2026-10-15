@@ -71,7 +71,7 @@ export const EXEMPT_SCRIPTS = new Set([
 ]);
 export const SCRIPT_CONTRACT_TEST = 'tests/scripts-contract.test.js';
 // Changes to checks themselves must not silently skip the checks they control.
-export function isQualityConfigPath(p) {
+function isQualityConfigPath(p) {
   return /^(?:eslint|vitest|vite|jsconfig|tsconfig)(?:\.[^/]+)?\.(?:js|mjs|cjs|json)$/.test(p)
     || p === '.githooks/pre-commit';
 }

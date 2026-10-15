@@ -3,7 +3,6 @@
 /* Full ally portraits keep the existing slots, names and target behaviour. */
 body[data-ui-cover-context='ordinary'] #overlay .card.battle .sts-hand .hs-card {
   width: 10em !important;
-  height: 14em !important;
   font-size: 14px !important;
 }
 body[data-ui-cover-context='ordinary'] #overlay .card.discover:has([data-act='btDiscover'], [data-act='btPickHand']) {

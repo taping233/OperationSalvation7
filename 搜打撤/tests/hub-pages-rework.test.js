@@ -56,7 +56,12 @@ async function mount() {
   return { feature, pages, openCard };
 }
 const search = value => { const input = document.querySelector('[data-warehouse-filter="query"]'); input.value = value; input.dispatchEvent(new Event('input')); return input; };
-const open = name => { const source = document.querySelector(`[data-name="${name}"]`); source.focus(); source.click(); return source; };
+const open = name => {
+  const source = document.querySelector(`[data-name="${name}"]`); source.focus(); source.click();
+  // 2026-10-15 老板指令新契约：点卡仅选中浏览，特写收进「查看详情」（warehousePick）入口。
+  ui._acts.warehousePick(document.querySelector('.warehouse-selection-v12 [data-act="warehousePick"]').dataset);
+  return source;
+};
 const footer = action => document.querySelector(`#cardZoom .cz-foot [data-act="${action}"]`);
 const tick = async () => { await Promise.resolve(); await Promise.resolve(); };
 
@@ -90,7 +95,14 @@ describe('仓库双排浏览与原特写事务边界', () => {
   it('筛选后的卡牌以真实库存索引和来源委派特写，浏览不执行出售', async () => {
     const { openCard } = await mount(); const before = JSON.stringify(base.data); search('乙');
     expect(document.querySelector('[data-name="甲"]').hidden).toBe(true);
-    const from = open('乙');
+    const source = document.querySelector('[data-name="乙"]'); source.focus(); source.click();
+    // 点卡只选中浏览：不直接开特写，「当前浏览」面板给出待查看的堆
+    expect(document.getElementById('cardZoom')).toBeNull();
+    expect(openCard).not.toHaveBeenCalled();
+    expect(document.querySelector('.warehouse-selection-v12').textContent).toContain('乙');
+    expect(JSON.stringify(base.data)).toBe(before);
+    const from = source;
+    ui._acts.warehousePick(document.querySelector('.warehouse-selection-v12 [data-act="warehousePick"]').dataset);
     expect(openCard).toHaveBeenCalledWith(1, { from });
     expect(ui.showCardZoom).toHaveBeenLastCalledWith(rare, expect.objectContaining({ from, returnFocus: from }));
     expect(JSON.stringify(base.data)).toBe(before);

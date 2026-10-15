@@ -107,19 +107,21 @@ export const overlayMethods = {
     // 战斗内反复 render（同模式）不重播，避免每出一张卡就闪一次
     // 2026-09-12 留言 #33：page 页之间的返回/前进导航也重播入场动画（battle/bag 等高频重绘模式除外）
     card.classList.toggle('hub-refresh', refreshHub);
-    if (wasOpen && !refreshHub && (this._lastMode !== mode || mode === 'page')) {
+    if (!document.body.classList.contains('interface-motion') && wasOpen && !refreshHub && (this._lastMode !== mode || mode === 'page')) {
       card.classList.remove('swap');
       void card.offsetWidth;
       card.classList.add('swap');
     }
-    else if (refreshHub) card.classList.remove('swap');
+    else if (refreshHub || document.body.classList.contains('interface-motion')) card.classList.remove('swap');
     const prevMode = this._lastMode;
     this._lastMode = mode;
     this.el.overlay.hidden = false;
     // 右上角 × 显隐：只有能被取消类入口安全关闭的浮层才显示（必选流程/战斗页自动隐藏）。
     // 卡牌库整页头部自带关闭钮（photo-studio v3 的 pg-close），全局 × 与它并排重复
     // （2026-09-20 老板：卡牌库有两个退出键）——该页隐藏全局 ×，Esc 仍走页内钮关闭
-    if (this.el.ovCloseX) this.el.ovCloseX.hidden = !this._canCancelOverlay() || !!this.el.ovBody.querySelector('.card-library-page, .shop-market, .shop-exchange, .reward-replica, .event-scene');
+    // （2026-09-20 老板：卡牌库有两个退出键）——该页隐藏全局 ×，Esc 仍走页内钮关闭
+    // 背包页同理（2026-10-15 老板：退出键复用 archive-back 放左上，多余的退出键删除）
+    if (this.el.ovCloseX) this.el.ovCloseX.hidden = !this._canCancelOverlay() || !!this.el.ovBody.querySelector('.card-library-page, .shop-market, .shop-exchange, .reward-replica, .event-scene, .bag-view');
     this._isolateOverlayBackground();
     // 全屏覆盖型页面（卡牌库/整备整页/战斗房间/宝箱）：被盖住的主页动画一律暂停
     // （2026-09-07 老板：动画不出现在画面中就暂停，回到页面再恢复）。
@@ -140,7 +142,7 @@ export const overlayMethods = {
     // 走纯 CSS（motion-transitions.css），WAAPI（y18px）仅标准弹层。
     // 主控 10-04 复核处置：glass 模式整体按确认小窗档（hub 材料/仓库确认窗
     // 同为 mode'glass' 而 markup 无 .glass-panel 锚点，按模式判定防漏）。
-    if ((!wasOpen || prevMode !== mode) && SDT.Motion && mode !== 'page' && mode !== 'bagpage' && mode !== 'glass' &&
+    if (!document.body.classList.contains('interface-motion') && (!wasOpen || prevMode !== mode) && SDT.Motion && mode !== 'page' && mode !== 'bagpage' && mode !== 'glass' &&
         !(mode === 'discover' || card.querySelector('.bt-settings, .bt-gy-list, .glass-panel, [data-act="leaveSave"]'))) SDT.Motion.overlayIn(card);
     // 开窗音效判定与文末场景音取景共用这一次查询（两者间无 DOM 增删，结果一致）
     const soundScene = this.el.ovBody.querySelector('.node-pg, .flow-transition');
@@ -170,17 +172,23 @@ export const overlayMethods = {
   _bgReady: null,
   _checkPageBg() {
     this._cancelPageBg?.();
+    this._pageBgReady = Promise.resolve();
     const host = this.el.ovBody.querySelector('[data-asset-key]');
     if (!host) return;
+    // Photo IMG loading is owned by the card-art queue, not a CSS background.
+    if (host.tagName === 'IMG' && host.closest('.photo-studio-v3')) return;
     const m = /url\("?([^")]+)"?\)/.exec(getComputedStyle(host).backgroundImage || '');
     if (!m) return;
     const url = m[1];
     if (this._bgReady && this._bgReady.has(url)) return;
     if (!this._bgReady) this._bgReady = new Set();
     const probe = new Image();
+    let resolveReady;
+    this._pageBgReady = new Promise(resolve => { resolveReady = resolve; });
     let active = true;
     let timeout;
     const cancel = () => {
+      resolveReady(false);
       active = false;
       clearTimeout(timeout);
       probe.onload = null;
@@ -192,6 +200,7 @@ export const overlayMethods = {
     const finish = success => {
       if (!active) return;
       if (success) this._bgReady.add(url);
+      resolveReady(success);
       cancel();
     };
     probe.onload = () => {

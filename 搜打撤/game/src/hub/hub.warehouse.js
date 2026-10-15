@@ -67,7 +67,6 @@ export function warehouseHTML(view = 'cards') {
     <div class="warehouse-workspace-v12"><section class="warehouse-inventory-v12"><section class="card-browser" data-card-browser="${pocket ? 'warehouse-pocket' : 'warehouse'}" aria-label="${pocket ? '待复原卡牌' : '战利品卡牌'}"><div class="card-browser-track" tabindex="0" aria-label="向下滚动浏览卡牌">${itemsHTML(base, cards, pocket)}</div></section>
     <div class="warehouse-no-results"${rows.length ? ' hidden' : ''}>${emptyWarehouseHTML(base, pocket)}</div></section><aside class="warehouse-selection-v12" aria-label="当前浏览卡牌">${warehouseSelectionHTML(rows)}</aside></div></div>`;
 }
-export function pocketWarehouseHTML() { return warehouseHTML('pocket'); }
 export function bindWarehouse({ ui, base, sound, openCard }) {
   const root = document.querySelector('.warehouse-v3');
   if (!root) return;
@@ -100,6 +99,15 @@ export function bindWarehouse({ ui, base, sound, openCard }) {
     const purpose = root.querySelector('.warehouse-purpose');
     if (purpose) purpose.hidden = !state.character;
   };
+  // 2026-10-15 老板指令：仓库点卡只选中浏览，不再直接弹大卡特写；放大收进「查看详情」按钮，
+  // 特写页脚的卖出/收藏/使用/孵化/拆包与待复原「复原」入口全部保留。
+  const select = (key) => {
+    if (!currentWarehouse()) return;
+    const list = pocket ? base.data.pocket : base.data.stash;
+    const candidates = list.filter(stack => inventoryKeyOf(stack) === key);
+    if (candidates.length !== 1) return;
+    state.key = key; update(); sound.tick();
+  };
   const open = (key, from) => {
     if (!currentWarehouse()) return;
     const list = pocket ? base.data.pocket : base.data.stash;
@@ -116,7 +124,7 @@ export function bindWarehouse({ ui, base, sound, openCard }) {
   };
   browser.addEventListener('click', event => {
     const item = event.target.closest('[data-browser-key]');
-    if (item && browser.contains(item) && !item.hidden) open(item.dataset.browserKey, item);
+    if (item && browser.contains(item) && !item.hidden) select(item.dataset.browserKey);
   });
   browser.querySelector('.card-browser-track').addEventListener('scroll', event => { if (currentWarehouse()) state.scrollTop = event.target.scrollTop; }, { passive:true });
   browser.addEventListener('load', () => { if (currentWarehouse()) refreshWarehouseBrowser(browser); }, true);

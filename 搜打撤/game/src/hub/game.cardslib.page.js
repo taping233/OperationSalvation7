@@ -502,7 +502,6 @@ function syncLibTileIntrinsicSize(grid) {
   const tile = grid.querySelector('.lib-item .lib-cardwrap')?.parentElement;
   const h = tile?.offsetHeight || 0;
   if (h > 0) grid.style.setProperty('--lib-tile-h', `${h}px`);
-  syncStudioTabMarker();
 }
 
 // 照片定位（键盘方向键 / 选片台翻看）：直接把目标壳滚入视野，
@@ -653,6 +652,10 @@ function bindLibGridNavigation() {
 function renderLibGrid({ reason = 'filter', direction = 0, reset = false } = {}) {
   if (!cardPageOpen || !isCurrentLibPage()) return;
   rememberLibBrowse();
+  // Capture the existing grid before DOM/style changes; category changes keep its width.
+  const grid = document.getElementById('libGrid');
+  const gridWidth = grid?.clientWidth;
+  if (grid) libMotion.leaveGrid(grid, { reason, direction });
   clearTimeout(libSearchTimer);
   libSearchTimer = null;
   if (libPreviewTimer) clearTimeout(libPreviewTimer);
@@ -672,16 +675,8 @@ function renderLibGrid({ reason = 'filter', direction = 0, reset = false } = {})
     // 全量时隐藏「陈列」组（09-23 计数语义：馆藏=总量，陈列只在筛选分家后有意义）
     const showWrap = resultCount.closest('.lib-show');
     if (showWrap) showWrap.hidden = (n === libCards.length);
-    // 数量真的变了才播脉冲（重绘时数字没变就别闪）
-    const changed = resultCount.textContent !== String(n);
     resultCount.textContent = n;
-      if (changed) {
-      resultCount.classList.remove('bump');
-      void resultCount.offsetWidth;
-      resultCount.classList.add('bump');
-    }
   }
-  const grid = document.getElementById('libGrid');
   if (grid) {
     clearTimeout(libHoloTimer);
     libHoloTimer = null;
@@ -689,9 +684,8 @@ function renderLibGrid({ reason = 'filter', direction = 0, reset = false } = {})
     grid.classList.toggle('is-empty', !filtered.length);
     resetLibArtWarmup();
     // （函数首行已 stopLibTileObserver，此处无重建语句，重复调用必为空操作——2026-10-02 审计 A 档删）
-    libMotion.leaveGrid(grid, { reason, direction });
     grid.innerHTML = libGridContentsHTML(filtered);
-    replayStudioMotion(grid, { reason, direction });
+    replayStudioMotion(grid, { reason, direction, width: gridWidth });
     // 上下滚动模式（09-24）：筛选重绘后回顶，否则沿用旧滚动位置会从半截行开始看
     grid.scrollTop = 0;
     rebuildLibNodeMap(grid);

@@ -69,8 +69,8 @@ describe('庭院独立页生命周期', () => {
   });
   it('声音只由手动打开；暂停挂起，离开停止音源并关闭上下文', async () => {
     const source = { connect: vi.fn(), start: vi.fn(), stop: vi.fn(), disconnect: vi.fn() };
-    const filter = { type: '', frequency: { value: 0 }, connect: vi.fn() };
-    const gain = { gain: { value: 0 }, connect: vi.fn() };
+    const filter = { type: '', frequency: { value: 0 }, connect: vi.fn(), disconnect: vi.fn() };
+    const gain = { gain: { value: 0 }, connect: vi.fn(), disconnect: vi.fn() };
     const audio = {
       sampleRate: 100, destination: {}, createBuffer: vi.fn(() => ({ getChannelData: () => new Float32Array(200) })),
       createBufferSource: () => source, createBiquadFilter: () => filter, createGain: () => gain,
@@ -81,10 +81,16 @@ describe('庭院独立页生命周期', () => {
     expect(window.AudioContext).not.toHaveBeenCalled();
     root.querySelector('[data-courtyard-control="sound"]').click();
     expect(source.start).toHaveBeenCalledTimes(1); expect(audio.resume).toHaveBeenCalled();
+    expect(gain.gain.value).toBe(.035); expect(filter.frequency.value).toBe(1100);
+    root.querySelector('[data-courtyard-control="interact"]').click();
+    expect(gain.gain.value).toBe(.095); expect(filter.frequency.value).toBe(2200);
+    root.querySelector('[data-courtyard-control="interact"]').click();
+    expect(gain.gain.value).toBe(.035); expect(source.start).toHaveBeenCalledTimes(1);
     expect(root.querySelector('[data-courtyard-control="sound"]').getAttribute('aria-pressed')).toBe('true');
     root.querySelector('[data-courtyard-control="pause"]').click(); expect(audio.suspend).toHaveBeenCalled();
     root.querySelector('[data-courtyard-control="rain"]').click();
     expect(source.stop).toHaveBeenCalledTimes(1); expect(source.disconnect).toHaveBeenCalled();
+    expect(gain.disconnect).toHaveBeenCalledOnce(); expect(filter.disconnect).toHaveBeenCalledOnce();
     expect(audio.close).toHaveBeenCalledTimes(1);
     root.querySelector('[data-courtyard-control="rain"]').click();
     expect(source.start).toHaveBeenCalledTimes(1);

@@ -1,0 +1,13 @@
+/* A short shared veil conceals incomplete layout/images, without rebuilding old page DOM. */
+.page-visual-handoff { position:fixed; inset:0; z-index:980; background:#10171b; pointer-events:auto; opacity:1; transition:opacity 160ms ease-out; }
+.page-visual-handoff.leaving { opacity:0; pointer-events:none; }
+.page-visual-return { animation:pageVisualCover 120ms ease-out both; }
+.page-visual-return.leaving { animation:none; }
+@keyframes pageVisualCover { from { opacity:0; } to { opacity:1; } }
+.camp-entry-cut.page-cut-waiting,
+.camp-entry-cut.page-cut-waiting * { animation-play-state:paused!important; }
+#overlay[data-camp-entry="preparing"] #hubMain *,
+#overlay[data-camp-entry="preparing"] .camp-entry-ghost,
+#overlay[data-camp-entry="preparing"] > .card::after { animation-play-state:paused!important; }
+.reduce-motion .page-visual-handoff { transition:none; }
+@media (prefers-reduced-motion:reduce) { .page-visual-handoff { transition:none; } }

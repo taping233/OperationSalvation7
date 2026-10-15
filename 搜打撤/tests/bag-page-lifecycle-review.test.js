@@ -75,18 +75,18 @@ describe('背包旧详情/页面回调与正常返回', () => {
 });
 describe('背包pointer拖动取消/会话身份', () => {
   it('pointercancel释放全部浮影，随后pointerup不会落账', () => {
-    startDrag(); vi.spyOn(document, 'elementFromPoint').mockReturnValue(document.querySelector('.safe-slot') || document.querySelector('.safe-grid .bag-slot'));
+    startDrag(); vi.spyOn(document, 'elementFromPoint').mockReturnValue(document.querySelector('.bag-rz[data-zone="safe"]'));
     pointer('pointercancel', window); pointer('pointerup', window);
     expect(H.game.ownedCards.some(item => item.safe)).toBe(false); expect(H.save).not.toHaveBeenCalled(); expect(document.querySelector('.bag-ghost')).toBeNull(); expect(drag.bagDrag).toBeNull();
   });
   it('别的pointerup不结束当前拖动，原pointer正常落入安全格', () => {
-    startDrag(); vi.spyOn(document, 'elementFromPoint').mockReturnValue(document.querySelector('.safe-grid .bag-slot'));
+    startDrag(); vi.spyOn(document, 'elementFromPoint').mockReturnValue(document.querySelector('.bag-rz[data-zone="safe"]'));
     pointer('pointerup', window, 2); expect(drag.bagDrag).not.toBeNull(); pointer('pointerup', window, 1);
     expect(H.game.ownedCards.find(item => item.card.id === 'wood').safe).toBe(true);
   });
   it.each(['slot', 'owned-instance', 'same-seed-run', 'page'])('%s变化后拖动释放不改新会话', change => {
     startDrag(); if (change === 'slot') window.SDT.Base.slot = 2; if (change === 'owned-instance') H.game.ownedCards = structuredClone(H.game.ownedCards); if (change === 'same-seed-run') H.game.discoveredPairs = new Set(); if (change === 'page') ui.showOverlay('', '<div id="newPage">新页</div>');
-    vi.spyOn(document, 'elementFromPoint').mockReturnValue(document.querySelector('.safe-grid .bag-slot')); const before = JSON.stringify(H.game.ownedCards); pointer('pointerup', window);
+    vi.spyOn(document, 'elementFromPoint').mockReturnValue(document.querySelector('.bag-rz[data-zone="safe"]')); const before = JSON.stringify(H.game.ownedCards); pointer('pointerup', window);
     expect(JSON.stringify(H.game.ownedCards)).toBe(before); expect(H.save).not.toHaveBeenCalled(); if (change === 'page') expect(document.getElementById('newPage')).not.toBeNull();
   });
 });

@@ -100,11 +100,6 @@ export function presentHub(ui, html, icons) {
 function reducedMotion() {
   return document.body.classList.contains('reduce-motion') || !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 }
-export function animateReader(target) {
-  if (!target || reducedMotion() || !target.animate) return;
-  target.getAnimations?.().forEach(animation => animation.cancel());
-  linkedAnimate(target, [{ opacity: .4, transform: 'translateX(8px)' }, { opacity: 1, transform: 'none' }], { duration: motionTiming.feedback, easing: motionEasing.enter });
-}
 export function pulseNumber(target) {
   if (!target || reducedMotion() || !target.animate) return;
   target.getAnimations?.().forEach(animation => animation.cancel());
@@ -198,8 +193,7 @@ function updatePersonnelV12(page, next, reduced, before) {
       image.dataset.portraitFit = nextImage.dataset.portraitFit;
       image.src = source; image.alt = nextImage.alt;
       if (changedPerson && !reduced) {
-        const stage = hero.querySelector('.pv12-agent-image-stage');
-        if (!hero.hidden) animateBaseRefresh(stage);
+        if (!hero.hidden) linkedAnimate(image, [{ opacity: .7 }, { opacity: 1 }], { duration: 120, easing: motionEasing.enter });
       }
     };
     loading.onload = () => {
@@ -253,8 +247,8 @@ function updatePersonnelV12(page, next, reduced, before) {
   const content = data.querySelector('.pv12-data-content');
   if (sectionChanged || changedPerson) content.scrollTop = 0;
   const transition = sectionChanged ? navigationChange({ room: 'classes', view: before.view }, { room: 'classes', view: next.dataset.view }) : null;
-  if (!reduced && !catalog.hidden && (catalogChanged || sectionChanged || changedPerson)) animateBaseRefresh(catalog, 0, transition);
-  if (!reduced && (contentChanged || sectionChanged || changedPerson)) animateBaseRefresh(content, !catalog.hidden ? navigationTiming.stagger : 0, transition);
+  if (!reduced && !changedPerson && !catalog.hidden && (catalogChanged || sectionChanged)) animateBaseRefresh(catalog, 0, transition);
+  if (!reduced && !changedPerson && (contentChanged || sectionChanged)) animateBaseRefresh(content, !catalog.hidden ? navigationTiming.stagger : 0, transition);
   return true;
 }
 function updatePersonnel(page, next, reduced, before) {

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-retired-art-1014",
+  "date": "2026-10-14",
+  "owner": "Friday",
+  "goal": "复用冬城四层迁移预战入口，退役批准旧图并提供Git恢复字节，正常验证提交推送",
+  "paths": [
+    "game/assets",
+    "game/css/scenes.css",
+    "game/src/run",
+    "game/src/generated",
+    "tests/r7a-scenes-integration.test.js",
+    "docs/archive/retired-art-2026-10-14",
+    "docs/evidence/2026-10-14-WF-retired-art-1014",
+    "docs/PARALLEL-REGISTRY.md"
+  ],
+  "doneWhen": [
+    "批准旧图退出运行引用和清单，未跟踪旧稿先归档核对字节",
+    "相关检查和正常提交门通过，实页不可用时明确阻塞"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "源码退役正常full门362文件3128测试通过16跳过；17项定向通过；1da9f7db已推送且原master安全快进；四张旧稿归档哈希一致后移除；NAI四项及其余未跟踪文件保持",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "游戏实页缺图及最终像素受内置浏览器能力不可用阻塞；源码/构建检查不等同实页验收",
+    "构建编译通过但四项包体预算仍失败；更广审查优化及远端CI由父线程处理"
+  ],
+  "updatedAt": "2026-10-14T06:46:07.192Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

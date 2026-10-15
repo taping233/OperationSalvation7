@@ -8,6 +8,7 @@ afterEach(() => {
   document.body.replaceChildren();
   document.body.className = '';
   vi.useRealTimers();
+  vi.unstubAllGlobals();
   vi.restoreAllMocks();
 });
 
@@ -94,6 +95,8 @@ it('reduced motion keeps archive input available and emits no decorative landing
 
 it('cleans the old handoff before a second camp entry and leaves the new entry alive', async () => {
   vi.useFakeTimers();
+  vi.stubGlobal('requestAnimationFrame', fn => setTimeout(() => fn(performance.now()), 16));
+  vi.stubGlobal('cancelAnimationFrame', clearTimeout);
   const { overlay, body } = picker();
   body.querySelector('.slot-card').dataset.archivePicked = '1';
   const ghost = captureArchiveExit(body);
@@ -110,6 +113,8 @@ it('cleans the old handoff before a second camp entry and leaves the new entry a
   await vi.advanceTimersByTimeAsync(680);
   expect(overlay.dataset.campEntry).toBe('1');
   expect(body.querySelector('.page-in')).toBeNull();
-  await vi.advanceTimersByTimeAsync(300);
+  await vi.advanceTimersByTimeAsync(300);   // 新切幕先等视觉就绪再计时长，仍在原时长内保持
+  expect(overlay.dataset.campEntry).toBe('1');
+  await vi.advanceTimersByTimeAsync(700);   // 播满后才清理
   expect(overlay.dataset.campEntry).toBeUndefined();
 });

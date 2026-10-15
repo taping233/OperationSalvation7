@@ -6,7 +6,10 @@ import { renderScheduler } from './render-scheduler.js';
 import { NODE_INFO } from './node-info.js';
 import { isConsumedMapNode } from './map-node-state.js';
 import { createMapCityAtmosphere } from './map-city-atmosphere.js';
-import { drawMapNodeBadge, drawMapTraveller, mapViewportScale } from './map-node-art.js';
+import { drawMapNodeBadge, drawMapFogBadge, drawMapTraveller, mapViewportScale, prepareMapNodeArt } from './map-node-art.js';
+import { noteGlowPulse, glowPulse } from './map-node-glow.js';
+import { entrySupplyGate } from '../run/node-reward-state.js';
+import { mapImageReady } from './map-image-ready.js';
 import { getExpeditionPreview, findMapTravelPath, getMapTravelPresentation, mapTravelCurve, mapTravelPoint } from '../run/expedition.view.js';
 const SDT = window.SDT;
 
@@ -128,19 +131,29 @@ const SDT = window.SDT;
    * 结点几何缓存（连线 Path2D 确定性生成，同输入必得同一条线）
    * ============================================================ */
   let geo = null;
+  // 辉光呼吸窗口触发器：当前/可达集合变化时重开窗口（见 map-node-glow.js 的零绘制口径）
+  let lastGlowSig = '';
   function nodeGeo(game) {
     const geometryVersion = game.geometryVersion ?? game.layoutVersion ?? game.map?.geometryVersion ?? 0;
+    // 入城闸门参与缓存键：进入补给页解锁的瞬间，可达集合/可达边要立即重算（辉光同步亮起）。
+    const entryGate = entrySupplyGate(game);
     if (geo && geo.src === game.nodes && geo.layerIdx === game.layerIdx && geo.trackPos === game.trackPos &&
         geo.nodePos === game.nodePos && geo.layerData === game.layerData &&
-        geo.geometryVersion === geometryVersion) return geo;
+        geo.geometryVersion === geometryVersion && geo.entryGate === entryGate &&
+        geo.seenCount === (game.seen ? Object.keys(game.seen).length : 0)) return geo;
     // 当前层始终可见；中央祭坛/BOSS 作为终局锚点保留，便于祭坛引导线落点明确。
     // 战争迷雾（2026-09-09 老板）：只显示走过的节点（game.seen）与相邻可走节点；
     // seen 为空（旧档/基地）时保持全可见兼容。
+    // 迷雾剪影（2026-10-15 老板修订）：未揭示节点改为「黑色模糊+微光晕」渲染——结构可见、
+    // 类型未知、不带图形语义。剪影仅进渲染层，命中检测（pickNode 的 seen 过滤）与 run 域揭示逻辑不变。
     const seenMap = game.seen || null;
     const fogOn = !!(seenMap && Object.keys(seenMap).length);
     const seenOnLayer = (li, idx) => !fogOn || (li === game.layerIdx && seenMap[li + ',' + idx] === 1);
     const visible = game.nodes.filter(n => n.li === -1 || (n.li === game.layerIdx && seenOnLayer(n.li, n.idx)));
     const nodes = visible.map(n => ({ ...n, r: nodeRadius(n) }));
+    const fogNodes = fogOn ? game.nodes
+      .filter(n => n.li === game.layerIdx && !seenOnLayer(n.li, n.idx))
+      .map(n => ({ ...n, r: nodeRadius(n), fog: true })) : [];
     const byKey = new Map(nodes.map(n => [`${n.li},${n.idx}`, n]));
 
     // 轻微确定性弯曲，避免分支边重合；端点由调用方按节点半径裁剪。
@@ -182,7 +195,8 @@ const SDT = window.SDT;
     const edgeKeys = new Set();
     const current = game.layerData[game.layerIdx]?.logical[game.trackPos];
     const currentKey = `${game.layerIdx},${game.trackPos}`;
-    const legalKeys = new Set((current?.next || []).map(([li, idx]) => `${li},${idx}`));
+    // 闸门激活时无可达节点：不亮可达辉光、不描可达边，与点击/移动判定同源。
+    const legalKeys = new Set(entryGate ? [] : (current?.next || []).map(([li, idx]) => `${li},${idx}`));
     game.layerData.forEach((ld, li) => {
       if (li !== game.layerIdx) return;
       ld.logical.forEach((cell, i) => {
@@ -209,6 +223,35 @@ const SDT = window.SDT;
         }
       });
     });
+    // 未探明结构边：至少一端未揭示的同层边走极淡虚线，只表达「此处有路」，
+    // 不参与可达/规划高亮（drawLinks 里真实道路只画两端已知边）。
+    const fogLinks = new Path2D();
+    if (fogNodes.length) {
+      const knownKeys = new Set(nodes.map(n => `${n.li},${n.idx}`));
+      const stub = (li, idx) => {
+        const p = game.nodePos[li]?.[idx];
+        if (!p) return null;
+        return { ...p, r: nodeRadius({ li, def: game.layerData[li]?.logical[idx]?.def || {} }) };
+      };
+      const fogEdgeKeys = new Set();
+      game.layerData.forEach((ld, li) => {
+        if (li !== game.layerIdx) return;
+        ld.logical.forEach((cell, i) => {
+          for (const [toLi, toIdx] of (cell.next || [])) {
+            if (toLi !== li) continue;
+            const aKey = `${li},${i}`, bKey = `${toLi},${toIdx}`;
+            const edgeKey = [aKey, bKey].sort().join('|');
+            if (edgeKeys.has(edgeKey) || fogEdgeKeys.has(edgeKey)) continue;
+            if (knownKeys.has(aKey) && knownKeys.has(bKey)) continue;
+            fogEdgeKeys.add(edgeKey);
+            const a = stub(li, i), b = stub(toLi, toIdx);
+            if (!a || !b) continue;
+            const [pa, pb] = trimNodes(a, b);
+            fogLinks.addPath(hand(pa, pb, li * 57 + i * 13 + toLi * 3 + toIdx));
+          }
+        });
+      });
+    }
     const doorLinks = [];
     // 跨层出口不在当前层地图内绘制；玩家点击当前层的出口节点后切换地图。
     // 祭坛引导线（紫，第三环入口 → 中央祭坛）
@@ -233,7 +276,8 @@ const SDT = window.SDT;
       return { minX, maxX, minY, maxY };
     });
     geo = { src: game.nodes, layerIdx: game.layerIdx, trackPos: game.trackPos, nodePos: game.nodePos, layerData: game.layerData,
-      geometryVersion, nodes, legalLinks, legalKeys, linksByLayer, doorLinks, altarLinks, bounds, altarNode };
+      geometryVersion, entryGate, seenCount: game.seen ? Object.keys(game.seen).length : 0,
+      nodes, fogNodes, fogLinks, legalLinks, legalKeys, linksByLayer, doorLinks, altarLinks, bounds, altarNode };
     return geo;
   }
 
@@ -247,6 +291,7 @@ const SDT = window.SDT;
   }
   const mapKey=n=>`${n.li},${n.idx}`;
   const mapEdgeKey=(a,b)=>[mapKey(a),mapKey(b)].sort().join('|');
+  const hexA=(h,a)=>{const n=parseInt(h.slice(1),16);return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`;};
 
   // Artwork and type names remain small relative to the complete viewport.
   function drawIcons(ctx,game){
@@ -255,6 +300,19 @@ const SDT = window.SDT;
     const preview=travel?.path?.at(-1)||getExpeditionPreview(game)||game.moveTarget;
     const path=selectedMapPath(game),onPath=new Set(path.map(mapKey));
     const reduced=SDT.Motion?.reduceMotion?.()||false;
+    const glowSig=`${game.layerIdx},${game.trackPos}:${[...g.legalKeys].join(';')}`;
+    // 呼吸窗口只在活跃对局的站立态武装：被动重绘（resize 重烘焙/测试极简 mock）不触发，
+    // 也不占用渲染调度器的定时器口径（renderer-resource-lifecycle 断言空闲零计时器）。
+    if(glowSig!==lastGlowSig&&(game.runActive&&game.state==='idle')){lastGlowSig=glowSig;noteGlowPulse(game.time||0);}
+    // 迷雾剪影先画：叠在结构虚线上、真实节点之下；不可交互、无标签、不泄露类型。
+    for(const n of g.fogNodes){
+      const screen=game.cam.worldToScreen(n.x,n.y);
+      if(screen.y<58*unit||screen.y>game.cam.viewH-105*unit)continue;
+      const scale=unit*Math.min(1,Math.max(.35,z*.8))/z;
+      ctx.save();ctx.translate(n.x,n.y);ctx.scale(scale,scale);
+      drawMapFogBadge(ctx);
+      ctx.restore();
+    }
     for(const n of g.nodes){
       const key=mapKey(n),current=isCurrentNode(game,n),legal=g.legalKeys.has(key);
       const selected=preview?.li===n.li&&preview?.idx===n.idx;
@@ -275,6 +333,7 @@ const SDT = window.SDT;
         hovered:game.hover?.li===n.li&&game.hover?.idx===n.idx,
         note:game.noteMap?.has(`${game.map?.boardId}|${key}`),
         showLabel:current||selected||(type!=='blank'&&!routed&&(legal?z>=.65:z>=.85)),
+        time:game.time||0,pulse:glowPulse(game.time||0),
       });
       ctx.restore();
     }
@@ -340,17 +399,39 @@ const SDT = window.SDT;
     for(let i=1;i<path.length;i++)planned.set(mapEdgeKey(path[i-1],path[i]),mapKey(path[i-1]));
     const travel=getMapTravelPresentation(game),moving=travel?.phase==='moving';
     ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
+    // 迷雾结构边：连续发丝线（10-15 老板：虚线点显噪），只表达「此处有路」。
+    if(g.fogLinks){
+      ctx.globalAlpha=1;ctx.strokeStyle='rgba(150,178,190,.13)';ctx.lineWidth=1.1*unit/z;
+      ctx.stroke(g.fogLinks);
+    }
     for(const road of cached.roads){
-      const chosen=planned.has(road.edgeKey),color=chosen?'#79c9c4':road.legal?'#c7d1ca':'#738180';
-      ctx.globalAlpha=chosen?(moving?.18:.40):road.legal?.30:.17;
+      const chosen=planned.has(road.edgeKey),legal=road.legal;
+      const color=chosen?'#79c9c4':legal?'#c7d1ca':'#b9c8c2';
+      if(chosen||legal){
+        // 可达/选中边的双层宽晕垫底：外扩辉光+主晕，发光轨道质感，不引 shadowBlur。
+        ctx.strokeStyle=color;
+        if(chosen){ctx.globalAlpha=.07;ctx.lineWidth=16*unit/z;ctx.stroke(road.path);}
+        ctx.globalAlpha=chosen?.15:.11;ctx.lineWidth=(chosen?9:8)*unit/z;ctx.stroke(road.path);
+      }
+      ctx.globalAlpha=chosen?(moving?.18:.40):legal?.30:.22;
       ctx.strokeStyle='#526361';ctx.lineWidth=6*unit/z;ctx.stroke(road.path);
-      ctx.globalAlpha=chosen?(moving?.24:.82):road.legal?.67:.28;
-      ctx.strokeStyle=color;ctx.lineWidth=(chosen||road.legal?1.8:1)*unit/z;ctx.stroke(road.path);
+      // 亮芯：沿路渐变，光向目的地汇聚（10-15 老板：路径太简单）。
+      const s=road.section;
+      const grad=ctx.createLinearGradient(s.from.x,s.from.y,s.to.x,s.to.y);
+      const stops=chosen?[.4,.7,1]:legal?[.35,.62,.92]:[.16,.42,.68];
+      grad.addColorStop(0,hexA(color,stops[0]));grad.addColorStop(.6,hexA(color,stops[1]));grad.addColorStop(1,hexA(color,stops[2]));
+      ctx.globalAlpha=chosen?(moving?.3:.88):1;
+      ctx.strokeStyle=grad;ctx.lineWidth=(chosen?3.4:legal?3:2.4)*unit/z;ctx.stroke(road.path);
+      if(chosen||legal){
+        // 活跃路线细密点划叠芯：能量节奏（静态纹理，不占空闲绘制）。
+        ctx.save();ctx.globalAlpha=(chosen?.5:.32)*(moving?.4:1);ctx.strokeStyle='#e8f4f0';ctx.lineWidth=1.2*unit/z;
+        ctx.setLineDash([2,6]);ctx.stroke(road.path);ctx.setLineDash([]);ctx.restore();
+      }
       if(chosen||road.legal){
         const forward=chosen?planned.get(road.edgeKey)===road.fromKey:road.fromKey===`${game.layerIdx},${game.trackPos}`;
         const c=road.section,tip=forward?c.to:c.from,control=forward?c.c2:c.c1;
         ctx.save();ctx.translate(tip.x,tip.y);ctx.rotate(Math.atan2(tip.y-control.y,tip.x-control.x));ctx.scale(unit/z,unit/z);
-        ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(-12,-3.5);ctx.lineTo(-9,0);ctx.lineTo(-12,3.5);ctx.closePath();ctx.fill();ctx.restore();
+        ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(-15,-4.4);ctx.lineTo(-11,0);ctx.lineTo(-15,4.4);ctx.closePath();ctx.fill();ctx.restore();
       }
     }
     if(travel?.path?.length){
@@ -362,7 +443,7 @@ const SDT = window.SDT;
         const forward=mapKey(a)===road.fromKey;
         const start=forward?road.start:Math.max(road.start,1-progress),end=forward?Math.min(road.end,progress):road.end;
         if(end<=start)continue;
-        ctx.globalAlpha=.88;ctx.strokeStyle='#9bdad0';ctx.lineWidth=2.2*unit/z;
+        ctx.globalAlpha=.88;ctx.strokeStyle='#9bdad0';ctx.lineWidth=3*unit/z;
         ctx.stroke(mapCurvePath(mapCurveSection(road.curve,start,end)));
       }
     }
@@ -383,7 +464,7 @@ const SDT = window.SDT;
     ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
     ctx.fillStyle = 'rgba(255,255,255,0.6)';
     for (const n of g.nodes) {
-      if (n.li !== game.layerIdx || n.li < 0) continue;
+      if (n.li !== game.layerIdx || n.li < 0 || n.fog) continue;
       ctx.globalAlpha = isCurrentNode(game, n) ? 0.85 : 0.18;
       ctx.fillText(String(n.idx), n.x, n.y - n.r - 4);
     }
@@ -452,5 +533,24 @@ const SDT = window.SDT;
     mapAtmosphere.onload = null;
   }
 
-  SDT.Renderer = { draw, dispose };
+  function warm() {
+    return Promise.all([mapImageReady(mapAtmosphere), drawMapCityAtmosphere.ready(), prepareMapNodeArt()]);
+  }
+
+  async function prepare(game, isCurrent = () => true) {
+    await warm();
+    if (rendererDisposed || !isCurrent()) return false;
+    // 续局初帧不复用上一局的壁纸/尺寸防抖，也不播旧层交叉溶解。
+    clearBackdropResize();
+    if (backdropFadeFrame) cancelAnimationFrame(backdropFadeFrame);
+    backdropFadeFrame = 0; backdropFadeDriving = false;
+    backdropCanvas = null; backdropFade.snap = null;
+    const canvas = document.getElementById('game');
+    const ctx = canvas?.getContext('2d');
+    if (!ctx || !game.cam || !game.nodes?.length) return false;
+    draw(ctx, game);
+    return true;
+  }
+
+  SDT.Renderer = { draw, dispose, warm, prepare };
   if (import.meta.hot) import.meta.hot.dispose(dispose);

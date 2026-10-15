@@ -11,24 +11,26 @@ import { Random } from '../core/random.js';
 import { eventNarrative, lastLampNarrative } from '../home/narrative.js';
 import { makeLastLampEventInstanceId } from '../home/story.last-lamp.js';
 import { RunStorage } from '../hub/game.storage.js';
+import { bagSlots } from '../hub/game.bag.bridge.js';
 import { storyCommands } from '../home/story.commands.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
 import { captureBattleContext, startBattle } from '../battle/battle-loader.js';
 import { isTurbo } from '../core/turbo.js';
 import { renderScheduler } from '../core/render-scheduler.js';
-import { findMapTravelPath, mapTravelPoint, setMapTravelPresentation } from './map-travel-path.js';
-import { buildEncounter, cancelLegacyChainMove, consumeCell, consumeCurrentCell, enterNode, finishInstant, grantEventCard, nodeOpt, nodeShell, openBattleCell, openBlankSafePage, openChestsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene } from './game.run.scenes.js';
+import { findMapTravelPath, setMapTravelPresentation } from './map-travel-path.js';
+import { createTravelMotion, createArrivalFeedback } from './map-travel-motion.js';
+import { cancelLegacyChainMove, consumeCell, consumeCurrentCell, enterNode, finishInstant, grantEventCard, nodeOpt, nodeShell, openBattleCell, openChestsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene } from './game.run.scenes.js';
 import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergencyModal, openEntrySupply } from './game.run.altar.js';
-import { claimResourceReward, entrySupplyAt, nodeActionBinding, resourceRewardAt } from './node-reward-state.js';
+import { claimResourceReward, entrySupplyAt, entrySupplyGate, nodeActionBinding, resourceRewardAt } from './node-reward-state.js';
 import { rewardExitHTML, rewardSceneHTML } from '../ui/reward-scene-view.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 
-// 一次路线持有移动锁；逐格动画抵达后才提交稳定位置、回合与存档，终点结算原内容。
+// 全路线共用移动时钟；穿过节点提交稳定位置与存档，终点反馈后结算原内容。
 let moveSeq = 0;
 let activeMove = null;
-const MOVE_DURATION = 220;
+const ARRIVAL_DURATION = 100;
 const moveUsesReducedMotion = () => {
   try { return localStorage.getItem('sdt-reduce-motion') === '1' || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches; }
   catch { return false; }
@@ -36,116 +38,133 @@ const moveUsesReducedMotion = () => {
 export function moveTo(toLi, toIdx) {
   if (activeMove && game.state !== 'moving') activeMove.cancel?.();
   if (game.state !== 'idle' || activeMove) return false;
+  if (entrySupplyGate(game)) { UI.log('[[icon:door]] 先进入脚下的入城节点，再前往其他地点', 'warn'); return false; }
   const path = findMapTravelPath(game, { li: toLi, idx: toIdx });
   if (!path?.length) return false;
-  game.geometryVersion = game.geometryVersion || `${String(game.mapSeed)}:${game.layoutVersion || 0}`;
+  game.geometryVersion = game.geometryVersion || String(game.mapSeed) + ':' + (game.layoutVersion || 0);
   const map = game.layerData, geometry = game.geometryVersion, runActive = game.runActive;
   const route = [{ li: game.layerIdx, idx: game.trackPos }, ...path].map(n => ({ ...n, ...cellCenter(n.li, n.idx) }));
   if (route.some(n => !Number.isFinite(n.x) || !Number.isFinite(n.y))) return false;
-  const seq = ++moveSeq;
-  activeMove = { seq };
+  const seq = ++moveSeq, reduced = moveUsesReducedMotion() || isTurbo();
+  const motion = createTravelMotion(route, game.cam?.zoom || 1);
+  const camera = game.cam, cameraMotion = camera?.beginTravel?.();
   const presentation = { path: route, segmentIndex: 1, progress: 0, phase: 'moving' };
   setMapTravelPresentation(game, presentation);
-  const step = (segmentIndex) => {
-  const current = curLayer()?.logical[game.trackPos];
-  const { li: toLi, idx: toIdx } = path[segmentIndex];
-  const fromLi = game.layerIdx, fromIdx = game.trackPos;
-  const from = cellCenter(fromLi, fromIdx);
-  const to = cellCenter(toLi, toIdx);
-  if (!from || !to) return false;
-  // 玩家确认路线时才预取目标房间；移动动画提供约 220ms 的网络/解码窗口。
-  preloadCellScene(game.layerData?.[toLi], toIdx);
-
-  const startedAt = typeof performance !== 'undefined' && performance.now ? performance.now() : Date.now();
-  let done = false;
-  let watchdog = null;
+  let committed = 0, done = false, watchdog = null, arrival = null, feedback = null;
+  const clock = () => performance.now();
+  const startedAt = clock();
+  let previousAt = startedAt;
   const frame = typeof requestAnimationFrame === 'function'
-    ? requestAnimationFrame
-    : (cb) => setTimeout(() => cb(Date.now()), 16);
-  const isCurrent = () => {
-    if (done || !activeMove || activeMove.seq !== seq) return false;
-    if (game.state === 'moving' && game.layerData === map && game.geometryVersion === geometry &&
-        game.runActive === runActive && game.layerIdx === fromLi && game.trackPos === fromIdx) return true;
-    done = true;
+    ? requestAnimationFrame : cb => setTimeout(() => cb(clock()), 16);
+  const cleanup = () => {
     if (watchdog != null) clearTimeout(watchdog);
+    if (arrival != null) clearTimeout(arrival);
+    feedback?.dispose();
+    feedback = null;
+  };
+  const isCurrent = () => {
+    if (done || activeMove?.seq !== seq) return false;
+    const stable = route[committed];
+    if (game.state === 'moving' && game.layerData === map && game.geometryVersion === geometry &&
+        game.runActive === runActive && game.layerIdx === stable.li && game.trackPos === stable.idx) return true;
+    done = true;
+    cleanup();
     activeMove = null;
     setMapTravelPresentation(game, null);
-    if (game.layerData === map && game.layerIdx === fromLi && game.trackPos === fromIdx) game.pos = { ...from };
+    if (game.layerData === map && game.layerIdx === stable.li && game.trackPos === stable.idx) game.pos = { x: stable.x, y: stable.y };
+    if (camera?.frameMode === 'travel') camera.frameMode = cameraMotion?.mode || 'routes';
     game.moveTarget = null;
     if (game.state === 'moving') game.state = 'idle';
     UI.refresh(game);
     renderScheduler.invalidate();
     return false;
   };
-  const finish = () => {
-    if (!isCurrent()) return;
-    done = true;
-    if (watchdog != null) clearTimeout(watchdog);
-    game.pos = { ...to };
-    game.layerIdx = toLi;
-    game.trackPos = toIdx;
-    markSeen(toLi, toIdx);
-    // 2026-10-03 老板（SYS-01）：首次踏入的格写入 explored（撤离经验只统计首次有效探索量，
-    // 重复进出已探索格不再涨经验）；旧档会话无该字段（null）不补标，撤离结算走旧口径。
-    if (game.explored) game.explored[toLi + ',' + toIdx] = 1;
-    // 商店是唯一按「离开房间」消耗的节点；其余节点在奖励/事件实际结算完成时自行写入。
-    if (current?.def?.type === 'shop') consumeCell(fromLi, fromIdx);
-    // 到达取景走镜头补间（2026-09-27 动效补全：原为硬切瞬跳）；减动效/急速档直接贴合
-    if (game.cam?.frameMode === 'routes') game.cam.frameExploration(game, false, { glide: !moveUsesReducedMotion() && !isTurbo() });
-    game.hop = 0;
-    game.moveTarget = null;
+  const commitNode = () => {
+    const from = route[committed], to = route[++committed];
+    const current = game.layerData[from.li]?.logical[from.idx];
+    game.pos = { x: to.x, y: to.y };
+    game.layerIdx = to.li;
+    game.trackPos = to.idx;
+    markSeen(to.li, to.idx);
+    if (game.explored) game.explored[to.li + ',' + to.idx] = 1;
+    if (current?.def?.type === 'shop') consumeCell(from.li, from.idx);
     game.turn++;
-    game.activeLayerBounds = game.layerBounds?.[toLi] || null;
-    game.geometryVersion = game.geometryVersion || `${String(game.mapSeed)}:${game.layoutVersion || 0}`;
+    game.activeLayerBounds = game.layerBounds?.[to.li] || null;
     SDT.Meta.track('action');
-    if (segmentIndex + 1 < path.length) {
-      // Save only the arrived node; the active transaction still rejects reentrant input.
+    if (committed < path.length) {
+      // Persist only a stable node, while keeping the travel transaction locked.
       game.state = 'idle';
       saveGame();
       game.state = 'moving';
-      step(segmentIndex + 1);
-      return;
+      preloadCellScene(game.layerData?.[route[committed + 1].li], route[committed + 1].idx);
     }
+  };
+  const resolveArrival = () => {
+    if (!isCurrent()) return;
+    done = true;
+    cleanup();
     activeMove = null;
+    game.moveTarget = null;
+    game.hop = 0;
+    setMapTravelPresentation(game, null);
+    if (path.length > 1) UI.log('[[icon:exit]] 已沿路线抵达，共经过 ' + path.length + ' 格', 'dim');
+    resolveCell();
+    renderScheduler.invalidate();
+  };
+  const finish = () => {
+    if (!isCurrent() || presentation.phase === 'arrived') return;
+    while (committed < path.length) commitNode();
+    const target = route.at(-1);
+    game.pos = { x: target.x, y: target.y };
+    presentation.segmentIndex = path.length;
     presentation.progress = 1;
     presentation.phase = 'arrived';
-    if (moveUsesReducedMotion() || isTurbo()) setMapTravelPresentation(game, null);
-    else setTimeout(() => {
-      if (moveSeq === seq) {
-        setMapTravelPresentation(game, null);
-        UI.refresh(game);
-        renderScheduler.invalidate();
-      }
-    }, 280);
-    if (path.length > 1) UI.log(`[[icon:exit]] 已沿路线抵达，共经过 ${path.length} 格`, 'dim');
-    resolveCell();
-  };
-  const tick = (now) => {
-    if (!isCurrent()) return;
-    const duration = path.length > 1 ? 150 : MOVE_DURATION;
-    const t = Math.max(0, Math.min(1, ((now || Date.now()) - startedAt) / duration));
-    const eased = 1 - Math.pow(1 - t, 3);
-    game.pos = mapTravelPoint(from, to, eased);
-    game.moveTarget.progress = t;
-    presentation.progress = eased;
+    camera?.endTravel?.(cameraMotion, game, !reduced);
+    UI.refresh(game);
     renderScheduler.invalidate();
-    if (t >= 1) finish();
+    if (reduced) { resolveArrival(); return; }
+    const arrivedAt = clock();
+    feedback = createArrivalFeedback(game);
+    feedback.update(0);
+    const settle = now => {
+      if (!isCurrent()) return;
+      const progress = Math.min(1, (now - arrivedAt) / ARRIVAL_DURATION);
+      feedback?.update(progress);
+      renderScheduler.invalidate();
+      if (progress >= 1) resolveArrival();
+      else frame(settle);
+    };
+    arrival = setTimeout(resolveArrival, ARRIVAL_DURATION + 80);
+    frame(settle);
+  };
+  const tick = now => {
+    if (!isCurrent() || presentation.phase !== 'moving') return;
+    const time = Math.max(0, Math.min(1, (now - startedAt) / motion.duration));
+    const sample = motion.sample(time);
+    while (committed < path.length && motion.ends[committed] <= sample.distance) commitNode();
+    game.pos = sample.point;
+    presentation.segmentIndex = sample.segment;
+    presentation.progress = sample.progress;
+    const target = route[sample.segment];
+    Object.assign(game.moveTarget, { li: target.li, idx: target.idx, progress: sample.progress });
+    const ahead = motion.sample(Math.min(1, time + 65 / motion.duration)).point;
+    camera?.updateTravel?.(cameraMotion, sample.point, ahead, now - previousAt);
+    previousAt = now;
+    renderScheduler.invalidate();
+    if (time >= 1) finish();
     else frame(tick);
   };
-  activeMove = { seq, from: { li: fromLi, idx: fromIdx }, to: { li: toLi, idx: toIdx }, startedAt, cancel: isCurrent };
-  game.moveTarget = { li: toLi, idx: toIdx, seq, progress: 0, moving: true };
+  activeMove = { seq, cancel: isCurrent };
+  game.moveTarget = { li: path[0].li, idx: path[0].idx, seq, progress: 0, moving: true, cameraOwned: true };
   game.state = 'moving';
-  presentation.segmentIndex = segmentIndex + 1;
-  presentation.progress = 0;
+  game.pos = { x: route[0].x, y: route[0].y };
+  preloadCellScene(game.layerData?.[path[0].li], path[0].idx);
   UI.refresh(game);
   renderScheduler.invalidate();
-  game.pos = { ...from };
-  // rAF 在后台页可能被暂停；看门狗确保事务最终回到稳定节点。
-  watchdog = setTimeout(finish, MOVE_DURATION + 700);
-  if (moveUsesReducedMotion() || isTurbo()) finish();
+  // Background tabs can pause rAF; the fallback still resolves through stable nodes.
+  watchdog = setTimeout(() => { finish(); resolveArrival(); }, motion.duration + ARRIVAL_DURATION + 700);
+  if (reduced) finish();
   else frame(tick);
-  };
-  step(0);
   return true;
 }
 
@@ -182,7 +201,7 @@ function resolveCell() {
     UI.beginRoom(); openSafeNode();
     return;
   }
-  // 首脑格：编组/战斗前不锁定——放弃编组可再来；击败首脑由战斗收尾写 visited（bag.js）。
+  // 首脑格：击败首脑由战斗收尾写 visited（bag.js），祭坛未激活时可再来。
   // 击败后的巢穴不可再战（重打首脑会反复领传说保底），按 bossKilled 拦截而非 visited
   //（离开未击败的首脑格也会被 moveTo 写 visited，不能据此锁格）。
   if (def && def.type === 'boss' && game.bossKilled) {
@@ -195,11 +214,11 @@ function resolveCell() {
   UI.beginRoom();
   game.state = 'modal';
 
-  // 1) 战斗格：独立接敌页确认后直接进入战场，不重复播放接敌幕。
+  // 1) 战斗格：抵达后直接进入战场。
   if (def && def.type === 'battle') {
-    openNodeDecision({ tone:'battle', title:'接敌', sub:'前方传来敌人的动静。准备好随身卡牌，再决定是否交战。',
-      act:'nodeBattleEnter', label:'进入战斗', detail:'确认后进入本层遭遇战',
-      run:() => { const encounter = buildEncounter(game.layerIdx); openBattleCell(def, encounter); } });
+    setBagReturnHook(null);
+    UI.hideOverlay();
+    openBattleCell(def);
     return;
   }
 
@@ -227,7 +246,7 @@ function resolveCell() {
   if (def && (def.type === 'emergencyExit' || def.type === 'extraction')) { enterNode('emergencyExit', openEmergencyModal); return; }
   if (def && def.type === 'shop') { enterNode('shop', () => openShop('cell:' + game.layerIdx + ',' + game.trackPos)); return; }
 
-  // 4) 空白安全格（无任何事件）：给完整提示页（2026-09-06 留言）
+  // 4) 空白安全格（无任何事件）：直接收尾，留在地图。
   openSafeNode();
 }
 
@@ -273,7 +292,7 @@ function openResourcePick(done) {
     UI.showCardZoom(card, { hideNote:true, presentation:'expedition', footer:`<button class="ov-btn ok" data-act="resTake" data-i="${i}">收下</button>` });
   });
   UI.act('resTake', data => take(Number(data.i)));
-  UI.act('resBag', () => { if (active()) document.getElementById('bagBtnFloat')?.click(); });
+  UI.act('resBag', () => { if (active()) bagSlots.showBackpack(); });
   UI.act('resSkip', () => { if (!active()) return; setBagReturnHook(null); UI.hideOverlay(); done(false); });
 }
 
@@ -289,13 +308,12 @@ function openNodeDecision(spec) {
 }
 
 function openSafeNode() {
-  openBlankSafePage();
-  const active = nodeActionBinding(game, UI, 'blankSafeDone');
-  setBagReturnHook(openSafeNode);
-  UI.act('blankSafeDone', () => { if (!active()) return; setBagReturnHook(null); UI.hideOverlay(); finishInstant(); });
+  setBagReturnHook(null);
+  UI.hideOverlay();
+  finishInstant();
 }
 
-// 空白安全节点提示页：明确告诉玩家这格无事发生（背景图后续再补）
+// 即时效果节点按类型处理奖励或事件。
 function runInstant(def, after) {
   const done = after || finishInstant;
   switch (def.type) {

@@ -78,6 +78,7 @@ import '../../css/roster-reference.css';
     // 2026-09-07 留言：仓库卡牌不再自动塞进背包——全部留在左侧，由玩家自己拖
     let entry;
     const choice = requestClassChoice({
+      onPresented: () => { if (current()) enterDepartureCut(document.querySelector('#overlay .cls2-page')); },
       isCurrent: current,
       isConfirmationCurrent: () => current() && !!document.getElementById('depMain') && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing'),
       initialCharacter: deployCharacter,
@@ -122,7 +123,6 @@ import '../../css/roster-reference.css';
     departureEntry = entry;
     entry.promise = Promise.resolve(choice).then(opened => {
       if (opened === false || !current()) return false;
-      enterDepartureCut(document.querySelector('#overlay .cls2-page'));
       return true;
     }).finally(() => { if (departureEntry === entry) departureEntry = null; });
     return entry.promise;

@@ -9,12 +9,12 @@ import { SceneMusicPlayer } from './sound.music.player.js';
   SDT.Sound?.dispose?.();
   const soundEvents = new AbortController();
   let disposed = false;
-  let ctx = null, master = null, masterComp = null, sfxGain = null, clickGain = null, clickComp = null;
+  let ctx = null, master = null, masterComp = null, sfxGain = null, sfxTame = null, clickGain = null, clickComp = null;
   // 三级开关：muted 全局静音（侧边栏 [[icon:gear]]）· musicOff 只关音乐 · sfxOff 只关音效（设置页）
   let muted = false, musicOff = false, sfxOff = false;
-  // 音量 0~1，随 localStorage 持久化；音乐基准 0.45，音效基准 2.5
+  // 音量 0~1，随 localStorage 持久化；音乐基准 0.45，音效基准 1.5
   let musicVol = 1, sfxVol = 1, musicSource = 'original';
-  const BASE_MUSIC = 0.45, BASE_SFX = 2.5;
+  const BASE_MUSIC = 0.45, BASE_SFX = 1.5;
   // 滑条 0..1 → 增益走 dB 曲线（等比可闻：低段每格有变化，端点不变 0=静音 / 1=基准）
   const dbGain = k => Number(k) <= 0 ? 0 : Math.pow(10, ((Math.min(1, Number(k)) - 1) * 30) / 20);
   // 战斗 ducking：战斗期间 BGM 侧链压低（audio-design），结束恢复
@@ -39,9 +39,14 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     masterComp.threshold.value = -6; masterComp.knee.value = 8;
     masterComp.ratio.value = 12; masterComp.attack.value = 0.003; masterComp.release.value = 0.18;
     master.connect(masterComp); masterComp.connect(ctx.destination);
-    sfxGain = ctx.createGain(); sfxGain.gain.value = sfxOff ? 0 : BASE_SFX * dbGain(sfxVol); sfxGain.connect(master);
+    sfxGain = ctx.createGain(); sfxGain.gain.value = sfxOff ? 0 : BASE_SFX * dbGain(sfxVol);
+    // 音效总线高频搁架衰减（>4.5kHz 收 4dB）：归一化采样的尖锐瞬态与高频合成音的刺耳段在此收敛，
+    // 限幅器不再被高频尖峰顶着工作；总线级处理保持所有音效相对响度不变。
+    sfxTame = ctx.createBiquadFilter();
+    sfxTame.type = 'highshelf'; sfxTame.frequency.value = 4500; sfxTame.gain.value = -4;
+    sfxGain.connect(sfxTame); sfxTame.connect(master);
     // 点击音专用链路：增益拉响度，压缩器压掉归一化后的尖峰，避免破音
-    clickGain = ctx.createGain(); clickGain.gain.value = 1.8;
+    clickGain = ctx.createGain(); clickGain.gain.value = 1.2;
     clickComp = ctx.createDynamicsCompressor();
     clickComp.threshold.value = -14; clickComp.ratio.value = 4;
     clickGain.connect(clickComp); clickComp.connect(sfxGain);
@@ -166,7 +171,7 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     if (hoverBuffers && hoverBuffers.length) {
       const src = ctx.createBufferSource();
       src.buffer = hoverBuffers[Math.floor(Random.random('audio') * hoverBuffers.length)];
-      const g = ctx.createGain(); g.gain.value = soft ? 0.055 : 0.12;
+      const g = ctx.createGain(); g.gain.value = soft ? 0.055 : 0.09;
       let filter = null;
       if (soft) {
         // 标题菜单只留柔和触感，压掉 rollover 采样的尖锐高频。
@@ -292,6 +297,7 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     click:  playClick,
     hover:  playHover,
     switch: playSwitch,
+    navigate: () => tone({ f: 420, f2: 350, type: 'sine', dur: .085, vol: .018, attack: .015 }),
     open:   () => { noise({ dur: .14, vol: .028, fHi: 600, fLo: 2200 }); tone({ f: 440, f2: 660, type: 'sine', dur: .12, vol: .025 }); },
     close:  () => { noise({ dur: .13, vol: .024, fHi: 1800, fLo: 500 }); tone({ f: 620, f2: 420, type: 'sine', dur: .11, vol: .02 }); },
     error:  () => { tone({ f: 190, type: 'square', dur: .09, vol: .045 }); tone({ f: 150, type: 'square', dur: .13, vol: .045, delay: .1 }); },
@@ -574,7 +580,7 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     lastSfxAt.clear(); lastHoverBtn = null;
     if (master) master.gain.value = 0;
     if (ctx && ctx.state !== 'closed') ctx.close().catch(() => {});
-    ctx = master = masterComp = sfxGain = clickGain = clickComp = null;
+    ctx = master = masterComp = sfxGain = sfxTame = clickGain = clickComp = null;
   }
   if (import.meta.hot) import.meta.hot.dispose(dispose);
 

@@ -5,6 +5,7 @@ import { esc, escAttr } from '../core/shared.js';
 import { rewardSceneHTML, rewardExitHTML } from '../ui/reward-scene-view.js';
 import { turboMs, isTurbo } from '../core/turbo.js';
 import { serializeChestReward, restoreChestReward } from './chest-reward-save.js';
+import { bagSlots } from '../hub/game.bag.bridge.js';
 
   const SDT = window.SDT;
   const UI = SDT.UI;
@@ -605,7 +606,7 @@ import { serializeChestReward, restoreChestReward } from './chest-reward-save.js
       if (!isLiveReward() || cur.cards.some((_, i) => !cur.taken.has(i) && !cur.lost.has(i))) return;
       collectCoinsOnce(); next();
     });
-    UI.act('chestOpenBag', () => { if (isLiveReward()) { closeRewardZoom(); document.getElementById('bagBtnFloat')?.click(); } });
+    UI.act('chestOpenBag', () => { if (isLiveReward()) { closeRewardZoom(); bagSlots.showBackpack(); } });
     UI.act('chestPick', (d) => {
       if (!isLiveReward() || !isPick || cur.leaveConfirm) return;
       const i = Number(d.i);

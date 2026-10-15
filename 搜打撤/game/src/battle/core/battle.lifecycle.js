@@ -257,7 +257,8 @@ export function createBattleLifecycle({
       set$selShaN(0);
       set$sel(new Set(selPool.map(o => o.uid)));
       beginBoss();
-    } else prepareDeckSelection();
+    } else if (opts.directBossStart) prepareAutomaticBossDeck();
+    else prepareDeckSelection();
   }
     else beginNormal();
   }
@@ -302,6 +303,21 @@ export function createBattleLifecycle({
   }
 
   // ---------- BOSS战：编组牌库 ----------
+  // 地图首脑直入：沿用有效旧编组，按背包顺序补齐，保持既有卡类与容量规则。
+  function prepareAutomaticBossDeck() {
+    set$selPool(G.ownedCards.filter(o => !['道具', '资源', '事件', '生物'].includes(o.card.type) && !isStarterAttack(o.card)));
+    set$selShaN(R().starterSha);
+    set$sel(new Set(lastDeckSel.filter(uid => selPool.some(entry => entry.uid === uid))));
+    const capacity = () => Math.min(selPool.length, R().bossDeckSize + deckCapBonus(sel));
+    while (sel.size > capacity()) sel.delete(sel.values().next().value);
+    for (const entry of selPool) {
+      if (sel.size >= capacity()) break;
+      sel.add(entry.uid);
+    }
+    set$selDeckMax(R().bossDeckSize + deckCapBonus(sel));
+    beginBoss();
+  }
+
   // 2026-09-09 玩法定版：必选 15 张（招式/装备/能力卡）起步；混沌之眼编入后牌库上限 +5（上限 20）。
   function prepareDeckSelection() {
     set$selDeckMax(R().bossDeckSize + deckCapBonus());   // 混沌之眼「牌库上限+5」（编入后才计入）
@@ -351,7 +367,7 @@ export function createBattleLifecycle({
     if (resetTriggers) resetTriggers();   // 与 beginNormal 对齐：上一场战斗的 M2 触发登记不得跨战斗泄漏
     G.log(opts.nest
       ? `[[icon:cards]] <b>牌盒即牌库</b>：${drawPile.length} 张 · 开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 每回合固定 <b>${maxEnergy}</b> 费`
-      : `[[icon:cards]] 牌库编成：自选 ${sel.size} 张非道具卡 + 初始攻击 ×${shas.length} = <b>${drawPile.length}</b> 张 ·
+      : `[[icon:cards]] 牌库编成：${opts.directBossStart ? '自动编入' : '自选'} ${sel.size} 张非道具卡 + 初始攻击 ×${shas.length} = <b>${drawPile.length}</b> 张 ·
       开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 每回合固定 <b>${maxEnergy}</b> 费`, 'sys');
     injectSealCards();   // 受缚之残影：编组带着才发动——4 张封印肢体洗入牌库（本牌已随编组在库），开局抽牌前洗入
     applyNestRunes();    // 龙巢符文：羁绊与符文效果开战结算

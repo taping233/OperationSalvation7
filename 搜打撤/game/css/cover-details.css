@@ -45,7 +45,7 @@
 :where(body[data-ui-cover-context="ordinary"]) #overlay .bag-view :is(button,.help-btn):focus-visible { outline: 2px solid #81878c; outline-offset: 3px; }
 /* Ordinary card zoom is distinct from the frozen photo card-zoom family. */
 :where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) { gap: 16px; padding: 24px 24px 52px; overflow-y: auto; justify-content: flex-start; justify-content: safe center; }
-:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) .cz-backdrop { background: #121314bd; backdrop-filter: blur(7px); }
+:where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) .cz-backdrop { background: #1213142e; backdrop-filter: blur(18px); }
 :where(body[data-ui-cover-context="ordinary"]) #cardZoom:not(.cz-photo) .cz-note {
   flex: none; width: min(620px, 90%); max-height: 28vh; overflow-y: auto;
   margin: 0; padding: 15px 18px; gap: 12px; border: 1px solid #a1a4a7; border-radius: 0;

@@ -158,11 +158,60 @@ import { ease } from './motion-primitives.js';
       Math.max(180, this.viewH - 70) * .84 / (maxY - minY + 50))));
     const cx = (minX + maxX) / 2 + (this.detailInset || 0) / (2 * zoom);
     const cy = (minY + maxY) / 2 - 30 / zoom;
-    // 默认保持同步落定（camera-interaction 测试断言终态）；flow.js 到达取景显式传 glide
+    // 显式定位默认同步落定；需要过渡的入口传入 glide。
     if (opts?.glide) this.glideTo(cx, cy, { zoom, dur: opts.dur });
     else { this._stopGlide(); this.zoom = zoom; this.cx = cx; this.cy = cy; }
     this.frameMode = overview ? 'overview' : 'routes';
     return true;
+  };
+
+  // Travel owns the camera until arrival; manual input cancels that ownership.
+  Camera.prototype.beginTravel = function () {
+    this._stopGlide();
+    const motion = { mode: this.frameMode, cx: this.cx, cy: this.cy, zoom: this.zoom };
+    this.frameMode = 'travel';
+    return motion;
+  };
+
+  Camera.prototype.updateTravel = function (motion, point, ahead, deltaMs) {
+    if (!motion || this.frameMode !== 'travel') return;
+    const inset = this.detailInset || 0, w = this.viewW - inset;
+    const screen = this.worldToScreen(ahead.x, ahead.y);
+    // Keep the player and a short look-ahead in a comfortable area, at fixed zoom.
+    const dx = screen.x < w * .22 ? screen.x - w * .22 : screen.x > w * .78 ? screen.x - w * .78 : 0;
+    const dy = screen.y < this.viewH * .24 ? screen.y - this.viewH * .24 : screen.y > this.viewH * .74 ? screen.y - this.viewH * .74 : 0;
+    const k = 1 - Math.exp(-Math.min(64, Math.max(0, deltaMs)) / 85);
+    this.cx += dx / this.zoom * k;
+    this.cy += dy / this.zoom * k;
+    // Large routes must not let the real position fall beyond the visible margins.
+    const actual = this.worldToScreen(point.x, point.y);
+    this.cx += (actual.x - Math.max(w * .12, Math.min(w * .88, actual.x))) / this.zoom;
+    this.cy += (actual.y - Math.max(this.viewH * .14, Math.min(this.viewH * .86, actual.y))) / this.zoom;
+    this.clamp();
+  };
+
+  Camera.prototype.endTravel = function (motion, game, animate = true) {
+    if (!motion || this.frameMode !== 'travel') return;
+    this.frameMode = motion.mode;
+    if (motion.mode !== 'routes') return;
+    const current = game.layerData?.[game.layerIdx]?.logical?.[game.trackPos];
+    const points = [game.trackPos, ...(current?.next || []).filter(([li]) => li === game.layerIdx).map(([, idx]) => idx)]
+      .map(idx => game.nodePos?.[game.layerIdx]?.[idx]).filter(Boolean);
+    const availableW = this.viewW - (this.detailInset || 0);
+    const outside = points.some(p => {
+      const screen = this.worldToScreen(p.x, p.y);
+      return screen.x < availableW * .1 || screen.x > availableW * .9 ||
+        screen.y < this.viewH * .12 || screen.y > this.viewH * .88;
+    });
+    if (!outside) return;
+    // Only an off-screen next decision changes framing; never zoom in at every stop.
+    const from = { cx: this.cx, cy: this.cy, zoom: this.zoom };
+    this.frameExploration(game);
+    const zoom = Math.min(from.zoom, this.zoom);
+    const cx = this.cx, cy = this.cy;
+    Object.assign(this, from);
+    if (animate) this.glideTo(cx, cy, { zoom, dur: 180 });
+    else { this.zoom = zoom; this.focus(cx, cy); }
   };
 
   // 世界空间命中半径：覆盖节点圆盘，同时保证低缩放下至少有稳定的屏幕目标尺寸。

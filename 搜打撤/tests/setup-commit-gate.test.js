@@ -1,15 +1,19 @@
 // @vitest-environment node
 import { execFileSync, spawnSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, unlinkSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterAll, afterEach, describe, expect, it } from 'vitest';
 
 const installer = readFileSync(fileURLToPath(new URL('../scripts/setup-commit-gate.mjs', import.meta.url)));
 const roots = [];
 const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('GIT_')));
-Object.assign(env, { GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: os.devNull, GIT_TERMINAL_PROMPT: '0' });
+// Windows 上 os.devNull（\\.\nul）无法被 git 作为配置文件打开；用空临时文件隔离全局配置。
+const isolatedGitConfig = path.join(os.tmpdir(), `sdt-gate-setup-global-${process.pid}.gitconfig`);
+writeFileSync(isolatedGitConfig, '');
+Object.assign(env, { GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: isolatedGitConfig, GIT_TERMINAL_PROMPT: '0' });
+afterAll(() => { unlinkSync(isolatedGitConfig); });
 const git = (root, args) => execFileSync('git', ['-C', root, ...args], { env, encoding: 'utf8', stdio: 'pipe' }).trim();
 
 function fixture() {

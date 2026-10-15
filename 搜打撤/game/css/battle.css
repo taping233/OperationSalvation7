@@ -242,7 +242,6 @@
 .bt-start-equip-flash { position:fixed; inset:0; z-index:900; display:flex; align-items:center; justify-content:center; gap:18px; pointer-events:none; }
 .bt-start-equip-card { position:relative; display:inline-block; filter:drop-shadow(0 12px 30px rgba(0,0,0,.6));
   animation:btEquipIn .5s var(--ease-spring, cubic-bezier(.34,1.56,.64,1)) both; }
-.bt-start-equip-card .hs-card { box-shadow:0 6px 24px rgba(0,0,0,.55); }
 .bt-start-equip-label { position:absolute; left:50%; bottom:-24px; transform:translateX(-50%); white-space:nowrap;
   padding:1px 10px; border-radius:999px; font-size:12px; color:#e6e3db; background:rgba(20,18,12,.85);
   border:1px solid rgba(248,219,126,.7); }
@@ -472,7 +471,6 @@
 }
 /* #14 悬停桥：卡牌下缘保持命中区，防止反复升降抖动（挂槽位上，命中区跟随扇形位） */
 .sts-hand .bt-slot::after { content: ''; position: absolute; left: -6px; right: -6px; bottom: -30px; height: 30px; }
-.sts-hand .hsc-desc .bt-rulehint { display:block; -webkit-line-clamp:unset; -webkit-box-orient:initial; overflow:visible; margin-top:.35em; color:#ffe9a0; font-weight:700; }
 @keyframes handDescIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
 /* ============ 2026-09-06 留言批次：手牌加大 + 描述完整露出 + 微透明 ============ */

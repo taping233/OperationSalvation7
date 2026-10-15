@@ -66,8 +66,10 @@ body.interface-motion #overlay .ag-detail[hidden] { opacity: 0; transform: trans
 @starting-style {
   body.interface-motion #overlay .ag-detail:not([hidden]) { opacity: 0; transform: translateY(8px) scale(.99); }
 }
-body.interface-motion #cardZoom:not(.cz-photo-closing) { animation: uiVeilInA var(--motion-detail-enter,320ms) var(--ui-in-ease); }
-body.interface-motion #cardZoom.cz-out { animation: uiVeilOut var(--motion-exit,180ms) var(--ui-out-ease) both !important; }
+/* 揭幕动画只留在照相馆特写（其幕布无 backdrop-filter，动画廉价）；普通卡特写的
+   幕布是全屏 18px 模糊，父级透明度动画会迫使模糊逐帧重算——老板实测所有界面
+   放大模糊都延迟，进出即瞬时满强度（与下方 reduce-motion 豁免 #cardZoom 同口径）。 */
+body.interface-motion #cardZoom.cz-photo:not(.cz-photo-closing) { animation: uiVeilInA var(--motion-detail-enter,320ms) var(--ui-in-ease); }
 body.interface-motion #cardZoom .cz-card,
 body.interface-motion #cardZoom .cz-photo-paper { transition-timing-function: var(--ui-in-ease) !important; }
 body.interface-motion #cardZoom.cz-out .cz-card,

@@ -1,6 +1,7 @@
 // Original painted node assets inside the current map badge and detail layout.
 // Presentation only; no topology, fog, route or persistent state writes.
 import { drawTacticalIcon } from './renderer.icons.js';
+import { mapImageReady } from './map-image-ready.js';
 const art = {
   blank: { url:new URL('../../assets/scenes/map-nodes/blank-symbol-foreground-1013-v1.webp',import.meta.url).href, bounds:[86,77,435,443] },
   fire: { url:new URL('../../assets/scenes/map-nodes/fire-symbol-foreground-1012-v5.webp',import.meta.url).href, bounds:[82,120,428,410] },
@@ -9,19 +10,35 @@ const art = {
   event: { url:new URL('../../assets/scenes/map-nodes/event-symbol-foreground-1012-v5.webp',import.meta.url).href, bounds:[95,53,448,482] },
   door: { url:new URL('../../assets/scenes/map-nodes/passage-symbol-foreground-1012-v5.webp',import.meta.url).href, bounds:[105,61,405,447] },
   chest: { url:new URL('../../assets/scenes/map-nodes/supply-symbol-foreground-1012-v5.webp',import.meta.url).href, bounds:[86,82,432,433] },
+  resource: { url:new URL('../../assets/scenes/map-nodes/resource-symbol-1015-v1.webp',import.meta.url).href, bounds:[105,90,399,397] },
+  // 金币节点与全局货币图标同源（gold-is7，整图 128×128）。
+  coin: { url:new URL('../../assets/ui/map-hud-1015/gold-is7-v2.webp',import.meta.url).href, bounds:[0,0,128,128] },
 };
 const aliases={boss:'battle',elite:'battle',battleElite:'battle',entrance:'door',emergencyExit:'door',extraction:'door'};
 const images = new Map();
 
+function nodeImage(url) {
+  let image = images.get(url);
+  if (!image) {
+    image = new Image(); image.decoding = 'async';
+    image.onload = () => window.SDT?.RenderScheduler?.invalidate();
+    image.src = url; images.set(url, image);
+  }
+  return image;
+}
+
+export function prepareMapNodeArt() {
+  const urls = Object.values(art).map(entry => entry.url);
+  const portrait = document.querySelector('#heroAva img, #charPanel .hero-ava img');
+  const portraitUrl = portrait?.src || portrait?.currentSrc;
+  if (portraitUrl) urls.push(portraitUrl);
+  return Promise.all(urls.map(url => mapImageReady(nodeImage(url))));
+}
+
 export function drawMapNodeArt(ctx,type,x,y,r) {
   const entry=art[aliases[type]||type];
   if (!entry) return false;
-  let image=images.get(entry.url);
-  if (!image) {
-    image=new Image(); image.decoding='async';
-    image.onload=()=>window.SDT?.RenderScheduler?.invalidate();
-    image.src=entry.url; images.set(entry.url,image);
-  }
+  const image = nodeImage(entry.url);
   if (!image.complete || !image.naturalWidth) return false;
   const bounds=entry.bounds || [0,0,image.naturalWidth,image.naturalHeight];
   const scale=r*1.56/Math.max(bounds[2]-bounds[0],bounds[3]-bounds[1]);
@@ -91,10 +108,43 @@ function mapNodeSupport(type){
   nodeSupports.set(key,canvas);return canvas;
 }
 
-export function drawMapNodeBadge(ctx,type,label,state,{hovered=false,note=false,showLabel=true}={}) {
+// 当前/可达节点的常驻辉光：径向光晕叠在暗色底座之下；pulse 为呼吸振幅（1→0 收束为静态）。
+const GLOW_TINT={current:'113,199,196',legal:'132,199,181'};
+// 节点类型色环（2026-10-15 老板）：颜色即类型。色值沿用游戏既有锚点——
+// 紫=renderer.js 祭坛引导线、金=expedition-map.css 金币、暖=mapNodeSupport 火堆。
+const TYPE_RING_TONE={
+  battle:'186,85,74',boss:'186,85,74',elite:'186,85,74',battleElite:'186,85,74',
+  event:'154,124,200',altar:'154,124,200',
+  shop:'216,189,121',chest:'216,189,121',resource:'216,189,121',
+  door:'216,189,121',coin:'216,189,121',key:'216,189,121',
+  fire:'208,163,91',wood:'208,163,91',
+  entrance:'122,176,164',emergencyExit:'122,176,164',extraction:'122,176,164',rations:'122,176,164',
+};
+function drawMapNodeGlow(ctx,type,state,time,pulse){
+  const tint=GLOW_TINT[state];if(!tint)return;
+  const empty=type==='blank';
+  const breath=Math.sin(time*Math.PI*2/2.2+(state==='legal'?.9:0))*pulse;
+  const r=(state==='current'?empty?40:58:empty?34:47)+(state==='current'?3:2)*breath;
+  const a=(state==='current'?.36:.20)+(state==='current'?.13:.09)*breath;
+  ctx.save();ctx.globalCompositeOperation='lighter';
+  const glow=ctx.createRadialGradient(0,0,r*.18,0,0,r);
+  glow.addColorStop(0,`rgba(${tint},${a.toFixed(3)})`);
+  glow.addColorStop(.55,`rgba(${tint},${(a*.45).toFixed(3)})`);
+  glow.addColorStop(1,`rgba(${tint},0)`);
+  ctx.fillStyle=glow;ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.fill();ctx.restore();
+}
+
+export function drawMapNodeBadge(ctx,type,label,state,{hovered=false,note=false,showLabel=true,time=0,pulse=0}={}) {
   const style=mapNodeAppearance(state);ctx.globalAlpha*=style.alpha;
+  if(state==='current'||state==='legal')drawMapNodeGlow(ctx,type,state,time,pulse);
   const empty=type==='blank';
   if(!empty){const support=mapNodeSupport(type);if(support)ctx.drawImage(support,-64,-64,128,128);}
+  // 类型色环：非空节点常驻一圈类型色，底色随节点状态透明度同步淡出。
+  const ringTone=TYPE_RING_TONE[aliases[type]||type];
+  if(ringTone&&!empty){
+    ctx.strokeStyle=`rgba(${ringTone},.5)`;ctx.lineWidth=1.8;
+    ctx.beginPath();ctx.arc(0,0,40,0,Math.PI*2);ctx.stroke();
+  }
   if(state==='selected'||hovered){
     ctx.save();ctx.strokeStyle=state==='selected'?'#e4efebcc':'#a5c8c580';ctx.lineWidth=state==='selected'?1.2:.8;
     ctx.shadowColor='#b9ded580';ctx.shadowBlur=state==='selected'?6:2;
@@ -120,16 +170,33 @@ export function drawMapNodeBadge(ctx,type,label,state,{hovered=false,note=false,
   if(note){ctx.fillStyle='#e8bd68';ctx.fillRect(28,-26,4,4);}
 }
 
+// 迷雾剪影徽章（2026-10-15 老板）：未揭示节点渲染为「黑色模糊+微光晕」——结构可见、
+// 类型未知、不带任何图形语义（老板明确不要问号）。底座烘焙一次，避免每帧建渐变。
+let fogBadge=null;
+export function drawMapFogBadge(ctx) {
+  if(!fogBadge){
+    fogBadge=document.createElement('canvas');fogBadge.width=fogBadge.height=128;
+    const b=fogBadge.getContext('2d');if(!b)return;
+    b.translate(64,64);
+    const halo=b.createRadialGradient(0,0,12,0,0,52);
+    halo.addColorStop(0,'rgba(150,178,190,.12)');
+    halo.addColorStop(.6,'rgba(150,178,190,.055)');
+    halo.addColorStop(1,'rgba(150,178,190,0)');
+    b.fillStyle=halo;b.beginPath();b.arc(0,0,52,0,Math.PI*2);b.fill();
+    const blob=b.createRadialGradient(-6,-8,4,0,0,34);
+    blob.addColorStop(0,'rgba(7,13,19,.85)');
+    blob.addColorStop(.66,'rgba(7,13,19,.55)');
+    blob.addColorStop(1,'rgba(7,13,19,0)');
+    b.fillStyle=blob;b.beginPath();b.arc(0,0,34,0,Math.PI*2);b.fill();
+  }
+  ctx.drawImage(fogBadge,-64,-64,128,128);
+}
+
 export function drawMapTraveller(ctx,x,y,zoom,anchor,screenScale=1,arrived=false) {
   // Hidden HUD portraits may remain lazy. The map owns an eager image of that same URL.
   const portrait=document.querySelector('#heroAva img, #charPanel .hero-ava img');
   const url=portrait?.src||portrait?.currentSrc;
-  let image=url?images.get(url):null;
-  if(url&&!image){
-    image=new Image();image.decoding='async';
-    image.onload=()=>window.SDT?.RenderScheduler?.invalidate();
-    image.src=url;images.set(url,image);
-  }
+  const image = url ? nodeImage(url) : null;
   ctx.save(); ctx.translate(x,y); ctx.scale(screenScale/zoom,screenScale/zoom);
   ctx.fillStyle='#0c151bf2';ctx.beginPath();ctx.arc(0,0,22,0,Math.PI*2);ctx.fill();
   ctx.strokeStyle=arrived?'#8ef1e5':'#e7eeee';ctx.lineWidth=1;ctx.beginPath();ctx.arc(0,0,22,0,Math.PI*2);ctx.stroke();

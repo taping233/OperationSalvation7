@@ -10,7 +10,8 @@ const { inspectInitialJs } = require('../scripts/perf-budget.cjs');
 
 const outDir = '/fixture/desktop-app/game';
 function inspect(html, relativeFiles = []) {
-  const files = new Set(relativeFiles.map(file => path.join(outDir, file)));
+  // perf-budget.cjs 归一化到 path.resolve 的绝对路径（Windows 带盘符），fixture 需同规则匹配。
+  const files = new Set(relativeFiles.map(file => path.resolve(outDir, file)));
   return inspectInitialJs(outDir, html, { exists: file => files.has(file), stat: () => ({ isFile: () => true }) });
 }
 function clearFixture({ remains = false, initiallyPresent = true, directory = outDir } = {}) {
@@ -35,7 +36,7 @@ describe('Build output contracts', () => {
       + '<link rel="stylesheet" href="./assets/style.css">',
     ['assets/js/index-abcd.js', 'assets/js/catalog-123.js']);
     expect(result.failures).toEqual([]);
-    expect(result.entryFiles).toEqual([path.join(outDir, 'assets/js/index-abcd.js')]);
+    expect(result.entryFiles).toEqual([path.resolve(outDir, 'assets/js/index-abcd.js')]);
     expect(result.initialFiles).toHaveLength(2);
   });
 
@@ -43,7 +44,7 @@ describe('Build output contracts', () => {
     const result = inspect("<SCRIPT TYPE='module' SRC='assets/main-entry.mjs?v=1#ready'></SCRIPT>"
       + '<link REL=modulepreload HREF=/assets/vendor.js?v=2>', ['assets/main-entry.mjs', 'assets/vendor.js']);
     expect(result.failures).toEqual([]);
-    expect(result.entryFiles).toEqual([path.join(outDir, 'assets/main-entry.mjs')]);
+    expect(result.entryFiles).toEqual([path.resolve(outDir, 'assets/main-entry.mjs')]);
     expect(result.initialFiles).toHaveLength(2);
   });
 

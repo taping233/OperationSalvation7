@@ -5,6 +5,9 @@
  * 与 tests/shop-sell-stored-guard.test.js（createShopController 依赖注入）。 */
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
+const bagPort = vi.hoisted(() => ({ showBackpack: vi.fn() }));
+vi.mock('../game/src/hub/game.bag.bridge.js', () => ({ bagSlots: bagPort }));
+
 const CARD_A = { id: 'sys03-a', name: '搜刮卡甲', rarity: '古朴', type: '法术', desc: '测试甲', cost: 0 };
 const CARD_B = { id: 'sys03-b', name: '搜刮卡乙', rarity: '古朴', type: '武术', desc: '测试乙', cost: 0 };
 
@@ -82,6 +85,7 @@ afterEach(() => {
   document.body.innerHTML = '';
   acts = {};
   shopMod = null;
+  bagPort.showBackpack.mockReset();
 });
 
 async function revealFirst(game, kind = 'small') {
@@ -95,7 +99,7 @@ async function revealFirst(game, kind = 'small') {
 }
 
 describe('SYS-03 搜刮页事务序（chests.js）', () => {
-  it('满包整理通过全局背包入口，返回后保留所选卡与待领状态', async () => {
+  it('满包整理通过背包命令入口，返回后保留所选卡与待领状态', async () => {
     vi.useFakeTimers();
     const { overlay, ovBody } = bootDom();
     const ownedCards = [];
@@ -105,7 +109,7 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
     document.body.append(bagButton);
     let facade;
     let bagOpens = 0;
-    bagButton.addEventListener('click', () => {
+    bagPort.showBackpack.mockImplementation(() => {
       bagOpens++;
       facade.Chests.suspend();
       ovBody.innerHTML = '<p>整理背包</p>';

@@ -1,0 +1,145 @@
+{
+  "initial": {
+    "path": "ui/card-frames/paper-1015/initial.webp",
+    "width": 512,
+    "height": 768,
+    "opening": [
+      57.0,
+      61.5,
+      411.0,
+      650.5
+    ]
+  },
+  "common": {
+    "path": "ui/card-frames/paper-1015/common.webp",
+    "width": 512,
+    "height": 768,
+    "opening": [
+      57.0,
+      66.0,
+      411.0,
+      646.0
+    ]
+  },
+  "rare": {
+    "path": "ui/card-frames/paper-1015/rare.webp",
+    "width": 512,
+    "height": 768,
+    "opening": [
+      56.5,
+      65.5,
+      411.0,
+      646.0
+    ]
+  },
+  "epic": {
+    "path": "ui/card-frames/paper-1015/epic.webp",
+    "width": 512,
+    "height": 768,
+    "opening": [
+      57.5,
+      62.5,
+      411.0,
+      642.5
+    ]
+  },
+  "legendary": {
+    "path": "ui/card-frames/paper-1015/legendary.webp",
+    "width": 512,
+    "height": 768,
+    "opening": [
+      56.5,
+      65.5,
+      399.5,
+      639.0
+    ]
+  },
+  "prism": {
+    "path": "ui/card-frames/paper-1015/prism.webp",
+    "width": 512,
+    "height": 768,
+    "opening": [
+      58.0,
+      73.0,
+      404.5,
+      625.0
+    ]
+  },
+  "token": {
+    "path": "ui/card-frames/paper-1015/token.webp",
+    "width": 512,
+    "height": 768,
+    "opening": [
+      57.0,
+      66.0,
+      410.5,
+      645.5
+    ]
+  },
+  "wu": {
+    "path": "ui/card-frames/paper-1015/wu.webp",
+    "width": 512,
+    "height": 768,
+    "opening": [
+      58.5,
+      67.5,
+      410.5,
+      645.0
+    ]
+  },
+  "xingyue": {
+    "path": "ui/card-frames/paper-1015/xingyue.webp",
+    "width": 512,
+    "height": 768,
+    "opening": [
+      59.0,
+      62.5,
+      411.0,
+      649.5
+    ]
+  },
+  "changwuyu": {
+    "path": "ui/card-frames/paper-1015/changwuyu.webp",
+    "width": 512,
+    "height": 768,
+    "opening": [
+      60.5,
+      66.5,
+      406.0,
+      639.0
+    ]
+  },
+  "baita": {
+    "path": "ui/card-frames/paper-1015/baita.webp",
+    "width": 512,
+    "height": 768,
+    "opening": [
+      58.5,
+      62.0,
+      410.0,
+      650.0
+    ]
+  },
+  "heixiang": {
+    "path": "ui/card-frames/paper-1015/heixiang.webp",
+    "width": 512,
+    "height": 768,
+    "opening": [
+      58.0,
+      65.0,
+      382.5,
+      636.0
+    ]
+  },
+  "neutral": {
+    "path": "ui/card-frames/paper-1015/neutral.webp",
+    "width": 512,
+    "height": 768,
+    "opening": [
+      57.0,
+      61.5,
+      411.0,
+      650.5
+    ]
+  }
+}

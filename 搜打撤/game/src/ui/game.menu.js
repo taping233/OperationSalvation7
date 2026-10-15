@@ -768,18 +768,23 @@ function createGameMenuController(deps) {
                 detail: '欢迎回到战场',
                 duration: 900,
                 presentation: 'city-cut',
+                holdVisual: true,
               });
+              // 显示过场后立即预热，模块和地图素材加载与演出重叠。
+              const resources = Promise.all([ensureBattleReady(), SDT.Renderer?.warm?.()])
+                .then(() => ({ ok: true }), error => ({ ok: false, error }));
               if (await transition === false || !transition.isCurrent() || !currentContext()) return false;
               // 存档可能包含战斗快照；必须先加载战斗域，loadGame 才能同步 restore。
-              await ensureBattleReady();
+              const warmed = await resources;
+              if (!warmed.ok) throw warmed.error;
               if (!transition.isCurrent() || !currentContext()) return false;
               const loaded = loadGame(slot);
               if (!loaded.ok) {
                 RunStorage.issue(slot);
                 return returnToPicker(`${loaded.message || '对局存档读取失败'}；原档已保留，请重试进入该档位`);
               }
+              const resumedContext = captureBattleContext(game, getActiveSlot);
               if (loaded.classChoiceEntry) {
-                const resumedContext = captureBattleContext(game, getActiveSlot);
                 const sourceBody = document.getElementById('ovBody');
                 const sourceRoot = sourceBody?.firstElementChild;
                 const sourceHidden = UI.el.overlay.hidden;
@@ -790,6 +795,18 @@ function createGameMenuController(deps) {
                 }
                 if (!resumedContext()) return false;
               }
+              if (game.state === 'idle' && game.runActive && !game.nestActive && !game.battleActive) {
+                // 等对局布局落定，遮层下面画好目标尺寸/镜头的首帧，再揭幕。
+                await new Promise(resolve => {
+                  const timer = setTimeout(resolve, 160);
+                  requestAnimationFrame(() => requestAnimationFrame(() => { clearTimeout(timer); resolve(); }));
+                });
+                if (!resumedContext()) return false;
+                runtime.resize();
+                await SDT.Renderer?.prepare?.(game, resumedContext);
+                if (!resumedContext()) return false;
+              }
+              await transition.release?.();
               return completed();
             }
             if (await runtime.openBaseHub('deploy') === false) {
@@ -800,6 +817,9 @@ function createGameMenuController(deps) {
           } catch {
             if (!currentContext() || (transition && !transition.isCurrent()) || (!hasSavedRun && !pickerPage?.isConnected)) return false;
             return returnToPicker('进入档位失败，请刷新页面后重试；原档已保留');
+          } finally {
+            // 异常或取消时也释放自有遮层；不会收掉恢复流程打开的新页面。
+            await transition?.release?.({ immediate: true });
           }
         }, !hasSavedRun);
       } finally { enteringSlot = false; }

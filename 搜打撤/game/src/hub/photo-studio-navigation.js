@@ -83,7 +83,7 @@ export function createPhotoStudioMotion() {
       const release = () => cancel(layer);
       animation.finished.then(release, release);
     },
-    play(node, { reason = 'filter', direction = 0, axis = 'x', delay = 0, surface = 'grid' } = {}) {
+    play(node, { reason = 'filter', direction = 0, axis = 'x', delay = 0, surface = 'grid', width } = {}) {
       if (!node) return;
       cancel(node);
       delete node.dataset.studioMotion;
@@ -102,7 +102,7 @@ export function createPhotoStudioMotion() {
         frames = [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0)' }];
       } else if (surface === 'grid') {
         // Every photo refresh enters from the left, regardless of filter or tab direction.
-        const travel = Math.max(64, Math.min(160, node.clientWidth * .18));
+        const travel = Math.max(64, Math.min(160, (width ?? node.clientWidth) * .18));
         frames = [{ opacity: 0, transform: `translateX(${-travel}px)` }, { opacity: 1, transform: 'translateX(0)' }];
       }
       const animation = node.animate(frames, { duration: surface === 'grid' ? motionTiming.regionEnter : duration, delay, easing: motionEasing.enter, fill: 'backwards' });

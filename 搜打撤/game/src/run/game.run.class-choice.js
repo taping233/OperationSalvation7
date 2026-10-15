@@ -71,6 +71,7 @@ export function openClassChoice(options = {}) {
       return false;
     }
     const result = page.openClassChoice(options);
+    if (result !== false) options.onPresented?.();
     entry.ready = result !== false;
     window.removeEventListener('keydown', entry.escape, true);
     return result;

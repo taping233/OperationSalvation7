@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>背包界面重设计小样 v2 · 玻璃拟态（代号柒 × 绝区零）</title>
+<style>
+/* ════════════════════════════════════════════════════════════════
+   背包界面二游重设计 · 隔离小样 v2（2026-10-15，WF-bag-redesign-1015）
+   v1（方舟式分组）老板判「杂乱」；v2 按绝区零语言重做：
+   模糊景深背景 + 玻璃拟态面板 + 大标题 + 静音网格，格子只留
+   图标/名称/数量，稀有度用底色晕染表达，文字信息收进右侧详情。
+   数据全部来自 cards-sync.json / map.json 真实条目；零循环动画。
+   ════════════════════════════════════════════════════════════════ */
+:root{
+  --gold:#f5d97b; --gold-deep:#d8b054;
+  --glass:rgba(14,18,26,.52); --glass-2:rgba(20,26,36,.42);
+  --stroke:rgba(255,255,255,.10); --stroke-2:rgba(255,255,255,.18);
+  --ink:#f2f4f6; --ink-dim:rgba(226,232,238,.55); --ink-faint:rgba(226,232,238,.34);
+  --r:.18px;
+  --fast:.2s cubic-bezier(.33,1,.68,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#06080c;overflow:hidden;
+  font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink)}
+#fit{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ── 景深背景：真实场景图重度模糊 + 暗角，玻璃从上读取 ────────── */
+.bg{position:absolute;inset:-40px;z-index:0}
+.bg img{width:100%;height:100%;object-fit:cover;
+  filter:blur(22px) brightness(.5) saturate(1.25)}
+.bg::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(120% 90% at 50% 30%,transparent 40%,rgba(4,6,10,.55) 100%)}
+
+.glass{background:var(--glass);backdrop-filter:blur(26px) saturate(1.35);
+  -webkit-backdrop-filter:blur(26px) saturate(1.35);
+  border:1px solid var(--stroke);border-radius:20px;
+  box-shadow:0 10px 40px rgba(0,0,0,.32)}
+
+/* ── 骨架：左图标栏 / 主区 / 右详情 ───────────────────────────── */
+#wrap{position:absolute;inset:34px 38px;z-index:1;
+  display:grid;grid-template-columns:88px minmax(0,1fr) 392px;gap:22px}
+
+/* 左：分区玻璃竖栏 */
+.rail{display:flex;flex-direction:column;align-items:center;gap:14px;padding:20px 0}
+.rail .rz{position:relative;width:60px;height:60px;border:0;border-radius:16px;cursor:pointer;
+  background:transparent;color:var(--ink-dim);display:flex;align-items:center;justify-content:center;
+  transition:background var(--fast),color var(--fast),transform var(--fast)}
+.rail .rz svg{width:26px;height:26px}
+.rail .rz .bdg{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 5px;
+  border-radius:10px;background:rgba(255,255,255,.14);color:var(--ink);
+  font-size:11px;font-weight:700;line-height:20px;font-variant-numeric:tabular-nums}
+.rail .rz:hover{color:var(--ink);background:rgba(255,255,255,.08);transform:translateY(-1px)}
+.rail .rz.on{color:#101319;background:var(--gold);box-shadow:0 6px 22px rgba(245,217,123,.35)}
+.rail .rz.on .bdg{background:#101319;color:var(--gold)}
+.rail .sep{width:34px;height:1px;background:var(--stroke-2)}
+.rail .rlogo{margin-top:auto;font-size:10px;letter-spacing:.3em;color:var(--ink-faint);
+  writing-mode:vertical-rl}
+
+/* 中：主列 */
+.main{display:flex;flex-direction:column;min-width:0;min-height:0;gap:18px}
+.head{display:flex;align-items:flex-end;gap:26px;padding:6px 8px 0}
+.head h1{font-size:44px;font-weight:800;letter-spacing:.06em;line-height:1}
+.head .sub{font-size:11px;letter-spacing:.42em;color:var(--ink-faint);margin-bottom:5px}
+.head .cap{margin-left:auto;display:flex;align-items:center;gap:12px;padding:12px 20px;border-radius:999px}
+.head .cap .k{font-size:11px;letter-spacing:.2em;color:var(--ink-dim)}
+.capbar{position:relative;width:190px;height:8px;border-radius:4px;background:rgba(255,255,255,.10)}
+.capbar i{position:absolute;inset:0 auto 0 0;width:47%;border-radius:4px;
+  background:linear-gradient(90deg,var(--gold-deep),var(--gold))}
+.head .cap b{font-size:20px;font-variant-numeric:tabular-nums}
+.head .cap small{color:var(--ink-dim);font-variant-numeric:tabular-nums}
+.head .cur{display:flex;gap:24px;padding-bottom:4px}
+.head .cur .c{text-align:right}
+.head .cur .c .v{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.head .cur .c .k{font-size:10px;letter-spacing:.22em;color:var(--ink-dim)}
+.head .cur .c.g .v{color:var(--gold)}
+
+/* 工具行：分类胶囊 + 排序/整理 */
+.tools{display:flex;align-items:center;gap:8px;padding:0 2px}
+.pill{border:1px solid transparent;background:rgba(255,255,255,.06);color:var(--ink-dim);
+  font-size:14px;padding:9px 18px;border-radius:999px;cursor:pointer;font-family:inherit;letter-spacing:.04em;
+  transition:background var(--fast),color var(--fast)}
+.pill:hover{color:var(--ink);background:rgba(255,255,255,.11)}
+.pill.on{background:var(--gold);color:#101319;font-weight:700}
+.tools .gap{flex:1}
+.icbtn{width:40px;height:40px;border-radius:12px;border:1px solid var(--stroke);cursor:pointer;
+  background:rgba(255,255,255,.06);color:var(--ink-dim);display:flex;align-items:center;justify-content:center;
+  transition:background var(--fast),color var(--fast)}
+.icbtn svg{width:19px;height:19px}
+.icbtn:hover{color:var(--ink);background:rgba(255,255,255,.12)}
+.icbtn.gold{background:var(--gold);border-color:var(--gold);color:#101319}
+.icbtn.gold:hover{filter:brightness(1.06)}
+
+/* 网格玻璃板 */
+.board{flex:1;min-height:0;padding:20px 22px;overflow-y:auto;scrollbar-color:rgba(255,255,255,.18) transparent}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:14px}
+.tile{position:relative;height:168px;border-radius:16px;cursor:pointer;overflow:hidden;
+  background:var(--tint,rgba(255,255,255,.055));border:1px solid transparent;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  transition:transform var(--fast),background var(--fast),border-color var(--fast)}
+.tile::before{content:"";position:absolute;inset:0;border-radius:16px;
+  background:radial-gradient(90% 62% at 50% 26%,var(--glow,rgba(255,255,255,.07)),transparent 72%);pointer-events:none}
+.tile:hover{transform:translateY(-3px);border-color:var(--stroke-2)}
+.tile.sel{border-color:var(--gold);box-shadow:0 0 0 1.5px var(--gold),0 10px 30px rgba(0,0,0,.35)}
+.tile:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.tile .ic{width:58px;height:58px;display:flex;align-items:center;justify-content:center;z-index:1}
+.tile .ic svg{width:100%;height:100%}
+.tile .nm{font-size:14.5px;font-weight:600;letter-spacing:.03em;z-index:1;max-width:92%;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tile .ct{position:absolute;top:9px;right:9px;z-index:2;padding:2px 9px;border-radius:999px;
+  background:rgba(8,10,15,.55);backdrop-filter:blur(8px);border:1px solid var(--stroke);
+  font-size:11.5px;font-weight:700;font-variant-numeric:tabular-nums}
+.tile .cost{position:absolute;top:8px;left:9px;z-index:2;width:24px;height:24px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;
+  color:#101319;background:var(--tc,#c8d2da)}
+.tile .state{position:absolute;bottom:10px;left:0;right:0;text-align:center;z-index:2;
+  font-size:10.5px;letter-spacing:.2em;color:var(--ink-faint)}
+.tile.protected .state{color:rgba(245,217,123,.75)}
+.tile.spent{filter:saturate(.3) brightness(.8)}
+.tile.spent .state{color:rgba(230,150,140,.75)}
+
+/* 右：详情玻璃板 */
+.detail{display:flex;flex-direction:column;min-height:0;padding:26px 26px 24px}
+.detail .dk{font-size:10px;letter-spacing:.34em;color:var(--ink-faint)}
+.dhead{display:flex;gap:18px;margin-top:16px}
+.dico{width:104px;height:104px;flex:none;border-radius:20px;display:flex;align-items:center;justify-content:center;
+  background:var(--glow,rgba(255,255,255,.06));border:1px solid var(--stroke)}
+.dico svg{width:62px;height:62px}
+.dtitle{min-width:0;padding-top:4px}
+.dtitle h3{font-size:26px;font-weight:800;letter-spacing:.04em;line-height:1.25}
+.dtitle .rt{display:inline-block;margin-top:10px;font-size:12px;font-weight:700;letter-spacing:.16em;
+  color:var(--rc,#c8d2da);background:var(--rw,rgba(255,255,255,.07));padding:3px 12px;border-radius:999px}
+.dtitle .mt{margin-top:9px;font-size:13px;color:var(--ink-dim);font-variant-numeric:tabular-nums}
+.ddesc{margin-top:18px;padding:16px 18px;border-radius:14px;background:rgba(255,255,255,.05);
+  font-size:13.5px;line-height:1.9;color:#ccd6dd}
+.dzone{margin-top:14px;font-size:12.5px;color:var(--ink-dim);line-height:1.8}
+.dzone b{color:var(--ink)}
+.dacts{margin-top:auto;display:flex;flex-direction:column;gap:10px;padding-top:16px}
+.abtn{border:0;border-radius:13px;padding:14px;font-size:15px;letter-spacing:.08em;cursor:pointer;
+  font-family:inherit;background:rgba(255,255,255,.08);color:var(--ink);
+  transition:background var(--fast),transform var(--fast)}
+.abtn:hover{background:rgba(255,255,255,.14)}
+.abtn:active{transform:scale(.985)}
+.abtn.primary{background:var(--gold);color:#101319;font-weight:800}
+.abtn.primary:hover{filter:brightness(1.06)}
+.abtn:disabled{opacity:.4;cursor:default}
+.dhint{margin-top:16px;font-size:13px;color:var(--ink-dim);line-height:1.9}
+
+#toast{position:absolute;left:50%;bottom:30px;transform:translateX(-50%) translateY(16px);opacity:0;
+  z-index:60;pointer-events:none;font-size:14px;letter-spacing:.05em;color:var(--ink);
+  background:rgba(12,16,24,.72);backdrop-filter:blur(18px);border:1px solid var(--stroke-2);
+  padding:12px 26px;border-radius:999px;transition:opacity var(--fast),transform var(--fast)}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div id="fit"><div id="stage">
+  <div class="bg"><img src="assets/scenes/hub-wallpaper.webp" alt="" aria-hidden="true"></div>
+
+  <div id="wrap">
+    <!-- 左：分区玻璃栏 -->
+    <nav class="rail glass">
+      <button class="rz on" data-zone="bag" title="随身背包">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="bdg">18</span>
+      </button>
+      <button class="rz" data-zone="safe" title="安全格 · 撤离失败也运回">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v5c0 4.4-3 8.4-7 10-4-1.6-7-5.6-7-10V6l7-3Z"/><path d="M12 8v6M9 11h6"/></svg>
+        <span class="bdg">3/8</span>
+      </button>
+      <button class="rz" data-zone="pocket" title="消耗口袋 · 本局不可用">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 4h12v6a6 6 0 0 1-12 0V4Z"/><path d="M9 20h6M12 16v4"/></svg>
+        <span class="bdg">6</span>
+      </button>
+      <div class="sep"></div>
+      <span class="rlogo">DEPOT</span>
+    </nav>
+
+    <!-- 中：主列 -->
+    <section class="main">
+      <header class="head">
+        <div><div class="sub">DEPOT</div><h1>背包</h1></div>
+        <div class="cap glass"><span class="k">容量</span><div class="capbar"><i></i></div><b>18</b><small>/ 38</small></div>
+        <div class="cur">
+          <div class="c g"><div class="v">1,240</div><div class="k">金币</div></div>
+          <div class="c"><div class="v">220</div><div class="k">物资估值</div></div>
+        </div>
+      </header>
+      <div class="tools">
+        <button class="pill on" data-f="all">全部</button>
+        <button class="pill" data-f="招式">招式</button>
+        <button class="pill" data-f="生物">生物</button>
+        <button class="pill" data-f="装备">装备</button>
+        <button class="pill" data-f="道具">道具</button>
+        <button class="pill" data-f="资源">资源</button>
+        <button class="pill" data-f="物资">物资</button>
+        <span class="gap"></span>
+        <button class="icbtn" id="sortBtn" title="排序：稀有度 / 种类">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 7h10M4 12h7M4 17h4M17 4v14m0 0 3.5-3.5M17 18l-3.5-3.5"/></svg>
+        </button>
+        <button class="icbtn gold" id="tidyBtn" title="一键整理">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4v4H5zM15 4h4v4h-4zM5 16h4v4H5zM15 16h4v4h-4zM9 6h6M7 9v7M7 16h8M16 9v7"/></svg>
+        </button>
+      </div>
+      <div class="board glass"><div class="grid" id="grid"></div></div>
+    </section>
+
+    <!-- 右：详情玻璃板 -->
+    <aside class="detail glass">
+      <span class="dk">SELECTED</span>
+      <div id="dbody" style="display:contents"></div>
+      <div class="dacts" id="dacts"></div>
+    </aside>
+  </div>
+
+  <div id="toast" role="status"></div>
+</div></div>
+<script>
+/* ═══ 数据：全部来自 game/data/cards-sync.json、map.json 真实条目 ═══ */
+const RAR = {
+  '古朴':{c:'#9fb0ba',w:'rgba(159,176,186,.10)'},
+  '职业':{c:'#5fcf94',w:'rgba(95,207,148,.10)'},
+  '衍生':{c:'#8ba0b8',w:'rgba(139,160,184,.10)'},
+  '稀有':{c:'#57a8f0',w:'rgba(87,168,240,.11)'},
+  '史诗':{c:'#b184e8',w:'rgba(177,132,232,.12)'},
+  '传说':{c:'#f0ac4e',w:'rgba(240,172,78,.13)'},
+  '棱彩':{c:'#ef86bd',w:'rgba(239,134,189,.12)'}
+};
+const TC = {'武术':'#e8695e','法术':'#63dcd4','生物':'#8ccf72','装备':'#e0bd6e','资源':'#aebfc9','道具':'#f5d97b','能力卡':'#b184e8','事件':'#e393bd'};
+const GLYPH = {
+  '武术':'<svg viewBox="0 0 24 24" fill="none" stroke="CUR" stroke-width="1.7"><path d="M14 3l7 7-9 9-3.5.9.9-3.5 9-9Z"/><path d="M13 6.5 17.5 11M5 19l2-2"/></svg>',
+  '法术':'<svg viewBox="0 0 24 24" fill="none" stroke="CUR" stroke-width="1.7"><path d="M12 2l2.2 6.2L20 10l-5.8 1.8L12 18l-2.2-6.2L4 10l5.8-1.8L12 2Z"/><path d="M18.5 15.5l.9 2.6 2.6.9-2.6.9-.9 2.6-.9-2.6-2.6-.9 2.6-.9.9-2.6Z"/></svg>',
+  '生物':'<svg viewBox="0 0 24 24" fill="none" stroke="CUR" stroke-width="1.7"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M5 19c0-3 1.6-5 4-5s4 2 4 5M13.5 14.6c2.8-.4 5.5 1.2 5.5 4.4"/></svg>',
+  '装备':'<svg viewBox="0 0 24 24" fill="none" stroke="CUR" stroke-width="1.7"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3"/></svg>',
+  '资源':'<svg viewBox="0 0 24 24" fill="none" stroke="CUR" stroke-width="1.7"><path d="M12 3l7 4v10l-7 4-7-4V7l7-4Z"/><path d="M12 12l7-4M12 12 5 8M12 12v9"/></svg>',
+  '道具':'<svg viewBox="0 0 24 24" fill="none" stroke="CUR" stroke-width="1.7"><path d="M12 2l6 7-6 13L6 9l6-7Z"/><path d="M6 9h12"/></svg>',
+  '能力卡':'<svg viewBox="0 0 24 24" fill="none" stroke="CUR" stroke-width="1.7"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>'
+};
+const SUPPLY_ICONS = {
+  '木材':'<svg viewBox="0 0 24 24" fill="none" stroke="#c9d4b8" stroke-width="1.6"><ellipse cx="6" cy="12" rx="3" ry="6"/><path d="M6 6h12c1.7 0 3 2.7 3 6s-1.3 6-3 6H6"/><path d="M6 9c1.7 0 3 1.3 3 3s-1.3 3-3 3"/></svg>',
+  '口粮':'<svg viewBox="0 0 24 24" fill="none" stroke="#e6d8ae" stroke-width="1.6"><rect x="5" y="7" width="14" height="12" rx="2"/><path d="M5 11h14M8 7V5h8v2M8 15.5h3"/></svg>',
+  '神秘钥匙':'<svg viewBox="0 0 24 24" fill="none" stroke="#f5d97b" stroke-width="1.6"><circle cx="8" cy="8" r="4"/><path d="M11 11l9 9M17 17l2.5-2.5M14.5 14.5 17 12"/></svg>'
+};
+const ITEM_ICONS = {
+  '能源结晶':'<svg viewBox="0 0 24 24" fill="none" stroke="#63dcd4" stroke-width="1.6"><path d="M12 2l6 7-6 13L6 9l6-7Z"/><path d="M6 9h12"/></svg>',
+  '斗神酒':'<svg viewBox="0 0 24 24" fill="none" stroke="#e8695e" stroke-width="1.6"><path d="M10 3h4M11 3v5l-5 9a3 3 0 0 0 2.6 4.5h6.8A3 3 0 0 0 18 17l-5-9V3"/><path d="M8.5 15h7"/></svg>',
+  'TNT':'<svg viewBox="0 0 24 24" fill="none" stroke="#e8695e" stroke-width="1.6"><rect x="6" y="9" width="12" height="11" rx="1.5"/><path d="M9 9V7h6v2M12 7V4M12 4c2-2 4-1 4 1"/></svg>',
+  '员工通行证B':'<svg viewBox="0 0 24 24" fill="none" stroke="#f0ac4e" stroke-width="1.6"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M9 5v14M12 10h5M12 14h4"/><circle cx="6.8" cy="9" r="1"/></svg>'
+};
+const RAIL_ICONS = {shield:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v5c0 4.4-3 8.4-7 10-4-1.6-7-5.6-7-10V6l7-3Z"/></svg>'};
+const SUPPLIES = [
+  {name:'木材', tier:'C', count:12, value:5},
+  {name:'口粮', tier:'C', count:4,  value:15},
+  {name:'神秘钥匙', tier:'A', count:1, value:100},
+];
+const ITEMS = [
+  {name:'能源结晶', rarity:'稀有', cost:1, count:1, desc:'在背包中才能使用，可以复原最多 3 张卡牌。'},
+  {name:'斗神酒',   rarity:'稀有', cost:1, count:1, desc:'回复 99 点生命。'},
+  {name:'TNT',      rarity:'史诗', cost:2, count:2, desc:'消灭 2 名 攻击力5点及以下小怪。'},
+  {name:'员工通行证B', rarity:'传说', cost:2, count:1, desc:'随机获取 1 张传说卡（不含棱彩卡）。'},
+];
+const CARDS = [
+  {name:'追斩',     rarity:'稀有', type:'武术', cost:2, count:3, desc:'攻（+0），本回合每打出一张其他武术，费用-1。'},
+  {name:'连续射击', rarity:'稀有', type:'武术', cost:1, count:2, desc:'本回合每打出一张其他招式，造成2点固定伤害（触发次数＝本回合已打出的招式数）。'},
+  {name:'二次爆炸', rarity:'衍生', type:'法术', cost:1, count:3, desc:'对所有敌人造成 3 点法术伤害。'},
+  {name:'熔岩爆破', rarity:'史诗', type:'法术', cost:2, count:1, desc:'造成9点法术伤害，获得1张「二次爆炸」。'},
+  {name:'毒爆',     rarity:'稀有', type:'法术', cost:1, count:1, desc:'立即触发 2 次目标全部毒伤。'},
+  {name:'法力奔涌', rarity:'史诗', type:'法术', cost:2, count:1, desc:'对随机敌人释放4个随机法术（这些随机法术默认已注能）。'},
+  {name:'迷之匣',   rarity:'史诗', type:'装备', cost:0, count:1, desc:'主动技能：发现两张随机招式，交换其费用。'},
+  {name:'步兵',     rarity:'衍生', type:'生物', cost:0, count:2, desc:'攻击力4生命4，优先为主人承受伤害，自动攻击敌人。'},
+  {name:'宠物蛋',   rarity:'古朴', type:'资源', cost:0, count:1, desc:'可以孵化宠物。'},
+  {name:'石榴弹珠', rarity:'古朴', type:'资源', cost:0, count:3, desc:'漂亮的小玩意，可出售。'},
+  {name:'一把钥匙', rarity:'古朴', type:'资源', cost:0, count:1, desc:'解锁大门。'},
+];
+const SAFE = [
+  {name:'破釜沉舟',     rarity:'稀有', type:'武术', cost:2, count:1, desc:'攻（+3）；若本牌为最后一张手牌，效果触发 2 次。'},
+  {name:'末日浩劫之门', rarity:'传说', type:'生物', cost:0, count:1, desc:'回合开始时对所有敌方角色各施加一层随机诅咒，优先不重复。'},
+  {name:'天国之门',     rarity:'传说', type:'生物', cost:0, count:1, desc:'回合开始时随机获取一项祝福，对全体友方施放，优先不重复。'},
+];
+const POCKET = [
+  {name:'江湖救急-改', rarity:'衍生', type:'武术', cost:0, count:2, desc:'随机获得3张临时卡牌，回合开始时将其消耗。'},
+  {name:'封印肢体1',   rarity:'衍生', type:'生物', cost:0, count:2, desc:'受缚之残影的封印肢体。入手时无效果，无法打出。'},
+  {name:'封印肢体4',   rarity:'衍生', type:'生物', cost:0, count:1, desc:'受缚之残影的封印肢体。集齐 5 张封印之牌后破除封印。'},
+  {name:'余烬爆裂',    rarity:'衍生', type:'法术', cost:1, count:1, desc:'对全体敌人造成 2 点法术伤害；若击杀敌人，再施放一次。'},
+];
+const RAR_ORDER = {'传说':0,'史诗':1,'稀有':2,'职业':3,'棱彩':4,'衍生':5,'古朴':6};
+
+/* ═══ 渲染 ═══ */
+let zone='bag', filter='all', sortBy='rarity', selected=null;
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const isMove=t=>['武术','法术','能力卡'].includes(t);
+const svg=(s,color)=>s?s.replaceAll('CUR',color):GLYPH['资源'].replaceAll('CUR',color);
+
+function tileHTML(it,z){
+  const supply=!!it.supply, item=!!it.item;
+  const rc=(RAR[it.rarity]||{}).c, rw=(RAR[it.rarity]||{}).w;
+  const tint=supply?'rgba(174,191,201,.09)':rw||'rgba(255,255,255,.055)';
+  const glow=supply?'rgba(174,191,201,.14)':rc+'2e';
+  const tc=TC[supply?'资源':item?'道具':it.type]||'#c8d2da';
+  const sel=selected&&selected.name===it.name&&selected.zone===z?' sel':'';
+  const spent=z==='pocket'?' spent':'';
+  const prot=z==='safe'?' protected':'';
+  const icon=supply?SUPPLY_ICONS[it.name]:item?ITEM_ICONS[it.name]:svg(GLYPH[it.type],rc);
+  const state=z==='safe'?'押运':z==='pocket'?'已消耗':(item?'可用':'');
+  return `<div class="tile${sel}${spent}${prot}" tabindex="0" data-z="${z}" data-n="${esc(it.name)}"
+    style="--tint:${tint};--glow:${glow};--tc:${tc}">
+    ${item&&it.cost?`<span class="cost">${it.cost}</span>`:''}
+    <span class="ic">${icon}</span>
+    <span class="nm">${esc(it.name)}</span>
+    ${state?`<span class="state">${state}</span>`:''}
+    ${it.count>1?`<span class="ct">×${it.count}</span>`:''}</div>`;
+}
+
+function listFor(){
+  if(zone==='safe') return SAFE.map(x=>({...x}));
+  if(zone==='pocket') return POCKET.map(x=>({...x}));
+  let list;
+  if(filter==='物资') list=SUPPLIES.map(s=>({...s,supply:true}));
+  else if(filter==='道具') list=ITEMS.map(i=>({...i,item:true}));
+  else if(filter==='all') list=[...SUPPLIES.map(s=>({...s,supply:true})),...ITEMS.map(i=>({...i,item:true})),...CARDS.map(c=>({...c}))];
+  else list=CARDS.filter(c=>filter==='招式'?isMove(c.type):c.type===filter).map(c=>({...c}));
+  if(filter!=='物资') list.sort((a,b)=>{
+    if(sortBy==='type'){const t=a.type||'物资',u=b.type||'物资';return t.localeCompare(u,'zh')||(RAR_ORDER[a.rarity]??9)-(RAR_ORDER[b.rarity]??9);}
+    return (RAR_ORDER[a.rarity]??9)-(RAR_ORDER[b.rarity]??9)||a.name.localeCompare(b.name,'zh');
+  });
+  return list;
+}
+function render(){
+  $('#grid').innerHTML=listFor().map(it=>tileHTML(it,zone)).join('');
+  $$('#grid .tile').forEach(el=>{
+    el.addEventListener('click',()=>select(el.dataset.n,el.dataset.z));
+    el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(el.dataset.n,el.dataset.z);}});
+  });
+}
+function findItem(name,z){
+  const pool=z==='safe'?SAFE:z==='pocket'?POCKET:[...SUPPLIES.map(s=>({...s,supply:true})),...ITEMS.map(i=>({...i,item:true})),...CARDS];
+  return pool.find(i=>i.name===name);
+}
+function select(name,z){ selected={name,zone:z}; render(); renderDetail(); }
+function renderDetail(){
+  const it=selected&&findItem(selected.name,selected.zone);
+  const body=$('#dbody'),acts=$('#dacts');
+  if(!it){ body.innerHTML='<p class="dhint">点选左侧任意物品查看详情。<br>类型、数量与稀有度直接标在格子上，描述只在这里展开。</p>'; acts.innerHTML=''; return; }
+  const supply=!!it.supply, item=!!it.item;
+  const rc=(RAR[it.rarity]||{}).c, rw=(RAR[it.rarity]||{}).w;
+  const rcFinal=supply?'#aebfc9':rc;
+  const icon=supply?SUPPLY_ICONS[it.name]:item?ITEM_ICONS[it.name]:svg(GLYPH[it.type],rcFinal);
+  body.innerHTML=`
+    <div class="dhead">
+      <div class="dico" style="--glow:${supply?'rgba(174,191,201,.12)':rw}">${icon}</div>
+      <div class="dtitle">
+        <h3>${esc(it.name)}${it.count>1?` <small style="color:var(--ink-dim);font-size:16px">×${it.count}</small>`:''}</h3>
+        <span class="rt" style="--rc:${rcFinal};--rw:${supply?'rgba(174,191,201,.12)':rw}">${supply?it.tier+' 级物资':esc(it.rarity)}</span>
+        <div class="mt">${supply?`价值 ${it.value*it.count}`:`${item?'道具':esc(it.type)}${item&&it.cost?` · ${it.cost} 费`:''}`}</div>
+      </div>
+    </div>
+    <div class="ddesc">${esc(it.desc||'—')}</div>
+    <div class="dzone">${zone==='safe'?'<b>押运中</b> · 撤离失败也将运回基地，拖回背包可取出。'
+      :zone==='pocket'?'<b>已消耗</b> · 火堆休整复原 2 张 / 能源结晶复原 3 张。'
+      :item?'在<b>背包内使用</b>生效；战斗中使用请走战斗背包。'
+      :supply?'撤离时按估值结算带回；珍珠盒扩展格只收资源卡。'
+      :'可移入安全格交阿七押运；按住拖动可整理顺序。'}</div>`;
+  const btns=[];
+  if(zone==='bag'&&item) btns.push(`<button class="abtn primary" data-demo="使用 ${esc(it.name)}（小样演示）">使用</button>`);
+  if(zone==='bag'&&!supply) btns.push(`<button class="abtn" data-demo="已移入安全格（小样演示）">移入安全格</button>`);
+  if(zone==='safe') btns.push(`<button class="abtn" data-demo="已移回背包（小样演示）">移回背包</button>`);
+  btns.push('<button class="abtn" disabled>放大查看</button>');
+  acts.innerHTML=btns.join('');
+  $$('#dacts [data-demo]').forEach(b=>b.addEventListener('click',()=>toast(b.dataset.demo)));
+}
+let toastTimer;
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),1600); }
+
+/* ═══ 事件 ═══ */
+$$('.rz').forEach(b=>b.addEventListener('click',()=>{
+  $$('.rz').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+  zone=b.dataset.zone; selected=null; render(); renderDetail();
+  $$('.pill').forEach(p=>{p.style.display=(zone==='bag'||p.dataset.f==='all')?'':'none';});
+}));
+$$('.pill').forEach(f=>f.addEventListener('click',()=>{
+  if(zone!=='bag')return;
+  $$('.pill').forEach(x=>x.classList.remove('on')); f.classList.add('on'); filter=f.dataset.f; render();
+}));
+$('#sortBtn').addEventListener('click',()=>{
+  sortBy=sortBy==='rarity'?'type':'rarity'; render();
+  toast(sortBy==='rarity'?'排序：稀有度':'排序：种类');
+});
+$('#tidyBtn').addEventListener('click',()=>{ sortBy='rarity'; render(); toast('已整理（按稀有度）'); });
+
+render(); renderDetail();
+/* 舞台自适应 */
+const fitStage=()=>{const s=Math.min(innerWidth/1920,innerHeight/1080);
+  document.getElementById('fit').style.transform=`translate(-50%,-50%) scale(${s})`;};
+addEventListener('resize',fitStage); fitStage();
+</script>
+</body>
+</html>

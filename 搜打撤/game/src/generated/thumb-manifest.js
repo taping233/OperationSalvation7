@@ -107,8 +107,6 @@ export default [
   "cards/martial-cmtn1wnhhym.webp",
   "cards/martial-cmtn233trmeg.webp",
   "cards/martial-cmtn2jc142dj.webp",
-  "cards/martial-melee.webp",
-  "cards/martial-ranged.webp",
   "cards/martial-tt2-block.webp",
   "cards/martial-tt2-bloodblade.webp",
   "cards/martial-tt2-comboarrow.webp",

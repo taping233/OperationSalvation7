@@ -1,24 +1,10 @@
 /* 页面结构和尺寸；卡面外观只由 card-layout-selected.css 维护。 */
-.hs-card { position:relative; width:10em; font-size:14px; box-sizing:border-box; user-select:none; }
+.hs-card { position:relative; width:13.08em; font-size:14px; box-sizing:border-box; user-select:none; }
 .hs-card.sm { font-size:12px; }
 .hs-card.lg { font-size:24px; }
 .hs-card.xl { font-size:30px; }
-.hsc-cost { display:flex; align-items:center; justify-content:center; font-weight:800; }
-.hsc-art { display:flex; align-items:center; justify-content:center; }
-.hsc-art .ic { width:2.6em; height:2.6em; vertical-align:0; }
-.hsc-name { text-align:center; font-weight:700; }
-.hsc-type { text-align:center; }
 /* 抽牌、注能、回复、护甲仍保留交互提示与语义色。 */
-  .hsc-kw { display: flex; gap: .25em; justify-content: center; margin: .1em 0 0; flex-shrink: 0; }
-  .hsc-kw span { display: inline-flex; align-items: center; gap: .2em; padding: .05em .42em;
-    border-radius: .9em; font-size: .58em; line-height: 1.45; letter-spacing: .05em; white-space: nowrap;
-    color: #ebebeb; background: rgba(12,12,12,.6); border: 1px solid rgba(161,161,161,.4); cursor: help; }
-  .hsc-kw .ic { width: .85em; height: .85em; vertical-align: 0; }
-  .hsc-kw .kw-draw { color: #d1d1d1; border-color: rgba(154,154,154,.55); }
-  .hsc-kw .kw-infuse { color: #b4b4b4; border-color: rgba(128,128,128,.55); }
   /* 注能变体（注能前后效果不同）：水蓝高亮提醒 */
-  .hsc-kw .kw-infuse.alt { color: #ced3d9; border-color: rgba(96,179,220,.85);
-    box-shadow: 0 0 .5em rgba(96,179,220,.35); }
 
 .dmg-num { color:#999; font-weight:700; }
   .sellable-tgl { display: inline-flex; align-items: center; gap: .35em; font-size: .9em;

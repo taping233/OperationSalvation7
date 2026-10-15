@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { readFileSync, mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { readFileSync, mkdtempSync, mkdirSync, writeFileSync, rmSync, unlinkSync } from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
@@ -57,7 +57,9 @@ describe('byte-identical chest output aliases', () => {
     writeFileSync(path.join(root, original), 'redrawn original');
     expect(collectVerifiedRuntimeAssetAliases(root).has(original)).toBe(false);
     expect(collectVerifiedRuntimeAssetAliases(root).has(thumbnail)).toBe(true);
-    rmSync(path.join(root, 'thumbs/cards/resources/ration.webp'));
+    // 本机 Node v24.13.0 的 fs.rmSync 对单文件静默不删除（unlinkSync 正常），
+    // 用 unlinkSync 保证「canonical 缺失则别名不成立」的删除前提真实生效。
+    unlinkSync(path.join(root, 'thumbs/cards/resources/ration.webp'));
     expect(collectVerifiedRuntimeAssetAliases(root).has(thumbnail)).toBe(false);
   });
 

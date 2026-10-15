@@ -42,6 +42,18 @@ async function finish(request) {
 }
 
 describe('选角真实按需叶入口', () => {
+  it('人物页挂载后同一步添加入口切幕，不等载入流程释放', async () => {
+    let completed = false;
+    const onPresented = vi.fn(() => {
+      expect(document.querySelector('.cls2-page')).not.toBeNull();
+      expect(completed).toBe(false);
+      document.querySelector('.cls2-page').insertAdjacentHTML('beforeend', '<div class="camp-entry-cut"></div>');
+    });
+    const request = h.facade.openClassChoice({ onCancel:h.cancel, onPresented }).then(result => { completed = true; return result; });
+    expect(await finish(request)).toBe(true);
+    expect(onPresented).toHaveBeenCalledOnce();
+    expect(document.querySelector('.camp-entry-cut')).not.toBeNull();
+  });
   it('等待标题/基地不导入页面，战斗/巢穴/标题状态也不偷偷加载', async () => {
     await vi.advanceTimersByTimeAsync(10_000); expect(h.imports).not.toHaveBeenCalled();
     for (const state of ['title', 'moving', 'done']) {

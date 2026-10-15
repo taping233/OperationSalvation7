@@ -40,10 +40,10 @@
   position:relative; display:flex; align-items:center; justify-content:center; width:100%; height:100%; min-width:0;
   background:transparent; border:0; transition:transform 280ms var(--motion-ease-enter,ease-out);
 }
-#overlay #hubMain.pg.hub.base-camp .shop-v3-art :is(img,.art-card-image) {
+#overlay #hubMain.pg.hub.base-camp .shop-v3-art > :is(img,.art-card-image) {
   display:block; width:auto!important; height:auto!important; max-width:100%; max-height:100%; object-fit:contain!important;
 }
-#overlay #hubMain.pg.hub.base-camp .shop-v3-product:not(.shop-v3-product--material) .shop-v3-art :is(img,.art-card-image) { box-shadow:0 8px 16px #172a3526; }
+#overlay #hubMain.pg.hub.base-camp .shop-v3-art > .hs-card { width:min(75%,180px);flex:none; }
 #overlay #hubMain.pg.hub.base-camp .shop-v3-product--material .shop-v3-preview::before {
   content:''; position:absolute; left:14%; right:14%; bottom:34px; height:16px; border-radius:50%; background:#172a3514;
 }

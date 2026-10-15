@@ -1,15 +1,70 @@
-/* Quiet winter scenery: weather does not redraw the map canvas. */
+/* Two depths of drifting snow; CSS compositing leaves the idle map canvas cached. */
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #viewport::before,
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #viewport::after {
   content:''; position:absolute; pointer-events:none; z-index:1; inset:-240px -320px;
-  background-image:radial-gradient(circle 1px at 36px 48px,#dceaf080 90%,transparent),radial-gradient(circle 1px at 253px 86px,#d2e5eb60 90%,transparent),radial-gradient(circle .8px at 72px 249px,#c2dbe660 90%,transparent);
-  background-size:397px 293px; animation:map-snow-drift 20s linear infinite; opacity:.28;
+  background-repeat:repeat;
 }
-@keyframes map-snow-drift { from { transform:translate3d(0,-120px,0); } to { transform:translate3d(-397px,173px,0); } }
-body.reduce-motion:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #viewport::after { animation:none; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #viewport::before {
+  background-image:radial-gradient(circle .8px at 36px 48px,#dceaf0a8 70%,transparent),radial-gradient(circle 1px at 253px 86px,#d2e5eb90 70%,transparent),radial-gradient(circle .7px at 72px 249px,#c2dbe680 70%,transparent),radial-gradient(circle 1px at 171px 178px,#e8f3f0a0 70%,transparent),radial-gradient(circle .8px at 344px 224px,#dceaf090 70%,transparent);
+  background-size:397px 293px; animation:map-snow-far 24s linear infinite; opacity:.55;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #viewport::after {
+  background-image:radial-gradient(circle 1.8px at 57px 79px,#eff8f0cc 45%,#dceaf030 75%,transparent),radial-gradient(circle 2.3px at 279px 238px,#eff8f0c0 40%,#dceaf028 75%,transparent),radial-gradient(circle 1.4px at 163px 367px,#eaf5f0b0 55%,transparent),radial-gradient(circle 2px at 409px 139px,#f0f7f0b8 40%,#dceaf028 75%,transparent);
+  background-size:487px 421px; animation:map-snow-near 15s linear infinite; animation-delay:-7s; opacity:.65;
+}
+/* A whole vertical tile per loop makes the wrap continuous; a little sway suggests wind. */
+@keyframes map-snow-far {
+  0% { transform:translate3d(0,-180px,0); }
+  50% { transform:translate3d(-14px,-33.5px,0); }
+  100% { transform:translate3d(0,113px,0); }
+}
+@keyframes map-snow-near {
+  0% { transform:translate3d(0,-220px,0); }
+  50% { transform:translate3d(24px,-9.5px,0); }
+  100% { transform:translate3d(0,201px,0); }
+}
+body.reduce-motion #viewport::before,
+body.reduce-motion #viewport::after { animation:none!important; }
 @media (prefers-reduced-motion:reduce) {
-  body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #viewport::after { animation:none; }
+  body #viewport::before,body #viewport::after { animation:none!important; }
 }
-body:has(#overlay:not([hidden])) #viewport::after { visibility:hidden; }
+body:has(#overlay:not([hidden])) #viewport::before,
+body:has(#overlay:not([hidden])) #viewport::after,
+body:has(#title:not([hidden])) #viewport::before,
+body:has(#title:not([hidden])) #viewport::after,
+body:has(#exitScr:not([hidden])) #viewport::before,
+body:has(#exitScr:not([hidden])) #viewport::after { visibility:hidden; animation-play-state:paused; }
+
+/* Soft shafts of cold light sit above the scenery, beneath map controls and snow. */
+.map-volumetric-light {
+  display:none; position:absolute; inset:0; z-index:1; overflow:hidden; pointer-events:none;
+  mask-image:linear-gradient(to bottom,#000 0%,#000 35%,transparent 94%);
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) .map-volumetric-light { display:block; }
+.map-volumetric-light i {
+  position:absolute; top:-20%; left:14%; width:18%; height:130%;
+  background:linear-gradient(90deg,transparent,rgba(178,217,230,.07) 24%,rgba(227,244,240,.15) 48%,rgba(178,217,230,.06) 73%,transparent);
+  clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);
+  filter:blur(12px); transform-origin:50% 0; transform:rotate(21deg);
+  animation:map-light-breathe 18s ease-in-out infinite alternate;
+}
+.map-volumetric-light i:nth-child(2) { left:49%; width:12%; top:-28%; opacity:.55; animation-duration:23s; animation-delay:-9s; }
+.map-volumetric-light i:nth-child(3) { left:84%; width:22%; opacity:.4; animation-duration:27s; animation-delay:-15s; }
+@keyframes map-light-breathe {
+  from { transform:rotate(17deg); opacity:.38; }
+  to { transform:rotate(23deg); opacity:.72; }
+}
+/* Each shaft retains its own intensity while the shared animation slowly breathes. */
+.map-volumetric-light i:nth-child(2) { background:linear-gradient(90deg,transparent,rgba(178,217,230,.035) 24%,rgba(227,244,240,.08) 48%,rgba(178,217,230,.03) 73%,transparent); }
+.map-volumetric-light i:nth-child(3) { background:linear-gradient(90deg,transparent,rgba(178,217,230,.025) 24%,rgba(227,244,240,.06) 48%,rgba(178,217,230,.025) 73%,transparent); }
+body:has(#overlay:not([hidden])) .map-volumetric-light,
+body:has(#title:not([hidden])) .map-volumetric-light,
+body:has(#exitScr:not([hidden])) .map-volumetric-light { visibility:hidden; }
+body:has(#overlay:not([hidden])) .map-volumetric-light i,
+body:has(#title:not([hidden])) .map-volumetric-light i,
+body:has(#exitScr:not([hidden])) .map-volumetric-light i { animation-play-state:paused; }
+body.reduce-motion .map-volumetric-light i { animation:none; }
+@media (prefers-reduced-motion:reduce) { .map-volumetric-light i { animation:none; } }
 
 /* One region name above the map; the old boxed chapter list is no longer rendered. */
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #expeditionChapter {
@@ -24,8 +79,45 @@ body #layerBanner { display:none; }
 body.lobby #expeditionChapter,body.page-opaque #expeditionChapter { display:none; }
 #game { background:#080d11; }
 
+/* Resource symbols share the map-node illustration grammar, including their dim support. */
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud .res-ic.map-resource-art {
+  width:64px; height:64px; padding:0; flex:none; object-fit:contain; filter:none;
+}
+
+/* The gold counter icon renders 1.5x the other resource symbols. */
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud .res-gold .res-ic.map-resource-art {
+  width:96px; height:96px;
+}
+
 /* Existing top controls retain their actions; the location key stays in flow.
    These three resets are required by winter.css's earlier fixed !important rules. */
 #topBtns #btnLocate { position:static!important; bottom:auto!important; right:auto!important; width:40px; height:40px; }
 #topBtns #btnHome.exit-btn { background:#292c2f; box-shadow:none; color:#ced0d1; border:1px solid #868b8e44; }
 #logPanel { background:#101a20ed; border:1px solid #71838b50; border-radius:0; }
+
+/* Local resource explanations do not revive the retired global black-box tooltip. */
+#resHud .chip-mini { position:relative; }
+:is(#resHud,#hpHud) .map-resource-tip {
+  position:absolute; top:calc(100% + 10px); right:0; z-index:12;
+  display:block; width:246px; box-sizing:border-box; padding:13px 16px;
+  background:rgba(17,27,35,.58); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border:1px solid #82989c55; border-left:2px solid #a8c9c5;
+  box-shadow:0 8px 22px #02080d66; color:#c5cfd1;
+  font:400 16px/1.65 var(--font-ui); letter-spacing:0; text-align:left;
+  pointer-events:none; opacity:0; visibility:hidden; transform:translateY(-4px);
+  transition:opacity 140ms ease,transform 140ms ease,visibility 140ms;
+}
+:is(#resHud,#hpHud) .map-resource-tip strong { display:block; margin-bottom:4px; color:#eef3ee; font:600 18px/1.4 var(--font-ui); }
+#hpHud .map-resource-tip { left:0; right:auto; }
+#resHud .res-gold .map-resource-tip { border-left-color:#d8bd79; }
+#resHud .res-atk .map-resource-tip { border-left-color:#c899b3; }
+#resHud .chip-mini:hover .map-resource-tip,
+#resHud .chip-mini:focus-visible .map-resource-tip,
+#hpHud:hover .map-resource-tip,
+#hpHud:focus-visible .map-resource-tip { opacity:1; visibility:visible; transform:none; }
+#resHud .chip-mini:focus-visible,
+#hpHud:focus-visible { outline:1px solid #a8c9c5; outline-offset:3px; }
+body:has(#overlay:not([hidden])) :is(#resHud,#hpHud) .map-resource-tip,
+body:has(#title:not([hidden])) :is(#resHud,#hpHud) .map-resource-tip { display:none; }
+body.reduce-motion :is(#resHud,#hpHud) .map-resource-tip { transition:none; transform:none; }
+@media (prefers-reduced-motion:reduce) { :is(#resHud,#hpHud) .map-resource-tip { transition:none; transform:none; } }

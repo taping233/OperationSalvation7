@@ -37,7 +37,6 @@
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-cardgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); align-content: start; gap: 20px; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-cell { min-width: 0; border-radius: 0; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-cell .hs-card { font-size: 14px; }
-#overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-cell .hsc-val { right: 2px; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-cell .stack-count { background: #242729; color: #f1f0ee; border-color: #c8af5b; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace :is(.ov-note, .hint, .dim, .set-tip) { color: #51575d; text-shadow: none; }
 #overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace :is(.hint b, .ov-note b) { color: #35393d; }

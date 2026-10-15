@@ -28,9 +28,15 @@ export function eventSceneHTML({ tone, icon = '', title, sub = '', body = '', fo
     <button type="button" class="event-choice-clear" disabled>取消选择</button>
     <button type="button" class="ov-btn ok event-choice-confirm" disabled>选择后确认</button>
   </div>` : '';
+  // 事件体系页顶栏（2026-10-15 老板令）：仅左上退出键，样式复用地图 #topBtns 按钮语言；
+  // 金币/攻击不经页面重画——CSS 把真 HUD #resHud 提到 overlay 之上常驻（entry-events.css）。
+  const topbar = ['event', 'entry', 'fire', 'pickup'].includes(tone) ? `<div class="event-topbar">
+    <button type="button" class="event-exit" data-act="eventExit" aria-label="退出，返回地图"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M14.5 4H19v16h-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 12h9.5M10 8.5 13.5 12 10 15.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>` : '';
   // Map area names may already carry their layer prefix; show that fact once.
   const areaLabel = (region || '远征节点').replace(/^第\s*\d+\s*层\s*[·・•—-]?\s*/, '') || '远征节点';
   return `<div class="pg node-pg sc-${escAttr(tone)} event-scene event-replica${entry ? ' entry-scene' : ''}"${choiceCount ? ` data-event-choice-count="${choiceCount}"` : ''}${music ? ` data-music-scene="${escAttr(music)}"` : ''}${asset ? ` data-asset-key="${escAttr(asset)}"` : ''}>
+    ${topbar}
     <div class="node-panel">
       <div class="event-context"><div class="node-kicker">${esc(areaLabel)} <span>第 ${layer + 1} 层</span></div>
       </div>

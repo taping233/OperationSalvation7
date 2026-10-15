@@ -34,7 +34,7 @@
 #overlay .shop-pg.shop-market .shop-preview:hover { background:#9bd7ca12; }
 #overlay .shop-pg.shop-market .shop-item-art { display:grid; place-items:center; container-type:size; flex:1; min-height:0; width:100%; padding:0; }
 #overlay .shop-pg.shop-market .shop-item-title { box-sizing:border-box; display:block; width:100%; min-height:29px; padding:0 12px 5px; color:var(--shop-ink); background:none; font-size:17px; font-weight:500; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-body:has(#viewport) #overlay .shop-pg.shop-market .shop-preview .hs-card { flex:none; width:min(174px,calc((100cqh - 46px) * 272 / 406)); max-width:78%; min-height:0; margin:0; font-size:13px; pointer-events:none; }
+body:has(#viewport) #overlay .shop-pg.shop-market .shop-preview .hs-card { flex:none; width:min(226px,calc((100cqh - 12px) * 2 / 3)); max-width:100%; margin:0; font-size:13px; pointer-events:none; }
 #overlay .shop-pg.shop-market .shop-preview .hs-card:is(.rv4,.rv7,.rv-prism) { margin:0; }
 #overlay .shop-pg.shop-market .shop-offer { display:flex; align-items:center; justify-content:space-between; box-sizing:border-box; width:100%; min-height:43px; margin:0; padding:6px 12px 12px; gap:6px; background:none; border:0; }
 #overlay .shop-pg.shop-market .shop-owned { color:#a8bbbf; font-size:12px; line-height:1.4; text-align:left; }
@@ -44,7 +44,7 @@ body:has(#viewport) #overlay .shop-pg.shop-market .shop-preview .hs-card { flex:
 #overlay .shop-pg.shop-market .shop-slot.sold .shop-item-art { opacity:.38; filter:grayscale(.75); }
 #overlay .shop-pg.shop-market .shop-slot.sold .shop-v14-price { color:#a4b8ad; font-size:16px; }
 #overlay .shop-pg.shop-market .shop-slot.sold .shop-item-title { color:#c1c8c9; }
-#overlay .shop-pg.sc-shop .shop-card-mystery { box-sizing:border-box; display:flex; flex:none; flex-direction:column; align-items:center; justify-content:center; gap:10px; width:min(174px,calc((100cqh - 46px) * 272 / 406)); max-width:78%; aspect-ratio:272/406; min-height:0; height:auto; margin:0; border:1px solid #94b9b55c; border-radius:0; background:#13232be8; color:#c9e0da; font:400 42px/1 var(--font-ui); text-shadow:none; }
+#overlay .shop-pg.sc-shop .shop-card-mystery { box-sizing:border-box; display:flex; flex:none; flex-direction:column; align-items:center; justify-content:center; gap:10px; width:min(226px,calc((100cqh - 12px) * 2 / 3)); max-width:100%; aspect-ratio:272/406; min-height:0; height:auto; margin:0; border:1px solid #94b9b55c; border-radius:0; background:#13232be8; color:#c9e0da; font:400 42px/1 var(--font-ui); text-shadow:none; }
 #overlay .shop-pg.sc-shop .shop-card-mystery .ic { width:24px; height:24px; color:var(--shop-muted); }
 #overlay .shop-pg.sc-shop .shop-card-mystery span { color:var(--shop-muted); font-size:14px; }
 #overlay .shop-pg.shop-market .shop-empty { box-sizing:border-box; display:grid; place-content:center; width:100%; height:100%; min-height:0; padding:18px; border:0; color:var(--shop-muted); font-size:16px; text-align:center; }
@@ -62,7 +62,7 @@ body:has(#viewport) #overlay .shop-pg.shop-market .shop-preview .hs-card { flex:
 #overlay .shop-pg.shop-market .shop-detail-close { position:absolute; z-index:2; top:14px; right:18px; width:44px; height:44px; padding:0; border:1px solid #c8d6d344; border-radius:50%; background:#0b171be6; color:#d5dfdc; font:400 30px/1 var(--font-ui); cursor:pointer; }
 #overlay .shop-pg.shop-market .shop-detail-scroll { position:relative; display:flex; flex:0 1 auto; flex-direction:column; align-items:center; gap:16px; width:min(620px,88%); min-height:0; padding:22px 28px 14px; overflow:auto; overscroll-behavior:contain; }
 #overlay .shop-pg.shop-market .shop-detail-art { display:grid; place-items:center; flex:none; min-width:0; padding:10px 12px; }
-body:has(#viewport) #overlay .shop-pg.shop-market .shop-detail-art .hs-card { width:350px; max-width:none; min-height:0; font-size:23px; }
+body:has(#viewport) #overlay .shop-pg.shop-market .shop-detail-art .hs-card { width:350px; max-width:none; font-size:23px; }
 #overlay .shop-pg.shop-market .shop-detail-art .shop-card-mystery { width:350px; max-width:none; margin:0; }
 #overlay .shop-pg.shop-market .shop-detail-art .shop-card-mystery small { font-size:18px; color:#a9c8c6; }
 #overlay .shop-pg.shop-market .shop-detail-rules { align-self:stretch; padding:12px 20px; border:0; background:#16282bcc; }

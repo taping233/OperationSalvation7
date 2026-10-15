@@ -1,4 +1,5 @@
-import { createCityCut, cityCutDuration } from './camp-entry.js';
+import { createCityCut, playPreparedCut } from './camp-entry.js';
+import { waitPageVisual } from './page-visual-ready.js';
 import { motionReduced } from './motion-presets.js';
 import '../../css/expedition-transitions.css';
 
@@ -22,6 +23,13 @@ export function startDepartureHandoff(start, source) {
       if (!motionReduced()) await delay(160);
       if (source && !source.isConnected) return false;
       const result = await start();
+      if (result !== false) {
+        await waitPageVisual(document.getElementById('viewport'), { background: window.SDT?.UI?._pageBgReady });
+        const game = window.SDT?.game;
+        if (game?.runActive && game.state === 'idle' && !game.battleActive && !game.nestActive) {
+          await window.SDT.Renderer?.prepare?.(game, () => handoff === operation);
+        }
+      }
       // 给已挂载过场/地图两个绘制机会；后台窗口仍有时间上限。
       await new Promise(resolve => {
         const timer = setTimeout(resolve, 160);
@@ -46,17 +54,5 @@ export function enterDepartureCut(page) {
   if (motionReduced() || !overlay || !card) return;
   const cut = createCityCut({ archive: '出征档案', title: '出征整备',
     subtitle: 'DEPARTURE / 人物与携带准备', destination: 'DEPARTURE', watermark: 'PREPARE' });
-  card.append(cut);
-  let timer;
-  const finish = () => {
-    clearTimeout(timer);
-    observer.disconnect();
-    cut.remove();
-  };
-  const observer = new MutationObserver(() => {
-    if (!page.isConnected || !overlay.contains(page) || overlay.hidden || overlay.dataset.uiClosing) finish();
-  });
-  observer.observe(overlay, { childList: true, subtree: true, attributes: true,
-    attributeFilter: ['hidden', 'data-ui-closing'] });
-  timer = setTimeout(finish, cityCutDuration);
+  playPreparedCut(page, cut);
 }

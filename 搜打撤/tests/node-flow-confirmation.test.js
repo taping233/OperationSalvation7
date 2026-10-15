@@ -28,18 +28,16 @@ beforeEach(() => {
   st.acts = {}; st.layer.logical = [{ def:{ type:'battle' } }];
   st.encounter.mockClear(); st.battle.mockClear(); st.enter.mockClear(); st.chests.mockClear(); st.supply.mockClear(); st.safe.mockClear();
 });
-it('落脚接敌不抽遭遇；返回可重入，确认一次才抽怪与开战，旧回调失效', () => {
+it('战斗格抵达直接开战：无确认页与过场，flow 不预抽遭遇', () => {
   reenter();
-  expect(st.encounter).not.toHaveBeenCalled();
-  const abandoned = st.acts.nodeBattleEnter;
-  st.acts.nodeDecisionLeave();
-  reenter(); abandoned();
-  expect(st.encounter).not.toHaveBeenCalled();
-  const enter = st.acts.nodeBattleEnter;
-  enter(); enter();
-  expect(st.encounter).toHaveBeenCalledTimes(1);
   expect(st.battle).toHaveBeenCalledTimes(1);
-  expect(st.enter).not.toHaveBeenCalled();
+  expect(st.battle.mock.calls[0][0]).toBe(st.layer.logical[0].def);   // 只传 def，遭遇由 openBattleCell 组建
+  expect(st.battle.mock.calls[0][1]).toBeUndefined();
+  expect(st.encounter).not.toHaveBeenCalled();
+  expect(st.enter).not.toHaveBeenCalled();          // 接敌确认过场已移除
+  expect(st.acts.nodeBattleEnter).toBeUndefined();  // 确认页按钮不再注册
+  expect(st.acts.nodeDecisionLeave).toBeUndefined();
+  expect(st.game.state).toBe('modal');              // 战斗接管前锁住地图
 });
 it('宝箱必须确认搜索；返回不发奖励，双击搜索只打开一次', () => {
   st.layer.logical[0].def.type = 'chest';
@@ -55,13 +53,15 @@ it('点击实际入口才派发补给页，旧档与旁边节点不合成补给'
   reenter(); expect(st.supply).toHaveBeenCalledTimes(1);
   st.game.entrySupply = null; st.game.state = 'idle';
   reenter(); expect(st.supply).toHaveBeenCalledTimes(1);
-  expect(st.acts.nodeBattleEnter).toBeTypeOf('function');
+  expect(st.battle).toHaveBeenCalledTimes(1);   // 补给领完后战斗格直接开战，不再弹确认页
 });
-it('入口全收/收益已消耗的终点显示安全页，不重开收益', () => {
+it('入口全收/收益已消耗的终点直接收尾，不重开收益也不弹安全页', () => {
   st.game.entrySupply = { version:1, layerIdx:0, trackPos:0, cardIds:['a'], taken:[0] };
   st.game.visited['0,0'] = 1;
   reenter();
   expect(st.supply).not.toHaveBeenCalled();
   expect(st.encounter).not.toHaveBeenCalled();
-  expect(st.safe).toHaveBeenCalledTimes(1);
+  expect(st.battle).not.toHaveBeenCalled();
+  expect(st.safe).not.toHaveBeenCalled();   // 空白安全提示页已移除
+  expect(st.game.state).toBe('idle');       // 直接收尾，留在地图
 });

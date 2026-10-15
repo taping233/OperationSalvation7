@@ -4,6 +4,7 @@ import { captureArchiveExit, enterCamp, clearCampEntry } from './camp-entry.js';
 import { pageMotionProfile } from './page-motion-profiles.js';
 import { enterArchive, clearArchiveMotion } from './archive-motion.js';
 import { navigationState, navigationChange } from './navigation-motion.js';
+import { stagePageVisual, stageMapReturn, cancelPageVisual } from './page-visual-ready.js';
 const installed = new WeakSet();
 const overlay = document.getElementById('overlay');
 let pendingClose = null;
@@ -44,8 +45,9 @@ function markEntry(kind, restart) {
 }
 
 function cancelLegacyCardTween() {
+  const revision = window.SDT?.UI?._overlayRevision;
   queueMicrotask(() => {
-    if (!overlay || overlay.hidden) return;
+    if (!overlay || overlay.hidden || window.SDT?.UI?._overlayRevision !== revision) return;
     const card = document.getElementById('ovBody')?.parentElement;
     let canceled = false;
     card?.getAnimations?.().forEach(animation => {
@@ -85,7 +87,6 @@ function install(ui = window.SDT?.UI) {
     const isCamp = mode === 'page' && typeof html === 'string' && html.includes('base-camp');
     const initialCamp = isCamp && !body?.querySelector('#hubMain');
     const archiveExit = initialCamp && !interfaceReducedMotion() ? captureArchiveExit(body) : null;
-    clearCampEntry();
     clearArchiveMotion(overlay);
     const wasOpen = !overlay.hidden;
     const oldProfile = pageMotionProfile(body)?.key;
@@ -93,6 +94,8 @@ function install(ui = window.SDT?.UI) {
     const oldNavigation = navigationState(body?.querySelector('#hubMain'));
     const refreshHub = wasOpen && mode === 'page' && !!body?.querySelector('#hubMain')
       && typeof html === 'string' && html.includes('id="hubMain"');
+    // 同一基地页的异步资料刷新只替换内容，不中断尚未播完的揭幕。
+    if (!refreshHub) clearCampEntry();
     const motionKeyChanged = options?.motionKey && options.motionKey !== this._motionKey;
     this._motionKey = options?.motionKey || null;
     const restart = !wasOpen || this._lastMode !== mode || motionKeyChanged || (mode === 'page' && !refreshHub);
@@ -105,14 +108,19 @@ function install(ui = window.SDT?.UI) {
     const currentBody = document.getElementById('ovBody');
     overlay.dataset.uiMotion = kindFor(this, mode, currentBody);
     const tabChanged = refreshHub && oldTab !== tabKey(currentBody);
+    const navChange = navigationChange(oldNavigation, navigationState(currentBody?.querySelector('#hubMain')));
+    const dedicated = !!currentBody?.querySelector('.city-run-transition, .expedition-cut')
+      || !!(currentBody?.querySelector('.studio-unified') && document.querySelector('.page-loading'));
+    const reveal = () => {
     if (refreshHub || initialCamp) {
       // 基地外壳始终保持不透明；首次进入由专用编排展开内容，
       // 基地内刷新也不为重建的 header/body 重挂通用入场块。
       delete overlay.dataset.uiEnter;
       clearSurface(overlay);
       delete overlay.dataset.surfaceMotion;
-      if (tabChanged || refreshHub && navigationChange(oldNavigation, navigationState(currentBody?.querySelector('#hubMain'))).changed) {
-        enterSurface(overlay, { restart: true, navigation: navigationChange(oldNavigation, navigationState(currentBody?.querySelector('#hubMain'))) });
+      if (tabChanged || refreshHub && navChange.changed) {
+        clearCampEntry();
+        enterSurface(overlay, { restart: true, navigation: navChange });
       }
       if (initialCamp) {
         delete overlay.dataset.surfaceLayout;
@@ -131,12 +139,31 @@ function install(ui = window.SDT?.UI) {
       if (samePage) delete overlay.dataset.uiEnter;
       enterSurface(overlay, { restart, fast: overlay.dataset.uiMotion === 'fast', contentOnly: !!samePage });
     }
-    cancelLegacyCardTween();
     enterArchive(overlay, currentBody, interfaceReducedMotion());
+    };
+    const realPageChange = !refreshHub || tabChanged || navChange.changed;
+    const staged = !dedicated && !initialCamp && realPageChange
+      && (mode === 'page' || mode === 'bagpage' || (this._roomActive && mode !== 'battle'));
+    if (staged) {
+      if (refreshHub) clearCampEntry();
+      clearSurface(overlay);
+      delete overlay.dataset.uiEnter;
+      stagePageVisual(this, reveal);
+    } else {
+      cancelPageVisual();
+      reveal();
+    }
+    cancelLegacyCardTween();
     return result;
   };
 
   ui.hideOverlay = function (options) {
+    cancelPageVisual();
+    const game = window.SDT?.game;
+    if (!options?.immediate && !overlay.hidden && game?.runActive && !game.battleActive && !game.nestActive
+      && (overlay.classList.contains('opaque') || overlay.dataset.surfaceContext === 'expedition')) {
+      stageMapReturn(this, game);
+    }
     clearCampEntry();
     if (pendingClose) {
       if (!options?.immediate) return;

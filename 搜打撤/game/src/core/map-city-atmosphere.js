@@ -1,11 +1,12 @@
 // 老板选定的透明城市残影只烘焙进背景，不参与节点或每帧调度。
+import { mapImageReady } from './map-image-ready.js';
 export function createMapCityAtmosphere(onReady) {
   const props = new Image();
   props.decoding = 'async';
   props.onload = onReady;
   props.src = new URL('../../assets/scenes/map-nodes/city-ghost-props-a-1012.webp', import.meta.url).href;
 
-  return function drawMapCityAtmosphere(ctx, w, h) {
+  function drawMapCityAtmosphere(ctx, w, h) {
     if (!props.complete || !props.naturalWidth) return;
     const s = Math.min(w / 1440, h / 900);
     const sw = Math.floor(props.naturalWidth / 2);
@@ -25,4 +26,6 @@ export function createMapCityAtmosphere(onReady) {
     place(1, 1, w - 375 * s, h * .60, 360 * s);
     ctx.restore();
   };
+  drawMapCityAtmosphere.ready = () => mapImageReady(props);
+  return drawMapCityAtmosphere;
 }

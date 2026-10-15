@@ -111,7 +111,7 @@ export function refreshArchiveBacks({ base, meta, cards }) {
   return true;
 }
 
-/** Call after bindArchive(ui, refresh), which owns filtering, target location and story loading. */
+/** Call after bindArchive(ui), which owns filtering, target location and story loading. */
 export function bindArchiveV3({ ui, base = window.SDT.Base, meta = window.SDT.Meta, cards }) {
   const root = document.querySelector('#hubMain .hub-archive-v3');
   if (!root) return;

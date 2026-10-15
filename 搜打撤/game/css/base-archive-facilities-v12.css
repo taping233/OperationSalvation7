@@ -52,7 +52,7 @@
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .collection-v12 { min-height:0; gap:14px; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .collection-v12-stage { display:grid; grid-template-columns:minmax(250px,1fr) minmax(240px,.75fr); gap:30px; min-height:300px; flex:1; padding:26px; border:1px solid var(--camp-line); border-radius:20px; background:var(--base-v12-glass); backdrop-filter:blur(16px); }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .collection-v12-display { display:flex; align-items:center; justify-content:center; min-height:260px; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .collection-v12-display .hs-card { width:230px; height:322px; max-width:none; margin:0; font-size:var(--base-type-label,19px); }
+#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .collection-v12-display .hs-card { width:230px; max-width:none; margin:0; font-size:var(--base-type-label,19px); }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .collection-v12-info { display:flex; flex-direction:column; justify-content:center; gap:14px; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .collection-v12-info h3 { font-size:30px; margin:0; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .collection-v12-info dl div { display:flex; justify-content:space-between; gap:15px; padding:14px 0; border-bottom:1px solid var(--camp-line); }

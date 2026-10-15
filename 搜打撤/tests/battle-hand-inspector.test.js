@@ -129,7 +129,8 @@ it('keeps nine hand identities and stable corner controls while rerendering the 
     name: `第${i + 1}张完整手牌`, type: '武术', cost: 1, desc: '造成 4 点物理伤害。', dmg: 4, dmgType: 'physical' }));
   start(2, Cards.SHA, distinct.map((entry, i) => ({ uid: `nine-${i}`, card: entry })));
   const hand = stage().querySelector('.sts-hand');
-  expect(hand.querySelectorAll('.bt-hand-identity')).toHaveLength(9);
+  expect(hand.querySelectorAll('.hs-card[data-card-layout="split"] .hsc-name')).toHaveLength(9);
+  expect(hand.querySelectorAll('.hs-card[data-card-layout="split"] .hsc-cost')).toHaveLength(9);
   for (const entry of distinct) expect(hand.textContent).toContain(entry.name);
   expect(stage().querySelector('.sts-topbar .sts-options')).not.toBeNull();
   expect(stage().querySelector('.sts-hud .sts-hud-l')).not.toBeNull();
@@ -236,9 +237,9 @@ it('reuses one stable slot for unchanged groups and clears it when the final cop
   expect(stage().querySelectorAll('.sts-hand .bt-card')).toHaveLength(0);
 });
 
-it('keeps short card rules in the single large card and names the full-rule hand entry', () => {
+it('keeps short card rules in the single large card without a redundant full-rule hand entry', () => {
   start();
-  expect(stage().querySelector('.bt-hand-inspect').textContent).toBe('完整规则');
+  expect(stage().querySelector('.bt-hand-inspect')).toBeNull();
   const before = BattleSession.getSnapshot();
   card().click();
   expect(panel().querySelector('.bt-hand-detail-copy')).toBeNull();

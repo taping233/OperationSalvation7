@@ -312,14 +312,14 @@
 #overlay .stash-shell.camp-detail .ov-btn { width: 100%; min-height: 48px; }
 #overlay .stash-shell.camp-detail :is(.ov-note, .ov-stats) { color: #587865; font-size: 18px; line-height: 1.8; }
 #overlay .stash-shell.camp-detail .ov-stats b { color: #3b645d; font: 700 42px/1.3 var(--font-num); }
-#cardZoom:has(.camp-detail), body:has(#depMain.camp-detail) #cardZoom { background: #182b32ec; }
+#cardZoom:has(.camp-detail), body:has(#depMain.camp-detail) #cardZoom { background: transparent; }
 #cardZoom:has(.camp-detail) .cz-foot, body:has(#depMain.camp-detail) #cardZoom .cz-foot { position: relative; max-width: 950px; width: calc(100% - 80px); margin: 20px auto; background: #f1efe1; color: #365b50; padding: 22px 30px; border: 1px solid #c8d4bd; border-radius: 2px; text-align: left; }
 #cardZoom:has(.camp-detail) :is(.ov-note, .gold), body:has(#depMain.camp-detail) #cardZoom .dep-n { color: #496c5a; font-size: 16px; text-shadow: none; }
 #cardZoom:has(.camp-detail) .ov-btn { background: #e4e9d7; color: #3b6653; border: 1px solid #aabc9f; border-radius: 2px; min-height: 42px; padding: 10px 16px; font-size: 16px; box-shadow: none; }
 #cardZoom:has(.camp-detail) .ov-btn.ok { background: #356d70; color: #fff8df; }
 #cardZoom:has(.camp-detail) .cz-note { display: none; }
 #cardZoom:has(.camp-card-actions) .cz-foot { background: transparent; border: 0; box-shadow: none; padding: 0; }
-#cardZoom:has(.camp-card-actions) { background: radial-gradient(ellipse at 50% 45%, #22313aec, #0c141af5 78%); }
+#cardZoom:has(.camp-card-actions) { background: transparent; }
 #cardZoom:has(.camp-card-actions) .cz-foot { width: min(440px, calc(100% - 48px)); max-width: none; margin: 14px auto 0; color: #d5e1e6; }
 #cardZoom .camp-card-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; }
 #cardZoom .camp-card-actions .inspect-meta { display: flex; align-items: center; justify-content: space-between; gap: 24px; width: min(340px, 100%); padding: 0 0 12px; border-bottom: 1px solid #a8bfcd26; }
@@ -335,7 +335,7 @@
 #cardZoom .camp-card-actions .ov-btn.ok:hover { background: #406e79; }
 #cardZoom:has(.camp-card-actions) .cz-close { width: 36px; height: 36px; background: #17232ed9; border: 1px solid #96adbb52; color: #cbdbe5; }
 #cardZoom:has(.camp-card-actions) .cz-hint { color: #8299a7; font-size: 11px; letter-spacing: .08em; }
-body:has(#hubMain.base-camp, .cls-pool-page[data-base-departure="true"]) #cardZoom { background: #182b32ec; }
+body:has(#hubMain.base-camp, .cls-pool-page[data-base-departure="true"]) #cardZoom { background: transparent; }
 body:has(#hubMain.base-camp, .cls-pool-page[data-base-departure="true"]) #cardZoom .cz-note { background: #f1efe1; border: 1px solid #c1cfba; color: #496f61; padding: 18px 24px; border-radius: 2px; }
 body:has(#hubMain.base-camp, .cls-pool-page[data-base-departure="true"]) #cardZoom :is(.cz-note-tag, .cz-note-text) { color: #496f61; font: 15px/1.6 var(--font-ui); }
 #cardZoom:has(.camp-detail) .camp-detail-copy h3 { margin: 5px 0 12px; color: #365c52; font-size: 24px; }

@@ -107,7 +107,7 @@ body #resHud .chip-mini { gap:8px; padding-left:10px; min-width:120px; }
 .expedition-feedback small { color:#c4d0d4; font-size:14px; }
 .expedition-feedback button { min-width:32px; min-height:32px; border:1px solid #95b0b5; background:#263f49; color:#edf5f5; cursor:pointer; }
 .expedition-feedback-cards { display:flex; justify-content:center; gap:16px; margin:16px 0; }
-.expedition-feedback-cards .hs-card { width:154px; height:216px; font-size:15.4px; flex:none; pointer-events:none; }
+.expedition-feedback-cards .hs-card { width:154px; font-size:15.4px; flex:none; pointer-events:none; }
 .expedition-feedback .expedition-feedback-continue { display:block; margin-left:auto; padding:8px 20px; font-size:16px; }
 .expedition-feedback-entry { bottom:224px; }
 #sidebar, #topBtns, #resHud, #logPanel, #bagBtnFloat {
@@ -382,31 +382,35 @@ body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns button {
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns #btnHome {
   order:0; background:#632d32!important; border:0!important; color:#fff!important;
 }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns #btnHelp,
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns #btnMute {
-  order:2; background:#20222580!important; border:0!important;
+  order:1; background:transparent!important; border:0!important; box-shadow:none!important;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns #btnMute svg {
+  width:34px; height:34px; flex:none;
 }
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud {
-  order:1; min-width:184px; height:54px; margin-left:6px; padding:0;
-  background:#15171acc; border:0; clip-path:none; box-shadow:none; gap:0;
+  order:2; position:relative; min-width:112px; height:62px; margin-left:6px; padding:0; align-items:center;
+  background:transparent; border:0; clip-path:none; box-shadow:none; gap:0;
 }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud .hp-hud-icon { display:none; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud .hp-hud-body { width:100%; padding:0; position:relative; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud .hp-hud-label {
-  display:block; height:19px; padding:0 9px!important; margin:0;
-  background:#356c84b0!important; color:#e8edf0; font:400 13px/19px var(--font-ui); letter-spacing:1px;
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud .hp-hud-body {
+  width:112px; padding:0; position:relative; gap:5px;
 }
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud #hpText {
-  display:block; padding:0 10px; margin:0; text-shadow:none; color:#f0f0ef; font:600 29px/33px var(--font-num); letter-spacing:1px;
+  display:block; padding:0; margin:0; text-shadow:none; color:#edf2ed; font:600 32px/36px var(--font-num); letter-spacing:.5px;
 }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud #hpText .hp-rest { color:#989fa3; font-size:20px; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpBarWrap { display:none; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud #hpText .hp-rest { color:#8eaba5; font-size:18px; text-shadow:none; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud #hpBarWrap {
+  display:block; width:100%; height:3px; margin:0; border:0; border-radius:0;
+  background:#b1c8c12b; box-shadow:none; animation:none;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud #hpBar { border-radius:0; box-shadow:none; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud #hpBar::after { display:none; }
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud {
   top:22px; right:72px; gap:30px; align-items:center;
 }
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud .chip-mini {
-  min-width:120px; height:44px; padding:0 12px 0 0; border:0; gap:10px;
-  background:#16171999; box-shadow:none; clip-path:none;
+  min-width:120px; height:64px; padding:0; border:0; gap:10px;
+  background:transparent; box-shadow:none; clip-path:none;
 }
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud .chip-mini::before { display:none; }
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud .res-ic {

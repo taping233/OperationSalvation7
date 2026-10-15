@@ -243,7 +243,6 @@ import { cardRuleHint } from './battle.preview.js';
         ...(spellBonus > 0 && g.card.dmgType === 'spell' && +(g.card.dmg || 0) > 0
           ? { dmgOverride: { bonus: spellBonus } } : {}),
       })
-      + `<span class="bt-hand-identity" aria-hidden="true"><b class="bt-hand-cost${costDiff ? effCost < baseCost ? ' mod-down' : ' mod-up' : ''}">${esc(effCost)}</b><span>${esc(g.card.name)}</span>${g.uids.length > 1 ? `<small>×${g.uids.length}</small>` : ''}</span>`
       + cnt + badge + costBadge + infChip + curseChip;
     const handState = infusingNow ? 'infusing' : targeted || clickSelectedUid === uid ? 'selected' : blockedReason ? 'blocked' : 'ready';
     return { g, uid, side, cls, tip, inner, ruleHint, handState, blockedReason };
@@ -297,7 +296,7 @@ import { cardRuleHint } from './battle.preview.js';
         rec.slot.className = 'bt-slot';
         rec.card.addEventListener('pointerdown', (e) => {
           // 注能角标是按钮，点击走 ovBody 委托，不进指向（需求 #15）
-          if (e.target.closest && e.target.closest('.bt-infchip, .bt-hand-inspect')) return;
+          if (e.target.closest && e.target.closest('.bt-infchip')) return;
           // N1（2026-09-25）：注能选牌态下整叠一个槽位，dataset.uid 是渲染时算好的叠代表
           // ——连点发同一个 uid，per-uid toggle 下选不满。按下瞬间按当前快照现算轮转 uid
           // 写回 dataset.uid，随后的 click 委托（btPlay→toggleInfusePick）即按 per-uid 生效；
@@ -316,21 +315,11 @@ import { cardRuleHint } from './battle.preview.js';
         rec.card.addEventListener('mouseenter', () => UI.hideTooltip?.());
         rec.card.addEventListener('keydown', (e) => {
           if (e.isComposing || e.keyCode === 229) return;
-          if ((e.key !== 'Enter' && e.key !== ' ') || e.target.closest('.bt-infchip, .bt-hand-inspect')) return;
+          if ((e.key !== 'Enter' && e.key !== ' ') || e.target.closest('.bt-infchip')) return;
           e.preventDefault();
           showHandCardDetails(rec.card.dataset.uid);
         });
         rec.slot.appendChild(rec.card);
-        const inspect = document.createElement('button');
-        inspect.type = 'button';
-        inspect.className = 'bt-hand-inspect';
-        inspect.textContent = '完整规则';
-        inspect.setAttribute('aria-label', `查看${g.card.name}完整规则`);
-        inspect.addEventListener('click', event => {
-          event.preventDefault(); event.stopPropagation();
-          showHandCardDetails(rec.card.dataset.uid);
-        });
-        rec.slot.appendChild(inspect);
         handSlots.set(key, rec);
       }
       rec.group = g;   // 实时分组挂在常驻 rec 上：pointerdown 注能轮转按本帧分组现算（N1）

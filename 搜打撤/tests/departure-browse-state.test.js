@@ -91,19 +91,25 @@ it('火焰精灵整备显示实际火球且详情可到达', () => {
 
 
 it('人物切幕等待实际DOM就绪，同入口重复请求共用Promise，换档旧结果不切幕', async () => {
-  let finishOld, finishNext;
+  let finishOld, finishNext, presentOld, presentNext;
   const old = new Promise(resolve => { finishOld = resolve; });
   const next = new Promise(resolve => { finishNext = resolve; });
-  ports.choice.mockReturnValueOnce(old).mockReturnValueOnce(next);
+  // 真实契约（game.run.class-choice）：选角页挂载成功即同步回调 onPresented 挂切幕，
+  // 不等待载入 Promise 落定（2026-10-15 WF-feedback：修复出征先漏人物页）。
+  ports.choice.mockImplementationOnce(options => { presentOld = options.onPresented; return old; })
+    .mockImplementationOnce(options => { presentNext = options.onPresented; return next; });
   const first = departure.openDepartPrep();
   expect(departure.openDepartPrep()).toBe(first); expect(ports.choice).toHaveBeenCalledOnce();
   expect(ports.cut).not.toHaveBeenCalled();
   base.slot = 2; const second = departure.openDepartPrep();
   finishOld(true); expect(await first).toBe(false); expect(ports.cut).not.toHaveBeenCalled();
+  presentOld(); // 换档后旧入口即使迟到呈现也不切幕
   const cls = document.createElement('section'); cls.className = 'cls2-page';
   window.SDT.UI.el.overlay.id = 'overlay'; window.SDT.UI.el.overlay.replaceChildren(cls);
-  finishNext(true); expect(await second).toBe(true); expect(ports.cut).toHaveBeenCalledOnce();
+  presentNext(); // 选角页真实挂载后才呈现：切幕拿到实际 DOM 而非占位查询
+  expect(ports.cut).toHaveBeenCalledOnce();
   expect(ports.cut).toHaveBeenCalledWith(cls);
+  finishNext(true); expect(await second).toBe(true);
 });
 it('人物入口失败可从原入口重试，换档后旧onSelect/beforeConfirm不会扣新档卡', async () => {
   ports.choice.mockReturnValueOnce(Promise.resolve(false));

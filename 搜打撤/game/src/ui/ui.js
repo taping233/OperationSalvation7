@@ -27,7 +27,6 @@ import { hudMethods } from './hud.js';
         hpBar: $('hpBar'), hpBarWrap: $('hpBarWrap'), hpText: $('hpText'), charCoins: $('charCoins'),
         charAtk: $('charAtk'),
         heroAva: $('heroAva'),
-        bagBtnFloat: $('bagBtnFloat'), bagCountFloat: $('bagCountFloat'),
         log: $('log'),
         logPanel: $('logPanel'),
         overlay: $('overlay'), ovTitle: $('ovTitle'), ovBody: $('ovBody'), ovCloseX: $('ovCloseX'),

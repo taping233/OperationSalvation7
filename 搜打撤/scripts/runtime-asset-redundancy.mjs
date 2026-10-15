@@ -5,7 +5,8 @@ import { parse } from 'acorn';
 import { full } from 'acorn-walk';
 import { RUNTIME_REDUNDANCY_REVIEW } from './runtime-asset-redundancy-review.mjs';
 
-const sha256 = code => createHash('sha256').update(code).digest('hex');
+// Git normalizes CRLF to LF; line endings do not change asset-path semantics.
+const sha256 = code => createHash('sha256').update(code.replaceAll('\r\n', '\n')).digest('hex');
 const posix = value => String(value).replace(/\\/g, '/');
 const JS_SOURCE_RE = /\.(?:[cm]?js|jsx|tsx?)$/;
 const ROOT_RE = /(?:assets\/|portraits\/frames\/|scenes\/|map-nodes\/)/;
@@ -43,7 +44,7 @@ export function hasOpaqueAssetPaths(code) {
   return opaque;
 }
 
-export function hasOpaqueRuntimeSourcePaths(filename, code) {
+function hasOpaqueRuntimeSourcePaths(filename, code) {
   if (JS_SOURCE_RE.test(filename)) return hasOpaqueAssetPaths(code);
   if (filename.endsWith('.html')) {
     return [...code.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
@@ -53,7 +54,7 @@ export function hasOpaqueRuntimeSourcePaths(filename, code) {
   return false;
 }
 
-export function readRuntimeReviewSources(projectRoot) {
+function readRuntimeReviewSources(projectRoot) {
   const result = [];
   const visit = relative => {
     const directory = path.join(projectRoot, relative);

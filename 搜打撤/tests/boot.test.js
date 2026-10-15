@@ -43,7 +43,7 @@ window.AudioContext = window.AudioContext || class FakeAudioContext {
   createDynamicsCompressor() { return { connect: () => {}, disconnect: () => {}, threshold: {}, knee: {}, ratio: {}, attack: {}, release: {} }; }
   createBuffer() { return { numberOfChannels: 1, getChannelData: () => new Float32Array(8) }; }
   createBufferSource() { return { connect: () => {}, disconnect: () => {}, start: () => {}, stop: () => {}, buffer: null, loop: false }; }
-  createBiquadFilter() { return { connect: () => {}, disconnect: () => {}, type: '', frequency: { value: 0 }, Q: { value: 0 } }; }
+  createBiquadFilter() { return { connect: () => {}, disconnect: () => {}, type: '', frequency: { value: 0 }, gain: { value: 0 }, Q: { value: 0 } }; }
   createOscillator() { return { connect: () => {}, disconnect: () => {}, start: () => {}, stop: () => {}, frequency: { value: 0, setValueAtTime: () => {} } }; }
   decodeAudioData() { return Promise.resolve(this.createBuffer()); }
   resume() { return Promise.resolve(); }
@@ -97,9 +97,13 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     game.state = 'modal';
     UI.showOverlay('来源节点', '<section id="consoleSource"><button data-act="sourceAction">继续</button></section>', 'page');
     UI.act('sourceAction', sourceAction);
+    // 整页 staged 揭幕的遮层会短暂阻断普通按键（Ctrl+L 在内）；等遮层退场再按。
+    await waitFor(() => !document.querySelector('.page-visual-handoff'));
     const source = document.getElementById('consoleSource');
     const toggle = (options = {}) => window.dispatchEvent(new KeyboardEvent('keydown', { key:'l', ctrlKey:true, bubbles:true, cancelable:true, ...options }));
     for (const [index, tab] of ['debug', 'agent', 'data', 'keys'].entries()) {
+      // 上一轮关闭会把来源页按 page 模式重开，同样产生 staged 遮层。
+      await waitFor(() => !document.querySelector('.page-visual-handoff'));
       toggle();
       // 只有首次冷入口等待真实控件；缓存命中仍沿用后续即时业务断言。
       if (index === 0) await vi.waitFor(() => expect(document.querySelector('#devConsole [data-act="devcTab"]')).not.toBeNull());
@@ -509,13 +513,18 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
       expect(game.state).toBe('moving');
       const tick = callbacks.at(-1);
       expect(typeof tick).toBe('function');
-      const now = (typeof performance !== 'undefined' && performance.now ? performance.now() : Date.now()) + 400;
+      const now = (typeof performance !== 'undefined' && performance.now ? performance.now() : Date.now()) + 600;
       tick(now);
-      expect(game.state).not.toBe('moving');
+      // 路线时钟走满后先进入 100ms 抵达反馈（光环淡出），移动锁保持到反馈结束。
+      expect(game.state).toBe('moving');
       expect([game.layerIdx, game.trackPos]).toEqual(edge);
+      const settle = callbacks.at(-1);
+      settle(now + 200);
+      expect(game.state).not.toBe('moving');
       expect(game.turn).toBe(2);
       // 重复调用同一个已完成帧回调不得再次结算。
-      tick(now + 400);
+      tick(now + 600);
+      settle(now + 600);
       expect(game.turn).toBe(2);
     } finally {
       globalThis.requestAnimationFrame = originalRaf;

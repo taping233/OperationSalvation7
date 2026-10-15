@@ -115,7 +115,7 @@
 #overlay .card.page #depMain.departure-cover .dep-no-results { grid-column: 1 / -1; width: 100%; margin: 0; padding: 35px 10px; text-align: center; color: #555b61; font: 500 14px/1.6 var(--font-ui); }
 /* 整备宿主限定缩略尺寸；卡面布局与文字使用共用样式。 */
 #overlay .card.page #depMain.departure-cover :is(.dep-card-face, .bag-cell) > .hs-card {
-  width: 100%; height: 100% !important; min-height: 0; max-height: 100%; box-sizing: border-box;
+  width: 100%; box-sizing: border-box;
 }
 #overlay .card.page #depMain.departure-cover .dep-card.picked { filter: none; }
 #overlay .card.page #depMain.departure-cover .dep-card.picked::after { content: none; }

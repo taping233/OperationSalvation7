@@ -2,7 +2,7 @@ import { beforeAll, afterEach, expect, it, vi } from 'vitest';
 
 let motion;
 beforeAll(async () => { motion = await import('../game/src/ui/surface-motion.js'); });
-afterEach(() => { document.body.replaceChildren(); document.body.className = ''; vi.useRealTimers(); });
+afterEach(() => { document.body.replaceChildren(); document.body.className = ''; vi.useRealTimers(); vi.unstubAllGlobals(); });
 
 it('automatically mounts page regions and replays entry only on navigation', () => {
   document.body.innerHTML = '<div id="overlay"><div id="ovBody"><main><header>Head</header><nav>Tabs</nav><section>Body</section><aside hidden>Hidden</aside></main></div></div>';
@@ -58,6 +58,10 @@ async function installOverlay() {
   const root = document.getElementById('overlay');
   const body = document.getElementById('ovBody');
   const ui = {
+    el: {
+      get overlay() { return document.getElementById('overlay'); },
+      get ovBody() { return document.getElementById('ovBody'); },
+    },
     showOverlay(_heading, html, mode) { body.innerHTML = html; root.hidden = false; this._lastMode = mode; },
     hideOverlay: vi.fn(() => { root.hidden = true; body.replaceChildren(); }),
   };
@@ -91,9 +95,12 @@ it('reduced motion preserves synchronous room cleanup', async () => {
   expect(closeSpy).toHaveBeenCalledTimes(1);
 });
 
-const hubPage = (tab, sub = '') => `<main id="hubMain" class="base-camp"><header class="hub-head">Base</header><div class="hub-body"><nav class="hub-tabs"><button class="hub-tab on" data-tab="${tab}">Tab</button></nav><nav><button class="stash-section-tab on" data-view="${sub}">Section</button></nav><section class="hub-page">${tab}/${sub}</section></div></main>`;
+const hubPage = (tab, sub = '') => `<main id="hubMain" class="base-camp"><header class="hub-head">Base</header><div class="hub-body"><nav class="hub-tabs"><button class="hub-tab on" data-tab="${tab}">Tab</button></nav><nav><button class="stash-section-tab on" data-view="${sub}">Section</button></nav><section class="hub-page"><div class="pv12-agent-strip">Strip</div><div class="pv12-agent-data">Data</div>${tab}/${sub}</section></div></main>`;
 
 it('base navigation keeps the veil and shell stable and animates only changed content', async () => {
+  vi.useFakeTimers();
+  vi.stubGlobal('requestAnimationFrame', fn => setTimeout(() => fn(performance.now()), 16));
+  vi.stubGlobal('cancelAnimationFrame', clearTimeout);
   const { root, body, ui } = await installOverlay();
   ui.showOverlay('', hubPage('deploy'), 'page');
   // 首次基地入场由城廓编排负责，通用遮罩/外壳阶段不再叠加。
@@ -102,16 +109,22 @@ it('base navigation keeps the veil and shell stable and animates only changed co
 
   for (const [tab, sub] of [['stash', 'cards'], ['stash', 'pets'], ['shop', '']]) {
     ui.showOverlay('', hubPage(tab, sub), 'page');
+    await vi.advanceTimersByTimeAsync(500);   // 分区导航先挂遮层，目标视觉就绪后重放区域入场
     expect(root.hidden).toBe(false);
     expect(root.dataset.surfaceLayout).toBe('base-content');
     expect(root.dataset.uiEnter).toBeUndefined();
     expect(body.querySelector('.hub-head').dataset.surfaceBlock).toBeUndefined();
     expect(body.querySelector('.hub-tabs').dataset.surfaceBlock).toBeUndefined();
-    expect([...body.querySelectorAll('[data-surface-role]')].every(el => el.dataset.surfaceRole === 'content')).toBe(true);
+    const marked = [...body.querySelectorAll('[data-surface-block]')];
+    expect(marked.length).toBeGreaterThan(0);   // 分区内容照常入场
+    expect(marked.every(el => body.querySelector('.hub-page').contains(el))).toBe(true);
   }
 });
 
 it('same-page base updates stay quiet while leaving the base retains normal entry', async () => {
+  vi.useFakeTimers();
+  vi.stubGlobal('requestAnimationFrame', fn => setTimeout(() => fn(performance.now()), 16));
+  vi.stubGlobal('cancelAnimationFrame', clearTimeout);
   const { root, body, ui } = await installOverlay();
   ui.showOverlay('', hubPage('shop'), 'page');
   ui.showOverlay('', hubPage('shop'), 'page');
@@ -120,6 +133,7 @@ it('same-page base updates stay quiet while leaving the base retains normal entr
   expect(body.querySelectorAll('[data-surface-block]')).toHaveLength(0);
 
   ui.showOverlay('', '<main class="settings-page">Settings</main>', 'page');
+  await vi.advanceTimersByTimeAsync(500);   // 离开基地的整页切换先遮层，就绪后重放区域入场
   expect(root.dataset.surfacePhase).toBeDefined();
-  expect(root.dataset.uiEnter).toBeDefined();
+  expect(root.dataset.uiEnter).toBeUndefined();   // 卡面翻入动画由遮层淡出替代，不提前播放
 });

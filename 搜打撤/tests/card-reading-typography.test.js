@@ -55,8 +55,9 @@ describe('独立卡牌规则阅读', () => {
     expect(copy).toMatch(/font:\s*400 var\(--card-copy-size\)\s*\/\s*var\(--card-copy-leading\) var\(--font-ui\)/);
     expect(copy).toMatch(/white-space:\s*pre-wrap/);
     expect(copy).toMatch(/user-select:\s*text/);
-    const card = block('body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc');
-    expect(card).toMatch(/font-size:\s*5\.52cqw !important/);
+    const card = block('.hs-card[data-card-layout="split"] .hsc-desc');
+    expect(card).toMatch(/font-size:\s*6\.03cqw/);
+    expect(card).toMatch(/overflow:\s*auto/);
     expect(stylesheet('inventory-zoom.css')).toMatch(/\.inventory-zoom-rules\s*\{[^}]*var\(--card-copy-size\)\/var\(--card-copy-leading\)/);
   });
 
@@ -66,8 +67,8 @@ describe('独立卡牌规则阅读', () => {
     expect(copyTokens).toMatch(/font-style:\s*normal/);
     expect(block('body:has(#viewport) .card-rules-copy .d-num')).toMatch(/font-weight:\s*700/);
     expect(block('body:has(#viewport) .card-rules-copy .d-term[data-term]')).toMatch(/font-weight:\s*600/);
-    const cardTokens = block('body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc :is(.d-num, .d-term, .d-kw)');
-    expect(cardTokens).toMatch(/font-size:\s*1em !important/);
+    const cardTokens = block('.hs-card[data-card-layout="split"] .hsc-desc :is(.d-num, .d-term, .d-kw)');
+    expect(cardTokens).toMatch(/font-size:\s*1em/);
     expect(cardTokens).toMatch(/font-style:\s*normal/);
   });
 });

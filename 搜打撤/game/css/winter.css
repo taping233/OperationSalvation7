@@ -28,7 +28,7 @@ button,input,select,textarea{font-family:inherit}button{border-radius:0;transiti
 #sceneTools{position:absolute;right:22px;bottom:24px;z-index:7;display:flex;gap:5px}#sceneTools button{padding:9px 13px;background:#222527e8;color:#dcddde;border:1px solid #848a8e;font-size:11px}body.lobby #sceneTools,body.scene-battle-3d #sceneTools{display:none}
 #overlay{background:#101112a8;backdrop-filter:blur(6px)}#overlay.opaque{background:linear-gradient(125deg,#202325,#181a1c);backdrop-filter:none}#overlay .card{border:1px solid #74797c;background:linear-gradient(125deg,#2b2e31,#1e2022);box-shadow:0 25px 100px #0d0e0f99;border-radius:0}#overlay .card::before{display:none}#overlay .card.page,#overlay .card.bag-page{border:0;border-radius:0;background:linear-gradient(125deg,#272a2d,#1b1d1f)}#overlay h2,.pg-head h2{color:#ebebeb;font-weight:400;letter-spacing:4px}.pg-head,.hub-head{border-bottom:1px solid #757a7e;padding-bottom:20px}.pg-close{background:#313438;border:1px solid #848a8e;box-shadow:none}.pg-close:hover{background:#6a5148}.ov-btn,.mini-btn,.hub-tab,.step-btn{background:#2f3336;border:1px solid #6e7478;color:#e8e8e9;border-radius:0;box-shadow:none}.ov-btn:hover,.mini-btn:hover{background:#41464b;border-color:#d2d3d4}.ov-btn.ok,.mini-btn.ok{background:#e4cb7a;border-color:#e4cb7a;color:#212326}.ov-btn.danger{background:#7a443e;color:#f3dcd5;border-color:#be8c7e}.ov-note,.ov-stats,.ov-empty{color:#bfc2c5;line-height:1.8}.hub-card,.cls-card,.ach-row{background:#25282a;border:1px solid #4d5359;border-radius:0;box-shadow:none}.hub-card h3{font-weight:400;letter-spacing:3px;color:#dedfe0}.hub-tabs{gap:10px;padding-top:10px}.hub-tab{border:0;background:none;color:#a9aeb1}.hub-tab.on{background:#e2cd88;color:#222528;box-shadow:none}.res-chip,.fc-chip{background:#1b1d20;border:1px solid #4f555b;border-radius:0;color:#bdc1c4}.res-chip b,.fc-chip b{color:#eddca6}.mode-card{background:#282b2e;border:1px solid #555b61;border-radius:0;box-shadow:none;min-height:96px}.mode-card.on{background:#35393d;border-color:#e0c876;box-shadow:inset 3px 0 #e0c876}.mode-card .mode-info b{font-size:21px;letter-spacing:3px;font-weight:400}.mode-card .mode-info span{color:#babec0}.mode-card .mode-ckpt{color:#e1cf94}.deploy-forecast{gap:12px}#btnDeploy{background:#ead386;border:0;border-radius:0;color:#232628;box-shadow:none;padding:18px 42px;font-weight:500;letter-spacing:5px}.gate-strip{background:#2a2d30;border:1px solid #585f66}#overlay #hubMain .gate-strip:focus-visible{outline:1px solid #e6cb76cc;outline-offset:2px}
 .slot-card{border-color:#72787c;background:linear-gradient(180deg,#191b1d,#131416);border-radius:0;box-shadow:0 12px 30px #0d0e0f66}.slot-card:hover{border-color:#d2d3d5}.slot-card-name{color:#ebebeb}.slot-empty{color:#abb1b6}.si-line em{color:#9ca2a6}.cls-grid{gap:10px;grid-template-columns:repeat(5,minmax(0,1fr))}.cls-pick{border:1px solid #757a7e;background:#2a2d30;border-radius:0;box-shadow:none;overflow:hidden}.cls-pick.sel{border-color:#edd37e;box-shadow:inset 0 -3px #e5ca6f}.cls-pick b{font-size:21px;letter-spacing:3px;font-weight:500}.cls-pick-art{box-shadow:none;border-radius:0;max-width:90px}.cls-detail{background:#202225!important;border:1px solid #50565c;border-radius:0;color:#c8c9ca}.cls-story{line-height:1.9;color:#c3c6c9}.cls-detail-name{font-size:34px;letter-spacing:5px;font-weight:400}.cls-detail-tag{color:#e4cb7a}.roster-portrait{display:block;aspect-ratio:var(--portrait-ratio);height:100%;max-width:100%;background-repeat:no-repeat}.cls-pick-art .roster-portrait{width:100%;height:100%}.cls-figure .roster-portrait{height:100%;width:auto;margin:auto}.cls-hub-art .roster-portrait{height:84px;width:40px}.xp-bar{background:#1b1d1f}.xp-bar i{background:#abb1b5}
-.pk-row,.dep-row{border-bottom:1px solid #484d52}.settings .set-h{color:#e3cd84;border-bottom:1px solid #494e54}.settings .chk{color:#d5d6d7}.settings input[type=range]{accent-color:#e3cb7b}.settings input[type=checkbox]{accent-color:#a8adb0}input,textarea,select{background:#1e2022;color:#e8e9ea;border:1px solid #72787c;border-radius:0}input::placeholder,textarea::placeholder{color:#91969a}.bag-slot{background:#232628;border-color:#545a61;border-radius:0}.bag-slot.safe-slot{border-color:#d4bf77;background:#2d3134}.bag-slot.drop-here{outline:2px solid #e3cd83}.lib-filters,.bag-toolbar{background:#1d1f21;border-color:#565c63}.hs-card,.card-tile{box-shadow:0 4px 12px #0f101170}.hs-card:hover{box-shadow:0 8px 20px #0e0f1099}.scene-line p{background:#202225d9;border:1px solid #7e8387;color:#e7e8e8;border-radius:0}.scene-title{font-family:'SimSun',serif;font-weight:400}.scene-ops .ov-btn{min-height:44px}.flow-title{font-family:'SimSun',serif;letter-spacing:.16em}
+.pk-row,.dep-row{border-bottom:1px solid #484d52}.settings .set-h{color:#e3cd84;border-bottom:1px solid #494e54}.settings .chk{color:#d5d6d7}.settings input[type=range]{accent-color:#e3cb7b}.settings input[type=checkbox]{accent-color:#a8adb0}input,textarea,select{background:#1e2022;color:#e8e9ea;border:1px solid #72787c;border-radius:0}input::placeholder,textarea::placeholder{color:#91969a}.bag-slot{background:#232628;border-color:#545a61;border-radius:0}.bag-slot.safe-slot{border-color:#d4bf77;background:#2d3134}.bag-slot.drop-here{outline:2px solid #e3cd83}.lib-filters,.bag-toolbar{background:#1d1f21;border-color:#565c63}.hs-card,.card-tile{box-shadow:0 4px 12px #0f101170}.scene-line p{background:#202225d9;border:1px solid #7e8387;color:#e7e8e8;border-radius:0}.scene-title{font-family:'SimSun',serif;font-weight:400}.scene-ops .ov-btn{min-height:44px}.flow-title{font-family:'SimSun',serif;letter-spacing:.16em}
 body.scene-battle-3d #sidebar,body.scene-battle-3d #layerBanner,body.scene-battle-3d #topBtns,body.scene-battle-3d #resHud{display:none!important}body.scene-battle-3d #overlay,body.scene-battle-3d #overlay .card,body.scene-battle-3d #ovBody,body.scene-battle-3d .battle-stage{background:transparent!important;backdrop-filter:none!important;box-shadow:none!important}body.scene-battle-3d .battle-stage::before,body.scene-battle-3d .battle-stage::after,body.scene-battle-3d .battle-stage-shade{display:none!important}body.scene-battle-3d .sts-figure>*{visibility:hidden}body.scene-battle-3d .sts-figure{height:clamp(140px,calc(var(--game-layout-height, 100vh) * 0.29),300px);filter:none}body.scene-battle-3d .sts-nameplate{background:#202224df!important;border:1px solid #8c9296!important;padding:8px 15px!important;color:#e8e8e8}body.scene-battle-3d .sts-hud{background:linear-gradient(0deg,#1c1e20 72%,#1c1e2000)!important}body.scene-battle-3d .sts-intent{background:#ebd489;color:#25282b;box-shadow:none;border:0}#overlay .card.battle{width:100%;height:100%;max-width:none;max-height:none;border:0;padding:0}body[data-gpu-lost]::after{content:'图形设备暂时中断，请保存后重启游戏';position:fixed;inset:35% 20%;z-index:999;padding:40px;background:#242729;color:#ebd58d;text-align:center}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 /* 快速参考弹窗（标题页） */
@@ -425,7 +425,7 @@ body.page-opaque #sidebar{visibility:hidden}
 .bag-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:9px;
   padding:10px;border:1.5px dashed #a69c79;border-radius: var(--radius-panel);min-height:170px;align-items:start;transition:background .15s,border-color .15s}
 .bag-grid.drop-here{background:rgba(202,168,58,.14);border-color:var(--gold-dim)}
-.bag-cell{position:relative;aspect-ratio:10/14;border:1.5px dashed #bdb395;border-radius: var(--radius-panel);overflow:visible}
+.bag-cell{position:relative;aspect-ratio:2/3;border:1.5px dashed #bdb395;border-radius: var(--radius-panel);overflow:visible}
 .bag-cell .hs-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:6.6px;margin:0}
 .bag-cell.empty{background:rgba(60,57,51,.05)}
 .bag-cell.fixed{border:1.5px solid #cfb972;background:rgba(202,168,58,.12)}
@@ -481,17 +481,17 @@ body:has(#overlay.opaque:not([hidden])) #sidebar{display:none!important}
 
 /* —— 卡牌放大特写（背包卡面点击）：背景虚化压暗 + 缩放弹出/收回 —— */
 #cardZoom{position:fixed;inset:0;z-index:400;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;cursor:pointer}
-/* 09-29 三期：去全屏毛玻璃——zoom-ab A/B 实测（8138 纯净树）：带 blur 点击放大
-   LoAF 10 个/最大 973.4ms、帧 P95 774.9ms；去后 LoAF 2/54.8ms、P95 7.1ms。
-   暗色幕布保留并加深补偿（.66→.78，聚焦效果不变），毛玻璃如需回归须连同 czFade 动画一起重设计。 */
-#cardZoom .cz-backdrop{position:absolute;inset:0;background:rgba(8,9,9,.78);animation:czFade .34s ease both}
+/* 毛玻璃 10-15 按留言回归（18% 幕布+18px，留言修复 WF-feedback-1015）；模糊层不参与
+   透明度动画：全屏 backdrop-filter 逐帧重算即 09-29 三期 zoom-ab 实测的卡顿源
+   （带动画时 LoAF 10 个/最大 973.4ms、帧 P95 774.9ms），故幕布瞬时满强度出现/退场，
+   与 inventory-zoom.css 同款；进出动画只保留在卡面/脚注/提示上。 */
+#cardZoom .cz-backdrop{position:absolute;inset:0;background:rgba(8,9,9,.18);backdrop-filter:blur(18px)}
 #cardZoom .cz-card{position:relative;z-index:1;animation:czIn .24s cubic-bezier(.2,1.3,.4,1) both}
 /* FLIP 入场（2026-09-12 留言）：从来源卡位置/尺寸放大到居中，禁 czIn 改走 transform+opacity 过渡 */
 #cardZoom .cz-card.cz-flip{animation:none;transition:transform .38s cubic-bezier(.22,.61,.36,1),opacity .3s ease}
 #cardZoom .cz-card .hs-card{font-size:34px}
 #cardZoom .cz-foot{position:relative;z-index:1;animation:czIn .24s .05s cubic-bezier(.2,1.3,.4,1) both}
 #cardZoom .cz-hint{position:relative;z-index:1;font-size:11px;letter-spacing:3px;color:#d0d0d1;animation:czFade .3s .1s ease both}
-#cardZoom.cz-out .cz-backdrop{animation:czFadeOut .24s ease both}
 #cardZoom.cz-out .cz-card,#cardZoom.cz-out .cz-foot{animation:czOut .24s ease both}
 /* 背签/提示不在 czOut 名单时会以不透明度 1 滞留到 remove（老板 09-19 实测），随退场同步淡出 */
 #cardZoom.cz-out .cz-note,#cardZoom.cz-out .cz-hint{animation:czFadeOut .24s ease both}
@@ -790,22 +790,17 @@ body,body *{font-family:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub',
 #overlay .sc-shop .shop-resources{cursor:pointer;transition:border-color .15s,color .15s}
 #overlay .sc-shop .shop-resources:hover{border-color:#e0c876}
 #overlay .sc-shop .shop-resources:hover .shop-resource b{color:#f7e29f}
-/* —— 背包 v2（2026-09-15 重设计）：格子即卡框 · cqw 等比满格 · 角标归位 ——
-   病根：旧版卡面 width:100% + height:14em（font-size 钉死 clamp 8.5-10.5px），与格子
-   10:14 比例脱钩 → 卡面被拉宽变形 + 上下露底黑边；费用/币值角标悬出卡框 .48em，
-   被格子 overflow:hidden 裁掉；数量角标钉在右下与币值打架。
-   方案：格子设 inline-size 容器，卡面 font-size=(格宽-2×角标带)/10 —— 10em×14em
-   恰好铺满 10:14 格，任意列宽严格等比；flip-face 留 4.5cqw 角标带（略大于角标
-   悬出的 .48em≈4.37cqw），费用/币值完整可见；数量角标移到右上。 */
+/* 背包格保留完整框体：前面居中放置共用卡牌，给等宽外框与角标留出空间。 */
 #overlay .bag-view .bag-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;padding:12px;border:1px solid rgba(194,199,202,.1);border-radius: var(--radius-panel);background:rgba(235,236,236,.015)}
 #overlay .bag-view .bag-grid.safe-grid{border-color:rgba(228,203,122,.18)}
 #overlay .bag-view .bag-grid.safe-grid .bag-slot.empty.safe-empty{border-color:rgba(228,203,122,.2);background:rgba(228,203,122,.03)}
-#overlay .bag-view .bag-slot{container-type:inline-size;aspect-ratio:10/14;padding:0;overflow:visible;border-radius: var(--radius-panel)}
-#overlay .bag-view .bag-slot.empty{aspect-ratio:10/14;background:rgba(235,236,236,.02);border:1px dashed rgba(194,199,202,.14)}
+#overlay .bag-view .bag-slot{container-type:inline-size;aspect-ratio:2/3;padding:0;overflow:visible;border-radius: var(--radius-panel)}
+#overlay .bag-view .bag-slot.empty{aspect-ratio:2/3;background:rgba(235,236,236,.02);border:1px dashed rgba(194,199,202,.14)}
 #overlay .bag-view .bag-slot.filled.card-slot{border:1px solid rgba(194,199,202,.2);background:#161819}
 #overlay .bag-view .bag-slot.filled.card-slot:hover{border-color:#e0c876}
 #overlay .bag-view .bag-slot .flip-face{padding:4.5cqw}
-#overlay .bag-view .bag-slot .flip-face.flip-front .hs-card{width:100%;height:100%;max-width:none;max-height:none;font-size:calc((100cqw - 9cqw)/10);box-shadow:none}
+#overlay .bag-view .bag-slot .flip-face.flip-front{display:grid;grid-template-columns:minmax(0,1fr);place-items:center;padding:0;overflow:visible}
+#overlay .bag-view .bag-slot .flip-face.flip-front .hs-card{width:100%;max-width:100%;font-size:calc(100cqw / 13.08)}
 /* 数量角标：右上角归位（左上=费用、右下=币值/伤害，四角各居其位），随格子等比缩放 */
 #overlay .bag-view .bag-slot .stack-count{top:.5em;right:.5em;bottom:auto;left:auto;font-size:max(10px,min(calc(9.1cqw*.78),16px));padding:.1em .5em;background:rgba(14,15,16,.85);border:1px solid rgba(228,203,122,.45);color:#ffe281;border-radius:999px}
 /* 物资格：与卡格同一 font 基准的等比排版（名/价竖排居中，稀有角标左上）
@@ -871,10 +866,10 @@ body #overlay .battle-stage.sts .sts-me{bottom:calc(var(--game-layout-height, 10
    2026-09-15 同步背包 v2：格子容器化 + 卡面 cqw 等比满格（修黑边/变形，费用角标可见） */
 #overlay .card.battle-bag{background:rgba(13,14,15,.92)}
 #overlay .card.battle-bag .battle-bag-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-#overlay .card.battle-bag .battle-bag-slot{position:relative;container-type:inline-size;aspect-ratio:10/14;border:1.5px solid rgba(194,199,202,.22);border-radius: var(--radius-panel);background:#161819;cursor:pointer;transition:border-color .12s, transform .12s}
+#overlay .card.battle-bag .battle-bag-slot{position:relative;container-type:inline-size;display:grid;grid-template-columns:minmax(0,1fr);place-items:center;aspect-ratio:2/3;border:1.5px solid rgba(194,199,202,.22);border-radius: var(--radius-panel);background:#161819;cursor:pointer;transition:border-color .12s, transform .12s}
 #overlay .card.battle-bag .battle-bag-slot:hover{border-color:#e3c871;transform:translateY(-2px)}
 #overlay .card.battle-bag .battle-bag-slot.off{opacity:.45;filter:grayscale(.8);cursor:default}
-#overlay .card.battle-bag .battle-bag-slot .hs-card{margin:4.5cqw;width:calc(100% - 9cqw);height:calc(100% - 9cqw);font-size:calc((100cqw - 9cqw)/10);box-shadow:none}
+#overlay .card.battle-bag .battle-bag-slot .hs-card{margin:0;width:100%;font-size:calc(100cqw / 13.08)}
 #overlay .card.battle-bag .bt-count{position:absolute;top:.5em;right:.5em;z-index:3;color:#ffdf76;font-weight:700;font-size:max(10px,min(calc(9.1cqw*.78),16px));text-shadow:0 1px 3px #000000;background:rgba(14,15,16,.85);border:1px solid rgba(228,203,122,.45);border-radius:999px;padding:.1em .5em}
 
 /* ===== 2026-09-13 留言复检追加 ===== */

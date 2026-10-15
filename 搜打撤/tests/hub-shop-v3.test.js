@@ -19,7 +19,7 @@ beforeEach(() => {
     data: { coins: 10, wood: 7, rations: 2, stash: [{ card: list[0], count: 2 }, { card: list[0], count: 1 }] },
     stashRoom: () => 2, stashCap: () => 25,
   };
-  cards = { all: () => list };
+  cards = { all: () => list, cardHTML: vi.fn(card => `<article class="hs-card" data-id="${card.id}">${card.name}</article>`) };
   art = { cardIcon: vi.fn(card => `<img src="${card.id}.webp" alt="${card.name}">`) };
 });
 const render = () => {
@@ -41,7 +41,8 @@ describe('独立补给商店的陈列与购买状态', () => {
     expect(root.querySelector('[data-act="shopBuy"][data-i="2"]').getAttribute('aria-label')).toContain('4 储备币');
     expect(root.querySelector('[data-act="shopPreview"][data-i="0"]')).not.toBeNull();
     expect(root.querySelector('.shop-v3-footer')).toBeNull();
-    expect(art.cardIcon.mock.calls.map(([card]) => card.id)).toEqual(['tt3-skewer', 'tt3-staff', 'tt-rations', 'tt-wood']);
+    expect(cards.cardHTML.mock.calls.map(([card]) => card.id)).toEqual(['tt3-skewer', 'tt3-staff']);
+    expect(art.cardIcon.mock.calls.map(([card]) => card.id)).toEqual(['tt-rations', 'tt-wood']);
     expect(JSON.stringify(base.data)).toBe(before);
   });
   it('仓库满时只阻止卡牌购买，物资仍可购买和查看', () => {

@@ -16,7 +16,7 @@
 #overlay #depMain.pg.hub.camp-detail .dep-card { width:100%; min-width:0; padding:10px; background:#edf3f6; }
 #overlay #depMain.pg.hub.camp-detail .dep-card .hs-card { width:100%; font-size:13px; }
 #overlay #depMain.pg.hub.camp-detail .dep-card-face { width:100%; aspect-ratio:5/7; min-height:0; }
-#overlay #depMain.pg.hub.camp-detail .dep-card-face .hs-card { width:100%; height:100%; }
+#overlay #depMain.pg.hub.camp-detail .dep-card-face .hs-card { width:100%; }
 #overlay #depMain.pg.hub.camp-detail :is(.dep-card,.bag-cell):focus-visible { outline:3px solid #68bbd4; outline-offset:3px; }
 #overlay #depMain.pg.hub.camp-detail .dep-quantity { font-size:19px; color:#566e7b; }
 #overlay #depMain.pg.hub.camp-detail .bag-grid { gap:12px; }
@@ -72,7 +72,7 @@
 #overlay #hubMain.pg.hub.base-camp .warehouse-v2 .stash-cell:hover { background:#ffffff60; transform:translateY(-3px); box-shadow:none; }
 #overlay #hubMain.pg.hub.base-camp .warehouse-v2 .stash-cell.selected { border-color:var(--camp-accent); background:#ffffff70; box-shadow:none; }
 #overlay #hubMain.pg.hub.base-camp .warehouse-card-art { display:block; width:180px; max-width:100%; height:252px; filter:drop-shadow(0 7px 8px #202b3728); }
-#overlay #hubMain.pg.hub.base-camp .warehouse-v2 .stash-cell .hs-card { width:100%; height:100%; max-width:none; font-size:12px; }
+#overlay #hubMain.pg.hub.base-camp .warehouse-v2 .stash-cell .hs-card { width:100%; max-width:none; font-size:12px; }
 #overlay #hubMain.pg.hub.base-camp .stash-card-caption { display:flex; align-items:baseline; justify-content:space-between; gap:8px; width:100%; padding:0; color:var(--camp-ink); }
 #overlay #hubMain.pg.hub.base-camp .stash-card-caption b { min-height:0; font:500 21px/1.4 var(--font-ui); text-align:left; }
 #overlay #hubMain.pg.hub.base-camp .warehouse-v2 .stack-count { position:static; flex:none; background:var(--camp-dark); color:white; min-width:30px; padding:2px 6px; font:600 20px/1.3 var(--font-num); border-radius:0; box-shadow:none; width:auto; height:auto; }
@@ -135,7 +135,7 @@
 #overlay #hubMain.pg.hub.base-camp .person-pool-card.on { border-color:var(--camp-accent); background:#ffffff65; box-shadow:none; }
 #overlay #hubMain.pg.hub.base-camp .person-pool-card:hover { background:#ffffff70; transform:translateY(-3px); }
 #overlay #hubMain.pg.hub.base-camp .pool-card-art { display:block; width:180px; max-width:100%; height:252px; filter:drop-shadow(0 7px 8px #202b3728); }
-#overlay #hubMain.pg.hub.base-camp .person-pool-card .hs-card { width:100%; height:100%; max-width:none; font-size:12px; }
+#overlay #hubMain.pg.hub.base-camp .person-pool-card .hs-card { width:100%; max-width:none; font-size:12px; }
 #overlay #hubMain.pg.hub.base-camp .person-pool-card > b { font-size:21px; font-weight:500; }
 #overlay #hubMain.pg.hub.base-camp .person-pool-card > span:not(.pool-card-art) { font-size:16px; color:var(--camp-muted); }
 #overlay #hubMain.pg.hub.base-camp .companion-toolbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:22px; font-size:22px; }

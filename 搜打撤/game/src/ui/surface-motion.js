@@ -33,7 +33,16 @@ export function enterSurface(root, { restart = true, fast = false, contentOnly =
   else delete root.dataset.surfaceLayout;
   if (profile?.expedition) root.dataset.surfaceContext = 'expedition';
   else delete root.dataset.surfaceContext;
-  const choreography = profile ? pageMotionBlocks(profile, contentOnly) : [];
+  let choreography = profile ? pageMotionBlocks(profile, contentOnly) : [];
+  // 页面换布局后旧分区选择器可能全失配；仍让可见内容入场，不能只禁用旧动画。
+  if (profile && !choreography.length) {
+    choreography = blocks(profile.page).map((el, index) => ({
+      el, role: 'content', delay: Math.min(index * surfaceTiming.stagger, 66),
+    }));
+    if (!choreography.length && !profile.page.closest('[hidden]')) {
+      choreography = [{ el: profile.page, role: 'content', delay: 0 }];
+    }
+  }
   const regions = profile ? choreography.map(region => region.el) : blocks(root);
   if (profile) {
     profile.page.querySelectorAll('.page-in').forEach(el => el.classList.remove('page-in'));
@@ -66,6 +75,12 @@ export function enterSurface(root, { restart = true, fast = false, contentOnly =
       el.style.setProperty('--surface-clip', right ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)');
     }
   });
+  if (restart && phase && !reduced()) {
+    // 同一帧内关闭/重开或连续换页会合并样式更新，a→b→a可能被当作未变化。
+    // 先提交无入场标记的样式，再给本次页面设置新阶段，确保重播。
+    delete root.dataset.surfacePhase;
+    void root.offsetWidth;
+  }
   root.dataset.surfacePhase = next;
 }
 

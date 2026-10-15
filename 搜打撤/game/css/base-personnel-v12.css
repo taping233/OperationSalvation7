@@ -131,7 +131,7 @@
   & .person-pool-card:hover { background:transparent; transform:none; }
   & .person-pool-card.on { background:transparent; border:0; box-shadow:none; }
   & .pool-card-art { display:block; pointer-events:none; width:272px; max-width:100%; height:auto; aspect-ratio:272/406; overflow:visible; margin:0; filter:none; }
-  & .pool-card-art > .hs-card { width:100%!important; max-width:none!important; min-width:0!important; height:auto!important; min-height:0!important; margin:0; transform:none; font-size:16px; }
+  & .pool-card-art > .hs-card { width:100%!important; max-width:none!important; min-width:0!important; margin:0; transform:none; font-size:16px; }
   & .person-pool-card > span:last-child { position:relative; top:6px; color:#566874; font-size:var(--base-type-label,19px); line-height:24px; font-weight:700; letter-spacing:.08em; }
   & .card-browser-footer { flex:none; margin:6px 0 0; padding:4px 0; color:#38454e; font-size:var(--base-type-label,19px); }
   & .card-browser-page { width:48px; height:38px; border:1px solid #9cabb3; border-radius:8px; background:#f6f8f9; color:#25333b; }

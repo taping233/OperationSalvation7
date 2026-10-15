@@ -1,0 +1,238 @@
+[
+  {
+    "group": "rarity",
+    "cards": [
+      {
+        "id": "starter-attack",
+        "name": "初始攻击",
+        "type": "武术",
+        "rarity": "初始",
+        "cost": 1,
+        "description": "造成等同于你的攻击力的攻击伤害。",
+        "art": "cards/expedition-starters/basic-attack.webp",
+        "caption": "初始"
+      },
+      {
+        "id": "tt2-frostsword",
+        "name": "寒冰剑",
+        "type": "装备",
+        "rarity": "古朴",
+        "cost": 0,
+        "description": "你对冰冻角色造成的伤害增加 2 点。",
+        "art": "cards/studio-expanded/tt2-frostsword.webp",
+        "caption": "古朴"
+      },
+      {
+        "id": "tt12-elemburst",
+        "name": "元素爆裂",
+        "type": "法术",
+        "rarity": "稀有",
+        "cost": 2,
+        "description": "对随机敌人造成 2 点法术伤害；本牌的伤害效果触发 4-5 次。",
+        "art": "cards/spell-tt12-elemburst.webp",
+        "caption": "稀有"
+      },
+      {
+        "id": "tt2-apollo",
+        "name": "阿猫的礼物",
+        "type": "装备",
+        "rarity": "史诗",
+        "cost": 0,
+        "description": "你发现或随机获得本牌时，回复 1 点能量，并随机获得另 1 张卡牌。",
+        "art": "cards/equip-tt2-apollo.webp",
+        "caption": "史诗"
+      },
+      {
+        "id": "tt3-execute",
+        "name": "斩杀",
+        "type": "武术",
+        "rarity": "传说",
+        "cost": 1,
+        "description": "对生命不超过 9 点的敌人造成 9 点真实伤害。",
+        "art": "cards/martial-tt3-execute.webp",
+        "caption": "传说"
+      },
+      {
+        "id": "tt3-fireball",
+        "name": "火球",
+        "type": "法术",
+        "rarity": "衍生",
+        "cost": 1,
+        "description": "造成 4 点法术伤害。",
+        "art": "cards/expedition-starters/fireball.webp",
+        "caption": "衍生"
+      },
+      {
+        "id": "tt7-goldencicada",
+        "name": "金蝉脱壳",
+        "type": "武术",
+        "rarity": "职业",
+        "cost": 0,
+        "description": "消耗你的所有手牌，并抽 3 张牌。",
+        "art": "cards/martial-tt7-goldencicada.webp",
+        "caption": "职业"
+      },
+      {
+        "id": "tt8-hero-assassin",
+        "name": "白梅落影·妄",
+        "type": "能力卡",
+        "rarity": "棱彩",
+        "cost": 2,
+        "description": "遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。",
+        "art": "cards/wu-void.webp",
+        "caption": "棱彩"
+      }
+    ]
+  },
+  {
+    "group": "career",
+    "cards": [
+      {
+        "id": "tt7-goldencicada",
+        "name": "金蝉脱壳",
+        "type": "武术",
+        "rarity": "职业",
+        "cost": 0,
+        "description": "消耗你的所有手牌，并抽 3 张牌。",
+        "art": "cards/martial-tt7-goldencicada.webp",
+        "caption": "无 · 侠客"
+      },
+      {
+        "id": "tt7-ironphalanx",
+        "name": "铁甲阵",
+        "type": "武术",
+        "rarity": "职业",
+        "cost": 2,
+        "description": "你获得 10 点护甲；将 5 张随机卡牌洗入你的牌库，并使这些牌的费用均减少 1 点。",
+        "art": "cards/martial-tt7-ironphalanx.webp",
+        "caption": "黑像 · 战士"
+      },
+      {
+        "id": "tt7-arcanebolt",
+        "name": "奥术弹",
+        "type": "法术",
+        "rarity": "职业",
+        "cost": 0,
+        "description": "造成 1 点法术伤害，并抽 1 张牌。",
+        "art": "cards/spell-tt7-arcanebolt.webp",
+        "caption": "白塔 · 法师"
+      },
+      {
+        "id": "tt7-holyglow",
+        "name": "沐愈光辉",
+        "type": "法术",
+        "rarity": "职业",
+        "cost": 1,
+        "description": "将你的生命回复至 12 点。",
+        "art": "cards/spell-tt7-holyglow.webp",
+        "caption": "星月 · 牧师"
+      },
+      {
+        "id": "tt3sp-shadowshot",
+        "name": "暗影射击",
+        "type": "法术",
+        "rarity": "职业",
+        "cost": 1,
+        "description": "造成 3 点法术伤害；若目标处于诅咒状态，本牌额外施放 1 次。",
+        "art": "cards/spell-tt3sp-shadowshot.webp",
+        "caption": "常无欲 · 降临者"
+      },
+      {
+        "id": "tt7-goldencicada",
+        "name": "金蝉脱壳",
+        "type": "武术",
+        "rarity": "职业",
+        "cost": 0,
+        "description": "消耗你的所有手牌，并抽 3 张牌。",
+        "art": "cards/martial-tt7-goldencicada.webp",
+        "caption": "职业素框 · 回退预览",
+        "frameOverride": "neutral"
+      }
+    ]
+  },
+  {
+    "group": "types",
+    "cards": [
+      {
+        "id": "tt7-goldencicada",
+        "name": "金蝉脱壳",
+        "type": "武术",
+        "rarity": "职业",
+        "cost": 0,
+        "description": "消耗你的所有手牌，并抽 3 张牌。",
+        "art": "cards/martial-tt7-goldencicada.webp",
+        "caption": "武术"
+      },
+      {
+        "id": "tt3-fireball",
+        "name": "火球",
+        "type": "法术",
+        "rarity": "衍生",
+        "cost": 1,
+        "description": "造成 4 点法术伤害。",
+        "art": "cards/expedition-starters/fireball.webp",
+        "caption": "法术"
+      },
+      {
+        "id": "tt2-frostsword",
+        "name": "寒冰剑",
+        "type": "装备",
+        "rarity": "古朴",
+        "cost": 0,
+        "description": "你对冰冻角色造成的伤害增加 2 点。",
+        "art": "cards/studio-expanded/tt2-frostsword.webp",
+        "caption": "装备"
+      },
+      {
+        "id": "tt-jinchuangyao",
+        "name": "金疮药",
+        "type": "道具",
+        "rarity": "史诗",
+        "cost": 0,
+        "description": "你回复 20 点生命。",
+        "art": "cards/items/tt-jinchuangyao.webp",
+        "caption": "道具"
+      },
+      {
+        "id": "tt-wood",
+        "name": "木材",
+        "type": "资源",
+        "rarity": "古朴",
+        "cost": 0,
+        "description": "木材 ×1。",
+        "art": "cards/resources/wood.webp",
+        "caption": "资源"
+      },
+      {
+        "id": "foe-infantry",
+        "name": "联邦巡防兵",
+        "type": "生物",
+        "rarity": "衍生",
+        "cost": 0,
+        "description": "攻击 4 / 生命 4。联邦·第1层。普通近战，行动无特殊之处。",
+        "art": "portraits/enemies/infantry.webp",
+        "caption": "生物"
+      },
+      {
+        "id": "tt6-relief",
+        "name": "爱心救济站",
+        "type": "事件",
+        "rarity": "衍生",
+        "cost": 0,
+        "description": "回复 6 血。",
+        "art": "scenes/event-tt6-relief.webp",
+        "caption": "事件"
+      },
+      {
+        "id": "tt8-hero-assassin",
+        "name": "白梅落影·妄",
+        "type": "能力卡",
+        "rarity": "棱彩",
+        "cost": 2,
+        "description": "遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。",
+        "art": "cards/wu-void.webp",
+        "caption": "能力卡"
+      }
+    ]
+  }
+]

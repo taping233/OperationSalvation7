@@ -24,7 +24,9 @@ export function shopV3HTML({ base, cards, art, goods }) {
       ? `data-act="rawItem" data-kind="${escAttr(good.material)}"`
       : `data-act="shopPreview" data-i="${index}"`;
     const unit = material ? good.material === 'wood' ? '个' : '份' : '张';
-    const illustration = card && art?.cardIcon ? art.cardIcon(card, { low: true }) : '';
+    const illustration = card
+      ? material ? art?.cardIcon?.(card, { low: true }) || '' : cards.cardHTML(card, 'sm', { low: true })
+      : '';
     return `<article class="shop-v3-product${material ? ' shop-v3-product--material' : ''}${missing.length ? ' is-unavailable' : ''}" data-goods-id="${escAttr(good.id || good.material)}">
         <header class="shop-v3-product-heading"><h3 class="shop-v3-product-name">${esc(name)}</h3><span>${material ? '基地物资' : esc(card?.type || '卡牌')}</span></header>
         <button type="button" class="shop-v3-preview" ${preview} aria-label="查看${escAttr(name)}详情"${!material && !card ? ' disabled' : ''}>

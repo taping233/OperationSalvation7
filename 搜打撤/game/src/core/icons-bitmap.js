@@ -18,7 +18,9 @@ import { esc } from './shared.js';
   // 空缺（跑局数据页头/终局结算提示）；零新素材，后续专属图出图后在此改指向即可。
   const ALIAS = { chart: 'archive', info: 'scroll' };
   function safe(name) { name = ALIAS[name] || name; if (NAMES.has(name)) return name; reportMissing('icon', name); return 'question'; }
-  function url(name) { return assetUrl(`${ROOT}${safe(name)}.png`); }
+  // 金币货币图标统一使用地图资源栏同源美术（2026-10-15 老板指示），不再走 icons/coin.png。
+  const COIN_ART_URL = assetUrl('assets/ui/map-hud-1015/gold-is7-v2.webp');
+  function url(name) { return safe(name) === 'coin' ? COIN_ART_URL : assetUrl(`${ROOT}${safe(name)}.png`); }
   function img(name, cls, alt) { const n=safe(name); return `<img class="ic${cls?' '+esc(cls):''}" src="${url(n)}" alt="${esc(alt||n)}" data-asset-key="icon-${esc(n)}" draggable="false" loading="eager" decoding="async">`; }
 
   const MAP = Object.create(null);

@@ -1,6 +1,7 @@
 import { reduceMotion } from '../core/motion.js';
 import { createCityCut, cityCutDuration } from './camp-entry.js';
 import '../../css/page-loading.css';
+import { waitPageVisual } from './page-visual-ready.js';
 
 let pending = null;
 
@@ -85,7 +86,11 @@ export function runPageLoading({ title, detail, open, signal, presentation, onRe
       const result = await Promise.race([Promise.resolve().then(open), cancelled]);
       if (signal?.aborted) return false;
       const mounted = performance.now();
-      releaseInput();
+      if (result !== false) await Promise.race([
+        waitPageVisual(document.getElementById('ovBody'), { signal, background: window.SDT?.UI?._pageBgReady }),
+        cancelled,
+      ]);
+      if (signal?.aborted) return false;
       await nextFrame(signal);
       if (signal?.aborted) return false;
       if (import.meta.env.DEV && new URLSearchParams(location.search).has('photoFps')) {
@@ -101,10 +106,12 @@ export function runPageLoading({ title, detail, open, signal, presentation, onRe
         // cleanup would hide an already visible page again and look like a refresh.
         if (result !== false && !signal?.aborted) onRevealStart?.();
         cover.classList.add('leaving');
+        releaseInput();
         await Promise.race([new Promise(resolve => setTimeout(resolve, cityCut ? cityCutDuration : 180)), cancelled]);
       } else if (result !== false && !signal?.aborted) {
         onRevealStart?.();
         if (cityPresentation) cover.classList.add('leaving');
+        releaseInput();
       }
       return result;
     } finally {

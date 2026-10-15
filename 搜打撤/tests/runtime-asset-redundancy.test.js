@@ -32,6 +32,19 @@ function fixture() {
 }
 const plan = f => planReviewedRuntimeAssetExclusions(f.sources, f.catalogs, f.review);
 
+it('keeps reviewed asset decisions identical across Git LF and Windows CRLF sources', () => {
+  const f = fixture();
+  for (const source of f.sources) source.code += '\n';
+  for (const fingerprints of Object.values(f.review.consumerFingerprints)) {
+    fingerprints[f.sources[0].path] = hash(f.sources[0].code);
+  }
+  f.review.opaqueConsumers[f.sources[1].path] = hash(f.sources[1].code);
+  const expected = [...plan(f).excludedAssets];
+  for (const source of f.sources) source.code = source.code.replaceAll('\n', '\r\n');
+  expect(plan(f).warnings).toEqual([]);
+  expect([...plan(f).excludedAssets]).toEqual(expected);
+});
+
 describe('reviewed production-only asset omissions', () => {
   it('contains exactly the 56 independently reviewed paths, never sprite-v1, skins, fonts or active scenery', () => {
     expect(RUNTIME_REDUNDANCY_REVIEW.candidates).toHaveLength(56);

@@ -1,5 +1,6 @@
 // 基地初次展开独立编排；只保留选档画面的短暂装饰副本，不接管存档或焦点。
 import '../../css/camp-entry.css';
+import { waitPageVisual } from './page-visual-ready.js';
 const CUT_SCENES = {
   camp: new URL('../../assets/scenes/transition-camp-v2.webp', import.meta.url).href,
   photo: new URL('../../assets/scenes/transition-photo-v2.webp', import.meta.url).href,
@@ -118,6 +119,35 @@ export function createCityCut({ archive = '基地档案', title = '返回基地'
 
 export const cityCutDuration = 980;
 
+// A mounted city cut holds its first pose until the destination's representative assets settle.
+export function playPreparedCut(page, cut, duration = cityCutDuration, onFinish) {
+  const overlay = page?.closest('#overlay');
+  const card = page?.closest('.card');
+  if (!overlay || !card) return () => {};
+  const controller = new AbortController();
+  let timer;
+  let finished = false;
+  cut.classList.add('page-cut-waiting');
+  card.append(cut);
+  const finish = () => {
+    if (finished) return;
+    finished = true; controller.abort(); clearTimeout(timer);
+    observer.disconnect(); cut.remove(); onFinish?.();
+  };
+  const observer = new MutationObserver(() => {
+    if (!page.isConnected || !overlay.contains(page) || overlay.hidden || overlay.dataset.uiClosing) finish();
+  });
+  observer.observe(overlay, { childList: true, subtree: true, attributes: true,
+    attributeFilter: ['hidden', 'data-ui-closing'] });
+  waitPageVisual(page, { signal: controller.signal, extraRoots: [cut], background: window.SDT?.UI?._pageBgReady })
+    .then(ready => {
+      if (!ready || finished) return;
+      cut.classList.remove('page-cut-waiting');
+      timer = setTimeout(finish, duration);
+    }).catch(finish);
+  return finish;
+}
+
 // 成就首次打开使用独立荣誉档案切幕，关闭或换页即清理装饰层。
 export function enterAchievementCut(page, reduced) {
   const overlay = page?.closest('#overlay');
@@ -125,20 +155,7 @@ export function enterAchievementCut(page, reduced) {
   if (reduced || !overlay || !card) return () => {};
   const cut = createCityCut({ scene: 'achievement', archive: '荣誉档案', title: '成就总览',
     subtitle: 'ACHIEVEMENTS / 远征荣誉陈列', destination: 'ACHIEVEMENTS', watermark: 'HONOR' });
-  card.append(cut);
-  let timer;
-  const finish = () => {
-    clearTimeout(timer);
-    observer.disconnect();
-    cut.remove();
-  };
-  const observer = new MutationObserver(() => {
-    if (!page.isConnected || !overlay.contains(page) || overlay.hidden || overlay.dataset.uiClosing) finish();
-  });
-  observer.observe(overlay, { childList: true, subtree: true, attributes: true,
-    attributeFilter: ['hidden', 'data-ui-closing'] });
-  timer = setTimeout(finish, cityCutDuration);
-  return finish;
+  return playPreparedCut(page, cut);
 }
 
 export function enterCamp(overlay, ghost, reduced) {
@@ -147,23 +164,31 @@ export function enterCamp(overlay, ghost, reduced) {
   overlay.querySelector('#hubMain .hub-page')?.classList.remove('page-in');
   if (reduced) return;
   // 先取目标位置，再挂入场标记，避免把目标的暂时位移当作落点。
-  const removeIdentity = ghost ? transferIdentity(overlay, ghost) : null;
-  overlay.dataset.campEntry = '1';
+  let removeIdentity = null;
+  overlay.dataset.campEntry = 'preparing';
   const card = overlay.querySelector('#ovBody')?.parentElement;
   if (ghost && card) card.appendChild(ghost);
   // 切面承接旧页和基地，装饰层不参与点击、焦点或业务等待。
-  const cut = ghost && card ? createCityCut({ archive: identities.get(ghost)?.text || '基地档案' }) : null;
-  if (cut) card.append(cut);
+  const cut = card ? createCityCut({ archive: ghost && identities.get(ghost)?.text || '基地档案' }) : null;
+  if (cut) { cut.classList.add('page-cut-waiting'); card.append(cut); }
+  const controller = new AbortController();
+  let timer;
   const finish = () => {
     clearTimeout(timer);
+    controller.abort();
     ghost?.remove();
     cut?.remove();
     removeIdentity?.();
     delete overlay.dataset.campEntry;
+    if (cleanup === finish) cleanup = null;
   };
-  const timer = setTimeout(() => {
-    finish();
-    cleanup = null;
-  }, 980);
   cleanup = finish;
+  waitPageVisual(overlay, { signal: controller.signal, extraRoots: cut ? [cut] : [], background: window.SDT?.UI?._pageBgReady })
+    .then(ready => {
+      if (!ready || cleanup !== finish || !overlay.querySelector('#hubMain')) return;
+      overlay.dataset.campEntry = '1';
+      cut?.classList.remove('page-cut-waiting');
+      removeIdentity = ghost ? transferIdentity(overlay, ghost) : null;
+      timer = setTimeout(finish, cityCutDuration);
+    }).catch(finish);
 }

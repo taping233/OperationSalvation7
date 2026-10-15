@@ -11,6 +11,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
 import { bagSlots } from './game.bag.bridge.js';
 import { bagDrag, resetBagDrag } from './game.bag.drag.js';
 import { useStructuredBagRule } from './game.bag.rules.js';
+import { pageHTML as bagV2PageHTML, rarityOf as bagV2Rarity } from './game.bag.view2.js';
 import { captureBattleContext } from '../battle/battle-loader.js';
 function captureBagView(rootFor = null) {
   const sameRun = captureBattleContext(game), cards = game.ownedCards, body = UI.el.ovBody;
@@ -26,6 +27,7 @@ function bagAct(name, handler, current = captureBagView()) {
 bagSlots.showBackpack = showBackpack;
 bagSlots.closeBackpack = closeBackpack;
 let requestedBagSection = null;
+let bagZone = 'bag', bagFilter = 'all', bagSortKey = 'rarity';
 function showBackpackSection(section) {
   requestedBagSection = ['safe', 'pocket'].includes(section) ? section : 'main';
   showBackpack();
@@ -549,6 +551,85 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     showBackpack(true);
   }
 
+  // —— v2 玻璃界面（2026-10-15 WF-bag-redesign-1015 实装，老板拍板绝区零方向）：
+  // 表现层在纯渲染切片 game.bag.view2.js（架构门：壳行数不上浮、切片不得 import 壳）；
+  // 壳负责数据组装（bagZoneTiles）与动作注册，跨区移动 = 拖到左栏分区钮或点详情按钮。
+  function bagZoneTiles() {
+    if (bagZone === 'safe') {
+      return sortStacksByOrder(cardStacks(true)).map(st => ({ name: st.card.name, card: st.card, rarity: bagV2Rarity(st.card), type: st.card.type, cost: st.card.cost, count: st.count, safe: 1, zone: 'safe' }));
+    }
+    if (bagZone === 'pocket') {
+      return game.usedPocket.map(p => ({ name: p.card.name, card: p.card, rarity: bagV2Rarity(p.card), type: p.card.type, cost: p.card.cost, count: p.count, zone: 'pocket' }));
+    }
+    const supplies = game.inventory.map(it => ({ name: it.name, count: it.count || 1, supply: 1, zone: 'bag' }));
+    let cards = sortStacksByOrder(cardStacks(false)).map(st => ({ name: st.card.name, card: st.card, rarity: bagV2Rarity(st.card), type: st.card.type, cost: st.card.cost, count: st.count, safe: 0, zone: 'bag' }));
+    if (bagFilter === '物资') return supplies;
+    if (bagFilter !== 'all') cards = cards.filter(c => bagFilter === '招式' ? ['武术', '法术', '能力卡'].includes(c.type) : c.type === bagFilter);
+    return [...supplies, ...cards];
+  }
+  function findBagStack(name, safe) {
+    return cardStacks(safe).find(st => st.card.name === name)
+      || (!safe ? game.inventory.find(it => it.name === name) : null);
+  }
+  // 看卡操作台（2026-10-15 老板定向：右侧复用基地仓库同款 inventory-zoom 界面）：
+  // 点格子直接开 presentation:'inventory' 特写——大真卡面 + camp-card-actions 页脚。
+  function openBagZoom(name, safe) {
+    const st = findBagStack(name, safe);
+    if (!st || !st.card) return;   // 物资格不开浮层：名称/等级/价值在格子与 tooltip 上
+    const card = st.card, safeFlag = !!safe;
+    const usable = !safeFlag && card.type === '道具';
+    const isSha = card.id === SDT.Cards.SHA.id;
+    const closeZoom = () => document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
+    const btns = [];
+    if (usable) btns.push('<button class="ov-btn ok" data-act="useDetailCard">使用这张道具</button>');
+    if (card.id === 'tt2-pearlbox' && !safeFlag) btns.push('<button class="ov-btn ok" data-act="pearlStoreZoom">[[icon:gem]] 打开珍珠盒</button>');
+    if (card.id === 'tt7-stratagem' && !safeFlag) btns.push('<button class="ov-btn ok" data-act="pouchStoreZoom">[[icon:cards]] 打开锦囊（存放法术 ×3）</button>');
+    if (card.id === 'tt-token-gold' && st.count >= 3) btns.push('<button class="ov-btn ok" data-act="craftColorToken">合成员工通行证A（3 张 B → 1 张 A）</button>');
+    if (card.id === 'tt-token-color' && (game.fragments || 0) >= 2) btns.push('<button class="ov-btn ok" data-act="craftColorTokenByFragments">合成员工通行证A（2 碎片 + 1 通行证A）</button>');
+    if (safeFlag) btns.push('<button class="ov-btn" data-act="zoomMoveToBag">[[icon:bag]] 移回背包</button>');
+    else if (!isSha) btns.push('<button class="ov-btn" data-act="zoomMoveToSafe">[[icon:lock]] 移入安全格</button>');
+    if (!isSha) btns.push('<button class="ov-btn danger" data-act="detailDiscard">丢弃 1 张</button>');
+    const zoneLabel = safeFlag ? '安全格押运中' : '随身背包';
+    const hint = safeFlag ? '撤离失败也将运回基地；拖到左栏背包钮或点「移回背包」取出。'
+      : card.type === '道具' ? '道具在背包内使用生效；战斗中使用请走战斗背包。'
+      : '按住拖动整理顺序；拖到左栏盾钮存入安全格。';
+    UI.showCardZoom(card, {
+      presentation: 'inventory',
+      footer: `<div class="camp-detail camp-card-actions"><div class="inspect-meta"><span class="inspect-count">持有 <b>×${st.count}</b> 张</span><span class="inspect-collection-state">${zoneLabel}</span></div><p class="inspect-collection-hint">${hint}</p>${btns.length ? `<div class="ov-btns">${btns.join('')}</div>` : ''}</div>`,
+    });
+    // 特写页动作：特写打开时注册（旧守卫语义——特写被新详情替换即失效，生命周期测试锚定）
+    bagAct('useDetailCard', () => { closeZoom(); useOwnedCard(st.uids[0]); });
+    if (safeFlag) bagAct('zoomMoveToBag', () => { closeZoom(); moveStackSafe(card.name, false); });
+    else if (!isSha) bagAct('zoomMoveToSafe', () => { closeZoom(); moveStackSafe(card.name, true); });
+    if (card.id === 'tt2-pearlbox' && !safeFlag) bagAct('pearlStoreZoom', () => { closeZoom(); openPearlStore(); });
+    if (card.id === 'tt7-stratagem' && !safeFlag) bagAct('pouchStoreZoom', () => { closeZoom(); openPouchStore(); });
+    bagAct('detailDiscard', () => { closeZoom(); showDiscardConfirm(card.name, safeFlag); });
+    bagAct('craftColorToken', () => {
+      closeZoom();
+      const golds = game.ownedCards.filter(x => x.card && x.card.id === 'tt-token-gold').slice(0, 3);
+      if (golds.length < 3) { UI.log('员工通行证B不足 3 张，无法合成', 'warn'); return; }
+      const goldIds = new Set(golds.map(g => g.uid));
+      game.ownedCards = game.ownedCards.filter(x => !goldIds.has(x.uid));
+      const color = SDT.Cards.all().find(c => c.id === 'tt-token-color');
+      if (color) game.ownedCards.push({ uid: newUid(), card: { ...color } });
+      UI.log('[[icon:sparkles]] 合成成功：3 张员工通行证B → 1 张<b>员工通行证A</b>', 'loot');
+      saveGame();
+      showBackpack(true);
+    });
+    bagAct('craftColorTokenByFragments', () => {
+      closeZoom();
+      if ((game.fragments || 0) < 2) { UI.log('员工通行证A碎片不足 2 枚，无法合成', 'warn'); return; }
+      const i = game.ownedCards.findIndex(x => x.card && x.card.id === 'tt-token-color');
+      if (i < 0) return;
+      game.ownedCards.splice(i, 1);
+      game.fragments -= 2;
+      const token = SDT.Cards.all().find(c => c.id === 'cmtmvq6ss84l');
+      if (token) game.ownedCards.push({ uid: newUid(), card: { ...token } });
+      UI.log('[[icon:sparkles]] 合成成功：员工通行证A + 2 枚碎片 → 1 张<b>员工通行证A</b>（使用后获取本职业能力卡）', 'loot');
+      saveGame();
+      showBackpack(true);
+    });
+  }
   function showBackpack(refreshOnly) {
     // 卡牌特写浮层挂在 body（overlay 之外）：此时按 B / 点背包按钮 = 先收回特写，
     // 不动背包——否则背包关闭后特写残留在局内画面上
@@ -594,173 +675,44 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     backpackOpen = true;
     _set_cardPageOpen(false);
     syncCardOrder();
-    const cap = bagCap(), sCap = safeCap();
+    const cap = bagCap(), sCap = safeCap(), baseCap = SDT.Base.bagCap();
     const total = game.inventory.reduce((a, b) => a + b.value * (b.count || 1), 0);
-    const supplies = game.inventory;
-    const stacks = sortStacksByOrder(cardStacks(false));
-    let cells = '';
-    for (let i = 0; i < cap; i++) {
-      if (i < supplies.length) {
-        const it = supplies[i];
-        cells += `<div class="bag-slot filled tier-bd-${it.tier}" title="${it.name}">
-             <b>${it.name}${it.count > 1 ? ` ×${it.count}` : ''}</b>
-             <span>价值 ${it.value * it.count}</span>
-             <i class="tier tier-${it.tier}">${it.tier}</i>
-           </div>`;
-      } else if (i - supplies.length < stacks.length) {
-        const st = stacks[i - supplies.length];
-        cells += `<div class="bag-slot filled card-slot flip3d" data-stack="${escAttr(st.card.name)}"
-              title="${escAttr(st.card.name)} ×${st.count} · 点击查看详情 · 按住拖动整理">
-             <div class="flip-inner">
-               <div class="flip-face flip-front" data-act="inspectStack" data-name="${escAttr(st.card.name)}" data-safe="0">
-                 ${SDT.Cards.cardHTML(st.card, '', { hideCost: true })}
-                 <span class="stack-count">×${st.count}</span>
-               </div>
-               <div class="flip-face flip-back">${SDT.Cards.cardBackHTML()}</div>
-             </div>
-           </div>`;
-      } else if (i >= SDT.Base.bagCap()) {
-        // 2026-09-10 留言 #26：珍珠盒扩格与普通格视觉区分——玩家不再误以为「有空位却拾取不了」
-        cells += '<div class="bag-slot empty pearl-empty" title="珍珠盒扩格：只收资源卡牌（木材/口粮/货币等），其他卡放不进"></div>';
-      } else cells += '<div class="bag-slot empty"></div>';
-    }
-    // 安全格：宠物看守，撤离失败时里面的卡牌安全运回基地
-    const safeStacks = sortStacksByOrder(cardStacks(true));
-    let safeCells = '';
-    for (let i = 0; i < sCap; i++) {
-      if (i < safeStacks.length) {
-        const st = safeStacks[i];
-        safeCells += `<div class="bag-slot filled safe-slot flip3d" data-stack="${escAttr(st.card.name)}"
-          title="${escAttr(st.card.name)} ×${st.count} · 点击查看详情 · 拖回背包可取出">
-          <div class="flip-inner">
-            <div class="flip-face flip-front" data-act="inspectStack" data-name="${escAttr(st.card.name)}" data-safe="1">
-              ${SDT.Cards.cardHTML(st.card, '', { hideCost: true })}
-              <span class="stack-count">×${st.count}</span>
-            </div>
-            <div class="flip-face flip-back">${SDT.Cards.cardBackHTML()}</div>
-          </div>
-        </div>`;
-      } else safeCells += '<div class="bag-slot empty safe-empty"></div>';
-    }
-    // 消耗口袋：容量无限，未复原不能再用（2026-09-09 老板 #6：文字行改真卡面，背包里看得见口袋里是哪张牌）
+    const safeUsedN = cardStacks(true).length;
     const pkN = game.usedPocket.reduce((a, b) => a + b.count, 0);
-    const pocketHTML = game.usedPocket.length
-      ? game.usedPocket.map(p => `
-          <div class="pk-card" title="${escAttr(p.card.name)}${p.count > 1 ? ` ×${p.count}` : ''} · ${p.card.cost}费 · 本局无法使用（火堆可复原；撤离每张仅 1/3 概率带回基地）">
-            ${SDT.Cards.cardHTML(p.card, 'sm')}
-            ${p.count > 1 ? `<span class="bt-count">×${p.count}</span>` : ''}
-          </div>`).join('')
-      : '<p class="ov-empty" style="margin:2px 0 0">暂无消耗卡牌</p>';
+    if (requestedBagSection) {
+      bagZone = requestedBagSection === 'main' ? 'bag' : requestedBagSection;
+      requestedBagSection = null;
+    }
     // 说明文字统一收进 ? 帮助弹层
     const helpCurrent = captureBattleContext(game), helpCards = game.ownedCards;
     UI.registerHelp('bag', {
       title: '背包说明',
       html: `
-        <p class="help-item"><b>背包格</b>物资与卡牌混占格数（同名堆叠只占 1 格）。双击卡牌翻面看卡背；按住拖动整理顺序，拖入右侧安全格即存入。</p>
+        <p class="help-item"><b>随身背包</b>物资与卡牌混占格（同名堆叠只占 1 格）。点击格子看右侧详情；按住拖动整理顺序，拖到左栏盾形按钮存入安全格。</p>
         <p class="help-item"><b>安全格</b>由宠物阿七看守：撤离失败或放弃对局时，只有安全格里的卡牌会被抢运回基地，其余全部丢失。容量在基地「升级」页用口粮升级。</p>
         <p class="help-item"><b>消耗口袋</b>对小怪用过的卡、注能消耗的卡会进到这里：本局无法再用，容量无限。撤离时每张仅 1/3 概率带回基地口袋（用钥匙复原）；局内火堆每次休整可复原 2 张；道具「能源结晶」可就地复原 3 张。</p>
-        <p class="help-item"><b>丢弃</b>把卡牌拖到背包页面外的空地可申请丢弃 1 张——丢弃的牌无法取回，请谨慎操作。</p>`,
+        <p class="help-item"><b>丢弃</b>把卡牌拖到背包页面外可申请丢弃 1 张——丢弃的牌无法取回，请谨慎操作。</p>`,
       back: () => { if (helpCurrent() && game.ownedCards === helpCards && UI.el.ovBody?.querySelector('.help-body')) showBackpack(true); },
     });
-    UI.showOverlay('[[icon:bag]] 背包', `<div class="bag-view bag-reference">
-      <header class="bag-head">
-        <div class="bag-head-info">
-          <h2>背包 ${UI.helpBtn('bag')}</h2>
-          <div class="bag-chips">
-            <span class="fc-chip">金币 <b>${game.coins}</b></span>
-            <span class="fc-chip">物资估值 <b>${total.toLocaleString()}</b></span>
-            ${(game.fragments || 0) > 0 ? `<span class="fc-chip" title="集齐 2 枚，可随员工通行证A合成员工通行证A">[[icon:gem]] 员工通行证A碎片 <b>${game.fragments}/2</b></span>` : ''}
-          </div>
-        </div>
-        <button class="bag-close" data-act="closeBag" title="关闭背包（B）" aria-label="关闭背包">
-          <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
-            <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-          </svg>
-          <span>返回</span>
-        </button>
-      </header>
-      <div class="bag-layout">
-        <section class="bag-main" aria-label="随身背包">
-          <h3 class="set-h">随身背包 <span class="set-tip">${game.bagCapacityText?.() || `${usedSlots()}/${cap} 格`}</span>
-            <span class="bag-sort">
-              <button class="mini-btn" data-act="bagSortRarity" title="按稀有度从高到低排序（同稀有度按种类）">按稀有度</button>
-              <button class="mini-btn" data-act="bagSortType" title="按种类排序（同种类按稀有度）">按种类</button>
-            </span>
-          </h3>
-          <p class="bag-region-note">点击卡面查看详情 · 按住拖动整理</p>
-          <div class="bag-grid">${cells}</div>
-        </section>
-        <aside class="bag-side">
-          <section class="bag-side-card bag-safe-region" aria-label="安全格">
-            <h3 class="set-h">安全格 <span class="set-tip">${safeStacks.length}/${sCap} 格</span></h3>
-            <p class="bag-region-note">撤离失败时运回基地 · 拖入存放，拖回取出</p>
-            <div class="bag-grid safe-grid">${safeCells}</div>
-          </section>
-          <section class="bag-side-card bag-pocket-region" aria-label="消耗口袋">
-            <h3 class="set-h">消耗口袋 <span class="set-tip">${pkN} 张 · 暂不可用</span></h3>
-            <p class="bag-region-note">已用过的卡牌 · 在火堆或用道具复原</p>
-            <div class="pk-list pk-cards">${pocketHTML}</div>
-          </section>
-        </aside>
-      </div></div>`, 'bagpage');
-    if (requestedBagSection) {
-      const selector = requestedBagSection === 'safe' ? '.bag-safe-region' : requestedBagSection === 'pocket' ? '.bag-pocket-region' : '.bag-main';
-      const region = UI.el.overlay.querySelector(selector);
-      if (region) {
-        region.classList.add('bag-region-selected');
-        region.setAttribute('tabindex', '-1');
-        region.focus({ preventScroll:true });
-      }
-      requestedBagSection = null;
-    }
-    // 2026-09-12 留言 #27：看卡不方便 → 点击直接放大卡面特写（替代原文字详情页）。
-    // 2026-09-15 修复：#27 改版把带「使用这张道具」按钮的 showBagCardDetail 整个挂空了，
-    // 背包里的道具（回血药等）从此没有任何使用入口——在特写 footer 把「使用」补回来
-    bagAct('inspectStack', (d) => {
-      const st = cardStacks(d.safe === '1').find(s => s.card.name === d.name);
-      if (!st) return;
-      const usable = d.safe !== '1' && st.card.type === '道具';
-      // 珍珠盒/法师锦囊：点击直接打开容器界面（2026-09-16 留言）
-      const isPearl = st.card.id === 'tt2-pearlbox' && d.safe !== '1';
-      const isPouch = st.card.id === 'tt7-stratagem' && d.safe !== '1';
-      let containerBtn = '';
-      if (isPearl) containerBtn = '<div class="ov-btns"><button class="ov-btn ok" data-act="pearlStoreZoom">[[icon:gem]] 打开珍珠盒</button></div>';
-      if (isPouch) containerBtn = '<div class="ov-btns"><button class="ov-btn ok" data-act="pouchStoreZoom">[[icon:cards]] 打开锦囊（存放法术 ×3）</button></div>';
-      // 点击移动（2026-09-16 留言）：背包卡可移入安全格、安全格卡可移回背包（不必拖拽）
-      const isShaStack = st.card.name === (SDT.Cards.SHA && SDT.Cards.SHA.name);
-      const moveBtn = d.safe === '1'
-        ? '<div class="ov-btns"><button class="ov-btn" data-act="zoomMoveToBag">[[icon:bag]] 移回背包</button></div>'
-        : (isShaStack ? '' : '<div class="ov-btns"><button class="ov-btn" data-act="zoomMoveToSafe">[[icon:lock]] 移入安全格</button></div>');
-      UI.showCardZoom(st.card, {
-        footer: `${containerBtn}
-          ${usable ? '<div class="ov-btns"><button class="ov-btn ok" data-act="useDetailCard">使用这张道具</button></div>' : ''}
-          ${moveBtn}
-          <p class="ov-note">${d.safe === '1' ? '[[icon:lock]] 安全格 · 可拖回背包或点击「移回背包」' : '按住拖动整理顺序 · 双击翻看卡背 · 可点击「移入安全格」'}</p>`,
-      });
-      if (d.safe === '1') {
-        bagAct('zoomMoveToBag', () => {
-          document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
-          moveStackSafe(st.card.name, false);
-        });
-      } else if (!isShaStack) {
-        bagAct('zoomMoveToSafe', () => {
-          document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
-          moveStackSafe(st.card.name, true);
-        });
-      }
-      // 特写收起助手：与 showBagCardDetail 里的同名助手同体（动作前先模拟点背景收回特写）
-      const closeCardZoom = () => document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
-      if (isPearl) bagAct('pearlStoreZoom', () => { closeCardZoom(); openPearlStore(); });
-      if (isPouch) bagAct('pouchStoreZoom', () => { closeCardZoom(); openPouchStore(); });
-      if (usable) bagAct('useDetailCard', () => {
-        document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
-        useOwnedCard(st.uids[0]);
-      });
+    UI.showOverlay('[[icon:bag]] 背包', bagV2PageHTML({
+      bagZone, bagFilter, bagSortKey,
+      cap, baseCap, capacityText:game.bagCapacityText?.() || '', total, safeUsedN, sCap, pkN,
+      used: usedSlots(), coins: game.coins, fragments: game.fragments || 0,
+      tiles: bagZoneTiles(),
+    }), 'bagpage');
+    // 分区 / 筛选 / 排序 / 点选详情（v2，2026-10-15）：点选格子只更新右侧详情面板，
+    // 「放大查看」沿用 09-12 留言 #27 卡面特写入口（inspectStack 契约不变，selftest 锚定）。
+    bagAct('bagZone', d => {
+      if (!['bag', 'safe', 'pocket'].includes(d.zone)) return;
+      bagZone = d.zone; bagFilter = 'all';
+      showBackpack(true);
     });
-    bagAct('bagSortRarity', () => sortBagBy('rarity'));
-    bagAct('bagSortType', () => sortBagBy('type'));
+    bagAct('bagFilter', d => { bagFilter = d.f || 'all'; showBackpack(true); });
+    bagAct('bagSortCycle', () => { bagSortKey = bagSortKey === 'rarity' ? 'type' : 'rarity'; sortBagBy(bagSortKey); });
+    bagAct('bagTidy', () => { bagSortKey = 'rarity'; sortBagBy('rarity'); });
     bagAct('closeBag', closeBackpack);
-    bagSlots.bindBagDrag();   // v0.21：3D 拖拽排序 / 双击翻卡背
+    bagAct('inspectStack', d => openBagZoom(d.name, d.safe === '1'));
+    bagSlots.bindBagDrag();   // v0.21：拖拽排序 / 左栏分区钮拖放跨区 / 点格子开看卡操作台
   }
 
   let backpackOpen = false;   // 背包弹窗开关（必须声明：showBackpack 打开路径会读取它）

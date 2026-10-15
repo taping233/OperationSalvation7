@@ -1,0 +1,45 @@
+/* Raster cutouts rotate around neck, shoulder and hip joints. */
+#hubMain .base-chibi-lane { position:absolute; left:56%; right:23%; bottom:5%; height:220px; pointer-events:none; z-index:2; }
+#hubMain .base-chibi { position:absolute; bottom:0; left:0; width:150px; height:210px; padding:0; border:0; border-radius:40%; background:transparent; box-shadow:none; cursor:pointer; pointer-events:auto; transform:translateX(var(--chibi-x,0px)); touch-action:manipulation; }
+#hubMain .base-chibi:focus-visible { outline:2px solid #9edce7; outline-offset:4px; }
+#hubMain .chibi-facing { position:absolute; inset:0; display:block; transform:scaleX(var(--chibi-facing,1)); pointer-events:none; }
+#hubMain .chibi-scale { position:absolute; inset:0; display:block; }
+#hubMain .chibi-rig { position:absolute; inset:0; display:block; transform-origin:50% 96%; animation:chibi-breathe 2.6s ease-in-out infinite; }
+#hubMain .chibi-part { position:absolute; display:block; object-fit:fill; max-width:none; pointer-events:none; user-select:none; }
+#hubMain .chibi-head { width:74px; height:74px; left:39px; top:10px; transform-origin:50% 93%; animation:chibi-nod 2.6s ease-in-out infinite; }
+#hubMain .chibi-hair { width:100px; height:140px; left:37px; top:-9px; transform-origin:30% 12%; animation:chibi-hair 2.6s ease-in-out infinite; }
+#hubMain .chibi-body { width:76px; height:78px; left:39px; top:76px; transform-origin:50% 15%; }
+#hubMain .chibi-arm-back { width:27px; height:61px; left:43px; top:83px; transform-origin:60% 8%; }
+#hubMain .chibi-arm-front { width:28px; height:61px; left:85px; top:83px; transform-origin:50% 8%; }
+#hubMain .chibi-leg-back { width:23px; height:68px; left:54px; top:138px; transform-origin:50% 7%; }
+#hubMain .chibi-leg-front { width:23px; height:68px; left:81px; top:138px; transform-origin:50% 7%; }
+#hubMain .chibi-sword { width:105px; height:154px; left:20px; top:39px; transform-origin:50% 40%; }
+#hubMain .chibi-shadow { position:absolute; bottom:0; left:42px; width:74px; height:12px; border-radius:50%; background:#10202d66; filter:blur(3px); pointer-events:none; }
+#hubMain .chibi-speech { position:absolute; bottom:100%; left:50%; width:max-content; max-width:210px; transform:translateX(-50%); padding:9px 13px; border:1px solid #9edce75c; border-radius:12px 12px 12px 2px; background:#16232eee; color:#eef5f5; font:14px/1.5 var(--font-ui); pointer-events:none; }
+#hubMain .chibi-speech:empty { display:none; }
+#hubMain .base-chibi[data-state="walk"] .chibi-rig { animation:chibi-step .48s ease-in-out infinite; }
+#hubMain .base-chibi[data-state="walk"] .chibi-head { animation:chibi-nod .48s ease-in-out infinite; }
+#hubMain .base-chibi[data-state="walk"] .chibi-hair { animation:chibi-hair .48s ease-in-out infinite; }
+#hubMain .base-chibi[data-state="walk"] :is(.chibi-leg-back,.chibi-arm-front) { animation:chibi-stride .48s ease-in-out infinite; }
+#hubMain .base-chibi[data-state="walk"] :is(.chibi-leg-front,.chibi-arm-back) { animation:chibi-stride .48s ease-in-out -.24s infinite; }
+#hubMain .base-chibi[data-state="react"] .chibi-rig { animation:chibi-greet .65s ease-in-out; }
+#hubMain .base-chibi[data-state="react"] .chibi-head { animation:none; transform:rotate(-7deg); }
+#hubMain .base-chibi[data-state="react"] .chibi-arm-front { animation:chibi-wave .32s ease-in-out 5; }
+#hubMain .base-chibi[data-paused="true"] * { animation-play-state:paused; }
+@keyframes chibi-breathe { 50% { transform:translateY(-2px) scaleY(1.012); } }
+@keyframes chibi-nod { 50% { transform:rotate(2deg); } }
+@keyframes chibi-hair { 50% { transform:rotate(-4deg); } }
+@keyframes chibi-step { 25%,75% { transform:translateY(-3px); } }
+@keyframes chibi-stride { 0%,100% { transform:rotate(-18deg); } 50% { transform:rotate(18deg); } }
+@keyframes chibi-greet { 35% { transform:translateY(-9px) rotate(-3deg); } 65% { transform:translateY(-3px) rotate(2deg); } }
+@keyframes chibi-wave { 0%,100% { transform:rotate(-112deg); } 50% { transform:rotate(-140deg); } }
+@media (prefers-reduced-motion:reduce) { #hubMain .base-chibi * { animation:none !important; } }
+body.reduce-motion #hubMain .base-chibi * { animation:none !important; }
+
+/* The white-page skinned rig uses shared joint transforms and anchored feet. */
+#hubMain .base-chibi[data-skin="true"] .chibi-rig { visibility:hidden; }
+#hubMain .base-chibi[data-skin="true"] .chibi-facing { transform:scaleX(calc(-1 * var(--chibi-facing,1))); }
+#hubMain .chibi-skin { position:absolute; left:-10px; top:-20px; width:170px; height:240px; display:block; pointer-events:none; }
+#hubMain .chibi-v2-source { position:absolute; top:-18px; left:0; width:150px; height:225px; }
+#hubMain .base-chibi[data-version="v2"][data-skin="true"] .chibi-v2-source { visibility:hidden; }
+#hubMain .base-chibi[data-version="v2"] .chibi-facing { transform:scaleX(var(--chibi-facing,1)); }

@@ -1,13 +1,13 @@
-@import url('./card-frames/rose/frames.css');
-@import url('./card-frames/career/frames.css');
-:root {
-  --card-copy-size: 24px;
-  --card-copy-leading: 1.55;
-  --card-copy-ink: #e8edef;
-  --card-copy-term: #c5e3ed;
-  --card-copy-keyword: #eee4ce;
+/* Shared card face. Hosts own width, placement, selection and drag behaviour only. */
+@font-face {
+  font-family: 'Card Oxanium';
+  src: url('../assets/fonts/oxanium-latin-700-normal.woff2') format('woff2');
+  font-weight: 700; font-display: swap;
 }
-/* 独立全文阅读复用同一字级；卡内正文继续随卡宽缩放。 */
+:root {
+  --card-copy-size: 24px; --card-copy-leading: 1.55;
+  --card-copy-ink: #e8edef; --card-copy-term: #c5e3ed; --card-copy-keyword: #eee4ce;
+}
 body:has(#viewport) .card-rules-copy {
   font: 400 var(--card-copy-size) / var(--card-copy-leading) var(--font-ui);
   color: var(--card-copy-ink); text-align: left; white-space: pre-wrap;
@@ -20,135 +20,199 @@ body:has(#viewport) .card-rules-copy .d-num { color: inherit; font-weight: 700; 
 body:has(#viewport) .card-rules-copy .d-term { color: var(--card-copy-term); font-weight: 400; }
 body:has(#viewport) .card-rules-copy .d-term[data-term] { font-weight: 600; }
 body:has(#viewport) .card-rules-copy .d-kw { color: var(--card-copy-keyword); font-weight: 700; }
-/* 老板选定的第八稿蔷薇外扩包框；全幅卡面、悬停、放大与飞行克隆共用同一外观。 */
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card {
-  --tier: #929b9f; --tier-light: #e3e9eb; --tier-label: '初始';
-  display: grid !important; container-type: inline-size; grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: minmax(0, 1fr) auto auto auto;
-  min-height: 14.93em; height: auto !important; aspect-ratio: 272 / 406 !important;
-  padding: .14em !important; border: 0 !important;
-  border-radius: .34em !important; background: #263440 !important;
-  box-shadow: none !important; overflow: visible !important; position: relative !important; isolation: isolate;
+
+.hs-card[data-card-layout="split"] {
+  --paper-pigment: #52595c; --paper-wash: #b7b8aa;
+  --card-copy-term: #355966; --card-copy-keyword: #725829;
+  display: block;
+  container-type: inline-size; position: relative; isolation: isolate; box-sizing: border-box;
+  height: auto; min-height: 0; aspect-ratio: 2 / 3; padding: 0; border: 0; flex-shrink: 0;
+  border-radius: .22em; background: transparent; overflow: visible; box-shadow: none;
+  font-family: var(--font-ui, 'HarmonyOS Sans SC', sans-serif);
 }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv1 { --tier: #929b9f; --tier-light: #e3e9eb; --tier-label: '古朴'; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv2 { --tier: #509ccb; --tier-light: #c0e7ff; --tier-label: '稀有'; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv3 { --tier: #9e72ce; --tier-light: #e3caff; --tier-label: '史诗'; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv4 { --tier: #d0a13d; --tier-light: #ffe6a3; --tier-label: '传说'; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv5 { --tier: #6c9c9f; --tier-light: #b4dad5; --tier-label: '衍生'; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv6 { --tier: #364451; --tier-light: #c4d0d9; --tier-label: '职业'; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card:is(.rv7, .rv-prism) {
-  --tier: #c2b5eb; --tier-light: #f9e4f3; --tier-label: '棱彩';
+.hs-card[data-card-layout="split"] .hsc-face {
+  position: absolute; left: var(--face-left); top: var(--face-top);
+  width: var(--face-width); height: var(--face-height); container-type: inline-size;
+  display: grid; grid-template-columns: minmax(0,1fr); grid-template-rows: 53% 47%;
+  background: #ded9cb; z-index: 6;
 }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card::after {
-  content: '' !important; display: block !important; position: absolute !important;
-  inset: .15em !important; width: auto !important; height: auto !important;
-  border-radius: .22em; pointer-events: none; z-index: 1;
-  background: linear-gradient(transparent 49%, #10182394 65%, #101823ec 82%, #0c131ded 100%) !important;
-  opacity: 1 !important; box-shadow: none !important;
+.hs-card[data-card-layout="split"] .hsc-art {
+  grid-row: 1; position: relative; display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%; min-height: 0; margin: 0; padding: 0; overflow: hidden;
+  border: 0; border-radius: .22em .22em 0 0; background: #242a35; z-index: 0;
 }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card:is(.rv7, .rv-prism)::after {
-  background: linear-gradient(transparent 49%, #10182394 65%, #101823ec 82%, #0c131ded 100%), linear-gradient(122deg, transparent 22%, #f9b5e937 28%, #ffe69c37 35%, #9ff5d838 42%, #a9d5ff30 48%, #d6b9ff30 54%, transparent 61%) !important;
+.hs-card[data-card-layout="split"] .hsc-art img { display: block; width: 100%; height: 100%; padding: 0; }
+.hs-card[data-card-layout="split"] .hsc-art > .ic { width: 50%; height: 50%; }
+.hs-card[data-card-id="tt7-goldencicada"] .hsc-art img { object-position: 48% 38%; }
+.hs-card[data-card-layout="split"].tp2 .hsc-art img { object-position: 50% 0; }
+.hs-card[data-card-layout="split"] .hsc-copy {
+  grid-row: 2; position: relative; display: flex; flex-direction: column; min-height: 0;
+  padding: 10.34cqw 6.03cqw 5.6cqw; box-sizing: border-box;
+  background: #e1ddcf url('../assets/ui/card-frames/paper-1015/interior.webp') center / cover; z-index: 3;
 }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-art {
-  position: absolute !important; inset: .15em !important; width: auto !important;
-  height: auto !important; min-height: 0 !important; aspect-ratio: auto !important;
-  margin: 0 !important; padding: 0 !important; border: 0 !important;
-  border-radius: .22em !important; box-shadow: none !important; z-index: 0 !important;
+.hs-card[data-card-layout="split"] .hsc-copy:before {
+  content: ''; position: absolute; top: -1.29cqw; left: 0; right: 0; height: 4.3cqw;
+  background: var(--paper-wash); opacity: .85; pointer-events: none;
+  clip-path: polygon(0 20%,18% 0,33% 30%,52% 4%,67% 22%,86% 0,100% 25%,97% 90%,70% 74%,54% 100%,34% 74%,12% 96%,0 65%);
 }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-art :is(.art-card-image, .art-hero-fit) {
-  width: 100% !important; height: 100% !important; object-fit: cover !important; padding: 0 !important;
+.hs-card[data-card-layout="split"] .hsc-name {
+  display: block; position: relative; flex: none; width: 100%; min-height: 0; height: auto;
+  margin: 0; padding: 0; border: 0; background: none; box-shadow: none; clip-path: none;
+  text-align: center; font-size: 9.05cqw; line-height: 1.35; font-weight: 700;
+  letter-spacing: .065em; color: var(--paper-pigment); overflow-wrap: anywhere; white-space: normal;
 }
-/* 金蝉脱壳保留人物与草替身：横幅按卡宽 130% 靠上展示。 */
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-art:has(img[data-asset-key="card-martial-tt7-goldencicada"]) {
-  background: #1e2130 !important; overflow: hidden !important;
+.hs-card[data-card-layout="split"] .hsc-name span { color: inherit; }
+.hs-card[data-card-layout="split"][data-rarity="古朴"] { --paper-pigment: #716048; --paper-wash: #a58b62; }
+.hs-card[data-card-layout="split"][data-rarity="稀有"] { --paper-pigment: #235682; --paper-wash: #347cc0; }
+.hs-card[data-card-layout="split"][data-rarity="史诗"] { --paper-pigment: #674087; --paper-wash: #9250b9; }
+.hs-card[data-card-layout="split"][data-rarity="传说"] { --paper-pigment: #805511; --paper-wash: #c79824; }
+.hs-card[data-card-layout="split"][data-rarity="棱彩"] { --paper-pigment: #694d86; --paper-wash: #998cc9; }
+.hs-card[data-card-layout="split"][data-rarity="衍生"] { --paper-pigment: #3f6c67; --paper-wash: #82a6a0; }
+.hs-card[data-card-layout="split"][data-frame="wu"] { --paper-pigment: #354a6d; --paper-wash: #5978a5; }
+.hs-card[data-card-layout="split"][data-frame="xingyue"] { --paper-pigment: #79600f; --paper-wash: #c6a735; }
+.hs-card[data-card-layout="split"][data-frame="changwuyu"] { --paper-pigment: #69427c; --paper-wash: #9264ab; }
+.hs-card[data-card-layout="split"][data-frame="baita"] { --paper-pigment: #416c33; --paper-wash: #a7ad3e; }
+.hs-card[data-card-layout="split"][data-frame="heixiang"] { --paper-pigment: #7b3c37; --paper-wash: #a34d44; }
+.hs-card[data-card-layout="split"][data-rarity="传说"] .hsc-name span,
+.hs-card[data-card-layout="split"][data-rarity="棱彩"] .hsc-name span {
+  color: transparent; background-clip: text; -webkit-background-clip: text;
+  -webkit-text-stroke: 0; text-shadow: none;
 }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-art img[data-asset-key="card-martial-tt7-goldencicada"] {
-  position: absolute; top: 0 !important; left: -15% !important;
-  width: 130% !important; height: auto !important; object-fit: contain !important;
+.hs-card[data-card-layout="split"][data-rarity="传说"] .hsc-name span {
+  background-image: linear-gradient(105deg,#7e500e,#a87724 38%,#9b6d1a 60%,#865f15);
 }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-art::before,
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-art::after { display: none !important; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-name {
-  position: relative !important; grid-row: 2; z-index: 3 !important;
-  width: calc(100% - 1.4em) !important; min-height: 1.35em !important;
-  margin: 0 .7em .38em !important; padding: 0 !important;
-  border: 0 !important; border-radius: 0 !important; clip-path: none !important;
-  display: flex !important; align-items: center !important; justify-content: center !important;
-  background: none !important; box-shadow: none !important;
-  color: #f5f5f2 !important; font-size: 9.2cqw !important; line-height: 1.35; letter-spacing: .04em !important;
-  text-shadow: 0 2px 2px #000b !important; white-space: normal !important;
+.hs-card[data-card-layout="split"][data-rarity="棱彩"] .hsc-name span {
+  background-image: linear-gradient(105deg,#8860ac,#ae667d 25%,#397c82 45%,#5472ab 68%,#965f9a 85%,#8860ac);
+  background-size: 180% 100%; animation: cardPrismTitle 7s ease-in-out infinite alternate;
 }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-name span {
-  color: #f5f5f2 !important; background: none !important; -webkit-text-stroke: 0 !important;
-  white-space: normal !important; overflow-wrap: anywhere; text-align: center;
+.hs-card[data-card-layout="split"] .hsc-desc {
+  display: block; flex: 1; min-height: 0; width: 100%; height: auto; max-height: none;
+  margin: 6.46cqw 0 0; padding: 0; border: 0; background: none; box-shadow: none;
+  color: #383e42; font-size: 6.03cqw; line-height: 1.65; text-align: center;
+  overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #69818d transparent;
 }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv3 .hsc-name span { color: #f0defe !important; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv4 .hsc-name span,
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card:is(.rv7, .rv-prism) .hsc-name span {
-  color: transparent !important; background-clip: text !important; -webkit-background-clip: text !important;
-  text-shadow: none !important; filter: drop-shadow(0 2px 1px #000);
+.hs-card[data-card-layout="split"][data-rule-density="dense"] .hsc-desc,
+.hs-card[data-card-layout="split"][data-rule-density="very-dense"] .hsc-desc {
+  margin-top: 4.3cqw; font-size: 5.6cqw; line-height: 1.55;
 }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv4 .hsc-name span { background-image: linear-gradient(105deg, #d09a3e, #f9dd98 22%, #fff3cd 45%, #d7a947 58%, #ffe9a9 82%, #ba8730) !important; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card:is(.rv7, .rv-prism) .hsc-name span { background-image: linear-gradient(105deg, #f4b9df, #fff0c5 25%, #baf4e0 45%, #bcd6ff 68%, #e7c8ff 85%, #ffe7f8) !important; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-cost {
-  position: absolute !important; top: -.22em !important; left: -.33em !important;
-  width: 19.5cqw !important; height: 19.5cqw !important; z-index: 8 !important;
-  border: .11em solid #c2d2d8 !important; border-radius: .44em !important;
-  background: linear-gradient(135deg, #a3bec8 0 11%, #436373 12% 38%, #223e50 39% 79%, #122b3c 80%) !important;
-  color: #effcff !important; font-size: 9.93cqw; transform: rotate(-4deg);
-  box-shadow: 0 2px 0 #10181c, 0 0 0 1px #32454f !important;
-  text-shadow: 0 2px 2px #000c !important; clip-path: none !important;
+.hs-card[data-card-layout="split"] .hsc-desc > span { display: block; white-space: pre-wrap; overflow-wrap: anywhere; }
+.hs-card[data-card-layout="split"] .hsc-desc :is(.d-num, .d-term, .d-kw) { font-family: inherit; font-size: 1em; font-style: normal; }
+.hs-card[data-card-layout="split"] .hsc-desc .d-num { color: var(--paper-pigment); font-weight: 700; }
+.hs-card[data-card-layout="split"] .hsc-desc .d-term { color: inherit; font-weight: 400; }
+.hs-card[data-card-layout="split"] .hsc-desc .d-term[data-term] { color: var(--card-copy-term); font-weight: 600; }
+.hs-card[data-card-layout="split"] .hsc-desc .d-kw { color: var(--card-copy-keyword); font-weight: 700; }
+.hs-card[data-card-layout="split"] .hsc-desc:focus-visible { outline: 1px solid #b8d4e0; outline-offset: 2px; }
+.hs-card[data-card-layout="split"] .hsc-desc .bt-rulehint { display: block; margin-top: .35em; color: #805511; font-weight: 700; }
+.hs-card[data-card-layout="split"] .hsc-type {
+  position: absolute; inset: 53% 2px auto; transform: translateY(-50%); z-index: 6;
+  height: 10.77cqw; display: flex; align-items: center; justify-content: center;
+  background: none; border: 0; padding: 0; margin: 0; line-height: 1; white-space: nowrap;
 }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-cost.mod-down { background: linear-gradient(135deg, #b8e6d2, #286e57 40%, #123b2c) !important; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-cost.mod-up { background: linear-gradient(135deg, #f5cbc0, #a55240 40%, #53271e) !important; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-type {
-  position: absolute !important; top: 3.2%; right: 4.4%; z-index: 4 !important;
-  display: block !important; width: 28% !important; height: 1.65em; min-height: 0;
-  margin: 0 !important; padding: 0 !important; border: 1px solid var(--tier) !important;
-  border-radius: .2em !important; background: #16212be6 !important;
-  color: transparent !important; font-size: 4.78cqw !important; line-height: 1.65;
-  box-shadow: none !important; letter-spacing: .06em !important; overflow: hidden;
+.hs-card[data-card-layout="split"] .hsc-type:before,
+.hs-card[data-card-layout="split"] .hsc-type:after {
+  content: ''; height: 1px; flex: 1; background: var(--paper-wash); opacity: .45;
 }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-type > * { visibility: hidden; pointer-events: none; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-type::after {
-  content: var(--tier-label); position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center; padding-left: 1.2em;
-  color: var(--tier-light); font-weight: 700; pointer-events: none;
+.hs-card[data-card-layout="split"] .hsc-type:after { transform: scaleX(-1); }
+.hs-card[data-card-layout="split"] .hsc-type-label {
+  position: relative; isolation: isolate; min-width: 50cqw; height: 10.77cqw; padding: 0 6cqw;
+  display: flex; align-items: center; justify-content: center; gap: 3.88cqw;
+  background: #e1ddcf url('../assets/ui/card-frames/paper-1015/interior.webp') center / cover;
+  transform: rotate(-1deg);
+  clip-path: polygon(2% 6%,29% 0,59% 6%,97% 0,100% 38%,97% 95%,68% 100%,31% 94%,0 100%,1% 60%);
 }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-gem {
-  display: block !important; position: absolute !important; top: calc(3.2% + .1em) !important; left: auto !important; right: 24% !important; z-index: 5;
-  width: 5.5cqw !important; height: 7.7cqw !important; margin: 0 !important; transform: none !important;
-  border: 1px solid var(--tier-light); border-radius: 50% !important;
-  background: radial-gradient(ellipse at 35% 28%, var(--tier-light), var(--tier) 45%, #263241 95%) !important;
-  box-shadow: 0 1px 2px #0008 !important;
+.hs-card[data-card-layout="split"] .hsc-type-label:before {
+  content: ''; position: absolute; left: 5.6cqw; right: 5.6cqw; bottom: 1.29cqw;
+  height: .86cqw; background: var(--paper-wash); opacity: .85; pointer-events: none;
 }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card:is(.rv7, .rv-prism) .hsc-gem { background: conic-gradient(#f6c7e9, #f6df9d, #a3ecda, #adc9f8, #c9b6ef, #f6c7e9) !important; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc {
-  position: relative !important; grid-row: 3; z-index: 3;
-  display: block !important; width: calc(100% - 1.4em) !important;
-  min-height: 2.2em; height: auto !important; margin: 0 .7em .45em !important;
-  padding: 0 !important; border: 0 !important; border-radius: 0 !important;
-  background: none !important; color: #f1f3f4 !important; box-shadow: none !important;
-  font-size: 5.52cqw !important; line-height: 1.7; text-align: left; overflow: visible !important;
+.hs-card[data-card-layout="split"] .hsc-type-primary { color: var(--paper-pigment); font-size: 5.17cqw; letter-spacing: .14em; }
+.hs-card[data-card-layout="split"] .hsc-type-secondary { color: #5d6261; font-size: 4.74cqw; letter-spacing: .08em; }
+.hs-card[data-card-layout="split"] .hsc-type-secondary:before { content: '·'; padding-right: 3.45cqw; color: #798b97; }
+.hs-card[data-card-layout="split"] .hsc-cost-layer {
+  position: absolute; left: var(--face-left); top: var(--face-top);
+  width: var(--face-width); height: var(--face-height); container-type: inline-size;
+  z-index: 9; pointer-events: none;
 }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc > span {
-  display: block !important; -webkit-line-clamp: unset !important; overflow: visible !important;
+.hs-card[data-card-layout="split"] .hsc-cost {
+  position: absolute; top: -1.29cqw; left: -2.58cqw; width: 15.09cqw; height: 18.54cqw;
+  display: grid; place-items: center; box-sizing: border-box; padding-bottom: 1.29cqw; z-index: 8;
+  border: 0; border-radius: 0; background: none; transform: rotate(-3deg); box-shadow: none;
+  font: 700 11.64cqw/1 'Card Oxanium', sans-serif; font-variant-numeric: lining-nums tabular-nums;
+  font-family: 'Card Oxanium', sans-serif !important;
+  color: var(--paper-pigment); text-shadow: none; isolation: isolate;
+  pointer-events: auto;
 }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc :is(.d-num, .d-term, .d-kw) { font-family: inherit; font-size: 1em !important; font-style: normal; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc .d-num { color: #f1f3f4 !important; font-weight: 700; font-variant-numeric: tabular-nums; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc .d-kw { color: var(--card-copy-keyword) !important; font-weight: 700; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc .d-term { color: var(--card-copy-term) !important; font-weight: 400; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-desc .d-term[data-term] { font-weight: 600; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-kw {
-  position: relative; grid-row: 4; z-index: 3 !important;
-  margin: 0 .4em .35em !important; justify-content: center; flex-wrap: wrap;
+.hs-card[data-card-layout="split"] .hsc-cost:before,
+.hs-card[data-card-layout="split"] .hsc-cost:after {
+  content: ''; position: absolute; z-index: -1; pointer-events: none;
+  clip-path: polygon(4% 0,95% 4%,100% 58%,92% 100%,42% 96%,0 100%,2% 31%);
 }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card :is(.hsc-dmg, .hsc-val) { display: none !important; }
-body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .hsc-art { z-index: auto !important; }
-/* Reserve exterior material in card hosts; the artwork and readable copy remain inside. */
-body:has(#viewport) :is(#overlay, #cardZoom, #cardPreview) :is(.pk-card, .shop-slot, .stash-cell, .shelf-visual, .pocket-thumb, .cz-card):has(.hs-card) { overflow: visible !important; }
-body:has(#viewport) #overlay :is(.pk-card, .shop-slot, .stash-cell):has(> .hs-card) { padding: 18% 15% 13% !important; }
-body:has(#viewport) #overlay :is(.pk-card, .shop-slot, .stash-cell) > .hs-card { max-width: 100% !important; }
-body:has(#viewport) #overlay .sts-hand .hs-card { margin-top: 1.7em; margin-bottom: .8em; }
-body:has(#viewport) #cardZoom:not(.cz-photo) .cz-card { margin: 36px 42px; overflow: visible !important; }
-body:has(#viewport) #cardPreview { overflow: visible !important; }
+.hs-card[data-card-layout="split"] .hsc-cost:before { inset: 0; background: #e1ddcf url('../assets/ui/card-frames/paper-1015/interior.webp') center / cover; }
+.hs-card[data-card-layout="split"] .hsc-cost:after { inset: auto 2.58cqw 2.15cqw; height: 1.29cqw; background: var(--paper-wash); }
+.hs-card[data-card-layout="split"] .hsc-cost.mod-down { color: #285839; }
+.hs-card[data-card-layout="split"] .hsc-cost.mod-down:after { background: #398359; }
+.hs-card[data-card-layout="split"] .hsc-cost.mod-up { color: #8d3931; }
+.hs-card[data-card-layout="split"] .hsc-cost.mod-up:after { background: #b55349; }
+.hs-card[data-card-layout="split"] .hsc-frame {
+  position: absolute; left: 0; top: 0; width: 100%;
+  height: auto; max-width: none; padding: 0; margin: 0; border: 0; object-fit: contain;
+  z-index: 7; pointer-events: none; filter: drop-shadow(1px 3px 2px #0006);
+}
+.hs-card[data-card-layout="split"] :is(.hsc-dmg,.hsc-val) { display: none; }
+.hs-card[data-card-layout="split"] .hsc-kw { display: flex; gap: .25em; flex-wrap: wrap; justify-content: center; margin-top: .3em; }
+.hs-card[data-card-layout="split"] .hsc-kw span { font-size: 5.6cqw; color: #c5d5de; }
+.hs-card[data-card-layout="split"] .hsc-kw .ic { width: 1em; height: 1em; }
+.hs-card[data-card-layout="split"][data-has-description="true"] .hsc-kw { display: none; }
+.hs-card[data-card-layout="split"] .hsc-prism-halo {
+  position: absolute; inset: 0;
+  opacity: .78; filter: blur(3px); pointer-events: none; z-index: 4;
+  animation: cardPrismHalo 6s ease-in-out infinite alternate;
+}
+.hs-card[data-card-layout="split"] .hsc-prism-halo:before {
+  content: ''; position: absolute; inset: 0;
+  background: conic-gradient(from 20deg,#f6b8dc,#efd99e,#9de7c9,#9ccaf3,#c1a5f1,#f6b8dc);
+  mask: url('../assets/ui/card-frames/paper-1015/prism.webp') center / 100% 100% no-repeat;
+  -webkit-mask: url('../assets/ui/card-frames/paper-1015/prism.webp') center / 100% 100% no-repeat;
+}
+.hs-card[data-card-layout="split"][data-rarity="棱彩"] .hsc-frame { filter: drop-shadow(0 0 5px #a9dfff99) drop-shadow(0 0 10px #c1a8ed66); }
+.hs-card[data-card-layout="split"] .rv-beam { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 2; }
+.hs-card[data-card-layout="split"] .rv-beam:before {
+  content: ''; position: absolute; top: -15%; left: -110%; width: 70%; height: 130%;
+  background: linear-gradient(90deg,transparent,#edc3f22e 30%,#e8f7f837 50%,#bbdafa25 70%,transparent);
+  transform: skewX(-22deg); animation: cardPrismSheen 7s ease-in-out infinite;
+}
+.hs-card[data-card-layout="split"] .hsc-gold-halo {
+  position: absolute; inset: 0;
+  opacity: .25; filter: blur(2px); z-index: 4; pointer-events: none;
+  animation: cardGoldHalo 6.5s ease-in-out infinite alternate;
+}
+.hs-card[data-card-layout="split"] .hsc-gold-halo:before {
+  content: ''; position: absolute; inset: 0; background: linear-gradient(125deg,#ebcf88,#b98624 55%,#efdaa5);
+  mask: url('../assets/ui/card-frames/paper-1015/legendary.webp') center / 100% 100% no-repeat;
+  -webkit-mask: url('../assets/ui/card-frames/paper-1015/legendary.webp') center / 100% 100% no-repeat;
+}
+.hs-card[data-card-layout="split"] .hsc-gold-beam {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 4;
+}
+.hs-card[data-card-layout="split"] .hsc-gold-beam:before {
+  content: ''; position: absolute; top: -15%; left: -100%; width: 45%; height: 130%;
+  background: linear-gradient(90deg,transparent,#efdab523 50%,transparent);
+  transform: skewX(-22deg); animation: cardGoldSheen 9s ease-in-out infinite;
+}
+@keyframes cardGoldHalo { to { opacity: .45; filter: blur(3px); } }
+@keyframes cardGoldSheen { 35%,100% { left: 155%; } }
+@keyframes cardPrismTitle { to { background-position: 100% 50%; } }
+@keyframes cardPrismHalo { to { opacity: .5; filter: blur(4px) hue-rotate(45deg); } }
+@keyframes cardPrismSheen { 55%,100% { left: 155%; } }
+@media (prefers-reduced-motion: reduce) {
+  .hs-card[data-card-layout="split"] :is(.hsc-name span,.hsc-prism-halo,.hsc-gold-halo),
+  .hs-card[data-card-layout="split"] :is(.rv-beam,.hsc-gold-beam):before { animation: none; }
+  .hs-card[data-card-layout="split"] .hsc-gold-beam:before { opacity: 0; }
+}
+body.reduce-motion .hs-card[data-card-layout="split"] :is(.hsc-name span,.hsc-prism-halo,.hsc-gold-halo),
+body.reduce-motion .hs-card[data-card-layout="split"] :is(.rv-beam,.hsc-gold-beam):before { animation: none; }
+body.reduce-motion .hs-card[data-card-layout="split"] .hsc-gold-beam:before { opacity: 0; }
+/* The root box contains the whole frame; hosts only size and position it. */
+:is(#overlay,#cardZoom,#cardPreview) :is(.pk-card,.shop-slot,.stash-cell,.shelf-visual,.pocket-thumb,.cz-card):has(.hs-card) { overflow: visible; }
+#overlay :is(.pk-card,.shop-slot,.stash-cell) > .hs-card { max-width: 100%; }
+#cardZoom:not(.cz-photo) .cz-card { margin: 36px 42px; overflow: visible; }
+#cardPreview { overflow: visible; }

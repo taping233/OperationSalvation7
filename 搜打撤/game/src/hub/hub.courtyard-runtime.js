@@ -26,7 +26,7 @@ export function mountCourtyardV3(root) {
   }
   const settings = { intensity:40 };
   let disposed = false, paused = false, frame = 0, previous = 0, image = null, feedbackTimer = 0;
-  let soundEnabled = false, audio = null, noise = null;
+  let soundEnabled = false, audio = null, noise = null, rainGain = null, rainFilter = null;
   let engine = null, koi = null;
   const running = () => !disposed && !paused && !document.hidden && !reducedMotion();
   const draw = (dt = 0, animate = false) => {
@@ -77,6 +77,7 @@ export function mountCourtyardV3(root) {
   const stopSound = () => {
     try { noise?.stop(); } catch { /* 尚未启动的音源也须继续释放上下文。 */ }
     noise?.disconnect(); noise = null;
+    rainGain?.disconnect(); rainFilter?.disconnect(); rainGain = rainFilter = null;
     const oldAudio = audio; audio = null;
     oldAudio?.close().catch(() => {});
     soundEnabled = false; soundButton.textContent = '声音：关'; soundButton.setAttribute('aria-pressed', 'false');
@@ -85,6 +86,14 @@ export function mountCourtyardV3(root) {
     if (!audio) return;
     const operation = document.hidden || paused ? audio.suspend() : audio.resume();
     operation.catch(() => {});
+  };
+  const syncRainSound = () => {
+    if (!audio || !rainGain || !rainFilter) return;
+    const heavy = settings.intensity === 80;
+    for (const [param, value] of [[rainGain.gain, heavy ? .095 : .035], [rainFilter.frequency, heavy ? 2200 : 1100]]) {
+      if (param.setTargetAtTime) param.setTargetAtTime(value, audio.currentTime, .15);
+      else param.value = value;
+    }
   };
   const toggleSound = () => {
     if (!rain) return;
@@ -98,9 +107,10 @@ export function mountCourtyardV3(root) {
       let smooth = 0;
       for (let i = 0; i < samples.length; i++) { smooth = .97 * smooth + .03 * (Random.random('audio') * 2 - 1); samples[i] = rain ? smooth * 4 : smooth * 2.5; }
       noise = audio.createBufferSource(); noise.buffer = buffer; noise.loop = true;
-      const filter = audio.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.value = rain ? 1600 : 500;
-      const gain = audio.createGain(); gain.gain.value = .06;
-      noise.connect(filter); filter.connect(gain); gain.connect(audio.destination); noise.start();
+      rainFilter = audio.createBiquadFilter(); rainFilter.type = 'lowpass';
+      rainGain = audio.createGain(); rainGain.gain.value = 0;
+      syncRainSound();
+      noise.connect(rainFilter); rainFilter.connect(rainGain); rainGain.connect(audio.destination); noise.start();
       soundEnabled = true; soundButton.textContent = '声音：开'; soundButton.setAttribute('aria-pressed', 'true');
       status.textContent = '';
       soundState();
@@ -174,7 +184,7 @@ export function mountCourtyardV3(root) {
       if (rain) {
         settings.intensity = settings.intensity === 40 ? 80 : 40;
         event.target.closest('button').textContent = settings.intensity === 40 ? '雨势：细雨' : '雨势：大雨';
-        engine.setIntensity(settings.intensity); draw();
+        engine.setIntensity(settings.intensity); syncRainSound(); draw();
       } else interact(canvas.width / 2, canvas.height / 2);
     }
   };

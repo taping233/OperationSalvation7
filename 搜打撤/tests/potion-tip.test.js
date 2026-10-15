@@ -47,7 +47,7 @@ window.AudioContext = window.AudioContext || class FakeAudioContext {
   createDynamicsCompressor() { return { connect: () => {}, disconnect: () => {}, threshold: {}, knee: {}, ratio: {}, attack: {}, release: {} }; }
   createBuffer() { return { numberOfChannels: 1, getChannelData: () => new Float32Array(8) }; }
   createBufferSource() { return { connect: () => {}, disconnect: () => {}, start: () => {}, stop: () => {}, buffer: null, loop: false }; }
-  createBiquadFilter() { return { connect: () => {}, disconnect: () => {}, type: '', frequency: { value: 0 }, Q: { value: 0 } }; }
+  createBiquadFilter() { return { connect: () => {}, disconnect: () => {}, type: '', gain: { value: 0 }, frequency: { value: 0 }, Q: { value: 0 } }; }
   createOscillator() { return { connect: () => {}, disconnect: () => {}, start: () => {}, stop: () => {}, frequency: { value: 0, setValueAtTime: () => {} } }; }
   decodeAudioData() { return Promise.resolve(this.createBuffer()); }
   resume() { return Promise.resolve(); }

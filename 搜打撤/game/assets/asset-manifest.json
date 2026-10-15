@@ -1,7 +1,7 @@
 {
   "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 1352,
+  "count": 1397,
   "assets": [
     {
       "path": "battle/fx-sticker-boom.svg",
@@ -802,18 +802,6 @@
       "bytes": 80518,
       "sha256": "61455a2aefe4bc858123f8082d4a0b75cd103fc908f3297bdec4758c6ee85ef5",
       "source": "docs/evidence/2026-10-10-sixteen-redraw/receipt.json"
-    },
-    {
-      "path": "cards/martial-melee.webp",
-      "ext": "webp",
-      "bytes": 119456,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "cards/martial-ranged.webp",
-      "ext": "webp",
-      "bytes": 159794,
-      "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "cards/martial-tt2-block.webp",
@@ -1978,6 +1966,94 @@
       "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
     },
     {
+      "path": "chibi/wu-v1/arm-back.webp",
+      "ext": "webp",
+      "license": "老板授权项目角色素材；Codex 内置 image_gen 生成",
+      "bytes": 22112,
+      "sha256": "9cc3a70ff2aea1e708a96b1ec00f3410272932695c3782410bb0e5459f0d1008",
+      "source": "docs/evidence/2026-10-14-WF-base-chibi/README.md"
+    },
+    {
+      "path": "chibi/wu-v1/arm-front.webp",
+      "ext": "webp",
+      "license": "老板授权项目角色素材；Codex 内置 image_gen 生成",
+      "bytes": 22066,
+      "sha256": "017059e2e4b8d79396a95b6274e3a0ddee46438b5179e1236df6ea5afe21d0dc",
+      "source": "docs/evidence/2026-10-14-WF-base-chibi/README.md"
+    },
+    {
+      "path": "chibi/wu-v1/body.webp",
+      "ext": "webp",
+      "license": "老板授权项目角色素材；Codex 内置 image_gen 生成",
+      "bytes": 37612,
+      "sha256": "9ff84c6bb9922d514c4ddbc094e21def16789b09aca4752b6bd892b16f03cdc4",
+      "source": "docs/evidence/2026-10-14-WF-base-chibi/README.md"
+    },
+    {
+      "path": "chibi/wu-v1/hair.webp",
+      "ext": "webp",
+      "license": "老板授权项目角色素材；Codex 内置 image_gen 生成",
+      "bytes": 50494,
+      "sha256": "b6fbf8adbac7f1952cc015562446a02574675c744f8e44ff750a708411dad0a2",
+      "source": "docs/evidence/2026-10-14-WF-base-chibi/README.md"
+    },
+    {
+      "path": "chibi/wu-v1/head.webp",
+      "ext": "webp",
+      "license": "老板授权项目角色素材；Codex 内置 image_gen 生成",
+      "bytes": 54268,
+      "sha256": "6aff36fff7805a4ee4498817f4fd3c6aad97195f2bd03585bf0405599ba8bb86",
+      "source": "docs/evidence/2026-10-14-WF-base-chibi/README.md"
+    },
+    {
+      "path": "chibi/wu-v1/leg-back.webp",
+      "ext": "webp",
+      "license": "老板授权项目角色素材；Codex 内置 image_gen 生成",
+      "bytes": 17922,
+      "sha256": "9bad5435f675126b15580bd8321810d298786c8717ccc2e2cc715cce4a6d6c79",
+      "source": "docs/evidence/2026-10-14-WF-base-chibi/README.md"
+    },
+    {
+      "path": "chibi/wu-v1/leg-front.webp",
+      "ext": "webp",
+      "license": "老板授权项目角色素材；Codex 内置 image_gen 生成",
+      "bytes": 16956,
+      "sha256": "a14dfba73af75383fc5ab775f594b08c77289f1a83a04b531c197a57a2d62e3c",
+      "source": "docs/evidence/2026-10-14-WF-base-chibi/README.md"
+    },
+    {
+      "path": "chibi/wu-v1/sword.webp",
+      "ext": "webp",
+      "license": "老板授权项目角色素材；Codex 内置 image_gen 生成",
+      "bytes": 15700,
+      "sha256": "62ead52e2e3514ba58b38b1e78e7ea2c3e5cefd80bb9e29425e5dec51de047c9",
+      "source": "docs/evidence/2026-10-14-WF-base-chibi/README.md"
+    },
+    {
+      "path": "chibi/wu-v2/body-underpaint.webp",
+      "ext": "webp",
+      "bytes": 516170,
+      "sha256": "0a050443ce37acd219746a3ae55c177d37d4528812675f14833f525f33afbb4e",
+      "license": "老板授权项目角色素材；Codex内置image_gen生成及透明无损编码",
+      "source": "docs/evidence/2026-10-14-WF-base-chibi/README.md"
+    },
+    {
+      "path": "chibi/wu-v2/legs-underpaint.webp",
+      "ext": "webp",
+      "bytes": 539972,
+      "sha256": "3ed0012a771a7d81d3fad9e226939389bba8f3f58bc14b3d01b0aa2b2119aba7",
+      "license": "老板授权项目角色素材；Codex内置image_gen生成及透明无损编码",
+      "source": "docs/evidence/2026-10-14-WF-base-chibi/README.md"
+    },
+    {
+      "path": "chibi/wu-v2/setup.webp",
+      "ext": "webp",
+      "bytes": 528284,
+      "sha256": "c456a4b056476a73f8d25373033690fb5f4ab6dc87cddcfe2141266736c94e47",
+      "license": "老板授权项目角色素材；Codex内置image_gen生成及透明无损编码",
+      "source": "docs/evidence/2026-10-14-WF-base-chibi/README.md"
+    },
+    {
       "path": "fonts/cascadia-code-400.woff2",
       "ext": "woff2",
       "bytes": 17480,
@@ -2148,90 +2224,90 @@
     {
       "path": "icons/base-v3/companion-cat.webp",
       "ext": "webp",
-      "bytes": 78568,
-      "sha256": "64410d0ee83f6444b7f475743bb08497b6a9e57bbee0d4186def2210e7a7561b",
+      "bytes": 122060,
+      "sha256": "7989e27d3417b26eb1cadee613a8d838ea6e62561d44d3cc4154fb2bc21aa71a",
       "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
-      "source": "game/art-source/ui/base-v3/receipts.json",
+      "source": "docs/evidence/2026-10-14-WF-pets-first-install/receipts.json",
       "provenance": {
         "kind": "generated-source-and-conversion-record",
-        "sourceSha256": "c68e4771d507c596696ac7bcf2f0476f4da4d9ac4e7c279ea67fa22fe92fa961",
-        "rawPath": "game/art-source/ui/base-v3/raw-companion-cat.png",
-        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "sourceSha256": "bbe12328ac9d7dfdcc0d966b141e4662fbc0ac50b83bf7a3bc497fd777d474f1",
+        "rawPath": "docs/evidence/2026-10-14-WF-pets-first-install/source/cat.png",
+        "encoder": "docs/evidence/2026-10-14-WF-pets-first-install/encode.py",
         "outputBytesMatch": true
       }
     },
     {
       "path": "icons/base-v3/companion-dog.webp",
       "ext": "webp",
-      "bytes": 70366,
-      "sha256": "a0a40b306c8e4d538d57d64d16ec957b4543426d3c561ce511c0a8cfbd68e822",
+      "bytes": 103532,
+      "sha256": "0a39e7667cea645753e944eef2c7ff56c0faacbd764008eedfaec0a7a59542ce",
       "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
-      "source": "game/art-source/ui/base-v3/receipts.json",
+      "source": "docs/evidence/2026-10-14-WF-pets-first-install/receipts.json",
       "provenance": {
         "kind": "generated-source-and-conversion-record",
-        "sourceSha256": "f614f45cfa8f7d40fc057ebd2c50650fb332ea43f8d03c663ba7197a88f30722",
-        "rawPath": "game/art-source/ui/base-v3/raw-companion-dog.png",
-        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "sourceSha256": "367c54d4e33ad5ac1b7b01cc9840c06ba0952e5cab17ad09c957dce1478e8eb8",
+        "rawPath": "docs/evidence/2026-10-14-WF-pets-first-install/source/dog.png",
+        "encoder": "docs/evidence/2026-10-14-WF-pets-first-install/encode.py",
         "outputBytesMatch": true
       }
     },
     {
       "path": "icons/base-v3/companion-falcon.webp",
       "ext": "webp",
-      "bytes": 74142,
-      "sha256": "c224d17431197646d3abb507fec005b8ec36fdb5d58397bd95582c0172f902d9",
+      "bytes": 121038,
+      "sha256": "654a1845ca519a63de6756cab3f7fbe51332ec54fa3366cf19954ae9861dfbfc",
       "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
-      "source": "game/art-source/ui/base-v3/receipts.json",
+      "source": "docs/evidence/2026-10-14-WF-pets-first-install/receipts.json",
       "provenance": {
         "kind": "generated-source-and-conversion-record",
-        "sourceSha256": "45c3d5b14dc0b98710f202cc89ca8a332f7578e676f166958d402216957c0c42",
-        "rawPath": "game/art-source/ui/base-v3/raw-companion-falcon.png",
-        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "sourceSha256": "37d23584965b548d91d1790cf7e958c8a2cb3f9e3481438774a8e4d04e63402e",
+        "rawPath": "docs/evidence/2026-10-14-WF-pets-first-install/source/falcon.png",
+        "encoder": "docs/evidence/2026-10-14-WF-pets-first-install/encode.py",
         "outputBytesMatch": true
       }
     },
     {
       "path": "icons/base-v3/companion-fire.webp",
       "ext": "webp",
-      "bytes": 61600,
-      "sha256": "bec3406ad90669cc04d7a0f2a6df7055dbc23cdbeee61e0ca2099299383e0958",
+      "bytes": 73100,
+      "sha256": "d8354206ee1f5d8403d206f6e2d6a634535660b9d8a50dc14a2e0d5e516a4621",
       "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
-      "source": "game/art-source/ui/base-v3/receipts.json",
+      "source": "docs/evidence/2026-10-14-WF-pets-first-install/receipts.json",
       "provenance": {
         "kind": "generated-source-and-conversion-record",
-        "sourceSha256": "90c2386ab7620b4e57268e775664ccab45d26abe2a914ada6b35eba8c2a7aac6",
-        "rawPath": "game/art-source/ui/base-v3/raw-companion-fire.png",
-        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "sourceSha256": "bac534aece39f4fd5759e83ea04835f29b8a1d03e7947bd7b142d787f2f297c9",
+        "rawPath": "docs/evidence/2026-10-14-WF-pets-first-install/source/fire.png",
+        "encoder": "docs/evidence/2026-10-14-WF-pets-first-install/encode.py",
         "outputBytesMatch": true
       }
     },
     {
       "path": "icons/base-v3/companion-penguin.webp",
       "ext": "webp",
-      "bytes": 50694,
-      "sha256": "024ab0d4065cd6b6c9bf4071419818262b1e5aeb03b36a464d8f05ca1e159471",
+      "bytes": 105994,
+      "sha256": "455176e51bbf6e65e11e36f23c3ee544ed56bd81d1bf6216cb31175432995230",
       "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
-      "source": "game/art-source/ui/base-v3/receipts.json",
+      "source": "docs/evidence/2026-10-14-WF-pets-first-install/receipts.json",
       "provenance": {
         "kind": "generated-source-and-conversion-record",
-        "sourceSha256": "5f741623eefdf88932aa07b4e5cca8dd8009d75aef47c8586b3d199890e0926d",
-        "rawPath": "game/art-source/ui/base-v3/raw-companion-penguin.png",
-        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "sourceSha256": "ce913e1973b6f3b61ba70005c42fd2ec0522abef63b13305d29505a17df30e4a",
+        "rawPath": "docs/evidence/2026-10-14-WF-pets-first-install/source/penguin.png",
+        "encoder": "docs/evidence/2026-10-14-WF-pets-first-install/encode.py",
         "outputBytesMatch": true
       }
     },
     {
       "path": "icons/base-v3/companion-robot.webp",
       "ext": "webp",
-      "bytes": 71922,
-      "sha256": "a2912112bb127770005327f6ef0a3be9df3d9b70d33c3b778eb2314a7714c279",
+      "bytes": 74566,
+      "sha256": "d2ecf7f8a255ff359f38a784b635315c13048eff140258c6143b5d1d070ada67",
       "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
-      "source": "game/art-source/ui/base-v3/receipts.json",
+      "source": "docs/evidence/2026-10-14-WF-pets-first-install/receipts.json",
       "provenance": {
         "kind": "generated-source-and-conversion-record",
-        "sourceSha256": "4268387b89cb3b56ee007e7378360b9723de6d62471e8845dc3b41e0b5640908",
-        "rawPath": "game/art-source/ui/base-v3/raw-companion-robot.png",
-        "encoder": "game/art-source/ui/base-v3/encode.py",
+        "sourceSha256": "80413522e13d00e4893201e284c7530866184c61fe228ad74349b689f1318b5b",
+        "rawPath": "docs/evidence/2026-10-14-WF-pets-first-install/source/robot.png",
+        "encoder": "docs/evidence/2026-10-14-WF-pets-first-install/encode.py",
         "outputBytesMatch": true
       }
     },
@@ -6206,6 +6282,34 @@
       }
     },
     {
+      "path": "scenes/chests/large-rig-v1/frame-14.webp",
+      "ext": "webp",
+      "bytes": 1020406,
+      "sha256": "c53d350b83cf17394a76f4c1bf6b478dcee0915d5dd2db46f405aea00dbb94ac",
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-15.webp",
+      "ext": "webp",
+      "bytes": 1033864,
+      "sha256": "081f52a3965dbc551a3d14a03e9403d374077fde0e54d1b4e8c12c6d7a851b05",
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-16.webp",
+      "ext": "webp",
+      "bytes": 1040916,
+      "sha256": "2b99084e67d8a733029ff476f796ebc89d67a86a9fb5ad2568e1822a88cfe65f",
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-17.webp",
+      "ext": "webp",
+      "bytes": 1040916,
+      "sha256": "2b99084e67d8a733029ff476f796ebc89d67a86a9fb5ad2568e1822a88cfe65f",
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
       "path": "scenes/chests/medium-rig-640-v1/frame-00.webp",
       "ext": "webp",
       "bytes": 191356,
@@ -6695,6 +6799,27 @@
       }
     },
     {
+      "path": "scenes/entry/threshold-cardstyle-1011-v1.webp",
+      "ext": "webp",
+      "bytes": 68470,
+      "sha256": "e1c7bb54e0c62b43cf37051b29ec0600eef3fd54810af82fbf71701683b5418a",
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/entry/winter-arrival-1011-v1.webp",
+      "ext": "webp",
+      "bytes": 112604,
+      "sha256": "1d44a932b6f6f78a11cf72d59eb3d20f9a6c1fbe1445000c56e4a438e7e5a894",
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/entry/winter-arrival-1011-v2.webp",
+      "ext": "webp",
+      "bytes": 88082,
+      "sha256": "68540f6eec3ba0278fbe9b7e1214ce33790ea077ee9f56598c11edd6f02deb7b",
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
       "path": "scenes/event-bandits-anime-v2.webp",
       "ext": "webp",
       "bytes": 273038,
@@ -7039,6 +7164,13 @@
         "sha256": "12dab51ed6fb5bee8ceb055f4f84c6bd16bfd55ea2ba128e6789552608468053",
         "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
       }
+    },
+    {
+      "path": "scenes/map-nodes/resource-symbol-1015-v1.webp",
+      "ext": "webp",
+      "bytes": 107562,
+      "sha256": "fe566f9e36fe0b45bcde7469359de71d6236b03825278bb4ac59f205db1ee8f2",
+      "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "scenes/map-nodes/rest-heat-cell-1011.webp",
@@ -8495,22 +8627,6 @@
       "bytes": 13416,
       "sha256": "2bcebe095fa6eacd05edf45085ac6b87bf8f7f626805da30489a284cd398bed2",
       "source": "docs/evidence/2026-10-10-sixteen-redraw/receipt.json"
-    },
-    {
-      "path": "thumbs/cards/martial-melee.webp",
-      "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 37128,
-      "sha256": "300eba72c4589ff253d3206e996f0566facd48d38ba0f10f35818ba937f3dd1b",
-      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
-    },
-    {
-      "path": "thumbs/cards/martial-ranged.webp",
-      "ext": "webp",
-      "license": "项目自有（自制/AI 生成）",
-      "bytes": 34290,
-      "sha256": "bc3d428ae2ed1c05d4da3a7cf36450d701e0c8e0bec1291debc90abfc99f2df5",
-      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
     },
     {
       "path": "thumbs/cards/martial-tt2-block.webp",
@@ -10569,6 +10685,222 @@
       "source": "docs/evidence/2026-10-04-WF-feedback-r3/guide-art.md"
     },
     {
+      "path": "ui/card-frames/paper-1015/baita.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 123356,
+      "sha256": "1a707ee4cb1c53dc58b5474aa4efca159f3b377b566da19f5a0aa9eca364bbca",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/changwuyu.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 103544,
+      "sha256": "940e81ce0da48ae69ac5d8052f5730e6d4a19ee88fed4abb8a85e5396577a723",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/common.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 113986,
+      "sha256": "ec369250d4ac6e1a40306c1000f3fe75773ca7a21015e32ffa781a38e37867f6",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/epic.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 148072,
+      "sha256": "aabae03f47c5b104a79e07229fe7f3e5fd3f18376d3274879ef077d8aa57be87",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/heixiang.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 140302,
+      "sha256": "f78bd8229a336e252cad38f751af5bf3460d21494f96b223260f0ba17ecc73b7",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/initial.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 105624,
+      "sha256": "e9a8c4854370de18e05ca552a2880e7a70a75f85b67c18f22f0887a11bee16a2",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/interior.webp",
+      "ext": "webp",
+      "license": "老板授权原创手绘纸面；Codex内置image_gen生成",
+      "bytes": 69756,
+      "sha256": "f172a651f7abad5ba0f6f72e5516fedab0ee85b31e945fda17689ba82b8830d9",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/legendary.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 198322,
+      "sha256": "0c907b17b7a99ce5fe648425dd5a9b6249bc2adba35d0b90a153a7630f263d1a",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/neutral.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 105624,
+      "sha256": "e9a8c4854370de18e05ca552a2880e7a70a75f85b67c18f22f0887a11bee16a2",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/prism.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 188376,
+      "sha256": "dac0d2c4512a2b1f4da3d592bc2625b6bfe5f5360f2786d0cda394bd3d65d81c",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/rare.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 124704,
+      "sha256": "c9a16e40bc710b41a433319356059dea71e86a47f3e97c00270a61d16cb73e6d",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/token.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 111706,
+      "sha256": "4152890a669679a61872078a8abfa22eb4f361c23cf3de9eaf55987e60015879",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/wu.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 109956,
+      "sha256": "b03ead8c11a2a44f1a25e3337824c03daa37067ac11be70363624b72f3f1b7f7",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/xingyue.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 104462,
+      "sha256": "017972b0552e0e74e653f7fadbfe58d69ccbb2ba1f0219e69491f923f73a8bca",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/split-1014/baita.webp",
+      "ext": "webp",
+      "license": "老板授权项目卡框；Codex内置image_gen重绘",
+      "bytes": 109118,
+      "sha256": "4b19f255acf7cf34ae7df5cea75379ee484325095efe0b3367fc58a175b53b2a",
+      "source": "docs/evidence/2026-10-15-card-face-integration/README.md"
+    },
+    {
+      "path": "ui/card-frames/split-1014/changwuyu.webp",
+      "ext": "webp",
+      "license": "老板授权项目卡框；Codex内置image_gen重绘",
+      "bytes": 121312,
+      "sha256": "b83ad8f19d59d12f08fd421780cf04e3526ceace00decad63a098f43a3e745f4",
+      "source": "docs/evidence/2026-10-15-card-face-integration/README.md"
+    },
+    {
+      "path": "ui/card-frames/split-1014/common.webp",
+      "ext": "webp",
+      "license": "老板授权项目卡框；Codex内置image_gen重绘",
+      "bytes": 100854,
+      "sha256": "b60e870c4b1fbe79e8147393ffe4bbfb393f4e368ef4283f6acc72b6c48a2809",
+      "source": "docs/evidence/2026-10-15-card-face-integration/README.md"
+    },
+    {
+      "path": "ui/card-frames/split-1014/epic.webp",
+      "ext": "webp",
+      "license": "老板授权项目卡框；Codex内置image_gen重绘",
+      "bytes": 119020,
+      "sha256": "a35b3f224ff0db54a42ba3f7d15810ebab1cdec45df4037ec1a55f6a3d2843b3",
+      "source": "docs/evidence/2026-10-15-card-face-integration/README.md"
+    },
+    {
+      "path": "ui/card-frames/split-1014/heixiang.webp",
+      "ext": "webp",
+      "license": "老板授权项目卡框；Codex内置image_gen重绘",
+      "bytes": 113282,
+      "sha256": "30d9f0931142d6f327d05fff8342784cedaee82086c6998aee0d220b7c484889",
+      "source": "docs/evidence/2026-10-15-card-face-integration/README.md"
+    },
+    {
+      "path": "ui/card-frames/split-1014/initial.webp",
+      "ext": "webp",
+      "license": "老板授权项目卡框；Codex内置image_gen重绘",
+      "bytes": 103112,
+      "sha256": "e230a06cb6fc1fe0090b5081400e8949402e82622931d04d136493973e16e14a",
+      "source": "docs/evidence/2026-10-15-card-face-integration/README.md"
+    },
+    {
+      "path": "ui/card-frames/split-1014/legendary.webp",
+      "ext": "webp",
+      "license": "老板授权项目卡框；Codex内置image_gen重绘",
+      "bytes": 146622,
+      "sha256": "31bd62bb861f7375115737e40f466fa387c8d686e1746429f3a22b62dbf8244e",
+      "source": "docs/evidence/2026-10-15-card-face-integration/README.md"
+    },
+    {
+      "path": "ui/card-frames/split-1014/neutral.webp",
+      "ext": "webp",
+      "license": "老板授权项目卡框；Codex内置image_gen重绘",
+      "bytes": 99074,
+      "sha256": "f17149375de11d22b1a7045a113266ce882d4f105cad4ccb329fca3da88f8d55",
+      "source": "docs/evidence/2026-10-15-card-face-integration/README.md"
+    },
+    {
+      "path": "ui/card-frames/split-1014/prism.webp",
+      "ext": "webp",
+      "license": "老板授权项目卡框；Codex内置image_gen重绘",
+      "bytes": 128884,
+      "sha256": "5d551ea11f14603d0b30c1db614b8f49f001f2cb25d5b991d434defbe623c3f4",
+      "source": "docs/evidence/2026-10-15-card-face-integration/README.md"
+    },
+    {
+      "path": "ui/card-frames/split-1014/rare.webp",
+      "ext": "webp",
+      "license": "老板授权项目卡框；Codex内置image_gen重绘",
+      "bytes": 128600,
+      "sha256": "62eab8bfe92e6f52dffe374f2df4e454eef14d566f1ff577ac8adc2825dc4f86",
+      "source": "docs/evidence/2026-10-15-rare-blue/request.json"
+    },
+    {
+      "path": "ui/card-frames/split-1014/token.webp",
+      "ext": "webp",
+      "license": "老板授权项目卡框；Codex内置image_gen重绘",
+      "bytes": 99344,
+      "sha256": "54a55d52f8e3d6f5239a4f386f0828329c2cc96fe8302fbc30fc57646c653e00",
+      "source": "docs/evidence/2026-10-15-card-face-integration/README.md"
+    },
+    {
+      "path": "ui/card-frames/split-1014/wu.webp",
+      "ext": "webp",
+      "license": "老板授权项目卡框；Codex内置image_gen重绘",
+      "bytes": 114418,
+      "sha256": "eb777896e1e13be4e8ba9f4938bd354e1f3f3974e098ad4c32072f13b6266934",
+      "source": "docs/evidence/2026-10-15-card-face-integration/README.md"
+    },
+    {
+      "path": "ui/card-frames/split-1014/xingyue.webp",
+      "ext": "webp",
+      "license": "老板授权项目卡框；Codex内置image_gen重绘",
+      "bytes": 122642,
+      "sha256": "ad5e503b64b8598c9035f4e5f5aeb6ec260054f347d8e6e74816ec79162799b1",
+      "source": "docs/evidence/2026-10-15-card-face-integration/README.md"
+    },
+    {
       "path": "ui/home-v2/achievement-handpainted-v3.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
@@ -10975,6 +11307,30 @@
       "ext": "png",
       "bytes": 416,
       "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/map-hud-1015/attack-is7-v2.webp",
+      "ext": "webp",
+      "bytes": 10198,
+      "sha256": "a0e6e65ae1ca6b60ed29cdf7e32cac9cbe9db3223d522538dcc4033d7d4b02c5",
+      "license": "老板授权原创图标；Codex内置image_gen生成；方舟节点图仅作画法参考",
+      "source": "docs/evidence/2026-10-15-WF-map-feedback/README.md"
+    },
+    {
+      "path": "ui/map-hud-1015/gold-is7-v2.webp",
+      "ext": "webp",
+      "bytes": 7256,
+      "sha256": "1beb50cdff1a039022d233310f93f36af0c20eff93fe038d9abb9510d1d13930",
+      "license": "老板授权原创图标；Codex内置image_gen生成；方舟节点图仅作画法参考",
+      "source": "docs/evidence/2026-10-15-WF-map-feedback/README.md"
+    },
+    {
+      "path": "ui/map-hud-1015/health-is7-v1.webp",
+      "ext": "webp",
+      "bytes": 7286,
+      "sha256": "8a3dee5ec395b560a6b35afa91c87c8ba4cccf08e9bdd118df0580bd7075edb1",
+      "license": "老板授权原创生命图标；Codex内置image_gen生成；方舟节点仅作视觉关系参考",
+      "source": "docs/evidence/2026-10-15-WF-health-hud/README.md"
     },
     {
       "path": "ui/photo-studio/back.webp",

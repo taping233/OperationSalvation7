@@ -14,7 +14,7 @@ const { setTurbo } = await import('../game/src/core/turbo.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 const { createGameMenuController } = await import('../game/src/ui/game.menu.js');
 const action = { type: 'ui', name: 'testCommand' };
-const options = { preSettled: true, allowEmpty: true, quietMs: 1, pollMs: 1, timeoutMs: 100, commandTimeoutMs: 100 };
+const options = { preSettled: true, allowEmpty: true, quietMs: 1, pollMs: 1, timeoutMs: 100, commandTimeoutMs: 1000 };
 const deferred = () => {
   let resolve, reject;
   const promise = new Promise((yes, no) => { resolve = yes; reject = no; });

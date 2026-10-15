@@ -8,7 +8,7 @@ import { isGateRelevantPath } from './gate-plan.mjs';
 const sha = value => createHash('sha256').update(value).digest('hex');
 const STATE = new Set(['docs/PARALLEL-REGISTRY.md', 'docs/PENDING.md', 'docs/STATUS.md']);
 const slash = value => value.replaceAll('\\', '/');
-export const DEPENDENCY_CACHES = new Set(['.cache', '.eslintcache', '.vite', '.vite-temp', '.vitest']);
+const DEPENDENCY_CACHES = new Set(['.cache', '.eslintcache', '.vite', '.vite-temp', '.vitest']);
 
 // Hash installed bytes, not just versions. ESLint's disposable cache is not a dependency input.
 export function dependencyBytes(root, { destination } = {}) {

@@ -1,70 +1,145 @@
-/* Shared out-of-run surfaces: deep navy archive, generous spacing, readable capacity. */
-/* 局内背包轮A：用途分区，保持原拖动目标与特写动作。 */
-body #overlay .card.bag-page .bag-view { max-width:1680px; height:100%; min-height:0; padding:24px 36px; display:flex; flex-direction:column; background:#14232d; color:#e3ecee; box-sizing:border-box; }
-body #overlay .card.bag-page #ovBody { overflow:hidden; }
-body:has(#overlay.bag-full:not([hidden])) #bagBtnFloat { display:none; }
-body #overlay .card.bag-page .bag-head { flex:none; position:static; padding:0 0 20px; margin:0; background:none; border-bottom:1px solid #81969f66; }
-body #overlay .card.bag-page .bag-head h2 { margin:0; font:600 28px/1.5 var(--font-ui); letter-spacing:.06em; }
-body #overlay .card.bag-page .bag-chips { gap:18px; }
-body #overlay .card.bag-page .fc-chip { border:0; background:none; padding:0; color:#c0d0d6; font-size:16px; }
-body #overlay .card.bag-page .fc-chip b { color:#f0e3bd; }
-body #overlay .card.bag-page .bag-close { width:auto; height:44px; min-width:100px; gap:10px; padding:0 16px; border:1px solid #99afb8; background:#2a404b; color:#edf3f4; font-size:16px; box-shadow:none; }
-body #overlay .card.bag-page .bag-layout { flex:1; min-height:0; margin-top:24px; grid-template-columns:minmax(0,1fr) 410px; align-items:stretch; gap:28px; }
-body #overlay .card.bag-page .bag-main { min-width:0; min-height:0; overflow-y:auto; padding:0 16px 0 0; }
-body #overlay .card.bag-page .bag-side { position:static; min-height:0; overflow-y:auto; gap:24px; padding:0 8px 0 20px; border-left:1px solid #81969f55; }
-body #overlay .card.bag-page .bag-side-card { padding:0; border:0; background:none; box-shadow:none; }
-body #overlay .card.bag-page .set-h { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:0; padding:0; border:0; color:#e3ecee; font-size:20px; letter-spacing:0; }
-body #overlay .card.bag-page .set-tip { font-size:15px; color:#b4c8d0; }
-body #overlay .card.bag-page .bag-sort { margin-left:auto; display:flex; gap:8px; }
-body #overlay .card.bag-page .bag-sort .mini-btn { font-size:14px; min-height:34px; padding:6px 12px; }
-body #overlay .card.bag-page .bag-region-note { margin:10px 0 16px; color:#b7c9d1; font-size:15px; line-height:1.5; }
-/* 轮B：列表只承托卡面与数量；两种侧库存各自滚动，返回不随列表离屏。 */
-body #overlay .card.bag-page .bag-side { display:grid; grid-template-rows:minmax(0,1fr) minmax(0,1fr); overflow:visible; }
-body #overlay .card.bag-page .bag-side-card { display:flex; flex-direction:column; min-height:0; }
-body #overlay .card.bag-page .bag-grid { grid-template-columns:repeat(auto-fill,minmax(156px,1fr)); gap:14px; padding:0; background:none; border:0; align-content:start; }
-body #overlay .card.bag-page .safe-grid { flex:1; min-height:0; overflow-y:auto; grid-template-columns:repeat(2,minmax(0,1fr)); padding:2px; }
-body #overlay .card.bag-page .bag-slot.empty { background:#21364066; border:1px dashed #8fa5ad55; }
-body #overlay .card.bag-page .bag-slot.empty::after { content:none; }
-body #overlay .card.bag-page .bag-slot.safe-empty { background:#2d45453d; border-color:#8eb6a77a; }
-body #overlay .card.bag-page .bag-slot.pearl-empty { border-color:#9aa8ca; background:#36435c44; }
-body #overlay .card.bag-page .bag-slot.filled.card-slot,
-body #overlay .card.bag-page .bag-slot.filled.safe-slot { border:1px solid #a4bbc344; background:#182a33; }
-body #overlay .card.bag-page .bag-slot.filled.safe-slot { border-color:#8eb6a7; }
-body #overlay .card.bag-page .bag-slot .stack-count { border:1px solid #98b1b8; border-radius:0; background:#14232deb; color:#edf4f4; font-size:14px; top:4px; right:4px; }
-body #overlay .card.bag-page .pk-cards { flex:1; min-height:0; max-height:none; overflow-y:auto; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; align-content:start; }
-body #overlay .card.bag-page .pk-card { position:relative; display:flex; justify-content:center; margin:0; padding:0; }
-body #overlay .card.bag-page .pk-card .hs-card { font-size:14px; width:140px; height:196px; flex:none; margin:0; }
-body #overlay .card.bag-page .pk-card .bt-count { position:absolute; right:0; top:0; font-size:14px; background:#14232d; color:#e3ecee; }
-/* Reference-led inventory: objects and quantities lead; protection stays beside
-   the carried cards. Existing slots, flip faces and drag targets remain intact. */
-body #overlay .card.bag-page .bag-view.bag-reference { background:#0e171e; padding:30px 40px; }
-body #overlay .card.bag-page .bag-reference .bag-head { display:flex; align-items:center; justify-content:space-between; gap:24px; border-bottom-color:#6f858b55; }
-body #overlay .card.bag-page .bag-reference .bag-head h2 { font-size:34px; letter-spacing:.04em; }
-body #overlay .card.bag-page .bag-reference .bag-chips { display:flex; flex-wrap:wrap; gap:24px; margin-top:8px; }
-body #overlay .card.bag-page .bag-reference .fc-chip { color:#a9bec7; font-size:18px; }
-body #overlay .card.bag-page .bag-reference .fc-chip b { margin-left:8px; font-size:22px; color:#eee5cc; }
-body #overlay .card.bag-page .bag-reference .bag-layout { gap:32px; margin-top:26px; grid-template-columns:minmax(0,1fr) 410px; }
-body #overlay .card.bag-page .bag-reference .bag-main { scrollbar-gutter:stable; }
-body #overlay .card.bag-page .bag-reference .bag-main .bag-grid { grid-template-columns:repeat(auto-fill,minmax(184px,1fr)); gap:18px; }
-body #overlay .card.bag-page .bag-reference .bag-side { grid-template-rows:minmax(0,1.08fr) minmax(0,.92fr); border-left:0; gap:28px; padding:0; }
-body #overlay .card.bag-page .bag-reference .bag-side-card { padding:18px; background:#16242a; border:1px solid #526b7355; }
-body #overlay .card.bag-page .bag-reference .bag-safe-region { border-top:2px solid #93bfb0; }
-body #overlay .card.bag-page .bag-reference .bag-pocket-region { background:#141c23; border-top:2px solid #7a8790; }
-body #overlay .card.bag-page .bag-reference .set-h { justify-content:flex-start; font-size:24px; line-height:1.4; }
-body #overlay .card.bag-page .bag-reference .set-tip { margin-left:auto; color:#d7e1dd; font-size:18px; }
-body #overlay .card.bag-page .bag-reference .bag-main .set-tip { margin-left:12px; }
-body #overlay .card.bag-page .bag-reference .bag-sort { width:auto; margin-left:auto; }
-body #overlay .card.bag-page .bag-reference .bag-sort .mini-btn { min-height:38px; padding:7px 14px; background:#22333c; border-color:#657c8555; color:#dbe6e8; }
-body #overlay .card.bag-page .bag-reference .bag-region-note { font-size:16px; line-height:1.55; color:#aabdc6; }
-body #overlay .card.bag-page .bag-reference .bag-slot.empty { background:#111c2440; border-color:#536b7338; }
-body #overlay .card.bag-page .bag-reference .bag-slot.safe-empty { background:#26443d28; border-color:#82ad9955; }
-body #overlay .card.bag-page .bag-reference .bag-slot.pearl-empty { border-color:#9aa8ca88; background:#36435c33; }
-body #overlay .card.bag-page .bag-reference .bag-slot.filled:hover { border-color:#a2bcbf; box-shadow:none; }
-body #overlay .card.bag-page .bag-reference .stack-count { min-width:30px; padding:3px 7px; font-size:16px; box-shadow:none; }
-body #overlay .card.bag-page .bag-reference .pk-card .hs-card { width:160px; height:224px; font-size:16px; }
-body #overlay .card.bag-page .bag-reference .bag-close { min-height:48px; background:#233841; border-color:#91a7af77; box-shadow:none; }
-body #overlay .card.bag-page .bag-reference :is(.bag-close,.mini-btn):focus-visible { outline:2px solid #d9c98c; outline-offset:3px; }
-body #overlay .card.bag-page .bag-reference .bag-region-selected { outline:2px solid #cab985; outline-offset:5px; }
+/* ══ 背包 v2 玻璃界面（2026-10-15 WF-bag-redesign-1015 实装，老板拍板绝区零方向）══
+   景深背景 + 玻璃拟态：左栏分区钮 / 轻量格子（真实卡面+物资图标+数量+稀有度晕染）/ 右侧常驻详情。
+   拖拽浮影与落点高亮的基础样式仍在 scenes.css（.bag-ghost/.bag-slot.dragging/.bag-slot.drop-here）。 */
+/* 全屏：对标 .card.battle 的满屏覆写（老板反馈「背包没有全屏」），页面从视口边缘起；
+   transform:none 顶掉外场对卡片的整体缩放（实测被 scale(0.65) 缩成 828×466 的根因） */
+body #overlay.bag-full { padding: 0; display: block; }
+body #overlay .card.bag-page {
+  width: 100vw; max-width: 100vw; height: 100vh; max-height: 100vh;
+  margin: 0; border: 0; border-radius: 0; padding: 0; box-shadow: none;
+  transform: none !important;
+}
+body #overlay .card.bag-page #ovBody { width: 100%; height: 100%; max-height: none; overflow: hidden; }
+body #overlay .card.bag-page .bag-view.bag-v2 {
+  position: relative; overflow: hidden; height: 100%; box-sizing: border-box;
+  max-width: none; margin: 0;
+  background: #0b1017; color: #f2f4f6;
+}
+body #overlay .card.bag-page .bag-v2 .bag-bg {
+  position: absolute; inset: -40px; width: calc(100% + 80px); height: calc(100% + 80px);
+  object-fit: cover; filter: blur(22px) brightness(.5) saturate(1.25); z-index: 0; pointer-events: none;
+}
+body #overlay .card.bag-page .bag-v2 .bag-shell {
+  position: relative; z-index: 1; height: 100%; min-height: 0; box-sizing: border-box;
+  display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 20px; padding: 28px 34px;
+}
+body #overlay .card.bag-page .bag-v2 .bag-rail,
+body #overlay .card.bag-page .bag-v2 .bag-board,
+body #overlay .card.bag-page .bag-v2 .bag-detail {
+  background: rgba(14, 18, 26, .52); backdrop-filter: blur(26px) saturate(1.35);
+  -webkit-backdrop-filter: blur(26px) saturate(1.35);
+  border: 1px solid rgba(255, 255, 255, .10); border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, .32);
+}
+/* 左栏分区（顶部让位给左上角 archive-back 退出键，样式复用 archive-back.css） */
+body #overlay .card.bag-page .bag-v2 .bag-rail { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 78px 0 20px; }
+body #overlay .card.bag-page .bag-v2 .bag-rz {
+  position: relative; width: 60px; height: 60px; border: 0; border-radius: 16px; cursor: pointer;
+  background: transparent; color: #93a7b1; display: flex; align-items: center; justify-content: center;
+  transition: background .2s, color .2s, transform .2s;
+}
+body #overlay .card.bag-page .bag-v2 .bag-rz svg { width: 26px; height: 26px; }
+body #overlay .card.bag-page .bag-v2 .bag-rz .bag-bdg {
+  position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; padding: 0 5px;
+  border-radius: 10px; background: rgba(255, 255, 255, .14); color: #f2f4f6;
+  font-size: 11px; font-weight: 700; line-height: 20px; font-variant-numeric: tabular-nums;
+}
+body #overlay .card.bag-page .bag-v2 .bag-rz:hover { color: #f2f4f6; background: rgba(255, 255, 255, .08); transform: translateY(-1px); }
+body #overlay .card.bag-page .bag-v2 .bag-rz.on { color: #101319; background: #f5d97b; box-shadow: 0 6px 22px rgba(245, 217, 123, .35); }
+body #overlay .card.bag-page .bag-v2 .bag-rz.on .bag-bdg { background: #101319; color: #f5d97b; }
+body #overlay .card.bag-page .bag-v2 .bag-rz.drop-here { outline: 2px dashed #f5d97b; outline-offset: 2px; }
+body #overlay .card.bag-page .bag-v2 .bag-rlogo { margin-top: auto; font-size: 10px; letter-spacing: .3em; color: rgba(226, 232, 238, .34); writing-mode: vertical-rl; }
+/* 中列：标题 / 容量 / 资产（横排分割线分隔头/工具/网格三段） */
+body #overlay .card.bag-page .bag-v2 .bag-col { display: flex; flex-direction: column; min-width: 0; min-height: 0; gap: 0; }
+body #overlay .card.bag-page .bag-v2 .bag-head2 {
+  display: flex; align-items: flex-end; gap: 24px; padding: 4px 6px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, .14);
+}
+body #overlay .card.bag-page .bag-v2 .bag-kick { display: block; font-size: 10px; letter-spacing: .42em; color: rgba(226, 232, 238, .34); }
+body #overlay .card.bag-page .bag-v2 .bag-head2 h2 { margin: 2px 0 0; font-size: 40px; font-weight: 800; letter-spacing: .06em; line-height: 1; color: #f2f4f6; }
+body #overlay .card.bag-page .bag-v2 .bag-capchip {
+  margin-left: auto; display: flex; align-items: center; gap: 10px; padding: 11px 20px; border-radius: 999px;
+  background: rgba(14, 18, 26, .52); backdrop-filter: blur(26px) saturate(1.35); -webkit-backdrop-filter: blur(26px) saturate(1.35);
+  border: 1px solid rgba(255, 255, 255, .10);
+}
+body #overlay .card.bag-page .bag-v2 .bag-capk { font-size: 11px; letter-spacing: .2em; color: #93a7b1; }
+body #overlay .card.bag-page .bag-v2 .bag-capbar { position: relative; width: 170px; height: 8px; border-radius: 4px; background: rgba(255, 255, 255, .10); overflow: hidden; }
+body #overlay .card.bag-page .bag-v2 .bag-capbar i { position: absolute; inset: 0 auto 0 0; border-radius: 4px; background: linear-gradient(90deg, #d8b054, #f5d97b); }
+body #overlay .card.bag-page .bag-v2 .bag-capchip b { font-size: 19px; font-variant-numeric: tabular-nums; }
+body #overlay .card.bag-page .bag-v2 .bag-capchip small { color: #93a7b1; font-variant-numeric: tabular-nums; }
+body #overlay .card.bag-page .bag-v2 .bag-cur { display: flex; gap: 20px; align-items: flex-end; }
+body #overlay .card.bag-page .bag-v2 .bag-cur .fc-chip { background: none; border: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; align-items: flex-end; color: #93a7b1; font-size: 10px; letter-spacing: .18em; }
+body #overlay .card.bag-page .bag-v2 .bag-cur .fc-chip b { color: #f2f4f6; font-size: 20px; letter-spacing: 0; }
+body #overlay .card.bag-page .bag-v2 .bag-tools {
+  display: flex; align-items: center; gap: 8px; padding: 16px 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, .09);
+}
+body #overlay .card.bag-page .bag-v2 .bag-pill {
+  border: 1px solid transparent; background: rgba(255, 255, 255, .06); color: #93a7b1;
+  font-size: 13.5px; padding: 8px 17px; border-radius: 999px; cursor: pointer; font-family: inherit; letter-spacing: .04em;
+  transition: background .2s, color .2s;
+}
+body #overlay .card.bag-page .bag-v2 .bag-pill:hover { color: #f2f4f6; background: rgba(255, 255, 255, .11); }
+body #overlay .card.bag-page .bag-v2 .bag-pill.on { background: #f5d97b; color: #101319; font-weight: 700; }
+body #overlay .card.bag-page .bag-v2 .bag-tgap { flex: 1; }
+body #overlay .card.bag-page .bag-v2 .bag-icbtn {
+  width: 40px; height: 40px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, .12); cursor: pointer;
+  background: rgba(255, 255, 255, .06); color: #c9d4dc; display: flex; align-items: center; justify-content: center;
+  transition: background .2s, color .2s;
+}
+body #overlay .card.bag-page .bag-v2 .bag-icbtn svg { width: 19px; height: 19px; }
+body #overlay .card.bag-page .bag-v2 .bag-icbtn:hover { color: #fff; background: rgba(255, 255, 255, .13); }
+body #overlay .card.bag-page .bag-v2 .bag-icbtn.gold { background: #f5d97b; border-color: #f5d97b; color: #101319; }
+/* 网格板 */
+body #overlay .card.bag-page .bag-v2 .bag-board { flex: 1; min-height: 0; margin-top: 16px; padding: 16px 20px; overflow-y: auto; scrollbar-color: rgba(255, 255, 255, .18) transparent; }
+body #overlay .card.bag-page .bag-v2 .bag-znote { margin: 0 0 12px; font-size: 12px; letter-spacing: .04em; color: #93a7b1; }
+/* 一行固定五列（老板定向），格子走卡面比例，卡面放大占满格子 */
+body #overlay .card.bag-page .bag-v2 .bag-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; padding: 0; background: none; border: 0; }
+body #overlay .card.bag-page .bag-v2 .bag-empty2 { margin: 8px 2px; color: #93a7b1; font-size: 13px; }
+body #overlay .card.bag-page .bag-v2 .bag-tile {
+  position: relative; aspect-ratio: 5 / 7.4; height: auto; border-radius: 16px; cursor: pointer; overflow: hidden;
+  background: var(--tint, rgba(255, 255, 255, .055)); border: 1px solid transparent;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  transition: transform .2s, border-color .2s;
+}
+/* 真实卡面格（老板反馈接入现行卡面并放大）：卡面自带名称/费用/框体，格底保留稀有度晕染 */
+body #overlay .card.bag-page .bag-v2 .bag-tile.card-face { padding-top: 3.2%; justify-content: flex-start; }
+body #overlay .card.bag-page .bag-v2 .bag-tile.card-face .hs-card {
+  width: calc(var(--game-layout-width, 100vw) * 0.142); max-width: calc(100% - 12px);
+  font-size: calc(var(--game-layout-width, 100vw) * 0.0142); margin: 0; flex: none;
+}
+body #overlay .card.bag-page .bag-v2 .bag-tile.card-face .bag-tstate {
+  bottom: 8px; left: 50%; right: auto; transform: translateX(-50%); width: max-content; z-index: 3;
+  background: rgba(8, 10, 15, .6); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 999px; padding: 2px 12px; letter-spacing: .14em;
+}
+body #overlay .card.bag-page .bag-v2 .bag-tile::before {
+  content: ""; position: absolute; inset: 0; border-radius: 16px;
+  background: radial-gradient(90% 62% at 50% 26%, var(--glow, rgba(255, 255, 255, .07)), transparent 72%); pointer-events: none;
+}
+body #overlay .card.bag-page .bag-v2 .bag-tile:hover { transform: translateY(-3px); border-color: rgba(255, 255, 255, .18); }
+body #overlay .card.bag-page .bag-v2 .bag-tile.sel { border-color: #f5d97b; box-shadow: 0 0 0 1.5px #f5d97b, 0 10px 30px rgba(0, 0, 0, .35); }
+body #overlay .card.bag-page .bag-v2 .bag-tile:focus-visible { outline: 2px solid #f5d97b; outline-offset: 2px; }
+body #overlay .card.bag-page .bag-v2 .bag-tile.dragging { opacity: .32; border-style: dashed; }
+body #overlay .card.bag-page .bag-v2 .bag-tile.drop-here { border-color: #f5d97b !important; box-shadow: inset 0 0 0 2px #f5d97b; }
+body #overlay .card.bag-page .bag-v2 .bag-tile.spent { filter: saturate(.3) brightness(.8); }
+body #overlay .card.bag-page .bag-v2 .bag-tico { width: 52px; height: 52px; z-index: 1; }
+body #overlay .card.bag-page .bag-v2 .bag-tico svg { width: 100%; height: 100%; }
+body #overlay .card.bag-page .bag-v2 .bag-tnm { max-width: 92%; z-index: 1; font-size: 14px; font-weight: 600; letter-spacing: .03em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+body #overlay .card.bag-page .bag-v2 .bag-tct {
+  position: absolute; top: 8px; right: 8px; z-index: 2; padding: 2px 9px; border-radius: 999px;
+  background: rgba(8, 10, 15, .55); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, .14);
+  font-size: 11.5px; font-weight: 700; font-variant-numeric: tabular-nums;
+}
+body #overlay .card.bag-page .bag-v2 .bag-tcost {
+  position: absolute; top: 7px; left: 8px; z-index: 2; width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #101319; background: var(--tc, #c8d2da);
+}
+body #overlay .card.bag-page .bag-v2 .bag-tstate {
+  position: absolute; bottom: 9px; left: 0; right: 0; text-align: center; z-index: 2;
+  font-size: 10.5px; letter-spacing: .2em; color: rgba(245, 217, 123, .7);
+}
+body #overlay .card.bag-page .bag-v2 .bag-tile.spent .bag-tstate { color: rgba(230, 150, 140, .75); }
 #overlay .hub, #overlay .bag-view, #overlay .cardlib-page, #overlay .settings-page { background:var(--bg-deep2); color:#ebecec; min-height:100%; }
 #overlay .hub-head, #overlay .bag-head, #overlay .cardlib-head, #overlay .pg-head { background:rgba(17,18,20,.96); border-bottom:1px solid rgba(234,210,130,.24); padding:18px 24px; }
 #overlay .hub-head h2, #overlay .bag-head h2, #overlay .pg-head h2 { color:#ebecec; letter-spacing:.16em; }
@@ -158,7 +233,7 @@ body #overlay .card.bag-page .bag-reference .bag-region-selected { outline:2px s
 #overlay .hub-page .stash-scroll { max-height:calc(var(--game-layout-height, 100vh) * 0.46); overflow-y:auto; padding:2px 2px 6px; scrollbar-color:#4f545a var(--bg-deep2); }
 #overlay .hub-page .stash-cardgrid { display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:12px; }
 #overlay .hub-page .stash-cell { position:relative; padding:0; border:1px solid rgba(194,199,202,.22); border-radius:0; background:#191a1c; cursor:pointer; transition:transform .14s, border-color .14s, box-shadow .14s; }
-#overlay .hub-page .stash-cell .hs-card { width:100%; height:auto; aspect-ratio:10/14; font-size:clamp(11px, calc(var(--game-layout-width, 100vw) * 0.009000000000000001), 13px); box-shadow:none; border-radius:0; }
+#overlay .hub-page .stash-cell .hs-card { width:100%; font-size:clamp(11px, calc(var(--game-layout-width, 100vw) * 0.009000000000000001), 13px); }
 #overlay .hub-page .stash-cell:hover { transform:translateY(-2px); border-color:#ead282; box-shadow:0 6px 16px rgba(0,0,0,.38); }
 #overlay .hub-page .stash-cell.collected { border-color:#ead282; box-shadow:inset 0 0 0 1px rgba(234,210,130,.5), 0 0 10px rgba(234,210,130,.12); }
 #overlay .hub-page .stash-cell .stack-count { position:absolute; right:3px; bottom:3px; z-index:5; min-width:18px; padding:1px 5px; border-radius:999px; color:#f0f0f0; background:rgba(14,15,16,.92); border:1px solid rgba(196,196,196,.55); font-size:10px; font-weight:800; }
@@ -173,7 +248,7 @@ body #overlay .card.bag-page .bag-reference .bag-region-selected { outline:2px s
 /* 消耗口袋：行首小卡面缩略（点击行内按钮复原不变）；hs-card 用 font-size 缩放法缩到 36px 宽 */
 #overlay .hub-page .pk-row.pocket-row { gap:10px; padding:6px 10px 6px 6px; }
 #overlay .hub-page .pocket-thumb { flex:0 0 auto; width:37px; height:52px; overflow:hidden; border-radius:0; background:#191a1c; }
-#overlay .hub-page .pocket-thumb .hs-card { font-size:3.7px; box-shadow:none; border-radius:0; }
+#overlay .hub-page .pocket-thumb .hs-card { font-size:3.7px; }
 #overlay .hub-page .pocket-info { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:left; }
 /* 物资物料格：大图标+大数字 */
 #overlay .hub-page .material-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px; }
@@ -215,7 +290,7 @@ body #overlay .card.bag-page .bag-reference .bag-region-selected { outline:2px s
 #overlay .hub-page .shelf-item { display:flex; align-items:center; gap:12px; padding:12px 14px 12px 12px; border:1px solid rgba(194,199,202,.2); border-radius:0; background:#1c1e20; transition:border-color .14s, transform .14s; }
 #overlay .hub-page .shelf-item:hover { border-color:#ead282; transform:translateY(-1px); }
 #overlay .hub-page .shelf-item .shelf-visual { flex:0 0 auto; width:66px; height:92px; overflow:hidden; border-radius:0; background:#191a1c; display:flex; align-items:center; justify-content:center; }
-#overlay .hub-page .shelf-item .shelf-visual .hs-card { font-size:6.6px; box-shadow:none; border-radius:0; }
+#overlay .hub-page .shelf-item .shelf-visual .hs-card { font-size:6.6px; }
 #overlay .hub-page .shelf-item .shelf-ico .ic { width:38px; height:38px; opacity:.92; }
 #overlay .hub-page .shelf-item .shelf-info { flex:1; min-width:0; display:flex; flex-direction:column; gap:4px; }
 #overlay .hub-page .shelf-item .shelf-info b { color:#ebecec; font-size:15px; letter-spacing:1px; }

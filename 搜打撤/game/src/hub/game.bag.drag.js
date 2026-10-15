@@ -8,68 +8,26 @@ import { esc } from '../core/shared.js';
 import { cardStacks, game, saveGame } from '../run/game.session.js';
 import { bagSlots } from './game.bag.bridge.js';
 import { captureBattleContext } from '../battle/battle-loader.js';
-  // ---------- 背包拖拽（v0.21）：3D 立体手感 · 堆排序 · 拖入/拖出安全格 ----------
+  // ---------- 背包拖拽（v0.21 → v2 2026-10-15）：堆排序 · 左栏分区钮拖放跨区 · 双击进特写 ----------
   export let bagDrag = null;   // {name, fromSafe, cell, ghost, card3d, sx, sy, lx, ly, vx, vy, moved}
-  let bagTiltBound = false;   // 悬停倾斜是 document 级委托，只绑一次（避免重复打开背包时叠加监听）
 
   function bindBagDrag() {
     const body = UI.el.ovBody;
-    const bagGrid = body.querySelector('.bag-grid:not(.safe-grid)');
-    const safeGrid = body.querySelector('.safe-grid');
+    const bagGrid = body.querySelector('.bag-grid');
     if (!bagGrid) return;
     const sameRun = captureBattleContext(game), cards = game.ownedCards;
     const current = () => sameRun() && game.ownedCards === cards && bagGrid.isConnected
-      && body === UI.el.ovBody && body.querySelector('.bag-grid:not(.safe-grid)') === bagGrid
+      && body === UI.el.ovBody && body.querySelector('.bag-grid') === bagGrid
       && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
-
-    // 悬停 3D 倾斜：卡牌跟随指针微微转动（立体感）
-    if (!bagTiltBound) {
-      bagTiltBound = true;
-      document.addEventListener('mousemove', (e) => {
-        if (bagDrag || UI.el.overlay.hidden) return;
-        // 卡槽只存在于背包页（mode==='bagpage' 时 overlay 带 bag-full 类）：
-        // 其他弹层（基地/商店/战斗/撤离页…）打开时直接跳出，
-        // 避免每次鼠标移动都白跑一轮 querySelectorAll + closest。
-        if (!UI.el.overlay.classList.contains('bag-full')) return;
-        const root = UI.el.ovBody;
-        root.querySelectorAll('.card-slot.tilted, .safe-slot.tilted').forEach(c => {
-          c.classList.remove('tilted');
-          const inner = c.querySelector('.flip-inner');
-          if (inner) inner.style.transform = c.classList.contains('flipped') ? 'rotateY(180deg)' : '';
-        });
-        const cell = e.target.closest && e.target.closest('#ovBody .card-slot, #ovBody .safe-slot');
-        if (!cell || (e.target.closest && e.target.closest('button'))) return;
-        const r = cell.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width - 0.5;
-        const py = (e.clientY - r.top) / r.height - 0.5;
-        const flip = cell.classList.contains('flipped') ? 180 : 0;
-        const inner = cell.querySelector('.flip-inner');
-        if (inner) {
-          cell.classList.add('tilted');
-          inner.style.transform = `rotateY(${(flip + px * 16).toFixed(1)}deg) rotateX(${(-py * 14).toFixed(1)}deg)`;
-        }
-      });
-    }
-    // 双击翻面：正面 ⇄ 当前装备的卡背
-    const onDbl = (e) => {
-      const cell = e.target.closest('.card-slot, .safe-slot');
-      if (!current() || !cell || e.target.closest('button')) return;
-      cell.classList.toggle('flipped');
-      const inner = cell.querySelector('.flip-inner');
-      if (inner) inner.style.transform = cell.classList.contains('flipped') ? 'rotateY(180deg)' : '';
-      SDT.Sound.sfx('click');
-    };
-    bagGrid.addEventListener('dblclick', onDbl);
-    if (safeGrid) safeGrid.addEventListener('dblclick', onDbl);
-    // 按住拖动（pointer 事件，鼠标/触屏通用）
-    const onDown = (e, fromSafe) => {
+    // 按住拖动（pointer 事件，鼠标/触屏通用）；单击看卡走格子上的 inspectStack（v2 看卡操作台）
+    const onDown = (e) => {
       if (!current() || e.button !== 0 || bagDrag) return;
       if (e.target.closest('button')) return;   // 格内按钮优先
-      const cell = e.target.closest(fromSafe ? '.safe-slot' : '.card-slot');
-      if (!cell || !cell.dataset.stack) return;
+      const cell = e.target.closest('.bag-tile[data-stack]');
+      if (!cell) return;
       e.preventDefault();
       bagDrag = {
-        name: cell.dataset.stack, fromSafe, cell, pointerId: e.pointerId, current,
+        name: cell.dataset.stack, fromSafe: cell.dataset.safe === '1', cell, pointerId: e.pointerId, current,
         sx: e.clientX, sy: e.clientY, lx: e.clientX, ly: e.clientY,
         vx: 0, vy: 0, moved: false, ghost: null, card3d: null,
       };
@@ -80,8 +38,7 @@ import { captureBattleContext } from '../battle/battle-loader.js';
       window.addEventListener('pointercancel', onBagDragCancel);
       window.addEventListener('blur', resetBagDrag);
     };
-    bagGrid.addEventListener('pointerdown', (e) => onDown(e, false));
-    if (safeGrid) safeGrid.addEventListener('pointerdown', (e) => onDown(e, true));
+    bagGrid.addEventListener('pointerdown', onDown);
   }
 
   // 拖拽浮影：真正的卡面 + 跟随速度的 3D 姿态
@@ -99,14 +56,21 @@ import { captureBattleContext } from '../battle/battle-loader.js';
   function bagDropTarget(x, y, srcCell) {
     const el = document.elementFromPoint(x, y);
     if (!el) return null;
-    const safeCell = el.closest('#ovBody .safe-grid .bag-slot');
-    if (safeCell) return { kind: 'safe', el: safeCell };
-    const cell = el.closest('#ovBody .bag-grid:not(.safe-grid) .bag-slot');
-    if (!cell) return null;
-    if (cell.classList.contains('card-slot') && cell !== srcCell) {
+    // v2：左栏分区钮即跨区拖放目标——盾钮存入安全格，背包钮取出
+    const railSafe = el.closest('#ovBody .bag-rz[data-zone="safe"]');
+    if (railSafe) return { kind: 'safe', el: railSafe };
+    const railBag = el.closest('#ovBody .bag-rz[data-zone="bag"]');
+    if (railBag) return { kind: 'railBag', el: railBag };
+    const cell = el.closest('#ovBody .bag-grid .bag-tile');
+    if (!cell) {
+      const board = el.closest('#ovBody .bag-board');
+      if (board) return { kind: 'area', el: board };   // 网格空处 = 放到卡牌区末尾
+      return null;
+    }
+    if (cell.dataset.stack && cell !== srcCell) {
       return { kind: 'stack', el: cell, name: cell.dataset.stack };
     }
-    return { kind: 'area', el: cell };   // 空格 / 物资格 = 放到卡牌区末尾
+    return { kind: 'area', el: cell };   // 物资格 / 原格 = 放到卡牌区末尾
   }
 
   // 当前高亮的落点格：pointermove 是高频路径，用追踪变量替代每次全树查询 .drop-here
@@ -165,7 +129,15 @@ import { captureBattleContext } from '../battle/battle-loader.js';
     const t = bagDropTarget(e.clientX, e.clientY, d.cell);
     if (!t) { bagSlots.showDiscardConfirm(d.name, d.fromSafe); return; }
     if (t.kind === 'safe') {
-      if (!d.fromSafe) bagSlots.moveStackSafe(d.name, true);   // 拖入安全格
+      if (!d.fromSafe) bagSlots.moveStackSafe(d.name, true);   // 拖入安全格（左栏盾钮）
+      return;
+    }
+    if (t.kind === 'railBag') {
+      // 从安全格拖回左栏背包钮 = 取出（落点次序按末尾追加）
+      if (d.fromSafe) {
+        bagSlots.moveStackOrder(d.name, null);
+        bagSlots.moveStackSafe(d.name, false);
+      }
       return;
     }
     // 拖资源卡到珍珠盒上 = 直接存入（2026-09-17 留言「拖动资源卡到珍珠盒上可以把资源卡移动到珍珠盒内」）

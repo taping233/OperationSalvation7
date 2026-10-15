@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-friday-cloud-review-1014",
+  "date": "2026-10-14",
+  "owner": "Friday",
+  "goal": "全面审查云端精确快照，修复已确认缺陷并完成实机和视觉评审",
+  "paths": [
+    "game/src",
+    "game/css",
+    "scripts",
+    "tests",
+    "docs",
+    ".githooks",
+    "package.json",
+    "package-lock.json",
+    "vite.config.js"
+  ],
+  "doneWhen": [
+    "已确认缺陷有修复与回归证据",
+    "完成内置浏览器真实流程与美术交互评审并列出边界"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "完整质量门静态与362文件3141测试通过，2原有跳过；生产编译成功",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "构建预算：重复资产已达标；包体、入口、首屏JS、CSS仍超预算",
+      "result": "failed"
+    },
+    {
+      "kind": "manual",
+      "description": "云端内置浏览器真实战斗、奖励、基地七房间、商店失败原因、照片备注持久性与庭院返回已检查，见browser-review.md",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "文档检查598相对链接零发现，diff空白检查通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "四项性能预算仍失败，未提高阈值",
+    "完整GPU演出、自然四层完整撤离、多尺寸和音频听感未验证",
+    "Vitest/mocker大版本安全升级未实施；未执行公开依赖图audit",
+    "修复尚待真实上游历史接入、正常钩子提交、推送与对应CI"
+  ],
+  "updatedAt": "2026-10-13T19:07:24.112278+00:00",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "完成本轮确认缺陷修复和实际体验审查，开放风险已明确，不代表全项目所有质量门通过"
+  }
+}

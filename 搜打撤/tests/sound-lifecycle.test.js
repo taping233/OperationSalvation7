@@ -58,10 +58,10 @@ describe('SFX mute and audio instance lifecycle', () => {
     const sound = await importSound(() => new Promise(() => {}));
     sound.ensure(); sound.sfx('danger');
     const bus = context.contexts[0].gains[1];
-    expect(bus.gain.value).toBe(2.5);
+    expect(bus.gain.value).toBe(1.5);
     sound.setSfxMuted(true); expect(bus.gain.value).toBe(0);
     sound.setSfxVolume(0.5); expect(bus.gain.value).toBe(0);
-    sound.setSfxMuted(false); expect(bus.gain.value).toBeCloseTo(2.5 * 10 ** -0.75);
+    sound.setSfxMuted(false); expect(bus.gain.value).toBeCloseTo(1.5 * 10 ** -0.75);
     sound.setMuted(true); sound.setSfxMuted(true); sound.setSfxMuted(false);
     expect(context.contexts[0].gains[0].gain.value).toBe(0);
   });

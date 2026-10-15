@@ -47,7 +47,7 @@ function setup() {
   const render = nextView => {
     view = nextView || view;
     document.body.innerHTML = `<main id="hubMain">${archiveV3HTML({ base, meta, cards, view, art: { classAvatarArt: cls => `<img alt="${cls}" src="/avatar.webp">` } })}</main>`;
-    bindArchive(ui, () => render(), { openAchievements:() => render('achievements') });
+    bindArchive(ui, { openAchievements:() => render('achievements') });
     bindArchiveV3({ ui, base, meta, cards, refresh: () => render() });
     actions.set('hubCollectionView', data => render(data.view));
     return document.querySelector('.hub-archive-v3');

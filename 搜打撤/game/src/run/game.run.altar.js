@@ -10,6 +10,7 @@ import { installExpeditionFeedback } from '../ui/expedition-feedback.js';
 import { openClassChoice as requestClassChoicePage } from './game.run.class-choice.js';
 import { rewardSceneHTML, rewardExitHTML } from '../ui/reward-scene-view.js';
 import { claimEntrySupply, entrySupplyAt, nodeActionBinding } from './node-reward-state.js';
+import { bagSlots } from '../hub/game.bag.bridge.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
 import { esc, escAttr } from '../core/shared.js';
 import { MAP, MODES, bagCap, curLayer, enterLayer, game, getActiveSlot, newUid, saveGame, scaledEnemy, usedSlots } from './game.session.js';
@@ -116,6 +117,7 @@ export function openFireRest(after = finishInstant) {
 export function openEntrySupply() {
   const supply = entrySupplyAt(game);
   if (!supply) return false;
+  supply.entered = true;   // 入城闸门：打开过补给页即视为已进入，解锁前往其他节点
   game.state = 'modal';
   let saveFailed = saveGame() === false;
   const cards = () => supply.cardIds.map(id => SDT.Cards.all().find(card => card.id === id));
@@ -136,7 +138,7 @@ export function openEntrySupply() {
         footer:supply.taken.includes(index) ? '' : `<button class="ov-btn ok" data-act="entrySupplyTake" data-i="${index}">收下</button>` });
     });
     UI.act('entrySupplyTake', data => { if (isCurrent() && active()) take(Number(data.i)); });
-    UI.act('entrySupplyBag', () => { if (isCurrent() && active()) document.getElementById('bagBtnFloat')?.click(); });
+    UI.act('entrySupplyBag', () => { if (isCurrent() && active()) bagSlots.showBackpack(); });
   };
   const take = (index = null) => {
     if (!Number.isInteger(index)) return;
@@ -343,57 +345,27 @@ function openAltarReward() {
   UI.refresh(game);
 }
 
-// 首脑格：必须先激活祭坛；三首脑任选其一挑战，胜利后终局撤离点放行
+// 首脑格：祭坛激活后直接挑战本层固定首脑，胜利后终局撤离点放行。
 export function openBossGate() {
   game.state = 'modal';
+  setBagReturnHook(null);
+  UI.hideOverlay();
   if (!game.altarActivated) {
-    nodeShell({
-      tone: 'altar', icon: '[[icon:skull]]', title: '首脑巢穴 · 封印中',
-      sub: '三位首脑被污染祭坛的辐射护盾庇护——先激活祭坛（弃 3 张卡牌），再来挑战',
-      body: nodeOpt('bossBounce', '离开', '首脑格不消耗——先去激活祭坛，随时回来挑战', 'ok'),
-    });
-    const active = altarPageBinding('bossBounce');
-    UI.act('bossBounce', () => {
-      if (!active()) return;
-      UI.hideOverlay();
-      // 首脑格未激活祭坛时不置 visited（见 resolveCell 的 ritualPending），原地离开即可；
-      // 此前按「数组下标-1」回退，2000 种子里 28.2% 的落点与首脑格不相邻（等于穿墙传送）
-      game.state = 'idle';
-      saveGame();
-      UI.refresh(game);
-    });
+    UI.log('[[icon:skull]] 首脑巢穴仍被封印，先激活污染祭坛再来挑战', 'warn');
+    game.state = 'idle';
+    saveGame();
     UI.refresh(game);
     return;
   }
-  // 2026-09-09 玩法定版：三首脑（5-50 / 4-45 / 8-48）随机一个坐镇，进入本格即告知，
-  // 让玩家在编组牌库前就知道要面对谁（编组界面也会再次显示首脑与词缀）。
-  // 2026-09-13 老板拍板：首脑每层 roll 一次存全层（game.bossPlan，进层重置/读档恢复）——
-  // 层内重进 boss 格不再换人，面板/编组/实战三处口径恒一致。
+  // 本层只抽取一次首脑；重进和读档沿用 bossPlan。
   if (game.bossPlan == null) {
     game.bossPlan = Math.floor(Random.random('boss') * MAP.altar.bosses.length);
   }
   const bossIdx = game.bossPlan % MAP.altar.bosses.length;
   const b = MAP.altar.bosses[bossIdx];
-  const aff = b.affix ? MAP.altar.bosses[bossIdx].affixDesc : '';
-  nodeShell({
-    tone: 'altar', icon: '[[icon:demon]]', title: '首脑巢穴 · 决战',
-    sub: `本层首脑：<b>${esc(b.name)}（${b.atk}-${b.hp}）</b>${aff ? ` · 词缀【${esc(b.affixName)}】${esc(aff)}` : ''}——胜利后终局撤离点放行`,
-    body:
-      nodeOpt('fightBoss', '编组牌库，迎战首脑', '从背包选 15 张招式/装备/能力卡，附加 5 张初始攻击（混沌之眼可多带 5 张）', 'ok') +
-      nodeOpt('bossLeave', '暂不挑战', '留在当前格子（本格不消耗，可再来）'),
-  });
-  const active = altarPageBinding('fightBoss');
-  let starting = false;
-  UI.act('fightBoss', async () => {
-    if (!active() || starting) return;
-    starting = true;
-    UI.hideOverlay();
-    const bossFoe = scaledEnemy(b);
-    bossFoe.boss = true;   // 首脑死亡立即结束战斗（2026-09-16 留言 #25）
-    await startBattle(game, bossFoe, { isBoss: true, name: b.name });
-  });
-  UI.act('bossLeave', () => { if (!active() || starting) return; UI.hideOverlay(); game.state = 'idle'; saveGame(); UI.refresh(game); });
-  UI.refresh(game);
+  const bossFoe = scaledEnemy(b);
+  bossFoe.boss = true;
+  return startBattle(game, bossFoe, { isBoss: true, name: b.name, directBossStart: true });
 }
 
 // 背包献祭选卡器（2026-09-06 #26）：从背包选 n 张卡，确认后消耗并回调

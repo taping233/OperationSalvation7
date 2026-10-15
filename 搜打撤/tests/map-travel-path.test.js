@@ -28,6 +28,16 @@ describe('known map travel path', () => {
     game.entrySupply = null;
     expect(findMapTravelPath(game, target(2))).toEqual([target(1), target(2)]);
   });
+  it('入城闸门：未进入补给页时除脚下格外全部不可达，进入后立即恢复', () => {
+    const game = makeGame(['entrance', 'blank', 'chest'], [[1], [2], []], { runActive: true, state: 'idle', hp: 30, maxHp: 30,
+      entrySupply: { version: 1, layerIdx: 0, trackPos: 0, cardIds: ['class-a'], taken: [] } });
+    expect(findMapTravelPath(game, target(0))).toEqual([]);
+    expect(findMapTravelPath(game, target(1))).toBeNull();
+    expect(findMapTravelPath(game, target(2))).toBeNull();
+    game.entrySupply.entered = true;
+    expect(findMapTravelPath(game, target(1))).toEqual([target(1)]);
+    expect(findMapTravelPath(game, target(2))).toEqual([target(1), target(2)]);   // blank 中途格可穿越
+  });
   it('shares a pure cubic curve with clamped endpoints and symmetric reverse travel', () => {
     const from = Object.freeze({ x: 20, y: 10 }), to = Object.freeze({ x: 120, y: 80 });
     const forwardCurve=mapTravelCurve(from,to),reverseCurve=mapTravelCurve(to,from);

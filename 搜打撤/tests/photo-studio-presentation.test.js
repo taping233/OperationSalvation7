@@ -1,7 +1,26 @@
-import { describe, it, expect } from 'vitest';
+// @vitest-environment jsdom
+import { describe, it, expect, vi } from 'vitest';
 import { photoMountFor } from '../game/src/hub/photo-studio-presentation.js';
+import { createPhotoStudioMotion } from '../game/src/hub/photo-studio-navigation.js';
 
 describe('照相馆稀有度装裱映射', () => {
+  it('网格用重绘前宽度保留入场距离，重绘后不再触发布局读取', async () => {
+    const grid = document.createElement('div');
+    Object.defineProperty(grid, 'clientWidth', { get() { throw new Error('post-write layout read'); } });
+    let finish;
+    const finished = new Promise(resolve => { finish = resolve; });
+    const animation = { finished, cancel: vi.fn() };
+    grid.animate = vi.fn(() => animation);
+    const motion = createPhotoStudioMotion();
+    motion.play(grid, { reason: 'tab', surface: 'grid', width: 500 });
+    expect(grid.animate.mock.calls[0][0]).toEqual([
+      { opacity: 0, transform: 'translateX(-90px)' },
+      { opacity: 1, transform: 'translateX(0)' },
+    ]);
+    motion.cancelAll();
+    expect(animation.cancel).toHaveBeenCalledOnce();
+    finish(); await finished;
+  });
   it('为每种馆藏稀有度提供稳定的装裱身份与名称', () => {
     const cases = [
       ['初始', 'proof', '初印'],

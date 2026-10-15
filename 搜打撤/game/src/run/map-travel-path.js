@@ -1,4 +1,5 @@
 import { isConsumedMapNode } from '../core/map-node-state.js';
+import { entrySupplyGate } from './node-reward-state.js';
 
 export function mapTravelCurve(from, to) {
   const dx = to.x - from.x;
@@ -36,6 +37,8 @@ export function findMapTravelPath(game, target) {
   if (!current || !Number.isInteger(target?.li) || !Number.isInteger(target?.idx) ||
       !game.layerData?.[target.li]?.logical?.[target.idx]) return null;
   if (target.li === li && target.idx === start) return [];
+  // 入城闸门：未进入过入城节点前，除脚下本格外哪里都不可达（点击/悬停/面板/moveTo 同源判定）。
+  if (entrySupplyGate(game)) return null;
   if ((current.next || []).some(([nl, idx]) => nl === target.li && idx === target.idx)) {
     return [{ li: target.li, idx: target.idx }];
   }

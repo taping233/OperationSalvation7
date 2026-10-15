@@ -27,16 +27,19 @@ async function runSupervisor({ fresh = false, stamp, weights = '{}', history = J
   let now = 1000000;
   const output = [];
   const writes = new Map();
+  // agent-supervise.mjs 经 path.resolve 生成平台原生绝对路径（Windows 带盘符反斜杠），
+  // 路径 mock 先统一成 POSIX 再比对，保持对两种平台同判。
+  const posixPath = file => String(file).replaceAll('\\', '/');
   const context = {
     process: { pid: 42, argv: ['/node', '/supervise', '--dir', '/fixture/evolve', '--grace', '1', '--interval', '1', '--max', '4', '--kill', '0'],
       cwd: () => '/fixture', exit(code) { throw new ToolExit(code); } },
     Date: class extends Date { constructor(value) { super(value ?? now); } static now() { return now; } },
     console: { log: (...args) => output.push(args.join(' ')), error: (...args) => output.push(args.join(' ')) },
     resolve: path.resolve, join: path.join,
-    existsSync: file => file === '/fixture/evolve/best-weights.json' || (!missingHistory && file === '/fixture/evolve/history.json'),
+    existsSync: file => { const target = posixPath(file); return target === '/fixture/evolve/best-weights.json' || (!missingHistory && target === '/fixture/evolve/history.json'); },
     readdirSync: (_file, options) => options?.withFileTypes ? [{ name: 'best-weights.json', isDirectory: () => false }] : ['best-weights.json'],
-    statSync: file => { if (missingHistory && file.endsWith('/history.json')) throw new Error('ENOENT'); return { mtimeMs: stamp ?? (fresh && now > 1000000 ? now : 999000) }; },
-    readFileSync: file => file.endsWith('/history.json') ? history : weights, writeFileSync: (file, value) => writes.set(file, value),
+    statSync: file => { if (missingHistory && posixPath(file).endsWith('/history.json')) throw new Error('ENOENT'); return { mtimeMs: stamp ?? (fresh && now > 1000000 ? now : 999000) }; },
+    readFileSync: file => posixPath(file).endsWith('/history.json') ? history : weights, writeFileSync: (file, value) => writes.set(file, value),
     spawnSync: () => ({ status: unknown ? 1 : 0, stdout: '', signal: null }),
     setTimeout: callback => { now += 1000; callback(); },
   };

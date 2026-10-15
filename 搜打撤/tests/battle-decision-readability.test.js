@@ -31,8 +31,8 @@ describe('battle decision reading CSS contract', () => {
     // This checks the resting/reading distinction, not a claim about actual browser layout.
     expect(1080 - bottom + 27 + shift + 330 * (scale - 1) / 2 + 30).toBeLessThanOrEqual(1080);
     expect(battle).toMatch(/bottom:calc\(var\(--battle-hand-height\) \+ 152px\)/);
-    const inspect = declarations(hand, 'body #overlay .battle-stage.battle-sts .sts-hand .bt-slot:is(:hover,:focus-within) .bt-hand-inspect');
-    expect(inspect).toContain(`transform:translateY(${shift}px)`);
+    // 2026-10-15 老板：悬停「完整规则」按钮已撤销，手牌皮肤不得再引入该入口。
+    expect(hand).not.toMatch(/bt-hand-inspect/);
   });
 
   it('wins the real winter important transform conflict for hover/focus while leaving inline drag transforms alone', () => {
@@ -82,13 +82,11 @@ describe('battle decision reading CSS contract', () => {
     expect(declarations(battle, `${stage} .sts-arena-caption span`)).toContain('line-height:1.3');
   });
 
-  it('uses the shared external reading size only inside the battle hand, with full short-rule hover and focus', () => {
-    const body = declarations(hand, `${reading} .hs-card .hsc-desc`);
-    expect(body).toContain('font-size:var(--card-copy-size,24px)!important');
-    expect(body).toContain('line-height:var(--card-copy-leading,1.55)!important');
-    const full = declarations(hand, `${reading} .bt-slot:is(:hover,:focus-within) .hs-card:is([data-rule-density="normal"],[data-rule-density="long"]) .hsc-desc`);
-    expect(full).toContain('-webkit-line-clamp:unset');
-    expect(full).toContain('max-height:none'); expect(full).toContain('overflow:visible!important');
+  it('keeps card copy sizing out of the hand skin while detail reading keeps the shared tokens', () => {
+    // 2026-10-15 卡面全局改造（WF-card-face-global-1015）：手牌恢复原卡框，卡面阅读
+    // 字号与短规则节选由共用卡面 CSS 管理，手牌皮肤不得再覆写 .hsc-desc；完整规则
+    // 阅读面仍走 .bt-hand-detail 弹层并沿用共享字号令牌（见下一定义与末个用例）。
+    expect(hand).not.toMatch(/hsc-desc/);
     expect(hand).toContain('transition:transform .16s ease');
     expect(hand).toContain('body.reduce-motion'); expect(hand).toContain('prefers-reduced-motion:reduce');
     expect(hand).toContain('.bt-card.aim-lift { transition:none!important; }');

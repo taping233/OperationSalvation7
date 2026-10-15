@@ -346,3 +346,254 @@ body #overlay .battle-stage.sts .sts-nameplate {
     url('../assets/scenes/ui-loop-0925/boss-arena.webp'),
     url('../assets/scenes/battle-street-amber-anime-v1.webp');
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   2026-10-15 三波（重制）：战斗「行动档案」二游化重皮肤（Friday）
+   老板对第一版（同日 C1–C9 温和迭代）判定「太丑」，推倒重来。
+   参考语言：星穹铁道式干净深色战斗面板 × 方舟硬朗切角结构 × PGR 式
+   斜切宣示主钮。三色纪律：金=我方动作/主操作，红=敌意/危险，
+   青=能量/我方状态；其余一律中性石墨蓝。几何家族：动作件=左上斜切
+   （指向敌方），信息件=对角硬切角。零 JS、零 DOM 改动、零循环动画，
+   过渡只 transform/opacity/色彩；卡牌本体、canvas、药水栏（老板定版
+   纸白）、冻结 battle.css 零接触。
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── R0 令牌与全局氛围：面板色、三色、加深深侧晕让战场更「上镜」 ── */
+body #overlay .battle-stage.sts.battle-sts {
+  --bx-panel: rgba(11, 19, 27, .95);
+  --bx-panel-2: rgba(16, 27, 38, .95);
+  --bx-line: rgba(255, 255, 255, .14);
+  --bx-gold: #f0d68a;
+  --bx-red: #ff6a55;
+  --bx-cyan: #7fd8e8;
+}
+body #overlay .battle-stage.sts.battle-sts .battle-stage-shade {
+  background:
+    linear-gradient(90deg, rgba(5, 10, 16, .5), transparent 16%, transparent 84%, rgba(5, 10, 16, .5)),
+    linear-gradient(180deg, rgba(5, 10, 16, .58), transparent 30%, transparent 60%, rgba(5, 10, 16, .74));
+}
+
+/* ── R1 顶栏：深色指挥条 + 金 kicker + 大回合数 + 状态徽标按语义换色 ── */
+body #overlay .battle-stage.sts.battle-sts > .sts-topbar {
+  background: linear-gradient(180deg, rgba(8, 14, 20, .96), rgba(8, 14, 20, .55)) !important;
+  border-bottom: 0 !important;
+}
+body #overlay .battle-stage.sts.battle-sts > .sts-topbar::before {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: linear-gradient(90deg, var(--bx-gold) 0%, rgba(240, 214, 138, .25) 46%, transparent 62%);
+  opacity: .85; pointer-events: none;
+}
+body #overlay .battle-stage.sts.battle-sts .sts-encounter-kicker {
+  color: var(--bx-gold); font-weight: 700; letter-spacing: .22em;
+}
+body #overlay .battle-stage.sts.battle-sts .sts-encounter b {
+  font-size: 26px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: .04em;
+}
+body #overlay .battle-stage.sts.battle-sts .sts-encounter > span:last-child {
+  padding: 3px 14px; border: 1px solid rgba(240, 214, 138, .55); border-radius: 0;
+  clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px);
+  background: rgba(240, 214, 138, .1); color: var(--bx-gold);
+  font-size: 15px; font-weight: 700; letter-spacing: .12em;
+}
+body #overlay .battle-stage.sts.battle-sts[data-battle-state="foe"] .sts-encounter > span:last-child {
+  border-color: rgba(255, 106, 85, .65); background: rgba(255, 106, 85, .1); color: #ff8a74;
+}
+body #overlay .battle-stage.sts.battle-sts[data-battle-state="focus"] .sts-encounter > span:last-child {
+  border-color: rgba(127, 216, 232, .6); background: rgba(127, 216, 232, .1); color: var(--bx-cyan);
+}
+body #overlay .battle-stage.sts.battle-sts[data-battle-state="warn"] .sts-encounter > span:last-child {
+  border-color: rgba(232, 180, 90, .6); background: rgba(232, 180, 90, .1); color: #e8b45a;
+}
+body #overlay .battle-stage.sts.battle-sts .sts-options summary {
+  border: 1px solid var(--bx-line); background: rgba(13, 24, 34, .85);
+  clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 0 100%);
+}
+body #overlay .battle-stage.sts.battle-sts .sts-options-menu {
+  background: var(--bx-panel); border: 1px solid var(--bx-line);
+}
+
+/* ── R2 战场讯标：默认（我方行动教学）耳语化；真实状态=金左缘档案签 ── */
+body #overlay .battle-stage.sts.battle-sts .sts-arena-caption {
+  top: 12px; padding: 4px 16px 4px 12px; border: 0; border-radius: 0;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  background: linear-gradient(90deg, rgba(240, 214, 138, .92) 0 3px, rgba(10, 16, 22, .84) 3px);
+  box-shadow: none;
+}
+body #overlay .battle-stage.sts.battle-sts .sts-arena-caption span { color: #dbe4e8; font-size: 16px; }
+body #overlay .battle-stage.sts.battle-sts[data-battle-state="self"] .sts-arena-caption {
+  padding: 2px 10px; clip-path: none; background: none; opacity: .45;
+}
+body #overlay .battle-stage.sts.battle-sts[data-battle-state="self"] .sts-arena-caption span {
+  font-size: 13px; letter-spacing: .06em;
+}
+
+/* ── R3 单位档案牌：对角硬切角面板 + 左缘 3px 身份条（我=青、敌=红），
+   名字加重、攻徽中性化、血条收窄重上色、季度刻度隐去 ── */
+body #overlay .battle-stage.sts.battle-sts .sts-nameplate,
+body #overlay .battle-stage.sts.battle-sts .sts-foe:not(.dead) .sts-nameplate,
+body #overlay .battle-stage.sts.battle-sts[data-boss='1'] .sts-arena .sts-foe .sts-nameplate {
+  border: 0 !important; border-radius: 0;
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 12px);
+  background: linear-gradient(180deg, var(--bx-panel-2), var(--bx-panel)) !important;
+  box-shadow: none !important; position: relative !important;
+}
+body #overlay .battle-stage.sts.battle-sts .sts-nameplate::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: linear-gradient(180deg, #8fe0ea, #2f8ea3);
+}
+body #overlay .battle-stage.sts.battle-sts .sts-foe .sts-nameplate::before,
+body #overlay .battle-stage.sts.battle-sts[data-boss='1'] .sts-arena .sts-foe .sts-nameplate::before {
+  background: linear-gradient(180deg, #ff8a6e, #c94f43);
+}
+body #overlay .battle-stage.sts.battle-sts .sts-headrow b {
+  font-size: 22px; font-weight: 800; letter-spacing: .02em; color: #f2f6f7;
+}
+body #overlay .battle-stage.sts.battle-sts .sts-atkbadge {
+  color: #b9c9d1; font-variant-numeric: tabular-nums; font-size: 18px;
+}
+body #overlay .battle-stage.sts.battle-sts .sts-hp {
+  height: 20px !important; min-height: 20px !important; max-height: 20px !important;
+  border: 0 !important; border-radius: 0 !important; background: rgba(6, 12, 18, .9) !important;
+}
+body #overlay .battle-stage.sts.battle-sts .sts-hp span {
+  font-size: 17px !important; font-weight: 700; text-shadow: 0 1px 2px #000;
+}
+body #overlay .battle-stage.sts.battle-sts .sts-me .sts-nameplate .sts-hp i.sts-hp-main,
+body #overlay .battle-stage.sts.battle-sts .sts-ally .sts-nameplate .sts-hp i.sts-hp-main {
+  background: linear-gradient(90deg, #2f9cb8, #8fe0ea) !important;
+}
+body #overlay .battle-stage.sts.battle-sts .sts-foe .sts-nameplate .sts-hp i.sts-hp-main {
+  background: linear-gradient(90deg, #c94f43, #ff9070) !important;
+}
+
+/* ── R4 意图章：平行四边形危险告示（红体+红数字），冻结换青；
+   章下渐隐发丝线锚回单位 ── */
+body #overlay .battle-stage.sts.battle-sts .sts-intent { position: relative; }
+body #overlay .battle-stage.sts.battle-sts .sts-intent::after {
+  content: ''; position: absolute; top: 100%; left: 50%; width: 1px; height: 12px;
+  margin-top: 5px; pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 106, 85, .55), transparent);
+}
+body #overlay .battle-stage.sts.battle-sts .bt-intent-part {
+  clip-path: polygon(9px 0, 100% 0, calc(100% - 9px) 100%, 0 100%);
+  border: 0; min-height: 42px; padding: 7px 14px;
+  background: linear-gradient(90deg, rgba(255, 99, 74, .95) 0 3px, rgba(28, 13, 11, .94) 3px);
+  color: #ffd9cf; font-size: 24px; font-weight: 800; font-variant-numeric: tabular-nums;
+}
+body #overlay .battle-stage.sts.battle-sts .bt-intent-part + .bt-intent-part { border: 0; margin-left: 6px; }
+body #overlay .battle-stage.sts.battle-sts .bt-intent-part[data-intent-kind='frozen'] {
+  background: linear-gradient(90deg, rgba(127, 216, 232, .95) 0 3px, rgba(10, 24, 30, .94) 3px);
+  color: #d9f4f8;
+}
+body #overlay .battle-stage.sts.battle-sts .bt-intent-part .ic { width: 26px; height: 26px; }
+
+/* ── R5 底部指挥台：连续深色台面 + 顶缘金封条 + 斜纹工业质感（静态） ── */
+body #overlay .battle-stage.sts.battle-sts .sts-hud {
+  background: linear-gradient(180deg, rgba(7, 12, 18, 0), rgba(7, 13, 19, .62) 30%, rgba(6, 11, 16, .97) 80%);
+}
+body #overlay .battle-stage.sts.battle-sts .sts-hud::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 2px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(240, 214, 138, .55) 16%, rgba(240, 214, 138, .9) 50%, rgba(240, 214, 138, .55) 84%, transparent);
+  opacity: .5;
+}
+body #overlay .battle-stage.sts.battle-sts .sts-hud::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 110px;
+  pointer-events: none;
+  background: repeating-linear-gradient(115deg, rgba(255, 255, 255, .03) 0 1px, transparent 1px 26px);
+}
+
+/* ── R6 能量核心：青色辉光六边核 + 金色瞄准角框（二游 lock-on 记号） ── */
+body #overlay .battle-stage.sts.battle-sts .sts-energy {
+  background: radial-gradient(95% 95% at 50% 28%, #46a2bc 0%, #153746 72%);
+  box-shadow: inset 0 0 0 1px rgba(158, 224, 236, .7), inset 0 0 0 6px rgba(158, 224, 236, .12);
+  filter: drop-shadow(0 10px 16px rgba(4, 16, 24, .6));
+}
+body #overlay .battle-stage.sts.battle-sts .sts-energy b {
+  font-size: 52px; color: #eafcff;
+  text-shadow: 0 0 16px rgba(127, 216, 232, .5), 0 2px 4px rgba(0, 0, 0, .55);
+}
+body #overlay .battle-stage.sts.battle-sts .sts-energy span { color: #8fc3cf; font-size: 21px; }
+body #overlay .battle-stage.sts.battle-sts .battle-energy-label {
+  color: #9fc3cd; font-size: 15px; font-weight: 700; letter-spacing: .4em; text-indent: .4em;
+}
+body #overlay .battle-stage.sts.battle-sts .sts-energy-wrap::before {
+  content: ''; position: absolute; left: 50%; bottom: -3px; transform: translateX(-50%);
+  width: 150px; height: 116px; pointer-events: none;
+  background:
+    linear-gradient(var(--bx-gold), var(--bx-gold)) left top / 16px 2px,
+    linear-gradient(var(--bx-gold), var(--bx-gold)) left top / 2px 16px,
+    linear-gradient(var(--bx-gold), var(--bx-gold)) right top / 16px 2px,
+    linear-gradient(var(--bx-gold), var(--bx-gold)) right top / 2px 16px,
+    linear-gradient(var(--bx-gold), var(--bx-gold)) left bottom / 16px 2px,
+    linear-gradient(var(--bx-gold), var(--bx-gold)) left bottom / 2px 16px,
+    linear-gradient(var(--bx-gold), var(--bx-gold)) right bottom / 16px 2px,
+    linear-gradient(var(--bx-gold), var(--bx-gold)) right bottom / 2px 16px;
+  background-repeat: no-repeat;
+  opacity: .85;
+}
+
+/* ── R7 战术技能件：左上斜切家族（动作指向敌方），青左缘换金系图标条 ── */
+body #overlay .battle-stage.sts.battle-sts .bt-slam-btn {
+  clip-path: polygon(16px 0, 100% 0, 100% 100%, 0 100%);
+  border: 0; padding: 12px 14px 12px 18px;
+  background: linear-gradient(90deg, rgba(127, 216, 232, .9) 0 3px, rgba(24, 48, 62, .96) 3px, rgba(12, 26, 36, .96) 100%);
+  color: #e8f4f6; font-size: 21px; font-weight: 700; letter-spacing: .06em;
+  box-shadow: 0 8px 18px rgba(4, 10, 16, .5);
+}
+body #overlay .battle-stage.sts.battle-sts .bt-slam-btn .battle-skill-cost { color: var(--bx-gold); }
+body #overlay .battle-stage.sts.battle-sts .bt-slam-btn.active {
+  background: linear-gradient(90deg, var(--bx-gold) 0 3px, rgba(64, 58, 34, .96) 3px, rgba(36, 32, 20, .96) 100%);
+  box-shadow: inset 0 0 0 2px rgba(240, 214, 138, .8), 0 8px 18px rgba(4, 10, 16, .5);
+}
+body #overlay .battle-stage.sts.battle-sts .bt-hand-page {
+  border: 1px solid var(--bx-line); border-radius: 0; background: rgba(13, 24, 34, .92);
+  width: 100%; text-align: center;
+}
+
+/* ── R8 结束回合：斜切宣示主钮（金底墨字、加重字距），敌 方阶段灰阶退让 ── */
+body #overlay .battle-stage.sts.battle-sts .sts-end-turn {
+  clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%);
+  border: 0; border-bottom: 0; min-height: 80px; padding: 14px 18px;
+  background: linear-gradient(115deg, #f8e7b0, #d9b26a 80%);
+  color: #241a08; font-size: 25px; font-weight: 800;
+  letter-spacing: .18em; text-indent: .18em;
+  box-shadow: 0 10px 22px rgba(4, 10, 16, .5);
+}
+body #overlay .battle-stage.sts.battle-sts .sts-end-turn:hover:not(:disabled) {
+  background: linear-gradient(115deg, #fff3c8, #e6c078 80%);
+  color: #241a08; border-color: transparent;
+  box-shadow: 0 12px 26px rgba(4, 10, 16, .55);
+}
+body #overlay .battle-stage.sts.battle-sts .sts-end-turn:disabled { opacity: .42; }
+body #overlay .battle-stage.sts.battle-sts .sts-tactics-secondary .ov-btn {
+  clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%);
+  border: 0 !important;
+  background: linear-gradient(90deg, rgba(240, 214, 138, .85) 0 2px, rgba(13, 24, 34, .94) 2px) !important;
+  color: #cfdae2;
+}
+
+/* ── R9 牌堆徽章：对角切角档案章，金数值 + 冷灰归属小签 ── */
+body #overlay .battle-stage.sts.battle-sts .bt-pile {
+  clip-path: polygon(9px 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%, 0 9px);
+  border: 0; background: var(--bx-panel); box-shadow: none;
+}
+body #overlay .battle-stage.sts.battle-sts .bt-pile b { color: #f4e2a5; font-size: 24px; }
+body #overlay .battle-stage.sts.battle-sts .bt-pile-cap { color: #93a9b4; }
+
+/* ── R10 注能条与手牌：注能=金左缘档案横条；同名堆叠章=金签；
+   悬停聚焦（其余牌退后一档）沿用上一版结论 ── */
+body #overlay .battle-stage.sts.battle-sts > .bt-infuse {
+  border: 1px solid var(--bx-line); border-left: 3px solid var(--bx-gold); border-radius: 0;
+  background: var(--bx-panel); color: #e8eff2;
+}
+body #overlay .battle-stage.sts.battle-sts > .bt-infuse b { color: var(--bx-gold); }
+body #overlay .battle-stage.sts.battle-sts .sts-hand .bt-count {
+  background: rgba(13, 24, 34, .94); color: #f4e2a5;
+  border: 1px solid rgba(240, 214, 138, .45); border-radius: 0;
+  font-variant-numeric: tabular-nums;
+}
+body #overlay .battle-stage.sts.battle-sts .sts-hand .bt-card {
+  transition: transform .16s ease, opacity var(--bt-fast, .18s cubic-bezier(.33, 1, .68, 1));
+}
+body #overlay .battle-stage.sts.battle-sts .sts-hand:has(.bt-slot:is(:hover, :focus-within)) .bt-slot:not(:is(:hover, :focus-within)):not(:has(.aim-lift)) .bt-card { opacity: .78; }

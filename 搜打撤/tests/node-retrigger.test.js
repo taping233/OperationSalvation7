@@ -34,7 +34,7 @@ window.AudioContext = window.AudioContext || class FakeAudioContext {
   createDynamicsCompressor() { return { connect: () => {}, disconnect: () => {}, threshold: {}, knee: {}, ratio: {}, attack: {}, release: {} }; }
   createBuffer() { return { numberOfChannels: 1, getChannelData: () => new Float32Array(8) }; }
   createBufferSource() { return { connect: () => {}, disconnect: () => {}, start: () => {}, stop: () => {}, buffer: null, loop: false }; }
-  createBiquadFilter() { return { connect: () => {}, disconnect: () => {}, type: '', frequency: { value: 0, setValueAtTime: () => {} }, Q: { value: 0 } }; }
+  createBiquadFilter() { return { connect: () => {}, disconnect: () => {}, type: '', gain: { value: 0 }, frequency: { value: 0, setValueAtTime: () => {} }, Q: { value: 0 } }; }
   createOscillator() { return { connect: () => {}, disconnect: () => {}, start: () => {}, stop: () => {}, type: '', frequency: { value: 0, setValueAtTime: () => {} } }; }
   decodeAudioData() { return Promise.resolve(this.createBuffer()); }
   resume() { return Promise.resolve(); }
@@ -62,14 +62,14 @@ const tick = (ms = 0) => new Promise(r => setTimeout(r, ms));
 
 const clickAct = (act) => {
   const el = document.querySelector(`[data-act="${act}"]`);
-  if (el) { el.click(); return true; }
+  if (el && !el.disabled && !el.closest('[hidden]')) { el.click(); return true; }
   return false;
 };
 async function sweep(max = 120) {
   for (let i = 0; i < max; i++) {
     await tick(30);
     if (game.state === 'idle') return;
-    for (const act of ['flowContinue', 'chestContinue', 'chestTake', 'chestTake1', 'chestPick', 'chestSkip', 'chestLeave', 'pickupGo', 'closeShop',
+    for (const act of ['flowContinue', 'chestContinue', 'chestTake', 'chestTake1', 'chestPick', 'chestSkip', 'chestLeave', 'chestSelect', 'pickupGo', 'closeShop',
       'blankSafeDone', 'evtNext', 'evtChoice', 'resTake', 'resSkip', 'nodeChestSearch', 'fireRestGo', 'fireDone', 'stayHere', 'goDoor']) {
       if (clickAct(act)) break;
     }

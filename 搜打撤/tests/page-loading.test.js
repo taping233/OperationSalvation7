@@ -60,14 +60,20 @@ describe('shared page loading cover', () => {
     expect(document.querySelector('.page-loading')).toBeNull();
   });
 
-  it('releases shortcuts as soon as content is ready, before the cover finishes fading', async () => {
+  it('releases shortcuts once the destination first frame is ready, before the cover finishes fading', async () => {
     const pending = runPageLoading({ title: '照相馆', detail: '', open: vi.fn() });
     await vi.advanceTimersByTimeAsync(32);
+    const mounted = new KeyboardEvent('keydown', { key: 'Enter', cancelable: true });
+    window.dispatchEvent(mounted);
+    expect(mounted.defaultPrevented).toBe(true);   // 挂载后仍护键：等待目标首帧视觉就绪
+    await vi.advanceTimersByTimeAsync(64);         // 视觉就绪检查（无 ovBody 立即放行）+ 一帧
     const key = new KeyboardEvent('keydown', { key: 'Enter', cancelable: true });
     window.dispatchEvent(key);
-    expect(key.defaultPrevented).toBe(false);
+    expect(key.defaultPrevented).toBe(false);      // 揭幕开始即放行，不等淡出结束
+    expect(document.querySelector('.page-loading').classList.contains('leaving')).toBe(true);
     await vi.runAllTimersAsync();
     await pending;
+    expect(document.querySelector('.page-loading')).toBeNull();
   });
 
   it('cancels a delayed destination without blocking a fresh request', async () => {
@@ -105,7 +111,7 @@ describe('shared page loading cover', () => {
     expect(document.querySelector('.page-loading-copy')).toBeNull();
     expect(document.querySelector('.camp-entry-cut')).toBeNull();
     mount('ready');
-    await vi.advanceTimersByTimeAsync(20);
+    await vi.advanceTimersByTimeAsync(48);   // 挂载后先过目标首帧视觉就绪，再揭幕一次
     expect(reveal).toHaveBeenCalledOnce();
     expect(document.querySelector('.camp-entry-cut')).not.toBeNull();
     expect(document.querySelector('.page-loading').classList.contains('leaving')).toBe(true);

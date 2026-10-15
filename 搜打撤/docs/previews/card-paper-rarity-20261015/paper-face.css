@@ -1,0 +1,48 @@
+/* Reading paper, painted divider, stamps and prismatic light share one card layer. */
+.gallery[hidden]{display:none}
+.board-tabs{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.board-tabs button{font:inherit;font-size:13px;padding:10px 18px;background:none;color:#acb8c3;border:1px solid #69778170;border-radius:3px;cursor:pointer}
+.board-tabs button[aria-pressed=true]{color:#253442;background:#d5c8a6;border-color:#d5c8a6}
+.dense .copy{padding-top:23px}
+.dense .copy h2{font-size:20px;margin:4px 0 9px}
+.dense .copy p{font-size:13px;line-height:1.55}
+.dense .ink-strokes{display:none}
+.sample[data-frame=career-xingyue] .quality-seal{background:#292722;color:#f1ce50}
+.sample{--pigment:#535659;--wash:#b9b9ae;--pale:#e1dfd4}
+.sample[data-rarity=common]{--pigment:#716048;--wash:#a58b62;--pale:#dfd0b8}
+.sample[data-rarity=rare]{--pigment:#235682;--wash:#347cc0;--pale:#bbd4eb}
+.sample[data-rarity=epic]{--pigment:#674087;--wash:#9250b9;--pale:#d5bde4}
+.sample[data-rarity=legendary]{--pigment:#805511;--wash:#c79824;--pale:#ead49a}
+.sample[data-rarity=prism]{--pigment:#694d86;--wash:#998cc9;--pale:#dccde6}
+.sample[data-rarity=token]{--pigment:#3f6c67;--wash:#82a6a0;--pale:#cadbd4}
+.sample[data-rarity=career]{--pigment:#35445e;--wash:#596d92;--pale:#c4cfdd}
+.card{background:#ded9cb;border-radius:0}
+.copy{position:relative;padding:28px 13px 14px;border:0;background:#e1ddcf url('../../../game/art-source/card-paper-rarity-20261015/interior.png') center/cover;color:#34383b;z-index:1}
+.copy:before{content:'';position:absolute;top:-3px;left:-2px;right:-2px;height:10px;background:var(--wash);opacity:.85;clip-path:polygon(0 20%,18% 0,33% 30%,52% 4%,67% 22%,86% 0,100% 25%,97% 90%,70% 74%,54% 100%,34% 74%,12% 96%,0 65%)}
+.copy h2{color:var(--pigment);margin:7px 0 13px;font-size:22px}
+.copy p{color:#383e42;font-size:14px;line-height:1.75}
+.copy b{color:var(--pigment)}
+.ink-strokes{display:block;width:48px;height:8px;background:var(--wash);opacity:.7;transform:rotate(-3deg);margin:13px auto 0;clip-path:polygon(0 32%,12% 0,60% 22%,96% 0,100% 45%,71% 68%,55% 100%,18% 70%,0 94%)}
+.type{position:absolute;left:50%;top:53%;transform:translate(-50%,-50%) rotate(-1deg);z-index:5;min-width:82px;padding:5px 17px;color:var(--pigment);font-size:12px;font-weight:700;letter-spacing:3px;border:0;background:var(--pale) url('../../../game/art-source/card-paper-rarity-20261015/interior.png') center/cover;box-shadow:0 2px 1px #292f352b;clip-path:polygon(2% 6%,29% 0,59% 6%,97% 0,100% 38%,97% 95%,68% 100%,31% 94%,0 100%,1% 60%)}
+.type:after{content:'';position:absolute;bottom:3px;left:13px;right:13px;height:2px;background:var(--wash);opacity:.85;transform:rotate(-1deg)}
+.quality-seal{position:absolute;top:13px;right:10px;z-index:5;background:var(--wash);color:#fff6e8;font-size:13px;font-weight:700;padding:5px 10px;letter-spacing:1px;transform:rotate(4deg);clip-path:polygon(1% 7%,23% 0,63% 5%,97% 0,100% 90%,72% 100%,37% 94%,0 100%)}
+.quality-seal span{font-size:16px;vertical-align:-1px}
+[data-rarity=initial] .quality-seal{color:#515454;background:#dad7ca;padding:3px 8px;font-weight:400}
+[data-rarity=common] .quality-seal{background:#d5c5a8;color:#675436}
+[data-rarity=token] .quality-seal{color:#3d6864;background:#c6d6cd;outline:1px dashed #638780;outline-offset:-3px}
+[data-rarity=epic] .quality-seal{transform:rotate(-5deg);padding:6px 13px}
+[data-rarity=legendary] .quality-seal{color:#513609;background:#dab957;padding:6px 13px}
+[data-rarity=prism] .quality-seal{background:linear-gradient(115deg,#bedcda,#e0bfd2 47%,#c0c1e2);color:#61496b;padding:6px 13px}
+.cost{background:#dfdbc9 url('../../../game/art-source/card-paper-rarity-20261015/interior.png') center/cover;color:var(--pigment);border:0;clip-path:polygon(4% 0,95% 4%,100% 58%,92% 100%,42% 96%,0 100%,2% 31%);box-shadow:none;transform:rotate(-3deg);width:35px;height:43px;left:-6px;top:-3px}
+.cost:after{content:'';position:absolute;bottom:5px;left:6px;right:6px;height:3px;background:var(--wash);opacity:.85}
+.frame-only :is(.type,.quality-seal,.prism-sheen){visibility:hidden}
+.frame-only .card{background:none}
+[data-rarity=prism] .frame{filter:drop-shadow(0 0 4px #a9dfff99) drop-shadow(0 0 8px #c1a8ed66)}
+[data-rarity=prism] .copy h2{color:transparent;background:linear-gradient(105deg,#8860ac,#ae667d 25%,#397c82 45%,#5472ab 68%,#965f9a 85%,#8860ac);background-size:180% 100%;background-clip:text;-webkit-background-clip:text;animation:paper-prism-title 7s ease-in-out infinite alternate}
+.prism-halo{position:absolute;z-index:3;background:conic-gradient(from 20deg,#f6b8dc,#efd99e,#9de7c9,#9ccaf3,#c1a5f1,#f6b8dc);mask:var(--frame-image) center/100% 100% no-repeat;-webkit-mask:var(--frame-image) center/100% 100% no-repeat;opacity:.72;filter:blur(3px);animation:paper-prism-halo 6s ease-in-out infinite alternate;pointer-events:none}
+.prism-sheen{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none}
+.prism-sheen:before{content:'';position:absolute;top:-15%;left:-110%;width:70%;height:130%;background:linear-gradient(90deg,transparent,#edc3f22e 30%,#e8f7f85c 50%,#bbdafa25 70%,transparent);transform:skewX(-22deg);animation:paper-prism-sheen 7s ease-in-out infinite}
+@keyframes paper-prism-title{to{background-position:100% 50%}}
+@keyframes paper-prism-halo{to{filter:blur(4px) hue-rotate(45deg);opacity:.45}}
+@keyframes paper-prism-sheen{55%,100%{left:155%}}
+@media(prefers-reduced-motion:reduce){[data-rarity=prism] .copy h2,.prism-halo,.prism-sheen:before{animation:none}.prism-sheen:before{left:20%;opacity:.4}}

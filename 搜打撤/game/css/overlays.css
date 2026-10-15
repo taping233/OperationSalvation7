@@ -23,7 +23,7 @@
   .pk-list.pk-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px; align-content: start; max-height: calc(var(--game-layout-height, 100vh) * 0.46); }
   .pk-card { position: relative; display: flex; justify-content: center; }
-  .pk-card .hs-card { width: 10em; height: 14em; font-size: clamp(9px, calc(var(--game-layout-width, 100vw) * 0.008199999999999999), 11px); max-width: 100%; }
+  .pk-card .hs-card { width: 10em; font-size: clamp(9px, calc(var(--game-layout-width, 100vw) * 0.008199999999999999), 11px); max-width: 100%; }
   .pk-card .pk-tag { position: absolute; left: 3px; right: 3px; bottom: 3px; z-index: 5; text-align: center;
     font-size: 10px; letter-spacing: .05em; color: #f0c9c9; background: rgba(28,10,10,.82);
     border: 1px solid rgba(198,96,96,.5); border-radius:0; padding: 1px 0; pointer-events: none; }
@@ -113,9 +113,6 @@
     box-shadow: 0 2px 5px rgba(0,0,0,.5), 0 0 8px rgba(90,177,220,.55); }
   .bt-cost1.cost-mod.mod-up   { background: linear-gradient(180deg, #c7513f, #7c2418); border-color: #551710;
     box-shadow: 0 2px 5px rgba(0,0,0,.5), 0 0 8px rgba(255,110,80,.55); }
-  .hsc-cost.cost-mod { color: #ffffff; }
-  .hsc-cost.cost-mod.mod-down { background: #464c51 !important; box-shadow: 0 0 8px rgba(90,177,220,.65); }
-  .hsc-cost.cost-mod.mod-up   { background: #a03d2d !important; box-shadow: 0 0 8px rgba(255,110,80,.65); }
   /* 需求 #15：手牌上的「注能」角标——点击进入注能流程（直接点卡则不注能打出） */
   .bt-infchip { position: absolute; z-index: 5; right: -6px; bottom: -6px; display: inline-flex; align-items: center; gap: 3px;
     padding: 3px 8px; border-radius: 999px; font-size: 10.5px; font-weight: 800; color: #ffeba8;

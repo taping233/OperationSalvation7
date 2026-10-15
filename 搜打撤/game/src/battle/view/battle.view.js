@@ -76,7 +76,7 @@ function layoutBattleScenery() {
   sceneryFront.style.top = `${a.top - overlay.top + y * sy}px`;
   sceneryFront.style.width = `${width * sx}px`; sceneryFront.style.height = `${height * sy}px`;
   // HUD 本身可透明且零高；只为实际可见控件开孔，保留其余前景覆盖地面。
-  const protectedNodes = sceneryStage.querySelectorAll('.sts-topbar, .sts-nameplate, .sts-intent, .sts-arena-caption, .bt-potions, .bt-infuse, .bt-card, .bt-hand-inspect, .sts-energy-wrap, .sts-hand-tools, .sts-tactics, .bt-fpreview, .bt-thought-bubble, .sts-unit.can-target, #aimArrow');
+  const protectedNodes = sceneryStage.querySelectorAll('.sts-topbar, .sts-nameplate, .sts-intent, .sts-arena-caption, .bt-potions, .bt-infuse, .bt-card, .sts-energy-wrap, .sts-hand-tools, .sts-tactics, .bt-fpreview, .bt-thought-bubble, .sts-unit.can-target, #aimArrow');
   const holes = [...protectedNodes].map(node => {
     const r = uiRect(node);
     const padding = node.matches('.sts-unit.can-target') ? 10 : 4;

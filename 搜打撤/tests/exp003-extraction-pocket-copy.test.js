@@ -6,7 +6,7 @@ import { RULE_CONFIG } from '../game/src/core/rule-config.js';
 // 与结算规则（game/src/hub/extraction.commands.js:56-63 逐张 random()<1/3，
 // 保留的进基地口袋用钥匙复原、未保留的散失）不符=欺骗玩家。本文件锁定准确文案。
 const altar = readFileSync('game/src/run/game.run.altar.js', 'utf8');
-const bag = readFileSync('game/src/hub/game.bag.js', 'utf8');
+const bag = readFileSync('game/src/hub/game.bag.js', 'utf8') + readFileSync('game/src/hub/game.bag.view2.js', 'utf8');
 const session = readFileSync('game/src/run/game.session.js', 'utf8');
 
 describe('EXP-003 撤离消耗口袋文案与规则一致', () => {
@@ -36,7 +36,7 @@ describe('EXP-003 撤离消耗口袋文案与规则一致', () => {
     expect(bag).not.toContain('免费复原');
     expect(bag).not.toContain('基地/火堆可复原');
     expect(bag).toContain('撤离时每张仅 1/3 概率带回基地口袋（用钥匙复原）');
-    expect(bag).toContain('火堆可复原；撤离每张仅 1/3 概率带回基地');
+    expect(bag).toContain('火堆休整复原 2 张 / 能源结晶 3 张 · 撤离每张 1/3 概率带回口袋');
   });
 
   it('准确表述不被回归：结算日志与出发清空提示保持原口径', () => {

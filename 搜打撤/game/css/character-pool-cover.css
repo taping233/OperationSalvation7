@@ -68,7 +68,6 @@
 #overlay .card.page .pg.cls-pool-page .pool-rarity-tag.prism { background: linear-gradient(#f3f3f3,#f3f3f3) padding-box,linear-gradient(100deg,#d3a6a2,#e1ca7f,#a6abaf,#aeb3b7) border-box; border-color: transparent; color: #555c62; }
 #overlay .card.page .pg.cls-pool-page .pool-card-button { display: block; width: min(100%,170px); max-width: 100%; margin: 0; padding: 0; border: 2px solid transparent; border-radius: 0; background: none; overflow: visible; box-shadow: 2px 3px 0 #2d313429; }
 #overlay .card.page .pg.cls-pool-page .pool-card-button .hs-card { margin: 0; font-size: 16px; }
-#overlay .card.page .pg.cls-pool-page .pool-card-button .hsc-art::after { box-shadow: none; }
 #overlay .card.page .pg.cls-pool-page .pool-card-button.lib-cardwrap:hover,
 #overlay .card.page .pg.cls-pool-page .pool-card-button.lib-cardwrap:focus-visible { transform: translateY(-2px); filter: none; border-color: #81878b; box-shadow: 2px 5px 0 #2d313433; }
 #overlay .card.page .pg.cls-pool-page .pool-card-button.selected { border-color: #c4ab58; box-shadow: 0 0 0 1px #c4ab5866,2px 4px 0 #baa04b40; }

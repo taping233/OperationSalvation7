@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-ship-pathspec-1013",
+  "date": "2026-10-13",
+  "owner": "Friday",
+  "goal": "修复workflow ship在Windows大批路径下git add/commit参数超限，保持only提交与冻结门语义",
+  "paths": [
+    "scripts/workflow-ship.mjs",
+    "tests/workflow-ship.test.js",
+    "docs/evidence/2026-10-13-WF-ship-pathspec-1013/",
+    "docs/PARALLEL-REGISTRY.md"
+  ],
+  "doneWhen": [
+    "大批路径可用受控pathspec输入提交且原计划一致性/钩子守卫不变",
+    "相关契约测试与语法lint通过"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "workflow-ship定向契约16项通过，覆盖超长路径与两笔提交",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "ESLint、语法、diff检查退出0；仅隔离临时仓提交",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "主仓大包提交尚未执行；打包任务继续分批归属与冻结门"
+  ],
+  "updatedAt": "2026-10-13T12:20:35.410Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

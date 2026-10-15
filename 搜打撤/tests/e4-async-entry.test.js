@@ -103,7 +103,10 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
     menu.startNewGame(); const request = handlers.enterSlot({ slot: 1 });
     expect(document.querySelector('.city-run-transition')).not.toBeNull();
     handlers.flowContinue(); await entered.promise;
-    expect(loadGame).not.toHaveBeenCalled(); gate.resolve(); await request;
+    expect(loadGame).not.toHaveBeenCalled(); gate.resolve();
+    // 续局首帧揭幕：160ms 布局兜底 + 220ms 揭幕定时器需推进后才完成恢复。
+    await vi.advanceTimersByTimeAsync(600);
+    await request;
     expect(loadGame).toHaveBeenCalledExactlyOnceWith(1);
   });
 
@@ -111,12 +114,12 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
     menu.startNewGame(); const request = handlers.enterSlot({ slot: 1 });
     handlers.flowContinue(); await entered.promise;
     menu.showTitle(); UI.log.mockClear(); UI.showOverlay.mockClear();
-    const page = document.getElementById('ovBody').innerHTML;
     gate[outcome](new Error('offline')); expect(await request).toBe(false);
     expect(loadGame).not.toHaveBeenCalled(); expect(UI.log).not.toHaveBeenCalled();
     expect(game.state).toBe('title');
     expect(UI.showOverlay).not.toHaveBeenCalled();
-    expect(document.getElementById('ovBody').innerHTML).toBe(page);
+    // 取消后 finally 即时收起自有的续局过场，不在标题页残留旧画面。
+    expect(document.querySelector('.city-run-transition')).toBeNull();
     expect(document.getElementById('slotRestoreError')).toBeNull();
   });
 
@@ -214,7 +217,10 @@ describe('选档消费 pending 选角就绪', () => {
     expect(UI.log.mock.calls.flat().join(' ')).not.toContain('已进入');
     await expect(handlers.enterSlot({ slot:1 })).resolves.toBe(false);
     expect(loadGame).toHaveBeenCalledOnce();
-    choice.resolve(true); await opening;
+    choice.resolve(true);
+    // 就绪后续局首帧揭幕含 160ms/220ms 定时器，推进后再等待完成。
+    await vi.advanceTimersByTimeAsync(600);
+    await opening;
     expect(UI.log.mock.calls.flat().join(' ')).toContain('已进入');
   });
   it.each(['failed', 'title', 'settings', 'new-run'])('未就绪结果按来源处理（%s）', async change => {

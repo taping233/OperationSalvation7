@@ -35,7 +35,7 @@ window.AudioContext = window.AudioContext || class FakeAudioContext {
   createDynamicsCompressor() { return { connect: () => {}, disconnect: () => {}, threshold: {}, knee: {}, ratio: {}, attack: {}, release: {} }; }
   createBuffer() { return { numberOfChannels: 1, getChannelData: () => new Float32Array(1) }; }
   createBufferSource() { return { connect: () => {}, disconnect: () => {}, start: () => {}, stop: () => {}, buffer: null, loop: false }; }
-  createBiquadFilter() { return { connect: () => {}, disconnect: () => {}, type: '', frequency: { value: 0, setValueAtTime: () => {} }, Q: { value: 1 } }; }
+  createBiquadFilter() { return { connect: () => {}, disconnect: () => {}, type: '', gain: { value: 0 }, frequency: { value: 0, setValueAtTime: () => {} }, Q: { value: 1 } }; }
   createOscillator() { return { connect: () => {}, disconnect: () => {}, start: () => {}, stop: () => {}, frequency: { value: 440, setValueAtTime: () => {} } }; }
   decodeAudioData() { return Promise.resolve(this.createBuffer()); }
   resume() { return Promise.resolve(); }
@@ -107,6 +107,8 @@ describe('INFRA-02 控制台快捷键页签跳转不再关掉目标页', () => {
     UI().act('originContinue', () => { continued += 1; });
     const toggle = repeat => window.dispatchEvent(new KeyboardEvent('keydown', { key:'l', ctrlKey:true, repeat, bubbles:true, cancelable:true }));
     for (const [index, tab] of ['debug', 'agent', 'data', 'keys'].entries()) {
+      // 整页 staged 揭幕的遮层会短暂阻断普通按键（Ctrl+L 在内）；等遮层退场再按（同 boot.test.js）。
+      await vi.waitFor(() => expect(document.querySelector('.page-visual-handoff')).toBeNull(), { timeout: 4000 });
       toggle(false);
       // 首次键盘入口按需装载；后续 warm toggle 保留即时 DOM 与原业务断言。
       if (index === 0) await vi.waitFor(() => expect(document.getElementById('devConsole')).not.toBeNull());

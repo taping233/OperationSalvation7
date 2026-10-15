@@ -1,4 +1,18 @@
 /* 节点确认与内容展开分开：短切幕只保留一次目的地名称。 */
+/* Resume keeps the destination covered until restoration and its first map frame finish. */
+#overlay .flow-transition.city-run-transition.resume-hold { background:#10171b!important; }
+#overlay .city-run-transition.resume-hold .camp-entry-cut {
+  animation:resumeCutHold var(--city-run-duration,900ms) ease-out both!important;
+}
+#overlay .city-run-transition.resume-hold.resume-reveal { background:transparent!important; }
+#overlay .city-run-transition.resume-hold.resume-reveal .camp-entry-cut {
+  animation:resumeCutReveal 220ms cubic-bezier(.65,0,.2,1) both!important;
+}
+@keyframes resumeCutHold { from,to { transform:translate3d(0,0,0); clip-path:polygon(0 0,100% 0,100% 100%,0 100%); } }
+@keyframes resumeCutReveal {
+  from { transform:translate3d(0,0,0); clip-path:polygon(0 0,100% 0,100% 100%,0 100%); }
+  to { transform:translate3d(105%,0,0); clip-path:polygon(0 0,84% 0,100% 100%,0 100%); }
+}
 #overlay .card.scene:has(.expedition-cut) { width:100%; height:100%; max-width:none; max-height:none; padding:0; border:0; border-radius:0; background:#171c20; box-shadow:none; }
 #overlay .card.scene:has(.expedition-cut) > #ovTitle,
 #overlay .card.scene:has(.expedition-cut)::before,

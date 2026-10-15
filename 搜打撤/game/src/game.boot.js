@@ -5,6 +5,7 @@ import { TYPE_NAME } from './hub/game.notes.js';
 import { MAP } from './run/game.session.js';
 import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, game, hasRun, migrateOldSave, openLeaveMenu, openSettings, openTitleGuide, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './run/game.session.js';
 import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openDevConsole, reenterCell, openClassChoice, openShop, showRunTransition, resumeChestsOnCell } from './run/game.run.js';
+import { entrySupplyGate } from './run/node-reward-state.js';
 import { devToolsLoading, cancelPendingDevTools } from './run/game.run.dev-loader.js';
 import { PRELOAD_SCENES } from './run/game.run.data.js';
 import { resumeExtraction } from './run/game.run.altar.js';
@@ -222,9 +223,8 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
       }
     });
 
-    // 底栏背包按钮已删（2026-09-19）：入口收敛到全局浮动背包键与 B 快捷键
-    // #27 全局浮动背包键：对局中任何界面同位置开背包（战斗中 showBackpack 自动转战斗背包）
-    document.getElementById('bagBtnFloat')?.addEventListener('click', () => showBackpack());
+    // 底栏背包按钮已删（2026-09-19）；全局浮动背包键已删（2026-10-15 老板：背包页自带左上退出键）
+    // 背包入口=B 快捷键与各流程动作（resBag/chestOpenBag/entrySupplyBag 直调 bagSlots.showBackpack）
     document.getElementById('sidebar')?.addEventListener('click', e => {
       const routeButton = e.target.closest('.expedition-map-preview button');
       if (routeButton) {
@@ -405,6 +405,11 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     UI.refresh(game);
     renderScheduler.invalidate();
     const r = canvas.getBoundingClientRect();
+    if (entrySupplyGate(game)) {
+      UI.showTooltip(e.clientX - r.left, e.clientY - r.top, '入城节点 · 须先进入', ['点击脚下的入城节点，打开随行补给后再出发']);
+      UI.log('[[icon:door]] 先进入脚下的入城节点，再前往其他地点', 'warn');
+      return;
+    }
     UI.showTooltip(e.clientX - r.left, e.clientY - r.top, `${hoverInfo(n)[0]} · 暂不可达`, ['路线中间须为已知的空白或已完成节点']);
     UI.log('该节点没有可连续通行的已知路线', 'warn');
   }
@@ -538,10 +543,10 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     // 活动态走 rAF；静态地图只保留 4Hz 状态巡检，输入/状态变化由 invalidate() 立即唤醒。
     // 这样不仅停止 Canvas DrawCall，也停止高刷屏上 144/165Hz 的空主循环 JS 唤醒。
     const active = !battleBehind && (game.battleActive || game.state === 'moving');
-    // 镜头平滑追随仅在棋子移动中生效（指数趋近，帧率无关；大距离跳变直接贴合）。
+    // 路线事务由移动时钟驱动镜头；此处仅保留其他移动入口的旧追随。
     // 站立/拖拽时镜头完全归玩家：早先每帧无差别追随会把玩家拖拽的镜头拉回去，
     // 拖动观感失效（老板留言：地图无法正常拖动）。
-    const followCam = game.state === 'moving' && !game.camDragging && cam.frameMode === 'manual';
+    const followCam = game.state === 'moving' && !game.moveTarget?.cameraOwned && !game.camDragging && cam.frameMode === 'manual';
     if (followCam && cam && game.pos && (cam.cx !== game.pos.x || cam.cy !== game.pos.y)) {
       if (Math.abs(game.pos.x - cam.cx) + Math.abs(game.pos.y - cam.cy) > MAP.tile * 4) {
         cam.cx = game.pos.x; cam.cy = game.pos.y;

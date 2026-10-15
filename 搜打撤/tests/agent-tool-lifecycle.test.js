@@ -34,6 +34,8 @@ class ToolExit extends Error {
 
 // Execute the exact optimizer body with in-memory artifacts and a stub child.
 // No game startup, subprocess, LLM call, dependency install, or repository write.
+// agent-evolve.mjs 归一化产物路径到 path.resolve 的平台原生形态（Windows 带盘符），fixture 路径同规则。
+const fixturePath = (...parts) => path.resolve('/fixture', ...parts);
 function runOptimizer(result, { stale = false, produce = true } = {}) {
   const files = new Map();
   const output = [];
@@ -44,7 +46,7 @@ function runOptimizer(result, { stale = false, produce = true } = {}) {
   const records = Array.from({ length: 5 }, (_, i) => JSON.stringify({
     seed: 77001 + i, outcome: 'extract', maxLayer: 3,
   })).join('\n');
-  if (stale) files.set('/fixture/evolve/eval-g0/summary.json', summary);
+  if (stale) files.set(fixturePath('evolve/eval-g0/summary.json'), summary);
   const spawnSync = vi.fn((_executable, args) => {
     if (produce && result.status === 0 && !result.error && !result.signal) {
       const dir = args[args.indexOf('--out') + 1];
@@ -95,7 +97,7 @@ describe('Agent tool lifecycle contracts', () => {
     const run = runOptimizer(result, { stale: true, produce: false });
     expect(run.exitCode).toBe(3);
     expect(run.spawnSync).toHaveBeenCalledTimes(1);
-    expect(run.files.has('/fixture/evolve/best-weights.json')).toBe(false);
+    expect(run.files.has(fixturePath('evolve/best-weights.json'))).toBe(false);
     expect(run.output).toContain('异常停车');
   });
 
@@ -110,8 +112,8 @@ describe('Agent tool lifecycle contracts', () => {
     const run = runOptimizer({ status: 0 });
     expect(run.exitCode).toBe(0);
     expect(run.spawnSync).toHaveBeenCalledTimes(5);
-    expect(run.files.has('/fixture/evolve/best-weights.json')).toBe(true);
-    expect(run.files.has('/fixture/evolve/history.json')).toBe(true);
+    expect(run.files.has(fixturePath('evolve/best-weights.json'))).toBe(true);
+    expect(run.files.has(fixturePath('evolve/history.json'))).toBe(true);
   });
 
   it('retains the fresh terminal record when the recorder ring is already full', async () => {

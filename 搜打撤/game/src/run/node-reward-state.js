@@ -5,6 +5,7 @@ export function validEntrySupply(value) {
   return !!value && value.version === 1 && value.layerIdx === 0 && coordinate(value.trackPos)
     && ids(value.cardIds) && value.cardIds.length <= 2 && new Set(value.cardIds).size === value.cardIds.length
     && Array.isArray(value.taken) && new Set(value.taken).size === value.taken.length
+    && (value.entered === undefined || typeof value.entered === 'boolean')
     && value.taken.every(i => Number.isInteger(i) && i >= 0 && i < value.cardIds.length);
 }
 
@@ -16,6 +17,14 @@ export function createEntrySupply(game, cards) {
 export function entrySupplyAt(game) {
   const value = game.entrySupply;
   return validEntrySupply(value) && value.layerIdx === game.layerIdx && value.trackPos === game.trackPos ? value : null;
+}
+
+// 入城闸门（2026-10-15 老板规则）：未进入过入城补给格前，不能前往其他节点。
+// 「进入过」= 打开过补给页（entered）或已领过卡（旧档没有 entered 字段，用 taken 推断）；
+// 领不完全部卡不拦——补给本来允许留在入口，回头再领。
+export function entrySupplyGate(game) {
+  const supply = entrySupplyAt(game);
+  return !!supply && !supply.entered && !(supply.taken?.length || 0);
 }
 
 export function claimEntrySupply(game, { findCard, canReceive, newUid, index:onlyIndex = null }) {

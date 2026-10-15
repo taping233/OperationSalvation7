@@ -327,7 +327,6 @@
 }
 
 /* W5 消耗口袋卡：红色「无法使用」标签保留警示语义，纸面 retint 冷青 */
-#overlay .card.bag-page .pk-card .hs-card { box-shadow: 0 4px 12px rgba(7,7,8,.45); }
 #overlay .card.bag-page .pk-card .pk-tag {
   color: #ffd9cf;
   background: rgba(30,12,10,.85);
