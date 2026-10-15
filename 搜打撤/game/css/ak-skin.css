@@ -135,8 +135,8 @@ h1, h2, h3 { font-family: var(--font-ui); }
 
 /* —— 事件 / 节点 —— */
 #overlay .node-panel::before { background: linear-gradient(90deg, var(--ak-yellow) 0 64px, var(--ak-line) 64px); height: 3px; left: 0; right: 0; top: 0; width: auto; }
-#overlay .evt-opt { border-radius: 0; background: linear-gradient(100deg, rgba(34,38,43,.95), rgba(18,20,23,.95)); border: 1px solid var(--ak-line-hi); border-left: 4px solid var(--ak-white); clip-path: var(--ak-clip-sm); }
-#overlay .evt-opt:hover { border-left-color: var(--ak-blue); background: linear-gradient(100deg, rgba(31,178,255,.16), rgba(18,20,23,.95) 70%); }
+#overlay .evt-opt { border-radius: 0; }
+#overlay .evt-opt:hover { border-left-color: var(--ak-blue); }
 
 /* —— 战斗（杀戮尖塔式布局 + 方舟配色） —— */
 body #overlay .battle-stage.sts { background: var(--ak-tex-grid) 0 0 / 32px 32px, radial-gradient(ellipse at 50% 100%, rgba(31,178,255,.10), transparent 60%), linear-gradient(180deg, #14171a, #08090b); }

@@ -9,11 +9,8 @@
  * ============================================================ */
 #overlay .pg.data-tuned .data-pg-head { padding-top: 58px; padding-left: 96px; }
 /* cards.css 对 .card.page h2 一刀切 display:none——页名恢复沿用 page-settings S2c 同款先例 */
-#overlay .pg.data-tuned .data-pg-head h2 {
-  display: block; position: relative; margin: 0;
+#overlay .pg.data-tuned .data-pg-head h2 { position: relative;
   padding-left: 14px;
-  font-size: clamp(17px, calc(var(--game-layout-width, 100vw) * 0.017), 21px); letter-spacing: 6px; color: #f4f4f4;
-  text-shadow: 0 0 16px rgba(16,18,19,.8), 0 0 3px rgba(230,203,118,.28);
 }
 #overlay .pg.data-tuned .data-pg-head h2::before {
   content: ''; position: absolute; left: 0; top: 50%; width: 2px; height: 16px;
@@ -21,10 +18,8 @@
   background: linear-gradient(180deg, transparent, #e6cb76cc, transparent);
   box-shadow: 1px 0 6px #e6cb7640;
 }
-#overlay .pg.data-tuned .data-pg-head h2 .ic { filter: brightness(1.08) drop-shadow(0 0 4px rgba(230,203,118,.22)); }
-#overlay .pg.data-tuned .data-pg-head h2 { margin: 0; font-size: 20px; }
+#overlay .pg.data-tuned .data-pg-head h2 { font-size: 20px; }
 #overlay .pg.data-tuned .data-pg-head .pg-spacer { flex: 1; }
-#overlay .pg.data-tuned .ov-btns { display: flex; justify-content: flex-end; }
 #overlay .pg.data-tuned .ov-btns .ov-btn { flex: 0 0 auto; min-width: 150px; }
 /* W4-04：数据页页头双语节标（R1 自补） */
 #overlay .pg.data-tuned .data-pg-head .section-kicker { align-self: center; margin-right: 10px; letter-spacing: .2em; }

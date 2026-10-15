@@ -13,25 +13,22 @@
 
 /* ── T0 统一节奏变量：fast=色彩/光晕/小位移，lift=回弹过冲（快按慢弹），press=按下快进 ── */
 /* 探索信息层：目标有独立阅读行，路线名称与已知结果分级。 */
-body #sidebar #routePanel { display:grid; grid-template-rows:auto minmax(60px,1fr) auto; align-content:start; justify-content:stretch; gap:6px; padding:8px 12px; box-sizing:border-box; }
-body #sidebar #routePanel .route-heading { display:flex; flex-direction:column; align-items:flex-start; gap:4px; min-height:48px; margin:0; }
+body #sidebar #routePanel { display:grid; align-content:start; justify-content:stretch; box-sizing:border-box; }
+body #sidebar #routePanel .route-heading { display:flex; flex-direction:column; align-items:flex-start; min-height:48px; margin:0; }
 body #sidebar .route-title { font-size:16px; letter-spacing:.08em; color:#f1e2bc; text-shadow:none; }
 body #sidebar .route-objective { font-size:15px; line-height:1.45; color:#d1dade; letter-spacing:0; white-space:normal; overflow:visible; text-overflow:clip; max-width:none; }
-body #sidebar #routePanel .route-options { min-height:60px; margin:0; padding:4px 2px; align-items:stretch; }
-body #sidebar #routePanel { grid-column:3; grid-row:1 / span 2; }
+body #sidebar #routePanel .route-options { margin:0; padding:4px 2px; }
 
 /* 地图系统第一轮：连续行动台。空间在主图，身份与当前行动在同一稳定底栏。 */
 body:not(.lobby):not(.scene-battle-3d) #sidebar {
-  height:188px; min-height:188px; grid-template-columns:116px 138px minmax(0,1fr);
-  grid-template-rows:minmax(0,1fr); gap:20px; padding:16px 24px;
-  border-top:1px solid #869ba5; background:#14242dea;
-  box-shadow:0 -8px 24px #0a172144;
+  grid-template-rows:minmax(0,1fr);
+  border-top:1px solid #869ba5;
 }
 body:not(.lobby):not(.scene-battle-3d) #sidebar::before { content:none; }
 body #sidebar .panel { background:none; box-shadow:none; border:0; min-width:0; padding:0; }
 body #sidebar .panel::before { content:none; }
 body #sidebar #charPanel { align-items:center; justify-content:center; min-width:0; }
-body #sidebar #charPanel .hero-ava { position:relative; left:auto; bottom:auto; width:96px; min-width:96px; height:120px; border:1px solid #92a8b2; box-shadow:none; }
+body #sidebar #charPanel .hero-ava { position:relative; left:auto; bottom:auto; border:1px solid #92a8b2; box-shadow:none; }
 body #sidebar #charPanel .hero-ava::after { content:none; }
 body #sidebar #statsPanel { min-width:0; justify-content:center; padding:0 16px 0 0; border-right:1px solid #768c963d; }
 body #sidebar #miniMap { display:none; }
@@ -39,17 +36,16 @@ body #sidebar #statsPanel .stat-duo { flex-direction:column; align-items:flex-st
 body #sidebar #statsPanel .stat-duo label { font-size:14px; letter-spacing:.04em; color:#c6d2d8; }
 body #sidebar #statsPanel .stat-duo b { font-size:22px; }
 body #sidebar #devPanel { display:none; }
-body #sidebar #routePanel { grid-column:3; grid-row:1; padding:0; background:none; box-shadow:none; }
+body #sidebar #routePanel { grid-column:3; grid-row:1; }
 body #sidebar #routePanel .route-heading { border:0; padding:0; }
 body #sidebar #routePanel .route-title::before { content:none; }
-body #sidebar #routePanel .route-option { background:#243942; border:1px solid #7c929a; box-shadow:none; min-height:64px; padding:10px 14px; }
+body #sidebar #routePanel .route-option { background:#243942; border:1px solid #7c929a; box-shadow:none; padding:10px 14px; }
 body #sidebar #routePanel .route-option::after { content:none; }
 body #sidebar #routePanel .route-option.selected { background:#394e54; border-color:#ead39b; box-shadow:inset 3px 0 #ead39b; }
-body #sidebar #routePanel .route-help { border:0; padding:0; font-size:12px; }
+body #sidebar #routePanel .route-help { border:0; padding:0; }
 body:not(.scene-battle-3d) #bagBtnFloat { bottom:calc(188px + 12px)!important; }
 
 /* IS7第二轮修正版：地图中央 / 节点决策右侧 / 底部薄工具带。 */
-body:not(.lobby):not(.scene-battle-3d) #sidebar { height:116px; min-height:116px; grid-template-columns:90px 138px minmax(0,1fr); padding:12px 24px; gap:18px; }
 body #sidebar #charPanel .hero-ava { width:64px; min-width:64px; height:80px; }
 body #sidebar #routePanel { position:absolute; right:24px; bottom:calc(100% + 20px); width:340px; height:430px; padding:20px; background:#152831f5; border:1px solid #869da5; grid-template-rows:auto minmax(0,1fr) auto; gap:16px; box-shadow:0 12px 24px #0613193d; }
 body #sidebar #routePanel .route-heading { gap:10px; }
@@ -63,7 +59,7 @@ body #sidebar #routePanel .route-arrow::before { display:block; margin-bottom:6p
 body #sidebar #routePanel .route-option[data-direction="return"] .route-arrow::before { content:'回程'; }
 body #sidebar #routePanel .route-option[data-direction="deeper"] .route-arrow::before { content:'深入'; }
 body #sidebar #routePanel .route-help { flex-direction:column; gap:6px; font-size:13px; line-height:1.5; }
-body #sidebar .expedition-nav-summary { display:flex; flex-direction:column; justify-content:center; gap:6px; padding-right:230px; color:#d6e2e5; }
+body #sidebar .expedition-nav-summary { flex-direction:column; justify-content:center; color:#d6e2e5; }
 body #sidebar .expedition-nav-summary b { font-size:16px; }
 body #sidebar .expedition-nav-summary span { font-size:14px; }
 body #sidebar .expedition-nav-summary small { font-size:12px; color:#adbec5; }

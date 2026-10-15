@@ -67,7 +67,7 @@
 /* 人物档案与收藏档案：与基地的深青金属骨架共用视觉语言。 */
 #overlay .hub-classes .hub-page,
 #overlay .hub-ach .hub-page { max-width:1420px; margin:0 auto; width:100%; }
-.section-kicker { display:block; margin-bottom:8px; color:var(--gold-main); font:700 10px/1.2 "Cascadia Code",monospace; letter-spacing:.2em; }
+.section-kicker { display:block; margin-bottom:8px; font:700 10px/1.2 "Cascadia Code",monospace; letter-spacing:.2em; }
 .class-command,
 .collection-command { display:flex; align-items:flex-end; justify-content:space-between; gap:28px; margin-bottom:16px; padding:20px 24px; border:1px solid rgba(195,199,202,.2); border-left:3px solid #e2c76c; background:linear-gradient(110deg,rgba(28,30,32,.96),rgba(16,17,18,.96)); box-shadow:0 14px 30px rgba(0,0,0,.18); }
 .class-command-copy,

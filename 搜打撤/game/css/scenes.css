@@ -593,9 +593,6 @@
   .battle-stage[data-asset-key="battle-boss-orc"] { background-image:var(--battle-winter-bg); }
   .battle-stage[data-asset-key="battle-boss-element"] { background-image:var(--battle-winter-bg); }
 
-  #overlay .scene[data-asset-key="scene-event-cobbler"] { background-image:url('../assets/scenes/event-cmtn7qttxqo4.webp'); }
-  #overlay .node-pg[data-asset-key="scene-event-cobbler"] { background-image:url('../assets/scenes/event-cmtn7qttxqo4.webp'); }
-
   #overlay :is(.scene,.node-pg)[data-asset-key="scene-event-vital"] { background-image:url('../assets/scenes/event-ev19-vital.webp'); }
   #overlay :is(.scene,.node-pg)[data-asset-key="scene-event-pearlbox"] { background-image:url('../assets/scenes/event-ev19-pearlbox.webp'); }
   #overlay :is(.scene,.node-pg)[data-asset-key="scene-event-fireballs"] { background-image:url('../assets/scenes/event-ev19-fireballs.webp'); }

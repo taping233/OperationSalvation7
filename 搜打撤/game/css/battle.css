@@ -284,16 +284,15 @@
   background:url('../assets/battle/energy-orb.webp') center/94% no-repeat,
     radial-gradient(circle at 50% 68%, rgba(46,38,18,.6), rgba(8,8,8,.78) 74%);
   color:#f0f0f0;
-  display:flex; align-items:center; justify-content:center; gap:2px;
+  display:flex; justify-content:center; gap:2px;
   box-shadow:0 0 26px rgba(246,219,129,.32), inset 0 -8px 14px rgba(0,0,0,.75), inset 0 5px 9px rgba(255,255,255,.14); }
 .sts-energy::before { content:''; position:absolute; inset:5px; border-radius:50%; pointer-events:none;
   border:1px solid rgba(255,255,255,.14); }
 .sts-energy b { text-shadow:0 1px 3px rgba(0,0,0,.92), 0 0 8px rgba(0,0,0,.7); }
 .sts-energy .ic { width:20px; height:20px; }
-.sts-energy b { font-size:30px; font-family:var(--cal); }
-.sts-energy span { font-size:13px; color:#a8a8a8; align-self:flex-end; margin-bottom:16px; }
-.sts-hand { flex:1; position:relative; display:flex; flex-wrap:nowrap; justify-content:center; align-items:flex-end;
-  min-height:188px; padding:26px 8px 4px; overflow:visible; }
+.sts-energy b { font-family:var(--cal); }
+.sts-energy span { align-self:flex-end; margin-bottom:16px; }
+.sts-hand { flex:1; position:relative; display:flex; flex-wrap:nowrap; justify-content:center; align-items:flex-end; overflow:visible; }
 /* 手牌分栏切换按钮（2026-09-10 留言 #27：一栏最多 12 叠，放不下的进第二栏）
    09-20 修：底栏实为 3 列 grid（expedition-battle.css sts-hud display:grid），本按钮
    未写坐标被 auto-placement 塞进隐式第 2 行溢出到屏幕外——显式钉回手牌列第 1 行贴底。
@@ -385,8 +384,7 @@
 .sts-energy { flex-direction:row; align-items:baseline; padding-top:12px; }
 .sts-energy b { font-size:30px; }
 .sts-energy span { font-size:13px; color:#a8a8a8; margin:0 0 1px 1px; }
-.sts-hand { min-height:216px; padding:34px 8px 4px; }
-.sts-hand .hs-card.sm { font-size:11px; }
+.sts-hand { padding:34px 8px 4px; }
 
 /* ============ v0.32.2 战斗特效 + 性能 ============ */
 /* 伤害/受击飘字（挂在 overlay 层，躲过 ovBody 整块重建） */

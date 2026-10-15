@@ -123,7 +123,6 @@
 #overlay .settings-tabbed .settings-panel-head p {
   color: #aab7c2; font-size: var(--home-ui-sub); margin: 0; line-height: 1.8;
 }
-#overlay .settings-tabbed .set-en { font-size: var(--home-ui-sub); letter-spacing: .12em; }
 #overlay .settings-tabbed .chk { font-size: var(--home-ui-copy); }
 /* 两侧信息区从各自方向展开，背景与点击区域保持既有布局。 */
 body #overlay#overlay#overlay#overlay[data-surface-layout="settings"] [data-surface-role="nav"] { --page-x: -20px; --page-y: 0px; }

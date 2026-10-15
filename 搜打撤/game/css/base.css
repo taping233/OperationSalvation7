@@ -139,7 +139,6 @@
     display: flex; flex-direction: row; align-items: stretch; padding: 10px 14px; gap: 12px;
     overflow-x: auto; overflow-y: visible; }
   #sidebar .panel { flex-shrink: 0; }
-  #charPanel { min-width: 300px; }
   #statsPanel { min-width: 230px; flex: 1 1 230px; }
   #devPanel { min-width: 210px; flex: 0 1 210px; }
 
@@ -366,7 +365,6 @@
     background: var(--inset); color: var(--txt); font: inherit; cursor: pointer; }
 
   .chk { display: flex; align-items: center; gap: 8px; font-size: 13px; padding: 3px 0; cursor: pointer; }
-  .chk input {  }
   .chk.vol input[type="range"] { flex: 1; min-width: 140px; cursor: pointer; }
   .chk.vol b { min-width: 3ch; text-align: right; font-size: 12px; font-family: inherit; }
   kbd { background: var(--ak-white); border: none; border-radius: 0; box-shadow: inset 0 -2px 0 #9aa0a4;

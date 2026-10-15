@@ -24,8 +24,7 @@
 #labEnding .lab-end-text.done .lab-end-cue { opacity: 1; }
 @keyframes labEndCue { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
 
-#labEnding .lab-end-skip { position: absolute; right: 24px; bottom: 20px; z-index: 5; padding: 8px 18px; border: 1px solid rgba(225,225,223,.4); background: rgba(0,0,0,.45); color: #e1e1df; font-size: 14px; letter-spacing: .08em; cursor: pointer; border-radius:0; transition: border-color .2s, color .2s; }
-#labEnding .lab-end-skip:hover { border-color: #ffd138; color: #ffd138; }
+#labEnding .lab-end-skip { position: absolute; right: 24px; bottom: 20px; z-index: 5; border: 1px solid rgba(225,225,223,.4); font-size: 14px; cursor: pointer; }
 
 /* ============================================================
  * 2026-09-25 二波 B 组（实验室结局）：字幕衬底 + 金点进度 + 跳过键制式

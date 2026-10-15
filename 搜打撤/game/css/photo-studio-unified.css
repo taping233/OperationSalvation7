@@ -196,8 +196,7 @@ body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-close:active {
 body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-hint {
   color:#c9c1a5;
   font:400 16px/1.5 var(--font-ui);
-  letter-spacing:.08em;
-  position:relative}
+  letter-spacing:.08em}
 body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-index {
   margin:0 0 10px;
   font:500 14px/1.5 var(--font-ui);
@@ -645,8 +644,7 @@ body.cardlib-open #overlay .studio-archive .studio-preview-empty .pv-hint { marg
 body.cardlib-open #overlay .studio-archive .studio-preview-copy {
   --su-ink:var(--sa-paper-ink); display:flex; flex-direction:column; flex:1 1 auto!important; min-height:0; color:var(--sa-paper-ink)!important; text-align:left; overflow:hidden; background:transparent !important; border:0; border-left:0; box-shadow:none; border-top:0; margin:0; padding:0 !important
 }
-body.cardlib-open #overlay .studio-archive .studio-dossier-scroll { min-height:0; overflow-y:auto; overflow-x:hidden; overscroll-behavior:contain; padding-right:5px; scrollbar-width:thin; scrollbar-color:#a79880 transparent; scroll-padding-block:8px; flex:1 1 auto; --studio-scroll-top:#927744cc; --studio-scroll-bottom:#705d45aa; --studio-scroll-rail:#8b77551a
-; --studio-scroll-hover-top:#80633ce6; --studio-scroll-hover-bottom:#6b5038d9}
+body.cardlib-open #overlay .studio-archive .studio-dossier-scroll { min-height:0; overflow-y:auto; overflow-x:hidden; overscroll-behavior:contain; padding-right:5px; scrollbar-width:thin; scrollbar-color:#a79880 transparent; scroll-padding-block:8px}
 body.cardlib-open #overlay .studio-archive .studio-preview-actions { flex:0 0 auto; border-top:0; margin-top:28px; padding-top:0
 }
 body.cardlib-open #overlay .studio-archive .studio-dossier-title { background:transparent;

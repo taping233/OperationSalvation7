@@ -19,7 +19,6 @@
 #overlay #hubMain.pg.hub.base-camp .courtyard-zzz .courtyard-v3-controls button { min-height:44px; padding:10px 12px; border:1px solid #d2e3e32e; border-radius:8px; color:#f0f4f3; background:#ffffff08; font:600 var(--base-type-body,22px)/1.4 var(--font-ui); cursor:pointer; transition:background 160ms,border-color 160ms; }
 #overlay #hubMain.pg.hub.base-camp .courtyard-zzz .courtyard-v3-controls button:hover:not(:disabled) { border-color:#9edce7; background:#9edce71c; }
 #overlay #hubMain.pg.hub.base-camp .courtyard-zzz .courtyard-v3-controls button[aria-pressed="true"] { border-color:#9edce7; background:#9edce71c; }
-#overlay #hubMain.pg.hub.base-camp .courtyard-zzz .courtyard-v3-controls button:disabled { opacity:.4; cursor:default; }
 #overlay #hubMain.pg.hub.base-camp .courtyard-zzz .courtyard-v3-controls .courtyard-v3-feed { color:#172a35; background:#e2c891; border-color:#e2c891; }
 #overlay #hubMain.pg.hub.base-camp .courtyard-zzz .courtyard-v3-settings { margin:0; width:100%; }
 #overlay #hubMain.pg.hub.base-camp .courtyard-zzz .courtyard-v3-settings summary { padding:12px 0; border-top:1px solid #d2e3e32e; color:#f0f4f3; font:600 var(--base-type-body,22px)/1.4 var(--font-ui); cursor:pointer; }

@@ -1,17 +1,16 @@
 /* Node rooms and extraction reports: one calm, legible result language. */
 #overlay .node-pg, #overlay .result-pg { background-color:#111214; color:#ebecec; }
-#overlay .node-panel { background:rgba(17,18,20,.55); border:1px solid rgba(234,210,130,.26); box-shadow:0 24px 80px rgba(0,0,0,.4); }
+#overlay .node-panel { box-shadow:0 24px 80px rgba(0,0,0,.4); }
 /* 2026-09-15 老板令：事件页排版统一——标题左缘与选项条对齐（原 padding 左右 28px 造成标题比选项缩进一截） */
 #overlay .node-panel .pg-head { padding:24px 0 18px; border-bottom:1px solid rgba(234,210,130,.22); }
 #overlay .node-panel .pg-head h2 { color:#ebecec; letter-spacing:.12em; }
 #overlay .node-panel .pg-head .sub { color:#b1b5b8; line-height:1.6; }
-#overlay .node-main { padding:24px 28px; }
 #overlay .node-summary { max-width:760px; width:100%; margin:0 auto; display:flex; flex-direction:column; gap:14px; }
 #overlay .node-summary .blank-safe-gain, #overlay .node-summary .bt-hand { background:rgba(28,30,32,.68); border:1px solid rgba(194,199,202,.15); padding:18px; }
 #overlay .node-summary .gain-big { color:#ead282; letter-spacing:.12em; }
 /* 事件页内金色强调（撤离结算 sub 的币数等）与面板金点缀同色（overlays 的 .gold 灰色在本壳不统一） */
 #overlay .node-pg .gold { color:#ead282; }
-#overlay .node-foot { padding:0 28px 24px; border-top:1px solid rgba(194,199,202,.12); }
+#overlay .node-foot { border-top:1px solid rgba(194,199,202,.12); }
 #overlay .node-foot .ov-btn.ok { background:#ead282; color:#17181a; border-color:#ead282; min-width:150px; }
 /* 09-25 二波 C 组：结算页「回基地」降为 secondary——winter 的 teal 实心（#2f3336）与
    主行动「再出发」金实心抢层级；改深蓝描边、hover 金线，成功（sc-exit）与失败（doom）结算同语义 */

@@ -175,7 +175,6 @@ body.reduce-motion .slot-page::before {
   pointer-events: none;
   background: linear-gradient(90deg, transparent, #e6cb76cc, transparent);
   opacity: .14;
-  transition: opacity .32s ease;
 }
 .slot-page .slot-card.filled::before { opacity: .42; }
 .slot-page .slot-card.slot-recent::before { opacity: .85; }

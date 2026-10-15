@@ -23,7 +23,7 @@
     & .warehouse-capacity { display:flex; align-items:center; gap:12px; }
     & .camp-page-stat { font-size:var(--base-type-label,19px); color:var(--camp-muted); }
     & .warehouse-categories-v7 { display:flex; flex-direction:row; align-self:flex-start; grid-column:auto; grid-row:auto; justify-content:flex-start; gap:4px; padding:4px; margin:0 0 4px; width:max-content; max-width:100%; border:1px solid #ffffff2a; border-radius:28px; background:#11171bba; }
-    & .warehouse-categories-v7 button { min-height:0; font-size:var(--base-type-body,22px); }
+    & .warehouse-categories-v7 button { min-height:0; }
     & .warehouse-categories-v7 button::before { content:none; }
     & .warehouse-categories-v7 button { display:flex; align-items:center; gap:8px; padding:10px 18px; border:0; border-radius:22px; background:transparent; color:#f1f4ee; font-size:var(--base-type-body,22px); cursor:pointer; }
     & .warehouse-categories-v7 button > span { font-size:var(--base-type-body,22px); line-height:1; }
