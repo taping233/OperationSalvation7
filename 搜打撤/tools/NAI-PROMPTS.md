@@ -9,6 +9,8 @@
 - 角色身份与 tag 口径：`docs/character-bible/`（每页只认「现行权威」段，历史段不拼入新配方）。
 - 历史查证：`.tmp/nai/`（不入库）与 `docs/archive/`；旧输出复现以当次 payload/manifest 为准，不用旧文案反改现行配方。
 
+网络与传输：老板已授权代号柒项目级公网访问，根 `.codex/config.toml` 启用工作区沙箱网络。新 Codex 沙箱中 `nai_gen.py` 默认用 Python requests 直连 NAI，000 时读取运行时 `HTTPS_PROXY` / `ALL_PROXY` 重试；旧环境确需 Windows curl 时显式设 `NAI_TRANSPORT=curl`。诊断 `HTTP 000` 先看传输错误，旧聊天沙箱可能仍用先前权限；新沙箱默认客户端 4.5 生图 HTTP 200 的请求、哈希与配置边界见[对照与网络诊断](../docs/evidence/2026-10-13-wu-nai45-prompt-compare/README.md)。所有生图继续走 `nai_gen` / `nai_guard`，不要手写请求绕过节流。
+
 2026-10-03 整理：画风原文仍来自 `nai_style.py`；新批次从 `nai_prompt_clean.py` 导入构建函数，后者只做兼容转发、负面词去重和透明战斗立绘用途分离。配方版本与整理器版本分别记录。
 
 ## 新批次

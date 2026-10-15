@@ -5,7 +5,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { planForPaths as selectPlan, reverseImports as readGraph, toProjectPath as normalizeProjectPath, packageJsonScriptsOnlyDiff, scriptsLocalRefs, isGateRelevantPath } from './gate-plan.mjs';
-import { parseUnclaimedPaths } from './registry-paths.mjs';
+import { parseUnclaimedPaths, pathOverlaps } from './registry-paths.mjs';
 
 const SCRIPT_PATH = process.argv[1] && /acceptance-gate\.mjs$/.test(process.argv[1])
   ? path.resolve(process.argv[1]) : null;
@@ -39,7 +39,7 @@ function checkCommitBoundary(repoPaths) {
   if (!existsSync(registryPath)) return;
   const unclaimed = parseUnclaimedPaths(readFileSync(registryPath, 'utf8'));
   if (!unclaimed.length) return;
-  const hits = repoPaths.filter(p => unclaimed.some(u => p === u || p.startsWith(u) || u.startsWith(p)));
+  const hits = repoPaths.filter(p => unclaimed.some(u => pathOverlaps(p, u.replace(/\/+$/, ''))));
   if (hits.length) {
     throw new Error('staged 命中 REGISTRY 无主物品（等认领/老板处置，勿随本次提交带库——26a5254 事故形态）：\n'
       + hits.map(p => '  ' + p).join('\n')

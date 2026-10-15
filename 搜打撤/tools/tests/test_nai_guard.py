@@ -12,6 +12,7 @@ import time
 import types
 import unittest
 import zipfile
+import requests
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from threading import Barrier
@@ -279,6 +280,33 @@ class GuardTests(unittest.TestCase):
         self.assertIn('Authorization: Bearer ' + token, arguments)
         self.assertIn('@' + str(payload), arguments)
 
+    def test_python_transport_uses_direct_and_explicit_proxy_without_environment(self):
+        payload = self.directory / 'payload.json'
+        output = self.directory / 'response.zip'
+        payload.write_bytes(b'{"test":true}')
+        with patch('requests.Session') as make_session:
+            session = make_session.return_value.__enter__.return_value
+            session.post.return_value.status_code = 200
+            session.post.return_value.content = b'archive bytes'
+            status = nai_gen._requests_request(payload, output, 'offline-token', ['--noproxy', '*'])
+            self.assertEqual(status, '200')
+            self.assertFalse(session.trust_env)
+            self.assertEqual(output.read_bytes(), b'archive bytes')
+            self.assertNotIn('proxies', session.post.call_args.kwargs)
+            self.assertEqual(session.post.call_args.kwargs['data'], b'{"test":true}')
+            self.assertEqual(session.post.call_args.kwargs['headers']['Authorization'],
+                             'Bearer offline-token')
+
+        with patch('requests.Session') as make_session:
+            session = make_session.return_value.__enter__.return_value
+            session.post.return_value.status_code = 201
+            session.post.return_value.content = b'proxy archive'
+            status = nai_gen._requests_request(
+                payload, output, 'offline-token', ['-x', 'http://127.0.0.1:12450'])
+            self.assertEqual(status, '201')
+            self.assertEqual(session.post.call_args.kwargs['proxies'],
+                             {'https': 'http://127.0.0.1:12450'})
+
     def test_generate_offline_retry_paces_and_charges_each_attempt(self):
         image_bytes = b'offline fake image bytes'
         self.image.size = (2048, 1152)
@@ -293,15 +321,16 @@ class GuardTests(unittest.TestCase):
                 zipped.writestr('image.png', image_bytes)
             return '200'
 
-        output, seed = nai_gen.generate_image('test', width=2048, height=1152, seed=42,
-            out=self.directory / 'offline & output.png', guard=self.guard,
-            transport=fake_transport, token='offline-fake-token')
+        with patch.dict(os.environ, {'HTTPS_PROXY': 'http://127.0.0.1:12450'}):
+            output, seed = nai_gen.generate_image('test', width=2048, height=1152, seed=42,
+                out=self.directory / 'offline & output.png', guard=self.guard,
+                transport=fake_transport, token='offline-fake-token')
         self.assertTrue(Path(output).is_file())
         self.assertEqual(Path(output).read_bytes(), image_bytes)
         self.image.verify.assert_called_once()
         self.assertEqual(seed, 42)
         self.assertEqual(calls, [(EPOCH, ['--noproxy', '*']),
-                                 (EPOCH + 45, ['-x', 'socks5h://127.0.0.1:7890'])])
+                                 (EPOCH + 45, ['-x', 'http://127.0.0.1:12450'])])
         day = datetime.datetime.fromtimestamp(EPOCH).date().isoformat()
         self.assertEqual(json.loads(self.guard.usage_file.read_text(encoding='utf-8'))[day], 2)
         self.assertEqual(nai_gen.MODEL, 'nai-diffusion-4-5-full')

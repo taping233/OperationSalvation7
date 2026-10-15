@@ -326,6 +326,20 @@ appendFileSync('calls.jsonl',JSON.stringify(process.argv.slice(1))+'\\n');
     expect(result.status).not.toBe(0);
     expect(result.stderr).toContain('不能以冻结 quick 证据代替');
   });
+  it('不把配置文件或源码误判为同名前缀备份的父路径', () => {
+    const { repo, root, gitAt } = mixedFixture({ dirty: false }); cleanups.push(repo);
+    mkdirSync(path.join(repo, '.codex'), { recursive: true });
+    mkdirSync(path.join(root, 'docs'), { recursive: true });
+    writeFileSync(path.join(repo, '.codex/config.toml'), '[sandbox_workspace_write]\nnetwork_access = true\n');
+    gitAt('add', '.codex/config.toml');
+    writeFileSync(path.join(root, 'docs/PARALLEL-REGISTRY.md'),
+      '## 无主物品\n| `.codex/config.toml.bak-nai-*` | 等认领 |\n| `搜打撤/scripts/mine.mjs.backup` | 等认领 |\n');
+    const env = { ...process.env }; delete env.GATE_MANIFEST_OK; delete env.GATE_RECEIPT;
+    const result = spawnSync(process.execPath, [path.join(root, 'scripts/acceptance-gate.mjs'), '--staged', '--plan'],
+      { cwd: repo, encoding: 'utf8', env });
+    expect(result.status, result.stderr).toBe(0);
+  });
+
   it('强制full也在编译前拒绝无主暂存物品', () => {
     const { repo, root } = mixedFixture({ dirty: false, runnable: true }); cleanups.push(repo);
     mkdirSync(path.join(root, 'docs'), { recursive: true });

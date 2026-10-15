@@ -5,9 +5,9 @@
   V5 需显式传 model='nai-diffusion-5-full'。**大图一天限额 20 张**：长×宽超过免费档上限
   每次请求（含通道重试）即计一次，工具内按自然日锁定预扣、到顶拒出
   （.tmp/nai/large-usage.json；状态损坏停手核对，宁保守勿超限）。
-【通道（09-24 双通道互试）】curl 子进程：先直连 `--noproxy "*"`，000 自动换 `-x socks5h://127.0.0.1:7890`
-  （Clash/TUN 起来后直连常被掐，见记忆 nai-image-endpoint-network-quirks）。
-  Python requests 本机对 image.novelai.net 握手必报 WinError 0，勿改回 requests。
+【通道】默认用 Python requests 直连，000 时改用当前环境的 HTTPS_PROXY/ALL_PROXY；
+  `NAI_TRANSPORT=curl` 可切回 Windows curl。代理端口不在客户端硬编码。
+  旧环境的 requests WinError 0 是历史诊断；2026-10-13 新沙箱已实测 requests 完整生图 HTTP 200。
 【端点】POST https://image.novelai.net/ai/generate-image
   Authorization: Bearer <token>；响应是 ZIP（200/201 都算成功）取第一个条目。
 【token】绝不进 git/记忆/日志：默认读 .tmp/nai/token.txt（过滤 # 注释行），或环境变量 NAI_TOKEN。
@@ -110,9 +110,33 @@ def _curl_request(payload_file, zip_file, token, channel):
     return subprocess.run(arguments, shell=False, capture_output=True, text=True).stdout.strip()
 
 
+def _requests_request(payload_file, zip_file, token, channel):
+    """Use Python TLS so Windows sandbox curl's Schannel credentials are not required."""
+    try:
+        import requests
+    except ImportError:
+        return _curl_request(payload_file, zip_file, token, channel)
+    proxy_options = {} if channel[0] == '--noproxy' else {
+        'proxies': {'https': channel[1]}}
+    with requests.Session() as session:
+        session.trust_env = False
+        try:
+            response = session.post(
+                ENDPOINT, data=payload_file.read_bytes(),
+                headers={'Authorization': 'Bearer ' + token,
+                         'Content-Type': 'application/json'},
+                timeout=120, **proxy_options,
+            )
+        except requests.RequestException as error:
+            print(f'NAI transport {type(error).__name__} on {channel[0]}', flush=True)
+            return '000'
+    zip_file.write_bytes(response.content)
+    return str(response.status_code)
+
+
 def generate_image(prompt, uc='', char_prompt='', width=832, height=1216, seed=None, out='nai-out.png', model=MODEL,
                    *, guard=None, transport=None, token=None):
-    """构造 payload → curl 直连生成 → 解 ZIP 首条目存 PNG → PIL 校验尺寸。返回 (out, seed)。"""
+    """构造 payload → 请求生成 → 解 ZIP 首条目存 PNG → PIL 校验尺寸。返回 (out, seed)。"""
     from PIL import Image
 
     out = Path(out)
@@ -120,12 +144,16 @@ def generate_image(prompt, uc='', char_prompt='', width=832, height=1216, seed=N
     body = build_payload(prompt, uc, char_prompt, width, height, seed, model)
     seed = body['parameters']['seed']
 
-    # 双通道互试（09-24）：Clash/TUN 起来后直连常被掐（000），自动换 socks5h 7890；
-    # 两条都 000 才报网络瞬断。顺序与 [[nai-image-endpoint-network-quirks]] 一致。
-    channels = [['--noproxy', '*'], ['-x', 'socks5h://127.0.0.1:7890']]
+    # 直连失败后使用本进程已配置的代理，避免沿用失效的固定端口。
+    proxy = (os.environ.get('HTTPS_PROXY') or os.environ.get('https_proxy') or
+             os.environ.get('ALL_PROXY') or os.environ.get('all_proxy'))
+    channels = [['--noproxy', '*']]
+    if proxy:
+        channels.append(['-x', proxy])
     guard = guard if guard is not None else RequestGuard(
         LARGE_USAGE_FILE.parent, free_px_cap=FREE_PX_CAP, quota=LARGE_QUOTA_PER_DAY)
-    transport = transport if transport is not None else _curl_request
+    transport = transport if transport is not None else (
+        _curl_request if os.environ.get('NAI_TRANSPORT', '').lower() == 'curl' else _requests_request)
     token = token if token is not None else load_token()
     # Output names can be shared by concurrent calls (including the default).
     # Keep each call's payload, response and verification private; only publish
