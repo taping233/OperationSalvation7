@@ -42,7 +42,7 @@ beforeEach(async () => {
     entered.resolve(); await gate.promise; SDT.Battle = battle; return {};
   });
   vi.doMock('../game/src/run/game.session.js', () => ({ game,
-    MAP: { altar: { bosses: [{ name: 'boss' }] } }, MODES: {}, getActiveSlot: () => slot,
+    MAP: { rules: { playerMaxHp: 30, playerAtk: 4 }, altar: { bosses: [{ name: 'boss' }] } }, MODES: {}, getActiveSlot: () => slot,
     bagCap: () => 9, newUid: () => 'uid', pick: a => a[0], saveGame, scaledEnemy: x => x,
     usedSlots: () => 0, newRun() {}, curLayer() {}, enterLayer() {}, exitToTitle() {} }));
   vi.doMock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { tick() {} }, _set_cardPageOpen() {}, cardHTML: () => '' }));
@@ -195,6 +195,11 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
       expect(document.querySelector('[data-act="clsEntryReveal"]')).not.toBeNull();
       handlers.clsEntryReveal();
       expect(document.querySelector('.entry-reward-scene')).not.toBeNull();
+      handlers.clsEntryContinue(); expect(game.state).toBe('modal');
+      expect(document.querySelector('[data-act="clsEntryContinue"]')).toBeNull();
+      handlers.entrySupplyTake({ i: '0' });
+      expect(game.entrySupply.taken).toEqual([0]);
+      expect(document.querySelector('[data-act="clsEntryContinue"]')).not.toBeNull();
       handlers.clsEntryContinue(); expect(game.state).toBe('idle');
       saveGame.mockClear(); game.discoveredPairs = new Set(); game.state = 'modal';
       handlers.clsEntryContinue(); expect(saveGame).not.toHaveBeenCalled(); expect(game.state).toBe('modal');

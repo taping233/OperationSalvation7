@@ -15,7 +15,7 @@ function harness(initial, shouldSave = () => true) {
 }
 
 describe('Base 出征准备事务', () => {
-  it('一次保存同时扣除可携带仓库卡并清空消耗口袋', () => {
+  it('一次保存同时扣除可携带仓库卡并清空消耗区', () => {
     const h = harness({
       stash: [
         { card: { id: 'a', name: '攻击卡', rarity: '稀有' }, count: 3 },

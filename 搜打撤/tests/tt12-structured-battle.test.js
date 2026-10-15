@@ -105,7 +105,7 @@ describe('TT12 结构化出牌前规则：真实 BattleSession', () => {
     await drain();
   });
 
-  it('后备能源按真实消耗口袋快照折费，并在改写描述后直接打出', async () => {
+  it('后备能源按真实消耗区快照折费，并在改写描述后直接打出', async () => {
     const canonical = byId('tt12-backupcell');
     const dragon = byId('tt12-raydragon');
     const fuel = byId('tt3-holy-water');

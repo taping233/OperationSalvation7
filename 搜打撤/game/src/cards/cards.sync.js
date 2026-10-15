@@ -844,7 +844,7 @@ export const syncSlice = {
 
     // 能力卡术语迁移（设计者 2026-09-08 定版）：类型「英雄卡」整体更名「能力卡」。
     // 幂等（改完即无目标，无需 key 标记）：卡库由 ensureAbilityRename 处理，
-    // 存档内的整卡副本（ownedCards / 仓库 stash / 消耗口袋 pocket）由读档路径调用本函数。
+    // 存档内的整卡副本（ownedCards / 仓库 stash / 消耗区 pocket）由读档路径调用本函数。
     applyAbilityRename(cards) {
       let dirty = false;
       (Array.isArray(cards) ? cards : []).forEach(c => {

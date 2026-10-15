@@ -1,0 +1,67 @@
+/* Broad edge glows fade before the central route; no animated blur or input capture. */
+.map-edge-light {
+  display:none;
+  position:absolute;
+  inset:0;
+  z-index:1;
+  overflow:hidden;
+  pointer-events:none;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) .map-edge-light { display:block; }
+.map-edge-light::before,
+.map-edge-light::after {
+  content:'';
+  position:absolute;
+  top:-10%;
+  bottom:-10%;
+  width:43%;
+  filter:blur(44px);
+  pointer-events:none;
+}
+.map-edge-light::before {
+  left:-9%;
+  background:
+    radial-gradient(ellipse at 12% 32%,rgb(91 205 211 / 28%),rgb(51 143 184 / 14%) 37%,transparent 72%),
+    radial-gradient(ellipse at 0% 82%,rgb(76 115 202 / 18%),transparent 64%);
+  mask-image:linear-gradient(90deg,#000 15%,rgb(0 0 0 / 70%) 48%,transparent 100%);
+}
+.map-edge-light::after {
+  right:-9%;
+  background:
+    radial-gradient(ellipse at 90% 61%,rgb(169 135 220 / 25%),rgb(104 110 190 / 12%) 39%,transparent 73%),
+    radial-gradient(ellipse at 100% 12%,rgb(100 175 203 / 19%),transparent 65%);
+  mask-image:linear-gradient(270deg,#000 15%,rgb(0 0 0 / 70%) 48%,transparent 100%);
+}
+body:has(#overlay:not([hidden])) .map-edge-light,
+body:has(#title:not([hidden])) .map-edge-light,
+body:has(#exitScr:not([hidden])) .map-edge-light { visibility:hidden; }
+
+/* Irregularly scattered motes have independent phases, with a soft core and halo. */
+.map-edge-light i {
+  position:absolute;
+  left:var(--x);
+  top:var(--y);
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  color:#a9e2df;
+  background:radial-gradient(circle,#eafbf5 0%,currentColor 28%,transparent 74%);
+  box-shadow:0 0 10px 3px #8fcfd95c,0 0 24px 6px #8fcfd918;
+  opacity:.35;
+  animation:map-mote-drift var(--t) ease-in-out var(--delay) infinite alternate;
+}
+.map-edge-light i:nth-child(3n) { width:6px; height:6px; color:#c2afe4; box-shadow:0 0 12px 3px #b4a0db50; }
+.map-edge-light i:nth-child(4n) { width:8px; height:8px; color:#e2d7a9; box-shadow:0 0 14px 3px #d8c68c48,0 0 27px 5px #d8c68c12; }
+@keyframes map-mote-drift {
+  0% { opacity:.12; transform:translate3d(-3px,5px,0) scale(.7); }
+  55% { opacity:.65; }
+  100% { opacity:.28; transform:translate3d(5px,-8px,0) scale(1.1); }
+}
+body:has(#overlay:not([hidden])) .map-edge-light i,
+body:has(#title:not([hidden])) .map-edge-light i,
+body:has(#exitScr:not([hidden])) .map-edge-light i,
+body.lobby .map-edge-light i,
+body.page-opaque .map-edge-light i,
+body.scene-battle-3d .map-edge-light i { animation-play-state:paused; }
+body.reduce-motion .map-edge-light i { animation:none; }
+@media (prefers-reduced-motion:reduce) { .map-edge-light i { animation:none; } }

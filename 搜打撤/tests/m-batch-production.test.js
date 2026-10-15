@@ -4,6 +4,7 @@ import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
 import before from '../docs/evidence/e8-card-migration-2026-09-27/catalog-before.json';
 import { approvedRevisionBaseline, isApprovedLampArmorRemoval, RETIRED_1010 } from './helpers/card-catalog-approved-revisions.js';
+import { isApprovedBackupcellRename } from './helpers/e8-card-inventory.js';
 
 const text = readFileSync('docs/M-BATCH-MATRIX.md', 'utf8');
 const targetIds = [...text.matchAll(/^\| ([a-z][\w-]+) \|/gm)].map(match => match[1]).filter(id => id !== 'id');
@@ -47,6 +48,10 @@ describe('M batch production boot', () => {
     expect(first.map(card => card.id).sort()).toEqual(old.map(card => card.id).sort());
     for (const previous of old) {
       const current = first.find(card => card.id === previous.id);
+      if (previous.id === 'tt12-backupcell') {
+        expect(isApprovedBackupcellRename(previous, current)).toBe(true);
+        continue;
+      }
       const fields = Object.keys({ ...previous, ...current }).filter(key =>
         JSON.stringify(previous[key]) !== JSON.stringify(current[key]));
       if (previous.id === 'tt3-magic-lamp') expect(isApprovedLampArmorRemoval(previous, current)).toBe(true);

@@ -154,8 +154,8 @@ import { ease } from './motion-primitives.js';
     // The camera frames the decision in front of the player, without revealing fogged nodes.
     const availableW = this.viewW - (this.detailInset || 0);
     const zoom = Math.min(3.4, Math.max(.4, Math.min(
-      availableW * .72 / (maxX - minX + 80),
-      Math.max(180, this.viewH - 70) * .84 / (maxY - minY + 50))));
+      availableW * .80 / (maxX - minX + 48),
+      Math.max(180, this.viewH - 70) * .90 / (maxY - minY + 24))));
     const cx = (minX + maxX) / 2 + (this.detailInset || 0) / (2 * zoom);
     const cy = (minY + maxY) / 2 - 30 / zoom;
     // 显式定位默认同步落定；需要过渡的入口传入 glide。

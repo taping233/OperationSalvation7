@@ -12,7 +12,7 @@ export function createBattleEquipment({
   processChoice, processDiscoverQueue, processHandSelect, randomDiscoverCard,
   addTempCard, fireCatGift, handSelectQueue,
   // M2：结构化装备域（onEquip/battleStart/passive/skill ops）经 triggers runner 的合成卡执行
-  triggersM2,
+  triggersM2, resolveCardSteps,
 }) {
   // ---------- 已穿戴装备（2026-09-09 老板 #9）----------
   // 打出装备卡即视为穿戴：角色信息区列出装备与说明；带「主动技能：」的装备额外提供一个
@@ -21,8 +21,11 @@ export function createBattleEquipment({
   const EQUIP_SKILL_PATTERN = /(?:主动技能|限定技能)[：:]\s*([^。]*(?:。|$))/;
   function equipSkillText(card) {
     card = getHostedExecutionCard(card);
-    // M3 收编：卡已迁 rules.equip.skill 时文本技能句不再参与（runner 单路径，防双结算/死数据）
-    if (card && card.rules && card.rules.equip && Array.isArray(card.rules.equip.skill && card.rules.equip.skill.ops)) return '';
+    // 文字只用于展示；结构化主动技能仍由 ops 单路径执行。
+    if (card?.rules?.equip?.skill?.ops?.length) {
+      const m = EQUIP_SKILL_PATTERN.exec(String(card.desc || ''));
+      return m ? m[1].trim() : '发动装备主动技能';
+    }
     const m = EQUIP_SKILL_PATTERN.exec(String(card && card.desc || ''));
     return m ? m[1].trim() : '';
   }
@@ -76,7 +79,7 @@ export function createBattleEquipment({
     const cursed = Combat.hasCurse(pstat);
     equipped.forEach(e => {
       const desc = String(e.card && e.card.desc || '');
-      if (e.card.type !== '装备' || equipSkillText(e.card)) return;
+      if (e.card.type !== '装备') return;
       // M2：结构化条件被动（rules.equip.passive.cond + aura）——与文本版同一动态核算模式
       const sr = e.card.rules && e.card.rules.equip && e.card.rules.equip.passive;
       if (sr && sr.cond && sr.cond.hasCurse) {
@@ -94,7 +97,7 @@ export function createBattleEquipment({
         }
         return;
       }
-      if (!CURSE_COND_EQUIP.test(desc)) return;
+      if (equipSkillText(e.card) || !CURSE_COND_EQUIP.test(desc)) return;
       const atkM = desc.match(/攻\s*\+\s*(\d+)/) || desc.match(/攻击\s*\+\s*(\d+)/);
       const spM = desc.match(/法伤\s*\+\s*(\d+)/);
       const want = cursed ? { atk: atkM ? +atkM[1] : 0, sp: spM ? +spM[1] : 0 } : { atk: 0, sp: 0 };
@@ -115,17 +118,33 @@ export function createBattleEquipment({
     if (!e) return;
     const executionCard = getHostedExecutionCard(e.card);
     const text = equipSkillText(executionCard);
-    // M2：结构化主动技能——无「主动技能：」文本时读 rules.equip.skill（oncePerBattle + ops）
-    const structuredSkill = !text && executionCard.rules && executionCard.rules.equip && executionCard.rules.equip.skill;
+    // 结构化技能优先于展示文字，避免同一主动技能双结算。
+    const structuredSkill = executionCard.rules?.equip?.skill?.ops?.length ? executionCard.rules.equip.skill : null;
     if (!text && !structuredSkill) return;
-    if (e.used) { G.log(`[[icon:cross]] 【${esc(e.card.name)}】的主动技能本场已经用过了`, 'warn'); return; }
+    if (e.used && structuredSkill?.oncePerBattle !== false) { G.log(`[[icon:cross]] 【${esc(e.card.name)}】的主动技能本场已经用过了`, 'warn'); return; }
     if (structuredSkill) {
       const once = structuredSkill.oncePerBattle !== false;
       if (once && e.used) { G.log(`[[icon:cross]] 【${esc(e.card.name)}】的主动技能本场已经用过了`, 'warn'); return; }
-      if (once) e.used = true;
-      G.log(`[[icon:sparkles]] <b>${esc(e.card.name)}</b> 主动技能发动`, 'ok');
-      if (triggersM2) triggersM2.resolveEquipOps(executionCard, structuredSkill.ops || []);
-      requestBattleRender();
+      clearTargetSession();
+      queueBattleAction(async signal => {
+        throwIfActionCancelled(signal);
+        if (!equipped.includes(e) || (once && e.used)) return;
+        if (once) e.used = true;
+        G.log(`[[icon:sparkles]] <b>${esc(e.card.name)}</b> 主动技能发动`, 'ok');
+        // 复用真实分段执行器，异步伤害、发现与后续选择都属于同一动作。
+        const ops = structuredSkill.ops;
+        const enemy = ops.some(op => op.op === 'damage' || ['chosenEnemy', 'allEnemies', 'randomEnemy'].includes(op.target));
+        const synthetic = { ...executionCard, desc: '', infuse: 0,
+          type: ops.some(op => op.op === 'damage') ? '法术' : executionCard.type,
+          dmgType: executionCard.dmgType || 'fixed',
+          rules: { ...executionCard.rules, battle: { target: { side: enemy ? 'enemy' : 'self', area: ops.some(op => op.target === 'allEnemies') } }, triggers: { onPlay: ops } } };
+        await runStagedSteps(resolveCardSteps(synthetic, alive()[0] || null), signal);
+        throwIfActionCancelled(signal);
+        sweepDead();
+        if (!alive().length) { finish(true); return; }
+        processChoice(); processDiscoverQueue(); processHandSelect();
+        requestBattleRender();
+      }, '装备技能');
       return;
     }
     if ((e.card.id === 'tt3-crimson-pouch' || e.card.id === 'tt7-naturestaff') && !hand.length) {

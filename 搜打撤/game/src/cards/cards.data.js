@@ -631,7 +631,7 @@ export const dataSlice = {
       { id: 'tt12-chargeray',   name: '充能射线', cost: 1, rarity: '稀有', type: '法术', dmg: 5, dmgType: 'spell', desc: '造成5点法伤，本牌在你手牌中时每注能过1张卡牌，伤害+2' },
       { id: 'tt12-breakthrough', name: '突破进展', cost: 1, rarity: '稀有', type: '法术', desc: '随机获取1张0费，一张1费，一张2费招式' },
       { id: 'tt12-raygun',      name: '射线枪', cost: 0, rarity: '古朴', type: '装备', desc: '主动技能：发现一张射线牌并直接释放' },
-      { id: 'tt12-backupcell',  name: '后备能源', cost: 6, rarity: '史诗', type: '法术', draw: 2, desc: '抽2张牌并回复所有费用，消耗口袋中每有一张法术牌，本牌费用-1', rules: { version: 1, battle: { target: { side: null, area: false }, costModifiers: [{ kind: 'consumedSpellDiscount', amount: 1 }] } } },
+      { id: 'tt12-backupcell',  name: '后备能源', cost: 6, rarity: '史诗', type: '法术', draw: 2, desc: '抽2张牌并回复所有费用，消耗区中每有一张法术牌，本牌费用-1', rules: { version: 1, battle: { target: { side: null, area: false }, costModifiers: [{ kind: 'consumedSpellDiscount', amount: 1 }] } } },
       { id: 'tt12-freezeray',   name: '冷冻射线', cost: 1, rarity: '稀有', type: '法术', dmg: 4, dmgType: 'spell', desc: '造成4点法伤；若此前其未曾受到过伤害，对其附加冰冻' },
     ],
 

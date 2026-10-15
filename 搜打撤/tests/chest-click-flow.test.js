@@ -84,6 +84,12 @@ describe('宝箱点击链路', () => {
 
     const { SDT: chestFacade } = await import('../game/src/run/chests.js');
     chestFacade.Chests.open(game, [{ kind: 'small' }]);
+    expect(ovBody.querySelector('.chest-offer-page')).not.toBeNull();
+    expect(ovBody.querySelector('[data-act="chestSelect"]')).toBeNull();
+    vi.advanceTimersByTime(5000);
+    expect(ovBody.querySelector('[data-eps-search]')).toBeNull();
+    expect(ownedCards).toHaveLength(0);
+    ovBody.querySelector('[data-act="chestClaim"]').click();
     expect(ovBody.querySelector('[data-eps-search]')).not.toBeNull();
     ovBody.querySelector('[data-eps-search]').click();
     expect(ovBody.querySelector('[data-act="chestSelect"]')).not.toBeNull();

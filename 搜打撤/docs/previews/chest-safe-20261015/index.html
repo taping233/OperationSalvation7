@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>保险箱 · 开箱动画小样</title><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main>
+    <header><p class="eyebrow">封存物资</p><h1>保险箱开启</h1><p class="description">灰白 · 石墨黑 · 朱红点睛</p></header>
+    <section class="opening" data-phase="closed" aria-label="保险箱开箱动画">
+      <div class="stage">
+        <img class="safe previous" alt="" draggable="false">
+        <img class="safe current" alt="保险箱闭合" draggable="false">
+        <img class="burst" alt="" draggable="false">
+        <span class="flash" aria-hidden="true"></span>
+      </div>
+      <p class="phase" role="status">素材准备中</p>
+    </section>
+    <nav aria-label="动画预览操作">
+      <button type="button" id="replay" disabled>重播开箱 <span aria-hidden="true">↗</span></button>
+      <div class="poses" aria-label="查看姿态">
+        <button type="button" data-pose="0">闭合</button><button type="button" data-pose="1">门缝</button><button type="button" data-pose="2">半开</button><button type="button" data-pose="3">开启</button>
+      </div>
+      <label class="sound"><input type="checkbox" id="sound" checked> 开箱音效</label>
+    </nav>
+    <footer>内部仅展示闪光，奖励在开箱后揭晓。</footer>
+  </main><script type="module" src="./preview.js"></script>
+</body></html>

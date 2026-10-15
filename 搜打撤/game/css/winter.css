@@ -29,7 +29,7 @@ button,input,select,textarea{font-family:inherit}button{border-radius:0;transiti
 #overlay{background:#101112a8;backdrop-filter:blur(6px)}#overlay.opaque{background:linear-gradient(125deg,#202325,#181a1c);backdrop-filter:none}#overlay .card{border:1px solid #74797c;background:linear-gradient(125deg,#2b2e31,#1e2022);box-shadow:0 25px 100px #0d0e0f99;border-radius:0}#overlay .card::before{display:none}#overlay .card.page,#overlay .card.bag-page{border:0;border-radius:0;background:linear-gradient(125deg,#272a2d,#1b1d1f)}#overlay h2,.pg-head h2{color:#ebebeb;font-weight:400;letter-spacing:4px}.pg-head,.hub-head{border-bottom:1px solid #757a7e;padding-bottom:20px}.pg-close{background:#313438;border:1px solid #848a8e;box-shadow:none}.pg-close:hover{background:#6a5148}.ov-btn,.mini-btn,.hub-tab,.step-btn{background:#2f3336;border:1px solid #6e7478;color:#e8e8e9;border-radius:0;box-shadow:none}.ov-btn:hover,.mini-btn:hover{background:#41464b;border-color:#d2d3d4}.ov-btn.ok,.mini-btn.ok{background:#e4cb7a;border-color:#e4cb7a;color:#212326}.ov-btn.danger{background:#7a443e;color:#f3dcd5;border-color:#be8c7e}.ov-note,.ov-stats,.ov-empty{color:#bfc2c5;line-height:1.8}.hub-card,.cls-card,.ach-row{background:#25282a;border:1px solid #4d5359;border-radius:0;box-shadow:none}.hub-card h3{font-weight:400;letter-spacing:3px;color:#dedfe0}.hub-tabs{gap:10px;padding-top:10px}.hub-tab{border:0;background:none;color:#a9aeb1}.hub-tab.on{background:#e2cd88;color:#222528;box-shadow:none}.res-chip,.fc-chip{background:#1b1d20;border:1px solid #4f555b;border-radius:0;color:#bdc1c4}.res-chip b,.fc-chip b{color:#eddca6}.mode-card{background:#282b2e;border:1px solid #555b61;border-radius:0;box-shadow:none;min-height:96px}.mode-card.on{background:#35393d;border-color:#e0c876;box-shadow:inset 3px 0 #e0c876}.mode-card .mode-info b{font-size:21px;letter-spacing:3px;font-weight:400}.mode-card .mode-info span{color:#babec0}.mode-card .mode-ckpt{color:#e1cf94}.deploy-forecast{gap:12px}#btnDeploy{background:#ead386;border:0;border-radius:0;color:#232628;box-shadow:none;padding:18px 42px;font-weight:500;letter-spacing:5px}.gate-strip{background:#2a2d30;border:1px solid #585f66}#overlay #hubMain .gate-strip:focus-visible{outline:1px solid #e6cb76cc;outline-offset:2px}
 .slot-card{border-color:#72787c;background:linear-gradient(180deg,#191b1d,#131416);border-radius:0;box-shadow:0 12px 30px #0d0e0f66}.slot-card:hover{border-color:#d2d3d5}.slot-card-name{color:#ebebeb}.slot-empty{color:#abb1b6}.si-line em{color:#9ca2a6}.cls-grid{gap:10px;grid-template-columns:repeat(5,minmax(0,1fr))}.cls-pick{border:1px solid #757a7e;background:#2a2d30;border-radius:0;box-shadow:none;overflow:hidden}.cls-pick.sel{border-color:#edd37e;box-shadow:inset 0 -3px #e5ca6f}.cls-pick b{font-size:21px;letter-spacing:3px;font-weight:500}.cls-pick-art{box-shadow:none;border-radius:0;max-width:90px}.cls-detail{background:#202225!important;border:1px solid #50565c;border-radius:0;color:#c8c9ca}.cls-story{line-height:1.9;color:#c3c6c9}.cls-detail-name{font-size:34px;letter-spacing:5px;font-weight:400}.cls-detail-tag{color:#e4cb7a}.roster-portrait{display:block;aspect-ratio:var(--portrait-ratio);height:100%;max-width:100%;background-repeat:no-repeat}.cls-pick-art .roster-portrait{width:100%;height:100%}.cls-figure .roster-portrait{height:100%;width:auto;margin:auto}.cls-hub-art .roster-portrait{height:84px;width:40px}.xp-bar{background:#1b1d1f}.xp-bar i{background:#abb1b5}
 .pk-row,.dep-row{border-bottom:1px solid #484d52}.settings .set-h{color:#e3cd84;border-bottom:1px solid #494e54}.settings .chk{color:#d5d6d7}.settings input[type=range]{accent-color:#e3cb7b}.settings input[type=checkbox]{accent-color:#a8adb0}input,textarea,select{background:#1e2022;color:#e8e9ea;border:1px solid #72787c;border-radius:0}input::placeholder,textarea::placeholder{color:#91969a}.bag-slot{background:#232628;border-color:#545a61;border-radius:0}.bag-slot.safe-slot{border-color:#d4bf77;background:#2d3134}.bag-slot.drop-here{outline:2px solid #e3cd83}.lib-filters,.bag-toolbar{background:#1d1f21;border-color:#565c63}.hs-card,.card-tile{box-shadow:0 4px 12px #0f101170}.scene-line p{background:#202225d9;border:1px solid #7e8387;color:#e7e8e8;border-radius:0}.scene-title{font-family:'SimSun',serif;font-weight:400}.scene-ops .ov-btn{min-height:44px}.flow-title{font-family:'SimSun',serif;letter-spacing:.16em}
-body.scene-battle-3d #sidebar,body.scene-battle-3d #layerBanner,body.scene-battle-3d #topBtns,body.scene-battle-3d #resHud{display:none!important}body.scene-battle-3d #overlay,body.scene-battle-3d #overlay .card,body.scene-battle-3d #ovBody,body.scene-battle-3d .battle-stage{background:transparent!important;backdrop-filter:none!important;box-shadow:none!important}body.scene-battle-3d .battle-stage::before,body.scene-battle-3d .battle-stage::after,body.scene-battle-3d .battle-stage-shade{display:none!important}body.scene-battle-3d .sts-figure>*{visibility:hidden}body.scene-battle-3d .sts-figure{height:clamp(140px,calc(var(--game-layout-height, 100vh) * 0.29),300px);filter:none}body.scene-battle-3d .sts-nameplate{background:#202224df!important;border:1px solid #8c9296!important;padding:8px 15px!important;color:#e8e8e8}body.scene-battle-3d .sts-hud{background:linear-gradient(0deg,#1c1e20 72%,#1c1e2000)!important}body.scene-battle-3d .sts-intent{background:#ebd489;color:#25282b;box-shadow:none;border:0}#overlay .card.battle{width:100%;height:100%;max-width:none;max-height:none;padding:0}body[data-gpu-lost]::after{content:'图形设备暂时中断，请保存后重启游戏';position:fixed;inset:35% 20%;z-index:999;padding:40px;background:#242729;color:#ebd58d;text-align:center}
+body.scene-battle-3d #sidebar,body.scene-battle-3d #layerBanner,body.scene-battle-3d #topBtns,body.scene-battle-3d #resHud{display:none!important}body.scene-battle-3d #overlay,body.scene-battle-3d #overlay .card,body.scene-battle-3d #ovBody{background:transparent!important;backdrop-filter:none!important;box-shadow:none!important}body[data-gpu-lost]::after{content:'图形设备暂时中断，请保存后重启游戏';position:fixed;inset:35% 20%;z-index:999;padding:40px;background:#242729;color:#ebd58d;text-align:center}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 /* 快速参考弹窗（标题页） */
 .guide-list{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;margin-bottom:14px}.guide-row{display:flex;align-items:center;gap:12px;padding:8px 12px;background:#1b1d2080;border:1px solid #44494e55}.guide-row b{min-width:104px;font:11px 'Cascadia Code';color:#e3cd84;letter-spacing:1px}.guide-row span{font-size:12.5px;color:#bfc2c5}
@@ -238,15 +238,9 @@ body.page-opaque #sidebar{visibility:hidden}
 
 /* —— 留言批次 2026-09-07：战斗视图占满 + 玩家立绘放大 —— */
 /* 战斗场景占满：标题条悬浮在场景上，不再占一行黑底 */
-#overlay .card.battle > h2{position:absolute;top:0;left:0;right:0;z-index:6;margin:0;background:none;border-bottom:0;text-shadow:0 1px 10px #000000,0 0 3px #000000}
 /* 底部 HUD 暗渐变减淡，消除"黑边"观感 */
-#overlay .battle-stage .sts-hud{background:linear-gradient(180deg,rgba(4,4,4,0),rgba(4,4,4,.18) 55%)}
 /* 手牌区：宽度约界面一半（白底按 2026-09-07 二批留言撤回） */
-#overlay .battle-stage .sts-hud .bt-hand{flex:1 1 auto;max-width:50%;margin:0 auto;padding:14px 12px 8px}
 /* 玩家立绘：收回到与敌方同一前景层级，并沿底部安全区站位 */
-.sts-me{left:clamp(4%,calc(var(--game-layout-width, 100vw) * 0.06),7%)!important;bottom:clamp(3%,calc(var(--game-layout-height, 100vh) * 0.025),5%)!important;width:min(calc(var(--game-layout-width, 100vw) * 0.25),320px)!important}
-.sts-me .sts-figure{width:92%!important}
-.sts-me .sts-figure img{width:100%;height:auto}
 
 /* —— 留言批次 2026-09-07 二批：标题页图鉴移位 + 选人页切换动画 —— */
 .ak-lib{top:57%}
@@ -501,10 +495,6 @@ body:has(#overlay.opaque:not([hidden])) #sidebar{display:none!important}
 /* 战斗弹层黑边收口：战斗时 card 同时挂 battle+room，
    #overlay.room-view .card.room 的 padding/深灰渐变/ovBody 限宽以更高优先级
    压过战斗全屏规则，四周漏出黑边——这里以更高优先级统一压回全屏 */
-#overlay.room-view .card.room.battle{padding:0;border:0;background:none;justify-content:flex-start;overflow:hidden}
-#overlay.room-view .card.room.battle #ovBody{width:100%;max-width:none;margin:0}
-#overlay.room-view .card.room.battle > h2{position:absolute;top:0;left:0;right:0;z-index:6;margin:0;
-  font-size:15px;letter-spacing:2px;padding:8px 18px;background:none;border-bottom:0;text-align:left}
 
 /* 头像彩蛋：连点两下以上左右抖动 */
 .hero-ava.ava-shake{animation:avaShake .45s ease}
@@ -571,12 +561,6 @@ body.page-covered #title *::after{animation-play-state:paused}
 /* ===== 全屏卡牌特写盖住战斗页时同步暂停战斗层动画（09-30 性能审计 F6，铁律①） =====
    #cardZoom 挂在 body（ui.showCardZoom），不经 showOverlay 的 page-covered 机制；
    特写开着时战斗立绘 idle/环境粒子照跑纯烧合成器帧，ui.js 挂/摘 body.zoom-open */
-body.zoom-open .battle-stage,
-body.zoom-open .battle-stage *{animation-play-state:paused}
-body.zoom-open .battle-stage::before,
-body.zoom-open .battle-stage::after,
-body.zoom-open .battle-stage *::before,
-body.zoom-open .battle-stage *::after{animation-play-state:paused}
 
 /* ===== 美术预热进度条（2026-09-08：启动强制预热，首页显示原因与进度） ===== */
 #warmupTip{position:absolute;left:26px;bottom:118px;z-index:5;min-width:280px;max-width:360px;
@@ -601,82 +585,16 @@ body,body *{font-family:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub',
   background:linear-gradient(145deg,#9b9b9b,#666666);}
 
 /* 2026-09-08：接入无人雪夜街道战斗背景；角色以脚底而非名牌作为地面基线。 */
-#overlay .battle-stage.sts{
-  min-width:0;
-  width:0;
-  flex:1 1 0;
-  background-size:cover;
-  background-position:center center;
-}
-#overlay .card.battle #ovBody > .battle-stage.sts{
-  min-width:0;
-  max-width:100%;
-}
-#overlay .battle-stage.sts .battle-stage-shade{
-  background:linear-gradient(180deg,rgba(9,9,9,.18),rgba(9,9,9,.28) 56%,rgba(5,5,5,.48) 100%);
-}
-#overlay .battle-stage.sts .sts-unit{
-  bottom:clamp(2%,calc(var(--game-layout-height, 100vh) * 0.022000000000000002),4%)!important;
-}
-#overlay .battle-stage.sts .sts-me{
-  left:clamp(9%,calc(var(--game-layout-width, 100vw) * 0.11),15%)!important;
-  width:clamp(160px,calc(var(--game-layout-width, 100vw) * 0.15),340px)!important;
-}
-#overlay .battle-stage.sts .sts-me .sts-figure{
-  width:100%!important;
-}
-#overlay .battle-stage.sts .sts-foes{
-  left:48%;
-  right:clamp(8%,calc(var(--game-layout-width, 100vw) * 0.09),12%);
-  gap:clamp(10px,calc(var(--game-layout-width, 100vw) * 0.013999999999999999),22px);
-}
-#overlay .battle-stage.sts .sts-foe{
-  width:clamp(120px,calc(var(--game-layout-width, 100vw) * 0.11),180px);
-}
-#overlay .battle-stage.sts .sts-foe.is-boss{
-  width:clamp(180px,calc(var(--game-layout-width, 100vw) * 0.17),260px);
-}
 /* 名牌脱离文档流，避免把人物脚底抬离背景地面。 */
-#overlay .battle-stage.sts .sts-nameplate{
-  position:absolute;
-  top:calc(100% + 6px);
-  left:0;
-  right:0;
-  width:100%;
-  margin:0;
-}
-#overlay .battle-stage.sts .sts-figure{
-  filter:drop-shadow(0 12px 16px rgba(0,0,0,.68));
-}
-#overlay .battle-stage.sts .sts-topbar{
-  display:flex;justify-content:space-between;align-items:flex-start;z-index:7;pointer-events:none;
-}
-#overlay .battle-stage.sts .sts-topbar .sts-hud-l,
-#overlay .battle-stage.sts .sts-topbar .sts-hud-r{
-  display:flex;align-items:center;gap:8px;pointer-events:auto;min-width:0;
-}
-#overlay .battle-stage.sts .sts-topbar .sts-hud-r .ov-btn{white-space:nowrap}
 /* 标题让出两角后居中于顶部中间 */
-#overlay .card.battle > h2{text-align:center;padding:10px 18px 6px}
 /* 药水栏下移一行，避让标题 */
-#overlay .battle-stage.sts .bt-potions{top:clamp(40px,calc(var(--game-layout-height, 100vh) * 0.055),56px)}
 /* 底部 HUD 只剩手牌：去掉渐变底、放宽手牌区（卡牌多不挤） */
-#overlay .battle-stage.sts .sts-hud{background:none}
-#overlay .battle-stage.sts .sts-hud .bt-hand{max-width:88%}
 /* 单位整体下沉：脚底踩进近景雪地（名牌跟随在立绘下方）——只压主角。
    敌人是容器+个体各吃一层 -24% 的双重下沉，会把下半身和名牌整个扎进手牌区
    （2026-09-09 老板：怪物上移，别挡牌），故敌人抵消个体下沉、容器只留微量入雪。
    2026-09-09 换废墟雪夜广场背景后按新地面重新校准：只对 .sts-me 生效。 */
-#overlay .battle-stage.sts .sts-me{bottom:-20%!important}
-#overlay .battle-stage.sts .sts-foes .sts-foe{bottom:0!important}
-#overlay .battle-stage.sts .sts-foes{bottom:-3%}
 /* 手牌容器透明区不拦截指针（立绘下沉后敌人下半身处在容器范围内，
    不收紧会导致拖拽指向/点击敌人被 elementFromPoint 命中到手牌容器） */
-#overlay .battle-stage.sts .sts-hud,
-#overlay .battle-stage.sts .sts-hud .bt-hand{pointer-events:none}
-#overlay .battle-stage.sts .sts-hud .bt-slot,
-#overlay .battle-stage.sts .sts-hud .bt-slot::after,
-#overlay .battle-stage.sts .sts-hud .sts-tactics .ov-btn{pointer-events:auto}
 
 /* ═══════════ 2026-09-09 战利品/开箱浮层重做（老板：界面放大+卡牌放大+按钮修复） ═══════════ */
 /* wide 类此前从未有过样式定义，开箱浮层一直走 430px 默认小卡 */
@@ -807,33 +725,14 @@ body,body *{font-family:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub',
 
 /* ===== 2026-09-13 留言批次九（遭遇战 UI 8 条）===== */
 /* #3 sts-arena 顶部状态文字条去掉 */
-#overlay .battle-stage.sts .sts-arena-caption{display:none!important}
 /* #5 血条不要黑色边框包裹：去边框/内阴影，槽底改浅透 */
-#overlay .battle-stage.sts .sts-nameplate .bt-hpwrap{border:0;box-shadow:none}
 /* 2026-09-13 复检：血条改细扁绿色长条（杀戮尖塔式）；09-25 微调——
    条高 12px 容纳数字不再上下溢出；掉血残影改白色系（原淡绿与主条同系，掉血量读不出） */
-#overlay .battle-stage.sts .sts-nameplate .bt-hpwrap{
-  height:12px!important;margin-top:5px;border-radius: var(--radius-panel)!important;
-  background:rgba(0,0,0,.45)!important;
-}
-#overlay .battle-stage.sts .sts-nameplate .bt-hpwrap i.sts-hp-main{
-  background:linear-gradient(180deg,#7ed37e,#3f9e46)!important;
-}
-#overlay .battle-stage.sts .sts-nameplate .bt-hpwrap i.sts-hp-ghost{
-  background:linear-gradient(180deg,#ffffff,#dfe0e1)!important;
-}
-#overlay .battle-stage.sts .sts-nameplate .bt-hpwrap span{
-  font-size:10.5px;color:#eaffea;text-shadow:0 1px 2px #000000;line-height:12px;
-}
 /* #4+#6 站位终版（2026-09-13 留言：人和怪踩进街道近处地板；卡牌区下移后留在其上方）
    2026-09-13 老板留言复检：脚底（立绘底，名牌之上）从 78.8% 上移到 ~70% = .sts-arena 底/
    .sts-hud 顶分界线（720 视口实测 arena 底 500px）。
    2026-09-13 二次口令：地板再升到点击位 ~67%（-8.5vh → -5vh，实测脚底 70.6% → ~67%）。
    名牌（static、约 57px 高）允许垂入其下方。用 vh 保持不同窗口高度下比例。 */
-body #overlay .battle-stage.sts .sts-unit,
-body #overlay .battle-stage.sts .sts-foes,
-body #overlay .battle-stage.sts .sts-allies,
-body #overlay .battle-stage.sts .sts-me{bottom:calc(var(--game-layout-height, 100vh) * -0.05)!important}
 /* #7 怪物死亡不残留虚影和假血条：死亡单位整体移出画面 */
 #overlay .battle-stage.sts .sts-unit.dead{display:none!important}
 /* 09-25 老板：死亡动画和贴图一起凭空消失——display:none 腰斩了 battle.css 的 fx-die
@@ -863,45 +762,17 @@ body #overlay .battle-stage.sts .sts-me{bottom:calc(var(--game-layout-height, 10
 
 /* ===== 2026-09-13 留言复检追加 ===== */
 /* 血条黑框彻底去除：名牌容器（黑底+灰边）与内槽全部透明化，名字加深色描边保可读 */
-#overlay .battle-stage.sts .sts-nameplate{
-  border:0!important; background:transparent!important; box-shadow:none!important;
-  backdrop-filter:none!important; padding:0 2px!important;
-}
-#overlay .battle-stage.sts .sts-foe:not(.dead) .sts-nameplate{
-  border:0!important; background:transparent!important; box-shadow:none!important;
-}
-#overlay .battle-stage.sts .sts-nameplate b{color:#ffffff;text-shadow:0 1px 4px #000000,0 0 2px #000000}
-#overlay .battle-stage.sts .sts-nameplate .sts-stats,
-#overlay .battle-stage.sts .sts-nameplate .sts-chips{color:#e8e8e8;text-shadow:0 1px 3px #000000}
-#overlay .battle-stage.sts .sts-you{border-color:rgba(255,255,255,.75);color:#ffffff;text-shadow:0 1px 3px #000000}
 /* 「第 N 回合」条贴到页面最顶端：absolute 定位（expedition 后加载的 flex 流规则压不住） */
-#overlay .battle-stage.sts .sts-topbar{
-  position:absolute!important;
-  top:0!important; left:0!important; right:0!important;
-  border-radius:0!important;
-}
 /* 空标题 h2 不再占 34px 流内高度 */
-#overlay .card.battle > h2:empty{display:none!important}
 
 /* ===== 2026-09-13 留言批次十（战斗界面微调 3 条，IAB 02:39-02:40）===== */
 /* #1 回合条融入背景：去蓝底/边框/阴影，文字描边直接压在背景图上 */
-#overlay .battle-stage.sts .sts-topbar{
-  background:transparent!important; border-bottom:0!important; box-shadow:none!important;
-}
-#overlay .battle-stage.sts .sts-topbar .sts-encounter-kicker,
-#overlay .battle-stage.sts .sts-topbar .sts-encounter > span:last-child{color:#e6e6e7;text-shadow:0 1px 4px #000000,0 0 2px #000000}
-#overlay .battle-stage.sts .sts-topbar .sts-encounter b{text-shadow:0 1px 4px #000000,0 0 2px #000000}
 /* #3 手牌下移 + 底部黑边去除 */
-#overlay .card.battle{background:transparent!important;border:0;box-shadow:none}
-#overlay .card.battle #ovBody{margin:0}
 /* 留言（同批追加）：卡面常态只露出一半（沉入约一半卡高），hover 浮出完整卡面
    2026-09-13 留言：卡牌稍微上移（-76px → -58px），黑底同步压缩见 expedition-battle.css */
 /* 2026-09-13 老板口令：地板抬高后卡牌不再沉底，完全露出（14px 抵消 .sts-hand margin-bottom:-14px，卡底贴屏底） */
-body #overlay .battle-stage.sts .sts-hand .bt-slot{bottom:14px!important}
 /* 2026-09-13 老板口令：卡面上升到屏幕三分之二线。悬停时卡面展开长高 ~66px（槽底锚定向上长）。
    卡牌改完全露出后静置卡顶 ~76%，展开+小幅位移即可到 2/3 线（-12px，实测微调） */
-body #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card:not(.off):not(.aim-lift){transform:translateY(-12px) scale(1.04)!important}
-#overlay .battle-stage.sts .sts-hand{padding-bottom:0;margin-bottom:-14px}
 
 /* ===== 2026-09-13 留言批次十一（夜城色调统一 + 伤害/掉血动画增强）===== */
 /* 伤害数字：更大更醒目，普通=白红、终结/暴击=金 */
@@ -915,11 +786,7 @@ body #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card:not(.off):not(
   text-shadow:0 0 12px rgba(255,210,60,.9),0 2px 4px #000000,-2px 0 0 #7a5a10,2px 0 0 #7a5a10;
 }
 /* 掉血时血条槽体红闪一下（幽灵黄尾已有，补槽体瞬红强化感知） */
-#overlay .battle-stage.sts .bt-hpwrap{transition:box-shadow .3s}
-#overlay .battle-stage.sts .bt-hpwrap.hp-dropping{box-shadow:0 0 14px rgba(255,80,50,.95)!important;transition:none}
 /* 夜城色调：战斗文字统一暖金/月白，与夜城背景同调 */
-#overlay .battle-stage.sts{color:#e8e7e5}
-#overlay .battle-stage.sts .sts-topbar .sts-encounter b{color:#e2ded5}
 
 /* ===== 2026-09-13 屏幕级进出过渡（所有界面进出都有过渡动画；boss 留言 #52 延伸） =====
    覆盖范围：标题页/告别屏/留言信箱的出入场、HUD 侧栏进对局淡入、环层横幅换层演出、

@@ -6,7 +6,7 @@ vi.mock('../game/src/core/random.js', async importOriginal => {
   return { ...actual, Random: { ...actual.Random, random: (...args) => H.random(...args) } };
 });
 vi.mock('../game/src/run/game.session.js', () => ({
-  game: H.game, MAP: { rules: { fireHeal: 10, fireClassCardChance: 1 }, monsters: {}, altar: { bosses: [] } }, MODES: {},
+  game: H.game, MAP: { rules: { fireHeal:10, fireClassCardChance:1, bossDeckSize:15, starterSha:5, battleStartDraw:5, battleTurnDraw:1, battleHandMax:8 }, monsters:{}, altar:{ bosses:[] } }, MODES: {},
   bagCap: () => 9, usedSlots: () => 0, newUid: () => `u${++H.uid}`, pick: a => a[0],
   saveGame: () => { H.saves.push(JSON.parse(JSON.stringify(H.game))); return true; },
   scaledEnemy: a => a, getActiveSlot: () => H.slot, curLayer: () => H.game.layerData[H.game.layerIdx],
@@ -22,8 +22,9 @@ vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative: (...args) => H
 
 let flow, altar, scenes, UI, takeBagReturnHook, setBagReturnHook;
 beforeAll(async () => {
-  window.SDT = { game: H.game, Icons: { rich: x => x }, Sound: { sfx() {} }, Meta: { track() {}, addXpToProgress() {} }, Base: {},
-    Cards: { all: () => H.cards, classPool: () => H.cards.filter(c => c.type === '能力卡'), isRandomObtainable: () => true, cardHTML: c => `<span>${c.name}</span>` } };
+  window.SDT = { game: H.game, Icons: { rich: x => x }, Sound: { sfx() {} }, Meta: { track() {}, addXpToProgress() {} }, Base: { bagCap:() => 9 },
+    MAP:{ chestKinds:{ small:{ name:'小宝箱' } } },
+    Cards: { DROP_WEIGHTS:{ 古朴:1 }, all: () => H.cards, classPool: () => H.cards.filter(c => c.type === '能力卡'), sellPrice:() => 1, isRandomObtainable: () => true, cardHTML: c => `<span>${c.name}</span>` } };
   const { overlayMethods } = await import('../game/src/ui/overlay.js');
   UI = window.SDT.UI = { ...overlayMethods, _acts: {}, _baseActs: {}, _roomActive: true, el: {},
     act: (name, fn) => UI._acts[name] = fn, refresh() {}, log() {}, showCardReward() {}, _checkPageBg() {},
@@ -32,6 +33,7 @@ beforeAll(async () => {
   flow = await import('../game/src/run/game.run.flow.js');
   altar = await import('../game/src/run/game.run.altar.js');
   scenes = await import('../game/src/run/game.run.scenes.js');
+  await import('../game/src/run/chests.js');
 });
 beforeEach(() => {
   vi.useFakeTimers();
@@ -41,9 +43,10 @@ beforeEach(() => {
   UI._acts = {}; UI._overlayInerted = []; UI._lastMode = null; UI._hideTimer = null; UI._roomActive = true; setBagReturnHook(null);
   H.saves = []; H.uid = 0; H.slot = null; H.narrative = async () => null;
   Object.assign(H.game, { seed: 7, state: 'idle', layerIdx: 0, trackPos: 1, hp: 1, maxHp: 35, visited: {}, ownedCards: [], usedPocket: [], myClass: '武', runActive: true, coins: 18, fragments: 0,
-    altarActivated: false, altarRewardPending: false, altarItemSacrificed: false,
+    altarActivated:false, altarRewardPending:false, altarItemSacrificed:false, nodeRewards:{}, entrySupply:null,
     discoveredPairs: new Set(), layerData: [{ logical: [{ def: { type: 'entrance' } }, { def: { type: 'event' } }] }],
     canReceiveCard: () => true, heal: n => H.game.hp = Math.min(H.game.maxHp, H.game.hp + n),
+    grantCard: (card, opts) => scenes.grantEventCard(card, opts), bagCap:() => 9, usedSlots:() => H.game.ownedCards.length,
   });
 });
 afterEach(() => { UI.hideOverlay({ immediate: true }); vi.restoreAllMocks(); vi.clearAllTimers(); vi.useRealTimers(); });
@@ -179,7 +182,9 @@ describe('事件等待与回调生命周期审计', () => {
     H.game.altarActivated = true; H.game.altarRewardPending = true;
     altar.openAltarRitual(); const old = UI._acts.altarRewardLoot; UI._acts.altarRewardLeave();
     altar.openAltarRitual(); old(); expect(H.game.ownedCards).toHaveLength(0);
-    const current = UI._acts.altarRewardLoot; current(); current(); expect(H.game.ownedCards).toHaveLength(2);
+    const current = UI._acts.altarRewardLoot; current(); current();
+    expect(H.game.ownedCards).toHaveLength(0);
+    const take = UI._acts.chestTake; take(); take(); expect(H.game.ownedCards).toHaveLength(2);
     expect(H.game.altarRewardPending).toBe(false); expect(H.saves.at(-1).altarRewardPending).toBe(false);
   });
   it('献祭取消后的旧确认不能激活或扣牌，不足数量的确认也不能通过', () => {
@@ -200,6 +205,133 @@ describe('事件等待与回调生命周期审计', () => {
     old({ name: '复原样本' }); expect(H.game.ownedCards).toHaveLength(0);
     const current = UI._acts.restoreOne; current({ name: '复原样本' }); old({ name: '复原样本' }); current({ name: '复原样本' });
     expect(H.game.ownedCards).toHaveLength(1); expect(H.game.usedPocket[0].count).toBe(2); expect(done).toHaveBeenCalledTimes(1);
+  });
+  it('F02 满包动力锤保留固定奖励，重载后可整理重试且不重复发卡', async () => {
+    const hammer = { id:'cmtn0xt0zr7', name:'闪金之锤', rarity:'传说', type:'装备' };
+    H.game.canReceiveCard = () => false;
+    await openEvent('tt6-goldhammer', [hammer]);
+    UI._acts.evtChoice({ i:'0' });
+    const saved = window.SDT.Chests.serialize(H.game);
+    expect(saved.current.cards.map(c => c.id)).toEqual([hammer.id]);
+    UI._acts.chestTake1({ i:'0' });
+    expect(H.game.ownedCards).toHaveLength(0);
+    expect(window.SDT.Chests.serialize(H.game).current.taken).toEqual([]);
+    H.game.canReceiveCard = () => true;
+    scenes.resumeChestsOnCell(JSON.parse(JSON.stringify(saved)));
+    const take = UI._acts.chestTake1; take({ i:'0' }); take({ i:'0' });
+    expect(H.game.ownedCards.map(o => o.card.id)).toEqual([hammer.id]);
+    expect(UI.el.ovBody.textContent).toContain('1 张已入背包');
+    UI._acts.chestContinue();
+    await vi.advanceTimersByTimeAsync(400);
+    expect(H.game.state).toBe('idle');
+    expect(UI.el.overlay.hidden).toBe(true);
+  });
+  it.each([false, true])('F40 配送无人机满包木材不发碎片，货币选项互斥幂等（满包=%s）', async full => {
+    H.game.canReceiveCard = () => !full;
+    await openEvent('tt6-systemsupply', [{ id:'tt-wood', name:'木材', type:'资源', rarity:'古朴' }]);
+    const choose = UI._acts.evtChoice;
+    choose({ i:'0' });
+    if (full) {
+      expect(H.game.fragments).toBe(0);
+      expect(H.game.visited).toEqual({});
+      expect(UI.el.ovBody.textContent).toContain('碎片和本次选择已保留');
+      expect(H.game.ownedCards).toHaveLength(0);
+      choose({ i:'1' }); choose({ i:'1' }); choose({ i:'0' });
+      expect(H.game.coins).toBe(20);
+    } else {
+      choose({ i:'0' }); choose({ i:'1' });
+      expect(H.game.ownedCards.map(o => o.card.id)).toEqual(['tt-wood']);
+      expect(H.game.coins).toBe(18);
+    }
+    expect(H.game.fragments).toBe(1);
+    expect(H.game.visited).toEqual({ '0,1':1 });
+    expect(H.saves.at(-1)).toMatchObject({ fragments:1, coins:full ? 20 : 18 });
+  });
+  it('F01 祭坛固定候选刷新不重掷，已领卡刷新后不重复发奖', () => {
+    H.cards = [{ id:'legend', name:'传说', rarity:'传说', type:'法术' }, { id:'equip', name:'装备', rarity:'古朴', type:'装备' }];
+    H.game.altarActivated = true; H.game.altarRewardPending = true;
+    altar.openAltarRitual(); UI._acts.altarRewardLoot();
+    const saved = window.SDT.Chests.serialize(H.game);
+    expect(saved.current.source).toContain('祭坛');
+    H.random = () => 0.2;
+    scenes.resumeChestsOnCell(JSON.parse(JSON.stringify(saved)));
+    expect(window.SDT.Chests.serialize(H.game).current.cards).toEqual(saved.current.cards);
+    UI._acts.chestTake1({ i:'0' });
+    const after = window.SDT.Chests.serialize(H.game);
+    scenes.resumeChestsOnCell(JSON.parse(JSON.stringify(after)));
+    UI._acts.chestTake1({ i:'0' }); UI._acts.chestTake1({ i:'1' });
+    expect(H.game.ownedCards.map(o => o.card.id)).toEqual(['legend', 'equip']);
+    UI._acts.chestContinue();
+    expect(H.game.state).toBe('idle');
+    H.random = () => 0.9;
+  });
+  it('F15/F41 物资格满包显示整理，领取成功留结果页再继续', () => {
+    H.cards = [{ id:'wood', name:'木材', type:'资源', rarity:'古朴' }, { id:'key', name:'钥匙', type:'资源', rarity:'古朴' }];
+    H.game.layerData[0].logical[1].def.type = 'resource';
+    H.game.canReceiveCard = () => false;
+    flow.reenterCell();
+    expect(UI.el.ovBody.textContent).toContain('当前放不下');
+    expect(UI.el.ovBody.querySelector('[data-act="resTake"]')).toBeNull();
+    H.game.canReceiveCard = () => true;
+    UI.showOverlay('背包', '<main>背包</main>', 'page'); returnFromBag();
+    const take = UI._acts.resTake; take({ i:'0' }); take({ i:'0' });
+    expect(H.game.ownedCards).toHaveLength(1);
+    expect(H.game.state).toBe('modal');
+    expect(UI.el.ovBody.textContent).toContain('领取完成');
+    expect(UI.el.ovBody.querySelector('[data-act="resTake"]')).toBeNull();
+    UI._acts.resSkip();
+    expect(H.game.state).toBe('idle');
+  });
+  it('F35 闸门确认前可返回当前层，旧进入动作不会换层', () => {
+    altar.openDoorModal({ pair:'p1', toLayer:1, arriveAt:0 }, {});
+    const enter = UI._acts.goDoor;
+    expect(UI.el.ovBody.textContent).toContain('确认前可返回当前层检查遗漏');
+    expect(UI.el.ovBody.querySelector('[data-act="doorBag"]')).not.toBeNull();
+    UI._acts.doorBack(); enter();
+    expect(H.game.layerIdx).toBe(0);
+    expect(H.game.state).toBe('idle');
+    expect(takeBagReturnHook()).toBeNull();
+  });
+  it('F06 三选一明确永久放弃，其余候选刷新后仍不可领取', () => {
+    H.cards = [1, 2, 3].map(i => ({ id:`pick${i}`, name:`候选${i}`, type:'法术', rarity:'古朴' }));
+    window.SDT.MAP.chestKinds.medium = { name:'中型宝箱', pickFrom:3 };
+    scenes.openFixedRewardsOnCell(H.cards, '测试三选一');
+    const saved = window.SDT.Chests.serialize(H.game);
+    saved.queue[0].kind = saved.current.kind = 'medium';
+    scenes.resumeChestsOnCell(saved);
+    expect(UI.el.ovBody.textContent).toContain('其余卡牌永久放弃，无法找回');
+    UI._acts.chestPick({ i:'1' });
+    const after = window.SDT.Chests.serialize(H.game);
+    expect(after.current.taken).toEqual([1]);
+    expect(after.current.lost).toEqual([0, 2]);
+    scenes.resumeChestsOnCell(after);
+    expect(UI.el.ovBody.textContent).toContain('2 张已永久放弃');
+    expect(UI.el.ovBody.querySelector('[data-act="chestPick"]')).toBeNull();
+    expect(H.game.ownedCards.map(o => o.card.id)).toEqual(['pick2']);
+  });
+  it('F42 奖励提示同时说明点击与自动收起，两种关闭均有效', async () => {
+    const { cinematicsMethods } = await import('../game/src/ui/cinematics.js');
+    const cinema = { ...cinematicsMethods, _cardGetQueue:[], _cardGetShowing:false };
+    const card = { id:'reward', name:'奖励', type:'法术', rarity:'古朴' };
+    cinema.showCardReward(card);
+    expect(document.querySelector('#cardGet .lg-hint').textContent).toBe('点击收起 · 稍后自动收起');
+    document.getElementById('cardGet').click();
+    await vi.advanceTimersByTimeAsync(500);
+    expect(document.getElementById('cardGet')).toBeNull();
+    cinema.showLegendGet({ ...card, rarity:'传说' });
+    expect(document.querySelector('#legendGet .lg-hint').textContent).toBe('点击收起 · 稍后自动收起');
+    await vi.advanceTimersByTimeAsync(3300);
+    expect(document.getElementById('legendGet')).toBeNull();
+  });
+  it('B01 首脑战先展示现行牌库与抽牌规则，返回保留挑战', () => {
+    H.game.altarActivated = true;
+    altar.openBossGate();
+    expect(UI.el.ovBody.textContent).toContain('最多 15 张');
+    expect(UI.el.ovBody.textContent).toContain('5 张初始攻击');
+    expect(UI.el.ovBody.textContent).toContain('起手抽 5 张，每回合抽 1 张，手牌上限 8 张');
+    UI._acts.bossGateBack();
+    expect(H.game.state).toBe('idle');
+    expect(H.game.visited).toEqual({});
   });
   it('复原离页/同槽新局后的动作与恢复hook不能操作新局', () => {
     H.game.usedPocket = [{ card: { id: 'restore', name: '复原样本', type: '武术' }, count: 3 }];

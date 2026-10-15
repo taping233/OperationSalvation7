@@ -109,7 +109,7 @@ it('base navigation keeps the veil and shell stable and animates only changed co
 
   for (const [tab, sub] of [['stash', 'cards'], ['stash', 'pets'], ['shop', '']]) {
     ui.showOverlay('', hubPage(tab, sub), 'page');
-    await vi.advanceTimersByTimeAsync(500);   // 分区导航先挂遮层，目标视觉就绪后重放区域入场
+    expect(document.querySelector('.page-visual-handoff')).toBeNull();
     expect(root.hidden).toBe(false);
     expect(root.dataset.surfaceLayout).toBe('base-content');
     expect(root.dataset.uiEnter).toBeUndefined();
@@ -118,6 +118,8 @@ it('base navigation keeps the veil and shell stable and animates only changed co
     const marked = [...body.querySelectorAll('[data-surface-block]')];
     expect(marked.length).toBeGreaterThan(0);   // 分区内容照常入场
     expect(marked.every(el => body.querySelector('.hub-page').contains(el))).toBe(true);
+    await vi.advanceTimersByTimeAsync(500);
+    expect(document.querySelector('.page-visual-handoff')).toBeNull();
   }
 });
 
@@ -133,6 +135,7 @@ it('same-page base updates stay quiet while leaving the base retains normal entr
   expect(body.querySelectorAll('[data-surface-block]')).toHaveLength(0);
 
   ui.showOverlay('', '<main class="settings-page">Settings</main>', 'page');
+  expect(document.querySelector('.page-visual-handoff')).not.toBeNull();
   await vi.advanceTimersByTimeAsync(500);   // 离开基地的整页切换先遮层，就绪后重放区域入场
   expect(root.dataset.surfacePhase).toBeDefined();
   expect(root.dataset.uiEnter).toBeUndefined();   // 卡面翻入动画由遮层淡出替代，不提前播放

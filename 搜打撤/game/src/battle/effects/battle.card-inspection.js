@@ -42,7 +42,7 @@ export function createBattleCardInspection({ cards, readState, curseMeta }) {
 
   const effCostOf = (card, uid) => {
     const state = readState();
-    // 仅后备能源类描述需要读取消耗口袋；常规求费不扫描消耗区。
+    // 仅后备能源类描述需要读取消耗区；常规求费不扫描消耗区。
     const pocketDiscount = pocketSpellDiscountFor(card);
     const consumedSpellCount = pocketDiscount
       ? state.consumed.filter(consumedUid => {

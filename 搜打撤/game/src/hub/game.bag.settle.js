@@ -1,5 +1,5 @@
 /* 由 game.bag.js 拆出（2026-09-22 六文件重构批4）：战后结算（battle.js 回调）——
- * bindBagMixins 装配（onBattleEnd：消耗口袋回充 / 掉宝箱续流 / 撤退拾回）。
+ * bindBagMixins 装配（onBattleEnd：消耗区回充 / 掉宝箱续流 / 撤退拾回）。
  * 逐字搬迁；对壳本体的调用经 game.bag.bridge.js 的 bagSlots（禁 import 壳）。 */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -18,8 +18,8 @@ let restoreBattleReward = null;
 export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || false;
   // ---------- 战后结算（battle.js 回调） ----------
   // win = true 胜利 / false 战败 / null 撤退。
-  // 小怪战：使用过的卡进消耗口袋；BOSS 战：卡牌完好保留；
-  // 注能消耗的卡（consumedUids）：无论战斗类型都进消耗口袋（可在火堆复原）。
+  // 小怪战：使用过的卡进消耗区；BOSS 战：卡牌完好保留；
+  // 注能消耗的卡（consumedUids）：无论战斗类型都进消耗区（可在火堆复原）。
   // 胜利 100% 掉宝箱（按所在环层 / BOSS 固定 BOSS宝箱），开完宝箱再续流。
   // ESM：循环导入下本模块体可能先于 game.session 执行，顶层读 game 会 TDZ，延迟到 boot 统一绑定
   function bindBagMixins() {
@@ -36,7 +36,7 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
   });
   const onBattleEnd = async function (opts, playedUids, win, consumedUids) {
     if (game.nestActive) return;   // 龙巢战斗结算由 game.nest 的总线订阅接管（一图战后流程不适用）
-    if (win === false) { doDeath(); return; }
+    if (win === false) { doDeath({ battleSummary: opts?.battleSummary, battleIsBoss: !!opts?.isBoss }); return; }
     // battle.engine 为每次开战创建独立 opts；同一场结束通知和失败重试共用这份记录。
     let settlement = settlements.get(opts);
     if (!settlement) {
@@ -97,31 +97,27 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
     // Display-only receipt lives in the WeakMap; it is never part of a run save or attempt.
     settlement.cardOutcome = { pocket: [], gone: [], retained: [] };
     if (win !== true) UI.hideOverlay();   // 胜利保留战场短反馈，随后直接进入领奖。
-    // Item 16（2026-09-16 老板定版）：局内满足条件的牌 100% 进入消耗口袋（招式和装备）——
-    // 「1/3 保留」改到离开对局（撤离结算）时统一结算，见 game.run.altar doExtract。
-    // 衍生卡（如 闪金之锤）不能进消耗口袋（2026-09-15 留言）；职业卡与初始攻击仍直接消散。
+    // 用过或被消耗的卡统一进入消耗区，不按职业、初始攻击或衍生稀有度排除。
+    const movedUids = new Set();
     const toPocket = (uids, why) => {
       const moved = [];
-      let gone = 0;
       uids.forEach(uid => {
+        if (movedUids.has(uid)) return;
         const i = game.ownedCards.findIndex(o => o.uid === uid);
-        if (i < 0) return;   // 战斗内临时卡（初始攻击/发现/随机卡）战后消散，自动跳过
-        const card = game.ownedCards[i].card;
-        game.ownedCards.splice(i, 1);
-        if (card.rarity === '职业' || SDT.Base.isSha(card)) { gone++; settlement.cardOutcome.gone.push(card.name); return; }
-        if (card.rarity === '衍生') { gone++; settlement.cardOutcome.gone.push(card.name); return; }
+        const card = i >= 0 ? game.ownedCards[i].card : opts.spentCards?.find(entry => entry.uid === uid)?.card;
+        if (!card) return;
+        if (i >= 0) game.ownedCards.splice(i, 1);
+        movedUids.add(uid);
         moved.push(card);
         settlement.cardOutcome.pocket.push(card.name);
       });
       moved.forEach(card => bagSlots.pocketAdd(card));
-      if ((moved.length || gone) && why) {
-        UI.log(`[[icon:archive]] ${why}：<b>${moved.length}</b> 张卡牌进入消耗口袋` +
-          (gone ? `，<b>${gone}</b> 张消散了（本局无法再用）` : '（本局无法再用）') +
-          '，撤离结算时只有 1/3 能带回基地', 'sys');
+      if (moved.length && why) {
+        UI.log(`[[icon:archive]] ${why}：<b>${moved.length}</b> 张卡牌进入消耗区，复原后可再用`, 'sys');
       }
       return moved.length;
     };
-    // Item 16 定版：所有战斗（含 BOSS）的消耗牌都进消耗口袋，撤离点统一 1/3 结算
+    // Item 16 定版：所有战斗（含 BOSS）的消耗牌都进消耗区，撤离点统一 1/3 结算
     if (playedUids && playedUids.length) {
       toPocket(playedUids, '使用过的卡牌');
     }
@@ -132,7 +128,7 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
     settlement.phase = 'pocket';
     }
     // 「卡牌是消耗品」一次性教学（2026-09-19 关卡审查）：
-    // 打出的卡不回背包、初始攻击/职业卡直接消散——这条核心规则此前只有战后台志提到过，
+    // 用过的牌统一进入消耗区，复原回背包后可再使用。
     // 新手首层打光 5 张初始攻击就会陷入无攻击牌死局。首胜结算后弹一次说明（按档位只弹一次）。
     // 2026-09-19 留言 #17：重做成大版图解页——卡面实物 + 箭头流向 + 图标分栏，不再挤小字
     const teachAmmoOnce = () => {
@@ -141,8 +137,8 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
       B.markAmmoTaught();   // 2026-09-29 收敛：内存推进+尝试保存的旧语义移入 Base 命令
       game.state = 'modal';
       const shaCard = SDT.Cards.all().find(c => c.id === SDT.Cards.SHA.id) || SDT.Cards.SHA;
-      // 2026-10-02 老板：左列「入口袋」图换真正会进消耗口袋的普通牌（镭射，TT10 定版）——
-      // 原两列都用初始攻击，但它打出即消散，左列用它讲入口袋是误导
+      // 2026-10-02 老板：左列「入口袋」图换真正会进消耗区的普通牌（镭射，TT10 定版）——
+      // 卡面仅举例，所有用过的牌按同一规则进入消耗区。
       const pocketCard = SDT.Cards.all().find(c => c.id === 'tt3sp-silverthorn')
         || (Array.isArray(SDT.Cards.TABLETOP10) && SDT.Cards.TABLETOP10.find(c => c.id === 'tt3sp-silverthorn'))
         || shaCard;
@@ -152,17 +148,17 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
             <div class="at-flow">
               <span class="at-card">${SDT.Cards.cardHTML(pocketCard, 'sm')}</span>
               <span class="at-arrow">➜</span>
-              <span class="at-node"><span class="at-ico">[[icon:pocket]]</span><b>消耗口袋</b></span>
+              <span class="at-node"><span class="at-ico">[[icon:pocket]]</span><b>消耗区</b></span>
             </div>
-            <p class="at-txt">普通卡打出后<b>不会回到背包</b>，先进入消耗口袋——可在火堆/修鞋铺复原；撤离结算只有 <b class="gold">1/3</b> 能带回基地。</p>
+            <p class="at-txt">所有用过的牌都进<b>消耗区</b>，复原后可以再用。</p>
           </section>
           <section class="at-col">
             <div class="at-flow">
               <span class="at-card">${SDT.Cards.cardHTML(shaCard, 'sm')}</span>
               <span class="at-arrow">➜</span>
-              <span class="at-node gone"><span class="at-ico">[[icon:skull]]</span><b>直接消散</b></span>
+              <span class="at-node"><span class="at-ico">[[icon:pocket]]</span><b>复原后可再用</b></span>
             </div>
-            <p class="at-txt">【初始攻击】与职业卡打出后<b>直接消散</b>——补给站的初始攻击 1 币 1 张，路过记得补弹。</p>
+            <p class="at-txt">复原回背包，就能再用。具体方法在背包查看。</p>
           </section>
           <section class="at-col">
             <div class="at-flow">
@@ -170,7 +166,7 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
               <span class="at-dot">·</span>
               <span class="at-node"><span class="at-ico">[[icon:bag]]</span><b>常逛商店</b></span>
             </div>
-            <p class="at-txt">弹药有限——多开宝箱、常逛商店补牌。祝顺利撤离。</p>
+            <p class="at-txt">牌快用完时，去宝箱或商店补牌。</p>
           </section>
         </div>
         <div class="ov-btns"><button class="ov-btn ok" data-act="ammoTeachOk">[[icon:check]] 知道了</button></div>`, 'discover');

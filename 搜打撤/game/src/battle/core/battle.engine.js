@@ -10,7 +10,7 @@ import {
   viewingDeck, viewingBag, floats, cardAnims, dreadShown, spellCost1, meleeCost1, shaTransform,
   consumeFireballN, lastDrawnUids, lastPlayedType, playedMartialThisTurn, playedMovesThisTurn,
   selPool, selShaN, sel, selectingDeck, selDeckMax, allies, growthNames, growth, infuseFuels,
-  sealUnlocked, deathSave, killAtkUp, nestRunes, nestSyn, unyieldRune,
+  sealUnlocked, deathSave, killAtkUp, nestRunes, nestSyn, unyieldRune, timeRune, extraTurn,
   unlimitedRune, holyRune, armorMul, sealDone, playerCurseImmune, zeroFeeUntil, cardOverrides,
   equipped, freeCast, activeActionSignal, surgeWaiter, lastPersistAt, snapCache,
   snapSig, set$noDrawNext, set$stealthStrike,
@@ -51,6 +51,7 @@ import '../view/battle.feedback.js';
 import { createBattleSelectionFlow } from './battle.selection-flow.js';
 import { matchesHandSelectKey as matchHandSelectKey } from './battle.hand-selection.js';
 import { createBattleEquipment } from '../bag/battle.equipment.js';
+import { recordBattleDamage } from './battle.summary.js';
 import { createBattleBag } from '../bag/battle.bag.js';
 import { getHostedExecutionCard } from '../effects/battle.hosted.js';
 import { createBattleLifecycle } from './battle.lifecycle.js';
@@ -291,7 +292,7 @@ function captureSnapshotInput() {
       }, []) : null;
     return {
       battleToken: battleState.token, mode, turn, energy, maxEnergy, busy, phase: battleState.phase,
-      actionQueueLength: actionQueue.length,
+      actionQueueLength: actionQueue.length, playedMovesThisTurn, endTurnContext: { deathSave, timeRune, extraTurn },
       opts,
       player: G ? { hp: G.hp, maxHp: G.maxHp, atk: G.atk, spellPower: G.spellPower || 0, myClass: G.myClass || null, characterId: G.characterId || null } : null,
       pdef, pstat, foes, deathFxPending: foes.map(foe => stagedDeathFx.has(foe)), allies, hand, drawPile, discard, grave, infusing, discovering,
@@ -1040,6 +1041,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     },
   });
   const equipment = createBattleEquipment({
+    resolveCardSteps: (card, target) => resolveCard.steps(card, target, false, 0, 'equip-skill'),
     requestBattleRender, clearTargetSession, queueBattleAction, runStagedSteps,
     applyTextEffects, sweepDead, alive, finish, throwIfActionCancelled,
     processChoice, processDiscoverQueue, processHandSelect, randomDiscoverCard,
@@ -1270,7 +1272,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     });
     if (!ids.has(SEALED_HERO_ID) || SEAL_LIMB_IDS.some(id => !ids.has(id))) return;
     set$sealDone(true);
-    // ① 5 张封印单卡自动消耗（进消耗口袋/墓地，不再可用）
+    // ① 5 张封印单卡自动消耗（进消耗区/墓地，不再可用）
     sealedInHand.forEach(u => {
       const o = findCard(u);
       const i = hand.indexOf(u);
@@ -1404,6 +1406,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     // U18：去钳位，负血保留真实值；死亡判定由敌方回合既有 G.hp<=0 检查收口（finish(false) 路径保留不动）。
     // dealDamage 内部把 target.hp 钳 0 并把超出量记入 r.overkill（combat.js 属地不动）——此处还原真实负血。
     G.hp = playerRef.hp - (r.overkill || 0);
+    recordBattleDamage(foe.name, r.dealt, turn);
     SDT.Sound.sfx('hurt');
     // 敌方阶段已在命中前等待前摇，受击数字与实际扣血同拍出现。
     floats.push({ unit: 'self', text: '-' + r.dealt, cls: 'hurt' });

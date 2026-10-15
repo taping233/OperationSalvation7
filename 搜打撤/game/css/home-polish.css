@@ -21,8 +21,8 @@ body #title.home-composed::before {
 body #title.home-composed::after {
   background:
     radial-gradient(ellipse 46% 38% at 52% 0%, #bcd6ff29, transparent 72%),
-    radial-gradient(ellipse 82% 84% at 52% 50%, transparent 56%, #05060a8f 100%),
-    linear-gradient(90deg, #121315c4 0%, #13141682 22%, #13141600 42%, #13141600 66%, #13141666 100%),
+    radial-gradient(ellipse 70% 76% at 53% 40%, transparent 28%, #05091040 58%, #05060ac9 100%),
+    linear-gradient(90deg, #080e18e0 0%, #0c142096 25%, #13141600 43%, #13141600 61%, #080e18b8 100%),
     linear-gradient(0deg, #12131599, transparent 25%, transparent 86%, #12131566);
 }
 /* Both wallpapers and their bleed layer share one camera; art selection keeps its own crossfade. */
@@ -40,12 +40,12 @@ body #title.home-composed .home-scene {
 /* Breathing shaft of winter light behind the menus. */
 body #title.home-composed .title-inner::after {
   content: ''; position: absolute; left: 0; right: 0; top: -8%; height: 62%; z-index: -1; pointer-events: none;
-  background: radial-gradient(ellipse 36% 62% at 50% 0%, #cfe0ff3d, transparent 72%);
+  background: radial-gradient(ellipse 36% 62% at 50% 0%, #cfe0ff18, transparent 72%);
   mix-blend-mode: screen; animation: homeLight 11s ease-in-out infinite alternate;
 }
 @keyframes homeLight {
-  from { opacity: .45; transform: translateX(-1%); }
-  to { opacity: .8; transform: translateX(1%); }
+  from { opacity: .3; transform: translateX(-1%); }
+  to { opacity: .45; transform: translateX(1%); }
 }
 body #title.home-composed .home-snow { opacity: .5; }
 
@@ -57,13 +57,14 @@ body #title.home-composed .home-depth {
   mask-composite: intersect;
 }
 body #title.home-composed .home-scene-light {
-  position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: screen; opacity: .24;
-  background: radial-gradient(ellipse 22% 32% at 55% 32%, #d0e8ff24, transparent 76%);
+  display: none;
+  position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: screen; opacity: .48;
+  /* Cold spill stays beside the city control, away from the portrait's face. */
+  background: radial-gradient(ellipse 20% 17% at 33% 45%, #c4dce52b, #b4cbd611 40%, transparent 76%);
   translate: calc(var(--px, 0) * -2px) calc(var(--py, 0) * -1px);
   transition: opacity .7s ease, translate .9s ease;
 }
-body #title.home-composed[data-home-attention="primary"] .home-scene-light { opacity: .65; }
-body #title.home-composed[data-home-attention="collection"] .home-scene-light { opacity: .45; }
+body #title.home-composed:has(.home-start:is(:hover,:focus-visible)) .home-scene-light { opacity: .9; }
 body #title.home-composed .home-near-snow {
   position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden;
   translate: calc(var(--px, 0) * 10px) calc(var(--py, 0) * 5px); transition: translate 1s ease;
@@ -85,13 +86,13 @@ body #title.home-composed .home-brand { translate: calc(var(--px, 0) * 2px) calc
 body #title.home-composed .home-brand::before {
   content: ''; position: absolute; inset: -10% -6% 4%; z-index: -1; pointer-events: none;
   background: radial-gradient(ellipse 60% 56% at 50% 46%, #e3edff52, transparent 72%);
-  opacity: .55;
+  opacity: .25;
 }
 body #title.home-composed .home-wordmark { position: relative; }
 body #title.home-composed .home-wordmark img {
   filter: drop-shadow(0 0 1px #fff) drop-shadow(0 0 5px #d3e4ff73) drop-shadow(0 4px 6px #0d0f1299);
 }
-body #title.home-composed .home-brand::after { transform-origin: left center; animation: homeRule 1.3s var(--ease-entrance) .5s both; }
+body #title.home-composed .home-brand::after { transform-origin: left center; }
 @keyframes homeRule { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 body #title.home-composed .home-spark {
   position: absolute; left: var(--x); top: var(--y); width: calc(14px * var(--s)); height: calc(14px * var(--s));
@@ -107,7 +108,7 @@ body #title.home-composed .home-spark {
 
 /* ---------- Cinematic atmosphere: ground mist and film grain ---------- */
 body #title.home-composed .home-mist {
-  position: absolute; left: -10%; right: -10%; bottom: 0; height: 40%; z-index: 1; pointer-events: none; opacity: .4; mix-blend-mode: screen;
+  position: absolute; left: -10%; right: -10%; bottom: 0; height: 40%; z-index: 1; pointer-events: none; opacity: .16; mix-blend-mode: screen;
   background:
     radial-gradient(ellipse 40% 50% at 20% 70%, #9fb4d03d, transparent 70%),
     radial-gradient(ellipse 45% 45% at 62% 82%, #b9c9e030, transparent 70%),
@@ -170,26 +171,28 @@ body #title.home-composed .home-secondary .home-plate > .home-hover-glow {
   background: radial-gradient(circle 150px at var(--mx, 50%) var(--my, 50%), #7fd5ff3d, transparent 70%),
     linear-gradient(90deg, transparent calc(100% - 6px), var(--ak-blue) calc(100% - 6px)), linear-gradient(260deg, rgba(31,178,255,.22), rgba(14,16,19,.9) 60%);
 }
-/* Two coherent consoles keep the existing cut plates, blur and contact shadows. */
+/* Open composition: scene remains visible between the wordmark and each functional group. */
 @property --home-pane-light { syntax: '<number>'; inherits: true; initial-value: .15; }
 body #title.home-composed .home-command,
 body #title.home-composed .home-support {
   --home-pane-feedback: var(--home-hover-out);
   transition: --home-pane-light var(--home-pane-feedback) var(--home-touch-ease);
 }
+body #title.home-composed .home-command { left: 6.6%; top: 13%; width: 28%; padding: 0; }
+body #title.home-composed .home-support { right: 6.6%; top: 32%; width: 22%; padding: 0; }
 body #title.home-composed .home-command::before,
 body #title.home-composed .home-support::before {
   content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
-  background: radial-gradient(ellipse at 12% 0, rgba(200,221,243,var(--home-pane-light,.15)), transparent 62%), linear-gradient(145deg, #263c552b, #09122073);
-  backdrop-filter: blur(18px) saturate(.88);
-  border: 1px solid var(--home-ui-edge); border-top-color: var(--home-ui-highlight);
-  box-shadow: inset 0 1px 0 var(--home-ui-highlight), inset 0 -1px 0 #03080e66, 0 14px 28px -14px #02070e8c;
+  background: none;
+  backdrop-filter: none;
+  border: 0;
+  box-shadow: none;
   transition: opacity .35s ease, border-color var(--home-pane-feedback) var(--home-touch-ease);
 }
 body #title.home-composed .home-command::after,
 body #title.home-composed .home-support::after {
-  content: ''; position: absolute; top: 0; left: 22px; width: 42px; height: 2px; z-index: 0; pointer-events: none;
+  content: none; position: absolute; top: 0; left: 22px; width: 42px; height: 2px; z-index: 0; pointer-events: none;
   background: linear-gradient(90deg, #d8ebffbf, transparent);
   transition: width var(--home-pane-feedback) var(--home-touch-ease);
 }
@@ -202,20 +205,35 @@ body #title.home-composed:is([data-home-attention="collection"],[data-home-atten
 body #title.home-composed[data-home-phase="in"] .home-command::before { animation: homeConsoleIn var(--home-console-duration,850ms) var(--home-ui-ease) both; }
 body #title.home-composed[data-home-phase="in"] .home-support::before { animation: homeConsoleIn var(--home-console-duration,850ms) var(--home-ui-ease) var(--home-console-delay,220ms) both; }
 @keyframes homeConsoleIn { from { opacity: 0; } to { opacity: 1; } }
-body #title.home-composed .home-brand { padding: 0; }
-body #title.home-composed .home-primary { margin-top: 34px; }
+body #title.home-composed .home-brand { padding: 0; width: 91%; }
+body #title.home-composed .home-brand::after {
+  width: 68%; height: 2px;
+  background: linear-gradient(90deg,transparent 40%,#e9f7ff 49%,#c5e5f2 52%,transparent 60%) 100% 0 / 240% 100%,linear-gradient(90deg,#c9dce995,#c9dce930,transparent);
+  filter: drop-shadow(0 0 5px #bcddea80); animation: homeHeaderTrace 13s linear infinite;
+}
+body #title.home-composed .home-primary { margin-top: 52px; }
 body #title.home-composed .home-secondary { top: auto; gap: 14px; }
 body #title.home-composed .home-secondary .home-plate {
   height: 90px; width: 100%; margin-left: 0;
-  --plate-fill: linear-gradient(270deg, rgba(43,61,80,.56), rgba(12,19,28,.67) 62%);
-  box-shadow: inset 0 1px 0 #d5e8ff1a, 0 8px 12px -8px rgba(3,8,14,.65), 0 3px 5px -3px rgba(3,8,14,.4);
+  --plate-fill: linear-gradient(270deg, #14202dd4, #14202d73 65%, #14202d00);
+  box-shadow: none;
 }
-/* Collection stays prominent; system controls keep the same cut glass at a quieter scale.
-   Both groups use home-secondary so departure, return and plate numbering remain shared. */
-body #title.home-composed .home-system { top: auto; width: 100%; gap: 12px; margin-top: 34px; }
+body #title.home-composed .home-collection { gap: 22px; }
+body #title.home-composed .home-collection .home-plate { padding: 12px 16px; --plate-accent: #c6d7e6; }
+body #title.home-composed .home-collection .home-ach { width: 90%; margin-left: auto; --plate-accent: #decca1; }
+body #title.home-composed .home-collection .home-line-icon { width: 46px; height: 46px; flex-basis: 46px; }
+body #title.home-composed .home-collection .home-plate::before {
+  inset: auto 0 0 24%; height: 2px; border: 0; clip-path: none;
+  background: linear-gradient(90deg,transparent 32%,#d6effa 47%,#f5fcff 50%,transparent 64%) 100% 0 / 240% 100%,linear-gradient(90deg,transparent,#b7d6e460);
+  filter: drop-shadow(0 0 6px #bcddea99); animation: homeHeaderTrace 9s linear infinite;
+}
+body #title.home-composed .home-collection .home-library::before { animation-delay: -4.5s; }
+body #title.home-composed .home-collection .home-plate::after { backdrop-filter: none; }
+/* System tools retain full hit areas while their plates and accent bars recede. */
+body #title.home-composed .home-system { top: auto; width: 100%; gap: 6px; margin-top: 38px; }
 body #title.home-composed .home-system::before {
   content: ''; position: absolute; left: 0; right: 0; top: -17px; height: 1px; pointer-events: none;
-  background: linear-gradient(90deg, transparent, #ffffff40);
+  background: linear-gradient(90deg, transparent, #cad9e347);
 }
 body #title.home-composed .home-system .home-plate {
   height: 68px; padding: 8px 24px; gap: 14px;
@@ -227,33 +245,87 @@ body #title.home-composed .home-system .home-plate:is(:hover,:focus-visible) .ho
 body #title.home-composed .home-system .home-exit .home-line-icon { color: #c9a7ab; }
 body #title.home-composed .home-system .home-exit:is(:hover,:focus-visible) .home-line-icon { color: #efd0d3; }
 body #title.home-composed .home-primary { gap: 20px; }
-body #title.home-composed .home-primary .home-guide { height: 82px; width: 100%; }
+body #title.home-composed .home-primary .home-guide { }
 body #title.home-composed .home-guide { --plate-fill: rgba(8,16,28,.65); }
 body #title.home-composed .home-plate::before { background: rgba(255,255,255,.17); }
 body #title.home-composed .home-plate::after { inset: 1px; }
 body #title.home-composed .home-button-cn { font-size: var(--home-ui-label); }
 body #title.home-composed .home-system .home-button-cn { letter-spacing: .1em; }
+/* System navigation is one quiet group beneath the two collection destinations. */
+body #title.home-composed .home-system :is(.home-settings,.home-makers,.home-exit) {
+  width: 86%; height: 58px; margin-left: auto; padding: 6px 14px; gap: 12px;
+  --plate-fill: linear-gradient(270deg, #121c2899, #121c2800); --plate-accent: transparent;
+}
+body #title.home-composed .home-system .home-plate::before { background: none; }
+body #title.home-composed .home-system .home-plate::after { backdrop-filter: none; }
+body #title.home-composed .home-system .home-index { visibility: hidden; }
+body #title.home-composed .home-system :is(.home-settings,.home-makers,.home-exit) .home-button-cn { font-size: 21px; }
+body #title.home-composed .home-system :is(.home-settings,.home-makers,.home-exit) .home-line-icon { width: 26px; height: 26px; flex-basis: 26px; }
+body #title.home-composed .home-system :is(.home-settings,.home-makers,.home-exit) .home-button-copy::after { font-size: 14px; }
 body #title.home-composed .home-start .home-button-cn { font-size: var(--home-ui-title); }
-/* Champagne gold instead of signal yellow. */
-body #title.home-composed .home-start { --plate-fill: linear-gradient(105deg, #c59d45, #e9d189 72%); }
-body #title.home-composed .home-start::before { background: #f6e9bf !important; }
+/* The city action keeps its established pale gold face beside the cold beacon. */
+body #title.home-composed .home-start { --plate-fill: linear-gradient(105deg,#bbcbd2,#e1d6b2 72%); height: 108px; color: #14120a; }
+body #title.home-composed .home-start::before { background: #e9e4d1 !important; }
 body #title.home-composed .home-start:hover::before { background: #fff !important; }
-body #title.home-composed .home-start::after { background: linear-gradient(105deg, #c9a24a, #e9d189 72%) !important; }
-body #title.home-composed .home-start:hover::after { background: linear-gradient(105deg, #c9a24a, #e9d189 72%) !important; }
-body #title.home-composed .home-start > .home-hover-glow { background: linear-gradient(105deg, #ecd993, #fff1c4 70%); }
+body #title.home-composed .home-start::after { background: linear-gradient(105deg,#bbcbd2,#e1d6b2 72%) !important; }
+body #title.home-composed .home-start:hover::after { background: linear-gradient(105deg,#bbcbd2,#e1d6b2 72%) !important; }
+body #title.home-composed .home-start > .home-hover-glow { background: linear-gradient(105deg,#dae7ec,#fff0c9 70%); }
+body #title.home-composed .home-start .home-line-icon { color: #14120a; }
+body #title.home-composed .home-start .home-arrow { opacity: 0; }
+body #title.home-composed .home-primary .home-guide { width: 82%; height: 72px; padding-left: 16px; --plate-accent: #becedb; --plate-fill: linear-gradient(90deg, #14202dbd, #14202d00); box-shadow: none; }
+body #title.home-composed .home-primary .home-guide::before {
+  background: radial-gradient(ellipse 45px 30px at 25px 50%,#c1e2f246,transparent 85%);
+  clip-path: none;
+}
+body #title.home-composed .home-guide::after { backdrop-filter: none; }
 /* Sub-labels: bigger and brighter, and the two that mislabelled their destination are corrected. */
 body #title.home-composed .home-button-copy { gap: 4px; }
 body #title.home-composed .home-button-copy::after { font-size: var(--home-ui-sub); letter-spacing: .16em; color: #c3ccd3; }
 body #title.home-composed .home-system .home-button-copy::after { color: #acbdca; }
 body #title.home-composed .home-start .home-button-copy::after { content: 'ENTER THE CITY'; color: #14120a; opacity: .78; }
 body #title.home-composed .home-library .home-button-copy::after { content: 'PHOTO STUDIO'; }
-/* A short, infrequent sheen preserves the primary plate without becoming the scene's pulse. */
-body #title.home-composed .home-sheen {
-  position: absolute; inset: 0; pointer-events: none; overflow: hidden; clip-path: var(--plate-shape);
-  background: linear-gradient(105deg, transparent 40%, #ffffff8c 50%, transparent 60%) 170% 0 / 260% 100% no-repeat;
-  animation: homeSheen 24s ease-in-out 3s infinite;
+/* The city entry keeps its plate without the decorative beacon or scene glow. */
+body #title.home-composed .home-sheen { display: none; }
+body #title.home-composed .home-start .home-city-current {
+  display: none;
+  position: absolute; right: -76px; top: -79px; width: 220px; height: 240px;
+  z-index: 1; overflow: visible; pointer-events: none; fill: none; stroke: none;
+  filter: none;
 }
-@keyframes homeSheen { 0% { background-position: 170% 0; } 10%, 100% { background-position: -70% 0; } }
+body #title.home-composed .city-beam { opacity: .65; }
+body #title.home-composed .city-beam-soft { opacity: .35; }
+body #title.home-composed .city-signal { animation: citySignal 7s linear infinite; opacity: 0; }
+body #title.home-composed .signal-b { animation-delay: -3.5s; }
+body #title.home-composed .city-emitter { filter: drop-shadow(0 0 4px #c7e6ed99); }
+body #title.home-composed .city-guide-line { opacity: .4; }
+body #title.home-composed .city-mote { animation: citySnow 9s linear infinite; opacity: 0; }
+body #title.home-composed .mote-b { animation-delay: -4.5s; }
+@keyframes citySignal { 0% { opacity: 0; transform: translateY(0); } 15% { opacity: .65; } 70% { opacity: .35; } 100% { opacity: 0; transform: translateY(-112px); } }
+@keyframes citySnow { 0%,100% { opacity: 0; } 20%,70% { opacity: .6; } to { transform: translate(5px,35px); } }
+/* Secondary destinations catch small, staggered glints; system tools remain quiet. */
+body #title.home-composed .home-collection .home-plate::after {
+  background: radial-gradient(ellipse 3px 9px at 99% 48%,#dcecf2,transparent),linear-gradient(270deg,#b4c9d730,transparent 22%),var(--plate-fill);
+}
+body #title.home-composed .home-collection .home-line-icon { color: #dbeaf0; filter: drop-shadow(0 0 3px #def4ffb3) drop-shadow(0 0 11px #a6d2e680); animation: homeDestinationLight 9s ease-in-out infinite; }
+body #title.home-composed .home-library .home-line-icon { animation-delay: -4.5s; }
+body #title.home-composed .home-guide .home-line-icon { color: #d1e7ef; filter: drop-shadow(0 0 6px #b6d9ee99); }
+body #title.home-composed :is(.home-collection,.home-primary) .home-button-copy { position: relative; }
+body #title.home-composed :is(.home-collection .home-plate,.home-guide) .home-button-copy::before {
+  content: ''; position: absolute; top: -13px; right: 0; width: 4px; height: 4px;
+  background: #e4f5fc; box-shadow: 0 0 6px #d9f3ff,0 0 16px #a6d2e6b3;
+  opacity: .7; pointer-events: none;
+}
+body #title.home-composed .home-system { opacity: .68; transition: opacity .3s ease; }
+body #title.home-composed .home-system:is(:hover,:focus-within) { opacity: 1; }
+body #title.home-composed .home-edge-band, body #title.home-composed .home-rail, body #title.home-composed .home-readout { opacity: .55; }
+@keyframes homeHeaderTrace { to { background-position: -140% 0,0 0; } }
+@keyframes homeDestinationLight { 0%,35%,75%,100% { opacity: .85; } 50%,60% { opacity: 1; } }
+body:is(.page-covered,:has(#homeCredits[open])) #title.home-composed .home-brand::after,
+body:is(.page-covered,:has(#homeCredits[open])) #title.home-composed .home-collection .home-plate::before { animation-play-state: paused !important; }
+body.page-covered #title.home-composed .home-city-current *,
+body:has(#homeCredits[open]) #title.home-composed .home-city-current *,
+body.page-covered #title.home-composed .home-collection .home-line-icon,
+body:has(#homeCredits[open]) #title.home-composed .home-collection .home-line-icon { animation-play-state: paused !important; }
 
 /* ---------- Footer and details ---------- */
 /* Wallpaper switch sits beside the wallpaper-only toggle instead of across the screen. */
@@ -325,19 +397,19 @@ body #title.home-composed .home-plate:focus-visible { outline-offset: 4px; }
 body #title.home-composed .title-bg-alternate { filter: saturate(.88) contrast(1.03) brightness(.96); }
 body #title.home-composed[data-home-wallpaper="ensemble"]::after {
   background:
-    radial-gradient(ellipse 82% 84% at 52% 50%, transparent 56%, #05060a70 100%),
-    linear-gradient(90deg, #0e1014c4 0%, #0f111566 24%, #0f111500 44%, #0f111500 66%, #0f11154d 100%),
+    radial-gradient(ellipse 72% 78% at 52% 42%, transparent 30%, #05091040 60%, #05060ab8 100%),
+    linear-gradient(90deg, #080e18dc 0%, #0c142082 25%, #13141600 44%, #13141600 61%, #080e18a6 100%),
     linear-gradient(0deg, #0e10148f, transparent 26%, transparent 84%, #0e10144d);
 }
 body #title.home-composed[data-home-wallpaper="ensemble"] .home-slash polygon { opacity: .6; }
 body #title.home-composed[data-home-wallpaper="ensemble"] .home-command { width: 27.5%; }
 body #title.home-composed[data-home-wallpaper="ensemble"] .home-snow { opacity: .2; }
-body #title.home-composed[data-home-wallpaper="ensemble"] .home-mist { opacity: .22; }
+body #title.home-composed[data-home-wallpaper="ensemble"] .home-mist { opacity: .1; }
 body #title.home-composed[data-home-wallpaper="ensemble"] .home-depth {
   backdrop-filter: blur(.7px) saturate(.95);
   mask-image: radial-gradient(ellipse 46% 62% at 51% 49%, transparent 0 68%, #000 97%); mask-composite: add;
 }
-body #title.home-composed[data-home-wallpaper="ensemble"] .home-scene-light { background: radial-gradient(ellipse 24% 34% at 52% 45%, #f4e5ca1c, transparent 80%); }
+body #title.home-composed[data-home-wallpaper="ensemble"] .home-scene-light { background: radial-gradient(ellipse 20% 17% at 33% 45%, #c4dce51c, #b4cbd60d 40%, transparent 76%); }
 body #title.home-composed[data-home-wallpaper="ensemble"] .home-near-snow { display: none; }
 
 /* ---------- Motion safety ---------- */
@@ -349,6 +421,8 @@ body.page-covered #title.home-composed .home-brand::before,
 body.page-covered #title.home-composed .home-mist,
 body.page-covered #title.home-composed .home-grain,
 body.page-covered #title.home-composed .home-sheen,
+body.page-covered #title.home-composed .home-sheen::before,
+body:has(#homeCredits[open]) #title.home-composed .home-sheen::before,
 body.page-covered #title.home-composed .home-readout-dot { animation-play-state: paused !important; }
 body.page-covered #title.home-composed .home-near-snow i,
 body:has(#homeCredits[open]) #title.home-composed .home-near-snow i { animation-play-state: paused; }
@@ -365,14 +439,13 @@ body #title.home-composed.wallpaper-only :is(.home-depth,.home-scene-light,.home
 body #title.home-composed.wallpaper-only .home-scene { animation: none; translate: none; scale: 1; filter: none; }
 body #title.home-composed.wallpaper-only :is(.home-near-snow i,.home-mist,.home-grain,.home-ghost-track,.home-beams,.hs-accent) { animation-play-state: paused; }
 body.reduce-motion #title.home-composed .home-grain,
-body.reduce-motion #title.home-composed .home-spark,
-body.reduce-motion #title.home-composed .home-sheen { display: none; }
+body.reduce-motion #title.home-composed .home-spark { display: none; }
 body.reduce-motion #title.home-composed .home-near-snow { display: none; }
 body.reduce-motion #title.home-composed *,
 body.reduce-motion #title.home-composed *::before,
 body.reduce-motion #title.home-composed *::after { animation: none !important; transition: none !important; translate: none !important; }
 @media (prefers-reduced-motion: reduce) {
-  body #title.home-composed .home-grain, body #title.home-composed .home-spark, body #title.home-composed .home-sheen { display: none; }
+  body #title.home-composed .home-grain, body #title.home-composed .home-spark { display: none; }
   body #title.home-composed .home-near-snow { display: none; }
   body #title.home-composed *, body #title.home-composed *::before, body #title.home-composed *::after { animation: none !important; transition: none !important; translate: none !important; }
 }

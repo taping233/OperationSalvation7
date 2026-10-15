@@ -1,5 +1,5 @@
 import { esc } from '../core/shared.js';
-import { NODE_INFO } from '../core/node-info.js';
+import { mapNodeInfo } from '../core/node-info.js';
 import { isConsumedMapNode } from '../core/map-node-state.js';
 import { mapNodeArtHTML, mapNodeIconDataUrl } from '../core/map-node-art.js';
 import { findMapTravelPath, getMapTravelPresentation } from './map-travel-path.js';
@@ -28,8 +28,7 @@ export function expeditionRoutes(game) {
     unique.add(idx);
     const door = layer.doors?.find(d => d.at === idx);
     const cleared = isConsumedMapNode(game, { li, idx, def: cell.def });
-    const type = cleared ? 'blank' : door ? 'door' : cell.def?.type;
-    const [name, hint, icon, tone] = NODE_INFO[type] || ['安全节点', '继续探明周围的路线', 'map', 'quiet'];
+    const [name, hint, icon, tone] = mapNodeInfo(game, { li, idx, def:cell.def });
     const plan=game.routePlan?.status==='applied' && game.routePlan.layerIndex===li && current.id===game.routePlan.startNodeId ? game.routePlan : null;
     const role=!cleared && plan && cell.id===plan.supplyNodeId?'supply':!cleared && plan && cell.id===plan.riskNodeId?'risk':null;
     const routeName=role==='supply'?'补给支路 · 物资点':role==='risk'?'交战支路 · 遭遇战':name;
@@ -83,7 +82,7 @@ export function expeditionObjective(game) {
       // 实测对账修正过一次参数序反转（门在东南被报成北）——以 raw dx/dy 对拍为准。
       const DIRS = ['东', '东南', '南', '西南', '西', '西北', '北', '东北'];
       const dir = DIRS[((Math.round(Math.atan2(best.dy, best.dx) / (Math.PI / 4)) % 8) + 8) % 8];
-      const steps = Math.max(1, Math.round(best.dist / 120));   // 120 = game.session.map MAP_NODE_SPACING 同值
+      const steps = Math.max(1, Math.round(best.dist / 180));   // 180 = game.session.map MAP_NODE_SPACING 同值
       return { tone: 'gold', text: `下一层闸门在${dir}方向 · 直线约 ${steps} 格 · 沿路搜集补给` };
     }
   }
@@ -116,12 +115,13 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
       summary.innerHTML = `<nav class="expedition-toolbar" aria-label="远征工具">
         <button data-expedition-tool="bag" aria-label="背包：携带卡牌 ${used}/${cap}" ${disabled ? 'disabled' : ''}>${iconHTML('bag')}<span>背包</span><strong>${used}<small>/${cap}</small></strong><kbd>B</kbd></button>
         <button data-expedition-tool="safe" aria-label="安全格：保护物资 ${safe}/${safeCap}" ${disabled ? 'disabled' : ''}>${iconHTML('lock')}<span>安全格</span><strong>${safe}<small>/${safeCap}</small></strong></button>
-        <button data-expedition-tool="pocket" aria-label="消耗口袋：待复原卡牌 ${pocket}" ${disabled ? 'disabled' : ''}>${iconHTML('cards')}<span>消耗口袋</span><strong>${pocket}</strong></button>
+        <button data-expedition-tool="pocket" aria-label="消耗区：已消耗卡牌 ${pocket}" ${disabled ? 'disabled' : ''}>${iconHTML('cards')}<span>消耗区</span><strong>${pocket}</strong></button>
         <span class="expedition-toolbar-space"></span>
         <button class="map-view-tool" data-expedition-tool="focus" ${disabled ? 'disabled' : ''}>${iconHTML('map')}<span>定位</span><kbd>F</kbd></button>
         <button class="map-view-tool" data-expedition-tool="overview" ${disabled ? 'disabled' : ''}>${iconHTML('map')}<span>总览</span><kbd>G</kbd></button>
       </nav>`;
     }
+
   }
   const chapter = doc.getElementById('expeditionChapter');
   const chapterKey = `${game.layerIdx}:${game.trackPos}:${Object.keys(game.seen || {}).length}`;
@@ -153,7 +153,7 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
   const selectedSupply = selectedNode && supply?.layerIdx === selectedNode.li && supply.trackPos === selectedNode.idx &&
     (supply.taken?.length || 0) < (supply.cardIds?.length || 0);
   const [nodeName, nodeHint, nodeIcon] = selectedNode
-    ? NODE_INFO[selectedSpent ? 'blank' : selectedDoor ? 'door' : selectedNode.def?.type] || ['已知地点', '查看当前已知区域', 'map']
+    ? mapNodeInfo(game, selectedNode)
     : [];
   const name = selectedSupply ? '入城补给' : route?.name || nodeName;
   const hint = selectedSupply ? '待领取职业补给' : route?.hint || nodeHint;
@@ -173,12 +173,12 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
   strip.hidden = !name;
   strip.dataset.nodeTone = danger ? 'danger' : 'neutral';
   strip.setAttribute('aria-label', selectedSupply ? `${name}（节点 ${selectedNode.idx + 1}）` : route?.ariaLabel || name || '地点预览');
-  const displayType = selectedSupply ? 'event' : selectedSpent ? 'blank' : selectedDoor ? 'door' : selectedNode?.def?.type;
+  const displayType = selectedSupply ? 'event' : selectedDoor ? 'door' : selectedNode?.def?.type;
   const paintedIcon = name && mapNodeArtHTML(displayType);
   const glyph = name && !paintedIcon && mapNodeIconDataUrl(displayType);
   strip.innerHTML = name ? `
     <header class="expedition-preview-heading">
-      <span class="expedition-preview-icon" aria-hidden="true">${paintedIcon || (glyph ? `<img class="ic${selectedSpent ? ' empty-node-icon' : ''}" src="${glyph}" alt="" draggable="false">` : selectedSpent || route?.cleared ? '<svg class="ic empty-node-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="16" height="14"/><path d="M9 12h6"/></svg>' : iconHTML(route?.icon || nodeIcon))}</span>
+      <span class="expedition-preview-icon" aria-hidden="true">${paintedIcon || (glyph ? `<img class="ic" src="${glyph}" alt="" draggable="false">` : iconHTML(route?.icon || nodeIcon))}</span>
       <span class="expedition-preview-copy"><small class="expedition-preview-status">${esc(status)}</small><b>${esc(name)}</b></span>
       <button type="button" class="expedition-preview-close" data-route-close="1" aria-label="关闭地点预览">×</button>
     </header>

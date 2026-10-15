@@ -9,7 +9,7 @@ import { modeCfg } from './game.session.modes.js';
 
 // ---------- 背包容量（基地扩建后生效）----------
 // 物资与卡牌混占背包格：同名物资/同名卡牌各堆叠 1 格；
-// 安全格独立计容（基地用口粮升级），消耗口袋不占格（无限容量）。
+// 安全格独立计容（基地用口粮升级），消耗区不占格（无限容量）。
 // 珍珠盒（Q5 老板定向）：每持有 1 个额外扩容 9 格，扩出来的格子只能放资源卡。
 export const PEARL_BOX_ID = 'tt2-pearlbox';
 const PEARL_BOX_SLOTS = 9;
@@ -69,7 +69,7 @@ export function assertZones() {
       console.error('[zone] 卡牌同时标记 safe 与异常 brought：', o.uid, o.card && o.card.name);
     }
   });
-  // 消耗口袋与身上卡不共享 uid（usedPocket 存 {card,count} 聚合，无 uid，天然隔离）
+  // 消耗区与身上卡不共享 uid（usedPocket 存 {card,count} 聚合，无 uid，天然隔离）
   game.usedPocket.forEach(p => {
     if (p && p.uid) console.error('[zone] usedPocket 条目不应携带 uid：', p.uid, p.card && p.card.name);
   });

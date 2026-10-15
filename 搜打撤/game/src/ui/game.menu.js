@@ -863,7 +863,7 @@ function createGameMenuController(deps) {
 
   // ---------- 离开对局 / 放弃对局（v0.21 设计者规则） ----------
   // 放弃对局：带入本局的卡牌【全部】丢失；对局中获得的卡牌只有安全格里的
-  // 会被宠物运回基地；物资/金币/消耗口袋全部散失。
+  // 会被宠物运回基地；物资/金币/消耗区全部散失。
   let leaveView = null;
   function leavePanel(title, step, content, initialFocus) {
     const view = { step, busy:false };
@@ -930,7 +930,7 @@ function createGameMenuController(deps) {
     const view = leavePanel('确认放弃本次对局？', 'abandon', `
       <p class="leave-run-warning">放弃后，本次远征将结束。</p>
       <dl class="leave-run-consequences">
-        <div><dt>将失去</dt><dd>带入的全部卡牌、未存入安全格的本局所得，以及金币、物资和消耗口袋。</dd></div>
+        <div><dt>将失去</dt><dd>带入的全部卡牌、未存入安全格的本局所得，以及金币、物资和消耗区。</dd></div>
         <div><dt>可带回</dt><dd>本局获得并已存入安全格的卡牌${safeCount ? `（${safeCount} 张）` : '（当前没有）'}。</dd></div>
       </dl>
       <div class="leave-run-actions">

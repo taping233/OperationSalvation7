@@ -11,7 +11,7 @@ import { MODES, game, newRun, requestClassChoice } from '../run/game.session.js'
 import { Sfx, _set_cardPageOpen } from './game.cardslib.js';
 import { slots as hubBridge } from './game.hub.bridge.js';   // 别名防局部 slots（槽位数）遮蔽——实机 depBack 曾因此 TypeError
 import { bindDepartureFilters, updateDepartureView } from './departure.view-updates.js';
-import { departureSummary } from './departure.summary.js';
+import { departureSummary, previewRecommendedDeparture } from './departure.summary.js';
 import { baseHomeV3HTML } from './hub.home-v3.js';
 import { enterDepartureCut, startDepartureHandoff } from '../ui/departure-transition.js';
 import '../../css/departure-selected.css';
@@ -46,6 +46,7 @@ import '../../css/roster-reference.css';
   let deploymentSlot = null;
   let deploySubmitting = false;
   let deployHint = '';      // 页内提示（容量不足等）
+  let deployRecommendation = null, deployUndo = null;
   let deployFilters = { rarity: '', type: '', cost: '' }; // 筛选只属于本次整备，不写存档。
   let departureGeneration = 0;
   let departureEntry = null;
@@ -69,6 +70,7 @@ import '../../css/roster-reference.css';
     deploySubmitting = false;
     game.state = 'modal';
     deployHint = '';
+    deployRecommendation = null; deployUndo = null;
     if (deployPickFresh || !deployPick) deployFilters = { rarity: '', type: '', cost: '' };
     // 预设应用链路（applyPicks → openDeparture）刚注入的选择必须保留：
     // 此前无条件清空，应用预设后确认出发只携带初始攻击（09-30 深审 ROOT-01）
@@ -186,6 +188,7 @@ import '../../css/roster-reference.css';
         slots, capacity: preview.capacity, capacityHtml, hint: deployHint,
         summaryHtml, petId: B.carriedPet()?.id || '', rich: html => SDT.Icons.rich(html),
       });
+      syncRecommendationButtons(currentStage);
       return;
     }
     UI.showOverlay('', `
@@ -210,6 +213,7 @@ import '../../css/roster-reference.css';
           </aside>
           <section class="hub-card dep-storage">
             <h3>仓库候选 <span class="set-tip">点击或拖拽带入</span></h3>
+            <div class="dep-recommend"><button class="mini-btn" data-act="depRecommendPreview">预览推荐装配</button><button class="mini-btn" data-act="depRecommendApply" disabled>应用预览</button><button class="mini-btn" data-act="depRecommendUndo" disabled>撤销推荐</button><small>保留已选，最多补 3 张不同卡，预留至少 3 格；可继续拖拽调整。</small></div>
             <div class="dep-filters">
               <label>稀有度<select id="depFilterRarity" aria-label="按稀有度筛选仓库卡牌"></select></label>
               <label>类型<select id="depFilterType" aria-label="按类型筛选仓库卡牌"></select></label>
@@ -224,6 +228,7 @@ import '../../css/roster-reference.css';
             <div class="bag-grid${full ? ' full' : ''}" id="depBag">${bagCells}</div>
             ${petStrip ? `<div class="pet-strip"><span class="pet-strip-label">[[icon:paw]] 随行宠物</span>${petStrip}</div>` : ''}
             <p class="camp-pack-note">点击卡面查看规则；拖回仓库移出额外携带。</p>
+            <details class="dep-survival"${B.data.ammoTaught ? '' : ' open'}><summary>用过的牌去哪了？</summary><p>所有用过的牌都进入<b>消耗区</b>，复原后可以再用。</p><p>复原方法在背包查看；撤离时再确认带回结果。</p></details>
           </section>
         </div>
         <p class="dep-status" id="depStatus" role="status"${deployHint ? '' : ' hidden'}>${deployHint}</p>
@@ -234,9 +239,40 @@ import '../../css/roster-reference.css';
         </footer>
       </div>`, 'page');
     const stage = document.getElementById('depMain'), slot = B.slot, generation = departureGeneration;
+    syncRecommendationButtons(stage);
     const current = () => generation === departureGeneration && SDT.Base.slot === slot && stage?.isConnected
       && document.getElementById('depMain') === stage && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
     const act = (name, handler) => UI.act(name, data => { if (current()) return handler(data); });
+    const signature = recommendationSignature;
+    act('depRecommendPreview', async () => {
+      const before = signature();
+      let previewDeployment;
+      try { ({ previewDeployment } = await import('./preparation.commands.js')); }
+      catch { if (current()) { deployHint = '推荐预览暂不可用，可继续手动整备或再次预览。'; renderDepartPrep(); } return; }
+      if (!current() || before !== signature()) return;
+      const plan = previewRecommendedDeparture({ ...departureOptions(), previewDeployment });
+      deployRecommendation = { ...plan, signature: signature() };
+      deployHint = plan.added.length ? `推荐补充：${plan.added.map(esc).join('、')}各 1 张。预览占 ${plan.summary.slots}/${plan.summary.capacity} 格；点击「应用预览」后仍可调整，当前未扣仓。`
+        : '当前库存或剩余容量没有可补充的推荐；已选卡牌保持不变。建议留 3 格接收战利品与入城职业卡。';
+      renderDepartPrep();
+    });
+    act('depRecommendApply', () => {
+      if (!deployRecommendation || deployRecommendation.signature !== signature()) {
+        deployHint = '请先预览推荐；若库存或选择有变化，请重新预览。'; renderDepartPrep(); return;
+      }
+      const before = { ...deployPick };
+      deployPick = { ...deployRecommendation.picks };
+      deployUndo = { before, after: JSON.stringify(deployPick) };
+      deployRecommendation = null;
+      deployHint = '已应用推荐，尚未扣仓；可拖回仓库调整或点击「撤销推荐」。'; renderDepartPrep();
+    });
+    act('depRecommendUndo', () => {
+      if (!deployUndo || deployUndo.after !== JSON.stringify(deployPick)) {
+        deployHint = '没有可撤销的推荐，或你已继续调整；保留当前选择。'; renderDepartPrep(); return;
+      }
+      deployPick = { ...deployUndo.before }; deployUndo = null; deployRecommendation = null;
+      deployHint = '已撤销推荐，恢复应用前的携带选择；仓库未扣卡。'; renderDepartPrep();
+    });
     bindDepartureFilters(stage, B.data.stash, {
       filters: deployFilters, rarities: SDT.Cards.RARITIES, types: SDT.Cards.TYPES,
       rarityOf: card => SDT.Cards.rarityOf(card),
@@ -386,15 +422,28 @@ import '../../css/roster-reference.css';
     deployJustOpened = false;   // 首帧渲染完成，后续页内操作不再播动画
   }
 
+  function recommendationSignature() {
+    return JSON.stringify([SDT.Base.slot, SDT.Base.data.selMode, SDT.Base.carriedPet()?.id, SDT.Base.bagCap(), departurePreview().starterCount,
+      SDT.Base.data.stash.map(stack => [departureStackKey(stack), stack.count, stack.card.name, stack.card.rarity]), deployPick]);
+  }
+  function syncRecommendationButtons(root) {
+    if (!root) return;
+    const apply = root.querySelector('[data-act="depRecommendApply"]'), undo = root.querySelector('[data-act="depRecommendUndo"]');
+    if (apply) apply.disabled = !(deployRecommendation?.added.length && deployRecommendation.signature === recommendationSignature());
+    if (undo) undo.disabled = !(deployUndo && deployUndo.after === JSON.stringify(deployPick));
+  }
   function departurePreview() {
+    return departureSummary(departureOptions());
+  }
+  function departureOptions() {
     const B = SDT.Base;
-    return departureSummary({ starterCount: MAP.rules.starterSha, starterCard: SDT.Cards.SHA,
+    return { starterCount: MAP.rules.starterSha, starterCard: SDT.Cards.SHA,
       fireball: SDT.Cards.all?.().find(card => card.id === 'tt3-fireball'), pet: B.carriedPet(),
       stash: B.data.stash, picks: deployPick, capacity: B.bagCap(),
-      stackCapOf: game.stackCapOf || (card => ['初始攻击', '火球'].includes(card.name) ? 5 : 3) });
+      stackCapOf: game.stackCapOf || (card => ['初始攻击', '火球'].includes(card.name) ? 5 : 3) };
   }
   function deploySlotsUsed() { return departurePreview().slots; }
 
-  // —— 仓库页：卡牌仓库（容量 / 卖出 / 收藏）+ 消耗口袋 + 物资 ——
+  // —— 仓库页：卡牌仓库（容量 / 卖出 / 收藏）+ 消耗区 + 物资 ——
 
 export { hubDeployHTML, openDepartPrep, deployPick, setDeployPick };

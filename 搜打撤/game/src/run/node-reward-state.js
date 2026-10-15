@@ -19,12 +19,10 @@ export function entrySupplyAt(game) {
   return validEntrySupply(value) && value.layerIdx === game.layerIdx && value.trackPos === game.trackPos ? value : null;
 }
 
-// 入城闸门（2026-10-15 老板规则）：未进入过入城补给格前，不能前往其他节点。
-// 「进入过」= 打开过补给页（entered）或已领过卡（旧档没有 entered 字段，用 taken 推断）；
-// 领不完全部卡不拦——补给本来允许留在入口，回头再领。
+// 入城补给全部领取后才能前往其他节点；打开页面或只领取部分卡牌不会解锁。
 export function entrySupplyGate(game) {
   const supply = entrySupplyAt(game);
-  return !!supply && !supply.entered && !(supply.taken?.length || 0);
+  return !!supply && supply.taken.length < supply.cardIds.length;
 }
 
 export function claimEntrySupply(game, { findCard, canReceive, newUid, index:onlyIndex = null }) {

@@ -1,4 +1,4 @@
-/* SYS-03 物资事务审计（2026-10-03 老板 SYS-03）：钥匙复原链（消耗口袋→卡牌仓库）钉现状。
+/* SYS-03 物资事务审计（2026-10-03 老板 SYS-03）：钥匙复原链（消耗区→卡牌仓库）钉现状。
  * 链路：基地页「复原 ×N」按钮（game.hub.pages.js 按 pocketKeyCost 预检 afford disabled）
  *   → UI.act('restoreCard')（game.hub.js:278，按返回值分笔回执：true/'sha'/'full'/nokey）
  *   → Base.restore（base.js）：钥匙不足 nokey 拒绝、仓库满 full 拒绝、mutate 事务内

@@ -153,7 +153,7 @@ it('复原稳定引用在索引移动之后只提交预览的ID和variant堆', a
 it('预览以后数量改变不会按更新整堆意外扣钥匙', async () => {
   harness=await createBrowsingHarness(); harness.base.data.pocket=[{card:{id:'card',name:'复原'},count:3}]; harness.runtime.openBaseHub('stash');
   harness.ui._acts.restoreCard({stackKey:'card:card',count:'2',name:'复原',i:'0'});
-  expect(harness.base.restore).not.toHaveBeenCalled(); expect(harness.ui.log).toHaveBeenCalledWith('口袋数量已变化，请重新打开详情','warn');
+  expect(harness.base.restore).not.toHaveBeenCalled(); expect(harness.ui.log).toHaveBeenCalledWith('消耗区数量已变化，请重新打开详情','warn');
 });
 it('同页重绘后最新扩建handler仍能正常提交，旧handler已失效', async () => {
   harness=await createBrowsingHarness(); harness.runtime.openBaseHub('stash'); const previous=harness.ui._acts.upStash;

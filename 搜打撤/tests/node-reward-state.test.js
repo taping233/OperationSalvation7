@@ -60,24 +60,26 @@ describe('入口补给与节点收益保存事务', () => {
     expect(validateRunSave({ hp:20 }).ok).toBe(true);
   });
 
-  it('入城闸门：未进入补给页且未领过卡时拦住脚下格，进入或领卡后解除', () => {
+  it('入城补给必须全部领取，entered 与旧档部分领取均不解除闸门', () => {
     const game = makeGame();
     game.entrySupply = createEntrySupply(game, cards);
-    // 开局站在补给格上且从未进入 → 闸门激活
     expect(entrySupplyGate(game)).toBe(true);
-    // 离开补给格（进入前不可能合法发生，但防御性确认闸门只看脚下格）
     game.trackPos = 3;
     expect(entrySupplyGate(game)).toBe(false);
     game.trackPos = 4;
-    // 打开过补给页（entered）→ 解锁；领不完全部卡也不重新上闸
     game.entrySupply.entered = true;
+    expect(entrySupplyGate(game)).toBe(true);
+    game.entrySupply.taken = [0];
+    expect(entrySupplyGate(game)).toBe(true);
+    game.entrySupply.taken = [0, 1];
     expect(entrySupplyGate(game)).toBe(false);
-    // 旧档没有 entered 字段：领过卡（taken>0）视为已进入，一张没领则仍然拦住
-    const legacyEntered = { ...createEntrySupply(makeGame(), cards), taken:[0] };
-    expect(entrySupplyGate({ layerIdx:0, trackPos:4, entrySupply:legacyEntered })).toBe(false);
-    const legacyUntouched = { ...createEntrySupply(makeGame(), cards) };
-    expect(entrySupplyGate({ layerIdx:0, trackPos:4, entrySupply:legacyUntouched })).toBe(true);
-    // entered 字段通过存档校验（新档写入、旧档缺省都合法）
+
+    // 历史档缺少 entered 时，仍以实际领取索引判断剩余奖励。
+    const legacyUntouched = createEntrySupply(makeGame(), cards);
+    const gate = supply => entrySupplyGate({ layerIdx:0, trackPos:4, entrySupply:supply });
+    expect(gate(legacyUntouched)).toBe(true);
+    expect(gate({ ...legacyUntouched, taken:[0] })).toBe(true);
+    expect(gate({ ...legacyUntouched, taken:[0, 1] })).toBe(false);
     expect(validEntrySupply(game.entrySupply)).toBe(true);
     expect(validEntrySupply(legacyUntouched)).toBe(true);
     expect(validEntrySupply({ ...legacyUntouched, entered:'yes' })).toBe(false);

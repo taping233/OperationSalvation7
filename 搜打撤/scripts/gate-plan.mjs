@@ -47,6 +47,7 @@ export const WORKFLOW_TESTS = new Map([
   ['scripts/runtime-asset-redundancy.mjs', ['tests/runtime-asset-redundancy.test.js', 'tests/runtime-asset-redundancy-plugin.test.js']],
   ['scripts/runtime-asset-redundancy-review.mjs', ['tests/runtime-asset-redundancy.test.js', 'tests/runtime-asset-redundancy-plugin.test.js']],
   ['scripts/css-asset-minification.mjs', ['tests/css-asset-minification.test.js']],
+  ['scripts/css-redundancy-audit.mjs', ['tests/css-redundancy-audit.test.js']],
   ['scripts/sync-cards-from-live.mjs', ['tests/sync-cards-from-live.test.js', 'tests/schema-op-coverage.test.js', 'tests/contracts.test.js']],
 ]);
 // R2（2026-10-01 拍板）：明确不配专属映射的脚本——回退脚本契约测试+引用搜索+哨兵，不再全量。

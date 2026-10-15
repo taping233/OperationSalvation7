@@ -74,7 +74,7 @@ function freezeRows(rows) {
   }));
 }
 
-// 卡牌、货架与消耗口袋包含嵌套纯数据，应逐层隔离；带原型对象保留引用。
+// 卡牌、货架与消耗区包含嵌套纯数据，应逐层隔离；带原型对象保留引用。
 function freezeDataRows(rows) {
   return Object.freeze((rows || []).map((row) => freezeDataValue(row)));
 }

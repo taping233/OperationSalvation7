@@ -5,7 +5,7 @@ export function pocketSpellDiscountFor(card) {
     const rule = modifiers.find(item => item.kind === 'consumedSpellDiscount');
     return rule ? (+rule.amount || 0) : 0;
   }
-  const match = String(card.desc || '').match(/消耗口袋中每有一张法术牌[，,]?\s*本牌费用\s*-\s*(\d+)/);
+  const match = String(card.desc || '').match(/消耗(?:区|口袋)中每有一张法术牌[，,]?\s*本牌费用\s*-\s*(\d+)/);
   return match ? +match[1] : 0;
 }
 

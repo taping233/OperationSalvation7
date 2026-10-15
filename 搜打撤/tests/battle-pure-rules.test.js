@@ -41,7 +41,7 @@ describe('纯费用规则：优先级与限时折扣', () => {
   });
 });
 
-describe('纯费用规则：卡牌条件与 TT12 消耗口袋', () => {
+describe('纯费用规则：卡牌条件与 TT12 消耗区', () => {
   it('上一张武术可归零；追斩按其他武术数折扣并封底为零', () => {
     expect(cost({ cost: 2, desc: '上一张牌是武术时，本牌0费' }, { lastPlayedType: '武术' })).toBe(0);
     const chase = { cost: 2, desc: '本回合每打出一张其他武术，本牌费用-1' };
@@ -60,9 +60,10 @@ describe('纯费用规则：卡牌条件与 TT12 消耗口袋', () => {
     });
   });
 
-  it('后备能源只按消耗口袋法术数折扣并最低为零；无匹配牌时原样回传费用', () => {
-    const card = { cost: 3, desc: '消耗口袋中每有一张法术牌，本牌费用-1' };
+  it('后备能源只按消耗区法术数折扣并最低为零；无匹配牌时原样回传费用', () => {
+    const card = { cost: 3, desc: '消耗区中每有一张法术牌，本牌费用-1' };
     expect(pocketSpellDiscountFor(card)).toBe(1);
+    expect(pocketSpellDiscountFor({ ...card, desc: '消耗口袋中每有一张法术牌，本牌费用-1' })).toBe(1);
     expect(cost(card, { pocketDiscount: 1, consumedSpellCount: 2 })).toBe(1);
     expect(cost(card, { pocketDiscount: 1, consumedSpellCount: 5 })).toBe(0);
     expect(cost(card, { pocketDiscount: 1, consumedSpellCount: 0 })).toBe(3);

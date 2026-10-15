@@ -63,4 +63,13 @@ describe('当前/可达节点辉光呼吸窗口', () => {
     const [ , , rBreath ] = breathing.createRadialGradient.mock.calls[0];
     expect(rBreath).toBeGreaterThanOrEqual(rStatic);
   });
+
+  it('选中可达点仍保留常驻可达光效，未选中的远处点不亮', () => {
+    const selected = mockCtx(), distant = mockCtx();
+    drawMapNodeBadge(selected, 'blank', '可以前往', 'selected', { reachable: true, pulse: 0 });
+    drawMapNodeBadge(distant, 'blank', '远处', 'known');
+    expect(selected.createRadialGradient).toHaveBeenCalledTimes(1);
+    expect(selected.gradient.addColorStop.mock.calls[0][1]).toContain('0.480');
+    expect(distant.createRadialGradient).not.toHaveBeenCalled();
+  });
 });

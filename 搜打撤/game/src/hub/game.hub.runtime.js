@@ -338,11 +338,11 @@ preparationFeature = createHubPreparationAdapter({
     hubAct('restoreCard', (d) => {
       const candidates = d.stackKey ? B.data.pocket.filter(stack => stackKeyOf(stack) === d.stackKey)
         : d.name ? B.data.pocket.filter(stack => stack.card.name === d.name) : [B.data.pocket[+d.i]].filter(Boolean);
-      if (candidates.length !== 1) { UI.log('口袋库存已变化，请重新打开详情', 'warn'); return; }
+      if (candidates.length !== 1) { UI.log('消耗区库存已变化，请重新打开详情', 'warn'); return; }
       const index = B.data.pocket.indexOf(candidates[0]);
       const stack = B.data.pocket[index];
       if (!stack) return;
-      if (d.count && Number(d.count) !== (stack.count || 1)) { UI.log('口袋数量已变化，请重新打开详情', 'warn'); return; }
+      if (d.count && Number(d.count) !== (stack.count || 1)) { UI.log('消耗区数量已变化，请重新打开详情', 'warn'); return; }
       document.getElementById('cardZoom')?._closeCardZoom?.(true);
       const r = B.restore(index);
       if (r === true) { Sfx.ding(); UI.log(`[[icon:key]] 消耗 <b>${B.pocketKeyCost(stack)}</b> 把钥匙，卡牌已复原，回到卡牌仓库`, 'ok'); }
@@ -412,7 +412,7 @@ preparationFeature = createHubPreparationAdapter({
     startNewGame();   // 基地返回选档，不触碰当前档案或对局存档
   }
 
-  // ---------- 背包（物资+卡牌混占格 · 安全格 · 消耗口袋） ----------
+  // ---------- 背包（物资+卡牌混占格 · 安全格 · 消耗区） ----------
   // 设计者 2026-09-02 定版：从背包丢弃的牌无法取回；消耗的牌可在火堆复原
 
 export { closeBase, openBaseHub, renderHub, renderHomeScene };

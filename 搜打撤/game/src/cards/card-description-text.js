@@ -222,12 +222,12 @@ const descriptions = new Map([
   ["tt12-chargeray", ["造成5点法伤，本牌在你手牌中时每注能过1张卡牌，伤害+2", "造成 5 点法术伤害；本牌在你的手牌中时，你每注能 1 张卡牌，本牌伤害增加 2 点。"]],
   ["tt12-breakthrough", ["随机获取1张0费，一张1费，一张2费招式", "随机获得 0 费、1 费和 2 费招式各 1 张。"]],
   ["tt12-raygun", ["主动技能：发现一张射线牌并直接释放", "主动技能：发现 1 张射线牌，并直接施放。"]],
-  ["tt12-backupcell", ["抽2张牌并回复所有费用，消耗口袋中每有一张法术牌，本牌费用-1", "抽 2 张牌，并回复你的全部能量；本场战斗消耗牌中每有 1 张法术牌，本牌费用减少 1 点（不计之前战斗的消耗口袋或普通弃牌；仅进入墓地的牌不计）。"]],
+  ["tt12-backupcell", ["抽2张牌并回复所有费用，消耗区中每有一张法术牌，本牌费用-1", "抽 2 张牌，并回复你的全部能量；本场战斗消耗牌中每有 1 张法术牌，本牌费用减少 1 点（不计之前战斗的消耗区或普通弃牌；仅进入墓地的牌不计）。"]],
   ["tt12-freezeray", ["造成4点法伤；若此前其未曾受到过伤害，对其附加冰冻", "造成 4 点法术伤害；若目标在受到本次伤害前未受伤，对目标附加冰冻。"]],
 ]);
 
 export function displayCardDescription(value, id) {
-  const source = String(value || '');
+  const source = String(value || '').replaceAll('消耗口袋', '消耗区');
   const revision = descriptions.get(String(id || ''));
   return revision && source === revision[0] ? revision[1] : source;
 }

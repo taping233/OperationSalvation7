@@ -1,5 +1,6 @@
 // Reviewed selectors and opaque dynamic paths; re-audit before changing fingerprints.
 // Source originals are retained. An unreviewed/changed selector preserves its assets.
+// Current consumer review: docs/evidence/2026-10-16-WF-integration-ship-1016/asset-contracts.md
 export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
   candidates: [
     {"path":"portraits/frames/wu/atk-hit-1.webp","category":"frames","role":"wu"},
@@ -67,30 +68,30 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
       "game/src/battle/view/battle.frame-catalog-three-role.js": "bc574a322120f650d20de25ec7649a7fa3643202c9cb97e04ef8f35fee60eb98"
     },
     "map": {
-      "game/src/core/map-node-art.js": "95f5a2a4371acb7ebf1b8bb36288b1456129056b59985d1be9e42fbdbc850c63",
-      "game/src/core/renderer.js": "8f7ed333fec94237ffdd8188f724717912ca7e0a94c06ce9b4f7ac551d4f8511",
+      "game/src/core/map-node-art.js": "2142595cfe18a9b47db627e03e10d4db1d868c66367751571c3e028e3bf8f0ac",
+      "game/src/core/renderer.js": "cc97d2ef02b50c240d18954c1a38e0acc352d0deea7985e6bfb37fa71db26fa2",
       "game/src/core/map-city-atmosphere.js": "70c7ce669d14bb5c55261a17c412b843a8616e9732b544bb03c18376cbf3a5fb",
-      "game/src/core/art.js": "f9cc8b3fe06f1bd7feb6d9eec712e7f13fced688113aaae6e5201043eaa79964",
+      "game/src/core/art.js": "7f161d92495690aecc15bd3fa5d6d0dd4b7828252d80c3af1d9b459e4259c9d3",
       "game/src/core/data-loader.js": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be"
     },
     "transitions": {
       "game/src/ui/camp-entry.js": "104ad905fee3feed9279f3f86ce56550a0d306ab80ce110faab66a899ed40fde",
-      "game/src/core/art.js": "f9cc8b3fe06f1bd7feb6d9eec712e7f13fced688113aaae6e5201043eaa79964",
+      "game/src/core/art.js": "7f161d92495690aecc15bd3fa5d6d0dd4b7828252d80c3af1d9b459e4259c9d3",
       "game/src/core/data-loader.js": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be"
     }
   },
   opaqueConsumers: {
-    "game/src/hub/game.bag.view2.js": "67ee01779031d5230a345427e39ddffd49e87731a00d33a768ac95e249bfd9a5",
+    "game/src/hub/game.bag.view2.js": "076d034c4d3d627044e4017d8ab79fedd54929cb32a36c3bc0507c94e24e82a5",
     "game/card-design-options-v2.html": "cead324bf47437043376cfb40dcc7cec7c9fde1e0bda644a4da356e240a5f9ee",
     "game/src/audio/sfx-audition.js": "e2a5dbbfc72747a51f1023a70bccd4f8ed33785126e0433a2ab2473881bdebdc",
     "game/src/audio/sound.bank.js": "81b9bdf76f7440c6adccdc757b10a1240201830d76f8b4dea695dc9812b0fdf4",
     "game/src/audio/sound.js": "f5053d38817ddaee067ff0c42e5677694641340fd210722c189a4ecdbee2a4a7",
     "game/src/battle/view/battle.frames.js": "3749586baaf1cbb45f00af3eccbd14e2963a0b98ac483c69b10a6c7b557eb904",
-    "game/src/battle/view/battle.layers.js": "0accccaccbb0fe852ebba12692c7f5eba96bbb29746015d409435090c6f5548f",
+    "game/src/battle/view/battle.layers.js": "f3ed0dea3d9122998bed05f546593aac97ce430bd3a1039ca168dfc7cbb25b2f",
     "game/src/battle/view/battle.vfx.js": "a439f13c5433f7dfc936a9e7a8c4bfe56350f745e17a69e2661b783d4d667e28",
     "game/src/cards/card-frame-presentation.js": "79ef8241faad2ed89bb1c19b6866f0e352ddd43e9498d1e0842e436335099d9a",
-    "game/src/core/art.js": "f9cc8b3fe06f1bd7feb6d9eec712e7f13fced688113aaae6e5201043eaa79964",
-    "game/src/core/icons-bitmap.js": "c043e3e20da6a564c0006c1a8fa8c60322492d09c5716ff52b7f1d230cafd408",
+    "game/src/core/art.js": "7f161d92495690aecc15bd3fa5d6d0dd4b7828252d80c3af1d9b459e4259c9d3",
+    "game/src/core/icons-bitmap.js": "c8c66dda18b0b7d43c08e7fac90f35f1672e9693775892e1d7116158bf18aa46",
     "game/src/home/home.scene.js": "abbbd5aaabc4afae047302bc2e7bd62858fbc7a6386b1505e60b46dcbe957604",
     "game/src/hub/base-chibi-v2.skin.js": "53a4a3e47e3b01b53d134776a0ee62335f5253e714edc5e775ca16c733906f86",
     "game/src/hub/hub.presentation.js": "364bbc0b5dfe309ca947d3fd2d3369a9038826a5caf0586af121e4618dece461",
@@ -98,7 +99,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "game/src/rarity-design-lab.js": "7371593bf0382256a8abc15b1470ff81da9f0a01e835fd5329ece73c16cde775",
     "game/src/run/lab.ending.js": "4ebedd8dd70253956410986e19b45d61a3b993514fb5a1dbc4fab1bc01d91b6c",
     "game/src/ui/base-preview-rooms-v7.js": "c68c228942c7aaa41d1d52343c8f34346f4b424327c14619c2e5c5943a4e9fb8",
-    "game/src/ui/game.menu.js": "2fd52c620d412462dea4ba35553152f7c06f5017887fe29dd53ce6eebb85b83b",
+    "game/src/ui/game.menu.js": "7d183604bab0efa1520fd5fa1abffffef229e757bad48debc8dc74596fa72004",
     "game/src/ui/ui.js": "e40a8eac1adb5e3a834a417c174a5d2513eadab5d55bf0b07804bd1e87b3d6a1",
     "game/src/wu-career-frame-preview.js": "2715b703789fef835432d3eb7cbffdedc249f8355a22714e6faff8ef49cfee38"
   },

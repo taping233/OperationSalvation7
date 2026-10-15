@@ -1,5 +1,5 @@
 import guideData from '../../data/beginner-guide.json';
-import { beginnerGuideDiagram } from './beginner-guide-diagrams.js';
+import { beginnerGuideDiagram, bossPreparationHTML } from './beginner-guide-diagrams.js';
 import { linkedBackHTML, linkedAnimate } from './home-linked-interactions.js';
 import { motionTiming, motionEasing, motionReduced, changeFrames } from './motion-presets.js';
 
@@ -58,6 +58,7 @@ export function beginnerGuideHTML(requestedIndex = 0) {
           <div class="bg-copy">
             <ol class="bg-steps">${steps}</ol>
             <aside class="bg-tip"><span class="bg-tip-label">要点</span><p>${escapeHTML(page.tip)}</p></aside>
+            ${page.id === 'extract' ? `<details class="bg-tip"><summary>首脑前准备</summary>${bossPreparationHTML()}</details>` : ''}
             ${controls ? `<div class="bg-controls" aria-label="本页操作提示">${controls}</div>` : ''}
           </div>
         </div>

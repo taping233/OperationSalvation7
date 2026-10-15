@@ -5,10 +5,9 @@ import postcss from 'postcss';
 import { describe, expect, it } from 'vitest';
 
 const hand = readFileSync(new URL('../game/css/battle-hand-overhaul.css', import.meta.url), 'utf8');
-const battle = readFileSync(new URL('../game/css/expedition-battle.css', import.meta.url), 'utf8').split('/* 战斗重建：')[1];
-const stage = 'body #overlay .battle-stage.sts.battle-sts';
-const reading = 'body:has(#viewport) #overlay .battle-stage.sts.battle-sts .sts-hand';
-const liftSelector = `${reading} .bt-slot:is(:hover,:focus-within) .bt-card:not(.aim-lift)`;
+const battle = readFileSync(new URL('../game/css/battle-stage.css', import.meta.url), 'utf8');
+const stage = '#overlay .battle-stage.sts';
+const liftSelector = `${stage} .bt-slot:is(:hover,:has(:focus-visible)) .bt-card:not(.aim-lift)`;
 function declarations(css, selector) {
   const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   return css.match(new RegExp(`${escaped}\\s*\\{([^}]+)\\}`))?.[1] || '';
@@ -16,70 +15,41 @@ function declarations(css, selector) {
 
 // These assertions guard the CSS contract. Actual crop/collision checks require the built-in browser.
 describe('battle decision reading CSS contract', () => {
-  it('rests the hand below the edge and raises only the hovered or keyboard-focused card into reading view', () => {
-    const slot = declarations(hand, `${stage} .sts-hand .bt-slot`);
-    const bottom = Number(slot.match(/bottom:([\d.-]+)px/)?.[1]);
-    expect(bottom).toBeLessThan(0);
-    expect(slot).toContain('width:220px;height:330px');
-    expect(slot).toContain('var(--fx,0px)'); expect(slot).toContain('var(--fy,0px)');
-    expect(slot).toContain('var(--frot,0deg)');
-    const lifted = declarations(hand, liftSelector);
-    const shift = Number(lifted.match(/translateY\(([\d.-]+)px\)/)?.[1]);
-    const scale = Number(lifted.match(/scale\(([\d.]+)\)/)?.[1]);
-    expect(scale).toBeGreaterThanOrEqual(1.04); expect(scale).toBeLessThanOrEqual(1.08);
-    // Conservative source-coordinate envelope for the nine-group edge: fy<=27 and rose frame<=30.
-    // This checks the resting/reading distinction, not a claim about actual browser layout.
-    expect(1080 - bottom + 27 + shift + 330 * (scale - 1) / 2 + 30).toBeLessThanOrEqual(1080);
-    expect(battle).toMatch(/bottom:calc\(var\(--battle-hand-height\) \+ 152px\)/);
-    // 2026-10-15 老板：悬停「完整规则」按钮已撤销，手牌皮肤不得再引入该入口。
+  it('keeps straight shared-card hosts and distinct resting and reading states', () => {
+    const slot = declarations(battle, `${stage} .bt-slot`);
+    expect(slot).toContain('var(--fx,0px)');
+    expect(slot).toContain('260px * var(--fs,1)');
+    expect(slot).not.toContain('rotate(');
+    expect(declarations(battle, `${stage} .bt-card:not(.aim-lift)`)).toContain('var(--hand-rest,24px)');
+    expect(declarations(battle, liftSelector)).toContain('translateY(0)');
     expect(hand).not.toMatch(/bt-hand-inspect/);
   });
 
-  it('wins the real winter important transform conflict for hover/focus while leaving inline drag transforms alone', () => {
+  it('puts the resting hover bridge behind the visible card so it cannot swallow a play gesture', () => {
+    const bridge = declarations(battle, `${stage} .bt-slot::after`);
+    expect(bridge).toContain('z-index:-1');
+    expect(bridge).toContain('top:calc(390px * var(--fs,1))');
+  });
+
+  it('retires the winter hover conflict and leaves inline drag transforms alone', () => {
     const legacySelector = 'body #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card:not(.off):not(.aim-lift)';
     const legacy = postcss.parse(readFileSync(new URL('../game/css/winter.css', import.meta.url), 'utf8'));
-    const current = postcss.parse(hand);
-    const transformRule = (root, selector) => {
-      let found;
-      root.walkRules(rule => {
-        if (rule.selector === selector) rule.walkDecls('transform', decl => { found = { selector, value: decl.value, important: !!decl.important }; });
-      });
-      return found;
-    };
-    const old = transformRule(legacy, legacySelector), lifted = transformRule(current, liftSelector);
-    expect(old?.important).toBe(true);
-    expect(old?.value).toBe('translateY(-12px) scale(1.04)');
-    expect(lifted?.important).toBe(true);
-    expect(lifted?.value).toBe('translateY(-156px) rotate(var(--counter-rot,0deg)) scale(1.06)');
-    // This bounded comparison uses the two actual conflicting rules. Extra viewport ID wins
-    // among important author declarations even if winter is bundled after the hand stylesheet.
-    const ids = rule => (rule.selector.match(/#[\w-]+/g) || []).length;
-    expect(ids(lifted)).toBeGreaterThan(ids(old));
-    const dom = new JSDOM('<body><div id="viewport"></div><div id="overlay"><div class="battle-stage sts battle-sts"><div class="sts-hand"><div class="bt-slot"><div class="bt-card"></div></div></div></div></div></body>');
-    const card = dom.window.document.querySelector('.bt-card'), slot = card.parentElement;
-    const matches = rule => card.matches(rule.selector.replaceAll(':hover', '.test-hover').replaceAll(':focus-within', '.test-focus-within'));
-    for (const mode of ['test-hover', 'test-focus-within']) {
-      slot.className = `bt-slot ${mode}`;
-      for (const state of ['', 'off']) {
-        card.className = `bt-card ${state}`;
-        expect(matches(lifted)).toBe(true);
-      }
-      card.className = 'bt-card aim-lift';
-      card.style.transform = 'translate(42px,-220px)';
-      expect(matches(lifted)).toBe(false); expect(matches(old)).toBe(false);
-      expect(card.style.transform).toBe('translate(42px,-220px)');
-    }
-    slot.className = 'bt-slot'; card.className = 'bt-card';
-    expect(matches(lifted)).toBe(false);
+    const old = [];
+    legacy.walkRules(rule => { if (rule.selector === legacySelector) old.push(rule); });
+    expect(old).toHaveLength(0);
+    const dom = new JSDOM('<div class="bt-card aim-lift"></div>');
+    const card = dom.window.document.querySelector('.bt-card');
+    card.style.transform = 'translate(42px,-220px)';
+    expect(card.matches('.bt-card:not(.aim-lift)')).toBe(false);
+    expect(card.style.transform).toBe('translate(42px,-220px)');
     dom.window.close();
   });
 
-  it('keeps the ordinary secondary instruction under the top bar and above the intent row', () => {
+  it('keeps the secondary instruction below the header in a separate interaction-free lane', () => {
     const caption = declarations(battle, `${stage} .sts-arena-caption`);
-    expect(caption).toContain('top:8px');
-    expect(caption).toContain('padding:4px 16px');
-    expect(caption).toContain('z-index:1');
-    expect(declarations(battle, `${stage} .sts-arena-caption span`)).toContain('line-height:1.3');
+    expect(caption).toContain('left:50%');
+    expect(caption).toContain('z-index:12');
+    expect(caption).toContain('pointer-events:none');
   });
 
   it('keeps card copy sizing out of the hand skin while detail reading keeps the shared tokens', () => {
@@ -87,17 +57,16 @@ describe('battle decision reading CSS contract', () => {
     // 字号与短规则节选由共用卡面 CSS 管理，手牌皮肤不得再覆写 .hsc-desc；完整规则
     // 阅读面仍走 .bt-hand-detail 弹层并沿用共享字号令牌（见下一定义与末个用例）。
     expect(hand).not.toMatch(/hsc-desc/);
-    expect(hand).toContain('transition:transform .16s ease');
-    expect(hand).toContain('body.reduce-motion'); expect(hand).toContain('prefers-reduced-motion:reduce');
-    expect(hand).toContain('.bt-card.aim-lift { transition:none!important; }');
+    expect(declarations(battle, `${stage} .bt-card`)).toContain('transition:transform .2s');
+    expect(battle).toContain('prefers-reduced-motion:reduce');
+    expect(declarations(battle, `${stage} .bt-card.aim-lift`)).toContain('transition:none');
   });
 
-  it('gives tactical labels one dark backing and keeps both corner action anchors', () => {
-    const nameplate = declarations(battle, `${stage}[data-boss='1'] .sts-arena .sts-foe .sts-nameplate`);
-    expect(nameplate).toContain('background:var(--tactical-surface)!important');
-    expect(nameplate).toContain('border:1px solid var(--tactical-line)!important');
-    expect(battle).toContain('.sts-energy-wrap { position:absolute;left:44px;bottom:140px');
-    expect(battle).toContain('.sts-tactics { position:absolute;right:30px;bottom:92px');
+  it('keeps labels unboxed, resources compact, and career controls beside the player', () => {
+    expect(declarations(battle, `${stage} .sts-nameplate`)).toContain('background:none');
+    expect(declarations(battle, `${stage} .sts-resource-dock`)).toContain('max-width:260px');
+    expect(declarations(battle, `${stage} .sts-energy>b`)).toContain('font-size:52px');
+    expect(declarations(battle, `${stage} #btSelf>.sts-hand-tools`)).toContain('left:-90px');
   });
 
   it('keeps full long rules scrollable and uses the same copy tokens with fixed footer controls', () => {

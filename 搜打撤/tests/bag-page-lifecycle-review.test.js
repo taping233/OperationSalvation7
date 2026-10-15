@@ -25,7 +25,7 @@ beforeEach(async () => {
   ui = { el: { overlay, ovBody: body }, _acts: {}, helpTopics: {}, act(name, fn) { this._acts[name] = fn; }, log: vi.fn(), refresh: vi.fn(), helpBtn: () => '', registerHelp(id, def) { this.helpTopics[id] = def; },
     showOverlay(_title, html, mode) { document.getElementById('cardZoom')?.remove(); overlay.hidden = false; overlay.classList.remove('closing'); overlay.classList.toggle('bag-full', mode === 'bagpage'); body.innerHTML = html; },
     hideOverlay() { overlay.hidden = true; },
-    showCardZoom(_card, options) { document.getElementById('cardZoom')?.remove(); const zoom = document.createElement('div'); zoom.id = 'cardZoom'; zoom.innerHTML = `<button class="cz-backdrop"></button>${options.footer}`; zoom.querySelector('.cz-backdrop').onclick = () => zoom.remove(); document.body.append(zoom); },
+    showCardZoom(_card, options) { document.getElementById('cardZoom')?.remove(); const zoom = document.createElement('div'); zoom.id = 'cardZoom'; zoom.innerHTML = `<button class="cz-backdrop"></button>${options.footer}`; zoom.querySelector('.cz-backdrop').onclick = () => { zoom.remove(); options.returnFocus?.focus(); }; document.body.append(zoom); },
   };
   body.addEventListener('click', event => { const target = event.target.closest('[data-act]'); if (target && !target.disabled) ui._acts[target.dataset.act]?.({ ...target.dataset }); });
   window.SDT = { UI: ui, game: H.game, Base: { slot: 1, bagCap: () => 16 }, Sound: { sfx: vi.fn() }, Cards: { SHA: { id: 'starter-attack', name: '初始攻击' }, cardHTML: card => `<span>${card.name}</span>`, cardBackHTML: () => '' } };
@@ -88,5 +88,91 @@ describe('背包pointer拖动取消/会话身份', () => {
     startDrag(); if (change === 'slot') window.SDT.Base.slot = 2; if (change === 'owned-instance') H.game.ownedCards = structuredClone(H.game.ownedCards); if (change === 'same-seed-run') H.game.discoveredPairs = new Set(); if (change === 'page') ui.showOverlay('', '<div id="newPage">新页</div>');
     vi.spyOn(document, 'elementFromPoint').mockReturnValue(document.querySelector('.bag-rz[data-zone="safe"]')); const before = JSON.stringify(H.game.ownedCards); pointer('pointerup', window);
     expect(JSON.stringify(H.game.ownedCards)).toBe(before); expect(H.save).not.toHaveBeenCalled(); if (change === 'page') expect(document.getElementById('newPage')).not.toBeNull();
+  });
+});
+
+
+describe('新号背包真实入口反馈', () => {
+  const filter = value => document.querySelector(`[data-act="bagFilter"][data-f="${value}"]`).click();
+  it('招式与物资按钮使用实际键值筛选，不将散装物资混入招式', () => {
+    H.game.inventory = [{ name: '口粮', count: 2, value: 3 }]; bag.showBackpack(true);
+    filter('move');
+    expect([...document.querySelectorAll('.bag-grid [data-stack]')].map(el => el.dataset.stack)).toEqual(['法术']);
+    expect(document.querySelector('.bag-grid [data-supply]')).toBeNull();
+    filter('supply');
+    expect(document.querySelector('.bag-grid [data-supply]').dataset.supply).toBe('口粮');
+    expect(document.querySelector('.bag-grid [data-stack]')).toBeNull();
+    H.game.inventory = []; filter('supply');
+    expect(document.querySelector('.bag-empty2').textContent).toContain('该分类没有');
+    document.querySelector('.bag-empty2 [data-f="all"]').click();
+    expect(document.querySelector('[data-stack="法术"]')).not.toBeNull();
+  });
+  it('安全格标题容量和伙伴名称跟随分区，口袋区分火堆可复原类型与张数', () => {
+    window.SDT.Base.carriedPet = () => ({ name: '旺财' });
+    H.game.ownedCards[0].safe = true;
+    H.game.usedPocket = [{ card: spell, count: 3 }, { card: { id: 'armor', name: '盔甲', type: '装备' }, count: 2 }];
+    bag.showBackpack(true); document.querySelector('[data-zone="safe"].bag-rz').click();
+    expect(document.querySelector('.bag-title h2').textContent).toContain('安全格');
+    expect(document.querySelector('.bag-capchip').textContent).toMatch(/1\s*\/6 格/);
+    expect(document.querySelector('.bag-znote').textContent).toContain('旺财');
+    document.querySelector('[data-zone="pocket"].bag-rz').click();
+    expect(document.querySelector('.bag-capchip').textContent).toContain('不限容量');
+    expect(document.querySelector('.bag-znote').textContent).toContain('火堆可复原 3 张／不可复原 2 张');
+    expect(document.querySelector('[data-stack="盔甲"] .bag-tstate').textContent).toBe('火堆不可复原');
+  });
+  it('按钮丢弃确认不误称拖拽，碎片库存与门槛分列且排序按钮有名称', () => {
+    H.game.fragments = 4; bag.showBackpack(true);
+    expect(document.querySelector('.bag-cur').textContent).toContain('4 枚');
+    expect(document.querySelector('.bag-cur').textContent).toContain('每次需 2 枚');
+    expect(document.querySelector('[data-act="bagSortCycle"]').getAttribute('aria-label')).toBeTruthy();
+    inspect(); ui._acts.detailDiscard();
+    expect(document.getElementById('ovBody').textContent).toContain('永久丢弃');
+    expect(document.getElementById('ovBody').textContent).not.toContain('拖到了');
+  });
+  it('通行证B结构化使用获取传说且保留棱彩与禁随机排除规则', () => {
+    const token = { id: 'tt-token-gold', name: '员工通行证B', type: '道具', rules: { bag: { use: [{ op: 'acquire', pool: { kind: 'legendary' } }] } } };
+    const legend = { id: 'legend', name: '传说牌', rarity: '传说', type: '法术' };
+    window.SDT.Cards.all = () => [{ ...legend, id: 'prism', rarity: '棱彩' }, { ...legend, id: 'blocked' }, legend];
+    window.SDT.Cards.isRandomObtainable = c => c.id !== 'blocked';
+    H.game.ownedCards = [{ uid: 'token', card: token }]; bag.showBackpack(true);
+    inspect(token.name); ui._acts.useDetailCard();
+    expect(H.game.ownedCards.map(item => item.card.id)).toEqual(['legend']);
+    expect(document.querySelector('[role="status"]').textContent).toContain('获得传说卡【传说牌】');
+    expect(H.save).toHaveBeenCalledOnce();
+  });
+  it('结晶使用回执保留复原名单与容量剩余，并保留装备可被结晶复原的规则', () => {
+    H.game.ownedCards = [{ uid: 'crystal', card: { id: 'tt-crystal', name: '能源结晶', type: '道具', rules: { bag: { use: [{ op: 'restoreConsumed', amount: 3 }] } } } }];
+    H.game.usedPocket = [{ card: { id: 'armor', name: '盔甲', type: '装备' }, count: 1 }, { card: spell, count: 3 }];
+    bag.showBackpack(true); inspect('能源结晶'); ui._acts.useDetailCard();
+    expect(H.game.ownedCards.map(item => item.card.name)).toEqual(['盔甲', '法术', '法术']);
+    expect(document.querySelector('[role="status"]').textContent).toContain('3 张卡牌：盔甲、法术、法术');
+    filter('move'); expect(document.querySelector('[role="status"]').textContent).toContain('盔甲');
+    H.game.ownedCards = []; bag.showBackpack(true); expect(document.querySelector('[role="status"]')).toBeNull();
+  });
+});
+
+
+describe('背包键盘查看与分区焦点', () => {
+  it.each(['Enter', ' '])('%s 查看详情再关闭返回来源卡格，不重复触发', key => {
+    const tile = document.querySelector('[data-stack="药剂"]'); tile.focus();
+    expect(tile.getAttribute('role')).toBe('button'); expect(tile.getAttribute('aria-label')).toContain('查看药剂');
+    const event = new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }); tile.dispatchEvent(event);
+    expect(event.defaultPrevented).toBe(true); expect(document.querySelectorAll('#cardZoom')).toHaveLength(1);
+    document.querySelector('#cardZoom .cz-backdrop').click(); expect(document.activeElement).toBe(tile);
+  });
+  it('分区切换保留当前分区按钮焦点，口袋卡可键盘查看但不能拖动或使用', () => {
+    H.game.usedPocket = [{ card: { id: 'armor', name: '盔甲', type: '装备' }, count: 2 }]; bag.showBackpack(true);
+    document.querySelector('.bag-rz[data-zone="pocket"]').click();
+    expect(document.activeElement).toBe(document.querySelector('.bag-rz[data-zone="pocket"]'));
+    expect(document.activeElement.getAttribute('aria-pressed')).toBe('true');
+    const tile = document.querySelector('[data-stack="盔甲"]'); pointer('pointerdown', tile); expect(drag.bagDrag).toBeNull();
+    tile.focus(); tile.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
+    expect(document.querySelector('#cardZoom').textContent).toContain('火堆不可复原；能源结晶');
+    expect(document.querySelector('#cardZoom [data-act="useDetailCard"]')).toBeNull();
+    document.querySelector('#cardZoom .cz-backdrop').click(); expect(document.activeElement).toBe(tile);
+  });
+  it('卡格去掉卡面内部重复Tab停靠，不嵌套焦点控件', () => {
+    window.SDT.Cards.cardHTML = card => `<div><div tabindex="0">${card.name}</div></div>`; bag.showBackpack(true);
+    expect(document.querySelector('.bag-tile [tabindex]')).toBeNull();
   });
 });

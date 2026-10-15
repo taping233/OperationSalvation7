@@ -131,10 +131,20 @@ export function buildCardInventory({ production, cardsSync, stages, sources, met
   return inventory;
 }
 
+// Boss-approved terminology revision; existing rules and all other fields must remain exact.
+export function isApprovedBackupcellRename(previous, current) {
+  const before = '抽2张牌并回复所有费用，消耗口袋中每有一张法术牌，本牌费用-1';
+  const after = '抽2张牌并回复所有费用，消耗区中每有一张法术牌，本牌费用-1';
+  return previous?.id === 'tt12-backupcell' && previous.desc === before
+    && current?.desc === after && equal({ ...previous, desc: after }, current);
+}
+
 export function compareMigrationInventories(before, after, approvedIds, expectedRules, expectedRulesById, expectedFaceById = {}) {
   const previous = before.production.cards.map(row => row.card);
   const current = after.production.cards.map(row => row.card);
   const delta = describeStage('E8 approved migration', previous, current);
+  delta.changed = delta.changed.filter(({ id }) => !isApprovedBackupcellRename(
+    previous.find(card => card.id === id), current.find(card => card.id === id)));
   if (delta.added.length || delta.removed.length) throw new Error('migration: card IDs changed');
   if (!equal(delta.changed.map(row => row.id).sort(), [...approvedIds].sort())) {
     const actual = new Set(delta.changed.map(row => row.id));

@@ -19,12 +19,18 @@ import { captureBattleContext } from '../battle/battle-loader.js';
     const current = () => sameRun() && game.ownedCards === cards && bagGrid.isConnected
       && body === UI.el.ovBody && body.querySelector('.bag-grid') === bagGrid
       && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
+    bagGrid.addEventListener('keydown', e => {
+      if (!current() || e.repeat || !['Enter', ' '].includes(e.key)) return;
+      const cell = e.target.closest('.bag-tile[data-act="inspectStack"]');
+      if (!cell || e.target !== cell) return;
+      e.preventDefault(); e.stopPropagation(); cell.click();
+    });
     // 按住拖动（pointer 事件，鼠标/触屏通用）；单击看卡走格子上的 inspectStack（v2 看卡操作台）
     const onDown = (e) => {
       if (!current() || e.button !== 0 || bagDrag) return;
       if (e.target.closest('button')) return;   // 格内按钮优先
       const cell = e.target.closest('.bag-tile[data-stack]');
-      if (!cell) return;
+      if (!cell || cell.dataset.pocket === '1') return;
       e.preventDefault();
       bagDrag = {
         name: cell.dataset.stack, fromSafe: cell.dataset.safe === '1', cell, pointerId: e.pointerId, current,

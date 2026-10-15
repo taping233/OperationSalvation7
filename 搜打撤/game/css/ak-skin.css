@@ -85,7 +85,7 @@ h1, h2, h3 { font-family: var(--font-ui); }
   font-weight: 800; letter-spacing: .3em; color: var(--ak-white); border-left: 5px solid var(--ak-blue); padding-left: 14px; text-shadow: none; }
 #overlay :is(.hub-head, .pg-head, .library-head, .data-pg-head) { border-bottom: 1px solid var(--ak-line);
   background: linear-gradient(90deg, rgba(31,178,255,.07), transparent 40%); position: relative; }
-#overlay :is(.hub-head, .pg-head, .library-head)::after { content: ''; position: absolute; left: 0; bottom: -1px; width: 96px; height: 2px; background: var(--ak-blue); }
+#overlay :is(.hub-head, .pg-head, .library-head):not(.event-themed *)::after { content: ''; position: absolute; left: 0; bottom: -1px; width: 96px; height: 2px; background: var(--ak-blue); }
 #overlay :is(.hub-back, .pg-back, .cls2-back, .dep-back, .ag-back) { background: var(--ak-white); color: #0b0c0e; border: 0; border-radius: 0;
   clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); font-weight: 800; letter-spacing: .2em; transition: background .14s, transform .14s var(--ease-pop); }
 #overlay :is(.hub-back, .pg-back, .cls2-back, .dep-back, .ag-back):hover { background: var(--ak-yellow); transform: translateX(-4px); }
@@ -134,24 +134,11 @@ h1, h2, h3 { font-family: var(--font-ui); }
 #overlay .settings-page .chk:hover { background: rgba(31,178,255,.08); border-left-color: var(--ak-blue); }
 
 /* —— 事件 / 节点 —— */
-#overlay .node-panel::before { background: linear-gradient(90deg, var(--ak-yellow) 0 64px, var(--ak-line) 64px); height: 3px; left: 0; right: 0; top: 0; width: auto; }
+#overlay .node-pg:not(.event-themed) .node-panel::before { background: linear-gradient(90deg, var(--ak-yellow) 0 64px, var(--ak-line) 64px); height: 3px; left: 0; right: 0; top: 0; width: auto; }
 #overlay .evt-opt { border-radius: 0; }
 #overlay .evt-opt:hover { border-left-color: var(--ak-blue); }
 
 /* —— 战斗（杀戮尖塔式布局 + 方舟配色） —— */
-body #overlay .battle-stage.sts { background: var(--ak-tex-grid) 0 0 / 32px 32px, radial-gradient(ellipse at 50% 100%, rgba(31,178,255,.10), transparent 60%), linear-gradient(180deg, #14171a, #08090b); }
-body #overlay .battle-stage.sts .sts-topbar { background: linear-gradient(180deg, rgba(8,9,11,.96), rgba(8,9,11,.7)); border-bottom: 1px solid var(--ak-line-hi); }
-body #overlay .battle-stage.sts .sts-topbar::after { content: ''; position: absolute; left: 0; bottom: -1px; width: 140px; height: 2px; background: var(--ak-blue); }
-.sts-nameplate { font-weight: 800; letter-spacing: .18em; clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%); border-radius: 0; }
-.sts-intent { font-family: var(--font-num); font-weight: 700; border-radius: 0; background: rgba(8,9,11,.85); border: 1px solid var(--ak-line-hi); border-left: 3px solid var(--ak-red); clip-path: var(--ak-clip-sm); }
-.sts-energy { font-family: var(--font-num); font-weight: 800; border-radius: 0; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
-  background: linear-gradient(160deg, var(--ak-blue-hi), var(--ak-blue) 55%, var(--ak-blue-deep)); color: #03121b; border: 0; box-shadow: none; filter: drop-shadow(0 0 10px var(--ak-blue-glow)); }
-.sts-end-turn { background: var(--ak-yellow); color: #14120a; border: 0; border-radius: 0; font-weight: 800; letter-spacing: .3em;
-  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px)); transition: transform .14s var(--ease-pop), background .14s; box-shadow: none; }
-.sts-end-turn:hover:not(:disabled) { background: #fff3b0; transform: translateY(-3px); }
-.sts-end-turn:active:not(:disabled) { transform: translateY(1px) scale(.98); }
-.sts-hand .hs-card { transition: transform .2s var(--ease-pop), filter .2s; }
-.sts-hand .hs-card:hover { filter: brightness(1.12) drop-shadow(0 0 14px var(--ak-blue-glow)); }
 
 /* —— 图鉴 / 工坊 —— */
 #overlay .lib-item.on, #overlay .lib-item.selected { outline: 2px solid var(--ak-blue); outline-offset: 2px; }
@@ -204,7 +191,7 @@ body #overlay .battle-stage.sts .sts-topbar::after { content: ''; position: abso
 #overlay .evt-opt span { display: block; margin-top: 5px; font-size: 13px; color: var(--ak-sub); }
 #overlay .evt-opt.bad::before, #overlay .evt-opt.danger::before { background: var(--ak-crimson); }
 #overlay .node-panel { border-top: 0; }
-#overlay .node-kicker::before { content: ''; display: inline-block; width: 28px; height: 2px; margin-right: 10px; vertical-align: middle; background: var(--ak-crimson); }
+#overlay .node-pg:not(.event-themed) .node-kicker::before { content: ''; display: inline-block; width: 28px; height: 2px; margin-right: 10px; vertical-align: middle; background: var(--ak-crimson); }
 .scene-line p { border-left: 2px solid var(--ak-crimson); padding-left: 14px; line-height: 1.9; }
 
 /* —— 主页：右侧选项盘增加红青双色细边（参考主界面「编队 / 干员 / 采购」的暗红底） —— */

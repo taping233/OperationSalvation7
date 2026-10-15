@@ -99,5 +99,4 @@ body:not(.lobby):not(.scene-battle-3d) #topBtns #hpHud #hpText .hp-rest { color:
 body:not(.lobby):not(.scene-battle-3d) #resHud .chip-mini { background: #ebecedef; border: 1px solid #9a9fa2; border-radius: 0; box-shadow: 3px 3px 0 #0e0f1040; color: #26292c; }
 body:not(.lobby):not(.scene-battle-3d) #resHud .chip-mini b { color: #26292c; font: 700 17px/1.2 var(--font-ui); text-shadow: none; }
 body:not(.lobby):not(.scene-battle-3d) #resHud .res-atk b { color: #a75b50; }
-body:not(.lobby):not(.scene-battle-3d) #bagBtnFloat { background: #2a2d30; border: 1px solid #a8acaf; border-radius: 0; box-shadow: 3px 3px 0 #0e0f1040; color: #f1f0ee; }
-body:not(.lobby):not(.scene-battle-3d) :is(#topBtns button, #bagBtnFloat, #routePanel button):focus-visible { outline: 2px solid #f1d67f; outline-offset: 4px; }
+body:not(.lobby):not(.scene-battle-3d) :is(#topBtns button, #routePanel button):focus-visible { outline: 2px solid #f1d67f; outline-offset: 4px; }

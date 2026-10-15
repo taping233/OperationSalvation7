@@ -50,10 +50,11 @@ beforeEach(() => {
 });
 afterEach(() => { Aim.cancelAim(); Aim.cancelClickSelection(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
-it('keeps a tap resting, opens the full inspector, and takes up only after six CSS pixels', () => {
+it('keeps a tap resting, selects a target, and takes up only after six CSS pixels', () => {
   begin(); expect(card.classList.contains('aim-lift')).toBe(false);
   move(323, 951); step(); expect(card.style.transform).toBe('');
-  release(323, 951); expect(inspect).toHaveBeenCalledWith('drag-card', expect.any(Function));
+  release(323, 951); expect(inspect).not.toHaveBeenCalled();
+  expect(Aim.clickSelectedUid).toBe('drag-card');
   expect(commands.playCard).not.toHaveBeenCalled();
   begin(); move(327, 950); expect(card.classList.contains('aim-lift')).toBe(true);
 });

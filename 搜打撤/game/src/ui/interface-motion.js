@@ -141,11 +141,10 @@ function install(ui = window.SDT?.UI) {
     }
     enterArchive(overlay, currentBody, interfaceReducedMotion());
     };
-    const realPageChange = !refreshHub || tabChanged || navChange.changed;
-    const staged = !dedicated && !initialCamp && realPageChange
+    // 基地内导航直接衔接区域动效，避免每次换房间都盖全屏黑幕。
+    const staged = !dedicated && !initialCamp && !refreshHub
       && (mode === 'page' || mode === 'bagpage' || (this._roomActive && mode !== 'battle'));
     if (staged) {
-      if (refreshHub) clearCampEntry();
       clearSurface(overlay);
       delete overlay.dataset.uiEnter;
       stagePageVisual(this, reveal);

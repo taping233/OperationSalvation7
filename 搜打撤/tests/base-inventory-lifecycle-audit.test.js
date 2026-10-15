@@ -186,3 +186,67 @@ it('旧仓库DOM点卡在换档后不能打开新档详情', async () => {
   const oldTile=document.querySelector('.stash-cell'); base.slot=2; oldTile.click();
   expect(document.getElementById('cardZoom')).toBeNull();
 });
+
+
+it('基地材料入口不依赖标准资源卡存在，关闭后可再次查看并说明折入规则', () => {
+  base.data.wood = 7; window.SDT.Cards.all = () => [];
+  pages.openRawItem('wood');
+  expect(document.querySelector('#cardZoom .cz-card').textContent).toBe('木材');
+  expect(document.querySelector('#cardZoom .cz-foot').textContent).toContain('基地木材库存 7 份');
+  expect(document.querySelector('#cardZoom .cz-foot').textContent).toContain('资源卡需在仓库详情使用');
+  document.querySelector('#cardZoom .cz-backdrop').click();
+  pages.openRawItem('wood'); expect(document.querySelector('#cardZoom')).not.toBeNull();
+  expect(base.data.wood).toBe(7); expect(base.useStashMaterial).not.toHaveBeenCalled();
+});
+
+
+describe('仓库补给物品真实页脚入口', () => {
+  const wood = { id: 'tt-wood', name: '木材', type: '资源', rarity: '古朴' };
+  const egg = { id: 'egg', name: '宠物蛋', type: '道具', rarity: '稀有' };
+  const pack = { id: 'tt-econpack', name: '经济卡包', type: '道具', rarity: '稀有' };
+  it('材料真实使用1张入口折入库存，关闭后可重入并确认最后一张', () => {
+    open(wood); base.data.wood = 0;
+    base.useStashMaterial.mockImplementation((_name, all) => {
+      const count = all ? base.data.stash[0].count : 1; base.data.wood += count;
+      base.data.stash[0].count -= count; if (!base.data.stash[0].count) base.data.stash = [];
+      return { ok: true, msg: '木材已折入' };
+    });
+    const stale = ui._acts.stashUseMat; button('stashUseMat').click();
+    expect(base.useStashMaterial).toHaveBeenCalledExactlyOnceWith('木材', false);
+    expect(base.data.wood).toBe(1); expect(document.getElementById('cardZoom')).toBeNull();
+    pages.openStashCardView(0); const current = document.getElementById('cardZoom'); stale();
+    expect(base.useStashMaterial).toHaveBeenCalledTimes(1); expect(document.getElementById('cardZoom')).toBe(current);
+    button('stashUseMat').click(); expect(button('stashUseMat').textContent).toBe('确认？');
+    expect(base.data.wood).toBe(1); button('stashUseMat').click(); expect(base.data.wood).toBe(2);
+    expect(base.data.stash).toEqual([]);
+  });
+  it('整堆按钮二次确认并绑定当前库存数量，数量变化后不能沿用旧确认', () => {
+    open(wood); button('stashUseMatAll').click(); expect(base.useStashMaterial).not.toHaveBeenCalled();
+    base.data.stash[0].count = 4; button('stashUseMatAll').click();
+    expect(base.useStashMaterial).not.toHaveBeenCalled(); button('stashUseMatAll').click();
+    expect(base.useStashMaterial).toHaveBeenCalledExactlyOnceWith('木材', true);
+  });
+  it('孵化按钮显示成本且需再次确认，失败保留详情供重试', () => {
+    open(egg); expect(button('stashHatch').textContent).toContain('50 储备币');
+    button('stashHatch').click(); expect(base.hatchPet).not.toHaveBeenCalled();
+    button('stashHatch').click(); expect(base.hatchPet).toHaveBeenCalledOnce();
+    expect(document.getElementById('cardZoom')).not.toBeNull(); expect(ui.log).toHaveBeenCalledWith(expect.stringContaining('不足 50'), 'warn');
+    base.hatchPet.mockReturnValue({ ok: true, pet: { name: '旺财', desc: '伙伴' } });
+    button('stashHatch').click(); button('stashHatch').click();
+    expect(base.hatchPet).toHaveBeenCalledTimes(2); expect(document.getElementById('cardZoom')).toBeNull();
+  });
+  it('拆包真实按钮受五格空位限制，最后一包需二次确认且向既有命令传5张', () => {
+    base.data.stash = [{ card: pack, count: 1 }]; base.stashRoom = () => 4; pages.openStashCardView(0);
+    button('stashOpenPack').click(); button('stashOpenPack').click();
+    expect(base.openCardPack).not.toHaveBeenCalled(); expect(ui.log).toHaveBeenCalledWith(expect.stringContaining('空位不足 5 格'), 'warn');
+    base.stashRoom = () => 5; button('stashOpenPack').click();
+    expect(base.openCardPack).toHaveBeenCalledExactlyOnceWith('tt-econpack', expect.arrayContaining([expect.objectContaining({ count: 1 })]));
+    expect(base.openCardPack.mock.calls[0][1]).toHaveLength(5); expect(document.getElementById('cardZoom')).toBeNull();
+  });
+  it.each([[wood, 'stashUseMat'], [egg, 'stashHatch'], [pack, 'stashOpenPack']])('同名/同ID异variant的%s不能误消耗另一堆', (item, action) => {
+    base.data.stash = [{ card: { ...item, variantKey: 'first' }, count: 2 }, { card: { ...item, variantKey: 'second' }, count: 2 }];
+    pages.openStashCardView(1); button(action).click(); if (action === 'stashHatch') button(action).click();
+    expect(base.useStashMaterial).not.toHaveBeenCalled(); expect(base.hatchPet).not.toHaveBeenCalled(); expect(base.openCardPack).not.toHaveBeenCalled();
+    expect(ui.log).toHaveBeenCalledWith('库存引用不唯一，请刷新仓库', 'warn');
+  });
+});

@@ -2,9 +2,15 @@
 
 本目录存放 Vite 版游戏的图片、字体和音频。是否在当前运行时被引用，应核对 `game/data/art-mapping.json`、`game/src/` 的加载路径与 `game/assets/asset-manifest.json`；仅凭文件存在或清单条目不能判断素材可删。
 
+第一层普通战斗使用 `scenes/battle/stage-reset-1015/{backdrop,ground,foreground}.webp` 三层独立场景，来源为 NAI 起稿后内置重绘，接入见 `src/battle/view/battle.scenery.js`。地板的远沿过渡由 `css/battle-stage.css` 维护；后续章节及首脑场景仍按场景目录选择。[来源与实装记录](../../docs/evidence/2026-10-15-battle-stage-reset/README.md)注明本轮按老板要求未做实装验收。
+
+`ui/home-nodes-1015/` 保留首页节点图标试作，当前首页使用原SVG线框图标；原稿、提示词与转换图SHA见[试作记录](../../docs/evidence/2026-10-15-home-nodes-set/README.md)。
+
 可编辑原稿与生成过程放在 `game/art-source/`；人物定稿时点的参考快照放在 `docs/character-bible/ref-images/`；设计比较图、历史截图和验收证据放在 `docs/previews/`、`docs/evidence/` 等目录。它们与本目录的运行素材用途不同。以上路径均相对项目根目录。
 
 新素材应记录来源与授权；已有字体、音效和卡图的来源说明分别见本目录下的 `fonts/`、`sfx/` 和 `cards/items/`。替换或删除素材前，先检查实际引用、来源记录及对应的视觉回归。
+
+无的“春日·机车”“新春·旗袍”“盛夏·水枪”分别使用 `portraits/full/wu-casual-v14.webp`、`wu-spring-v15.webp`、`wu-beach.webp`，三图均已按当前人物大图容器约1.30:1补绘上下场景并实装；来源、备份和逐图预览见[扩图记录](../../docs/evidence/2026-10-15-wu-skin-fill/README.md)。泳装此前的NAI构图及默认v1.0重绘过程见[泳装来源](../../docs/evidence/2026-10-15-wu-swim-nai/README.md)。
 
 常无欲的战斗Sprite使用 portraits/frames/changwuyu/sprite-v1/（animations.json维护帧序和时长），静态兜底与新待机一致；四动作实装来源见 [10-10实装记录](../../docs/evidence/2026-10-10-changwuyu-install/README.md)。
 

@@ -5,6 +5,7 @@ export function createCharacterViewMotion() {
   let switching = false;
   const previews = new WeakMap();
   const portraitRequests = new WeakMap();
+  const swaps = new WeakMap();
   const reduced = () => document.body.classList.contains('reduce-motion')
     || window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches === true;
 
@@ -77,5 +78,42 @@ export function createCharacterViewMotion() {
     });
   }
 
-  return Object.freeze({ page, preview, portrait, enter, get busy() { return switching; } });
+  function swapPortrait(current, next, direction = 0) {
+    if (!current || !next) return;
+    const parent = current.parentElement;
+    if (!parent) return;
+    const request = {};
+    swaps.set(parent, request);
+    if (reduced() || typeof next.animate !== 'function') {
+      current.replaceWith(next);
+      return;
+    }
+    const commit = () => {
+      if (!current.isConnected || swaps.get(parent) !== request) return;
+      if (reduced()) { current.replaceWith(next); return; }
+      const outgoing = current.cloneNode(true);
+      outgoing.querySelectorAll('[data-portrait-outgoing]').forEach(node => node.remove());
+      outgoing.dataset.portraitOutgoing = 'true';
+      outgoing.setAttribute('aria-hidden', 'true');
+      outgoing.style.cssText += ';position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;';
+      current.replaceWith(next);
+      next.append(outgoing);
+      const incoming = next.querySelector('.art-figure-wrap') || next.querySelector('img') || next;
+      const offset = Math.sign(direction) * 14;
+      linkedAnimate(incoming, [
+        { opacity: 0, transform: `translateX(${offset}px)` },
+        { opacity: 1, transform: 'none' },
+      ], { duration: motionTiming.regionEnter, easing: motionEasing.enter });
+      const fade = linkedAnimate(outgoing, [
+        { opacity: 1, transform: 'none' },
+        { opacity: 0, transform: `translateX(${-offset}px)` },
+      ], { duration: motionTiming.regionEnter, easing: motionEasing.enter, fill: 'forwards' });
+      fade?.finished.then(() => outgoing.remove(), () => outgoing.remove());
+    };
+    // Keep the visible portrait until its replacement is decoded; only the latest click wins.
+    Promise.all([...next.querySelectorAll('img')].map(image => image.decode?.().catch(() => {}) ?? Promise.resolve()))
+      .then(commit);
+  }
+
+  return Object.freeze({ page, preview, portrait, swapPortrait, enter, get busy() { return switching; } });
 }

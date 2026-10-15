@@ -31,9 +31,18 @@ describe('G03 揭晓宝箱持久化',()=>{
       grantCard:vi.fn(()=>true),gainCoins:vi.fn(),persistSave:vi.fn()};
     Chests.open(game,[{kind:'small'}],()=>{},{onCell:true,consumeNode:true});
     const saved=JSON.parse(JSON.stringify(Chests.serialize(game)));
+    expect(saved.current.rewardStage).toBe('chest');
     expect(saved.current.cards[0].name).toBe('原奖励');expect(game.persistSave).toHaveBeenCalled();
     draw.mockImplementation(()=>alternate);const calls=draw.mock.calls.length;
     expect(Chests.restore(game,saved,()=>{})).toBe(true);expect(draw).toHaveBeenCalledTimes(calls);
+    vi.advanceTimersByTime(5000);
+    expect(body.querySelector('.chest-offer-page')).not.toBeNull();
+    expect(body.textContent).not.toContain('原奖励');
+    acts.chestClaim();
+    const opening=JSON.parse(JSON.stringify(Chests.serialize(game)));
+    expect(opening.current.rewardStage).toBe('opening');
+    expect(Chests.restore(game,opening,()=>{})).toBe(true);
+    expect(Chests.serialize(game).current.rewardStage).toBe('cards');
     expect(body.textContent).toContain('原奖励');expect(body.textContent).not.toContain('重抽奖励');
     acts.chestSelect({i:0});acts.chestTake1({i:0});expect(game.grantCard).toHaveBeenCalledTimes(1);
     const taken=JSON.parse(JSON.stringify(Chests.serialize(game)));

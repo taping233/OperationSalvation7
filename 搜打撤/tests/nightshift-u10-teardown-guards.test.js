@@ -63,6 +63,7 @@ describe('U10 H2 chests 逐卡揭晓音效守卫', () => {
     };
     const { SDT: chestFacade } = await import('../game/src/run/chests.js');
     chestFacade.Chests.open(game, [{ kind: 'small' }]);
+    ovBody.querySelector('[data-act="chestClaim"]').click();
     ovBody.querySelector('[data-eps-search]').click();        // 立即揭晓 → scheduleRevealSfx 挂 140ms 定时器（无句柄）
     ovBody.querySelector('[data-act="chestTake1"]').click();
     ovBody.querySelector('[data-act="chestContinue"]').click(); // 单卡已领完，继续探索使 cur 失活
@@ -136,7 +137,7 @@ describe('U10 H4 cinematics 发卡队列续棒守卫', () => {
     const queued = [...document.querySelectorAll('#cardGet')].at(-1);
     expect(queued.dataset.combat).toBe('false');
     expect(queued.querySelector('.lg-name').textContent).toBe('能力样本');
-    expect(queued.querySelector('.lg-hint').textContent).toBe('点击任意处继续');
+    expect(queued.querySelector('.lg-hint').textContent).toBe('点击收起 · 稍后自动收起');
   });
 });
 

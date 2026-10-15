@@ -4,8 +4,9 @@ import path from 'node:path';
 const CHEST_RIGS = Object.freeze(['small', 'medium', 'large', 'class', 'boss']);
 const IDENTICAL_FRAME_CANDIDATES = Object.freeze([['01', '00'], ['02', '00'], ['17', '16']]);
 
-// These frames are statically referenced by new URL in chests.js. Preserve all
-// timeline entries and source files; only their published URLs may share bytes.
+// Legacy rig frames still enter the copied asset/preload output. The active
+// chest timeline uses safe-simple-v7 in chest-opening-art.js instead. Preserve
+// all source files; only the verified legacy pairs' published URLs share bytes.
 // Re-check equality for each build so a newly redrawn frame retains its own URL.
 export function collectVerifiedChestFrameAliases(assetsRoot) {
   const aliases = new Map();

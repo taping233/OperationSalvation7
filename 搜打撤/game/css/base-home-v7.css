@@ -47,3 +47,6 @@
 body.reduce-motion #overlay#overlay #hubMain.pg.hub.base-frame-v7 :is(#btnDeploy,#btnDeploy > span,.base-home-services button) { transition:none; transform:none; }
 
 #overlay#overlay #hubMain.pg.hub.base-frame-v7 .base-home-affairs-empty { margin:0; padding:0; color:#d3dee0; font:15px/1.5 var(--font-ui); }
+#overlay#overlay #hubMain.pg.hub.base-frame-v7 .base-home-first-objective { grid-template-columns:minmax(0,1fr) auto; }
+#overlay#overlay #hubMain.pg.hub.base-frame-v7 .base-home-first-objective b { font-size:19px; }
+#overlay#overlay #hubMain.pg.hub.base-frame-v7 .base-home-first-objective small { font-size:15px; line-height:1.6; }

@@ -1,35 +1,4 @@
 /* 手牌常态收在下沿；悬停或键盘焦点只抬起当前牌，移开后回落。 */
-body #overlay .battle-stage.battle-sts .sts-hand .bt-slot { z-index:calc(10 + var(--hand-index,0)); }
-body:has(#viewport) #overlay .battle-stage.battle-sts .sts-hand .hs-card {
-  width:280px!important;font-size:22px!important;margin:-44px 0 0 -30px!important;
-}
-body #overlay .battle-stage.battle-sts .sts-hand .bt-card {
-  position:relative;isolation:isolate;outline-offset:3px;
-  filter:drop-shadow(0 8px 10px #0008);transition:transform .16s ease;
-}
-body #overlay .battle-stage.battle-sts .sts-hand .bt-slot:is(:hover,:focus-within) { z-index:28!important; }
-body #overlay .battle-stage.battle-sts .sts-hand .bt-slot:has(.bt-card[data-hand-state="selected"]) { z-index:25!important; }
-body #overlay .battle-stage.battle-sts .sts-hand .bt-slot:is(:hover,:focus-within) .bt-card:not(.aim-lift) {
-  transform:translateY(-156px) rotate(var(--counter-rot,0deg)) scale(1.06);
-  filter:drop-shadow(0 18px 25px #000b);
-}
-body #overlay .battle-stage.battle-sts .sts-hand .bt-card[data-hand-state="selected"] {
-  transform:scale(1.02);
-  outline:2px solid #efda9d;box-shadow:0 0 0 4px #efd99933;
-  z-index:25;
-}
-body #overlay .battle-stage.battle-sts .sts-hand .bt-card[data-hand-state="blocked"] { opacity:.78;filter:saturate(.72) drop-shadow(0 8px 10px #0008); }
-body #overlay .battle-stage.battle-sts .sts-hand .bt-slot:is(:hover,:focus-within) .bt-card[data-hand-state="blocked"] { opacity:1;filter:drop-shadow(0 18px 25px #000b); }
-body #overlay .battle-stage.battle-sts .sts-hand .bt-card[data-hand-state="blocked"]::after {
-  content:attr(data-block-reason);position:absolute;left:50%;bottom:calc(100% + 6px);
-  transform:translateX(-50%);width:max-content;max-width:230px;padding:5px 9px;
-  background:#202b2eea;border:1px solid #cd9d8d;border-radius:3px;
-  color:#f0d8d1;font-size:20px;line-height:1.3;text-align:center;
-  white-space:normal;opacity:0;pointer-events:none;
-}
-body #overlay .battle-stage.battle-sts .sts-hand .bt-slot:is(:hover,:focus-within) .bt-card[data-hand-state="blocked"]::after { opacity:1; }
-body #overlay .battle-stage.battle-sts .sts-hand .bt-card:focus-visible { outline:2px solid #f1dda7; }
-body #overlay .battle-stage.battle-sts[data-phase="enemy"] .sts-hand { transform:translateY(60%);opacity:.16;pointer-events:none; }
 body #overlay .battle-stage.battle-sts .bt-thought-bubble { border-radius:4px;background:#e8e3d0;color:#2a3030; }
 body #overlay .battle-stage.battle-sts .bt-fpreview {
   width:max-content;max-width:min(300px,40vw);padding:9px 11px;
@@ -75,7 +44,6 @@ body #overlay .bt-hand-detail-use { flex-shrink:0;width:420px;max-width:100%;min
 body #overlay .bt-hand-detail-use:disabled { opacity:.55;cursor:default; }
 body #overlay .bt-hand-detail-use:focus-visible { outline:3px solid #b6e8ff;outline-offset:3px; }
 @media (prefers-reduced-motion:reduce) {
-  body #overlay .battle-stage.battle-sts .sts-hand .bt-card { transition:none; }
 }
 
 /* 发现、抉择、牌堆、背包沿用同一阅读面，动作停在固定页脚。 */
@@ -121,18 +89,8 @@ body #overlay .battle-decision[data-decision-kind="bag"] .battle-bag-inspect:foc
 }
 
 /* 同一手牌保留原卡框；StS2位置表适配的低弧让九叠身份区全部可见。 */
-body #overlay .battle-stage.sts.battle-sts .sts-hand { display:block!important;height:var(--battle-hand-height,300px)!important;padding:0!important;box-sizing:border-box;overflow:visible!important; }
-body #overlay .battle-stage.sts.battle-sts .sts-hand .bt-slot { position:absolute!important;left:50%!important;bottom:-82px!important;transform:translate(calc(-50% + var(--fx,0px)),var(--fy,0px)) rotate(var(--frot,0deg))!important;width:220px;height:330px; }
-body #overlay .battle-stage.sts.battle-sts .sts-hand .bt-card { touch-action:none;user-select:none; }
-body #overlay .battle-stage.sts.battle-sts .sts-hand .bt-card.aim-lift { transition:none!important; }
-body #overlay .battle-stage.sts.battle-sts .sts-hand .bt-slot:has(.aim-lift) { z-index:60!important; }
 /* winter 的历史 hover 使用 important；当前阅读态增加 viewport 作用域并同级覆盖，拖拽仍完全排除。 */
-body:has(#viewport) #overlay .battle-stage.sts.battle-sts .sts-hand .bt-slot:is(:hover,:focus-within) .bt-card:not(.aim-lift) { transform:translateY(-156px) rotate(var(--counter-rot,0deg)) scale(1.06)!important;filter:drop-shadow(0 15px 20px #0009); }
-body #overlay .battle-stage.sts.battle-sts .sts-hand .bt-slot:is(:hover,:focus-within) { z-index:45!important; }
 /* 短规则悬停/焦点全文可读；密集规则保留节选与明确的完整规则入口。 */
-body #overlay .battle-stage.battle-sts .sts-hand .bt-card::before { content:attr(data-hand-index);position:absolute;z-index:33;left:14px;top:82px;display:grid;place-items:center;width:25px;height:25px;background:#102630dc;border:1px solid #b3cdd169;color:#d6e9eb;font-size:16px;line-height:1;pointer-events:none; }
-body #overlay .battle-stage.battle-sts .sts-hand .bt-cost1 { visibility:hidden!important; }
-body.reduce-motion #overlay .battle-stage.battle-sts .sts-hand .bt-card { transition:none; }
 
 /* 首脑编组先看对手与进度，再选择卡牌；抽牌细则按需展开。 */
 body #overlay .battle-decision[data-decision-kind="formation"] .boss-formation-summary { display:flex;justify-content:space-between;align-items:center;gap:32px;margin:0; }
@@ -154,3 +112,5 @@ body #overlay .battle-decision[data-decision-kind="formation"] .bs-count { font-
 body #overlay .battle-decision[data-decision-kind="formation"] .bt-hand { gap:18px;padding:18px 0 24px;align-items:start; }
 body #overlay .battle-decision[data-decision-kind="formation"] .bt-card { position:relative;transition:transform .16s,border-color .16s; }
 body #overlay .battle-decision[data-decision-kind="formation"] .bt-card.sel::after { content:'已编入';position:absolute;inset:0 0 auto;padding:7px 12px;background:#b8ded6;color:#16303a;text-align:center;font-size:16px;font-weight:700;pointer-events:none; }
+
+/* 独立操作固定在牌面可见顶部；不随沉底牌面掉出窗口。 */

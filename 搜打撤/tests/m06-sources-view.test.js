@@ -22,7 +22,7 @@ describe('M06 mountable view', () => {
   it('builds the shared model from snapshots without consuming inventory', () => {
     const base = { stash: [{ card: { id: 'random', name: '远行短刃', rarity: '古朴', type: '武术' }, count: 1 }], characters: { wu: { lv: 1 } }, pets: { dog: { lv: 1 } } };
     const before = JSON.stringify(base);
-    const model = buildPreparationViewModel({ baseSnapshot: base, preparation: { tracked: ['random'], presets: [{ id: 'preset-1', name: '猛攻', characterId: 'wu', petId: 'dog', picks: [{ card: { cardId: 'random' }, count: 1 }] }] }, cardCatalog: [base.stash[0].card], characters: [{ id: 'wu', name: '无' }], pets: [{ id: 'dog', name: '汪汪狗' }], bagCapacity: 6 });
+    const model = buildPreparationViewModel({ baseSnapshot: base, preparation: { tracked: ['random'], presets: [{ id: 'preset-1', name: '猛攻', characterId: 'wu', petId: 'dog', picks: [{ card: { cardId: 'random' }, count: 1 }] }] }, cardCatalog: [base.stash[0].card], characters: [{ id: 'wu', name: '无' }], pets: [{ id: 'dog', name: '旺财' }], bagCapacity: 6 });
     expect(model.goals[0].source.certainty).toBe('known'); expect(model.presets[0].preview.canStart).toBe(true); expect(JSON.stringify(base)).toBe(before);
   });
 

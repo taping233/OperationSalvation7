@@ -68,7 +68,7 @@
 
 模块之间不得直接修改另一模块的私有变量；需要跨模块行为时应暴露命名命令、只读快照或一次性配置接口。
 
-基地持久化分为 `base-state.js`（默认状态和旧档归一化）、`base-mutation.js`（同步草稿与提交结果）、`base-economy.js`（购买、拆包、领奖命令）、`base-progression.commands.js`（模式选择与研究所钥匙门禁）、`base-departure.commands.js`（一次准备命令中扣除出征卡并清理消耗口袋）、`base-pet-egg.commands.js`（宠物蛋保底）、`base-elapsed.commands.js`（累计游玩时间算术）、`base.js`（活动槽、存储保护与兼容接口）。标准 `mutate` 草稿命令在保存失败时不替换运行态；pet egg 的旧兼容命令则只推进内存 `eggPity` 并继续发放本次奖励，返回 `persisted:false`；elapsed 同样保留先推进内存、再尝试保存的旧 checkpoint 策略并显式报告持久化结果。这两类特定兼容命令不改变通用 `mutate` 的回滚语义。未改变的标准草稿分支保持引用，兼容旧收藏流程持有的卡堆。研究所门禁按整数钥匙储备校验并只扣一次；旧 `game.nest.js` 无费用解锁入口保留兼容语义。出征命令提交 Base 后 `game.session.newRun()` 才创建新局；Base 与 Run 使用不同存储，不能把这个单边事务称为跨存储原子提交。跨基地/对局的结算仍使用原 journal/requestId 协议。其他旧流程仍有直接写 `Base.data` 后保存的路径，不能把这次收敛理解为整个存档层已不可变。
+基地持久化分为 `base-state.js`（默认状态和旧档归一化）、`base-mutation.js`（同步草稿与提交结果）、`base-economy.js`（购买、拆包、领奖命令）、`base-progression.commands.js`（模式选择与研究所钥匙门禁）、`base-departure.commands.js`（一次准备命令中扣除出征卡并清理消耗区）、`base-pet-egg.commands.js`（宠物蛋保底）、`base-elapsed.commands.js`（累计游玩时间算术）、`base.js`（活动槽、存储保护与兼容接口）。标准 `mutate` 草稿命令在保存失败时不替换运行态；pet egg 的旧兼容命令则只推进内存 `eggPity` 并继续发放本次奖励，返回 `persisted:false`；elapsed 同样保留先推进内存、再尝试保存的旧 checkpoint 策略并显式报告持久化结果。这两类特定兼容命令不改变通用 `mutate` 的回滚语义。未改变的标准草稿分支保持引用，兼容旧收藏流程持有的卡堆。研究所门禁按整数钥匙储备校验并只扣一次；旧 `game.nest.js` 无费用解锁入口保留兼容语义。出征命令提交 Base 后 `game.session.newRun()` 才创建新局；Base 与 Run 使用不同存储，不能把这个单边事务称为跨存储原子提交。跨基地/对局的结算仍使用原 journal/requestId 协议。其他旧流程仍有直接写 `Base.data` 后保存的路径，不能把这次收敛理解为整个存档层已不可变。
 
 `core/rule-config.js` 是只读共享规则来源，包含容量、战斗上限、撤离保留比例和兽王奖励概率；校验真实的字段范围和同组容量顺序。预估和实际结算读取同一常量，随机抽取仍留在原调用位置。
 

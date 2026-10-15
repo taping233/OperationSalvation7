@@ -1,4 +1,9 @@
 /* Node rooms and extraction reports: one calm, legible result language. */
+#overlay.room-view.fx-doom .doom-panel { max-height:calc(var(--game-layout-height,100vh) - 140px);overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box; }
+#overlay .doom-panel .doom-review { margin:12px 0 16px;padding:12px 14px;border:1px solid #b5b5ac44;background:#141a1ed9;text-align:left;color:#e4e7e5; }
+#overlay .doom-panel .doom-review b { color:#ead282; }
+#overlay .doom-panel .doom-review p { margin:7px 0;line-height:1.5;font-size:14px; }
+#overlay .doom-panel .doom-review small { display:block;color:#b7c0c4;line-height:1.5;font-size:12px; }
 #overlay .node-pg, #overlay .result-pg { background-color:#111214; color:#ebecec; }
 #overlay .node-panel { box-shadow:0 24px 80px rgba(0,0,0,.4); }
 /* 2026-09-15 老板令：事件页排版统一——标题左缘与选项条对齐（原 padding 左右 28px 造成标题比选项缩进一截） */
@@ -106,16 +111,14 @@ body #overlay .result-pg[data-unclaimed-cards]:not([data-unclaimed-cards="0"]) #
 
 /* Arknights reference: independent vertical rewards, then one clear exit. */
 body #overlay .card.chest:has(.reward-replica),
-body #overlay .card.page:has(.entry-reward-scene.reward-replica) {
-  width:min(1740px,calc(var(--game-layout-width,100vw) * .94)); height:min(930px,calc(var(--game-layout-height,100vh) * .90));
-  max-width:none; max-height:calc(var(--game-layout-height,100vh) * .90); min-height:0; padding:0!important;
+body #overlay .card.page:has(.reward-replica) {
+  width:100%; height:100%; margin:0;
+  max-width:none; max-height:none; min-height:0; padding:0!important;
   border:0!important; border-radius:0; background:transparent!important; box-shadow:none!important; clip-path:none; backdrop-filter:none;
 }
 body #overlay .card:has(.reward-replica)::before, body #overlay .card:has(.reward-replica)::after,
 body #overlay .card:has(.reward-replica) > h2 { display:none; }
-/* A small haul keeps its reading, claims and exit in one compact field. */
-body #overlay .card:is(.page,.chest):has(.reward-replica[data-reward-count="1"]) { width:min(1100px,calc(var(--game-layout-width,100vw) * .94)); }
-body #overlay .card:is(.page,.chest):has(.reward-replica[data-reward-count="2"]) { width:min(1260px,calc(var(--game-layout-width,100vw) * .94)); }
+body #overlay:has(.reward-replica) { padding:0; }
 body #overlay .card:has(.reward-replica) #ovBody { display:flex; width:100%; height:100%; min-height:0; overflow:hidden; }
 body #overlay .card:has(.reward-replica) .reward-replica,
 body #overlay .card.page .pg.entry-reward-scene.reward-replica {
@@ -132,8 +135,8 @@ body #overlay .card:has(.reward-replica) .reward-replica .reward-coins b { color
 body #overlay .card:has(.reward-replica) .reward-replica .reward-coins span { color:#aebbbd; font-size:16px; }
 body #overlay .card:has(.reward-replica) .reward-replica .reward-main { flex:1 1 auto; min-height:0; display:grid; grid-template-columns:minmax(0,1fr) 248px; gap:34px; }
 body #overlay .card:has(.reward-replica) .reward-replica .reward-stage { display:flex; flex-direction:column; justify-content:flex-start; min-width:0; min-height:0; padding:0 10px; overflow:auto; overscroll-behavior:contain; scrollbar-gutter:stable; }
-body #overlay .card:has(.reward-replica) .reward-replica .reward-objects { display:flex; flex:none; flex-wrap:nowrap; align-items:stretch; justify-content:center; justify-content:safe center; gap:34px; width:100%; height:auto; min-height:0; max-height:none; margin-block:auto; padding:18px 0; border:0; background:none; overflow:visible; }
-body #overlay .card:has(.reward-replica) .reward-replica .reward-unit { display:flex; flex:0 0 278px; flex-direction:column; align-items:stretch; gap:18px; width:278px; padding:0 18px 10px; box-sizing:border-box; border:0; background:none; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-objects { display:flex; flex-wrap:nowrap; align-items:stretch; gap:34px; width:100%; height:auto; max-height:none; padding:18px 0; border:0; background:none; overflow:visible; }
+body #overlay .card:has(.reward-replica) .reward-replica .reward-unit { display:flex; flex:0 0 278px; flex-direction:column; align-items:stretch; gap:18px; width:278px; padding:0 18px 10px; box-sizing:border-box; }
 body #overlay .card:has(.reward-replica) .reward-replica[data-reward-count="1"] .reward-unit { flex-basis:322px; width:322px; }
 body #overlay .card:has(.reward-replica) .reward-replica[data-reward-count="2"] .reward-unit { flex-basis:302px; width:302px; }
 body #overlay .card:has(.reward-replica) .reward-replica .reward-card { display:block; flex:none; width:100%; margin:30px 0 34px; padding:0; border:0; border-radius:0; background:none; color:inherit; font:inherit; cursor:zoom-in; overflow:visible; transform:none; box-shadow:none; }
@@ -168,7 +171,6 @@ body #overlay .card:has(.reward-replica) .reward-replica .loot-outcome summary {
 body #overlay .card:has(.reward-replica) .reward-replica .chest-warn { flex:none; max-width:960px; margin:6px 20px; padding:12px 16px; border:0; border-left:2px solid #c79b88; background:#382f2988; color:#e0bfa9; font-size:17px; line-height:1.6; }
 body #overlay .card:has(.reward-replica) .reward-replica .reward-empty { padding:60px; color:#aebfbb; font-size:24px; }
 body #overlay .card:has(.reward-replica) .reward-replica :is(button,[tabindex]):focus-visible { outline:2px solid #99d5c9; outline-offset:5px; }
-body:has(#overlay:not([hidden]) .reward-replica) #bagBtnFloat { display:none; }
 body #cardZoom.expedition-card-zoom:not(.cz-photo) .cz-foot:has([data-act^="chest"]) { width:min(400px,calc(var(--game-layout-width,100vw) * .8)); margin:0; padding:0; border:0; background:none; box-shadow:none; }
 body #cardZoom.expedition-card-zoom:not(.cz-photo) .cz-foot [data-act^="chest"] { width:100%; min-height:58px; margin:0; padding:10px 18px; border:1px solid #65bcb25c; border-radius:0; background:#197b76; color:#f1f6f0; font:600 25px/1.35 var(--font-ui); letter-spacing:0; clip-path:none; cursor:pointer; }
 body #cardZoom.expedition-card-zoom:not(.cz-photo) .cz-foot [data-act^="chest"]:hover { background:#248f87; }
@@ -176,6 +178,94 @@ body #cardZoom.expedition-card-zoom:not(.cz-photo) .cz-foot [data-act^="chest"]:
 body #overlay .pick-search .ps-tip { display:block; margin-top:12px; color:#d4e3e8; font-size:19px; }
 #overlay .pick-search .chest-prop[data-chest-animated="true"], #overlay .pick-search .chest-prop.chest-opening { animation:none; transform:none; }
 @keyframes rewardUnitEnter { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+
+/* 入城补给：视频参考的左侧玻璃奖励条，收下后移除，领完集中确认。 */
+body #overlay .card.page:has(.entry-supply-strips) {
+  width:100%; height:100%; max-height:none; margin:0;
+}
+body:has(#overlay .entry-supply-strips) #overlay {
+  background:#030b0c9c; backdrop-filter:blur(9px);
+}
+body #overlay .card.page .pg.entry-supply-strips.reward-replica {
+  padding:64px 4vw 30px; background:linear-gradient(90deg,#041310d9,#06120d77 46%,#07110c22); isolation:isolate;
+}
+body #overlay .card:has(.entry-supply-strips) .entry-supply-strips .reward-head {
+  padding:0 0 20px; gap:12px;
+}
+body #overlay .card:has(.entry-supply-strips) .entry-supply-strips .reward-head h3 {
+  font-size:24px; font-weight:500; letter-spacing:.16em;
+}
+body #overlay .card:has(.entry-supply-strips) .entry-supply-strips .reward-source {
+  font-size:13px; color:#8eaaa1;
+}
+body #overlay .card:has(.entry-supply-strips) .entry-supply-strips .reward-main {
+  display:flex; gap:0;
+}
+body #overlay .card:has(.entry-supply-strips) .entry-supply-strips .reward-stage {
+  width:100%; padding:0; scrollbar-gutter:auto;
+}
+body #overlay .card:has(.entry-supply-strips) .entry-supply-strips .loot-actions { display:none; }
+body #overlay .card:has(.entry-supply-strips) .entry-supply-strips .reward-objects {
+  justify-content:flex-start; align-items:stretch; width:max-content; min-width:100%; gap:18px; margin-block:auto; padding:16px 6px 24px;
+}
+body #overlay .card:has(.entry-supply-strips) .entry-supply-strips .reward-unit {
+  position:relative; flex:0 0 216px; width:216px; min-height:420px; gap:0; padding:24px 18px 20px;
+  border:1px solid #b1ddc35c; border-top:2px solid #d9f0df99;
+  background:linear-gradient(155deg,#a9d4b416,transparent 42%),linear-gradient(0deg,#17684655,#071411b3 48%,#07141177);
+  box-shadow:inset 0 0 28px #8cdbad0b,0 10px 24px #0004;
+}
+body #overlay .card:has(.entry-supply-strips) .entry-supply-strips .reward-card {
+  width:100%; margin:0 0 22px; filter:drop-shadow(0 8px 14px #0008);
+}
+body:has(#viewport) #overlay .entry-supply-strips .reward-card .hs-card { font-size:12px; }
+body #overlay .entry-supply-strips .entry-reward-label {
+  padding:10px 0; border-bottom:1px solid #91cbaa55; color:#ecf3ed; text-align:center; font:500 19px/1.4 var(--font-ui);
+}
+body #overlay .entry-supply-strips .entry-reward-amount {
+  padding:14px 0 24px; color:#f3f5ed; text-align:center; font:500 34px/1.1 var(--font-ui);
+}
+body #overlay .entry-supply-strips .entry-reward-amount span { color:#6ef0b0; font-size:24px; margin-right:3px; }
+body #overlay .card:has(.entry-supply-strips) .entry-supply-strips .reward-claim {
+  width:100%; min-height:38px; padding:5px 18px; margin-top:auto; border:1px solid #b1ffe185; border-radius:24px;
+  background:linear-gradient(90deg,#126444,#358b62 48%,#126444); box-shadow:inset 0 0 12px #a4ffd54d,0 0 14px #3cf39b33;
+  color:#eefff3; font-size:18px; font-weight:500; letter-spacing:.22em;
+}
+body #overlay .card:has(.entry-supply-strips) .entry-supply-strips .reward-claim:hover { background:#399a70; box-shadow:0 0 20px #77f8b755; }
+body #overlay .card:has(.entry-supply-strips) .entry-supply-strips .reward-foot {
+  padding:14px 0 0; border:0; gap:22px; font-size:14px;
+}
+body #overlay .card:has(.entry-supply-strips) .entry-supply-strips .reward-notice {
+  margin-left:0; font-size:14px; color:#99b1a6;
+}
+body #overlay .entry-supply-strips.reward-complete .reward-head { visibility:hidden; }
+body #overlay .card:has(.entry-supply-strips) .entry-supply-strips.reward-complete .reward-objects { width:100%; justify-content:center; }
+body #overlay .entry-supply-strips .entry-reward-complete { display:grid; justify-items:center; gap:20px; color:#e6efe5; }
+body #overlay .entry-supply-strips .entry-complete-symbol .ic { width:110px; height:110px; }
+body #overlay .entry-supply-strips .entry-reward-complete p { margin:0; font:500 20px/1.5 var(--font-ui); letter-spacing:.12em; }
+body #overlay .entry-supply-strips .entry-complete-confirm {
+  display:grid; place-items:center; width:46px; height:46px; margin-top:8px; border:2px solid #faf5c3; border-radius:50%;
+  background:#a6a45e26; box-shadow:0 0 20px #ede69744; color:#fffbd2; font-size:27px; cursor:pointer;
+}
+body #overlay .entry-supply-strips .entry-complete-confirm:hover { background:#b2b16a66; }
+
+/* 奖励条贯穿可用高度；金币占独立一栏，与卡牌并列。 */
+body #overlay .card:has(.reward-replica) .reward-replica .reward-objects {
+  flex:1 0 auto; min-height:100%; margin-block:0; box-sizing:border-box; justify-content:flex-start;
+}
+body #overlay .card:has(.reward-replica) .reward-replica .reward-unit {
+  border:1px solid #b1ddc34d; border-top:2px solid #d9f0df80;
+  background:linear-gradient(155deg,#a9d4b416,transparent 42%),linear-gradient(0deg,#17684644,#07141199 52%,#07141155);
+}
+body #overlay .card:has(.reward-replica) .reward-replica .reward-coin-unit {
+  padding:34px 22px 20px; gap:0; text-align:center;
+}
+body #overlay .reward-replica .reward-coin-art {
+  display:grid; place-items:center; min-height:220px; padding:24px 0; color:#ead082;
+  background:radial-gradient(ellipse,#dfbd5730,transparent 68%);
+}
+body #overlay .reward-replica .reward-coin-art .ic { width:180px; height:180px; filter:drop-shadow(0 8px 18px #e8c45b44); }
+body #overlay .reward-replica .reward-coin-amount { padding:24px 0; color:#ebd68e; font:500 42px/1.2 var(--font-ui); }
+body #overlay .reward-replica .reward-coin-unit.got .reward-coin-art { opacity:.4; }
 @media (prefers-reduced-motion:no-preference) {
   body:not(.reduce-motion) #overlay .reward-replica:not(.no-anim) .reward-unit { animation:rewardUnitEnter .24s ease-out both; }
   body:not(.reduce-motion) #overlay .reward-replica .reward-card { transition:transform .16s ease,opacity .16s ease; }

@@ -1,7 +1,8 @@
 /* 选角叶页面：仅由 class-choice 轻门面在用户请求时装载，共用 session / Base 单例。 */
 import { CHARACTERS, characterFor, characterName } from '../core/characters.js';
 import { esc, escAttr } from '../core/shared.js';
-import { game, getActiveSlot, exitToTitle, saveGame } from './game.session.js';
+import { MAP, game, getActiveSlot, exitToTitle, saveGame } from './game.session.js';
+import { slamSkillFor } from '../battle/bag/battle.slam-skill.js';
 import { createEntrySupply } from './node-reward-state.js';
 import { createCharacterViewMotion } from '../ui/character-view-motion.js';
 import { Sfx } from '../hub/game.cardslib.js';
@@ -71,6 +72,9 @@ export function openClassChoice(options = {}) {
       xingyue: ['治疗护持', '治疗 · 圣盾 · 圣光'],
     };
     const mechanism = mechanisms[story?.id];
+    const skill = slamSkillFor(displaySel);
+    const petHp = SDT.Base?.carriedPet?.()?.effect?.maxHp || 0;
+    const hp = Number.isFinite(MAP.rules.playerMaxHp) ? MAP.rules.playerMaxHp + petHp + Math.max(0, lv - 1) : '—';
     const roster = picks.map(cl => ({ cl, c: characterFor(cl) }));
     const content = `
       <div class="pg cls2-page roster-reference" data-base-departure="${!!onCancel}">
@@ -85,7 +89,7 @@ export function openClassChoice(options = {}) {
               <div class="cls2-chips">
                 ${sel ? '<span class="cls2-chip cls2-chip-live">当前选择</span>' : ''}
               </div>
-              <section class="cls2-mechanism"><b>${esc(mechanism?.[0] || story.rulesetId)}</b><p>${esc(mechanism?.[1] || '查看完整人物卡池')}</p></section>
+              <section class="cls2-mechanism"><p class="cls2-stats">生命上限 <b>${hp}</b> · 基础攻击 <b>${MAP.rules.playerAtk ?? '—'}</b></p><b>${esc(mechanism?.[0] || story.rulesetId)}</b><p>${esc(mechanism?.[1] || '查看完整人物卡池')}</p><p class="cls2-skill"><b>${esc(skill.name)}</b> · 每回合一次<br>${esc(skill.hint)}</p></section>
               <details class="cls2-growth"><summary>熟练成长 · Lv.${lv}</summary><div class="cls2-level">
                 <div class="cls2-level-num"><i>LV</i>${lv}</div>
                 <div class="cls2-level-meta">
@@ -94,7 +98,7 @@ export function openClassChoice(options = {}) {
                   <div class="cls2-perk">[[icon:medal]] 出征加成 ${esc(SDT.Meta.perkText(lv))}</div>
                 </div>
               </div>
-              </details>${!onSelect ? `<details class="cls2-growth cls2-supply-rules"${SDT.Base?.data?.ammoTaught ? '' : ' open'}><summary>卡牌消耗规则 · 随时重看</summary><p>普通卡打出后进入消耗口袋；初始攻击、职业卡与衍生卡打出后直接消散。道具与装备不能在火堆复原。撤离时消耗口袋每张仅 1/3 概率带回。</p></details>` : ''}
+              </details><details class="cls2-growth cls2-supply-rules"${SDT.Base?.data?.ammoTaught ? '' : ' open'}><summary>用过的牌去哪了？</summary><p>所有用过的牌都进入<b>消耗区</b>，复原后可以再用。</p><p>复原方法在背包查看；首脑战规则在入场前说明。</p></details>
               ${!mechanism ? `<p class="cls2-story">${esc(CLASS_STORY[story.id] || '确认后以此人物进入远征，熟练度加成与职业卡将在确认时生效。')}</p>` : ''}
               ${(SDT.Art.listSkins ? SDT.Art.listSkins(displaySel) : []).length ? `
                 <div class="cls2-skins-wrap">
@@ -119,12 +123,19 @@ export function openClassChoice(options = {}) {
     if (mounted) {
       const template = document.createElement('template');
       template.innerHTML = SDT.Icons?.rich ? SDT.Icons.rich(content) : content;
-      for (const selector of ['.cls2-fullart', '.cls2-panel', '.cls2-strip']) {
+      for (const selector of ['.cls2-fullart', '.cls2-panel']) {
         const current = mounted.querySelector(selector);
         const next = template.content.querySelector(selector);
-        if (current && next) current.replaceWith(next);
+        if (current && next) {
+          if (selector === '.cls2-fullart') characterMotion.swapPortrait(current, next, direction);
+          else current.replaceWith(next);
+        }
       }
-      characterMotion.portrait(mounted.querySelector('.cls2-fullart'), direction);
+      mounted.querySelectorAll('.cls2-face').forEach(button => {
+        const selected = button.dataset.cls === sel;
+        button.classList.toggle('sel', selected);
+        button.setAttribute('aria-pressed', String(selected));
+      });
       characterMotion.preview(mounted.querySelector('.cls2-panel'));
     } else {
       UI.showOverlay('', content, 'page');
@@ -346,15 +357,14 @@ export function openClassChoice(options = {}) {
   act('clsSkin', (d) => {   // 皮肤切换（2026-09-19）：只换选人页大立绘，会话内记忆不入存档
     if (SDT.Art.getSkin(d.cls) === d.skin) return;
     SDT.Art.setSkin(d.cls, d.skin);
-    const url = SDT.Art.skinUrl(d.cls, d.skin);
-    document.querySelectorAll('.cls2-fullart img.art-figure, .cls2-fullart img.art-figure-back')
-      .forEach(im => {
-        im.src = url;
-        im.classList.remove('skin-swap');
-      });
     const portrait = document.querySelector('#overlay .cls2-fullart');
-    if (portrait) portrait.dataset.skin = d.skin;
-    characterMotion.portrait(portrait);
+    const next = portrait?.cloneNode(true);
+    if (next) {
+      next.innerHTML = `<div class="roster-art-surface">${SDT.Art.classFullArt(d.cls)}</div>`;
+      next.dataset.skin = d.skin;
+      next.dataset.character = characterFor(d.cls)?.id || '';
+    }
+    characterMotion.swapPortrait(portrait, next);
     document.querySelectorAll(`.cls2-skin-btn[data-cls="${d.cls}"]`)
       .forEach(b => { const active = b.dataset.skin === d.skin; b.classList.toggle('sel', active); b.setAttribute('aria-pressed', String(active)); });
     Sfx.tick();

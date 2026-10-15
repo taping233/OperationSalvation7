@@ -53,11 +53,5 @@ body #overlay#overlay#overlay .cls2-page .cls2-fullart::after { background:none;
 body #overlay#overlay#overlay .cls2-page .cls2-fullart { mix-blend-mode:normal; }
 /* Map preview and toolbar are maintained in page-expedition-hud.css. */
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns #btnHome { background:transparent!important; border:0; box-shadow:none; }
-body #overlay#overlay#overlay .sts-energy-wrap { transform:translateY(-24px) scale(1.12); transform-origin:left bottom; }
-body #overlay#overlay#overlay [data-act="btSlam"] { display:grid; grid-template-columns:36px minmax(0,1fr); gap:3px 6px; padding:6px 8px; text-align:left; align-items:center; min-height:62px; border:2px solid #9edce7; background:#25485b; color:#fff; font-size:20px; }
-body #overlay#overlay#overlay [data-act="btSlam"] .battle-skill-cost { grid-column:1/-1; width:100%; max-width:100%; margin:0; padding:0; color:#d6e8ee; background:none; font-size:11px; line-height:1.3; white-space:normal; }
-body #overlay#overlay#overlay [data-act="btSlam"] > .ic { width:36px; height:36px; }
-body #overlay#overlay#overlay [data-act="btSlam"] > .battle-skill-icon { width:36px; height:36px; flex:none; }
-body #overlay#overlay#overlay [data-act="btSlam"]:disabled { opacity:.5; }
 body #overlay#overlay#overlay .sts-float.sticker { z-index:120; overflow:visible; }
 body #overlay#overlay#overlay .sts-float.sticker img { display:block; width:46px; height:46px; max-width:none; }

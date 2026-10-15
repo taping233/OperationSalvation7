@@ -8,7 +8,7 @@
 import { characterFor, characterName } from '../core/characters.js';
 import { installExpeditionFeedback } from '../ui/expedition-feedback.js';
 import { openClassChoice as requestClassChoicePage } from './game.run.class-choice.js';
-import { rewardSceneHTML, rewardExitHTML } from '../ui/reward-scene-view.js';
+import { rewardSceneHTML } from '../ui/reward-scene-view.js';
 import { claimEntrySupply, entrySupplyAt, nodeActionBinding } from './node-reward-state.js';
 import { bagSlots } from '../hub/game.bag.bridge.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
@@ -20,7 +20,7 @@ import { openBaseHub } from '../hub/game.hub.js';
 import { Sfx, _set_cardPageOpen } from '../hub/game.cardslib.js';
 import { Random, SeededRandomService } from '../core/random.js';
 import { startBattle } from '../battle/battle-loader.js';
-import { FIRE_RESTORABLE, consumeCurrentCell, finishInstant, grantEventCard, nodeOpt, nodeShell, openPocketRestore, openShop } from './game.run.scenes.js';
+import { FIRE_RESTORABLE, consumeCurrentCell, finishInstant, grantEventCard, nodeOpt, nodeShell, openFixedRewardsOnCell, openPocketRestore, openShop } from './game.run.scenes.js';
 import { RunStorage } from '../hub/game.storage.js';
 import { commitBaseAndRun, readSettlementReceipt, recoverSlot } from '../hub/recovery.commands.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
@@ -75,13 +75,18 @@ export function openFireRest(after = finishInstant) {
   };
   setBagReturnHook(() => openFireRest(after));
   if (game.nodeRewards[cellKey]?.type === 'fire') { result(); return; }
+  const restorable = game.usedPocket.filter(item => FIRE_RESTORABLE(item.card));
+  const restorableN = restorable.reduce((sum, item) => sum + item.count, 0);
+  const fits = restorable.some(item => game.canReceiveCard ? game.canReceiveCard(item.card) : usedSlots() < bagCap());
   nodeShell({ tone:'fire', asset:'scene-fire-bg', icon:'[[icon:fire]]', title:'营火休整',
     sub:'风雪被隔在火光之外。你可以在这里整顿状态，再继续前行。',
-    body:nodeOpt('fireRestGo','休整',`回复 ${MAP.rules.fireHeal} 点生命，随机复原至多 2 张可复原卡牌；${Math.round(MAP.rules.fireClassCardChance * 100)}% 概率获得本职业卡。`),
-    foot:'<button class="ov-btn" data-act="fireLeave">离开火堆</button>',
+    body:nodeOpt('fireRestGo','休整',`回复 ${MAP.rules.fireHeal} 点生命，随机复原至多 2 张可复原卡牌；${Math.round(MAP.rules.fireClassCardChance * 100)}% 概率获得本职业卡。`) +
+      `<p class="reward-notice" role="status">消耗区有 ${restorableN} 张可复原卡牌，本次最多复原 ${Math.min(2, restorableN)} 张。背包 ${esc(game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`)}；${restorableN && !fits ? '当前可复原卡均放不下，将复原 0 张。' : '实际数量受卡牌叠放及剩余容量限制。'}休整后本处机会即消耗；放不下的消耗卡保留在消耗区，额外职业卡无法入包时不会获得。</p>`,
+    foot:'<button class="ov-btn" data-act="fireBag">先整理背包</button><button class="ov-btn" data-act="fireLeave">离开火堆</button>',
   });
   const active = nodeActionBinding(game, UI, 'fireRestGo');
   let resolving = false;
+  UI.act('fireBag', () => { if (active() && !resolving) bagSlots.showBackpack(); });
   UI.act('fireLeave', () => { if (active() && !resolving) leave(); });
   UI.act('fireRestGo', () => {
     if (!active() || resolving || game.nodeRewards[cellKey]?.type === 'fire') return;
@@ -98,8 +103,9 @@ export function openFireRest(after = finishInstant) {
     for (let i = 0; i < 2; i++) {
       const pool = game.usedPocket.filter(item => FIRE_RESTORABLE(item.card));
       if (!pool.length) break;
-      if (usedSlots() >= bagCap()) { SDT.Sound.sfx('deny'); UI.log('[[icon:bag]] 背包已满，可复原卡牌保留在消耗口袋', 'warn'); break; }
-      const item = pool[Math.floor(Random.random('pocket') * pool.length)];
+      const available = pool.filter(item => game.canReceiveCard ? game.canReceiveCard(item.card) : usedSlots() < bagCap());
+      if (!available.length) { SDT.Sound.sfx('deny'); UI.log('[[icon:bag]] 背包已满或可用格不足，可复原卡牌保留在消耗区', 'warn'); break; }
+      const item = available[Math.floor(Random.random('pocket') * available.length)];
       item.count--;
       if (item.count <= 0) game.usedPocket.splice(game.usedPocket.indexOf(item), 1);
       game.ownedCards.push({ uid:newUid(), card:{ ...item.card } });
@@ -117,20 +123,21 @@ export function openFireRest(after = finishInstant) {
 export function openEntrySupply() {
   const supply = entrySupplyAt(game);
   if (!supply) return false;
-  supply.entered = true;   // 入城闸门：打开过补给页即视为已进入，解锁前往其他节点
+  supply.entered = true;   // 记录打开状态；移动闸门仅在补给全部领取后解锁。
   game.state = 'modal';
   let saveFailed = saveGame() === false;
   const cards = () => supply.cardIds.map(id => SDT.Cards.all().find(card => card.id === id));
   const isCurrent = () => entrySupplyAt(game) === supply;
   const finish = () => { setBagReturnHook(null); UI.hideOverlay(); finishInstant(); };
   const showResult = () => {
-    UI.showOverlay('', rewardSceneHTML({ className:'pg entry-reward-scene', title:'随行补给', source:characterName(game.myClass), count:supply.cardIds.length,
-      cards:cards().map((card, i) => card ? `<article class="reward-unit${supply.taken.includes(i) ? ' got' : ''}"><button class="reward-card" data-act="clsEntryCard" data-i="${i}" aria-label="放大查看${escAttr(card.name)}">${SDT.Cards.cardHTML(card)}</button>${supply.taken.includes(i) ? '<span class="reward-unit-state">已入背包</span>' : `<button class="reward-claim" data-act="entrySupplyTake" data-i="${i}">收下</button>`}</article>` : '<p class="reward-empty">该职业补给暂不可用</p>').join(''),
-      actions:rewardExitHTML('clsEntryContinue'),
-      footer:`<button class="reward-bag" data-act="entrySupplyBag">整理背包</button>${saveFailed ? '<p class="entry-save-warning" role="status">当前进度未保存，请查看存档错误提示。</p>' : ''}${supply.taken.length < supply.cardIds.length ? '<span class="reward-notice">未领取的补给保留在此入口</span>' : ''}`,
+    const complete = supply.taken.length === supply.cardIds.length;
+    UI.showOverlay('', rewardSceneHTML({ className:`pg entry-reward-scene entry-supply-strips${complete ? ' reward-complete' : ''}`, title:'随行补给', source:characterName(game.myClass), count:supply.cardIds.length - supply.taken.length,
+      cards:complete ? '<div class="entry-reward-complete"><span class="entry-complete-symbol" aria-hidden="true">[[icon:exit]]</span><p>已领取所有奖励</p><button type="button" class="entry-complete-confirm" data-act="clsEntryContinue" aria-label="继续探索">✓</button></div>' : cards().map((card, i) => supply.taken.includes(i) ? '' : card ? `<article class="reward-unit"><button class="reward-card" data-act="clsEntryCard" data-i="${i}" aria-label="放大查看${escAttr(card.name)}">${SDT.Cards.cardHTML(card)}</button><div class="entry-reward-label">${esc(card.name)}</div><div class="entry-reward-amount"><span>×</span>1</div><button type="button" class="reward-claim" data-act="entrySupplyTake" data-i="${i}">收下</button></article>` : '<p class="reward-empty">该职业补给暂不可用</p>').join(''),
+      actions:'',
+      footer:`<button class="reward-bag" data-act="entrySupplyBag">整理背包</button>${saveFailed ? '<p class="entry-save-warning" role="status">当前进度未保存，请查看存档错误提示。</p>' : ''}${supply.taken.length < supply.cardIds.length ? '<span class="reward-notice">领完全部入城补给后才能前往其他地点；放不下时请先整理背包</span>' : ''}`,
     }), 'page');
-    const active = nodeActionBinding(game, UI, 'clsEntryContinue');
-    UI.act('clsEntryContinue', () => { if (isCurrent() && active()) finish(); });
+    const active = nodeActionBinding(game, UI, complete ? 'clsEntryContinue' : 'entrySupplyBag');
+    UI.act('clsEntryContinue', () => { if (isCurrent() && active() && supply.taken.length === supply.cardIds.length) finish(); });
     UI.act('clsEntryCard', data => {
       if (!isCurrent() || !active()) return;
       const index = Number(data.i), card = cards()[index];
@@ -156,14 +163,13 @@ export function openEntrySupply() {
   nodeShell({ tone:'entry', asset:'scene-door-bg', icon:'', title:'入城补给',
     sub:'随行的职业补给已留在城门旁。收下所需的卡牌，再踏入风雪。',
     body:nodeOpt('clsEntryReveal','查看职业补给',`可领取最多 ${supply.cardIds.length} 张${esc(characterName(game.myClass))}的职业卡，放不下的保留在入口。`),
-    foot:`<button class="ov-btn" data-act="entrySupplyLeave">返回地图</button>${saveFailed ? '<p class="entry-save-warning">当前进度未保存，请查看存档错误提示。</p>' : ''}`,
+    foot:saveFailed ? '<p class="entry-save-warning">当前进度未保存，请查看存档错误提示。</p>' : '',
   });
   const active = nodeActionBinding(game, UI, 'clsEntryReveal');
   UI.act('clsEntryReveal', () => { if (isCurrent() && active()) showResult(); });
-  UI.act('entrySupplyLeave', () => { if (isCurrent() && active()) finish(); });
   return true;
 }
-// 消耗口袋复原选牌（picks = 最多复原张数；done = 结束回调）
+// 消耗区复原选牌（picks = 最多复原张数；done = 结束回调）
 // 2026-09-09 老板实测：原文字行在整屏场景壳上看不清、也不显示卡面——改为真卡面网格，点卡即复原
 // 需求 #12：消耗的装备不能在火堆复原（与道具一样）——列表里直接滤掉，不可选
 export function openClassChoice(options = {}) { return requestClassChoicePage(options); }
@@ -176,16 +182,21 @@ export function openDoorModal(door, cellDef) {
   // 环间门不再提供撤离选项，只能向深处走
   nodeShell({
     tone: 'door', icon: '[[icon:door]]', title: '层间闸门',
-    sub: door.reverse ? '这条通路返回已探索的区域。' : '穿过闸门后将离开当前区域，继续深入城市。',
+    sub: door.reverse ? '这条通路返回已探索的区域。' : '穿过闸门后进入下一层。确认前可返回当前层检查遗漏，或先整理背包。',
     body:
       nodeOpt('goDoor', `${door.reverse ? '返回' : '进入'}${target.name}`, '', 'ok') +
       (cellDef && cellDef.type === 'shop' ? nodeOpt('doorShop', '逛商队', '闸门旁的拾荒商队还在营业') : ''),
+    foot:'<button class="ov-btn" data-act="doorBag">整理背包</button><button class="ov-btn" data-act="doorBack">返回当前层</button>',
   });
   const active = altarPageBinding('goDoor');
   let entering = false;
+  setBagReturnHook(() => openDoorModal(door, cellDef));
+  UI.act('doorBag', () => { if (active() && !entering) bagSlots.showBackpack(); });
+  UI.act('doorBack', () => { if (!active() || entering) return; setBagReturnHook(null); UI.hideOverlay(); finishInstant(); });
   UI.act('goDoor', () => {
     if (!active() || entering) return;
     entering = true;
+    setBagReturnHook(null);
     UI.hideOverlay();
     UI.log(`穿过隔离闸门 → <b>${target.name}</b>`, 'sys');
     // 穿门换层走镜头补间（2026-09-27 二轮动效）：壁纸交叉溶解 + 相机滑入新环，不再硬切
@@ -212,7 +223,7 @@ export function openAltarRitual(def) {
   const frags = game.fragments || 0;
   // 碎片不足时不再隐藏选项，改为禁用态并说明原因（2026-09-10 撤离测试：玩家不知道选项为何消失）
   const fragOpt = frags >= 2
-    ? nodeOpt('altarFragHero', `献上 2 枚员工通行证A碎片（不弃牌）`, `获得 1 张本职业随机能力卡（现有碎片 ${frags}）`, 'ok')
+    ? nodeOpt('altarFragHero', `献上 2 枚员工通行证A碎片（不弃牌）`, `获得 1 张本职业随机能力卡（现有碎片 ${frags}）；需能放下能力卡，背包 ${esc(game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`)}，放不下时不扣碎片`, 'ok')
     : nodeOpt('altarFragLocked', '献上 2 枚员工通行证A碎片（不弃牌）', `碎片不足（现有 ${frags}/2）——集齐 2 枚后可在任意祭坛直接兑换能力卡`, '', 'disabled title="员工通行证A碎片不足，无法兑换"');
   nodeShell({
     tone: 'altar', icon: '[[icon:crystal]]', title: '污染祭坛',
@@ -224,9 +235,10 @@ export function openAltarRitual(def) {
       (game.altarItemSacrificed
         ? nodeOpt('altarItemUsed', '献祭道具 · 已用过', '这座祭坛的道具献祭已受理过一次，不再 repeat——换其他方式激活，或直接离开', '', 'disabled title="道具献祭每座祭坛限一次"')
         : game.ownedCards.some(o => o.card.type === '道具')
-          ? nodeOpt('altarItemRestore', '献祭道具 · 复原卡牌', '献祭 1 张道具卡，从消耗口袋复原 2 张卡牌（每座祭坛限一次）')
+          ? nodeOpt('altarItemRestore', '献祭道具 · 复原卡牌', '献祭 1 张道具卡，从消耗区复原 2 张卡牌（每座祭坛限一次）')
           : nodeOpt('altarItemNoItem', '献祭道具 · 复原卡牌', '背包里没有道具卡——先弄到一张道具卡，再回来献祭复原', '', 'disabled title="背包里没有道具卡"')) +
       nodeOpt('altarLeave', '离开', '祭坛保持沉睡——回到当前格子，稍后再来'),
+    foot:'<button class="ov-btn" data-act="altarBag">整理背包</button>',
   });
   const markActivated = () => {
     SDT.Sound.sfx('altarActivate');
@@ -235,18 +247,20 @@ export function openAltarRitual(def) {
     game.visited[game.layerIdx + ',' + game.trackPos] = 1;   // 激活成功才消耗本格
   };
   const active = altarPageBinding('altarOn3');
-  // 献祭道具复原（2026-09-10 需求）：1 张道具卡 → 从消耗口袋复原 2 张；
+  setBagReturnHook(() => openAltarRitual(def));
+  UI.act('altarBag', () => { if (active()) bagSlots.showBackpack(); });
+  // 献祭道具复原（2026-09-10 需求）：1 张道具卡 → 从消耗区复原 2 张；
   // 每座祭坛限一次（2026-09-19 老板定版：真加一次性锁，标记随存档持久化）
   UI.act('altarItemRestore', () => {
     if (!active() || game.altarActivated) return;
     if (game.altarItemSacrificed) { UI.log('[[icon:crystal]] 这座祭坛的道具献祭已经受理过了', 'warn'); return; }
     if (!game.ownedCards.some(o => o.card.type === '道具')) { UI.log('[[icon:bag]] 背包里没有道具卡可供献祭', 'warn'); return; }
     const restorableN = game.usedPocket.filter(p => FIRE_RESTORABLE(p.card)).length;
-    if (!game.usedPocket.length || !restorableN) { UI.log('[[icon:bag]] 消耗口袋里没有可复原的卡牌——先去战斗吧', 'warn'); return; }
+    if (!game.usedPocket.length || !restorableN) { UI.log('[[icon:bag]] 消耗区里没有可复原的卡牌——先去战斗吧', 'warn'); return; }
     openBagSacrifice(1, (chosen) => {
       game.altarItemSacrificed = true;   // 确认献祭才上锁；取消献祭不上锁
       SDT.Sound.sfx('altarOffer');
-      UI.log(`[[icon:crystal]] 献上道具【<b>${esc(chosen[0].card.name)}</b>】——从消耗口袋复原卡牌（本祭坛的道具献祭已用完）`, 'loot');
+      UI.log(`[[icon:crystal]] 献上道具【<b>${esc(chosen[0].card.name)}</b>】——从消耗区复原卡牌（本祭坛的道具献祭已用完）`, 'loot');
       saveGame();
       // 祭坛道具路径的复原页跟祭坛身份，不落默认「营火休整」（同 openAltarReward 口径）
       openPocketRestore(Math.min(2, restorableN), () => { saveGame(); openAltarRitual(def); }, {
@@ -283,14 +297,19 @@ export function openAltarRitual(def) {
     }
     const card = pool[Math.floor(Random.random('loot') * pool.length)];
     // 先发牌、后扣碎片：背包满时发卡会被拒收（现场播报），不能白扣 2 枚碎片
-    if (!grantEventCard(card)) return;
+    if (!grantEventCard(card)) {
+      const button = UI.el?.ovBody?.querySelector('[data-act="altarFragHero"] span');
+      if (button) button.textContent = '背包放不下能力卡，2 枚碎片已保留；请先整理背包再兑换。';
+      return;
+    }
     game.fragments = (game.fragments || 0) - 2;
     markActivated();
     UI.log(`[[icon:gem]] 献上 2 枚员工通行证A碎片（剩 ${game.fragments}）——获得本职业能力卡【<b>${esc(card.name)}</b>】；<b>祭坛苏醒了</b>`, 'loot');
     saveGame();
+    UI.hideOverlay();
     finishInstant();
   });
-  UI.act('altarLeave', () => { if (!active()) return; UI.hideOverlay(); game.state = 'idle'; saveGame(); UI.refresh(game); });
+  UI.act('altarLeave', () => { if (!active()) return; setBagReturnHook(null); UI.hideOverlay(); game.state = 'idle'; saveGame(); UI.refresh(game); });
   UI.refresh(game);
 }
 
@@ -300,12 +319,12 @@ function openAltarReward() {
   SDT.Sound.sfx('altarReward');
   game.state = 'modal';
   game.altarRewardPending = true;
-  // 2026-09-10 留言 #33：消耗口袋没有可复原卡牌（或全是不可复原的道具/装备）时，
+  // 2026-09-10 留言 #33：消耗区没有可复原卡牌（或全是不可复原的道具/装备）时，
   // 选项①要如实标注——否则选了它只会看到空列表，感觉「无法复原」
   const restorableN = game.usedPocket.filter(p => FIRE_RESTORABLE(p.card)).length;
   const restoreOpt = restorableN
-    ? nodeOpt('altarRewardRestore', '① 复原 3 张消耗卡 + 回复 10 血', `从消耗口袋挑选卡牌复原回背包（现有 ${restorableN} 张可复原${restorableN < 3 ? '，不足 3 张时全复原' : ''}），并回复 10 点生命`, 'ok')
-    : nodeOpt('altarRewardRestoreOff', '① 复原 3 张消耗卡 + 回复 10 血', '消耗口袋里没有可复原的卡牌（道具/装备类消耗不可复原）——此项不可选', '', 'disabled title="消耗口袋里没有可复原的卡牌，请选奖励②"');
+    ? nodeOpt('altarRewardRestore', '① 复原 3 张消耗卡 + 回复 10 血', `从消耗区挑选卡牌复原回背包（现有 ${restorableN} 张可复原${restorableN < 3 ? '，不足 3 张时全复原' : ''}），并回复 10 点生命`, 'ok')
+    : nodeOpt('altarRewardRestoreOff', '① 复原 3 张消耗卡 + 回复 10 血', '消耗区里没有可复原的卡牌（道具/装备类消耗不可复原）——此项不可选', '', 'disabled title="消耗区里没有可复原的卡牌，请选奖励②"');
   nodeShell({
     tone: 'altar', icon: '[[icon:crystal]]', title: '祭坛回赠 · 二选一',
     sub: '祭坛已苏醒——选择你要的奖励（只能选一次；离开后回到本格可再选）',
@@ -328,20 +347,17 @@ function openAltarReward() {
   });
   UI.act('altarRewardLoot', () => {
     if (!active() || !game.altarRewardPending) return;
-    game.altarRewardPending = false;   // 领取即消耗：奖励只能选一次
     const legend = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
     const equips = SDT.Cards.all().filter(c => c.type === '装备' && SDT.Cards.isRandomObtainable(c));
     const legendPick = legend.length ? legend[Math.floor(Random.random('loot') * legend.length)] : null;
-    if (legendPick) grantEventCard(legendPick);
     // 同一奖励内不得重复（2026-09-13 老板口径）：传说装备卡（不朽神剑/混沌之眼等）同时
     // 属于两个池，两池各自随机时会把同一张牌发两次；装备池里排掉已发的那张再抽
     const restEquips = equips.filter(c => !legendPick || (c.id !== legendPick.id && c.name !== legendPick.name));
-    if (restEquips.length) grantEventCard(restEquips[Math.floor(Random.random('loot') * restEquips.length)]);
-    UI.log('[[icon:crystal]] 祭坛回赠：随机获得 1 张<b>传说卡</b>和 1 张<b>装备卡</b>（见背包）', 'loot');
-    saveGame();
-    finishInstant();
+    const equipPick = restEquips.length ? restEquips[Math.floor(Random.random('loot') * restEquips.length)] : null;
+    game.altarRewardPending = false;   // 选择已确定，待领卡牌由持久化领奖页接管。
+    openFixedRewardsOnCell([legendPick, equipPick], '祭坛回赠 · 传说卡与装备卡');
   });
-  UI.act('altarRewardLeave', () => { if (!active()) return; UI.hideOverlay(); finishInstant(); });
+  UI.act('altarRewardLeave', () => { if (!active()) return; setBagReturnHook(null); UI.hideOverlay(); finishInstant(); });
   UI.refresh(game);
 }
 
@@ -357,15 +373,31 @@ export function openBossGate() {
     UI.refresh(game);
     return;
   }
-  // 本层只抽取一次首脑；重进和读档沿用 bossPlan。
-  if (game.bossPlan == null) {
-    game.bossPlan = Math.floor(Random.random('boss') * MAP.altar.bosses.length);
-  }
-  const bossIdx = game.bossPlan % MAP.altar.bosses.length;
-  const b = MAP.altar.bosses[bossIdx];
-  const bossFoe = scaledEnemy(b);
-  bossFoe.boss = true;
-  return startBattle(game, bossFoe, { isBoss: true, name: b.name, directBossStart: true });
+  const rules = MAP.rules;
+  nodeShell({ tone:'battle', asset:'scene-battle-bg', icon:'[[icon:skull]]', title:'首脑迎战',
+    sub:`首脑战使用独立牌库：从随身招式、装备和能力卡中自动编入最多 ${rules.bossDeckSize} 张，再加入 ${rules.starterSha} 张初始攻击。背包其余卡牌不会消失。`,
+    body:nodeOpt('bossGateFight','继续迎战',`起手抽 ${rules.battleStartDraw} 张，每回合抽 ${rules.battleTurnDraw} 张，手牌上限 ${rules.battleHandMax} 张。请先检查随身卡牌。`, 'ok') +
+      '<p class="reward-notice">先看敌方意图，高伤回合先用护盾、护甲或格挡减伤；对方有防护或元素庇幕时，如有破甲牌，可施加破甲再集中攻击。</p>',
+    foot:'<button class="ov-btn" data-act="bossGateBag">整理背包</button><button class="ov-btn" data-act="bossGateBack">返回地图</button>',
+  });
+  const active = altarPageBinding('bossGateFight');
+  let entering = false;
+  setBagReturnHook(openBossGate);
+  UI.act('bossGateBag', () => { if (active() && !entering) bagSlots.showBackpack(); });
+  UI.act('bossGateBack', () => { if (!active() || entering) return; setBagReturnHook(null); UI.hideOverlay(); finishInstant(); });
+  UI.act('bossGateFight', () => {
+    if (!active() || entering) return;
+    entering = true;
+    setBagReturnHook(null);
+    UI.hideOverlay();
+    // 本层只抽取一次首脑；重进和读档沿用 bossPlan。
+    if (game.bossPlan == null) game.bossPlan = Math.floor(Random.random('boss') * MAP.altar.bosses.length);
+    const b = MAP.altar.bosses[game.bossPlan % MAP.altar.bosses.length];
+    const bossFoe = scaledEnemy(b);
+    bossFoe.boss = true;
+    startBattle(game, bossFoe, { isBoss:true, name:b.name, directBossStart:true });
+  });
+  UI.refresh(game);
 }
 
 // 背包献祭选卡器（2026-09-06 #26）：从背包选 n 张卡，确认后消耗并回调
@@ -387,11 +419,11 @@ function openBagSacrifice(n, done, onCancel, filterType) {
     // 2026-09-10 留言 #31/#32：原文字行看不清也看不到卡面——改为真卡面网格（口径同火堆复原），
     // 点卡选中/取消，选中卡挂黄铜图钉角标
     const rows = eligible.map(o => `
-      <div class="bt-card sac-card${sel.has(o.uid) ? ' sel' : ''}" data-act="sacPick" data-uid="${escAttr(o.uid)}"
+      <button type="button" class="bt-card sac-card${sel.has(o.uid) ? ' sel' : ''}" data-act="sacPick" data-uid="${escAttr(o.uid)}" aria-label="献祭候选：${escAttr(o.card.name)}" aria-pressed="${sel.has(o.uid)}"
         title="${escAttr(`${o.card.name}${o.card.cost != null ? ` · ${o.card.cost} 费` : ''}——${o.card.desc || '点击选中/取消'}`)}">
         ${SDT.Cards.cardHTML(o.card, 'sm')}
         ${o.card.cost != null ? `<span class="bt-sac-cost">${o.card.cost} 费</span>` : ''}
-      </div>`).join('');
+      </button>`).join('');
     UI.showOverlay('[[icon:crystal]] 选择要献祭的卡牌', `
       <p class="ov-note">选择 <b>${n}</b> 张${filterType ? `<b>${escAttr(filterType)}</b>卡` : '卡牌'}献祭（已选 <b>${sel.size}</b>）</p>
       <div class="bt-hand sac-hand">${rows || '<p class="ov-empty">背包里没有符合条件的卡牌</p>'}</div>
@@ -408,6 +440,7 @@ function openBagSacrifice(n, done, onCancel, filterType) {
       else if (sel.size < n) sel.add(o.uid);
       Sfx.tick();
       render();
+      [...UI.el.ovBody.querySelectorAll('[data-act="sacPick"]')].find(button => button.dataset.uid === o.uid)?.focus({ preventScroll:true });
     });
     UI.act('sacCancel', () => {
       if (finished || !active()) return;
@@ -515,7 +548,7 @@ export function openEmergencyModal() {
 }
 
 // 撤离成功 → 「整理入库」交互：把背包中的物品放回仓库（不入库的会丢失）。
-// 「初始攻击」为初始牌不可入库；木材/口粮自动入库；消耗口袋逐张 1/3 概率保留（散失的不复原）。
+// 「初始攻击」为初始牌不可入库；木材/口粮自动入库；消耗区逐张 1/3 概率保留（散失的不复原）。
 let extractLeft = null;   // 待整理的卡牌堆 [{card, count}]（撤离整理页暂存）
 let extractionStarting = false;
 let extractViewRevision = 0;
@@ -579,7 +612,7 @@ export async function doExtract() {
     SDT.Sound.music('title');
     const { totalPocketCount, lostPocketCount } = started.value;
     if (totalPocketCount > 0) {
-      UI.log(`[[icon:pocket]] 撤离结算：消耗口袋 <b>${totalPocketCount}</b> 张只有 1/3 保留（带回 ${totalPocketCount - lostPocketCount} 张，散失 ${lostPocketCount} 张）`, 'sys');
+      UI.log(`[[icon:pocket]] 撤离结算：消耗区 <b>${totalPocketCount}</b> 张只有 1/3 保留（带回 ${totalPocketCount - lostPocketCount} 张，散失 ${lostPocketCount} 张）`, 'sys');
     }
     extractLeft = started.value.remainingCards.map(stack => ({ card: { ...stack.card }, count: stack.count }));
     renderExtractStash();
@@ -617,11 +650,11 @@ function renderExtractStash() {
   const otherN = game.inventory.filter(i => i.name !== '木材' && i.name !== '口粮')
     .reduce((a, b) => a + b.count, 0);
   const room = B.stashRoom();
-  // EXP-003（2026-09-29）：消耗口袋行如实展示 1/3 逐张结算结果（保留数/散失数来自撤离掷骰快照）
+  // EXP-003（2026-09-29）：消耗区行如实展示 1/3 逐张结算结果（保留数/散失数来自撤离掷骰快照）
   const pocketPending = game.pendingExtraction;
   const pocketTotal = pocketPending && Number.isInteger(pocketPending.totalPocketCount) ? pocketPending.totalPocketCount : null;
   const pocketNote = pocketTotal == null
-    ? '每张仅 1/3 概率带回（进基地口袋，钥匙可复原）'
+    ? '每张仅 1/3 概率带回（进基地消耗区，钥匙可复原）'
     : (pocketTotal > 0
       ? `每张 1/3 概率保留 · 带回 ${pocketTotal - (pocketPending.lostPocketCount || 0)} 张（基地可复原）· 散失 ${pocketPending.lostPocketCount || 0} 张`
       : '本局没有消耗卡 · 每张仅 1/3 概率带回');
@@ -656,7 +689,7 @@ function renderExtractStash() {
     title: '整理入库说明',
     html: `
       <p class="help-item"><b>背包卡牌</b>点击「入库」放回仓库；仓库容量不足时无法入库，未入库的卡牌将在撤离中丢失。</p>
-      <p class="help-item"><b>自动入库</b>木材/口粮自动入库（纯资源没有丢弃的意义）；消耗口袋逐张结算，每张仅 1/3 概率带回——保留的进基地口袋（用钥匙复原），未带回的散失；「初始攻击」不可入库（每局自动携带）。</p>
+      <p class="help-item"><b>自动入库</b>木材/口粮自动入库（纯资源没有丢弃的意义）；消耗区逐张结算，每张仅 1/3 概率带回——保留的进基地消耗区（用钥匙复原），未带回的散失；「初始攻击」不可入库（每局自动携带）。</p>
       <p class="help-item"><b>仓库容量</b>可在基地「升级」页用 [[icon:wood]] 木材×${MAP.rules.stashUpgradeWood} 扩建 +${MAP.rules.stashUpgradeSlots} 张；仓库里的卡牌下次出发时可以携带。</p>`,
     back: () => renderExtractStash(),
   });
@@ -682,7 +715,7 @@ function renderExtractStash() {
           <div class="pk-row"><span>[[icon:wood]] 木材 ×<b>${woodN}</b></span><span class="dim">已入库（扩建背包/仓库用）</span></div>
           <div class="pk-row"><span>[[icon:bread]] 口粮 ×<b>${ratN}</b></span><span class="dim">已入库（升级安全格用）</span></div>
           ${otherN ? `<div class="pk-row"><span>[[icon:bag]] 其余物资 ×<b>${otherN}</b></span><span class="dim">未能带出 · 价值已计入本局得分</span></div>` : ''}
-          <div class="pk-row"><span>[[icon:pocket]] 消耗口袋</span><span class="dim">${pocketNote}</span></div>
+          <div class="pk-row"><span>[[icon:pocket]] 消耗区</span><span class="dim">${pocketNote}</span></div>
           ${extractLeft.length ? `<button class="ov-btn ok" data-act="exAll" ${room > 0 && totalLeft <= room ? '' : 'disabled'}
             style="width:100%">[[icon:archive]] 全部入库（${Math.min(totalLeft, room)}/${totalLeft} 张可入）</button>` : ''}
           <div class="dep-foot" style="margin-top:10px">
@@ -770,10 +803,10 @@ function showExtractDone(receipt) {
   UI.log(`<b>[[icon:exit]] ${wasClear ? '首脑突破，撤离成功！' : '保本返回，撤离成功！'}</b>共 ${r.actions ?? 0} 次行动；` +
     `运回基地：木材×${net.wood ?? 0}、口粮×${net.rations ?? 0}，本局入库 ${net.cardsStashed ?? 0} 张（仓库现有 ${B.stashUsed()}/${B.stashCap()} 张）`, 'ok');
   // 本局关键收获 / 散失两行：clear 与 extract 共用数据源（回执），主体短收束按结局区分
-  const gainRow = `<p class="result-line"><span class="ov-note">[[icon:sparkles]] 本局真实入库 <b>${net.cardsStashed ?? 0}</b> 张 · 口袋带回 <b>${net.pocketKept ?? 0}</b> 张 ·
+  const gainRow = `<p class="result-line"><span class="ov-note">[[icon:sparkles]] 本局真实入库 <b>${net.cardsStashed ?? 0}</b> 张 · 消耗区带回 <b>${net.pocketKept ?? 0}</b> 张 ·
     [[icon:wood]] 木材 ×<b>${net.wood ?? 0}</b> · [[icon:bread]] 口粮 ×<b>${net.rations ?? 0}</b> · [[icon:medal]] 首探经验 <b class="gold">+${r.firstExplore?.xp ?? 0}</b></span></p>`;
   const lossRow = (loss.lostCount || loss.pocketLost)
-    ? `<p class="ov-note">[[icon:cross]] 散失：未入库 ${loss.lostCount || 0} 张${loss.lostNotable?.length ? `（${loss.lostNotable.map(c => `【${esc(c.name)}】×${c.count}`).join('、')}）` : ''} · 口袋散失 ${loss.pocketLost || 0} 张</p>`
+    ? `<p class="ov-note">[[icon:cross]] 散失：未入库 ${loss.lostCount || 0} 张${loss.lostNotable?.length ? `（${loss.lostNotable.map(c => `【${esc(c.name)}】×${c.count}`).join('、')}）` : ''} · 消耗区散失 ${loss.pocketLost || 0} 张</p>`
     : '';
   nodeShell({
     tone: 'exit',

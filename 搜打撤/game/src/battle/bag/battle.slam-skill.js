@@ -15,11 +15,11 @@ const SLAM_SKILLS = {
   '降临者': { kind: 'fireball', name: '火球', icon: 'fire', cost: 2, dmg: 4, needsTarget: true,
             hint: '2 费 · 施放一次火球（4 点法伤）· 不消耗卡牌', aimDesc: '4 点法术伤害' },
   '牧师': { kind: 'heal',     name: '圣疗', icon: 'heart',  cost: 1, heal: 3, needsTarget: false,
-            hint: '1 费 · 回复 3 点生命；使用后本局翻面为「惩戒」（3 点法伤）· 不消耗卡牌', aimDesc: '' },
+            hint: '1 费 · 回复 3 点生命；使用后切换为「惩戒」（3 点法伤）· 不消耗卡牌', aimDesc: '' },
 };
-// 牧师翻面态（使用圣疗后本局固定）：3 点法伤、恢复点选敌人
+// 牧师惩戒态：3 点法伤、点选敌人；使用后切回圣疗。
 const SLAM_SKILL_PRIEST_FLIPPED = { kind: 'spell', name: '惩戒', icon: 'fire', cost: 1, dmg: 3, needsTarget: true,
-  hint: '1 费 · 造成 3 点法术伤害（已翻面，本局固定）· 不消耗卡牌', aimDesc: '3 点法术伤害' };
+  hint: '1 费 · 造成 3 点法术伤害；使用后切换为「圣疗」（回复 3 点生命）· 不消耗卡牌', aimDesc: '3 点法术伤害' };
 
 function slamSkillFor(cls, flipped = false) {
   if (cls === '牧师' && flipped) return SLAM_SKILL_PRIEST_FLIPPED;

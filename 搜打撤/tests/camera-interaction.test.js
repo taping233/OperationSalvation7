@@ -5,13 +5,13 @@ window.SDT = {};
 const { nodeHitRadius } = await import('../game/src/core/camera.js');
 
 describe('地图相机交互几何', () => {
-  it('1920探索起点的120世界间距分支保留400屏幕像素与独立点击目标', () => {
+  it('探索起点的180世界间距分支保留更宽留白与独立点击目标', () => {
     const cam = new window.SDT.Camera({cols:30,rows:30,tile:48},1920,968);
-    const game = {layerIdx:0,trackPos:0,nodePos:[[{x:180,y:180},{x:300,y:180},{x:180,y:300}]],
+    const game = {layerIdx:0,trackPos:0,nodePos:[[{x:180,y:180},{x:360,y:180},{x:180,y:360}]],
       layerData:[{logical:[{next:[[0,1],[0,2]]},{next:[]},{next:[]}]}]};
     cam.frameExploration(game);
-    const a=cam.worldToScreen(180,180),b=cam.worldToScreen(300,180);
-    expect(b.x-a.x).toBeGreaterThanOrEqual(400);
+    const a=cam.worldToScreen(180,180),b=cam.worldToScreen(360,180);
+    expect(b.x-a.x).toBeGreaterThanOrEqual(560);
     expect(nodeHitRadius(cam.zoom)*cam.zoom*2).toBeLessThan(b.x-a.x);
     expect(cam.screenToWorld(b.x,b.y)).toEqual(game.nodePos[0][1]);
     cam.setDetailInset(530);

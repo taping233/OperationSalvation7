@@ -421,7 +421,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
         for (const [toLi, toIdx] of node.next) {
           if (toLi !== li) continue;
           const a = positions[nodeIdx], b = game.nodePos[toLi][toIdx];
-          expect(Math.hypot(a.x - b.x, a.y - b.y)).toBe(120);
+          expect(Math.hypot(a.x - b.x, a.y - b.y)).toBe(180);
         }
       }
     }
@@ -571,99 +571,156 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     session.enterLayer(li, at);
     expect(game.activeLayerBounds).toEqual(game.layerBounds[li]);
     expect(camera.frameExploration).toBeTypeOf('function');
-    const pad = 70;
+    // Brush-map framing intentionally enlarges the current decision (2026-10-15 map-brush).
+    // All route centres stay visible, their span fits the decision area, and fogged
+    // remote nodes must not dilute it; a fixed 70px inset is no longer the contract.
+    expect(camera.frameMode).toBe('routes');
     const indices = [at, ...game.layerData[li].logical[at].next.filter(([nl]) => nl === li).map(([, idx]) => idx)];
-    for (const idx of indices) {
+    const screens = indices.map(idx => {
       const p = game.nodePos[li][idx];
       const screen = camera.worldToScreen(p.x, p.y);
-      expect(screen.x).toBeGreaterThanOrEqual(pad);
-      expect(screen.x).toBeLessThanOrEqual(camera.viewW - pad);
-      expect(screen.y).toBeGreaterThanOrEqual(pad);
-      expect(screen.y).toBeLessThanOrEqual(camera.viewH - pad);
-    }
+      expect(screen.x).toBeGreaterThan(0);
+      expect(screen.x).toBeLessThan(camera.viewW - (camera.detailInset || 0));
+      expect(screen.y).toBeGreaterThan(0);
+      expect(screen.y).toBeLessThan(camera.viewH);
+      return screen;
+    });
+    expect(Math.max(...screens.map(p => p.x)) - Math.min(...screens.map(p => p.x)))
+      .toBeLessThanOrEqual((camera.viewW - (camera.detailInset || 0)) * .80);
+    expect(Math.max(...screens.map(p => p.y)) - Math.min(...screens.map(p => p.y)))
+      .toBeLessThanOrEqual((camera.viewH - 70) * .90);
+    const remote = game.nodePos[li].findIndex((_, idx) => !indices.includes(idx));
+    expect(remote).toBeGreaterThanOrEqual(0);
+    const original = game.nodePos[li][remote];
+    const framing = { cx: camera.cx, cy: camera.cy, zoom: camera.zoom };
+    try {
+      game.nodePos[li][remote] = { x: 1e6, y: 1e6 };
+      camera.frameExploration(game);
+      expect({ cx: camera.cx, cy: camera.cy, zoom: camera.zoom }).toEqual(framing);
+    } finally { game.nodePos[li][remote] = original; }
     game.state = 'title';
   });
 
-  it('战斗指向卡先放大，确认使用后支持Esc取消与目标结算', { timeout: 15_000 }, async () => {
+  it('战斗数字键/点选与内层卡面键盘输入共享选中、取消和目标结算', { timeout: 15_000 }, async () => {
     await (await import('../game/src/battle/battle-loader.js')).ensureBattleReady();
-    const C = window.SDT.Cards;
-    const sha = C.all().find(c => c.id === 'starter-attack');
+    const sha = window.SDT.Cards.all().find(c => c.id === 'starter-attack');
     const game = {
-      ownedCards: [{ uid: 'boot-click-sha', card: sha }], hp: 30, maxHp: 30, atk: 5, spellPower: 0, coins: 0,
-      myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
-      log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {},
-      onBattleEnd() {},
+      ownedCards: [{ uid: 'boot-click-sha', card: sha },
+        { uid: 'boot-blocked', card: { ...sha, id: 'boot-expensive', cost: 99 } }], hp: 30, maxHp: 30, atk: 5, spellPower: 0, coins: 0,
+      myClass: '战士', characterId: null, state: 'idle', battleActive: false,
+      log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {}, onBattleEnd() {},
     };
-    const foe = { id: 'infantry', name: '点击测试靶', hp: 40, maxHp: 40, atk: 1 };
-    const foe2 = { id: 'infantry', name: '第二目标', hp: 20, maxHp: 20, atk: 1 };
-    // 两个敌人：唯一敌人时 STS2 口径会免选直接打出，这里必须双敌才能测「选中→取消→结算」流
+    const foes = [{ id: 'infantry', name: '第一目标', hp: 40, maxHp: 40, atk: 1 },
+      { id: 'infantry', name: '第二目标', hp: 20, maxHp: 20, atk: 1 }];
     const oldAnimate = Element.prototype.animate;
     Element.prototype.animate = function () { return { onfinish: null, cancel() {} }; };
-    window.SDT.Battle.start(game, [foe, foe2], { isBoss: false, name: '点击测试' });
-    await new Promise(resolve => setTimeout(resolve, 20));
-    const card = document.querySelector('.sts-hand .bt-card.need-target');
-    const enemy = document.querySelector('.sts-foe[data-eidx="0"]');
-    expect(card).not.toBeNull(); expect(enemy).not.toBeNull();
-    const hotkey = new KeyboardEvent('keydown', { key: card.dataset.handIndex, bubbles: true, cancelable: true });
-    document.dispatchEvent(hotkey);
-    expect(document.querySelector('.bt-hand-detail')).not.toBeNull();
-    expect(card.classList.contains('click-selected')).toBe(false);
-    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
-    card.click();
-    expect(document.querySelector('.bt-hand-detail')).not.toBeNull();
-    document.querySelector('.bt-hand-detail-use').click();
-    expect(card.classList.contains('click-selected')).toBe(true);
-    expect(card.getAttribute('aria-pressed')).toBe('true');
-    const esc = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true });
-    document.dispatchEvent(esc);
-    expect(esc.defaultPrevented).toBe(true);
-    expect(card.classList.contains('click-selected')).toBe(false);
-    expect(card.getAttribute('aria-pressed')).toBe('false');
-    card.click();
-    document.querySelector('.bt-hand-detail-use').click();
-    const before = window.SDT.Battle.getSnapshot().foes[0].hp;
-    enemy.click();
-    await new Promise(resolve => setTimeout(resolve, 40));
-    expect(window.SDT.Battle.getSnapshot().foes[0].hp).toBeLessThan(before);
-    expect(window.SDT.Battle.getSnapshot().foes[0].hp).toBeLessThan(40);
-    if (game.battleActive) window.SDT.Battle.commands.flee();
-    Element.prototype.animate = oldAnimate;
-    document.getElementById('overlay')?.setAttribute('hidden', '');
-    game.state = 'title';
+    try {
+      window.SDT.Battle.start(game, foes, { isBoss: false, name: '输入回归' });
+      await waitFor(() => document.querySelector('.sts-hand .bt-card[data-uid="boot-click-sha"]'));
+      const card = document.querySelector('.sts-hand .bt-card[data-uid="boot-click-sha"]');
+      const face = card.querySelector('.hs-card');
+      expect(card.getAttribute('role')).toBe('group');
+      expect(card.tabIndex).toBe(-1);
+      expect(face.getAttribute('role')).toBe('button');
+      expect(face.tabIndex).toBe(0);
+      expect(face.getAttribute('aria-disabled')).toBe('false');
+      const blocked = document.querySelector('.sts-hand .bt-card[data-uid="boot-blocked"]');
+      expect(blocked.dataset.blockReason).toContain('能量不足');
+      expect(blocked.querySelector('.hs-card').getAttribute('aria-disabled')).toBe('true');
+      const before = window.SDT.Battle.getSnapshot();
+      const key = (target, value, extra = {}) => {
+        const event = new KeyboardEvent('keydown', { key: value, bubbles: true, cancelable: true, ...extra });
+        target.dispatchEvent(event); return event;
+      };
+      const expectUnspent = () => {
+        const snap = window.SDT.Battle.getSnapshot();
+        expect(snap.energy).toBe(before.energy);
+        expect(snap.foes.map(f => f.hp)).toEqual(before.foes.map(f => f.hp));
+        expect(snap.hand.includes(card.dataset.uid)).toBe(true);
+      };
+      key(document, card.dataset.handIndex, { isComposing: true });
+      expect(card.classList.contains('click-selected')).toBe(false);
+      key(document, card.dataset.handIndex);
+      expect(card.classList.contains('click-selected')).toBe(true);
+      expect(face.getAttribute('aria-pressed')).toBe('true');
+      expectUnspent();
+      const playAction = window.SDT.UI._acts.btPlay;
+      expect(typeof playAction).toBe('function');
+      key(document, 'Escape', { isComposing: true });
+      key(document, 'Escape', { keyCode: 229 });
+      expect(window.SDT.UI._acts.btPlay).toBe(playAction);
+      expect(document.getElementById('overlay').hidden).toBe(false);
+      expect(card.classList.contains('click-selected')).toBe(true);
+      expect(key(document, 'Escape').defaultPrevented).toBe(true);
+      expect(face.getAttribute('aria-pressed')).toBe('false');
+      // Shift+Enter remains an explicit inspector shortcut; normal play needs no inspector button.
+      key(face, 'Enter', { shiftKey: true });
+      expect(document.querySelector('.bt-hand-detail')).not.toBeNull();
+      expectUnspent();
+      key(document, 'Escape');
+      card.click();
+      expect(card.classList.contains('click-selected')).toBe(true);
+      expect(document.querySelector('.bt-hand-detail')).toBeNull();
+      expectUnspent();
+      key(document, 'Escape');
+      expect(key(face, ' ').defaultPrevented).toBe(true);
+      expect(face.getAttribute('aria-pressed')).toBe('true');
+      expectUnspent();
+      const enemy = document.querySelector('.sts-foe[data-eidx="0"]');
+      expect(enemy.getAttribute('role')).toBe('button');
+      expect(enemy.tabIndex).toBe(0);
+      key(enemy, 'Enter');
+      await waitFor(() => window.SDT.Battle.getSnapshot().foes[0].hp < before.foes[0].hp);
+      const after = window.SDT.Battle.getSnapshot();
+      expect(after.foes[1].hp).toBe(before.foes[1].hp);
+      expect(after.energy).toBeLessThan(before.energy);
+      expect(after.hand.includes('boot-click-sha')).toBe(false);
+    } finally {
+      if (game.battleActive) window.SDT.Battle.commands.flee();
+      Element.prototype.animate = oldAnimate;
+      document.getElementById('overlay')?.setAttribute('hidden', '');
+      game.state = 'title';
+    }
   });
 
-  it('唯一敌人时也先看大卡，使用和目标确认前不打出', async () => {
+  it('唯一敌人也需确认目标；键盘选中可取消且确认前不扣资源', async () => {
     await (await import('../game/src/battle/battle-loader.js')).ensureBattleReady();
-    const C = window.SDT.Cards;
-    const sha = C.all().find(c => c.id === 'starter-attack');
+    const sha = window.SDT.Cards.all().find(c => c.id === 'starter-attack');
     const game = {
       ownedCards: [{ uid: 'boot-single-sha', card: sha }], hp: 30, maxHp: 30, atk: 5, spellPower: 0, coins: 0,
-      myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
-      log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {},
-      onBattleEnd() {},
+      myClass: '战士', characterId: null, state: 'idle', battleActive: false,
+      log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {}, onBattleEnd() {},
     };
-    const foe = { id: 'infantry', name: '唯一靶', hp: 40, maxHp: 40, atk: 1 };
     const oldAnimate = Element.prototype.animate;
     Element.prototype.animate = function () { return { onfinish: null, cancel() {} }; };
-    window.SDT.Battle.start(game, [foe], { isBoss: false, name: '单敌测试' });
-    // 手牌 DOM 渲染与结算都是异步：固定等待在全量负载下撞空（门禁抖动），改条件等待（有上限）
-    await waitFor(() => document.querySelector('.sts-hand .bt-card.need-target'), 3000);
-    const card = document.querySelector('.sts-hand .bt-card.need-target');
-    expect(card).not.toBeNull();
-    card.click();
-    // 单敌也遵循老板的新交互：点击只读，使用后再确认目标。
-    expect(card.classList.contains('click-selected')).toBe(false);
-    expect(document.querySelector('.bt-hand-detail')).not.toBeNull();
-    expect(window.SDT.Battle.getSnapshot().foes[0].hp).toBe(40);
-    document.querySelector('.bt-hand-detail-use').click();
-    expect(window.SDT.Battle.getSnapshot().foes[0].hp).toBe(40);
-    document.querySelector('.sts-foe[data-eidx="0"]').click();
-    await waitFor(() => window.SDT.Battle.getSnapshot().foes[0].hp < 40, 3000);
-    expect(window.SDT.Battle.getSnapshot().foes[0].hp).toBeLessThan(40);
-    if (game.battleActive) window.SDT.Battle.commands.flee();
-    Element.prototype.animate = oldAnimate;
-    document.getElementById('overlay')?.setAttribute('hidden', '');
-    game.state = 'title';
+    try {
+      window.SDT.Battle.start(game, [{ id: 'infantry', name: '唯一敌', hp: 40, maxHp: 40, atk: 1 }], { isBoss: false, name: '单敌输入' });
+      await waitFor(() => document.querySelector('.sts-hand .bt-card.need-target'));
+      const card = document.querySelector('.sts-hand .bt-card.need-target');
+      const face = card.querySelector('.hs-card');
+      const before = window.SDT.Battle.getSnapshot();
+      face.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
+      expect(face.getAttribute('aria-pressed')).toBe('true');
+      expect(window.SDT.Battle.getSnapshot().foes[0].hp).toBe(40);
+      expect(window.SDT.Battle.getSnapshot().energy).toBe(before.energy);
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
+      expect(face.getAttribute('aria-pressed')).toBe('false');
+      expect(window.SDT.Battle.getSnapshot().hand.includes('boot-single-sha')).toBe(true);
+      card.click();
+      expect(document.querySelector('.bt-hand-detail')).toBeNull();
+      expect(card.classList.contains('click-selected')).toBe(true);
+      expect(window.SDT.Battle.getSnapshot().foes[0].hp).toBe(before.foes[0].hp);
+      expect(window.SDT.Battle.getSnapshot().energy).toBe(before.energy);
+      document.querySelector('.sts-foe[data-eidx="0"]').click();
+      await waitFor(() => window.SDT.Battle.getSnapshot().foes[0].hp < before.foes[0].hp);
+      expect(window.SDT.Battle.getSnapshot().energy).toBeLessThan(before.energy);
+      expect(window.SDT.Battle.getSnapshot().hand.includes('boot-single-sha')).toBe(false);
+    } finally {
+      if (game.battleActive) window.SDT.Battle.commands.flee();
+      Element.prototype.animate = oldAnimate;
+      document.getElementById('overlay')?.setAttribute('hidden', '');
+      game.state = 'title';
+    }
   });
 
   // IME 家族守卫（game.boot.js 两处 Esc 分支）：中文输入法组合态按 Esc 是取消候选词，

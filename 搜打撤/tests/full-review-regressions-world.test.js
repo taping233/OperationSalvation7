@@ -112,7 +112,7 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     expect(claimed).toBe(2);
   });
 
-  it('WORLD-002 火堆：从消耗口袋自动发现两张复原（道具不入池），节点一次性结算', () => {
+  it('WORLD-002 火堆：从消耗区自动发现两张复原（道具不入池），节点一次性结算', () => {
     H.game.usedPocket = [
       { uid: 'p1', card: { id: 'x1', name: '烬卡一', type: '武术' }, count: 1 },
       { uid: 'p2', card: { id: 'x2', name: '烬卡二', type: '武术' }, count: 1 },
@@ -122,7 +122,7 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     expect(H.game.hp).toBe(1); // 确认前不结算
     UI._acts.fireRestGo();
     expect(H.game.hp).toBe(11);   // 回血一次（重入不得重复）
-    // 职业卡 + 自动发现两张复原入包；道具卡留在消耗口袋不可复原（发现顺序随机，排序后比对）
+    // 职业卡 + 自动发现两张复原入包；道具卡留在消耗区不可复原（发现顺序随机，排序后比对）
     expect(H.game.ownedCards.map(c => c.card.name).sort()).toEqual(['奖励牌', '烬卡一', '烬卡二'].sort());
     expect(H.game.usedPocket.map(p => p.card.name)).toEqual(['行军膏']);
     expect(H.game.state).toBe('modal'); // 结果页待继续

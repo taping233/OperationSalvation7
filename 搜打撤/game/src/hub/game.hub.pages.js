@@ -18,7 +18,7 @@ import { readBase } from './base.commands.js';
 import { convertCollection, stackKeyOf } from './collection.commands.js';
 import { homeErrorMessage } from '../home/home.presenter.js';
 import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // 别名防局部 slots（收藏槽位等）遮蔽
-  // —— 仓库页：卡牌仓库（容量 / 卖出 / 收藏）+ 消耗口袋 + 物资 ——
+  // —— 仓库页：卡牌仓库（容量 / 卖出 / 收藏）+ 消耗区 + 物资 ——
   // 特殊收藏品：传说卡与桌游珍宝——[[icon:sparkles]]收藏后完成对应成就
   const SPECIAL_COLLECT_IDS = new Set(['tt-gold', 'tt-token-color', 'tt-econpack']);
   const isSpecialCollect = (card) => !!card &&
@@ -84,7 +84,14 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       const convertType = !!card.cls && (card.rarity === '职业' || card.type === '能力卡');
       const collectXp = card.type === '能力卡' ? 50 : 10;
       const btns = [];
-      if (!mat && !isEgg && !isPack) {
+      if (mat) {
+        btns.push('<button class="ov-btn ok" data-act="stashUseMat">使用 1 张 · 折入基地材料</button>');
+        if (n > 1) btns.push(`<button class="ov-btn" data-act="stashUseMatAll">使用整堆 · ${n} 张</button>`);
+      } else if (isEgg) {
+        btns.push('<button class="ov-btn ok" data-act="stashHatch">孵化 1 枚 · 消耗 50 储备币</button>');
+      } else if (isPack) {
+        btns.push('<button class="ov-btn ok" data-act="stashOpenPack">拆开 1 包 · 获得 5 张随机卡牌</button>');
+      } else {
         if (convertType && !marked) {
           btns.push(`<button class="ov-btn ok" data-act="stashCollectOne">收藏 1 张</button>`);
           if (n > 1) btns.push(`<button class="ov-btn" data-act="stashCollectAll">全部收藏 · ${n} 张</button>`);
@@ -92,7 +99,10 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
           btns.push(`<button class="ov-btn${marked ? '' : ' ok'}" data-act="stashCollectToggle">${marked ? '取消收藏' : '收藏卡牌'}</button>`);
         }
       }
-      const hint = mat || isEgg || isPack ? '补给物品不计入卡牌收藏' : convertType && !marked ? `收藏后转化为 ${collectXp} 点人物经验，消耗对应卡牌` : marked ? '已加入收藏' : '加入收藏，卡牌保留在仓库';
+      const hint = mat ? '使用资源卡后折入基地材料；最后一张或整堆使用需再次确认。'
+        : isEgg ? '消耗 1 枚宠物蛋与 50 储备币，随机孵化未拥有的伙伴；再次点击确认。'
+        : isPack ? '随机卡牌存入后勤仓库，需至少 5 格空位；最后一包需再次确认。'
+        : convertType && !marked ? `收藏后转化为 ${collectXp} 点人物经验，消耗对应卡牌` : marked ? '已加入收藏' : '加入收藏，卡牌保留在仓库';
       return `<div class="camp-detail camp-card-actions"><div class="inspect-meta"><span class="inspect-count">持有 <b>${n}</b> 张</span><span class="inspect-collection-state">${marked ? '已收藏' : '仓库卡牌'}</span></div><p class="inspect-collection-hint">${hint}</p>${btns.length ? `<div class="ov-btns">${btns.join('')}</div>` : ''}</div>`;
     };
     const refreshZoom = () => {
@@ -192,10 +202,9 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
         UI.log('库存引用不唯一，请刷新仓库', 'warn'); return;
       }
       const r = B.useStashMaterial(card.name, all);
-      if (r.ok) { Sfx.ding(); UI.log(r.msg, 'loot'); }
+      if (r.ok) { Sfx.ding(); UI.log(r.msg, 'loot'); closeZoom(); hubBridge.renderHub(); }
       else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');
-      hubBridge.renderHub();
-      refreshZoom();
+      if (!r.ok) refreshZoom();
     };
     detailAct('stashUseMat', () => {
       const cur = freshStack();
@@ -205,9 +214,10 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
     detailAct('stashUseMatAll', () => { armOrRun('stashUseMatAll', () => useMat(true)); });
 
     // —— 宠物蛋孵化（消耗 1 蛋 + 50 币，随机未拥有宠物）——
-    detailAct('stashHatch', () => {
+    detailAct('stashHatch', () => armOrRun('stashHatch', () => {
       const cur = freshStack();
       if (!cur) { closeZoom(); return; }
+      if (B.data.stash.filter(stack => stack.card.id === card.id).length !== 1) { UI.log('库存引用不唯一，请刷新仓库', 'warn'); return; }
       const r = B.hatchPet();
       if (r.ok) {
         Sfx.ding();
@@ -217,16 +227,16 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       else if (r.why === 'all') UI.log('[[icon:paw]] 已经集齐全部宠物了', 'dim');
       else if (r.why === 'save') UI.log('基地存档未保存，宠物蛋与储备币均未消耗', 'warn');
       else UI.log('[[icon:crystal]] 仓库里没有宠物蛋了', 'warn');
-      hubBridge.renderHub();
-      if (r.ok) closeZoom();
+      if (r.ok) { closeZoom(); hubBridge.renderHub(); }
       else refreshZoom();
-    });
+    }));
 
     // —— 经济卡包使用（2026-09-09 审计补实装）：获得 5 张随机卡牌，必须入卡牌仓库——
     // 局外没有对局，塞进对局背包（game.ownedCards）会在下次开局被清空（2026-09-19 审计 P1-4）
     const openPack = () => {
       const cur = freshStack();
       if (!cur) { closeZoom(); return; }
+      if (B.data.stash.filter(stack => stack.card.id === card.id).length !== 1) { UI.log('库存引用不唯一，请刷新仓库', 'warn'); return; }
       if (B.stashRoom() < 5) { UI.log(`[[icon:archive]] 仓库空位不足 5 格（现 ${B.stashRoom()}）——先卖出或扩建仓库再拆包`, 'warn'); return; }
       const pool = SDT.Cards.all().filter(c => SDT.Cards.isRandomObtainable(c));
       if (!pool.length) { UI.log('[[icon:cards]] 卡牌库是空的，没有可获得的卡牌', 'warn'); return; }
@@ -237,8 +247,8 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       const result = B.openCardPack(card.id, cards);
       if (!result.ok) { UI.log(result.msg || '卡包已变化，请重新打开仓库', 'warn'); return; }
       UI.log('[[icon:cards]] <b>经济卡包</b>：拆开获得 5 张随机卡牌（入卡牌仓库）', 'loot');
+      closeZoom();
       hubBridge.renderHub();
-      refreshZoom();
     };
     detailAct('stashOpenPack', () => {
       const cur = freshStack();
@@ -252,11 +262,13 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
   }
   // 基地物资（木材/口粮）：材料不可卖出换币（2026-09-08 定版）——只作展示说明
   function openRawItem(kind, { from } = {}) {
-    const card = SDT.Cards.all().find(item => item.id === (kind === 'wood' ? 'tt-wood' : 'tt-rations'));
-    if (!card) return;
+    if (!['wood', 'rations'].includes(kind)) return;
     const label = kind === 'wood' ? '木材' : '口粮';
+    const card = SDT.Cards.all().find(item => item.id === (kind === 'wood' ? 'tt-wood' : 'tt-rations'))
+      || SDT.Cards.all().find(item => SDT.Base.materialInfo?.(item)?.kind === kind)
+      || { id: `base-material-${kind}`, name: label, type: '基地材料', rarity: '初始', cost: 0, desc: kind === 'wood' ? '用于扩建出征背包与仓库。' : '用于培养远征伙伴，提升安全格。' };
     const target = kind === 'wood' ? 'upgrade' : 'classes';
-    const footer = `<div class="raw-material-actions"><b>${label}库存 ${SDT.Base.data[kind] || 0}</b><button class="mini-btn ok" data-act="hubTab" data-tab="${target}"${kind === 'wood' ? '' : ' data-group="pets"'}>${kind === 'wood' ? '扩建' : '伙伴培养'} →</button><button class="mini-btn" data-act="hubTab" data-tab="shop">补给 →</button></div>`;
+    const footer = `<div class="raw-material-actions"><b>基地${label}库存 ${SDT.Base.data[kind] || 0} 份</b><p>这里显示已折入的基地材料，不含仓库里的资源卡。资源卡需在仓库详情使用后才增加库存；散装物资与资源卡分别结算。</p><button class="mini-btn ok" data-act="hubTab" data-tab="${target}"${kind === 'wood' ? '' : ' data-group="pets"'}>${kind === 'wood' ? '扩建' : '伙伴培养'} →</button><button class="mini-btn" data-act="hubTab" data-tab="shop">补给 →</button></div>`;
     UI.showCardZoom(card, { presentation:'inventory', footer, from, returnFocus:from });
     decorateInventoryZoom(card, { description:kind === 'wood' ? '用于扩建出征背包与仓库。' : '用于培养远征伙伴，提升安全格。' });
   }

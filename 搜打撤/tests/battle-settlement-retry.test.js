@@ -103,6 +103,15 @@ async function bind() {
   return state.game.onBattleEnd;
 }
 
+it('forwards the real battle review and boss identity to death settlement without persisting it', async () => {
+  const onBattleEnd = await bind();
+  const { doDeath } = await import('../game/src/run/game.session.js');
+  const battleSummary = Object.freeze({round:4,remainingFoes:[],damageTaken:[]});
+  await onBattleEnd({isBoss:true,battleSummary},[],false,[]);
+  expect(doDeath).toHaveBeenCalledWith({battleSummary,battleIsBoss:true});
+  expect(state.commands.createAttempt).not.toHaveBeenCalled();
+});
+
 async function openAndFinishChest(onBattleEnd, opts) {
   await onBattleEnd(opts, [], true, []);
   expect(state.chestDone).toBeTypeOf('function');
@@ -168,6 +177,8 @@ describe('真实战斗奖励刷新续流', () => {
       expect(draw).toHaveBeenCalledTimes(drawCount);
     };
     reload();
+    expect(document.querySelector('.chest-offer-page')).not.toBeNull();
+    state.actions.chestClaim(); state.actions.chestReveal();
     state.actions.chestSelect({ i:0 }); state.actions.chestTake1({ i:0 });
     expect(disk.chestReward.current.taken).toEqual([0]);
     reload();
@@ -246,16 +257,20 @@ describe('战后结算事务接线与失败重试', () => {
     state.game.ownedCards.push(
       { uid:'spent', card:{ id:'normal', name:'普通消耗牌', rarity:'古朴' } },
       { uid:'gone', card:{ id:'class', name:'职业消散牌', rarity:'职业' } },
+      { uid:'starter', card:{ id:'starter-attack', name:'初始攻击', rarity:'初始' } },
+      { uid:'token', card:{ id:'token', name:'衍生牌', rarity:'衍生' } },
       { uid:'kept', card:{ id:'keep', name:'未用保留牌', rarity:'稀有' } },
     );
     state.transition.mockRejectedValueOnce(new Error('transition failed'));
-    const opts = { isBoss:false, foeNames:['敌人'], encounterId:'entry:enemy' };
-    expect(await onBattleEnd(opts, ['spent','gone'], true, ['spent'])).toBe(false);
+    const opts = { isBoss:false, foeNames:['敌人'], encounterId:'entry:enemy',
+      spentCards:[{ uid:'temporary', card:{ id:'temporary', name:'战斗生成牌', rarity:'衍生' } }] };
+    const played = ['spent','gone','starter','token','temporary'];
+    expect(await onBattleEnd(opts, played, true, ['spent','temporary'])).toBe(false);
     await state.actions.battleSettleRetry();
     const summary = window.SDT.Chests.open.mock.calls[0][3].battleSummary;
-    expect(summary.cardOutcome).toEqual({ pocket:['普通消耗牌'], gone:['职业消散牌'], retained:['未用保留牌'] });
-    expect(bagSlots.pocketAdd.mock.calls.length - pocketCallsBefore).toBe(1);
-    await onBattleEnd(opts, ['spent','gone'], true, ['spent']);
+    expect(summary.cardOutcome).toEqual({ pocket:['普通消耗牌','职业消散牌','初始攻击','衍生牌','战斗生成牌'], gone:[], retained:['未用保留牌'] });
+    expect(bagSlots.pocketAdd.mock.calls.length - pocketCallsBefore).toBe(5);
+    await onBattleEnd(opts, played, true, ['spent','temporary']);
     expect(window.SDT.Chests.open).toHaveBeenCalledTimes(1);
     await state.chestDone();
     expect(state.commands.createAttempt.mock.calls[0][0]).not.toHaveProperty('cardOutcome');

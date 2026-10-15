@@ -210,8 +210,7 @@ function mapActions() {
   const layer = curLayer();
   const current = layer?.logical?.[game.trackPos];
   const acts = [];
-  // 入城闸门：未进入过入城补给格时不给出 move 动作（给了也会被 moveTo 拒绝），
-  // 观测面只留 reenter——策略的空移回退会选中它，重开即开补给页、闸门解除。
+  // 入城补给未领完时不给出 move 动作，保留 reenter 供返回入口领取。
   if (!entrySupplyGate(game)) for (const [li, idx] of current?.next || []) {
     const cell = game.layerData?.[li]?.logical?.[idx];
     const def = cell?.def;

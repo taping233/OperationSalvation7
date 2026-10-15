@@ -12,6 +12,7 @@ import { MAP, bagCap, game, newUid, pick, saveGame, scaledEnemy, usedSlots } fro
 import { _set_cardPageOpen, cardHTML } from '../hub/game.cardslib.js';
 import { IMMEDIATE_SCENES, NODE_BG, PICKUP_BG, PRELOAD_SCENES, SCENES, WINTER_BATTLE_LAYERS } from './game.run.data.js';
 import { Random } from '../core/random.js';
+import { hashSeed } from '../core/random-core.js';
 import { createShopController } from './game.run.shop.js';
 import { captureBattleContext, startBattle } from '../battle/battle-loader.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
@@ -161,8 +162,8 @@ export function nodeShell(o) {
   const bg = o.asset || NODE_BG[o.tone] || '';
   UI.showOverlay('', eventSceneHTML({ ...o, asset: bg, region: game.layerData?.[game.layerIdx]?.name, layer: game.layerIdx }), 'page');
   // 事件体系页（事件/入城/火堆/物资点）：左上退出键（IS7 事件整页语言，样式复用地图
-  // #topBtns 按钮族）——事件未消耗可原节点重进；入城页与「返回地图」同义（打开过即
-  // 解锁移动闸门，剩余卡保留在入口）；金币/攻击由 #resHud 经 CSS 提层常驻，不经页面重画。
+  // #topBtns 按钮族）——事件未消耗可原节点重进；入城退出保留剩余卡，领完才解锁移动。
+  // 金币/攻击由 #resHud 经 CSS 提层常驻，不经页面重画。
   if (['event', 'entry', 'fire', 'pickup'].includes(o.tone)) {
     const key = `${game.mapSeed}|${game.turn}|${game.layerIdx},${game.trackPos}|${o.title}|${bg}|${o.sub || ''}`;
     if (o.tone === 'event') {
@@ -354,15 +355,26 @@ export function buildEncounter(layerIdx) {
   pool=spec.enemyIds; size=spec.size;
   const n=spec.kind==='group'?2:(MAP.rollCount ? MAP.rollCount(size, () => Random.random('enemy')) : size[0] + Math.floor(Random.random('enemy') * (size[1] - size[0] + 1)));
   const list = [];
+  // 只对新局第三层普通遭遇轮换；独立种子盐不推进地图、掉落或遭遇随机流。
+  // 人数沿原掷数；替代只取该层人数区间允许的普通敌人，精英与旧档完全沿原路径。
+  const cells = game.layerData?.[layerIdx]?.logical || [];
+  const ordinal = cells.map((cell, index) => ({ cell, index })).filter(item => item.cell.def?.type === 'battle')
+    .findIndex(item => item.index === game.trackPos);
+  const alternatives = game.encounterRotationVersion === 1 && layerIdx === 2 && spec.kind === 'entry' && ordinal >= 0
+    ? (enc.entries || []).filter(entry => entry.size?.[0] <= n && entry.size?.[1] >= n &&
+      MAP.monsters[entry.id] && !MAP.monsters[entry.id].elite) : [];
+  const rotation = alternatives.length > 1 ? hashSeed(`${game.mapSeed ?? game.seed}:third-layer-encounters:v1`) + ordinal : null;
   for (let i = 0; i < n; i++) {
-    const id=spec.kind==='group'?pool[i]:pool[Math.floor(Random.random('enemy') * pool.length)];
+    const originalId=spec.kind==='group'?pool[i]:pool[Math.floor(Random.random('enemy') * pool.length)];
+    const id=rotation === null ? originalId : alternatives[(rotation + i) % alternatives.length].id;
     const tpl = MAP.monsters[id];
     list.push(scaledEnemy({ ...tpl }));
   }
   // 元数据不参与战斗结算，仅用于战前预告和战斗内提示；旧敌人对象仍保持原字段。
   list.risk = risk;
   list.strategy = strategy;
-  list.encounterId=spec.encounterId; list.encounterKind=spec.kind; list.rewardKind=spec.rewardKind; list.fallbackReason=spec.fallbackReason;
+  list.encounterId=rotation === null ? spec.encounterId : `rotation:${list.map(enemy => enemy.id).join('+')}`;
+  list.encounterKind=spec.kind; list.rewardKind=spec.rewardKind; list.fallbackReason=spec.fallbackReason;
   return list;
 }
 
@@ -408,6 +420,18 @@ export function resumeChestsOnCell(saved) {
   });
 }
 
+// 固定奖励复用宝箱的逐张领取与存档恢复，不重新掷卡，也不因容量不足丢失。
+export function openFixedRewardsOnCell(cards, source) {
+  const saved = { version:1, seed:game.seed, layerIdx:game.layerIdx, trackPos:game.trackPos,
+    queue:[{ kind:'small' }], index:1, context:{ onCell:true },
+    current:{ kind:'small', cards:cards.filter(Boolean), coins:0, coinsReceived:false,
+      taken:[], lost:[], source, title:'领取奖励' } };
+  setBagReturnHook(null);
+  const opened = resumeChestsOnCell(saved);
+  if (opened) saveGame();
+  return opened;
+}
+
 // 即时效果（经场景演出后结算）；after = 效果完成后的续流回调
 // 拾取类在场景里用大字标明结算（v0.22：明确告诉玩家发生了什么）
 // opts.silent：跳过获得演出（宝箱/基地等调用方自带卡牌展示界面，2026-09-13）
@@ -419,7 +443,7 @@ export function grantEventCard(tpl, opts = {}) {
   if (!canReceive) {
     // 2026-09-09 老板 #12：收不下要当场给提示（音效+日志，口径同 addItem），不能只默默掉在原地
     SDT.Sound.sfx('deny');
-    UI.log(`[[icon:bag]] 背包放不下（${game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`}${tpl.type !== '资源' ? '；新普通牌需通用空格，同名未满仍可叠放' : ''}），【${esc(tpl.name)}】掉在了原地…`, 'warn');
+    UI.log(`[[icon:bag]] 背包放不下（${game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`}${tpl.type !== '资源' ? '；新普通牌需通用空格，同名未满仍可叠放' : ''}），【${esc(tpl.name)}】未领取，请整理背包后重试`, 'warn');
     return false;
   }
   game.ownedCards.push({ uid: newUid(), card: { ...tpl } });
@@ -464,10 +488,10 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
             ${SDT.Cards.cardHTML(p.card, 'sm')}
             ${p.count > 1 ? `<span class="bt-count" title="同名卡牌还剩 ${p.count} 张">×${p.count}</span>` : ''}
           </div>`).join('')
-      : `<p class="ov-empty">（消耗口袋里没有可复原的卡牌${blockedN ? `——另有 ${blockedN} 张道具/装备不可在此复原` : ''}）</p>`;
+      : `<p class="ov-empty">（消耗区里没有可复原的卡牌${blockedN ? `——另有 ${blockedN} 张道具/装备不可在此复原` : ''}）</p>`;
     nodeShell({
       tone: opts.tone || 'fire', icon: opts.icon || '[[icon:fire]]', title: opts.title || '营火休整',
-      sub: (opts.sub != null ? opts.sub : `还可从消耗口袋中复原 <b>${left}</b> 张（最多 ${picks} 张）· 点击卡牌复原` +
+      sub: (opts.sub != null ? opts.sub : `还可从消耗区中复原 <b>${left}</b> 张（最多 ${picks} 张）· 点击卡牌复原` +
         // 体验线切片2（2026-09-28）：复原的机会成本可见——不复原的消耗卡撤离时每张仅 1/3 幸存
         ` · <span class="eps-fate">复原=撤离全额带回，否则每张仅 1/3 幸存</span>`) +
         (blockedN ? ` · 道具/装备共 ${blockedN} 张不可复原` : ''),

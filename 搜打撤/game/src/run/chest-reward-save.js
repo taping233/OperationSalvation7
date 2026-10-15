@@ -31,7 +31,10 @@ export function restoreChestReward(game, saved) {
     || !Number.isFinite(c.coins) || c.coins < 0 || typeof c.coinsReceived !== 'boolean') return null;
   const validIndices = list => Array.isArray(list) && list.every(i => Number.isInteger(i) && i >= 0 && i < c.cards.length);
   if (!validIndices(c.taken) || !validIndices(c.lost) || c.taken.some(i => c.lost.includes(i))) return null;
+  if (c.rewardStage != null && !['chest','opening','cards'].includes(c.rewardStage)) return null;
+  if (['chest','opening'].includes(c.rewardStage) && (c.taken.length || c.lost.length || c.coinsReceived)) return null;
   const copy = JSON.parse(JSON.stringify(saved));
+  copy.current.rewardStage ||= 'cards'; // 旧快照已经进入领奖页，不再次领取宝箱。
   copy.current.taken = new Set(copy.current.taken); copy.current.lost = new Set(copy.current.lost);
   return copy;
 }

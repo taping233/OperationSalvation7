@@ -63,15 +63,26 @@ describe('byte-identical chest output aliases', () => {
     expect(collectVerifiedRuntimeAssetAliases(root).has(thumbnail)).toBe(false);
   });
 
-  it('all currently omitted frames have equal canonical bytes and static timeline references', () => {
+  it('aliases only byte-identical legacy rig output and preserves the active safe timeline URLs', () => {
     const source = readFileSync(path.join(gameRoot, 'src/run/chests.js'), 'utf8');
+    const openingArt = readFileSync(path.join(gameRoot, 'src/run/chest-opening-art.js'), 'utf8');
     const aliases = collectVerifiedChestFrameAliases(assetsRoot);
     expect(aliases.size).toBeLessThanOrEqual(15);
     for (const [alias, canonical] of aliases) {
       expect(readFileSync(path.join(assetsRoot, alias)).equals(readFileSync(path.join(assetsRoot, canonical)))).toBe(true);
       for (const asset of [alias, canonical]) {
-        expect(source).toContain(`new URL('../../assets/${asset}', import.meta.url)`);
+        expect(asset).toMatch(/^scenes\/chests\/(?:small|medium|large|class|boss)-rig-640-v1\/frame-\d{2}\.webp$/);
+        expect(openingArt).not.toContain(asset);
       }
+    }
+    expect(source).toContain("from './chest-opening-art.js'");
+    expect(source).toContain('const CHEST_FRAME_SETS = createChestFrameSets();');
+    for (const frame of ['frame-00', 'frame-01', 'frame-02', 'frame-03', 'burst']) {
+      const asset = `scenes/chests/safe-simple-v7/${frame}.webp`;
+      expect(openingArt).toContain(`new URL('../../assets/${asset}', import.meta.url)`);
+      expect(readFileSync(path.join(assetsRoot, asset)).byteLength).toBeGreaterThan(0);
+      expect(aliases.has(asset)).toBe(false);
+      expect([...aliases.values()]).not.toContain(asset);
     }
   });
 

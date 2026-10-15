@@ -101,12 +101,14 @@ describe('背包结构化道具用法', () => {
     expect(state.game.ownedCards.map(entry => entry.card.name)).toEqual(['消耗卡', '消耗卡']);
     expect(state.game.ownedCards.map(entry => entry.uid)).toEqual(['new-1', 'new-2']);
     expect(state.game.usedPocket).toEqual([{ card: { id: 'used-card', name: '消耗卡' }, count: 1 }]);
-    expect(state.ui.log).toHaveBeenCalledWith(expect.stringContaining('复原了消耗口袋中的 <b>2</b> 张卡牌'), 'ok');
+    expect(state.ui.log).toHaveBeenCalledWith(expect.stringContaining('复原了消耗区中的 <b>2</b> 张卡牌'), 'ok');
     expect(state.saveGame).toHaveBeenCalledOnce();
   });
 
-  it('复原时受背包空位限制，剩余卡继续留在消耗口袋', () => {
+  it('复原时受背包空位限制，剩余卡继续留在消耗区', () => {
     state.game.cap = 2;
+    const overlayPages = [];
+    state.ui.showOverlay = (_title, html) => { state.ui.el.overlay.hidden = false; overlayPages.push(html); };
     state.game.ownedCards.push(
       { uid: 'potion-1', card: { id: 'cmtn6bge52qt', name: '旧名', type: '道具', desc: '回复 999 点生命。', rules: { version: 1, bag: { use: [{ op: 'restoreConsumed', amount: 2 }] } } } },
       { uid: 'occupied', card: { id: 'occupied', name: '占位卡' } },
@@ -117,7 +119,9 @@ describe('背包结构化道具用法', () => {
 
     expect(state.game.ownedCards.map(entry => entry.card.name)).toEqual(['占位卡', '消耗卡']);
     expect(state.game.usedPocket[0].count).toBe(2);
-    expect(state.ui.log).toHaveBeenCalledWith(expect.stringContaining('剩 2 张留在口袋'), 'ok');
+    expect(state.ui.log).toHaveBeenCalledWith(expect.stringContaining('剩 2 张留在消耗区'), 'ok');
+    expect(overlayPages.at(-1)).toContain('role="status"');
+    expect(overlayPages.at(-1)).toContain('剩 2 张留在消耗区');
     expect(state.saveGame).toHaveBeenCalledOnce();
   });
 });

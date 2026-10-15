@@ -12,7 +12,7 @@ import { game } from './game.session.kernel.js';
 // ---------- 初始化派生数据 ----------
 // 逻辑格：轨道上可站立的最小单位。相连火堆（上下左右连通）合并为 1 个逻辑格，
 // 掷骰移动时整片火堆只算 1 步，不存在"从一半走到另一半"。
-const MAP_NODE_SPACING = 120;
+const MAP_NODE_SPACING = 180;
 const MAP_NODE_PADDING = 180;
 
 export function clampIndex(value, max, fallback = 0) {
@@ -57,7 +57,7 @@ export function installDerived(layerData, mapSeed, generatorVersion = GENERATOR_
       gridBounds: grid,
     };
   });
-  game.geometryVersion = `${String(game.mapSeed)}:${game.generatorVersion}:${game.layoutVersion}`;
+  game.geometryVersion = `${String(game.mapSeed)}:${game.generatorVersion}:${game.layoutVersion}:${MAP_NODE_SPACING}`;
   // W1-10（2026-09-27 R2）：门结点键集合（'li,idx'）。渲染器逐帧判定门节点
   // 此前要 per-node 遍历 doors 数组（drawNodeLabels 的 .some），这里派生一次、
   // 渲染侧 O(1) 查询（逐帧零分配纪律）。

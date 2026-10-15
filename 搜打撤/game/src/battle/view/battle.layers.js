@@ -51,7 +51,7 @@ import { commands, getSnapshot, AFFIX_META, Combat, aegisBlocked, effCostOf, fin
   const HAND_PAGE_SIZE = 9;   // 2026-09-16 老板：每栏最多 9 张（原 battle.view 渲染段，随 updateHand 的 handIndex 落位迁入——批5）
 import { animateSafe } from './battle.anim.view.js';
 import { schedulePresentationMs } from '../runtime/battle.clock.js';
-import { aim, clickSelectedUid, clickSelectedTarget, setTargetable, startAim, cancelAim, cancelClickSelection, showHandCardDetails } from './battle.aim.js';
+import { aim, clickSelectedUid, clickSelectedTarget, setTargetable, startAim, cancelAim, cancelClickSelection, selectCardByClick, showHandCardDetails } from './battle.aim.js';
 import { showFoePreview, clearFoePreview } from './battle.hover.js';
 import { cardRuleHint } from './battle.preview.js';
   // 数字键选牌 / Esc 取消（原在 aim 片：需读手牌层 handLayer，随迁本片解 aim↔layers 环——2026-09-22 批5）
@@ -78,9 +78,16 @@ import { cardRuleHint } from './battle.preview.js';
     const el = handLayer.querySelector(`.bt-card[data-hand-index="${e.key}"]`);
     if (!el) return;
     e.preventDefault();
-    showHandCardDetails(el.dataset.uid);
+    if (e.shiftKey) showHandCardDetails(el.dataset.uid);
+    else if (getSnapshot().infusing) {
+      const rec = [...handSlots.values()].find(entry => entry.card === el);
+      const uid = infuseRotateUid(rec?.group, getSnapshot().infusing);
+      if (uid) commands.selectInfusion(uid);
+    }
+    else selectCardByClick(el.dataset.uid, true, { autoSingleTarget: false });
   });
   function onTargetKeydown(e) {
+    if (e.target.closest('.sts-hand-tools')) return;
     if (e.isComposing || e.keyCode === 229) return;
     if (e.target !== e.currentTarget || !e.currentTarget.classList.contains('can-target')) return;
     if (e.key === 'Enter' || e.key === ' ') {
@@ -144,6 +151,8 @@ import { cardRuleHint } from './battle.preview.js';
     slot.style.setProperty('--frot', L.rot + 'deg');
     slot.style.setProperty('--counter-rot', -L.rot + 'deg');
     slot.style.setProperty('--fs', L.scale);
+    slot.style.setProperty('--hand-index', String(L.index ?? 0));
+    slot.style.setProperty('--hand-rest', (L.rest ?? 140) + 'px');
     slot.style.setProperty('--hand-visible-width', (L.visibleWidth ?? 204) + 'px');
   }
   // 只改变手牌视图位置；分组、顺序、出牌 UID 与差分槽位保持原语义。
@@ -163,7 +172,8 @@ import { cardRuleHint } from './battle.preview.js';
   function infuseRotateUid(g, infusing) {
     if (!g || g.self || !infusing || !infusing.picked) return null;
     const uids = g.uids;
-    if (!uids || uids.length < 2) return null;   // 单张叠代表即本身，per-uid toggle 天然成立
+    if (!uids?.length) return null;
+    if (uids.length === 1) return uids[0];
     const inGroup = infusing.picked.filter(u => uids.includes(u));   // 组内已选，按点选先后
     if (inGroup.length >= uids.length || infusing.picked.length >= infusing.need) return inGroup[0] || null;
     const cursor = inGroup.length ? uids.indexOf(inGroup[inGroup.length - 1]) : -1;
@@ -194,33 +204,32 @@ import { cardRuleHint } from './battle.preview.js';
     const costTip = effCost !== g.card.cost
       ? (effCost === 0 ? `（[[icon:bolt]] 当前按 0 费打出）` : `（[[icon:sparkles]] 费用变化：按 ${effCost} 费打出）`)
       : '';
-    const ruleHint = cardRuleHint(g.card, mode);
+    const dynamic = g.card.rules?.triggers?.onPlay?.find(op => op.op === 'damage' && op.hits?.perPlayedMoves !== undefined);
+    const hits = ctx.playedMovesThisTurn || 0;
+    const amount = dynamic ? +(dynamic.amount ?? g.card.dmg ?? 0) : 0;
+    const ruleHint = dynamic ? `当前 ${hits} 段 × ${amount} 基础伤害，共 ${hits * amount}；目标防御与加成另计。` : cardRuleHint(g.card, mode);
     const tip = infusingNow
-      ? (isSelf ? '正在注能的卡牌 · 点击查看' : `点击查看并选择注能材料${g.uids.length > 1 ? ` · 本叠还有 ${g.uids.length} 张` : ''}`)
+      ? (isSelf ? '正在注能的卡牌 · 详情按钮查看规则' : `点击选择注能材料${g.uids.length > 1 ? ` · 本叠还有 ${g.uids.length} 张` : ''}`)
       : blocked
-        ? `点击查看完整规则 · 无法打出：${blocked}`
+        ? `无法打出：${blocked} · 详情按钮查看完整规则`
         : infuseOf(g.card) > 0
-        ? `费用 ${effCost}${costTip} · 点击查看大卡，确认使用后进入注能；也可直接拖拽使用`
+        ? `费用 ${effCost}${costTip} · 点击选择注能材料；也可直接拖拽使用`
         : side === 'enemy'
-        ? `费用 ${effCost}${costTip} · 点击查看大卡，确认使用后选敌人；也可直接拖到敌人身上使用`
+        ? `费用 ${effCost}${costTip} · 点击选择敌人；也可直接拖到敌人身上使用`
         : side === 'self'
-          ? `费用 ${effCost}${costTip} · 点击查看大卡，确认使用后选自己；也可直接拖到左侧人物使用`
+          ? `费用 ${effCost}${costTip} · 点击选择自己；也可直接拖到左侧人物使用`
           : side === 'any'
-            ? `费用 ${effCost}${costTip} · 点击查看大卡，确认后使用；也可直接拖到战场空地`
+            ? `费用 ${effCost}${costTip} · 点击直接使用；也可直接拖到战场空地`
             : `费用 ${effCost}${costTip} · 点击查看完整规则`;
-    const badge = side === 'enemy' ? '<span class="bt-tt">[[icon:swords]]</span>'
-      : side === 'self' ? '<span class="bt-tt">[[icon:heart]]</span>'
-        : side === 'any' ? '<span class="bt-tt">[[icon:sparkles]]</span>' : '';
     // 需求 #16：费用变动显示在卡牌左上角费用处——降低 = 绿字，提高 = 红字
     // （天狼长弓等「变为0费」的临时卡带 _baseCost：按原费用对比显示绿色 0）
     const baseCost = (g.card._baseCost != null) ? g.card._baseCost : g.card.cost;
     const costDiff = effCost !== baseCost;
-    const costBadge = costDiff ? `<span class="bt-cost1 cost-mod ${effCost < baseCost ? 'mod-down' : 'mod-up'}" title="费用变化：按 ${effCost} 费打出（原 ${baseCost} 费）">[[icon:bolt]]${effCost}</span>` : '';
-    // 注能角标与卡面共用详情入口；查看不开始注能或消耗卡牌。
+    // 注能角标直接进入选材料；详情入口另置，不消耗卡牌。
     const infN = infuseOf(g.card);
     const infChip = (!infusingNow && !blocked && infN > 0)
       ? `<button class="bt-infchip" data-act="btInfuseStart" data-uid="${uid}"
-          title="查看注能(${infN})规则；确认使用后再选择材料">[[icon:crystal]] 注能${infN}</button>`
+          title="开始注能(${infN})，点击手牌选择材料">[[icon:crystal]] 注能${infN}</button>`
       : '';
     const cnt = g.uids.length > 1 ? `<span class="bt-count" title="同名卡 ${g.uids.length} 张堆叠为一叠">×${g.uids.length}</span>` : '';
     // 诅咒之刃（2026-09-10 需求）：卡面实时显示手牌招式（武术+法术）提供的全部诅咒
@@ -243,7 +252,8 @@ import { cardRuleHint } from './battle.preview.js';
         ...(spellBonus > 0 && g.card.dmgType === 'spell' && +(g.card.dmg || 0) > 0
           ? { dmgOverride: { bonus: spellBonus } } : {}),
       })
-      + cnt + badge + costBadge + infChip + curseChip;
+      + cnt + infChip + curseChip
+      + `<button type="button" class="bt-detail-chip" data-act="btCardDetails" data-uid="${uid}" aria-label="查看${escAttr(g.card.name)}详情">详情</button>`;
     const handState = infusingNow ? 'infusing' : targeted || clickSelectedUid === uid ? 'selected' : blockedReason ? 'blocked' : 'ready';
     return { g, uid, side, cls, tip, inner, ruleHint, handState, blockedReason };
   }
@@ -278,7 +288,7 @@ import { cardRuleHint } from './battle.preview.js';
     drawn.forEach(u => played.delete(u));   // 打出又回手（不朽斩）：同帧两事件抵消不演
     const ctx = {
       infusingNow: !!snapshot.infusing, infusing: snapshot.infusing,
-      pendingTarget: snapshot.pendingTarget, energy: snapshot.energy, busy: snapshot.busy,
+      pendingTarget: snapshot.pendingTarget, energy: snapshot.energy, busy: snapshot.busy, playedMovesThisTurn: snapshot.playedMovesThisTurn,
       spellBonus: (extra && extra.spellBonus) || 0,
       mode: extra && extra.mode,
     };
@@ -289,6 +299,7 @@ import { cardRuleHint } from './battle.preview.js';
     pageGroups.forEach((g, i) => {
       const key = handSlotKey(g);
       const st = handGroupState(g, ctx);
+      // Keep card identity and shortcut assignment; close visual gaps after a card leaves.
       const L = handDisplayLayout(i, pageGroups.length, handLayer.clientWidth);
       let rec = handSlots.get(key);
       if (!(rec && rec.slot.isConnected)) {
@@ -296,7 +307,7 @@ import { cardRuleHint } from './battle.preview.js';
         rec.slot.className = 'bt-slot';
         rec.card.addEventListener('pointerdown', (e) => {
           // 注能角标是按钮，点击走 ovBody 委托，不进指向（需求 #15）
-          if (e.target.closest && e.target.closest('.bt-infchip')) return;
+          if (e.target.closest && e.target.closest('button')) return;
           // N1（2026-09-25）：注能选牌态下整叠一个槽位，dataset.uid 是渲染时算好的叠代表
           // ——连点发同一个 uid，per-uid toggle 下选不满。按下瞬间按当前快照现算轮转 uid
           // 写回 dataset.uid，随后的 click 委托（btPlay→toggleInfusePick）即按 per-uid 生效；
@@ -315,9 +326,13 @@ import { cardRuleHint } from './battle.preview.js';
         rec.card.addEventListener('mouseenter', () => UI.hideTooltip?.());
         rec.card.addEventListener('keydown', (e) => {
           if (e.isComposing || e.keyCode === 229) return;
-          if ((e.key !== 'Enter' && e.key !== ' ') || e.target.closest('.bt-infchip')) return;
+          if ((e.key !== 'Enter' && e.key !== ' ') || e.target.closest('button')) return;
           e.preventDefault();
-          showHandCardDetails(rec.card.dataset.uid);
+          if (e.shiftKey) showHandCardDetails(rec.card.dataset.uid);
+          else if (getSnapshot().infusing) {
+            const uid = infuseRotateUid(rec.group, getSnapshot().infusing);
+            if (uid) commands.selectInfusion(uid);
+          } else selectCardByClick(rec.card.dataset.uid, true, { autoSingleTarget: false });
         });
         rec.slot.appendChild(rec.card);
         handSlots.set(key, rec);
@@ -330,7 +345,7 @@ import { cardRuleHint } from './battle.preview.js';
         + (st.side === 'any' ? ' free-drop' : '')
         + (clickSelectedUid === st.uid ? ' click-selected' : '');
       rec.card.dataset.uid = st.uid;
-      rec.card.dataset.handIndex = String((i % HAND_PAGE_SIZE) + 1);
+      rec.card.dataset.handIndex = String((g.displayIndex ?? i) + 1);
       rec.card.dataset.act = 'btPlay';
       rec.card.dataset.aim = st.side ? '1' : '';
       rec.card.dataset.side = st.side || '';
@@ -339,13 +354,11 @@ import { cardRuleHint } from './battle.preview.js';
       else rec.card.removeAttribute('data-block-reason');
       rec.__tip = st.tip;
       rec.__name = `${g.card.name} · ${effCostOf(g.card, st.uid)} 费`;
-      rec.card.setAttribute('role', 'button');
-      rec.card.tabIndex = 0;
-      rec.card.setAttribute('aria-label', `${rec.__name}。${st.ruleHint ? st.ruleHint + ' ' : ''}${st.tip || '按回车或空格查看这张牌'}`);
-      rec.card.setAttribute('aria-disabled', 'false');   // 无法使用仍可查看；禁用只在详情确认动作上。
+      rec.card.setAttribute('role', 'group');
+      rec.card.tabIndex = -1;
+      rec.card.setAttribute('aria-label', `${rec.__name}。${st.ruleHint ? st.ruleHint + ' ' : ''}${st.tip || '按回车或空格使用，Shift+Enter查看详情'}`);
       // 操作提示由局面说明和可访问名称提供，原生 title 不再挂。
       rec.card.removeAttribute('title');
-      rec.card.setAttribute('aria-pressed', clickSelectedUid === st.uid ? 'true' : 'false');
       // 卡面外的角标（目标侧/费用变化/注能/诅咒）带 [[icon:]] 宏——写入时统一渲染，否则宏原文直接上屏
       const renderSig = `${st.inner}\u0000${st.ruleHint}`;
       if (rec.sig !== renderSig) {
@@ -359,6 +372,13 @@ import { cardRuleHint } from './battle.preview.js';
         }
         rec.sig = renderSig;
       }
+      const face = rec.card.querySelector('.hs-card');
+      if (face) {
+        face.setAttribute('role', 'button'); face.tabIndex = 0;
+        face.setAttribute('aria-disabled', st.blockedReason ? 'true' : 'false');
+        face.setAttribute('aria-label', `${rec.__name}。${st.ruleHint} ${st.tip}。Shift+Enter查看详情`);
+        face.setAttribute('aria-pressed', clickSelectedUid === st.uid ? 'true' : 'false');
+      }
       ordered.push(rec);
     });
     // —— 顺序校正（DOM 序 = 扇形叠放序）：失序才搬节点 ——
@@ -369,7 +389,7 @@ import { cardRuleHint } from './battle.preview.js';
     // —— 空手牌提示（原模板 N=0 分支的等价物） ——
     const emptyHint = handLayer.querySelector('.ov-empty');
     if (!ordered.length) {
-      const msg = extra.mode === 'boss'
+      const msg = snapshot.hand.length ? '本栏已空；切换其他栏继续使用手牌。' : extra.mode === 'boss'
         ? ((snapshot.drawPile.length + snapshot.discard.length) ? '手牌打空了……下回合开始会再抽 1 张' : '牌库与弃牌堆都空了——只能结束回合硬抗，或撤退')
         : '没有能出的卡了……（打出过的卡本场不可再用）';
       const hint = emptyHint || handLayer.appendChild(Object.assign(document.createElement('p'), { className: 'ov-empty' }));
@@ -464,7 +484,7 @@ import { cardRuleHint } from './battle.preview.js';
       selfUnit.id = 'btSelf';
       selfUnit.title = '你自己——治疗 / 净化 / 护盾 / 格挡类卡牌拖到这里打出';
       selfUnit.addEventListener('click', (e) => {
-        if (e.target.closest('.sts-equip')) return;
+        if (e.target.closest('.sts-equip, .sts-hand-tools')) return;
         const snap = getSnapshot();
         if (snap.pendingItem || snap.slamPending) return;
         clickSelectedTarget('self');
@@ -474,6 +494,8 @@ import { cardRuleHint } from './battle.preview.js';
       selfSig = {};
     }
     if (selfAnchor !== selfUnit) selfAnchor.replaceWith(selfUnit);
+    const careerTools = body.querySelector('.sts-hand-tools');
+    if (careerTools && careerTools.parentElement !== selfUnit) selfUnit.appendChild(careerTools);
     return { alliesMount, foesMount };
   }
   // 单位节点固定骨架：意图(敌) + 立绘 + 名牌(名号/血条/属性/状态角标/装备)，各段按签名差分
@@ -587,7 +609,7 @@ import { cardRuleHint } from './battle.preview.js';
     setTargetable(selfUnit, !!((pendingCard && targetSide(pendingCard.card) === 'self') || (clickCard && targetSide(clickCard.card) === 'self')), '自己，按 Enter 确认目标');
     // 已穿戴装备（2026-09-09 老板 #9）：名称 + 说明 tooltip；带限定技能的可点击发动
     const equipsHTML = (equipped || []).map(e => e.skill
-      ? `<button class="sts-equip has-skill${e.used ? ' used' : ''}" data-act="btEquipSkill" data-uid="${escAttr(e.uid)}"
+      ? `<button class="sts-equip has-skill${e.used ? ' used' : ''}" data-act="btEquipSkill" data-uid="${escAttr(e.uid)}" ${snapshot.busy || e.used ? 'disabled' : ''} aria-label="${escAttr(e.name)}主动技能：${escAttr(e.skill)}${e.used ? '，本场已使用' : ''}"
           title="${escAttr(`【${e.name}】${e.desc}${e.used ? '（主动技能本场已用过）' : '——点击发动主动技能'}`)}">[[icon:tools]] ${esc(e.name)}${e.used ? '' : ' [[icon:bolt]]'}</button>`
       : `<span class="sts-equip" title="${escAttr(`【${e.name}】${e.desc}`)}">[[icon:tools]] ${esc(e.name)}</span>`).join('');
     setSection(selfParts.equips, sig, 'equips', equipsHTML);
@@ -736,7 +758,7 @@ import { cardRuleHint } from './battle.preview.js';
       // 迭代评审 09-20：意图详情并入气泡常驻文本（原生 title 已随手牌侧停用，交互口径统一）；
       // 实算伤害外带窄位流血角标「流血 N 层」；气泡允许两行折行（battle.css .sts-intent）
       if (!f.dead && intents.length) {
-        const intentDetail = intents.map(intent => `${intent.label}${intent.damage == null ? '' : ` · ${intent.damage}${intent.hits > 1 ? ` ×${intent.hits}（共${intent.totalDamage}）` : ''}`}${intent.bleedBonus ? ` · 流血 ${intent.bleedBonus} 层` : ''}`).join('；');
+        const intentDetail = intents.map(intent => `${intent.label}${intent.damage == null ? '' : ` · ${intent.damage}${intent.hits > 1 ? ` ×${intent.hits}（共${intent.totalDamage}）` : ''}`}${intent.bleedBonus ? ` · 流血 ${intent.bleedBonus} 层` : ''}`).join('；') + (f.affix === 'aegis' ? '。元素庇幕：偶数回合减免所有伤害；对其施加破甲可克制。' : '');
         setSection(parts.intent, sig, 'intent',
           intents.map(intent => {
             // 短标签保留动作语义；复合效果、流血加成和总伤仍在原完整说明中。

@@ -1,3 +1,4 @@
+import { prepareMapBrushArt } from './map-brush-art.js';
 // Original painted node assets inside the current map badge and detail layout.
 // Presentation only; no topology, fog, route or persistent state writes.
 import { drawTacticalIcon } from './renderer.icons.js';
@@ -32,7 +33,7 @@ export function prepareMapNodeArt() {
   const portrait = document.querySelector('#heroAva img, #charPanel .hero-ava img');
   const portraitUrl = portrait?.src || portrait?.currentSrc;
   if (portraitUrl) urls.push(portraitUrl);
-  return Promise.all(urls.map(url => mapImageReady(nodeImage(url))));
+  return Promise.all([prepareMapBrushArt(), ...urls.map(url => mapImageReady(nodeImage(url)))]);
 }
 
 export function drawMapNodeArt(ctx,type,x,y,r) {
@@ -102,57 +103,34 @@ function mapNodeSupport(type){
   const disk=ctx.createRadialGradient(-8,-10,2,0,0,34);
   disk.addColorStop(0,'#111e26ee');disk.addColorStop(.85,'#060d14eb');disk.addColorStop(1,'#07111980');
   ctx.fillStyle=disk;ctx.beginPath();ctx.arc(0,0,34,0,Math.PI*2);ctx.fill();
-  ctx.strokeStyle=`rgba(${tint},.42)`;ctx.lineWidth=.8;ctx.beginPath();ctx.arc(0,0,34,-2.7,-.55);ctx.stroke();
   ctx.strokeStyle=`rgba(${tint},.22)`;
   for(const [x,y,h] of [[-27,20,7],[-21,26,4],[28,12,8],[33,0,5]]){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y+h);ctx.stroke();}
   nodeSupports.set(key,canvas);return canvas;
 }
 
 // 当前/可达节点的常驻辉光：径向光晕叠在暗色底座之下；pulse 为呼吸振幅（1→0 收束为静态）。
-const GLOW_TINT={current:'113,199,196',legal:'132,199,181'};
-// 节点类型色环（2026-10-15 老板）：颜色即类型。色值沿用游戏既有锚点——
-// 紫=renderer.js 祭坛引导线、金=expedition-map.css 金币、暖=mapNodeSupport 火堆。
-const TYPE_RING_TONE={
-  battle:'186,85,74',boss:'186,85,74',elite:'186,85,74',battleElite:'186,85,74',
-  event:'154,124,200',altar:'154,124,200',
-  shop:'216,189,121',chest:'216,189,121',resource:'216,189,121',
-  door:'216,189,121',coin:'216,189,121',key:'216,189,121',
-  fire:'208,163,91',wood:'208,163,91',
-  entrance:'122,176,164',emergencyExit:'122,176,164',extraction:'122,176,164',rations:'122,176,164',
-};
+const GLOW_TINT={current:'104,230,222',legal:'187,229,187'};
 function drawMapNodeGlow(ctx,type,state,time,pulse){
   const tint=GLOW_TINT[state];if(!tint)return;
   const empty=type==='blank';
   const breath=Math.sin(time*Math.PI*2/2.2+(state==='legal'?.9:0))*pulse;
-  const r=(state==='current'?empty?40:58:empty?34:47)+(state==='current'?3:2)*breath;
-  const a=(state==='current'?.36:.20)+(state==='current'?.13:.09)*breath;
+  const r=(state==='current'?empty?52:76:empty?44:64)+(state==='current'?4:3)*breath;
+  const a=(state==='current'?.68:.48)+(state==='current'?.12:.10)*breath;
   ctx.save();ctx.globalCompositeOperation='lighter';
   const glow=ctx.createRadialGradient(0,0,r*.18,0,0,r);
   glow.addColorStop(0,`rgba(${tint},${a.toFixed(3)})`);
-  glow.addColorStop(.55,`rgba(${tint},${(a*.45).toFixed(3)})`);
+  glow.addColorStop(.38,`rgba(${tint},${(a*.78).toFixed(3)})`);
+  glow.addColorStop(.72,`rgba(${tint},${(a*.22).toFixed(3)})`);
   glow.addColorStop(1,`rgba(${tint},0)`);
   ctx.fillStyle=glow;ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.fill();ctx.restore();
 }
 
-export function drawMapNodeBadge(ctx,type,label,state,{hovered=false,note=false,showLabel=true,time=0,pulse=0}={}) {
+export function drawMapNodeBadge(ctx,type,label,state,{note=false,completed=false,showLabel=true,time=0,pulse=0,reachable=false}={}) {
   const style=mapNodeAppearance(state);ctx.globalAlpha*=style.alpha;
-  if(state==='current'||state==='legal')drawMapNodeGlow(ctx,type,state,time,pulse);
+  const glowState=state==='current'?'current':state==='legal'||reachable?'legal':null;
+  if(glowState)drawMapNodeGlow(ctx,type,glowState,time,pulse);
   const empty=type==='blank';
   if(!empty){const support=mapNodeSupport(type);if(support)ctx.drawImage(support,-64,-64,128,128);}
-  // 类型色环：非空节点常驻一圈类型色，底色随节点状态透明度同步淡出。
-  const ringTone=TYPE_RING_TONE[aliases[type]||type];
-  if(ringTone&&!empty){
-    ctx.strokeStyle=`rgba(${ringTone},.5)`;ctx.lineWidth=1.8;
-    ctx.beginPath();ctx.arc(0,0,40,0,Math.PI*2);ctx.stroke();
-  }
-  if(state==='selected'||hovered){
-    ctx.save();ctx.strokeStyle=state==='selected'?'#e4efebcc':'#a5c8c580';ctx.lineWidth=state==='selected'?1.2:.8;
-    ctx.shadowColor='#b9ded580';ctx.shadowBlur=state==='selected'?6:2;
-    ctx.beginPath();ctx.arc(0,0,empty?23:43,0,Math.PI*2);ctx.stroke();ctx.restore();
-  }else if(state==='current'){
-    ctx.strokeStyle='#71c7c499';ctx.lineWidth=.9;
-    ctx.beginPath();ctx.arc(0,0,empty?22:38,-2.65,-.5);ctx.stroke();
-  }
   if(getMapNodeArt(type)) drawMapNodeArt(ctx,type,0,0,empty?18:32);
   else if(!drawMapNativeSymbol(ctx,type,0,0,3.1,nativeInk(type))) drawTacticalIcon(ctx,type,0,0,2.8,nativeInk(type));
   if(showLabel){
@@ -168,6 +146,10 @@ export function drawMapNodeBadge(ctx,type,label,state,{hovered=false,note=false,
     ctx.fillText(label,0,labelY+labelHeight/2);ctx.shadowBlur=0;
   }
   if(note){ctx.fillStyle='#e8bd68';ctx.fillRect(28,-26,4,4);}
+  if(completed){
+    ctx.save();ctx.fillStyle='#0a171c';ctx.beginPath();ctx.arc(30,27,10,0,Math.PI*2);ctx.fill();
+    ctx.strokeStyle='#9bbdb1';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(25,27);ctx.lineTo(29,31);ctx.lineTo(35,23);ctx.stroke();ctx.restore();
+  }
 }
 
 // 迷雾剪影徽章（2026-10-15 老板）：未揭示节点渲染为「黑色模糊+微光晕」——结构可见、

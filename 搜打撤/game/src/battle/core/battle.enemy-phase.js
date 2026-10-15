@@ -8,6 +8,7 @@ import * as Combat from './combat.js';
 import { waitForFeedback, waitMs } from '../view/battle.feedback.js';
 import { demoMs } from '../runtime/battle.pace.js';
 import { battleState, G, foes, mode, drawPile, hand, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, handSelecting, choosing, interaction, noDrawNext, floats, cardAnims, playedMovesThisTurn, allies, extraTurn, timeRune, holyRune, fireballRuneOn, swiftRune, timeSpaceRune, timeSpaceUsed, set$noDrawNext, set$energy, set$extraTurn, set$interaction, set$turn, set$busy, set$timeSpaceUsed, set$playedMartialThisTurn, set$playedMovesThisTurn, set$lastPersistAt, clearTargetHint, transitionTo, cancelTargetingState } from '../runtime/battle.runtime.js';
+import { recordBattleDamage } from './battle.summary.js';
 import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, effCostOf, finish, fireTurnEndTriggers, fireConsumeTriggers, deferEndTurn, hasPendingEndTurn } from './battle.engine.js';
 import { restoreAtkDown } from '../effects/effect-steps.m2.js';
 
@@ -127,6 +128,7 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
     for (let pass = 0; pass < tickPasses; pass++) {
       const p1 = Combat.tickPoison(pref);
       if (p1?.dealt > 0) {
+        recordBattleDamage('中毒', p1.dealt, turn);
         G.hp = pref.hp - (p1.overkill || 0);
         playerOverkill += p1.overkill || 0;
         floats.push({ unit: 'self', text: '-' + p1.dealt, cls: 'hurt' });
@@ -135,6 +137,7 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
       }
       const b1 = Combat.tickBurn(pref);
       if (b1?.dealt > 0) {
+        recordBattleDamage('灼烧', b1.dealt, turn);
         G.hp = pref.hp - (b1.overkill || 0);
         playerOverkill += b1.overkill || 0;
         floats.push({ unit: 'self', text: '-' + b1.dealt, cls: 'hurt' });

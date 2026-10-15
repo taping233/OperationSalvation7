@@ -95,7 +95,6 @@ body:has(#viewport) #overlay .shop-pg.shop-market .shop-detail-art .hs-card { wi
 #overlay .shop-pg.shop-market .shop-live:empty { display:none; }
 #overlay .shop-pg.sc-shop :is(.shop-back,.shop-sellpost,.shop-bag-btn):hover { transform:none; filter:none; background:#394347; }
 #overlay .shop-pg.sc-shop :is(button,[tabindex]):focus-visible { outline:2px solid var(--shop-gold); outline-offset:3px; }
-body:has(#overlay:not([hidden]) .shop-pg) #bagBtnFloat { display:none; }
 /* The acquisition desk keeps its ledger, with the same resource and action hierarchy. */
 #overlay .shop-pg.shop-exchange .sell-board { flex:1; min-height:0; overflow:auto; overscroll-behavior:contain; }
 #overlay .shop-pg.shop-exchange .sell-desk { display:grid; grid-template-columns:minmax(240px,28fr) minmax(0,72fr); gap:24px; align-items:start; }

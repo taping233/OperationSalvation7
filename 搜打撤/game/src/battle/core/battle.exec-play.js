@@ -137,7 +137,7 @@ export function createBattleExecPlay({
       if (mode === 'boss') grave.push(f);
       const o = findCard(f);
       cardAnims.push({ kind: 'burn', uid: f, name: o ? o.card.name : '' });
-      G.log(`[[icon:flask]] <b>${esc(card.name)}</b> 注能：消耗了【<b>${esc(o ? o.card.name : '?')}</b>】${mode === 'boss' ? '（进墓地，不参与洗回）' : '（战后进消耗口袋，可在火堆复原）'}`, 'sys');
+      G.log(`[[icon:flask]] <b>${esc(card.name)}</b> 注能：消耗了【<b>${esc(o ? o.card.name : '?')}</b>】${mode === 'boss' ? '（进墓地，不参与洗回）' : '（战后进消耗区，可在火堆复原）'}`, 'sys');
       // 被牺牲的牌并没有被「使用」：不结算主效果，只结算它的「被注能时」条件效果
       if (o) resolveInfusedFuel(o.card, target);
       throwIfActionCancelled(signal);

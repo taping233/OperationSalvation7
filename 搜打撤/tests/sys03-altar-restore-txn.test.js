@@ -1,10 +1,10 @@
-/* SYS-03 物资事务审计（2026-10-03 老板 SYS-03）：祭坛献祭两分支、消耗口袋复原、
+/* SYS-03 物资事务审计（2026-10-03 老板 SYS-03）：祭坛献祭两分支、消耗区复原、
  * 钥匙复原链与火堆自动复原（只验证不改行为）的事务顺序钉现状。
  * 审计结论：五拍齐全、无「已领/未领搞混」缺陷——
  *   献祭道具：确认才上锁 altarItemSacrificed（随存档持久化）、取消不上锁卡不丢；
  *   弃 3 激活：卡不足 3 张拒开选卡器；确认后 markActivated+visited+saveGame；
  *   碎片兑换：先发卡后扣 2 碎片（满包拒收不扣碎片，2026-09-10 留言 #30/#532 注释口径）；
- *   奖励二选一：altarRewardPending 领取即消耗/离开保留（幂等，重进直接回奖励面板）；
+ *   奖励二选一：离开保留选择；传说+装备选择后冻结到持久化领奖页，容量失败保留；
  *   复原页 restoreOne：left 校验+满包拒绝（卡留口袋）；修鞋铺 picks=1 复原 1 张自动收尾；
  *   火堆（10-02 玩法批改「发现两张自动复原」，本包不动行为）：满包先检后扣口袋、
  *   consumeCurrentCell 收格、saveGame 落盘；
@@ -59,7 +59,7 @@ function makeGame() {
     bossKilled: false, _fireRestKey: undefined, nodeRewards: {},
     heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); },
     bagCap: () => st.bagCapN,
-    usedSlots: () => this.ownedCards.length,
+    usedSlots() { return this.ownedCards.length; },
     canReceiveCard(card) {
       if (this.__canReceive) return this.__canReceive(card);
       // 简化口径：新卡名需空格，本测试用 ownedCards.length 直接控满包；同名并入恒可收
@@ -101,13 +101,18 @@ beforeEach(async () => {
       isRandomObtainable: () => true,
       randomClassCard: () => null,
       cardHTML: c => c.name,
+      sellPrice: () => 1,
     },
-    Base: { isSha: () => false },
+    MAP: { chestKinds:{ small:{ name:'小宝箱' } } },
+    Base: { isSha: () => false, bagCap:() => st.bagCapN },
     Motion: undefined,
   };
 });
 
 async function importAltar() {
+  const scenes = await import('../game/src/run/game.run.scenes.js');
+  st.game.grantCard = scenes.grantEventCard;
+  await import('../game/src/run/chests.js');
   const altar = await import('../game/src/run/game.run.altar.js');
   return altar;
 }
@@ -130,7 +135,11 @@ it('献祭道具：确认后上锁+道具移除+复原页打开，复原 min(2, 
   expect(acts.altarItemRestore).toBeTypeOf('function');
   acts.altarItemRestore();
   expect(document.querySelector('[data-act="sacConfirm"]')).not.toBeNull();
+  expect(document.querySelector('[data-act="sacPick"]')?.tagName).toBe('BUTTON');
+  expect(document.querySelector('[data-act="sacPick"]').getAttribute('aria-pressed')).toBe('false');
   acts.sacPick({ uid: 'item-1' });
+  expect(document.querySelector('[data-act="sacPick"]').getAttribute('aria-pressed')).toBe('true');
+  expect(document.activeElement).toBe(document.querySelector('[data-act="sacPick"]'));
   acts.sacConfirm();
   expect(game.altarItemSacrificed).toBe(true);          // 确认才上锁
   expect(game.ownedCards.some(o => o.uid === 'item-1')).toBe(false);   // 道具已献
@@ -204,7 +213,7 @@ it('弃 3 激活：卡不足 3 张拒开选卡器；满 3 张确认后激活+消
   expect(document.querySelector('[data-act="altarOn3"]')).toBeNull();
 });
 
-it('奖励② 传说+装备：满包时两卡均被拒收散落，领取标记照常消耗（口径：有播报可预期）', async () => {
+it('奖励② 传说+装备：满包时两张保留，整理后领取一次并可继续探索', async () => {
   const game = st.game;
   game.altarActivated = true;
   game.altarRewardPending = true;
@@ -213,9 +222,20 @@ it('奖励② 传说+装备：满包时两卡均被拒收散落，领取标记�
   const { openAltarRitual } = await importAltar();
   openAltarRitual(st.curLayer.logical[0].def);   // 激活+待领 → 直接进奖励面板
   acts.altarRewardLoot();
-  expect(game.ownedCards).toHaveLength(0);   // 两张均拒收散落
-  expect(game.altarRewardPending).toBe(false);   // 领取即消耗：不把已领搞混成未领
-  expect(UI.log.mock.calls.some(c => String(c[0]).includes('掉在了原地'))).toBe(true);
+  expect(game.ownedCards).toHaveLength(0);
+  expect(game.altarRewardPending).toBe(false);   // 固定奖励已交由持久化领奖页接管
+  acts.chestTake();
+  expect(window.SDT.Chests.serialize(game).current).toMatchObject({ taken:[], lost:[] });
+  expect(document.body.textContent).toContain('放不下的保留');
+  st.bagCapN = 10;
+  window.SDT.Chests.resume();
+  const take = acts.chestTake;
+  take(); take();
+  expect(game.ownedCards.map(o => o.card.id)).toEqual(['lg1', 'eq1']);
+  expect(document.body.textContent).toContain('2 张已入背包');
+  acts.chestContinue();
+  expect(game.state).toBe('idle');
+  expect(window.SDT.Chests.isOpen()).toBe(false);
 });
 
 /* ---------- 碎片兑换：先发卡后扣碎片 ---------- */
@@ -327,6 +347,9 @@ it('火堆：满包时不扣口袋（先检后扣），deny 播报后照常收�
   game.usedPocket.push({ card: { id: 'a', name: '消耗甲', type: '法术' }, count: 1 });
   const { openFireRest } = await importAltar();
   openFireRest();
+  expect(document.body.textContent).toContain('当前可复原卡均放不下，将复原 0 张');
+  expect(document.querySelector('[data-act="fireBag"]')).not.toBeNull();
+  expect(st.game.visited).toEqual({});
   acts.fireRestGo();
   expect(game.usedPocket[0].count).toBe(1);   // 口袋未扣
   expect(game.ownedCards).toHaveLength(0);

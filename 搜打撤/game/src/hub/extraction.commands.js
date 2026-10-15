@@ -33,7 +33,7 @@ export function validatePendingExtraction(pending) {
       !Number.isInteger(pending.lostPocketCount) || pending.lostPocketCount < 0 ||
       pending.lostPocketCount > pending.totalPocketCount ||
       pending.keptPocket.reduce((sum, stack) => sum + stack.count, 0) + pending.lostPocketCount !== pending.totalPocketCount) {
-    return fail('INVALID_EXTRACTION', '撤离消耗口袋概率结果计数无效');
+    return fail('INVALID_EXTRACTION', '撤离消耗区概率结果计数无效');
   }
   const resources = pending.resources;
   if (!resources || typeof resources !== 'object' || Array.isArray(resources) ||

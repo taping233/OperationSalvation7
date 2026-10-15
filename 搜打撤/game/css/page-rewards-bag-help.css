@@ -267,7 +267,7 @@
   box-shadow: 0 0 10px rgba(230,203,118,.2);
 }
 
-/* W3 分节标题（背包格/消耗口袋/安全格）：前置金短线 + 暖米金（对标 stash 卡题） */
+/* W3 分节标题（背包格/消耗区/安全格）：前置金短线 + 暖米金（对标 stash 卡题） */
 #overlay .card.bag-page .set-h {
   color: #f4e2a5; letter-spacing: .14em;
   text-shadow: 0 0 10px rgba(230,203,118,.14);
@@ -326,7 +326,7 @@
   box-shadow: 0 0 6px rgba(230,203,118,.16);
 }
 
-/* W5 消耗口袋卡：红色「无法使用」标签保留警示语义，纸面 retint 冷青 */
+/* W5 消耗区卡：红色「无法使用」标签保留警示语义，纸面 retint 冷青 */
 #overlay .card.bag-page .pk-card .pk-tag {
   color: #ffd9cf;
   background: rgba(30,12,10,.85);

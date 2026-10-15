@@ -322,7 +322,7 @@
     border-radius: var(--radius-panel); padding: 12px 14px; }
   .bag-side-card .hint { margin: 0 0 8px; }
   .bag-side-card .pk-list { max-height: calc(var(--game-layout-height, 100vh) * 0.26); overflow-y: auto; }
-  /* 安全格移到右栏消耗口袋下方（2026-09-16 留言），网格按右栏宽度收窄 */
+  /* 安全格移到右栏消耗区下方（2026-09-16 留言），网格按右栏宽度收窄 */
   .bag-side-card .bag-grid.safe-grid { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
   .bag-view .bag-grid { grid-template-columns: repeat(auto-fill, minmax(92px, 116px)); gap: 10px;
     overflow: visible; max-height: none; align-items: start; }

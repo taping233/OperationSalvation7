@@ -116,7 +116,7 @@ const ELSEWHERE = [
   { id: 'delayedGate', label: '两回合后的延迟门', impl: 'battle.core', pattern: /两回合后[^。]*未选择/ },
   { id: 'designerBlank', label: '设计者原文留白句', impl: 'battle.core', pattern: /在你抽到[^。]*后……/ },
   { id: 'imitateInHand', label: '在手牌中变形', impl: 'battle.core', pattern: /在手牌中时[^。]*?变为/ },
-  { id: 'pocketRestore', label: '背包消耗口袋复原', impl: 'game.bag', pattern: /复原最多(两|2)张/ },
+  { id: 'pocketRestore', label: '背包消耗区复原', impl: 'game.bag', pattern: /复原最多(两|2)张/ },
   { id: 'structuredDamage', label: '结构化伤害字段已覆盖', impl: 'battle.core', gate: 'structuredHit', pattern: /造成\s*\d+\s*点(?:\s*(?:固定|法术|真实|攻击))?\s*伤害|(\d+)\s*点?法术伤害/ },
   { id: 'infuseBonusStructured', label: '注能伤害加成（结构化字段覆盖）', impl: 'battle.core', gate: 'structuredHit', pattern: /注能\s*[（(][^）)]*[）)][：:]?\s*伤害\s*\+\s*\d+/ },
   { id: 'infuseLeadBonus', label: '注能前缀后的「伤害 +N」', impl: 'battle.core', gate: 'structuredHit+infusedLead', pattern: /^\s*伤害\s*\+\s*\d+\s*$/ },

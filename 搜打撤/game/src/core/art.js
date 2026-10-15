@@ -8,6 +8,7 @@ import ART_MANIFEST from '../generated/art-manifest.js';
 import THUMB_MANIFEST from '../generated/thumb-manifest.js';
 import { esc } from './shared.js';
 import { PERFORMANCE_BUDGETS } from './performance-budgets.js';
+import { decodeImagesIn } from './image-decode.js';
 
   
   const ROOT = 'assets/';
@@ -295,36 +296,8 @@ function characterArt(value, full=false, useDefault=false) {
     },
     // 就地预解码某块 DOM 里已渲染的 <img>（卡牌库开页后补热用）：
     // 启动的全量预热清单补的是原图，库里显示的是 assets/thumbs/ 缩略图，不补这一步
-    // 首轮滚动就要现场解码——实测首轮滚动 32~35fps → 44~45fps，长帧减半。
-    // decode() 在解码线程上跑，不占主线程；lazy 的视口外图先改 eager 才会真的开始加载，
-    // 否则 decode() 永远挂着。图已解码时 decode() 立即兑现，重复调用无副作用。
-    // 2026-09-19 黑窗修复：战斗手牌冷启动时多图并发解码排队，img 加载完成后合成层
-    // 仍可能缓存空栅格不失效（实测 complete=true 却持续黑窗，直到下一次布局变化才显形）。
-    // decode() 兑现后微抖 opacity 强制该 img 重绘，把"位图就绪"同步成"像素上屏"。
-    // 注意 decode() 对尚未开始加载的 img 会立即 reject（EncodingError），必须等 load
-    // 事件后再 decode，否则挂载瞬间的首次调用全部静默落空。
-    decodeIn(root) {
-      const scope = root || document;
-      if (!scope || !scope.querySelectorAll) return;
-      scope.querySelectorAll('img[src]').forEach(im => {
-        im.loading = 'eager';
-        const shine = () => {
-          if (!im.isConnected) return;
-          // visibility 是 paint 属性：强制该 img 所在合成层失效重新光栅化。
-          // opacity/transform 是合成器属性，抖动它们不会触发重绘（实测无效）。
-          im.style.visibility = 'hidden';
-          requestAnimationFrame(() => { im.style.visibility = ''; });
-        };
-        const kick = () => {
-          try {
-            const p = im.decode && im.decode();
-            if (p && typeof p.then === 'function') p.then(shine).catch(() => { /* 解码失败：图片照常展示 */ });
-          } catch { /* decode 抛错：高亮只是增强，跳过 */ }
-        };
-        if (im.complete && im.naturalWidth > 0) kick();
-        else im.addEventListener('load', kick, { once: true });
-      });
-    },
+    // 可见图片提前加载/解码；保留冷图黑窗的 visibility 补绘，同一源只登记一次。
+    decodeIn(root) { decodeImagesIn(root || document); },
     classArt(className, useDefault=false) {
       if(characterFor(className)) return characterArt(className, false, useDefault);
       // 旧 11 职业立绘已随「以立绘为基准」清理下线，无法解析的历史职业一律走占位图

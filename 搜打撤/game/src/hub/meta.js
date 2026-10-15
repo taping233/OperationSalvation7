@@ -91,7 +91,7 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
     labScore3: (_s, d) => (((d || B().data).stats || {}).labTotalScore || 0) >= 4000,
   };
   const ACHIEVEMENTS = DATA.achievements.achievements.map(a => ({ ...a, done: ACH_DONE[a.id] }));
-  // 孵化计数 = 已拥有宠物数 - 初始宠物（汪汪狗自动获得，不算孵化）
+  // 孵化计数 = 已拥有宠物数 - 初始宠物（旺财自动获得，不算孵化）
   const petHatchedN = (d) => Math.max(0, Object.keys((d || B().data).pets || {}).length - 1);
 
   // ---------- 职业收藏室（2026-09-09：成就系统升级为「成就与职业收藏室系统」）----------

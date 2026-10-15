@@ -69,7 +69,7 @@ async function sweep(max = 120) {
   for (let i = 0; i < max; i++) {
     await tick(30);
     if (game.state === 'idle') return;
-    for (const act of ['flowContinue', 'chestContinue', 'chestTake', 'chestTake1', 'chestPick', 'chestSkip', 'chestLeave', 'chestSelect', 'pickupGo', 'closeShop',
+    for (const act of ['flowContinue', 'chestClaim', 'chestReveal', 'chestCoins', 'chestContinue', 'chestTake', 'chestTake1', 'chestPick', 'chestSkip', 'chestLeave', 'chestSelect', 'pickupGo', 'closeShop',
       'blankSafeDone', 'evtNext', 'evtChoice', 'resTake', 'resSkip', 'nodeChestSearch', 'fireRestGo', 'fireDone', 'stayHere', 'goDoor']) {
       if (clickAct(act)) break;
     }
@@ -229,5 +229,49 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
     expect(moveTo(li, nextIdx)).toBe(true);
     await sweep();
     expect(game.visited[key]).toBe(1);
+  });
+  it('F38 真实新局保存/读取保留轮换开关，旧快照与旧种子档缺字段均继续旧遭遇', async () => {
+    const session = await import('../game/src/run/game.session.js');
+    const { RunStorage } = await import('../game/src/hub/game.storage.js');
+    const { Random } = await import('../game/src/core/random.js');
+    const { buildEncounter } = await import('../game/src/run/game.run.scenes.js');
+    const slot = 5;
+    RunStorage.remove(slot);
+    session._set_active_slot(slot); window.SDT.Base.use(slot);
+    try {
+      expect(newRun('standard', [], { skipClassChoice:true })).not.toBe(false);
+      game.myClass = '武'; game.characterId = 'wu'; game.state = 'idle';
+      expect(game.encounterRotationVersion).toBe(1);
+      const battle = game.layerData[2].logical.findIndex(cell => cell.def.type === 'battle');
+      enterLayer(2, battle);
+      expect(session.saveGame()).toBe(true);
+      const modern = RunStorage.read(slot);
+      expect(modern.encounterRotationVersion).toBe(1);
+      game.encounterRotationVersion = 0;
+      expect(session.loadGame(slot).ok).toBe(true);
+      expect(game.encounterRotationVersion).toBe(1);
+      const stableMap = JSON.stringify(game.layerData.map(layer => layer.logical.map(cell => [cell.id, cell.x, cell.row, cell.def, cell.next])));
+      const state = Random.snapshot();
+      const first = buildEncounter(2);
+      Random.restore(state);
+      expect(buildEncounter(2)).toEqual(first);
+      for (const legacySeedOnly of [false, true]) {
+        const legacy = JSON.parse(JSON.stringify(modern));
+        delete legacy.encounterRotationVersion;
+        if (legacySeedOnly) { delete legacy.mapSnapshot; delete legacy.routeVersion; }
+        expect(RunStorage.write(slot, legacy)).toBe(true);
+        game.encounterRotationVersion = 1;
+        expect(session.loadGame(slot).ok).toBe(true);
+        expect(game.encounterRotationVersion).toBe(0);
+        if (!legacySeedOnly) expect(JSON.stringify(game.layerData.map(layer => layer.logical.map(cell => [cell.id, cell.x, cell.row, cell.def, cell.next])))).toBe(stableMap);
+        Random.restore(state);
+        const old = buildEncounter(2);
+        expect(old.encounterId.startsWith('rotation:')).toBe(false);
+        expect(new Set(old.map(enemy => enemy.id)).size).toBe(1);
+      }
+    } finally {
+      session._set_active_slot(null);
+      RunStorage.remove(slot);
+    }
   });
 });

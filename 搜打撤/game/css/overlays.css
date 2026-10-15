@@ -7,7 +7,7 @@
   @media (prefers-reduced-motion: reduce) { #overlay .card.page:has(.pg.settings-page) { animation: none; } }
   .bag-card { display: flex; flex-direction: column; align-items: center; gap: 5px; }
 
-  /* ---------------- 基地 / 安全格 / 消耗口袋 / 占位战斗 ---------------- */
+  /* ---------------- 基地 / 安全格 / 消耗区 / 占位战斗 ---------------- */
   .card-slot, .safe-slot { background: #1e1e1e; }
   .bag-grid.safe-grid .bag-slot.empty.safe-empty { border-color: #555555; background: rgba(126,126,126,.08); }
   /* 2026-09-10 留言 #26：珍珠盒扩格（只收资源卡）与普通空格视觉区分 */
@@ -19,7 +19,7 @@
     font-size: 12.5px; text-align: left; }
   .pk-row .dim, .dim { color: #959595; font-size: 11.5px; }
   .pk-row .ic { width: 14px; height: 14px; vertical-align: -0.18em; }
-  /* 消耗口袋卡面网格（2026-09-09 老板 #6）：口袋里的牌以真卡面展示，底部标注本局无法使用 */
+  /* 消耗区卡面网格（2026-09-09 老板 #6）：口袋里的牌以真卡面展示，底部标注本局无法使用 */
   .pk-list.pk-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px; align-content: start; max-height: calc(var(--game-layout-height, 100vh) * 0.46); }
   .pk-card { position: relative; display: flex; justify-content: center; }

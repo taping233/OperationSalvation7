@@ -19,7 +19,7 @@ function renderCombatPiles({ mode, drawCount, discardCount, graveCount, pileTip,
     }
     const draw = renderPileBadge({ title: `牌库：普通战斗不使用牌库（「抽 N 张牌」改为获得初始攻击）`, count: drawCount.length, cardBackHTML, cap: '牌库' }, escAttr);
     const discard = renderPileBadge({ title: `弃牌堆：${pileTip(discardCount)}`, count: discardCount.length, cardBackHTML: `<span class="down">${cardBackHTML}</span>`, cap: '弃牌' }, escAttr);
-    const grave = renderPileBadge({ title: `墓地：被消耗的牌战后进消耗口袋，可在火堆复原`, count: graveCount.length, cardBackHTML: `<span class="down">${cardBackHTML}</span>`, suffix: '[[icon:skull]] ', cap: '消耗' }, escAttr);
+    const grave = renderPileBadge({ title: `墓地：被消耗的牌战后进消耗区，可在火堆复原`, count: graveCount.length, cardBackHTML: `<span class="down">${cardBackHTML}</span>`, suffix: '[[icon:skull]] ', cap: '消耗' }, escAttr);
     return { draw, rest: `${discard}${grave}` };
   }
   // 牌库徽标可点击查看（2026-09-13 留言：点击应该能看牌库和墓地中的卡牌）

@@ -4,7 +4,7 @@
  *   ② 战斗界面手牌左侧背包图案按钮（bt-slam-btn）——按钮本体是声明式模板，
  *      这里实打它的命令链路：bagSlam 进入点选（有目标技能）→ slamPending → resolveSlam 结算；
  *   ③ 五职业分化口径（单源 battle.slam-skill.js）：侠客(刺客) 1 费 2 固定伤 / 战士 2 费攻击一次 /
- *      法师 1 费随机获取 / 降临者 2 费火球 / 牧师 1 费回复 3 血后本局翻面为 3 点法伤；
+ *      法师 1 费随机获取 / 降临者 2 费火球 / 牧师 1 费圣疗与惩戒每次使用后交替；
  *      未知职业兜底=战士口径。 */
 import { describe, it, expect, beforeAll } from 'vitest';
 
@@ -261,7 +261,7 @@ describe('背包砸击按钮形态', () => {
     await drain(100);
   });
 
-  it('牧师圣疗：回复 3 血后本局翻面为「惩戒」（1 费 3 点法伤+法伤加成），翻面固定', async () => {
+  it('牧师圣疗与惩戒每次使用后交替，取消选敌不切换，每回合只能使用一次', async () => {
     const g = makeGame([], '牧师', 10);
     BattleSession.start(g, [foeOf('惩戒靶')], { isBoss: false, name: '按钮测试' });
     await drain();
@@ -284,10 +284,28 @@ describe('背包砸击按钮形态', () => {
     expect(commands.slamSkill().used).toBe(false);
     commands.bagSlam();   // 下一回合翻面后：惩戒=点选敌人
     expect(snap().slamPending).toBe(true);
+    commands.bagSlam();   // 取消选敌不切换、不占次数
+    expect(commands.slamSkill()).toMatchObject({ name: '惩戒', used: false });
+    commands.bagSlam();
     commands.resolveSlam(0);
     await drain();
     expect(snap().foes[0].hp).toBe(99999 - 5);   // 3 + 法伤加成 2
     expect(snap().energy).toBe(nextEnergy - 1);   // 下一回合惩戒消耗 1 费
+    expect(commands.slamSkill()).toMatchObject({ name: '圣疗', used: true, needsTarget: false });
+    commands.bagSlam();
+    expect(snap().energy).toBe(nextEnergy - 1);
+    commands.endTurn();
+    await drain();
+    const hpBeforeHeal = g.hp;
+    commands.bagSlam();
+    await drain();
+    expect(g.hp).toBe(hpBeforeHeal + 3);
+    expect(commands.slamSkill()).toMatchObject({ name: '惩戒', used: true, needsTarget: true });
+    BattleSession.commands.flee();
+    await drain(100);
+    BattleSession.start(g, [foeOf('新战斗靶')], { isBoss: false, name: '技能复位测试' });
+    await drain();
+    expect(commands.slamSkill()).toMatchObject({ name: '圣疗', used: false });
     BattleSession.commands.flee();
     await drain(100);
   });

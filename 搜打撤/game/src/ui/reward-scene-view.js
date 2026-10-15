@@ -7,8 +7,8 @@ export function rewardExitHTML(act, label = '继续探索', extraClass = '') {
 // Cards contain their own names and rules. This frame adds only acquisition actions.
 export function rewardSceneHTML({ title, source = '', rule = '', cards, actions, footer = '', coins = '', warning = '', details = '', className = 'reward-v14', count = 0 }) {
   return `<section class="${escAttr(className)} reward-replica" data-reward-count="${count}">
-    <header class="reward-head"><div>${source ? `<span class="reward-source">${esc(source)}</span>` : ''}<h3>${esc(title)}</h3>${rule ? `<p class="reward-rule">${esc(rule)}</p>` : ''}</div>${coins}</header>
-    <div class="reward-main"><div class="reward-stage loot-scroll"><div class="reward-objects">${cards}</div>${warning}${details}</div><aside class="loot-actions" aria-label="奖励操作">${actions}</aside></div>
+    <header class="reward-head"><div>${source ? `<span class="reward-source">${esc(source)}</span>` : ''}<h3>${esc(title)}</h3>${rule ? `<p class="reward-rule">${esc(rule)}</p>` : ''}</div></header>
+    <div class="reward-main"><div class="reward-stage loot-scroll"><div class="reward-objects">${coins}${cards}</div>${warning}${details}</div><aside class="loot-actions" aria-label="奖励操作">${actions}</aside></div>
     ${footer ? `<footer class="reward-foot">${footer}</footer>` : ''}
   </section>`;
 }

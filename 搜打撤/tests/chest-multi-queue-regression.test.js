@@ -40,6 +40,7 @@ it('multi-chest leave and take actions advance exactly once per box', async () =
   const { SDT } = await import('../game/src/run/chests.js');
   SDT.Chests.open(game, [{kind:'small'}, {kind:'small'}], done);
   expect(UI.el.ovTitle.textContent).toContain('第 1 / 2');
+  ovBody.querySelector('[data-act="chestClaim"]').click();
   ovBody.querySelector('[data-act="chestReveal"]').click();
   const previews = [...ovBody.querySelectorAll('[data-act="chestSelect"]')];
   const claims = [...ovBody.querySelectorAll('[data-act="chestTake1"]')];
@@ -62,6 +63,8 @@ it('multi-chest leave and take actions advance exactly once per box', async () =
   expect(ovBody.querySelector('[data-act="chestContinue"]')).not.toBeNull();
   ovBody.querySelector('[data-act="chestContinue"]').click();
   expect(UI.el.ovTitle.textContent).toContain('第 2 / 2');
+  expect(ovBody.querySelector('[data-act="chestSelect"]')).toBeNull();
+  ovBody.querySelector('[data-act="chestClaim"]').click();
   ovBody.querySelector('[data-act="chestReveal"]').click();
   expect(ovBody.querySelector('[data-act="chestTake"]')).not.toBeNull();
   ovBody.querySelector('[data-act="chestTake"]').click();

@@ -21,7 +21,7 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
   const BASE_VERSION = 2;
   const BASE_MIGRATIONS = {
     // 0→1：首个显式版本，字段缺省由 mergeDef/adopt 兜底，盖章即可
-    // 1→2：保险升级改为宠物升级（2026-09-09 需求#2）——旧 safeUp 折算成初始宠物汪汪狗的等级
+    // 1→2：保险升级改为宠物升级（2026-09-09 需求#2）——旧 safeUp 折算成初始宠物旺财的等级
     1: (s) => {
       s.pets = (s.pets && typeof s.pets === 'object') ? s.pets : {};
       if (!Object.keys(s.pets).length) {
@@ -34,7 +34,7 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
   };
 
   // ---------- 宠物（2026-09-09 需求 #2/#4/#14）----------
-  // 初始宠物汪汪狗进入基地自动获得；其余只能用宠物蛋 + 50 币在仓库孵化（随机、不重复）。
+  // 初始宠物旺财进入基地自动获得；其余只能用宠物蛋 + 50 币在仓库孵化（随机、不重复）。
   // effect 字段在「携带」该宠物时生效（见 game.session newRun / chests / shop / safeCap）。
   // 数据外置 game/data/pets.json（2026-09-11 架构批次 2：中央数据源）。
   const PET_EGG_ID = DATA.pets.eggId;
@@ -52,7 +52,7 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
   // 基地成长接音（迭代评审 09-20）：升级成功=levelup；base.js 无 UI/Sound 静态导入，
   // 循 window.SDT 晚读惯例（同 :41 MAP），失败分支不播 deny（调用层 UI 已有 deny 职责）
   const sfxLevelup = () => { if (window.SDT && window.SDT.Sound) window.SDT.Sound.sfx('levelup'); };
-  // 「初始攻击」初始牌：能进消耗口袋（对局中复原用），但永远不入卡牌仓库
+  // 「初始攻击」初始牌：能进消耗区（对局中复原用），但永远不入卡牌仓库
   const isSha = (card) => !!card && (card.id === 'starter-attack' ||
     (card.id === undefined && card.name === '初始攻击'));
 
@@ -119,7 +119,7 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
     return data;
   }
 
-  // 初始宠物「汪汪狗」进入基地自动获得（需求 #4）；老档迁移也走这里兜底
+  // 初始宠物「旺财」进入基地自动获得（需求 #4）；老档迁移也走这里兜底
   function ensureStarterPet() {
     if (!data.pets || typeof data.pets !== 'object') data.pets = {};
     if (!data.pets.dog) data.pets.dog = { lv: 1, ts: Date.now() };
@@ -449,8 +449,8 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
     });
   }
 
-  // 卡牌入库（同名堆叠）。toPocket = true 时进基地消耗口袋（待钥匙复原）。
-  // 「初始攻击」不进卡牌仓库；需求 #6：职业卡与初始牌不进消耗口袋（撤离回收时直接消散）。
+  // 卡牌入库（同名堆叠）。toPocket = true 时进基地消耗区（待钥匙复原）。
+  // 「初始攻击」不进卡牌仓库；需求 #6：职业卡与初始牌不进消耗区（撤离回收时直接消散）。
   function depositCards(cards, toPocket) {
     return mutate(draft => { appendCards(draft, cards, toPocket); return true; });
   }
@@ -467,7 +467,7 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
     });
   }
 
-  // ---------- 消耗口袋复原（需求 #1/#11）：在仓库中使用钥匙，按稀有度计价 ----------
+  // ---------- 消耗区复原（需求 #1/#11）：在仓库中使用钥匙，按稀有度计价 ----------
   // 古朴 1 / 稀有 2 / 史诗 3 / 传说 4；整堆复原 = 单张价 × 张数。钥匙不足则无法复原。
   const POCKET_KEY_COST = { '古朴': 1, '稀有': 2, '史诗': 3, '传说': 4 };
   const pocketKeyCost = (stack) => {
@@ -476,7 +476,7 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
     return per * (stack.count || 1);
   };
 
-  // 复原：消耗口袋 → 卡牌仓库（消耗数量不等的钥匙）。
+  // 复原：消耗区 → 卡牌仓库（消耗数量不等的钥匙）。
   // 返回 true=成功；'sha'=初始牌无需入库（已销毁，每局自动重带）；
   // 'full'=仓库容量不足；'nokey'=钥匙不足（cost 里带所需数量）；false=无效序号
   function restore(i) {

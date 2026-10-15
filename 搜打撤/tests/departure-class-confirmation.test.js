@@ -14,7 +14,7 @@ describe('选角确认的出征整备守卫', () => {
     const transition = Object.assign(Promise.resolve(completed), { isCurrent: () => true });
 
     vi.doMock('../game/src/run/game.session.js', () => ({
-      MAP: { rules: { fireHeal: 5 } }, MODES: { standard: { xpMul: 1 } },
+      MAP: { rules: { fireHeal: 5, playerMaxHp: 24, playerAtk: 3 } }, MODES: { standard: { xpMul: 1 } },
       curLayer: () => ({}), enterLayer: vi.fn(), exitToTitle: vi.fn(), game,
       getActiveSlot: () => 1, newUid: () => 'uid', saveGame, scaledEnemy: value => value,
     }));
@@ -66,6 +66,11 @@ describe('选角确认的出征整备守卫', () => {
 
     const onSelect = vi.fn();
     openClassChoice({ beforeConfirm, onCancel: vi.fn(), ...(deferred ? { onSelect } : {}) });
+    expect(document.querySelector('.cls2-stats').textContent).toContain('生命上限 24');
+    expect(document.querySelector('.cls2-stats').textContent).toContain('基础攻击 3');
+    expect(document.querySelector('.cls2-skill').textContent).toContain('刺击');
+    expect(document.querySelector('.cls2-skill').textContent).toContain('不消耗卡牌');
+    expect(document.querySelector('.cls2-supply-rules').open).toBe(true);
     handlers.pickClass();
     if (deferred) {
       expect(onSelect).toHaveBeenCalledTimes(1);

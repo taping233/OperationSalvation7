@@ -49,7 +49,9 @@ const scenery = () => [overlay.querySelector('.battle-scene-world'), overlay.que
 function expectPaintedScenery() {
   const [world, front] = scenery();
   expect(world?.hidden).toBe(false); expect(front?.hidden).toBe(false);
-  expect(world?.querySelectorAll('.battle-scene-layer')).toHaveLength(3);
+  expect([...world.querySelectorAll('.battle-scene-layer')].map(image => image.className)).toEqual([
+    'battle-scene-layer scene-far', 'battle-scene-layer scene-ground',
+  ]);
   expect(stage().classList.contains('has-painted-scenery')).toBe(true);
   return [world, front];
 }
@@ -58,15 +60,15 @@ function frame() {
   if (!callback) throw new Error('Expected a queued battle render');
   callback(performance.now());
 }
-function start(ownedCards = []) {
+function start(ownedCards = [], { layerIdx = 0, isBoss = false } = {}) {
   const game = {
-    ownedCards, inventory: [], hp: 50, maxHp: 50, atk: 4, spellPower: 0, coins: 0,
+    ownedCards, inventory: [], hp: 50, maxHp: 50, atk: 4, spellPower: 0, coins: 0, layerIdx,
     myClass: null, characterId: null, state: 'idle', battleActive: false, logs: [],
     log(message) { this.logs.push(String(message)); },
     heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {}, onBattleEnd() {},
   };
   window.SDT.game = game;
-  BattleSession.start(game, [{ id: 'entry-foe', name: '入场回归靶子', hp: 50, atk: 1 }], { isBoss: false }); frame();
+  BattleSession.start(game, [{ id: 'entry-foe', name: '入场回归靶子', hp: 50, atk: 1 }], { isBoss, directBossStart:isBoss }); frame();
   return game;
 }
 beforeEach(() => {
@@ -113,7 +115,7 @@ it('preserves decoded winter scenery through simplified entry and rerenders, res
   expect(overlay.querySelector('.battle-entry-curtain')).toBeNull();
   const restoredScenery = expectPaintedScenery();
   expect(restoredScenery[0]).not.toBe(firstScenery[0]); expect(restoredScenery[1]).not.toBe(firstScenery[1]);
-  expect(HTMLImageElement.prototype.decode).toHaveBeenCalledTimes(firstDecodeCount + 4);
+  expect(HTMLImageElement.prototype.decode).toHaveBeenCalledTimes(firstDecodeCount + 3);
   expect(frames.attach).toHaveBeenCalledTimes(1);
   start(); await flush();
   expect(stage()._battleToken).not.toBe(token); expect(stage().dataset.battleEntry).toBe('waiting');
@@ -121,10 +123,10 @@ it('preserves decoded winter scenery through simplified entry and rerenders, res
 });
 
 it('keeps truly failed winter scenery hidden and reports the failure while simplified combat remains available', async () => {
-  const failedDecode = new Error('winter mid layer decode failed');
+  const failedDecode = new Error('winter ground layer decode failed');
   const warning = vi.spyOn(console, 'warn').mockImplementation(() => {});
   HTMLImageElement.prototype.decode.mockImplementation(function () {
-    return this.classList.contains('scene-mid') ? Promise.reject(failedDecode) : Promise.resolve();
+    return this.classList.contains('scene-ground') ? Promise.reject(failedDecode) : Promise.resolve();
   });
   start(); await flush();
   expect(stage().dataset.battleEntry).toBe('waiting');
@@ -254,4 +256,36 @@ it('cancels an actual payment action on departure without charging or reviving i
   while (rafQueue.length) frame(); await flush();
   expect(game.logs.some(log => log.includes('作为出牌代价'))).toBe(false);
   expect(overlay.hidden).toBe(true);
+});
+
+
+it.each([[1,'winter-street'],[2,'frozen-ruins'],[3,'contaminated-core']])('mounts one decoded scene on layer %s and keeps it across rendering and modal return', async (layerIdx,key) => {
+  const game=start([], {layerIdx}); await flush();
+  expect(stage().dataset.sceneryKey).toBe(key);
+  const world=overlay.querySelector('.battle-scene-world');
+  expect(world.hidden).toBe(false);expect(world.querySelectorAll('.battle-scene-layer')).toHaveLength(1);
+  expect(world.querySelector('.scene-static')).not.toBeNull();expect(overlay.querySelector('.battle-scene-foreground')).toBeNull();
+  const decoded=HTMLImageElement.prototype.decode.mock.calls.length;
+  game.layerIdx=0;BattleSession.commands.setPendingHint('static-render');frame();await flush();
+  expect(overlay.querySelector('.battle-scene-world')).toBe(world);
+  expect(HTMLImageElement.prototype.decode).toHaveBeenCalledTimes(decoded);
+  BattleSession.commands.openGrave();frame();await flush();expect(scenery()).toEqual([null,null]);
+  BattleSession.commands.closeGrave();frame();await flush();
+  expect(stage().dataset.sceneryKey).toBe(key);
+  expect(overlay.querySelectorAll('.battle-scene-layer')).toHaveLength(1);
+  expect(overlay.querySelector('.battle-scene-foreground')).toBeNull();
+});
+
+it('does not let a late decoded static scene reveal itself in a newer boss battle', async () => {
+  const oldDecode=deferred();
+  HTMLImageElement.prototype.decode.mockImplementation(function () { return this.src.includes('frozen-ruins') ? oldDecode.promise : Promise.resolve(); });
+  start([], {layerIdx:2});await flush();const oldWorld=overlay.querySelector('.battle-scene-world');
+  expect(oldWorld.hidden).toBe(true);
+  start([], {layerIdx:0,isBoss:true});await flush();
+  const current=overlay.querySelector('.battle-scene-world');
+  expect(stage().dataset.sceneryKey).toBe('contaminated-core');expect(current.hidden).toBe(false);
+  expect(oldWorld.isConnected).toBe(false);
+  oldDecode.resolve();await flush();
+  expect(oldWorld.hidden).toBe(true);expect(overlay.querySelector('.battle-scene-world')).toBe(current);
+  expect(overlay.querySelector('.battle-scene-foreground')).toBeNull();
 });

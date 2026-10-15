@@ -2,6 +2,7 @@ import { sdtDefine } from './sdt-facade.js';
   'use strict';
 import { assetUrl } from './asset-url.js';
 import { esc } from './shared.js';
+import { observeIconHydration } from './icon-hydration.js';
 
   
   const ROOT = 'assets/ui/icons/';
@@ -42,70 +43,56 @@ import { esc } from './shared.js';
   add('question',[0x26a0,0x267e,0x221e,0x1f4cc]); add('crystal',[0x2744]);
 
   const EMOJI_RE = /(?:[\uD83C-\uDBFF][\uDC00-\uDFFF](?:\uFE0F|\u200D[\s\S])?|[\u2300-\u27BF]\uFE0?|[\u2B00-\u2BFF]\uFE0?)/g;
+  const ICON_TOKEN_RE = /\[\[icon:[a-z-]+\]\]/;
+  function hasTokens(text) {
+    EMOJI_RE.lastIndex = 0;
+    return EMOJI_RE.test(text) || ICON_TOKEN_RE.test(text);
+  }
   function rich(html) {
     if (!html) return html;
-    const source=String(html), parity=new Uint8Array(source.length+1);
+    const source=String(html);
+    if (!hasTokens(source)) return source;
+    const parity=new Uint8Array(source.length+1);
     for(let i=0;i<source.length;i++) parity[i+1]=parity[i]^(source.charCodeAt(i)===34?1:0);
     const tokenRe=/\[\[icon:([a-z-]+)\]\]/g;
     let out='',last=0,match;
     while((match=tokenRe.exec(source))){out+=source.slice(last,match.index)+(parity[match.index]?'':img(match[1]));last=match.index+match[0].length;}
-    const tokenized=out+source.slice(last), tokenParity=new Uint8Array(tokenized.length+1);
+    const tokenized=out+source.slice(last);
+    EMOJI_RE.lastIndex=0;
+    if (!EMOJI_RE.test(tokenized)) return tokenized;
+    const tokenParity=new Uint8Array(tokenized.length+1);
     for(let i=0;i<tokenized.length;i++)tokenParity[i+1]=tokenParity[i]^(tokenized.charCodeAt(i)===34?1:0);
     out='';last=0;EMOJI_RE.lastIndex=0;
     while((match=EMOJI_RE.exec(tokenized))){if(tokenParity[match.index])continue;const symbol=match[0].replace(/\uFE0F/g,'');out+=tokenized.slice(last,match.index)+img(MAP[symbol]||'question');last=match.index+match[0].length;}
     return out+tokenized.slice(last);
   }
+  function scrubAttrs(el) {
+    for (const attr of ['title', 'placeholder', 'aria-label']) {
+      if (!el?.hasAttribute?.(attr)) continue;
+      const before = el.getAttribute(attr);
+      if (!before.includes('[[icon:')) continue;
+      const after = before.replace(/\s*\[\[icon:[a-z-]+\]\]\s*/g, ' ').trim();
+      if (after !== before) el.setAttribute(attr, after);
+    }
+  }
   function hydrate(root) {
     if(!root||typeof document==='undefined') return;
     // 单次遍历同时检出 emoji 与 [[icon:]] 两种 token（旧实现两个 TreeWalker +
     // nodes.includes O(n²) 去重；战斗/背包整页重建时这段叠在渲染成本上）
-    const tokenRe=/\[\[icon:[a-z-]+\]\]/;
     const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),nodes=[];let node;
-    while((node=walker.nextNode())){EMOJI_RE.lastIndex=0;if(EMOJI_RE.test(node.nodeValue)||tokenRe.test(node.nodeValue))nodes.push(node);}
+    while((node=walker.nextNode())){if(hasTokens(node.nodeValue))nodes.push(node);}
     nodes.forEach(textNode=>{
       // 文本节点的 nodeValue 是转义前的原文，直接 innerHTML 会把它重新解析成 HTML——
       // 自定义卡名/备注里的 <img onerror=…> 会变成真实标签（09-30 深审 INFRA-01）。
       // 先 esc 再进 rich：文本段保持字面显示，图标 img 仍由本模块生成
       const span=document.createElement('span');span.innerHTML=rich(esc(textNode.nodeValue));const frag=document.createDocumentFragment();while(span.firstChild)frag.appendChild(span.firstChild);textNode.parentNode.replaceChild(frag,textNode);});
-    const scrubAttrs=el=>['title','placeholder','aria-label'].forEach(attr=>{if(el&&el.hasAttribute&&el.hasAttribute(attr)){const before=el.getAttribute(attr),after=before.replace(/\s*\[\[icon:[a-z-]+\]\]\s*/g,' ').trim();if(after!==before)el.setAttribute(attr,after);}});
     scrubAttrs(root);
     if(root.querySelectorAll)root.querySelectorAll('[title],[placeholder],[aria-label]').forEach(scrubAttrs);
   }
   const TYPE_ART={'武术':'swords','法术':'sparkles','道具':'flask','装备':'shield','事件':'dice','能力卡':'helmet','资源':'gem'};
   if(typeof document!=='undefined'&&document.body)hydrate(document.body);
   if (typeof MutationObserver!=='undefined'&&typeof document!=='undefined'&&document.body){
-    // 战斗/背包会一次重建上百节点：合并同帧变更，但只扫描真正新增的子树，
-    // 避免每次小改动都从 document.body 重新遍历整页。
-    let hydrateQueued=false;
-    const dirtyRoots=new Set();
-    const flush=()=>{
-      hydrateQueued=false;
-      // 整页重建时同一批 records 里会出现「先添加、回调执行前已被移除」的节点，
-      // 其 parentElement 为 null 混进 roots 后 parent.contains 会抛 TypeError 中断整批 hydrate
-      const roots=Array.from(dirtyRoots).filter(Boolean);
-      dirtyRoots.clear();
-      roots.forEach((root,i)=>{
-        if(!root.isConnected) return;
-        if(roots.some((parent,j)=>j!==i&&parent&&parent!==root&&parent.contains&&parent.contains(root))) return;
-        hydrate(root);
-      });
-    };
-    const schedule=typeof requestAnimationFrame==='function'?requestAnimationFrame:setTimeout;
-    const observer=new MutationObserver(records=>{
-      records.forEach(record=>{
-        if(record.type==='attributes') dirtyRoots.add(record.target);
-        else record.addedNodes.forEach(node=>{
-          // 已脱离文档的节点（parentElement 为 null）没有可扫描的子树，直接丢弃，
-          // 不能把 null 放进 dirtyRoots（flush 时会炸，见上）
-          const root=node.nodeType===Node.ELEMENT_NODE?node:node.parentElement;
-          if(root) dirtyRoots.add(root);
-        });
-      });
-      if(hydrateQueued||!dirtyRoots.size)return;
-      hydrateQueued=true;
-      schedule(flush);
-    });
-    observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['title','placeholder','aria-label']});
+    observeIconHydration(document.body, { hydrate, scrubAttrs, hasTokens });
   }
   if (typeof window !== 'undefined') window.addEventListener('error', event => {
     const target=event.target;

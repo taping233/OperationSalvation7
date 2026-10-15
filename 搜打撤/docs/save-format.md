@@ -19,11 +19,14 @@
 - `generatorVersion`：生成该拓扑的算法版本，不再在读档时静默升级。
 - `layoutVersion`：网格到世界坐标的布局版本。节点中心距由布局层固定为约 120 世界像素，避免把旧的全局横移公式带入新图。
 - `geometryVersion`：当前地图几何缓存签名；换 seed 或布局版本时改变。
+- `encounterRotationVersion`：顶层可选遭遇轮换标记。新局为 `1`，启用第三层既有普通档混编；保存写入 `1` 或 `0`，旧档缺字段时恢复为 `0`，保持原遭遇。该标记不改变地图快照、地图生成版本或旧档拓扑，也不额外推进随机流。
 - `mapSnapshot`：`snapshotVersion=1` 的普通 JSON 数据，保存四层节点 id/type/网格坐标、双向边、入口、出口和 forward door 描述。它是进行中普通地图的拓扑真源；`toLogical`、世界坐标、bounds 缓存、扁平节点表和 `Map` 对象均在校验后重建，不入存档。
 
 无 `mapSnapshot` 的旧普通图只有在明确记录 `generatorVersion=3`、`layoutVersion=9`，并且存在真实 `mapSeed` 或 `seed` 时才允许由保留的 3/9 生成器重建并冻结。缺 seed、缺地图版本、未知版本或位置越界均拒绝恢复，原 run 串保留；不再制造 `legacy-slot-*` seed，也不把位置 clamp 到另一个节点。快照存在时，它与外层 seed/version 任一冲突都拒绝，不悄悄选择一侧。读取旧档不会保存动画中间态。
 
 移动事务只在稳定节点落点后保存：对局进入 `moving` 状态时不写档；页面刷新、退出或崩溃后恢复到上一次已完成的 `layerIdx` / `trackPos`。动画完成后才递增 `turn`、结算节点事件并写入存档。
+
+宝箱奖励快照的 current.rewardStage 保存 chest（待领取宝箱）、opening（已领取，正在开箱）或 cards（卡牌/金币领奖）。待领取快照恢复宝箱页；已领取但尚在演出的快照直接恢复卡牌页，沿用已冻结奖励；缺字段的旧快照按卡牌领奖处理。
 
 ## 兼容要求
 

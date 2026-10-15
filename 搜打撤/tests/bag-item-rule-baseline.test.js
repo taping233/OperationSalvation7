@@ -111,7 +111,7 @@ describe('背包道具旧行为基线', () => {
     expect(game.usedPocket.reduce((n, p) => n + p.count, 0)).toBe(1);
   });
 
-  it('背包容量不足时只复原可容纳数量，剩余留在消耗口袋', async () => {
+  it('背包容量不足时只复原可容纳数量，剩余留在消耗区', async () => {
     const uid = 'baseline-crystal-capacity';
     const filler = Array.from({ length: session.bagCap() - 1 }, (_, i) => ({
       name: `容量占位物资${i}`, value: 1, count: 1, tier: '普通',
@@ -127,7 +127,7 @@ describe('背包道具旧行为基线', () => {
     expect(session.usedSlots()).toBe(session.bagCap());
   });
 
-  it('消耗口袋为空时能源结晶不消耗', async () => {
+  it('消耗区为空时能源结晶不消耗', async () => {
     const uid = 'baseline-crystal-empty';
     setScenario({ ownedCards: [{ uid, card: { ...crystal } }], usedPocket: [] });
     await useItem('tt-crystal', uid);

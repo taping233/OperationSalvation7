@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <base href="/">
+  <title>战斗重设计 · 冬境交通枢纽</title>
+  <link rel="stylesheet" href="/css/cards.css">
+  <link rel="stylesheet" href="/css/card-v3.css">
+  <link rel="stylesheet" href="/css/card-layout-selected.css">
+  <link rel="stylesheet" href="/@fs/D:/素材/代号柒/搜打撤/docs/previews/battle-stage-reset-20261015/style.css">
+</head>
+<body>
+  <main id="overlay">
+    <div id="ovBody">
+      <section class="battle-stage sts" aria-label="战斗界面设计方案">
+        <div class="scenery" aria-hidden="true">
+          <img class="scene-layer backdrop" src="/@fs/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-15-battle-stage-reset/layers/backdrop.webp" alt="">
+          <img class="scene-layer ground" src="/@fs/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-15-battle-stage-reset/layers/ground.webp" alt="">
+          <img class="scene-layer foreground" src="/@fs/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-15-battle-stage-reset/layers/foreground.webp" alt="">
+        </div>
+        <header class="encounter-header">
+          <div class="location"><span class="chapter-number">01</span><div><span class="eyebrow">WINTER TRANSIT DISTRICT</span><h1>冬境交通枢纽<span>遭遇战</span></h1></div></div>
+          <div class="turn"><span id="turnNumber">01</span><div><span class="eyebrow">YOUR TURN</span><strong id="phaseText">你的回合</strong></div></div>
+          <div class="header-tools"><span class="credit"><svg viewBox="0 0 24 24"><path d="M12 2 21 7v10l-9 5-9-5V7Z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2Z"/></svg>128</span><button class="icon-button" id="optionsButton" aria-label="打开战斗选项"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></svg></button></div>
+        </header>
+        <div class="items"><span class="eyebrow">道具</span><button id="itemButton" aria-label="查看恢复药剂"><svg viewBox="0 0 24 24"><path d="M9 2h6M10 2v7l-5 9q-2 4 3 4h8q5 0 3-4l-5-9V2M8 14h9"/></svg><b>2</b></button></div>
+        <div class="battlefield">
+          <div id="btSelf" class="hero combat-unit">
+            <div class="ground-shadow"></div>
+            <div class="sts-figure"><img src="assets/portraits/frames/wu/sprite-v1/neutral.webp" data-asset-key="battle-wu" alt="无 · 现有战斗动画" draggable="false"></div>
+            <button class="career-button" id="careerButton"><span class="career-icon"><svg viewBox="0 0 24 24"><path d="m18 2 4 4-12 12-4-4ZM4 12l8 8M7 17l-5 5"/></svg></span><span class="career-copy"><small>职业技能 · 侠客</small><strong id="careerName">刺击</strong><span id="careerEffect">2 点固定伤害</span></span><span class="career-cost" id="careerCost">1<span>能量</span></span><span class="career-status" id="careerStatus">每回合一次 · 不消耗卡牌</span></button>
+            <div class="unit-caption"><div class="unit-name"><strong>无</strong><span>侠客</span><span class="block-badge" id="blockBadge"><svg viewBox="0 0 24 24"><path d="M12 2 21 6v7q-2 6-9 9-7-3-9-9V6Z"/></svg><b id="blockValue">5</b></span></div><div class="health-track"><i id="playerHealth" style="width:80%"></i><b><span id="playerHp">28</span><small> / 35</small></b></div><div class="status-row"><span class="status-chip blue" title="攻击力"><svg viewBox="0 0 24 24"><path d="m18 2 4 4-12 12-4-4ZM4 12l8 8M7 17l-5 5"/></svg>4</span><span class="status-note">攻击力</span></div></div>
+          </div>
+          <button class="foe combat-unit foe-one" data-target="0" aria-label="选择联邦步兵为目标">
+            <div class="intent"><svg viewBox="0 0 24 24"><path d="m18 2 4 4-12 12-4-4ZM4 12l8 8M7 17l-5 5"/></svg><b>6</b><span>攻击</span></div>
+            <div class="target-reticle" aria-hidden="true"></div><div class="ground-shadow"></div>
+            <img class="enemy-figure" src="assets/portraits/cut/enemies/infantry.webp" alt="联邦步兵" draggable="false">
+            <div class="unit-caption"><div class="unit-name"><strong>联邦步兵</strong><span class="enemy-index">01</span></div><div class="health-track"><i id="foeHealth0" style="width:100%"></i><b><span id="foeHp0">24</span><small> / 24</small></b></div><div class="status-row"><span class="status-note">准备射击</span></div></div>
+          </button>
+          <button class="foe combat-unit foe-two" data-target="1" aria-label="选择异能者为目标">
+            <div class="intent intent-guard"><svg viewBox="0 0 24 24"><path d="M12 2 21 6v7q-2 6-9 9-7-3-9-9V6Z"/></svg><b>4</b><span>格挡</span></div>
+            <div class="target-reticle" aria-hidden="true"></div><div class="ground-shadow"></div>
+            <img class="enemy-figure" src="assets/portraits/cut/enemies/esper_crow.webp" alt="异能者" draggable="false">
+            <div class="unit-caption"><div class="unit-name"><strong>异能者</strong><span class="enemy-index">02</span></div><div class="health-track"><i id="foeHealth1" style="width:72%"></i><b><span id="foeHp1">18</span><small> / 25</small></b></div><div class="status-row"><span class="status-chip purple">诅咒 1</span></div></div>
+          </button>
+        </div>
+        <div class="action-message" id="actionMessage" aria-live="polite">选择手牌，决定下一步</div>
+        <div class="hand-zone">
+          <button class="pile draw-pile" id="drawButton" aria-label="查看抽牌堆"><span class="pile-art"><i></i><i></i><i><svg viewBox="0 0 48 64"><path d="M24 6 40 29 24 57 8 29Z M24 15v33M15 29h18"/></svg></i></span><b>12</b><span>抽牌堆</span></button>
+          <div class="energy-zone"><div class="energy-mark"><svg viewBox="0 0 40 48"><path d="M23 2 5 28h13l-2 18 20-28H23Z"/></svg><b id="energyNumber">3</b><span>/ 3</span></div><span class="eyebrow">能量</span></div>
+          <div class="hand" id="hand" role="group" aria-label="当前手牌"></div>
+          <div class="turn-actions"><div class="forecast"><svg viewBox="0 0 24 24"><path d="m12 3 10 18H2ZM12 9v5M12 17v1"/></svg>预计承伤 <b id="forecastValue">1</b></div><button class="end-turn" id="endTurn">结束回合<svg viewBox="0 0 24 24"><path d="m8 5 9 7-9 7Z M21 5v14"/></svg></button><div class="turn-shortcuts"><button id="bagButton">背包 <kbd>B</kbd></button><button id="discardButton">弃牌堆 <b id="discardCount">3</b></button><button id="consumeButton">消耗区 <b>0</b></button></div></div>
+        </div>
+        <aside class="review-bar" aria-label="设计稿工具"><span class="review-badge">方案预览</span><button id="notesButton">设计说明</button><button id="layersButton">分层检查</button><button id="resetButton">重置演示</button><span class="runtime-note" id="runtimeNote">现有战斗动画载入中</span></aside>
+        <dialog id="notesDialog"><button class="dialog-close" data-close aria-label="关闭">×</button><span class="eyebrow">BATTLE / DESIGN DIRECTION</span><h2>把战场还给角色</h2><p>先看敌人准备做什么，再看手上能做什么。角色、敌方意图、生命和手牌形成一条阅读路径。</p><div class="design-grid"><section><b>01 / 舞台</b><p>宽阔视野、同一站脚线。后景、地板、前景分别绘制和挂载，前景只出现在边缘。</p></section><section><b>02 / 决策</b><p>职业技能独立突出；手牌放大并横向叠放，常态下沉时露出费用和标题，悬停或键盘聚焦时展开整卡。</p></section><section><b>03 / 反馈</b><p>现有 Pixi 序列帧原样调用；卡框、插画、费用、名称与规则直接来自共用卡牌渲染接口。</p></section></div><p class="dialog-footnote">这是独立设计稿，不连接存档或正式战斗规则。卡面调用cardHTML、正式插画映射与共用样式，预览只控制手牌位置和交互。旧战斗样式清退清单见任务说明，正式替换待老板确认。</p></dialog>
+        <dialog id="layersDialog"><button class="dialog-close" data-close aria-label="关闭">×</button><span class="eyebrow">SCENE COMPOSITION</span><h2>三层独立场景</h2><div class="layer-switches"><label><input type="checkbox" data-layer="backdrop" checked> 后景 · 城市与天空</label><label><input type="checkbox" data-layer="ground" checked> 地板 · 空旷站脚区</label><label><input type="checkbox" data-layer="foreground" checked> 前景 · 两侧近物</label></div><p class="dialog-footnote">每层均由独立 NAI 草稿经内置生图重绘；前景与地板保留透明区。取消勾选可检查分层边界。</p></dialog>
+        <dialog id="infoDialog"><button class="dialog-close" data-close aria-label="关闭">×</button><span class="eyebrow">PREVIEW</span><h2 id="infoTitle"></h2><p id="infoBody"></p></dialog>
+      </section>
+    </div>
+  </main>
+  <script type="module" src="/@fs/D:/素材/代号柒/搜打撤/docs/previews/battle-stage-reset-20261015/preview.js"></script>
+</body>
+</html>

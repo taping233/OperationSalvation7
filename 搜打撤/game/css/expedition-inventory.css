@@ -7,11 +7,11 @@ body #overlay.bag-full { padding: 0; display: block; }
 body #overlay .card.bag-page {
   width: 100vw; max-width: 100vw; height: 100vh; max-height: 100vh;
   margin: 0; border: 0; border-radius: 0; padding: 0; box-shadow: none;
-  transform: none !important;
+  transform: none !important; translate: none; scale: none;
 }
 body #overlay .card.bag-page #ovBody { width: 100%; height: 100%; max-height: none; overflow: hidden; }
 body #overlay .card.bag-page .bag-view.bag-v2 {
-  position: relative; overflow: hidden; height: 100%; box-sizing: border-box;
+  position: relative; overflow: hidden; height: 100%; width: 100%; box-sizing: border-box;
   max-width: none; margin: 0;
   background: #0b1017; color: #f2f4f6;
 }
@@ -52,7 +52,7 @@ body #overlay .card.bag-page .bag-v2 .bag-rlogo { margin-top: auto; font-size: 1
 /* 中列：标题 / 容量 / 资产（横排分割线分隔头/工具/网格三段） */
 body #overlay .card.bag-page .bag-v2 .bag-col { display: flex; flex-direction: column; min-width: 0; min-height: 0; gap: 0; }
 body #overlay .card.bag-page .bag-v2 .bag-head2 {
-  display: flex; align-items: flex-end; gap: 24px; padding: 4px 6px 16px;
+  display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 20px; padding: 4px 6px 16px;
   border-bottom: 1px solid rgba(255, 255, 255, .14);
 }
 body #overlay .card.bag-page .bag-v2 .bag-kick { display: block; font-size: 10px; letter-spacing: .42em; color: rgba(226, 232, 238, .34); }
@@ -81,6 +81,8 @@ body #overlay .card.bag-page .bag-v2 .bag-pill {
 }
 body #overlay .card.bag-page .bag-v2 .bag-pill:hover { color: #f2f4f6; background: rgba(255, 255, 255, .11); }
 body #overlay .card.bag-page .bag-v2 .bag-pill.on { background: #f5d97b; color: #101319; font-weight: 700; }
+body #overlay .card.bag-page .bag-v2 .bag-receipt { margin: 0 0 12px; padding: 10px 14px; color: #f5d97b; border: 1px solid #f5d97b66; border-radius: 10px; background: #101319dd; }
+body #overlay .card.bag-page .bag-v2 button:focus-visible { outline: 2px solid #f5d97b; outline-offset: 3px; }
 body #overlay .card.bag-page .bag-v2 .bag-tgap { flex: 1; }
 body #overlay .card.bag-page .bag-v2 .bag-icbtn {
   width: 40px; height: 40px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, .12); cursor: pointer;
@@ -245,7 +247,7 @@ body #overlay .card.bag-page .bag-v2 .bag-tile.spent .bag-tstate { color: rgba(2
 #overlay .hub-page .stash-empty .empty-ico .ic { width:30px; height:30px; opacity:.75; }
 #overlay .hub-page .stash-empty b { color:#d0d2d3; font-size:14px; letter-spacing:2px; }
 #overlay .hub-page .stash-empty span { max-width:420px; font-size:11.5px; line-height:1.7; }
-/* 消耗口袋：行首小卡面缩略（点击行内按钮复原不变）；hs-card 用 font-size 缩放法缩到 36px 宽 */
+/* 消耗区：行首小卡面缩略（点击行内按钮复原不变）；hs-card 用 font-size 缩放法缩到 36px 宽 */
 #overlay .hub-page .pk-row.pocket-row { gap:10px; padding:6px 10px 6px 6px; }
 #overlay .hub-page .pocket-thumb { flex:0 0 auto; width:37px; height:52px; overflow:hidden; border-radius:0; background:#191a1c; }
 #overlay .hub-page .pocket-thumb .hs-card { font-size:3.7px; }

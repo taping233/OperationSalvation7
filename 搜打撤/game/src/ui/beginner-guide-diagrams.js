@@ -1,4 +1,7 @@
 // Transparent, code-native diagrams: short facts, not simulated game screenshots.
+export function bossPreparationHTML() {
+  return '<p><b>深入前练习防御：</b>先看敌方下一步意图；对方要攻击时，留能量使用护甲、护盾或格挡，别把所有牌都换成伤害。</p><p><b>遇到减伤先查词缀：</b>破甲可使目标的格挡、护盾、护甲与元素庇幕失效；部分破甲牌有流血等前提，先看卡牌规则再安排出牌顺序。普通战可先练习，首脑前补给并保留关键牌。</p>';
+}
 const icons = {
   archive: '<path d="M6 9h32v29H6zM4 4h36v7H4zM16 19h12M17 27h10"/>',
   mode: '<path d="M7 12h30M7 23h30M7 34h30M16 7v10M29 18v10M18 29v10"/>',
@@ -33,7 +36,7 @@ const diagrams = {
   ],
   loot: [
     ['chest', '密封物资箱', '三张奖励选一张'], ['bag', '背包', '留出领取奖励的空位'],
-    ['shield', '宠物安全格', '失败时保留符合条件的牌'], ['restore', '消耗口袋', '复原后才能再用'],
+    ['shield', '宠物安全格', '失败时保留符合条件的牌'], ['restore', '消耗区', '复原后才能再用'],
   ],
   extract: [
     ['door', '第三层：紧急撤离', '提前带回剩余收获'], ['trophy', '第四层：终局撤离', '击败首脑后前往终点'],

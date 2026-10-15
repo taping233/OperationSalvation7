@@ -58,7 +58,7 @@ export const cinematicsMethods = {
       <span class="lg-kicker">LEGENDARY · 传说</span>
       <div class="lg-card">${SDT.Cards.cardHTML(card, 'lg')}</div>
       <b class="lg-name">${card.name}</b>
-      <span class="lg-hint">点击任意处继续</span>`;
+      <span class="lg-hint">点击收起 · 稍后自动收起</span>`;
     const close = () => { el.classList.add('lg-out'); setTimeout(() => el.remove(), 420); };
     el.addEventListener('click', close, { once: true });
     document.body.appendChild(el);
@@ -110,7 +110,7 @@ export const cinematicsMethods = {
         <div class="lg-card">${SDT.Cards.cardHTML(next.card, 'lg')}</div>
         ${combat ? '' : `<b class="lg-name">${next.card.name}</b>`}
         ${next.reason ? `<span class="lg-reason">${esc(next.reason)}</span>` : ''}
-        <span class="lg-hint">${combat ? '点击收起' : '点击任意处继续'}</span>`;
+        <span class="lg-hint">点击收起 · 稍后自动收起</span>`;
       let closed = false;
       const close = () => {
         if (closed || !el.isConnected) return;

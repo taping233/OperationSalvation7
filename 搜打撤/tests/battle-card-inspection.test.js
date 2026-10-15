@@ -9,7 +9,7 @@ function setup() {
   };
   const spell = {
     id: 'inspect-spell', name: '费用探针', type: '法术', cost: 4,
-    desc: '消耗口袋中每有一张法术牌，本牌费用 - 1。附加 2 层中毒；附加 3 层中毒；附加 1 层流血。',
+    desc: '消耗区中每有一张法术牌，本牌费用 - 1。附加 2 层中毒；附加 3 层中毒；附加 1 层流血。',
   };
   const game = {
     ownedCards: [

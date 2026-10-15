@@ -1,9 +1,10 @@
+import { drawMapBrushRoad } from './map-brush-art.js';
 
 import { font, hash2 } from './renderer.primitives.js';
 import { revealProgress } from './map-reveals.js';
 import { ease } from './motion-primitives.js';
 import { renderScheduler } from './render-scheduler.js';
-import { NODE_INFO } from './node-info.js';
+import { mapNodeInfo } from './node-info.js';
 import { isConsumedMapNode } from './map-node-state.js';
 import { createMapCityAtmosphere } from './map-city-atmosphere.js';
 import { drawMapNodeBadge, drawMapFogBadge, drawMapTraveller, mapViewportScale, prepareMapNodeArt } from './map-node-art.js';
@@ -135,7 +136,7 @@ const SDT = window.SDT;
   let lastGlowSig = '';
   function nodeGeo(game) {
     const geometryVersion = game.geometryVersion ?? game.layoutVersion ?? game.map?.geometryVersion ?? 0;
-    // 入城闸门参与缓存键：进入补给页解锁的瞬间，可达集合/可达边要立即重算（辉光同步亮起）。
+    // 入城闸门参与缓存键：领完补给解锁时，可达集合/可达边立即重算（辉光同步亮起）。
     const entryGate = entrySupplyGate(game);
     if (geo && geo.src === game.nodes && geo.layerIdx === game.layerIdx && geo.trackPos === game.trackPos &&
         geo.nodePos === game.nodePos && geo.layerData === game.layerData &&
@@ -190,6 +191,7 @@ const SDT = window.SDT;
     };
 
     // 当前层道路按真实 next 去重；同时保留分组，供可达边/悬停边单独强调。
+    const fogRoads = [];
     const linksByLayer = game.nodePos.map(() => new Path2D());
     const legalLinks = new Path2D();
     const edgeKeys = new Set();
@@ -225,7 +227,6 @@ const SDT = window.SDT;
     });
     // 未探明结构边：至少一端未揭示的同层边走极淡虚线，只表达「此处有路」，
     // 不参与可达/规划高亮（drawLinks 里真实道路只画两端已知边）。
-    const fogLinks = new Path2D();
     if (fogNodes.length) {
       const knownKeys = new Set(nodes.map(n => `${n.li},${n.idx}`));
       const stub = (li, idx) => {
@@ -247,7 +248,7 @@ const SDT = window.SDT;
             const a = stub(li, i), b = stub(toLi, toIdx);
             if (!a || !b) continue;
             const [pa, pb] = trimNodes(a, b);
-            fogLinks.addPath(hand(pa, pb, li * 57 + i * 13 + toLi * 3 + toIdx));
+            fogRoads.push({edgeKey, section:mapTravelCurve(pa,pb)});
           }
         });
       });
@@ -277,7 +278,7 @@ const SDT = window.SDT;
     });
     geo = { src: game.nodes, layerIdx: game.layerIdx, trackPos: game.trackPos, nodePos: game.nodePos, layerData: game.layerData,
       geometryVersion, entryGate, seenCount: game.seen ? Object.keys(game.seen).length : 0,
-      nodes, fogNodes, fogLinks, legalLinks, legalKeys, linksByLayer, doorLinks, altarLinks, bounds, altarNode };
+      nodes, fogNodes, fogRoads, legalLinks, legalKeys, linksByLayer, doorLinks, altarLinks, bounds, altarNode };
     return geo;
   }
 
@@ -291,7 +292,6 @@ const SDT = window.SDT;
   }
   const mapKey=n=>`${n.li},${n.idx}`;
   const mapEdgeKey=(a,b)=>[mapKey(a),mapKey(b)].sort().join('|');
-  const hexA=(h,a)=>{const n=parseInt(h.slice(1),16);return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`;};
 
   // Artwork and type names remain small relative to the complete viewport.
   function drawIcons(ctx,game){
@@ -304,7 +304,7 @@ const SDT = window.SDT;
     // 呼吸窗口只在活跃对局的站立态武装：被动重绘（resize 重烘焙/测试极简 mock）不触发，
     // 也不占用渲染调度器的定时器口径（renderer-resource-lifecycle 断言空闲零计时器）。
     if(glowSig!==lastGlowSig&&(game.runActive&&game.state==='idle')){lastGlowSig=glowSig;noteGlowPulse(game.time||0);}
-    // 迷雾剪影先画：叠在结构虚线上、真实节点之下；不可交互、无标签、不泄露类型。
+    // 迷雾剪影先画：叠在手绘路径上、真实节点之下；不可交互、无标签、不泄露类型。
     for(const n of g.fogNodes){
       const screen=game.cam.worldToScreen(n.x,n.y);
       if(screen.y<58*unit||screen.y>game.cam.viewH-105*unit)continue;
@@ -322,15 +322,16 @@ const SDT = window.SDT;
       const door=game.doorKeys?.has(key)||game.layerData[n.li]?.doors?.some(d=>d.at===n.idx);
       const supply=game.entrySupply;
       const entryPending=supply?.layerIdx===n.li&&supply.trackPos===n.idx&&(supply.taken?.length||0)<(supply.cardIds?.length||0);
-      const type=entryPending?'event':isConsumedMapNode(game,n)?'blank':door?'door':n.def.type;
-      const name=entryPending?'入城补给':NODE_INFO[type]?.[0]||'未知地点';
+      const completed=isConsumedMapNode(game,n);
+      const type=entryPending?'event':door?'door':n.def.type;
+      const name=entryPending?'入城补给':mapNodeInfo(game,n)[0];
       const state=current?'current':selected?'selected':routed?'route':legal?'legal':game.visited?.[key]?'visited':'known';
       const rv=reduced?1:revealProgress(key,game.time||0);
       const detailScale=primary?Math.min(1,Math.max(.65,z)):Math.min(1,Math.max(.25,z*.65));
       const scale=unit*detailScale*(rv<1?.75+.25*rv:1)/z;
       ctx.save();ctx.translate(n.x,n.y);ctx.scale(scale,scale);ctx.globalAlpha=rv<1?Math.min(1,rv*1.4):1;
       drawMapNodeBadge(ctx,type,name,state,{
-        hovered:game.hover?.li===n.li&&game.hover?.idx===n.idx,
+        completed,reachable:legal,
         note:game.noteMap?.has(`${game.map?.boardId}|${key}`),
         showLabel:current||selected||(type!=='blank'&&!routed&&(legal?z>=.65:z>=.85)),
         time:game.time||0,pulse:glowPulse(game.time||0),
@@ -361,7 +362,7 @@ const SDT = window.SDT;
       const supply=game.entrySupply;
       const pending=supply?.layerIdx===n.li&&supply.trackPos===n.idx&&(supply.taken?.length||0)<(supply.cardIds?.length||0);
       if(!pending&&(n.def?.type==='blank'||isConsumedMapNode(game,n)))return {x:24*unit/z,top:24*unit/z,bottom:(marked?52:24)*unit/z};
-      return {x:(marked?54:34)*unit/z,top:(marked?51:34)*unit/z,bottom:74*unit/z};
+      return {x:(marked?60:56)*unit/z,top:56*unit/z,bottom:78*unit/z};
     };
     const outside=(p,n,box)=>Math.abs(p.x-n.x)>Math.min(box.x,len*.32)||p.y-n.y < -Math.min(box.top,len*.32)||p.y-n.y > Math.min(box.bottom,len*.32);
     const exit=(origin,target)=>{
@@ -399,34 +400,11 @@ const SDT = window.SDT;
     for(let i=1;i<path.length;i++)planned.set(mapEdgeKey(path[i-1],path[i]),mapKey(path[i-1]));
     const travel=getMapTravelPresentation(game),moving=travel?.phase==='moving';
     ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
-    // 迷雾结构边：连续发丝线（10-15 老板：虚线点显噪），只表达「此处有路」。
-    if(g.fogLinks){
-      ctx.globalAlpha=1;ctx.strokeStyle='rgba(150,178,190,.13)';ctx.lineWidth=1.1*unit/z;
-      ctx.stroke(g.fogLinks);
-    }
+    for (const road of g.fogRoads) drawMapBrushRoad(ctx,road,unit/z,{alpha:.12});
     for(const road of cached.roads){
       const chosen=planned.has(road.edgeKey),legal=road.legal;
       const color=chosen?'#79c9c4':legal?'#c7d1ca':'#b9c8c2';
-      if(chosen||legal){
-        // 可达/选中边的双层宽晕垫底：外扩辉光+主晕，发光轨道质感，不引 shadowBlur。
-        ctx.strokeStyle=color;
-        if(chosen){ctx.globalAlpha=.07;ctx.lineWidth=16*unit/z;ctx.stroke(road.path);}
-        ctx.globalAlpha=chosen?.15:.11;ctx.lineWidth=(chosen?9:8)*unit/z;ctx.stroke(road.path);
-      }
-      ctx.globalAlpha=chosen?(moving?.18:.40):legal?.30:.22;
-      ctx.strokeStyle='#526361';ctx.lineWidth=6*unit/z;ctx.stroke(road.path);
-      // 亮芯：沿路渐变，光向目的地汇聚（10-15 老板：路径太简单）。
-      const s=road.section;
-      const grad=ctx.createLinearGradient(s.from.x,s.from.y,s.to.x,s.to.y);
-      const stops=chosen?[.4,.7,1]:legal?[.35,.62,.92]:[.16,.42,.68];
-      grad.addColorStop(0,hexA(color,stops[0]));grad.addColorStop(.6,hexA(color,stops[1]));grad.addColorStop(1,hexA(color,stops[2]));
-      ctx.globalAlpha=chosen?(moving?.3:.88):1;
-      ctx.strokeStyle=grad;ctx.lineWidth=(chosen?3.4:legal?3:2.4)*unit/z;ctx.stroke(road.path);
-      if(chosen||legal){
-        // 活跃路线细密点划叠芯：能量节奏（静态纹理，不占空闲绘制）。
-        ctx.save();ctx.globalAlpha=(chosen?.5:.32)*(moving?.4:1);ctx.strokeStyle='#e8f4f0';ctx.lineWidth=1.2*unit/z;
-        ctx.setLineDash([2,6]);ctx.stroke(road.path);ctx.setLineDash([]);ctx.restore();
-      }
+      drawMapBrushRoad(ctx,road,unit/z,{alpha:chosen?(moving?.45:.95):legal?.8:.45});
       if(chosen||road.legal){
         const forward=chosen?planned.get(road.edgeKey)===road.fromKey:road.fromKey===`${game.layerIdx},${game.trackPos}`;
         const c=road.section,tip=forward?c.to:c.from,control=forward?c.c2:c.c1;

@@ -61,3 +61,21 @@ function orderHandGroups(groups) {
 }
 
 export { groupHandCards, fanLayout, orderHandGroups };
+
+// 每回合保留槽号；复制/合并与费用变化按 UID 继承旧槽，新组只追加。
+export function createStableHandSlots() {
+  let epoch = null, slots = [];
+  return (groups, token, turn) => {
+    const nextEpoch = `${token}:${turn}`;
+    if (nextEpoch !== epoch) { epoch = nextEpoch; slots = []; }
+    const assigned = new Set();
+    const result = groups.map(group => {
+      let index = slots.findIndex((slot, i) => !assigned.has(i) && (slot.key === group.key || slot.uids.some(uid => group.uids.includes(uid))));
+      if (index < 0) index = slots.length;
+      slots[index] = { key: group.key, uids: group.uids.slice() };
+      assigned.add(index);
+      return { ...group, displaySlot: index };
+    });
+    return { groups: result.sort((a,b) => a.displaySlot - b.displaySlot), count: slots.length };
+  };
+}

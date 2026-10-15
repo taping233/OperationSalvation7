@@ -107,24 +107,25 @@ describe('expedition view DOM rendering', () => {
     expect(document.getElementById('routePanel')).toBeNull();
   });
 
-  it('已消耗的相邻节点与脚下节点统一显示空白图标，仍可进入', () => {
+  it('已消耗的相邻节点与脚下节点保留原类型并明确已完成，仍可进入', () => {
     const g = makeGame({ visited: { '0,1': 1 } });
     setExpeditionPreview(g, g.nodes[1]);
     renderExpeditionPanel(null, g, icon => icon);
     let strip = document.querySelector('.expedition-map-preview');
-    expect(strip.querySelector('b').textContent).toBe('空白节点');
-    expect(strip.querySelector('.empty-node-icon')).not.toBeNull();
+    expect(strip.querySelector('b').textContent).toBe('遭遇战 · 已完成');
+    expect(strip.querySelector('.empty-node-icon')).toBeNull();
+    expect(strip.querySelector('.map-node-painted')).not.toBeNull();
     expect(strip.textContent).toContain('内容已消耗');
     expect(strip.querySelector('[data-route-enter]').disabled).toBe(false);
     g.trackPos = 1;
     setExpeditionPreview(g, g.nodes[1]);
     renderExpeditionPanel(null, g, icon => icon);
     strip = document.querySelector('.expedition-map-preview');
-    expect(strip.querySelector('b').textContent).toBe('空白节点');
-    expect(strip.querySelector('.empty-node-icon')).not.toBeNull();
+    expect(strip.querySelector('b').textContent).toBe('遭遇战 · 已完成');
+    expect(strip.querySelector('.empty-node-icon')).toBeNull();
     expect(strip.querySelector('[data-route-enter]').disabled).toBe(false);
     expect(document.querySelector('.expedition-toolbar-location')).toBeNull();
-    expect(strip.querySelectorAll('.empty-node-icon')).toHaveLength(1);
+    expect(strip.querySelectorAll('.map-node-painted')).toHaveLength(1);
   });
 
   it('行动中保留单节点信息，但进入动作不可用', () => {
@@ -225,5 +226,11 @@ describe('expedition view DOM rendering', () => {
     expect(strip.querySelector('[data-route-enter]').textContent).toContain('查看本地内容');
     expect(document.querySelector('#expeditionChapter img')).toBeNull();
     expect(document.getElementById('expeditionChapter').textContent).toContain('<img');
+  });
+  it('地图不渲染操作图例和地点列表，消耗区保持原标签', () => {
+    const g = makeGame({ usedPocket:[{ card:{ type:'装备' }, count:2 }] });
+    renderExpeditionPanel(null, g, icon => icon);
+    expect(document.querySelector('.expedition-map-guide')).toBeNull();
+    expect(document.querySelector('[data-expedition-tool="pocket"]').getAttribute('aria-label')).toBe('消耗区：已消耗卡牌 2');
   });
 });

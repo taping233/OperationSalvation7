@@ -24,7 +24,8 @@ const Aim = await import('../game/src/battle/view/battle.aim.js');
 const { closeHandInspector, syncHandInspector } = await import('../game/src/battle/view/battle.hand-inspector.js');
 const { clearFeedback } = await import('../game/src/battle/view/battle.feedback.js');
 const { mountUnitLayer, updateUnits } = await import('../game/src/battle/view/battle.layers.js');
-const { set$energy } = await import('../game/src/battle/runtime/battle.runtime.session.js');
+const { forecastEnemyTurn } = await import('../game/src/battle/view/battle.turn-forecast.js');
+const { set$energy, set$turn } = await import('../game/src/battle/runtime/battle.runtime.session.js');
 const Cards = window.SDT.Cards;
 Cards.ensureSha(); Cards.ensureStarters(); Cards.ensureTabletop(); Cards.ensureDmgTypes(); Cards.ensureEffectFields();
 const mockedIcons = window.SDT.Icons;
@@ -49,7 +50,7 @@ async function settle() {
 function start(count = 1, entry = Cards.SHA, extra = []) {
   game = {
     ownedCards: [{ uid: 'inspect-card', card: entry }, ...extra], inventory: [], usedPocket: [], hp: 30, maxHp: 30, atk: 4, spellPower: 0, coins: 0,
-    myClass: null, state: 'idle', battleActive: false, log() {}, heal() {}, addItem() {}, onBattleEnd() {},
+    myClass: null, state: 'idle', battleActive: false, log() {}, heal() {}, addItem() {}, onBattleEnd(opts) { this.lastBattleSummary = opts.battleSummary; },
   };
   window.SDT.game = game;
   BattleSession.start(game, Array.from({ length: count }, (_, i) => ({ id: `foe-${i}`, name: `敌人${i}`, hp: 40, atk: 1 })), { isBoss: false });
@@ -78,7 +79,7 @@ afterEach(async () => {
 it.each([1, 2])('clicking with %s enemies only inspects; explicit use still requires target confirmation', async count => {
   start(count);
   const before = BattleSession.getSnapshot();
-  card().click();
+  card().querySelector('[data-act=btCardDetails]').click();
   expect(panel()?.getAttribute('aria-modal')).toBe('true');
   expect(panel().querySelector('.hs-card.lg')).not.toBeNull();
   expect(stage().inert).toBe(true);
@@ -97,7 +98,7 @@ it.each([1, 2])('clicking with %s enemies only inspects; explicit use still requ
 it('keeps untargeted cards read-only until explicit use, and a repeated old confirmation cannot spend twice', async () => {
   start(1, { id: 'inspect-coins', name: '金币试验牌', type: '法术', rarity: '古朴', cost: 1, desc: '获得 3 金币。',
     rules: { version: 1, battle: { target: { side: null, area: false } }, triggers: { onPlay: [{ op: 'coins', n: 3 }] } } });
-  card().click(); expect(game.coins).toBe(0);
+  card().querySelector('[data-act=btCardDetails]').click(); expect(game.coins).toBe(0);
   const use = panel().querySelector('.bt-hand-detail-use'); use.click(); use.click();
   await settle();
   expect(game.coins).toBe(3);
@@ -109,7 +110,7 @@ it('opens from number/Enter keys, traps focus and blocks combat hotkeys until Es
   document.dispatchEvent(new KeyboardEvent('keydown', { key: '1', isComposing: true, bubbles: true }));
   card().dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', isComposing: true, bubbles: true }));
   expect(panel()).toBeNull();
-  document.dispatchEvent(new KeyboardEvent('keydown', { key: '1', bubbles: true }));
+  document.dispatchEvent(new KeyboardEvent('keydown', { key: '1', shiftKey: true, bubbles: true }));
   expect(panel()).not.toBeNull();
   const use = panel().querySelector('.bt-hand-detail-use'); use.focus();
   use.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true }));
@@ -120,7 +121,7 @@ it('opens from number/Enter keys, traps focus and blocks combat hotkeys until Es
   expect(panel()).not.toBeNull();
   document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
   expect(panel()).toBeNull(); expect(stage().inert).toBe(false); expect(document.activeElement).toBe(card());
-  card().dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
+  card().dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', shiftKey: true, bubbles: true, cancelable: true }));
   expect(panel()).not.toBeNull(); expect(BattleSession.getSnapshot().energy).toBe(9);
 });
 
@@ -143,7 +144,7 @@ it('keeps nine hand identities and stable corner controls while rerendering the 
   expect(stage().querySelectorAll('[data-act="btSettings"]')).toHaveLength(1);
 });
 
-it('opens on a pointer tap without movement and suppresses the following synthetic click', () => {
+it('selects a target on a pointer tap and suppresses the following synthetic click', () => {
   start();
   expect([...stage().querySelectorAll('.bt-card')].map(node => node.dataset.uid)).toEqual(['inspect-card']);
   const down = new MouseEvent('pointerdown', { bubbles: true, button: 0, clientX: 20, clientY: 600 });
@@ -151,21 +152,22 @@ it('opens on a pointer tap without movement and suppresses the following synthet
   expect(Aim.aim?.uid).toBe('inspect-card');
   const up = new MouseEvent('pointerup', { bubbles: true, button: 0, clientX: 20, clientY: 600 });
   Object.defineProperty(up, 'pointerId', { value: 1 }); window.dispatchEvent(up);
-  expect(panel()).not.toBeNull(); card().click();
-  expect(document.querySelectorAll('.bt-hand-detail')).toHaveLength(1);
+  expect(panel()).toBeNull(); card().click();
+  expect(Aim.clickSelectedUid).toBe('inspect-card');
+  expect(document.querySelectorAll('.bt-hand-detail')).toHaveLength(0);
   expect(BattleSession.getSnapshot().foes[0].hp).toBe(40);
 });
 
 it('keeps unavailable cards readable and prevents stale confirmations after a battle switch', () => {
-  start(); set$energy(0); render(); card().click();
+  start(); set$energy(0); render(); card().querySelector('[data-act=btCardDetails]').click();
   expect(panel().querySelector('.bt-hand-detail-use').disabled).toBe(true);
   expect(panel().textContent).toContain('能量不足');
-  closeHandInspector(); set$energy(9); render(); card().click();
+  closeHandInspector(); set$energy(9); render(); card().querySelector('[data-act=btCardDetails]').click();
   const oldStage = stage(), oldUse = panel().querySelector('.bt-hand-detail-use');
   start(); oldUse.click();
   expect(panel()).toBeNull(); expect(oldStage.inert).toBe(false);
   expect(BattleSession.getSnapshot().foes[0].hp).toBe(40);
-  card().click();
+  card().querySelector('[data-act=btCardDetails]').click();
   const currentPanel = panel(); oldUse.click();
   expect(panel()).toBe(currentPanel);
   expect(Aim.clickSelectedUid).toBeNull();
@@ -174,7 +176,7 @@ it('keeps unavailable cards readable and prevents stale confirmations after a ba
 });
 
 it('removes the inspector and restores inert state when the whole overlay is hidden', async () => {
-  start(); card().click();
+  start(); card().querySelector('[data-act=btCardDetails]').click();
   const oldStage = stage();
   UI.el.overlay.hidden = true;
   await Promise.resolve();
@@ -184,11 +186,11 @@ it('removes the inspector and restores inert state when the whole overlay is hid
 
 it('inspects infusion cards and materials before either entering or changing the selection', () => {
   start(1, { id: 'inspect-infuse', name: '注能护体', type: '法术', cost: 1, infuse: 1, desc: '注能(1)：获得 6 点护盾。' }, [{ uid: 'inspect-fuel', card: Cards.SHA }]);
-  UI.el.ovBody.querySelector('.bt-card[data-uid="inspect-card"]').click();
+  UI.el.ovBody.querySelector('.bt-card[data-uid="inspect-card"] [data-act=btCardDetails]').click();
   expect(BattleSession.getSnapshot().infusing).toBeNull();
   panel().querySelector('.bt-hand-detail-use').click(); flush();
   expect(BattleSession.getSnapshot().infusing.picked).toEqual([]);
-  UI.el.ovBody.querySelector('.bt-card[data-uid="inspect-fuel"]').click();
+  UI.el.ovBody.querySelector('.bt-card[data-uid="inspect-fuel"] [data-act=btCardDetails]').click();
   expect(BattleSession.getSnapshot().infusing.picked).toEqual([]);
   expect(panel().querySelector('.bt-hand-detail-use').textContent).toBe('选作注能材料');
   panel().querySelector('.bt-hand-detail-use').click(); flush();
@@ -209,7 +211,7 @@ it.each(['cost', 'id', 'desc'])('keeps distinct hand groups keyed by %s and remo
   expect(uids()).toEqual(['inspect-card', 'separate-copy']); render(); expect(uids()).toEqual(['inspect-card', 'separate-copy']);
   BattleSession.commands.playCard('inspect-card', 0); await settle();
   expect(BattleSession.getSnapshot().hand).toEqual(['separate-copy']); expect(uids()).toEqual(['separate-copy']);
-  card().click(); expect(panel()).not.toBeNull(); panel().querySelector('.bt-hand-detail-use').click();
+  card().querySelector('[data-act=btCardDetails]').click(); expect(panel()).not.toBeNull(); panel().querySelector('.bt-hand-detail-use').click();
   expect(Aim.clickSelectedUid).toBe('separate-copy');
   UI.el.ovBody.querySelector('.bt-foe[data-eidx="0"]').click(); await settle();
   expect(BattleSession.getSnapshot().hand).toEqual([]); expect(uids()).toEqual([]);
@@ -220,7 +222,7 @@ it('leaves the original playable when its generated zero-cost copy is played fir
   start(2, original, [{ uid: 'free-copy', card: { ...original, cost: 0, _baseCost: original.cost } }]);
   BattleSession.commands.playCard('free-copy', 0); await settle();
   expect([...stage().querySelectorAll('.sts-hand .bt-card')].map(node => node.dataset.uid)).toEqual(['inspect-card']);
-  card().click(); expect(panel().querySelector('.bt-hand-detail-use').disabled).toBe(false);
+  card().querySelector('[data-act=btCardDetails]').click(); expect(panel().querySelector('.bt-hand-detail-use').disabled).toBe(false);
   panel().querySelector('.bt-hand-detail-use').click();
   UI.el.ovBody.querySelector('.bt-foe[data-eidx="0"]').click(); await settle();
   expect(stage().querySelectorAll('.sts-hand .bt-card')).toHaveLength(0);
@@ -241,7 +243,7 @@ it('keeps short card rules in the single large card without a redundant full-rul
   start();
   expect(stage().querySelector('.bt-hand-inspect')).toBeNull();
   const before = BattleSession.getSnapshot();
-  card().click();
+  card().querySelector('[data-act=btCardDetails]').click();
   expect(panel().querySelector('.bt-hand-detail-copy')).toBeNull();
   expect(panel().querySelector('.hsc-desc').textContent).toContain('攻击伤害');
   closeHandInspector();
@@ -252,7 +254,7 @@ it('keeps short card rules in the single large card without a redundant full-rul
 it('renders every long-rule condition through the shared safe rich-text copy without spending or changing focus contracts', () => {
   const description = '回合开始时：获得 2 点能量。对敌人造成 3 点攻击伤害并施加 2 层流血。回合结束时：若你仍有护甲，回复 4 点生命。此牌仅本场战斗生效，消耗后不计之前战斗，不能改变上述触发时点。<img src=x onerror=alert(1)> & "保留原句"';
   start(1, { id: 'inspect-long-rules', name: '完整条件试验牌', type: '法术', rarity: '古朴', cost: 1, desc: description });
-  const before = BattleSession.getSnapshot(); card().click();
+  const before = BattleSession.getSnapshot(); card().querySelector('[data-act=btCardDetails]').click();
   const rules = panel().querySelector('.bt-hand-detail-rules.card-rules-copy');
   expect(rules).not.toBeNull();
   expect(rules.textContent).toBe(description);
@@ -315,4 +317,70 @@ it('renders real unit icon bitmaps synchronously before observer/rAF hydration a
     expect(head.firstChild).toBe(first);
     expect(BattleSession.getSnapshot()).toEqual(before);
   } finally { window.SDT.Icons = mockedIcons; }
+});
+
+
+it('single click selects a target and details stay separately accessible', async () => {
+  start(1); card().click();
+  expect(panel()).toBeNull(); expect(Aim.clickSelectedUid).toBe('inspect-card');
+  expect(BattleSession.getSnapshot().foes[0].hp).toBe(40);
+  UI.el.ovBody.querySelector('.bt-foe[data-eidx="0"]').click(); await settle();
+  expect(BattleSession.getSnapshot().foes[0].hp).toBeLessThan(40);
+});
+
+it('directly toggles infusion materials without opening the inspector', () => {
+  start(1, { id:'fresh-infusion', name:'注能护体', type:'法术', cost:1, infuse:1, desc:'注能(1)：获得 6 点护盾。' }, [{ uid:'fuel', card:Cards.SHA }]);
+  UI.el.ovBody.querySelector('[data-act=btInfuseStart]').click(); flush();
+  UI.el.ovBody.querySelector('.bt-card[data-uid="fuel"]').click(); flush();
+  expect(panel()).toBeNull();
+  expect(BattleSession.getSnapshot().infusing.picked).toEqual(['fuel']);
+  document.dispatchEvent(new KeyboardEvent('keydown', {key:'1',bubbles:true,cancelable:true})); flush();
+  expect(BattleSession.getSnapshot().infusing.picked).toEqual([]);
+});
+
+it('keeps remaining shortcut numbers after a lower slot leaves', async () => {
+  const fireball = Cards.all().find(c => c.id === 'tt3-fireball');
+  start(2, Cards.SHA, [{uid:'second',card:fireball}]);
+  const second = () => stage().querySelector('.bt-card[data-uid="second"]');
+  expect(second().dataset.handIndex).toBe('2');
+  BattleSession.commands.playCard('inspect-card',0); await settle();
+  expect(second().dataset.handIndex).toBe('2');
+});
+
+it('shows and executes a structured raygun skill once despite repeated input', async () => {
+  const gun = Cards.all().find(c => c.id === 'tt12-raygun');
+  start(1, gun); BattleSession.commands.playCard('inspect-card', 'self'); await settle();
+  const skill = stage().querySelector('[data-act=btEquipSkill]');
+  expect(skill).not.toBeNull(); expect(skill.disabled).toBe(false);
+  skill.click(); skill.click(); await settle();
+  const snap = BattleSession.getSnapshot();
+  expect(snap.equipped[0].used).toBe(true);
+  expect(snap.discovering.options.length).toBeGreaterThan(0);
+  expect(snap.discovering.act).toBe('play');
+  BattleSession.commands.pickDiscover(snap.discovering.options.findIndex(c => !c.infuse)); await settle();
+  expect(BattleSession.getSnapshot().foes[0].hp).toBeLessThan(40);
+});
+
+it('calculates defense before warning and provides return or continue only for lethal turns', () => {
+  start();
+  const snapshot = BattleSession.getSnapshot();
+  const input = { ...snapshot, player:{...snapshot.player,hp:3}, pdef:{shield:0,armor:5,guard:false}, foes:[{...snapshot.foes[0],atk:8}] };
+  const before = JSON.stringify(input);
+  expect(forecastEnemyTurn(input)).toMatchObject({damage:3,hpAfter:0,lethal:true});
+  expect(JSON.stringify(input)).toBe(before);
+  expect(forecastEnemyTurn({...input,pdef:{shield:0,armor:6,guard:false}})).toMatchObject({damage:2,lethal:false});
+});
+
+it('warns only on lethal end turn and lets the player return or proceed', async () => {
+  start(); game.hp = 1; set$turn(2); render();
+  stage().querySelector('[data-act=btEnd]').click();
+  expect(UI.el.ovBody.querySelector('[data-act=btRiskBack]')).not.toBeNull();
+  UI.el.ovBody.querySelector('[data-act=btRiskBack]').click();
+  expect(stage()).not.toBeNull(); expect(game.hp).toBe(1);
+  stage().querySelector('[data-act=btEnd]').click();
+  UI.el.ovBody.querySelector('[data-act=btRiskContinue]').click();
+  await settle(); expect(game.battleActive).toBe(false); expect(game.hp).toBe(0);
+  expect(game.lastBattleSummary.round).toBe(2);
+  expect(game.lastBattleSummary.damageTaken).toEqual([{source:'敌人0',damage:1,round:2}]);
+  expect(Object.isFrozen(game.lastBattleSummary.remainingFoes)).toBe(true);
 });

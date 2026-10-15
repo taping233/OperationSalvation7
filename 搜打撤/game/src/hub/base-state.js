@@ -14,8 +14,8 @@ export function createBaseState() {
     nestBagUp: 0,   // 符文背包升级次数（10 + n 格，上限 25）
     eggPity: 0,     // 宠物蛋硬保底：连续未实际加入蛋的宝箱奖励次数（第 150 次保底，加入蛋归零）
     stash: [],      // 卡牌仓库 [{card, count}]——出发时自选携带；「初始攻击」不可入库
-    pocket: [],     // 基地消耗口袋 [{card, count}]，用钥匙复原后才回仓库
-    pets: {},       // 已拥有宠物 [宠物id] => { lv, ts }（宠物蛋孵化；初始宠物汪汪狗自动获得）
+    pocket: [],     // 基地消耗区 [{card, count}]，用钥匙复原后才回仓库
+    pets: {},       // 已拥有宠物 [宠物id] => { lv, ts }（宠物蛋孵化；初始宠物旺财自动获得）
     petSel: null,   // 当前携带的宠物 id（出发携带效果 / 安全格数量随之变化）
     collection: {}, // 收藏图鉴 [卡牌id] => { name, rarity, ts }（[[icon:sparkles]]收藏中的物品）
     // ---- 局外成长（v0.9 职业熟练度与成就） ----

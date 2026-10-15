@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="css/winter.css" />
 <link rel="stylesheet" href="css/expedition.css" />
 <link rel="stylesheet" href="css/expedition-map.css" />
+<link rel="stylesheet" href="css/map-edge-light.css" />
 <link rel="stylesheet" href="css/expedition-hub.css" />
 <link rel="stylesheet" href="css/expedition-inventory.css" />
 <link rel="stylesheet" href="css/expedition-rewards.css" />
@@ -54,6 +55,7 @@
 <link rel="stylesheet" href="css/base-camp.css" />
 <link rel="stylesheet" href="css/base-camp-compact.css" />
 <link rel="stylesheet" href="css/card-layout-selected.css" />
+<link rel="stylesheet" href="css/battle-stage.css" />
 </head>
 <body>
 <div id="app">
@@ -83,6 +85,15 @@
   <main id="viewport">
     <canvas id="game"></canvas>
     <div class="map-volumetric-light" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="map-edge-light" aria-hidden="true">
+      <i style="--x:24%;--y:28%;--t:7s;--delay:-2s"></i>
+      <i style="--x:31%;--y:63%;--t:9s;--delay:-6s"></i>
+      <i style="--x:43%;--y:47%;--t:8s;--delay:-7s"></i>
+      <i style="--x:48%;--y:76%;--t:12s;--delay:-3s"></i>
+      <i style="--x:61%;--y:57%;--t:7s;--delay:-5s"></i>
+      <i style="--x:68%;--y:22%;--t:10s;--delay:-8s"></i>
+      <i style="--x:74%;--y:71%;--t:13s;--delay:-4s"></i>
+    </div>
     <div id="layerBanner" aria-hidden="true">
       <div class="lb-zh" id="layerBannerZh">—</div>
       <div class="lb-en" id="layerBannerEn"></div>
@@ -161,6 +172,25 @@
             <svg class="home-line-icon home-city-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M5 34V17h8V9h14v8h8v17M13 17h14M16 34v-9a4 4 0 0 1 8 0v9M4 34h32M17 13h6M9 22v3M31 22v3M17 4v5M23 4v5"/></svg>
             <span class="home-button-copy"><span class="home-button-cn">进入城市</span></span>
             <svg class="home-arrow" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 16h21M18 7l9 9-9 9" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+            <svg class="home-city-current" viewBox="0 0 220 240" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="cityBeacon" x1="0" y1="1" x2="0" y2="0"><stop stop-color="#dceef4" stop-opacity=".7"/><stop offset=".5" stop-color="#c4dee9" stop-opacity=".18"/><stop offset="1" stop-color="#c4dee9" stop-opacity="0"/></linearGradient>
+                <filter id="citySoft" x="-.5" y="-.3" width="2" height="1.6"><feGaussianBlur stdDeviation="3"/></filter>
+                <clipPath id="citySignalClip"><path d="M100 184L108 30H150L146 184Z"/></clipPath>
+              </defs>
+              <path class="city-beam" fill="url(#cityBeacon)" d="M100 184L108 30H150L146 184Z"/>
+              <path class="city-beam-soft" fill="url(#cityBeacon)" filter="url(#citySoft)" d="M94 184L105 38H154L153 184Z"/>
+              <path fill="#162332" stroke="#a5bbc766" stroke-width="1" d="M93 185L137 171L154 184L109 199Z"/>
+              <path fill="#314351" d="M93 185L109 193L154 180V188L109 202L93 194Z"/>
+              <path class="city-emitter" fill="none" stroke="#edf7f8" stroke-width="2.5" d="M102 185L137 175L146 181L111 192"/>
+              <path fill="none" stroke="#d8edf2" stroke-width="5" opacity=".45" filter="url(#citySoft)" d="M102 185L137 175L146 181L111 192"/>
+              <g clip-path="url(#citySignalClip)" fill="none" stroke="#d7edf4" stroke-width="1.2">
+                <path class="city-signal signal-a" d="M102 166H119M127 166H148M103 170H111"/>
+                <path class="city-signal signal-b" d="M104 166H131M139 166H148"/>
+              </g>
+              <path class="city-guide-line" fill="none" stroke="#b3ccd3" stroke-width=".8" d="M78 196H97M158 176H173V168M113 207H149"/>
+              <g fill="#e3f0f3"><circle class="city-mote mote-a" cx="116" cy="74" r="1.5"/><circle class="city-mote mote-b" cx="148" cy="115" r="1"/><circle cx="78" cy="196" r="1.4"/></g>
+            </svg>
           </button>
           <button class="home-plate home-guide" id="mGuide" title="生存指南" aria-label="打开生存指南">
             <svg class="home-line-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 7c4-2 8-2 12 0 4-2 8-2 12 0v20c-4-2-8-2-12 0-4-2-8-2-12 0zM16 7v20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>

@@ -50,6 +50,7 @@ beforeEach(async () => {
   openBaseHub = vi.fn(() => { game.state = 'modal'; });
   altarState.openBaseHub = openBaseHub;
   UI = {
+    el: { ovBody: document.getElementById('body') },
     acts: {}, showOverlay: (_title, html) => { document.getElementById('body').innerHTML = html; },
     hideOverlay: () => { UI.acts = {}; }, act: (name, fn) => { UI.acts[name] = fn; },
     log: vi.fn(), refresh: vi.fn(), registerHelp: vi.fn(), helpBtn: () => '',

@@ -1,5 +1,5 @@
 /* 指向施法：按真实 STS2 NMouseCardPlay / NHandCardHolder 接入中心跟随、出牌线与取消线。
- * 点击先阅读，拖拽释放到合法目标可直接提交；本片经 battle.core 执行命令。 */
+ * 点击选目标，独立详情入口阅读；拖拽释放到合法目标直接提交。 */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { scale as uiScale, viewport as uiViewport } from '../../ui/ui-scale.js';
@@ -34,7 +34,7 @@ import { commands, getSnapshot, getBattleLiveness, effCostOf, findCard, infuseOf
     return !!reason;
   }
   const closeHandCardDetails = closeHandInspector;
-  // 单击只阅读；确认使用才进入原有注能/选目标/出牌命令。
+  // 独立详情入口；查看期间不消耗卡牌，面板内仍可选择使用。
   function showHandCardDetails(uid) {
     if (aim) cancelAim();
     cancelClickSelection();
@@ -244,7 +244,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     clickSelectedUid = null;
     document.querySelectorAll('.sts-hand .bt-card.click-selected').forEach(el => {
       el.classList.remove('click-selected');
-      el.setAttribute('aria-pressed', 'false');
+      el.querySelector('.hs-card')?.setAttribute('aria-pressed', 'false');
       el.dataset.handState = el.dataset.blockReason ? 'blocked' : 'ready';
     });
     updateClickSelectionUI();
@@ -272,7 +272,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       clickSelectedUid = null;
       document.querySelectorAll('.sts-hand .bt-card.click-selected').forEach(el => {
         el.classList.remove('click-selected');
-        el.setAttribute('aria-pressed', 'false');
+        el.querySelector('.hs-card')?.setAttribute('aria-pressed', 'false');
         el.dataset.handState = el.dataset.blockReason ? 'blocked' : 'ready';
       });
       updateClickSelectionUI();
@@ -348,13 +348,13 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     });
     document.querySelectorAll('.sts-hand .bt-card.click-selected').forEach(el => {
       el.classList.remove('click-selected');
-      el.setAttribute('aria-pressed', 'false');
+      el.querySelector('.hs-card')?.setAttribute('aria-pressed', 'false');
       el.dataset.handState = el.dataset.blockReason ? 'blocked' : 'ready';
     });
     const el = [...document.querySelectorAll('.sts-hand .bt-card')].find(x => x.dataset.uid === uid);
     if (el) {
       el.classList.add('click-selected');
-      el.setAttribute('aria-pressed', 'true');
+      el.querySelector('.hs-card')?.setAttribute('aria-pressed', 'true');
       el.dataset.handState = 'selected';
       if (focusTarget) flashCardPickup(el);
     }
@@ -638,11 +638,11 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       return;
     }
 
-    // overlay 捕获 pointerup，轻点只打开详情；真正拖动仍沿原目标释放规则。
+    // overlay 捕获 pointerup，轻点进入目标选择，拖动沿目标释放规则。
     if (!wasMoved) {
       finishAim(a);
       aimPlayedAt = Date.now();
-      showHandCardDetails(a.uid);
+      selectCardByClick(a.uid, false, { autoSingleTarget: false });
       return;
     }
 

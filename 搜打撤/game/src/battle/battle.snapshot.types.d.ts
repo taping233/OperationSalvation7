@@ -95,6 +95,8 @@ export type BattleSnapshotInput = {
   busy: boolean;
   phase: string;
   actionQueueLength: number;
+  playedMovesThisTurn?: number;
+  endTurnContext?: { deathSave: number; timeRune: boolean; extraTurn: boolean };
   opts: Record<string, unknown> | null;
   player: { hp: number; maxHp: number; atk: number; spellPower: number; [key: string]: unknown } | null;
   pdef: ({ [key: string]: unknown } & { shield?: number; armor?: number; guard?: boolean }) | null;
@@ -173,6 +175,8 @@ export type BattleSnapshot = {
   readonly busy: boolean;
   readonly phase: string;
   readonly actionQueueLength: number;
+  readonly playedMovesThisTurn?: number;
+  readonly endTurnContext?: Readonly<{ deathSave: number; timeRune: boolean; extraTurn: boolean }>;
   readonly opts: Readonly<Record<string, unknown>> | null;
   readonly player: ({ readonly atk: number; readonly spellPower: number; readonly [key: string]: unknown }) | null;
   readonly pdef: Readonly<Record<string, unknown>> | null;

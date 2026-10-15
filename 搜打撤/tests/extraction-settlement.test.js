@@ -79,7 +79,7 @@ it('真实撤离命令创建整理快照，资源自动入库并打开整理页'
   expect(base.depositCards).not.toHaveBeenCalled();
 });
 
-it('消耗口袋 1/3 保留：恒保留侧四张全带回且日志/快照一致', async () => {
+it('消耗区 1/3 保留：恒保留侧四张全带回且日志/快照一致', async () => {
   altarState.random.mockReturnValue(0);
   expect(await doExtract()).toBe(true);
   expect(altarState.random).toHaveBeenCalledTimes(4);
@@ -90,7 +90,7 @@ it('消耗口袋 1/3 保留：恒保留侧四张全带回且日志/快照一致'
   expect(base.data.pocket).toEqual([{ card: { id: 'a', name: '口袋卡' }, count: 4 }]);
 });
 
-it('消耗口袋 1/3 保留：恒散失侧全部散失且不进入基地口袋', async () => {
+it('消耗区 1/3 保留：恒散失侧全部散失且不进入基地口袋', async () => {
   altarState.random.mockReturnValue(0.99);
   expect(await doExtract()).toBe(true);
   expect(altarState.random).toHaveBeenCalledTimes(4);

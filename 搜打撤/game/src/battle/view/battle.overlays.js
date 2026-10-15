@@ -132,7 +132,7 @@ function installPileInspection(stacks) {
     showBattleDecision(`${snapshot.opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · [[icon:skull]] 消耗牌`, `
       <p class="ov-stats">被消耗的牌共 <b>${cards.length}</b> 张 —— ${statLine}</p>
       <div class="battle-pile-layout"><div class="bt-gy-list">${listHTML}</div>${pileDetailHTML(stacks[0])}</div>
-      <p class="ov-note">被消耗的牌<b>不会在牌库空后洗回</b>；打出的牌进弃牌堆并参与洗回。战后按实际卡牌规则入口袋或消散。</p>
+      <p class="ov-note">被消耗的牌<b>不会在牌库空后洗回</b>；打出的牌进弃牌堆并参与洗回。战后按实际卡牌规则入消耗区或消散。</p>
       <div class="ov-btns"><button class="ov-btn ok" data-act="btGraveBack">↩ 返回战斗</button></div>`, true, snapshot);
     UI.act('btGraveBack', closeGrave);
     installPileInspection(stacks);

@@ -7,7 +7,7 @@ import * as Combat from '../core/combat.js';
 import { itemTargetSideFor } from '../effects/battle.target-rules.js';
 import { getHostedExecutionCard } from '../effects/battle.hosted.js';
 import { G, foes, mode, energy, busy, infusing, discovering, choosing, handSelecting, viewingGrave, selectingDeck, viewingBag, pstat, floats, consumed, grave, hand, cardAnims, delayed, set$energy, set$viewingBag, battleState } from '../runtime/battle.runtime.js';
-import { slamSkillFor, SLAM_SKILL_PRIEST_FLIPPED } from './battle.slam-skill.js';
+import { slamSkillFor } from './battle.slam-skill.js';
 import { removeUid } from './battle.piles.js';
 
 export function createBattleBag({
@@ -283,7 +283,7 @@ export function createBattleBag({
   // —— 背包技能（2026-10-02 老板：背包砸击换成技能，按五职业分化；原砸击=2 费 4 固定伤）——
   // 技能表单源在 battle.slam-skill.js（view 按钮/aim 拖拽/agent 策略共用）；本文件只管结算。
   // 牧师翻面态按战斗实例令牌键控（lifecycle 每场 createBattleState 递增 token）：
-  // 新一场自动复位；本局翻一次后固定；读档从本场开头重开 = 新 token，同样复位。
+  // 新一场自动复位；每次使用后交替切换；读档从本场开头重开 = 新 token，同样复位。
   let slamFlipToken = 0;
   let slamUsedToken = -1, slamUsedTurn = -1;
   function slamSkill() {
@@ -409,6 +409,7 @@ export function createBattleBag({
         // hitFoe 已负责伤害浮字及伤害后的潜行破除，本处只保留技能日志和击杀奖励。
         const type = (SLAM_DAMAGE_TYPE[skill.kind] || SLAM_DAMAGE_TYPE.fixed)();
         const dealt = hitFoe(t, { name: skill.name, desc: '' }, skill.dmg || 0, type, '');
+        if (G.myClass === '牧师') switchSlamSkill(skill);
         G.log(`[[icon:${skill.icon}]] <b>${esc(skill.name)}</b>${skill.kind === 'fireball' ? '施放 1 次火球 → ' : ' → '}${esc(t.name)}：造成 <b>${dealt}</b> 点${Combat.TYPE_NAME[type]}（-${skill.cost} 能量）`, 'sys');
         sweepDead();
         // 击杀数必须在 sweepDead 之后取（dealDamage 只扣血不标倒下）：此前先取后清，
@@ -420,8 +421,12 @@ export function createBattleBag({
       requestBattleRender();
     }, skill.name);
   }
-  // 牧师·圣疗（2026-10-02 老板）：回复 3 血；使用后本局翻面为「惩戒」（3 点法伤，本局固定）。
-  // 禁疗中也翻面——费用已支付、技能已「使用」；翻面只记一次（token 键控），重复结算不会再次翻转
+  function switchSlamSkill(skill) {
+    slamFlipToken = skill.kind === 'heal' ? battleState.token : 0;
+    const next = slamSkill();
+    G.log(`[[icon:${next.icon}]] <b>${esc(skill.name)}</b>已翻面：技能变为「<b>${esc(next.name)}</b>」（${next.hint}）`, 'sys');
+  }
+  // 圣疗回复 3 血后切为惩戒；禁疗中也切换，费用已支付即算使用。
   function resolveSlamHeal(skill) {
     set$energy(energy - skill.cost);
     const n = skill.heal || 0;
@@ -431,10 +436,8 @@ export function createBattleBag({
       G.heal(n);
       floats.push({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
     }
-    const flipped = SLAM_SKILL_PRIEST_FLIPPED;
-    slamFlipToken = battleState.token;
     G.log(`[[icon:${skill.icon}]] <b>${esc(skill.name)}</b>：回复 <b>${n}</b> 点生命（-${skill.cost} 能量）`, 'sys');
-    G.log(`[[icon:${flipped.icon}]] <b>${esc(skill.name)}</b>已翻面：技能变为「<b>${esc(flipped.name)}</b>」（${flipped.hint.replace('（已翻面，本局固定）', '')}），本局固定`, 'sys');
+    switchSlamSkill(skill);
   }
   // 法师·搜刮（2026-10-02 老板）：随机获得一张卡牌入手牌——取池口径对齐神秘药水
   // （isRandomObtainable 单源，battle.bag useItem 同款）：普通战置入手牌、BOSS 战洗入牌库

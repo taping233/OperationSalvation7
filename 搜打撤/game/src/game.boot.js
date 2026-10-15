@@ -191,7 +191,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
       const tag = e.target && e.target.tagName;
       if (tag === 'TEXTAREA' || tag === 'INPUT' || tag === 'SELECT' || e.target?.isContentEditable) return;
       // Native buttons own Space/Enter. Do not let map shortcuts swallow keyboard activation.
-      if ((e.key === ' ' || e.key === 'Enter') && e.target?.closest?.('button,[role="button"]')) return;
+      if ((e.key === ' ' || e.key === 'Enter') && e.target?.closest?.('button,summary,[role="button"]')) return;
       const action = SDT.Input && SDT.Input.actionFor(e);
       if (!action) return;
       switch (action) {
@@ -203,6 +203,8 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
         case 'movePrev': e.preventDefault(); chooseNextTarget(-1); break;
         case 'moveConfirm': e.preventDefault(); confirmTarget(); break;
         case 'moveCancel':
+          // IME Escape cancels composition before any overlay or map action.
+          if (e.isComposing || e.keyCode === 229) return;
           e.preventDefault();
           // 卡牌特写浮层挂在 body（overlay 之外）：Esc 先收回特写，
           // 否则会把底下的背包/整备页一起关掉、特写残留在画面上
@@ -226,6 +228,16 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     // 底栏背包按钮已删（2026-09-19）；全局浮动背包键已删（2026-10-15 老板：背包页自带左上退出键）
     // 背包入口=B 快捷键与各流程动作（resBag/chestOpenBag/entrySupplyBag 直调 bagSlots.showBackpack）
     document.getElementById('sidebar')?.addEventListener('click', e => {
+      const location = e.target.closest('button[data-route-select]');
+      if (location) {
+        if (location.disabled || game.state !== 'idle') return;
+        const li = Number(location.dataset.li), idx = Number(location.dataset.idx);
+        const node = game.nodes.find(n => n.li === li && n.idx === idx);
+        const fogOn = Object.keys(game.seen || {}).length > 0;
+        if (!node || li !== game.layerIdx || (fogOn && game.seen[`${li},${idx}`] !== 1)) return;
+        if (idx === game.trackPos || isReachable(node)) showTarget(node);
+        return;
+      }
       const routeButton = e.target.closest('.expedition-map-preview button');
       if (routeButton) {
         if (routeButton.disabled || game.state !== 'idle') return;
@@ -406,8 +418,8 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     renderScheduler.invalidate();
     const r = canvas.getBoundingClientRect();
     if (entrySupplyGate(game)) {
-      UI.showTooltip(e.clientX - r.left, e.clientY - r.top, '入城节点 · 须先进入', ['点击脚下的入城节点，打开随行补给后再出发']);
-      UI.log('[[icon:door]] 先进入脚下的入城节点，再前往其他地点', 'warn');
+      UI.showTooltip(e.clientX - r.left, e.clientY - r.top, '入城节点 · 须领完补给', ['点击脚下的入城节点，领取全部随行补给后再出发']);
+      UI.log('[[icon:door]] 领完入城补给后才能前往其他地点', 'warn');
       return;
     }
     UI.showTooltip(e.clientX - r.left, e.clientY - r.top, `${hoverInfo(n)[0]} · 暂不可达`, ['路线中间须为已知的空白或已完成节点']);
@@ -448,7 +460,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
       if (eIdx >= 0) lines.push(`[[icon:door]] 出生入口：${loc.layer.entranceNames[eIdx]}`);
       if (door) lines.push(`[[icon:door]] 环间门${door.reverse ? '（返回）' : ''}${door.exit ? ' / 撤离出口' : ''} ⇄ ${game.layerData[door.toLayer]?.name || '下一层'}`);
       if (altarE) lines.push('[[icon:crystal]] 污染核心入口');
-      if (isConsumedMapNode(game, node)) lines.push('空白节点 · 内容已消耗，仍可通行');
+      if (isConsumedMapNode(game, node)) lines.push(`${TYPE_NAME[def.type] || def.type} · 已完成 · 内容已消耗，仍可通行`);
       else if (def && def.type !== 'entrance') lines.push(`事件：${TYPE_NAME[def.type] || def.type}${def.n ? `（+${def.n}币）` : ''}`);
       else if (eIdx < 0 && !door && !altarE) lines.push('普通格');
     } else {

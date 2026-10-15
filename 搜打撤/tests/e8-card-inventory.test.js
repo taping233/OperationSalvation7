@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
-import { assertInventoryComplete, buildCardInventory, compareMigrationInventories, describeStage, renderCardInventory } from './helpers/e8-card-inventory.js';
+import { assertInventoryComplete, buildCardInventory, compareMigrationInventories, describeStage, isApprovedBackupcellRename, renderCardInventory } from './helpers/e8-card-inventory.js';
 import beforeInventory from '../docs/evidence/e8-card-migration-2026-09-27/catalog-before.json';
 import { approvedRevisionBaseline, RETIRED_1010 } from './helpers/card-catalog-approved-revisions.js';
 import { readFileSync } from 'node:fs';
@@ -178,7 +178,7 @@ describe('E8 isolated production inventory', () => {
     expect(() => assertInventoryComplete(stageGap, boot)).toThrow('count imbalance');
   });
 
-  it('changes only approved IDs (E8 bag heal + M batch onPlay) by adding rules, leaving every other full card untouched', () => {
+  it('changes only approved migrations and the exact backupcell terminology revision', () => {
     const approvedIds = APPROVED_IDS;
     expect(M_BATCH_ONPLAY_IDS.every(id => ALL_M_BATCH_IDS.includes(id))).toBe(true);
     const comparison = compareMigrationInventories(currentBaseline, inventory, approvedIds, HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID);
@@ -191,6 +191,26 @@ describe('E8 isolated production inventory', () => {
     changedSync.cardsSync.cards[0].card.desc += 'changed';
     expect(() => compareMigrationInventories(currentBaseline, changedSync, approvedIds, HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID))
       .toThrow('CARDS_SYNC card fields changed');
+  });
+
+  it('allows only the exact backupcell description rename with its existing rules unchanged', () => {
+    const previous = currentBaseline.production.cards.find(row => row.id === 'tt12-backupcell').card;
+    const current = inventory.production.cards.find(row => row.id === 'tt12-backupcell').card;
+    expect(isApprovedBackupcellRename(previous, current)).toBe(true);
+    for (const mutate of [
+      card => { card.desc += '额外效果'; }, card => { card.cost++; },
+      card => { card.rules.battle.costModifiers[0].amount = 2; },
+      card => { card.extra = true; }, card => { card.id = 'another-card'; },
+    ]) {
+      const changed = clone(current);
+      mutate(changed);
+      expect(isApprovedBackupcellRename(previous, changed)).toBe(false);
+    }
+    expect(isApprovedBackupcellRename({ ...previous, desc: previous.desc + '其他旧文案' }, current)).toBe(false);
+    const changed = clone(inventory);
+    changed.production.cards.find(row => row.id === 'tt12-backupcell').card.cost++;
+    expect(() => compareMigrationInventories(currentBaseline, changed, APPROVED_IDS,
+      HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID)).toThrow('changed IDs differ from approved IDs');
   });
 
   it('神灯只批准已知生产副本的 armor:5 删除及精确 M11 声明', () => {

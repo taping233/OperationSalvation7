@@ -1,8 +1,48 @@
 {
   "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 1397,
+  "count": 1422,
   "assets": [
+    {
+      "path": "scenes/chests/safe-simple-v7/frame-00.webp",
+      "ext": "webp",
+      "license": "项目原创（老板授权 NAI 草稿＋内置 imagegen 透明素材）",
+      "bytes": 199562,
+      "sha256": "cd9f549102b33b3f2e8a5a6d81b17349bffa38c0e14c9a13a7f9ebea2e1188c9",
+      "source": "docs/evidence/2026-10-15-chest-repaint/simple-preview-receipt.json"
+    },
+    {
+      "path": "scenes/chests/safe-simple-v7/frame-01.webp",
+      "ext": "webp",
+      "license": "项目原创（老板授权 NAI 草稿＋内置 imagegen 透明素材）",
+      "bytes": 183892,
+      "sha256": "19830d5e7080c42488874aba116b5dc6be5dda8e5fbcf4f8ac54ea83bd089996",
+      "source": "docs/evidence/2026-10-15-chest-repaint/simple-preview-receipt.json"
+    },
+    {
+      "path": "scenes/chests/safe-simple-v7/frame-02.webp",
+      "ext": "webp",
+      "license": "项目原创（老板授权 NAI 草稿＋内置 imagegen 透明素材）",
+      "bytes": 180958,
+      "sha256": "3fde8e2b661dafe6c1bcf25f0929d98df1413825ccfbfb911a1688a256ad1f8e",
+      "source": "docs/evidence/2026-10-15-chest-repaint/simple-preview-receipt.json"
+    },
+    {
+      "path": "scenes/chests/safe-simple-v7/frame-03.webp",
+      "ext": "webp",
+      "license": "项目原创（老板授权 NAI 草稿＋内置 imagegen 透明素材）",
+      "bytes": 239750,
+      "sha256": "d3c9f87e322e6beadbff73dc82bef748a03a29ddbd3c88279603e473c7defcc3",
+      "source": "docs/evidence/2026-10-15-chest-repaint/simple-preview-receipt.json"
+    },
+    {
+      "path": "scenes/chests/safe-simple-v7/burst.webp",
+      "ext": "webp",
+      "license": "项目原创（老板授权 NAI 草稿＋内置 imagegen 透明素材）",
+      "bytes": 141710,
+      "sha256": "64107ff0efcb2dab6cf420e0d4a43d0edda404ed6ee8c778bfdda3a484ced423",
+      "source": "docs/evidence/2026-10-15-chest-repaint/simple-preview-receipt.json"
+    },
     {
       "path": "battle/fx-sticker-boom.svg",
       "ext": "svg",
@@ -5429,20 +5469,28 @@
       "source": "docs/evidence/2026-10-13-roster-redraw/README.md"
     },
     {
+      "path": "portraits/full/wu-beach.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 378674,
+      "sha256": "027f6fb049a6966a9f3c7662b012075d3f5c7533e9e39fc95c5147a38ccb232a",
+      "source": "docs/evidence/2026-10-15-wu-skin-fill/installed.json"
+    },
+    {
       "path": "portraits/full/wu-casual-v14.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 291698,
-      "sha256": "5718066ab6489e9671ae2f61f9ef948fbfa1ad12acd736bb54b0ae38b9d20ede",
-      "source": "docs/evidence/2026-10-12-WF-base-skins/casual-approved.json"
+      "bytes": 366400,
+      "sha256": "377ac979dcfdc04292e7332326864fb3cccee5defe02537c089653afa6e77f0d",
+      "source": "docs/evidence/2026-10-15-wu-skin-fill/installed.json"
     },
     {
       "path": "portraits/full/wu-spring-v15.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 250418,
-      "sha256": "067206e74f16369751f40e4d03459bc46d439730fe2502c69ca6e504270f365e",
-      "source": "docs/evidence/2026-10-12-pool-wallpaper/asset.json"
+      "bytes": 329108,
+      "sha256": "ec37a0b208a58a39df729ea289cf68075e485c58f44b42583b4fe249ddec83ad",
+      "source": "docs/evidence/2026-10-15-wu-skin-fill/installed.json"
     },
     {
       "path": "portraits/full/wu.webp",
@@ -6280,34 +6328,6 @@
         "sha256": "ecc5b2a6c872f58b73dd2ade8953f73bc5be36e3809d40fe9858f916ffb062ac",
         "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
       }
-    },
-    {
-      "path": "scenes/chests/large-rig-v1/frame-14.webp",
-      "ext": "webp",
-      "bytes": 1020406,
-      "sha256": "c53d350b83cf17394a76f4c1bf6b478dcee0915d5dd2db46f405aea00dbb94ac",
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "scenes/chests/large-rig-v1/frame-15.webp",
-      "ext": "webp",
-      "bytes": 1033864,
-      "sha256": "081f52a3965dbc551a3d14a03e9403d374077fde0e54d1b4e8c12c6d7a851b05",
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "scenes/chests/large-rig-v1/frame-16.webp",
-      "ext": "webp",
-      "bytes": 1040916,
-      "sha256": "2b99084e67d8a733029ff476f796ebc89d67a86a9fb5ad2568e1822a88cfe65f",
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "scenes/chests/large-rig-v1/frame-17.webp",
-      "ext": "webp",
-      "bytes": 1040916,
-      "sha256": "2b99084e67d8a733029ff476f796ebc89d67a86a9fb5ad2568e1822a88cfe65f",
-      "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "scenes/chests/medium-rig-640-v1/frame-00.webp",
@@ -7298,8 +7318,10 @@
     {
       "path": "scenes/scene-chest-anime-v2.webp",
       "ext": "webp",
-      "bytes": 179290,
-      "license": "项目自有（自制/AI 生成）"
+      "bytes": 135098,
+      "license": "项目自有（自制/AI 生成）",
+      "sha256": "841f161e1076e0b4444172f92cf31536cd9d97e5c68718fb15d3d1b88f45e783",
+      "source": "docs/evidence/2026-10-15-supply-scene/install-chest/receipt.json"
     },
     {
       "path": "scenes/scene-chest-boss-anime-v1.webp",
@@ -7346,8 +7368,10 @@
     {
       "path": "scenes/scene-fire-anime-v2.webp",
       "ext": "webp",
-      "bytes": 173650,
-      "license": "项目自有（自制/AI 生成）"
+      "bytes": 191192,
+      "license": "项目自有（自制/AI 生成）",
+      "sha256": "89eb513aae29cf0fc6602f38798f97894cc0ab95022ce59d2ff90cde6443a21d",
+      "source": "docs/evidence/2026-10-15-supply-scene/install-fire-event-v4/receipt.json"
     },
     {
       "path": "scenes/scene-pickup-coin-anime-v2.webp",
@@ -10280,9 +10304,9 @@
       "path": "thumbs/scenes/scene-chest-anime-v2.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 14940,
-      "sha256": "1d47f1b0601136967f01fc0696f867274027b111f2e0da0e12cc7f6171fbedc5",
-      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+      "bytes": 17862,
+      "sha256": "dd8171ff2e052b4be0390176b1b383c174aadcb95e291b741ba1c37a8d46e5eb",
+      "source": "docs/evidence/2026-10-15-supply-scene/install-chest/receipt.json"
     },
     {
       "path": "thumbs/scenes/scene-chest-boss-anime-v1.webp",
@@ -10344,9 +10368,9 @@
       "path": "thumbs/scenes/scene-fire-anime-v2.webp",
       "ext": "webp",
       "license": "项目自有（自制/AI 生成）",
-      "bytes": 13196,
-      "sha256": "cdf3a634ad349dbcefec156ad51179b1f27c185900f5809be1647a9012a945e6",
-      "source": "docs/evidence/2026-10-05-WF-web-5200-1005/manifest-backfill-2026-10-05.json"
+      "bytes": 24132,
+      "sha256": "4ad5311ee3d6f8b1462bc161ee17db1ef45d5b74a7d7aed2d663ef58cbf370b6",
+      "source": "docs/evidence/2026-10-15-supply-scene/install-fire-event-v4/receipt.json"
     },
     {
       "path": "thumbs/scenes/scene-pickup-coin-anime-v2.webp",
@@ -11716,6 +11740,200 @@
         "kind": "fixed-upstream-commit-and-bundled-license",
         "licenseFile": "game/assets/vendor/base-courtyard/rain-LICENSE.txt"
       }
+    },
+    {
+      "path": "scenes/battle/frozen-ruins-1015.webp",
+      "ext": "webp",
+      "bytes": 194026,
+      "sha256": "28bffc69088702a0676d9c823d3a42a4eb57ae2de0aa09b4b110ee15c9b37379",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-15-WF-fresh-run-fixes-1015/scenery-assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "28bffc69088702a0676d9c823d3a42a4eb57ae2de0aa09b4b110ee15c9b37379",
+        "publicationScope": "仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "scenes/battle/contaminated-core-1015.webp",
+      "ext": "webp",
+      "bytes": 192968,
+      "sha256": "f8164af14613afdc981a902d4f8ece8822073cca0850bcd467da19ef524c1868",
+      "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+      "source": "docs/evidence/2026-10-15-WF-fresh-run-fixes-1015/scenery-assets.json",
+      "provenance": {
+        "kind": "exact-recorded-output-hash",
+        "sha256": "f8164af14613afdc981a902d4f8ece8822073cca0850bcd467da19ef524c1868",
+        "publicationScope": "仅本次私有项目交付；不代表第三方公开授权"
+      }
+    },
+    {
+      "path": "ui/home-nodes-1015/city-v1.webp",
+      "ext": "webp",
+      "bytes": 49844,
+      "sha256": "4c3e0e15d025b7cc5704804ba67c97c7bb67720b302182831dfb940a0d30af86",
+      "license": "项目原创，内置 image_gen 生成；原板仅作视觉关系参考",
+      "source": "docs/evidence/2026-10-15-home-nodes-set/install-receipt.json"
+    },
+    {
+      "path": "ui/home-nodes-1015/guide-v1.webp",
+      "ext": "webp",
+      "bytes": 65420,
+      "sha256": "568897bc83f154510af3a347a9c4fa07eb1cd57312dcf378be8fec5cd5c2ca8f",
+      "license": "项目原创，内置 image_gen 生成；原板仅作视觉关系参考",
+      "source": "docs/evidence/2026-10-15-home-nodes-set/install-receipt.json"
+    },
+    {
+      "path": "ui/home-nodes-1015/achievement-v1.webp",
+      "ext": "webp",
+      "bytes": 48170,
+      "sha256": "7ec93116785ca71abdcb466c01b106d1c1c5e672af4746b6692156fbf5e155bf",
+      "license": "项目原创，内置 image_gen 生成；原板仅作视觉关系参考",
+      "source": "docs/evidence/2026-10-15-home-nodes-set/install-receipt.json"
+    },
+    {
+      "path": "ui/home-nodes-1015/photo-v1.webp",
+      "ext": "webp",
+      "bytes": 46178,
+      "sha256": "099df45d76d0e38bc427a80bfb9923048ce044a8d58df80cde5b52cfa762933c",
+      "license": "项目原创，内置 image_gen 生成；原板仅作视觉关系参考",
+      "source": "docs/evidence/2026-10-15-home-nodes-set/install-receipt.json"
+    },
+    {
+      "path": "ui/home-nodes-1015/settings-v1.webp",
+      "ext": "webp",
+      "bytes": 48950,
+      "sha256": "8ea74c456a7854fac323d7ce0172bb0196215645d64728de8da8f206d2c1383e",
+      "license": "项目原创，内置 image_gen 生成；原板仅作视觉关系参考",
+      "source": "docs/evidence/2026-10-15-home-nodes-set/install-receipt.json"
+    },
+    {
+      "path": "ui/home-nodes-1015/credits-v1.webp",
+      "ext": "webp",
+      "bytes": 57702,
+      "sha256": "9dee1f9db360ad33777d83f6ad36834c34fe1b9f3966ad99dddb866e3afaa8a6",
+      "license": "项目原创，内置 image_gen 生成；原板仅作视觉关系参考",
+      "source": "docs/evidence/2026-10-15-home-nodes-set/install-receipt.json"
+    },
+    {
+      "path": "ui/home-nodes-1015/exit-v1.webp",
+      "ext": "webp",
+      "bytes": 69606,
+      "sha256": "6935a8b1882f68f03967b3a46262911970598d5f05d954a96ae2f53148d685fc",
+      "license": "项目原创，内置 image_gen 生成；原板仅作视觉关系参考",
+      "source": "docs/evidence/2026-10-15-home-nodes-set/install-receipt.json"
+    },
+    {
+      "path": "scenes/map-brush-1015/battle.webp",
+      "ext": "webp",
+      "license": "AI生成（本项目原创，内置 image_gen）",
+      "bytes": 46598,
+      "sha256": "7eb923261af7dd1731ee3c067cdfd8cba8fbda8bf7660221c58e04283cd100d1",
+      "source": "docs/evidence/2026-10-15-map-brush/README.md"
+    },
+    {
+      "path": "scenes/map-brush-1015/event.webp",
+      "ext": "webp",
+      "license": "AI生成（本项目原创，内置 image_gen）",
+      "bytes": 47946,
+      "sha256": "3f6692ea3a797b2db0d395d3d0e626a867b24d6c509f5aecd307a1497bb27303",
+      "source": "docs/evidence/2026-10-15-map-brush/README.md"
+    },
+    {
+      "path": "scenes/map-brush-1015/shop.webp",
+      "ext": "webp",
+      "license": "AI生成（本项目原创，内置 image_gen）",
+      "bytes": 52390,
+      "sha256": "525dbdd58baad4114e6e87606b986255fa11dc93ad06750da1ad6ef220fe496a",
+      "source": "docs/evidence/2026-10-15-map-brush/README.md"
+    },
+    {
+      "path": "scenes/map-brush-1015/supply.webp",
+      "ext": "webp",
+      "license": "AI生成（本项目原创，内置 image_gen）",
+      "bytes": 41252,
+      "sha256": "3b75695118d1421ecce22ce9b76cb6c24b9a5b72619673c5b67cb765b656d148",
+      "source": "docs/evidence/2026-10-15-map-brush/README.md"
+    },
+    {
+      "path": "scenes/map-brush-1015/fire.webp",
+      "ext": "webp",
+      "license": "AI生成（本项目原创，内置 image_gen）",
+      "bytes": 52952,
+      "sha256": "a4535012ecc2ad150017c43838639c7e8d107ee07dec2c552cbd0b088e24aacf",
+      "source": "docs/evidence/2026-10-15-map-brush/README.md"
+    },
+    {
+      "path": "scenes/map-brush-1015/passage.webp",
+      "ext": "webp",
+      "license": "AI生成（本项目原创，内置 image_gen）",
+      "bytes": 44968,
+      "sha256": "cdb4fd0a9f2c035c9522588e5f47c6ffd8b32cf08b0ee0b1d2189d9eae73c4e1",
+      "source": "docs/evidence/2026-10-15-map-brush/README.md"
+    },
+    {
+      "path": "scenes/map-brush-1015/altar.webp",
+      "ext": "webp",
+      "license": "AI生成（本项目原创，内置 image_gen）",
+      "bytes": 44474,
+      "sha256": "052a3dc3283913a4882abf2d9572795351437ad7185e5a4b4238e4a104a560e0",
+      "source": "docs/evidence/2026-10-15-map-brush/README.md"
+    },
+    {
+      "path": "scenes/map-brush-1015/resource.webp",
+      "ext": "webp",
+      "license": "AI生成（本项目原创，内置 image_gen）",
+      "bytes": 45954,
+      "sha256": "ab94cf950cc5b3504cb838ed8ebc0fe25efd4d4ffb4db2fed352dd0113c45807",
+      "source": "docs/evidence/2026-10-15-map-brush/README.md"
+    },
+    {
+      "path": "scenes/map-brush-1015/trail-a.webp",
+      "ext": "webp",
+      "license": "AI生成（本项目原创，内置 image_gen）",
+      "bytes": 108416,
+      "sha256": "efe8f48313cd11d5459798875a3079748affd883a8d4b819baa83b3234d0a248",
+      "source": "docs/evidence/2026-10-15-map-brush/README.md"
+    },
+    {
+      "path": "scenes/map-brush-1015/trail-b.webp",
+      "ext": "webp",
+      "license": "AI生成（本项目原创，内置 image_gen）",
+      "bytes": 119624,
+      "sha256": "d4496861e7279bef185d0b51c9bcde84830adab44f950a4ce7dde9e050d6aa29",
+      "source": "docs/evidence/2026-10-15-map-brush/README.md"
+    },
+    {
+      "path": "scenes/map-brush-1015/trail-c.webp",
+      "ext": "webp",
+      "license": "AI生成（本项目原创，内置 image_gen）",
+      "bytes": 113940,
+      "sha256": "19de4d15633c62fcf0dd70cf2bcafd958175334fbdb4be4102f2863b0eadc7b8",
+      "source": "docs/evidence/2026-10-15-map-brush/README.md"
+    },
+    {
+      "path": "scenes/battle/stage-reset-1015/backdrop.webp",
+      "ext": "webp",
+      "license": "项目原创（NAI草稿＋内置imagegen重绘）",
+      "bytes": 124270,
+      "sha256": "a02440d99e07d998df27ba8109ece4259f840bdf1f38fe903e75b1b484c4ec0a",
+      "source": "docs/evidence/2026-10-15-battle-stage-reset/repaint-assets.json"
+    },
+    {
+      "path": "scenes/battle/stage-reset-1015/ground.webp",
+      "ext": "webp",
+      "license": "项目原创（NAI草稿＋内置imagegen重绘）",
+      "bytes": 111678,
+      "sha256": "ad03856b5dbe71747077848f50350bda1bebad4aae31e2ab9cb31f4fd098613b",
+      "source": "docs/evidence/2026-10-15-battle-stage-reset/repaint-assets.json"
+    },
+    {
+      "path": "scenes/battle/stage-reset-1015/foreground.webp",
+      "ext": "webp",
+      "license": "项目原创（NAI草稿＋内置imagegen重绘）",
+      "bytes": 42410,
+      "sha256": "4ee16c5ea65b7d410c49d7161943e8ac112ed77d4658d6ee6f85423b96bf1de9",
+      "source": "docs/evidence/2026-10-15-battle-stage-reset/repaint-assets.json"
     }
   ],
   "verified": "2026-10-05"

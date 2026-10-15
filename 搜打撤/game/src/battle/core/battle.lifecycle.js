@@ -12,8 +12,9 @@ import { clearFeedback } from '../view/battle.feedback.js';
 import { shuffleCards } from '../bag/battle.deck.js';
 import { BATTLE_PHASES, createBattleState, transitionBattle } from '../runtime/battle.state.js';
 import { getHostedExecutionCard } from '../effects/battle.hosted.js';
+import { resetBattleSummary, readBattleSummary } from './battle.summary.js';
 import {
-  battleState, G, foes, opts, mode, drawPile, hand, played, consumed, granted, maxEnergy, pstat,
+  battleState, G, foes, opts, mode, drawPile, hand, played, consumed, granted, maxEnergy, pstat, turn,
   busy, infusing, discovering, discoverQueue, choosing, selPool, sel, lastDeckSel,
   selectingDeck, selDeckMax, freezeRuneOn, equipped, battleRestartCheckpoint,
   restoringRestartCheckpoint, set$G, set$opts, set$foes,
@@ -83,6 +84,7 @@ export function createBattleLifecycle({
     }
     // 旧版本战斗档缺少入场检查点，只能兼容恢复一次；恢复后再次保存即升级为新格式。
     if (!data || !data.opts) return false;
+    resetBattleSummary();
     if (!data.deckSelect && (!Array.isArray(data.foes) || !data.foes.length)) return false;
     if (!Array.isArray(data.foes)) data.foes = [];
     session.reset('battle restored');
@@ -136,6 +138,9 @@ export function createBattleLifecycle({
     SDT.Sound.sfx(win === true ? (opts.isBoss ? 'bossVictory' : 'victory') : win === false ? 'defeat' : 'flee');
     const playedCopy = played.slice();
     const consumedCopy = consumed.slice();
+    const spentUids = new Set([...playedCopy, ...consumedCopy]);
+    opts.spentCards = granted.filter(entry => spentUids.has(entry.uid))
+      .map(entry => ({ uid: entry.uid, card: { ...entry.card } }));
     clearBattlePiles(); set$hand([]);
     clearBattlePresentation();
     set$sel(new Set());
@@ -150,6 +155,7 @@ export function createBattleLifecycle({
     if (SDT.Sound) SDT.Sound.setDucked(false);   // 战斗结束恢复 BGM 音量
     if (SDT.Sound) SDT.Sound.setBoss?.(false);   // BOSS 紧张垫解除（音频 P2#12）
     opts.foeNames = foes.map(f => f.name);
+    opts.battleSummary = readBattleSummary(turn, foes);
     SDT.Sound.music('board');   // 战斗结束切回行军氛围
     // 战斗结束广播（2026-09-11 批次 5）：订阅方各自响应（背包结算/基地/统计），
     // 战斗核心不再直接依赖 game.onBattleEnd 的实现；无人订阅时回退旧回调（审计 harness 兼容）
@@ -198,6 +204,7 @@ export function createBattleLifecycle({
 
   // ---------- 入口 ----------
   function start(game, enemyDefs, options) {
+    resetBattleSummary();
     session.reset('battle replaced');
     clearActionSignals();
     clearFeedback();
@@ -353,7 +360,7 @@ export function createBattleLifecycle({
     if (battleRestartCheckpoint) battleRestartCheckpoint.selectedDeck = [...sel];
     set$selectingDeck(false);
     clearBattlePiles();
-    // 首脑入口保证固定初始攻击数；缺少的只补进本场临时牌，不挤占背包或进入口袋。
+    // 首脑入口保证固定初始攻击数；缺少的补为战斗临时牌，用过后也进入消耗区。
     while (!opts.nest && shas.length < R().starterSha) {
       const uid = `boss-sha-${battleState.token}-${shas.length}`;
       granted.push({ uid, card: { ...SDT.Cards.SHA } });

@@ -5,7 +5,7 @@
    （数值暖米金表格数字、面板金短线标题）④ 交互三档节奏 + 按压快按慢弹 +
    :focus-visible 金线焦点环 ⑤ 光标自查
    作用域：仅对局 DOM HUD——#sidebar（底部面板栏）/ #topBtns / #resHud /
-   #logPanel / #bagBtnFloat / #expeditionChapter / #layerBanner。
+   #logPanel / #expeditionChapter / #layerBanner。
    硬约束：Pixi 画布（#game / #miniMap）零接触；只覆盖不删除；关键帧动画
    仅 transform/opacity 且零常驻循环（战斗中常驻界面，克制）；winter.css
    末尾 09-24 留言批次的 !important 底态用同特异性 + 更晚加载 + !important 覆盖。
@@ -43,7 +43,6 @@ body #sidebar #routePanel .route-option { background:#243942; border:1px solid #
 body #sidebar #routePanel .route-option::after { content:none; }
 body #sidebar #routePanel .route-option.selected { background:#394e54; border-color:#ead39b; box-shadow:inset 3px 0 #ead39b; }
 body #sidebar #routePanel .route-help { border:0; padding:0; }
-body:not(.scene-battle-3d) #bagBtnFloat { bottom:calc(188px + 12px)!important; }
 
 /* IS7第二轮修正版：地图中央 / 节点决策右侧 / 底部薄工具带。 */
 body #sidebar #charPanel .hero-ava { width:64px; min-width:64px; height:80px; }
@@ -63,7 +62,6 @@ body #sidebar .expedition-nav-summary { flex-direction:column; justify-content:c
 body #sidebar .expedition-nav-summary b { font-size:16px; }
 body #sidebar .expedition-nav-summary span { font-size:14px; }
 body #sidebar .expedition-nav-summary small { font-size:12px; color:#adbec5; }
-body:not(.lobby):not(.scene-battle-3d) #bagBtnFloat { right:24px!important; bottom:24px!important; }
 body #sidebar #logPanel { position:absolute; right:104px; left:auto; bottom:24px; width:330px; }
 body #sidebar #logPanel.collapsed { width:130px; min-width:130px; }
 body #sidebar #logPanel:not(.collapsed) { bottom:24px; z-index:10; }
@@ -92,7 +90,6 @@ body #sidebar .expedition-toolbar button:focus-visible { outline:2px solid #e4d3
 body #sidebar .expedition-toolbar button:disabled { opacity:.5; cursor:default; }
 body #sidebar .expedition-toolbar-space { flex:1; }
 body #sidebar .expedition-toolbar .map-view-tool { min-width:130px; background:transparent; border-color:#617d842b; }
-body:not(.lobby):not(.scene-battle-3d):not(:has(#overlay:not([hidden]))) #bagBtnFloat { display:none; }
 body #resHud .res-gold::before { content:'金币'; font-size:14px; color:#e3d6b3; }
 body #resHud .res-atk::before { content:'攻击'; font-size:14px; color:#f0c0b4; }
 body #resHud .chip-mini { gap:8px; padding-left:10px; min-width:120px; }
@@ -106,7 +103,7 @@ body #resHud .chip-mini { gap:8px; padding-left:10px; min-width:120px; }
 .expedition-feedback-cards .hs-card { width:154px; font-size:15.4px; flex:none; pointer-events:none; }
 .expedition-feedback .expedition-feedback-continue { display:block; margin-left:auto; padding:8px 20px; font-size:16px; }
 .expedition-feedback-entry { bottom:224px; }
-#sidebar, #topBtns, #resHud, #logPanel, #bagBtnFloat {
+#sidebar, #topBtns, #resHud, #logPanel {
   --exh-fast: .18s cubic-bezier(.33, 1, .68, 1);
   --exh-lift: .32s cubic-bezier(.3, 1.4, .45, 1);
   --exh-press: .09s ease-out;
@@ -325,34 +322,11 @@ body:not(.lobby):not(.scene-battle-3d) #topBtns #btnLocate { display: none !impo
   color: #9a9fa2; letter-spacing: .2em;
   transition: color var(--exh-fast), border-color var(--exh-fast);
 }
-#logPanel .log-toggle:hover { color: #f4e2a5; border-bottom-color: rgba(230,203,118,.42); }
-
-/* ═════════ W8 全局背包浮键 #bagBtnFloat：与资源章同族 + 三态 ═════════ */
-
-#bagBtnFloat {
-  background: linear-gradient(180deg, rgba(17,18,20,.9), rgba(13,14,15,.92));
-  border-color: rgba(170,174,177,.3); border-radius:0;
-  box-shadow: 0 4px 14px rgba(7,7,8,.4), inset 0 1px 0 rgba(223,224,226,.05);
-  transition: background var(--exh-fast), border-color var(--exh-fast), color var(--exh-fast),
-    box-shadow var(--exh-fast), transform var(--exh-fast);
-}
-#bagBtnFloat:hover {
-  background: rgba(21,23,24,.92);
-  border-color: rgba(230,203,118,.6);
-  color: #f4f4f4;
-  box-shadow: 0 6px 16px rgba(7,7,8,.45), 0 0 10px rgba(230,203,118,.15);
-  transform: translateY(-2px);
-}
-#bagBtnFloat:active {
-  transform: translateY(0) scale(.95);
-  transition-duration: var(--exh-press);
-}
-#bagBtnFloat #bagCountFloat { color: #f4e2a5; font-variant-numeric: tabular-nums; font-family: 'Cascadia Code', monospace; } /* 09-25 P3：数字字体与 HUD 其余等宽制式对齐 */
+#logPanel .log-toggle:hover { color: #f4e2a5; border-bottom-color: rgba(230,203,118,.42); } /* 09-25 P3：数字字体与 HUD 其余等宽制式对齐 */
 
 /* ═════════ T2 焦点态：键盘导航金线焦点环（对局 HUD 全部可焦元素） ═════════ */
 #sidebar .route-option:focus-visible,
 #topBtns button:focus-visible,
-#bagBtnFloat:focus-visible,
 #logPanel .log-toggle:focus-visible {
   outline: 1px solid #e6cb76cc;
   outline-offset: 2px;
@@ -385,7 +359,7 @@ body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns #btnMute svg {
   width:34px; height:34px; flex:none;
 }
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud {
-  order:2; position:relative; min-width:112px; height:62px; margin-left:6px; padding:0; align-items:center;
+  order:2; position:relative; min-width:112px; height:62px; margin-left:22px; padding:0; align-items:center;
   background:transparent; border:0; clip-path:none; box-shadow:none; gap:0;
 }
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud .hp-hud-body {

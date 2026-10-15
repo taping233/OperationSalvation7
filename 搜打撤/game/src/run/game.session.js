@@ -147,6 +147,7 @@ function createRunSavePayload() {
   return {
     seed: Random.seed, rngState: Random.snapshot(),
     mapSeed: game.mapSeed ?? Random.seed,
+    encounterRotationVersion: game.encounterRotationVersion === 1 ? 1 : 0,
     generatorVersion: game.generatorVersion ?? GENERATOR_VERSION,
     layoutVersion: game.layoutVersion ?? LAYOUT_VERSION,
     geometryVersion: game.geometryVersion ?? null,
@@ -336,7 +337,7 @@ function restoreGame(slot) {
   }
   game.cardOrder = Array.isArray(s.cardOrder) ? s.cardOrder : [];
   game.usedPocket = Array.isArray(s.usedPocket) ? s.usedPocket : [];
-  // 背包/仓库/消耗口袋卡牌快照刷新（2026-09-10 留言 #22/#37）：发牌时存的是卡库快照克隆且
+  // 背包/仓库/消耗区卡牌快照刷新（2026-09-10 留言 #22/#37）：发牌时存的是卡库快照克隆且
   // 从不随版本更新——旧档里「血蝠风暴」还卡着旧费用 4（每回合 2 费永远注能不了）、「法力奔涌」
   // 带着旧措辞描述（识别正则失配整卡无效）。读档时按 id 用现行卡库刷新克隆。
   refreshCardClones(game.ownedCards.map(o => o.card)
@@ -352,6 +353,7 @@ function restoreGame(slot) {
   game.explored = (s.explored && typeof s.explored === 'object') ? s.explored : null;
   game.fragments = +s.fragments || 0;   // 员工通行证A碎片（旧档无字段 → 0）
   game.bossKilled = !!s.bossKilled;     // 本局是否已击败首脑（终局撤离条件）
+  game.encounterRotationVersion = s.encounterRotationVersion === 1 ? 1 : 0;
   game.altarActivated = !!s.altarActivated;   // 第四层祭坛是否已激活（首脑格准入条件，旧档无字段 → false）
   game.altarRewardPending = !!s.altarRewardPending;   // 祭坛奖励待领取（旧档无字段 → false）
   game.bossPlan = (s.bossPlan == null ? null : +s.bossPlan);   // 本层首脑预案（旧档无字段 → null，进 boss 格时现 roll）
@@ -461,7 +463,7 @@ function grantStarterSha() {
 }
 
 function newRun(mode, picks, options = {}) {
-  // Base 仓库出征卡与消耗口袋同属一次出征准备，必须在初始化局内状态或抽随机数前落盘。
+  // Base 仓库出征卡与消耗区同属一次出征准备，必须在初始化局内状态或抽随机数前落盘。
   // run 存档仍沿用既有生命周期；这里不宣称 Base 与 run 两个存储原子提交。
   const departure = SDT.Base.prepareDeparture(picks);
   if (!departure?.ok) {
@@ -471,6 +473,7 @@ function newRun(mode, picks, options = {}) {
   terminalGeneration++;
   game.seed = Random.reseed();
   game.mapSeed = game.seed;
+  game.encounterRotationVersion = 1;   // 仅新局启用同层编组轮换；旧档缺省继续原遭遇。
   buildNewRunDerived(game.mapSeed);
   game.mode = MODES[mode] ? mode : 'standard';
   applyModeRules();
@@ -528,11 +531,11 @@ function newRun(mode, picks, options = {}) {
     UI.log(`[[icon:cross]] 职业卡【${esc(name)}】无法带入对局（带出后留在仓库）`, 'warn');
   }
   if (loaded) UI.log(`[[icon:archive]] 从基地仓库携带 <b>${loaded}</b> 张卡牌出征`, 'loot');
-  // 需求 #1：下一次出发后，基地消耗口袋清空（未复原的卡牌随之消散）
+  // 需求 #1：下一次出发后，基地消耗区清空（未复原的卡牌随之消散）
   if (departure.pocketCleared) {
-    UI.log(`[[icon:pocket]] 出发整理：基地消耗口袋已清空（${departure.dispersedPocketCount} 张未复原的卡牌消散了）`, 'dim');
+    UI.log(`[[icon:pocket]] 出发整理：基地消耗区已清空（${departure.dispersedPocketCount} 张未复原的卡牌消散了）`, 'dim');
   }
-  // 需求 #4：携带宠物「汪汪狗」的生命上限 +5
+  // 需求 #4：携带宠物「旺财」的生命上限 +5
   const pet = SDT.Base.carriedPet ? SDT.Base.carriedPet() : null;
   if (pet && pet.effect && pet.effect.maxHp) {
     game.maxHp += pet.effect.maxHp;

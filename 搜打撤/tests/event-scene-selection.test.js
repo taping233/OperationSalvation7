@@ -7,6 +7,17 @@ const scene = body => eventSceneHTML({
 });
 
 describe('事件选项阅读与执行边界', () => {
+  it('四类插画页使用统一退出组件，其他节点保留自身布局', () => {
+    for (const tone of ['event', 'entry', 'fire', 'pickup', 'door', 'altar', 'extract']) {
+      const page = document.createElement('div');
+      page.innerHTML = eventSceneHTML({ tone, title:'节点', region:'城市外围', layer:0 });
+      const themed = ['event', 'entry', 'fire', 'pickup'].includes(tone);
+      expect(page.querySelector('.event-themed') !== null).toBe(themed);
+      expect(page.querySelector('.archive-back[data-act="eventExit"]') !== null).toBe(themed);
+      expect(page.querySelector('.event-exit')).toBeNull();
+    }
+  });
+
   it('多项事件先展示选择状态和独立确认；已知后果仍留在各选项', () => {
     const page = document.createElement('div');
     page.innerHTML = scene('<button class="evt-opt" data-act="choose" data-i="0"><b>接通</b><span>获得补给</span></button><button class="evt-opt" data-act="choose" data-i="1"><b>离开</b><span>保持现状</span></button>');
